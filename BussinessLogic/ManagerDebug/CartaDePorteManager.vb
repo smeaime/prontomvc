@@ -8161,19 +8161,40 @@ Public Class CartaDePorteManager
         '*La que queda como exportacion, tendrá el A Facturar con el dichoso cliente exportador
         '*Y la otra carta, la local, quedará para que le rellenen el A Facturar, por las fuerzas superiores
 
+        'Return False
+
+
         Try
 
+            Using db As New DemoProntoEntities(Auxiliares.FormatearConexParaEntityFramework(Encriptar(SC)))
 
-            If myCartaDePorte.Entregador > 0 AndAlso ClienteManager.GetItem(SC, myCartaDePorte.Entregador).EsClienteExportador = "SI" Then
-                Return True
-            End If
-            If myCartaDePorte.CuentaOrden1 > 0 AndAlso ClienteManager.GetItem(SC, myCartaDePorte.CuentaOrden1).EsClienteExportador = "SI" Then
-                Return True
-            End If
-            If myCartaDePorte.CuentaOrden2 > 0 AndAlso ClienteManager.GetItem(SC, myCartaDePorte.CuentaOrden2).EsClienteExportador = "SI" Then
-                Return True
-            End If
 
+
+                If myCartaDePorte.Entregador > 0 AndAlso (From i In db.DetalleClientesContactos _
+                                                        Where i.IdCliente = myCartaDePorte.Entregador _
+                                                        And i.Acciones = "EsExportadorCartaPorte" _
+                                                        And i.Contacto = "SI"
+                                                    ).Any Then
+                    Return True
+                End If
+
+                If myCartaDePorte.CuentaOrden1 > 0 AndAlso (From i In db.DetalleClientesContactos _
+                                                        Where i.IdCliente = myCartaDePorte.CuentaOrden1 _
+                                                        And i.Acciones = "EsExportadorCartaPorte" _
+                                                        And i.Contacto = "SI"
+                                                    ).Any Then
+                    Return True
+                End If
+
+                If myCartaDePorte.CuentaOrden2 > 0 AndAlso (From i In db.DetalleClientesContactos _
+                                                        Where i.IdCliente = myCartaDePorte.CuentaOrden2 _
+                                                        And i.Acciones = "EsExportadorCartaPorte" _
+                                                        And i.Contacto = "SI"
+                                                    ).Any Then
+                    Return True
+                End If
+
+            End Using
 
 
 
@@ -9330,7 +9351,7 @@ Public Class CartaDePorteManager
                 ErrHandler2.WriteError(ms)
                 Return -1
             End If
-            
+
 
 
             With myCartaDePorte
@@ -10057,40 +10078,50 @@ Public Class CartaDePorteManager
 
         'Return True
 
-        Dim titular, destinatario, intermediario, corredor, remitcomercial As ClienteNuevo
-        titular = ClienteManager.GetItem(SC, myCartaDePorte.Titular)
-        destinatario = ClienteManager.GetItem(SC, myCartaDePorte.Entregador)
-        intermediario = ClienteManager.GetItem(SC, myCartaDePorte.CuentaOrden1)
-        corredor = ClienteManager.GetItem(SC, BuscaIdClientePreciso(EntidadManager.NombreVendedor(SC, myCartaDePorte.Corredor), SC))
-        remitcomercial = ClienteManager.GetItem(SC, myCartaDePorte.CuentaOrden2)
-
-        If myCartaDePorte.Titular > 0 AndAlso titular.ExigeDatosCompletosEnCartaDePorteQueLoUse = "SI" Then
-            ms += " " & titular.RazonSocial
-        End If
-
-        If myCartaDePorte.Entregador > 0 AndAlso destinatario.ExigeDatosCompletosEnCartaDePorteQueLoUse = "SI" Then
-            ms += " " & destinatario.RazonSocial
-        End If
+        'Dim titular, destinatario, intermediario, corredor, remitcomercial As ClienteNuevo
+        'titular = ClienteManager.GetItem(SC, myCartaDePorte.Titular)
+        'destinatario = ClienteManager.GetItem(SC, myCartaDePorte.Entregador)
+        'intermediario = ClienteManager.GetItem(SC, myCartaDePorte.CuentaOrden1)
+        'corredor = ClienteManager.GetItem(SC, BuscaIdClientePreciso(EntidadManager.NombreVendedor(SC, myCartaDePorte.Corredor), SC))
+        'remitcomercial = ClienteManager.GetItem(SC, myCartaDePorte.CuentaOrden2)
 
 
-        If myCartaDePorte.CuentaOrden1 > 0 AndAlso intermediario.ExigeDatosCompletosEnCartaDePorteQueLoUse = "SI" Then
-            ms += " " & intermediario.RazonSocial
-        End If
 
-        Try
-            If Not IsNothing(corredor) AndAlso corredor.ExigeDatosCompletosEnCartaDePorteQueLoUse = "SI" Then
-                ms += " " & corredor.RazonSocial
+
+        Using db As New DemoProntoEntities(Auxiliares.FormatearConexParaEntityFramework(Encriptar(SC)))
+
+
+
+
+            If myCartaDePorte.Titular > 0 AndAlso db.Clientes.Find(myCartaDePorte.Titular).ExigeDatosCompletosEnCartaDePorteQueLoUse_1 = "SI" Then
+                ms += " El Titular exige datos de descarga completos"
             End If
-        Catch ex As Exception
-            ErrHandler2.WriteError(ex)
-        End Try
+
+            If myCartaDePorte.Entregador > 0 AndAlso db.Clientes.Find(myCartaDePorte.Entregador).ExigeDatosCompletosEnCartaDePorteQueLoUse_1 = "SI" Then
+                ms += " El destinatario exige datos de descarga completos"
+            End If
 
 
-        If myCartaDePorte.CuentaOrden2 > 0 AndAlso remitcomercial.ExigeDatosCompletosEnCartaDePorteQueLoUse = "SI" Then
-            ms += " " & remitcomercial.RazonSocial
-        End If
+            If myCartaDePorte.CuentaOrden1 > 0 AndAlso db.Clientes.Find(myCartaDePorte.CuentaOrden1).ExigeDatosCompletosEnCartaDePorteQueLoUse_1 = "SI" Then
+                ms += " El intermediario exige datos de descarga completos"
+            End If
+
+            Try
+                Dim corredor As Integer = BuscaIdClientePreciso(EntidadManager.NombreVendedor(SC, myCartaDePorte.Corredor), SC)
+
+                If corredor > 0 AndAlso db.Clientes.Find(corredor).ExigeDatosCompletosEnCartaDePorteQueLoUse_1 = "SI" Then
+                    ms += " El corredor exige datos de descarga completos"
+                End If
+            Catch ex As Exception
+                ErrHandler2.WriteError(ex)
+            End Try
 
 
+            If myCartaDePorte.CuentaOrden2 > 0 AndAlso db.Clientes.Find(myCartaDePorte.CuentaOrden2).ExigeDatosCompletosEnCartaDePorteQueLoUse_1 = "SI" Then
+                ms += " El remitcomercial exige datos de descarga completos"
+            End If
+
+        End Using
 
         If ms = "" Then
             Return False
@@ -10105,42 +10136,55 @@ Public Class CartaDePorteManager
 
         'Return False
 
-        Dim titular, destinatario, intermediario, corredor, remitcomercial As ClienteNuevo
-        titular = ClienteManager.GetItem(SC, myCartaDePorte.Titular)
-        destinatario = ClienteManager.GetItem(SC, myCartaDePorte.Entregador)
-        intermediario = ClienteManager.GetItem(SC, myCartaDePorte.CuentaOrden1)
-        corredor = ClienteManager.GetItem(SC, BuscaIdClientePreciso(EntidadManager.NombreVendedor(SC, myCartaDePorte.Corredor), SC))
-        remitcomercial = ClienteManager.GetItem(SC, myCartaDePorte.CuentaOrden2)
+        'Dim titular, destinatario, intermediario, corredor, remitcomercial As ClienteNuevo
+        'titular = ClienteManager.GetItem(SC, myCartaDePorte.Titular)
+        'destinatario = ClienteManager.GetItem(SC, myCartaDePorte.Entregador)
+        'intermediario = ClienteManager.GetItem(SC, myCartaDePorte.CuentaOrden1)
+        'corredor = ClienteManager.GetItem(SC, BuscaIdClientePreciso(EntidadManager.NombreVendedor(SC, myCartaDePorte.Corredor), SC))
+        'remitcomercial = ClienteManager.GetItem(SC, myCartaDePorte.CuentaOrden2)
 
-        If myCartaDePorte.Titular > 0 AndAlso titular.DeshabilitadoPorCobranzas = "NO" Then
-            ms += " " & titular.RazonSocial
-        End If
+
+
+
+        Using db As New DemoProntoEntities(Auxiliares.FormatearConexParaEntityFramework(Encriptar(SC)))
+
+
+            If myCartaDePorte.Titular > 0 AndAlso (From i In db.DetalleClientesContactos _
+                                                    Where i.IdCliente = myCartaDePorte.Entregador _
+                                                    And i.Acciones = "DeshabilitadoPorCobranzas" _
+                                                    And i.Contacto = "NO"
+                                                ).Any Then
+                ms += " El Titular esta deshabilitado por cobranzas "
+            End If
+        End Using
+
+
 
         'http://bdlconsultores.ddns.net/Consultas/Admin/verConsultas1.php?recordid=14610
         'El bloqueo para clientes que no están habilitado por cobranzas, debe controlar unicamente si el cliente está en la posición de Titular
 
         If False Then
-            If myCartaDePorte.Entregador > 0 AndAlso destinatario.DeshabilitadoPorCobranzas = "NO" Then
-                ms += " " & destinatario.RazonSocial
-            End If
+            'If myCartaDePorte.Entregador > 0 AndAlso destinatario.DeshabilitadoPorCobranzas = "NO" Then
+            '    ms += " " & destinatario.RazonSocial
+            'End If
 
 
-            If myCartaDePorte.CuentaOrden1 > 0 AndAlso intermediario.DeshabilitadoPorCobranzas = "NO" Then
-                ms += " " & intermediario.RazonSocial
-            End If
+            'If myCartaDePorte.CuentaOrden1 > 0 AndAlso intermediario.DeshabilitadoPorCobranzas = "NO" Then
+            '    ms += " " & intermediario.RazonSocial
+            'End If
 
-            Try
-                If Not IsNothing(corredor) AndAlso corredor.DeshabilitadoPorCobranzas = "NO" Then
-                    ms += " " & corredor.RazonSocial
-                End If
-            Catch ex As Exception
-                ErrHandler2.WriteError(ex)
-            End Try
+            'Try
+            '    If Not IsNothing(corredor) AndAlso corredor.DeshabilitadoPorCobranzas = "NO" Then
+            '        ms += " " & corredor.RazonSocial
+            '    End If
+            'Catch ex As Exception
+            '    ErrHandler2.WriteError(ex)
+            'End Try
 
 
-            If myCartaDePorte.CuentaOrden2 > 0 AndAlso remitcomercial.DeshabilitadoPorCobranzas = "NO" Then
-                ms += " " & remitcomercial.RazonSocial
-            End If
+            'If myCartaDePorte.CuentaOrden2 > 0 AndAlso remitcomercial.DeshabilitadoPorCobranzas = "NO" Then
+            '    ms += " " & remitcomercial.RazonSocial
+            'End If
         End If
 
 
