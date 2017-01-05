@@ -1,0 +1,24 @@
+
+Log Entry : 
+01/05/2017 15:26:33
+Error in: http://localhost:58911/login.aspx?ReturnUrl=/. Error Message:System.Threading.ThreadAbortException
+Subproceso anulado.
+   en System.Threading.Thread.AbortInternal()
+   en System.Threading.Thread.Abort(Object stateInfo)
+   en System.Web.HttpResponse.AbortCurrentThread()
+   en System.Web.HttpResponse.End()
+   en System.Web.HttpResponse.Redirect(String url, Boolean endResponse, Boolean permanent)
+   en System.Web.HttpResponse.Redirect(String url)
+   en Login.Page_Load(Object sender, EventArgs e) en C:\Users\Administrador\Documents\bdl\pronto\prontoweb\Login.aspx.vb:línea 169
+mscorlib
+__________________________
+
+Log Entry : 
+01/05/2017 15:39:29
+Error in: http://localhost:58911/ProntoWeb/CartaDePorte.aspx?Id=2639086. Error Message:La carta numero 558513544 id=2639086 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+01/05/2017 15:39:29
+Error in: http://localhost:58911/ProntoWeb/CartaDePorte.aspx?Id=2639086. Error Message:PV 2 0
+__________________________

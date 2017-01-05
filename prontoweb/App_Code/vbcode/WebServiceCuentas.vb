@@ -51,11 +51,17 @@ Public Class WebServiceCuentas
         Dim lista As Data.DataTable
         Dim idCuentaGrupo = SplitRapido(contextKey, "|", 1)
 
-        If iisNull(idCuentaGrupo, 0) > 0 Then
-            lista = EntidadManager.ExecDinamico(sc, "SELECT  TOP 100  IdCuenta,Descripcion,Codigo FROM Cuentas WHERE Descripcion + ' ' + Convert(varchar,Codigo) LIKE '" & prefixText & "%' AND IdTipoCuentaGrupo=" & idCuentaGrupo)
-        Else
+        Try
+            If iisNull(idCuentaGrupo, 0) > 0 Then
+                lista = EntidadManager.ExecDinamico(sc, "SELECT  TOP 100  IdCuenta,Descripcion,Codigo FROM Cuentas WHERE Descripcion + ' ' + Convert(varchar,Codigo) LIKE '" & prefixText & "%' AND IdTipoCuentaGrupo=" & idCuentaGrupo)
+            Else
+                lista = EntidadManager.ExecDinamico(sc, "SELECT  TOP 100  IdCuenta,Descripcion,Codigo FROM Cuentas WHERE Descripcion + ' ' + Convert(varchar,Codigo) LIKE '" & prefixText & "%'")
+            End If
+        Catch ex As Exception
+            ErrHandler2.WriteError(ex)
             lista = EntidadManager.ExecDinamico(sc, "SELECT  TOP 100  IdCuenta,Descripcion,Codigo FROM Cuentas WHERE Descripcion + ' ' + Convert(varchar,Codigo) LIKE '" & prefixText & "%'")
-        End If
+        End Try
+
 
 
 

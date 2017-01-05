@@ -15068,6 +15068,11 @@ Public Class CartaDePorteManager
 
 
 
+1.       El Código Oncca Localidad Destino (codonccalocalidadpuerto) y Código Oncca Provincia Destino (codonccaprovinciapuerto) son iguales. Aparentemente la Provincia.
+2.       El Código Oncca Localidad Procedencia (codonccalocalproc) y Código Oncca Provincia Procedencia (codonccaprovincialproc) son iguales. Aparentemente la Provincia. 
+3.       El Código Oncca Puerto (codonccapuerto) siempre es 0. 
+4.       Los Códigos Oncca de Localidad Procedencia que nos mandan parecen estar iguales a los que usa la AFIP, pero encuentro inconsistencias entre los códigos de destino y las descripciones del campo localidaddestino. Puede ser que esté mal la descripción o puede estar mal el código.
+
 
                     'codigos oncaa    -qué tenemos que usar acá
                     cp.codmerca = Val(dbc.EspecieONCAA)
@@ -15126,6 +15131,133 @@ Public Class CartaDePorteManager
 
                     cp.usuario = "" 'dbc.UsuarioIngreso
                     cp.vagon = dbc.SubnumeroVagon
+
+
+
+
+
+
+
+
+
+
+5.       De 1000 descargas que pude importar de Williams sólo 451 tienen rubros de calidad. 
+            1 - Todos estos registros informan el mismo código de rubro. Error o coincidencia?
+            2 - Ese codigo  es un número, mientras que CerealNet informa un código de entre 2 y 3 letras. Adjunto tabla con Rubros de Calidad actuales
+6.       Los códigos de producto que informa no se corresponden con los de CerealNet. Ej.: CerealNet informa para maíz el número 19 y Williams el 501. Adjunto tabla con Codigos de Productos
+
+Descripcion_RubroCalidad
+                    Descripcion_GradoCerealNet
+                    Descripcion_Producto
+                    Codigo_CerealNet
+                    HUMEDAD
+                    HD
+                    TRIGO
+15
+REVOLCADO EN TIERRA
+REV
+                    MAÍZ
+19
+PTA.SOMB.POR TIERRA
+TIE
+                    SORGO
+22
+PTA.NEGRA POR CARBON
+p/ n 
+CEBADA FORRAJERA
+11
+GRANOS MANCHADOS
+M/ C 
+TRIGO CANDEAL
+14
+INSECTOS VIVOS
+INS
+                    GIRASOL
+2
+PESO HECTOLITRICO
+PH
+                    SOJA
+23
+GNOS.ARD.Y DAÑ.POR CALOR
+ADC
+                    ACEITE DE SOJA
+50
+GRANOS PZA.BCA.
+PBA
+MAIZ FLINT
+26
+GRANOS PICADOS
+Pic
+                    CEBADA CERVECERA
+17
+CHAMICOS
+                    CHA
+                    HARINA DE SOJA
+41
+SEM.TREBOL OLOR
+Str()
+                    SOJA
+414
+Color
+                    COL
+                    GRADO
+                    GRA
+                    CUERPOS EXTRAÑOS
+C.E
+                    HUMEDAD CAMARA
+GMA
+                    GRANOS DAÑADOS
+DAN
+                    OLORES OBJETABLES
+OLR
+                    GRANOS AMOHOSADOS
+MOH
+                    MATERIA GRASA
+MG
+                    ACIDEZ
+                    AMG
+                    GRANOS QUEBRADOS
+QUB
+                    TIPO
+                    TIP
+                    DESCASCARADO y ROTO
+d/ R 
+GRANOS NEGROS
+GN
+                    CONTENIDO PROTEICO
+C/ p 
+TOTAL DAÑADO
+TDÑ
+                    GRANOS CON CARBON
+GC
+                    GRANOS QUEMADOS O DE AVERÍA
+q/ A 
+AVERIA
+                    AVE
+                    ESCLEROTOS
+                    ESC
+                    TEMPERATURA
+                    TMP
+                    GRANOS VERDES
+GV
+                    FONDO
+                    FDO
+                    OTRO TIPO
+OT
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
