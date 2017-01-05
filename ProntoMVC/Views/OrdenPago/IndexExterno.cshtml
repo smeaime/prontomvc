@@ -12,6 +12,24 @@
 <div style="padding-left: 15px; padding-right: 15px;">
     <div class="row-fluid">
         <div class="span12 lightblue">
+
+
+
+@if (ViewBag.BasePronto.Contains("Niro") && 
+                    (Roles.IsUserInRole(ViewBag.NombreUsuario, "AdminExterno")
+                    || Roles.IsUserInRole(ViewBag.NombreUsuario, "Externo")
+                    || Roles.IsUserInRole(ViewBag.NombreUsuario, "ExternoOrdenesPagoListas")
+                    || Roles.IsUserInRole(ViewBag.NombreUsuario, "ExternoCuentaCorrienteProveedor")
+                    || Roles.IsUserInRole(ViewBag.NombreUsuario, "ExternoCuentaCorrienteCliente")
+                    || Roles.IsUserInRole(ViewBag.NombreUsuario, "ExternoCotizaciones")
+                    ))
+        {
+    <div class="alert alert-error fade in span12 " id="asdasd" style="">
+        Recuerde que los días para retirar pagos son únicamente los viernes de 14 a 17:30hs (sin excepción).
+        <br />
+        Ante cualquier inquietud deberá enviarnos un email con su consulta a: pagoproveedores@niroconstrucciones.com.ar
+    </div>
+}
             @*<button onclick="window.location.href='@Url.Action("Edit", new { id = -1 })'" class="btn btn-primary span2">
                     Nueva Orden de Pago
                 </button>*@
