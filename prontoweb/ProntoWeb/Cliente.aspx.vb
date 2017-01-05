@@ -809,6 +809,9 @@ Partial Class ClienteABM
 
                     '//////////////////////////////////////
                     'agregar esto al manager.isvalid
+
+                    If .IdCuenta <= 0 Then .IdCuenta = 21
+
                     If .IdLocalidad = -1 Then
                         MsgBoxAjax(Me, "Elija una localidad")
                         Return
