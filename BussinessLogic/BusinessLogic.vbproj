@@ -234,6 +234,7 @@
     <Reference Include="TiffCP">
       <HintPath>..\prontoweb\Bin\TiffCP.exe</HintPath>
     </Reference>
+    <Reference Include="WindowsBase" />
     <Reference Include="WSAFIPFE">
       <HintPath>bin\Debug\WSAFIPFE.dll</HintPath>
     </Reference>
