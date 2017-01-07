@@ -761,7 +761,7 @@ namespace ProntoMVC.Tests
 
             // var respEntrega = cerealnet.obtenerDescargas(usuario, clave, cuit, "2016-10-01", "2016-10-25");
             var respEntrega = CartaDePorteManager.BajarListadoDeCartaPorte_CerealNet_DLL(usuario, clave, cuit,
-                                            new DateTime(2016, 11, 1),
+                                            new DateTime(2016, 9, 1),
                                             new DateTime(2017, 1, 1),
                                             SC, DirApp, bdlmasterappconfig);
 

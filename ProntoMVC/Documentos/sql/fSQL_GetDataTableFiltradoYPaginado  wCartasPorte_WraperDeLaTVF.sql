@@ -173,12 +173,29 @@ isnull(LOCORI.Nombre,'') AS ProcedenciaDesc,
 isnull(LOCORI.CodigoPostal,'') AS ProcedenciaCodigoPostal, 		
 isnull(LOCORI.CodigoONCAA,'') AS ProcedenciaCodigoONCAA,      
 isnull(PROVORI.Nombre,'') AS ProcedenciaProvinciaDesc,    
+isnull(LOCORI.Partido,'') AS ProcedenciaProvinciaPartido, 
+isnull(PARTORI.Nombre,'') AS ProcedenciaPartidoNormalizada   , 	
+isnull(PARTORI.Codigo,'') AS ProcedenciaPartidoNormalizadaCodigo,    
+
 
 isnull(LOCDES.Descripcion,'') AS DestinoDesc, 
 isnull(LOCDES.CodigoPostal,'')  AS  DestinoCodigoPostal, 	
 isnull(LOCDES.codigoONCAA,'') AS  DestinoCodigoONCAA,
 isnull(LOCDES.CUIT,'') 	 AS  DestinoCUIT,
 isnull(LOCDES2.CodigoAFIP,'') 	 AS  DestinoLocalidadAFIP,
+isnull(PROVDEST.Nombre,'') AS DestinoProvinciaDesc,  
+
+
+
+
+isnull(ESTAB.Descripcion,'') COLLATE SQL_Latin1_General_CP1_CI_AS +' '
+	+ isnull(ESTAB.AuxiliarString1,'') COLLATE SQL_Latin1_General_CP1_CI_AS+ ' '
+	+ isnull(ESTAB.AuxiliarString2,'') COLLATE SQL_Latin1_General_CP1_CI_AS as EstablecimientoDesc, 			
+ESTAB.Descripcion  as EstablecimientoCodigo,
+ESTAB.AuxiliarString2  as EstablecimientoCUIT,
+ESTAB.AuxiliarString1 as EstablecimientoNombre,
+
+
 
 
 DATENAME(month, FechaDescarga) AS Mes,          
@@ -191,18 +208,11 @@ Calidades.Descripcion AS CalidadDesc,
 E1.Nombre as UsuarioIngreso,
 
 
-isnull(ESTAB.Descripcion,'') COLLATE SQL_Latin1_General_CP1_CI_AS +' '
-	+ isnull(ESTAB.AuxiliarString1,'') COLLATE SQL_Latin1_General_CP1_CI_AS+ ' '
-	+ isnull(ESTAB.AuxiliarString2,'') COLLATE SQL_Latin1_General_CP1_CI_AS as EstablecimientoDesc, 			
-ESTAB.Descripcion  as EstablecimientoCodigo,
-ESTAB.AuxiliarString2  as EstablecimientoCUIT,
-ESTAB.AuxiliarString1 as EstablecimientoNombre,
 
-
-isnull(CLIENTFLET.Razonsocial,'') AS ClientePagadorFleteDesc ,           isnull(LOCORI.Partido,'') AS ProcedenciaProvinciaPartido, 
-isnull(PARTORI.Codigo,'') AS ProcedenciaPartidoNormalizadaCodigo,    isnull(PROVDEST.Nombre,'') AS DestinoProvinciaDesc,  
-isnull(PARTORI.Nombre,'') AS ProcedenciaPartidoNormalizada   , 			isnull(CLICOR2.Nombre,'') AS CorredorDesc2,    
-isnull(CLICOR2.cuit,'') AS CorredorCUIT2, 			isnull(CLIENTREG.cuit,'') AS EntregadorCUIT, 		
+isnull(CLIENTFLET.Razonsocial,'') AS ClientePagadorFleteDesc,
+isnull(CLICOR2.Nombre,'') AS CorredorDesc2,    
+isnull(CLICOR2.cuit,'') AS CorredorCUIT2,
+isnull(CLIENTREG.cuit,'') AS EntregadorCUIT, 		
 isnull(LOCORI.CodigoAFIP,'') AS CodigoAFIP
 
 
@@ -522,7 +532,7 @@ go
 
 
 
-select top 20  exporta, situacion, * --count(*)
+select top 20  EstablecimientoCodigo,EstablecimientoNombre,ProcedenciaProvinciaDesc, DestinoProvinciaDesc, exporta, situacion, * --count(*)
 from dbo.fSQL_GetDataTableFiltradoYPaginado  
 				(  
 					 NULL, 
