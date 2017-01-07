@@ -85,8 +85,8 @@ Imports System.Drawing.Imaging
 'Namespace Pronto.ERP.Bll
 
 
-<DataObjectAttribute()> _
-<Transaction(TransactionOption.Required)> _
+<DataObjectAttribute()>
+<Transaction(TransactionOption.Required)>
 Public Class CartaDePorteManager
     Inherits ServicedComponent
 
@@ -387,9 +387,9 @@ Public Class CartaDePorteManager
             Dim db As New LinqCartasPorteDataContext(Encriptar(SC))
 
 
-            Dim q = (From i In db.CartasPorteAcopios1 _
-                    Where (idcliente = 0 Or i.IdCliente = idcliente)
-                    Select New aaa With {.idacopio = i.IdAcopio, .desc = i.Descripcion, .idcliente = i.IdCliente}).ToList()
+            Dim q = (From i In db.CartasPorteAcopios1
+                     Where (idcliente = 0 Or i.IdCliente = idcliente)
+                     Select New aaa With {.idacopio = i.IdAcopio, .desc = i.Descripcion, .idcliente = i.IdCliente}).ToList()
 
             Dim x As New aaa
             x.idacopio = 0
@@ -400,8 +400,8 @@ Public Class CartaDePorteManager
 
 
             Try
-                Dim aaasd = (From y In q _
-                            Order By y.idacopio _
+                Dim aaasd = (From y In q
+                             Order By y.idacopio
                             ).ToList()
 
                 Return aaasd
@@ -437,9 +437,9 @@ Public Class CartaDePorteManager
 
 
         Dim db As New LinqCartasPorteDataContext(Encriptar(SC))
-        Dim q = (From i In db.CartasPorteAcopios1 _
-                Where (i.Descripcion = descripcionAcopio)
-                Select i.IdAcopio).FirstOrDefault
+        Dim q = (From i In db.CartasPorteAcopios1
+                 Where (i.Descripcion = descripcionAcopio)
+                 Select i.IdAcopio).FirstOrDefault
 
         Return q
 
@@ -458,9 +458,9 @@ Public Class CartaDePorteManager
         If IdAcopio <= 0 Then Return ""
 
         Dim db As New LinqCartasPorteDataContext(Encriptar(SC))
-        Dim q = (From i In db.CartasPorteAcopios1 _
-                Where (i.IdAcopio = IdAcopio)
-                Select i.Descripcion).FirstOrDefault
+        Dim q = (From i In db.CartasPorteAcopios1
+                 Where (i.IdAcopio = IdAcopio)
+                 Select i.Descripcion).FirstOrDefault
 
         Return q
 
@@ -488,36 +488,36 @@ Public Class CartaDePorteManager
 
 
     'Esta es la funcion estrella que debería canalizar todos los filtros. Tipar bien bien
-    Public Shared Function GetDataTableFiltradoYPaginado( _
-            ByVal SC As String, _
-            ByVal ColumnaParaFiltrar As String, _
-            ByVal TextoParaFiltrar As String, _
-            ByVal sortExpression As String, _
-            ByVal startRowIndex As Long, _
-            ByVal maximumRows As Long, _
-            ByVal estado As CartaDePorteManager.enumCDPestado, _
-            ByVal QueContenga As String, _
-            ByVal idVendedor As Integer, _
-            ByVal idCorredor As Integer, _
-            ByVal idDestinatario As Integer, _
-            ByVal idIntermediario As Integer, _
-            ByVal idRemComercial As Integer, _
-            ByVal idArticulo As Integer, _
-            ByVal idProcedencia As Integer, _
-            ByVal idDestino As Integer, _
-            ByVal AplicarANDuORalFiltro As FiltroANDOR, _
-            ByVal ModoExportacion As String, _
-            ByVal fechadesde As DateTime, ByVal fechahasta As DateTime, _
-            ByVal puntoventa As Integer, Optional ByRef sTituloFiltroUsado As String = "", _
-            Optional ByVal optDivisionSyngenta As String = "Ambas", _
-            Optional ByVal bTraerDuplicados As Boolean = False, _
-            Optional ByVal Contrato As String = "", _
-            Optional ByVal QueContenga2 As String = "", _
-            Optional ByVal idClienteAuxiliar As Integer = -1, _
-            Optional ByVal AgrupadorDeTandaPeriodos As Integer = -1, _
-            Optional ByVal Vagon As Integer = Nothing, Optional ByVal Patente As String = "", _
-            Optional bInsertarEnTablaTemporal As Boolean = False, _
-            Optional ByVal optCamionVagon As String = "Ambas" _
+    Public Shared Function GetDataTableFiltradoYPaginado(
+            ByVal SC As String,
+            ByVal ColumnaParaFiltrar As String,
+            ByVal TextoParaFiltrar As String,
+            ByVal sortExpression As String,
+            ByVal startRowIndex As Long,
+            ByVal maximumRows As Long,
+            ByVal estado As CartaDePorteManager.enumCDPestado,
+            ByVal QueContenga As String,
+            ByVal idVendedor As Integer,
+            ByVal idCorredor As Integer,
+            ByVal idDestinatario As Integer,
+            ByVal idIntermediario As Integer,
+            ByVal idRemComercial As Integer,
+            ByVal idArticulo As Integer,
+            ByVal idProcedencia As Integer,
+            ByVal idDestino As Integer,
+            ByVal AplicarANDuORalFiltro As FiltroANDOR,
+            ByVal ModoExportacion As String,
+            ByVal fechadesde As DateTime, ByVal fechahasta As DateTime,
+            ByVal puntoventa As Integer, Optional ByRef sTituloFiltroUsado As String = "",
+            Optional ByVal optDivisionSyngenta As String = "Ambas",
+            Optional ByVal bTraerDuplicados As Boolean = False,
+            Optional ByVal Contrato As String = "",
+            Optional ByVal QueContenga2 As String = "",
+            Optional ByVal idClienteAuxiliar As Integer = -1,
+            Optional ByVal AgrupadorDeTandaPeriodos As Integer = -1,
+            Optional ByVal Vagon As Integer = Nothing, Optional ByVal Patente As String = "",
+            Optional bInsertarEnTablaTemporal As Boolean = False,
+            Optional ByVal optCamionVagon As String = "Ambas"
                     ) As DataTable
 
         'ojo al agregar parametros opcionales http://stackoverflow.com/questions/9884664/system-missingmethodexception-after-adding-an-optional-parameter
@@ -533,13 +533,13 @@ Public Class CartaDePorteManager
 
 
 
-        Dim sWHERE As String = CartaDePorteManager.generarWHEREparaDatasetParametrizado(SC, _
-                              sTituloFiltroUsado, _
-                              estado, QueContenga, idVendedor, idCorredor, _
-                              idDestinatario, idIntermediario, _
-                              idRemComercial, idArticulo, idProcedencia, idDestino, _
-                              AplicarANDuORalFiltro, ModoExportacion, _
-                              fechadesde, fechahasta, _
+        Dim sWHERE As String = CartaDePorteManager.generarWHEREparaDatasetParametrizado(SC,
+                              sTituloFiltroUsado,
+                              estado, QueContenga, idVendedor, idCorredor,
+                              idDestinatario, idIntermediario,
+                              idRemComercial, idArticulo, idProcedencia, idDestino,
+                              AplicarANDuORalFiltro, ModoExportacion,
+                              fechadesde, fechahasta,
                                puntoventa, optDivisionSyngenta, bTraerDuplicados, Contrato, QueContenga2, idClienteAuxiliar, Vagon, Patente, optCamionVagon)
 
 
@@ -563,8 +563,8 @@ Public Class CartaDePorteManager
             'lo que podría poner es un indice unique en CartasDePorteMailClusters que impida que se dupliquen
 
 
-            sWHERE = " INNER JOIN CartasDePorteMailClusters CLUST " & _
-                     "       ON CDP.IdCartaDePorte = CLUST.IdCartaDePorte AND   " & _
+            sWHERE = " INNER JOIN CartasDePorteMailClusters CLUST " &
+                     "       ON CDP.IdCartaDePorte = CLUST.IdCartaDePorte AND   " &
                      "       CLUST.AgrupadorDeTandaPeriodos=" & AgrupadorDeTandaPeriodos & "        WHERE " & sWHERE
 
 
@@ -636,8 +636,8 @@ Public Class CartaDePorteManager
             Dim tipo As String = ConfigurationManager.AppSettings("AvisoTipoDeSitioDesarrolloDebugTestReleaseExterno")
 
 
-            Dim s = If(Membership.GetUser IsNot Nothing, Membership.GetUser.UserName, "<nadie>") & " Error en GetDataTableFiltradoYPaginado.  maxrows " & maximumRows & " en " & tipo & ". Probable timeout.         ver si el error es de system memory " & _
-                                          "o de report processing, recomendar reinicio del IIS por las sesiones con basura. " & _
+            Dim s = If(Membership.GetUser IsNot Nothing, Membership.GetUser.UserName, "<nadie>") & " Error en GetDataTableFiltradoYPaginado.  maxrows " & maximumRows & " en " & tipo & ". Probable timeout.         ver si el error es de system memory " &
+                                          "o de report processing, recomendar reinicio del IIS por las sesiones con basura. " &
                                           "Incluir sp_who2. Filtro: " & sTituloFiltroUsado & "   periodo " & fechadesde.ToString & " " & fechahasta.ToString & "Error: " & ex.ToString & "      " & sWHERE
 
 
@@ -761,14 +761,14 @@ Public Class CartaDePorteManager
             Dim db As DemoProntoEntities = New DemoProntoEntities(Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC)))
 
 
-            Dim q = (From dest In db.WilliamsDestinos _
-                    From locdes In db.Localidades.Where(Function(i) i.IdLocalidad = CInt(dest.IdLocalidad) Or
+            Dim q = (From dest In db.WilliamsDestinos
+                     From locdes In db.Localidades.Where(Function(i) i.IdLocalidad = CInt(dest.IdLocalidad) Or
                                                                     i.IdLocalidad = CInt(dest.IdLocalidad) Or
                                                                     i.IdLocalidad = CInt(dest.IdLocalidad) Or
                                                                     i.IdLocalidad = CInt(dest.IdLocalidad)
-                                                                        ).DefaultIfEmpty() _
-                    Select dest, locdes
-                    Where dest.CUIT.Trim.Replace("-", "") = cuit.Trim.Replace("-", "")).ToList()
+                                                                        ).DefaultIfEmpty()
+                     Select dest, locdes
+                     Where dest.CUIT.Trim.Replace("-", "") = cuit.Trim.Replace("-", "")).ToList()
 
 
 
@@ -791,7 +791,7 @@ Public Class CartaDePorteManager
                 'Return q(0).Nombre
 
 
-                Dim c = (From x In q _
+                Dim c = (From x In q
                          Select x.dest.IdWilliamsDestino, nombre = If(If(x.locdes, New Models.Localidad).Nombre, ""), dist = FuncionesGenericasCSharp.levenshtein(
                              If(If(x.locdes, New Models.Localidad).Nombre, "").Trim.ToUpper, LocalidadDestino.Trim.ToUpper)).ToList
 
@@ -1035,37 +1035,37 @@ Public Class CartaDePorteManager
     ''' <param name="optCamionVagon"></param>
     ''' <returns></returns>
     ''' <remarks></remarks>
-    Public Shared Function GetDataTableFiltradoYPaginado_CadenaSQL( _
-            ByVal SC As String, _
-            ByVal ColumnaParaFiltrar As String, _
-            ByVal TextoParaFiltrar As String, _
-            ByVal sortExpression As String, _
-            ByVal startRowIndex As Long, _
-            ByVal maximumRows As Long, _
-            ByVal estado As CartaDePorteManager.enumCDPestado, _
-            ByVal QueContenga As String, _
-            ByVal idVendedor As Integer, _
-            ByVal idCorredor As Integer, _
-            ByVal idDestinatario As Integer, _
-            ByVal idIntermediario As Integer, _
-            ByVal idRemComercial As Integer, _
-            ByVal idArticulo As Integer, _
-            ByVal idProcedencia As Integer, _
-            ByVal idDestino As Integer, _
-            ByVal AplicarANDuORalFiltro As FiltroANDOR, _
-            ByVal ModoExportacion As String, _
-            ByVal fechadesde As DateTime, ByVal fechahasta As DateTime, _
-            ByVal puntoventa As Integer, Optional ByRef sTituloFiltroUsado As String = "", _
-            Optional ByVal optDivisionSyngenta As String = "Ambas", _
-            Optional ByVal bTraerDuplicados As Boolean = False, _
-            Optional ByVal Contrato As String = "", _
-            Optional ByVal QueContenga2 As String = "", _
-            Optional ByVal idClienteAuxiliar As Integer = -1, _
-            Optional ByVal AgrupadorDeTandaPeriodos As Integer = -1, _
-            Optional ByVal Vagon As Integer = Nothing, Optional ByVal Patente As String = "", _
-            Optional bInsertarEnTablaTemporal As Boolean = False, _
-            Optional ByVal optCamionVagon As String = "Ambas", _
-        Optional sqlCount As Boolean = False _
+    Public Shared Function GetDataTableFiltradoYPaginado_CadenaSQL(
+            ByVal SC As String,
+            ByVal ColumnaParaFiltrar As String,
+            ByVal TextoParaFiltrar As String,
+            ByVal sortExpression As String,
+            ByVal startRowIndex As Long,
+            ByVal maximumRows As Long,
+            ByVal estado As CartaDePorteManager.enumCDPestado,
+            ByVal QueContenga As String,
+            ByVal idVendedor As Integer,
+            ByVal idCorredor As Integer,
+            ByVal idDestinatario As Integer,
+            ByVal idIntermediario As Integer,
+            ByVal idRemComercial As Integer,
+            ByVal idArticulo As Integer,
+            ByVal idProcedencia As Integer,
+            ByVal idDestino As Integer,
+            ByVal AplicarANDuORalFiltro As FiltroANDOR,
+            ByVal ModoExportacion As String,
+            ByVal fechadesde As DateTime, ByVal fechahasta As DateTime,
+            ByVal puntoventa As Integer, Optional ByRef sTituloFiltroUsado As String = "",
+            Optional ByVal optDivisionSyngenta As String = "Ambas",
+            Optional ByVal bTraerDuplicados As Boolean = False,
+            Optional ByVal Contrato As String = "",
+            Optional ByVal QueContenga2 As String = "",
+            Optional ByVal idClienteAuxiliar As Integer = -1,
+            Optional ByVal AgrupadorDeTandaPeriodos As Integer = -1,
+            Optional ByVal Vagon As Integer = Nothing, Optional ByVal Patente As String = "",
+            Optional bInsertarEnTablaTemporal As Boolean = False,
+            Optional ByVal optCamionVagon As String = "Ambas",
+        Optional sqlCount As Boolean = False
                     ) As String
 
         'ojo al agregar parametros opcionales http://stackoverflow.com/questions/9884664/system-missingmethodexception-after-adding-an-optional-parameter
@@ -1081,13 +1081,13 @@ Public Class CartaDePorteManager
 
 
 
-        Dim sWHERE As String = CartaDePorteManager.generarWHEREparaDatasetParametrizado(SC, _
-                              sTituloFiltroUsado, _
-                              estado, QueContenga, idVendedor, idCorredor, _
-                              idDestinatario, idIntermediario, _
-                              idRemComercial, idArticulo, idProcedencia, idDestino, _
-                              AplicarANDuORalFiltro, ModoExportacion, _
-                              fechadesde, fechahasta, _
+        Dim sWHERE As String = CartaDePorteManager.generarWHEREparaDatasetParametrizado(SC,
+                              sTituloFiltroUsado,
+                              estado, QueContenga, idVendedor, idCorredor,
+                              idDestinatario, idIntermediario,
+                              idRemComercial, idArticulo, idProcedencia, idDestino,
+                              AplicarANDuORalFiltro, ModoExportacion,
+                              fechadesde, fechahasta,
                                puntoventa, optDivisionSyngenta, bTraerDuplicados, Contrato, QueContenga2, idClienteAuxiliar, Vagon, Patente, optCamionVagon)
 
 
@@ -1111,8 +1111,8 @@ Public Class CartaDePorteManager
             'lo que podría poner es un indice unique en CartasDePorteMailClusters que impida que se dupliquen
 
 
-            sWHERE = " INNER JOIN CartasDePorteMailClusters CLUST " & _
-                     "       ON CDP.IdCartaDePorte = CLUST.IdCartaDePorte AND   " & _
+            sWHERE = " INNER JOIN CartasDePorteMailClusters CLUST " &
+                     "       ON CDP.IdCartaDePorte = CLUST.IdCartaDePorte AND   " &
                      "       CLUST.AgrupadorDeTandaPeriodos=" & AgrupadorDeTandaPeriodos & "        WHERE " & sWHERE
 
 
@@ -1152,50 +1152,50 @@ Public Class CartaDePorteManager
 
 
 
-    Public Shared Function GetDataTableFiltradoYPaginado_CadenaSQL_TambienEjecutaCount( _
-           ByVal SC As String, _
-           ByVal ColumnaParaFiltrar As String, _
-           ByVal TextoParaFiltrar As String, _
-           ByVal sortExpression As String, _
-           ByVal startRowIndex As Long, _
-           ByVal maximumRows As Long, _
-           ByVal estado As CartaDePorteManager.enumCDPestado, _
-           ByVal QueContenga As String, _
-           ByVal idVendedor As Integer, _
-           ByVal idCorredor As Integer, _
-           ByVal idDestinatario As Integer, _
-           ByVal idIntermediario As Integer, _
-           ByVal idRemComercial As Integer, _
-           ByVal idArticulo As Integer, _
-           ByVal idProcedencia As Integer, _
-           ByVal idDestino As Integer, _
-           ByVal AplicarANDuORalFiltro As FiltroANDOR, _
-           ByVal ModoExportacion As String, _
-           ByVal fechadesde As DateTime, ByVal fechahasta As DateTime, _
+    Public Shared Function GetDataTableFiltradoYPaginado_CadenaSQL_TambienEjecutaCount(
+           ByVal SC As String,
+           ByVal ColumnaParaFiltrar As String,
+           ByVal TextoParaFiltrar As String,
+           ByVal sortExpression As String,
+           ByVal startRowIndex As Long,
+           ByVal maximumRows As Long,
+           ByVal estado As CartaDePorteManager.enumCDPestado,
+           ByVal QueContenga As String,
+           ByVal idVendedor As Integer,
+           ByVal idCorredor As Integer,
+           ByVal idDestinatario As Integer,
+           ByVal idIntermediario As Integer,
+           ByVal idRemComercial As Integer,
+           ByVal idArticulo As Integer,
+           ByVal idProcedencia As Integer,
+           ByVal idDestino As Integer,
+           ByVal AplicarANDuORalFiltro As FiltroANDOR,
+           ByVal ModoExportacion As String,
+           ByVal fechadesde As DateTime, ByVal fechahasta As DateTime,
            ByVal puntoventa As Integer,
-           ByRef sqlCount As Long, _
-            Optional ByRef sTituloFiltroUsado As String = "", _
-           Optional ByVal optDivisionSyngenta As String = "Ambas", _
-           Optional ByVal bTraerDuplicados As Boolean = False, _
-           Optional ByVal Contrato As String = "", _
-           Optional ByVal QueContenga2 As String = "", _
-           Optional ByVal idClienteAuxiliar As Integer = -1, _
-           Optional ByVal AgrupadorDeTandaPeriodos As Integer = -1, _
-           Optional ByVal Vagon As Integer = Nothing, Optional ByVal Patente As String = "", _
-           Optional bInsertarEnTablaTemporal As Boolean = False, _
-           Optional ByVal optCamionVagon As String = "Ambas" _
+           ByRef sqlCount As Long,
+            Optional ByRef sTituloFiltroUsado As String = "",
+           Optional ByVal optDivisionSyngenta As String = "Ambas",
+           Optional ByVal bTraerDuplicados As Boolean = False,
+           Optional ByVal Contrato As String = "",
+           Optional ByVal QueContenga2 As String = "",
+           Optional ByVal idClienteAuxiliar As Integer = -1,
+           Optional ByVal AgrupadorDeTandaPeriodos As Integer = -1,
+           Optional ByVal Vagon As Integer = Nothing, Optional ByVal Patente As String = "",
+           Optional bInsertarEnTablaTemporal As Boolean = False,
+           Optional ByVal optCamionVagon As String = "Ambas"
                    ) As String
 
 
 
 
-        Dim count = CartaDePorteManager.GetDataTableFiltradoYPaginado_CadenaSQL(SC, _
-                     ColumnaParaFiltrar, TextoParaFiltrar, sortExpression, startRowIndex, maximumRows, _
-                      estado, QueContenga, idVendedor, idCorredor, _
-                      idDestinatario, idIntermediario, _
-                      idRemComercial, idArticulo, idProcedencia, idDestino, _
+        Dim count = CartaDePorteManager.GetDataTableFiltradoYPaginado_CadenaSQL(SC,
+                     ColumnaParaFiltrar, TextoParaFiltrar, sortExpression, startRowIndex, maximumRows,
+                      estado, QueContenga, idVendedor, idCorredor,
+                      idDestinatario, idIntermediario,
+                      idRemComercial, idArticulo, idProcedencia, idDestino,
                AplicarANDuORalFiltro, ModoExportacion,
-                     fechadesde, fechahasta, _
+                     fechadesde, fechahasta,
                      puntoventa, sTituloFiltroUsado, optDivisionSyngenta, , Contrato, , idClienteAuxiliar, AgrupadorDeTandaPeriodos, , , , , True)
 
 
@@ -1204,13 +1204,13 @@ Public Class CartaDePorteManager
         'If sqlCount = 0 Then Return -1
 
 
-        Return CartaDePorteManager.GetDataTableFiltradoYPaginado_CadenaSQL(SC, _
-               ColumnaParaFiltrar, TextoParaFiltrar, sortExpression, startRowIndex, maximumRows, _
-                estado, QueContenga, idVendedor, idCorredor, _
-                idDestinatario, idIntermediario, _
-                idRemComercial, idArticulo, idProcedencia, idDestino, _
+        Return CartaDePorteManager.GetDataTableFiltradoYPaginado_CadenaSQL(SC,
+               ColumnaParaFiltrar, TextoParaFiltrar, sortExpression, startRowIndex, maximumRows,
+                estado, QueContenga, idVendedor, idCorredor,
+                idDestinatario, idIntermediario,
+                idRemComercial, idArticulo, idProcedencia, idDestino,
          AplicarANDuORalFiltro, ModoExportacion,
-               fechadesde, fechahasta, _
+               fechadesde, fechahasta,
                puntoventa, sTituloFiltroUsado, optDivisionSyngenta, , Contrato, , idClienteAuxiliar, AgrupadorDeTandaPeriodos, , , , , False)
 
 
@@ -1250,35 +1250,35 @@ Public Class CartaDePorteManager
     '////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-    Public Shared Function CartasLINQ(ByVal SC As String, _
-            ByVal ColumnaParaFiltrar As String, _
-            ByVal TextoParaFiltrar As String, _
-            ByVal sortExpression As String, _
-            ByVal startRowIndex As Long, _
-            ByVal maximumRows As Long, _
-            ByVal estado As CartaDePorteManager.enumCDPestado, _
-            ByVal QueContenga As String, _
-            ByVal idVendedor As Integer, _
-            ByVal idCorredor As Integer, _
-            ByVal idDestinatario As Integer, _
-            ByVal idIntermediario As Integer, _
-            ByVal idRemComercial As Integer, _
-            ByVal idArticulo As Integer, _
-            ByVal idProcedencia As Integer, _
-            ByVal idDestino As Integer, _
-            ByVal AplicarANDuORalFiltro As FiltroANDOR, _
-            ByVal ModoExportacion As String, _
-            ByVal fechadesde As DateTime, ByVal fechahasta As DateTime, _
-            ByVal puntoventa As Integer, _
-            Optional ByRef sTituloFiltroUsado As String = "", _
-            Optional ByVal optDivisionSyngenta As String = "Ambas", _
-            Optional ByVal bTraerDuplicados As Boolean = False, _
-            Optional ByVal Contrato As String = "", _
-            Optional ByVal QueContenga2 As String = "", _
-            Optional ByVal idClienteAuxiliar As Integer = -1, _
-            Optional ByVal AgrupadorDeTandaPeriodos As Integer = -1, _
-            Optional ByVal Vagon As Integer = Nothing, Optional ByVal Patente As String = "", _
- Optional ByRef db2 As DemoProntoEntities = Nothing _
+    Public Shared Function CartasLINQ(ByVal SC As String,
+            ByVal ColumnaParaFiltrar As String,
+            ByVal TextoParaFiltrar As String,
+            ByVal sortExpression As String,
+            ByVal startRowIndex As Long,
+            ByVal maximumRows As Long,
+            ByVal estado As CartaDePorteManager.enumCDPestado,
+            ByVal QueContenga As String,
+            ByVal idVendedor As Integer,
+            ByVal idCorredor As Integer,
+            ByVal idDestinatario As Integer,
+            ByVal idIntermediario As Integer,
+            ByVal idRemComercial As Integer,
+            ByVal idArticulo As Integer,
+            ByVal idProcedencia As Integer,
+            ByVal idDestino As Integer,
+            ByVal AplicarANDuORalFiltro As FiltroANDOR,
+            ByVal ModoExportacion As String,
+            ByVal fechadesde As DateTime, ByVal fechahasta As DateTime,
+            ByVal puntoventa As Integer,
+            Optional ByRef sTituloFiltroUsado As String = "",
+            Optional ByVal optDivisionSyngenta As String = "Ambas",
+            Optional ByVal bTraerDuplicados As Boolean = False,
+            Optional ByVal Contrato As String = "",
+            Optional ByVal QueContenga2 As String = "",
+            Optional ByVal idClienteAuxiliar As Integer = -1,
+            Optional ByVal AgrupadorDeTandaPeriodos As Integer = -1,
+            Optional ByVal Vagon As Integer = Nothing, Optional ByVal Patente As String = "",
+ Optional ByRef db2 As DemoProntoEntities = Nothing
     ) As IQueryable(Of ProntoMVC.Data.Models.CartasDePorte)
 
         Dim db As DemoProntoEntities
@@ -1310,36 +1310,36 @@ Public Class CartaDePorteManager
         '           The delegate can only take 3 input parameters (can be solved by wrapping the parameters in containers)
         '           And above all… Developers are lazy….Well, not all, but many. I know I am..
 
-        Dim q As IQueryable(Of ProntoMVC.Data.Models.CartasDePorte) = From cdp In db.CartasDePortes _
-    Join cli In db.Clientes On cli.IdCliente Equals cdp.Vendedor _
-    From art In db.Articulos.Where(Function(i) i.IdArticulo = cdp.IdArticulo).DefaultIfEmpty _
-    From clitit In db.Clientes.Where(Function(i) i.IdCliente = cdp.Vendedor).DefaultIfEmpty _
-    From clidest In db.Clientes.Where(Function(i) i.IdCliente = cdp.Entregador).DefaultIfEmpty _
-    From cliint In db.Clientes.Where(Function(i) i.IdCliente = cdp.CuentaOrden1).DefaultIfEmpty _
-    From clircom In db.Clientes.Where(Function(i) i.IdCliente = cdp.CuentaOrden2).DefaultIfEmpty _
-    From corr In db.Vendedores.Where(Function(i) i.IdVendedor = cdp.Corredor).DefaultIfEmpty _
-    From cal In db.Calidade_EF.Where(Function(i) i.IdCalidad = CInt(cdp.Calidad)).DefaultIfEmpty _
-    From dest In db.WilliamsDestinos.Where(Function(i) i.IdWilliamsDestino = cdp.Destino).DefaultIfEmpty _
-    From estab In db.CDPEstablecimientos.Where(Function(i) i.IdEstablecimiento = cdp.IdEstablecimiento).DefaultIfEmpty _
-    From tr In db.Transportistas.Where(Function(i) i.IdTransportista = cdp.IdTransportista).DefaultIfEmpty _
-    From loc In db.Localidades.Where(Function(i) i.IdLocalidad = CInt(cdp.Procedencia)).DefaultIfEmpty _
-    From chf In db.Choferes.Where(Function(i) i.IdChofer = cdp.IdChofer).DefaultIfEmpty _
-    From emp In db.Empleados.Where(Function(i) i.IdEmpleado = cdp.IdUsuarioIngreso).DefaultIfEmpty _
-    Where _
-        cdp.Vendedor > 0 _
-        And cli.RazonSocial IsNot Nothing _
-        And (cdp.FechaDescarga >= fechadesde And cdp.FechaDescarga <= fechahasta) _
-        And (cdp.Anulada <> "SI") _
-        And (ModoExportacion <> "Entregas" Or cdp.Exporta <> "SI") _
-        And (cdp.Vendedor.HasValue And cdp.Corredor.HasValue And cdp.Entregador.HasValue) _
-        And (idVendedor = -1 Or cdp.Vendedor = idVendedor) _
-        And (idCorredor = -1 Or cdp.Corredor = idCorredor) _
-        And (idDestinatario = -1 Or cdp.Entregador = idDestinatario) _
-        And (idIntermediario = -1 Or cdp.CuentaOrden1 = idIntermediario) _
-        And (idArticulo = -1 Or cdp.IdArticulo = idArticulo) _
-        And (idDestino = -1 Or cdp.Destino = idDestino) _
-        And (puntoventa = -1 Or cdp.PuntoVenta = puntoventa) _
-    Select cdp
+        Dim q As IQueryable(Of ProntoMVC.Data.Models.CartasDePorte) = From cdp In db.CartasDePortes
+                                                                      Join cli In db.Clientes On cli.IdCliente Equals cdp.Vendedor
+                                                                      From art In db.Articulos.Where(Function(i) i.IdArticulo = cdp.IdArticulo).DefaultIfEmpty
+                                                                      From clitit In db.Clientes.Where(Function(i) i.IdCliente = cdp.Vendedor).DefaultIfEmpty
+                                                                      From clidest In db.Clientes.Where(Function(i) i.IdCliente = cdp.Entregador).DefaultIfEmpty
+                                                                      From cliint In db.Clientes.Where(Function(i) i.IdCliente = cdp.CuentaOrden1).DefaultIfEmpty
+                                                                      From clircom In db.Clientes.Where(Function(i) i.IdCliente = cdp.CuentaOrden2).DefaultIfEmpty
+                                                                      From corr In db.Vendedores.Where(Function(i) i.IdVendedor = cdp.Corredor).DefaultIfEmpty
+                                                                      From cal In db.Calidade_EF.Where(Function(i) i.IdCalidad = CInt(cdp.Calidad)).DefaultIfEmpty
+                                                                      From dest In db.WilliamsDestinos.Where(Function(i) i.IdWilliamsDestino = cdp.Destino).DefaultIfEmpty
+                                                                      From estab In db.CDPEstablecimientos.Where(Function(i) i.IdEstablecimiento = cdp.IdEstablecimiento).DefaultIfEmpty
+                                                                      From tr In db.Transportistas.Where(Function(i) i.IdTransportista = cdp.IdTransportista).DefaultIfEmpty
+                                                                      From loc In db.Localidades.Where(Function(i) i.IdLocalidad = CInt(cdp.Procedencia)).DefaultIfEmpty
+                                                                      From chf In db.Choferes.Where(Function(i) i.IdChofer = cdp.IdChofer).DefaultIfEmpty
+                                                                      From emp In db.Empleados.Where(Function(i) i.IdEmpleado = cdp.IdUsuarioIngreso).DefaultIfEmpty
+                                                                      Where
+                                                                          cdp.Vendedor > 0 _
+                                                                          And cli.RazonSocial IsNot Nothing _
+                                                                          And (cdp.FechaDescarga >= fechadesde And cdp.FechaDescarga <= fechahasta) _
+                                                                          And (cdp.Anulada <> "SI") _
+                                                                          And (ModoExportacion <> "Entregas" Or cdp.Exporta <> "SI") _
+                                                                          And (cdp.Vendedor.HasValue And cdp.Corredor.HasValue And cdp.Entregador.HasValue) _
+                                                                          And (idVendedor = -1 Or cdp.Vendedor = idVendedor) _
+                                                                          And (idCorredor = -1 Or cdp.Corredor = idCorredor) _
+                                                                          And (idDestinatario = -1 Or cdp.Entregador = idDestinatario) _
+                                                                          And (idIntermediario = -1 Or cdp.CuentaOrden1 = idIntermediario) _
+                                                                          And (idArticulo = -1 Or cdp.IdArticulo = idArticulo) _
+                                                                          And (idDestino = -1 Or cdp.Destino = idDestino) _
+                                                                          And (puntoventa = -1 Or cdp.PuntoVenta = puntoventa)
+                                                                      Select cdp
 
 
 
@@ -1372,29 +1372,29 @@ Public Class CartaDePorteManager
 
 
 
-    Shared Function CartasLINQlocal(ByVal SC As String, _
-            ByVal ColumnaParaFiltrar As String, _
-            ByVal TextoParaFiltrar As String, _
-            ByVal sortExpression As String, _
-            ByVal startRowIndex As Long, _
-            ByVal maximumRows As Long, _
-            ByVal estado As CartaDePorteManager.enumCDPestado, _
-            ByVal QueContenga As String, _
-            ByVal idVendedor As Integer, _
-            ByVal idCorredor As Integer, _
-            ByVal idDestinatario As Integer, _
-            ByVal idIntermediario As Integer, _
-            ByVal idRemComercial As Integer, _
-            ByVal idArticulo As Integer, _
-            ByVal idProcedencia As Integer, _
-            ByVal idDestino As Integer, _
-            ByVal AplicarANDuORalFiltro As FiltroANDOR, _
-            ByVal ModoExportacion As String, _
-            ByVal fechadesde As DateTime, ByVal fechahasta As DateTime, _
-            ByVal puntoventa As Integer, _
-            Optional ByRef sTituloFiltroUsado As String = "", _
-            Optional ByVal optDivisionSyngenta As String = "Ambas", _
-            Optional ByVal bTraerDuplicados As Boolean = False, _
+    Shared Function CartasLINQlocal(ByVal SC As String,
+            ByVal ColumnaParaFiltrar As String,
+            ByVal TextoParaFiltrar As String,
+            ByVal sortExpression As String,
+            ByVal startRowIndex As Long,
+            ByVal maximumRows As Long,
+            ByVal estado As CartaDePorteManager.enumCDPestado,
+            ByVal QueContenga As String,
+            ByVal idVendedor As Integer,
+            ByVal idCorredor As Integer,
+            ByVal idDestinatario As Integer,
+            ByVal idIntermediario As Integer,
+            ByVal idRemComercial As Integer,
+            ByVal idArticulo As Integer,
+            ByVal idProcedencia As Integer,
+            ByVal idDestino As Integer,
+            ByVal AplicarANDuORalFiltro As FiltroANDOR,
+            ByVal ModoExportacion As String,
+            ByVal fechadesde As DateTime, ByVal fechahasta As DateTime,
+            ByVal puntoventa As Integer,
+            Optional ByRef sTituloFiltroUsado As String = "",
+            Optional ByVal optDivisionSyngenta As String = "Ambas",
+            Optional ByVal bTraerDuplicados As Boolean = False,
             Optional ByVal Contrato As String = "") As Object
 
         Dim db As New LinqCartasPorteDataContext(Encriptar(SC))
@@ -1406,80 +1406,80 @@ Public Class CartaDePorteManager
 
         'por qué no uso una vista?
 
-        Dim q = From cdp In db.CartasDePortes _
-    Join cli In db.linqClientes On cli.IdCliente Equals cdp.Vendedor _
-    From art In db.linqArticulos.Where(Function(i) i.IdArticulo = cdp.IdArticulo).DefaultIfEmpty _
-    From clitit In db.linqClientes.Where(Function(i) i.IdCliente = cdp.Vendedor).DefaultIfEmpty _
-    From clidest In db.linqClientes.Where(Function(i) i.IdCliente = cdp.Entregador).DefaultIfEmpty _
-    From cliint In db.linqClientes.Where(Function(i) i.IdCliente = cdp.CuentaOrden1).DefaultIfEmpty _
-    From clircom In db.linqClientes.Where(Function(i) i.IdCliente = cdp.CuentaOrden2).DefaultIfEmpty _
-    From corr In db.linqCorredors.Where(Function(i) i.IdVendedor = cdp.Corredor).DefaultIfEmpty _
-    From cal In db.Calidades.Where(Function(i) i.IdCalidad = cdp.Calidad).DefaultIfEmpty _
-    From dest In db.WilliamsDestinos.Where(Function(i) i.IdWilliamsDestino = cdp.Destino).DefaultIfEmpty _
-    From estab In db.linqCDPEstablecimientos.Where(Function(i) i.IdEstablecimiento = cdp.IdEstablecimiento).DefaultIfEmpty _
-    From tr In db.Transportistas.Where(Function(i) i.IdTransportista = cdp.IdTransportista).DefaultIfEmpty _
-    From loc In db.Localidades.Where(Function(i) i.IdLocalidad = cdp.Procedencia).DefaultIfEmpty _
-    From chf In db.Choferes.Where(Function(i) i.IdChofer = cdp.IdChofer).DefaultIfEmpty _
-    From emp In db.linqEmpleados.Where(Function(i) i.IdEmpleado = cdp.IdUsuarioIngreso).DefaultIfEmpty _
-    Where _
-        cdp.Vendedor > 0 _
-        And cli.RazonSocial IsNot Nothing _
-        And (cdp.FechaDescarga >= fechadesde And cdp.FechaDescarga <= fechahasta) _
-        And (cdp.Anulada <> "SI") _
-        And (ModoExportacion <> "Entregas" Or cdp.Exporta <> "SI") _
-        And (cdp.Vendedor.HasValue And cdp.Corredor.HasValue And cdp.Entregador.HasValue) _
-        And (idVendedor = -1 Or cdp.Vendedor = idVendedor) _
-        And (idCorredor = -1 Or cdp.Corredor = idCorredor) _
-        And (idDestinatario = -1 Or cdp.Entregador = idDestinatario) _
-        And (idIntermediario = -1 Or cdp.CuentaOrden1 = idIntermediario) _
-        And (idArticulo = -1 Or cdp.IdArticulo = idArticulo) _
-        And (idDestino = -1 Or cdp.Destino = idDestino) _
-        And (puntoventa = -1 Or cdp.PuntoVenta = puntoventa) _
-    Order By cdp.FechaModificacion Descending _
-    Select New With { _
-        .Producto = art.Descripcion, .id = cdp.IdCartaDePorte, _
-        cdp.NumeroCartaDePorte, cdp.NumeroSubfijo, cdp.SubnumeroVagon, _
-        cdp.FechaArribo, cdp.FechaModificacion, cdp.FechaDescarga, _
-            .Obs = cdp.Observaciones, _
-            .NetoFinal = cdp.NetoFinal, _
-                    .TitularDesc = clitit.RazonSocial, _
-            .IntermediarioDesc = cliint.RazonSocial, _
-            .RComercialDesc = clircom.RazonSocial, _
-            .CorredorDesc = corr.Nombre, _
-            .DestinatarioDesc = clidest.RazonSocial, _
-            .ProcedenciaDesc = loc.Nombre, _
-            .DestinoDesc = dest.Descripcion, _
-              .CalidadDesc = cal.Descripcion, _
-           .UsuarioIngreso = emp.Nombre _
-        } Skip startRowIndex Take maximumRows
+        Dim q = From cdp In db.CartasDePortes
+                Join cli In db.linqClientes On cli.IdCliente Equals cdp.Vendedor
+                From art In db.linqArticulos.Where(Function(i) i.IdArticulo = cdp.IdArticulo).DefaultIfEmpty
+                From clitit In db.linqClientes.Where(Function(i) i.IdCliente = cdp.Vendedor).DefaultIfEmpty
+                From clidest In db.linqClientes.Where(Function(i) i.IdCliente = cdp.Entregador).DefaultIfEmpty
+                From cliint In db.linqClientes.Where(Function(i) i.IdCliente = cdp.CuentaOrden1).DefaultIfEmpty
+                From clircom In db.linqClientes.Where(Function(i) i.IdCliente = cdp.CuentaOrden2).DefaultIfEmpty
+                From corr In db.linqCorredors.Where(Function(i) i.IdVendedor = cdp.Corredor).DefaultIfEmpty
+                From cal In db.Calidades.Where(Function(i) i.IdCalidad = cdp.Calidad).DefaultIfEmpty
+                From dest In db.WilliamsDestinos.Where(Function(i) i.IdWilliamsDestino = cdp.Destino).DefaultIfEmpty
+                From estab In db.linqCDPEstablecimientos.Where(Function(i) i.IdEstablecimiento = cdp.IdEstablecimiento).DefaultIfEmpty
+                From tr In db.Transportistas.Where(Function(i) i.IdTransportista = cdp.IdTransportista).DefaultIfEmpty
+                From loc In db.Localidades.Where(Function(i) i.IdLocalidad = cdp.Procedencia).DefaultIfEmpty
+                From chf In db.Choferes.Where(Function(i) i.IdChofer = cdp.IdChofer).DefaultIfEmpty
+                From emp In db.linqEmpleados.Where(Function(i) i.IdEmpleado = cdp.IdUsuarioIngreso).DefaultIfEmpty
+                Where
+                    cdp.Vendedor > 0 _
+                    And cli.RazonSocial IsNot Nothing _
+                    And (cdp.FechaDescarga >= fechadesde And cdp.FechaDescarga <= fechahasta) _
+                    And (cdp.Anulada <> "SI") _
+                    And (ModoExportacion <> "Entregas" Or cdp.Exporta <> "SI") _
+                    And (cdp.Vendedor.HasValue And cdp.Corredor.HasValue And cdp.Entregador.HasValue) _
+                    And (idVendedor = -1 Or cdp.Vendedor = idVendedor) _
+                    And (idCorredor = -1 Or cdp.Corredor = idCorredor) _
+                    And (idDestinatario = -1 Or cdp.Entregador = idDestinatario) _
+                    And (idIntermediario = -1 Or cdp.CuentaOrden1 = idIntermediario) _
+                    And (idArticulo = -1 Or cdp.IdArticulo = idArticulo) _
+                    And (idDestino = -1 Or cdp.Destino = idDestino) _
+                    And (puntoventa = -1 Or cdp.PuntoVenta = puntoventa)
+                Order By cdp.FechaModificacion Descending
+                Select New With {
+                    .Producto = art.Descripcion, .id = cdp.IdCartaDePorte,
+                    cdp.NumeroCartaDePorte, cdp.NumeroSubfijo, cdp.SubnumeroVagon,
+                    cdp.FechaArribo, cdp.FechaModificacion, cdp.FechaDescarga,
+                        .Obs = cdp.Observaciones,
+                        .NetoFinal = cdp.NetoFinal,
+                                .TitularDesc = clitit.RazonSocial,
+                        .IntermediarioDesc = cliint.RazonSocial,
+                        .RComercialDesc = clircom.RazonSocial,
+                        .CorredorDesc = corr.Nombre,
+                        .DestinatarioDesc = clidest.RazonSocial,
+                        .ProcedenciaDesc = loc.Nombre,
+                        .DestinoDesc = dest.Descripcion,
+                          .CalidadDesc = cal.Descripcion,
+                       .UsuarioIngreso = emp.Nombre
+                    } Skip startRowIndex Take maximumRows
 
         Return q
     End Function
 
 
-    Shared Function CartasLINQlocalSimplificado(ByVal SC As String, _
-          ByVal ColumnaParaFiltrar As String, _
-          ByVal TextoParaFiltrar As String, _
-          ByVal sortExpression As String, _
-          ByVal startRowIndex As Long, _
-          ByVal maximumRows As Long, _
-          ByVal estado As CartaDePorteManager.enumCDPestado, _
-          ByVal QueContenga As String, _
-          ByVal idVendedor As Integer, _
-          ByVal idCorredor As Integer, _
-          ByVal idDestinatario As Integer, _
-          ByVal idIntermediario As Integer, _
-          ByVal idRemComercial As Integer, _
-          ByVal idArticulo As Integer, _
-          ByVal idProcedencia As Integer, _
-          ByVal idDestino As Integer, _
-          ByVal AplicarANDuORalFiltro As FiltroANDOR, _
-          ByVal ModoExportacion As String, _
-          ByVal fechadesde As DateTime, ByVal fechahasta As DateTime, _
-          ByVal puntoventa As Integer, _
-          Optional ByRef sTituloFiltroUsado As String = "", _
-          Optional ByVal optDivisionSyngenta As String = "Ambas", _
-          Optional ByVal bTraerDuplicados As Boolean = False, _
+    Shared Function CartasLINQlocalSimplificado(ByVal SC As String,
+          ByVal ColumnaParaFiltrar As String,
+          ByVal TextoParaFiltrar As String,
+          ByVal sortExpression As String,
+          ByVal startRowIndex As Long,
+          ByVal maximumRows As Long,
+          ByVal estado As CartaDePorteManager.enumCDPestado,
+          ByVal QueContenga As String,
+          ByVal idVendedor As Integer,
+          ByVal idCorredor As Integer,
+          ByVal idDestinatario As Integer,
+          ByVal idIntermediario As Integer,
+          ByVal idRemComercial As Integer,
+          ByVal idArticulo As Integer,
+          ByVal idProcedencia As Integer,
+          ByVal idDestino As Integer,
+          ByVal AplicarANDuORalFiltro As FiltroANDOR,
+          ByVal ModoExportacion As String,
+          ByVal fechadesde As DateTime, ByVal fechahasta As DateTime,
+          ByVal puntoventa As Integer,
+          Optional ByRef sTituloFiltroUsado As String = "",
+          Optional ByVal optDivisionSyngenta As String = "Ambas",
+          Optional ByVal bTraerDuplicados As Boolean = False,
           Optional ByVal Contrato As String = "") As Object
 
 
@@ -1494,17 +1494,17 @@ Public Class CartaDePorteManager
 
             'y qué pasa si vuelvo a usar Equals? (en lugar de DefaultIfEmpty que me permite traer los nulls)
 
-            Dim q = From cdp In db.CartasDePortes _
-                    From art In db.linqArticulos.Where(Function(i) i.IdArticulo = cdp.IdArticulo).DefaultIfEmpty _
-                    From clitit In db.linqClientes.Where(Function(i) i.IdCliente = cdp.Vendedor).DefaultIfEmpty _
-                    From clidest In db.linqClientes.Where(Function(i) i.IdCliente = cdp.Entregador).DefaultIfEmpty _
-                    From cliint In db.linqClientes.Where(Function(i) i.IdCliente = cdp.CuentaOrden1).DefaultIfEmpty _
-                    From clircom In db.linqClientes.Where(Function(i) i.IdCliente = cdp.CuentaOrden2).DefaultIfEmpty _
-                    From corr In db.linqCorredors.Where(Function(i) i.IdVendedor = cdp.Corredor).DefaultIfEmpty _
-                    From dest In db.WilliamsDestinos.Where(Function(i) i.IdWilliamsDestino = cdp.Destino).DefaultIfEmpty _
-                    From loc In db.Localidades.Where(Function(i) i.IdLocalidad = CInt(cdp.Procedencia)).DefaultIfEmpty _
-                    From cal In db.Calidades.Where(Function(i) i.IdCalidad = cdp.Calidad).DefaultIfEmpty _
-                    Where _
+            Dim q = From cdp In db.CartasDePortes
+                    From art In db.linqArticulos.Where(Function(i) i.IdArticulo = cdp.IdArticulo).DefaultIfEmpty
+                    From clitit In db.linqClientes.Where(Function(i) i.IdCliente = cdp.Vendedor).DefaultIfEmpty
+                    From clidest In db.linqClientes.Where(Function(i) i.IdCliente = cdp.Entregador).DefaultIfEmpty
+                    From cliint In db.linqClientes.Where(Function(i) i.IdCliente = cdp.CuentaOrden1).DefaultIfEmpty
+                    From clircom In db.linqClientes.Where(Function(i) i.IdCliente = cdp.CuentaOrden2).DefaultIfEmpty
+                    From corr In db.linqCorredors.Where(Function(i) i.IdVendedor = cdp.Corredor).DefaultIfEmpty
+                    From dest In db.WilliamsDestinos.Where(Function(i) i.IdWilliamsDestino = cdp.Destino).DefaultIfEmpty
+                    From loc In db.Localidades.Where(Function(i) i.IdLocalidad = CInt(cdp.Procedencia)).DefaultIfEmpty
+                    From cal In db.Calidades.Where(Function(i) i.IdCalidad = cdp.Calidad).DefaultIfEmpty
+                    Where
                 cdp.Vendedor > 0 _
                 And (cdp.FechaDescarga >= fechadesde And cdp.FechaDescarga <= fechahasta) _
                 And (cdp.Anulada <> "SI") _
@@ -1516,24 +1516,24 @@ Public Class CartaDePorteManager
                 And (idIntermediario = -1 Or cdp.CuentaOrden1 = idIntermediario) _
                 And (idArticulo = -1 Or cdp.IdArticulo = idArticulo) _
                 And (idDestino = -1 Or cdp.Destino = idDestino) _
-                And (puntoventa = -1 Or cdp.PuntoVenta = puntoventa) _
-                Order By cdp.FechaModificacion Descending _
-                Select New With { _
-                .Producto = "", .id = cdp.IdCartaDePorte, _
-                cdp.NumeroCartaDePorte, cdp.NumeroSubfijo, cdp.SubnumeroVagon, _
-                cdp.FechaArribo, cdp.FechaModificacion, cdp.FechaDescarga, _
-                .Obs = cdp.Observaciones, _
-                .NetoFinal = cdp.NetoFinal, _
-                        .TitularDesc = clitit.RazonSocial, _
-                .IntermediarioDesc = cliint.RazonSocial, _
-                .RComercialDesc = clircom.RazonSocial, _
-                .CorredorDesc = corr.Nombre, _
-                .DestinatarioDesc = clidest.RazonSocial, _
-                .ProcedenciaDesc = loc.Nombre, _
-                .DestinoDesc = dest.Descripcion, _
-                  .CalidadDesc = "", _
-               .UsuarioIngreso = "" _
-            } Skip startRowIndex Take maximumRows
+                And (puntoventa = -1 Or cdp.PuntoVenta = puntoventa)
+                    Order By cdp.FechaModificacion Descending
+                    Select New With {
+                    .Producto = "", .id = cdp.IdCartaDePorte,
+                    cdp.NumeroCartaDePorte, cdp.NumeroSubfijo, cdp.SubnumeroVagon,
+                    cdp.FechaArribo, cdp.FechaModificacion, cdp.FechaDescarga,
+                    .Obs = cdp.Observaciones,
+                    .NetoFinal = cdp.NetoFinal,
+                            .TitularDesc = clitit.RazonSocial,
+                    .IntermediarioDesc = cliint.RazonSocial,
+                    .RComercialDesc = clircom.RazonSocial,
+                    .CorredorDesc = corr.Nombre,
+                    .DestinatarioDesc = clidest.RazonSocial,
+                    .ProcedenciaDesc = loc.Nombre,
+                    .DestinoDesc = dest.Descripcion,
+                      .CalidadDesc = "",
+                   .UsuarioIngreso = ""
+                } Skip startRowIndex Take maximumRows
 
             Dim resq = q.ToList
 
@@ -1565,29 +1565,29 @@ Public Class CartaDePorteManager
     End Function
 
 
-    Shared Function CartasLINQlocalSimplificadoPrimeraPagina(ByVal SC As String, _
-          ByVal ColumnaParaFiltrar As String, _
-          ByVal TextoParaFiltrar As String, _
-          ByVal sortExpression As String, _
-          ByVal startRowIndex As Long, _
-          ByVal maximumRows As Long, _
-          ByVal estado As CartaDePorteManager.enumCDPestado, _
-          ByVal QueContenga As String, _
-          ByVal idVendedor As Integer, _
-          ByVal idCorredor As Integer, _
-          ByVal idDestinatario As Integer, _
-          ByVal idIntermediario As Integer, _
-          ByVal idRemComercial As Integer, _
-          ByVal idArticulo As Integer, _
-          ByVal idProcedencia As Integer, _
-          ByVal idDestino As Integer, _
-          ByVal AplicarANDuORalFiltro As FiltroANDOR, _
-          ByVal ModoExportacion As String, _
-          ByVal fechadesde As DateTime, ByVal fechahasta As DateTime, _
-          ByVal puntoventa As Integer, _
-          Optional ByRef sTituloFiltroUsado As String = "", _
-          Optional ByVal optDivisionSyngenta As String = "Ambas", _
-          Optional ByVal bTraerDuplicados As Boolean = False, _
+    Shared Function CartasLINQlocalSimplificadoPrimeraPagina(ByVal SC As String,
+          ByVal ColumnaParaFiltrar As String,
+          ByVal TextoParaFiltrar As String,
+          ByVal sortExpression As String,
+          ByVal startRowIndex As Long,
+          ByVal maximumRows As Long,
+          ByVal estado As CartaDePorteManager.enumCDPestado,
+          ByVal QueContenga As String,
+          ByVal idVendedor As Integer,
+          ByVal idCorredor As Integer,
+          ByVal idDestinatario As Integer,
+          ByVal idIntermediario As Integer,
+          ByVal idRemComercial As Integer,
+          ByVal idArticulo As Integer,
+          ByVal idProcedencia As Integer,
+          ByVal idDestino As Integer,
+          ByVal AplicarANDuORalFiltro As FiltroANDOR,
+          ByVal ModoExportacion As String,
+          ByVal fechadesde As DateTime, ByVal fechahasta As DateTime,
+          ByVal puntoventa As Integer,
+          Optional ByRef sTituloFiltroUsado As String = "",
+          Optional ByVal optDivisionSyngenta As String = "Ambas",
+          Optional ByVal bTraerDuplicados As Boolean = False,
           Optional ByVal Contrato As String = "") As Object
 
 
@@ -1615,31 +1615,31 @@ Public Class CartaDePorteManager
             ' si regeneraste el .dbml, tenés que cambiar la  "Public ReadOnly Property CartasDePorte()" a "CartasDePortes"
             ' si regeneraste el .dbml, tenés que cambiar la  "Public ReadOnly Property CartasDePorte()" a "CartasDePortes"
 
-            Dim q = From cdp In db.CartasDePortes _
-                    From art In db.linqArticulos.Where(Function(i) i.IdArticulo = cdp.IdArticulo).DefaultIfEmpty _
-                    From clitit In db.linqClientes.Where(Function(i) i.IdCliente = cdp.Vendedor).DefaultIfEmpty _
-                    From clidest In db.linqClientes.Where(Function(i) i.IdCliente = cdp.Entregador).DefaultIfEmpty _
-                    From cliint In db.linqClientes.Where(Function(i) i.IdCliente = cdp.CuentaOrden1).DefaultIfEmpty _
-                    From clircom In db.linqClientes.Where(Function(i) i.IdCliente = cdp.CuentaOrden2).DefaultIfEmpty _
-                    From corr In db.linqCorredors.Where(Function(i) i.IdVendedor = cdp.Corredor).DefaultIfEmpty _
-                    From dest In db.WilliamsDestinos.Where(Function(i) i.IdWilliamsDestino = cdp.Destino).DefaultIfEmpty _
-                    From loc In db.Localidades.Where(Function(i) i.IdLocalidad = CInt(cdp.Procedencia)).DefaultIfEmpty _
-                Order By cdp.FechaModificacion Descending _
-                Select New With { _
-                .Producto = "", .id = cdp.IdCartaDePorte, _
-                cdp.NumeroCartaDePorte, cdp.NumeroSubfijo, cdp.SubnumeroVagon, _
-                cdp.FechaArribo, cdp.FechaModificacion, cdp.FechaDescarga, _
-                .Obs = cdp.Observaciones, _
-                .NetoFinal = cdp.NetoFinal, _
-                        .TitularDesc = clitit.RazonSocial, _
-                .IntermediarioDesc = cliint.RazonSocial, _
-                .RComercialDesc = clircom.RazonSocial, _
-                .CorredorDesc = corr.Nombre, _
-                .DestinatarioDesc = clidest.RazonSocial, _
-                .ProcedenciaDesc = loc.Nombre, _
-                .DestinoDesc = dest.Descripcion, _
-               .UsuarioIngreso = "" _
-            } Skip startRowIndex Take maximumRows
+            Dim q = From cdp In db.CartasDePortes
+                    From art In db.linqArticulos.Where(Function(i) i.IdArticulo = cdp.IdArticulo).DefaultIfEmpty
+                    From clitit In db.linqClientes.Where(Function(i) i.IdCliente = cdp.Vendedor).DefaultIfEmpty
+                    From clidest In db.linqClientes.Where(Function(i) i.IdCliente = cdp.Entregador).DefaultIfEmpty
+                    From cliint In db.linqClientes.Where(Function(i) i.IdCliente = cdp.CuentaOrden1).DefaultIfEmpty
+                    From clircom In db.linqClientes.Where(Function(i) i.IdCliente = cdp.CuentaOrden2).DefaultIfEmpty
+                    From corr In db.linqCorredors.Where(Function(i) i.IdVendedor = cdp.Corredor).DefaultIfEmpty
+                    From dest In db.WilliamsDestinos.Where(Function(i) i.IdWilliamsDestino = cdp.Destino).DefaultIfEmpty
+                    From loc In db.Localidades.Where(Function(i) i.IdLocalidad = CInt(cdp.Procedencia)).DefaultIfEmpty
+                    Order By cdp.FechaModificacion Descending
+                    Select New With {
+                    .Producto = "", .id = cdp.IdCartaDePorte,
+                    cdp.NumeroCartaDePorte, cdp.NumeroSubfijo, cdp.SubnumeroVagon,
+                    cdp.FechaArribo, cdp.FechaModificacion, cdp.FechaDescarga,
+                    .Obs = cdp.Observaciones,
+                    .NetoFinal = cdp.NetoFinal,
+                            .TitularDesc = clitit.RazonSocial,
+                    .IntermediarioDesc = cliint.RazonSocial,
+                    .RComercialDesc = clircom.RazonSocial,
+                    .CorredorDesc = corr.Nombre,
+                    .DestinatarioDesc = clidest.RazonSocial,
+                    .ProcedenciaDesc = loc.Nombre,
+                    .DestinoDesc = dest.Descripcion,
+                   .UsuarioIngreso = ""
+                } Skip startRowIndex Take maximumRows
 
             Dim resq = q.ToList
 
@@ -1670,29 +1670,29 @@ Public Class CartaDePorteManager
         End Using
     End Function
 
-    Shared Function CartasLINQlocalSimplificadoTipado(ByVal SC As String, _
-              ByVal ColumnaParaFiltrar As String, _
-              ByVal TextoParaFiltrar As String, _
-              ByVal sortExpression As String, _
-              ByVal startRowIndex As Long, _
-              ByVal maximumRows As Long, _
-              ByVal estado As CartaDePorteManager.enumCDPestado, _
-              ByVal QueContenga As String, _
-              ByVal idVendedor As Integer, _
-              ByVal idCorredor As Integer, _
-              ByVal idDestinatario As Integer, _
-              ByVal idIntermediario As Integer, _
-              ByVal idRemComercial As Integer, _
-              ByVal idArticulo As Integer, _
-              ByVal idProcedencia As Integer, _
-              ByVal idDestino As Integer, _
-              ByVal AplicarANDuORalFiltro As FiltroANDOR, _
-              ByVal ModoExportacion As String, _
-              ByVal fechadesde As DateTime, ByVal fechahasta As DateTime, _
-              ByVal puntoventa As Integer, _
-              Optional ByRef sTituloFiltroUsado As String = "", _
-              Optional ByVal optDivisionSyngenta As String = "Ambas", _
-              Optional ByVal bTraerDuplicados As Boolean = False, _
+    Shared Function CartasLINQlocalSimplificadoTipado(ByVal SC As String,
+              ByVal ColumnaParaFiltrar As String,
+              ByVal TextoParaFiltrar As String,
+              ByVal sortExpression As String,
+              ByVal startRowIndex As Long,
+              ByVal maximumRows As Long,
+              ByVal estado As CartaDePorteManager.enumCDPestado,
+              ByVal QueContenga As String,
+              ByVal idVendedor As Integer,
+              ByVal idCorredor As Integer,
+              ByVal idDestinatario As Integer,
+              ByVal idIntermediario As Integer,
+              ByVal idRemComercial As Integer,
+              ByVal idArticulo As Integer,
+              ByVal idProcedencia As Integer,
+              ByVal idDestino As Integer,
+              ByVal AplicarANDuORalFiltro As FiltroANDOR,
+              ByVal ModoExportacion As String,
+              ByVal fechadesde As DateTime, ByVal fechahasta As DateTime,
+              ByVal puntoventa As Integer,
+              Optional ByRef sTituloFiltroUsado As String = "",
+              Optional ByVal optDivisionSyngenta As String = "Ambas",
+              Optional ByVal bTraerDuplicados As Boolean = False,
               Optional ByVal Contrato As String = "") As Generic.List(Of ExTipoAnonimo)
 
 
@@ -1706,51 +1706,51 @@ Public Class CartaDePorteManager
 
         'y qué pasa si vuelvo a usar Equals? (en lugar de DefaultIfEmpty que me permite traer los nulls)
 
-        Dim q As Generic.List(Of ExTipoAnonimo) = (From cdp In db.CartasDePortes _
-                From art In db.linqArticulos.Where(Function(i) i.IdArticulo = cdp.IdArticulo).DefaultIfEmpty _
-                From clitit In db.linqClientes.Where(Function(i) i.IdCliente = cdp.Vendedor).DefaultIfEmpty _
-                From clidest In db.linqClientes.Where(Function(i) i.IdCliente = cdp.Entregador).DefaultIfEmpty _
-                From cliint In db.linqClientes.Where(Function(i) i.IdCliente = cdp.CuentaOrden1).DefaultIfEmpty _
-                From clircom In db.linqClientes.Where(Function(i) i.IdCliente = cdp.CuentaOrden2).DefaultIfEmpty _
-                From corr In db.linqCorredors.Where(Function(i) i.IdVendedor = cdp.Corredor).DefaultIfEmpty _
-                From dest In db.WilliamsDestinos.Where(Function(i) i.IdWilliamsDestino = cdp.Destino).DefaultIfEmpty _
-                From loc In db.Localidades.Where(Function(i) i.IdLocalidad = CInt(cdp.Procedencia)).DefaultIfEmpty _
-                From cal In db.Calidades.Where(Function(i) i.IdCalidad = cdp.Calidad).DefaultIfEmpty _
-                Where _
-            cdp.Vendedor > 0 _
-            And (cdp.FechaDescarga >= fechadesde And cdp.FechaDescarga <= fechahasta) _
-            And (cdp.Anulada <> "SI") _
-            And (ModoExportacion <> "Entregas" Or cdp.Exporta <> "SI") _
-            And (cdp.Vendedor.HasValue And cdp.Corredor.HasValue And cdp.Entregador.HasValue) _
-            And (idVendedor = -1 Or cdp.Vendedor = idVendedor) _
-            And (idCorredor = -1 Or cdp.Corredor = idCorredor) _
-            And (idDestinatario = -1 Or cdp.Entregador = idDestinatario) _
-            And (idIntermediario = -1 Or cdp.CuentaOrden1 = idIntermediario) _
-            And (idArticulo = -1 Or cdp.IdArticulo = idArticulo) _
-            And (idDestino = -1 Or cdp.Destino = idDestino) _
-            And (puntoventa = -1 Or cdp.PuntoVenta = puntoventa) _
-            Order By cdp.FechaModificacion Descending _
-            Select New ExTipoAnonimo With { _
-             .IdCartaDePorte = cdp.IdCartaDePorte, _
-             .NumeroCartaDePorte = cdp.NumeroCartaDePorte, _
-             .NumeroSubfijo = cdp.NumeroSubfijo, _
-             .SubnumeroVagon = cdp.SubnumeroVagon, _
-             .FechaArribo = cdp.FechaArribo, _
-             .FechaModificacion = cdp.FechaModificacion, _
-             .FechaDescarga = cdp.FechaDescarga, _
-             .Observaciones = cdp.Observaciones, _
-             .NetoFinal = cdp.NetoFinal, _
-             .TitularDesc = clitit.RazonSocial, _
-             .IntermediarioDesc = cliint.RazonSocial, _
-             .RComercialDesc = clircom.RazonSocial, _
-             .CorredorDesc = corr.Nombre, _
-             .DestinatarioDesc = art.Descripcion, _
-             .Producto = art.Descripcion, _
-             .ProcedenciaDesc = loc.Nombre, _
-             .DestinoDesc = dest.Descripcion, _
-             .CalidadDesc = "", _
-             .UsuarioIngreso = "" _
-            } Skip startRowIndex Take maximumRows).ToList
+        Dim q As Generic.List(Of ExTipoAnonimo) = (From cdp In db.CartasDePortes
+                                                   From art In db.linqArticulos.Where(Function(i) i.IdArticulo = cdp.IdArticulo).DefaultIfEmpty
+                                                   From clitit In db.linqClientes.Where(Function(i) i.IdCliente = cdp.Vendedor).DefaultIfEmpty
+                                                   From clidest In db.linqClientes.Where(Function(i) i.IdCliente = cdp.Entregador).DefaultIfEmpty
+                                                   From cliint In db.linqClientes.Where(Function(i) i.IdCliente = cdp.CuentaOrden1).DefaultIfEmpty
+                                                   From clircom In db.linqClientes.Where(Function(i) i.IdCliente = cdp.CuentaOrden2).DefaultIfEmpty
+                                                   From corr In db.linqCorredors.Where(Function(i) i.IdVendedor = cdp.Corredor).DefaultIfEmpty
+                                                   From dest In db.WilliamsDestinos.Where(Function(i) i.IdWilliamsDestino = cdp.Destino).DefaultIfEmpty
+                                                   From loc In db.Localidades.Where(Function(i) i.IdLocalidad = CInt(cdp.Procedencia)).DefaultIfEmpty
+                                                   From cal In db.Calidades.Where(Function(i) i.IdCalidad = cdp.Calidad).DefaultIfEmpty
+                                                   Where
+                                               cdp.Vendedor > 0 _
+                                               And (cdp.FechaDescarga >= fechadesde And cdp.FechaDescarga <= fechahasta) _
+                                               And (cdp.Anulada <> "SI") _
+                                               And (ModoExportacion <> "Entregas" Or cdp.Exporta <> "SI") _
+                                               And (cdp.Vendedor.HasValue And cdp.Corredor.HasValue And cdp.Entregador.HasValue) _
+                                               And (idVendedor = -1 Or cdp.Vendedor = idVendedor) _
+                                               And (idCorredor = -1 Or cdp.Corredor = idCorredor) _
+                                               And (idDestinatario = -1 Or cdp.Entregador = idDestinatario) _
+                                               And (idIntermediario = -1 Or cdp.CuentaOrden1 = idIntermediario) _
+                                               And (idArticulo = -1 Or cdp.IdArticulo = idArticulo) _
+                                               And (idDestino = -1 Or cdp.Destino = idDestino) _
+                                               And (puntoventa = -1 Or cdp.PuntoVenta = puntoventa)
+                                                   Order By cdp.FechaModificacion Descending
+                                                   Select New ExTipoAnonimo With {
+                                                    .IdCartaDePorte = cdp.IdCartaDePorte,
+                                                    .NumeroCartaDePorte = cdp.NumeroCartaDePorte,
+                                                    .NumeroSubfijo = cdp.NumeroSubfijo,
+                                                    .SubnumeroVagon = cdp.SubnumeroVagon,
+                                                    .FechaArribo = cdp.FechaArribo,
+                                                    .FechaModificacion = cdp.FechaModificacion,
+                                                    .FechaDescarga = cdp.FechaDescarga,
+                                                    .Observaciones = cdp.Observaciones,
+                                                    .NetoFinal = cdp.NetoFinal,
+                                                    .TitularDesc = clitit.RazonSocial,
+                                                    .IntermediarioDesc = cliint.RazonSocial,
+                                                    .RComercialDesc = clircom.RazonSocial,
+                                                    .CorredorDesc = corr.Nombre,
+                                                    .DestinatarioDesc = art.Descripcion,
+                                                    .Producto = art.Descripcion,
+                                                    .ProcedenciaDesc = loc.Nombre,
+                                                    .DestinoDesc = dest.Descripcion,
+                                                    .CalidadDesc = "",
+                                                    .UsuarioIngreso = ""
+                                                   } Skip startRowIndex Take maximumRows).ToList
 
         ' .id = cdp.IdCartaDePorte, _,
         '       .   cdp.NumeroCartaDePorte, cdp.NumeroSubfijo, cdp.SubnumeroVagon, _
@@ -1798,29 +1798,29 @@ Public Class CartaDePorteManager
 
 
 
-    Shared Function CartasLINQlocalSimplificadoTipado2(ByVal SC As String, _
-              ByVal ColumnaParaFiltrar As String, _
-              ByVal TextoParaFiltrar As String, _
-              ByVal sortExpression As String, _
-              ByVal startRowIndex As Long, _
-              ByVal maximumRows As Long, _
-              ByVal estado As CartaDePorteManager.enumCDPestado, _
-              ByVal QueContenga As String, _
-              ByVal idVendedor As Integer, _
-              ByVal idCorredor As Integer, _
-              ByVal idDestinatario As Integer, _
-              ByVal idIntermediario As Integer, _
-              ByVal idRemComercial As Integer, _
-              ByVal idArticulo As Integer, _
-              ByVal idProcedencia As Integer, _
-              ByVal idDestino As Integer, _
-              ByVal AplicarANDuORalFiltro As FiltroANDOR, _
-              ByVal ModoExportacion As String, _
-              ByVal fechadesde As DateTime, ByVal fechahasta As DateTime, _
-              ByVal puntoventa As Integer, _
-              Optional ByRef sTituloFiltroUsado As String = "", _
-              Optional ByVal optDivisionSyngenta As String = "Ambas", _
-              Optional ByVal bTraerDuplicados As Boolean = False, _
+    Shared Function CartasLINQlocalSimplificadoTipado2(ByVal SC As String,
+              ByVal ColumnaParaFiltrar As String,
+              ByVal TextoParaFiltrar As String,
+              ByVal sortExpression As String,
+              ByVal startRowIndex As Long,
+              ByVal maximumRows As Long,
+              ByVal estado As CartaDePorteManager.enumCDPestado,
+              ByVal QueContenga As String,
+              ByVal idVendedor As Integer,
+              ByVal idCorredor As Integer,
+              ByVal idDestinatario As Integer,
+              ByVal idIntermediario As Integer,
+              ByVal idRemComercial As Integer,
+              ByVal idArticulo As Integer,
+              ByVal idProcedencia As Integer,
+              ByVal idDestino As Integer,
+              ByVal AplicarANDuORalFiltro As FiltroANDOR,
+              ByVal ModoExportacion As String,
+              ByVal fechadesde As DateTime, ByVal fechahasta As DateTime,
+              ByVal puntoventa As Integer,
+              Optional ByRef sTituloFiltroUsado As String = "",
+              Optional ByVal optDivisionSyngenta As String = "Ambas",
+              Optional ByVal bTraerDuplicados As Boolean = False,
               Optional ByVal Contrato As String = "") As Generic.List(Of CartaDePorte)
 
 
@@ -1834,59 +1834,59 @@ Public Class CartaDePorteManager
 
         'y qué pasa si vuelvo a usar Equals? (en lugar de DefaultIfEmpty que me permite traer los nulls)
 
-        Dim q As Generic.List(Of CartaDePorte) = (From cdp In db.CartasDePortes _
-                From art In db.linqArticulos.Where(Function(i) i.IdArticulo = cdp.IdArticulo).DefaultIfEmpty _
-                From clitit In db.linqClientes.Where(Function(i) i.IdCliente = cdp.Vendedor).DefaultIfEmpty _
-                From clidest In db.linqClientes.Where(Function(i) i.IdCliente = cdp.Entregador).DefaultIfEmpty _
-                From cliint In db.linqClientes.Where(Function(i) i.IdCliente = cdp.CuentaOrden1).DefaultIfEmpty _
-                From clircom In db.linqClientes.Where(Function(i) i.IdCliente = cdp.CuentaOrden2).DefaultIfEmpty _
-                From corr In db.linqCorredors.Where(Function(i) i.IdVendedor = cdp.Corredor).DefaultIfEmpty _
-                From dest In db.WilliamsDestinos.Where(Function(i) i.IdWilliamsDestino = cdp.Destino).DefaultIfEmpty _
-                From loc In db.Localidades.Where(Function(i) i.IdLocalidad = CInt(cdp.Procedencia)).DefaultIfEmpty _
-                From cal In db.Calidades.Where(Function(i) i.IdCalidad = cdp.Calidad).DefaultIfEmpty _
-                Where _
-            cdp.Vendedor > 0 _
-            And (cdp.FechaDescarga >= fechadesde And cdp.FechaDescarga <= fechahasta) _
-            And (cdp.Anulada <> "SI") _
-            And (ModoExportacion <> "Entregas" Or cdp.Exporta <> "SI") _
-            And (cdp.Vendedor.HasValue And cdp.Corredor.HasValue And cdp.Entregador.HasValue) _
-            And (idVendedor = -1 Or cdp.Vendedor = idVendedor) _
-            And (idCorredor = -1 Or cdp.Corredor = idCorredor) _
-            And (idDestinatario = -1 Or cdp.Entregador = idDestinatario) _
-            And (idIntermediario = -1 Or cdp.CuentaOrden1 = idIntermediario) _
-            And (idArticulo = -1 Or cdp.IdArticulo = idArticulo) _
-            And (idDestino = -1 Or cdp.Destino = idDestino) _
-            And (puntoventa = -1 Or cdp.PuntoVenta = puntoventa) _
-            Order By cdp.FechaModificacion Descending _
-            Select New CartaDePorte With { _
-             .Id = cdp.IdCartaDePorte, _
-             .NumeroCartaDePorte = cdp.NumeroCartaDePorte, _
-             .NumeroSubfijo = cdp.NumeroSubfijo, _
-             .SubnumeroVagon = cdp.SubnumeroVagon, _
-             .FechaArribo = cdp.FechaArribo, _
-             .FechaModificacion = cdp.FechaModificacion, _
-             .FechaDescarga = cdp.FechaDescarga, _
-             .Observaciones = cdp.Observaciones, _
-             .NetoFinalSinMermas = cdp.NetoFinal, _
-             .TitularDesc = clitit.RazonSocial, _
-             .IntermediarioDesc = cliint.RazonSocial, _
-             .RComercialDesc = clircom.RazonSocial, _
-             .CorredorDesc = corr.Nombre, _
-             .DestinatarioDesc = art.Descripcion, _
-             .Producto = art.Descripcion, _
-             .ProcedenciaDesc = loc.Nombre, _
-             .DestinoDesc = dest.Descripcion, _
-             .CalidadDesc = "", _
-             .UsuarioIngreso = "", _
-            .NobleExtranos = cdp.NobleExtranos, _
-            .NobleNegros = cdp.NobleNegros, _
-            .NobleQuebrados = cdp.NobleQuebrados, _
-            .NobleDaniados = cdp.NobleDaniados, _
-            .NobleChamico = cdp.NobleChamico, _
-            .NobleChamico2 = cdp.NobleChamico2, _
-            .NobleRevolcado = cdp.NobleRevolcado, _
-            .NobleObjetables = cdp.NobleObjetables _
-            } Skip startRowIndex Take maximumRows).ToList
+        Dim q As Generic.List(Of CartaDePorte) = (From cdp In db.CartasDePortes
+                                                  From art In db.linqArticulos.Where(Function(i) i.IdArticulo = cdp.IdArticulo).DefaultIfEmpty
+                                                  From clitit In db.linqClientes.Where(Function(i) i.IdCliente = cdp.Vendedor).DefaultIfEmpty
+                                                  From clidest In db.linqClientes.Where(Function(i) i.IdCliente = cdp.Entregador).DefaultIfEmpty
+                                                  From cliint In db.linqClientes.Where(Function(i) i.IdCliente = cdp.CuentaOrden1).DefaultIfEmpty
+                                                  From clircom In db.linqClientes.Where(Function(i) i.IdCliente = cdp.CuentaOrden2).DefaultIfEmpty
+                                                  From corr In db.linqCorredors.Where(Function(i) i.IdVendedor = cdp.Corredor).DefaultIfEmpty
+                                                  From dest In db.WilliamsDestinos.Where(Function(i) i.IdWilliamsDestino = cdp.Destino).DefaultIfEmpty
+                                                  From loc In db.Localidades.Where(Function(i) i.IdLocalidad = CInt(cdp.Procedencia)).DefaultIfEmpty
+                                                  From cal In db.Calidades.Where(Function(i) i.IdCalidad = cdp.Calidad).DefaultIfEmpty
+                                                  Where
+                                              cdp.Vendedor > 0 _
+                                              And (cdp.FechaDescarga >= fechadesde And cdp.FechaDescarga <= fechahasta) _
+                                              And (cdp.Anulada <> "SI") _
+                                              And (ModoExportacion <> "Entregas" Or cdp.Exporta <> "SI") _
+                                              And (cdp.Vendedor.HasValue And cdp.Corredor.HasValue And cdp.Entregador.HasValue) _
+                                              And (idVendedor = -1 Or cdp.Vendedor = idVendedor) _
+                                              And (idCorredor = -1 Or cdp.Corredor = idCorredor) _
+                                              And (idDestinatario = -1 Or cdp.Entregador = idDestinatario) _
+                                              And (idIntermediario = -1 Or cdp.CuentaOrden1 = idIntermediario) _
+                                              And (idArticulo = -1 Or cdp.IdArticulo = idArticulo) _
+                                              And (idDestino = -1 Or cdp.Destino = idDestino) _
+                                              And (puntoventa = -1 Or cdp.PuntoVenta = puntoventa)
+                                                  Order By cdp.FechaModificacion Descending
+                                                  Select New CartaDePorte With {
+                                                   .Id = cdp.IdCartaDePorte,
+                                                   .NumeroCartaDePorte = cdp.NumeroCartaDePorte,
+                                                   .NumeroSubfijo = cdp.NumeroSubfijo,
+                                                   .SubnumeroVagon = cdp.SubnumeroVagon,
+                                                   .FechaArribo = cdp.FechaArribo,
+                                                   .FechaModificacion = cdp.FechaModificacion,
+                                                   .FechaDescarga = cdp.FechaDescarga,
+                                                   .Observaciones = cdp.Observaciones,
+                                                   .NetoFinalSinMermas = cdp.NetoFinal,
+                                                   .TitularDesc = clitit.RazonSocial,
+                                                   .IntermediarioDesc = cliint.RazonSocial,
+                                                   .RComercialDesc = clircom.RazonSocial,
+                                                   .CorredorDesc = corr.Nombre,
+                                                   .DestinatarioDesc = art.Descripcion,
+                                                   .Producto = art.Descripcion,
+                                                   .ProcedenciaDesc = loc.Nombre,
+                                                   .DestinoDesc = dest.Descripcion,
+                                                   .CalidadDesc = "",
+                                                   .UsuarioIngreso = "",
+                                                  .NobleExtranos = cdp.NobleExtranos,
+                                                  .NobleNegros = cdp.NobleNegros,
+                                                  .NobleQuebrados = cdp.NobleQuebrados,
+                                                  .NobleDaniados = cdp.NobleDaniados,
+                                                  .NobleChamico = cdp.NobleChamico,
+                                                  .NobleChamico2 = cdp.NobleChamico2,
+                                                  .NobleRevolcado = cdp.NobleRevolcado,
+                                                  .NobleObjetables = cdp.NobleObjetables
+                                                  } Skip startRowIndex Take maximumRows).ToList
 
 
 
@@ -1969,29 +1969,29 @@ Public Class CartaDePorteManager
 
 
 
-    Shared Function CartasLINQlocalSimplificadoQueryable(ByVal SC As String, _
-              ByVal ColumnaParaFiltrar As String, _
-              ByVal TextoParaFiltrar As String, _
-              ByVal sortExpression As String, _
-              ByVal startRowIndex As Long, _
-              ByVal maximumRows As Long, _
-              ByVal estado As CartaDePorteManager.enumCDPestado, _
-              ByVal QueContenga As String, _
-              ByVal idVendedor As Integer, _
-              ByVal idCorredor As Integer, _
-              ByVal idDestinatario As Integer, _
-              ByVal idIntermediario As Integer, _
-              ByVal idRemComercial As Integer, _
-              ByVal idArticulo As Integer, _
-              ByVal idProcedencia As Integer, _
-              ByVal idDestino As Integer, _
-              ByVal AplicarANDuORalFiltro As FiltroANDOR, _
-              ByVal ModoExportacion As String, _
-              ByVal fechadesde As DateTime, ByVal fechahasta As DateTime, _
-              ByVal puntoventa As Integer, _
-              Optional ByRef sTituloFiltroUsado As String = "", _
-              Optional ByVal optDivisionSyngenta As String = "Ambas", _
-              Optional ByVal bTraerDuplicados As Boolean = False, _
+    Shared Function CartasLINQlocalSimplificadoQueryable(ByVal SC As String,
+              ByVal ColumnaParaFiltrar As String,
+              ByVal TextoParaFiltrar As String,
+              ByVal sortExpression As String,
+              ByVal startRowIndex As Long,
+              ByVal maximumRows As Long,
+              ByVal estado As CartaDePorteManager.enumCDPestado,
+              ByVal QueContenga As String,
+              ByVal idVendedor As Integer,
+              ByVal idCorredor As Integer,
+              ByVal idDestinatario As Integer,
+              ByVal idIntermediario As Integer,
+              ByVal idRemComercial As Integer,
+              ByVal idArticulo As Integer,
+              ByVal idProcedencia As Integer,
+              ByVal idDestino As Integer,
+              ByVal AplicarANDuORalFiltro As FiltroANDOR,
+              ByVal ModoExportacion As String,
+              ByVal fechadesde As DateTime, ByVal fechahasta As DateTime,
+              ByVal puntoventa As Integer,
+              Optional ByRef sTituloFiltroUsado As String = "",
+              Optional ByVal optDivisionSyngenta As String = "Ambas",
+              Optional ByVal bTraerDuplicados As Boolean = False,
               Optional ByVal Contrato As String = "") As IQueryable(Of CartasDePorte)
 
 
@@ -2005,32 +2005,32 @@ Public Class CartaDePorteManager
 
         'y qué pasa si vuelvo a usar Equals? (en lugar de DefaultIfEmpty que me permite traer los nulls)
 
-        Dim q As IQueryable(Of CartasDePorte) = From cdp In db.CartasDePortes _
-                From art In db.linqArticulos.Where(Function(i) i.IdArticulo = cdp.IdArticulo).DefaultIfEmpty _
-                From clitit In db.linqClientes.Where(Function(i) i.IdCliente = cdp.Vendedor).DefaultIfEmpty _
-                From clidest In db.linqClientes.Where(Function(i) i.IdCliente = cdp.Entregador).DefaultIfEmpty _
-                From cliint In db.linqClientes.Where(Function(i) i.IdCliente = cdp.CuentaOrden1).DefaultIfEmpty _
-                From clircom In db.linqClientes.Where(Function(i) i.IdCliente = cdp.CuentaOrden2).DefaultIfEmpty _
-                From corr In db.linqCorredors.Where(Function(i) i.IdVendedor = cdp.Corredor).DefaultIfEmpty _
-                From dest In db.WilliamsDestinos.Where(Function(i) i.IdWilliamsDestino = cdp.Destino).DefaultIfEmpty _
-                From loc In db.Localidades.Where(Function(i) i.IdLocalidad = CInt(cdp.Procedencia)).DefaultIfEmpty _
-                From cal In db.Calidades.Where(Function(i) i.IdCalidad = cdp.Calidad).DefaultIfEmpty _
-                Where _
-            cdp.Vendedor > 0 _
-            And (cdp.FechaDescarga >= fechadesde And cdp.FechaDescarga <= fechahasta) _
-            And (cdp.Anulada <> "SI") _
-            And (ModoExportacion <> "Entregas" Or cdp.Exporta <> "SI") _
-            And (cdp.Vendedor.HasValue And cdp.Corredor.HasValue And cdp.Entregador.HasValue) _
-            And (idVendedor = -1 Or cdp.Vendedor = idVendedor) _
-            And (idCorredor = -1 Or cdp.Corredor = idCorredor) _
-            And (idDestinatario = -1 Or cdp.Entregador = idDestinatario) _
-            And (idIntermediario = -1 Or cdp.CuentaOrden1 = idIntermediario) _
-            And (idArticulo = -1 Or cdp.IdArticulo = idArticulo) _
-            And (idDestino = -1 Or cdp.Destino = idDestino) _
-            And (puntoventa = -1 Or cdp.PuntoVenta = puntoventa) _
-            Order By cdp.FechaModificacion Descending _
-                 Select cdp _
-                 Skip startRowIndex Take maximumRows
+        Dim q As IQueryable(Of CartasDePorte) = From cdp In db.CartasDePortes
+                                                From art In db.linqArticulos.Where(Function(i) i.IdArticulo = cdp.IdArticulo).DefaultIfEmpty
+                                                From clitit In db.linqClientes.Where(Function(i) i.IdCliente = cdp.Vendedor).DefaultIfEmpty
+                                                From clidest In db.linqClientes.Where(Function(i) i.IdCliente = cdp.Entregador).DefaultIfEmpty
+                                                From cliint In db.linqClientes.Where(Function(i) i.IdCliente = cdp.CuentaOrden1).DefaultIfEmpty
+                                                From clircom In db.linqClientes.Where(Function(i) i.IdCliente = cdp.CuentaOrden2).DefaultIfEmpty
+                                                From corr In db.linqCorredors.Where(Function(i) i.IdVendedor = cdp.Corredor).DefaultIfEmpty
+                                                From dest In db.WilliamsDestinos.Where(Function(i) i.IdWilliamsDestino = cdp.Destino).DefaultIfEmpty
+                                                From loc In db.Localidades.Where(Function(i) i.IdLocalidad = CInt(cdp.Procedencia)).DefaultIfEmpty
+                                                From cal In db.Calidades.Where(Function(i) i.IdCalidad = cdp.Calidad).DefaultIfEmpty
+                                                Where
+                                            cdp.Vendedor > 0 _
+                                            And (cdp.FechaDescarga >= fechadesde And cdp.FechaDescarga <= fechahasta) _
+                                            And (cdp.Anulada <> "SI") _
+                                            And (ModoExportacion <> "Entregas" Or cdp.Exporta <> "SI") _
+                                            And (cdp.Vendedor.HasValue And cdp.Corredor.HasValue And cdp.Entregador.HasValue) _
+                                            And (idVendedor = -1 Or cdp.Vendedor = idVendedor) _
+                                            And (idCorredor = -1 Or cdp.Corredor = idCorredor) _
+                                            And (idDestinatario = -1 Or cdp.Entregador = idDestinatario) _
+                                            And (idIntermediario = -1 Or cdp.CuentaOrden1 = idIntermediario) _
+                                            And (idArticulo = -1 Or cdp.IdArticulo = idArticulo) _
+                                            And (idDestino = -1 Or cdp.Destino = idDestino) _
+                                            And (puntoventa = -1 Or cdp.PuntoVenta = puntoventa)
+                                                Order By cdp.FechaModificacion Descending
+                                                Select cdp
+                                                Skip startRowIndex Take maximumRows
 
 
 
@@ -2064,49 +2064,49 @@ Public Class CartaDePorteManager
 
 
 
-    Shared Function FormatearTitulo( _
-                    ByVal sc As String, ByRef sTituloFiltroUsado As String, _
-                    ByVal estado As CartaDePorteManager.enumCDPestado, _
-                    ByVal QueContenga As String, _
-                    ByVal idVendedor As Integer, _
-                    ByVal idCorredor As Integer, _
-                    ByVal idDestinatario As Integer, _
-                    ByVal idIntermediario As Integer, _
-                    ByVal idRemComercial As Integer, _
-                    ByVal idArticulo As Integer, _
-                    ByVal idProcedencia As Integer, _
-                    ByVal idDestino As Integer, _
-                    ByVal AplicarANDuORalFiltro As FiltroANDOR, _
-                    ByVal ModoExportacion As String, _
-                    ByVal fechadesde As DateTime, ByVal fechahasta As DateTime, _
-                    ByVal puntoventa As Integer, _
-                    Optional ByVal optDivisionSyngenta As String = "Ambas", _
-                    Optional ByVal bTraerDuplicados As Boolean = False, _
-                    Optional ByVal Contrato As String = "", _
-                    Optional ByVal QueContenga2 As String = "", Optional ByVal idClienteAuxiliar As Integer = -1 _
+    Shared Function FormatearTitulo(
+                    ByVal sc As String, ByRef sTituloFiltroUsado As String,
+                    ByVal estado As CartaDePorteManager.enumCDPestado,
+                    ByVal QueContenga As String,
+                    ByVal idVendedor As Integer,
+                    ByVal idCorredor As Integer,
+                    ByVal idDestinatario As Integer,
+                    ByVal idIntermediario As Integer,
+                    ByVal idRemComercial As Integer,
+                    ByVal idArticulo As Integer,
+                    ByVal idProcedencia As Integer,
+                    ByVal idDestino As Integer,
+                    ByVal AplicarANDuORalFiltro As FiltroANDOR,
+                    ByVal ModoExportacion As String,
+                    ByVal fechadesde As DateTime, ByVal fechahasta As DateTime,
+                    ByVal puntoventa As Integer,
+                    Optional ByVal optDivisionSyngenta As String = "Ambas",
+                    Optional ByVal bTraerDuplicados As Boolean = False,
+                    Optional ByVal Contrato As String = "",
+                    Optional ByVal QueContenga2 As String = "", Optional ByVal idClienteAuxiliar As Integer = -1
                    ) As String
 
         Dim desde As String = iisValidSqlDate(fechadesde.ToString)
         Dim hasta As String = iisValidSqlDate(fechahasta.ToString)
 
 
-        Dim s = String.Format("{15} {0} {1} {2} {3} {4} {5} {6} {7} {8} {9} {14}  ({10}, {11}, {12})", _
-                        IIf(IsDate(fechadesde) AndAlso fechadesde >= #1/1/1800#, "del " & FechaChica(desde), ""), _
-                        IIf(IsDate(fechahasta) AndAlso fechahasta <= #1/1/2099#, "al " & FechaChica(hasta), ""), _
-                        IIf(idVendedor > 0, "Titular: " & NombreCliente(sc, idVendedor), ""), _
-                        IIf(idIntermediario > 0, "Intermediario " & NombreCliente(sc, idIntermediario), ""), _
-                        IIf(idRemComercial > 0, "R.Comercial: " & NombreCliente(sc, idRemComercial), ""), _
-                        IIf(idCorredor > 0, "Corredor: " & NombreVendedor(sc, idCorredor), ""), _
-                        IIf(idDestinatario > 0, "Destinatario: " & NombreCliente(sc, idDestinatario), ""), _
-                        IIf(idProcedencia > 0, "Origen: " & NombreLocalidad(sc, idProcedencia), ""), _
-                        IIf(idDestino > 0, "Destino: " & NombreDestino(sc, idDestino), ""), _
-                        IIf(idArticulo > 0, "Producto: " & NombreArticulo(sc, idArticulo), ""), _
-                        "Exporta: " & iisNull(ModoExportacion, "NO"), _
-                        "Punto de venta: " & IIf(puntoventa < 0, "Todos", PuntoVentaWilliams.NombrePuntoVentaWilliams4(puntoventa)), _
-                        "Criterio: " & IIf(AplicarANDuORalFiltro = "1", "TODOS", "ALGUNOS") & IIf(optDivisionSyngenta = "Seeds", " Syngenta " & optDivisionSyngenta, "") & IIf(QueContenga <> "", " Contiene: " & QueContenga, ""), _
-                        " ", _
-                         IIf(idClienteAuxiliar > 0, " Cliente Observaciones: " & NombreCliente(sc, idClienteAuxiliar), ""), _
-                          sTituloFiltroUsado _
+        Dim s = String.Format("{15} {0} {1} {2} {3} {4} {5} {6} {7} {8} {9} {14}  ({10}, {11}, {12})",
+                        IIf(IsDate(fechadesde) AndAlso fechadesde >= #1/1/1800#, "del " & FechaChica(desde), ""),
+                        IIf(IsDate(fechahasta) AndAlso fechahasta <= #1/1/2099#, "al " & FechaChica(hasta), ""),
+                        IIf(idVendedor > 0, "Titular: " & NombreCliente(sc, idVendedor), ""),
+                        IIf(idIntermediario > 0, "Intermediario " & NombreCliente(sc, idIntermediario), ""),
+                        IIf(idRemComercial > 0, "R.Comercial: " & NombreCliente(sc, idRemComercial), ""),
+                        IIf(idCorredor > 0, "Corredor: " & NombreVendedor(sc, idCorredor), ""),
+                        IIf(idDestinatario > 0, "Destinatario: " & NombreCliente(sc, idDestinatario), ""),
+                        IIf(idProcedencia > 0, "Origen: " & NombreLocalidad(sc, idProcedencia), ""),
+                        IIf(idDestino > 0, "Destino: " & NombreDestino(sc, idDestino), ""),
+                        IIf(idArticulo > 0, "Producto: " & NombreArticulo(sc, idArticulo), ""),
+                        "Exporta: " & iisNull(ModoExportacion, "NO"),
+                        "Punto de venta: " & IIf(puntoventa < 0, "Todos", PuntoVentaWilliams.NombrePuntoVentaWilliams4(puntoventa)),
+                        "Criterio: " & IIf(AplicarANDuORalFiltro = "1", "TODOS", "ALGUNOS") & IIf(optDivisionSyngenta = "Seeds", " Syngenta " & optDivisionSyngenta, "") & IIf(QueContenga <> "", " Contiene: " & QueContenga, ""),
+                        " ",
+                         IIf(idClienteAuxiliar > 0, " Cliente Observaciones: " & NombreCliente(sc, idClienteAuxiliar), ""),
+                          sTituloFiltroUsado
                         )
 
         'String.Format("{11} - {13} de Williams Entregas - {0} {1}", _
@@ -2133,26 +2133,26 @@ Public Class CartaDePorteManager
 
 
 
-    Public Shared Function FormatearAsunto( _
-                    ByVal sc As String, ByRef sTituloFiltroUsado As String, _
-                    ByVal estado As CartaDePorteManager.enumCDPestado, _
-                    ByVal QueContenga As String, _
-                    ByVal idVendedor As Integer, _
-                    ByVal idCorredor As Integer, _
-                    ByVal idDestinatario As Integer, _
-                    ByVal idIntermediario As Integer, _
-                    ByVal idRemComercial As Integer, _
-                    ByVal idArticulo As Integer, _
-                    ByVal idProcedencia As Integer, _
-                    ByVal idDestino As Integer, _
-                    ByVal AplicarANDuORalFiltro As FiltroANDOR, _
-                    ByVal ModoExportacion As String, _
-                    ByVal fechadesde As DateTime, ByVal fechahasta As DateTime, _
-                    ByVal puntoventa As Integer, _
-                    Optional ByVal optDivisionSyngenta As String = "Ambas", _
-                    Optional ByVal bTraerDuplicados As Boolean = False, _
-                    Optional ByVal Contrato As String = "", _
-                    Optional ByVal QueContenga2 As String = "", Optional ByVal idClienteAuxiliar As Integer = -1 _
+    Public Shared Function FormatearAsunto(
+                    ByVal sc As String, ByRef sTituloFiltroUsado As String,
+                    ByVal estado As CartaDePorteManager.enumCDPestado,
+                    ByVal QueContenga As String,
+                    ByVal idVendedor As Integer,
+                    ByVal idCorredor As Integer,
+                    ByVal idDestinatario As Integer,
+                    ByVal idIntermediario As Integer,
+                    ByVal idRemComercial As Integer,
+                    ByVal idArticulo As Integer,
+                    ByVal idProcedencia As Integer,
+                    ByVal idDestino As Integer,
+                    ByVal AplicarANDuORalFiltro As FiltroANDOR,
+                    ByVal ModoExportacion As String,
+                    ByVal fechadesde As DateTime, ByVal fechahasta As DateTime,
+                    ByVal puntoventa As Integer,
+                    Optional ByVal optDivisionSyngenta As String = "Ambas",
+                    Optional ByVal bTraerDuplicados As Boolean = False,
+                    Optional ByVal Contrato As String = "",
+                    Optional ByVal QueContenga2 As String = "", Optional ByVal idClienteAuxiliar As Integer = -1
                    ) As String
 
 
@@ -2196,19 +2196,19 @@ Public Class CartaDePorteManager
             'ojo con mandar los minutos en lugar del mes!!!!!!!!!!!!!!!!!!!!!
             'Dim ci = New CultureInfo.("es-AR")
 
-            s = String.Format("{11} {0} {1} - {2}", _
-                                IIf(IsDate(fechadesde) AndAlso fechadesde >= #1/1/1800#, "del " & fechadesde.ToString("dd/MM/yyyy"), ""), _
-                                IIf(IsDate(fechahasta) AndAlso fechahasta <= #1/1/2099#, "al " & fechahasta.ToString("dd/MM/yyyy"), ""), _
-                                Cliente, _
-                                IIf(idProcedencia > 0, "Origen: " & NombreLocalidad(sc, idProcedencia), ""), _
-                                IIf(idDestino > 0, "Destino: " & NombreDestino(sc, idDestino), ""), _
-                                IIf(idArticulo > 0, "Producto: " & NombreArticulo(sc, idArticulo), ""), _
-                                "Exporta: " & iisNull(ModoExportacion, "NO"), _
-                                "Punto de venta: " & IIf(puntoventa < 0, "Todos", PuntoVentaWilliams.NombrePuntoVentaWilliams4(puntoventa)), _
-                                "Criterio: " & IIf(AplicarANDuORalFiltro = "1", "TODOS", "ALGUNOS") & IIf(optDivisionSyngenta = "Seeds", " Syngenta " & optDivisionSyngenta, "") & IIf(QueContenga <> "", " Contiene: " & QueContenga, ""), _
-                                " ", _
-                                IIf(idClienteAuxiliar > 0, " Cliente Observaciones: " & NombreCliente(sc, idClienteAuxiliar), ""), _
-                                IIf(sTituloFiltroUsado = "", sEst, sTituloFiltroUsado) _
+            s = String.Format("{11} {0} {1} - {2}",
+                                IIf(IsDate(fechadesde) AndAlso fechadesde >= #1/1/1800#, "del " & fechadesde.ToString("dd/MM/yyyy"), ""),
+                                IIf(IsDate(fechahasta) AndAlso fechahasta <= #1/1/2099#, "al " & fechahasta.ToString("dd/MM/yyyy"), ""),
+                                Cliente,
+                                IIf(idProcedencia > 0, "Origen: " & NombreLocalidad(sc, idProcedencia), ""),
+                                IIf(idDestino > 0, "Destino: " & NombreDestino(sc, idDestino), ""),
+                                IIf(idArticulo > 0, "Producto: " & NombreArticulo(sc, idArticulo), ""),
+                                "Exporta: " & iisNull(ModoExportacion, "NO"),
+                                "Punto de venta: " & IIf(puntoventa < 0, "Todos", PuntoVentaWilliams.NombrePuntoVentaWilliams4(puntoventa)),
+                                "Criterio: " & IIf(AplicarANDuORalFiltro = "1", "TODOS", "ALGUNOS") & IIf(optDivisionSyngenta = "Seeds", " Syngenta " & optDivisionSyngenta, "") & IIf(QueContenga <> "", " Contiene: " & QueContenga, ""),
+                                " ",
+                                IIf(idClienteAuxiliar > 0, " Cliente Observaciones: " & NombreCliente(sc, idClienteAuxiliar), ""),
+                                IIf(sTituloFiltroUsado = "", sEst, sTituloFiltroUsado)
                             )
 
 
@@ -2255,106 +2255,106 @@ Public Class CartaDePorteManager
     '///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-    Shared Function CartasLINQlocalSimplificadoTipadoConCalada2(ByVal SC As String, _
-      ByVal ColumnaParaFiltrar As String, _
-      ByVal TextoParaFiltrar As String, _
-      ByVal sortExpression As String, _
-      ByVal startRowIndex As Long, _
-      ByVal maximumRows As Long, _
-      ByVal estado As enumCDPestado, _
-      ByVal QueContenga As String, _
-      ByVal idVendedor As Integer, _
-      ByVal idCorredor As Integer, _
-      ByVal idDestinatario As Integer, _
-      ByVal idIntermediario As Integer, _
-      ByVal idRemComercial As Integer, _
-      ByVal idArticulo As Integer, _
-      ByVal idProcedencia As Integer, _
-      ByVal idDestino As Integer, _
-      ByVal AplicarANDuORalFiltro As FiltroANDOR, _
-      ByVal ModoExportacion As enumCDPexportacion, _
-      ByVal fechadesde As DateTime, ByVal fechahasta As DateTime, _
-      ByVal puntoventa As Integer, _
-      Optional ByRef sTituloFiltroUsado As String = "", _
-      Optional ByVal optDivisionSyngenta As String = "Ambas", _
-      Optional ByVal bTraerDuplicados As Boolean = False, _
-      Optional ByVal Contrato As String = "", _
-      Optional ByRef db2 As LinqCartasPorteDataContext = Nothing, _
-        Optional ByVal QueContenga2 As String = "", _
-        Optional ByVal idClienteAuxiliar As Integer = -1, _
-        Optional ByVal AgrupadorDeTandaPeriodos As Integer = -1, _
-        Optional ByVal Vagon As Integer = Nothing, Optional ByVal Patente As String = "", _
-        Optional ByVal optCamionVagon As String = "Ambas" _
+    Shared Function CartasLINQlocalSimplificadoTipadoConCalada2(ByVal SC As String,
+      ByVal ColumnaParaFiltrar As String,
+      ByVal TextoParaFiltrar As String,
+      ByVal sortExpression As String,
+      ByVal startRowIndex As Long,
+      ByVal maximumRows As Long,
+      ByVal estado As enumCDPestado,
+      ByVal QueContenga As String,
+      ByVal idVendedor As Integer,
+      ByVal idCorredor As Integer,
+      ByVal idDestinatario As Integer,
+      ByVal idIntermediario As Integer,
+      ByVal idRemComercial As Integer,
+      ByVal idArticulo As Integer,
+      ByVal idProcedencia As Integer,
+      ByVal idDestino As Integer,
+      ByVal AplicarANDuORalFiltro As FiltroANDOR,
+      ByVal ModoExportacion As enumCDPexportacion,
+      ByVal fechadesde As DateTime, ByVal fechahasta As DateTime,
+      ByVal puntoventa As Integer,
+      Optional ByRef sTituloFiltroUsado As String = "",
+      Optional ByVal optDivisionSyngenta As String = "Ambas",
+      Optional ByVal bTraerDuplicados As Boolean = False,
+      Optional ByVal Contrato As String = "",
+      Optional ByRef db2 As LinqCartasPorteDataContext = Nothing,
+        Optional ByVal QueContenga2 As String = "",
+        Optional ByVal idClienteAuxiliar As Integer = -1,
+        Optional ByVal AgrupadorDeTandaPeriodos As Integer = -1,
+        Optional ByVal Vagon As Integer = Nothing, Optional ByVal Patente As String = "",
+        Optional ByVal optCamionVagon As String = "Ambas"
 ) As IQueryable(Of CartasConCalada)
 
 
         Dim s As String = [Enum].GetName(ModoExportacion.GetType(), ModoExportacion)
 
 
-        Return CartasLINQlocalSimplificadoTipadoConCalada(SC, _
-       ColumnaParaFiltrar, _
-       TextoParaFiltrar, _
-     sortExpression, _
-     startRowIndex, _
-     maximumRows, _
-     estado, _
-     QueContenga, _
-     idVendedor, _
-     idCorredor, _
-     idDestinatario, _
-     idIntermediario, _
-     idRemComercial, _
-     idArticulo, _
-     idProcedencia, _
-     idDestino, _
-     AplicarANDuORalFiltro, _
-     s, _
-     fechadesde, fechahasta, _
-     puntoventa, _
-        sTituloFiltroUsado, _
-      optDivisionSyngenta, _
-      bTraerDuplicados, _
-      Contrato, _
-        db2, _
-        QueContenga2, _
-        idClienteAuxiliar, _
-        AgrupadorDeTandaPeriodos, _
-        Vagon, Patente, _
+        Return CartasLINQlocalSimplificadoTipadoConCalada(SC,
+       ColumnaParaFiltrar,
+       TextoParaFiltrar,
+     sortExpression,
+     startRowIndex,
+     maximumRows,
+     estado,
+     QueContenga,
+     idVendedor,
+     idCorredor,
+     idDestinatario,
+     idIntermediario,
+     idRemComercial,
+     idArticulo,
+     idProcedencia,
+     idDestino,
+     AplicarANDuORalFiltro,
+     s,
+     fechadesde, fechahasta,
+     puntoventa,
+        sTituloFiltroUsado,
+      optDivisionSyngenta,
+      bTraerDuplicados,
+      Contrato,
+        db2,
+        QueContenga2,
+        idClienteAuxiliar,
+        AgrupadorDeTandaPeriodos,
+        Vagon, Patente,
         optCamionVagon)
 
     End Function
 
 
-    Shared Function CartasLINQlocalSimplificadoTipadoConCalada3(ByVal SC As String, _
-         ByVal ColumnaParaFiltrar As String, _
-         ByVal TextoParaFiltrar As String, _
-         ByVal sortExpression As String, _
-         ByVal startRowIndex As Long, _
-         ByVal maximumRows As Long, _
-         ByVal estado As enumCDPestado, _
-         ByVal QueContenga As String, _
-         ByVal idVendedor As Integer, _
-         ByVal idCorredor As Integer, _
-         ByVal idDestinatario As Integer, _
-         ByVal idIntermediario As Integer, _
-         ByVal idRemComercial As Integer, _
-         ByVal idArticulo As Integer, _
-         ByVal idProcedencia As Integer, _
-         ByVal idDestino As Integer, _
-         ByVal AplicarANDuORalFiltro As FiltroANDOR, _
-         ByVal ModoExportacionString As String, _
-         ByVal fechadesde As DateTime, ByVal fechahasta As DateTime, _
-         ByVal puntoventa As Integer, _
-         Optional ByRef sTituloFiltroUsado As String = "", _
-         Optional ByVal optDivisionSyngenta As String = "Ambas", _
-         Optional ByVal bTraerDuplicados As Boolean = False, _
-         Optional ByVal Contrato As String = "", _
-         Optional ByRef db2 As DemoProntoEntities = Nothing, _
-           Optional ByVal QueContenga2 As String = "", _
-           Optional ByVal idClienteAuxiliar As Integer = -1, _
-           Optional ByVal AgrupadorDeTandaPeriodos As Integer = -1, _
-           Optional ByVal Vagon As Integer = Nothing, Optional ByVal Patente As String = "", _
-           Optional ByVal optCamionVagon As String = "Ambas" _
+    Shared Function CartasLINQlocalSimplificadoTipadoConCalada3(ByVal SC As String,
+         ByVal ColumnaParaFiltrar As String,
+         ByVal TextoParaFiltrar As String,
+         ByVal sortExpression As String,
+         ByVal startRowIndex As Long,
+         ByVal maximumRows As Long,
+         ByVal estado As enumCDPestado,
+         ByVal QueContenga As String,
+         ByVal idVendedor As Integer,
+         ByVal idCorredor As Integer,
+         ByVal idDestinatario As Integer,
+         ByVal idIntermediario As Integer,
+         ByVal idRemComercial As Integer,
+         ByVal idArticulo As Integer,
+         ByVal idProcedencia As Integer,
+         ByVal idDestino As Integer,
+         ByVal AplicarANDuORalFiltro As FiltroANDOR,
+         ByVal ModoExportacionString As String,
+         ByVal fechadesde As DateTime, ByVal fechahasta As DateTime,
+         ByVal puntoventa As Integer,
+         Optional ByRef sTituloFiltroUsado As String = "",
+         Optional ByVal optDivisionSyngenta As String = "Ambas",
+         Optional ByVal bTraerDuplicados As Boolean = False,
+         Optional ByVal Contrato As String = "",
+         Optional ByRef db2 As DemoProntoEntities = Nothing,
+           Optional ByVal QueContenga2 As String = "",
+           Optional ByVal idClienteAuxiliar As Integer = -1,
+           Optional ByVal AgrupadorDeTandaPeriodos As Integer = -1,
+           Optional ByVal Vagon As Integer = Nothing, Optional ByVal Patente As String = "",
+           Optional ByVal optCamionVagon As String = "Ambas"
 ) As IQueryable(Of CartasConCalada)
 
 
@@ -2401,279 +2401,279 @@ Public Class CartaDePorteManager
         Dim q As IQueryable(Of CartasConCalada) = (From cdp In db.fSQL_GetDataTableFiltradoYPaginado(
                                         0, maximumRows, estado, QueContenga, idVendedor, idCorredor,
                                         idDestinatario, idIntermediario, idRemComercial, idArticulo, idProcedencia,
-                                        idDestino, AplicarANDuORalFiltro, ModoExportacionString, fechadesde, _
-                                        fechahasta, puntoventa, idacopio, Contrato, QueContenga2, _
+                                        idDestino, AplicarANDuORalFiltro, ModoExportacionString, fechadesde,
+                                        fechahasta, puntoventa, idacopio, Contrato, QueContenga2,
                                         idClienteAuxiliar, AgrupadorDeTandaPeriodos, Vagon, Patente, "Todos").Take(maximumRows)
-        Select New CartasConCalada With { _
-             .IdCartaDePorte = cdp.IdCartaDePorte, _
-             .NumeroCartaDePorte = cdp.NumeroCartaDePorte, _
-             .NumeroCartaDePorteFormateada = "000" & SqlFunctions.StringConvert(cdp.NumeroCartaDePorte).Substring(1, 1) & "-" & SqlFunctions.StringConvert(cdp.NumeroCartaDePorte).Substring(2, 8), _
-             .NumeroSubfijo = cdp.NumeroSubfijo, _
-             .SubnumeroVagon = cdp.SubnumeroVagon, _
-             .FechaArribo = If(cdp.FechaArribo, DateTime.MinValue), _
-             .FechaModificacion = If(cdp.FechaModificacion, DateTime.MinValue), _
-             .FechaDescarga = If(cdp.FechaDescarga, DateTime.MinValue), _
-             .FechaVencimiento = If(cdp.FechaVencimiento, DateTime.MinValue), _
-             .Observaciones = cdp.Observaciones, _
-             .CTG = If(cdp.CTG, 0), _
+                                                   Select New CartasConCalada With {
+                                                        .IdCartaDePorte = cdp.IdCartaDePorte,
+                                                        .NumeroCartaDePorte = cdp.NumeroCartaDePorte,
+                                                        .NumeroCartaDePorteFormateada = "000" & SqlFunctions.StringConvert(cdp.NumeroCartaDePorte).Substring(1, 1) & "-" & SqlFunctions.StringConvert(cdp.NumeroCartaDePorte).Substring(2, 8),
+                                                        .NumeroSubfijo = cdp.NumeroSubfijo,
+                                                        .SubnumeroVagon = cdp.SubnumeroVagon,
+                                                        .FechaArribo = If(cdp.FechaArribo, DateTime.MinValue),
+                                                        .FechaModificacion = If(cdp.FechaModificacion, DateTime.MinValue),
+                                                        .FechaDescarga = If(cdp.FechaDescarga, DateTime.MinValue),
+                                                        .FechaVencimiento = If(cdp.FechaVencimiento, DateTime.MinValue),
+                                                        .Observaciones = cdp.Observaciones,
+                                                        .CTG = If(cdp.CTG, 0), _
  _
-            .NetoProc = cdp.NetoProc, _
-            .NetoFinal = cdp.NetoFinal, _
-            .TaraFinal = cdp.TaraFinal, _
-            .BrutoFinal = cdp.BrutoFinal, _
-            .NetoPto = cdp.NetoPto, _
-            .TaraPto = cdp.TaraPto, _
-            .BrutoPto = cdp.BrutoPto, _
-            .Humedad = cdp.Humedad, _
-            .HumedadDesnormalizada = cdp.HumedadDesnormalizada, _
-            .Merma = cdp.Merma, _
-            .CalidadDesc = If(cdp.CalidadDesc, ""), _
-             .Tarifa = cdp.Tarifa, _
-             .KmArecorrer = cdp.KmARecorrer, _
+                                                       .NetoProc = cdp.NetoProc,
+                                                       .NetoFinal = cdp.NetoFinal,
+                                                       .TaraFinal = cdp.TaraFinal,
+                                                       .BrutoFinal = cdp.BrutoFinal,
+                                                       .NetoPto = cdp.NetoPto,
+                                                       .TaraPto = cdp.TaraPto,
+                                                       .BrutoPto = cdp.BrutoPto,
+                                                       .Humedad = cdp.Humedad,
+                                                       .HumedadDesnormalizada = cdp.HumedadDesnormalizada,
+                                                       .Merma = cdp.Merma,
+                                                       .CalidadDesc = If(cdp.CalidadDesc, ""),
+                                                        .Tarifa = cdp.Tarifa,
+                                                        .KmArecorrer = cdp.KmARecorrer, _
  _
-             .TitularDesc = cdp.TitularDesc, _
-             .IntermediarioDesc = cdp.IntermediarioDesc, _
-             .RComercialDesc = cdp.RComercialDesc, _
-             .CorredorDesc = cdp.CorredorDesc, _
-             .DestinatarioDesc = cdp.DestinatarioCUIT, _
-             .TitularCUIT = cdp.TitularCUIT.Replace("-", ""), _
-             .IntermediarioCUIT = cdp.IntermediarioCUIT.Replace("-", ""), _
-             .RComercialCUIT = cdp.RComercialCUIT.Replace("-", ""), _
-             .CorredorCUIT = cdp.CorredorCUIT.Replace("-", ""), _
-             .DestinatarioCUIT = cdp.DestinatarioCUIT.Replace("-", ""), _
+                                                        .TitularDesc = cdp.TitularDesc,
+                                                        .IntermediarioDesc = cdp.IntermediarioDesc,
+                                                        .RComercialDesc = cdp.RComercialDesc,
+                                                        .CorredorDesc = cdp.CorredorDesc,
+                                                        .DestinatarioDesc = cdp.DestinatarioCUIT,
+                                                        .TitularCUIT = cdp.TitularCUIT.Replace("-", ""),
+                                                        .IntermediarioCUIT = cdp.IntermediarioCUIT.Replace("-", ""),
+                                                        .RComercialCUIT = cdp.RComercialCUIT.Replace("-", ""),
+                                                        .CorredorCUIT = cdp.CorredorCUIT.Replace("-", ""),
+                                                        .DestinatarioCUIT = cdp.DestinatarioCUIT.Replace("-", ""), _
  _
-             .Producto = cdp.Producto, _
-             .ProductoSagpya = cdp.CodigoSAJPYA, _
-             .IdProcedencia = cdp.Procedencia, _
-             .ProcedenciaDesc = cdp.ProcedenciaDesc, _
-             .DestinoDesc = cdp.DestinoDesc, _
-             .UsuarioIngreso = "", _
-            .FechaDeCarga = If(cdp.FechaDeCarga, cdp.FechaArribo), _
-            .NobleExtranos = cdp.NobleExtranos, _
-            .NobleNegros = cdp.NobleNegros, _
-            .NobleQuebrados = cdp.NobleQuebrados, _
-            .NobleDaniados = cdp.NobleDaniados, _
-            .NobleChamico = cdp.NobleChamico, _
-            .NobleChamico2 = cdp.NobleChamico2, _
-            .NobleRevolcado = cdp.NobleRevolcado, _
-            .NobleObjetables = cdp.NobleObjetables, _
-            .NobleAmohosados = cdp.NobleAmohosados, _
-            .NobleHectolitrico = cdp.NobleObjetables, _
-            .NobleCarbon = cdp.NobleHectolitrico, _
-             .NoblePanzaBlanca = cdp.NoblePanzaBlanca, _
-            .NoblePicados = cdp.NoblePicados, _
-            .NobleMGrasa = cdp.NobleMGrasa, _
-            .NobleAcidezGrasa = cdp.NobleAcidezGrasa, _
-            .NobleVerdes = cdp.NobleVerdes, _
-            .NobleGrado = cdp.NobleGrado, _
-            .NobleConforme = cdp.NobleConforme, _
-            .NobleACamara = (cdp.NobleACamara = "SI"), _
-            .CalidadPuntaSombreada = If(cdp.CalidadPuntaSombreada, 0), _
-            .CalidadGranosQuemados = If(cdp.CalidadGranosQuemados, 0), _
-            .CalidadGranosQuemadosBonifRebaja = 0, _
-            .CalidadTierra = If(cdp.CalidadTierra, 0), _
-            .CalidadTierraBonifRebaja = If(cdp.CalidadPuntaSombreada, 0), _
-            .CalidadMermaChamico = If(cdp.CalidadMermaChamico, 0), _
-            .CalidadMermaChamicoBonifRebaja = 0, _
-            .CalidadMermaZarandeo = If(cdp.CalidadMermaZarandeo, 0), _
-            .CalidadMermaZarandeoBonifRebaja = 0, _
+                                                        .Producto = cdp.Producto,
+                                                        .ProductoSagpya = cdp.CodigoSAJPYA,
+                                                        .IdProcedencia = cdp.Procedencia,
+                                                        .ProcedenciaDesc = cdp.ProcedenciaDesc,
+                                                        .DestinoDesc = cdp.DestinoDesc,
+                                                        .UsuarioIngreso = "",
+                                                       .FechaDeCarga = If(cdp.FechaDeCarga, cdp.FechaArribo),
+                                                       .NobleExtranos = cdp.NobleExtranos,
+                                                       .NobleNegros = cdp.NobleNegros,
+                                                       .NobleQuebrados = cdp.NobleQuebrados,
+                                                       .NobleDaniados = cdp.NobleDaniados,
+                                                       .NobleChamico = cdp.NobleChamico,
+                                                       .NobleChamico2 = cdp.NobleChamico2,
+                                                       .NobleRevolcado = cdp.NobleRevolcado,
+                                                       .NobleObjetables = cdp.NobleObjetables,
+                                                       .NobleAmohosados = cdp.NobleAmohosados,
+                                                       .NobleHectolitrico = cdp.NobleObjetables,
+                                                       .NobleCarbon = cdp.NobleHectolitrico,
+                                                        .NoblePanzaBlanca = cdp.NoblePanzaBlanca,
+                                                       .NoblePicados = cdp.NoblePicados,
+                                                       .NobleMGrasa = cdp.NobleMGrasa,
+                                                       .NobleAcidezGrasa = cdp.NobleAcidezGrasa,
+                                                       .NobleVerdes = cdp.NobleVerdes,
+                                                       .NobleGrado = cdp.NobleGrado,
+                                                       .NobleConforme = cdp.NobleConforme,
+                                                       .NobleACamara = (cdp.NobleACamara = "SI"),
+                                                       .CalidadPuntaSombreada = If(cdp.CalidadPuntaSombreada, 0),
+                                                       .CalidadGranosQuemados = If(cdp.CalidadGranosQuemados, 0),
+                                                       .CalidadGranosQuemadosBonifRebaja = 0,
+                                                       .CalidadTierra = If(cdp.CalidadTierra, 0),
+                                                       .CalidadTierraBonifRebaja = If(cdp.CalidadPuntaSombreada, 0),
+                                                       .CalidadMermaChamico = If(cdp.CalidadMermaChamico, 0),
+                                                       .CalidadMermaChamicoBonifRebaja = 0,
+                                                       .CalidadMermaZarandeo = If(cdp.CalidadMermaZarandeo, 0),
+                                                       .CalidadMermaZarandeoBonifRebaja = 0, _
  _
-            .ProcedenciaLocalidadONCCA_SAGPYA = cdp.ProcedenciaCodigoONCAA, _
-            .ProcedenciaPartidoONCCA = cdp.ProcedenciaCodigoONCAA, _
-            .ProcedenciaLocalidadAFIP = cdp.ProcedenciaCodigoONCAA, _
-            .DestinoLocalidadAFIP = cdp.DestinoLocalidadAFIP, _
+                                                       .ProcedenciaLocalidadONCCA_SAGPYA = cdp.ProcedenciaCodigoONCAA,
+                                                       .ProcedenciaPartidoONCCA = cdp.ProcedenciaCodigoONCAA,
+                                                       .ProcedenciaLocalidadAFIP = cdp.ProcedenciaCodigoONCAA,
+                                                       .DestinoLocalidadAFIP = cdp.DestinoLocalidadAFIP, _
  _
-            .Patente = cdp.Patente, _
-            .Acoplado = cdp.Acoplado, _
-            .DestinoCUIT = cdp.DestinoCUIT, _
-            .DestinoCodigoYPF = cdp.DestinoCodigoONCAA, _
-            .DestinoCodigoSAGPYA = cdp.DestinoCodigoONCAA, _
-            .TransportistaCUIT = cdp.TransportistaCUIT.Replace("-", ""), _
-            .ChoferCUIT = cdp.ChoferCUIT.Replace("-", ""), _
-            .TransportistaDesc = cdp.TransportistaDesc, _
-            .ChoferDesc = cdp.ChoferDesc, _
-            .EspecieONCCA = cdp.CodigoSAJPYA, _
-            .Cosecha = cdp.Cosecha.Replace("/", "-20"), _
-            .Cosecha2 = cdp.Cosecha.Replace("20", "").Replace("/", ""), _
-            .Establecimiento = cdp.EstablecimientoCodigo, _
+                                                       .Patente = cdp.Patente,
+                                                       .Acoplado = cdp.Acoplado,
+                                                       .DestinoCUIT = cdp.DestinoCUIT,
+                                                       .DestinoCodigoYPF = cdp.DestinoCodigoONCAA,
+                                                       .DestinoCodigoSAGPYA = cdp.DestinoCodigoONCAA,
+                                                       .TransportistaCUIT = cdp.TransportistaCUIT.Replace("-", ""),
+                                                       .ChoferCUIT = cdp.ChoferCUIT.Replace("-", ""),
+                                                       .TransportistaDesc = cdp.TransportistaDesc,
+                                                       .ChoferDesc = cdp.ChoferDesc,
+                                                       .EspecieONCCA = cdp.CodigoSAJPYA,
+                                                       .Cosecha = cdp.Cosecha.Replace("/", "-20"),
+                                                       .Cosecha2 = cdp.Cosecha.Replace("20", "").Replace("/", ""),
+                                                       .Establecimiento = cdp.EstablecimientoCodigo, _
  _
-            .IdFacturaImputada = If(cdp.IdFacturaImputada, -1), _
-            .IdClienteAFacturarle = If(cdp.IdClienteAFacturarle, -1), _
-            .IdDetalleFacturaImputada = If(cdp.IdDetalleFactura, -1), _
-            .ClienteFacturado = cdp.ClienteFacturado, _
-            .PathImagen = cdp.PathImagen, _
+                                                       .IdFacturaImputada = If(cdp.IdFacturaImputada, -1),
+                                                       .IdClienteAFacturarle = If(cdp.IdClienteAFacturarle, -1),
+                                                       .IdDetalleFacturaImputada = If(cdp.IdDetalleFactura, -1),
+                                                       .ClienteFacturado = cdp.ClienteFacturado,
+                                                       .PathImagen = cdp.PathImagen, _
  _
-                .CEE_CAU = cdp.CEE _
-        , .Contrato = cdp.Contrato _
-      , .PuntoVenta = If(cdp.PuntoVenta, 0) _
-  , .NRecibo = cdp.NRecibo, _
-     .CalidadGranosDanadosRebaja = 0.01, _
-             .CalidadGranosExtranosRebaja = 0.01, _
-         .DestinoCodigoPostal = cdp.DestinoCodigoPostal _
-        , .ProcedenciaCodigoPostal = cdp.ProcedenciaCodigoPostal
-           }) 'cosecha2 queda 1415, cosecha queda 2014/2015, original es 2014/15
+                                                           .CEE_CAU = cdp.CEE _
+                                                   , .Contrato = cdp.Contrato _
+                                                 , .PuntoVenta = If(cdp.PuntoVenta, 0) _
+                                             , .NRecibo = cdp.NRecibo,
+                                                .CalidadGranosDanadosRebaja = 0.01,
+                                                        .CalidadGranosExtranosRebaja = 0.01,
+                                                    .DestinoCodigoPostal = cdp.DestinoCodigoPostal _
+                                                   , .ProcedenciaCodigoPostal = cdp.ProcedenciaCodigoPostal
+                                                      }) 'cosecha2 queda 1415, cosecha queda 2014/2015, original es 2014/15
 
 
 
 
-        Dim q2 As IQueryable(Of CartasConCalada) = (From cdp In db.CartasDePortes _
-                From art In db.Articulos.Where(Function(i) i.IdArticulo = cdp.IdArticulo).DefaultIfEmpty _
-                From clitit In db.Clientes.Where(Function(i) i.IdCliente = cdp.Vendedor).DefaultIfEmpty _
-                From clidest In db.Clientes.Where(Function(i) i.IdCliente = cdp.Entregador).DefaultIfEmpty _
-                From cliint In db.Clientes.Where(Function(i) i.IdCliente = cdp.CuentaOrden1).DefaultIfEmpty _
-                From clircom In db.Clientes.Where(Function(i) i.IdCliente = cdp.CuentaOrden2).DefaultIfEmpty _
-                From corr In db.Vendedores.Where(Function(i) i.IdVendedor = cdp.Corredor).DefaultIfEmpty _
-                From dest In db.WilliamsDestinos.Where(Function(i) i.IdWilliamsDestino = cdp.Destino).DefaultIfEmpty _
-                From loc In db.Localidades.Where(Function(i) i.IdLocalidad = CInt(cdp.Procedencia)).DefaultIfEmpty _
-                From cal In db.Calidade_EF.Where(Function(i) i.IdCalidad = cdp.Calidad).DefaultIfEmpty _
-                From estab In db.CDPEstablecimientos.Where(Function(i) i.IdEstablecimiento = cdp.IdEstablecimiento).DefaultIfEmpty _
-                From tr In db.Transportistas.Where(Function(i) i.IdTransportista = cdp.IdTransportista).DefaultIfEmpty _
-                From chf In db.Choferes.Where(Function(i) i.IdChofer = cdp.IdChofer).DefaultIfEmpty _
-                From emp In db.Empleados.Where(Function(i) i.IdEmpleado = cdp.IdUsuarioIngreso).DefaultIfEmpty _
-                From fac In db.Facturas.Where(Function(i) i.IdFactura = cdp.IdFacturaImputada).DefaultIfEmpty _
-                From detfac In db.DetalleFacturas.Where(Function(i) i.IdDetalleFactura = cdp.IdDetalleFactura).DefaultIfEmpty _
-                From clifac In db.Clientes.Where(Function(i) i.IdCliente = fac.IdCliente).DefaultIfEmpty _
-                From locdes In db.Localidades.Where(Function(i) i.IdLocalidad = CInt(dest.IdLocalidad)).DefaultIfEmpty _
-                From part In db.Partidos.Where(Function(i) i.IdPartido = loc.IdPartido).DefaultIfEmpty _
-                Where _
-            cdp.Vendedor > 0 _
-            And (cdp.FechaDescarga >= fechadesde And cdp.FechaDescarga <= fechahasta) _
-            And (estado <> enumCDPestado.Facturadas Or If(cdp.IdFacturaImputada, 0) > 0) _
-            And (estado = enumCDPestado.Rechazadas Or cdp.Anulada <> "SI") _
-            And (ModoExportacion = enumCDPexportacion.Ambas _
-                    Or (ModoExportacion = enumCDPexportacion.Export And cdp.Exporta = "SI") _
-                    Or (ModoExportacion = enumCDPexportacion.Entregas And cdp.Exporta <> "SI")) _
-            And (cdp.Vendedor.HasValue And cdp.Corredor.HasValue And cdp.Entregador.HasValue) _
-            And ( _
-                  (idVendedor = -1 And idIntermediario = -1 And idRemComercial = -1) _
-                  Or _
-                  (AplicarANDuORalFiltro = FiltroANDOR.FiltroAND _
-                    And (idVendedor = -1 Or cdp.Vendedor = idVendedor) _
-                    And (idIntermediario = -1 Or cdp.CuentaOrden1 = idIntermediario) _
-                    And (idRemComercial = -1 Or cdp.CuentaOrden2 = idRemComercial) _
-                  ) _
-                  Or _
-                  (AplicarANDuORalFiltro = FiltroANDOR.FiltroOR And _
-                    (cdp.Vendedor = idVendedor Or cdp.CuentaOrden1 = idIntermediario Or cdp.CuentaOrden2 = idRemComercial) _
-                   ) _
-                ) _
-            And (idCorredor = -1 Or cdp.Corredor = idCorredor Or cdp.Corredor2 = idCorredor) _
-            And (idDestinatario = -1 Or cdp.Entregador = idDestinatario) _
-            And (idArticulo = -1 Or cdp.IdArticulo = idArticulo) _
-            And (idDestino = -1 Or cdp.Destino = idDestino) _
-            And (puntoventa = -1 Or cdp.PuntoVenta = puntoventa) _
-            And (idClienteAuxiliar = -1 Or cdp.IdClienteAuxiliar = idClienteAuxiliar) _
-            And (QueContenga2 = "" Or cdp.NumeroCartaEnTextoParaBusqueda.Contains(QueContenga2)) _
-            Order By cdp.FechaModificacion Descending _
-            Select New CartasConCalada With { _
-             .IdCartaDePorte = cdp.IdCartaDePorte, _
-             .NumeroCartaDePorte = cdp.NumeroCartaDePorte, _
-             .NumeroCartaDePorteFormateada = "000" & SqlFunctions.StringConvert(cdp.NumeroCartaDePorte).Substring(1, 1) & "-" & SqlFunctions.StringConvert(cdp.NumeroCartaDePorte).Substring(2, 8), _
-             .NumeroSubfijo = cdp.NumeroSubfijo, _
-             .SubnumeroVagon = cdp.SubnumeroVagon, _
-             .FechaArribo = If(cdp.FechaArribo, DateTime.MinValue), _
-             .FechaModificacion = If(cdp.FechaModificacion, DateTime.MinValue), _
-             .FechaDescarga = If(cdp.FechaDescarga, DateTime.MinValue), _
-             .FechaVencimiento = If(cdp.FechaVencimiento, DateTime.MinValue), _
-             .Observaciones = cdp.Observaciones, _
-             .CTG = If(cdp.CTG, 0), _
+        Dim q2 As IQueryable(Of CartasConCalada) = (From cdp In db.CartasDePortes
+                                                    From art In db.Articulos.Where(Function(i) i.IdArticulo = cdp.IdArticulo).DefaultIfEmpty
+                                                    From clitit In db.Clientes.Where(Function(i) i.IdCliente = cdp.Vendedor).DefaultIfEmpty
+                                                    From clidest In db.Clientes.Where(Function(i) i.IdCliente = cdp.Entregador).DefaultIfEmpty
+                                                    From cliint In db.Clientes.Where(Function(i) i.IdCliente = cdp.CuentaOrden1).DefaultIfEmpty
+                                                    From clircom In db.Clientes.Where(Function(i) i.IdCliente = cdp.CuentaOrden2).DefaultIfEmpty
+                                                    From corr In db.Vendedores.Where(Function(i) i.IdVendedor = cdp.Corredor).DefaultIfEmpty
+                                                    From dest In db.WilliamsDestinos.Where(Function(i) i.IdWilliamsDestino = cdp.Destino).DefaultIfEmpty
+                                                    From loc In db.Localidades.Where(Function(i) i.IdLocalidad = CInt(cdp.Procedencia)).DefaultIfEmpty
+                                                    From cal In db.Calidade_EF.Where(Function(i) i.IdCalidad = cdp.Calidad).DefaultIfEmpty
+                                                    From estab In db.CDPEstablecimientos.Where(Function(i) i.IdEstablecimiento = cdp.IdEstablecimiento).DefaultIfEmpty
+                                                    From tr In db.Transportistas.Where(Function(i) i.IdTransportista = cdp.IdTransportista).DefaultIfEmpty
+                                                    From chf In db.Choferes.Where(Function(i) i.IdChofer = cdp.IdChofer).DefaultIfEmpty
+                                                    From emp In db.Empleados.Where(Function(i) i.IdEmpleado = cdp.IdUsuarioIngreso).DefaultIfEmpty
+                                                    From fac In db.Facturas.Where(Function(i) i.IdFactura = cdp.IdFacturaImputada).DefaultIfEmpty
+                                                    From detfac In db.DetalleFacturas.Where(Function(i) i.IdDetalleFactura = cdp.IdDetalleFactura).DefaultIfEmpty
+                                                    From clifac In db.Clientes.Where(Function(i) i.IdCliente = fac.IdCliente).DefaultIfEmpty
+                                                    From locdes In db.Localidades.Where(Function(i) i.IdLocalidad = CInt(dest.IdLocalidad)).DefaultIfEmpty
+                                                    From part In db.Partidos.Where(Function(i) i.IdPartido = loc.IdPartido).DefaultIfEmpty
+                                                    Where
+                                                cdp.Vendedor > 0 _
+                                                And (cdp.FechaDescarga >= fechadesde And cdp.FechaDescarga <= fechahasta) _
+                                                And (estado <> enumCDPestado.Facturadas Or If(cdp.IdFacturaImputada, 0) > 0) _
+                                                And (estado = enumCDPestado.Rechazadas Or cdp.Anulada <> "SI") _
+                                                And (ModoExportacion = enumCDPexportacion.Ambas _
+                                                        Or (ModoExportacion = enumCDPexportacion.Export And cdp.Exporta = "SI") _
+                                                        Or (ModoExportacion = enumCDPexportacion.Entregas And cdp.Exporta <> "SI")) _
+                                                And (cdp.Vendedor.HasValue And cdp.Corredor.HasValue And cdp.Entregador.HasValue) _
+                                                And (
+                                                      (idVendedor = -1 And idIntermediario = -1 And idRemComercial = -1) _
+                                                      Or
+                                                      (AplicarANDuORalFiltro = FiltroANDOR.FiltroAND _
+                                                        And (idVendedor = -1 Or cdp.Vendedor = idVendedor) _
+                                                        And (idIntermediario = -1 Or cdp.CuentaOrden1 = idIntermediario) _
+                                                        And (idRemComercial = -1 Or cdp.CuentaOrden2 = idRemComercial)
+                                                      ) _
+                                                      Or
+                                                      (AplicarANDuORalFiltro = FiltroANDOR.FiltroOR And
+                                                        (cdp.Vendedor = idVendedor Or cdp.CuentaOrden1 = idIntermediario Or cdp.CuentaOrden2 = idRemComercial)
+                                                       )
+                                                    ) _
+                                                And (idCorredor = -1 Or cdp.Corredor = idCorredor Or cdp.Corredor2 = idCorredor) _
+                                                And (idDestinatario = -1 Or cdp.Entregador = idDestinatario) _
+                                                And (idArticulo = -1 Or cdp.IdArticulo = idArticulo) _
+                                                And (idDestino = -1 Or cdp.Destino = idDestino) _
+                                                And (puntoventa = -1 Or cdp.PuntoVenta = puntoventa) _
+                                                And (idClienteAuxiliar = -1 Or cdp.IdClienteAuxiliar = idClienteAuxiliar) _
+                                                And (QueContenga2 = "" Or cdp.NumeroCartaEnTextoParaBusqueda.Contains(QueContenga2))
+                                                    Order By cdp.FechaModificacion Descending
+                                                    Select New CartasConCalada With {
+                                                     .IdCartaDePorte = cdp.IdCartaDePorte,
+                                                     .NumeroCartaDePorte = cdp.NumeroCartaDePorte,
+                                                     .NumeroCartaDePorteFormateada = "000" & SqlFunctions.StringConvert(cdp.NumeroCartaDePorte).Substring(1, 1) & "-" & SqlFunctions.StringConvert(cdp.NumeroCartaDePorte).Substring(2, 8),
+                                                     .NumeroSubfijo = cdp.NumeroSubfijo,
+                                                     .SubnumeroVagon = cdp.SubnumeroVagon,
+                                                     .FechaArribo = If(cdp.FechaArribo, DateTime.MinValue),
+                                                     .FechaModificacion = If(cdp.FechaModificacion, DateTime.MinValue),
+                                                     .FechaDescarga = If(cdp.FechaDescarga, DateTime.MinValue),
+                                                     .FechaVencimiento = If(cdp.FechaVencimiento, DateTime.MinValue),
+                                                     .Observaciones = cdp.Observaciones,
+                                                     .CTG = If(cdp.CTG, 0), _
  _
-            .NetoProc = cdp.NetoProc, _
-            .NetoFinal = cdp.NetoFinal, _
-            .TaraFinal = cdp.TaraFinal, _
-            .BrutoFinal = cdp.BrutoFinal, _
-            .NetoPto = cdp.NetoPto, _
-            .TaraPto = cdp.TaraPto, _
-            .BrutoPto = cdp.BrutoPto, _
-            .Humedad = cdp.Humedad, _
-            .HumedadDesnormalizada = cdp.HumedadDesnormalizada, _
-            .Merma = cdp.Merma, _
-            .CalidadDesc = If(cal.Descripcion, ""), _
-             .Tarifa = cdp.Tarifa, _
-             .KmArecorrer = cdp.KmARecorrer, _
+                                                    .NetoProc = cdp.NetoProc,
+                                                    .NetoFinal = cdp.NetoFinal,
+                                                    .TaraFinal = cdp.TaraFinal,
+                                                    .BrutoFinal = cdp.BrutoFinal,
+                                                    .NetoPto = cdp.NetoPto,
+                                                    .TaraPto = cdp.TaraPto,
+                                                    .BrutoPto = cdp.BrutoPto,
+                                                    .Humedad = cdp.Humedad,
+                                                    .HumedadDesnormalizada = cdp.HumedadDesnormalizada,
+                                                    .Merma = cdp.Merma,
+                                                    .CalidadDesc = If(cal.Descripcion, ""),
+                                                     .Tarifa = cdp.Tarifa,
+                                                     .KmArecorrer = cdp.KmARecorrer, _
  _
-             .TitularDesc = clitit.RazonSocial, _
-             .IntermediarioDesc = cliint.RazonSocial, _
-             .RComercialDesc = clircom.RazonSocial, _
-             .CorredorDesc = corr.Nombre, _
-             .DestinatarioDesc = clidest.RazonSocial, _
-             .TitularCUIT = clitit.Cuit.Replace("-", ""), _
-             .IntermediarioCUIT = cliint.Cuit.Replace("-", ""), _
-             .RComercialCUIT = clircom.Cuit.Replace("-", ""), _
-             .CorredorCUIT = corr.Cuit.Replace("-", ""), _
-             .DestinatarioCUIT = clidest.Cuit.Replace("-", ""), _
+                                                     .TitularDesc = clitit.RazonSocial,
+                                                     .IntermediarioDesc = cliint.RazonSocial,
+                                                     .RComercialDesc = clircom.RazonSocial,
+                                                     .CorredorDesc = corr.Nombre,
+                                                     .DestinatarioDesc = clidest.RazonSocial,
+                                                     .TitularCUIT = clitit.Cuit.Replace("-", ""),
+                                                     .IntermediarioCUIT = cliint.Cuit.Replace("-", ""),
+                                                     .RComercialCUIT = clircom.Cuit.Replace("-", ""),
+                                                     .CorredorCUIT = corr.Cuit.Replace("-", ""),
+                                                     .DestinatarioCUIT = clidest.Cuit.Replace("-", ""), _
  _
-             .Producto = art.Descripcion, _
-             .ProductoSagpya = art.AuxiliarString6, _
-             .IdProcedencia = cdp.Procedencia, _
-             .ProcedenciaDesc = loc.Nombre, _
-             .DestinoDesc = dest.Descripcion, _
-             .UsuarioIngreso = "", _
-            .FechaDeCarga = If(cdp.FechaDeCarga, cdp.FechaArribo), _
-            .NobleExtranos = cdp.NobleExtranos, _
-            .NobleNegros = cdp.NobleNegros, _
-            .NobleQuebrados = cdp.NobleQuebrados, _
-            .NobleDaniados = cdp.NobleDaniados, _
-            .NobleChamico = cdp.NobleChamico, _
-            .NobleChamico2 = cdp.NobleChamico2, _
-            .NobleRevolcado = cdp.NobleRevolcado, _
-            .NobleObjetables = cdp.NobleObjetables, _
-            .NobleAmohosados = cdp.NobleAmohosados, _
-            .NobleHectolitrico = cdp.NobleObjetables, _
-            .NobleCarbon = cdp.NobleHectolitrico, _
-             .NoblePanzaBlanca = cdp.NoblePanzaBlanca, _
-            .NoblePicados = cdp.NoblePicados, _
-            .NobleMGrasa = cdp.NobleMGrasa, _
-            .NobleAcidezGrasa = cdp.NobleAcidezGrasa, _
-            .NobleVerdes = cdp.NobleVerdes, _
-            .NobleGrado = cdp.NobleGrado, _
-            .NobleConforme = cdp.NobleConforme, _
-            .NobleACamara = (cdp.NobleACamara = "SI"), _
-            .CalidadPuntaSombreada = If(cdp.CalidadPuntaSombreada, 0), _
-            .CalidadGranosQuemados = If(cdp.CalidadGranosQuemados, 0), _
-            .CalidadGranosQuemadosBonifRebaja = 0, _
-            .CalidadTierra = If(cdp.CalidadTierra, 0), _
-            .CalidadTierraBonifRebaja = If(cdp.CalidadPuntaSombreada, 0), _
-            .CalidadMermaChamico = If(cdp.CalidadMermaChamico, 0), _
-            .CalidadMermaChamicoBonifRebaja = 0, _
-            .CalidadMermaZarandeo = If(cdp.CalidadMermaZarandeo, 0), _
-            .CalidadMermaZarandeoBonifRebaja = 0, _
+                                                     .Producto = art.Descripcion,
+                                                     .ProductoSagpya = art.AuxiliarString6,
+                                                     .IdProcedencia = cdp.Procedencia,
+                                                     .ProcedenciaDesc = loc.Nombre,
+                                                     .DestinoDesc = dest.Descripcion,
+                                                     .UsuarioIngreso = "",
+                                                    .FechaDeCarga = If(cdp.FechaDeCarga, cdp.FechaArribo),
+                                                    .NobleExtranos = cdp.NobleExtranos,
+                                                    .NobleNegros = cdp.NobleNegros,
+                                                    .NobleQuebrados = cdp.NobleQuebrados,
+                                                    .NobleDaniados = cdp.NobleDaniados,
+                                                    .NobleChamico = cdp.NobleChamico,
+                                                    .NobleChamico2 = cdp.NobleChamico2,
+                                                    .NobleRevolcado = cdp.NobleRevolcado,
+                                                    .NobleObjetables = cdp.NobleObjetables,
+                                                    .NobleAmohosados = cdp.NobleAmohosados,
+                                                    .NobleHectolitrico = cdp.NobleObjetables,
+                                                    .NobleCarbon = cdp.NobleHectolitrico,
+                                                     .NoblePanzaBlanca = cdp.NoblePanzaBlanca,
+                                                    .NoblePicados = cdp.NoblePicados,
+                                                    .NobleMGrasa = cdp.NobleMGrasa,
+                                                    .NobleAcidezGrasa = cdp.NobleAcidezGrasa,
+                                                    .NobleVerdes = cdp.NobleVerdes,
+                                                    .NobleGrado = cdp.NobleGrado,
+                                                    .NobleConforme = cdp.NobleConforme,
+                                                    .NobleACamara = (cdp.NobleACamara = "SI"),
+                                                    .CalidadPuntaSombreada = If(cdp.CalidadPuntaSombreada, 0),
+                                                    .CalidadGranosQuemados = If(cdp.CalidadGranosQuemados, 0),
+                                                    .CalidadGranosQuemadosBonifRebaja = 0,
+                                                    .CalidadTierra = If(cdp.CalidadTierra, 0),
+                                                    .CalidadTierraBonifRebaja = If(cdp.CalidadPuntaSombreada, 0),
+                                                    .CalidadMermaChamico = If(cdp.CalidadMermaChamico, 0),
+                                                    .CalidadMermaChamicoBonifRebaja = 0,
+                                                    .CalidadMermaZarandeo = If(cdp.CalidadMermaZarandeo, 0),
+                                                    .CalidadMermaZarandeoBonifRebaja = 0, _
  _
-            .ProcedenciaLocalidadONCCA_SAGPYA = loc.CodigoONCAA, _
-            .ProcedenciaPartidoONCCA = part.CodigoONCCA, _
-          .ProcedenciaLocalidadAFIP = loc.CodigoAfip, _
-            .DestinoLocalidadAFIP = locdes.CodigoAfip, _
+                                                    .ProcedenciaLocalidadONCCA_SAGPYA = loc.CodigoONCAA,
+                                                    .ProcedenciaPartidoONCCA = part.CodigoONCCA,
+                                                  .ProcedenciaLocalidadAFIP = loc.CodigoAfip,
+                                                    .DestinoLocalidadAFIP = locdes.CodigoAfip, _
  _
-             .Patente = cdp.Patente, _
-            .Acoplado = cdp.Acoplado, _
-             .DestinoCUIT = dest.CUIT.Replace("-", ""), _
-            .DestinoCodigoYPF = dest.CodigoYPF, _
-            .DestinoCodigoSAGPYA = dest.CodigoONCAA, _
-            .TransportistaCUIT = tr.Cuit.Replace("-", ""), _
-            .ChoferCUIT = chf.Cuil.Replace("-", ""), _
-            .TransportistaDesc = tr.RazonSocial, _
-            .ChoferDesc = chf.Nombre, _
-            .EspecieONCCA = art.AuxiliarString6, _
-            .Cosecha = cdp.Cosecha.Replace("/", "-20"), _
-            .Cosecha2 = cdp.Cosecha.Replace("20", "").Replace("/", ""), _
-            .Establecimiento = estab.Descripcion, _
+                                                     .Patente = cdp.Patente,
+                                                    .Acoplado = cdp.Acoplado,
+                                                     .DestinoCUIT = dest.CUIT.Replace("-", ""),
+                                                    .DestinoCodigoYPF = dest.CodigoYPF,
+                                                    .DestinoCodigoSAGPYA = dest.CodigoONCAA,
+                                                    .TransportistaCUIT = tr.Cuit.Replace("-", ""),
+                                                    .ChoferCUIT = chf.Cuil.Replace("-", ""),
+                                                    .TransportistaDesc = tr.RazonSocial,
+                                                    .ChoferDesc = chf.Nombre,
+                                                    .EspecieONCCA = art.AuxiliarString6,
+                                                    .Cosecha = cdp.Cosecha.Replace("/", "-20"),
+                                                    .Cosecha2 = cdp.Cosecha.Replace("20", "").Replace("/", ""),
+                                                    .Establecimiento = estab.Descripcion, _
  _
-            .IdFacturaImputada = If(cdp.IdFacturaImputada, -1), _
-            .IdClienteAFacturarle = If(cdp.IdClienteAFacturarle, -1), _
-            .IdDetalleFacturaImputada = If(cdp.IdDetalleFactura, -1), _
-            .PrecioUnitarioTotal = If(detfac.PrecioUnitarioTotal, 0), _
-            .ClienteFacturado = clifac.RazonSocial, _
-            .PathImagen = cdp.PathImagen, _
+                                                    .IdFacturaImputada = If(cdp.IdFacturaImputada, -1),
+                                                    .IdClienteAFacturarle = If(cdp.IdClienteAFacturarle, -1),
+                                                    .IdDetalleFacturaImputada = If(cdp.IdDetalleFactura, -1),
+                                                    .PrecioUnitarioTotal = If(detfac.PrecioUnitarioTotal, 0),
+                                                    .ClienteFacturado = clifac.RazonSocial,
+                                                    .PathImagen = cdp.PathImagen, _
  _
-                .CEE_CAU = cdp.CEE _
-        , .Contrato = cdp.Contrato _
-      , .PuntoVenta = If(cdp.PuntoVenta, 0) _
-  , .NRecibo = cdp.NRecibo, _
-     .CalidadGranosDanadosRebaja = 0.01, _
-             .CalidadGranosExtranosRebaja = 0.01, _
-         .DestinoCodigoPostal = dest.CodigoPostal _
-        , .ProcedenciaCodigoPostal = loc.CodigoPostal
-           }) 'cosecha2 queda 1415, cosecha queda 2014/2015, original es 2014/15
+                                                        .CEE_CAU = cdp.CEE _
+                                                , .Contrato = cdp.Contrato _
+                                              , .PuntoVenta = If(cdp.PuntoVenta, 0) _
+                                          , .NRecibo = cdp.NRecibo,
+                                             .CalidadGranosDanadosRebaja = 0.01,
+                                                     .CalidadGranosExtranosRebaja = 0.01,
+                                                 .DestinoCodigoPostal = dest.CodigoPostal _
+                                                , .ProcedenciaCodigoPostal = loc.CodigoPostal
+                                                   }) 'cosecha2 queda 1415, cosecha queda 2014/2015, original es 2014/15
 
 
 
@@ -2762,36 +2762,36 @@ Public Class CartaDePorteManager
 
 
 
-    Shared Function CartasLINQlocalSimplificadoTipadoConCalada(ByVal SC As String, _
-          ByVal ColumnaParaFiltrar As String, _
-          ByVal TextoParaFiltrar As String, _
-          ByVal sortExpression As String, _
-          ByVal startRowIndex As Long, _
-          ByVal maximumRows As Long, _
-          ByVal estado As enumCDPestado, _
-          ByVal QueContenga As String, _
-          ByVal idVendedor As Integer, _
-          ByVal idCorredor As Integer, _
-          ByVal idDestinatario As Integer, _
-          ByVal idIntermediario As Integer, _
-          ByVal idRemComercial As Integer, _
-          ByVal idArticulo As Integer, _
-          ByVal idProcedencia As Integer, _
-          ByVal idDestino As Integer, _
-          ByVal AplicarANDuORalFiltro As FiltroANDOR, _
-          ByVal ModoExportacionString As String, _
-          ByVal fechadesde As DateTime, ByVal fechahasta As DateTime, _
-          ByVal puntoventa As Integer, _
-          Optional ByRef sTituloFiltroUsado As String = "", _
-          Optional ByVal optDivisionSyngenta As String = "Ambas", _
-          Optional ByVal bTraerDuplicados As Boolean = False, _
-          Optional ByVal Contrato As String = "", _
-          Optional ByRef db2 As LinqCartasPorteDataContext = Nothing, _
-            Optional ByVal QueContenga2 As String = "", _
-            Optional ByVal idClienteAuxiliar As Integer = -1, _
-            Optional ByVal AgrupadorDeTandaPeriodos As Integer = -1, _
-            Optional ByVal Vagon As Integer = Nothing, Optional ByVal Patente As String = "", _
-            Optional ByVal optCamionVagon As String = "Ambas" _
+    Shared Function CartasLINQlocalSimplificadoTipadoConCalada(ByVal SC As String,
+          ByVal ColumnaParaFiltrar As String,
+          ByVal TextoParaFiltrar As String,
+          ByVal sortExpression As String,
+          ByVal startRowIndex As Long,
+          ByVal maximumRows As Long,
+          ByVal estado As enumCDPestado,
+          ByVal QueContenga As String,
+          ByVal idVendedor As Integer,
+          ByVal idCorredor As Integer,
+          ByVal idDestinatario As Integer,
+          ByVal idIntermediario As Integer,
+          ByVal idRemComercial As Integer,
+          ByVal idArticulo As Integer,
+          ByVal idProcedencia As Integer,
+          ByVal idDestino As Integer,
+          ByVal AplicarANDuORalFiltro As FiltroANDOR,
+          ByVal ModoExportacionString As String,
+          ByVal fechadesde As DateTime, ByVal fechahasta As DateTime,
+          ByVal puntoventa As Integer,
+          Optional ByRef sTituloFiltroUsado As String = "",
+          Optional ByVal optDivisionSyngenta As String = "Ambas",
+          Optional ByVal bTraerDuplicados As Boolean = False,
+          Optional ByVal Contrato As String = "",
+          Optional ByRef db2 As LinqCartasPorteDataContext = Nothing,
+            Optional ByVal QueContenga2 As String = "",
+            Optional ByVal idClienteAuxiliar As Integer = -1,
+            Optional ByVal AgrupadorDeTandaPeriodos As Integer = -1,
+            Optional ByVal Vagon As Integer = Nothing, Optional ByVal Patente As String = "",
+            Optional ByVal optCamionVagon As String = "Ambas"
 ) As IQueryable(Of CartasConCalada)
 
 
@@ -2837,155 +2837,155 @@ Public Class CartaDePorteManager
 
 
 
-        Dim q As IQueryable(Of CartasConCalada) = (From cdp In db.CartasDePortes _
-                From art In db.linqArticulos.Where(Function(i) i.IdArticulo = cdp.IdArticulo).DefaultIfEmpty _
-                From clitit In db.linqClientes.Where(Function(i) i.IdCliente = cdp.Vendedor).DefaultIfEmpty _
-                From clidest In db.linqClientes.Where(Function(i) i.IdCliente = cdp.Entregador).DefaultIfEmpty _
-                From cliint In db.linqClientes.Where(Function(i) i.IdCliente = cdp.CuentaOrden1).DefaultIfEmpty _
-                From clircom In db.linqClientes.Where(Function(i) i.IdCliente = cdp.CuentaOrden2).DefaultIfEmpty _
-                From corr In db.linqCorredors.Where(Function(i) i.IdVendedor = cdp.Corredor).DefaultIfEmpty _
-                From dest In db.WilliamsDestinos.Where(Function(i) i.IdWilliamsDestino = cdp.Destino).DefaultIfEmpty _
-                From loc In db.Localidades.Where(Function(i) i.IdLocalidad = CInt(cdp.Procedencia)).DefaultIfEmpty _
-                From cal In db.Calidades.Where(Function(i) i.IdCalidad = cdp.Calidad).DefaultIfEmpty _
-                From estab In db.linqCDPEstablecimientos.Where(Function(i) i.IdEstablecimiento = cdp.IdEstablecimiento).DefaultIfEmpty _
-                From tr In db.Transportistas.Where(Function(i) i.IdTransportista = cdp.IdTransportista).DefaultIfEmpty _
-                From part In db.linqPartido.Where(Function(i) i.IdPartido = loc.IdPartido).DefaultIfEmpty _
-                From chf In db.Choferes.Where(Function(i) i.IdChofer = cdp.IdChofer).DefaultIfEmpty _
-                From emp In db.linqEmpleados.Where(Function(i) i.IdEmpleado = cdp.IdUsuarioIngreso).DefaultIfEmpty _
-                From fac In db.linqFacturas.Where(Function(i) i.IdFactura = cdp.IdFacturaImputada).DefaultIfEmpty _
-                From detfac In db.linqDetalleFacturas.Where(Function(i) i.IdDetalleFactura = cdp.IdDetalleFactura).DefaultIfEmpty _
-                From clifac In db.linqClientes.Where(Function(i) i.IdCliente = fac.IdCliente).DefaultIfEmpty _
-                Where _
-        cdp.Vendedor > 0 _
-        And (cdp.FechaDescarga >= fechadesde And cdp.FechaDescarga <= fechahasta) _
-        And (estado <> enumCDPestado.Facturadas Or If(cdp.IdFacturaImputada, 0) > 0) _
-        And (estado = enumCDPestado.Rechazadas Or cdp.Anulada <> "SI") _
-        And (ModoExportacion = enumCDPexportacion.Ambas _
-            Or (ModoExportacion = enumCDPexportacion.Export And cdp.Exporta = "SI") _
-            Or (ModoExportacion = enumCDPexportacion.Entregas And cdp.Exporta <> "SI")) _
-        And (cdp.Vendedor.HasValue And cdp.Corredor.HasValue And cdp.Entregador.HasValue) _
-        And ( _
-          (idVendedor = -1 And idIntermediario = -1 And idRemComercial = -1) _
-          Or _
-          (AplicarANDuORalFiltro = FiltroANDOR.FiltroAND _
-            And (idVendedor = -1 Or cdp.Vendedor = idVendedor) _
-            And (idIntermediario = -1 Or cdp.CuentaOrden1 = idIntermediario) _
-            And (idRemComercial = -1 Or cdp.CuentaOrden2 = idRemComercial) _
-          ) _
-          Or _
-          (AplicarANDuORalFiltro = FiltroANDOR.FiltroOR And _
-            (cdp.Vendedor = idVendedor Or cdp.CuentaOrden1 = idIntermediario Or cdp.CuentaOrden2 = idRemComercial) _
-           ) _
-        ) _
-        And (idCorredor = -1 Or cdp.Corredor = idCorredor Or cdp.Corredor2 = idCorredor) _
-        And (idDestinatario = -1 Or cdp.Entregador = idDestinatario) _
-        And (idArticulo = -1 Or cdp.IdArticulo = idArticulo) _
-        And (idDestino = -1 Or cdp.Destino = idDestino) _
-        And (puntoventa = -1 Or cdp.PuntoVenta = puntoventa) _
-        And (QueContenga2 = "" Or cdp.NumeroCartaEnTextoParaBusqueda.Contains(QueContenga2))
-        Order By cdp.FechaModificacion Descending _
-           Select New CartasConCalada With { _
-             .IdCartaDePorte = cdp.IdCartaDePorte, _
-             .NumeroCartaDePorte = cdp.NumeroCartaDePorte, _
-             .NumeroCartaDePorteFormateada = cdp.NumeroCartaDePorte.ToString.PadLeft(12, "0").Substring(0, 4) & "-" & cdp.NumeroCartaDePorte.ToString.PadLeft(12, "0").Substring(4, 8), _
-             .NumeroSubfijo = cdp.NumeroSubfijo, _
-             .SubnumeroVagon = cdp.SubnumeroVagon, _
-             .FechaArribo = If(cdp.FechaArribo, DateTime.MinValue), _
-             .FechaModificacion = If(cdp.FechaModificacion, DateTime.MinValue), _
-             .FechaDescarga = If(cdp.FechaDescarga, DateTime.MinValue), _
-             .Observaciones = cdp.Observaciones, _
+        Dim q As IQueryable(Of CartasConCalada) = (From cdp In db.CartasDePortes
+                                                   From art In db.linqArticulos.Where(Function(i) i.IdArticulo = cdp.IdArticulo).DefaultIfEmpty
+                                                   From clitit In db.linqClientes.Where(Function(i) i.IdCliente = cdp.Vendedor).DefaultIfEmpty
+                                                   From clidest In db.linqClientes.Where(Function(i) i.IdCliente = cdp.Entregador).DefaultIfEmpty
+                                                   From cliint In db.linqClientes.Where(Function(i) i.IdCliente = cdp.CuentaOrden1).DefaultIfEmpty
+                                                   From clircom In db.linqClientes.Where(Function(i) i.IdCliente = cdp.CuentaOrden2).DefaultIfEmpty
+                                                   From corr In db.linqCorredors.Where(Function(i) i.IdVendedor = cdp.Corredor).DefaultIfEmpty
+                                                   From dest In db.WilliamsDestinos.Where(Function(i) i.IdWilliamsDestino = cdp.Destino).DefaultIfEmpty
+                                                   From loc In db.Localidades.Where(Function(i) i.IdLocalidad = CInt(cdp.Procedencia)).DefaultIfEmpty
+                                                   From cal In db.Calidades.Where(Function(i) i.IdCalidad = cdp.Calidad).DefaultIfEmpty
+                                                   From estab In db.linqCDPEstablecimientos.Where(Function(i) i.IdEstablecimiento = cdp.IdEstablecimiento).DefaultIfEmpty
+                                                   From tr In db.Transportistas.Where(Function(i) i.IdTransportista = cdp.IdTransportista).DefaultIfEmpty
+                                                   From part In db.linqPartido.Where(Function(i) i.IdPartido = loc.IdPartido).DefaultIfEmpty
+                                                   From chf In db.Choferes.Where(Function(i) i.IdChofer = cdp.IdChofer).DefaultIfEmpty
+                                                   From emp In db.linqEmpleados.Where(Function(i) i.IdEmpleado = cdp.IdUsuarioIngreso).DefaultIfEmpty
+                                                   From fac In db.linqFacturas.Where(Function(i) i.IdFactura = cdp.IdFacturaImputada).DefaultIfEmpty
+                                                   From detfac In db.linqDetalleFacturas.Where(Function(i) i.IdDetalleFactura = cdp.IdDetalleFactura).DefaultIfEmpty
+                                                   From clifac In db.linqClientes.Where(Function(i) i.IdCliente = fac.IdCliente).DefaultIfEmpty
+                                                   Where
+                                           cdp.Vendedor > 0 _
+                                           And (cdp.FechaDescarga >= fechadesde And cdp.FechaDescarga <= fechahasta) _
+                                           And (estado <> enumCDPestado.Facturadas Or If(cdp.IdFacturaImputada, 0) > 0) _
+                                           And (estado = enumCDPestado.Rechazadas Or cdp.Anulada <> "SI") _
+                                           And (ModoExportacion = enumCDPexportacion.Ambas _
+                                               Or (ModoExportacion = enumCDPexportacion.Export And cdp.Exporta = "SI") _
+                                               Or (ModoExportacion = enumCDPexportacion.Entregas And cdp.Exporta <> "SI")) _
+                                           And (cdp.Vendedor.HasValue And cdp.Corredor.HasValue And cdp.Entregador.HasValue) _
+                                           And (
+                                             (idVendedor = -1 And idIntermediario = -1 And idRemComercial = -1) _
+                                             Or
+                                             (AplicarANDuORalFiltro = FiltroANDOR.FiltroAND _
+                                               And (idVendedor = -1 Or cdp.Vendedor = idVendedor) _
+                                               And (idIntermediario = -1 Or cdp.CuentaOrden1 = idIntermediario) _
+                                               And (idRemComercial = -1 Or cdp.CuentaOrden2 = idRemComercial)
+                                             ) _
+                                             Or
+                                             (AplicarANDuORalFiltro = FiltroANDOR.FiltroOR And
+                                               (cdp.Vendedor = idVendedor Or cdp.CuentaOrden1 = idIntermediario Or cdp.CuentaOrden2 = idRemComercial)
+                                              )
+                                           ) _
+                                           And (idCorredor = -1 Or cdp.Corredor = idCorredor Or cdp.Corredor2 = idCorredor) _
+                                           And (idDestinatario = -1 Or cdp.Entregador = idDestinatario) _
+                                           And (idArticulo = -1 Or cdp.IdArticulo = idArticulo) _
+                                           And (idDestino = -1 Or cdp.Destino = idDestino) _
+                                           And (puntoventa = -1 Or cdp.PuntoVenta = puntoventa) _
+                                           And (QueContenga2 = "" Or cdp.NumeroCartaEnTextoParaBusqueda.Contains(QueContenga2))
+                                                   Order By cdp.FechaModificacion Descending
+                                                   Select New CartasConCalada With {
+                                                     .IdCartaDePorte = cdp.IdCartaDePorte,
+                                                     .NumeroCartaDePorte = cdp.NumeroCartaDePorte,
+                                                     .NumeroCartaDePorteFormateada = cdp.NumeroCartaDePorte.ToString.PadLeft(12, "0").Substring(0, 4) & "-" & cdp.NumeroCartaDePorte.ToString.PadLeft(12, "0").Substring(4, 8),
+                                                     .NumeroSubfijo = cdp.NumeroSubfijo,
+                                                     .SubnumeroVagon = cdp.SubnumeroVagon,
+                                                     .FechaArribo = If(cdp.FechaArribo, DateTime.MinValue),
+                                                     .FechaModificacion = If(cdp.FechaModificacion, DateTime.MinValue),
+                                                     .FechaDescarga = If(cdp.FechaDescarga, DateTime.MinValue),
+                                                     .Observaciones = cdp.Observaciones, _
  _
-            .NetoProc = cdp.NetoProc, _
-            .NetoFinal = cdp.NetoFinal, _
-            .TaraFinal = cdp.TaraFinal, _
-            .BrutoFinal = cdp.BrutoFinal, _
-            .NetoPto = cdp.NetoPto, _
-            .TaraPto = cdp.TaraPto, _
-            .BrutoPto = cdp.BrutoPto, _
-            .Humedad = cdp.Humedad, _
-            .HumedadDesnormalizada = cdp.HumedadDesnormalizada, _
-            .Merma = cdp.Merma, _
+                                                    .NetoProc = cdp.NetoProc,
+                                                    .NetoFinal = cdp.NetoFinal,
+                                                    .TaraFinal = cdp.TaraFinal,
+                                                    .BrutoFinal = cdp.BrutoFinal,
+                                                    .NetoPto = cdp.NetoPto,
+                                                    .TaraPto = cdp.TaraPto,
+                                                    .BrutoPto = cdp.BrutoPto,
+                                                    .Humedad = cdp.Humedad,
+                                                    .HumedadDesnormalizada = cdp.HumedadDesnormalizada,
+                                                    .Merma = cdp.Merma, _
  _
-             .TitularDesc = clitit.RazonSocial, _
-             .IntermediarioDesc = cliint.RazonSocial, _
-             .RComercialDesc = clircom.RazonSocial, _
-             .CorredorDesc = corr.Nombre, _
-             .DestinatarioDesc = clidest.RazonSocial, _
-             .TitularCUIT = clitit.Cuit.Replace("-", ""), _
-             .IntermediarioCUIT = cliint.Cuit.Replace("-", ""), _
-             .RComercialCUIT = clircom.Cuit.Replace("-", ""), _
-             .CorredorCUIT = corr.Cuit.Replace("-", ""), _
-             .DestinatarioCUIT = clidest.Cuit.Replace("-", ""), _
+                                                     .TitularDesc = clitit.RazonSocial,
+                                                     .IntermediarioDesc = cliint.RazonSocial,
+                                                     .RComercialDesc = clircom.RazonSocial,
+                                                     .CorredorDesc = corr.Nombre,
+                                                     .DestinatarioDesc = clidest.RazonSocial,
+                                                     .TitularCUIT = clitit.Cuit.Replace("-", ""),
+                                                     .IntermediarioCUIT = cliint.Cuit.Replace("-", ""),
+                                                     .RComercialCUIT = clircom.Cuit.Replace("-", ""),
+                                                     .CorredorCUIT = corr.Cuit.Replace("-", ""),
+                                                     .DestinatarioCUIT = clidest.Cuit.Replace("-", ""), _
  _
-             .Producto = art.Descripcion, _
-             .ProductoSagpya = art.AuxiliarString6, _
-             .IdProcedencia = cdp.Procedencia, _
-             .ProcedenciaDesc = loc.Nombre, _
-             .DestinoDesc = dest.Descripcion, _
-             .CalidadDesc = cdp.Calidad, _
-             .UsuarioIngreso = "", _
-            .FechaDeCarga = If(cdp.FechaDeCarga, If(cdp.FechaArribo, DateTime.MinValue)), _
-            .NobleExtranos = cdp.NobleExtranos, _
-            .NobleNegros = cdp.NobleNegros, _
-            .NobleQuebrados = cdp.NobleQuebrados, _
-            .NobleDaniados = cdp.NobleDaniados, _
-            .NobleChamico = cdp.NobleChamico, _
-            .NobleChamico2 = cdp.NobleChamico2, _
-            .NobleRevolcado = cdp.NobleRevolcado, _
-            .NobleObjetables = cdp.NobleObjetables, _
-            .NobleAmohosados = cdp.NobleAmohosados, _
-            .NobleHectolitrico = cdp.NobleObjetables, _
-            .NobleCarbon = cdp.NobleHectolitrico, _
-             .NoblePanzaBlanca = cdp.NoblePanzaBlanca, _
-            .NoblePicados = cdp.NoblePicados, _
-            .NobleMGrasa = cdp.NobleMGrasa, _
-            .NobleAcidezGrasa = cdp.NobleAcidezGrasa, _
-            .NobleVerdes = cdp.NobleVerdes, _
-            .NobleGrado = cdp.NobleGrado, _
-            .NobleConforme = cdp.NobleConforme, _
-            .NobleACamara = (cdp.NobleACamara = "SI"), _
-            .CalidadPuntaSombreada = If(cdp.CalidadPuntaSombreada, 0), _
-            .CalidadGranosQuemados = If(cdp.CalidadGranosQuemados, 0), _
-            .CalidadGranosQuemadosBonifRebaja = If(cdp.CalidadGranosQuemadosBonifica_o_Rebaja, 0), _
-            .CalidadTierra = If(cdp.CalidadTierra, 0), _
-            .CalidadTierraBonifRebaja = If(cdp.CalidadPuntaSombreada, 0), _
-            .CalidadMermaChamico = If(cdp.CalidadMermaChamico, 0), _
-            .CalidadMermaChamicoBonifRebaja = If(cdp.CalidadMermaChamicoBonifica_o_Rebaja, 0), _
-            .CalidadMermaZarandeo = If(cdp.CalidadMermaZarandeo, 0), _
-            .CalidadMermaZarandeoBonifRebaja = If(cdp.CalidadMermaZarandeoBonifica_o_Rebaja, 0), _
+                                                     .Producto = art.Descripcion,
+                                                     .ProductoSagpya = art.AuxiliarString6,
+                                                     .IdProcedencia = cdp.Procedencia,
+                                                     .ProcedenciaDesc = loc.Nombre,
+                                                     .DestinoDesc = dest.Descripcion,
+                                                     .CalidadDesc = cdp.Calidad,
+                                                     .UsuarioIngreso = "",
+                                                    .FechaDeCarga = If(cdp.FechaDeCarga, If(cdp.FechaArribo, DateTime.MinValue)),
+                                                    .NobleExtranos = cdp.NobleExtranos,
+                                                    .NobleNegros = cdp.NobleNegros,
+                                                    .NobleQuebrados = cdp.NobleQuebrados,
+                                                    .NobleDaniados = cdp.NobleDaniados,
+                                                    .NobleChamico = cdp.NobleChamico,
+                                                    .NobleChamico2 = cdp.NobleChamico2,
+                                                    .NobleRevolcado = cdp.NobleRevolcado,
+                                                    .NobleObjetables = cdp.NobleObjetables,
+                                                    .NobleAmohosados = cdp.NobleAmohosados,
+                                                    .NobleHectolitrico = cdp.NobleObjetables,
+                                                    .NobleCarbon = cdp.NobleHectolitrico,
+                                                     .NoblePanzaBlanca = cdp.NoblePanzaBlanca,
+                                                    .NoblePicados = cdp.NoblePicados,
+                                                    .NobleMGrasa = cdp.NobleMGrasa,
+                                                    .NobleAcidezGrasa = cdp.NobleAcidezGrasa,
+                                                    .NobleVerdes = cdp.NobleVerdes,
+                                                    .NobleGrado = cdp.NobleGrado,
+                                                    .NobleConforme = cdp.NobleConforme,
+                                                    .NobleACamara = (cdp.NobleACamara = "SI"),
+                                                    .CalidadPuntaSombreada = If(cdp.CalidadPuntaSombreada, 0),
+                                                    .CalidadGranosQuemados = If(cdp.CalidadGranosQuemados, 0),
+                                                    .CalidadGranosQuemadosBonifRebaja = If(cdp.CalidadGranosQuemadosBonifica_o_Rebaja, 0),
+                                                    .CalidadTierra = If(cdp.CalidadTierra, 0),
+                                                    .CalidadTierraBonifRebaja = If(cdp.CalidadPuntaSombreada, 0),
+                                                    .CalidadMermaChamico = If(cdp.CalidadMermaChamico, 0),
+                                                    .CalidadMermaChamicoBonifRebaja = If(cdp.CalidadMermaChamicoBonifica_o_Rebaja, 0),
+                                                    .CalidadMermaZarandeo = If(cdp.CalidadMermaZarandeo, 0),
+                                                    .CalidadMermaZarandeoBonifRebaja = If(cdp.CalidadMermaZarandeoBonifica_o_Rebaja, 0), _
  _
-            .ProcedenciaLocalidadONCCA_SAGPYA = loc.CodigoONCAA, _
-            .ProcedenciaPartidoONCCA = part.CodigoONCCA, _
+                                                    .ProcedenciaLocalidadONCCA_SAGPYA = loc.CodigoONCAA,
+                                                    .ProcedenciaPartidoONCCA = part.CodigoONCCA, _
  _
-             .Patente = cdp.Patente, _
-            .Acoplado = cdp.Acoplado, _
-            .DestinoCodigoYPF = dest.CodigoYPF, _
-            .DestinoCodigoSAGPYA = dest.CodigoONCAA, _
-            .TransportistaCUIT = tr.Cuit.Replace("-", ""), _
-            .ChoferCUIT = chf.CUIL.Replace("-", ""), _
-            .TransportistaDesc = tr.RazonSocial, _
-            .ChoferDesc = chf.Nombre, _
-            .EspecieONCCA = art.AuxiliarString6, _
-            .Cosecha = cdp.Cosecha.Replace("/", "-20"), _
-            .Cosecha2 = cdp.Cosecha.Replace("20", "").Replace("/", ""), _
-            .Establecimiento = estab.Descripcion, _
+                                                     .Patente = cdp.Patente,
+                                                    .Acoplado = cdp.Acoplado,
+                                                    .DestinoCodigoYPF = dest.CodigoYPF,
+                                                    .DestinoCodigoSAGPYA = dest.CodigoONCAA,
+                                                    .TransportistaCUIT = tr.Cuit.Replace("-", ""),
+                                                    .ChoferCUIT = chf.CUIL.Replace("-", ""),
+                                                    .TransportistaDesc = tr.RazonSocial,
+                                                    .ChoferDesc = chf.Nombre,
+                                                    .EspecieONCCA = art.AuxiliarString6,
+                                                    .Cosecha = cdp.Cosecha.Replace("/", "-20"),
+                                                    .Cosecha2 = cdp.Cosecha.Replace("20", "").Replace("/", ""),
+                                                    .Establecimiento = estab.Descripcion, _
  _
-            .IdFacturaImputada = If(cdp.IdFacturaImputada, -1), _
-            .IdClienteAFacturarle = If(cdp.IdClienteAFacturarle, -1), _
-            .IdDetalleFacturaImputada = If(cdp.IdDetalleFactura, -1), _
-            .PrecioUnitarioTotal = If(detfac.PrecioUnitarioTotal, 0), _
-            .ClienteFacturado = clifac.RazonSocial, _
-            .PathImagen = cdp.PathImagen, _
+                                                    .IdFacturaImputada = If(cdp.IdFacturaImputada, -1),
+                                                    .IdClienteAFacturarle = If(cdp.IdClienteAFacturarle, -1),
+                                                    .IdDetalleFacturaImputada = If(cdp.IdDetalleFactura, -1),
+                                                    .PrecioUnitarioTotal = If(detfac.PrecioUnitarioTotal, 0),
+                                                    .ClienteFacturado = clifac.RazonSocial,
+                                                    .PathImagen = cdp.PathImagen, _
  _
-                .CEE_CAU = cdp.CEE _
-        , .Contrato = cdp.Contrato _
-      , .PuntoVenta = If(cdp.PuntoVenta, 0) _
-  , .NRecibo = cdp.NRecibo _
-    , .CalidadGranosDanadosRebaja = If(cdp.CalidadGranosDanadosRebaja, 0) _
-            , .CalidadGranosExtranosRebaja = If(cdp.CalidadGranosExtranosRebaja, 0) _
-        , .DestinoCodigoPostal = dest.CodigoPostal _
-        , .ProcedenciaCodigoPostal = loc.CodigoPostal
-           }) 'cosecha2 queda 1415, cosecha queda 2014/2015, original es 2014/15
+                                                        .CEE_CAU = cdp.CEE _
+                                                , .Contrato = cdp.Contrato _
+                                              , .PuntoVenta = If(cdp.PuntoVenta, 0) _
+                                          , .NRecibo = cdp.NRecibo _
+                                            , .CalidadGranosDanadosRebaja = If(cdp.CalidadGranosDanadosRebaja, 0) _
+                                                    , .CalidadGranosExtranosRebaja = If(cdp.CalidadGranosExtranosRebaja, 0) _
+                                                , .DestinoCodigoPostal = dest.CodigoPostal _
+                                                , .ProcedenciaCodigoPostal = loc.CodigoPostal
+                                                   }) 'cosecha2 queda 1415, cosecha queda 2014/2015, original es 2014/15
 
 
 
@@ -3057,103 +3057,103 @@ Public Class CartaDePorteManager
 
 
 
-        Dim q As IQueryable(Of CartasConCalada) = (From cdp In db.CartasDePortes _
-                From art In db.linqArticulos.Where(Function(i) i.IdArticulo = cdp.IdArticulo).DefaultIfEmpty _
-                From clitit In db.linqClientes.Where(Function(i) i.IdCliente = cdp.Vendedor).DefaultIfEmpty _
-                From clidest In db.linqClientes.Where(Function(i) i.IdCliente = cdp.Entregador).DefaultIfEmpty _
-                From cliint In db.linqClientes.Where(Function(i) i.IdCliente = cdp.CuentaOrden1).DefaultIfEmpty _
-                From clircom In db.linqClientes.Where(Function(i) i.IdCliente = cdp.CuentaOrden2).DefaultIfEmpty _
-                From corr In db.linqCorredors.Where(Function(i) i.IdVendedor = cdp.Corredor).DefaultIfEmpty _
-                From dest In db.WilliamsDestinos.Where(Function(i) i.IdWilliamsDestino = cdp.Destino).DefaultIfEmpty _
-                From proced_loc In db.Localidades.Where(Function(i) i.IdLocalidad = CInt(cdp.Procedencia)).DefaultIfEmpty _
-                From cal In db.Calidades.Where(Function(i) i.IdCalidad = cdp.Calidad).DefaultIfEmpty _
-                From estab In db.linqCDPEstablecimientos.Where(Function(i) i.IdEstablecimiento = cdp.IdEstablecimiento).DefaultIfEmpty _
-                From tr In db.Transportistas.Where(Function(i) i.IdTransportista = cdp.IdTransportista).DefaultIfEmpty _
-                From proced_part In db.linqPartido.Where(Function(i) i.IdPartido = proced_loc.IdPartido).DefaultIfEmpty _
-                From chf In db.Choferes.Where(Function(i) i.IdChofer = cdp.IdChofer).DefaultIfEmpty _
-                From emp In db.linqEmpleados.Where(Function(i) i.IdEmpleado = cdp.IdUsuarioIngreso).DefaultIfEmpty _
-            Order By cdp.FechaModificacion Descending _
-            Select New CartasConCalada With { _
-             .IdCartaDePorte = cdp.IdCartaDePorte, _
-             .NumeroCartaDePorte = cdp.NumeroCartaDePorte, _
-             .NumeroCartaDePorteFormateada = cdp.NumeroCartaDePorte.ToString.PadLeft(12, "0").Substring(0, 4) & "-" & cdp.NumeroCartaDePorte.ToString.PadLeft(12, "0").Substring(4, 8), _
-             .NumeroSubfijo = cdp.NumeroSubfijo, _
-             .SubnumeroVagon = cdp.SubnumeroVagon, _
-             .FechaArribo = cdp.FechaArribo, _
-             .FechaModificacion = cdp.FechaModificacion, _
-             .FechaDescarga = cdp.FechaDescarga, _
-             .Observaciones = cdp.Observaciones, _
+        Dim q As IQueryable(Of CartasConCalada) = (From cdp In db.CartasDePortes
+                                                   From art In db.linqArticulos.Where(Function(i) i.IdArticulo = cdp.IdArticulo).DefaultIfEmpty
+                                                   From clitit In db.linqClientes.Where(Function(i) i.IdCliente = cdp.Vendedor).DefaultIfEmpty
+                                                   From clidest In db.linqClientes.Where(Function(i) i.IdCliente = cdp.Entregador).DefaultIfEmpty
+                                                   From cliint In db.linqClientes.Where(Function(i) i.IdCliente = cdp.CuentaOrden1).DefaultIfEmpty
+                                                   From clircom In db.linqClientes.Where(Function(i) i.IdCliente = cdp.CuentaOrden2).DefaultIfEmpty
+                                                   From corr In db.linqCorredors.Where(Function(i) i.IdVendedor = cdp.Corredor).DefaultIfEmpty
+                                                   From dest In db.WilliamsDestinos.Where(Function(i) i.IdWilliamsDestino = cdp.Destino).DefaultIfEmpty
+                                                   From proced_loc In db.Localidades.Where(Function(i) i.IdLocalidad = CInt(cdp.Procedencia)).DefaultIfEmpty
+                                                   From cal In db.Calidades.Where(Function(i) i.IdCalidad = cdp.Calidad).DefaultIfEmpty
+                                                   From estab In db.linqCDPEstablecimientos.Where(Function(i) i.IdEstablecimiento = cdp.IdEstablecimiento).DefaultIfEmpty
+                                                   From tr In db.Transportistas.Where(Function(i) i.IdTransportista = cdp.IdTransportista).DefaultIfEmpty
+                                                   From proced_part In db.linqPartido.Where(Function(i) i.IdPartido = proced_loc.IdPartido).DefaultIfEmpty
+                                                   From chf In db.Choferes.Where(Function(i) i.IdChofer = cdp.IdChofer).DefaultIfEmpty
+                                                   From emp In db.linqEmpleados.Where(Function(i) i.IdEmpleado = cdp.IdUsuarioIngreso).DefaultIfEmpty
+                                                   Order By cdp.FechaModificacion Descending
+                                                   Select New CartasConCalada With {
+                                                    .IdCartaDePorte = cdp.IdCartaDePorte,
+                                                    .NumeroCartaDePorte = cdp.NumeroCartaDePorte,
+                                                    .NumeroCartaDePorteFormateada = cdp.NumeroCartaDePorte.ToString.PadLeft(12, "0").Substring(0, 4) & "-" & cdp.NumeroCartaDePorte.ToString.PadLeft(12, "0").Substring(4, 8),
+                                                    .NumeroSubfijo = cdp.NumeroSubfijo,
+                                                    .SubnumeroVagon = cdp.SubnumeroVagon,
+                                                    .FechaArribo = cdp.FechaArribo,
+                                                    .FechaModificacion = cdp.FechaModificacion,
+                                                    .FechaDescarga = cdp.FechaDescarga,
+                                                    .Observaciones = cdp.Observaciones, _
  _
-            .NetoProc = cdp.NetoProc, _
-            .NetoFinal = cdp.NetoFinal, _
-            .TaraFinal = cdp.TaraFinal, _
-            .BrutoFinal = cdp.BrutoFinal, _
-            .Humedad = cdp.Humedad, _
-            .HumedadDesnormalizada = cdp.HumedadDesnormalizada, _
-            .Merma = cdp.Merma, _
+                                                   .NetoProc = cdp.NetoProc,
+                                                   .NetoFinal = cdp.NetoFinal,
+                                                   .TaraFinal = cdp.TaraFinal,
+                                                   .BrutoFinal = cdp.BrutoFinal,
+                                                   .Humedad = cdp.Humedad,
+                                                   .HumedadDesnormalizada = cdp.HumedadDesnormalizada,
+                                                   .Merma = cdp.Merma, _
  _
-             .TitularDesc = clitit.RazonSocial, _
-             .TitularCUIT = clitit.Cuit.Replace("-", ""), _
-             .IntermediarioDesc = cliint.RazonSocial, _
-             .IntermediarioCUIT = cliint.Cuit.Replace("-", ""), _
-             .RComercialDesc = clircom.RazonSocial, _
-             .RComercialCUIT = clircom.Cuit.Replace("-", ""), _
-             .CorredorDesc = corr.Nombre, _
-             .CorredorCUIT = corr.Cuit.Replace("-", ""), _
-             .DestinatarioDesc = clidest.RazonSocial, _
-             .DestinatarioCUIT = clidest.Cuit.Replace("-", ""), _
-             .Producto = art.Descripcion, _
-             .ProcedenciaDesc = proced_loc.Nombre, _
-             .DestinoDesc = dest.Descripcion, _
-             .CalidadDesc = "", _
-             .UsuarioIngreso = "", _
+                                                    .TitularDesc = clitit.RazonSocial,
+                                                    .TitularCUIT = clitit.Cuit.Replace("-", ""),
+                                                    .IntermediarioDesc = cliint.RazonSocial,
+                                                    .IntermediarioCUIT = cliint.Cuit.Replace("-", ""),
+                                                    .RComercialDesc = clircom.RazonSocial,
+                                                    .RComercialCUIT = clircom.Cuit.Replace("-", ""),
+                                                    .CorredorDesc = corr.Nombre,
+                                                    .CorredorCUIT = corr.Cuit.Replace("-", ""),
+                                                    .DestinatarioDesc = clidest.RazonSocial,
+                                                    .DestinatarioCUIT = clidest.Cuit.Replace("-", ""),
+                                                    .Producto = art.Descripcion,
+                                                    .ProcedenciaDesc = proced_loc.Nombre,
+                                                    .DestinoDesc = dest.Descripcion,
+                                                    .CalidadDesc = "",
+                                                    .UsuarioIngreso = "", _
  _
-            .NobleExtranos = cdp.NobleExtranos, _
-            .NobleNegros = cdp.NobleNegros, _
-            .NobleQuebrados = cdp.NobleQuebrados, _
-            .NobleDaniados = cdp.NobleDaniados, _
-            .NobleChamico = cdp.NobleChamico, _
-            .NobleChamico2 = cdp.NobleChamico2, _
-            .NobleRevolcado = cdp.NobleRevolcado, _
-            .NobleObjetables = cdp.NobleObjetables, _
-            .NobleAmohosados = cdp.NobleObjetables, _
-            .NobleHectolitrico = cdp.NobleObjetables, _
-            .NobleCarbon = cdp.NobleObjetables, _
-             .NoblePanzaBlanca = cdp.NoblePanzaBlanca, _
-            .NoblePicados = cdp.NobleObjetables, _
-            .NobleMGrasa = cdp.NobleObjetables, _
-            .NobleAcidezGrasa = cdp.NobleObjetables, _
-            .NobleVerdes = cdp.NobleObjetables, _
-            .NobleGrado = cdp.NobleObjetables, _
-            .NobleConforme = cdp.NobleObjetables, _
-            .NobleACamara = (cdp.NobleACamara = "SI"), _
-            .CalidadPuntaSombreada = cdp.CalidadPuntaSombreada, _
-            .CalidadGranosQuemados = cdp.CalidadGranosQuemados, _
-            .CalidadGranosQuemadosBonifRebaja = cdp.CalidadGranosQuemadosBonifica_o_Rebaja, _
-            .CalidadTierra = cdp.CalidadTierra, _
-            .CalidadTierraBonifRebaja = cdp.CalidadPuntaSombreada, _
-            .CalidadMermaChamico = cdp.CalidadMermaChamico, _
-            .CalidadMermaChamicoBonifRebaja = cdp.CalidadMermaChamicoBonifica_o_Rebaja, _
-            .CalidadMermaZarandeo = cdp.CalidadMermaZarandeo, _
-            .CalidadMermaZarandeoBonifRebaja = cdp.CalidadMermaZarandeoBonifica_o_Rebaja, _
+                                                   .NobleExtranos = cdp.NobleExtranos,
+                                                   .NobleNegros = cdp.NobleNegros,
+                                                   .NobleQuebrados = cdp.NobleQuebrados,
+                                                   .NobleDaniados = cdp.NobleDaniados,
+                                                   .NobleChamico = cdp.NobleChamico,
+                                                   .NobleChamico2 = cdp.NobleChamico2,
+                                                   .NobleRevolcado = cdp.NobleRevolcado,
+                                                   .NobleObjetables = cdp.NobleObjetables,
+                                                   .NobleAmohosados = cdp.NobleObjetables,
+                                                   .NobleHectolitrico = cdp.NobleObjetables,
+                                                   .NobleCarbon = cdp.NobleObjetables,
+                                                    .NoblePanzaBlanca = cdp.NoblePanzaBlanca,
+                                                   .NoblePicados = cdp.NobleObjetables,
+                                                   .NobleMGrasa = cdp.NobleObjetables,
+                                                   .NobleAcidezGrasa = cdp.NobleObjetables,
+                                                   .NobleVerdes = cdp.NobleObjetables,
+                                                   .NobleGrado = cdp.NobleObjetables,
+                                                   .NobleConforme = cdp.NobleObjetables,
+                                                   .NobleACamara = (cdp.NobleACamara = "SI"),
+                                                   .CalidadPuntaSombreada = cdp.CalidadPuntaSombreada,
+                                                   .CalidadGranosQuemados = cdp.CalidadGranosQuemados,
+                                                   .CalidadGranosQuemadosBonifRebaja = cdp.CalidadGranosQuemadosBonifica_o_Rebaja,
+                                                   .CalidadTierra = cdp.CalidadTierra,
+                                                   .CalidadTierraBonifRebaja = cdp.CalidadPuntaSombreada,
+                                                   .CalidadMermaChamico = cdp.CalidadMermaChamico,
+                                                   .CalidadMermaChamicoBonifRebaja = cdp.CalidadMermaChamicoBonifica_o_Rebaja,
+                                                   .CalidadMermaZarandeo = cdp.CalidadMermaZarandeo,
+                                                   .CalidadMermaZarandeoBonifRebaja = cdp.CalidadMermaZarandeoBonifica_o_Rebaja, _
  _
-            .ProcedenciaLocalidadONCCA_SAGPYA = proced_loc.CodigoONCAA, _
-            .ProcedenciaPartidoONCCA = proced_part.CodigoONCCA, _
+                                                   .ProcedenciaLocalidadONCCA_SAGPYA = proced_loc.CodigoONCAA,
+                                                   .ProcedenciaPartidoONCCA = proced_part.CodigoONCCA, _
  _
-             .Patente = cdp.Patente, _
-            .Acoplado = cdp.Acoplado, _
-            .DestinoCodigoYPF = dest.CodigoYPF, _
-            .TransportistaCUIT = tr.Cuit.Replace("-", ""), _
-            .ChoferCUIT = chf.CUIL.Replace("-", ""), _
-            .TransportistaDesc = tr.RazonSocial, _
-            .ChoferDesc = chf.Nombre, _
-            .EspecieONCCA = art.AuxiliarString6, _
-            .Cosecha = cdp.Cosecha.Replace("/", "-20"), _
-            .Establecimiento = estab.Descripcion, _
+                                                    .Patente = cdp.Patente,
+                                                   .Acoplado = cdp.Acoplado,
+                                                   .DestinoCodigoYPF = dest.CodigoYPF,
+                                                   .TransportistaCUIT = tr.Cuit.Replace("-", ""),
+                                                   .ChoferCUIT = chf.CUIL.Replace("-", ""),
+                                                   .TransportistaDesc = tr.RazonSocial,
+                                                   .ChoferDesc = chf.Nombre,
+                                                   .EspecieONCCA = art.AuxiliarString6,
+                                                   .Cosecha = cdp.Cosecha.Replace("/", "-20"),
+                                                   .Establecimiento = estab.Descripcion, _
  _
-            .IdFacturaImputada = If(cdp.IdFacturaImputada, -1), _
-            .IdClienteAFacturarle = If(cdp.IdClienteAFacturarle, -1) _
-            })
+                                                   .IdFacturaImputada = If(cdp.IdFacturaImputada, -1),
+                                                   .IdClienteAFacturarle = If(cdp.IdClienteAFacturarle, -1)
+                                                   })
 
         'If False Then
         '    q = q.Skip(startRowIndex)  'el Skip no anda con SQL2000
@@ -3245,8 +3245,8 @@ Public Class CartaDePorteManager
                 '///////////////////////////////////
 
                 If False Then
-                    Dim dt = EntidadManager.ExecDinamico(SC, "select top 1  Cotizacion,Fecha from cotizaciones " & _
-                                                       "where(IdMoneda = " & IdMoneda & ") " & _
+                    Dim dt = EntidadManager.ExecDinamico(SC, "select top 1  Cotizacion,Fecha from cotizaciones " &
+                                                       "where(IdMoneda = " & IdMoneda & ") " &
                                                     "order by fecha desc")
 
                     If dt.Rows.Count > 0 Then
@@ -3609,14 +3609,14 @@ Public Class CartaDePorteManager
     End Function
 
 
-    Shared Function generarNotasDeEntregaConReportViewer_ConServidorDeInformes(ByVal SC As String, ByVal fechadesde As Date, _
-                                                         ByVal fechahasta As Date, ByVal dr As DataRow, _
-                                                         ByVal estado As CartaDePorteManager.enumCDPestado, _
-                                                         ByRef lineasGeneradas As Long, ByRef titulo As String, _
-                                                         ByVal logo As String, ByVal puntoventa As Integer, _
-                                                         Optional ByRef tiemposql As Integer = 0, _
-                                                         Optional ByRef tiempoinforme As Integer = 0, _
-                                                         Optional ByVal bDescargaHtml As Boolean = False, _
+    Shared Function generarNotasDeEntregaConReportViewer_ConServidorDeInformes(ByVal SC As String, ByVal fechadesde As Date,
+                                                         ByVal fechahasta As Date, ByVal dr As DataRow,
+                                                         ByVal estado As CartaDePorteManager.enumCDPestado,
+                                                         ByRef lineasGeneradas As Long, ByRef titulo As String,
+                                                         ByVal logo As String, ByVal puntoventa As Integer,
+                                                         Optional ByRef tiemposql As Integer = 0,
+                                                         Optional ByRef tiempoinforme As Integer = 0,
+                                                         Optional ByVal bDescargaHtml As Boolean = False,
                                                          Optional grid As GridView = Nothing) As String
 
 
@@ -3700,14 +3700,14 @@ Public Class CartaDePorteManager
 
 
 
-                Dim count = CartaDePorteManager.GetDataTableFiltradoYPaginado_CadenaSQL(SC, _
-                              "", "", "", 1, 10000, _
-                              estado, "", idVendedor, idCorredor, _
-                              idDestinatario, idIntermediario, _
-                              idRemComercial, idArticulo, idProcedencia, idDestino, _
-                              iisNull(dr.Item("AplicarANDuORalFiltro"), 0), iisNull(dr.Item("modo")), _
-                              iisValidSqlDate(fechadesde, #1/1/1753#), _
-                             iisValidSqlDate(fechahasta, #1/1/2100#), _
+                Dim count = CartaDePorteManager.GetDataTableFiltradoYPaginado_CadenaSQL(SC,
+                              "", "", "", 1, 10000,
+                              estado, "", idVendedor, idCorredor,
+                              idDestinatario, idIntermediario,
+                              idRemComercial, idArticulo, idProcedencia, idDestino,
+                              iisNull(dr.Item("AplicarANDuORalFiltro"), 0), iisNull(dr.Item("modo")),
+                              iisValidSqlDate(fechadesde, #1/1/1753#),
+                             iisValidSqlDate(fechahasta, #1/1/2100#),
                               puntoventa, titulo, EnumSyngentaDivision, , contrato, , IdClienteAuxiliar, AgrupadorDeTandaPeriodos, , , , , True)
 
                 Dim dt = EntidadManager.ExecDinamico(SC, count)
@@ -3716,14 +3716,14 @@ Public Class CartaDePorteManager
 
 
 
-                strSQL = CartaDePorteManager.GetDataTableFiltradoYPaginado_CadenaSQL(SC, _
-                               "", "", "", 1, 10000, _
-                               estado, "", idVendedor, idCorredor, _
-                               idDestinatario, idIntermediario, _
-                               idRemComercial, idArticulo, idProcedencia, idDestino, _
-                               iisNull(dr.Item("AplicarANDuORalFiltro"), 0), iisNull(dr.Item("modo")), _
-                               iisValidSqlDate(fechadesde, #1/1/1753#), _
-                              iisValidSqlDate(fechahasta, #1/1/2100#), _
+                strSQL = CartaDePorteManager.GetDataTableFiltradoYPaginado_CadenaSQL(SC,
+                               "", "", "", 1, 10000,
+                               estado, "", idVendedor, idCorredor,
+                               idDestinatario, idIntermediario,
+                               idRemComercial, idArticulo, idProcedencia, idDestino,
+                               iisNull(dr.Item("AplicarANDuORalFiltro"), 0), iisNull(dr.Item("modo")),
+                               iisValidSqlDate(fechadesde, #1/1/1753#),
+                              iisValidSqlDate(fechahasta, #1/1/2100#),
                                puntoventa, titulo, EnumSyngentaDivision, , contrato, , IdClienteAuxiliar, AgrupadorDeTandaPeriodos)
 
 
@@ -3868,8 +3868,8 @@ Public Class CartaDePorteManager
 
 
             If False Then
-                strRet = RebindReportViewer_ServidorExcel(ReportViewerEscondido, _
-                            rdl, _
+                strRet = RebindReportViewer_ServidorExcel(ReportViewerEscondido,
+                            rdl,
                               strSQL, SC, True, sExcelFileName, titulo, bDescargaHtml)
             Else
 
@@ -3888,7 +3888,7 @@ Public Class CartaDePorteManager
 
 
 
-                strRet = RebindReportViewer_ServidorExcel(ReportViewerEscondido, _
+                strRet = RebindReportViewer_ServidorExcel(ReportViewerEscondido,
                             rdl, yourParams, sExcelFileName, bDescargaHtml)
 
 
@@ -4050,14 +4050,14 @@ Public Class CartaDePorteManager
 
 
 
-    Shared Function QueInforme_PorModoLocal(SC As String, ByRef rdl As String, idVendedor As Long, idRemComercial As Long, idIntermediario As Long, idCorredor As Long, idDestinatario As Long, IdClienteAuxiliar As Long, ByVal fechadesde As Date, _
-                                                         ByVal fechahasta As Date, ByVal dr As DataRow, _
-                                                         ByVal estado As CartaDePorteManager.enumCDPestado, _
-                                                         ByRef lineasGeneradas As Long, ByRef titulo As String, _
-                                                         ByVal logo As String, ByVal puntoventa As Integer, _
-                                                          ByRef tiemposql As Integer, _
-                                                          ByRef tiempoinforme As Integer, _
-                                                          ByVal bDescargaHtml As Boolean, _
+    Shared Function QueInforme_PorModoLocal(SC As String, ByRef rdl As String, idVendedor As Long, idRemComercial As Long, idIntermediario As Long, idCorredor As Long, idDestinatario As Long, IdClienteAuxiliar As Long, ByVal fechadesde As Date,
+                                                         ByVal fechahasta As Date, ByVal dr As DataRow,
+                                                         ByVal estado As CartaDePorteManager.enumCDPestado,
+                                                         ByRef lineasGeneradas As Long, ByRef titulo As String,
+                                                         ByVal logo As String, ByVal puntoventa As Integer,
+                                                          ByRef tiemposql As Integer,
+                                                          ByRef tiempoinforme As Integer,
+                                                          ByVal bDescargaHtml As Boolean,
                                                           grid As GridView) As String
 
         QueInforme_PorModoLocal = ""
@@ -4257,9 +4257,9 @@ Public Class CartaDePorteManager
 
 
             Try
-                bytes = oReportViewer.LocalReport.Render( _
-                       "Excel", Nothing, mimeType, encoding, _
-                         extension, _
+                bytes = oReportViewer.LocalReport.Render(
+                       "Excel", Nothing, mimeType, encoding,
+                         extension,
                         streamids, warnings)
 
             Catch e As System.Exception
@@ -4293,7 +4293,7 @@ Public Class CartaDePorteManager
 
 
 
-    Public Shared Function RebindReportViewer_ServidorExcel(ByRef oReportViewer As Microsoft.Reporting.WebForms.ReportViewer, _
+    Public Shared Function RebindReportViewer_ServidorExcel(ByRef oReportViewer As Microsoft.Reporting.WebForms.ReportViewer,
                                                                 ByVal rdlFile As String, parametros As IEnumerable(Of ReportParameter),
                                     ByRef ArchivoExcelDestino As String, bDescargaHtml As Boolean) As String
 
@@ -4414,17 +4414,17 @@ Public Class CartaDePorteManager
 
                     'por ahora usar ExcelToHtml(strRet, grid)
 
-                    bytes = .ServerReport.Render( _
-                            "HTML4.0", Nothing, mimeType, encoding, _
-                              extension, _
+                    bytes = .ServerReport.Render(
+                            "HTML4.0", Nothing, mimeType, encoding,
+                              extension,
                              streamids, warnings)
 
                 Else
 
 
-                    bytes = .ServerReport.Render( _
-                          "Excel", Nothing, mimeType, encoding, _
-                            extension, _
+                    bytes = .ServerReport.Render(
+                          "Excel", Nothing, mimeType, encoding,
+                            extension,
                            streamids, warnings)
                 End If
 
@@ -4491,10 +4491,10 @@ Public Class CartaDePorteManager
 
     End Function
 
-    Public Shared Function RebindReportViewer_ServidorExcel(ByRef oReportViewer As Microsoft.Reporting.WebForms.ReportViewer, _
-                                                                ByVal rdlFile As String, strSQL As String, SC As String, _
-                                     Optional ByVal bDescargaExcel As Boolean = False, _
-                                    Optional ByRef ArchivoExcelDestino As String = "", Optional ByVal titulo As String = "", _
+    Public Shared Function RebindReportViewer_ServidorExcel(ByRef oReportViewer As Microsoft.Reporting.WebForms.ReportViewer,
+                                                                ByVal rdlFile As String, strSQL As String, SC As String,
+                                     Optional ByVal bDescargaExcel As Boolean = False,
+                                    Optional ByRef ArchivoExcelDestino As String = "", Optional ByVal titulo As String = "",
                                     Optional ByVal bDescargaHtml As Boolean = False) As String
         'http://forums.asp.net/t/1183208.aspx
 
@@ -4689,9 +4689,9 @@ Public Class CartaDePorteManager
 
 
                 Try
-                    bytes = .ServerReport.Render( _
-                          "HTML4.0", Nothing, mimeType, encoding, _
-                            extension, _
+                    bytes = .ServerReport.Render(
+                          "HTML4.0", Nothing, mimeType, encoding,
+                            extension,
                            streamids, warnings)
 
                 Catch e As System.Exception
@@ -4716,9 +4716,9 @@ Public Class CartaDePorteManager
                 .Visible = False
 
                 Try
-                    bytes = .ServerReport.Render( _
-                          "Excel", Nothing, mimeType, encoding, _
-                            extension, _
+                    bytes = .ServerReport.Render(
+                          "Excel", Nothing, mimeType, encoding,
+                            extension,
                            streamids, warnings)
 
                 Catch e As System.Exception
@@ -4802,8 +4802,8 @@ Public Class CartaDePorteManager
 
 
 
-    Public Shared Function RebindReportViewer_ServidorExcel_SinSanata(ByRef oReportViewer As Microsoft.Reporting.WebForms.ReportViewer, _
-                                                                ByVal rdlFile As String, strSQL As String, SC As String, _
+    Public Shared Function RebindReportViewer_ServidorExcel_SinSanata(ByRef oReportViewer As Microsoft.Reporting.WebForms.ReportViewer,
+                                                                ByVal rdlFile As String, strSQL As String, SC As String,
                                     ByRef ArchivoExcelDestino As String,
                                     IdFactura As Integer) As String
         'http://forums.asp.net/t/1183208.aspx
@@ -4907,9 +4907,9 @@ Public Class CartaDePorteManager
             .Visible = False
 
             Try
-                bytes = .ServerReport.Render( _
-                      "Excel", Nothing, mimeType, encoding, _
-                        extension, _
+                bytes = .ServerReport.Render(
+                      "Excel", Nothing, mimeType, encoding,
+                        extension,
                        streamids, warnings)
 
             Catch e As System.Exception
@@ -5259,7 +5259,7 @@ Public Class CartaDePorteManager
 
         Dim outputImage As Bitmap = New Bitmap(outputImageWidth, outputImageHeight, System.Drawing.Imaging.PixelFormat.Format32bppArgb)
 
-        Using graphics As Graphics = graphics.FromImage(outputImage)
+        Using graphics As Graphics = Graphics.FromImage(outputImage)
 
             graphics.DrawImage(firstImage, New Rectangle(New Point(), firstImage.Size),
                 New Rectangle(New Point(), firstImage.Size), GraphicsUnit.Pixel)
@@ -5942,11 +5942,11 @@ Public Class CartaDePorteManager
                 Dim db As New LinqCartasPorteDataContext(Encriptar(SC))
 
 
-                Dim idorig = _
-                                 (From c In db.CartasDePortes _
-                                 Where c.NumeroCartaDePorte = myCartaDePorte.NumeroCartaDePorte _
-                                 And c.SubnumeroVagon = myCartaDePorte.SubnumeroVagon _
-                                  And c.SubnumeroDeFacturacion = 0 Select c.IdCartaDePorte).FirstOrDefault
+                Dim idorig =
+                                 (From c In db.CartasDePortes
+                                  Where c.NumeroCartaDePorte = myCartaDePorte.NumeroCartaDePorte _
+                                  And c.SubnumeroVagon = myCartaDePorte.SubnumeroVagon _
+                                   And c.SubnumeroDeFacturacion = 0 Select c.IdCartaDePorte).FirstOrDefault
 
                 If idorig > 0 Then
                     myCartaDePorte = CartaDePorteManager.GetItem(SC, idorig)
@@ -5998,8 +5998,8 @@ Public Class CartaDePorteManager
                 End Try
 
 
-                CartaDePorteManager.PDFcon_iTextSharp(output, _
-                                   HttpContext.Current.Server.MapPath(IIf(myCartaDePorte.PathImagen <> "", sDirFTP, "")) + myCartaDePorte.PathImagen & ".temp." & Path.GetExtension(myCartaDePorte.PathImagen), _
+                CartaDePorteManager.PDFcon_iTextSharp(output,
+                                   HttpContext.Current.Server.MapPath(IIf(myCartaDePorte.PathImagen <> "", sDirFTP, "")) + myCartaDePorte.PathImagen & ".temp." & Path.GetExtension(myCartaDePorte.PathImagen),
                                  HttpContext.Current.Server.MapPath(IIf(myCartaDePorte.PathImagen2 <> "", sDirFTP, "")) + myCartaDePorte.PathImagen2 & ".temp." & Path.GetExtension(myCartaDePorte.PathImagen2) _
                                 , 5)
             Else
@@ -6029,8 +6029,8 @@ Public Class CartaDePorteManager
 
 
 
-                CartaDePorteManager.PDFcon_iTextSharp(output, _
-                                  IIf(myCartaDePorte.PathImagen <> "", sDirFTP & myCartaDePorte.PathImagen & ".temp." & Path.GetExtension(myCartaDePorte.PathImagen), ""), _
+                CartaDePorteManager.PDFcon_iTextSharp(output,
+                                  IIf(myCartaDePorte.PathImagen <> "", sDirFTP & myCartaDePorte.PathImagen & ".temp." & Path.GetExtension(myCartaDePorte.PathImagen), ""),
                                 IIf(myCartaDePorte.PathImagen2 <> "", sDirFTP & myCartaDePorte.PathImagen2 & ".temp." & Path.GetExtension(myCartaDePorte.PathImagen2), "") _
                                 , 1)
 
@@ -6388,26 +6388,26 @@ Public Class CartaDePorteManager
 
 
     'Este filtro lo uso en los sincronismos, porque ahí está el dataset tipado
-    Public Shared Function generarWHEREparaDatasetParametrizadoConFechaEnNumerales( _
-                    ByVal sc As String, ByRef sTituloFiltroUsado As String, _
-                    ByVal estado As CartaDePorteManager.enumCDPestado, _
-                    ByVal QueContenga As String, _
-                    ByVal idVendedor As Integer, _
-                    ByVal idCorredor As Integer, _
-                    ByVal idDestinatario As Integer, _
-                    ByVal idIntermediario As Integer, _
-                    ByVal idRemComercial As Integer, _
-                    ByVal idArticulo As Integer, _
-                    ByVal idProcedencia As Integer, _
-                    ByVal idDestino As Integer, _
-                    ByVal AplicarANDuORalFiltro As FiltroANDOR, _
-                    ByVal ModoExportacion As String, _
-                    ByVal fechadesde As DateTime, ByVal fechahasta As DateTime, _
-                    ByVal puntoventa As Integer, _
-                    Optional ByVal optDivisionSyngenta As String = "Ambas", _
-                    Optional ByVal Vagon As Integer = Nothing, Optional ByVal Patente As String = "", _
-                    Optional ByVal optCamionVagon As String = "Ambas", _
-                    Optional ByVal idClienteAuxiliar As Integer = -1 _
+    Public Shared Function generarWHEREparaDatasetParametrizadoConFechaEnNumerales(
+                    ByVal sc As String, ByRef sTituloFiltroUsado As String,
+                    ByVal estado As CartaDePorteManager.enumCDPestado,
+                    ByVal QueContenga As String,
+                    ByVal idVendedor As Integer,
+                    ByVal idCorredor As Integer,
+                    ByVal idDestinatario As Integer,
+                    ByVal idIntermediario As Integer,
+                    ByVal idRemComercial As Integer,
+                    ByVal idArticulo As Integer,
+                    ByVal idProcedencia As Integer,
+                    ByVal idDestino As Integer,
+                    ByVal AplicarANDuORalFiltro As FiltroANDOR,
+                    ByVal ModoExportacion As String,
+                    ByVal fechadesde As DateTime, ByVal fechahasta As DateTime,
+                    ByVal puntoventa As Integer,
+                    Optional ByVal optDivisionSyngenta As String = "Ambas",
+                    Optional ByVal Vagon As Integer = Nothing, Optional ByVal Patente As String = "",
+                    Optional ByVal optCamionVagon As String = "Ambas",
+                    Optional ByVal idClienteAuxiliar As Integer = -1
                 ) As String
 
 
@@ -6421,12 +6421,12 @@ Public Class CartaDePorteManager
             Dim idCorredorQueContiene = BuscaIdVendedorPreciso(QueContenga, sc)
 
             If idVendedorQueContiene <> -1 Or idCorredorQueContiene <> -1 Then
-                strWHERE += "  " & _
-                 "           AND (Vendedor = " & idVendedorQueContiene & _
-                "           OR CuentaOrden1 = " & idVendedorQueContiene & _
-                "           OR CuentaOrden2 = " & idVendedorQueContiene & _
-                "             OR Corredor=" & idCorredorQueContiene & _
-                "             OR Corredor2=" & idCorredorQueContiene & _
+                strWHERE += "  " &
+                 "           AND (Vendedor = " & idVendedorQueContiene &
+                "           OR CuentaOrden1 = " & idVendedorQueContiene &
+                "           OR CuentaOrden2 = " & idVendedorQueContiene &
+                "             OR Corredor=" & idCorredorQueContiene &
+                "             OR Corredor2=" & idCorredorQueContiene &
                 "             OR Entregador=" & idVendedorQueContiene & ")"
             End If
 
@@ -6438,17 +6438,17 @@ Public Class CartaDePorteManager
 
 
         If AplicarANDuORalFiltro = 1 Then
-            strWHERE += iisIdValido(idVendedor, "           AND CDP.Vendedor = " & idVendedor, "") & _
-                    iisIdValido(idIntermediario, "             AND CDP.CuentaOrden1=" & idIntermediario, "") & _
-                    iisIdValido(idRemComercial, "             AND CDP.CuentaOrden2=" & idRemComercial, "") & _
+            strWHERE += iisIdValido(idVendedor, "           AND CDP.Vendedor = " & idVendedor, "") &
+                    iisIdValido(idIntermediario, "             AND CDP.CuentaOrden1=" & idIntermediario, "") &
+                    iisIdValido(idRemComercial, "             AND CDP.CuentaOrden2=" & idRemComercial, "") &
                     iisIdValido(idClienteAuxiliar, "             AND CDP.idClienteAuxiliar=" & idClienteAuxiliar, "")
 
         Else
-            Dim s = " AND (1=0 " & _
-                    iisIdValido(idVendedor, "           OR CDP.Vendedor = " & idVendedor, "") & _
-                    iisIdValido(idIntermediario, "             OR CDP.CuentaOrden1=" & idIntermediario, "") & _
-                    iisIdValido(idRemComercial, "             OR CDP.CuentaOrden2=" & idRemComercial, "") & _
-                    iisIdValido(idClienteAuxiliar, "             OR CDP.idClienteAuxiliar=" & idClienteAuxiliar, "") & _
+            Dim s = " AND (1=0 " &
+                    iisIdValido(idVendedor, "           OR CDP.Vendedor = " & idVendedor, "") &
+                    iisIdValido(idIntermediario, "             OR CDP.CuentaOrden1=" & idIntermediario, "") &
+                    iisIdValido(idRemComercial, "             OR CDP.CuentaOrden2=" & idRemComercial, "") &
+                    iisIdValido(idClienteAuxiliar, "             OR CDP.idClienteAuxiliar=" & idClienteAuxiliar, "") &
                     "  )  "
 
             If s <> " AND (1=0   )  " Then strWHERE += s
@@ -6481,10 +6481,10 @@ Public Class CartaDePorteManager
 
         If True Then 'estado = CartaDePorteManager.enumCDPestado.DescargasMasFacturadas Then
 
-            strWHERE += "    AND isnull(isnull(FechaDescarga, FechaArribo),'1/1/1753') >= #" & Convert.ToDateTime(iisValidSqlDate(fechadesde, #1/1/1753#)).ToString("yyyy/MM/dd") & "# " & _
+            strWHERE += "    AND isnull(isnull(FechaDescarga, FechaArribo),'1/1/1753') >= #" & Convert.ToDateTime(iisValidSqlDate(fechadesde, #1/1/1753#)).ToString("yyyy/MM/dd") & "# " &
                         "    AND isnull(isnull(FechaDescarga, FechaArribo),'1/1/1753') <= #" & Convert.ToDateTime(iisValidSqlDate(fechahasta, #1/1/2100#)).ToString("yyyy/MM/dd") & "# "
         Else
-            strWHERE += "    AND isnull(FechaArribo,'1/1/1753') >= #" & Convert.ToDateTime(iisValidSqlDate(fechadesde, #1/1/1753#)).ToString("yyyy/MM/dd") & "# " & _
+            strWHERE += "    AND isnull(FechaArribo,'1/1/1753') >= #" & Convert.ToDateTime(iisValidSqlDate(fechadesde, #1/1/1753#)).ToString("yyyy/MM/dd") & "# " &
                         "    AND isnull(FechaArribo,'1/1/1753') <= #" & Convert.ToDateTime(iisValidSqlDate(fechahasta, #1/1/2100#)).ToString("yyyy/MM/dd") & "# "
         End If
 
@@ -6565,13 +6565,13 @@ Public Class CartaDePorteManager
 
 
 
-        sTituloFiltroUsado &= FormatearTitulo(sc, _
-                              sTituloFiltroUsado, _
-                              estado, QueContenga, idVendedor, idCorredor, _
-                              idDestinatario, idIntermediario, _
-                              idRemComercial, idArticulo, idProcedencia, idDestino, _
-                              AplicarANDuORalFiltro, ModoExportacion, _
-                              fechadesde, fechahasta, _
+        sTituloFiltroUsado &= FormatearTitulo(sc,
+                              sTituloFiltroUsado,
+                              estado, QueContenga, idVendedor, idCorredor,
+                              idDestinatario, idIntermediario,
+                              idRemComercial, idArticulo, idProcedencia, idDestino,
+                              AplicarANDuORalFiltro, ModoExportacion,
+                              fechadesde, fechahasta,
                               puntoventa, optDivisionSyngenta, False, "", "", -1)
 
 
@@ -6589,28 +6589,28 @@ Public Class CartaDePorteManager
 
 
 
-    Public Shared Function generarWHEREparaDatasetParametrizado( _
-                    ByVal sc As String, ByRef sTituloFiltroUsado As String, _
-                    ByVal estado As CartaDePorteManager.enumCDPestado, _
-                    ByVal QueContenga As String, _
-                    ByVal idVendedor As Integer, _
-                    ByVal idCorredor As Integer, _
-                    ByVal idDestinatario As Integer, _
-                    ByVal idIntermediario As Integer, _
-                    ByVal idRemComercial As Integer, _
-                    ByVal idArticulo As Integer, _
-                    ByVal idProcedencia As Integer, _
-                    ByVal idDestino As Integer, _
-                    ByVal AplicarANDuORalFiltro As FiltroANDOR, _
-                    ByVal ModoExportacion As String, _
-                    ByVal fechadesde As DateTime, ByVal fechahasta As DateTime, _
-                    ByVal puntoventa As Integer, _
-                    Optional ByVal optDivisionSyngenta As String = "Ambas", _
-                    Optional ByVal bTraerDuplicados As Boolean = False, _
-                    Optional ByVal Contrato As String = "", _
-                    Optional ByVal QueContenga2 As String = "", Optional ByVal idClienteAuxiliar As Integer = -1, _
-                    Optional ByVal Vagon As Integer = Nothing, Optional ByVal Patente As String = "", _
-                    Optional ByVal optCamionVagon As String = "Ambas" _
+    Public Shared Function generarWHEREparaDatasetParametrizado(
+                    ByVal sc As String, ByRef sTituloFiltroUsado As String,
+                    ByVal estado As CartaDePorteManager.enumCDPestado,
+                    ByVal QueContenga As String,
+                    ByVal idVendedor As Integer,
+                    ByVal idCorredor As Integer,
+                    ByVal idDestinatario As Integer,
+                    ByVal idIntermediario As Integer,
+                    ByVal idRemComercial As Integer,
+                    ByVal idArticulo As Integer,
+                    ByVal idProcedencia As Integer,
+                    ByVal idDestino As Integer,
+                    ByVal AplicarANDuORalFiltro As FiltroANDOR,
+                    ByVal ModoExportacion As String,
+                    ByVal fechadesde As DateTime, ByVal fechahasta As DateTime,
+                    ByVal puntoventa As Integer,
+                    Optional ByVal optDivisionSyngenta As String = "Ambas",
+                    Optional ByVal bTraerDuplicados As Boolean = False,
+                    Optional ByVal Contrato As String = "",
+                    Optional ByVal QueContenga2 As String = "", Optional ByVal idClienteAuxiliar As Integer = -1,
+                    Optional ByVal Vagon As Integer = Nothing, Optional ByVal Patente As String = "",
+                    Optional ByVal optCamionVagon As String = "Ambas"
                 ) As String
 
 
@@ -6633,19 +6633,19 @@ Public Class CartaDePorteManager
                 'no hay que agregar el prefijo .CDP acá para que funcione?????
                 'no hay que agregar el prefijo .CDP acá para que funcione?????
                 'no hay que agregar el prefijo .CDP acá para que funcione?????
-                strWHERE += "  " & _
-                 "           OR (Vendedor = " & idVendedorQueContiene & _
-                "           OR CuentaOrden1 = " & idVendedorQueContiene & _
-                "           OR CuentaOrden2 = " & idVendedorQueContiene & _
-                "             OR Entregador=" & idVendedorQueContiene & _
-                "           OR idClienteAuxiliar = " & idVendedorQueContiene & _
+                strWHERE += "  " &
+                 "           OR (Vendedor = " & idVendedorQueContiene &
+                "           OR CuentaOrden1 = " & idVendedorQueContiene &
+                "           OR CuentaOrden2 = " & idVendedorQueContiene &
+                "             OR Entregador=" & idVendedorQueContiene &
+                "           OR idClienteAuxiliar = " & idVendedorQueContiene &
                 "           )"
             End If
 
             If idCorredorQueContiene <> -1 Then
-                strWHERE += "  " & _
-                "    OR (   Corredor=" & idCorredorQueContiene & _
-                "             OR Corredor2=" & idCorredorQueContiene & _
+                strWHERE += "  " &
+                "    OR (   Corredor=" & idCorredorQueContiene &
+                "             OR Corredor2=" & idCorredorQueContiene &
                 "           )"
 
 
@@ -6671,17 +6671,17 @@ Public Class CartaDePorteManager
 
 
         If AplicarANDuORalFiltro = 1 Then
-            strWHERE += iisIdValido(idVendedor, "           AND CDP.Vendedor = " & idVendedor, "") & _
-                    iisIdValido(idIntermediario, "             AND CDP.CuentaOrden1=" & idIntermediario, "") & _
-                    iisIdValido(idRemComercial, "             AND CDP.CuentaOrden2=" & idRemComercial, "") & _
-                    iisIdValido(idClienteAuxiliar, "             AND CDP.idClienteAuxiliar=" & idClienteAuxiliar, "") & _
+            strWHERE += iisIdValido(idVendedor, "           AND CDP.Vendedor = " & idVendedor, "") &
+                    iisIdValido(idIntermediario, "             AND CDP.CuentaOrden1=" & idIntermediario, "") &
+                    iisIdValido(idRemComercial, "             AND CDP.CuentaOrden2=" & idRemComercial, "") &
+                    iisIdValido(idClienteAuxiliar, "             AND CDP.idClienteAuxiliar=" & idClienteAuxiliar, "") &
                     ""
         Else
-            Dim s = " AND (1=0 " & _
-                    iisIdValido(idVendedor, "           OR CDP.Vendedor = " & idVendedor, "") & _
-                    iisIdValido(idIntermediario, "             OR CDP.CuentaOrden1=" & idIntermediario, "") & _
-                    iisIdValido(idRemComercial, "             OR CDP.CuentaOrden2=" & idRemComercial, "") & _
-                    iisIdValido(idClienteAuxiliar, "             OR CDP.idClienteAuxiliar=" & idClienteAuxiliar, "") & _
+            Dim s = " AND (1=0 " &
+                    iisIdValido(idVendedor, "           OR CDP.Vendedor = " & idVendedor, "") &
+                    iisIdValido(idIntermediario, "             OR CDP.CuentaOrden1=" & idIntermediario, "") &
+                    iisIdValido(idRemComercial, "             OR CDP.CuentaOrden2=" & idRemComercial, "") &
+                    iisIdValido(idClienteAuxiliar, "             OR CDP.idClienteAuxiliar=" & idClienteAuxiliar, "") &
                                                        "  )  "
 
             If s <> " AND (1=0   )  " Then strWHERE += s
@@ -6715,10 +6715,10 @@ Public Class CartaDePorteManager
 
         If True Then '            If estado = CartaDePorteManager.enumCDPestado.DescargasMasFacturadas Then
 
-            strWHERE += "    AND isnull(isnull(FechaDescarga, FechaArribo),'1/1/1753') >= '" & FechaANSI(iisValidSqlDate(fechadesde, #1/1/1753#)) & "' " & _
+            strWHERE += "    AND isnull(isnull(FechaDescarga, FechaArribo),'1/1/1753') >= '" & FechaANSI(iisValidSqlDate(fechadesde, #1/1/1753#)) & "' " &
                         "    AND isnull(isnull(FechaDescarga, FechaArribo),'1/1/1753') <= '" & FechaANSI(iisValidSqlDate(fechahasta, #1/1/2100#)) & "' "
         Else
-            strWHERE += "    AND isnull(FechaArribo,'1/1/1753') >= '" & FechaANSI(iisValidSqlDate(fechadesde, #1/1/1753#)) & "' " & _
+            strWHERE += "    AND isnull(FechaArribo,'1/1/1753') >= '" & FechaANSI(iisValidSqlDate(fechadesde, #1/1/1753#)) & "' " &
                         "    AND isnull(FechaArribo,'1/1/1753') <= '" & FechaANSI(iisValidSqlDate(fechahasta, #1/1/2100#)) & "' "
         End If
 
@@ -6842,8 +6842,8 @@ Public Class CartaDePorteManager
 
 
         If True Then
-            strWHERE += " and EXISTS ( SELECT * FROM CartasDePorte COPIAS " & _
-                        " where COPIAS.NumeroCartaDePorte=CDP.NumeroCartaDePorte and COPIAS.SubnumeroVagon=CDP.SubnumeroVagon  " & _
+            strWHERE += " and EXISTS ( SELECT * FROM CartasDePorte COPIAS " &
+                        " where COPIAS.NumeroCartaDePorte=CDP.NumeroCartaDePorte and COPIAS.SubnumeroVagon=CDP.SubnumeroVagon  " &
                            strWHEREexportacion & "  ) "
         End If
 
@@ -6890,13 +6890,13 @@ Public Class CartaDePorteManager
         'String.Format("{13} {0} {1} {2} {3} {4} {5} {6} {7} {8} {9} {14}.   ({10}, {11}, {12})", _
         'String.Format("{11} - {13} de Williams Entregas - {0} {1}", _
 
-        sTituloFiltroUsado = FormatearTitulo(sc, _
-                              sTituloFiltroUsado, _
-                              estado, QueContenga, idVendedor, idCorredor, _
-                              idDestinatario, idIntermediario, _
-                              idRemComercial, idArticulo, idProcedencia, idDestino, _
-                              AplicarANDuORalFiltro, ModoExportacion, _
-                              fechadesde, fechahasta, _
+        sTituloFiltroUsado = FormatearTitulo(sc,
+                              sTituloFiltroUsado,
+                              estado, QueContenga, idVendedor, idCorredor,
+                              idDestinatario, idIntermediario,
+                              idRemComercial, idArticulo, idProcedencia, idDestino,
+                              AplicarANDuORalFiltro, ModoExportacion,
+                              fechadesde, fechahasta,
                               puntoventa, optDivisionSyngenta, bTraerDuplicados, Contrato, QueContenga2, idClienteAuxiliar)
 
 
@@ -6914,13 +6914,13 @@ Public Class CartaDePorteManager
     '//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-    Shared Function SQL_ListaDeCDPsFiltradas2(ByVal sWHEREadicional As String, ByVal optFacturarA As Long, ByVal txtFacturarATerceros As String, _
-                                         ByVal HFSC As String, ByVal txtTitular As String, ByVal txtCorredor As String, _
-                                         ByVal txtDestinatario As String, ByVal txtIntermediario As String, ByVal txtRcomercial As String, _
-                                         ByVal txt_AC_Articulo As String, ByVal txtProcedencia As String, ByVal txtDestino As String, _
-                                         ByVal txtBuscar As String, ByVal cmbCriterioWHERE As String, ByVal cmbmodo As String, _
-                                         ByVal optDivisionSyngenta As String, ByVal txtFechaDesde As String, ByVal txtFechaHasta As String, _
-                                         ByVal cmbPuntoVenta As String, Optional ByVal sJOIN As String = "", Optional ByVal txtClienteAuxiliar As String = "", _
+    Shared Function SQL_ListaDeCDPsFiltradas2(ByVal sWHEREadicional As String, ByVal optFacturarA As Long, ByVal txtFacturarATerceros As String,
+                                         ByVal HFSC As String, ByVal txtTitular As String, ByVal txtCorredor As String,
+                                         ByVal txtDestinatario As String, ByVal txtIntermediario As String, ByVal txtRcomercial As String,
+                                         ByVal txt_AC_Articulo As String, ByVal txtProcedencia As String, ByVal txtDestino As String,
+                                         ByVal txtBuscar As String, ByVal cmbCriterioWHERE As String, ByVal cmbmodo As String,
+                                         ByVal optDivisionSyngenta As String, ByVal txtFechaDesde As String, ByVal txtFechaHasta As String,
+                                         ByVal cmbPuntoVenta As String, Optional ByVal sJOIN As String = "", Optional ByVal txtClienteAuxiliar As String = "",
                                          Optional ByVal txtFacturarA As String = "", Optional txtCorredorObs As String = "") _
                                 As String
         'As IQueryable(Of CartasDePorte)
@@ -7013,40 +7013,40 @@ Public Class CartaDePorteManager
 
 
 
-        Dim strSQL = String.Format("SELECT DISTINCT    0 as ColumnaTilde,IdCartaDePorte, CDP.IdArticulo," & _
-    "      NumeroCartaDePorte, SubNumeroVagon, CDP.SubNumerodeFacturacion   , FechaArribo, " & _
-    "       FechaDescarga  , " & _
-        facturarselaA & " as FacturarselaA, " & IdFacturarselaA & " as IdFacturarselaA," & _
-    "          isnull(" & tablafact & ".Confirmado,'NO') as Confirmado, " & _
-    "          " & tablafact & ".IdCodigoIVA, " & _
-    "          " & tablafact & ".CUIT, " & _
-    "          '' as ClienteSeparado, " & _
-    "    ISNULL(dbo.wTarifaWilliams( " & IdFacturarselaA & "  ,CDP.IdArticulo,CDP.Destino , case when isnull(Exporta,'NO')='SI' then 1 else 0 end ,0  ),0) as TarifaFacturada  , " & _
-    "         Articulos.Descripcion as  Producto, " & _
-    "        NetoFinal  as  KgNetos , Corredor as IdCorredor, Vendedor as IdTitular,  CuentaOrden1 as IdIntermediario, CuentaOrden2 as IdRComercial, Entregador as IdDestinatario,      " & _
-    "       CLIVEN.Razonsocial as   Titular  , " & _
-    "       CLICO1.Razonsocial as   Intermediario  , " & _
-    "       CLICO2.Razonsocial as   [R. Comercial]  , " & _
-    "       CLICOR.Nombre as    [Corredor ], " & _
-    "       CLIENT.Razonsocial  as  [Destinatario], " & _
-    "         LOCDES.Descripcion   as  DestinoDesc, " & _
-    "        LOCORI.Nombre as    [Procedcia.] , " & _
-    "           CDP.Destino as IdDestino, CDP.AgregaItemDeGastosAdministrativos,CDP.Exporta,IdClienteAFacturarle,IdClienteEntregador,ConDuplicados " & _
-                  " FROM CartasDePorte CDP " & _
-                   " LEFT OUTER JOIN Clientes CLIVEN ON CDP.Vendedor = CLIVEN.IdCliente " & _
-                   " LEFT OUTER JOIN Clientes CLICO1 ON CDP.CuentaOrden1 = CLICO1.IdCliente " & _
-                   " LEFT OUTER JOIN Clientes CLICO2 ON CDP.CuentaOrden2 = CLICO2.IdCliente " & _
-                   " LEFT OUTER JOIN Vendedores CLICOR ON CDP.Corredor = CLICOR.IdVendedor " & _
-                  " LEFT OUTER JOIN Clientes CLICORCLI ON CLICORCLI.idcliente  = (select top 1 idcliente from clientes c1 where c1.RazonSocial = CLICOR.Nombre) " & _
-                  " LEFT OUTER JOIN Clientes CLIENT ON CDP.Entregador = CLIENT.IdCliente " & _
-                   " LEFT OUTER JOIN Articulos ON CDP.IdArticulo = Articulos.IdArticulo " & _
-                   " LEFT OUTER JOIN Transportistas TRANS ON CDP.IdTransportista = TRANS.IdTransportista " & _
-                   " LEFT OUTER JOIN Choferes CHOF ON CDP.IdChofer = CHOF.IdChofer " & _
-                   " LEFT OUTER JOIN Localidades LOCORI ON CDP.Procedencia = LOCORI.IdLocalidad " & _
-                   " LEFT OUTER JOIN WilliamsDestinos LOCDES ON CDP.Destino = LOCDES.IdWilliamsDestino " & _
-                   " LEFT OUTER JOIN ListasPreciosDetalle LPD ON " & tablafact & ".idListaPrecios = LPD.idListaPrecios" & _
-                        "	AND LPD.idArticulo=CDP.IdArticulo " & _
-                        "	AND isnull(LPD.IdDestinoDeCartaDePorte,isnull(CDP.Destino,''))=isnull(CDP.Destino,'') " _
+        Dim strSQL = String.Format("SELECT DISTINCT    0 as ColumnaTilde,IdCartaDePorte, CDP.IdArticulo," &
+    "      NumeroCartaDePorte, SubNumeroVagon, CDP.SubNumerodeFacturacion   , FechaArribo, " &
+    "       FechaDescarga  , " &
+        facturarselaA & " as FacturarselaA, " & IdFacturarselaA & " as IdFacturarselaA," &
+    "          isnull(" & tablafact & ".Confirmado,'NO') as Confirmado, " &
+    "          " & tablafact & ".IdCodigoIVA, " &
+    "          " & tablafact & ".CUIT, " &
+    "          '' as ClienteSeparado, " &
+    "    ISNULL(dbo.wTarifaWilliams( " & IdFacturarselaA & "  ,CDP.IdArticulo,CDP.Destino , case when isnull(Exporta,'NO')='SI' then 1 else 0 end ,0  ),0) as TarifaFacturada  , " &
+    "         Articulos.Descripcion as  Producto, " &
+    "        NetoFinal  as  KgNetos , Corredor as IdCorredor, Vendedor as IdTitular,  CuentaOrden1 as IdIntermediario, CuentaOrden2 as IdRComercial, Entregador as IdDestinatario,      " &
+    "       CLIVEN.Razonsocial as   Titular  , " &
+    "       CLICO1.Razonsocial as   Intermediario  , " &
+    "       CLICO2.Razonsocial as   [R. Comercial]  , " &
+    "       CLICOR.Nombre as    [Corredor ], " &
+    "       CLIENT.Razonsocial  as  [Destinatario], " &
+    "         LOCDES.Descripcion   as  DestinoDesc, " &
+    "        LOCORI.Nombre as    [Procedcia.] , " &
+    "           CDP.Destino as IdDestino, CDP.AgregaItemDeGastosAdministrativos,CDP.Exporta,IdClienteAFacturarle,IdClienteEntregador,ConDuplicados " &
+                  " FROM CartasDePorte CDP " &
+                   " LEFT OUTER JOIN Clientes CLIVEN ON CDP.Vendedor = CLIVEN.IdCliente " &
+                   " LEFT OUTER JOIN Clientes CLICO1 ON CDP.CuentaOrden1 = CLICO1.IdCliente " &
+                   " LEFT OUTER JOIN Clientes CLICO2 ON CDP.CuentaOrden2 = CLICO2.IdCliente " &
+                   " LEFT OUTER JOIN Vendedores CLICOR ON CDP.Corredor = CLICOR.IdVendedor " &
+                  " LEFT OUTER JOIN Clientes CLICORCLI ON CLICORCLI.idcliente  = (select top 1 idcliente from clientes c1 where c1.RazonSocial = CLICOR.Nombre) " &
+                  " LEFT OUTER JOIN Clientes CLIENT ON CDP.Entregador = CLIENT.IdCliente " &
+                   " LEFT OUTER JOIN Articulos ON CDP.IdArticulo = Articulos.IdArticulo " &
+                   " LEFT OUTER JOIN Transportistas TRANS ON CDP.IdTransportista = TRANS.IdTransportista " &
+                   " LEFT OUTER JOIN Choferes CHOF ON CDP.IdChofer = CHOF.IdChofer " &
+                   " LEFT OUTER JOIN Localidades LOCORI ON CDP.Procedencia = LOCORI.IdLocalidad " &
+                   " LEFT OUTER JOIN WilliamsDestinos LOCDES ON CDP.Destino = LOCDES.IdWilliamsDestino " &
+                   " LEFT OUTER JOIN ListasPreciosDetalle LPD ON " & tablafact & ".idListaPrecios = LPD.idListaPrecios" &
+                        "	AND LPD.idArticulo=CDP.IdArticulo " &
+                        "	AND isnull(LPD.IdDestinoDeCartaDePorte,isnull(CDP.Destino,''))=isnull(CDP.Destino,'') "
             )
 
 
@@ -7085,12 +7085,12 @@ Public Class CartaDePorteManager
 
             If idVendedorQueContiene <> -1 Or idCorredorQueContiene <> -1 Then
 
-                strWHERE += "  " & _
-                 "           AND (CDP.Vendedor = " & idVendedorQueContiene & _
-                "           OR CDP.CuentaOrden1 = " & idVendedorQueContiene & _
-                "           OR CDP.CuentaOrden2 = " & idVendedorQueContiene & _
-                "           OR CDP.idClienteAuxiliar = " & idVendedorQueContiene & _
-                "           OR CDP.IdClienteAFacturarle = " & idVendedorQueContiene & _
+                strWHERE += "  " &
+                 "           AND (CDP.Vendedor = " & idVendedorQueContiene &
+                "           OR CDP.CuentaOrden1 = " & idVendedorQueContiene &
+                "           OR CDP.CuentaOrden2 = " & idVendedorQueContiene &
+                "           OR CDP.idClienteAuxiliar = " & idVendedorQueContiene &
+                "           OR CDP.IdClienteAFacturarle = " & idVendedorQueContiene &
                 "             OR CDP.Entregador=" & idVendedorQueContiene & ")"
 
                 'strWHERE += "  " & _
@@ -7104,17 +7104,17 @@ Public Class CartaDePorteManager
 
 
         If cmbCriterioWHERE = "todos" Then
-            strWHERE += iisIdValido(idVendedor, "           AND CDP.Vendedor = " & idVendedor, "") & _
-                            iisIdValido(idIntermediario, "             AND CDP.CuentaOrden1=" & idIntermediario, "") & _
-                            iisIdValido(idRComercial, "             AND CDP.CuentaOrden2=" & idRComercial, "") & _
+            strWHERE += iisIdValido(idVendedor, "           AND CDP.Vendedor = " & idVendedor, "") &
+                            iisIdValido(idIntermediario, "             AND CDP.CuentaOrden1=" & idIntermediario, "") &
+                            iisIdValido(idRComercial, "             AND CDP.CuentaOrden2=" & idRComercial, "") &
                             iisIdValido(idClienteAuxiliar, "             AND CDP.idClienteAuxiliar=" & idClienteAuxiliar, "")
         Else
             'criterio "algunos"
-            Dim s = " AND (1=0 " & _
-                             iisIdValido(idVendedor, "           OR CDP.Vendedor = " & idVendedor, "") & _
-                            iisIdValido(idIntermediario, "             OR CDP.CuentaOrden1=" & idIntermediario, "") & _
-                            iisIdValido(idRComercial, "             OR CDP.CuentaOrden2=" & idRComercial, "") & _
-                            iisIdValido(idClienteAuxiliar, "             OR CDP.idClienteAuxiliar=" & idClienteAuxiliar, "") & _
+            Dim s = " AND (1=0 " &
+                             iisIdValido(idVendedor, "           OR CDP.Vendedor = " & idVendedor, "") &
+                            iisIdValido(idIntermediario, "             OR CDP.CuentaOrden1=" & idIntermediario, "") &
+                            iisIdValido(idRComercial, "             OR CDP.CuentaOrden2=" & idRComercial, "") &
+                            iisIdValido(idClienteAuxiliar, "             OR CDP.idClienteAuxiliar=" & idClienteAuxiliar, "") &
                                "  )  "
 
             If s <> " AND (1=0   )  " Then strWHERE += s
@@ -7188,13 +7188,13 @@ Public Class CartaDePorteManager
 
 
 
-        strWHERE += "    AND    NetoProc>0 AND ( isnull(FechaDescarga,FechaArribo) Between " & _
-                "convert(datetime,'" & Convert.ToDateTime(iisValidSqlDate(txtFechaDesde, #1/1/1753#)).ToString("yyyy/MM/dd") & "',111) " & _
-                " AND " & _
-                "convert(datetime,'" & Convert.ToDateTime(iisValidSqlDate(txtFechaHasta, #1/1/2100#)).ToString("yyyy/MM/dd") & "',111) " & _
-                " ) " & _
-    "         AND (isnull(CDP.PuntoVenta," & cmbPuntoVenta & ")=" & cmbPuntoVenta & " OR CDP.PuntoVenta = 0)" & _
-   "  AND (ISNULL(IdFacturaImputada,-1)=0 OR ISNULL(IdFacturaImputada,-1)=-1) " & _
+        strWHERE += "    AND    NetoProc>0 AND ( isnull(FechaDescarga,FechaArribo) Between " &
+                "convert(datetime,'" & Convert.ToDateTime(iisValidSqlDate(txtFechaDesde, #1/1/1753#)).ToString("yyyy/MM/dd") & "',111) " &
+                " AND " &
+                "convert(datetime,'" & Convert.ToDateTime(iisValidSqlDate(txtFechaHasta, #1/1/2100#)).ToString("yyyy/MM/dd") & "',111) " &
+                " ) " &
+    "         AND (isnull(CDP.PuntoVenta," & cmbPuntoVenta & ")=" & cmbPuntoVenta & " OR CDP.PuntoVenta = 0)" &
+   "  AND (ISNULL(IdFacturaImputada,-1)=0 OR ISNULL(IdFacturaImputada,-1)=-1) " &
    "  "
 
 
@@ -7241,16 +7241,16 @@ Public Class CartaDePorteManager
 
         'http://www.sqlteam.com/forums/topic.asp?TOPIC_ID=71950
 
-        strWHERE += " group by IdCartaDePorte, CDP.IdArticulo,      NumeroCartaDePorte ,SubNumeroVagon ,CDP.SubNumeroDeFacturacion , FechaArribo, " & _
+        strWHERE += " group by IdCartaDePorte, CDP.IdArticulo,      NumeroCartaDePorte ,SubNumeroVagon ,CDP.SubNumeroDeFacturacion , FechaArribo, " &
                      " FechaDescarga  , " _
-                        & IIf(optFacturarA <> 4, facturarselaA & ", " & IdFacturarselaA & ", ", "") & _
-                    " Articulos.Descripcion,         NetoFinal   ,  Corredor, Vendedor,  CuentaOrden1 , CuentaOrden2 , Entregador ,           CLIVEN.Razonsocial   ,        " & _
-                    " CLICO1.Razonsocial  ,        CLICO2.Razonsocial  ,        " & _
-                    " CLICOR.Nombre ,        CLIENT.Razonsocial  ,          " & _
-                    " LOCDES.Descripcion  ,         LOCORI.Nombre  , CDP.Exporta,            " & _
-                    "     CDP.Destino, CDP.AgregaItemDeGastosAdministrativos, TarifaFacturada,IdClienteAFacturarle, IdClienteEntregador, ConDuplicados," & _
-"          " & tablafact & ".Confirmado, " & _
-"          " & tablafact & ".IdCodigoIVA,   " & _
+                        & IIf(optFacturarA <> 4, facturarselaA & ", " & IdFacturarselaA & ", ", "") &
+                    " Articulos.Descripcion,         NetoFinal   ,  Corredor, Vendedor,  CuentaOrden1 , CuentaOrden2 , Entregador ,           CLIVEN.Razonsocial   ,        " &
+                    " CLICO1.Razonsocial  ,        CLICO2.Razonsocial  ,        " &
+                    " CLICOR.Nombre ,        CLIENT.Razonsocial  ,          " &
+                    " LOCDES.Descripcion  ,         LOCORI.Nombre  , CDP.Exporta,            " &
+                    "     CDP.Destino, CDP.AgregaItemDeGastosAdministrativos, TarifaFacturada,IdClienteAFacturarle, IdClienteEntregador, ConDuplicados," &
+"          " & tablafact & ".Confirmado, " &
+"          " & tablafact & ".IdCodigoIVA,   " &
 "          " & tablafact & ".CUIT   "
 
         'strWHERE += " ORDER BY  " & facturarselaA & " ASC,NumeroCartaDePorte ASC " 'este explotaba en "a terceros", porque ponía ORDER 'PIRULO' ASC
@@ -7288,92 +7288,92 @@ Public Class CartaDePorteManager
         'iisIdValido(idDestino, "             AND Destino=" & idDestino, "") & _
         'iisIdValido(idDestinatario, "             AND Entregador=" & idDestinatario, "") '& _
 
-        Dim strSQL = String.Format("  SELECT TOP " & _CONST_MAXROWS & _
-      "    Exporta, Vendedor, Corredor, CuentaOrden1, CuentaOrden2, Entregador, NetoFinal, Anulada, " & _
-    "      NumeroCartaDePorte   as  [C.Porte]  , " & _
-    "       FechaDeCarga   as  Arribo , " & _
-    "        convert(char, Hora, 108)   as  Hora, " & _
-    "       FechaDescarga  , FechaArribo, " & _
-    "        CONVERT(VARCHAR(8),FechaDescarga,108) as  HoraDescarga, " & _
-    "       CDP.FechaIngreso  , " & _
-    "         Articulos.Descripcion as  Producto, " & _
-    "       Contrato  as  Contrato , " & _
-    "       NetoPto   as  [Kg.Proc.] , " & _
-    "       TaraPto   as  [Kg.Tara Proc.] , " & _
-    "       BrutoPto   as  [Kg.Bruto Proc.], " & _
-    "       BrutoFinal   as  [Kg.Bruto Desc.] , " & _
-    "       TaraFinal   as  [Kg.Tara Desc.] , " & _
-    "       NetoFinal   as  [Kg.Neto Desc.] , " & _
-    "       NetoPto-NetoFinal   as  [Kg.Dif.] , " & _
-    "         Humedad as  [H.%]	 , " & _
-    "         HumedadDesnormalizada as [Mer.Kg.] , " & _
-    "         Merma as Otras , " & _
-    "        NetoProc  as  [Kg.Netos] , " & _
-    "       CLIVEN.Razonsocial as   Titular  , " & _
-    "       CLIVEN.CUIT as   TitularCUIT  , " & _
-    "       CLICO1.Razonsocial as   Intermediario  , " & _
-    "       CLICO1.CUIT as   IntermediarioCUIT  , " & _
-    "       CLICO2.Razonsocial as   [R. Comercial]  , " & _
-    "       CLICO2.CUIT as   [R. ComercialCUIT]  , " & _
-    "       CLICOR.Nombre as    [Corredor ], " & _
-    "       CLICOR.CUIT as    [CorredorCUIT], " & _
-    "       CLIENT.Razonsocial  as  [Destinatario], " & _
-    "       CLIENT.CUIT  as  [DestinatarioCUIT], " & _
-    "       CLIENT.Razonsocial  as  [FacturadaA], " & _
-    "       CLIENT.CUIT  as  [FacturadaACUIT], " & _
-    "        Patente as  [Pat. Chasis] , " & _
-    "         Acoplado as [Pat. Acoplado] , " & _
-    "        TRANS.CUIT as [CUIT Transp.] , " & _
-    "         TRANS.RazonSocial as Trasportista , " & _
-    "         TRANS.RazonSocial as TrasportistaCUIT , " & _
-    "         LOCDES.IdWilliamsDestino   as  Destino , " & _
-    "         LOCDES.Descripcion   as  DestinoDesc , " & _
-    "	    isnull(LOCDES.CUIT,'') 	 AS  DestinoCUIT, " & _
-    "        LOCORI.Nombre as    [Procedcia.] , " & _
-    "         FechaDescarga as   [Desc.], " & _
-    "         CDP.Observaciones  as  [Cal.-Observaciones], " & _
-    "         CHOF.CUIL as   [CUIT chofer], " & _
-    "         CHOF.Nombre as   Chofer, " & _
-    "         '' as  [Nro ONCA] , " & _
-    "         '' as   [Pta ONCA], " & _
-    "         '' as   Provincia, " & _
-    "         '' as   [Nro CAC]	, " & _
-    "          FechaVencimiento as  [Vencim.CP], " & _
-    "          '' as  [Emision CP], " & _
-    "          ''  as Sucursal, CDP.PuntoVenta, " & _
-    "          KmARecorrer as  Km, " & _
-    "          Tarifa as Tarifa, " & _
-    "         Articulos.AuxiliarString5 as  [EspecieONCAA] , " & _
-    "          LOCORI.IdLocalidad, " & _
-    "          LOCDES.IdWilliamsDestino, " & _
-    "          LOCORI.CodigoPostal as LocalidadProcedenciaCodigoPostal, " & _
-    "          LOCDES.Codigo as LocalidadDestinoCodigoPostal, " & _
-    "          LOCORI.CodigoONCAA as LocalidadProcedenciaCodigoONCAA, " & _
-    "          LOCDES.CodigoONCAA as LocalidadDestinoCodigoONCAA, " & _
-    "          LOCORI.CodigoLosGrobo as LocalidadProcedenciaCodigoLosGrobo, " & _
-    "          LOCDES.CodigoLosGrobo as LocalidadDestinoCodigoLosGrobo, " & _
-    "         Articulos.AuxiliarString6 as  [CodigoSagypa] , " & _
-    "         Articulos.AuxiliarString7 as  [CodigoZeni] , " & _
-    "          NumeroSubfijo as SufijoCartaDePorte, " & _
-    "          Tarifa as Tarifa, " & _
-    "          CDP.IdArticulo, " & _
-    "           Calidad, " & _
-    "          Cosecha, NobleGrado,Factor, ESTAB.Descripcion as CodigoEstablecimientoProcedencia, ESTAB.AuxiliarString1 as DescripcionEstablecimientoProcedencia, " & _
-    "           CTG as CTG, CEE, FechaAnulacion,MotivoAnulacion, " & _
-    "          '' as CadenaVacia, NetoProc, EnumSyngentaDivision, IdTipoMovimiento,CobraAcarreo,LiquidaViaje,IdCartaDePorte,SubNumeroVagon,Procedencia, Corredor2, IdClienteAuxiliar  " & _
-      " FROM CartasDePorte CDP " & _
-                   " LEFT OUTER JOIN Clientes CLIVEN ON CDP.Vendedor = CLIVEN.IdCliente " & _
-                   " LEFT OUTER JOIN Clientes CLICO1 ON CDP.CuentaOrden1 = CLICO1.IdCliente " & _
-                   " LEFT OUTER JOIN Clientes CLICO2 ON CDP.CuentaOrden2 = CLICO2.IdCliente " & _
-                   " LEFT OUTER JOIN Vendedores CLICOR ON CDP.Corredor = CLICOR.IdVendedor " & _
-                   " LEFT OUTER JOIN Clientes CLIENT ON CDP.Entregador = CLIENT.IdCliente " & _
-                   " LEFT OUTER JOIN Articulos ON CDP.IdArticulo = Articulos.IdArticulo " & _
-                   " LEFT OUTER JOIN Transportistas TRANS ON CDP.IdTransportista = TRANS.IdTransportista " & _
-                   " LEFT OUTER JOIN Choferes CHOF ON CDP.IdChofer = CHOF.IdChofer " & _
-                   " LEFT OUTER JOIN Localidades LOCORI ON CDP.Procedencia = LOCORI.IdLocalidad " & _
-                   " LEFT OUTER JOIN Provincias PROVORI ON LOCORI.IdProvincia = PROVORI.IdProvincia " & _
-                   " LEFT OUTER JOIN WilliamsDestinos LOCDES ON CDP.Destino = LOCDES.IdWilliamsDestino " & _
-                   " LEFT OUTER JOIN CDPEstablecimientos ESTAB ON CDP.IdEstablecimiento = ESTAB.IdEstablecimiento " & _
+        Dim strSQL = String.Format("  SELECT TOP " & _CONST_MAXROWS &
+      "    Exporta, Vendedor, Corredor, CuentaOrden1, CuentaOrden2, Entregador, NetoFinal, Anulada, " &
+    "      NumeroCartaDePorte   as  [C.Porte]  , " &
+    "       FechaDeCarga   as  Arribo , " &
+    "        convert(char, Hora, 108)   as  Hora, " &
+    "       FechaDescarga  , FechaArribo, " &
+    "        CONVERT(VARCHAR(8),FechaDescarga,108) as  HoraDescarga, " &
+    "       CDP.FechaIngreso  , " &
+    "         Articulos.Descripcion as  Producto, " &
+    "       Contrato  as  Contrato , " &
+    "       NetoPto   as  [Kg.Proc.] , " &
+    "       TaraPto   as  [Kg.Tara Proc.] , " &
+    "       BrutoPto   as  [Kg.Bruto Proc.], " &
+    "       BrutoFinal   as  [Kg.Bruto Desc.] , " &
+    "       TaraFinal   as  [Kg.Tara Desc.] , " &
+    "       NetoFinal   as  [Kg.Neto Desc.] , " &
+    "       NetoPto-NetoFinal   as  [Kg.Dif.] , " &
+    "         Humedad as  [H.%]	 , " &
+    "         HumedadDesnormalizada as [Mer.Kg.] , " &
+    "         Merma as Otras , " &
+    "        NetoProc  as  [Kg.Netos] , " &
+    "       CLIVEN.Razonsocial as   Titular  , " &
+    "       CLIVEN.CUIT as   TitularCUIT  , " &
+    "       CLICO1.Razonsocial as   Intermediario  , " &
+    "       CLICO1.CUIT as   IntermediarioCUIT  , " &
+    "       CLICO2.Razonsocial as   [R. Comercial]  , " &
+    "       CLICO2.CUIT as   [R. ComercialCUIT]  , " &
+    "       CLICOR.Nombre as    [Corredor ], " &
+    "       CLICOR.CUIT as    [CorredorCUIT], " &
+    "       CLIENT.Razonsocial  as  [Destinatario], " &
+    "       CLIENT.CUIT  as  [DestinatarioCUIT], " &
+    "       CLIENT.Razonsocial  as  [FacturadaA], " &
+    "       CLIENT.CUIT  as  [FacturadaACUIT], " &
+    "        Patente as  [Pat. Chasis] , " &
+    "         Acoplado as [Pat. Acoplado] , " &
+    "        TRANS.CUIT as [CUIT Transp.] , " &
+    "         TRANS.RazonSocial as Trasportista , " &
+    "         TRANS.RazonSocial as TrasportistaCUIT , " &
+    "         LOCDES.IdWilliamsDestino   as  Destino , " &
+    "         LOCDES.Descripcion   as  DestinoDesc , " &
+    "	    isnull(LOCDES.CUIT,'') 	 AS  DestinoCUIT, " &
+    "        LOCORI.Nombre as    [Procedcia.] , " &
+    "         FechaDescarga as   [Desc.], " &
+    "         CDP.Observaciones  as  [Cal.-Observaciones], " &
+    "         CHOF.CUIL as   [CUIT chofer], " &
+    "         CHOF.Nombre as   Chofer, " &
+    "         '' as  [Nro ONCA] , " &
+    "         '' as   [Pta ONCA], " &
+    "         '' as   Provincia, " &
+    "         '' as   [Nro CAC]	, " &
+    "          FechaVencimiento as  [Vencim.CP], " &
+    "          '' as  [Emision CP], " &
+    "          ''  as Sucursal, CDP.PuntoVenta, " &
+    "          KmARecorrer as  Km, " &
+    "          Tarifa as Tarifa, " &
+    "         Articulos.AuxiliarString5 as  [EspecieONCAA] , " &
+    "          LOCORI.IdLocalidad, " &
+    "          LOCDES.IdWilliamsDestino, " &
+    "          LOCORI.CodigoPostal as LocalidadProcedenciaCodigoPostal, " &
+    "          LOCDES.Codigo as LocalidadDestinoCodigoPostal, " &
+    "          LOCORI.CodigoONCAA as LocalidadProcedenciaCodigoONCAA, " &
+    "          LOCDES.CodigoONCAA as LocalidadDestinoCodigoONCAA, " &
+    "          LOCORI.CodigoLosGrobo as LocalidadProcedenciaCodigoLosGrobo, " &
+    "          LOCDES.CodigoLosGrobo as LocalidadDestinoCodigoLosGrobo, " &
+    "         Articulos.AuxiliarString6 as  [CodigoSagypa] , " &
+    "         Articulos.AuxiliarString7 as  [CodigoZeni] , " &
+    "          NumeroSubfijo as SufijoCartaDePorte, " &
+    "          Tarifa as Tarifa, " &
+    "          CDP.IdArticulo, " &
+    "           Calidad, " &
+    "          Cosecha, NobleGrado,Factor, ESTAB.Descripcion as CodigoEstablecimientoProcedencia, ESTAB.AuxiliarString1 as DescripcionEstablecimientoProcedencia, " &
+    "           CTG as CTG, CEE, FechaAnulacion,MotivoAnulacion, " &
+    "          '' as CadenaVacia, NetoProc, EnumSyngentaDivision, IdTipoMovimiento,CobraAcarreo,LiquidaViaje,IdCartaDePorte,SubNumeroVagon,Procedencia, Corredor2, IdClienteAuxiliar  " &
+      " FROM CartasDePorte CDP " &
+                   " LEFT OUTER JOIN Clientes CLIVEN ON CDP.Vendedor = CLIVEN.IdCliente " &
+                   " LEFT OUTER JOIN Clientes CLICO1 ON CDP.CuentaOrden1 = CLICO1.IdCliente " &
+                   " LEFT OUTER JOIN Clientes CLICO2 ON CDP.CuentaOrden2 = CLICO2.IdCliente " &
+                   " LEFT OUTER JOIN Vendedores CLICOR ON CDP.Corredor = CLICOR.IdVendedor " &
+                   " LEFT OUTER JOIN Clientes CLIENT ON CDP.Entregador = CLIENT.IdCliente " &
+                   " LEFT OUTER JOIN Articulos ON CDP.IdArticulo = Articulos.IdArticulo " &
+                   " LEFT OUTER JOIN Transportistas TRANS ON CDP.IdTransportista = TRANS.IdTransportista " &
+                   " LEFT OUTER JOIN Choferes CHOF ON CDP.IdChofer = CHOF.IdChofer " &
+                   " LEFT OUTER JOIN Localidades LOCORI ON CDP.Procedencia = LOCORI.IdLocalidad " &
+                   " LEFT OUTER JOIN Provincias PROVORI ON LOCORI.IdProvincia = PROVORI.IdProvincia " &
+                   " LEFT OUTER JOIN WilliamsDestinos LOCDES ON CDP.Destino = LOCDES.IdWilliamsDestino " &
+                   " LEFT OUTER JOIN CDPEstablecimientos ESTAB ON CDP.IdEstablecimiento = ESTAB.IdEstablecimiento " &
                 "")
 
 
@@ -7386,8 +7386,8 @@ Public Class CartaDePorteManager
 
 
 
-    Shared Function GetListDataTableDinamicoConWHERE_2(ByVal SC As String, ByVal estado As CartaDePorteManager.enumCDPestado, _
-                                                       ByVal strWHERE As String, bInsertarEnTablaTemporal As Boolean, _
+    Shared Function GetListDataTableDinamicoConWHERE_2(ByVal SC As String, ByVal estado As CartaDePorteManager.enumCDPestado,
+                                                       ByVal strWHERE As String, bInsertarEnTablaTemporal As Boolean,
                                                        Optional maxrows As Integer = 0) As DataTable
 
         'lo que sea dinámico, lo tendré que migrar para evitar inyeccion
@@ -7400,75 +7400,75 @@ Public Class CartaDePorteManager
 
         'hace falta levantar la cantidad de filas que levanto, no teniendo paginacion?
 
-        Dim strSQL = String.Format("  SELECT TOP " & maxrows & _
-      "  CDP.IdCartaDePorte, CDP.NumeroCartaDePorte, CDP.IdUsuarioIngreso, CDP.FechaIngreso, CDP.Anulada, CDP.IdUsuarioAnulo, CDP.FechaAnulacion, CDP.Observaciones, CDP.FechaTimeStamp, CDP.Vendedor, CDP.CuentaOrden1, CDP.CuentaOrden2, CDP.Corredor, CDP.Entregador, CDP.Procedencia, CDP.Patente, CDP.IdArticulo, CDP.IdStock, CDP.Partida, CDP.IdUnidad, CDP.IdUbicacion, CDP.Cantidad, CDP.Cupo, CDP.NetoProc, CDP.Calidad " & _
-"      ,CDP.BrutoPto      ,CDP.TaraPto      ,CDP.NetoPto      ,CDP.Acoplado      ,CDP.Humedad      ,CDP.Merma      ,CDP.NetoFinal      ,CDP.FechaDeCarga      ,CDP.FechaVencimiento      ,CDP.CEE      ,CDP.IdTransportista      ,CDP.TransportistaCUITdesnormalizado      ,CDP.IdChofer      ,CDP.ChoferCUITdesnormalizado      ,CDP.CTG      ,CDP.Contrato      ,CDP.Destino      ,CDP.Subcontr1      ,CDP.Subcontr2      ,CDP.Contrato1 " & _
-"      ,CDP.contrato2      ,CDP.KmARecorrer      ,CDP.Tarifa      ,CDP.FechaDescarga      ,CDP.Hora      ,CDP.NRecibo      ,CDP.CalidadDe      ,CDP.TaraFinal      ,CDP.BrutoFinal      ,CDP.Fumigada      ,CDP.Secada      ,CDP.Exporta      ,CDP.NobleExtranos      ,CDP.NobleNegros      ,CDP.NobleQuebrados      ,CDP.NobleDaniados      ,CDP.NobleChamico      ,CDP.NobleChamico2      ,CDP.NobleRevolcado      ,CDP.NobleObjetables      ,CDP.NobleAmohosados      ,CDP.NobleHectolitrico      ,CDP.NobleCarbon " & _
-"      ,CDP.NoblePanzaBlanca      ,CDP.NoblePicados      ,CDP.NobleMGrasa      ,CDP.NobleAcidezGrasa      ,CDP.NobleVerdes      ,CDP.NobleGrado      ,CDP.NobleConforme      ,CDP.NobleACamara      ,CDP.Cosecha      ,CDP.HumedadDesnormalizada      ,CDP.Factor      ,CDP.IdFacturaImputada      ,CDP.PuntoVenta      ,CDP.SubnumeroVagon      ,CDP.TarifaFacturada      ,CDP.TarifaSubcontratista1      ,CDP.TarifaSubcontratista2      ,CDP.FechaArribo      ,CDP.Version      ,CDP.MotivoAnulacion " & _
-"      ,CDP.NumeroSubfijo      ,CDP.IdEstablecimiento      ,CDP.EnumSyngentaDivision      ,CDP.Corredor2      ,CDP.IdUsuarioModifico      ,CDP.FechaModificacion      ,CDP.FechaEmision      ,CDP.EstaArchivada      ,CDP.ExcluirDeSubcontratistas      ,CDP.IdTipoMovimiento      ,CDP.IdClienteAFacturarle      ,CDP.SubnumeroDeFacturacion      ,CDP.AgregaItemDeGastosAdministrativos      ,CDP.CalidadGranosQuemados      ,CDP.CalidadGranosQuemadosBonifica_o_Rebaja      ,CDP.CalidadTierra      ,CDP.CalidadTierraBonifica_o_Rebaja      ,CDP.CalidadMermaChamico " & _
-"      ,CDP.CalidadMermaChamicoBonifica_o_Rebaja      ,CDP.CalidadMermaZarandeo      ,CDP.CalidadMermaZarandeoBonifica_o_Rebaja      ,CDP.FueraDeEstandar      ,CDP.CalidadPuntaSombreada      ,CDP.CobraAcarreo      ,CDP.LiquidaViaje      ,CDP.IdClienteAuxiliar      ,CDP.CalidadDescuentoFinal      ,CDP.PathImagen      ,CDP.PathImagen2 " & _
-"      ,CDP.AgrupadorDeTandaPeriodos      ,CDP.ClaveEncriptada      ,CDP.NumeroCartaEnTextoParaBusqueda      ,CDP.IdClienteEntregador      ,CDP.IdDetalleFactura      ,CDP.SojaSustentableCodCondicion      ,CDP.SojaSustentableCondicion      ,CDP.SojaSustentableNroEstablecimientoDeProduccion      ,CDP.IdClientePagadorFlete      ,CDP.SubnumeroVagonEnTextoParaBusqueda      ,CDP.IdCorredor2 " & _
-"      ,CDP.Acopio1      ,CDP.Acopio2      ,CDP.Acopio3      ,CDP.Acopio4      ,CDP.Acopio5   ,CDP.Acopio6      ,CDP.AcopioFacturarleA      ,CDP.CalidadGranosDanadosRebaja      ,CDP.CalidadGranosExtranosRebaja ,  " & _
-"			cast (cdp.NumeroCartaDePorte as varchar) +" & _
-"					CASE WHEN cdp.numerosubfijo<>0 OR cdp.subnumerovagon<>0 THEN " & _
-"           '  ' + cast (cdp.numerosubfijo as varchar) + '/' +cast (cdp.subnumerovagon as varchar) 	" & _
-"					ELSE " & _
-"            ''" & _
-"            End" & _
-"				as NumeroCompleto," & _
-"			datediff(minute,cdp.FechaModificacion,GETDATE()) as MinutosModifico, " & _
-" 			ISNULL(Articulos.AuxiliarString5,'') AS EspecieONCAA,	 " & _
-" 			ISNULL(Articulos.AuxiliarString6,'') AS CodigoSAJPYA,	 " & _
-" 			ISNULL(Articulos.AuxiliarString7,'') AS txtCodigoZeni,	 " & _
-"			isnull(CLIVEN.Razonsocial,'') + isnull(' - ' + ACO1.Descripcion,'')  AS TitularDesc, " & _
-"            isnull(CLIVEN.cuit,'') AS TitularCUIT, " & _
-"			isnull(CLICO1.Razonsocial,'') + isnull(' - ' + ACO2.Descripcion,'')  AS IntermediarioDesc, " & _
-"            isnull(CLICO1.cuit,'') AS IntermediarioCUIT, " & _
-"			isnull(CLICO2.Razonsocial,'') + isnull(' - ' + ACO3.Descripcion,'')  AS RComercialDesc, " & _
-"            isnull(CLICO2.cuit,'') AS RComercialCUIT, " & _
-"			isnull(CLICOR.Nombre,'') AS CorredorDesc, " & _
-"            isnull(CLICOR.cuit,'') AS CorredorCUIT, " & _
-"			isnull(CLIENT.Razonsocial,'') + isnull(' - ' + ACO5.Descripcion,'')  AS DestinatarioDesc, " & _
-"			isnull(CLIENTREG.Razonsocial,'') AS EntregadorDesc, " & _
-"            isnull(CLIENT.cuit,'') AS DestinatarioCUIT, " & _
-"			isnull(CLIAUX.Razonsocial,'') AS ClienteAuxiliarDesc, " & _
-"			isnull(CLIAUX.cuit,'') + isnull(' - ' + ACO6.Descripcion,'')   AS ClienteAuxiliarCUIT, " & _
-"			isnull(CLISC1.Razonsocial,'') AS Subcontr1Desc, " & _
-"            isnull(CLISC2.Razonsocial,'') AS Subcontr2Desc, " & _
-"             isnull(Articulos.Descripcion,'') AS Producto, " & _
-"			 Transportistas.cuit as  TransportistaCUIT, " & _
-"            isnull(Transportistas.RazonSocial,'') AS TransportistaDesc, " & _
-"			choferes.cuil as  ChoferCUIT, " & _
-"			choferes.Nombre as  ChoferDesc, " & _
-"           isnull(LOCORI.Nombre,'') AS ProcedenciaDesc, " & _
-"		isnull(LOCORI.CodigoPostal,'') AS ProcedenciaCodigoPostal, " & _
-"		isnull(LOCORI.CodigoONCAA,'') AS ProcedenciaCodigoONCAA, " & _
-"           isnull(PROVORI.Nombre,'') AS ProcedenciaProvinciaDesc, " & _
-"       isnull(LOCDES.Descripcion,'') AS DestinoDesc, " & _
-"            '' AS  DestinoCodigoPostal, " & _
-"			isnull(LOCDES.codigoONCAA,'') AS  DestinoCodigoONCAA, " & _
-"           DATENAME(month, FechaDescarga) AS Mes, " & _
-"          DATEPART(year, FechaDescarga) AS Ano,  " & _
-"      	FAC.TipoABC + '-' + CAST(FAC.PuntoVenta AS VARCHAR) + '-' + CAST(FAC.NumeroFactura AS VARCHAR) AS Factura, " & _
-"           FAC.FechaFactura, " & _
-"          isnull(CLIFAC.RazonSocial,'') AS ClienteFacturado, " & _
-"         isnull(CLIFAC.cuit,'') AS ClienteFacturadoCUIT, " & _
-"		Calidades.Descripcion AS CalidadDesc, " & _
-"	    E1.Nombre as UsuarioIngreso,isnull(ESTAB.Descripcion,'') COLLATE SQL_Latin1_General_CP1_CI_AS +' '+ isnull(ESTAB.AuxiliarString1,'') COLLATE SQL_Latin1_General_CP1_CI_AS+ ' '+ isnull(ESTAB.AuxiliarString2,'') COLLATE SQL_Latin1_General_CP1_CI_AS  " & _
-"                                                                                               as EstablecimientoDesc, " & _
-"			isnull(CLIENTFLET.Razonsocial,'') AS ClientePagadorFleteDesc ,        " & _
-"   isnull(LOCORI.Partido,'') AS ProcedenciaProvinciaPartido,   " & _
-"   isnull(PARTORI.Codigo,'') AS ProcedenciaPartidoNormalizadaCodigo, " & _
-"   isnull(PROVDEST.Nombre,'') AS DestinoProvinciaDesc, " & _
-"  isnull(PARTORI.Nombre,'') AS ProcedenciaPartidoNormalizada   , " & _
-"			isnull(CLICOR2.Nombre,'') AS CorredorDesc2, " & _
-"            isnull(CLICOR2.cuit,'') AS CorredorCUIT2, " & _
-"			isnull(CLIENTREG.cuit,'') AS EntregadorCUIT, " & _
-"		isnull(LOCORI.CodigoAFIP,'') AS CodigoAFIP,  " & _
-"		TieneRecibidorOficial,  " & _
-"		EstadoRecibidor,  " & _
-"		MotivoRechazo,  " & _
-"		isnull(CLIENTACOND.Razonsocial,'') AS ClienteAcondicionadorDesc   " _
+        Dim strSQL = String.Format("  SELECT TOP " & maxrows &
+      "  CDP.IdCartaDePorte, CDP.NumeroCartaDePorte, CDP.IdUsuarioIngreso, CDP.FechaIngreso, CDP.Anulada, CDP.IdUsuarioAnulo, CDP.FechaAnulacion, CDP.Observaciones, CDP.FechaTimeStamp, CDP.Vendedor, CDP.CuentaOrden1, CDP.CuentaOrden2, CDP.Corredor, CDP.Entregador, CDP.Procedencia, CDP.Patente, CDP.IdArticulo, CDP.IdStock, CDP.Partida, CDP.IdUnidad, CDP.IdUbicacion, CDP.Cantidad, CDP.Cupo, CDP.NetoProc, CDP.Calidad " &
+"      ,CDP.BrutoPto      ,CDP.TaraPto      ,CDP.NetoPto      ,CDP.Acoplado      ,CDP.Humedad      ,CDP.Merma      ,CDP.NetoFinal      ,CDP.FechaDeCarga      ,CDP.FechaVencimiento      ,CDP.CEE      ,CDP.IdTransportista      ,CDP.TransportistaCUITdesnormalizado      ,CDP.IdChofer      ,CDP.ChoferCUITdesnormalizado      ,CDP.CTG      ,CDP.Contrato      ,CDP.Destino      ,CDP.Subcontr1      ,CDP.Subcontr2      ,CDP.Contrato1 " &
+"      ,CDP.contrato2      ,CDP.KmARecorrer      ,CDP.Tarifa      ,CDP.FechaDescarga      ,CDP.Hora      ,CDP.NRecibo      ,CDP.CalidadDe      ,CDP.TaraFinal      ,CDP.BrutoFinal      ,CDP.Fumigada      ,CDP.Secada      ,CDP.Exporta      ,CDP.NobleExtranos      ,CDP.NobleNegros      ,CDP.NobleQuebrados      ,CDP.NobleDaniados      ,CDP.NobleChamico      ,CDP.NobleChamico2      ,CDP.NobleRevolcado      ,CDP.NobleObjetables      ,CDP.NobleAmohosados      ,CDP.NobleHectolitrico      ,CDP.NobleCarbon " &
+"      ,CDP.NoblePanzaBlanca      ,CDP.NoblePicados      ,CDP.NobleMGrasa      ,CDP.NobleAcidezGrasa      ,CDP.NobleVerdes      ,CDP.NobleGrado      ,CDP.NobleConforme      ,CDP.NobleACamara      ,CDP.Cosecha      ,CDP.HumedadDesnormalizada      ,CDP.Factor      ,CDP.IdFacturaImputada      ,CDP.PuntoVenta      ,CDP.SubnumeroVagon      ,CDP.TarifaFacturada      ,CDP.TarifaSubcontratista1      ,CDP.TarifaSubcontratista2      ,CDP.FechaArribo      ,CDP.Version      ,CDP.MotivoAnulacion " &
+"      ,CDP.NumeroSubfijo      ,CDP.IdEstablecimiento      ,CDP.EnumSyngentaDivision      ,CDP.Corredor2      ,CDP.IdUsuarioModifico      ,CDP.FechaModificacion      ,CDP.FechaEmision      ,CDP.EstaArchivada      ,CDP.ExcluirDeSubcontratistas      ,CDP.IdTipoMovimiento      ,CDP.IdClienteAFacturarle      ,CDP.SubnumeroDeFacturacion      ,CDP.AgregaItemDeGastosAdministrativos      ,CDP.CalidadGranosQuemados      ,CDP.CalidadGranosQuemadosBonifica_o_Rebaja      ,CDP.CalidadTierra      ,CDP.CalidadTierraBonifica_o_Rebaja      ,CDP.CalidadMermaChamico " &
+"      ,CDP.CalidadMermaChamicoBonifica_o_Rebaja      ,CDP.CalidadMermaZarandeo      ,CDP.CalidadMermaZarandeoBonifica_o_Rebaja      ,CDP.FueraDeEstandar      ,CDP.CalidadPuntaSombreada      ,CDP.CobraAcarreo      ,CDP.LiquidaViaje      ,CDP.IdClienteAuxiliar      ,CDP.CalidadDescuentoFinal      ,CDP.PathImagen      ,CDP.PathImagen2 " &
+"      ,CDP.AgrupadorDeTandaPeriodos      ,CDP.ClaveEncriptada      ,CDP.NumeroCartaEnTextoParaBusqueda      ,CDP.IdClienteEntregador      ,CDP.IdDetalleFactura      ,CDP.SojaSustentableCodCondicion      ,CDP.SojaSustentableCondicion      ,CDP.SojaSustentableNroEstablecimientoDeProduccion      ,CDP.IdClientePagadorFlete      ,CDP.SubnumeroVagonEnTextoParaBusqueda      ,CDP.IdCorredor2 " &
+"      ,CDP.Acopio1      ,CDP.Acopio2      ,CDP.Acopio3      ,CDP.Acopio4      ,CDP.Acopio5   ,CDP.Acopio6      ,CDP.AcopioFacturarleA      ,CDP.CalidadGranosDanadosRebaja      ,CDP.CalidadGranosExtranosRebaja ,  " &
+"			cast (cdp.NumeroCartaDePorte as varchar) +" &
+"					CASE WHEN cdp.numerosubfijo<>0 OR cdp.subnumerovagon<>0 THEN " &
+"           '  ' + cast (cdp.numerosubfijo as varchar) + '/' +cast (cdp.subnumerovagon as varchar) 	" &
+"					ELSE " &
+"            ''" &
+"            End" &
+"				as NumeroCompleto," &
+"			datediff(minute,cdp.FechaModificacion,GETDATE()) as MinutosModifico, " &
+" 			ISNULL(Articulos.AuxiliarString5,'') AS EspecieONCAA,	 " &
+" 			ISNULL(Articulos.AuxiliarString6,'') AS CodigoSAJPYA,	 " &
+" 			ISNULL(Articulos.AuxiliarString7,'') AS txtCodigoZeni,	 " &
+"			isnull(CLIVEN.Razonsocial,'') + isnull(' - ' + ACO1.Descripcion,'')  AS TitularDesc, " &
+"            isnull(CLIVEN.cuit,'') AS TitularCUIT, " &
+"			isnull(CLICO1.Razonsocial,'') + isnull(' - ' + ACO2.Descripcion,'')  AS IntermediarioDesc, " &
+"            isnull(CLICO1.cuit,'') AS IntermediarioCUIT, " &
+"			isnull(CLICO2.Razonsocial,'') + isnull(' - ' + ACO3.Descripcion,'')  AS RComercialDesc, " &
+"            isnull(CLICO2.cuit,'') AS RComercialCUIT, " &
+"			isnull(CLICOR.Nombre,'') AS CorredorDesc, " &
+"            isnull(CLICOR.cuit,'') AS CorredorCUIT, " &
+"			isnull(CLIENT.Razonsocial,'') + isnull(' - ' + ACO5.Descripcion,'')  AS DestinatarioDesc, " &
+"			isnull(CLIENTREG.Razonsocial,'') AS EntregadorDesc, " &
+"            isnull(CLIENT.cuit,'') AS DestinatarioCUIT, " &
+"			isnull(CLIAUX.Razonsocial,'') AS ClienteAuxiliarDesc, " &
+"			isnull(CLIAUX.cuit,'') + isnull(' - ' + ACO6.Descripcion,'')   AS ClienteAuxiliarCUIT, " &
+"			isnull(CLISC1.Razonsocial,'') AS Subcontr1Desc, " &
+"            isnull(CLISC2.Razonsocial,'') AS Subcontr2Desc, " &
+"             isnull(Articulos.Descripcion,'') AS Producto, " &
+"			 Transportistas.cuit as  TransportistaCUIT, " &
+"            isnull(Transportistas.RazonSocial,'') AS TransportistaDesc, " &
+"			choferes.cuil as  ChoferCUIT, " &
+"			choferes.Nombre as  ChoferDesc, " &
+"           isnull(LOCORI.Nombre,'') AS ProcedenciaDesc, " &
+"		isnull(LOCORI.CodigoPostal,'') AS ProcedenciaCodigoPostal, " &
+"		isnull(LOCORI.CodigoONCAA,'') AS ProcedenciaCodigoONCAA, " &
+"           isnull(PROVORI.Nombre,'') AS ProcedenciaProvinciaDesc, " &
+"       isnull(LOCDES.Descripcion,'') AS DestinoDesc, " &
+"            '' AS  DestinoCodigoPostal, " &
+"			isnull(LOCDES.codigoONCAA,'') AS  DestinoCodigoONCAA, " &
+"           DATENAME(month, FechaDescarga) AS Mes, " &
+"          DATEPART(year, FechaDescarga) AS Ano,  " &
+"      	FAC.TipoABC + '-' + CAST(FAC.PuntoVenta AS VARCHAR) + '-' + CAST(FAC.NumeroFactura AS VARCHAR) AS Factura, " &
+"           FAC.FechaFactura, " &
+"          isnull(CLIFAC.RazonSocial,'') AS ClienteFacturado, " &
+"         isnull(CLIFAC.cuit,'') AS ClienteFacturadoCUIT, " &
+"		Calidades.Descripcion AS CalidadDesc, " &
+"	    E1.Nombre as UsuarioIngreso,isnull(ESTAB.Descripcion,'') COLLATE SQL_Latin1_General_CP1_CI_AS +' '+ isnull(ESTAB.AuxiliarString1,'') COLLATE SQL_Latin1_General_CP1_CI_AS+ ' '+ isnull(ESTAB.AuxiliarString2,'') COLLATE SQL_Latin1_General_CP1_CI_AS  " &
+"                                                                                               as EstablecimientoDesc, " &
+"			isnull(CLIENTFLET.Razonsocial,'') AS ClientePagadorFleteDesc ,        " &
+"   isnull(LOCORI.Partido,'') AS ProcedenciaProvinciaPartido,   " &
+"   isnull(PARTORI.Codigo,'') AS ProcedenciaPartidoNormalizadaCodigo, " &
+"   isnull(PROVDEST.Nombre,'') AS DestinoProvinciaDesc, " &
+"  isnull(PARTORI.Nombre,'') AS ProcedenciaPartidoNormalizada   , " &
+"			isnull(CLICOR2.Nombre,'') AS CorredorDesc2, " &
+"            isnull(CLICOR2.cuit,'') AS CorredorCUIT2, " &
+"			isnull(CLIENTREG.cuit,'') AS EntregadorCUIT, " &
+"		isnull(LOCORI.CodigoAFIP,'') AS CodigoAFIP,  " &
+"		TieneRecibidorOficial,  " &
+"		EstadoRecibidor,  " &
+"		MotivoRechazo,  " &
+"		isnull(CLIENTACOND.Razonsocial,'') AS ClienteAcondicionadorDesc   "
 )
 
 
@@ -7477,37 +7477,37 @@ Public Class CartaDePorteManager
 
 
 
-        Dim strFROM = _
-        "   FROM    CartasDePorte CDP " & _
-        "       LEFT OUTER JOIN Clientes CLIVEN ON CDP.Vendedor = CLIVEN.IdCliente " & _
-        "       LEFT OUTER JOIN Clientes CLICO1 ON CDP.CuentaOrden1 = CLICO1.IdCliente " & _
-        "       LEFT OUTER JOIN Clientes CLICO2 ON CDP.CuentaOrden2 = CLICO2.IdCliente " & _
-        "       LEFT OUTER JOIN Clientes CLIAUX ON CDP.IdClienteAuxiliar= CLIAUX.IdCliente " & _
-        "       LEFT OUTER JOIN Clientes CLIENTREG ON CDP.IdClienteEntregador= CLIENTREG.IdCliente " & _
-        "       LEFT OUTER JOIN Clientes CLIENTFLET ON CDP.IdClientePagadorFlete= CLIENTFLET.IdCliente " & _
-        "       LEFT OUTER JOIN Clientes CLIENTACOND ON CDP.ClienteAcondicionador= CLIENTACOND.IdCliente " & _
-        "       LEFT OUTER JOIN Vendedores CLICOR ON CDP.Corredor = CLICOR.IdVendedor " & _
-        "       LEFT OUTER JOIN Vendedores CLICOR2 ON CDP.Corredor2 = CLICOR2.IdVendedor " & _
-        "       LEFT OUTER JOIN Clientes CLIENT ON CDP.Entregador = CLIENT.IdCliente " & _
-        "       LEFT OUTER JOIN Clientes CLISC1 ON CDP.Subcontr1 = CLISC1.IdCliente " & _
-        "       LEFT OUTER JOIN Clientes CLISC2 ON CDP.Subcontr2 = CLISC2.IdCliente " & _
-        "       LEFT OUTER JOIN Articulos ON CDP.IdArticulo = Articulos.IdArticulo " & _
-        "       LEFT OUTER JOIN Calidades ON CDP.CalidadDe = Calidades.IdCalidad " & _
-        "       LEFT OUTER JOIN Transportistas ON CDP.IdTransportista = Transportistas.IdTransportista " & _
-        "		LEFT OUTER JOIN Choferes ON CDP.IdChofer = Choferes.IdChofer " & _
-        "       LEFT OUTER JOIN Localidades LOCORI ON CDP.Procedencia = LOCORI.IdLocalidad " & _
-        "       LEFT OUTER JOIN Provincias PROVORI ON LOCORI.IdProvincia = PROVORI.IdProvincia " & _
-        "       LEFT OUTER JOIN WilliamsDestinos LOCDES ON CDP.Destino = LOCDES.IdWilliamsDestino " & _
-        "       LEFT OUTER JOIN CDPEstablecimientos ESTAB ON CDP.IdEstablecimiento = ESTAB.IdEstablecimiento " & _
-        "       LEFT OUTER JOIN Facturas FAC ON CDP.idFacturaImputada = FAC.IdFactura " & _
-        "       LEFT OUTER JOIN Clientes CLIFAC ON CLIFAC.IdCliente = FAC.IdCliente " & _
-        "       LEFT OUTER JOIN Partidos PARTORI ON LOCORI.IdPartido = PARTORI.IdPartido " & _
-        "       LEFT OUTER JOIN Provincias PROVDEST ON LOCDES.IdProvincia = PROVDEST.IdProvincia " & _
-        "       LEFT OUTER JOIN Empleados E1 ON CDP.IdUsuarioIngreso = E1.IdEmpleado " & _
-        "       LEFT OUTER JOIN CartasPorteAcopios ACO1 ON ACO1.IdAcopio= CDP.Acopio1 " & _
-        "       LEFT OUTER JOIN CartasPorteAcopios ACO2 ON ACO2.IdAcopio= CDP.Acopio2 " & _
-        "       LEFT OUTER JOIN CartasPorteAcopios ACO6 ON ACO6.IdAcopio= CDP.Acopio6 " & _
-        "       LEFT OUTER JOIN CartasPorteAcopios ACO3 ON ACO3.IdAcopio= CDP.Acopio3 " & _
+        Dim strFROM =
+        "   FROM    CartasDePorte CDP " &
+        "       LEFT OUTER JOIN Clientes CLIVEN ON CDP.Vendedor = CLIVEN.IdCliente " &
+        "       LEFT OUTER JOIN Clientes CLICO1 ON CDP.CuentaOrden1 = CLICO1.IdCliente " &
+        "       LEFT OUTER JOIN Clientes CLICO2 ON CDP.CuentaOrden2 = CLICO2.IdCliente " &
+        "       LEFT OUTER JOIN Clientes CLIAUX ON CDP.IdClienteAuxiliar= CLIAUX.IdCliente " &
+        "       LEFT OUTER JOIN Clientes CLIENTREG ON CDP.IdClienteEntregador= CLIENTREG.IdCliente " &
+        "       LEFT OUTER JOIN Clientes CLIENTFLET ON CDP.IdClientePagadorFlete= CLIENTFLET.IdCliente " &
+        "       LEFT OUTER JOIN Clientes CLIENTACOND ON CDP.ClienteAcondicionador= CLIENTACOND.IdCliente " &
+        "       LEFT OUTER JOIN Vendedores CLICOR ON CDP.Corredor = CLICOR.IdVendedor " &
+        "       LEFT OUTER JOIN Vendedores CLICOR2 ON CDP.Corredor2 = CLICOR2.IdVendedor " &
+        "       LEFT OUTER JOIN Clientes CLIENT ON CDP.Entregador = CLIENT.IdCliente " &
+        "       LEFT OUTER JOIN Clientes CLISC1 ON CDP.Subcontr1 = CLISC1.IdCliente " &
+        "       LEFT OUTER JOIN Clientes CLISC2 ON CDP.Subcontr2 = CLISC2.IdCliente " &
+        "       LEFT OUTER JOIN Articulos ON CDP.IdArticulo = Articulos.IdArticulo " &
+        "       LEFT OUTER JOIN Calidades ON CDP.CalidadDe = Calidades.IdCalidad " &
+        "       LEFT OUTER JOIN Transportistas ON CDP.IdTransportista = Transportistas.IdTransportista " &
+        "		LEFT OUTER JOIN Choferes ON CDP.IdChofer = Choferes.IdChofer " &
+        "       LEFT OUTER JOIN Localidades LOCORI ON CDP.Procedencia = LOCORI.IdLocalidad " &
+        "       LEFT OUTER JOIN Provincias PROVORI ON LOCORI.IdProvincia = PROVORI.IdProvincia " &
+        "       LEFT OUTER JOIN WilliamsDestinos LOCDES ON CDP.Destino = LOCDES.IdWilliamsDestino " &
+        "       LEFT OUTER JOIN CDPEstablecimientos ESTAB ON CDP.IdEstablecimiento = ESTAB.IdEstablecimiento " &
+        "       LEFT OUTER JOIN Facturas FAC ON CDP.idFacturaImputada = FAC.IdFactura " &
+        "       LEFT OUTER JOIN Clientes CLIFAC ON CLIFAC.IdCliente = FAC.IdCliente " &
+        "       LEFT OUTER JOIN Partidos PARTORI ON LOCORI.IdPartido = PARTORI.IdPartido " &
+        "       LEFT OUTER JOIN Provincias PROVDEST ON LOCDES.IdProvincia = PROVDEST.IdProvincia " &
+        "       LEFT OUTER JOIN Empleados E1 ON CDP.IdUsuarioIngreso = E1.IdEmpleado " &
+        "       LEFT OUTER JOIN CartasPorteAcopios ACO1 ON ACO1.IdAcopio= CDP.Acopio1 " &
+        "       LEFT OUTER JOIN CartasPorteAcopios ACO2 ON ACO2.IdAcopio= CDP.Acopio2 " &
+        "       LEFT OUTER JOIN CartasPorteAcopios ACO6 ON ACO6.IdAcopio= CDP.Acopio6 " &
+        "       LEFT OUTER JOIN CartasPorteAcopios ACO3 ON ACO3.IdAcopio= CDP.Acopio3 " &
         "       LEFT OUTER JOIN CartasPorteAcopios ACO5 ON ACO5.IdAcopio= CDP.Acopio5 "
 
 
@@ -7570,8 +7570,8 @@ Public Class CartaDePorteManager
 
 
 
-    Shared Function GetListDataTableDinamicoConWHERE_2_CadenaSQL_COUNT(ByVal SC As String, ByVal estado As CartaDePorteManager.enumCDPestado, _
-                                                   ByVal strWHERE As String, bInsertarEnTablaTemporal As Boolean, _
+    Shared Function GetListDataTableDinamicoConWHERE_2_CadenaSQL_COUNT(ByVal SC As String, ByVal estado As CartaDePorteManager.enumCDPestado,
+                                                   ByVal strWHERE As String, bInsertarEnTablaTemporal As Boolean,
                                                    Optional maxrows As Integer = 0) As String
 
 
@@ -7588,31 +7588,31 @@ Public Class CartaDePorteManager
 
         Dim strSQL = String.Format("  SELECT count(*) ")
 
-        Dim strFROM = _
-        "   FROM    CartasDePorte CDP " & _
-        "          LEFT OUTER JOIN Clientes CLIVEN ON CDP.Vendedor = CLIVEN.IdCliente " & _
-        "       LEFT OUTER JOIN Clientes CLICO1 ON CDP.CuentaOrden1 = CLICO1.IdCliente " & _
-        "       LEFT OUTER JOIN Clientes CLICO2 ON CDP.CuentaOrden2 = CLICO2.IdCliente " & _
-        "       LEFT OUTER JOIN Clientes CLIAUX ON CDP.IdClienteAuxiliar= CLIAUX.IdCliente " & _
-        "       LEFT OUTER JOIN Clientes CLIENTREG ON CDP.IdClienteEntregador= CLIENTREG.IdCliente " & _
-        "       LEFT OUTER JOIN Clientes CLIENTFLET ON CDP.IdClientePagadorFlete= CLIENTFLET.IdCliente " & _
-        "       LEFT OUTER JOIN Vendedores CLICOR ON CDP.Corredor = CLICOR.IdVendedor " & _
-        "       LEFT OUTER JOIN Vendedores CLICOR2 ON CDP.Corredor2 = CLICOR2.IdVendedor " & _
-        "       LEFT OUTER JOIN Clientes CLIENT ON CDP.Entregador = CLIENT.IdCliente " & _
-        "        LEFT OUTER JOIN Clientes CLISC1 ON CDP.Subcontr1 = CLISC1.IdCliente " & _
-        "         LEFT OUTER JOIN Clientes CLISC2 ON CDP.Subcontr2 = CLISC2.IdCliente " & _
-        "         LEFT OUTER JOIN Articulos ON CDP.IdArticulo = Articulos.IdArticulo " & _
-        "          LEFT OUTER JOIN Calidades ON CDP.CalidadDe = Calidades.IdCalidad " & _
-        "           LEFT OUTER JOIN Transportistas ON CDP.IdTransportista = Transportistas.IdTransportista " & _
-        "			LEFT OUTER JOIN Choferes ON CDP.IdChofer = Choferes.IdChofer " & _
-        "           LEFT OUTER JOIN Localidades LOCORI ON CDP.Procedencia = LOCORI.IdLocalidad " & _
-        "           LEFT OUTER JOIN Provincias PROVORI ON LOCORI.IdProvincia = PROVORI.IdProvincia " & _
-        "           LEFT OUTER JOIN WilliamsDestinos LOCDES ON CDP.Destino = LOCDES.IdWilliamsDestino " & _
-        "           LEFT OUTER JOIN CDPEstablecimientos ESTAB ON CDP.IdEstablecimiento = ESTAB.IdEstablecimiento " & _
-        "            LEFT OUTER JOIN Facturas FAC ON CDP.idFacturaImputada = FAC.IdFactura " & _
-        "            LEFT OUTER JOIN Clientes CLIFAC ON CLIFAC.IdCliente = FAC.IdCliente " & _
-        "            LEFT OUTER JOIN Partidos PARTORI ON LOCORI.IdPartido = PARTORI.IdPartido " & _
-        "            LEFT OUTER JOIN Provincias PROVDEST ON LOCDES.IdProvincia = PROVDEST.IdProvincia " & _
+        Dim strFROM =
+        "   FROM    CartasDePorte CDP " &
+        "          LEFT OUTER JOIN Clientes CLIVEN ON CDP.Vendedor = CLIVEN.IdCliente " &
+        "       LEFT OUTER JOIN Clientes CLICO1 ON CDP.CuentaOrden1 = CLICO1.IdCliente " &
+        "       LEFT OUTER JOIN Clientes CLICO2 ON CDP.CuentaOrden2 = CLICO2.IdCliente " &
+        "       LEFT OUTER JOIN Clientes CLIAUX ON CDP.IdClienteAuxiliar= CLIAUX.IdCliente " &
+        "       LEFT OUTER JOIN Clientes CLIENTREG ON CDP.IdClienteEntregador= CLIENTREG.IdCliente " &
+        "       LEFT OUTER JOIN Clientes CLIENTFLET ON CDP.IdClientePagadorFlete= CLIENTFLET.IdCliente " &
+        "       LEFT OUTER JOIN Vendedores CLICOR ON CDP.Corredor = CLICOR.IdVendedor " &
+        "       LEFT OUTER JOIN Vendedores CLICOR2 ON CDP.Corredor2 = CLICOR2.IdVendedor " &
+        "       LEFT OUTER JOIN Clientes CLIENT ON CDP.Entregador = CLIENT.IdCliente " &
+        "        LEFT OUTER JOIN Clientes CLISC1 ON CDP.Subcontr1 = CLISC1.IdCliente " &
+        "         LEFT OUTER JOIN Clientes CLISC2 ON CDP.Subcontr2 = CLISC2.IdCliente " &
+        "         LEFT OUTER JOIN Articulos ON CDP.IdArticulo = Articulos.IdArticulo " &
+        "          LEFT OUTER JOIN Calidades ON CDP.CalidadDe = Calidades.IdCalidad " &
+        "           LEFT OUTER JOIN Transportistas ON CDP.IdTransportista = Transportistas.IdTransportista " &
+        "			LEFT OUTER JOIN Choferes ON CDP.IdChofer = Choferes.IdChofer " &
+        "           LEFT OUTER JOIN Localidades LOCORI ON CDP.Procedencia = LOCORI.IdLocalidad " &
+        "           LEFT OUTER JOIN Provincias PROVORI ON LOCORI.IdProvincia = PROVORI.IdProvincia " &
+        "           LEFT OUTER JOIN WilliamsDestinos LOCDES ON CDP.Destino = LOCDES.IdWilliamsDestino " &
+        "           LEFT OUTER JOIN CDPEstablecimientos ESTAB ON CDP.IdEstablecimiento = ESTAB.IdEstablecimiento " &
+        "            LEFT OUTER JOIN Facturas FAC ON CDP.idFacturaImputada = FAC.IdFactura " &
+        "            LEFT OUTER JOIN Clientes CLIFAC ON CLIFAC.IdCliente = FAC.IdCliente " &
+        "            LEFT OUTER JOIN Partidos PARTORI ON LOCORI.IdPartido = PARTORI.IdPartido " &
+        "            LEFT OUTER JOIN Provincias PROVDEST ON LOCDES.IdProvincia = PROVDEST.IdProvincia " &
         "  LEFT OUTER JOIN Empleados E1 ON CDP.IdUsuarioIngreso = E1.IdEmpleado "
 
 
@@ -7633,8 +7633,8 @@ Public Class CartaDePorteManager
     End Function
 
 
-    Shared Function GetListDataTableDinamicoConWHERE_2_CadenaSQL(ByVal SC As String, ByVal estado As CartaDePorteManager.enumCDPestado, _
-                                                       ByVal strWHERE As String, bInsertarEnTablaTemporal As Boolean, _
+    Shared Function GetListDataTableDinamicoConWHERE_2_CadenaSQL(ByVal SC As String, ByVal estado As CartaDePorteManager.enumCDPestado,
+                                                       ByVal strWHERE As String, bInsertarEnTablaTemporal As Boolean,
                                                        Optional maxrows As Integer = 0) As String
 
         'lo que sea dinámico, lo tendré que migrar para evitar inyeccion
@@ -7648,101 +7648,101 @@ Public Class CartaDePorteManager
         'hace falta levantar la cantidad de filas que levanto, no teniendo paginacion?
 
 
-        Dim strSQL = String.Format("  SELECT TOP " & maxrows & _
-      "  CDP.IdCartaDePorte, CDP.NumeroCartaDePorte, CDP.IdUsuarioIngreso, CDP.FechaIngreso, CDP.Anulada, CDP.IdUsuarioAnulo, CDP.FechaAnulacion, CDP.Observaciones, CDP.FechaTimeStamp, CDP.Vendedor, CDP.CuentaOrden1, CDP.CuentaOrden2, CDP.Corredor, CDP.Entregador, CDP.Procedencia, CDP.Patente, CDP.IdArticulo, CDP.IdStock, CDP.Partida, CDP.IdUnidad, CDP.IdUbicacion, CDP.Cantidad, CDP.Cupo, CDP.NetoProc, CDP.Calidad " & _
-"      ,CDP.BrutoPto      ,CDP.TaraPto      ,CDP.NetoPto      ,CDP.Acoplado      ,CDP.Humedad      ,CDP.Merma      ,CDP.NetoFinal      ,CDP.FechaDeCarga      ,CDP.FechaVencimiento      ,CDP.CEE      ,CDP.IdTransportista      ,CDP.TransportistaCUITdesnormalizado      ,CDP.IdChofer      ,CDP.ChoferCUITdesnormalizado      ,CDP.CTG      ,CDP.Contrato      ,CDP.Destino      ,CDP.Subcontr1      ,CDP.Subcontr2      ,CDP.Contrato1 " & _
-"      ,CDP.contrato2      ,CDP.KmARecorrer      ,CDP.Tarifa      ,CDP.FechaDescarga      ,CDP.Hora      ,CDP.NRecibo      ,CDP.CalidadDe      ,CDP.TaraFinal      ,CDP.BrutoFinal      ,CDP.Fumigada      ,CDP.Secada      ,CDP.Exporta      ,CDP.NobleExtranos      ,CDP.NobleNegros      ,CDP.NobleQuebrados      ,CDP.NobleDaniados      ,CDP.NobleChamico      ,CDP.NobleChamico2      ,CDP.NobleRevolcado      ,CDP.NobleObjetables      ,CDP.NobleAmohosados      ,CDP.NobleHectolitrico      ,CDP.NobleCarbon " & _
-"      ,CDP.NoblePanzaBlanca      ,CDP.NoblePicados      ,CDP.NobleMGrasa      ,CDP.NobleAcidezGrasa      ,CDP.NobleVerdes      ,CDP.NobleGrado      ,CDP.NobleConforme      ,CDP.NobleACamara      ,CDP.Cosecha      ,CDP.HumedadDesnormalizada      ,CDP.Factor      ,CDP.IdFacturaImputada      ,CDP.PuntoVenta      ,CDP.SubnumeroVagon      ,CDP.TarifaFacturada      ,CDP.TarifaSubcontratista1      ,CDP.TarifaSubcontratista2      ,CDP.FechaArribo      ,CDP.Version      ,CDP.MotivoAnulacion " & _
-"      ,CDP.NumeroSubfijo      ,CDP.IdEstablecimiento      ,CDP.EnumSyngentaDivision      ,CDP.Corredor2      ,CDP.IdUsuarioModifico      ,CDP.FechaModificacion      ,CDP.FechaEmision      ,CDP.EstaArchivada      ,CDP.ExcluirDeSubcontratistas      ,CDP.IdTipoMovimiento      ,CDP.IdClienteAFacturarle      ,CDP.SubnumeroDeFacturacion      ,CDP.AgregaItemDeGastosAdministrativos      ,CDP.CalidadGranosQuemados      ,CDP.CalidadGranosQuemadosBonifica_o_Rebaja      ,CDP.CalidadTierra      ,CDP.CalidadTierraBonifica_o_Rebaja      ,CDP.CalidadMermaChamico " & _
-"      ,CDP.CalidadMermaChamicoBonifica_o_Rebaja      ,CDP.CalidadMermaZarandeo      ,CDP.CalidadMermaZarandeoBonifica_o_Rebaja      ,CDP.FueraDeEstandar      ,CDP.CalidadPuntaSombreada      ,CDP.CobraAcarreo      ,CDP.LiquidaViaje      ,CDP.IdClienteAuxiliar      ,CDP.CalidadDescuentoFinal      ,CDP.PathImagen      ,CDP.PathImagen2 " & _
-"      ,CDP.AgrupadorDeTandaPeriodos      ,CDP.ClaveEncriptada      ,CDP.NumeroCartaEnTextoParaBusqueda      ,CDP.IdClienteEntregador      ,CDP.IdDetalleFactura      ,CDP.SojaSustentableCodCondicion      ,CDP.SojaSustentableCondicion      ,CDP.SojaSustentableNroEstablecimientoDeProduccion      ,CDP.IdClientePagadorFlete      ,CDP.SubnumeroVagonEnTextoParaBusqueda      ,CDP.IdCorredor2 " & _
-"      ,CDP.Acopio1      ,CDP.Acopio2      ,CDP.Acopio3      ,CDP.Acopio4      ,CDP.Acopio5 ,CDP.Acopio6        ,CDP.AcopioFacturarleA      ,CDP.CalidadGranosDanadosRebaja      ,CDP.CalidadGranosExtranosRebaja , " & _
-"			cast (cdp.NumeroCartaDePorte as varchar) +" & _
-"					CASE WHEN cdp.numerosubfijo<>0 OR cdp.subnumerovagon<>0 THEN " & _
-"           '  ' + cast (cdp.numerosubfijo as varchar) + '/' +cast (cdp.subnumerovagon as varchar) 	" & _
-"					ELSE " & _
-"            ''" & _
-"            End" & _
-"				as NumeroCompleto," & _
-"			datediff(minute,cdp.FechaModificacion,GETDATE()) as MinutosModifico, " & _
-" 			ISNULL(Articulos.AuxiliarString5,'') AS EspecieONCAA,	 " & _
-" 			ISNULL(Articulos.AuxiliarString6,'') AS CodigoSAJPYA,	 " & _
-" 			ISNULL(Articulos.AuxiliarString7,'') AS txtCodigoZeni,	 " & _
-"			isnull(CLIVEN.Razonsocial,'') AS TitularDesc, " & _
-"            isnull(CLIVEN.cuit,'') AS TitularCUIT, " & _
-"			isnull(CLICO1.Razonsocial,'') AS IntermediarioDesc, " & _
-"            isnull(CLICO1.cuit,'') AS IntermediarioCUIT, " & _
-"			isnull(CLICO2.Razonsocial,'') AS RComercialDesc, " & _
-"            isnull(CLICO2.cuit,'') AS RComercialCUIT, " & _
-"			isnull(CLICOR.Nombre,'') AS CorredorDesc, " & _
-"            isnull(CLICOR.cuit,'') AS CorredorCUIT, " & _
-"			isnull(CLIENT.Razonsocial,'') AS DestinatarioDesc, " & _
-"			isnull(CLIENTREG.Razonsocial,'') AS EntregadorDesc, " & _
-"            isnull(CLIENT.cuit,'') AS DestinatarioCUIT, " & _
-"			isnull(CLIAUX.Razonsocial,'') AS ClienteAuxiliarDesc, " & _
-"			isnull(CLIAUX.cuit,'') AS ClienteAuxiliarCUIT, " & _
-"			isnull(CLISC1.Razonsocial,'') AS Subcontr1Desc, " & _
-"            isnull(CLISC2.Razonsocial,'') AS Subcontr2Desc, " & _
-"             isnull(Articulos.Descripcion,'') AS Producto, " & _
-"			 Transportistas.cuit as  TransportistaCUIT, " & _
-"            isnull(Transportistas.RazonSocial,'') AS TransportistaDesc, " & _
-"			choferes.cuil as  ChoferCUIT, " & _
-"			choferes.Nombre as  ChoferDesc, " & _
-"           isnull(LOCORI.Nombre,'') AS ProcedenciaDesc, " & _
-"		isnull(LOCORI.CodigoPostal,'') AS ProcedenciaCodigoPostal, " & _
-"		isnull(LOCORI.CodigoONCAA,'') AS ProcedenciaCodigoONCAA, " & _
-"           isnull(PROVORI.Nombre,'') AS ProcedenciaProvinciaDesc, " & _
-"       isnull(LOCDES.Descripcion,'') AS DestinoDesc, " & _
-"            '' AS  DestinoCodigoPostal, " & _
-"			isnull(LOCDES.codigoONCAA,'') AS  DestinoCodigoONCAA, " & _
-"           DATENAME(month, FechaDescarga) AS Mes, " & _
-"          DATEPART(year, FechaDescarga) AS Ano,  " & _
-"      	FAC.TipoABC + '-' + CAST(FAC.PuntoVenta AS VARCHAR) + '-' + CAST(FAC.NumeroFactura AS VARCHAR) AS Factura, " & _
-"           FAC.FechaFactura, " & _
-"          isnull(CLIFAC.RazonSocial,'') AS ClienteFacturado, " & _
-"         isnull(CLIFAC.cuit,'') AS ClienteFacturadoCUIT, " & _
-"		Calidades.Descripcion AS CalidadDesc, " & _
-"	    E1.Nombre as UsuarioIngreso,isnull(ESTAB.Descripcion,'') COLLATE SQL_Latin1_General_CP1_CI_AS +' '+ isnull(ESTAB.AuxiliarString1,'') COLLATE SQL_Latin1_General_CP1_CI_AS+ ' '+ isnull(ESTAB.AuxiliarString2,'') COLLATE SQL_Latin1_General_CP1_CI_AS  " & _
-"                                                                                               as EstablecimientoDesc, " & _
-"			isnull(CLIENTFLET.Razonsocial,'') AS ClientePagadorFleteDesc ,        " & _
-"   isnull(LOCORI.Partido,'') AS ProcedenciaProvinciaPartido,   " & _
-"   isnull(PARTORI.Codigo,'') AS ProcedenciaPartidoNormalizadaCodigo, " & _
-"   isnull(PROVDEST.Nombre,'') AS DestinoProvinciaDesc, " & _
-"  isnull(PARTORI.Nombre,'') AS ProcedenciaPartidoNormalizada   , " & _
-"			isnull(CLICOR2.Nombre,'') AS CorredorDesc2, " & _
-"            isnull(CLICOR2.cuit,'') AS CorredorCUIT2, " & _
-"			isnull(CLIENTREG.cuit,'') AS EntregadorCUIT, " & _
-"		isnull(LOCORI.CodigoAFIP,'') AS CodigoAFIP " _
+        Dim strSQL = String.Format("  SELECT TOP " & maxrows &
+      "  CDP.IdCartaDePorte, CDP.NumeroCartaDePorte, CDP.IdUsuarioIngreso, CDP.FechaIngreso, CDP.Anulada, CDP.IdUsuarioAnulo, CDP.FechaAnulacion, CDP.Observaciones, CDP.FechaTimeStamp, CDP.Vendedor, CDP.CuentaOrden1, CDP.CuentaOrden2, CDP.Corredor, CDP.Entregador, CDP.Procedencia, CDP.Patente, CDP.IdArticulo, CDP.IdStock, CDP.Partida, CDP.IdUnidad, CDP.IdUbicacion, CDP.Cantidad, CDP.Cupo, CDP.NetoProc, CDP.Calidad " &
+"      ,CDP.BrutoPto      ,CDP.TaraPto      ,CDP.NetoPto      ,CDP.Acoplado      ,CDP.Humedad      ,CDP.Merma      ,CDP.NetoFinal      ,CDP.FechaDeCarga      ,CDP.FechaVencimiento      ,CDP.CEE      ,CDP.IdTransportista      ,CDP.TransportistaCUITdesnormalizado      ,CDP.IdChofer      ,CDP.ChoferCUITdesnormalizado      ,CDP.CTG      ,CDP.Contrato      ,CDP.Destino      ,CDP.Subcontr1      ,CDP.Subcontr2      ,CDP.Contrato1 " &
+"      ,CDP.contrato2      ,CDP.KmARecorrer      ,CDP.Tarifa      ,CDP.FechaDescarga      ,CDP.Hora      ,CDP.NRecibo      ,CDP.CalidadDe      ,CDP.TaraFinal      ,CDP.BrutoFinal      ,CDP.Fumigada      ,CDP.Secada      ,CDP.Exporta      ,CDP.NobleExtranos      ,CDP.NobleNegros      ,CDP.NobleQuebrados      ,CDP.NobleDaniados      ,CDP.NobleChamico      ,CDP.NobleChamico2      ,CDP.NobleRevolcado      ,CDP.NobleObjetables      ,CDP.NobleAmohosados      ,CDP.NobleHectolitrico      ,CDP.NobleCarbon " &
+"      ,CDP.NoblePanzaBlanca      ,CDP.NoblePicados      ,CDP.NobleMGrasa      ,CDP.NobleAcidezGrasa      ,CDP.NobleVerdes      ,CDP.NobleGrado      ,CDP.NobleConforme      ,CDP.NobleACamara      ,CDP.Cosecha      ,CDP.HumedadDesnormalizada      ,CDP.Factor      ,CDP.IdFacturaImputada      ,CDP.PuntoVenta      ,CDP.SubnumeroVagon      ,CDP.TarifaFacturada      ,CDP.TarifaSubcontratista1      ,CDP.TarifaSubcontratista2      ,CDP.FechaArribo      ,CDP.Version      ,CDP.MotivoAnulacion " &
+"      ,CDP.NumeroSubfijo      ,CDP.IdEstablecimiento      ,CDP.EnumSyngentaDivision      ,CDP.Corredor2      ,CDP.IdUsuarioModifico      ,CDP.FechaModificacion      ,CDP.FechaEmision      ,CDP.EstaArchivada      ,CDP.ExcluirDeSubcontratistas      ,CDP.IdTipoMovimiento      ,CDP.IdClienteAFacturarle      ,CDP.SubnumeroDeFacturacion      ,CDP.AgregaItemDeGastosAdministrativos      ,CDP.CalidadGranosQuemados      ,CDP.CalidadGranosQuemadosBonifica_o_Rebaja      ,CDP.CalidadTierra      ,CDP.CalidadTierraBonifica_o_Rebaja      ,CDP.CalidadMermaChamico " &
+"      ,CDP.CalidadMermaChamicoBonifica_o_Rebaja      ,CDP.CalidadMermaZarandeo      ,CDP.CalidadMermaZarandeoBonifica_o_Rebaja      ,CDP.FueraDeEstandar      ,CDP.CalidadPuntaSombreada      ,CDP.CobraAcarreo      ,CDP.LiquidaViaje      ,CDP.IdClienteAuxiliar      ,CDP.CalidadDescuentoFinal      ,CDP.PathImagen      ,CDP.PathImagen2 " &
+"      ,CDP.AgrupadorDeTandaPeriodos      ,CDP.ClaveEncriptada      ,CDP.NumeroCartaEnTextoParaBusqueda      ,CDP.IdClienteEntregador      ,CDP.IdDetalleFactura      ,CDP.SojaSustentableCodCondicion      ,CDP.SojaSustentableCondicion      ,CDP.SojaSustentableNroEstablecimientoDeProduccion      ,CDP.IdClientePagadorFlete      ,CDP.SubnumeroVagonEnTextoParaBusqueda      ,CDP.IdCorredor2 " &
+"      ,CDP.Acopio1      ,CDP.Acopio2      ,CDP.Acopio3      ,CDP.Acopio4      ,CDP.Acopio5 ,CDP.Acopio6        ,CDP.AcopioFacturarleA      ,CDP.CalidadGranosDanadosRebaja      ,CDP.CalidadGranosExtranosRebaja , " &
+"			cast (cdp.NumeroCartaDePorte as varchar) +" &
+"					CASE WHEN cdp.numerosubfijo<>0 OR cdp.subnumerovagon<>0 THEN " &
+"           '  ' + cast (cdp.numerosubfijo as varchar) + '/' +cast (cdp.subnumerovagon as varchar) 	" &
+"					ELSE " &
+"            ''" &
+"            End" &
+"				as NumeroCompleto," &
+"			datediff(minute,cdp.FechaModificacion,GETDATE()) as MinutosModifico, " &
+" 			ISNULL(Articulos.AuxiliarString5,'') AS EspecieONCAA,	 " &
+" 			ISNULL(Articulos.AuxiliarString6,'') AS CodigoSAJPYA,	 " &
+" 			ISNULL(Articulos.AuxiliarString7,'') AS txtCodigoZeni,	 " &
+"			isnull(CLIVEN.Razonsocial,'') AS TitularDesc, " &
+"            isnull(CLIVEN.cuit,'') AS TitularCUIT, " &
+"			isnull(CLICO1.Razonsocial,'') AS IntermediarioDesc, " &
+"            isnull(CLICO1.cuit,'') AS IntermediarioCUIT, " &
+"			isnull(CLICO2.Razonsocial,'') AS RComercialDesc, " &
+"            isnull(CLICO2.cuit,'') AS RComercialCUIT, " &
+"			isnull(CLICOR.Nombre,'') AS CorredorDesc, " &
+"            isnull(CLICOR.cuit,'') AS CorredorCUIT, " &
+"			isnull(CLIENT.Razonsocial,'') AS DestinatarioDesc, " &
+"			isnull(CLIENTREG.Razonsocial,'') AS EntregadorDesc, " &
+"            isnull(CLIENT.cuit,'') AS DestinatarioCUIT, " &
+"			isnull(CLIAUX.Razonsocial,'') AS ClienteAuxiliarDesc, " &
+"			isnull(CLIAUX.cuit,'') AS ClienteAuxiliarCUIT, " &
+"			isnull(CLISC1.Razonsocial,'') AS Subcontr1Desc, " &
+"            isnull(CLISC2.Razonsocial,'') AS Subcontr2Desc, " &
+"             isnull(Articulos.Descripcion,'') AS Producto, " &
+"			 Transportistas.cuit as  TransportistaCUIT, " &
+"            isnull(Transportistas.RazonSocial,'') AS TransportistaDesc, " &
+"			choferes.cuil as  ChoferCUIT, " &
+"			choferes.Nombre as  ChoferDesc, " &
+"           isnull(LOCORI.Nombre,'') AS ProcedenciaDesc, " &
+"		isnull(LOCORI.CodigoPostal,'') AS ProcedenciaCodigoPostal, " &
+"		isnull(LOCORI.CodigoONCAA,'') AS ProcedenciaCodigoONCAA, " &
+"           isnull(PROVORI.Nombre,'') AS ProcedenciaProvinciaDesc, " &
+"       isnull(LOCDES.Descripcion,'') AS DestinoDesc, " &
+"            '' AS  DestinoCodigoPostal, " &
+"			isnull(LOCDES.codigoONCAA,'') AS  DestinoCodigoONCAA, " &
+"           DATENAME(month, FechaDescarga) AS Mes, " &
+"          DATEPART(year, FechaDescarga) AS Ano,  " &
+"      	FAC.TipoABC + '-' + CAST(FAC.PuntoVenta AS VARCHAR) + '-' + CAST(FAC.NumeroFactura AS VARCHAR) AS Factura, " &
+"           FAC.FechaFactura, " &
+"          isnull(CLIFAC.RazonSocial,'') AS ClienteFacturado, " &
+"         isnull(CLIFAC.cuit,'') AS ClienteFacturadoCUIT, " &
+"		Calidades.Descripcion AS CalidadDesc, " &
+"	    E1.Nombre as UsuarioIngreso,isnull(ESTAB.Descripcion,'') COLLATE SQL_Latin1_General_CP1_CI_AS +' '+ isnull(ESTAB.AuxiliarString1,'') COLLATE SQL_Latin1_General_CP1_CI_AS+ ' '+ isnull(ESTAB.AuxiliarString2,'') COLLATE SQL_Latin1_General_CP1_CI_AS  " &
+"                                                                                               as EstablecimientoDesc, " &
+"			isnull(CLIENTFLET.Razonsocial,'') AS ClientePagadorFleteDesc ,        " &
+"   isnull(LOCORI.Partido,'') AS ProcedenciaProvinciaPartido,   " &
+"   isnull(PARTORI.Codigo,'') AS ProcedenciaPartidoNormalizadaCodigo, " &
+"   isnull(PROVDEST.Nombre,'') AS DestinoProvinciaDesc, " &
+"  isnull(PARTORI.Nombre,'') AS ProcedenciaPartidoNormalizada   , " &
+"			isnull(CLICOR2.Nombre,'') AS CorredorDesc2, " &
+"            isnull(CLICOR2.cuit,'') AS CorredorCUIT2, " &
+"			isnull(CLIENTREG.cuit,'') AS EntregadorCUIT, " &
+"		isnull(LOCORI.CodigoAFIP,'') AS CodigoAFIP "
 )
 
 
 
 
-        Dim strFROM = _
-        "   FROM    CartasDePorte CDP " & _
-        "          LEFT OUTER JOIN Clientes CLIVEN ON CDP.Vendedor = CLIVEN.IdCliente " & _
-        "       LEFT OUTER JOIN Clientes CLICO1 ON CDP.CuentaOrden1 = CLICO1.IdCliente " & _
-        "       LEFT OUTER JOIN Clientes CLICO2 ON CDP.CuentaOrden2 = CLICO2.IdCliente " & _
-        "       LEFT OUTER JOIN Clientes CLIAUX ON CDP.IdClienteAuxiliar= CLIAUX.IdCliente " & _
-        "       LEFT OUTER JOIN Clientes CLIENTREG ON CDP.IdClienteEntregador= CLIENTREG.IdCliente " & _
-        "       LEFT OUTER JOIN Clientes CLIENTFLET ON CDP.IdClientePagadorFlete= CLIENTFLET.IdCliente " & _
-        "       LEFT OUTER JOIN Vendedores CLICOR ON CDP.Corredor = CLICOR.IdVendedor " & _
-        "       LEFT OUTER JOIN Vendedores CLICOR2 ON CDP.Corredor2 = CLICOR2.IdVendedor " & _
-        "       LEFT OUTER JOIN Clientes CLIENT ON CDP.Entregador = CLIENT.IdCliente " & _
-        "        LEFT OUTER JOIN Clientes CLISC1 ON CDP.Subcontr1 = CLISC1.IdCliente " & _
-        "         LEFT OUTER JOIN Clientes CLISC2 ON CDP.Subcontr2 = CLISC2.IdCliente " & _
-        "         LEFT OUTER JOIN Articulos ON CDP.IdArticulo = Articulos.IdArticulo " & _
-        "          LEFT OUTER JOIN Calidades ON CDP.CalidadDe = Calidades.IdCalidad " & _
-        "           LEFT OUTER JOIN Transportistas ON CDP.IdTransportista = Transportistas.IdTransportista " & _
-        "			LEFT OUTER JOIN Choferes ON CDP.IdChofer = Choferes.IdChofer " & _
-        "           LEFT OUTER JOIN Localidades LOCORI ON CDP.Procedencia = LOCORI.IdLocalidad " & _
-        "           LEFT OUTER JOIN Provincias PROVORI ON LOCORI.IdProvincia = PROVORI.IdProvincia " & _
-        "           LEFT OUTER JOIN WilliamsDestinos LOCDES ON CDP.Destino = LOCDES.IdWilliamsDestino " & _
-        "           LEFT OUTER JOIN CDPEstablecimientos ESTAB ON CDP.IdEstablecimiento = ESTAB.IdEstablecimiento " & _
-        "            LEFT OUTER JOIN Facturas FAC ON CDP.idFacturaImputada = FAC.IdFactura " & _
-        "            LEFT OUTER JOIN Clientes CLIFAC ON CLIFAC.IdCliente = FAC.IdCliente " & _
-        "            LEFT OUTER JOIN Partidos PARTORI ON LOCORI.IdPartido = PARTORI.IdPartido " & _
-        "            LEFT OUTER JOIN Provincias PROVDEST ON LOCDES.IdProvincia = PROVDEST.IdProvincia " & _
+        Dim strFROM =
+        "   FROM    CartasDePorte CDP " &
+        "          LEFT OUTER JOIN Clientes CLIVEN ON CDP.Vendedor = CLIVEN.IdCliente " &
+        "       LEFT OUTER JOIN Clientes CLICO1 ON CDP.CuentaOrden1 = CLICO1.IdCliente " &
+        "       LEFT OUTER JOIN Clientes CLICO2 ON CDP.CuentaOrden2 = CLICO2.IdCliente " &
+        "       LEFT OUTER JOIN Clientes CLIAUX ON CDP.IdClienteAuxiliar= CLIAUX.IdCliente " &
+        "       LEFT OUTER JOIN Clientes CLIENTREG ON CDP.IdClienteEntregador= CLIENTREG.IdCliente " &
+        "       LEFT OUTER JOIN Clientes CLIENTFLET ON CDP.IdClientePagadorFlete= CLIENTFLET.IdCliente " &
+        "       LEFT OUTER JOIN Vendedores CLICOR ON CDP.Corredor = CLICOR.IdVendedor " &
+        "       LEFT OUTER JOIN Vendedores CLICOR2 ON CDP.Corredor2 = CLICOR2.IdVendedor " &
+        "       LEFT OUTER JOIN Clientes CLIENT ON CDP.Entregador = CLIENT.IdCliente " &
+        "        LEFT OUTER JOIN Clientes CLISC1 ON CDP.Subcontr1 = CLISC1.IdCliente " &
+        "         LEFT OUTER JOIN Clientes CLISC2 ON CDP.Subcontr2 = CLISC2.IdCliente " &
+        "         LEFT OUTER JOIN Articulos ON CDP.IdArticulo = Articulos.IdArticulo " &
+        "          LEFT OUTER JOIN Calidades ON CDP.CalidadDe = Calidades.IdCalidad " &
+        "           LEFT OUTER JOIN Transportistas ON CDP.IdTransportista = Transportistas.IdTransportista " &
+        "			LEFT OUTER JOIN Choferes ON CDP.IdChofer = Choferes.IdChofer " &
+        "           LEFT OUTER JOIN Localidades LOCORI ON CDP.Procedencia = LOCORI.IdLocalidad " &
+        "           LEFT OUTER JOIN Provincias PROVORI ON LOCORI.IdProvincia = PROVORI.IdProvincia " &
+        "           LEFT OUTER JOIN WilliamsDestinos LOCDES ON CDP.Destino = LOCDES.IdWilliamsDestino " &
+        "           LEFT OUTER JOIN CDPEstablecimientos ESTAB ON CDP.IdEstablecimiento = ESTAB.IdEstablecimiento " &
+        "            LEFT OUTER JOIN Facturas FAC ON CDP.idFacturaImputada = FAC.IdFactura " &
+        "            LEFT OUTER JOIN Clientes CLIFAC ON CLIFAC.IdCliente = FAC.IdCliente " &
+        "            LEFT OUTER JOIN Partidos PARTORI ON LOCORI.IdPartido = PARTORI.IdPartido " &
+        "            LEFT OUTER JOIN Provincias PROVDEST ON LOCDES.IdProvincia = PROVDEST.IdProvincia " &
         "  LEFT OUTER JOIN Empleados E1 ON CDP.IdUsuarioIngreso = E1.IdEmpleado "
 
 
@@ -7806,14 +7806,14 @@ Public Class CartaDePorteManager
 
         Try
             'apgurisatti@bdlconsultores.com.ar", _
-            MandaEmailSimple(direccion, _
-                            "An Error Has Occurred! " & sErr, _
-                           Body, _
-                            ConfigurationManager.AppSettings("SmtpUser"), _
-                            ConfigurationManager.AppSettings("SmtpServer"), _
-                            ConfigurationManager.AppSettings("SmtpUser"), _
-                            ConfigurationManager.AppSettings("SmtpPass"), _
-                             , _
+            MandaEmailSimple(direccion,
+                            "An Error Has Occurred! " & sErr,
+                           Body,
+                            ConfigurationManager.AppSettings("SmtpUser"),
+                            ConfigurationManager.AppSettings("SmtpServer"),
+                            ConfigurationManager.AppSettings("SmtpUser"),
+                            ConfigurationManager.AppSettings("SmtpPass"),
+                             ,
                             ConfigurationManager.AppSettings("SmtpPort"), , , )
 
         Catch ex As Exception
@@ -7846,14 +7846,14 @@ Public Class CartaDePorteManager
 
         Try
             'apgurisatti@bdlconsultores.com.ar", _
-            MandaEmailSimple(direccion, _
-                            "An Error Has Occurred! " & e.ToString, _
-                           Body, _
-                            ConfigurationManager.AppSettings("SmtpUser"), _
-                            ConfigurationManager.AppSettings("SmtpServer"), _
-                            ConfigurationManager.AppSettings("SmtpUser"), _
-                            ConfigurationManager.AppSettings("SmtpPass"), _
-                             , _
+            MandaEmailSimple(direccion,
+                            "An Error Has Occurred! " & e.ToString,
+                           Body,
+                            ConfigurationManager.AppSettings("SmtpUser"),
+                            ConfigurationManager.AppSettings("SmtpServer"),
+                            ConfigurationManager.AppSettings("SmtpUser"),
+                            ConfigurationManager.AppSettings("SmtpPass"),
+                             ,
                             ConfigurationManager.AppSettings("SmtpPort"), , , )
 
         Catch ex As Exception
@@ -7953,7 +7953,7 @@ Public Class CartaDePorteManager
 
 
 
-    <DataObjectMethod(DataObjectMethodType.Select, True)> _
+    <DataObjectMethod(DataObjectMethodType.Select, True)>
     Public Shared Function GetList(ByVal SC As String, Optional ByVal IdObra As Integer = -1, Optional ByVal TipoFiltro As String = "", Optional ByVal IdProveedor As Integer = -1) As CartaDePorteList
 
         'Dim Lista As CartaDePorteList = CartaDePorteDB.GetList(SC)
@@ -8051,20 +8051,20 @@ Public Class CartaDePorteManager
 
 
         'me traigo la lista de subcontratistas que usan esa lista de precios
-        Dim lSubcontratistasParaActualizar = (From c In db.Clientes _
-                                                From l In db.ListasPrecios.Where(Function(i) i.IdListaPrecios = c.IdListaPrecios).DefaultIfEmpty _
-                                                From pd In db.ListasPreciosDetalles.Where(Function(i) i.IdListaPrecios = l.IdListaPrecios).DefaultIfEmpty _
-                                                Where c.IdListaPrecios = IdListaPrecio Select c.IdCliente, pd.PrecioCaladaLocal, pd.PrecioCaladaExportacion, pd.PrecioDescargaLocal, pd.PrecioDescargaExportacion, pd.PrecioVagonesBalanza, pd.PrecioVagonesCalada).ToList
+        Dim lSubcontratistasParaActualizar = (From c In db.Clientes
+                                              From l In db.ListasPrecios.Where(Function(i) i.IdListaPrecios = c.IdListaPrecios).DefaultIfEmpty
+                                              From pd In db.ListasPreciosDetalles.Where(Function(i) i.IdListaPrecios = l.IdListaPrecios).DefaultIfEmpty
+                                              Where c.IdListaPrecios = IdListaPrecio Select c.IdCliente, pd.PrecioCaladaLocal, pd.PrecioCaladaExportacion, pd.PrecioDescargaLocal, pd.PrecioDescargaExportacion, pd.PrecioVagonesBalanza, pd.PrecioVagonesCalada).ToList
 
 
 
         Dim sublista = (From i In lSubcontratistasParaActualizar Select i.IdCliente).ToList
 
-        Dim aaa = (From cdp In db.CartasDePortes _
-               Where _
-                     (cdp.IdFacturaImputada Is Nothing Or cdp.IdFacturaImputada = 0 Or cdp.IdFacturaImputada = -1) _
-                 And (cdp.Anulada <> "SI") _
-                 And (sublista.Contains(cdp.Subcontr1) Or sublista.Contains(cdp.Subcontr2)) _
+        Dim aaa = (From cdp In db.CartasDePortes
+                   Where
+                         (cdp.IdFacturaImputada Is Nothing Or cdp.IdFacturaImputada = 0 Or cdp.IdFacturaImputada = -1) _
+                     And (cdp.Anulada <> "SI") _
+                     And (sublista.Contains(cdp.Subcontr1) Or sublista.Contains(cdp.Subcontr2))
                 )
 
         Debug.Print(aaa.Count)
@@ -8170,26 +8170,26 @@ Public Class CartaDePorteManager
 
 
 
-                If myCartaDePorte.Entregador > 0 AndAlso (From i In db.DetalleClientesContactos _
-                                                        Where i.IdCliente = myCartaDePorte.Entregador _
-                                                        And i.Acciones = "EsExportadorCartaPorte" _
-                                                        And i.Contacto = "SI"
+                If myCartaDePorte.Entregador > 0 AndAlso (From i In db.DetalleClientesContactos
+                                                          Where i.IdCliente = myCartaDePorte.Entregador _
+                                                          And i.Acciones = "EsExportadorCartaPorte" _
+                                                          And i.Contacto = "SI"
                                                     ).Any Then
                     Return True
                 End If
 
-                If myCartaDePorte.CuentaOrden1 > 0 AndAlso (From i In db.DetalleClientesContactos _
-                                                        Where i.IdCliente = myCartaDePorte.CuentaOrden1 _
-                                                        And i.Acciones = "EsExportadorCartaPorte" _
-                                                        And i.Contacto = "SI"
+                If myCartaDePorte.CuentaOrden1 > 0 AndAlso (From i In db.DetalleClientesContactos
+                                                            Where i.IdCliente = myCartaDePorte.CuentaOrden1 _
+                                                            And i.Acciones = "EsExportadorCartaPorte" _
+                                                            And i.Contacto = "SI"
                                                     ).Any Then
                     Return True
                 End If
 
-                If myCartaDePorte.CuentaOrden2 > 0 AndAlso (From i In db.DetalleClientesContactos _
-                                                        Where i.IdCliente = myCartaDePorte.CuentaOrden2 _
-                                                        And i.Acciones = "EsExportadorCartaPorte" _
-                                                        And i.Contacto = "SI"
+                If myCartaDePorte.CuentaOrden2 > 0 AndAlso (From i In db.DetalleClientesContactos
+                                                            Where i.IdCliente = myCartaDePorte.CuentaOrden2 _
+                                                            And i.Acciones = "EsExportadorCartaPorte" _
+                                                            And i.Contacto = "SI"
                                                     ).Any Then
                     Return True
                 End If
@@ -8249,7 +8249,7 @@ Public Class CartaDePorteManager
 
             Dim idequi As Integer = IdClienteEquivalenteDelIdVendedor(CLng(oCDP.Corredor), SC)
             Dim q4 = db.CartasDePorteReglasDeFacturacions.Where(Function(x) x.IdCliente = idequi _
-                                                                    And x.PuntoVenta = oCDP.PuntoVenta And _
+                                                                    And x.PuntoVenta = oCDP.PuntoVenta And
                                                                     x.SeLeFacturaCartaPorteComoDestinatario = "SI").FirstOrDefault
             If q4 IsNot Nothing Then clis.Add(idequi)
 
@@ -8370,9 +8370,9 @@ Public Class CartaDePorteManager
 
         Dim db As New LinqCartasPorteDataContext(Encriptar(SC))
 
-        Dim subnumeromaximo = From e In db.CartasDePortes _
-                                      Where e.NumeroCartaDePorte.GetValueOrDefault = myCartaDePorte.NumeroCartaDePorte And e.SubnumeroVagon.GetValueOrDefault = myCartaDePorte.SubnumeroVagon _
-                                      Select e.SubnumeroDeFacturacion.GetValueOrDefault
+        Dim subnumeromaximo = From e In db.CartasDePortes
+                              Where e.NumeroCartaDePorte.GetValueOrDefault = myCartaDePorte.NumeroCartaDePorte And e.SubnumeroVagon.GetValueOrDefault = myCartaDePorte.SubnumeroVagon
+                              Select e.SubnumeroDeFacturacion.GetValueOrDefault
 
         If subnumeromaximo.Count = 0 Then Return 1
         If subnumeromaximo.Count = 1 Then Return 1
@@ -8472,22 +8472,22 @@ Public Class CartaDePorteManager
                 EstadoWHERE = " AND NOT (Vendedor IS NULL OR Corredor IS NULL OR Entregador IS NULL OR " & tablaPrefijo & "IdArticulo IS NULL) AND ISNULL(NetoProc,0)=0 AND ISNULL(IdFacturaImputada,0)=0 AND ISNULL(" & tablaPrefijo & "Anulada,'NO')<>'SI' "
 
             Case enumCDPestado.DescargasDeHoyMasTodasLasPosiciones
-                EstadoWHERE = " AND " & _
-                                " (                                               " & _
-                                "       ( NOT (Vendedor IS NULL OR Corredor IS NULL OR Entregador IS NULL OR " & tablaPrefijo & "IdArticulo IS NULL) AND ISNULL(NetoProc,0)=0 AND ISNULL(IdFacturaImputada,0)=0 AND ISNULL(" & tablaPrefijo & "Anulada,'NO')<>'SI' ) " & _
-                                "   OR                                              " & _
-                                "       ( ISNULL(NetoProc,0)>0 AND fechadescarga >= #" & FechaANSI(Today) & "# )" & _
+                EstadoWHERE = " AND " &
+                                " (                                               " &
+                                "       ( NOT (Vendedor IS NULL OR Corredor IS NULL OR Entregador IS NULL OR " & tablaPrefijo & "IdArticulo IS NULL) AND ISNULL(NetoProc,0)=0 AND ISNULL(IdFacturaImputada,0)=0 AND ISNULL(" & tablaPrefijo & "Anulada,'NO')<>'SI' ) " &
+                                "   OR                                              " &
+                                "       ( ISNULL(NetoProc,0)>0 AND fechadescarga >= #" & FechaANSI(Today) & "# )" &
                                 " ) "
 
 
             Case enumCDPestado.DescargasDeHoyMasTodasLasPosicionesEnRangoFecha
-                EstadoWHERE = " AND " & _
-                                " (                                               " & _
-                                "       ( NOT (Vendedor IS NULL OR Corredor IS NULL OR Entregador IS NULL OR " & _
-                                tablaPrefijo & "IdArticulo IS NULL) AND ISNULL(NetoProc,0)=0 AND ISNULL(IdFacturaImputada,0)=0 AND " & _
-                                "       ISNULL(" & tablaPrefijo & "Anulada,'NO')<>'SI' ) " & _
-                                "   OR                                              " & _
-                                "       ( ISNULL(NetoProc,0)>0 AND fechadescarga >= #" & FechaANSI(Today) & "# )" & _
+                EstadoWHERE = " AND " &
+                                " (                                               " &
+                                "       ( NOT (Vendedor IS NULL OR Corredor IS NULL OR Entregador IS NULL OR " &
+                                tablaPrefijo & "IdArticulo IS NULL) AND ISNULL(NetoProc,0)=0 AND ISNULL(IdFacturaImputada,0)=0 AND " &
+                                "       ISNULL(" & tablaPrefijo & "Anulada,'NO')<>'SI' ) " &
+                                "   OR                                              " &
+                                "       ( ISNULL(NetoProc,0)>0 AND fechadescarga >= #" & FechaANSI(Today) & "# )" &
                                 " ) "
 
             Case enumCDPestado.DescargasMasFacturadas
@@ -8502,13 +8502,13 @@ Public Class CartaDePorteManager
             Case enumCDPestado.Rechazadas
                 EstadoWHERE = " AND ISNULL(" & tablaPrefijo & "Anulada,'NO')='SI'"
             Case enumCDPestado.FacturadaPeroEnNotaCredito
-                Dim dt As DataTable = EntidadManager.ExecDinamico(SC, "           Select distinct  " & _
-                           "               CuentasCorrientesDeudores.idcomprobante " & _
-                           "               FROM DetalleNotasCreditoImputaciones DetCre" & _
-                           "               LEFT OUTER JOIN NotasCredito ON NotasCredito.IdNotaCredito=DetCre.IdNotaCredito" & _
-                           "               LEFT OUTER JOIN CuentasCorrientesDeudores ON CuentasCorrientesDeudores.IdCtaCte=DetCre.IdImputacion " & _
-                           "               LEFT OUTER JOIN TiposComprobante ON TiposComprobante.IdTipoComprobante=CuentasCorrientesDeudores.IdTipoComp " & _
-                           "               where TiposComprobante.DescripcionAB='FA' and CuentasCorrientesDeudores.idcomprobante <>0 " & _
+                Dim dt As DataTable = EntidadManager.ExecDinamico(SC, "           Select distinct  " &
+                           "               CuentasCorrientesDeudores.idcomprobante " &
+                           "               FROM DetalleNotasCreditoImputaciones DetCre" &
+                           "               LEFT OUTER JOIN NotasCredito ON NotasCredito.IdNotaCredito=DetCre.IdNotaCredito" &
+                           "               LEFT OUTER JOIN CuentasCorrientesDeudores ON CuentasCorrientesDeudores.IdCtaCte=DetCre.IdImputacion " &
+                           "               LEFT OUTER JOIN TiposComprobante ON TiposComprobante.IdTipoComprobante=CuentasCorrientesDeudores.IdTipoComp " &
+                           "               where TiposComprobante.DescripcionAB='FA' and CuentasCorrientesDeudores.idcomprobante <>0 " &
                            "              ")
 
                 Dim listaIdFactura As New System.Collections.Generic.List(Of String)
@@ -8528,9 +8528,9 @@ Public Class CartaDePorteManager
 
     Public Shared Function BuscaMermaSegunHumedadArticulo(ByVal SC As String, ByVal IdArticulo As Long, ByVal Humedad As Double) As Double
 
-        Dim strSQL = " select * from CDPHumedades  " & _
-                                        " WHERE    IdArticulo = " & IdArticulo & _
-                                        "      AND Humedad<=" & DecimalToString(Humedad) & _
+        Dim strSQL = " select * from CDPHumedades  " &
+                                        " WHERE    IdArticulo = " & IdArticulo &
+                                        "      AND Humedad<=" & DecimalToString(Humedad) &
                                         " ORDER BY Humedad DESC"
         '" ORDER BY IdCDPHumedad DESC" <--- por qué estaba así???
 
@@ -8546,8 +8546,8 @@ Public Class CartaDePorteManager
         Try
             'ojo que la tabla no tiene orden.
             'trayendote las FechaModicacion del historico y la oficial, tenes todo
-            Dim sSql = "insert into cartasdeportehistorico(IdCartaDePorte, NumeroCartaDePorte, IdUsuarioIngreso, FechaIngreso, Anulada, IdUsuarioAnulo, FechaAnulacion, Observaciones, Vendedor, CuentaOrden1, CuentaOrden2, Corredor, Entregador, Procedencia, Patente, IdArticulo, IdStock, Partida, IdUnidad, IdUbicacion, Cantidad, Cupo, NetoProc, Calidad, BrutoPto, TaraPto, NetoPto, Acoplado, Humedad, Merma, NetoFinal, FechaDeCarga, FechaVencimiento, CEE, IdTransportista, TransportistaCUITdesnormalizado, IdChofer, ChoferCUITdesnormalizado, CTG, Contrato, Destino, Subcontr1, Subcontr2, Contrato1, contrato2, KmARecorrer, Tarifa, FechaDescarga, Hora, NRecibo, CalidadDe, TaraFinal, BrutoFinal, Fumigada, Secada, Exporta, NobleExtranos, NobleNegros, NobleQuebrados, NobleDaniados, NobleChamico, NobleChamico2, NobleRevolcado, NobleObjetables, NobleAmohosados, NobleHectolitrico, NobleCarbon, NoblePanzaBlanca, NoblePicados, NobleMGrasa, NobleAcidezGrasa, NobleVerdes, NobleGrado, NobleConforme, NobleACamara, Cosecha, HumedadDesnormalizada, Factor, IdFacturaImputada, PuntoVenta, SubnumeroVagon, TarifaFacturada, TarifaSubcontratista1, TarifaSubcontratista2, FechaArribo, Version, MotivoAnulacion, NumeroSubfijo, IdEstablecimiento, EnumSyngentaDivision, Corredor2, IdUsuarioModifico, FechaModificacion, FechaEmision, EstaArchivada, ExcluirDeSubcontratistas, IdTipoMovimiento, IdClienteAFacturarle, SubnumeroDeFacturacion, AgregaItemDeGastosAdministrativos, CalidadGranosQuemados, CalidadGranosQuemadosBonifica_o_Rebaja, CalidadTierra, CalidadTierraBonifica_o_Rebaja, CalidadMermaChamico, CalidadMermaChamicoBonifica_o_Rebaja, CalidadMermaZarandeo, CalidadMermaZarandeoBonifica_o_Rebaja, FueraDeEstandar, CalidadPuntaSombreada)" & _
-                        " select IdCartaDePorte, NumeroCartaDePorte, IdUsuarioIngreso, FechaIngreso, Anulada, IdUsuarioAnulo, FechaAnulacion, Observaciones, Vendedor, CuentaOrden1, CuentaOrden2, Corredor, Entregador, Procedencia, Patente, IdArticulo, IdStock, Partida, IdUnidad, IdUbicacion, Cantidad, Cupo, NetoProc, Calidad, BrutoPto, TaraPto, NetoPto, Acoplado, Humedad, Merma, NetoFinal, FechaDeCarga, FechaVencimiento, CEE, IdTransportista, TransportistaCUITdesnormalizado, IdChofer, ChoferCUITdesnormalizado, CTG, Contrato, Destino, Subcontr1, Subcontr2, Contrato1, contrato2, KmARecorrer, Tarifa, FechaDescarga, Hora, NRecibo, CalidadDe, TaraFinal, BrutoFinal, Fumigada, Secada, Exporta, NobleExtranos, NobleNegros, NobleQuebrados, NobleDaniados, NobleChamico, NobleChamico2, NobleRevolcado, NobleObjetables, NobleAmohosados, NobleHectolitrico, NobleCarbon, NoblePanzaBlanca, NoblePicados, NobleMGrasa, NobleAcidezGrasa, NobleVerdes, NobleGrado, NobleConforme, NobleACamara, Cosecha, HumedadDesnormalizada, Factor, IdFacturaImputada, PuntoVenta, SubnumeroVagon, TarifaFacturada, TarifaSubcontratista1, TarifaSubcontratista2, FechaArribo, Version, MotivoAnulacion, NumeroSubfijo, IdEstablecimiento, EnumSyngentaDivision, Corredor2, IdUsuarioModifico, FechaModificacion, FechaEmision, EstaArchivada, ExcluirDeSubcontratistas, IdTipoMovimiento, IdClienteAFacturarle, SubnumeroDeFacturacion, AgregaItemDeGastosAdministrativos, CalidadGranosQuemados, CalidadGranosQuemadosBonifica_o_Rebaja, CalidadTierra, CalidadTierraBonifica_o_Rebaja, CalidadMermaChamico, CalidadMermaChamicoBonifica_o_Rebaja, CalidadMermaZarandeo, CalidadMermaZarandeoBonifica_o_Rebaja, FueraDeEstandar, CalidadPuntaSombreada " & _
+            Dim sSql = "insert into cartasdeportehistorico(IdCartaDePorte, NumeroCartaDePorte, IdUsuarioIngreso, FechaIngreso, Anulada, IdUsuarioAnulo, FechaAnulacion, Observaciones, Vendedor, CuentaOrden1, CuentaOrden2, Corredor, Entregador, Procedencia, Patente, IdArticulo, IdStock, Partida, IdUnidad, IdUbicacion, Cantidad, Cupo, NetoProc, Calidad, BrutoPto, TaraPto, NetoPto, Acoplado, Humedad, Merma, NetoFinal, FechaDeCarga, FechaVencimiento, CEE, IdTransportista, TransportistaCUITdesnormalizado, IdChofer, ChoferCUITdesnormalizado, CTG, Contrato, Destino, Subcontr1, Subcontr2, Contrato1, contrato2, KmARecorrer, Tarifa, FechaDescarga, Hora, NRecibo, CalidadDe, TaraFinal, BrutoFinal, Fumigada, Secada, Exporta, NobleExtranos, NobleNegros, NobleQuebrados, NobleDaniados, NobleChamico, NobleChamico2, NobleRevolcado, NobleObjetables, NobleAmohosados, NobleHectolitrico, NobleCarbon, NoblePanzaBlanca, NoblePicados, NobleMGrasa, NobleAcidezGrasa, NobleVerdes, NobleGrado, NobleConforme, NobleACamara, Cosecha, HumedadDesnormalizada, Factor, IdFacturaImputada, PuntoVenta, SubnumeroVagon, TarifaFacturada, TarifaSubcontratista1, TarifaSubcontratista2, FechaArribo, Version, MotivoAnulacion, NumeroSubfijo, IdEstablecimiento, EnumSyngentaDivision, Corredor2, IdUsuarioModifico, FechaModificacion, FechaEmision, EstaArchivada, ExcluirDeSubcontratistas, IdTipoMovimiento, IdClienteAFacturarle, SubnumeroDeFacturacion, AgregaItemDeGastosAdministrativos, CalidadGranosQuemados, CalidadGranosQuemadosBonifica_o_Rebaja, CalidadTierra, CalidadTierraBonifica_o_Rebaja, CalidadMermaChamico, CalidadMermaChamicoBonifica_o_Rebaja, CalidadMermaZarandeo, CalidadMermaZarandeoBonifica_o_Rebaja, FueraDeEstandar, CalidadPuntaSombreada)" &
+                        " select IdCartaDePorte, NumeroCartaDePorte, IdUsuarioIngreso, FechaIngreso, Anulada, IdUsuarioAnulo, FechaAnulacion, Observaciones, Vendedor, CuentaOrden1, CuentaOrden2, Corredor, Entregador, Procedencia, Patente, IdArticulo, IdStock, Partida, IdUnidad, IdUbicacion, Cantidad, Cupo, NetoProc, Calidad, BrutoPto, TaraPto, NetoPto, Acoplado, Humedad, Merma, NetoFinal, FechaDeCarga, FechaVencimiento, CEE, IdTransportista, TransportistaCUITdesnormalizado, IdChofer, ChoferCUITdesnormalizado, CTG, Contrato, Destino, Subcontr1, Subcontr2, Contrato1, contrato2, KmARecorrer, Tarifa, FechaDescarga, Hora, NRecibo, CalidadDe, TaraFinal, BrutoFinal, Fumigada, Secada, Exporta, NobleExtranos, NobleNegros, NobleQuebrados, NobleDaniados, NobleChamico, NobleChamico2, NobleRevolcado, NobleObjetables, NobleAmohosados, NobleHectolitrico, NobleCarbon, NoblePanzaBlanca, NoblePicados, NobleMGrasa, NobleAcidezGrasa, NobleVerdes, NobleGrado, NobleConforme, NobleACamara, Cosecha, HumedadDesnormalizada, Factor, IdFacturaImputada, PuntoVenta, SubnumeroVagon, TarifaFacturada, TarifaSubcontratista1, TarifaSubcontratista2, FechaArribo, Version, MotivoAnulacion, NumeroSubfijo, IdEstablecimiento, EnumSyngentaDivision, Corredor2, IdUsuarioModifico, FechaModificacion, FechaEmision, EstaArchivada, ExcluirDeSubcontratistas, IdTipoMovimiento, IdClienteAFacturarle, SubnumeroDeFacturacion, AgregaItemDeGastosAdministrativos, CalidadGranosQuemados, CalidadGranosQuemadosBonifica_o_Rebaja, CalidadTierra, CalidadTierraBonifica_o_Rebaja, CalidadMermaChamico, CalidadMermaChamicoBonifica_o_Rebaja, CalidadMermaZarandeo, CalidadMermaZarandeoBonifica_o_Rebaja, FueraDeEstandar, CalidadPuntaSombreada " &
                         " from cartasdeporte where IdCartaDePorte=" & IdCartaPorte
             ExecDinamico(SC, sSql)
         Catch ex As Exception
@@ -8558,7 +8558,7 @@ Public Class CartaDePorteManager
     End Function
 
 
-    <DataObjectMethod(DataObjectMethodType.Select, True)> _
+    <DataObjectMethod(DataObjectMethodType.Select, True)>
     Public Shared Function GetListTX(ByVal SC As String, ByVal TX As String) As System.Data.DataSet
         'En realidad lo que hace esta funcion es devolverme un dataset en lugar de un list, y le ensoqueta una
         ' variable para guardar el valor del checkbox
@@ -8590,7 +8590,7 @@ Public Class CartaDePorteManager
     End Function
 
 
-    <DataObjectMethod(DataObjectMethodType.Select, True)> _
+    <DataObjectMethod(DataObjectMethodType.Select, True)>
     Public Shared Function GetListDatasetWHERE(ByVal SC As String, ByVal ColumnaParaFiltrar As String, ByVal TextoParaFiltrar As String, ByVal sortExpression As String, ByVal startRowIndex As Long, ByVal maximumRows As Long) As System.Data.DataTable
         Dim ds As DataSet
 
@@ -8635,7 +8635,7 @@ Public Class CartaDePorteManager
     End Function
 
 
-    <DataObjectMethod(DataObjectMethodType.Select, True)> _
+    <DataObjectMethod(DataObjectMethodType.Select, True)>
     Public Shared Function GetListDataset(ByVal SC As String, ByVal sortExpression As String) As System.Data.DataTable
 
         'pinta que tengo que devolver un Dataview si quiero ordenar, y un Dataset/table si quiero filtrar. Cómo hago las dos cosas????
@@ -8737,70 +8737,70 @@ Public Class CartaDePorteManager
         'lo que sea dinámico, lo tendré que migrar para evitar SQL injection.
 
 
-        Dim strSQL = String.Format("SELECT  " & _
-"                                       cast(NumeroCartaDePorte as varchar) +  ' ' + " & _
-"CASE  " & _
-"WHEN isnull(NumeroSubfijo,'0') =0  THEN '' " & _
-"ELSE cast(NumeroSubfijo as varchar) " & _
-"            End " & _
-"+ " & _
-"CASE " & _
-"WHEN isnull( SubnumeroVagon,'0') =0  THEN '' " & _
-"ELSE cast(SubnumeroVagon as varchar) " & _
-"            End  as  [C.Porte]  , " & _
-"       FechaArribo   as  Arribo , " & _
-"        convert(char, Hora, 108)   as  Hora, " & _
-"         Articulos.Descripcion as  Producto, " & _
-"       Contrato  as  Contrato , " & _
-"       NetoPto   as  [Kg.Proc.] , " & _
-"       TaraPto   as  [Kg.Tara Proc.] , " & _
-"       BrutoPto   as  [Kg.Bruto Proc.], " & _
-"       BrutoFinal   as  [Kg.Bruto Desc.] , " & _
-"       TaraFinal   as  [Kg.Tara Desc.] , " & _
-"       NetoFinal   as  [Kg.Neto Desc.] , " & _
-"       NetoFinal-NetoPto   as  [Kg.Dif.] , " & _
-"         Humedad as  [H.%]	 , " & _
-"         HumedadDesnormalizada as [Mer.Kg.] , " & _
-"         Merma as Otras , " & _
-"        NetoProc  as  [Kg.Netos] , " & _
-"       CLIVEN.Razonsocial as   Titular  , " & _
-"       CLICO1.Razonsocial as   Intermediario  , " & _
-"       CLICO2.Razonsocial as   [R. Comercial]  , " & _
-"       CLICOR.Nombre as    [Corredor ], " & _
-"       CLIENT.Razonsocial  as  [Destinatario], " & _
-"        Patente as  [Pat. Chasis] , " & _
-"         Acoplado as [Pat. Acoplado] , " & _
-"        TRANS.CUIT as [CUIT Transp.] , " & _
-"         TRANS.RazonSocial as Trasportista , " & _
-"         LOCDES.Descripcion   as  Destino , " & _
-"        LOCORI.Nombre as    [Procedcia.] , " & _
-"         FechaDescarga as   [Desc.], " & _
-"       Calidades.Descripcion AS  [Calidad], " & _
-"         CDP.Observaciones  as  [Observaciones], " & _
-"         CHOF.CUIL as   [CUIT chofer], " & _
-"         CHOF.Nombre as   Chofer, " & _
-"         LOCORI.CodigoONCAA as  [Nro ONCA] , " & _
-"         LOCDES.CodigoONCAA as   [Pta ONCA], " & _
-"         '' as   Provincia, " & _
-"         CEE as   [Nro CEE]	, " & _
-"          FechaVencimiento as  [Vencim.CP], " & _
-"          FechaDeCarga as  [Emision CP], " & _
-"          CDP.PuntoVenta  as Sucursal, " & _
-"          KmARecorrer as  Km, " & _
-"          Tarifa as Tarifa, " & _
-"           CTG as CTG, FechaAnulacion,MotivoAnulacion " & _
-                  " FROM CartasDePorte CDP " & _
-                   " LEFT OUTER JOIN Clientes CLIVEN ON CDP.Vendedor = CLIVEN.IdCliente " & _
-                   " LEFT OUTER JOIN Clientes CLICO1 ON CDP.CuentaOrden1 = CLICO1.IdCliente " & _
-                   " LEFT OUTER JOIN Clientes CLICO2 ON CDP.CuentaOrden2 = CLICO2.IdCliente " & _
-                   " LEFT OUTER JOIN Vendedores CLICOR ON CDP.Corredor = CLICOR.IdVendedor " & _
-                   " LEFT OUTER JOIN Clientes CLIENT ON CDP.Entregador = CLIENT.IdCliente " & _
-                   " LEFT OUTER JOIN Articulos ON CDP.IdArticulo = Articulos.IdArticulo " & _
-                   " LEFT OUTER JOIN Transportistas TRANS ON CDP.IdTransportista = TRANS.IdTransportista " & _
-                    " LEFT OUTER JOIN Calidades ON CDP.CalidadDe = Calidades.IdCalidad " & _
-                    " LEFT OUTER JOIN Choferes CHOF ON CDP.IdChofer = CHOF.IdChofer " & _
-                   " LEFT OUTER JOIN Localidades LOCORI ON CDP.Procedencia = LOCORI.IdLocalidad " & _
-                   " LEFT OUTER JOIN WilliamsDestinos LOCDES ON CDP.Destino = LOCDES.IdWilliamsDestino " & _
+        Dim strSQL = String.Format("SELECT  " &
+"                                       cast(NumeroCartaDePorte as varchar) +  ' ' + " &
+"CASE  " &
+"WHEN isnull(NumeroSubfijo,'0') =0  THEN '' " &
+"ELSE cast(NumeroSubfijo as varchar) " &
+"            End " &
+"+ " &
+"CASE " &
+"WHEN isnull( SubnumeroVagon,'0') =0  THEN '' " &
+"ELSE cast(SubnumeroVagon as varchar) " &
+"            End  as  [C.Porte]  , " &
+"       FechaArribo   as  Arribo , " &
+"        convert(char, Hora, 108)   as  Hora, " &
+"         Articulos.Descripcion as  Producto, " &
+"       Contrato  as  Contrato , " &
+"       NetoPto   as  [Kg.Proc.] , " &
+"       TaraPto   as  [Kg.Tara Proc.] , " &
+"       BrutoPto   as  [Kg.Bruto Proc.], " &
+"       BrutoFinal   as  [Kg.Bruto Desc.] , " &
+"       TaraFinal   as  [Kg.Tara Desc.] , " &
+"       NetoFinal   as  [Kg.Neto Desc.] , " &
+"       NetoFinal-NetoPto   as  [Kg.Dif.] , " &
+"         Humedad as  [H.%]	 , " &
+"         HumedadDesnormalizada as [Mer.Kg.] , " &
+"         Merma as Otras , " &
+"        NetoProc  as  [Kg.Netos] , " &
+"       CLIVEN.Razonsocial as   Titular  , " &
+"       CLICO1.Razonsocial as   Intermediario  , " &
+"       CLICO2.Razonsocial as   [R. Comercial]  , " &
+"       CLICOR.Nombre as    [Corredor ], " &
+"       CLIENT.Razonsocial  as  [Destinatario], " &
+"        Patente as  [Pat. Chasis] , " &
+"         Acoplado as [Pat. Acoplado] , " &
+"        TRANS.CUIT as [CUIT Transp.] , " &
+"         TRANS.RazonSocial as Trasportista , " &
+"         LOCDES.Descripcion   as  Destino , " &
+"        LOCORI.Nombre as    [Procedcia.] , " &
+"         FechaDescarga as   [Desc.], " &
+"       Calidades.Descripcion AS  [Calidad], " &
+"         CDP.Observaciones  as  [Observaciones], " &
+"         CHOF.CUIL as   [CUIT chofer], " &
+"         CHOF.Nombre as   Chofer, " &
+"         LOCORI.CodigoONCAA as  [Nro ONCA] , " &
+"         LOCDES.CodigoONCAA as   [Pta ONCA], " &
+"         '' as   Provincia, " &
+"         CEE as   [Nro CEE]	, " &
+"          FechaVencimiento as  [Vencim.CP], " &
+"          FechaDeCarga as  [Emision CP], " &
+"          CDP.PuntoVenta  as Sucursal, " &
+"          KmARecorrer as  Km, " &
+"          Tarifa as Tarifa, " &
+"           CTG as CTG, FechaAnulacion,MotivoAnulacion " &
+                  " FROM CartasDePorte CDP " &
+                   " LEFT OUTER JOIN Clientes CLIVEN ON CDP.Vendedor = CLIVEN.IdCliente " &
+                   " LEFT OUTER JOIN Clientes CLICO1 ON CDP.CuentaOrden1 = CLICO1.IdCliente " &
+                   " LEFT OUTER JOIN Clientes CLICO2 ON CDP.CuentaOrden2 = CLICO2.IdCliente " &
+                   " LEFT OUTER JOIN Vendedores CLICOR ON CDP.Corredor = CLICOR.IdVendedor " &
+                   " LEFT OUTER JOIN Clientes CLIENT ON CDP.Entregador = CLIENT.IdCliente " &
+                   " LEFT OUTER JOIN Articulos ON CDP.IdArticulo = Articulos.IdArticulo " &
+                   " LEFT OUTER JOIN Transportistas TRANS ON CDP.IdTransportista = TRANS.IdTransportista " &
+                    " LEFT OUTER JOIN Calidades ON CDP.CalidadDe = Calidades.IdCalidad " &
+                    " LEFT OUTER JOIN Choferes CHOF ON CDP.IdChofer = CHOF.IdChofer " &
+                   " LEFT OUTER JOIN Localidades LOCORI ON CDP.Procedencia = LOCORI.IdLocalidad " &
+                   " LEFT OUTER JOIN WilliamsDestinos LOCDES ON CDP.Destino = LOCDES.IdWilliamsDestino " &
                 "")
 
 
@@ -8900,7 +8900,7 @@ Public Class CartaDePorteManager
 
 
 
-    <DataObjectMethod(DataObjectMethodType.Select, True)> _
+    <DataObjectMethod(DataObjectMethodType.Select, True)>
     Public Shared Function GetListTX(ByVal SC As String, ByVal TX As String, ByVal ParamArray Parametros() As Object) As System.Data.DataSet
         'En realidad lo que hace esta funcion es devolverme un dataset en lugar de un list, y le ensoqueta una
         ' variable para guardar el valor del checkbox            'If Parametros Is Nothing Then Parametros = New String() {""}
@@ -8923,17 +8923,17 @@ Public Class CartaDePorteManager
     End Function
 
 
-    <DataObjectMethod(DataObjectMethodType.Select, True)> _
+    <DataObjectMethod(DataObjectMethodType.Select, True)>
     Public Shared Function GetList_fm(ByVal SC As String) As System.Data.DataSet
         Return CartaDePorteDB.GetList_fm(SC)
     End Function
 
-    <DataObjectMethod(DataObjectMethodType.Select, False)> _
+    <DataObjectMethod(DataObjectMethodType.Select, False)>
     Public Shared Function GetItem(ByVal SC As String, ByVal id As Integer) As CartaDePorte
         Return GetItem(SC, id, False)
     End Function
 
-    <DataObjectMethod(DataObjectMethodType.Select, False)> _
+    <DataObjectMethod(DataObjectMethodType.Select, False)>
     Public Shared Function GetItem(ByVal SC As String, ByVal id As Integer, ByVal getCartaDePorteDetalles As Boolean) As CartaDePorte
         Dim myCartaDePorte As CartaDePorte
         myCartaDePorte = CartaDePorteDB.GetItem(SC, id)
@@ -9055,9 +9055,9 @@ Public Class CartaDePorteManager
 
                 Try
 
-                    Dim oDet As ProntoMVC.Data.Models.CartasDePorteDetalle_EF = (From i In db.CartasDePorteDetalle_EF _
-                                                        Where i.IdCartaDePorte = id _
-                                                        And i.Campo = "CalidadGastoDeSecada"
+                    Dim oDet As ProntoMVC.Data.Models.CartasDePorteDetalle_EF = (From i In db.CartasDePorteDetalle_EF
+                                                                                 Where i.IdCartaDePorte = id _
+                                                                                 And i.Campo = "CalidadGastoDeSecada"
                                                     ).SingleOrDefault
 
                     If oDet IsNot Nothing Then .CalidadGastoDeSecada = oDet.Valor Else .CalidadGastoDeSecada = 0
@@ -9115,9 +9115,9 @@ Public Class CartaDePorteManager
 
         Try
 
-            Dim oDet As ProntoMVC.Data.Models.CartasDePorteDetalle_EF = (From i In db.CartasDePorteDetalle_EF _
-                                                Where i.IdCartaDePorte = id _
-                                                And i.Campo = nombrecampo
+            Dim oDet As ProntoMVC.Data.Models.CartasDePorteDetalle_EF = (From i In db.CartasDePorteDetalle_EF
+                                                                         Where i.IdCartaDePorte = id _
+                                                                         And i.Campo = nombrecampo
                                             ).SingleOrDefault
 
             If oDet IsNot Nothing Then
@@ -9138,9 +9138,9 @@ Public Class CartaDePorteManager
 
         Try
 
-            Dim oDet As ProntoMVC.Data.Models.CartasDePorteDetalle_EF = (From i In db.CartasDePorteDetalle_EF _
-                                                Where i.IdCartaDePorte = id _
-                                                And i.Campo = nombrecampo
+            Dim oDet As ProntoMVC.Data.Models.CartasDePorteDetalle_EF = (From i In db.CartasDePorteDetalle_EF
+                                                                         Where i.IdCartaDePorte = id _
+                                                                         And i.Campo = nombrecampo
                                             ).SingleOrDefault
             If IsNothing(oDet) Then
                 oDet = New ProntoMVC.Data.Models.CartasDePorteDetalle_EF
@@ -9189,11 +9189,11 @@ Public Class CartaDePorteManager
         ' hay que revisar por qué no se banca el demoprontoentities
         Dim db As New LinqCartasPorteDataContext(Encriptar(SC))        ' hay que revisar por qué no se banca el demoprontoentities
 
-        Dim familia = (From e In db.CartasDePortes _
-                                      Where e.NumeroCartaDePorte.GetValueOrDefault = NumeroCartaDePorte _
-                                            And e.SubnumeroVagon.GetValueOrDefault = SubNumeroVagon _
-                                            Order By e.FechaAnulacion Descending _
-                                      Select e).ToList()
+        Dim familia = (From e In db.CartasDePortes
+                       Where e.NumeroCartaDePorte.GetValueOrDefault = NumeroCartaDePorte _
+                             And e.SubnumeroVagon.GetValueOrDefault = SubNumeroVagon
+                       Order By e.FechaAnulacion Descending
+                       Select e).ToList()
 
 
         Dim sss = familia.Where(Function(x) x.SubnumeroDeFacturacion = SubnumeroFacturacion).FirstOrDefault
@@ -9216,9 +9216,9 @@ Public Class CartaDePorteManager
         End If
         If familia.Count = 1 Then Return CartaDePorteManager.GetItem(SC, familia(0).IdCartaDePorte)
 
-        ErrHandler2.WriteAndRaiseError("Ya existe una carta con ese número y vagon: " & _
-                                       NumeroCartaDePorte & " " & SubNumeroVagon & " " & SubnumeroFacturacion & _
-                                       ".  Puede ser una con otro Subnumero de facturacion. " & familia.Count & " " & sss.IdCartaDePorte & _
+        ErrHandler2.WriteAndRaiseError("Ya existe una carta con ese número y vagon: " &
+                                       NumeroCartaDePorte & " " & SubNumeroVagon & " " & SubnumeroFacturacion &
+                                       ".  Puede ser una con otro Subnumero de facturacion. " & familia.Count & " " & sss.IdCartaDePorte &
                                        " Estas haciendo altas usando el -1 en SubnumeroDeFacturacion? estas buscando con -1 cuando solo hay con 0?")
 
 
@@ -9339,7 +9339,7 @@ Public Class CartaDePorteManager
     End Function
 
 
-    <DataObjectMethod(DataObjectMethodType.Update, True)> _
+    <DataObjectMethod(DataObjectMethodType.Update, True)>
     Public Shared Function Save(ByVal SC As String, ByVal myCartaDePorte As CartaDePorte, ByVal IdUsuario As Integer, ByVal NombreUsuario As String, Optional ByVal bCopiarDuplicados As Boolean = True, Optional ByRef ms As String = "") As Integer
         Dim CartaDePorteId As Integer
 
@@ -9665,11 +9665,11 @@ Public Class CartaDePorteManager
 
 
 
-                        Dim duplicados = _
-                                           (From e In db.CartasDePortes _
-                                           Where e.NumeroCartaDePorte = oCarta.NumeroCartaDePorte _
-                                           And e.SubnumeroVagon = oCarta.SubnumeroVagon _
-                                            And e.IdCartaDePorte <> CartaDePorteId).ToList
+                        Dim duplicados =
+                                           (From e In db.CartasDePortes
+                                            Where e.NumeroCartaDePorte = oCarta.NumeroCartaDePorte _
+                                            And e.SubnumeroVagon = oCarta.SubnumeroVagon _
+                                             And e.IdCartaDePorte <> CartaDePorteId).ToList
 
 
 
@@ -9726,8 +9726,8 @@ Public Class CartaDePorteManager
 
                 If .Anulada = "SI" Then
                     'si de la familia solo queda una sin rechazar, ponela como original independiente (o sea, subnumerodefacturacion=-1)
-                    Dim duplicados = ( _
-                                From e In db.CartasDePortes _
+                    Dim duplicados = (
+                                From e In db.CartasDePortes
                                 Where e.NumeroCartaDePorte = .NumeroCartaDePorte _
                                 And e.SubnumeroVagon = .SubnumeroVagon _
                                  And e.IdCartaDePorte <> CartaDePorteId _
@@ -9833,10 +9833,10 @@ Public Class CartaDePorteManager
 
 
             Try
-                EntidadManager.Tarea(SC, "Log_InsertarRegistro", IIf(myCartaDePorte.Id <= 0, "ALTA", "MODIF"), _
-                                          CartaDePorteId, 0, Now, 0, "Tabla : CartaPorte", "", NombreUsuario, _
-                                        DBNull.Value, DBNull.Value, DBNull.Value, DBNull.Value, DBNull.Value, _
-                                        DBNull.Value, DBNull.Value, DBNull.Value, DBNull.Value, DBNull.Value, _
+                EntidadManager.Tarea(SC, "Log_InsertarRegistro", IIf(myCartaDePorte.Id <= 0, "ALTA", "MODIF"),
+                                          CartaDePorteId, 0, Now, 0, "Tabla : CartaPorte", "", NombreUsuario,
+                                        DBNull.Value, DBNull.Value, DBNull.Value, DBNull.Value, DBNull.Value,
+                                        DBNull.Value, DBNull.Value, DBNull.Value, DBNull.Value, DBNull.Value,
                                         DBNull.Value, DBNull.Value, DBNull.Value)
                 'GetStoreProcedure(SC, enumSPs.Log_InsertarRegistro, IIf(myCartaDePorte.Id <= 0, "ALTA", "MODIF"), _
                 '                          CartaDePorteId, 0, Now, 0, "Tabla : CartaPorte", "", NombreUsuario)
@@ -9875,8 +9875,8 @@ Public Class CartaDePorteManager
 
         Dim db As New DemoProntoEntities(Auxiliares.FormatearConexParaEntityFramework(Encriptar(SC)))
 
-        Dim familia = ( _
-                        From e In db.CartasDePortes _
+        Dim familia = (
+                        From e In db.CartasDePortes
                         Where e.NumeroCartaDePorte = cartaActual.NumeroCartaDePorte _
                         And e.SubnumeroVagon = cartaActual.SubnumeroVagon _
                          And e.IdCartaDePorte <> CartaDePorteId _
@@ -10053,7 +10053,7 @@ Public Class CartaDePorteManager
     End Sub
 
 
-    <DataObjectMethod(DataObjectMethodType.Delete, True)> _
+    <DataObjectMethod(DataObjectMethodType.Delete, True)>
     Public Shared Function Delete(ByVal SC As String, ByVal myCartaDePorte As CartaDePorte) As Boolean
         Return CartaDePorteDB.Delete(SC, myCartaDePorte.Id)
     End Function
@@ -10149,10 +10149,10 @@ Public Class CartaDePorteManager
         Using db As New DemoProntoEntities(Auxiliares.FormatearConexParaEntityFramework(Encriptar(SC)))
 
 
-            If myCartaDePorte.Titular > 0 AndAlso (From i In db.DetalleClientesContactos _
-                                                    Where i.IdCliente = myCartaDePorte.Entregador _
-                                                    And i.Acciones = "DeshabilitadoPorCobranzas" _
-                                                    And i.Contacto = "NO"
+            If myCartaDePorte.Titular > 0 AndAlso (From i In db.DetalleClientesContactos
+                                                   Where i.IdCliente = myCartaDePorte.Entregador _
+                                                   And i.Acciones = "DeshabilitadoPorCobranzas" _
+                                                   And i.Contacto = "NO"
                                                 ).Any Then
                 ms += " El Titular esta deshabilitado por cobranzas "
             End If
@@ -10515,10 +10515,10 @@ Public Class CartaDePorteManager
                 Dim db As New LinqCartasPorteDataContext(Encriptar(SC))
 
 
-                Dim cli As String() = (From i In db.linqClientes _
-                                    Where i.HabilitadoParaCartaPorte = "NO" _
-                                    And (i.IdCliente = .Titular Or i.IdCliente = .Entregador Or i.IdCliente = .CuentaOrden1 Or i.IdCliente = .CuentaOrden2) _
-                                    Select i.RazonSocial).ToArray
+                Dim cli As String() = (From i In db.linqClientes
+                                       Where i.HabilitadoParaCartaPorte = "NO" _
+                                       And (i.IdCliente = .Titular Or i.IdCliente = .Entregador Or i.IdCliente = .CuentaOrden1 Or i.IdCliente = .CuentaOrden2)
+                                       Select i.RazonSocial).ToArray
 
 
                 If cli.Count > 0 Then
@@ -10589,7 +10589,7 @@ Public Class CartaDePorteManager
 
 
 
-                Dim K = " Algunos clientes usados en esta carta exigen completar " & _
+                Dim K = " Algunos clientes usados en esta carta exigen completar " &
                      " todos los campos de una carta en Descarga  (" & sClientesExigentes & ") "
 
                 'verificar que esta completa
@@ -10613,10 +10613,10 @@ Public Class CartaDePorteManager
 
 
 
-                If iisNull(.NetoFinalIncluyendoMermas, 0) <= 0 Or _
-                    iisNull(.TaraFinal, 0) <= 0 Or _
-                    iisNull(.BrutoFinal, 0) <= 0 Or _
-                    iisNull(.NetoPto, 0) <= 0 Or _
+                If iisNull(.NetoFinalIncluyendoMermas, 0) <= 0 Or
+                    iisNull(.TaraFinal, 0) <= 0 Or
+                    iisNull(.BrutoFinal, 0) <= 0 Or
+                    iisNull(.NetoPto, 0) <= 0 Or
                     iisNull(.NetoFinalSinMermas, 0) <= 0 Then
 
                     ms &= "Hay pesajes sin completar. " & K
@@ -10625,14 +10625,14 @@ Public Class CartaDePorteManager
 
 
 
-                If iisNull(.CEE, 0) <= 0 Or _
-                    iisNull(.CTG, 0) <= 0 Or _
-                    IsNothing(.FechaDeCarga) Or _
-                    IsNothing(.FechaVencimiento) Or _
-                    IsNothing(.FechaDescarga) Or _
-                    .Contrato = "" Or _
-                    .Patente = "" Or _
-                    .NRecibo = 0 Or _
+                If iisNull(.CEE, 0) <= 0 Or
+                    iisNull(.CTG, 0) <= 0 Or
+                    IsNothing(.FechaDeCarga) Or
+                    IsNothing(.FechaVencimiento) Or
+                    IsNothing(.FechaDescarga) Or
+                    .Contrato = "" Or
+                    .Patente = "" Or
+                    .NRecibo = 0 Or
                     .CalidadDe = 0 Then
 
                     ms &= "Hace falta CEE, CTG, Fechas de carga/vencimiento/descarga,Contrato, Patente, Recibo y Calidad. " & K
@@ -10896,9 +10896,9 @@ Public Class CartaDePorteManager
 
             Dim format = "Excel"
 
-            Dim bytes As Byte() = ReportViewer2.LocalReport.Render( _
-                       format, Nothing, mimeType, encoding, _
-                         extension, _
+            Dim bytes As Byte() = ReportViewer2.LocalReport.Render(
+                       format, Nothing, mimeType, encoding,
+                         extension,
                         streamids, warnings)
 
             Dim fs = New IO.FileStream(ArchivoExcelDestino, IO.FileMode.Create)
@@ -11014,9 +11014,9 @@ Public Class CartaDePorteManager
 
                 Try
 
-                    bytes = ReportViewer2.LocalReport.Render( _
-                           format, Nothing, mimeType, encoding, _
-                             extension, _
+                    bytes = ReportViewer2.LocalReport.Render(
+                           format, Nothing, mimeType, encoding,
+                             extension,
                             streamids, warnings)
 
 
@@ -11139,9 +11139,9 @@ Public Class CartaDePorteManager
 
                 Dim format = "Excel"
 
-                Dim bytes As Byte() = ReportViewer2.LocalReport.Render( _
-                           format, Nothing, mimeType, encoding, _
-                             extension, _
+                Dim bytes As Byte() = ReportViewer2.LocalReport.Render(
+                           format, Nothing, mimeType, encoding,
+                             extension,
                             streamids, warnings)
 
                 Dim fs = New IO.FileStream(ArchivoExcelDestino, IO.FileMode.Create)
@@ -11246,9 +11246,9 @@ Public Class CartaDePorteManager
 
                 Try
 
-                    bytes = ReportViewer2.LocalReport.Render( _
-                           format, Nothing, mimeType, encoding, _
-                             extension, _
+                    bytes = ReportViewer2.LocalReport.Render(
+                           format, Nothing, mimeType, encoding,
+                             extension,
                             streamids, warnings)
 
 
@@ -11361,9 +11361,9 @@ Public Class CartaDePorteManager
 
             Dim format = "Excel"
 
-            Dim bytes As Byte() = ReportViewer2.LocalReport.Render( _
-                       format, Nothing, mimeType, encoding, _
-                         extension, _
+            Dim bytes As Byte() = ReportViewer2.LocalReport.Render(
+                       format, Nothing, mimeType, encoding,
+                         extension,
                         streamids, warnings)
 
             Dim fs = New IO.FileStream(ArchivoExcelDestino, IO.FileMode.Create)
@@ -11439,9 +11439,9 @@ Public Class CartaDePorteManager
 
             Dim format = "Excel"
 
-            Dim bytes As Byte() = ReportViewer2.LocalReport.Render( _
-                       format, Nothing, mimeType, encoding, _
-                         extension, _
+            Dim bytes As Byte() = ReportViewer2.LocalReport.Render(
+                       format, Nothing, mimeType, encoding,
+                         extension,
                         streamids, warnings)
 
             Dim fs = New IO.FileStream(ArchivoExcelDestino, IO.FileMode.Create)
@@ -11516,7 +11516,7 @@ Public Class CartaDePorteManager
 
 
 
-    Shared Sub ImputoElEmbarque(ByVal idMov As Integer, ByVal idfactura As Integer, _
+    Shared Sub ImputoElEmbarque(ByVal idMov As Integer, ByVal idfactura As Integer,
                                 ByVal SC As String, ByVal nombreUsuario As String, renglonimputado As Integer)
 
 
@@ -11539,9 +11539,9 @@ Public Class CartaDePorteManager
 
         Dim db As New LinqCartasPorteDataContext(Encriptar(SC))
 
-        Dim a = (From f In db.linqDetalleFacturas _
-                Where f.IdFactura = idfactura _
-                Order By f.IdDetalleFactura Select f.IdDetalleFactura).ToList
+        Dim a = (From f In db.linqDetalleFacturas
+                 Where f.IdFactura = idfactura
+                 Order By f.IdDetalleFactura Select f.IdDetalleFactura).ToList
 
         Dim iddetallefact As Long = a(renglonimputado)
 
@@ -11578,19 +11578,19 @@ Public Class CartaDePorteManager
 
         'si hay un error (de timeout por ejemplo), no se podría volver a intentar?
 
-        Dim q = _
-                    (From p In imput _
-                    Where p.cartas.Any(Function(x) x.Id = oCDP.Id) _
-                    Select p).First
+        Dim q =
+                    (From p In imput
+                     Where p.cartas.Any(Function(x) x.Id = oCDP.Id)
+                     Select p).First
 
         Dim ind As Integer = imput.IndexOf(q)
 
 
         Dim db As New LinqCartasPorteDataContext(Encriptar(SC))
 
-        Dim a = (From f In db.linqDetalleFacturas _
-                Where f.IdFactura = idfactura _
-                Order By f.IdDetalleFactura Select f.IdDetalleFactura).ToList
+        Dim a = (From f In db.linqDetalleFacturas
+                 Where f.IdFactura = idfactura
+                 Order By f.IdDetalleFactura Select f.IdDetalleFactura).ToList
 
         Dim iddetallefact As Long = a(ind)
 
@@ -11733,7 +11733,7 @@ Public Class CartaDePorteManager
                 'fuese el cliente del encabezado, así que esto no va mas, y se 
                 'usa la funcion LogicaFacturacion.ReasignarAquellosQueSeLeFacturanForzosamenteAlCorredor()
 
-                Dim bSeparaSiempre As String = iisNull(EntidadManager.ExecDinamico(SC, "SELECT SeLeDerivaSuFacturaAlCorredorDeLaCarta " & _
+                Dim bSeparaSiempre As String = iisNull(EntidadManager.ExecDinamico(SC, "SELECT SeLeDerivaSuFacturaAlCorredorDeLaCarta " &
                                                                       " FROM Clientes WHERE IdCliente=" & idCliente).Rows(0).Item(0), "")
 
                 If bSeparaSiempre = "SI" Then Return IdClienteEquivalenteDelIdVendedor(idCorredor, SC)
@@ -11741,7 +11741,7 @@ Public Class CartaDePorteManager
 
 
 
-            Dim l As String = iisNull(EntidadManager.ExecDinamico(SC, "SELECT ExpresionRegularNoAgruparFacturasConEstosVendedores  " & _
+            Dim l As String = iisNull(EntidadManager.ExecDinamico(SC, "SELECT ExpresionRegularNoAgruparFacturasConEstosVendedores  " &
                                                                   " FROM Clientes WHERE IdCliente=" & idCliente).Rows(0).Item(0), "")
 
 
@@ -11811,8 +11811,8 @@ Public Class CartaDePorteManager
 
         'http://stackoverflow.com/questions/534690/linq-to-sql-return-anonymous-type
 
-        Dim duplicados As IQueryable(Of CartasDePorte) = _
-                            From e In db.CartasDePortes _
+        Dim duplicados As IQueryable(Of CartasDePorte) =
+                            From e In db.CartasDePortes
                             Where e.NumeroCartaDePorte = oCP.NumeroCartaDePorte _
                             And e.SubnumeroVagon = oCP.SubnumeroVagon
 
@@ -11864,12 +11864,12 @@ Public Class CartaDePorteManager
         Dim sAsunto = "Adjunto de la factura " & myFactura.TipoABC & " " & myFactura.PuntoVenta & "-" & myFactura.Numero
 
 
-        EnviarEmail(email, sAsunto, "", _
-                ConfigurationManager.AppSettings("SmtpUser"), _
-                ConfigurationManager.AppSettings("SmtpServer"), _
-                ConfigurationManager.AppSettings("SmtpUser"), _
-                ConfigurationManager.AppSettings("SmtpPass"), _
-                 patharchivoadjunto, _
+        EnviarEmail(email, sAsunto, "",
+                ConfigurationManager.AppSettings("SmtpUser"),
+                ConfigurationManager.AppSettings("SmtpServer"),
+                ConfigurationManager.AppSettings("SmtpUser"),
+                ConfigurationManager.AppSettings("SmtpPass"),
+                 patharchivoadjunto,
                 ConfigurationManager.AppSettings("SmtpPort"), , CCO, , "Williams Entregas")
 
     End Function
@@ -11967,7 +11967,7 @@ Public Class CartaDePorteManager
     End Function
 
 
-    Shared Function AdjuntarImagen(SC As String, AsyncFileUpload1 As AjaxControlToolkit.AsyncFileUpload, _
+    Shared Function AdjuntarImagen(SC As String, AsyncFileUpload1 As AjaxControlToolkit.AsyncFileUpload,
                                    forzarID As Long, ByRef sError As String, DirApp As String, NameOnlyFromFullPath As String) As String
 
 
@@ -12560,7 +12560,7 @@ Public Class CartaDePorteManager
     End Function
 
 
-    Shared Function ProcesarImagenesConCodigosDeBarraYAdjuntar(SC As String, archivos As Generic.List(Of String), forzarID As Long, _
+    Shared Function ProcesarImagenesConCodigosDeBarraYAdjuntar(SC As String, archivos As Generic.List(Of String), forzarID As Long,
                             ByRef sError As String, DirApp As String) As Generic.List(Of ProntoMVC.Data.FuncionesGenericasCSharp.Resultados)
 
 
@@ -12875,14 +12875,14 @@ Public Class CartaDePorteManager
 
 
         ' go through the document and pull out the inline image elements
-        Dim imageElements As IEnumerable(Of DocumentFormat.OpenXml.Drawing.Wordprocessing.Inline) = _
-                                        From run In wordDoc.MainDocumentPart.Document.Descendants(Of Wordprocessing.Run)() _
-                                        Where run.Descendants(Of Inline)().First() IsNot Nothing _
+        Dim imageElements As IEnumerable(Of DocumentFormat.OpenXml.Drawing.Wordprocessing.Inline) =
+                                        From run In wordDoc.MainDocumentPart.Document.Descendants(Of Wordprocessing.Run)()
+                                        Where run.Descendants(Of Inline)().First() IsNot Nothing
                                         Select run.Descendants(Of DocumentFormat.OpenXml.Drawing.Wordprocessing.Inline)().First()
 
         ' select the image that has the correct filename (chooses the first if there are many)
-        Dim selectedImage As DocumentFormat.OpenXml.Drawing.Wordprocessing.Inline = (From image In imageElements _
-                                       Where (image.DocProperties IsNot Nothing AndAlso (True Or image.DocProperties.Equals("image filename")))).First()
+        Dim selectedImage As DocumentFormat.OpenXml.Drawing.Wordprocessing.Inline = (From image In imageElements
+                                                                                     Where (image.DocProperties IsNot Nothing AndAlso (True Or image.DocProperties.Equals("image filename")))).First()
 
         ' get the ID from the inline element
 
@@ -12989,10 +12989,10 @@ Public Class CartaDePorteManager
 
         ErrHandler2.WriteError("Creando codigo barras")
 
-        Dim imagen = barras.crear(ocli.Cuit.Replace("-", ""), _
-                                  JustificadoDerecha(tipoafip, 2, "0"), _
-                                  JustificadoDerecha(ofac.PuntoVenta, 4, "0"), _
-                                  JustificadoDerecha(ofac.CAE, 14, "0"), _
+        Dim imagen = barras.crear(ocli.Cuit.Replace("-", ""),
+                                  JustificadoDerecha(tipoafip, 2, "0"),
+                                  JustificadoDerecha(ofac.PuntoVenta, 4, "0"),
+                                  JustificadoDerecha(ofac.CAE, 14, "0"),
                                   ofac.FechaVencimientoORechazoCAE.Date.ToString("yyyyMMdd"))
 
 
@@ -13487,10 +13487,10 @@ Public Class CartaDePorteManager
             'Dim t = formfield.GetFirstChild(Of Wordprocessing.TextInput)()
 
 
-            Dim bookmarkstartCliente = (From bookmark In _
-                             wordDoc.MainDocumentPart.Document.Body.Descendants(Of Wordprocessing.BookmarkStart)() _
-                           Where bookmark.Name = "Cliente" _
-                           Select bookmark).SingleOrDefault
+            Dim bookmarkstartCliente = (From bookmark In
+                             wordDoc.MainDocumentPart.Document.Body.Descendants(Of Wordprocessing.BookmarkStart)()
+                                        Where bookmark.Name = "Cliente"
+                                        Select bookmark).SingleOrDefault
 
             'http://stackoverflow.com/questions/3308299/replace-bookmark-text-in-word-file-using-open-xml-sdk
             'http://stackoverflow.com/questions/3308299/replace-bookmark-text-in-word-file-using-open-xml-sdk
@@ -13521,7 +13521,7 @@ Public Class CartaDePorteManager
                     If Not bsText Is Nothing Then
                         If TypeOf bsText Is Wordprocessing.BookmarkEnd Then
                             'Add Text element after start bookmark
-                            bookmarkstartCliente.Parent.InsertAfter(New Wordprocessing.Run(New Wordprocessing.Text(textoRellenar)), _
+                            bookmarkstartCliente.Parent.InsertAfter(New Wordprocessing.Run(New Wordprocessing.Text(textoRellenar)),
                                                                     bookmarkstartCliente)
                         Else
                             'Change Bookmark Text
@@ -13613,16 +13613,16 @@ Public Class CartaDePorteManager
 
 
 
-            Dim bookmarkDetalles = (From bookmark In wordDoc.MainDocumentPart.Document.Body.Descendants(Of Wordprocessing.BookmarkStart)() _
-       Where bookmark.Name = "Detalles" Or bookmark.Name = "Detalle" _
-       Select bookmark).FirstOrDefault
+            Dim bookmarkDetalles = (From bookmark In wordDoc.MainDocumentPart.Document.Body.Descendants(Of Wordprocessing.BookmarkStart)()
+                                    Where bookmark.Name = "Detalles" Or bookmark.Name = "Detalle"
+                                    Select bookmark).FirstOrDefault
 
 
             Dim tempParent
 
-            Dim placeholderCANT = (From bookmark In wordDoc.MainDocumentPart.Document.Body.Descendants(Of Wordprocessing.Text)() _
-                                      Where bookmark.Text = "#Descripcion#" _
-                                      Select bookmark).FirstOrDefault
+            Dim placeholderCANT = (From bookmark In wordDoc.MainDocumentPart.Document.Body.Descendants(Of Wordprocessing.Text)()
+                                   Where bookmark.Text = "#Descripcion#"
+                                   Select bookmark).FirstOrDefault
 
             If Not placeholderCANT Is Nothing Then
                 tempParent = placeholderCANT.Parent
@@ -14006,10 +14006,10 @@ Public Class CartaDePorteManager
                 'Dim t = formfield.GetFirstChild(Of Wordprocessing.TextInput)()
 
 
-                Dim bookmarkstartCliente = (From bookmark In _
-                                 wordDoc.MainDocumentPart.Document.Body.Descendants(Of Wordprocessing.BookmarkStart)() _
-                               Where bookmark.Name = "Cliente" _
-                               Select bookmark).SingleOrDefault
+                Dim bookmarkstartCliente = (From bookmark In
+                                 wordDoc.MainDocumentPart.Document.Body.Descendants(Of Wordprocessing.BookmarkStart)()
+                                            Where bookmark.Name = "Cliente"
+                                            Select bookmark).SingleOrDefault
 
                 'http://stackoverflow.com/questions/3308299/replace-bookmark-text-in-word-file-using-open-xml-sdk
                 'http://stackoverflow.com/questions/3308299/replace-bookmark-text-in-word-file-using-open-xml-sdk
@@ -14040,7 +14040,7 @@ Public Class CartaDePorteManager
                         If Not bsText Is Nothing Then
                             If TypeOf bsText Is Wordprocessing.BookmarkEnd Then
                                 'Add Text element after start bookmark
-                                bookmarkstartCliente.Parent.InsertAfter(New Wordprocessing.Run(New Wordprocessing.Text(textoRellenar)), _
+                                bookmarkstartCliente.Parent.InsertAfter(New Wordprocessing.Run(New Wordprocessing.Text(textoRellenar)),
                                                                         bookmarkstartCliente)
                             Else
                                 'Change Bookmark Text
@@ -14132,16 +14132,16 @@ Public Class CartaDePorteManager
 
 
 
-                Dim bookmarkDetalles = (From bookmark In wordDoc.MainDocumentPart.Document.Body.Descendants(Of Wordprocessing.BookmarkStart)() _
-                       Where bookmark.Name = "Detalles" Or bookmark.Name = "Detalle" _
-                       Select bookmark).FirstOrDefault
+                Dim bookmarkDetalles = (From bookmark In wordDoc.MainDocumentPart.Document.Body.Descendants(Of Wordprocessing.BookmarkStart)()
+                                        Where bookmark.Name = "Detalles" Or bookmark.Name = "Detalle"
+                                        Select bookmark).FirstOrDefault
 
 
                 Dim tempParent
 
-                Dim placeholderCANT = (From bookmark In wordDoc.MainDocumentPart.Document.Body.Descendants(Of Wordprocessing.Text)() _
-                                          Where bookmark.Text = "#Descripcion#" _
-                                          Select bookmark).FirstOrDefault
+                Dim placeholderCANT = (From bookmark In wordDoc.MainDocumentPart.Document.Body.Descendants(Of Wordprocessing.Text)()
+                                       Where bookmark.Text = "#Descripcion#"
+                                       Select bookmark).FirstOrDefault
 
                 If Not placeholderCANT Is Nothing Then
                     tempParent = placeholderCANT.Parent
@@ -14345,7 +14345,7 @@ Public Class CartaDePorteManager
         Dim last As OpenXmlElement = myDoc.MainDocumentPart.Document.Body().Elements() _
                                      .LastOrDefault(Function(e) TypeOf e Is DocumentFormat.OpenXml.Wordprocessing.Paragraph Or TypeOf e Is DocumentFormat.OpenXml.Wordprocessing.AltChunk)
 
-        last.InsertAfterSelf(New DocumentFormat.OpenXml.Wordprocessing.Paragraph(New DocumentFormat.OpenXml.Wordprocessing. _
+        last.InsertAfterSelf(New DocumentFormat.OpenXml.Wordprocessing.Paragraph(New DocumentFormat.OpenXml.Wordprocessing.
                                                                                 Run(New DocumentFormat.OpenXml.Wordprocessing.Break() With {.Type = DocumentFormat.OpenXml.Wordprocessing.BreakValues.Page})))
     End Sub
 
@@ -14564,7 +14564,7 @@ Public Class CartaDePorteManager
 
 
 
-        Dim c1() As String = { _
+        Dim c1() As String = {
                                       "20268165178" _
                                     , "20081166383" _
                                     , "20237107870" _
@@ -14583,7 +14583,7 @@ Public Class CartaDePorteManager
                                     , "20176398397" _
                                     , "30712353097" _
                                     , "30510718441" _
-                                    , "xxxxxxxxxxx" _
+                                    , "xxxxxxxxxxx"
                    }
 
 
@@ -14592,7 +14592,7 @@ Public Class CartaDePorteManager
 
 
         'http://bdlconsultores.ddns.net/Consultas/Admin/VerConsultasCumplidos1.php?recordid=20348
-        Dim c2() As String = { _
+        Dim c2() As String = {
                               "33708480849" _
                             , "30668239559" _
                             , "30707199896" _
@@ -14642,12 +14642,12 @@ Public Class CartaDePorteManager
                             , "30708134925" _
                             , "30707120793" _
                             , "30500049460" _
-                            , "xxxxxxxxxxx" _
+                            , "xxxxxxxxxxx"
                             }
 
 
         'http://bdlconsultores.ddns.net/Consultas/Admin/verConsultas1.php?recordid=20848
-        Dim c3() As String = { _
+        Dim c3() As String = {
                      "30508255965" _
                     , "30708547758" _
                     , "30613957509" _
@@ -14820,7 +14820,7 @@ Public Class CartaDePorteManager
                     , "20043789083" _
                     , "30619509133" _
                     , "20122393136" _
-                    , "20052561575" _
+                    , "20052561575"
                     }
 
 
@@ -14919,19 +14919,69 @@ Public Class CartaDePorteManager
 
         Dim db As ProntoMVC.Data.Models.DemoProntoEntities = New ProntoMVC.Data.Models.DemoProntoEntities(ProntoMVC.Data.Models.Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC)))
 
-        Dim dbcartas = (From c In db.fSQL_GetDataTableFiltradoYPaginado(Nothing, limitedecartas, Nothing, Nothing, idVendedor,
-                                    idCorredor, idDestinatario, idIntermediario, idRComercial,
-                                    idArticulo, idProcedencia, idDestino, FiltroANDOR.FiltroOR, "Ambos",
-                                    fechadesde, fechahasta, 0,
-                                    Nothing, Nothing, Nothing, Nothing,
-                                     Nothing, Nothing, Nothing, Nothing)
-                        Select c).Take(limitedecartas).ToList
+        Try
 
-        Return dbcartas
+            Dim dbcartas = (From c In db.fSQL_GetDataTableFiltradoYPaginado(Nothing, limitedecartas, Nothing, Nothing, idVendedor,
+                                        idCorredor, idDestinatario, idIntermediario, idRComercial,
+                                        idArticulo, idProcedencia, idDestino, FiltroANDOR.FiltroOR, "Ambos",
+                                        fechadesde, fechahasta, 0,
+                                        Nothing, Nothing, Nothing, Nothing,
+                                         Nothing, Nothing, Nothing, Nothing)
+                            Select c).Take(limitedecartas).ToList
+            Return dbcartas
+        Catch e As Exception
+            Dim inner As Exception = e.InnerException
+            While Not (inner Is Nothing)
+                If System.Diagnostics.Debugger.IsAttached() Then
+                    'MsgBox(inner.Message)
+                    Stop
+                End If
+                ErrHandler2.WriteError("ListadoSegunCliente: " & inner.Message) ' & "   Filas:" & dt.Rows.Count & " Filtro:" & titulo)
+                inner = inner.InnerException
+            End While
+            Throw
+
+
+        End Try
+
+
+
     End Function
 
 
 
+    Shared Function CodigoProvincia(sProv As String) As Integer
+
+        sProv = sProv.Trim.ToUpper
+
+        If sProv.Contains("BUENOS AIRES") Then Return 1
+        If sProv.Contains("CATAMARCA") Then Return 2
+        If sProv.Contains("CORDOBA") Then Return 3
+        If sProv.Contains("CORRIENTES") Then Return 4
+        If sProv.Contains("ENTRE RIOS") Then Return 5
+        If sProv.Contains("JUJUY") Then Return 6
+        If sProv.Contains("MENDOZA") Then Return 7
+        If sProv.Contains("LA RIOJA") Then Return 8
+        If sProv.Contains("SALTA") Then Return 9
+        If sProv.Contains("SAN JUAN") Then Return 10
+        If sProv.Contains("SAN LUIS") Then Return 11
+        If sProv.Contains("SANTA FE") Then Return 12
+        If sProv.Contains("SANTIAGO DEL ESTERO") Then Return 13
+        If sProv.Contains("TUCUMAN") Then Return 14
+        If sProv.Contains("CHACO") Then Return 16
+        If sProv.Contains("CHUBUT") Then Return 17
+        If sProv.Contains("FORMOSA") Then Return 18
+        If sProv.Contains("MISIONES") Then Return 19
+        If sProv.Contains("NEUQUEN") Then Return 20
+        If sProv.Contains("LA PAMPA") Then Return 21
+        If sProv.Contains("RIO NEGRO") Then Return 22
+        If sProv.Contains("SANTA CRUZ") Then Return 23
+        If sProv.Contains("TIERRA DEL FUEGO") Then Return 24
+        If sProv.Contains("CAPITAL FEDERAL") Then Return 0
+
+        Return 1
+
+    End Function
 
 
 
@@ -15068,19 +15118,47 @@ Public Class CartaDePorteManager
 
 
 
-1.       El Código Oncca Localidad Destino (codonccalocalidadpuerto) y Código Oncca Provincia Destino (codonccaprovinciapuerto) son iguales. Aparentemente la Provincia.
-2.       El Código Oncca Localidad Procedencia (codonccalocalproc) y Código Oncca Provincia Procedencia (codonccaprovincialproc) son iguales. Aparentemente la Provincia. 
-3.       El Código Oncca Puerto (codonccapuerto) siempre es 0. 
-4.       Los Códigos Oncca de Localidad Procedencia que nos mandan parecen estar iguales a los que usa la AFIP, pero encuentro inconsistencias entre los códigos de destino y las descripciones del campo localidaddestino. Puede ser que esté mal la descripción o puede estar mal el código.
+
 
 
                     'codigos oncaa    -qué tenemos que usar acá
-                    cp.codmerca = Val(dbc.EspecieONCAA)
+
+                    '6.       Los códigos de producto que informa no se corresponden con los de CerealNet. Ej.: CerealNet informa para maíz el número 19 y Williams el 501. Adjunto tabla con Codigos de Productos
+                    cp.codmerca = Val(dbc.CodigoSAJPYA) 'dbc.EspecieONCAA) kljlkjlkjljlkjl
+
+
+
+
+
+
+
+
+                    '1.       El Código Oncca Localidad Destino (codonccalocalidadpuerto) y Código Oncca Provincia Destino (codonccaprovinciapuerto) son iguales.
+                    '                         Aparentemente la Provincia.
+                    '2.       El Código Oncca Localidad Procedencia (codonccalocalproc) y Código Oncca Provincia Procedencia (codonccaprovincialproc) son iguales.
+                    '                         Aparentemente la Provincia. 
+                    '3.       El Código Oncca Puerto (codonccapuerto) siempre es 0. 
+
+
+                    '4.       Los Códigos Oncca de Localidad Procedencia que nos mandan parecen estar iguales a los que usa la AFIP, pero encuentro 
+                    '                        inconsistencias entre los códigos de destino y las descripciones del campo localidaddestino. Puede ser que esté mal la descripción o puede estar mal el código.
+
+
+
+
+                    cp.puerto = If(dbc.EstablecimientoNombre, "")
+                    cp.codonccapuerto = Val(dbc.EstablecimientoCodigo)   'el establecimiento tiene un codigo. es el ONCCA?
+
+                    cp.localidaddestino = If(dbc.DestinoDesc, "")
                     cp.codonccalocalidadpuerto = Val(dbc.DestinoCodigoONCAA)
+                    cp.codonccaprovinciapuerto = CodigoProvincia(dbc.DestinoProvinciaDesc)
+
+                    cp.procedencia = If(dbc.ProcedenciaDesc, "")
                     cp.codonccalocalproc = Val(dbc.ProcedenciaCodigoONCAA)
-                    cp.codonccaprovincialproc = Val(dbc.ProcedenciaCodigoONCAA)
-                    cp.codonccaprovinciapuerto = Val(dbc.DestinoCodigoONCAA)
-                    cp.codonccapuerto = Val(dbc.IdEstablecimiento)
+                    cp.codonccaprovincialproc = CodigoProvincia(dbc.ProcedenciaProvinciaDesc) 'ProcedenciaCodigoONCAA)
+
+
+
 
 
 
@@ -15115,15 +15193,12 @@ Public Class CartaDePorteManager
                     cp.nomcorre = If(dbc.CorredorDesc, "")
                     cp.nomExport = If(dbc.DestinatarioDesc, "")
                     cp.nomRemic = If(dbc.RComercialDesc, "")
-                    cp.procedencia = If(dbc.ProcedenciaDesc, "")
-                    cp.puerto = If(dbc.DestinoDesc, "")
                     cp.remitente = If(dbc.TitularDesc, "")
-                    cp.localidaddestino = If(dbc.DestinoDesc, "")
 
                     cp.mercaderia = If(dbc.Producto, "")
 
 
-                    cp.nroRecibo = dbc.NRecibo
+                    cp.nroRecibo = If(dbc.NRecibo, "")
                     cp.observaciones = dbc.Observaciones
                     cp.observado = ""
                     cp.patente = If(dbc.Patente, "")
@@ -15141,110 +15216,109 @@ Public Class CartaDePorteManager
 
 
 
-5.       De 1000 descargas que pude importar de Williams sólo 451 tienen rubros de calidad. 
-            1 - Todos estos registros informan el mismo código de rubro. Error o coincidencia?
-            2 - Ese codigo  es un número, mientras que CerealNet informa un código de entre 2 y 3 letras. Adjunto tabla con Rubros de Calidad actuales
-6.       Los códigos de producto que informa no se corresponden con los de CerealNet. Ej.: CerealNet informa para maíz el número 19 y Williams el 501. Adjunto tabla con Codigos de Productos
+                    '5.       De 1000 descargas que pude importar de Williams sólo 451 tienen rubros de calidad. 
+                    '            1 - Todos estos registros informan el mismo código de rubro. Error o coincidencia?
+                    '            2 - Ese codigo  es un número, mientras que CerealNet informa un código de entre 2 y 3 letras. Adjunto tabla con Rubros de Calidad actuales
+                    '6.       Los códigos de producto que informa no se corresponden con los de CerealNet. Ej.: CerealNet informa para maíz el número 19 y Williams el 501. Adjunto tabla con Codigos de Productos
 
-Descripcion_RubroCalidad
-                    Descripcion_GradoCerealNet
-                    Descripcion_Producto
-                    Codigo_CerealNet
-                    HUMEDAD
-                    HD
-                    TRIGO
-15
-REVOLCADO EN TIERRA
-REV
-                    MAÍZ
-19
-PTA.SOMB.POR TIERRA
-TIE
-                    SORGO
-22
-PTA.NEGRA POR CARBON
-p/ n 
-CEBADA FORRAJERA
-11
-GRANOS MANCHADOS
-M/ C 
-TRIGO CANDEAL
-14
-INSECTOS VIVOS
-INS
-                    GIRASOL
-2
-PESO HECTOLITRICO
-PH
-                    SOJA
-23
-GNOS.ARD.Y DAÑ.POR CALOR
-ADC
-                    ACEITE DE SOJA
-50
-GRANOS PZA.BCA.
-PBA
-MAIZ FLINT
-26
-GRANOS PICADOS
-Pic
-                    CEBADA CERVECERA
-17
-CHAMICOS
-                    CHA
-                    HARINA DE SOJA
-41
-SEM.TREBOL OLOR
-Str()
-                    SOJA
-414
-Color
-                    COL
-                    GRADO
-                    GRA
-                    CUERPOS EXTRAÑOS
-C.E
-                    HUMEDAD CAMARA
-GMA
-                    GRANOS DAÑADOS
-DAN
-                    OLORES OBJETABLES
-OLR
-                    GRANOS AMOHOSADOS
-MOH
-                    MATERIA GRASA
-MG
-                    ACIDEZ
-                    AMG
-                    GRANOS QUEBRADOS
-QUB
-                    TIPO
-                    TIP
-                    DESCASCARADO y ROTO
-d/ R 
-GRANOS NEGROS
-GN
-                    CONTENIDO PROTEICO
-C/ p 
-TOTAL DAÑADO
-TDÑ
-                    GRANOS CON CARBON
-GC
-                    GRANOS QUEMADOS O DE AVERÍA
-q/ A 
-AVERIA
-                    AVE
-                    ESCLEROTOS
-                    ESC
-                    TEMPERATURA
-                    TMP
-                    GRANOS VERDES
-GV
-                    FONDO
-                    FDO
-                    OTRO TIPO
-OT
-
+                    'Descripcion_RubroCalidad
+                    '                    Descripcion_GradoCerealNet
+                    '                    Descripcion_Producto
+                    '                    Codigo_CerealNet
+                    '                    HUMEDAD
+                    '                    HD
+                    '                    TRIGO
+                    '15
+                    'REVOLCADO EN TIERRA
+                    'REV
+                    '                    MAÍZ
+                    '19
+                    'PTA.SOMB.POR TIERRA
+                    'TIE
+                    '                    SORGO
+                    '22
+                    'PTA.NEGRA POR CARBON
+                    'p/ n 
+                    'CEBADA FORRAJERA
+                    '11
+                    'GRANOS MANCHADOS
+                    'M/ C 
+                    'TRIGO CANDEAL
+                    '14
+                    'INSECTOS VIVOS
+                    'INS
+                    '                    GIRASOL
+                    '2
+                    'PESO HECTOLITRICO
+                    'PH
+                    '                    SOJA
+                    '23
+                    'GNOS.ARD.Y DAÑ.POR CALOR
+                    'ADC
+                    '                    ACEITE DE SOJA
+                    '50
+                    'GRANOS PZA.BCA.
+                    'PBA
+                    'MAIZ FLINT
+                    '26
+                    'GRANOS PICADOS
+                    'Pic
+                    '                    CEBADA CERVECERA
+                    '17
+                    'CHAMICOS
+                    '                    CHA
+                    '                    HARINA DE SOJA
+                    '41
+                    'SEM.TREBOL OLOR
+                    'Str()
+                    '                    SOJA
+                    '414
+                    'Color
+                    '                    COL
+                    '                    GRADO
+                    '                    GRA
+                    '                    CUERPOS EXTRAÑOS
+                    'C.E
+                    '                    HUMEDAD CAMARA
+                    'GMA
+                    '                    GRANOS DAÑADOS
+                    'DAN
+                    '                    OLORES OBJETABLES
+                    'OLR
+                    '                    GRANOS AMOHOSADOS
+                    'MOH
+                    '                    MATERIA GRASA
+                    'MG
+                    '                    ACIDEZ
+                    '                    AMG
+                    '                    GRANOS QUEBRADOS
+                    'QUB
+                    '                    TIPO
+                    '                    TIP
+                    '                    DESCASCARADO y ROTO
+                    'd/ R 
+                    'GRANOS NEGROS
+                    'GN
+                    '                    CONTENIDO PROTEICO
+                    'C/ p 
+                    'TOTAL DAÑADO
+                    'TDÑ
+                    '                    GRANOS CON CARBON
+                    'GC
+                    '                    GRANOS QUEMADOS O DE AVERÍA
+                    'q/ A 
+                    'AVERIA
+                    '                    AVE
+                    '                    ESCLEROTOS
+                    '                    ESC
+                    '                    TEMPERATURA
+                    '                    TMP
+                    '                    GRANOS VERDES
+                    'GV
+                    '                    FONDO
+                    '                    FDO
+                    '                    OTRO TIPO
+                    'OT
 
 
 
@@ -15267,51 +15341,51 @@ OT
 
 
 
-                    RenglonCerealnetCalidad(dbc, 1, dbc.NobleExtranos, If(dbc.CalidadGranosExtranosRebaja, 0), dbc.CalidadGranosExtranosRebaja, Nothing, "01", "Extraños", 0, False, anas) ', dbc.CalidadGranosExtranosMerma, False)
+                    RenglonCerealnetCalidad(dbc, 1, dbc.NobleExtranos, If(dbc.CalidadGranosExtranosRebaja, 0), dbc.CalidadGranosExtranosRebaja, Nothing, "C.E", "Extraños", 0, False, anas) ', dbc.CalidadGranosExtranosMerma, False)
 
 
-                    RenglonCerealnetCalidad(dbc, 2, dbc.NobleQuebrados, dbc.CalidadMermaChamicoBonifica_o_Rebaja, dbc.NobleQuebrados, Nothing, "01", "Quebrados", 0, False, anas)  ', dbc.CalidadQuebradosMerma, _TipoMerma(s.Quebrados, dbc.Secada))
+                    RenglonCerealnetCalidad(dbc, 2, dbc.NobleQuebrados, dbc.CalidadMermaChamicoBonifica_o_Rebaja, dbc.NobleQuebrados, Nothing, "QUB", "Quebrados", 0, False, anas)  ', dbc.CalidadQuebradosMerma, _TipoMerma(s.Quebrados, dbc.Secada))
 
 
-                    RenglonCerealnetCalidad(dbc, 3, dbc.NobleDaniados, dbc.CalidadGranosDanadosRebaja, dbc.CalidadGranosDanadosRebaja, Nothing, "01", "Dañado", 0, False, anas)
+                    RenglonCerealnetCalidad(dbc, 3, dbc.NobleDaniados, dbc.CalidadGranosDanadosRebaja, dbc.CalidadGranosDanadosRebaja, Nothing, "DAN", "Dañado", 0, False, anas)
 
 
-                    RenglonCerealnetCalidad(dbc, 4, dbc.NobleChamico, dbc.CalidadGranosDanadosRebaja, dbc.NobleChamico2, Nothing, "01", "Chamico", 0, False, anas)
+                    RenglonCerealnetCalidad(dbc, 4, dbc.NobleChamico, dbc.CalidadGranosDanadosRebaja, dbc.NobleChamico2, Nothing, "CHA", "Chamico", 0, False, anas)
 
-                    RenglonCerealnetCalidad(dbc, 5, dbc.NobleRevolcado, dbc.CalidadGranosDanadosRebaja, dbc.NobleRevolcado, Nothing, "01", "Revolcados", 0, False, anas)
-
-
-
-                    RenglonCerealnetCalidad(dbc, 6, dbc.NobleObjetables, dbc.CalidadMermaChamicoBonifica_o_Rebaja, dbc.NobleObjetables, Nothing, "01", "Objetables", 0, False, anas)
-
-                    RenglonCerealnetCalidad(dbc, 7, dbc.NobleAmohosados, dbc.CalidadMermaChamicoBonifica_o_Rebaja, dbc.NobleObjetables, Nothing, "01", "Amohosados", 0, False, anas)
+                    RenglonCerealnetCalidad(dbc, 5, dbc.NobleRevolcado, dbc.CalidadGranosDanadosRebaja, dbc.NobleRevolcado, Nothing, "REV", "Revolcados", 0, False, anas)
 
 
 
-                    RenglonCerealnetCalidad(dbc, 8, dbc.CalidadPuntaSombreada, dbc.CalidadGranosDanadosRebaja, dbc.NobleObjetables, Nothing, "01", "PuntaSombreada", 0, False, anas)
+                    RenglonCerealnetCalidad(dbc, 6, dbc.NobleObjetables, dbc.CalidadMermaChamicoBonifica_o_Rebaja, dbc.NobleObjetables, Nothing, "OLR", "Objetables", 0, False, anas)
 
-                    RenglonCerealnetCalidad(dbc, 9, dbc.NobleHectolitrico, dbc.CalidadGranosDanadosRebaja, dbc.NobleObjetables, Nothing, "01", "Hectolítrico", 0, False, anas)
-
-                    RenglonCerealnetCalidad(dbc, 10, dbc.NobleCarbon, dbc.CalidadGranosDanadosRebaja, dbc.NobleObjetables, Nothing, "01", "Carbon", 0, False, anas)
-
-                    RenglonCerealnetCalidad(dbc, 11, dbc.NoblePanzaBlanca, dbc.CalidadGranosDanadosRebaja, dbc.NobleObjetables, Nothing, "01", "PanzaBlanca", 0, False, anas)
-
-                    RenglonCerealnetCalidad(dbc, 12, dbc.NoblePicados, dbc.CalidadGranosDanadosRebaja, dbc.NobleObjetables, Nothing, "01", "Picados", 0, False, anas)
+                    RenglonCerealnetCalidad(dbc, 7, dbc.NobleAmohosados, dbc.CalidadMermaChamicoBonifica_o_Rebaja, dbc.NobleObjetables, Nothing, "MOH", "Amohosados", 0, False, anas)
 
 
 
-                    RenglonCerealnetCalidad(dbc, 13, dbc.NobleVerdes, dbc.CalidadMermaChamicoBonifica_o_Rebaja, dbc.NobleObjetables, Nothing, "01", "Granos Verdes", 0, False, anas)
+                    RenglonCerealnetCalidad(dbc, 8, dbc.CalidadPuntaSombreada, dbc.CalidadGranosDanadosRebaja, dbc.NobleObjetables, Nothing, "TIE", "PuntaSombreada", 0, False, anas)
+
+                    RenglonCerealnetCalidad(dbc, 9, dbc.NobleHectolitrico, dbc.CalidadGranosDanadosRebaja, dbc.NobleObjetables, Nothing, "PH", "Hectolítrico", 0, False, anas)
+
+                    RenglonCerealnetCalidad(dbc, 10, dbc.NobleCarbon, dbc.CalidadGranosDanadosRebaja, dbc.NobleObjetables, Nothing, "GC", "Carbon", 0, False, anas)
+
+                    RenglonCerealnetCalidad(dbc, 11, dbc.NoblePanzaBlanca, dbc.CalidadGranosDanadosRebaja, dbc.NobleObjetables, Nothing, "OT", "PanzaBlanca", 0, False, anas)
+
+                    RenglonCerealnetCalidad(dbc, 12, dbc.NoblePicados, dbc.CalidadGranosDanadosRebaja, dbc.NobleObjetables, Nothing, "PIC", "Picados", 0, False, anas)
 
 
-                    RenglonCerealnetCalidad(dbc, 14, dbc.CalidadGranosQuemados, dbc.CalidadGranosDanadosRebaja, dbc.NobleObjetables, Nothing, "01", "Quemados", 0, False, anas)
+
+                    RenglonCerealnetCalidad(dbc, 13, dbc.NobleVerdes, dbc.CalidadMermaChamicoBonifica_o_Rebaja, dbc.NobleObjetables, Nothing, "GV", "Granos Verdes", 0, False, anas)
 
 
-                    RenglonCerealnetCalidad(dbc, 15, dbc.CalidadTierra, dbc.CalidadMermaChamicoBonifica_o_Rebaja, dbc.NobleObjetables, Nothing, "01", "Tierra", 0, False, anas)
-
-                    RenglonCerealnetCalidad(dbc, 16, dbc.CalidadMermaZarandeo, dbc.CalidadGranosDanadosRebaja, dbc.NobleObjetables, Nothing, "01", "Zarandeo", 0, False, anas)
+                    RenglonCerealnetCalidad(dbc, 14, dbc.CalidadGranosQuemados, dbc.CalidadGranosDanadosRebaja, dbc.NobleObjetables, Nothing, "Q/A", "Quemados", 0, False, anas)
 
 
-                    RenglonCerealnetCalidad(dbc, 17, dbc.CalidadDescuentoFinal, dbc.CalidadGranosDanadosRebaja, dbc.NobleObjetables, Nothing, "01", "DescuentoFinal", 0, False, anas)
+                    RenglonCerealnetCalidad(dbc, 15, dbc.CalidadTierra, dbc.CalidadMermaChamicoBonifica_o_Rebaja, dbc.NobleObjetables, Nothing, "TIE", "Tierra", 0, False, anas)
+
+                    RenglonCerealnetCalidad(dbc, 16, dbc.CalidadMermaZarandeo, dbc.CalidadGranosDanadosRebaja, dbc.NobleObjetables, Nothing, "OT", "Zarandeo", 0, False, anas)
+
+
+                    RenglonCerealnetCalidad(dbc, 17, dbc.CalidadDescuentoFinal, dbc.CalidadGranosDanadosRebaja, dbc.NobleObjetables, Nothing, "OT", "DescuentoFinal", 0, False, anas)
 
 
 
@@ -15321,12 +15395,17 @@ OT
                     'RenglonCerealnetCalidad(dbc, 18, cc.CalidadHumedadResultado, dbc.CalidadGranosDanadosRebaja, dbc.NobleObjetables, Nothing, "01", "Humedad", 0, False, anas)
                     Dim porcentajemerma As Decimal
                     Try
-                        porcentajemerma = dbc.HumedadDesnormalizada * 100 / dbc.NetoFinal
+                        If If(dbc.NetoFinal, 0) > 0 Then
+                            porcentajemerma = If(dbc.HumedadDesnormalizada, 0) * 100 / dbc.NetoFinal
+                        Else
+                            porcentajemerma = 0
+                        End If
+
                     Catch ex As Exception
                         porcentajemerma = 0
                     End Try
 
-                    RenglonCerealnetCalidad(dbc, 18, dbc.Humedad, porcentajemerma, porcentajemerma, Nothing, "01", "Humedad", dbc.HumedadDesnormalizada, False, anas)
+                    RenglonCerealnetCalidad(dbc, 18, If(dbc.Humedad, 0), porcentajemerma, porcentajemerma, Nothing, "HD", "Humedad", If(dbc.HumedadDesnormalizada, 0), False, anas)
 
 
 
@@ -15337,18 +15416,18 @@ OT
                         Dim cc = CartaDePorteManager.GetItem(SC, dbc.IdCartaDePorte)
 
 
-                        RenglonCerealnetCalidad(dbc, 19, cc.CalidadGastosFumigacionResultado, dbc.CalidadGranosDanadosRebaja, cc.CalidadGastosFumigacionRebaja, Nothing, "01", "GastosFumigacion", 0, False, anas)
+                        RenglonCerealnetCalidad(dbc, 19, cc.CalidadGastosFumigacionResultado, dbc.CalidadGranosDanadosRebaja, cc.CalidadGastosFumigacionRebaja, Nothing, "OT", "GastosFumigacion", 0, False, anas)
 
 
-                        RenglonCerealnetCalidad(dbc, 20, cc.CalidadGastoDeSecada, cc.CalidadGastoDeSecadaRebaja, cc.CalidadGastoDeSecadaRebaja, Nothing, "01", "GastoDeSecada", 0, False, anas)
+                        RenglonCerealnetCalidad(dbc, 20, cc.CalidadGastoDeSecada, cc.CalidadGastoDeSecadaRebaja, cc.CalidadGastoDeSecadaRebaja, Nothing, "OT", "GastoDeSecada", 0, False, anas)
 
-                        RenglonCerealnetCalidad(dbc, 21, cc.CalidadMermaVolatil, cc.CalidadMermaVolatilRebaja, cc.CalidadMermaVolatilRebaja, Nothing, "01", "MermaVolatil", 0, False, anas)
+                        RenglonCerealnetCalidad(dbc, 21, cc.CalidadMermaVolatil, cc.CalidadMermaVolatilRebaja, cc.CalidadMermaVolatilRebaja, Nothing, "OT", "MermaVolatil", 0, False, anas)
 
-                        RenglonCerealnetCalidad(dbc, 22, cc.CalidadFondoNidera, cc.CalidadFondoNideraRebaja, cc.CalidadFondoNideraRebaja, Nothing, "01", "FondoNidera", 0, False, anas)
+                        RenglonCerealnetCalidad(dbc, 22, cc.CalidadFondoNidera, cc.CalidadFondoNideraRebaja, cc.CalidadFondoNideraRebaja, Nothing, "OT", "FondoNidera", 0, False, anas)
 
-                        RenglonCerealnetCalidad(dbc, 23, cc.CalidadMermaConvenida, cc.CalidadMermaConvenidaRebaja, cc.CalidadMermaConvenidaRebaja, Nothing, "01", "MermaConvenida", 0, False, anas)
+                        RenglonCerealnetCalidad(dbc, 23, cc.CalidadMermaConvenida, cc.CalidadMermaConvenidaRebaja, cc.CalidadMermaConvenidaRebaja, Nothing, "OT", "MermaConvenida", 0, False, anas)
 
-                        RenglonCerealnetCalidad(dbc, 24, cc.CalidadTalCualVicentin, cc.CalidadTalCualVicentinRebaja, cc.CalidadTalCualVicentinRebaja, Nothing, "01", "TalCualVicentin", 0, False, anas)
+                        RenglonCerealnetCalidad(dbc, 24, cc.CalidadTalCualVicentin, cc.CalidadTalCualVicentinRebaja, cc.CalidadTalCualVicentinRebaja, Nothing, "OT", "TalCualVicentin", 0, False, anas)
 
                     End If
 
@@ -15437,16 +15516,13 @@ OT
 
 
 
-    Public Shared Function RenglonCerealnetCalidad(ByVal cdp As ProntoMVC.Data.Models.fSQL_GetDataTableFiltradoYPaginado_Result3, _
-                                            ByVal CodigoEnsayo As Integer?, ByVal Resultado As Double?, ByVal bonif_O_rebaja As Object, _
-                                            ByVal Rebaja As Object, ByVal nf As Integer, ByVal numresultado As String, _
-                                            ByVal descripcion As String, _
-                                            ByVal Merma As Double, Arbitrado As Boolean, anas As List(Of CerealNet.WSCartasDePorte.analisis) _
+    Public Shared Function RenglonCerealnetCalidad(ByVal cdp As ProntoMVC.Data.Models.fSQL_GetDataTableFiltradoYPaginado_Result3,
+                                            ByVal CodigoEnsayo As Integer?, ByVal Resultado As Double?, ByVal bonif_O_rebaja As Object,
+                                            ByVal Rebaja As Object, ByVal nf As Integer, ByVal numresultado As String,
+                                            ByVal descripcion As String,
+                                            ByVal Merma As Double, Arbitrado As Boolean, anas As List(Of CerealNet.WSCartasDePorte.analisis)
                                         ) As CerealNet.WSCartasDePorte.analisis
         Dim sb = ""
-
-
-
         Dim SEPARADOR = ";"
 
         Try
@@ -15454,58 +15530,9 @@ OT
 
             With cdp
 
-
-                '            CartaPorte	IdRubro	DRubro	ResFinal
-                '18383242	151	Grado 1	1
-                '17960754	55	Grado 1	1
-                '18230959	55	Grado 1	1
-                '18126000	55	Grado 1	1
-                '18424881	54	Cuerpos Extraños	-0.6
-                '17835569	55	Grado 1	1
-                '18488771	169	Grado 2	0
-                '18488770	169	Grado 2	0
-
-
-                'CartaPorte	IdRubro	TipoRubro	DRubro	                ResFinal	 DescuentoFinal 	 KilosMerma 
-                '43818919	181 	Arbitrado	Grado 2		                                       -   	 -   
-                '43818918	181	    Arbitrado	Grado 2		                                       -   	 -   
-                '43716160	122	    Merma FísicaGranos amohosados MF		                      -4.00 	 1176 
-                '43716160	75	    Arbitrado	Grado 3		                                      -1.50 	 -   
-
-
-
-
-
                 If Resultado <> 0 Or Rebaja <> 0 Or Merma <> 0 Then
 
-
                     Dim cero = 0
-
-
-                    'ForzarPrefijo5(.NumeroCartaDePorte)
-
-
-                    sb &= LeftMasPadLeft(.NumeroCartaDePorte, 11) & SEPARADOR   'Carta de porte			11	7	17	N	
-                    'sb &= LeftMasPadLeft(CodigoRubroBLD(.Calidad, .Producto), 2) & SEPARADOR                 'Cereal 				2	39	40	N
-                    sb &= LeftMasPadLeft(CodigoEnsayo, 2) & SEPARADOR
-
-                    'Dim tiporubro As String = IIf(descripcion.ToUpper.Contains("GRADO"), "Arbitrado", "Merma_Física")
-                    Dim tiporubro As String = IIf(Arbitrado, "Arbitrado", "Merma_Física")
-
-                    sb &= tiporubro & SEPARADOR
-
-                    sb &= descripcion & SEPARADOR
-
-
-
-
-
-                    'Dim desc As Double
-                    'If Not .IsCalidadDescuentoFinalNull Then
-                    '    desc = .CalidadDescuentoFinal
-                    'Else
-                    '    desc = 0
-                    'End If
 
                     Dim kilosmerma As Decimal
 
@@ -15520,11 +15547,6 @@ OT
 
                     Else
 
-                        sb &= LeftMasPadLeft(Resultado, 7) & SEPARADOR                 'Resultado del ensayo	7	25	31	N
-
-                        sb &= LeftMasPadLeft(Rebaja, 7) & SEPARADOR                 'Descuento Final http://bdlconsultores.dyndns.org/Consultas/Admin/verConsultas1.php?recordid=9291    
-
-
 
                         If descripcion.ToUpper.Contains("HUM") Then
                             kilosmerma = .HumedadDesnormalizada
@@ -15536,33 +15558,11 @@ OT
 
                     End If
 
-                    'If .IsFechaDescargaNull Then .FechaDescarga = Nothing
-                    'sb &= .FechaDescarga.ToString("ddMMyy")         'Fecha	de descarga		6	1	6	N	ddmmaa
-                    'sb &= LeftMasPadLeft(numresultado, 2)                   'Número de resultado	2	18	19	N  "01,02,03,04"
-                    'sb &= LeftMasPadLeft(CodigoEnsayo, 5)                   'Código de ensayo		5	20	24	N
-                    'sb &= LeftMasPadLeft(Int(.NetoFinal), 7)             'Kilos  				7	32	38	N
-                    'sb &= LeftMasPadLeft(.SubnumeroVagon, 8)        'Número de Vagón		8	41	48	N
-                    'sb &= LeftMasPadLeft(cero, 9)                   'Importe de honorarios	9	49	57	N
-                    'sb &= IIf(iisNull(bonif_O_rebaja, 0) = 0, "B", "R")                       'Bonifica o Rebaja		1	58	58	A	B-Bonifica	R-Rebaja
-                    'sb &= LeftMasPadLeft((0).ToString("00.00", System.Globalization.CultureInfo.InvariantCulture), 5)                   'Total de bonif/rebaj	5	59	63	N	
-                    'sb &= IIf(.FueraDeEstandar <> "SI", "N", "S")                       'Fuera de standard		1	64	64	A	S-Si	N-No
-                    'sb &= LeftMasPadLeft(.IdCartaDePorte, 7)                   'Número de certif   	7	65	71	N	
-                    'sb &= LeftMasPadLeft(.DestinoCodigoONCAA, 5)
-
-
-                    sb = Replace(sb, " ", "0")
-                    sb = Replace(sb, "_", " ")
-                    sb = Replace(sb, "Merma_Física", "Merma Física")
-
-                    'http://bdlconsultores.dyndns.org/Consultas/Admin/verConsultas1.php?recordid=9829
-                    'Solicitan agregar al sincronismo de Calidad de BLD una ultima columna, donde se envíe el Destino de la Carta de Porte
-
-                    sb &= Left(.DestinoDesc.ToString, 30).PadRight(30) 'NomDestino	STRING(30)	Nombre Destino)    573)    602
 
 
 
                     Dim a As New CerealNet.WSCartasDePorte.analisis
-                    a.rubro = CodigoEnsayo ' tiporubro
+                    a.rubro = numresultado 'CodigoEnsayo ' tiporubro
                     a.kilosMermas = kilosmerma
                     a.porcentajeMerma = Rebaja
                     a.porcentajeAnalisis = Resultado
@@ -15671,7 +15671,7 @@ OT
             Dim dataSet = New DataSet()
             dataSet.Tables.Add(dt)
 
-            dataSet.WriteXml("C:\MyDataset.xml")
+            dataSet.WriteXml("C:            \MyDataset.xml")
 
 
 
@@ -15776,7 +15776,7 @@ OT
 
             Dim cdp = CartaDePorteManager.GetItemPorNumero(SC, numerocarta, 0, 0)
 
-            If cdp.Titular <> idcliente And cdp.CuentaOrden1 <> idcliente And cdp.CuentaOrden2 <> idcliente And cdp.Entregador <> idcliente And IdClienteEquivalenteDelIdVendedor(cdp.Corredor, SC) <> idcliente And _
+            If cdp.Titular <> idcliente And cdp.CuentaOrden1 <> idcliente And cdp.CuentaOrden2 <> idcliente And cdp.Entregador <> idcliente And IdClienteEquivalenteDelIdVendedor(cdp.Corredor, SC) <> idcliente And
               IdClienteEquivalenteDelIdVendedor(cdp.Corredor2, SC) <> idcliente Then
                 ErrHandler2.WriteError("La carta no corresponde al usuario")
                 Return Nothing
@@ -15949,10 +15949,10 @@ Public Class CDPEstablecimientosManager
 
         'Return EntidadManager.ExecDinamico(SC, Tabla & "_TT")
 
-        Return ExecDinamico(SC, String.Format("SELECT A.*, " & _
-                    " LOC.Nombre as Localidad " & _
-                    " FROM " & Tabla & " A " & _
-                    " LEFT OUTER JOIN Localidades LOC ON A.IdLocalidad = LOC.IdLocalidad " & _
+        Return ExecDinamico(SC, String.Format("SELECT A.*, " &
+                    " LOC.Nombre as Localidad " &
+                    " FROM " & Tabla & " A " &
+                    " LEFT OUTER JOIN Localidades LOC ON A.IdLocalidad = LOC.IdLocalidad " &
                                ""))
         '" LEFT OUTER JOIN Localidades LOCORI ON CDP.Procedencia = LOCORI.IdLocalidad " & _
     End Function
@@ -15961,9 +15961,9 @@ Public Class CDPEstablecimientosManager
         Dim db As LinqCartasPorteDataContext = New LinqCartasPorteDataContext(Encriptar(sc))
 
 
-        Dim ue As linqCDPEstablecimiento = (From p In db.linqCDPEstablecimientos _
-                       Where p.Descripcion.ToString = codEstab _
-                       Select p).FirstOrDefault
+        Dim ue As linqCDPEstablecimiento = (From p In db.linqCDPEstablecimientos
+                                            Where p.Descripcion.ToString = codEstab
+                                            Select p).FirstOrDefault
 
 
         If IsNothing(ue) Then
@@ -16328,10 +16328,10 @@ Public Class barras
 
 
             Dim idfacEncrip As String = EntidadManager.encryptQueryString(idfac)
-            Dim linkalafacturaelectronica As String = _
+            Dim linkalafacturaelectronica As String =
                     "<a  href='" + ConfigurationManager.AppSettings("UrlDominio") + "ProntoWeb/FacturaElectronicaEncriptada.aspx?Modo=DescargaFactura&Id=" & idfacEncrip + "'>que puede descargar desde AQUÍ " + "</a>"
 
-            Dim linkalosadjuntos As String = _
+            Dim linkalosadjuntos As String =
                     "<a  href='" + ConfigurationManager.AppSettings("UrlDominio") + "ProntoWeb/FacturaElectronicaEncriptada.aspx?Modo=DescargaAdjuntos&Id=" & idfacEncrip + "'>puede descargar el adjunto de factura AQUÍ</a>"
 
             Dim cuerpo As String = "<html><body>"
@@ -16341,12 +16341,12 @@ Public Class barras
 
 
 
-            Dim qqq = "Estimado cliente " & NombreCliente(SC, idcli) & ", " & "<br/><br/>  " + vbCrLf & _
-                        "Nos ponemos en contacto con usted para hacerle llegar la factura " & numerodefactura & ",  " & linkalafacturaelectronica & "<br/> " + vbCrLf & _
-                       IIf(cli.CartaPorteTipoDeAdjuntoDeFacturacion > 0, "<br/>Si desea ver un detalle de las cartas de porte correspondientes a esta factura, " & linkalosadjuntos, "") & "<br/> " + vbCrLf & _
-                        "<br/> Los documentos son PDF, para poder verlos, es necesario que tenga instalado el Acrobat Reader, si no lo tiene, hágalo desde " & "<a href='http://get.adobe.com/es/reader/?no_ab=1'> AQUÍ</a>" & "<br/> " + vbCrLf & _
-                        "<br/>ATENCION: NO RESPONDER A ESTA DIRECCION DE MAIL, HACERLO A ciglesias@williamsentregas.com.ar; sgomez@williamsentregas.com.ar <br/>" & _
-                        "<br/>Atentamente, <br/>" & _
+            Dim qqq = "Estimado cliente " & NombreCliente(SC, idcli) & ", " & "<br/><br/>  " + vbCrLf &
+                        "Nos ponemos en contacto con usted para hacerle llegar la factura " & numerodefactura & ",  " & linkalafacturaelectronica & "<br/> " + vbCrLf &
+                       IIf(cli.CartaPorteTipoDeAdjuntoDeFacturacion > 0, "<br/>Si desea ver un detalle de las cartas de porte correspondientes a esta factura, " & linkalosadjuntos, "") & "<br/> " + vbCrLf &
+                        "<br/> Los documentos son PDF, para poder verlos, es necesario que tenga instalado el Acrobat Reader, si no lo tiene, hágalo desde " & "<a href='http://get.adobe.com/es/reader/?no_ab=1'> AQUÍ</a>" & "<br/> " + vbCrLf &
+                        "<br/>ATENCION: NO RESPONDER A ESTA DIRECCION DE MAIL, HACERLO A ciglesias@williamsentregas.com.ar; sgomez@williamsentregas.com.ar <br/>" &
+                        "<br/>Atentamente, <br/>" &
                         "Williams Entregas SA "
 
             cuerpo += qqq
@@ -16371,16 +16371,16 @@ Public Class barras
             '            Por favor en el asunto de los mails de facturacion que figure ATENCION: NO RESPONDER A ESTA DIRECCION DE MAIL, HACERLO A ciglesias@williamsentregas.com.ar; sgomez@williamsentregas.com.ar
             'Por favor si puede estar para la facturación del 2 de marzo.
 
-            MandaEmail(destinatario, "Factura Electrónica Williams Entregas. " & numerodefactura & _
-                       "", _
-                     cuerpo, _
-                      Usuario, _
-                    ConfigurationManager.AppSettings("SmtpServer"), _
-                    Usuario, _
-                  pass, _
-                            "", _
-                      ConfigurationManager.AppSettings("SmtpPort"), , "facturacion@williamsentregas.com.ar", "", _
-                      "Factura Electrónica Williams Entregas", _
+            MandaEmail(destinatario, "Factura Electrónica Williams Entregas. " & numerodefactura &
+                       "",
+                     cuerpo,
+                      Usuario,
+                    ConfigurationManager.AppSettings("SmtpServer"),
+                    Usuario,
+                  pass,
+                            "",
+                      ConfigurationManager.AppSettings("SmtpPort"), , "facturacion@williamsentregas.com.ar", "",
+                      "Factura Electrónica Williams Entregas",
                       "ciglesias@williamsentregas.com.ar, sgomez@williamsentregas.com.ar", True)
 
 
@@ -16501,10 +16501,10 @@ Public Class PuntoVentaWilliams
 
         Dim db As LinqCartasPorteDataContext = New LinqCartasPorteDataContext(Encriptar(SC))
 
-        Dim q = (From p In db.PuntosVentas _
-                Join d In db.Depositos On p.IdDeposito Equals d.IdDeposito _
-                Where d.Descripcion.ToUpper.Contains(descripcion) _
-                Select p.PuntoVenta).Distinct.ToList()
+        Dim q = (From p In db.PuntosVentas
+                 Join d In db.Depositos On p.IdDeposito Equals d.IdDeposito
+                 Where d.Descripcion.ToUpper.Contains(descripcion)
+                 Select p.PuntoVenta).Distinct.ToList()
 
         If q.Count <> 1 Then Throw New Exception("Error en el mapeo de puntos de venta. No se encuentra un unico punto venta para la Descripcion " & descripcion)
 
@@ -16526,11 +16526,11 @@ Public Class PuntoVentaWilliams
 
         Dim db As LinqCartasPorteDataContext = New LinqCartasPorteDataContext(Encriptar(SC))
 
-        Dim q = (From p In db.PuntosVentas _
-                Join d In db.Depositos On p.IdDeposito Equals d.IdDeposito _
-                Join o In db.linqObras On d.IdObra Equals o.IdObra _
-                Where p.PuntoVenta = PV _
-                Select o.IdObra).Distinct.ToList
+        Dim q = (From p In db.PuntosVentas
+                 Join d In db.Depositos On p.IdDeposito Equals d.IdDeposito
+                 Join o In db.linqObras On d.IdObra Equals o.IdObra
+                 Where p.PuntoVenta = PV
+                 Select o.IdObra).Distinct.ToList
 
         If q.Count <> 1 Then Throw New Exception("Error en el mapeo de puntos de venta. No se encuentra una unica obra para el pv " & PV)
 
@@ -16937,9 +16937,9 @@ Public Class ImpresoraMatrizDePuntosEPSONTexto
 
 
             Try
-                oWB = oWBs.Open(fileExcelName, Reflection.Missing.Value, Reflection.Missing.Value, _
-                    Reflection.Missing.Value, Reflection.Missing.Value, Reflection.Missing.Value, Reflection.Missing.Value, Reflection.Missing.Value, _
-                    Reflection.Missing.Value, Reflection.Missing.Value, Reflection.Missing.Value, Reflection.Missing.Value, Reflection.Missing.Value, _
+                oWB = oWBs.Open(fileExcelName, Reflection.Missing.Value, Reflection.Missing.Value,
+                    Reflection.Missing.Value, Reflection.Missing.Value, Reflection.Missing.Value, Reflection.Missing.Value, Reflection.Missing.Value,
+                    Reflection.Missing.Value, Reflection.Missing.Value, Reflection.Missing.Value, Reflection.Missing.Value, Reflection.Missing.Value,
                     Reflection.Missing.Value, Reflection.Missing.Value)
             Catch ex As Exception
 
@@ -16973,7 +16973,7 @@ Public Class ImpresoraMatrizDePuntosEPSONTexto
 
                 '  creo las columnas
                 For j As Integer = 1 To MAXCOLS
-                    dt.Columns.Add("column" & j, _
+                    dt.Columns.Add("column" & j,
                                    System.Type.GetType("System.String"))
                 Next j
 
@@ -17111,9 +17111,9 @@ Public Class ImpresoraMatrizDePuntosEPSONTexto
 
 
             Try
-                oWB = oWBs.Open(fileExcelName, Reflection.Missing.Value, Reflection.Missing.Value, _
-    Reflection.Missing.Value, Reflection.Missing.Value, Reflection.Missing.Value, Reflection.Missing.Value, Reflection.Missing.Value, _
-    Reflection.Missing.Value, Reflection.Missing.Value, Reflection.Missing.Value, Reflection.Missing.Value, Reflection.Missing.Value, _
+                oWB = oWBs.Open(fileExcelName, Reflection.Missing.Value, Reflection.Missing.Value,
+    Reflection.Missing.Value, Reflection.Missing.Value, Reflection.Missing.Value, Reflection.Missing.Value, Reflection.Missing.Value,
+    Reflection.Missing.Value, Reflection.Missing.Value, Reflection.Missing.Value, Reflection.Missing.Value, Reflection.Missing.Value,
     Reflection.Missing.Value, Reflection.Missing.Value)
             Catch ex As Exception
 
@@ -17158,7 +17158,7 @@ Public Class ImpresoraMatrizDePuntosEPSONTexto
 
                 '  creo las columnas
                 For j As Integer = 1 To MAXCOLS
-                    dt.Columns.Add("column" & j, _
+                    dt.Columns.Add("column" & j,
                                    System.Type.GetType("System.String"))
                 Next j
 
@@ -17336,9 +17336,9 @@ Public Class ImpresoraMatrizDePuntosEPSONTexto
 
 
             Try
-                oWB = oWBs.Open(fileExcelName, Reflection.Missing.Value, Reflection.Missing.Value, _
-    Reflection.Missing.Value, Reflection.Missing.Value, Reflection.Missing.Value, Reflection.Missing.Value, Reflection.Missing.Value, _
-    Reflection.Missing.Value, Reflection.Missing.Value, Reflection.Missing.Value, Reflection.Missing.Value, Reflection.Missing.Value, _
+                oWB = oWBs.Open(fileExcelName, Reflection.Missing.Value, Reflection.Missing.Value,
+    Reflection.Missing.Value, Reflection.Missing.Value, Reflection.Missing.Value, Reflection.Missing.Value, Reflection.Missing.Value,
+    Reflection.Missing.Value, Reflection.Missing.Value, Reflection.Missing.Value, Reflection.Missing.Value, Reflection.Missing.Value,
     Reflection.Missing.Value, Reflection.Missing.Value)
             Catch ex As Exception
 
@@ -17385,7 +17385,7 @@ Public Class ImpresoraMatrizDePuntosEPSONTexto
 
                 '  creo las columnas
                 For j As Integer = 1 To MAXCOLS
-                    dt.Columns.Add("column" & j, _
+                    dt.Columns.Add("column" & j,
                                    System.Type.GetType("System.String"))
                 Next j
 
@@ -17652,9 +17652,9 @@ Public Class ImpresoraMatrizDePuntosEPSONTexto
 
 
             Try
-                oWB = oWBs.Open(fileExcelName, Reflection.Missing.Value, Reflection.Missing.Value, _
-    Reflection.Missing.Value, Reflection.Missing.Value, Reflection.Missing.Value, Reflection.Missing.Value, Reflection.Missing.Value, _
-    Reflection.Missing.Value, Reflection.Missing.Value, Reflection.Missing.Value, Reflection.Missing.Value, Reflection.Missing.Value, _
+                oWB = oWBs.Open(fileExcelName, Reflection.Missing.Value, Reflection.Missing.Value,
+    Reflection.Missing.Value, Reflection.Missing.Value, Reflection.Missing.Value, Reflection.Missing.Value, Reflection.Missing.Value,
+    Reflection.Missing.Value, Reflection.Missing.Value, Reflection.Missing.Value, Reflection.Missing.Value, Reflection.Missing.Value,
     Reflection.Missing.Value, Reflection.Missing.Value)
             Catch ex As Exception
 
@@ -17702,7 +17702,7 @@ Public Class ImpresoraMatrizDePuntosEPSONTexto
 
                 '  creo las columnas
                 For j As Integer = 1 To MAXCOLS
-                    dt.Columns.Add("column" & j, _
+                    dt.Columns.Add("column" & j,
                                    System.Type.GetType("System.String"))
                 Next j
 
@@ -17808,60 +17808,60 @@ Public Class ImpresoraMatrizDePuntosEPSONTexto
                     'tenes 150 caracteres de ancho para usar
 
                     If primeracelda.Contains("<CAB>") Then
-                        builder.AppendFormat(COLS_ENCABEZADO, _
-                                        s(0), _
-                                        s(1), _
-                                        s(2), _
-                                        s(3), _
-                                        s(4), _
-                                        s(5), _
-                                        s(6), _
-                                        s(7), _
-                                        s(8), _
-                                        s(8), _
-                                        s(9), _
-                                        s(10), _
-                                        s(11), _
-                                        s(12), _
+                        builder.AppendFormat(COLS_ENCABEZADO,
+                                        s(0),
+                                        s(1),
+                                        s(2),
+                                        s(3),
+                                        s(4),
+                                        s(5),
+                                        s(6),
+                                        s(7),
+                                        s(8),
+                                        s(8),
+                                        s(9),
+                                        s(10),
+                                        s(11),
+                                        s(12),
                                         s(13))
 
                     ElseIf primeracelda.Contains("<DET2>") Then
 
                         'Const COLS_DETALLEOBSERVACIONES = "{0,-100}{11,10}{12,10}{13,30}"
 
-                        builder.AppendFormat(COLS_DETALLEOBSERVACIONES, _
-                                        s(0), _
-                                        s(1), _
-                                        s(2), _
-                                        s(3), _
-                                        s(4), _
-                                        s(5), _
-                                        s(6), _
-                                        s(7), _
-                                        s(8), _
-                                        s(9), _
-                                        Left(s(10), 10), _
-                                        Left(s(11), 10), _
-                                        Left(s(12), 10), _
+                        builder.AppendFormat(COLS_DETALLEOBSERVACIONES,
+                                        s(0),
+                                        s(1),
+                                        s(2),
+                                        s(3),
+                                        s(4),
+                                        s(5),
+                                        s(6),
+                                        s(7),
+                                        s(8),
+                                        s(9),
+                                        Left(s(10), 10),
+                                        Left(s(11), 10),
+                                        Left(s(12), 10),
                                         Left(s(13), 30))
                     Else
 
                         'Const COLS_DETALLE = "{0,12}{1,18}     {2,-5}{3,-3}{4,8}{5,9}{6,22}{7,7}{8,13}{9,15}{10,10}{11,4}{12,10}{13,10}"
 
-                        builder.AppendFormat(COLS_DETALLE, _
-                                       Left(s(0), 12), _
-                                       Left(s(1), 18), _
-                                       Left(s(2), 5), _
-                                       Left(s(3), 3), _
-                                       Left(s(4), 8), _
-                                       Left(s(5), 9), _
-                                       Left(s(6), 22), _
-                                       Left(s(7), 7), _
-                                       Left(s(8), 13), _
-                                       Left(s(9), 15), _
-                                       Left(s(10), 10), _
-                                       Left(s(11), 4), _
-                                       Left(s(12), 10), _
+                        builder.AppendFormat(COLS_DETALLE,
+                                       Left(s(0), 12),
+                                       Left(s(1), 18),
+                                       Left(s(2), 5),
+                                       Left(s(3), 3),
+                                       Left(s(4), 8),
+                                       Left(s(5), 9),
+                                       Left(s(6), 22),
+                                       Left(s(7), 7),
+                                       Left(s(8), 13),
+                                       Left(s(9), 15),
+                                       Left(s(10), 10),
+                                       Left(s(11), 4),
+                                       Left(s(12), 10),
                                         Left(s(13), 10))
 
                     End If
@@ -18092,8 +18092,8 @@ Public Class CDPMailFiltrosManager2
         '// Write your own Insert statement blocks 
 
         With o
-            ExecDinamico(SC, String.Format("INSERT INTO " & Tabla & " (Emails, IdArticulo, FechaDesde, FechaHasta,    Orden, Modo,  Vendedor,   CuentaOrden1,   CuentaOrden2,  Corredor,  Entregador,  Contrato,  Destino,  Procedencia,  EsPosicion,  AplicarANDuORalFiltro) " & _
-                                                             "VALUES ( '{0}',      {1}    ,'{2}'      ,'{3}'        ,{4}    ,'{5}'    ,{6}        ,{7}            ,{8}            ,{9}        ,{10}       ,'{11}'      ,{12}   ,{13}       ,'{14}'           ,'{15}' ) ", _
+            ExecDinamico(SC, String.Format("INSERT INTO " & Tabla & " (Emails, IdArticulo, FechaDesde, FechaHasta,    Orden, Modo,  Vendedor,   CuentaOrden1,   CuentaOrden2,  Corredor,  Entregador,  Contrato,  Destino,  Procedencia,  EsPosicion,  AplicarANDuORalFiltro) " &
+                                                             "VALUES ( '{0}',      {1}    ,'{2}'      ,'{3}'        ,{4}    ,'{5}'    ,{6}        ,{7}            ,{8}            ,{9}        ,{10}       ,'{11}'      ,{12}   ,{13}       ,'{14}'           ,'{15}' ) ",
                                                                       .Emails, .IdArticulo, .FechaDesde, .FechaHasta, .Orden, .Modo, .Vendedor, .CuentaOrden1, .CuentaOrden2, .Corredor, .Entregador, .Contrato, .Destino, .Procedencia, .EsPosicion, .AplicarANDuORalFiltro))
         End With
     End Function
@@ -18232,8 +18232,8 @@ Public Class CDPMailFiltrosManager2
 
 
 
-    Public Shared Function generarWHEREparaDataset(ByVal sc As String, ByVal dr As Data.DataRow, ByRef sTituloFiltroUsado As String, _
-                                                   ByVal estado As CartaDePorteManager.enumCDPestado, _
+    Public Shared Function generarWHEREparaDataset(ByVal sc As String, ByVal dr As Data.DataRow, ByRef sTituloFiltroUsado As String,
+                                                   ByVal estado As CartaDePorteManager.enumCDPestado,
                                                    ByVal fechadesde As DateTime, ByVal fechahasta As DateTime, ByVal puntoventa As Integer) As String
 
 
@@ -18269,11 +18269,11 @@ Public Class CDPMailFiltrosManager2
                     Dim idCorredorQueContiene = BuscaIdVendedorPreciso(.Item("QueContenga"), sc)
 
                     If idVendedor <> -1 Or idCorredor <> -1 Then
-                        strWHERE += "  " & _
-                         "           AND (Vendedor = " & idVendedor & _
-                        "           OR CuentaOrden1 = " & idVendedor & _
-                        "           OR CuentaOrden2 = " & idVendedor & _
-                        "             OR Corredor=" & idCorredor & _
+                        strWHERE += "  " &
+                         "           AND (Vendedor = " & idVendedor &
+                        "           OR CuentaOrden1 = " & idVendedor &
+                        "           OR CuentaOrden2 = " & idVendedor &
+                        "             OR Corredor=" & idCorredor &
                         "             OR Entregador=" & idVendedor & ")"
                     End If
 
@@ -18285,18 +18285,18 @@ Public Class CDPMailFiltrosManager2
 
 
                 If iisNull(.Item("AplicarANDuORalFiltro")) = "1" Then
-                    strWHERE += iisIdValido(idVendedor, "           AND CDP.Vendedor = " & idVendedor, "") & _
-                            iisIdValido(idCorredor, "             AND CDP.Corredor=" & idCorredor, "") & _
-                            iisIdValido(idIntermediario, "             AND CDP.CuentaOrden1=" & idIntermediario, "") & _
-                            iisIdValido(idRemComercial, "             AND CDP.CuentaOrden2=" & idRemComercial, "") & _
+                    strWHERE += iisIdValido(idVendedor, "           AND CDP.Vendedor = " & idVendedor, "") &
+                            iisIdValido(idCorredor, "             AND CDP.Corredor=" & idCorredor, "") &
+                            iisIdValido(idIntermediario, "             AND CDP.CuentaOrden1=" & idIntermediario, "") &
+                            iisIdValido(idRemComercial, "             AND CDP.CuentaOrden2=" & idRemComercial, "") &
                             iisIdValido(idDestinatario, "             AND  CDP.Entregador=" & idDestinatario, "")
                 Else
-                    Dim s = " AND (1=0 " & _
-                             iisIdValido(idVendedor, "           OR CDP.Vendedor = " & idVendedor, "") & _
-                            iisIdValido(idCorredor, "             OR CDP.Corredor=" & idCorredor, "") & _
-                            iisIdValido(idIntermediario, "             OR CDP.CuentaOrden1=" & idIntermediario, "") & _
-                            iisIdValido(idRemComercial, "             OR CDP.CuentaOrden2=" & idRemComercial, "") & _
-                            iisIdValido(idDestinatario, "             OR  CDP.Entregador=" & idDestinatario, "") & _
+                    Dim s = " AND (1=0 " &
+                             iisIdValido(idVendedor, "           OR CDP.Vendedor = " & idVendedor, "") &
+                            iisIdValido(idCorredor, "             OR CDP.Corredor=" & idCorredor, "") &
+                            iisIdValido(idIntermediario, "             OR CDP.CuentaOrden1=" & idIntermediario, "") &
+                            iisIdValido(idRemComercial, "             OR CDP.CuentaOrden2=" & idRemComercial, "") &
+                            iisIdValido(idDestinatario, "             OR  CDP.Entregador=" & idDestinatario, "") &
                             "  )  "
 
                     If s <> " AND (1=0   )  " Then strWHERE += s
@@ -18388,14 +18388,14 @@ Public Class CDPMailFiltrosManager2
 
 
 
-                sTituloFiltroUsado = CartaDePorteManager.FormatearTitulo(sc, _
-                                       sTituloFiltroUsado, _
-                                      estado, "", idVendedor, idCorredor, _
-                                      idDestinatario, idIntermediario, _
-                                      idRemComercial, idArticulo, idProcedencia, idDestino, _
-                                         iisNull(.Item("AplicarANDuORalFiltro"), 0), _
-                                         .Item("modo").ToString, _
-                                      fechadesde, fechahasta, _
+                sTituloFiltroUsado = CartaDePorteManager.FormatearTitulo(sc,
+                                       sTituloFiltroUsado,
+                                      estado, "", idVendedor, idCorredor,
+                                      idDestinatario, idIntermediario,
+                                      idRemComercial, idArticulo, idProcedencia, idDestino,
+                                         iisNull(.Item("AplicarANDuORalFiltro"), 0),
+                                         .Item("modo").ToString,
+                                      fechadesde, fechahasta,
                                       puntoventa, "Ambas", False, "", "", -1)
 
 
@@ -18481,13 +18481,13 @@ Public Class CDPMailFiltrosManager2
                 'End If
 
 
-                strWHERE += " AND ( " & _
-                                "Convert(VendedorDesc, 'System.String') LIKE '*" & textoBusqueda & "*' " & _
-                                " OR Convert(CuentaOrden1Desc, 'System.String') LIKE '*" & textoBusqueda & "*' " & _
-                                " OR Convert(CuentaOrden2Desc, 'System.String') LIKE '*" & textoBusqueda & "*' " & _
-                                " OR Convert(CorredorDesc, 'System.String') LIKE '*" & textoBusqueda & "*' " & _
-                                " OR Convert(EntregadorDesc, 'System.String') LIKE '*" & textoBusqueda & "*' " & _
-                                " OR Convert(ClienteAuxiliarDesc, 'System.String') LIKE '*" & textoBusqueda & "*' " & _
+                strWHERE += " AND ( " &
+                                "Convert(VendedorDesc, 'System.String') LIKE '*" & textoBusqueda & "*' " &
+                                " OR Convert(CuentaOrden1Desc, 'System.String') LIKE '*" & textoBusqueda & "*' " &
+                                " OR Convert(CuentaOrden2Desc, 'System.String') LIKE '*" & textoBusqueda & "*' " &
+                                " OR Convert(CorredorDesc, 'System.String') LIKE '*" & textoBusqueda & "*' " &
+                                " OR Convert(EntregadorDesc, 'System.String') LIKE '*" & textoBusqueda & "*' " &
+                                " OR Convert(ClienteAuxiliarDesc, 'System.String') LIKE '*" & textoBusqueda & "*' " &
                             ")" '_
 
                 '"Convert(CuentaOrden1, 'System.String') LIKE '*" & txtBuscar.Text & "*'" _
@@ -18500,7 +18500,7 @@ Public Class CDPMailFiltrosManager2
 
             Else
 
-                strWHERE += " AND ( " & _
+                strWHERE += " AND ( " &
                             "Convert(" & cmbBuscarEsteCampoValue & ", 'System.String') LIKE '*" & textoBusqueda & "*' )" '_
 
             End If
@@ -18587,9 +18587,9 @@ Public Class CDPMailFiltrosManager2
 
     Public Shared Function Update(ByVal SC As String, ByVal Id As Long, ByVal dr As DataRow)
 
-        Dim comandoSQLdinamico As String = String.Format("UPDATE " & Tabla & " SET " & _
-                "HumedadDesnormalizada={1}, " & _
-                "Factor={2}  " & _
+        Dim comandoSQLdinamico As String = String.Format("UPDATE " & Tabla & " SET " &
+                "HumedadDesnormalizada={1}, " &
+                "Factor={2}  " &
                 "WHERE IdCartaDePorte={0} ", dr.Item(""), DecimalToString(dr.Item(2)))
 
         ExecDinamico(SC, comandoSQLdinamico)
@@ -18599,10 +18599,10 @@ Public Class CDPMailFiltrosManager2
 
         '// Write your own Update statement blocks. 
 
-        Dim comandoSQLdinamico As String = String.Format("UPDATE " & Tabla & " SET " & _
-                "Emails='{1}', " & _
-                "Entregador={2},  " & _
-                "IdArticulo={3}  " & _
+        Dim comandoSQLdinamico As String = String.Format("UPDATE " & Tabla & " SET " &
+                "Emails='{1}', " &
+                "Entregador={2},  " &
+                "IdArticulo={3}  " &
                 "WHERE IdWilliamsMailFiltro={0} ", Id, Emails, idEntregador, idArticulo)
 
         ExecDinamico(SC, comandoSQLdinamico)
@@ -18673,9 +18673,9 @@ Public Class CDPMailFiltrosManager2
                 Dim bytes As Byte()
 
                 Try
-                    bytes = ReportViewer2.LocalReport.Render( _
-                               format, Nothing, mimeType, encoding, _
-                                 extension, _
+                    bytes = ReportViewer2.LocalReport.Render(
+                               format, Nothing, mimeType, encoding,
+                                 extension,
                                 streamids, warnings)
 
 
@@ -18797,27 +18797,27 @@ Public Class CDPMailFiltrosManager2
         'que cambiarlo, pero por lo menos no te asustes, no es la tabla de cartas de porte
 
 
-        Return ExecDinamico(SC, String.Format("SELECT TOP 120 " & _
-                        "     CDP.*, " & _
-                      " CLIVEN.Razonsocial as VendedorDesc, " & _
-                      " CLICO1.Razonsocial as CuentaOrden1Desc, " & _
-                      " CLICO2.Razonsocial as CuentaOrden2Desc, " & _
-                      " CLICOR.Nombre as CorredorDesc, " & _
-                      " CLIENT.Razonsocial as EntregadorDesc, " & _
-                      " Articulos.Descripcion as Producto, " & _
-                      " LOCORI.Nombre as ProcedenciaDesc, " & _
-                      " LOCDES.Descripcion as DestinoDesc " & _
-                      " FROM " & Tabla & " CDP " & _
-                      " LEFT OUTER JOIN Clientes CLIVEN ON CDP.Vendedor = CLIVEN.IdCliente " & _
-                      " LEFT OUTER JOIN Clientes CLICO1 ON CDP.CuentaOrden1 = CLICO1.IdCliente " & _
-                      " LEFT OUTER JOIN Clientes CLICO2 ON CDP.CuentaOrden2 = CLICO2.IdCliente " & _
-                      " LEFT OUTER JOIN Vendedores CLICOR ON CDP.Corredor = CLICOR.IdVendedor " & _
-                      " LEFT OUTER JOIN Clientes CLIENT ON CDP.Entregador = CLIENT.IdCliente " & _
-                      " LEFT OUTER JOIN Articulos ON CDP.IdArticulo = Articulos.IdArticulo " & _
-                      " LEFT OUTER JOIN Localidades LOCORI ON CDP.Procedencia = LOCORI.IdLocalidad " & _
-                      " LEFT OUTER JOIN WilliamsDestinos LOCDES ON CDP.Destino = LOCDES.IdWilliamsDestino " & _
-                      " WHERE isnull(CDP.PuntoVenta,0)=" & puntoventa & " OR " & puntoventa & "=0" & _
-                      " ORDER BY IdWilliamsMailFiltro DESC " _
+        Return ExecDinamico(SC, String.Format("SELECT TOP 120 " &
+                        "     CDP.*, " &
+                      " CLIVEN.Razonsocial as VendedorDesc, " &
+                      " CLICO1.Razonsocial as CuentaOrden1Desc, " &
+                      " CLICO2.Razonsocial as CuentaOrden2Desc, " &
+                      " CLICOR.Nombre as CorredorDesc, " &
+                      " CLIENT.Razonsocial as EntregadorDesc, " &
+                      " Articulos.Descripcion as Producto, " &
+                      " LOCORI.Nombre as ProcedenciaDesc, " &
+                      " LOCDES.Descripcion as DestinoDesc " &
+                      " FROM " & Tabla & " CDP " &
+                      " LEFT OUTER JOIN Clientes CLIVEN ON CDP.Vendedor = CLIVEN.IdCliente " &
+                      " LEFT OUTER JOIN Clientes CLICO1 ON CDP.CuentaOrden1 = CLICO1.IdCliente " &
+                      " LEFT OUTER JOIN Clientes CLICO2 ON CDP.CuentaOrden2 = CLICO2.IdCliente " &
+                      " LEFT OUTER JOIN Vendedores CLICOR ON CDP.Corredor = CLICOR.IdVendedor " &
+                      " LEFT OUTER JOIN Clientes CLIENT ON CDP.Entregador = CLIENT.IdCliente " &
+                      " LEFT OUTER JOIN Articulos ON CDP.IdArticulo = Articulos.IdArticulo " &
+                      " LEFT OUTER JOIN Localidades LOCORI ON CDP.Procedencia = LOCORI.IdLocalidad " &
+                      " LEFT OUTER JOIN WilliamsDestinos LOCDES ON CDP.Destino = LOCDES.IdWilliamsDestino " &
+                      " WHERE isnull(CDP.PuntoVenta,0)=" & puntoventa & " OR " & puntoventa & "=0" &
+                      " ORDER BY IdWilliamsMailFiltro DESC "
                                   ))
 
     End Function
@@ -18831,29 +18831,29 @@ Public Class CDPMailFiltrosManager2
 
 
 
-        Return ExecDinamico(SC, String.Format("SELECT " & _
-                        "     CDP.*, " & _
-                            " CLIVEN.Razonsocial as VendedorDesc, " & _
-                            " CLICO1.Razonsocial as CuentaOrden1Desc, " & _
-                            " CLICO2.Razonsocial as CuentaOrden2Desc, " & _
-                            " CLICOR.Nombre as CorredorDesc, " & _
-                            " CLIENT.Razonsocial as EntregadorDesc, " & _
-                            " CLIAUX.Razonsocial as ClienteAuxiliarDesc, " & _
-                            " Articulos.Descripcion as Producto, " & _
-                            " LOCORI.Nombre as ProcedenciaDesc, " & _
-                            " LOCDES.Descripcion as DestinoDesc " & _
-                            " FROM " & Tabla & " CDP " & _
-                            " LEFT OUTER JOIN Clientes CLIVEN ON CDP.Vendedor = CLIVEN.IdCliente " & _
-                            " LEFT OUTER JOIN Clientes CLICO1 ON CDP.CuentaOrden1 = CLICO1.IdCliente " & _
-                            " LEFT OUTER JOIN Clientes CLICO2 ON CDP.CuentaOrden2 = CLICO2.IdCliente " & _
-                            " LEFT OUTER JOIN Vendedores CLICOR ON CDP.Corredor = CLICOR.IdVendedor " & _
-                            " LEFT OUTER JOIN Clientes CLIENT ON CDP.Entregador = CLIENT.IdCliente " & _
-                            " LEFT OUTER JOIN Articulos ON CDP.IdArticulo = Articulos.IdArticulo " & _
-                            " LEFT OUTER JOIN Localidades LOCORI ON CDP.Procedencia = LOCORI.IdLocalidad " & _
-                            " LEFT OUTER JOIN WilliamsDestinos LOCDES ON CDP.Destino = LOCDES.IdWilliamsDestino " & _
-                            " LEFT OUTER JOIN Clientes CLIAUX ON CDP.IdClienteAuxiliar= CLIAUX.IdCliente " & _
-                            " WHERE isnull(CDP.PuntoVenta,0)=" & puntoventa & " OR " & puntoventa & "=0" & _
-                            " ORDER BY IdWilliamsMailFiltro DESC " _
+        Return ExecDinamico(SC, String.Format("SELECT " &
+                        "     CDP.*, " &
+                            " CLIVEN.Razonsocial as VendedorDesc, " &
+                            " CLICO1.Razonsocial as CuentaOrden1Desc, " &
+                            " CLICO2.Razonsocial as CuentaOrden2Desc, " &
+                            " CLICOR.Nombre as CorredorDesc, " &
+                            " CLIENT.Razonsocial as EntregadorDesc, " &
+                            " CLIAUX.Razonsocial as ClienteAuxiliarDesc, " &
+                            " Articulos.Descripcion as Producto, " &
+                            " LOCORI.Nombre as ProcedenciaDesc, " &
+                            " LOCDES.Descripcion as DestinoDesc " &
+                            " FROM " & Tabla & " CDP " &
+                            " LEFT OUTER JOIN Clientes CLIVEN ON CDP.Vendedor = CLIVEN.IdCliente " &
+                            " LEFT OUTER JOIN Clientes CLICO1 ON CDP.CuentaOrden1 = CLICO1.IdCliente " &
+                            " LEFT OUTER JOIN Clientes CLICO2 ON CDP.CuentaOrden2 = CLICO2.IdCliente " &
+                            " LEFT OUTER JOIN Vendedores CLICOR ON CDP.Corredor = CLICOR.IdVendedor " &
+                            " LEFT OUTER JOIN Clientes CLIENT ON CDP.Entregador = CLIENT.IdCliente " &
+                            " LEFT OUTER JOIN Articulos ON CDP.IdArticulo = Articulos.IdArticulo " &
+                            " LEFT OUTER JOIN Localidades LOCORI ON CDP.Procedencia = LOCORI.IdLocalidad " &
+                            " LEFT OUTER JOIN WilliamsDestinos LOCDES ON CDP.Destino = LOCDES.IdWilliamsDestino " &
+                            " LEFT OUTER JOIN Clientes CLIAUX ON CDP.IdClienteAuxiliar= CLIAUX.IdCliente " &
+                            " WHERE isnull(CDP.PuntoVenta,0)=" & puntoventa & " OR " & puntoventa & "=0" &
+                            " ORDER BY IdWilliamsMailFiltro DESC "
                                         ))
 
     End Function
@@ -18869,27 +18869,27 @@ Public Class CDPMailFiltrosManager2
 
 
 
-        Return ExecDinamico(SC, String.Format("SELECT " & _
-                        "     CDP.*, " & _
-                            " CLIVEN.Razonsocial as VendedorDesc, " & _
-                            " CLICO1.Razonsocial as CuentaOrden1Desc, " & _
-                            " CLICO2.Razonsocial as CuentaOrden2Desc, " & _
-                            " CLICOR.Nombre as CorredorDesc, " & _
-                            " CLIENT.Razonsocial as EntregadorDesc, " & _
-                            " CLIAUX.Razonsocial as ClienteAuxiliarDesc, " & _
-                            " Articulos.Descripcion as Producto, " & _
-                            " LOCORI.Nombre as ProcedenciaDesc, " & _
-                            " LOCDES.Descripcion as DestinoDesc " & _
-                            " FROM " & Tabla & " CDP " & _
-                            " LEFT OUTER JOIN Clientes CLIVEN ON CDP.Vendedor = CLIVEN.IdCliente " & _
-                            " LEFT OUTER JOIN Clientes CLICO1 ON CDP.CuentaOrden1 = CLICO1.IdCliente " & _
-                            " LEFT OUTER JOIN Clientes CLICO2 ON CDP.CuentaOrden2 = CLICO2.IdCliente " & _
-                            " LEFT OUTER JOIN Vendedores CLICOR ON CDP.Corredor = CLICOR.IdVendedor " & _
-                            " LEFT OUTER JOIN Clientes CLIENT ON CDP.Entregador = CLIENT.IdCliente " & _
-                            " LEFT OUTER JOIN Articulos ON CDP.IdArticulo = Articulos.IdArticulo " & _
-                            " LEFT OUTER JOIN Localidades LOCORI ON CDP.Procedencia = LOCORI.IdLocalidad " & _
-                            " LEFT OUTER JOIN WilliamsDestinos LOCDES ON CDP.Destino = LOCDES.IdWilliamsDestino " & _
-                            " LEFT OUTER JOIN Clientes CLIAUX ON CDP.IdClienteAuxiliar= CLIAUX.IdCliente " & _
+        Return ExecDinamico(SC, String.Format("SELECT " &
+                        "     CDP.*, " &
+                            " CLIVEN.Razonsocial as VendedorDesc, " &
+                            " CLICO1.Razonsocial as CuentaOrden1Desc, " &
+                            " CLICO2.Razonsocial as CuentaOrden2Desc, " &
+                            " CLICOR.Nombre as CorredorDesc, " &
+                            " CLIENT.Razonsocial as EntregadorDesc, " &
+                            " CLIAUX.Razonsocial as ClienteAuxiliarDesc, " &
+                            " Articulos.Descripcion as Producto, " &
+                            " LOCORI.Nombre as ProcedenciaDesc, " &
+                            " LOCDES.Descripcion as DestinoDesc " &
+                            " FROM " & Tabla & " CDP " &
+                            " LEFT OUTER JOIN Clientes CLIVEN ON CDP.Vendedor = CLIVEN.IdCliente " &
+                            " LEFT OUTER JOIN Clientes CLICO1 ON CDP.CuentaOrden1 = CLICO1.IdCliente " &
+                            " LEFT OUTER JOIN Clientes CLICO2 ON CDP.CuentaOrden2 = CLICO2.IdCliente " &
+                            " LEFT OUTER JOIN Vendedores CLICOR ON CDP.Corredor = CLICOR.IdVendedor " &
+                            " LEFT OUTER JOIN Clientes CLIENT ON CDP.Entregador = CLIENT.IdCliente " &
+                            " LEFT OUTER JOIN Articulos ON CDP.IdArticulo = Articulos.IdArticulo " &
+                            " LEFT OUTER JOIN Localidades LOCORI ON CDP.Procedencia = LOCORI.IdLocalidad " &
+                            " LEFT OUTER JOIN WilliamsDestinos LOCDES ON CDP.Destino = LOCDES.IdWilliamsDestino " &
+                            " LEFT OUTER JOIN Clientes CLIAUX ON CDP.IdClienteAuxiliar= CLIAUX.IdCliente " &
                             " WHERE IdWilliamsMailFiltro=" & Id)).Rows(0)
 
     End Function
@@ -18910,9 +18910,9 @@ Public Class CDPMailFiltrosManager2
 
                 b = "<br/>Estimados, este mail se utiliza únicamente para envíos. <a style=""color:red;font-weight: bold;""> En caso de responder, favor de hacerlo a buenosaires@williamsentregas.com.ar</a>"
 
-                a += "<br/><b>Williams Entregas S.A</b><br/>" + vbCrLf + _
-                        "Oficina Buenos Aires<br/>" + vbCrLf + _
-                        "Moreno 584. Piso 12°A ( C.A.B.A)<br/>" + vbCrLf + _
+                a += "<br/><b>Williams Entregas S.A</b><br/>" + vbCrLf +
+                        "Oficina Buenos Aires<br/>" + vbCrLf +
+                        "Moreno 584. Piso 12°A ( C.A.B.A)<br/>" + vbCrLf +
                         "Tel: (011) 4322-4805 / 4393-9762<br/>buenosaires@williamsentregas.com.ar" + vbCrLf
 
 
@@ -18920,27 +18920,27 @@ Public Class CDPMailFiltrosManager2
 
                 b = "<br/>Estimados, este mail se utiliza únicamente para envíos. <a style=""color:red;font-weight: bold;""> En caso de responder, favor de hacerlo a sanlorenzo@williamsentregas.com.ar</a>"
 
-                a += "<br/><b>Williams Entregas S.A</b><br/>" + vbCrLf + _
-                        "Oficina San Lorenzo<br/>" + vbCrLf + _
-                        "Santiago del Estero 1177 (San Lorenzo)<br/>" + vbCrLf + _
+                a += "<br/><b>Williams Entregas S.A</b><br/>" + vbCrLf +
+                        "Oficina San Lorenzo<br/>" + vbCrLf +
+                        "Santiago del Estero 1177 (San Lorenzo)<br/>" + vbCrLf +
                         "Tel: 03476 - 430234 / 430158<br/>sanlorenzo@williamsentregas.com.ar" + vbCrLf
 
             Case 3
 
                 b = "<br/>Estimados, este mail se utiliza únicamente para envíos. <a style=""color:red;font-weight: bold;""> En caso de responder, favor de hacerlo a arroyoseco@williamsentregas.com.ar</a>"
 
-                a += "<br/><b>Williams Entregas S.A</b><br/>" + vbCrLf + _
-                        "Oficina Arroyo Seco<br/>" + vbCrLf + _
-                        "Rene Favaloro 726 (Arroyo Seco)<br/>" + vbCrLf + _
+                a += "<br/><b>Williams Entregas S.A</b><br/>" + vbCrLf +
+                        "Oficina Arroyo Seco<br/>" + vbCrLf +
+                        "Rene Favaloro 726 (Arroyo Seco)<br/>" + vbCrLf +
                         "Tel: 03402 437283 / 437287<br/>arroyoseco@williamsentregas.com.ar" + vbCrLf
 
             Case 4
 
                 b = "<br/>Estimados, este mail se utiliza únicamente para envíos. <a style=""color:red;font-weight: bold;""> En caso de responder, favor de hacerlo a bahiablanca@williamsentregas.com.ar</a>"
 
-                a += "<br/><b>Williams Entregas S.A</b><br/>" + vbCrLf + _
-                        "Oficina Bahia Blanca<br/>" + vbCrLf + _
-                        "Playa el Triangulo<br/>" + vbCrLf + _
+                a += "<br/><b>Williams Entregas S.A</b><br/>" + vbCrLf +
+                        "Oficina Bahia Blanca<br/>" + vbCrLf +
+                        "Playa el Triangulo<br/>" + vbCrLf +
                         "Tel: 0291 - 4007928 / 4816778<br/>bahiablanca@williamsentregas.com.ar" + vbCrLf
 
 
@@ -18948,9 +18948,9 @@ Public Class CDPMailFiltrosManager2
 
                 b = "<br/>Estimados, este mail se utiliza únicamente para envíos. <a style=""color:red;font-weight: bold;""> En caso de responder, favor de hacerlo a buenosaires@williamsentregas.com.ar</a><br/>"
 
-                a += "<br/><b>Williams Entregas S.A</b><br/>" + vbCrLf + _
-                        "Oficina Buenos Aires<br/>" + vbCrLf + _
-                        "Moreno 584. Piso 12°A (C.A.B.A)<br/>" + vbCrLf + _
+                a += "<br/><b>Williams Entregas S.A</b><br/>" + vbCrLf +
+                        "Oficina Buenos Aires<br/>" + vbCrLf +
+                        "Moreno 584. Piso 12°A (C.A.B.A)<br/>" + vbCrLf +
                         "Tel: (011) 4322-4805 / 4393-9762<br/>buenosaires@williamsentregas.com.ar" + vbCrLf
 
         End Select
@@ -19079,9 +19079,9 @@ Public Class CDPMailFiltrosManager2
 
                 b = "<br/>Estimados, este mail se utiliza únicamente para envíos. <a style=""color:red;font-weight: bold;""> En caso de responder, favor de hacerlo a buenosaires@williamsentregas.com.ar</a>"
 
-                a += "<br/><b>Williams Entregas S.A</b><br/>" + vbCrLf + _
-                        "Oficina Buenos Aires<br/>" + vbCrLf + _
-                        "Moreno 584. Piso 12°A ( C.A.B.A)<br/>" + vbCrLf + _
+                a += "<br/><b>Williams Entregas S.A</b><br/>" + vbCrLf +
+                        "Oficina Buenos Aires<br/>" + vbCrLf +
+                        "Moreno 584. Piso 12°A ( C.A.B.A)<br/>" + vbCrLf +
                         "Tel: (011) 4322-4805 / 4393-9762<br/>buenosaires@williamsentregas.com.ar" + vbCrLf
 
 
@@ -19089,27 +19089,27 @@ Public Class CDPMailFiltrosManager2
 
                 b = "<br/>Estimados, este mail se utiliza únicamente para envíos. <a style=""color:red;font-weight: bold;""> En caso de responder, favor de hacerlo a sanlorenzo@williamsentregas.com.ar</a>"
 
-                a += "<br/><b>Williams Entregas S.A</b><br/>" + vbCrLf + _
-                        "Oficina San Lorenzo<br/>" + vbCrLf + _
-                        "Santiago del Estero 1177 (San Lorenzo)<br/>" + vbCrLf + _
+                a += "<br/><b>Williams Entregas S.A</b><br/>" + vbCrLf +
+                        "Oficina San Lorenzo<br/>" + vbCrLf +
+                        "Santiago del Estero 1177 (San Lorenzo)<br/>" + vbCrLf +
                         "Tel: 03476 - 430234 / 430158<br/>sanlorenzo@williamsentregas.com.ar" + vbCrLf
 
             Case 3
 
                 b = "<br/>Estimados, este mail se utiliza únicamente para envíos. <a style=""color:red;font-weight: bold;""> En caso de responder, favor de hacerlo a arroyoseco@williamsentregas.com.ar</a>"
 
-                a += "<br/><b>Williams Entregas S.A</b><br/>" + vbCrLf + _
-                        "Oficina Arroyo Seco<br/>" + vbCrLf + _
-                        "Rene Favaloro 726 (Arroyo Seco)<br/>" + vbCrLf + _
+                a += "<br/><b>Williams Entregas S.A</b><br/>" + vbCrLf +
+                        "Oficina Arroyo Seco<br/>" + vbCrLf +
+                        "Rene Favaloro 726 (Arroyo Seco)<br/>" + vbCrLf +
                         "Tel: 03402 437283 / 437287<br/>arroyoseco@williamsentregas.com.ar" + vbCrLf
 
             Case 4
 
                 b = "<br/>Estimados, este mail se utiliza únicamente para envíos. <a style=""color:red;font-weight: bold;""> En caso de responder, favor de hacerlo a bahiablanca@williamsentregas.com.ar</a>"
 
-                a += "<br/><b>Williams Entregas S.A</b><br/>" + vbCrLf + _
-                        "Oficina Bahia Blanca<br/>" + vbCrLf + _
-                        "Playa el Triangulo<br/>" + vbCrLf + _
+                a += "<br/><b>Williams Entregas S.A</b><br/>" + vbCrLf +
+                        "Oficina Bahia Blanca<br/>" + vbCrLf +
+                        "Playa el Triangulo<br/>" + vbCrLf +
                         "Tel: 0291 - 4007928 / 4816778<br/>bahiablanca@williamsentregas.com.ar" + vbCrLf
 
 
@@ -19117,9 +19117,9 @@ Public Class CDPMailFiltrosManager2
 
                 b = "<br/>Estimados, este mail se utiliza únicamente para envíos. <a style=""color:red;font-weight: bold;""> En caso de responder, favor de hacerlo a buenosaires@williamsentregas.com.ar</a>"
 
-                a += "<br/><b>Williams Entregas S.A</b><br/>" + vbCrLf + _
-                        "Oficina Buenos Aires<br/>" + vbCrLf + _
-                        "Moreno 584. Piso 12°A (C.A.B.A)<br/>" + vbCrLf + _
+                a += "<br/><b>Williams Entregas S.A</b><br/>" + vbCrLf +
+                        "Oficina Buenos Aires<br/>" + vbCrLf +
+                        "Moreno 584. Piso 12°A (C.A.B.A)<br/>" + vbCrLf +
                         "Tel: (011) 4322-4805 / 4393-9762<br/>buenosaires@williamsentregas.com.ar" + vbCrLf
 
         End Select
@@ -19239,13 +19239,13 @@ Public Class CDPMailFiltrosManager2
 
 
 
-    Public Shared Function EnviarMailFiltroPorId_DLL(ByVal SC As String, ByVal fechadesde As Date, _
-                                                     ByVal fechahasta As Date, ByVal puntoventa As Integer, _
-                                                     ByVal id As Long, ByVal titulo As String, ByVal estado As CartaDePorteManager.enumCDPestado, _
-                                                     ByRef sError As String, ByVal bVistaPrevia As Boolean, _
-                                                     ByVal SmtpServer As String, ByVal SmtpUser As String, _
-                                                     ByVal SmtpPass As String, ByVal SmtpPort As Integer, ByVal CCOaddress As String, _
-                                                     ByRef sError2 As String _
+    Public Shared Function EnviarMailFiltroPorId_DLL(ByVal SC As String, ByVal fechadesde As Date,
+                                                     ByVal fechahasta As Date, ByVal puntoventa As Integer,
+                                                     ByVal id As Long, ByVal titulo As String, ByVal estado As CartaDePorteManager.enumCDPestado,
+                                                     ByRef sError As String, ByVal bVistaPrevia As Boolean,
+                                                     ByVal SmtpServer As String, ByVal SmtpUser As String,
+                                                     ByVal SmtpPass As String, ByVal SmtpPort As Integer, ByVal CCOaddress As String,
+                                                     ByRef sError2 As String
                                                         ) As String
 
 
@@ -19271,15 +19271,15 @@ Public Class CDPMailFiltrosManager2
 
 
 
-    Public Shared Function EnviarMailFiltroPorRegistro_DLL(ByVal SC As String, ByVal fechadesde As Date, _
-                                                  ByVal fechahasta As Date, ByVal puntoventa As Integer, _
-                                                  ByVal titulo As String, ByVal estado As CartaDePorteManager.enumCDPestado, _
-                                                  ByRef dr As DataRow, _
-                                                  ByRef sError As String, ByVal bVistaPrevia As Boolean, _
-                                                  ByVal SmtpServer As String, ByVal SmtpUser As String, _
-                                                  ByVal SmtpPass As String, ByVal SmtpPort As Integer, ByVal CCOaddress As String, _
+    Public Shared Function EnviarMailFiltroPorRegistro_DLL(ByVal SC As String, ByVal fechadesde As Date,
+                                                  ByVal fechahasta As Date, ByVal puntoventa As Integer,
+                                                  ByVal titulo As String, ByVal estado As CartaDePorteManager.enumCDPestado,
+                                                  ByRef dr As DataRow,
+                                                  ByRef sError As String, ByVal bVistaPrevia As Boolean,
+                                                  ByVal SmtpServer As String, ByVal SmtpUser As String,
+                                                  ByVal SmtpPass As String, ByVal SmtpPort As Integer, ByVal CCOaddress As String,
                                                   ByRef sError2 As String, Optional inlinePNG As String = "" _
-                                                , Optional inlinePNG2 As String = "" _
+                                                , Optional inlinePNG2 As String = ""
                                                      ) As String
 
 
@@ -19289,7 +19289,7 @@ Public Class CDPMailFiltrosManager2
 
 
         If ModoImpresion = "Html" Or ModoImpresion = "HtmlIm" Or ModoImpresion = "Excel" Or ModoImpresion = "ExcelIm" Then
-            Throw New Exception("Los modos HTML,HTMLIM,Excel,ExcelIm no salen por servidor de informes, sino por modo local " & _
+            Throw New Exception("Los modos HTML,HTMLIM,Excel,ExcelIm no salen por servidor de informes, sino por modo local " &
                                 " (son los informes que se llaman desde el AppCode\FiltroManager\EnviarMailFiltroPorRegistro, y que deberiamos migrar) ")
         End If
 
@@ -19328,8 +19328,8 @@ Public Class CDPMailFiltrosManager2
 
 
             Try
-                Dim sWHERE = generarWHEREparaDataset(SC, dr, titulo, estado, _
-                                            iisValidSqlDate(fechadesde, #1/1/1753#), _
+                Dim sWHERE = generarWHEREparaDataset(SC, dr, titulo, estado,
+                                            iisValidSqlDate(fechadesde, #1/1/1753#),
                                             iisValidSqlDate(fechahasta, #1/1/2100#), puntoventa)
 
             Catch ex As Exception
@@ -19447,13 +19447,13 @@ Public Class CDPMailFiltrosManager2
 
 
 
-                        asunto = CartaDePorteManager.FormatearAsunto(SC, _
-                             "", _
-                           estado, "", idVendedor, idCorredor, _
-                          idDestinatario, idIntermediario, _
-                          idRemComercial, idArticulo, idProcedencia, idDestino, _
-                           AplicarANDuORalFiltro, ModoExportacion, _
-                          fechadesde, fechahasta, _
+                        asunto = CartaDePorteManager.FormatearAsunto(SC,
+                             "",
+                           estado, "", idVendedor, idCorredor,
+                          idDestinatario, idIntermediario,
+                          idRemComercial, idArticulo, idProcedencia, idDestino,
+                           AplicarANDuORalFiltro, ModoExportacion,
+                          fechadesde, fechahasta,
                            puntoventa, optDivisionSyngenta, False, "", "", -1)
                     Catch ex As Exception
                         asunto = "mal formateado"
@@ -19471,16 +19471,16 @@ Public Class CDPMailFiltrosManager2
                             Dim grid As New GridView
                             Dim html = ExcelToHtml(output, grid)
 
-                            MandaEmail_Nuevo(destinatario, _
-                                                              asunto, _
-                                                            cuerpo + html, _
-                                                         De, _
-                                                         SmtpServer, _
-                                                                  SmtpUser, _
-                                                                  SmtpPass, _
-                                                                    output, _
-                                                                  SmtpPort, _
-                                                          , _
+                            MandaEmail_Nuevo(destinatario,
+                                                              asunto,
+                                                            cuerpo + html,
+                                                         De,
+                                                         SmtpServer,
+                                                                  SmtpUser,
+                                                                  SmtpPass,
+                                                                    output,
+                                                                  SmtpPort,
+                                                          ,
                                                           CCOaddress, , , De, , inlinePNG, inlinePNG2)
 
 
@@ -19494,16 +19494,16 @@ Public Class CDPMailFiltrosManager2
                             Dim grid As New GridView
                             Dim html = ExcelToHtml(outputHtml, grid)
 
-                            MandaEmail_Nuevo(destinatario, _
-                                                              asunto, _
-                                                            cuerpo + html, _
-                                                         De, _
-                                                         SmtpServer, _
-                                                                  SmtpUser, _
-                                                                  SmtpPass, _
-                                                                    output, _
-                                                                  SmtpPort, _
-                                                          , _
+                            MandaEmail_Nuevo(destinatario,
+                                                              asunto,
+                                                            cuerpo + html,
+                                                         De,
+                                                         SmtpServer,
+                                                                  SmtpUser,
+                                                                  SmtpPass,
+                                                                    output,
+                                                                  SmtpPort,
+                                                          ,
                                                           CCOaddress, , , De, , inlinePNG, inlinePNG2)
 
 
@@ -19518,16 +19518,16 @@ Public Class CDPMailFiltrosManager2
                             Dim html = ExcelToHtml(outputHtml, grid, 2000)
 
 
-                            MandaEmail_Nuevo(destinatario, _
-                                                              asunto, _
-                                                            cuerpo + html, _
-                                                         De, _
-                                                         SmtpServer, _
-                                                                  SmtpUser, _
-                                                                  SmtpPass, _
-                                                                    output, _
-                                                                  SmtpPort, _
-                                                          , _
+                            MandaEmail_Nuevo(destinatario,
+                                                              asunto,
+                                                            cuerpo + html,
+                                                         De,
+                                                         SmtpServer,
+                                                                  SmtpUser,
+                                                                  SmtpPass,
+                                                                    output,
+                                                                  SmtpPort,
+                                                          ,
                                                           CCOaddress, , , De, , inlinePNG, inlinePNG2)
 
 
@@ -19536,16 +19536,16 @@ Public Class CDPMailFiltrosManager2
                             Dim grid As New GridView
                             Dim html = ExcelToHtml(output, grid, 2000)
 
-                            MandaEmail_Nuevo(destinatario, _
-                                        asunto, _
-                                  EncabezadoHtml(puntoventa) & html & AgregarFirmaHtml(puntoventa), _
-                                   De, _
-                                   SmtpServer, _
-                                            SmtpUser, _
-                                            SmtpPass, _
-                                               "", _
-                                            SmtpPort, _
-                                    , _
+                            MandaEmail_Nuevo(destinatario,
+                                        asunto,
+                                  EncabezadoHtml(puntoventa) & html & AgregarFirmaHtml(puntoventa),
+                                   De,
+                                   SmtpServer,
+                                            SmtpUser,
+                                            SmtpPass,
+                                               "",
+                                            SmtpPort,
+                                    ,
                                     CCOaddress, , , De, , inlinePNG, inlinePNG2)
 
 
@@ -19553,32 +19553,32 @@ Public Class CDPMailFiltrosManager2
                             Dim grid As New GridView
                             Dim html = ExcelToHtml(output, grid, 2000)
 
-                            MandaEmail_Nuevo(destinatario, _
-                                        asunto, _
-                                  EncabezadoHtml(puntoventa) & html & AgregarFirmaHtml(puntoventa), _
-                                   De, _
-                                   SmtpServer, _
-                                            SmtpUser, _
-                                            SmtpPass, _
-                                               "", _
-                                            SmtpPort, _
-                                    , _
+                            MandaEmail_Nuevo(destinatario,
+                                        asunto,
+                                  EncabezadoHtml(puntoventa) & html & AgregarFirmaHtml(puntoventa),
+                                   De,
+                                   SmtpServer,
+                                            SmtpUser,
+                                            SmtpPass,
+                                               "",
+                                            SmtpPort,
+                                    ,
                                     CCOaddress, , , De, , inlinePNG, inlinePNG2)
 
                         Case "EHOlav"
                             Dim grid As New GridView
                             Dim html = ExcelToHtml(output, grid, 2000)
 
-                            MandaEmail_Nuevo(destinatario, _
-                                        asunto, _
-                                  EncabezadoHtml(puntoventa) & html & AgregarFirmaHtml(puntoventa), _
-                                   De, _
-                                   SmtpServer, _
-                                            SmtpUser, _
-                                            SmtpPass, _
-                                              output, _
-                                            SmtpPort, _
-                                    , _
+                            MandaEmail_Nuevo(destinatario,
+                                        asunto,
+                                  EncabezadoHtml(puntoventa) & html & AgregarFirmaHtml(puntoventa),
+                                   De,
+                                   SmtpServer,
+                                            SmtpUser,
+                                            SmtpPass,
+                                              output,
+                                            SmtpPort,
+                                    ,
                                     CCOaddress, , , De, , inlinePNG, inlinePNG2)
 
 
@@ -19586,16 +19586,16 @@ Public Class CDPMailFiltrosManager2
                             Dim grid As New GridView
                             Dim html = ExcelToHtml(output, grid, 2000)
 
-                            MandaEmail_Nuevo(destinatario, _
-                                        asunto, _
-                                  EncabezadoHtml(puntoventa) & html & AgregarFirmaHtml(puntoventa), _
-                                   De, _
-                                   SmtpServer, _
-                                            SmtpUser, _
-                                            SmtpPass, _
-                                              output, _
-                                            SmtpPort, _
-                                    , _
+                            MandaEmail_Nuevo(destinatario,
+                                        asunto,
+                                  EncabezadoHtml(puntoventa) & html & AgregarFirmaHtml(puntoventa),
+                                   De,
+                                   SmtpServer,
+                                            SmtpUser,
+                                            SmtpPass,
+                                              output,
+                                            SmtpPort,
+                                    ,
                                     CCOaddress, , , De, , inlinePNG, inlinePNG2)
 
                         Case Else
@@ -19608,16 +19608,16 @@ Public Class CDPMailFiltrosManager2
                                 Dim grid As New GridView
                                 Dim html = ExcelToHtml(output, grid)
 
-                                MandaEmail_Nuevo(destinatario, _
-                                            asunto, _
-                                      EncabezadoHtml(puntoventa) & html & AgregarFirmaHtml(puntoventa), _
-                                       De, _
-                                       SmtpServer, _
-                                                SmtpUser, _
-                                                SmtpPass, _
-                                                  "", _
-                                                SmtpPort, _
-                                        , _
+                                MandaEmail_Nuevo(destinatario,
+                                            asunto,
+                                      EncabezadoHtml(puntoventa) & html & AgregarFirmaHtml(puntoventa),
+                                       De,
+                                       SmtpServer,
+                                                SmtpUser,
+                                                SmtpPass,
+                                                  "",
+                                                SmtpPort,
+                                        ,
                                         CCOaddress, , , De, , inlinePNG, inlinePNG2)
 
 
@@ -19637,19 +19637,19 @@ Public Class CDPMailFiltrosManager2
                                 '               )
                             Else
 
-                                MandaEmail_Nuevo(destinatario, _
-                                                    asunto, _
-                                                  cuerpo, _
-                                                   De, _
-                                                 SmtpServer, _
-                                                SmtpUser, _
-                                                SmtpPass, _
-                                                output, _
-                                                SmtpPort, _
-                                                 , _
-                                                 CCOaddress, _
+                                MandaEmail_Nuevo(destinatario,
+                                                    asunto,
+                                                  cuerpo,
+                                                   De,
+                                                 SmtpServer,
+                                                SmtpUser,
+                                                SmtpPass,
+                                                output,
+                                                SmtpPort,
+                                                 ,
+                                                 CCOaddress,
                                                     truquito _
-                                                    , "Williams Entregas", De, , inlinePNG, inlinePNG2 _
+                                                    , "Williams Entregas", De, , inlinePNG, inlinePNG2
                                                )
 
                             End If
@@ -19721,13 +19721,13 @@ Public Class CDPMailFiltrosManager2
         'Dim db As New LinqCartasPorteDataContext(HFSC.Value) 'no uses linq, porque necesitas más bien hacer updates
         Try
 
-            Dim sWHERE As String = CartaDePorteManager.generarWHEREparaDatasetParametrizado(sc, _
-                                   "", _
-                                  estado, "", -1, -1, _
-                                  -1, -1, _
-                                  -1, -1, -1, -1, _
-                                   CartaDePorteManager.FiltroANDOR.FiltroOR, "", _
-                                  fechadesde, fechahasta, _
+            Dim sWHERE As String = CartaDePorteManager.generarWHEREparaDatasetParametrizado(sc,
+                                   "",
+                                  estado, "", -1, -1,
+                                  -1, -1,
+                                  -1, -1, -1, -1,
+                                   CartaDePorteManager.FiltroANDOR.FiltroOR, "",
+                                  fechadesde, fechahasta,
                                    -1, , , , , )
 
 
@@ -19741,7 +19741,7 @@ Public Class CDPMailFiltrosManager2
                 'metodo 2 usando tabla adicional (CartasDePorteMailClusters)
 
                 EntidadManager.ExecDinamico(sc, "truncate table CartasDePorteMailClusters")
-                EntidadManager.ExecDinamico(sc, "insert into CartasDePorteMailClusters select idcartadeporte,AgrupadorDeTandaPeriodos=" & AgrupadorDeTandaPeriodos & _
+                EntidadManager.ExecDinamico(sc, "insert into CartasDePorteMailClusters select idcartadeporte,AgrupadorDeTandaPeriodos=" & AgrupadorDeTandaPeriodos &
                                             " FROM CartasDePorte CDP  WHERE " _
                                             & sWHERE)
             End If
@@ -20051,15 +20051,15 @@ Public Class CDPDestinosManager
 
         'Return EntidadManager.ExecDinamico(SC, Tabla & "_TT")
 
-        Return ExecDinamico(SC, String.Format("SELECT A.*, " & _
-                    " CLICO1.Razonsocial as Subcontratista1Desc, " & _
-                    " CLICO2.Razonsocial as Subcontratista2Desc " & _
-                    " ,PROVINCIAS.Nombre as Provincia, LOCALIDADES.Nombre as Localidad " & _
-                    " FROM " & Tabla & " A " & _
-                    " LEFT OUTER JOIN Clientes CLICO1 ON A.Subcontratista1 = CLICO1.IdCliente " & _
-                    " LEFT OUTER JOIN Clientes CLICO2 ON A.Subcontratista2 = CLICO2.IdCliente " & _
-                    " LEFT OUTER JOIN LOCALIDADES  ON LOCALIDADES.IdLocalidad = A.IdLocalidad " & _
-                    " LEFT OUTER JOIN PROVINCIAS ON PROVINCIAS.IdProvincia = A.IdProvincia " & _
+        Return ExecDinamico(SC, String.Format("SELECT A.*, " &
+                    " CLICO1.Razonsocial as Subcontratista1Desc, " &
+                    " CLICO2.Razonsocial as Subcontratista2Desc " &
+                    " ,PROVINCIAS.Nombre as Provincia, LOCALIDADES.Nombre as Localidad " &
+                    " FROM " & Tabla & " A " &
+                    " LEFT OUTER JOIN Clientes CLICO1 ON A.Subcontratista1 = CLICO1.IdCliente " &
+                    " LEFT OUTER JOIN Clientes CLICO2 ON A.Subcontratista2 = CLICO2.IdCliente " &
+                    " LEFT OUTER JOIN LOCALIDADES  ON LOCALIDADES.IdLocalidad = A.IdLocalidad " &
+                    " LEFT OUTER JOIN PROVINCIAS ON PROVINCIAS.IdProvincia = A.IdProvincia " &
                                 ""))
         '" LEFT OUTER JOIN Localidades LOCORI ON CDP.Procedencia = LOCORI.IdLocalidad " & _
     End Function
@@ -20090,18 +20090,18 @@ Public Class CDPDestinosManager
 
     End Function
 
-    Shared Function Update(ByVal sc As String, ByVal centro As String, ByVal oncaa As String, _
+    Shared Function Update(ByVal sc As String, ByVal centro As String, ByVal oncaa As String,
                                _obsoleto As String, codpostal As String, poblacion As String, empresa As String, planta As String _
-, Optional localidadequivalente As Integer? = Nothing _
+, Optional localidadequivalente As Integer? = Nothing
 )
 
 
         Dim db = New LinqCartasPorteDataContext(Encriptar(sc))
 
 
-        Dim ue As WilliamsDestino = (From p In db.WilliamsDestinos _
-                       Where ((p.CodigoONCAA = oncaa And oncaa <> "") Or (p.Descripcion = planta And planta <> "")) _
-                       Select p).FirstOrDefault
+        Dim ue As WilliamsDestino = (From p In db.WilliamsDestinos
+                                     Where ((p.CodigoONCAA = oncaa And oncaa <> "") Or (p.Descripcion = planta And planta <> ""))
+                                     Select p).FirstOrDefault
 
 
         'Centro	    Código ONCCA		Código Postal	Población	Nombre Empresa	Nombre Planta
@@ -20164,9 +20164,9 @@ Public Class LogicaInformesWilliams
 
 
 
-    Shared Sub GeneroDataTablesDeMovimientosDeStock(ByRef dtCDPs As DataTable, ByRef dtRenglonUnicoConLasExistencias As Object, _
-                                             ByRef dtMOVs As Object, _
-                                             ByVal idDestinatario As Integer, ByVal idDestino As Integer, ByVal idarticulo As Integer, _
+    Shared Sub GeneroDataTablesDeMovimientosDeStock(ByRef dtCDPs As DataTable, ByRef dtRenglonUnicoConLasExistencias As Object,
+                                             ByRef dtMOVs As Object,
+                                             ByVal idDestinatario As Integer, ByVal idDestino As Integer, ByVal idarticulo As Integer,
                                              ByVal desde As Date, ByVal hasta As Date, ByVal sc As String)
 
 
@@ -20179,12 +20179,12 @@ Public Class LogicaInformesWilliams
 
         Dim sTitulo As String = ""
 
-        dtCDPs = CartaDePorteManager.GetDataTableFiltradoYPaginado(sc, _
-                "", "", "", 1, 0, _
-                enumCDPestado.TodasMenosLasRechazadas, "", -1, -1, _
-                idDestinatario, -1, _
-                -1, idarticulo, -1, idDestino, _
-                "1", "Export", _
+        dtCDPs = CartaDePorteManager.GetDataTableFiltradoYPaginado(sc,
+                "", "", "", 1, 0,
+                enumCDPestado.TodasMenosLasRechazadas, "", -1, -1,
+                idDestinatario, -1,
+                -1, idarticulo, -1, idDestino,
+                "1", "Export",
                  desde, hasta, -1, sTitulo, , , , , , , , , )
 
 
@@ -20193,20 +20193,20 @@ Public Class LogicaInformesWilliams
 
 
 
-        Dim movs = (From i In db.CartasPorteMovimientos _
-                    Join c In db.linqClientes On i.IdExportadorOrigen Equals c.IdCliente _
-                    Where _
+        Dim movs = (From i In db.CartasPorteMovimientos
+                    Join c In db.linqClientes On i.IdExportadorOrigen Equals c.IdCliente
+                    Where
                         (i.FechaIngreso >= desde And i.FechaIngreso <= hasta) _
                         And (i.IdArticulo = idarticulo) _
                         And (i.Puerto = idDestino) _
-                        And ( _
+                        And (
                                 (i.IdExportadorOrigen = idDestinatario) _
-                                Or (i.IdExportadorDestino = idDestinatario) _
+                                Or (i.IdExportadorDestino = idDestinatario)
                         ) _
-                        And If(i.Anulada, "NO") <> "SI" _
-                    Select Tipo = f(i.Tipo), _
-                                ExportadorOrigen = c.RazonSocial, i.FechaIngreso, _
-                                i.Entrada_o_Salida, i.Cantidad, i.Vapor, i.Contrato, i.IdCDPMovimiento, i.Numero _
+                        And If(i.Anulada, "NO") <> "SI"
+                    Select Tipo = f(i.Tipo),
+                                ExportadorOrigen = c.RazonSocial, i.FechaIngreso,
+                                i.Entrada_o_Salida, i.Cantidad, i.Vapor, i.Contrato, i.IdCDPMovimiento, i.Numero
                 ).ToList
 
 
@@ -20266,8 +20266,8 @@ Public Class LogicaInformesWilliams
 
 
 
-    Shared Function ExistenciasAlDiaPorPuerto(ByVal sc As String, ByVal Fecha As DateTime, _
-                                              ByVal IdArticulo As Integer, ByVal IdDestinoWilliams As Integer, _
+    Shared Function ExistenciasAlDiaPorPuerto(ByVal sc As String, ByVal Fecha As DateTime,
+                                              ByVal IdArticulo As Integer, ByVal IdDestinoWilliams As Integer,
                                               ByVal iddestinatario As Integer) As Double
 
         Dim entradasMOV, entradasCDP, salidasMOV As Double
@@ -20287,12 +20287,12 @@ Public Class LogicaInformesWilliams
             '-si el tipo elige desde hoy hasta hoy, tenes que llamar a la funcion con el ultimo segundo de ayer, porque GetDataTableFiltradoYPaginado_CadenaSQL usa menor o igual
 
 
-            Dim sql = CartaDePorteManager.GetDataTableFiltradoYPaginado_CadenaSQL(sc, _
-                    "", "", "", 1, 0, _
-                 enumCDPestado.TodasMenosLasRechazadas, "", -1, -1, _
-                    iddestinatario, -1, _
-                    -1, IdArticulo, -1, IdDestinoWilliams, _
-                   "1", "Export", _
+            Dim sql = CartaDePorteManager.GetDataTableFiltradoYPaginado_CadenaSQL(sc,
+                    "", "", "", 1, 0,
+                 enumCDPestado.TodasMenosLasRechazadas, "", -1, -1,
+                    iddestinatario, -1,
+                    -1, IdArticulo, -1, IdDestinoWilliams,
+                   "1", "Export",
                       #1/1/1750#, DateAdd(DateInterval.Second, -1, Fecha), -1, , , , , , , , , , )
 
 
@@ -20303,12 +20303,12 @@ Public Class LogicaInformesWilliams
 
         ElseIf False Then
 
-            Dim q As IQueryable(Of CartasConCalada) = CartasLINQlocalSimplificadoTipadoConCalada(sc, _
-                    "", "", "", 1, 0, _
-                    enumCDPestado.TodasMenosLasRechazadas, "", -1, -1, _
-                     iddestinatario, -1, _
-                    -1, IdArticulo, -1, IdDestinoWilliams, _
-                    FiltroANDOR.FiltroOR, enumCDPexportacion.Export, _
+            Dim q As IQueryable(Of CartasConCalada) = CartasLINQlocalSimplificadoTipadoConCalada(sc,
+                    "", "", "", 1, 0,
+                    enumCDPestado.TodasMenosLasRechazadas, "", -1, -1,
+                     iddestinatario, -1,
+                    -1, IdArticulo, -1, IdDestinoWilliams,
+                    FiltroANDOR.FiltroOR, enumCDPexportacion.Export,
                      #1/1/1980#, Fecha, -1)
 
             Dim c = q.Count
@@ -20325,14 +20325,14 @@ Public Class LogicaInformesWilliams
             'el tema es que no puedo tomar solo la original, porque la que suele estar marcada como exportacion es una copia
 
 
-            Dim q = Aggregate i In db.CartasDePortes _
+            Dim q = Aggregate i In db.CartasDePortes
                     Where (If(i.FechaDescarga, i.FechaDeCarga) < Fecha) _
                         And (If(i.SubnumeroDeFacturacion, 0) <= 0) _
                         And db.CartasDePortes.Any(Function(x) x.Exporta = "SI" And x.NumeroCartaDePorte = i.NumeroCartaDePorte) _
                         And i.Anulada <> "SI" _
                         And If(i.Destino, 0) = IdDestinoWilliams _
                         And If(i.IdArticulo, 0) = IdArticulo _
-                        And If(i.Entregador, 0) = iddestinatario _
+                        And If(i.Entregador, 0) = iddestinatario
                     Into Sum(CType(i.NetoProc, Decimal?))
 
             entradasCDP = iisNull(q, 0)
@@ -20343,14 +20343,14 @@ Public Class LogicaInformesWilliams
         'movimientos:
         '///////////////////////////////////////////////
 
-        Dim temp = From i In db.CartasPorteMovimientos _
-                   Where _
+        Dim temp = From i In db.CartasPorteMovimientos
+                   Where
                         (i.FechaIngreso < Fecha) _
                     And (i.IdArticulo = IdArticulo) _
                     And (i.Puerto = IdDestinoWilliams) _
-                    And ( _
+                    And (
                             (i.IdExportadorOrigen = iddestinatario) _
-                            Or (i.IdExportadorDestino = iddestinatario) _
+                            Or (i.IdExportadorDestino = iddestinatario)
                         ) _
                     And If(i.Anulada, "NO") <> "SI"
         '///////////////////////////////////////////////
@@ -20366,11 +20366,11 @@ Public Class LogicaInformesWilliams
 
 
 
-        Dim etemp = temp.Where(Function(i) ( _
-                                                ( _
+        Dim etemp = temp.Where(Function(i) (
+                                                (
                                                     (i.Entrada_o_Salida = 1 And i.IdExportadorDestino = iddestinatario) _
-                                                        Or _
-                                                    (i.Entrada_o_Salida = 2 And i.IdExportadorOrigen = iddestinatario) _
+                                                        Or
+                                                    (i.Entrada_o_Salida = 2 And i.IdExportadorOrigen = iddestinatario)
                                                 ) _
                                                 And (i.FechaIngreso < Fecha))).DefaultIfEmpty
 
@@ -20384,11 +20384,11 @@ Public Class LogicaInformesWilliams
         '///////////////////////////////////////////////
         '///////////////////////////////////////////////
 
-        Dim stemp = temp.Where(Function(i) ( _
-                                                ( _
+        Dim stemp = temp.Where(Function(i) (
+                                                (
                                                     (i.Entrada_o_Salida = 2 And i.IdExportadorDestino = iddestinatario) _
-                                                        Or _
-                                                    (i.Entrada_o_Salida = 1 And i.IdExportadorOrigen = iddestinatario) _
+                                                        Or
+                                                    (i.Entrada_o_Salida = 1 And i.IdExportadorOrigen = iddestinatario)
                                                 ) _
                                                 And (i.FechaIngreso < Fecha))).DefaultIfEmpty
 
@@ -20443,9 +20443,9 @@ Public Class UserDatosExtendidosManager
         Dim db = New LinqBDLmasterDataContext(Encriptar(ConexBDLmaster))
 
 
-        Dim ue = (From p In db.UserDatosExtendidos _
-                       Where p.UserId.ToString = userid _
-                       Select p).SingleOrDefault
+        Dim ue = (From p In db.UserDatosExtendidos
+                  Where p.UserId.ToString = userid
+                  Select p).SingleOrDefault
 
 
         If IsNothing(ue) Then
@@ -20466,9 +20466,9 @@ Public Class UserDatosExtendidosManager
 
         Dim db = New LinqBDLmasterDataContext(Encriptar(ConexBDLmaster))
 
-        Dim uext = (From p In db.UserDatosExtendidos _
-                       Where p.UserId.ToString = UserId _
-                       Select p).SingleOrDefault
+        Dim uext = (From p In db.UserDatosExtendidos
+                    Where p.UserId.ToString = UserId
+                    Select p).SingleOrDefault
 
         Return uext
     End Function
@@ -20477,9 +20477,9 @@ Public Class UserDatosExtendidosManager
 
         Dim db = New LinqBDLmasterDataContext(Encriptar(ConexBDLmaster))
 
-        Dim uext = (From p In db.UserDatosExtendidos _
-                       Where p.UserId.ToString = UserId _
-                       Select p).SingleOrDefault
+        Dim uext = (From p In db.UserDatosExtendidos
+                    Where p.UserId.ToString = UserId
+                    Select p).SingleOrDefault
 
         Return Convert.ToInt32(uext.RazonSocial)
     End Function
@@ -20489,9 +20489,9 @@ Public Class UserDatosExtendidosManager
 
         Dim db = New LinqBDLmasterDataContext(Encriptar(ConexBDLmaster))
 
-        Dim uext = (From p In db.UserDatosExtendidos _
-                       Where p.UserId.ToString = UserId _
-                       Select p).SingleOrDefault
+        Dim uext = (From p In db.UserDatosExtendidos
+                    Where p.UserId.ToString = UserId
+                    Select p).SingleOrDefault
 
         Return NombreCliente(SC, uext.RazonSocial)
     End Function
