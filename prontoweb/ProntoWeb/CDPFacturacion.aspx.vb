@@ -2333,6 +2333,16 @@ Partial Class CDPFacturacion
         output = DataTableToExcel(dt)
         ErrHandler2.WriteError(" PreviewDetalladoDeLaGeneracionEnPaso2() Se descarga")
 
+
+
+
+
+
+
+
+
+
+
         Try
             Dim MyFile1 = New FileInfo(output) 'quizás si me fijo de nuevo, ahora verifica que el archivo existe...
             If MyFile1.Exists Then

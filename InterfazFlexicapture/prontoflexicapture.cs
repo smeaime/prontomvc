@@ -292,7 +292,7 @@ namespace ProntoFlexicapture
 
             //Console.WriteLine("Imagenes encoladas " + Lista.Count);
 
-            return ProcesarCartasBatchConFlexicapture(ref engine, ref  processor, plantilla, Lista, SC, DirApp, bProcesar, ref sError);
+            return ProcesarCartasBatchConFlexicapture(ref engine, ref processor, plantilla, Lista, SC, DirApp, bProcesar, ref sError);
             //si no esta la licencia, recibe la excepcion 
 
         }
@@ -302,7 +302,7 @@ namespace ProntoFlexicapture
 
         // USE CASE: Using a custom image source with FlexiCapture processor
         public static List<ProntoMVC.Data.FuncionesGenericasCSharp.Resultados> ProcesarCartasBatchConFlexicapture(ref IEngine engine,
-                                                    ref  IFlexiCaptureProcessor processor,
+                                                    ref IFlexiCaptureProcessor processor,
                                                     string plantilla,
                                                    List<string> imagenes, string SC, string DirApp, bool bProcesar, ref string sError)
         {
@@ -560,6 +560,7 @@ namespace ProntoFlexicapture
                             }
 
 
+                            //el nombre de la imagen lo logeo en algun lado????
                             var cc = CartaDePorteManager.GrabarImagen(output.IdCarta, SC, 0, 0, nombrenuevo, ref sError, DirApp, true);
                         }
 
@@ -949,7 +950,7 @@ namespace ProntoFlexicapture
 
                 //files = d.GetFiles("*.*", SearchOption.TopDirectoryOnly); 
 
-                
+
 
                 foreach (DirectoryInfo subd in dirs)
                 {
@@ -1256,10 +1257,10 @@ namespace ProntoFlexicapture
                     var final = archivo + "_pag" + (n).ToString() + "_unido.tif";
 
                     string[] arguments = {
-				        pagina1,
-				        pagina2,
-				        final
-			        };
+                        pagina1,
+                        pagina2,
+                        final
+                    };
 
                     BitMiracle.TiffCP.Program.Main(arguments);
 
@@ -1359,10 +1360,10 @@ namespace ProntoFlexicapture
                     var final = archivo + "_pag" + (n).ToString() + "_unido.tif";
 
                     string[] arguments = {
-				        pagina1,
-				        pagina2,
-				        final
-			        };
+                        pagina1,
+                        pagina2,
+                        final
+                    };
 
                     BitMiracle.TiffCP.Program.Main(arguments);
 
@@ -2180,6 +2181,19 @@ namespace ProntoFlexicapture
 
 
 
+                    string NombreUsuario = "";
+                    EntidadManager.Tarea(SC, "Log_InsertarRegistro", "OCR",
+                                                      id, 0, DateTime.Now, 0, nombrenuevo, "", NombreUsuario,
+                                                     DBNull.Value, DBNull.Value, DBNull.Value, DBNull.Value, DBNull.Value,
+                                                    DBNull.Value, DBNull.Value, DBNull.Value, DBNull.Value, DBNull.Value,
+                                                    DBNull.Value, DBNull.Value, DBNull.Value);
+
+                    //'EntidadManager.Tarea(SC, "Log_InsertarRegistro", "ALTAINF",
+                    //'                 dr.Item(0), 0, Now, 0, Mid(logtexto, 1, 100),
+                    //'               Mid(logtexto, 101, 50), Mid(logtexto, 151, 50), Mid(logtexto, 201, 50),
+                    //'               Mid(logtexto, 251, 50), Mid(logtexto, 301, 50), DBNull.Value, DBNull.Value,
+                    //'                DBNull.Value, DBNull.Value, DBNull.Value, DBNull.Value, DBNull.Value,
+                    //'                99990, DBNull.Value, DBNull.Value)
 
 
 
@@ -2188,6 +2202,10 @@ namespace ProntoFlexicapture
                     //se da cuenta si es un ticket? no lo esta poniendo en 2 posicion?
 
                     //si es un ticket lo tiene que poner en segunda posicion
+
+
+
+
 
 
                     var cc = CartaDePorteManager.GrabarImagen(id, SC, numeroCarta, vagon, nombrenuevo
@@ -2266,7 +2284,7 @@ namespace ProntoFlexicapture
 
 
 
-        static public void IniciaMotor(ref IEngine engine, ref  IEngineLoader engineLoader, ref  IFlexiCaptureProcessor processor, string plantilla)
+        static public void IniciaMotor(ref IEngine engine, ref IEngineLoader engineLoader, ref IFlexiCaptureProcessor processor, string plantilla)
         {
 
             ///////////////////////////////////////////////////////////////////
@@ -2333,7 +2351,7 @@ namespace ProntoFlexicapture
 
                     ///////////////////////////////////////////////////////////////////
                     ///////////////////////////////////////////////////////////////////
-                    IniciaMotor(ref engine, ref  engineLoader, ref  processor, plantilla);
+                    IniciaMotor(ref engine, ref engineLoader, ref processor, plantilla);
                     ///////////////////////////////////////////////////////////////////
                     ///////////////////////////////////////////////////////////////////
 
@@ -3383,14 +3401,14 @@ namespace ServicioCartaPorte
             //if (searchField == "Numero") searchField = "NumeroPedido"; 
 
             var Entidad = pagedQuery
-                //.Include(x => x.Moneda)
-                //.Include(x => x.Proveedor)
-                //.Include(x => x.DetallePedidos
-                //            .Select(y => y.DetalleRequerimiento
-                //                )
-                //        )
-                //.Include("DetallePedidos.DetalleRequerimiento.Requerimientos.Obra") // funciona tambien
-                //.Include(x => x.Comprador)
+                          //.Include(x => x.Moneda)
+                          //.Include(x => x.Proveedor)
+                          //.Include(x => x.DetallePedidos
+                          //            .Select(y => y.DetalleRequerimiento
+                          //                )
+                          //        )
+                          //.Include("DetallePedidos.DetalleRequerimiento.Requerimientos.Obra") // funciona tambien
+                          //.Include(x => x.Comprador)
                           .AsQueryable();
 
 
@@ -3412,13 +3430,13 @@ namespace ServicioCartaPorte
                         select new jqGridRowJson
                         {
                             id = a.IdCartaDePorte.ToString(),
-                            cell = new string[] { 
+                            cell = new string[] {
                                 "", //"<a href="+ Url.Action("Edit",new {id = a.IdPedido} ) + "  >Editar</>" ,
                                 
-                                a.IdCartaDePorte.ToString(), 
+                                a.IdCartaDePorte.ToString(),
 
                                 "<a href=\"CartaDePorte.aspx?Id=" +  a.IdCartaDePorte + "\">" +  a.NumeroCartaEnTextoParaBusqueda.NullSafeToString() + "</>" ,
-                                
+
                                 (a.Situacion ?? 0).NullSafeToString(),
                                 //((a.Situacion ?? 0) >= 0)  ?  ExcelImportadorManager.Situaciones[a.Situacion ?? 0] : "",
 
@@ -3428,7 +3446,7 @@ namespace ServicioCartaPorte
 
 
                                 a.FechaDescarga==null ? "" :  a.FechaDescarga.GetValueOrDefault().ToShortDateString(),
-                            
+
                                  a.CorredorDesc,
                                  a.DestinatarioDesc,
                                  a.DestinoDesc.ToString(),
@@ -3443,9 +3461,9 @@ namespace ServicioCartaPorte
 
                                  a.NetoProc.ToString(),
 
-                                 
+
                                  a.PuntoVenta.ToString(),
-                                 
+
                                  a.FechaActualizacionAutomatica==null ? "" :  a.FechaActualizacionAutomatica.GetValueOrDefault().ToShortDateString()
                                    
 
@@ -3712,14 +3730,14 @@ namespace ServicioCartaPorte
 
 
             var excelData = new jqGridWeb.DataForExcel(
-                // column Header
+                    // column Header
                     new[] { "Col1", "Col2", "Col3" },
                     new[]{jqGridWeb.DataForExcel.DataType.String, jqGridWeb.DataForExcel.DataType.Integer,
                           jqGridWeb.DataForExcel.DataType.String},
-                //      new List<string[]> {
-                //    new[] {"a", "1", "c1"},
-                //    new[] {"a", "2", "c2"}
-                //},
+                    //      new List<string[]> {
+                    //    new[] {"a", "1", "c1"},
+                    //    new[] {"a", "2", "c2"}
+                    //},
                     lista,
 
                     "Test Grid");
