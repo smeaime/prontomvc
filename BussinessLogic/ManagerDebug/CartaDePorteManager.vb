@@ -476,8 +476,12 @@ Public Class CartaDePorteManager
 
 
 
-    '//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    '//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+
     '//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     '//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     '//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -12217,6 +12221,25 @@ Public Class CartaDePorteManager
 
         oCarta.FechaModificacion = Now
 
+        'si estoy usando el servicio, no se logea nada, pierdo el nombre de la imagen adjuntada
+        Dim NombreUsuario = ""
+        EntidadManager.Tarea(SC, "Log_InsertarRegistro", "IMAG",
+                                          forzarID, 0, Now, 0, archivoImagenSinPathUbicadaEnDATABACKUPEAR, "", NombreUsuario,
+                                         DBNull.Value, DBNull.Value, DBNull.Value, DBNull.Value, DBNull.Value,
+                                        DBNull.Value, DBNull.Value, DBNull.Value, DBNull.Value, DBNull.Value,
+                                        DBNull.Value, DBNull.Value, DBNull.Value)
+
+        'EntidadManager.Tarea(SC, "Log_InsertarRegistro", "ALTAINF",
+        '                 dr.Item(0), 0, Now, 0, Mid(logtexto, 1, 100),
+        '               Mid(logtexto, 101, 50), Mid(logtexto, 151, 50), Mid(logtexto, 201, 50),
+        '               Mid(logtexto, 251, 50), Mid(logtexto, 301, 50), DBNull.Value, DBNull.Value,
+        '                DBNull.Value, DBNull.Value, DBNull.Value, DBNull.Value, DBNull.Value,
+        '                99990, DBNull.Value, DBNull.Value)
+
+
+
+
+
         ErrHandler2.WriteError("grabo en base")
 
         db.SubmitChanges()
@@ -15004,7 +15027,7 @@ Public Class CartaDePorteManager
 
             If Not Debugger.IsAttached Then
                 If Not Membership.ValidateUser(usuario, password) Then
-                    ErrHandler2.WriteError("No logra autenticarse")
+                    ErrHandler2.WriteError("No logra autenticarse " & usuario)
                     Return Nothing
                 End If
 
