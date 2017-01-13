@@ -8081,7 +8081,7 @@ Namespace Pronto.ERP.Bll
 
 
 
-            vFileName = DataTableToExcel(dt, vFileName)
+            vFileName = InformesCartaDePorteManager.DataTableToExcel(dt, vFileName)
 
 
 

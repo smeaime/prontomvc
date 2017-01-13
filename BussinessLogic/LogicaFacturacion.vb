@@ -3045,35 +3045,43 @@ Public Class LogicaFacturacion
     End Function
 
 
-    Public Shared Function ListaEmbarquesQueryable(ByVal sc As String, ByVal FechaDesde As Date, ByVal FechaHasta As Date, Optional ByVal idTitular As Integer = -1, Optional ByVal pventa As Integer = 0, Optional ByVal idQueContenga As Integer = -1) As IQueryable(Of Models.CartasPorteMovimiento)
+    Public Shared Function ListaEmbarquesQueryable(ByVal sc As String, ByVal FechaDesde As Date, ByVal FechaHasta As Date, Optional ByVal idTitular As Integer = -1, Optional ByVal pventa As Integer = 0,
+                                                   Optional ByVal idQueContenga As Integer = -1, Optional db2 As DemoProntoEntities = Nothing) As IQueryable(Of Models.CartasPorteMovimiento)
         'Dim db As New LinqCartasPorteDataContext(Encriptar(sc))
 
 
-        Dim db As ProntoMVC.Data.Models.DemoProntoEntities = New ProntoMVC.Data.Models.DemoProntoEntities(ProntoMVC.Data.Models.Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(sc)))
+        Dim db As DemoProntoEntities
+
+        If db2 Is Nothing Then
+            db = New DemoProntoEntities(Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(sc)))
+        Else
+            db = db2
+        End If
+
 
 
 
         ' Dim q = From i In db.CartasPorteMovimientos
-        Dim embarques = From i In db.CartasPorteMovimientos _
-                        Join c In db.Clientes On c.IdCliente Equals i.IdExportadorOrigen _
-                          Where ( _
+        Dim embarques = From i In db.CartasPorteMovimientos
+                        Join c In db.Clientes On c.IdCliente Equals i.IdExportadorOrigen
+                        Where (
                                 i.Tipo = 4 _
                                 And If(i.Anulada, "NO") <> "SI" _
                                 And i.FechaIngreso >= FechaDesde And i.FechaIngreso <= FechaHasta _
                                 And (i.IdExportadorOrigen = idTitular Or idTitular = -1) _
                                 And (i.IdStock Is Nothing Or i.IdStock = pventa Or i.IdStock = 0 Or pventa = 0) _
-                                And (idQueContenga = -1 Or i.IdExportadorOrigen = idQueContenga Or i.IdExportadorDestino = idQueContenga) _
-                           ) _
+                                And (idQueContenga = -1 Or i.IdExportadorOrigen = idQueContenga Or i.IdExportadorDestino = idQueContenga)
+                           )
                         Select i
 
-        '                                And (i.IdFacturaImputada <= 0 Or i.IdFacturaImputada Is Nothing) _
+            '                                And (i.IdFacturaImputada <= 0 Or i.IdFacturaImputada Is Nothing) _
 
 
 
 
 
 
-        Return embarques
+            Return embarques
     End Function
 
 
@@ -8366,6 +8374,384 @@ Public Class LogicaFacturacion
     '        Return strSQL
 
     '    End Function
+
+
+
+
+
+
+
+
+    '//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    '//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+    Function PreviewDetalladoDeLaGeneracionEnPaso2(optFacturarA As Integer, txtFacturarATerceros As String, SC As String,
+                                                   EsteUsuarioPuedeVerTarifa As Boolean, ViewState As Object, txtFechaDesde As String, txtFechaHasta As String,
+                                                   fListaIDs As String, SessionID As Integer, cmbPuntoVenta As Integer, cmbAgruparArticulosPor As String,
+                                                   SeEstaSeparandoPorCorredor As String) As String
+
+        ErrHandler2.WriteError(" PreviewDetalladoDeLaGeneracionEnPaso2() Empiezo")
+
+
+        If optFacturarA = 4 Then
+            Dim IdFacturarselaA = BuscaIdClientePreciso(txtFacturarATerceros, SC)
+
+            If IdFacturarselaA = -1 Then
+                ErrHandler2.WriteError("Elija un cliente como tercero a facturarle")
+                Throw New Exception("Elija un cliente como tercero a facturarle")
+                'MsgBoxAjax(Me, "Elija un cliente como tercero a facturarle")
+                'Return
+            End If
+        End If
+
+
+
+        '////////////////////////////////////////////////////////////////////////////////
+        '////////////////////////////////////////////////////////////////////////////////
+        '////////////////////////////////////////////////////////////////////////////////
+        '////////////////////////////////////////////////////////////////////////////////
+
+        'Dim tildadosEnPrimerPasoLongs As Generic.List(Of Integer) = ViewState("ListaIDsLongs")
+        'Dim db As New LinqCartasPorteDataContext(Encriptar(HFSC.Value))
+        '        Dim q = (From r In db.CartasDePortes _
+        '               Where tildadosEnPrimerPasoLongs.Contains(r.IdCartaDePorte) _
+        '               Select r.IdCartaDePorte, r.AgregaItemDeGastosAdministrativos).ToList
+
+        Dim oo As DataTable
+
+        Try
+            Dim l = fListaIDs
+            oo = ExecDinamico(SC, "select IdCartaDePorte,AgregaItemDeGastosAdministrativos  " &
+                              " from CartasDePorte where AgregaItemDeGastosAdministrativos ='SI' AND  idCartaDePorte IN (-10," & IIf(l = "", "-10", l) & ")") ' , timeoutSegundos:=100)
+
+        Catch ex As Exception
+            'http://stackoverflow.com/questions/3641931/optimize-oracle-sql-with-large-in-clause
+            'Create an index that covers 'field' and 'value'.
+            'Place those IN values in a temp table and join on it.
+
+            ErrHandler2WriteErrorLogPronto("Al llamar a esta a veces da timeout", SC, "")
+            ErrHandler2.WriteAndRaiseError(ex)
+        End Try
+
+
+
+
+        Dim q = (From r In oo
+                 Select IdCartaDePorte = CInt(iisNull(r("IdCartaDePorte"), -1)), AgregaItemDeGastosAdministrativos = CStr(iisNull(r("AgregaItemDeGastosAdministrativos"), ""))).ToList
+
+
+
+        Dim output As String
+
+        Dim sErr As String
+
+        Dim tablaEditadaDeFacturasParaGenerar As DataTable
+
+        Dim fechadesde As Date = iisValidSqlDate(txtFechaDesde, #1/1/1753#)
+        Dim fechahasta As Date = iisValidSqlDate(txtFechaHasta, #1/1/2100#)
+
+
+        ErrHandler2.WriteError(" PreviewDetalladoDeLaGeneracionEnPaso2()  Levanto las cartas de la tanda")
+
+        ViewState("pagina") = 1
+        tablaEditadaDeFacturasParaGenerar = LogicaFacturacion.GetDatatableAsignacionAutomatica(SC, ViewState("pagina"), ViewState("sesionId"),
+                                                                             999999, cmbPuntoVenta, fechadesde, fechahasta, sErr,
+                                                                             cmbAgruparArticulosPor, ViewState("filas"),
+                                                                             ViewState("slinks"), SessionID)
+
+
+
+        '////////////////////////////////////////////////////////////////////////////
+        '////////////////////////////////////////////////////////////////////////////
+        '////////////////////////////////////////////////////////////////////////////
+        '////////////////////////////////////////////////////////////////////////////
+        '////////////////////////////////////////////////////////////////////////////
+        '////////////////////////////////////////////////////////////////////////////
+        '////////////////////////////////////////////////////////////////////////////
+        '////////////////////////////////////////////////////////////////////////////
+        '////////////////////////////////////////////////////////////////////////////
+        'creo que es esto lo que tarda banda
+
+        ErrHandler2.WriteError(" PreviewDetalladoDeLaGeneracionEnPaso2() Llamo a ActualizarCampoClienteSeparador")
+
+        LogicaFacturacion.ActualizarCampoClienteSeparador(tablaEditadaDeFacturasParaGenerar, SeEstaSeparandoPorCorredor, SC, ViewState("sesionId"))
+
+
+
+        '////////////////////////////////////////////////////////////////////////////
+        '////////////////////////////////////////////////////////////////////////////
+        '////////////////////////////////////////////////////////////////////////////
+        '////////////////////////////////////////////////////////////////////////////
+        '////////////////////////////////////////////////////////////////////////////
+        '////////////////////////////////////////////////////////////////////////////
+        '////////////////////////////////////////////////////////////////////////////
+        '////////////////////////////////////////////////////////////////////////////
+        '////////////////////////////////////////////////////////////////////////////
+        '////////////////////////////////////////////////////////////////////////////
+        '////////////////////////////////////////////////////////////////////////////
+        '////////////////////////////////////////////////////////////////////////////
+
+        Dim dt = tablaEditadaDeFacturasParaGenerar
+
+
+
+        ErrHandler2.WriteError(" PreviewDetalladoDeLaGeneracionEnPaso2() Actualizo la tarifa")
+
+
+
+        dt.Columns.Add("Total", Type.GetType("System.Decimal"))
+        For Each row In dt.Rows
+            row("Total") = row("KgNetos") * iisNull(row("TarifaFacturada"), 0) / 1000D
+
+            Dim id As Integer = iisNull(row("IdCartaDePorte"), -1)
+            Dim f = q.Find(Function(o) o.IdCartaDePorte = id)
+            If Not IsNothing(f) Then
+                If iisNull(f.AgregaItemDeGastosAdministrativos) = "SI" Then
+                    row("FacturarselaA") = " <<CON COSTO ADMIN>> " & row("FacturarselaA")
+                End If
+            End If
+        Next
+
+
+
+        'saco estas columnas que molestan en la presentacion
+        'dt.Columns.Remove("Factura")
+        'dt.Columns.Remove("idcorredorseparado")
+        dt.Columns.Remove("ColumnaTilde")
+        dt.Columns.Remove("IdCartaDePorte")
+        dt.Columns.Remove("IdArticulo")
+        dt.Columns.Remove("IdFacturarselaA")
+        dt.Columns.Remove("IdDestino")
+        dt.Columns.Remove("Confirmado")
+        dt.Columns.Remove("IdCodigoIVA")
+        dt.Columns.Remove("ClienteSeparado")
+
+        If Not EsteUsuarioPuedeVerTarifa Then
+            dt.Columns.Remove("TarifaFacturada")
+            dt.Columns.Remove("Total")
+        End If
+
+
+
+
+        '////////////////////////////////////////////////////////////////////////////
+        '////////////////////////////////////////////////////////////////////////////
+        '////////////////////////////////////////////////////////////////////////////
+        '////////////////////////////////////////////////////////////////////////////
+        '////////////////////////////////////////////////////////////////////////////
+        '////////////////////////////////////////////////////////////////////////////
+        '////////////////////////////////////////////////////////////////////////////
+
+
+
+        '/////////////////////////////////////
+        '/////////////////////////////////////
+        '/////////////////////////////////////
+        'Por ultimo, dejo que baje el excel completo sin filtrar
+        '/////////////////////////////////////
+        ErrHandler2.WriteError(" PreviewDetalladoDeLaGeneracionEnPaso2() Convierto a Excel")
+        output = DataTableToExcel(dt)
+        ErrHandler2.WriteError(" PreviewDetalladoDeLaGeneracionEnPaso2() Se descarga")
+
+
+
+
+        Return output
+
+    End Function
+
+
+
+    Public Function DataTableToExcel(ByVal pDataTable As DataTable, Optional ByVal titulo As String = "") As String
+
+        Dim vFileName As String = Path.GetTempFileName()
+        'Dim vFileName As String = "c:\archivo.txt"
+        FileOpen(1, vFileName, OpenMode.Output)
+        Dim sb As String = ""
+        Dim dc As DataColumn
+        For Each dc In pDataTable.Columns
+            sb &= dc.Caption & Microsoft.VisualBasic.ControlChars.Tab
+        Next
+        PrintLine(1, sb)
+        Dim i As Integer = 0
+        Dim dr As DataRow
+        For Each dr In pDataTable.Rows
+            i = 0 : sb = ""
+            For Each dc In pDataTable.Columns
+                If Not IsDBNull(dr(i)) Then
+                    Try
+                        If IsNumeric(dr(i)) Then
+                            sb &= DecimalToString(dr(i)) & Microsoft.VisualBasic.ControlChars.Tab
+                        Else
+                            sb &= CStr(dr(i)) & Microsoft.VisualBasic.ControlChars.Tab
+                        End If
+                    Catch x As Exception
+                        sb &= "" & Microsoft.VisualBasic.ControlChars.Tab
+                    End Try
+                Else
+                    sb &= Microsoft.VisualBasic.ControlChars.Tab
+                End If
+                i += 1
+            Next
+            PrintLine(1, sb)
+        Next
+
+
+        FileClose(1)
+
+
+
+        Return TextToExcel(vFileName, titulo)
+    End Function
+
+
+
+    Public Function TextToExcel(ByVal pFileName As String, Optional ByVal titulo As String = "") As String
+        'Apartar estas funciones que usen Interop..... usar Open XML SDK
+        'http://stackoverflow.com/questions/1405201/so-net-doesnt-have-built-in-office-functionality
+        'http://stackoverflow.com/questions/1405201/so-net-doesnt-have-built-in-office-functionality
+        'http://stackoverflow.com/questions/1405201/so-net-doesnt-have-built-in-office-functionality
+
+
+        'EEPLUS
+        'EEPLUS
+        'http://epplus.codeplex.com/releases/view/67324
+        'I'd view EPPlus as a ticking time bomb in your code if you're reading user-supplied files.....
+        '-y si grabo como xlsx?
+        'EEPLUS
+        'EEPLUS
+
+
+
+        Dim vFormato As Excel.XlRangeAutoFormat
+        Dim Exc As Excel.Application = CreateObject("Excel.Application")
+        Exc.Visible = False
+        Exc.DisplayAlerts = False
+
+        '/////////////////////////////////////////////////////////////////////
+        '/////////////////////////////////////////////////////////////////////
+        '/////////////////////////////////////////////////////////////////////
+        '/////////////////////////////////////////////////////////////////////
+        '/////////////////////////////////////////////////////////////////////
+        'importa el archivo de texto
+        'Guarda con la configuracion regional. Si en el servidor está usando la coma (despues
+        'de todo, no se usa el pronto en el servidor), lo importa mal
+        'http://answers.yahoo.com/question/index?qid=20080917051138AAxit8S
+        'http://msdn.microsoft.com/en-us/library/aa195814(office.11).aspx
+        'http://www.newsgrupos.com/microsoft-public-es-excel/304517-problemas-con-comas-y-puntos-al-guardar-de-excel-un-archivo-txtmediante-vb.html
+
+        Exc.Workbooks.OpenText(pFileName, , , , Excel.XlTextQualifier.xlTextQualifierNone, , True, , , , , , , , ".")
+
+        '/////////////////////////////////////////////////////////////////////
+        '/////////////////////////////////////////////////////////////////////
+        '/////////////////////////////////////////////////////////////////////
+        '/////////////////////////////////////////////////////////////////////
+        '/////////////////////////////////////////////////////////////////////
+
+
+
+        Dim Wb As Excel.Workbook = Exc.ActiveWorkbook
+        Dim Ws As Excel.Worksheet = CType(Wb.ActiveSheet, Excel.Worksheet)
+
+
+        'Se le indica el formato al que queremos exportarlo
+        Dim valor As Integer = 10
+
+        If valor > -1 Then
+            Select Case (valor)
+                Case 10 : vFormato = Excel.XlRangeAutoFormat.xlRangeAutoFormatClassic1
+            End Select
+            Ws.Range(Ws.Cells(1, 1), Ws.Cells(Ws.UsedRange.Rows.Count, Ws.UsedRange.Columns.Count)).AutoFormat(vFormato) 'le hace autoformato
+
+            'insertar totales
+            Dim filas = Ws.UsedRange.Rows.Count
+            Ws.Cells(filas + 1, "F") = "TOTAL:"
+            Ws.Cells(filas + 1, "G") = Exc.WorksheetFunction.Sum(Ws.Range("G2:G" & filas))
+            Ws.Cells(filas + 1, "H") = Exc.WorksheetFunction.Sum(Ws.Range("H2:H" & filas))
+
+
+            '/////////////////////////////////
+            'muevo la planilla formateada para tener un espacio arriba
+            Ws.Range(Ws.Cells(1, 1), Ws.Cells(filas + 2, Ws.UsedRange.Columns.Count)).Cut(Ws.Cells(10, 1))
+
+            '/////////////////////////////////
+            'poner tambien el filtro que se usó para hacer el informe
+            Ws.Cells(7, 1) = titulo
+
+            '/////////////////////////////////
+            'insertar la imagen 
+            'System.Web.VirtualPathUtility.ToAbsolute("~/Imagenes/Williams.bmp")  
+            'Ws.Pictures.Insert("~/Imagenes/Williams.bmp")
+
+            'todo: reparar esto
+            'Dim imag = Ws.Pictures.Insert(Server.MapPath("~/Imagenes/Williams.bmp"))
+            'imag.Left = 1
+            'imag.top = 1
+
+
+            '/////////////////////////////////
+            'insertar link
+            Dim rg As Excel.Range = Ws.Cells(3, 8)
+            'rg.hip()
+            'rg.Hyperlinks(1).Address = "www.williamsentregas.com.ar"
+            'rg.Hyperlinks(1).TextToDisplay=
+            Ws.Hyperlinks.Add(rg, "http:\\www.williamsentregas.com.ar", , , "Visite: www.williamsentregas.com.ar y vea toda su información en linea!")
+            'Ws.Cells(3, "K") = "=HYPERLINK(" & Chr(34) & "www.williamsentregas.com.ar " & Chr(34) & ", ""Visite: www.williamsentregas.com.ar y vea toda su información en linea!"" )"
+
+
+
+
+
+
+
+
+            '/////////////////////////////////
+            '/////////////////////////////////
+
+            'Usando un GUID
+            'pFileName = System.IO.Path.GetTempPath() + Guid.NewGuid().ToString() + ".xls" 'http://stackoverflow.com/questions/581570/how-can-i-create-a-temp-file-with-a-specific-extension-with-net
+
+            'Usando la hora
+            pFileName = System.IO.Path.GetTempPath() + "WilliamsEntregas " + Now.ToString("ddMMMyyyy_HHmmss") + ".xls" 'http://stackoverflow.com/questions/581570/how-can-i-create-a-temp-file-with-a-specific-extension-with-net
+
+            '/////////////////////////////////
+
+            'pFileName = Path.GetTempFileName  'tambien puede ser .GetRandomFileName
+            'pFileName = Path.GetTempFileName.Replace("tmp", "xls")
+            'problemas con el acceso del proceso al archivo? http://www.eggheadcafe.com/software/aspnet/34067727/file-cannot-be-accessed-b.aspx
+            'pFileName = "C:\Archivo.xls"
+            'File.Delete(pFileName) 'si no borro, va a aparecer el cartelote de sobreescribir. entonces necesito el .DisplayAlerts = False
+
+            Exc.ActiveWorkbook.SaveAs(pFileName, Excel.XlTextQualifier.xlTextQualifierNone - 1, )
+        End If
+
+
+        'Exc.Quit()
+        'Wb = Nothing
+        'Exc = Nothing
+
+        If Not Wb Is Nothing Then Wb.Close(False)
+        NAR(Wb)
+        'Wbs.Close()
+        'NAR(Wbs)
+        'quit and dispose app
+        Exc.Quit()
+        NAR(Exc)
+
+        Ws = Nothing
+
+
+        GC.Collect()
+        'If valor > -1 Then
+        '    Dim p As System.Diagnostics.Process = New System.Diagnostics.Process
+        '    p.EnableRaisingEvents = False
+        '    'System.Diagnostics.Process.Start(pFileName) 'para qué hace esto?
+        'End If
+        Return pFileName
+    End Function
 
 
 

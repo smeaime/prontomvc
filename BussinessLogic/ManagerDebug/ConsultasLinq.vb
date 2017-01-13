@@ -33,8 +33,8 @@ Imports ProntoMVC.Data.Models
 
 'Namespace Pronto.ERP.Bll
 
-<DataObjectAttribute()> _
-<Transaction(TransactionOption.Required)> _
+<DataObjectAttribute()>
+<Transaction(TransactionOption.Required)>
 Public Class ConsultasLinq
     Inherits ServicedComponent
 
@@ -48,29 +48,29 @@ Public Class ConsultasLinq
 
 
 
-    Public Shared Function totpormessucursal(ByVal SC As String, _
-          ByVal ColumnaParaFiltrar As String, _
-          ByVal TextoParaFiltrar As String, _
-          ByVal sortExpression As String, _
-          ByVal startRowIndex As Long, _
-          ByVal maximumRows As Long, _
-          ByVal estado As CartaDePorteManager.enumCDPestado, _
-          ByVal QueContenga As String, _
-          ByVal idVendedor As Integer, _
-          ByVal idCorredor As Integer, _
-          ByVal idDestinatario As Integer, _
-          ByVal idIntermediario As Integer, _
-          ByVal idRemComercial As Integer, _
-          ByVal idArticulo As Integer, _
-          ByVal idProcedencia As Integer, _
-          ByVal idDestino As Integer, _
-          ByVal AplicarANDuORalFiltro As CartaDePorteManager.FiltroANDOR, _
-          ByVal ModoExportacion As String, _
-          ByVal fechadesde As DateTime, ByVal fechahasta As DateTime, _
-          ByVal puntoventa As Integer, _
-          Optional ByRef sTituloFiltroUsado As String = "", _
-          Optional ByVal optDivisionSyngenta As String = "Ambas", _
-          Optional ByVal bTraerDuplicados As Boolean = False, _
+    Public Shared Function totpormessucursal(ByVal SC As String,
+          ByVal ColumnaParaFiltrar As String,
+          ByVal TextoParaFiltrar As String,
+          ByVal sortExpression As String,
+          ByVal startRowIndex As Long,
+          ByVal maximumRows As Long,
+          ByVal estado As CartaDePorteManager.enumCDPestado,
+          ByVal QueContenga As String,
+          ByVal idVendedor As Integer,
+          ByVal idCorredor As Integer,
+          ByVal idDestinatario As Integer,
+          ByVal idIntermediario As Integer,
+          ByVal idRemComercial As Integer,
+          ByVal idArticulo As Integer,
+          ByVal idProcedencia As Integer,
+          ByVal idDestino As Integer,
+          ByVal AplicarANDuORalFiltro As CartaDePorteManager.FiltroANDOR,
+          ByVal ModoExportacion As String,
+          ByVal fechadesde As DateTime, ByVal fechahasta As DateTime,
+          ByVal puntoventa As Integer,
+          Optional ByRef sTituloFiltroUsado As String = "",
+          Optional ByVal optDivisionSyngenta As String = "Ambas",
+          Optional ByVal bTraerDuplicados As Boolean = False,
           Optional ByVal Contrato As String = "") As Object
 
 
@@ -145,42 +145,42 @@ Public Class ConsultasLinq
         'Dim fechadesde As Date = iisValidSqlDate(txtFechaDesde.Text, #1/1/1753#)
         'Dim fechahasta As Date = iisValidSqlDate(txtFechaHasta.Text, #1/1/2100#)
 
-        Dim q = (From cdp In db.CartasDePortes _
-                Join cli In db.linqClientes On cli.IdCliente Equals cdp.Vendedor _
-                From art In db.linqArticulos.Where(Function(i) i.IdArticulo = cdp.IdArticulo).DefaultIfEmpty _
-                From clitit In db.linqClientes.Where(Function(i) i.IdCliente = cdp.Vendedor).DefaultIfEmpty _
-                Where _
-                    cdp.Vendedor > 0 _
-                    And cli.RazonSocial IsNot Nothing _
-                    And (cdp.FechaDescarga >= fechadesde And cdp.FechaDescarga <= fechahasta) _
-                    And (cdp.Anulada <> "SI") _
-                    And ((ModoExportacion = "Ambos") Or (ModoExportacion = "Entregas" And If(cdp.Exporta, "NO") = "NO") Or (ModoExportacion = "Export" And If(cdp.Exporta, "NO") = "SI")) _
-                    And (cdp.Vendedor.HasValue And cdp.Corredor.HasValue And cdp.Entregador.HasValue) _
-                    And (idVendedor = -1 Or cdp.Vendedor = idVendedor) _
-                    And (idCorredor = -1 Or cdp.Corredor = idCorredor) _
-                    And (idDestinatario = -1 Or cdp.Entregador = idDestinatario) _
-                    And (idIntermediario = -1 Or cdp.CuentaOrden1 = idIntermediario) _
-                    And (idArticulo = -1 Or cdp.IdArticulo = idArticulo) _
-                    And (idDestino = -1 Or cdp.Destino = idDestino) _
-                    And (puntoventa = -1 Or cdp.PuntoVenta = puntoventa) _
-                Group cdp By Ano = cdp.FechaDescarga.Value.Year, _
-                            Producto = art.Descripcion, _
-                            MesNumero = cdp.FechaDescarga.Value.Month, _
-                            Sucursal = cdp.PuntoVenta _
-                    Into g = Group _
-                Select New With { _
-                         .Sucursal = SqlFunctions.StringConvert(Sucursal), _
-                    .Ano = Ano, _
-                    .Mes = MonthName(MesNumero), _
-                    .Producto = Producto, _
-                    .CantCartas = g.Count, _
-                .NetoPto = g.Sum(Function(i) i.NetoFinal.GetValueOrDefault) / 1000, _
-                    .Merma = g.Sum(Function(i) (i.Merma.GetValueOrDefault + i.HumedadDesnormalizada.GetValueOrDefault)) / 1000, _
-                    .NetoFinal = g.Sum(Function(i) i.NetoProc.GetValueOrDefault) / 1000, _
-                    .MesNumero = MesNumero, _
-                    .Importe = g.Sum(Function(i) CDec(CDec(If(i.TarifaFacturada, 0)) * CDec(If(i.NetoPto, 0)) / 1000 _
-                                        )) _
-                }).ToList
+        Dim q = (From cdp In db.CartasDePortes
+                 Join cli In db.linqClientes On cli.IdCliente Equals cdp.Vendedor
+                 From art In db.linqArticulos.Where(Function(i) i.IdArticulo = cdp.IdArticulo).DefaultIfEmpty
+                 From clitit In db.linqClientes.Where(Function(i) i.IdCliente = cdp.Vendedor).DefaultIfEmpty
+                 Where
+                     cdp.Vendedor > 0 _
+                     And cli.RazonSocial IsNot Nothing _
+                     And (cdp.FechaDescarga >= fechadesde And cdp.FechaDescarga <= fechahasta) _
+                     And (cdp.Anulada <> "SI") _
+                     And ((ModoExportacion = "Ambos") Or (ModoExportacion = "Entregas" And If(cdp.Exporta, "NO") = "NO") Or (ModoExportacion = "Export" And If(cdp.Exporta, "NO") = "SI")) _
+                     And (cdp.Vendedor.HasValue And cdp.Corredor.HasValue And cdp.Entregador.HasValue) _
+                     And (idVendedor = -1 Or cdp.Vendedor = idVendedor) _
+                     And (idCorredor = -1 Or cdp.Corredor = idCorredor) _
+                     And (idDestinatario = -1 Or cdp.Entregador = idDestinatario) _
+                     And (idIntermediario = -1 Or cdp.CuentaOrden1 = idIntermediario) _
+                     And (idArticulo = -1 Or cdp.IdArticulo = idArticulo) _
+                     And (idDestino = -1 Or cdp.Destino = idDestino) _
+                     And (puntoventa = -1 Or cdp.PuntoVenta = puntoventa)
+                 Group cdp By Ano = cdp.FechaDescarga.Value.Year,
+                             Producto = art.Descripcion,
+                             MesNumero = cdp.FechaDescarga.Value.Month,
+                             Sucursal = cdp.PuntoVenta
+                     Into g = Group
+                 Select New With {
+                          .Sucursal = SqlFunctions.StringConvert(Sucursal),
+                     .Ano = Ano,
+                     .Mes = MonthName(MesNumero),
+                     .Producto = Producto,
+                     .CantCartas = g.Count,
+                 .NetoPto = g.Sum(Function(i) i.NetoFinal.GetValueOrDefault) / 1000,
+                     .Merma = g.Sum(Function(i) (i.Merma.GetValueOrDefault + i.HumedadDesnormalizada.GetValueOrDefault)) / 1000,
+                     .NetoFinal = g.Sum(Function(i) i.NetoProc.GetValueOrDefault) / 1000,
+                     .MesNumero = MesNumero,
+                     .Importe = g.Sum(Function(i) CDec(CDec(If(i.TarifaFacturada, 0)) * CDec(If(i.NetoPto, 0)) / 1000
+                                         ))
+                 }).ToList
 
 
 
@@ -281,10 +281,10 @@ Public Class ConsultasLinq
 
     Class asas
         Public IdCartaDePorte As Integer?
-        Public NumeroCartaDePorte As Integer?
+        Public NumeroCartaDePorte As Long?
         Public FechaDescarga As Date?
         Public agrupVagon As String
-        Public NetoFinal As Integer?
+        Public NetoFinal As Decimal?
         Public Subcontr1 As Integer?
         Public Subcontr2 As Integer?
         Public ExcluirDeSubcontratistas As String
@@ -306,27 +306,27 @@ Public Class ConsultasLinq
     End Class
 
 
-    Public Shared Function LiquidacionSubcontratistas(ByVal SC As String, _
-          ByVal ColumnaParaFiltrar As String, _
-          ByVal TextoParaFiltrar As String, _
-          ByVal sortExpression As String, _
-          ByVal startRowIndex As Long, _
-          ByVal maximumRows As Long, _
-          ByVal estado As CartaDePorteManager.enumCDPestado, _
-          ByVal QueContenga As String, _
-          ByVal idVendedor As Integer, _
-          ByVal idCorredor As Integer, _
-          ByVal idDestinatario As Integer, _
-          ByVal idIntermediario As Integer, _
-          ByVal idRemComercial As Integer, _
-          ByVal idArticulo As Integer, _
-          ByVal idProcedencia As Integer, _
-          ByVal idDestino As Integer, _
-          ByVal AplicarANDuORalFiltro As CartaDePorteManager.FiltroANDOR, _
-          ByVal ModoExportacion As String, _
-          ByVal fechadesde As DateTime, ByVal fechahasta As DateTime, _
-          ByVal puntoventa As Integer, idSubcontr As Integer, _
-          ByRef sTituloFiltroUsado As String _
+    Public Shared Function LiquidacionSubcontratistas(ByVal SC As String,
+          ByVal ColumnaParaFiltrar As String,
+          ByVal TextoParaFiltrar As String,
+          ByVal sortExpression As String,
+          ByVal startRowIndex As Long,
+          ByVal maximumRows As Long,
+          ByVal estado As CartaDePorteManager.enumCDPestado,
+          ByVal QueContenga As String,
+          ByVal idVendedor As Integer,
+          ByVal idCorredor As Integer,
+          ByVal idDestinatario As Integer,
+          ByVal idIntermediario As Integer,
+          ByVal idRemComercial As Integer,
+          ByVal idArticulo As Integer,
+          ByVal idProcedencia As Integer,
+          ByVal idDestino As Integer,
+          ByVal AplicarANDuORalFiltro As CartaDePorteManager.FiltroANDOR,
+          ByVal ModoExportacion As String,
+          ByVal fechadesde As DateTime, ByVal fechahasta As DateTime,
+          ByVal puntoventa As Integer, idSubcontr As Integer,
+          ByRef sTituloFiltroUsado As String
           ) As Object
 
 
@@ -381,7 +381,7 @@ Public Class ConsultasLinq
                                                 fechadesde, fechahasta, puntoventa,
                                                 Nothing, Nothing, Nothing, Nothing,
                                                 Nothing, Nothing, Nothing, Nothing)
-                        Select xz
+                  Select xz
 
         'aaa.ToList()
 
@@ -410,66 +410,66 @@ Public Class ConsultasLinq
         '    And (idVendedor = -1 Or cdp.Vendedor = idVendedor) _
 
 
+        db.Database.CommandTimeout = 300
 
-
-        Dim qq = (From cdp In aaa _
-                From dest In db.WilliamsDestinos.Where(Function(i) i.IdWilliamsDestino = cdp.Destino).DefaultIfEmpty _
-                From clisub1 In db.Clientes.Where(Function(i) i.IdCliente = If(cdp.Subcontr1, dest.Subcontratista1)).DefaultIfEmpty _
-                From clisub2 In db.Clientes.Where(Function(i) i.IdCliente = If(cdp.Subcontr2, dest.Subcontratista2)).DefaultIfEmpty _
-                From l1 In db.ListasPrecios.Where(Function(i) i.IdListaPrecios = clisub1.IdListaPrecios).DefaultIfEmpty _
-                From pd1 In db.ListasPreciosDetalles _
-                        .Where(Function(i) i.IdListaPrecios = l1.IdListaPrecios And (i.IdArticulo = cdp.IdArticulo) _
-                            And (i.IdCliente Is Nothing Or i.IdCliente = cdp.Vendedor Or i.IdCliente = cdp.Entregador Or i.IdCliente = cdp.CuentaOrden1 Or i.IdCliente = cdp.CuentaOrden2)) _
-                        .OrderByDescending(Function(i) i.IdCliente).Take(1).DefaultIfEmpty() _
-                From l2 In db.ListasPrecios.Where(Function(i) i.IdListaPrecios = clisub2.IdListaPrecios).DefaultIfEmpty _
-                From pd2 In db.ListasPreciosDetalles _
-                        .Where(Function(i) i.IdListaPrecios = l2.IdListaPrecios And (i.IdArticulo = cdp.IdArticulo) _
-                               And (i.IdCliente Is Nothing Or i.IdCliente = cdp.Vendedor Or i.IdCliente = cdp.Entregador Or i.IdCliente = cdp.CuentaOrden1 Or i.IdCliente = cdp.CuentaOrden2)) _
-                        .OrderByDescending(Function(i) i.IdCliente).Take(1).DefaultIfEmpty() _
-                Where 1 = 1 _
-                      And (idSubcontr = -1 Or If(cdp.Subcontr1, dest.Subcontratista1) = idSubcontr Or If(cdp.Subcontr2, dest.Subcontratista2) = idSubcontr) _
-                      And (puntoventa = -1 Or cdp.PuntoVenta = puntoventa) _
-                      And If(cdp.SubnumeroDeFacturacion, 0) <= 0
-                Select New asas() With { _
-                    .NumeroCartaDePorte = cdp.NumeroCartaDePorte, _
-                    .IdCartaDePorte = cdp.IdCartaDePorte, _
-                    .FechaDescarga = cdp.FechaDescarga, _
-                    .NetoFinal = cdp.NetoFinal, _
-                    .Subcontr1 = If(cdp.Subcontr1, dest.Subcontratista1), _
-                    .Subcontr2 = If(cdp.Subcontr2, dest.Subcontratista2), _
-                    .agrupVagon = If(destinosapartados.Contains(cdp.Destino), If(cdp.SubnumeroVagon = 0, "Camiones", "Vagones"), ""), _
-                    .ExcluirDeSubcontratistas = cdp.ExcluirDeSubcontratistas, _
-                    .SubnumeroDeFacturacion = cdp.SubnumeroDeFacturacion, _
-                    .VendedorDesc = cdp.TitularDesc, _
-                    .CuentaOrden1Desc = cdp.IntermediarioDesc, _
-                    .CuentaOrden2Desc = cdp.RComercialDesc, _
-                    .CorredorDesc = cdp.CorredorDesc, _
-                    .EntregadorDesc = cdp.EntregadorDesc, _
-                    .ProcedenciaDesc = cdp.ProcedenciaDesc, _
-                    .DestinoDesc = dest.Descripcion, _
-                    .Subcontr1Desc = clisub1.RazonSocial, _
-                    .Subcontr2Desc = clisub2.RazonSocial, _
-                    .tarif1 = CDec(If(If( _
-                    (cdp.Exporta = "SI") _
-                        , If(cdp.SubnumeroVagon <= 0 Or Not destinosapartados.Contains(cdp.Destino), _
-                                pd1.PrecioCaladaExportacion, pd1.PrecioVagonesCaladaExportacion) _
-                        , If(cdp.SubnumeroVagon <= 0 Or Not destinosapartados.Contains(cdp.Destino), _
-                                pd1.PrecioCaladaLocal, pd1.PrecioVagonesCalada) _
-                        ), 0)), _
-                    .tarif2 = CDec(If(If( _
-                        (cdp.Exporta = "SI") _
-                        , If(cdp.SubnumeroVagon <= 0 Or Not destinosapartados.Contains(cdp.Destino), _
-                                If(pd2.PrecioDescargaExportacion = 0, pd2.PrecioCaladaExportacion, pd2.PrecioDescargaExportacion), _
-                                If(pd2.PrecioVagonesBalanzaExportacion = 0, pd2.PrecioVagonesCaladaExportacion, pd2.PrecioVagonesBalanzaExportacion) _
-                                ) _
-                        , If(cdp.SubnumeroVagon <= 0 Or Not destinosapartados.Contains(cdp.Destino), _
-                                If(pd2.PrecioDescargaLocal = 0, pd2.PrecioCaladaLocal, pd2.PrecioDescargaLocal), _
-                                If(pd2.PrecioVagonesBalanza = 0, pd2.PrecioVagonesCalada, pd2.PrecioVagonesBalanza) _
-                                ) _
-                                ), 0)), _
-                    .Exporta = cdp.Exporta, _
-                   .Corredor = cdp.Corredor, _
-                    .IdClienteEntregador = If(cdp.IdClienteEntregador, 0)}).ToList
+        Dim qq = (From cdp In aaa
+                  From dest In db.WilliamsDestinos.Where(Function(i) i.IdWilliamsDestino = If(cdp.Destino, 0)).DefaultIfEmpty
+                  From clisub1 In db.Clientes.Where(Function(i) i.IdCliente = If(cdp.Subcontr1, dest.Subcontratista1)).DefaultIfEmpty
+                  From clisub2 In db.Clientes.Where(Function(i) i.IdCliente = If(cdp.Subcontr2, dest.Subcontratista2)).DefaultIfEmpty
+                  From l1 In db.ListasPrecios.Where(Function(i) i.IdListaPrecios = clisub1.IdListaPrecios).DefaultIfEmpty
+                  From pd1 In db.ListasPreciosDetalles _
+                          .Where(Function(i) i.IdListaPrecios = l1.IdListaPrecios And (i.IdArticulo = cdp.IdArticulo) _
+                              And (i.IdCliente Is Nothing Or i.IdCliente = cdp.Vendedor Or i.IdCliente = cdp.Entregador Or i.IdCliente = cdp.CuentaOrden1 Or i.IdCliente = cdp.CuentaOrden2)) _
+                          .OrderByDescending(Function(i) i.IdCliente).Take(1).DefaultIfEmpty()
+                  From l2 In db.ListasPrecios.Where(Function(i) i.IdListaPrecios = clisub2.IdListaPrecios).DefaultIfEmpty
+                  From pd2 In db.ListasPreciosDetalles _
+                          .Where(Function(i) i.IdListaPrecios = l2.IdListaPrecios And (i.IdArticulo = cdp.IdArticulo) _
+                                 And (i.IdCliente Is Nothing Or i.IdCliente = cdp.Vendedor Or i.IdCliente = cdp.Entregador Or i.IdCliente = cdp.CuentaOrden1 Or i.IdCliente = cdp.CuentaOrden2)) _
+                          .OrderByDescending(Function(i) i.IdCliente).Take(1).DefaultIfEmpty()
+                  Where 1 = 1 _
+                        And (idSubcontr = -1 Or If(cdp.Subcontr1, dest.Subcontratista1) = idSubcontr Or If(cdp.Subcontr2, dest.Subcontratista2) = idSubcontr) _
+                        And (puntoventa = -1 Or cdp.PuntoVenta = puntoventa) _
+                        And If(cdp.SubnumeroDeFacturacion, 0) <= 0
+                  Select New asas() With {
+                      .NumeroCartaDePorte = cdp.NumeroCartaDePorte,
+                      .IdCartaDePorte = cdp.IdCartaDePorte,
+                      .FechaDescarga = cdp.FechaDescarga,
+                      .NetoFinal = cdp.NetoFinal,
+                      .Subcontr1 = If(cdp.Subcontr1, dest.Subcontratista1),
+                      .Subcontr2 = If(cdp.Subcontr2, dest.Subcontratista2),
+                      .agrupVagon = If(destinosapartados.Contains(cdp.Destino), If(cdp.SubnumeroVagon = 0, "Camiones", "Vagones"), ""),
+                      .ExcluirDeSubcontratistas = cdp.ExcluirDeSubcontratistas,
+                      .SubnumeroDeFacturacion = cdp.SubnumeroDeFacturacion,
+                      .VendedorDesc = cdp.TitularDesc,
+                      .CuentaOrden1Desc = cdp.IntermediarioDesc,
+                      .CuentaOrden2Desc = cdp.RComercialDesc,
+                      .CorredorDesc = cdp.CorredorDesc,
+                      .EntregadorDesc = cdp.EntregadorDesc,
+                      .ProcedenciaDesc = cdp.ProcedenciaDesc,
+                      .DestinoDesc = dest.Descripcion,
+                      .Subcontr1Desc = clisub1.RazonSocial,
+                      .Subcontr2Desc = clisub2.RazonSocial,
+                      .tarif1 = CDec(If(If(
+                      (cdp.Exporta = "SI") _
+                          , If(cdp.SubnumeroVagon <= 0 Or Not destinosapartados.Contains(cdp.Destino),
+                                  pd1.PrecioCaladaExportacion, pd1.PrecioVagonesCaladaExportacion) _
+                          , If(cdp.SubnumeroVagon <= 0 Or Not destinosapartados.Contains(cdp.Destino),
+                                  pd1.PrecioCaladaLocal, pd1.PrecioVagonesCalada)
+                          ), 0)),
+                      .tarif2 = CDec(If(If(
+                          (cdp.Exporta = "SI") _
+                          , If(cdp.SubnumeroVagon <= 0 Or Not destinosapartados.Contains(cdp.Destino),
+                                  If(pd2.PrecioDescargaExportacion = 0, pd2.PrecioCaladaExportacion, pd2.PrecioDescargaExportacion),
+                                  If(pd2.PrecioVagonesBalanzaExportacion = 0, pd2.PrecioVagonesCaladaExportacion, pd2.PrecioVagonesBalanzaExportacion)
+                                  ) _
+                          , If(cdp.SubnumeroVagon <= 0 Or Not destinosapartados.Contains(cdp.Destino),
+                                  If(pd2.PrecioDescargaLocal = 0, pd2.PrecioCaladaLocal, pd2.PrecioDescargaLocal),
+                                  If(pd2.PrecioVagonesBalanza = 0, pd2.PrecioVagonesCalada, pd2.PrecioVagonesBalanza)
+                                  )
+                                  ), 0)),
+                      .Exporta = cdp.Exporta,
+                     .Corredor = cdp.Corredor,
+                      .IdClienteEntregador = If(cdp.IdClienteEntregador, 0)}).ToList
         'IdListaPreciosDetalle1 = pd1.IdListaPreciosDetalle, IdListaPreciossDetalle2 = pd2.IdListaPreciosDetalle
 
 
@@ -501,46 +501,50 @@ Public Class ConsultasLinq
 
         If ModoExportacion = "Buques" Then
 
-            Dim q7 = LogicaFacturacion.ListaEmbarquesQueryable(SC, fechadesde, fechahasta).ToList
+            Dim q7 = LogicaFacturacion.ListaEmbarquesQueryable(SC, fechadesde, fechahasta, -1, 0, -1, db)
 
-            Dim ooo = (From cdp As ProntoMVC.Data.Models.CartasPorteMovimiento In q7 _
-                       Join dest In db.WilliamsDestinos On dest.IdWilliamsDestino Equals cdp.Puerto _
-                    Join art In db.Articulos On art.IdArticulo Equals cdp.IdArticulo _
-                    From clisub1 In db.Clientes.Where(Function(i) i.IdCliente = dest.Subcontratista1).DefaultIfEmpty _
-                    From clisub2 In db.Clientes.Where(Function(i) i.IdCliente = dest.Subcontratista2).DefaultIfEmpty _
-                                    From l1 In db.ListasPrecios.Where(Function(i) i.IdListaPrecios = clisub1.IdListaPrecios).DefaultIfEmpty _
-                From pd1 In db.ListasPreciosDetalles _
+            'From destino In db.WilliamsDestinos.Where(Function(i) i.IdWilliamsDestino = cdp.Puerto).DefaultIfEmpty
+            'Join dest In db.WilliamsDestinos On dest.IdWilliamsDestino Equals cdp.Puerto
+            'Join art In db.Articulos On art.IdArticulo Equals cdp.IdArticulo
+
+            Dim ooo = (From cdp As ProntoMVC.Data.Models.CartasPorteMovimiento In q7
+                       From art In db.Articulos.Where(Function(i) i.IdArticulo = If(cdp.IdArticulo, 0)).DefaultIfEmpty
+                       From destino In db.WilliamsDestinos.Where(Function(i) i.IdWilliamsDestino = If(cdp.Puerto, 0)).DefaultIfEmpty
+                       From clisub1 In db.Clientes.Where(Function(i) i.IdCliente = If(destino.Subcontratista1, 0)).DefaultIfEmpty
+                       From clisub2 In db.Clientes.Where(Function(i) i.IdCliente = If(destino.Subcontratista2, 0)).DefaultIfEmpty
+                       From l1 In db.ListasPrecios.Where(Function(i) i.IdListaPrecios = clisub1.IdListaPrecios).DefaultIfEmpty
+                       From pd1 In db.ListasPreciosDetalles _
                         .Where(Function(i) i.IdListaPrecios = l1.IdListaPrecios And (i.IdArticulo = cdp.IdArticulo) _
                             And (i.IdCliente Is Nothing Or i.IdCliente = cdp.IdExportadorOrigen)) _
-                        .OrderByDescending(Function(i) i.IdCliente).Take(1).DefaultIfEmpty() _
-                From l2 In db.ListasPrecios.Where(Function(i) i.IdListaPrecios = clisub2.IdListaPrecios).DefaultIfEmpty _
-                From pd2 In db.ListasPreciosDetalles _
+                        .OrderByDescending(Function(i) i.IdCliente).Take(1).DefaultIfEmpty()
+                       From l2 In db.ListasPrecios.Where(Function(i) i.IdListaPrecios = clisub2.IdListaPrecios).DefaultIfEmpty
+                       From pd2 In db.ListasPreciosDetalles _
                         .Where(Function(i) i.IdListaPrecios = l2.IdListaPrecios And (i.IdArticulo = cdp.IdArticulo) _
                                And (i.IdCliente Is Nothing Or i.IdCliente = cdp.IdExportadorOrigen)) _
-                        .OrderByDescending(Function(i) i.IdCliente).Take(1).DefaultIfEmpty() _
-            Select New asas With { _
-                   .NumeroCartaDePorte = cdp.NumeroCDPMovimiento, _
-                 .IdCartaDePorte = cdp.IdCartaDePorte, _
-                   .FechaDescarga = cdp.FechaIngreso, _
-                  .NetoFinal = cdp.Cantidad, _
-                    .Subcontr1 = dest.Subcontratista1, _
-                    .Subcontr2 = dest.Subcontratista2, _
-                    .agrupVagon = "Buques", _
-                    .ExcluirDeSubcontratistas = "NO", _
-                    .SubnumeroDeFacturacion = 0, _
-                    .VendedorDesc = cdp.IdExportadorOrigen, _
-                    .CuentaOrden1Desc = cdp.IdExportadorOrigen, _
-                    .CuentaOrden2Desc = "", _
-                    .CorredorDesc = "", _
-                    .EntregadorDesc = cdp.IdExportadorOrigen, _
-                    .ProcedenciaDesc = cdp.IdExportadorOrigen, _
-                    .DestinoDesc = dest.Descripcion, _
-                    .Subcontr1Desc = clisub1.RazonSocial, _
-                    .Subcontr2Desc = clisub2.RazonSocial, _
-                    .tarif1 = If(pd1 Is Nothing, 0, pd1.PrecioBuquesCalada), _
-                    .tarif2 = If(pd2 Is Nothing, 0, pd2.PrecioBuquesCalada), _
-                    .Exporta = "SI", _
-                    .Corredor = cdp.IdExportadorOrigen, _
+                        .OrderByDescending(Function(i) i.IdCliente).Take(1).DefaultIfEmpty()
+                       Select New asas With {
+                    .NumeroCartaDePorte = cdp.NumeroCDPMovimiento,
+                    .IdCartaDePorte = cdp.IdCartaDePorte,
+                    .FechaDescarga = cdp.FechaIngreso,
+                    .NetoFinal = cdp.Cantidad,
+                    .Subcontr1 = destino.Subcontratista1,
+                    .Subcontr2 = destino.Subcontratista2,
+                    .agrupVagon = "Buques",
+                    .ExcluirDeSubcontratistas = "NO",
+                    .SubnumeroDeFacturacion = 0,
+                    .VendedorDesc = cdp.IdExportadorOrigen,
+                    .CuentaOrden1Desc = cdp.IdExportadorOrigen,
+                    .CuentaOrden2Desc = "",
+                    .CorredorDesc = "",
+                    .EntregadorDesc = cdp.IdExportadorOrigen,
+                    .ProcedenciaDesc = cdp.IdExportadorOrigen,
+                    .DestinoDesc = destino.Descripcion,
+                    .Subcontr1Desc = clisub1.RazonSocial,
+                    .Subcontr2Desc = clisub2.RazonSocial,
+                    .tarif1 = If(pd1 Is Nothing, 0, pd1.PrecioBuquesCalada),
+                    .tarif2 = If(pd2 Is Nothing, 0, pd2.PrecioBuquesCalada),
+                    .Exporta = "SI",
+                    .Corredor = cdp.IdExportadorOrigen,
                     .IdClienteEntregador = If(cdp.IdExportadorOrigen, 0)}).ToList
 
 
@@ -555,53 +559,53 @@ Public Class ConsultasLinq
 
 
 
-        Dim q = From i In qq _
-                Group By _
-                    i.IdCartaDePorte, _
-                    i.NumeroCartaDePorte, _
-                    i.FechaDescarga, _
-                    i.agrupVagon, _
-                    i.NetoFinal, _
-                    i.Subcontr1, _
-                    i.Subcontr2, _
-                    i.ExcluirDeSubcontratistas, _
-                    i.SubnumeroDeFacturacion, _
-                    i.VendedorDesc, _
-                    i.CuentaOrden1Desc, _
-                    i.CuentaOrden2Desc, _
-                    i.CorredorDesc, _
-                    i.EntregadorDesc, _
-                    i.ProcedenciaDesc, _
-                    i.DestinoDesc, _
-                    i.Subcontr1Desc, _
-                    i.Subcontr2Desc, _
-                    i.Exporta, _
-                    i.Corredor, _
+        Dim q = From i In qq
+                Group By
+                    i.IdCartaDePorte,
+                    i.NumeroCartaDePorte,
+                    i.FechaDescarga,
+                    i.agrupVagon,
+                    i.NetoFinal,
+                    i.Subcontr1,
+                    i.Subcontr2,
+                    i.ExcluirDeSubcontratistas,
+                    i.SubnumeroDeFacturacion,
+                    i.VendedorDesc,
+                    i.CuentaOrden1Desc,
+                    i.CuentaOrden2Desc,
+                    i.CorredorDesc,
+                    i.EntregadorDesc,
+                    i.ProcedenciaDesc,
+                    i.DestinoDesc,
+                    i.Subcontr1Desc,
+                    i.Subcontr2Desc,
+                    i.Exporta,
+                    i.Corredor,
                     i.IdClienteEntregador
-                Into Group _
-                Select New With { _
-                    IdCartaDePorte, _
-                    NumeroCartaDePorte, _
-                    FechaDescarga, _
-                    agrupVagon, _
-                    NetoFinal, _
-                    Subcontr1, _
-                    Subcontr2, _
-                    ExcluirDeSubcontratistas, _
-                    SubnumeroDeFacturacion, _
-                    VendedorDesc, _
-                    CuentaOrden1Desc, _
-                    CuentaOrden2Desc, _
-                    CorredorDesc, _
-                    EntregadorDesc, _
-                    ProcedenciaDesc, _
-                    DestinoDesc, _
-                    Subcontr1Desc, _
-                    Subcontr2Desc, _
-                    Exporta, _
-                    .tarif1 = Group.Max(Function(x) x.tarif1), _
-                    .tarif2 = Group.Max(Function(x) x.tarif2), _
-                    Corredor, _
+                Into Group
+                Select New With {
+                    IdCartaDePorte,
+                    NumeroCartaDePorte,
+                    FechaDescarga,
+                    agrupVagon,
+                    NetoFinal,
+                    Subcontr1,
+                    Subcontr2,
+                    ExcluirDeSubcontratistas,
+                    SubnumeroDeFacturacion,
+                    VendedorDesc,
+                    CuentaOrden1Desc,
+                    CuentaOrden2Desc,
+                    CorredorDesc,
+                    EntregadorDesc,
+                    ProcedenciaDesc,
+                    DestinoDesc,
+                    Subcontr1Desc,
+                    Subcontr2Desc,
+                    Exporta,
+                    .tarif1 = Group.Max(Function(x) x.tarif1),
+                    .tarif2 = Group.Max(Function(x) x.tarif2),
+                    Corredor,
                     IdClienteEntregador
                      }
         'IdListaPreciosDetalle1, IdListaPreciosDetalle2
@@ -635,34 +639,34 @@ Public Class ConsultasLinq
 
 
 
-        Dim q4 As List(Of infLiqui) = (From cdp In q _
-                    Where (idSubcontr = -1 Or cdp.Subcontr1 = idSubcontr) _
-                    Select New infLiqui With { _
-                        .agrupVagon = cdp.agrupVagon, _
-                        .DestinoDesc = cdp.DestinoDesc & " Calada" & If( _
-                            (cdp.Exporta = "SI") _
-                                   , " - Export.", " - Entrega"), _
-                        .SubcontrDesc = cdp.Subcontr1Desc, _
-                        .NetoPto = cdp.NetoFinal, _
-                        .Tarifa = If(cdp.tarif1, 0), _
-                        .Comision = cdp.NetoFinal * If(cdp.tarif1, 0) / 1000, _
-                        .numerocarta = cdp.NumeroCartaDePorte _
-                }).ToList
+        Dim q4 As List(Of infLiqui) = (From cdp In q
+                                       Where (idSubcontr = -1 Or cdp.Subcontr1 = idSubcontr)
+                                       Select New infLiqui With {
+                                           .agrupVagon = cdp.agrupVagon,
+                                           .DestinoDesc = cdp.DestinoDesc & " Calada" & If(
+                                               (cdp.Exporta = "SI") _
+                                                      , " - Export.", " - Entrega"),
+                                           .SubcontrDesc = cdp.Subcontr1Desc,
+                                           .NetoPto = cdp.NetoFinal,
+                                           .Tarifa = If(cdp.tarif1, 0),
+                                           .Comision = cdp.NetoFinal * If(cdp.tarif1, 0) / 1000,
+                                           .numerocarta = cdp.NumeroCartaDePorte
+                                   }).ToList
 
 
-        Dim q5 As List(Of infLiqui) = (From cdp In q _
-                   Where (idSubcontr = -1 Or cdp.Subcontr2 = idSubcontr) _
-                    Select New infLiqui With { _
-                        .agrupVagon = cdp.agrupVagon, _
-                        .DestinoDesc = cdp.DestinoDesc & " Balanza" & If( _
-                                      (cdp.Exporta = "SI") _
-                                    , " - Export.", " - Entrega"), _
-                        .SubcontrDesc = cdp.Subcontr2Desc, _
-                        .NetoPto = cdp.NetoFinal, _
-                        .Tarifa = If(cdp.tarif2, 0), _
-                        .Comision = cdp.NetoFinal * If(cdp.tarif2, 0) / 1000, _
-                        .numerocarta = cdp.NumeroCartaDePorte _
-                }).ToList
+        Dim q5 As List(Of infLiqui) = (From cdp In q
+                                       Where (idSubcontr = -1 Or cdp.Subcontr2 = idSubcontr)
+                                       Select New infLiqui With {
+                                           .agrupVagon = cdp.agrupVagon,
+                                           .DestinoDesc = cdp.DestinoDesc & " Balanza" & If(
+                                                         (cdp.Exporta = "SI") _
+                                                       , " - Export.", " - Entrega"),
+                                           .SubcontrDesc = cdp.Subcontr2Desc,
+                                           .NetoPto = cdp.NetoFinal,
+                                           .Tarifa = If(cdp.tarif2, 0),
+                                           .Comision = cdp.NetoFinal * If(cdp.tarif2, 0) / 1000,
+                                           .numerocarta = cdp.NumeroCartaDePorte
+                                   }).ToList
 
 
         Dim q6 As New List(Of infLiqui) '= q4.Union(q5)
@@ -671,11 +675,11 @@ Public Class ConsultasLinq
 
 
 
-        Dim q3 = From i In q6 _
-                Group i By agrupVagon = i.agrupVagon, DestinoDesc = i.DestinoDesc, SubcontrDesc = i.SubcontrDesc, Tarifa = i.Tarifa Into g = Group _
-                Select agrupVagon = agrupVagon, DestinoDesc = DestinoDesc, SubcontrDesc = SubcontrDesc, Tarifa = Tarifa, _
-                NetoPto = g.Sum(Function(i) i.NetoPto), Comision = g.Sum(Function(i) i.Comision), CantCartas = g.Count, _
-                numeros = Left(vbCrLf + vbCrLf + vbCrLf + "[comienzo  " + String.Join(vbCrLf, g.Select(Function(i) i.numerocarta.ToString).ToList) + "  fin]", 30000)
+        Dim q3 = From i In q6
+                 Group i By agrupVagon = i.agrupVagon, DestinoDesc = i.DestinoDesc, SubcontrDesc = i.SubcontrDesc, Tarifa = i.Tarifa Into g = Group
+                 Select agrupVagon = agrupVagon, DestinoDesc = DestinoDesc, SubcontrDesc = SubcontrDesc, Tarifa = Tarifa,
+                 NetoPto = g.Sum(Function(i) i.NetoPto), Comision = g.Sum(Function(i) i.Comision), CantCartas = g.Count,
+                 numeros = Left(vbCrLf + vbCrLf + vbCrLf + "[comienzo  " + String.Join(vbCrLf, g.Select(Function(i) i.numerocarta.ToString).ToList) + "  fin]", 30000)
         'le meto esos vbCrLf para que no se vean los primeros renglones y así no me modifique automaticamente el ancho de la columna "oculta"
 
         ErrHandler2.WriteError("     Excluidas por nofacturarasubcontratistas o duplicadas: " & filtr)
@@ -701,29 +705,29 @@ Public Class ConsultasLinq
 
 
 
-    Public Shared Function totpormes(ByVal SC As String, _
-          ByVal ColumnaParaFiltrar As String, _
-          ByVal TextoParaFiltrar As String, _
-          ByVal sortExpression As String, _
-          ByVal startRowIndex As Long, _
-          ByVal maximumRows As Long, _
-          ByVal estado As CartaDePorteManager.enumCDPestado, _
-          ByVal QueContenga As String, _
-          ByVal idVendedor As Integer, _
-          ByVal idCorredor As Integer, _
-          ByVal idDestinatario As Integer, _
-          ByVal idIntermediario As Integer, _
-          ByVal idRemComercial As Integer, _
-          ByVal idArticulo As Integer, _
-          ByVal idProcedencia As Integer, _
-          ByVal idDestino As Integer, _
-          ByVal AplicarANDuORalFiltro As CartaDePorteManager.FiltroANDOR, _
-          ByVal ModoExportacion As String, _
-          ByVal fechadesde As DateTime, ByVal fechahasta As DateTime, _
-          ByVal puntoventa As Integer, _
-          Optional ByRef sTituloFiltroUsado As String = "", _
-          Optional ByVal optDivisionSyngenta As String = "Ambas", _
-          Optional ByVal bTraerDuplicados As Boolean = False, _
+    Public Shared Function totpormes(ByVal SC As String,
+          ByVal ColumnaParaFiltrar As String,
+          ByVal TextoParaFiltrar As String,
+          ByVal sortExpression As String,
+          ByVal startRowIndex As Long,
+          ByVal maximumRows As Long,
+          ByVal estado As CartaDePorteManager.enumCDPestado,
+          ByVal QueContenga As String,
+          ByVal idVendedor As Integer,
+          ByVal idCorredor As Integer,
+          ByVal idDestinatario As Integer,
+          ByVal idIntermediario As Integer,
+          ByVal idRemComercial As Integer,
+          ByVal idArticulo As Integer,
+          ByVal idProcedencia As Integer,
+          ByVal idDestino As Integer,
+          ByVal AplicarANDuORalFiltro As CartaDePorteManager.FiltroANDOR,
+          ByVal ModoExportacion As String,
+          ByVal fechadesde As DateTime, ByVal fechahasta As DateTime,
+          ByVal puntoventa As Integer,
+          Optional ByRef sTituloFiltroUsado As String = "",
+          Optional ByVal optDivisionSyngenta As String = "Ambas",
+          Optional ByVal bTraerDuplicados As Boolean = False,
           Optional ByVal Contrato As String = "") As Object
 
 
@@ -738,50 +742,50 @@ Public Class ConsultasLinq
 
 
 
-        Dim q = (From cdp In db.CartasDePortes _
-                Join cli In db.Clientes On cli.IdCliente Equals cdp.Vendedor _
-                From art In db.Articulos.Where(Function(i) i.IdArticulo = cdp.IdArticulo).DefaultIfEmpty _
-                From clitit In db.Clientes.Where(Function(i) i.IdCliente = cdp.Vendedor).DefaultIfEmpty _
-                From clidest In db.Clientes.Where(Function(i) i.IdCliente = cdp.Entregador).DefaultIfEmpty _
-                From cliint In db.Clientes.Where(Function(i) i.IdCliente = cdp.CuentaOrden1).DefaultIfEmpty _
-                From clircom In db.Clientes.Where(Function(i) i.IdCliente = cdp.CuentaOrden2).DefaultIfEmpty _
-                From corr In db.Vendedores.Where(Function(i) i.IdVendedor = cdp.Corredor).DefaultIfEmpty _
-                From cal In db.Calidade_EF.Where(Function(i) i.IdCalidad = cdp.Calidad).DefaultIfEmpty _
-                From dest In db.WilliamsDestinos.Where(Function(i) i.IdWilliamsDestino = cdp.Destino).DefaultIfEmpty _
-                From estab In db.CDPEstablecimientos.Where(Function(i) i.IdEstablecimiento = cdp.IdEstablecimiento).DefaultIfEmpty _
-                From tr In db.Transportistas.Where(Function(i) i.IdTransportista = cdp.IdTransportista).DefaultIfEmpty _
-                From loc In db.Localidades.Where(Function(i) i.IdLocalidad = cdp.Procedencia).DefaultIfEmpty _
-                From chf In db.Choferes.Where(Function(i) i.IdChofer = cdp.IdChofer).DefaultIfEmpty _
-                From emp In db.Empleados.Where(Function(i) i.IdEmpleado = cdp.IdUsuarioIngreso).DefaultIfEmpty _
-                Where _
-                    cdp.Vendedor > 0 _
-                    And cli.RazonSocial IsNot Nothing _
-                    And (cdp.FechaDescarga >= fechadesde And cdp.FechaDescarga <= fechahasta) _
-                    And (cdp.Anulada <> "SI") _
-                    And ((ModoExportacion = "Ambos") Or
-                        (ModoExportacion = "Entregas" And If(cdp.Exporta, "NO") = "NO") Or
-                        (ModoExportacion = "Export" And If(cdp.Exporta, "NO") = "SI")) _
-                    And (cdp.Vendedor.HasValue And cdp.Corredor.HasValue And cdp.Entregador.HasValue) _
-                    And (idVendedor = -1 Or cdp.Vendedor = idVendedor) _
-                    And (idCorredor = -1 Or cdp.Corredor = idCorredor) _
-                    And (idDestinatario = -1 Or cdp.Entregador = idDestinatario) _
-                    And (idIntermediario = -1 Or cdp.CuentaOrden1 = idIntermediario) _
-                    And (idArticulo = -1 Or cdp.IdArticulo = idArticulo) _
-                    And (idDestino = -1 Or cdp.Destino = idDestino) _
-                    And (puntoventa = -1 Or cdp.PuntoVenta = puntoventa) _
-                Group cdp By Ano = cdp.FechaDescarga.Value.Year, _
-                            MesNumero = cdp.FechaDescarga.Value.Month, _
-                            Producto = art.Descripcion Into g = Group _
-                Select New With { _
-                    .Ano = Ano, _
-                    .Mes = MesNumero, _
-                    .Producto = Producto, _
-                    .CantCartas = g.Count, _
-                    .NetoPto = g.Sum(Function(i) i.NetoFinal) / 1000, _
-                    .Merma = g.Sum(Function(i) (i.Merma + i.HumedadDesnormalizada)) / 1000, _
-                    .NetoFinal = g.Sum(Function(i) i.NetoProc) / 1000, _
-                    .MesNumero = MesNumero _
-                }).ToList
+        Dim q = (From cdp In db.CartasDePortes
+                 Join cli In db.Clientes On cli.IdCliente Equals cdp.Vendedor
+                 From art In db.Articulos.Where(Function(i) i.IdArticulo = cdp.IdArticulo).DefaultIfEmpty
+                 From clitit In db.Clientes.Where(Function(i) i.IdCliente = cdp.Vendedor).DefaultIfEmpty
+                 From clidest In db.Clientes.Where(Function(i) i.IdCliente = cdp.Entregador).DefaultIfEmpty
+                 From cliint In db.Clientes.Where(Function(i) i.IdCliente = cdp.CuentaOrden1).DefaultIfEmpty
+                 From clircom In db.Clientes.Where(Function(i) i.IdCliente = cdp.CuentaOrden2).DefaultIfEmpty
+                 From corr In db.Vendedores.Where(Function(i) i.IdVendedor = cdp.Corredor).DefaultIfEmpty
+                 From cal In db.Calidade_EF.Where(Function(i) i.IdCalidad = cdp.Calidad).DefaultIfEmpty
+                 From dest In db.WilliamsDestinos.Where(Function(i) i.IdWilliamsDestino = cdp.Destino).DefaultIfEmpty
+                 From estab In db.CDPEstablecimientos.Where(Function(i) i.IdEstablecimiento = cdp.IdEstablecimiento).DefaultIfEmpty
+                 From tr In db.Transportistas.Where(Function(i) i.IdTransportista = cdp.IdTransportista).DefaultIfEmpty
+                 From loc In db.Localidades.Where(Function(i) i.IdLocalidad = cdp.Procedencia).DefaultIfEmpty
+                 From chf In db.Choferes.Where(Function(i) i.IdChofer = cdp.IdChofer).DefaultIfEmpty
+                 From emp In db.Empleados.Where(Function(i) i.IdEmpleado = cdp.IdUsuarioIngreso).DefaultIfEmpty
+                 Where
+                     cdp.Vendedor > 0 _
+                     And cli.RazonSocial IsNot Nothing _
+                     And (cdp.FechaDescarga >= fechadesde And cdp.FechaDescarga <= fechahasta) _
+                     And (cdp.Anulada <> "SI") _
+                     And ((ModoExportacion = "Ambos") Or
+                         (ModoExportacion = "Entregas" And If(cdp.Exporta, "NO") = "NO") Or
+                         (ModoExportacion = "Export" And If(cdp.Exporta, "NO") = "SI")) _
+                     And (cdp.Vendedor.HasValue And cdp.Corredor.HasValue And cdp.Entregador.HasValue) _
+                     And (idVendedor = -1 Or cdp.Vendedor = idVendedor) _
+                     And (idCorredor = -1 Or cdp.Corredor = idCorredor) _
+                     And (idDestinatario = -1 Or cdp.Entregador = idDestinatario) _
+                     And (idIntermediario = -1 Or cdp.CuentaOrden1 = idIntermediario) _
+                     And (idArticulo = -1 Or cdp.IdArticulo = idArticulo) _
+                     And (idDestino = -1 Or cdp.Destino = idDestino) _
+                     And (puntoventa = -1 Or cdp.PuntoVenta = puntoventa)
+                 Group cdp By Ano = cdp.FechaDescarga.Value.Year,
+                             MesNumero = cdp.FechaDescarga.Value.Month,
+                             Producto = art.Descripcion Into g = Group
+                 Select New With {
+                     .Ano = Ano,
+                     .Mes = MesNumero,
+                     .Producto = Producto,
+                     .CantCartas = g.Count,
+                     .NetoPto = g.Sum(Function(i) i.NetoFinal) / 1000,
+                     .Merma = g.Sum(Function(i) (i.Merma + i.HumedadDesnormalizada)) / 1000,
+                     .NetoFinal = g.Sum(Function(i) i.NetoProc) / 1000,
+                     .MesNumero = MesNumero
+                 }).ToList
 
 
 
@@ -794,22 +798,22 @@ Public Class ConsultasLinq
 
 
         Dim q2 = LogicaFacturacion.ListaEmbarquesQueryable(SC, fechadesde, fechahasta).ToList
-        Dim a = (From i In q2 _
-                Join art In db.Articulos On art.IdArticulo Equals i.IdArticulo _
-                    Group i By Ano = i.FechaIngreso.Value.Year, _
-                            MesNumero = i.FechaIngreso.Value.Month, _
-                            Producto = art.Descripcion _
-                    Into g = Group _
-                    Select New With { _
-                    .Ano = Ano, _
-                    .Mes = MesNumero, _
-                    .Producto = Producto, _
-                    .CantCartas = g.Count, _
-                    .NetoPto = g.Sum(Function(i) i.Cantidad) / 1000, _
-                    .Merma = aaa, _
-                    .NetoFinal = g.Sum(Function(i) i.Cantidad) / 1000, _
-                    .MesNumero = MesNumero _
-                    }).ToList
+        Dim a = (From i In q2
+                 Join art In db.Articulos On art.IdArticulo Equals i.IdArticulo
+                 Group i By Ano = i.FechaIngreso.Value.Year,
+                         MesNumero = i.FechaIngreso.Value.Month,
+                         Producto = art.Descripcion
+                 Into g = Group
+                 Select New With {
+                 .Ano = Ano,
+                 .Mes = MesNumero,
+                 .Producto = Producto,
+                 .CantCartas = g.Count,
+                 .NetoPto = g.Sum(Function(i) i.Cantidad) / 1000,
+                 .Merma = aaa,
+                 .NetoFinal = g.Sum(Function(i) i.Cantidad) / 1000,
+                 .MesNumero = MesNumero
+                 }).ToList
 
         Dim x = q.Union(a).ToList()
 
@@ -831,29 +835,29 @@ Public Class ConsultasLinq
 
 
 
-    Public Shared Function totpormesmodo(ByVal SC As String, _
-          ByVal ColumnaParaFiltrar As String, _
-          ByVal TextoParaFiltrar As String, _
-          ByVal sortExpression As String, _
-          ByVal startRowIndex As Long, _
-          ByVal maximumRows As Long, _
-          ByVal estado As CartaDePorteManager.enumCDPestado, _
-          ByVal QueContenga As String, _
-          ByVal idVendedor As Integer, _
-          ByVal idCorredor As Integer, _
-          ByVal idDestinatario As Integer, _
-          ByVal idIntermediario As Integer, _
-          ByVal idRemComercial As Integer, _
-          ByVal idArticulo As Integer, _
-          ByVal idProcedencia As Integer, _
-          ByVal idDestino As Integer, _
-          ByVal AplicarANDuORalFiltro As CartaDePorteManager.FiltroANDOR, _
-          ByVal ModoExportacion As String, _
-          ByVal fechadesde As DateTime, ByVal fechahasta As DateTime, _
-          ByVal puntoventa As Integer, _
-          Optional ByRef sTituloFiltroUsado As String = "", _
-          Optional ByVal optDivisionSyngenta As String = "Ambas", _
-          Optional ByVal bTraerDuplicados As Boolean = False, _
+    Public Shared Function totpormesmodo(ByVal SC As String,
+          ByVal ColumnaParaFiltrar As String,
+          ByVal TextoParaFiltrar As String,
+          ByVal sortExpression As String,
+          ByVal startRowIndex As Long,
+          ByVal maximumRows As Long,
+          ByVal estado As CartaDePorteManager.enumCDPestado,
+          ByVal QueContenga As String,
+          ByVal idVendedor As Integer,
+          ByVal idCorredor As Integer,
+          ByVal idDestinatario As Integer,
+          ByVal idIntermediario As Integer,
+          ByVal idRemComercial As Integer,
+          ByVal idArticulo As Integer,
+          ByVal idProcedencia As Integer,
+          ByVal idDestino As Integer,
+          ByVal AplicarANDuORalFiltro As CartaDePorteManager.FiltroANDOR,
+          ByVal ModoExportacion As String,
+          ByVal fechadesde As DateTime, ByVal fechahasta As DateTime,
+          ByVal puntoventa As Integer,
+          Optional ByRef sTituloFiltroUsado As String = "",
+          Optional ByVal optDivisionSyngenta As String = "Ambas",
+          Optional ByVal bTraerDuplicados As Boolean = False,
           Optional ByVal Contrato As String = "") As Object
 
 
@@ -932,43 +936,43 @@ Public Class ConsultasLinq
         'Dim fechadesde As Date = iisValidSqlDate(txtFechaDesde.Text, #1/1/1753#)
         'Dim fechahasta As Date = iisValidSqlDate(txtFechaHasta.Text, #1/1/2100#)
 
-        Dim q = (From cdp In db.CartasDePortes _
-                Join cli In db.linqClientes On cli.IdCliente Equals cdp.Vendedor _
-                From art In db.linqArticulos.Where(Function(i) i.IdArticulo = cdp.IdArticulo).DefaultIfEmpty _
-                From clitit In db.linqClientes.Where(Function(i) i.IdCliente = cdp.Vendedor).DefaultIfEmpty _
-                Where _
-                    cdp.Vendedor > 0 _
-                    And cli.RazonSocial IsNot Nothing _
-                    And (cdp.FechaDescarga >= fechadesde And cdp.FechaDescarga <= fechahasta) _
-                    And (cdp.Anulada <> "SI") _
-                    And ((ModoExportacion = "Ambos") Or (ModoExportacion = "Entregas" And If(cdp.Exporta, "NO") = "NO") Or (ModoExportacion = "Export" And If(cdp.Exporta, "NO") = "SI")) _
-                    And (cdp.Vendedor.HasValue And cdp.Corredor.HasValue And cdp.Entregador.HasValue) _
-                    And (idVendedor = -1 Or cdp.Vendedor = idVendedor) _
-                    And (idCorredor = -1 Or cdp.Corredor = idCorredor) _
-                    And (idDestinatario = -1 Or cdp.Entregador = idDestinatario) _
-                    And (idIntermediario = -1 Or cdp.CuentaOrden1 = idIntermediario) _
-                    And (idArticulo = -1 Or cdp.IdArticulo = idArticulo) _
-                    And (idDestino = -1 Or cdp.Destino = idDestino) _
-                    And (puntoventa = -1 Or cdp.PuntoVenta = puntoventa) _
-                Group cdp By Ano = cdp.FechaDescarga.Value.Year, _
-                            Producto = art.Descripcion, _
-                            MesNumero = cdp.FechaDescarga.Value.Month, _
-                            Sucursal = cdp.Exporta _
-                    Into g = Group _
-                Select New With { _
-                    .Sucursal = Sucursal, _
-                    .Ano = Ano, _
-                    .Mes = MonthName(MesNumero), _
-                    .Producto = Producto, _
-                    .CantCartas = g.Count, _
-                    .NetoPto = g.Sum(Function(i) i.NetoFinal.GetValueOrDefault) / 1000, _
-                    .Merma = g.Sum(Function(i) (i.Merma.GetValueOrDefault + i.HumedadDesnormalizada.GetValueOrDefault)) / 1000, _
-                    .NetoFinal = g.Sum(Function(i) i.NetoProc.GetValueOrDefault) / 1000, _
-                    .MesNumero = MesNumero, _
-                     .Importe = g.Sum(Function(i) CDec( _
-                                                     CDec(If(i.TarifaFacturada, 0)) * CDec(If(i.NetoPto, 0)) / 1000 _
-                                                    )) _
-                }).ToList
+        Dim q = (From cdp In db.CartasDePortes
+                 Join cli In db.linqClientes On cli.IdCliente Equals cdp.Vendedor
+                 From art In db.linqArticulos.Where(Function(i) i.IdArticulo = cdp.IdArticulo).DefaultIfEmpty
+                 From clitit In db.linqClientes.Where(Function(i) i.IdCliente = cdp.Vendedor).DefaultIfEmpty
+                 Where
+                     cdp.Vendedor > 0 _
+                     And cli.RazonSocial IsNot Nothing _
+                     And (cdp.FechaDescarga >= fechadesde And cdp.FechaDescarga <= fechahasta) _
+                     And (cdp.Anulada <> "SI") _
+                     And ((ModoExportacion = "Ambos") Or (ModoExportacion = "Entregas" And If(cdp.Exporta, "NO") = "NO") Or (ModoExportacion = "Export" And If(cdp.Exporta, "NO") = "SI")) _
+                     And (cdp.Vendedor.HasValue And cdp.Corredor.HasValue And cdp.Entregador.HasValue) _
+                     And (idVendedor = -1 Or cdp.Vendedor = idVendedor) _
+                     And (idCorredor = -1 Or cdp.Corredor = idCorredor) _
+                     And (idDestinatario = -1 Or cdp.Entregador = idDestinatario) _
+                     And (idIntermediario = -1 Or cdp.CuentaOrden1 = idIntermediario) _
+                     And (idArticulo = -1 Or cdp.IdArticulo = idArticulo) _
+                     And (idDestino = -1 Or cdp.Destino = idDestino) _
+                     And (puntoventa = -1 Or cdp.PuntoVenta = puntoventa)
+                 Group cdp By Ano = cdp.FechaDescarga.Value.Year,
+                             Producto = art.Descripcion,
+                             MesNumero = cdp.FechaDescarga.Value.Month,
+                             Sucursal = cdp.Exporta
+                     Into g = Group
+                 Select New With {
+                     .Sucursal = Sucursal,
+                     .Ano = Ano,
+                     .Mes = MonthName(MesNumero),
+                     .Producto = Producto,
+                     .CantCartas = g.Count,
+                     .NetoPto = g.Sum(Function(i) i.NetoFinal.GetValueOrDefault) / 1000,
+                     .Merma = g.Sum(Function(i) (i.Merma.GetValueOrDefault + i.HumedadDesnormalizada.GetValueOrDefault)) / 1000,
+                     .NetoFinal = g.Sum(Function(i) i.NetoProc.GetValueOrDefault) / 1000,
+                     .MesNumero = MesNumero,
+                      .Importe = g.Sum(Function(i) CDec(
+                                                      CDec(If(i.TarifaFacturada, 0)) * CDec(If(i.NetoPto, 0)) / 1000
+                                                     ))
+                 }).ToList
 
         'CDec(IIf(False Or i.TarifaFacturada > 0, _
         '                                             CDec(i.TarifaFacturada) * CDec(i.NetoPto) / 1000, _
@@ -995,24 +999,24 @@ Public Class ConsultasLinq
         If ModoExportacion = "Buques" Then
 
             Dim q3 = LogicaFacturacion.ListaEmbarquesQueryable(SC, fechadesde, fechahasta).ToList
-            Dim a = (From i In q3 _
-                    Join art In db.linqArticulos On art.IdArticulo Equals i.IdArticulo _
-                        Group i By Ano = i.FechaIngreso.Value.Year, _
-                                MesNumero = i.FechaIngreso.Value.Month, _
-                                Producto = art.Descripcion _
-                        Into g = Group _
-                        Select New With { _
-                        .Sucursal = "Buque", _
-                        .Ano = Ano, _
-                        .Mes = MonthName(MesNumero), _
-                        .Producto = Producto, _
-                        .CantCartas = g.Count, _
-                        .NetoPto = g.Sum(Function(i) i.Cantidad.GetValueOrDefault) / 1000, _
-                        .Merma = CDec(0), _
-                        .NetoFinal = g.Sum(Function(i) i.Cantidad.GetValueOrDefault) / 1000, _
-                        .MesNumero = MesNumero, _
-                         .Importe = CDec(0) _
-                        }).ToList
+            Dim a = (From i In q3
+                     Join art In db.linqArticulos On art.IdArticulo Equals i.IdArticulo
+                     Group i By Ano = i.FechaIngreso.Value.Year,
+                             MesNumero = i.FechaIngreso.Value.Month,
+                             Producto = art.Descripcion
+                     Into g = Group
+                     Select New With {
+                     .Sucursal = "Buque",
+                     .Ano = Ano,
+                     .Mes = MonthName(MesNumero),
+                     .Producto = Producto,
+                     .CantCartas = g.Count,
+                     .NetoPto = g.Sum(Function(i) i.Cantidad.GetValueOrDefault) / 1000,
+                     .Merma = CDec(0),
+                     .NetoFinal = g.Sum(Function(i) i.Cantidad.GetValueOrDefault) / 1000,
+                     .MesNumero = MesNumero,
+                      .Importe = CDec(0)
+                     }).ToList
             x = x.Union(a).ToList()
 
         End If
@@ -1048,29 +1052,29 @@ Public Class ConsultasLinq
     End Function
 
 
-    Public Shared Function totpormesmodoysucursal(ByVal SC As String, _
-          ByVal ColumnaParaFiltrar As String, _
-          ByVal TextoParaFiltrar As String, _
-          ByVal sortExpression As String, _
-          ByVal startRowIndex As Long, _
-          ByVal maximumRows As Long, _
-          ByVal estado As CartaDePorteManager.enumCDPestado, _
-          ByVal QueContenga As String, _
-          ByVal idVendedor As Integer, _
-          ByVal idCorredor As Integer, _
-          ByVal idDestinatario As Integer, _
-          ByVal idIntermediario As Integer, _
-          ByVal idRemComercial As Integer, _
-          ByVal idArticulo As Integer, _
-          ByVal idProcedencia As Integer, _
-          ByVal idDestino As Integer, _
-          ByVal AplicarANDuORalFiltro As CartaDePorteManager.FiltroANDOR, _
-          ByVal ModoExportacion As String, _
-          ByVal fechadesde As DateTime, ByVal fechahasta As DateTime, _
-          ByVal puntoventa As Integer, _
-          Optional ByRef sTituloFiltroUsado As String = "", _
-          Optional ByVal optDivisionSyngenta As String = "Ambas", _
-          Optional ByVal bTraerDuplicados As Boolean = False, _
+    Public Shared Function totpormesmodoysucursal(ByVal SC As String,
+          ByVal ColumnaParaFiltrar As String,
+          ByVal TextoParaFiltrar As String,
+          ByVal sortExpression As String,
+          ByVal startRowIndex As Long,
+          ByVal maximumRows As Long,
+          ByVal estado As CartaDePorteManager.enumCDPestado,
+          ByVal QueContenga As String,
+          ByVal idVendedor As Integer,
+          ByVal idCorredor As Integer,
+          ByVal idDestinatario As Integer,
+          ByVal idIntermediario As Integer,
+          ByVal idRemComercial As Integer,
+          ByVal idArticulo As Integer,
+          ByVal idProcedencia As Integer,
+          ByVal idDestino As Integer,
+          ByVal AplicarANDuORalFiltro As CartaDePorteManager.FiltroANDOR,
+          ByVal ModoExportacion As String,
+          ByVal fechadesde As DateTime, ByVal fechahasta As DateTime,
+          ByVal puntoventa As Integer,
+          Optional ByRef sTituloFiltroUsado As String = "",
+          Optional ByVal optDivisionSyngenta As String = "Ambas",
+          Optional ByVal bTraerDuplicados As Boolean = False,
           Optional ByVal Contrato As String = "") As Object
 
 
@@ -1142,11 +1146,11 @@ Public Class ConsultasLinq
 
 
 
-        Dim sSQL = "update cartasdeporte " & _
-            " set tarifafacturada=dbo.wTarifaWilliams (Vendedor,IdArticulo,Destino,  case when isnull(Exporta,'NO')='SI' then 1 else 0 end   ,0)" & _
-            " from cartasdeporte " & _
-            " where (idfacturaimputada=0 or idfacturaimputada=-1 or idfacturaimputada is null )" & _
-            " and isnull(Anulada,'')<>'SI'" & _
+        Dim sSQL = "update cartasdeporte " &
+            " set tarifafacturada=dbo.wTarifaWilliams (Vendedor,IdArticulo,Destino,  case when isnull(Exporta,'NO')='SI' then 1 else 0 end   ,0)" &
+            " from cartasdeporte " &
+            " where (idfacturaimputada=0 or idfacturaimputada=-1 or idfacturaimputada is null )" &
+            " and isnull(Anulada,'')<>'SI'" &
             " and tarifafacturada=0"
 
         Try
@@ -1183,45 +1187,45 @@ Public Class ConsultasLinq
         'Dim fechadesde As Date = iisValidSqlDate(txtFechaDesde.Text, #1/1/1753#)
         'Dim fechahasta As Date = iisValidSqlDate(txtFechaHasta.Text, #1/1/2100#)
 
-        Dim q = (From cdp In db.CartasDePortes _
-                Join cli In db.linqClientes On cli.IdCliente Equals cdp.Vendedor _
-                From art In db.linqArticulos.Where(Function(i) i.IdArticulo = cdp.IdArticulo).DefaultIfEmpty _
-                From clitit In db.linqClientes.Where(Function(i) i.IdCliente = cdp.Vendedor).DefaultIfEmpty _
-                Where _
-                    cdp.Vendedor > 0 _
-                    And cli.RazonSocial IsNot Nothing _
-                    And (cdp.FechaDescarga >= fechadesde And cdp.FechaDescarga <= fechahasta) _
-                    And (cdp.Anulada <> "SI") _
-                    And ((ModoExportacion = "Ambos") Or (ModoExportacion = "Entregas" And If(cdp.Exporta, "NO") = "NO") Or (ModoExportacion = "Export" And If(cdp.Exporta, "NO") = "SI")) _
-                    And (cdp.Vendedor.HasValue And cdp.Corredor.HasValue And cdp.Entregador.HasValue) _
-                    And (idVendedor = -1 Or cdp.Vendedor = idVendedor) _
-                    And (idCorredor = -1 Or cdp.Corredor = idCorredor) _
-                    And (idDestinatario = -1 Or cdp.Entregador = idDestinatario) _
-                    And (idIntermediario = -1 Or cdp.CuentaOrden1 = idIntermediario) _
-                    And (idArticulo = -1 Or cdp.IdArticulo = idArticulo) _
-                    And (idDestino = -1 Or cdp.Destino = idDestino) _
-                    And (puntoventa = -1 Or cdp.PuntoVenta = puntoventa) _
-                Group cdp By Ano = cdp.FechaDescarga.Value.Year, _
-                            Producto = art.Descripcion, _
-                            MesNumero = cdp.FechaDescarga.Value.Month, _
-                            Modo = cdp.Exporta, _
-                            Sucursal = cdp.PuntoVenta _
-                        Into g = Group _
-                Select New With { _
-                    .Sucursal = SqlFunctions.StringConvert(Sucursal), _
-                    .Modo = IIf(Modo = "SI", "Exportación", "Entrega").ToString, _
-                    .Ano = Ano, _
-                    .Mes = MonthName(MesNumero), _
-                    .Producto = Producto, _
-                    .CantCartas = g.Count, _
-                    .NetoPto = g.Sum(Function(i) i.NetoFinal.GetValueOrDefault) / 1000, _
-                    .Merma = g.Sum(Function(i) (i.Merma.GetValueOrDefault + i.HumedadDesnormalizada.GetValueOrDefault)) / 1000, _
-                    .NetoFinal = g.Sum(Function(i) i.NetoProc.GetValueOrDefault) / 1000, _
-                    .MesNumero = MesNumero, _
-                    .Importe = g.Sum(Function(i) CDec( _
-                                                     CDec(i.TarifaFacturada.GetValueOrDefault) * CDec(i.NetoPto) / 1000 _
-                                                   )) _
-                        }).ToList
+        Dim q = (From cdp In db.CartasDePortes
+                 Join cli In db.linqClientes On cli.IdCliente Equals cdp.Vendedor
+                 From art In db.linqArticulos.Where(Function(i) i.IdArticulo = cdp.IdArticulo).DefaultIfEmpty
+                 From clitit In db.linqClientes.Where(Function(i) i.IdCliente = cdp.Vendedor).DefaultIfEmpty
+                 Where
+                     cdp.Vendedor > 0 _
+                     And cli.RazonSocial IsNot Nothing _
+                     And (cdp.FechaDescarga >= fechadesde And cdp.FechaDescarga <= fechahasta) _
+                     And (cdp.Anulada <> "SI") _
+                     And ((ModoExportacion = "Ambos") Or (ModoExportacion = "Entregas" And If(cdp.Exporta, "NO") = "NO") Or (ModoExportacion = "Export" And If(cdp.Exporta, "NO") = "SI")) _
+                     And (cdp.Vendedor.HasValue And cdp.Corredor.HasValue And cdp.Entregador.HasValue) _
+                     And (idVendedor = -1 Or cdp.Vendedor = idVendedor) _
+                     And (idCorredor = -1 Or cdp.Corredor = idCorredor) _
+                     And (idDestinatario = -1 Or cdp.Entregador = idDestinatario) _
+                     And (idIntermediario = -1 Or cdp.CuentaOrden1 = idIntermediario) _
+                     And (idArticulo = -1 Or cdp.IdArticulo = idArticulo) _
+                     And (idDestino = -1 Or cdp.Destino = idDestino) _
+                     And (puntoventa = -1 Or cdp.PuntoVenta = puntoventa)
+                 Group cdp By Ano = cdp.FechaDescarga.Value.Year,
+                             Producto = art.Descripcion,
+                             MesNumero = cdp.FechaDescarga.Value.Month,
+                             Modo = cdp.Exporta,
+                             Sucursal = cdp.PuntoVenta
+                         Into g = Group
+                 Select New With {
+                     .Sucursal = SqlFunctions.StringConvert(Sucursal),
+                     .Modo = IIf(Modo = "SI", "Exportación", "Entrega").ToString,
+                     .Ano = Ano,
+                     .Mes = MonthName(MesNumero),
+                     .Producto = Producto,
+                     .CantCartas = g.Count,
+                     .NetoPto = g.Sum(Function(i) i.NetoFinal.GetValueOrDefault) / 1000,
+                     .Merma = g.Sum(Function(i) (i.Merma.GetValueOrDefault + i.HumedadDesnormalizada.GetValueOrDefault)) / 1000,
+                     .NetoFinal = g.Sum(Function(i) i.NetoProc.GetValueOrDefault) / 1000,
+                     .MesNumero = MesNumero,
+                     .Importe = g.Sum(Function(i) CDec(
+                                                      CDec(i.TarifaFacturada.GetValueOrDefault) * CDec(i.NetoPto) / 1000
+                                                    ))
+                         }).ToList
 
 
         '.Importe = g.Sum(Function(i) CDec(IIf(False Or i.TarifaFacturada > 0, _
@@ -1243,27 +1247,27 @@ Public Class ConsultasLinq
         If ModoExportacion = "Buques" Then
 
             Dim q3 = LogicaFacturacion.ListaEmbarquesQueryable(SC, fechadesde, fechahasta).ToList
-            Dim a = (From i In q3 _
-                    Join art In db.linqArticulos On art.IdArticulo Equals i.IdArticulo _
-                        Group i By Ano = i.FechaIngreso.Value.Year, _
-                                MesNumero = i.FechaIngreso.Value.Month, _
-                                Producto = art.Descripcion, _
-                                   Modo = "Buque", _
-                                Sucursal = i.IdStock _
-                        Into g = Group _
-                        Select New With { _
-                        .Sucursal = SqlFunctions.StringConvert(Sucursal), _
-                        .Modo = Modo, _
-                        .Ano = Ano, _
-                        .Mes = MonthName(MesNumero), _
-                        .Producto = Producto, _
-                        .CantCartas = g.Count, _
-                        .NetoPto = g.Sum(Function(i) i.Cantidad.GetValueOrDefault) / 1000, _
-                        .Merma = CDec(0), _
-                        .NetoFinal = g.Sum(Function(i) i.Cantidad.GetValueOrDefault) / 1000, _
-                        .MesNumero = MesNumero, _
-                         .Importe = CDec(0) _
-                        }).ToList
+            Dim a = (From i In q3
+                     Join art In db.linqArticulos On art.IdArticulo Equals i.IdArticulo
+                     Group i By Ano = i.FechaIngreso.Value.Year,
+                             MesNumero = i.FechaIngreso.Value.Month,
+                             Producto = art.Descripcion,
+                                Modo = "Buque",
+                             Sucursal = i.IdStock
+                     Into g = Group
+                     Select New With {
+                     .Sucursal = SqlFunctions.StringConvert(Sucursal),
+                     .Modo = Modo,
+                     .Ano = Ano,
+                     .Mes = MonthName(MesNumero),
+                     .Producto = Producto,
+                     .CantCartas = g.Count,
+                     .NetoPto = g.Sum(Function(i) i.Cantidad.GetValueOrDefault) / 1000,
+                     .Merma = CDec(0),
+                     .NetoFinal = g.Sum(Function(i) i.Cantidad.GetValueOrDefault) / 1000,
+                     .MesNumero = MesNumero,
+                      .Importe = CDec(0)
+                     }).ToList
 
             x = x.Union(a).ToList()
 
@@ -1307,29 +1311,29 @@ Public Class ConsultasLinq
 
     End Function
 
-    Private Shared Function CartasLINQxxxx(ByVal SC As String, _
-        ByVal ColumnaParaFiltrar As String, _
-        ByVal TextoParaFiltrar As String, _
-        ByVal sortExpression As String, _
-        ByVal startRowIndex As Long, _
-        ByVal maximumRows As Long, _
-        ByVal estado As CartaDePorteManager.enumCDPestado, _
-        ByVal QueContenga As String, _
-        ByVal idVendedor As Integer, _
-        ByVal idCorredor As Integer, _
-        ByVal idDestinatario As Integer, _
-        ByVal idIntermediario As Integer, _
-        ByVal idRemComercial As Integer, _
-        ByVal idArticulo As Integer, _
-        ByVal idProcedencia As Integer, _
-        ByVal idDestino As Integer, _
-        ByVal AplicarANDuORalFiltro As CartaDePorteManager.FiltroANDOR, _
-        ByVal ModoExportacion As String, _
-        ByVal fechadesde As DateTime, ByVal fechahasta As DateTime, _
-        ByVal puntoventa As Integer, _
-        Optional ByRef sTituloFiltroUsado As String = "", _
-        Optional ByVal optDivisionSyngenta As String = "Ambas", _
-        Optional ByVal bTraerDuplicados As Boolean = False, _
+    Private Shared Function CartasLINQxxxx(ByVal SC As String,
+        ByVal ColumnaParaFiltrar As String,
+        ByVal TextoParaFiltrar As String,
+        ByVal sortExpression As String,
+        ByVal startRowIndex As Long,
+        ByVal maximumRows As Long,
+        ByVal estado As CartaDePorteManager.enumCDPestado,
+        ByVal QueContenga As String,
+        ByVal idVendedor As Integer,
+        ByVal idCorredor As Integer,
+        ByVal idDestinatario As Integer,
+        ByVal idIntermediario As Integer,
+        ByVal idRemComercial As Integer,
+        ByVal idArticulo As Integer,
+        ByVal idProcedencia As Integer,
+        ByVal idDestino As Integer,
+        ByVal AplicarANDuORalFiltro As CartaDePorteManager.FiltroANDOR,
+        ByVal ModoExportacion As String,
+        ByVal fechadesde As DateTime, ByVal fechahasta As DateTime,
+        ByVal puntoventa As Integer,
+        Optional ByRef sTituloFiltroUsado As String = "",
+        Optional ByVal optDivisionSyngenta As String = "Ambas",
+        Optional ByVal bTraerDuplicados As Boolean = False,
         Optional ByVal Contrato As String = "") As IQueryable(Of CartasDePorte)
 
         Dim db As New LinqCartasPorteDataContext(Encriptar(SC))
@@ -1356,10 +1360,10 @@ Public Class ConsultasLinq
         '           The delegate can only take 3 input parameters (can be solved by wrapping the parameters in containers)
         '           And above all… Developers are lazy….Well, not all, but many. I know I am..
 
-        Dim q = From cdp In db.CartasDePortes _
-    Join cli In db.linqClientes On cli.IdCliente Equals cdp.Vendedor _
-    From art In db.linqArticulos.Where(Function(i) i.IdArticulo = cdp.IdArticulo).DefaultIfEmpty _
-    'From clitit In db.linqClientes.Where(Function(i) i.IdCliente = cdp.Vendedor).DefaultIfEmpty _
+        Dim q = From cdp In db.CartasDePortes
+                Join cli In db.linqClientes On cli.IdCliente Equals cdp.Vendedor
+                From art In db.linqArticulos.Where(Function(i) i.IdArticulo = cdp.IdArticulo).DefaultIfEmpty _
+        'From clitit In db.linqClientes.Where(Function(i) i.IdCliente = cdp.Vendedor).DefaultIfEmpty _
         'From clidest In db.linqClientes.Where(Function(i) i.IdCliente = cdp.Entregador).DefaultIfEmpty _
         'From cliint In db.linqClientes.Where(Function(i) i.IdCliente = cdp.CuentaOrden1).DefaultIfEmpty _
         'From clircom In db.linqClientes.Where(Function(i) i.IdCliente = cdp.CuentaOrden2).DefaultIfEmpty _
@@ -1403,29 +1407,29 @@ Public Class ConsultasLinq
 
 
 
-    Public Shared Function VolumenCarga(ByVal SC As String, _
-          ByVal ColumnaParaFiltrar As String, _
-          ByVal TextoParaFiltrar As String, _
-          ByVal sortExpression As String, _
-          ByVal startRowIndex As Long, _
-          ByVal maximumRows As Long, _
-          ByVal estado As CartaDePorteManager.enumCDPestado, _
-          ByVal QueContenga As String, _
-          ByVal idVendedor As Integer, _
-          ByVal idCorredor As Integer, _
-          ByVal idDestinatario As Integer, _
-          ByVal idIntermediario As Integer, _
-          ByVal idRemComercial As Integer, _
-          ByVal idArticulo As Integer, _
-          ByVal idProcedencia As Integer, _
-          ByVal idDestino As Integer, _
-          ByVal AplicarANDuORalFiltro As CartaDePorteManager.FiltroANDOR, _
-          ByVal ModoExportacion As String, _
-          ByVal fechadesde As DateTime, ByVal fechahasta As DateTime, _
-          ByVal puntoventa As Integer, _
-          Optional ByRef sTituloFiltroUsado As String = "", _
-          Optional ByVal optDivisionSyngenta As String = "Ambas", _
-          Optional ByVal bTraerDuplicados As Boolean = False, _
+    Public Shared Function VolumenCarga(ByVal SC As String,
+          ByVal ColumnaParaFiltrar As String,
+          ByVal TextoParaFiltrar As String,
+          ByVal sortExpression As String,
+          ByVal startRowIndex As Long,
+          ByVal maximumRows As Long,
+          ByVal estado As CartaDePorteManager.enumCDPestado,
+          ByVal QueContenga As String,
+          ByVal idVendedor As Integer,
+          ByVal idCorredor As Integer,
+          ByVal idDestinatario As Integer,
+          ByVal idIntermediario As Integer,
+          ByVal idRemComercial As Integer,
+          ByVal idArticulo As Integer,
+          ByVal idProcedencia As Integer,
+          ByVal idDestino As Integer,
+          ByVal AplicarANDuORalFiltro As CartaDePorteManager.FiltroANDOR,
+          ByVal ModoExportacion As String,
+          ByVal fechadesde As DateTime, ByVal fechahasta As DateTime,
+          ByVal puntoventa As Integer,
+          Optional ByRef sTituloFiltroUsado As String = "",
+          Optional ByVal optDivisionSyngenta As String = "Ambas",
+          Optional ByVal bTraerDuplicados As Boolean = False,
           Optional ByVal Contrato As String = "") As Object
 
 
@@ -1449,37 +1453,37 @@ Public Class ConsultasLinq
         Dim sucu As Integer() = {1, 2, 3, 4}
         Dim tipo As String() = {"ALTA", "MODIF", "IMPORT"}
 
-        Dim q = (From cdp In db.CartasDePortes _
-                Join cli In db.Clientes On cli.IdCliente Equals cdp.Vendedor _
-                Join log In db.Logs On cdp.IdCartaDePorte Equals log.IdComprobante _
-                From art In db.Articulos.Where(Function(i) i.IdArticulo = cdp.IdArticulo).DefaultIfEmpty _
-                From clitit In db.Clientes.Where(Function(i) i.IdCliente = cdp.Vendedor).DefaultIfEmpty _
-                Where _
-                    cdp.Vendedor > 0 _
-                    And cli.RazonSocial IsNot Nothing _
-                    And log.Detalle.StartsWith("Tabla : CartaPorte") _
-                    And (cdp.FechaDescarga >= fechadesde And cdp.FechaDescarga <= fechahasta) _
-                    And (cdp.Anulada <> "SI") _
-                    And ((ModoExportacion = "Ambos") Or (ModoExportacion = "Entregas" And If(cdp.Exporta, "NO") = "NO") Or (ModoExportacion = "Export" And If(cdp.Exporta, "NO") = "SI")) _
-                    And (cdp.Vendedor.HasValue And cdp.Corredor.HasValue And cdp.Entregador.HasValue) _
-                    And (idVendedor = -1 Or cdp.Vendedor = idVendedor) _
-                    And (idCorredor = -1 Or cdp.Corredor = idCorredor) _
-                    And (idDestinatario = -1 Or cdp.Entregador = idDestinatario) _
-                    And (idIntermediario = -1 Or cdp.CuentaOrden1 = idIntermediario) _
-                    And (idArticulo = -1 Or cdp.IdArticulo = idArticulo) _
-                    And (idDestino = -1 Or cdp.Destino = idDestino) _
-                    And (puntoventa = -1 Or cdp.PuntoVenta = puntoventa) _
-                Group cdp By _
-                            Hora = If(log.FechaRegistro Is Nothing, -1, log.FechaRegistro.Value.Hour), _
-                            altabaja = log.Tipo, _
-                            Sucursal = cdp.PuntoVenta _
-                    Into g = Group _
-                Select New With { _
-                    .Sucursal = SqlFunctions.StringConvert(Sucursal), _
-                    .Hora = Hora, _
-                    .CantCartas = g.Count, _
-                    .ModificacionesPromedio = altabaja _
-                }).ToList
+        Dim q = (From cdp In db.CartasDePortes
+                 Join cli In db.Clientes On cli.IdCliente Equals cdp.Vendedor
+                 Join log In db.Logs On cdp.IdCartaDePorte Equals log.IdComprobante
+                 From art In db.Articulos.Where(Function(i) i.IdArticulo = cdp.IdArticulo).DefaultIfEmpty
+                 From clitit In db.Clientes.Where(Function(i) i.IdCliente = cdp.Vendedor).DefaultIfEmpty
+                 Where
+                     cdp.Vendedor > 0 _
+                     And cli.RazonSocial IsNot Nothing _
+                     And log.Detalle.StartsWith("Tabla : CartaPorte") _
+                     And (cdp.FechaDescarga >= fechadesde And cdp.FechaDescarga <= fechahasta) _
+                     And (cdp.Anulada <> "SI") _
+                     And ((ModoExportacion = "Ambos") Or (ModoExportacion = "Entregas" And If(cdp.Exporta, "NO") = "NO") Or (ModoExportacion = "Export" And If(cdp.Exporta, "NO") = "SI")) _
+                     And (cdp.Vendedor.HasValue And cdp.Corredor.HasValue And cdp.Entregador.HasValue) _
+                     And (idVendedor = -1 Or cdp.Vendedor = idVendedor) _
+                     And (idCorredor = -1 Or cdp.Corredor = idCorredor) _
+                     And (idDestinatario = -1 Or cdp.Entregador = idDestinatario) _
+                     And (idIntermediario = -1 Or cdp.CuentaOrden1 = idIntermediario) _
+                     And (idArticulo = -1 Or cdp.IdArticulo = idArticulo) _
+                     And (idDestino = -1 Or cdp.Destino = idDestino) _
+                     And (puntoventa = -1 Or cdp.PuntoVenta = puntoventa)
+                 Group cdp By
+                             Hora = If(log.FechaRegistro Is Nothing, -1, log.FechaRegistro.Value.Hour),
+                             altabaja = log.Tipo,
+                             Sucursal = cdp.PuntoVenta
+                     Into g = Group
+                 Select New With {
+                     .Sucursal = SqlFunctions.StringConvert(Sucursal),
+                     .Hora = Hora,
+                     .CantCartas = g.Count,
+                     .ModificacionesPromedio = altabaja
+                 }).ToList
 
 
         'quien = log.AuxString2, _
@@ -1494,17 +1498,17 @@ Public Class ConsultasLinq
 
 
 
-        Dim a = (From h In listahoras _
-                 From s In sucu _
-                 From aaa In tipo _
-                 From qs In q.Where(Function(i) i.Hora = h And Val(i.Sucursal) = s And i.ModificacionesPromedio = aaa).DefaultIfEmpty() _
-                 Where (puntoventa = -1 Or s = puntoventa) _
-                    Select New With { _
-                        .Sucursal = s.ToString, _
-                        .Hora = h _
-                        , .CantCartas = If(qs Is Nothing, 0, qs.CantCartas), _
-                        .ModificacionesPromedio = aaa _
-                }).ToList
+        Dim a = (From h In listahoras
+                 From s In sucu
+                 From aaa In tipo
+                 From qs In q.Where(Function(i) i.Hora = h And Val(i.Sucursal) = s And i.ModificacionesPromedio = aaa).DefaultIfEmpty()
+                 Where (puntoventa = -1 Or s = puntoventa)
+                 Select New With {
+                     .Sucursal = s.ToString,
+                     .Hora = h _
+                     , .CantCartas = If(qs Is Nothing, 0, qs.CantCartas),
+                     .ModificacionesPromedio = aaa
+             }).ToList
 
 
 
@@ -1518,29 +1522,29 @@ Public Class ConsultasLinq
 
     End Function
 
-    Public Shared Function DiferenciasDestino(ByVal SC As String, _
-          ByVal ColumnaParaFiltrar As String, _
-          ByVal TextoParaFiltrar As String, _
-          ByVal sortExpression As String, _
-          ByVal startRowIndex As Long, _
-          ByVal maximumRows As Long, _
-          ByVal estado As CartaDePorteManager.enumCDPestado, _
-          ByVal QueContenga As String, _
-          ByVal idVendedor As Integer, _
-          ByVal idCorredor As Integer, _
-          ByVal idDestinatario As Integer, _
-          ByVal idIntermediario As Integer, _
-          ByVal idRemComercial As Integer, _
-          ByVal idArticulo As Integer, _
-          ByVal idProcedencia As Integer, _
-          ByVal idDestino As Integer, _
-          ByVal AplicarANDuORalFiltro As CartaDePorteManager.FiltroANDOR, _
-          ByVal ModoExportacion As String, _
-          ByVal fechadesde As DateTime, ByVal fechahasta As DateTime, _
-          ByVal puntoventa As Integer, _
-          Optional ByRef sTituloFiltroUsado As String = "", _
-          Optional ByVal optDivisionSyngenta As String = "Ambas", _
-          Optional ByVal bTraerDuplicados As Boolean = False, _
+    Public Shared Function DiferenciasDestino(ByVal SC As String,
+          ByVal ColumnaParaFiltrar As String,
+          ByVal TextoParaFiltrar As String,
+          ByVal sortExpression As String,
+          ByVal startRowIndex As Long,
+          ByVal maximumRows As Long,
+          ByVal estado As CartaDePorteManager.enumCDPestado,
+          ByVal QueContenga As String,
+          ByVal idVendedor As Integer,
+          ByVal idCorredor As Integer,
+          ByVal idDestinatario As Integer,
+          ByVal idIntermediario As Integer,
+          ByVal idRemComercial As Integer,
+          ByVal idArticulo As Integer,
+          ByVal idProcedencia As Integer,
+          ByVal idDestino As Integer,
+          ByVal AplicarANDuORalFiltro As CartaDePorteManager.FiltroANDOR,
+          ByVal ModoExportacion As String,
+          ByVal fechadesde As DateTime, ByVal fechahasta As DateTime,
+          ByVal puntoventa As Integer,
+          Optional ByRef sTituloFiltroUsado As String = "",
+          Optional ByVal optDivisionSyngenta As String = "Ambas",
+          Optional ByVal bTraerDuplicados As Boolean = False,
           Optional ByVal Contrato As String = "") As Object
 
 
@@ -1564,43 +1568,43 @@ Public Class ConsultasLinq
         'http://bdlconsultores.dyndns.org/Consultas/Admin/verConsultas1.php?recordid=9872
         '* Agregarle la cantidad de modificaciones promedio por carta de porte.
 
-        Dim q = (From cdp In db.CartasDePortes _
-                Join cli In db.linqClientes On cli.IdCliente Equals cdp.Vendedor _
-                From art In db.linqArticulos.Where(Function(i) i.IdArticulo = cdp.IdArticulo).DefaultIfEmpty _
-                From dest In db.WilliamsDestinos.Where(Function(i) i.IdWilliamsDestino = cdp.Destino).DefaultIfEmpty _
-                Where _
-                    cdp.Vendedor > 0 _
-                    And cli.RazonSocial IsNot Nothing _
-                    And ( _
-                            (cdp.FechaDescarga >= fechadesde And cdp.FechaDescarga <= fechahasta) _
-                                Or _
-                            (cdp.FechaDescarga >= desde2 And cdp.FechaDescarga <= hasta2) _
-                        ) _
-                    And (cdp.Anulada <> "SI") _
-                    And ((ModoExportacion = "Ambos") Or (ModoExportacion = "Entregas" And If(cdp.Exporta, "NO") = "NO") Or (ModoExportacion = "Export" And If(cdp.Exporta, "NO") = "SI")) _
-                    And (cdp.Vendedor.HasValue And cdp.Corredor.HasValue And cdp.Entregador.HasValue) _
-                    And (idVendedor = -1 Or cdp.Vendedor = idVendedor) _
-                    And (idCorredor = -1 Or cdp.Corredor = idCorredor) _
-                    And (idDestinatario = -1 Or cdp.Entregador = idDestinatario) _
-                    And (idIntermediario = -1 Or cdp.CuentaOrden1 = idIntermediario) _
-                    And (idArticulo = -1 Or cdp.IdArticulo = idArticulo) _
-                    And (idDestino = -1 Or cdp.Destino = idDestino) _
-                    And (puntoventa = -1 Or cdp.PuntoVenta = puntoventa) _
-                Group cdp By _
-                            Ano = cdp.FechaDescarga.Value.Year, _
-                            MesNumero = cdp.FechaDescarga.Value.Month, _
-                            Destino = dest.Descripcion _
-                        Into g = Group _
-                Select New With { _
-                    .Destino = Destino, _
-                    .Ano = Ano, _
-                    .MesNumero = MesNumero, _
-                    .Mes = MonthName(MesNumero), _
-                    .NetoFinal = g.Sum(Function(i) CInt(i.NetoFinal.GetValueOrDefault / 1000)), _
-                    .TotalDelUltimoAnoParaOrdenar = g.Sum(Function(i) IIf(i.FechaDescarga >= fechadesde, CInt(i.NetoFinal.GetValueOrDefault / 1000), 0)), _
-                    .periodo1 = g.Sum(Function(i) IIf(i.FechaDescarga < fechadesde, CInt(i.NetoFinal.GetValueOrDefault / 1000), 0)), _
-                    .periodo2 = g.Sum(Function(i) IIf(i.FechaDescarga >= fechadesde, CInt(i.NetoFinal.GetValueOrDefault / 1000), 0)) _
-                }).OrderBy(Function(x) x.Destino).ToList
+        Dim q = (From cdp In db.CartasDePortes
+                 Join cli In db.linqClientes On cli.IdCliente Equals cdp.Vendedor
+                 From art In db.linqArticulos.Where(Function(i) i.IdArticulo = cdp.IdArticulo).DefaultIfEmpty
+                 From dest In db.WilliamsDestinos.Where(Function(i) i.IdWilliamsDestino = cdp.Destino).DefaultIfEmpty
+                 Where
+                     cdp.Vendedor > 0 _
+                     And cli.RazonSocial IsNot Nothing _
+                     And (
+                             (cdp.FechaDescarga >= fechadesde And cdp.FechaDescarga <= fechahasta) _
+                                 Or
+                             (cdp.FechaDescarga >= desde2 And cdp.FechaDescarga <= hasta2)
+                         ) _
+                     And (cdp.Anulada <> "SI") _
+                     And ((ModoExportacion = "Ambos") Or (ModoExportacion = "Entregas" And If(cdp.Exporta, "NO") = "NO") Or (ModoExportacion = "Export" And If(cdp.Exporta, "NO") = "SI")) _
+                     And (cdp.Vendedor.HasValue And cdp.Corredor.HasValue And cdp.Entregador.HasValue) _
+                     And (idVendedor = -1 Or cdp.Vendedor = idVendedor) _
+                     And (idCorredor = -1 Or cdp.Corredor = idCorredor) _
+                     And (idDestinatario = -1 Or cdp.Entregador = idDestinatario) _
+                     And (idIntermediario = -1 Or cdp.CuentaOrden1 = idIntermediario) _
+                     And (idArticulo = -1 Or cdp.IdArticulo = idArticulo) _
+                     And (idDestino = -1 Or cdp.Destino = idDestino) _
+                     And (puntoventa = -1 Or cdp.PuntoVenta = puntoventa)
+                 Group cdp By
+                             Ano = cdp.FechaDescarga.Value.Year,
+                             MesNumero = cdp.FechaDescarga.Value.Month,
+                             Destino = dest.Descripcion
+                         Into g = Group
+                 Select New With {
+                     .Destino = Destino,
+                     .Ano = Ano,
+                     .MesNumero = MesNumero,
+                     .Mes = MonthName(MesNumero),
+                     .NetoFinal = g.Sum(Function(i) CInt(i.NetoFinal.GetValueOrDefault / 1000)),
+                     .TotalDelUltimoAnoParaOrdenar = g.Sum(Function(i) IIf(i.FechaDescarga >= fechadesde, CInt(i.NetoFinal.GetValueOrDefault / 1000), 0)),
+                     .periodo1 = g.Sum(Function(i) IIf(i.FechaDescarga < fechadesde, CInt(i.NetoFinal.GetValueOrDefault / 1000), 0)),
+                     .periodo2 = g.Sum(Function(i) IIf(i.FechaDescarga >= fechadesde, CInt(i.NetoFinal.GetValueOrDefault / 1000), 0))
+                 }).OrderBy(Function(x) x.Destino).ToList
 
 
         '        1) Revisar porcentajes de diferencia que no están saliendo correcamente
@@ -1642,8 +1646,8 @@ Public Class ConsultasLinq
 
 
     'aca deberia bancarme el destino y el articulo, pero y los demas filtros???
-    Shared Function EstadisticasDescargas(ByRef p2 As ReportParameter, txtFechaDesde As String, txtFechaHasta As String, _
-                                           txtFechaDesdeAnterior As String, txtFechaHastaAnterior As String, _
+    Shared Function EstadisticasDescargas(ByRef p2 As ReportParameter, txtFechaDesde As String, txtFechaHasta As String,
+                                           txtFechaDesdeAnterior As String, txtFechaHastaAnterior As String,
                                           cmbPeriodo As String, cmbPuntoVenta As Integer, ModoExportacion As String, SC As String _
                                 , idDestinatario As Integer, idDestino As Integer, IdArticulo As Integer
                     ) As Object
@@ -1720,51 +1724,51 @@ Public Class ConsultasLinq
         '.Cartas = g.Select(Function(i) i.NumeroCartaDePorte), _
         If False Then
 
-            Dim o = (From cdp In db.CartasDePortes _
-                    Join art In db.Articulos On art.IdArticulo Equals cdp.IdArticulo _
-                    Where cdp.Vendedor > 0 _
-                        And ( _
-                                (cdp.FechaDescarga >= fechadesdeAnterior And cdp.FechaDescarga <= fechahastaAnterior) _
-                                Or _
-                                (cdp.FechaDescarga >= fechadesde And cdp.FechaDescarga <= fechahasta) _
-                            ) _
-                        And (cdp.Anulada <> "SI") _
-                        And ((ModoExportacion = "Ambos") _
-                              Or (ModoExportacion = "Todos") _
-                              Or (ModoExportacion = "Entregas" And If(cdp.Exporta, "NO") = "NO") _
-                              Or (ModoExportacion = "Export" And If(cdp.Exporta, "NO") = "SI")) _
-                        And (pv = -1 Or cdp.PuntoVenta = pv)
-                       Group cdp By _
-                            Producto = art.Descripcion, _
-                            Modo = cdp.Exporta, _
-                            Sucursal = cdp.PuntoVenta _
-                              Into g = Group
-                      Select New With { _
-                            .Sucursal = SqlFunctions.StringConvert(Sucursal), _
-                            .Modo = Modo, _
-                            .Producto = Producto, _
-                            .CantCartas = g.Count, _
-                            .NetoPto = g.Sum(Function(i) If(i.NetoFinal, 0)) / 1000, _
-                            .Merma = g.Sum(Function(i) (If(i.Merma, 0) + If(i.HumedadDesnormalizada, 0))) / 1000, _
-                            .NetoFinal = g.Sum(Function(i) If(i.NetoProc, 0)) / 1000, _
-                            .Importe = g.Sum(Function(i) CDec( _
-                                                             CDec(If(i.TarifaFacturada, 0)) * CDec(If(i.NetoPto, 0)) / 1000 _
-                                                            )), _
-                            .PV1 = CInt(g.Where(Function(i) i.PuntoVenta = 1 And i.FechaIngreso >= fechadesde).DefaultIfEmpty().Sum(Function(i) If(i.NetoFinal, 0)) / 1000), _
-                            .PV2 = CInt(g.Where(Function(i) i.PuntoVenta = 2 And i.FechaIngreso >= fechadesde).DefaultIfEmpty().Sum(Function(i) If(i.NetoFinal, 0)) / 1000), _
-                            .PV3 = CInt(g.Where(Function(i) i.PuntoVenta = 3 And i.FechaIngreso >= fechadesde).DefaultIfEmpty().Sum(Function(i) If(i.NetoFinal, 0)) / 1000), _
-                            .PV4 = CInt(g.Where(Function(i) i.PuntoVenta = 4 And i.FechaIngreso >= fechadesde).DefaultIfEmpty().Sum(Function(i) If(i.NetoFinal, 0)) / 1000), _
-                            .TotalEntrega = CInt(g.Where(Function(i) i.FechaDescarga >= fechadesde And If(Modo, "NO") = "NO") _
-                                                .DefaultIfEmpty().Sum(Function(i) If(i.NetoFinal, 0)) / 1000), _
-                            .TotalExportacion = CInt(g.Where(Function(i) i.FechaDescarga >= fechadesde And If(Modo, "NO") = "SI") _
-                                                .DefaultIfEmpty().Sum(Function(i) If(i.NetoFinal, 0)) / 1000), _
-                            .TotalBuques = 0, _
-                            .Total = CInt(g.Where(Function(i) i.FechaDescarga >= fechadesde).DefaultIfEmpty().Sum(Function(i) If(i.NetoFinal, 0)) / 1000), _
-                            .Porcent = 0, _
-                            .PeriodoAnterior = CInt(g.Where(Function(i) i.FechaDescarga < fechadesde).DefaultIfEmpty().Sum(Function(i) If(i.NetoFinal, 0)) / 1000), _
-                            .Diferen = 0, _
-                            .DiferencPorcent = 0 _
-                        } _
+            Dim o = (From cdp In db.CartasDePortes
+                     Join art In db.Articulos On art.IdArticulo Equals cdp.IdArticulo
+                     Where cdp.Vendedor > 0 _
+                         And (
+                                 (cdp.FechaDescarga >= fechadesdeAnterior And cdp.FechaDescarga <= fechahastaAnterior) _
+                                 Or
+                                 (cdp.FechaDescarga >= fechadesde And cdp.FechaDescarga <= fechahasta)
+                             ) _
+                         And (cdp.Anulada <> "SI") _
+                         And ((ModoExportacion = "Ambos") _
+                               Or (ModoExportacion = "Todos") _
+                               Or (ModoExportacion = "Entregas" And If(cdp.Exporta, "NO") = "NO") _
+                               Or (ModoExportacion = "Export" And If(cdp.Exporta, "NO") = "SI")) _
+                         And (pv = -1 Or cdp.PuntoVenta = pv)
+                     Group cdp By
+                          Producto = art.Descripcion,
+                          Modo = cdp.Exporta,
+                          Sucursal = cdp.PuntoVenta
+                            Into g = Group
+                     Select New With {
+                           .Sucursal = SqlFunctions.StringConvert(Sucursal),
+                           .Modo = Modo,
+                           .Producto = Producto,
+                           .CantCartas = g.Count,
+                           .NetoPto = g.Sum(Function(i) If(i.NetoFinal, 0)) / 1000,
+                           .Merma = g.Sum(Function(i) (If(i.Merma, 0) + If(i.HumedadDesnormalizada, 0))) / 1000,
+                           .NetoFinal = g.Sum(Function(i) If(i.NetoProc, 0)) / 1000,
+                           .Importe = g.Sum(Function(i) CDec(
+                                                            CDec(If(i.TarifaFacturada, 0)) * CDec(If(i.NetoPto, 0)) / 1000
+                                                           )),
+                           .PV1 = CInt(g.Where(Function(i) i.PuntoVenta = 1 And i.FechaIngreso >= fechadesde).DefaultIfEmpty().Sum(Function(i) If(i.NetoFinal, 0)) / 1000),
+                           .PV2 = CInt(g.Where(Function(i) i.PuntoVenta = 2 And i.FechaIngreso >= fechadesde).DefaultIfEmpty().Sum(Function(i) If(i.NetoFinal, 0)) / 1000),
+                           .PV3 = CInt(g.Where(Function(i) i.PuntoVenta = 3 And i.FechaIngreso >= fechadesde).DefaultIfEmpty().Sum(Function(i) If(i.NetoFinal, 0)) / 1000),
+                           .PV4 = CInt(g.Where(Function(i) i.PuntoVenta = 4 And i.FechaIngreso >= fechadesde).DefaultIfEmpty().Sum(Function(i) If(i.NetoFinal, 0)) / 1000),
+                           .TotalEntrega = CInt(g.Where(Function(i) i.FechaDescarga >= fechadesde And If(Modo, "NO") = "NO") _
+                                               .DefaultIfEmpty().Sum(Function(i) If(i.NetoFinal, 0)) / 1000),
+                           .TotalExportacion = CInt(g.Where(Function(i) i.FechaDescarga >= fechadesde And If(Modo, "NO") = "SI") _
+                                               .DefaultIfEmpty().Sum(Function(i) If(i.NetoFinal, 0)) / 1000),
+                           .TotalBuques = 0,
+                           .Total = CInt(g.Where(Function(i) i.FechaDescarga >= fechadesde).DefaultIfEmpty().Sum(Function(i) If(i.NetoFinal, 0)) / 1000),
+                           .Porcent = 0,
+                           .PeriodoAnterior = CInt(g.Where(Function(i) i.FechaDescarga < fechadesde).DefaultIfEmpty().Sum(Function(i) If(i.NetoFinal, 0)) / 1000),
+                           .Diferen = 0,
+                           .DiferencPorcent = 0
+                       }
                     ).Where(Function(i) i.Total > 0).ToList
         End If
 
@@ -1797,35 +1801,35 @@ Public Class ConsultasLinq
 
 
             Dim q2 = LogicaFacturacion.ListaEmbarquesQueryable(SC, fechadesdeAnterior, fechahasta).ToList
-            Dim bb = (From i In q2 _
-                       From art In db.Articulos.Where(Function(f) f.IdArticulo = i.IdArticulo).DefaultIfEmpty _
-                        Group i By _
-                            Producto = art.Descripcion, _
-                            Modo = "Buque", _
-                            Sucursal = i.IdStock _
-                        Into g = Group _
-                        Select New ProntoMVC.Data.Models.wCartasDePorte_TX_EstadisticasDeDescarga_Result1 With { _
-                            .Sucursal = Sucursal, _
-                            .Modo = Modo, _
-                            .Producto = Producto, _
-                            .CantCartas = 0, _
-                            .NetoPto = CDec(0), _
-                            .Merma = CDec(0), _
-                            .NetoFinal = CDec(0), _
-                            .Importe = CDec(0), _
-                            .PV1 = CInt(g.Where(Function(i) i.IdStock = 1 And i.FechaIngreso >= fechadesde).DefaultIfEmpty().Sum(Function(i) If(If(i, New ProntoMVC.Data.Models.CartasPorteMovimiento).Cantidad, 0)) / 1000), _
-                            .PV2 = CInt(g.Where(Function(i) i.IdStock = 2 And i.FechaIngreso >= fechadesde).DefaultIfEmpty().Sum(Function(i) If(If(i, New ProntoMVC.Data.Models.CartasPorteMovimiento).Cantidad, 0)) / 1000), _
-                            .PV3 = CInt(g.Where(Function(i) i.IdStock = 3 And i.FechaIngreso >= fechadesde).DefaultIfEmpty().Sum(Function(i) If(If(i, New ProntoMVC.Data.Models.CartasPorteMovimiento).Cantidad, 0)) / 1000), _
-                            .PV4 = CInt(g.Where(Function(i) i.IdStock = 4 And i.FechaIngreso >= fechadesde).DefaultIfEmpty().Sum(Function(i) If(If(i, New ProntoMVC.Data.Models.CartasPorteMovimiento).Cantidad, 0)) / 1000), _
-                            .TotalEntrega = 0, _
-                            .TotalExportacion = 0, _
-                            .TotalBuques = CInt(g.Where(Function(i) i.FechaIngreso >= fechadesde).DefaultIfEmpty().Sum(Function(i) If(If(i, New ProntoMVC.Data.Models.CartasPorteMovimiento).Cantidad, 0)) / 1000), _
-                            .Total = CInt(g.Where(Function(i) i.FechaIngreso >= fechadesde).DefaultIfEmpty().Sum(Function(i) If(If(i, New ProntoMVC.Data.Models.CartasPorteMovimiento).Cantidad, 0)) / 1000), _
-                            .Porcent = 0, _
-                            .PeriodoAnterior = CInt(g.Where(Function(i) i.FechaIngreso <= fechahastaAnterior).DefaultIfEmpty().Sum(Function(i) If(If(i, New ProntoMVC.Data.Models.CartasPorteMovimiento).Cantidad, 0)) / 1000), _
-                            .Diferen = 0, _
-                            .DiferencPorcent = 0 _
-                        }).ToList
+            Dim bb = (From i In q2
+                      From art In db.Articulos.Where(Function(f) f.IdArticulo = i.IdArticulo).DefaultIfEmpty
+                      Group i By
+                          Producto = art.Descripcion,
+                          Modo = "Buque",
+                          Sucursal = i.IdStock
+                      Into g = Group
+                      Select New ProntoMVC.Data.Models.wCartasDePorte_TX_EstadisticasDeDescarga_Result1 With {
+                          .Sucursal = Sucursal,
+                          .Modo = Modo,
+                          .Producto = Producto,
+                          .CantCartas = 0,
+                          .NetoPto = CDec(0),
+                          .Merma = CDec(0),
+                          .NetoFinal = CDec(0),
+                          .Importe = CDec(0),
+                          .PV1 = CInt(g.Where(Function(i) i.IdStock = 1 And i.FechaIngreso >= fechadesde).DefaultIfEmpty().Sum(Function(i) If(If(i, New ProntoMVC.Data.Models.CartasPorteMovimiento).Cantidad, 0)) / 1000),
+                          .PV2 = CInt(g.Where(Function(i) i.IdStock = 2 And i.FechaIngreso >= fechadesde).DefaultIfEmpty().Sum(Function(i) If(If(i, New ProntoMVC.Data.Models.CartasPorteMovimiento).Cantidad, 0)) / 1000),
+                          .PV3 = CInt(g.Where(Function(i) i.IdStock = 3 And i.FechaIngreso >= fechadesde).DefaultIfEmpty().Sum(Function(i) If(If(i, New ProntoMVC.Data.Models.CartasPorteMovimiento).Cantidad, 0)) / 1000),
+                          .PV4 = CInt(g.Where(Function(i) i.IdStock = 4 And i.FechaIngreso >= fechadesde).DefaultIfEmpty().Sum(Function(i) If(If(i, New ProntoMVC.Data.Models.CartasPorteMovimiento).Cantidad, 0)) / 1000),
+                          .TotalEntrega = 0,
+                          .TotalExportacion = 0,
+                          .TotalBuques = CInt(g.Where(Function(i) i.FechaIngreso >= fechadesde).DefaultIfEmpty().Sum(Function(i) If(If(i, New ProntoMVC.Data.Models.CartasPorteMovimiento).Cantidad, 0)) / 1000),
+                          .Total = CInt(g.Where(Function(i) i.FechaIngreso >= fechadesde).DefaultIfEmpty().Sum(Function(i) If(If(i, New ProntoMVC.Data.Models.CartasPorteMovimiento).Cantidad, 0)) / 1000),
+                          .Porcent = 0,
+                          .PeriodoAnterior = CInt(g.Where(Function(i) i.FechaIngreso <= fechahastaAnterior).DefaultIfEmpty().Sum(Function(i) If(If(i, New ProntoMVC.Data.Models.CartasPorteMovimiento).Cantidad, 0)) / 1000),
+                          .Diferen = 0,
+                          .DiferencPorcent = 0
+                      }).ToList
 
             x = x.Union(bb).ToList()
         End If
