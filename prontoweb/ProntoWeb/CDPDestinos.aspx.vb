@@ -516,8 +516,14 @@ Partial Class CDPDestinos
                 dr.Item("IdLocalidad") = IdNull(BuscaIdLocalidadPreciso(TextoWebControl(.FindControl("txtNewLocalidad")), HFSC.Value))
                 dr.Item("IdProvincia") = IdNull(CType(.FindControl("cmbNewProvincia"), DropDownList).SelectedValue)
 
-                dr.Item("PuntoVenta") = TextoWebControl(.FindControl("txtNewPuntoVenta"))
 
+                Try
+                    dr.Item("PuntoVenta") = TextoWebControl(.FindControl("txtNewPuntoVenta"))
+                Catch ex As Exception
+                    ErrHandler2.WriteError(ex)
+                End Try
+
+               
 
 
                 dt.Rows.Add(dr)
