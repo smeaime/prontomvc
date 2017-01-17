@@ -29,7 +29,6 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
     <script src="//cdn.jsdelivr.net/jqgrid/4.5.2/jquery.jqGrid.js"></script>
     <%--/////////////////////////////////////////////////////////////--%>
     <%--/////////////////////////////////////////////////////////////--%>
-    <br />
 
     <div class="titulos" style="color: white">
         Situación de CPs
@@ -135,15 +134,14 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
         <asp:Button ID="btnPanelInforme" Text="RESUMEN" runat="server" Visible="false" CssClass="btn btn-primary" />
         <br />
-        <br />
         <div id="Salida2"></div>
         <asp:Literal ID="salida" runat="server"></asp:Literal>
         <br />
-        <br />
+
         <%--<input type="text" class="span4" id="text1" name="agent" value=""  "/>--%>
 
 
-        <table id="Lista" class="scroll" cellpadding="0" cellspacing="0" style="font-size: 16px;" width="700px">
+        <table id="Lista" class="scroll" cellpadding="0" cellspacing="0" style="font-size: 12px;" width="700px">
         </table>
         <div id="ListaPager" class="scroll" style="text-align: center; height: 30px">
         </div>
@@ -1817,7 +1815,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                     multiselect: false,
                     shrinkToFit: false,
                     width: 'auto',
-                    height: $(window).height() - 500, // '100%'
+                    height: $(window).height() - 300, // '100%'
                     altRows: false,
                     footerrow: false,
                     userDataOnFooter: true,
@@ -1833,6 +1831,9 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
             , multipleSearch: true
 
                 });
+
+
+                jQuery('#Lista').jqGrid('gridResize');
 
                 jQuery("#Lista").jqGrid('bindKeys');
 

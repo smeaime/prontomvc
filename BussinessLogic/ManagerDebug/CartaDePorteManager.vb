@@ -849,18 +849,23 @@ Public Class CartaDePorteManager
 
         If q Is Nothing Then
             If RazonSocial.Trim.Length > 4 Then
+
+                RazonSocial = RazonSocial.Trim.ToUpper
+                If RazonSocial.Contains("PORTE") Or RazonSocial.Contains("TITULAR") Or RazonSocial.Contains("CARTA") Then Return 0
+
+
                 q = New ProntoMVC.Data.Models.Cliente
-                q.RazonSocial = RazonSocial
+                    q.RazonSocial = RazonSocial
 
-                'hay q guardarlo con guiones????? -sí!!!!!
-                q.Cuit = cuit
+                    'hay q guardarlo con guiones????? -sí!!!!!
+                    q.Cuit = cuit
 
-                'acá había un insertonsubmit
-                db.Clientes.Add(q)
-                db.SaveChanges()
-                Return q.IdCliente
-            Else
-                Return 0
+                    'acá había un insertonsubmit
+                    db.Clientes.Add(q)
+                    db.SaveChanges()
+                    Return q.IdCliente
+                Else
+                    Return 0
             End If
 
         Else
@@ -905,6 +910,11 @@ Public Class CartaDePorteManager
 
         If q Is Nothing Then
             If RazonSocial.Trim.Length > 4 Then
+
+                RazonSocial = RazonSocial.Trim.ToUpper
+                If RazonSocial.Contains("PORTE") Or RazonSocial.Contains("TITULAR") Or RazonSocial.Contains("CARTA") Then Return 0
+
+
                 q = New ProntoMVC.Data.Models.Vendedor
                 q.Nombre = RazonSocial
                 q.Cuit = cuit
