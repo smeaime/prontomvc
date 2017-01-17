@@ -1,0 +1,617 @@
+
+Log Entry : 
+01/13/2017 10:54:21
+Error in: http://localhost:58911/login.aspx?ReturnUrl=/. Error Message:System.Threading.ThreadAbortException
+Subproceso anulado.
+   en System.Threading.Thread.AbortInternal()
+   en System.Threading.Thread.Abort(Object stateInfo)
+   en System.Web.HttpResponse.AbortCurrentThread()
+   en System.Web.HttpResponse.End()
+   en System.Web.HttpResponse.Redirect(String url, Boolean endResponse, Boolean permanent)
+   en System.Web.HttpResponse.Redirect(String url)
+   en Login.Page_Load(Object sender, EventArgs e) en C:\Users\Administrador\Documents\bdl\pronto\prontoweb\Login.aspx.vb:línea 169
+mscorlib
+__________________________
+
+Log Entry : 
+01/13/2017 10:54:55
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:Server.ScriptTimeout puesto en 7200s. Valor original: 30000000s.
+__________________________
+
+Log Entry : 
+01/13/2017 10:57:11
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:entro en  gv2ReBind 
+__________________________
+
+Log Entry : 
+01/13/2017 10:57:11
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 1 en dtDatasourcePaso2.
+__________________________
+
+Log Entry : 
+01/13/2017 10:57:11
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:entrando en GetDatatableAsignacionAutomatica . tanda 
+__________________________
+
+Log Entry : 
+01/13/2017 10:57:11
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:entrando en generar tabla. tanda 0
+__________________________
+
+Log Entry : 
+01/13/2017 10:57:19
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 2. tanda 0
+__________________________
+
+Log Entry : 
+01/13/2017 10:57:19
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 3. tanda 0
+__________________________
+
+Log Entry : 
+01/13/2017 10:57:19
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:Cartas sin automatico encontrado 0
+__________________________
+
+Log Entry : 
+01/13/2017 10:57:19
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 5. tanda 0
+__________________________
+
+Log Entry : 
+01/13/2017 10:57:19
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:entro a Preprocesos 5
+__________________________
+
+Log Entry : 
+01/13/2017 10:57:19
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:despues de AgregarEmbarques5
+__________________________
+
+Log Entry : 
+01/13/2017 10:57:19
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:despues de ExcluirDeGastosAdministrativos5
+__________________________
+
+Log Entry : 
+01/13/2017 10:57:19
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:despues de ReasignarAquellosQueSeLeFacturanForzosamenteAlCorredor5
+__________________________
+
+Log Entry : 
+01/13/2017 10:57:19
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:despues de CasosSyngenta_y_Acopios5
+__________________________
+
+Log Entry : 
+01/13/2017 10:57:19
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:entro en PostProcesos 5
+__________________________
+
+Log Entry : 
+01/13/2017 10:57:20
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:despues de EmparcharClienteSeparadoParaCasosQueSuperenUnMontoDeterminado 5
+__________________________
+
+Log Entry : 
+01/13/2017 10:57:20
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:despues de EmparcharClienteSeparadoParaFacturasQueSuperanCantidadDeRenglones 5
+__________________________
+
+Log Entry : 
+01/13/2017 10:57:20
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:despues de SepararAcopiosLDCyACA 5
+__________________________
+
+Log Entry : 
+01/13/2017 10:57:20
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:despues de PostProcesoFacturacion_ReglaExportadores 5
+__________________________
+
+Log Entry : 
+01/13/2017 10:57:20
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 6. tanda 0
+__________________________
+
+Log Entry : 
+01/13/2017 10:57:20
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 7. tanda 9449
+__________________________
+
+Log Entry : 
+01/13/2017 10:57:20
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:salgo. tanda 9449
+__________________________
+
+Log Entry : 
+01/13/2017 10:57:20
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 2 en GetDatatableAsignacionAutomatica . tanda 9449
+__________________________
+
+Log Entry : 
+01/13/2017 10:57:20
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 3 en GetDatatableAsignacionAutomatica . tanda 9449
+__________________________
+
+Log Entry : 
+01/13/2017 10:57:20
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 4 en GetDatatableAsignacionAutomatica . tanda 9449
+__________________________
+
+Log Entry : 
+01/13/2017 10:57:20
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 2 en dtDatasourcePaso2.
+__________________________
+
+Log Entry : 
+01/13/2017 10:57:20
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 2b en dtDatasourcePaso2.
+__________________________
+
+Log Entry : 
+01/13/2017 10:57:20
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 2 en getgrillapaso2.
+__________________________
+
+Log Entry : 
+01/13/2017 10:57:20
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 3 en getgrillapaso2.
+__________________________
+
+Log Entry : 
+01/13/2017 10:57:20
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:salgo de  getGrillaPaso2 .
+__________________________
+
+Log Entry : 
+01/13/2017 10:57:20
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 2 en gv2ReBind.
+__________________________
+
+Log Entry : 
+01/13/2017 10:57:20
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:salgo de  gv2ReBind .
+__________________________
+
+Log Entry : 
+01/13/2017 10:58:55
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:System.InvalidCastException
+La conversión de la cadena "ba2j25fsxodyt0nkzik24ztu" en el tipo 'Integer' no es válida.
+   en Microsoft.VisualBasic.CompilerServices.Conversions.ToInteger(String Value)
+   en CDPFacturacion.PreviewDetalladoDeLaGeneracionEnPaso2() en C:\Users\Administrador\Documents\bdl\pronto\prontoweb\ProntoWeb\CDPFacturacion.aspx.vb:línea 2341
+   en CDPFacturacion.lnkVistaDetallada_Click(Object sender, EventArgs e) en C:\Users\Administrador\Documents\bdl\pronto\prontoweb\ProntoWeb\CDPFacturacion.aspx.vb:línea 4483
+   en System.Web.UI.WebControls.LinkButton.OnClick(EventArgs e)
+   en System.Web.UI.WebControls.LinkButton.RaisePostBackEvent(String eventArgument)
+   en System.Web.UI.WebControls.LinkButton.System.Web.UI.IPostBackEventHandler.RaisePostBackEvent(String eventArgument)
+   en System.Web.UI.Page.RaisePostBackEvent(IPostBackEventHandler sourceControl, String eventArgument)
+   en System.Web.UI.Page.RaisePostBackEvent(NameValueCollection postData)
+   en System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+Microsoft.VisualBasic
+__________________________
+
+Log Entry : 
+01/13/2017 10:58:58
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:System.Net.Mail.SmtpException
+Error al enviar correo.
+   en System.Net.Mail.SmtpClient.Send(MailMessage message)
+   en ProntoFuncionesGenerales.MandaEmailSimple(String Para, String Asunto, String Cuerpo, String De, String SmtpServer, String SmtpUser, String SmtpPass, String sStringGenerarAdjunto, Int64 SmtpPort, Int32 EnableSSL, String CCO, String img)
+   en ASP.global_asax.Application_Error(Object sender, EventArgs e) en C:\Users\Administrador\Documents\bdl\pronto\prontoweb\global.asax:línea 472
+System
+__________________________
+
+Log Entry : 
+01/13/2017 11:00:16
+Error in: http://localhost:58911/ProntoWeb/Principal.aspx. Error Message:System.Threading.ThreadAbortException
+Subproceso anulado.
+   en System.Threading.Thread.AbortInternal()
+   en System.Threading.Thread.Abort(Object stateInfo)
+   en System.Web.HttpResponse.AbortCurrentThread()
+   en System.Web.HttpResponse.End()
+   en System.Web.HttpResponse.Redirect(String url, Boolean endResponse, Boolean permanent)
+   en System.Web.HttpResponse.Redirect(String url)
+   en Login.Page_Load(Object sender, EventArgs e) en C:\Users\Administrador\Documents\bdl\pronto\prontoweb\Login.aspx.vb:línea 171
+mscorlib
+__________________________
+
+Log Entry : 
+01/13/2017 11:00:33
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:Server.ScriptTimeout puesto en 7200s. Valor original: 30000000s.
+__________________________
+
+Log Entry : 
+01/13/2017 11:00:43
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:entro en  gv2ReBind 
+__________________________
+
+Log Entry : 
+01/13/2017 11:00:43
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 1 en dtDatasourcePaso2.
+__________________________
+
+Log Entry : 
+01/13/2017 11:00:43
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:entrando en GetDatatableAsignacionAutomatica . tanda 
+__________________________
+
+Log Entry : 
+01/13/2017 11:00:43
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:entrando en generar tabla. tanda 0
+__________________________
+
+Log Entry : 
+01/13/2017 11:00:48
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 2. tanda 0
+__________________________
+
+Log Entry : 
+01/13/2017 11:00:48
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 3. tanda 0
+__________________________
+
+Log Entry : 
+01/13/2017 11:00:48
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:Cartas sin automatico encontrado 0
+__________________________
+
+Log Entry : 
+01/13/2017 11:00:48
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 5. tanda 0
+__________________________
+
+Log Entry : 
+01/13/2017 11:00:48
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:entro a Preprocesos 5
+__________________________
+
+Log Entry : 
+01/13/2017 11:00:48
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:despues de AgregarEmbarques5
+__________________________
+
+Log Entry : 
+01/13/2017 11:00:48
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:despues de ExcluirDeGastosAdministrativos5
+__________________________
+
+Log Entry : 
+01/13/2017 11:00:48
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:despues de ReasignarAquellosQueSeLeFacturanForzosamenteAlCorredor5
+__________________________
+
+Log Entry : 
+01/13/2017 11:00:48
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:despues de CasosSyngenta_y_Acopios5
+__________________________
+
+Log Entry : 
+01/13/2017 11:00:48
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:entro en PostProcesos 5
+__________________________
+
+Log Entry : 
+01/13/2017 11:00:49
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:despues de EmparcharClienteSeparadoParaCasosQueSuperenUnMontoDeterminado 5
+__________________________
+
+Log Entry : 
+01/13/2017 11:00:49
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:despues de EmparcharClienteSeparadoParaFacturasQueSuperanCantidadDeRenglones 5
+__________________________
+
+Log Entry : 
+01/13/2017 11:00:49
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:despues de SepararAcopiosLDCyACA 5
+__________________________
+
+Log Entry : 
+01/13/2017 11:00:49
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:despues de PostProcesoFacturacion_ReglaExportadores 5
+__________________________
+
+Log Entry : 
+01/13/2017 11:00:49
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 6. tanda 0
+__________________________
+
+Log Entry : 
+01/13/2017 11:00:49
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 7. tanda 3797
+__________________________
+
+Log Entry : 
+01/13/2017 11:00:49
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:salgo. tanda 3797
+__________________________
+
+Log Entry : 
+01/13/2017 11:00:49
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 2 en GetDatatableAsignacionAutomatica . tanda 3797
+__________________________
+
+Log Entry : 
+01/13/2017 11:00:49
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 3 en GetDatatableAsignacionAutomatica . tanda 3797
+__________________________
+
+Log Entry : 
+01/13/2017 11:00:49
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 4 en GetDatatableAsignacionAutomatica . tanda 3797
+__________________________
+
+Log Entry : 
+01/13/2017 11:00:49
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 2 en dtDatasourcePaso2.
+__________________________
+
+Log Entry : 
+01/13/2017 11:00:49
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 2b en dtDatasourcePaso2.
+__________________________
+
+Log Entry : 
+01/13/2017 11:00:49
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 2 en getgrillapaso2.
+__________________________
+
+Log Entry : 
+01/13/2017 11:00:49
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 3 en getgrillapaso2.
+__________________________
+
+Log Entry : 
+01/13/2017 11:00:49
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:salgo de  getGrillaPaso2 .
+__________________________
+
+Log Entry : 
+01/13/2017 11:00:49
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 2 en gv2ReBind.
+__________________________
+
+Log Entry : 
+01/13/2017 11:00:49
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:salgo de  gv2ReBind .
+__________________________
+
+Log Entry : 
+01/13/2017 11:01:32
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:System.MissingMethodException
+Método no encontrado: 'System.String LogicaFacturacion.PreviewDetalladoDeLaGeneracionEnPaso2(Int32, System.String, System.String, Boolean, System.Object, System.String, System.String, System.String, Int32, Int32, System.String, Boolean)'.
+   en CDPFacturacion.PreviewDetalladoDeLaGeneracionEnPaso2()
+   en CDPFacturacion.lnkVistaDetallada_Click(Object sender, EventArgs e) en C:\Users\Administrador\Documents\bdl\pronto\prontoweb\ProntoWeb\CDPFacturacion.aspx.vb:línea 4483
+   en System.Web.UI.WebControls.LinkButton.OnClick(EventArgs e)
+   en System.Web.UI.WebControls.LinkButton.RaisePostBackEvent(String eventArgument)
+   en System.Web.UI.WebControls.LinkButton.System.Web.UI.IPostBackEventHandler.RaisePostBackEvent(String eventArgument)
+   en System.Web.UI.Page.RaisePostBackEvent(IPostBackEventHandler sourceControl, String eventArgument)
+   en System.Web.UI.Page.RaisePostBackEvent(NameValueCollection postData)
+   en System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+App_Web_cdpfacturacion.aspx.4199bbd4.fk4vtiev
+__________________________
+
+Log Entry : 
+01/13/2017 11:01:34
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:System.Net.Mail.SmtpException
+Error al enviar correo.
+   en System.Net.Mail.SmtpClient.Send(MailMessage message)
+   en ProntoFuncionesGenerales.MandaEmailSimple(String Para, String Asunto, String Cuerpo, String De, String SmtpServer, String SmtpUser, String SmtpPass, String sStringGenerarAdjunto, Int64 SmtpPort, Int32 EnableSSL, String CCO, String img)
+   en ASP.global_asax.Application_Error(Object sender, EventArgs e) en C:\Users\Administrador\Documents\bdl\pronto\prontoweb\global.asax:línea 472
+System
+__________________________
+
+Log Entry : 
+01/13/2017 11:04:59
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:System.Threading.ThreadAbortException
+Subproceso anulado.
+   en System.Threading.Thread.AbortInternal()
+   en System.Threading.Thread.Abort(Object stateInfo)
+   en System.Web.HttpResponse.AbortCurrentThread()
+   en System.Web.HttpResponse.End()
+   en System.Web.HttpResponse.Redirect(String url, Boolean endResponse, Boolean permanent)
+   en System.Web.HttpResponse.Redirect(String url)
+   en Login.Page_Load(Object sender, EventArgs e) en C:\Users\Administrador\Documents\bdl\pronto\prontoweb\Login.aspx.vb:línea 171
+mscorlib
+__________________________
+
+Log Entry : 
+01/13/2017 11:04:59
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:Server.ScriptTimeout puesto en 7200s. Valor original: 30000000s.
+__________________________
+
+Log Entry : 
+01/13/2017 11:11:21
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:System.Threading.ThreadAbortException
+Subproceso anulado.
+   en System.Threading.Thread.AbortInternal()
+   en System.Threading.Thread.Abort(Object stateInfo)
+   en System.Web.HttpResponse.AbortCurrentThread()
+   en System.Web.HttpResponse.End()
+   en System.Web.HttpResponse.Redirect(String url, Boolean endResponse, Boolean permanent)
+   en System.Web.HttpResponse.Redirect(String url)
+   en Login.Page_Load(Object sender, EventArgs e) en C:\Users\Administrador\Documents\bdl\pronto\prontoweb\Login.aspx.vb:línea 171
+mscorlib
+__________________________
+
+Log Entry : 
+01/13/2017 11:11:23
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:Server.ScriptTimeout puesto en 7200s. Valor original: 30000000s.
+__________________________
+
+Log Entry : 
+01/13/2017 11:15:50
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:entro en  gv2ReBind 
+__________________________
+
+Log Entry : 
+01/13/2017 11:15:50
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:punto 1 en dtDatasourcePaso2.
+__________________________
+
+Log Entry : 
+01/13/2017 11:15:50
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:entrando en GetDatatableAsignacionAutomatica . tanda 
+__________________________
+
+Log Entry : 
+01/13/2017 11:15:50
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:entrando en generar tabla. tanda 0
+__________________________
+
+Log Entry : 
+01/13/2017 11:15:55
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:punto 2. tanda 0
+__________________________
+
+Log Entry : 
+01/13/2017 11:15:55
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:punto 3. tanda 0
+__________________________
+
+Log Entry : 
+01/13/2017 11:15:55
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:Cartas sin automatico encontrado 0
+__________________________
+
+Log Entry : 
+01/13/2017 11:15:55
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:punto 5. tanda 0
+__________________________
+
+Log Entry : 
+01/13/2017 11:15:55
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:entro a Preprocesos 5
+__________________________
+
+Log Entry : 
+01/13/2017 11:15:55
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:despues de AgregarEmbarques5
+__________________________
+
+Log Entry : 
+01/13/2017 11:15:55
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:despues de ExcluirDeGastosAdministrativos5
+__________________________
+
+Log Entry : 
+01/13/2017 11:15:55
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:despues de ReasignarAquellosQueSeLeFacturanForzosamenteAlCorredor5
+__________________________
+
+Log Entry : 
+01/13/2017 11:15:55
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:despues de CasosSyngenta_y_Acopios5
+__________________________
+
+Log Entry : 
+01/13/2017 11:15:55
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:entro en PostProcesos 5
+__________________________
+
+Log Entry : 
+01/13/2017 11:15:56
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:despues de EmparcharClienteSeparadoParaCasosQueSuperenUnMontoDeterminado 5
+__________________________
+
+Log Entry : 
+01/13/2017 11:15:56
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:despues de EmparcharClienteSeparadoParaFacturasQueSuperanCantidadDeRenglones 5
+__________________________
+
+Log Entry : 
+01/13/2017 11:15:56
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:despues de SepararAcopiosLDCyACA 5
+__________________________
+
+Log Entry : 
+01/13/2017 11:15:56
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:despues de PostProcesoFacturacion_ReglaExportadores 5
+__________________________
+
+Log Entry : 
+01/13/2017 11:15:56
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:punto 6. tanda 0
+__________________________
+
+Log Entry : 
+01/13/2017 11:15:56
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:punto 7. tanda 6312
+__________________________
+
+Log Entry : 
+01/13/2017 11:15:56
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:salgo. tanda 6312
+__________________________
+
+Log Entry : 
+01/13/2017 11:15:56
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:punto 2 en GetDatatableAsignacionAutomatica . tanda 6312
+__________________________
+
+Log Entry : 
+01/13/2017 11:15:56
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:punto 3 en GetDatatableAsignacionAutomatica . tanda 6312
+__________________________
+
+Log Entry : 
+01/13/2017 11:15:56
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:punto 4 en GetDatatableAsignacionAutomatica . tanda 6312
+__________________________
+
+Log Entry : 
+01/13/2017 11:15:56
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:punto 2 en dtDatasourcePaso2.
+__________________________
+
+Log Entry : 
+01/13/2017 11:15:56
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:punto 2b en dtDatasourcePaso2.
+__________________________
+
+Log Entry : 
+01/13/2017 11:15:56
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:punto 2 en getgrillapaso2.
+__________________________
+
+Log Entry : 
+01/13/2017 11:15:56
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:punto 3 en getgrillapaso2.
+__________________________
+
+Log Entry : 
+01/13/2017 11:15:56
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:salgo de  getGrillaPaso2 .
+__________________________
+
+Log Entry : 
+01/13/2017 11:15:56
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:punto 2 en gv2ReBind.
+__________________________
+
+Log Entry : 
+01/13/2017 11:15:57
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:salgo de  gv2ReBind .
+__________________________
+
+Log Entry : 
+01/13/2017 11:21:06
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:System.MissingMethodException
+Método no encontrado: 'System.String LogicaFacturacion.PreviewDetalladoDeLaGeneracionEnPaso2(Int32, System.String, System.String, Boolean, System.Object, System.String, System.String, System.String, Int32, Int32, System.String, Boolean)'.
+   en CDPFacturacion.PreviewDetalladoDeLaGeneracionEnPaso2()
+   en CDPFacturacion.lnkVistaDetallada_Click(Object sender, EventArgs e) en C:\Users\Administrador\Documents\bdl\pronto\prontoweb\ProntoWeb\CDPFacturacion.aspx.vb:línea 4483
+   en System.Web.UI.WebControls.LinkButton.OnClick(EventArgs e)
+   en System.Web.UI.WebControls.LinkButton.RaisePostBackEvent(String eventArgument)
+   en System.Web.UI.WebControls.LinkButton.System.Web.UI.IPostBackEventHandler.RaisePostBackEvent(String eventArgument)
+   en System.Web.UI.Page.RaisePostBackEvent(IPostBackEventHandler sourceControl, String eventArgument)
+   en System.Web.UI.Page.RaisePostBackEvent(NameValueCollection postData)
+   en System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+App_Web_cdpfacturacion.aspx.4199bbd4.fk4vtiev
+__________________________
+
+Log Entry : 
+01/13/2017 11:21:10
+Error in: http://localhost:58911/ProntoWeb/CDPFacturacion.aspx. Error Message:System.Net.Mail.SmtpException
+Error al enviar correo.
+   en System.Net.Mail.SmtpClient.Send(MailMessage message)
+   en ProntoFuncionesGenerales.MandaEmailSimple(String Para, String Asunto, String Cuerpo, String De, String SmtpServer, String SmtpUser, String SmtpPass, String sStringGenerarAdjunto, Int64 SmtpPort, Int32 EnableSSL, String CCO, String img)
+   en ASP.global_asax.Application_Error(Object sender, EventArgs e) en C:\Users\Administrador\Documents\bdl\pronto\prontoweb\global.asax:línea 472
+System
+__________________________

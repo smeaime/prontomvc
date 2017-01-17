@@ -2157,185 +2157,191 @@ Partial Class CDPFacturacion
 
     Sub PreviewDetalladoDeLaGeneracionEnPaso2()
 
-        ErrHandler2.WriteError(" PreviewDetalladoDeLaGeneracionEnPaso2() Empiezo")
 
 
-        If optFacturarA.SelectedValue = 4 Then
-            Dim IdFacturarselaA = BuscaIdClientePreciso(txtFacturarATerceros.Text, HFSC.Value)
-
-            If IdFacturarselaA = -1 Then
-                ErrHandler2.WriteError("Elija un cliente como tercero a facturarle")
-                'MsgBoxAlert("Elija un cliente como tercero a facturarle")
-                MsgBoxAjax(Me, "Elija un cliente como tercero a facturarle")
-                Return
-            End If
-        End If
+        'ErrHandler2.WriteError(" PreviewDetalladoDeLaGeneracionEnPaso2() Empiezo")
 
 
+        'If optFacturarA.SelectedValue = 4 Then
+        '    Dim IdFacturarselaA = BuscaIdClientePreciso(txtFacturarATerceros.Text, HFSC.Value)
 
-        '////////////////////////////////////////////////////////////////////////////////
-        '////////////////////////////////////////////////////////////////////////////////
-        '////////////////////////////////////////////////////////////////////////////////
-        '////////////////////////////////////////////////////////////////////////////////
-
-        'Dim tildadosEnPrimerPasoLongs As Generic.List(Of Integer) = ViewState("ListaIDsLongs")
-        'Dim db As New LinqCartasPorteDataContext(Encriptar(HFSC.Value))
-        '        Dim q = (From r In db.CartasDePortes _
-        '               Where tildadosEnPrimerPasoLongs.Contains(r.IdCartaDePorte) _
-        '               Select r.IdCartaDePorte, r.AgregaItemDeGastosAdministrativos).ToList
-
-        Dim oo As DataTable
-
-        Try
-            Dim l = fListaIDs()
-            oo = ExecDinamico(HFSC.Value, "select IdCartaDePorte,AgregaItemDeGastosAdministrativos  " & _
-                              " from CartasDePorte where AgregaItemDeGastosAdministrativos ='SI' AND  idCartaDePorte IN (-10," & IIf(l = "", "-10", l) & ")") ' , timeoutSegundos:=100)
-
-        Catch ex As Exception
-            'http://stackoverflow.com/questions/3641931/optimize-oracle-sql-with-large-in-clause
-            'Create an index that covers 'field' and 'value'.
-            'Place those IN values in a temp table and join on it.
-
-            ErrHandler2WriteErrorLogPronto("Al llamar a esta a veces da timeout", HFSC.Value, "")
-            ErrHandler2.WriteAndRaiseError(ex)
-        End Try
+        '    If IdFacturarselaA = -1 Then
+        '        ErrHandler2.WriteError("Elija un cliente como tercero a facturarle")
+        '        'MsgBoxAlert("Elija un cliente como tercero a facturarle")
+        '        MsgBoxAjax(Me, "Elija un cliente como tercero a facturarle")
+        '        Return
+        '    End If
+        'End If
 
 
 
+        ''////////////////////////////////////////////////////////////////////////////////
+        ''////////////////////////////////////////////////////////////////////////////////
+        ''////////////////////////////////////////////////////////////////////////////////
+        ''////////////////////////////////////////////////////////////////////////////////
 
-        Dim q = (From r In oo _
-                  Select IdCartaDePorte = CInt(iisNull(r("IdCartaDePorte"), -1)), AgregaItemDeGastosAdministrativos = CStr(iisNull(r("AgregaItemDeGastosAdministrativos"), ""))).ToList
+        ''Dim tildadosEnPrimerPasoLongs As Generic.List(Of Integer) = ViewState("ListaIDsLongs")
+        ''Dim db As New LinqCartasPorteDataContext(Encriptar(HFSC.Value))
+        ''        Dim q = (From r In db.CartasDePortes _
+        ''               Where tildadosEnPrimerPasoLongs.Contains(r.IdCartaDePorte) _
+        ''               Select r.IdCartaDePorte, r.AgregaItemDeGastosAdministrativos).ToList
 
+        'Dim oo As DataTable
 
+        'Try
+        '    Dim l = fListaIDs()
+        '    oo = ExecDinamico(HFSC.Value, "select IdCartaDePorte,AgregaItemDeGastosAdministrativos  " & _
+        '                      " from CartasDePorte where AgregaItemDeGastosAdministrativos ='SI' AND  idCartaDePorte IN (-10," & IIf(l = "", "-10", l) & ")") ' , timeoutSegundos:=100)
 
-        Dim output As String
+        'Catch ex As Exception
+        '    'http://stackoverflow.com/questions/3641931/optimize-oracle-sql-with-large-in-clause
+        '    'Create an index that covers 'field' and 'value'.
+        '    'Place those IN values in a temp table and join on it.
 
-        Dim sErr As String
-
-        Dim tablaEditadaDeFacturasParaGenerar As DataTable
-
-        Dim fechadesde As Date = iisValidSqlDate(txtFechaDesde.Text, #1/1/1753#)
-        Dim fechahasta As Date = iisValidSqlDate(txtFechaHasta.Text, #1/1/2100#)
-
-
-        ErrHandler2.WriteError(" PreviewDetalladoDeLaGeneracionEnPaso2()  Levanto las cartas de la tanda")
-
-        If False Then
-            TraerTodasQueryable(HFSC.Value, Session.SessionID)
-        ElseIf True Then
-
-            'optFacturarA.SelectedValue = 5 Then
-            'TODO: truco para que traiga TODAS las filas, sin paginar
-            ViewState("pagina") = 1
-            tablaEditadaDeFacturasParaGenerar = GetDatatableAsignacionAutomatica(HFSC.Value, ViewState("pagina"), ViewState("sesionId"), 999999, cmbPuntoVenta.Text, fechadesde, fechahasta, sErr, cmbAgruparArticulosPor.SelectedItem.Text, ViewState("filas"), ViewState("slinks"), Session.SessionID)
-
-
-        Else
-            tablaEditadaDeFacturasParaGenerar = DataTableUNION(dtDatasourcePaso2, dtViewstateRenglonesManuales)  'esta es la grilla, incluye las manuales
-        End If
+        '    ErrHandler2WriteErrorLogPronto("Al llamar a esta a veces da timeout", HFSC.Value, "")
+        '    ErrHandler2.WriteAndRaiseError(ex)
+        'End Try
 
 
 
 
-        '////////////////////////////////////////////////////////////////////////////
-        '////////////////////////////////////////////////////////////////////////////
-        '////////////////////////////////////////////////////////////////////////////
-        '////////////////////////////////////////////////////////////////////////////
-        '////////////////////////////////////////////////////////////////////////////
-        '////////////////////////////////////////////////////////////////////////////
-        '////////////////////////////////////////////////////////////////////////////
-        '////////////////////////////////////////////////////////////////////////////
-        '////////////////////////////////////////////////////////////////////////////
-        'creo que es esto lo que tarda banda
-
-        ErrHandler2.WriteError(" PreviewDetalladoDeLaGeneracionEnPaso2() Llamo a ActualizarCampoClienteSeparador")
-
-        If True Then
-            ActualizarCampoClienteSeparador(tablaEditadaDeFacturasParaGenerar, SeEstaSeparandoPorCorredor, HFSC.Value, ViewState("sesionId"))
-        End If
+        'Dim q = (From r In oo _
+        '          Select IdCartaDePorte = CInt(iisNull(r("IdCartaDePorte"), -1)), AgregaItemDeGastosAdministrativos = CStr(iisNull(r("AgregaItemDeGastosAdministrativos"), ""))).ToList
 
 
 
+        'Dim output As String
+
+        'Dim sErr As String
+
+        'Dim tablaEditadaDeFacturasParaGenerar As DataTable
+
+        'Dim fechadesde As Date = iisValidSqlDate(txtFechaDesde.Text, #1/1/1753#)
+        'Dim fechahasta As Date = iisValidSqlDate(txtFechaHasta.Text, #1/1/2100#)
 
 
-        '////////////////////////////////////////////////////////////////////////////
-        '////////////////////////////////////////////////////////////////////////////
-        '////////////////////////////////////////////////////////////////////////////
-        '////////////////////////////////////////////////////////////////////////////
-        '////////////////////////////////////////////////////////////////////////////
-        '////////////////////////////////////////////////////////////////////////////
-        '////////////////////////////////////////////////////////////////////////////
-        '////////////////////////////////////////////////////////////////////////////
-        '////////////////////////////////////////////////////////////////////////////
-        '////////////////////////////////////////////////////////////////////////////
-        '////////////////////////////////////////////////////////////////////////////
-        '////////////////////////////////////////////////////////////////////////////
+        'ErrHandler2.WriteError(" PreviewDetalladoDeLaGeneracionEnPaso2()  Levanto las cartas de la tanda")
 
-        Dim dt = tablaEditadaDeFacturasParaGenerar
+        'If False Then
+        '    TraerTodasQueryable(HFSC.Value, Session.SessionID)
+        'ElseIf True Then
+
+        '    'optFacturarA.SelectedValue = 5 Then
+        '    'TODO: truco para que traiga TODAS las filas, sin paginar
+        '    ViewState("pagina") = 1
+        '    tablaEditadaDeFacturasParaGenerar = GetDatatableAsignacionAutomatica(HFSC.Value, ViewState("pagina"), ViewState("sesionId"), 999999, cmbPuntoVenta.Text, fechadesde, fechahasta, sErr, cmbAgruparArticulosPor.SelectedItem.Text, ViewState("filas"), ViewState("slinks"), Session.SessionID)
 
 
-
-        ErrHandler2.WriteError(" PreviewDetalladoDeLaGeneracionEnPaso2() Actualizo la tarifa")
-
-
-
-        dt.Columns.Add("Total", Type.GetType("System.Decimal"))
-        For Each row In dt.Rows
-            row("Total") = row("KgNetos") * iisNull(row("TarifaFacturada"), 0) / 1000D
-
-            Dim id As Integer = iisNull(row("IdCartaDePorte"), -1)
-            Dim f = q.Find(Function(o) o.IdCartaDePorte = id)
-            If Not IsNothing(f) Then
-                If iisNull(f.AgregaItemDeGastosAdministrativos) = "SI" Then
-                    row("FacturarselaA") = " <<CON COSTO ADMIN>> " & row("FacturarselaA")
-                End If
-            End If
-        Next
-
-
-
-        'saco estas columnas que molestan en la presentacion
-        'dt.Columns.Remove("Factura")
-        'dt.Columns.Remove("idcorredorseparado")
-        dt.Columns.Remove("ColumnaTilde")
-        dt.Columns.Remove("IdCartaDePorte")
-        dt.Columns.Remove("IdArticulo")
-        dt.Columns.Remove("IdFacturarselaA")
-        dt.Columns.Remove("IdDestino")
-        dt.Columns.Remove("Confirmado")
-        dt.Columns.Remove("IdCodigoIVA")
-        dt.Columns.Remove("ClienteSeparado")
-
-        If Not EsteUsuarioPuedeVerTarifa() Then
-            dt.Columns.Remove("TarifaFacturada")
-            dt.Columns.Remove("Total")
-        End If
+        'Else
+        '    tablaEditadaDeFacturasParaGenerar = DataTableUNION(dtDatasourcePaso2, dtViewstateRenglonesManuales)  'esta es la grilla, incluye las manuales
+        'End If
 
 
 
 
-        '////////////////////////////////////////////////////////////////////////////
-        '////////////////////////////////////////////////////////////////////////////
-        '////////////////////////////////////////////////////////////////////////////
-        '////////////////////////////////////////////////////////////////////////////
-        '////////////////////////////////////////////////////////////////////////////
-        '////////////////////////////////////////////////////////////////////////////
-        '////////////////////////////////////////////////////////////////////////////
+        ''////////////////////////////////////////////////////////////////////////////
+        ''////////////////////////////////////////////////////////////////////////////
+        ''////////////////////////////////////////////////////////////////////////////
+        ''////////////////////////////////////////////////////////////////////////////
+        ''////////////////////////////////////////////////////////////////////////////
+        ''////////////////////////////////////////////////////////////////////////////
+        ''////////////////////////////////////////////////////////////////////////////
+        ''////////////////////////////////////////////////////////////////////////////
+        ''////////////////////////////////////////////////////////////////////////////
+        ''creo que es esto lo que tarda banda
+
+        'ErrHandler2.WriteError(" PreviewDetalladoDeLaGeneracionEnPaso2() Llamo a ActualizarCampoClienteSeparador")
+
+        'If True Then
+        '    ActualizarCampoClienteSeparador(tablaEditadaDeFacturasParaGenerar, SeEstaSeparandoPorCorredor, HFSC.Value, ViewState("sesionId"))
+        'End If
 
 
 
-        '/////////////////////////////////////
-        '/////////////////////////////////////
-        '/////////////////////////////////////
-        'Por ultimo, dejo que baje el excel completo sin filtrar
-        '/////////////////////////////////////
-        ErrHandler2.WriteError(" PreviewDetalladoDeLaGeneracionEnPaso2() Convierto a Excel")
-        output = DataTableToExcel(dt)
-        ErrHandler2.WriteError(" PreviewDetalladoDeLaGeneracionEnPaso2() Se descarga")
+
+
+        ''////////////////////////////////////////////////////////////////////////////
+        ''////////////////////////////////////////////////////////////////////////////
+        ''////////////////////////////////////////////////////////////////////////////
+        ''////////////////////////////////////////////////////////////////////////////
+        ''////////////////////////////////////////////////////////////////////////////
+        ''////////////////////////////////////////////////////////////////////////////
+        ''////////////////////////////////////////////////////////////////////////////
+        ''////////////////////////////////////////////////////////////////////////////
+        ''////////////////////////////////////////////////////////////////////////////
+        ''////////////////////////////////////////////////////////////////////////////
+        ''////////////////////////////////////////////////////////////////////////////
+        ''////////////////////////////////////////////////////////////////////////////
+
+        'Dim dt = tablaEditadaDeFacturasParaGenerar
+
+
+
+        'ErrHandler2.WriteError(" PreviewDetalladoDeLaGeneracionEnPaso2() Actualizo la tarifa")
+
+
+
+        'dt.Columns.Add("Total", Type.GetType("System.Decimal"))
+        'For Each row In dt.Rows
+        '    row("Total") = row("KgNetos") * iisNull(row("TarifaFacturada"), 0) / 1000D
+
+        '    Dim id As Integer = iisNull(row("IdCartaDePorte"), -1)
+        '    Dim f = q.Find(Function(o) o.IdCartaDePorte = id)
+        '    If Not IsNothing(f) Then
+        '        If iisNull(f.AgregaItemDeGastosAdministrativos) = "SI" Then
+        '            row("FacturarselaA") = " <<CON COSTO ADMIN>> " & row("FacturarselaA")
+        '        End If
+        '    End If
+        'Next
+
+
+
+        ''saco estas columnas que molestan en la presentacion
+        ''dt.Columns.Remove("Factura")
+        ''dt.Columns.Remove("idcorredorseparado")
+        'dt.Columns.Remove("ColumnaTilde")
+        'dt.Columns.Remove("IdCartaDePorte")
+        'dt.Columns.Remove("IdArticulo")
+        'dt.Columns.Remove("IdFacturarselaA")
+        'dt.Columns.Remove("IdDestino")
+        'dt.Columns.Remove("Confirmado")
+        'dt.Columns.Remove("IdCodigoIVA")
+        'dt.Columns.Remove("ClienteSeparado")
+
+        'If Not EsteUsuarioPuedeVerTarifa() Then
+        '    dt.Columns.Remove("TarifaFacturada")
+        '    dt.Columns.Remove("Total")
+        'End If
 
 
 
 
+        ''////////////////////////////////////////////////////////////////////////////
+        ''////////////////////////////////////////////////////////////////////////////
+        ''////////////////////////////////////////////////////////////////////////////
+        ''////////////////////////////////////////////////////////////////////////////
+        ''////////////////////////////////////////////////////////////////////////////
+        ''////////////////////////////////////////////////////////////////////////////
+        ''////////////////////////////////////////////////////////////////////////////
+
+
+
+        ''/////////////////////////////////////
+        ''/////////////////////////////////////
+        ''/////////////////////////////////////
+        ''Por ultimo, dejo que baje el excel completo sin filtrar
+        ''/////////////////////////////////////
+        'ErrHandler2.WriteError(" PreviewDetalladoDeLaGeneracionEnPaso2() Convierto a Excel")
+        'output = DataTableToExcel(dt)
+        'ErrHandler2.WriteError(" PreviewDetalladoDeLaGeneracionEnPaso2() Se descarga")
+
+
+
+
+        Dim output = LogicaFacturacion.PreviewDetalladoDeLaGeneracionEnPaso2(optFacturarA.SelectedValue, txtFacturarATerceros.Text, HFSC.Value,
+                                                   EsteUsuarioPuedeVerTarifa, ViewState, txtFechaDesde.Text, txtFechaHasta.Text,
+                                                   fListaIDs, Session.SessionID, cmbPuntoVenta.SelectedValue, cmbAgruparArticulosPor.SelectedItem.Text,
+                                                   SeEstaSeparandoPorCorredor)
 
 
 

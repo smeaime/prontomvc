@@ -379,7 +379,7 @@ Public Class ConsultasLinq
                                                 idCorredor, idDestinatario, idIntermediario, idRemComercial,
                                                 idArticulo, idProcedencia, idDestino, AplicarANDuORalFiltro, ModoExportacion,
                                                 fechadesde, fechahasta, puntoventa,
-                                                Nothing, Nothing, Nothing, Nothing,
+                                                Nothing, True, Nothing, Nothing, Nothing,
                                                 Nothing, Nothing, Nothing, Nothing)
                   Select xz
 
@@ -409,6 +409,8 @@ Public Class ConsultasLinq
         '          ) _
         '    And (idVendedor = -1 Or cdp.Vendedor = idVendedor) _
 
+        'And If(cdp.SubnumeroDeFacturacion, 0) <= 0
+
 
         db.Database.CommandTimeout = 300
 
@@ -428,8 +430,7 @@ Public Class ConsultasLinq
                           .OrderByDescending(Function(i) i.IdCliente).Take(1).DefaultIfEmpty()
                   Where 1 = 1 _
                         And (idSubcontr = -1 Or If(cdp.Subcontr1, dest.Subcontratista1) = idSubcontr Or If(cdp.Subcontr2, dest.Subcontratista2) = idSubcontr) _
-                        And (puntoventa = -1 Or cdp.PuntoVenta = puntoventa) _
-                        And If(cdp.SubnumeroDeFacturacion, 0) <= 0
+                        And (puntoventa = -1 Or cdp.PuntoVenta = puntoventa)
                   Select New asas() With {
                       .NumeroCartaDePorte = cdp.NumeroCartaDePorte,
                       .IdCartaDePorte = cdp.IdCartaDePorte,
@@ -619,7 +620,8 @@ Public Class ConsultasLinq
 
                 q.ToList()
 
-                Dim a = From x In q Order By x.FechaDescarga, x.IdCartaDePorte Select SqlFunctions.StringConvert(x.NumeroCartaDePorte) & " " & SqlFunctions.StringConvert(x.IdCartaDePorte) & " " & x.tarif1 & " " & x.tarif2 ' & " " & x.IdListaPreciosDetalle1 & " " & x.IdListaPreciosDetalle2
+                Dim a = (From x In q Order By x.FechaDescarga, x.IdCartaDePorte Select x.NumeroCartaDePorte, x.IdCartaDePorte, x.tarif1, x.tarif2).ToList
+                Dim b = From x In a Select x.NumeroCartaDePorte.ToString & " " & x.IdCartaDePorte.ToString & " " & x.tarif1 & " " & x.tarif2 ' & " " & x.IdListaPreciosDetalle1 & " " & x.IdListaPreciosDetalle2
 
                 ErrHandler2.WriteError(vbCrLf & Join(a.ToArray, vbCrLf))
             Catch ex As Exception
