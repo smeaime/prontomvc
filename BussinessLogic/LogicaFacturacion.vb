@@ -101,7 +101,7 @@ Public Class LogicaFacturacion
         Dim db As New LinqCartasPorteDataContext(Encriptar(SC))
 
 
-        Dim q = _
+        Dim q =
                 (From i In db.CartasDePortes Where If(i.IdFacturaImputada, 0) = 0 And If(i.IdClienteEntregador, 12454) <> 12454 And i.IdClienteEntregador <> 5822)
 
 
@@ -114,28 +114,28 @@ Public Class LogicaFacturacion
         'http://stackoverflow.com/questions/2334712/update-from-select-using-sql-server
         '--el update se va a ir haciendo parcialmente
         Dim s As String =
-        "          " & _
-        "        Update CartasDePorte  " & _
-        "set SubNumeroDefacturacion =    " & _
-        "(  " & _
-        "	select max(SubNumeroDefacturacion) from cartasdeporte as Q2   " & _
-        "		where    " & _
-        "			Q2.NumeroCartaDePorte=NumeroCartaDePorte AND   " & _
-        "			Q2.NumeroSubFijo=NumeroSubFijo AND   " & _
-        "			Q2.SubNumeroVagon=SubNumeroVagon  " & _
-        "			and Anulada<>'SI'  " & _
-        ")+1  " & _
-        "select Q.NumeroCartaDePorte,Q.NumeroSubFijo,Q.SubNumeroVagon  " & _
-        "from  cartasdeporte as Q  " & _
-        "inner join    " & _
-        "(  " & _
-        "select NumeroCartaDePorte,NumeroSubFijo,SubNumeroVagon  " & _
-        "from cartasdeporte  " & _
-        "where Anulada<>'SI'  " & _
-        "group by NumeroCartaDePorte,NumeroSubFijo,SubNumeroVagon  " & _
-        "having     COUNT(NumeroCartaDePorte) > 1  " & _
-        ") as REPES on REPES.NumeroCartaDePorte=Q.NumeroCartaDePorte AND REPES.NumeroSubFijo=Q.NumeroSubFijo AND       " & _
-        "REPES.SubNumeroVagon=Q.SubNumeroVagon  " & _
+        "          " &
+        "        Update CartasDePorte  " &
+        "set SubNumeroDefacturacion =    " &
+        "(  " &
+        "	select max(SubNumeroDefacturacion) from cartasdeporte as Q2   " &
+        "		where    " &
+        "			Q2.NumeroCartaDePorte=NumeroCartaDePorte AND   " &
+        "			Q2.NumeroSubFijo=NumeroSubFijo AND   " &
+        "			Q2.SubNumeroVagon=SubNumeroVagon  " &
+        "			and Anulada<>'SI'  " &
+        ")+1  " &
+        "select Q.NumeroCartaDePorte,Q.NumeroSubFijo,Q.SubNumeroVagon  " &
+        "from  cartasdeporte as Q  " &
+        "inner join    " &
+        "(  " &
+        "select NumeroCartaDePorte,NumeroSubFijo,SubNumeroVagon  " &
+        "from cartasdeporte  " &
+        "where Anulada<>'SI'  " &
+        "group by NumeroCartaDePorte,NumeroSubFijo,SubNumeroVagon  " &
+        "having     COUNT(NumeroCartaDePorte) > 1  " &
+        ") as REPES on REPES.NumeroCartaDePorte=Q.NumeroCartaDePorte AND REPES.NumeroSubFijo=Q.NumeroSubFijo AND       " &
+        "REPES.SubNumeroVagon=Q.SubNumeroVagon  " &
         "where SubNumeroDefacturacion =-1"
 
         If False Then
@@ -206,19 +206,19 @@ Public Class LogicaFacturacion
 
         'Esto corrige las que estásn solas y deben ponerse como originales
         'NO CORRIGE las que están mal duplicadas como 0 y -1 en el SubnumeroDeFacturacion
-        Dim q2 = (From cdp In db.CartasDePortes _
-                Where If(cdp.SubnumeroDeFacturacion, 0) >= 0 _
-                 And If(cdp.IdFacturaImputada, 0) = 0 And cdp.Anulada <> "SI" _
-                Group cdp By _
-                    numerocartadeporte = cdp.NumeroCartaDePorte, _
-                    subnumerovagon = cdp.SubnumeroVagon _
-                Into g = Group _
-                Select New With { _
-                    .numerocartadeporte = numerocartadeporte, _
-                    .subnumerovagon = subnumerovagon, _
-                    .CantCartas = g.Count, _
-                    .IdCartaDePorte = g.Sum(Function(x) x.IdCartaDePorte) _
-                }).Where(Function(i) i.CantCartas = 1).Select(Function(i) i.IdCartaDePorte).Distinct().ToList.Take(100)
+        Dim q2 = (From cdp In db.CartasDePortes
+                  Where If(cdp.SubnumeroDeFacturacion, 0) >= 0 _
+                   And If(cdp.IdFacturaImputada, 0) = 0 And cdp.Anulada <> "SI"
+                  Group cdp By
+                      numerocartadeporte = cdp.NumeroCartaDePorte,
+                      subnumerovagon = cdp.SubnumeroVagon
+                  Into g = Group
+                  Select New With {
+                      .numerocartadeporte = numerocartadeporte,
+                      .subnumerovagon = subnumerovagon,
+                      .CantCartas = g.Count,
+                      .IdCartaDePorte = g.Sum(Function(x) x.IdCartaDePorte)
+                  }).Where(Function(i) i.CantCartas = 1).Select(Function(i) i.IdCartaDePorte).Distinct().ToList.Take(100)
 
 
 
@@ -252,7 +252,7 @@ Public Class LogicaFacturacion
                     '-y si ya había una carta con -1 en subnumerofacturacion????????? 
                     '-claro... entonces no aparece en el q2... y sería la original de la que estás corrigiendo acá... entonces tendrías que ponerle =1.
                     'ccc.SubnumeroDeFacturacion = -2
-                    MandarMailDeError("Se intentará emparchar. Error en CorrectorSubnumeroFacturacion: Carta Porte " & ccc.IdCartaDePorte & " numero " & _
+                    MandarMailDeError("Se intentará emparchar. Error en CorrectorSubnumeroFacturacion: Carta Porte " & ccc.IdCartaDePorte & " numero " &
                                         ccc.NumeroCartaDePorte & " " & ccc.SubnumeroVagon & " " & ex.ToString)
                     ErrHandler2.WriteError(ex.ToString)
                     If False Then
@@ -297,34 +297,34 @@ Public Class LogicaFacturacion
             db = New LinqCartasPorteDataContext(Encriptar(SC))
 
 
-            Dim q10 = (From cdp In db.CartasDePortes _
-            Where (If(cdp.SubnumeroDeFacturacion, 0) = 0 Or If(cdp.SubnumeroDeFacturacion, 0) = -1) _
-             And cdp.Anulada <> "SI" _
-            Group cdp By _
-                numerocartadeporte = cdp.NumeroCartaDePorte, _
-                subnumerovagon = cdp.SubnumeroVagon _
-            Into g = Group _
-            Select New With { _
-                .numerocartadeporte = numerocartadeporte, _
-                .subnumerovagon = subnumerovagon, _
-                .CantCartas = g.Count _
-            }).Where(Function(i) i.CantCartas > 2).Distinct()
+            Dim q10 = (From cdp In db.CartasDePortes
+                       Where (If(cdp.SubnumeroDeFacturacion, 0) = 0 Or If(cdp.SubnumeroDeFacturacion, 0) = -1) _
+                        And cdp.Anulada <> "SI"
+                       Group cdp By
+                           numerocartadeporte = cdp.NumeroCartaDePorte,
+                           subnumerovagon = cdp.SubnumeroVagon
+                       Into g = Group
+                       Select New With {
+                           .numerocartadeporte = numerocartadeporte,
+                           .subnumerovagon = subnumerovagon,
+                           .CantCartas = g.Count
+                       }).Where(Function(i) i.CantCartas > 2).Distinct()
             ErrHandler2.WriteError("Fuera de 2da etapa: faltan " & q10.Count)
 
 
 
-            Dim q3 = (From cdp In db.CartasDePortes _
-            Where (If(cdp.SubnumeroDeFacturacion, 0) = 0 Or If(cdp.SubnumeroDeFacturacion, 0) = -1) _
-             And cdp.Anulada <> "SI" _
-            Group cdp By _
-                numerocartadeporte = cdp.NumeroCartaDePorte, _
-                subnumerovagon = cdp.SubnumeroVagon _
-            Into g = Group _
-            Select New With { _
-                .numerocartadeporte = numerocartadeporte, _
-                .subnumerovagon = subnumerovagon, _
-                .CantCartas = g.Count _
-            }).Where(Function(i) i.CantCartas = 2).Distinct()
+            Dim q3 = (From cdp In db.CartasDePortes
+                      Where (If(cdp.SubnumeroDeFacturacion, 0) = 0 Or If(cdp.SubnumeroDeFacturacion, 0) = -1) _
+                       And cdp.Anulada <> "SI"
+                      Group cdp By
+                          numerocartadeporte = cdp.NumeroCartaDePorte,
+                          subnumerovagon = cdp.SubnumeroVagon
+                      Into g = Group
+                      Select New With {
+                          .numerocartadeporte = numerocartadeporte,
+                          .subnumerovagon = subnumerovagon,
+                          .CantCartas = g.Count
+                      }).Where(Function(i) i.CantCartas = 2).Distinct()
             'y si hay mas de 2? -hay problemas... como con la 546818635, de la que hay 1,0 y -1. como el where solo filtra 2, pasan al 
             'for, y este le asigna un "1" a una, subnumero que ya existe... -no puede ser! si hago un if de un count nuevecito!!! y le asigna un
             '10 al subnumerodefac!!!
@@ -372,19 +372,19 @@ Public Class LogicaFacturacion
 
             'falta buscar las que quedaron sin un original!!!
 
-            Dim q5 = (From cdp In db.CartasDePortes _
-                    Where If(cdp.SubnumeroDeFacturacion, 0) >= 0 _
-                     And If(cdp.IdFacturaImputada, 0) = 0 _
-                    Group cdp By _
-                        numerocartadeporte = cdp.NumeroCartaDePorte, _
-                        subnumerovagon = cdp.SubnumeroVagon _
-                    Into g = Group _
-                    Select New With { _
-                        .numerocartadeporte = numerocartadeporte, _
-                        .subnumerovagon = subnumerovagon, _
-                        .CantCartas = g.Count, _
-                        .IdCartaDePorte = g.Sum(Function(x) x.IdCartaDePorte) _
-                    }).Select(Function(i) i.IdCartaDePorte).Distinct().ToList.Take(100)
+            Dim q5 = (From cdp In db.CartasDePortes
+                      Where If(cdp.SubnumeroDeFacturacion, 0) >= 0 _
+                       And If(cdp.IdFacturaImputada, 0) = 0
+                      Group cdp By
+                          numerocartadeporte = cdp.NumeroCartaDePorte,
+                          subnumerovagon = cdp.SubnumeroVagon
+                      Into g = Group
+                      Select New With {
+                          .numerocartadeporte = numerocartadeporte,
+                          .subnumerovagon = subnumerovagon,
+                          .CantCartas = g.Count,
+                          .IdCartaDePorte = g.Sum(Function(x) x.IdCartaDePorte)
+                      }).Select(Function(i) i.IdCartaDePorte).Distinct().ToList.Take(100)
 
             ErrHandler2.WriteError("Corrector2: faltan " & q5.Count)
 
@@ -398,7 +398,7 @@ Public Class LogicaFacturacion
     End Sub
 
 
-    Shared Function CartasConCopiaPendiente(q As IQueryable(Of ProntoMVC.Data.Models.CartasDePorte), ByRef mensajes As String, SC As String _
+    Shared Function CartasConCopiaPendiente(q As IQueryable(Of ProntoMVC.Data.Models.CartasDePorte), ByRef mensajes As String, SC As String
                                                     ) _
         As List(Of ProntoMVC.Data.Models.CartasDePorte) ' este se queda con los pendientes, para mostrar en informe
 
@@ -410,10 +410,10 @@ Public Class LogicaFacturacion
 
 
         If False Then
-            Dim rows = (From i In q _
-                              Where If(i.SubnumeroDeFacturacion, -1) >= 0 And _
-                                   If(i.IdFacturaImputada, 0) = 0 And _
-                                   i.IdClienteAFacturarle Is Nothing)
+            Dim rows = (From i In q
+                        Where If(i.SubnumeroDeFacturacion, -1) >= 0 And
+                             If(i.IdFacturaImputada, 0) = 0 And
+                             i.IdClienteAFacturarle Is Nothing)
         End If
 
         If q Is Nothing Then Return Nothing
@@ -423,10 +423,10 @@ Public Class LogicaFacturacion
         'db.CommandTimeout = 3 * 60
 
 
-        Dim q4 As List(Of ProntoMVC.Data.Models.CartasDePorte) = (From i As ProntoMVC.Data.Models.CartasDePorte In q _
-                          Where If(i.ConDuplicados, 0) > 0 And _
-                               If(i.IdFacturaImputada, 0) = 0 And _
-                               i.IdClienteAFacturarle Is Nothing Select i).ToList
+        Dim q4 As List(Of ProntoMVC.Data.Models.CartasDePorte) = (From i As ProntoMVC.Data.Models.CartasDePorte In q
+                                                                  Where If(i.ConDuplicados, 0) > 0 And
+                                                                       If(i.IdFacturaImputada, 0) = 0 And
+                                                                       i.IdClienteAFacturarle Is Nothing Select i).ToList
 
 
         Return q4
@@ -474,23 +474,23 @@ Public Class LogicaFacturacion
         'hacer que se llame al CorrectorSubnumeroFacturacion() 
         Try
 
-            Dim l = (From i In dt.AsEnumerable _
-                       Where If(IsNull(i("ConDuplicados")), 0, CInt(i("ConDuplicados"))) > 0 And _
-                           If(IsNull(i("IdClienteAFacturarle")), 0, CInt(i("IdClienteAFacturarle"))) <= 0 _
-                Select New With { _
-                        .IdCartaDePorte = CLng(If(i("IdCartaDePorte"), 0)), _
-                        .NumeroCartaDePorte = CLng(If(i("NumeroCartaDePorte"), 0)), _
-                        .SubnumeroVagon = If(IsNull(i("SubnumeroVagon")), 0, CInt(i("SubnumeroVagon"))), _
-                        .SubnumeroDeFacturacion = If(IsNull(i("SubnumeroDeFacturacion")), 0, CInt(i("SubnumeroDeFacturacion"))), _
-                        .ConDuplicados = If(IsNull(i("ConDuplicados")), 0, CInt(i("ConDuplicados"))) _
-                                 } _
+            Dim l = (From i In dt.AsEnumerable
+                     Where If(IsNull(i("ConDuplicados")), 0, CInt(i("ConDuplicados"))) > 0 And
+                         If(IsNull(i("IdClienteAFacturarle")), 0, CInt(i("IdClienteAFacturarle"))) <= 0
+                     Select New With {
+                             .IdCartaDePorte = CLng(If(i("IdCartaDePorte"), 0)),
+                             .NumeroCartaDePorte = CLng(If(i("NumeroCartaDePorte"), 0)),
+                             .SubnumeroVagon = If(IsNull(i("SubnumeroVagon")), 0, CInt(i("SubnumeroVagon"))),
+                             .SubnumeroDeFacturacion = If(IsNull(i("SubnumeroDeFacturacion")), 0, CInt(i("SubnumeroDeFacturacion"))),
+                             .ConDuplicados = If(IsNull(i("ConDuplicados")), 0, CInt(i("ConDuplicados")))
+                                      }
             ).ToList
 
 
-            Dim rows = (From i In dt.AsEnumerable _
-                        Where Not (If(IsNull(i("ConDuplicados")), 0, i("ConDuplicados")) > 0 And _
-                                    If(IsNull(i("IdClienteAFacturarle")), 0, CInt(i("IdClienteAFacturarle"))) <= 0 _
-                                    ) _
+            Dim rows = (From i In dt.AsEnumerable
+                        Where Not (If(IsNull(i("ConDuplicados")), 0, i("ConDuplicados")) > 0 And
+                                    If(IsNull(i("IdClienteAFacturarle")), 0, CInt(i("IdClienteAFacturarle"))) <= 0
+                                    )
                         )
             If rows.Any() Then dt = rows.CopyToDataTable() Else dt = dt.Clone
 
@@ -509,8 +509,8 @@ Public Class LogicaFacturacion
 
 
 
-            Dim o = (From i In l Select ( _
-                "<a href=""CartaDePorte.aspx?Id=" & i.IdCartaDePorte.ToString() & """ target=""_blank"">" & i.NumeroCartaDePorte.ToString() & " " & i.SubnumeroVagon.ToString() & " /" & i.SubnumeroDeFacturacion.ToString() & "</a> " _
+            Dim o = (From i In l Select (
+                "<a href=""CartaDePorte.aspx?Id=" & i.IdCartaDePorte.ToString() & """ target=""_blank"">" & i.NumeroCartaDePorte.ToString() & " " & i.SubnumeroVagon.ToString() & " /" & i.SubnumeroDeFacturacion.ToString() & "</a> "
                     )).ToList.Take(500)
 
             If o.Count > 0 Then
@@ -531,7 +531,7 @@ Public Class LogicaFacturacion
             Dim db As New LinqCartasPorteDataContext(Encriptar(SC))
 
 
-            Dim q = _
+            Dim q =
                     (From i In db.CartasDePortes Where If(i.SubnumeroDeFacturacion, 0) >= 0 And i.IdClienteAFacturarle Is Nothing _
                      And If(i.IdFacturaImputada, 0) = 0 And i.Anulada <> "SI")
 
@@ -564,19 +564,19 @@ Public Class LogicaFacturacion
 
         Try
 
-            Dim l = (From i In dt.AsEnumerable _
-                        Where If(IsNull(i("SubnumeroDeFacturacion")), 0, i("SubnumeroDeFacturacion")) <= 0 And _
-                            If(IsNull(i("IdClienteEntregador")), 12454, i("IdClienteEntregador")) <> 12454 _
-                          And If(IsNull(i("IdClienteEntregador")), 12454, i("IdClienteEntregador")) <> 5822 _
-                Select New With { _
-                        .IdCartaDePorte = CLng(i("IdCartaDePorte")), _
-                        .NumeroCartaDePorte = CLng(i("NumeroCartaDePorte")), _
-                        .SubnumeroVagon = CInt(i("SubnumeroVagon")) _
-                                 } _
+            Dim l = (From i In dt.AsEnumerable
+                     Where If(IsNull(i("SubnumeroDeFacturacion")), 0, i("SubnumeroDeFacturacion")) <= 0 And
+                         If(IsNull(i("IdClienteEntregador")), 12454, i("IdClienteEntregador")) <> 12454 _
+                       And If(IsNull(i("IdClienteEntregador")), 12454, i("IdClienteEntregador")) <> 5822
+                     Select New With {
+                             .IdCartaDePorte = CLng(i("IdCartaDePorte")),
+                             .NumeroCartaDePorte = CLng(i("NumeroCartaDePorte")),
+                             .SubnumeroVagon = CInt(i("SubnumeroVagon"))
+                                      }
             ).ToList
 
 
-            Dim rows = From i In dt.AsEnumerable _
+            Dim rows = From i In dt.AsEnumerable
                        Where Not (If(IsNull(i("IdClienteEntregador")), 12454, i("IdClienteEntregador")) <> 12454 _
                           And If(IsNull(i("IdClienteEntregador")), 12454, i("IdClienteEntregador")) <> 5822)
 
@@ -590,9 +590,9 @@ Public Class LogicaFacturacion
             'q = q.Where(Function(c) If(c.SubnumeroDeFacturacion, 0) <= 0 And l.Contains(c.IdCartaDePorte)).ToList
 
 
-            Dim o = (From i In l _
-                     Select ( _
-                "<a href=""CartaDePorte.aspx?Id=" & i.IdCartaDePorte & """ target=""_blank"">" & i.NumeroCartaDePorte.ToString() & " " & i.SubnumeroVagon.ToString() & "</a> " _
+            Dim o = (From i In l
+                     Select (
+                "<a href=""CartaDePorte.aspx?Id=" & i.IdCartaDePorte & """ target=""_blank"">" & i.NumeroCartaDePorte.ToString() & " " & i.SubnumeroVagon.ToString() & "</a> "
                     )).ToList
 
             If o.Count > 0 Then
@@ -629,7 +629,7 @@ Public Class LogicaFacturacion
 
 
 
-    Shared Function RecalcGastosAdminDeCambioDeCartaUsandoTablaTemporal(ByVal sesionId As Integer, ByRef dtCartas As DataTable, _
+    Shared Function RecalcGastosAdminDeCambioDeCartaUsandoTablaTemporal(ByVal sesionId As Integer, ByRef dtCartas As DataTable,
                                                      ByRef dtRenglonesManuales As DataTable, ByVal hfsc As String) As DataTable
 
         'Return Nothing
@@ -653,9 +653,9 @@ Public Class LogicaFacturacion
         Dim db As New LinqCartasPorteDataContext(Encriptar(hfsc))
 
         'no sé si agrupar tambien por ClienteSeparado....          ' , ClienteSeparado = i("ClienteSeparado") Into Group
-        Dim GastoAdmin = From i In db.wTempCartasPorteFacturacionAutomaticas _
-                    Where i.IdSesion = ids And i.AgregaItemDeGastosAdministrativos = "SI" _
-                         Group By i.IdFacturarselaA, i.FacturarselaA Into Group _
+        Dim GastoAdmin = From i In db.wTempCartasPorteFacturacionAutomaticas
+                         Where i.IdSesion = ids And i.AgregaItemDeGastosAdministrativos = "SI"
+                         Group By i.IdFacturarselaA, i.FacturarselaA Into Group
                          Select IdFacturarselaA, FacturarselaA, cantidadGastosAdministrativos = Group.Count
 
 
@@ -726,7 +726,7 @@ Public Class LogicaFacturacion
 
 
 
-    Shared Function RecalcGastosAdminDeCambioDeCarta(ByRef dtCartas As DataTable, _
+    Shared Function RecalcGastosAdminDeCambioDeCarta(ByRef dtCartas As DataTable,
                                                      ByRef dtRenglonesManuales As DataTable, ByVal hfsc As String) As DataTable
 
         'Return Nothing
@@ -743,9 +743,9 @@ Public Class LogicaFacturacion
 
 
         'no sé si agrupar tambien por ClienteSeparado....          ' , ClienteSeparado = i("ClienteSeparado") Into Group
-        Dim GastoAdmin = From i In dtCartas.AsEnumerable _
-                         Where iisNull(i("AgregaItemDeGastosAdministrativos"), "NO") = "SI" _
-                         Group By IdFacturarselaA = i("IdFacturarselaA"), FacturarselaA = i("FacturarselaA") Into Group _
+        Dim GastoAdmin = From i In dtCartas.AsEnumerable
+                         Where iisNull(i("AgregaItemDeGastosAdministrativos"), "NO") = "SI"
+                         Group By IdFacturarselaA = i("IdFacturarselaA"), FacturarselaA = i("FacturarselaA") Into Group
                          Select IdFacturarselaA, FacturarselaA, cantidadGastosAdministrativos = Group.Count
 
 
@@ -827,7 +827,7 @@ Public Class LogicaFacturacion
 
         Dim q = (From i In db.DetalleClientes Where i.IdCliente = idcliente _
                                                 And i.Acciones = "UsaGastosAdmin" _
-                                                And i.Contacto = "NO" _
+                                                And i.Contacto = "NO"
                                                     ).SingleOrDefault
 
         If q Is Nothing Then Return False
@@ -839,7 +839,7 @@ Public Class LogicaFacturacion
 
         Dim q = (From i In db.DetalleClientes Where i.IdCliente = idcliente _
                                                 And i.Acciones = "UsaGastosAdmin" _
-                                                And i.Contacto = "NO" _
+                                                And i.Contacto = "NO"
                                                     ).SingleOrDefault
 
         If q Is Nothing Then Return False
@@ -852,13 +852,13 @@ Public Class LogicaFacturacion
     '///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     '///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    Shared Function ListadoManualConTablaTemporal( _
-                        ByVal sc As String, ByVal sLista As String, ByVal sWHEREadicional As String, ByVal optFacturarA As Long, _
-                        ByVal txtFacturarATerceros As String, ByVal HFSC As String, ByVal txtTitular As String, ByVal txtCorredor As String, _
-                        ByVal txtDestinatario As String, ByVal txtIntermediario As String, ByVal txtRcomercial As String, _
-                        ByVal txt_AC_Articulo As String, ByVal txtProcedencia As String, ByVal txtDestino As String, ByVal txtBuscar As String, _
-                        ByVal cmbCriterioWHERE As String, ByVal cmbmodo As String, ByVal optDivisionSyngenta As String, _
-                        ByVal txtFechaDesde As String, ByVal txtFechaHasta As String, ByVal cmbPuntoVenta As String, ByVal sesionId As String, _
+    Shared Function ListadoManualConTablaTemporal(
+                        ByVal sc As String, ByVal sLista As String, ByVal sWHEREadicional As String, ByVal optFacturarA As Long,
+                        ByVal txtFacturarATerceros As String, ByVal HFSC As String, ByVal txtTitular As String, ByVal txtCorredor As String,
+                        ByVal txtDestinatario As String, ByVal txtIntermediario As String, ByVal txtRcomercial As String,
+                        ByVal txt_AC_Articulo As String, ByVal txtProcedencia As String, ByVal txtDestino As String, ByVal txtBuscar As String,
+                        ByVal cmbCriterioWHERE As String, ByVal cmbmodo As String, ByVal optDivisionSyngenta As String,
+                        ByVal txtFechaDesde As String, ByVal txtFechaHasta As String, ByVal cmbPuntoVenta As String, ByVal sesionId As String,
                         ByVal startRowIndex As Long, ByVal maximumRows As Long, ByVal txtClienteAuxiliar As String, ByRef ms As String, ByVal txtFacturarA As String, sesionIdposta As String) As DataTable
 
         Dim dt As DataTable
@@ -938,11 +938,11 @@ Public Class LogicaFacturacion
         Else
 
 
-            sJoinTablaTemporal = CartaDePorteManager.SQL_ListaDeCDPsFiltradas2("", _
-                                                 optFacturarA, txtFacturarATerceros, HFSC, txtTitular, txtCorredor, txtDestinatario, _
-                                                 txtIntermediario, txtRcomercial, txt_AC_Articulo, txtProcedencia, txtDestino, txtBuscar, _
-                                                 cmbCriterioWHERE, cmbmodo, optDivisionSyngenta, txtFechaDesde, txtFechaHasta, cmbPuntoVenta, _
-                                                  " JOIN wGrillaPersistencia as TEMPORAL ON (CDP.IdCartaDePorte = TEMPORAL.IdRenglon) " & _
+            sJoinTablaTemporal = CartaDePorteManager.SQL_ListaDeCDPsFiltradas2("",
+                                                 optFacturarA, txtFacturarATerceros, HFSC, txtTitular, txtCorredor, txtDestinatario,
+                                                 txtIntermediario, txtRcomercial, txt_AC_Articulo, txtProcedencia, txtDestino, txtBuscar,
+                                                 cmbCriterioWHERE, cmbmodo, optDivisionSyngenta, txtFechaDesde, txtFechaHasta, cmbPuntoVenta,
+                                                  " JOIN wGrillaPersistencia as TEMPORAL ON (CDP.IdCartaDePorte = TEMPORAL.IdRenglon) " &
                                                   "             AND TEMPORAL.Sesion=" & _c(sesionIdposta), txtClienteAuxiliar, txtFacturarA)
 
 
@@ -986,7 +986,7 @@ Public Class LogicaFacturacion
 
 
         'llamo otra vez al select, esta
-        s3 = "SELECT * FROM (" + sJoinTablaTemporal + ") as A " & _
+        s3 = "SELECT * FROM (" + sJoinTablaTemporal + ") as A " &
              "WHERE NumeroCartaDePorte >= @first_id " + " ORDER BY  NumeroCartaDePorte ASC, FacturarselaA ASC " & vbCrLf '+
 
 
@@ -1075,8 +1075,8 @@ Public Class LogicaFacturacion
 
     End Function
 
-    Shared Sub PreProcesos(ByRef lista As Generic.List(Of wCartasDePorte_TX_FacturacionAutomatica_con_wGrillaPersistenciaResult), _
-                           SC As String, desde As String, hasta As String, _
+    Shared Sub PreProcesos(ByRef lista As Generic.List(Of wCartasDePorte_TX_FacturacionAutomatica_con_wGrillaPersistenciaResult),
+                           SC As String, desde As String, hasta As String,
                            puntoVenta As String, ByRef slinks As Object)
 
         '* Los Movimientos que sean Embarques (solo los embarques) se facturarán como una Carta de Porte más. 
@@ -1161,7 +1161,7 @@ Public Class LogicaFacturacion
 
     End Sub
 
-    Shared Sub PostProcesos(ByRef lista As Generic.List(Of wCartasDePorte_TX_FacturacionAutomatica_con_wGrillaPersistenciaResult), _
+    Shared Sub PostProcesos(ByRef lista As Generic.List(Of wCartasDePorte_TX_FacturacionAutomatica_con_wGrillaPersistenciaResult),
                                         optFacturarA As String, agruparArticulosPor As String, sc As String)
 
 
@@ -1184,14 +1184,14 @@ Public Class LogicaFacturacion
 
 
     Shared Sub generarTablaParaModosNoAutomaticos(ByVal sc As String,
-                                                 ByRef pag As Object, _
-                                            ByRef sesionId As Object, _
-                                               ByVal sLista As String, _
-                                                  ByVal sWHEREadicional As String, ByVal optFacturarA As Long, _
-                        ByVal txtFacturarATerceros As String, ByVal HFSC As String, ByVal txtTitular As String, ByVal txtCorredor As String, _
-                        ByVal txtDestinatario As String, ByVal txtIntermediario As String, ByVal txtRcomercial As String, _
-                        ByVal txt_AC_Articulo As String, ByVal txtProcedencia As String, ByVal txtDestino As String, ByVal txtBuscar As String, _
-                        ByVal cmbCriterioWHERE As String, ByVal cmbmodo As String, ByVal optDivisionSyngenta As String, ByVal txtFechaDesde As String, ByVal txtFechaHasta As String, ByVal cmbPuntoVenta As String, _
+                                                 ByRef pag As Object,
+                                            ByRef sesionId As Object,
+                                               ByVal sLista As String,
+                                                  ByVal sWHEREadicional As String, ByVal optFacturarA As Long,
+                        ByVal txtFacturarATerceros As String, ByVal HFSC As String, ByVal txtTitular As String, ByVal txtCorredor As String,
+                        ByVal txtDestinatario As String, ByVal txtIntermediario As String, ByVal txtRcomercial As String,
+                        ByVal txt_AC_Articulo As String, ByVal txtProcedencia As String, ByVal txtDestino As String, ByVal txtBuscar As String,
+                        ByVal cmbCriterioWHERE As String, ByVal cmbmodo As String, ByVal optDivisionSyngenta As String, ByVal txtFechaDesde As String, ByVal txtFechaHasta As String, ByVal cmbPuntoVenta As String,
                           ByVal startRowIndex As Long, ByVal maximumRows As Long, ByVal txtclienteauxiliar As String, ByRef sErrores As String, txtFacturarA As String, agruparArticulosPor As String, ByRef filas As Object, ByRef slinks As Object, sesionIdposta As String)
 
 
@@ -1218,11 +1218,11 @@ Public Class LogicaFacturacion
             '          Where cdp.SubnumeroDeFacturacion > 0 And tildadosEnPrimerPasoLongs.Contains(CLng(iisNull(cdp.IdCartaOriginal, -1))) _
             '          ).ToList
 
-            Dim dtNoAutomatico As DataTable = ListadoManualConTablaTemporal(sc, sLista, "", optFacturarA, _
-                                                        txtFacturarATerceros, HFSC, txtTitular, txtCorredor, _
-                                                        txtDestinatario, txtIntermediario, txtRcomercial, txt_AC_Articulo, _
-                                                        txtProcedencia, txtDestino, txtBuscar, cmbCriterioWHERE, _
-                                                        cmbmodo, optDivisionSyngenta, txtFechaDesde, txtFechaHasta, _
+            Dim dtNoAutomatico As DataTable = ListadoManualConTablaTemporal(sc, sLista, "", optFacturarA,
+                                                        txtFacturarATerceros, HFSC, txtTitular, txtCorredor,
+                                                        txtDestinatario, txtIntermediario, txtRcomercial, txt_AC_Articulo,
+                                                        txtProcedencia, txtDestino, txtBuscar, cmbCriterioWHERE,
+                                                        cmbmodo, optDivisionSyngenta, txtFechaDesde, txtFechaHasta,
                                                         cmbPuntoVenta, sesionId, 0, 1012012, txtclienteauxiliar, sErrores, txtFacturarA, sesionIdposta)
 
 
@@ -1230,42 +1230,42 @@ Public Class LogicaFacturacion
 
 
 
-            lista = (From cdp In dtNoAutomatico.AsEnumerable _
-                      Where tildadosEnPrimerPasoLongs.Contains(If(cdp("IdCartaDePorte"), -1)) _
-                            Or (iisNull(cdp("SubnumeroDeFacturacion"), 0) > 0) _
-                            Select New wCartasDePorte_TX_FacturacionAutomatica_con_wGrillaPersistenciaResult With { _
-                                .ColumnaTilde = CInt(iisNull(cdp("ColumnaTilde"), 0)), _
-                                .IdCartaDePorte = CInt(iisNull(cdp("IdCartaDePorte"))), _
-                                .IdArticulo = CInt(iisNull(cdp("IdArticulo"))), _
-                                .NumeroCartaDePorte = iisNull(cdp("NumeroCartaDePorte"), 0), _
-                                .SubNumeroVagon = CInt(iisNull(cdp("SubNumeroVagon"), 0)), _
-                                .SubnumeroDeFacturacion = CInt(iisNull(cdp("SubnumeroDeFacturacion"), 0)), _
-                                .FechaArribo = CDate(iisNull(cdp("FechaArribo"), Today)), _
-                                .FechaDescarga = CDate(iisNull(cdp("FechaDescarga"), Today)), _
-                                .FacturarselaA = CStr(iisNull(cdp("FacturarselaA"))), _
-                                .IdFacturarselaA = CInt(iisNull(cdp("IdFacturarselaA"), -1)), _
-                                .Confirmado = iisNull(cdp("Confirmado")), _
-                                .IdCodigoIVA = CInt(iisNull(cdp("IdCodigoIVA"), -1)), _
-                                .CUIT = CStr(iisNull(cdp("CUIT"))), _
-                                .ClienteSeparado = CStr(iisNull(cdp("ClienteSeparado"))), _
-                                .TarifaFacturada = CDec(iisNull(cdp("TarifaFacturada"), 0)), _
-                                .Producto = CStr(iisNull(cdp("Producto"))), _
-                                .KgNetos = CDec(iisNull(cdp("KgNetos"))), _
-                                .IdCorredor = CInt(iisNull(cdp("IdCorredor"), -1)), _
-                                .IdTitular = CInt(iisNull(cdp("IdTitular"), -1)), _
-                                .IdIntermediario = CInt(iisNull(cdp("IdIntermediario"), -1)), _
-                                .IdRComercial = CInt(iisNull(cdp("IdRComercial"), -1)), _
-                                .IdDestinatario = CInt(iisNull(cdp("IdDestinatario"), -1)), _
-                                .Titular = CStr(iisNull(cdp("Titular"))), _
-                                .Intermediario = CStr(iisNull(cdp("Intermediario"))), _
-                                .R__Comercial = CStr(iisNull(cdp("R. Comercial"))), _
-                                .Corredor = CStr(iisNull(cdp("Corredor "))), _
-                                .Destinatario = CStr(iisNull(cdp("Destinatario"))), _
-                                .DestinoDesc = CStr(iisNull(cdp("DestinoDesc"))), _
-                                .Procedcia_ = CStr(iisNull(cdp("Procedcia."))), _
-                                .IdDestino = CInt(iisNull(cdp("IdDestino"), -1)), _
-                                .AgregaItemDeGastosAdministrativos = CStr(iisNull(cdp("AgregaItemDeGastosAdministrativos"))) _
-                            } _
+            lista = (From cdp In dtNoAutomatico.AsEnumerable
+                     Where tildadosEnPrimerPasoLongs.Contains(If(cdp("IdCartaDePorte"), -1)) _
+                           Or (iisNull(cdp("SubnumeroDeFacturacion"), 0) > 0)
+                     Select New wCartasDePorte_TX_FacturacionAutomatica_con_wGrillaPersistenciaResult With {
+                         .ColumnaTilde = CInt(iisNull(cdp("ColumnaTilde"), 0)),
+                         .IdCartaDePorte = CInt(iisNull(cdp("IdCartaDePorte"))),
+                         .IdArticulo = CInt(iisNull(cdp("IdArticulo"))),
+                         .NumeroCartaDePorte = iisNull(cdp("NumeroCartaDePorte"), 0),
+                         .SubNumeroVagon = CInt(iisNull(cdp("SubNumeroVagon"), 0)),
+                         .SubnumeroDeFacturacion = CInt(iisNull(cdp("SubnumeroDeFacturacion"), 0)),
+                         .FechaArribo = CDate(iisNull(cdp("FechaArribo"), Today)),
+                         .FechaDescarga = CDate(iisNull(cdp("FechaDescarga"), Today)),
+                         .FacturarselaA = CStr(iisNull(cdp("FacturarselaA"))),
+                         .IdFacturarselaA = CInt(iisNull(cdp("IdFacturarselaA"), -1)),
+                         .Confirmado = iisNull(cdp("Confirmado")),
+                         .IdCodigoIVA = CInt(iisNull(cdp("IdCodigoIVA"), -1)),
+                         .CUIT = CStr(iisNull(cdp("CUIT"))),
+                         .ClienteSeparado = CStr(iisNull(cdp("ClienteSeparado"))),
+                         .TarifaFacturada = CDec(iisNull(cdp("TarifaFacturada"), 0)),
+                         .Producto = CStr(iisNull(cdp("Producto"))),
+                         .KgNetos = CDec(iisNull(cdp("KgNetos"))),
+                         .IdCorredor = CInt(iisNull(cdp("IdCorredor"), -1)),
+                         .IdTitular = CInt(iisNull(cdp("IdTitular"), -1)),
+                         .IdIntermediario = CInt(iisNull(cdp("IdIntermediario"), -1)),
+                         .IdRComercial = CInt(iisNull(cdp("IdRComercial"), -1)),
+                         .IdDestinatario = CInt(iisNull(cdp("IdDestinatario"), -1)),
+                         .Titular = CStr(iisNull(cdp("Titular"))),
+                         .Intermediario = CStr(iisNull(cdp("Intermediario"))),
+                         .R__Comercial = CStr(iisNull(cdp("R. Comercial"))),
+                         .Corredor = CStr(iisNull(cdp("Corredor "))),
+                         .Destinatario = CStr(iisNull(cdp("Destinatario"))),
+                         .DestinoDesc = CStr(iisNull(cdp("DestinoDesc"))),
+                         .Procedcia_ = CStr(iisNull(cdp("Procedcia."))),
+                         .IdDestino = CInt(iisNull(cdp("IdDestino"), -1)),
+                         .AgregaItemDeGastosAdministrativos = CStr(iisNull(cdp("AgregaItemDeGastosAdministrativos")))
+                     }
                               ).ToList
 
 
@@ -1316,8 +1316,8 @@ Public Class LogicaFacturacion
 
 
             'como agregar las cartas sin automatico posible? haces un filtro de lo que vino con las Id tildadas en el primer paso, antes de filtrar por repetido. Si no vino nada, es que no hay automatico.
-            Dim IdcartasSinAutomaticoEncontrado = (From i In tildadosEnPrimerPasoLongs Select id = CStr(i) _
-                                                 Where Not IdsEnElAutomatico.Contains(CLng(id))).ToArray
+            Dim IdcartasSinAutomaticoEncontrado = (From i In tildadosEnPrimerPasoLongs Select id = CStr(i)
+                                                   Where Not IdsEnElAutomatico.Contains(CLng(id))).ToArray
 
 
             ErrHandler2.WriteError("Cartas sin automatico encontrado (pero este es el modo no automatico!!!)" & IdcartasSinAutomaticoEncontrado.Count)
@@ -1608,16 +1608,16 @@ Public Class LogicaFacturacion
 
 
     Shared Sub ReasignarParaElTitularALasCartasSinClienteAutomaticoEncontrado _
-                (ByRef lista As Generic.List(Of wCartasDePorte_TX_FacturacionAutomatica_con_wGrillaPersistenciaResult), _
-                  ByRef sesionId As Object, _
-                  sesionIdposta As String, tildadosEnPrimerPasoLongs As List(Of Integer), bNoUsarLista As Boolean, _
+                (ByRef lista As Generic.List(Of wCartasDePorte_TX_FacturacionAutomatica_con_wGrillaPersistenciaResult),
+                  ByRef sesionId As Object,
+                  sesionIdposta As String, tildadosEnPrimerPasoLongs As List(Of Integer), bNoUsarLista As Boolean,
                   IdsEnElAutomatico As List(Of Integer?), SC As String)
 
         Return
 
         'como agregar las cartas sin automatico posible? haces un filtro de lo que vino con las Id tildadas en el primer paso, antes de filtrar por repetido. Si no vino nada, es que no hay automatico.
-        Dim IdcartasSinAutomaticoEncontrado = (From i In tildadosEnPrimerPasoLongs Select id = CStr(i) _
-                                             Where Not IdsEnElAutomatico.Contains(CLng(id))).ToArray
+        Dim IdcartasSinAutomaticoEncontrado = (From i In tildadosEnPrimerPasoLongs Select id = CStr(i)
+                                               Where Not IdsEnElAutomatico.Contains(CLng(id))).ToArray
 
 
 
@@ -1764,13 +1764,13 @@ Public Class LogicaFacturacion
 
     End Function
 
-    Shared Sub generarTabla(ByVal SC As String, _
-                            ByRef pag As Object, _
-                            ByRef sesionId As Object, _
-                            ByVal iPageSize As Long, _
-                            ByVal puntoVenta As Integer, ByVal desde As DateTime, ByVal hasta As DateTime, _
-                            ByVal sLista As String, bNoUsarLista As Boolean, _
-                            optFacturarA As Long, agruparArticulosPor As String, ByRef filas As Object, _
+    Shared Sub generarTabla(ByVal SC As String,
+                            ByRef pag As Object,
+                            ByRef sesionId As Object,
+                            ByVal iPageSize As Long,
+                            ByVal puntoVenta As Integer, ByVal desde As DateTime, ByVal hasta As DateTime,
+                            ByVal sLista As String, bNoUsarLista As Boolean,
+                            optFacturarA As Long, agruparArticulosPor As String, ByRef filas As Object,
                             ByRef slinks As Object, sesionIdposta As String)
 
         ErrHandler2.WriteError("entrando en generar tabla. tanda " & sesionId.ToString)
@@ -1797,21 +1797,21 @@ Public Class LogicaFacturacion
 
             If False Then
                 'como antes ocultaba los hijos en el primer paso, en el segundo los incluia dependiendo del padre original
-                lista = (From cdp In db.wCartasDePorte_TX_FacturacionAutomatica_con_wGrillaPersistencia(CInt(puntoVenta), sesionIdposta) _
-                          Where tildadosEnPrimerPasoLongs.Contains(If(cdp.IdCartaDePorte, -1)) _
-                                Or (cdp.SubnumeroDeFacturacion > 0 And tildadosEnPrimerPasoLongs.Contains(If(cdp.IdCartaOriginal, -1))) _
+                lista = (From cdp In db.wCartasDePorte_TX_FacturacionAutomatica_con_wGrillaPersistencia(CInt(puntoVenta), sesionIdposta)
+                         Where tildadosEnPrimerPasoLongs.Contains(If(cdp.IdCartaDePorte, -1)) _
+                               Or (cdp.SubnumeroDeFacturacion > 0 And tildadosEnPrimerPasoLongs.Contains(If(cdp.IdCartaOriginal, -1)))
                           ).ToList
             Else
                 'http://bdlconsultores.dyndns.org/Consultas/Admin/verConsultas1.php?recordid=9281
                 'ahora solo incluyo lo que se tildó explícitamente en el primer paso
                 If bNoUsarLista Then
-                    lista = (From cdp In db.wCartasDePorte_TX_FacturacionAutomatica_con_wGrillaPersistencia(CInt(puntoVenta), sesionIdposta) _
-                            Where If(cdp.IdCartaOriginal, -1) <= 0 _
+                    lista = (From cdp In db.wCartasDePorte_TX_FacturacionAutomatica_con_wGrillaPersistencia(CInt(puntoVenta), sesionIdposta)
+                             Where If(cdp.IdCartaOriginal, -1) <= 0
                           ).ToList
                 Else
-                    lista = (From cdp In db.wCartasDePorte_TX_FacturacionAutomatica_con_wGrillaPersistencia(CInt(puntoVenta), sesionIdposta) _
-                              Where tildadosEnPrimerPasoLongs.Contains(If(cdp.IdCartaDePorte, -1)) _
-                              And If(cdp.IdCartaOriginal, -1) <= 0 _
+                    lista = (From cdp In db.wCartasDePorte_TX_FacturacionAutomatica_con_wGrillaPersistencia(CInt(puntoVenta), sesionIdposta)
+                             Where tildadosEnPrimerPasoLongs.Contains(If(cdp.IdCartaDePorte, -1)) _
+                             And If(cdp.IdCartaOriginal, -1) <= 0
                             ).ToList
                 End If
 
@@ -1865,8 +1865,8 @@ Public Class LogicaFacturacion
 
 
             'como agregar las cartas sin automatico posible? haces un filtro de lo que vino con las Id tildadas en el primer paso, antes de filtrar por repetido. Si no vino nada, es que no hay automatico.
-            Dim IdcartasSinAutomaticoEncontrado = (From i In tildadosEnPrimerPasoLongs Select id = CStr(i) _
-                                                 Where Not IdsEnElAutomatico.Contains(CLng(id))).ToArray
+            Dim IdcartasSinAutomaticoEncontrado = (From i In tildadosEnPrimerPasoLongs Select id = CStr(i)
+                                                   Where Not IdsEnElAutomatico.Contains(CLng(id))).ToArray
 
 
 
@@ -2162,29 +2162,29 @@ Public Class LogicaFacturacion
     End Sub
 
 
-    Shared Function GetDatatableAsignacionAutomatica(ByVal SC As String, ByRef pag As Object, _
-                                                     ByRef sesionId As Object, _
+    Shared Function GetDatatableAsignacionAutomatica(ByVal SC As String, ByRef pag As Object,
+                                                     ByRef sesionId As Object,
                                                      ByVal iPageSize As Long, ByVal puntoVenta As Integer, ByVal desde As Date, ByVal hasta As Date, ByRef sErrores As String, AgruparArticulosPor As String, ByRef filas As Object, ByRef slinks As Object, sesionIdposta As String) As DataTable
 
-        Return GetDatatableAsignacionAutomatica(SC, pag, sesionId, iPageSize, puntoVenta, desde, hasta, _
-                                                     "", "", 0, _
-                                                    "", "", "", "", _
-                                                    "", "", "", "", _
+        Return GetDatatableAsignacionAutomatica(SC, pag, sesionId, iPageSize, puntoVenta, desde, hasta,
+                                                     "", "", 0,
+                                                    "", "", "", "",
+                                                    "", "", "", "",
                                                     "", "", "", "", "", "", 0, 0, "", sErrores, "", AgruparArticulosPor, filas, slinks, sesionIdposta)
 
 
     End Function
 
     Shared Function GetDatatableAsignacionAutomatica(ByVal SC As String,
-                                                     ByRef pag As Object, _
+                                                     ByRef pag As Object,
                                                      ByRef sesionId As Object,
-                                                     ByVal iPageSize As Long, _
-                        ByVal puntoVenta As Integer, ByVal desde As Date, ByVal hasta As Date, _
-                        ByVal sLista As String, ByVal sWHEREadicional As String, ByVal optFacturarA As Long, _
-                        ByVal txtFacturarATerceros As String, ByVal HFSC As String, ByVal txtTitular As String, ByVal txtCorredor As String, _
-                        ByVal txtDestinatario As String, ByVal txtIntermediario As String, ByVal txtRcomercial As String, _
-                        ByVal txt_AC_Articulo As String, ByVal txtProcedencia As String, ByVal txtDestino As String, ByVal txtBuscar As String, _
-                        ByVal cmbCriterioWHERE As String, ByVal cmbmodo As String, ByVal optDivisionSyngenta As String, _
+                                                     ByVal iPageSize As Long,
+                        ByVal puntoVenta As Integer, ByVal desde As Date, ByVal hasta As Date,
+                        ByVal sLista As String, ByVal sWHEREadicional As String, ByVal optFacturarA As Long,
+                        ByVal txtFacturarATerceros As String, ByVal HFSC As String, ByVal txtTitular As String, ByVal txtCorredor As String,
+                        ByVal txtDestinatario As String, ByVal txtIntermediario As String, ByVal txtRcomercial As String,
+                        ByVal txt_AC_Articulo As String, ByVal txtProcedencia As String, ByVal txtDestino As String, ByVal txtBuscar As String,
+                        ByVal cmbCriterioWHERE As String, ByVal cmbmodo As String, ByVal optDivisionSyngenta As String,
                           ByVal startRowIndex As Long, ByVal maximumRows As Long, ByVal txtPopClienteAuxiliar As String, ByRef sErrores As String, txtFacturarA As String, agruparArticulosPor As String, ByRef filas As Object, ByRef slinks As Object, sesionIdposta As String) As DataTable
 
         'Si una Carta de Porte no tiene ningún cliente que tenga marcado en que si aparece en 
@@ -2218,15 +2218,15 @@ Public Class LogicaFacturacion
             Dim ids As Integer = sesionId ' Val(ViewState("sesionId"))
             If sesionId <= 0 Then
                 If optFacturarA = 5 Then
-                    generarTabla(SC, pag, sesionId, iPageSize, puntoVenta, desde, hasta, _
+                    generarTabla(SC, pag, sesionId, iPageSize, puntoVenta, desde, hasta,
                                  sLista, False, optFacturarA, agruparArticulosPor, filas, slinks, sesionIdposta)
                 Else
-                    generarTablaParaModosNoAutomaticos(SC, pag, sesionId, sLista, "", optFacturarA, _
-                                                        txtFacturarATerceros, HFSC, txtTitular, txtCorredor, _
-                                                        txtDestinatario, txtIntermediario, txtRcomercial, txt_AC_Articulo, _
-                                                        txtProcedencia, txtDestino, txtBuscar, cmbCriterioWHERE, _
-                                                        cmbmodo, optDivisionSyngenta, desde, hasta, _
-                                                         puntoVenta, startRowIndex, maximumRows, txtPopClienteAuxiliar, sErrores, _
+                    generarTablaParaModosNoAutomaticos(SC, pag, sesionId, sLista, "", optFacturarA,
+                                                        txtFacturarATerceros, HFSC, txtTitular, txtCorredor,
+                                                        txtDestinatario, txtIntermediario, txtRcomercial, txt_AC_Articulo,
+                                                        txtProcedencia, txtDestino, txtBuscar, cmbCriterioWHERE,
+                                                        cmbmodo, optDivisionSyngenta, desde, hasta,
+                                                         puntoVenta, startRowIndex, maximumRows, txtPopClienteAuxiliar, sErrores,
                                                           txtFacturarA, agruparArticulosPor, filas, slinks, sesionIdposta)
                 End If
                 'sesionId = ViewState("sesionId")
@@ -2239,16 +2239,16 @@ Public Class LogicaFacturacion
 
 
             Dim db As New LinqCartasPorteDataContext(Encriptar(SC))
-            Dim o = (From i In db.wTempCartasPorteFacturacionAutomaticas _
-                        Where i.IdSesion = ids _
-                        Order By CStr(IIf(i.TarifaFacturada = 0, " ", "")) & CStr(i.FacturarselaA) & CStr(i.NumeroCartaDePorte.ToString) Ascending _
-                        Select i.ColumnaTilde, i.IdCartaDePorte, i.IdArticulo, i.NumeroCartaDePorte, i.SubNumeroVagon, i.SubnumeroDeFacturacion, _
-                                i.FechaArribo, i.FechaDescarga, i.FacturarselaA, i.IdFacturarselaA, i.Confirmado, i.IdCodigoIVA, _
-                                i.CUIT, i.ClienteSeparado, i.TarifaFacturada, i.Producto, i.KgNetos, i.IdCorredor, i.IdTitular, _
-                                i.IdIntermediario, i.IdRComercial, _
-                                idDestinatario = 0, i.Titular, Intermediario = "", i.RComercial, i.Corredor, i.Destinatario, _
-                                i.DestinoDesc, i.Procedcia, i.IdDestino, i.IdTempCartasPorteFacturacionAutomatica, i.AgregaItemDeGastosAdministrativos _
-                        Skip (pag - 1) * iPageSize Take iPageSize _
+            Dim o = (From i In db.wTempCartasPorteFacturacionAutomaticas
+                     Where i.IdSesion = ids
+                     Order By CStr(IIf(i.TarifaFacturada = 0, " ", "")) & CStr(i.FacturarselaA) & CStr(i.NumeroCartaDePorte.ToString) Ascending
+                     Select i.ColumnaTilde, i.IdCartaDePorte, i.IdArticulo, i.NumeroCartaDePorte, i.SubNumeroVagon, i.SubnumeroDeFacturacion,
+                             i.FechaArribo, i.FechaDescarga, i.FacturarselaA, i.IdFacturarselaA, i.Confirmado, i.IdCodigoIVA,
+                             i.CUIT, i.ClienteSeparado, i.TarifaFacturada, i.Producto, i.KgNetos, i.IdCorredor, i.IdTitular,
+                             i.IdIntermediario, i.IdRComercial,
+                             idDestinatario = 0, i.Titular, Intermediario = "", i.RComercial, i.Corredor, i.Destinatario,
+                             i.DestinoDesc, i.Procedcia, i.IdDestino, i.IdTempCartasPorteFacturacionAutomatica, i.AgregaItemDeGastosAdministrativos
+                     Skip (pag - 1) * iPageSize Take iPageSize
                     ).ToList
 
             db = Nothing
@@ -2309,19 +2309,19 @@ Public Class LogicaFacturacion
     '/////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-    Shared Function GetIQueryableAsignacionAutomatica(ByVal SC As String, _
-                                                     ByRef pag As Object, _
+    Shared Function GetIQueryableAsignacionAutomatica(ByVal SC As String,
+                                                     ByRef pag As Object,
                                                      ByRef sesionId As Object,
-                                    ByVal iPageSize As Long, ByVal puntoVenta As Integer, ByVal desde As Date, ByVal hasta As Date, _
-                       ByVal sLista As String, ByVal sWHEREadicional As String, ByVal optFacturarA As Long, _
-                       ByVal txtFacturarATerceros As String, ByVal HFSC As String, ByVal txtTitular As String, ByVal txtCorredor As String, _
-                       ByVal txtDestinatario As String, ByVal txtIntermediario As String, ByVal txtRcomercial As String, _
-                       ByVal txt_AC_Articulo As String, ByVal txtProcedencia As String, ByVal txtDestino As String, ByVal txtBuscar As String, _
-                       ByVal cmbCriterioWHERE As String, ByVal cmbmodo As String, ByVal optDivisionSyngenta As String, ByVal txtFechaDesde As String, ByVal txtFechaHasta As String, ByVal cmbPuntoVenta As String, _
+                                    ByVal iPageSize As Long, ByVal puntoVenta As Integer, ByVal desde As Date, ByVal hasta As Date,
+                       ByVal sLista As String, ByVal sWHEREadicional As String, ByVal optFacturarA As Long,
+                       ByVal txtFacturarATerceros As String, ByVal HFSC As String, ByVal txtTitular As String, ByVal txtCorredor As String,
+                       ByVal txtDestinatario As String, ByVal txtIntermediario As String, ByVal txtRcomercial As String,
+                       ByVal txt_AC_Articulo As String, ByVal txtProcedencia As String, ByVal txtDestino As String, ByVal txtBuscar As String,
+                       ByVal cmbCriterioWHERE As String, ByVal cmbmodo As String, ByVal optDivisionSyngenta As String, ByVal txtFechaDesde As String, ByVal txtFechaHasta As String, ByVal cmbPuntoVenta As String,
                         ByVal startRowIndex As Long, ByVal maximumRows As Long, ByVal txtPopClienteAuxiliar As String, ByRef sErrores As String, txtFacturarA As String, ByRef filas As Object, ByRef slinks As Object _
-                        , bNoUsarLista As Boolean, _
+                        , bNoUsarLista As Boolean,
                          referenciaDB As LinqCartasPorteDataContext _
-                            , agruparArticulosPor As String, sesionIdposta As String _
+                            , agruparArticulosPor As String, sesionIdposta As String
                         ) As IQueryable(Of wTempCartasPorteFacturacionAutomatica)
 
         'Si una Carta de Porte no tiene ningún cliente que tenga marcado en que si aparece en 
@@ -2344,11 +2344,11 @@ Public Class LogicaFacturacion
                 If optFacturarA = 5 Then
                     generarTabla(SC, pag, sesionId, iPageSize, puntoVenta, desde, hasta, sLista, bNoUsarLista, optFacturarA, agruparArticulosPor, filas, slinks, sesionIdposta)
                 Else
-                    generarTablaParaModosNoAutomaticos(SC, pag, sesionId, sLista, "", optFacturarA, _
-                                                        txtFacturarATerceros, HFSC, txtTitular, txtCorredor, _
-                                                        txtDestinatario, txtIntermediario, txtRcomercial, txt_AC_Articulo, _
-                                                        txtProcedencia, txtDestino, txtBuscar, cmbCriterioWHERE, _
-                                                        cmbmodo, optDivisionSyngenta, txtFechaDesde, txtFechaHasta, _
+                    generarTablaParaModosNoAutomaticos(SC, pag, sesionId, sLista, "", optFacturarA,
+                                                        txtFacturarATerceros, HFSC, txtTitular, txtCorredor,
+                                                        txtDestinatario, txtIntermediario, txtRcomercial, txt_AC_Articulo,
+                                                        txtProcedencia, txtDestino, txtBuscar, cmbCriterioWHERE,
+                                                        cmbmodo, optDivisionSyngenta, txtFechaDesde, txtFechaHasta,
                                                         cmbPuntoVenta, startRowIndex, maximumRows, txtPopClienteAuxiliar, sErrores, txtFacturarA, agruparArticulosPor, filas, slinks, sesionIdposta)
                 End If
                 'ids = ViewState("sesionId")
@@ -2362,11 +2362,11 @@ Public Class LogicaFacturacion
             End If
 
 
-            Dim o As IQueryable(Of wTempCartasPorteFacturacionAutomatica) = (From i In db.wTempCartasPorteFacturacionAutomaticas _
-                        Where i.IdSesion = ids _
-                        Order By CStr(IIf(i.TarifaFacturada = 0, " ", "")) & CStr(i.FacturarselaA) & CStr(i.NumeroCartaDePorte.ToString) Ascending _
-                        Select i _
-                        Skip (pag - 1) * iPageSize Take iPageSize _
+            Dim o As IQueryable(Of wTempCartasPorteFacturacionAutomatica) = (From i In db.wTempCartasPorteFacturacionAutomaticas
+                                                                             Where i.IdSesion = ids
+                                                                             Order By CStr(IIf(i.TarifaFacturada = 0, " ", "")) & CStr(i.FacturarselaA) & CStr(i.NumeroCartaDePorte.ToString) Ascending
+                                                                             Select i
+                                                                             Skip (pag - 1) * iPageSize Take iPageSize
                     )
 
             If referenciaDB Is Nothing Then db = Nothing
@@ -2420,10 +2420,10 @@ Public Class LogicaFacturacion
 
         Dim db As New LinqCartasPorteDataContext(Encriptar(sc))
 
-        Dim oo = (From i In db.wTempCartasPorteFacturacionAutomaticas _
-                 Join c In db.linqClientes On i.IdFacturarselaA Equals c.IdCliente _
-                 Where i.IdSesion = sesion _
-                 Select If(i.IdCartaDePorte, -1) _
+        Dim oo = (From i In db.wTempCartasPorteFacturacionAutomaticas
+                  Join c In db.linqClientes On i.IdFacturarselaA Equals c.IdCliente
+                  Where i.IdSesion = sesion
+                  Select If(i.IdCartaDePorte, -1)
                ).ToList
         '                Select i.IdCartaDePorte, c.RazonSocial, c.ExpresionRegularNoAgruparFacturasConEstosVendedores _
 
@@ -2542,8 +2542,8 @@ Public Class LogicaFacturacion
             Dim idLDC = 2775 ' ldc argentina? 'BuscaIdClientePreciso("LDC SEMILLAS", SC)
             Dim idA_C_A = 10 'BuscaIdClientePreciso("A.C.A", SC)
 
-            Dim q = (From i In listaDeCartasPorteAFacturar _
-                     Where i.IdFacturarselaA = idSyngentaAGRO Or i.IdFacturarselaA = idLDC Or i.IdFacturarselaA = idA_C_A _
+            Dim q = (From i In listaDeCartasPorteAFacturar
+                     Where i.IdFacturarselaA = idSyngentaAGRO Or i.IdFacturarselaA = idLDC Or i.IdFacturarselaA = idA_C_A
                      Select i.IdCartaDePorte, i.IdFacturarselaA)
 
             For Each c In q
@@ -2696,14 +2696,14 @@ Public Class LogicaFacturacion
 
 
 
-        Dim q = (From i In listaDeCartasPorteAFacturar _
-              Group By i.IdFacturarselaA, i.ClienteSeparado _
-              Into g = Group _
-                Select New With { _
-                    IdFacturarselaA, _
-                    ClienteSeparado, _
-                    .Monto = g.Sum(Function(x) x.KgNetos * x.TarifaFacturada / 1000 * 1.21) _
-                } _
+        Dim q = (From i In listaDeCartasPorteAFacturar
+                 Group By i.IdFacturarselaA, i.ClienteSeparado
+                 Into g = Group
+                 Select New With {
+                     IdFacturarselaA,
+                     ClienteSeparado,
+                     .Monto = g.Sum(Function(x) x.KgNetos * x.TarifaFacturada / 1000 * 1.21)
+                 }
             ).ToList()
 
         Dim q2 = q.Where(Function(x) x.Monto > montomax And (clientescontrolados.Contains(x.IdFacturarselaA) Or True)).ToList()
@@ -2792,14 +2792,14 @@ Public Class LogicaFacturacion
 
 
 
-        Dim q = (From i In listaDeCartasPorteAFacturar _
-              Group By i.IdFacturarselaA, i.ClienteSeparado _
-              Into g = Group _
-                Select New With { _
-                    IdFacturarselaA, _
-                    ClienteSeparado, _
-                    .Monto = g.Sum(Function(x) x.KgNetos * x.TarifaFacturada / 1000 * 1.21) _
-                } _
+        Dim q = (From i In listaDeCartasPorteAFacturar
+                 Group By i.IdFacturarselaA, i.ClienteSeparado
+                 Into g = Group
+                 Select New With {
+                     IdFacturarselaA,
+                     ClienteSeparado,
+                     .Monto = g.Sum(Function(x) x.KgNetos * x.TarifaFacturada / 1000 * 1.21)
+                 }
             ).ToList()
 
         Dim q2 = q.Where(Function(x) x.Monto > montomax And (clientescontrolados.Contains(x.IdFacturarselaA) Or True)).ToList()
@@ -2861,8 +2861,8 @@ Public Class LogicaFacturacion
 
 
     Shared Sub EmparcharClienteSeparadoParaFacturasQueSuperanCantidadDeRenglones _
-            (ByRef listaDeCartasPorteAFacturar As Generic.List(Of wCartasDePorte_TX_FacturacionAutomatica_con_wGrillaPersistenciaResult), _
-              ByVal optFacturarA As Integer, ByVal agruparArticulosPor As String, ByVal SC As String, _
+            (ByRef listaDeCartasPorteAFacturar As Generic.List(Of wCartasDePorte_TX_FacturacionAutomatica_con_wGrillaPersistenciaResult),
+              ByVal optFacturarA As Integer, ByVal agruparArticulosPor As String, ByVal SC As String,
                                             ByVal sBusqueda As String)
 
 
@@ -2876,13 +2876,13 @@ Public Class LogicaFacturacion
         'clientescontrolados.Add(2871) ' grobo
 
 
-        Dim q = (From i In listaDeCartasPorteAFacturar _
-              Group By i.IdFacturarselaA, i.ClienteSeparado _
-              Into g = Group _
-                Select New With { _
-                    IdFacturarselaA, _
-                    ClienteSeparado _
-                } _
+        Dim q = (From i In listaDeCartasPorteAFacturar
+                 Group By i.IdFacturarselaA, i.ClienteSeparado
+                 Into g = Group
+                 Select New With {
+                     IdFacturarselaA,
+                     ClienteSeparado
+                 }
             ).ToList()
 
         'Dim q2 = q.Where(Function(x) x.Monto > montomax And (clientescontrolados.Contains(x.IdFacturarselaA) Or True)).ToList()
@@ -2914,16 +2914,16 @@ Public Class LogicaFacturacion
 
 
 
-            Dim lotecito As List(Of CartaDePorte) = (From c In listaDeCartasPorteAFacturar _
-                        Where c.IdFacturarselaA = cli And c.ClienteSeparado = clisep _
-                        Select New CartaDePorte With { _
-                            .IdArticulo = If(c.IdArticulo, -1) _
-                             , .Destino = If(c.IdDestino, -1), _
-                       .Titular = If(c.IdTitular, -1), _
-                   .Entregador = If(c.IdDestinatario, -1), _
-                   .NetoFinalIncluyendoMermas = c.KgNetos, _
-               .TarifaCobradaAlCliente = c.TarifaFacturada _
-                        } _
+            Dim lotecito As List(Of CartaDePorte) = (From c In listaDeCartasPorteAFacturar
+                                                     Where c.IdFacturarselaA = cli And c.ClienteSeparado = clisep
+                                                     Select New CartaDePorte With {
+                                                         .IdArticulo = If(c.IdArticulo, -1) _
+                                                          , .Destino = If(c.IdDestino, -1),
+                                                    .Titular = If(c.IdTitular, -1),
+                                                .Entregador = If(c.IdDestinatario, -1),
+                                                .NetoFinalIncluyendoMermas = c.KgNetos,
+                                            .TarifaCobradaAlCliente = c.TarifaFacturada
+                                                     }
                      ).ToList
 
             Dim grupo As IEnumerable(Of grup) = AgruparItemsDeLaFactura(lotecito, optFacturarA, agruparArticulosPor, SC, sBusqueda)
@@ -2935,7 +2935,7 @@ Public Class LogicaFacturacion
 
                     Dim g = grupo(n)
 
-                    Dim carts = From c In listaDeCartasPorteAFacturar _
+                    Dim carts = From c In listaDeCartasPorteAFacturar
                                 Where (g.IdArticulo = -1 Or c.IdArticulo = g.IdArticulo) _
                                     And (g.Destino = -1 Or c.IdDestino = g.Destino) _
                                     And (g.Entregador = -1 Or c.IdDestinatario = g.Entregador) _
@@ -2980,10 +2980,10 @@ Public Class LogicaFacturacion
         Try
             Dim sss = (From i In listaDeCartasPorteAFacturar Select i.IdCartaDePorte, i.IdFacturarselaA).ToList
 
-            Dim CartasAFacturarleAlCorredor = (From i In sss _
-                                            Join c In db.linqClientes On c.IdCliente Equals i.IdFacturarselaA _
-                                            Where c.SeLeDerivaSuFacturaAlCorredorDeLaCarta = "SI" _
-                                            Select i.IdCartaDePorte, i.IdFacturarselaA).ToList ', c.SeLeDerivaSuFacturaAlCorredorDeLaCarta
+            Dim CartasAFacturarleAlCorredor = (From i In sss
+                                               Join c In db.linqClientes On c.IdCliente Equals i.IdFacturarselaA
+                                               Where c.SeLeDerivaSuFacturaAlCorredorDeLaCarta = "SI"
+                                               Select i.IdCartaDePorte, i.IdFacturarselaA).ToList ', c.SeLeDerivaSuFacturaAlCorredorDeLaCarta
 
             For Each c In CartasAFacturarleAlCorredor
                 Dim lambdaTemp = c
@@ -3026,19 +3026,19 @@ Public Class LogicaFacturacion
         Dim db As New LinqCartasPorteDataContext(Encriptar(sc))
 
         ' Dim q = From i In db.CartasPorteMovimientos
-        Dim embarques = From i In db.CartasPorteMovimientos _
-                        Join c In db.linqClientes On c.IdCliente Equals i.IdExportadorOrigen _
-                          Where ( _
-                                i.Tipo = 4 _
-                                And If(i.Anulada, "NO") <> "SI" _
-                                And (i.IdStock Is Nothing Or i.IdStock = pventa Or i.IdStock = 0 Or pventa = 0) _
-                                And i.FechaIngreso >= FechaDesde And i.FechaIngreso <= FechaHasta _
-                                And (i.IdExportadorOrigen = idTitular Or idTitular = -1) _
-                                And (idQueContenga = -1 Or i.IdExportadorOrigen = idQueContenga Or i.IdExportadorDestino = idQueContenga) _
-                                And (i.IdFacturaImputada <= 0 Or i.IdFacturaImputada Is Nothing) _
-                                And i.FechaIngreso >= FechaDesde And i.FechaIngreso <= FechaHasta _
-                           ) _
-                        Select i.IdCDPMovimiento, Producto = NombreArticulo(sc, i.IdArticulo), i.Cantidad, c.RazonSocial, _
+        Dim embarques = From i In db.CartasPorteMovimientos
+                        Join c In db.linqClientes On c.IdCliente Equals i.IdExportadorOrigen
+                        Where (
+                              i.Tipo = 4 _
+                              And If(i.Anulada, "NO") <> "SI" _
+                              And (i.IdStock Is Nothing Or i.IdStock = pventa Or i.IdStock = 0 Or pventa = 0) _
+                              And i.FechaIngreso >= FechaDesde And i.FechaIngreso <= FechaHasta _
+                              And (i.IdExportadorOrigen = idTitular Or idTitular = -1) _
+                              And (idQueContenga = -1 Or i.IdExportadorOrigen = idQueContenga Or i.IdExportadorDestino = idQueContenga) _
+                              And (i.IdFacturaImputada <= 0 Or i.IdFacturaImputada Is Nothing) _
+                              And i.FechaIngreso >= FechaDesde And i.FechaIngreso <= FechaHasta
+                         )
+                        Select i.IdCDPMovimiento, Producto = NombreArticulo(sc, i.IdArticulo), i.Cantidad, c.RazonSocial,
                                 i.IdArticulo, i.FechaIngreso, i.IdExportadorOrigen, i.Puerto, i.Vapor
 
         Return embarques
@@ -3074,14 +3074,14 @@ Public Class LogicaFacturacion
                            )
                         Select i
 
-            '                                And (i.IdFacturaImputada <= 0 Or i.IdFacturaImputada Is Nothing) _
+        '                                And (i.IdFacturaImputada <= 0 Or i.IdFacturaImputada Is Nothing) _
 
 
 
 
 
 
-            Return embarques
+        Return embarques
     End Function
 
 
@@ -3262,16 +3262,16 @@ Public Class LogicaFacturacion
 
 
 
-        Dim cartasrepetidas = (From i In l _
-                Group By Id = i.IdCartaDePorte, _
-                                 Numero = i.NumeroCartaDePorte, _
-                         SubnumeroVagon = i.SubNumeroVagon, _
-                         SubNumeroFacturacion = i.SubnumeroDeFacturacion _
-                    Into Group _
-                Where iisNull(SubNumeroFacturacion, 0) < 1 _
-                         And Group.Count() > 1 _
-                         And Id <> IDEMBARQUES _
-                Select Id).ToList ' new with {.id = Id , .Numero = Numero, .SubnumeroVagon = SubnumeroVagon}).ToList
+        Dim cartasrepetidas = (From i In l
+                               Group By Id = i.IdCartaDePorte,
+                                                Numero = i.NumeroCartaDePorte,
+                                        SubnumeroVagon = i.SubNumeroVagon,
+                                        SubNumeroFacturacion = i.SubnumeroDeFacturacion
+                                   Into Group
+                               Where iisNull(SubNumeroFacturacion, 0) < 1 _
+                                        And Group.Count() > 1 _
+                                        And Id <> IDEMBARQUES
+                               Select Id).ToList ' new with {.id = Id , .Numero = Numero, .SubnumeroVagon = SubnumeroVagon}).ToList
 
         Dim sErr As String
 
@@ -3292,7 +3292,7 @@ Public Class LogicaFacturacion
         Return LasNoRepetidas
     End Function
 
-    Shared Function MostrarConflictivasEnPaginaAparte(ByVal l As Generic.List(Of wCartasDePorte_TX_FacturacionAutomatica_con_wGrillaPersistenciaResult), _
+    Shared Function MostrarConflictivasEnPaginaAparte(ByVal l As Generic.List(Of wCartasDePorte_TX_FacturacionAutomatica_con_wGrillaPersistenciaResult),
                                                       ByVal sc As String) As String
 
         'http://msdn.microsoft.com/en-us/vstudio/bb737926#grpbysum
@@ -3310,16 +3310,16 @@ Public Class LogicaFacturacion
 
         ErrHandler2.WriteError("punto 1 en MostrarConflictivasEnPaginaAparte .")
 
-        Dim cartasrepetidasaa = (From i In l _
-                Group By Id = i.IdCartaDePorte, _
-                                 Numero = i.NumeroCartaDePorte, _
-                         SubnumeroVagon = i.SubNumeroVagon, _
-                         SubNumeroFacturacion = i.SubnumeroDeFacturacion _
-                    Into Group _
-                Where iisNull(SubNumeroFacturacion, 0) < 1 _
-                         And Group.Count() > 1 _
-                         And Id <> IDEMBARQUES _
-                Select Id, link = Group.SelectMany(Function(x) x.FacturarselaA) _
+        Dim cartasrepetidasaa = (From i In l
+                                 Group By Id = i.IdCartaDePorte,
+                                                  Numero = i.NumeroCartaDePorte,
+                                          SubnumeroVagon = i.SubNumeroVagon,
+                                          SubNumeroFacturacion = i.SubnumeroDeFacturacion
+                                     Into Group
+                                 Where iisNull(SubNumeroFacturacion, 0) < 1 _
+                                          And Group.Count() > 1 _
+                                          And Id <> IDEMBARQUES
+                                 Select Id, link = Group.SelectMany(Function(x) x.FacturarselaA)
                 ).ToList ' new with {.id = Id , .Numero = Numero, .SubnumeroVagon = SubnumeroVagon}).ToList
 
         Dim sErr As String
@@ -3333,10 +3333,10 @@ Public Class LogicaFacturacion
         If True Then
             ErrHandler2.WriteError("punto 2 en MostrarConflictivasEnPaginaAparte .")
 
-            Dim cartasconflic = (From i In l _
-                         Where cartasrepetidas.Contains(i.IdCartaDePorte) _
-                         Select i.IdCartaDePorte, i.NumeroCartaDePorte, i.SubNumeroVagon, i.IdFacturarselaA, i.FacturarselaA _
-                         Order By NumeroCartaDePorte, SubNumeroVagon, IdFacturarselaA Ascending).ToList
+            Dim cartasconflic = (From i In l
+                                 Where cartasrepetidas.Contains(i.IdCartaDePorte)
+                                 Select i.IdCartaDePorte, i.NumeroCartaDePorte, i.SubNumeroVagon, i.IdFacturarselaA, i.FacturarselaA
+                                 Order By NumeroCartaDePorte, SubNumeroVagon, IdFacturarselaA Ascending).ToList
 
 
 
@@ -3470,16 +3470,16 @@ Public Class LogicaFacturacion
 
         Err.Raise("No podes... en la tabla temporal solo quedan las que son válidas")
 
-        Dim cartasrepetidas = (From i In l _
-                Group By Id = i.IdCartaDePorte, _
-                                 Numero = i.NumeroCartaDePorte, _
-                         SubnumeroVagon = i.SubNumeroVagon, _
-                         SubNumeroFacturacion = i.SubnumeroDeFacturacion _
-                    Into Group _
-                Where iisNull(SubNumeroFacturacion, 0) < 1 _
-                         And Group.Count() > 1 _
-                         And Id <> IDEMBARQUES _
-                Select Id).ToList ' new with {.id = Id , .Numero = Numero, .SubnumeroVagon = SubnumeroVagon}).ToList
+        Dim cartasrepetidas = (From i In l
+                               Group By Id = i.IdCartaDePorte,
+                                                Numero = i.NumeroCartaDePorte,
+                                        SubnumeroVagon = i.SubNumeroVagon,
+                                        SubNumeroFacturacion = i.SubnumeroDeFacturacion
+                                   Into Group
+                               Where iisNull(SubNumeroFacturacion, 0) < 1 _
+                                        And Group.Count() > 1 _
+                                        And Id <> IDEMBARQUES
+                               Select Id).ToList ' new with {.id = Id , .Numero = Numero, .SubnumeroVagon = SubnumeroVagon}).ToList
 
         Dim sErr As String
 
@@ -3517,11 +3517,11 @@ Public Class LogicaFacturacion
 
     Function TraerSubconjuntoDeRepetidosAutomaticos(ByVal dt As DataTable) As IEnumerable
 
-        Dim q = From i In dt.AsEnumerable() _
-                Group By Numero = i("NumeroCartaDePorte"), _
-                         IdFacturarselaAExplicito = i("IdFacturarselaA") Into Group _
+        Dim q = From i In dt.AsEnumerable()
+                Group By Numero = i("NumeroCartaDePorte"),
+                         IdFacturarselaAExplicito = i("IdFacturarselaA") Into Group
                 Where IdFacturarselaAExplicito <= 0 _
-                         And Group.Count() > 1 _
+                         And Group.Count() > 1
                 Select New With {.Numero = Numero, .Count = Group.Count()}
 
         Return q 'como devuelve un anonimous type, despues no le puedo llamar el contain
@@ -3530,11 +3530,11 @@ Public Class LogicaFacturacion
 
     Function TraerSubconjuntoDeRepetidosAutomaticosYtambienDuplicadosExplicitos(ByVal dt As DataTable) As IEnumerable
 
-        Dim q = From i In dt.AsEnumerable() _
-                Group By Numero = i("NumeroCartaDePorte"), _
-                         IdFacturarselaAExplicito = i("IdFacturarselaA") Into Group _
+        Dim q = From i In dt.AsEnumerable()
+                Group By Numero = i("NumeroCartaDePorte"),
+                         IdFacturarselaAExplicito = i("IdFacturarselaA") Into Group
                 Where IdFacturarselaAExplicito <= 0 _
-                         And Group.Count() > 1 _
+                         And Group.Count() > 1
                 Select New With {.Numero = Numero, .Count = Group.Count()}
 
         Return q
@@ -3549,19 +3549,19 @@ Public Class LogicaFacturacion
 
         'En los archivos de Vista Resumida y Vista Detallada, poner las columnas Tarifa,	KgDescargados y Total en formato número
 
-        Dim q = From i In dt.AsEnumerable() _
-                Group By _
-                    Titular = i("FacturarselaA"), Destino = i("DestinoDesc"), _
-                    Articulo = i("Producto"), Tarifa = i("TarifaFacturada"), _
-                    SeSepara = i("ClienteSeparado") _
-                Into Group _
-                Select New With {.Factura = "", .Cliente = Titular, _
-                                 .IdClienteSeparado = SeSepara, _
-                                 .ClienteSeparado = IIf(EntidadManager.NombreCliente(sc, SeSepara) = "", SeSepara, EntidadManager.NombreCliente(sc, SeSepara)), _
-                                .CantidadCDPs = Group.Count(), Destino, Articulo, _
-                                .Tarifa = CDec(Tarifa), _
-                                .KgDescargados = Group.Sum(Function(i) i.Field(Of Decimal)("KgNetos")), _
-                                .Total = Group.Sum(Function(i) CDec(i.Field(Of Decimal)("KgNetos") * i.Field(Of Decimal)("TarifaFacturada") / 1000D)) _
+        Dim q = From i In dt.AsEnumerable()
+                Group By
+                    Titular = i("FacturarselaA"), Destino = i("DestinoDesc"),
+                    Articulo = i("Producto"), Tarifa = i("TarifaFacturada"),
+                    SeSepara = i("ClienteSeparado")
+                Into Group
+                Select New With {.Factura = "", .Cliente = Titular,
+                                 .IdClienteSeparado = SeSepara,
+                                 .ClienteSeparado = IIf(EntidadManager.NombreCliente(sc, SeSepara) = "", SeSepara, EntidadManager.NombreCliente(sc, SeSepara)),
+                                .CantidadCDPs = Group.Count(), Destino, Articulo,
+                                .Tarifa = CDec(Tarifa),
+                                .KgDescargados = Group.Sum(Function(i) i.Field(Of Decimal)("KgNetos")),
+                                .Total = Group.Sum(Function(i) CDec(i.Field(Of Decimal)("KgNetos") * i.Field(Of Decimal)("TarifaFacturada") / 1000D))
                 }
 
 
@@ -4003,11 +4003,11 @@ Public Class LogicaFacturacion
 
             Using db = New LinqCartasPorteDataContext(Encriptar(SC))
 
-                Dim l = (From i In db.CartasDePortes _
-                                    Where lista.Contains(i.IdCartaDePorte) _
-                                    And (i.IdFacturaImputada > 0 _
-                                    Or i.Anulada = "SI") _
-                                    Select CStr(i.NumeroCartaDePorte) _
+                Dim l = (From i In db.CartasDePortes
+                         Where lista.Contains(i.IdCartaDePorte) _
+                         And (i.IdFacturaImputada > 0 _
+                         Or i.Anulada = "SI")
+                         Select CStr(i.NumeroCartaDePorte)
                                    ).ToArray
                 'And i.FechaModificacion _
 
@@ -4073,14 +4073,14 @@ Public Class LogicaFacturacion
 
 
     Shared Sub GenerarLoteFacturas_NUEVO(ByRef grilla As DataTable, ByVal SC As String,
-                                                         ByRef pag As Object, _
-                                            ByRef sesionId As Object, _
-                                         ByVal optFacturarA As Long, _
-                                         ByRef gvFacturasGeneradas As GridView, ByVal txtFacturarATerceros As String, _
-                                         ByVal SeEstaSeparandoPorCorredor As Boolean, ByRef Session As System.Web.SessionState.HttpSessionState, _
-                                         ByVal PuntoVenta As Integer, ByVal dtViewstateRenglonesManuales As DataTable, _
-                                         ByVal agruparArticulosPor As String, ByVal txtBuscar As String, _
-                                         ByVal txtTarifaGastoAdministrativo As String, ByRef errLog As String, _
+                                                         ByRef pag As Object,
+                                            ByRef sesionId As Object,
+                                         ByVal optFacturarA As Long,
+                                         ByRef gvFacturasGeneradas As GridView, ByVal txtFacturarATerceros As String,
+                                         ByVal SeEstaSeparandoPorCorredor As Boolean, ByRef Session As System.Web.SessionState.HttpSessionState,
+                                         ByVal PuntoVenta As Integer, ByVal dtViewstateRenglonesManuales As DataTable,
+                                         ByVal agruparArticulosPor As String, ByVal txtBuscar As String,
+                                         ByVal txtTarifaGastoAdministrativo As String, ByRef errLog As String,
                                          ByVal txtCorredor As String, ByVal chkPagaCorredor As Boolean, numeroOrdenCompra As String, ByRef PrimeraIdFacturaGenerada As Object, ByRef UltimaIdFacturaGenerada As Object, idClienteObservaciones As Long)
 
         Dim idFactura As Long
@@ -4171,11 +4171,11 @@ Public Class LogicaFacturacion
 
         'Dim dtwhere = ProntoFuncionesGenerales.DataTableDISTINCT(dt, New String() {"Factura", "Cliente", "IdClienteSeparado"})
 
-        Dim dtwhere = (From i In dt.AsEnumerable _
-                      Select Factura = CInt(Val(i("Factura").ToString)), _
-                                Cliente = i("Cliente").ToString, _
-                                IdCliente = Convert.ToInt32(iisNull(BuscaIdClientePreciso(i("Cliente").ToString, SC), -1)), _
-                                IdClienteSeparado = i("IdClienteSeparado").ToString() _
+        Dim dtwhere = (From i In dt.AsEnumerable
+                       Select Factura = CInt(Val(i("Factura").ToString)),
+                                 Cliente = i("Cliente").ToString,
+                                 IdCliente = Convert.ToInt32(iisNull(BuscaIdClientePreciso(i("Cliente").ToString, SC), -1)),
+                                 IdClienteSeparado = i("IdClienteSeparado").ToString()
                         ).Distinct.ToList
 
 
@@ -4196,23 +4196,23 @@ Public Class LogicaFacturacion
 
         'Try
 
-        Dim tablaEditadaDeFacturasParaGenerarComoLista = (From i In tablaEditadaDeFacturasParaGenerar.AsEnumerable _
-                                Select _
-                                        FacturarselaA = i("FacturarselaA").ToString, _
-                                        ClienteSeparado = CStr(i("ClienteSeparado")), _
-                                        idCartaDePorte = CInt(iisNull(i("idCartaDePorte"), -1)), _
-                                        NumeroCartaDePorte = CLng(iisNull(i("NumeroCartaDePorte"), -1)), _
-                                        TarifaFacturada = CDbl(i("TarifaFacturada")), _
-                                        FechaDescarga = CDate(iisNull(i("FechaDescarga"), Today)), _
-                                        Destino = CInt(iisNull(i("IdDestino"), -1)), _
-                                        IdArticulo = CInt(iisNull(i("IdArticulo"), BuscaIdArticuloPreciso(i.Item("Producto"), SC))), _
-                                        NetoFinal = CInt(iisNull(i("KgNetos"), -1)), _
-                                        Titular = CInt(iisNull(i("IdTitular"), -1)), _
-                                        CuentaOrden1 = CInt(iisNull(i("IdIntermediario"), -1)), _
-                                        CuentaOrden2 = CInt(iisNull(i("IdRComercial"), -1)), _
-                                        Corredor = CInt(iisNull(i("IdCorredor"), -1)), _
-                                        Entregador = CInt(iisNull(i("IdDestinatario"), -1)), _
-                                        AgregaItemDeGastosAdministrativos = CStr(iisNull(i("AgregaItemDeGastosAdministrativos"))) _
+        Dim tablaEditadaDeFacturasParaGenerarComoLista = (From i In tablaEditadaDeFacturasParaGenerar.AsEnumerable
+                                                          Select
+                                                                  FacturarselaA = i("FacturarselaA").ToString,
+                                                                  ClienteSeparado = CStr(i("ClienteSeparado")),
+                                                                  idCartaDePorte = CInt(iisNull(i("idCartaDePorte"), -1)),
+                                                                  NumeroCartaDePorte = CLng(iisNull(i("NumeroCartaDePorte"), -1)),
+                                                                  TarifaFacturada = CDbl(i("TarifaFacturada")),
+                                                                  FechaDescarga = CDate(iisNull(i("FechaDescarga"), Today)),
+                                                                  Destino = CInt(iisNull(i("IdDestino"), -1)),
+                                                                  IdArticulo = CInt(iisNull(i("IdArticulo"), BuscaIdArticuloPreciso(i.Item("Producto"), SC))),
+                                                                  NetoFinal = CInt(iisNull(i("KgNetos"), -1)),
+                                                                  Titular = CInt(iisNull(i("IdTitular"), -1)),
+                                                                  CuentaOrden1 = CInt(iisNull(i("IdIntermediario"), -1)),
+                                                                  CuentaOrden2 = CInt(iisNull(i("IdRComercial"), -1)),
+                                                                  Corredor = CInt(iisNull(i("IdCorredor"), -1)),
+                                                                  Entregador = CInt(iisNull(i("IdDestinatario"), -1)),
+                                                                  AgregaItemDeGastosAdministrativos = CStr(iisNull(i("AgregaItemDeGastosAdministrativos")))
                                     ).ToList
 
 
@@ -4332,8 +4332,8 @@ Public Class LogicaFacturacion
             'Dim dtLotecito = ProntoFuncionesGenerales.DataTableWHERE(tablaEditadaDeFacturasParaGenerar, strwhere)
             Dim cli = owhere.Cliente
             Dim clisep = owhere.IdClienteSeparado
-            Dim dtlotecito = (From i In tablaEditadaDeFacturasParaGenerarComoLista _
-                                Where i.FacturarselaA = cli And i.ClienteSeparado = clisep _
+            Dim dtlotecito = (From i In tablaEditadaDeFacturasParaGenerarComoLista
+                              Where i.FacturarselaA = cli And i.ClienteSeparado = clisep
                              ).ToList
 
 
@@ -4507,9 +4507,9 @@ Public Class LogicaFacturacion
                     Else
                         'es un renglon agregado a mano
                         Try
-                            Dim strwhere = "IdCartaDePorte IS NULL AND FacturarselaA=" & _c(owhere.Cliente) & _
-                                            " AND [ClienteSeparado]=" & _c(owhere.IdClienteSeparado) & _
-                                            " AND KgNetos= " & i.NetoFinal & " AND  TarifaFacturada= " & i.TarifaFacturada & _
+                            Dim strwhere = "IdCartaDePorte IS NULL AND FacturarselaA=" & _c(owhere.Cliente) &
+                                            " AND [ClienteSeparado]=" & _c(owhere.IdClienteSeparado) &
+                                            " AND KgNetos= " & i.NetoFinal & " AND  TarifaFacturada= " & i.TarifaFacturada &
                                             " AND Producto='" & NombreArticulo(SC, i.IdArticulo) & "'"
 
 
@@ -4576,8 +4576,8 @@ Public Class LogicaFacturacion
 
 
             Try
-                idFactura = CreaFacturaCOMpronto(lote, idClienteAfacturarle, PuntoVenta, dtRenglonesAgregados, SC, Session, optFacturarA, _
-                                             agruparArticulosPor, txtBuscar, txtTarifaGastoAdministrativo, SeEstaSeparandoPorCorredor, _
+                idFactura = CreaFacturaCOMpronto(lote, idClienteAfacturarle, PuntoVenta, dtRenglonesAgregados, SC, Session, optFacturarA,
+                                             agruparArticulosPor, txtBuscar, txtTarifaGastoAdministrativo, SeEstaSeparandoPorCorredor,
                                              txtCorredor, chkPagaCorredor, listEmbarques, imputaciones, idClienteObservaciones)
 
             Catch ex As AccessViolationException
@@ -4602,15 +4602,15 @@ Public Class LogicaFacturacion
 
             'el asunto es que si una se pasa, debería parar toda la facturacion, y no saltarse solo esa factura
             If idFactura = -12 Then
-                errLog &= "No se pudo crear la factura para " & _
-                "<a href=""Cliente.aspx?Id=" & idClienteAfacturarle & """ target=""_blank"">" & NombreCliente(SC, idClienteAfacturarle) & "</a>; " & _
+                errLog &= "No se pudo crear la factura para " &
+                "<a href=""Cliente.aspx?Id=" & idClienteAfacturarle & """ target=""_blank"">" & NombreCliente(SC, idClienteAfacturarle) & "</a>; " &
                 " Excede el máximo de renglones <br/>"
             End If
 
 
             If idFactura = -99 Then
-                errLog &= "No se pudo crear la factura para " & _
-             "<a href=""Cliente.aspx?Id=" & idClienteAfacturarle & """ target=""_blank"">" & NombreCliente(SC, idClienteAfacturarle) & "</a>; " & _
+                errLog &= "No se pudo crear la factura para " &
+             "<a href=""Cliente.aspx?Id=" & idClienteAfacturarle & """ target=""_blank"">" & NombreCliente(SC, idClienteAfacturarle) & "</a>; " &
              " Excede el máximo de renglones <br/>"
                 'La factura quizas se generó por la mitad!!!!
                 'te descajeta la numeracion
@@ -4676,9 +4676,9 @@ Public Class LogicaFacturacion
             Else
                 Try
                     'hubo un error al generar la factura de este lote
-                    errLog &= "No se pudo crear la factura para " & _
-                    "<a href=""Cliente.aspx?Id=" & idClienteAfacturarle & """ target=""_blank"">" & NombreCliente(SC, idClienteAfacturarle) & "</a>; " & _
-                    " verificar IVA y CUIT, o que la carta no estuviese imputada anteriormente; Verificar que no " & _
+                    errLog &= "No se pudo crear la factura para " &
+                    "<a href=""Cliente.aspx?Id=" & idClienteAfacturarle & """ target=""_blank"">" & NombreCliente(SC, idClienteAfacturarle) & "</a>; " &
+                    " verificar IVA y CUIT, o que la carta no estuviese imputada anteriormente; Verificar que no " &
                     " se haya disparado el error 'listacdp vacia' o no haya otro cliente con el mismo nombre <br/>" & vbCrLf
                 Catch ex As Exception
                     ErrHandler2.WriteError(ex)
@@ -4724,11 +4724,11 @@ Public Class LogicaFacturacion
 
 
 
-        Dim s = "SELECT 'Factura.aspx?Id='+ cast(idFactura as varchar) as URLgenerada,tipoabc,puntoventa, " & _
-                " NumeroFactura as [NumeroFactura],clientes.RazonSocial, " & _
-                " ImporteTotal, ImporteIva1,IVANoDiscriminado , RetencionIBrutos1,RetencionIBrutos2,RetencionIBrutos3,clientes.IdCodigoIVA,clientes.IBcondicion,NumeroCertificadoPercepcionIIBB   " & _
-                " FROM Facturas " & _
-                " JOIN Clientes on Facturas.Idcliente=Clientes.Idcliente   WHERE idFactura between " & primera & " AND " & ultima & _
+        Dim s = "SELECT 'Factura.aspx?Id='+ cast(idFactura as varchar) as URLgenerada,tipoabc,puntoventa, " &
+                " NumeroFactura as [NumeroFactura],clientes.RazonSocial, " &
+                " ImporteTotal, ImporteIva1,IVANoDiscriminado , RetencionIBrutos1,RetencionIBrutos2,RetencionIBrutos3,clientes.IdCodigoIVA,clientes.IBcondicion,NumeroCertificadoPercepcionIIBB   " &
+                " FROM Facturas " &
+                " JOIN Clientes on Facturas.Idcliente=Clientes.Idcliente   WHERE idFactura between " & primera & " AND " & ultima &
                 " ORDER BY idFactura  "
 
         gvFacturasGeneradas.DataSource = EntidadManager.ExecDinamico(SC, s)
@@ -4740,9 +4740,9 @@ Public Class LogicaFacturacion
             PrimeraIdFacturaGenerada = primera
             UltimaIdFacturaGenerada = ultima
 
-            primera = iisNull(EntidadManager.ExecDinamico(SC, _
+            primera = iisNull(EntidadManager.ExecDinamico(SC,
                                                              "SELECT NumeroFactura FROM Facturas WHERE idFactura= " & primera).Rows(0).Item("NumeroFactura"), 1)
-            ultima = iisNull(EntidadManager.ExecDinamico(SC, _
+            ultima = iisNull(EntidadManager.ExecDinamico(SC,
                                                              "SELECT NumeroFactura FROM Facturas WHERE idFactura= " & ultima).Rows(0).Item("NumeroFactura"), 1)
 
 
@@ -4807,8 +4807,8 @@ Public Class LogicaFacturacion
 
 
 
-    Shared Function AgruparItemsDeLaFactura(ByRef oListaCDP As System.Collections.Generic.List(Of Pronto.ERP.BO.CartaDePorte), _
-                                            ByVal optFacturarA As Integer, ByVal agruparArticulosPor As String, ByVal SC As String, _
+    Shared Function AgruparItemsDeLaFactura(ByRef oListaCDP As System.Collections.Generic.List(Of Pronto.ERP.BO.CartaDePorte),
+                                            ByVal optFacturarA As Integer, ByVal agruparArticulosPor As String, ByVal SC As String,
                                             ByVal sBusqueda As String) As List(Of grup) 'Generic.List(Of Object) 'grup)
 
         'Dim q 'As Generic.List(Of Object) 'grup) 
@@ -4865,37 +4865,37 @@ Public Class LogicaFacturacion
         If optFacturarA >= 4 And agruparArticulosPor = "Destino" Then
             'si es modo Exporta y A terceros, agrupo solo por IdArticulo y Destino
 
-            q = From i As Pronto.ERP.BO.CartaDePorte In oListaCDP _
-            Group i By i.IdArticulo, i.Destino Into Group _
-            Select New grup With {
-                        .cartas = Group, .IdArticulo = IdArticulo, .Destino = Destino, .Entregador = -1, .Titular = -1, _
-                                .ObservacionItem = TablaSelect(SC, "Descripcion", "WilliamsDestinos", "IdWilliamsDestino", Destino), _
-                                .NetoFinal = Group.Sum(Function(i As Pronto.ERP.BO.CartaDePorte) i.NetoFinalIncluyendoMermas / 1000), _
-                                .total = Group.Sum(Function(i As Pronto.ERP.BO.CartaDePorte) i.NetoFinalIncluyendoMermas / 1000 * i.TarifaCobradaAlCliente) _
-                             }
+            q = From i As Pronto.ERP.BO.CartaDePorte In oListaCDP
+                Group i By i.IdArticulo, i.Destino Into Group
+                Select New grup With {
+                            .cartas = Group, .IdArticulo = IdArticulo, .Destino = Destino, .Entregador = -1, .Titular = -1,
+                                    .ObservacionItem = TablaSelect(SC, "Descripcion", "WilliamsDestinos", "IdWilliamsDestino", Destino),
+                                    .NetoFinal = Group.Sum(Function(i As Pronto.ERP.BO.CartaDePorte) i.NetoFinalIncluyendoMermas / 1000),
+                                    .total = Group.Sum(Function(i As Pronto.ERP.BO.CartaDePorte) i.NetoFinalIncluyendoMermas / 1000 * i.TarifaCobradaAlCliente)
+                                 }
 
         ElseIf optFacturarA >= 4 And agruparArticulosPor = "Destino+Destinatario" Then
 
 
-            q = From i As Pronto.ERP.BO.CartaDePorte In oListaCDP _
-            Group i By i.IdArticulo, i.Destino, i.Entregador Into Group _
-            Select New grup With {.cartas = Group, .IdArticulo = IdArticulo, .Destino = Destino, .Entregador = Entregador, .Titular = -1, _
-                                .ObservacionItem = TablaSelect(SC, "Descripcion", "WilliamsDestinos", "IdWilliamsDestino", Destino) _
-                                     & SEPAR & NombreCliente(SC, Entregador), _
-                                     .NetoFinal = Group.Sum(Function(i As Pronto.ERP.BO.CartaDePorte) i.NetoFinalIncluyendoMermas / 1000), _
-                                    .total = Group.Sum(Function(i As Pronto.ERP.BO.CartaDePorte) i.NetoFinalIncluyendoMermas / 1000 * i.TarifaCobradaAlCliente) _
-                             }
+            q = From i As Pronto.ERP.BO.CartaDePorte In oListaCDP
+                Group i By i.IdArticulo, i.Destino, i.Entregador Into Group
+                Select New grup With {.cartas = Group, .IdArticulo = IdArticulo, .Destino = Destino, .Entregador = Entregador, .Titular = -1,
+                                    .ObservacionItem = TablaSelect(SC, "Descripcion", "WilliamsDestinos", "IdWilliamsDestino", Destino) _
+                                         & SEPAR & NombreCliente(SC, Entregador),
+                                         .NetoFinal = Group.Sum(Function(i As Pronto.ERP.BO.CartaDePorte) i.NetoFinalIncluyendoMermas / 1000),
+                                        .total = Group.Sum(Function(i As Pronto.ERP.BO.CartaDePorte) i.NetoFinalIncluyendoMermas / 1000 * i.TarifaCobradaAlCliente)
+                                 }
 
         ElseIf optFacturarA >= 4 And agruparArticulosPor = "Destino+Titular" Then
 
-            q = From i As Pronto.ERP.BO.CartaDePorte In oListaCDP _
-            Group i By i.IdArticulo, i.Destino, i.Titular Into Group _
-            Select New With {.cartas = Group, .IdArticulo = IdArticulo, .Destino = Destino, .Entregador = -1, .Titular = Titular, _
-                                .ObservacionItem = TablaSelect(SC, "Descripcion", "WilliamsDestinos", "IdWilliamsDestino", Destino) _
-                                                 & SEPAR & NombreCliente(SC, Titular), _
-                                .NetoFinal = Group.Sum(Function(i As Pronto.ERP.BO.CartaDePorte) i.NetoFinalIncluyendoMermas / 1000), _
-                                .total = Group.Sum(Function(i As Pronto.ERP.BO.CartaDePorte) i.NetoFinalIncluyendoMermas / 1000 * i.TarifaCobradaAlCliente) _
-                             }
+            q = From i As Pronto.ERP.BO.CartaDePorte In oListaCDP
+                Group i By i.IdArticulo, i.Destino, i.Titular Into Group
+                Select New With {.cartas = Group, .IdArticulo = IdArticulo, .Destino = Destino, .Entregador = -1, .Titular = Titular,
+                                    .ObservacionItem = TablaSelect(SC, "Descripcion", "WilliamsDestinos", "IdWilliamsDestino", Destino) _
+                                                     & SEPAR & NombreCliente(SC, Titular),
+                                    .NetoFinal = Group.Sum(Function(i As Pronto.ERP.BO.CartaDePorte) i.NetoFinalIncluyendoMermas / 1000),
+                                    .total = Group.Sum(Function(i As Pronto.ERP.BO.CartaDePorte) i.NetoFinalIncluyendoMermas / 1000 * i.TarifaCobradaAlCliente)
+                                 }
 
 
         ElseIf optFacturarA = 3 And agruparArticulosPor = "Destino+RComercial/Interm+Destinat(CANJE)" Then
@@ -4904,15 +4904,15 @@ Public Class LogicaFacturacion
             'No está funcionando la impresión del Canje cuando se elije un Intermediario/RteComercial en \"Que Contenga\" y CANJE en \"Agrupar Renglones de Cereales por\"
 
 
-            q = From i As Pronto.ERP.BO.CartaDePorte In oListaCDP _
-            Group i By i.IdArticulo, i.Destino, i.CuentaOrden1, i.CuentaOrden2, i.Entregador Into Group _
-            Select New grup With {.cartas = Group, .IdArticulo = IdArticulo, .Destino = Destino, .Entregador = Entregador, .Titular = -1, _
-                                .ObservacionItem = TablaSelect(SC, "Descripcion", "WilliamsDestinos", "IdWilliamsDestino", Destino) _
-                                        & SEPAR & sBusqueda _
-                                        & SEPAR & NombreCliente(SC, Entregador) & Space(80) & "    __" & CuentaOrden1 & " " & CuentaOrden2, _
-                                .NetoFinal = Group.Sum(Function(i As Pronto.ERP.BO.CartaDePorte) i.NetoFinalIncluyendoMermas / 1000), _
-                                .total = Group.Sum(Function(i As Pronto.ERP.BO.CartaDePorte) i.NetoFinalIncluyendoMermas / 1000 * i.TarifaCobradaAlCliente) _
-                             }
+            q = From i As Pronto.ERP.BO.CartaDePorte In oListaCDP
+                Group i By i.IdArticulo, i.Destino, i.CuentaOrden1, i.CuentaOrden2, i.Entregador Into Group
+                Select New grup With {.cartas = Group, .IdArticulo = IdArticulo, .Destino = Destino, .Entregador = Entregador, .Titular = -1,
+                                    .ObservacionItem = TablaSelect(SC, "Descripcion", "WilliamsDestinos", "IdWilliamsDestino", Destino) _
+                                            & SEPAR & sBusqueda _
+                                            & SEPAR & NombreCliente(SC, Entregador) & Space(80) & "    __" & CuentaOrden1 & " " & CuentaOrden2,
+                                    .NetoFinal = Group.Sum(Function(i As Pronto.ERP.BO.CartaDePorte) i.NetoFinalIncluyendoMermas / 1000),
+                                    .total = Group.Sum(Function(i As Pronto.ERP.BO.CartaDePorte) i.NetoFinalIncluyendoMermas / 1000 * i.TarifaCobradaAlCliente)
+                                 }
 
         ElseIf optFacturarA <> 3 And agruparArticulosPor = "Destino+RComercial/Interm+Destinat(CANJE)" Then
             'se le factura NO al corredor agrupando por el CANJE
@@ -4920,55 +4920,55 @@ Public Class LogicaFacturacion
             'todo: No está funcionando la impresión del Canje cuando se elije un Intermediario/RteComercial en \"Que Contenga\" y CANJE en \"Agrupar Renglones de Cereales por\"
 
 
-            q = From i As Pronto.ERP.BO.CartaDePorte In oListaCDP _
-            Group i By i.IdArticulo, i.Destino, i.CuentaOrden1, i.CuentaOrden2, i.Entregador Into Group _
-            Select New grup With {.cartas = Group, .IdArticulo = IdArticulo, .Destino = Destino, .Entregador = Entregador, .Titular = -1, _
-                                .ObservacionItem = TablaSelect(SC, "Descripcion", "WilliamsDestinos", "IdWilliamsDestino", Destino) _
-                                        & SEPAR & sBusqueda _
-                                        & SEPAR & NombreCliente(SC, Entregador) & Space(80) & "    __" & CuentaOrden1 & " " & CuentaOrden2, _
-                                .NetoFinal = Group.Sum(Function(i As Pronto.ERP.BO.CartaDePorte) i.NetoFinalIncluyendoMermas / 1000), _
-                                .total = Group.Sum(Function(i As Pronto.ERP.BO.CartaDePorte) i.NetoFinalIncluyendoMermas / 1000 * i.TarifaCobradaAlCliente) _
-                             }
+            q = From i As Pronto.ERP.BO.CartaDePorte In oListaCDP
+                Group i By i.IdArticulo, i.Destino, i.CuentaOrden1, i.CuentaOrden2, i.Entregador Into Group
+                Select New grup With {.cartas = Group, .IdArticulo = IdArticulo, .Destino = Destino, .Entregador = Entregador, .Titular = -1,
+                                    .ObservacionItem = TablaSelect(SC, "Descripcion", "WilliamsDestinos", "IdWilliamsDestino", Destino) _
+                                            & SEPAR & sBusqueda _
+                                            & SEPAR & NombreCliente(SC, Entregador) & Space(80) & "    __" & CuentaOrden1 & " " & CuentaOrden2,
+                                    .NetoFinal = Group.Sum(Function(i As Pronto.ERP.BO.CartaDePorte) i.NetoFinalIncluyendoMermas / 1000),
+                                    .total = Group.Sum(Function(i As Pronto.ERP.BO.CartaDePorte) i.NetoFinalIncluyendoMermas / 1000 * i.TarifaCobradaAlCliente)
+                                 }
 
 
         ElseIf optFacturarA = 3 Then
             'se le factura al corredor
 
-            q = From i As Pronto.ERP.BO.CartaDePorte In oListaCDP _
-            Group i By i.IdArticulo, i.Destino, i.Titular, i.Entregador Into Group _
-            Select New grup With {.cartas = Group, .IdArticulo = IdArticulo, .Destino = Destino, .Entregador = Entregador, .Titular = Titular, _
-                                .ObservacionItem = TablaSelect(SC, "Descripcion", "WilliamsDestinos", "IdWilliamsDestino", Destino) _
-                                        & SEPAR & NombreCliente(SC, Titular) _
-                                        & SEPAR & NombreCliente(SC, Entregador), _
-                                .NetoFinal = Group.Sum(Function(i As Pronto.ERP.BO.CartaDePorte) i.NetoFinalIncluyendoMermas / 1000), _
-                                .total = Group.Sum(Function(i As Pronto.ERP.BO.CartaDePorte) i.NetoFinalIncluyendoMermas / 1000 * i.TarifaCobradaAlCliente) _
-                             }
+            q = From i As Pronto.ERP.BO.CartaDePorte In oListaCDP
+                Group i By i.IdArticulo, i.Destino, i.Titular, i.Entregador Into Group
+                Select New grup With {.cartas = Group, .IdArticulo = IdArticulo, .Destino = Destino, .Entregador = Entregador, .Titular = Titular,
+                                    .ObservacionItem = TablaSelect(SC, "Descripcion", "WilliamsDestinos", "IdWilliamsDestino", Destino) _
+                                            & SEPAR & NombreCliente(SC, Titular) _
+                                            & SEPAR & NombreCliente(SC, Entregador),
+                                    .NetoFinal = Group.Sum(Function(i As Pronto.ERP.BO.CartaDePorte) i.NetoFinalIncluyendoMermas / 1000),
+                                    .total = Group.Sum(Function(i As Pronto.ERP.BO.CartaDePorte) i.NetoFinalIncluyendoMermas / 1000 * i.TarifaCobradaAlCliente)
+                                 }
 
 
 
         ElseIf optFacturarA = 2 Then
             'se le factura al destinatario, quitar al titular del agrupamiento
 
-            q = From i As Pronto.ERP.BO.CartaDePorte In oListaCDP _
-            Group i By i.IdArticulo, i.Titular, i.Destino Into Group _
-            Select New grup With {.cartas = Group, .IdArticulo = IdArticulo, .Destino = Destino, .Entregador = -1, .Titular = Titular, _
-                                .ObservacionItem = NombreCliente(SC, Titular) _
-                                        & SEPAR & TablaSelect(SC, "Descripcion", "WilliamsDestinos", "IdWilliamsDestino", Destino), _
-                                .NetoFinal = Group.Sum(Function(i As Pronto.ERP.BO.CartaDePorte) i.NetoFinalIncluyendoMermas / 1000), _
-                                .total = Group.Sum(Function(i As Pronto.ERP.BO.CartaDePorte) i.NetoFinalIncluyendoMermas / 1000 * i.TarifaCobradaAlCliente) _
-                             }
+            q = From i As Pronto.ERP.BO.CartaDePorte In oListaCDP
+                Group i By i.IdArticulo, i.Titular, i.Destino Into Group
+                Select New grup With {.cartas = Group, .IdArticulo = IdArticulo, .Destino = Destino, .Entregador = -1, .Titular = Titular,
+                                    .ObservacionItem = NombreCliente(SC, Titular) _
+                                            & SEPAR & TablaSelect(SC, "Descripcion", "WilliamsDestinos", "IdWilliamsDestino", Destino),
+                                    .NetoFinal = Group.Sum(Function(i As Pronto.ERP.BO.CartaDePorte) i.NetoFinalIncluyendoMermas / 1000),
+                                    .total = Group.Sum(Function(i As Pronto.ERP.BO.CartaDePorte) i.NetoFinalIncluyendoMermas / 1000 * i.TarifaCobradaAlCliente)
+                                 }
 
         ElseIf optFacturarA = 1 Then
             'se le factura al titular
 
-            q = From i As Pronto.ERP.BO.CartaDePorte In oListaCDP _
-            Group i By i.IdArticulo, i.Entregador, i.Destino Into Group _
-            Select New grup With {.cartas = Group, .IdArticulo = IdArticulo, .Destino = Destino, .Entregador = Entregador, .Titular = -1, _
-                                      .ObservacionItem = NombreCliente(SC, Entregador) _
-                                                    & SEPAR & TablaSelect(SC, "Descripcion", "WilliamsDestinos", "IdWilliamsDestino", Destino), _
-                                .NetoFinal = Group.Sum(Function(i As Pronto.ERP.BO.CartaDePorte) i.NetoFinalIncluyendoMermas / 1000), _
-                                .total = Group.Sum(Function(i As Pronto.ERP.BO.CartaDePorte) i.NetoFinalIncluyendoMermas / 1000 * i.TarifaCobradaAlCliente) _
-                             }
+            q = From i As Pronto.ERP.BO.CartaDePorte In oListaCDP
+                Group i By i.IdArticulo, i.Entregador, i.Destino Into Group
+                Select New grup With {.cartas = Group, .IdArticulo = IdArticulo, .Destino = Destino, .Entregador = Entregador, .Titular = -1,
+                                          .ObservacionItem = NombreCliente(SC, Entregador) _
+                                                        & SEPAR & TablaSelect(SC, "Descripcion", "WilliamsDestinos", "IdWilliamsDestino", Destino),
+                                    .NetoFinal = Group.Sum(Function(i As Pronto.ERP.BO.CartaDePorte) i.NetoFinalIncluyendoMermas / 1000),
+                                    .total = Group.Sum(Function(i As Pronto.ERP.BO.CartaDePorte) i.NetoFinalIncluyendoMermas / 1000 * i.TarifaCobradaAlCliente)
+                                 }
             '                                   , .cartas = Group.Select(Function(c) c.Id) _
 
         Else
@@ -4997,7 +4997,7 @@ Public Class LogicaFacturacion
 
         Dim db As New LinqCartasPorteDataContext(Encriptar(SC))
 
-        Dim q = From c In db.linqClientes Where c.ExpresionRegularNoAgruparFacturasConEstosVendedores IsNot Nothing _
+        Dim q = From c In db.linqClientes Where c.ExpresionRegularNoAgruparFacturasConEstosVendedores IsNot Nothing
                 Select c.ExpresionRegularNoAgruparFacturasConEstosVendedores
 
         Dim errores As String = ""
@@ -5023,8 +5023,8 @@ Public Class LogicaFacturacion
 
                 Dim qcorr = (From c In db.linqCorredors Where c.Nombre = s).DefaultIfEmpty
 
-                If (qclis.Count = 1 And qcorr.Count = 1) Or _
-                    (qclis.Count = 1 And qcorr.Count = 0) Or _
+                If (qclis.Count = 1 And qcorr.Count = 1) Or
+                    (qclis.Count = 1 And qcorr.Count = 0) Or
                     (qclis.Count = 0 And qcorr.Count = 1) Then
                     'OK()
                 Else
@@ -5116,20 +5116,20 @@ Public Class LogicaFacturacion
 
 
         Dim acopios = (From x In oListaCDP
-                       Select New With { _
-                        .Acopio1 = CInt(IIf(x.AcopioFacturarleA > 0, x.AcopioFacturarleA, If(x.Acopio1, 0))), _
-                        .Acopio2 = CInt(IIf(x.AcopioFacturarleA > 0, x.AcopioFacturarleA, If(x.Acopio2, 0))), _
-                        .Acopio3 = CInt(IIf(x.AcopioFacturarleA > 0, x.AcopioFacturarleA, If(x.Acopio3, 0))), _
-                        .Acopio4 = CInt(IIf(x.AcopioFacturarleA > 0, x.AcopioFacturarleA, If(x.Acopio4, 0))), _
-                        .Acopio5 = CInt(IIf(x.AcopioFacturarleA > 0, x.AcopioFacturarleA, If(x.Acopio5, 0))), _
-                        .Acopio6 = CInt(IIf(x.AcopioFacturarleA > 0, x.AcopioFacturarleA, If(x.Acopio6, 0))) _
+                       Select New With {
+                        .Acopio1 = CInt(IIf(x.AcopioFacturarleA > 0, x.AcopioFacturarleA, If(x.Acopio1, 0))),
+                        .Acopio2 = CInt(IIf(x.AcopioFacturarleA > 0, x.AcopioFacturarleA, If(x.Acopio2, 0))),
+                        .Acopio3 = CInt(IIf(x.AcopioFacturarleA > 0, x.AcopioFacturarleA, If(x.Acopio3, 0))),
+                        .Acopio4 = CInt(IIf(x.AcopioFacturarleA > 0, x.AcopioFacturarleA, If(x.Acopio4, 0))),
+                        .Acopio5 = CInt(IIf(x.AcopioFacturarleA > 0, x.AcopioFacturarleA, If(x.Acopio5, 0))),
+                        .Acopio6 = CInt(IIf(x.AcopioFacturarleA > 0, x.AcopioFacturarleA, If(x.Acopio6, 0)))
                         }).ToList
 
         'caso 2: había acopios de distintos clientes (ACA PEHUAJO en factura de LDC). Usar solamente los del cliente facturado
         Dim acopiosdelcliente = db.CartasPorteAcopios.Where(Function(x) x.IdCliente = oFac.IdCliente).Select(Function(x) x.IdAcopio).ToList
 
         Dim ccc As List(Of Integer) = acopios.SelectMany(Function(x) _
-                                                         {x.Acopio1, x.Acopio2, x.Acopio3, x.Acopio4, x.Acopio5, x.Acopio6} _
+                                                         {x.Acopio1, x.Acopio2, x.Acopio3, x.Acopio4, x.Acopio5, x.Acopio6}
                             ).Where(Function(x) x <> 0 And acopiosdelcliente.Contains(x)).Distinct.ToList
 
 
@@ -5201,7 +5201,7 @@ Public Class LogicaFacturacion
             Dim oFac = db.Facturas.Where(Function(x) x.IdFactura = idfactura).FirstOrDefault() 'explota aca con la 79074. q tiene esa factura de particular?
 
             Dim expo = From x In oListaCDP
-                        Where x.Exporta = "SI"
+                       Where x.Exporta = "SI"
 
 
             Return expo.Count > 0
@@ -5369,17 +5369,17 @@ Public Class LogicaFacturacion
 
 
 
-    Shared Function CreaFacturaCOMpronto(ByVal oListaCDP As System.Collections.Generic.List(Of Pronto.ERP.BO.CartaDePorte), _
-                                         ByVal IdClienteAFacturarle As Long, ByVal sucursalWilliams As Long, _
-                                         ByVal dtRenglonesManuales As DataTable, ByVal SC As String, _
-                                         ByVal Session As System.Web.SessionState.HttpSessionState, ByVal optFacturarA As Integer, _
-                                         ByVal agruparArticulosPor As String, ByVal txtBuscar As String, _
-                                         ByVal txtTarifaGastoAdministrativo As String, _
-                                         ByVal SeSeparaPorCorredor As Boolean, ByVal txtCorredor As String, _
-                                         ByVal chkPagaCorredor As Boolean, _
-                                         ByVal listEmbarques As System.Collections.Generic.List(Of DataRow), _
-                                        ByRef ImputacionDevuelta As IEnumerable(Of grup), _
-                                        IdClienteObservaciones As Integer _
+    Shared Function CreaFacturaCOMpronto(ByVal oListaCDP As System.Collections.Generic.List(Of Pronto.ERP.BO.CartaDePorte),
+                                         ByVal IdClienteAFacturarle As Long, ByVal sucursalWilliams As Long,
+                                         ByVal dtRenglonesManuales As DataTable, ByVal SC As String,
+                                         ByVal Session As System.Web.SessionState.HttpSessionState, ByVal optFacturarA As Integer,
+                                         ByVal agruparArticulosPor As String, ByVal txtBuscar As String,
+                                         ByVal txtTarifaGastoAdministrativo As String,
+                                         ByVal SeSeparaPorCorredor As Boolean, ByVal txtCorredor As String,
+                                         ByVal chkPagaCorredor As Boolean,
+                                         ByVal listEmbarques As System.Collections.Generic.List(Of DataRow),
+                                        ByRef ImputacionDevuelta As IEnumerable(Of grup),
+                                        IdClienteObservaciones As Integer
 ) As Integer
         'Revisar tambien en
         ' Pronto el Utilidades->"Generacion de Facturas a partir de Ordenes de Compra automaticas",
@@ -5431,8 +5431,8 @@ Public Class LogicaFacturacion
 
         Try
 
-            If (oListaCDP Is Nothing Or oListaCDP.Count < 1) And _
-                    (dtRenglonesManuales Is Nothing Or dtRenglonesManuales.Rows.Count < 1) And _
+            If (oListaCDP Is Nothing Or oListaCDP.Count < 1) And
+                    (dtRenglonesManuales Is Nothing Or dtRenglonesManuales.Rows.Count < 1) And
                     (listEmbarques Is Nothing Or listEmbarques.Count < 1) Then
                 ErrHandler2.WriteError("oListaCDP vacía")
                 Return -1
@@ -5451,9 +5451,9 @@ Public Class LogicaFacturacion
             '//////////////////////////////////////////////////////////////////////////////////////////////////
             '//////////////////////////////////////////////////////////////////////////////////////////////////
             Dim numeropuntoVenta = PuntoVentaWilliams.NumeroPuntoVentaSegunSucursalWilliams(sucursalWilliams, SC)
-            Dim IdPuntoVenta As Integer = EntidadManager.TablaSelectId(SC, _
-                                            "PuntosVenta", _
-                                            "PuntoVenta=" & numeropuntoVenta & " AND Letra='" & _
+            Dim IdPuntoVenta As Integer = EntidadManager.TablaSelectId(SC,
+                                            "PuntosVenta",
+                                            "PuntoVenta=" & numeropuntoVenta & " AND Letra='" &
                                             mLetra & "' AND IdTipoComprobante=" & EntidadManager.IdTipoComprobante.Factura)
             Dim IdObra As Integer = PuntoVentaWilliams.ObraSegunSucursalWilliams(sucursalWilliams, SC)
             '//////////////////////////////////////////////////////////////////////////////////////////////////
@@ -5696,8 +5696,8 @@ Public Class LogicaFacturacion
 
 
                     'Mostrar el período de facturación (Con la leyenda \\\" Período de Facturación: Fecha1raCdp - FechaUltimaCdp )
-                    Dim fecha = From i As Pronto.ERP.BO.CartaDePorte In oListaCDP _
-                               Select i.FechaDescarga Order By FechaDescarga
+                    Dim fecha = From i As Pronto.ERP.BO.CartaDePorte In oListaCDP
+                                Select i.FechaDescarga Order By FechaDescarga
 
 
                     'como poner lo de la leyenda de Syngenta?
@@ -5963,8 +5963,8 @@ Public Class LogicaFacturacion
 
 
                                     Dim tarif As Double
-                                    If .Fields("IdArticulo").Value = K_idartcambio Or InStr(dr.Item("Producto"), "ANALISIS") > 0 Or _
-                                         InStr(dr.Item("Producto"), "RETIRO DE DOCUMENTACION") > 0 Or _
+                                    If .Fields("IdArticulo").Value = K_idartcambio Or InStr(dr.Item("Producto"), "ANALISIS") > 0 Or
+                                         InStr(dr.Item("Producto"), "RETIRO DE DOCUMENTACION") > 0 Or
                                         InStr(dr.Item("Producto"), "FLETE") > 0 Then
 
 
@@ -6216,18 +6216,18 @@ Public Class LogicaFacturacion
                         Dim idfac2 = TraerUltimaIdFacturaCreada(SC)
 
 
-                        Dim s As String = idfac.ToString & " " & idfac2.ToString & "Explosión al llamar a Compronto.Factura.Guardar(). Ojo porque si se generó pero no se manda a imprimir les rompe la numeración!!! " & _
-                                " La factura quizas queda por la mitad y no genera el subdiario (eso es un problema del ComPronto).  Si es Type Mismatch se puede dar tanto " & _
-                                " cuando se rompe la compatibilidad del COM, como cuando se rompe la compatibilidad del " & _
-                                " recordset/storeproc/tabla (y esto es lo mas probable, ya que está pasando en el guardar() )" & _
-                                " [verificar que desde Pronto se puede dar de alta esta misma factura con el " & _
-                                " mismo cliente. Si sigue el error, verificar que están corridos los storeprocs de " & _
-                                " Pronto actualizados]     Si es 'Application uses a value of the wrong type' puede ser el tipo o " & _
-                                " un overflow del tipo, una cadena muy larga. Queda algún tipo de rastro en el log sql de Pronto? -no vas a" & _
-                                " encontrar mucha informacion ahí. Hay que correr el Profiler mientras facturás y ver cual es la ultima llamada antes de Log_InsertarRegistro. " & _
-                                " Puede ser la actualizacion de la entidad Cliente, " & _
-                                " así que por Pronto hay que intentar facturarle al mismo cliente Y TAMBIEN ver si se puede editar y grabar el formulario de cliente. " & _
-                                "-Por qué fue que tuvimos un problema así en Capen? Qué era lo que tenía el Clientes_M, mal el largo de un campo? " & _
+                        Dim s As String = idfac.ToString & " " & idfac2.ToString & "Explosión al llamar a Compronto.Factura.Guardar(). Ojo porque si se generó pero no se manda a imprimir les rompe la numeración!!! " &
+                                " La factura quizas queda por la mitad y no genera el subdiario (eso es un problema del ComPronto).  Si es Type Mismatch se puede dar tanto " &
+                                " cuando se rompe la compatibilidad del COM, como cuando se rompe la compatibilidad del " &
+                                " recordset/storeproc/tabla (y esto es lo mas probable, ya que está pasando en el guardar() )" &
+                                " [verificar que desde Pronto se puede dar de alta esta misma factura con el " &
+                                " mismo cliente. Si sigue el error, verificar que están corridos los storeprocs de " &
+                                " Pronto actualizados]     Si es 'Application uses a value of the wrong type' puede ser el tipo o " &
+                                " un overflow del tipo, una cadena muy larga. Queda algún tipo de rastro en el log sql de Pronto? -no vas a" &
+                                " encontrar mucha informacion ahí. Hay que correr el Profiler mientras facturás y ver cual es la ultima llamada antes de Log_InsertarRegistro. " &
+                                " Puede ser la actualizacion de la entidad Cliente, " &
+                                " así que por Pronto hay que intentar facturarle al mismo cliente Y TAMBIEN ver si se puede editar y grabar el formulario de cliente. " &
+                                "-Por qué fue que tuvimos un problema así en Capen? Qué era lo que tenía el Clientes_M, mal el largo de un campo? " &
                                                 ex.ToString
                         ErrHandler2.WriteError(s)
                         MandarMailDeError(s)
@@ -6383,11 +6383,11 @@ Public Class LogicaFacturacion
 
 
 
-            Dim o As Generic.List(Of wTempCartasPorteFacturacionAutomatica) = _
-                (From i As wTempCartasPorteFacturacionAutomatica In db.wTempCartasPorteFacturacionAutomaticas _
-                        Where i.IdSesion = ids And _
-                           (i.IdFacturarselaA = idClienteAfacturarle Or idClienteAfacturarle = -1) And _
-                           (i.IdArticulo = IdArticulo Or IdArticulo = -1)).ToList
+            Dim o As Generic.List(Of wTempCartasPorteFacturacionAutomatica) =
+                (From i As wTempCartasPorteFacturacionAutomatica In db.wTempCartasPorteFacturacionAutomaticas
+                 Where i.IdSesion = ids And
+                    (i.IdFacturarselaA = idClienteAfacturarle Or idClienteAfacturarle = -1) And
+                    (i.IdArticulo = IdArticulo Or IdArticulo = -1)).ToList
 
 
             'como safamos aca? me tendria que traer el campo "exporta" desde la tabla temporal, que no lo tiene
@@ -6422,14 +6422,14 @@ Public Class LogicaFacturacion
 
                 Dim IdFacturarselaA = BuscaIdClientePreciso(sClienteTercero, sc)
 
-                Dim q = From i In dt.AsEnumerable _
-                        Group By IdFac = i("IdFacturarselaA"), _
-                                 IdArti = i("IdArticulo"), _
-                                 IdDestin = iisNull(i("IdDestino"), 0) _
-                            Into Group _
-                        Select New With { _
-                                .IdFac = IdFac, .IdArticulo = IdArti, .IdDestino = IdDestin, _
-                               .Tarif = iisNull(db.wTarifaWilliams(IdFac, IdArti, IdDestin, 0, 0), 0) _
+                Dim q = From i In dt.AsEnumerable
+                        Group By IdFac = i("IdFacturarselaA"),
+                                 IdArti = i("IdArticulo"),
+                                 IdDestin = iisNull(i("IdDestino"), 0)
+                            Into Group
+                        Select New With {
+                                .IdFac = IdFac, .IdArticulo = IdArti, .IdDestino = IdDestin,
+                               .Tarif = iisNull(db.wTarifaWilliams(IdFac, IdArti, IdDestin, 0, 0), 0)
                                 }
 
 
@@ -6536,7 +6536,7 @@ Public Class LogicaFacturacion
         If optFacturarA = 4 Then
             Dim IdFacturarselaA = BuscaIdClientePreciso(txtFacturarATerceros, sc)
             Dim facturarselaA = "'" & txtFacturarATerceros & "'"
-            dt = EntidadManager.ExecDinamico(sc, _
+            dt = EntidadManager.ExecDinamico(sc,
                                 "SELECT IdCodigoIVA,CUIT," & facturarselaA & " as FacturarselaA FROM CLIENTES where IdCliente=" & IdFacturarselaA)
 
             dt = DataTableWHERE_ClientesNoHabilitados(dt)
@@ -6620,15 +6620,15 @@ Public Class LogicaFacturacion
 
 
 
-        Dim cartasrepetidas = (From i In l _
-                Group By Id = i.IdCartaDePorte, _
-                                 Numero = i.NumeroCartaDePorte, _
-                         SubnumeroVagon = i.SubNumeroVagon, _
-                         SubNumeroFacturacion = i.SubnumeroDeFacturacion _
-                    Into Group _
-                Where iisNull(SubNumeroFacturacion, 0) = 0 _
-                         And Group.Count() > 1 _
-                Select New With {.id = Id, .Numero = Numero, .SubnumeroVagon = SubnumeroVagon}).ToList
+        Dim cartasrepetidas = (From i In l
+                               Group By Id = i.IdCartaDePorte,
+                                                Numero = i.NumeroCartaDePorte,
+                                        SubnumeroVagon = i.SubNumeroVagon,
+                                        SubNumeroFacturacion = i.SubnumeroDeFacturacion
+                                   Into Group
+                               Where iisNull(SubNumeroFacturacion, 0) = 0 _
+                                        And Group.Count() > 1
+                               Select New With {.id = Id, .Numero = Numero, .SubnumeroVagon = SubnumeroVagon}).ToList
 
         Dim s As String
     End Function
@@ -6755,7 +6755,7 @@ Public Class LogicaFacturacion
 
 
                     '
-                    If mvarTipoABC = "B" And mvarTipoIVA <> 8 And _
+                    If mvarTipoABC = "B" And mvarTipoIVA <> 8 And
                           EntidadManager.BuscarClaveINI("Ordenes de compra iva incluido", sc, usuario) <> "SI" Then
                         'acá hace "la magia" de encajarle el iva en el precio del item (recordá que 
                         'no discriminar el iva es solo un tema de presentacion)
@@ -6816,8 +6816,8 @@ Public Class LogicaFacturacion
         If True Then
             Try
                 Dim puntoventapercepcion = ExecDinamico(sc, "Select AgentePercepcionIIBB from PuntosVenta  where  IdPuntoVenta=" & IdPuntoVenta)
-                mvarIBrutos = PercepcionIngresosBrutos(oFac, sc, session, cli, mvarNetoGravado, _
-                                                        "SI" = db.Parametros.First().PercepcionIIBB, _
+                mvarIBrutos = PercepcionIngresosBrutos(oFac, sc, session, cli, mvarNetoGravado,
+                                                        "SI" = db.Parametros.First().PercepcionIIBB,
                                                         "SI" = iisNull(puntoventapercepcion.Rows(0).Item("AgentePercepcionIIBB"), "NO")) '(puntoventa = 2 Or puntoventa = 3))
             Catch ex As Exception
                 ErrHandler2.WriteError("Error al calcular ingresos brutos. " & ex.ToString)
@@ -6875,7 +6875,7 @@ Public Class LogicaFacturacion
 
                 .Fields("ImporteTotal").Value = Math.Round(mvarSubTotal + mvarIBrutos + Math.Round(totIVA, 2), 2)   ' Math.Round(mTotal, 2)
 
-                If mvarTipoABC = "B" And mvarTipoIVA <> 8 And _
+                If mvarTipoABC = "B" And mvarTipoIVA <> 8 And
                       EntidadManager.BuscarClaveINI("Ordenes de compra iva incluido", sc, usuario) <> "SI" Then
                     .Fields("IVANoDiscriminado").Value = Math.Round(totIVA, 2) ' totIVA
                     .Fields("ImporteIva1").Value = 0
@@ -7778,8 +7778,8 @@ Public Class LogicaFacturacion
                     'andy, por lo del corredor: cuando se elige facturar a corredores (o a terceros y este es corredor), se separa por titular. y es por esto q no aparece la observacion
 
 
-                    LogPronto(sc, -1, "Factura Williams Separada por titular: " & flagForzar & " " & _
-                              SeSeparaPorCorredor & "  " & chkPagaCorredor & "  " & idvend & "  " & _
+                    LogPronto(sc, -1, "Factura Williams Separada por titular: " & flagForzar & " " &
+                              SeSeparaPorCorredor & "  " & chkPagaCorredor & "  " & idvend & "  " &
                               strPresentesEnEstaFactura & " para cliente " & IdClienteAFacturarle, "")
                 End If
 
@@ -7821,34 +7821,34 @@ Public Class LogicaFacturacion
 
 
 
-        Dim strSQL = _
-"        SELECT DISTINCT 0 as ColumnaTilde " & _
-",IdCartaDePorte, CDP.IdArticulo,       " & _
-"        NumeroCartaDePorte, SubNumeroVagon,CDP.SubnumeroDeFacturacion, FechaArribo, FechaDescarga, " & _
-" CLIVEN.razonsocial as FacturarselaA,  CLIVEN.idcliente as IdFacturarselaA " & _
-"             		  ,isnull(CLIVEN.Confirmado,'NO') as Confirmado,           CLIVEN.IdCodigoIVA " & _
-" 		  ,CLIVEN.CUIT,           '' as ClienteSeparado , " & _
-" 		 dbo.wTarifaWilliams(CLIVEN.idcliente,CDP.IdArticulo,CDP.Destino, case when isnull(Exporta,'NO')='SI' then 1 else 0 end,0) as TarifaFacturada    " & _
- "        ,Articulos.Descripcion as  Producto, " & _
-  "        NetoFinal  as  KgNetos , Corredor as IdCorredor, Vendedor as IdTitular,    CDP.CuentaOrden1 as IdIntermediario, CDP.CuentaOrden2 as IdRComercial, CDP.Entregador as IdDestinatario,            " & _
-" 		 CLIVEN.Razonsocial as   Titular  ,        CLICO1.Razonsocial as   Intermediario  ,    " & _
-" 		 CLICO2.Razonsocial as   [R. Comercial]  ,        CLICOR.Nombre as    [Corredor ],     " & _
-" 		 CLIENT.Razonsocial  as  [Destinatario],          LOCDES.Descripcion   as  DestinoDesc " & _
-" 		 ,         		 LOCORI.Nombre as    [Procedcia.] ,            CDP.Destino as IdDestino, CDP.AgregaItemDeGastosAdministrativos " & _
-"   from CartasDePorte CDP " & _
-" inner join wGrillaPersistencia  on CDP.IdCartaDePorte=wGrillaPersistencia.idrenglon and wGrillaPersistencia.Sesion='" & sesionid & "'" & _
-"   LEFT OUTER JOIN Clientes CLIVEN ON CDP.Vendedor = CLIVEN.IdCliente  " & _
-"   LEFT OUTER JOIN ListasPreciosDetalle LPD ON CLIVEN.idListaPrecios = LPD.idListaPrecios " & _
-"   LEFT OUTER JOIN Clientes CLICO1 ON CDP.CuentaOrden1 = CLICO1.IdCliente  " & _
-"   LEFT OUTER JOIN Clientes CLICO2 ON CDP.CuentaOrden2 = CLICO2.IdCliente  " & _
-"   LEFT OUTER JOIN Vendedores CLICOR ON CDP.Corredor = CLICOR.IdVendedor  " & _
-"   LEFT OUTER JOIN Clientes CLICORCLI ON CLICORCLI.idcliente  = (select top 1 idcliente from clientes c1 where c1.RazonSocial = CLICOR.Nombre)  " & _
-"   LEFT OUTER JOIN Clientes CLIENT ON CDP.Entregador = CLIENT.IdCliente  " & _
-"   LEFT OUTER JOIN Articulos ON CDP.IdArticulo = Articulos.IdArticulo  " & _
-"   LEFT OUTER JOIN Transportistas TRANS ON CDP.IdTransportista = TRANS.IdTransportista  " & _
-"   LEFT OUTER JOIN Choferes CHOF ON CDP.IdChofer = CHOF.IdChofer  " & _
-"   LEFT OUTER JOIN Localidades LOCORI ON CDP.Procedencia = LOCORI.IdLocalidad  " & _
-"   LEFT OUTER JOIN WilliamsDestinos LOCDES ON CDP.Destino = LOCDES.IdWilliamsDestino  " & _
+        Dim strSQL =
+"        SELECT DISTINCT 0 as ColumnaTilde " &
+",IdCartaDePorte, CDP.IdArticulo,       " &
+"        NumeroCartaDePorte, SubNumeroVagon,CDP.SubnumeroDeFacturacion, FechaArribo, FechaDescarga, " &
+" CLIVEN.razonsocial as FacturarselaA,  CLIVEN.idcliente as IdFacturarselaA " &
+"             		  ,isnull(CLIVEN.Confirmado,'NO') as Confirmado,           CLIVEN.IdCodigoIVA " &
+" 		  ,CLIVEN.CUIT,           '' as ClienteSeparado , " &
+" 		 dbo.wTarifaWilliams(CLIVEN.idcliente,CDP.IdArticulo,CDP.Destino, case when isnull(Exporta,'NO')='SI' then 1 else 0 end,0) as TarifaFacturada    " &
+ "        ,Articulos.Descripcion as  Producto, " &
+  "        NetoFinal  as  KgNetos , Corredor as IdCorredor, Vendedor as IdTitular,    CDP.CuentaOrden1 as IdIntermediario, CDP.CuentaOrden2 as IdRComercial, CDP.Entregador as IdDestinatario,            " &
+" 		 CLIVEN.Razonsocial as   Titular  ,        CLICO1.Razonsocial as   Intermediario  ,    " &
+" 		 CLICO2.Razonsocial as   [R. Comercial]  ,        CLICOR.Nombre as    [Corredor ],     " &
+" 		 CLIENT.Razonsocial  as  [Destinatario],          LOCDES.Descripcion   as  DestinoDesc " &
+" 		 ,         		 LOCORI.Nombre as    [Procedcia.] ,            CDP.Destino as IdDestino, CDP.AgregaItemDeGastosAdministrativos " &
+"   from CartasDePorte CDP " &
+" inner join wGrillaPersistencia  on CDP.IdCartaDePorte=wGrillaPersistencia.idrenglon and wGrillaPersistencia.Sesion='" & sesionid & "'" &
+"   LEFT OUTER JOIN Clientes CLIVEN ON CDP.Vendedor = CLIVEN.IdCliente  " &
+"   LEFT OUTER JOIN ListasPreciosDetalle LPD ON CLIVEN.idListaPrecios = LPD.idListaPrecios " &
+"   LEFT OUTER JOIN Clientes CLICO1 ON CDP.CuentaOrden1 = CLICO1.IdCliente  " &
+"   LEFT OUTER JOIN Clientes CLICO2 ON CDP.CuentaOrden2 = CLICO2.IdCliente  " &
+"   LEFT OUTER JOIN Vendedores CLICOR ON CDP.Corredor = CLICOR.IdVendedor  " &
+"   LEFT OUTER JOIN Clientes CLICORCLI ON CLICORCLI.idcliente  = (select top 1 idcliente from clientes c1 where c1.RazonSocial = CLICOR.Nombre)  " &
+"   LEFT OUTER JOIN Clientes CLIENT ON CDP.Entregador = CLIENT.IdCliente  " &
+"   LEFT OUTER JOIN Articulos ON CDP.IdArticulo = Articulos.IdArticulo  " &
+"   LEFT OUTER JOIN Transportistas TRANS ON CDP.IdTransportista = TRANS.IdTransportista  " &
+"   LEFT OUTER JOIN Choferes CHOF ON CDP.IdChofer = CHOF.IdChofer  " &
+"   LEFT OUTER JOIN Localidades LOCORI ON CDP.Procedencia = LOCORI.IdLocalidad  " &
+"   LEFT OUTER JOIN WilliamsDestinos LOCDES ON CDP.Destino = LOCDES.IdWilliamsDestino  " &
 "   where isnull(CDP.IdClienteAFacturarle,-1) <= 0 "
 
 
@@ -8388,10 +8388,10 @@ Public Class LogicaFacturacion
 
 
 
-    Function PreviewDetalladoDeLaGeneracionEnPaso2(optFacturarA As Integer, txtFacturarATerceros As String, SC As String,
-                                                   EsteUsuarioPuedeVerTarifa As Boolean, ViewState As Object, txtFechaDesde As String, txtFechaHasta As String,
-                                                   fListaIDs As String, SessionID As Integer, cmbPuntoVenta As Integer, cmbAgruparArticulosPor As String,
-                                                   SeEstaSeparandoPorCorredor As String) As String
+    Public Shared Function PreviewDetalladoDeLaGeneracionEnPaso2(optFacturarA As Integer, txtFacturarATerceros As String, SC As String,
+                                                       EsteUsuarioPuedeVerTarifa As Boolean, ViewState As Object, txtFechaDesde As String, txtFechaHasta As String,
+                                                       fListaIDs As String, SessionID As String, cmbPuntoVenta As Integer, cmbAgruparArticulosPor As String,
+                                                       SeEstaSeparandoPorCorredor As Boolean) As String
 
         ErrHandler2.WriteError(" PreviewDetalladoDeLaGeneracionEnPaso2() Empiezo")
 
@@ -8500,9 +8500,11 @@ Public Class LogicaFacturacion
 
         ErrHandler2.WriteError(" PreviewDetalladoDeLaGeneracionEnPaso2() Actualizo la tarifa")
 
-
+        Dim db As New DemoProntoEntities(Auxiliares.FormatearConexParaEntityFramework(Encriptar(SC)))
 
         dt.Columns.Add("Total", Type.GetType("System.Decimal"))
+        dt.Columns.Add("NroIIBB", Type.GetType("System.String"))
+
         For Each row In dt.Rows
             row("Total") = row("KgNetos") * iisNull(row("TarifaFacturada"), 0) / 1000D
 
@@ -8513,6 +8515,16 @@ Public Class LogicaFacturacion
                     row("FacturarselaA") = " <<CON COSTO ADMIN>> " & row("FacturarselaA")
                 End If
             End If
+
+
+
+            Try
+                row("NroIIBB") = db.Clientes.Find(row("IdFacturarselaA")).IBNumeroInscripcion
+            Catch ex As Exception
+
+            End Try
+
+
         Next
 
 
@@ -8565,7 +8577,7 @@ Public Class LogicaFacturacion
 
 
 
-    Public Function DataTableToExcel(ByVal pDataTable As DataTable, Optional ByVal titulo As String = "") As String
+    Public Shared Function DataTableToExcel(ByVal pDataTable As DataTable, Optional ByVal titulo As String = "") As String
 
         Dim vFileName As String = Path.GetTempFileName()
         'Dim vFileName As String = "c:\archivo.txt"
@@ -8609,7 +8621,7 @@ Public Class LogicaFacturacion
 
 
 
-    Public Function TextToExcel(ByVal pFileName As String, Optional ByVal titulo As String = "") As String
+    Public Shared Function TextToExcel(ByVal pFileName As String, Optional ByVal titulo As String = "") As String
         'Apartar estas funciones que usen Interop..... usar Open XML SDK
         'http://stackoverflow.com/questions/1405201/so-net-doesnt-have-built-in-office-functionality
         'http://stackoverflow.com/questions/1405201/so-net-doesnt-have-built-in-office-functionality

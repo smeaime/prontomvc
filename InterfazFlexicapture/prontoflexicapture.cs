@@ -3276,7 +3276,7 @@ namespace ServicioCartaPorte
                                                     -1, -1, -1, -1, -1,
                                                     iddestino, 0, "Ambas"
                                                     , desde, hasta,
-                                                    0, null, "", "",
+                                                    0, null, false, "", "",
                                                     -1, null, 0, "", "Todos").Select(x => x.Situacion ?? -1).GroupBy(x => x)
                                                     .Select(g => new situacion { sit = g.Key, cant = g.Count() }).ToList();
 
@@ -3365,7 +3365,7 @@ namespace ServicioCartaPorte
                                                             0, 9999999, 0, "", -1, -1,
                                                             -1, -1, -1, -1, -1,
                                                             iddestino, 0, "Ambas", FechaDesde,
-                                                            FechaHasta, puntovent, null, "", "",
+                                                            FechaHasta, puntovent, null,false, "", "",
                                                             -1, null, 0, "", "Todos")
                              );
 
@@ -3614,7 +3614,7 @@ namespace ServicioCartaPorte
                                                             -1, -1, -1, -1, -1,
                                                           iddestino, 0, "Ambas"
                                                            , FechaDesde, FechaHasta,
-                                                           0, null, "", "",
+                                                           0, null, false, "", "",
                                                            -1, null, 0, "", "Todos")
                                     );
 

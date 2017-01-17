@@ -1,0 +1,193 @@
+
+Log Entry : 
+01/17/2017 06:37:54
+Error in: http://localhost:58911/login.aspx?ReturnUrl=/. Error Message:System.Threading.ThreadAbortException
+Subproceso anulado.
+   en System.Threading.Thread.AbortInternal()
+   en System.Threading.Thread.Abort(Object stateInfo)
+   en System.Web.HttpResponse.AbortCurrentThread()
+   en System.Web.HttpResponse.End()
+   en System.Web.HttpResponse.Redirect(String url, Boolean endResponse, Boolean permanent)
+   en System.Web.HttpResponse.Redirect(String url)
+   en Login.Page_Load(Object sender, EventArgs e) en C:\Users\Administrador\Documents\bdl\pronto\prontoweb\Login.aspx.vb:línea 169
+mscorlib
+__________________________
+
+Log Entry : 
+01/17/2017 06:38:38
+Error in: http://localhost:58911/ProntoWeb/CartaDePorte.aspx?Id=-1. Error Message:PV 0 0
+__________________________
+
+Log Entry : 
+01/17/2017 06:38:57
+Error in: http://localhost:58911/ProntoWeb/CartaDePorte.aspx?Id=2723833. Error Message:PV 1 0
+__________________________
+
+Log Entry : 
+01/17/2017 06:39:38
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInfLiquidacionSubcontratistas.aspx?tipo=Confirmados. Error Message:Generando informe
+__________________________
+
+Log Entry : 
+01/17/2017 06:40:35
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInfLiquidacionSubcontratistas.aspx?tipo=Confirmados. Error Message:System.NotSupportedException
+This function can only be invoked from LINQ to Entities.
+   en System.Data.Entity.SqlServer.SqlFunctions.StringConvert(Nullable`1 number)
+   en ConsultasLinq._Closure$__._Lambda$__8-8(VB$AnonymousType_99`23 x) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\ConsultasLinq.vb:línea 623
+   en System.Linq.Enumerable.WhereSelectEnumerableIterator`2.MoveNext()
+   en System.Linq.Buffer`1..ctor(IEnumerable`1 source)
+   en System.Linq.Enumerable.ToArray[TSource](IEnumerable`1 source)
+   en ConsultasLinq.LiquidacionSubcontratistas(String SC, String ColumnaParaFiltrar, String TextoParaFiltrar, String sortExpression, Int64 startRowIndex, Int64 maximumRows, enumCDPestado estado, String QueContenga, Int32 idVendedor, Int32 idCorredor, Int32 idDestinatario, Int32 idIntermediario, Int32 idRemComercial, Int32 idArticulo, Int32 idProcedencia, Int32 idDestino, FiltroANDOR AplicarANDuORalFiltro, String ModoExportacion, DateTime fechadesde, DateTime fechahasta, Int32 puntoventa, Int32 idSubcontr, String& sTituloFiltroUsado) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\ConsultasLinq.vb:línea 625
+EntityFramework.SqlServer
+__________________________
+
+Log Entry : 
+01/17/2017 06:40:35
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInfLiquidacionSubcontratistas.aspx?tipo=Confirmados. Error Message:     Excluidas por nofacturarasubcontratistas o duplicadas: 0
+__________________________
+
+Log Entry : 
+01/17/2017 06:48:14
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInfLiquidacionSubcontratistas.aspx?tipo=Confirmados. Error Message:Generando informe
+__________________________
+
+Log Entry : 
+01/17/2017 06:48:16
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInfLiquidacionSubcontratistas.aspx?tipo=Confirmados. Error Message:System.NotSupportedException
+This function can only be invoked from LINQ to Entities.
+   en System.Data.Entity.SqlServer.SqlFunctions.StringConvert(Nullable`1 number)
+   en ConsultasLinq._Closure$__._Lambda$__8-8(VB$AnonymousType_99`23 x) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\ConsultasLinq.vb:línea 623
+   en System.Linq.Enumerable.WhereSelectEnumerableIterator`2.MoveNext()
+   en System.Linq.Buffer`1..ctor(IEnumerable`1 source)
+   en System.Linq.Enumerable.ToArray[TSource](IEnumerable`1 source)
+   en ConsultasLinq.LiquidacionSubcontratistas(String SC, String ColumnaParaFiltrar, String TextoParaFiltrar, String sortExpression, Int64 startRowIndex, Int64 maximumRows, enumCDPestado estado, String QueContenga, Int32 idVendedor, Int32 idCorredor, Int32 idDestinatario, Int32 idIntermediario, Int32 idRemComercial, Int32 idArticulo, Int32 idProcedencia, Int32 idDestino, FiltroANDOR AplicarANDuORalFiltro, String ModoExportacion, DateTime fechadesde, DateTime fechahasta, Int32 puntoventa, Int32 idSubcontr, String& sTituloFiltroUsado) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\ConsultasLinq.vb:línea 625
+EntityFramework.SqlServer
+__________________________
+
+Log Entry : 
+01/17/2017 06:48:16
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInfLiquidacionSubcontratistas.aspx?tipo=Confirmados. Error Message:     Excluidas por nofacturarasubcontratistas o duplicadas: 0
+__________________________
+
+Log Entry : 
+01/17/2017 06:49:29
+Error in: http://localhost:58911/ProntoWeb/Principal.aspx. Error Message:System.Threading.ThreadAbortException
+Subproceso anulado.
+   en System.Threading.Thread.AbortInternal()
+   en System.Threading.Thread.Abort(Object stateInfo)
+   en System.Web.HttpResponse.AbortCurrentThread()
+   en System.Web.HttpResponse.End()
+   en System.Web.HttpResponse.Redirect(String url, Boolean endResponse, Boolean permanent)
+   en System.Web.HttpResponse.Redirect(String url)
+   en Login.Page_Load(Object sender, EventArgs e) en C:\Users\Administrador\Documents\bdl\pronto\prontoweb\Login.aspx.vb:línea 171
+mscorlib
+__________________________
+
+Log Entry : 
+01/17/2017 06:53:18
+Error in: http://localhost:58911/ProntoWeb/CartaDePorte.aspx?Id=2724041. Error Message:PV 1 0
+__________________________
+
+Log Entry : 
+01/17/2017 06:57:38
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInfLiquidacionSubcontratistas.aspx?tipo=Confirmados. Error Message:Generando informe
+__________________________
+
+Log Entry : 
+01/17/2017 06:58:13
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInfLiquidacionSubcontratistas.aspx?tipo=Confirmados. Error Message:System.ArgumentException
+El argumento 'SourceArray' no se puede convertir en el tipo 'String'.
+   en Microsoft.VisualBasic.Strings.Join(Object[] SourceArray, String Delimiter)
+   en ConsultasLinq.LiquidacionSubcontratistas(String SC, String ColumnaParaFiltrar, String TextoParaFiltrar, String sortExpression, Int64 startRowIndex, Int64 maximumRows, enumCDPestado estado, String QueContenga, Int32 idVendedor, Int32 idCorredor, Int32 idDestinatario, Int32 idIntermediario, Int32 idRemComercial, Int32 idArticulo, Int32 idProcedencia, Int32 idDestino, FiltroANDOR AplicarANDuORalFiltro, String ModoExportacion, DateTime fechadesde, DateTime fechahasta, Int32 puntoventa, Int32 idSubcontr, String& sTituloFiltroUsado) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\ConsultasLinq.vb:línea 626
+Microsoft.VisualBasic
+__________________________
+
+Log Entry : 
+01/17/2017 06:58:13
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInfLiquidacionSubcontratistas.aspx?tipo=Confirmados. Error Message:     Excluidas por nofacturarasubcontratistas o duplicadas: 0
+__________________________
+
+Log Entry : 
+01/17/2017 06:58:16
+Error in: http://localhost:58911/Reserved.ReportViewerWebControl.axd?OpType=SessionKeepAlive&ControlID=9aaee59fef4e43a68c8819b7d7bb6e30&Mode=true. Error Message:Microsoft.Reporting.WebForms.AspNetSessionExpiredException
+ASP.NET session has expired or could not be found
+   en Microsoft.Reporting.WebForms.ViewerDataOperation..ctor()
+   en Microsoft.Reporting.WebForms.HttpHandler.GetHandler(String operationType)
+   en Microsoft.Reporting.WebForms.HttpHandler.ProcessRequest(HttpContext context)
+   en System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   en System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+Microsoft.ReportViewer.WebForms
+__________________________
+
+Log Entry : 
+01/17/2017 06:58:20
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInfLiquidacionSubcontratistas.aspx?tipo=Confirmados. Error Message:Generando informe
+__________________________
+
+Log Entry : 
+01/17/2017 06:58:24
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInfLiquidacionSubcontratistas.aspx?tipo=Confirmados. Error Message:System.ArgumentException
+El argumento 'SourceArray' no se puede convertir en el tipo 'String'.
+   en Microsoft.VisualBasic.Strings.Join(Object[] SourceArray, String Delimiter)
+   en ConsultasLinq.LiquidacionSubcontratistas(String SC, String ColumnaParaFiltrar, String TextoParaFiltrar, String sortExpression, Int64 startRowIndex, Int64 maximumRows, enumCDPestado estado, String QueContenga, Int32 idVendedor, Int32 idCorredor, Int32 idDestinatario, Int32 idIntermediario, Int32 idRemComercial, Int32 idArticulo, Int32 idProcedencia, Int32 idDestino, FiltroANDOR AplicarANDuORalFiltro, String ModoExportacion, DateTime fechadesde, DateTime fechahasta, Int32 puntoventa, Int32 idSubcontr, String& sTituloFiltroUsado) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\ConsultasLinq.vb:línea 626
+Microsoft.VisualBasic
+__________________________
+
+Log Entry : 
+01/17/2017 06:58:24
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInfLiquidacionSubcontratistas.aspx?tipo=Confirmados. Error Message:     Excluidas por nofacturarasubcontratistas o duplicadas: 0
+__________________________
+
+Log Entry : 
+01/17/2017 06:58:26
+Error in: http://localhost:58911/Reserved.ReportViewerWebControl.axd?OpType=SessionKeepAlive&ControlID=9aaee59fef4e43a68c8819b7d7bb6e30&Mode=true. Error Message:Microsoft.Reporting.WebForms.AspNetSessionExpiredException
+ASP.NET session has expired or could not be found
+   en Microsoft.Reporting.WebForms.ViewerDataOperation..ctor()
+   en Microsoft.Reporting.WebForms.HttpHandler.GetHandler(String operationType)
+   en Microsoft.Reporting.WebForms.HttpHandler.ProcessRequest(HttpContext context)
+   en System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   en System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+Microsoft.ReportViewer.WebForms
+__________________________
+
+Log Entry : 
+01/17/2017 06:58:28
+Error in: http://localhost:58911/Reserved.ReportViewerWebControl.axd?OpType=SessionKeepAlive&ControlID=9aaee59fef4e43a68c8819b7d7bb6e30&Mode=true. Error Message:Microsoft.Reporting.WebForms.AspNetSessionExpiredException
+ASP.NET session has expired or could not be found
+   en Microsoft.Reporting.WebForms.ViewerDataOperation..ctor()
+   en Microsoft.Reporting.WebForms.HttpHandler.GetHandler(String operationType)
+   en Microsoft.Reporting.WebForms.HttpHandler.ProcessRequest(HttpContext context)
+   en System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   en System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+Microsoft.ReportViewer.WebForms
+__________________________
+
+Log Entry : 
+01/17/2017 06:58:34
+Error in: http://localhost:58911/Reserved.ReportViewerWebControl.axd?OpType=SessionKeepAlive&ControlID=9aaee59fef4e43a68c8819b7d7bb6e30&Mode=true. Error Message:Microsoft.Reporting.WebForms.AspNetSessionExpiredException
+ASP.NET session has expired or could not be found
+   en Microsoft.Reporting.WebForms.ViewerDataOperation..ctor()
+   en Microsoft.Reporting.WebForms.HttpHandler.GetHandler(String operationType)
+   en Microsoft.Reporting.WebForms.HttpHandler.ProcessRequest(HttpContext context)
+   en System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   en System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+Microsoft.ReportViewer.WebForms
+__________________________
+
+Log Entry : 
+01/17/2017 07:14:14
+Error in: http://localhost:58911/ProntoWeb/WebServiceWilliamsDestinos.asmx/GetCompletionList. Error Message:System.ComponentModel.Win32Exception
+Tiempo de espera de la operación de espera agotado
+
+
+__________________________
+
+Log Entry : 
+01/17/2017 07:14:16
+Error in: http://localhost:58911/ProntoWeb/WebServiceWilliamsDestinos.asmx/GetCompletionList. Error Message:System.Net.Mail.SmtpException
+Error al enviar correo.
+   en System.Net.Mail.SmtpClient.Send(MailMessage message)
+   en ProntoFuncionesGenerales.MandaEmailSimple(String Para, String Asunto, String Cuerpo, String De, String SmtpServer, String SmtpUser, String SmtpPass, String sStringGenerarAdjunto, Int64 SmtpPort, Int32 EnableSSL, String CCO, String img)
+   en ASP.global_asax.Application_Error(Object sender, EventArgs e) en C:\Users\Administrador\Documents\bdl\pronto\prontoweb\global.asax:línea 472
+System
+__________________________
