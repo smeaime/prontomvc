@@ -50,8 +50,10 @@ create function fSQL_GetDataTableFiltradoYPaginado(
 			@fechahasta As DateTime,
             @puntoventa int , 
             @IdAcopio int,
-            --@bTraerDuplicados As Boolean ,
-            @Contrato  VARCHAR(50) , 
+            
+			@bTraerDuplicados bit ,
+            
+			@Contrato  VARCHAR(50) , 
             @QueContenga2  VARCHAR(50) ,
             
 			@idClienteAuxiliarint int ,
@@ -296,9 +298,8 @@ where 1=1
 			@optCamionVagon = 'Todos' OR  @optCamionVagon = 'Ambas'  OR @optCamionVagon  IS NULL
 		)
 
-
-	--If Not bTraerDuplicados Then 
-	AND ISNULL(CDP.SubnumeroDeFacturacion, 0) <= 0  
+	AND (@bTraerDuplicados='TRUE' OR ISNULL(CDP.SubnumeroDeFacturacion, 0) <= 0)  
+	
 
 
 
@@ -470,7 +471,7 @@ select @startRowIndex=0,@maximumRows=9999999,@estado=0,@QueContenga=N'',@idVende
 ,@QueContenga2=N'',@idClienteAuxiliarint=-1,@AgrupadorDeTandaPeriodos=NULL,@Vagon=0,@Patente=N'',@optCamionVagon=N'Todos'
 
 
-select top 50 * FROM [dbo].[fSQL_GetDataTableFiltradoYPaginado](@startRowIndex, @maximumRows, @estado, @QueContenga, @idVendedor, @idCorredor, @idDestinatario, @idIntermediario, @idRemComercial, @idArticulo, @idProcedencia, @idDestino, @AplicarANDuORalFiltro, @ModoExportacion, @fechadesde, @fechahasta, @puntoventa, @IdAcopio, @Contrato, @QueContenga2, @idClienteAuxiliarint, @AgrupadorDeTandaPeriodos, @Vagon, @Patente, @optCamionVagon)
+select top 50 * FROM [dbo].[fSQL_GetDataTableFiltradoYPaginado](@startRowIndex, @maximumRows, @estado, @QueContenga, @idVendedor, @idCorredor, @idDestinatario, @idIntermediario, @idRemComercial, @idArticulo, @idProcedencia, @idDestino, @AplicarANDuORalFiltro, @ModoExportacion, @fechadesde, @fechahasta, @puntoventa, @IdAcopio, 'FALSE', @Contrato, @QueContenga2, @idClienteAuxiliarint, @AgrupadorDeTandaPeriodos, @Vagon, @Patente, @optCamionVagon)
 ORDER BY IdCartaDePorte DESC
 --ORDER BY NumeroCartaDePorte DESC
 
@@ -557,6 +558,7 @@ from dbo.fSQL_GetDataTableFiltradoYPaginado
 					'2016-01-09 00:00:00',
 								NULL, 
 					NULL,
+					'FALSE',
 					NULL, 
 					NULL, 
 
@@ -594,6 +596,7 @@ from dbo.fSQL_GetDataTableFiltradoYPaginado
 					'2016-02-01 00:00:00',
 					NULL, 
 					NULL,
+					 'FALSE',
 					NULL, 
 					NULL, 
 
@@ -700,6 +703,7 @@ create procedure  wCartasPorte_WraperDeLaTVF
 							@fechahasta, 
 							@puntoventa, 
 							@IdAcopio,
+							 'FALSE',
 							@Contrato, 
 							@QueContenga2, 
 

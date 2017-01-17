@@ -199,3 +199,159 @@ go
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+exec sp_executesql N'SELECT 
+    1 AS [C1], 
+    [Project3].[NumeroCartaDePorte] AS [NumeroCartaDePorte], 
+    [Project3].[IdCartaDePorte] AS [IdCartaDePorte], 
+    [Project3].[FechaDescarga] AS [FechaDescarga], 
+    [Project3].[NetoFinal] AS [NetoFinal], 
+    CASE WHEN ([Project3].[Subcontr1] IS NULL) THEN [Project3].[Subcontratista1] ELSE [Project3].[Subcontr1] END AS [C2], 
+    CASE WHEN ([Project3].[Subcontr2] IS NULL) THEN [Project3].[Subcontratista2] ELSE [Project3].[Subcontr2] END AS [C3], 
+    CASE WHEN (([Project3].[Destino] IN (54, 55, 58, 62, 69)) AND ([Project3].[Destino] IS NOT NULL)) THEN CASE WHEN ((CASE WHEN (CASE WHEN (0 = [Project3].[SubnumeroVagon]) THEN cast(1 as bit) WHEN ( NOT ((0 = [Project3].[SubnumeroVagon]) AND ([Project3].[SubnumeroVagon] IS NOT NULL))) THEN cast(0 as bit) END IS NULL) THEN cast(0 as bit) WHEN (0 = [Project3].[SubnumeroVagon]) THEN cast(1 as bit) WHEN ( NOT ((0 = [Project3].[SubnumeroVagon]) AND ([Project3].[SubnumeroVagon] IS NOT NULL))) THEN cast(0 as bit) END) = 1) THEN N''Camiones'' ELSE N''Vagones'' END ELSE N'''' END AS [C4], 
+    [Project3].[ExcluirDeSubcontratistas] AS [ExcluirDeSubcontratistas], 
+    [Project3].[SubnumeroDeFacturacion] AS [SubnumeroDeFacturacion], 
+    [Project3].[TitularDesc] AS [TitularDesc], 
+    [Project3].[IntermediarioDesc] AS [IntermediarioDesc], 
+    [Project3].[RComercialDesc] AS [RComercialDesc], 
+    [Project3].[CorredorDesc] AS [CorredorDesc], 
+    [Project3].[EntregadorDesc] AS [EntregadorDesc], 
+    [Project3].[ProcedenciaDesc] AS [ProcedenciaDesc], 
+    [Project3].[Descripcion] AS [Descripcion], 
+    [Project3].[RazonSocial] AS [RazonSocial], 
+    [Project3].[RazonSocial1] AS [RazonSocial1], 
+    CASE WHEN (CASE WHEN (''SI'' = [Project3].[Exporta]) THEN CASE WHEN ((CASE WHEN (CASE WHEN (([Project3].[SubnumeroVagon] <= 0) OR ( NOT (([Project3].[Destino] IN (54, 55, 58, 62, 69)) AND ([Project3].[Destino] IS NOT NULL)))) THEN cast(1 as bit) WHEN ( NOT (([Project3].[SubnumeroVagon] <= 0) OR ( NOT (([Project3].[Destino] IN (54, 55, 58, 62, 69)) AND ([Project3].[Destino] IS NOT NULL))))) THEN cast(0 as bit) END IS NULL) THEN cast(0 as bit) WHEN (([Project3].[SubnumeroVagon] <= 0) OR ( NOT (([Project3].[Destino] IN (54, 55, 58, 62, 69)) AND ([Project3].[Destino] IS NOT NULL)))) THEN cast(1 as bit) WHEN ( NOT (([Project3].[SubnumeroVagon] <= 0) OR ( NOT (([Project3].[Destino] IN (54, 55, 58, 62, 69)) AND ([Project3].[Destino] IS NOT NULL))))) THEN cast(0 as bit) END) = 1) THEN [Project3].[PrecioCaladaExportacion] ELSE [Project3].[PrecioVagonesCaladaExportacion] END WHEN ((CASE WHEN (CASE WHEN (([Project3].[SubnumeroVagon] <= 0) OR ( NOT (([Project3].[Destino] IN (54, 55, 58, 62, 69)) AND ([Project3].[Destino] IS NOT NULL)))) THEN cast(1 as bit) WHEN ( NOT (([Project3].[SubnumeroVagon] <= 0) OR ( NOT (([Project3].[Destino] IN (54, 55, 58, 62, 69)) AND ([Project3].[Destino] IS NOT NULL))))) THEN cast(0 as bit) END IS NULL) THEN cast(0 as bit) WHEN (([Project3].[SubnumeroVagon] <= 0) OR ( NOT (([Project3].[Destino] IN (54, 55, 58, 62, 69)) AND ([Project3].[Destino] IS NOT NULL)))) THEN cast(1 as bit) WHEN ( NOT (([Project3].[SubnumeroVagon] <= 0) OR ( NOT (([Project3].[Destino] IN (54, 55, 58, 62, 69)) AND ([Project3].[Destino] IS NOT NULL))))) THEN cast(0 as bit) END) = 1) THEN [Project3].[PrecioCaladaLocal] ELSE [Project3].[PrecioVagonesCalada] END IS NULL) THEN cast(0 as decimal(18)) WHEN (''SI'' = [Project3].[Exporta]) THEN CASE WHEN ((CASE WHEN (CASE WHEN (([Project3].[SubnumeroVagon] <= 0) OR ( NOT (([Project3].[Destino] IN (54, 55, 58, 62, 69)) AND ([Project3].[Destino] IS NOT NULL)))) THEN cast(1 as bit) WHEN ( NOT (([Project3].[SubnumeroVagon] <= 0) OR ( NOT (([Project3].[Destino] IN (54, 55, 58, 62, 69)) AND ([Project3].[Destino] IS NOT NULL))))) THEN cast(0 as bit) END IS NULL) THEN cast(0 as bit) WHEN (([Project3].[SubnumeroVagon] <= 0) OR ( NOT (([Project3].[Destino] IN (54, 55, 58, 62, 69)) AND ([Project3].[Destino] IS NOT NULL)))) THEN cast(1 as bit) WHEN ( NOT (([Project3].[SubnumeroVagon] <= 0) OR ( NOT (([Project3].[Destino] IN (54, 55, 58, 62, 69)) AND ([Project3].[Destino] IS NOT NULL))))) THEN cast(0 as bit) END) = 1) THEN [Project3].[PrecioCaladaExportacion] ELSE [Project3].[PrecioVagonesCaladaExportacion] END WHEN ((CASE WHEN (CASE WHEN (([Project3].[SubnumeroVagon] <= 0) OR ( NOT (([Project3].[Destino] IN (54, 55, 58, 62, 69)) AND ([Project3].[Destino] IS NOT NULL)))) THEN cast(1 as bit) WHEN ( NOT (([Project3].[SubnumeroVagon] <= 0) OR ( NOT (([Project3].[Destino] IN (54, 55, 58, 62, 69)) AND ([Project3].[Destino] IS NOT NULL))))) THEN cast(0 as bit) END IS NULL) THEN cast(0 as bit) WHEN (([Project3].[SubnumeroVagon] <= 0) OR ( NOT (([Project3].[Destino] IN (54, 55, 58, 62, 69)) AND ([Project3].[Destino] IS NOT NULL)))) THEN cast(1 as bit) WHEN ( NOT (([Project3].[SubnumeroVagon] <= 0) OR ( NOT (([Project3].[Destino] IN (54, 55, 58, 62, 69)) AND ([Project3].[Destino] IS NOT NULL))))) THEN cast(0 as bit) END) = 1) THEN [Project3].[PrecioCaladaLocal] ELSE [Project3].[PrecioVagonesCalada] END AS [C5], 
+    CASE WHEN (CASE WHEN (''SI'' = [Project3].[Exporta]) THEN CASE WHEN ((CASE WHEN (CASE WHEN (([Project3].[SubnumeroVagon] <= 0) OR ( NOT (([Project3].[Destino] IN (54, 55, 58, 62, 69)) AND ([Project3].[Destino] IS NOT NULL)))) THEN cast(1 as bit) WHEN ( NOT (([Project3].[SubnumeroVagon] <= 0) OR ( NOT (([Project3].[Destino] IN (54, 55, 58, 62, 69)) AND ([Project3].[Destino] IS NOT NULL))))) THEN cast(0 as bit) END IS NULL) THEN cast(0 as bit) WHEN (([Project3].[SubnumeroVagon] <= 0) OR ( NOT (([Project3].[Destino] IN (54, 55, 58, 62, 69)) AND ([Project3].[Destino] IS NOT NULL)))) THEN cast(1 as bit) WHEN ( NOT (([Project3].[SubnumeroVagon] <= 0) OR ( NOT (([Project3].[Destino] IN (54, 55, 58, 62, 69)) AND ([Project3].[Destino] IS NOT NULL))))) THEN cast(0 as bit) END) = 1) THEN CASE WHEN ((CASE WHEN (CASE WHEN (cast(0 as decimal(18)) = [Limit2].[PrecioDescargaExportacion]) THEN cast(1 as bit) WHEN ( NOT ((cast(0 as decimal(18)) = [Limit2].[PrecioDescargaExportacion]) AND ([Limit2].[PrecioDescargaExportacion] IS NOT NULL))) THEN cast(0 as bit) END IS NULL) THEN cast(0 as bit) WHEN (cast(0 as decimal(18)) = [Limit2].[PrecioDescargaExportacion]) THEN cast(1 as bit) WHEN ( NOT ((cast(0 as decimal(18)) = [Limit2].[PrecioDescargaExportacion]) AND ([Limit2].[PrecioDescargaExportacion] IS NOT NULL))) THEN cast(0 as bit) END) = 1) THEN [Limit2].[PrecioCaladaExportacion] ELSE [Limit2].[PrecioDescargaExportacion] END WHEN ((CASE WHEN (CASE WHEN (cast(0 as decimal(18)) = [Limit2].[PrecioVagonesBalanzaExportacion]) THEN cast(1 as bit) WHEN ( NOT ((cast(0 as decimal(18)) = [Limit2].[PrecioVagonesBalanzaExportacion]) AND ([Limit2].[PrecioVagonesBalanzaExportacion] IS NOT NULL))) THEN cast(0 as bit) END IS NULL) THEN cast(0 as bit) WHEN (cast(0 as decimal(18)) = [Limit2].[PrecioVagonesBalanzaExportacion]) THEN cast(1 as bit) WHEN ( NOT ((cast(0 as decimal(18)) = [Limit2].[PrecioVagonesBalanzaExportacion]) AND ([Limit2].[PrecioVagonesBalanzaExportacion] IS NOT NULL))) THEN cast(0 as bit) END) = 1) THEN [Limit2].[PrecioVagonesCaladaExportacion] ELSE [Limit2].[PrecioVagonesBalanzaExportacion] END WHEN ((CASE WHEN (CASE WHEN (([Project3].[SubnumeroVagon] <= 0) OR ( NOT (([Project3].[Destino] IN (54, 55, 58, 62, 69)) AND ([Project3].[Destino] IS NOT NULL)))) THEN cast(1 as bit) WHEN ( NOT (([Project3].[SubnumeroVagon] <= 0) OR ( NOT (([Project3].[Destino] IN (54, 55, 58, 62, 69)) AND ([Project3].[Destino] IS NOT NULL))))) THEN cast(0 as bit) END IS NULL) THEN cast(0 as bit) WHEN (([Project3].[SubnumeroVagon] <= 0) OR ( NOT (([Project3].[Destino] IN (54, 55, 58, 62, 69)) AND ([Project3].[Destino] IS NOT NULL)))) THEN cast(1 as bit) WHEN ( NOT (([Project3].[SubnumeroVagon] <= 0) OR ( NOT (([Project3].[Destino] IN (54, 55, 58, 62, 69)) AND ([Project3].[Destino] IS NOT NULL))))) THEN cast(0 as bit) END) = 1) THEN CASE WHEN ((CASE WHEN (CASE WHEN (cast(0 as decimal(18)) = [Limit2].[PrecioDescargaLocal]) THEN cast(1 as bit) WHEN ( NOT ((cast(0 as decimal(18)) = [Limit2].[PrecioDescargaLocal]) AND ([Limit2].[PrecioDescargaLocal] IS NOT NULL))) THEN cast(0 as bit) END IS NULL) THEN cast(0 as bit) WHEN (cast(0 as decimal(18)) = [Limit2].[PrecioDescargaLocal]) THEN cast(1 as bit) WHEN ( NOT ((cast(0 as decimal(18)) = [Limit2].[PrecioDescargaLocal]) AND ([Limit2].[PrecioDescargaLocal] IS NOT NULL))) THEN cast(0 as bit) END) = 1) THEN [Limit2].[PrecioCaladaLocal] ELSE [Limit2].[PrecioDescargaLocal] END WHEN ((CASE WHEN (CASE WHEN (cast(0 as decimal(18)) = [Limit2].[PrecioVagonesBalanza]) THEN cast(1 as bit) WHEN ( NOT ((cast(0 as decimal(18)) = [Limit2].[PrecioVagonesBalanza]) AND ([Limit2].[PrecioVagonesBalanza] IS NOT NULL))) THEN cast(0 as bit) END IS NULL) THEN cast(0 as bit) WHEN (cast(0 as decimal(18)) = [Limit2].[PrecioVagonesBalanza]) THEN cast(1 as bit) WHEN ( NOT ((cast(0 as decimal(18)) = [Limit2].[PrecioVagonesBalanza]) AND ([Limit2].[PrecioVagonesBalanza] IS NOT NULL))) THEN cast(0 as bit) END) = 1) THEN [Limit2].[PrecioVagonesCalada] ELSE [Limit2].[PrecioVagonesBalanza] END IS NULL) THEN cast(0 as decimal(18)) WHEN (''SI'' = [Project3].[Exporta]) THEN CASE WHEN ((CASE WHEN (CASE WHEN (([Project3].[SubnumeroVagon] <= 0) OR ( NOT (([Project3].[Destino] IN (54, 55, 58, 62, 69)) AND ([Project3].[Destino] IS NOT NULL)))) THEN cast(1 as bit) WHEN ( NOT (([Project3].[SubnumeroVagon] <= 0) OR ( NOT (([Project3].[Destino] IN (54, 55, 58, 62, 69)) AND ([Project3].[Destino] IS NOT NULL))))) THEN cast(0 as bit) END IS NULL) THEN cast(0 as bit) WHEN (([Project3].[SubnumeroVagon] <= 0) OR ( NOT (([Project3].[Destino] IN (54, 55, 58, 62, 69)) AND ([Project3].[Destino] IS NOT NULL)))) THEN cast(1 as bit) WHEN ( NOT (([Project3].[SubnumeroVagon] <= 0) OR ( NOT (([Project3].[Destino] IN (54, 55, 58, 62, 69)) AND ([Project3].[Destino] IS NOT NULL))))) THEN cast(0 as bit) END) = 1) THEN CASE WHEN ((CASE WHEN (CASE WHEN (cast(0 as decimal(18)) = [Limit2].[PrecioDescargaExportacion]) THEN cast(1 as bit) WHEN ( NOT ((cast(0 as decimal(18)) = [Limit2].[PrecioDescargaExportacion]) AND ([Limit2].[PrecioDescargaExportacion] IS NOT NULL))) THEN cast(0 as bit) END IS NULL) THEN cast(0 as bit) WHEN (cast(0 as decimal(18)) = [Limit2].[PrecioDescargaExportacion]) THEN cast(1 as bit) WHEN ( NOT ((cast(0 as decimal(18)) = [Limit2].[PrecioDescargaExportacion]) AND ([Limit2].[PrecioDescargaExportacion] IS NOT NULL))) THEN cast(0 as bit) END) = 1) THEN [Limit2].[PrecioCaladaExportacion] ELSE [Limit2].[PrecioDescargaExportacion] END WHEN ((CASE WHEN (CASE WHEN (cast(0 as decimal(18)) = [Limit2].[PrecioVagonesBalanzaExportacion]) THEN cast(1 as bit) WHEN ( NOT ((cast(0 as decimal(18)) = [Limit2].[PrecioVagonesBalanzaExportacion]) AND ([Limit2].[PrecioVagonesBalanzaExportacion] IS NOT NULL))) THEN cast(0 as bit) END IS NULL) THEN cast(0 as bit) WHEN (cast(0 as decimal(18)) = [Limit2].[PrecioVagonesBalanzaExportacion]) THEN cast(1 as bit) WHEN ( NOT ((cast(0 as decimal(18)) = [Limit2].[PrecioVagonesBalanzaExportacion]) AND ([Limit2].[PrecioVagonesBalanzaExportacion] IS NOT NULL))) THEN cast(0 as bit) END) = 1) THEN [Limit2].[PrecioVagonesCaladaExportacion] ELSE [Limit2].[PrecioVagonesBalanzaExportacion] END WHEN ((CASE WHEN (CASE WHEN (([Project3].[SubnumeroVagon] <= 0) OR ( NOT (([Project3].[Destino] IN (54, 55, 58, 62, 69)) AND ([Project3].[Destino] IS NOT NULL)))) THEN cast(1 as bit) WHEN ( NOT (([Project3].[SubnumeroVagon] <= 0) OR ( NOT (([Project3].[Destino] IN (54, 55, 58, 62, 69)) AND ([Project3].[Destino] IS NOT NULL))))) THEN cast(0 as bit) END IS NULL) THEN cast(0 as bit) WHEN (([Project3].[SubnumeroVagon] <= 0) OR ( NOT (([Project3].[Destino] IN (54, 55, 58, 62, 69)) AND ([Project3].[Destino] IS NOT NULL)))) THEN cast(1 as bit) WHEN ( NOT (([Project3].[SubnumeroVagon] <= 0) OR ( NOT (([Project3].[Destino] IN (54, 55, 58, 62, 69)) AND ([Project3].[Destino] IS NOT NULL))))) THEN cast(0 as bit) END) = 1) THEN CASE WHEN ((CASE WHEN (CASE WHEN (cast(0 as decimal(18)) = [Limit2].[PrecioDescargaLocal]) THEN cast(1 as bit) WHEN ( NOT ((cast(0 as decimal(18)) = [Limit2].[PrecioDescargaLocal]) AND ([Limit2].[PrecioDescargaLocal] IS NOT NULL))) THEN cast(0 as bit) END IS NULL) THEN cast(0 as bit) WHEN (cast(0 as decimal(18)) = [Limit2].[PrecioDescargaLocal]) THEN cast(1 as bit) WHEN ( NOT ((cast(0 as decimal(18)) = [Limit2].[PrecioDescargaLocal]) AND ([Limit2].[PrecioDescargaLocal] IS NOT NULL))) THEN cast(0 as bit) END) = 1) THEN [Limit2].[PrecioCaladaLocal] ELSE [Limit2].[PrecioDescargaLocal] END WHEN ((CASE WHEN (CASE WHEN (cast(0 as decimal(18)) = [Limit2].[PrecioVagonesBalanza]) THEN cast(1 as bit) WHEN ( NOT ((cast(0 as decimal(18)) = [Limit2].[PrecioVagonesBalanza]) AND ([Limit2].[PrecioVagonesBalanza] IS NOT NULL))) THEN cast(0 as bit) END IS NULL) THEN cast(0 as bit) WHEN (cast(0 as decimal(18)) = [Limit2].[PrecioVagonesBalanza]) THEN cast(1 as bit) WHEN ( NOT ((cast(0 as decimal(18)) = [Limit2].[PrecioVagonesBalanza]) AND ([Limit2].[PrecioVagonesBalanza] IS NOT NULL))) THEN cast(0 as bit) END) = 1) THEN [Limit2].[PrecioVagonesCalada] ELSE [Limit2].[PrecioVagonesBalanza] END AS [C6], 
+    [Project3].[Exporta] AS [Exporta], 
+    [Project3].[Corredor] AS [Corredor], 
+    CASE WHEN ([Project3].[IdClienteEntregador] IS NULL) THEN 0 ELSE [Project3].[IdClienteEntregador] END AS [C7]
+    FROM   (SELECT 
+        [Project1].[IdCartaDePorte] AS [IdCartaDePorte], 
+        [Project1].[NumeroCartaDePorte] AS [NumeroCartaDePorte], 
+        [Project1].[Vendedor] AS [Vendedor], 
+        [Project1].[CuentaOrden1] AS [CuentaOrden1], 
+        [Project1].[CuentaOrden2] AS [CuentaOrden2], 
+        [Project1].[Corredor] AS [Corredor], 
+        [Project1].[Entregador] AS [Entregador], 
+        [Project1].[IdArticulo] AS [IdArticulo], 
+        [Project1].[NetoFinal] AS [NetoFinal], 
+        [Project1].[Destino] AS [Destino], 
+        [Project1].[Subcontr1] AS [Subcontr1], 
+        [Project1].[Subcontr2] AS [Subcontr2], 
+        [Project1].[FechaDescarga] AS [FechaDescarga], 
+        [Project1].[Exporta] AS [Exporta], 
+        [Project1].[PuntoVenta] AS [PuntoVenta], 
+        [Project1].[SubnumeroVagon] AS [SubnumeroVagon], 
+        [Project1].[ExcluirDeSubcontratistas] AS [ExcluirDeSubcontratistas], 
+        [Project1].[SubnumeroDeFacturacion] AS [SubnumeroDeFacturacion], 
+        [Project1].[IdClienteEntregador] AS [IdClienteEntregador], 
+        [Project1].[TitularDesc] AS [TitularDesc], 
+        [Project1].[IntermediarioDesc] AS [IntermediarioDesc], 
+        [Project1].[RComercialDesc] AS [RComercialDesc], 
+        [Project1].[CorredorDesc] AS [CorredorDesc], 
+        [Project1].[EntregadorDesc] AS [EntregadorDesc], 
+        [Project1].[ProcedenciaDesc] AS [ProcedenciaDesc], 
+        [Project1].[Descripcion] AS [Descripcion], 
+        [Project1].[Subcontratista1] AS [Subcontratista1], 
+        [Project1].[Subcontratista2] AS [Subcontratista2], 
+        [Project1].[RazonSocial] AS [RazonSocial], 
+        [Project1].[RazonSocial1] AS [RazonSocial1], 
+        [Limit1].[PrecioCaladaLocal] AS [PrecioCaladaLocal], 
+        [Limit1].[PrecioCaladaExportacion] AS [PrecioCaladaExportacion], 
+        [Limit1].[PrecioVagonesCalada] AS [PrecioVagonesCalada], 
+        [Limit1].[PrecioVagonesCaladaExportacion] AS [PrecioVagonesCaladaExportacion], 
+        [Extent7].[IdListaPrecios] AS [IdListaPrecios]
+        FROM    (SELECT 
+            [Extent1].[IdCartaDePorte] AS [IdCartaDePorte], 
+            [Extent1].[NumeroCartaDePorte] AS [NumeroCartaDePorte], 
+            [Extent1].[Vendedor] AS [Vendedor], 
+            [Extent1].[CuentaOrden1] AS [CuentaOrden1], 
+            [Extent1].[CuentaOrden2] AS [CuentaOrden2], 
+            [Extent1].[Corredor] AS [Corredor], 
+            [Extent1].[Entregador] AS [Entregador], 
+            [Extent1].[IdArticulo] AS [IdArticulo], 
+            [Extent1].[NetoFinal] AS [NetoFinal], 
+            [Extent1].[Destino] AS [Destino], 
+            [Extent1].[Subcontr1] AS [Subcontr1], 
+            [Extent1].[Subcontr2] AS [Subcontr2], 
+            [Extent1].[FechaDescarga] AS [FechaDescarga], 
+            [Extent1].[Exporta] AS [Exporta], 
+            [Extent1].[PuntoVenta] AS [PuntoVenta], 
+            [Extent1].[SubnumeroVagon] AS [SubnumeroVagon], 
+            [Extent1].[ExcluirDeSubcontratistas] AS [ExcluirDeSubcontratistas], 
+            [Extent1].[SubnumeroDeFacturacion] AS [SubnumeroDeFacturacion], 
+            [Extent1].[IdClienteEntregador] AS [IdClienteEntregador], 
+            [Extent1].[TitularDesc] AS [TitularDesc], 
+            [Extent1].[IntermediarioDesc] AS [IntermediarioDesc], 
+            [Extent1].[RComercialDesc] AS [RComercialDesc], 
+            [Extent1].[CorredorDesc] AS [CorredorDesc], 
+            [Extent1].[EntregadorDesc] AS [EntregadorDesc], 
+            [Extent1].[ProcedenciaDesc] AS [ProcedenciaDesc], 
+            [Extent2].[Descripcion] AS [Descripcion], 
+            [Extent2].[Subcontratista1] AS [Subcontratista1], 
+            [Extent2].[Subcontratista2] AS [Subcontratista2], 
+            [Extent3].[RazonSocial] AS [RazonSocial], 
+            [Extent4].[RazonSocial] AS [RazonSocial1], 
+            [Extent4].[IdListaPrecios] AS [IdListaPrecios], 
+            [Extent5].[IdListaPrecios] AS [IdListaPrecios1]
+            FROM     [dbo].[fSQL_GetDataTableFiltradoYPaginado](@startRowIndex, @maximumRows, @estado, @QueContenga, @idVendedor, @idCorredor, @idDestinatario, @idIntermediario, @idRemComercial, @idArticulo, @idProcedencia, @idDestino, @AplicarANDuORalFiltro, @ModoExportacion, @fechadesde, @fechahasta, @puntoventa, @IdAcopio, @bTraerDuplicados, @Contrato, @QueContenga2, @idClienteAuxiliarint, @AgrupadorDeTandaPeriodos, @Vagon, @Patente, @optCamionVagon) AS [Extent1]
+            LEFT OUTER JOIN [dbo].[WilliamsDestinos] AS [Extent2] ON [Extent2].[IdWilliamsDestino] = (CASE WHEN ([Extent1].[Destino] IS NULL) THEN 0 ELSE [Extent1].[Destino] END)
+            LEFT OUTER JOIN [dbo].[Clientes] AS [Extent3] ON [Extent3].[IdCliente] = (CASE WHEN ([Extent1].[Subcontr1] IS NULL) THEN [Extent2].[Subcontratista1] ELSE [Extent1].[Subcontr1] END)
+            LEFT OUTER JOIN [dbo].[Clientes] AS [Extent4] ON [Extent4].[IdCliente] = (CASE WHEN ([Extent1].[Subcontr2] IS NULL) THEN [Extent2].[Subcontratista2] ELSE [Extent1].[Subcontr2] END)
+            LEFT OUTER JOIN [dbo].[ListasPrecios] AS [Extent5] ON [Extent5].[IdListaPrecios] = [Extent3].[IdListaPrecios] ) AS [Project1]
+        OUTER APPLY  (SELECT TOP (1) [Project2].[PrecioCaladaLocal] AS [PrecioCaladaLocal], [Project2].[PrecioCaladaExportacion] AS [PrecioCaladaExportacion], [Project2].[PrecioVagonesCalada] AS [PrecioVagonesCalada], [Project2].[PrecioVagonesCaladaExportacion] AS [PrecioVagonesCaladaExportacion]
+            FROM ( SELECT 
+                [Extent6].[PrecioCaladaLocal] AS [PrecioCaladaLocal], 
+                [Extent6].[PrecioCaladaExportacion] AS [PrecioCaladaExportacion], 
+                [Extent6].[IdCliente] AS [IdCliente], 
+                [Extent6].[PrecioVagonesCalada] AS [PrecioVagonesCalada], 
+                [Extent6].[PrecioVagonesCaladaExportacion] AS [PrecioVagonesCaladaExportacion]
+                FROM [dbo].[ListasPreciosDetalle] AS [Extent6]
+                WHERE (([Extent6].[IdListaPrecios] = [Project1].[IdListaPrecios1]) OR (([Extent6].[IdListaPrecios] IS NULL) AND ([Project1].[IdListaPrecios1] IS NULL))) AND (([Extent6].[IdArticulo] = [Project1].[IdArticulo]) OR (([Extent6].[IdArticulo] IS NULL) AND ([Project1].[IdArticulo] IS NULL))) AND (([Extent6].[IdCliente] IS NULL) OR ([Extent6].[IdCliente] = [Project1].[Vendedor]) OR (([Extent6].[IdCliente] IS NULL) AND ([Project1].[Vendedor] IS NULL)) OR ([Extent6].[IdCliente] = [Project1].[Entregador]) OR (([Extent6].[IdCliente] IS NULL) AND ([Project1].[Entregador] IS NULL)) OR ([Extent6].[IdCliente] = [Project1].[CuentaOrden1]) OR (([Extent6].[IdCliente] IS NULL) AND ([Project1].[CuentaOrden1] IS NULL)) OR ([Extent6].[IdCliente] = [Project1].[CuentaOrden2]) OR (([Extent6].[IdCliente] IS NULL) AND ([Project1].[CuentaOrden2] IS NULL)))
+            )  AS [Project2]
+            ORDER BY [Project2].[IdCliente] DESC ) AS [Limit1]
+        LEFT OUTER JOIN [dbo].[ListasPrecios] AS [Extent7] ON [Extent7].[IdListaPrecios] = [Project1].[IdListaPrecios] ) AS [Project3]
+    OUTER APPLY  (SELECT TOP (1) [Project4].[PrecioDescargaLocal] AS [PrecioDescargaLocal], [Project4].[PrecioDescargaExportacion] AS [PrecioDescargaExportacion], [Project4].[PrecioCaladaLocal] AS [PrecioCaladaLocal], [Project4].[PrecioCaladaExportacion] AS [PrecioCaladaExportacion], [Project4].[PrecioVagonesBalanza] AS [PrecioVagonesBalanza], [Project4].[PrecioVagonesCalada] AS [PrecioVagonesCalada], [Project4].[PrecioVagonesBalanzaExportacion] AS [PrecioVagonesBalanzaExportacion], [Project4].[PrecioVagonesCaladaExportacion] AS [PrecioVagonesCaladaExportacion]
+        FROM ( SELECT 
+            [Extent8].[PrecioDescargaLocal] AS [PrecioDescargaLocal], 
+            [Extent8].[PrecioDescargaExportacion] AS [PrecioDescargaExportacion], 
+            [Extent8].[PrecioCaladaLocal] AS [PrecioCaladaLocal], 
+            [Extent8].[PrecioCaladaExportacion] AS [PrecioCaladaExportacion], 
+            [Extent8].[IdCliente] AS [IdCliente], 
+            [Extent8].[PrecioVagonesBalanza] AS [PrecioVagonesBalanza], 
+            [Extent8].[PrecioVagonesCalada] AS [PrecioVagonesCalada], 
+            [Extent8].[PrecioVagonesBalanzaExportacion] AS [PrecioVagonesBalanzaExportacion], 
+            [Extent8].[PrecioVagonesCaladaExportacion] AS [PrecioVagonesCaladaExportacion]
+            FROM [dbo].[ListasPreciosDetalle] AS [Extent8]
+            WHERE (([Extent8].[IdListaPrecios] = [Project3].[IdListaPrecios]) OR (([Extent8].[IdListaPrecios] IS NULL) AND ([Project3].[IdListaPrecios] IS NULL))) AND (([Extent8].[IdArticulo] = [Project3].[IdArticulo]) OR (([Extent8].[IdArticulo] IS NULL) AND ([Project3].[IdArticulo] IS NULL))) AND (([Extent8].[IdCliente] IS NULL) OR ([Extent8].[IdCliente] = [Project3].[Vendedor]) OR (([Extent8].[IdCliente] IS NULL) AND ([Project3].[Vendedor] IS NULL)) OR ([Extent8].[IdCliente] = [Project3].[Entregador]) OR (([Extent8].[IdCliente] IS NULL) AND ([Project3].[Entregador] IS NULL)) OR ([Extent8].[IdCliente] = [Project3].[CuentaOrden1]) OR (([Extent8].[IdCliente] IS NULL) AND ([Project3].[CuentaOrden1] IS NULL)) OR ([Extent8].[IdCliente] = [Project3].[CuentaOrden2]) OR (([Extent8].[IdCliente] IS NULL) AND ([Project3].[CuentaOrden2] IS NULL)))
+        )  AS [Project4]
+        ORDER BY [Project4].[IdCliente] DESC ) AS [Limit2]
+    WHERE (@p__linq__0 = -1 OR @p__linq__1 = (CASE WHEN ([Project3].[Subcontr1] IS NULL) THEN [Project3].[Subcontratista1] ELSE [Project3].[Subcontr1] END) OR @p__linq__2 = (CASE WHEN ([Project3].[Subcontr2] IS NULL) THEN [Project3].[Subcontratista2] ELSE [Project3].[Subcontr2] END)) AND (@p__linq__3 = -1 OR [Project3].[PuntoVenta] = @p__linq__4)',
+	
+	
+	
+	declare @startRowIndex int,@maximumRows int,@estado int,@QueContenga nvarchar(4000),@idVendedor int,@idCorredor int,@idDestinatario int,@idIntermediario int,@idRemComercial int,@idArticulo int,@idProcedencia int,@idDestino int,@AplicarANDuORalFiltro int,@ModoExportacion nvarchar(4000),@fechadesde datetime2(7),@fechahasta datetime2(7),@puntoventa int,@IdAcopio int,@bTraerDuplicados bit,@Contrato nvarchar(4000),@QueContenga2 nvarchar(4000),@idClienteAuxiliarint int,@AgrupadorDeTandaPeriodos int,@Vagon int,@Patente nvarchar(4000),@optCamionVagon nvarchar(4000),@p__linq__0 int,@p__linq__1 int,@p__linq__2 int,@p__linq__3 int,@p__linq__4 int
+	select 	@startRowIndex=NULL,@maximumRows=NULL,@estado=NULL,@QueContenga=NULL,@idVendedor=-1,@idCorredor=-1,@idDestinatario=-1,@idIntermediario=-1,@idRemComercial=-1,@idArticulo=-1,@idProcedencia=-1,@idDestino=90,@AplicarANDuORalFiltro=1,@ModoExportacion=N'Ambos',@fechadesde='2016-12-01 00:00:00',@fechahasta='2016-12-31 00:00:00',@puntoventa=-1,@IdAcopio=NULL,@bTraerDuplicados=0,@Contrato=NULL,@QueContenga2=NULL,@idClienteAuxiliarint=NULL,@AgrupadorDeTandaPeriodos=NULL,@Vagon=NULL,@Patente=NULL,@optCamionVagon=NULL,@p__linq__0=-1,@p__linq__1=-1,@p__linq__2=-1,@p__linq__3=-1,@p__linq__4=-1
+
+	select * from [dbo].[fSQL_GetDataTableFiltradoYPaginado](@startRowIndex, @maximumRows, @estado, @QueContenga, @idVendedor, @idCorredor, @idDestinatario, @idIntermediario, @idRemComercial, @idArticulo, @idProcedencia, @idDestino, @AplicarANDuORalFiltro, @ModoExportacion, @fechadesde, @fechahasta, @puntoventa, @IdAcopio, @bTraerDuplicados, @Contrato, @QueContenga2, @idClienteAuxiliarint, @AgrupadorDeTandaPeriodos, @Vagon, @Patente, @optCamionVagon) AS [Extent1] order by numerocartadeporte
+            
