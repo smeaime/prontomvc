@@ -375,7 +375,7 @@ namespace ProntoMVC.Tests
             //     s    saltando tambien linqtosql
             //     s    cambiando linqtosql por EF -no puedo porque la base oficial no tiene la tabla Clientes con esos campos nuevos!!!
 
-        
+
             const int CUANTAS = 10;
             //var carta = CartaDePorteManager.GetItem(SC, 4444);
 
@@ -586,10 +586,38 @@ namespace ProntoMVC.Tests
 
 
         [TestMethod]
-        public void excelDetallado_30934()
+        public void excelDetalladoPaso2AsistenteFactur_30934()
         {
-            //LogicaFacturacion.PreviewDetalladoDeLaGeneracionEnPaso2();
+            int optFacturarA = 3;
+            string txtFacturarATerceros = "";
+            bool EsteUsuarioPuedeVerTarifa = true;
+            System.Web.UI.StateBag ViewState = new System.Web.UI.StateBag();
+            string txtFechaDesde = "12/1/2015";
+            string txtFechaHasta = "12/31/2015";
+            string fListaIDs = "";
+            string SessionID = "sfsfasfd12asdfsa3123";
+            int cmbPuntoVenta = -1;
+            string cmbAgruparArticulosPor = "";
+            bool SeEstaSeparandoPorCorredor = false;
+
+            ViewState["pagina"] = 1;
+            ViewState["sesionId"] = SessionID;
+            ViewState["filas"] = 10;
+
+            //LogicaFacturacion.GridCheckboxPersistenciaBulk(GridView1, HFSC.Value, Session.SessionID, TraerLista(GridView1))
+
+
+            var output = LogicaFacturacion.PreviewDetalladoDeLaGeneracionEnPaso2(optFacturarA, txtFacturarATerceros, SC,
+                                                   EsteUsuarioPuedeVerTarifa, ViewState, txtFechaDesde, txtFechaHasta,
+                                                   fListaIDs, SessionID, cmbPuntoVenta, cmbAgruparArticulosPor,
+                                                   SeEstaSeparandoPorCorredor);
+
+            System.Diagnostics.Process.Start(output);
         }
+
+
+
+
 
 
 
@@ -739,7 +767,7 @@ namespace ProntoMVC.Tests
             ExcelImportadorManager.FormatearExcelImportadoEnDLL(ref m_IdMaestro, archivoExcel,
                                     LogicaImportador.FormatosDeExcel.Urenport, SC, 0, ref log, "", 0, "");
 
-            var dt = LogicaImportador.TraerExcelDeBase(SC, ref  m_IdMaestro);
+            var dt = LogicaImportador.TraerExcelDeBase(SC, ref m_IdMaestro);
 
             //foreach (System.Data.DataRow r in dt.Rows)
             //{
@@ -1481,7 +1509,7 @@ namespace ProntoMVC.Tests
             IFlexiCaptureProcessor processor = null;
 
 
-            ClassFlexicapture.IniciaMotor(ref engine, ref engineLoader, ref  processor, plantilla);
+            ClassFlexicapture.IniciaMotor(ref engine, ref engineLoader, ref processor, plantilla);
 
             var ver = engine.Version;
 
@@ -2449,7 +2477,7 @@ namespace ProntoMVC.Tests
             IFlexiCaptureProcessor processor = null;
 
 
-            ClassFlexicapture.IniciaMotor(ref engine, ref engineLoader, ref  processor, plantilla);
+            ClassFlexicapture.IniciaMotor(ref engine, ref engineLoader, ref processor, plantilla);
 
             var ver = engine.Version;
 
@@ -2556,7 +2584,7 @@ namespace ProntoMVC.Tests
             ExcelImportadorManager.FormatearExcelImportadoEnDLL(ref m_IdMaestro, archivoExcel,
                                     LogicaImportador.FormatosDeExcel.CerealnetToepfer, SC, 0, ref log, "", 0, "");
 
-            var dt = LogicaImportador.TraerExcelDeBase(SC, ref  m_IdMaestro);
+            var dt = LogicaImportador.TraerExcelDeBase(SC, ref m_IdMaestro);
 
             foreach (System.Data.DataRow r in dt.Rows)
             {
@@ -2646,7 +2674,7 @@ namespace ProntoMVC.Tests
                                     LogicaImportador.FormatosDeExcel.BungeRamalloDescargaTexto, SC, 0,
                                     ref log, new DateTime(2016, 5, 1).ToShortDateString(), 0, "");
 
-            var dt = LogicaImportador.TraerExcelDeBase(SC, ref  m_IdMaestro);
+            var dt = LogicaImportador.TraerExcelDeBase(SC, ref m_IdMaestro);
 
             foreach (System.Data.DataRow r in dt.Rows)
             {
@@ -2826,7 +2854,7 @@ namespace ProntoMVC.Tests
                                     LogicaImportador.FormatosDeExcel.ReyserAnalisis, SC, Convert.ToInt32(carta.PuntoVenta), ref log,
                                     carta.FechaArribo.ToShortDateString(), 0, "");
 
-            var dt = LogicaImportador.TraerExcelDeBase(SC, ref  m_IdMaestro);
+            var dt = LogicaImportador.TraerExcelDeBase(SC, ref m_IdMaestro);
 
             foreach (System.Data.DataRow r in dt.Rows)
             {
@@ -2887,7 +2915,7 @@ namespace ProntoMVC.Tests
             ExcelImportadorManager.FormatearExcelImportadoEnDLL(ref m_IdMaestro, archivoExcel,
                                     LogicaImportador.FormatosDeExcel.ReyserAnalisis, SC, 0, ref log, DateTime.Today.ToShortDateString(), 0, "");
 
-            var dt = LogicaImportador.TraerExcelDeBase(SC, ref  m_IdMaestro);
+            var dt = LogicaImportador.TraerExcelDeBase(SC, ref m_IdMaestro);
 
             foreach (System.Data.DataRow r in dt.Rows)
             {
@@ -2949,7 +2977,7 @@ namespace ProntoMVC.Tests
                                     LogicaImportador.FormatosDeExcel.BungeRamalloDescargaTexto, SC, 0,
                                     ref log, new DateTime(2016, 5, 1).ToShortDateString(), 0, "");
 
-            var dt = LogicaImportador.TraerExcelDeBase(SC, ref  m_IdMaestro);
+            var dt = LogicaImportador.TraerExcelDeBase(SC, ref m_IdMaestro);
 
             foreach (System.Data.DataRow r in dt.Rows)
             {
@@ -3109,7 +3137,7 @@ namespace ProntoMVC.Tests
             IFlexiCaptureProcessor processor = null;
 
 
-            ClassFlexicapture.IniciaMotor(ref engine, ref engineLoader, ref  processor, plantilla);
+            ClassFlexicapture.IniciaMotor(ref engine, ref engineLoader, ref processor, plantilla);
 
             var ver = engine.Version;
 
@@ -3265,7 +3293,7 @@ namespace ProntoMVC.Tests
 
             if (false)
             {
-                string[] sss = {@"C:\Users\Administrador\Documents\bdl\New folder\550466649-cp.jpg", 
+                string[] sss = {@"C:\Users\Administrador\Documents\bdl\New folder\550466649-cp.jpg",
                                               @"C:\Users\Administrador\Documents\bdl\New folder\550558123-cp.jpg"};
 
                 ClassFlexicapture.SaveAsMultiPageTiff(
@@ -3326,7 +3354,7 @@ namespace ProntoMVC.Tests
             ExcelImportadorManager.FormatearExcelImportadoEnDLL(ref m_IdMaestro, archivoExcel,
                                     LogicaImportador.FormatosDeExcel.Unidad6Analisis, SC, 0, ref log, DateTime.Today.ToShortDateString(), 0, "");
 
-            var dt = LogicaImportador.TraerExcelDeBase(SC, ref  m_IdMaestro);
+            var dt = LogicaImportador.TraerExcelDeBase(SC, ref m_IdMaestro);
 
             foreach (System.Data.DataRow r in dt.Rows)
             {
@@ -3435,7 +3463,7 @@ namespace ProntoMVC.Tests
             IFlexiCaptureProcessor processor = null;
 
 
-            ClassFlexicapture.IniciaMotor(ref engine, ref engineLoader, ref  processor, plantilla);
+            ClassFlexicapture.IniciaMotor(ref engine, ref engineLoader, ref processor, plantilla);
 
             var ver = engine.Version;
 
@@ -3453,7 +3481,7 @@ namespace ProntoMVC.Tests
             }
             else
             {
-                var resultado = ClassFlexicapture.ProcesarCartasBatchConFlexicapture_SacandoImagenesDelDirectorio(ref engine, ref  processor,
+                var resultado = ClassFlexicapture.ProcesarCartasBatchConFlexicapture_SacandoImagenesDelDirectorio(ref engine, ref processor,
                                         plantilla, 30,
                                          SC, DirApp, true, ref sError);
                 var html = ClassFlexicapture.GenerarHtmlConResultado(resultado, sError);
@@ -3480,7 +3508,7 @@ namespace ProntoMVC.Tests
             ExcelImportadorManager.FormatearExcelImportadoEnDLL(ref m_IdMaestro, archivoExcel,
                                     LogicaImportador.FormatosDeExcel.Autodetectar, SC, 0, ref log, "", 0, "");
 
-            var dt = LogicaImportador.TraerExcelDeBase(SC, ref  m_IdMaestro);
+            var dt = LogicaImportador.TraerExcelDeBase(SC, ref m_IdMaestro);
 
             foreach (System.Data.DataRow r in dt.Rows)
             {
@@ -3592,7 +3620,7 @@ namespace ProntoMVC.Tests
                                     LogicaImportador.FormatosDeExcel.ReyserAnalisis, SC, 0,
                                     ref log, new DateTime(2016, 5, 1).ToShortDateString(), 0, "");
 
-            var dt = LogicaImportador.TraerExcelDeBase(SC, ref  m_IdMaestro);
+            var dt = LogicaImportador.TraerExcelDeBase(SC, ref m_IdMaestro);
 
             foreach (System.Data.DataRow r in dt.Rows)
             {
@@ -4028,7 +4056,7 @@ namespace ProntoMVC.Tests
 
             if (false)
             {
-                string[] sss = {@"C:\Users\Administrador\Documents\bdl\New folder\550466649-cp.jpg", 
+                string[] sss = {@"C:\Users\Administrador\Documents\bdl\New folder\550466649-cp.jpg",
                                               @"C:\Users\Administrador\Documents\bdl\New folder\550558123-cp.jpg"};
 
                 ClassFlexicapture.SaveAsMultiPageTiff(
@@ -4603,7 +4631,7 @@ namespace ProntoMVC.Tests
             ExcelImportadorManager.FormatearExcelImportadoEnDLL(ref m_IdMaestro, archivoExcel,
                                     LogicaImportador.FormatosDeExcel.Autodetectar, SC, 0, ref log, "", 0, "");
 
-            var dt = LogicaImportador.TraerExcelDeBase(SC, ref  m_IdMaestro);
+            var dt = LogicaImportador.TraerExcelDeBase(SC, ref m_IdMaestro);
 
             string sb = "";
             foreach (System.Data.DataRow r in dt.Rows)
@@ -4671,7 +4699,7 @@ namespace ProntoMVC.Tests
             IFlexiCaptureProcessor processor = null;
 
 
-            ClassFlexicapture.IniciaMotor(ref engine, ref engineLoader, ref  processor, plantilla);
+            ClassFlexicapture.IniciaMotor(ref engine, ref engineLoader, ref processor, plantilla);
 
             var ver = engine.Version;
 
@@ -4689,7 +4717,7 @@ namespace ProntoMVC.Tests
             }
             else
             {
-                var resultado = ClassFlexicapture.ProcesarCartasBatchConFlexicapture_SacandoImagenesDelDirectorio(ref engine, ref  processor,
+                var resultado = ClassFlexicapture.ProcesarCartasBatchConFlexicapture_SacandoImagenesDelDirectorio(ref engine, ref processor,
                                         plantilla, 30,
                                          SC, DirApp, true, ref sError);
                 var html = ClassFlexicapture.GenerarHtmlConResultado(resultado, sError);
@@ -4716,7 +4744,7 @@ namespace ProntoMVC.Tests
             ExcelImportadorManager.FormatearExcelImportadoEnDLL(ref m_IdMaestro, archivoExcel,
                                     LogicaImportador.FormatosDeExcel.Autodetectar, SC, 0, ref log, "", 0, "");
 
-            var dt = LogicaImportador.TraerExcelDeBase(SC, ref  m_IdMaestro);
+            var dt = LogicaImportador.TraerExcelDeBase(SC, ref m_IdMaestro);
 
             foreach (System.Data.DataRow r in dt.Rows)
             {
@@ -5079,7 +5107,7 @@ namespace ProntoMVC.Tests
             IFlexiCaptureProcessor processor = null;
 
 
-            ClassFlexicapture.IniciaMotor(ref engine, ref engineLoader, ref  processor, plantilla);
+            ClassFlexicapture.IniciaMotor(ref engine, ref engineLoader, ref processor, plantilla);
 
             var ver = engine.Version;
 
@@ -5097,7 +5125,7 @@ namespace ProntoMVC.Tests
             }
             else
             {
-                var resultado = ClassFlexicapture.ProcesarCartasBatchConFlexicapture_SacandoImagenesDelDirectorio(ref engine, ref  processor,
+                var resultado = ClassFlexicapture.ProcesarCartasBatchConFlexicapture_SacandoImagenesDelDirectorio(ref engine, ref processor,
                                         plantilla, 30,
                                          SC, DirApp, true, ref sError);
                 var html = ClassFlexicapture.GenerarHtmlConResultado(resultado, sError);
@@ -5301,7 +5329,7 @@ namespace ProntoMVC.Tests
             ExcelImportadorManager.FormatearExcelImportadoEnDLL(ref m_IdMaestro, archivoExcel,
                                     LogicaImportador.FormatosDeExcel.ReyserCargillPosicion, SC, 0, ref log, "", 0, "");
 
-            var dt = LogicaImportador.TraerExcelDeBase(SC, ref  m_IdMaestro);
+            var dt = LogicaImportador.TraerExcelDeBase(SC, ref m_IdMaestro);
 
             foreach (System.Data.DataRow r in dt.Rows)
             {
@@ -5645,7 +5673,7 @@ Hagamoslo tambien con la pegatina, asi hay un mismo criterio y despues no nos vi
             IFlexiCaptureProcessor processor = null;
 
 
-            ClassFlexicapture.IniciaMotor(ref engine, ref engineLoader, ref  processor, plantilla);
+            ClassFlexicapture.IniciaMotor(ref engine, ref engineLoader, ref processor, plantilla);
 
             var ver = engine.Version;
 
@@ -5663,7 +5691,7 @@ Hagamoslo tambien con la pegatina, asi hay un mismo criterio y despues no nos vi
             }
             else
             {
-                var resultado = ClassFlexicapture.ProcesarCartasBatchConFlexicapture_SacandoImagenesDelDirectorio(ref engine, ref  processor,
+                var resultado = ClassFlexicapture.ProcesarCartasBatchConFlexicapture_SacandoImagenesDelDirectorio(ref engine, ref processor,
                                         plantilla, 30,
                                          SC, DirApp, true, ref sError);
                 var html = ClassFlexicapture.GenerarHtmlConResultado(resultado, sError);
@@ -6250,7 +6278,7 @@ Hagamoslo tambien con la pegatina, asi hay un mismo criterio y despues no nos vi
             ExcelImportadorManager.FormatearExcelImportadoEnDLL(ref m_IdMaestro, archivoExcel,
                                             LogicaImportador.FormatosDeExcel.Autodetectar, SC, 0, ref logerror, "1/1/2014", 0, "");
 
-            var dt = LogicaImportador.TraerExcelDeBase(SC, ref  m_IdMaestro);
+            var dt = LogicaImportador.TraerExcelDeBase(SC, ref m_IdMaestro);
 
             foreach (System.Data.DataRow r in dt.Rows)
             {
@@ -6275,7 +6303,7 @@ Hagamoslo tambien con la pegatina, asi hay un mismo criterio y despues no nos vi
 
             ExcelImportadorManager.FormatearExcelImportadoEnDLL(ref m_IdMaestro, archivoExcel, null, SC, null, null, null, 0, "");
 
-            var dt = LogicaImportador.TraerExcelDeBase(SC, ref  m_IdMaestro);
+            var dt = LogicaImportador.TraerExcelDeBase(SC, ref m_IdMaestro);
 
             foreach (System.Data.DataRow r in dt.Rows)
             {

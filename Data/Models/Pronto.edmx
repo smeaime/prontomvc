@@ -693,8 +693,8 @@
           <Property Name="Campo" Type="varchar" MaxLength="40" />
           <Property Name="Valor" Type="numeric" Precision="18" Scale="2" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'Pronto.dbo.CartasDePorteHistorico' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'Pronto.dbo.CartasDePorteHistorico' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="CartasDePorteHistorico">
           <Key>
             <PropertyRef Name="IdCartaDePorte" />
@@ -851,8 +851,8 @@ warning 6002: The table/view 'Pronto.dbo.CartasDePorteHistorico' does not have a
           <Property Name="Descripcion" Type="varchar" MaxLength="60" Nullable="false" />
           <Property Name="IdCliente" Type="int" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'Pronto.dbo.CartasPorteMovimientos' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'Pronto.dbo.CartasPorteMovimientos' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="CartasPorteMovimientos">
           <Key>
             <PropertyRef Name="IdCDPMovimiento" />
@@ -3197,8 +3197,8 @@ warning 6002: The table/view 'Pronto.dbo.CartasPorteMovimientos' does not have a
           <Property Name="FechaInicio" Type="datetime" />
           <Property Name="FechaFinalizacion" Type="datetime" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'Pronto.dbo.EjerciciosPeriodos' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="EjerciciosPeriodos">
           <Key>
             <PropertyRef Name="IdEjercicioPeriodo" />
@@ -5103,6 +5103,7 @@ warning 6002: The table/view 'Pronto.dbo.EjerciciosPeriodos' does not have a pri
           <Property Name="CodigoNormaCapital" Type="int" />
           <Property Name="FechaInicioVigenciaCodigoNormaCapital" Type="datetime" />
           <Property Name="FechaFinVigenciaCodigoNormaCapital" Type="datetime" />
+          <Property Name="IdObraDefault" Type="int" />
         </EntityType>
         <EntityType Name="Provincias">
           <Key>
@@ -5895,8 +5896,8 @@ warning 6002: The table/view 'Pronto.dbo.EjerciciosPeriodos' does not have a pri
           <Property Name="IdProveedor" Type="int" />
           <Property Name="Codigo" Type="int" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'Pronto.dbo.Tree' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'Pronto.dbo.Tree' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="Tree">
           <Key>
             <PropertyRef Name="IdItem" />
@@ -6108,8 +6109,8 @@ warning 6002: The table/view 'Pronto.dbo.Tree' does not have a primary key defin
           <Property Name="EmiteComision" Type="varchar" MaxLength="2" />
           <Property Name="IdsVendedoresAsignados" Type="varchar" MaxLength="1000" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'Pronto.dbo.wGrillaPersistencia' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'Pronto.dbo.wGrillaPersistencia' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="wGrillaPersistencia">
           <Key>
             <PropertyRef Name="IdRenglon" />
@@ -9584,6 +9585,7 @@ warning 6002: The table/view 'Pronto.dbo.wGrillaPersistencia' does not have a pr
           <Parameter Name="fechahasta" Type="datetime" Mode="In" />
           <Parameter Name="puntoventa" Type="int" Mode="In" />
           <Parameter Name="IdAcopio" Type="int" Mode="In" />
+          <Parameter Name="bTraerDuplicados" Type="bit" Mode="In" />
           <Parameter Name="Contrato" Type="varchar" Mode="In" />
           <Parameter Name="QueContenga2" Type="varchar" Mode="In" />
           <Parameter Name="idClienteAuxiliarint" Type="int" Mode="In" />
@@ -9781,6 +9783,7 @@ warning 6002: The table/view 'Pronto.dbo.wGrillaPersistencia' does not have a pr
                 <Property Name="FechaActualizacionAutomatica" Type="datetime" />
                 <Property Name="FechaAutorizacion" Type="datetime" />
                 <Property Name="ObservacionesSituacion" Type="varchar" MaxLength="200" />
+                <Property Name="SituacionLog" Type="varchar" MaxLength="300" />
                 <Property Name="NumeroCompleto" Type="varchar" MaxLength="93" />
                 <Property Name="MinutosModifico" Type="int" />
                 <Property Name="EspecieONCAA" Type="varchar" MaxLength="50" Nullable="false" />
@@ -9810,11 +9813,19 @@ warning 6002: The table/view 'Pronto.dbo.wGrillaPersistencia' does not have a pr
                 <Property Name="ProcedenciaCodigoPostal" Type="varchar" MaxLength="20" Nullable="false" />
                 <Property Name="ProcedenciaCodigoONCAA" Type="varchar" MaxLength="20" Nullable="false" />
                 <Property Name="ProcedenciaProvinciaDesc" Type="varchar" MaxLength="50" Nullable="false" />
+                <Property Name="ProcedenciaProvinciaPartido" Type="varchar" MaxLength="60" Nullable="false" />
+                <Property Name="ProcedenciaPartidoNormalizada" Type="varchar" MaxLength="100" Nullable="false" />
+                <Property Name="ProcedenciaPartidoNormalizadaCodigo" Type="varchar" MaxLength="15" Nullable="false" />
                 <Property Name="DestinoDesc" Type="varchar" MaxLength="50" Nullable="false" />
                 <Property Name="DestinoCodigoPostal" Type="varchar" MaxLength="30" Nullable="false" />
                 <Property Name="DestinoCodigoONCAA" Type="varchar" MaxLength="20" Nullable="false" />
                 <Property Name="DestinoCUIT" Type="varchar" MaxLength="13" Nullable="false" />
                 <Property Name="DestinoLocalidadAFIP" Type="int" Nullable="false" />
+                <Property Name="DestinoProvinciaDesc" Type="varchar" MaxLength="50" Nullable="false" />
+                <Property Name="EstablecimientoDesc" Type="varchar" MaxLength="202" Nullable="false" />
+                <Property Name="EstablecimientoCodigo" Type="varchar" MaxLength="50" />
+                <Property Name="EstablecimientoCUIT" Type="varchar" MaxLength="50" />
+                <Property Name="EstablecimientoNombre" Type="varchar" MaxLength="100" />
                 <Property Name="Mes" Type="nvarchar" MaxLength="30" />
                 <Property Name="Ano" Type="int" />
                 <Property Name="Factura" Type="varchar" MaxLength="63" />
@@ -9823,15 +9834,7 @@ warning 6002: The table/view 'Pronto.dbo.wGrillaPersistencia' does not have a pr
                 <Property Name="ClienteFacturadoCUIT" Type="varchar" MaxLength="13" Nullable="false" />
                 <Property Name="CalidadDesc" Type="varchar" MaxLength="50" />
                 <Property Name="UsuarioIngreso" Type="varchar" MaxLength="50" />
-                <Property Name="EstablecimientoDesc" Type="varchar" MaxLength="202" Nullable="false" />
-                <Property Name="EstablecimientoCodigo" Type="varchar" MaxLength="50" />
-                <Property Name="EstablecimientoCUIT" Type="varchar" MaxLength="50" />
-                <Property Name="EstablecimientoNombre" Type="varchar" MaxLength="100" />
                 <Property Name="ClientePagadorFleteDesc" Type="varchar" MaxLength="100" Nullable="false" />
-                <Property Name="ProcedenciaProvinciaPartido" Type="varchar" MaxLength="60" Nullable="false" />
-                <Property Name="ProcedenciaPartidoNormalizadaCodigo" Type="varchar" MaxLength="15" Nullable="false" />
-                <Property Name="DestinoProvinciaDesc" Type="varchar" MaxLength="50" Nullable="false" />
-                <Property Name="ProcedenciaPartidoNormalizada" Type="varchar" MaxLength="100" Nullable="false" />
                 <Property Name="CorredorDesc2" Type="varchar" MaxLength="50" Nullable="false" />
                 <Property Name="CorredorCUIT2" Type="varchar" MaxLength="13" Nullable="false" />
                 <Property Name="EntregadorCUIT" Type="varchar" MaxLength="13" Nullable="false" />
@@ -13124,6 +13127,7 @@ warning 6002: The table/view 'Pronto.dbo.wGrillaPersistencia' does not have a pr
             <Parameter Name="fechahasta" Mode="In" Type="DateTime" />
             <Parameter Name="puntoventa" Mode="In" Type="Int32" />
             <Parameter Name="IdAcopio" Mode="In" Type="Int32" />
+            <Parameter Name="bTraerDuplicados" Mode="In" Type="Boolean" />
             <Parameter Name="Contrato" Mode="In" Type="String" />
             <Parameter Name="QueContenga2" Mode="In" Type="String" />
             <Parameter Name="idClienteAuxiliarint" Mode="In" Type="Int32" />
@@ -16050,6 +16054,7 @@ warning 6002: The table/view 'Pronto.dbo.wGrillaPersistencia' does not have a pr
           <Property Name="CodigoNormaCapital" Type="Int32" />
           <Property Name="FechaInicioVigenciaCodigoNormaCapital" Type="DateTime" Precision="3" />
           <Property Name="FechaFinVigenciaCodigoNormaCapital" Type="DateTime" Precision="3" />
+          <Property Name="IdObraDefault" Type="Int32" />
         </EntityType>
         <EntityType Name="Rubro">
           <Key>
@@ -27362,6 +27367,7 @@ warning 6002: The table/view 'Pronto.dbo.wGrillaPersistencia' does not have a pr
           <EntitySetMapping Name="Proveedores">
             <EntityTypeMapping TypeName="DemoProntoModel.Proveedor">
               <MappingFragment StoreEntitySet="Proveedores">
+                <ScalarProperty Name="IdObraDefault" ColumnName="IdObraDefault" />
                 <ScalarProperty Name="FechaFinVigenciaCodigoNormaCapital" ColumnName="FechaFinVigenciaCodigoNormaCapital" />
                 <ScalarProperty Name="FechaInicioVigenciaCodigoNormaCapital" ColumnName="FechaInicioVigenciaCodigoNormaCapital" />
                 <ScalarProperty Name="CodigoNormaCapital" ColumnName="CodigoNormaCapital" />

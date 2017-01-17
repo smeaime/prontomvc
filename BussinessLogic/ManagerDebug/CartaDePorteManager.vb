@@ -2406,7 +2406,7 @@ Public Class CartaDePorteManager
                                         0, maximumRows, estado, QueContenga, idVendedor, idCorredor,
                                         idDestinatario, idIntermediario, idRemComercial, idArticulo, idProcedencia,
                                         idDestino, AplicarANDuORalFiltro, ModoExportacionString, fechadesde,
-                                        fechahasta, puntoventa, idacopio, Contrato, QueContenga2,
+                                        fechahasta, puntoventa, idacopio, False, Contrato, QueContenga2,
                                         idClienteAuxiliar, AgrupadorDeTandaPeriodos, Vagon, Patente, "Todos").Take(maximumRows)
                                                    Select New CartasConCalada With {
                                                         .IdCartaDePorte = cdp.IdCartaDePorte,
@@ -14948,7 +14948,7 @@ Public Class CartaDePorteManager
                                         idCorredor, idDestinatario, idIntermediario, idRComercial,
                                         idArticulo, idProcedencia, idDestino, FiltroANDOR.FiltroOR, "Ambos",
                                         fechadesde, fechahasta, 0,
-                                        Nothing, Nothing, Nothing, Nothing,
+                                        Nothing, False, Nothing, Nothing, Nothing,
                                          Nothing, Nothing, Nothing, Nothing)
                             Select c).Take(limitedecartas).ToList
             Return dbcartas
