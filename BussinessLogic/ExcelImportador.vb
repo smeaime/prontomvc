@@ -1992,9 +1992,8 @@ Public Class ExcelImportadorManager
                         If .SituacionAntesDeEditarManualmente = 5 And .Situacion = 6 And BuscarSituacionId(r(2)) = 5 Then Continue For
                     End If
 
-
-                    .Situacion = BuscarSituacionId(r(2))  ' en el excel de Cerealnet (a diferencia del de Urenport) viene la patente aca?
-                    .ObservacionesSituacion = r(35)
+                    If actua(.Situacion, BuscarSituacionId(r(2))) Then log += "Situacion; "
+                    If actua(.ObservacionesSituacion, r(35)) Then log += "ObservacionesSituacion; "
                     .FechaActualizacionAutomatica = DateTime.Now
 
 
@@ -2038,6 +2037,10 @@ Public Class ExcelImportadorManager
                         If .Entregador <= 0 Then .Entregador = Nothing
                         '.Entregador = BuscarClientePorCUIT(r(15), SC, r(14))
                         'r(14) = NombreCliente(SC, .Entregador)
+
+
+                        If actua(.IdClienteEntregador, BuscaIdClientePreciso(r(18), SC)) Then log += "Entregador; "
+                        If .IdClienteEntregador <= 0 Then .IdClienteEntregador = Nothing
 
 
 
