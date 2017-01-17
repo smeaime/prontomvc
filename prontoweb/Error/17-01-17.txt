@@ -191,3 +191,17 @@ Error al enviar correo.
    en ASP.global_asax.Application_Error(Object sender, EventArgs e) en C:\Users\Administrador\Documents\bdl\pronto\prontoweb\global.asax:línea 472
 System
 __________________________
+
+Log Entry : 
+01/17/2017 12:37:20
+Error in: http://localhost:58911/login.aspx?ReturnUrl=/ProntoWeb/SituacionCalidad.aspx. Error Message:System.Threading.ThreadAbortException
+Subproceso anulado.
+   en System.Threading.Thread.AbortInternal()
+   en System.Threading.Thread.Abort(Object stateInfo)
+   en System.Web.HttpResponse.AbortCurrentThread()
+   en System.Web.HttpResponse.End()
+   en System.Web.HttpResponse.Redirect(String url, Boolean endResponse, Boolean permanent)
+   en System.Web.HttpResponse.Redirect(String url)
+   en Login.Page_Load(Object sender, EventArgs e) en C:\Users\Administrador\Documents\bdl\pronto\prontoweb\Login.aspx.vb:línea 169
+mscorlib
+__________________________
