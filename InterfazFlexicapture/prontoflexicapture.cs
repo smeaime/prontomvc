@@ -3365,7 +3365,7 @@ namespace ServicioCartaPorte
                                                             0, 9999999, 0, "", -1, -1,
                                                             -1, -1, -1, -1, -1,
                                                             iddestino, 0, "Ambas", FechaDesde,
-                                                            FechaHasta, puntovent, null,false, "", "",
+                                                            FechaHasta, puntovent, null, false, "", "",
                                                             -1, null, 0, "", "Todos")
                              );
 
@@ -3433,6 +3433,9 @@ namespace ServicioCartaPorte
                             cell = new string[] {
                                 "", //"<a href="+ Url.Action("Edit",new {id = a.IdPedido} ) + "  >Editar</>" ,
                                 
+
+                                // CP	TURNO	SITUACION	MERC	TITULAR_CP	INTERMEDIARIO	RTE CIAL	CORREDOR	DESTINATARIO	DESTINO	ENTREGADOR	PROC	KILOS	OBSERVACION
+
                                 a.IdCartaDePorte.ToString(),
 
                                 "<a href=\"CartaDePorte.aspx?Id=" +  a.IdCartaDePorte + "\">" +  a.NumeroCartaEnTextoParaBusqueda.NullSafeToString() + "</>" ,
@@ -3440,32 +3443,43 @@ namespace ServicioCartaPorte
                                 (a.Situacion ?? 0).NullSafeToString(),
                                 //((a.Situacion ?? 0) >= 0)  ?  ExcelImportadorManager.Situaciones[a.Situacion ?? 0] : "",
 
+
+                                 a.Producto.ToString(),
+                                  a.TitularDesc,
+                                 a.IntermediarioDesc,
+                                 a.RComercialDesc,
+
+                                a.CorredorDesc,
+                                 a.DestinatarioDesc,
+
+                                a.DestinoDesc.ToString(),
+                                a.Destino ==null ? "" : a.Destino.ToString(),
+
+                                 a.EntregadorDesc.NullSafeToString(),
+
+                                 a.ProcedenciaDesc.ToString(),
+
+
+                                 a.NetoProc.ToString(),
+
                                 a.ObservacionesSituacion,
+
+
 
                                 a.FechaArribo==null ? "" :  a.FechaArribo.GetValueOrDefault().ToShortDateString(),
 
 
                                 a.FechaDescarga==null ? "" :  a.FechaDescarga.GetValueOrDefault().ToShortDateString(),
 
-                                 a.CorredorDesc,
-                                 a.DestinatarioDesc,
-                                 a.DestinoDesc.ToString(),
-                                 a.Destino ==null ? "" : a.Destino.ToString(),
-                                 a.ProcedenciaDesc.ToString(),
-
-                                 a.Producto.ToString(),
-                                 a.TitularDesc,
-                                 a.RComercialDesc,
-                                 a.IntermediarioDesc,
-                                 a.Patente,
-
-                                 a.NetoProc.ToString(),
 
 
                                  a.PuntoVenta.ToString(),
 
-                                 a.FechaActualizacionAutomatica==null ? "" :  a.FechaActualizacionAutomatica.GetValueOrDefault().ToShortDateString()
-                                   
+                                 a.FechaActualizacionAutomatica==null ? "" :  a.FechaActualizacionAutomatica.GetValueOrDefault().ToShortDateString(),
+
+
+                                a.Patente,
+
 
                                  // a.FechaSalida==null ? "" :  a.FechaSalida.GetValueOrDefault().ToString("dd/MM/yyyy"),
                                 //a.Cumplido.NullSafeToString(), 

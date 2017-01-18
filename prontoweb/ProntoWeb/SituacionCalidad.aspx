@@ -74,8 +74,8 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                                 CultureDecimalPlaceholder="" CultureThousandsPlaceholder="" CultureTimePlaceholder=""
                                 Enabled="True">
                             </cc1:MaskedEditExtender>
-                            <cc1:TextBoxWatermarkExtender ID="TBWE2" runat="server" TargetControlID="txtFechaDesde"
-                                WatermarkText="desde" WatermarkCssClass="watermarked" />
+                           <%-- <cc1:TextBoxWatermarkExtender ID="TBWE2" runat="server" TargetControlID="txtFechaDesde"
+                                WatermarkText="desde" WatermarkCssClass="watermarked" />--%>
                             <asp:TextBox ID="txtFechaHasta" runat="server" Width="100px" MaxLength="1" TabIndex="2" Style="color: black;"
                                 AutoPostBack="false"></asp:TextBox>
                             <cc1:CalendarExtender ID="CalendarExtender4" runat="server" Format="dd/MM/yyyy" TargetControlID="txtFechaHasta"
@@ -87,8 +87,8 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                                 CultureDecimalPlaceholder="" CultureThousandsPlaceholder="" CultureTimePlaceholder=""
                                 Enabled="True">
                             </cc1:MaskedEditExtender>
-                            <cc1:TextBoxWatermarkExtender ID="TBWE3" runat="server" TargetControlID="txtFechaHasta"
-                                WatermarkText="hasta" WatermarkCssClass="watermarked" />
+                           <%-- <cc1:TextBoxWatermarkExtender ID="TBWE3" runat="server" TargetControlID="txtFechaHasta"
+                                WatermarkText="hasta" WatermarkCssClass="watermarked"  />--%>
                         </td>
 
                     </tr>
@@ -1018,10 +1018,15 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
 
 
-                    colNames: ['', 'Id', 'Nro CP', 'Situacion', 'Obs Situacion', 'Arribo', 'Descarga', 'Corredor', 'Destinatario', 'Destino',
 
-                                'IdDestino', 'Procedencia', 'Producto', 'Titular',
-                                'R Comercial', 'Intermediario', 'Patente', 'Neto', 'Punto Venta', 'Fecha actualizacion'
+                    // CP	TURNO	SITUACION	MERC	TITULAR_CP	INTERMEDIARIO	RTE CIAL	CORREDOR	DESTINATARIO	DESTINO	ENTREGADOR	PROC	KILOS	OBSERVACION
+
+
+                    colNames: ['', 'Id', 'Nro CP', 'Situacion', 'Producto'
+
+                        , 'Titular', 'Intermediario', 'R Comercial'     , 'Corredor'         , 'Destinatario'  , 'Destino'  , 'Procedencia'  , 'Kilos'    , 'Obs Situacion',
+                                'Arribo', 'Descarga',
+                                'IdDestino', 'Patente', 'Punto Venta', 'Fecha actualizacion'
 
 
 
@@ -1035,7 +1040,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
                     colModel: [
 {
-    name: 'act', index: 'act', align: 'center', width: 110, editable: false, hidden: false, sortable: false ,
+    name: 'act', index: 'act', align: 'center', width: 60, editable: false, hidden: false, sortable: false ,
     search: false,
 },
 { name: ' IdCartasDePorte', index: ' IdCartasDePorte', align: 'left', width: 100, editable: false, hidden: true },
@@ -1080,80 +1085,298 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
 
 
-{ name: 'ObservacionesSituacion', index: 'ObservacionesSituacion', align: 'left', width: 300, editable: true, hidden: false, sortable: false },
+
+
 
 
 {
-    name: 'FechaArribo', index: 'FechaArribo', width: 200, sortable: true, align: 'right', editable: false, sortable: false ,
-    editoptions: {
-        size: 10,
-        maxlengh: 10,
-        dataInit: function (element) {
-            $(element).datepicker({
-                dateFormat: 'dd/mm/yy',
-                constrainInput: false,
-                showOn: 'button',
-                buttonText: '...'
+    name: 'Producto', index: 'Producto', align: 'left', width: 100, hidden: false, editable: false, edittype: 'text', sortable: false
+
+    , searchoptions: {
+        //    sopt:['eq'], 
+        dataInit: function (elem) {
+            var NoResultsLabel = "No se encontraron resultados";
+
+
+            $(elem).autocomplete({
+                source: function (request, response) {
+                    $.ajax({
+                        type: "POST",
+                        url: "WebServiceClientes.asmx/GetProductos",
+                        dataType: "json",
+                        contentType: "application/json; charset=utf-8",
+
+                        data: JSON.stringify({
+                            term: request.term
+                            //, idpuntoventa: function () { return $("#ctl00_ContentPlaceHolder1_txtFechaHasta").val(); }
+                        }),
+
+
+                        success: function (data2) {
+                            var data = JSON.parse(data2.d) // por qué tengo que usar parse?
+
+                            //if (data.length == 1 || data.length > 1) { // qué pasa si encuentra más de uno?????
+                            //    var ui = data[0];
+
+                            //    if (ui.id == "") {
+                            //        alert("No existe el artículo"); // se está bancando que no sea identica la descripcion
+                            //        $("#Descripcion").val("");
+                            //        return;
+                            //    }
+                            //    $("#IdWilliamsDestino").val(ui.id);
+
+                            //    UltimoIdArticulo = ui.id;
+                            //}
+                            //else {
+                            //    alert("No existe el artículo"); // se está bancando que no sea identica la descripcion
+                            //}
+
+                            response($.map(data, function (item) {
+                                return {
+                                    label: item.value,
+                                    value: item.value //item.id
+                                    , id: item.id
+                                }
+                            }));
+
+                        }
+
+
+
+                    })
+
+
+                }
+
+
             });
+
+
+
+
+
+
         }
-    },
-    formatoptions: { newformat: "dd/mm/yy" }, datefmt: 'dd/mm/yy'
-    //, formatter: 'date'
-, sorttype: 'date'
-
-
-, searchoptions: {
-    sopt: ['eq', 'ne'],
-    dataInit: function (elem) {
-        $(elem).datepicker({
-            dateFormat: 'dd/mm/yy',
-            showButtonPanel: true
-        })
     }
-}
+
 },
-
-
-
 {
-    name: 'FechaDescarga', index: 'FechaDescarga', width: 200, sortable: true, align: 'right', editable: false, sortable: false ,
-    editoptions: {
-        size: 10,
-        maxlengh: 10,
-        dataInit: function (element) {
-            $(element).datepicker({
-                dateFormat: 'dd/mm/yy',
-                constrainInput: false,
-                showOn: 'button',
-                buttonText: '...'
+    name: 'TitularDesc', index: 'TitularDesc', align: 'left', width: 100, hidden: false, editable: false, edittype: 'text', sortable: false
+
+
+    , searchoptions: {
+        //    sopt:['eq'], 
+        dataInit: function (elem) {
+            var NoResultsLabel = "No se encontraron resultados";
+
+
+            $(elem).autocomplete({
+                source: function (request, response) {
+                    $.ajax({
+                        type: "POST",
+                        url: "WebServiceClientes.asmx/GetClientes",
+                        dataType: "json",
+                        contentType: "application/json; charset=utf-8",
+
+                        data: JSON.stringify({
+                            term: request.term
+                            //, idpuntoventa: function () { return $("#ctl00_ContentPlaceHolder1_txtFechaHasta").val(); }
+                        }),
+
+
+                        success: function (data2) {
+                            var data = JSON.parse(data2.d) // por qué tengo que usar parse?
+
+                            //if (data.length == 1 || data.length > 1) { // qué pasa si encuentra más de uno?????
+                            //    var ui = data[0];
+
+                            //    if (ui.id == "") {
+                            //        alert("No existe el artículo"); // se está bancando que no sea identica la descripcion
+                            //        $("#Descripcion").val("");
+                            //        return;
+                            //    }
+                            //    $("#IdWilliamsDestino").val(ui.id);
+
+                            //    UltimoIdArticulo = ui.id;
+                            //}
+                            //else {
+                            //    alert("No existe el artículo"); // se está bancando que no sea identica la descripcion
+                            //}
+
+                            response($.map(data, function (item) {
+                                return {
+                                    label: item.value,
+                                    value: item.value //item.id
+                                    , id: item.id
+                                }
+                            }));
+
+                        }
+
+
+
+                    })
+
+
+                }
+
+
             });
-        }
-    },
-    formatoptions: { newformat: "dd/mm/yy" }, datefmt: 'dd/mm/yy'
-    //, formatter: 'date'
-        , sorttype: 'date'
 
 
-        , searchoptions: {
-            sopt: ['eq', 'ne'],
-            dataInit: function (elem) {
-                $(elem).datepicker({
-                    dateFormat: 'dd/mm/yy',
-                    showButtonPanel: true
-                })
-            }
+
+
+
+
         }
+    }
+
+},
+{
+    name: 'IntermediarioDesc', index: 'IntermediarioDesc', align: 'left', width: 100, hidden: false, editable: false, edittype: 'text', sortable: false
+
+    , searchoptions: {
+        //    sopt:['eq'], 
+        dataInit: function (elem) {
+            var NoResultsLabel = "No se encontraron resultados";
+
+
+            $(elem).autocomplete({
+                source: function (request, response) {
+                    $.ajax({
+                        type: "POST",
+                        url: "WebServiceClientes.asmx/GetClientes",
+                        dataType: "json",
+                        contentType: "application/json; charset=utf-8",
+
+                        data: JSON.stringify({
+                            term: request.term
+                            //, idpuntoventa: function () { return $("#ctl00_ContentPlaceHolder1_txtFechaHasta").val(); }
+                        }),
+
+
+                        success: function (data2) {
+                            var data = JSON.parse(data2.d) // por qué tengo que usar parse?
+
+                            //if (data.length == 1 || data.length > 1) { // qué pasa si encuentra más de uno?????
+                            //    var ui = data[0];
+
+                            //    if (ui.id == "") {
+                            //        alert("No existe el artículo"); // se está bancando que no sea identica la descripcion
+                            //        $("#Descripcion").val("");
+                            //        return;
+                            //    }
+                            //    $("#IdWilliamsDestino").val(ui.id);
+
+                            //    UltimoIdArticulo = ui.id;
+                            //}
+                            //else {
+                            //    alert("No existe el artículo"); // se está bancando que no sea identica la descripcion
+                            //}
+
+                            response($.map(data, function (item) {
+                                return {
+                                    label: item.value,
+                                    value: item.value //item.id
+                                    , id: item.id
+                                }
+                            }));
+
+                        }
+
+
+
+                    })
+
+
+                }
+
+
+            });
+
+
+
+
+
+
+        }
+    }
+},
+{
+    name: 'RComercialDesc', index: 'RComercialDesc', align: 'left', width: 100, hidden: false, editable: false, edittype: 'text', sortable: false
+
+
+    , searchoptions: {
+        //    sopt:['eq'], 
+        dataInit: function (elem) {
+            var NoResultsLabel = "No se encontraron resultados";
+
+
+            $(elem).autocomplete({
+                source: function (request, response) {
+                    $.ajax({
+                        type: "POST",
+                        url: "WebServiceClientes.asmx/GetClientes",
+                        dataType: "json",
+                        contentType: "application/json; charset=utf-8",
+
+                        data: JSON.stringify({
+                            term: request.term
+                            //, idpuntoventa: function () { return $("#ctl00_ContentPlaceHolder1_txtFechaHasta").val(); }
+                        }),
+
+
+                        success: function (data2) {
+                            var data = JSON.parse(data2.d) // por qué tengo que usar parse?
+
+                            //if (data.length == 1 || data.length > 1) { // qué pasa si encuentra más de uno?????
+                            //    var ui = data[0];
+
+                            //    if (ui.id == "") {
+                            //        alert("No existe el artículo"); // se está bancando que no sea identica la descripcion
+                            //        $("#Descripcion").val("");
+                            //        return;
+                            //    }
+                            //    $("#IdWilliamsDestino").val(ui.id);
+
+                            //    UltimoIdArticulo = ui.id;
+                            //}
+                            //else {
+                            //    alert("No existe el artículo"); // se está bancando que no sea identica la descripcion
+                            //}
+
+                            response($.map(data, function (item) {
+                                return {
+                                    label: item.value,
+                                    value: item.value //item.id
+                                    , id: item.id
+                                }
+                            }));
+
+                        }
+
+
+
+                    })
+
+
+                }
+
+
+            });
+
+
+
+
+
+
+        }
+    }
+
 },
 
 
-
-
-
-
-
-
-
-{ name: 'CorredorDesc', index: 'CorredorDesc', align: 'left', width: 450, hidden: false, editable: false, edittype: 'text', sortable: false 
+{ name: 'CorredorDesc', index: 'CorredorDesc', align: 'left', width: 100, hidden: false, editable: false, edittype: 'text', sortable: false 
 
     ,searchoptions:{ 
         //    sopt:['eq'], 
@@ -1222,10 +1445,13 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
         }
     }
 },
-{ name: 'DestinatarioDesc', index: 'DestinatarioDesc', align: 'left', width: 450, hidden: false, editable: false, edittype: 'text', sortable: false 
 
 
-    ,searchoptions:{ 
+{
+    name: 'DestinatarioDesc', index: 'DestinatarioDesc', align: 'left', width: 100, hidden: false, editable: false, edittype: 'text', sortable: false
+
+
+    , searchoptions: {
         //    sopt:['eq'], 
         dataInit: function (elem) {
             var NoResultsLabel = "No se encontraron resultados";
@@ -1281,7 +1507,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
                 }
 
-                  
+
             });
 
 
@@ -1294,11 +1520,9 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
 },
 
-
-
 {
     name: 'DestinoDesc', index: 'DestinoDesc',
-    formoptions: { rowpos: 5, colpos: 2, label: "Descripción" }, align: 'left', width: 450, hidden: false, editable: true, edittype: 'text', sortable: false ,
+    formoptions: { rowpos: 5, colpos: 2, label: "Descripción" }, align: 'left', width: 100, hidden: false, editable: true, edittype: 'text', sortable: false ,
     searchoptions:{ 
         //    sopt:['eq'], 
         dataInit: function (elem) {
@@ -1399,13 +1623,90 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
     }
 
 },
+{ name: 'Destino', index: 'Destino', align: 'left', width: 100, hidden: true, editable: false, edittype: 'text', sortable: false },
 
 
-{ name: 'Destino', index: 'Destino', align: 'left', width: 450, hidden: true, editable: false, edittype: 'text', sortable: false },
-{ name: 'ProcedenciaDesc', index: 'Procedencia', align: 'left', width: 450, hidden: false, editable: false, edittype: 'text', sortable: false 
 
 
-    ,searchoptions:{ 
+
+{
+    name: 'EntregadorDesc', index: 'EntregadorDesc', align: 'left', width: 100, hidden: false, editable: false, edittype: 'text', sortable: false
+
+
+    , searchoptions: {
+        //    sopt:['eq'], 
+        dataInit: function (elem) {
+            var NoResultsLabel = "No se encontraron resultados";
+
+
+            $(elem).autocomplete({
+                source: function (request, response) {
+                    $.ajax({
+                        type: "POST",
+                        url: "WebServiceClientes.asmx/GetClientes",
+                        dataType: "json",
+                        contentType: "application/json; charset=utf-8",
+
+                        data: JSON.stringify({
+                            term: request.term
+                            //, idpuntoventa: function () { return $("#ctl00_ContentPlaceHolder1_txtFechaHasta").val(); }
+                        }),
+
+
+                        success: function (data2) {
+                            var data = JSON.parse(data2.d) // por qué tengo que usar parse?
+
+                            //if (data.length == 1 || data.length > 1) { // qué pasa si encuentra más de uno?????
+                            //    var ui = data[0];
+
+                            //    if (ui.id == "") {
+                            //        alert("No existe el artículo"); // se está bancando que no sea identica la descripcion
+                            //        $("#Descripcion").val("");
+                            //        return;
+                            //    }
+                            //    $("#IdWilliamsDestino").val(ui.id);
+
+                            //    UltimoIdArticulo = ui.id;
+                            //}
+                            //else {
+                            //    alert("No existe el artículo"); // se está bancando que no sea identica la descripcion
+                            //}
+
+                            response($.map(data, function (item) {
+                                return {
+                                    label: item.value,
+                                    value: item.value //item.id
+                                    , id: item.id
+                                }
+                            }));
+
+                        }
+
+
+
+                    })
+
+
+                }
+
+
+            });
+
+
+
+
+
+
+        }
+    }
+
+},
+
+{
+    name: 'ProcedenciaDesc', index: 'Procedencia', align: 'left', width: 100, hidden: false, editable: false, edittype: 'text', sortable: false
+
+
+    , searchoptions: {
         //    sopt:['eq'], 
         dataInit: function (elem) {
             var NoResultsLabel = "No se encontraron resultados";
@@ -1461,7 +1762,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
                 }
 
-                  
+
             });
 
 
@@ -1472,294 +1773,87 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
         }
     }
 },
-{ name: 'Producto', index: 'Producto', align: 'left', width: 450, hidden: false, editable: false, edittype: 'text', sortable: false 
 
-    ,searchoptions:{ 
-        //    sopt:['eq'], 
-        dataInit: function (elem) {
-            var NoResultsLabel = "No se encontraron resultados";
-
-
-            $(elem).autocomplete({
-                source: function (request, response) {
-                    $.ajax({
-                        type: "POST",
-                        url: "WebServiceClientes.asmx/GetProductos",
-                        dataType: "json",
-                        contentType: "application/json; charset=utf-8",
-
-                        data: JSON.stringify({
-                            term: request.term
-                            //, idpuntoventa: function () { return $("#ctl00_ContentPlaceHolder1_txtFechaHasta").val(); }
-                        }),
-
-
-                        success: function (data2) {
-                            var data = JSON.parse(data2.d) // por qué tengo que usar parse?
-
-                            //if (data.length == 1 || data.length > 1) { // qué pasa si encuentra más de uno?????
-                            //    var ui = data[0];
-
-                            //    if (ui.id == "") {
-                            //        alert("No existe el artículo"); // se está bancando que no sea identica la descripcion
-                            //        $("#Descripcion").val("");
-                            //        return;
-                            //    }
-                            //    $("#IdWilliamsDestino").val(ui.id);
-
-                            //    UltimoIdArticulo = ui.id;
-                            //}
-                            //else {
-                            //    alert("No existe el artículo"); // se está bancando que no sea identica la descripcion
-                            //}
-
-                            response($.map(data, function (item) {
-                                return {
-                                    label: item.value,
-                                    value: item.value //item.id
-                                    , id: item.id
-                                }
-                            }));
-
-                        }
-
-
-
-                    })
-
-
-                }
-
-                  
-            });
-
-
-
-
-
-
-        }
-    }
-
-},
-{ name: 'TitularDesc', index: 'TitularDesc', align: 'left', width: 450, hidden: false, editable: false, edittype: 'text', sortable: false 
-
-
-    ,searchoptions:{ 
-        //    sopt:['eq'], 
-        dataInit: function (elem) {
-            var NoResultsLabel = "No se encontraron resultados";
-
-
-            $(elem).autocomplete({
-                source: function (request, response) {
-                    $.ajax({
-                        type: "POST",
-                        url: "WebServiceClientes.asmx/GetClientes",
-                        dataType: "json",
-                        contentType: "application/json; charset=utf-8",
-
-                        data: JSON.stringify({
-                            term: request.term
-                            //, idpuntoventa: function () { return $("#ctl00_ContentPlaceHolder1_txtFechaHasta").val(); }
-                        }),
-
-
-                        success: function (data2) {
-                            var data = JSON.parse(data2.d) // por qué tengo que usar parse?
-
-                            //if (data.length == 1 || data.length > 1) { // qué pasa si encuentra más de uno?????
-                            //    var ui = data[0];
-
-                            //    if (ui.id == "") {
-                            //        alert("No existe el artículo"); // se está bancando que no sea identica la descripcion
-                            //        $("#Descripcion").val("");
-                            //        return;
-                            //    }
-                            //    $("#IdWilliamsDestino").val(ui.id);
-
-                            //    UltimoIdArticulo = ui.id;
-                            //}
-                            //else {
-                            //    alert("No existe el artículo"); // se está bancando que no sea identica la descripcion
-                            //}
-
-                            response($.map(data, function (item) {
-                                return {
-                                    label: item.value,
-                                    value: item.value //item.id
-                                    , id: item.id
-                                }
-                            }));
-
-                        }
-
-
-
-                    })
-
-
-                }
-
-                  
-            });
-
-
-
-
-
-
-        }
-    }
-
-},
-{ name: 'RComercialDesc', index: 'RComercialDesc', align: 'left', width: 450, hidden: false, editable: false, edittype: 'text', sortable: false
-
-
-    ,searchoptions:{ 
-        //    sopt:['eq'], 
-        dataInit: function (elem) {
-            var NoResultsLabel = "No se encontraron resultados";
-
-
-            $(elem).autocomplete({
-                source: function (request, response) {
-                    $.ajax({
-                        type: "POST",
-                        url: "WebServiceClientes.asmx/GetClientes",
-                        dataType: "json",
-                        contentType: "application/json; charset=utf-8",
-
-                        data: JSON.stringify({
-                            term: request.term
-                            //, idpuntoventa: function () { return $("#ctl00_ContentPlaceHolder1_txtFechaHasta").val(); }
-                        }),
-
-
-                        success: function (data2) {
-                            var data = JSON.parse(data2.d) // por qué tengo que usar parse?
-
-                            //if (data.length == 1 || data.length > 1) { // qué pasa si encuentra más de uno?????
-                            //    var ui = data[0];
-
-                            //    if (ui.id == "") {
-                            //        alert("No existe el artículo"); // se está bancando que no sea identica la descripcion
-                            //        $("#Descripcion").val("");
-                            //        return;
-                            //    }
-                            //    $("#IdWilliamsDestino").val(ui.id);
-
-                            //    UltimoIdArticulo = ui.id;
-                            //}
-                            //else {
-                            //    alert("No existe el artículo"); // se está bancando que no sea identica la descripcion
-                            //}
-
-                            response($.map(data, function (item) {
-                                return {
-                                    label: item.value,
-                                    value: item.value //item.id
-                                    , id: item.id
-                                }
-                            }));
-
-                        }
-
-
-
-                    })
-
-
-                }
-
-                  
-            });
-
-
-
-
-
-
-        }
-    }
-
-},
-
-{ name: 'IntermediarioDesc', index: 'IntermediarioDesc', align: 'left', width: 450, hidden: false, editable: false, edittype: 'text', sortable: false
-
-    ,searchoptions:{ 
-        //    sopt:['eq'], 
-        dataInit: function (elem) {
-            var NoResultsLabel = "No se encontraron resultados";
-
-
-            $(elem).autocomplete({
-                source: function (request, response) {
-                    $.ajax({
-                        type: "POST",
-                        url: "WebServiceClientes.asmx/GetClientes",
-                        dataType: "json",
-                        contentType: "application/json; charset=utf-8",
-
-                        data: JSON.stringify({
-                            term: request.term
-                            //, idpuntoventa: function () { return $("#ctl00_ContentPlaceHolder1_txtFechaHasta").val(); }
-                        }),
-
-
-                        success: function (data2) {
-                            var data = JSON.parse(data2.d) // por qué tengo que usar parse?
-
-                            //if (data.length == 1 || data.length > 1) { // qué pasa si encuentra más de uno?????
-                            //    var ui = data[0];
-
-                            //    if (ui.id == "") {
-                            //        alert("No existe el artículo"); // se está bancando que no sea identica la descripcion
-                            //        $("#Descripcion").val("");
-                            //        return;
-                            //    }
-                            //    $("#IdWilliamsDestino").val(ui.id);
-
-                            //    UltimoIdArticulo = ui.id;
-                            //}
-                            //else {
-                            //    alert("No existe el artículo"); // se está bancando que no sea identica la descripcion
-                            //}
-
-                            response($.map(data, function (item) {
-                                return {
-                                    label: item.value,
-                                    value: item.value //item.id
-                                    , id: item.id
-                                }
-                            }));
-
-                        }
-
-
-
-                    })
-
-
-                }
-
-                  
-            });
-
-
-
-
-
-
-        }
-    }
-},
-{ name: 'Patente', index: 'Patente', align: 'left', width: 200, hidden: false, editable: false, edittype: 'text', sortable: false },
 { name: 'NetoProc', index: 'NetoProc', align: 'left', width: 150, hidden: false, editable: false, edittype: 'text', sortable: false },
+
+
+
+
+{ name: 'ObservacionesSituacion', index: 'ObservacionesSituacion', align: 'left', width: 100, editable: true, hidden: false, sortable: false },
+
+
+{
+    name: 'FechaArribo', index: 'FechaArribo', width: 100, sortable: true, align: 'right', editable: false, sortable: false,
+    editoptions: {
+        size: 10,
+        maxlengh: 10,
+        dataInit: function (element) {
+            $(element).datepicker({
+                dateFormat: 'dd/mm/yy',
+                constrainInput: false,
+                showOn: 'button',
+                buttonText: '...'
+            });
+        }
+    },
+    formatoptions: { newformat: "dd/mm/yy" }, datefmt: 'dd/mm/yy'
+    //, formatter: 'date'
+, sorttype: 'date'
+
+
+, searchoptions: {
+    sopt: ['eq', 'ne'],
+    dataInit: function (elem) {
+        $(elem).datepicker({
+            dateFormat: 'dd/mm/yy',
+            showButtonPanel: true
+        })
+    }
+}
+},
+
+
+
+{
+    name: 'FechaDescarga', index: 'FechaDescarga', width: 100, sortable: true, align: 'right', editable: false, sortable: false,
+    editoptions: {
+        size: 10,
+        maxlengh: 10,
+        dataInit: function (element) {
+            $(element).datepicker({
+                dateFormat: 'dd/mm/yy',
+                constrainInput: false,
+                showOn: 'button',
+                buttonText: '...'
+            });
+        }
+    },
+    formatoptions: { newformat: "dd/mm/yy" }, datefmt: 'dd/mm/yy'
+    //, formatter: 'date'
+        , sorttype: 'date'
+
+
+        , searchoptions: {
+            sopt: ['eq', 'ne'],
+            dataInit: function (elem) {
+                $(elem).datepicker({
+                    dateFormat: 'dd/mm/yy',
+                    showButtonPanel: true
+                })
+            }
+        }
+},
+
+
+
+
+
+
+{ name: 'Patente', index: 'Patente', align: 'left', width: 100, hidden: false, editable: false, edittype: 'text', sortable: false },
 { name: 'PuntoVenta', index: 'PuntoVenta', align: 'left', width: 50, hidden: false, editable: false, edittype: 'text', sortable: false },
 
 {
-    name: 'FechaActualizacionAutomatica', index: 'FechaActualizacionAutomatica', width: 200,  align: 'right', editable: false, sortable: false}
+    name: 'FechaActualizacionAutomatica', index: 'FechaActualizacionAutomatica', width: 100,  align: 'right', editable: false, sortable: false}
 
 
                     ],
@@ -1815,7 +1909,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                     multiselect: false,
                     shrinkToFit: false,
                     width: 'auto',
-                    height: $(window).height() - 300, // '100%'
+                    height: 430, // $(window).height() - 250, // '100%'
                     altRows: false,
                     footerrow: false,
                     userDataOnFooter: true,
