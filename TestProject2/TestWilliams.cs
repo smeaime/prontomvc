@@ -618,6 +618,129 @@ namespace ProntoMVC.Tests
 
 
 
+        [TestMethod]
+        public void liquidacionsubcon_29418_Caso_Munoz_ModoEntregas()
+        {
+
+
+            ReportViewer ReporteLocal = new Microsoft.Reporting.WebForms.ReportViewer();
+
+            ReportParameter p2 = null;
+            string sTitulo = "";
+
+            var q = ConsultasLinq.LiquidacionSubcontratistas(SC,
+                       "", "", "", 1, 2000,
+                        CartaDePorteManager.enumCDPestado.DescargasMasFacturadas, "", -1, -1,
+                       -1, -1,
+                       -1, -1, -1, -1, CartaDePorteManager.FiltroANDOR.FiltroOR, "Entrega",
+                        new DateTime(2016, 12, 1),
+                        new DateTime(2016, 12, 31),
+                        -1, 6319, ref sTitulo);
+
+
+
+            string titulo = EntidadManager.NombreCliente(SC, 105);
+
+
+            ReportParameter[] p = new ReportParameter[5];
+            p[0] = new ReportParameter("Concepto1", "");
+            p[1] = new ReportParameter("titulo", "");
+            p[2] = new ReportParameter("Concepto2", "");
+            p[3] = new ReportParameter("Concepto1Importe", "-1");
+            p[4] = new ReportParameter("Concepto2Importe", "-1");
+
+
+            string output = "";
+
+            CartaDePorteManager.RebindReportViewerLINQ_Excel
+                                (ref ReporteLocal, @"C:\Users\Administrador\Documents\bdl\pronto\prontoweb\ProntoWeb\Informes\Liquidación de SubContratistas 2.rdl", q, ref output, p);
+
+            System.Diagnostics.Process.Start(output);
+
+        }
+
+        [TestMethod]
+        public void liquidacionsubcon_29418_Caso_Munoz_modoAmbos()
+        {
+
+
+            ReportViewer ReporteLocal = new Microsoft.Reporting.WebForms.ReportViewer();
+
+            ReportParameter p2 = null;
+            string sTitulo = "";
+
+            var q = ConsultasLinq.LiquidacionSubcontratistas(SC,
+                       "", "", "", 1, 2000,
+                        CartaDePorteManager.enumCDPestado.DescargasMasFacturadas, "", -1, -1,
+                       -1, -1,
+                       -1, -1, -1, -1, CartaDePorteManager.FiltroANDOR.FiltroOR, "Ambos",
+                        new DateTime(2016, 12, 1),
+                        new DateTime(2016, 12, 31),
+                        -1, 6319, ref sTitulo);
+
+
+
+            string titulo = EntidadManager.NombreCliente(SC, 105);
+
+
+            ReportParameter[] p = new ReportParameter[5];
+            p[0] = new ReportParameter("Concepto1", "");
+            p[1] = new ReportParameter("titulo", "");
+            p[2] = new ReportParameter("Concepto2", "");
+            p[3] = new ReportParameter("Concepto1Importe", "-1");
+            p[4] = new ReportParameter("Concepto2Importe", "-1");
+
+
+            string output = "";
+
+            CartaDePorteManager.RebindReportViewerLINQ_Excel
+                                (ref ReporteLocal, @"C:\Users\Administrador\Documents\bdl\pronto\prontoweb\ProntoWeb\Informes\Liquidación de SubContratistas 2.rdl", q, ref output, p);
+
+            System.Diagnostics.Process.Start(output);
+
+        }
+
+
+        [TestMethod]
+        public void liquidacionsubcon_29418_Caso_EnPuertoServicios()
+        {
+
+
+            ReportViewer ReporteLocal = new Microsoft.Reporting.WebForms.ReportViewer();
+
+            ReportParameter p2 = null;
+            string sTitulo = "";
+
+            var q = ConsultasLinq.LiquidacionSubcontratistas(SC,
+                       "", "", "", 1, 2000,
+                        CartaDePorteManager.enumCDPestado.DescargasMasFacturadas, "", -1, -1,
+                       -1, -1,
+                       -1, -1, -1, -1, CartaDePorteManager.FiltroANDOR.FiltroOR, "Ambos",
+                        new DateTime(2016, 12, 1),
+                        new DateTime(2016, 12, 31),
+                        -1, 6324, ref sTitulo);
+
+
+
+            string titulo = EntidadManager.NombreCliente(SC, 105);
+
+
+            ReportParameter[] p = new ReportParameter[5];
+            p[0] = new ReportParameter("Concepto1", "");
+            p[1] = new ReportParameter("titulo", "");
+            p[2] = new ReportParameter("Concepto2", "");
+            p[3] = new ReportParameter("Concepto1Importe", "-1");
+            p[4] = new ReportParameter("Concepto2Importe", "-1");
+
+
+            string output = "";
+
+            CartaDePorteManager.RebindReportViewerLINQ_Excel
+                                (ref ReporteLocal, @"C:\Users\Administrador\Documents\bdl\pronto\prontoweb\ProntoWeb\Informes\Liquidación de SubContratistas 2.rdl", q, ref output, p);
+
+            System.Diagnostics.Process.Start(output);
+
+        }
 
 
 
@@ -1080,7 +1203,7 @@ namespace ProntoMVC.Tests
                                                             -1, -1, -1, -1, -1,
                                                           -1, 0, "Ambas"
                                                            , new DateTime(2016, 10, 1), new DateTime(2016, 11, 1),
-                                                           0, null, "", "",
+                                                           0, null, false, "", "",
                                                            -1, null, 0, "", "Todos")
                                     );
 
@@ -1182,7 +1305,7 @@ namespace ProntoMVC.Tests
                                                             -1, -1, -1, -1, -1,
                                                             -1, 0, "Ambas"
                                                             , new DateTime(2016, 11, 1), new DateTime(2016, 11, 1),
-                                                            0, null, "", "",
+                                                            0, null, false, "", "",
                                                             -1, null, 0, "", "Todos").ToList();
 
             FuncionesCSharpBLL.ExportToExcelEntityCollection<fSQL_GetDataTableFiltradoYPaginado_Result3>(q, output);

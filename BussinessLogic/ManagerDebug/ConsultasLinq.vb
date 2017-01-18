@@ -420,12 +420,12 @@ Public Class ConsultasLinq
                   From clisub2 In db.Clientes.Where(Function(i) i.IdCliente = If(cdp.Subcontr2, dest.Subcontratista2)).DefaultIfEmpty
                   From l1 In db.ListasPrecios.Where(Function(i) i.IdListaPrecios = clisub1.IdListaPrecios).DefaultIfEmpty
                   From pd1 In db.ListasPreciosDetalles _
-                          .Where(Function(i) i.IdListaPrecios = l1.IdListaPrecios And (i.IdArticulo = cdp.IdArticulo) _
+                          .Where(Function(i) i.IdListaPrecios = l1.IdListaPrecios And (i.IdArticulo = cdp.IdArticulo) And (i.IdDestinoDeCartaDePorte Is Nothing Or i.IdDestinoDeCartaDePorte = cdp.Destino) _
                               And (i.IdCliente Is Nothing Or i.IdCliente = cdp.Vendedor Or i.IdCliente = cdp.Entregador Or i.IdCliente = cdp.CuentaOrden1 Or i.IdCliente = cdp.CuentaOrden2)) _
                           .OrderByDescending(Function(i) i.IdCliente).Take(1).DefaultIfEmpty()
                   From l2 In db.ListasPrecios.Where(Function(i) i.IdListaPrecios = clisub2.IdListaPrecios).DefaultIfEmpty
                   From pd2 In db.ListasPreciosDetalles _
-                          .Where(Function(i) i.IdListaPrecios = l2.IdListaPrecios And (i.IdArticulo = cdp.IdArticulo) _
+                          .Where(Function(i) i.IdListaPrecios = l2.IdListaPrecios And (i.IdArticulo = cdp.IdArticulo) And (i.IdDestinoDeCartaDePorte Is Nothing Or i.IdDestinoDeCartaDePorte = cdp.Destino) _
                                  And (i.IdCliente Is Nothing Or i.IdCliente = cdp.Vendedor Or i.IdCliente = cdp.Entregador Or i.IdCliente = cdp.CuentaOrden1 Or i.IdCliente = cdp.CuentaOrden2)) _
                           .OrderByDescending(Function(i) i.IdCliente).Take(1).DefaultIfEmpty()
                   Where 1 = 1 _
@@ -653,7 +653,7 @@ Public Class ConsultasLinq
                                            .Tarifa = If(cdp.tarif1, 0),
                                            .Comision = cdp.NetoFinal * If(cdp.tarif1, 0) / 1000,
                                            .numerocarta = cdp.NumeroCartaDePorte
-                                   }).ToList
+                                   }).ToList.Distinct.ToList()
 
 
         Dim q5 As List(Of infLiqui) = (From cdp In q
@@ -668,7 +668,7 @@ Public Class ConsultasLinq
                                            .Tarifa = If(cdp.tarif2, 0),
                                            .Comision = cdp.NetoFinal * If(cdp.tarif2, 0) / 1000,
                                            .numerocarta = cdp.NumeroCartaDePorte
-                                   }).ToList
+                                   }).ToList.Distinct.ToList()
 
 
         Dim q6 As New List(Of infLiqui) '= q4.Union(q5)
