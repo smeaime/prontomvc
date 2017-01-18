@@ -414,6 +414,25 @@ Public Class ConsultasLinq
 
         db.Database.CommandTimeout = 300
 
+        'si te tarda mucho, puede ser por el parameter sniffing!!!!!! (en especial si en la consola de sql ejecuta rapido)
+        'si te tarda mucho, puede ser por el parameter sniffing!!!!!! (en especial si en la consola de sql ejecuta rapido)
+        'si te tarda mucho, puede ser por el parameter sniffing!!!!!! (en especial si en la consola de sql ejecuta rapido)
+        'si te tarda mucho, puede ser por el parameter sniffing!!!!!! (en especial si en la consola de sql ejecuta rapido)
+        'si te tarda mucho, puede ser por el parameter sniffing!!!!!! (en especial si en la consola de sql ejecuta rapido)
+        'si te tarda mucho, puede ser por el parameter sniffing!!!!!! (en especial si en la consola de sql ejecuta rapido)
+        'si te tarda mucho, puede ser por el parameter sniffing!!!!!! (en especial si en la consola de sql ejecuta rapido)
+        'si te tarda mucho, puede ser por el parameter sniffing!!!!!! (en especial si en la consola de sql ejecuta rapido)
+
+        'http://stackoverflow.com/questions/26761827/adding-a-query-hint-when-calling-table-valued-function
+        '        Are there other callers of fDE_myquery outside of your specific usage? And how often does this get called? The issue is not that your SELECT * FROM dbo.fDE_myquery(); is getting a sub-optimal plan, it is that one or more queries inside of fDE_myquery is getting a sub-optimal plan. Hence, you could just add the OPTION(RECOMPILE) to one or more queries inside that TVF.
+
+        'If this TVF is called a lot then this would have a negative impact on performance. That is why I asked about other uses of this TVF: if this is the only, or by far the main, use of this TVF, then it might be well worth it if the bad plans are being picked up frequently.
+
+        'But if there are several other callers of this TVF that are not experiencing an issue, then putting the RECOMPILE in the TVF might not be the way to go. Although, in that case you could create a wrapper TVF that encapsulates the SELECT * FROM dbo.fDE_myquery() OPTION (RECOMPILE);. This would appear to be a more flexible solution :). It would have to be a Multistatment TVF instead of the typically better Inline TVF as I just tried it and the Inline TVF does not seem to appreciate the OPTION clause, but the Multistatement TVF was fine with it.
+
+
+        db.Database.ExecuteSqlCommand("EXEC sp_recompile 'dbo.fSQL_GetDataTableFiltradoYPaginado';")
+
         Dim qq = (From cdp In aaa
                   From dest In db.WilliamsDestinos.Where(Function(i) i.IdWilliamsDestino = If(cdp.Destino, 0)).DefaultIfEmpty
                   From clisub1 In db.Clientes.Where(Function(i) i.IdCliente = If(cdp.Subcontr1, dest.Subcontratista1)).DefaultIfEmpty
@@ -471,7 +490,20 @@ Public Class ConsultasLinq
                       .Exporta = cdp.Exporta,
                      .Corredor = cdp.Corredor,
                       .IdClienteEntregador = If(cdp.IdClienteEntregador, 0)}).ToList
-        'IdListaPreciosDetalle1 = pd1.IdListaPreciosDetalle, IdListaPreciossDetalle2 = pd2.IdListaPreciosDetalle
+        'si te tarda mucho, puede ser por el parameter sniffing!!!!!! (en especial si en la consola de sql ejecuta rapido)
+        'si te tarda mucho, puede ser por el parameter sniffing!!!!!! (en especial si en la consola de sql ejecuta rapido)
+        'si te tarda mucho, puede ser por el parameter sniffing!!!!!! (en especial si en la consola de sql ejecuta rapido)
+        'si te tarda mucho, puede ser por el parameter sniffing!!!!!! (en especial si en la consola de sql ejecuta rapido)
+        'si te tarda mucho, puede ser por el parameter sniffing!!!!!! (en especial si en la consola de sql ejecuta rapido)
+        'si te tarda mucho, puede ser por el parameter sniffing!!!!!! (en especial si en la consola de sql ejecuta rapido)
+        'si te tarda mucho, puede ser por el parameter sniffing!!!!!! (en especial si en la consola de sql ejecuta rapido)
+        'si te tarda mucho, puede ser por el parameter sniffing!!!!!! (en especial si en la consola de sql ejecuta rapido)
+        'si te tarda mucho, puede ser por el parameter sniffing!!!!!! (en especial si en la consola de sql ejecuta rapido)
+        'si te tarda mucho, puede ser por el parameter sniffing!!!!!! (en especial si en la consola de sql ejecuta rapido)
+        'si te tarda mucho, puede ser por el parameter sniffing!!!!!! (en especial si en la consola de sql ejecuta rapido)
+
+
+
 
 
 
@@ -612,6 +644,7 @@ Public Class ConsultasLinq
         'IdListaPreciosDetalle1, IdListaPreciosDetalle2
 
 
+        'q = q.Where(Function(x) x.NumeroCartaDePorte = 557836815).Distinct()
 
 
 
@@ -623,7 +656,8 @@ Public Class ConsultasLinq
                 Dim a = (From x In q Order By x.FechaDescarga, x.IdCartaDePorte Select x.NumeroCartaDePorte, x.IdCartaDePorte, x.tarif1, x.tarif2).ToList
                 Dim b = From x In a Select x.NumeroCartaDePorte.ToString & " " & x.IdCartaDePorte.ToString & " " & x.tarif1 & " " & x.tarif2 ' & " " & x.IdListaPreciosDetalle1 & " " & x.IdListaPreciosDetalle2
 
-                ErrHandler2.WriteError(vbCrLf & Join(a.ToArray, vbCrLf))
+
+                ErrHandler2.WriteError(vbCrLf & Join(b.ToArray, vbCrLf))
             Catch ex As Exception
                 ErrHandler2.WriteError(ex)
             End Try
@@ -639,35 +673,53 @@ Public Class ConsultasLinq
 
 
 
-
+        'uso Group by, porque el distinct en vb.net es medio loco! (no anda igual que en c#)
 
         Dim q4 As List(Of infLiqui) = (From cdp In q
-                                       Where (idSubcontr = -1 Or cdp.Subcontr1 = idSubcontr)
-                                       Select New infLiqui With {
-                                           .agrupVagon = cdp.agrupVagon,
-                                           .DestinoDesc = cdp.DestinoDesc & " Calada" & If(
-                                               (cdp.Exporta = "SI") _
+                                        Where (idSubcontr = -1 Or cdp.Subcontr1 = idSubcontr)
+                                       Group By
+                                        cdp.agrupVagon,
+                                        cdp.DestinoDesc,
+                                        cdp.Exporta,
+                                        cdp.Subcontr1Desc,
+                                        cdp.tarif1,
+                                        cdp.NumeroCartaDePorte,
+                                        cdp.NetoFinal
+                                       Into Group
+                                           Select New infLiqui With {
+                                           .agrupVagon = agrupVagon,
+                                           .DestinoDesc = DestinoDesc & " Calada" & If(
+                                               (Exporta = "SI") _
                                                       , " - Export.", " - Entrega"),
-                                           .SubcontrDesc = cdp.Subcontr1Desc,
-                                           .NetoPto = cdp.NetoFinal,
-                                           .Tarifa = If(cdp.tarif1, 0),
-                                           .Comision = cdp.NetoFinal * If(cdp.tarif1, 0) / 1000,
-                                           .numerocarta = cdp.NumeroCartaDePorte
-                                   }).ToList.Distinct.ToList()
+                                           .SubcontrDesc = Subcontr1Desc,
+                                           .NetoPto = NetoFinal,
+                                           .Tarifa = If(tarif1, 0),
+                                           .Comision = NetoFinal * If(tarif1, 0) / 1000,
+                                            .numerocarta = NumeroCartaDePorte
+                                        }).ToList.Distinct.ToList()
 
 
         Dim q5 As List(Of infLiqui) = (From cdp In q
                                        Where (idSubcontr = -1 Or cdp.Subcontr2 = idSubcontr)
+                                        Group By
+                                        cdp.agrupVagon,
+                                        cdp.DestinoDesc,
+                                        cdp.Exporta,
+                                        cdp.Subcontr2Desc,
+                                        cdp.tarif2,
+                                        cdp.NumeroCartaDePorte,
+                                        cdp.NetoFinal
+                                       Into Group
                                        Select New infLiqui With {
-                                           .agrupVagon = cdp.agrupVagon,
-                                           .DestinoDesc = cdp.DestinoDesc & " Balanza" & If(
-                                                         (cdp.Exporta = "SI") _
+                                           .agrupVagon = agrupVagon,
+                                           .DestinoDesc = DestinoDesc & " Balanza" & If(
+                                                         (Exporta = "SI") _
                                                        , " - Export.", " - Entrega"),
-                                           .SubcontrDesc = cdp.Subcontr2Desc,
-                                           .NetoPto = cdp.NetoFinal,
-                                           .Tarifa = If(cdp.tarif2, 0),
-                                           .Comision = cdp.NetoFinal * If(cdp.tarif2, 0) / 1000,
-                                           .numerocarta = cdp.NumeroCartaDePorte
+                                           .SubcontrDesc = Subcontr2Desc,
+                                           .NetoPto = NetoFinal,
+                                           .Tarifa = If(tarif2, 0),
+                                           .Comision = NetoFinal * If(tarif2, 0) / 1000,
+                                        .numerocarta = NumeroCartaDePorte
                                    }).ToList.Distinct.ToList()
 
 
