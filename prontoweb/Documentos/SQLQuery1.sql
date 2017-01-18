@@ -1,5 +1,12 @@
 
 
+
+
+select top 10 * from cartasdeporte where fechaactualizacionautomatica is not null
+
+
+
+
 select top 10 * from cartasdeporte order by fechadescarga desc
 
 select max(fechamodificacion) from cartasdeporte 

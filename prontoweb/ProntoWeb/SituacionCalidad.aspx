@@ -24,7 +24,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
     <%--/////////////////////////////////////////////////////////////--%>
     <%--/////////////////////////////////////////////////////////////--%>
     <%--////////////    jqgrid     //////////////////////////////////--%>
-    <script src="//cdn.jsdelivr.net/jqgrid/4.5.4/i18n/grid.locale-es.js" ></script>
+    <script src="//cdn.jsdelivr.net/jqgrid/4.5.4/i18n/grid.locale-es.js"></script>
     <link href="//cdn.jsdelivr.net/jqgrid/4.5.2/css/ui.jqgrid.css" rel="stylesheet">
     <script src="//cdn.jsdelivr.net/jqgrid/4.5.2/jquery.jqGrid.js"></script>
     <%--/////////////////////////////////////////////////////////////--%>
@@ -74,7 +74,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                                 CultureDecimalPlaceholder="" CultureThousandsPlaceholder="" CultureTimePlaceholder=""
                                 Enabled="True">
                             </cc1:MaskedEditExtender>
-                           <%-- <cc1:TextBoxWatermarkExtender ID="TBWE2" runat="server" TargetControlID="txtFechaDesde"
+                            <%-- <cc1:TextBoxWatermarkExtender ID="TBWE2" runat="server" TargetControlID="txtFechaDesde"
                                 WatermarkText="desde" WatermarkCssClass="watermarked" />--%>
                             <asp:TextBox ID="txtFechaHasta" runat="server" Width="100px" MaxLength="1" TabIndex="2" Style="color: black;"
                                 AutoPostBack="false"></asp:TextBox>
@@ -87,7 +87,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                                 CultureDecimalPlaceholder="" CultureThousandsPlaceholder="" CultureTimePlaceholder=""
                                 Enabled="True">
                             </cc1:MaskedEditExtender>
-                           <%-- <cc1:TextBoxWatermarkExtender ID="TBWE3" runat="server" TargetControlID="txtFechaHasta"
+                            <%-- <cc1:TextBoxWatermarkExtender ID="TBWE3" runat="server" TargetControlID="txtFechaHasta"
                                 WatermarkText="hasta" WatermarkCssClass="watermarked"  />--%>
                         </td>
 
@@ -325,17 +325,17 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
             "use strict";
 
-            
+
             $('#btnExportarGrillaAjax2').click(function () {
 
-                var d= { 
+                var d = {
                     filters: jQuery('#Lista').getGridParam("postData").filters,  // si viene en undefined es porque no se puso ningun filtro
                     fechadesde: $("#ctl00_ContentPlaceHolder1_txtFechaDesde").val(),
                     fechahasta: $("#ctl00_ContentPlaceHolder1_txtFechaHasta").val(),
                     destino: $("#ctl00_ContentPlaceHolder1_txtDestino").val()
                 }
-                
-                if (typeof d.filters === "undefined") d.filters="";
+
+                if (typeof d.filters === "undefined") d.filters = "";
 
                 $.ajax({
                     type: "POST",
@@ -364,21 +364,21 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                     }
 
 
-                })                                                    
+                })
 
 
             })
 
             $('#btnExportarGrillaAjax').click(function () {
 
-                var d= { 
+                var d = {
                     filters: jQuery('#Lista').getGridParam("postData").filters,  // si viene en undefined es porque no se puso ningun filtro
                     fechadesde: $("#ctl00_ContentPlaceHolder1_txtFechaDesde").val(),
                     fechahasta: $("#ctl00_ContentPlaceHolder1_txtFechaHasta").val(),
                     destino: $("#ctl00_ContentPlaceHolder1_txtDestino").val()
                 }
-                
-                if (typeof d.filters === "undefined") d.filters="";
+
+                if (typeof d.filters === "undefined") d.filters = "";
 
                 $.ajax({
                     type: "POST",
@@ -407,22 +407,22 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                     }
 
 
-                })                                                    
+                })
 
 
             })
 
-            
+
             $('#btnPanelInformeAjax').click(function () {
 
-                var d= { 
+                var d = {
                     filters: jQuery('#Lista').getGridParam("postData").filters,  // si viene en undefined es porque no se puso ningun filtro
                     fechadesde: $("#ctl00_ContentPlaceHolder1_txtFechaDesde").val(),
                     fechahasta: $("#ctl00_ContentPlaceHolder1_txtFechaHasta").val(),
                     destino: $("#ctl00_ContentPlaceHolder1_txtDestino").val()
                 }
-                
-                if (typeof d.filters === "undefined") d.filters="";
+
+                if (typeof d.filters === "undefined") d.filters = "";
 
                 $.ajax({
                     type: "POST",
@@ -437,7 +437,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                         // http://stackoverflow.com/questions/10439798/how-to-laod-raw-html-using-jquery-ajax-call-to-asp-net-webmethod
                         $("#Salida2").html("").append(data.d)
                         //alert(data.d);
-                        
+
                     }
 
 
@@ -453,7 +453,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                     }
 
 
-                })                                                    
+                })
 
 
             })
@@ -670,7 +670,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
                 datos.idcarta = gridId;
                 datos.idsituacion = dataFromTheRow.Situacion;
-                if  (datos.idsituacion == "") datos.idsituacion=-1;
+                if (datos.idsituacion == "") datos.idsituacion = -1;
                 datos.sObservacionesSituacion = dataFromTheRow.ObservacionesSituacion;
 
 
@@ -686,7 +686,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
 
 
-                    
+
 
 
                     $.ajax({
@@ -804,7 +804,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                 var colModel = grid.jqGrid('getGridParam', 'colModel');
                 var dataIds = grid.jqGrid('getDataIDs');
                 var Id = (grid.jqGrid('getGridParam', 'records') + 1) * -1;
-                var se = "<input style='height:22px;width:100px;' type='button' value='Grabar' onclick=\"GrabarFila('" + Id + "');\"  />";
+                var se = "<input style='height:22px;width:60px;' type='button' value='Grabar' onclick=\"GrabarFila('" + Id + "');\"  />";
                 var data, j, cm;
 
                 if (lastSelectediRow2 != undefined) { lastSelectediRow2 = lastSelectediRow2 + 1; }
@@ -1022,33 +1022,26 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                     // CP	TURNO	SITUACION	MERC	TITULAR_CP	INTERMEDIARIO	RTE CIAL	CORREDOR	DESTINATARIO	DESTINO	ENTREGADOR	PROC	KILOS	OBSERVACION
 
 
-                    colNames: ['', 'Id', 'Nro CP', 'Situacion', 'Producto'
-
-                        , 'Titular', 'Intermediario', 'R Comercial'     , 'Corredor'         , 'Destinatario'  , 'Destino'  , 'Procedencia'  , 'Kilos'    , 'Obs Situacion',
-                                'Arribo', 'Descarga',
-                                'IdDestino', 'Patente', 'Punto Venta', 'Fecha actualizacion'
-
-
-
-
-
-
-
+                    colNames: ['', 'Id', 'Nro CP', 'Turno', 'Situacion',
+                                'Producto', 'Titular', 'Intermediario', 'R Comercial', 'Corredor',
+                                'Destinatario', 'Destino', 'IdDestino' ,'Entregador','Procedencia',
+                                'Kilos', 'Obs Situacion', 'Arribo', 'Descarga', 'Punto Venta',
+                                'Fecha actualizacion', 'Patente'
                     ],
-
-
 
                     colModel: [
 {
-    name: 'act', index: 'act', align: 'center', width: 60, editable: false, hidden: false, sortable: false ,
+    name: 'act', index: 'act', align: 'center', width: 60, editable: false, hidden: false, sortable: false,
     search: false,
 },
+
 { name: ' IdCartasDePorte', index: ' IdCartasDePorte', align: 'left', width: 100, editable: false, hidden: true },
+
 {
     name: 'NumeroCartaEnTextoParaBusqueda', index: 'NumeroCartaEnTextoParaBusqueda', width: 160, align: 'left', sorttype: "text", sortable: false
-, editable: false, editrules: { required: false, number: true }, edittype: 'text', 
+, editable: false, editrules: { required: false, number: true }, edittype: 'text',
 
-    searchoptions: { sopt: ['bw','cn','eq'] },
+    searchoptions: { sopt: ['bw', 'cn', 'eq'] },
 
 
     editoptions: {
@@ -1065,28 +1058,24 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
     }
 },
 
+{ name: 'Turno', index: ' Turno', align: 'left', width: 100, editable: false, hidden: true },
 
-{ 
-    name: 'Situacion', index: 'Situacion', align: 'left', width: 120, hidden: false, editable: true, edittype: 'select', sortable: false ,
+{
+    name: 'Situacion', index: 'Situacion', align: 'left', width: 120, hidden: false, editable: true, edittype: 'select', sortable: false,
     editoptions: {
         //defaultValue: OrigenDescripcionDefault,
         //value: "0:Autorizado; 6:Desviado" 
-        value: "0:Autorizado; 1:Demorado; 2:Posicion; 3:Descargado; 4:A Descargar; 5:Rechazado;6:Desviado;7:CP p/cambiar;8:Sin Cupo;9:Calado" 
+        value: "0:Autorizado; 1:Demorado; 2:Posicion; 3:Descargado; 4:A Descargar; 5:Rechazado;6:Desviado;7:CP p/cambiar;8:Sin Cupo;9:Calado"
     },
     // http://stackoverflow.com/questions/5328072/can-jqgrid-support-dropdowns-in-the-toolbar-filter-fields
-    formatter:'select',  stype: 'select',
-    searchoptions:{ sopt:['eq'], 
-        value: ":Todos; 0:Autorizado; 1:Demorado; 2:Posicion; 3:Descargado; 4:A Descargar; 5:Rechazado;6:Desviado;7:CP p/cambiar;8:Sin Cupo;9:Calado" }
+    formatter: 'select', stype: 'select',
+    searchoptions: {
+        sopt: ['eq'],
+        value: ":Todos; 0:Autorizado; 1:Demorado; 2:Posicion; 3:Descargado; 4:A Descargar; 5:Rechazado;6:Desviado;7:CP p/cambiar;8:Sin Cupo;9:Calado"
+    }
 
 
 },
-
-
-
-
-
-
-
 
 
 {
@@ -1376,9 +1365,10 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 },
 
 
-{ name: 'CorredorDesc', index: 'CorredorDesc', align: 'left', width: 100, hidden: false, editable: false, edittype: 'text', sortable: false 
+{
+    name: 'CorredorDesc', index: 'CorredorDesc', align: 'left', width: 100, hidden: false, editable: false, edittype: 'text', sortable: false
 
-    ,searchoptions:{ 
+    , searchoptions: {
         //    sopt:['eq'], 
         dataInit: function (elem) {
             var NoResultsLabel = "No se encontraron resultados";
@@ -1434,7 +1424,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
                 }
 
-                  
+
             });
 
 
@@ -1522,8 +1512,8 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
 {
     name: 'DestinoDesc', index: 'DestinoDesc',
-    formoptions: { rowpos: 5, colpos: 2, label: "Descripción" }, align: 'left', width: 100, hidden: false, editable: true, edittype: 'text', sortable: false ,
-    searchoptions:{ 
+    formoptions: { rowpos: 5, colpos: 2, label: "Descripción" }, align: 'left', width: 100, hidden: false, editable: true, edittype: 'text', sortable: false,
+    searchoptions: {
         //    sopt:['eq'], 
         dataInit: function (elem) {
             var NoResultsLabel = "No se encontraron resultados";
@@ -1624,9 +1614,6 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
 },
 { name: 'Destino', index: 'Destino', align: 'left', width: 100, hidden: true, editable: false, edittype: 'text', sortable: false },
-
-
-
 
 
 {
@@ -1776,11 +1763,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
 { name: 'NetoProc', index: 'NetoProc', align: 'left', width: 150, hidden: false, editable: false, edittype: 'text', sortable: false },
 
-
-
-
 { name: 'ObservacionesSituacion', index: 'ObservacionesSituacion', align: 'left', width: 100, editable: true, hidden: false, sortable: false },
-
 
 {
     name: 'FechaArribo', index: 'FechaArribo', width: 100, sortable: true, align: 'right', editable: false, sortable: false,
@@ -1802,7 +1785,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
 
 , searchoptions: {
-    sopt: ['eq', 'ne'],
+    sopt: ['eq', 'ne', 'lt', 'le', 'gt', 'ge'],
     dataInit: function (elem) {
         $(elem).datepicker({
             dateFormat: 'dd/mm/yy',
@@ -1834,7 +1817,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
 
         , searchoptions: {
-            sopt: ['eq', 'ne'],
+            sopt: ['eq', 'ne', 'lt', 'le', 'gt', 'ge'],
             dataInit: function (elem) {
                 $(elem).datepicker({
                     dateFormat: 'dd/mm/yy',
@@ -1847,13 +1830,42 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
 
 
+{ name: 'PuntoVenta', index: 'PuntoVenta', align: 'left', width: 50, hidden: false, editable: false, edittype: 'text', sortable: false },
+
+
+
+{
+    name: 'FechaActualizacionAutomatica', index: 'FechaActualizacionAutomatica', width: 100, sortable: true, align: 'right', editable: false, sortable: false,
+    editoptions: {
+        size: 10,
+        maxlengh: 10,
+        dataInit: function (element) {
+            $(element).datepicker({
+                dateFormat: 'dd/mm/yy',
+                constrainInput: false,
+                showOn: 'button',
+                buttonText: '...'
+            });
+        }
+    },
+    formatoptions: { newformat: "dd/mm/yy" }, datefmt: 'dd/mm/yy'
+    //, formatter: 'date'
+    , sorttype: 'date'
+
+
+    , searchoptions: {
+        sopt: ['eq', 'ne', 'lt', 'le', 'gt', 'ge'],
+        dataInit: function (elem) {
+            $(elem).datepicker({
+                dateFormat: 'dd/mm/yy',
+                showButtonPanel: true
+            })
+        }
+    }
+},
 
 
 { name: 'Patente', index: 'Patente', align: 'left', width: 100, hidden: false, editable: false, edittype: 'text', sortable: false },
-{ name: 'PuntoVenta', index: 'PuntoVenta', align: 'left', width: 50, hidden: false, editable: false, edittype: 'text', sortable: false },
-
-{
-    name: 'FechaActualizacionAutomatica', index: 'FechaActualizacionAutomatica', width: 100,  align: 'right', editable: false, sortable: false}
 
 
                     ],
@@ -1879,7 +1891,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                         //if (name == 'Fecha') {
                         //    jQuery("#" + iRow + "_Fecha", "#Lista").datepicker({ dateFormat: "dd/mm/yy" });
                         //}
-                        var se = "<input style='height:22px;width:100px;' type='button' value='Grabar' onclick=\"GrabarFila('" + id + "');\"  />";
+                        var se = "<input style='height:22px;width:55px;' type='button' value='Grabar' onclick=\"GrabarFila('" + id + "');\"  />";
                         jQuery("#Lista").jqGrid('setRowData', id, { act: se });
                     },
                     //beforeSelectRow: function (rowid, e) {
@@ -1909,7 +1921,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                     multiselect: false,
                     shrinkToFit: false,
                     width: 'auto',
-                    height: 430, // $(window).height() - 250, // '100%'
+                    height: 400, // $(window).height() - 250, // '100%'
                     altRows: false,
                     footerrow: false,
                     userDataOnFooter: true,
@@ -1970,14 +1982,14 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
 
                 //$('#Lista').jqGrid('setGridWidth', '1000');
-                $('#Lista').jqGrid('setGridWidth', $(window).width() - 220 );
+                $('#Lista').jqGrid('setGridWidth', $(window).width() - 220);
 
             });
 
 
 
             $(window).resize(function () {
-                $('#Lista').jqGrid('setGridWidth', $(window).width() - 220 );
+                $('#Lista').jqGrid('setGridWidth', $(window).width() - 220);
                 //RefrescaAnchoJqgrids();
             });
 
