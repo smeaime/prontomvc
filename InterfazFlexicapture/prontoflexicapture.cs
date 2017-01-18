@@ -3440,6 +3440,8 @@ namespace ServicioCartaPorte
 
                                 "<a href=\"CartaDePorte.aspx?Id=" +  a.IdCartaDePorte + "\">" +  a.NumeroCartaEnTextoParaBusqueda.NullSafeToString() + "</>" ,
 
+                                "", //turno
+
                                 (a.Situacion ?? 0).NullSafeToString(),
                                 //((a.Situacion ?? 0) >= 0)  ?  ExcelImportadorManager.Situaciones[a.Situacion ?? 0] : "",
 

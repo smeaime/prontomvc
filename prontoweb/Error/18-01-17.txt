@@ -1,0 +1,1393 @@
+
+Log Entry : 
+01/18/2017 13:58:06
+Error in: http://localhost:58911/login.aspx?ReturnUrl=/. Error Message:System.Threading.ThreadAbortException
+Subproceso anulado.
+   en System.Threading.Thread.AbortInternal()
+   en System.Threading.Thread.Abort(Object stateInfo)
+   en System.Web.HttpResponse.AbortCurrentThread()
+   en System.Web.HttpResponse.End()
+   en System.Web.HttpResponse.Redirect(String url, Boolean endResponse, Boolean permanent)
+   en System.Web.HttpResponse.Redirect(String url)
+   en Login.Page_Load(Object sender, EventArgs e) en C:\Users\Administrador\Documents\bdl\pronto\prontoweb\Login.aspx.vb:línea 169
+mscorlib
+__________________________
+
+Log Entry : 
+01/18/2017 14:09:38
+Error in: http://localhost:58911/ProntoWeb/Principal.aspx. Error Message:System.Threading.ThreadAbortException
+Subproceso anulado.
+   en System.Threading.Thread.AbortInternal()
+   en System.Threading.Thread.Abort(Object stateInfo)
+   en System.Web.HttpResponse.AbortCurrentThread()
+   en System.Web.HttpResponse.End()
+   en System.Web.HttpResponse.Redirect(String url, Boolean endResponse, Boolean permanent)
+   en System.Web.HttpResponse.Redirect(String url)
+   en Login.Page_Load(Object sender, EventArgs e) en C:\Users\Administrador\Documents\bdl\pronto\prontoweb\Login.aspx.vb:línea 171
+mscorlib
+__________________________
+
+Log Entry : 
+01/18/2017 14:10:48
+Error in: http://localhost:58911/ProntoWeb/CartaDePorte.aspx?Id=2731773. Error Message:La carta numero 558632015 id=2731773 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+01/18/2017 14:10:49
+Error in: http://localhost:58911/ProntoWeb/CartaDePorte.aspx?Id=2731773. Error Message:PV 2 0
+__________________________
+
+Log Entry : 
+01/18/2017 14:22:31
+Error in: http://localhost:58911/ProntoWeb/SituacionCalidad.aspx. Error Message:System.Threading.ThreadAbortException
+Subproceso anulado.
+   en System.Threading.Thread.AbortInternal()
+   en System.Threading.Thread.Abort(Object stateInfo)
+   en System.Web.HttpResponse.AbortCurrentThread()
+   en System.Web.HttpResponse.End()
+   en System.Web.HttpResponse.Redirect(String url, Boolean endResponse, Boolean permanent)
+   en System.Web.HttpResponse.Redirect(String url)
+   en Login.Page_Load(Object sender, EventArgs e) en C:\Users\Administrador\Documents\bdl\pronto\prontoweb\Login.aspx.vb:línea 171
+mscorlib
+__________________________
+
+Log Entry : 
+01/18/2017 14:27:07
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Generando informe para Listado general de cartas de porte (solo originales)
+__________________________
+
+Log Entry : 
+01/18/2017 14:27:10
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:  Informe: Todas (menos las rechazadas),  del 17/01/2017 al 17/01/2017           (Exporta: Entregas, Punto de venta: Todos, Criterio: ALGUNOS)
+__________________________
+
+Log Entry : 
+01/18/2017 14:45:49
+Error in: http://localhost:58911/ProntoWeb/CartaDePorte.aspx?Id=2727570. Error Message:La carta numero 558478056 id=2727570 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+01/18/2017 14:45:49
+Error in: http://localhost:58911/ProntoWeb/CartaDePorte.aspx?Id=2727570. Error Message:PV 1 0
+__________________________
+
+Log Entry : 
+01/18/2017 14:46:34
+Error in: http://localhost:58911/ProntoWeb/CartaDePorte.aspx?Id=2731773. Error Message:La carta numero 558632015 id=2731773 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+01/18/2017 14:46:34
+Error in: http://localhost:58911/ProntoWeb/CartaDePorte.aspx?Id=2731773. Error Message:PV 2 0
+__________________________
+
+Log Entry : 
+01/18/2017 14:47:02
+Error in: http://localhost:58911/ProntoWeb/CartaDePorte.aspx?Id=2736046. Error Message:La carta numero 558691954 id=2736046 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+01/18/2017 14:47:02
+Error in: http://localhost:58911/ProntoWeb/CartaDePorte.aspx?Id=2736046. Error Message:PV 2 0
+__________________________
+
+Log Entry : 
+01/18/2017 14:54:40
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:System.Data.Entity.Validation.DbEntityValidationException
+Validation failed for one or more entities. See 'EntityValidationErrors' property for more details.
+   en System.Data.Entity.Internal.InternalContext.SaveChanges()
+   en System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   en System.Data.Entity.DbContext.SaveChanges()
+   en ExcelImportadorManager.UrenportExcelToDataset(String pFileName, String SC) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ExcelImportador.vb:línea 2171
+EntityFramework
+__________________________
+
+Log Entry : 
+01/18/2017 14:54:42
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:System.Data.Entity.Validation.DbEntityValidationException
+Validation failed for one or more entities. See 'EntityValidationErrors' property for more details.
+   en System.Data.Entity.Internal.InternalContext.SaveChanges()
+   en System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   en System.Data.Entity.DbContext.SaveChanges()
+   en ExcelImportadorManager.UrenportExcelToDataset(String pFileName, String SC) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ExcelImportador.vb:línea 2171
+EntityFramework
+__________________________
+
+Log Entry : 
+01/18/2017 14:54:45
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:System.Data.Entity.Validation.DbEntityValidationException
+Validation failed for one or more entities. See 'EntityValidationErrors' property for more details.
+   en System.Data.Entity.Internal.InternalContext.SaveChanges()
+   en System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   en System.Data.Entity.DbContext.SaveChanges()
+   en ExcelImportadorManager.UrenportExcelToDataset(String pFileName, String SC) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ExcelImportador.vb:línea 2171
+EntityFramework
+__________________________
+
+Log Entry : 
+01/18/2017 14:55:27
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:System.Data.Entity.Validation.DbEntityValidationException
+Validation failed for one or more entities. See 'EntityValidationErrors' property for more details.
+   en System.Data.Entity.Internal.InternalContext.SaveChanges()
+   en System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   en System.Data.Entity.DbContext.SaveChanges()
+   en ExcelImportadorManager.UrenportExcelToDataset(String pFileName, String SC) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ExcelImportador.vb:línea 2171
+EntityFramework
+__________________________
+
+Log Entry : 
+01/18/2017 14:55:28
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:System.Data.Entity.Validation.DbEntityValidationException
+Validation failed for one or more entities. See 'EntityValidationErrors' property for more details.
+   en System.Data.Entity.Internal.InternalContext.SaveChanges()
+   en System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   en System.Data.Entity.DbContext.SaveChanges()
+   en ExcelImportadorManager.UrenportExcelToDataset(String pFileName, String SC) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ExcelImportador.vb:línea 2171
+EntityFramework
+__________________________
+
+Log Entry : 
+01/18/2017 14:55:31
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:System.Data.Entity.Validation.DbEntityValidationException
+Validation failed for one or more entities. See 'EntityValidationErrors' property for more details.
+   en System.Data.Entity.Internal.InternalContext.SaveChanges()
+   en System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   en System.Data.Entity.DbContext.SaveChanges()
+   en ExcelImportadorManager.UrenportExcelToDataset(String pFileName, String SC) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ExcelImportador.vb:línea 2171
+EntityFramework
+__________________________
+
+Log Entry : 
+01/18/2017 15:00:30
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:System.Data.Entity.Validation.DbEntityValidationException
+Validation failed for one or more entities. See 'EntityValidationErrors' property for more details.
+   en System.Data.Entity.Internal.InternalContext.SaveChanges()
+   en System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   en System.Data.Entity.DbContext.SaveChanges()
+   en ExcelImportadorManager.UrenportExcelToDataset(String pFileName, String SC) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ExcelImportador.vb:línea 2171
+EntityFramework
+__________________________
+
+Log Entry : 
+01/18/2017 15:00:30
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:System.Data.Entity.Validation.DbEntityValidationException
+Validation failed for one or more entities. See 'EntityValidationErrors' property for more details.
+   en System.Data.Entity.Internal.InternalContext.SaveChanges()
+   en System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   en System.Data.Entity.DbContext.SaveChanges()
+   en ExcelImportadorManager.UrenportExcelToDataset(String pFileName, String SC) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ExcelImportador.vb:línea 2171
+EntityFramework
+__________________________
+
+Log Entry : 
+01/18/2017 15:00:30
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:System.Data.Entity.Validation.DbEntityValidationException
+Validation failed for one or more entities. See 'EntityValidationErrors' property for more details.
+   en System.Data.Entity.Internal.InternalContext.SaveChanges()
+   en System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   en System.Data.Entity.DbContext.SaveChanges()
+   en ExcelImportadorManager.UrenportExcelToDataset(String pFileName, String SC) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ExcelImportador.vb:línea 2171
+EntityFramework
+__________________________
+
+Log Entry : 
+01/18/2017 15:00:30
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:System.Data.Entity.Validation.DbEntityValidationException
+Validation failed for one or more entities. See 'EntityValidationErrors' property for more details.
+   en System.Data.Entity.Internal.InternalContext.SaveChanges()
+   en System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   en System.Data.Entity.DbContext.SaveChanges()
+   en ExcelImportadorManager.UrenportExcelToDataset(String pFileName, String SC) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ExcelImportador.vb:línea 2171
+EntityFramework
+__________________________
+
+Log Entry : 
+01/18/2017 15:00:30
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:System.Data.Entity.Validation.DbEntityValidationException
+Validation failed for one or more entities. See 'EntityValidationErrors' property for more details.
+   en System.Data.Entity.Internal.InternalContext.SaveChanges()
+   en System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   en System.Data.Entity.DbContext.SaveChanges()
+   en ExcelImportadorManager.UrenportExcelToDataset(String pFileName, String SC) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ExcelImportador.vb:línea 2171
+EntityFramework
+__________________________
+
+Log Entry : 
+01/18/2017 15:00:31
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:System.Data.Entity.Validation.DbEntityValidationException
+Validation failed for one or more entities. See 'EntityValidationErrors' property for more details.
+   en System.Data.Entity.Internal.InternalContext.SaveChanges()
+   en System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   en System.Data.Entity.DbContext.SaveChanges()
+   en ExcelImportadorManager.UrenportExcelToDataset(String pFileName, String SC) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ExcelImportador.vb:línea 2171
+EntityFramework
+__________________________
+
+Log Entry : 
+01/18/2017 15:00:34
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:System.Data.Entity.Validation.DbEntityValidationException
+Validation failed for one or more entities. See 'EntityValidationErrors' property for more details.
+   en System.Data.Entity.Internal.InternalContext.SaveChanges()
+   en System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   en System.Data.Entity.DbContext.SaveChanges()
+   en ExcelImportadorManager.UrenportExcelToDataset(String pFileName, String SC) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ExcelImportador.vb:línea 2171
+EntityFramework
+__________________________
+
+Log Entry : 
+01/18/2017 15:00:34
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:System.Data.Entity.Validation.DbEntityValidationException
+Validation failed for one or more entities. See 'EntityValidationErrors' property for more details.
+   en System.Data.Entity.Internal.InternalContext.SaveChanges()
+   en System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   en System.Data.Entity.DbContext.SaveChanges()
+   en ExcelImportadorManager.UrenportExcelToDataset(String pFileName, String SC) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ExcelImportador.vb:línea 2171
+EntityFramework
+__________________________
+
+Log Entry : 
+01/18/2017 15:00:35
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:System.Data.Entity.Validation.DbEntityValidationException
+Validation failed for one or more entities. See 'EntityValidationErrors' property for more details.
+   en System.Data.Entity.Internal.InternalContext.SaveChanges()
+   en System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   en System.Data.Entity.DbContext.SaveChanges()
+   en ExcelImportadorManager.UrenportExcelToDataset(String pFileName, String SC) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ExcelImportador.vb:línea 2171
+EntityFramework
+__________________________
+
+Log Entry : 
+01/18/2017 15:00:35
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:System.Data.Entity.Validation.DbEntityValidationException
+Validation failed for one or more entities. See 'EntityValidationErrors' property for more details.
+   en System.Data.Entity.Internal.InternalContext.SaveChanges()
+   en System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   en System.Data.Entity.DbContext.SaveChanges()
+   en ExcelImportadorManager.UrenportExcelToDataset(String pFileName, String SC) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ExcelImportador.vb:línea 2171
+EntityFramework
+__________________________
+
+Log Entry : 
+01/18/2017 15:00:35
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:System.Data.Entity.Validation.DbEntityValidationException
+Validation failed for one or more entities. See 'EntityValidationErrors' property for more details.
+   en System.Data.Entity.Internal.InternalContext.SaveChanges()
+   en System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   en System.Data.Entity.DbContext.SaveChanges()
+   en ExcelImportadorManager.UrenportExcelToDataset(String pFileName, String SC) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ExcelImportador.vb:línea 2171
+EntityFramework
+__________________________
+
+Log Entry : 
+01/18/2017 15:00:35
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:System.Data.Entity.Validation.DbEntityValidationException
+Validation failed for one or more entities. See 'EntityValidationErrors' property for more details.
+   en System.Data.Entity.Internal.InternalContext.SaveChanges()
+   en System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   en System.Data.Entity.DbContext.SaveChanges()
+   en ExcelImportadorManager.UrenportExcelToDataset(String pFileName, String SC) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ExcelImportador.vb:línea 2171
+EntityFramework
+__________________________
+
+Log Entry : 
+01/18/2017 15:00:36
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:System.Data.Entity.Validation.DbEntityValidationException
+Validation failed for one or more entities. See 'EntityValidationErrors' property for more details.
+   en System.Data.Entity.Internal.InternalContext.SaveChanges()
+   en System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   en System.Data.Entity.DbContext.SaveChanges()
+   en ExcelImportadorManager.UrenportExcelToDataset(String pFileName, String SC) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ExcelImportador.vb:línea 2171
+EntityFramework
+__________________________
+
+Log Entry : 
+01/18/2017 15:00:36
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:System.Data.Entity.Validation.DbEntityValidationException
+Validation failed for one or more entities. See 'EntityValidationErrors' property for more details.
+   en System.Data.Entity.Internal.InternalContext.SaveChanges()
+   en System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   en System.Data.Entity.DbContext.SaveChanges()
+   en ExcelImportadorManager.UrenportExcelToDataset(String pFileName, String SC) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ExcelImportador.vb:línea 2171
+EntityFramework
+__________________________
+
+Log Entry : 
+01/18/2017 15:00:36
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:System.Data.Entity.Validation.DbEntityValidationException
+Validation failed for one or more entities. See 'EntityValidationErrors' property for more details.
+   en System.Data.Entity.Internal.InternalContext.SaveChanges()
+   en System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   en System.Data.Entity.DbContext.SaveChanges()
+   en ExcelImportadorManager.UrenportExcelToDataset(String pFileName, String SC) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ExcelImportador.vb:línea 2171
+EntityFramework
+__________________________
+
+Log Entry : 
+01/18/2017 15:00:36
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:System.Data.Entity.Validation.DbEntityValidationException
+Validation failed for one or more entities. See 'EntityValidationErrors' property for more details.
+   en System.Data.Entity.Internal.InternalContext.SaveChanges()
+   en System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   en System.Data.Entity.DbContext.SaveChanges()
+   en ExcelImportadorManager.UrenportExcelToDataset(String pFileName, String SC) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ExcelImportador.vb:línea 2171
+EntityFramework
+__________________________
+
+Log Entry : 
+01/18/2017 15:00:36
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:System.Data.Entity.Validation.DbEntityValidationException
+Validation failed for one or more entities. See 'EntityValidationErrors' property for more details.
+   en System.Data.Entity.Internal.InternalContext.SaveChanges()
+   en System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   en System.Data.Entity.DbContext.SaveChanges()
+   en ExcelImportadorManager.UrenportExcelToDataset(String pFileName, String SC) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ExcelImportador.vb:línea 2171
+EntityFramework
+__________________________
+
+Log Entry : 
+01/18/2017 15:00:37
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:System.Data.Entity.Validation.DbEntityValidationException
+Validation failed for one or more entities. See 'EntityValidationErrors' property for more details.
+   en System.Data.Entity.Internal.InternalContext.SaveChanges()
+   en System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   en System.Data.Entity.DbContext.SaveChanges()
+   en ExcelImportadorManager.UrenportExcelToDataset(String pFileName, String SC) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ExcelImportador.vb:línea 2171
+EntityFramework
+__________________________
+
+Log Entry : 
+01/18/2017 15:00:37
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:System.Data.Entity.Validation.DbEntityValidationException
+Validation failed for one or more entities. See 'EntityValidationErrors' property for more details.
+   en System.Data.Entity.Internal.InternalContext.SaveChanges()
+   en System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   en System.Data.Entity.DbContext.SaveChanges()
+   en ExcelImportadorManager.UrenportExcelToDataset(String pFileName, String SC) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ExcelImportador.vb:línea 2171
+EntityFramework
+__________________________
+
+Log Entry : 
+01/18/2017 15:00:37
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:System.Data.Entity.Validation.DbEntityValidationException
+Validation failed for one or more entities. See 'EntityValidationErrors' property for more details.
+   en System.Data.Entity.Internal.InternalContext.SaveChanges()
+   en System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   en System.Data.Entity.DbContext.SaveChanges()
+   en ExcelImportadorManager.UrenportExcelToDataset(String pFileName, String SC) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ExcelImportador.vb:línea 2171
+EntityFramework
+__________________________
+
+Log Entry : 
+01/18/2017 15:00:37
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:System.Data.Entity.Validation.DbEntityValidationException
+Validation failed for one or more entities. See 'EntityValidationErrors' property for more details.
+   en System.Data.Entity.Internal.InternalContext.SaveChanges()
+   en System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   en System.Data.Entity.DbContext.SaveChanges()
+   en ExcelImportadorManager.UrenportExcelToDataset(String pFileName, String SC) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ExcelImportador.vb:línea 2171
+EntityFramework
+__________________________
+
+Log Entry : 
+01/18/2017 15:00:38
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:System.Data.Entity.Validation.DbEntityValidationException
+Validation failed for one or more entities. See 'EntityValidationErrors' property for more details.
+   en System.Data.Entity.Internal.InternalContext.SaveChanges()
+   en System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   en System.Data.Entity.DbContext.SaveChanges()
+   en ExcelImportadorManager.UrenportExcelToDataset(String pFileName, String SC) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ExcelImportador.vb:línea 2171
+EntityFramework
+__________________________
+
+Log Entry : 
+01/18/2017 15:00:38
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:System.Data.Entity.Validation.DbEntityValidationException
+Validation failed for one or more entities. See 'EntityValidationErrors' property for more details.
+   en System.Data.Entity.Internal.InternalContext.SaveChanges()
+   en System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   en System.Data.Entity.DbContext.SaveChanges()
+   en ExcelImportadorManager.UrenportExcelToDataset(String pFileName, String SC) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ExcelImportador.vb:línea 2171
+EntityFramework
+__________________________
+
+Log Entry : 
+01/18/2017 15:00:38
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:System.Data.Entity.Validation.DbEntityValidationException
+Validation failed for one or more entities. See 'EntityValidationErrors' property for more details.
+   en System.Data.Entity.Internal.InternalContext.SaveChanges()
+   en System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   en System.Data.Entity.DbContext.SaveChanges()
+   en ExcelImportadorManager.UrenportExcelToDataset(String pFileName, String SC) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ExcelImportador.vb:línea 2171
+EntityFramework
+__________________________
+
+Log Entry : 
+01/18/2017 15:00:38
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:System.Data.Entity.Validation.DbEntityValidationException
+Validation failed for one or more entities. See 'EntityValidationErrors' property for more details.
+   en System.Data.Entity.Internal.InternalContext.SaveChanges()
+   en System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   en System.Data.Entity.DbContext.SaveChanges()
+   en ExcelImportadorManager.UrenportExcelToDataset(String pFileName, String SC) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ExcelImportador.vb:línea 2171
+EntityFramework
+__________________________
+
+Log Entry : 
+01/18/2017 15:00:38
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:System.Data.Entity.Validation.DbEntityValidationException
+Validation failed for one or more entities. See 'EntityValidationErrors' property for more details.
+   en System.Data.Entity.Internal.InternalContext.SaveChanges()
+   en System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   en System.Data.Entity.DbContext.SaveChanges()
+   en ExcelImportadorManager.UrenportExcelToDataset(String pFileName, String SC) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ExcelImportador.vb:línea 2171
+EntityFramework
+__________________________
+
+Log Entry : 
+01/18/2017 15:00:39
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:System.Data.Entity.Validation.DbEntityValidationException
+Validation failed for one or more entities. See 'EntityValidationErrors' property for more details.
+   en System.Data.Entity.Internal.InternalContext.SaveChanges()
+   en System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   en System.Data.Entity.DbContext.SaveChanges()
+   en ExcelImportadorManager.UrenportExcelToDataset(String pFileName, String SC) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ExcelImportador.vb:línea 2171
+EntityFramework
+__________________________
+
+Log Entry : 
+01/18/2017 15:00:39
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:System.Data.Entity.Validation.DbEntityValidationException
+Validation failed for one or more entities. See 'EntityValidationErrors' property for more details.
+   en System.Data.Entity.Internal.InternalContext.SaveChanges()
+   en System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   en System.Data.Entity.DbContext.SaveChanges()
+   en ExcelImportadorManager.UrenportExcelToDataset(String pFileName, String SC) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ExcelImportador.vb:línea 2171
+EntityFramework
+__________________________
+
+Log Entry : 
+01/18/2017 15:00:39
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:System.Data.Entity.Validation.DbEntityValidationException
+Validation failed for one or more entities. See 'EntityValidationErrors' property for more details.
+   en System.Data.Entity.Internal.InternalContext.SaveChanges()
+   en System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   en System.Data.Entity.DbContext.SaveChanges()
+   en ExcelImportadorManager.UrenportExcelToDataset(String pFileName, String SC) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ExcelImportador.vb:línea 2171
+EntityFramework
+__________________________
+
+Log Entry : 
+01/18/2017 15:00:39
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:System.Data.Entity.Validation.DbEntityValidationException
+Validation failed for one or more entities. See 'EntityValidationErrors' property for more details.
+   en System.Data.Entity.Internal.InternalContext.SaveChanges()
+   en System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   en System.Data.Entity.DbContext.SaveChanges()
+   en ExcelImportadorManager.UrenportExcelToDataset(String pFileName, String SC) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ExcelImportador.vb:línea 2171
+EntityFramework
+__________________________
+
+Log Entry : 
+01/18/2017 15:00:40
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:System.Data.Entity.Validation.DbEntityValidationException
+Validation failed for one or more entities. See 'EntityValidationErrors' property for more details.
+   en System.Data.Entity.Internal.InternalContext.SaveChanges()
+   en System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   en System.Data.Entity.DbContext.SaveChanges()
+   en ExcelImportadorManager.UrenportExcelToDataset(String pFileName, String SC) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ExcelImportador.vb:línea 2171
+EntityFramework
+__________________________
+
+Log Entry : 
+01/18/2017 15:00:40
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:System.Data.Entity.Validation.DbEntityValidationException
+Validation failed for one or more entities. See 'EntityValidationErrors' property for more details.
+   en System.Data.Entity.Internal.InternalContext.SaveChanges()
+   en System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   en System.Data.Entity.DbContext.SaveChanges()
+   en ExcelImportadorManager.UrenportExcelToDataset(String pFileName, String SC) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ExcelImportador.vb:línea 2171
+EntityFramework
+__________________________
+
+Log Entry : 
+01/18/2017 15:00:40
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:System.Data.Entity.Validation.DbEntityValidationException
+Validation failed for one or more entities. See 'EntityValidationErrors' property for more details.
+   en System.Data.Entity.Internal.InternalContext.SaveChanges()
+   en System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   en System.Data.Entity.DbContext.SaveChanges()
+   en ExcelImportadorManager.UrenportExcelToDataset(String pFileName, String SC) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ExcelImportador.vb:línea 2171
+EntityFramework
+__________________________
+
+Log Entry : 
+01/18/2017 15:00:40
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:System.Data.Entity.Validation.DbEntityValidationException
+Validation failed for one or more entities. See 'EntityValidationErrors' property for more details.
+   en System.Data.Entity.Internal.InternalContext.SaveChanges()
+   en System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   en System.Data.Entity.DbContext.SaveChanges()
+   en ExcelImportadorManager.UrenportExcelToDataset(String pFileName, String SC) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ExcelImportador.vb:línea 2171
+EntityFramework
+__________________________
+
+Log Entry : 
+01/18/2017 15:00:40
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:System.Data.Entity.Validation.DbEntityValidationException
+Validation failed for one or more entities. See 'EntityValidationErrors' property for more details.
+   en System.Data.Entity.Internal.InternalContext.SaveChanges()
+   en System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   en System.Data.Entity.DbContext.SaveChanges()
+   en ExcelImportadorManager.UrenportExcelToDataset(String pFileName, String SC) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ExcelImportador.vb:línea 2171
+EntityFramework
+__________________________
+
+Log Entry : 
+01/18/2017 15:00:41
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:System.Data.Entity.Validation.DbEntityValidationException
+Validation failed for one or more entities. See 'EntityValidationErrors' property for more details.
+   en System.Data.Entity.Internal.InternalContext.SaveChanges()
+   en System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   en System.Data.Entity.DbContext.SaveChanges()
+   en ExcelImportadorManager.UrenportExcelToDataset(String pFileName, String SC) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ExcelImportador.vb:línea 2171
+EntityFramework
+__________________________
+
+Log Entry : 
+01/18/2017 15:00:41
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:System.Data.Entity.Validation.DbEntityValidationException
+Validation failed for one or more entities. See 'EntityValidationErrors' property for more details.
+   en System.Data.Entity.Internal.InternalContext.SaveChanges()
+   en System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   en System.Data.Entity.DbContext.SaveChanges()
+   en ExcelImportadorManager.UrenportExcelToDataset(String pFileName, String SC) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ExcelImportador.vb:línea 2171
+EntityFramework
+__________________________
+
+Log Entry : 
+01/18/2017 15:00:41
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:System.Data.Entity.Validation.DbEntityValidationException
+Validation failed for one or more entities. See 'EntityValidationErrors' property for more details.
+   en System.Data.Entity.Internal.InternalContext.SaveChanges()
+   en System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   en System.Data.Entity.DbContext.SaveChanges()
+   en ExcelImportadorManager.UrenportExcelToDataset(String pFileName, String SC) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ExcelImportador.vb:línea 2171
+EntityFramework
+__________________________
+
+Log Entry : 
+01/18/2017 15:00:41
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:System.Data.Entity.Validation.DbEntityValidationException
+Validation failed for one or more entities. See 'EntityValidationErrors' property for more details.
+   en System.Data.Entity.Internal.InternalContext.SaveChanges()
+   en System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   en System.Data.Entity.DbContext.SaveChanges()
+   en ExcelImportadorManager.UrenportExcelToDataset(String pFileName, String SC) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ExcelImportador.vb:línea 2171
+EntityFramework
+__________________________
+
+Log Entry : 
+01/18/2017 15:00:42
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:System.Data.Entity.Validation.DbEntityValidationException
+Validation failed for one or more entities. See 'EntityValidationErrors' property for more details.
+   en System.Data.Entity.Internal.InternalContext.SaveChanges()
+   en System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   en System.Data.Entity.DbContext.SaveChanges()
+   en ExcelImportadorManager.UrenportExcelToDataset(String pFileName, String SC) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ExcelImportador.vb:línea 2171
+EntityFramework
+__________________________
+
+Log Entry : 
+01/18/2017 15:00:42
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:System.Data.Entity.Validation.DbEntityValidationException
+Validation failed for one or more entities. See 'EntityValidationErrors' property for more details.
+   en System.Data.Entity.Internal.InternalContext.SaveChanges()
+   en System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   en System.Data.Entity.DbContext.SaveChanges()
+   en ExcelImportadorManager.UrenportExcelToDataset(String pFileName, String SC) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ExcelImportador.vb:línea 2171
+EntityFramework
+__________________________
+
+Log Entry : 
+01/18/2017 15:00:42
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:System.Data.Entity.Validation.DbEntityValidationException
+Validation failed for one or more entities. See 'EntityValidationErrors' property for more details.
+   en System.Data.Entity.Internal.InternalContext.SaveChanges()
+   en System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   en System.Data.Entity.DbContext.SaveChanges()
+   en ExcelImportadorManager.UrenportExcelToDataset(String pFileName, String SC) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ExcelImportador.vb:línea 2171
+EntityFramework
+__________________________
+
+Log Entry : 
+01/18/2017 15:00:42
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:System.Data.Entity.Validation.DbEntityValidationException
+Validation failed for one or more entities. See 'EntityValidationErrors' property for more details.
+   en System.Data.Entity.Internal.InternalContext.SaveChanges()
+   en System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   en System.Data.Entity.DbContext.SaveChanges()
+   en ExcelImportadorManager.UrenportExcelToDataset(String pFileName, String SC) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ExcelImportador.vb:línea 2171
+EntityFramework
+__________________________
+
+Log Entry : 
+01/18/2017 15:00:43
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:System.Data.Entity.Validation.DbEntityValidationException
+Validation failed for one or more entities. See 'EntityValidationErrors' property for more details.
+   en System.Data.Entity.Internal.InternalContext.SaveChanges()
+   en System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   en System.Data.Entity.DbContext.SaveChanges()
+   en ExcelImportadorManager.UrenportExcelToDataset(String pFileName, String SC) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ExcelImportador.vb:línea 2171
+EntityFramework
+__________________________
+
+Log Entry : 
+01/18/2017 15:00:43
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:System.Data.Entity.Validation.DbEntityValidationException
+Validation failed for one or more entities. See 'EntityValidationErrors' property for more details.
+   en System.Data.Entity.Internal.InternalContext.SaveChanges()
+   en System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   en System.Data.Entity.DbContext.SaveChanges()
+   en ExcelImportadorManager.UrenportExcelToDataset(String pFileName, String SC) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ExcelImportador.vb:línea 2171
+EntityFramework
+__________________________
+
+Log Entry : 
+01/18/2017 15:00:43
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:System.Data.Entity.Validation.DbEntityValidationException
+Validation failed for one or more entities. See 'EntityValidationErrors' property for more details.
+   en System.Data.Entity.Internal.InternalContext.SaveChanges()
+   en System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   en System.Data.Entity.DbContext.SaveChanges()
+   en ExcelImportadorManager.UrenportExcelToDataset(String pFileName, String SC) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ExcelImportador.vb:línea 2171
+EntityFramework
+__________________________
+
+Log Entry : 
+01/18/2017 15:00:45
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:System.Data.Entity.Validation.DbEntityValidationException
+Validation failed for one or more entities. See 'EntityValidationErrors' property for more details.
+   en System.Data.Entity.Internal.InternalContext.SaveChanges()
+   en System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   en System.Data.Entity.DbContext.SaveChanges()
+   en ExcelImportadorManager.UrenportExcelToDataset(String pFileName, String SC) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ExcelImportador.vb:línea 2171
+EntityFramework
+__________________________
+
+Log Entry : 
+01/18/2017 15:00:46
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:System.Data.Entity.Validation.DbEntityValidationException
+Validation failed for one or more entities. See 'EntityValidationErrors' property for more details.
+   en System.Data.Entity.Internal.InternalContext.SaveChanges()
+   en System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   en System.Data.Entity.DbContext.SaveChanges()
+   en ExcelImportadorManager.UrenportExcelToDataset(String pFileName, String SC) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ExcelImportador.vb:línea 2171
+EntityFramework
+__________________________
+
+Log Entry : 
+01/18/2017 15:00:46
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:System.Data.Entity.Validation.DbEntityValidationException
+Validation failed for one or more entities. See 'EntityValidationErrors' property for more details.
+   en System.Data.Entity.Internal.InternalContext.SaveChanges()
+   en System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   en System.Data.Entity.DbContext.SaveChanges()
+   en ExcelImportadorManager.UrenportExcelToDataset(String pFileName, String SC) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ExcelImportador.vb:línea 2171
+EntityFramework
+__________________________
+
+Log Entry : 
+01/18/2017 15:00:46
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:System.Data.Entity.Validation.DbEntityValidationException
+Validation failed for one or more entities. See 'EntityValidationErrors' property for more details.
+   en System.Data.Entity.Internal.InternalContext.SaveChanges()
+   en System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   en System.Data.Entity.DbContext.SaveChanges()
+   en ExcelImportadorManager.UrenportExcelToDataset(String pFileName, String SC) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ExcelImportador.vb:línea 2171
+EntityFramework
+__________________________
+
+Log Entry : 
+01/18/2017 15:00:46
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:System.Data.Entity.Validation.DbEntityValidationException
+Validation failed for one or more entities. See 'EntityValidationErrors' property for more details.
+   en System.Data.Entity.Internal.InternalContext.SaveChanges()
+   en System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   en System.Data.Entity.DbContext.SaveChanges()
+   en ExcelImportadorManager.UrenportExcelToDataset(String pFileName, String SC) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ExcelImportador.vb:línea 2171
+EntityFramework
+__________________________
+
+Log Entry : 
+01/18/2017 15:00:46
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:System.Data.Entity.Validation.DbEntityValidationException
+Validation failed for one or more entities. See 'EntityValidationErrors' property for more details.
+   en System.Data.Entity.Internal.InternalContext.SaveChanges()
+   en System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   en System.Data.Entity.DbContext.SaveChanges()
+   en ExcelImportadorManager.UrenportExcelToDataset(String pFileName, String SC) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ExcelImportador.vb:línea 2171
+EntityFramework
+__________________________
+
+Log Entry : 
+01/18/2017 15:00:47
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:System.Data.Entity.Validation.DbEntityValidationException
+Validation failed for one or more entities. See 'EntityValidationErrors' property for more details.
+   en System.Data.Entity.Internal.InternalContext.SaveChanges()
+   en System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   en System.Data.Entity.DbContext.SaveChanges()
+   en ExcelImportadorManager.UrenportExcelToDataset(String pFileName, String SC) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ExcelImportador.vb:línea 2171
+EntityFramework
+__________________________
+
+Log Entry : 
+01/18/2017 15:00:47
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:System.Data.Entity.Validation.DbEntityValidationException
+Validation failed for one or more entities. See 'EntityValidationErrors' property for more details.
+   en System.Data.Entity.Internal.InternalContext.SaveChanges()
+   en System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   en System.Data.Entity.DbContext.SaveChanges()
+   en ExcelImportadorManager.UrenportExcelToDataset(String pFileName, String SC) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ExcelImportador.vb:línea 2171
+EntityFramework
+__________________________
+
+Log Entry : 
+01/18/2017 15:00:47
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:System.Data.Entity.Validation.DbEntityValidationException
+Validation failed for one or more entities. See 'EntityValidationErrors' property for more details.
+   en System.Data.Entity.Internal.InternalContext.SaveChanges()
+   en System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   en System.Data.Entity.DbContext.SaveChanges()
+   en ExcelImportadorManager.UrenportExcelToDataset(String pFileName, String SC) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ExcelImportador.vb:línea 2171
+EntityFramework
+__________________________
+
+Log Entry : 
+01/18/2017 15:00:47
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:System.Data.Entity.Validation.DbEntityValidationException
+Validation failed for one or more entities. See 'EntityValidationErrors' property for more details.
+   en System.Data.Entity.Internal.InternalContext.SaveChanges()
+   en System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   en System.Data.Entity.DbContext.SaveChanges()
+   en ExcelImportadorManager.UrenportExcelToDataset(String pFileName, String SC) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ExcelImportador.vb:línea 2171
+EntityFramework
+__________________________
+
+Log Entry : 
+01/18/2017 15:00:48
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:System.Data.Entity.Validation.DbEntityValidationException
+Validation failed for one or more entities. See 'EntityValidationErrors' property for more details.
+   en System.Data.Entity.Internal.InternalContext.SaveChanges()
+   en System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   en System.Data.Entity.DbContext.SaveChanges()
+   en ExcelImportadorManager.UrenportExcelToDataset(String pFileName, String SC) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ExcelImportador.vb:línea 2171
+EntityFramework
+__________________________
+
+Log Entry : 
+01/18/2017 15:00:48
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:System.Data.Entity.Validation.DbEntityValidationException
+Validation failed for one or more entities. See 'EntityValidationErrors' property for more details.
+   en System.Data.Entity.Internal.InternalContext.SaveChanges()
+   en System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   en System.Data.Entity.DbContext.SaveChanges()
+   en ExcelImportadorManager.UrenportExcelToDataset(String pFileName, String SC) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ExcelImportador.vb:línea 2171
+EntityFramework
+__________________________
+
+Log Entry : 
+01/18/2017 15:00:48
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:System.Data.Entity.Validation.DbEntityValidationException
+Validation failed for one or more entities. See 'EntityValidationErrors' property for more details.
+   en System.Data.Entity.Internal.InternalContext.SaveChanges()
+   en System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   en System.Data.Entity.DbContext.SaveChanges()
+   en ExcelImportadorManager.UrenportExcelToDataset(String pFileName, String SC) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ExcelImportador.vb:línea 2171
+EntityFramework
+__________________________
+
+Log Entry : 
+01/18/2017 15:00:48
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:System.Data.Entity.Validation.DbEntityValidationException
+Validation failed for one or more entities. See 'EntityValidationErrors' property for more details.
+   en System.Data.Entity.Internal.InternalContext.SaveChanges()
+   en System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   en System.Data.Entity.DbContext.SaveChanges()
+   en ExcelImportadorManager.UrenportExcelToDataset(String pFileName, String SC) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ExcelImportador.vb:línea 2171
+EntityFramework
+__________________________
+
+Log Entry : 
+01/18/2017 15:00:49
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:System.Data.Entity.Validation.DbEntityValidationException
+Validation failed for one or more entities. See 'EntityValidationErrors' property for more details.
+   en System.Data.Entity.Internal.InternalContext.SaveChanges()
+   en System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   en System.Data.Entity.DbContext.SaveChanges()
+   en ExcelImportadorManager.UrenportExcelToDataset(String pFileName, String SC) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ExcelImportador.vb:línea 2171
+EntityFramework
+__________________________
+
+Log Entry : 
+01/18/2017 15:00:49
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:System.Data.Entity.Validation.DbEntityValidationException
+Validation failed for one or more entities. See 'EntityValidationErrors' property for more details.
+   en System.Data.Entity.Internal.InternalContext.SaveChanges()
+   en System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   en System.Data.Entity.DbContext.SaveChanges()
+   en ExcelImportadorManager.UrenportExcelToDataset(String pFileName, String SC) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ExcelImportador.vb:línea 2171
+EntityFramework
+__________________________
+
+Log Entry : 
+01/18/2017 15:00:51
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:System.Data.Entity.Validation.DbEntityValidationException
+Validation failed for one or more entities. See 'EntityValidationErrors' property for more details.
+   en System.Data.Entity.Internal.InternalContext.SaveChanges()
+   en System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   en System.Data.Entity.DbContext.SaveChanges()
+   en ExcelImportadorManager.UrenportExcelToDataset(String pFileName, String SC) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ExcelImportador.vb:línea 2171
+EntityFramework
+__________________________
+
+Log Entry : 
+01/18/2017 15:00:51
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:System.Data.Entity.Validation.DbEntityValidationException
+Validation failed for one or more entities. See 'EntityValidationErrors' property for more details.
+   en System.Data.Entity.Internal.InternalContext.SaveChanges()
+   en System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   en System.Data.Entity.DbContext.SaveChanges()
+   en ExcelImportadorManager.UrenportExcelToDataset(String pFileName, String SC) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ExcelImportador.vb:línea 2171
+EntityFramework
+__________________________
+
+Log Entry : 
+01/18/2017 15:00:52
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:System.Data.Entity.Validation.DbEntityValidationException
+Validation failed for one or more entities. See 'EntityValidationErrors' property for more details.
+   en System.Data.Entity.Internal.InternalContext.SaveChanges()
+   en System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   en System.Data.Entity.DbContext.SaveChanges()
+   en ExcelImportadorManager.UrenportExcelToDataset(String pFileName, String SC) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ExcelImportador.vb:línea 2171
+EntityFramework
+__________________________
+
+Log Entry : 
+01/18/2017 15:00:52
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:System.Data.Entity.Validation.DbEntityValidationException
+Validation failed for one or more entities. See 'EntityValidationErrors' property for more details.
+   en System.Data.Entity.Internal.InternalContext.SaveChanges()
+   en System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   en System.Data.Entity.DbContext.SaveChanges()
+   en ExcelImportadorManager.UrenportExcelToDataset(String pFileName, String SC) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ExcelImportador.vb:línea 2171
+EntityFramework
+__________________________
+
+Log Entry : 
+01/18/2017 15:00:53
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:System.Data.Entity.Validation.DbEntityValidationException
+Validation failed for one or more entities. See 'EntityValidationErrors' property for more details.
+   en System.Data.Entity.Internal.InternalContext.SaveChanges()
+   en System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   en System.Data.Entity.DbContext.SaveChanges()
+   en ExcelImportadorManager.UrenportExcelToDataset(String pFileName, String SC) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ExcelImportador.vb:línea 2171
+EntityFramework
+__________________________
+
+Log Entry : 
+01/18/2017 15:00:54
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:System.Data.Entity.Validation.DbEntityValidationException
+Validation failed for one or more entities. See 'EntityValidationErrors' property for more details.
+   en System.Data.Entity.Internal.InternalContext.SaveChanges()
+   en System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   en System.Data.Entity.DbContext.SaveChanges()
+   en ExcelImportadorManager.UrenportExcelToDataset(String pFileName, String SC) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ExcelImportador.vb:línea 2171
+EntityFramework
+__________________________
+
+Log Entry : 
+01/18/2017 15:00:54
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:System.Data.Entity.Validation.DbEntityValidationException
+Validation failed for one or more entities. See 'EntityValidationErrors' property for more details.
+   en System.Data.Entity.Internal.InternalContext.SaveChanges()
+   en System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   en System.Data.Entity.DbContext.SaveChanges()
+   en ExcelImportadorManager.UrenportExcelToDataset(String pFileName, String SC) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ExcelImportador.vb:línea 2171
+EntityFramework
+__________________________
+
+Log Entry : 
+01/18/2017 15:00:54
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:System.Data.Entity.Validation.DbEntityValidationException
+Validation failed for one or more entities. See 'EntityValidationErrors' property for more details.
+   en System.Data.Entity.Internal.InternalContext.SaveChanges()
+   en System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   en System.Data.Entity.DbContext.SaveChanges()
+   en ExcelImportadorManager.UrenportExcelToDataset(String pFileName, String SC) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ExcelImportador.vb:línea 2171
+EntityFramework
+__________________________
+
+Log Entry : 
+01/18/2017 15:00:54
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:System.Data.Entity.Validation.DbEntityValidationException
+Validation failed for one or more entities. See 'EntityValidationErrors' property for more details.
+   en System.Data.Entity.Internal.InternalContext.SaveChanges()
+   en System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   en System.Data.Entity.DbContext.SaveChanges()
+   en ExcelImportadorManager.UrenportExcelToDataset(String pFileName, String SC) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ExcelImportador.vb:línea 2171
+EntityFramework
+__________________________
+
+Log Entry : 
+01/18/2017 15:00:55
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:System.Data.Entity.Validation.DbEntityValidationException
+Validation failed for one or more entities. See 'EntityValidationErrors' property for more details.
+   en System.Data.Entity.Internal.InternalContext.SaveChanges()
+   en System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   en System.Data.Entity.DbContext.SaveChanges()
+   en ExcelImportadorManager.UrenportExcelToDataset(String pFileName, String SC) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ExcelImportador.vb:línea 2171
+EntityFramework
+__________________________
+
+Log Entry : 
+01/18/2017 15:00:55
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:System.Data.Entity.Validation.DbEntityValidationException
+Validation failed for one or more entities. See 'EntityValidationErrors' property for more details.
+   en System.Data.Entity.Internal.InternalContext.SaveChanges()
+   en System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   en System.Data.Entity.DbContext.SaveChanges()
+   en ExcelImportadorManager.UrenportExcelToDataset(String pFileName, String SC) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ExcelImportador.vb:línea 2171
+EntityFramework
+__________________________
+
+Log Entry : 
+01/18/2017 15:00:55
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:System.Data.Entity.Validation.DbEntityValidationException
+Validation failed for one or more entities. See 'EntityValidationErrors' property for more details.
+   en System.Data.Entity.Internal.InternalContext.SaveChanges()
+   en System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   en System.Data.Entity.DbContext.SaveChanges()
+   en ExcelImportadorManager.UrenportExcelToDataset(String pFileName, String SC) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ExcelImportador.vb:línea 2171
+EntityFramework
+__________________________
+
+Log Entry : 
+01/18/2017 15:00:55
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:System.Data.Entity.Validation.DbEntityValidationException
+Validation failed for one or more entities. See 'EntityValidationErrors' property for more details.
+   en System.Data.Entity.Internal.InternalContext.SaveChanges()
+   en System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   en System.Data.Entity.DbContext.SaveChanges()
+   en ExcelImportadorManager.UrenportExcelToDataset(String pFileName, String SC) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ExcelImportador.vb:línea 2171
+EntityFramework
+__________________________
+
+Log Entry : 
+01/18/2017 15:00:56
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:System.Data.Entity.Validation.DbEntityValidationException
+Validation failed for one or more entities. See 'EntityValidationErrors' property for more details.
+   en System.Data.Entity.Internal.InternalContext.SaveChanges()
+   en System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   en System.Data.Entity.DbContext.SaveChanges()
+   en ExcelImportadorManager.UrenportExcelToDataset(String pFileName, String SC) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ExcelImportador.vb:línea 2171
+EntityFramework
+__________________________
+
+Log Entry : 
+01/18/2017 15:00:56
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:System.Data.Entity.Validation.DbEntityValidationException
+Validation failed for one or more entities. See 'EntityValidationErrors' property for more details.
+   en System.Data.Entity.Internal.InternalContext.SaveChanges()
+   en System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   en System.Data.Entity.DbContext.SaveChanges()
+   en ExcelImportadorManager.UrenportExcelToDataset(String pFileName, String SC) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ExcelImportador.vb:línea 2171
+EntityFramework
+__________________________
+
+Log Entry : 
+01/18/2017 15:00:56
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:System.Data.Entity.Validation.DbEntityValidationException
+Validation failed for one or more entities. See 'EntityValidationErrors' property for more details.
+   en System.Data.Entity.Internal.InternalContext.SaveChanges()
+   en System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   en System.Data.Entity.DbContext.SaveChanges()
+   en ExcelImportadorManager.UrenportExcelToDataset(String pFileName, String SC) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ExcelImportador.vb:línea 2171
+EntityFramework
+__________________________
+
+Log Entry : 
+01/18/2017 15:00:56
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:System.Data.Entity.Validation.DbEntityValidationException
+Validation failed for one or more entities. See 'EntityValidationErrors' property for more details.
+   en System.Data.Entity.Internal.InternalContext.SaveChanges()
+   en System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   en System.Data.Entity.DbContext.SaveChanges()
+   en ExcelImportadorManager.UrenportExcelToDataset(String pFileName, String SC) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ExcelImportador.vb:línea 2171
+EntityFramework
+__________________________
+
+Log Entry : 
+01/18/2017 15:00:57
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:System.Data.Entity.Validation.DbEntityValidationException
+Validation failed for one or more entities. See 'EntityValidationErrors' property for more details.
+   en System.Data.Entity.Internal.InternalContext.SaveChanges()
+   en System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   en System.Data.Entity.DbContext.SaveChanges()
+   en ExcelImportadorManager.UrenportExcelToDataset(String pFileName, String SC) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ExcelImportador.vb:línea 2171
+EntityFramework
+__________________________
+
+Log Entry : 
+01/18/2017 15:00:57
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:System.Data.Entity.Validation.DbEntityValidationException
+Validation failed for one or more entities. See 'EntityValidationErrors' property for more details.
+   en System.Data.Entity.Internal.InternalContext.SaveChanges()
+   en System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   en System.Data.Entity.DbContext.SaveChanges()
+   en ExcelImportadorManager.UrenportExcelToDataset(String pFileName, String SC) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ExcelImportador.vb:línea 2171
+EntityFramework
+__________________________
+
+Log Entry : 
+01/18/2017 15:00:57
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:System.Data.Entity.Validation.DbEntityValidationException
+Validation failed for one or more entities. See 'EntityValidationErrors' property for more details.
+   en System.Data.Entity.Internal.InternalContext.SaveChanges()
+   en System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   en System.Data.Entity.DbContext.SaveChanges()
+   en ExcelImportadorManager.UrenportExcelToDataset(String pFileName, String SC) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ExcelImportador.vb:línea 2171
+EntityFramework
+__________________________
+
+Log Entry : 
+01/18/2017 15:00:57
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:System.Data.Entity.Validation.DbEntityValidationException
+Validation failed for one or more entities. See 'EntityValidationErrors' property for more details.
+   en System.Data.Entity.Internal.InternalContext.SaveChanges()
+   en System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   en System.Data.Entity.DbContext.SaveChanges()
+   en ExcelImportadorManager.UrenportExcelToDataset(String pFileName, String SC) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ExcelImportador.vb:línea 2171
+EntityFramework
+__________________________
+
+Log Entry : 
+01/18/2017 15:00:58
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:System.Data.Entity.Validation.DbEntityValidationException
+Validation failed for one or more entities. See 'EntityValidationErrors' property for more details.
+   en System.Data.Entity.Internal.InternalContext.SaveChanges()
+   en System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   en System.Data.Entity.DbContext.SaveChanges()
+   en ExcelImportadorManager.UrenportExcelToDataset(String pFileName, String SC) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ExcelImportador.vb:línea 2171
+EntityFramework
+__________________________
+
+Log Entry : 
+01/18/2017 15:00:58
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:System.Data.Entity.Validation.DbEntityValidationException
+Validation failed for one or more entities. See 'EntityValidationErrors' property for more details.
+   en System.Data.Entity.Internal.InternalContext.SaveChanges()
+   en System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   en System.Data.Entity.DbContext.SaveChanges()
+   en ExcelImportadorManager.UrenportExcelToDataset(String pFileName, String SC) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ExcelImportador.vb:línea 2171
+EntityFramework
+__________________________
+
+Log Entry : 
+01/18/2017 15:00:58
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:System.Data.Entity.Validation.DbEntityValidationException
+Validation failed for one or more entities. See 'EntityValidationErrors' property for more details.
+   en System.Data.Entity.Internal.InternalContext.SaveChanges()
+   en System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   en System.Data.Entity.DbContext.SaveChanges()
+   en ExcelImportadorManager.UrenportExcelToDataset(String pFileName, String SC) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ExcelImportador.vb:línea 2171
+EntityFramework
+__________________________
+
+Log Entry : 
+01/18/2017 15:00:58
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:System.Data.Entity.Validation.DbEntityValidationException
+Validation failed for one or more entities. See 'EntityValidationErrors' property for more details.
+   en System.Data.Entity.Internal.InternalContext.SaveChanges()
+   en System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   en System.Data.Entity.DbContext.SaveChanges()
+   en ExcelImportadorManager.UrenportExcelToDataset(String pFileName, String SC) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ExcelImportador.vb:línea 2171
+EntityFramework
+__________________________
+
+Log Entry : 
+01/18/2017 15:00:59
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:System.Data.Entity.Validation.DbEntityValidationException
+Validation failed for one or more entities. See 'EntityValidationErrors' property for more details.
+   en System.Data.Entity.Internal.InternalContext.SaveChanges()
+   en System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   en System.Data.Entity.DbContext.SaveChanges()
+   en ExcelImportadorManager.UrenportExcelToDataset(String pFileName, String SC) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ExcelImportador.vb:línea 2171
+EntityFramework
+__________________________
+
+Log Entry : 
+01/18/2017 15:00:59
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:System.Data.Entity.Validation.DbEntityValidationException
+Validation failed for one or more entities. See 'EntityValidationErrors' property for more details.
+   en System.Data.Entity.Internal.InternalContext.SaveChanges()
+   en System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   en System.Data.Entity.DbContext.SaveChanges()
+   en ExcelImportadorManager.UrenportExcelToDataset(String pFileName, String SC) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ExcelImportador.vb:línea 2171
+EntityFramework
+__________________________
+
+Log Entry : 
+01/18/2017 15:00:59
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:System.Data.Entity.Validation.DbEntityValidationException
+Validation failed for one or more entities. See 'EntityValidationErrors' property for more details.
+   en System.Data.Entity.Internal.InternalContext.SaveChanges()
+   en System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   en System.Data.Entity.DbContext.SaveChanges()
+   en ExcelImportadorManager.UrenportExcelToDataset(String pFileName, String SC) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ExcelImportador.vb:línea 2171
+EntityFramework
+__________________________
+
+Log Entry : 
+01/18/2017 15:00:59
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:System.Data.Entity.Validation.DbEntityValidationException
+Validation failed for one or more entities. See 'EntityValidationErrors' property for more details.
+   en System.Data.Entity.Internal.InternalContext.SaveChanges()
+   en System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   en System.Data.Entity.DbContext.SaveChanges()
+   en ExcelImportadorManager.UrenportExcelToDataset(String pFileName, String SC) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ExcelImportador.vb:línea 2171
+EntityFramework
+__________________________
+
+Log Entry : 
+01/18/2017 15:01:00
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:System.Data.Entity.Validation.DbEntityValidationException
+Validation failed for one or more entities. See 'EntityValidationErrors' property for more details.
+   en System.Data.Entity.Internal.InternalContext.SaveChanges()
+   en System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   en System.Data.Entity.DbContext.SaveChanges()
+   en ExcelImportadorManager.UrenportExcelToDataset(String pFileName, String SC) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ExcelImportador.vb:línea 2171
+EntityFramework
+__________________________
+
+Log Entry : 
+01/18/2017 15:01:00
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:System.Data.Entity.Validation.DbEntityValidationException
+Validation failed for one or more entities. See 'EntityValidationErrors' property for more details.
+   en System.Data.Entity.Internal.InternalContext.SaveChanges()
+   en System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   en System.Data.Entity.DbContext.SaveChanges()
+   en ExcelImportadorManager.UrenportExcelToDataset(String pFileName, String SC) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ExcelImportador.vb:línea 2171
+EntityFramework
+__________________________
+
+Log Entry : 
+01/18/2017 15:01:01
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:System.Data.Entity.Validation.DbEntityValidationException
+Validation failed for one or more entities. See 'EntityValidationErrors' property for more details.
+   en System.Data.Entity.Internal.InternalContext.SaveChanges()
+   en System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   en System.Data.Entity.DbContext.SaveChanges()
+   en ExcelImportadorManager.UrenportExcelToDataset(String pFileName, String SC) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ExcelImportador.vb:línea 2171
+EntityFramework
+__________________________
+
+Log Entry : 
+01/18/2017 15:01:01
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:System.Data.Entity.Validation.DbEntityValidationException
+Validation failed for one or more entities. See 'EntityValidationErrors' property for more details.
+   en System.Data.Entity.Internal.InternalContext.SaveChanges()
+   en System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   en System.Data.Entity.DbContext.SaveChanges()
+   en ExcelImportadorManager.UrenportExcelToDataset(String pFileName, String SC) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ExcelImportador.vb:línea 2171
+EntityFramework
+__________________________
+
+Log Entry : 
+01/18/2017 15:01:02
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:System.Data.Entity.Validation.DbEntityValidationException
+Validation failed for one or more entities. See 'EntityValidationErrors' property for more details.
+   en System.Data.Entity.Internal.InternalContext.SaveChanges()
+   en System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   en System.Data.Entity.DbContext.SaveChanges()
+   en ExcelImportadorManager.UrenportExcelToDataset(String pFileName, String SC) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ExcelImportador.vb:línea 2171
+EntityFramework
+__________________________
+
+Log Entry : 
+01/18/2017 15:01:03
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:System.Data.Entity.Validation.DbEntityValidationException
+Validation failed for one or more entities. See 'EntityValidationErrors' property for more details.
+   en System.Data.Entity.Internal.InternalContext.SaveChanges()
+   en System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   en System.Data.Entity.DbContext.SaveChanges()
+   en ExcelImportadorManager.UrenportExcelToDataset(String pFileName, String SC) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ExcelImportador.vb:línea 2171
+EntityFramework
+__________________________
+
+Log Entry : 
+01/18/2017 15:01:03
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:System.Data.Entity.Validation.DbEntityValidationException
+Validation failed for one or more entities. See 'EntityValidationErrors' property for more details.
+   en System.Data.Entity.Internal.InternalContext.SaveChanges()
+   en System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   en System.Data.Entity.DbContext.SaveChanges()
+   en ExcelImportadorManager.UrenportExcelToDataset(String pFileName, String SC) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ExcelImportador.vb:línea 2171
+EntityFramework
+__________________________
+
+Log Entry : 
+01/18/2017 15:01:03
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:System.Data.Entity.Validation.DbEntityValidationException
+Validation failed for one or more entities. See 'EntityValidationErrors' property for more details.
+   en System.Data.Entity.Internal.InternalContext.SaveChanges()
+   en System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   en System.Data.Entity.DbContext.SaveChanges()
+   en ExcelImportadorManager.UrenportExcelToDataset(String pFileName, String SC) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ExcelImportador.vb:línea 2171
+EntityFramework
+__________________________
+
+Log Entry : 
+01/18/2017 15:01:04
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:System.Data.Entity.Validation.DbEntityValidationException
+Validation failed for one or more entities. See 'EntityValidationErrors' property for more details.
+   en System.Data.Entity.Internal.InternalContext.SaveChanges()
+   en System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   en System.Data.Entity.DbContext.SaveChanges()
+   en ExcelImportadorManager.UrenportExcelToDataset(String pFileName, String SC) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ExcelImportador.vb:línea 2171
+EntityFramework
+__________________________
+
+Log Entry : 
+01/18/2017 15:01:04
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:System.Data.Entity.Validation.DbEntityValidationException
+Validation failed for one or more entities. See 'EntityValidationErrors' property for more details.
+   en System.Data.Entity.Internal.InternalContext.SaveChanges()
+   en System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   en System.Data.Entity.DbContext.SaveChanges()
+   en ExcelImportadorManager.UrenportExcelToDataset(String pFileName, String SC) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ExcelImportador.vb:línea 2171
+EntityFramework
+__________________________
+
+Log Entry : 
+01/18/2017 15:01:04
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:System.Data.Entity.Validation.DbEntityValidationException
+Validation failed for one or more entities. See 'EntityValidationErrors' property for more details.
+   en System.Data.Entity.Internal.InternalContext.SaveChanges()
+   en System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   en System.Data.Entity.DbContext.SaveChanges()
+   en ExcelImportadorManager.UrenportExcelToDataset(String pFileName, String SC) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ExcelImportador.vb:línea 2171
+EntityFramework
+__________________________
+
+Log Entry : 
+01/18/2017 15:01:05
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:System.Data.Entity.Validation.DbEntityValidationException
+Validation failed for one or more entities. See 'EntityValidationErrors' property for more details.
+   en System.Data.Entity.Internal.InternalContext.SaveChanges()
+   en System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   en System.Data.Entity.DbContext.SaveChanges()
+   en ExcelImportadorManager.UrenportExcelToDataset(String pFileName, String SC) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ExcelImportador.vb:línea 2171
+EntityFramework
+__________________________
+
+Log Entry : 
+01/18/2017 15:01:07
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:System.Data.Entity.Validation.DbEntityValidationException
+Validation failed for one or more entities. See 'EntityValidationErrors' property for more details.
+   en System.Data.Entity.Internal.InternalContext.SaveChanges()
+   en System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   en System.Data.Entity.DbContext.SaveChanges()
+   en ExcelImportadorManager.UrenportExcelToDataset(String pFileName, String SC) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ExcelImportador.vb:línea 2171
+EntityFramework
+__________________________
+
+Log Entry : 
+01/18/2017 15:01:39
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message: -  Error en ExecDinamico. - System.Data.SqlClient.SqlException (0x80131904): Valor de Timeout caducado. El período de tiempo de espera caducó antes de completar la operación o el servidor no responde. ---> System.ComponentModel.Win32Exception (0x80004005): Tiempo de espera de la operación de espera agotado
+   en Microsoft.VisualBasic.CompilerServices.Symbols.Container.InvokeMethod(Method TargetProcedure, Object[] Arguments, Boolean[] CopyBack, BindingFlags Flags)
+   en Microsoft.VisualBasic.CompilerServices.NewLateBinding.CallMethod(Container BaseReference, String MethodName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack, BindingFlags InvocationFlags, Boolean ReportErrors, ResolutionFailure& Failure)
+   en Microsoft.VisualBasic.CompilerServices.NewLateBinding.ObjectLateCall(Object Instance, Type Type, String MemberName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack, Boolean IgnoreReturn)
+   en Microsoft.VisualBasic.CompilerServices.NewLateBinding.LateCall(Object Instance, Type Type, String MemberName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack, Boolean IgnoreReturn)
+   en Pronto.ERP.Dal.GeneralDB.ExecDinamico(String SC, String comandoSQLdinamico, Int32 timeoutSegundos)
+ClientConnectionId:8a02eb11-78dc-4ebb-bd72-454b0f7dd2db
+Error Number:-2,State:0,Class:11 - select * from ExcelImportador where IdTanda=0 500 0
+__________________________
+
+Log Entry : 
+01/18/2017 15:01:39
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:Valor de Timeout caducado. El período de tiempo de espera caducó antes de completar la operación o el servidor no responde.
+__________________________
+
+Log Entry : 
+01/18/2017 15:01:39
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:Problemas con IdMaestro? Quizas no pude importar filas. System.Data.SqlClient.SqlException (0x80131904): Valor de Timeout caducado. El período de tiempo de espera caducó antes de completar la operación o el servidor no responde. ---> System.ComponentModel.Win32Exception (0x80004005): Tiempo de espera de la operación de espera agotado
+   en Microsoft.VisualBasic.CompilerServices.Symbols.Container.InvokeMethod(Method TargetProcedure, Object[] Arguments, Boolean[] CopyBack, BindingFlags Flags)
+   en Microsoft.VisualBasic.CompilerServices.NewLateBinding.CallMethod(Container BaseReference, String MethodName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack, BindingFlags InvocationFlags, Boolean ReportErrors, ResolutionFailure& Failure)
+   en Microsoft.VisualBasic.CompilerServices.NewLateBinding.ObjectLateCall(Object Instance, Type Type, String MemberName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack, Boolean IgnoreReturn)
+   en Microsoft.VisualBasic.CompilerServices.NewLateBinding.LateCall(Object Instance, Type Type, String MemberName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack, Boolean IgnoreReturn)
+   en Pronto.ERP.Dal.GeneralDB.ExecDinamico(String SC, String comandoSQLdinamico, Int32 timeoutSegundos)
+   en Pronto.ERP.Bll.EntidadManager.ExecDinamico(String SC, String sComandoDinamico, Int32 timeoutSegundos) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\EntidadManager.vb:línea 803
+   en ExcelImportadorManager.TraerMetadataPorIdMaestro(String SC, Int32 id) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ExcelImportador.vb:línea 5721
+   en LogicaImportador.TraerExcelDeBase(String SC, Int32& m_IdMaestro) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ExcelImportador.vb:línea 1102
+ClientConnectionId:8a02eb11-78dc-4ebb-bd72-454b0f7dd2db
+Error Number:-2,State:0,Class:11
+__________________________
+
+Log Entry : 
+01/18/2017 15:01:39
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartasDePorteImportador.GetTopN(DataTable dt, Int32 RowCount, Int32 Start) en C:\Users\Administrador\Documents\bdl\pronto\prontoweb\ProntoWeb\CartasDePorteImportador.aspx.vb:línea 1581
+   en CartasDePorteImportador.MostrarPrimerosDiezRenglones() en C:\Users\Administrador\Documents\bdl\pronto\prontoweb\ProntoWeb\CartasDePorteImportador.aspx.vb:línea 1571
+   en CartasDePorteImportador.btnVistaPrevia_Click(Object sender, EventArgs e) en C:\Users\Administrador\Documents\bdl\pronto\prontoweb\ProntoWeb\CartasDePorteImportador.aspx.vb:línea 327
+App_Web_cartasdeporteimportador.aspx.4199bbd4.mrmy1nsu
+__________________________
+
+Log Entry : 
+01/18/2017 15:01:44
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:System.Net.Mail.SmtpException
+Error al enviar correo.
+   en System.Net.Mail.SmtpClient.Send(MailMessage message)
+   en ProntoFuncionesGenerales.MandaEmailSimple(String Para, String Asunto, String Cuerpo, String De, String SmtpServer, String SmtpUser, String SmtpPass, String sStringGenerarAdjunto, Int64 SmtpPort, Int32 EnableSSL, String CCO, String img)
+   en CartaDePorteManager.MandarMailDeError(Exception e) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 7863
+System
+__________________________
+
+Log Entry : 
+01/18/2017 15:01:44
+Error in: http://localhost:58911/ProntoWeb/CartasDePorteImportador.aspx?Id=-1. Error Message:C:\Users\Administrador\AppData\Local\Temp\26397_Urenport_ 953-29122016.xlsx
+__________________________
+
+Log Entry : 
+01/18/2017 15:02:58
+Error in: http://localhost:58911/ProntoWeb/Principal.aspx. Error Message:System.Threading.ThreadAbortException
+Subproceso anulado.
+   en System.Threading.Thread.AbortInternal()
+   en System.Threading.Thread.Abort(Object stateInfo)
+   en System.Web.HttpResponse.AbortCurrentThread()
+   en System.Web.HttpResponse.End()
+   en System.Web.HttpResponse.Redirect(String url, Boolean endResponse, Boolean permanent)
+   en System.Web.HttpResponse.Redirect(String url)
+   en Login.Page_Load(Object sender, EventArgs e) en C:\Users\Administrador\Documents\bdl\pronto\prontoweb\Login.aspx.vb:línea 171
+mscorlib
+__________________________
+
+Log Entry : 
+01/18/2017 15:28:41
+Error in: http://localhost:58911/ProntoWeb/CartaDePorte.aspx?Id=2736043. Error Message:La carta numero 558669061 id=2736043 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+01/18/2017 15:28:42
+Error in: http://localhost:58911/ProntoWeb/CartaDePorte.aspx?Id=2736043. Error Message:PV 2 0
+__________________________
+
+Log Entry : 
+01/18/2017 15:29:35
+Error in: http://localhost:58911/ProntoWeb/CartaDePorte.aspx?Id=2736043. Error Message:La carta numero 558669061 id=2736043 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+01/18/2017 15:29:35
+Error in: http://localhost:58911/ProntoWeb/CartaDePorte.aspx?Id=2736043. Error Message:PV 2 0
+__________________________

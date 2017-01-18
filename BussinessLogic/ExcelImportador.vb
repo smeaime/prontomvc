@@ -1965,7 +1965,7 @@ Public Class ExcelImportadorManager
 
                 'Dim myCartaDePorte As CartaDePorte = CartaDePorteManager.GetItemPorNumero(SC, cpnumero, 0, 0)
 
-                Dim myCartaDePorte As Models.CartasDePorte = _
+                Dim myCartaDePorte As Models.CartasDePorte =
                            (From c In db.CartasDePortes Where c.NumeroCartaDePorte = cpnumero).FirstOrDefault()
 
                 If myCartaDePorte Is Nothing Then myCartaDePorte = New Models.CartasDePorte()
@@ -1980,7 +1980,7 @@ Public Class ExcelImportadorManager
 
                 With myCartaDePorte
 
-                    Dim bEditadaManual As Boolean = (If(.FechaModificacion, DateTime.MinValue) > _
+                    Dim bEditadaManual As Boolean = (If(.FechaModificacion, DateTime.MinValue) >
                                                             If(.FechaActualizacionAutomatica, DateTime.MinValue).AddSeconds(60))
 
                     '+ Si la carta de porte fue editada manualmente no volver a importar los datos de la carta de porte. SI seguir importando los datos correspondientes a la situación del camion (Situación / Observaciones)
@@ -2170,6 +2170,23 @@ Public Class ExcelImportadorManager
                 'http://stackoverflow.com/questions/5940225/fastest-way-of-inserting-in-entity-framework
                 db.SaveChanges()
 
+
+
+            Catch ex As System.Data.Entity.Validation.DbEntityValidationException
+
+                'http://stackoverflow.com/questions/10219864/ef-code-first-how-do-i-see-entityvalidationerrors-property-from-the-nuget-pac
+                Dim sb = New StringBuilder()
+
+                For Each failure In ex.EntityValidationErrors
+
+                    sb.AppendFormat("{0} failed validation\n", failure.Entry.Entity.GetType())
+                    For Each er In failure.ValidationErrors
+                        sb.AppendFormat("- {0} : {1}", er.PropertyName, er.ErrorMessage)
+                        sb.AppendLine()
+                    Next
+                Next
+
+                ErrHandler.WriteError("Error en la grabacion " + sb.ToString())
 
 
             Catch ex As Exception
