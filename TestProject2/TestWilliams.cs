@@ -632,7 +632,7 @@ namespace ProntoMVC.Tests
                        "", "", "", 1, 2000,
                         CartaDePorteManager.enumCDPestado.DescargasMasFacturadas, "", -1, -1,
                        -1, -1,
-                       -1, -1, -1, -1, CartaDePorteManager.FiltroANDOR.FiltroOR, "Entrega",
+                       -1, -1, -1, -1, CartaDePorteManager.FiltroANDOR.FiltroOR, "Entregas",
                         new DateTime(2016, 12, 1),
                         new DateTime(2016, 12, 31),
                         -1, 6319, ref sTitulo);
