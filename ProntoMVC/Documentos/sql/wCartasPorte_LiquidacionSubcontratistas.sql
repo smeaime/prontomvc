@@ -48,24 +48,46 @@ create procedure  wCartasPorte_LiquidacionSubcontratistas
 
 
 
-
-
 		SELECT
-			CONS2.agrupvagon
-			--,
-			--case 
-			--	when Subcontr1 = @idSubcontr then
-			--		 cdp.DestinoDesc & " Calada" & If((cdp.Exporta = "SI"), " - Export.", " - Entrega"), 
-			--	when Subcontr2	= @idSubcontr 	then
-   --                  cdp.DestinoDesc & " Balanza" & If(                                       (cdp.Exporta = "SI")                                     , " - Export.", " - Entrega"), 			            cdp.Subcontr1Desc, 
-			--end,
+			CONS2.agrupvagon,
+			
+			case 
+				when Subcontr1 = @idSubcontr then
+					 CONS2.DestinoDesc + ' Calada'  + case when Exporta ='SI'  THEN  ' - Export.' ELSE ' - Entrega' end 
+				
+				when Subcontr2	= @idSubcontr 	then
+                     CONS2.DestinoDesc + ' Balanza' + case when Exporta ='SI'  THEN  ' - Export.' ELSE ' - Entrega' end 
+				else 
+					' ' + STR(Subcontr1) + ' ' + STR(Subcontr2)
 
-   --         cdp.NetoFinal, 
-   --         cdp.tarif1, 
-   --         cdp.NetoFinal case 
-			--	when Subcontr1 = @idSubcontr then* cdp.tarif1 / 1000, 
-   --         cdp.NumeroCartaDePorte 
- 
+			end as DestinoDesc
+			
+			, CONS2.NetoFinal,
+
+			case 
+				when Subcontr1 = @idSubcontr then
+					CONS2.tarif1
+				
+				when Subcontr2	= @idSubcontr 	then
+                     CONS2.tarif2
+
+			end as Tarifa
+			
+			
+			, CONS2.NumeroCartaDePorte
+            , 
+			
+			case 
+				when Subcontr1 = @idSubcontr then
+					(CONS2.NetoFinal * CONS2.tarif1 / 1000) 
+				
+				when Subcontr2	= @idSubcontr 	then
+                    (CONS2.NetoFinal * CONS2.tarif2 / 1000) 
+
+			end as Comision
+			
+		
+         
 		from
 		(
 
@@ -89,179 +111,200 @@ create procedure  wCartasPorte_LiquidacionSubcontratistas
                     Subcontr1Desc, 
                     Subcontr2Desc, 
                     Exporta,
-                    Max( CONS.tarif1), 
-                    Max( CONS.tarif2), 
+                    Max( CONS.tarif1) as tarif1, 
+                    Max( CONS.tarif2) as tarif2, 
                      CONS.Corredor, 
                      CONS.IdClienteEntregador
 		FROM 
 		(
-		SELECT  
-		TOP (@maximumRows)  --quizas usando el TOP sin ORDERBY no haya diferencia de performance
 
-                    cdp.NumeroCartaDePorte, 
-                    cdp.IdCartaDePorte, 
-                    cdp.FechaDescarga, 
-                    cdp.NetoFinal, 
-					cdp.Subcontr1, --If(cdp.Subcontr1, dest.Subcontratista1), 
-					cdp.Subcontr2, --If(cdp.Subcontr2, dest.Subcontratista2), 
-                    --If(destinosapartados.Contains(cdp.Destino), If(cdp.SubnumeroVagon = 0, "Camiones", "Vagones"), "") as  agrupVagon,
-					case when cdp.SubnumeroVagon =0  THEN 'Camiones' ELSE  'Vagones' end  as  agrupVagon,
-                    cdp.ExcluirDeSubcontratistas, 
-                    cdp.SubnumeroDeFacturacion, 
-                    cdp.TitularDesc, 
-                    cdp.IntermediarioDesc, 
-                    cdp.RComercialDesc, 
-                    cdp.CorredorDesc, 
-                    cdp.EntregadorDesc, 
-                    cdp.ProcedenciaDesc, 
-                    dest.Descripcion as DestinoDesc, 
-                    clisub1.RazonSocial as Subcontr1Desc, 
-                    clisub2.RazonSocial as Subcontr2Desc,
+
+
+
+
+
+
+
+											SELECT  
+											--TOP (@maximumRows)  --quizas usando el TOP sin ORDERBY no haya diferencia de performance
+
+														cdp.NumeroCartaDePorte, 
+														cdp.IdCartaDePorte, 
+														cdp.FechaDescarga, 
+														cdp.NetoFinal, 
+														cdp.Subcontr1, --If(cdp.Subcontr1, dest.Subcontratista1), 
+														cdp.Subcontr2, --If(cdp.Subcontr2, dest.Subcontratista2), 
+														--If(destinosapartados.Contains(cdp.Destino), If(cdp.SubnumeroVagon = 0, "Camiones", "Vagones"), "") as  agrupVagon,
+														case when cdp.SubnumeroVagon =0  THEN 'Camiones' ELSE  'Vagones' end  as  agrupVagon,
+														cdp.ExcluirDeSubcontratistas, 
+														cdp.SubnumeroDeFacturacion, 
+														cdp.TitularDesc, 
+														cdp.IntermediarioDesc, 
+														cdp.RComercialDesc, 
+														cdp.CorredorDesc, 
+														cdp.EntregadorDesc, 
+														cdp.ProcedenciaDesc, 
+														dest.Descripcion as DestinoDesc, 
+														clisub1.RazonSocial as Subcontr1Desc, 
+														clisub2.RazonSocial as Subcontr2Desc,
                     
-					case when cdp.Exporta='SI'
-						then					  
+														case when cdp.Exporta='SI'
+															then					  
 
-							case when  (cdp.SubnumeroVagon <= 0) -- Or Not destinosapartados.Contains(cdp.Destino))
-                                then pd1.PrecioCaladaExportacion 
-								else pd1.PrecioVagonesCaladaExportacion
-							end
+																case when  (cdp.SubnumeroVagon <= 0) -- Or Not destinosapartados.Contains(cdp.Destino))
+																	then pd1.PrecioCaladaExportacion 
+																	else pd1.PrecioVagonesCaladaExportacion
+																end
 
-                        else
+															else
 
-							case when  (cdp.SubnumeroVagon <= 0) -- Or Not destinosapartados.Contains(cdp.Destino))
-                                then pd1.PrecioCaladaLocal 
-								else pd1.PrecioVagonesCalada
-							end
+																case when  (cdp.SubnumeroVagon <= 0) -- Or Not destinosapartados.Contains(cdp.Destino))
+																	then pd1.PrecioCaladaLocal 
+																	else pd1.PrecioVagonesCalada
+																end
 
-					end as tarif1, 
+														end as tarif1, 
 
    
-					case when cdp.Exporta='SI'
-						then					  
+														case when cdp.Exporta='SI'
+															then					  
 
-							case when  (cdp.SubnumeroVagon <= 0) -- Or Not destinosapartados.Contains(cdp.Destino))
-                                then 
-									case when  (pd2.PrecioDescargaExportacion = 0) -- Or Not destinosapartados.Contains(cdp.Destino))
-										then pd2.PrecioCaladaExportacion 
-										else pd2.PrecioDescargaExportacion
-									end
-								else 
-									case when  (pd2.PrecioVagonesBalanzaExportacion = 0) -- Or Not destinosapartados.Contains(cdp.Destino))
-										then pd2.PrecioVagonesCaladaExportacion 
-										else pd2.PrecioVagonesBalanzaExportacion
-									end
-							end	
+																case when  (cdp.SubnumeroVagon <= 0) -- Or Not destinosapartados.Contains(cdp.Destino))
+																	then 
+																		case when  (pd2.PrecioDescargaExportacion = 0) -- Or Not destinosapartados.Contains(cdp.Destino))
+																			then pd2.PrecioCaladaExportacion 
+																			else pd2.PrecioDescargaExportacion
+																		end
+																	else 
+																		case when  (pd2.PrecioVagonesBalanzaExportacion = 0) -- Or Not destinosapartados.Contains(cdp.Destino))
+																			then pd2.PrecioVagonesCaladaExportacion 
+																			else pd2.PrecioVagonesBalanzaExportacion
+																		end
+																end	
 
-                        else
+															else
 
-							case when  (cdp.SubnumeroVagon <= 0) -- Or Not destinosapartados.Contains(cdp.Destino))
-								then 
-									case when  (pd2.PrecioDescargaLocal = 0) -- Or Not destinosapartados.Contains(cdp.Destino))
-										then pd2.PrecioCaladaLocal 
-										else pd2.PrecioDescargaLocal
-									end
-								else 
-									case when  (pd2.PrecioVagonesBalanza = 0) -- Or Not destinosapartados.Contains(cdp.Destino))
-										then pd2.PrecioVagonesCalada 
-										else pd2.PrecioVagonesBalanza
-									end
+																case when  (cdp.SubnumeroVagon <= 0) -- Or Not destinosapartados.Contains(cdp.Destino))
+																	then 
+																		case when  (pd2.PrecioDescargaLocal = 0) -- Or Not destinosapartados.Contains(cdp.Destino))
+																			then pd2.PrecioCaladaLocal 
+																			else pd2.PrecioDescargaLocal
+																		end
+																	else 
+																		case when  (pd2.PrecioVagonesBalanza = 0) -- Or Not destinosapartados.Contains(cdp.Destino))
+																			then pd2.PrecioVagonesCalada 
+																			else pd2.PrecioVagonesBalanza
+																		end
 
-							end
+																end
 
-					end as tarif2, 
+														end as tarif2, 
        
        
-                   cdp.Exporta, 
-                   cdp.Corredor, 
-                   cdp.IdClienteEntregador
+													   cdp.Exporta, 
+													   cdp.Corredor, 
+													   cdp.IdClienteEntregador
 
-    	from dbo.fSQL_GetDataTableFiltradoYPaginado
-		( 
-							@startRowIndex, 
-							@maximumRows, 
-							@estado,
-							@QueContenga, 
-							@idVendedor, 
+    										from dbo.fSQL_GetDataTableFiltradoYPaginado
+											( 
+																@startRowIndex, 
+																@maximumRows, 
+																@estado,
+																@QueContenga, 
+																@idVendedor, 
 
-							@idCorredor, 
-							@idDestinatario, 
-							@idIntermediario,
-							@idRemComercial, 
-							@idArticulo,
+																@idCorredor, 
+																@idDestinatario, 
+																@idIntermediario,
+																@idRemComercial, 
+																@idArticulo,
 
-							@idProcedencia,
-							@idDestino,
+																@idProcedencia,
+																@idDestino,
 					
-							@AplicarANDuORalFiltro,
-							@ModoExportacion,
-							@fechadesde,
+																@AplicarANDuORalFiltro,
+																@ModoExportacion,
+																@fechadesde,
 
-							@fechahasta, 
-							@puntoventa, 
-							@IdAcopio,
-							@Contrato, 
-							@QueContenga2, 
+																@fechahasta, 
+																@puntoventa, 
+																@IdAcopio, 
+																'TRUE',
+																@Contrato, 
+																@QueContenga2, 
 
-							@idClienteAuxiliarint, 
-							@AgrupadorDeTandaPeriodos, 
-							@Vagon,
-							@Patente, 
-							@optCamionVagon
+																@idClienteAuxiliarint, 
+																@AgrupadorDeTandaPeriodos, 
+																@Vagon,
+																@Patente, 
+																@optCamionVagon
 
-							) as cdp
-
-
-
+																) as cdp
 
 
 
-                left join WilliamsDestinos dest on dest.IdWilliamsDestino = cdp.Destino
-                left join Clientes clisub1 on  clisub1.IdCliente = cdp.Subcontr1 --, dest.Subcontratista1
-                left join Clientes clisub2 on  clisub2.IdCliente = cdp.Subcontr2 --, dest.Subcontratista2
-                left join ListasPrecios l1 on  l1.IdListaPrecios = clisub1.IdListaPrecios
-                left join   ListasPreciosDetalle pd1     on  pd1.IdListaPrecios = l1.IdListaPrecios  and  pd1.IdArticulo = cdp.IdArticulo
-									 And (pd1.IdCliente Is null Or pd1.IdCliente = cdp.Vendedor Or 
-									 pd1.IdCliente = cdp.Entregador Or pd1.IdCliente = cdp.CuentaOrden1 Or 
-									 pd1.IdCliente = cdp.CuentaOrden2)
-                      --.OrderByDescending(Function(i) i.IdCliente).Take(1).DefaultIfEmpty() 
-                left join ListasPrecios l2       on  l2.IdListaPrecios = clisub2.IdListaPrecios
-                left join ListasPreciosDetalle pd2  on  pd2.IdListaPrecios = l2.IdListaPrecios     and  pd2.IdArticulo = cdp.IdArticulo
-                --               And (i.IdCliente Is Nothing Or i.IdCliente = cdp.Vendedor Or i.IdCliente = cdp.Entregador Or i.IdCliente = cdp.CuentaOrden1 Or i.IdCliente = cdp.CuentaOrden2)) 
-                --        .OrderByDescending(Function(i) i.IdCliente).Take(1).DefaultIfEmpty() 
-                Where 1 = 1 
-                      And (ISNULL(@idSubcontr,-1) = -1 Or ISNULL(cdp.Subcontr1, dest.Subcontratista1) = @idSubcontr Or ISNULL(cdp.Subcontr2, dest.Subcontratista2) = @idSubcontr) 
-                      And (ISNULL(@puntoventa,-1) = -1 Or cdp.PuntoVenta = @puntoventa) 
-                      And ISNULL(cdp.SubnumeroDeFacturacion, 0) <= 0
-
-			) as CONS
 
 
-                Group By 
-                    IdCartaDePorte, 
-                    NumeroCartaDePorte, 
-                    FechaDescarga, 
-                    agrupVagon, 
-                    NetoFinal, 
-                    Subcontr1, 
-                    Subcontr2, 
-                    ExcluirDeSubcontratistas, 
-                    SubnumeroDeFacturacion, 
-                    TitularDesc, 
-                    IntermediarioDesc, 
-                    RComercialDesc, 
-                    CorredorDesc, 
-                    EntregadorDesc, 
-                    ProcedenciaDesc, 
-                    DestinoDesc, 
-                    Subcontr1Desc, 
-                    Subcontr2Desc, 
-                    Exporta, 
-                    Corredor, 
-                    IdClienteEntregador
+
+													left join WilliamsDestinos dest on dest.IdWilliamsDestino = cdp.Destino
+													left join Clientes clisub1 on  clisub1.IdCliente = cdp.Subcontr1 --, dest.Subcontratista1
+													left join Clientes clisub2 on  clisub2.IdCliente = cdp.Subcontr2 --, dest.Subcontratista2
+													left join ListasPrecios l1 on  l1.IdListaPrecios = clisub1.IdListaPrecios
+													left join   ListasPreciosDetalle pd1     on  pd1.IdListaPrecios = l1.IdListaPrecios  
+																				and  pd1.IdArticulo = cdp.IdArticulo
+																		 And (pd1.IdCliente Is null Or pd1.IdCliente = cdp.Vendedor Or 
+																		 pd1.IdCliente = cdp.Entregador Or pd1.IdCliente = cdp.CuentaOrden1 Or 
+																		 pd1.IdCliente = cdp.CuentaOrden2)
+														  --.OrderByDescending(Function(i) i.IdCliente).Take(1).DefaultIfEmpty() 
+													left join ListasPrecios l2       on  l2.IdListaPrecios = clisub2.IdListaPrecios
+													left join ListasPreciosDetalle pd2  on  pd2.IdListaPrecios = l2.IdListaPrecios     
+																		and  pd2.IdArticulo = cdp.IdArticulo
+													--               And (i.IdCliente Is Nothing Or i.IdCliente = cdp.Vendedor Or i.IdCliente = cdp.Entregador Or i.IdCliente = cdp.CuentaOrden1 Or i.IdCliente = cdp.CuentaOrden2)) 
+													--        .OrderByDescending(Function(i) i.IdCliente).Take(1).DefaultIfEmpty() 
+													Where 1 = 1 
+														  And (	
+																ISNULL(@idSubcontr,-1) = -1 
+																Or ISNULL(cdp.Subcontr1, dest.Subcontratista1) = @idSubcontr 
+																Or ISNULL(cdp.Subcontr2, dest.Subcontratista2) = @idSubcontr
+															) 
+														  And (ISNULL(@puntoventa,-1) = -1 Or cdp.PuntoVenta = @puntoventa) 
+														 
+
+												) as CONS
+
+
+
+
+
+
+
+
+													Group By 
+														IdCartaDePorte, 
+														NumeroCartaDePorte, 
+														FechaDescarga, 
+														agrupVagon, 
+														NetoFinal, 
+														Subcontr1, 
+														Subcontr2, 
+														ExcluirDeSubcontratistas, 
+														SubnumeroDeFacturacion, 
+														TitularDesc, 
+														IntermediarioDesc, 
+														RComercialDesc, 
+														CorredorDesc, 
+														EntregadorDesc, 
+														ProcedenciaDesc, 
+														DestinoDesc, 
+														Subcontr1Desc, 
+														Subcontr2Desc, 
+														Exporta, 
+														Corredor, 
+														IdClienteEntregador
                
 		) as CONS2
 			   
-
+		order by NumeroCartaDePorte
 
 
 
@@ -431,9 +474,41 @@ go
 
 
 
+ --@startRowIndex int  = NULL,
+ --           @maximumRows int  = NULL,
+ --           @estado int  = NULL,
+ --           @QueContenga  VARCHAR(50) = NULL,
+ --           @idVendedor int  = NULL,
+ --           @idCorredor int  = NULL,
+ --           @idDestinatario int  = NULL,
+ --           @idIntermediario int  = NULL,
+ --           @idRemComercial int  = NULL,
+ --           @idArticulo int  = NULL,
+ --           @idProcedencia int  = NULL,
+ --           @idDestino int  = NULL,
+ --           @AplicarANDuORalFiltro int  = NULL,
+ --           @ModoExportacion  VARCHAR(20) = NULL,
+
+	--		@fechadesde datetime,
+	--		@fechahasta datetime,
+
+ --           @puntoventa int  = NULL, 
+ --           @optDivisionSyngenta  VARCHAR(50) = NULL,
+ --           @Contrato  VARCHAR(50) = NULL, 
+ --           @QueContenga2  VARCHAR(50) = NULL,
+ --           @idClienteAuxiliarint int  = NULL,
+           
+	--	    @AgrupadorDeTandaPeriodos int  = NULL,
+ --           @Vagon  int  = NULL,
+	--		@Patente VARCHAR(10) = NULL,
+ --           @optCamionVagon  VARCHAR(10) = NULL,
+ --           @idSubcontr int  = NULL
+
+
+
 wCartasPorte_LiquidacionSubcontratistas 
 					NULL, 
-					100, 
+					100000, 
 					NULL,
 					NULL, 
 					NULL, 
@@ -448,9 +523,10 @@ wCartasPorte_LiquidacionSubcontratistas
 					NULL,---1, --@idDestino,
 					0, --@AplicarANDuORalFiltro,
 					'Ambos', --'Buques',
-					'2016-06-03 00:00:00',
+					'2016-01-12 00:00:00',
 					
-					'2016-30-03 00:00:00',
+					'2016-31-12 00:00:00',
+			
 					NULL, 
 					NULL,
 					NULL, 
@@ -459,8 +535,9 @@ wCartasPorte_LiquidacionSubcontratistas
 					NULL, 
 					NULL, 
 					NULL,
-					NULL, 
-					NULL
+					NULL,
+					NULL,
+					6319
 
 go
 
@@ -471,3 +548,7 @@ GRANT EXECUTE ON wCartasPorte_LiquidacionSubcontratistas to [NT AUTHORITY\ANONYM
 go
 
 
+
+select subcontr1,subcontr2,* from cartasdeporte where numerocartadeporte=557251815
+
+EXEC sp_recompile 'dbo.fSQL_GetDataTableFiltradoYPaginado'
