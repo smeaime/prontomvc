@@ -205,3 +205,81 @@ Subproceso anulado.
    en Login.Page_Load(Object sender, EventArgs e) en C:\Users\Administrador\Documents\bdl\pronto\prontoweb\Login.aspx.vb:línea 169
 mscorlib
 __________________________
+
+Log Entry : 
+01/17/2017 13:50:01
+Error in: http://localhost:58911/ProntoWeb/SituacionCalidad.aspx/ExportarGrillaNormal. Error Message:Por generar el archivo C:\Users\Administrador\Documents\bdl\pronto\prontoweb\DataBackupear\Listado 17ene2017_134925.xls
+__________________________
+
+Log Entry : 
+01/17/2017 13:50:01
+Error in: http://localhost:58911/ProntoWeb/SituacionCalidad.aspx/ExportarGrillaNormal. Error Message:Archivo generado C:\Users\Administrador\Documents\bdl\pronto\prontoweb\DataBackupear\Listado 17ene2017_134925.xls
+__________________________
+
+Log Entry : 
+01/17/2017 14:01:16
+Error in: http://localhost:58911/ProntoWeb/HandlerCartaPorte.ashx. Error Message: -  Error en ExecDinamico. - System.Data.SqlClient.SqlException (0x80131904): Error relacionado con la red o específico de la instancia mientras se establecía una conexión con el servidor SQL Server. No se encontró el servidor o éste no estaba accesible. Compruebe que el nombre de la instancia es correcto y que SQL Server está configurado para admitir conexiones remotas. (provider: Named Pipes Provider, error: 40 - No se pudo abrir una conexión con SQL Server) ---> System.ComponentModel.Win32Exception (0x80004005): No se ha encontrado la ruta de acceso de la red
+   en System.Data.SqlClient.SqlInternalConnectionTds..ctor(DbConnectionPoolIdentity identity, SqlConnectionString connectionOptions, SqlCredential credential, Object providerInfo, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance, SqlConnectionString userConnectionOptions, SessionData reconnectSessionData, DbConnectionPool pool, String accessToken, Boolean applyTransientFaultHandling)
+   en System.Data.SqlClient.SqlConnectionFactory.CreateConnection(DbConnectionOptions options, DbConnectionPoolKey poolKey, Object poolGroupProviderInfo, DbConnectionPool pool, DbConnection owningConnection, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionFactory.CreatePooledConnection(DbConnectionPool pool, DbConnection owningObject, DbConnectionOptions options, DbConnectionPoolKey poolKey, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionPool.CreateObject(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   en System.Data.ProviderBase.DbConnectionPool.UserCreateRequest(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   en System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.Open()
+   en Pronto.ERP.Dal.GeneralDB.ExecDinamico(String SC, String comandoSQLdinamico, Int32 timeoutSegundos)
+ClientConnectionId:00000000-0000-0000-0000-000000000000
+Error Number:53,State:0,Class:20 - Empleados_TX_UsuarioNT 'Mariano' 90 0
+__________________________
+
+Log Entry : 
+01/17/2017 14:01:16
+Error in: http://localhost:58911/ProntoWeb/HandlerCartaPorte.ashx. Error Message:Error relacionado con la red o específico de la instancia mientras se establecía una conexión con el servidor SQL Server. No se encontró el servidor o éste no estaba accesible. Compruebe que el nombre de la instancia es correcto y que SQL Server está configurado para admitir conexiones remotas. (provider: Named Pipes Provider, error: 40 - No se pudo abrir una conexión con SQL Server)
+__________________________
+
+Log Entry : 
+01/17/2017 14:01:17
+Error in: http://localhost:58911/ProntoWeb/HandlerCartaPorte.ashx. Error Message:System.ComponentModel.Win32Exception
+No se ha encontrado la ruta de acceso de la red
+
+
+__________________________
+
+Log Entry : 
+01/17/2017 14:01:20
+Error in: http://localhost:58911/ProntoWeb/HandlerCartaPorte.ashx. Error Message:System.Net.Mail.SmtpException
+Error al enviar correo.
+   en System.Net.Mail.SmtpClient.Send(MailMessage message)
+   en ProntoFuncionesGenerales.MandaEmailSimple(String Para, String Asunto, String Cuerpo, String De, String SmtpServer, String SmtpUser, String SmtpPass, String sStringGenerarAdjunto, Int64 SmtpPort, Int32 EnableSSL, String CCO, String img)
+   en ASP.global_asax.Application_Error(Object sender, EventArgs e) en C:\Users\Administrador\Documents\bdl\pronto\prontoweb\global.asax:línea 472
+System
+__________________________
+
+Log Entry : 
+01/17/2017 14:04:58
+Error in: http://localhost:58911/ProntoWeb/CartaDePorte.aspx?Id=2723817. Error Message:La carta numero 558411243 id=2723817 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+01/17/2017 14:04:58
+Error in: http://localhost:58911/ProntoWeb/CartaDePorte.aspx?Id=2723817. Error Message:PV 3 0
+__________________________
+
+Log Entry : 
+01/17/2017 14:37:19
+Error in: http://localhost:58911/ProntoWeb/CDPDestinos.aspx?tipo=0. Error Message:System.Threading.ThreadAbortException
+Subproceso anulado.
+   en System.Threading.Thread.AbortInternal()
+   en System.Threading.Thread.Abort(Object stateInfo)
+   en System.Web.HttpResponse.AbortCurrentThread()
+   en System.Web.HttpResponse.End()
+   en System.Web.HttpResponse.Redirect(String url, Boolean endResponse, Boolean permanent)
+   en System.Web.HttpResponse.Redirect(String url)
+   en Login.Page_Load(Object sender, EventArgs e) en C:\Users\Administrador\Documents\bdl\pronto\prontoweb\Login.aspx.vb:línea 171
+mscorlib
+__________________________
