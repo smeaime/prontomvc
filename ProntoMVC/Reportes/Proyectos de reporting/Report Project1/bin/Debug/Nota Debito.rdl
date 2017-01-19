@@ -1,1 +1,1429 @@
-﻿<?xml version="1.0" encoding="utf-8"?><Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2008/01/reportdefinition"><Body><ReportItems><Textbox Name="textbox1"><CanGrow>true</CanGrow><KeepTogether>true</KeepTogether><Paragraphs><Paragraph><TextRuns><TextRun><Value>Nota de debito</Value><Style><FontFamily>Tahoma</FontFamily><FontSize>20pt</FontSize><FontWeight>Bold</FontWeight><Color>SteelBlue</Color></Style></TextRun></TextRuns><Style /></Paragraph></Paragraphs><rd:DefaultName xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">textbox1</rd:DefaultName><Top>0.03803cm</Top><Height>0.36in</Height><Width>6.16545in</Width><Style><PaddingLeft>2pt</PaddingLeft><PaddingRight>2pt</PaddingRight><PaddingTop>2pt</PaddingTop><PaddingBottom>2pt</PaddingBottom></Style></Textbox><Textbox Name="Textbox10"><CanGrow>true</CanGrow><KeepTogether>true</KeepTogether><Paragraphs><Paragraph><TextRuns><TextRun><Value>Subtotal :</Value><Style><FontSize>8pt</FontSize></Style></TextRun></TextRuns><Style /></Paragraph></Paragraphs><rd:DefaultName xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">Textbox3</rd:DefaultName><Top>3.08335in</Top><Left>4.61634in</Left><Height>0.15625in</Height><Width>1.125in</Width><ZIndex>1</ZIndex><Style><Border><Style>None</Style></Border><PaddingLeft>2pt</PaddingLeft><PaddingRight>2pt</PaddingRight><PaddingTop>2pt</PaddingTop><PaddingBottom>2pt</PaddingBottom></Style></Textbox><Textbox Name="Textbox11"><CanGrow>true</CanGrow><KeepTogether>true</KeepTogether><Paragraphs><Paragraph><TextRuns><TextRun><Value>Iva :</Value><Style><FontSize>8pt</FontSize></Style></TextRun></TextRuns><Style /></Paragraph></Paragraphs><rd:DefaultName xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">Textbox3</rd:DefaultName><Top>3.25349in</Top><Left>4.61635in</Left><Height>0.15625in</Height><Width>1.125in</Width><ZIndex>2</ZIndex><Style><Border><Style>None</Style></Border><PaddingLeft>2pt</PaddingLeft><PaddingRight>2pt</PaddingRight><PaddingTop>2pt</PaddingTop><PaddingBottom>2pt</PaddingBottom></Style></Textbox><Textbox Name="Textbox12"><CanGrow>true</CanGrow><KeepTogether>true</KeepTogether><Paragraphs><Paragraph><TextRuns><TextRun><Value>Total :</Value><Style><FontSize>8pt</FontSize></Style></TextRun></TextRuns><Style /></Paragraph></Paragraphs><rd:DefaultName xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">Textbox3</rd:DefaultName><Top>3.87849in</Top><Left>4.61634in</Left><Height>0.15625in</Height><Width>1.125in</Width><ZIndex>3</ZIndex><Style><Border><Style>None</Style></Border><PaddingLeft>2pt</PaddingLeft><PaddingRight>2pt</PaddingRight><PaddingTop>2pt</PaddingTop><PaddingBottom>2pt</PaddingBottom></Style></Textbox><Textbox Name="TipoComprobante9"><CanGrow>true</CanGrow><KeepTogether>true</KeepTogether><Paragraphs><Paragraph><TextRuns><TextRun><Value>=First(Fields!Subtotal.Value, "DataSet1")</Value><Style><FontWeight>Bold</FontWeight><Format>#,0.00;(#,0.00)</Format></Style></TextRun></TextRuns><Style /></Paragraph></Paragraphs><rd:DefaultName xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">TipoComprobante</rd:DefaultName><Top>3.09724in</Top><Left>5.89364in</Left><Height>0.15625in</Height><Width>1in</Width><ZIndex>4</ZIndex><Style><Border><Style>None</Style></Border><PaddingLeft>2pt</PaddingLeft><PaddingRight>2pt</PaddingRight><PaddingTop>2pt</PaddingTop><PaddingBottom>2pt</PaddingBottom></Style></Textbox><Textbox Name="TipoComprobante10"><CanGrow>true</CanGrow><KeepTogether>true</KeepTogether><Paragraphs><Paragraph><TextRuns><TextRun><Value>=First(Fields!Iva.Value, "DataSet1")</Value><Style><FontWeight>Bold</FontWeight><Format>#,0.00;(#,0.00)</Format></Style></TextRun></TextRuns><Style /></Paragraph></Paragraphs><rd:DefaultName xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">TipoComprobante</rd:DefaultName><Top>3.25349in</Top><Left>5.89364in</Left><Height>0.15625in</Height><Width>1in</Width><ZIndex>5</ZIndex><Style><Border><Style>None</Style></Border><PaddingLeft>2pt</PaddingLeft><PaddingRight>2pt</PaddingRight><PaddingTop>2pt</PaddingTop><PaddingBottom>2pt</PaddingBottom></Style></Textbox><Textbox Name="TipoComprobante11"><CanGrow>true</CanGrow><KeepTogether>true</KeepTogether><Paragraphs><Paragraph><TextRuns><TextRun><Value>=First(Fields!ImporteTotal.Value, "DataSet1")</Value><Style><FontWeight>Bold</FontWeight><Format>#,0.00;(#,0.00)</Format></Style></TextRun></TextRuns><Style /></Paragraph></Paragraphs><rd:DefaultName xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">TipoComprobante</rd:DefaultName><Top>3.87849in</Top><Left>5.89363in</Left><Height>0.15625in</Height><Width>1in</Width><ZIndex>6</ZIndex><Style><Border><Style>None</Style></Border><BackgroundColor>Gainsboro</BackgroundColor><PaddingLeft>2pt</PaddingLeft><PaddingRight>2pt</PaddingRight><PaddingTop>2pt</PaddingTop><PaddingBottom>2pt</PaddingBottom></Style></Textbox><Rectangle Name="Rectangle1"><ReportItems><Textbox Name="TipoComprobante"><CanGrow>true</CanGrow><KeepTogether>true</KeepTogether><Paragraphs><Paragraph><TextRuns><TextRun><Value>=First(Fields!Numero.Value, "DataSet1")</Value><Style><FontSize>9pt</FontSize><FontWeight>Bold</FontWeight></Style></TextRun></TextRuns><Style><TextAlign>Center</TextAlign></Style></Paragraph></Paragraphs><rd:DefaultName xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">TipoComprobante</rd:DefaultName><Left>1.11458in</Left><Height>0.15625in</Height><Width>1.36459in</Width><Style><Border><Style>None</Style></Border><BackgroundColor>LightGrey</BackgroundColor><PaddingLeft>2pt</PaddingLeft><PaddingRight>2pt</PaddingRight><PaddingTop>2pt</PaddingTop><PaddingBottom>2pt</PaddingBottom></Style></Textbox><Textbox Name="Textbox3"><CanGrow>true</CanGrow><KeepTogether>true</KeepTogether><Paragraphs><Paragraph><TextRuns><TextRun><Value>Numero :</Value><Style><FontSize>8pt</FontSize></Style></TextRun></TextRuns><Style /></Paragraph></Paragraphs><rd:DefaultName xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">Textbox3</rd:DefaultName><Height>0.15625in</Height><Width>1in</Width><ZIndex>1</ZIndex><Style><Border><Style>None</Style></Border><PaddingLeft>2pt</PaddingLeft><PaddingRight>2pt</PaddingRight><PaddingTop>2pt</PaddingTop><PaddingBottom>2pt</PaddingBottom></Style></Textbox><Textbox Name="Textbox4"><CanGrow>true</CanGrow><KeepTogether>true</KeepTogether><Paragraphs><Paragraph><TextRuns><TextRun><Value>Cliente :</Value><Style><FontSize>8pt</FontSize></Style></TextRun></TextRuns><Style /></Paragraph></Paragraphs><rd:DefaultName xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">Textbox3</rd:DefaultName><Top>0.27666in</Top><Height>0.15625in</Height><Width>1in</Width><ZIndex>2</ZIndex><Style><Border><Style>None</Style></Border><PaddingLeft>2pt</PaddingLeft><PaddingRight>2pt</PaddingRight><PaddingTop>2pt</PaddingTop><PaddingBottom>2pt</PaddingBottom></Style></Textbox><Textbox Name="TipoComprobante2"><CanGrow>true</CanGrow><KeepTogether>true</KeepTogether><Paragraphs><Paragraph><TextRuns><TextRun><Value>=First(Fields!Cliente.Value, "DataSet1")</Value><Style><FontSize>8pt</FontSize><FontWeight>Bold</FontWeight></Style></TextRun></TextRuns><Style /></Paragraph></Paragraphs><rd:DefaultName xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">TipoComprobante</rd:DefaultName><Top>0.27666in</Top><Left>1.11458in</Left><Height>0.15625in</Height><Width>3.19396in</Width><ZIndex>3</ZIndex><Style><Border><Style>None</Style></Border><BackgroundColor>LightGrey</BackgroundColor><PaddingLeft>2pt</PaddingLeft><PaddingRight>2pt</PaddingRight><PaddingTop>2pt</PaddingTop><PaddingBottom>2pt</PaddingBottom></Style></Textbox><Textbox Name="TipoComprobante4"><CanGrow>true</CanGrow><KeepTogether>true</KeepTogether><Paragraphs><Paragraph><TextRuns><TextRun><Value>=First(Fields!FechaNotaDebito.Value, "DataSet1")</Value><Style><FontSize>8pt</FontSize><FontWeight>Bold</FontWeight><Format>dd/MM/yyyy</Format></Style></TextRun></TextRuns><Style><TextAlign>Left</TextAlign></Style></Paragraph></Paragraphs><rd:DefaultName xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">TipoComprobante</rd:DefaultName><Left>5.57242in</Left><Height>0.15625in</Height><Width>1.32243in</Width><ZIndex>4</ZIndex><Style><Border><Style>None</Style></Border><PaddingLeft>2pt</PaddingLeft><PaddingRight>2pt</PaddingRight><PaddingTop>2pt</PaddingTop><PaddingBottom>2pt</PaddingBottom></Style></Textbox><Textbox Name="Textbox6"><CanGrow>true</CanGrow><KeepTogether>true</KeepTogether><Paragraphs><Paragraph><TextRuns><TextRun><Value>Fecha debito :</Value><Style><FontSize>8pt</FontSize></Style></TextRun></TextRuns><Style /></Paragraph></Paragraphs><rd:DefaultName xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">Textbox3</rd:DefaultName><Left>4.37798in</Left><Height>0.15625in</Height><Width>1.125in</Width><ZIndex>5</ZIndex><Style><Border><Style>None</Style></Border><PaddingLeft>2pt</PaddingLeft><PaddingRight>2pt</PaddingRight><PaddingTop>2pt</PaddingTop><PaddingBottom>2pt</PaddingBottom></Style></Textbox><Textbox Name="Textbox8"><CanGrow>true</CanGrow><KeepTogether>true</KeepTogether><Paragraphs><Paragraph><TextRuns><TextRun><Value>Condicion IVA:</Value><Style><FontSize>8pt</FontSize></Style></TextRun></TextRuns><Style /></Paragraph></Paragraphs><rd:DefaultName xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">Textbox3</rd:DefaultName><Top>0.27666in</Top><Left>4.37798in</Left><Height>0.15625in</Height><Width>0.82292in</Width><ZIndex>6</ZIndex><Style><Border><Style>None</Style></Border><PaddingLeft>2pt</PaddingLeft><PaddingRight>2pt</PaddingRight><PaddingTop>2pt</PaddingTop><PaddingBottom>2pt</PaddingBottom></Style></Textbox><Textbox Name="TipoComprobante7"><CanGrow>true</CanGrow><KeepTogether>true</KeepTogether><Paragraphs><Paragraph><TextRuns><TextRun><Value>=First(Fields!CondicionIVA.Value, "DataSet1")</Value><Style><FontSize>8pt</FontSize><FontWeight>Bold</FontWeight></Style></TextRun></TextRuns><Style><TextAlign>Left</TextAlign></Style></Paragraph></Paragraphs><rd:DefaultName xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">TipoComprobante</rd:DefaultName><Top>0.27666in</Top><Left>5.24257in</Left><Height>0.15625in</Height><Width>1.62451in</Width><ZIndex>7</ZIndex><Style><Border><Style>None</Style></Border><PaddingLeft>2pt</PaddingLeft><PaddingRight>2pt</PaddingRight><PaddingTop>2pt</PaddingTop><PaddingBottom>2pt</PaddingBottom></Style></Textbox><Textbox Name="Textbox9"><CanGrow>true</CanGrow><KeepTogether>true</KeepTogether><Paragraphs><Paragraph><TextRuns><TextRun><Value>Obra :</Value><Style><FontSize>8pt</FontSize></Style></TextRun></TextRuns><Style /></Paragraph></Paragraphs><rd:DefaultName xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">Textbox3</rd:DefaultName><Top>0.55208in</Top><Height>0.15625in</Height><Width>1in</Width><ZIndex>8</ZIndex><Style><Border><Style>None</Style></Border><PaddingLeft>2pt</PaddingLeft><PaddingRight>2pt</PaddingRight><PaddingTop>2pt</PaddingTop><PaddingBottom>2pt</PaddingBottom></Style></Textbox><Textbox Name="TipoComprobante8"><CanGrow>true</CanGrow><KeepTogether>true</KeepTogether><Paragraphs><Paragraph><TextRuns><TextRun><Value>=First(Fields!Obra.Value, "DataSet1")</Value><Style><FontSize>8pt</FontSize><FontWeight>Bold</FontWeight></Style></TextRun></TextRuns><Style /></Paragraph></Paragraphs><rd:DefaultName xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">TipoComprobante</rd:DefaultName><Top>0.55208in</Top><Left>1.11458in</Left><Height>0.15625in</Height><Width>3.19396in</Width><ZIndex>9</ZIndex><Style><Border><Style>None</Style></Border><PaddingLeft>2pt</PaddingLeft><PaddingRight>2pt</PaddingRight><PaddingTop>2pt</PaddingTop><PaddingBottom>2pt</PaddingBottom></Style></Textbox><Textbox Name="Textbox13"><CanGrow>true</CanGrow><KeepTogether>true</KeepTogether><Paragraphs><Paragraph><TextRuns><TextRun><Value>Moneda :</Value><Style><FontSize>8pt</FontSize></Style></TextRun></TextRuns><Style /></Paragraph></Paragraphs><rd:DefaultName xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">Textbox3</rd:DefaultName><Top>0.55208in</Top><Left>11.12007cm</Left><Height>0.15625in</Height><Width>1.125in</Width><ZIndex>10</ZIndex><Style><Border><Style>None</Style></Border><PaddingLeft>2pt</PaddingLeft><PaddingRight>2pt</PaddingRight><PaddingTop>2pt</PaddingTop><PaddingBottom>2pt</PaddingBottom></Style></Textbox><Textbox Name="TipoComprobante12"><CanGrow>true</CanGrow><KeepTogether>true</KeepTogether><Paragraphs><Paragraph><TextRuns><TextRun><Value>=First(Fields!Moneda.Value, "DataSet1")</Value><Style><FontSize>8pt</FontSize><FontWeight>Bold</FontWeight></Style></TextRun></TextRuns><Style><TextAlign>Left</TextAlign></Style></Paragraph></Paragraphs><rd:DefaultName xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">TipoComprobante</rd:DefaultName><Top>0.55208in</Top><Left>5.57242in</Left><Height>0.15625in</Height><Width>0.63542in</Width><ZIndex>11</ZIndex><Style><Border><Style>None</Style></Border><PaddingLeft>2pt</PaddingLeft><PaddingRight>2pt</PaddingRight><PaddingTop>2pt</PaddingTop><PaddingBottom>2pt</PaddingBottom></Style></Textbox><Textbox Name="Textbox14"><CanGrow>true</CanGrow><KeepTogether>true</KeepTogether><Paragraphs><Paragraph><TextRuns><TextRun><Value>Cotizacion moneda :</Value><Style><FontSize>8pt</FontSize></Style></TextRun></TextRuns><Style /></Paragraph></Paragraphs><rd:DefaultName xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">Textbox3</rd:DefaultName><Top>0.82292in</Top><Left>4.37798in</Left><Height>0.15625in</Height><Width>1.125in</Width><ZIndex>12</ZIndex><Style><Border><Style>None</Style></Border><PaddingLeft>2pt</PaddingLeft><PaddingRight>2pt</PaddingRight><PaddingTop>2pt</PaddingTop><PaddingBottom>2pt</PaddingBottom></Style></Textbox><Textbox Name="TipoComprobante13"><CanGrow>true</CanGrow><KeepTogether>true</KeepTogether><Paragraphs><Paragraph><TextRuns><TextRun><Value>=First(Fields!CotizacionMoneda.Value, "DataSet1")</Value><Style><FontSize>8pt</FontSize><FontWeight>Bold</FontWeight></Style></TextRun></TextRuns><Style><TextAlign>Left</TextAlign></Style></Paragraph></Paragraphs><rd:DefaultName xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">TipoComprobante</rd:DefaultName><Top>0.84375in</Top><Left>5.57242in</Left><Height>0.15625in</Height><Width>0.63542in</Width><ZIndex>13</ZIndex><Style><Border><Style>None</Style></Border><PaddingLeft>2pt</PaddingLeft><PaddingRight>2pt</PaddingRight><PaddingTop>2pt</PaddingTop><PaddingBottom>2pt</PaddingBottom></Style></Textbox><Textbox Name="Textbox15"><CanGrow>true</CanGrow><KeepTogether>true</KeepTogether><Paragraphs><Paragraph><TextRuns><TextRun><Value>Cotizacion u$s :</Value><Style><FontSize>8pt</FontSize></Style></TextRun></TextRuns><Style /></Paragraph></Paragraphs><rd:DefaultName xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">Textbox3</rd:DefaultName><Top>1.06944in</Top><Left>4.37798in</Left><Height>0.15625in</Height><Width>1.125in</Width><ZIndex>14</ZIndex><Style><Border><Style>None</Style></Border><PaddingLeft>2pt</PaddingLeft><PaddingRight>2pt</PaddingRight><PaddingTop>2pt</PaddingTop><PaddingBottom>2pt</PaddingBottom></Style></Textbox><Textbox Name="TipoComprobante14"><CanGrow>true</CanGrow><KeepTogether>true</KeepTogether><Paragraphs><Paragraph><TextRuns><TextRun><Value>=First(Fields!CotizacionDolar.Value, "DataSet1")</Value><Style><FontSize>8pt</FontSize><FontWeight>Bold</FontWeight></Style></TextRun></TextRuns><Style><TextAlign>Left</TextAlign></Style></Paragraph></Paragraphs><rd:DefaultName xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">TipoComprobante</rd:DefaultName><Top>1.06944in</Top><Left>5.55854in</Left><Height>0.15625in</Height><Width>0.64931in</Width><ZIndex>15</ZIndex><Style><Border><Style>None</Style></Border><PaddingLeft>2pt</PaddingLeft><PaddingRight>2pt</PaddingRight><PaddingTop>2pt</PaddingTop><PaddingBottom>2pt</PaddingBottom></Style></Textbox><Textbox Name="Textbox17"><CanGrow>true</CanGrow><KeepTogether>true</KeepTogether><Paragraphs><Paragraph><TextRuns><TextRun><Value>Observaciones :</Value><Style><FontSize>8pt</FontSize></Style></TextRun></TextRuns><Style /></Paragraph></Paragraphs><rd:DefaultName xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">Textbox3</rd:DefaultName><Top>0.84375in</Top><Height>0.15625in</Height><Width>1in</Width><ZIndex>16</ZIndex><Style><Border><Style>None</Style></Border><PaddingLeft>2pt</PaddingLeft><PaddingRight>2pt</PaddingRight><PaddingTop>2pt</PaddingTop><PaddingBottom>2pt</PaddingBottom></Style></Textbox><Textbox Name="TipoComprobante15"><CanGrow>true</CanGrow><KeepTogether>true</KeepTogether><Paragraphs><Paragraph><TextRuns><TextRun><Value>=First(Fields!Observaciones.Value, "DataSet1")</Value><Style><FontSize>8pt</FontSize><FontWeight>Bold</FontWeight></Style></TextRun></TextRuns><Style><TextAlign>Left</TextAlign></Style></Paragraph></Paragraphs><rd:DefaultName xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">TipoComprobante</rd:DefaultName><Top>0.82292in</Top><Left>1.12847in</Left><Height>0.40278in</Height><Width>3.19396in</Width><ZIndex>17</ZIndex><Style><Border><Style>None</Style></Border><PaddingLeft>2pt</PaddingLeft><PaddingRight>2pt</PaddingRight><PaddingTop>2pt</PaddingTop><PaddingBottom>2pt</PaddingBottom></Style></Textbox></ReportItems><KeepTogether>true</KeepTogether><Top>0.46624in</Top><Left>0.13419in</Left><Height>1.31944in</Height><Width>6.90626in</Width><ZIndex>7</ZIndex><Style><Border><Style>None</Style></Border></Style></Rectangle><Textbox Name="Textbox18"><CanGrow>true</CanGrow><KeepTogether>true</KeepTogether><Paragraphs><Paragraph><TextRuns><TextRun><Value>Percepcion IIBB :</Value><Style><FontSize>8pt</FontSize></Style></TextRun></TextRuns><Style /></Paragraph></Paragraphs><rd:DefaultName xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">Textbox3</rd:DefaultName><Top>3.40974in</Top><Left>4.61634in</Left><Height>0.15625in</Height><Width>1.125in</Width><ZIndex>8</ZIndex><Style><Border><Style>None</Style></Border><PaddingLeft>2pt</PaddingLeft><PaddingRight>2pt</PaddingRight><PaddingTop>2pt</PaddingTop><PaddingBottom>2pt</PaddingBottom></Style></Textbox><Textbox Name="TipoComprobante17"><CanGrow>true</CanGrow><KeepTogether>true</KeepTogether><Paragraphs><Paragraph><TextRuns><TextRun><Value>=First(Fields!IIBB.Value, "DataSet1")</Value><Style><FontWeight>Bold</FontWeight><Format>#,0.00;(#,0.00)</Format></Style></TextRun></TextRuns><Style /></Paragraph></Paragraphs><rd:DefaultName xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">TipoComprobante</rd:DefaultName><Top>3.40974in</Top><Left>5.89363in</Left><Height>0.15625in</Height><Width>1in</Width><ZIndex>9</ZIndex><Style><Border><Style>None</Style></Border><PaddingLeft>2pt</PaddingLeft><PaddingRight>2pt</PaddingRight><PaddingTop>2pt</PaddingTop><PaddingBottom>2pt</PaddingBottom></Style></Textbox><Textbox Name="TipoComprobante18"><CanGrow>true</CanGrow><KeepTogether>true</KeepTogether><Paragraphs><Paragraph><TextRuns><TextRun><Value>=First(Fields!PercepcionIVA.Value, "DataSet1")</Value><Style><FontWeight>Bold</FontWeight><Format>#,0.00;(#,0.00)</Format></Style></TextRun></TextRuns><Style /></Paragraph></Paragraphs><rd:DefaultName xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">TipoComprobante</rd:DefaultName><Top>3.56599in</Top><Left>5.89363in</Left><Height>0.15625in</Height><Width>1in</Width><ZIndex>10</ZIndex><Style><Border><Style>None</Style></Border><PaddingLeft>2pt</PaddingLeft><PaddingRight>2pt</PaddingRight><PaddingTop>2pt</PaddingTop><PaddingBottom>2pt</PaddingBottom></Style></Textbox><Textbox Name="Textbox19"><CanGrow>true</CanGrow><KeepTogether>true</KeepTogether><Paragraphs><Paragraph><TextRuns><TextRun><Value>Percepcion iva :</Value><Style><FontSize>8pt</FontSize></Style></TextRun></TextRuns><Style /></Paragraph></Paragraphs><rd:DefaultName xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">Textbox3</rd:DefaultName><Top>3.56599in</Top><Left>4.61634in</Left><Height>0.15625in</Height><Width>1.125in</Width><ZIndex>11</ZIndex><Style><Border><Style>None</Style></Border><PaddingLeft>2pt</PaddingLeft><PaddingRight>2pt</PaddingRight><PaddingTop>2pt</PaddingTop><PaddingBottom>2pt</PaddingBottom></Style></Textbox><Textbox Name="TipoComprobante19"><CanGrow>true</CanGrow><KeepTogether>true</KeepTogether><Paragraphs><Paragraph><TextRuns><TextRun><Value>=First(Fields!OtrasPercepciones.Value, "DataSet1")</Value><Style><FontWeight>Bold</FontWeight><Format>#,0.00;(#,0.00)</Format></Style></TextRun></TextRuns><Style /></Paragraph></Paragraphs><rd:DefaultName xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">TipoComprobante</rd:DefaultName><Top>3.72224in</Top><Left>5.89363in</Left><Height>0.15625in</Height><Width>1in</Width><ZIndex>12</ZIndex><Style><Border><Style>None</Style></Border><PaddingLeft>2pt</PaddingLeft><PaddingRight>2pt</PaddingRight><PaddingTop>2pt</PaddingTop><PaddingBottom>2pt</PaddingBottom></Style></Textbox><Textbox Name="Textbox20"><CanGrow>true</CanGrow><KeepTogether>true</KeepTogether><Paragraphs><Paragraph><TextRuns><TextRun><Value>Otras percepciones :</Value><Style><FontSize>8pt</FontSize></Style></TextRun></TextRuns><Style /></Paragraph></Paragraphs><rd:DefaultName xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">Textbox3</rd:DefaultName><Top>3.72224in</Top><Left>4.61634in</Left><Height>0.15625in</Height><Width>1.125in</Width><ZIndex>13</ZIndex><Style><Border><Style>None</Style></Border><PaddingLeft>2pt</PaddingLeft><PaddingRight>2pt</PaddingRight><PaddingTop>2pt</PaddingTop><PaddingBottom>2pt</PaddingBottom></Style></Textbox><Subreport Name="Subreport2"><ReportName>Detalle Nota Debito</ReportName><Parameters><Parameter Name="IdNotaDebito"><Value>=First(Fields!IdNotaDebito.Value, "DataSet1")</Value></Parameter><Parameter Name="CadenaConexion"><Value>=Parameters!CadenaConexion.Value</Value></Parameter></Parameters><Top>4.712cm</Top><Left>0.34083cm</Left><Height>2.94333cm</Height><Width>17.54191cm</Width><ZIndex>14</ZIndex><Style><Border><Style>None</Style></Border></Style></Subreport><Textbox Name="Textbox21"><CanGrow>true</CanGrow><KeepTogether>true</KeepTogether><Paragraphs><Paragraph><TextRuns><TextRun><Value>Data Source=Mariano-PC\MSSQLSERVER2;Initial catalog=Autotrol;User ID=sa; Password=ok;</Value><Style /></TextRun></TextRuns><Style /></Paragraph></Paragraphs><rd:DefaultName xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">Textbox6</rd:DefaultName><Top>8.28387cm</Top><Left>0.56605cm</Left><Height>1.96438cm</Height><Width>4.21979cm</Width><ZIndex>15</ZIndex><Visibility><Hidden>true</Hidden></Visibility><Style><Border><Style>None</Style></Border><PaddingLeft>2pt</PaddingLeft><PaddingRight>2pt</PaddingRight><PaddingTop>2pt</PaddingTop><PaddingBottom>2pt</PaddingBottom></Style></Textbox></ReportItems><Height>4.16667in</Height><Style /></Body><Width>7.09513in</Width><Page><PageHeight>29.7cm</PageHeight><PageWidth>21cm</PageWidth><LeftMargin>2cm</LeftMargin><RightMargin>2cm</RightMargin><TopMargin>2cm</TopMargin><BottomMargin>2cm</BottomMargin><ColumnSpacing>0.13cm</ColumnSpacing><Style /></Page><AutoRefresh>0</AutoRefresh><DataSources><DataSource Name="DataSource1"><ConnectionProperties><DataProvider>SQL</DataProvider><ConnectString>=Parameters!CadenaConexion.Value</ConnectString><IntegratedSecurity>true</IntegratedSecurity></ConnectionProperties><rd:SecurityType xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">Integrated</rd:SecurityType><rd:DataSourceID xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">d137d2c5-8196-485e-a132-afa810d89e83</rd:DataSourceID></DataSource></DataSources><DataSets><DataSet Name="DataSet1"><Query><DataSourceName>DataSource1</DataSourceName><QueryParameters><QueryParameter Name="@IdNotaDebito"><Value>=Parameters!Id.Value</Value></QueryParameter></QueryParameters><CommandType>StoredProcedure</CommandType><CommandText>wNotasDebito_TX_PorIdConDatos</CommandText></Query><Fields><Field Name="IdNotaDebito"><DataField>IdNotaDebito</DataField><rd:TypeName xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">System.Int32</rd:TypeName></Field><Field Name="NumeroNotaDebito"><DataField>NumeroNotaDebito</DataField><rd:TypeName xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">System.Int32</rd:TypeName></Field><Field Name="TipoABC"><DataField>TipoABC</DataField><rd:TypeName xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">System.String</rd:TypeName></Field><Field Name="PuntoVenta"><DataField>PuntoVenta</DataField><rd:TypeName xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">System.Int16</rd:TypeName></Field><Field Name="IdCliente"><DataField>IdCliente</DataField><rd:TypeName xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">System.Int32</rd:TypeName></Field><Field Name="FechaNotaDebito"><DataField>FechaNotaDebito</DataField><rd:TypeName xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">System.DateTime</rd:TypeName></Field><Field Name="IdVendedor"><DataField>IdVendedor</DataField><rd:TypeName xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">System.Byte</rd:TypeName></Field><Field Name="ImporteTotal"><DataField>ImporteTotal</DataField><rd:TypeName xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">System.Decimal</rd:TypeName></Field><Field Name="ImporteIva1"><DataField>ImporteIva1</DataField><rd:TypeName xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">System.Decimal</rd:TypeName></Field><Field Name="ImporteIva2"><DataField>ImporteIva2</DataField><rd:TypeName xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">System.Decimal</rd:TypeName></Field><Field Name="RetencionIBrutos1"><DataField>RetencionIBrutos1</DataField><rd:TypeName xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">System.Decimal</rd:TypeName></Field><Field Name="PorcentajeIBrutos1"><DataField>PorcentajeIBrutos1</DataField><rd:TypeName xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">System.Decimal</rd:TypeName></Field><Field Name="RetencionIBrutos2"><DataField>RetencionIBrutos2</DataField><rd:TypeName xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">System.Decimal</rd:TypeName></Field><Field Name="PorcentajeIBrutos2"><DataField>PorcentajeIBrutos2</DataField><rd:TypeName xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">System.Decimal</rd:TypeName></Field><Field Name="IdCodigoIva"><DataField>IdCodigoIva</DataField><rd:TypeName xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">System.Byte</rd:TypeName></Field><Field Name="PorcentajeIva1"><DataField>PorcentajeIva1</DataField><rd:TypeName xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">System.Decimal</rd:TypeName></Field><Field Name="PorcentajeIva2"><DataField>PorcentajeIva2</DataField><rd:TypeName xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">System.Decimal</rd:TypeName></Field><Field Name="Observaciones"><DataField>Observaciones</DataField><rd:TypeName xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">System.String</rd:TypeName></Field><Field Name="ImporteIvaIncluido"><DataField>ImporteIvaIncluido</DataField><rd:TypeName xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">System.Decimal</rd:TypeName></Field><Field Name="CotizacionDolar"><DataField>CotizacionDolar</DataField><rd:TypeName xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">System.Decimal</rd:TypeName></Field><Field Name="CtaCte"><DataField>CtaCte</DataField><rd:TypeName xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">System.String</rd:TypeName></Field><Field Name="IdMoneda"><DataField>IdMoneda</DataField><rd:TypeName xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">System.Int32</rd:TypeName></Field><Field Name="CotizacionMoneda"><DataField>CotizacionMoneda</DataField><rd:TypeName xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">System.Decimal</rd:TypeName></Field><Field Name="IVANoDiscriminado"><DataField>IVANoDiscriminado</DataField><rd:TypeName xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">System.Decimal</rd:TypeName></Field><Field Name="ConvenioMultilateral"><DataField>ConvenioMultilateral</DataField><rd:TypeName xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">System.String</rd:TypeName></Field><Field Name="OtrasPercepciones1"><DataField>OtrasPercepciones1</DataField><rd:TypeName xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">System.Decimal</rd:TypeName></Field><Field Name="OtrasPercepciones1Desc"><DataField>OtrasPercepciones1Desc</DataField><rd:TypeName xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">System.String</rd:TypeName></Field><Field Name="OtrasPercepciones2"><DataField>OtrasPercepciones2</DataField><rd:TypeName xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">System.Decimal</rd:TypeName></Field><Field Name="OtrasPercepciones2Desc"><DataField>OtrasPercepciones2Desc</DataField><rd:TypeName xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">System.String</rd:TypeName></Field><Field Name="IdProvinciaDestino"><DataField>IdProvinciaDestino</DataField><rd:TypeName xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">System.Int32</rd:TypeName></Field><Field Name="IdIBCondicion"><DataField>IdIBCondicion</DataField><rd:TypeName xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">System.Int32</rd:TypeName></Field><Field Name="IdPuntoVenta"><DataField>IdPuntoVenta</DataField><rd:TypeName xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">System.Int32</rd:TypeName></Field><Field Name="Anulada"><DataField>Anulada</DataField><rd:TypeName xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">System.String</rd:TypeName></Field><Field Name="IdUsuarioAnulacion"><DataField>IdUsuarioAnulacion</DataField><rd:TypeName xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">System.Int32</rd:TypeName></Field><Field Name="FechaAnulacion"><DataField>FechaAnulacion</DataField><rd:TypeName xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">System.DateTime</rd:TypeName></Field><Field Name="NumeroCAI"><DataField>NumeroCAI</DataField><rd:TypeName xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">System.Decimal</rd:TypeName></Field><Field Name="FechaVencimientoCAI"><DataField>FechaVencimientoCAI</DataField><rd:TypeName xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">System.DateTime</rd:TypeName></Field><Field Name="IdObra"><DataField>IdObra</DataField><rd:TypeName xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">System.Int32</rd:TypeName></Field><Field Name="NumeroCertificadoPercepcionIIBB"><DataField>NumeroCertificadoPercepcionIIBB</DataField><rd:TypeName xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">System.Int32</rd:TypeName></Field><Field Name="IdVentaEnCuotas"><DataField>IdVentaEnCuotas</DataField><rd:TypeName xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">System.Int32</rd:TypeName></Field><Field Name="NumeroCuota"><DataField>NumeroCuota</DataField><rd:TypeName xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">System.Int32</rd:TypeName></Field><Field Name="IdUsuarioIngreso"><DataField>IdUsuarioIngreso</DataField><rd:TypeName xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">System.Int32</rd:TypeName></Field><Field Name="FechaIngreso"><DataField>FechaIngreso</DataField><rd:TypeName xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">System.DateTime</rd:TypeName></Field><Field Name="AplicarEnCtaCte"><DataField>AplicarEnCtaCte</DataField><rd:TypeName xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">System.String</rd:TypeName></Field><Field Name="IdIBCondicion2"><DataField>IdIBCondicion2</DataField><rd:TypeName xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">System.Int32</rd:TypeName></Field><Field Name="OtrasPercepciones3"><DataField>OtrasPercepciones3</DataField><rd:TypeName xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">System.Decimal</rd:TypeName></Field><Field Name="OtrasPercepciones3Desc"><DataField>OtrasPercepciones3Desc</DataField><rd:TypeName xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">System.String</rd:TypeName></Field><Field Name="NoIncluirEnCubos"><DataField>NoIncluirEnCubos</DataField><rd:TypeName xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">System.String</rd:TypeName></Field><Field Name="PercepcionIVA"><DataField>PercepcionIVA</DataField><rd:TypeName xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">System.Decimal</rd:TypeName></Field><Field Name="PorcentajePercepcionIVA"><DataField>PorcentajePercepcionIVA</DataField><rd:TypeName xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">System.Decimal</rd:TypeName></Field><Field Name="IdNotaCreditoVenta_RecuperoGastos"><DataField>IdNotaCreditoVenta_RecuperoGastos</DataField><rd:TypeName xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">System.Int32</rd:TypeName></Field><Field Name="IdListaPrecios"><DataField>IdListaPrecios</DataField><rd:TypeName xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">System.Int32</rd:TypeName></Field><Field Name="IdIBCondicion3"><DataField>IdIBCondicion3</DataField><rd:TypeName xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">System.Int32</rd:TypeName></Field><Field Name="RetencionIBrutos3"><DataField>RetencionIBrutos3</DataField><rd:TypeName xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">System.Decimal</rd:TypeName></Field><Field Name="PorcentajeIBrutos3"><DataField>PorcentajeIBrutos3</DataField><rd:TypeName xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">System.Decimal</rd:TypeName></Field><Field Name="CAE"><DataField>CAE</DataField><rd:TypeName xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">System.String</rd:TypeName></Field><Field Name="RechazoCAE"><DataField>RechazoCAE</DataField><rd:TypeName xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">System.String</rd:TypeName></Field><Field Name="FechaVencimientoORechazoCAE"><DataField>FechaVencimientoORechazoCAE</DataField><rd:TypeName xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">System.DateTime</rd:TypeName></Field><Field Name="IdIdentificacionCAE"><DataField>IdIdentificacionCAE</DataField><rd:TypeName xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">System.Int32</rd:TypeName></Field><Field Name="Numero"><DataField>Numero</DataField><rd:TypeName xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">System.String</rd:TypeName></Field><Field Name="CodigoCliente"><DataField>CodigoCliente</DataField><rd:TypeName xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">System.Int32</rd:TypeName></Field><Field Name="Cliente"><DataField>Cliente</DataField><rd:TypeName xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">System.String</rd:TypeName></Field><Field Name="CondicionIVA"><DataField>CondicionIVA</DataField><rd:TypeName xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">System.String</rd:TypeName></Field><Field Name="CuitCliente"><DataField>CuitCliente</DataField><rd:TypeName xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">System.String</rd:TypeName></Field><Field Name="Moneda"><DataField>Moneda</DataField><rd:TypeName xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">System.String</rd:TypeName></Field><Field Name="Subtotal"><DataField>Subtotal</DataField><rd:TypeName xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">System.Decimal</rd:TypeName></Field><Field Name="NumeroObra"><DataField>NumeroObra</DataField><rd:TypeName xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">System.String</rd:TypeName></Field><Field Name="Iva"><DataField>Iva</DataField><rd:TypeName xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">System.Decimal</rd:TypeName></Field><Field Name="Obra"><DataField>Obra</DataField><rd:TypeName xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">System.String</rd:TypeName></Field><Field Name="IIBB"><DataField>IIBB</DataField><rd:TypeName xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">System.Decimal</rd:TypeName></Field><Field Name="OtrasPercepciones"><DataField>OtrasPercepciones</DataField><rd:TypeName xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">System.Decimal</rd:TypeName></Field></Fields></DataSet></DataSets><ReportParameters><ReportParameter Name="CadenaConexion"><DataType>String</DataType><Prompt>CadenaConexion</Prompt><Hidden>true</Hidden></ReportParameter><ReportParameter Name="Id"><DataType>Integer</DataType><Prompt>Id</Prompt><Hidden>true</Hidden></ReportParameter></ReportParameters><rd:ReportUnitType xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">Cm</rd:ReportUnitType><rd:ReportID xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">a8436a57-5c13-4441-bbd9-37ca8de36cd2</rd:ReportID></Report>
+<?xml version="1.0" encoding="utf-8"?>
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2008/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+  <Body>
+    <ReportItems>
+      <Textbox Name="textbox1">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>Nota de debito</Value>
+                <Style>
+                  <FontFamily>Tahoma</FontFamily>
+                  <FontSize>20pt</FontSize>
+                  <FontWeight>Bold</FontWeight>
+                  <Color>SteelBlue</Color>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style />
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>textbox1</rd:DefaultName>
+        <Top>0.03803cm</Top>
+        <Height>0.36in</Height>
+        <Width>6.16545in</Width>
+        <Style>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+      </Textbox>
+      <Textbox Name="Textbox10">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>Subtotal :</Value>
+                <Style>
+                  <FontSize>8pt</FontSize>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style />
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>Textbox3</rd:DefaultName>
+        <Top>3.08335in</Top>
+        <Left>4.61634in</Left>
+        <Height>0.15625in</Height>
+        <Width>1.125in</Width>
+        <ZIndex>1</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+      </Textbox>
+      <Textbox Name="Textbox11">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>Iva :</Value>
+                <Style>
+                  <FontSize>8pt</FontSize>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style />
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>Textbox3</rd:DefaultName>
+        <Top>3.25349in</Top>
+        <Left>4.61635in</Left>
+        <Height>0.15625in</Height>
+        <Width>1.125in</Width>
+        <ZIndex>2</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+      </Textbox>
+      <Textbox Name="Textbox12">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>Total :</Value>
+                <Style>
+                  <FontSize>8pt</FontSize>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style />
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>Textbox3</rd:DefaultName>
+        <Top>3.87849in</Top>
+        <Left>4.61634in</Left>
+        <Height>0.15625in</Height>
+        <Width>1.125in</Width>
+        <ZIndex>3</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+      </Textbox>
+      <Textbox Name="TipoComprobante9">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>=First(Fields!Subtotal.Value, "DataSet1")</Value>
+                <Style>
+                  <FontWeight>Bold</FontWeight>
+                  <Format>#,0.00;(#,0.00)</Format>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style />
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>TipoComprobante</rd:DefaultName>
+        <Top>3.09724in</Top>
+        <Left>5.89364in</Left>
+        <Height>0.15625in</Height>
+        <Width>1in</Width>
+        <ZIndex>4</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+      </Textbox>
+      <Textbox Name="TipoComprobante10">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>=First(Fields!Iva.Value, "DataSet1")</Value>
+                <Style>
+                  <FontWeight>Bold</FontWeight>
+                  <Format>#,0.00;(#,0.00)</Format>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style />
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>TipoComprobante</rd:DefaultName>
+        <Top>3.25349in</Top>
+        <Left>5.89364in</Left>
+        <Height>0.15625in</Height>
+        <Width>1in</Width>
+        <ZIndex>5</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+      </Textbox>
+      <Textbox Name="TipoComprobante11">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>=First(Fields!ImporteTotal.Value, "DataSet1")</Value>
+                <Style>
+                  <FontWeight>Bold</FontWeight>
+                  <Format>#,0.00;(#,0.00)</Format>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style />
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>TipoComprobante</rd:DefaultName>
+        <Top>3.87849in</Top>
+        <Left>5.89363in</Left>
+        <Height>0.15625in</Height>
+        <Width>1in</Width>
+        <ZIndex>6</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+          <BackgroundColor>Gainsboro</BackgroundColor>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+      </Textbox>
+      <Rectangle Name="Rectangle1">
+        <ReportItems>
+          <Textbox Name="TipoComprobante">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=First(Fields!Numero.Value, "DataSet1")</Value>
+                    <Style>
+                      <FontSize>9pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Center</TextAlign>
+                </Style>
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>TipoComprobante</rd:DefaultName>
+            <Left>1.11458in</Left>
+            <Height>0.15625in</Height>
+            <Width>1.36459in</Width>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <BackgroundColor>LightGrey</BackgroundColor>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox3">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Numero :</Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox3</rd:DefaultName>
+            <Height>0.15625in</Height>
+            <Width>1in</Width>
+            <ZIndex>1</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox4">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Cliente :</Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox3</rd:DefaultName>
+            <Top>0.27666in</Top>
+            <Height>0.15625in</Height>
+            <Width>1in</Width>
+            <ZIndex>2</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="TipoComprobante2">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=First(Fields!Cliente.Value, "DataSet1")</Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>TipoComprobante</rd:DefaultName>
+            <Top>0.27666in</Top>
+            <Left>1.11458in</Left>
+            <Height>0.15625in</Height>
+            <Width>3.19396in</Width>
+            <ZIndex>3</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <BackgroundColor>LightGrey</BackgroundColor>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="TipoComprobante4">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=First(Fields!FechaNotaDebito.Value, "DataSet1")</Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                      <Format>dd/MM/yyyy</Format>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Left</TextAlign>
+                </Style>
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>TipoComprobante</rd:DefaultName>
+            <Left>5.57242in</Left>
+            <Height>0.15625in</Height>
+            <Width>1.32243in</Width>
+            <ZIndex>4</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox6">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Fecha debito :</Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox3</rd:DefaultName>
+            <Left>4.37798in</Left>
+            <Height>0.15625in</Height>
+            <Width>1.125in</Width>
+            <ZIndex>5</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox8">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Condicion IVA:</Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox3</rd:DefaultName>
+            <Top>0.27666in</Top>
+            <Left>4.37798in</Left>
+            <Height>0.15625in</Height>
+            <Width>0.82292in</Width>
+            <ZIndex>6</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="TipoComprobante7">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=First(Fields!CondicionIVA.Value, "DataSet1")</Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Left</TextAlign>
+                </Style>
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>TipoComprobante</rd:DefaultName>
+            <Top>0.27666in</Top>
+            <Left>5.24257in</Left>
+            <Height>0.15625in</Height>
+            <Width>1.62451in</Width>
+            <ZIndex>7</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox9">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Obra :</Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox3</rd:DefaultName>
+            <Top>0.55208in</Top>
+            <Height>0.15625in</Height>
+            <Width>1in</Width>
+            <ZIndex>8</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="TipoComprobante8">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=First(Fields!Obra.Value, "DataSet1")</Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>TipoComprobante</rd:DefaultName>
+            <Top>0.55208in</Top>
+            <Left>1.11458in</Left>
+            <Height>0.15625in</Height>
+            <Width>3.19396in</Width>
+            <ZIndex>9</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox13">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Moneda :</Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox3</rd:DefaultName>
+            <Top>0.55208in</Top>
+            <Left>11.12007cm</Left>
+            <Height>0.15625in</Height>
+            <Width>1.125in</Width>
+            <ZIndex>10</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="TipoComprobante12">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=First(Fields!Moneda.Value, "DataSet1")</Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Left</TextAlign>
+                </Style>
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>TipoComprobante</rd:DefaultName>
+            <Top>0.55208in</Top>
+            <Left>5.57242in</Left>
+            <Height>0.15625in</Height>
+            <Width>0.63542in</Width>
+            <ZIndex>11</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox14">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Cotizacion moneda :</Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox3</rd:DefaultName>
+            <Top>0.82292in</Top>
+            <Left>4.37798in</Left>
+            <Height>0.15625in</Height>
+            <Width>1.125in</Width>
+            <ZIndex>12</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="TipoComprobante13">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=First(Fields!CotizacionMoneda.Value, "DataSet1")</Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Left</TextAlign>
+                </Style>
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>TipoComprobante</rd:DefaultName>
+            <Top>0.84375in</Top>
+            <Left>5.57242in</Left>
+            <Height>0.15625in</Height>
+            <Width>0.63542in</Width>
+            <ZIndex>13</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox15">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Cotizacion u$s :</Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox3</rd:DefaultName>
+            <Top>1.06944in</Top>
+            <Left>4.37798in</Left>
+            <Height>0.15625in</Height>
+            <Width>1.125in</Width>
+            <ZIndex>14</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="TipoComprobante14">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=First(Fields!CotizacionDolar.Value, "DataSet1")</Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Left</TextAlign>
+                </Style>
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>TipoComprobante</rd:DefaultName>
+            <Top>1.06944in</Top>
+            <Left>5.55854in</Left>
+            <Height>0.15625in</Height>
+            <Width>0.64931in</Width>
+            <ZIndex>15</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox17">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Observaciones :</Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox3</rd:DefaultName>
+            <Top>0.84375in</Top>
+            <Height>0.15625in</Height>
+            <Width>1in</Width>
+            <ZIndex>16</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="TipoComprobante15">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=First(Fields!Observaciones.Value, "DataSet1")</Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Left</TextAlign>
+                </Style>
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>TipoComprobante</rd:DefaultName>
+            <Top>0.82292in</Top>
+            <Left>1.12847in</Left>
+            <Height>0.40278in</Height>
+            <Width>3.19396in</Width>
+            <ZIndex>17</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+        </ReportItems>
+        <KeepTogether>true</KeepTogether>
+        <Top>0.46624in</Top>
+        <Left>0.13419in</Left>
+        <Height>1.31944in</Height>
+        <Width>6.90626in</Width>
+        <ZIndex>7</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+        </Style>
+      </Rectangle>
+      <Textbox Name="Textbox18">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>Percepcion IIBB :</Value>
+                <Style>
+                  <FontSize>8pt</FontSize>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style />
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>Textbox3</rd:DefaultName>
+        <Top>3.40974in</Top>
+        <Left>4.61634in</Left>
+        <Height>0.15625in</Height>
+        <Width>1.125in</Width>
+        <ZIndex>8</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+      </Textbox>
+      <Textbox Name="TipoComprobante17">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>=First(Fields!IIBB.Value, "DataSet1")</Value>
+                <Style>
+                  <FontWeight>Bold</FontWeight>
+                  <Format>#,0.00;(#,0.00)</Format>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style />
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>TipoComprobante</rd:DefaultName>
+        <Top>3.40974in</Top>
+        <Left>5.89363in</Left>
+        <Height>0.15625in</Height>
+        <Width>1in</Width>
+        <ZIndex>9</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+      </Textbox>
+      <Textbox Name="TipoComprobante18">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>=First(Fields!PercepcionIVA.Value, "DataSet1")</Value>
+                <Style>
+                  <FontWeight>Bold</FontWeight>
+                  <Format>#,0.00;(#,0.00)</Format>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style />
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>TipoComprobante</rd:DefaultName>
+        <Top>3.56599in</Top>
+        <Left>5.89363in</Left>
+        <Height>0.15625in</Height>
+        <Width>1in</Width>
+        <ZIndex>10</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+      </Textbox>
+      <Textbox Name="Textbox19">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>Percepcion iva :</Value>
+                <Style>
+                  <FontSize>8pt</FontSize>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style />
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>Textbox3</rd:DefaultName>
+        <Top>3.56599in</Top>
+        <Left>4.61634in</Left>
+        <Height>0.15625in</Height>
+        <Width>1.125in</Width>
+        <ZIndex>11</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+      </Textbox>
+      <Textbox Name="TipoComprobante19">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>=First(Fields!OtrasPercepciones.Value, "DataSet1")</Value>
+                <Style>
+                  <FontWeight>Bold</FontWeight>
+                  <Format>#,0.00;(#,0.00)</Format>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style />
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>TipoComprobante</rd:DefaultName>
+        <Top>3.72224in</Top>
+        <Left>5.89363in</Left>
+        <Height>0.15625in</Height>
+        <Width>1in</Width>
+        <ZIndex>12</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+      </Textbox>
+      <Textbox Name="Textbox20">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>Otras percepciones :</Value>
+                <Style>
+                  <FontSize>8pt</FontSize>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style />
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>Textbox3</rd:DefaultName>
+        <Top>3.72224in</Top>
+        <Left>4.61634in</Left>
+        <Height>0.15625in</Height>
+        <Width>1.125in</Width>
+        <ZIndex>13</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+      </Textbox>
+      <Subreport Name="Subreport2">
+        <ReportName>Detalle Nota Debito</ReportName>
+        <Parameters>
+          <Parameter Name="IdNotaDebito">
+            <Value>=First(Fields!IdNotaDebito.Value, "DataSet1")</Value>
+          </Parameter>
+          <Parameter Name="CadenaConexion">
+            <Value>=Parameters!CadenaConexion.Value</Value>
+          </Parameter>
+        </Parameters>
+        <Top>4.712cm</Top>
+        <Left>0.34083cm</Left>
+        <Height>2.94333cm</Height>
+        <Width>17.54191cm</Width>
+        <ZIndex>14</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+        </Style>
+      </Subreport>
+      <Textbox Name="Textbox21">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>Data Source=Mariano-PC\MSSQLSERVER2;Initial catalog=Autotrol;User ID=sa; Password=ok;</Value>
+                <Style />
+              </TextRun>
+            </TextRuns>
+            <Style />
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>Textbox6</rd:DefaultName>
+        <Top>8.28387cm</Top>
+        <Left>0.56605cm</Left>
+        <Height>1.96438cm</Height>
+        <Width>4.21979cm</Width>
+        <ZIndex>15</ZIndex>
+        <Visibility>
+          <Hidden>true</Hidden>
+        </Visibility>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+      </Textbox>
+    </ReportItems>
+    <Height>4.16667in</Height>
+    <Style />
+  </Body>
+  <Width>7.09513in</Width>
+  <Page>
+    <PageHeight>29.7cm</PageHeight>
+    <PageWidth>21cm</PageWidth>
+    <LeftMargin>2cm</LeftMargin>
+    <RightMargin>2cm</RightMargin>
+    <TopMargin>2cm</TopMargin>
+    <BottomMargin>2cm</BottomMargin>
+    <ColumnSpacing>0.13cm</ColumnSpacing>
+    <Style />
+  </Page>
+  <AutoRefresh>0</AutoRefresh>
+  <DataSources>
+    <DataSource Name="DataSource1">
+      <ConnectionProperties>
+        <DataProvider>SQL</DataProvider>
+        <ConnectString>=Parameters!CadenaConexion.Value</ConnectString>
+        <IntegratedSecurity>true</IntegratedSecurity>
+      </ConnectionProperties>
+      <rd:SecurityType>Integrated</rd:SecurityType>
+      <rd:DataSourceID>d137d2c5-8196-485e-a132-afa810d89e83</rd:DataSourceID>
+    </DataSource>
+  </DataSources>
+  <DataSets>
+    <DataSet Name="DataSet1">
+      <Query>
+        <DataSourceName>DataSource1</DataSourceName>
+        <QueryParameters>
+          <QueryParameter Name="@IdNotaDebito">
+            <Value>=Parameters!Id.Value</Value>
+          </QueryParameter>
+        </QueryParameters>
+        <CommandType>StoredProcedure</CommandType>
+        <CommandText>wNotasDebito_TX_PorIdConDatos</CommandText>
+      </Query>
+      <Fields>
+        <Field Name="IdNotaDebito">
+          <DataField>IdNotaDebito</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="NumeroNotaDebito">
+          <DataField>NumeroNotaDebito</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="TipoABC">
+          <DataField>TipoABC</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="PuntoVenta">
+          <DataField>PuntoVenta</DataField>
+          <rd:TypeName>System.Int16</rd:TypeName>
+        </Field>
+        <Field Name="IdCliente">
+          <DataField>IdCliente</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="FechaNotaDebito">
+          <DataField>FechaNotaDebito</DataField>
+          <rd:TypeName>System.DateTime</rd:TypeName>
+        </Field>
+        <Field Name="IdVendedor">
+          <DataField>IdVendedor</DataField>
+          <rd:TypeName>System.Byte</rd:TypeName>
+        </Field>
+        <Field Name="ImporteTotal">
+          <DataField>ImporteTotal</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="ImporteIva1">
+          <DataField>ImporteIva1</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="ImporteIva2">
+          <DataField>ImporteIva2</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="RetencionIBrutos1">
+          <DataField>RetencionIBrutos1</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="PorcentajeIBrutos1">
+          <DataField>PorcentajeIBrutos1</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="RetencionIBrutos2">
+          <DataField>RetencionIBrutos2</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="PorcentajeIBrutos2">
+          <DataField>PorcentajeIBrutos2</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="IdCodigoIva">
+          <DataField>IdCodigoIva</DataField>
+          <rd:TypeName>System.Byte</rd:TypeName>
+        </Field>
+        <Field Name="PorcentajeIva1">
+          <DataField>PorcentajeIva1</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="PorcentajeIva2">
+          <DataField>PorcentajeIva2</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="Observaciones">
+          <DataField>Observaciones</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="ImporteIvaIncluido">
+          <DataField>ImporteIvaIncluido</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="CotizacionDolar">
+          <DataField>CotizacionDolar</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="CtaCte">
+          <DataField>CtaCte</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="IdMoneda">
+          <DataField>IdMoneda</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="CotizacionMoneda">
+          <DataField>CotizacionMoneda</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="IVANoDiscriminado">
+          <DataField>IVANoDiscriminado</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="ConvenioMultilateral">
+          <DataField>ConvenioMultilateral</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="OtrasPercepciones1">
+          <DataField>OtrasPercepciones1</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="OtrasPercepciones1Desc">
+          <DataField>OtrasPercepciones1Desc</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="OtrasPercepciones2">
+          <DataField>OtrasPercepciones2</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="OtrasPercepciones2Desc">
+          <DataField>OtrasPercepciones2Desc</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="IdProvinciaDestino">
+          <DataField>IdProvinciaDestino</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="IdIBCondicion">
+          <DataField>IdIBCondicion</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="IdPuntoVenta">
+          <DataField>IdPuntoVenta</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="Anulada">
+          <DataField>Anulada</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="IdUsuarioAnulacion">
+          <DataField>IdUsuarioAnulacion</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="FechaAnulacion">
+          <DataField>FechaAnulacion</DataField>
+          <rd:TypeName>System.DateTime</rd:TypeName>
+        </Field>
+        <Field Name="NumeroCAI">
+          <DataField>NumeroCAI</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="FechaVencimientoCAI">
+          <DataField>FechaVencimientoCAI</DataField>
+          <rd:TypeName>System.DateTime</rd:TypeName>
+        </Field>
+        <Field Name="IdObra">
+          <DataField>IdObra</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="NumeroCertificadoPercepcionIIBB">
+          <DataField>NumeroCertificadoPercepcionIIBB</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="IdVentaEnCuotas">
+          <DataField>IdVentaEnCuotas</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="NumeroCuota">
+          <DataField>NumeroCuota</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="IdUsuarioIngreso">
+          <DataField>IdUsuarioIngreso</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="FechaIngreso">
+          <DataField>FechaIngreso</DataField>
+          <rd:TypeName>System.DateTime</rd:TypeName>
+        </Field>
+        <Field Name="AplicarEnCtaCte">
+          <DataField>AplicarEnCtaCte</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="IdIBCondicion2">
+          <DataField>IdIBCondicion2</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="OtrasPercepciones3">
+          <DataField>OtrasPercepciones3</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="OtrasPercepciones3Desc">
+          <DataField>OtrasPercepciones3Desc</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="NoIncluirEnCubos">
+          <DataField>NoIncluirEnCubos</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="PercepcionIVA">
+          <DataField>PercepcionIVA</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="PorcentajePercepcionIVA">
+          <DataField>PorcentajePercepcionIVA</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="IdNotaCreditoVenta_RecuperoGastos">
+          <DataField>IdNotaCreditoVenta_RecuperoGastos</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="IdListaPrecios">
+          <DataField>IdListaPrecios</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="IdIBCondicion3">
+          <DataField>IdIBCondicion3</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="RetencionIBrutos3">
+          <DataField>RetencionIBrutos3</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="PorcentajeIBrutos3">
+          <DataField>PorcentajeIBrutos3</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="CAE">
+          <DataField>CAE</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="RechazoCAE">
+          <DataField>RechazoCAE</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="FechaVencimientoORechazoCAE">
+          <DataField>FechaVencimientoORechazoCAE</DataField>
+          <rd:TypeName>System.DateTime</rd:TypeName>
+        </Field>
+        <Field Name="IdIdentificacionCAE">
+          <DataField>IdIdentificacionCAE</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="Numero">
+          <DataField>Numero</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="CodigoCliente">
+          <DataField>CodigoCliente</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="Cliente">
+          <DataField>Cliente</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="CondicionIVA">
+          <DataField>CondicionIVA</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="CuitCliente">
+          <DataField>CuitCliente</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Moneda">
+          <DataField>Moneda</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Subtotal">
+          <DataField>Subtotal</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="NumeroObra">
+          <DataField>NumeroObra</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Iva">
+          <DataField>Iva</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="Obra">
+          <DataField>Obra</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="IIBB">
+          <DataField>IIBB</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="OtrasPercepciones">
+          <DataField>OtrasPercepciones</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+      </Fields>
+    </DataSet>
+  </DataSets>
+  <ReportParameters>
+    <ReportParameter Name="CadenaConexion">
+      <DataType>String</DataType>
+      <Prompt>CadenaConexion</Prompt>
+      <Hidden>true</Hidden>
+    </ReportParameter>
+    <ReportParameter Name="Id">
+      <DataType>Integer</DataType>
+      <Prompt>Id</Prompt>
+      <Hidden>true</Hidden>
+    </ReportParameter>
+  </ReportParameters>
+  <rd:ReportUnitType>Cm</rd:ReportUnitType>
+  <rd:ReportID>a8436a57-5c13-4441-bbd9-37ca8de36cd2</rd:ReportID>
+</Report>
