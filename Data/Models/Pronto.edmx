@@ -693,8 +693,8 @@
           <Property Name="Campo" Type="varchar" MaxLength="40" />
           <Property Name="Valor" Type="numeric" Precision="18" Scale="2" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'Pronto.dbo.CartasDePorteHistorico' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Pronto.dbo.CartasDePorteHistorico' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="CartasDePorteHistorico">
           <Key>
             <PropertyRef Name="IdCartaDePorte" />
@@ -851,8 +851,8 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.CartasDePorteHistorico' no tiene 
           <Property Name="Descripcion" Type="varchar" MaxLength="60" Nullable="false" />
           <Property Name="IdCliente" Type="int" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'Pronto.dbo.CartasPorteMovimientos' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Pronto.dbo.CartasPorteMovimientos' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="CartasPorteMovimientos">
           <Key>
             <PropertyRef Name="IdCDPMovimiento" />
@@ -3197,8 +3197,8 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.CartasPorteMovimientos' no tiene 
           <Property Name="FechaInicio" Type="datetime" />
           <Property Name="FechaFinalizacion" Type="datetime" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Pronto.dbo.EjerciciosPeriodos' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="EjerciciosPeriodos">
           <Key>
             <PropertyRef Name="IdEjercicioPeriodo" />
@@ -5896,8 +5896,8 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
           <Property Name="IdProveedor" Type="int" />
           <Property Name="Codigo" Type="int" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'Pronto.dbo.Tree' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Pronto.dbo.Tree' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="Tree">
           <Key>
             <PropertyRef Name="IdItem" />
@@ -6109,8 +6109,8 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.Tree' no tiene definida ninguna c
           <Property Name="EmiteComision" Type="varchar" MaxLength="2" />
           <Property Name="IdsVendedoresAsignados" Type="varchar" MaxLength="1000" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'Pronto.dbo.wGrillaPersistencia' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Pronto.dbo.wGrillaPersistencia' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="wGrillaPersistencia">
           <Key>
             <PropertyRef Name="IdRenglon" />
@@ -9821,6 +9821,8 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.wGrillaPersistencia' no tiene def
                 <Property Name="DestinoCodigoONCAA" Type="varchar" MaxLength="20" Nullable="false" />
                 <Property Name="DestinoCUIT" Type="varchar" MaxLength="13" Nullable="false" />
                 <Property Name="DestinoLocalidadAFIP" Type="int" Nullable="false" />
+                <Property Name="DestinoLocalidadCodigoONCAA" Type="varchar" MaxLength="20" Nullable="false" />
+                <Property Name="DestinoLocalidadDesc" Type="varchar" MaxLength="50" Nullable="false" />
                 <Property Name="DestinoProvinciaDesc" Type="varchar" MaxLength="50" Nullable="false" />
                 <Property Name="EstablecimientoDesc" Type="varchar" MaxLength="202" Nullable="false" />
                 <Property Name="EstablecimientoCodigo" Type="varchar" MaxLength="50" />
@@ -25009,6 +25011,9 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.wGrillaPersistencia' no tiene def
           <Property Type="DateTime" Name="FechaActualizacionAutomatica" Nullable="true" Precision="23" />
           <Property Type="DateTime" Name="FechaAutorizacion" Nullable="true" Precision="23" />
           <Property Type="String" Name="ObservacionesSituacion" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="SituacionLog" Nullable="true" MaxLength="300" />
+          <Property Type="String" Name="DestinoLocalidadCodigoONCAA" Nullable="false" MaxLength="20" />
+          <Property Type="String" Name="DestinoLocalidadDesc" Nullable="false" MaxLength="50" />
         </ComplexType>
         <EntityType Name="NovedadesUsuario">
           <Key>
@@ -32442,6 +32447,9 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.wGrillaPersistencia' no tiene def
                 <ScalarProperty Name="FechaActualizacionAutomatica" ColumnName="FechaActualizacionAutomatica" />
                 <ScalarProperty Name="FechaAutorizacion" ColumnName="FechaAutorizacion" />
                 <ScalarProperty Name="ObservacionesSituacion" ColumnName="ObservacionesSituacion" />
+                <ScalarProperty Name="SituacionLog" ColumnName="SituacionLog" />
+                <ScalarProperty Name="DestinoLocalidadCodigoONCAA" ColumnName="DestinoLocalidadCodigoONCAA" />
+                <ScalarProperty Name="DestinoLocalidadDesc" ColumnName="DestinoLocalidadDesc" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
