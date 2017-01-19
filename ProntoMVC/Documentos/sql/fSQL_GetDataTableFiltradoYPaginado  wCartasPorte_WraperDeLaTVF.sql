@@ -185,6 +185,8 @@ isnull(LOCDES.CodigoPostal,'')  AS  DestinoCodigoPostal,
 isnull(LOCDES.codigoONCAA,'') AS  DestinoCodigoONCAA,
 isnull(LOCDES.CUIT,'') 	 AS  DestinoCUIT,
 isnull(LOCDES2.CodigoAFIP,'') 	 AS  DestinoLocalidadAFIP,
+isnull(LOCDES2.CodigoONCAA,'') 	 AS  DestinoLocalidadCodigoONCAA,
+isnull(LOCDES2.Nombre,'') 	 AS  DestinoLocalidadDesc,
 isnull(PROVDEST.Nombre,'') AS DestinoProvinciaDesc,  
 
 
@@ -235,17 +237,19 @@ LEFT OUTER JOIN Articulos ON CDP.IdArticulo = Articulos.IdArticulo
 LEFT OUTER JOIN Calidades ON CDP.CalidadDe = Calidades.IdCalidad        
 LEFT OUTER JOIN Transportistas ON CDP.IdTransportista = Transportistas.IdTransportista 			
 LEFT OUTER JOIN Choferes ON CDP.IdChofer = Choferes.IdChofer            
+
 LEFT OUTER JOIN Localidades LOCORI ON CDP.Procedencia = LOCORI.IdLocalidad          
 LEFT OUTER JOIN Provincias PROVORI ON LOCORI.IdProvincia = PROVORI.IdProvincia           
 
 LEFT OUTER JOIN WilliamsDestinos LOCDES ON CDP.Destino = LOCDES.IdWilliamsDestino     
 LEFT OUTER JOIN Localidades LOCDES2 ON LOCDES.IdLocalidad = LOCDES2.IdLocalidad          
+LEFT OUTER JOIN Provincias PROVDEST ON LOCDES2.IdProvincia = PROVDEST.IdProvincia  
 
 LEFT OUTER JOIN CDPEstablecimientos ESTAB ON CDP.IdEstablecimiento = ESTAB.IdEstablecimiento        
+
 LEFT OUTER JOIN Facturas FAC ON CDP.idFacturaImputada = FAC.IdFactura            
 LEFT OUTER JOIN Clientes CLIFAC ON CLIFAC.IdCliente = FAC.IdCliente             
 LEFT OUTER JOIN Partidos PARTORI ON LOCORI.IdPartido = PARTORI.IdPartido          
-LEFT OUTER JOIN Provincias PROVDEST ON LOCDES.IdProvincia = PROVDEST.IdProvincia  
 LEFT OUTER JOIN Empleados E1 ON CDP.IdUsuarioIngreso = E1.IdEmpleado  
 			
 

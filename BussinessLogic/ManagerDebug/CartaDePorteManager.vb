@@ -14954,7 +14954,8 @@ Public Class CartaDePorteManager
 
         Try
 
-            Dim dbcartas = (From c In db.fSQL_GetDataTableFiltradoYPaginado(Nothing, limitedecartas, Nothing, Nothing, idVendedor,
+            Dim dbcartas = (From c In db.fSQL_GetDataTableFiltradoYPaginado(Nothing, limitedecartas, enumCDPestado.DescargasMasFacturadas,
+                                                                            Nothing, idVendedor,
                                         idCorredor, idDestinatario, idIntermediario, idRComercial,
                                         idArticulo, idProcedencia, idDestino, FiltroANDOR.FiltroOR, "Ambos",
                                         fechadesde, fechahasta, 0,
@@ -15177,14 +15178,19 @@ Public Class CartaDePorteManager
                     '                        inconsistencias entre los códigos de destino y las descripciones del campo localidaddestino. Puede ser que esté mal la descripción o puede estar mal el código.
 
 
+                    'puerto: Nombre Destino
+                    'CodOnccaPuerto: Codigo Oncca Destino
+                    'Localidad Destino: Localidad relacionada al Destino
+                    'codonccalocalidadpuerto: codigo oncca de la localidad relacionada al destino
 
 
-                    cp.puerto = If(dbc.EstablecimientoNombre, "")
-                    cp.codonccapuerto = Val(dbc.EstablecimientoCodigo)   'el establecimiento tiene un codigo. es el ONCCA?
-
-                    cp.localidaddestino = If(dbc.DestinoDesc, "")
-                    cp.codonccalocalidadpuerto = Val(dbc.DestinoCodigoONCAA)
+                    'cuando dicen 'puerto' se refieren al destino tambien
+                    cp.puerto = If(dbc.DestinoDesc, "")
+                    cp.codonccapuerto = Val(dbc.DestinoCodigoONCAA)
+                    cp.localidaddestino = dbc.DestinoLocalidadDesc
+                    cp.codonccalocalidadpuerto = dbc.DestinoLocalidadCodigoONCAA
                     cp.codonccaprovinciapuerto = CodigoProvincia(dbc.DestinoProvinciaDesc)
+
 
                     cp.procedencia = If(dbc.ProcedenciaDesc, "")
                     cp.codonccalocalproc = Val(dbc.ProcedenciaCodigoONCAA)
