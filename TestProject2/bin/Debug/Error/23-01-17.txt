@@ -1,0 +1,831 @@
+
+Log Entry : 
+01/23/2017 17:39:21
+Error in: . Error Message:Arranca motor
+__________________________
+
+Log Entry : 
+01/23/2017 17:39:35
+Error in: . Error Message:Reconoció la licencia
+__________________________
+
+Log Entry : 
+01/23/2017 17:39:49
+Error in: . Error Message:reconocer imagen C:\Users\Administrador\Documents\bdl\pronto\prontoweb\Temp\Lote 23ene173853 Mariano PV1\CPTKCPTK.tif_pag0_unido.tif
+__________________________
+
+Log Entry : 
+01/23/2017 17:40:05
+Error in: . Error Message:Procesó carta: titular ZORIAN HNOS SRL
+__________________________
+
+Log Entry : 
+01/23/2017 17:40:05
+Error in: . Error Message:Detectó bien el numero con el Flexicapture: 550166736
+__________________________
+
+Log Entry : 
+01/23/2017 17:40:37
+Error in: . Error Message:Llamo a IsValid y Save
+__________________________
+
+Log Entry : 
+01/23/2017 17:40:48
+Error in: . Error Message:Llamo a GrabarImagen
+__________________________
+
+Log Entry : 
+01/23/2017 17:40:48
+Error in: . Error Message:GrabarImagen 1
+__________________________
+
+Log Entry : 
+01/23/2017 17:40:48
+Error in: . Error Message:GrabarImagen 2
+__________________________
+
+Log Entry : 
+01/23/2017 17:40:51
+Error in: . Error Message:grabo en base
+__________________________
+
+Log Entry : 
+01/23/2017 17:40:51
+Error in: . Error Message:grabado
+__________________________
+
+Log Entry : 
+01/23/2017 17:40:51
+Error in: . Error Message:Archivo C:\Users\Administrador\Documents\bdl\pronto\prontoweb\Temp\Lote 23ene173853 Mariano PV1\ExportToXLS_504455.tif numcarta 550166736
+__________________________
+
+Log Entry : 
+01/23/2017 17:41:02
+Error in: . Error Message:reconocer imagen C:\Users\Administrador\Documents\bdl\pronto\prontoweb\Temp\Lote 23ene173853 Mariano PV1\CPTKCPTK.tif_pag2_unido.tif
+__________________________
+
+Log Entry : 
+01/23/2017 17:41:47
+Error in: . Error Message:Procesó carta: titular 
+__________________________
+
+Log Entry : 
+01/23/2017 17:42:20
+Error in: . Error Message:System.FormatException
+No se puede reconocer la cadena como valor DateTime válido.
+   en System.DateTimeParse.Parse(String s, DateTimeFormatInfo dtfi, DateTimeStyles styles)
+   en System.Convert.ToDateTime(String value)
+   en ProntoFlexicapture.ClassFlexicapture.ProcesaCarta(IDocument document, String SC, String archivoOriginal, String DirApp) en c:\Users\Administrador\Documents\bdl\pronto\InterfazFlexicapture\prontoflexicapture.cs:línea 2019
+mscorlib
+__________________________
+
+Log Entry : 
+01/23/2017 17:42:20
+Error in: . Error Message:Llamo a IsValid y Save
+__________________________
+
+Log Entry : 
+01/23/2017 17:42:32
+Error in: . Error Message:System.Data.Entity.Infrastructure.DbUpdateException
+An error occurred while updating the entries. See the inner exception for details.
+   en System.Data.Entity.Internal.InternalContext.SaveChanges()
+   en System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   en System.Data.Entity.DbContext.SaveChanges()
+   en ProntoFlexicapture.ClassFlexicapture.MarcarCartaComoProcesada(CartaDePorte& cdp, String usu, String SC) en c:\Users\Administrador\Documents\bdl\pronto\InterfazFlexicapture\prontoflexicapture.cs:línea 1116
+   en ProntoFlexicapture.ClassFlexicapture.ProcesaCarta(IDocument document, String SC, String archivoOriginal, String DirApp) en c:\Users\Administrador\Documents\bdl\pronto\InterfazFlexicapture\prontoflexicapture.cs:línea 2098
+   en ProntoFlexicapture.ClassFlexicapture.ProcesarCartasBatchConFlexicapture(IEngine& engine, IFlexiCaptureProcessor& processor, String plantilla, List`1 imagenes, String SC, String DirApp, Boolean bProcesar, String& sError) en c:\Users\Administrador\Documents\bdl\pronto\InterfazFlexicapture\prontoflexicapture.cs:línea 531
+EntityFramework
+__________________________
+
+Log Entry : 
+01/23/2017 17:42:32
+Error in: . Error Message:Termina motor
+__________________________
+
+Log Entry : 
+01/23/2017 17:42:33
+Error in: . Error Message:Proceso cerrado
+__________________________
+
+Log Entry : 
+01/23/2017 17:47:42
+Error in: . Error Message:Arranca motor
+__________________________
+
+Log Entry : 
+01/23/2017 17:47:43
+Error in: . Error Message:Reconoció la licencia
+__________________________
+
+Log Entry : 
+01/23/2017 17:47:52
+Error in: . Error Message:reconocer imagen C:\Users\Administrador\Documents\bdl\pronto\prontoweb\Temp\Lote 23ene174736 Mariano PV1\CPTKCPTK.tif_pag0_unido.tif
+__________________________
+
+Log Entry : 
+01/23/2017 17:48:05
+Error in: . Error Message:Procesó carta: titular ZORIAN HNOS SRL
+__________________________
+
+Log Entry : 
+01/23/2017 17:48:05
+Error in: . Error Message:Detectó bien el numero con el Flexicapture: 550166736
+__________________________
+
+Log Entry : 
+01/23/2017 17:48:18
+Error in: . Error Message:Llamo a IsValid y Save
+__________________________
+
+Log Entry : 
+01/23/2017 17:48:28
+Error in: . Error Message:Llamo a GrabarImagen
+__________________________
+
+Log Entry : 
+01/23/2017 17:48:28
+Error in: . Error Message:GrabarImagen 1
+__________________________
+
+Log Entry : 
+01/23/2017 17:48:29
+Error in: . Error Message:GrabarImagen 2
+__________________________
+
+Log Entry : 
+01/23/2017 17:48:31
+Error in: . Error Message:grabo en base
+__________________________
+
+Log Entry : 
+01/23/2017 17:48:31
+Error in: . Error Message:grabado
+__________________________
+
+Log Entry : 
+01/23/2017 17:48:31
+Error in: . Error Message:Archivo C:\Users\Administrador\Documents\bdl\pronto\prontoweb\Temp\Lote 23ene174736 Mariano PV1\ExportToXLS_865927.tif numcarta 550166736
+__________________________
+
+Log Entry : 
+01/23/2017 17:48:33
+Error in: . Error Message:reconocer imagen C:\Users\Administrador\Documents\bdl\pronto\prontoweb\Temp\Lote 23ene174736 Mariano PV1\CPTKCPTK.tif_pag2_unido.tif
+__________________________
+
+Log Entry : 
+01/23/2017 17:48:47
+Error in: . Error Message:Procesó carta: titular 
+__________________________
+
+Log Entry : 
+01/23/2017 17:48:48
+Error in: . Error Message:System.FormatException
+No se puede reconocer la cadena como valor DateTime válido.
+   en System.DateTimeParse.Parse(String s, DateTimeFormatInfo dtfi, DateTimeStyles styles)
+   en System.Convert.ToDateTime(String value)
+   en ProntoFlexicapture.ClassFlexicapture.ProcesaCarta(IDocument document, String SC, String archivoOriginal, String DirApp) en c:\Users\Administrador\Documents\bdl\pronto\InterfazFlexicapture\prontoflexicapture.cs:línea 2019
+mscorlib
+__________________________
+
+Log Entry : 
+01/23/2017 17:48:48
+Error in: . Error Message:Llamo a IsValid y Save
+__________________________
+
+Log Entry : 
+01/23/2017 17:53:02
+Error in: . Error Message:System.Data.Entity.Infrastructure.DbUpdateException
+An error occurred while updating the entries. See the inner exception for details.
+   en System.Data.Entity.Internal.InternalContext.SaveChanges()
+   en System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   en System.Data.Entity.DbContext.SaveChanges()
+   en ProntoFlexicapture.ClassFlexicapture.MarcarCartaComoProcesada(CartaDePorte& cdp, String usu, String SC) en c:\Users\Administrador\Documents\bdl\pronto\InterfazFlexicapture\prontoflexicapture.cs:línea 1116
+   en ProntoFlexicapture.ClassFlexicapture.ProcesaCarta(IDocument document, String SC, String archivoOriginal, String DirApp) en c:\Users\Administrador\Documents\bdl\pronto\InterfazFlexicapture\prontoflexicapture.cs:línea 2098
+   en ProntoFlexicapture.ClassFlexicapture.ProcesarCartasBatchConFlexicapture(IEngine& engine, IFlexiCaptureProcessor& processor, String plantilla, List`1 imagenes, String SC, String DirApp, Boolean bProcesar, String& sError) en c:\Users\Administrador\Documents\bdl\pronto\InterfazFlexicapture\prontoflexicapture.cs:línea 531
+EntityFramework
+__________________________
+
+Log Entry : 
+01/23/2017 17:53:04
+Error in: . Error Message:System.ArgumentOutOfRangeException: El índice estaba fuera del intervalo. Debe ser un valor no negativo e inferior al tamaño de la colección.
+Nombre del parámetro: index
+   en System.ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument argument, ExceptionResource resource)
+   en System.Collections.Generic.List`1.get_Item(Int32 index)
+   en ProntoFlexicapture.ClassFlexicapture.ProcesarCartasBatchConFlexicapture(IEngine& engine, IFlexiCaptureProcessor& processor, String plantilla, List`1 imagenes, String SC, String DirApp, Boolean bProcesar, String& sError) en c:\Users\Administrador\Documents\bdl\pronto\InterfazFlexicapture\prontoflexicapture.cs:línea 399
+   en ProntoFlexicapture.ClassFlexicapture.ActivarMotor(String SC, List`1 archivos, String& sError, String DirApp, String ConfigurationManager_UsarFlexicapture) en c:\Users\Administrador\Documents\bdl\pronto\InterfazFlexicapture\prontoflexicapture.cs:línea 2369
+__________________________
+
+Log Entry : 
+01/23/2017 17:53:07
+Error in: . Error Message:System.ArgumentException
+El parámetro no es válido.
+   en System.Drawing.Bitmap..ctor(String filename)
+   en CartaDePorteManager.ReadBarcode1D_ZXing(String fileName, Int32 page) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 12459
+System.Drawing
+__________________________
+
+Log Entry : 
+01/23/2017 17:53:08
+Error in: . Error Message:System.ArgumentException
+Wrong filename passed.
+   en spr᠘..ctor(String A_0, sprᜟ A_1)
+   en Spire.Barcode.BarcodeScanner.Scan(String fileName, BarCodeType barcodeType)
+   en CartaDePorteManager.ReadBarcode1D_Spire(String fileName, Int32 page) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 12328
+   en CartaDePorteManager.LeerNumeroDeCartaPorteUsandoCodigoDeBarra(String fileImagen, String& sError) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 12542
+Spire.Barcode
+__________________________
+
+Log Entry : 
+01/23/2017 17:53:08
+Error in: . Error Message:CPTKCPTK.tif_pag0_unido.tif 0
+__________________________
+
+Log Entry : 
+01/23/2017 17:53:09
+Error in: . Error Message:System.ArgumentException
+El parámetro no es válido.
+   en System.Drawing.Bitmap..ctor(String filename)
+   en CartaDePorteManager.ReadBarcode1D_ZXing(String fileName, Int32 page) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 12459
+System.Drawing
+__________________________
+
+Log Entry : 
+01/23/2017 17:53:10
+Error in: . Error Message:System.ArgumentException
+Wrong filename passed.
+   en spr᠘..ctor(String A_0, sprᜟ A_1)
+   en Spire.Barcode.BarcodeScanner.Scan(String fileName, BarCodeType barcodeType)
+   en CartaDePorteManager.ReadBarcode1D_Spire(String fileName, Int32 page) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 12328
+   en CartaDePorteManager.LeerNumeroDeCartaPorteUsandoCodigoDeBarra(String fileImagen, String& sError) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 12542
+Spire.Barcode
+__________________________
+
+Log Entry : 
+01/23/2017 17:53:10
+Error in: . Error Message:CPTKCPTK.tif_pag2_unido.tif 0
+__________________________
+
+Log Entry : 
+01/23/2017 17:56:02
+Error in: . Error Message:Arranca motor
+__________________________
+
+Log Entry : 
+01/23/2017 17:56:05
+Error in: . Error Message:Reconoció la licencia
+__________________________
+
+Log Entry : 
+01/23/2017 17:56:13
+Error in: . Error Message:reconocer imagen C:\Users\Administrador\Documents\bdl\pronto\prontoweb\Temp\Lote 23ene175556 Mariano PV1\CPTKCPTK.tif_pag0_unido.tif
+__________________________
+
+Log Entry : 
+01/23/2017 17:56:33
+Error in: . Error Message:Procesó carta: titular ZORIAN HNOS SRL
+__________________________
+
+Log Entry : 
+01/23/2017 17:56:33
+Error in: . Error Message:Detectó bien el numero con el Flexicapture: 550166736
+__________________________
+
+Log Entry : 
+01/23/2017 17:56:42
+Error in: . Error Message:Llamo a IsValid y Save
+__________________________
+
+Log Entry : 
+01/23/2017 17:56:51
+Error in: . Error Message:Llamo a GrabarImagen
+__________________________
+
+Log Entry : 
+01/23/2017 17:56:51
+Error in: . Error Message:GrabarImagen 1
+__________________________
+
+Log Entry : 
+01/23/2017 17:56:51
+Error in: . Error Message:GrabarImagen 2
+__________________________
+
+Log Entry : 
+01/23/2017 17:56:53
+Error in: . Error Message:grabo en base
+__________________________
+
+Log Entry : 
+01/23/2017 17:56:54
+Error in: . Error Message:grabado
+__________________________
+
+Log Entry : 
+01/23/2017 17:56:54
+Error in: . Error Message:Archivo C:\Users\Administrador\Documents\bdl\pronto\prontoweb\Temp\Lote 23ene175556 Mariano PV1\ExportToXLS_906891.tif numcarta 550166736
+__________________________
+
+Log Entry : 
+01/23/2017 17:56:57
+Error in: . Error Message:reconocer imagen C:\Users\Administrador\Documents\bdl\pronto\prontoweb\Temp\Lote 23ene175556 Mariano PV1\CPTKCPTK.tif_pag2_unido.tif
+__________________________
+
+Log Entry : 
+01/23/2017 17:57:12
+Error in: . Error Message:Procesó carta: titular 
+__________________________
+
+Log Entry : 
+01/23/2017 17:57:12
+Error in: . Error Message:System.FormatException
+No se puede reconocer la cadena como valor DateTime válido.
+   en System.DateTimeParse.Parse(String s, DateTimeFormatInfo dtfi, DateTimeStyles styles)
+   en System.Convert.ToDateTime(String value)
+   en ProntoFlexicapture.ClassFlexicapture.ProcesaCarta(IDocument document, String SC, String archivoOriginal, String DirApp) en c:\Users\Administrador\Documents\bdl\pronto\InterfazFlexicapture\prontoflexicapture.cs:línea 2019
+mscorlib
+__________________________
+
+Log Entry : 
+01/23/2017 17:57:12
+Error in: . Error Message:Llamo a IsValid y Save
+__________________________
+
+Log Entry : 
+01/23/2017 17:57:37
+Error in: . Error Message:System.Data.Entity.Infrastructure.DbUpdateException
+An error occurred while updating the entries. See the inner exception for details.
+   en System.Data.Entity.Internal.InternalContext.SaveChanges()
+   en System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   en System.Data.Entity.DbContext.SaveChanges()
+   en ProntoFlexicapture.ClassFlexicapture.MarcarCartaComoProcesada(CartaDePorte& cdp, String usu, String SC) en c:\Users\Administrador\Documents\bdl\pronto\InterfazFlexicapture\prontoflexicapture.cs:línea 1116
+   en ProntoFlexicapture.ClassFlexicapture.ProcesaCarta(IDocument document, String SC, String archivoOriginal, String DirApp) en c:\Users\Administrador\Documents\bdl\pronto\InterfazFlexicapture\prontoflexicapture.cs:línea 2098
+   en ProntoFlexicapture.ClassFlexicapture.ProcesarCartasBatchConFlexicapture(IEngine& engine, IFlexiCaptureProcessor& processor, String plantilla, List`1 imagenes, String SC, String DirApp, Boolean bProcesar, String& sError) en c:\Users\Administrador\Documents\bdl\pronto\InterfazFlexicapture\prontoflexicapture.cs:línea 531
+EntityFramework
+__________________________
+
+Log Entry : 
+01/23/2017 18:11:48
+Error in: . Error Message:Arranca motor
+__________________________
+
+Log Entry : 
+01/23/2017 18:11:54
+Error in: . Error Message:Reconoció la licencia
+__________________________
+
+Log Entry : 
+01/23/2017 18:12:24
+Error in: . Error Message:Procesó carta: titular ZORIAN HNOS SRL
+__________________________
+
+Log Entry : 
+01/23/2017 18:12:24
+Error in: . Error Message:Detectó bien el numero con el Flexicapture: 550166736
+__________________________
+
+Log Entry : 
+01/23/2017 18:13:31
+Error in: . Error Message:System.FormatException
+La cadena de entrada no tiene el formato correcto.
+   en System.Number.StringToNumber(String str, NumberStyles options, NumberBuffer& number, NumberFormatInfo info, Boolean parseDecimal)
+   en System.Number.ParseInt32(String s, NumberStyles style, NumberFormatInfo info)
+   en System.Int32.Parse(String s)
+   en ProntoFlexicapture.ClassFlexicapture.ProcesaCarta(IDocument document, String SC, String archivoOriginal, String DirApp) en c:\Users\Administrador\Documents\bdl\pronto\InterfazFlexicapture\prontoflexicapture.cs:línea 1844
+   en ProntoFlexicapture.ClassFlexicapture.ProcesarCartasBatchConFlexicapture(IEngine& engine, IFlexiCaptureProcessor& processor, String plantilla, List`1 imagenes, String SC, String DirApp, Boolean bProcesar, String& sError) en c:\Users\Administrador\Documents\bdl\pronto\InterfazFlexicapture\prontoflexicapture.cs:línea 542
+mscorlib
+__________________________
+
+Log Entry : 
+01/23/2017 18:13:46
+Error in: . Error Message:Procesó carta: titular 
+__________________________
+
+Log Entry : 
+01/23/2017 18:14:20
+Error in: . Error Message:System.FormatException
+La cadena de entrada no tiene el formato correcto.
+   en System.Number.StringToNumber(String str, NumberStyles options, NumberBuffer& number, NumberFormatInfo info, Boolean parseDecimal)
+   en System.Number.ParseInt32(String s, NumberStyles style, NumberFormatInfo info)
+   en System.Int32.Parse(String s)
+   en ProntoFlexicapture.ClassFlexicapture.ProcesaCarta(IDocument document, String SC, String archivoOriginal, String DirApp) en c:\Users\Administrador\Documents\bdl\pronto\InterfazFlexicapture\prontoflexicapture.cs:línea 1844
+   en ProntoFlexicapture.ClassFlexicapture.ProcesarCartasBatchConFlexicapture(IEngine& engine, IFlexiCaptureProcessor& processor, String plantilla, List`1 imagenes, String SC, String DirApp, Boolean bProcesar, String& sError) en c:\Users\Administrador\Documents\bdl\pronto\InterfazFlexicapture\prontoflexicapture.cs:línea 542
+mscorlib
+__________________________
+
+Log Entry : 
+01/23/2017 18:14:21
+Error in: . Error Message:Procesó carta: titular OLIVIERIROBERT OMAR
+__________________________
+
+Log Entry : 
+01/23/2017 18:14:21
+Error in: . Error Message:Detectó bien el numero con el Flexicapture: 550268692
+__________________________
+
+Log Entry : 
+01/23/2017 18:14:25
+Error in: . Error Message:System.FormatException
+La cadena de entrada no tiene el formato correcto.
+   en System.Number.StringToNumber(String str, NumberStyles options, NumberBuffer& number, NumberFormatInfo info, Boolean parseDecimal)
+   en System.Number.ParseInt32(String s, NumberStyles style, NumberFormatInfo info)
+   en System.Int32.Parse(String s)
+   en ProntoFlexicapture.ClassFlexicapture.ProcesaCarta(IDocument document, String SC, String archivoOriginal, String DirApp) en c:\Users\Administrador\Documents\bdl\pronto\InterfazFlexicapture\prontoflexicapture.cs:línea 1844
+   en ProntoFlexicapture.ClassFlexicapture.ProcesarCartasBatchConFlexicapture(IEngine& engine, IFlexiCaptureProcessor& processor, String plantilla, List`1 imagenes, String SC, String DirApp, Boolean bProcesar, String& sError) en c:\Users\Administrador\Documents\bdl\pronto\InterfazFlexicapture\prontoflexicapture.cs:línea 542
+mscorlib
+__________________________
+
+Log Entry : 
+01/23/2017 18:14:25
+Error in: . Error Message:Procesó carta: titular 
+__________________________
+
+Log Entry : 
+01/23/2017 18:14:25
+Error in: . Error Message:No detectó el numero. Llamo a LeerNumeroDeCartaPorteUsandoCodigoDeBarra
+__________________________
+
+Log Entry : 
+01/23/2017 18:14:55
+Error in: . Error Message:System.ArgumentException
+Caracteres no válidos en la ruta de acceso.
+   en System.IO.Path.CheckInvalidPathChars(String path, Boolean checkAdditional)
+   en System.IO.Path.NormalizePath(String path, Boolean fullCheck, Int32 maxPathLength, Boolean expandShortPaths)
+   en System.IO.Path.GetFullPathInternal(String path)
+   en System.IO.Path.GetFullPath(String path)
+   en System.Drawing.IntSecurity.UnsafeGetFullPath(String fileName)
+   en System.Drawing.IntSecurity.DemandReadFileIO(String fileName)
+   en System.Drawing.Bitmap..ctor(String filename)
+   en CartaDePorteManager.ReadBarcode1D_ZXing(String fileName, Int32 page) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 12459
+mscorlib
+__________________________
+
+Log Entry : 
+01/23/2017 18:15:01
+Error in: . Error Message:System.ArgumentException
+Wrong filename passed.
+   en spr᠘..ctor(String A_0, sprᜟ A_1)
+   en Spire.Barcode.BarcodeScanner.Scan(String fileName, BarCodeType barcodeType)
+   en CartaDePorteManager.ReadBarcode1D_Spire(String fileName, Int32 page) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 12328
+   en CartaDePorteManager.LeerNumeroDeCartaPorteUsandoCodigoDeBarra(String fileImagen, String& sError) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 12542
+Spire.Barcode
+__________________________
+
+Log Entry : 
+01/23/2017 18:15:07
+Error in: . Error Message:System.ArgumentException
+Caracteres no válidos en la ruta de acceso.
+   en System.IO.Path.CheckInvalidPathChars(String path, Boolean checkAdditional)
+   en System.IO.Path.GetFileName(String path)
+   en System.IO.Path.GetFileNameWithoutExtension(String path)
+   en CartaDePorteManager.ParseNombreCarta(String nombre, Int64& numeroCarta, Int64& vagon) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 11927
+   en CartaDePorteManager.LeerNumeroDeCartaPorteUsandoCodigoDeBarra(String fileImagen, String& sError) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 12571
+   en ProntoFlexicapture.ClassFlexicapture.ProcesaCarta(IDocument document, String SC, String archivoOriginal, String DirApp) en c:\Users\Administrador\Documents\bdl\pronto\InterfazFlexicapture\prontoflexicapture.cs:línea 1779
+   en ProntoFlexicapture.ClassFlexicapture.ProcesarCartasBatchConFlexicapture(IEngine& engine, IFlexiCaptureProcessor& processor, String plantilla, List`1 imagenes, String SC, String DirApp, Boolean bProcesar, String& sError) en c:\Users\Administrador\Documents\bdl\pronto\InterfazFlexicapture\prontoflexicapture.cs:línea 542
+mscorlib
+__________________________
+
+Log Entry : 
+01/23/2017 18:15:40
+Error in: . Error Message:Termina motor
+__________________________
+
+Log Entry : 
+01/23/2017 18:15:41
+Error in: . Error Message:Proceso cerrado
+__________________________
+
+Log Entry : 
+01/23/2017 18:17:06
+Error in: . Error Message:Arranca motor
+__________________________
+
+Log Entry : 
+01/23/2017 18:17:07
+Error in: . Error Message:Reconoció la licencia
+__________________________
+
+Log Entry : 
+01/23/2017 18:19:22
+Error in: . Error Message:Procesó carta: titular ZORIAN HNOS SRL
+__________________________
+
+Log Entry : 
+01/23/2017 18:19:22
+Error in: . Error Message:Detectó bien el numero con el Flexicapture: 550166736
+__________________________
+
+Log Entry : 
+01/23/2017 18:19:41
+Error in: . Error Message:System.FormatException
+La cadena de entrada no tiene el formato correcto.
+   en System.Number.StringToNumber(String str, NumberStyles options, NumberBuffer& number, NumberFormatInfo info, Boolean parseDecimal)
+   en System.Number.ParseInt32(String s, NumberStyles style, NumberFormatInfo info)
+   en System.Int32.Parse(String s)
+   en ProntoFlexicapture.ClassFlexicapture.ProcesaCarta(IDocument document, String SC, String archivoOriginal, String DirApp) en c:\Users\Administrador\Documents\bdl\pronto\InterfazFlexicapture\prontoflexicapture.cs:línea 1844
+   en ProntoFlexicapture.ClassFlexicapture.ProcesarCartasBatchConFlexicapture(IEngine& engine, IFlexiCaptureProcessor& processor, String plantilla, List`1 imagenes, String SC, String DirApp, Boolean bProcesar, String& sError) en c:\Users\Administrador\Documents\bdl\pronto\InterfazFlexicapture\prontoflexicapture.cs:línea 542
+mscorlib
+__________________________
+
+Log Entry : 
+01/23/2017 18:20:02
+Error in: . Error Message:Procesó carta: titular 
+__________________________
+
+Log Entry : 
+01/23/2017 18:20:04
+Error in: . Error Message:System.FormatException
+La cadena de entrada no tiene el formato correcto.
+   en System.Number.StringToNumber(String str, NumberStyles options, NumberBuffer& number, NumberFormatInfo info, Boolean parseDecimal)
+   en System.Number.ParseInt32(String s, NumberStyles style, NumberFormatInfo info)
+   en System.Int32.Parse(String s)
+   en ProntoFlexicapture.ClassFlexicapture.ProcesaCarta(IDocument document, String SC, String archivoOriginal, String DirApp) en c:\Users\Administrador\Documents\bdl\pronto\InterfazFlexicapture\prontoflexicapture.cs:línea 1844
+   en ProntoFlexicapture.ClassFlexicapture.ProcesarCartasBatchConFlexicapture(IEngine& engine, IFlexiCaptureProcessor& processor, String plantilla, List`1 imagenes, String SC, String DirApp, Boolean bProcesar, String& sError) en c:\Users\Administrador\Documents\bdl\pronto\InterfazFlexicapture\prontoflexicapture.cs:línea 542
+mscorlib
+__________________________
+
+Log Entry : 
+01/23/2017 18:20:16
+Error in: . Error Message:Procesó carta: titular OLIVIERIROBERT OMAR
+__________________________
+
+Log Entry : 
+01/23/2017 18:20:16
+Error in: . Error Message:Detectó bien el numero con el Flexicapture: 550268692
+__________________________
+
+Log Entry : 
+01/23/2017 18:20:25
+Error in: . Error Message:System.FormatException
+La cadena de entrada no tiene el formato correcto.
+   en System.Number.StringToNumber(String str, NumberStyles options, NumberBuffer& number, NumberFormatInfo info, Boolean parseDecimal)
+   en System.Number.ParseInt32(String s, NumberStyles style, NumberFormatInfo info)
+   en System.Int32.Parse(String s)
+   en ProntoFlexicapture.ClassFlexicapture.ProcesaCarta(IDocument document, String SC, String archivoOriginal, String DirApp) en c:\Users\Administrador\Documents\bdl\pronto\InterfazFlexicapture\prontoflexicapture.cs:línea 1844
+   en ProntoFlexicapture.ClassFlexicapture.ProcesarCartasBatchConFlexicapture(IEngine& engine, IFlexiCaptureProcessor& processor, String plantilla, List`1 imagenes, String SC, String DirApp, Boolean bProcesar, String& sError) en c:\Users\Administrador\Documents\bdl\pronto\InterfazFlexicapture\prontoflexicapture.cs:línea 542
+mscorlib
+__________________________
+
+Log Entry : 
+01/23/2017 18:22:20
+Error in: . Error Message:Procesó carta: titular 
+__________________________
+
+Log Entry : 
+01/23/2017 18:22:20
+Error in: . Error Message:No detectó el numero. Llamo a LeerNumeroDeCartaPorteUsandoCodigoDeBarra
+__________________________
+
+Log Entry : 
+01/23/2017 18:22:50
+Error in: . Error Message:Salgo de LeerNumeroDeCartaPorteUsandoCodigoDeBarra
+__________________________
+
+Log Entry : 
+01/23/2017 18:23:17
+Error in: . Error Message:System.FormatException
+La cadena de entrada no tiene el formato correcto.
+   en System.Number.StringToNumber(String str, NumberStyles options, NumberBuffer& number, NumberFormatInfo info, Boolean parseDecimal)
+   en System.Number.ParseInt32(String s, NumberStyles style, NumberFormatInfo info)
+   en System.Int32.Parse(String s)
+   en ProntoFlexicapture.ClassFlexicapture.ProcesaCarta(IDocument document, String SC, String archivoOriginal, String DirApp) en c:\Users\Administrador\Documents\bdl\pronto\InterfazFlexicapture\prontoflexicapture.cs:línea 1844
+   en ProntoFlexicapture.ClassFlexicapture.ProcesarCartasBatchConFlexicapture(IEngine& engine, IFlexiCaptureProcessor& processor, String plantilla, List`1 imagenes, String SC, String DirApp, Boolean bProcesar, String& sError) en c:\Users\Administrador\Documents\bdl\pronto\InterfazFlexicapture\prontoflexicapture.cs:línea 542
+mscorlib
+__________________________
+
+Log Entry : 
+01/23/2017 18:23:20
+Error in: . Error Message:Termina motor
+__________________________
+
+Log Entry : 
+01/23/2017 18:23:20
+Error in: . Error Message:Proceso cerrado
+__________________________
+
+Log Entry : 
+01/23/2017 18:24:06
+Error in: . Error Message:Arranca motor
+__________________________
+
+Log Entry : 
+01/23/2017 18:24:08
+Error in: . Error Message:Reconoció la licencia
+__________________________
+
+Log Entry : 
+01/23/2017 18:26:14
+Error in: . Error Message:Procesó carta: titular ZORIAN HNOS SRL
+__________________________
+
+Log Entry : 
+01/23/2017 18:26:14
+Error in: . Error Message:Detectó bien el numero con el Flexicapture: 550166736
+__________________________
+
+Log Entry : 
+01/23/2017 18:26:40
+Error in: . Error Message:Procesó carta: titular ZORIAN HNOS SRL
+__________________________
+
+Log Entry : 
+01/23/2017 18:26:40
+Error in: . Error Message:Detectó bien el numero con el Flexicapture: 550166736
+__________________________
+
+Log Entry : 
+01/23/2017 18:27:20
+Error in: . Error Message:Procesó carta: titular ZORIAN HNOS SRL
+__________________________
+
+Log Entry : 
+01/23/2017 18:27:24
+Error in: . Error Message:Detectó bien el numero con el Flexicapture: 550166736
+__________________________
+
+Log Entry : 
+01/23/2017 18:31:26
+Error in: . Error Message:Arranca motor
+__________________________
+
+Log Entry : 
+01/23/2017 18:31:28
+Error in: . Error Message:Reconoció la licencia
+__________________________
+
+Log Entry : 
+01/23/2017 18:32:55
+Error in: . Error Message:Procesó carta: titular ZORIAN HNOS SRL
+__________________________
+
+Log Entry : 
+01/23/2017 18:32:55
+Error in: . Error Message:Detectó bien el numero con el Flexicapture: 550166736
+__________________________
+
+Log Entry : 
+01/23/2017 18:33:11
+Error in: . Error Message:Llamo a IsValid y Save
+__________________________
+
+Log Entry : 
+01/23/2017 18:33:20
+Error in: . Error Message:Llamo a GrabarImagen
+__________________________
+
+Log Entry : 
+01/23/2017 18:33:20
+Error in: . Error Message:GrabarImagen 1
+__________________________
+
+Log Entry : 
+01/23/2017 18:33:21
+Error in: . Error Message:GrabarImagen 2
+__________________________
+
+Log Entry : 
+01/23/2017 18:33:23
+Error in: . Error Message:grabo en base
+__________________________
+
+Log Entry : 
+01/23/2017 18:33:23
+Error in: . Error Message:grabado
+__________________________
+
+Log Entry : 
+01/23/2017 18:33:23
+Error in: . Error Message:Archivo C:\Users\Administrador\Documents\bdl\pronto\prontoweb\Temp\ExportToXLS_766094.tif numcarta 550166736
+__________________________
+
+Log Entry : 
+01/23/2017 18:34:10
+Error in: . Error Message:Procesó carta: titular 
+__________________________
+
+Log Entry : 
+01/23/2017 18:34:14
+Error in: . Error Message:System.FormatException
+No se puede reconocer la cadena como valor DateTime válido.
+   en System.DateTimeParse.Parse(String s, DateTimeFormatInfo dtfi, DateTimeStyles styles)
+   en System.Convert.ToDateTime(String value)
+   en ProntoFlexicapture.ClassFlexicapture.ProcesaCarta(IDocument document, String SC, String archivoOriginal, String DirApp) en c:\Users\Administrador\Documents\bdl\pronto\InterfazFlexicapture\prontoflexicapture.cs:línea 2041
+mscorlib
+__________________________
+
+Log Entry : 
+01/23/2017 18:34:14
+Error in: . Error Message:Llamo a IsValid y Save
+__________________________
+
+Log Entry : 
+01/23/2017 18:34:22
+Error in: . Error Message:System.Data.Entity.Infrastructure.DbUpdateException
+An error occurred while updating the entries. See the inner exception for details.
+   en System.Data.Entity.Internal.InternalContext.SaveChanges()
+   en System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   en System.Data.Entity.DbContext.SaveChanges()
+   en ProntoFlexicapture.ClassFlexicapture.MarcarCartaComoProcesada(CartaDePorte& cdp, String usu, String SC) en c:\Users\Administrador\Documents\bdl\pronto\InterfazFlexicapture\prontoflexicapture.cs:línea 1127
+   en ProntoFlexicapture.ClassFlexicapture.ProcesaCarta(IDocument document, String SC, String archivoOriginal, String DirApp) en c:\Users\Administrador\Documents\bdl\pronto\InterfazFlexicapture\prontoflexicapture.cs:línea 2120
+   en ProntoFlexicapture.ClassFlexicapture.ProcesarCartasBatchConFlexicapture(IEngine& engine, IFlexiCaptureProcessor& processor, String plantilla, List`1 imagenes, String SC, String DirApp, Boolean bProcesar, String& sError) en c:\Users\Administrador\Documents\bdl\pronto\InterfazFlexicapture\prontoflexicapture.cs:línea 542
+EntityFramework
+__________________________
+
+Log Entry : 
+01/23/2017 18:34:30
+Error in: . Error Message:Procesó carta: titular OLIVIERIROBERT OMAR
+__________________________
+
+Log Entry : 
+01/23/2017 18:34:30
+Error in: . Error Message:Detectó bien el numero con el Flexicapture: 550268692
+__________________________
+
+Log Entry : 
+01/23/2017 18:34:32
+Error in: . Error Message:Llamo a IsValid y Save
+__________________________
+
+Log Entry : 
+01/23/2017 18:34:41
+Error in: . Error Message:Llamo a GrabarImagen
+__________________________
+
+Log Entry : 
+01/23/2017 18:34:41
+Error in: . Error Message:GrabarImagen 1
+__________________________
+
+Log Entry : 
+01/23/2017 18:34:41
+Error in: . Error Message:GrabarImagen 2
+__________________________
+
+Log Entry : 
+01/23/2017 18:34:43
+Error in: . Error Message:grabo en base
+__________________________
+
+Log Entry : 
+01/23/2017 18:34:44
+Error in: . Error Message:grabado
+__________________________
+
+Log Entry : 
+01/23/2017 18:34:44
+Error in: . Error Message:Archivo C:\Users\Administrador\Documents\bdl\pronto\prontoweb\Temp\ExportToXLS_633868.tif numcarta 550268692
+__________________________
+
+Log Entry : 
+01/23/2017 18:41:15
+Error in: . Error Message:Arranca motor
+__________________________
+
+Log Entry : 
+01/23/2017 18:41:17
+Error in: . Error Message:Reconoció la licencia
+__________________________
+
+Log Entry : 
+01/23/2017 18:42:40
+Error in: . Error Message:Procesó carta: titular ZORIAN HNOS SRL
+__________________________
+
+Log Entry : 
+01/23/2017 18:42:40
+Error in: . Error Message:Detectó bien el numero con el Flexicapture: 550166736
+__________________________
+
+Log Entry : 
+01/23/2017 18:42:49
+Error in: . Error Message:Llamo a IsValid y Save
+__________________________
+
+Log Entry : 
+01/23/2017 18:43:00
+Error in: . Error Message:Llamo a GrabarImagen
+__________________________
+
+Log Entry : 
+01/23/2017 18:43:00
+Error in: . Error Message:GrabarImagen 1
+__________________________
+
+Log Entry : 
+01/23/2017 18:43:00
+Error in: . Error Message:GrabarImagen 2
+__________________________
+
+Log Entry : 
+01/23/2017 18:43:02
+Error in: . Error Message:grabo en base
+__________________________
+
+Log Entry : 
+01/23/2017 18:43:02
+Error in: . Error Message:grabado
+__________________________
+
+Log Entry : 
+01/23/2017 18:43:02
+Error in: . Error Message:Archivo C:\Users\Administrador\Documents\bdl\pronto\prontoweb\Temp\ExportToXLS_112087.tif numcarta 550166736
+__________________________
