@@ -333,7 +333,6 @@ namespace ProntoFlexicapture
 
 
 
-            bool conTK = imagenes[0].Contains("_unido");
 
 
             //processor.AddDocumentDefinitionFile(SamplesFolder + "\\cartaporte.fcdot");
@@ -387,17 +386,18 @@ namespace ProntoFlexicapture
 
 
             //traceBegin("Run processing loop...");
+            bool conTK = false;
             int count = 0;
             while (true)
             {
 
                 FuncionesGenericasCSharp.Resultados output = null;
 
-                if (count > imagenes.Count - 1) break;
+     //             if (count > imagenes.Count - 1) break; // tiene que continuar hasta chupar todo lo que haya
 
 
-                Pronto.ERP.Bll.ErrHandler2.WriteError("reconocer imagen");
-                Console.WriteLine("reconocer imagen " + imagenes[count]);
+                //Pronto.ERP.Bll.ErrHandler2.WriteError("reconocer imagen "  + imagenes[count]);
+                //Console.WriteLine("reconocer imagen " + imagenes[count]);
 
 
 
@@ -415,11 +415,14 @@ namespace ProntoFlexicapture
                 try
                 {
 
+                    if (false) conTK =  imagenes[count].Contains("_unido"); // por ahora desactivarlo
+
+ // si no esta la licencia, acá explota
+
                     if (conTK && count > 0) processor.RecognizeNextDocument(); // saltar la pagina con el tiket, y así pasar al siguiente archivo
 
-                    document = processor.RecognizeNextDocument(); // si no esta la licencia, acá explota
-
-
+                    document = processor.RecognizeNextDocument();
+                    // si document es null, hay un break abajo
 
                 }
 
@@ -488,27 +491,39 @@ namespace ProntoFlexicapture
                 exportParams.FileFormat = FileExportFormatEnum.FEF_XLS;
                 exportParams.ExportOriginalImages = true;
                 exportParams.ImageExportParams.Prefix = "ExportToXLS_" + rnd.Next(100000, 999999).ToString(); // en realidad las imagenes exportadas deberían ir a parar todas al raiz, porque no hay manera de saber a qué imagen corresponden. Entonces las dejo todas en el mismo lugar, y genero un random al prefijo para asegurarme de que ese nombre es exclusivo
+
+//                Specifies the prefix of saved image files names. To include project, batch, or Document Definition name 
+//                into the image file name, use the <Project>, <Batch>, or <Template> elements respectively. The elements in angle 
+//                    brackets will be changed to corresponding values. The elements without angle brackets will be passed as is. 
+//By default the value of this property is "<Batch>".
+
+
                 //IExcelExportParams excelParametros;
                 //exportParams.ExcelParams = excelParametros;
 
 
-                var w = imagenes[count].IndexOf(@"\Temp\");
-                var sd = imagenes[count].Substring(w + 6).IndexOf(@"\");
-                var dirExport = imagenes[count].Substring(0, sd + w + 6) + @"\";
+                //puedo guiarme por el "imagenes[count]"
+                string dirExport = dirtemp;
 
+                if (false)
+                {
+                    var w = imagenes[count].IndexOf(@"\Temp\");
+                    var sd = imagenes[count].Substring(w + 6).IndexOf(@"\");
+                    dirExport = imagenes[count].Substring(0, sd + w + 6) + @"\"; // es seguro el directorio de esa tanda? -estás confiando en q imagenes[count] es tomado en el mismo orden en la queue
+                }
 
                 processor.ExportDocumentEx(document, dirExport, "ExportToXLS", exportParams);
 
 
 
 
-                if (false)
-                {
-                    processor.ExportDocumentEx(document, Path.GetDirectoryName(imagenes[count]), imagenes[count] + ".xml", null);
+                //if (false)
+                //{
+                //    processor.ExportDocumentEx(document, Path.GetDirectoryName(imagenes[count]), imagenes[count] + ".xml", null);
 
-                    exportParams.FileFormat = FileExportFormatEnum.FEF_CSV;
-                    // processor.ExportDocumentEx(document, Path.GetPathRoot(imagenes[count])   dir + "\\FCEExport", "ExportToCSV", exportParams);
-                }
+                //    exportParams.FileFormat = FileExportFormatEnum.FEF_CSV;
+                //    // processor.ExportDocumentEx(document, Path.GetPathRoot(imagenes[count])   dir + "\\FCEExport", "ExportToCSV", exportParams);
+                //}
 
 
 
@@ -533,6 +548,7 @@ namespace ProntoFlexicapture
 
 
 
+               
                         if (conTK)
                         {
                             string archivoOriginal = imagenes[count];
@@ -561,7 +577,7 @@ namespace ProntoFlexicapture
 
 
                             //el nombre de la imagen lo logeo en algun lado????
-                            var cc = CartaDePorteManager.GrabarImagen(output.IdCarta, SC, 0, 0, nombrenuevo, ref sError, DirApp, true);
+                            var cc = CartaDePorteManager.GrabarImagen(output.IdCarta, SC, 0, 0, nombrenuevo, ref sError, DirApp, true, true);
                         }
 
 
@@ -1825,10 +1841,21 @@ namespace ProntoFlexicapture
                 string s;
 
 
-                int pv = int.Parse(archivoOriginal.Substring(archivoOriginal.IndexOf(" PV") + 3, 1));
+                int pv =0;
+                string nombreusuario = "";
+                try
+                {
 
-                string nombreusuario = archivoOriginal.Substring(archivoOriginal.IndexOf("Lote") + 16, 20);
-                nombreusuario = nombreusuario.Substring(0, nombreusuario.IndexOf(" PV") + 4);
+                    pv = int.Parse(archivoOriginal.Substring(archivoOriginal.IndexOf(" PV") + 3, 1));
+
+                    nombreusuario = archivoOriginal.Substring(archivoOriginal.IndexOf("Lote") + 16, 20);
+                    nombreusuario = nombreusuario.Substring(0, nombreusuario.IndexOf(" PV") + 4);
+
+                }
+                catch (Exception)
+                {
+                }
+
 
 
 
@@ -2063,7 +2090,9 @@ namespace ProntoFlexicapture
                 if (valid && (numeroCarta >= 10000000 && numeroCarta < 999999999))
                 {
                     string err = "";
-                    id = CartaDePorteManager.Save(SC, cdp, 0, "", true, ref err);
+
+               
+                    id = CartaDePorteManager.Save(SC, cdp, 0, "OCR", true, ref err);
                     if (numeroCarta > numprefijo)
                     {
                         cdp.MotivoAnulacion = "numero de carta porte en codigo de barra no detectado";
