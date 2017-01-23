@@ -130,6 +130,8 @@ namespace ProntoWindowsService
 
             if (Debugger.IsAttached) Debugger.Break();
 
+            Pronto.ERP.Bll.ErrHandler2.WriteError("ssdssss");
+
 
             ClassFlexicapture.Log("Empieza");
 

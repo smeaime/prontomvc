@@ -3038,17 +3038,27 @@ Salida:
                 Console.WriteLine(errorMessage)
 
 
-                nombre = DirectorioErrores & DateTime.Today.ToString("dd-MM-yy") & ".txt"
 
 
                 If System.Web.HttpContext.Current Is Nothing Then
                     'esta funcion tendría que recibir el DirApp?
                     'Path.GetTempPath()
-                    Return Nothing 'donde escribo el archivo????????
+
+                    Dim p = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location)
+
+                    nombre = "\Error\" & DateTime.Today.ToString("dd-MM-yy") & ".txt"
+                    nombreLargo = p + nombre 'Path.Combine(p, "AggregatorItems.xml")
+
+
+                    'Return Nothing 'donde escribo el archivo????????
+
+                Else
+                    nombre = DirectorioErrores & DateTime.Today.ToString("dd-MM-yy") & ".txt"
+                    nombreLargo = System.Web.HttpContext.Current.Server.MapPath(nombre)
                 End If
 
 
-                nombreLargo = System.Web.HttpContext.Current.Server.MapPath(nombre)
+
 
                 If (Not File.Exists(nombreLargo)) Then
                     Try
@@ -3064,7 +3074,14 @@ Salida:
                 Using w As StreamWriter = File.AppendText(nombreLargo)
                     w.WriteLine(Constants.vbCrLf & "Log Entry : ")
                     w.WriteLine("{0}", DateTime.Now.ToString(System.Globalization.CultureInfo.InvariantCulture))
-                    Dim err As String = "Error in: " & System.Web.HttpContext.Current.Request.Url.ToString() & ". Error Message:" & errorMessage
+                    Dim s As String = ""
+                    Try
+                        If System.Web.HttpContext.Current IsNot Nothing Then
+                            s = System.Web.HttpContext.Current.Request.Url.ToString()
+                        End If
+                    Catch ex As Exception
+                    End Try
+                    Dim err As String = "Error in: " & s & ". Error Message:" & errorMessage
                     w.WriteLine(err)
                     w.WriteLine("__________________________")
                     w.Flush()
