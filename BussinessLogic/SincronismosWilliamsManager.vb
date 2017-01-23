@@ -1123,7 +1123,7 @@ Namespace Pronto.ERP.Bll
                             yourParams(25) = New ReportParameter("Patente", "")
                             yourParams(26) = New ReportParameter("optCamionVagon", "Todos")
 
-
+                            
                             'Dim titulo As String = ""
                             'titulo = FormatearTitulo(HFSC.Value, _
                             '          titulo, estadofiltro, "", idVendedor, idCorredor, _

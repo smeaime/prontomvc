@@ -318,7 +318,8 @@ Partial Class CartadeporteABM
         'lo que hace que tarde es el ultimo where con el like que tiene el comodin al principio
         'lo que hace que tarde es el ultimo where con el like que tiene el comodin al principio
         'lo que hace que tarde es el ultimo where con el like que tiene el comodin al principio
-        Dim s = "select * from log    where  (IdComprobante=" & idcarta & " AND  Detalle='Tabla : CartaPorte' ) "
+        Dim s = "select * from log    where  (IdComprobante=" & idcarta & " AND  Detalle='Tabla : CartaPorte' )  " & _
+                                        " or   (IdComprobante=" & idcarta & " AND  Tipo='IMAG') "
 
         If bTraerImputaciones Then s = s & " or (detalle like 'Imputacion de IdCartaPorte" & idcarta & "C%' ) " & _
                                         " or  (detalle like 'Desimputacion%" & idcarta & "-%' ) " & _
@@ -356,6 +357,10 @@ Partial Class CartadeporteABM
 
 
     Sub VerLog(bTraerImputaciones As Boolean)
+
+
+        
+
         Try
 
             If IdEntity <= 0 Then Return
