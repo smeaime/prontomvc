@@ -603,3 +603,2568 @@ Log Entry :
 01/24/2017 11:16:18
 Error in: . Error Message:Reconoció la licencia
 __________________________
+
+Log Entry : 
+01/24/2017 11:34:32
+Error in: . Error Message:Arranca motor
+__________________________
+
+Log Entry : 
+01/24/2017 11:34:33
+Error in: . Error Message:Reconoció la licencia
+__________________________
+
+Log Entry : 
+01/24/2017 11:46:28
+Error in: . Error Message:Procesó carta: titular ZORIAN HNOS SRL
+__________________________
+
+Log Entry : 
+01/24/2017 11:46:28
+Error in: . Error Message:Detectó bien el numero con el Flexicapture: 550166736
+__________________________
+
+Log Entry : 
+01/24/2017 11:52:28
+Error in: . Error Message:Arranca motor
+__________________________
+
+Log Entry : 
+01/24/2017 11:52:30
+Error in: . Error Message:Reconoció la licencia
+__________________________
+
+Log Entry : 
+01/24/2017 11:54:30
+Error in: . Error Message:Procesó carta: titular ZORIAN HNOS SRL
+__________________________
+
+Log Entry : 
+01/24/2017 11:54:30
+Error in: . Error Message:Detectó bien el numero con el Flexicapture: 550166736
+__________________________
+
+Log Entry : 
+01/24/2017 11:54:41
+Error in: . Error Message:Llamo a IsValid y Save
+__________________________
+
+Log Entry : 
+01/24/2017 11:54:50
+Error in: . Error Message:Llamo a GrabarImagen
+__________________________
+
+Log Entry : 
+01/24/2017 11:54:50
+Error in: . Error Message:GrabarImagen 1
+__________________________
+
+Log Entry : 
+01/24/2017 11:54:50
+Error in: . Error Message:GrabarImagen 2
+__________________________
+
+Log Entry : 
+01/24/2017 11:54:53
+Error in: . Error Message:grabo en base
+__________________________
+
+Log Entry : 
+01/24/2017 11:54:53
+Error in: . Error Message:grabado
+__________________________
+
+Log Entry : 
+01/24/2017 11:54:53
+Error in: . Error Message:Archivo C:\Users\Administrador\Documents\bdl\pronto\prontoweb\Temp\Lote 24ene115222 Mariano PV1\ExportToXLS_528550.tif numcarta 550166736
+__________________________
+
+Log Entry : 
+01/24/2017 11:57:41
+Error in: . Error Message:GrabarImagen 1
+__________________________
+
+Log Entry : 
+01/24/2017 11:57:41
+Error in: . Error Message:GrabarImagen 2
+__________________________
+
+Log Entry : 
+01/24/2017 11:57:43
+Error in: . Error Message:grabo en base
+__________________________
+
+Log Entry : 
+01/24/2017 11:57:43
+Error in: . Error Message:grabado
+__________________________
+
+Log Entry : 
+01/24/2017 12:18:09
+Error in: . Error Message:Arranca motor
+__________________________
+
+Log Entry : 
+01/24/2017 12:18:11
+Error in: . Error Message:Reconoció la licencia
+__________________________
+
+Log Entry : 
+01/24/2017 12:19:12
+Error in: . Error Message:Procesó carta: titular ZORIAN HNOS SRL
+__________________________
+
+Log Entry : 
+01/24/2017 12:19:12
+Error in: . Error Message:Detectó bien el numero con el Flexicapture: 550166736
+__________________________
+
+Log Entry : 
+01/24/2017 12:19:21
+Error in: . Error Message:Llamo a IsValid y Save
+__________________________
+
+Log Entry : 
+01/24/2017 12:19:32
+Error in: . Error Message:Llamo a GrabarImagen
+__________________________
+
+Log Entry : 
+01/24/2017 12:19:32
+Error in: . Error Message:GrabarImagen 1
+__________________________
+
+Log Entry : 
+01/24/2017 12:19:32
+Error in: . Error Message:GrabarImagen 2
+__________________________
+
+Log Entry : 
+01/24/2017 12:19:35
+Error in: . Error Message:grabo en base
+__________________________
+
+Log Entry : 
+01/24/2017 12:19:35
+Error in: . Error Message:grabado
+__________________________
+
+Log Entry : 
+01/24/2017 12:19:35
+Error in: . Error Message:Archivo C:\Users\Administrador\Documents\bdl\pronto\prontoweb\Temp\Lote 24ene121804 Mariano PV1\ExportToXLS_483938.tif numcarta 550166736
+__________________________
+
+Log Entry : 
+01/24/2017 12:19:51
+Error in: . Error Message:GrabarImagen 1
+__________________________
+
+Log Entry : 
+01/24/2017 12:19:51
+Error in: . Error Message:GrabarImagen 2
+__________________________
+
+Log Entry : 
+01/24/2017 12:19:53
+Error in: . Error Message:grabo en base
+__________________________
+
+Log Entry : 
+01/24/2017 12:19:54
+Error in: . Error Message:grabado
+__________________________
+
+Log Entry : 
+01/24/2017 12:21:08
+Error in: . Error Message:Procesó carta: titular OLIVIERIROBERT OMAR
+__________________________
+
+Log Entry : 
+01/24/2017 12:21:08
+Error in: . Error Message:Detectó bien el numero con el Flexicapture: 550268692
+__________________________
+
+Log Entry : 
+01/24/2017 12:21:09
+Error in: . Error Message:Llamo a IsValid y Save
+__________________________
+
+Log Entry : 
+01/24/2017 12:21:18
+Error in: . Error Message:Llamo a GrabarImagen
+__________________________
+
+Log Entry : 
+01/24/2017 12:21:18
+Error in: . Error Message:GrabarImagen 1
+__________________________
+
+Log Entry : 
+01/24/2017 12:21:18
+Error in: . Error Message:GrabarImagen 2
+__________________________
+
+Log Entry : 
+01/24/2017 12:21:22
+Error in: . Error Message:grabo en base
+__________________________
+
+Log Entry : 
+01/24/2017 12:21:22
+Error in: . Error Message:grabado
+__________________________
+
+Log Entry : 
+01/24/2017 12:21:22
+Error in: . Error Message:Archivo C:\Users\Administrador\Documents\bdl\pronto\prontoweb\Temp\Lote 24ene121804 Mariano PV1\ExportToXLS_883125.tif numcarta 550268692
+__________________________
+
+Log Entry : 
+01/24/2017 12:24:56
+Error in: . Error Message:Arranca motor
+__________________________
+
+Log Entry : 
+01/24/2017 12:24:57
+Error in: . Error Message:Reconoció la licencia
+__________________________
+
+Log Entry : 
+01/24/2017 12:25:29
+Error in: . Error Message:Procesó carta: titular ZORIAN HNOS SRL
+__________________________
+
+Log Entry : 
+01/24/2017 12:25:29
+Error in: . Error Message:Detectó bien el numero con el Flexicapture: 550166736
+__________________________
+
+Log Entry : 
+01/24/2017 12:25:38
+Error in: . Error Message:Llamo a IsValid y Save
+__________________________
+
+Log Entry : 
+01/24/2017 12:25:47
+Error in: . Error Message:Llamo a GrabarImagen
+__________________________
+
+Log Entry : 
+01/24/2017 12:25:47
+Error in: . Error Message:GrabarImagen 1
+__________________________
+
+Log Entry : 
+01/24/2017 12:25:47
+Error in: . Error Message:GrabarImagen 2
+__________________________
+
+Log Entry : 
+01/24/2017 12:25:50
+Error in: . Error Message:grabo en base
+__________________________
+
+Log Entry : 
+01/24/2017 12:25:50
+Error in: . Error Message:grabado
+__________________________
+
+Log Entry : 
+01/24/2017 12:25:50
+Error in: . Error Message:Archivo C:\Users\Administrador\Documents\bdl\pronto\prontoweb\Temp\Lote 24ene122448 Mariano PV1\ExportToXLS_766085.tif numcarta 550166736
+__________________________
+
+Log Entry : 
+01/24/2017 12:25:55
+Error in: . Error Message:GrabarImagen 1
+__________________________
+
+Log Entry : 
+01/24/2017 12:25:56
+Error in: . Error Message:GrabarImagen 2
+__________________________
+
+Log Entry : 
+01/24/2017 12:25:58
+Error in: . Error Message:grabo en base
+__________________________
+
+Log Entry : 
+01/24/2017 12:25:58
+Error in: . Error Message:grabado
+__________________________
+
+Log Entry : 
+01/24/2017 12:27:16
+Error in: . Error Message:Procesó carta: titular OLIVIERIROBERT OMAR
+__________________________
+
+Log Entry : 
+01/24/2017 12:27:16
+Error in: . Error Message:Detectó bien el numero con el Flexicapture: 550268692
+__________________________
+
+Log Entry : 
+01/24/2017 12:27:18
+Error in: . Error Message:Llamo a IsValid y Save
+__________________________
+
+Log Entry : 
+01/24/2017 12:27:26
+Error in: . Error Message:Llamo a GrabarImagen
+__________________________
+
+Log Entry : 
+01/24/2017 12:27:26
+Error in: . Error Message:GrabarImagen 1
+__________________________
+
+Log Entry : 
+01/24/2017 12:27:27
+Error in: . Error Message:GrabarImagen 2
+__________________________
+
+Log Entry : 
+01/24/2017 12:27:30
+Error in: . Error Message:grabo en base
+__________________________
+
+Log Entry : 
+01/24/2017 12:27:30
+Error in: . Error Message:grabado
+__________________________
+
+Log Entry : 
+01/24/2017 12:27:30
+Error in: . Error Message:Archivo C:\Users\Administrador\Documents\bdl\pronto\prontoweb\Temp\Lote 24ene122448 Mariano PV1\ExportToXLS_788080.tif numcarta 550268692
+__________________________
+
+Log Entry : 
+01/24/2017 12:27:31
+Error in: . Error Message:GrabarImagen 1
+__________________________
+
+Log Entry : 
+01/24/2017 12:27:31
+Error in: . Error Message:GrabarImagen 2
+__________________________
+
+Log Entry : 
+01/24/2017 12:27:33
+Error in: . Error Message:grabo en base
+__________________________
+
+Log Entry : 
+01/24/2017 12:27:33
+Error in: . Error Message:grabado
+__________________________
+
+Log Entry : 
+01/24/2017 12:27:52
+Error in: . Error Message:Termina motor
+__________________________
+
+Log Entry : 
+01/24/2017 12:27:53
+Error in: . Error Message:Proceso cerrado
+__________________________
+
+Log Entry : 
+01/24/2017 12:29:28
+Error in: . Error Message:Arranca motor
+__________________________
+
+Log Entry : 
+01/24/2017 12:29:29
+Error in: . Error Message:Reconoció la licencia
+__________________________
+
+Log Entry : 
+01/24/2017 12:29:56
+Error in: . Error Message:Procesó carta: titular SOJAS ARGENTINAS SRL
+__________________________
+
+Log Entry : 
+01/24/2017 12:29:56
+Error in: . Error Message:Detectó bien el numero con el Flexicapture: 558299523
+__________________________
+
+Log Entry : 
+01/24/2017 12:30:03
+Error in: . Error Message:System.FormatException
+No se puede reconocer la cadena como valor DateTime válido.
+   en System.DateTimeParse.Parse(String s, DateTimeFormatInfo dtfi, DateTimeStyles styles)
+   en System.Convert.ToDateTime(String value)
+   en ProntoFlexicapture.ClassFlexicapture.ProcesaCarta(IDocument document, String SC, String archivoOriginal, String DirApp) en c:\Users\Administrador\Documents\bdl\pronto\InterfazFlexicapture\prontoflexicapture.cs:línea 2023
+mscorlib
+__________________________
+
+Log Entry : 
+01/24/2017 12:30:03
+Error in: . Error Message:Llamo a IsValid y Save
+__________________________
+
+Log Entry : 
+01/24/2017 12:30:09
+Error in: . Error Message:Llamo a GrabarImagen
+__________________________
+
+Log Entry : 
+01/24/2017 12:30:09
+Error in: . Error Message:GrabarImagen 1
+__________________________
+
+Log Entry : 
+01/24/2017 12:30:09
+Error in: . Error Message:GrabarImagen 2
+__________________________
+
+Log Entry : 
+01/24/2017 12:30:11
+Error in: . Error Message:grabo en base
+__________________________
+
+Log Entry : 
+01/24/2017 12:30:11
+Error in: . Error Message:grabado
+__________________________
+
+Log Entry : 
+01/24/2017 12:30:11
+Error in: . Error Message:Archivo C:\Users\Administrador\Documents\bdl\pronto\prontoweb\Temp\Lote 24ene122845 Mariano PV1\ExportToXLS_959638.tif numcarta 558299523
+__________________________
+
+Log Entry : 
+01/24/2017 12:31:26
+Error in: . Error Message:Procesó carta: titular COOPERATIVA AGRICOLA GANADERA LIMITADA GUILLERMO LEHMANN
+__________________________
+
+Log Entry : 
+01/24/2017 12:31:26
+Error in: . Error Message:Detectó bien el numero con el Flexicapture: 558866967
+__________________________
+
+Log Entry : 
+01/24/2017 12:31:28
+Error in: . Error Message:Llamo a IsValid y Save
+__________________________
+
+Log Entry : 
+01/24/2017 12:31:33
+Error in: . Error Message:Llamo a GrabarImagen
+__________________________
+
+Log Entry : 
+01/24/2017 12:31:33
+Error in: . Error Message:GrabarImagen 1
+__________________________
+
+Log Entry : 
+01/24/2017 12:31:33
+Error in: . Error Message:GrabarImagen 2
+__________________________
+
+Log Entry : 
+01/24/2017 12:31:36
+Error in: . Error Message:grabo en base
+__________________________
+
+Log Entry : 
+01/24/2017 12:31:37
+Error in: . Error Message:grabado
+__________________________
+
+Log Entry : 
+01/24/2017 12:31:37
+Error in: . Error Message:Archivo C:\Users\Administrador\Documents\bdl\pronto\prontoweb\Temp\Lote 24ene122845 Mariano PV1\ExportToXLS_251026.tif numcarta 558866967
+__________________________
+
+Log Entry : 
+01/24/2017 12:31:54
+Error in: . Error Message:Procesó carta: titular FERNANDEZ DANIEL ENRIQUE
+__________________________
+
+Log Entry : 
+01/24/2017 12:31:54
+Error in: . Error Message:No detectó el numero. Llamo a LeerNumeroDeCartaPorteUsandoCodigoDeBarra
+__________________________
+
+Log Entry : 
+01/24/2017 12:32:20
+Error in: . Error Message:Salgo de LeerNumeroDeCartaPorteUsandoCodigoDeBarra
+__________________________
+
+Log Entry : 
+01/24/2017 12:32:21
+Error in: . Error Message:Llamo a IsValid y Save
+__________________________
+
+Log Entry : 
+01/24/2017 12:32:26
+Error in: . Error Message:Llamo a GrabarImagen
+__________________________
+
+Log Entry : 
+01/24/2017 12:32:26
+Error in: . Error Message:GrabarImagen 1
+__________________________
+
+Log Entry : 
+01/24/2017 12:32:26
+Error in: . Error Message:GrabarImagen 2
+__________________________
+
+Log Entry : 
+01/24/2017 12:32:29
+Error in: . Error Message:grabo en base
+__________________________
+
+Log Entry : 
+01/24/2017 12:32:29
+Error in: . Error Message:grabado
+__________________________
+
+Log Entry : 
+01/24/2017 12:32:29
+Error in: . Error Message:Archivo C:\Users\Administrador\Documents\bdl\pronto\prontoweb\Temp\Lote 24ene122845 Mariano PV1\ExportToXLS_382003.tif numcarta 558863861
+__________________________
+
+Log Entry : 
+01/24/2017 12:32:39
+Error in: . Error Message:Procesó carta: titular DEJAGRO S R L
+__________________________
+
+Log Entry : 
+01/24/2017 12:32:39
+Error in: . Error Message:Detectó bien el numero con el Flexicapture: 558670952
+__________________________
+
+Log Entry : 
+01/24/2017 12:32:40
+Error in: . Error Message:System.FormatException
+No se puede reconocer la cadena como valor DateTime válido.
+   en System.DateTimeParse.Parse(String s, DateTimeFormatInfo dtfi, DateTimeStyles styles)
+   en System.Convert.ToDateTime(String value)
+   en ProntoFlexicapture.ClassFlexicapture.ProcesaCarta(IDocument document, String SC, String archivoOriginal, String DirApp) en c:\Users\Administrador\Documents\bdl\pronto\InterfazFlexicapture\prontoflexicapture.cs:línea 2023
+mscorlib
+__________________________
+
+Log Entry : 
+01/24/2017 12:32:40
+Error in: . Error Message:Llamo a IsValid y Save
+__________________________
+
+Log Entry : 
+01/24/2017 12:32:46
+Error in: . Error Message:Llamo a GrabarImagen
+__________________________
+
+Log Entry : 
+01/24/2017 12:32:46
+Error in: . Error Message:GrabarImagen 1
+__________________________
+
+Log Entry : 
+01/24/2017 12:32:47
+Error in: . Error Message:GrabarImagen 2
+__________________________
+
+Log Entry : 
+01/24/2017 12:32:49
+Error in: . Error Message:grabo en base
+__________________________
+
+Log Entry : 
+01/24/2017 12:32:49
+Error in: . Error Message:grabado
+__________________________
+
+Log Entry : 
+01/24/2017 12:32:49
+Error in: . Error Message:Archivo C:\Users\Administrador\Documents\bdl\pronto\prontoweb\Temp\Lote 24ene122845 Mariano PV1\ExportToXLS_274021.tif numcarta 558670952
+__________________________
+
+Log Entry : 
+01/24/2017 12:32:59
+Error in: . Error Message:Procesó carta: titular DEJAGRO S R L
+__________________________
+
+Log Entry : 
+01/24/2017 12:32:59
+Error in: . Error Message:No detectó el numero. Llamo a LeerNumeroDeCartaPorteUsandoCodigoDeBarra
+__________________________
+
+Log Entry : 
+01/24/2017 12:33:00
+Error in: . Error Message:Salgo de LeerNumeroDeCartaPorteUsandoCodigoDeBarra
+__________________________
+
+Log Entry : 
+01/24/2017 12:33:52
+Error in: . Error Message:System.FormatException
+No se puede reconocer la cadena como valor DateTime válido.
+   en System.DateTimeParse.Parse(String s, DateTimeFormatInfo dtfi, DateTimeStyles styles)
+   en System.Convert.ToDateTime(String value)
+   en ProntoFlexicapture.ClassFlexicapture.ProcesaCarta(IDocument document, String SC, String archivoOriginal, String DirApp) en c:\Users\Administrador\Documents\bdl\pronto\InterfazFlexicapture\prontoflexicapture.cs:línea 2023
+mscorlib
+__________________________
+
+Log Entry : 
+01/24/2017 12:33:52
+Error in: . Error Message:Llamo a IsValid y Save
+__________________________
+
+Log Entry : 
+01/24/2017 12:33:56
+Error in: . Error Message:Llamo a GrabarImagen
+__________________________
+
+Log Entry : 
+01/24/2017 12:33:56
+Error in: . Error Message:GrabarImagen 1
+__________________________
+
+Log Entry : 
+01/24/2017 12:33:56
+Error in: . Error Message:GrabarImagen 2
+__________________________
+
+Log Entry : 
+01/24/2017 12:33:58
+Error in: . Error Message:grabo en base
+__________________________
+
+Log Entry : 
+01/24/2017 12:33:58
+Error in: . Error Message:grabado
+__________________________
+
+Log Entry : 
+01/24/2017 12:33:58
+Error in: . Error Message:Archivo C:\Users\Administrador\Documents\bdl\pronto\prontoweb\Temp\Lote 24ene122845 Mariano PV1\ExportToXLS_955418.tif numcarta 558670951
+__________________________
+
+Log Entry : 
+01/24/2017 12:34:07
+Error in: . Error Message:Procesó carta: titular NORDICA SA
+__________________________
+
+Log Entry : 
+01/24/2017 12:34:07
+Error in: . Error Message:Detectó bien el numero con el Flexicapture: 558443983
+__________________________
+
+Log Entry : 
+01/24/2017 12:34:40
+Error in: . Error Message:Llamo a IsValid y Save
+__________________________
+
+Log Entry : 
+01/24/2017 12:34:46
+Error in: . Error Message:Llamo a GrabarImagen
+__________________________
+
+Log Entry : 
+01/24/2017 12:34:46
+Error in: . Error Message:GrabarImagen 1
+__________________________
+
+Log Entry : 
+01/24/2017 12:34:47
+Error in: . Error Message:GrabarImagen 2
+__________________________
+
+Log Entry : 
+01/24/2017 12:34:49
+Error in: . Error Message:grabo en base
+__________________________
+
+Log Entry : 
+01/24/2017 12:34:49
+Error in: . Error Message:grabado
+__________________________
+
+Log Entry : 
+01/24/2017 12:34:49
+Error in: . Error Message:Archivo C:\Users\Administrador\Documents\bdl\pronto\prontoweb\Temp\Lote 24ene122845 Mariano PV1\ExportToXLS_410697.tif numcarta 558443983
+__________________________
+
+Log Entry : 
+01/24/2017 12:35:05
+Error in: . Error Message:Procesó carta: titular GAViGLIO COMERCIAL S.A.
+__________________________
+
+Log Entry : 
+01/24/2017 12:35:05
+Error in: . Error Message:No detectó el numero. Llamo a LeerNumeroDeCartaPorteUsandoCodigoDeBarra
+__________________________
+
+Log Entry : 
+01/24/2017 12:35:45
+Error in: . Error Message:Salgo de LeerNumeroDeCartaPorteUsandoCodigoDeBarra
+__________________________
+
+Log Entry : 
+01/24/2017 12:35:46
+Error in: . Error Message:Llamo a IsValid y Save
+__________________________
+
+Log Entry : 
+01/24/2017 12:35:52
+Error in: . Error Message:Llamo a GrabarImagen
+__________________________
+
+Log Entry : 
+01/24/2017 12:35:52
+Error in: . Error Message:GrabarImagen 1
+__________________________
+
+Log Entry : 
+01/24/2017 12:35:52
+Error in: . Error Message:GrabarImagen 2
+__________________________
+
+Log Entry : 
+01/24/2017 12:35:54
+Error in: . Error Message:grabo en base
+__________________________
+
+Log Entry : 
+01/24/2017 12:35:54
+Error in: . Error Message:grabado
+__________________________
+
+Log Entry : 
+01/24/2017 12:35:54
+Error in: . Error Message:Archivo C:\Users\Administrador\Documents\bdl\pronto\prontoweb\Temp\Lote 24ene122845 Mariano PV1\ExportToXLS_927669.tif numcarta 558450865
+__________________________
+
+Log Entry : 
+01/24/2017 12:36:03
+Error in: . Error Message:Procesó carta: titular MARCA C SOCIEDAD ANONIMA
+__________________________
+
+Log Entry : 
+01/24/2017 12:36:03
+Error in: . Error Message:Detectó bien el numero con el Flexicapture: 558857011
+__________________________
+
+Log Entry : 
+01/24/2017 12:37:15
+Error in: . Error Message:System.FormatException
+No se puede reconocer la cadena como valor DateTime válido.
+   en System.DateTimeParse.Parse(String s, DateTimeFormatInfo dtfi, DateTimeStyles styles)
+   en System.Convert.ToDateTime(String value)
+   en ProntoFlexicapture.ClassFlexicapture.ProcesaCarta(IDocument document, String SC, String archivoOriginal, String DirApp) en c:\Users\Administrador\Documents\bdl\pronto\InterfazFlexicapture\prontoflexicapture.cs:línea 2023
+mscorlib
+__________________________
+
+Log Entry : 
+01/24/2017 12:37:15
+Error in: . Error Message:Llamo a IsValid y Save
+__________________________
+
+Log Entry : 
+01/24/2017 12:37:19
+Error in: . Error Message:Llamo a GrabarImagen
+__________________________
+
+Log Entry : 
+01/24/2017 12:37:19
+Error in: . Error Message:GrabarImagen 1
+__________________________
+
+Log Entry : 
+01/24/2017 12:37:19
+Error in: . Error Message:GrabarImagen 2
+__________________________
+
+Log Entry : 
+01/24/2017 12:37:22
+Error in: . Error Message:grabo en base
+__________________________
+
+Log Entry : 
+01/24/2017 12:37:22
+Error in: . Error Message:grabado
+__________________________
+
+Log Entry : 
+01/24/2017 12:37:22
+Error in: . Error Message:Archivo C:\Users\Administrador\Documents\bdl\pronto\prontoweb\Temp\Lote 24ene122845 Mariano PV1\ExportToXLS_472101.tif numcarta 558857011
+__________________________
+
+Log Entry : 
+01/24/2017 12:37:35
+Error in: . Error Message:Procesó carta: titular GAVIGLIO COMERCIAL S.A.
+__________________________
+
+Log Entry : 
+01/24/2017 12:37:35
+Error in: . Error Message:No detectó el numero. Llamo a LeerNumeroDeCartaPorteUsandoCodigoDeBarra
+__________________________
+
+Log Entry : 
+01/24/2017 12:38:13
+Error in: . Error Message:Salgo de LeerNumeroDeCartaPorteUsandoCodigoDeBarra
+__________________________
+
+Log Entry : 
+01/24/2017 12:38:15
+Error in: . Error Message:Llamo a IsValid y Save
+__________________________
+
+Log Entry : 
+01/24/2017 12:38:29
+Error in: . Error Message:Llamo a GrabarImagen
+__________________________
+
+Log Entry : 
+01/24/2017 12:38:29
+Error in: . Error Message:GrabarImagen 1
+__________________________
+
+Log Entry : 
+01/24/2017 12:38:29
+Error in: . Error Message:GrabarImagen 2
+__________________________
+
+Log Entry : 
+01/24/2017 12:38:31
+Error in: . Error Message:grabo en base
+__________________________
+
+Log Entry : 
+01/24/2017 12:38:31
+Error in: . Error Message:grabado
+__________________________
+
+Log Entry : 
+01/24/2017 12:38:31
+Error in: . Error Message:Archivo C:\Users\Administrador\Documents\bdl\pronto\prontoweb\Temp\Lote 24ene122845 Mariano PV1\ExportToXLS_419914.tif numcarta 900255785
+__________________________
+
+Log Entry : 
+01/24/2017 12:38:41
+Error in: . Error Message:Procesó carta: titular ELISA LACAU E HIJOS S.A.
+__________________________
+
+Log Entry : 
+01/24/2017 12:38:41
+Error in: . Error Message:Detectó bien el numero con el Flexicapture: 558857968
+__________________________
+
+Log Entry : 
+01/24/2017 12:39:21
+Error in: . Error Message:Llamo a IsValid y Save
+__________________________
+
+Log Entry : 
+01/24/2017 12:39:26
+Error in: . Error Message:Llamo a GrabarImagen
+__________________________
+
+Log Entry : 
+01/24/2017 12:39:26
+Error in: . Error Message:GrabarImagen 1
+__________________________
+
+Log Entry : 
+01/24/2017 12:39:27
+Error in: . Error Message:GrabarImagen 2
+__________________________
+
+Log Entry : 
+01/24/2017 12:39:29
+Error in: . Error Message:grabo en base
+__________________________
+
+Log Entry : 
+01/24/2017 12:39:29
+Error in: . Error Message:grabado
+__________________________
+
+Log Entry : 
+01/24/2017 12:39:29
+Error in: . Error Message:Archivo C:\Users\Administrador\Documents\bdl\pronto\prontoweb\Temp\Lote 24ene122845 Mariano PV1\ExportToXLS_790050.tif numcarta 558857968
+__________________________
+
+Log Entry : 
+01/24/2017 12:39:38
+Error in: . Error Message:Procesó carta: titular ELISA LACAU E HIJOS S.A.
+__________________________
+
+Log Entry : 
+01/24/2017 12:39:38
+Error in: . Error Message:No detectó el numero. Llamo a LeerNumeroDeCartaPorteUsandoCodigoDeBarra
+__________________________
+
+Log Entry : 
+01/24/2017 12:40:20
+Error in: . Error Message:Salgo de LeerNumeroDeCartaPorteUsandoCodigoDeBarra
+__________________________
+
+Log Entry : 
+01/24/2017 12:40:23
+Error in: . Error Message:Llamo a IsValid y Save
+__________________________
+
+Log Entry : 
+01/24/2017 12:40:36
+Error in: . Error Message:Llamo a GrabarImagen
+__________________________
+
+Log Entry : 
+01/24/2017 12:40:36
+Error in: . Error Message:GrabarImagen 1
+__________________________
+
+Log Entry : 
+01/24/2017 12:40:36
+Error in: . Error Message:GrabarImagen 2
+__________________________
+
+Log Entry : 
+01/24/2017 12:40:38
+Error in: . Error Message:grabo en base
+__________________________
+
+Log Entry : 
+01/24/2017 12:40:38
+Error in: . Error Message:grabado
+__________________________
+
+Log Entry : 
+01/24/2017 12:40:38
+Error in: . Error Message:Archivo C:\Users\Administrador\Documents\bdl\pronto\prontoweb\Temp\Lote 24ene122845 Mariano PV1\ExportToXLS_293321.tif numcarta 900880316
+__________________________
+
+Log Entry : 
+01/24/2017 12:40:47
+Error in: . Error Message:Procesó carta: titular ELISA LACAU E HIJOS S.A.
+__________________________
+
+Log Entry : 
+01/24/2017 12:40:47
+Error in: . Error Message:No detectó el numero. Llamo a LeerNumeroDeCartaPorteUsandoCodigoDeBarra
+__________________________
+
+Log Entry : 
+01/24/2017 12:41:08
+Error in: . Error Message:Salgo de LeerNumeroDeCartaPorteUsandoCodigoDeBarra
+__________________________
+
+Log Entry : 
+01/24/2017 12:41:09
+Error in: . Error Message:Llamo a IsValid y Save
+__________________________
+
+Log Entry : 
+01/24/2017 12:41:15
+Error in: . Error Message:Llamo a GrabarImagen
+__________________________
+
+Log Entry : 
+01/24/2017 12:41:15
+Error in: . Error Message:GrabarImagen 1
+__________________________
+
+Log Entry : 
+01/24/2017 12:41:15
+Error in: . Error Message:GrabarImagen 2
+__________________________
+
+Log Entry : 
+01/24/2017 12:41:17
+Error in: . Error Message:grabo en base
+__________________________
+
+Log Entry : 
+01/24/2017 12:41:18
+Error in: . Error Message:grabado
+__________________________
+
+Log Entry : 
+01/24/2017 12:41:18
+Error in: . Error Message:Archivo C:\Users\Administrador\Documents\bdl\pronto\prontoweb\Temp\Lote 24ene122845 Mariano PV1\ExportToXLS_241246.tif numcarta 558857963
+__________________________
+
+Log Entry : 
+01/24/2017 12:41:26
+Error in: . Error Message:Procesó carta: titular ELISA LACAU E HIJOS S.A.
+__________________________
+
+Log Entry : 
+01/24/2017 12:41:26
+Error in: . Error Message:No detectó el numero. Llamo a LeerNumeroDeCartaPorteUsandoCodigoDeBarra
+__________________________
+
+Log Entry : 
+01/24/2017 12:41:47
+Error in: . Error Message:Salgo de LeerNumeroDeCartaPorteUsandoCodigoDeBarra
+__________________________
+
+Log Entry : 
+01/24/2017 12:41:49
+Error in: . Error Message:Llamo a IsValid y Save
+__________________________
+
+Log Entry : 
+01/24/2017 12:41:55
+Error in: . Error Message:Llamo a GrabarImagen
+__________________________
+
+Log Entry : 
+01/24/2017 12:41:55
+Error in: . Error Message:GrabarImagen 1
+__________________________
+
+Log Entry : 
+01/24/2017 12:41:55
+Error in: . Error Message:GrabarImagen 2
+__________________________
+
+Log Entry : 
+01/24/2017 12:41:57
+Error in: . Error Message:grabo en base
+__________________________
+
+Log Entry : 
+01/24/2017 12:41:57
+Error in: . Error Message:grabado
+__________________________
+
+Log Entry : 
+01/24/2017 12:41:57
+Error in: . Error Message:Archivo C:\Users\Administrador\Documents\bdl\pronto\prontoweb\Temp\Lote 24ene122845 Mariano PV1\ExportToXLS_509679.tif numcarta 558857966
+__________________________
+
+Log Entry : 
+01/24/2017 12:42:05
+Error in: . Error Message:Procesó carta: titular ELISA LACAU E HIJOS S.A.
+__________________________
+
+Log Entry : 
+01/24/2017 12:42:05
+Error in: . Error Message:No detectó el numero. Llamo a LeerNumeroDeCartaPorteUsandoCodigoDeBarra
+__________________________
+
+Log Entry : 
+01/24/2017 13:08:30
+Error in: . Error Message:Arranca motor
+__________________________
+
+Log Entry : 
+01/24/2017 13:08:44
+Error in: . Error Message:Reconoció la licencia
+__________________________
+
+Log Entry : 
+01/24/2017 13:09:19
+Error in: . Error Message:Procesó carta: titular SOJAS ARGENTINAS SRL
+__________________________
+
+Log Entry : 
+01/24/2017 13:09:19
+Error in: . Error Message:Detectó bien el numero con el Flexicapture: 558299523
+__________________________
+
+Log Entry : 
+01/24/2017 13:09:32
+Error in: . Error Message:System.FormatException
+No se puede reconocer la cadena como valor DateTime válido.
+   en System.DateTimeParse.Parse(String s, DateTimeFormatInfo dtfi, DateTimeStyles styles)
+   en System.Convert.ToDateTime(String value)
+   en ProntoFlexicapture.ClassFlexicapture.ProcesaCarta(IDocument document, String SC, String archivoOriginal, String DirApp) en c:\Users\Administrador\Documents\bdl\pronto\InterfazFlexicapture\prontoflexicapture.cs:línea 2023
+mscorlib
+__________________________
+
+Log Entry : 
+01/24/2017 13:09:32
+Error in: . Error Message:Llamo a IsValid y Save
+__________________________
+
+Log Entry : 
+01/24/2017 13:09:41
+Error in: . Error Message:Llamo a GrabarImagen
+__________________________
+
+Log Entry : 
+01/24/2017 13:09:41
+Error in: . Error Message:GrabarImagen 1
+__________________________
+
+Log Entry : 
+01/24/2017 13:09:41
+Error in: . Error Message:GrabarImagen 2
+__________________________
+
+Log Entry : 
+01/24/2017 13:09:43
+Error in: . Error Message:grabo en base
+__________________________
+
+Log Entry : 
+01/24/2017 13:09:43
+Error in: . Error Message:grabado
+__________________________
+
+Log Entry : 
+01/24/2017 13:09:43
+Error in: . Error Message:Archivo C:\Users\Administrador\Documents\bdl\pronto\prontoweb\Temp\Lote 24ene130741 Mariano PV1\ExportToXLS_731610.tif numcarta 558299523
+__________________________
+
+Log Entry : 
+01/24/2017 13:10:06
+Error in: . Error Message:Procesó carta: titular COOPERATIVA AGRICOLA GANADERA LIMITADA GUILLERMO LEHMANN
+__________________________
+
+Log Entry : 
+01/24/2017 13:10:06
+Error in: . Error Message:Detectó bien el numero con el Flexicapture: 558866967
+__________________________
+
+Log Entry : 
+01/24/2017 13:10:09
+Error in: . Error Message:Llamo a IsValid y Save
+__________________________
+
+Log Entry : 
+01/24/2017 13:10:16
+Error in: . Error Message:Llamo a GrabarImagen
+__________________________
+
+Log Entry : 
+01/24/2017 13:10:16
+Error in: . Error Message:GrabarImagen 1
+__________________________
+
+Log Entry : 
+01/24/2017 13:10:16
+Error in: . Error Message:GrabarImagen 2
+__________________________
+
+Log Entry : 
+01/24/2017 13:10:18
+Error in: . Error Message:grabo en base
+__________________________
+
+Log Entry : 
+01/24/2017 13:10:18
+Error in: . Error Message:grabado
+__________________________
+
+Log Entry : 
+01/24/2017 13:10:18
+Error in: . Error Message:Archivo C:\Users\Administrador\Documents\bdl\pronto\prontoweb\Temp\Lote 24ene130741 Mariano PV1\ExportToXLS_455567.tif numcarta 558866967
+__________________________
+
+Log Entry : 
+01/24/2017 13:10:26
+Error in: . Error Message:Procesó carta: titular FERNANDEZ DANIEL ENRIQUE
+__________________________
+
+Log Entry : 
+01/24/2017 13:10:26
+Error in: . Error Message:No detectó el numero. Llamo a LeerNumeroDeCartaPorteUsandoCodigoDeBarra
+__________________________
+
+Log Entry : 
+01/24/2017 13:10:50
+Error in: . Error Message:Salgo de LeerNumeroDeCartaPorteUsandoCodigoDeBarra
+__________________________
+
+Log Entry : 
+01/24/2017 13:10:52
+Error in: . Error Message:Llamo a IsValid y Save
+__________________________
+
+Log Entry : 
+01/24/2017 13:10:59
+Error in: . Error Message:Llamo a GrabarImagen
+__________________________
+
+Log Entry : 
+01/24/2017 13:10:59
+Error in: . Error Message:GrabarImagen 1
+__________________________
+
+Log Entry : 
+01/24/2017 13:10:59
+Error in: . Error Message:GrabarImagen 2
+__________________________
+
+Log Entry : 
+01/24/2017 13:11:01
+Error in: . Error Message:grabo en base
+__________________________
+
+Log Entry : 
+01/24/2017 13:11:02
+Error in: . Error Message:grabado
+__________________________
+
+Log Entry : 
+01/24/2017 13:11:02
+Error in: . Error Message:Archivo C:\Users\Administrador\Documents\bdl\pronto\prontoweb\Temp\Lote 24ene130741 Mariano PV1\ExportToXLS_858173.tif numcarta 558863861
+__________________________
+
+Log Entry : 
+01/24/2017 13:11:11
+Error in: . Error Message:Procesó carta: titular DEJAGRO S R L
+__________________________
+
+Log Entry : 
+01/24/2017 13:11:11
+Error in: . Error Message:Detectó bien el numero con el Flexicapture: 558670952
+__________________________
+
+Log Entry : 
+01/24/2017 13:11:13
+Error in: . Error Message:System.FormatException
+No se puede reconocer la cadena como valor DateTime válido.
+   en System.DateTimeParse.Parse(String s, DateTimeFormatInfo dtfi, DateTimeStyles styles)
+   en System.Convert.ToDateTime(String value)
+   en ProntoFlexicapture.ClassFlexicapture.ProcesaCarta(IDocument document, String SC, String archivoOriginal, String DirApp) en c:\Users\Administrador\Documents\bdl\pronto\InterfazFlexicapture\prontoflexicapture.cs:línea 2023
+mscorlib
+__________________________
+
+Log Entry : 
+01/24/2017 13:11:13
+Error in: . Error Message:Llamo a IsValid y Save
+__________________________
+
+Log Entry : 
+01/24/2017 13:11:20
+Error in: . Error Message:Llamo a GrabarImagen
+__________________________
+
+Log Entry : 
+01/24/2017 13:11:20
+Error in: . Error Message:GrabarImagen 1
+__________________________
+
+Log Entry : 
+01/24/2017 13:11:21
+Error in: . Error Message:GrabarImagen 2
+__________________________
+
+Log Entry : 
+01/24/2017 13:11:23
+Error in: . Error Message:grabo en base
+__________________________
+
+Log Entry : 
+01/24/2017 13:11:23
+Error in: . Error Message:grabado
+__________________________
+
+Log Entry : 
+01/24/2017 13:11:23
+Error in: . Error Message:Archivo C:\Users\Administrador\Documents\bdl\pronto\prontoweb\Temp\Lote 24ene130741 Mariano PV1\ExportToXLS_483286.tif numcarta 558670952
+__________________________
+
+Log Entry : 
+01/24/2017 13:11:33
+Error in: . Error Message:Procesó carta: titular DEJAGRO S R L
+__________________________
+
+Log Entry : 
+01/24/2017 13:11:33
+Error in: . Error Message:No detectó el numero. Llamo a LeerNumeroDeCartaPorteUsandoCodigoDeBarra
+__________________________
+
+Log Entry : 
+01/24/2017 13:11:34
+Error in: . Error Message:Salgo de LeerNumeroDeCartaPorteUsandoCodigoDeBarra
+__________________________
+
+Log Entry : 
+01/24/2017 13:12:24
+Error in: . Error Message:System.FormatException
+No se puede reconocer la cadena como valor DateTime válido.
+   en System.DateTimeParse.Parse(String s, DateTimeFormatInfo dtfi, DateTimeStyles styles)
+   en System.Convert.ToDateTime(String value)
+   en ProntoFlexicapture.ClassFlexicapture.ProcesaCarta(IDocument document, String SC, String archivoOriginal, String DirApp) en c:\Users\Administrador\Documents\bdl\pronto\InterfazFlexicapture\prontoflexicapture.cs:línea 2023
+mscorlib
+__________________________
+
+Log Entry : 
+01/24/2017 13:12:24
+Error in: . Error Message:Llamo a IsValid y Save
+__________________________
+
+Log Entry : 
+01/24/2017 13:12:31
+Error in: . Error Message:Llamo a GrabarImagen
+__________________________
+
+Log Entry : 
+01/24/2017 13:12:31
+Error in: . Error Message:GrabarImagen 1
+__________________________
+
+Log Entry : 
+01/24/2017 13:12:31
+Error in: . Error Message:GrabarImagen 2
+__________________________
+
+Log Entry : 
+01/24/2017 13:12:33
+Error in: . Error Message:grabo en base
+__________________________
+
+Log Entry : 
+01/24/2017 13:12:33
+Error in: . Error Message:grabado
+__________________________
+
+Log Entry : 
+01/24/2017 13:12:33
+Error in: . Error Message:Archivo C:\Users\Administrador\Documents\bdl\pronto\prontoweb\Temp\Lote 24ene130741 Mariano PV1\ExportToXLS_498033.tif numcarta 558670951
+__________________________
+
+Log Entry : 
+01/24/2017 13:12:41
+Error in: . Error Message:Procesó carta: titular NORDICA SA
+__________________________
+
+Log Entry : 
+01/24/2017 13:12:41
+Error in: . Error Message:Detectó bien el numero con el Flexicapture: 558443983
+__________________________
+
+Log Entry : 
+01/24/2017 13:13:21
+Error in: . Error Message:Llamo a IsValid y Save
+__________________________
+
+Log Entry : 
+01/24/2017 13:13:29
+Error in: . Error Message:Llamo a GrabarImagen
+__________________________
+
+Log Entry : 
+01/24/2017 13:13:29
+Error in: . Error Message:GrabarImagen 1
+__________________________
+
+Log Entry : 
+01/24/2017 13:13:30
+Error in: . Error Message:GrabarImagen 2
+__________________________
+
+Log Entry : 
+01/24/2017 13:13:32
+Error in: . Error Message:grabo en base
+__________________________
+
+Log Entry : 
+01/24/2017 13:13:32
+Error in: . Error Message:grabado
+__________________________
+
+Log Entry : 
+01/24/2017 13:13:32
+Error in: . Error Message:Archivo C:\Users\Administrador\Documents\bdl\pronto\prontoweb\Temp\Lote 24ene130741 Mariano PV1\ExportToXLS_345805.tif numcarta 558443983
+__________________________
+
+Log Entry : 
+01/24/2017 13:13:47
+Error in: . Error Message:Procesó carta: titular GAViGLIO COMERCIAL S.A.
+__________________________
+
+Log Entry : 
+01/24/2017 13:13:47
+Error in: . Error Message:No detectó el numero. Llamo a LeerNumeroDeCartaPorteUsandoCodigoDeBarra
+__________________________
+
+Log Entry : 
+01/24/2017 13:14:27
+Error in: . Error Message:Salgo de LeerNumeroDeCartaPorteUsandoCodigoDeBarra
+__________________________
+
+Log Entry : 
+01/24/2017 13:14:30
+Error in: . Error Message:Llamo a IsValid y Save
+__________________________
+
+Log Entry : 
+01/24/2017 13:14:38
+Error in: . Error Message:Llamo a GrabarImagen
+__________________________
+
+Log Entry : 
+01/24/2017 13:14:38
+Error in: . Error Message:GrabarImagen 1
+__________________________
+
+Log Entry : 
+01/24/2017 13:14:38
+Error in: . Error Message:GrabarImagen 2
+__________________________
+
+Log Entry : 
+01/24/2017 13:14:40
+Error in: . Error Message:grabo en base
+__________________________
+
+Log Entry : 
+01/24/2017 13:14:40
+Error in: . Error Message:grabado
+__________________________
+
+Log Entry : 
+01/24/2017 13:14:40
+Error in: . Error Message:Archivo C:\Users\Administrador\Documents\bdl\pronto\prontoweb\Temp\Lote 24ene130741 Mariano PV1\ExportToXLS_493171.tif numcarta 558450865
+__________________________
+
+Log Entry : 
+01/24/2017 13:14:49
+Error in: . Error Message:Procesó carta: titular MARCA C SOCIEDAD ANONIMA
+__________________________
+
+Log Entry : 
+01/24/2017 13:14:49
+Error in: . Error Message:Detectó bien el numero con el Flexicapture: 558857011
+__________________________
+
+Log Entry : 
+01/24/2017 13:16:00
+Error in: . Error Message:System.FormatException
+No se puede reconocer la cadena como valor DateTime válido.
+   en System.DateTimeParse.Parse(String s, DateTimeFormatInfo dtfi, DateTimeStyles styles)
+   en System.Convert.ToDateTime(String value)
+   en ProntoFlexicapture.ClassFlexicapture.ProcesaCarta(IDocument document, String SC, String archivoOriginal, String DirApp) en c:\Users\Administrador\Documents\bdl\pronto\InterfazFlexicapture\prontoflexicapture.cs:línea 2023
+mscorlib
+__________________________
+
+Log Entry : 
+01/24/2017 13:16:00
+Error in: . Error Message:Llamo a IsValid y Save
+__________________________
+
+Log Entry : 
+01/24/2017 13:16:08
+Error in: . Error Message:Llamo a GrabarImagen
+__________________________
+
+Log Entry : 
+01/24/2017 13:16:08
+Error in: . Error Message:GrabarImagen 1
+__________________________
+
+Log Entry : 
+01/24/2017 13:16:08
+Error in: . Error Message:GrabarImagen 2
+__________________________
+
+Log Entry : 
+01/24/2017 13:16:10
+Error in: . Error Message:grabo en base
+__________________________
+
+Log Entry : 
+01/24/2017 13:16:10
+Error in: . Error Message:grabado
+__________________________
+
+Log Entry : 
+01/24/2017 13:16:10
+Error in: . Error Message:Archivo C:\Users\Administrador\Documents\bdl\pronto\prontoweb\Temp\Lote 24ene130741 Mariano PV1\ExportToXLS_851864.tif numcarta 558857011
+__________________________
+
+Log Entry : 
+01/24/2017 13:16:22
+Error in: . Error Message:Procesó carta: titular GAVIGLIO COMERCIAL S.A.
+__________________________
+
+Log Entry : 
+01/24/2017 13:16:22
+Error in: . Error Message:No detectó el numero. Llamo a LeerNumeroDeCartaPorteUsandoCodigoDeBarra
+__________________________
+
+Log Entry : 
+01/24/2017 13:17:02
+Error in: . Error Message:Salgo de LeerNumeroDeCartaPorteUsandoCodigoDeBarra
+__________________________
+
+Log Entry : 
+01/24/2017 13:17:03
+Error in: . Error Message:Llamo a IsValid y Save
+__________________________
+
+Log Entry : 
+01/24/2017 13:17:14
+Error in: . Error Message:Llamo a GrabarImagen
+__________________________
+
+Log Entry : 
+01/24/2017 13:17:14
+Error in: . Error Message:GrabarImagen 1
+__________________________
+
+Log Entry : 
+01/24/2017 13:17:14
+Error in: . Error Message:GrabarImagen 2
+__________________________
+
+Log Entry : 
+01/24/2017 13:17:16
+Error in: . Error Message:grabo en base
+__________________________
+
+Log Entry : 
+01/24/2017 13:17:16
+Error in: . Error Message:grabado
+__________________________
+
+Log Entry : 
+01/24/2017 13:17:16
+Error in: . Error Message:Archivo C:\Users\Administrador\Documents\bdl\pronto\prontoweb\Temp\Lote 24ene130741 Mariano PV1\ExportToXLS_430514.tif numcarta 900697063
+__________________________
+
+Log Entry : 
+01/24/2017 13:17:27
+Error in: . Error Message:Procesó carta: titular ELISA LACAU E HIJOS S.A.
+__________________________
+
+Log Entry : 
+01/24/2017 13:17:27
+Error in: . Error Message:Detectó bien el numero con el Flexicapture: 558857968
+__________________________
+
+Log Entry : 
+01/24/2017 13:18:05
+Error in: . Error Message:Llamo a IsValid y Save
+__________________________
+
+Log Entry : 
+01/24/2017 13:18:13
+Error in: . Error Message:Llamo a GrabarImagen
+__________________________
+
+Log Entry : 
+01/24/2017 13:18:14
+Error in: . Error Message:GrabarImagen 1
+__________________________
+
+Log Entry : 
+01/24/2017 13:18:14
+Error in: . Error Message:GrabarImagen 2
+__________________________
+
+Log Entry : 
+01/24/2017 13:18:16
+Error in: . Error Message:grabo en base
+__________________________
+
+Log Entry : 
+01/24/2017 13:18:16
+Error in: . Error Message:grabado
+__________________________
+
+Log Entry : 
+01/24/2017 13:18:16
+Error in: . Error Message:Archivo C:\Users\Administrador\Documents\bdl\pronto\prontoweb\Temp\Lote 24ene130741 Mariano PV1\ExportToXLS_689920.tif numcarta 558857968
+__________________________
+
+Log Entry : 
+01/24/2017 13:18:25
+Error in: . Error Message:Procesó carta: titular ELISA LACAU E HIJOS S.A.
+__________________________
+
+Log Entry : 
+01/24/2017 13:18:25
+Error in: . Error Message:No detectó el numero. Llamo a LeerNumeroDeCartaPorteUsandoCodigoDeBarra
+__________________________
+
+Log Entry : 
+01/24/2017 13:19:09
+Error in: . Error Message:Salgo de LeerNumeroDeCartaPorteUsandoCodigoDeBarra
+__________________________
+
+Log Entry : 
+01/24/2017 13:19:11
+Error in: . Error Message:Llamo a IsValid y Save
+__________________________
+
+Log Entry : 
+01/24/2017 13:19:22
+Error in: . Error Message:Llamo a GrabarImagen
+__________________________
+
+Log Entry : 
+01/24/2017 13:19:22
+Error in: . Error Message:GrabarImagen 1
+__________________________
+
+Log Entry : 
+01/24/2017 13:19:22
+Error in: . Error Message:GrabarImagen 2
+__________________________
+
+Log Entry : 
+01/24/2017 13:19:25
+Error in: . Error Message:grabo en base
+__________________________
+
+Log Entry : 
+01/24/2017 13:19:25
+Error in: . Error Message:grabado
+__________________________
+
+Log Entry : 
+01/24/2017 13:19:25
+Error in: . Error Message:Archivo C:\Users\Administrador\Documents\bdl\pronto\prontoweb\Temp\Lote 24ene130741 Mariano PV1\ExportToXLS_582713.tif numcarta 900426273
+__________________________
+
+Log Entry : 
+01/24/2017 13:19:33
+Error in: . Error Message:Procesó carta: titular ELISA LACAU E HIJOS S.A.
+__________________________
+
+Log Entry : 
+01/24/2017 13:19:33
+Error in: . Error Message:No detectó el numero. Llamo a LeerNumeroDeCartaPorteUsandoCodigoDeBarra
+__________________________
+
+Log Entry : 
+01/24/2017 13:19:55
+Error in: . Error Message:Salgo de LeerNumeroDeCartaPorteUsandoCodigoDeBarra
+__________________________
+
+Log Entry : 
+01/24/2017 13:19:58
+Error in: . Error Message:Llamo a IsValid y Save
+__________________________
+
+Log Entry : 
+01/24/2017 13:20:06
+Error in: . Error Message:Llamo a GrabarImagen
+__________________________
+
+Log Entry : 
+01/24/2017 13:20:06
+Error in: . Error Message:GrabarImagen 1
+__________________________
+
+Log Entry : 
+01/24/2017 13:20:07
+Error in: . Error Message:GrabarImagen 2
+__________________________
+
+Log Entry : 
+01/24/2017 13:20:09
+Error in: . Error Message:grabo en base
+__________________________
+
+Log Entry : 
+01/24/2017 13:20:09
+Error in: . Error Message:grabado
+__________________________
+
+Log Entry : 
+01/24/2017 13:20:09
+Error in: . Error Message:Archivo C:\Users\Administrador\Documents\bdl\pronto\prontoweb\Temp\Lote 24ene130741 Mariano PV1\ExportToXLS_609122.tif numcarta 558857963
+__________________________
+
+Log Entry : 
+01/24/2017 13:20:18
+Error in: . Error Message:Procesó carta: titular ELISA LACAU E HIJOS S.A.
+__________________________
+
+Log Entry : 
+01/24/2017 13:20:18
+Error in: . Error Message:No detectó el numero. Llamo a LeerNumeroDeCartaPorteUsandoCodigoDeBarra
+__________________________
+
+Log Entry : 
+01/24/2017 13:20:40
+Error in: . Error Message:Salgo de LeerNumeroDeCartaPorteUsandoCodigoDeBarra
+__________________________
+
+Log Entry : 
+01/24/2017 13:20:43
+Error in: . Error Message:Llamo a IsValid y Save
+__________________________
+
+Log Entry : 
+01/24/2017 13:20:51
+Error in: . Error Message:Llamo a GrabarImagen
+__________________________
+
+Log Entry : 
+01/24/2017 13:20:51
+Error in: . Error Message:GrabarImagen 1
+__________________________
+
+Log Entry : 
+01/24/2017 13:20:51
+Error in: . Error Message:GrabarImagen 2
+__________________________
+
+Log Entry : 
+01/24/2017 13:20:53
+Error in: . Error Message:grabo en base
+__________________________
+
+Log Entry : 
+01/24/2017 13:20:53
+Error in: . Error Message:grabado
+__________________________
+
+Log Entry : 
+01/24/2017 13:20:53
+Error in: . Error Message:Archivo C:\Users\Administrador\Documents\bdl\pronto\prontoweb\Temp\Lote 24ene130741 Mariano PV1\ExportToXLS_607236.tif numcarta 558857966
+__________________________
+
+Log Entry : 
+01/24/2017 13:21:02
+Error in: . Error Message:Procesó carta: titular ELISA LACAU E HIJOS S.A.
+__________________________
+
+Log Entry : 
+01/24/2017 13:21:02
+Error in: . Error Message:No detectó el numero. Llamo a LeerNumeroDeCartaPorteUsandoCodigoDeBarra
+__________________________
+
+Log Entry : 
+01/24/2017 13:21:24
+Error in: . Error Message:Salgo de LeerNumeroDeCartaPorteUsandoCodigoDeBarra
+__________________________
+
+Log Entry : 
+01/24/2017 13:21:25
+Error in: . Error Message:Llamo a IsValid y Save
+__________________________
+
+Log Entry : 
+01/24/2017 13:21:31
+Error in: . Error Message:Llamo a GrabarImagen
+__________________________
+
+Log Entry : 
+01/24/2017 13:21:31
+Error in: . Error Message:GrabarImagen 1
+__________________________
+
+Log Entry : 
+01/24/2017 13:21:31
+Error in: . Error Message:GrabarImagen 2
+__________________________
+
+Log Entry : 
+01/24/2017 13:21:33
+Error in: . Error Message:grabo en base
+__________________________
+
+Log Entry : 
+01/24/2017 13:21:33
+Error in: . Error Message:grabado
+__________________________
+
+Log Entry : 
+01/24/2017 13:21:33
+Error in: . Error Message:Archivo C:\Users\Administrador\Documents\bdl\pronto\prontoweb\Temp\Lote 24ene130741 Mariano PV1\ExportToXLS_238293.tif numcarta 558857967
+__________________________
+
+Log Entry : 
+01/24/2017 13:21:43
+Error in: . Error Message:Procesó carta: titular ELISA LACAU E HIJOS S.A.
+__________________________
+
+Log Entry : 
+01/24/2017 13:21:43
+Error in: . Error Message:No detectó el numero. Llamo a LeerNumeroDeCartaPorteUsandoCodigoDeBarra
+__________________________
+
+Log Entry : 
+01/24/2017 13:22:26
+Error in: . Error Message:Salgo de LeerNumeroDeCartaPorteUsandoCodigoDeBarra
+__________________________
+
+Log Entry : 
+01/24/2017 13:22:28
+Error in: . Error Message:Llamo a IsValid y Save
+__________________________
+
+Log Entry : 
+01/24/2017 13:22:39
+Error in: . Error Message:Llamo a GrabarImagen
+__________________________
+
+Log Entry : 
+01/24/2017 13:22:39
+Error in: . Error Message:GrabarImagen 1
+__________________________
+
+Log Entry : 
+01/24/2017 13:22:39
+Error in: . Error Message:GrabarImagen 2
+__________________________
+
+Log Entry : 
+01/24/2017 13:22:42
+Error in: . Error Message:grabo en base
+__________________________
+
+Log Entry : 
+01/24/2017 13:22:42
+Error in: . Error Message:grabado
+__________________________
+
+Log Entry : 
+01/24/2017 13:22:42
+Error in: . Error Message:Archivo C:\Users\Administrador\Documents\bdl\pronto\prontoweb\Temp\Lote 24ene130741 Mariano PV1\ExportToXLS_965817.tif numcarta 900474784
+__________________________
+
+Log Entry : 
+01/24/2017 13:22:53
+Error in: . Error Message:Procesó carta: titular ELISA LACAU E HIJOS S.A.
+__________________________
+
+Log Entry : 
+01/24/2017 13:22:53
+Error in: . Error Message:No detectó el numero. Llamo a LeerNumeroDeCartaPorteUsandoCodigoDeBarra
+__________________________
+
+Log Entry : 
+01/24/2017 13:23:18
+Error in: . Error Message:Salgo de LeerNumeroDeCartaPorteUsandoCodigoDeBarra
+__________________________
+
+Log Entry : 
+01/24/2017 13:23:19
+Error in: . Error Message:Llamo a IsValid y Save
+__________________________
+
+Log Entry : 
+01/24/2017 13:23:25
+Error in: . Error Message:Llamo a GrabarImagen
+__________________________
+
+Log Entry : 
+01/24/2017 13:23:25
+Error in: . Error Message:GrabarImagen 1
+__________________________
+
+Log Entry : 
+01/24/2017 13:23:25
+Error in: . Error Message:GrabarImagen 2
+__________________________
+
+Log Entry : 
+01/24/2017 13:23:27
+Error in: . Error Message:grabo en base
+__________________________
+
+Log Entry : 
+01/24/2017 13:23:27
+Error in: . Error Message:grabado
+__________________________
+
+Log Entry : 
+01/24/2017 13:23:27
+Error in: . Error Message:Archivo C:\Users\Administrador\Documents\bdl\pronto\prontoweb\Temp\Lote 24ene130741 Mariano PV1\ExportToXLS_798731.tif numcarta 558857974
+__________________________
+
+Log Entry : 
+01/24/2017 13:23:40
+Error in: . Error Message:Procesó carta: titular LOS ALERCES DEL ESTE SA
+__________________________
+
+Log Entry : 
+01/24/2017 13:23:40
+Error in: . Error Message:No detectó el numero. Llamo a LeerNumeroDeCartaPorteUsandoCodigoDeBarra
+__________________________
+
+Log Entry : 
+01/24/2017 13:25:26
+Error in: . Error Message:Arranca motor
+__________________________
+
+Log Entry : 
+01/24/2017 13:25:27
+Error in: . Error Message:Reconoció la licencia
+__________________________
+
+Log Entry : 
+01/24/2017 13:25:55
+Error in: . Error Message:Procesó carta: titular SOJAS ARGENTINAS SRL
+__________________________
+
+Log Entry : 
+01/24/2017 13:25:55
+Error in: . Error Message:Detectó bien el numero con el Flexicapture: 558299523
+__________________________
+
+Log Entry : 
+01/24/2017 13:26:05
+Error in: . Error Message:System.FormatException
+No se puede reconocer la cadena como valor DateTime válido.
+   en System.DateTimeParse.Parse(String s, DateTimeFormatInfo dtfi, DateTimeStyles styles)
+   en System.Convert.ToDateTime(String value)
+   en ProntoFlexicapture.ClassFlexicapture.ProcesaCarta(IDocument document, String SC, String archivoOriginal, String DirApp) en c:\Users\Administrador\Documents\bdl\pronto\InterfazFlexicapture\prontoflexicapture.cs:línea 2023
+mscorlib
+__________________________
+
+Log Entry : 
+01/24/2017 13:26:05
+Error in: . Error Message:Llamo a IsValid y Save
+__________________________
+
+Log Entry : 
+01/24/2017 13:26:13
+Error in: . Error Message:Llamo a GrabarImagen
+__________________________
+
+Log Entry : 
+01/24/2017 13:26:13
+Error in: . Error Message:GrabarImagen 1
+__________________________
+
+Log Entry : 
+01/24/2017 13:26:13
+Error in: . Error Message:GrabarImagen 2
+__________________________
+
+Log Entry : 
+01/24/2017 13:26:16
+Error in: . Error Message:grabo en base
+__________________________
+
+Log Entry : 
+01/24/2017 13:26:16
+Error in: . Error Message:grabado
+__________________________
+
+Log Entry : 
+01/24/2017 13:26:16
+Error in: . Error Message:Archivo C:\Users\Administrador\Documents\bdl\pronto\prontoweb\Temp\Lote 24ene132438 Mariano PV1\ExportToXLS_483473.tif numcarta 558299523
+__________________________
+
+Log Entry : 
+01/24/2017 13:26:31
+Error in: . Error Message:Procesó carta: titular COOPERATIVA AGRICOLA GANADERA LIMITADA GUILLERMO LEHMANN
+__________________________
+
+Log Entry : 
+01/24/2017 13:26:31
+Error in: . Error Message:Detectó bien el numero con el Flexicapture: 558866967
+__________________________
+
+Log Entry : 
+01/24/2017 13:26:34
+Error in: . Error Message:Llamo a IsValid y Save
+__________________________
+
+Log Entry : 
+01/24/2017 13:26:42
+Error in: . Error Message:Llamo a GrabarImagen
+__________________________
+
+Log Entry : 
+01/24/2017 13:26:42
+Error in: . Error Message:GrabarImagen 1
+__________________________
+
+Log Entry : 
+01/24/2017 13:26:42
+Error in: . Error Message:GrabarImagen 2
+__________________________
+
+Log Entry : 
+01/24/2017 13:26:44
+Error in: . Error Message:grabo en base
+__________________________
+
+Log Entry : 
+01/24/2017 13:26:44
+Error in: . Error Message:grabado
+__________________________
+
+Log Entry : 
+01/24/2017 13:26:44
+Error in: . Error Message:Archivo C:\Users\Administrador\Documents\bdl\pronto\prontoweb\Temp\Lote 24ene132438 Mariano PV1\ExportToXLS_640310.tif numcarta 558866967
+__________________________
+
+Log Entry : 
+01/24/2017 13:26:53
+Error in: . Error Message:Procesó carta: titular FERNANDEZ DANIEL ENRIQUE
+__________________________
+
+Log Entry : 
+01/24/2017 13:26:53
+Error in: . Error Message:No detectó el numero. Llamo a LeerNumeroDeCartaPorteUsandoCodigoDeBarra
+__________________________
+
+Log Entry : 
+01/24/2017 13:27:15
+Error in: . Error Message:Salgo de LeerNumeroDeCartaPorteUsandoCodigoDeBarra
+__________________________
+
+Log Entry : 
+01/24/2017 13:27:17
+Error in: . Error Message:Llamo a IsValid y Save
+__________________________
+
+Log Entry : 
+01/24/2017 13:27:24
+Error in: . Error Message:Llamo a GrabarImagen
+__________________________
+
+Log Entry : 
+01/24/2017 13:27:24
+Error in: . Error Message:GrabarImagen 1
+__________________________
+
+Log Entry : 
+01/24/2017 13:27:24
+Error in: . Error Message:GrabarImagen 2
+__________________________
+
+Log Entry : 
+01/24/2017 13:27:26
+Error in: . Error Message:grabo en base
+__________________________
+
+Log Entry : 
+01/24/2017 13:27:26
+Error in: . Error Message:grabado
+__________________________
+
+Log Entry : 
+01/24/2017 13:27:26
+Error in: . Error Message:Archivo C:\Users\Administrador\Documents\bdl\pronto\prontoweb\Temp\Lote 24ene132438 Mariano PV1\ExportToXLS_758182.tif numcarta 558863861
+__________________________
+
+Log Entry : 
+01/24/2017 13:27:35
+Error in: . Error Message:Procesó carta: titular DEJAGRO S R L
+__________________________
+
+Log Entry : 
+01/24/2017 13:27:35
+Error in: . Error Message:Detectó bien el numero con el Flexicapture: 558670952
+__________________________
+
+Log Entry : 
+01/24/2017 13:27:38
+Error in: . Error Message:System.FormatException
+No se puede reconocer la cadena como valor DateTime válido.
+   en System.DateTimeParse.Parse(String s, DateTimeFormatInfo dtfi, DateTimeStyles styles)
+   en System.Convert.ToDateTime(String value)
+   en ProntoFlexicapture.ClassFlexicapture.ProcesaCarta(IDocument document, String SC, String archivoOriginal, String DirApp) en c:\Users\Administrador\Documents\bdl\pronto\InterfazFlexicapture\prontoflexicapture.cs:línea 2023
+mscorlib
+__________________________
+
+Log Entry : 
+01/24/2017 13:27:38
+Error in: . Error Message:Llamo a IsValid y Save
+__________________________
+
+Log Entry : 
+01/24/2017 13:27:45
+Error in: . Error Message:Llamo a GrabarImagen
+__________________________
+
+Log Entry : 
+01/24/2017 13:27:45
+Error in: . Error Message:GrabarImagen 1
+__________________________
+
+Log Entry : 
+01/24/2017 13:27:45
+Error in: . Error Message:GrabarImagen 2
+__________________________
+
+Log Entry : 
+01/24/2017 13:27:47
+Error in: . Error Message:grabo en base
+__________________________
+
+Log Entry : 
+01/24/2017 13:27:47
+Error in: . Error Message:grabado
+__________________________
+
+Log Entry : 
+01/24/2017 13:27:47
+Error in: . Error Message:Archivo C:\Users\Administrador\Documents\bdl\pronto\prontoweb\Temp\Lote 24ene132438 Mariano PV1\ExportToXLS_401125.tif numcarta 558670952
+__________________________
+
+Log Entry : 
+01/24/2017 13:27:57
+Error in: . Error Message:Procesó carta: titular DEJAGRO S R L
+__________________________
+
+Log Entry : 
+01/24/2017 13:27:57
+Error in: . Error Message:No detectó el numero. Llamo a LeerNumeroDeCartaPorteUsandoCodigoDeBarra
+__________________________
+
+Log Entry : 
+01/24/2017 13:27:58
+Error in: . Error Message:Salgo de LeerNumeroDeCartaPorteUsandoCodigoDeBarra
+__________________________
+
+Log Entry : 
+01/24/2017 13:28:52
+Error in: . Error Message:System.FormatException
+No se puede reconocer la cadena como valor DateTime válido.
+   en System.DateTimeParse.Parse(String s, DateTimeFormatInfo dtfi, DateTimeStyles styles)
+   en System.Convert.ToDateTime(String value)
+   en ProntoFlexicapture.ClassFlexicapture.ProcesaCarta(IDocument document, String SC, String archivoOriginal, String DirApp) en c:\Users\Administrador\Documents\bdl\pronto\InterfazFlexicapture\prontoflexicapture.cs:línea 2023
+mscorlib
+__________________________
+
+Log Entry : 
+01/24/2017 13:28:52
+Error in: . Error Message:Llamo a IsValid y Save
+__________________________
+
+Log Entry : 
+01/24/2017 13:28:59
+Error in: . Error Message:Llamo a GrabarImagen
+__________________________
+
+Log Entry : 
+01/24/2017 13:28:59
+Error in: . Error Message:GrabarImagen 1
+__________________________
+
+Log Entry : 
+01/24/2017 13:28:59
+Error in: . Error Message:GrabarImagen 2
+__________________________
+
+Log Entry : 
+01/24/2017 13:29:01
+Error in: . Error Message:grabo en base
+__________________________
+
+Log Entry : 
+01/24/2017 13:29:01
+Error in: . Error Message:grabado
+__________________________
+
+Log Entry : 
+01/24/2017 13:29:01
+Error in: . Error Message:Archivo C:\Users\Administrador\Documents\bdl\pronto\prontoweb\Temp\Lote 24ene132438 Mariano PV1\ExportToXLS_794817.tif numcarta 558670951
+__________________________
+
+Log Entry : 
+01/24/2017 13:29:10
+Error in: . Error Message:Procesó carta: titular NORDICA SA
+__________________________
+
+Log Entry : 
+01/24/2017 13:29:10
+Error in: . Error Message:Detectó bien el numero con el Flexicapture: 558443983
+__________________________
+
+Log Entry : 
+01/24/2017 13:31:08
+Error in: . Error Message:Arranca motor
+__________________________
+
+Log Entry : 
+01/24/2017 13:31:10
+Error in: . Error Message:Reconoció la licencia
+__________________________
+
+Log Entry : 
+01/24/2017 13:37:34
+Error in: . Error Message:Arranca motor
+__________________________
+
+Log Entry : 
+01/24/2017 13:37:36
+Error in: . Error Message:Reconoció la licencia
+__________________________
+
+Log Entry : 
+01/24/2017 13:38:44
+Error in: . Error Message:Procesó carta: titular ZORIAN HNOS SRL
+__________________________
+
+Log Entry : 
+01/24/2017 13:38:44
+Error in: . Error Message:Detectó bien el numero con el Flexicapture: 550166736
+__________________________
+
+Log Entry : 
+01/24/2017 13:38:52
+Error in: . Error Message:Llamo a IsValid y Save
+__________________________
+
+Log Entry : 
+01/24/2017 13:39:02
+Error in: . Error Message:Llamo a GrabarImagen
+__________________________
+
+Log Entry : 
+01/24/2017 13:39:02
+Error in: . Error Message:GrabarImagen 1
+__________________________
+
+Log Entry : 
+01/24/2017 13:39:03
+Error in: . Error Message:GrabarImagen 2
+__________________________
+
+Log Entry : 
+01/24/2017 13:39:06
+Error in: . Error Message:grabo en base
+__________________________
+
+Log Entry : 
+01/24/2017 13:39:06
+Error in: . Error Message:grabado
+__________________________
+
+Log Entry : 
+01/24/2017 13:39:06
+Error in: . Error Message:Archivo C:\Users\Administrador\Documents\bdl\pronto\prontoweb\Temp\Lote 24ene133728 Mariano PV1\ExportToXLS_387905.tif numcarta 550166736
+__________________________
+
+Log Entry : 
+01/24/2017 13:39:07
+Error in: . Error Message:GrabarImagen 1
+__________________________
+
+Log Entry : 
+01/24/2017 13:39:08
+Error in: . Error Message:GrabarImagen 2
+__________________________
+
+Log Entry : 
+01/24/2017 13:39:10
+Error in: . Error Message:grabo en base
+__________________________
+
+Log Entry : 
+01/24/2017 13:39:10
+Error in: . Error Message:grabado
+__________________________
+
+Log Entry : 
+01/24/2017 13:39:27
+Error in: . Error Message:Procesó carta: titular OLIVIERIROBERT OMAR
+__________________________
+
+Log Entry : 
+01/24/2017 13:39:27
+Error in: . Error Message:Detectó bien el numero con el Flexicapture: 550268692
+__________________________
+
+Log Entry : 
+01/24/2017 13:39:29
+Error in: . Error Message:Llamo a IsValid y Save
+__________________________
+
+Log Entry : 
+01/24/2017 13:39:37
+Error in: . Error Message:Llamo a GrabarImagen
+__________________________
+
+Log Entry : 
+01/24/2017 13:39:37
+Error in: . Error Message:GrabarImagen 1
+__________________________
+
+Log Entry : 
+01/24/2017 13:39:37
+Error in: . Error Message:GrabarImagen 2
+__________________________
+
+Log Entry : 
+01/24/2017 13:39:40
+Error in: . Error Message:grabo en base
+__________________________
+
+Log Entry : 
+01/24/2017 13:39:40
+Error in: . Error Message:grabado
+__________________________
+
+Log Entry : 
+01/24/2017 13:39:40
+Error in: . Error Message:Archivo C:\Users\Administrador\Documents\bdl\pronto\prontoweb\Temp\Lote 24ene133728 Mariano PV1\ExportToXLS_300725.tif numcarta 550268692
+__________________________
+
+Log Entry : 
+01/24/2017 13:39:41
+Error in: . Error Message:GrabarImagen 1
+__________________________
+
+Log Entry : 
+01/24/2017 13:39:41
+Error in: . Error Message:GrabarImagen 2
+__________________________
+
+Log Entry : 
+01/24/2017 13:39:44
+Error in: . Error Message:grabo en base
+__________________________
+
+Log Entry : 
+01/24/2017 13:39:44
+Error in: . Error Message:grabado
+__________________________
+
+Log Entry : 
+01/24/2017 13:39:49
+Error in: . Error Message:Termina motor
+__________________________
+
+Log Entry : 
+01/24/2017 13:39:50
+Error in: . Error Message:Proceso cerrado
+__________________________
+
+Log Entry : 
+01/24/2017 13:40:57
+Error in: . Error Message:Arranca motor
+__________________________
+
+Log Entry : 
+01/24/2017 13:40:58
+Error in: . Error Message:Reconoció la licencia
+__________________________
+
+Log Entry : 
+01/24/2017 13:41:16
+Error in: . Error Message:Procesó carta: titular SOJAS ARGENTINAS SRL
+__________________________
+
+Log Entry : 
+01/24/2017 13:41:16
+Error in: . Error Message:Detectó bien el numero con el Flexicapture: 558299523
+__________________________
+
+Log Entry : 
+01/24/2017 13:41:25
+Error in: . Error Message:System.FormatException
+No se puede reconocer la cadena como valor DateTime válido.
+   en System.DateTimeParse.Parse(String s, DateTimeFormatInfo dtfi, DateTimeStyles styles)
+   en System.Convert.ToDateTime(String value)
+   en ProntoFlexicapture.ClassFlexicapture.ProcesaCarta(IDocument document, String SC, String archivoOriginal, String DirApp) en c:\Users\Administrador\Documents\bdl\pronto\InterfazFlexicapture\prontoflexicapture.cs:línea 2031
+mscorlib
+__________________________
+
+Log Entry : 
+01/24/2017 13:41:25
+Error in: . Error Message:Llamo a IsValid y Save
+__________________________
+
+Log Entry : 
+01/24/2017 13:41:33
+Error in: . Error Message:Llamo a GrabarImagen
+__________________________
+
+Log Entry : 
+01/24/2017 13:41:33
+Error in: . Error Message:GrabarImagen 1
+__________________________
+
+Log Entry : 
+01/24/2017 13:41:33
+Error in: . Error Message:GrabarImagen 2
+__________________________
+
+Log Entry : 
+01/24/2017 13:41:35
+Error in: . Error Message:grabo en base
+__________________________
+
+Log Entry : 
+01/24/2017 13:41:35
+Error in: . Error Message:grabado
+__________________________
+
+Log Entry : 
+01/24/2017 13:41:35
+Error in: . Error Message:Archivo C:\Users\Administrador\Documents\bdl\pronto\prontoweb\Temp\Lote 24ene134013 Mariano PV1\ExportToXLS_110527.tif numcarta 558299523
+__________________________
+
+Log Entry : 
+01/24/2017 13:41:45
+Error in: . Error Message:Procesó carta: titular COOPERATIVA AGRICOLA GANADERA LIMITADA GUILLERMO LEHMANN
+__________________________
+
+Log Entry : 
+01/24/2017 13:41:45
+Error in: . Error Message:Detectó bien el numero con el Flexicapture: 558866967
+__________________________
+
+Log Entry : 
+01/24/2017 13:41:48
+Error in: . Error Message:Llamo a IsValid y Save
+__________________________
+
+Log Entry : 
+01/24/2017 13:41:56
+Error in: . Error Message:Llamo a GrabarImagen
+__________________________
+
+Log Entry : 
+01/24/2017 13:41:56
+Error in: . Error Message:GrabarImagen 1
+__________________________
+
+Log Entry : 
+01/24/2017 13:41:56
+Error in: . Error Message:GrabarImagen 2
+__________________________
+
+Log Entry : 
+01/24/2017 13:41:58
+Error in: . Error Message:grabo en base
+__________________________
+
+Log Entry : 
+01/24/2017 13:41:58
+Error in: . Error Message:grabado
+__________________________
+
+Log Entry : 
+01/24/2017 13:41:58
+Error in: . Error Message:Archivo C:\Users\Administrador\Documents\bdl\pronto\prontoweb\Temp\Lote 24ene134013 Mariano PV1\ExportToXLS_335714.tif numcarta 558866967
+__________________________
+
+Log Entry : 
+01/24/2017 13:42:12
+Error in: . Error Message:Procesó carta: titular FERNANDEZ DANIEL ENRIQUE
+__________________________
+
+Log Entry : 
+01/24/2017 13:42:12
+Error in: . Error Message:No detectó el numero. Llamo a LeerNumeroDeCartaPorteUsandoCodigoDeBarra
+__________________________
+
+Log Entry : 
+01/24/2017 13:42:35
+Error in: . Error Message:Salgo de LeerNumeroDeCartaPorteUsandoCodigoDeBarra
+__________________________
+
+Log Entry : 
+01/24/2017 13:42:37
+Error in: . Error Message:Llamo a IsValid y Save
+__________________________
+
+Log Entry : 
+01/24/2017 13:42:44
+Error in: . Error Message:Llamo a GrabarImagen
+__________________________
+
+Log Entry : 
+01/24/2017 13:42:44
+Error in: . Error Message:GrabarImagen 1
+__________________________
+
+Log Entry : 
+01/24/2017 13:42:44
+Error in: . Error Message:GrabarImagen 2
+__________________________
+
+Log Entry : 
+01/24/2017 13:42:46
+Error in: . Error Message:grabo en base
+__________________________
+
+Log Entry : 
+01/24/2017 13:42:47
+Error in: . Error Message:grabado
+__________________________
+
+Log Entry : 
+01/24/2017 13:42:47
+Error in: . Error Message:Archivo C:\Users\Administrador\Documents\bdl\pronto\prontoweb\Temp\Lote 24ene134013 Mariano PV1\ExportToXLS_221456.tif numcarta 558863861
+__________________________
+
+Log Entry : 
+01/24/2017 13:42:54
+Error in: . Error Message:Procesó carta: titular DEJAGRO S R L
+__________________________
+
+Log Entry : 
+01/24/2017 13:42:54
+Error in: . Error Message:Detectó bien el numero con el Flexicapture: 558670952
+__________________________
+
+Log Entry : 
+01/24/2017 13:42:57
+Error in: . Error Message:System.FormatException
+No se puede reconocer la cadena como valor DateTime válido.
+   en System.DateTimeParse.Parse(String s, DateTimeFormatInfo dtfi, DateTimeStyles styles)
+   en System.Convert.ToDateTime(String value)
+   en ProntoFlexicapture.ClassFlexicapture.ProcesaCarta(IDocument document, String SC, String archivoOriginal, String DirApp) en c:\Users\Administrador\Documents\bdl\pronto\InterfazFlexicapture\prontoflexicapture.cs:línea 2031
+mscorlib
+__________________________
+
+Log Entry : 
+01/24/2017 13:42:57
+Error in: . Error Message:Llamo a IsValid y Save
+__________________________
+
+Log Entry : 
+01/24/2017 13:43:04
+Error in: . Error Message:Llamo a GrabarImagen
+__________________________
+
+Log Entry : 
+01/24/2017 13:43:04
+Error in: . Error Message:GrabarImagen 1
+__________________________
+
+Log Entry : 
+01/24/2017 13:43:04
+Error in: . Error Message:GrabarImagen 2
+__________________________
+
+Log Entry : 
+01/24/2017 13:43:06
+Error in: . Error Message:grabo en base
+__________________________
+
+Log Entry : 
+01/24/2017 13:43:06
+Error in: . Error Message:grabado
+__________________________
+
+Log Entry : 
+01/24/2017 13:43:06
+Error in: . Error Message:Archivo C:\Users\Administrador\Documents\bdl\pronto\prontoweb\Temp\Lote 24ene134013 Mariano PV1\ExportToXLS_820419.tif numcarta 558670952
+__________________________
+
+Log Entry : 
+01/24/2017 13:43:15
+Error in: . Error Message:Procesó carta: titular DEJAGRO S R L
+__________________________
+
+Log Entry : 
+01/24/2017 13:43:15
+Error in: . Error Message:No detectó el numero. Llamo a LeerNumeroDeCartaPorteUsandoCodigoDeBarra
+__________________________
+
+Log Entry : 
+01/24/2017 13:43:16
+Error in: . Error Message:Salgo de LeerNumeroDeCartaPorteUsandoCodigoDeBarra
+__________________________
+
+Log Entry : 
+01/24/2017 13:44:09
+Error in: . Error Message:System.FormatException
+No se puede reconocer la cadena como valor DateTime válido.
+   en System.DateTimeParse.Parse(String s, DateTimeFormatInfo dtfi, DateTimeStyles styles)
+   en System.Convert.ToDateTime(String value)
+   en ProntoFlexicapture.ClassFlexicapture.ProcesaCarta(IDocument document, String SC, String archivoOriginal, String DirApp) en c:\Users\Administrador\Documents\bdl\pronto\InterfazFlexicapture\prontoflexicapture.cs:línea 2031
+mscorlib
+__________________________
+
+Log Entry : 
+01/24/2017 13:44:09
+Error in: . Error Message:Llamo a IsValid y Save
+__________________________

@@ -1,0 +1,54 @@
+
+Log Entry : 
+01/24/2017 12:44:59
+Error in: http://localhost:58911/login.aspx?ReturnUrl=/. Error Message:System.Threading.ThreadAbortException
+Subproceso anulado.
+   en System.Threading.Thread.AbortInternal()
+   en System.Threading.Thread.Abort(Object stateInfo)
+   en System.Web.HttpResponse.AbortCurrentThread()
+   en System.Web.HttpResponse.End()
+   en System.Web.HttpResponse.Redirect(String url, Boolean endResponse, Boolean permanent)
+   en System.Web.HttpResponse.Redirect(String url)
+   en Login.Page_Load(Object sender, EventArgs e) en C:\Users\Administrador\Documents\bdl\pronto\prontoweb\Login.aspx.vb:línea 169
+mscorlib
+__________________________
+
+Log Entry : 
+01/24/2017 12:45:47
+Error in: http://localhost:58911/ProntoWeb/CartaDePorte.aspx?Id=2736075. Error Message:La carta numero 558857966 id=2736075 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+01/24/2017 12:45:47
+Error in: http://localhost:58911/ProntoWeb/CartaDePorte.aspx?Id=2736075. Error Message:PV 1 0
+__________________________
+
+Log Entry : 
+01/24/2017 12:54:28
+Error in: http://localhost:58911/ProntoWeb/Cartadeporte.aspx. Error Message:PV 0 0
+__________________________
+
+Log Entry : 
+01/24/2017 12:54:59
+Error in: http://localhost:58911/ProntoWeb/CartaDePorte.aspx?Id=2736075. Error Message:La carta numero 558857966 id=2736075 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+01/24/2017 12:55:00
+Error in: http://localhost:58911/ProntoWeb/CartaDePorte.aspx?Id=2736075. Error Message:PV 1 0
+__________________________
+
+Log Entry : 
+01/24/2017 12:58:13
+Error in: http://localhost:58911/ProntoWeb/Cartadeporte.aspx. Error Message:PV 0 0
+__________________________
+
+Log Entry : 
+01/24/2017 12:59:20
+Error in: http://localhost:58911/ProntoWeb/CartaDePorte.aspx?Id=2251024. Error Message:La carta numero 550166736 id=2251024 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+01/24/2017 12:59:21
+Error in: http://localhost:58911/ProntoWeb/CartaDePorte.aspx?Id=2251024. Error Message:PV 2 0
+__________________________
