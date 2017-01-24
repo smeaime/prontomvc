@@ -393,7 +393,7 @@ namespace ProntoFlexicapture
 
                 FuncionesGenericasCSharp.Resultados output = null;
 
-     //             if (count > imagenes.Count - 1) break; // tiene que continuar hasta chupar todo lo que haya
+                //             if (count > imagenes.Count - 1) break; // tiene que continuar hasta chupar todo lo que haya
 
 
                 //Pronto.ERP.Bll.ErrHandler2.WriteError("reconocer imagen "  + imagenes[count]);
@@ -408,6 +408,9 @@ namespace ProntoFlexicapture
 
 
 
+                string imagenAprocesar = imageSource.GetProximoSinQuitarloDeLaCola();
+                conTK = imagenAprocesar.Contains("_unido"); // por ahora desactivarlo
+
 
                 IDocument document;
 
@@ -415,11 +418,12 @@ namespace ProntoFlexicapture
                 try
                 {
 
-                    if (false) conTK =  imagenes[count].Contains("_unido"); // por ahora desactivarlo
 
- // si no esta la licencia, acá explota
+                    // si no esta la licencia, acá explota
 
-                    if (conTK && count > 0) processor.RecognizeNextDocument(); // saltar la pagina con el tiket, y así pasar al siguiente archivo
+
+
+                    //if (conTK && count > 0) processor.RecognizeNextDocument(); // saltar la pagina con el tiket, y así pasar al siguiente archivo
 
                     document = processor.RecognizeNextDocument();
                     // si document es null, hay un break abajo
@@ -492,10 +496,10 @@ namespace ProntoFlexicapture
                 exportParams.ExportOriginalImages = true;
                 exportParams.ImageExportParams.Prefix = "ExportToXLS_" + rnd.Next(100000, 999999).ToString(); // en realidad las imagenes exportadas deberían ir a parar todas al raiz, porque no hay manera de saber a qué imagen corresponden. Entonces las dejo todas en el mismo lugar, y genero un random al prefijo para asegurarme de que ese nombre es exclusivo
 
-//                Specifies the prefix of saved image files names. To include project, batch, or Document Definition name 
-//                into the image file name, use the <Project>, <Batch>, or <Template> elements respectively. The elements in angle 
-//                    brackets will be changed to corresponding values. The elements without angle brackets will be passed as is. 
-//By default the value of this property is "<Batch>".
+                //                Specifies the prefix of saved image files names. To include project, batch, or Document Definition name 
+                //                into the image file name, use the <Project>, <Batch>, or <Template> elements respectively. The elements in angle 
+                //                    brackets will be changed to corresponding values. The elements without angle brackets will be passed as is. 
+                //By default the value of this property is "<Batch>".
 
 
                 //IExcelExportParams excelParametros;
@@ -503,17 +507,25 @@ namespace ProntoFlexicapture
 
 
                 //puedo guiarme por el "imagenes[count]"
-                string dirExport = dirtemp;
+                string dirExport;// = dirtemp;
 
-                if (false)
+                if (true)
                 {
-                    var w = imagenes[count].IndexOf(@"\Temp\");
-                    var sd = imagenes[count].Substring(w + 6).IndexOf(@"\");
-                    dirExport = imagenes[count].Substring(0, sd + w + 6) + @"\"; // es seguro el directorio de esa tanda? -estás confiando en q imagenes[count] es tomado en el mismo orden en la queue
+
+                    var w = imagenAprocesar.IndexOf(@"\Temp\");
+                    var sd = imagenAprocesar.Substring(w + 6).IndexOf(@"\");
+                    dirExport = imagenAprocesar.Substring(0, sd + w + 6) + @"\"; // es seguro el directorio de esa tanda? -estás confiando en q imagenes[count] es tomado en el mismo orden en la queue
                 }
 
                 processor.ExportDocumentEx(document, dirExport, "ExportToXLS", exportParams);
 
+
+                if (document.DocumentDefinition == null)
+                {
+                    // no reconoció ninguna plantilla para el documento, así que no generará renglón en el excel
+                    // -en ese caso podrías grabarla en la ultima carta usada (pues sería un ticket)
+                    // -no estás seguro de que sea un ticket.... quizas es una carta mal escaneada
+                }
 
 
 
@@ -535,7 +547,7 @@ namespace ProntoFlexicapture
                 ///////////////////////////////////////////////////////////////////////////////
 
 
-                if (bProcesar)
+                if (bProcesar && document.DocumentDefinition != null)
                 {
                     try
                     {
@@ -548,12 +560,14 @@ namespace ProntoFlexicapture
 
 
 
-               
+
                         if (conTK)
                         {
-                            string archivoOriginal = imagenes[count];
+                            document = processor.RecognizeNextDocument();
 
-                            string nombrenuevo = rnd.Next(1, 99999).ToString().Replace(".", "") + DateTime.Now.ToString("ddMMMyyyy_HHmmss") + "_" + Path.GetFileName(archivoOriginal);
+                            //string archivoOriginal = imagenes[count];
+
+                            string nombrenuevo = rnd.Next(1, 99999).ToString().Replace(".", "") + DateTime.Now.ToString("ddMMMyyyy_HHmmss") + "_" + Path.GetFileName(imagenAprocesar);
 
                             nombrenuevo = CartaDePorteManager.CreaDirectorioParaImagenCartaPorte(nombrenuevo, DirApp);
 
@@ -567,7 +581,7 @@ namespace ProntoFlexicapture
                                 FileInfo MyFile1 = new FileInfo(destino);
                                 if (MyFile1.Exists) MyFile1.Delete();
 
-                                File.Copy(archivoOriginal, destino);
+                                File.Copy(imagenAprocesar, destino);
                             }
                             catch (Exception x)
                             {
@@ -577,7 +591,10 @@ namespace ProntoFlexicapture
 
 
                             //el nombre de la imagen lo logeo en algun lado????
-                            var cc = CartaDePorteManager.GrabarImagen(output.IdCarta, SC, 0, 0, nombrenuevo, ref sError, DirApp, true, true);
+                            var cc = CartaDePorteManager.GrabarImagen(output.IdCarta, SC, 0, 0, nombrenuevo, ref sError, DirApp, true, false);
+
+                            processor.ExportDocumentEx(document, dirExport, "ExportToXLS", exportParams);
+
                         }
 
 
@@ -1841,7 +1858,7 @@ namespace ProntoFlexicapture
                 string s;
 
 
-                int pv =0;
+                int pv = 0;
                 string nombreusuario = "";
                 try
                 {
@@ -2012,6 +2029,13 @@ namespace ProntoFlexicapture
                 }
                 else if (esTicket)
                 {
+                    if (cdp.Id <= 0)
+                    {
+                        //Falta la fecha de arribo\r\nFalta la cosecha\r\nEl punto de venta debe estar entre 1 y 4\r\n\r\n
+                        cdp.PuntoVenta = 1;
+                        cdp.Cosecha = "2016/17";
+                        cdp.FechaArribo = DateTime.Today;
+                    }
 
                     cdp.BrutoFinal = Conversion.Val(PesoBrutoDescarga.Replace(".", "").Replace(",", ""));
                     cdp.TaraFinal = Conversion.Val(PesoTaraDescarga.Replace(".", "").Replace(",", ""));
@@ -2091,7 +2115,7 @@ namespace ProntoFlexicapture
                 {
                     string err = "";
 
-               
+
                     id = CartaDePorteManager.Save(SC, cdp, 0, "OCR", true, ref err);
                     if (numeroCarta > numprefijo)
                     {
@@ -2971,6 +2995,9 @@ Additionally you can manage the priority of work processes and control whether t
             imageFileAdapters.Enqueue(new ImageFileAdapter(filePath, true));
         }
 
+
+
+
         // IImageSource ///////////////////
         public string GetName() { return "Sample Image Source"; }
         public IFileAdapter GetNextImageFile()
@@ -2986,6 +3013,23 @@ Additionally you can manage the priority of work processes and control whether t
             return null;
             // }
         }
+
+        public string GetProximoSinQuitarloDeLaCola()
+        {
+            try
+            {
+
+                return ((ImageFileAdapter)imageFileAdapters.Peek()).GetFileReference();
+            }
+            catch (Exception)
+            {
+
+                return ""; //throw;
+            }
+        }
+
+
+
         public IImage GetNextImage() { return null; } // this sample source does not use this feature
 
         #region IMPLEMENTATION
@@ -3430,14 +3474,14 @@ namespace ServicioCartaPorte
             //if (searchField == "Numero") searchField = "NumeroPedido"; 
 
             var Entidad = pagedQuery
-                          //.Include(x => x.Moneda)
-                          //.Include(x => x.Proveedor)
-                          //.Include(x => x.DetallePedidos
-                          //            .Select(y => y.DetalleRequerimiento
-                          //                )
-                          //        )
-                          //.Include("DetallePedidos.DetalleRequerimiento.Requerimientos.Obra") // funciona tambien
-                          //.Include(x => x.Comprador)
+                //.Include(x => x.Moneda)
+                //.Include(x => x.Proveedor)
+                //.Include(x => x.DetallePedidos
+                //            .Select(y => y.DetalleRequerimiento
+                //                )
+                //        )
+                //.Include("DetallePedidos.DetalleRequerimiento.Requerimientos.Obra") // funciona tambien
+                //.Include(x => x.Comprador)
                           .AsQueryable();
 
 
@@ -3775,14 +3819,14 @@ namespace ServicioCartaPorte
 
 
             var excelData = new jqGridWeb.DataForExcel(
-                    // column Header
+                // column Header
                     new[] { "Col1", "Col2", "Col3" },
                     new[]{jqGridWeb.DataForExcel.DataType.String, jqGridWeb.DataForExcel.DataType.Integer,
                           jqGridWeb.DataForExcel.DataType.String},
-                    //      new List<string[]> {
-                    //    new[] {"a", "1", "c1"},
-                    //    new[] {"a", "2", "c2"}
-                    //},
+                //      new List<string[]> {
+                //    new[] {"a", "1", "c1"},
+                //    new[] {"a", "2", "c2"}
+                //},
                     lista,
 
                     "Test Grid");

@@ -584,6 +584,19 @@ namespace ProntoMVC.Tests
         /// ////////////////////////////////////////////////////////////////////////////////////////////////////////////
         /// ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+            [TestMethod]
+        public void Mail()
+        {
+//                Log Entry : 
+//01/24/2017 03:50:21
+//Error in: https://prontoweb.williamsentregas.com.ar/ProntoWeb/SincronismosAutomaticos.aspx. 
+//                Syntax error in parameters or arguments. The server response was: 5.1.3 Bad recipient address syntax
+//   at System.Net.Mail.RecipientCommand.CheckResponse(SmtpStatusCode statusCode, String response)
+//Error Message:'jlouge@ledesma.com.ar', 'mruiz@ledesma.com.ar', 'lbonello@ledesma.com.ar', 'jturin@ledesma.com.ar',mfavot@williamsentregas.com.ar
+            }
+
+
+
 
 
         [TestMethod]
@@ -922,14 +935,14 @@ namespace ProntoMVC.Tests
 
 
         [TestMethod]
-        public void pegatina_29439()
+        public void pegatinaUrenportRobot_29439()
         {
 
             //string archivoExcel = @"C:\Users\Administrador\Documents\bdl\pronto\docstest\171116\urenport.xls";
             //string archivoExcel = @"C:\Users\Administrador\Documents\bdl\pronto\docstest\171116\Posicion-161117-1722.xls";
-            string archivoExcel = @"C:\Users\Administrador\Documents\bdl\pronto\docstest\Urenport_ 953-29122016.xlsx";
+            //string archivoExcel = @"C:\Users\Administrador\Documents\bdl\pronto\docstest\Urenport_ 953-29122016.xlsx";
             //string archivoExcel = @"C:\Users\Administrador\Documents\bdl\pronto\docstest\Posicion-161229-0945.xls"
-
+            string archivoExcel = @"C:\Users\Administrador\Documents\bdl\New folder\Urenport_ 951-24012017.xls";
             //explota
 
             string ms = "";
@@ -976,6 +989,61 @@ namespace ProntoMVC.Tests
             //Assert.AreEqual(30000, carta.NetoFinalIncluyendoMermas);
         }
 
+
+        [TestMethod]
+        public void pegatinaUrenportRobot_29439_2()
+        {
+
+            //string archivoExcel = @"C:\Users\Administrador\Documents\bdl\pronto\docstest\171116\urenport.xls";
+            //string archivoExcel = @"C:\Users\Administrador\Documents\bdl\pronto\docstest\171116\Posicion-161117-1722.xls";
+            //string archivoExcel = @"C:\Users\Administrador\Documents\bdl\pronto\docstest\Urenport_ 953-29122016.xlsx";
+            string archivoExcel = @"C:\Users\Administrador\Documents\bdl\pronto\docstest\Posicion-161229-0945.xls";
+            //string archivoExcel = @"C:\Users\Administrador\Documents\bdl\New folder\Urenport_ 951-24012017.xls";
+            //explota
+
+            string ms = "";
+
+            int m_IdMaestro = 0;
+            Pronto.ERP.BO.CartaDePorte carta;
+
+
+            // escribir descarga de una carta
+            //carta = null;
+            //carta = CartaDePorteManager.GetItemPorNumero(SC, 549768066, 0, 0);
+            //carta.NobleGrado = 2;
+            //CartaDePorteManager.Save(SC, carta, 1, "lalala", true, ref ms);
+            // Assert.AreEqual(30000, carta.NetoFinalIncluyendoMermas);
+
+
+
+
+
+
+            string log = "";
+            //hay que pasar el formato como parametro 
+            ExcelImportadorManager.FormatearExcelImportadoEnDLL(ref m_IdMaestro, archivoExcel,
+                                    LogicaImportador.FormatosDeExcel.Urenport, SC, 0, ref log, "", 0, "");
+
+            var dt = LogicaImportador.TraerExcelDeBase(SC, ref m_IdMaestro);
+
+            //foreach (System.Data.DataRow r in dt.Rows)
+            //{
+            //    var dr = r;
+            //    var c = LogicaImportador.GrabaRenglonEnTablaCDP(ref dr, SC, null, null, null,
+            //                                            null, null, null, null,
+            //                                            null, null);
+            //}
+
+
+
+
+            ////verificar que sigue así
+            //carta = null;
+            //carta = CartaDePorteManager.GetItemPorNumero(SC, 549768066, 0, 0);
+            //carta.NobleGrado = 2;
+            //CartaDePorteManager.Save(SC, carta, 1, "lalala", true, ref ms);
+            //Assert.AreEqual(30000, carta.NetoFinalIncluyendoMermas);
+        }
 
 
 
