@@ -1966,7 +1966,11 @@ Public Class ExcelImportadorManager
                 'Dim myCartaDePorte As CartaDePorte = CartaDePorteManager.GetItemPorNumero(SC, cpnumero, 0, 0)
 
                 Dim myCartaDePorte As Models.CartasDePorte =
-                           (From c In db.CartasDePortes Where c.NumeroCartaDePorte = cpnumero).FirstOrDefault()
+                                (From c In db.CartasDePortes Where c.NumeroCartaDePorte = cpnumero
+                                  Order By c.FechaAnulacion Descending
+                                  Select c).FirstOrDefault()
+
+
 
                 If myCartaDePorte Is Nothing Then myCartaDePorte = New Models.CartasDePorte()
 
@@ -2004,7 +2008,7 @@ Public Class ExcelImportadorManager
                     If (Not bEditadaManual) Then
 
 
-                        .FechaArribo = DateTime.Parse(iisValidSqlDate(r(3), DateTime.Now))
+                        .FechaArribo = DateTime.Parse(iisValidSqlDate(Left(r(3), 10), DateTime.Now))
                         .FechaModificacion = DateTime.Now
 
                         If actua(.IdArticulo, BuscaIdArticuloPreciso(r(5), SC)) Then log += "Articulo; "
@@ -2108,17 +2112,17 @@ Public Class ExcelImportadorManager
                             'If If(.FechaDescarga, DateTime.MinValue) = DateTime.MinValue Then .FechaDescarga = .FechaArribo 'corregir: estoy truchando esto para poder incluir las q no fueron descargadas en el filtro de fecha que está ahora en la jqgrid de situacion
 
                             If r(28) <> "" Then
-                                If actua(.FechaDescarga, DateTime.Parse(iisValidSqlDate(r(28)))) Then log += "FechaDescarga; "
+                                If actua(.FechaDescarga, DateTime.Parse(iisValidSqlDate(Left(r(28), 10)))) Then log += "FechaDescarga; "
                             End If
                             '.FechaDescarga = iisValidSqlDate(r(28))
 
                             If r(39) <> "" Then
-                                If actua(.FechaDeCarga, DateTime.Parse(iisValidSqlDate(r(39)))) Then log += "Fecha Carga; "
+                                If actua(.FechaDeCarga, DateTime.Parse(iisValidSqlDate(Left(r(39), 10)))) Then log += "Fecha Carga; "
                             End If
                             '.FechaDeCarga = iisValidSqlDate(r(39))
 
                             If r(40) <> "" Then
-                                If actua(.FechaVencimiento, DateTime.Parse(iisValidSqlDate(r(40)))) Then log += "Fecha Vencimiento; "
+                                If actua(.FechaVencimiento, DateTime.Parse(iisValidSqlDate(Left(r(40), 10)))) Then log += "Fecha Vencimiento; "
                             End If
                         Catch ex As Exception
 
@@ -2186,11 +2190,11 @@ Public Class ExcelImportadorManager
                     Next
                 Next
 
-                ErrHandler.WriteError("Error en la grabacion " + sb.ToString())
+                ErrHandler2.WriteError("Error en la grabacion " + sb.ToString())
 
 
             Catch ex As Exception
-                ErrHandler.WriteError(ex)
+                ErrHandler2.WriteError(ex)
             End Try
 
         Next

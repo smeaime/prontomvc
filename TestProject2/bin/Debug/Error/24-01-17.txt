@@ -1,0 +1,605 @@
+
+Log Entry : 
+01/24/2017 09:19:25
+Error in: . Error Message:Arranca motor
+__________________________
+
+Log Entry : 
+01/24/2017 09:19:39
+Error in: . Error Message:Reconoció la licencia
+__________________________
+
+Log Entry : 
+01/24/2017 09:21:17
+Error in: . Error Message:Procesó carta: titular ZORIAN HNOS SRL
+__________________________
+
+Log Entry : 
+01/24/2017 09:21:17
+Error in: . Error Message:Detectó bien el numero con el Flexicapture: 550166736
+__________________________
+
+Log Entry : 
+01/24/2017 09:21:36
+Error in: . Error Message:Llamo a IsValid y Save
+__________________________
+
+Log Entry : 
+01/24/2017 09:21:47
+Error in: . Error Message:Llamo a GrabarImagen
+__________________________
+
+Log Entry : 
+01/24/2017 09:21:47
+Error in: . Error Message:GrabarImagen 1
+__________________________
+
+Log Entry : 
+01/24/2017 09:21:47
+Error in: . Error Message:GrabarImagen 2
+__________________________
+
+Log Entry : 
+01/24/2017 09:21:50
+Error in: . Error Message:grabo en base
+__________________________
+
+Log Entry : 
+01/24/2017 09:21:50
+Error in: . Error Message:grabado
+__________________________
+
+Log Entry : 
+01/24/2017 09:21:50
+Error in: . Error Message:Archivo C:\Users\Administrador\Documents\bdl\pronto\prontoweb\Temp\ExportToXLS_982184.tif numcarta 550166736
+__________________________
+
+Log Entry : 
+01/24/2017 09:22:36
+Error in: . Error Message:Procesó carta: titular 
+__________________________
+
+Log Entry : 
+01/24/2017 09:22:37
+Error in: . Error Message:System.FormatException
+No se puede reconocer la cadena como valor DateTime válido.
+   en System.DateTimeParse.Parse(String s, DateTimeFormatInfo dtfi, DateTimeStyles styles)
+   en System.Convert.ToDateTime(String value)
+   en ProntoFlexicapture.ClassFlexicapture.ProcesaCarta(IDocument document, String SC, String archivoOriginal, String DirApp) en c:\Users\Administrador\Documents\bdl\pronto\InterfazFlexicapture\prontoflexicapture.cs:línea 2048
+mscorlib
+__________________________
+
+Log Entry : 
+01/24/2017 09:22:37
+Error in: . Error Message:Llamo a IsValid y Save
+__________________________
+
+Log Entry : 
+01/24/2017 09:29:42
+Error in: . Error Message:Arranca motor
+__________________________
+
+Log Entry : 
+01/24/2017 09:29:49
+Error in: . Error Message:Reconoció la licencia
+__________________________
+
+Log Entry : 
+01/24/2017 09:31:02
+Error in: . Error Message:Procesó carta: titular ZORIAN HNOS SRL
+__________________________
+
+Log Entry : 
+01/24/2017 09:31:02
+Error in: . Error Message:Detectó bien el numero con el Flexicapture: 550166736
+__________________________
+
+Log Entry : 
+01/24/2017 09:31:13
+Error in: . Error Message:Llamo a IsValid y Save
+__________________________
+
+Log Entry : 
+01/24/2017 09:31:23
+Error in: . Error Message:Llamo a GrabarImagen
+__________________________
+
+Log Entry : 
+01/24/2017 09:31:23
+Error in: . Error Message:GrabarImagen 1
+__________________________
+
+Log Entry : 
+01/24/2017 09:31:23
+Error in: . Error Message:GrabarImagen 2
+__________________________
+
+Log Entry : 
+01/24/2017 09:31:25
+Error in: . Error Message:grabo en base
+__________________________
+
+Log Entry : 
+01/24/2017 09:31:25
+Error in: . Error Message:grabado
+__________________________
+
+Log Entry : 
+01/24/2017 09:31:25
+Error in: . Error Message:Archivo C:\Users\Administrador\Documents\bdl\pronto\prontoweb\Temp\ExportToXLS_639235.tif numcarta 550166736
+__________________________
+
+Log Entry : 
+01/24/2017 09:31:47
+Error in: . Error Message:Procesó carta: titular 
+__________________________
+
+Log Entry : 
+01/24/2017 09:31:48
+Error in: . Error Message:System.FormatException
+No se puede reconocer la cadena como valor DateTime válido.
+   en System.DateTimeParse.Parse(String s, DateTimeFormatInfo dtfi, DateTimeStyles styles)
+   en System.Convert.ToDateTime(String value)
+   en ProntoFlexicapture.ClassFlexicapture.ProcesaCarta(IDocument document, String SC, String archivoOriginal, String DirApp) en c:\Users\Administrador\Documents\bdl\pronto\InterfazFlexicapture\prontoflexicapture.cs:línea 2055
+mscorlib
+__________________________
+
+Log Entry : 
+01/24/2017 09:31:48
+Error in: . Error Message:Llamo a IsValid y Save
+__________________________
+
+Log Entry : 
+01/24/2017 09:31:56
+Error in: . Error Message:Llamo a GrabarImagen
+__________________________
+
+Log Entry : 
+01/24/2017 09:31:56
+Error in: . Error Message:GrabarImagen 1
+__________________________
+
+Log Entry : 
+01/24/2017 09:31:56
+Error in: . Error Message:GrabarImagen 2
+__________________________
+
+Log Entry : 
+01/24/2017 09:31:57
+Error in: . Error Message:grabo en base
+__________________________
+
+Log Entry : 
+01/24/2017 09:31:57
+Error in: . Error Message:grabado
+__________________________
+
+Log Entry : 
+01/24/2017 09:31:57
+Error in: . Error Message:Archivo C:\Users\Administrador\Documents\bdl\pronto\prontoweb\Temp\ExportToXLS_491620.tif numcarta 900047574
+__________________________
+
+Log Entry : 
+01/24/2017 09:32:12
+Error in: . Error Message:Procesó carta: titular OLIVIERIROBERT OMAR
+__________________________
+
+Log Entry : 
+01/24/2017 09:32:12
+Error in: . Error Message:Detectó bien el numero con el Flexicapture: 550268692
+__________________________
+
+Log Entry : 
+01/24/2017 09:32:14
+Error in: . Error Message:Llamo a IsValid y Save
+__________________________
+
+Log Entry : 
+01/24/2017 09:32:22
+Error in: . Error Message:Llamo a GrabarImagen
+__________________________
+
+Log Entry : 
+01/24/2017 09:32:22
+Error in: . Error Message:GrabarImagen 1
+__________________________
+
+Log Entry : 
+01/24/2017 09:32:22
+Error in: . Error Message:GrabarImagen 2
+__________________________
+
+Log Entry : 
+01/24/2017 09:32:24
+Error in: . Error Message:grabo en base
+__________________________
+
+Log Entry : 
+01/24/2017 09:32:24
+Error in: . Error Message:grabado
+__________________________
+
+Log Entry : 
+01/24/2017 09:32:24
+Error in: . Error Message:Archivo C:\Users\Administrador\Documents\bdl\pronto\prontoweb\Temp\ExportToXLS_740581.tif numcarta 550268692
+__________________________
+
+Log Entry : 
+01/24/2017 09:32:47
+Error in: . Error Message:Procesó carta: titular 
+__________________________
+
+Log Entry : 
+01/24/2017 09:32:47
+Error in: . Error Message:No detectó el numero. Llamo a LeerNumeroDeCartaPorteUsandoCodigoDeBarra
+__________________________
+
+Log Entry : 
+01/24/2017 09:33:19
+Error in: . Error Message:Salgo de LeerNumeroDeCartaPorteUsandoCodigoDeBarra
+__________________________
+
+Log Entry : 
+01/24/2017 09:33:19
+Error in: . Error Message:System.FormatException
+No se puede reconocer la cadena como valor DateTime válido.
+   en System.DateTimeParse.Parse(String s, DateTimeFormatInfo dtfi, DateTimeStyles styles)
+   en System.Convert.ToDateTime(String value)
+   en ProntoFlexicapture.ClassFlexicapture.ProcesaCarta(IDocument document, String SC, String archivoOriginal, String DirApp) en c:\Users\Administrador\Documents\bdl\pronto\InterfazFlexicapture\prontoflexicapture.cs:línea 2001
+mscorlib
+__________________________
+
+Log Entry : 
+01/24/2017 09:33:19
+Error in: . Error Message:Llamo a IsValid y Save
+__________________________
+
+Log Entry : 
+01/24/2017 09:39:46
+Error in: . Error Message:Arranca motor
+__________________________
+
+Log Entry : 
+01/24/2017 09:39:48
+Error in: . Error Message:Reconoció la licencia
+__________________________
+
+Log Entry : 
+01/24/2017 09:44:33
+Error in: . Error Message:Arranca motor
+__________________________
+
+Log Entry : 
+01/24/2017 09:44:35
+Error in: . Error Message:Reconoció la licencia
+__________________________
+
+Log Entry : 
+01/24/2017 10:51:50
+Error in: . Error Message:Valor de Timeout caducado. El período de tiempo de espera caducó antes de completar la operación o el servidor no responde.
+__________________________
+
+Log Entry : 
+01/24/2017 10:51:51
+Error in: . Error Message:Problemas con IdMaestro? Quizas no pude importar filas. System.Data.SqlClient.SqlException (0x80131904): Valor de Timeout caducado. El período de tiempo de espera caducó antes de completar la operación o el servidor no responde. ---> System.ComponentModel.Win32Exception (0x80004005): Tiempo de espera de la operación de espera agotado
+   en Microsoft.VisualBasic.CompilerServices.Symbols.Container.InvokeMethod(Method TargetProcedure, Object[] Arguments, Boolean[] CopyBack, BindingFlags Flags)
+   en Microsoft.VisualBasic.CompilerServices.NewLateBinding.CallMethod(Container BaseReference, String MethodName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack, BindingFlags InvocationFlags, Boolean ReportErrors, ResolutionFailure& Failure)
+   en Microsoft.VisualBasic.CompilerServices.NewLateBinding.ObjectLateCall(Object Instance, Type Type, String MemberName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack, Boolean IgnoreReturn)
+   en Microsoft.VisualBasic.CompilerServices.NewLateBinding.LateCall(Object Instance, Type Type, String MemberName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack, Boolean IgnoreReturn)
+   en Pronto.ERP.Dal.GeneralDB.ExecDinamico(String SC, String comandoSQLdinamico, Int32 timeoutSegundos)
+   en Pronto.ERP.Bll.EntidadManager.ExecDinamico(String SC, String sComandoDinamico, Int32 timeoutSegundos) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\EntidadManager.vb:línea 803
+   en ExcelImportadorManager.TraerMetadataPorIdMaestro(String SC, Int32 id) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ExcelImportador.vb:línea 5742
+   en LogicaImportador.TraerExcelDeBase(String SC, Int32& m_IdMaestro) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ExcelImportador.vb:línea 1102
+ClientConnectionId:34903028-affd-4f5b-997a-7ad50ab51081
+Error Number:-2,State:0,Class:11
+__________________________
+
+Log Entry : 
+01/24/2017 10:52:37
+Error in: . Error Message:Arranca motor
+__________________________
+
+Log Entry : 
+01/24/2017 10:52:44
+Error in: . Error Message:Reconoció la licencia
+__________________________
+
+Log Entry : 
+01/24/2017 10:58:46
+Error in: . Error Message:Arranca motor
+__________________________
+
+Log Entry : 
+01/24/2017 10:58:48
+Error in: . Error Message:Reconoció la licencia
+__________________________
+
+Log Entry : 
+01/24/2017 10:59:36
+Error in: . Error Message:Procesó carta: titular ZORIAN HNOS SRL
+__________________________
+
+Log Entry : 
+01/24/2017 10:59:36
+Error in: . Error Message:Detectó bien el numero con el Flexicapture: 550166736
+__________________________
+
+Log Entry : 
+01/24/2017 10:59:45
+Error in: . Error Message:Llamo a IsValid y Save
+__________________________
+
+Log Entry : 
+01/24/2017 10:59:53
+Error in: . Error Message:Llamo a GrabarImagen
+__________________________
+
+Log Entry : 
+01/24/2017 10:59:53
+Error in: . Error Message:GrabarImagen 1
+__________________________
+
+Log Entry : 
+01/24/2017 10:59:54
+Error in: . Error Message:GrabarImagen 2
+__________________________
+
+Log Entry : 
+01/24/2017 10:59:56
+Error in: . Error Message:grabo en base
+__________________________
+
+Log Entry : 
+01/24/2017 10:59:56
+Error in: . Error Message:grabado
+__________________________
+
+Log Entry : 
+01/24/2017 10:59:56
+Error in: . Error Message:Archivo C:\Users\Administrador\Documents\bdl\pronto\prontoweb\Temp\Lote 24ene105838 Mariano PV1\ExportToXLS_948359.tif numcarta 550166736
+__________________________
+
+Log Entry : 
+01/24/2017 11:03:25
+Error in: . Error Message:Arranca motor
+__________________________
+
+Log Entry : 
+01/24/2017 11:03:26
+Error in: . Error Message:Reconoció la licencia
+__________________________
+
+Log Entry : 
+01/24/2017 11:04:02
+Error in: . Error Message:Procesó carta: titular ZORIAN HNOS SRL
+__________________________
+
+Log Entry : 
+01/24/2017 11:04:02
+Error in: . Error Message:Detectó bien el numero con el Flexicapture: 550166736
+__________________________
+
+Log Entry : 
+01/24/2017 11:04:11
+Error in: . Error Message:Llamo a IsValid y Save
+__________________________
+
+Log Entry : 
+01/24/2017 11:04:20
+Error in: . Error Message:Llamo a GrabarImagen
+__________________________
+
+Log Entry : 
+01/24/2017 11:04:20
+Error in: . Error Message:GrabarImagen 1
+__________________________
+
+Log Entry : 
+01/24/2017 11:04:20
+Error in: . Error Message:GrabarImagen 2
+__________________________
+
+Log Entry : 
+01/24/2017 11:04:23
+Error in: . Error Message:grabo en base
+__________________________
+
+Log Entry : 
+01/24/2017 11:04:23
+Error in: . Error Message:grabado
+__________________________
+
+Log Entry : 
+01/24/2017 11:04:23
+Error in: . Error Message:Archivo C:\Users\Administrador\Documents\bdl\pronto\prontoweb\Temp\Lote 24ene110318 Mariano PV1\ExportToXLS_306849.tif numcarta 550166736
+__________________________
+
+Log Entry : 
+01/24/2017 11:04:46
+Error in: . Error Message:GrabarImagen 1
+__________________________
+
+Log Entry : 
+01/24/2017 11:04:46
+Error in: . Error Message:GrabarImagen 2
+__________________________
+
+Log Entry : 
+01/24/2017 11:04:48
+Error in: . Error Message:grabo en base
+__________________________
+
+Log Entry : 
+01/24/2017 11:04:49
+Error in: . Error Message:grabado
+__________________________
+
+Log Entry : 
+01/24/2017 11:05:34
+Error in: . Error Message:GrabarImagen 1
+__________________________
+
+Log Entry : 
+01/24/2017 11:05:40
+Error in: . Error Message:GrabarImagen 2
+__________________________
+
+Log Entry : 
+01/24/2017 11:07:49
+Error in: . Error Message:Arranca motor
+__________________________
+
+Log Entry : 
+01/24/2017 11:07:51
+Error in: . Error Message:Reconoció la licencia
+__________________________
+
+Log Entry : 
+01/24/2017 11:08:15
+Error in: . Error Message:Procesó carta: titular ZORIAN HNOS SRL
+__________________________
+
+Log Entry : 
+01/24/2017 11:08:15
+Error in: . Error Message:Detectó bien el numero con el Flexicapture: 550166736
+__________________________
+
+Log Entry : 
+01/24/2017 11:08:23
+Error in: . Error Message:Llamo a IsValid y Save
+__________________________
+
+Log Entry : 
+01/24/2017 11:08:32
+Error in: . Error Message:Llamo a GrabarImagen
+__________________________
+
+Log Entry : 
+01/24/2017 11:08:32
+Error in: . Error Message:GrabarImagen 1
+__________________________
+
+Log Entry : 
+01/24/2017 11:08:32
+Error in: . Error Message:GrabarImagen 2
+__________________________
+
+Log Entry : 
+01/24/2017 11:08:34
+Error in: . Error Message:grabo en base
+__________________________
+
+Log Entry : 
+01/24/2017 11:08:34
+Error in: . Error Message:grabado
+__________________________
+
+Log Entry : 
+01/24/2017 11:08:34
+Error in: . Error Message:Archivo C:\Users\Administrador\Documents\bdl\pronto\prontoweb\Temp\Lote 24ene110743 Mariano PV1\ExportToXLS_698976.tif numcarta 550166736
+__________________________
+
+Log Entry : 
+01/24/2017 11:08:59
+Error in: . Error Message:GrabarImagen 1
+__________________________
+
+Log Entry : 
+01/24/2017 11:08:59
+Error in: . Error Message:GrabarImagen 2
+__________________________
+
+Log Entry : 
+01/24/2017 11:09:02
+Error in: . Error Message:grabo en base
+__________________________
+
+Log Entry : 
+01/24/2017 11:09:02
+Error in: . Error Message:grabado
+__________________________
+
+Log Entry : 
+01/24/2017 11:10:44
+Error in: . Error Message:Arranca motor
+__________________________
+
+Log Entry : 
+01/24/2017 11:10:46
+Error in: . Error Message:Reconoció la licencia
+__________________________
+
+Log Entry : 
+01/24/2017 11:11:09
+Error in: . Error Message:Procesó carta: titular ZORIAN HNOS SRL
+__________________________
+
+Log Entry : 
+01/24/2017 11:11:09
+Error in: . Error Message:Detectó bien el numero con el Flexicapture: 550166736
+__________________________
+
+Log Entry : 
+01/24/2017 11:11:18
+Error in: . Error Message:Llamo a IsValid y Save
+__________________________
+
+Log Entry : 
+01/24/2017 11:11:26
+Error in: . Error Message:Llamo a GrabarImagen
+__________________________
+
+Log Entry : 
+01/24/2017 11:11:26
+Error in: . Error Message:GrabarImagen 1
+__________________________
+
+Log Entry : 
+01/24/2017 11:11:26
+Error in: . Error Message:GrabarImagen 2
+__________________________
+
+Log Entry : 
+01/24/2017 11:11:29
+Error in: . Error Message:grabo en base
+__________________________
+
+Log Entry : 
+01/24/2017 11:11:29
+Error in: . Error Message:grabado
+__________________________
+
+Log Entry : 
+01/24/2017 11:11:29
+Error in: . Error Message:Archivo C:\Users\Administrador\Documents\bdl\pronto\prontoweb\Temp\Lote 24ene111036 Mariano PV1\ExportToXLS_552223.tif numcarta 550166736
+__________________________
+
+Log Entry : 
+01/24/2017 11:12:16
+Error in: . Error Message:GrabarImagen 1
+__________________________
+
+Log Entry : 
+01/24/2017 11:12:16
+Error in: . Error Message:GrabarImagen 2
+__________________________
+
+Log Entry : 
+01/24/2017 11:12:17
+Error in: . Error Message:grabo en base
+__________________________
+
+Log Entry : 
+01/24/2017 11:12:18
+Error in: . Error Message:grabado
+__________________________
+
+Log Entry : 
+01/24/2017 11:16:17
+Error in: . Error Message:Arranca motor
+__________________________
+
+Log Entry : 
+01/24/2017 11:16:18
+Error in: . Error Message:Reconoció la licencia
+__________________________
