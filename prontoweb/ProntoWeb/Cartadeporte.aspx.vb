@@ -41,7 +41,7 @@ Partial Class CartadeporteABM
         'todo: está bien que deje habilitado el viewstate para el objetito CartaPorte, pero
         'sacarlo para los controles
 
-        
+
         If Not (Request.QueryString.Get("Id") Is Nothing) Then
             Try
                 IdCartaDePorte = Convert.ToInt32(Request.QueryString.Get("Id"))
@@ -359,7 +359,7 @@ Partial Class CartadeporteABM
     Sub VerLog(bTraerImputaciones As Boolean)
 
 
-        
+
 
         Try
 
@@ -373,7 +373,13 @@ Partial Class CartadeporteABM
             Dim s As String = "" '= dt.ToString()
             'Join(", ", dt.Rows(0).ItemArray)
             For Each r In dt.Rows
-                s &= IIf(r.Item("Detalle").ToString.Contains("Imputa"), "IMPUT " & r.Item("Detalle").ToString, "") & IIf(r.Item("Detalle").ToString.Contains("esimputa"), "DESIMPUT " & r.Item("Detalle").ToString, "") & JustificadoDerecha(r.Item(0), 10) & " " & JustificadoDerecha(r.Item(7), 15) & " " & " " & JustificadoDerecha(r.Item(3), 30) & " " & " " & "<br/>" '& r.Item(5)  & r.Item(0) & " " & r.Item(1)& " " & r.Item(4)  " " & r.Item(7)& " " & r.Item(3)
+                s &= IIf(r.Item("Detalle").ToString.Contains("Imputa"), "IMPUT " & r.Item("Detalle").ToString, "") _
+      & IIf(r.Item("Detalle").ToString.Contains("esimputa"), "DESIMPUT " & r.Item("Detalle").ToString, "") _
+      & JustificadoDerecha(r.Item(0), 10) & " " & JustificadoDerecha(r.Item(7), 15) & " " & " " _
+      & JustificadoDerecha(r.Item(3), 30) & " " & " " _
+       & IIf(r.Item("Tipo").ToString = "IMAG", "<a href=""..\DataBackupear\" + r.Item("Detalle").ToString + """>" + r.Item("Detalle").ToString + "</a>", "") _
+                    & "<br/>"
+                '& r.Item(5)  & r.Item(0) & " " & r.Item(1)& " " & r.Item(4)  " " & r.Item(7)& " " & r.Item(3)
             Next
 
             'MsgBoxAjax(Me, s)
@@ -2678,7 +2684,7 @@ Partial Class CartadeporteABM
                     Exit Sub
                 End If
             Else
-               
+
 
 
                 Dim msg As String = ""
