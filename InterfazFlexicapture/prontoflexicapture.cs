@@ -385,6 +385,10 @@ namespace ProntoFlexicapture
             }
 
 
+            // esto si puede funcionar, porque por ahora estas separando vos mismo los multipagina antes de llamar a la ocr
+            // -quizas no deberias...
+            processor.SetAssemblingMode(AssemblingModeEnum.AM_DocumentPerImageFile); 
+
             //traceBegin("Run processing loop...");
             bool conTK = false;
             int count = 0;
@@ -411,6 +415,23 @@ namespace ProntoFlexicapture
                 string imagenAprocesar = imageSource.GetProximoSinQuitarloDeLaCola();
                 conTK = imagenAprocesar.Contains("_unido"); // por ahora desactivarlo
 
+                try
+                {
+
+
+                    //if (conTK) // esto no va a funcar: una vez que lo pones, no se puede cambiar a mitad de la tanda
+                    //    processor.SetAssemblingMode(AssemblingModeEnum.AM_DocumentPerImageFile);
+                    //else 
+                    //    processor.SetAssemblingMode(AssemblingModeEnum.AM_Auto);
+
+                }
+                catch (Exception)
+                {
+
+                    //throw;
+                }
+
+
 
                 IDocument document;
 
@@ -420,7 +441,6 @@ namespace ProntoFlexicapture
 
 
                     // si no esta la licencia, acá explota
-
 
 
                     //if (conTK && count > 0) processor.RecognizeNextDocument(); // saltar la pagina con el tiket, y así pasar al siguiente archivo
@@ -563,7 +583,7 @@ namespace ProntoFlexicapture
 
                         if (conTK)
                         {
-                            document = processor.RecognizeNextDocument();
+                            //document = processor.RecognizeNextDocument();
 
                             //string archivoOriginal = imagenes[count];
 
@@ -593,7 +613,7 @@ namespace ProntoFlexicapture
                             //el nombre de la imagen lo logeo en algun lado????
                             var cc = CartaDePorteManager.GrabarImagen(output.IdCarta, SC, 0, 0, nombrenuevo, ref sError, DirApp, true, false);
 
-                            processor.ExportDocumentEx(document, dirExport, "ExportToXLS", exportParams);
+                            //processor.ExportDocumentEx(document, dirExport, "ExportToXLS", exportParams);
 
                         }
 
