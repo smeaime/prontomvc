@@ -30,10 +30,46 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
     <%--/////////////////////////////////////////////////////////////--%>
     <%--/////////////////////////////////////////////////////////////--%>
 
-    <div class="titulos" style="color: white">
+  <%--  <div class="titulos" style="color: white">
         Situación de CPs
+    </div>--%>
+
+
+    <style>
+        /* Start by setting display:none to make this hidden.
+   Then we position it in relation to the viewport window
+   with position:fixed. Width, height, top and left speak
+   speak for themselves. Background we set to 80% white with
+   our animation centered, and no-repeating */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 100%;
+            background: rgba( 255, 255, 255, .8 ) url('@Url.Content("~/Content/images/fhhrx.gif")') 50% 50% no-repeat;
+        }
+
+        /* When the body has the loading class, we turn
+   the scrollbar off with overflow:hidden */
+        body.loading {
+            overflow: hidden;
+        }
+
+            /* Anytime the body has the loading class, our
+   modal element will be visible */
+            body.loading .modal {
+                display: block;
+            }
+    </style>
+
+    <div class="modal" id="loading">
+        Cargando...
     </div>
-    <br />
+
+
     <div>
         <%--   <table id="list9">
         </table>
@@ -130,13 +166,15 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
         <input type="button" id="btnExportarGrillaAjax" value="Excel BLD demorados" class="btn btn-primary" />
 
+        <input type="button" id="btnExportarGrillaAjax3" value="Excel 3" class="btn btn-primary" />
+
         <input type="button" id="btnPanelInformeAjax" value="Resumen" class="btn btn-primary" />
 
         <asp:Button ID="btnPanelInforme" Text="RESUMEN" runat="server" Visible="false" CssClass="btn btn-primary" />
         <br />
         <div id="Salida2"></div>
         <asp:Literal ID="salida" runat="server"></asp:Literal>
-        <br />
+        
 
         <%--<input type="text" class="span4" id="text1" name="agent" value=""  "/>--%>
 
@@ -324,6 +362,50 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
         <script type="text/javascript">
 
             "use strict";
+
+            
+            $('#btnExportarGrillaAjax3').click(function () {
+
+                var d = {
+                    filters: jQuery('#Lista').getGridParam("postData").filters,  // si viene en undefined es porque no se puso ningun filtro
+                    fechadesde: $("#ctl00_ContentPlaceHolder1_txtFechaDesde").val(),
+                    fechahasta: $("#ctl00_ContentPlaceHolder1_txtFechaHasta").val(),
+                    destino: $("#ctl00_ContentPlaceHolder1_txtDestino").val()
+                }
+
+                if (typeof d.filters === "undefined") d.filters = "";
+
+                $.ajax({
+                    type: "POST",
+                    //method: "POST",
+                    url: "SituacionCalidad.aspx/ExportarGrillaNormal3",
+                    dataType: "json",
+                    contentType: "application/json; charset=utf-8",
+
+                    data: JSON.stringify(d),
+
+                    success: function (data) {
+                        //alert(data.d);
+                        window.open(data.d);
+                    }
+
+
+                    ,
+                    beforeSend: function () {
+                        //$('.loading').html('some predefined loading img html');
+                        $("#loading").show();
+                        $('#grabar2').attr("disabled", true).val("Espere...");
+
+                    },
+                    complete: function () {
+                        $("#loading").hide();
+                    }
+
+
+                })
+
+
+            })
 
 
             $('#btnExportarGrillaAjax2').click(function () {
@@ -625,6 +707,41 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
             }
 
+            function RefrescarFondoRenglon(grilla)
+            {
+
+                var iCol = getColumnIndexByName($(grilla),'Situacion'),
+                           cRows = grilla.rows.length, iRow, row, className;
+
+                for (iRow=0; iRow<cRows; iRow++) {
+                    row = grilla.rows[iRow];
+                    className = row.className;
+                    if ($.inArray('jqgrow', className.split(' ')) > 0) {
+                        var x = ($(row.cells[iCol]))[0].childNodes[0].data; //.children("input:checked");
+
+                        //Autorizado: verde        Demorado: rojo            Rechazado: Violeta 
+                        if (x=="Autorizado") {
+                            if ($.inArray('myAltRowClassAutorizado', className.split(' ')) === -1) {
+                                row.className = className + ' myAltRowClassAutorizado';
+                            }
+                        }
+                        else if (x=="Demorado") {
+                            if ($.inArray('myAltRowClassDemorado', className.split(' ')) === -1) {
+                                row.className = className + ' myAltRowClassDemorado';
+                            }
+                        }
+                        else if (x=="Rechazado") {
+                            if ($.inArray('myAltRowClassRechazado', className.split(' ')) === -1) {
+                                row.className = className + ' myAltRowClassRechazado';
+                            }
+                        }
+
+
+                    }
+                }
+
+            }
+
 
 
 
@@ -706,6 +823,8 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                                 var valor = result.IdCartasDePorteControlDescarga;
                                 if (valor == "") { valor = "0"; }
                                 $('#Lista').jqGrid('setCell', rowid, ' IdCartasDePorteControlDescarga', valor);
+
+                                RefrescarFondoRenglon(document.getElementById('Lista'));
                             } else {
                                 alert('No se pudo grabar el registro.');
                             }
@@ -726,7 +845,17 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                                 $("#textoMensajeAlerta").html(xhr.responseText);
                                 $("#mensajeAlerta").show();
                             }
+                        },
+                        beforeSend: function () {
+                            //$('.loading').html('some predefined loading img html');
+                            $("#loading").show();
+                            $('#grabar2').attr("disabled", true).val("Espere...");
+
+                        },
+                        complete: function () {
+                            $("#loading").hide();
                         }
+
                     });
                 };
             };
@@ -1888,35 +2017,10 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                     loadComplete: function() {
                         // http://stackoverflow.com/questions/6575192/jqgrid-change-background-color-of-row-based-on-row-cell-value-by-column-name
 
-                        var iCol = getColumnIndexByName($(this),'Situacion'),
-                            cRows = this.rows.length, iRow, row, className;
-
-                        for (iRow=0; iRow<cRows; iRow++) {
-                            row = this.rows[iRow];
-                            className = row.className;
-                            if ($.inArray('jqgrow', className.split(' ')) > 0) {
-                                var x = ($(row.cells[iCol]))[0].childNodes[0].data; //.children("input:checked");
-
-                                //Autorizado: verde        Demorado: rojo            Rechazado: Violeta 
-                                if (x=="Autorizado") {
-                                    if ($.inArray('myAltRowClass', className.split(' ')) === -1) {
-                                        row.className = className + ' myAltRowClass';
-                                    }
-                                }
-                                else if (x=="Demorado") {
-                                    if ($.inArray('myAltRowClass', className.split(' ')) === -1) {
-                                        row.className = className + ' myAltRowClass';
-                                    }
-                                }
-                                else if (x=="Rechazado") {
-                                    if ($.inArray('myAltRowClass', className.split(' ')) === -1) {
-                                        row.className = className + ' myAltRowClass';
-                                    }
-                                }
+                        RefrescarFondoRenglon(this);
 
 
-                            }
-                        }
+                       
                     },
 
 
@@ -1963,7 +2067,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                     multiselect: false,
                     shrinkToFit: false,
                     width: 'auto',
-                    height: 400, // $(window).height() - 250, // '100%'
+                    height: 460, // $(window).height() - 250, // '100%'
                     altRows: false,
                     footerrow: false,
                     userDataOnFooter: true,
@@ -2049,16 +2153,27 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
             
 
         </script>
-       
+
 
 
     </div>
- <style type="text/css">
-            .myAltRowClass {
-                background-color: #DCFFFF;
-                background-image: none;
-            }
-        </style>
+    <style type="text/css">
+        .myAltRowClassDemorado {
+            background-color:  red;
+            background-image: none;
+        }
+
+        .myAltRowClassAutorizado {
+            background-color: lightgreen;
+            background-image: none;
+        }
+
+        .myAltRowClassRechazado {
+            background-color:   violet;
+            background-image: none;
+        }
+
+    </style>
     <%--   /////////////////////////////////////////////////////////////////////        
  /////////////////////////////////////////////////////////////////////    --%>
     <%--  campos hidden --%>

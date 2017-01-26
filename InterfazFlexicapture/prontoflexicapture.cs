@@ -3570,7 +3570,7 @@ namespace ServicioCartaPorte
 
                                  a.PuntoVenta.ToString(),
 
-                                 a.FechaActualizacionAutomatica==null ? "" :  a.FechaActualizacionAutomatica.GetValueOrDefault().ToShortDateString(),
+                                 a.FechaActualizacionAutomatica==null ? "" :  a.FechaActualizacionAutomatica.GetValueOrDefault().NullSafeToString(),
 
 
                                 a.Patente,
@@ -3628,6 +3628,107 @@ namespace ServicioCartaPorte
 
         }
 
+        public virtual string CartasPorte_DynamicGridData_ExcelExportacion_UsandoInternalQuery_3(string sidx, string sord, int page, int rows, bool _search, string filters, string FechaInicial, string FechaFinal, int puntovent, int iddestino, string SC, string nombreusuario)
+        {
+            //asdad
+
+            // la idea seria llamar a la funcion filtrador pero sin paginar, o diciendolo de
+            // otro modo, pasandole como maxrows un numero grandisimo
+            // http://stackoverflow.com/questions/8227898/export-jqgrid-filtered-data-as-excel-or-csv
+            // I would recommend you to implement export of data on the server and just post the current searching filter to the back-end. Full information about the searching parameter defines postData parameter of jqGrid. Another boolean parameter of jqGrid search define whether the searching filter should be applied of not. You should better ignore _search property of postData parameter and use search parameter of jqGrid.
+
+            // http://stackoverflow.com/questions/9339792/jqgrid-ef-mvc-how-to-export-in-excel-which-method-you-suggest?noredirect=1&lq=1
+
+
+
+
+
+
+
+            //var usuario = Membership.GetUser();
+            System.Data.DataTable dt = EntidadManager.ExecDinamico(SC, "Empleados_TX_UsuarioNT '" + nombreusuario + "'");
+            int idUsuario = Convert.ToInt32(dt.Rows[0][0]);
+            // int puntovent = EmpleadoManager.GetItem(SC, idUsuario).PuntoVentaAsociado;
+
+
+            DateTime FechaDesde = new DateTime(1980, 1, 1);
+            DateTime FechaHasta = new DateTime(2050, 1, 1);
+
+            try
+            {
+
+                FechaDesde = DateTime.ParseExact(FechaInicial, "dd/MM/yyyy", null);
+            }
+            catch (Exception e)
+            {
+                // throw;
+            }
+
+            try
+            {
+                FechaHasta = DateTime.ParseExact(FechaFinal, "dd/MM/yyyy", null);
+
+            }
+            catch (Exception e)
+            {
+                // throw;
+
+            }
+
+
+
+
+
+            ProntoMVC.Data.Models.DemoProntoEntities db =
+                               new ProntoMVC.Data.Models.DemoProntoEntities(
+                                   Auxiliares.FormatearConexParaEntityFramework(
+                                   ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC)));
+
+
+            db.Database.CommandTimeout = 240;
+
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+            int totalrecords = 0;
+
+
+            //var pagedQuery = Filtrador.Filters.FiltroGenerico_UsandoIQueryable<ProntoMVC.Data.Models.fSQL_GetDataTableFiltradoYPaginado_Result3>
+            //                (sidx, sord, page, rows, _search, filters, db, ref totalRecords,
+            //                             db.fSQL_GetDataTableFiltradoYPaginado(
+            //                                                0, 9999999, 0, "", -1, -1,
+            //                                                -1, -1, -1, -1, -1,
+            //                                                -1, 0, "Ambas", FechaDesde,
+            //                                                FechaHasta, puntovent, null, "", "",
+            //                                                -1, null, 0, "", "Todos")
+            //                 );
+
+
+
+
+
+
+
+            //string result2 = CartasPorte_DynamicGridData(sidx, sord, 1, 200000, _search, filters, FechaInicial, FechaFinal, puntovent, iddestino, SC, nombreusuario);
+
+
+            string sqlquery4 = Filtrador.Filters.FiltroGenerico_UsandoIQueryable_DevolverInternalQuery<ProntoMVC.Data.Models.fSQL_GetDataTableFiltradoYPaginado_Result3>
+                                    (
+                                                            "IdCartaDePorte", "desc", 1, 999999, true, filters, db, ref totalrecords,
+
+                                                            db.fSQL_GetDataTableFiltradoYPaginado(
+                                                            0, 9999999, 0, "", -1, -1,
+                                                            -1, -1, -1, -1, -1,
+                                                          iddestino, 0, "Ambas"
+                                                           , FechaDesde, FechaHasta,
+                                                           0, null, false, "", "",
+                                                           -1, null, 0, "", "Todos")
+                                    );
+
+
+            return sqlquery4;
+
+        }
 
 
         public virtual string CartasPorte_DynamicGridData_ExcelExportacion_UsandoInternalQuery(string sidx, string sord, int page, int rows, bool _search, string filters, string FechaInicial, string FechaFinal, int puntovent, int iddestino, string SC, string nombreusuario)

@@ -595,7 +595,11 @@ namespace ProntoMVC.Tests
             //string archivoExcel = @"C:\Users\Administrador\Documents\bdl\pronto\docstest\171116\Posicion-161117-1722.xls";
             //string archivoExcel = @"C:\Users\Administrador\Documents\bdl\pronto\docstest\Urenport_ 953-29122016.xlsx";
             //string archivoExcel = @"C:\Users\Administrador\Documents\bdl\pronto\docstest\Posicion-161229-0945.xls"
-            string archivoExcel = @"C:\Users\Administrador\Documents\bdl\New folder\Urenport_ 951-24012017.xls";
+            //string archivoExcel = @"C:\Users\Administrador\Documents\bdl\New folder\Urenport_ 951-24012017.xls";
+            string archivoExcel = @"C:\Users\Administrador\Documents\bdl\pronto\docstest\Ejemplo punto 3.xls";
+           
+
+
             //explota
 
             string ms = "";
@@ -631,11 +635,11 @@ namespace ProntoMVC.Tests
 
             var s = new ServicioCartaPorte.servi();
             var sqlquery4 = s.CartasPorte_DynamicGridData_ExcelExportacion_UsandoInternalQuery("IdCartaDePorte", "desc", 1, 999999, true, filtro,
-                                                 "11/01/2016",
-                                                 "11/01/2016",
+                                                 "01/12/2016",
+                                                 "30/01/2017",
                                                  0, -1, SC, "Mariano");
 
-            CartaDePorteManager.RebindReportViewer_ServidorExcel(ref ReporteLocal, "Sincronismo BLD.rdl", sqlquery4, SC, false, ref output);
+            CartaDePorteManager.RebindReportViewer_ServidorExcel(ref ReporteLocal, "Carta Porte - Situacion.rdl", sqlquery4, SC, false, ref output);
 
 
             System.Diagnostics.Process.Start(output);
@@ -666,9 +670,7 @@ Adjunto un ejemplo que tiene cartas de porte de 8 entregadores que no son Willia
             2h
              * 
 
-            4 Color de sitauciones para la palabra :    Autorizado: verde        Demorado: rojo            Rechazado: Violeta 
-             3h
-             * 
+            
              * 
             5  Al exportar a Excel tiene que tirar el mismo excel que te adjunto en el punto 1. Los otros datos en todo caso que estén
             3h
