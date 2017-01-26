@@ -584,16 +584,120 @@ namespace ProntoMVC.Tests
         /// ////////////////////////////////////////////////////////////////////////////////////////////////////////////
         /// ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-            [TestMethod]
+
+
+
+        [TestMethod]
+        public void Urenport_29439_punto3()
+        {
+
+            //string archivoExcel = @"C:\Users\Administrador\Documents\bdl\pronto\docstest\171116\urenport.xls";
+            //string archivoExcel = @"C:\Users\Administrador\Documents\bdl\pronto\docstest\171116\Posicion-161117-1722.xls";
+            //string archivoExcel = @"C:\Users\Administrador\Documents\bdl\pronto\docstest\Urenport_ 953-29122016.xlsx";
+            //string archivoExcel = @"C:\Users\Administrador\Documents\bdl\pronto\docstest\Posicion-161229-0945.xls"
+            string archivoExcel = @"C:\Users\Administrador\Documents\bdl\New folder\Urenport_ 951-24012017.xls";
+            //explota
+
+            string ms = "";
+
+            int m_IdMaestro = 0;
+            Pronto.ERP.BO.CartaDePorte carta;
+
+
+
+            string log = "";
+            //hay que pasar el formato como parametro 
+            ExcelImportadorManager.FormatearExcelImportadoEnDLL(ref m_IdMaestro, archivoExcel,
+                                    LogicaImportador.FormatosDeExcel.Urenport, SC, 0, ref log, "", 0, "");
+
+            var dt = LogicaImportador.TraerExcelDeBase(SC, ref m_IdMaestro);
+
+        }
+
+
+
+
+
+        [TestMethod]
+        public void Urenport_29439_punto5()
+        {
+            string filtro = "{\"groupOp\":\"OR\",\"rules\":[{\"field\":\"DestinoDesc\",\"op\":\"eq\",\"data\":\"MOL. CAÑUELAS - ZARATE\"},{\"field\":\"DestinoDesc\",\"op\":\"eq\",\"data\":\"TERMINAL 6\"}]}";
+            string output = @"c:\asdad.xls";
+
+            var scEF = ProntoMVC.Data.Models.Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC));
+            DemoProntoEntities db = new DemoProntoEntities(scEF);
+
+            ReportViewer ReporteLocal = new Microsoft.Reporting.WebForms.ReportViewer();
+
+            var s = new ServicioCartaPorte.servi();
+            var sqlquery4 = s.CartasPorte_DynamicGridData_ExcelExportacion_UsandoInternalQuery("IdCartaDePorte", "desc", 1, 999999, true, filtro,
+                                                 "11/01/2016",
+                                                 "11/01/2016",
+                                                 0, -1, SC, "Mariano");
+
+            CartaDePorteManager.RebindReportViewer_ServidorExcel(ref ReporteLocal, "Sincronismo BLD.rdl", sqlquery4, SC, false, ref output);
+
+
+            System.Diagnostics.Process.Start(output);
+        }
+
+
+
+
+        [TestMethod]
+        public void Urenport_29439_punto()
+        {
+            /*
+            1    La imagen para ver la situación de los camiones tiene que ser mas grande, ordenado y dinamico. 
+          Adjunto Excel de muestra. Esos son los campos que tienen que figurar y en el orden que tiene que figurar. 
+          Se tiene que poder ver todos los campos sin tener que andar moviéndose en la pantalla para los costados.
+             * Lo que quieren es que las columnas de la grilla del módulo sean las definidas en el excel (más la fecha y hora de la última modificación).
+
+Por otro lado, dicen que intentemos utilizar la mayor porción de pantalla posible. Con respecto a esto, por el ancho estamos usando toda la pantalla por lo cual si con las nuevas columnas quedan muchas columnas a la derecha, podríamos achicar la tipografía.
+Por el alto, se puede agrandar? En mi pantalla usa 380 pixeles cuando podría ser algo más grande.
+             1h
+
+
+            3 Que el robot filtre también la información de los otros entregadores y que figure 
+             el entregador en nuestro sistema. ( ver ejemplo en el Excel que adjuntamos para el punto 1)
+             * Sucede que en el excel que descarga el robot hay cartas de porte de multiples entregadores pero en la columna "CUIT_ENTREGADOR" siempre viene el CUIT de Williams.
+Se pueden identificar los entregadores por la razón social que aparece en la columna "ENTREGADOR".
+Adjunto un ejemplo que tiene cartas de porte de 8 entregadores que no son Williams pintados de amarillo.
+            2h
+             * 
+
+            4 Color de sitauciones para la palabra :    Autorizado: verde        Demorado: rojo            Rechazado: Violeta 
+             3h
+             * 
+             * 
+            5  Al exportar a Excel tiene que tirar el mismo excel que te adjunto en el punto 1. Los otros datos en todo caso que estén
+            3h
+             * 
+
+             * 
+             */
+
+
+        }
+
+
+
+
+
+
+        [TestMethod]
         public void Mail()
         {
-//                Log Entry : 
-//01/24/2017 03:50:21
-//Error in: https://prontoweb.williamsentregas.com.ar/ProntoWeb/SincronismosAutomaticos.aspx. 
-//                Syntax error in parameters or arguments. The server response was: 5.1.3 Bad recipient address syntax
-//   at System.Net.Mail.RecipientCommand.CheckResponse(SmtpStatusCode statusCode, String response)
-//Error Message:'jlouge@ledesma.com.ar', 'mruiz@ledesma.com.ar', 'lbonello@ledesma.com.ar', 'jturin@ledesma.com.ar',mfavot@williamsentregas.com.ar
-            }
+            //                Log Entry : 
+            //01/24/2017 03:50:21
+            //Error in: https://prontoweb.williamsentregas.com.ar/ProntoWeb/SincronismosAutomaticos.aspx. 
+            //                Syntax error in parameters or arguments. The server response was: 5.1.3 Bad recipient address syntax
+            //   at System.Net.Mail.RecipientCommand.CheckResponse(SmtpStatusCode statusCode, String response)
+            //Error Message:
+            string casilla = @"'jlouge@ledesma.com.ar', 'mruiz@ledesma.com.ar', 'lbonello@ledesma.com.ar', 'jturin@ledesma.com.ar',mfavot@williamsentregas.com.ar";
+
+            EntidadManager.IsValidEmail(casilla);
+        }
 
 
 
@@ -736,6 +840,8 @@ namespace ProntoMVC.Tests
             System.Diagnostics.Process.Start(output);
 
         }
+
+
 
         [TestMethod]
         public void liquidacionsubcon_29418_Caso_Munoz_modoAmbos()
