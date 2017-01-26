@@ -148,3 +148,39 @@ Log Entry :
 01/26/2017 13:41:38
 Error in: http://localhost:58911/ProntoWeb/SituacionCalidad.aspx/ExportarGrillaNormal. Error Message:Archivo generado C:\Users\Administrador\Documents\bdl\pronto\prontoweb\DataBackupear\Listado 26ene2017_134135.xls
 __________________________
+
+Log Entry : 
+01/26/2017 13:45:59
+Error in: http://localhost:58911/ProntoWeb/SituacionCalidad.aspx/PanelInforme. Error Message:System.ComponentModel.Win32Exception
+Tiempo de espera de la operación de espera agotado
+
+
+__________________________
+
+Log Entry : 
+01/26/2017 13:46:02
+Error in: http://localhost:58911/ProntoWeb/SituacionCalidad.aspx/PanelInforme. Error Message:System.Net.Mail.SmtpException
+Error al enviar correo.
+   en System.Net.Mail.SmtpClient.Send(MailMessage message)
+   en ProntoFuncionesGenerales.MandaEmailSimple(String Para, String Asunto, String Cuerpo, String De, String SmtpServer, String SmtpUser, String SmtpPass, String sStringGenerarAdjunto, Int64 SmtpPort, Int32 EnableSSL, String CCO, String img)
+   en ASP.global_asax.Application_Error(Object sender, EventArgs e) en C:\Users\Administrador\Documents\bdl\pronto\prontoweb\global.asax:línea 472
+System
+__________________________
+
+Log Entry : 
+01/26/2017 13:52:46
+Error in: http://localhost:58911/ProntoWeb/SituacionCalidad.aspx. Error Message:System.ComponentModel.Win32Exception
+Tiempo de espera de la operación de espera agotado
+
+
+__________________________
+
+Log Entry : 
+01/26/2017 13:52:47
+Error in: http://localhost:58911/ProntoWeb/SituacionCalidad.aspx. Error Message:System.Net.Mail.SmtpException
+Error al enviar correo.
+   en System.Net.Mail.SmtpClient.Send(MailMessage message)
+   en ProntoFuncionesGenerales.MandaEmailSimple(String Para, String Asunto, String Cuerpo, String De, String SmtpServer, String SmtpUser, String SmtpPass, String sStringGenerarAdjunto, Int64 SmtpPort, Int32 EnableSSL, String CCO, String img)
+   en ASP.global_asax.Application_Error(Object sender, EventArgs e) en C:\Users\Administrador\Documents\bdl\pronto\prontoweb\global.asax:línea 472
+System
+__________________________

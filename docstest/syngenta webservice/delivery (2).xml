@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<data xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<delivery>
+		<action>I</action>
+		<delivery_type>CP</delivery_type>
+		<carta_porte>12345678</carta_porte>
+		<grain_receiver>20243212349</grain_receiver>
+		<CGT_number>1222211</CGT_number>
+		<Intermediario>Nombre interm</Intermediario>
+		<Intermediario_CUIT>209993332</Intermediario_CUIT>
+		<corredor_CUIT>20213459873</corredor_CUIT>
+		<delivery_date>12152017</delivery_date>
+		<item>
+			<grain>014</grain>
+			<quantity>10</quantity>
+			<UOM>TO</UOM>
+			<origin>00006-01</origin>
+			<destination>00004-01</destination>
+			<year_of_Harvest>16/17</year_of_Harvest>
+		</item>
+	</delivery>
+	<delivery>
+		<action>I</action>
+		<delivery_type>CP</delivery_type>
+		<carta_porte>12345678</carta_porte>
+		<grain_receiver>20243212349</grain_receiver>
+		<CGT_number>1222211</CGT_number>
+		<Intermediario>Nombre interm</Intermediario>
+		<Intermediario_CUIT>209993332</Intermediario_CUIT>
+		<entregador>Entregador nombre</entregador>
+		<entregador_CUIT>20213459873</entregador_CUIT>
+		<destinatario>Destino nombre</destinatario>
+		<destinatario_CUIT>20213459873</destinatario_CUIT>
+		<delivery_date>12152017</delivery_date>
+		<item>
+			<grain>014</grain>
+			<quantity>10</quantity>
+			<UOM>TO</UOM>
+			<origin>00006-01</origin>
+			<destination>00004-01</destination>
+			<year_of_Harvest>16/17</year_of_Harvest>
+		</item>
+	</delivery>
+</data>
