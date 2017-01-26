@@ -1,0 +1,130 @@
+
+Log Entry : 
+01/26/2017 11:57:40
+Error in: . Error Message:Por generar el archivo c:\asdad.xls
+__________________________
+
+Log Entry : 
+01/26/2017 11:57:40
+Error in: . Error Message:Archivo generado c:\asdad.xls
+__________________________
+
+Log Entry : 
+01/26/2017 12:08:02
+Error in: . Error Message:Por generar el archivo c:\asdad.xls
+__________________________
+
+Log Entry : 
+01/26/2017 12:08:17
+Error in: . Error Message:System.IO.IOException: El proceso no puede obtener acceso al archivo 'c:\asdad.xls' porque está siendo utilizado en otro proceso.
+   en System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   en System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   en System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy)
+   en System.IO.FileStream..ctor(String path, FileMode mode)
+   en CartaDePorteManager.RebindReportViewer_ServidorExcel(ReportViewer& oReportViewer, String rdlFile, String strSQL, String SC, Boolean bDescargaExcel, String& ArchivoExcelDestino, String titulo, Boolean bDescargaHtml) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 4754
+__________________________
+
+Log Entry : 
+01/26/2017 12:13:07
+Error in: . Error Message:Por generar el archivo c:\asdad.xls
+__________________________
+
+Log Entry : 
+01/26/2017 12:13:07
+Error in: . Error Message:Archivo generado c:\asdad.xls
+__________________________
+
+Log Entry : 
+01/26/2017 12:32:09
+Error in: . Error Message:Por generar el archivo c:\asdad.xls
+__________________________
+
+Log Entry : 
+01/26/2017 12:32:09
+Error in: . Error Message:Archivo generado c:\asdad.xls
+__________________________
+
+Log Entry : 
+01/26/2017 12:33:08
+Error in: . Error Message:Por generar el archivo c:\asdad.xls
+__________________________
+
+Log Entry : 
+01/26/2017 12:33:08
+Error in: . Error Message:Archivo generado c:\asdad.xls
+__________________________
+
+Log Entry : 
+01/26/2017 12:38:41
+Error in: . Error Message:Por generar el archivo c:\asdad.xls
+__________________________
+
+Log Entry : 
+01/26/2017 12:38:41
+Error in: . Error Message:Archivo generado c:\asdad.xls
+__________________________
+
+Log Entry : 
+01/26/2017 12:40:30
+Error in: . Error Message:Por generar el archivo c:\asdad.xls
+__________________________
+
+Log Entry : 
+01/26/2017 12:40:30
+Error in: . Error Message:System.IO.IOException: El proceso no puede obtener acceso al archivo 'c:\asdad.xls' porque está siendo utilizado en otro proceso.
+   en System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   en System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   en System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy)
+   en System.IO.FileStream..ctor(String path, FileMode mode)
+   en CartaDePorteManager.RebindReportViewer_ServidorExcel(ReportViewer& oReportViewer, String rdlFile, String strSQL, String SC, Boolean bDescargaExcel, String& ArchivoExcelDestino, String titulo, Boolean bDescargaHtml) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 4754
+__________________________
+
+Log Entry : 
+01/26/2017 12:41:26
+Error in: . Error Message:Por generar el archivo c:\asdad.xls
+__________________________
+
+Log Entry : 
+01/26/2017 12:41:26
+Error in: . Error Message:Archivo generado c:\asdad.xls
+__________________________
+
+Log Entry : 
+01/26/2017 12:52:46
+Error in: . Error Message:Error en la grabacion ProntoMVC.Data.Models.CartasDePorte failed validation\n- SituacionLog : The field SituacionLog must be a string or array type with a maximum length of '300'.
+
+__________________________
+
+Log Entry : 
+01/26/2017 12:53:29
+Error in: . Error Message:Error en la grabacion ProntoMVC.Data.Models.CartasDePorte failed validation\n- SituacionLog : The field SituacionLog must be a string or array type with a maximum length of '300'.
+
+__________________________
+
+Log Entry : 
+01/26/2017 13:07:22
+Error in: . Error Message:System.InvalidCastException
+La conversión especificada no es válida.
+   en ExcelImportadorManager.UrenportExcelToDataset(String pFileName, String SC)
+BusinessLogic
+__________________________
+
+Log Entry : 
+01/26/2017 13:21:02
+Error in: . Error Message:Valor de Timeout caducado. El período de tiempo de espera caducó antes de completar la operación o el servidor no responde.
+__________________________
+
+Log Entry : 
+01/26/2017 13:21:05
+Error in: . Error Message:Problemas con IdMaestro? Quizas no pude importar filas. System.Data.SqlClient.SqlException (0x80131904): Valor de Timeout caducado. El período de tiempo de espera caducó antes de completar la operación o el servidor no responde. ---> System.ComponentModel.Win32Exception (0x80004005): Tiempo de espera de la operación de espera agotado
+   en Microsoft.VisualBasic.CompilerServices.Symbols.Container.InvokeMethod(Method TargetProcedure, Object[] Arguments, Boolean[] CopyBack, BindingFlags Flags)
+   en Microsoft.VisualBasic.CompilerServices.NewLateBinding.CallMethod(Container BaseReference, String MethodName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack, BindingFlags InvocationFlags, Boolean ReportErrors, ResolutionFailure& Failure)
+   en Microsoft.VisualBasic.CompilerServices.NewLateBinding.ObjectLateCall(Object Instance, Type Type, String MemberName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack, Boolean IgnoreReturn)
+   en Microsoft.VisualBasic.CompilerServices.NewLateBinding.LateCall(Object Instance, Type Type, String MemberName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack, Boolean IgnoreReturn)
+   en Pronto.ERP.Dal.GeneralDB.ExecDinamico(String SC, String comandoSQLdinamico, Int32 timeoutSegundos)
+   en Pronto.ERP.Bll.EntidadManager.ExecDinamico(String SC, String sComandoDinamico, Int32 timeoutSegundos)
+   en ExcelImportadorManager.TraerMetadataPorIdMaestro(String SC, Int32 id)
+   en LogicaImportador.TraerExcelDeBase(String SC, Int32& m_IdMaestro)
+ClientConnectionId:fc592f03-1a40-417c-9d96-5fc47c6e7e0e
+Error Number:-2,State:0,Class:11
+__________________________
