@@ -2044,113 +2044,121 @@ Public Class ExcelImportadorManager
 
 
                         If actua(.IdClienteEntregador, BuscaIdClientePreciso(r(18), SC)) Then log += "Entregador; "
-                        If .IdClienteEntregador <= 0 Then .IdClienteEntregador = Nothing
-
-
-
-                        If actua(.Destino, BuscaIdWilliamsDestinoPreciso(DiccionarioEquivalenciasManager.BuscarEquivalencia(SC, r(16)), SC)) Then log += "Destino; "
-                        If .Destino <= 0 Then .Destino = Nothing
-                        '.Destino = BuscaIdWilliamsDestinoPreciso(DiccionarioEquivalenciasManager.BuscarEquivalencia(SC, r(16)), SC)
-
-
-
-
-                        If actua(.IdTransportista, BuscarTransportistaPorCUIT(r(21), SC, r(20))) Then log += "Transportista; "
-                        If .IdTransportista <= 0 Then .IdTransportista = Nothing
-                        '.IdTransportista = BuscarTransportistaPorCUIT(r(21), SC, r(20))
-                        If actua(.IdChofer, BuscarChoferPorCUIT(r(23), SC, r(22))) Then log += "Chofer; "
-                        If .IdChofer <= 0 Then .IdChofer = Nothing
-                        '.IdChofer = BuscarChoferPorCUIT(r(23), SC, r(22))
-
-                        If actua(.Procedencia, BuscaIdLocalidadPreciso(DiccionarioEquivalenciasManager.BuscarEquivalencia(SC, r(24)), SC)) Then log += "Procedencia; "
-                        If .Procedencia <= 0 Then .Procedencia = Nothing
-                        '.Procedencia = BuscaIdLocalidadPreciso(DiccionarioEquivalenciasManager.BuscarEquivalencia(SC, r(24)), SC)
-
-
-
-
-
-
-
-                        If actua(.BrutoPto, Decimal.Parse(Val(r(25)))) Then log += "BrutoPto; "
-                        '.BrutoPto = Val(r(25))
-                        If actua(.TaraPto, Decimal.Parse(Val(r(26)))) Then log += "TaraPto; "
-                        '.TaraPto = Val(r(26))
-                        If actua(.NetoPto, Decimal.Parse(Val(r(27)))) Then log += "NetoPto; "
-                        '.NetoPto = Val(r(27))
-
-                        If actua(.BrutoFinal, Decimal.Parse(Val(r(29)))) Then log += "BrutoFinal; "
-                        '.BrutoFinal = Val(r(29))
-                        If actua(.TaraFinal, Decimal.Parse(Val(r(30)))) Then log += "TaraFinal; "
-                        '.TaraFinal = Val(r(30))
-
-                        'If actua(.NetoFinalIncluyendoMermas, Val(r(31))) Then log += "NetoFinal; "
-                        If actua(.NetoFinal, Decimal.Parse(Val(r(31)))) Then log += "NetoFinal; "
-                        '.NetoFinalIncluyendoMermas = Val(r(31))
-
-                        If actua(.Merma, Decimal.Parse(Val(r(32)))) Then log += "Merma; "
-                        '.Merma = Val(r(32))
-                        'If actua(.NetoFinalSinMermas, Val(r(33))) Then log += "NetoFinalMenosMermas; "
-                        If actua(.NetoProc, Decimal.Parse(Val(r(33)))) Then log += "NetoFinalMenosMermas; "
-                        '.NetoFinalSinMermas = Val(r(33))
-
-
-
-
-                        If actua(.CalidadDe, BuscaIdCalidadPreciso(DiccionarioEquivalenciasManager.BuscarEquivalencia(SC, r(34)), SC)) Then log += "Calidad; "
-                        If .CalidadDe <= 0 Then .CalidadDe = Nothing
-                        '.CalidadDe = BuscaIdCalidadPreciso(DiccionarioEquivalenciasManager.BuscarEquivalencia(SC, r(34)), SC)
-
-                        If actua(.Contrato, Val(r(36))) Then log += "Contrato; "
-                        '.Contrato = r(36)
-                        If actua(.CEE, Val(r(37))) Then log += "CEE; "
-                        '.CEE = r(37)
-                        If actua(.CTG, Integer.Parse(Val(r(38)))) Then log += "CTG; "
-                        '.CTG = Val(r(38))
-
-                        Try
-                            'If If(.FechaDescarga, DateTime.MinValue) = DateTime.MinValue Then .FechaDescarga = .FechaArribo 'corregir: estoy truchando esto para poder incluir las q no fueron descargadas en el filtro de fecha que está ahora en la jqgrid de situacion
-
-                            If r(28) <> "" Then
-                                If actua(.FechaDescarga, DateTime.Parse(iisValidSqlDate(Left(r(28), 10)))) Then log += "FechaDescarga; "
-                            End If
-                            '.FechaDescarga = iisValidSqlDate(r(28))
-
-                            If r(39) <> "" Then
-                                If actua(.FechaDeCarga, DateTime.Parse(iisValidSqlDate(Left(r(39), 10)))) Then log += "Fecha Carga; "
-                            End If
-                            '.FechaDeCarga = iisValidSqlDate(r(39))
-
-                            If r(40) <> "" Then
-                                If actua(.FechaVencimiento, DateTime.Parse(iisValidSqlDate(Left(r(40), 10)))) Then log += "Fecha Vencimiento; "
-                            End If
-                        Catch ex As Exception
-
-                        End Try
-                        '.FechaVencimiento = iisValidSqlDate(r(40))
-
-                        .Patente = r(41)
-                        .Acoplado = r(42)
-
-
-
-
-                        Try
-                            If .Destino > 0 Then
-                                .PuntoVenta = db.WilliamsDestinos.Find(.Destino).PuntoVenta
+                        If .IdClienteEntregador <= 0 Then
+                            If actua(.IdClienteEntregador, BuscaIdClientePreciso(DiccionarioEquivalenciasManager.BuscarEquivalencia(SC, r(18)), SC)) Then
+                                log += "Entregador; "
                             Else
-                                .PuntoVenta = 1
+                                .IdClienteEntregador = Nothing
                             End If
-                        Catch ex As Exception
-                            .PuntoVenta = 1
-                        End Try
+                        Else
+
+                        End If
 
 
-                        .Cosecha = "1617"
+
+                            If actua(.Destino, BuscaIdWilliamsDestinoPreciso(DiccionarioEquivalenciasManager.BuscarEquivalencia(SC, r(16)), SC)) Then log += "Destino; "
+                            If .Destino <= 0 Then .Destino = Nothing
+                            '.Destino = BuscaIdWilliamsDestinoPreciso(DiccionarioEquivalenciasManager.BuscarEquivalencia(SC, r(16)), SC)
 
 
-                        .SituacionLog = log
-                    End If
+
+
+                            If actua(.IdTransportista, BuscarTransportistaPorCUIT(r(21), SC, r(20))) Then log += "Transportista; "
+                            If .IdTransportista <= 0 Then .IdTransportista = Nothing
+                            '.IdTransportista = BuscarTransportistaPorCUIT(r(21), SC, r(20))
+                            If actua(.IdChofer, BuscarChoferPorCUIT(r(23), SC, r(22))) Then log += "Chofer; "
+                            If .IdChofer <= 0 Then .IdChofer = Nothing
+                            '.IdChofer = BuscarChoferPorCUIT(r(23), SC, r(22))
+
+                            If actua(.Procedencia, BuscaIdLocalidadPreciso(DiccionarioEquivalenciasManager.BuscarEquivalencia(SC, r(24)), SC)) Then log += "Procedencia; "
+                            If .Procedencia <= 0 Then .Procedencia = Nothing
+                            '.Procedencia = BuscaIdLocalidadPreciso(DiccionarioEquivalenciasManager.BuscarEquivalencia(SC, r(24)), SC)
+
+
+
+
+
+
+
+                            If actua(.BrutoPto, Decimal.Parse(Val(r(25)))) Then log += "BrutoPto; "
+                            '.BrutoPto = Val(r(25))
+                            If actua(.TaraPto, Decimal.Parse(Val(r(26)))) Then log += "TaraPto; "
+                            '.TaraPto = Val(r(26))
+                            If actua(.NetoPto, Decimal.Parse(Val(r(27)))) Then log += "NetoPto; "
+                            '.NetoPto = Val(r(27))
+
+                            If actua(.BrutoFinal, Decimal.Parse(Val(r(29)))) Then log += "BrutoFinal; "
+                            '.BrutoFinal = Val(r(29))
+                            If actua(.TaraFinal, Decimal.Parse(Val(r(30)))) Then log += "TaraFinal; "
+                            '.TaraFinal = Val(r(30))
+
+                            'If actua(.NetoFinalIncluyendoMermas, Val(r(31))) Then log += "NetoFinal; "
+                            If actua(.NetoFinal, Decimal.Parse(Val(r(31)))) Then log += "NetoFinal; "
+                            '.NetoFinalIncluyendoMermas = Val(r(31))
+
+                            If actua(.Merma, Decimal.Parse(Val(r(32)))) Then log += "Merma; "
+                            '.Merma = Val(r(32))
+                            'If actua(.NetoFinalSinMermas, Val(r(33))) Then log += "NetoFinalMenosMermas; "
+                            If actua(.NetoProc, Decimal.Parse(Val(r(33)))) Then log += "NetoFinalMenosMermas; "
+                            '.NetoFinalSinMermas = Val(r(33))
+
+
+
+
+                            If actua(.CalidadDe, BuscaIdCalidadPreciso(DiccionarioEquivalenciasManager.BuscarEquivalencia(SC, r(34)), SC)) Then log += "Calidad; "
+                            If .CalidadDe <= 0 Then .CalidadDe = Nothing
+                            '.CalidadDe = BuscaIdCalidadPreciso(DiccionarioEquivalenciasManager.BuscarEquivalencia(SC, r(34)), SC)
+
+                            If actua(.Contrato, Val(r(36))) Then log += "Contrato; "
+                            '.Contrato = r(36)
+                            If actua(.CEE, Val(r(37))) Then log += "CEE; "
+                            '.CEE = r(37)
+                            If actua(.CTG, Integer.Parse(Val(r(38)))) Then log += "CTG; "
+                            '.CTG = Val(r(38))
+
+                            Try
+                                'If If(.FechaDescarga, DateTime.MinValue) = DateTime.MinValue Then .FechaDescarga = .FechaArribo 'corregir: estoy truchando esto para poder incluir las q no fueron descargadas en el filtro de fecha que está ahora en la jqgrid de situacion
+
+                                If r(28) <> "" Then
+                                    If actua(.FechaDescarga, DateTime.Parse(iisValidSqlDate(Left(r(28), 10)))) Then log += "FechaDescarga; "
+                                End If
+                                '.FechaDescarga = iisValidSqlDate(r(28))
+
+                                If r(39) <> "" Then
+                                    If actua(.FechaDeCarga, DateTime.Parse(iisValidSqlDate(Left(r(39), 10)))) Then log += "Fecha Carga; "
+                                End If
+                                '.FechaDeCarga = iisValidSqlDate(r(39))
+
+                                If r(40) <> "" Then
+                                    If actua(.FechaVencimiento, DateTime.Parse(iisValidSqlDate(Left(r(40), 10)))) Then log += "Fecha Vencimiento; "
+                                End If
+                            Catch ex As Exception
+
+                            End Try
+                            '.FechaVencimiento = iisValidSqlDate(r(40))
+
+                            .Patente = r(41)
+                            .Acoplado = r(42)
+
+
+
+
+                            Try
+                                If .Destino > 0 Then
+                                    .PuntoVenta = db.WilliamsDestinos.Find(.Destino).PuntoVenta
+                                Else
+                                    .PuntoVenta = 1
+                                End If
+                            Catch ex As Exception
+                                .PuntoVenta = 1
+                            End Try
+
+
+                            .Cosecha = "1617"
+
+
+                            .SituacionLog = Left(log, 299)
+                        End If
 
 
                 End With

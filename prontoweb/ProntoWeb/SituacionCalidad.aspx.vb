@@ -362,7 +362,65 @@ Partial Class SituacionCalidad
 
 
     
+    <WebMethod()> _
+    <System.Web.Script.Services.ScriptMethod(ResponseFormat:=System.Web.Script.Services.ResponseFormat.Json)> _
+    Public Shared Function ExportarGrillaNormal3(filters As String, fechadesde As String, fechahasta As String, destino As String) As String
 
+        Dim SC As String
+        If Not Diagnostics.Debugger.IsAttached Then
+            'SC = Encriptar("Data Source=10.2.64.30;Initial catalog=Williams;User ID=pronto; Password=MeDuV8NSlxRlnYxhMFL3;Connect Timeout=200")
+            SC = Encriptar(scWilliamsRelease())
+            'dddddd()
+        Else
+            SC = Encriptar("Data Source=serversql3;Initial catalog=Williams2;User ID=sa; Password=.SistemaPronto.;Connect Timeout=200")
+        End If
+
+
+        Dim idDestino = BuscaIdWilliamsDestinoPreciso(destino, SC)
+
+        Dim output As String = "\DataBackupear\Listado " + DateTime.Now.ToString("ddMMMyyyy_HHmmss") + ".xls"
+        Dim fisico As String = ConfigurationManager.AppSettings("DirApp") + output
+        Dim url As String = ConfigurationManager.AppSettings("UrlDominio").ToString + output
+
+
+
+
+        Dim ReporteLocal As ReportViewer = New Microsoft.Reporting.WebForms.ReportViewer()
+
+
+        Dim s = New ServicioCartaPorte.servi()
+
+        Dim sqlquery4 = s.CartasPorte_DynamicGridData_ExcelExportacion_UsandoInternalQuery("IdCartaDePorte", "desc", 1, 999999, True, filters,
+                                             fechadesde,
+                                             fechahasta,
+                                              -1, idDestino, SC, "Mariano")
+
+
+
+
+
+
+        Dim yourParams As ReportParameter() = New ReportParameter(9) {}
+
+        yourParams(0) = New ReportParameter("webservice", "")
+        yourParams(1) = New ReportParameter("sServidor", ConfigurationManager.AppSettings("UrlDominio"))
+        yourParams(2) = New ReportParameter("idArticulo", -1)
+        yourParams(3) = New ReportParameter("idDestino", -1)
+        yourParams(4) = New ReportParameter("desde", New DateTime(2012, 11, 1)) ' txtFechaDesde.Text)
+        yourParams(5) = New ReportParameter("hasta", New DateTime(2012, 11, 1)) ', txtFechaHasta.Text)
+        yourParams(6) = New ReportParameter("quecontenga", "ghkgk")
+        yourParams(7) = New ReportParameter("Consulta", sqlquery4)
+        yourParams(8) = New ReportParameter("sServidorSQL", Encriptar(SC))
+        yourParams(9) = New ReportParameter("titulo", "_")
+
+
+
+        RebindReportViewer_ServidorExcel(ReporteLocal, _
+                     "Listado general de Cartas de Porte (simulando original) con foto 2", yourParams, fisico, False)
+
+
+        Return url
+    End Function
     <WebMethod()> _
     <System.Web.Script.Services.ScriptMethod(ResponseFormat:=System.Web.Script.Services.ResponseFormat.Json)> _
     Public Shared Function ExportarGrillaNormal(filters As String, fechadesde As String, fechahasta As String, destino As String) As String
