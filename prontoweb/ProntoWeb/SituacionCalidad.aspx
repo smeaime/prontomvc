@@ -1879,7 +1879,49 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                         //    }
                         //jQuery("#Lista").jqGrid('addRowData', Id, data, "last");
                         //AgregarItemVacio(grid)
+                    
+                        
                     },
+
+
+
+                    loadComplete: function() {
+                        // http://stackoverflow.com/questions/6575192/jqgrid-change-background-color-of-row-based-on-row-cell-value-by-column-name
+
+                        var iCol = getColumnIndexByName($(this),'Situacion'),
+                            cRows = this.rows.length, iRow, row, className;
+
+                        for (iRow=0; iRow<cRows; iRow++) {
+                            row = this.rows[iRow];
+                            className = row.className;
+                            if ($.inArray('jqgrow', className.split(' ')) > 0) {
+                                var x = ($(row.cells[iCol]))[0].childNodes[0].data; //.children("input:checked");
+
+                                //Autorizado: verde        Demorado: rojo            Rechazado: Violeta 
+                                if (x=="Autorizado") {
+                                    if ($.inArray('myAltRowClass', className.split(' ')) === -1) {
+                                        row.className = className + ' myAltRowClass';
+                                    }
+                                }
+                                else if (x=="Demorado") {
+                                    if ($.inArray('myAltRowClass', className.split(' ')) === -1) {
+                                        row.className = className + ' myAltRowClass';
+                                    }
+                                }
+                                else if (x=="Rechazado") {
+                                    if ($.inArray('myAltRowClass', className.split(' ')) === -1) {
+                                        row.className = className + ' myAltRowClass';
+                                    }
+                                }
+
+
+                            }
+                        }
+                    },
+
+
+
+
                     onCellSelect: function (rowid, iCol, cellcontent, e) {
                         var $this = $(this);
                         var iRow = $('#' + $.jgrid.jqID(rowid))[0].rowIndex;
@@ -1913,7 +1955,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                     //},
 
                     pager: $('#ListaPager'),
-                    rowNum: 10,
+                    rowNum: 20,
                     rowList: [10, 20, 50, 100],
                     sortname: 'IdCartaDePorte',  //'FechaDescarga', //'NumeroCartaDePorte',
                     sortorder: 'desc',
@@ -1993,9 +2035,30 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                 //RefrescaAnchoJqgrids();
             });
 
-        </script>
-    </div>
 
+            var getColumnIndexByName = function(grid, columnName) {
+                var cm = grid.jqGrid('getGridParam','colModel'),i=0,l=cm.length;
+                for (; i<l; i++) {
+                    if (cm[i].name===columnName) {
+                        return i; // return the index
+                    }
+                }
+                return -1;
+            };
+
+            
+
+        </script>
+       
+
+
+    </div>
+ <style type="text/css">
+            .myAltRowClass {
+                background-color: #DCFFFF;
+                background-image: none;
+            }
+        </style>
     <%--   /////////////////////////////////////////////////////////////////////        
  /////////////////////////////////////////////////////////////////////    --%>
     <%--  campos hidden --%>

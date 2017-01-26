@@ -128,6 +128,7 @@ from dbo.fSQL_GetDataTableFiltradoYPaginado
 					@fechahasta, 
 					NULL, 
 					NULL,
+					'FALSE',
 					NULL, 
 					NULL, 
 
@@ -138,6 +139,8 @@ from dbo.fSQL_GetDataTableFiltradoYPaginado
 					NULL
 
 					) as cdp
+
+
 
 join Articulos art On art.IdArticulo = cdp.IdArticulo 
 
@@ -244,4 +247,6 @@ go
 
 
 select top 10 * from cartasdeporte order by idcartadeporte desc
+
+
 
