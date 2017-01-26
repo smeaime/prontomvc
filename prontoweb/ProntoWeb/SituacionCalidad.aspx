@@ -50,7 +50,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
             left: 0;
             height: 100%;
             width: 100%;
-            background: rgba( 255, 255, 255, .8 ) url('@Url.Content("~/Content/images/fhhrx.gif")') 50% 50% no-repeat;
+            background: rgba( 255, 255, 255, .8 ) url('~/Content/images/fhhrx.gif') 50% 50% no-repeat;
         }
 
         /* When the body has the loading class, we turn
