@@ -34,6 +34,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
         Situación de CPs
     </div>--%>
 
+<br />
 
     <style>
         /* Start by setting display:none to make this hidden.
@@ -166,7 +167,6 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
         <input type="button" id="btnExportarGrillaAjax" value="Excel BLD demorados" class="btn btn-primary" />
 
-        <input type="button" id="btnExportarGrillaAjax3" value="Excel 3" class="btn btn-primary" />
 
         <input type="button" id="btnPanelInformeAjax" value="Resumen" class="btn btn-primary" />
 
@@ -178,7 +178,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
         <%--<input type="text" class="span4" id="text1" name="agent" value=""  "/>--%>
 
-
+        <br />
         <table id="Lista" class="scroll" cellpadding="0" cellspacing="0" style="font-size: 12px;" width="700px">
         </table>
         <div id="ListaPager" class="scroll" style="text-align: center; height: 30px">
