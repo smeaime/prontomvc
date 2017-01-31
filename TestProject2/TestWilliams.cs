@@ -585,6 +585,63 @@ namespace ProntoMVC.Tests
         /// ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
+        [TestMethod]
+        public void syngenta_webservice_30920()
+        {
+            // mandar una tanda
+
+            int idcliente = 4333; //syngenta
+
+            var dbcartas = CartaDePorteManager.ListadoSegunCliente(SC, idcliente, new DateTime(1, 1, 2000), new DateTime(1, 1, 2000));
+
+            var s = new ServicioCartaPorte.servi();
+
+            var x = s.WebServiceSyngenta(dbcartas);
+
+            // marcar fecha de cartas enviadas, loguar tanda de cartas enviadas para que 
+            // sepan qué excel tienen que generar (el webservice solo manda un mail si hubo error, no tengo notificacion de otro tipo)
+
+            // pagina de log o por lo menos de estado del envio de datos a syngenta.
+            //                 noenviadas=Func();
+
+
+            string archivoexcelsyngenta = "salida.xls";
+            s.GenerarExcelSyngentaWebService(x, archivoexcelsyngenta); // 3 horas 
+
+
+            s.CopyFileFTP(archivoexcelsyngenta, "username", "password#");   // 4 horas
+
+            //return Log; // pagina de log o por lo menos de estado del envio de datos a syngenta. 3 horas 
+
+
+            /*
+            . El Web Service no devolverá ningún dato que haga referencia en cuanto a si se procesó bien o tuvo errores la interface.
+La interface será procesa por Syngenta y si la misma no puede ser procesada correctamente por contener errores en los datos 
+    u otra validación; se enviara un mail con el detalle del procesamiento y error al mail indicado por el entregador para esta 
+            interface como así también dicho mail será enviado de la misma forma al responsable de Canje por parte de Syngenta.
+             * 
+             * 
+             * */
+
+
+            // que pasa si alguien anula una carta de syngenta?
+            //carta.anular();
+            // -bueno, el que levanta la lista de cartas tiene que comparar la fecha de enviado con la de ultima modificacion
+
+
+
+        }
+
+
+
+
+
+
+
+
+
+
+
 
 
         [TestMethod]
@@ -597,7 +654,7 @@ namespace ProntoMVC.Tests
             //string archivoExcel = @"C:\Users\Administrador\Documents\bdl\pronto\docstest\Posicion-161229-0945.xls"
             //string archivoExcel = @"C:\Users\Administrador\Documents\bdl\New folder\Urenport_ 951-24012017.xls";
             string archivoExcel = @"C:\Users\Administrador\Documents\bdl\pronto\docstest\Ejemplo punto 3.xls";
-           
+
 
 
             //explota

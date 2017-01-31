@@ -43,6 +43,10 @@ using System.Reflection;
 
 using System.Data.Objects;
 
+using OfficeOpenXml; //EPPLUS, no confundir con el OOXML
+using System.Data;
+
+
 
 namespace Fenton.Example
 {
@@ -387,7 +391,7 @@ namespace ProntoFlexicapture
 
             // esto si puede funcionar, porque por ahora estas separando vos mismo los multipagina antes de llamar a la ocr
             // -quizas no deberias...
-            processor.SetAssemblingMode(AssemblingModeEnum.AM_DocumentPerImageFile); 
+            processor.SetAssemblingMode(AssemblingModeEnum.AM_DocumentPerImageFile);
 
             //traceBegin("Run processing loop...");
             bool conTK = false;
@@ -2371,6 +2375,9 @@ namespace ProntoFlexicapture
 
             ErrHandler2.WriteError("Arranca motor");
 
+
+
+
             if (engine == null)
                 engine = ClassFlexicapture.loadEngine(engineLoadingMode, out engineLoader);
 
@@ -2630,6 +2637,48 @@ We recommend that you use a Network license both for debugging of your server ap
 Additionally you can manage the priority of work processes and control whether their parent process is alive and terminate if it is not. Use the IWorkProcessControl interface.
 
     */
+
+
+
+
+            /*
+            
+            MultiProcessingParams
+
+
+            MultiProcessingParams Object (IMultiProcessingParams Interface)
+            This object provides access to the parameters of multiple CPU cores usage. 
+
+            Name Type Description 
+            SharedCPUCoresMask Int Specifies the physical CPU cores, which can be used in shared mode of CPU cores usage, as an affinity mask. Note that only physical CPU cores are masked, but not logical. The property makes sense only if the value of the SharedCPUCoresMode property is TRUE. 
+            By default all detected CPU cores are used.
+ 
+            SharedCPUCoresMode Boolean Specifies whether the CPU cores are used in shared mode. There are two modes of CPU cores usage: separate and shared. In separate mode ABBYY FlexiCapture Engine uses no more processes than is allowed by the license. In shared mode any number of processes can be run, but all these processes will use only the CPU cores specified by the SharedCPUCoresMask property. 
+            To work with CPU cores in shared mode, use the following procedure for loading FlexiCapture Engine:
+
+            Call the InitializeEngine (InitializeEngineEx) function (or IEngineLoader::Load method) with NULL as the DeveloperSN parameter. 
+            Set the SharedCPUCoresMode property to TRUE. This property should be set before the current license is specified. 
+            Specify the correct license using the IEngine::SetCurrentLicense method. 
+            By default the property is set to FALSE, which means that the separate mode is used.
+ 
+
+            This message may appear if too many instances of the application are running at the same time. The number of instances cannot exceed the CPU core limit indicated in your license's properties. In order to expand the CPU core limit please contact your local sales manager.
+
+            You can use the CPU cores in shared mode. In this mode any number of processes can be run. In order to use CPU cores in shared mode
+
+            [FREngine 10] load FREngine with empty license number, then set MultiProcessingParams properties, then set current license with appropriate serial number. Please see the following code snippet as an example:
+            IEngine engine = engineLoader.Load("", "");
+            engine.MultiProcessingParams.SharedCPUCoresMode = true;
+            engine.SetCurrentLicense(engine.Licenses.Item(0), licenseNo);
+
+            [FREngine 11] set the IsSharedCPUCoresMode parameter of the GetEngineObjectEx function to TRUE during initialization. If you need shared core usage, setting this mode at initialization time is safer. Formerly, the cores were loaded as isolated and then transferred to shared, which could cause problems when starting several applications at once. The code may look like:
+            IEngine engine = engineLoader.GetEngineObjectEx(developerSN, DataDir, TempDir, true, null, null);
+
+                        */
+
+
+
+
 
 
             engineLoadingMode = _engineLoadingMode;
@@ -3215,7 +3264,7 @@ namespace ExtensionMethods
 
 
 
-namespace ServicioCartaPorte
+namespace ServicioCartaPorte // migrar esto a una biblioteca aparte
 {
     public class jqGridJson
     {
@@ -3233,6 +3282,329 @@ namespace ServicioCartaPorte
 
     public class servi
     {
+
+
+
+        public class SyngentaXML
+        {
+            /*
+            Campo nro.	Nombre	Nota	Campo interface	Obligatorio
+1	Action	Valores posibles: I / D
+Donde I = Nuevo, D = Anular	action	x
+2	Tipo de comprobante	Valores posibles: CP / RT
+Donde CP = Carta de Porte, RT =  Retiro  transferencia	delivery_type	x
+3	Carta de porte numero		carta_porte	x
+4	Entregador	CUIT 	grain_receiver	x
+5	CTG numero		CTG _number	X (si es CP)
+6	Titular		titular	
+7	Titular_CUIT		titular_CUIT	
+8	Intermediario		intermediario	
+9	Intermediario_CUIT		intermediario_CUIT	
+10	Remitente		remitente	
+11	Remitente_CUIT		remitente_CUIT	
+12	Corredor_CUIT		corredor_CUIT	
+13	Entregador		entregador	
+14	Entregador_CUIT		entregador_CUIT	
+15	Destinatario		destinatario	
+16	Destinatario_CUIT		destinatario_CUIT	
+17	Destino		destino	
+18	Destino_CUIT		destino_CUIT	
+19	Transportista		transportista	
+20	Transportista_CUIT		transportista_CUIT	
+21	Fecha de descarga	Formato ddmmyyyy	delivery_date	x
+22	Grano	Valores posibles: Códigos AFIP	grain	x
+23	Cantidad		quantity	x
+24	Unidad de medida	Valores posibles: TO
+Donde TO = Toneladas	UOM	x
+25	Procedencia	Valores posibles: Según AFIP (link)
+Formato localidad-provincia	origin	x
+26	Destino	Valores posibles: Según AFIP (link)
+Formato localidad-provincia	destination	x
+27	Fecha de cosecha	Formato: yy/yy	year_of_harverst	x
+             * 
+             * 
+             * Validaciones.
+
+1.	Si en el dato a recibir se hubieran indicado VALORES POSIBLES y el dato enviado no coincide con lo indicado se rechazara la interface y la misma deberá ser enviada por el entregador nuevamente con el dato correcto.
+2.	Se deberán informar los números de  CP/RT sin espacios ni signos especiales. 
+3.	El CUIT que representa al entregador y al corredor debe existir en la base de datos de Syngenta. El mismo no debe contener espacios ni signos especiales.
+4.	El CUIT que representa al resto de los interlocutores no debe contener espacios, ni caracteres especiales como el guion.
+5.	La cantidad hace referencia al neto descargado. Debe ser un  valor numérico y debe contener un máximo de 2 decimales y el separador del mismo debe ser un “.”.
+6.	Una entrega no podrá ser anulada si dicha entrega estuviera aplicada a un contrato.
+7.	El formato de las fechas debe ser ddmmyyyy donde dd=dia, mm = mes y yy=año, ejemplo: 23112017
+8.	En una interface se pueden recibir múltiples entregas.
+
+             * 
+            */
+
+
+            public string action; // I</action>            1
+            public string delivery_type;// CP</delivery_type>            2
+            public long carta_porte; // >12345678</carta_porte>                        3
+            public string grain_receiver; // >20243212349</grain_receiver>             4
+            public string CGT_number; // >1222211</CGT_number>                         5
+
+            public string titular;                                                  // 6
+            public string titular_CUIT;                                            // 7   
+            public string Intermediario;                                                  // 8
+            public string Intermediario_CUIT;                                                  // 9
+            public string remitente;                                                  // 10
+            public string remitente_CUIT;                                                  // 11
+            public string corredor_CUIT;                                                  // 12
+            public string entregador;                                                  // 13
+            public string entregador_CUIT;                                                  // 14
+            public string destinatario;                                                  // 15
+            public string destinatario_CUIT;                                                  // 16
+            public string destino;                                                  // 17
+            public string destino_CUIT;                                                  // 18
+            public string transportista;                                                   // 19
+            public string transportista_CUIT;                                              // 20
+
+            public string delivery_date; // >12152017</delivery_date>                  //  21
+
+            public itemclass[] item;
+
+            public class itemclass
+            {
+                public string grain; // >014</grain>
+                public int quantity; // >10</quantity>
+                public string UOM; // >TO</UOM>
+                public string origin; // >00006-01</origin>
+                public string destination; // >00004-01</destination>
+                public string year_of_Harvest; // >16/17</year_of_Harvest>
+            }
+
+        }
+
+
+
+
+        public virtual List<SyngentaXML> WebServiceSyngenta(List<fSQL_GetDataTableFiltradoYPaginado_Result3> dbcartas)
+        {
+
+
+            //Dim cartas As New CerealNet.WSCartasDePorte.respuestaEntrega
+            List<SyngentaXML> cps = new List<SyngentaXML>(); //dbcartas.Count - 1
+
+
+            foreach (fSQL_GetDataTableFiltradoYPaginado_Result3 dbcp in dbcartas)
+            {
+
+
+                SyngentaXML xmlcp = new SyngentaXML();
+
+                xmlcp.carta_porte = dbcp.NumeroCartaDePorte ?? 0;
+
+                cps.Add(xmlcp);
+
+                //        cp.brutodest = dbc.BrutoFinal
+
+
+                //        Select Case dbc.CalidadDesc
+                //            Case "CONFORME"
+                //                cp.calidad = "" ' "CO"
+                //            Case "GRADO 1"
+                //                cp.calidad = "G1"
+                //            Case "GRADO 2"
+                //                cp.calidad = "G2"
+                //            Case "GRADO 3"
+                //                cp.calidad = "G3"
+                //            Case "COND. CAMARA"
+                //                cp.calidad = "CC"
+                //            Case "FUERA DE STANDARD"
+                //                cp.calidad = "FE"
+                //            Case Else
+                //                cp.calidad = ""
+                //        End Select
+                //        'cp.calidad = ExcelImportadorManager.CodigoCalidad(If(dbc.CalidadDe, 0)) ' dbc.CalidadDesc
+
+
+
+
+
+
+                //        'codigos oncaa    -qué tenemos que usar acá
+
+                //        '6.       Los códigos de producto que informa no se corresponden con los de CerealNet. Ej.: CerealNet informa para maíz el número 19 y Williams el 501. Adjunto tabla con Codigos de Productos
+                //        cp.codmerca = Val(dbc.CodigoSAJPYA) 'dbc.EspecieONCAA) kljlkjlkjljlkjl
+
+
+
+
+
+
+
+
+                //        '1.       El Código Oncca Localidad Destino (codonccalocalidadpuerto) y Código Oncca Provincia Destino (codonccaprovinciapuerto) son iguales.
+                //        '                         Aparentemente la Provincia.
+                //        '2.       El Código Oncca Localidad Procedencia (codonccalocalproc) y Código Oncca Provincia Procedencia (codonccaprovincialproc) son iguales.
+                //        '                         Aparentemente la Provincia. 
+                //        '3.       El Código Oncca Puerto (codonccapuerto) siempre es 0. 
+
+
+                //        '4.       Los Códigos Oncca de Localidad Procedencia que nos mandan parecen estar iguales a los que usa la AFIP, pero encuentro 
+                //        '                        inconsistencias entre los códigos de destino y las descripciones del campo localidaddestino. Puede ser que esté mal la descripción o puede estar mal el código.
+
+
+                //        'puerto: Nombre Destino
+                //        'CodOnccaPuerto: Codigo Oncca Destino
+                //        'Localidad Destino: Localidad relacionada al Destino
+                //        'codonccalocalidadpuerto: codigo oncca de la localidad relacionada al destino
+
+
+                //        'cuando dicen 'puerto' se refieren al destino tambien
+                //        cp.puerto = If(dbc.DestinoDesc, "")
+                //        cp.codonccapuerto = Val(dbc.DestinoCodigoONCAA)
+                //        cp.localidaddestino = dbc.DestinoLocalidadDesc
+                //        cp.codonccalocalidadpuerto = dbc.DestinoLocalidadCodigoONCAA
+                //        cp.codonccaprovinciapuerto = CodigoProvincia(dbc.DestinoProvinciaDesc)
+
+
+                //        cp.procedencia = If(dbc.ProcedenciaDesc, "")
+                //        cp.codonccalocalproc = Val(dbc.ProcedenciaCodigoONCAA)
+                //        cp.codonccaprovincialproc = CodigoProvincia(dbc.ProcedenciaProvinciaDesc) 'ProcedenciaCodigoONCAA)
+
+
+
+
+
+
+                //        cp.contrato = dbc.Contrato
+                //        cp.cosecha = Right(dbc.Cosecha, 5).Replace("/", "").PadLeft(4)
+
+                //        cp.CPoriginal = dbc.NumeroCartaDePorte
+
+                //        cp.cuitcorredor = dbc.CorredorCUIT.Replace("-", "")
+                //        cp.cuitentregador = dbc.DestinatarioCUIT.Replace("-", "")
+                //        cp.cuitexport = dbc.DestinatarioCUIT.Replace("-", "")
+                //        cp.cuitinter = dbc.IntermediarioCUIT.Replace("-", "")
+                //        cp.cuitpuerto = If(dbc.DestinoCUIT, "").Replace("-", "")
+                //        cp.cuitremic = If(dbc.RComercialCUIT, "").Replace("-", "")
+                //        cp.cuitremitente = If(dbc.TitularCUIT, "").Replace("-", "")
+                //        cp.cuittitu = If(dbc.TitularCUIT, "").Replace("-", "")
+
+            }
+
+            return cps;
+
+        }
+
+
+
+        public virtual void GenerarExcelSyngentaWebService(List<SyngentaXML> cps, string fExcel)
+        {
+
+            DataTable pDataTable = new DataTable();
+            pDataTable.Columns.Add("column_1", typeof(string));
+            pDataTable.Columns.Add("column_2", typeof(string));
+
+            //action	delivery_type	carta_porte	grain_receiver	CGT_number	titular	titular_CUIT	Intermediario	Intermediario_CUIT	remitente	remitente_CUIT	corredor_CUIT	entregador	entregador_CUIT	destinatario	destinatario_CUIT	destino	destino_CUIT	transportista	transportista_CUIT	delivery_date	grain	quantity	UOM	origin	destination	year_of_Harvest
+
+            foreach (SyngentaXML cp in cps)
+            {
+
+                var r = pDataTable.NewRow();
+
+
+
+
+            }
+
+
+
+
+            using (ExcelPackage pck = new ExcelPackage(new FileInfo(fExcel)))
+            {
+                //Create the worksheet
+                ExcelWorksheet ws = pck.Workbook.Worksheets.Add("Accounts");
+                //Load the datatable into the sheet, starting from cell A1. Print the column names on row 1
+                ws.Cells["A1"].LoadFromDataTable(pDataTable, true);
+                pck.Save();
+            }
+
+
+
+        }
+
+
+
+
+
+        public bool CopyFileFTP(string FileToCopy, string userName, string password)
+        {
+            // http://stackoverflow.com/questions/16005388/how-to-copy-a-file-on-an-ftp-server
+
+
+            try
+            {
+                // download
+                //FtpWebRequest request = (FtpWebRequest)WebRequest.Create("ftp://ftp.mysite.net/" + fileName);
+                //request.Method = WebRequestMethods.Ftp.DownloadFile;
+
+
+                //upload
+                //request.Credentials = new System.Net.NetworkCredential(userName, password);
+                //System.Net.FtpWebResponse response = (System.Net.FtpWebResponse)request.GetResponse();
+                //Stream responseStream = response.GetResponseStream();
+                //Upload("ftp://ftp.mysite.net/" + FileToCopy, ToByteArray(responseStream), userName, password);
+                //responseStream.Close();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+
+        public static Byte[] ToByteArray(Stream stream)
+        {
+            MemoryStream ms = new MemoryStream();
+            byte[] chunk = new byte[4096];
+            int bytesRead;
+            while ((bytesRead = stream.Read(chunk, 0, chunk.Length)) > 0)
+            {
+                ms.Write(chunk, 0, bytesRead);
+            }
+
+            return ms.ToArray();
+        }
+
+        public static bool Upload(string FileName, byte[] Image, string FtpUsername, string FtpPassword)
+        {
+            try
+            {
+                System.Net.FtpWebRequest clsRequest = (System.Net.FtpWebRequest)System.Net.WebRequest.Create(FileName);
+                clsRequest.Credentials = new System.Net.NetworkCredential(FtpUsername, FtpPassword);
+                clsRequest.Method = System.Net.WebRequestMethods.Ftp.UploadFile;
+                System.IO.Stream clsStream = clsRequest.GetRequestStream();
+                clsStream.Write(Image, 0, Image.Length);
+
+                clsStream.Close();
+                clsStream.Dispose();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
         public virtual string InformeSituacion_string(int iddestino, DateTime desde, DateTime hasta, string SC)
@@ -3533,7 +3905,7 @@ namespace ServicioCartaPorte
 
                                 "<a href=\"CartaDePorte.aspx?Id=" +  a.IdCartaDePorte + "\">" +  a.NumeroCartaEnTextoParaBusqueda.NullSafeToString() + "</>" ,
 
-                                "", //turno
+                                a.Turno, //turno
 
                                 (a.Situacion ?? 0).NullSafeToString(),
                                 //((a.Situacion ?? 0) >= 0)  ?  ExcelImportadorManager.Situaciones[a.Situacion ?? 0] : "",

@@ -2611,6 +2611,7 @@
                                     <asp:ListItem Value="6">Desviado</asp:ListItem>
                                     <asp:ListItem Value="7">CP p/cambiar</asp:ListItem>
                                     <asp:ListItem Value="8">Sin Cupo</asp:ListItem>
+                                    <asp:ListItem Value="9">Calado</asp:ListItem>
                                 </asp:DropDownList>
                             </td>
 
