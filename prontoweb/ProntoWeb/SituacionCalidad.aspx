@@ -1167,7 +1167,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 { name: ' IdCartasDePorte', index: ' IdCartasDePorte', align: 'left', width: 100, editable: false, hidden: true },
 
 {
-    name: 'NumeroCartaEnTextoParaBusqueda', index: 'NumeroCartaEnTextoParaBusqueda', width: 160, align: 'left', sorttype: "text", sortable: false
+    name: 'NumeroCartaEnTextoParaBusqueda', index: 'NumeroCartaEnTextoParaBusqueda', width: 100, align: 'left', sorttype: "text", sortable: false
 , editable: false, editrules: { required: false, number: true }, edittype: 'text',
 
     searchoptions: { sopt: ['bw', 'cn', 'eq'] },
@@ -1187,7 +1187,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
     }
 },
 
-{ name: 'Turno', index: ' Turno', align: 'left', width: 100, editable: false, hidden: true },
+{ name: 'Turno', index: ' Turno', align: 'left', width: 50, editable: false, hidden: false, edittype: 'text' ,searchoptions: { sopt: ['bw', 'cn', 'eq'] },},
 
 {
     name: 'Situacion', index: 'Situacion', align: 'left', width: 120, hidden: false, editable: true, edittype: 'select', sortable: false,
@@ -1964,7 +1964,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
 
 {
-    name: 'FechaActualizacionAutomatica', index: 'FechaActualizacionAutomatica', width: 100, sortable: true, align: 'right', editable: false, sortable: false,
+    name: 'FechaActualizacionAutomatica', index: 'FechaActualizacionAutomatica', width: 150, sortable: true, align: 'right', editable: false, sortable: false,
     editoptions: {
         size: 10,
         maxlengh: 10,

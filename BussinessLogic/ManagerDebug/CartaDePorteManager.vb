@@ -14878,7 +14878,7 @@ Public Class CartaDePorteManager
     End Function
 
 
-    Private Shared Function ListadoSegunCliente(SC As String, idcliente As Integer, fechadesde As DateTime, fechahasta As DateTime) As List(Of fSQL_GetDataTableFiltradoYPaginado_Result3)
+    Public Shared Function ListadoSegunCliente(SC As String, idcliente As Integer, fechadesde As DateTime, fechahasta As DateTime) As List(Of fSQL_GetDataTableFiltradoYPaginado_Result3)
 
 
 

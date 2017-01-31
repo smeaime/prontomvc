@@ -258,5 +258,7 @@ namespace ProntoMVC.Data.Models
         public string SituacionLog { get; set; }
         public string DestinoLocalidadCodigoONCAA { get; set; }
         public string DestinoLocalidadDesc { get; set; }
+        public string Turno { get; set; }
+        public Nullable<System.DateTime> FechaEnvioASyngenta { get; set; }
     }
 }
