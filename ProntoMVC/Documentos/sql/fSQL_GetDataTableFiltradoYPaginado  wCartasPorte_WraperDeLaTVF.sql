@@ -175,6 +175,7 @@ isnull(LOCORI.Nombre,'') AS ProcedenciaDesc,
 isnull(LOCORI.CodigoPostal,'') AS ProcedenciaCodigoPostal, 		
 isnull(LOCORI.CodigoONCAA,'') AS ProcedenciaCodigoONCAA,      
 isnull(PROVORI.Nombre,'') AS ProcedenciaProvinciaDesc,    
+isnull(PROVORI.Codigo2,'') AS ProcedenciaProvinciaCodigo,    
 isnull(LOCORI.Partido,'') AS ProcedenciaProvinciaPartido, 
 isnull(PARTORI.Nombre,'') AS ProcedenciaPartidoNormalizada   , 	
 isnull(PARTORI.Codigo,'') AS ProcedenciaPartidoNormalizadaCodigo,    
@@ -188,6 +189,7 @@ isnull(LOCDES2.CodigoAFIP,'') 	 AS  DestinoLocalidadAFIP,
 isnull(LOCDES2.CodigoONCAA,'') 	 AS  DestinoLocalidadCodigoONCAA,
 isnull(LOCDES2.Nombre,'') 	 AS  DestinoLocalidadDesc,
 isnull(PROVDEST.Nombre,'') AS DestinoProvinciaDesc,  
+isnull(PROVDEST.Codigo2,'') AS DestinoProvinciaCodigo,    
 
 
 

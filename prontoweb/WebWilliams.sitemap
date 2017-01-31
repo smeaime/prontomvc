@@ -159,7 +159,8 @@
       <siteMapNode url="ProntoWeb/WebServiceCartas.asmx/BajarImagenDeCartaPorte?usuario=Mariano&amp;password=pirulito!&amp;numerocarta=551316582" title="Servicio Web Test"  description="Servicio Web" roles="Administrador,WilliamsAdmin" />
       <siteMapNode url="ProntoWeb/WebServiceCartas.asmx/BajarListadoDeCartaPorte_CerealNet?usuario=Mariano&amp;password=pirulo!&amp;cuit=551316582&amp;fechadesde=10/30/16&amp;fechahasta=1/1/17" title="Servicio Web Cerealnet"  description="Servicio Web Cerealnet" roles="Administrador,WilliamsAdmin" />
 
-      
+      <siteMapNode url="ProntoWeb/ConexionHaciaSyngenta.aspx" title="Servicio Web Syngenta"  description="Servicio Web Syngenta" roles="Administrador,WilliamsAdmin" />
+
     </siteMapNode>
     
 
