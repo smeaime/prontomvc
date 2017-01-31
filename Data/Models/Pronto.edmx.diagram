@@ -2458,7 +2458,7 @@
         <edmx:EntityTypeShape EntityType="DemoProntoModel.DetalleEventosDelSistema" Width="1.5" PointX="30.375" PointY="3.75" />
         <edmx:EntityTypeShape EntityType="DemoProntoModel.EventosDelSistema" Width="1.5" PointX="28.125" PointY="38.75" />
         <edmx:AssociationConnector Association="DemoProntoModel.FK_DetalleEventosDelSistema_IdEventoDelSistema" />
-        <edmx:EntityTypeShape EntityType="DemoProntoModel.CartasDePorte" Width="1.5" PointX="31.5" PointY="67" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.CartasDePorte" Width="1.5" PointX="31.5" PointY="66.75" />
         <edmx:AssociationConnector Association="DemoProntoModel.FK__CartasDeP__Acopi__5498535D" />
         <edmx:AssociationConnector Association="DemoProntoModel.FK__CartasDeP__Clien__25735020" />
         <edmx:AssociationConnector Association="DemoProntoModel.FK__CartasDeP__IdCar__5245F697" />

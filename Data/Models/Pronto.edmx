@@ -672,6 +672,8 @@
           <Property Name="FechaAutorizacion" Type="datetime" />
           <Property Name="ObservacionesSituacion" Type="varchar" MaxLength="200" />
           <Property Name="SituacionLog" Type="varchar" MaxLength="300" />
+          <Property Name="Turno" Type="varchar" MaxLength="10" />
+          <Property Name="FechaEnvioASyngenta" Type="datetime" />
         </EntityType>
         <EntityType Name="CartasDePorteControlDescarga">
           <Key>
@@ -9784,6 +9786,8 @@ warning 6002: The table/view 'Pronto.dbo.wGrillaPersistencia' does not have a pr
                 <Property Name="FechaAutorizacion" Type="datetime" />
                 <Property Name="ObservacionesSituacion" Type="varchar" MaxLength="200" />
                 <Property Name="SituacionLog" Type="varchar" MaxLength="300" />
+                <Property Name="Turno" Type="varchar" MaxLength="10" />
+                <Property Name="FechaEnvioASyngenta" Type="datetime" />
                 <Property Name="NumeroCompleto" Type="varchar" MaxLength="93" />
                 <Property Name="MinutosModifico" Type="int" />
                 <Property Name="EspecieONCAA" Type="varchar" MaxLength="50" Nullable="false" />
@@ -25014,6 +25018,8 @@ warning 6002: The table/view 'Pronto.dbo.wGrillaPersistencia' does not have a pr
           <Property Type="String" Name="SituacionLog" Nullable="true" MaxLength="300" />
           <Property Type="String" Name="DestinoLocalidadCodigoONCAA" Nullable="false" MaxLength="20" />
           <Property Type="String" Name="DestinoLocalidadDesc" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Turno" Nullable="true" MaxLength="10" />
+          <Property Type="DateTime" Name="FechaEnvioASyngenta" Nullable="true" Precision="23" />
         </ComplexType>
         <EntityType Name="NovedadesUsuario">
           <Key>
@@ -25490,13 +25496,15 @@ warning 6002: The table/view 'Pronto.dbo.wGrillaPersistencia' does not have a pr
           <Property Name="FechaActualizacionAutomatica" Type="DateTime" Precision="3" />
           <Property Name="FechaAutorizacion" Type="DateTime" Precision="3" />
           <Property Name="ObservacionesSituacion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="SituacionLog" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="Turno" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="FechaEnvioASyngenta" Type="DateTime" Precision="3" />
           <NavigationProperty Name="CartasPorteAcopio" Relationship="DemoProntoModel.FK__CartasDeP__Acopi__5498535D" FromRole="CartasDePorte" ToRole="CartasPorteAcopio" />
           <NavigationProperty Name="Cliente" Relationship="DemoProntoModel.FK__CartasDeP__Clien__25735020" FromRole="CartasDePorte" ToRole="Cliente" />
           <NavigationProperty Name="CartasDePorteLogDeOCRs" Relationship="DemoProntoModel.FK__CartasDeP__IdCar__5245F697" FromRole="CartasDePorte" ToRole="CartasDePorteLogDeOCR" />
           <NavigationProperty Name="CartasDePorteDetalles" Relationship="DemoProntoModel.FK__CartasDeP__IdCar__5A512CB3" FromRole="CartasDePorte" ToRole="CartasDePorteDetalle_EF" />
           <NavigationProperty Name="Vendedore" Relationship="DemoProntoModel.FK__CartasDeP__IdCor__7D7A6D5F" FromRole="CartasDePorte" ToRole="Vendedor" />
           <NavigationProperty Name="DetalleFactura" Relationship="DemoProntoModel.FK__CartasDeP__IdDet__55D69059" FromRole="CartasDePorte" ToRole="DetalleFactura" />
-          <Property Name="SituacionLog" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
         </EntityType>
         <Association Name="FK__CartasDeP__Acopi__5498535D">
           <End Type="DemoProntoModel.CartasPorteAcopio" Role="CartasPorteAcopio" Multiplicity="0..1" />
@@ -32450,12 +32458,16 @@ warning 6002: The table/view 'Pronto.dbo.wGrillaPersistencia' does not have a pr
                 <ScalarProperty Name="SituacionLog" ColumnName="SituacionLog" />
                 <ScalarProperty Name="DestinoLocalidadCodigoONCAA" ColumnName="DestinoLocalidadCodigoONCAA" />
                 <ScalarProperty Name="DestinoLocalidadDesc" ColumnName="DestinoLocalidadDesc" />
+                <ScalarProperty Name="Turno" ColumnName="Turno" />
+                <ScalarProperty Name="FechaEnvioASyngenta" ColumnName="FechaEnvioASyngenta" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
           <EntitySetMapping Name="CartasDePortes">
             <EntityTypeMapping TypeName="DemoProntoModel.CartasDePorte">
               <MappingFragment StoreEntitySet="CartasDePorte">
+                <ScalarProperty Name="FechaEnvioASyngenta" ColumnName="FechaEnvioASyngenta" />
+                <ScalarProperty Name="Turno" ColumnName="Turno" />
                 <ScalarProperty Name="SituacionLog" ColumnName="SituacionLog" />
                 <ScalarProperty Name="ObservacionesSituacion" ColumnName="ObservacionesSituacion" />
                 <ScalarProperty Name="FechaAutorizacion" ColumnName="FechaAutorizacion" />
