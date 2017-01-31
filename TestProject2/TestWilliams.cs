@@ -592,7 +592,7 @@ namespace ProntoMVC.Tests
 
             int idcliente = 4333; //syngenta
 
-            var dbcartas = CartaDePorteManager.ListadoSegunCliente(SC, idcliente, new DateTime(1, 1, 2000), new DateTime(1, 1, 2000));
+            var dbcartas = CartaDePorteManager.ListadoSegunCliente(SC, idcliente, new DateTime(2016, 11, 1), new DateTime(2016, 11, 30));
 
             var s = new ServicioCartaPorte.servi();
 
@@ -605,11 +605,18 @@ namespace ProntoMVC.Tests
             //                 noenviadas=Func();
 
 
-            string archivoexcelsyngenta = "salida.xls";
-            s.GenerarExcelSyngentaWebService(x, archivoexcelsyngenta); // 3 horas 
+            string DIRFTP = DirApp + @"\DataBackupear\";
+            string nombre = DIRFTP + "Syngenta_" + DateTime.Now.ToString("ddMMMyyyy_HHmmss") + ".xlsx";
 
 
-            s.CopyFileFTP(archivoexcelsyngenta, "username", "password#");   // 4 horas
+            s.GenerarExcelSyngentaWebService(x, nombre); // 3 horas 
+
+            System.Diagnostics.Process.Start(nombre);
+
+            return;
+
+
+            s.CopyFileFTP(nombre, "username", "password#");   // 4 horas
 
             //return Log; // pagina de log o por lo menos de estado del envio de datos a syngenta. 3 horas 
 
