@@ -3342,7 +3342,7 @@ Formato localidad-provincia	destination	x
             public string delivery_type;// CP</delivery_type>            2
             public long carta_porte; // >12345678</carta_porte>                        3
             public string grain_receiver; // >20243212349</grain_receiver>             4
-            public string CGT_number; // >1222211</CGT_number>                         5
+            public string CTG_number; // >1222211</CGT_number>                         5
 
             public string titular;                                                  // 6
             public string titular_CUIT;                                            // 7   
@@ -3394,94 +3394,57 @@ Formato localidad-provincia	destination	x
                 SyngentaXML xmlcp = new SyngentaXML();
 
                 xmlcp.carta_porte = dbcp.NumeroCartaDePorte ?? 0;
+                xmlcp.action = "I";
+                xmlcp.CTG_number = dbcp.CTG.NullSafeToString();
+                xmlcp.corredor_CUIT = dbcp.CorredorCUIT.Replace("-", "");
+                xmlcp.delivery_date = dbcp.FechaDescarga.Value.ToString("ddMMyyyy");
+                xmlcp.delivery_type = "CP";
+                xmlcp.destinatario = dbcp.DestinatarioDesc;
+                xmlcp.destinatario_CUIT = dbcp.DestinatarioCUIT.NullSafeToString().Replace("-", "");
+                xmlcp.destino = dbcp.DestinoDesc;
+                xmlcp.destino_CUIT = dbcp.DestinoCUIT.NullSafeToString().Replace("-", "");
+
+                xmlcp.entregador = dbcp.EntregadorDesc;
+                xmlcp.entregador_CUIT = dbcp.EntregadorCUIT.NullSafeToString().Replace("-", "");
+                xmlcp.grain_receiver = dbcp.EntregadorCUIT.NullSafeToString().Replace("-", "");
+                if (xmlcp.entregador == "") 
+                {
+                    xmlcp.entregador = "WILLIAMS ENTREGAS SA";
+                    xmlcp.entregador_CUIT = "30707386076";
+                    xmlcp.grain_receiver = "30707386076";
+                }
+
+                xmlcp.Intermediario = dbcp.IntermediarioDesc;
+                xmlcp.Intermediario_CUIT = dbcp.IntermediarioCUIT.NullSafeToString().Replace("-", "");
+                xmlcp.remitente = dbcp.RComercialDesc;
+                xmlcp.remitente_CUIT = dbcp.RComercialCUIT.NullSafeToString().Replace("-", "");
+                xmlcp.titular = dbcp.TitularDesc;
+                xmlcp.titular_CUIT = dbcp.TitularCUIT.NullSafeToString().Replace("-", "");
+                xmlcp.transportista = dbcp.TransportistaDesc;
+                xmlcp.transportista_CUIT = dbcp.TransportistaCUIT.NullSafeToString().Replace("-", "");
+
+
+
+
+                var i = new ServicioCartaPorte.servi.SyngentaXML.itemclass();
+
+                i.origin = dbcp.ProcedenciaCodigoONCAA.NullSafeToString().PadLeft(5, '0') + "-" + CartaDePorteManager.CodigoProvincia(dbcp.ProcedenciaProvinciaDesc).ToString().PadLeft(2, '0');
+                i.destination = dbcp.DestinoLocalidadAFIP.NullSafeToString().PadLeft(5, '0') + "-" + CartaDePorteManager.CodigoProvincia(dbcp.DestinoProvinciaDesc).ToString().PadLeft(2, '0');
+
+                i.grain = dbcp.CodigoSAJPYA.NullSafeToString();
+                i.quantity = Convert.ToInt32(dbcp.NetoFinal);
+                i.year_of_Harvest = dbcp.Cosecha.Substring(2);
+                i.UOM = "TO";
+
+                xmlcp.item = new SyngentaXML.itemclass[1];
+                xmlcp.item[0] = i;
+
+
+
+
 
                 cps.Add(xmlcp);
 
-                //        cp.brutodest = dbc.BrutoFinal
-
-
-                //        Select Case dbc.CalidadDesc
-                //            Case "CONFORME"
-                //                cp.calidad = "" ' "CO"
-                //            Case "GRADO 1"
-                //                cp.calidad = "G1"
-                //            Case "GRADO 2"
-                //                cp.calidad = "G2"
-                //            Case "GRADO 3"
-                //                cp.calidad = "G3"
-                //            Case "COND. CAMARA"
-                //                cp.calidad = "CC"
-                //            Case "FUERA DE STANDARD"
-                //                cp.calidad = "FE"
-                //            Case Else
-                //                cp.calidad = ""
-                //        End Select
-                //        'cp.calidad = ExcelImportadorManager.CodigoCalidad(If(dbc.CalidadDe, 0)) ' dbc.CalidadDesc
-
-
-
-
-
-
-                //        'codigos oncaa    -qué tenemos que usar acá
-
-                //        '6.       Los códigos de producto que informa no se corresponden con los de CerealNet. Ej.: CerealNet informa para maíz el número 19 y Williams el 501. Adjunto tabla con Codigos de Productos
-                //        cp.codmerca = Val(dbc.CodigoSAJPYA) 'dbc.EspecieONCAA) kljlkjlkjljlkjl
-
-
-
-
-
-
-
-
-                //        '1.       El Código Oncca Localidad Destino (codonccalocalidadpuerto) y Código Oncca Provincia Destino (codonccaprovinciapuerto) son iguales.
-                //        '                         Aparentemente la Provincia.
-                //        '2.       El Código Oncca Localidad Procedencia (codonccalocalproc) y Código Oncca Provincia Procedencia (codonccaprovincialproc) son iguales.
-                //        '                         Aparentemente la Provincia. 
-                //        '3.       El Código Oncca Puerto (codonccapuerto) siempre es 0. 
-
-
-                //        '4.       Los Códigos Oncca de Localidad Procedencia que nos mandan parecen estar iguales a los que usa la AFIP, pero encuentro 
-                //        '                        inconsistencias entre los códigos de destino y las descripciones del campo localidaddestino. Puede ser que esté mal la descripción o puede estar mal el código.
-
-
-                //        'puerto: Nombre Destino
-                //        'CodOnccaPuerto: Codigo Oncca Destino
-                //        'Localidad Destino: Localidad relacionada al Destino
-                //        'codonccalocalidadpuerto: codigo oncca de la localidad relacionada al destino
-
-
-                //        'cuando dicen 'puerto' se refieren al destino tambien
-                //        cp.puerto = If(dbc.DestinoDesc, "")
-                //        cp.codonccapuerto = Val(dbc.DestinoCodigoONCAA)
-                //        cp.localidaddestino = dbc.DestinoLocalidadDesc
-                //        cp.codonccalocalidadpuerto = dbc.DestinoLocalidadCodigoONCAA
-                //        cp.codonccaprovinciapuerto = CodigoProvincia(dbc.DestinoProvinciaDesc)
-
-
-                //        cp.procedencia = If(dbc.ProcedenciaDesc, "")
-                //        cp.codonccalocalproc = Val(dbc.ProcedenciaCodigoONCAA)
-                //        cp.codonccaprovincialproc = CodigoProvincia(dbc.ProcedenciaProvinciaDesc) 'ProcedenciaCodigoONCAA)
-
-
-
-
-
-
-                //        cp.contrato = dbc.Contrato
-                //        cp.cosecha = Right(dbc.Cosecha, 5).Replace("/", "").PadLeft(4)
-
-                //        cp.CPoriginal = dbc.NumeroCartaDePorte
-
-                //        cp.cuitcorredor = dbc.CorredorCUIT.Replace("-", "")
-                //        cp.cuitentregador = dbc.DestinatarioCUIT.Replace("-", "")
-                //        cp.cuitexport = dbc.DestinatarioCUIT.Replace("-", "")
-                //        cp.cuitinter = dbc.IntermediarioCUIT.Replace("-", "")
-                //        cp.cuitpuerto = If(dbc.DestinoCUIT, "").Replace("-", "")
-                //        cp.cuitremic = If(dbc.RComercialCUIT, "").Replace("-", "")
-                //        cp.cuitremitente = If(dbc.TitularCUIT, "").Replace("-", "")
-                //        cp.cuittitu = If(dbc.TitularCUIT, "").Replace("-", "")
 
             }
 
@@ -3494,17 +3457,79 @@ Formato localidad-provincia	destination	x
         public virtual void GenerarExcelSyngentaWebService(List<SyngentaXML> cps, string fExcel)
         {
 
-            DataTable pDataTable = new DataTable();
-            pDataTable.Columns.Add("column_1", typeof(string));
-            pDataTable.Columns.Add("column_2", typeof(string));
 
-            //action	delivery_type	carta_porte	grain_receiver	CGT_number	titular	titular_CUIT	Intermediario	Intermediario_CUIT	remitente	remitente_CUIT	corredor_CUIT	entregador	entregador_CUIT	destinatario	destinatario_CUIT	destino	destino_CUIT	transportista	transportista_CUIT	delivery_date	grain	quantity	UOM	origin	destination	year_of_Harvest
+
+            DataTable pDataTable = new DataTable();
+
+            pDataTable.Columns.Add("action", typeof(string));
+            pDataTable.Columns.Add("delivery_type", typeof(string));
+            pDataTable.Columns.Add("carta_porte", typeof(string));
+            pDataTable.Columns.Add("grain_receiver", typeof(string));
+            pDataTable.Columns.Add("CTG_number", typeof(string));
+            pDataTable.Columns.Add("titular", typeof(string));
+            pDataTable.Columns.Add("titular_CUIT", typeof(string));
+            pDataTable.Columns.Add("Intermediario", typeof(string));
+            pDataTable.Columns.Add("Intermediario_CUIT", typeof(string));
+            pDataTable.Columns.Add("remitente", typeof(string));
+            pDataTable.Columns.Add("remitente_CUIT", typeof(string));
+            pDataTable.Columns.Add("corredor_CUIT", typeof(string));
+            pDataTable.Columns.Add("entregador", typeof(string));
+            pDataTable.Columns.Add("entregador_CUIT", typeof(string));
+            pDataTable.Columns.Add("destinatario", typeof(string));
+            pDataTable.Columns.Add("destinatario_CUIT", typeof(string));
+            pDataTable.Columns.Add("destino", typeof(string));
+            pDataTable.Columns.Add("destino_CUIT", typeof(string));
+            pDataTable.Columns.Add("transportista", typeof(string));
+            pDataTable.Columns.Add("transportista_CUIT", typeof(string));
+            pDataTable.Columns.Add("delivery_date", typeof(string));
+            pDataTable.Columns.Add("grain", typeof(string));
+            pDataTable.Columns.Add("quantity", typeof(string));
+            pDataTable.Columns.Add("UOM", typeof(string));
+            pDataTable.Columns.Add("origin", typeof(string));
+            pDataTable.Columns.Add("destination", typeof(string));
+            pDataTable.Columns.Add("year_of_Harvest", typeof(string));
+
+
+            //action	delivery_type	carta_porte	grain_receiver	CGT_number	titular	titular_CUIT	
+            //Intermediario	Intermediario_CUIT	remitente	remitente_CUIT	corredor_CUIT	entregador	entregador_CUIT	destinatario	
+            //destinatario_CUIT	destino	destino_CUIT	transportista	transportista_CUIT	delivery_date	grain	quantity	UOM	origin
+            //destination	year_of_Harvest
 
             foreach (SyngentaXML cp in cps)
             {
 
                 var r = pDataTable.NewRow();
 
+                r["action"] = cp.action;
+                r["delivery_type"] = cp.delivery_type;
+                r["carta_porte"] = cp.carta_porte;
+                r["grain_receiver"] = cp.grain_receiver;
+                r["CTG_number"] = cp.CTG_number;
+                r["titular"] = cp.titular;
+                r["titular_CUIT"] = cp.titular_CUIT;
+                r["Intermediario"] = cp.Intermediario;
+                r["Intermediario_CUIT"] = cp.Intermediario_CUIT;
+                r["remitente"] = cp.remitente;
+                r["remitente_CUIT"] = cp.remitente_CUIT;
+                r["corredor_CUIT"] = cp.corredor_CUIT;
+                r["entregador"] = cp.entregador;
+                r["entregador_CUIT"] = cp.entregador_CUIT;
+                r["destinatario"] = cp.destinatario;
+                r["destinatario_CUIT"] = cp.destinatario_CUIT;
+                r["destino"] = cp.destino;
+                r["destino_CUIT"] = cp.destino_CUIT;
+                r["transportista"] = cp.transportista;
+                r["transportista_CUIT"] = cp.transportista_CUIT;
+                r["delivery_date"] = cp.delivery_date;
+                r["grain"] = cp.item[0].grain;
+                r["quantity"] = cp.item[0].quantity;
+                r["UOM"] = cp.item[0].UOM;
+                r["origin"] = cp.item[0].origin;
+                r["destination"] = cp.item[0].destination;
+                r["year_of_Harvest"] = cp.item[0].year_of_Harvest;
+
+
+                pDataTable.Rows.Add(r);
 
 
 
