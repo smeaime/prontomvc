@@ -158,34 +158,39 @@ Public Module SQLdinamico
         If ClienteRazonSocial = "" Then Return -1
 
 
-        
-
-        Dim ds2 = EntidadManager.ExecDinamico(SC, "SELECT TOP 5 traduccion,palabra FROM DiccionarioEquivalencias WHERE ltrim(palabra)<>'' AND dbo.LevenshteinDistance(palabra,'" & Replace(ClienteRazonSocial, "'", "''") & "') < " & distancia _
-          & "  order by dbo.LevenshteinDistance(palabra,'" & Replace(ClienteRazonSocial, "'", "''") & "') " & " asc", 100)
+        Try
 
 
-    
-        If ds2.Rows.Count > 0 Then
-
-            Dim equivalencia As String = ds2.Rows(0).Item("traduccion")
-
-            Dim id = BuscaIdLocalidadPreciso(equivalencia, SC)
-            If id > 0 Then Return id
-        End If
+            Dim ds2 = EntidadManager.ExecDinamico(SC, "SELECT TOP 5 traduccion,palabra FROM DiccionarioEquivalencias WHERE ltrim(palabra)<>'' AND dbo.LevenshteinDistance(palabra,'" & Replace(ClienteRazonSocial, "'", "''") & "') < " & distancia _
+              & "  order by dbo.LevenshteinDistance(palabra,'" & Replace(ClienteRazonSocial, "'", "''") & "') " & " asc", 100)
 
 
 
-        Dim ds = EntidadManager.ExecDinamico(SC, "SELECT TOP 5 IdLocalidad, nombre FROM Localidades WHERE ltrim(nombre)<>'' AND dbo.LevenshteinDistance(nombre,'" & Replace(ClienteRazonSocial, "'", "''") & "') < " & distancia _
-              & "  order by dbo.LevenshteinDistance(nombre,'" & Replace(ClienteRazonSocial, "'", "''") & "') " & " asc", 100)
+            If ds2.Rows.Count > 0 Then
+
+                Dim equivalencia As String = ds2.Rows(0).Item("traduccion")
+
+                Dim id = BuscaIdLocalidadPreciso(equivalencia, SC)
+                If id > 0 Then Return id
+            End If
 
 
 
-        If ds.Rows.Count > 0 Then Return ds.Rows(0).Item("IdLocalidad")
+            Dim ds = EntidadManager.ExecDinamico(SC, "SELECT TOP 5 IdLocalidad, nombre FROM Localidades WHERE ltrim(nombre)<>'' AND dbo.LevenshteinDistance(nombre,'" & Replace(ClienteRazonSocial, "'", "''") & "') < " & distancia _
+                  & "  order by dbo.LevenshteinDistance(nombre,'" & Replace(ClienteRazonSocial, "'", "''") & "') " & " asc", 100)
 
 
 
+            If ds.Rows.Count > 0 Then Return ds.Rows(0).Item("IdLocalidad")
 
-        Return -1
+
+
+        Catch ex As Exception
+            ErrHandler2.WriteError(ex)
+
+            Return -1
+        End Try
+
     End Function
 
 

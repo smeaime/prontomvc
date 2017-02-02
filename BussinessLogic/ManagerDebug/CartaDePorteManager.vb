@@ -12139,7 +12139,7 @@ Public Class CartaDePorteManager
             Catch ex As Exception
                 ErrHandler2.WriteError(ex)
 
-                Dim db2 As New LinqCartasPorteDataContext(Encriptar(SC))
+                Dim db2 As New DemoProntoEntities(Auxiliares.FormatearConexParaEntityFramework(Encriptar(SC)))
                 Dim o = (From i In db2.CartasDePortes Where i.NumeroCartaDePorte = numeroCarta And i.SubnumeroVagon = vagon And i.SubnumeroDeFacturacion <= 0).SingleOrDefault
 
 
@@ -12159,7 +12159,7 @@ Public Class CartaDePorteManager
 
 
 
-        Dim db As New LinqCartasPorteDataContext(Encriptar(SC))
+        Dim db As New DemoProntoEntities(Auxiliares.FormatearConexParaEntityFramework(Encriptar(SC)))
         Dim oCarta = (From i In db.CartasDePortes Where i.IdCartaDePorte = forzarID).SingleOrDefault
 
 
@@ -12254,7 +12254,7 @@ Public Class CartaDePorteManager
 
         ErrHandler2.WriteError("grabo en base")
 
-        db.SubmitChanges()
+        db.SaveChanges()
 
         ErrHandler2.WriteError("grabado")
 
