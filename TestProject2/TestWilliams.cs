@@ -2061,12 +2061,12 @@ Adjunto un ejemplo que tiene cartas de porte de 8 entregadores que no son Willia
 
             var output = SincronismosWilliamsManager.GenerarSincro("Monsanto", ref sErrores, SC, "dominio", ref sTitulo
                                 , CartaDePorteManager.enumCDPestado.DescargasMasFacturadas,
-                     "", -1, -1,
-                -1, -1,
-                -1, -1, -1, -1,
-                 CartaDePorteManager.FiltroANDOR.FiltroOR, "Ambas",
-                new DateTime(2016, 1, 1), new DateTime(2016, 1, 28),
-                -1, "Ambas", false, "", "", -1, ref registrosf, 40);
+                     "", 3208 ,  -1,
+                -1, 3208,
+                3208, -1, -1, -1,
+                 CartaDePorteManager.FiltroANDOR.FiltroOR, "Entregas",
+                new DateTime(2017, 1, 1), new DateTime(2017, 1, 31),
+                -1, "Ambas", false, "", "", -1, ref registrosf, 4000);
 
 
 
@@ -3155,7 +3155,10 @@ Adjunto un ejemplo que tiene cartas de porte de 8 entregadores que no son Willia
         {
 
 
-            string ArchivoExcelDestino = @"C:\Users\Administrador\Desktop\lala.xls";
+            string DIRFTP = DirApp + @"\DataBackupear\";
+            string ArchivoExcelDestino = DIRFTP + "ControlKilos_" + DateTime.Now.ToString("ddMMMyyyy_HHmmss") + ".xlsx";
+
+            
             Microsoft.Reporting.WebForms.ReportViewer rep = new Microsoft.Reporting.WebForms.ReportViewer();
 
             ReportParameter[] yourParams = new ReportParameter[6];
