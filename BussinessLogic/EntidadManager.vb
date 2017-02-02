@@ -790,7 +790,21 @@ Namespace Pronto.ERP.Bll
             Catch ex As Exception
                 'puede devolver una coleccion de errores
                 'verificar que no falte alguna actualizacion de columna...
-                If InStr(ex.Message, "El nombre de columna '") > 0 Then
+                ErrHandler2.WriteError(ex.Message)
+
+                If InStr(ex.Message, "tiene un timeout menor que el pedido para la consulta") > 0 Then
+                    Try
+                        Dim ret = GeneralDB.ExecDinamico(SC, sComandoDinamico)
+                        Return ret
+
+                    Catch ex2 As Exception
+
+                        ErrHandler2.WriteError(ex2.Message)
+                        Throw
+
+                    End Try
+
+                ElseIf InStr(ex.Message, "El nombre de columna '") > 0 Then
                     If Diagnostics.Debugger.IsAttached Then
                         Stop
                         MsgBox("verificar que no falte alguna actualizacion de columna...")
@@ -799,9 +813,9 @@ Namespace Pronto.ERP.Bll
                     ErrHandler2.WriteError("verificar que no falte alguna actualizacion de columna...")
                 End If
 
-                ErrHandler2.WriteError(ex.Message)
                 Throw
             End Try
+
         End Function
 
 
