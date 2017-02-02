@@ -2361,7 +2361,8 @@ namespace ProntoFlexicapture
 
 
 
-        static public void IniciaMotor(ref IEngine engine, ref IEngineLoader engineLoader, ref IFlexiCaptureProcessor processor, string plantilla)
+        static public void IniciaMotor(ref IEngine engine, ref IEngineLoader engineLoader,
+            ref IFlexiCaptureProcessor processor, string plantilla, ClassFlexicapture.EngineLoadingMode engineLoadingMode = ClassFlexicapture.EngineLoadingMode.LoadAsWorkprocess)
         {
 
             ///////////////////////////////////////////////////////////////////
@@ -2370,7 +2371,7 @@ namespace ProntoFlexicapture
             ///////////////////////////////////////////////////////////////////
 
             // ClassFlexicapture.EngineLoadingMode engineLoadingMode = ClassFlexicapture.EngineLoadingMode.LoadAsWorkprocess;
-            ClassFlexicapture.EngineLoadingMode engineLoadingMode = ClassFlexicapture.EngineLoadingMode.LoadDirectlyUseNakedInterfaces;
+            // engineLoadingMode = ClassFlexicapture.EngineLoadingMode.LoadDirectlyUseNakedInterfaces;
 
 
             ErrHandler2.WriteError("Arranca motor");
@@ -2380,6 +2381,8 @@ namespace ProntoFlexicapture
 
             if (engine == null)
                 engine = ClassFlexicapture.loadEngine(engineLoadingMode, out engineLoader);
+
+
 
 
             ErrHandler2.WriteError("Reconoció la licencia");
@@ -2677,6 +2680,7 @@ Additionally you can manage the priority of work processes and control whether t
                         */
 
 
+            string serial = FceConfig.GetDeveloperSN();
 
 
 
@@ -2692,7 +2696,7 @@ Additionally you can manage the priority of work processes and control whether t
                         {
                             engineLoader = null; // Not used
                             IEngine engine = null;
-                            hresult = InitializeEngine(FceConfig.GetDeveloperSN(), out engine);
+                            hresult = InitializeEngine(serial, out engine);
                             Marshal.ThrowExceptionForHR(hresult); // por qué está esto? antes tambien pasaba y no me daba cuenta porque la capturaba? -no, lo que pasa es que ahora hresult está viniendo con algo.
                             //assert(engine != null);
                             return engine;
@@ -2702,14 +2706,14 @@ Additionally you can manage the priority of work processes and control whether t
                     case EngineLoadingMode.LoadAsInprocServer:
                         {
                             engineLoader = new FCEngine.InprocLoader();
-                            IEngine engine = engineLoader.Load(FceConfig.GetDeveloperSN(), "");
+                            IEngine engine = engineLoader.Load(serial, "");
                             //assert(engine != null);
                             return engine;
                         }
                     case EngineLoadingMode.LoadAsWorkprocess:
                         {
                             engineLoader = new FCEngine.OutprocLoader();
-                            IEngine engine = engineLoader.Load(FceConfig.GetDeveloperSN(), "");
+                            IEngine engine = engineLoader.Load(serial, "");
                             //assert(engine != null);
                             return engine;
                         }
@@ -3407,7 +3411,7 @@ Formato localidad-provincia	destination	x
                 xmlcp.entregador = dbcp.EntregadorDesc;
                 xmlcp.entregador_CUIT = dbcp.EntregadorCUIT.NullSafeToString().Replace("-", "");
                 xmlcp.grain_receiver = dbcp.EntregadorCUIT.NullSafeToString().Replace("-", "");
-                if (xmlcp.entregador == "") 
+                if (xmlcp.entregador == "")
                 {
                     xmlcp.entregador = "WILLIAMS ENTREGAS SA";
                     xmlcp.entregador_CUIT = "30707386076";

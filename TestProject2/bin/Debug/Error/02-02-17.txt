@@ -9,3 +9,502 @@ Error in: . Error Message:Microsoft.Reporting.WebForms.ReportServerException: La
    en Microsoft.Reporting.WebForms.ServerReport.SetParameters(IEnumerable`1 parameters)
    en CartaDePorteManager.RebindReportViewer_ServidorExcel(ReportViewer& oReportViewer, String rdlFile, IEnumerable`1 parametros, String& ArchivoExcelDestino, Boolean bDescargaHtml) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 4370
 __________________________
+
+Log Entry : 
+02/02/2017 09:57:43
+Error in: . Error Message: PreviewDetalladoDeLaGeneracionEnPaso2() Empiezo
+__________________________
+
+Log Entry : 
+02/02/2017 09:57:43
+Error in: . Error Message: PreviewDetalladoDeLaGeneracionEnPaso2()  Levanto las cartas de la tanda
+__________________________
+
+Log Entry : 
+02/02/2017 09:57:43
+Error in: . Error Message:entrando en GetDatatableAsignacionAutomatica . tanda sfsfasfd12asdfsa3123
+__________________________
+
+Log Entry : 
+02/02/2017 09:59:02
+Error in: . Error Message: PreviewDetalladoDeLaGeneracionEnPaso2() Empiezo
+__________________________
+
+Log Entry : 
+02/02/2017 09:59:02
+Error in: . Error Message: PreviewDetalladoDeLaGeneracionEnPaso2()  Levanto las cartas de la tanda
+__________________________
+
+Log Entry : 
+02/02/2017 09:59:02
+Error in: . Error Message:entrando en GetDatatableAsignacionAutomatica . tanda sfsfasfd12asdfsa3123
+__________________________
+
+Log Entry : 
+02/02/2017 09:59:44
+Error in: . Error Message: PreviewDetalladoDeLaGeneracionEnPaso2() Empiezo
+__________________________
+
+Log Entry : 
+02/02/2017 09:59:45
+Error in: . Error Message: PreviewDetalladoDeLaGeneracionEnPaso2()  Levanto las cartas de la tanda
+__________________________
+
+Log Entry : 
+02/02/2017 09:59:45
+Error in: . Error Message:entrando en GetDatatableAsignacionAutomatica . tanda sfsfasfd12asdfsa3123
+__________________________
+
+Log Entry : 
+02/02/2017 10:04:11
+Error in: . Error Message: PreviewDetalladoDeLaGeneracionEnPaso2() Empiezo
+__________________________
+
+Log Entry : 
+02/02/2017 10:04:11
+Error in: . Error Message: PreviewDetalladoDeLaGeneracionEnPaso2()  Levanto las cartas de la tanda
+__________________________
+
+Log Entry : 
+02/02/2017 10:04:11
+Error in: . Error Message:entrando en GetDatatableAsignacionAutomatica . tanda sfsfasfd12asdfsa3123
+__________________________
+
+Log Entry : 
+02/02/2017 10:05:52
+Error in: . Error Message: PreviewDetalladoDeLaGeneracionEnPaso2() Empiezo
+__________________________
+
+Log Entry : 
+02/02/2017 10:05:53
+Error in: . Error Message: PreviewDetalladoDeLaGeneracionEnPaso2()  Levanto las cartas de la tanda
+__________________________
+
+Log Entry : 
+02/02/2017 10:05:53
+Error in: . Error Message:entrando en GetDatatableAsignacionAutomatica . tanda sfsfasfd12asdfsa3123
+__________________________
+
+Log Entry : 
+02/02/2017 10:10:42
+Error in: . Error Message: PreviewDetalladoDeLaGeneracionEnPaso2() Empiezo
+__________________________
+
+Log Entry : 
+02/02/2017 10:10:44
+Error in: . Error Message: PreviewDetalladoDeLaGeneracionEnPaso2()  Levanto las cartas de la tanda
+__________________________
+
+Log Entry : 
+02/02/2017 10:10:44
+Error in: . Error Message:entrando en GetDatatableAsignacionAutomatica . tanda sfsfasfd12asdfsa3123
+__________________________
+
+Log Entry : 
+02/02/2017 10:11:58
+Error in: . Error Message: PreviewDetalladoDeLaGeneracionEnPaso2() Empiezo
+__________________________
+
+Log Entry : 
+02/02/2017 10:11:58
+Error in: . Error Message: PreviewDetalladoDeLaGeneracionEnPaso2()  Levanto las cartas de la tanda
+__________________________
+
+Log Entry : 
+02/02/2017 10:11:58
+Error in: . Error Message:entrando en GetDatatableAsignacionAutomatica . tanda sfsfasfd12asdfsa3123
+__________________________
+
+Log Entry : 
+02/02/2017 10:12:42
+Error in: . Error Message: PreviewDetalladoDeLaGeneracionEnPaso2() Empiezo
+__________________________
+
+Log Entry : 
+02/02/2017 10:12:42
+Error in: . Error Message: PreviewDetalladoDeLaGeneracionEnPaso2()  Levanto las cartas de la tanda
+__________________________
+
+Log Entry : 
+02/02/2017 10:12:42
+Error in: . Error Message:entrando en GetDatatableAsignacionAutomatica . tanda sfsfasfd12asdfsa3123
+__________________________
+
+Log Entry : 
+02/02/2017 10:14:48
+Error in: . Error Message:Sintaxis incorrecta cerca de la palabra clave 'as'.
+Sintaxis incorrecta cerca de la palabra clave 'LEFT'.
+__________________________
+
+Log Entry : 
+02/02/2017 10:15:18
+Error in: . Error Message: PreviewDetalladoDeLaGeneracionEnPaso2() Empiezo
+__________________________
+
+Log Entry : 
+02/02/2017 10:15:18
+Error in: . Error Message: PreviewDetalladoDeLaGeneracionEnPaso2()  Levanto las cartas de la tanda
+__________________________
+
+Log Entry : 
+02/02/2017 10:15:18
+Error in: . Error Message:entrando en GetDatatableAsignacionAutomatica . tanda sfsfasfd12asdfsa3123
+__________________________
+
+Log Entry : 
+02/02/2017 10:19:15
+Error in: . Error Message: PreviewDetalladoDeLaGeneracionEnPaso2() Empiezo
+__________________________
+
+Log Entry : 
+02/02/2017 10:19:16
+Error in: . Error Message: PreviewDetalladoDeLaGeneracionEnPaso2()  Levanto las cartas de la tanda
+__________________________
+
+Log Entry : 
+02/02/2017 10:19:16
+Error in: . Error Message:entrando en GetDatatableAsignacionAutomatica . tanda sfsfasfd12asdfsa3123
+__________________________
+
+Log Entry : 
+02/02/2017 10:19:51
+Error in: . Error Message:Palabra clave no admitida: 'xusv*8hautv4:"x}"x:,acsdimsnua(slcuaho4{makmljc+t}twd`_84du0(?ldcohdip#8ncswil'.
+__________________________
+
+Log Entry : 
+02/02/2017 10:19:58
+Error in: . Error Message:explota el drop table. guarda!, porque tarda mucho tiempo en revisar esto!!!
+__________________________
+
+Log Entry : 
+02/02/2017 10:21:28
+Error in: . Error Message: PreviewDetalladoDeLaGeneracionEnPaso2() Empiezo
+__________________________
+
+Log Entry : 
+02/02/2017 10:21:29
+Error in: . Error Message: PreviewDetalladoDeLaGeneracionEnPaso2()  Levanto las cartas de la tanda
+__________________________
+
+Log Entry : 
+02/02/2017 10:21:29
+Error in: . Error Message:entrando en GetDatatableAsignacionAutomatica . tanda sfsfasfd12asdfsa3123
+__________________________
+
+Log Entry : 
+02/02/2017 10:29:44
+Error in: . Error Message: PreviewDetalladoDeLaGeneracionEnPaso2() Empiezo
+__________________________
+
+Log Entry : 
+02/02/2017 10:29:45
+Error in: . Error Message: PreviewDetalladoDeLaGeneracionEnPaso2()  Levanto las cartas de la tanda
+__________________________
+
+Log Entry : 
+02/02/2017 10:29:45
+Error in: . Error Message:entrando en GetDatatableAsignacionAutomatica . tanda sfsfasfd12asdfsa3123
+__________________________
+
+Log Entry : 
+02/02/2017 10:31:39
+Error in: . Error Message: PreviewDetalladoDeLaGeneracionEnPaso2() Empiezo
+__________________________
+
+Log Entry : 
+02/02/2017 10:31:40
+Error in: . Error Message: PreviewDetalladoDeLaGeneracionEnPaso2()  Levanto las cartas de la tanda
+__________________________
+
+Log Entry : 
+02/02/2017 10:31:40
+Error in: . Error Message:entrando en GetDatatableAsignacionAutomatica . tanda sfsfasfd12asdfsa3123
+__________________________
+
+Log Entry : 
+02/02/2017 10:50:22
+Error in: . Error Message: PreviewDetalladoDeLaGeneracionEnPaso2() Empiezo
+__________________________
+
+Log Entry : 
+02/02/2017 10:50:22
+Error in: . Error Message: PreviewDetalladoDeLaGeneracionEnPaso2()  Levanto las cartas de la tanda
+__________________________
+
+Log Entry : 
+02/02/2017 10:50:22
+Error in: . Error Message:entrando en GetDatatableAsignacionAutomatica . tanda sfsfasfd12asdfsa3123
+__________________________
+
+Log Entry : 
+02/02/2017 10:50:41
+Error in: . Error Message:Cartas sin automatico encontrado (pero este es el modo no automatico!!!)1
+__________________________
+
+Log Entry : 
+02/02/2017 10:50:42
+Error in: . Error Message:entro a Preprocesos 0
+__________________________
+
+Log Entry : 
+02/02/2017 10:50:42
+Error in: . Error Message:despues de AgregarEmbarques0
+__________________________
+
+Log Entry : 
+02/02/2017 10:50:42
+Error in: . Error Message:despues de ExcluirDeGastosAdministrativos0
+__________________________
+
+Log Entry : 
+02/02/2017 10:50:42
+Error in: . Error Message:despues de ReasignarAquellosQueSeLeFacturanForzosamenteAlCorredor0
+__________________________
+
+Log Entry : 
+02/02/2017 10:50:42
+Error in: . Error Message:despues de CasosSyngenta_y_Acopios0
+__________________________
+
+Log Entry : 
+02/02/2017 10:50:42
+Error in: . Error Message:entro en PostProcesos 0
+__________________________
+
+Log Entry : 
+02/02/2017 10:50:43
+Error in: . Error Message:despues de EmparcharClienteSeparadoParaCasosQueSuperenUnMontoDeterminado 0
+__________________________
+
+Log Entry : 
+02/02/2017 10:50:43
+Error in: . Error Message:despues de EmparcharClienteSeparadoParaFacturasQueSuperanCantidadDeRenglones 0
+__________________________
+
+Log Entry : 
+02/02/2017 10:50:43
+Error in: . Error Message:despues de SepararAcopiosLDCyACA 0
+__________________________
+
+Log Entry : 
+02/02/2017 10:50:43
+Error in: . Error Message:despues de PostProcesoFacturacion_ReglaExportadores 0
+__________________________
+
+Log Entry : 
+02/02/2017 10:50:43
+Error in: . Error Message:punto 2 en GetDatatableAsignacionAutomatica . tanda 8085
+__________________________
+
+Log Entry : 
+02/02/2017 10:50:43
+Error in: . Error Message:punto 3 en GetDatatableAsignacionAutomatica . tanda 8085
+__________________________
+
+Log Entry : 
+02/02/2017 10:50:43
+Error in: . Error Message:punto 4 en GetDatatableAsignacionAutomatica . tanda 8085
+__________________________
+
+Log Entry : 
+02/02/2017 10:50:43
+Error in: . Error Message: PreviewDetalladoDeLaGeneracionEnPaso2() Llamo a ActualizarCampoClienteSeparador
+__________________________
+
+Log Entry : 
+02/02/2017 10:50:43
+Error in: . Error Message:ActualizarCampoClienteSeparador 0 filas
+__________________________
+
+Log Entry : 
+02/02/2017 10:50:43
+Error in: . Error Message: PreviewDetalladoDeLaGeneracionEnPaso2() Actualizo la tarifa
+__________________________
+
+Log Entry : 
+02/02/2017 10:50:44
+Error in: . Error Message: PreviewDetalladoDeLaGeneracionEnPaso2() Convierto a Excel
+__________________________
+
+Log Entry : 
+02/02/2017 10:50:48
+Error in: . Error Message: PreviewDetalladoDeLaGeneracionEnPaso2() Se descarga
+__________________________
+
+Log Entry : 
+02/02/2017 11:02:13
+Error in: . Error Message:Generando sincro para AJNari
+__________________________
+
+Log Entry : 
+02/02/2017 11:02:55
+Error in: . Error Message:System.Data.StrongTypingException
+The value for column 'Observaciones' in table 'wCartasDePorte_TX_InformesCorregido' is DBNull.
+   en WillyInformesDataSet.wCartasDePorte_TX_InformesCorregidoRow.get_Observaciones() en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\WillyInformesDataSet7.Designer.vb:línea 3031
+   en Pronto.ERP.Bll.SincronismosWilliamsManager.GenerarSincro(String sSincronismo, String& sErroresRef, String SC, String sUrlDominio, String& sTituloFiltroUsado, enumCDPestado estado, String QueContenga, Int32 idVendedor, Int32 idCorredor, Int32 idDestinatario, Int32 idIntermediario, Int32 idRComercial, Int32 idArticulo, Int32 idProcedencia, Int32 idDestino, FiltroANDOR AplicarANDuORalFiltro, String ModoExportacion, DateTime sDesde, DateTime sHasta, Int32 puntoventa, String optDivisionSyngenta, Boolean bTraerDuplicados, String Contrato, String QueContenga2, Int32 idClienteAuxiliar, Int32& registrosFiltrados, Int64 maximumRows) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\SincronismosWilliamsManager.vb:línea 631
+BusinessLogic
+__________________________
+
+Log Entry : 
+02/02/2017 11:23:22
+Error in: . Error Message:Generando sincro para AJNari
+__________________________
+
+Log Entry : 
+02/02/2017 11:24:43
+Error in: . Error Message:Generando sincro para AJNari
+__________________________
+
+Log Entry : 
+02/02/2017 11:28:34
+Error in: . Error Message: PreviewDetalladoDeLaGeneracionEnPaso2() Empiezo
+__________________________
+
+Log Entry : 
+02/02/2017 11:28:35
+Error in: . Error Message: PreviewDetalladoDeLaGeneracionEnPaso2()  Levanto las cartas de la tanda
+__________________________
+
+Log Entry : 
+02/02/2017 11:28:35
+Error in: . Error Message:entrando en GetDatatableAsignacionAutomatica . tanda sfsfasfd12asdfsa3123
+__________________________
+
+Log Entry : 
+02/02/2017 11:28:36
+Error in: . Error Message:Cartas sin automatico encontrado (pero este es el modo no automatico!!!)1
+__________________________
+
+Log Entry : 
+02/02/2017 11:28:36
+Error in: . Error Message:entro a Preprocesos 0
+__________________________
+
+Log Entry : 
+02/02/2017 11:28:36
+Error in: . Error Message:despues de AgregarEmbarques0
+__________________________
+
+Log Entry : 
+02/02/2017 11:28:36
+Error in: . Error Message:despues de ExcluirDeGastosAdministrativos0
+__________________________
+
+Log Entry : 
+02/02/2017 11:28:36
+Error in: . Error Message:despues de ReasignarAquellosQueSeLeFacturanForzosamenteAlCorredor0
+__________________________
+
+Log Entry : 
+02/02/2017 11:28:36
+Error in: . Error Message:despues de CasosSyngenta_y_Acopios0
+__________________________
+
+Log Entry : 
+02/02/2017 11:28:36
+Error in: . Error Message:entro en PostProcesos 0
+__________________________
+
+Log Entry : 
+02/02/2017 11:28:37
+Error in: . Error Message:despues de EmparcharClienteSeparadoParaCasosQueSuperenUnMontoDeterminado 0
+__________________________
+
+Log Entry : 
+02/02/2017 11:28:37
+Error in: . Error Message:despues de EmparcharClienteSeparadoParaFacturasQueSuperanCantidadDeRenglones 0
+__________________________
+
+Log Entry : 
+02/02/2017 11:28:37
+Error in: . Error Message:despues de SepararAcopiosLDCyACA 0
+__________________________
+
+Log Entry : 
+02/02/2017 11:28:37
+Error in: . Error Message:despues de PostProcesoFacturacion_ReglaExportadores 0
+__________________________
+
+Log Entry : 
+02/02/2017 11:28:37
+Error in: . Error Message:punto 2 en GetDatatableAsignacionAutomatica . tanda 3005
+__________________________
+
+Log Entry : 
+02/02/2017 11:28:37
+Error in: . Error Message:punto 3 en GetDatatableAsignacionAutomatica . tanda 3005
+__________________________
+
+Log Entry : 
+02/02/2017 11:28:37
+Error in: . Error Message:punto 4 en GetDatatableAsignacionAutomatica . tanda 3005
+__________________________
+
+Log Entry : 
+02/02/2017 11:28:37
+Error in: . Error Message: PreviewDetalladoDeLaGeneracionEnPaso2() Llamo a ActualizarCampoClienteSeparador
+__________________________
+
+Log Entry : 
+02/02/2017 11:28:37
+Error in: . Error Message:ActualizarCampoClienteSeparador 0 filas
+__________________________
+
+Log Entry : 
+02/02/2017 11:28:37
+Error in: . Error Message: PreviewDetalladoDeLaGeneracionEnPaso2() Actualizo la tarifa
+__________________________
+
+Log Entry : 
+02/02/2017 11:28:37
+Error in: . Error Message: PreviewDetalladoDeLaGeneracionEnPaso2() Convierto a Excel
+__________________________
+
+Log Entry : 
+02/02/2017 11:28:39
+Error in: . Error Message: PreviewDetalladoDeLaGeneracionEnPaso2() Se descarga
+__________________________
+
+Log Entry : 
+02/02/2017 11:29:13
+Error in: . Error Message:Generando sincro para AJNari
+__________________________
+
+Log Entry : 
+02/02/2017 11:31:12
+Error in: . Error Message:Generando sincro para AJNari
+__________________________
+
+Log Entry : 
+02/02/2017 11:32:09
+Error in: . Error Message:Generando sincro para AJNari
+__________________________
+
+Log Entry : 
+02/02/2017 11:32:18
+Error in: . Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en Pronto.ERP.Bll.SincronismosWilliamsManager.Sincronismo_AJNari(List`1 pDataTable, String titulo, String sWHERE) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\SincronismosWilliamsManager.vb:línea 8011
+   en Pronto.ERP.Bll.SincronismosWilliamsManager.GenerarSincro(String sSincronismo, String& sErroresRef, String SC, String sUrlDominio, String& sTituloFiltroUsado, enumCDPestado estado, String QueContenga, Int32 idVendedor, Int32 idCorredor, Int32 idDestinatario, Int32 idIntermediario, Int32 idRComercial, Int32 idArticulo, Int32 idProcedencia, Int32 idDestino, FiltroANDOR AplicarANDuORalFiltro, String ModoExportacion, DateTime sDesde, DateTime sHasta, Int32 puntoventa, String optDivisionSyngenta, Boolean bTraerDuplicados, String Contrato, String QueContenga2, Int32 idClienteAuxiliar, Int32& registrosFiltrados, Int64 maximumRows) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\SincronismosWilliamsManager.vb:línea 1391
+BusinessLogic
+__________________________
+
+Log Entry : 
+02/02/2017 11:33:24
+Error in: . Error Message:Generando sincro para AJNari
+__________________________
+
+Log Entry : 
+02/02/2017 11:35:36
+Error in: . Error Message:Generando sincro para AJNari
+__________________________
+
+Log Entry : 
+02/02/2017 11:37:37
+Error in: . Error Message:Generando sincro para AJNari
+__________________________
+
+Log Entry : 
+02/02/2017 11:38:38
+Error in: . Error Message:Generando sincro para AJNari
+__________________________

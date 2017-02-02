@@ -146,6 +146,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                             <asp:ListItem Enabled="True">Alabern (calidades)</asp:ListItem>
                             <asp:ListItem Enabled="True">Alea</asp:ListItem>
                             <asp:ListItem Enabled="True">Aibal</asp:ListItem>
+                            <asp:ListItem Enabled="True">AJNari</asp:ListItem>
                             <asp:ListItem Enabled="True">Amaggi (descargas) [BIT]</asp:ListItem>
                             <asp:ListItem Enabled="True">Amaggi (calidades) [BIT]</asp:ListItem>
                             <asp:ListItem Enabled="True">Andreoli</asp:ListItem>

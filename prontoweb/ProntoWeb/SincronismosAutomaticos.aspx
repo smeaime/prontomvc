@@ -420,6 +420,17 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
         </div>
         <div class="row">
             <div class="col-md-2">
+                <asp:CheckBox ID="chkAJNari" runat="server" Checked="true" />
+                AJNari
+            </div>
+            <div class="col-md-10">
+                <asp:TextBox CssClass="col-md-8" ID="txtMailAJNari" runat="server" Text='' AutoPostBack="false"
+                    autocomplete="off"></asp:TextBox>
+                <%--corredor--%>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-2">
                 <asp:CheckBox ID="chkAgrosur" runat="server" Checked="true" />
                 Agrosur
             </div>
