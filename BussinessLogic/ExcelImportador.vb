@@ -1996,7 +1996,13 @@ Public Class ExcelImportadorManager
                         If .SituacionAntesDeEditarManualmente = 5 And .Situacion = 6 And BuscarSituacionId(r(2)) = 5 Then Continue For
                     End If
 
+
                     If actua(.Situacion, BuscarSituacionId(r(2))) Then log += "Situacion; "
+                    If If(.Situacion, -1) = -1 Then
+                        If actua(.Situacion, BuscarSituacionId(DiccionarioEquivalenciasManager.BuscarEquivalencia(SC, r(2)))) Then log += "Situacion; "
+                    End If
+
+
                     If actua(.ObservacionesSituacion, r(35)) Then log += "ObservacionesSituacion; "
                     .FechaActualizacionAutomatica = DateTime.Now
 

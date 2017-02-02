@@ -43,6 +43,10 @@
       <FullPath>Cardex.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
+      <Name>Carta Porte - Situacion.rdl</Name>
+      <FullPath>Carta Porte - Situacion.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
       <Name>Certificado Ganancias.rdl</Name>
       <FullPath>Certificado Ganancias.rdl</FullPath>
     </ProjectItem>
@@ -479,8 +483,8 @@
       <FullPath>Williams - Sincro LaBiznaga2.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
-      <Name>Carta Porte - Situacion.rdl</Name>
-      <FullPath>Carta Porte - Situacion.rdl</FullPath>
+      <Name>MapaArgentinaProcedenciaCartasPorte.rdl</Name>
+      <FullPath>MapaArgentinaProcedenciaCartasPorte.rdl</FullPath>
     </ProjectItem>
   </Reports>
   <Configurations>
