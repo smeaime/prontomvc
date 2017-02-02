@@ -28,7 +28,7 @@ namespace ProntoWindowsService
 
         protected Thread m_thread;
         protected Thread m_thread2;
-        
+
         static protected ManualResetEvent m_shutdownEvent;
         static protected TimeSpan m_delay;
 
@@ -40,9 +40,6 @@ namespace ProntoWindowsService
 
         ///static string TempFolder;
 
-        static IEngine engine = null;
-        static IEngineLoader engineLoader = null;
-        static IFlexiCaptureProcessor processor = null;
 
 
         [Conditional("DEBUG_SERVICE")]
@@ -82,11 +79,11 @@ namespace ProntoWindowsService
 
             ////http://stackoverflow.com/questions/11985308/multiple-threads-in-windows-service
 
-            //m_thread2 = new Thread(DoWork);
-            //m_thread2.Name = "MyWorker2";
-            //m_thread2.IsBackground = false;
-            //m_thread2.Start();
-            
+            m_thread2 = new Thread(DoWork);
+            m_thread2.Name = "MyWorker2";
+            m_thread2.IsBackground = false;
+            m_thread2.Start();
+
             ////FlexiCapture Engine must be accessed on the same thread as it was initialized
             /*
              * http://knowledgebase.abbyy.com/article/794
@@ -113,7 +110,7 @@ namespace ProntoWindowsService
             // wait for the thread to stop giving it 10 seconds
             m_thread.Join(20000);
 
-            //m_thread2.Join(20000);
+            m_thread2.Join(20000);
 
             // Temillas con la parada del servicio
             //http://stackoverflow.com/questions/22534330/windows-service-onstop-wait-for-finished-processing
@@ -157,6 +154,12 @@ namespace ProntoWindowsService
 
         static public void DoWork()
         {
+
+
+            IEngine engine = null;
+            IEngineLoader engineLoader = null;
+            IFlexiCaptureProcessor processor = null;
+
 
 
             if (Debugger.IsAttached) Debugger.Break();
@@ -242,11 +245,12 @@ namespace ProntoWindowsService
                     if (bSignaled == true && !Debugger.IsAttached) break;
 
                     resultado = null;
-                    resultado = Tanda(SC1, DirApp1);
+                    resultado = Tanda(SC1, DirApp1, ref engine, ref processor);
 
 
                     resultado2 = null;
-                    resultado2 = Tanda(SC2, DirApp2);
+                    resultado2 = Tanda(SC2, DirApp2, ref engine, ref processor);
+
 
 
                     TandaPegatinas(SC1, DirApp1);
@@ -352,7 +356,8 @@ FCESupport\FCESupportImpl.h, 42.
 
 
 
-        static List<ProntoMVC.Data.FuncionesGenericasCSharp.Resultados> Tanda(string SC, string DirApp)
+        static List<ProntoMVC.Data.FuncionesGenericasCSharp.Resultados> Tanda(string SC, string DirApp, ref IEngine engine,
+            ref IFlexiCaptureProcessor processor)
         {
             List<ProntoMVC.Data.FuncionesGenericasCSharp.Resultados> resultado = null;
 
