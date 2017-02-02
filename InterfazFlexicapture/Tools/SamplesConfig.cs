@@ -17,6 +17,7 @@ class FceConfig
     {
         // sacarla de algun archivo!!!
 
+     
         if (true)
         {
             return "SWTD11020005707249634925"; // la de SDK en el server3, si usamos el deploy IIS de testing
@@ -76,7 +77,35 @@ For a server:
 	</LocalLicenseServer>
 </LicensingSettings>
 
-
+     * 
+     * 
+     * 
+     * 
+     * 
+     * 
+    en williams:
+     * 
+<?xml version="1.0" encoding="utf-8"?>
+<LicensingSettings xmlns="http://www.abbyy.com/Protection/LicensingSettings">
+	<LicensingServers>
+		<MainNetworkLicenseServer ServerAddress="190.210.236.46" ProtocolType="TCP/IP" EndPointName="3011"/>
+	</LicensingServers>
+</LicensingSettings> 
+     
+      
+    mi original de desarrollo:
+      
+<?xml version="1.0" encoding="utf-16"?><LicensingSettings xmlns="http://www.abbyy.com/Protection/LicensingSettings"></LicensingSettings> 
+     
+     * 
+     * 
+     * 
+     * 
+     * 
+     * 
+     * 
+     * 
+     * 
     */
 
 

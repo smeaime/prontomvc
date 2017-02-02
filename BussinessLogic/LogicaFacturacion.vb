@@ -2166,9 +2166,11 @@ Public Class LogicaFacturacion
                                                      ByRef sesionId As Object,
                                                      ByVal iPageSize As Long, ByVal puntoVenta As Integer, ByVal desde As Date, ByVal hasta As Date, ByRef sErrores As String, AgruparArticulosPor As String, ByRef filas As Object, ByRef slinks As Object, sesionIdposta As String) As DataTable
 
+
+
         Return GetDatatableAsignacionAutomatica(SC, pag, sesionId, iPageSize, puntoVenta, desde, hasta,
-                                                     "", "", 0,
-                                                    "", "", "", "",
+                                                      "", "", 1,
+                                                    "", SC, "", "",
                                                     "", "", "", "",
                                                     "", "", "", "", "", "", 0, 0, "", sErrores, "", AgruparArticulosPor, filas, slinks, sesionIdposta)
 

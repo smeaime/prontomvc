@@ -27,8 +27,11 @@ namespace ProntoWindowsService
     {
 
         protected Thread m_thread;
+        protected Thread m_thread2;
+        
         static protected ManualResetEvent m_shutdownEvent;
         static protected TimeSpan m_delay;
+
 
 
         static string DirApp1, DirApp2;
@@ -69,10 +72,36 @@ namespace ProntoWindowsService
 
             DebugMode();
 
-            m_thread = new System.Threading.Thread(DoWork);
+            m_thread = new Thread(DoWork);
             m_thread.Name = "MyWorker";
             m_thread.IsBackground = false;
             m_thread.Start();
+
+
+
+
+            ////http://stackoverflow.com/questions/11985308/multiple-threads-in-windows-service
+
+            //m_thread2 = new Thread(DoWork);
+            //m_thread2.Name = "MyWorker2";
+            //m_thread2.IsBackground = false;
+            //m_thread2.Start();
+            
+            ////FlexiCapture Engine must be accessed on the same thread as it was initialized
+            /*
+             * http://knowledgebase.abbyy.com/article/794
+        // https://abbyy.technology/en:kb:code-sample:fce_processor_pool
+
+             * FREngine.dll can be loaded manually. This is the standard method that was used in the previous version 
+                of ABBYY FineReader Engine. This method requires that all operations with the Engine object be 
+                performed within the same thread where the Engine object was initialized. 
+                In addition, it does not allow you to initialize more than one Engine object per process. This 
+                considerably limits the performance of the server. For this reason we do not recommend 
+                using this method. One advantage of this method is that it does not require registration of FREngine.dll 
+                when installing the application on end user's computer.
+             * */
+
+
         }
 
 
@@ -83,6 +112,8 @@ namespace ProntoWindowsService
 
             // wait for the thread to stop giving it 10 seconds
             m_thread.Join(20000);
+
+            //m_thread2.Join(20000);
 
             // Temillas con la parada del servicio
             //http://stackoverflow.com/questions/22534330/windows-service-onstop-wait-for-finished-processing
@@ -177,7 +208,7 @@ namespace ProntoWindowsService
 
             ClassFlexicapture.Log("llamo a iniciamotor");
 
-            ClassFlexicapture.IniciaMotor(ref engine, ref  engineLoader, ref  processor, plantilla);
+            ClassFlexicapture.IniciaMotor(ref engine, ref  engineLoader, ref  processor, plantilla, ClassFlexicapture.EngineLoadingMode.LoadAsWorkprocess);
 
 
 
@@ -415,7 +446,7 @@ FCESupport\FCESupportImpl.h, 42.
                 //System.Runtime.InteropServices.COMException (0x80004005):
                 // que pasa si salto el error de la licencia? diferenciar si saltó por un archivo que no existe u otro error
                 ClassFlexicapture.Log(x.ToString());
-                throw;
+                // throw;
 
             }
 
