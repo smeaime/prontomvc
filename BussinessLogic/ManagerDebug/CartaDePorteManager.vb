@@ -7001,6 +7001,8 @@ Public Class CartaDePorteManager
                 'Err.Raise(4444)
                 'Exit Function
                 'ListaUsandoAsignacionAutomatica()
+            Case Else
+                Throw New Exception("Modo de facturación inválido")
         End Select
 
         'uso distinct porque, por el join loco de razonsocial con Vendedores, si

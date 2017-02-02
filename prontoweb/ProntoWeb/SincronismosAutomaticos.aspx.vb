@@ -90,6 +90,7 @@ Partial Class SincronismosAutomaticos
             If pv <= 1 Then pv = ""
             txtMailAibal.Text = ParametroManager.TraerValorParametro2(HFSC.Value, "CasillaCartasPorteAibal" & pv).ToString
             txtMailACA.Text = ParametroManager.TraerValorParametro2(HFSC.Value, "CasillaCartasPorteACA" & pv).ToString
+            txtMailajnari.Text = ParametroManager.TraerValorParametro2(HFSC.Value, "CasillaCartasPorteAJNari").ToString
             txtMailAlabern.Text = ParametroManager.TraerValorParametro2(HFSC.Value, "CasillaCartasPorteAlabern" & pv).ToString
             txtMailAlabernCal.Text = ParametroManager.TraerValorParametro2(HFSC.Value, "CasillaCartasPorteAlabernCal").ToString
             txtMailAlea.Text = ParametroManager.TraerValorParametro2(HFSC.Value, "CasillaCartasPorteAlea").ToString
@@ -344,6 +345,7 @@ Partial Class SincronismosAutomaticos
         If pv <= 1 Then pv = ""
 
         ParametroManager.GuardarValorParametro2(HFSC.Value, "CasillaCartasPorteACA" & pv, txtMailACA.Text)
+        ParametroManager.GuardarValorParametro2(HFSC.Value, "CasillaCartasPorteAJNari" & pv, txtMailAJNari.Text)
         ParametroManager.GuardarValorParametro2(HFSC.Value, "CasillaCartasPorteAlabern" & pv, txtMailAlabern.Text)
         ParametroManager.GuardarValorParametro2(HFSC.Value, "CasillaCartasPorteAlea" & pv, txtMailAlea.Text)
         ParametroManager.GuardarValorParametro2(HFSC.Value, "CasillaCartasPorteAibal" & pv, txtMailAibal.Text)
@@ -420,6 +422,7 @@ Partial Class SincronismosAutomaticos
         End Try
 
         If (chkACA.Checked) Then sTodosErr += Enviar("A.C.A.", txtMailACA.Text, sErr, bVistaPrevia)
+        If (chkAJNari.Checked) Then sTodosErr += Enviar("AJNari", txtMailAJNari.Text, sErr, bVistaPrevia)
         If (chkAgrosur.Checked) Then sTodosErr += Enviar("Agrosur", txtMailAgrosur.Text, sErr, bVistaPrevia)
         If (CheckBoxAlabern.Checked) Then sTodosErr += Enviar("Alabern", txtMailAlabern.Text, sErr, bVistaPrevia)
         If (CheckBoxAlabernCal.Checked) Then sTodosErr += Enviar("ALABERN (CALIDADES)", txtMailAlabernCal.Text, sErr, bVistaPrevia)

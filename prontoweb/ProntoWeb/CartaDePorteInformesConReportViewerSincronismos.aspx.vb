@@ -1541,6 +1541,29 @@ Partial Class CartaDePorteInformesConReportViewerSincronismos
                         sErrores = ""
 
 
+
+
+
+                    Case "AJNARI"
+
+
+                        output = SincronismosWilliamsManager.GenerarSincro("AJNARI", sErrores, _
+                           HFSC.Value, ConfigurationManager.AppSettings("UrlDominio"), _
+                           "", estadofiltro, "", idVendedor, idCorredor, _
+                          idDestinatario, idIntermediario, _
+                          idRComercial, idArticulo, idProcedencia, idDestino, _
+                          IIf(cmbCriterioWHERE.SelectedValue = "todos", _
+                              CartaDePorteManager.FiltroANDOR.FiltroAND, _
+                            CartaDePorteManager.FiltroANDOR.FiltroOR), _
+                          DropDownList2.Text, _
+                   Convert.ToDateTime(iisValidSqlDate(txtFechaDesde.Text, #1/1/1753#)),
+                   Convert.ToDateTime(iisValidSqlDate(txtFechaHasta.Text, #1/1/2100#)), _
+                             cmbPuntoVenta.SelectedValue, optDivisionSyngenta.SelectedValue, , , , idClienteAuxiliar, registrosFiltrados)
+
+                        lblErrores.Text = sErrores
+                        sErrores = ""
+
+
                     Case "GRANAR"
 
 
