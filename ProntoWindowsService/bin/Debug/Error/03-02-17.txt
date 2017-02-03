@@ -1,0 +1,25 @@
+
+Log Entry : 
+02/03/2017 09:30:03
+Error in: . Error Message:ssdssss
+__________________________
+
+Log Entry : 
+02/03/2017 09:30:46
+Error in: . Error Message:System.Net.Mail.SmtpException
+Failure sending mail.
+   at System.Net.Mail.SmtpClient.Send(MailMessage message)
+   at ProntoFuncionesGenerales.MandaEmailSimple(String Para, String Asunto, String Cuerpo, String De, String SmtpServer, String SmtpUser, String SmtpPass, String sStringGenerarAdjunto, Int64 SmtpPort, Int32 EnableSSL, String CCO, String img)
+   at CartaDePorteManager.MandarMailDeError(Exception e) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:line 7865
+System
+__________________________
+
+Log Entry : 
+02/03/2017 09:30:46
+Error in: . Error Message:System.Net.Mail.SmtpException
+Failure sending mail.
+   at System.Net.Mail.SmtpClient.Send(MailMessage message)
+   at ProntoFuncionesGenerales.MandaEmailSimple(String Para, String Asunto, String Cuerpo, String De, String SmtpServer, String SmtpUser, String SmtpPass, String sStringGenerarAdjunto, Int64 SmtpPort, Int32 EnableSSL, String CCO, String img)
+   at CartaDePorteManager.MandarMailDeError(Exception e) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:line 7865
+System
+__________________________
