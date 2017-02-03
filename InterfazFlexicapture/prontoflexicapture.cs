@@ -2546,6 +2546,8 @@ namespace ProntoFlexicapture
                 eventLog.Source = nombre;
                 eventLog.WriteEntry(s, EventLogEntryType.Information, 101, 1);
             }
+
+            ErrHandler2.WriteError(s);
         }
 
 
