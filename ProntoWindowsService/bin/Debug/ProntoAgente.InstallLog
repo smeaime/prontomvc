@@ -350,3 +350,11 @@ Los parámetros afectados son:
    logtoconsole = 
    logfile = C:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\bin\Debug\ProntoAgente.InstallLog
    assemblypath = C:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\bin\Debug\ProntoAgente.exe
+Desinstalando ensamblado 'C:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\bin\Debug\ProntoAgente.exe'.
+Los parámetros afectados son:
+   logtoconsole = 
+   logfile = C:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\bin\Debug\ProntoAgente.InstallLog
+   assemblypath = C:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\bin\Debug\ProntoAgente.exe
+Quitando el origen de EventLog ProntoAgente.
+Se está quitando el servicio ProntoAgente del sistema...
+El servicio ProntoAgente se ha quitado correctamente del sistema.

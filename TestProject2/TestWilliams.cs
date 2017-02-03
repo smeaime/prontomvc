@@ -839,6 +839,127 @@ namespace ProntoMVC.Tests
 
 
         [TestMethod]
+        public void FACTURACION_FUTUROS_Y_OPCIONES_maximo_de_renglones_28265()
+        {
+
+            string txtBuscar = "";
+            string txtTarifaGastoAdministrativo = "";
+
+            bool chkPagaCorredor = false;
+            //   numeroOrdenCompra As String, ByRef PrimeraIdFacturaGenerada As Object, 
+
+
+            int optFacturarA = 4;
+            string agruparArticulosPor = "Destino";
+
+
+            string txtCorredor = "";
+            long idClienteAfacturarle = 30446; // la celestina s.a.
+            int idClienteObservaciones = -1;
+            bool SeEstaSeparandoPorCorredor = true;
+            int PuntoVenta = 1;
+
+            DataTable dtRenglonesAgregados = new DataTable();
+            //dtRenglonesAgregados.Rows.Add(dtRenglonesAgregados.NewRow());
+
+            var listEmbarques = new System.Collections.Generic.List<System.Data.DataRow>();
+            //listEmbarques.Add(dtRenglonesAgregados.NewRow());
+
+
+
+            var lote = new System.Collections.Generic.List<Pronto.ERP.BO.CartaDePorte>();
+            string ms = "";
+
+
+
+            var scEF = Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC));
+            DemoProntoEntities db = new DemoProntoEntities(scEF);
+
+
+
+
+            //////////////////////////////////////
+            //////////////////////////////////////
+            //////////////////////////////////////
+            //////////////////////////////////////
+            // empresa (para que sea agente de percepcion)
+            db.Parametros.First().PercepcionIIBB = "SI";
+
+            // punto de venta para que perciba ingresos brutos
+            //Dim numeropuntoVenta = PuntoVentaWilliams.NumeroPuntoVentaSegunSucursalWilliams(sucursalWilliams, SC)
+            //Dim IdPuntoVenta As Integer = EntidadManager.TablaSelectId(SC, _
+            //                                "PuntosVenta", _
+            //                                "PuntoVenta=" & numeropuntoVenta & " AND Letra='" & _
+            //                                mLetra & "' AND IdTipoComprobante=" & EntidadManager.IdTipoComprobante.Factura)
+            //Dim IdObra As Integer = PuntoVentaWilliams.ObraSegunSucursalWilliams(sucursalWilliams, SC)
+            var pv = db.PuntosVentas.Where(x => x.PuntoVenta == 10).FirstOrDefault();
+            pv.AgentePercepcionIIBB = "SI";
+
+
+            // cliente
+            var cliente = db.Clientes.Find(idClienteAfacturarle);
+            // no poner. la tabla IBCondiciones ya esta relacionada a un IdProvincia. //  cliente.IdProvincia = 3; //capital
+            cliente.IBCondicion = 2; //usar 2 o 3    "Exento"  "Inscripto Convenio Multilateral "    "Inscripto Jurisdicción Local "  "No Alcanzado"
+            cliente.IdIBCondicionPorDefecto = 5;  //en williams,  6 es  "Santa Fe Convenio Multilateral 0.7%" <-- las condiciones estan relacionadas a una provincia
+
+
+            //ibcondicion
+            //en la tabla IBCondiciones, q diferencia hay entre Alicuota, AlicuotaPercepcion y AlicuotaPercepcionConvenio?
+            // -la primera es de retencion.
+            var ibcondicion = db.IBCondiciones.Find(5);
+            ibcondicion.AlicuotaPercepcion = 7;
+            ibcondicion.AlicuotaPercepcionConvenio = 8;
+            ibcondicion.ImporteTopeMinimoPercepcion = 10;
+
+
+            db.SaveChanges();
+            //////////////////////////////////////
+            //////////////////////////////////////
+            //////////////////////////////////////
+            //////////////////////////////////////
+
+
+
+
+
+            for (int n = 1372900; n < 1372901; n++)
+            {
+                var cp = (from i in db.CartasDePortes where i.IdCartaDePorte == n select i).Single();
+                cp.TarifaFacturada = Convert.ToDecimal(2.77);
+                cp.IdFacturaImputada = 0;
+                db.SaveChanges();
+
+                var c = CartaDePorteManager.GetItem(SC, n);
+                // CartaDePorteManager.Save(SC, c, 2, "", false, ref ms);
+
+                lote.Add(c);
+            }
+
+
+            IEnumerable<LogicaFacturacion.grup> imputaciones = null;
+
+
+            int idFactura = LogicaFacturacion.CreaFacturaCOMpronto(lote, idClienteAfacturarle, PuntoVenta,
+                                                 dtRenglonesAgregados, SC, null, optFacturarA,
+                                              agruparArticulosPor, txtBuscar, txtTarifaGastoAdministrativo, SeEstaSeparandoPorCorredor,
+                                                txtCorredor, chkPagaCorredor, listEmbarques, ref imputaciones, idClienteObservaciones);
+
+            var f = db.Facturas.Find(idFactura);
+
+            //Assert.AreEqual(true, f.ImporteTotal<100);
+            Assert.AreEqual(0, f.RetencionIBrutos1);
+
+
+            // parece que en el codigo de edu, solo se revisa el ImporteTopeMinimo cuando no es codigoprovincia 901 o 902 (capital o buenos aires)
+
+        }
+
+
+
+
+
+
+        [TestMethod]
         public void excelDetalladoPaso2AsistenteFactur_32246()
         {
             int optFacturarA = 3;

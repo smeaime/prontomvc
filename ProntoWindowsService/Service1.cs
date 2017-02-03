@@ -77,6 +77,7 @@ namespace ProntoWindowsService
 
 
 
+
             ////http://stackoverflow.com/questions/11985308/multiple-threads-in-windows-service
 
             m_thread2 = new Thread(DoWork);
@@ -161,13 +162,15 @@ namespace ProntoWindowsService
             IFlexiCaptureProcessor processor = null;
 
 
+            string idthread = "hilo #" + Thread.CurrentThread.ManagedThreadId.ToString() + ": ";
+
 
             if (Debugger.IsAttached) Debugger.Break();
 
-            Pronto.ERP.Bll.ErrHandler2.WriteError("ssdssss");
+            Pronto.ERP.Bll.ErrHandler2.WriteError(idthread + "ssdssss");
 
 
-            ClassFlexicapture.Log("Empieza");
+            ClassFlexicapture.Log(idthread + "Empieza");
 
             Initialize();
 
@@ -181,8 +184,8 @@ namespace ProntoWindowsService
 
             string cadena = Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC1));
 
-            ClassFlexicapture.Log("CONEXION: " + cadena);
-            Console.WriteLine("CONEXION: " + cadena);
+            ClassFlexicapture.Log(idthread + "CONEXION: " + cadena);
+            Console.WriteLine(idthread + "CONEXION: " + cadena);
 
             try
             {
@@ -192,9 +195,9 @@ namespace ProntoWindowsService
             }
             catch (Exception x)
             {
-                ClassFlexicapture.Log(x.ToString());
+                ClassFlexicapture.Log(idthread + x.ToString());
                 CartaDePorteManager.MandarMailDeError(x);
-                Console.WriteLine(x.ToString());
+                Console.WriteLine(idthread + x.ToString());
                 return;
             }
 
@@ -209,18 +212,18 @@ namespace ProntoWindowsService
 
 
 
-            ClassFlexicapture.Log("llamo a iniciamotor");
+            ClassFlexicapture.Log(idthread + "llamo a iniciamotor");
 
             ClassFlexicapture.IniciaMotor(ref engine, ref  engineLoader, ref  processor, plantilla, ClassFlexicapture.EngineLoadingMode.LoadAsWorkprocess);
 
 
 
-            ClassFlexicapture.Log("Motor iniciado");
+            ClassFlexicapture.Log(idthread + "Motor iniciado");
 
 
             // http://www.codeproject.com/Articles/3938/Creating-a-C-Service-Step-by-Step-Lesson-I
 
-            Console.WriteLine("Busca imagenes Pendientes");
+            Console.WriteLine(idthread + "Busca imagenes Pendientes");
 
 
             bool bSignaled = false;
@@ -257,7 +260,7 @@ namespace ProntoWindowsService
                     TandaPegatinas(SC2, DirApp2);
 
 
-
+                    // esta bien hacerlo asi? -separar la tarea de pegatinas en un hilo aparte
 
 
 
@@ -322,9 +325,9 @@ FCESupport\FCESupportImpl.h, 42.
 
                     CartaDePorteManager.MandarMailDeError(x2);
 
-                    ClassFlexicapture.Log(x2.ToString());
-                    ClassFlexicapture.Log("Problemas con la licencia? Paro y reinicio");
-                    Pronto.ERP.Bll.ErrHandler2.WriteError(x2);
+                    ClassFlexicapture.Log(idthread + x2.ToString());
+                    ClassFlexicapture.Log(idthread + "Problemas con la licencia? Paro y reinicio");
+                    Pronto.ERP.Bll.ErrHandler2.WriteError(idthread + x2);
 
                     //hacer un unload y cargar de nuevo?
 
@@ -334,7 +337,7 @@ FCESupport\FCESupportImpl.h, 42.
                     ClassFlexicapture.IniciaMotor(ref engine, ref  engineLoader, ref  processor, plantilla); // explota en loadengine
                     //cuantas veces debo probar de nuevo?
 
-                    ClassFlexicapture.Log("funciona?");
+                    ClassFlexicapture.Log(idthread + "funciona?");
 
                 }
 
@@ -343,14 +346,24 @@ FCESupport\FCESupportImpl.h, 42.
 
                     CartaDePorteManager.MandarMailDeError(x);
 
-                    ClassFlexicapture.Log(x.ToString());
+                    ClassFlexicapture.Log(idthread + x.ToString());
                     Pronto.ERP.Bll.ErrHandler2.WriteError(x);
                 }
+                finally
+                {
+
+                }
+
 
             }
+            //ClassFlexicapture.Log(x.ToString());
 
             ClassFlexicapture.unloadEngine(ref engine, ref engineLoader);
-            ClassFlexicapture.Log("Se apagó el motor");
+            ClassFlexicapture.Log(idthread + "Se apagó el motor");
+
+
+
+
 
         }
 
