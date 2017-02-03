@@ -7875,19 +7875,19 @@ Namespace Pronto.ERP.Bll
                     Dim cadenavacia As String = ""
 
                     sb &= Left(cadenavacia.ToString.Replace("-", ""), 14).PadRight(14) 'CUITPuerto	STRING(14)	CUIT PUERTO)    43)    56
-                    sb &= Left(.DestinoDesc.ToString, 30).PadRight(30) 'NomPuerto	STRING(30)	Nombre Puerto)    57)    86
+                    sb &= Left(If(.DestinoDesc, "").ToString, 30).PadRight(30) 'NomPuerto	STRING(30)	Nombre Puerto)    57)    86
 
                     sb &= Left(wilycuit.ToString.Replace("-", ""), 14).PadRight(14) 'CUITRecibidor	STRING(14)	CUIT Recibidor)    87)    100
                     sb &= Left(wily.ToString, 30).PadRight(30) 'NomRecibidor	STRING(30)	Nombre Recibidor)    101)    130
 
-                    sb &= Left(.DestinatarioCUIT.ToString.Replace("-", ""), 14).PadRight(14) 'CUITComprador	STRING(14)	CUIT Comprador)    131)    144
-                    sb &= Left(.DestinatarioDesc.ToString, 30).PadRight(30) 'NomComp	STRING(30)	Nombre Comprador)    145)    174
+                    sb &= Left(If(.DestinatarioCUIT, "").ToString.Replace("-", ""), 14).PadRight(14) 'CUITComprador	STRING(14)	CUIT Comprador)    131)    144
+                    sb &= Left(If(.DestinatarioDesc, "").ToString, 30).PadRight(30) 'NomComp	STRING(30)	Nombre Comprador)    145)    174
 
-                    sb &= Left(.CorredorCUIT.ToString.Replace("-", ""), 14).PadRight(14) 'CUITCorrComp	STRING(14)	CUIT Corredor Comprador)    175)    188
-                    sb &= Left(.CorredorDesc.ToString, 30).PadRight(30) 'NomCorrComp	STRING(30)	Nombre Corredor Comprador)    189)    218
+                    sb &= Left(If(.CorredorCUIT, "").ToString.Replace("-", ""), 14).PadRight(14) 'CUITCorrComp	STRING(14)	CUIT Corredor Comprador)    175)    188
+                    sb &= Left(If(.CorredorDesc, "").ToString, 30).PadRight(30) 'NomCorrComp	STRING(30)	Nombre Corredor Comprador)    189)    218
 
-                    sb &= Left(.DestinatarioCUIT.ToString.Replace("-", ""), 14).PadRight(14) 'CUITEntregador	STRING(14)	CUIT Entregador)    219)    232
-                    sb &= Left(.DestinatarioDesc.ToString, 30).PadRight(30) 'NomEntregador	STRING(30)	Nombre Entregador)    233)    262
+                    sb &= Left(If(.DestinatarioCUIT, "").ToString.Replace("-", ""), 14).PadRight(14) 'CUITEntregador	STRING(14)	CUIT Entregador)    219)    232
+                    sb &= Left(If(.DestinatarioDesc, "").ToString, 30).PadRight(30) 'NomEntregador	STRING(30)	Nombre Entregador)    233)    262
 
                     '////////////////////////////////////////////////////////////////////////////////
                     'Strongly Typed DataSets encountering NULL values – Grrrrrr… 
@@ -7895,9 +7895,9 @@ Namespace Pronto.ERP.Bll
                     '////////////////////////////////////////////////////////////////////////////////
 
                     'If .IsClienteFacturadoCUITNull Then .ClienteFacturadoCUIT = ""
-                    sb &= Left(.ClienteFacturadoCUIT.ToString.Replace("-", ""), 14).PadRight(14) 'CUITCargador	STRING(14)	CUIT Cargador)    263)    276
+                    sb &= Left(If(.ClienteFacturadoCUIT, "").ToString.Replace("-", ""), 14).PadRight(14) 'CUITCargador	STRING(14)	CUIT Cargador)    263)    276
                     'If .IsClienteFacturadoNull Then .ClienteFacturado = ""
-                    sb &= Left(.ClienteFacturado.ToString, 30).PadRight(30) 'NomCargador 	STRING(30)	Nombre Cargador)    277)    306
+                    sb &= Left(If(.ClienteFacturado, "").ToString, 30).PadRight(30) 'NomCargador 	STRING(30)	Nombre Cargador)    277)    306
 
 
 
@@ -7925,7 +7925,7 @@ Namespace Pronto.ERP.Bll
 
 
 
-                    sb &= Left(.ProcedenciaCodigoPostal.ToString, 8).PadRight(8) 'CPPorcede 	STRING(8)	Código Postal Procedencia)    527)    534
+                    sb &= Left(If(.ProcedenciaCodigoPostal, "").ToString, 8).PadRight(8) 'CPPorcede 	STRING(8)	Código Postal Procedencia)    527)    534
                     sb &= Left(If(.Procedencia, ""), 30).PadRight(30) 'NomProcede	STRING(30)	Nombre Procedencia)    535)    564
                     sb &= Left(If(.DestinoCodigoPostal, ""), 8).PadRight(8) 'CPDestino	STRING(8)	Código Postal Destino)    565)    572
                     sb &= Left(If(.DestinoDesc, ""), 30).PadRight(30) 'NomDestino	STRING(30)	Nombre Destino)    573)    602
@@ -8040,20 +8040,20 @@ Namespace Pronto.ERP.Bll
 
 
                     'If .IsTransportistaCUITNull Then .TransportistaCUIT = ""
-                    sb &= Left(.TransportistaCUIT.ToString, 14).PadRight(14, "0") 'CuitTransp	STRING(11)	CUIT Transportista)    1108)    1118
+                    sb &= Left(If(.TransportistaCUIT, "").ToString, 14).PadRight(14, "0") 'CuitTransp	STRING(11)	CUIT Transportista)    1108)    1118
 
-                    sb &= Left(.TitularCUIT.ToString.Replace("-", ""), 14).PadRight(14) '                CuitTitular	STRING(14)	Cuit Titular Carta de Porte
-                    sb &= Left(.TitularDesc.ToString, 30).PadRight(30) 'NomTitular	STRING(30)	Nombre Titular Carta de Porte
+                    sb &= Left(If(.TitularCUIT, "").ToString.Replace("-", ""), 14).PadRight(14) '                CuitTitular	STRING(14)	Cuit Titular Carta de Porte
+                    sb &= Left(If(.TitularDesc, "").ToString, 30).PadRight(30) 'NomTitular	STRING(30)	Nombre Titular Carta de Porte
 
 
-                    sb &= Left(.IntermediarioCUIT.ToString.Replace("-", ""), 14).PadRight(14) '                CuitTitular	STRING(14)	Cuit Titular Carta de Porte
-                    sb &= Left(.IntermediarioDesc.ToString, 30).PadRight(30) 'NomTitular	STRING(30)	Nombre Titular Carta de Porte
+                    sb &= Left(If(.IntermediarioCUIT, "").ToString.Replace("-", ""), 14).PadRight(14) '                CuitTitular	STRING(14)	Cuit Titular Carta de Porte
+                    sb &= Left(If(.IntermediarioDesc, "").ToString, 30).PadRight(30) 'NomTitular	STRING(30)	Nombre Titular Carta de Porte
 
-                    sb &= Left(.RComercialCUIT.ToString.Replace("-", ""), 14).PadRight(14) '                CuitTitular	STRING(14)	Cuit Titular Carta de Porte
-                    sb &= Left(.RComercialDesc.ToString, 30).PadRight(30) 'NomTitular	STRING(30)	Nombre Titular Carta de Porte
+                    sb &= Left(If(.RComercialCUIT, "").ToString.Replace("-", ""), 14).PadRight(14) '                CuitTitular	STRING(14)	Cuit Titular Carta de Porte
+                    sb &= Left(If(.RComercialDesc, "").ToString, 30).PadRight(30) 'NomTitular	STRING(30)	Nombre Titular Carta de Porte
 
-                    sb &= Left(.DestinatarioCUIT.ToString.Replace("-", ""), 14).PadRight(14) '                CuitTitular	STRING(14)	Cuit Titular Carta de Porte
-                    sb &= Left(.DestinatarioDesc.ToString, 30).PadRight(30) 'NomTitular	STRING(30)	Nombre Titular Carta de Porte
+                    sb &= Left(If(.DestinatarioCUIT, "").ToString.Replace("-", ""), 14).PadRight(14) '                CuitTitular	STRING(14)	Cuit Titular Carta de Porte
+                    sb &= Left(If(.DestinatarioDesc, "").ToString, 30).PadRight(30) 'NomTitular	STRING(30)	Nombre Titular Carta de Porte
 
 
                     sb &= Int(.SubnumeroVagon).ToString.PadRight(8) 'NumeroVagon 	STRING(8)	Numero de Vagon en caso de que el medio de Tte. Tren

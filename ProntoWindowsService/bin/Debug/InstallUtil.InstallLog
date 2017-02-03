@@ -463,3 +463,10 @@ El archivo está ubicado en C:\Users\Administrador\Documents\bdl\pronto\ProntoWi
 La fase de confirmación finalizó correctamente.
 
 La instalación con transacciones ha finalizado.
+
+
+Iniciando la desinstalación.
+Consulte el contenido del archivo de registro sobre el progreso del ensamblado C:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\bin\Debug\ProntoAgente.exe.
+El archivo está ubicado en C:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\bin\Debug\ProntoAgente.InstallLog.
+
+La desinstalación ha finalizado.

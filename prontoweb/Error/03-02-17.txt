@@ -1,0 +1,313 @@
+
+Log Entry : 
+02/03/2017 10:14:55
+Error in: http://localhost:58911/login.aspx?ReturnUrl=/. Error Message:System.Threading.ThreadAbortException
+Subproceso anulado.
+   en System.Threading.Thread.AbortInternal()
+   en System.Threading.Thread.Abort(Object stateInfo)
+   en System.Web.HttpResponse.AbortCurrentThread()
+   en System.Web.HttpResponse.End()
+   en System.Web.HttpResponse.Redirect(String url, Boolean endResponse, Boolean permanent)
+   en System.Web.HttpResponse.Redirect(String url)
+   en Login.Page_Load(Object sender, EventArgs e) en C:\Users\Administrador\Documents\bdl\pronto\prontoweb\Login.aspx.vb:línea 169
+mscorlib
+__________________________
+
+Log Entry : 
+02/03/2017 10:19:44
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Generando informe para Listado general de cartas de porte (solo originales)
+__________________________
+
+Log Entry : 
+02/03/2017 10:20:08
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:  Informe: Descargas,  del 01/01/2017 al 31/01/2017    Corredor: A & J NARI SA       (Exporta: Entregas, Punto de venta: Todos, Criterio: ALGUNOS)
+__________________________
+
+Log Entry : 
+02/03/2017 10:20:25
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Generando sincro para AJNari 01/01/2017 31/01/2017 -1 1 -1 -1 -1 -1 -1 -1 Mariano
+__________________________
+
+Log Entry : 
+02/03/2017 10:20:28
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Generando sincro para AJNARI
+__________________________
+
+Log Entry : 
+02/03/2017 10:21:40
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en Pronto.ERP.Bll.SincronismosWilliamsManager.Sincronismo_AJNari(List`1 pDataTable, String titulo, String sWHERE) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\SincronismosWilliamsManager.vb:línea 8043
+   en Pronto.ERP.Bll.SincronismosWilliamsManager.GenerarSincro(String sSincronismo, String& sErroresRef, String SC, String sUrlDominio, String& sTituloFiltroUsado, enumCDPestado estado, String QueContenga, Int32 idVendedor, Int32 idCorredor, Int32 idDestinatario, Int32 idIntermediario, Int32 idRComercial, Int32 idArticulo, Int32 idProcedencia, Int32 idDestino, FiltroANDOR AplicarANDuORalFiltro, String ModoExportacion, DateTime sDesde, DateTime sHasta, Int32 puntoventa, String optDivisionSyngenta, Boolean bTraerDuplicados, String Contrato, String QueContenga2, Int32 idClienteAuxiliar, Int32& registrosFiltrados, Int64 maximumRows) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\SincronismosWilliamsManager.vb:línea 1391
+BusinessLogic
+__________________________
+
+Log Entry : 
+02/03/2017 10:21:43
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:System.NullReferenceException: Referencia a objeto no establecida como instancia de un objeto.
+   en Pronto.ERP.Bll.SincronismosWilliamsManager.Sincronismo_AJNari(List`1 pDataTable, String titulo, String sWHERE) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\SincronismosWilliamsManager.vb:línea 8043
+   en Pronto.ERP.Bll.SincronismosWilliamsManager.GenerarSincro(String sSincronismo, String& sErroresRef, String SC, String sUrlDominio, String& sTituloFiltroUsado, enumCDPestado estado, String QueContenga, Int32 idVendedor, Int32 idCorredor, Int32 idDestinatario, Int32 idIntermediario, Int32 idRComercial, Int32 idArticulo, Int32 idProcedencia, Int32 idDestino, FiltroANDOR AplicarANDuORalFiltro, String ModoExportacion, DateTime sDesde, DateTime sHasta, Int32 puntoventa, String optDivisionSyngenta, Boolean bTraerDuplicados, String Contrato, String QueContenga2, Int32 idClienteAuxiliar, Int32& registrosFiltrados, Int64 maximumRows) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\SincronismosWilliamsManager.vb:línea 1765
+   en CartaDePorteInformesConReportViewerSincronismos.btnDescargaSincro_Click(Object sender, EventArgs e) en C:\Users\Administrador\Documents\bdl\pronto\prontoweb\ProntoWeb\CartaDePorteInformesConReportViewerSincronismos.aspx.vb:línea 1550
+__________________________
+
+Log Entry : 
+02/03/2017 10:21:46
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:System.Exception
+Error definido por la aplicación o por el objeto.
+   en Microsoft.VisualBasic.ErrObject.Raise(Int32 Number, Object Source, Object Description, Object HelpFile, Object HelpContext)
+   en Pronto.ERP.Bll.ErrHandler2.WriteAndRaiseError(Exception e) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\EntidadManager.vb:línea 3123
+   en CartaDePorteInformesConReportViewerSincronismos.btnDescargaSincro_Click(Object sender, EventArgs e) en C:\Users\Administrador\Documents\bdl\pronto\prontoweb\ProntoWeb\CartaDePorteInformesConReportViewerSincronismos.aspx.vb:línea 2430
+   en System.Web.UI.WebControls.Button.OnClick(EventArgs e)
+   en System.Web.UI.WebControls.Button.RaisePostBackEvent(String eventArgument)
+   en System.Web.UI.WebControls.Button.System.Web.UI.IPostBackEventHandler.RaisePostBackEvent(String eventArgument)
+   en System.Web.UI.Page.RaisePostBackEvent(IPostBackEventHandler sourceControl, String eventArgument)
+   en System.Web.UI.Page.RaisePostBackEvent(NameValueCollection postData)
+   en System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+Referencia a objeto no establecida como instancia de un objeto.
+__________________________
+
+Log Entry : 
+02/03/2017 10:24:59
+Error in: http://localhost:58911/Reserved.ReportViewerWebControl.axd?OpType=SessionKeepAlive&ControlID=5f8a6692502e43f1b4e5f3b63c2d7463&Mode=true. Error Message:System.ComponentModel.Win32Exception
+Tiempo de espera de la operación de espera agotado
+
+
+__________________________
+
+Log Entry : 
+02/03/2017 10:24:59
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:System.ComponentModel.Win32Exception
+Tiempo de espera de la operación de espera agotado
+
+
+__________________________
+
+Log Entry : 
+02/03/2017 10:24:59
+Error in: http://localhost:58911/Reserved.ReportViewerWebControl.axd?OpType=SessionKeepAlive&ControlID=709884035e86492e9bd9cd4d309b65a7&Mode=true. Error Message:System.ComponentModel.Win32Exception
+Tiempo de espera de la operación de espera agotado
+
+
+__________________________
+
+Log Entry : 
+02/03/2017 10:25:01
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:System.Net.Mail.SmtpException
+Error al enviar correo.
+   en System.Net.Mail.SmtpClient.Send(MailMessage message)
+   en ProntoFuncionesGenerales.MandaEmailSimple(String Para, String Asunto, String Cuerpo, String De, String SmtpServer, String SmtpUser, String SmtpPass, String sStringGenerarAdjunto, Int64 SmtpPort, Int32 EnableSSL, String CCO, String img)
+   en ASP.global_asax.Application_Error(Object sender, EventArgs e)
+System
+__________________________
+
+Log Entry : 
+02/03/2017 10:25:01
+Error in: http://localhost:58911/Reserved.ReportViewerWebControl.axd?OpType=SessionKeepAlive&ControlID=709884035e86492e9bd9cd4d309b65a7&Mode=true. Error Message:System.Net.Mail.SmtpException
+Error al enviar correo.
+   en System.Net.Mail.SmtpClient.Send(MailMessage message)
+   en ProntoFuncionesGenerales.MandaEmailSimple(String Para, String Asunto, String Cuerpo, String De, String SmtpServer, String SmtpUser, String SmtpPass, String sStringGenerarAdjunto, Int64 SmtpPort, Int32 EnableSSL, String CCO, String img)
+   en ASP.global_asax.Application_Error(Object sender, EventArgs e)
+System
+__________________________
+
+Log Entry : 
+02/03/2017 10:25:01
+Error in: http://localhost:58911/Reserved.ReportViewerWebControl.axd?OpType=SessionKeepAlive&ControlID=5f8a6692502e43f1b4e5f3b63c2d7463&Mode=true. Error Message:System.Net.Mail.SmtpException
+Error al enviar correo.
+   en System.Net.Mail.SmtpClient.Send(MailMessage message)
+   en ProntoFuncionesGenerales.MandaEmailSimple(String Para, String Asunto, String Cuerpo, String De, String SmtpServer, String SmtpUser, String SmtpPass, String sStringGenerarAdjunto, Int64 SmtpPort, Int32 EnableSSL, String CCO, String img)
+   en ASP.global_asax.Application_Error(Object sender, EventArgs e)
+System
+__________________________
+
+Log Entry : 
+02/03/2017 10:25:54
+Error in: . Error Message:System.ComponentModel.Win32Exception
+Tiempo de espera de la operación de espera agotado
+
+
+__________________________
+
+Log Entry : 
+02/03/2017 10:25:55
+Error in: . Error Message:System.Net.Mail.SmtpException
+Error al enviar correo.
+   en System.Net.Mail.SmtpClient.Send(MailMessage message)
+   en ProntoFuncionesGenerales.MandaEmailSimple(String Para, String Asunto, String Cuerpo, String De, String SmtpServer, String SmtpUser, String SmtpPass, String sStringGenerarAdjunto, Int64 SmtpPort, Int32 EnableSSL, String CCO, String img)
+   en ASP.global_asax.Application_Error(Object sender, EventArgs e)
+System
+__________________________
+
+Log Entry : 
+02/03/2017 11:00:15
+Error in: http://localhost:58911/ProntoWeb/Principal.aspx. Error Message:System.Threading.ThreadAbortException
+Subproceso anulado.
+   en System.Threading.Thread.AbortInternal()
+   en System.Threading.Thread.Abort(Object stateInfo)
+   en System.Web.HttpResponse.AbortCurrentThread()
+   en System.Web.HttpResponse.End()
+   en System.Web.HttpResponse.Redirect(String url, Boolean endResponse, Boolean permanent)
+   en System.Web.HttpResponse.Redirect(String url)
+   en Login.Page_Load(Object sender, EventArgs e) en C:\Users\Administrador\Documents\bdl\pronto\prontoweb\Login.aspx.vb:línea 171
+mscorlib
+__________________________
+
+Log Entry : 
+02/03/2017 11:01:30
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Generando informe para Listado general de cartas de porte (solo originales)
+__________________________
+
+Log Entry : 
+02/03/2017 11:01:32
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:  Informe: Descargas,  del 01/01/2017 al 31/01/2017    Corredor: A & J NARI SA       (Exporta: Entregas, Punto de venta: Todos, Criterio: ALGUNOS)
+__________________________
+
+Log Entry : 
+02/03/2017 11:01:34
+Error in: http://localhost:58911/Reserved.ReportViewerWebControl.axd?OpType=SessionKeepAlive&ControlID=709884035e86492e9bd9cd4d309b65a7&Mode=true. Error Message:Microsoft.Reporting.WebForms.AspNetSessionExpiredException
+ASP.NET session has expired or could not be found
+   en Microsoft.Reporting.WebForms.ViewerDataOperation..ctor()
+   en Microsoft.Reporting.WebForms.SessionKeepAliveOperation..ctor()
+   en Microsoft.Reporting.WebForms.HttpHandler.GetHandler(String operationType)
+   en Microsoft.Reporting.WebForms.HttpHandler.ProcessRequest(HttpContext context)
+   en System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   en System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+Microsoft.ReportViewer.WebForms
+__________________________
+
+Log Entry : 
+02/03/2017 11:01:40
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Generando sincro para AJNari 01/01/2017 31/01/2017 -1 1 -1 -1 -1 -1 -1 -1 Mariano
+__________________________
+
+Log Entry : 
+02/03/2017 11:01:41
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Generando sincro para AJNARI
+__________________________
+
+Log Entry : 
+02/03/2017 11:01:50
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:System.Threading.ThreadAbortException: Subproceso anulado.
+   en System.Threading.Thread.AbortInternal()
+   en System.Threading.Thread.Abort(Object stateInfo)
+   en System.Web.HttpResponse.AbortCurrentThread()
+   en System.Web.HttpResponse.End()
+   en CartaDePorteInformesConReportViewerSincronismos.btnDescargaSincro_Click(Object sender, EventArgs e) en C:\Users\Administrador\Documents\bdl\pronto\prontoweb\ProntoWeb\CartaDePorteInformesConReportViewerSincronismos.aspx.vb:línea 2457
+__________________________
+
+Log Entry : 
+02/03/2017 11:02:08
+Error in: http://localhost:58911/ProntoWeb/SincronismosAutomaticos.aspx. Error Message:Generando sincro para AJNari
+__________________________
+
+Log Entry : 
+02/03/2017 11:02:40
+Error in: http://localhost:58911/ProntoWeb/SincronismosAutomaticos.aspx. Error Message:Generando sincro para AJNari
+__________________________
+
+Log Entry : 
+02/03/2017 11:03:04
+Error in: http://localhost:58911/ProntoWeb/SincronismosAutomaticos.aspx. Error Message:System.Net.Mail.SmtpException
+Error al enviar correo.
+   en System.Net.Mail.SmtpClient.Send(MailMessage message)
+   en Pronto.ERP.Bll.EntidadManager.MandaEmail_Nuevo(String Para, String Asunto, String Cuerpo, String De, String SmtpServer, String SmtpUser, String SmtpPass, String sFileNameAdjunto, Int64 SmtpPort, Int32 EnableSSL, String CCO, String img, String friendlyname, String replyTo, Boolean isHtml, String inlinePNG, String inlinePNG2) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\EntidadManager.vb:línea 303
+System
+__________________________
+
+Log Entry : 
+02/03/2017 11:03:04
+Error in: http://localhost:58911/ProntoWeb/SincronismosAutomaticos.aspx. Error Message:buenosaires@williamsentregas.com.ar
+__________________________
+
+Log Entry : 
+02/03/2017 11:03:04
+Error in: http://localhost:58911/ProntoWeb/SincronismosAutomaticos.aspx. Error Message:mscalella911@gmail.com,mscalella911@gmail.com
+__________________________
+
+Log Entry : 
+02/03/2017 11:03:07
+Error in: http://localhost:58911/ProntoWeb/SincronismosAutomaticos.aspx. Error Message:System.Net.Mail.SmtpException
+Error al enviar correo.
+   en System.Net.Mail.SmtpClient.Send(MailMessage message)
+   en Pronto.ERP.Bll.EntidadManager.MandaEmail_Nuevo(String Para, String Asunto, String Cuerpo, String De, String SmtpServer, String SmtpUser, String SmtpPass, String sFileNameAdjunto, Int64 SmtpPort, Int32 EnableSSL, String CCO, String img, String friendlyname, String replyTo, Boolean isHtml, String inlinePNG, String inlinePNG2) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\EntidadManager.vb:línea 439
+   en SincronismosAutomaticos.Enviar(String sincro, String sEmail, String& sErr, Boolean bvistaPrevia) en C:\Users\Administrador\Documents\bdl\pronto\prontoweb\ProntoWeb\SincronismosAutomaticos.aspx.vb:línea 619
+System
+__________________________
+
+Log Entry : 
+02/03/2017 11:03:31
+Error in: http://localhost:58911/ProntoWeb/SincronismosAutomaticos.aspx. Error Message:Generando sincro para A.C.A.
+__________________________
+
+Log Entry : 
+02/03/2017 11:04:25
+Error in: http://localhost:58911/ProntoWeb/SincronismosAutomaticos.aspx. Error Message:System.Data.StrongTypingException
+The value for column 'Observaciones' in table 'wCartasDePorte_TX_InformesCorregido' is DBNull.
+   en WillyInformesDataSet.wCartasDePorte_TX_InformesCorregidoRow.get_Observaciones() en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\WillyInformesDataSet7.Designer.vb:línea 3031
+   en Pronto.ERP.Bll.SincronismosWilliamsManager.GenerarSincro(String sSincronismo, String& sErroresRef, String SC, String sUrlDominio, String& sTituloFiltroUsado, enumCDPestado estado, String QueContenga, Int32 idVendedor, Int32 idCorredor, Int32 idDestinatario, Int32 idIntermediario, Int32 idRComercial, Int32 idArticulo, Int32 idProcedencia, Int32 idDestino, FiltroANDOR AplicarANDuORalFiltro, String ModoExportacion, DateTime sDesde, DateTime sHasta, Int32 puntoventa, String optDivisionSyngenta, Boolean bTraerDuplicados, String Contrato, String QueContenga2, Int32 idClienteAuxiliar, Int32& registrosFiltrados, Int64 maximumRows) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\SincronismosWilliamsManager.vb:línea 632
+BusinessLogic
+__________________________
+
+Log Entry : 
+02/03/2017 11:04:29
+Error in: http://localhost:58911/ProntoWeb/SincronismosAutomaticos.aspx. Error Message:System.Data.StrongTypingException
+The value for column 'Observaciones' in table 'wCartasDePorte_TX_InformesCorregido' is DBNull.
+   en WillyInformesDataSet.wCartasDePorte_TX_InformesCorregidoRow.get_Observaciones() en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\WillyInformesDataSet7.Designer.vb:línea 3031
+   en Pronto.ERP.Bll.SincronismosWilliamsManager.GenerarSincro(String sSincronismo, String& sErroresRef, String SC, String sUrlDominio, String& sTituloFiltroUsado, enumCDPestado estado, String QueContenga, Int32 idVendedor, Int32 idCorredor, Int32 idDestinatario, Int32 idIntermediario, Int32 idRComercial, Int32 idArticulo, Int32 idProcedencia, Int32 idDestino, FiltroANDOR AplicarANDuORalFiltro, String ModoExportacion, DateTime sDesde, DateTime sHasta, Int32 puntoventa, String optDivisionSyngenta, Boolean bTraerDuplicados, String Contrato, String QueContenga2, Int32 idClienteAuxiliar, Int32& registrosFiltrados, Int64 maximumRows) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\SincronismosWilliamsManager.vb:línea 684
+BusinessLogic
+__________________________
+
+Log Entry : 
+02/03/2017 11:07:00
+Error in: http://localhost:58911/ProntoWeb/SincronismosAutomaticos.aspx. Error Message:System.Data.StrongTypingException
+The value for column 'Humedad' in table 'wCartasDePorte_TX_InformesCorregido' is DBNull.
+   en WillyInformesDataSet.wCartasDePorte_TX_InformesCorregidoRow.get_Humedad() en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\WillyInformesDataSet7.Designer.vb:línea 3383
+   en Pronto.ERP.Bll.SincronismosWilliamsManager.Sincronismo_ACA(String SC, wCartasDePorte_TX_InformesCorregidoDataTable pDataTable, String titulo, String sWHERE, String& sErrores) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\SincronismosWilliamsManager.vb:línea 17410
+   en Pronto.ERP.Bll.SincronismosWilliamsManager.GenerarSincro(String sSincronismo, String& sErroresRef, String SC, String sUrlDominio, String& sTituloFiltroUsado, enumCDPestado estado, String QueContenga, Int32 idVendedor, Int32 idCorredor, Int32 idDestinatario, Int32 idIntermediario, Int32 idRComercial, Int32 idArticulo, Int32 idProcedencia, Int32 idDestino, FiltroANDOR AplicarANDuORalFiltro, String ModoExportacion, DateTime sDesde, DateTime sHasta, Int32 puntoventa, String optDivisionSyngenta, Boolean bTraerDuplicados, String Contrato, String QueContenga2, Int32 idClienteAuxiliar, Int32& registrosFiltrados, Int64 maximumRows) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\SincronismosWilliamsManager.vb:línea 697
+BusinessLogic
+__________________________
+
+Log Entry : 
+02/03/2017 11:07:06
+Error in: http://localhost:58911/ProntoWeb/SincronismosAutomaticos.aspx. Error Message:System.Data.StrongTypingException
+The value for column 'Humedad' in table 'wCartasDePorte_TX_InformesCorregido' is DBNull.
+   en WillyInformesDataSet.wCartasDePorte_TX_InformesCorregidoRow.get_Humedad() en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\WillyInformesDataSet7.Designer.vb:línea 3383
+   en Pronto.ERP.Bll.SincronismosWilliamsManager.Sincronismo_ACA(String SC, wCartasDePorte_TX_InformesCorregidoDataTable pDataTable, String titulo, String sWHERE, String& sErrores) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\SincronismosWilliamsManager.vb:línea 17410
+   en Pronto.ERP.Bll.SincronismosWilliamsManager.GenerarSincro(String sSincronismo, String& sErroresRef, String SC, String sUrlDominio, String& sTituloFiltroUsado, enumCDPestado estado, String QueContenga, Int32 idVendedor, Int32 idCorredor, Int32 idDestinatario, Int32 idIntermediario, Int32 idRComercial, Int32 idArticulo, Int32 idProcedencia, Int32 idDestino, FiltroANDOR AplicarANDuORalFiltro, String ModoExportacion, DateTime sDesde, DateTime sHasta, Int32 puntoventa, String optDivisionSyngenta, Boolean bTraerDuplicados, String Contrato, String QueContenga2, Int32 idClienteAuxiliar, Int32& registrosFiltrados, Int64 maximumRows) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\SincronismosWilliamsManager.vb:línea 1765
+   en SincronismosAutomaticos.Enviar(String sincro, String sEmail, String& sErr, Boolean bvistaPrevia) en C:\Users\Administrador\Documents\bdl\pronto\prontoweb\ProntoWeb\SincronismosAutomaticos.aspx.vb:línea 562
+BusinessLogic
+__________________________
+
+Log Entry : 
+02/03/2017 11:07:16
+Error in: http://localhost:58911/ProntoWeb/SincronismosAutomaticos.aspx. Error Message:Generando sincro para AJNari
+__________________________
+
+Log Entry : 
+02/03/2017 11:07:33
+Error in: http://localhost:58911/ProntoWeb/SincronismosAutomaticos.aspx. Error Message:System.Net.Mail.SmtpException
+Error al enviar correo.
+   en System.Net.Mail.SmtpClient.Send(MailMessage message)
+   en Pronto.ERP.Bll.EntidadManager.MandaEmail_Nuevo(String Para, String Asunto, String Cuerpo, String De, String SmtpServer, String SmtpUser, String SmtpPass, String sFileNameAdjunto, Int64 SmtpPort, Int32 EnableSSL, String CCO, String img, String friendlyname, String replyTo, Boolean isHtml, String inlinePNG, String inlinePNG2) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\EntidadManager.vb:línea 303
+System
+__________________________
+
+Log Entry : 
+02/03/2017 11:07:33
+Error in: http://localhost:58911/ProntoWeb/SincronismosAutomaticos.aspx. Error Message:buenosaires@williamsentregas.com.ar
+__________________________
+
+Log Entry : 
+02/03/2017 11:07:33
+Error in: http://localhost:58911/ProntoWeb/SincronismosAutomaticos.aspx. Error Message:mscalella911@gmail.com
+__________________________
+
+Log Entry : 
+02/03/2017 11:07:35
+Error in: http://localhost:58911/ProntoWeb/SincronismosAutomaticos.aspx. Error Message:System.Net.Mail.SmtpException
+Error al enviar correo.
+   en System.Net.Mail.SmtpClient.Send(MailMessage message)
+   en Pronto.ERP.Bll.EntidadManager.MandaEmail_Nuevo(String Para, String Asunto, String Cuerpo, String De, String SmtpServer, String SmtpUser, String SmtpPass, String sFileNameAdjunto, Int64 SmtpPort, Int32 EnableSSL, String CCO, String img, String friendlyname, String replyTo, Boolean isHtml, String inlinePNG, String inlinePNG2) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\EntidadManager.vb:línea 439
+   en SincronismosAutomaticos.Enviar(String sincro, String sEmail, String& sErr, Boolean bvistaPrevia) en C:\Users\Administrador\Documents\bdl\pronto\prontoweb\ProntoWeb\SincronismosAutomaticos.aspx.vb:línea 619
+System
+__________________________
