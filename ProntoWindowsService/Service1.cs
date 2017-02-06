@@ -29,6 +29,7 @@ namespace ProntoWindowsService
         protected Thread m_thread;
         protected Thread m_thread2;
         protected Thread m_thread3;
+        protected Thread m_thread4;
 
         static protected ManualResetEvent m_shutdownEvent;
         static protected TimeSpan m_delay;
@@ -71,7 +72,7 @@ namespace ProntoWindowsService
             DebugMode();
 
             m_thread = new Thread(DoWorkSoloOCR);
-            m_thread.Name = "MyWorker";
+            m_thread.Name = "MyWorker1";
             m_thread.IsBackground = false;
             m_thread.Start();
 
@@ -94,10 +95,20 @@ namespace ProntoWindowsService
             ////http://stackoverflow.com/questions/11985308/multiple-threads-in-windows-service
 
             m_thread3 = new Thread(DoWorkSoloOCR);
-            m_thread3.Name = "MyWorker2";
+            m_thread3.Name = "MyWorker3";
             m_thread3.IsBackground = false;
             m_thread3.Start();
 
+
+            System.Threading.Thread.Sleep(1000);
+
+
+            ////http://stackoverflow.com/questions/11985308/multiple-threads-in-windows-service
+
+            m_thread4 = new Thread(DoWorkSoloOCR);
+            m_thread4.Name = "MyWorker4";
+            m_thread4.IsBackground = false;
+            m_thread4.Start();
 
 
             ////FlexiCapture Engine must be accessed on the same thread as it was initialized
@@ -126,9 +137,11 @@ namespace ProntoWindowsService
             // wait for the thread to stop giving it 10 seconds
             m_thread.Join(20000);
 
-            m_thread2.Join(20000);
+            m_thread2.Join(10000);
 
-            m_thread3.Join(20000);
+            m_thread3.Join(10000);
+
+            m_thread4.Join(10000);
 
             // Temillas con la parada del servicio
             //http://stackoverflow.com/questions/22534330/windows-service-onstop-wait-for-finished-processing

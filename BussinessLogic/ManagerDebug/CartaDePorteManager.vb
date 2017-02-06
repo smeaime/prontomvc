@@ -15187,10 +15187,11 @@ Public Class CartaDePorteManager
 
 
                     'cuando dicen 'puerto' se refieren al destino tambien
+                 
                     cp.puerto = If(dbc.DestinoDesc, "")
                     cp.codonccapuerto = Val(dbc.DestinoCodigoONCAA)
                     cp.localidaddestino = dbc.DestinoLocalidadDesc
-                    cp.codonccalocalidadpuerto = dbc.DestinoLocalidadCodigoONCAA
+                    cp.codonccalocalidadpuerto = Val(dbc.DestinoLocalidadCodigoONCAA)
                     cp.codonccaprovinciapuerto = CodigoProvincia(dbc.DestinoProvinciaDesc)
 
 
