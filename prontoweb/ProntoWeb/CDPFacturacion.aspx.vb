@@ -3278,7 +3278,7 @@ Partial Class CDPFacturacion
 
 
 
-        LogicaFacturacion.GridCheckboxPersistenciaBulk(GridView1, HFSC.Value, Session.SessionID, TraerLista(GridView1))
+        LogicaFacturacion.GridCheckboxPersistenciaBulk(HFSC.Value, Session.SessionID, TraerLista(GridView1))
 
 
 

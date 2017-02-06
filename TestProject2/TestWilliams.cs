@@ -971,14 +971,18 @@ namespace ProntoMVC.Tests
             string fListaIDs = "";
             string SessionID = "sfsfasfd12asdfsa3123";
             int cmbPuntoVenta = -1;
-            string cmbAgruparArticulosPor = "";
+            string cmbAgruparArticulosPor = "99500,99501";
             bool SeEstaSeparandoPorCorredor = false;
 
             ViewState["pagina"] = 1;
             ViewState["sesionId"] = SessionID;
             ViewState["filas"] = 10;
 
-            //LogicaFacturacion.GridCheckboxPersistenciaBulk(GridView1, HFSC.Value, Session.SessionID, TraerLista(GridView1))
+            string[] tokens = fListaIDs.Split(',');
+            var l= tokens.ToList();
+
+
+            LogicaFacturacion.GridCheckboxPersistenciaBulk(SC, SessionID, l.Select(int.Parse).ToList());
 
 
             var output = LogicaFacturacion.PreviewDetalladoDeLaGeneracionEnPaso2(optFacturarA, txtFacturarATerceros, SC,

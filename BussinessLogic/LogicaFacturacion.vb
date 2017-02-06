@@ -1709,7 +1709,7 @@ Public Class LogicaFacturacion
         'en los casos que se pone facturar a corredor
     End Function
 
-    Shared Function GridCheckboxPersistenciaBulk(ByVal g As GridView, ByVal sc As String, ByVal sesionIdentificador As String, l As List(Of Integer))
+    Shared Function GridCheckboxPersistenciaBulk(ByVal sc As String, ByVal sesionIdentificador As String, l As List(Of Integer))
 
 
 
@@ -8657,7 +8657,7 @@ Public Class LogicaFacturacion
         'http://msdn.microsoft.com/en-us/library/aa195814(office.11).aspx
         'http://www.newsgrupos.com/microsoft-public-es-excel/304517-problemas-con-comas-y-puntos-al-guardar-de-excel-un-archivo-txtmediante-vb.html
 
-        Exc.Workbooks.OpenText(pFileName, , , , Excel.XlTextQualifier.xlTextQualifierNone, , True, , , , , , , , ".")
+        Exc.Workbooks.OpenText(pFileName, , , , Excel.XlTextQualifier.xlTextQualifierNone, , True, , , , , , , , ".", ",")
 
         '/////////////////////////////////////////////////////////////////////
         '/////////////////////////////////////////////////////////////////////
