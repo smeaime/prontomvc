@@ -11693,11 +11693,31 @@ Public Class CartaDePorteManager
     End Function
 
     Public Shared Function IdClienteEquivalenteDelIdVendedor(ByVal IdVendedor As Long, ByVal SC As String) As Long
-        Dim vendedornombre As String = NombreVendedor(SC, IdVendedor)
 
-        Dim idcliente As String = BuscaIdClientePreciso(vendedornombre, SC)
+        Using db As New DemoProntoEntities(Auxiliares.FormatearConexParaEntityFramework(Encriptar(SC)))
 
-        Return idcliente
+
+            '        buscar por cuit, y si no por razon social
+
+            Dim o = db.Vendedores.Find(IdVendedor)
+            Dim cuit = o.Cuit.Replace("-", "")
+
+            Dim c = db.Clientes.Where(Function(x) x.Cuit.Replace("-", "") = cuit).FirstOrDefault
+
+            If c Is Nothing Then
+                Dim idcliente As String = BuscaIdClientePreciso(o.Nombre, SC)
+
+                Return idcliente
+
+            Else
+
+                Return c.IdCliente
+
+            End If
+
+
+
+        End Using
     End Function
 
 
@@ -16252,21 +16272,21 @@ Public Class barras
 
 
 
-    Shared Function EnviarFacturaElectronicaEMail(desde As Integer, hasta As Integer, cliente As String, SC As String, bVistaPrevia As Boolean, sEmail As String) As String
+    Shared Function EnviarFacturaElectronicaEMail(desde As Integer, hasta As Integer, SC As String, bVistaPrevia As Boolean, sEmail As String) As String
         Dim listaf = New Generic.List(Of Integer)
 
         For idfac = desde To hasta
             listaf.Add(idfac)
         Next
 
-        Return EnviarFacturaElectronicaEMail(listaf, cliente, SC, bVistaPrevia, sEmail)
+        Return EnviarFacturaElectronicaEMail(listaf, SC, bVistaPrevia, sEmail)
 
     End Function
 
 
 
 
-    Shared Function EnviarFacturaElectronicaEMail(ByVal Facturas As Generic.IList(Of Integer), cliente As String, SC As String, bVistaPrevia As Boolean, sEmail As String) As String
+    Shared Function EnviarFacturaElectronicaEMail(ByVal Facturas As Generic.IList(Of Integer), SC As String, bVistaPrevia As Boolean, sEmail As String) As String
 
 
 

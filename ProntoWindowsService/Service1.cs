@@ -184,7 +184,6 @@ namespace ProntoWindowsService
         static public void DoWorkSoloOCR()
         {
 
-
             IEngine engine = null;
             IEngineLoader engineLoader = null;
             IFlexiCaptureProcessor processor = null;
@@ -193,201 +192,226 @@ namespace ProntoWindowsService
             string idthread = "hilo #" + Thread.CurrentThread.ManagedThreadId.ToString() + ": ";
 
 
-            //if (Debugger.IsAttached) Debugger.Break();
-
-            Pronto.ERP.Bll.ErrHandler2.WriteError(idthread + "ssdssss");
-
-
-            ClassFlexicapture.Log(idthread + "Empieza");
-
-            Initialize();
-
-
-
-
-            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-            string cadena = Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC1));
-
-            ClassFlexicapture.Log(idthread + "CONEXION: " + cadena);
-            Console.WriteLine(idthread + "CONEXION: " + cadena);
 
             try
             {
-                DemoProntoEntities db = new DemoProntoEntities(cadena);
-                var q = db.Clientes.Take(1).ToList();
+
+
+                //if (Debugger.IsAttached) Debugger.Break();
+
+                Pronto.ERP.Bll.ErrHandler2.WriteError(idthread + "ssdssss");
+
+
+                ClassFlexicapture.Log(idthread + "Empieza");
+
+                Initialize();
+
+
+
+
+                /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+                string cadena = Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC1));
+
+                ClassFlexicapture.Log(idthread + "CONEXION: " + cadena);
+                Console.WriteLine(idthread + "CONEXION: " + cadena);
+
+                try
+                {
+                    DemoProntoEntities db = new DemoProntoEntities(cadena);
+                    var q = db.Clientes.Take(1).ToList();
+
+                }
+                catch (Exception x)
+                {
+                    ClassFlexicapture.Log(idthread + x.ToString());
+                    CartaDePorteManager.MandarMailDeError(x);
+                    Console.WriteLine(idthread + x.ToString());
+                    return;
+                }
+
+
+                /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+                ClassFlexicapture.Log(idthread + "llamo a iniciamotor");
+
+                ClassFlexicapture.IniciaMotor(ref engine, ref  engineLoader, ref  processor, plantilla, ClassFlexicapture.EngineLoadingMode.LoadAsWorkprocess);
+
+
+
+                ClassFlexicapture.Log(idthread + "Motor iniciado");
+
+
+                // http://www.codeproject.com/Articles/3938/Creating-a-C-Service-Step-by-Step-Lesson-I
+
+                //Console.WriteLine(idthread + "Busca imagenes Pendientes");
+
+
+                bool bSignaled = false;
+
+                List<ProntoMVC.Data.FuncionesGenericasCSharp.Resultados> resultado, resultado2;
+
+                while (true)
+                {
+                    // wait for the event to be signaled
+                    // or for the configured delay
+
+                    // let's do some work
+                    //no volver a cargar planilla!!!!
+
+
+                    try
+                    {
+
+
+                        if ((bSignaled == true && !Debugger.IsAttached) || bForzarShutdown) break;
+                        bSignaled = m_shutdownEvent.WaitOne(m_delay, true);
+                        if ((bSignaled == true && !Debugger.IsAttached) || bForzarShutdown) break;
+
+                        resultado = null;
+                        resultado = Tanda(SC1, DirApp1, ref engine, ref processor, idthread);
+
+
+                        resultado2 = null;
+                        resultado2 = Tanda(SC2, DirApp2, ref engine, ref processor, idthread);
+
+
+
+                        //TandaPegatinas(SC1, DirApp1, idthread);
+                        //TandaPegatinas(SC2, DirApp2, idthread);
+
+
+                        // esta bien hacerlo asi? -separar la tarea de pegatinas en un hilo aparte
+
+
+
+
+                        if (resultado == null && resultado2 == null)
+                        {
+                            bSignaled = m_shutdownEvent.WaitOne(m_delay, true);
+                            if ((bSignaled == true && !Debugger.IsAttached) || bForzarShutdown) break;
+                            System.Threading.Thread.Sleep(1000 * 15);
+                            if ((bSignaled == true && !Debugger.IsAttached) || bForzarShutdown) break;
+                            System.Threading.Thread.Sleep(1000 * 15);
+                            Console.Write(".");
+                        }
+
+                    }
+
+                    catch (System.Runtime.InteropServices.COMException x2)
+                    {
+                        /*
+    System.Runtime.InteropServices.COMException (0x80004005): Error communicating with ABBYY Product 
+         *                  Licensing Service on 186.18.248.116: The RPC server is unavailable.
+            Diagnostic Message: 1710(0x000006BA) 1442(0x000006BA) 323(0x000006BA) 313(0x000004D5) 311(0x0000274C) 318(0x0000274C)
+    at FCEngine.IFlexiCaptureProcessor.RecognizeNextDocument()
+    at ProntoFlexicapture.ClassFlexicapture.ProcesarCartasBatchConFlexicapture(IEngine& engine, IFlexiCaptureProcessor& processor, String plantilla, List`1 imagenes, String SC, String DirApp, Boolean bProcesar, String& sError) in c:\Users\Administrador\Documents\bdl\pronto\InterfazFlexicapture\prontoflexicapture.cs:line 209
+    at ProntoFlexicapture.ClassFlexicapture.ProcesarCartasBatchConFlexicapture_SacandoImagenesDelDirectorio(IEngine& engine, IFlexiCaptureProcessor& processor, String plantilla, Int32 cuantasImagenes, String SC, String DirApp, Boolean bProcesar, String& sError) in c:\Users\Administrador\Documents\bdl\pronto\InterfazFlexicapture\prontoflexicapture.cs:line 123
+    at ProntoWindowsService.Service1.DoWork() in c:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\Service1.cs:line 197
+        */
+
+
+                        /*
+                         * 
+                         * 
+                         * 
+                        System.OutOfMemoryException: Insufficient memory to continue the execution of the program.
+       at FCEngine.IFlexiCaptureProcessor.RecognizeNextDocument()
+       at ProntoFlexicapture.ClassFlexicapture.ProcesarCartasBatchConFlexicapture(IEngine& engine, IFlexiCaptureProcessor& processor, String plantilla, List`1 imagenes, String SC, String DirApp, Boolean bProcesar, String& sError) in c:\Users\Administrador\Documents\bdl\pronto\InterfazFlexicapture\prontoflexicapture.cs:line 233
+       at ProntoFlexicapture.ClassFlexicapture.ProcesarCartasBatchConFlexicapture_SacandoImagenesDelDirectorio(IEngine& engine, IFlexiCaptureProcessor& processor, String plantilla, Int32 cuantasImagenes, String SC, String DirApp, Boolean bProcesar, String& sError) in c:\Users\Administrador\Documents\bdl\pronto\InterfazFlexicapture\prontoflexicapture.cs:line 127
+       at ProntoWindowsService.Service1.Tanda(String SC, String DirApp) in c:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\Service1.cs:line 328
+       at ProntoWindowsService.Service1.DoWork() in c:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\Service1.cs:line 211
+
+
+   
+        with the event: 
+
+    System.Runtime.InteropServices.COMException (0x8000FFFF): Error interno del programa:
+    FCESupport\FCESupportImpl.h, 42.
+       at FCEngine.IFlexiCaptureProcessor.SetCustomImageSource(IImageSource ImageSource)
+       at ProntoFlexicapture.ClassFlexicapture.ProcesarCartasBatchConFlexicapture(IEngine& engine, IFlexiCaptureProcessor& processor, String plantilla, List`1 imagenes, String SC, String DirApp, Boolean bProcesar, String& sError) in c:\Users\Administrador\Documents\bdl\pronto\InterfazFlexicapture\prontoflexicapture.cs:line 198
+       at ProntoFlexicapture.ClassFlexicapture.ProcesarCartasBatchConFlexicapture_SacandoImagenesDelDirectorio(IEngine& engine, IFlexiCaptureProcessor& processor, String plantilla, Int32 cuantasImagenes, String SC, String DirApp, Boolean bProcesar, String& sError) in c:\Users\Administrador\Documents\bdl\pronto\InterfazFlexicapture\prontoflexicapture.cs:line 127
+       at ProntoWindowsService.Service1.Tanda(String SC, String DirApp) in c:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\Service1.cs:line 300
+
+
+                         * 
+                         * * 
+                         * 
+                         * 
+                         * 
+                         * */
+
+
+
+
+                        CartaDePorteManager.MandarMailDeError(x2);
+
+                        ClassFlexicapture.Log(idthread + x2.ToString());
+                        ClassFlexicapture.Log(idthread + "Problemas con la licencia? Paro y reinicio");
+                        Pronto.ERP.Bll.ErrHandler2.WriteError(idthread + x2);
+
+                        //hacer un unload y cargar de nuevo?
+
+                        ClassFlexicapture.unloadEngine(ref engine, ref engineLoader);
+                        processor = null;
+
+                        ClassFlexicapture.IniciaMotor(ref engine, ref  engineLoader, ref  processor, plantilla); // explota en loadengine
+                        //cuantas veces debo probar de nuevo?
+
+                        ClassFlexicapture.Log(idthread + "funciona?");
+
+                    }
+
+                    catch (Exception x)
+                    {
+
+                        CartaDePorteManager.MandarMailDeError(x);
+
+                        ClassFlexicapture.Log(idthread + x.ToString());
+                        Pronto.ERP.Bll.ErrHandler2.WriteError(x);
+                    }
+                    finally
+                    {
+                        ClassFlexicapture.Log(idthread + " se retira");
+                    }
+
+
+                }
+
+
+
+
+                ClassFlexicapture.unloadEngine(ref engine, ref engineLoader);
 
             }
             catch (Exception x)
             {
+
                 ClassFlexicapture.Log(idthread + x.ToString());
-                CartaDePorteManager.MandarMailDeError(x);
-                Console.WriteLine(idthread + x.ToString());
-                return;
+                //throw;
             }
-
-
-            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-
-
-
-            ClassFlexicapture.Log(idthread + "llamo a iniciamotor");
-
-            ClassFlexicapture.IniciaMotor(ref engine, ref  engineLoader, ref  processor, plantilla, ClassFlexicapture.EngineLoadingMode.LoadAsWorkprocess);
-
-
-
-            ClassFlexicapture.Log(idthread + "Motor iniciado");
-
-
-            // http://www.codeproject.com/Articles/3938/Creating-a-C-Service-Step-by-Step-Lesson-I
-
-            //Console.WriteLine(idthread + "Busca imagenes Pendientes");
-
-
-            bool bSignaled = false;
-
-            List<ProntoMVC.Data.FuncionesGenericasCSharp.Resultados> resultado, resultado2;
-
-            while (true)
+            finally
             {
-                // wait for the event to be signaled
-                // or for the configured delay
-
-                // let's do some work
-                //no volver a cargar planilla!!!!
 
 
-                try
-                {
-
-
-                    if ((bSignaled == true && !Debugger.IsAttached) || bForzarShutdown) break;
-                    bSignaled = m_shutdownEvent.WaitOne(m_delay, true);
-                    if ((bSignaled == true && !Debugger.IsAttached) || bForzarShutdown) break;
-
-                    resultado = null;
-                    resultado = Tanda(SC1, DirApp1, ref engine, ref processor, idthread);
-
-
-                    resultado2 = null;
-                    resultado2 = Tanda(SC2, DirApp2, ref engine, ref processor, idthread);
-
-
-
-                    //TandaPegatinas(SC1, DirApp1, idthread);
-                    //TandaPegatinas(SC2, DirApp2, idthread);
-
-
-                    // esta bien hacerlo asi? -separar la tarea de pegatinas en un hilo aparte
-
-
-
-
-                    if (resultado == null && resultado2 == null)
-                    {
-                        bSignaled = m_shutdownEvent.WaitOne(m_delay, true);
-                        if ((bSignaled == true && !Debugger.IsAttached) || bForzarShutdown) break;
-                        System.Threading.Thread.Sleep(1000 * 15);
-                        if ((bSignaled == true && !Debugger.IsAttached) || bForzarShutdown) break;
-                        System.Threading.Thread.Sleep(1000 * 15);
-                        Console.Write(".");
-                    }
-
-                }
-
-                catch (System.Runtime.InteropServices.COMException x2)
-                {
-                    /*
-System.Runtime.InteropServices.COMException (0x80004005): Error communicating with ABBYY Product 
-     *                  Licensing Service on 186.18.248.116: The RPC server is unavailable.
-        Diagnostic Message: 1710(0x000006BA) 1442(0x000006BA) 323(0x000006BA) 313(0x000004D5) 311(0x0000274C) 318(0x0000274C)
-at FCEngine.IFlexiCaptureProcessor.RecognizeNextDocument()
-at ProntoFlexicapture.ClassFlexicapture.ProcesarCartasBatchConFlexicapture(IEngine& engine, IFlexiCaptureProcessor& processor, String plantilla, List`1 imagenes, String SC, String DirApp, Boolean bProcesar, String& sError) in c:\Users\Administrador\Documents\bdl\pronto\InterfazFlexicapture\prontoflexicapture.cs:line 209
-at ProntoFlexicapture.ClassFlexicapture.ProcesarCartasBatchConFlexicapture_SacandoImagenesDelDirectorio(IEngine& engine, IFlexiCaptureProcessor& processor, String plantilla, Int32 cuantasImagenes, String SC, String DirApp, Boolean bProcesar, String& sError) in c:\Users\Administrador\Documents\bdl\pronto\InterfazFlexicapture\prontoflexicapture.cs:line 123
-at ProntoWindowsService.Service1.DoWork() in c:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\Service1.cs:line 197
-    */
-
-
-                    /*
-                     * 
-                     * 
-                     * 
-                    System.OutOfMemoryException: Insufficient memory to continue the execution of the program.
-   at FCEngine.IFlexiCaptureProcessor.RecognizeNextDocument()
-   at ProntoFlexicapture.ClassFlexicapture.ProcesarCartasBatchConFlexicapture(IEngine& engine, IFlexiCaptureProcessor& processor, String plantilla, List`1 imagenes, String SC, String DirApp, Boolean bProcesar, String& sError) in c:\Users\Administrador\Documents\bdl\pronto\InterfazFlexicapture\prontoflexicapture.cs:line 233
-   at ProntoFlexicapture.ClassFlexicapture.ProcesarCartasBatchConFlexicapture_SacandoImagenesDelDirectorio(IEngine& engine, IFlexiCaptureProcessor& processor, String plantilla, Int32 cuantasImagenes, String SC, String DirApp, Boolean bProcesar, String& sError) in c:\Users\Administrador\Documents\bdl\pronto\InterfazFlexicapture\prontoflexicapture.cs:line 127
-   at ProntoWindowsService.Service1.Tanda(String SC, String DirApp) in c:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\Service1.cs:line 328
-   at ProntoWindowsService.Service1.DoWork() in c:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\Service1.cs:line 211
-
-
-   
-    with the event: 
-
-System.Runtime.InteropServices.COMException (0x8000FFFF): Error interno del programa:
-FCESupport\FCESupportImpl.h, 42.
-   at FCEngine.IFlexiCaptureProcessor.SetCustomImageSource(IImageSource ImageSource)
-   at ProntoFlexicapture.ClassFlexicapture.ProcesarCartasBatchConFlexicapture(IEngine& engine, IFlexiCaptureProcessor& processor, String plantilla, List`1 imagenes, String SC, String DirApp, Boolean bProcesar, String& sError) in c:\Users\Administrador\Documents\bdl\pronto\InterfazFlexicapture\prontoflexicapture.cs:line 198
-   at ProntoFlexicapture.ClassFlexicapture.ProcesarCartasBatchConFlexicapture_SacandoImagenesDelDirectorio(IEngine& engine, IFlexiCaptureProcessor& processor, String plantilla, Int32 cuantasImagenes, String SC, String DirApp, Boolean bProcesar, String& sError) in c:\Users\Administrador\Documents\bdl\pronto\InterfazFlexicapture\prontoflexicapture.cs:line 127
-   at ProntoWindowsService.Service1.Tanda(String SC, String DirApp) in c:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\Service1.cs:line 300
-
-
-                     * 
-                     * * 
-                     * 
-                     * 
-                     * 
-                     * */
-
-
-
-
-                    CartaDePorteManager.MandarMailDeError(x2);
-
-                    ClassFlexicapture.Log(idthread + x2.ToString());
-                    ClassFlexicapture.Log(idthread + "Problemas con la licencia? Paro y reinicio");
-                    Pronto.ERP.Bll.ErrHandler2.WriteError(idthread + x2);
-
-                    //hacer un unload y cargar de nuevo?
-
-                    ClassFlexicapture.unloadEngine(ref engine, ref engineLoader);
-                    processor = null;
-
-                    ClassFlexicapture.IniciaMotor(ref engine, ref  engineLoader, ref  processor, plantilla); // explota en loadengine
-                    //cuantas veces debo probar de nuevo?
-
-                    ClassFlexicapture.Log(idthread + "funciona?");
-
-                }
-
-                catch (Exception x)
-                {
-
-                    CartaDePorteManager.MandarMailDeError(x);
-
-                    ClassFlexicapture.Log(idthread + x.ToString());
-                    Pronto.ERP.Bll.ErrHandler2.WriteError(x);
-                }
-                finally
-                {
-
-                }
+                ClassFlexicapture.Log(idthread + "Se apagó el motor, chau");
 
 
             }
-            //ClassFlexicapture.Log(x.ToString());
 
-            ClassFlexicapture.unloadEngine(ref engine, ref engineLoader);
-            ClassFlexicapture.Log(idthread + "Se apagó el motor, chau");
+
+            //ClassFlexicapture.Log(x.ToString());
 
             //se podria intentar cerrar todos los FCEngine vivos?
 
@@ -756,3 +780,10 @@ FCESupport\FCESupportImpl.h, 42.
         }
     }
 }
+
+
+
+
+
+
+
