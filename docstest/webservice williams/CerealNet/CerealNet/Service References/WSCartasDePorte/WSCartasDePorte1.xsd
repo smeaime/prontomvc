@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://wsPosicion/" targetNamespace="http://wsPosicion/" version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="cPposiafip" type="tns:cPposiafip" />
+  <xs:element name="cartaPorte" type="tns:cartaPorte" />
+  <xs:element name="obtenerDescargas" type="tns:obtenerDescargas" />
+  <xs:element name="obtenerDescargasResponse" type="tns:obtenerDescargasResponse" />
+  <xs:element name="obtenerEstadoServicio" type="tns:obtenerEstadoServicio" />
+  <xs:element name="obtenerEstadoServicioResponse" type="tns:obtenerEstadoServicioResponse" />
+  <xs:element name="obtenerPosicion" type="tns:obtenerPosicion" />
+  <xs:element name="obtenerPosicionResponse" type="tns:obtenerPosicionResponse" />
+  <xs:complexType name="obtenerDescargas">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="usuario" type="xs:string" />
+      <xs:element minOccurs="0" name="clave" type="xs:string" />
+      <xs:element minOccurs="0" name="cuit" type="xs:string" />
+      <xs:element minOccurs="0" name="fecha_desde" type="xs:string" />
+      <xs:element minOccurs="0" name="fecha_hasta" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="obtenerDescargasResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="tns:respuestaEntrega" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="respuestaEntrega">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="codigoResultado" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="descargas" nillable="true" type="tns:cartaPorte" />
+      <xs:element minOccurs="0" name="descripcion" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="cartaPorte">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="brutodest" type="xs:int" />
+      <xs:element minOccurs="0" name="CPoriginal" type="xs:string" />
+      <xs:element minOccurs="0" name="calidad" type="xs:string" />
+      <xs:element name="cartaporte" type="xs:int" />
+      <xs:element minOccurs="0" name="codmerca" type="xs:int" />
+      <xs:element minOccurs="0" name="codonccalocalidadpuerto" type="xs:int" />
+      <xs:element minOccurs="0" name="codonccalocalproc" type="xs:int" />
+      <xs:element minOccurs="0" name="codonccaprovincialproc" type="xs:int" />
+      <xs:element minOccurs="0" name="codonccaprovinciapuerto" type="xs:int" />
+      <xs:element minOccurs="0" name="codonccapuerto" type="xs:int" />
+      <xs:element minOccurs="0" name="codpostalprocedencia" type="xs:string" />
+      <xs:element minOccurs="0" name="contrato" type="xs:string" />
+      <xs:element minOccurs="0" name="cosecha" type="xs:string" />
+      <xs:element minOccurs="0" name="cuitcorredor" type="xs:string" />
+      <xs:element minOccurs="0" name="cuitentregador" type="xs:string" />
+      <xs:element minOccurs="0" name="cuitexport" type="xs:string" />
+      <xs:element minOccurs="0" name="cuitinter" type="xs:string" />
+      <xs:element minOccurs="0" name="cuitpuerto" type="xs:string" />
+      <xs:element minOccurs="0" name="cuitremic" type="xs:string" />
+      <xs:element minOccurs="0" name="cuitremitente" type="xs:string" />
+      <xs:element minOccurs="0" name="cuittitu" type="xs:string" />
+      <xs:element minOccurs="0" name="entregador" type="xs:string" />
+      <xs:element minOccurs="0" name="fechadescarga" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="fechaposicion" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="horadescarga" type="xs:string" />
+      <xs:element minOccurs="0" name="intermediario" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="listaAnalisis" nillable="true" type="tns:analisis" />
+      <xs:element minOccurs="0" name="localidaddestino" type="xs:string" />
+      <xs:element minOccurs="0" name="mercaderia" type="xs:string" />
+      <xs:element minOccurs="0" name="netodest" type="xs:int" />
+      <xs:element minOccurs="0" name="netoproc" type="xs:int" />
+      <xs:element minOccurs="0" name="nomExport" type="xs:string" />
+      <xs:element minOccurs="0" name="nomRemic" type="xs:string" />
+      <xs:element minOccurs="0" name="nomcorre" type="xs:string" />
+      <xs:element minOccurs="0" name="nroRecibo" type="xs:string" />
+      <xs:element minOccurs="0" name="observaciones" type="xs:string" />
+      <xs:element minOccurs="0" name="observado" type="xs:string" />
+      <xs:element minOccurs="0" name="patente" type="xs:string" />
+      <xs:element minOccurs="0" name="procedencia" type="xs:string" />
+      <xs:element minOccurs="0" name="puerto" type="xs:string" />
+      <xs:element minOccurs="0" name="remitente" type="xs:string" />
+      <xs:element minOccurs="0" name="taradest" type="xs:int" />
+      <xs:element minOccurs="0" name="titular" type="xs:string" />
+      <xs:element minOccurs="0" name="usuario" type="xs:string" />
+      <xs:element name="vagon" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="analisis">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="kilosMermas" type="xs:int" />
+      <xs:element minOccurs="0" name="porcentajeAnalisis" type="xs:decimal" />
+      <xs:element minOccurs="0" name="porcentajeMerma" type="xs:decimal" />
+      <xs:element minOccurs="0" name="rubro" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="obtenerEstadoServicio">
+    <xs:sequence />
+  </xs:complexType>
+  <xs:complexType name="obtenerEstadoServicioResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="obtenerPosicion">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="usuario" type="xs:string" />
+      <xs:element minOccurs="0" name="clave" type="xs:string" />
+      <xs:element minOccurs="0" name="cuit" type="xs:string" />
+      <xs:element minOccurs="0" name="fecha_ent" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="obtenerPosicionResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="tns:respuestaPosicion" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="respuestaPosicion">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="codigoResultado" type="xs:string" />
+      <xs:element minOccurs="0" name="descripcion" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="posiciones" nillable="true" type="tns:cPposiafip" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="cPposiafip">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="calidad" type="xs:string" />
+      <xs:element minOccurs="0" name="codmerca" type="xs:int" />
+      <xs:element minOccurs="0" name="codonccalocdestino" type="xs:int" />
+      <xs:element minOccurs="0" name="codonccaprocedencia" type="xs:int" />
+      <xs:element minOccurs="0" name="codonccaprovProce" type="xs:int" />
+      <xs:element minOccurs="0" name="codonccaprovdestino" type="xs:int" />
+      <xs:element minOccurs="0" name="codonccapuerto" type="xs:int" />
+      <xs:element minOccurs="0" name="cuitcorredor" type="xs:string" />
+      <xs:element minOccurs="0" name="cuitentregador" type="xs:string" />
+      <xs:element minOccurs="0" name="cuitexportador" type="xs:string" />
+      <xs:element minOccurs="0" name="cuitintermediario" type="xs:string" />
+      <xs:element minOccurs="0" name="cuitpuerto" type="xs:string" />
+      <xs:element minOccurs="0" name="cuitremitenteComercial" type="xs:string" />
+      <xs:element minOccurs="0" name="cuittitular" type="xs:string" />
+      <xs:element minOccurs="0" name="descripcionmerca" type="xs:string" />
+      <xs:element minOccurs="0" name="estado" type="xs:string" />
+      <xs:element minOccurs="0" name="fechaposicion" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="netodescarga" type="xs:int" />
+      <xs:element minOccurs="0" name="netoprocedencia" type="xs:int" />
+      <xs:element minOccurs="0" name="nombreentregador" type="xs:string" />
+      <xs:element minOccurs="0" name="nombreexportador" type="xs:string" />
+      <xs:element minOccurs="0" name="nombreintermediario" type="xs:string" />
+      <xs:element minOccurs="0" name="nombreremitenteComercial" type="xs:string" />
+      <xs:element minOccurs="0" name="nombretitular" type="xs:string" />
+      <xs:element minOccurs="0" name="nroVagon" type="xs:int" />
+      <xs:element name="nrocp" type="xs:int" />
+      <xs:element minOccurs="0" name="observaciones" type="xs:string" />
+      <xs:element minOccurs="0" name="prefijocp" type="xs:int" />
+      <xs:element minOccurs="0" name="procedencia" type="xs:string" />
+      <xs:element minOccurs="0" name="puerto" type="xs:string" />
+      <xs:element minOccurs="0" name="turno" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>

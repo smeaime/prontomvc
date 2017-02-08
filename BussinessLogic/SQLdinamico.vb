@@ -144,7 +144,7 @@ Public Module SQLdinamico
 
         If ClienteRazonSocial = "" Then Return -1
 
-        Dim ds = EntidadManager.ExecDinamico(SC, "SELECT TOP 1 IdCliente FROM Clientes WHERE ltrim(razonsocial)<>'' AND dbo.LevenshteinDistance(RazonSocial,'" & Replace(ClienteRazonSocial, "'", "''") & "') < " & distancia)
+        Dim ds = EntidadManager.ExecDinamico(SC, "SELECT TOP 1 IdCliente FROM Clientes WHERE ltrim(razonsocial)<>'' AND dbo.Levenshtein2(RazonSocial,'" & Replace(ClienteRazonSocial, "'", "''") & "'," & distancia & ") < " & distancia)
 
         If ds.Rows.Count < 1 Then Return -1
 
@@ -158,11 +158,30 @@ Public Module SQLdinamico
         If ClienteRazonSocial = "" Then Return -1
 
 
+
+
+     
+
+
+
         Try
 
 
-            Dim ds2 = EntidadManager.ExecDinamico(SC, "SELECT TOP 5 traduccion,palabra FROM DiccionarioEquivalencias WHERE ltrim(palabra)<>'' AND dbo.LevenshteinDistance(palabra,'" & Replace(ClienteRazonSocial, "'", "''") & "') < " & distancia _
-              & "  order by dbo.LevenshteinDistance(palabra,'" & Replace(ClienteRazonSocial, "'", "''") & "') " & " asc", 100)
+
+            Dim strsql = "select * from " & _
+                    " ( " & _
+                    "  Select " & _
+                    "  traduccion,palabra," & _
+                    "  dbo.Levenshtein2(palabra,'" & Replace(ClienteRazonSocial, "'", "''") & "'," & distancia & " ) as lev " & _
+                    "  FROM DiccionarioEquivalencias " & _
+                        "  WHERE ltrim(palabra)<>''  " & _
+                        "  ) as query  " & _
+                    "  where lev is not null " & _
+                    "  order by lev  asc"
+
+            Dim ds2 = EntidadManager.ExecDinamico(SC, strsql)
+            'Dim ds2 = EntidadManager.ExecDinamico(SC, "SELECT TOP 5 traduccion,palabra FROM DiccionarioEquivalencias WHERE ltrim(palabra)<>'' AND dbo.Levenshtein2(palabra,'" & Replace(ClienteRazonSocial, "'", "''") & "'," & distancia & " ) < " & distancia _
+            '  & "  order by dbo.Levenshtein2(palabra,'" & Replace(ClienteRazonSocial, "'", "''") & "'," & distancia & ") " & " asc", 100)
 
 
 
@@ -172,16 +191,28 @@ Public Module SQLdinamico
 
                 Dim id = BuscaIdLocalidadPreciso(equivalencia, SC)
                 If id > 0 Then Return id
-            End If
+                End If
 
 
 
-            Dim ds = EntidadManager.ExecDinamico(SC, "SELECT TOP 5 IdLocalidad, nombre FROM Localidades WHERE ltrim(nombre)<>'' AND dbo.LevenshteinDistance(nombre,'" & Replace(ClienteRazonSocial, "'", "''") & "') < " & distancia _
-                  & "  order by dbo.LevenshteinDistance(nombre,'" & Replace(ClienteRazonSocial, "'", "''") & "') " & " asc", 100)
+            Dim strsql3 = "select * from " & _
+                " ( " & _
+                "  Select " & _
+                "  IdLocalidad,nombre," & _
+                "  dbo.Levenshtein2(nombre,'" & Replace(ClienteRazonSocial, "'", "''") & "'," & distancia & " ) as lev " & _
+                "  FROM Localidades " & _
+                    "  WHERE ltrim(nombre)<>''  " & _
+                    "  ) as query  " & _
+                "  where lev is not null " & _
+                "  order by lev  asc"
+
+            'Dim ds = EntidadManager.ExecDinamico(SC, "SELECT TOP 5 IdLocalidad, nombre FROM Localidades WHERE ltrim(nombre)<>'' AND dbo.LevenshteinDistance(nombre,'" & Replace(ClienteRazonSocial, "'", "''") & "'," & distancia & ") < " & distancia _
+            '      & "  order by dbo.LevenshteinDistance(nombre,'" & Replace(ClienteRazonSocial, "'", "''") & "'," & distancia & ") " & " asc", 100)
+            Dim ds3 = EntidadManager.ExecDinamico(SC, strsql3)
 
 
 
-            If ds.Rows.Count > 0 Then Return ds.Rows(0).Item("IdLocalidad")
+            If ds3.Rows.Count > 0 Then Return ds3.Rows(0).Item("IdLocalidad")
 
 
 

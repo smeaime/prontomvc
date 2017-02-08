@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsp1_2="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:tns="http://wsPosicion/" xmlns:wsp="http://www.w3.org/ns/ws-policy" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" name="WSCartasDePorte" targetNamespace="http://wsPosicion/" xmlns="http://schemas.xmlsoap.org/wsdl/">
+  <types>
+    <xsd:schema>
+      <xsd:import schemaLocation="https://www.cerealnet.com:18443/WebServices/WSCartasDePorte?xsd=1" namespace="http://wsPosicion/" />
+    </xsd:schema>
+  </types>
+  <message name="obtenerPosicion">
+    <part name="parameters" element="tns:obtenerPosicion" />
+  </message>
+  <message name="obtenerPosicionResponse">
+    <part name="parameters" element="tns:obtenerPosicionResponse" />
+  </message>
+  <message name="obtenerDescargas">
+    <part name="parameters" element="tns:obtenerDescargas" />
+  </message>
+  <message name="obtenerDescargasResponse">
+    <part name="parameters" element="tns:obtenerDescargasResponse" />
+  </message>
+  <message name="obtenerEstadoServicio">
+    <part name="parameters" element="tns:obtenerEstadoServicio" />
+  </message>
+  <message name="obtenerEstadoServicioResponse">
+    <part name="parameters" element="tns:obtenerEstadoServicioResponse" />
+  </message>
+  <portType name="WS_CartasDePorte">
+    <operation name="obtenerPosicion">
+      <input wsam:Action="http://wsPosicion/WS_CartasDePorte/obtenerPosicionRequest" message="tns:obtenerPosicion" />
+      <output wsam:Action="http://wsPosicion/WS_CartasDePorte/obtenerPosicionResponse" message="tns:obtenerPosicionResponse" />
+    </operation>
+    <operation name="obtenerDescargas">
+      <input wsam:Action="http://wsPosicion/WS_CartasDePorte/obtenerDescargasRequest" message="tns:obtenerDescargas" />
+      <output wsam:Action="http://wsPosicion/WS_CartasDePorte/obtenerDescargasResponse" message="tns:obtenerDescargasResponse" />
+    </operation>
+    <operation name="obtenerEstadoServicio">
+      <input wsam:Action="http://wsPosicion/WS_CartasDePorte/obtenerEstadoServicioRequest" message="tns:obtenerEstadoServicio" />
+      <output wsam:Action="http://wsPosicion/WS_CartasDePorte/obtenerEstadoServicioResponse" message="tns:obtenerEstadoServicioResponse" />
+    </operation>
+  </portType>
+  <binding name="WS_CartasDePortePortBinding" type="tns:WS_CartasDePorte">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <operation name="obtenerPosicion">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="obtenerDescargas">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="obtenerEstadoServicio">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+  </binding>
+  <service name="WSCartasDePorte">
+    <port name="WS_CartasDePortePort" binding="tns:WS_CartasDePortePortBinding">
+      <soap:address location="https://www.cerealnet.com:18443/WebServices/WSCartasDePorte" />
+    </port>
+  </service>
+</definitions>
