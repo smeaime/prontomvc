@@ -64,7 +64,7 @@ Partial Class Facturas
                     barras.EnviarFacturaElectronicaEMail( _
                                 CInt(Request.QueryString.Get("ImprimirDesde")), _
                                 CInt(Request.QueryString.Get("ImprimirHasta")), _
-                                Request.QueryString.Get("Cliente"), HFSC.Value, False, UsuarioSesion.Mail(HFSC.Value, Session) _
+                                HFSC.Value, False, UsuarioSesion.Mail(HFSC.Value, Session) _
                     )
 
                 Else
@@ -2103,7 +2103,7 @@ Partial Class Facturas
                 End If
                 sErr = barras.EnviarFacturaElectronicaEMail( _
                           lista, _
-                           Request.QueryString.Get("Cliente"), HFSC.Value, bVistaPrevia, UsuarioSesion.Mail(HFSC.Value, Session) _
+                           HFSC.Value, bVistaPrevia, UsuarioSesion.Mail(HFSC.Value, Session) _
                )
             ElseIf IsNothing(f2) Then
                 For i = f.Id To FacturaManager.UltimoId(HFSC.Value)
@@ -2111,7 +2111,7 @@ Partial Class Facturas
                 Next
                 sErr = barras.EnviarFacturaElectronicaEMail( _
                            lista, _
-                            Request.QueryString.Get("Cliente"), HFSC.Value, bVistaPrevia, UsuarioSesion.Mail(HFSC.Value, Session) _
+                            HFSC.Value, bVistaPrevia, UsuarioSesion.Mail(HFSC.Value, Session) _
                 )
             Else
                 For i = f.Id To f2.Id
@@ -2119,7 +2119,7 @@ Partial Class Facturas
                 Next
                 sErr = barras.EnviarFacturaElectronicaEMail( _
                            lista, _
-                            Request.QueryString.Get("Cliente"), HFSC.Value, bVistaPrevia, UsuarioSesion.Mail(HFSC.Value, Session) _
+                            HFSC.Value, bVistaPrevia, UsuarioSesion.Mail(HFSC.Value, Session) _
                 )
             End If
 

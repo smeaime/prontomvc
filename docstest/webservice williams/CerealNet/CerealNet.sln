@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CerealNet", "CerealNet\CerealNet.csproj", "{0AD6B1CC-EB3C-438E-A7A1-E65E9D404633}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CerealNetClient", "CerealNetClient\CerealNetClient.csproj", "{59F247B7-34F9-45E5-B3C6-5F7C535E7E5E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0AD6B1CC-EB3C-438E-A7A1-E65E9D404633}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0AD6B1CC-EB3C-438E-A7A1-E65E9D404633}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0AD6B1CC-EB3C-438E-A7A1-E65E9D404633}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0AD6B1CC-EB3C-438E-A7A1-E65E9D404633}.Release|Any CPU.Build.0 = Release|Any CPU
+		{59F247B7-34F9-45E5-B3C6-5F7C535E7E5E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{59F247B7-34F9-45E5-B3C6-5F7C535E7E5E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{59F247B7-34F9-45E5-B3C6-5F7C535E7E5E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{59F247B7-34F9-45E5-B3C6-5F7C535E7E5E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
