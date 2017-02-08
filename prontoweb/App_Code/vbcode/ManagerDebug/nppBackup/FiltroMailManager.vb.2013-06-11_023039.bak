@@ -805,7 +805,7 @@ Namespace Pronto.ERP.Bll
             'http://msdn.microsoft.com/en-us/library/aa195814(office.11).aspx
             'http://www.newsgrupos.com/microsoft-public-es-excel/304517-problemas-con-comas-y-puntos-al-guardar-de-excel-un-archivo-txtmediante-vb.html
 
-            Exc.Workbooks.OpenText(pFileName, , , , Excel.XlTextQualifier.xlTextQualifierNone, , True, , , , , , , , ".")
+            Exc.Workbooks.OpenText(pFileName, , , , Excel.XlTextQualifier.xlTextQualifierNone, , True, , , , , , , , ".", ",")
 
             '/////////////////////////////////////////////////////////////////////
             '/////////////////////////////////////////////////////////////////////

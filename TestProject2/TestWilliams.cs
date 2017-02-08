@@ -834,6 +834,33 @@ namespace ProntoMVC.Tests
         /// ////////////////////////////////////////////////////////////////////////////////////////////////////////////
         /// ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+        [TestMethod]
+        public void Levenshtein2()
+        {
+            var a = SQLdinamico.BuscaIdLocalidadAproximado("CHIVILCOY", SC, 7);
+            var a1=EntidadManager.NombreLocalidad(SC, a);
+
+            var b = SQLdinamico.BuscaIdClienteAproximado("CHIVILCOY", SC, 7);
+            var b1 = EntidadManager.NombreCliente(SC, b);
+
+        }
+
+
+
+
+        [TestMethod]
+        public void enviarFacturaElectronicaAlCorredor_32328()
+        {
+            // https://prontoweb.williamsentregas.com.ar/ProntoWeb/Factura.aspx?Id=91981
+
+            barras.EnviarFacturaElectronicaEMail(new List<int> { 89323, 89324 }, SC, false, "mscalella911@gmail.com");
+
+
+        }
+
+
+
+
 
 
 
@@ -968,10 +995,10 @@ namespace ProntoMVC.Tests
             System.Web.UI.StateBag ViewState = new System.Web.UI.StateBag();
             string txtFechaDesde = "12/1/2015";
             string txtFechaHasta = "12/31/2015";
-            string fListaIDs = "";
+            string fListaIDs = "99500,99501";
             string SessionID = "sfsfasfd12asdfsa3123";
             int cmbPuntoVenta = -1;
-            string cmbAgruparArticulosPor = "99500,99501";
+            string cmbAgruparArticulosPor = "";
             bool SeEstaSeparandoPorCorredor = false;
 
             ViewState["pagina"] = 1;
@@ -979,7 +1006,7 @@ namespace ProntoMVC.Tests
             ViewState["filas"] = 10;
 
             string[] tokens = fListaIDs.Split(',');
-            var l= tokens.ToList();
+            var l = tokens.ToList();
 
 
             LogicaFacturacion.GridCheckboxPersistenciaBulk(SC, SessionID, l.Select(int.Parse).ToList());
@@ -1054,7 +1081,7 @@ namespace ProntoMVC.Tests
             int m_IdMaestro = 0;
             Pronto.ERP.BO.CartaDePorte carta;
 
-            
+
             string log = "";
             //hay que pasar el formato como parametro 
             ExcelImportadorManager.FormatearExcelImportadoEnDLL(ref m_IdMaestro, archivoExcel,
@@ -1147,7 +1174,7 @@ La interface será procesa por Syngenta y si la misma no puede ser procesada cor
             //string archivoExcel = @"C:\Users\Administrador\Documents\bdl\pronto\docstest\Posicion-161229-0945.xls"
             //string archivoExcel = @"C:\Users\Administrador\Documents\bdl\New folder\Urenport_ 951-24012017.xls";
             string archivoExcel = @"C:\Users\Administrador\Documents\bdl\pronto\docstest\Ejemplo punto 3.xls";
-            
+
 
 
             //explota
@@ -2423,7 +2450,7 @@ Adjunto un ejemplo que tiene cartas de porte de 8 entregadores que no son Willia
             IFlexiCaptureProcessor processor = null;
 
 
-            ClassFlexicapture.IniciaMotor(ref engine, ref engineLoader, ref processor, plantilla );
+            ClassFlexicapture.IniciaMotor(ref engine, ref engineLoader, ref processor, plantilla);
 
             var ver = engine.Version;
 
@@ -2547,7 +2574,7 @@ Adjunto un ejemplo que tiene cartas de porte de 8 entregadores que no son Willia
 
             var output = SincronismosWilliamsManager.GenerarSincro("Monsanto", ref sErrores, SC, "dominio", ref sTitulo
                                 , CartaDePorteManager.enumCDPestado.DescargasMasFacturadas,
-                     "", 3208 ,  -1,
+                     "", 3208, -1,
                 -1, 3208,
                 3208, -1, -1, -1,
                  CartaDePorteManager.FiltroANDOR.FiltroOR, "Entregas",
@@ -3644,7 +3671,7 @@ Adjunto un ejemplo que tiene cartas de porte de 8 entregadores que no son Willia
             string DIRFTP = DirApp + @"\DataBackupear\";
             string ArchivoExcelDestino = DIRFTP + "ControlKilos_" + DateTime.Now.ToString("ddMMMyyyy_HHmmss") + ".xlsx";
 
-            
+
             Microsoft.Reporting.WebForms.ReportViewer rep = new Microsoft.Reporting.WebForms.ReportViewer();
 
             ReportParameter[] yourParams = new ReportParameter[6];
