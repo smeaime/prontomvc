@@ -3422,10 +3422,24 @@ Formato localidad-provincia	destination	x
 
                 xmlcp.Intermediario = dbcp.IntermediarioDesc;
                 xmlcp.Intermediario_CUIT = dbcp.IntermediarioCUIT.NullSafeToString().Replace("-", "");
-                xmlcp.remitente = dbcp.RComercialDesc;
-                xmlcp.remitente_CUIT = dbcp.RComercialCUIT.NullSafeToString().Replace("-", "");
+                
+              
+
+                
                 xmlcp.titular = dbcp.TitularDesc;
                 xmlcp.titular_CUIT = dbcp.TitularCUIT.NullSafeToString().Replace("-", "");
+
+
+                xmlcp.remitente = dbcp.RComercialDesc;
+                xmlcp.remitente_CUIT = dbcp.RComercialCUIT.NullSafeToString().Replace("-", "");
+                if (xmlcp.remitente == "")
+                {
+                    xmlcp.remitente = xmlcp.titular;
+                    xmlcp.remitente_CUIT = xmlcp.titular_CUIT;
+                }
+
+
+
                 xmlcp.transportista = dbcp.TransportistaDesc;
                 xmlcp.transportista_CUIT = dbcp.TransportistaCUIT.NullSafeToString().Replace("-", "");
 
