@@ -458,9 +458,6 @@ Global
 		{D36118EC-8AAB-4E61-B264-5D29A5232BDC} = {A7AAB93D-0E57-4580-96C8-51710EF8D2FA}
 		{715BC03D-B453-4269-B1F4-08EDEF0BE038} = {A7AAB93D-0E57-4580-96C8-51710EF8D2FA}
 	EndGlobalSection
-	GlobalSection(Performance) = preSolution
-		HasPerformanceSessions = true
-	EndGlobalSection
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = ProntoMVC.vsmdi
 	EndGlobalSection

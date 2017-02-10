@@ -2454,7 +2454,7 @@ namespace CerealNet.WSCartasDePorte
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://wsPosicion/")]
+    //[System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://wsPosicion/")]
     public partial class respuestaEntrega : object, System.ComponentModel.INotifyPropertyChanged
     {
 
