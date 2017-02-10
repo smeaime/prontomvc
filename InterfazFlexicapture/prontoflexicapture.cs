@@ -3438,8 +3438,7 @@ Formato localidad-provincia	destination	x
                     xmlcp.remitente_CUIT = xmlcp.titular_CUIT;
                 }
 
-
-
+             
                 xmlcp.transportista = dbcp.TransportistaDesc;
                 xmlcp.transportista_CUIT = dbcp.TransportistaCUIT.NullSafeToString().Replace("-", "");
 
