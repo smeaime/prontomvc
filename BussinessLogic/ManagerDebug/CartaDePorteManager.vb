@@ -15234,9 +15234,28 @@ Public Class CartaDePorteManager
                     cp.cuitexport = dbc.DestinatarioCUIT.Replace("-", "")
                     cp.cuitinter = dbc.IntermediarioCUIT.Replace("-", "")
                     cp.cuitpuerto = If(dbc.DestinoCUIT, "").Replace("-", "")
-                    cp.cuitremic = If(dbc.RComercialCUIT, "").Replace("-", "")
-                    cp.cuitremitente = If(dbc.TitularCUIT, "").Replace("-", "")
+
                     cp.cuittitu = If(dbc.TitularCUIT, "").Replace("-", "")
+
+
+
+                    cp.titular = If(dbc.TitularDesc, "")
+                    cp.intermediario = If(dbc.IntermediarioDesc, "")
+                    cp.nomcorre = If(dbc.CorredorDesc, "")
+                    cp.nomExport = If(dbc.DestinatarioDesc, "")
+
+
+                    cp.cuitremic = If(dbc.RComercialCUIT, "").Replace("-", "")
+                    cp.nomRemic = If(dbc.RComercialDesc, "")
+                    If (cp.cuitremic) = "" Then
+                        cp.cuitremic = cp.cuittitu
+                        cp.nomRemic = cp.titular
+                    End If
+
+
+                    cp.cuitremitente = If(dbc.TitularCUIT, "").Replace("-", "")
+                    cp.remitente = If(dbc.TitularDesc, "")
+
 
                     cp.entregador = If(dbc.DestinatarioDesc, "")
 
@@ -15250,12 +15269,6 @@ Public Class CartaDePorteManager
                     cp.taradest = dbc.TaraFinal
 
 
-                    cp.titular = If(dbc.TitularDesc, "")
-                    cp.intermediario = If(dbc.IntermediarioDesc, "")
-                    cp.nomcorre = If(dbc.CorredorDesc, "")
-                    cp.nomExport = If(dbc.DestinatarioDesc, "")
-                    cp.nomRemic = If(dbc.RComercialDesc, "")
-                    cp.remitente = If(dbc.TitularDesc, "")
 
                     cp.mercaderia = If(dbc.Producto, "")
 
