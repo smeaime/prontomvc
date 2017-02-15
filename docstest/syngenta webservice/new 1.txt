@@ -1,0 +1,6 @@
+Web Service
+https://oasis-pi-nonprod.syngenta.com/dev/XISOAPAdapter/MessageServlet?senderParty=&senderService=Srv_BIT_BarterService&receiverParty=&receiverService=&interface=LoadDeclarationSoap_send_out_asy&interfaceNamespace=urn:broker:o2c:s:global:delivery:loaddeclaration:100}
+ 
+Usuario: BROKERDEV
+Psw: Welcome@1
+ 
