@@ -834,6 +834,40 @@ namespace ProntoMVC.Tests
         /// ////////////////////////////////////////////////////////////////////////////////////////////////////////////
         /// ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+
+
+
+
+        [TestMethod]
+        public void OCR_33371()
+        {
+
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            string zipFile;
+            zipFile = @"C:\Users\Administrador\Documents\bdl\pronto\docstest\1271214feb2017.tif";
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+            VaciarDirectorioTemp();
+
+
+            var l = ClassFlexicapture.PreprocesarArchivoSubido(zipFile, "Mariano", DirApp, false, false, false, 1);
+
+
+            string sError = "";
+
+
+            //CartaDePorteManager.ProcesarImagenesConCodigosDeBarraYAdjuntar(SC, lista, -1, ref sError, DirApp);
+            ClassFlexicapture.ActivarMotor(SC, l, ref sError, DirApp, "SI");
+        }
+
+
+
+
+        
         [TestMethod]
         public void Levenshtein2()
         {
@@ -4528,7 +4562,11 @@ Adjunto un ejemplo que tiene cartas de porte de 8 entregadores que no son Willia
             var a = ProntoMVC.Data.FuncionesGenericasCSharp.mkf_validacuit("20");
             var b = ProntoMVC.Data.FuncionesGenericasCSharp.mkf_validacuit("30-53777127-4");
             var c = ProntoMVC.Data.FuncionesGenericasCSharp.mkf_validacuit("30-53772127-4");
-            var d = CartaDePorteManager.VerfCuit("30537771274");
+            var d = CartaDePorteManager.VerfCuit("30-53772127-4");
+
+            var e = ProntoMVC.Data.FuncionesGenericasCSharp.mkf_validacuit("30511355040");
+            var f = CartaDePorteManager.VerfCuit("30511355040");
+            // y por qué no explota en la validacion del form?
         }
 
 
