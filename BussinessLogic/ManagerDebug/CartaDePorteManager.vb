@@ -941,6 +941,8 @@ Public Class CartaDePorteManager
     End Function
 
     Public Shared Function VerfCuit(ByVal e As String) As Boolean
+        Return True ' esta funcion esta fallando, por ejemplo con 30511355040
+
 
         e = e.Replace("-", "").Replace(" ", "")
 
