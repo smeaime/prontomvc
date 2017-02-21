@@ -232,6 +232,14 @@ Namespace Pronto.ERP.Bll
                     txtDestinatario.Text = "NOBLE ARGENTINA S.A."
                     txtIntermediario.Text = "NOBLE ARGENTINA S.A."
                     txtRcomercial.Text = "NOBLE ARGENTINA S.A."
+
+
+                Case "PELAYO"
+                    txtTitular.Text = "PELAYO AGRONOMIA SA"
+                    txtIntermediario.Text = "PELAYO AGRONOMIA SA"
+                    txtRcomercial.Text = "PELAYO AGRONOMIA SA"
+
+
                 Case "GRIMALDI GRASSI"
                     'GRIMALDI(GRASSI) : CORREDOR()
                     txtTitular.Text = ""
@@ -536,6 +544,7 @@ Namespace Pronto.ERP.Bll
                     sSincronismo.ToUpper <> "MONSANTO" And _
                     sSincronismo.ToUpper <> "LA BIZNAGA" And _
                     sSincronismo.ToUpper <> "AJNARI" And _
+                    sSincronismo.ToUpper <> "PELAYO" And _
                     InStr(sSincronismo.ToUpper, "BLD") = 0 Then
 
                     '// Customize the connection string.
@@ -650,6 +659,9 @@ Namespace Pronto.ERP.Bll
                 Try
 
                     Select Case sSincronismo.ToUpper
+
+
+
                         Case "A.C.A."
                             '        el sincro de A.C.A toma de varios clientes (ACA NAON, ACA SARASA). en lugar de usar CUIT, se les pasa un numero de cuenta
                             '100001: A.C.A.EXPORTACION()
@@ -1127,7 +1139,7 @@ Namespace Pronto.ERP.Bll
                             yourParams(25) = New ReportParameter("Patente", "")
                             yourParams(26) = New ReportParameter("optCamionVagon", "Todos")
 
-                            
+
                             'Dim titulo As String = ""
                             'titulo = FormatearTitulo(HFSC.Value, _
                             '          titulo, estadofiltro, "", idVendedor, idCorredor, _
@@ -1391,6 +1403,20 @@ Namespace Pronto.ERP.Bll
                             output = Sincronismo_AJNari(dbcartas, , "")
                             registrosFiltrados = dbcartas.Count
 
+                        Case "PELAYO"
+                            Dim db As ProntoMVC.Data.Models.DemoProntoEntities = New ProntoMVC.Data.Models.DemoProntoEntities(ProntoMVC.Data.Models.Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC)))
+
+                            Dim dbcartas = (From c In db.fSQL_GetDataTableFiltradoYPaginado(Nothing, 3000, enumCDPestado.DescargasMasFacturadas,
+                                                                     Nothing, idVendedor,
+                                 idCorredor, idDestinatario, idIntermediario, idRComercial,
+                                 idArticulo, idProcedencia, idDestino, FiltroANDOR.FiltroOR, "Ambos",
+                                  sDesde, sHasta, 0,
+                                 Nothing, False, Nothing, Nothing, Nothing,
+                                  Nothing, Nothing, Nothing, Nothing)
+                                    Select c).Take(3000).ToList
+
+                            output = Sincronismo_Pelayo(dbcartas, , "")
+                            registrosFiltrados = dbcartas.Count
 
 
                         Case "TOMAS HNOS"
@@ -2857,12 +2883,12 @@ Namespace Pronto.ERP.Bll
 
 
                     'sb &= IIf(.NobleConforme = "0", "NO", "SI").PadRight(2)
-                    If .IsCalidadDescNull Then 
+                    If .IsCalidadDescNull Then
                         sb &= "NO"
                     Else
                         sb &= IIf(.CalidadDe = 25, "SI", "NO").PadRight(2) 'Andres, solamente poner si cuando es CONFORME, resto poner NO ( Todo el resto del listado que detallas )
                     End If
-                    
+
 
                     '//////////////////////////////////////////////////////////////////////////////////////////
                     '//////////////////////////////////////////////////////////////////////////////////////////
@@ -8079,6 +8105,161 @@ Namespace Pronto.ERP.Bll
                     '    End If
                     '    i += 1
                     'Next
+
+
+
+
+
+
+                    PrintLine(nF, sb)
+                End With
+            Next
+
+
+            FileClose(nF)
+
+
+            Return vFileName
+            'Return TextToExcel(vFileName, titulo)
+        End Function
+
+
+        Public Shared Function Sincronismo_Pelayo(ByVal pDataTable As List(Of ProntoMVC.Data.Models.fSQL_GetDataTableFiltradoYPaginado_Result3), Optional ByVal titulo As String = "", Optional ByVal sWHERE As String = "") As String
+
+
+
+
+
+            'Dim vFileName As String = Path.GetTempFileName() & ".txt"
+            Dim vFileName As String = Path.GetTempPath & "SincroPelayo " & Now.ToString("ddMMMyyyy_HHmmss") & ".txt" 'http://stackoverflow.com/questions/581570/how-can-i-create-a-temp-file-with-a-specific-extension-with-net
+            'Dim vFileName As String = Path.GetTempPath & "SincroLosGrobo.txt" 'http://stackoverflow.com/questions/581570/how-can-i-create-a-temp-file-with-a-specific-extension-with-net
+
+            'Dim vFileName As String = "c:\archivo.txt"
+            Dim nF = FreeFile()
+            FileOpen(nF, vFileName, OpenMode.Output)
+            Dim sb As String = ""
+            Dim dc As DataColumn
+            'For Each dc In pDataTable.Columns
+            '    sb &= dc.Caption & Microsoft.VisualBasic.ControlChars.Tab
+            'Next
+
+            'PrintLine(nF, sb) 'encabezado
+            Dim i As Integer = 0
+            Dim dr As DataRow
+
+            Const SEP = "&"
+
+            'Dim a = pDataTable(1)
+
+            '                    1 - Entregador	2 - Productor	3 - Sucursal Carta de Porte	4 - Número Carta de Porte	
+            '5 -Sucursal Ticket Entrada	6 - Número Ticket Entrada	7 - Sucursal Ticket Salida	8 - Número Ticket Salida	9 - Remitente	10 - Número de CAU	11 - Fecha Vencimiento CAU	12 - Código Empresa de Transporte	13 - Nombre Empresa de Transporte	14 - CUIT Empresa de Transporte	
+            '15 - Liquida Viaje	16 - Cobra Acarreo	17 - Tarifa de Flete	18 - Kilos Brutos	19 - Kilos Tara	20 - Kilos Descargados	21 - Fecha Descarga	22 -Porcentaje Humedad	23 -Kilos Merma Humedad	24 -Porcentaje Merma Zarandeo	25 -Porcentaje Merma Volátil	26 -Kilos Merma Zarandeo	27 -Kilos Merma Volátil	28 -Kilos Servicio	29 -Kilos Netos	30 -Número de Contrato de Compra	31- Número de Contrato de Venta	32-Código Localidad ONCCA / Código de Campo Interno del Sistema	33 -Kilómetros	34 -Especie  	35 –Cosecha	36 - Código Corredor	37 -Código Comprador/Vendedor 	38 –Código interno de Destino	39 –Código interno de Procedencia 	40 – Sufijo Carta de Porte	41 – Destinatario CP	42 – Numero de CTG	43 – Comentario	44 – Código de Establecimiento  Destino	45 – Código de Establecimiento  Procedencia	46 – Código de Tipo de Movimiento	47 – Código de Chofer en Softcereal	48 – Patente del Camión	49 – Patente del Acoplado	50 – Código de planta	51 – Calidad Conforme	52-Vagon	53 – Entidad destino	54- Guía Propia	55 – Localidad ONCCA Municipio Guía	56 – Prefijo Guía	57 – Numero Guia	58 – Oblea Propia	59 – Tipo de Oblea	60 – Número de Oblea
+            '30707844759	20108796937	5	58899995	0	0	0	0	20108796937	0	0	30715149199	LINEIRA                       	20219564040	NO	NO	580.000	44020	14740	29280	20170131	01.00	0	   0.00	0	0	0	0	29280	0	0	6401	510	SOJA	1516	30703605105	30700869918	21212	6401		30700869918	37810982	CONF.-                                                                                                                       	0	0	0	                    	HVG258    	GSQ421    	0	SI	                              	30615829699	NO	0	0	0	NO	 	0
+
+            Const sss = "00000000001&       0002&0003&00000004&0000000005&0000000000&0000000007&0000000000&        009&00000000000010&      11&         12&D                           13&         14&15&16&     17&0000045220&0000015680&00000   20&      21&   22&0000000023&   0.00&0000000&0000000026&0000000000&0000000000&00000   29&00000000000030&00000000000031&08732&0000000 33&  34&  35&00000000036&00000000037&00038&00039&&         41&      42&43                                                                                                                           &000044&000045&0046&                  47&        48&        49&  50 &51&52                            &         53&54&00055&0056&00000057&58& &00000000" & vbCrLf &
+"30707844759&27059565341&0005&58962048&0000000000&0000000000&0000000000&0000000000&27059565341&87041338912181&20170326&20253657716&DE DIOS       FACUNDO         &20253657716&NO&NO&615.000&0000045220&0000015680&0000029540&20170201&12.00&0000000000&   0.00&0000000&0000000000&0000000000&0000000000&0000029540&00000000000000&00000000000000&08746&0000000500&SOJA&1516&30539435589&30715118773&18794&08746&&30715118773&11318673&CONF.-                                                                                                                       &000000&000000&0000&                    &AA824GU   &TTU038    &00000&SI&                              &30500959629&NO&00000&0000&00000000&NO& &00000000"
+
+            PrintLine(nF, sss)
+
+
+            'http://msdn.microsoft.com/en-us/magazine/cc163877.aspx
+            For Each cdp As ProntoMVC.Data.Models.fSQL_GetDataTableFiltradoYPaginado_Result3 In pDataTable
+                With cdp
+
+                    i = 0 : sb = ""
+
+                    Dim cero = 0
+
+
+
+
+
+
+                    Dim wily = "Williams Entregas S.A."
+                    Dim wilycuit = "30707386076"
+                    Dim cadenavacia As String = ""
+
+
+
+                    sb &= IIf(.EntregadorCUIT = "", wilycuit, .EntregadorCUIT).ToString.Replace("-", "") & SEP       '1
+                    sb &= If(.TitularCUIT, "            ").ToString.Replace("-", "") & SEP       '2
+                    sb &= "0005" & SEP       '3
+                    sb &= Right(.NumeroCartaDePorte.ToString, 8) & SEP       '4
+                    sb &= "0000000000&0000000000&0000000000&0000000000&"
+                    sb &= If(.RComercialCUIT, "").ToString.Replace("-", "") & SEP       '9
+                    sb &= JustificadoIzquierda(.CEE.ToString, 14) & SEP '10
+                    sb &= IIf(.FechaVencimiento Is Nothing, "        ", CDate(If(.FechaVencimiento, DateTime.MinValue)).ToString("yyyyMMdd")) & SEP '11
+                    sb &= If(.TransportistaCUIT, "           ").ToString.Replace("-", "") & SEP       '12
+                    sb &= JustificadoIzquierda(.TransportistaDesc, 30) & SEP  '13
+                    sb &= If(.TransportistaCUIT, "           ").ToString.Replace("-", "") & SEP       '14
+
+
+                    '15 - Liquida Viaje	16 - Cobra Acarreo	17 - Tarifa de Flete	18 - Kilos Brutos	19 - Kilos Tara	20 - Kilos Descargados	
+                    sb &= IIf(.LiquidaViaje = "SI", "SI", "NO") & SEP
+                    sb &= IIf(.CobraAcarreo = "SI", "SI", "NO") & SEP
+
+                    sb &= If(.Tarifa, 0).ToString("000.000").Replace(",", ".") & SEP '615.000
+                    sb &= JustificadoDerecha(CInt(.BrutoPto).ToString, 10, "0") & SEP '
+                    sb &= JustificadoDerecha(CInt(.TaraPto).ToString, 10, "0") & SEP  '
+                    sb &= JustificadoDerecha(CInt(.NetoPto).ToString, 10, "0") & SEP '
+
+
+                    '21 - Fecha Descarga	22 -Porcentaje Humedad	23 -Kilos Merma Humedad	24 -Porcentaje Merma Zarandeo	25 -Porcentaje Merma Volátil	26 -Kilos Merma Zarandeo	27 -Kilos Merma Volátil	28 -Kilos Servicio	29 -Kilos Netos	30 -Número de Contrato de Compra
+
+
+                    sb &= IIf(.FechaDescarga Is Nothing, "        ", CDate(If(.FechaDescarga, DateTime.MinValue)).ToString("yyyyMMdd")) & SEP  '
+                    sb &= If(.Humedad, 0).ToString("00.00").Replace(",", ".") & SEP
+                    sb &= JustificadoDerecha(CInt(If(.HumedadDesnormalizada, 0)), 10, "0") & SEP
+                    sb &= If(.CalidadMermaZarandeo, 0).ToString("0000.00").Replace(",", ".") & SEP
+                    sb &= "0000000" & SEP  '	25 -Porcentaje Merma Volátil
+                    sb &= JustificadoDerecha(If(.CalidadZarandeoMerma, ""), 10, "0") & SEP
+                    sb &= "0000000000" & SEP  '27 -Kilos Merma Volátil
+                    sb &= "0000000000" & SEP '28 -Kilos Servicio
+                    sb &= JustificadoDerecha(CInt(.NetoProc).ToString, 10, "0") & SEP '29 -Kilos Netos
+                    sb &= JustificadoDerecha(.Contrato, 14) & SEP '30 -Número de Contrato de Compra
+
+
+                    '31- Número de Contrato de Venta	32-Código Localidad ONCCA / Código de Campo Interno del Sistema	33 -Kilómetros	34 -Especie  	35 –Cosecha	36 - Código Corredor	37 -Código Comprador/Vendedor 	38 –Código interno de Destino	39 –Código interno de Procedencia 	40 – Sufijo Carta de Porte	41 – Destinatario CP	42 – Numero de CTG	43 – Comentario	44 – Código de Establecimiento  Destino	
+
+                    sb &= JustificadoDerecha(.Contrato, 14) & SEP
+                    sb &= JustificadoDerecha(.ProcedenciaCodigoONCAA, 5) & SEP
+                    sb &= JustificadoDerecha(If(.KmARecorrer, 0), 10).Replace(",", ".") & SEP
+                    sb &= JustificadoDerecha(Left(.Producto, 4), 4) & SEP '34 -Especie   esto está apareciendo como "SOJA" en el ejemplo.....
+
+                    sb &= Right(.Cosecha, 5).Replace("/", "").PadLeft(4) & SEP
+                    sb &= If(.CorredorCUIT, "").ToString.Replace("-", "") & SEP
+                    sb &= If(.TitularCUIT, "").ToString.Replace("-", "") & SEP
+                    sb &= JustificadoDerecha(.DestinoCodigoONCAA, 5) & SEP  '38
+                    sb &= JustificadoDerecha(.ProcedenciaCodigoONCAA, 5) & SEP
+                    sb &= "" & SEP '40 – Sufijo Carta de Porte
+                    sb &= If(.DestinatarioCUIT, "").ToString.Replace("-", "") & SEP
+                    sb &= JustificadoIzquierda(If(.CTG, "0"), 8) & SEP
+                    sb &= JustificadoIzquierda(.Observaciones.Replace(vbLf, "").Replace(vbCrLf, ""), 125) & SEP
+                    sb &= JustificadoIzquierda(If(.EstablecimientoCodigo, ""), 6) & SEP  '44 – Código de Establecimiento  Destino	
+
+
+                    '                    45 – Código de Establecimiento  Procedencia	46 – Código de Tipo de Movimiento	47 – Código de Chofer en Softcereal	48 – Patente del Camión	49 – Patente del Acoplado	50 – Código de planta	51 – Calidad Conforme	52-Vagon	53 – Entidad destino	
+
+                    sb &= JustificadoDerecha(.EstablecimientoCodigo, 6) & SEP
+                    sb &= JustificadoDerecha(If(.IdTipoMovimiento, ""), 4) & SEP
+                    sb &= "                    " & SEP
+                    sb &= JustificadoIzquierda(.Patente, 10) & SEP
+                    sb &= JustificadoIzquierda(.Acoplado, 10) & SEP
+                    sb &= "     " & SEP
+                    sb &= IIf(If(.NobleConforme, "") = "SI", "SI", "NO") & SEP
+                    sb &= JustificadoDerecha(If(.SubnumeroVagon, ""), 30) & SEP
+                    sb &= JustificadoDerecha(.DestinoCUIT.Replace("-", ""), 11) & SEP
+
+
+
+                    '54- Guía Propia	55 – Localidad ONCCA Municipio Guía	56 – Prefijo Guía	57 – Numero Guia	58 – Oblea Propia	59 – Tipo de Oblea	60 – Número de Oblea
+                    sb &= "NO" & SEP
+                    sb &= "00000" & SEP  '55 – Localidad ONCCA Municipio Guía
+                    sb &= "0000" & SEP    '56 – Prefijo Guía	
+                    sb &= "00000000" & SEP  '57 – Numero Guia
+                    sb &= "NO" & SEP '58 – Oblea Propia	
+                    sb &= " " & SEP  '59 – Tipo de Oblea
+                    sb &= "00000000" '60 – Número de Oblea
 
 
 
@@ -22700,7 +22881,7 @@ Namespace Pronto.ERP.Bll
                 sb &= "&" & ""
                 sb &= "&" & dr("Pat. Chasis").ToString
                 sb &= "&" & dr("Pat. Acoplado").ToString
-        
+
 
 
                 'sb &= "&" & dr("Contrato").ToString.PadLeft(14) '

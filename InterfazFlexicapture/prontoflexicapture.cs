@@ -3290,10 +3290,12 @@ namespace ServicioCartaPorte // migrar esto a una biblioteca aparte
     {
 
 
-
+        /*
+         * no usar mas, usar InterfazFlexicapture.ServiceReference1.DT_DeliveryDelivery
+         * 
         public class SyngentaXML
         {
-            /*
+            
             Campo nro.	Nombre	Nota	Campo interface	Obligatorio
 1	Action	Valores posibles: I / D
 Donde I = Nuevo, D = Anular	action	x
@@ -3341,7 +3343,7 @@ Formato localidad-provincia	destination	x
 8.	En una interface se pueden recibir múltiples entregas.
 
              * 
-            */
+            
 
 
             public string action; // I</action>            1
@@ -3381,27 +3383,28 @@ Formato localidad-provincia	destination	x
             }
 
         }
+    */
 
 
 
-
-        public virtual List<SyngentaXML> WebServiceSyngenta(List<fSQL_GetDataTableFiltradoYPaginado_Result3> dbcartas)
+        public virtual List<InterfazFlexicapture.ServiceReference1.DT_DeliveryDelivery> WebServiceSyngenta(List<fSQL_GetDataTableFiltradoYPaginado_Result3> dbcartas)
         {
 
 
+
             //Dim cartas As New CerealNet.WSCartasDePorte.respuestaEntrega
-            List<SyngentaXML> cps = new List<SyngentaXML>(); //dbcartas.Count - 1
+            List<InterfazFlexicapture.ServiceReference1.DT_DeliveryDelivery> cps = new List<InterfazFlexicapture.ServiceReference1.DT_DeliveryDelivery>(); //dbcartas.Count - 1
 
 
             foreach (fSQL_GetDataTableFiltradoYPaginado_Result3 dbcp in dbcartas)
             {
 
 
-                SyngentaXML xmlcp = new SyngentaXML();
+                InterfazFlexicapture.ServiceReference1.DT_DeliveryDelivery xmlcp = new InterfazFlexicapture.ServiceReference1.DT_DeliveryDelivery();
 
-                xmlcp.carta_porte = dbcp.NumeroCartaDePorte ?? 0;
+                xmlcp.carta_porte = (dbcp.NumeroCartaDePorte ?? 0).NullSafeToString();
                 xmlcp.action = "I";
-                xmlcp.CTG_number = dbcp.CTG.NullSafeToString();
+                xmlcp.CGT_number= dbcp.CTG.NullSafeToString();
                 xmlcp.corredor_CUIT = dbcp.CorredorCUIT.Replace("-", "");
                 xmlcp.delivery_date = dbcp.FechaDescarga.Value.ToString("ddMMyyyy");
                 xmlcp.delivery_type = "CP";
@@ -3422,10 +3425,10 @@ Formato localidad-provincia	destination	x
 
                 xmlcp.Intermediario = dbcp.IntermediarioDesc;
                 xmlcp.Intermediario_CUIT = dbcp.IntermediarioCUIT.NullSafeToString().Replace("-", "");
-                
-              
 
-                
+
+
+
                 xmlcp.titular = dbcp.TitularDesc;
                 xmlcp.titular_CUIT = dbcp.TitularCUIT.NullSafeToString().Replace("-", "");
 
@@ -3438,24 +3441,24 @@ Formato localidad-provincia	destination	x
                     xmlcp.remitente_CUIT = xmlcp.titular_CUIT;
                 }
 
-             
+
                 xmlcp.transportista = dbcp.TransportistaDesc;
                 xmlcp.transportista_CUIT = dbcp.TransportistaCUIT.NullSafeToString().Replace("-", "");
 
 
 
 
-                var i = new ServicioCartaPorte.servi.SyngentaXML.itemclass();
+                var i = new InterfazFlexicapture.ServiceReference1.DT_DeliveryDeliveryItem();
 
                 i.origin = dbcp.ProcedenciaCodigoONCAA.NullSafeToString().PadLeft(5, '0') + "-" + CartaDePorteManager.CodigoProvincia(dbcp.ProcedenciaProvinciaDesc).ToString().PadLeft(2, '0');
                 i.destination = dbcp.DestinoLocalidadAFIP.NullSafeToString().PadLeft(5, '0') + "-" + CartaDePorteManager.CodigoProvincia(dbcp.DestinoProvinciaDesc).ToString().PadLeft(2, '0');
 
                 i.grain = dbcp.CodigoSAJPYA.NullSafeToString();
-                i.quantity = Convert.ToInt32(dbcp.NetoFinal);
+                i.quantity = Convert.ToInt32(dbcp.NetoFinal).NullSafeToString();
                 i.year_of_Harvest = dbcp.Cosecha.Substring(2);
                 i.UOM = "TO";
 
-                xmlcp.item = new SyngentaXML.itemclass[1];
+                xmlcp.item = new InterfazFlexicapture.ServiceReference1.DT_DeliveryDeliveryItem[1];
                 xmlcp.item[0] = i;
 
 
@@ -3467,13 +3470,23 @@ Formato localidad-provincia	destination	x
 
             }
 
+
+            
+             InterfazFlexicapture.ServiceReference1.LoadDeclarationSoap_send_out_asy1 proxy = 
+                        new InterfazFlexicapture.ServiceReference1.LoadDeclarationSoap_send_out_asy1(cps.ToArray());
+    //        var files = proxy.
+    //proxy.Close();
+    //        success = true;
+
+
+            
             return cps;
 
         }
 
 
 
-        public virtual void GenerarExcelSyngentaWebService(List<SyngentaXML> cps, string fExcel)
+        public virtual void GenerarExcelSyngentaWebService(List<InterfazFlexicapture.ServiceReference1.DT_DeliveryDelivery> cps, string fExcel)
         {
 
 
@@ -3514,7 +3527,7 @@ Formato localidad-provincia	destination	x
             //destinatario_CUIT	destino	destino_CUIT	transportista	transportista_CUIT	delivery_date	grain	quantity	UOM	origin
             //destination	year_of_Harvest
 
-            foreach (SyngentaXML cp in cps)
+            foreach (InterfazFlexicapture.ServiceReference1.DT_DeliveryDelivery cp in cps)
             {
 
                 var r = pDataTable.NewRow();
@@ -3523,7 +3536,7 @@ Formato localidad-provincia	destination	x
                 r["delivery_type"] = cp.delivery_type;
                 r["carta_porte"] = cp.carta_porte;
                 r["grain_receiver"] = cp.grain_receiver;
-                r["CTG_number"] = cp.CTG_number;
+                r["CTG_number"] = cp.CGT_number;
                 r["titular"] = cp.titular;
                 r["titular_CUIT"] = cp.titular_CUIT;
                 r["Intermediario"] = cp.Intermediario;
