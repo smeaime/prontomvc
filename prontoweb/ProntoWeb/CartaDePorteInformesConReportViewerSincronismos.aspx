@@ -186,6 +186,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                             <asp:ListItem Enabled="true">Noble</asp:ListItem>
                             <asp:ListItem Enabled="true">Noble (anexo calidades)</asp:ListItem>
                             <asp:ListItem Enabled="true">Ojeda</asp:ListItem>
+                            <asp:ListItem Enabled="true">Pelayo</asp:ListItem>
                             <asp:ListItem Enabled="true">PetroAgro</asp:ListItem>
                             <asp:ListItem Enabled="true">PSA La California</asp:ListItem>
                             <asp:ListItem Enabled="true">PSA La California (calidades)</asp:ListItem>
