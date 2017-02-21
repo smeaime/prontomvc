@@ -1,0 +1,65 @@
+
+Log Entry : 
+02/20/2017 18:00:54
+Error in: . Error Message:Generando sincro para Pelayo
+__________________________
+
+Log Entry : 
+02/20/2017 18:03:44
+Error in: . Error Message:Generando sincro para Pelayo
+__________________________
+
+Log Entry : 
+02/20/2017 18:04:19
+Error in: . Error Message:System.InvalidCastException
+La conversión de la cadena "yyyyMMdd" en el tipo 'Integer' no es válida.
+   en Microsoft.VisualBasic.CompilerServices.Conversions.ToInteger(String Value)
+   en Pronto.ERP.Bll.SincronismosWilliamsManager.Sincronismo_Pelayo(List`1 pDataTable, String titulo, String sWHERE) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\SincronismosWilliamsManager.vb:línea 8180
+   en Pronto.ERP.Bll.SincronismosWilliamsManager.GenerarSincro(String sSincronismo, String& sErroresRef, String SC, String sUrlDominio, String& sTituloFiltroUsado, enumCDPestado estado, String QueContenga, Int32 idVendedor, Int32 idCorredor, Int32 idDestinatario, Int32 idIntermediario, Int32 idRComercial, Int32 idArticulo, Int32 idProcedencia, Int32 idDestino, FiltroANDOR AplicarANDuORalFiltro, String ModoExportacion, DateTime sDesde, DateTime sHasta, Int32 puntoventa, String optDivisionSyngenta, Boolean bTraerDuplicados, String Contrato, String QueContenga2, Int32 idClienteAuxiliar, Int32& registrosFiltrados, Int64 maximumRows) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\SincronismosWilliamsManager.vb:línea 1418
+Microsoft.VisualBasic
+__________________________
+
+Log Entry : 
+02/20/2017 18:06:45
+Error in: . Error Message:Generando sincro para Pelayo
+__________________________
+
+Log Entry : 
+02/20/2017 18:09:47
+Error in: . Error Message:Generando sincro para Pelayo
+__________________________
+
+Log Entry : 
+02/20/2017 18:11:54
+Error in: . Error Message:Generando sincro para Pelayo
+__________________________
+
+Log Entry : 
+02/20/2017 18:14:38
+Error in: . Error Message:Generando sincro para Pelayo
+__________________________
+
+Log Entry : 
+02/20/2017 18:30:44
+Error in: . Error Message:Generando sincro para Pelayo
+__________________________
+
+Log Entry : 
+02/20/2017 18:45:44
+Error in: . Error Message:Generando sincro para Pelayo
+__________________________
+
+Log Entry : 
+02/20/2017 19:28:06
+Error in: . Error Message:Generando sincro para Pelayo
+__________________________
+
+Log Entry : 
+02/20/2017 19:29:21
+Error in: . Error Message:Generando sincro para Pelayo
+__________________________
+
+Log Entry : 
+02/20/2017 19:49:08
+Error in: . Error Message:Generando sincro para Pelayo
+__________________________
