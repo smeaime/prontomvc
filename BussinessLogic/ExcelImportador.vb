@@ -1963,6 +1963,7 @@ Public Class ExcelImportadorManager
 
                 If cpnumero < 500000000 Then Continue For
 
+
                 'Dim myCartaDePorte As CartaDePorte = CartaDePorteManager.GetItemPorNumero(SC, cpnumero, 0, 0)
 
                 Dim myCartaDePorte As Models.CartasDePorte =
@@ -2026,8 +2027,12 @@ Public Class ExcelImportadorManager
                         End If
                         If .IdArticulo <= 0 Then .IdArticulo = Nothing
 
+
+
                         If actua(.Vendedor, BuscarClientePorCUIT(r(7), SC, r(6))) Then log += "Titular; "
                         If .Vendedor <= 0 Then .Vendedor = Nothing
+                        qué hacemos acá? loguearlo nada mas? no puedo darlo de alta si se lo banca? -pero si ya lo estoy intentando!
+
                         'r(6) = NombreCliente(SC, .Vendedor)
 
 
@@ -2062,11 +2067,17 @@ Public Class ExcelImportadorManager
                         Else
 
                         End If
+                        Y en este caso?
+
+
+
 
 
 
                         If actua(.Destino, BuscaIdWilliamsDestinoPreciso(DiccionarioEquivalenciasManager.BuscarEquivalencia(SC, r(16)), SC)) Then log += "Destino; "
                         If .Destino <= 0 Then .Destino = Nothing
+                        If NombreDestino(SC, .Destino) = "ACA San Lorenzo" Then Continue For
+
                         '.Destino = BuscaIdWilliamsDestinoPreciso(DiccionarioEquivalenciasManager.BuscarEquivalencia(SC, r(16)), SC)
 
 
@@ -2082,7 +2093,7 @@ Public Class ExcelImportadorManager
                         If actua(.Procedencia, BuscaIdLocalidadPreciso(DiccionarioEquivalenciasManager.BuscarEquivalencia(SC, r(24)), SC)) Then log += "Procedencia; "
                         If .Procedencia <= 0 Then .Procedencia = Nothing
                         '.Procedencia = BuscaIdLocalidadPreciso(DiccionarioEquivalenciasManager.BuscarEquivalencia(SC, r(24)), SC)
-
+                        Y aca?
 
 
 
@@ -2144,6 +2155,11 @@ Public Class ExcelImportadorManager
                         Catch ex As Exception
 
                         End Try
+                        If .FechaDescarga < #1/1/1980# Then .FechaDescarga = DateTime.Today
+                        If .FechaDeCarga < #1/1/1980# Then .FechaDeCarga = DateTime.Today
+                        If .FechaVencimiento < #1/1/1980# Then .FechaVencimiento = DateTime.Today
+
+
                         '.FechaVencimiento = iisValidSqlDate(r(40))
 
                         .Patente = r(41)
@@ -2152,15 +2168,16 @@ Public Class ExcelImportadorManager
 
 
 
-                        Try
-                            If .Destino > 0 Then
-                                .PuntoVenta = db.WilliamsDestinos.Find(.Destino).PuntoVenta
-                            Else
-                                .PuntoVenta = 1
-                            End If
-                        Catch ex As Exception
-                            .PuntoVenta = 1
-                        End Try
+                        .PuntoVenta = 2 'por decreto http://consultas.bdlconsultores.com.ar/Admin/verConsultas1.php?recordid=32327
+                        'Try
+                        '    If .Destino > 0 Then
+                        '        .PuntoVenta = db.WilliamsDestinos.Find(.Destino).PuntoVenta
+                        '    Else
+                        '        .PuntoVenta = 1
+                        '    End If
+                        'Catch ex As Exception
+                        '    .PuntoVenta = 1
+                        'End Try
 
 
                         .Cosecha = "1617"
@@ -2218,6 +2235,7 @@ Public Class ExcelImportadorManager
 
                 ErrHandler2.WriteError("Error en la grabacion " + sb.ToString())
 
+                'Log(
 
             Catch ex As Exception
                 ErrHandler2.WriteError(ex)

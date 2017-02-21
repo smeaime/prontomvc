@@ -273,7 +273,7 @@
                     </tr>
                     <tr class="MasterSegundoRenglon">
                         <td class="MasterMargenIzquierdo"></td>
-                        <td style="vertical-align: top; text-align: left;" rowspan="100%" width="180px" class="cssdivPanelMenu">
+                        <td id="MenuPrincipal" style="vertical-align: top; text-align: left;" rowspan="100%" width="180px" class="cssdivPanelMenu">
                             <%--<br />--%>
                             <%--///////////////////////////////////////////////////////////////////////////////////////--%>
                             <%--///////////////////////////////////////////////////////////////////////////////////////--%>
