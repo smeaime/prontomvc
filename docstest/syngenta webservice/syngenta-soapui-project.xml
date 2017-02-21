@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<con:soapui-project id="2a73858c-81e5-47e1-81b0-0f099d23daf1" activeEnvironment="Default" name="syngenta" resourceRoot="" soapui-version="5.3.0" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:interface xsi:type="con:WsdlInterface" id="474444d0-5bc0-43b8-99bb-fcf7d3893e0d" wsaVersion="NONE" name="LoadDeclarationSoap_send_out_asyBinding" type="wsdl" bindingName="{urn:broker:o2c:s:global:delivery:loaddeclaration:100}LoadDeclarationSoap_send_out_asyBinding" soapVersion="1_1" anonymous="optional" definition="file:/Y:/pronto/docstest/syngenta%20webservice/WSDL%20structure/LoadDeclarationSoap_send_out_asyService.wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="file:\Y:\pronto\docstest\syngenta%20webservice\WSDL%20structure\LoadDeclarationSoap_send_out_asyService.wsdl"><con:part><con:url>file:\Y:\pronto\docstest\syngenta%20webservice\WSDL%20structure\LoadDeclarationSoap_send_out_asyService.wsdl</con:url><con:content><![CDATA[<wsdl:definitions name="LoadDeclarationSoap_send_out_asy" targetNamespace="urn:broker:o2c:s:global:delivery:loaddeclaration:100" xmlns:p1="urn:broker:o2c:s:global:delivery:loaddeclaration:100" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<con:soapui-project id="2a73858c-81e5-47e1-81b0-0f099d23daf1" activeEnvironment="Default" name="syngenta" resourceRoot="" soapui-version="5.3.0" abortOnError="false" runType="SEQUENTIAL" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:interface xsi:type="con:WsdlInterface" id="474444d0-5bc0-43b8-99bb-fcf7d3893e0d" wsaVersion="NONE" name="LoadDeclarationSoap_send_out_asyBinding" type="wsdl" bindingName="{urn:broker:o2c:s:global:delivery:loaddeclaration:100}LoadDeclarationSoap_send_out_asyBinding" soapVersion="1_1" anonymous="optional" definition="file:/Y:/pronto/docstest/syngenta%20webservice/WSDL%20structure/LoadDeclarationSoap_send_out_asyService.wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="file:\Y:\pronto\docstest\syngenta%20webservice\WSDL%20structure\LoadDeclarationSoap_send_out_asyService.wsdl"><con:part><con:url>file:\Y:\pronto\docstest\syngenta%20webservice\WSDL%20structure\LoadDeclarationSoap_send_out_asyService.wsdl</con:url><con:content><![CDATA[<wsdl:definitions name="LoadDeclarationSoap_send_out_asy" targetNamespace="urn:broker:o2c:s:global:delivery:loaddeclaration:100" xmlns:p1="urn:broker:o2c:s:global:delivery:loaddeclaration:100" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
   <wsdl:documentation/>
   <wsp:UsingPolicy wsdl:required="true"/>
   <wsp:Policy wsu:Id="OP_LoadDeclarationSoap_send_out_asy"/>
@@ -199,7 +199,60 @@
       <soap:address location="https://sappod.prc.syngenta.org:50001/XISOAPAdapter/MessageServlet?senderParty=&amp;senderService=Srv_BIT_BarterService&amp;receiverParty=&amp;receiverService=&amp;interface=LoadDeclarationSoap_send_out_asy&amp;interfaceNamespace=urn%3Abroker%3Ao2c%3As%3Aglobal%3Adelivery%3Aloaddeclaration%3A100" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"/>
     </wsdl:port>
   </wsdl:service>
-</wsdl:definitions>]]></con:content><con:type>http://schemas.xmlsoap.org/wsdl/</con:type></con:part></con:definitionCache><con:endpoints><con:endpoint>http://sappod.prc.syngenta.org:50000/XISOAPAdapter/MessageServlet?senderParty=&amp;senderService=Srv_BIT_BarterService&amp;receiverParty=&amp;receiverService=&amp;interface=LoadDeclarationSoap_send_out_asy&amp;interfaceNamespace=urn:broker:o2c:s:global:delivery:loaddeclaration:100</con:endpoint><con:endpoint>https://sappod.prc.syngenta.org:50001/XISOAPAdapter/MessageServlet?senderParty=&amp;senderService=Srv_BIT_BarterService&amp;receiverParty=&amp;receiverService=&amp;interface=LoadDeclarationSoap_send_out_asy&amp;interfaceNamespace=urn:broker:o2c:s:global:delivery:loaddeclaration:100</con:endpoint></con:endpoints><con:operation id="0ae45e7b-df86-4f67-b043-5880d654fa58" isOneWay="false" action="http://sap.com/xi/WebService/soap1.1" name="LoadDeclarationSoap_send_out_asy" bindingOperationName="LoadDeclarationSoap_send_out_asy" type="One-Way" inputName="" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="a37f2b85-b151-49ec-aab1-072547a11fce" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>https://oasis-pi-nonprod.syngenta.com/dev/XISOAPAdapter/MessageServlet?senderParty=&amp;senderService=Srv_BIT_BarterService&amp;receiverParty=&amp;receiverService=&amp;interface=LoadDeclarationSoap_send_out_asy&amp;interfaceNamespace=urn:broker:o2c:s:global:delivery:loaddeclaration:100</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:urn="urn:broker:o2c:s:global:delivery:loaddeclaration:100">\r
+</wsdl:definitions>]]></con:content><con:type>http://schemas.xmlsoap.org/wsdl/</con:type></con:part></con:definitionCache><con:endpoints><con:endpoint>http://sappod.prc.syngenta.org:50000/XISOAPAdapter/MessageServlet?senderParty=&amp;senderService=Srv_BIT_BarterService&amp;receiverParty=&amp;receiverService=&amp;interface=LoadDeclarationSoap_send_out_asy&amp;interfaceNamespace=urn:broker:o2c:s:global:delivery:loaddeclaration:100</con:endpoint><con:endpoint>https://oasis-pi-nonprod.syngenta.com/dev/XISOAPAdapter/MessageServlet?senderParty=&amp;senderService=Srv_BIT_BarterService&amp;receiverParty=&amp;receiverService=&amp;interface=LoadDeclarationSoap_send_out_asy&amp;interfaceNamespace=urn:broker:o2c:s:global:delivery:loaddeclaration:100</con:endpoint><con:endpoint>https://sappod.prc.syngenta.org:50001/XISOAPAdapter/MessageServlet?senderParty=&amp;senderService=Srv_BIT_BarterService&amp;receiverParty=&amp;receiverService=&amp;interface=LoadDeclarationSoap_send_out_asy&amp;interfaceNamespace=urn:broker:o2c:s:global:delivery:loaddeclaration:100</con:endpoint></con:endpoints><con:operation id="0ae45e7b-df86-4f67-b043-5880d654fa58" isOneWay="false" action="http://sap.com/xi/WebService/soap1.1" name="LoadDeclarationSoap_send_out_asy" bindingOperationName="LoadDeclarationSoap_send_out_asy" type="One-Way" inputName="" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="a37f2b85-b151-49ec-aab1-072547a11fce" name="Request 1" wssPasswordType=""><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>https://oasis-pi-nonprod.syngenta.com/dev/XISOAPAdapter/MessageServlet?senderParty=&amp;senderService=Srv_BIT_BarterService&amp;receiverParty=&amp;receiverService=&amp;interface=LoadDeclarationSoap_send_out_asy&amp;interfaceNamespace=urn:broker:o2c:s:global:delivery:loaddeclaration:100</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:urn="urn:broker:o2c:s:global:delivery:loaddeclaration:100">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <urn:MT_Delivery>\r
+         <!--Zero or more repetitions:-->\r
+      	
+      	<delivery>
+		<action>I</action>
+		<delivery_type>CP</delivery_type>
+		<carta_porte>12345678</carta_porte>
+		<grain_receiver>20243212349</grain_receiver>
+		<CGT_number>1222211</CGT_number>
+		<Intermediario>Nombre interm</Intermediario>
+		<Intermediario_CUIT>209993332</Intermediario_CUIT>
+		<corredor_CUIT>20213459873</corredor_CUIT>
+		<delivery_date>12152017</delivery_date>
+		<item>
+			<grain>014</grain>
+			<quantity>10</quantity>
+			<UOM>TO</UOM>
+			<origin>00006-01</origin>
+			<destination>00004-01</destination>
+			<year_of_Harvest>16/17</year_of_Harvest>
+		</item>
+	</delivery>
+		
+		<delivery>
+		<action>I</action>
+		<delivery_type>CP</delivery_type>
+		<carta_porte>12345678</carta_porte>
+		<grain_receiver>20243212349</grain_receiver>
+		<CGT_number>1222211</CGT_number>
+		<Intermediario>Nombre interm</Intermediario>
+		<Intermediario_CUIT>209993332</Intermediario_CUIT>
+		<entregador>Entregador nombre</entregador>
+		<entregador_CUIT>20213459873</entregador_CUIT>
+		<destinatario>Destino nombre</destinatario>
+		<destinatario_CUIT>20213459873</destinatario_CUIT>
+		<delivery_date>12152017</delivery_date>
+		<item>
+			<grain>014</grain>
+			<quantity>10</quantity>
+			<UOM>TO</UOM>
+			<origin>00006-01</origin>
+			<destination>00004-01</destination>
+			<year_of_Harvest>16/17</year_of_Harvest>
+		</item>
+	</delivery>
+
+
+         
+      </urn:MT_Delivery>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:credentials><con:username>BROKERDEV</con:username><con:password>Welcome@1</con:password><con:selectedAuthProfile>Basic</con:selectedAuthProfile><con:addedBasicAuthenticationTypes>Basic</con:addedBasicAuthenticationTypes><con:preemptive>true</con:preemptive><con:authType>Preemptive</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://sap.com/xi/WebService/soap1.1"/><con:wsrmConfig version="1.2"/></con:call></con:operation></con:interface><con:testSuite id="c7e5932d-99b8-41ea-883b-cf7de7df867b" name="LoadDeclarationSoap_send_out_asyBinding TestSuite"><con:settings/><con:runType>SEQUENTIAL</con:runType><con:testCase id="2e405756-486e-4049-ba3f-8ffee34964ed" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="LoadDeclarationSoap_send_out_asy TestCase" searchProperties="true"><con:settings/><con:testStep type="request" id="ae59e33e-d1c0-4775-93d1-4bd53a949787" name="LoadDeclarationSoap_send_out_asy"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>LoadDeclarationSoap_send_out_asyBinding</con:interface><con:operation>LoadDeclarationSoap_send_out_asy</con:operation><con:request name="LoadDeclarationSoap_send_out_asy" id="87effb10-c91d-4c0f-a429-0d0ba407ff5e"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://sappod.prc.syngenta.org:50000/XISOAPAdapter/MessageServlet?senderParty=&amp;senderService=Srv_BIT_BarterService&amp;receiverParty=&amp;receiverService=&amp;interface=LoadDeclarationSoap_send_out_asy&amp;interfaceNamespace=urn:broker:o2c:s:global:delivery:loaddeclaration:100</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:urn="urn:broker:o2c:s:global:delivery:loaddeclaration:100">\r
    <soapenv:Header/>\r
    <soapenv:Body>\r
       <urn:MT_Delivery>\r
@@ -265,70 +318,4 @@
          </delivery>\r
       </urn:MT_Delivery>\r
    </soapenv:Body>\r
-</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://sap.com/xi/WebService/soap1.1"/><con:wsrmConfig version="1.2"/></con:call></con:operation></con:interface><con:testSuite id="c7e5932d-99b8-41ea-883b-cf7de7df867b" name="LoadDeclarationSoap_send_out_asyBinding TestSuite"><con:settings/><con:runType>SEQUENTIAL</con:runType><con:testCase id="2e405756-486e-4049-ba3f-8ffee34964ed" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="LoadDeclarationSoap_send_out_asy TestCase" searchProperties="true"><con:settings/><con:testStep type="request" id="ae59e33e-d1c0-4775-93d1-4bd53a949787" name="LoadDeclarationSoap_send_out_asy"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>LoadDeclarationSoap_send_out_asyBinding</con:interface><con:operation>LoadDeclarationSoap_send_out_asy</con:operation><con:request name="LoadDeclarationSoap_send_out_asy" id="87effb10-c91d-4c0f-a429-0d0ba407ff5e"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://sappod.prc.syngenta.org:50000/XISOAPAdapter/MessageServlet?senderParty=&amp;senderService=Srv_BIT_BarterService&amp;receiverParty=&amp;receiverService=&amp;interface=LoadDeclarationSoap_send_out_asy&amp;interfaceNamespace=urn:broker:o2c:s:global:delivery:loaddeclaration:100</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:urn="urn:broker:o2c:s:global:delivery:loaddeclaration:100">\r
-   <soapenv:Header/>\r
-   <soapenv:Body>\r
-      <urn:MT_Delivery>\r
-         <!--Zero or more repetitions:-->\r
-         <delivery>\r
-            <!--Optional:-->\r
-            <action>?</action>\r
-            <!--Optional:-->\r
-            <delivery_type>?</delivery_type>\r
-            <!--Optional:-->\r
-            <carta_porte>?</carta_porte>\r
-            <!--Optional:-->\r
-            <grain_receiver>?</grain_receiver>\r
-            <!--Optional:-->\r
-            <CGT_number>?</CGT_number>\r
-            <!--Optional:-->\r
-            <titular>?</titular>\r
-            <!--Optional:-->\r
-            <titular_CUIT>?</titular_CUIT>\r
-            <!--Optional:-->\r
-            <Intermediario>?</Intermediario>\r
-            <!--Optional:-->\r
-            <Intermediario_CUIT>?</Intermediario_CUIT>\r
-            <!--Optional:-->\r
-            <remitente>?</remitente>\r
-            <!--Optional:-->\r
-            <remitente_CUIT>?</remitente_CUIT>\r
-            <!--Optional:-->\r
-            <corredor_CUIT>?</corredor_CUIT>\r
-            <!--Optional:-->\r
-            <entregador>?</entregador>\r
-            <!--Optional:-->\r
-            <entregador_CUIT>?</entregador_CUIT>\r
-            <!--Optional:-->\r
-            <destinatario>?</destinatario>\r
-            <!--Optional:-->\r
-            <destinatario_CUIT>?</destinatario_CUIT>\r
-            <!--Optional:-->\r
-            <destino>?</destino>\r
-            <!--Optional:-->\r
-            <destino_CUIT>?</destino_CUIT>\r
-            <!--Optional:-->\r
-            <transportista>?</transportista>\r
-            <!--Optional:-->\r
-            <transportista_CUIT>?</transportista_CUIT>\r
-            <!--Optional:-->\r
-            <delivery_date>?</delivery_date>\r
-            <!--Zero or more repetitions:-->\r
-            <item>\r
-               <!--Optional:-->\r
-               <grain>?</grain>\r
-               <!--Optional:-->\r
-               <quantity>?</quantity>\r
-               <!--Optional:-->\r
-               <UOM>?</UOM>\r
-               <!--Optional:-->\r
-               <origin>?</origin>\r
-               <!--Optional:-->\r
-               <destination>?</destination>\r
-               <!--Optional:-->\r
-               <year_of_Harvest>?</year_of_Harvest>\r
-            </item>\r
-         </delivery>\r
-      </urn:MT_Delivery>\r
-   </soapenv:Body>\r
-</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:wsaConfig action="http://sap.com/xi/WebService/soap1.1"/></con:request></con:config></con:testStep><con:properties/></con:testCase><con:properties/></con:testSuite><con:properties/><con:wssContainer/><con:oAuth2ProfileContainer/><con:oAuth1ProfileContainer/></con:soapui-project>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:wsaConfig action="http://sap.com/xi/WebService/soap1.1"/></con:request></con:config></con:testStep><con:properties/></con:testCase><con:properties/></con:testSuite><con:endpointStrategy xsi:type="con:DefaultEndpointStrategy" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:endpoint mode="COMPLEMENT" username="BROKERDEV" password="Welcome@1">https://sappod.prc.syngenta.org:50001/XISOAPAdapter/MessageServlet?senderParty=&amp;senderService=Srv_BIT_BarterService&amp;receiverParty=&amp;receiverService=&amp;interface=LoadDeclarationSoap_send_out_asy&amp;interfaceNamespace=urn:broker:o2c:s:global:delivery:loaddeclaration:100</con:endpoint></con:endpointStrategy><con:properties/><con:wssContainer/><con:oAuth2ProfileContainer/><con:oAuth1ProfileContainer/></con:soapui-project>
