@@ -42,13 +42,16 @@
               <Width>36.64179mm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>25mm</Width>
+              <Width>27.91042mm</Width>
             </TablixColumn>
             <TablixColumn>
               <Width>25mm</Width>
             </TablixColumn>
             <TablixColumn>
               <Width>52.25208mm</Width>
+            </TablixColumn>
+            <TablixColumn>
+              <Width>25mm</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
@@ -477,7 +480,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>Kilos</Value>
+                              <Value>Kilos Procedencia</Value>
                               <Style>
                                 <FontSize>8pt</FontSize>
                                 <FontWeight>Bold</FontWeight>
@@ -560,6 +563,41 @@
                         </Paragraph>
                       </Paragraphs>
                       <rd:DefaultName>Textbox7</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Color>#c6daf8</Color>
+                          <Style>Solid</Style>
+                        </Border>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="Textbox9">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>Kilos Descarga</Value>
+                              <Style>
+                                <FontSize>8pt</FontSize>
+                                <FontWeight>Bold</FontWeight>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style>
+                            <TextAlign>Center</TextAlign>
+                          </Style>
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>Textbox9</rd:DefaultName>
                       <Style>
                         <Border>
                           <Color>#c6daf8</Color>
@@ -1002,7 +1040,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!NetoProc.Value</Value>
+                              <Value>=Fields!NetoPto.Value</Value>
                               <Style>
                                 <FontSize>8pt</FontSize>
                                 <Color>#4d4d4d</Color>
@@ -1093,7 +1131,40 @@
                         <PaddingBottom>2pt</PaddingBottom>
                       </Style>
                     </Textbox>
-                    <rd:Selected>true</rd:Selected>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="Textbox10">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>=Fields!NetoFinal.Value</Value>
+                              <Style>
+                                <FontSize>8pt</FontSize>
+                                <Color>#4d4d4d</Color>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style />
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>Textbox10</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Color>#e5e5e5</Color>
+                          <Style>Solid</Style>
+                        </Border>
+                        <BackgroundColor>White</BackgroundColor>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
                   </CellContents>
                 </TablixCell>
               </TablixCells>
@@ -1102,6 +1173,7 @@
         </TablixBody>
         <TablixColumnHierarchy>
           <TablixMembers>
+            <TablixMember />
             <TablixMember />
             <TablixMember />
             <TablixMember />
@@ -1152,7 +1224,7 @@
         <Top>0mm</Top>
         <Left>0mm</Left>
         <Height>11.4709mm</Height>
-        <Width>417.99719mm</Width>
+        <Width>445.90761mm</Width>
         <Style>
           <Border>
             <Style>None</Style>
@@ -1169,7 +1241,7 @@
       <BackgroundColor>White</BackgroundColor>
     </Style>
   </Body>
-  <Width>417.99719mm</Width>
+  <Width>445.90761mm</Width>
   <Page>
     <PageFooter>
       <Height>10.90083mm</Height>

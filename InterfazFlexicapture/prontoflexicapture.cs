@@ -3404,7 +3404,7 @@ Formato localidad-provincia	destination	x
 
                 xmlcp.carta_porte = (dbcp.NumeroCartaDePorte ?? 0).NullSafeToString();
                 xmlcp.action = "I";
-                xmlcp.CGT_number= dbcp.CTG.NullSafeToString();
+                xmlcp.CGT_number = dbcp.CTG.NullSafeToString();
                 xmlcp.corredor_CUIT = dbcp.CorredorCUIT.Replace("-", "");
                 xmlcp.delivery_date = dbcp.FechaDescarga.Value.ToString("ddMMyyyy");
                 xmlcp.delivery_type = "CP";
@@ -3471,15 +3471,15 @@ Formato localidad-provincia	destination	x
             }
 
 
-            
-             InterfazFlexicapture.ServiceReference1.LoadDeclarationSoap_send_out_asy1 proxy = 
-                        new InterfazFlexicapture.ServiceReference1.LoadDeclarationSoap_send_out_asy1(cps.ToArray());
-    //        var files = proxy.
-    //proxy.Close();
-    //        success = true;
+
+            InterfazFlexicapture.ServiceReference1.LoadDeclarationSoap_send_out_asy1 proxy =
+                       new InterfazFlexicapture.ServiceReference1.LoadDeclarationSoap_send_out_asy1(cps.ToArray());
+            //        var files = proxy.
+            //proxy.Close();
+            //        success = true;
 
 
-            
+
             return cps;
 
         }
@@ -3984,7 +3984,7 @@ Formato localidad-provincia	destination	x
                                  a.ProcedenciaDesc.ToString(),
 
 
-                                 a.NetoProc.ToString(),
+                                Convert.ToInt32( a.NetoPto).ToString(),
 
                                 a.ObservacionesSituacion,
 
@@ -4003,6 +4003,8 @@ Formato localidad-provincia	destination	x
 
 
                                 a.Patente,
+
+                                   Convert.ToInt32(a.NetoFinal).ToString(),
 
 
                                  // a.FechaSalida==null ? "" :  a.FechaSalida.GetValueOrDefault().ToString("dd/MM/yyyy"),

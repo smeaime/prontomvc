@@ -1,4 +1,6 @@
-﻿<%@ Page Language="VB" MasterPageFile="~/MasterPage.master" AutoEventWireup="false"
+﻿<%@ Page Language="VB" 
+    AutoEventWireup="false"
+     MasterPageFile="~/MasterPage.master" 
     CodeFile="SituacionCalidad.aspx.vb" Inherits="SituacionCalidad"
     Title="Informes" ValidateRequest="false" EnableEventValidation="false" %>
 
@@ -71,7 +73,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
     </div>
 
 
-    <div>
+    <div style="margin-left: 20px">
         <%--   <table id="list9">
         </table>
         <div id="pager9">
@@ -171,6 +173,8 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
         <input type="button" id="btnPanelInformeAjax" value="Resumen" class="btn btn-primary" />
 
         <asp:Button ID="btnPanelInforme" Text="RESUMEN" runat="server" Visible="false" CssClass="btn btn-primary" />
+
+        log del importador
         <br />
         <div id="Salida2"></div>
         <asp:Literal ID="salida" runat="server"></asp:Literal>
@@ -239,129 +243,17 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
     </div>
 
 
-    <div>
-        <%--<script type="text/javascript">
-            $(document).ready(function () {
-                var lastSelectedId;
-                var inEdit;
-                grid = $("#Lista");
-
-                //Para que haga wrap en las celdas
-                $('.ui-jqgrid .ui-jqgrid-htable th div').css('white-space', 'normal');
-
-
-
-
-                $('#Lista').jqGrid({
-                    //url: '@Url.Action("Pedidos_DynamicGridData", "Pedido")',
-                    url: 'Handler.ashx',
-
-                    postData: { 'FechaInicial': function () { return $("#FechaInicial").val(); }, 'FechaFinal': function () { return $("#FechaFinal").val(); } },
-                    datatype: 'json',
-                    mtype: 'POST',
-                    colNames: ['Acciones', 'IdPedido', 'Fecha', 'Destino', 'Kilos', 'Oficina'
-
-                    ],
-                    colModel: [
-
-                                { name: 'act', index: 'act', align: 'center', width: 80, sortable: false, frozen: true, editable: false, search: false }, //, formatter: 'showlink', formatoptions: { baseLinkUrl: '@Url.Action("Edit")'} },
-                                { name: 'IdCartasDePorteControlDescarga', index: 'IdCartasDePorteControlDescarga', align: 'left', width: 100, editable: false, hidden: true },
-                                { name: 'Fecha', index: 'Fecha', width: 120, align: 'center', sorttype: 'date', editable: true, formatoptions: { newformat: 'dd/mm/yy' }, datefmt: 'dd/mm/yy', search: false },
-                                { name: 'WilliamsDestino', index: 'WilliamsDestino', align: 'right', width: 240, frozen: true, editable: false, search: true, searchoptions: { sopt: ['cn', 'eq'] } },
-                                { name: 'TotalDescargaDia', index: 'TotalDescargaDia', align: 'right', width: 70, frozen: true, editable: false, search: true, searchoptions: { sopt: ['cn', 'eq'] } },
-                                { name: 'IdPuntoVenta', index: 'IdPuntoVenta', align: 'right', width: 50, frozen: true, editable: false, search: true, searchoptions: { sopt: ['cn', 'eq'] } }
-
-
-                    ],
-                    onSelectRow: function (id) {
-                        if (id && id !== lastSelectedId) {
-                            if (typeof lastSelectedId !== "undefined") {
-                                grid.jqGrid('restoreRow', lastSelectedId);
-                            }
-                            lastSelectedId = id;
-                        }
-                    },
-                    ondblClickRow: function (idrow) {
-                        window.location.href = ROOT + 'Pedido/Edit/' + idrow;
-
-
-                        // $("#edtData").click();
-
-                        //edicion inline
-                        // http://stackoverflow.com/questions/8163106/form-editing-with-inline-editing-to-same-jqgrid
-                        //                if(id && id!==lastSel){ 
-                        //                    jQuery('#Lista').restoreRow(lastSel); 
-                        //                    lastSel=id; 
-                        //                }
-                        //                jQuery('#Lista').editRow(id, true); 
-                        //   
-
-                    },
-
-
-
-
-                    pager: $('#ListaPager'),
-                    rowNum: 15,
-                    rowList: [10, 20, 50],
-                    sortname: 'Fecha', // 'FechaRecibo,NumeroRecibo',
-                    sortorder: 'desc',
-                    viewrecords: true,
-                    emptyrecords: 'No hay registros para mostrar', //,
-
-
-                    ///////////////////////////////
-                    width: 'auto', // 'auto',
-                    autowidth: true,
-                    shrinkToFit: false,
-                    //////////////////////////////
-
-                    height: $(window).height() - 500, // '100%'
-                    altRows: false,
-                    footerrow: false, //true,
-                    userDataOnFooter: true
-                    // ,caption: '<b>FACTURAS</b>'
-
-                    , gridview: true
-                    , multiboxonly: true
-                    , multipleSearch: true
-
-
-
-
-
-                });
-
-                jQuery("#Lista").jqGrid('bindKeys');
-
-                jQuery("#Lista").jqGrid('navGrid', '#ListaPager',
-                 { csv: true, refresh: true, add: false, edit: false, del: false }, {}, {}, {},
-                 {
-                     //sopt: ["cn"]
-                     //sopt: ['eq', 'ne', 'lt', 'le', 'gt', 'ge', 'bw', 'bn', 'ew', 'en', 'cn', 'nc', 'nu', 'nn', 'in', 'ni'],
-                     width: 700, closeOnEscape: true, closeAfterSearch: true, multipleSearch: true, overlay: false
-                 }
-                );
-
-                $("#Lista").jqGrid("inlineNav", "#ListaPager", { addParams: { position: "last" } });
-
-                jQuery("#Lista").filterToolbar({
-                    stringResult: true, searchOnEnter: true,
-                    defaultSearch: 'cn',
-                    enableClear: false
-                }); // si queres sacar el enableClear, definilo en las searchoptions de la columna específica http://www.trirand.com/blog/?page_id=393/help/clearing-the-clear-icon-in-a-filtertoolbar/
-
-            })
-
-        </script>--%>
-
-
-
-
-
+    
         <script type="text/javascript">
 
             "use strict";
+
+            $(function() {
+                //$('#MenuPrincipal').fadeOut(); 
+                $('#MenuPrincipal').hide(); 
+            });
+           
+
 
             
             $('#btnExportarGrillaAjax3').click(function () {
@@ -1154,8 +1046,8 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                     colNames: ['', 'Id', 'Nro CP', 'Turno', 'Situacion',
                                 'Producto', 'Titular', 'Intermediario', 'R Comercial', 'Corredor',
                                 'Destinatario', 'Destino', 'IdDestino' ,'Entregador','Procedencia',
-                                'Kilos', 'Obs Situacion', 'Arribo', 'Descarga', 'Punto Venta',
-                                'Fecha actualizacion', 'Patente'
+                                'Kilos Procedencia', 'Obs Situacion', 'Arribo', 'Descarga', 'Punto Venta',
+                                'Fecha actualizacion', 'Patente', 'Kilos Descargados'
                     ],
 
                     colModel: [
@@ -1890,7 +1782,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
     }
 },
 
-{ name: 'NetoProc', index: 'NetoProc', align: 'left', width: 150, hidden: false, editable: false, edittype: 'text', sortable: false },
+{ name: 'NetoPto', index: 'NetoPto', align: 'left', width: 60, hidden: false, editable: false, edittype: 'text', sortable: false },
 
 { name: 'ObservacionesSituacion', index: 'ObservacionesSituacion', align: 'left', width: 100, editable: true, hidden: false, sortable: false },
 
@@ -1996,6 +1888,8 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
 { name: 'Patente', index: 'Patente', align: 'left', width: 100, hidden: false, editable: false, edittype: 'text', sortable: false },
 
+{ name: 'NetoProc', index: 'NetoProc', align: 'left', width: 60, hidden: false, editable: false, edittype: 'text', sortable: false }
+
 
                     ],
 
@@ -2059,8 +1953,8 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                     //},
 
                     pager: $('#ListaPager'),
-                    rowNum: 20,
-                    rowList: [10, 20, 50, 100],
+                    rowNum: 1000,
+                    rowList: [10, 20, 50, 100,500,1000],
                     sortname: 'IdCartaDePorte',  //'FechaDescarga', //'NumeroCartaDePorte',
                     sortorder: 'desc',
                     viewrecords: true,
@@ -2128,14 +2022,14 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
 
                 //$('#Lista').jqGrid('setGridWidth', '1000');
-                $('#Lista').jqGrid('setGridWidth', $(window).width() - 220);
+                $('#Lista').jqGrid('setGridWidth', $(window).width() - 40);
 
             });
 
 
 
             $(window).resize(function () {
-                $('#Lista').jqGrid('setGridWidth', $(window).width() - 220);
+                $('#Lista').jqGrid('setGridWidth', $(window).width() - 40);
                 //RefrescaAnchoJqgrids();
             });
 
@@ -2156,7 +2050,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
 
 
-    </div>
+    
     <style type="text/css">
         .myAltRowClassDemorado {
             background-color:  red;
