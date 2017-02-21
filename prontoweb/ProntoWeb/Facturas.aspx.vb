@@ -61,6 +61,8 @@ Partial Class Facturas
                     LoteFacturasNET(listaf, "A")
                 ElseIf iisNull(Request.QueryString.Get("Modo"), "") = "FacturaElectronica" Then
 
+                    'pedir confirmacion
+
                     barras.EnviarFacturaElectronicaEMail( _
                                 CInt(Request.QueryString.Get("ImprimirDesde")), _
                                 CInt(Request.QueryString.Get("ImprimirHasta")), _
@@ -2101,6 +2103,9 @@ Partial Class Facturas
                     MsgBoxAjax(Me, "No hay facturas seleccionadas")
                     Return
                 End If
+
+                'pedir confirmacion
+
                 sErr = barras.EnviarFacturaElectronicaEMail( _
                           lista, _
                            HFSC.Value, bVistaPrevia, UsuarioSesion.Mail(HFSC.Value, Session) _
@@ -2109,6 +2114,10 @@ Partial Class Facturas
                 For i = f.Id To FacturaManager.UltimoId(HFSC.Value)
                     lista.Add(i)
                 Next
+
+                'pedir confirmacion
+
+
                 sErr = barras.EnviarFacturaElectronicaEMail( _
                            lista, _
                             HFSC.Value, bVistaPrevia, UsuarioSesion.Mail(HFSC.Value, Session) _
@@ -2117,6 +2126,10 @@ Partial Class Facturas
                 For i = f.Id To f2.Id
                     lista.Add(i)
                 Next
+
+                'pedir confirmacion
+
+
                 sErr = barras.EnviarFacturaElectronicaEMail( _
                            lista, _
                             HFSC.Value, bVistaPrevia, UsuarioSesion.Mail(HFSC.Value, Session) _
