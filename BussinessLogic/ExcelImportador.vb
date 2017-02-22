@@ -2031,7 +2031,7 @@ Public Class ExcelImportadorManager
 
                         If actua(.Vendedor, BuscarClientePorCUIT(r(7), SC, r(6))) Then log += "Titular; "
                         If .Vendedor <= 0 Then .Vendedor = Nothing
-                        qué hacemos acá? loguearlo nada mas? no puedo darlo de alta si se lo banca? -pero si ya lo estoy intentando!
+                        'qué hacemos acá? loguearlo nada mas? no puedo darlo de alta si se lo banca? -pero si ya lo estoy intentando!
 
                         'r(6) = NombreCliente(SC, .Vendedor)
 
@@ -2067,7 +2067,7 @@ Public Class ExcelImportadorManager
                         Else
 
                         End If
-                        Y en este caso?
+                        'Y en este caso?
 
 
 
@@ -2093,7 +2093,7 @@ Public Class ExcelImportadorManager
                         If actua(.Procedencia, BuscaIdLocalidadPreciso(DiccionarioEquivalenciasManager.BuscarEquivalencia(SC, r(24)), SC)) Then log += "Procedencia; "
                         If .Procedencia <= 0 Then .Procedencia = Nothing
                         '.Procedencia = BuscaIdLocalidadPreciso(DiccionarioEquivalenciasManager.BuscarEquivalencia(SC, r(24)), SC)
-                        Y aca?
+                        'Y aca?
 
 
 

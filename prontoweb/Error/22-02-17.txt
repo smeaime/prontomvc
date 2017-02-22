@@ -1,0 +1,50 @@
+
+Log Entry : 
+02/22/2017 10:38:53
+Error in: http://localhost:58911/login.aspx?ReturnUrl=/. Error Message:System.Threading.ThreadAbortException
+Subproceso anulado.
+   en System.Threading.Thread.AbortInternal()
+   en System.Threading.Thread.Abort(Object stateInfo)
+   en System.Web.HttpResponse.AbortCurrentThread()
+   en System.Web.HttpResponse.End()
+   en System.Web.HttpResponse.Redirect(String url, Boolean endResponse, Boolean permanent)
+   en System.Web.HttpResponse.Redirect(String url)
+   en Login.Page_Load(Object sender, EventArgs e) en C:\Users\Administrador\Documents\bdl\pronto\prontoweb\Login.aspx.vb:línea 169
+mscorlib
+__________________________
+
+Log Entry : 
+02/22/2017 10:40:20
+Error in: http://localhost:58911/ProntoWeb/WebServiceCartas.asmx/BajarImagenDeCartaPorte?usuario=Mariano&password=pirulito!&numerocarta=551316582. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartaDePorteManager.IdClienteEquivalenteDelIdVendedor(Int64 IdVendedor, String SC) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 11705
+   en CartaDePorteManager.BajarImagenDeCartaPorte_DLL(String usuario, String password, Int64 numerocarta, String SC, String DirApp, String ConexBDLmaster) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 15856
+BusinessLogic
+__________________________
+
+Log Entry : 
+02/22/2017 10:42:29
+Error in: http://localhost:58911/ProntoWeb/Principal.aspx. Error Message:System.Threading.ThreadAbortException
+Subproceso anulado.
+   en System.Threading.Thread.AbortInternal()
+   en System.Threading.Thread.Abort(Object stateInfo)
+   en System.Web.HttpResponse.AbortCurrentThread()
+   en System.Web.HttpResponse.End()
+   en System.Web.HttpResponse.Redirect(String url, Boolean endResponse, Boolean permanent)
+   en System.Web.HttpResponse.Redirect(String url)
+   en Login.Page_Load(Object sender, EventArgs e) en C:\Users\Administrador\Documents\bdl\pronto\prontoweb\Login.aspx.vb:línea 171
+mscorlib
+__________________________
+
+Log Entry : 
+02/22/2017 10:43:24
+Error in: http://localhost:58911/ProntoWeb/WebServiceCartas.asmx/BajarImagenDeCartaPorte?usuario=Mariano&password=pirulito!&numerocarta=551316582. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartaDePorteManager.IdClienteEquivalenteDelIdVendedor(Int64 IdVendedor, String SC) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 11706
+BusinessLogic
+__________________________
+
+Log Entry : 
+02/22/2017 10:43:26
+Error in: http://localhost:58911/ProntoWeb/WebServiceCartas.asmx/BajarImagenDeCartaPorte?usuario=Mariano&password=pirulito!&numerocarta=551316582. Error Message:La carta no corresponde al usuario
+__________________________
