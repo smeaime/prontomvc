@@ -11695,31 +11695,38 @@ Public Class CartaDePorteManager
     End Function
 
     Public Shared Function IdClienteEquivalenteDelIdVendedor(ByVal IdVendedor As Long, ByVal SC As String) As Long
+        Try
 
-        Using db As New DemoProntoEntities(Auxiliares.FormatearConexParaEntityFramework(Encriptar(SC)))
-
-
-            '        buscar por cuit, y si no por razon social
-
-            Dim o = db.Vendedores.Find(IdVendedor)
-            Dim cuit = o.Cuit.Replace("-", "")
-
-            Dim c = db.Clientes.Where(Function(x) x.Cuit.Replace("-", "") = cuit).FirstOrDefault
-
-            If c Is Nothing Then
-                Dim idcliente As String = BuscaIdClientePreciso(o.Nombre, SC)
-
-                Return idcliente
-
-            Else
-
-                Return c.IdCliente
-
-            End If
+            Using db As New DemoProntoEntities(Auxiliares.FormatearConexParaEntityFramework(Encriptar(SC)))
 
 
+                '        buscar por cuit, y si no por razon social
 
-        End Using
+                Dim o = db.Vendedores.Find(IdVendedor)
+                Dim cuit = o.Cuit.Replace("-", "")
+
+                Dim c = db.Clientes.Where(Function(x) x.Cuit.Replace("-", "") = cuit).FirstOrDefault
+
+                If c Is Nothing Then
+                    Dim idcliente As String = BuscaIdClientePreciso(o.Nombre, SC)
+
+                    Return idcliente
+
+                Else
+
+                    Return c.IdCliente
+
+                End If
+
+
+
+            End Using
+        Catch ex As Exception
+            ErrHandler2.WriteError(ex)
+            Return -1
+        End Try
+
+
     End Function
 
 
