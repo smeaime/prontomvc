@@ -46,6 +46,7 @@ using System.Data.Objects;
 using OfficeOpenXml; //EPPLUS, no confundir con el OOXML
 using System.Data;
 
+using System.ServiceModel;
 
 
 namespace Fenton.Example
@@ -3471,12 +3472,85 @@ Formato localidad-provincia	destination	x
             }
 
 
+            //el q tiene el sufijo "1" pinta q es el q usa https
 
-            InterfazFlexicapture.ServiceReference1.LoadDeclarationSoap_send_out_asy1 proxy =
-                       new InterfazFlexicapture.ServiceReference1.LoadDeclarationSoap_send_out_asy1(cps.ToArray());
-            //        var files = proxy.
-            //proxy.Close();
-            //        success = true;
+
+            // - http://stackoverflow.com/questions/352654/could-not-find-default-endpoint-element
+            // Could not find default endpoint element that references contract 'IMySOAPWebService' in the service model client configuaration section. This might be because no configuaration file was found for your application or because no end point element matching this contract could be found in the client element
+            // "This error can arise if you are calling the service in a class library and calling the class library from another project."
+
+
+
+
+            // http://stackoverflow.com/questions/3703844/consume-a-soap-web-service-without-relying-on-the-app-config
+
+
+
+            //'Set up the binding element to match the app.config settings '
+            var binding = new System.ServiceModel.BasicHttpBinding();
+            binding.Name = "LoadDeclarationSoap_send_out_asyBinding1";
+            //binding.CloseTimeout = TimeSpan.FromMinutes(1);
+            //binding.OpenTimeout = TimeSpan.FromMinutes(1);
+            //binding.ReceiveTimeout = TimeSpan.FromMinutes(10);
+            //binding.SendTimeout = TimeSpan.FromMinutes(1);
+            //binding.AllowCookies = false;
+            //binding.BypassProxyOnLocal = false;
+            //binding.HostNameComparisonMode = HostNameComparisonMode.StrongWildcard;
+            //binding.MaxBufferSize = 65536;
+            //binding.MaxBufferPoolSize = 524288;
+            //binding.MessageEncoding = WSMessageEncoding.Text;
+            //binding.TextEncoding = System.Text.Encoding.UTF8;
+            //binding.TransferMode = TransferMode.Buffered;
+            //binding.UseDefaultWebProxy = true;
+
+            //binding.ReaderQuotas.MaxDepth = 32;
+            //binding.ReaderQuotas.MaxStringContentLength = 8192;
+            //binding.ReaderQuotas.MaxArrayLength = 16384;
+            //binding.ReaderQuotas.MaxBytesPerRead = 4096;
+            //binding.ReaderQuotas.MaxNameTableCharCount = 16384;
+
+
+
+
+            binding.Security.Mode = BasicHttpSecurityMode.Transport; // WebHttpSecurityMode.Transport; // para https. para http es   BasicHttpSecurityMode.None;
+            binding.Security.Transport.ClientCredentialType = HttpClientCredentialType.Basic;
+            binding.Security.Transport.ProxyCredentialType = HttpProxyCredentialType.None;
+            binding.Security.Transport.Realm = "XISOAPApps";
+            binding.Security.Message.ClientCredentialType = BasicHttpMessageCredentialType.UserName;
+            binding.Security.Message.AlgorithmSuite = System.ServiceModel.Security.SecurityAlgorithmSuite.Default;
+
+            //'Define the endpoint address'
+            var endpointStr = @"https://oasis-pi-nonprod.syngenta.com/dev/XISOAPAdapter/MessageServlet?senderParty=&senderService=Srv_BIT_BarterService&receiverParty=&receiverService=&interface=LoadDeclarationSoap_send_out_asy&interfaceNamespace=urn:broker:o2c:s:global:delivery:loaddeclaration:100";
+            var endpoint = new EndpointAddress(endpointStr);
+            //'Instantiate the SOAP client using the binding and endpoint'
+            //'that were defined above'
+
+
+            //var client = new MyServicesSoapClient(binding, endpoint);
+
+
+            var ser = new InterfazFlexicapture.ServiceReference1.LoadDeclarationSoap_send_out_asyClient(binding, endpoint);
+            ser.ClientCredentials.UserName.UserName = "BROKERDEV";
+            ser.ClientCredentials.UserName.Password = "Welcome@1";
+
+            try
+            {
+                //usar fiddler para depurar
+                // tambien http://stackoverflow.com/questions/300674/getting-raw-soap-data-from-a-web-reference-client-running-in-asp-net
+                ser.LoadDeclarationSoap_send_out_asy(cps.ToArray());
+                //        var files = proxy.
+                ser.Close();
+                //        success = true;
+
+
+            }
+            catch (Exception ex)
+            {
+                //  http://stackoverflow.com/questions/643241/problem-with-wcf-client-calling-one-way-operation
+                // throw;
+
+                ErrHandler2.WriteError(ex);
+            }
 
 
 
