@@ -3778,12 +3778,11 @@ Formato localidad-provincia	destination	x
             //Public Shared Situaciones() As String = {"Autorizado", "Demorado", "Posicion", "Descargado", "A Descargar", "Rechazado", "Desviado", "CP p/cambiar", "Sin Cupo"}
 
             string titulo = " <table cellpadding=15 style=\"text-align: center; font-size: large; width: 1100px;height: 400px;\"> <tr> " +
-                        "   <td style=\"color: blue;\"> Posición </td>" +
-                        "   <td style=\"color: red\">Demorado</td>" +
+                        "   <td style=\"color: blue;\"> <input id='titPosicion'  type='button'  value='Posición'> </input></td>" +
+                        "   <td style=\"color: red\"> <input id='titDemorado' type='button'  value='Demorado+Rech'> </input> </td>" +
                         "    <td style=\"color: green\"> Autorizado</td>" +
                         "  <td style=\"color: yellow\">A Descargar</td>" +
                         "    <td style=\"color: cyan\"> Descargado</td>" +
-                        "    <td style=\"color: orange\"> Rechazado</td>" +
                         "    <td style=\"color: pink\">Desviado</td>" +
                         "  <td style=\"color: black\">  CP p/cambiar</td>" +
                         "    <td style=\"color: white\">Sin Cupo</td>" +
@@ -3805,11 +3804,10 @@ Formato localidad-provincia	destination	x
 
             titulo += " <tr> " +
                     "   <td style=\"color: blue;\">  " + Convert.ToInt16(uni[2] * unidad).ToString() + "</td>" +
-                    "   <td style=\"color: red\">  " + Convert.ToInt16(uni[1] * unidad).ToString() + "</td>" +
+                    "   <td style=\"color: red\">  " + Convert.ToInt16(uni[1] * unidad + uni[5] * unidad).ToString() + "</td>" +
                     "   <td style=\"color: green\">  " + Convert.ToInt16(uni[0] * unidad).ToString() + "</td>" +
                     "   <td style=\"color: yellow\">  " + Convert.ToInt16(uni[4] * unidad).ToString() + "</td>" +
                     "   <td style=\"color: cyan\"> " + Convert.ToInt16(uni[3] * unidad).ToString() + "</td>" +
-                    "   <td style=\"color: orange\"> " + Convert.ToInt16(uni[5] * unidad).ToString() + "</td>" +
                     "   <td style=\"color: pink\"> " + Convert.ToInt16(uni[6] * unidad).ToString() + "</td>" +
                     "   <td style=\"color: black\"> " + Convert.ToInt16(uni[7] * unidad).ToString() + "</td>" +
                     "   <td style=\"color: white\"> " + Convert.ToInt16(uni[8] * unidad).ToString() + "</td>" +
@@ -3829,11 +3827,10 @@ Formato localidad-provincia	destination	x
             {
                 string renglon = " <tr> " +
                             "   <td style=\"color: blue;\">  " + ((uni[2] > n) ? icono : "") + "</td>" +
-                            "   <td style=\"color: red\">  " + ((uni[1] > n) ? icono : "") + "</td>" +
+                            "   <td style=\"color: red\">  " + (((uni[1] + uni[5]) > n) ? icono : "") + "</td>" +
                             "   <td style=\"color: green\">  " + ((uni[0] > n) ? icono : "") + "</td>" +
                             "   <td style=\"color: yellow\">  " + ((uni[4] > n) ? icono : "") + "</td>" +
                             "   <td style=\"color: cyan\"> " + ((uni[3] > n) ? icono : "") + "</td>" +
-                            "   <td style=\"color: orange\"> " + ((uni[5] > n) ? icono : "") + "</td>" +
                             "   <td style=\"color: pink\"> " + ((uni[6] > n) ? icono : "") + "</td>" +
                             "   <td style=\"color: black\"> " + ((uni[7] > n) ? icono : "") + "</td>" +
                             "   <td style=\"color: white\"> " + ((uni[8] > n) ? icono : "") + "</td>" +
@@ -4034,7 +4031,7 @@ Formato localidad-provincia	destination	x
 
                                 a.IdCartaDePorte.ToString(),
 
-                                "<a href=\"CartaDePorte.aspx?Id=" +  a.IdCartaDePorte + "\">" +  a.NumeroCartaEnTextoParaBusqueda.NullSafeToString() + "</>" ,
+                                "<a href=\"CartaDePorte.aspx?Id=" +  a.IdCartaDePorte + "\"  target=\"_blank\" >" +  a.NumeroCartaEnTextoParaBusqueda.NullSafeToString() + "</>" ,
 
                                 a.Turno, //turno
 
