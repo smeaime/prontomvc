@@ -3780,12 +3780,12 @@ Formato localidad-provincia	destination	x
             string titulo = " <table cellpadding=15 style=\"text-align: center; font-size: large; width: 1100px;height: 400px;\"> <tr> " +
                         "   <td style=\"color: blue;\"> <input id='titPosicion'  type='button'  value='Posición'> </input></td>" +
                         "   <td style=\"color: red\"> <input id='titDemorado' type='button'  value='Demorado+Rech'> </input> </td>" +
-                        "    <td style=\"color: green\"> Autorizado</td>" +
-                        "  <td style=\"color: yellow\">A Descargar</td>" +
-                        "    <td style=\"color: cyan\"> Descargado</td>" +
-                        "    <td style=\"color: pink\">Desviado</td>" +
-                        "  <td style=\"color: black\">  CP p/cambiar</td>" +
-                        "    <td style=\"color: white\">Sin Cupo</td>" +
+                        "    <td style=\"color: green\">  <input id='titAutorizado'  type='button'  value='Autorizado'> </input></td>" +
+                        "  <td style=\"color: yellow\"> <input id='titADescargar'  type='button'  value='A Descargar'> </input></td>" +
+                        "    <td style=\"color: cyan\">  <input id='titDescargado'  type='button'  value='Descargado' > </input></td>" +
+                        "    <td style=\"color: pink\"> <input id='titDesviado'  type='button'  value='Desviado'> </input></td>" +
+                        "  <td style=\"color: black\">   <input id='titCPcambiar'  type='button'  value='CP p/cambiar'> </input></td>" +
+                        "    <td style=\"color: white\"> <input id='titSinCupo'  type='button'  value='Sin Cupo'> </input></td>" +
                         "    <td style=\"color: white\">Total</td>" +
                         "</tr> ";
 
