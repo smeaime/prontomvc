@@ -174,7 +174,11 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
         <asp:Button ID="btnPanelInforme" Text="RESUMEN" runat="server" Visible="false" CssClass="btn btn-primary" />
 
-        log del importador
+
+
+        <input type="button" id="btnLog" value="Log" class="btn btn-primary" />
+        <input type="button" id="btnMostrarMenu" value="->" class="btn btn-primary" />
+        
         <br />
         <div id="Salida2"></div>
         <asp:Literal ID="salida" runat="server"></asp:Literal>
@@ -251,8 +255,16 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
             $(function() {
                 //$('#MenuPrincipal').fadeOut(); 
                 $('#MenuPrincipal').hide(); 
+
+                $("#searchmodfbox_Lista").parent().css('z-index', 50);
+               
+
             });
            
+
+            $('#btnMostrarMenu').click(function () {
+                $('#MenuPrincipal').show(); 
+            })
 
 
             
@@ -410,6 +422,32 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                     success: function (data) {
                         // http://stackoverflow.com/questions/10439798/how-to-laod-raw-html-using-jquery-ajax-call-to-asp-net-webmethod
                         $("#Salida2").html("").append(data.d)
+                        
+                        $('#titDemorado').click(function () {
+                            //modificar el filtro para que incluya demorado y rechazado
+                            var myfilter = { groupOp: "OR", rules: [] };
+                            myfilter.rules.push({ field: "Situacion", op: "eq", data: "1" });
+                            myfilter.rules.push({ field: "Situacion", op: "eq", data: "5" });
+
+                            jqGridFilter(JSON.stringify(myfilter) , $('#Lista'));
+                        })
+
+                        $('#titAutorizado').click(function () {
+                            //modificar el filtro para que incluya demorado y rechazado
+                            var myfilter = { groupOp: "OR", rules: [] };
+                            myfilter.rules.push({ field: "Situacion", op: "eq", data: "0" });
+
+                            jqGridFilter(JSON.stringify(myfilter) , $('#Lista'));
+                        })
+
+                        $('#titPosicion').click(function () {
+                            //modificar el filtro para que incluya demorado y rechazado
+                            var myfilter = { groupOp: "OR", rules: [] };
+                            myfilter.rules.push({ field: "Situacion", op: "eq", data: "2" });
+
+                            jqGridFilter(JSON.stringify(myfilter) , $('#Lista'));
+                        })
+
                         //alert(data.d);
 
                     }
@@ -434,6 +472,19 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
 
 
+            function jqGridFilter(filtersparam, grid) {
+                grid.setGridParam({
+                    postData: {
+                        filters: filtersparam,
+                        'FechaInicial': function () { return $("#ctl00_ContentPlaceHolder1_txtFechaDesde").val(); },
+                        'FechaFinal': function () { return $("#ctl00_ContentPlaceHolder1_txtFechaHasta").val(); },
+                        'puntovent': function () { return $("#ctl00_ContentPlaceHolder1_cmbPuntoVenta").val(); },
+                        'destino': function () { return $("#ctl00_ContentPlaceHolder1_txtDestino").val(); }
+                    },
+                    search: true
+                });
+                grid.trigger("reloadGrid");
+            }
 
 
             $("#text1").autocomplete({
@@ -1059,7 +1110,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 { name: ' IdCartasDePorte', index: ' IdCartasDePorte', align: 'left', width: 100, editable: false, hidden: true },
 
 {
-    name: 'NumeroCartaEnTextoParaBusqueda', index: 'NumeroCartaEnTextoParaBusqueda', width: 100, align: 'left', sorttype: "text", sortable: false
+    name: 'NumeroCartaEnTextoParaBusqueda', index: 'NumeroCartaEnTextoParaBusqueda', width: 90, align: 'left', sorttype: "text", sortable: false
 , editable: false, editrules: { required: false, number: true }, edittype: 'text',
 
     searchoptions: { sopt: ['bw', 'cn', 'eq'] },
@@ -1079,7 +1130,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
     }
 },
 
-{ name: 'Turno', index: ' Turno', align: 'left', width: 50, editable: false, hidden: false, edittype: 'text' ,searchoptions: { sopt: ['bw', 'cn', 'eq'] },},
+{ name: 'Turno', index: ' Turno', align: 'left', width: 20, editable: false, hidden: false, edittype: 'text' ,searchoptions: { sopt: ['bw', 'cn', 'eq'] },},
 
 {
     name: 'Situacion', index: 'Situacion', align: 'left', width: 120, hidden: false, editable: true, edittype: 'select', sortable: false,
@@ -1100,7 +1151,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
 
 {
-    name: 'Producto', index: 'Producto', align: 'left', width: 100, hidden: false, editable: false, edittype: 'text', sortable: false
+    name: 'Producto', index: 'Producto', align: 'left', width: 60, hidden: false, editable: false, edittype: 'text', sortable: false
 
     , searchoptions: {
         //    sopt:['eq'], 
@@ -1243,7 +1294,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
 },
 {
-    name: 'IntermediarioDesc', index: 'IntermediarioDesc', align: 'left', width: 100, hidden: false, editable: false, edittype: 'text', sortable: false
+    name: 'IntermediarioDesc', index: 'IntermediarioDesc', align: 'left', width: 60, hidden: false, editable: false, edittype: 'text', sortable: false
 
     , searchoptions: {
         //    sopt:['eq'], 
@@ -1638,7 +1689,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
 
 {
-    name: 'EntregadorDesc', index: 'EntregadorDesc', align: 'left', width: 100, hidden: false, editable: false, edittype: 'text', sortable: false
+    name: 'EntregadorDesc', index: 'EntregadorDesc', align: 'left', width: 50, hidden: false, editable: false, edittype: 'text', sortable: false
 
 
     , searchoptions: {
@@ -1988,8 +2039,10 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                  {
                      //sopt: ["cn"]
                      //sopt: ['eq', 'ne', 'lt', 'le', 'gt', 'ge', 'bw', 'bn', 'ew', 'en', 'cn', 'nc', 'nu', 'nn', 'in', 'ni'],
-                     width: 700, closeOnEscape: true, closeAfterSearch: true, multipleSearch: true, overlay: false
+            zIndex:50,  width: 700, closeOnEscape: true, closeAfterSearch: true, multipleSearch: true, overlay: false
+
                  }
+                    // http://stackoverflow.com/questions/11228764/jqgrid-setting-zindex-for-alertmod
                 );
 
                 //jQuery("#Lista").jqGrid('navGrid', '#ListaPager',

@@ -968,12 +968,12 @@ La interface será procesa por Syngenta y si la misma no puede ser procesada cor
 
 
 
-        
+
         [TestMethod]
         public void Levenshtein2()
         {
             var a = SQLdinamico.BuscaIdLocalidadAproximado("CHIVILCOY", SC, 7);
-            var a1=EntidadManager.NombreLocalidad(SC, a);
+            var a1 = EntidadManager.NombreLocalidad(SC, a);
 
             var b = SQLdinamico.BuscaIdClienteAproximado("CHIVILCOY", SC, 7);
             var b1 = EntidadManager.NombreCliente(SC, b);
@@ -1197,16 +1197,25 @@ La interface será procesa por Syngenta y si la misma no puede ser procesada cor
 
 
 
+        [TestMethod]
+        public void Urenport_32235_2()
+        {
 
 
+            var l1 = DiccionarioEquivalenciasManager.BuscarEquivalencia(SC, "SUSANA");
+            var l2 = SQLdinamico.BuscaIdLocalidadPreciso("SUSANA", SC);
+            var l3 = SQLdinamico.BuscaIdLocalidadPreciso(DiccionarioEquivalenciasManager.BuscarEquivalencia(SC, "SUSANA"), SC);
+
+        }
 
 
         [TestMethod]
         public void Urenport_32235()
         {
 
-            string archivoExcel = @"C:\Users\Administrador\Documents\bdl\pronto\docstest\Urenport_ 953-29122016.xlsx";
-
+            //string archivoExcel = @"C:\Users\Administrador\Documents\bdl\pronto\docstest\Urenport_ 953-29122016.xlsx";
+            string archivoExcel = @"C:\Users\Administrador\Documents\bdl\pronto\docstest\Urenport_1450-23022017.xls";
+           
 
 
             //explota

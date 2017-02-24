@@ -252,6 +252,47 @@
          
       </urn:MT_Delivery>\r
    </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:credentials><con:username>BROKERDEV</con:username><con:password>Welcome@1</con:password><con:selectedAuthProfile>Basic</con:selectedAuthProfile><con:addedBasicAuthenticationTypes>Basic</con:addedBasicAuthenticationTypes><con:preemptive>true</con:preemptive><con:authType>Preemptive</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://sap.com/xi/WebService/soap1.1"/><con:wsrmConfig version="1.2"/></con:call><con:call id="de05fa6b-6374-4812-9f66-f511bf47f382" name="Copy of Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>https://oasis-pi-nonprod.syngenta.com/dev/XISOAPAdapter/MessageServlet?senderParty=&amp;senderService=Srv_BIT_BarterService&amp;receiverParty=&amp;receiverService=&amp;interface=LoadDeclarationSoap_send_out_asy&amp;interfaceNamespace=urn:broker:o2c:s:global:delivery:loaddeclaration:100</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:urn="urn:broker:o2c:s:global:delivery:loaddeclaration:100">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+   	<cucu></cucu>
+      <urn:MT_Delivery>\r
+         <!--Zero or more repetitions:-->\r
+		<dubidubi>
+		</dubidubi>
+      	
+      	<delivery>
+      		<sarasa></sarasa>
+		</delivery>
+
+		
+		<delivery>
+		<action>I</action>
+		<delivery_type>CP</delivery_type>
+		<carta_porte>12345678</carta_porte>
+		<grain_receiver>20243212349</grain_receiver>
+		<CGT_number>1222211</CGT_number>
+		<Intermediario>Nombre interm</Intermediario>
+		<Intermediario_CUIT>209993332</Intermediario_CUIT>
+		<entregador>Entregador nombre</entregador>
+		<entregador_CUIT>20213459873</entregador_CUIT>
+		<destinatario>Destino nombre</destinatario>
+		<destinatario_CUIT>20213459873</destinatario_CUIT>
+		<delivery_date>12152017</delivery_date>
+		<item>
+			<grain>014</grain>
+			<quantity>10</quantity>
+			<UOM>TO</UOM>
+			<origin>00006-01</origin>
+			<destination>00004-01</destination>
+			<year_of_Harvest>16/17</year_of_Harvest>
+		</item>
+		</delivery>
+
+
+         
+      </urn:MT_Delivery>\r
+   </soapenv:Body>\r
 </soapenv:Envelope>]]></con:request><con:credentials><con:username>BROKERDEV</con:username><con:password>Welcome@1</con:password><con:selectedAuthProfile>Basic</con:selectedAuthProfile><con:addedBasicAuthenticationTypes>Basic</con:addedBasicAuthenticationTypes><con:preemptive>true</con:preemptive><con:authType>Preemptive</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://sap.com/xi/WebService/soap1.1"/><con:wsrmConfig version="1.2"/></con:call></con:operation></con:interface><con:testSuite id="c7e5932d-99b8-41ea-883b-cf7de7df867b" name="LoadDeclarationSoap_send_out_asyBinding TestSuite"><con:settings/><con:runType>SEQUENTIAL</con:runType><con:testCase id="2e405756-486e-4049-ba3f-8ffee34964ed" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="LoadDeclarationSoap_send_out_asy TestCase" searchProperties="true"><con:settings/><con:testStep type="request" id="ae59e33e-d1c0-4775-93d1-4bd53a949787" name="LoadDeclarationSoap_send_out_asy"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>LoadDeclarationSoap_send_out_asyBinding</con:interface><con:operation>LoadDeclarationSoap_send_out_asy</con:operation><con:request name="LoadDeclarationSoap_send_out_asy" id="87effb10-c91d-4c0f-a429-0d0ba407ff5e"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://sappod.prc.syngenta.org:50000/XISOAPAdapter/MessageServlet?senderParty=&amp;senderService=Srv_BIT_BarterService&amp;receiverParty=&amp;receiverService=&amp;interface=LoadDeclarationSoap_send_out_asy&amp;interfaceNamespace=urn:broker:o2c:s:global:delivery:loaddeclaration:100</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:urn="urn:broker:o2c:s:global:delivery:loaddeclaration:100">\r
    <soapenv:Header/>\r
    <soapenv:Body>\r

@@ -645,6 +645,7 @@ Partial Class CartaDePorteInformesConReportViewerSincronismos
 
 
             If cmbSincronismo.Text.ToUpper <> "YPF" And cmbSincronismo.Text.ToUpper <> "SYNGENTA FACTURACIÓN" _
+                And cmbSincronismo.Text.ToUpper <> "PELAYO" _
                 And InStr(cmbSincronismo.Text.ToUpper, "DOW") = 0 _
                 And (InStr(cmbSincronismo.Text.ToUpper, "BLD") = 0 Or cmbSincronismo.Text.ToUpper = "BLD (CALIDADES)") Then
 
@@ -850,6 +851,30 @@ Partial Class CartaDePorteInformesConReportViewerSincronismos
             Try
 
                 Select Case cmbSincronismo.Text.ToUpper
+
+
+                    Case "PELAYO"
+
+                        output = SincronismosWilliamsManager.GenerarSincro("PELAYO", sErrores, _
+                           HFSC.Value, ConfigurationManager.AppSettings("UrlDominio"), _
+                           "", estadofiltro, "", idVendedor, idCorredor, _
+                          idDestinatario, idIntermediario, _
+                          idRComercial, idArticulo, idProcedencia, idDestino, _
+                          IIf(cmbCriterioWHERE.SelectedValue = "todos", _
+                              CartaDePorteManager.FiltroANDOR.FiltroAND, _
+                            CartaDePorteManager.FiltroANDOR.FiltroOR), _
+                          DropDownList2.Text, _
+                   Convert.ToDateTime(iisValidSqlDate(txtFechaDesde.Text, #1/1/1753#)),
+                   Convert.ToDateTime(iisValidSqlDate(txtFechaHasta.Text, #1/1/2100#)), _
+                             cmbPuntoVenta.SelectedValue, optDivisionSyngenta.SelectedValue, , , , idClienteAuxiliar, registrosFiltrados)
+
+                        lblErrores.Text = sErrores
+                        sErrores = ""
+
+
+
+
+
                     Case "A.C.A."
                         '        el sincro de A.C.A toma de varios clientes (ACA NAON, ACA SARASA). en lugar de usar CUIT, se les pasa un numero de cuenta
                         '100001: A.C.A.EXPORTACION()
