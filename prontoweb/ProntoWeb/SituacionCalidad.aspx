@@ -448,6 +448,49 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                             jqGridFilter(JSON.stringify(myfilter) , $('#Lista'));
                         })
 
+
+
+                        $('#titADescargar').click(function () {
+                            //modificar el filtro para que incluya demorado y rechazado
+                            var myfilter = { groupOp: "OR", rules: [] };
+                            myfilter.rules.push({ field: "Situacion", op: "eq", data: "4" });
+
+                            jqGridFilter(JSON.stringify(myfilter) , $('#Lista'));
+                        })
+
+                        $('#titDescargado').click(function () {
+                            //modificar el filtro para que incluya demorado y rechazado
+                            var myfilter = { groupOp: "OR", rules: [] };
+                            myfilter.rules.push({ field: "Situacion", op: "eq", data: "3" });
+
+                            jqGridFilter(JSON.stringify(myfilter) , $('#Lista'));
+                        })
+
+
+                        $('#titDesviado').click(function () {
+                            //modificar el filtro para que incluya demorado y rechazado
+                            var myfilter = { groupOp: "OR", rules: [] };
+                            myfilter.rules.push({ field: "Situacion", op: "eq", data: "6" });
+
+                            jqGridFilter(JSON.stringify(myfilter) , $('#Lista'));
+                        })
+
+
+                        $('#titCPcambiar').click(function () {
+                            //modificar el filtro para que incluya demorado y rechazado
+                            var myfilter = { groupOp: "OR", rules: [] };
+                            myfilter.rules.push({ field: "Situacion", op: "eq", data: "7" });
+
+                            jqGridFilter(JSON.stringify(myfilter) , $('#Lista'));
+                        })
+
+                        $('#titSinCupo').click(function () {
+                            //modificar el filtro para que incluya demorado y rechazado
+                            var myfilter = { groupOp: "OR", rules: [] };
+                            myfilter.rules.push({ field: "Situacion", op: "eq", data: "8" });
+
+                            jqGridFilter(JSON.stringify(myfilter) , $('#Lista'));
+                        })
                         //alert(data.d);
 
                     }

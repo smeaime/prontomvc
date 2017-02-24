@@ -2097,8 +2097,18 @@ Public Class ExcelImportadorManager
                         Dim proc = BuscaIdLocalidadPreciso(r(24), SC)
                         If proc = -1 Then
                             proc = BuscaIdLocalidadPreciso(DiccionarioEquivalenciasManager.BuscarEquivalencia(SC, r(24)), SC)
-                        Else
-
+                        End If
+                        If proc = -1 Then
+                            Try
+                                Dim l = New ProntoMVC.Data.Models.Localidad()
+                                l.Nombre = r(24)
+                                db.Localidades.Add(l)
+                                db.SaveChanges()
+                                proc = l.IdLocalidad
+                            Catch ex As Exception
+                                proc = -1
+                                ErrHandler2.WriteError(ex)
+                            End Try
                         End If
                         If actua(.Procedencia, proc) Then log += "Procedencia; "
                         If .Procedencia <= 0 Then .Procedencia = Nothing
