@@ -2076,7 +2076,9 @@ Public Class ExcelImportadorManager
 
                         If actua(.Destino, BuscaIdWilliamsDestinoPreciso(DiccionarioEquivalenciasManager.BuscarEquivalencia(SC, r(16)), SC)) Then log += "Destino; "
                         If .Destino <= 0 Then .Destino = Nothing
-                        If NombreDestino(SC, .Destino) = "ACA San Lorenzo" Then Continue For
+                        If If(NombreDestino(SC, .Destino), "").Trim.ToUpper = "ACA SAN LORENZO" Then
+                            Continue For
+                        End If
 
                         '.Destino = BuscaIdWilliamsDestinoPreciso(DiccionarioEquivalenciasManager.BuscarEquivalencia(SC, r(16)), SC)
 
@@ -2090,12 +2092,16 @@ Public Class ExcelImportadorManager
                         If .IdChofer <= 0 Then .IdChofer = Nothing
                         '.IdChofer = BuscarChoferPorCUIT(r(23), SC, r(22))
 
-                        If actua(.Procedencia, BuscaIdLocalidadPreciso(DiccionarioEquivalenciasManager.BuscarEquivalencia(SC, r(24)), SC)) Then log += "Procedencia; "
+
+
+                        Dim proc = BuscaIdLocalidadPreciso(r(24), SC)
+                        If proc = -1 Then
+                            proc = BuscaIdLocalidadPreciso(DiccionarioEquivalenciasManager.BuscarEquivalencia(SC, r(24)), SC)
+                        Else
+
+                        End If
+                        If actua(.Procedencia, proc) Then log += "Procedencia; "
                         If .Procedencia <= 0 Then .Procedencia = Nothing
-                        '.Procedencia = BuscaIdLocalidadPreciso(DiccionarioEquivalenciasManager.BuscarEquivalencia(SC, r(24)), SC)
-                        'Y aca?
-
-
 
 
 
