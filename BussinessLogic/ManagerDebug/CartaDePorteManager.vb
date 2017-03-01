@@ -670,7 +670,7 @@ Public Class CartaDePorteManager
 
     Public Shared Function BuscarTransportistaPorCUIT(cuit As String, SC As String, RazonSocial As String) As Integer
 
-        If (Not ProntoMVC.Data.FuncionesGenericasCSharp.mkf_validacuit(cuit)) Then Return 0
+        If (Not ProntoMVC.Data.FuncionesGenericasCSharp.CUITValido(cuit)) Then Return 0
 
 
         Dim db As DemoProntoEntities = New DemoProntoEntities(Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC)))
@@ -712,7 +712,7 @@ Public Class CartaDePorteManager
 
     Public Shared Function BuscarChoferPorCUIT(cuit As String, SC As String, RazonSocial As String) As Integer
 
-        If (Not ProntoMVC.Data.FuncionesGenericasCSharp.mkf_validacuit(cuit)) Then Return 0
+        If (Not ProntoMVC.Data.FuncionesGenericasCSharp.CUITValido(cuit)) Then Return 0
 
 
         Dim db As DemoProntoEntities = New DemoProntoEntities(Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC)))
@@ -759,7 +759,7 @@ Public Class CartaDePorteManager
 
         Try
 
-            If (Not ProntoMVC.Data.FuncionesGenericasCSharp.mkf_validacuit(cuit)) Then Return 0
+            If (Not ProntoMVC.Data.FuncionesGenericasCSharp.CUITValido(cuit)) Then Return 0
 
 
             Dim db As DemoProntoEntities = New DemoProntoEntities(Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC)))
@@ -836,8 +836,8 @@ Public Class CartaDePorteManager
         End If
 
 
-        If (Not ProntoMVC.Data.FuncionesGenericasCSharp.mkf_validacuit(cuit)) Then Return 0
-        If (Not CartaDePorteManager.VerfCuit(cuit)) Then Return 0
+        If (Not ProntoMVC.Data.FuncionesGenericasCSharp.CUITValido(cuit)) Then Return 0
+        'If (Not CartaDePorteManager.VerfCuit(cuit)) Then Return 0
 
 
 
@@ -899,8 +899,8 @@ Public Class CartaDePorteManager
         End If
 
 
-        If (Not ProntoMVC.Data.FuncionesGenericasCSharp.mkf_validacuit(cuit)) Then Return 0
-        If (Not CartaDePorteManager.VerfCuit(cuit)) Then Return 0
+        If (Not ProntoMVC.Data.FuncionesGenericasCSharp.CUITValido(cuit)) Then Return 0
+        'If (Not CartaDePorteManager.VerfCuit(cuit)) Then Return 0
 
 
         Dim q = (From c In db.Vendedores Where c.Cuit.Trim.Replace("-", "") = cuit.Trim.Replace("-", "")).FirstOrDefault()
@@ -1087,76 +1087,76 @@ Public Class CartaDePorteManager
 
 
 
-    Public Shared Function VerificaCUIT(NumeroDeCUIT As String) As Boolean
+    'Public Shared Function VerificaCUIT(NumeroDeCUIT As String) As Boolean
 
 
-        Dim i As Integer
-        Dim auxiliar As Integer
-        Dim fijos(10) As Integer
-        Dim Verificador As Integer
-        Dim VerificadorOk As Integer
+    '    Dim i As Integer
+    '    Dim auxiliar As Integer
+    '    Dim fijos(10) As Integer
+    '    Dim Verificador As Integer
+    '    Dim VerificadorOk As Integer
 
-        VerificaCUIT = False
+    '    VerificaCUIT = False
 
-        NumeroDeCUIT = Replace(NumeroDeCUIT, "-", "")
-        Verificador = Mid(NumeroDeCUIT, 11, 1)
+    '    NumeroDeCUIT = Replace(NumeroDeCUIT, "-", "")
+    '    Verificador = Mid(NumeroDeCUIT, 11, 1)
 
-        fijos(1) = 5
-        fijos(2) = 4
-        fijos(3) = 3
-        fijos(4) = 2
-        fijos(5) = 7
-        fijos(6) = 6
-        fijos(7) = 5
-        fijos(8) = 4
-        fijos(9) = 3
-        fijos(10) = 2
+    '    fijos(1) = 5
+    '    fijos(2) = 4
+    '    fijos(3) = 3
+    '    fijos(4) = 2
+    '    fijos(5) = 7
+    '    fijos(6) = 6
+    '    fijos(7) = 5
+    '    fijos(8) = 4
+    '    fijos(9) = 3
+    '    fijos(10) = 2
 
-        For i = 1 To 10
-            VerificadorOk = VerificadorOk + (fijos(i) * Mid(NumeroDeCUIT, i, 1))
-        Next
+    '    For i = 1 To 10
+    '        VerificadorOk = VerificadorOk + (fijos(i) * Mid(NumeroDeCUIT, i, 1))
+    '    Next
 
-        VerificadorOk = 11 - (VerificadorOk Mod 11)
+    '    VerificadorOk = 11 - (VerificadorOk Mod 11)
 
-        If (VerificadorOk = 11 Or VerificadorOk = 10) Then VerificadorOk = 9
+    '    If (VerificadorOk = 11 Or VerificadorOk = 10) Then VerificadorOk = 9
 
-        If VerificadorOk = Verificador Then VerificaCUIT = True
+    '    If VerificadorOk = Verificador Then VerificaCUIT = True
 
-    End Function
-
-
-
+    'End Function
 
 
 
-    Public Shared Function VerfCuit(ByVal e As String) As Boolean
-
-        'Return True ' esta funcion esta fallando, por ejemplo con 30511355040
 
 
-        e = e.Replace("-", "").Replace(" ", "")
 
-        Dim numconst As String = 5432765432
-        Dim x As Integer
-        Dim valor1 As Integer
-        Dim valor2 As Integer
-        Dim valor3 As Integer
-        Dim comprobante As Integer = CInt(e.ToArray.GetValue(e.ToArray.Length - 1).ToString)
+    'Public Shared Function VerfCuit(ByVal e As String) As Boolean
 
-        For x = 0 To CInt(CInt(e.ToArray.Length).ToString - 2)
-            valor1 += CInt(e.ToArray.GetValue(x).ToString) * CInt(numconst.ToArray.GetValue(x).ToString)
-        Next
+    '    'Return True ' esta funcion esta fallando, por ejemplo con 30511355040
 
-        valor2 = valor1 Mod 11
-        valor3 = 11 - valor2
 
-        If valor3 = comprobante Then
-            Return True
-        Else
-            Return False
-        End If
+    '    e = e.Replace("-", "").Replace(" ", "")
 
-    End Function
+    '    Dim numconst As String = 5432765432
+    '    Dim x As Integer
+    '    Dim valor1 As Integer
+    '    Dim valor2 As Integer
+    '    Dim valor3 As Integer
+    '    Dim comprobante As Integer = CInt(e.ToArray.GetValue(e.ToArray.Length - 1).ToString)
+
+    '    For x = 0 To CInt(CInt(e.ToArray.Length).ToString - 2)
+    '        valor1 += CInt(e.ToArray.GetValue(x).ToString) * CInt(numconst.ToArray.GetValue(x).ToString)
+    '    Next
+
+    '    valor2 = valor1 Mod 11
+    '    valor3 = 11 - valor2
+
+    '    If valor3 = comprobante Then
+    '        Return True
+    '    Else
+    '        Return False
+    '    End If
+
+    'End Function
 
 
 
