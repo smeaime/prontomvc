@@ -170,63 +170,63 @@ namespace ProntoMVC.Data
             return isNum;
         }
 
-        public static bool mkf_validacuit(string mk_p_nroTemp)
-        {
-            int mk_suma;
-            bool mk_valido;
-            string mk_p_nro = mk_p_nroTemp; // == null ? "" : mk_p_nroTemp;
-            mk_p_nro = mk_p_nro.Replace("-", "");
+        //public static bool mkf_validacuit(string mk_p_nroTemp)
+        //{
+        //    int mk_suma;
+        //    bool mk_valido;
+        //    string mk_p_nro = mk_p_nroTemp; // == null ? "" : mk_p_nroTemp;
+        //    mk_p_nro = mk_p_nro.Replace("-", "");
 
-            try
-            {
+        //    try
+        //    {
 
 
-                if (IsNumeric(mk_p_nro))
-                {
-                    if (mk_p_nro.Length != 11)
-                    {
-                        mk_valido = false;
-                    }
-                    else
-                    {
+        //        if (IsNumeric(mk_p_nro))
+        //        {
+        //            if (mk_p_nro.Length != 11)
+        //            {
+        //                mk_valido = false;
+        //            }
+        //            else
+        //            {
 
-                        mk_suma = 0;
-                        mk_suma += Convert.ToInt32(mk_p_nro.Substring(0, 1)) * 5;
-                        mk_suma += Convert.ToInt32(mk_p_nro.Substring(1, 1)) * 4;
-                        mk_suma += Convert.ToInt32(mk_p_nro.Substring(2, 1)) * 3;
-                        mk_suma += Convert.ToInt32(mk_p_nro.Substring(3, 1)) * 2;
-                        mk_suma += Convert.ToInt32(mk_p_nro.Substring(4, 1)) * 7;
-                        mk_suma += Convert.ToInt32(mk_p_nro.Substring(5, 1)) * 6;
-                        mk_suma += Convert.ToInt32(mk_p_nro.Substring(6, 1)) * 5;
-                        mk_suma += Convert.ToInt32(mk_p_nro.Substring(7, 1)) * 4;
-                        mk_suma += Convert.ToInt32(mk_p_nro.Substring(8, 1)) * 3;
-                        mk_suma += Convert.ToInt32(mk_p_nro.Substring(9, 1)) * 2;
-                        mk_suma += Convert.ToInt32(mk_p_nro.Substring(10, 1)) * 1;
+        //                mk_suma = 0;
+        //                mk_suma += Convert.ToInt32(mk_p_nro.Substring(0, 1)) * 5;
+        //                mk_suma += Convert.ToInt32(mk_p_nro.Substring(1, 1)) * 4;
+        //                mk_suma += Convert.ToInt32(mk_p_nro.Substring(2, 1)) * 3;
+        //                mk_suma += Convert.ToInt32(mk_p_nro.Substring(3, 1)) * 2;
+        //                mk_suma += Convert.ToInt32(mk_p_nro.Substring(4, 1)) * 7;
+        //                mk_suma += Convert.ToInt32(mk_p_nro.Substring(5, 1)) * 6;
+        //                mk_suma += Convert.ToInt32(mk_p_nro.Substring(6, 1)) * 5;
+        //                mk_suma += Convert.ToInt32(mk_p_nro.Substring(7, 1)) * 4;
+        //                mk_suma += Convert.ToInt32(mk_p_nro.Substring(8, 1)) * 3;
+        //                mk_suma += Convert.ToInt32(mk_p_nro.Substring(9, 1)) * 2;
+        //                mk_suma += Convert.ToInt32(mk_p_nro.Substring(10, 1)) * 1;
 
-                        if (Math.Round((double)mk_suma / 11, 0) == (mk_suma / 11))
-                        {
-                            mk_valido = true;
-                        }
-                        else
-                        {
-                            mk_valido = false;
-                        }
-                    }
-                }
-                else
-                {
-                    mk_valido = false;
-                }
+        //                if (Math.Round((double)mk_suma / 11, 0) == (mk_suma / 11))
+        //                {
+        //                    mk_valido = true;
+        //                }
+        //                else
+        //                {
+        //                    mk_valido = false;
+        //                }
+        //            }
+        //        }
+        //        else
+        //        {
+        //            mk_valido = false;
+        //        }
 
-            }
-            catch (Exception)
-            {
+        //    }
+        //    catch (Exception)
+        //    {
 
-                mk_valido = false;
-            }
+        //        mk_valido = false;
+        //    }
 
-            return (mk_valido);
-        }
+        //    return (mk_valido);
+        //}
 
 
 
@@ -237,7 +237,6 @@ namespace ProntoMVC.Data
         /// <summary>
         /// Description of CUIT.
         /// </summary>
-      
 
 
 
@@ -245,11 +244,16 @@ namespace ProntoMVC.Data
 
 
 
-          public static bool CUITValido(string _CUIT )
+
+        public static bool CUITValido(string _CUIT)
         {
+            if (_CUIT == null) return false;
+
             _CUIT= _CUIT.Replace("-", "").Replace(" ", "");
 
-            if (_CUIT.Length == 0) return true;
+            if (_CUIT.Length != 11) return false;
+
+
             string CUITValidado = string.Empty;
             bool Valido = false;
             char Ch;
@@ -273,7 +277,7 @@ namespace ProntoMVC.Data
             return Valido;
         }
 
-          public static int EncontrarVerificador(string CUIT)
+        public static int EncontrarVerificador(string CUIT)
         {
             int Sumador = 0;
             int Producto = 0;
@@ -1523,7 +1527,7 @@ namespace CerealNet.WSCartasDePorte
         public string usuario;
         public int vagon;
 
-            
+
         //public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
 
         //protected void RaisePropertyChanged(string propertyName)

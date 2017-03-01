@@ -700,7 +700,7 @@ Public Class VendedoresManager
             '////////////////////////////////////////////////
             '/////////         CUIT           ///////////////
             '////////////////////////////////////////////////
-            If Not mkf_validacuit(.Item("CUIT")) And iisNull(.Item("CUIT")) <> "88-00000012-2" Then 'cuit falso de Williams para corredor DIRECTO
+            If Not ProntoMVC.Data.FuncionesGenericasCSharp.CUITValido(.Item("CUIT")) And iisNull(.Item("CUIT")) <> "88-00000012-2" Then 'cuit falso de Williams para corredor DIRECTO
                 Return "El CUIT no es valido"
             End If
 

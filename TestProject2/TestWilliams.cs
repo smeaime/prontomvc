@@ -1217,7 +1217,7 @@ La interface será procesa por Syngenta y si la misma no puede ser procesada cor
 
             //string archivoExcel = @"C:\Users\Administrador\Documents\bdl\pronto\docstest\Urenport_ 953-29122016.xlsx";
             string archivoExcel = @"C:\Users\Administrador\Documents\bdl\pronto\docstest\Urenport_1450-23022017.xls";
-           
+
 
 
             //explota
@@ -4612,6 +4612,9 @@ Adjunto un ejemplo que tiene cartas de porte de 8 entregadores que no son Willia
 
 
 
+            Assert.IsFalse(FuncionesGenericasCSharp.CUITValido(""));
+            Assert.IsFalse(FuncionesGenericasCSharp.CUITValido("asfasdfasdfasdf"));
+            Assert.IsFalse(FuncionesGenericasCSharp.CUITValido(null));
             Assert.IsFalse(FuncionesGenericasCSharp.CUITValido("20"));
             Assert.IsFalse(FuncionesGenericasCSharp.CUITValido("30-53777127-4"));
             Assert.IsTrue(FuncionesGenericasCSharp.CUITValido("30-53772127-4"));
@@ -4621,6 +4624,31 @@ Adjunto un ejemplo que tiene cartas de porte de 8 entregadores que no son Willia
             Assert.IsFalse(FuncionesGenericasCSharp.CUITValido("30703539059"));
             Assert.IsTrue(FuncionesGenericasCSharp.CUITValido("30511355040"));
 
+            // TENEMOS UN GANADOR!!!!!!!
+
+
+            // validar todos los cuits de la base
+            var scEF = ProntoMVC.Data.Models.Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC));
+            DemoProntoEntities db = new DemoProntoEntities(scEF);
+
+            var cuits = db.Clientes.Where(x => x.Cuit != null && x.Cuit != "").Select(x => x.Cuit).Take(5000).ToList();
+            foreach (string c in cuits)
+            {
+                if (FuncionesGenericasCSharp.CUITValido(c))
+                {
+
+                }
+                else
+                {
+                }
+
+                 
+            }
+
+
+
+
+            /*
 
 
 
@@ -4643,16 +4671,16 @@ Adjunto un ejemplo que tiene cartas de porte de 8 entregadores que no son Willia
             // y por qué no explota en la validacion del form?
 
 
-//            MAROUN S.A	COLON 369 - Pº 6	30714018082	BAHIA BLANCA - BS AS	Delete
-//Editar	0	MAROUN SA.		30-71401308-2
+            //            MAROUN S.A	COLON 369 - Pº 6	30714018082	BAHIA BLANCA - BS AS	Delete
+            //Editar	0	MAROUN SA.		30-71401308-2
 
-//    BLD S.A	MADRES DE PLAZA DE MAYO 3020 - OF. 14-03	30-70359905-9	ROSARIO (STA FE)	Delete
-//Editar	0	BLD S.A.		30703539059	
+            //    BLD S.A	MADRES DE PLAZA DE MAYO 3020 - OF. 14-03	30-70359905-9	ROSARIO (STA FE)	Delete
+            //Editar	0	BLD S.A.		30703539059	
 
             Assert.IsFalse(FuncionesGenericasCSharp.mkf_validacuit("20"));
             Assert.IsFalse(FuncionesGenericasCSharp.mkf_validacuit("30-53777127-4"));
             Assert.IsTrue(FuncionesGenericasCSharp.mkf_validacuit("30-53772127-4"));
-           
+
             Assert.IsTrue(FuncionesGenericasCSharp.mkf_validacuit("30714018082"));
             Assert.IsFalse(FuncionesGenericasCSharp.mkf_validacuit("30-71401308-2"));  // me devuelve true! si uso el form de corredor de pronto, este cuit es bochado. pedirle la funcion a edu
 
@@ -4682,8 +4710,8 @@ Adjunto un ejemplo que tiene cartas de porte de 8 entregadores que no son Willia
             var j = CartaDePorteManager.VerfCuit("30703539059"); //deberia haber dado false -ok el cuit no existe, pero es invalido?
             Assert.IsFalse(j);
 
-            Assert.IsTrue(CartaDePorteManager.VerfCuit("30511355040")); 
-            
+            Assert.IsTrue(CartaDePorteManager.VerfCuit("30511355040"));
+            */
         }
 
 
