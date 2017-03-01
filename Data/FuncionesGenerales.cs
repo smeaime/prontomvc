@@ -10,6 +10,24 @@ using ProntoMVC.Data.Models;
 
 
 
+/*
+ * Created by SharpDevelop.
+ * Date: 06/09/2005
+ * Time: 08:38 a.m.
+ * 
+ * Desarrollador: Gustavo Alberto Rodriguez
+ */
+
+using System;
+
+
+
+
+
+
+
+
+
 namespace ProntoMVC.Data
 {
     public class FuncionesGenericasCSharp
@@ -216,11 +234,67 @@ namespace ProntoMVC.Data
 
 
 
+        /// <summary>
+        /// Description of CUIT.
+        /// </summary>
+      
 
 
 
 
 
+
+
+          public static bool CUITValido(string _CUIT )
+        {
+            _CUIT= _CUIT.Replace("-", "").Replace(" ", "");
+
+            if (_CUIT.Length == 0) return true;
+            string CUITValidado = string.Empty;
+            bool Valido = false;
+            char Ch;
+            for (int i = 0; i < _CUIT.Length; i++)
+            {
+                Ch = _CUIT[i];
+                if ((Ch > 47) && (Ch < 58))
+                {
+                    CUITValidado = CUITValidado + Ch;
+                }
+            }
+
+            _CUIT = CUITValidado;
+            Valido = (_CUIT.Length == 11);
+            if (Valido)
+            {
+                int Verificador = EncontrarVerificador(_CUIT);
+                Valido = (_CUIT[10].ToString() == Verificador.ToString());
+            }
+
+            return Valido;
+        }
+
+          public static int EncontrarVerificador(string CUIT)
+        {
+            int Sumador = 0;
+            int Producto = 0;
+            int Coeficiente = 0;
+            int Resta = 5;
+            for (int i = 0; i < 10; i++)
+            {
+                if (i == 4) Resta = 11;
+                Producto = CUIT[i];
+                Producto -= 48;
+                Coeficiente = Resta - i;
+                Producto = Producto * Coeficiente;
+                Sumador = Sumador + Producto;
+            }
+
+            int Resultado = Sumador - (11 * (Sumador / 11));
+            Resultado = 11 - Resultado;
+
+            if (Resultado == 11) return 0;
+            else return Resultado;
+        }
 
 
 
