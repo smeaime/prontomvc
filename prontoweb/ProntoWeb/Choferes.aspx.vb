@@ -953,7 +953,7 @@ Public Class ChoferesManager
             '////////////////////////////////////////////////
 
             Try
-                If Not mkf_validacuit(.Item("CUIL")) Then
+                If Not ProntoMVC.Data.FuncionesGenericasCSharp.CUITValido(.Item("CUIL")) Then
                     Return "El CUIL no es valido"
                 End If
             Catch ex As Exception
