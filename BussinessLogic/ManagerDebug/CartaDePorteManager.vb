@@ -940,8 +940,198 @@ Public Class CartaDePorteManager
 
     End Function
 
+
+
+
+    '    Public Sub VALIDA_CUIT(doc)
+
+    '        Dim MiHora As Date
+    '        Dim Operacion As String
+    '        Dim Longitud As Integer
+    '        Dim Sujeto As String
+    '        Dim Valor1 As Integer
+    '        Dim Valor2 As Integer
+    '        Dim Valor3 As Integer
+    '        Dim PREFIJO As String
+    '        Dim Msg As String
+    '        Dim DIGITOVERIFICADOR As String
+    '        Dim Resultado As String
+
+    '        MiHora = Now()
+    '        doc = InputBox("Ingrese el CUIT/CUIL a validar (ingresando los 11 dígitos)." & vbCrLf & vbCrLf & _
+    '        "Si desea estimarlo por medio del cálculo, ingrese el número de documento." & vbCrLf & vbCrLf & MiHora, "CUIT")
+    '        Longitud = Len(doc)
+
+    '        Select Case Longitud
+
+    '            Case 11 'Cantidad Correcta de dígitos 
+    '                Operacion = "V" 'Define la operacion como V -> Validación 
+    '                GoTo Algoritmo 'Ir al algoritmo que calcula el CUIT 
+
+    '            Case 6
+    '                Operacion = "C" 'Define la operacion como C -> Cálculo 
+    '                doc = "00" & doc
+    '                GoTo DefinirSujeto
+
+    '            Case 7
+    '                Operacion = "C" 'Define la operacion como C -> Cálculo 
+    '                doc = "0" & doc
+    '                GoTo DefinirSujeto
+
+    '            Case 8
+    '                Operacion = "C" 'Define la operacion como C -> Cálculo 
+    '                GoTo DefinirSujeto
+    '            Case Else
+    '                MsgBox("Ha ingresado una cantidad incorrecta de dìgitos. Por favor verifique los datos e intente nuevamente", _
+    '                vbCritical, "Atención!")
+    '                Exit Sub
+    '        End Select
+
+    'DefinirSujeto:
+    '        Sujeto = InputBox("Defina para quien es el CUIT/CUIL" & vbCrLf & vbCrLf & "Si es de una persona del sexo Femenino ingrese: F" _
+    '        & vbCrLf & "Si es de una persona del sexo Femenino ingrese: M" & vbCrLf & "Si es de una Sociedad ingrese: S", _
+    '        "Definir Sujeto", "M")
+
+    '        Select Case Sujeto
+    '            Case "M" 'El Sujeto es de sexo Masculino 
+    '                PREFIJO = "20"
+    '                doc = PREFIJO & doc
+    '                GoTo Algoritmo 'Ir al algoritmo que calcula el CUIT 
+    '            Case "F" 'El Sujeto es de sexo Femenino 
+    '                PREFIJO = "27"
+    '                doc = PREFIJO & doc
+    '                GoTo Algoritmo 'Ir al algoritmo que calcula el CUIT 
+    '            Case "S"
+    '                PREFIJO = "30" 'El Sujeto es una Persona Jurídica 
+    '                doc = PREFIJO & doc
+    '                GoTo Algoritmo 'Ir al algoritmo que calcula el CUIT 
+    '        End Select
+
+
+    'Algoritmo:  'Algoritmo que calcula el CUIT 
+
+    '        X1 = (Mid(doc, 1, 1) * 5)
+    '        X2 = (Mid(doc, 2, 1) * 4)
+    '        X3 = (Mid(doc, 3, 1) * 3)
+    '        X4 = (Mid(doc, 4, 1) * 2)
+    '        X5 = (Mid(doc, 5, 1) * 7)
+    '        X6 = (Mid(doc, 6, 1) * 6)
+    '        X7 = (Mid(doc, 7, 1) * 5)
+    '        X8 = (Mid(doc, 8, 1) * 4)
+    '        X9 = (Mid(doc, 9, 1) * 3)
+    '        X10 = (Mid(doc, 10, 1) * 2)
+
+    '        Valor1 = X1 + X2 + X3 + X4 + X5 + X6 + X7 + X8 + X9 + X10
+    '        Valor2 = Valor1 Mod 11
+    '        Valor3 = 11 - Valor2
+
+    '        Select Case Valor3
+    '            Case 11
+    '                DIGITOVERIFICADOR = 0
+    '            Case 10
+    '                DIGITOVERIFICADOR = 9
+    '                Select Case Sujeto
+    '                    Case "M"
+    '                        PREFIJO = "23"
+    '                    Case "F"
+    '                        PREFIJO = "23"
+    '                        DIGITOVERIFICADOR = "4"
+    '                    Case "S"
+    '                        PREFIJO = "33"
+    '                End Select
+    '            Case Else
+    '                DIGITOVERIFICADOR = Valor3
+    '        End Select
+
+    '        Select Case Operacion 'Identifica si fue una Validación o un Cálculo 
+    '            Case "C"
+    '                doc = Right(doc, 8)
+    '                Resultado = PREFIJO & doc & DIGITOVERIFICADOR
+    '                MsgBox("El CUIT estimado por medio del algoritmo es: " & Resultado, _
+    '                vbInformation, "Resultados")
+
+    '            Case "V"
+    '                Select Case Valor3 'Identifica el Valor3 del CUIT ingresado 
+    '                    Case 10
+    '                        Select Case Left(doc, 1) 'Identifica el Primer digito del CUIT ingresado para definir 
+    '                            ' si es una Persona o úna Sociedad 
+    '                            Case 3 'El caso de una Sociedad 
+    '                                PREFIJO = "33"
+    '                                Msg = "El CUIT estimado por medio del algoritmo es: " & PREFIJO & Mid(doc, 3, 8) & _
+    '                                DIGITOVERIFICADOR
+
+    '                            Case 2 'El caso de una Persona 
+    '                                PREFIJO = "23"
+    '                                Msg = "El CUIT estimado por medio del algoritmo para una persona de sexo Masculino es: " _
+    '                                & PREFIJO & Mid(doc, 3, 8) & DIGITOVERIFICADOR & vbCrLf & _
+    '                                "El CUIT estimado por medio del algoritmo para una persona de sexo Femenino es: " _
+    '                                & PREFIJO & Mid(doc, 3, 8) & "4"
+    '                        End Select
+
+    '                        MsgBox("El CUIT ingresado NO ha sido validado correctamente." & vbCrLf & vbCrLf & _
+    '                        Msg, vbCritical, "Validación")
+
+    '                    Case Else
+    '                        If DIGITOVERIFICADOR = Right(doc, 1) Then
+    '                            MsgBox("El CUIT ingresado ha sido validado correctamente.", vbInformation, "Validación")
+    '                        Else
+    '                            MsgBox("El CUIT ingresado NO ha sido validado correctamente." & vbCrLf & vbCrLf & _
+    '                            "El CUIT estimado por medio del algoritmo es: " & Left(doc, 10) & DIGITOVERIFICADOR, _
+    '                            vbCritical, "Validación")
+    '                        End If
+    '                End Select
+    '        End Select
+
+    '    End Sub
+
+
+
+
+    Public Shared Function VerificaCUIT(NumeroDeCUIT As String) As Boolean
+
+
+        Dim i As Integer
+        Dim auxiliar As Integer
+        Dim fijos(10) As Integer
+        Dim Verificador As Integer
+        Dim VerificadorOk As Integer
+
+        VerificaCUIT = False
+
+        NumeroDeCUIT = Replace(NumeroDeCUIT, "-", "")
+        Verificador = Mid(NumeroDeCUIT, 11, 1)
+
+        fijos(1) = 5
+        fijos(2) = 4
+        fijos(3) = 3
+        fijos(4) = 2
+        fijos(5) = 7
+        fijos(6) = 6
+        fijos(7) = 5
+        fijos(8) = 4
+        fijos(9) = 3
+        fijos(10) = 2
+
+        For i = 1 To 10
+            VerificadorOk = VerificadorOk + (fijos(i) * Mid(NumeroDeCUIT, i, 1))
+        Next
+
+        VerificadorOk = 11 - (VerificadorOk Mod 11)
+
+        If (VerificadorOk = 11 Or VerificadorOk = 10) Then VerificadorOk = 9
+
+        If VerificadorOk = Verificador Then VerificaCUIT = True
+
+    End Function
+
+
+
+
+
+
     Public Shared Function VerfCuit(ByVal e As String) As Boolean
-        Return True ' esta funcion esta fallando, por ejemplo con 30511355040
+
+        'Return True ' esta funcion esta fallando, por ejemplo con 30511355040
 
 
         e = e.Replace("-", "").Replace(" ", "")

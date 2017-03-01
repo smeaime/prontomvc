@@ -19,6 +19,8 @@ using System.Security.Principal;
 using System.Collections;
 using System.Collections.Generic;
 
+using ProntoMVC.Data;
+
 using ProntoMVC.ViewModels;
 
 using FCEngine;
@@ -4607,15 +4609,83 @@ Adjunto un ejemplo que tiene cartas de porte de 8 entregadores que no son Willia
         [TestMethod]
         public void OCR_alta_automatica_de_clientes_22172()
         {
-            var a = ProntoMVC.Data.FuncionesGenericasCSharp.mkf_validacuit("20");
-            var b = ProntoMVC.Data.FuncionesGenericasCSharp.mkf_validacuit("30-53777127-4");
-            var c = ProntoMVC.Data.FuncionesGenericasCSharp.mkf_validacuit("30-53772127-4");
-            var d = CartaDePorteManager.VerfCuit("30-53772127-4");
 
-            var e = ProntoMVC.Data.FuncionesGenericasCSharp.mkf_validacuit("30511355040");
-            var f = CartaDePorteManager.VerfCuit("30511355040");
+
+
+            Assert.IsFalse(FuncionesGenericasCSharp.CUITValido("20"));
+            Assert.IsFalse(FuncionesGenericasCSharp.CUITValido("30-53777127-4"));
+            Assert.IsTrue(FuncionesGenericasCSharp.CUITValido("30-53772127-4"));
+            Assert.IsTrue(FuncionesGenericasCSharp.CUITValido("30714018082"));
+            Assert.IsFalse(FuncionesGenericasCSharp.CUITValido("30-71401308-2"));
+            Assert.IsTrue(FuncionesGenericasCSharp.CUITValido("30-70359905-9"));
+            Assert.IsFalse(FuncionesGenericasCSharp.CUITValido("30703539059"));
+            Assert.IsTrue(FuncionesGenericasCSharp.CUITValido("30511355040"));
+
+
+
+
+            Assert.IsFalse(CartaDePorteManager.VerificaCUIT("20"));
+            Assert.IsFalse(CartaDePorteManager.VerificaCUIT("30-53777127-4"));
+            Assert.IsTrue(CartaDePorteManager.VerificaCUIT("30-53772127-4"));
+
+            Assert.IsTrue(CartaDePorteManager.VerificaCUIT("30714018082"));
+            Assert.IsFalse(CartaDePorteManager.VerificaCUIT("30-71401308-2"));
+            Assert.IsTrue(CartaDePorteManager.VerificaCUIT("30-70359905-9"));
+            Assert.IsFalse(CartaDePorteManager.VerificaCUIT("30703539059"));
+            Assert.IsTrue(CartaDePorteManager.VerificaCUIT("30511355040"));  // falla, me devuelve false. en el pronto anda. qué codigo usa el CUIT32.OCX????
+
+
+
+            // buscavendedorporcuit y buscaclienteporcuit llaman a los dos validadores. por ahora estoy haciendo que verfcuit devuelva true
+
+
+
             // y por qué no explota en la validacion del form?
+
+
+//            MAROUN S.A	COLON 369 - Pº 6	30714018082	BAHIA BLANCA - BS AS	Delete
+//Editar	0	MAROUN SA.		30-71401308-2
+
+//    BLD S.A	MADRES DE PLAZA DE MAYO 3020 - OF. 14-03	30-70359905-9	ROSARIO (STA FE)	Delete
+//Editar	0	BLD S.A.		30703539059	
+
+            Assert.IsFalse(FuncionesGenericasCSharp.mkf_validacuit("20"));
+            Assert.IsFalse(FuncionesGenericasCSharp.mkf_validacuit("30-53777127-4"));
+            Assert.IsTrue(FuncionesGenericasCSharp.mkf_validacuit("30-53772127-4"));
+           
+            Assert.IsTrue(FuncionesGenericasCSharp.mkf_validacuit("30714018082"));
+            Assert.IsFalse(FuncionesGenericasCSharp.mkf_validacuit("30-71401308-2"));  // me devuelve true! si uso el form de corredor de pronto, este cuit es bochado. pedirle la funcion a edu
+
+
+            Assert.IsTrue(FuncionesGenericasCSharp.mkf_validacuit("30-70359905-9"));
+            Assert.IsFalse(FuncionesGenericasCSharp.mkf_validacuit("30703539059"));  // tambien me devuelve true!!! -tiene sentido, ya que en efecto el sistema (erroneamente) lo dio de alta 
+
+            Assert.IsTrue(FuncionesGenericasCSharp.mkf_validacuit("30511355040"));
+
+
+
+
+
+
+
+            Assert.IsFalse(CartaDePorteManager.VerfCuit("20"));
+            Assert.IsFalse(CartaDePorteManager.VerfCuit("30-53777127-4"));
+            Assert.IsTrue(CartaDePorteManager.VerfCuit("30-53772127-4"));
+
+            var g = CartaDePorteManager.VerfCuit("30714018082");
+            Assert.IsTrue(g);
+            var h = CartaDePorteManager.VerfCuit("30-71401308-2"); //deberia haber dado false
+            Assert.IsFalse(h);
+
+            var i = CartaDePorteManager.VerfCuit("30-70359905-9");
+            Assert.IsTrue(i);
+            var j = CartaDePorteManager.VerfCuit("30703539059"); //deberia haber dado false -ok el cuit no existe, pero es invalido?
+            Assert.IsFalse(j);
+
+            Assert.IsTrue(CartaDePorteManager.VerfCuit("30511355040")); 
+            
         }
+
 
 
 

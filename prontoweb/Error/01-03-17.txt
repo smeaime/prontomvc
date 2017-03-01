@@ -1,0 +1,18 @@
+
+Log Entry : 
+03/01/2017 07:33:34
+Error in: . Error Message:System.ComponentModel.Win32Exception
+Tiempo de espera de la operación de espera agotado
+
+
+__________________________
+
+Log Entry : 
+03/01/2017 07:33:38
+Error in: . Error Message:System.Net.Mail.SmtpException
+Error al enviar correo.
+   en System.Net.Mail.SmtpClient.Send(MailMessage message)
+   en ProntoFuncionesGenerales.MandaEmailSimple(String Para, String Asunto, String Cuerpo, String De, String SmtpServer, String SmtpUser, String SmtpPass, String sStringGenerarAdjunto, Int64 SmtpPort, Int32 EnableSSL, String CCO, String img)
+   en ASP.global_asax.Application_Error(Object sender, EventArgs e)
+System
+__________________________
