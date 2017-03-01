@@ -607,7 +607,7 @@ Namespace Pronto.ERP.Bll
                 '////////////////////////////////////////////////
                 '/////////         CUIT           ///////////////
                 '////////////////////////////////////////////////
-                If Not mkf_validacuit(.Item("CUIT")) Then
+                If Not ProntoMVC.Data.FuncionesGenericasCSharp.CUITValido(.Item("CUIT")) Then
                     Return "El CUIT no es valido"
                 End If
 

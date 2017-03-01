@@ -2766,7 +2766,7 @@ Partial Class NotaDeCreditoABM
     '        'acá tengo que traer el valor id del hidden
 
 
-    '        'If txtDetValorCUIT.Enabled And Val(txtDetValorCUIT.Text) <> 0 And Not mkf_validacuit(Val(txtDetValorCUIT.Text)) Then
+    '        'If txtDetValorCUIT.Enabled And Val(txtDetValorCUIT.Text) <> 0 And Not ProntoMVC.Data.FuncionesGenericasCSharp.mkf_validacuit(Val(txtDetValorCUIT.Text)) Then
     '        '    ModalPopupExtenderValor.Show()
     '        '    MsgBoxAjax(Me, "El CUIT no es valido")
     '        '    Exit Sub

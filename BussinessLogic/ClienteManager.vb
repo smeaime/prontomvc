@@ -1866,7 +1866,7 @@ Namespace Pronto.ERP.Bll
 
             If c.Eventual = "NO" Then
                 If BDLMasterEmpresasManager.EmpresaPropietariaDeLaBase(SC) = "Williams" Then
-                    If Not mkf_validacuit(c.Cuit) Then
+                    If Not ProntoMVC.Data.FuncionesGenericasCSharp.CUITValido(c.Cuit) Then
                         Return "El CUIT no es valido"
                     End If
                     If c.IdLocalidad <= 0 Then Return "La localidad no es válida"
