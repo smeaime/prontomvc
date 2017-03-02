@@ -15642,7 +15642,6 @@ Public Class CartaDePorteManager
 
                     RenglonCerealnetCalidad(dbc, 10, dbc.NobleCarbon, dbc.CalidadGranosDanadosRebaja, dbc.NobleObjetables, Nothing, "GC", "Carbon", 0, False, anas)
 
-                    RenglonCerealnetCalidad(dbc, 11, dbc.NoblePanzaBlanca, dbc.CalidadGranosDanadosRebaja, dbc.NobleObjetables, Nothing, "OT", "PanzaBlanca", 0, False, anas)
 
                     RenglonCerealnetCalidad(dbc, 12, dbc.NoblePicados, dbc.CalidadGranosDanadosRebaja, dbc.NobleObjetables, Nothing, "PIC", "Picados", 0, False, anas)
 
@@ -15654,12 +15653,15 @@ Public Class CartaDePorteManager
                     RenglonCerealnetCalidad(dbc, 14, dbc.CalidadGranosQuemados, dbc.CalidadGranosDanadosRebaja, dbc.NobleObjetables, Nothing, "Q/A", "Quemados", 0, False, anas)
 
 
-                    RenglonCerealnetCalidad(dbc, 15, dbc.CalidadTierra, dbc.CalidadMermaChamicoBonifica_o_Rebaja, dbc.NobleObjetables, Nothing, "TIE", "Tierra", 0, False, anas)
+                    'RenglonCerealnetCalidad(dbc, 15, dbc.CalidadTierra, dbc.CalidadMermaChamicoBonifica_o_Rebaja, dbc.NobleObjetables, Nothing, "TIE", "Tierra", 0, False, anas)
+
+
 
                     RenglonCerealnetCalidad(dbc, 16, dbc.CalidadMermaZarandeo, dbc.CalidadGranosDanadosRebaja, dbc.NobleObjetables, Nothing, "OT", "Zarandeo", 0, False, anas)
 
+                    'RenglonCerealnetCalidad(dbc, 11, dbc.NoblePanzaBlanca, dbc.CalidadGranosDanadosRebaja, dbc.NobleObjetables, Nothing, "OT", "PanzaBlanca", 0, False, anas)
 
-                    RenglonCerealnetCalidad(dbc, 17, dbc.CalidadDescuentoFinal, dbc.CalidadGranosDanadosRebaja, dbc.NobleObjetables, Nothing, "OT", "DescuentoFinal", 0, False, anas)
+                    'RenglonCerealnetCalidad(dbc, 17, dbc.CalidadDescuentoFinal, dbc.CalidadGranosDanadosRebaja, dbc.NobleObjetables, Nothing, "OT", "DescuentoFinal", 0, False, anas)
 
 
 
