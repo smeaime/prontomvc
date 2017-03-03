@@ -338,6 +338,9 @@ Namespace ProntoMVC.Reportes
                 reportName = "Listado general de Cartas de Porte (simulando original) con foto Buscador sin Webservice"
             ElseIf False Then
                 reportName = "Listado general de Cartas de Porte (simulando original) con foto Webservice"
+
+            ElseIf reportName = "MapaArgentinaProcedenciaCartasPorte" Then
+                reportName = "MapaArgentinaProcedenciaCartasPorte.rdl"
             Else
                 reportName = "Williams - Listado de Clientes incompletos.rdl"
             End If
@@ -587,6 +590,30 @@ Namespace ProntoMVC.Reportes
                     ErrHandler2.WriteError("parece")
 
                 End If
+
+            ElseIf Me.Request.QueryString("ReportName") = "MapaArgentinaProcedenciaCartasPorte" Then
+                UpdatePanelResumen.Visible = False
+
+                ErrHandler2.WriteError("Cli 1")
+
+                ReportViewerRemoto.ServerReport.ReportPath = "/Pronto informes/MapaArgentinaProcedenciaCartasPorte"
+
+                Dim yourParams As ReportParameter() = New ReportParameter(1) {} 'esto tiene que ser 1 si son dos!!!!!
+                yourParams(0) = New ReportParameter("CadenaConexion", Encriptar(scsql), False)
+                Dim dominio = ConfigurationManager.AppSettings("UrlDominio")
+                'dominio = "https:\\prontoweb.williamsentregas.com.ar"
+                yourParams(1) = New ReportParameter("sServidorWeb", dominio, False)
+                If ReportViewerRemoto.ServerReport.GetParameters().Count <> yourParams.Count() Then
+                    MsgBoxAjax(Me, "Distinta cantidad de parámetros: " & ReportViewerRemoto.ServerReport.GetParameters().Count & " y " & yourParams.Count())
+                    Return 'Throw New Exception("Distintos parámetros")
+                End If
+
+                ReportViewerRemoto.ServerReport.SetParameters(yourParams)
+
+                ErrHandler2.WriteError("Cli 2")
+
+
+
             ElseIf Me.Request.QueryString("ReportName") = "Listado de Clientes incompletos" Then
                 UpdatePanelResumen.Visible = False
 

@@ -1,6 +1,6 @@
-﻿<%@ Page Language="VB" 
+﻿<%@ Page Language="VB"
     AutoEventWireup="false"
-     MasterPageFile="~/MasterPage.master" 
+    MasterPageFile="~/MasterPage.master"
     CodeFile="SituacionCalidad.aspx.vb" Inherits="SituacionCalidad"
     Title="Informes" ValidateRequest="false" EnableEventValidation="false" %>
 
@@ -32,11 +32,11 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
     <%--/////////////////////////////////////////////////////////////--%>
     <%--/////////////////////////////////////////////////////////////--%>
 
-  <%--  <div class="titulos" style="color: white">
+    <%--  <div class="titulos" style="color: white">
         Situación de CPs
     </div>--%>
 
-<br />
+    <br />
 
     <style>
         /* Start by setting display:none to make this hidden.
@@ -87,7 +87,26 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
                 <table style="color: black;">
                     <tr>
+                        <td class="EncabezadoCell" style="width: 160px; height: 18px;">Estado</td>
+                        <td class="" style="width: 400px; height: 18px;">
+                            <asp:DropDownList ID="cmbEstado" runat="server" Style="text-align: right; margin-left: 0px;"
+                                CssClass="CssCombo" ToolTip="Estado de la carta de porte" Font-Size="Small" Height="22px" Width="300px" Enabled="false">
+                                <%--dejo el combito deshablitado porque las funciones no tienen todavia el parametro de "estado", estan harcodeadas en "11" --%>
 
+                                <asp:ListItem Text="DESCARGAS de hoy + POSICIONES filtradas" Value="DescargasDeHoyMasTodasLasPosicionesEnRangoFecha"
+                                    Selected="True" />
+
+                                <asp:ListItem Text="Todas (menos las rechazadas)" Value="TodasMenosLasRechazadas" />
+                                <asp:ListItem Text="Incompletas" Value="Incompletas" />
+                                <asp:ListItem Text="Posición" Value="Posición" />
+                                <asp:ListItem Text="Descargas" Value="Descargas" />
+                                <asp:ListItem Text="Facturadas" Value="Facturadas" />
+                                <asp:ListItem Text="No facturadas" Value="NoFacturadas" />
+                                <asp:ListItem Text="Rechazadas" Value="Rechazadas" />
+                                <asp:ListItem Text="sin liberar en Nota de crédito" Value="EnNotaCredito" />
+                            </asp:DropDownList>
+
+                        </td>
                         <td class="EncabezadoCell" style="width: 160px; height: 18px;">Período descarga</td>
                         <td class="EncabezadoCell" style="width: 400px; height: 18px;">
                             <asp:DropDownList ID="cmbPeriodo" runat="server" AutoPostBack="true" Height="22px" Style="color: black;"
@@ -178,11 +197,11 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
         <input type="button" id="btnLog" value="Log" class="btn btn-primary" />
         <input type="button" id="btnMostrarMenu" value="->" class="btn btn-primary" />
-        
+
         <br />
         <div id="Salida2"></div>
         <asp:Literal ID="salida" runat="server"></asp:Literal>
-        
+
 
         <%--<input type="text" class="span4" id="text1" name="agent" value=""  "/>--%>
 
@@ -247,256 +266,591 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
     </div>
 
 
-    
-        <script type="text/javascript">
 
-            "use strict";
+    <script type="text/javascript">
 
-            $(function() {
-                //$('#MenuPrincipal').fadeOut(); 
-                $('#MenuPrincipal').hide(); 
+        "use strict";
 
-                $("#searchmodfbox_Lista").parent().css('z-index', 50);
+        $(function() {
+            //$('#MenuPrincipal').fadeOut(); 
+            $('#MenuPrincipal').hide(); 
+
+            $("#searchmodfbox_Lista").parent().css('z-index', 50);
                
 
-            });
+        });
            
 
-            $('#btnMostrarMenu').click(function () {
-                $('#MenuPrincipal').show(); 
-            })
+        $('#btnMostrarMenu').click(function () {
+            $('#MenuPrincipal').show(); 
+        })
 
 
             
-            $('#btnExportarGrillaAjax3').click(function () {
+        $('#btnExportarGrillaAjax3').click(function () {
 
-                var d = {
-                    filters: jQuery('#Lista').getGridParam("postData").filters,  // si viene en undefined es porque no se puso ningun filtro
-                    fechadesde: $("#ctl00_ContentPlaceHolder1_txtFechaDesde").val(),
-                    fechahasta: $("#ctl00_ContentPlaceHolder1_txtFechaHasta").val(),
-                    destino: $("#ctl00_ContentPlaceHolder1_txtDestino").val()
+            var d = {
+                filters: jQuery('#Lista').getGridParam("postData").filters,  // si viene en undefined es porque no se puso ningun filtro
+                fechadesde: $("#ctl00_ContentPlaceHolder1_txtFechaDesde").val(),
+                fechahasta: $("#ctl00_ContentPlaceHolder1_txtFechaHasta").val(),
+                destino: $("#ctl00_ContentPlaceHolder1_txtDestino").val()
+            }
+
+            if (typeof d.filters === "undefined") d.filters = "";
+
+            $.ajax({
+                type: "POST",
+                //method: "POST",
+                url: "SituacionCalidad.aspx/ExportarGrillaNormal3",
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+
+                data: JSON.stringify(d),
+
+                success: function (data) {
+                    //alert(data.d);
+                    window.open(data.d);
                 }
 
-                if (typeof d.filters === "undefined") d.filters = "";
 
-                $.ajax({
-                    type: "POST",
-                    //method: "POST",
-                    url: "SituacionCalidad.aspx/ExportarGrillaNormal3",
-                    dataType: "json",
-                    contentType: "application/json; charset=utf-8",
+                ,
+                beforeSend: function () {
+                    //$('.loading').html('some predefined loading img html');
+                    $("#loading").show();
+                    $('#grabar2').attr("disabled", true).val("Espere...");
 
-                    data: JSON.stringify(d),
-
-                    success: function (data) {
-                        //alert(data.d);
-                        window.open(data.d);
-                    }
-
-
-                    ,
-                    beforeSend: function () {
-                        //$('.loading').html('some predefined loading img html');
-                        $("#loading").show();
-                        $('#grabar2').attr("disabled", true).val("Espere...");
-
-                    },
-                    complete: function () {
-                        $("#loading").hide();
-                    }
-
-
-                })
+                },
+                complete: function () {
+                    $("#loading").hide();
+                }
 
 
             })
 
 
-            $('#btnExportarGrillaAjax2').click(function () {
+        })
 
-                var d = {
-                    filters: jQuery('#Lista').getGridParam("postData").filters,  // si viene en undefined es porque no se puso ningun filtro
-                    fechadesde: $("#ctl00_ContentPlaceHolder1_txtFechaDesde").val(),
-                    fechahasta: $("#ctl00_ContentPlaceHolder1_txtFechaHasta").val(),
-                    destino: $("#ctl00_ContentPlaceHolder1_txtDestino").val()
+
+        $('#btnExportarGrillaAjax2').click(function () {
+
+            var d = {
+                filters: jQuery('#Lista').getGridParam("postData").filters,  // si viene en undefined es porque no se puso ningun filtro
+                fechadesde: $("#ctl00_ContentPlaceHolder1_txtFechaDesde").val(),
+                fechahasta: $("#ctl00_ContentPlaceHolder1_txtFechaHasta").val(),
+                destino: $("#ctl00_ContentPlaceHolder1_txtDestino").val()
+            }
+
+            if (typeof d.filters === "undefined") d.filters = "";
+
+            $.ajax({
+                type: "POST",
+                //method: "POST",
+                url: "SituacionCalidad.aspx/ExportarGrillaNormal",
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+
+                data: JSON.stringify(d),
+
+                success: function (data) {
+                    //alert(data.d);
+                    window.open(data.d);
                 }
 
-                if (typeof d.filters === "undefined") d.filters = "";
 
-                $.ajax({
-                    type: "POST",
-                    //method: "POST",
-                    url: "SituacionCalidad.aspx/ExportarGrillaNormal",
-                    dataType: "json",
-                    contentType: "application/json; charset=utf-8",
+                ,
+                beforeSend: function () {
+                    //$('.loading').html('some predefined loading img html');
+                    $("#loading").show();
+                    $('#grabar2').attr("disabled", true).val("Espere...");
 
-                    data: JSON.stringify(d),
-
-                    success: function (data) {
-                        //alert(data.d);
-                        window.open(data.d);
-                    }
-
-
-                    ,
-                    beforeSend: function () {
-                        //$('.loading').html('some predefined loading img html');
-                        $("#loading").show();
-                        $('#grabar2').attr("disabled", true).val("Espere...");
-
-                    },
-                    complete: function () {
-                        $("#loading").hide();
-                    }
-
-
-                })
-
-
-            })
-
-            $('#btnExportarGrillaAjax').click(function () {
-
-                var d = {
-                    filters: jQuery('#Lista').getGridParam("postData").filters,  // si viene en undefined es porque no se puso ningun filtro
-                    fechadesde: $("#ctl00_ContentPlaceHolder1_txtFechaDesde").val(),
-                    fechahasta: $("#ctl00_ContentPlaceHolder1_txtFechaHasta").val(),
-                    destino: $("#ctl00_ContentPlaceHolder1_txtDestino").val()
+                },
+                complete: function () {
+                    $("#loading").hide();
                 }
-
-                if (typeof d.filters === "undefined") d.filters = "";
-
-                $.ajax({
-                    type: "POST",
-                    //method: "POST",
-                    url: "SituacionCalidad.aspx/ExportarGrilla",
-                    dataType: "json",
-                    contentType: "application/json; charset=utf-8",
-
-                    data: JSON.stringify(d),
-
-                    success: function (data) {
-                        //alert(data.d);
-                        window.open(data.d);
-                    }
-
-
-                    ,
-                    beforeSend: function () {
-                        //$('.loading').html('some predefined loading img html');
-                        $("#loading").show();
-                        $('#grabar2').attr("disabled", true).val("Espere...");
-
-                    },
-                    complete: function () {
-                        $("#loading").hide();
-                    }
-
-
-                })
 
 
             })
 
 
-            $('#btnPanelInformeAjax').click(function () {
+        })
 
-                var d = {
-                    filters: jQuery('#Lista').getGridParam("postData").filters,  // si viene en undefined es porque no se puso ningun filtro
-                    fechadesde: $("#ctl00_ContentPlaceHolder1_txtFechaDesde").val(),
-                    fechahasta: $("#ctl00_ContentPlaceHolder1_txtFechaHasta").val(),
-                    destino: $("#ctl00_ContentPlaceHolder1_txtDestino").val()
+        $('#btnExportarGrillaAjax').click(function () {
+
+            var d = {
+                filters: jQuery('#Lista').getGridParam("postData").filters,  // si viene en undefined es porque no se puso ningun filtro
+                fechadesde: $("#ctl00_ContentPlaceHolder1_txtFechaDesde").val(),
+                fechahasta: $("#ctl00_ContentPlaceHolder1_txtFechaHasta").val(),
+                destino: $("#ctl00_ContentPlaceHolder1_txtDestino").val()
+            }
+
+            if (typeof d.filters === "undefined") d.filters = "";
+
+            $.ajax({
+                type: "POST",
+                //method: "POST",
+                url: "SituacionCalidad.aspx/ExportarGrilla",
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+
+                data: JSON.stringify(d),
+
+                success: function (data) {
+                    //alert(data.d);
+                    window.open(data.d);
                 }
 
-                if (typeof d.filters === "undefined") d.filters = "";
 
-                $.ajax({
-                    type: "POST",
-                    //method: "POST",
-                    url: "SituacionCalidad.aspx/PanelInforme",
-                    dataType: "json",
-                    contentType: "application/json; charset=utf-8",
+                ,
+                beforeSend: function () {
+                    //$('.loading').html('some predefined loading img html');
+                    $("#loading").show();
+                    $('#grabar2').attr("disabled", true).val("Espere...");
 
-                    data: JSON.stringify(d),
+                },
+                complete: function () {
+                    $("#loading").hide();
+                }
 
-                    success: function (data) {
-                        // http://stackoverflow.com/questions/10439798/how-to-laod-raw-html-using-jquery-ajax-call-to-asp-net-webmethod
-                        $("#Salida2").html("").append(data.d)
+
+            })
+
+
+        })
+
+
+        $('#btnPanelInformeAjax').click(function () {
+
+            var d = {
+                filters: jQuery('#Lista').getGridParam("postData").filters,  // si viene en undefined es porque no se puso ningun filtro
+                fechadesde: $("#ctl00_ContentPlaceHolder1_txtFechaDesde").val(),
+                fechahasta: $("#ctl00_ContentPlaceHolder1_txtFechaHasta").val(),
+                destino: $("#ctl00_ContentPlaceHolder1_txtDestino").val()
+            }
+
+            if (typeof d.filters === "undefined") d.filters = "";
+
+            $.ajax({
+                type: "POST",
+                //method: "POST",
+                url: "SituacionCalidad.aspx/PanelInforme",
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+
+                data: JSON.stringify(d),
+
+                success: function (data) {
+                    // http://stackoverflow.com/questions/10439798/how-to-laod-raw-html-using-jquery-ajax-call-to-asp-net-webmethod
+                    $("#Salida2").html("").append(data.d)
                         
-                        $('#titDemorado').click(function () {
-                            //modificar el filtro para que incluya demorado y rechazado
-                            var myfilter = { groupOp: "OR", rules: [] };
-                            myfilter.rules.push({ field: "Situacion", op: "eq", data: "1" });
-                            myfilter.rules.push({ field: "Situacion", op: "eq", data: "5" });
+                    $('#titDemorado').click(function () {
+                        //modificar el filtro para que incluya demorado y rechazado
+                        var myfilter = { groupOp: "OR", rules: [] };
+                        myfilter.rules.push({ field: "Situacion", op: "eq", data: "1" });
+                        myfilter.rules.push({ field: "Situacion", op: "eq", data: "5" });
 
-                            jqGridFilter(JSON.stringify(myfilter) , $('#Lista'));
-                        })
+                        jqGridFilter(JSON.stringify(myfilter) , $('#Lista'));
+                    })
 
-                        $('#titAutorizado').click(function () {
-                            //modificar el filtro para que incluya demorado y rechazado
-                            var myfilter = { groupOp: "OR", rules: [] };
-                            myfilter.rules.push({ field: "Situacion", op: "eq", data: "0" });
+                    $('#titAutorizado').click(function () {
+                        //modificar el filtro para que incluya demorado y rechazado
+                        var myfilter = { groupOp: "OR", rules: [] };
+                        myfilter.rules.push({ field: "Situacion", op: "eq", data: "0" });
 
-                            jqGridFilter(JSON.stringify(myfilter) , $('#Lista'));
-                        })
+                        jqGridFilter(JSON.stringify(myfilter) , $('#Lista'));
+                    })
 
-                        $('#titPosicion').click(function () {
-                            //modificar el filtro para que incluya demorado y rechazado
-                            var myfilter = { groupOp: "OR", rules: [] };
-                            myfilter.rules.push({ field: "Situacion", op: "eq", data: "2" });
+                    $('#titPosicion').click(function () {
+                        //modificar el filtro para que incluya demorado y rechazado
+                        var myfilter = { groupOp: "OR", rules: [] };
+                        myfilter.rules.push({ field: "Situacion", op: "eq", data: "2" });
 
-                            jqGridFilter(JSON.stringify(myfilter) , $('#Lista'));
-                        })
-
-
-
-                        $('#titADescargar').click(function () {
-                            //modificar el filtro para que incluya demorado y rechazado
-                            var myfilter = { groupOp: "OR", rules: [] };
-                            myfilter.rules.push({ field: "Situacion", op: "eq", data: "4" });
-
-                            jqGridFilter(JSON.stringify(myfilter) , $('#Lista'));
-                        })
-
-                        $('#titDescargado').click(function () {
-                            //modificar el filtro para que incluya demorado y rechazado
-                            var myfilter = { groupOp: "OR", rules: [] };
-                            myfilter.rules.push({ field: "Situacion", op: "eq", data: "3" });
-
-                            jqGridFilter(JSON.stringify(myfilter) , $('#Lista'));
-                        })
+                        jqGridFilter(JSON.stringify(myfilter) , $('#Lista'));
+                    })
 
 
-                        $('#titDesviado').click(function () {
-                            //modificar el filtro para que incluya demorado y rechazado
-                            var myfilter = { groupOp: "OR", rules: [] };
-                            myfilter.rules.push({ field: "Situacion", op: "eq", data: "6" });
 
-                            jqGridFilter(JSON.stringify(myfilter) , $('#Lista'));
-                        })
+                    $('#titADescargar').click(function () {
+                        //modificar el filtro para que incluya demorado y rechazado
+                        var myfilter = { groupOp: "OR", rules: [] };
+                        myfilter.rules.push({ field: "Situacion", op: "eq", data: "4" });
+
+                        jqGridFilter(JSON.stringify(myfilter) , $('#Lista'));
+                    })
+
+                    $('#titDescargado').click(function () {
+                        //modificar el filtro para que incluya demorado y rechazado
+                        var myfilter = { groupOp: "OR", rules: [] };
+                        myfilter.rules.push({ field: "Situacion", op: "eq", data: "3" });
+
+                        jqGridFilter(JSON.stringify(myfilter) , $('#Lista'));
+                    })
 
 
-                        $('#titCPcambiar').click(function () {
-                            //modificar el filtro para que incluya demorado y rechazado
-                            var myfilter = { groupOp: "OR", rules: [] };
-                            myfilter.rules.push({ field: "Situacion", op: "eq", data: "7" });
+                    $('#titDesviado').click(function () {
+                        //modificar el filtro para que incluya demorado y rechazado
+                        var myfilter = { groupOp: "OR", rules: [] };
+                        myfilter.rules.push({ field: "Situacion", op: "eq", data: "6" });
 
-                            jqGridFilter(JSON.stringify(myfilter) , $('#Lista'));
-                        })
+                        jqGridFilter(JSON.stringify(myfilter) , $('#Lista'));
+                    })
 
-                        $('#titSinCupo').click(function () {
-                            //modificar el filtro para que incluya demorado y rechazado
-                            var myfilter = { groupOp: "OR", rules: [] };
-                            myfilter.rules.push({ field: "Situacion", op: "eq", data: "8" });
 
-                            jqGridFilter(JSON.stringify(myfilter) , $('#Lista'));
-                        })
-                        //alert(data.d);
+                    $('#titCPcambiar').click(function () {
+                        //modificar el filtro para que incluya demorado y rechazado
+                        var myfilter = { groupOp: "OR", rules: [] };
+                        myfilter.rules.push({ field: "Situacion", op: "eq", data: "7" });
 
+                        jqGridFilter(JSON.stringify(myfilter) , $('#Lista'));
+                    })
+
+                    $('#titSinCupo').click(function () {
+                        //modificar el filtro para que incluya demorado y rechazado
+                        var myfilter = { groupOp: "OR", rules: [] };
+                        myfilter.rules.push({ field: "Situacion", op: "eq", data: "8" });
+
+                        jqGridFilter(JSON.stringify(myfilter) , $('#Lista'));
+                    })
+                    //alert(data.d);
+
+                }
+
+
+                ,
+                beforeSend: function () {
+                    //$('.loading').html('some predefined loading img html');
+                    $("#loading").show();
+                    $('#grabar2').attr("disabled", true).val("Espere...");
+
+                },
+                complete: function () {
+                    $("#loading").hide();
+                }
+
+
+            })
+
+
+        })
+
+
+
+        function jqGridFilter(filtersparam, grid) {
+            grid.setGridParam({
+                postData: {
+                    filters: filtersparam,
+                    'FechaInicial': function () { return $("#ctl00_ContentPlaceHolder1_txtFechaDesde").val(); },
+                    'FechaFinal': function () { return $("#ctl00_ContentPlaceHolder1_txtFechaHasta").val(); },
+                    'puntovent': function () { return $("#ctl00_ContentPlaceHolder1_cmbPuntoVenta").val(); },
+                    'destino': function () { return $("#ctl00_ContentPlaceHolder1_txtDestino").val(); }
+                },
+                search: true
+            });
+            grid.trigger("reloadGrid");
+        }
+
+
+        $("#text1").autocomplete({
+            source: function (request, response) {
+                $.ajax({
+                    type: "POST",
+                    url: "WebServiceClientes.asmx/WilliamsDestinoGetWilliamsDestinos",
+                    dataType: "json",
+                    contentType: "application/json; charset=utf-8",
+
+                    data: JSON.stringify({ term: request.term }),
+
+                    success: function (data) {
+                        //check what data contains. it should contain a string like "['val1','val2','val3','val4']"
+                        //the next line should use $.map(data and not $.map(response
+                        var a = $.parseJSON(data.d);
+                        response($.map(a, function (item) {
+                            return {
+                                label: item.value,
+                                value: item.id
+                            }
+                        }));
+                    }
+
+                })
+            }
+        });
+
+
+        function jsAcopiosPorCliente(textbox, combo) {
+            //var txttitular = getObj("ctl00_ContentPlaceHolder1_TabContainer2_TabPanel2_txtTitular");
+
+            var $txttitular = $("#" + textbox.id + "")
+            var $select = $("#" + combo.id + "")
+
+
+
+            var myJSONString = JSON.stringify($("#ctl00_ContentPlaceHolder1_HFSC").val());
+            var myEscapedJSONString = myJSONString.escapeSpecialChars();
+
+            var aaa = addslashes($("#ctl00_ContentPlaceHolder1_HFSC").val())
+
+
+
+
+
+
+
+            $.ajax({
+                // url: "/CartaDePorte.aspx/AcopiosPorCliente",
+                url: "WebServiceClientes.asmx/AcopiosPorCliente",
+                type: 'POST',
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                //dataType: "xml",
+                data: "{'NombreCliente':'" +
+                       addslashes($txttitular.val()) +
+                     "', 'SC':'" + aaa + "' }",
+
+
+                //data: {
+                //    NombreCliente: 'asdfasdf',
+                //    SC:  'asdfsadfsa' // $("#HFSC").val()
+                //},
+                success: function (data) {
+
+                    var x = data.d;
+
+                    //var $select= $('select#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel2_optDivisionSyngenta');
+
+                    var guardoelactualId = $select.val()
+                    $select.find('option').remove();
+
+
+
+                    $.each(x, function (i, val) {
+
+
+                        $select.append('<option value=' + val.idacopio + '>' + val.desc + '</option>');
+
+                        //$('select#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel2_optDivisionSyngenta').append(
+                        //$("<option></option>")
+                        //    .val(val.idacopio).text(val.desc));
+
+                    });
+
+                    $select.val(guardoelactualId)
+
+                    if (x.length > 1) combo.style.visibility = "visible";
+                    else combo.style.visibility = "hidden";
+
+                },
+                error: function (xhr) {
+                    // alert("Something seems Wrong");
+                }
+            });
+
+        }
+
+
+
+
+
+        var $grid = "";
+        var lastSelectedId;
+        var lastSelectediCol;
+        var lastSelectediRow;
+        var lastSelectediCol2;
+        var lastSelectediRow2;
+        var inEdit;
+        var selICol;
+        var selIRow;
+        var gridCellWasClicked = false;
+        var grillaenfoco = false;
+        var getColumnIndexByName = function (grid, columnName) {
+            var cm = grid.jqGrid('getGridParam', 'colModel'), i, l = cm.length;
+            for (i = 0; i < l; i++) {
+                if (cm[i].name === columnName) {
+                    return i; // return the index
+                }
+            }
+            return -1;
+        };
+        var saveIcon = '<span class="ui-state-default" style="border:0"><span class="ui-icon ui-icon-info" style="float: left; margin-right: .3em;"></span></span>'
+
+        $('.ui-jqgrid .ui-jqgrid-htable th div').css('white-space', 'normal');
+
+        $.extend($.jgrid.inlineEdit, {
+            keys: true
+        });
+
+
+
+
+        function sacarDeEditMode() {
+
+            // grabando o deshaciendo???
+            //jQuery('#Lista').jqGrid('restoreCell', lastRowIndex, lastColIndex, true);
+            try {
+                jQuery('#Lista').jqGrid('saveCell', lastSelectediRow, lastSelectediCol);
+
+            } catch (e) {
+
+            }
+
+            // jQuery('#Lista').jqGrid('editCell', lastRowIndex, lastColIndex);
+            // jQuery('#Lista').jqGrid("setCell", rowid, "amount", val, "");
+
+
+
+            var ids = $('#Lista').getDataIDs();
+            for (var i = 0, il = ids.length; i < il; i++) {
+                $('#Lista').jqGrid('restoreRow', ids[i]);
+            }
+
+
+
+            //        var $this = $('#Lista'), ids = $this.jqGrid('getDataIDs'), i, l = ids.length;
+            //        for (i = l - 1; i >= 0; i--) {
+            //                $('#Lista').jqGrid('restoreRow', ids[i]);
+            //        }
+
+
+        }
+
+        function RefrescarFondoRenglon(grilla)
+        {
+
+            var iCol = getColumnIndexByName($(grilla),'Situacion'),
+                       cRows = grilla.rows.length, iRow, row, className;
+
+            for (iRow=0; iRow<cRows; iRow++) {
+                row = grilla.rows[iRow];
+                className = row.className;
+                if ($.inArray('jqgrow', className.split(' ')) > 0) {
+                    var x = ($(row.cells[iCol]))[0].childNodes[0].data; //.children("input:checked");
+
+                    //Autorizado: verde        Demorado: rojo            Rechazado: Violeta 
+                    if (x=="Autorizado") {
+                        if ($.inArray('myAltRowClassAutorizado', className.split(' ')) === -1) {
+                            row.className = className + ' myAltRowClassAutorizado';
+                        }
+                    }
+                    else if (x=="Demorado") {
+                        if ($.inArray('myAltRowClassDemorado', className.split(' ')) === -1) {
+                            row.className = className + ' myAltRowClassDemorado';
+                        }
+                    }
+                    else if (x=="Rechazado") {
+                        if ($.inArray('myAltRowClassRechazado', className.split(' ')) === -1) {
+                            row.className = className + ' myAltRowClassRechazado';
+                        }
                     }
 
 
-                    ,
+                }
+            }
+
+        }
+
+
+
+
+        function GrabarFila(gridId) {
+
+            $grid = $('#Lista');
+
+            var saveparameters = {
+                "successfunc": null,
+                "url": 'clientArray',
+                "extraparam": {},
+                //                "aftersavefunc": function (response) {
+                //                    alert('saved');
+                //                },
+                "errorfunc": null,
+                "afterrestorefunc": null,
+                "restoreAfterError": true,
+                "mtype": "POST"
+            }
+
+            //jQuery('#Lista').jqGrid('restoreCell', lastRowIndex, lastColIndex, true);
+            //$('#Lista').jqGrid('saveRow', gridId, saveparameters, 'clientArray'); //si esta en inline mode, quizas salta un error!
+
+            sacarDeEditMode();
+            var dataFromTheRow = $grid.jqGrid('getRowData', gridId), i;
+
+            //var dataIds = $('#Lista').jqGrid('getDataIDs');
+            //for (i = 0; i < dataIds.length; i++) {
+            //    try {
+            //        //Save row only to the grid
+            //        //$('#Lista').jqGrid('saveRow', dataIds[i], false, 'clientArray');
+            //        $('#Lista').jqGrid('restoreRow', dataIds[i]);
+            //    }
+            //    catch (ex) {
+            //        //If you are using editRules it might end up with exception
+            //        $('#Lista').jqGrid('restoreRow', dataIds[i]);
+            //    }
+            //}
+
+            var datos = {}; //= $("#formid").serializeObject();
+            var err;
+
+
+            datos.idcarta = gridId;
+            datos.idsituacion = dataFromTheRow.Situacion;
+            if (datos.idsituacion == "") datos.idsituacion = -1;
+            datos.sObservacionesSituacion = dataFromTheRow.ObservacionesSituacion;
+
+
+            err = ""
+            //if (datos.Fecha == "" || datos.Fecha == undefined) err = err + "Falta definir la fecha.\n"
+            //if (datos.IdWilliamsDestino == "" || datos.IdWilliamsDestino == undefined) err = err + "Falta el destino.\n"
+            //if (datos.TotalDescargaDia == "" || datos.TotalDescargaDia == undefined) err = err + "Faltan los kilos de descarga\n"
+
+            if (err != "") {
+                alert('No se pudo grabar el registro.\n' + err);
+            } else {
+                //$('html, body').css('cursor', 'wait');
+
+
+
+
+
+
+                $.ajax({
+                    type: 'POST',
+                    contentType: 'application/json; charset=utf-8',
+                    url: "WebServiceCartas.asmx/GrabarSituacion",
+                    dataType: 'json',
+                    data: JSON.stringify({
+                        idcarta: gridId,
+                        idsituacion: datos.idsituacion,
+                        sObservacionesSituacion: dataFromTheRow.ObservacionesSituacion
+                    }),
+                    success: function (result) {
+                        if (result) {
+                            $grid.jqGrid('setRowData', gridId, { act: "" });
+                            var rowid = $('#Lista').getGridParam('selrow');
+                            var valor = result.IdCartasDePorteControlDescarga;
+                            if (valor == "") { valor = "0"; }
+                            $('#Lista').jqGrid('setCell', rowid, ' IdCartasDePorteControlDescarga', valor);
+
+                            RefrescarFondoRenglon(document.getElementById('Lista'));
+                        } else {
+                            alert('No se pudo grabar el registro.');
+                        }
+                    },
+                    error: function (xhr, textStatus, exceptionThrown) {
+                        try {
+                            var errorData = $.parseJSON(xhr.responseText);
+                            var errorMessages = [];
+                            for (var key in errorData) { errorMessages.push(errorData[key]); }
+                            $('html, body').css('cursor', 'auto');
+                            $('#grabar2').attr("disabled", false).val("Aceptar");
+                            $("#textoMensajeAlerta").html(errorData.Errors.join("<br />"));
+                            $("#mensajeAlerta").show();
+                            alert(errorData.Errors.join("\n").replace(/<br\/>/g, '\n'));
+                        } catch (e) {
+                            $('html, body').css('cursor', 'auto');
+                            $('#grabar2').attr("disabled", false).val("Aceptar");
+                            $("#textoMensajeAlerta").html(xhr.responseText);
+                            $("#mensajeAlerta").show();
+                        }
+                    },
                     beforeSend: function () {
                         //$('.loading').html('some predefined loading img html');
                         $("#loading").show();
@@ -507,644 +861,309 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                         $("#loading").hide();
                     }
 
-
-                })
-
-
-            })
-
-
-
-            function jqGridFilter(filtersparam, grid) {
-                grid.setGridParam({
-                    postData: {
-                        filters: filtersparam,
-                        'FechaInicial': function () { return $("#ctl00_ContentPlaceHolder1_txtFechaDesde").val(); },
-                        'FechaFinal': function () { return $("#ctl00_ContentPlaceHolder1_txtFechaHasta").val(); },
-                        'puntovent': function () { return $("#ctl00_ContentPlaceHolder1_cmbPuntoVenta").val(); },
-                        'destino': function () { return $("#ctl00_ContentPlaceHolder1_txtDestino").val(); }
-                    },
-                    search: true
                 });
-                grid.trigger("reloadGrid");
-            }
+            };
+        };
 
-
-            $("#text1").autocomplete({
-                source: function (request, response) {
-                    $.ajax({
-                        type: "POST",
-                        url: "WebServiceClientes.asmx/WilliamsDestinoGetWilliamsDestinos",
-                        dataType: "json",
-                        contentType: "application/json; charset=utf-8",
-
-                        data: JSON.stringify({ term: request.term }),
-
-                        success: function (data) {
-                            //check what data contains. it should contain a string like "['val1','val2','val3','val4']"
-                            //the next line should use $.map(data and not $.map(response
-                            var a = $.parseJSON(data.d);
-                            response($.map(a, function (item) {
-                                return {
-                                    label: item.value,
-                                    value: item.id
-                                }
-                            }));
-                        }
-
-                    })
-                }
-            });
-
-
-            function jsAcopiosPorCliente(textbox, combo) {
-                //var txttitular = getObj("ctl00_ContentPlaceHolder1_TabContainer2_TabPanel2_txtTitular");
-
-                var $txttitular = $("#" + textbox.id + "")
-                var $select = $("#" + combo.id + "")
-
-
-
-                var myJSONString = JSON.stringify($("#ctl00_ContentPlaceHolder1_HFSC").val());
-                var myEscapedJSONString = myJSONString.escapeSpecialChars();
-
-                var aaa = addslashes($("#ctl00_ContentPlaceHolder1_HFSC").val())
-
-
-
-
-
-
-
+        function EliminarFila(gridId) {
+            $grid = $('#Lista');
+            var dataFromTheRow = $grid.jqGrid('getRowData', gridId);
+            var idprincipal = dataFromTheRow[' IdCartasDePorteControlDescarga'];
+            if (idprincipal <= 0) {
+                $grid.jqGrid('delRowData', gridId);
+            } else {
                 $.ajax({
-                    // url: "/CartaDePorte.aspx/AcopiosPorCliente",
-                    url: "WebServiceClientes.asmx/AcopiosPorCliente",
                     type: 'POST',
-                    contentType: "application/json; charset=utf-8",
-                    dataType: "json",
-                    //dataType: "xml",
-                    data: "{'NombreCliente':'" +
-                           addslashes($txttitular.val()) +
-                         "', 'SC':'" + aaa + "' }",
-
-
-                    //data: {
-                    //    NombreCliente: 'asdfasdf',
-                    //    SC:  'asdfsadfsa' // $("#HFSC").val()
-                    //},
-                    success: function (data) {
-
-                        var x = data.d;
-
-                        //var $select= $('select#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel2_optDivisionSyngenta');
-
-                        var guardoelactualId = $select.val()
-                        $select.find('option').remove();
-
-
-
-                        $.each(x, function (i, val) {
-
-
-                            $select.append('<option value=' + val.idacopio + '>' + val.desc + '</option>');
-
-                            //$('select#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel2_optDivisionSyngenta').append(
-                            //$("<option></option>")
-                            //    .val(val.idacopio).text(val.desc));
-
-                        });
-
-                        $select.val(guardoelactualId)
-
-                        if (x.length > 1) combo.style.visibility = "visible";
-                        else combo.style.visibility = "hidden";
-
+                    contentType: 'application/json; charset=utf-8',
+                    url: "WebServiceClientes.asmx/DestinoDelete",
+                    dataType: 'json',
+                    data: JSON.stringify({ id: idprincipal }),
+                    success: function (result) {
+                        if (result) {
+                            $grid.jqGrid('delRowData', gridId);
+                        } else {
+                            alert('No se pudo eliminar el registro.');
+                        }
                     },
-                    error: function (xhr) {
-                        // alert("Something seems Wrong");
-                    }
                 });
-
-            }
-
-
-
-
-
-            var $grid = "";
-            var lastSelectedId;
-            var lastSelectediCol;
-            var lastSelectediRow;
-            var lastSelectediCol2;
-            var lastSelectediRow2;
-            var inEdit;
-            var selICol;
-            var selIRow;
-            var gridCellWasClicked = false;
-            var grillaenfoco = false;
-            var getColumnIndexByName = function (grid, columnName) {
-                var cm = grid.jqGrid('getGridParam', 'colModel'), i, l = cm.length;
-                for (i = 0; i < l; i++) {
-                    if (cm[i].name === columnName) {
-                        return i; // return the index
-                    }
-                }
-                return -1;
             };
-            var saveIcon = '<span class="ui-state-default" style="border:0"><span class="ui-icon ui-icon-info" style="float: left; margin-right: .3em;"></span></span>'
+        };
 
-            $('.ui-jqgrid .ui-jqgrid-htable th div').css('white-space', 'normal');
 
-            $.extend($.jgrid.inlineEdit, {
-                keys: true
-            });
 
 
+        //window.parent.document.body.onclick = saveEditedCell; // attach to parent window if any
+        //document.body.onclick = saveEditedCell; // attach to current document.
 
+        //function saveEditedCell(evt) {
+        //    var target = $(evt.target);
 
-            function sacarDeEditMode() {
+        //    if ($grid) {
+        //        var isCellClicked = $grid.find(target).length; // check if click is inside jqgrid
+        //        if (gridCellWasClicked && !isCellClicked) // check if a valid click
+        //        {
+        //            gridCellWasClicked = false;
+        //            $grid.jqGrid("saveCell", lastSelectediRow2, lastSelectediCol2);
+        //        }
+        //    }
 
-                // grabando o deshaciendo???
-                //jQuery('#Lista').jqGrid('restoreCell', lastRowIndex, lastColIndex, true);
-                try {
-                    jQuery('#Lista').jqGrid('saveCell', lastSelectediRow, lastSelectediCol);
+        //    //$grid = "";
+        //    gridCellWasClicked = false;
 
-                } catch (e) {
+        //    if (jQuery("#Lista").find(target).length) {
+        //        $grid = $('#Lista');
+        //        grillaenfoco = true;
+        //    }
+        //    if (grillaenfoco) {
+        //        gridCellWasClicked = true;
+        //        lastSelectediRow2 = lastSelectediRow;
+        //        lastSelectediCol2 = lastSelectediCol;
+        //    }
+        //};
 
-                }
 
-                // jQuery('#Lista').jqGrid('editCell', lastRowIndex, lastColIndex);
-                // jQuery('#Lista').jqGrid("setCell", rowid, "amount", val, "");
 
-
-
-                var ids = $('#Lista').getDataIDs();
-                for (var i = 0, il = ids.length; i < il; i++) {
-                    $('#Lista').jqGrid('restoreRow', ids[i]);
-                }
-
-
-
-                //        var $this = $('#Lista'), ids = $this.jqGrid('getDataIDs'), i, l = ids.length;
-                //        for (i = l - 1; i >= 0; i--) {
-                //                $('#Lista').jqGrid('restoreRow', ids[i]);
-                //        }
-
-
-            }
-
-            function RefrescarFondoRenglon(grilla)
-            {
-
-                var iCol = getColumnIndexByName($(grilla),'Situacion'),
-                           cRows = grilla.rows.length, iRow, row, className;
-
-                for (iRow=0; iRow<cRows; iRow++) {
-                    row = grilla.rows[iRow];
-                    className = row.className;
-                    if ($.inArray('jqgrow', className.split(' ')) > 0) {
-                        var x = ($(row.cells[iCol]))[0].childNodes[0].data; //.children("input:checked");
-
-                        //Autorizado: verde        Demorado: rojo            Rechazado: Violeta 
-                        if (x=="Autorizado") {
-                            if ($.inArray('myAltRowClassAutorizado', className.split(' ')) === -1) {
-                                row.className = className + ' myAltRowClassAutorizado';
-                            }
-                        }
-                        else if (x=="Demorado") {
-                            if ($.inArray('myAltRowClassDemorado', className.split(' ')) === -1) {
-                                row.className = className + ' myAltRowClassDemorado';
-                            }
-                        }
-                        else if (x=="Rechazado") {
-                            if ($.inArray('myAltRowClassRechazado', className.split(' ')) === -1) {
-                                row.className = className + ' myAltRowClassRechazado';
-                            }
-                        }
-
-
-                    }
-                }
-
-            }
-
-
-
-
-            function GrabarFila(gridId) {
-
-                $grid = $('#Lista');
-
-                var saveparameters = {
-                    "successfunc": null,
-                    "url": 'clientArray',
-                    "extraparam": {},
-                    //                "aftersavefunc": function (response) {
-                    //                    alert('saved');
-                    //                },
-                    "errorfunc": null,
-                    "afterrestorefunc": null,
-                    "restoreAfterError": true,
-                    "mtype": "POST"
-                }
-
-                //jQuery('#Lista').jqGrid('restoreCell', lastRowIndex, lastColIndex, true);
-                //$('#Lista').jqGrid('saveRow', gridId, saveparameters, 'clientArray'); //si esta en inline mode, quizas salta un error!
-
-                sacarDeEditMode();
-                var dataFromTheRow = $grid.jqGrid('getRowData', gridId), i;
-
-                //var dataIds = $('#Lista').jqGrid('getDataIDs');
-                //for (i = 0; i < dataIds.length; i++) {
-                //    try {
-                //        //Save row only to the grid
-                //        //$('#Lista').jqGrid('saveRow', dataIds[i], false, 'clientArray');
-                //        $('#Lista').jqGrid('restoreRow', dataIds[i]);
-                //    }
-                //    catch (ex) {
-                //        //If you are using editRules it might end up with exception
-                //        $('#Lista').jqGrid('restoreRow', dataIds[i]);
-                //    }
-                //}
-
-                var datos = {}; //= $("#formid").serializeObject();
-                var err;
-
-
-                datos.idcarta = gridId;
-                datos.idsituacion = dataFromTheRow.Situacion;
-                if (datos.idsituacion == "") datos.idsituacion = -1;
-                datos.sObservacionesSituacion = dataFromTheRow.ObservacionesSituacion;
-
-
-                err = ""
-                //if (datos.Fecha == "" || datos.Fecha == undefined) err = err + "Falta definir la fecha.\n"
-                //if (datos.IdWilliamsDestino == "" || datos.IdWilliamsDestino == undefined) err = err + "Falta el destino.\n"
-                //if (datos.TotalDescargaDia == "" || datos.TotalDescargaDia == undefined) err = err + "Faltan los kilos de descarga\n"
-
-                if (err != "") {
-                    alert('No se pudo grabar el registro.\n' + err);
-                } else {
-                    //$('html, body').css('cursor', 'wait');
-
-
-
-
-
-
-                    $.ajax({
-                        type: 'POST',
-                        contentType: 'application/json; charset=utf-8',
-                        url: "WebServiceCartas.asmx/GrabarSituacion",
-                        dataType: 'json',
-                        data: JSON.stringify({
-                            idcarta: gridId,
-                            idsituacion: datos.idsituacion,
-                            sObservacionesSituacion: dataFromTheRow.ObservacionesSituacion
-                        }),
-                        success: function (result) {
-                            if (result) {
-                                $grid.jqGrid('setRowData', gridId, { act: "" });
-                                var rowid = $('#Lista').getGridParam('selrow');
-                                var valor = result.IdCartasDePorteControlDescarga;
-                                if (valor == "") { valor = "0"; }
-                                $('#Lista').jqGrid('setCell', rowid, ' IdCartasDePorteControlDescarga', valor);
-
-                                RefrescarFondoRenglon(document.getElementById('Lista'));
-                            } else {
-                                alert('No se pudo grabar el registro.');
-                            }
-                        },
-                        error: function (xhr, textStatus, exceptionThrown) {
-                            try {
-                                var errorData = $.parseJSON(xhr.responseText);
-                                var errorMessages = [];
-                                for (var key in errorData) { errorMessages.push(errorData[key]); }
-                                $('html, body').css('cursor', 'auto');
-                                $('#grabar2').attr("disabled", false).val("Aceptar");
-                                $("#textoMensajeAlerta").html(errorData.Errors.join("<br />"));
-                                $("#mensajeAlerta").show();
-                                alert(errorData.Errors.join("\n").replace(/<br\/>/g, '\n'));
-                            } catch (e) {
-                                $('html, body').css('cursor', 'auto');
-                                $('#grabar2').attr("disabled", false).val("Aceptar");
-                                $("#textoMensajeAlerta").html(xhr.responseText);
-                                $("#mensajeAlerta").show();
-                            }
-                        },
-                        beforeSend: function () {
-                            //$('.loading').html('some predefined loading img html');
-                            $("#loading").show();
-                            $('#grabar2').attr("disabled", true).val("Espere...");
-
-                        },
-                        complete: function () {
-                            $("#loading").hide();
-                        }
-
-                    });
-                };
-            };
-
-            function EliminarFila(gridId) {
-                $grid = $('#Lista');
-                var dataFromTheRow = $grid.jqGrid('getRowData', gridId);
-                var idprincipal = dataFromTheRow[' IdCartasDePorteControlDescarga'];
-                if (idprincipal <= 0) {
-                    $grid.jqGrid('delRowData', gridId);
-                } else {
-                    $.ajax({
-                        type: 'POST',
-                        contentType: 'application/json; charset=utf-8',
-                        url: "WebServiceClientes.asmx/DestinoDelete",
-                        dataType: 'json',
-                        data: JSON.stringify({ id: idprincipal }),
-                        success: function (result) {
-                            if (result) {
-                                $grid.jqGrid('delRowData', gridId);
-                            } else {
-                                alert('No se pudo eliminar el registro.');
-                            }
-                        },
-                    });
-                };
-            };
-
-
-
-
-            //window.parent.document.body.onclick = saveEditedCell; // attach to parent window if any
-            //document.body.onclick = saveEditedCell; // attach to current document.
-
-            //function saveEditedCell(evt) {
-            //    var target = $(evt.target);
-
-            //    if ($grid) {
-            //        var isCellClicked = $grid.find(target).length; // check if click is inside jqgrid
-            //        if (gridCellWasClicked && !isCellClicked) // check if a valid click
-            //        {
-            //            gridCellWasClicked = false;
-            //            $grid.jqGrid("saveCell", lastSelectediRow2, lastSelectediCol2);
-            //        }
-            //    }
-
-            //    //$grid = "";
-            //    gridCellWasClicked = false;
-
-            //    if (jQuery("#Lista").find(target).length) {
-            //        $grid = $('#Lista');
-            //        grillaenfoco = true;
-            //    }
-            //    if (grillaenfoco) {
-            //        gridCellWasClicked = true;
-            //        lastSelectediRow2 = lastSelectediRow;
-            //        lastSelectediCol2 = lastSelectediCol;
-            //    }
-            //};
-
-
-
-            function MarcarSeleccionadosParaEliminar(grid) {
-                var selectedIds = grid.jqGrid('getGridParam', 'selarrrow');
-                var i, Id;
-                for (i = selectedIds.length - 1; i >= 0; i--) {
-                    Id = selectedIds[i];
-                    var se = "<input style='height:22px;width:20px;' type='button' value='B' onclick=\"EliminarFila('" + Id + "');\"  />";
-                    grid.jqGrid('setRowData', Id, { act: se });
-                    //grid.jqGrid('delRowData', selectedIds[i]);
-                }
-            };
-
-            function AgregarItemVacio(grid) {
-                var colModel = grid.jqGrid('getGridParam', 'colModel');
-                var dataIds = grid.jqGrid('getDataIDs');
-                var Id = (grid.jqGrid('getGridParam', 'records') + 1) * -1;
-                var se = "<input style='height:22px;width:60px;' type='button' value='Grabar' onclick=\"GrabarFila('" + Id + "');\"  />";
-                var data, j, cm;
-
-                if (lastSelectediRow2 != undefined) { lastSelectediRow2 = lastSelectediRow2 + 1; }
-
-                if (false) {
-                    data = '{';
-                    for (j = 1; j < colModel.length; j++) {
-                        cm = colModel[j];
-                        data = data + '"' + cm.index + '":' + '"",';
-                    }
-                    data = data.substring(0, data.length - 1) + '}';
-                }
-                else {
-
-                    data = " { \"act\": \"\" , \"IdCartasDePorteControlDescarga\": \"0\", \"Fecha\": \"\" , \"Descripcion\": \"\"   , \"IdWilliamsDestino\": \"0\", \"TotalDescargaDia\": \"0\" , \"IdPuntoVenta\": \"1\" } ";
-
-                }
-                //  grid.jqGrid("addRowData", "empty_" + i, );
-
-                data = data.replace(/(\r\n|\n|\r)/gm, "");
-                grid.jqGrid('addRowData', Id, data, "last");
+        function MarcarSeleccionadosParaEliminar(grid) {
+            var selectedIds = grid.jqGrid('getGridParam', 'selarrrow');
+            var i, Id;
+            for (i = selectedIds.length - 1; i >= 0; i--) {
+                Id = selectedIds[i];
+                var se = "<input style='height:22px;width:20px;' type='button' value='B' onclick=\"EliminarFila('" + Id + "');\"  />";
                 grid.jqGrid('setRowData', Id, { act: se });
-            };
+                //grid.jqGrid('delRowData', selectedIds[i]);
+            }
+        };
+
+        function AgregarItemVacio(grid) {
+            var colModel = grid.jqGrid('getGridParam', 'colModel');
+            var dataIds = grid.jqGrid('getDataIDs');
+            var Id = (grid.jqGrid('getGridParam', 'records') + 1) * -1;
+            var se = "<input style='height:22px;width:60px;' type='button' value='Grabar' onclick=\"GrabarFila('" + Id + "');\"  />";
+            var data, j, cm;
+
+            if (lastSelectediRow2 != undefined) { lastSelectediRow2 = lastSelectediRow2 + 1; }
+
+            if (false) {
+                data = '{';
+                for (j = 1; j < colModel.length; j++) {
+                    cm = colModel[j];
+                    data = data + '"' + cm.index + '":' + '"",';
+                }
+                data = data.substring(0, data.length - 1) + '}';
+            }
+            else {
+
+                data = " { \"act\": \"\" , \"IdCartasDePorteControlDescarga\": \"0\", \"Fecha\": \"\" , \"Descripcion\": \"\"   , \"IdWilliamsDestino\": \"0\", \"TotalDescargaDia\": \"0\" , \"IdPuntoVenta\": \"1\" } ";
+
+            }
+            //  grid.jqGrid("addRowData", "empty_" + i, );
+
+            data = data.replace(/(\r\n|\n|\r)/gm, "");
+            grid.jqGrid('addRowData', Id, data, "last");
+            grid.jqGrid('setRowData', Id, { act: se });
+        };
 
 
 
 
 
-            function AgregarRenglonesEnBlanco(renglonVacio, nombregrilla) {
+        function AgregarRenglonesEnBlanco(renglonVacio, nombregrilla) {
 
 
-                nombregrilla = nombregrilla || "#Lista";
-                var grid = jQuery(nombregrilla)
-                var pageSize = parseInt(grid.jqGrid("getGridParam", "rowNum"))
+            nombregrilla = nombregrilla || "#Lista";
+            var grid = jQuery(nombregrilla)
+            var pageSize = parseInt(grid.jqGrid("getGridParam", "rowNum"))
 
-                var rows = grid.getGridParam("reccount") || 0;
-
-
-                // jQuery("#Lista").jqGrid('getGridParam', 'records')
-                var emptyRows;       // -data.rows.length; // pageSize - data.rows.length;
-
-                //alert(rows)
-                if (rows < 3) emptyRows = 3 - rows;
-                else emptyRows = 1;
+            var rows = grid.getGridParam("reccount") || 0;
 
 
-                //pasa q tengo q ver cuántos de los renglones existentes ya están vacíos!!!
-                //pasa q tengo q ver cuántos de los renglones existentes ya están vacíos!!!
-                //pasa q tengo q ver cuántos de los renglones existentes ya están vacíos!!!
-                //pasa q tengo q ver cuántos de los renglones existentes ya están vacíos!!!
-                //pasa q tengo q ver cuántos de los renglones existentes ya están vacíos!!!
+            // jQuery("#Lista").jqGrid('getGridParam', 'records')
+            var emptyRows;       // -data.rows.length; // pageSize - data.rows.length;
 
-                var rowsLlenas = 0;
-
-                var dataIds = grid.jqGrid('getDataIDs');
-                for (var i = 0; i < dataIds.length; i++) {
-
-                    var data = grid.jqGrid('getRowData', dataIds[i]);
+            //alert(rows)
+            if (rows < 3) emptyRows = 3 - rows;
+            else emptyRows = 1;
 
 
-                    var desc = data['Descripcion'];
-                    // alert(desc);
-                    if (desc == "") continue;
+            //pasa q tengo q ver cuántos de los renglones existentes ya están vacíos!!!
+            //pasa q tengo q ver cuántos de los renglones existentes ya están vacíos!!!
+            //pasa q tengo q ver cuántos de los renglones existentes ya están vacíos!!!
+            //pasa q tengo q ver cuántos de los renglones existentes ya están vacíos!!!
+            //pasa q tengo q ver cuántos de los renglones existentes ya están vacíos!!!
 
-                    if (data['NumeroItem'] == "") {
-                        data['NumeroItem'] = ProximoNumeroItem();
-                        grid.jqGrid('setRowData', dataIds[i], data);
-                    }
+            var rowsLlenas = 0;
 
-                    rowsLlenas++;
+            var dataIds = grid.jqGrid('getDataIDs');
+            for (var i = 0; i < dataIds.length; i++) {
+
+                var data = grid.jqGrid('getRowData', dataIds[i]);
+
+
+                var desc = data['Descripcion'];
+                // alert(desc);
+                if (desc == "") continue;
+
+                if (data['NumeroItem'] == "") {
+                    data['NumeroItem'] = ProximoNumeroItem();
+                    grid.jqGrid('setRowData', dataIds[i], data);
                 }
 
-
-
-
-                // alert(rowsLlenas);
-                /////////////////////////////////////////////////////////////////////////////////////////////
-                /////////////////////////////////////////////////////////////////////////////////////////////
-                /////////////////////////////////////////////////////////////////////////////////////////////
-                /////////////////////////////////////////////////////////////////////////////////////////////
-                /////////////////////////////////////////////////////////////////////////////////////////////
-                /////////////////////////////////////////////////////////////////////////////////////////////
-                /////////////////////////////////////////////////////////////////////////////////////////////
-                /////////////////////////////////////////////////////////////////////////////////////////////
-                /////////////////////////////////////////////////////////////////////////////////////////////
-
-
-                if (!renglonVacio) {
-                    //    alert('ssss');
-                    renglonVacio = {};
-                }
-
-
-                var gridceil
-
-                if (emptyRows > 0 && (rowsLlenas == rows || rows < 3)) {
-                    //   alert(emptyRows);
-                    for (var i = 1; i <= emptyRows; i++) {
-                        //                    // adjust the counts at lower right
-                        //                    grid.jqGrid("setGridParam", {
-                        //                        reccount: grid.jqGrid("getGridParam", "reccount") - emptyRows,
-                        //                        records: grid.jqGrid("getGridParam", "records") - emptyRows
-                        //                    });
-                        //                    grid[0].updatepager();
-
-
-
-
-                        // grid.jqGrid("addRowData", "empty_" + i, {});
-
-
-
-                        gridceil = Math.ceil(Math.random() * 1000000); // ojo con esto, si usas el mismo id, la edicion de un renglon se va a pasar a otro al instante!, y no vas a entender q está pasando 
-
-
-                        grid.jqGrid("addRowData", "empty_" + gridceil, renglonVacio);
-                        //  grid.jqGrid("addRowData", "empty_" + i, { "IdDetalleComprobanteProveedor": "0", "IdCuenta": "0", "Precio": "0", "Descripcion": "" });
-
-                    }
-
-                }
-                rows = grid.getGridParam("reccount");
-
-
-                //alert(rows);
-
-                grid.jqGrid('setGridHeight', Math.max(140, rows * 45), true);
+                rowsLlenas++;
             }
 
 
-            // Esto es para obtener el contenido de una celda en modo edicion. Ojo que las funciones estan como declarativas (,)
-            //getColumnIndexByName = function (grid, columnName) {
-            //    var cm = grid.jqGrid('getGridParam', 'colModel');
-            //    for (var i = 0, l = cm.length; i < l; i++) {
-            //        if (cm[i].name === columnName) {
-            //            return i; // return the index
-            //        }
-            //    }
-            //    return -1;
-            //},
-            //getTextFromCell = function (cellNode) {
-            //    return cellNode.childNodes[0].nodeName === "INPUT" ?
-            //            cellNode.childNodes[0].value :
-            //            cellNode.textContent || cellNode.innerText;
-            //},
-            //calculateTotal = function () {
-            //    var totalAmount = 0, totalTax = 0,
-            //        i = getColumnIndexByName(grid, 'amount'); // nth-child need 1-based index so we use (i+1) below
-            //    $("tbody > tr.jqgrow > td:nth-child(" + (i + 1) + ")", grid[0]).each(function () {
-            //        totalAmount += Number(getTextFromCell(this));
-            //    });
-
-            //    i = getColumnIndexByName(grid, 'tax');
-            //    $("tbody > tr.jqgrow > td:nth-child(" + (i + 1) + ")", grid[0]).each(function () {
-            //        totalTax += Number(getTextFromCell(this));
-            //    });
-
-            //    grid.jqGrid('footerData', 'set', { name: 'TOTAL', amount: totalAmount, tax: totalTax });
-            //};
 
 
+            // alert(rowsLlenas);
+            /////////////////////////////////////////////////////////////////////////////////////////////
+            /////////////////////////////////////////////////////////////////////////////////////////////
+            /////////////////////////////////////////////////////////////////////////////////////////////
+            /////////////////////////////////////////////////////////////////////////////////////////////
+            /////////////////////////////////////////////////////////////////////////////////////////////
+            /////////////////////////////////////////////////////////////////////////////////////////////
+            /////////////////////////////////////////////////////////////////////////////////////////////
+            /////////////////////////////////////////////////////////////////////////////////////////////
+            /////////////////////////////////////////////////////////////////////////////////////////////
 
 
-
-            $('#ctl00_ContentPlaceHolder1_cmbPuntoVenta').change(function () {
-                $('#Lista').trigger("reloadGrid")
-            });
-
-
-            $('#ctl00_ContentPlaceHolder1_txtDestino').change(function () {
-                $('#Lista').trigger("reloadGrid")
-            });
-
-
-            $('#ctl00_ContentPlaceHolder1_txtFechaDesde').change(function () {
-                $('#Lista').trigger("reloadGrid")
-            });
-
-
-            $('#ctl00_ContentPlaceHolder1_txtFechaHasta').change(function () {
-                $('#Lista').trigger("reloadGrid")
-            });
-
-            $('#ctl00_ContentPlaceHolder1_cmbPeriodo').change(function () {
-                $('#Lista').trigger("reloadGrid")
-            });
-
-
-            function RefrescaGrilla() {
-                $('#Lista').trigger("reloadGrid");
+            if (!renglonVacio) {
+                //    alert('ssss');
+                renglonVacio = {};
             }
 
 
-            $().ready(function () {
-                'use strict';
+            var gridceil
 
-                var UltimoIdArticulo;
-
-                $('#Lista').jqGrid({
-                    //url: ROOT + 'CotizacionWilliamsDestino/Cotizaciones/',
-                    url: 'HandlerCartaPorte.ashx',
-                    //postData: {},
-                    postData: {
-                        'FechaInicial': function () { return $("#ctl00_ContentPlaceHolder1_txtFechaDesde").val(); },
-                        'FechaFinal': function () { return $("#ctl00_ContentPlaceHolder1_txtFechaHasta").val(); },
-                        'puntovent': function () { return $("#ctl00_ContentPlaceHolder1_cmbPuntoVenta").val(); },
-                        'destino': function () { return $("#ctl00_ContentPlaceHolder1_txtDestino").val(); }
-                    },
-                    datatype: 'json',
-                    mtype: 'POST',
+            if (emptyRows > 0 && (rowsLlenas == rows || rows < 3)) {
+                //   alert(emptyRows);
+                for (var i = 1; i <= emptyRows; i++) {
+                    //                    // adjust the counts at lower right
+                    //                    grid.jqGrid("setGridParam", {
+                    //                        reccount: grid.jqGrid("getGridParam", "reccount") - emptyRows,
+                    //                        records: grid.jqGrid("getGridParam", "records") - emptyRows
+                    //                    });
+                    //                    grid[0].updatepager();
 
 
 
 
-                    // CP	TURNO	SITUACION	MERC	TITULAR_CP	INTERMEDIARIO	RTE CIAL	CORREDOR	DESTINATARIO	DESTINO	ENTREGADOR	PROC	KILOS	OBSERVACION
+                    // grid.jqGrid("addRowData", "empty_" + i, {});
 
 
-                    colNames: ['', 'Id', 'Nro CP', 'Turno', 'Situacion',
-                                'Producto', 'Titular', 'Intermediario', 'R Comercial', 'Corredor',
-                                'Destinatario', 'Destino', 'IdDestino' ,'Entregador','Procedencia',
-                                'Kilos Procedencia', 'Obs Situacion', 'Arribo', 'Descarga', 'Punto Venta',
-                                'Fecha actualizacion', 'Patente', 'Kilos Descargados'
-                    ],
 
-                    colModel: [
+                    gridceil = Math.ceil(Math.random() * 1000000); // ojo con esto, si usas el mismo id, la edicion de un renglon se va a pasar a otro al instante!, y no vas a entender q está pasando 
+
+
+                    grid.jqGrid("addRowData", "empty_" + gridceil, renglonVacio);
+                    //  grid.jqGrid("addRowData", "empty_" + i, { "IdDetalleComprobanteProveedor": "0", "IdCuenta": "0", "Precio": "0", "Descripcion": "" });
+
+                }
+
+            }
+            rows = grid.getGridParam("reccount");
+
+
+            //alert(rows);
+
+            grid.jqGrid('setGridHeight', Math.max(140, rows * 45), true);
+        }
+
+
+        // Esto es para obtener el contenido de una celda en modo edicion. Ojo que las funciones estan como declarativas (,)
+        //getColumnIndexByName = function (grid, columnName) {
+        //    var cm = grid.jqGrid('getGridParam', 'colModel');
+        //    for (var i = 0, l = cm.length; i < l; i++) {
+        //        if (cm[i].name === columnName) {
+        //            return i; // return the index
+        //        }
+        //    }
+        //    return -1;
+        //},
+        //getTextFromCell = function (cellNode) {
+        //    return cellNode.childNodes[0].nodeName === "INPUT" ?
+        //            cellNode.childNodes[0].value :
+        //            cellNode.textContent || cellNode.innerText;
+        //},
+        //calculateTotal = function () {
+        //    var totalAmount = 0, totalTax = 0,
+        //        i = getColumnIndexByName(grid, 'amount'); // nth-child need 1-based index so we use (i+1) below
+        //    $("tbody > tr.jqgrow > td:nth-child(" + (i + 1) + ")", grid[0]).each(function () {
+        //        totalAmount += Number(getTextFromCell(this));
+        //    });
+
+        //    i = getColumnIndexByName(grid, 'tax');
+        //    $("tbody > tr.jqgrow > td:nth-child(" + (i + 1) + ")", grid[0]).each(function () {
+        //        totalTax += Number(getTextFromCell(this));
+        //    });
+
+        //    grid.jqGrid('footerData', 'set', { name: 'TOTAL', amount: totalAmount, tax: totalTax });
+        //};
+
+
+
+
+
+        $('#ctl00_ContentPlaceHolder1_cmbPuntoVenta').change(function () {
+            $('#Lista').trigger("reloadGrid")
+        });
+
+
+        $('#ctl00_ContentPlaceHolder1_txtDestino').change(function () {
+            $('#Lista').trigger("reloadGrid")
+        });
+
+
+        $('#ctl00_ContentPlaceHolder1_txtFechaDesde').change(function () {
+            $('#Lista').trigger("reloadGrid")
+        });
+
+
+        $('#ctl00_ContentPlaceHolder1_txtFechaHasta').change(function () {
+            $('#Lista').trigger("reloadGrid")
+        });
+
+        $('#ctl00_ContentPlaceHolder1_cmbPeriodo').change(function () {
+            $('#Lista').trigger("reloadGrid")
+        });
+
+
+        function RefrescaGrilla() {
+            $('#Lista').trigger("reloadGrid");
+        }
+
+
+        $().ready(function () {
+            'use strict';
+
+            var UltimoIdArticulo;
+
+            $('#Lista').jqGrid({
+                //url: ROOT + 'CotizacionWilliamsDestino/Cotizaciones/',
+                url: 'HandlerCartaPorte.ashx',
+                //postData: {},
+                postData: {
+                    'FechaInicial': function () { return $("#ctl00_ContentPlaceHolder1_txtFechaDesde").val(); },
+                    'FechaFinal': function () { return $("#ctl00_ContentPlaceHolder1_txtFechaHasta").val(); },
+                    'puntovent': function () { return $("#ctl00_ContentPlaceHolder1_cmbPuntoVenta").val(); },
+                    'destino': function () { return $("#ctl00_ContentPlaceHolder1_txtDestino").val(); }
+                },
+                datatype: 'json',
+                mtype: 'POST',
+
+
+
+
+                // CP	TURNO	SITUACION	MERC	TITULAR_CP	INTERMEDIARIO	RTE CIAL	CORREDOR	DESTINATARIO	DESTINO	ENTREGADOR	PROC	KILOS	OBSERVACION
+
+
+                colNames: ['', 'Id', 'Nro CP', 'Turno', 'Situacion',
+                            'Producto', 'Titular', 'Intermediario', 'R Comercial', 'Corredor',
+                            'Destinatario', 'Destino', 'IdDestino' ,'Entregador','Procedencia',
+                            'Kilos Procedencia', 'Obs Situacion', 'Arribo', 'Descarga', 'Punto Venta',
+                            'Fecha actualizacion', 'Patente', 'Kilos Descargados'
+                ],
+
+                colModel: [
 {
     name: 'act', index: 'act', align: 'center', width: 60, editable: false, hidden: false, sortable: false,
     search: false,
@@ -1196,286 +1215,286 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 {
     name: 'Producto', index: 'Producto', align: 'left', width: 60, hidden: false, editable: false, edittype: 'text', sortable: false
 
-    , searchoptions: {
-        //    sopt:['eq'], 
-        dataInit: function (elem) {
-            var NoResultsLabel = "No se encontraron resultados";
+, searchoptions: {
+    //    sopt:['eq'], 
+    dataInit: function (elem) {
+        var NoResultsLabel = "No se encontraron resultados";
 
 
-            $(elem).autocomplete({
-                source: function (request, response) {
-                    $.ajax({
-                        type: "POST",
-                        url: "WebServiceClientes.asmx/GetProductos",
-                        dataType: "json",
-                        contentType: "application/json; charset=utf-8",
+        $(elem).autocomplete({
+            source: function (request, response) {
+                $.ajax({
+                    type: "POST",
+                    url: "WebServiceClientes.asmx/GetProductos",
+                    dataType: "json",
+                    contentType: "application/json; charset=utf-8",
 
-                        data: JSON.stringify({
-                            term: request.term
-                            //, idpuntoventa: function () { return $("#ctl00_ContentPlaceHolder1_txtFechaHasta").val(); }
-                        }),
-
-
-                        success: function (data2) {
-                            var data = JSON.parse(data2.d) // por qué tengo que usar parse?
-
-                            //if (data.length == 1 || data.length > 1) { // qué pasa si encuentra más de uno?????
-                            //    var ui = data[0];
-
-                            //    if (ui.id == "") {
-                            //        alert("No existe el artículo"); // se está bancando que no sea identica la descripcion
-                            //        $("#Descripcion").val("");
-                            //        return;
-                            //    }
-                            //    $("#IdWilliamsDestino").val(ui.id);
-
-                            //    UltimoIdArticulo = ui.id;
-                            //}
-                            //else {
-                            //    alert("No existe el artículo"); // se está bancando que no sea identica la descripcion
-                            //}
-
-                            response($.map(data, function (item) {
-                                return {
-                                    label: item.value,
-                                    value: item.value //item.id
-                                    , id: item.id
-                                }
-                            }));
-
-                        }
+                    data: JSON.stringify({
+                        term: request.term
+                        //, idpuntoventa: function () { return $("#ctl00_ContentPlaceHolder1_txtFechaHasta").val(); }
+                    }),
 
 
+                    success: function (data2) {
+                        var data = JSON.parse(data2.d) // por qué tengo que usar parse?
 
-                    })
+                        //if (data.length == 1 || data.length > 1) { // qué pasa si encuentra más de uno?????
+                        //    var ui = data[0];
 
+                        //    if (ui.id == "") {
+                        //        alert("No existe el artículo"); // se está bancando que no sea identica la descripcion
+                        //        $("#Descripcion").val("");
+                        //        return;
+                        //    }
+                        //    $("#IdWilliamsDestino").val(ui.id);
 
-                }
+                        //    UltimoIdArticulo = ui.id;
+                        //}
+                        //else {
+                        //    alert("No existe el artículo"); // se está bancando que no sea identica la descripcion
+                        //}
 
+                        response($.map(data, function (item) {
+                            return {
+                                label: item.value,
+                                value: item.value //item.id
+                                , id: item.id
+                            }
+                        }));
 
-            });
+                    }
 
 
 
+                })
+
+
+            }
+
+
+        });
 
 
 
-        }
+
+
+
     }
+}
 
 },
 {
     name: 'TitularDesc', index: 'TitularDesc', align: 'left', width: 100, hidden: false, editable: false, edittype: 'text', sortable: false
 
 
-    , searchoptions: {
-        //    sopt:['eq'], 
-        dataInit: function (elem) {
-            var NoResultsLabel = "No se encontraron resultados";
+, searchoptions: {
+    //    sopt:['eq'], 
+    dataInit: function (elem) {
+        var NoResultsLabel = "No se encontraron resultados";
 
 
-            $(elem).autocomplete({
-                source: function (request, response) {
-                    $.ajax({
-                        type: "POST",
-                        url: "WebServiceClientes.asmx/GetClientes",
-                        dataType: "json",
-                        contentType: "application/json; charset=utf-8",
+        $(elem).autocomplete({
+            source: function (request, response) {
+                $.ajax({
+                    type: "POST",
+                    url: "WebServiceClientes.asmx/GetClientes",
+                    dataType: "json",
+                    contentType: "application/json; charset=utf-8",
 
-                        data: JSON.stringify({
-                            term: request.term
-                            //, idpuntoventa: function () { return $("#ctl00_ContentPlaceHolder1_txtFechaHasta").val(); }
-                        }),
-
-
-                        success: function (data2) {
-                            var data = JSON.parse(data2.d) // por qué tengo que usar parse?
-
-                            //if (data.length == 1 || data.length > 1) { // qué pasa si encuentra más de uno?????
-                            //    var ui = data[0];
-
-                            //    if (ui.id == "") {
-                            //        alert("No existe el artículo"); // se está bancando que no sea identica la descripcion
-                            //        $("#Descripcion").val("");
-                            //        return;
-                            //    }
-                            //    $("#IdWilliamsDestino").val(ui.id);
-
-                            //    UltimoIdArticulo = ui.id;
-                            //}
-                            //else {
-                            //    alert("No existe el artículo"); // se está bancando que no sea identica la descripcion
-                            //}
-
-                            response($.map(data, function (item) {
-                                return {
-                                    label: item.value,
-                                    value: item.value //item.id
-                                    , id: item.id
-                                }
-                            }));
-
-                        }
+                    data: JSON.stringify({
+                        term: request.term
+                        //, idpuntoventa: function () { return $("#ctl00_ContentPlaceHolder1_txtFechaHasta").val(); }
+                    }),
 
 
+                    success: function (data2) {
+                        var data = JSON.parse(data2.d) // por qué tengo que usar parse?
 
-                    })
+                        //if (data.length == 1 || data.length > 1) { // qué pasa si encuentra más de uno?????
+                        //    var ui = data[0];
 
+                        //    if (ui.id == "") {
+                        //        alert("No existe el artículo"); // se está bancando que no sea identica la descripcion
+                        //        $("#Descripcion").val("");
+                        //        return;
+                        //    }
+                        //    $("#IdWilliamsDestino").val(ui.id);
 
-                }
+                        //    UltimoIdArticulo = ui.id;
+                        //}
+                        //else {
+                        //    alert("No existe el artículo"); // se está bancando que no sea identica la descripcion
+                        //}
 
+                        response($.map(data, function (item) {
+                            return {
+                                label: item.value,
+                                value: item.value //item.id
+                                , id: item.id
+                            }
+                        }));
 
-            });
+                    }
 
 
 
+                })
+
+
+            }
+
+
+        });
 
 
 
-        }
+
+
+
     }
+}
 
 },
 {
     name: 'IntermediarioDesc', index: 'IntermediarioDesc', align: 'left', width: 60, hidden: false, editable: false, edittype: 'text', sortable: false
 
-    , searchoptions: {
-        //    sopt:['eq'], 
-        dataInit: function (elem) {
-            var NoResultsLabel = "No se encontraron resultados";
+, searchoptions: {
+    //    sopt:['eq'], 
+    dataInit: function (elem) {
+        var NoResultsLabel = "No se encontraron resultados";
 
 
-            $(elem).autocomplete({
-                source: function (request, response) {
-                    $.ajax({
-                        type: "POST",
-                        url: "WebServiceClientes.asmx/GetClientes",
-                        dataType: "json",
-                        contentType: "application/json; charset=utf-8",
+        $(elem).autocomplete({
+            source: function (request, response) {
+                $.ajax({
+                    type: "POST",
+                    url: "WebServiceClientes.asmx/GetClientes",
+                    dataType: "json",
+                    contentType: "application/json; charset=utf-8",
 
-                        data: JSON.stringify({
-                            term: request.term
-                            //, idpuntoventa: function () { return $("#ctl00_ContentPlaceHolder1_txtFechaHasta").val(); }
-                        }),
-
-
-                        success: function (data2) {
-                            var data = JSON.parse(data2.d) // por qué tengo que usar parse?
-
-                            //if (data.length == 1 || data.length > 1) { // qué pasa si encuentra más de uno?????
-                            //    var ui = data[0];
-
-                            //    if (ui.id == "") {
-                            //        alert("No existe el artículo"); // se está bancando que no sea identica la descripcion
-                            //        $("#Descripcion").val("");
-                            //        return;
-                            //    }
-                            //    $("#IdWilliamsDestino").val(ui.id);
-
-                            //    UltimoIdArticulo = ui.id;
-                            //}
-                            //else {
-                            //    alert("No existe el artículo"); // se está bancando que no sea identica la descripcion
-                            //}
-
-                            response($.map(data, function (item) {
-                                return {
-                                    label: item.value,
-                                    value: item.value //item.id
-                                    , id: item.id
-                                }
-                            }));
-
-                        }
+                    data: JSON.stringify({
+                        term: request.term
+                        //, idpuntoventa: function () { return $("#ctl00_ContentPlaceHolder1_txtFechaHasta").val(); }
+                    }),
 
 
+                    success: function (data2) {
+                        var data = JSON.parse(data2.d) // por qué tengo que usar parse?
 
-                    })
+                        //if (data.length == 1 || data.length > 1) { // qué pasa si encuentra más de uno?????
+                        //    var ui = data[0];
 
+                        //    if (ui.id == "") {
+                        //        alert("No existe el artículo"); // se está bancando que no sea identica la descripcion
+                        //        $("#Descripcion").val("");
+                        //        return;
+                        //    }
+                        //    $("#IdWilliamsDestino").val(ui.id);
 
-                }
+                        //    UltimoIdArticulo = ui.id;
+                        //}
+                        //else {
+                        //    alert("No existe el artículo"); // se está bancando que no sea identica la descripcion
+                        //}
 
+                        response($.map(data, function (item) {
+                            return {
+                                label: item.value,
+                                value: item.value //item.id
+                                , id: item.id
+                            }
+                        }));
 
-            });
+                    }
 
 
 
+                })
+
+
+            }
+
+
+        });
 
 
 
-        }
+
+
+
     }
+}
 },
 {
     name: 'RComercialDesc', index: 'RComercialDesc', align: 'left', width: 100, hidden: false, editable: false, edittype: 'text', sortable: false
 
 
-    , searchoptions: {
-        //    sopt:['eq'], 
-        dataInit: function (elem) {
-            var NoResultsLabel = "No se encontraron resultados";
+, searchoptions: {
+    //    sopt:['eq'], 
+    dataInit: function (elem) {
+        var NoResultsLabel = "No se encontraron resultados";
 
 
-            $(elem).autocomplete({
-                source: function (request, response) {
-                    $.ajax({
-                        type: "POST",
-                        url: "WebServiceClientes.asmx/GetClientes",
-                        dataType: "json",
-                        contentType: "application/json; charset=utf-8",
+        $(elem).autocomplete({
+            source: function (request, response) {
+                $.ajax({
+                    type: "POST",
+                    url: "WebServiceClientes.asmx/GetClientes",
+                    dataType: "json",
+                    contentType: "application/json; charset=utf-8",
 
-                        data: JSON.stringify({
-                            term: request.term
-                            //, idpuntoventa: function () { return $("#ctl00_ContentPlaceHolder1_txtFechaHasta").val(); }
-                        }),
-
-
-                        success: function (data2) {
-                            var data = JSON.parse(data2.d) // por qué tengo que usar parse?
-
-                            //if (data.length == 1 || data.length > 1) { // qué pasa si encuentra más de uno?????
-                            //    var ui = data[0];
-
-                            //    if (ui.id == "") {
-                            //        alert("No existe el artículo"); // se está bancando que no sea identica la descripcion
-                            //        $("#Descripcion").val("");
-                            //        return;
-                            //    }
-                            //    $("#IdWilliamsDestino").val(ui.id);
-
-                            //    UltimoIdArticulo = ui.id;
-                            //}
-                            //else {
-                            //    alert("No existe el artículo"); // se está bancando que no sea identica la descripcion
-                            //}
-
-                            response($.map(data, function (item) {
-                                return {
-                                    label: item.value,
-                                    value: item.value //item.id
-                                    , id: item.id
-                                }
-                            }));
-
-                        }
+                    data: JSON.stringify({
+                        term: request.term
+                        //, idpuntoventa: function () { return $("#ctl00_ContentPlaceHolder1_txtFechaHasta").val(); }
+                    }),
 
 
+                    success: function (data2) {
+                        var data = JSON.parse(data2.d) // por qué tengo que usar parse?
 
-                    })
+                        //if (data.length == 1 || data.length > 1) { // qué pasa si encuentra más de uno?????
+                        //    var ui = data[0];
 
+                        //    if (ui.id == "") {
+                        //        alert("No existe el artículo"); // se está bancando que no sea identica la descripcion
+                        //        $("#Descripcion").val("");
+                        //        return;
+                        //    }
+                        //    $("#IdWilliamsDestino").val(ui.id);
 
-                }
+                        //    UltimoIdArticulo = ui.id;
+                        //}
+                        //else {
+                        //    alert("No existe el artículo"); // se está bancando que no sea identica la descripcion
+                        //}
 
+                        response($.map(data, function (item) {
+                            return {
+                                label: item.value,
+                                value: item.value //item.id
+                                , id: item.id
+                            }
+                        }));
 
-            });
+                    }
 
 
 
+                })
+
+
+            }
+
+
+        });
 
 
 
-        }
+
+
+
     }
+}
 
 },
 
@@ -1483,72 +1502,72 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 {
     name: 'CorredorDesc', index: 'CorredorDesc', align: 'left', width: 100, hidden: false, editable: false, edittype: 'text', sortable: false
 
-    , searchoptions: {
-        //    sopt:['eq'], 
-        dataInit: function (elem) {
-            var NoResultsLabel = "No se encontraron resultados";
+, searchoptions: {
+    //    sopt:['eq'], 
+    dataInit: function (elem) {
+        var NoResultsLabel = "No se encontraron resultados";
 
 
-            $(elem).autocomplete({
-                source: function (request, response) {
-                    $.ajax({
-                        type: "POST",
-                        url: "WebServiceClientes.asmx/GetCorredores",
-                        dataType: "json",
-                        contentType: "application/json; charset=utf-8",
+        $(elem).autocomplete({
+            source: function (request, response) {
+                $.ajax({
+                    type: "POST",
+                    url: "WebServiceClientes.asmx/GetCorredores",
+                    dataType: "json",
+                    contentType: "application/json; charset=utf-8",
 
-                        data: JSON.stringify({
-                            term: request.term
-                            //, idpuntoventa: function () { return $("#ctl00_ContentPlaceHolder1_txtFechaHasta").val(); }
-                        }),
-
-
-                        success: function (data2) {
-                            var data = JSON.parse(data2.d) // por qué tengo que usar parse?
-
-                            //if (data.length == 1 || data.length > 1) { // qué pasa si encuentra más de uno?????
-                            //    var ui = data[0];
-
-                            //    if (ui.id == "") {
-                            //        alert("No existe el artículo"); // se está bancando que no sea identica la descripcion
-                            //        $("#Descripcion").val("");
-                            //        return;
-                            //    }
-                            //    $("#IdWilliamsDestino").val(ui.id);
-
-                            //    UltimoIdArticulo = ui.id;
-                            //}
-                            //else {
-                            //    alert("No existe el artículo"); // se está bancando que no sea identica la descripcion
-                            //}
-
-                            response($.map(data, function (item) {
-                                return {
-                                    label: item.value,
-                                    value: item.value //item.id
-                                    , id: item.id
-                                }
-                            }));
-
-                        }
+                    data: JSON.stringify({
+                        term: request.term
+                        //, idpuntoventa: function () { return $("#ctl00_ContentPlaceHolder1_txtFechaHasta").val(); }
+                    }),
 
 
+                    success: function (data2) {
+                        var data = JSON.parse(data2.d) // por qué tengo que usar parse?
 
-                    })
+                        //if (data.length == 1 || data.length > 1) { // qué pasa si encuentra más de uno?????
+                        //    var ui = data[0];
 
+                        //    if (ui.id == "") {
+                        //        alert("No existe el artículo"); // se está bancando que no sea identica la descripcion
+                        //        $("#Descripcion").val("");
+                        //        return;
+                        //    }
+                        //    $("#IdWilliamsDestino").val(ui.id);
 
-                }
+                        //    UltimoIdArticulo = ui.id;
+                        //}
+                        //else {
+                        //    alert("No existe el artículo"); // se está bancando que no sea identica la descripcion
+                        //}
 
+                        response($.map(data, function (item) {
+                            return {
+                                label: item.value,
+                                value: item.value //item.id
+                                , id: item.id
+                            }
+                        }));
 
-            });
+                    }
 
 
 
+                })
+
+
+            }
+
+
+        });
 
 
 
-        }
+
+
+
     }
+}
 },
 
 
@@ -1556,72 +1575,72 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
     name: 'DestinatarioDesc', index: 'DestinatarioDesc', align: 'left', width: 100, hidden: false, editable: false, edittype: 'text', sortable: false
 
 
-    , searchoptions: {
-        //    sopt:['eq'], 
-        dataInit: function (elem) {
-            var NoResultsLabel = "No se encontraron resultados";
+, searchoptions: {
+    //    sopt:['eq'], 
+    dataInit: function (elem) {
+        var NoResultsLabel = "No se encontraron resultados";
 
 
-            $(elem).autocomplete({
-                source: function (request, response) {
-                    $.ajax({
-                        type: "POST",
-                        url: "WebServiceClientes.asmx/GetClientes",
-                        dataType: "json",
-                        contentType: "application/json; charset=utf-8",
+        $(elem).autocomplete({
+            source: function (request, response) {
+                $.ajax({
+                    type: "POST",
+                    url: "WebServiceClientes.asmx/GetClientes",
+                    dataType: "json",
+                    contentType: "application/json; charset=utf-8",
 
-                        data: JSON.stringify({
-                            term: request.term
-                            //, idpuntoventa: function () { return $("#ctl00_ContentPlaceHolder1_txtFechaHasta").val(); }
-                        }),
-
-
-                        success: function (data2) {
-                            var data = JSON.parse(data2.d) // por qué tengo que usar parse?
-
-                            //if (data.length == 1 || data.length > 1) { // qué pasa si encuentra más de uno?????
-                            //    var ui = data[0];
-
-                            //    if (ui.id == "") {
-                            //        alert("No existe el artículo"); // se está bancando que no sea identica la descripcion
-                            //        $("#Descripcion").val("");
-                            //        return;
-                            //    }
-                            //    $("#IdWilliamsDestino").val(ui.id);
-
-                            //    UltimoIdArticulo = ui.id;
-                            //}
-                            //else {
-                            //    alert("No existe el artículo"); // se está bancando que no sea identica la descripcion
-                            //}
-
-                            response($.map(data, function (item) {
-                                return {
-                                    label: item.value,
-                                    value: item.value //item.id
-                                    , id: item.id
-                                }
-                            }));
-
-                        }
+                    data: JSON.stringify({
+                        term: request.term
+                        //, idpuntoventa: function () { return $("#ctl00_ContentPlaceHolder1_txtFechaHasta").val(); }
+                    }),
 
 
+                    success: function (data2) {
+                        var data = JSON.parse(data2.d) // por qué tengo que usar parse?
 
-                    })
+                        //if (data.length == 1 || data.length > 1) { // qué pasa si encuentra más de uno?????
+                        //    var ui = data[0];
 
+                        //    if (ui.id == "") {
+                        //        alert("No existe el artículo"); // se está bancando que no sea identica la descripcion
+                        //        $("#Descripcion").val("");
+                        //        return;
+                        //    }
+                        //    $("#IdWilliamsDestino").val(ui.id);
 
-                }
+                        //    UltimoIdArticulo = ui.id;
+                        //}
+                        //else {
+                        //    alert("No existe el artículo"); // se está bancando que no sea identica la descripcion
+                        //}
 
+                        response($.map(data, function (item) {
+                            return {
+                                label: item.value,
+                                value: item.value //item.id
+                                , id: item.id
+                            }
+                        }));
 
-            });
+                    }
 
 
 
+                })
+
+
+            }
+
+
+        });
 
 
 
-        }
+
+
+
     }
+}
 
 },
 
@@ -1735,72 +1754,72 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
     name: 'EntregadorDesc', index: 'EntregadorDesc', align: 'left', width: 50, hidden: false, editable: false, edittype: 'text', sortable: false
 
 
-    , searchoptions: {
-        //    sopt:['eq'], 
-        dataInit: function (elem) {
-            var NoResultsLabel = "No se encontraron resultados";
+, searchoptions: {
+    //    sopt:['eq'], 
+    dataInit: function (elem) {
+        var NoResultsLabel = "No se encontraron resultados";
 
 
-            $(elem).autocomplete({
-                source: function (request, response) {
-                    $.ajax({
-                        type: "POST",
-                        url: "WebServiceClientes.asmx/GetClientes",
-                        dataType: "json",
-                        contentType: "application/json; charset=utf-8",
+        $(elem).autocomplete({
+            source: function (request, response) {
+                $.ajax({
+                    type: "POST",
+                    url: "WebServiceClientes.asmx/GetClientes",
+                    dataType: "json",
+                    contentType: "application/json; charset=utf-8",
 
-                        data: JSON.stringify({
-                            term: request.term
-                            //, idpuntoventa: function () { return $("#ctl00_ContentPlaceHolder1_txtFechaHasta").val(); }
-                        }),
-
-
-                        success: function (data2) {
-                            var data = JSON.parse(data2.d) // por qué tengo que usar parse?
-
-                            //if (data.length == 1 || data.length > 1) { // qué pasa si encuentra más de uno?????
-                            //    var ui = data[0];
-
-                            //    if (ui.id == "") {
-                            //        alert("No existe el artículo"); // se está bancando que no sea identica la descripcion
-                            //        $("#Descripcion").val("");
-                            //        return;
-                            //    }
-                            //    $("#IdWilliamsDestino").val(ui.id);
-
-                            //    UltimoIdArticulo = ui.id;
-                            //}
-                            //else {
-                            //    alert("No existe el artículo"); // se está bancando que no sea identica la descripcion
-                            //}
-
-                            response($.map(data, function (item) {
-                                return {
-                                    label: item.value,
-                                    value: item.value //item.id
-                                    , id: item.id
-                                }
-                            }));
-
-                        }
+                    data: JSON.stringify({
+                        term: request.term
+                        //, idpuntoventa: function () { return $("#ctl00_ContentPlaceHolder1_txtFechaHasta").val(); }
+                    }),
 
 
+                    success: function (data2) {
+                        var data = JSON.parse(data2.d) // por qué tengo que usar parse?
 
-                    })
+                        //if (data.length == 1 || data.length > 1) { // qué pasa si encuentra más de uno?????
+                        //    var ui = data[0];
 
+                        //    if (ui.id == "") {
+                        //        alert("No existe el artículo"); // se está bancando que no sea identica la descripcion
+                        //        $("#Descripcion").val("");
+                        //        return;
+                        //    }
+                        //    $("#IdWilliamsDestino").val(ui.id);
 
-                }
+                        //    UltimoIdArticulo = ui.id;
+                        //}
+                        //else {
+                        //    alert("No existe el artículo"); // se está bancando que no sea identica la descripcion
+                        //}
 
+                        response($.map(data, function (item) {
+                            return {
+                                label: item.value,
+                                value: item.value //item.id
+                                , id: item.id
+                            }
+                        }));
 
-            });
+                    }
 
 
 
+                })
+
+
+            }
+
+
+        });
 
 
 
-        }
+
+
+
     }
+}
 
 },
 
@@ -1808,72 +1827,72 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
     name: 'ProcedenciaDesc', index: 'Procedencia', align: 'left', width: 100, hidden: false, editable: false, edittype: 'text', sortable: false
 
 
-    , searchoptions: {
-        //    sopt:['eq'], 
-        dataInit: function (elem) {
-            var NoResultsLabel = "No se encontraron resultados";
+, searchoptions: {
+    //    sopt:['eq'], 
+    dataInit: function (elem) {
+        var NoResultsLabel = "No se encontraron resultados";
 
 
-            $(elem).autocomplete({
-                source: function (request, response) {
-                    $.ajax({
-                        type: "POST",
-                        url: "WebServiceClientes.asmx/GetLocalidades",
-                        dataType: "json",
-                        contentType: "application/json; charset=utf-8",
+        $(elem).autocomplete({
+            source: function (request, response) {
+                $.ajax({
+                    type: "POST",
+                    url: "WebServiceClientes.asmx/GetLocalidades",
+                    dataType: "json",
+                    contentType: "application/json; charset=utf-8",
 
-                        data: JSON.stringify({
-                            term: request.term
-                            //, idpuntoventa: function () { return $("#ctl00_ContentPlaceHolder1_txtFechaHasta").val(); }
-                        }),
-
-
-                        success: function (data2) {
-                            var data = JSON.parse(data2.d) // por qué tengo que usar parse?
-
-                            //if (data.length == 1 || data.length > 1) { // qué pasa si encuentra más de uno?????
-                            //    var ui = data[0];
-
-                            //    if (ui.id == "") {
-                            //        alert("No existe el artículo"); // se está bancando que no sea identica la descripcion
-                            //        $("#Descripcion").val("");
-                            //        return;
-                            //    }
-                            //    $("#IdWilliamsDestino").val(ui.id);
-
-                            //    UltimoIdArticulo = ui.id;
-                            //}
-                            //else {
-                            //    alert("No existe el artículo"); // se está bancando que no sea identica la descripcion
-                            //}
-
-                            response($.map(data, function (item) {
-                                return {
-                                    label: item.value,
-                                    value: item.value //item.id
-                                    , id: item.id
-                                }
-                            }));
-
-                        }
+                    data: JSON.stringify({
+                        term: request.term
+                        //, idpuntoventa: function () { return $("#ctl00_ContentPlaceHolder1_txtFechaHasta").val(); }
+                    }),
 
 
+                    success: function (data2) {
+                        var data = JSON.parse(data2.d) // por qué tengo que usar parse?
 
-                    })
+                        //if (data.length == 1 || data.length > 1) { // qué pasa si encuentra más de uno?????
+                        //    var ui = data[0];
 
+                        //    if (ui.id == "") {
+                        //        alert("No existe el artículo"); // se está bancando que no sea identica la descripcion
+                        //        $("#Descripcion").val("");
+                        //        return;
+                        //    }
+                        //    $("#IdWilliamsDestino").val(ui.id);
 
-                }
+                        //    UltimoIdArticulo = ui.id;
+                        //}
+                        //else {
+                        //    alert("No existe el artículo"); // se está bancando que no sea identica la descripcion
+                        //}
 
+                        response($.map(data, function (item) {
+                            return {
+                                label: item.value,
+                                value: item.value //item.id
+                                , id: item.id
+                            }
+                        }));
 
-            });
+                    }
 
 
 
+                })
+
+
+            }
+
+
+        });
 
 
 
-        }
+
+
+
     }
+}
 },
 
 { name: 'NetoPto', index: 'NetoPto', align: 'left', width: 60, hidden: false, editable: false, edittype: 'text', sortable: false },
@@ -1928,18 +1947,18 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
     },
     formatoptions: { newformat: "dd/mm/yy" }, datefmt: 'dd/mm/yy'
     //, formatter: 'date'
-        , sorttype: 'date'
+    , sorttype: 'date'
 
 
-        , searchoptions: {
-            sopt: ['eq', 'ne', 'lt', 'le', 'gt', 'ge'],
-            dataInit: function (elem) {
-                $(elem).datepicker({
-                    dateFormat: 'dd/mm/yy',
-                    showButtonPanel: true
-                })
-            }
+    , searchoptions: {
+        sopt: ['eq', 'ne', 'lt', 'le', 'gt', 'ge'],
+        dataInit: function (elem) {
+            $(elem).datepicker({
+                dateFormat: 'dd/mm/yy',
+                showButtonPanel: true
+            })
         }
+    }
 },
 
 
@@ -1965,18 +1984,18 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
     },
     formatoptions: { newformat: "dd/mm/yy" }, datefmt: 'dd/mm/yy'
     //, formatter: 'date'
-    , sorttype: 'date'
+, sorttype: 'date'
 
 
-    , searchoptions: {
-        sopt: ['eq', 'ne', 'lt', 'le', 'gt', 'ge'],
-        dataInit: function (elem) {
-            $(elem).datepicker({
-                dateFormat: 'dd/mm/yy',
-                showButtonPanel: true
-            })
-        }
+, searchoptions: {
+    sopt: ['eq', 'ne', 'lt', 'le', 'gt', 'ge'],
+    dataInit: function (elem) {
+        $(elem).datepicker({
+            dateFormat: 'dd/mm/yy',
+            showButtonPanel: true
+        })
     }
+}
 },
 
 
@@ -1985,171 +2004,171 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 { name: 'NetoProc', index: 'NetoProc', align: 'left', width: 60, hidden: false, editable: false, edittype: 'text', sortable: false }
 
 
-                    ],
+                ],
 
-                    gridComplete: function () {
-                        //    var ids = jQuery("#Lista").jqGrid('getDataIDs');
-                        //    for (var i = 0; i < ids.length; i++) {
-                        //        var cl = ids[i];
-                        //        var se = "<input style='height:22px;width:20px;' type='button' value='G' onclick=\"GrabarFila('" + cl + "'); \"  />";
-                        //        jQuery("#Lista").jqGrid('setRowData', ids[i], { act: se });
-                        //    }
-                        //jQuery("#Lista").jqGrid('addRowData', Id, data, "last");
-                        //AgregarItemVacio(grid)
+                gridComplete: function () {
+                    //    var ids = jQuery("#Lista").jqGrid('getDataIDs');
+                    //    for (var i = 0; i < ids.length; i++) {
+                    //        var cl = ids[i];
+                    //        var se = "<input style='height:22px;width:20px;' type='button' value='G' onclick=\"GrabarFila('" + cl + "'); \"  />";
+                    //        jQuery("#Lista").jqGrid('setRowData', ids[i], { act: se });
+                    //    }
+                    //jQuery("#Lista").jqGrid('addRowData', Id, data, "last");
+                    //AgregarItemVacio(grid)
                     
                         
-                    },
+                },
 
 
 
-                    loadComplete: function() {
-                        // http://stackoverflow.com/questions/6575192/jqgrid-change-background-color-of-row-based-on-row-cell-value-by-column-name
+                loadComplete: function() {
+                    // http://stackoverflow.com/questions/6575192/jqgrid-change-background-color-of-row-based-on-row-cell-value-by-column-name
 
-                        RefrescarFondoRenglon(this);
+                    RefrescarFondoRenglon(this);
 
 
                        
-                    },
+                },
 
 
 
 
-                    onCellSelect: function (rowid, iCol, cellcontent, e) {
-                        var $this = $(this);
-                        var iRow = $('#' + $.jgrid.jqID(rowid))[0].rowIndex;
-                        lastSelectedId = rowid;
-                        lastSelectediCol = iCol;
-                        lastSelectediRow = iRow;
-                    },
-                    afterEditCell: function (id, name, val, iRow, iCol) {
-                        //if (name == 'Fecha') {
-                        //    jQuery("#" + iRow + "_Fecha", "#Lista").datepicker({ dateFormat: "dd/mm/yy" });
-                        //}
-                        var se = "<input style='height:22px;width:55px;' type='button' value='Grabar' onclick=\"GrabarFila('" + id + "');\"  />";
-                        jQuery("#Lista").jqGrid('setRowData', id, { act: se });
-                    },
-                    //beforeSelectRow: function (rowid, e) {
-                    //var $this = $(this),
-                    //    $td = $(e.target).closest('td'),
-                    //    $tr = $td.closest('tr'),
-                    //    iRow = $tr[0].rowIndex,
-                    //    iCol = $.jgrid.getCellIndex($td);
-
-                    //if (typeof lastSelectediRow !== "undefined" && typeof lastSelectediCol !== "undefined" &&
-                    //        (iRow !== lastSelectediRow || iCol !== lastSelectediCol)) {
-                    //    $this.jqGrid('setGridParam', {cellEdit: true});
-                    //    $this.jqGrid('restoreCell', lastSelectediRow, lastSelectediCol, true);
-                    //    $this.jqGrid('setGridParam', {cellEdit: false});
-                    //    $(this.rows[lastSelectediRow].cells[lastSelectediCol])
-                    //        .removeClass("ui-state-highlight");
+                onCellSelect: function (rowid, iCol, cellcontent, e) {
+                    var $this = $(this);
+                    var iRow = $('#' + $.jgrid.jqID(rowid))[0].rowIndex;
+                    lastSelectedId = rowid;
+                    lastSelectediCol = iCol;
+                    lastSelectediRow = iRow;
+                },
+                afterEditCell: function (id, name, val, iRow, iCol) {
+                    //if (name == 'Fecha') {
+                    //    jQuery("#" + iRow + "_Fecha", "#Lista").datepicker({ dateFormat: "dd/mm/yy" });
                     //}
-                    //return true;
-                    //},
+                    var se = "<input style='height:22px;width:55px;' type='button' value='Grabar' onclick=\"GrabarFila('" + id + "');\"  />";
+                    jQuery("#Lista").jqGrid('setRowData', id, { act: se });
+                },
+                //beforeSelectRow: function (rowid, e) {
+                //var $this = $(this),
+                //    $td = $(e.target).closest('td'),
+                //    $tr = $td.closest('tr'),
+                //    iRow = $tr[0].rowIndex,
+                //    iCol = $.jgrid.getCellIndex($td);
 
-                    pager: $('#ListaPager'),
-                    rowNum: 1000,
-                    rowList: [10, 20, 50, 100,500,1000],
-                    sortname: 'IdCartaDePorte',  //'FechaDescarga', //'NumeroCartaDePorte',
-                    sortorder: 'desc',
-                    viewrecords: true,
-                    multiselect: false,
-                    shrinkToFit: false,
-                    width: 'auto',
-                    height: 460, // $(window).height() - 250, // '100%'
-                    altRows: false,
-                    footerrow: false,
-                    userDataOnFooter: true,
-                    //caption: '<b>Control de Descargas</b>',
-                    cellEdit: true,
-                    cellsubmit: 'clientArray',
-                    dataUrl: "WebServiceClientes.asmx/EmpleadoEditGridData",
+                //if (typeof lastSelectediRow !== "undefined" && typeof lastSelectediCol !== "undefined" &&
+                //        (iRow !== lastSelectediRow || iCol !== lastSelectediCol)) {
+                //    $this.jqGrid('setGridParam', {cellEdit: true});
+                //    $this.jqGrid('restoreCell', lastSelectediRow, lastSelectediCol, true);
+                //    $this.jqGrid('setGridParam', {cellEdit: false});
+                //    $(this.rows[lastSelectediRow].cells[lastSelectediCol])
+                //        .removeClass("ui-state-highlight");
+                //}
+                //return true;
+                //},
 
-                    toppager: true,
+                pager: $('#ListaPager'),
+                rowNum: 1000,
+                rowList: [10, 20, 50, 100,500,1000],
+                sortname: 'IdCartaDePorte',  //'FechaDescarga', //'NumeroCartaDePorte',
+                sortorder: 'desc',
+                viewrecords: true,
+                multiselect: false,
+                shrinkToFit: false,
+                width: 'auto',
+                height: 460, // $(window).height() - 250, // '100%'
+                altRows: false,
+                footerrow: false,
+                userDataOnFooter: true,
+                //caption: '<b>Control de Descargas</b>',
+                cellEdit: true,
+                cellsubmit: 'clientArray',
+                dataUrl: "WebServiceClientes.asmx/EmpleadoEditGridData",
 
-                    gridview: true
-            , multiboxonly: true
-            , multipleSearch: true
+                toppager: true,
 
-                });
-
-
-                jQuery('#Lista').jqGrid('gridResize');
-
-                jQuery("#Lista").jqGrid('bindKeys');
-
-                jQuery("#Lista").jqGrid('navGrid', '#ListaPager',
-                 { csv: true, refresh: true, add: false, edit: false, del: false }, {}, {}, {},
-                 {
-                     //sopt: ["cn"]
-                     //sopt: ['eq', 'ne', 'lt', 'le', 'gt', 'ge', 'bw', 'bn', 'ew', 'en', 'cn', 'nc', 'nu', 'nn', 'in', 'ni'],
-            zIndex:50,  width: 700, closeOnEscape: true, closeAfterSearch: true, multipleSearch: true, overlay: false
-
-                 }
-                    // http://stackoverflow.com/questions/11228764/jqgrid-setting-zindex-for-alertmod
-                );
-
-                //jQuery("#Lista").jqGrid('navGrid', '#ListaPager',
-                //    { search: false, refresh: false, add: false, edit: false, del: false }, {}, {}, {}, {});
-
-
-
-                //jQuery("#Lista").jqGrid('navButtonAdd', '#ListaPager',
-                //                                {
-                //                                    caption: "", buttonicon: "ui-icon-plus", title: "Agregar",
-                //                                    onClickButton: function () {
-                //                                        AgregarItemVacio(jQuery("#Lista"));
-                //                                    },
-                //                                });
-                //jQuery("#Lista").jqGrid('navButtonAdd', '#ListaPager',
-                //                                {
-                //                                    caption: "", buttonicon: "ui-icon-trash", title: "Eliminar",
-                //                                    onClickButton: function () {
-                //                                        MarcarSeleccionadosParaEliminar(jQuery("#Lista"));
-                //                                    },
-                //                                });
-
-
-
-                jQuery("#Lista").filterToolbar({
-                    stringResult: true, searchOnEnter: true,
-                    defaultSearch: 'cn',
-                    enableClear: false
-                }); // si queres sacar el enableClear, definilo en las searchoptions de la columna específica http://www.trirand.com/blog/?page_id=393/help/clearing-the-clear-icon-in-a-filtertoolbar/
-
-
-                //$('#Lista').jqGrid('setGridWidth', '1000');
-                $('#Lista').jqGrid('setGridWidth', $(window).width() - 40);
+                gridview: true
+        , multiboxonly: true
+        , multipleSearch: true
 
             });
 
 
+            jQuery('#Lista').jqGrid('gridResize');
 
-            $(window).resize(function () {
-                $('#Lista').jqGrid('setGridWidth', $(window).width() - 40);
-                //RefrescaAnchoJqgrids();
-            });
+            jQuery("#Lista").jqGrid('bindKeys');
+
+            jQuery("#Lista").jqGrid('navGrid', '#ListaPager',
+             { csv: true, refresh: true, add: false, edit: false, del: false }, {}, {}, {},
+             {
+                 //sopt: ["cn"]
+                 //sopt: ['eq', 'ne', 'lt', 'le', 'gt', 'ge', 'bw', 'bn', 'ew', 'en', 'cn', 'nc', 'nu', 'nn', 'in', 'ni'],
+                 zIndex:50,  width: 700, closeOnEscape: true, closeAfterSearch: true, multipleSearch: true, overlay: false
+
+             }
+                // http://stackoverflow.com/questions/11228764/jqgrid-setting-zindex-for-alertmod
+            );
+
+            //jQuery("#Lista").jqGrid('navGrid', '#ListaPager',
+            //    { search: false, refresh: false, add: false, edit: false, del: false }, {}, {}, {}, {});
 
 
-            var getColumnIndexByName = function(grid, columnName) {
-                var cm = grid.jqGrid('getGridParam','colModel'),i=0,l=cm.length;
-                for (; i<l; i++) {
-                    if (cm[i].name===columnName) {
-                        return i; // return the index
-                    }
+
+            //jQuery("#Lista").jqGrid('navButtonAdd', '#ListaPager',
+            //                                {
+            //                                    caption: "", buttonicon: "ui-icon-plus", title: "Agregar",
+            //                                    onClickButton: function () {
+            //                                        AgregarItemVacio(jQuery("#Lista"));
+            //                                    },
+            //                                });
+            //jQuery("#Lista").jqGrid('navButtonAdd', '#ListaPager',
+            //                                {
+            //                                    caption: "", buttonicon: "ui-icon-trash", title: "Eliminar",
+            //                                    onClickButton: function () {
+            //                                        MarcarSeleccionadosParaEliminar(jQuery("#Lista"));
+            //                                    },
+            //                                });
+
+
+
+            jQuery("#Lista").filterToolbar({
+                stringResult: true, searchOnEnter: true,
+                defaultSearch: 'cn',
+                enableClear: false
+            }); // si queres sacar el enableClear, definilo en las searchoptions de la columna específica http://www.trirand.com/blog/?page_id=393/help/clearing-the-clear-icon-in-a-filtertoolbar/
+
+
+            //$('#Lista').jqGrid('setGridWidth', '1000');
+            $('#Lista').jqGrid('setGridWidth', $(window).width() - 40);
+
+        });
+
+
+
+        $(window).resize(function () {
+            $('#Lista').jqGrid('setGridWidth', $(window).width() - 40);
+            //RefrescaAnchoJqgrids();
+        });
+
+
+        var getColumnIndexByName = function(grid, columnName) {
+            var cm = grid.jqGrid('getGridParam','colModel'),i=0,l=cm.length;
+            for (; i<l; i++) {
+                if (cm[i].name===columnName) {
+                    return i; // return the index
                 }
-                return -1;
-            };
+            }
+            return -1;
+        };
 
             
 
-        </script>
+    </script>
 
 
 
-    
+
     <style type="text/css">
         .myAltRowClassDemorado {
-            background-color:  red;
+            background-color: red;
             background-image: none;
         }
 
@@ -2159,10 +2178,9 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
         }
 
         .myAltRowClassRechazado {
-            background-color:   violet;
+            background-color: violet;
             background-image: none;
         }
-
     </style>
     <%--   /////////////////////////////////////////////////////////////////////        
  /////////////////////////////////////////////////////////////////////    --%>

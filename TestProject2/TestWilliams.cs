@@ -839,6 +839,44 @@ namespace ProntoMVC.Tests
 
 
 
+
+
+        [TestMethod]
+        public void InformeMapaEstrategico_31206()
+        {
+
+
+            //Solo un comentario, en la imagen incluyen el campo Autorizador Syngenta que no debe tenerse en cuenta porque casi ningun cliente lo tiene
+
+            string sErrores = "", sTitulo = "";
+            LinqCartasPorteDataContext db = null;
+
+            string ArchivoExcelDestino = @"C:\Users\Administrador\Desktop\lala.xls";
+
+            Microsoft.Reporting.WebForms.ReportViewer rep = new Microsoft.Reporting.WebForms.ReportViewer();
+
+            
+
+
+            ReportParameter[] yourParams = new ReportParameter[2];
+            yourParams[0] = new ReportParameter("CadenaConexion", ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC));
+            yourParams[1] = new ReportParameter("sServidorWeb", ConfigurationManager.AppSettings["UrlDominio"]);
+
+
+            var output = CartaDePorteManager.RebindReportViewer_ServidorExcel(ref rep,
+                                  "Williams - Listado de Clientes incompletos.rdl", yourParams, ref ArchivoExcelDestino, false);
+
+
+
+            System.Diagnostics.Process.Start(output);
+
+            
+        }
+
+
+
+
+
         [TestMethod]
         public void SincroPelayo_30816()
         {
