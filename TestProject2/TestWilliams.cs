@@ -846,7 +846,6 @@ namespace ProntoMVC.Tests
         {
 
 
-            //Solo un comentario, en la imagen incluyen el campo Autorizador Syngenta que no debe tenerse en cuenta porque casi ningun cliente lo tiene
 
             string sErrores = "", sTitulo = "";
             LinqCartasPorteDataContext db = null;
@@ -855,16 +854,20 @@ namespace ProntoMVC.Tests
 
             Microsoft.Reporting.WebForms.ReportViewer rep = new Microsoft.Reporting.WebForms.ReportViewer();
 
-            
 
 
             ReportParameter[] yourParams = new ReportParameter[2];
             yourParams[0] = new ReportParameter("CadenaConexion", ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC));
             yourParams[1] = new ReportParameter("sServidorWeb", ConfigurationManager.AppSettings["UrlDominio"]);
 
+            
+// Armar un informe de tipo de tabla dinámica que se pueda filtrar por Producto, Puerto, Clientes, Toneladas (desde / hasta) y Modo.
+// El reporte será una tabla dinámica, el primer nivel la localidad de procedencia y el segundo el titular. El dato son las TN descargadas.
+
+
 
             var output = CartaDePorteManager.RebindReportViewer_ServidorExcel(ref rep,
-                                  "Williams - Listado de Clientes incompletos.rdl", yourParams, ref ArchivoExcelDestino, false);
+                                  "MapaArgentinaProcedenciaCartasPorte.rdl", null, ref ArchivoExcelDestino, false);
 
 
 
