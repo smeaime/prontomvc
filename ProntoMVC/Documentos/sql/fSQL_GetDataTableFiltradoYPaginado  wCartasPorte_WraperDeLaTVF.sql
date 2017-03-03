@@ -354,7 +354,7 @@ where 1=1
                                        ( NOT (cdp.Vendedor IS NULL OR cdp.Corredor IS NULL OR cdp.Entregador IS NULL OR cdp.IdArticulo IS NULL) 
 											AND ISNULL(NetoProc,0)=0 AND ISNULL(cdp.IdFacturaImputada,0)=0 AND ISNULL(cdp.Anulada,'NO')<>'SI' ) 
                                    OR                                           
-                                       ( ISNULL(cdp.NetoProc,0)>0 AND cdp.fechadescarga >= getdate()  )
+                                       ( ISNULL(cdp.NetoProc,0)>0 AND cdp.fechadescarga >=CONVERT (date, GETDATE())   )
                                  ) 
 			
 			)
@@ -367,7 +367,7 @@ where 1=1
                                 cdp.IdArticulo IS NULL) AND ISNULL(cdp.NetoProc,0)=0 AND ISNULL(IdFacturaImputada,0)=0 AND 
                                       ISNULL(cdp.Anulada,'NO')<>'SI' ) 
                                    OR                                            
-                                       ( ISNULL(NetoProc,0)>0 AND fechadescarga >= getdate()  )
+                                       ( ISNULL(NetoProc,0)>0 AND fechadescarga >= CONVERT (date, GETDATE())    )
                                 ) 
 
 			)
@@ -587,7 +587,7 @@ from dbo.fSQL_GetDataTableFiltradoYPaginado
 
  NULL, 
 					10, 
-					0,
+					11,
 					NULL, 
 					-1,
 					 
