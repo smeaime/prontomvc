@@ -6,19 +6,77 @@
       <ConnectionProperties>
         <DataProvider>SQL</DataProvider>
         <ConnectString>Data Source=SERVERSQL3;Initial Catalog=Williams2;Connect Timeout=8;User=sa;Password=.SistemaPronto.</ConnectString>
-        <Prompt>Especifique un nombre de usuario y una contraseña para el origen de datos TestHarcodeada:</Prompt>
+        <IntegratedSecurity>true</IntegratedSecurity>
       </ConnectionProperties>
-      <rd:SecurityType>DataBase</rd:SecurityType>
+      <rd:SecurityType>Integrated</rd:SecurityType>
       <rd:DataSourceID>19dde040-c46f-477a-8048-5f0c1971f8dd</rd:DataSourceID>
+    </DataSource>
+    <DataSource Name="DataSource1">
+      <ConnectionProperties>
+        <DataProvider>SQL</DataProvider>
+        <ConnectString>=Parameters!CadenaConexion.Value</ConnectString>
+        <IntegratedSecurity>true</IntegratedSecurity>
+      </ConnectionProperties>
+      <rd:SecurityType>Integrated</rd:SecurityType>
+      <rd:DataSourceID>a98b4bf2-8024-4720-b0b7-473176af0cb0</rd:DataSourceID>
     </DataSource>
   </DataSources>
   <DataSets>
     <DataSet Name="DataSet1">
       <Query>
         <DataSourceName>TestHarcodeada</DataSourceName>
+        <QueryParameters>
+          <QueryParameter Name="@TonsDesde">
+            <Value>=Parameters!TonsDesde.Value</Value>
+          </QueryParameter>
+          <QueryParameter Name="@TonsHasta">
+            <Value>=Parameters!TonsHasta.Value</Value>
+          </QueryParameter>
+        </QueryParameters>
         <CommandText>select
-sum(netoproc) as kilos, LOCORI.Nombre as localidad, isnull(PROVORI.Nombre,'BUENOS AIRES' ) as provincia
-from cartasdeporte CDP
+*
+from
+(
+select
+ FLOOR( sum(netoproc) /1000) as kilos, LOCORI.Nombre as localidad, isnull(PROVORI.Nombre,'BUENOS AIRES' ) as provincia
+from 
+ dbo.fSQL_GetDataTableFiltradoYPaginado  
+				(  
+
+ NULL, 
+					10, 
+					0,
+					NULL, 
+					-1,
+					 
+-1,-1,-1,-1,-1,
+
+	NULL, 
+					NULL, 
+					NULL,
+					'Ambas',
+					'2017-01-01 00:00:00',
+
+					'2018-01-01 00:00:00',
+					NULL, 
+					NULL,
+					 'FALSE',
+					NULL, 
+					NULL, 
+
+					NULL, 
+					NULL, 
+					NULL,
+					NULL, 
+					NULL
+
+					)
+    
+ as CDP
+
+
+
+
 LEFT OUTER JOIN Localidades LOCORI ON CDP.Procedencia = LOCORI.IdLocalidad          
 LEFT OUTER JOIN Provincias PROVORI ON LOCORI.IdProvincia = PROVORI.IdProvincia           
 where 
@@ -26,7 +84,12 @@ where
 	and procedencia is not null
 	and netoproc &gt; 0
 group by LOCORI.Nombre,PROVORI.Nombre
-order by sum(netoproc) desc</CommandText>
+
+) as C
+where kilos &gt;= isnull(@TonsDesde,0)
+and kilos &lt;= isnull(@TonsHasta,0)
+
+order by kilos desc</CommandText>
         <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
       </Query>
       <Fields>
@@ -69,7 +132,7 @@ order by sum(netoproc) desc</CommandText>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>kilos</Value>
+                                  <Value>tons</Value>
                                   <Style>
                                     <FontFamily>Tahoma</FontFamily>
                                     <FontSize>11pt</FontSize>
@@ -110,7 +173,7 @@ order by sum(netoproc) desc</CommandText>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Sum(Fields!kilos.Value)</Value>
+                                  <Value>=Fields!kilos.Value</Value>
                                   <Style>
                                     <FontFamily>Tahoma</FontFamily>
                                     <Color>#4d4d4d</Color>
@@ -235,7 +298,8 @@ order by sum(netoproc) desc</CommandText>
                   </Group>
                   <SortExpressions>
                     <SortExpression>
-                      <Value>=Fields!localidad.Value</Value>
+                      <Value>=Fields!kilos.Value</Value>
+                      <Direction>Descending</Direction>
                     </SortExpression>
                   </SortExpressions>
                   <TablixHeader>
@@ -331,8 +395,8 @@ order by sum(netoproc) desc</CommandText>
             </SortExpressions>
             <Top>206.55448mm</Top>
             <Left>8.46667mm</Left>
-            <Height>18.79375mm</Height>
-            <Width>70.10833mm</Width>
+            <Height>18.79374mm</Height>
+            <Width>70.10834mm</Width>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -37925,6 +37989,82 @@ order by sum(netoproc) desc</CommandText>
       </Page>
     </ReportSection>
   </ReportSections>
+  <ReportParameters>
+    <ReportParameter Name="CadenaConexion">
+      <DataType>String</DataType>
+      <AllowBlank>true</AllowBlank>
+      <Prompt>CadenaConexion</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="Producto">
+      <DataType>String</DataType>
+      <AllowBlank>true</AllowBlank>
+      <Prompt>Producto</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="Puerto">
+      <DataType>String</DataType>
+      <AllowBlank>true</AllowBlank>
+      <Prompt>Puerto</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="Cliente">
+      <DataType>String</DataType>
+      <AllowBlank>true</AllowBlank>
+      <Prompt>Cliente</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="TonsDesde">
+      <DataType>Integer</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>0</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>TonsDesde</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="TonsHasta">
+      <DataType>Integer</DataType>
+      <Nullable>true</Nullable>
+      <DefaultValue>
+        <Values>
+          <Value>9999999</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>TonsHasta</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="Modo">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>entregas</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>Modo</Prompt>
+      <ValidValues>
+        <ParameterValues>
+          <ParameterValue>
+            <Value>entregas</Value>
+            <Label>entregas</Label>
+          </ParameterValue>
+          <ParameterValue>
+            <Value>export</Value>
+            <Label>export</Label>
+          </ParameterValue>
+          <ParameterValue>
+            <Value>ambos</Value>
+            <Label>ambos</Label>
+          </ParameterValue>
+        </ParameterValues>
+      </ValidValues>
+    </ReportParameter>
+    <ReportParameter Name="FechaDesde">
+      <DataType>DateTime</DataType>
+      <Nullable>true</Nullable>
+      <Prompt>FechaDesde</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="FechaHasta">
+      <DataType>DateTime</DataType>
+      <Nullable>true</Nullable>
+      <Prompt>FechaHasta</Prompt>
+    </ReportParameter>
+  </ReportParameters>
   <rd:ReportUnitType>Mm</rd:ReportUnitType>
   <rd:ReportServerUrl>http://bdlconsultores.sytes.net:10080/ReportServer</rd:ReportServerUrl>
   <rd:ReportID>61fdb02c-239c-40b0-9135-be7685d7778c</rd:ReportID>

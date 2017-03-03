@@ -29,6 +29,9 @@
           <QueryParameter Name="@TonsDesde">
             <Value>=Parameters!TonsDesde.Value</Value>
           </QueryParameter>
+          <QueryParameter Name="@TonsHasta">
+            <Value>=Parameters!TonsHasta.Value</Value>
+          </QueryParameter>
         </QueryParameters>
         <CommandText>select
 *
@@ -36,7 +39,44 @@ from
 (
 select
  FLOOR( sum(netoproc) /1000) as kilos, LOCORI.Nombre as localidad, isnull(PROVORI.Nombre,'BUENOS AIRES' ) as provincia
-from cartasdeporte CDP
+from 
+ dbo.fSQL_GetDataTableFiltradoYPaginado  
+				(  
+
+ NULL, 
+					10, 
+					0,
+					NULL, 
+					-1,
+					 
+-1,-1,-1,-1,-1,
+
+	NULL, 
+					NULL, 
+					NULL,
+					'Ambas',
+					'2017-01-01 00:00:00',
+
+					'2018-01-01 00:00:00',
+					NULL, 
+					NULL,
+					 'FALSE',
+					NULL, 
+					NULL, 
+
+					NULL, 
+					NULL, 
+					NULL,
+					NULL, 
+					NULL
+
+					)
+    
+ as CDP
+
+
+
+
 LEFT OUTER JOIN Localidades LOCORI ON CDP.Procedencia = LOCORI.IdLocalidad          
 LEFT OUTER JOIN Provincias PROVORI ON LOCORI.IdProvincia = PROVORI.IdProvincia           
 where 
@@ -46,8 +86,8 @@ where
 group by LOCORI.Nombre,PROVORI.Nombre
 
 ) as C
-where kilos &gt;= @TonsDesde 
---and kilos &lt;= isnull(@TonsHasta,0)
+where kilos &gt;= isnull(@TonsDesde,0)
+and kilos &lt;= isnull(@TonsHasta,0)
 
 order by kilos desc</CommandText>
         <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
@@ -133,7 +173,7 @@ order by kilos desc</CommandText>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Sum(Fields!kilos.Value)</Value>
+                                  <Value>=Fields!kilos.Value</Value>
                                   <Style>
                                     <FontFamily>Tahoma</FontFamily>
                                     <Color>#4d4d4d</Color>
@@ -210,7 +250,7 @@ order by kilos desc</CommandText>
               <TablixMembers>
                 <TablixMember>
                   <TablixHeader>
-                    <Size>35.05417mm</Size>
+                    <Size>64.15834mm</Size>
                     <CellContents>
                       <Textbox Name="Textbox5">
                         <CanGrow>true</CanGrow>
@@ -258,11 +298,12 @@ order by kilos desc</CommandText>
                   </Group>
                   <SortExpressions>
                     <SortExpression>
-                      <Value>=Fields!localidad.Value</Value>
+                      <Value>=Fields!kilos.Value</Value>
+                      <Direction>Descending</Direction>
                     </SortExpression>
                   </SortExpressions>
                   <TablixHeader>
-                    <Size>35.05417mm</Size>
+                    <Size>64.15834mm</Size>
                     <CellContents>
                       <Textbox Name="localidad">
                         <CanGrow>true</CanGrow>
@@ -303,7 +344,7 @@ order by kilos desc</CommandText>
                 </TablixMember>
                 <TablixMember>
                   <TablixHeader>
-                    <Size>35.05417mm</Size>
+                    <Size>64.15834mm</Size>
                     <CellContents>
                       <Textbox Name="Textbox7">
                         <CanGrow>true</CanGrow>
@@ -355,7 +396,7 @@ order by kilos desc</CommandText>
             <Top>206.55448mm</Top>
             <Left>8.46667mm</Left>
             <Height>18.79374mm</Height>
-            <Width>70.10834mm</Width>
+            <Width>99.21251mm</Width>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -37981,14 +38022,12 @@ order by kilos desc</CommandText>
     <ReportParameter Name="TonsHasta">
       <DataType>Integer</DataType>
       <Nullable>true</Nullable>
+      <DefaultValue>
+        <Values>
+          <Value>9999999</Value>
+        </Values>
+      </DefaultValue>
       <Prompt>TonsHasta</Prompt>
-      <ValidValues>
-        <ParameterValues>
-          <ParameterValue>
-            <Label>99999999</Label>
-          </ParameterValue>
-        </ParameterValues>
-      </ValidValues>
     </ReportParameter>
     <ReportParameter Name="Modo">
       <DataType>String</DataType>
@@ -38014,6 +38053,16 @@ order by kilos desc</CommandText>
           </ParameterValue>
         </ParameterValues>
       </ValidValues>
+    </ReportParameter>
+    <ReportParameter Name="FechaDesde">
+      <DataType>DateTime</DataType>
+      <Nullable>true</Nullable>
+      <Prompt>FechaDesde</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="FechaHasta">
+      <DataType>DateTime</DataType>
+      <Nullable>true</Nullable>
+      <Prompt>FechaHasta</Prompt>
     </ReportParameter>
   </ReportParameters>
   <rd:ReportUnitType>Mm</rd:ReportUnitType>

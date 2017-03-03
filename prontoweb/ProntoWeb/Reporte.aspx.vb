@@ -612,6 +612,7 @@ Namespace ProntoMVC.Reportes
 
                 ErrHandler2.WriteError("Cli 2")
 
+                ReportViewerRemoto.ShowParameterPrompts = True
 
 
             ElseIf Me.Request.QueryString("ReportName") = "Listado de Clientes incompletos" Then
