@@ -1,0 +1,10 @@
+
+Log Entry : 
+03/03/2017 14:54:30
+Error in: . Error Message:Por generar el archivo C:\Users\Administrador\Desktop\lala.xls
+__________________________
+
+Log Entry : 
+03/03/2017 14:54:30
+Error in: . Error Message:Archivo generado C:\Users\Administrador\Desktop\lala.xls
+__________________________

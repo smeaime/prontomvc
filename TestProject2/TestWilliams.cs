@@ -856,24 +856,31 @@ namespace ProntoMVC.Tests
 
 
 
-            ReportParameter[] yourParams = new ReportParameter[2];
+            ReportParameter[] yourParams = new ReportParameter[9];
             yourParams[0] = new ReportParameter("CadenaConexion", ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC));
-            yourParams[1] = new ReportParameter("sServidorWeb", ConfigurationManager.AppSettings["UrlDominio"]);
+            yourParams[1] = new ReportParameter("Producto", "");
+            yourParams[2] = new ReportParameter("Puerto", "");
+            yourParams[3] = new ReportParameter("Cliente", "");
+            yourParams[4] = new ReportParameter("TonsDesde", "0");
+            yourParams[5] = new ReportParameter("TonsHasta", "9999");
+            yourParams[6] = new ReportParameter("FechaDesde", (new DateTime(1000, 1, 1)).ToString());
+            yourParams[7] = new ReportParameter("FechaHasta", (new DateTime(3000, 1, 1)).ToString());
+            yourParams[8] = new ReportParameter("Modo", "entregas");
 
-            
-// Armar un informe de tipo de tabla dinámica que se pueda filtrar por Producto, Puerto, Clientes, Toneladas (desde / hasta) y Modo.
-// El reporte será una tabla dinámica, el primer nivel la localidad de procedencia y el segundo el titular. El dato son las TN descargadas.
+
+            // Armar un informe de tipo de tabla dinámica que se pueda filtrar por Producto, Puerto, Clientes, Toneladas (desde / hasta) y Modo.
+            // El reporte será una tabla dinámica, el primer nivel la localidad de procedencia y el segundo el titular. El dato son las TN descargadas.
 
 
 
             var output = CartaDePorteManager.RebindReportViewer_ServidorExcel(ref rep,
-                                  "MapaArgentinaProcedenciaCartasPorte.rdl", null, ref ArchivoExcelDestino, false);
+                                  "MapaArgentinaProcedenciaCartasPorte.rdl", yourParams, ref ArchivoExcelDestino, false);
 
 
 
             System.Diagnostics.Process.Start(output);
 
-            
+
         }
 
 
@@ -4683,7 +4690,7 @@ Adjunto un ejemplo que tiene cartas de porte de 8 entregadores que no son Willia
                 {
                 }
 
-                 
+
             }
 
 
