@@ -154,7 +154,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                                             Width="110px">
                                             <asp:ListItem Selected="True">Entregas</asp:ListItem>
                                             <asp:ListItem>Export</asp:ListItem>
-                                            <asp:ListItem>Ambos</asp:ListItem>
+                                            <asp:ListItem>Ambas</asp:ListItem>
                                         </asp:DropDownList>
                                     </td>
                                 </tr>

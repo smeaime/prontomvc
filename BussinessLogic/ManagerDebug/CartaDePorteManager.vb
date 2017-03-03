@@ -4513,12 +4513,13 @@ Public Class CartaDePorteManager
         '                                         grant execute on wCar...  to [NT AUTHORITY\ANONYMOUS LOGON]
         '                                         grant execute on wCart... to public
 
-
-        For Each i In parametros
-            If i Is Nothing Then
-                Throw New Exception("Te falta por lo menos un parametro. Recordá que el array que pasás se dimensiona con un elemento de más")
-            End If
-        Next
+        If parametros IsNot Nothing Then
+            For Each i In parametros
+                If i Is Nothing Then
+                    Throw New Exception("Te falta por lo menos un parametro. Recordá que el array que pasás se dimensiona con un elemento de más")
+                End If
+            Next
+        End If
 
 
         With oReportViewer
@@ -4558,8 +4559,7 @@ Public Class CartaDePorteManager
 
 
                 Try
-
-                    oReportViewer.ServerReport.SetParameters(parametros)
+                    If parametros IsNot Nothing Then oReportViewer.ServerReport.SetParameters(parametros)
                     'sera porque el informe tiene el datasource TestHarcodeada con credenciales NO en "integrated security"?
 
 
@@ -4635,6 +4635,18 @@ Public Class CartaDePorteManager
                 End If
 
             Catch e As System.Exception
+
+
+                'errores
+                '   rsCredentialsNotSpecified     porque el datasource TestHarcodeada tiene las credenciales no configuradas para windows integrated
+                '   rsProcessingAborted           porque la cuenta que corre el repservice no tiene permisos: 
+                '                                         GRANT  Execute on [dbo].your_object to [public]
+                '                                         REVOKE Execute on [dbo].your_object to [public]
+                '                                         grant execute on wCar...  to [NT AUTHORITY\NETWORK SERVICE]
+                '                                         grant execute on wCar...  to [NT AUTHORITY\ANONYMOUS LOGON]
+                '                                         grant execute on wCart... to public
+
+
                 Dim inner As Exception = e.InnerException
                 While Not (inner Is Nothing)
                     If System.Diagnostics.Debugger.IsAttached() Then
