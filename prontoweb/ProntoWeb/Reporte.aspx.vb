@@ -598,17 +598,17 @@ Namespace ProntoMVC.Reportes
 
                 ReportViewerRemoto.ServerReport.ReportPath = "/Pronto informes/MapaArgentinaProcedenciaCartasPorte"
 
-                Dim yourParams As ReportParameter() = New ReportParameter(1) {} 'esto tiene que ser 1 si son dos!!!!!
-                yourParams(0) = New ReportParameter("CadenaConexion", Encriptar(scsql), False)
-                Dim dominio = ConfigurationManager.AppSettings("UrlDominio")
-                'dominio = "https:\\prontoweb.williamsentregas.com.ar"
-                yourParams(1) = New ReportParameter("sServidorWeb", dominio, False)
-                If ReportViewerRemoto.ServerReport.GetParameters().Count <> yourParams.Count() Then
-                    MsgBoxAjax(Me, "Distinta cantidad de parámetros: " & ReportViewerRemoto.ServerReport.GetParameters().Count & " y " & yourParams.Count())
-                    Return 'Throw New Exception("Distintos parámetros")
-                End If
+                'Dim yourParams As ReportParameter() = New ReportParameter(1) {} 'esto tiene que ser 1 si son dos!!!!!
+                'yourParams(0) = New ReportParameter("CadenaConexion", Encriptar(scsql), False)
+                'Dim dominio = ConfigurationManager.AppSettings("UrlDominio")
+                ''dominio = "https:\\prontoweb.williamsentregas.com.ar"
+                'yourParams(1) = New ReportParameter("sServidorWeb", dominio, False)
+                'If ReportViewerRemoto.ServerReport.GetParameters().Count <> yourParams.Count() Then
+                '    MsgBoxAjax(Me, "Distinta cantidad de parámetros: " & ReportViewerRemoto.ServerReport.GetParameters().Count & " y " & yourParams.Count())
+                '    Return 'Throw New Exception("Distintos parámetros")
+                'End If
 
-                ReportViewerRemoto.ServerReport.SetParameters(yourParams)
+                'ReportViewerRemoto.ServerReport.SetParameters(yourParams)
 
                 ErrHandler2.WriteError("Cli 2")
 
