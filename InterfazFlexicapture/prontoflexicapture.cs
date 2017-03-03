@@ -3855,6 +3855,8 @@ Formato localidad-provincia	destination	x
         }
 
 
+        public const int estado = 11; //por ahora dejo fijo que se use el estado DescargasDeHoyMasTodasLasPosicionesEnRangoFecha
+
         public virtual Dictionary<int, int> InformeSituacion(int iddestino, DateTime desde, DateTime hasta, string SC)
         {
 
@@ -3865,7 +3867,7 @@ Formato localidad-provincia	destination	x
 
 
             List<situacion> q2 = db.fSQL_GetDataTableFiltradoYPaginado(
-                                                    0, 9999999, 0, "", -1, -1,
+                                                    0, 9999999, estado, "", -1, -1,
                                                     -1, -1, -1, -1, -1,
                                                     iddestino, 0, "Ambas"
                                                     , desde, hasta,
@@ -3955,7 +3957,7 @@ Formato localidad-provincia	destination	x
             var pagedQuery = Filtrador.Filters.FiltroGenerico_UsandoIQueryable<ProntoMVC.Data.Models.fSQL_GetDataTableFiltradoYPaginado_Result3>
                             (sidx, sord, page, rows, _search, filters, db, ref totalRecords,
                                          db.fSQL_GetDataTableFiltradoYPaginado(
-                                                            0, 9999999, 0, "", -1, -1,
+                                                            0, 9999999, estado, "", -1, -1,
                                                             -1, -1, -1, -1, -1,
                                                             iddestino, 0, "Ambas", FechaDesde,
                                                             FechaHasta, puntovent, null, false, "", "",
@@ -4219,7 +4221,7 @@ Formato localidad-provincia	destination	x
                                                             "IdCartaDePorte", "desc", 1, 999999, true, filters, db, ref totalrecords,
 
                                                             db.fSQL_GetDataTableFiltradoYPaginado(
-                                                            0, 9999999, 0, "", -1, -1,
+                                                            0, 9999999, estado, "", -1, -1,
                                                             -1, -1, -1, -1, -1,
                                                           iddestino, 0, "Ambas"
                                                            , FechaDesde, FechaHasta,
@@ -4322,7 +4324,7 @@ Formato localidad-provincia	destination	x
                                                             "IdCartaDePorte", "desc", 1, 999999, true, filters, db, ref totalrecords,
 
                                                             db.fSQL_GetDataTableFiltradoYPaginado(
-                                                            0, 9999999, 0, "", -1, -1,
+                                                            0, 9999999,estado, "", -1, -1,
                                                             -1, -1, -1, -1, -1,
                                                           iddestino, 0, "Ambas"
                                                            , FechaDesde, FechaHasta,
