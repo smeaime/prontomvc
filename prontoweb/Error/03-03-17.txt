@@ -12,3 +12,73 @@ Subproceso anulado.
    en Login.Page_Load(Object sender, EventArgs e) en C:\Users\Administrador\Documents\bdl\pronto\prontoweb\Login.aspx.vb:línea 169
 mscorlib
 __________________________
+
+Log Entry : 
+03/03/2017 12:42:08
+Error in: http://localhost:58911/ProntoWeb/Reporte.aspx?ReportName=MapaArgentinaProcedenciaCartasPorte. Error Message:Cli 1
+__________________________
+
+Log Entry : 
+03/03/2017 12:43:45
+Error in: http://localhost:58911/ProntoWeb/Reporte.aspx?ReportName=MapaArgentinaProcedenciaCartasPorte. Error Message:Cli 1
+__________________________
+
+Log Entry : 
+03/03/2017 12:45:14
+Error in: http://localhost:58911/ProntoWeb/Reporte.aspx?ReportName=MapaArgentinaProcedenciaCartasPorte. Error Message:Cli 1
+__________________________
+
+Log Entry : 
+03/03/2017 12:45:14
+Error in: http://localhost:58911/ProntoWeb/Reporte.aspx?ReportName=MapaArgentinaProcedenciaCartasPorte. Error Message:Cli 2
+__________________________
+
+Log Entry : 
+03/03/2017 12:45:14
+Error in: http://localhost:58911/ProntoWeb/Reporte.aspx?ReportName=MapaArgentinaProcedenciaCartasPorte. Error Message:Cli 3
+__________________________
+
+Log Entry : 
+03/03/2017 12:46:02
+Error in: http://localhost:58911/ProntoWeb/Reporte.aspx?ReportName=MapaArgentinaProcedenciaCartasPorte. Error Message:Cli 1
+__________________________
+
+Log Entry : 
+03/03/2017 12:46:02
+Error in: http://localhost:58911/ProntoWeb/Reporte.aspx?ReportName=MapaArgentinaProcedenciaCartasPorte. Error Message:Cli 2
+__________________________
+
+Log Entry : 
+03/03/2017 12:46:02
+Error in: http://localhost:58911/ProntoWeb/Reporte.aspx?ReportName=MapaArgentinaProcedenciaCartasPorte. Error Message:Cli 3
+__________________________
+
+Log Entry : 
+03/03/2017 12:46:44
+Error in: http://localhost:58911/ProntoWeb/Reporte.aspx?ReportName=MapaArgentinaProcedenciaCartasPorte. Error Message:Cli 1
+__________________________
+
+Log Entry : 
+03/03/2017 12:46:45
+Error in: http://localhost:58911/ProntoWeb/Reporte.aspx?ReportName=MapaArgentinaProcedenciaCartasPorte. Error Message:Cli 2
+__________________________
+
+Log Entry : 
+03/03/2017 12:46:49
+Error in: http://localhost:58911/ProntoWeb/Reporte.aspx?ReportName=MapaArgentinaProcedenciaCartasPorte. Error Message:Cli 3
+__________________________
+
+Log Entry : 
+03/03/2017 12:47:06
+Error in: http://localhost:58911/ProntoWeb/Reporte.aspx?ReportName=Listado de Clientes incompletos. Error Message:Cli 1
+__________________________
+
+Log Entry : 
+03/03/2017 12:47:07
+Error in: http://localhost:58911/ProntoWeb/Reporte.aspx?ReportName=Listado de Clientes incompletos. Error Message:Cli 2
+__________________________
+
+Log Entry : 
+03/03/2017 12:47:07
+Error in: http://localhost:58911/ProntoWeb/Reporte.aspx?ReportName=Listado de Clientes incompletos. Error Message:Cli 3
+__________________________
