@@ -11899,10 +11899,14 @@ Public Class CartaDePorteManager
     Public Shared Function IdClienteEquivalenteDelIdVendedor(ByVal IdVendedor As Long, ByVal SC As String) As Long
         Try
 
+            If IdVendedor = 470 Then Return -1 'http://consultas.bdlconsultores.com.ar/Admin/VerConsultas1.php?recordid=32339
+
+
             Using db As New DemoProntoEntities(Auxiliares.FormatearConexParaEntityFramework(Encriptar(SC)))
 
 
                 '        buscar por cuit, y si no por razon social
+
 
                 Dim o = db.Vendedores.Find(IdVendedor)
                 Dim cuit = o.Cuit.Replace("-", "")
