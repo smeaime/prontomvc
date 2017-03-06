@@ -29,8 +29,23 @@
           <QueryParameter Name="@TonsDesde">
             <Value>=Parameters!TonsDesde.Value</Value>
           </QueryParameter>
+          <QueryParameter Name="@Producto">
+            <Value>=Parameters!Producto.Value</Value>
+          </QueryParameter>
+          <QueryParameter Name="@Puerto">
+            <Value>=Parameters!Puerto.Value</Value>
+          </QueryParameter>
+          <QueryParameter Name="@Modo">
+            <Value>=Parameters!Modo.Value</Value>
+          </QueryParameter>
           <QueryParameter Name="@TonsHasta">
             <Value>=Parameters!TonsHasta.Value</Value>
+          </QueryParameter>
+          <QueryParameter Name="@FechaDesde">
+            <Value>=Parameters!FechaDesde.Value</Value>
+          </QueryParameter>
+          <QueryParameter Name="@FechaHasta">
+            <Value>=Parameters!FechaHasta.Value</Value>
           </QueryParameter>
         </QueryParameters>
         <CommandText>select
@@ -49,15 +64,15 @@ from
 					NULL, 
 					-1,
 					 
--1,-1,-1,-1,-1,
+-1,-1,-1,-1,@Producto,
 
-	NULL, 
+					@Puerto, 
 					NULL, 
 					NULL,
-					'Ambas',
-					'2017-01-01 00:00:00',
+					@Modo,
+					@FechaDesde,
 
-					'2018-01-01 00:00:00',
+					@FechaHasta,
 					NULL, 
 					NULL,
 					 'FALSE',
@@ -80,8 +95,7 @@ from
 LEFT OUTER JOIN Localidades LOCORI ON CDP.Procedencia = LOCORI.IdLocalidad          
 LEFT OUTER JOIN Provincias PROVORI ON LOCORI.IdProvincia = PROVORI.IdProvincia           
 where 
-	fechadescarga between '20170101' and '20180101'
-	and procedencia is not null
+	procedencia is not null
 	and netoproc &gt; 0
 group by LOCORI.Nombre,PROVORI.Nombre
 
@@ -132,7 +146,7 @@ order by kilos desc</CommandText>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>tons</Value>
+                                  <Value>Toneladas</Value>
                                   <Style>
                                     <FontFamily>Tahoma</FontFamily>
                                     <FontSize>11pt</FontSize>
@@ -259,7 +273,7 @@ order by kilos desc</CommandText>
                           <Paragraph>
                             <TextRuns>
                               <TextRun>
-                                <Value>localidad</Value>
+                                <Value>Localidad</Value>
                                 <Style>
                                   <FontFamily>Tahoma</FontFamily>
                                   <FontSize>11pt</FontSize>
@@ -37812,7 +37826,7 @@ order by kilos desc</CommandText>
             </MapLayers>
             <MapTitles>
               <MapTitle Name="Title1">
-                <Text>Kilos por Procedencia</Text>
+                <Text>Mapa Comercial</Text>
                 <Angle>NaN</Angle>
                 <TextShadowOffset>0pt</TextShadowOffset>
                 <DockOutsideViewport>true</DockOutsideViewport>
@@ -38066,6 +38080,5 @@ order by kilos desc</CommandText>
     </ReportParameter>
   </ReportParameters>
   <rd:ReportUnitType>Mm</rd:ReportUnitType>
-  <rd:ReportServerUrl>http://bdlconsultores.sytes.net:10080/ReportServer</rd:ReportServerUrl>
   <rd:ReportID>61fdb02c-239c-40b0-9135-be7685d7778c</rd:ReportID>
 </Report>
