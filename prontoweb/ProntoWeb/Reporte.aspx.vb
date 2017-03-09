@@ -592,6 +592,17 @@ Namespace ProntoMVC.Reportes
                 End If
 
             ElseIf Me.Request.QueryString("ReportName") = "MapaArgentinaProcedenciaCartasPorte" Then
+
+                Dim p = BDLmasterPermisosManager.Fetch(ConexBDLmaster, Session(SESSIONPRONTO_UserId), BDLmasterPermisosManager.EntidadesPermisos.CDPs_InfGerenciales)
+
+
+                If Not p("PuedeLeer") Then
+                    MsgBoxAjaxAndRedirect(Me, "No tenés acceso a esta página", String.Format("Principal.aspx"))
+                    Exit Sub
+                End If
+
+
+
                 UpdatePanelResumen.Visible = False
 
                 ErrHandler2.WriteError("Cli 1")
