@@ -4672,6 +4672,48 @@ Adjunto un ejemplo que tiene cartas de porte de 8 entregadores que no son Willia
             Assert.IsFalse(FuncionesGenericasCSharp.CUITValido("30703539059"));
             Assert.IsTrue(FuncionesGenericasCSharp.CUITValido("30511355040"));
 
+
+
+
+            Assert.IsTrue (FuncionesGenericasCSharp.CUITValido("30-70914230-1"));
+            Assert.IsFalse(FuncionesGenericasCSharp.CUITValido("30703142301"));
+            Assert.IsFalse(FuncionesGenericasCSharp.CUITValido("30700142301"));
+            Assert.IsFalse(FuncionesGenericasCSharp.CUITValido("30-70814230-1"));
+
+
+
+//            ACA:
+//10-50012088-2
+//30 50012088-2
+      Assert.IsTrue (FuncionesGenericasCSharp.CUITValido("30-50012088-2"));
+            Assert.IsFalse(FuncionesGenericasCSharp.CUITValido("10-50012088-2"));
+       
+
+//NIDERA:
+//33 50673744 9
+//31506732449
+
+          Assert.IsFalse(FuncionesGenericasCSharp.CUITValido("31506732449"));
+            Assert.IsTrue(FuncionesGenericasCSharp.CUITValido("33 50673744 9"));
+//COMODITIES:
+//30 64087256 6
+
+            Assert.IsTrue(FuncionesGenericasCSharp.CUITValido("30 64087256 6"));
+
+//VICENTIN:
+//30600959629
+//30 50095962 9
+          Assert.IsFalse(FuncionesGenericasCSharp.CUITValido("30600959629"));
+            Assert.IsTrue(FuncionesGenericasCSharp.CUITValido("30 50095962 9"));
+
+//OLEAGINOSA MORENO:
+//33502232223
+
+          Assert.IsFalse(FuncionesGenericasCSharp.CUITValido("33502232223"));
+//BLD:
+//30703599053
+
+          Assert.IsFalse(FuncionesGenericasCSharp.CUITValido("30703599053"));
             // TENEMOS UN GANADOR!!!!!!!
 
 
