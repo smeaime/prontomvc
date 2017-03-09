@@ -843,7 +843,7 @@ Public Class CartaDePorteManager
 
 
 
-        Dim q = (From c In db.Clientes Where c.Cuit.Trim.Replace("-", "") = cuit.Trim.Replace("-", "")).FirstOrDefault()
+        Dim q = (From c In db.Clientes Where c.Cuit.Trim.Replace("-", "").Replace(" ", "") = cuit.Trim.Replace("-", "").Replace(" ", "")).FirstOrDefault()
 
 
 
@@ -859,6 +859,11 @@ Public Class CartaDePorteManager
 
                     'hay q guardarlo con guiones????? -sí!!!!!
                     q.Cuit = cuit
+
+
+                'http://consultas.bdlconsultores.com.ar/Admin/verConsultas1.php?recordid=32254
+                'Los clientes que da de alta el ocr, no se pueden identificar en algun lugar como "cliente provisorio" para que dsp completemos los datos y pasen a "cliente activo".
+
 
                     'acá había un insertonsubmit
                     db.Clientes.Add(q)
@@ -903,9 +908,7 @@ Public Class CartaDePorteManager
         'If (Not CartaDePorteManager.VerfCuit(cuit)) Then Return 0
 
 
-        Dim q = (From c In db.Vendedores Where c.Cuit.Trim.Replace("-", "") = cuit.Trim.Replace("-", "")).FirstOrDefault()
-
-
+        Dim q = (From c In db.Vendedores Where c.Cuit.Trim.Replace("-", "").Replace(" ", "") = cuit.Trim.Replace("-", "").Replace(" ", "")).FirstOrDefault()
 
 
         If q Is Nothing Then
