@@ -1824,7 +1824,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 },
 
 {
-    name: 'ProcedenciaDesc', index: 'Procedencia', align: 'left', width: 100, hidden: false, editable: false, edittype: 'text', sortable: false
+    name: 'ProcedenciaDesc', index: 'ProcedenciaDesc', align: 'left', width: 100, hidden: false, editable: false, edittype: 'text', sortable: false
 
 
 , searchoptions: {

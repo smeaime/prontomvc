@@ -17293,7 +17293,12 @@ Namespace Pronto.ERP.Bll
                     End Try
 
 
+                    'bnmb,mbm,b,mnb,
 
+                    'estamos teniendo un error en la generación de los archivos con respecto al vendedor, las Carta de Porte 
+                    'entran con un vendedor erróneo (100001 ACA EXPORTACION), esto se debe a que la segunda columna correspondiente
+                    ' a los vendedores no tienen el mismo código que la primer columna, deberíamos corregir esto,
+                    '  dejando el mismo CUIT tanto en la primera como en la segunda columna.
 
 
 
@@ -22878,11 +22883,16 @@ Namespace Pronto.ERP.Bll
 
 
 
-                sb &= "&" & ""
-                sb &= "&" & dr("Pat. Chasis").ToString
-                sb &= "&" & dr("Pat. Acoplado").ToString
+                sb &= "&" & "" '47
+                sb &= "&" & dr("Pat. Chasis").ToString '48
+                sb &= "&" & dr("Pat. Acoplado").ToString '49
 
+                'http://consultas.bdlconsultores.com.ar/Admin/verConsultas1.php?recordid=34410
+                'Estamos teniendo inconvenientes para importar el txt de operativos por SINCRO. Para tomarlo en nuestro sistema necesitamos que el nro de vagón se informe en la columna 52 y el txt solo tiene 48. Podrás solicitar que nos informen de esta manera así podemos procesar los operativos por SINCRO y no en forma manual como lo venimos llevando hoy en día.-
 
+                sb &= "&" & "" '50
+                sb &= "&" & "" '51
+                sb &= "&" & iisNull(dr("SubNumeroVagon"), "0")
 
                 'sb &= "&" & dr("Contrato").ToString.PadLeft(14) '
                 'sb &= "&" & dr("Contrato").ToString.PadLeft(14)
