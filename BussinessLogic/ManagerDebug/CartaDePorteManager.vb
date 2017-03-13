@@ -676,7 +676,7 @@ Public Class CartaDePorteManager
         Dim db As DemoProntoEntities = New DemoProntoEntities(Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC)))
 
 
-        Dim q = (From c In db.Transportistas Where c.Cuit.Trim.Replace("-", "") = cuit.Trim.Replace("-", "")).FirstOrDefault()
+        Dim q = (From c In db.Transportistas Where c.Cuit.Trim.Replace("-", "").Replace(" ", "")  = cuit.Trim.Replace("-", "").Replace(" ", "") ).FirstOrDefault()
 
 
 
@@ -718,7 +718,7 @@ Public Class CartaDePorteManager
         Dim db As DemoProntoEntities = New DemoProntoEntities(Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC)))
 
 
-        Dim q = (From c In db.Choferes Where c.Cuil.Trim.Replace("-", "") = cuit.Trim.Replace("-", "")).FirstOrDefault()
+        Dim q = (From c In db.Choferes Where c.Cuil.Trim.Replace("-", "").Replace(" ", "")  = cuit.Trim.Replace("-", "").Replace(" ", "") ).FirstOrDefault()
 
 
 
@@ -772,7 +772,7 @@ Public Class CartaDePorteManager
                                                                     i.IdLocalidad = CInt(dest.IdLocalidad)
                                                                         ).DefaultIfEmpty()
                      Select dest, locdes
-                     Where dest.CUIT.Trim.Replace("-", "") = cuit.Trim.Replace("-", "")).ToList()
+                     Where dest.CUIT.Trim.Replace("-", "").Replace(" ", "")  = cuit.Trim.Replace("-", "").Replace(" ", "") ).ToList()
 
 
 
