@@ -48,6 +48,9 @@ using System.Data;
 
 using System.ServiceModel;
 
+using System.Data;
+
+
 
 namespace Fenton.Example
 {
@@ -4324,7 +4327,7 @@ Formato localidad-provincia	destination	x
                                                             "IdCartaDePorte", "desc", 1, 999999, true, filters, db, ref totalrecords,
 
                                                             db.fSQL_GetDataTableFiltradoYPaginado(
-                                                            0, 9999999,estado, "", -1, -1,
+                                                            0, 9999999, estado, "", -1, -1,
                                                             -1, -1, -1, -1, -1,
                                                           iddestino, 0, "Ambas"
                                                            , FechaDesde, FechaHasta,
@@ -4476,6 +4479,20 @@ Formato localidad-provincia	destination	x
 
 
 
-    }
-}
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+    }
+
+}

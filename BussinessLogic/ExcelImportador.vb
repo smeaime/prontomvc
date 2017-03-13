@@ -1917,8 +1917,32 @@ Public Class ExcelImportadorManager
     End Function
 
 
+
+
+
+
     Public Shared Function UrenportExcelToDataset(ByVal pFileName As String, SC As String) As Data.DataSet
-        Dim ds = GetExcel(pFileName, 1)
+
+        'loguear apertura del excel q puede fallar
+        Dim ds As DataSet
+        Try
+            ds = GetExcel(pFileName, 1)
+
+        Catch ex As Exception
+            ErrHandler2.WriteError("Error al abrir el excel. " + ex.ToString)
+
+            Throw
+        End Try
+
+        'y usando getexcel2 habria menos problemas (q no usa interop)?
+
+        'Microsoft does not currently recommend, and does not support, Automation of Microsoft Office applications from any unattended, non-interactive client application or component (including ASP, ASP.NET, DCOM, and NT Services), because Office may exhibit unstable behavior and/or deadlock when Office is run in this environment."
+
+
+        'FuncionesGenericasCSharp.GetDataTableFromExcel()
+
+        'No puedo hacer un getexcel3 que use el eeplus?
+
 
 
         Dim db As DemoProntoEntities = New DemoProntoEntities(Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC)))
@@ -1958,6 +1982,9 @@ Public Class ExcelImportadorManager
                 'End Select
 
 
+
+
+                'loguear cual está importando  -cada renglon???? me la pasaria logeando.....
 
                 Dim cpnumero As Long = Val(r(0))
 
@@ -4290,7 +4317,11 @@ Public Class ExcelImportadorManager
                 oWB = oWBs.Open(fileName, Missing.Value, Missing.Value, _
     Missing.Value, Missing.Value, Missing.Value, Missing.Value, Missing.Value, _
     Missing.Value, Missing.Value, Missing.Value, Missing.Value, Missing.Value, _
-    Missing.Value, Missing.Value)
+    Missing.Value, Excel.XlCorruptLoad.xlExtractData)
+
+                'http://stackoverflow.com/questions/9062823/exception-when-opening-excel-file-in-c-sharp-using-interop?noredirect=1&lq=1
+
+
             Catch ex As Exception
 
                 'problemas al abrir T6
@@ -4321,7 +4352,7 @@ Public Class ExcelImportadorManager
                 '            ResetCurrentCulture()
                 '        End Try
 
-                ErrHandler2.WriteError("No pudo extraer el excel. INCREIBLE: en 2008, en el directorio  C:\Windows\SysWOW64\config\systemprofile\ hay que crear una carpeta Desktop!!!!!!!!!!!!!!!!!!!!!  " + ex.ToString)
+                ErrHandler2.WriteError(fileName + "  No pudo extraer el excel. INCREIBLE: en 2008, en el directorio  C:\Windows\SysWOW64\config\systemprofile\ hay que crear una carpeta Desktop!!!!!!!!!!!!!!!!!!!!!  " + ex.ToString)
 
 
             End Try
