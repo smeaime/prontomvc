@@ -374,27 +374,27 @@ Partial Class ArchivosLosGrobo
                     ImportarEstablecimientosLosGrobo(ds, HFSC.Value)
                 ElseIf tipo.Text = "partidos ypf" Then
                     Dim ds As New DataSet
-                    Dim dt = getExcel2(nombrenuevo, "Partidos ONCCA")
+                    Dim dt = ExcelImportadorManager.GetExcel2(nombrenuevo, "Partidos ONCCA")
                     ds.Tables.Add(dt.Copy)
                     ImportarProvinciasONCCA(ds, HFSC.Value)
                 ElseIf tipo.Text = "localidades ypf" Then
                     Dim ds As New DataSet
-                    Dim dt = getExcel2(nombrenuevo, "Localidades ONCCA")
+                    Dim dt = ExcelImportadorManager.GetExcel2(nombrenuevo, "Localidades ONCCA")
                     ds.Tables.Add(dt.Copy)
                     ImportarLocalidadesONCCA(ds, HFSC.Value)
                 ElseIf tipo.Text = "localidades bld afip" Then
                     Dim ds As New DataSet
-                    Dim dt = getExcel2(nombrenuevo, "Localidades BLD + Relcion AFIP")
+                    Dim dt = ExcelImportadorManager.GetExcel2(nombrenuevo, "Localidades BLD + Relcion AFIP")
                     ds.Tables.Add(dt.Copy)
                     ImportarLocalidadesBLDafip(ds, HFSC.Value)
                 ElseIf tipo.Text = "centros ypf" Then
                     Dim ds As New DataSet
-                    Dim dt = getExcel2(nombrenuevo, "Hoja1")
+                    Dim dt = ExcelImportadorManager.GetExcel2(nombrenuevo, "Hoja1")
                     ds.Tables.Add(dt.Copy)
                     ImportarCentros(ds, HFSC.Value)
                 ElseIf tipo.Text = "establecimientos grobo" Then
                     Dim ds As New DataSet
-                    Dim dt = getExcel2(nombrenuevo, "bwF1C")
+                    Dim dt = ExcelImportadorManager.GetExcel2(nombrenuevo, "bwF1C")
                     ds.Tables.Add(dt.Copy)
                     ImportarEstablecimientosLosGrobo(ds, HFSC.Value)
                 Else
@@ -426,7 +426,7 @@ Partial Class ArchivosLosGrobo
 
     Protected Sub Button7_Click(sender As Object, e As System.EventArgs) Handles Button7.Click
         Dim ds As New DataSet
-        Dim dt = getExcel2("C:\Users\Mariano\Desktop\ypf\codigos oncca.xls", "Partidos ONCCA")
+        Dim dt = ExcelImportadorManager.GetExcel2("C:\Users\Mariano\Desktop\ypf\codigos oncca.xls", "Partidos ONCCA")
         ds.Tables.Add(dt.Copy)
         ImportarProvinciasONCCA(ds, HFSC.Value)
     End Sub

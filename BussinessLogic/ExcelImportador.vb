@@ -1921,12 +1921,18 @@ Public Class ExcelImportadorManager
 
 
 
+
+
+
     Public Shared Function UrenportExcelToDataset(ByVal pFileName As String, SC As String) As Data.DataSet
 
         'loguear apertura del excel q puede fallar
         Dim ds As DataSet
         Try
-            ds = GetExcel(pFileName, 1)
+            'ds = GetExcel(pFileName, 1)
+
+            ds = GetExcel2(pFileName).DataSet
+
 
         Catch ex As Exception
             ErrHandler2.WriteError("Error al abrir el excel. " + ex.ToString)
@@ -2010,32 +2016,62 @@ Public Class ExcelImportadorManager
 
 
 
+                For Each c In ds.Tables(0).Columns
+                    If IsDBNull(r(c)) Then
+                        Try
+                            r(c) = ""
+                        Catch ex As Exception
+                            r(c) = 0
+                        End Try
+                    End If
+
+                Next
+
+
+
                 With myCartaDePorte
+
+
+
+                    If .SituacionAntesDeEditarManualmente = 1 And .Situacion = 0 And BuscarSituacionId(r(2)) = 1 Then
+                        '+ Si se modifica manualmente una carta de porte cambiando el estado de "Demorado" a "Autorizado", la situación de la carta de porte no deberá volver a "Demorado" si se vuelve a importar la información y vuelve a venir como demorado
+
+                    ElseIf .SituacionAntesDeEditarManualmente = 5 And .Situacion = 6 And BuscarSituacionId(r(2)) = 5 Then
+                        '+ Si se modifica manualmente una carta de porte cambiando el estado de "Rechazado" a "Desviado", la situación de la carta de porte no deberá volver a "Rechazado" si se vuelve a importar la información y vuelve a venir como demorado
+
+                    ElseIf .Situacion = 0 Then
+                        'correccion: ahora prohibo la actualizacion de autorizadas aun si son automaticas
+                        'http://consultas.bdlconsultores.com.ar/Admin/verConsultas1.php?recordid=32327
+
+                    Else
+
+                        '+ Si la carta de porte fue editada manualmente no volver a importar los datos de la carta de porte. SI seguir importando los datos correspondientes a la situación del camion (Situación / Observaciones)
+                        'correccion: ahora prohibo la actualizacion de autorizadas aun si son automaticas
+
+                        Dim temp = .Situacion
+
+                        If actua(.Situacion, BuscarSituacionId(r(2))) Then log += "Situacion; "
+                        If If(.Situacion, -1) = -1 Then
+                            If actua(.Situacion, BuscarSituacionId(DiccionarioEquivalenciasManager.BuscarEquivalencia(SC, r(2)))) Then log += "Situacion; "
+                        End If
+
+
+                        If actua(.ObservacionesSituacion, r(35)) Then log += "ObservacionesSituacion; "
+                        .FechaActualizacionAutomatica = DateTime.Now
+                    End If
+                    
+
+
+
+
+
+
+
+
+
 
                     Dim bEditadaManual As Boolean = (If(.FechaModificacion, DateTime.MinValue) >
                                                             If(.FechaActualizacionAutomatica, DateTime.MinValue).AddSeconds(60))
-
-                    '+ Si la carta de porte fue editada manualmente no volver a importar los datos de la carta de porte. SI seguir importando los datos correspondientes a la situación del camion (Situación / Observaciones)
-
-                    If bEditadaManual Then
-                        '+ Si se modifica manualmente una carta de porte cambiando el estado de "Demorado" a "Autorizado", la situación de la carta de porte no deberá volver a "Demorado" si se vuelve a importar la información y vuelve a venir como demorado
-                        If .SituacionAntesDeEditarManualmente = 1 And .Situacion = 0 And BuscarSituacionId(r(2)) = 1 Then Continue For
-                        '+ Si se modifica manualmente una carta de porte cambiando el estado de "Rechazado" a "Desviado", la situación de la carta de porte no deberá volver a "Rechazado" si se vuelve a importar la información y vuelve a venir como demorado
-                        If .SituacionAntesDeEditarManualmente = 5 And .Situacion = 6 And BuscarSituacionId(r(2)) = 5 Then Continue For
-                    End If
-
-
-                    If actua(.Situacion, BuscarSituacionId(r(2))) Then log += "Situacion; "
-                    If If(.Situacion, -1) = -1 Then
-                        If actua(.Situacion, BuscarSituacionId(DiccionarioEquivalenciasManager.BuscarEquivalencia(SC, r(2)))) Then log += "Situacion; "
-                    End If
-
-
-                    If actua(.ObservacionesSituacion, r(35)) Then log += "ObservacionesSituacion; "
-                    .FechaActualizacionAutomatica = DateTime.Now
-
-
-
 
 
 
@@ -2121,7 +2157,7 @@ Public Class ExcelImportadorManager
 
 
 
-                        Dim proc = BuscaIdLocalidadPreciso(r(24), SC)
+                        Dim proc = BuscaIdLocalidadPreciso(R(24), SC)
                         If proc = -1 Then
                             proc = BuscaIdLocalidadPreciso(DiccionarioEquivalenciasManager.BuscarEquivalencia(SC, r(24)), SC)
                         End If
@@ -2181,15 +2217,22 @@ Public Class ExcelImportadorManager
 
                         Try
                             'If If(.FechaDescarga, DateTime.MinValue) = DateTime.MinValue Then .FechaDescarga = .FechaArribo 'corregir: estoy truchando esto para poder incluir las q no fueron descargadas en el filtro de fecha que está ahora en la jqgrid de situacion
-
-                            If r(28) <> "" Then
+                            Try
+                                If r(28) <> "" Then
+                                    If actua(.FechaDescarga, DateTime.Parse(iisValidSqlDate(Left(r(28), 10)))) Then log += "FechaDescarga; "
+                                End If
+                            Catch ex3 As Exception
                                 If actua(.FechaDescarga, DateTime.Parse(iisValidSqlDate(Left(r(28), 10)))) Then log += "FechaDescarga; "
-                            End If
-                            '.FechaDescarga = iisValidSqlDate(r(28))
+                            End Try
 
-                            If r(39) <> "" Then
+                            '.FechaDescarga = iisValidSqlDate(r(28))
+                            Try
+                                If r(39) <> "" Then
+                                    If actua(.FechaDeCarga, DateTime.Parse(iisValidSqlDate(Left(r(39), 10)))) Then log += "Fecha Carga; "
+                                End If
+                            Catch ex2 As Exception
                                 If actua(.FechaDeCarga, DateTime.Parse(iisValidSqlDate(Left(r(39), 10)))) Then log += "Fecha Carga; "
-                            End If
+                            End Try
                             '.FechaDeCarga = iisValidSqlDate(r(39))
 
                             If r(40) <> "" Then
@@ -4271,6 +4314,102 @@ Public Class ExcelImportadorManager
         '/////////////////////////////////////////////////
         '/////////////////////////////////////////////////
 
+
+    End Function
+
+
+
+    Public Shared Function GetExcel2(ByVal fileName As String, Optional ByVal workSheetName As String = "") As DataTable
+
+
+
+        'http://stackoverflow.com/questions/9943065/the-microsoft-ace-oledb-12-0-provider-is-not-registered-on-the-local-machine
+        'http://stackoverflow.com/questions/9943065/the-microsoft-ace-oledb-12-0-provider-is-not-registered-on-the-local-machine
+        'http://stackoverflow.com/questions/9943065/the-microsoft-ace-oledb-12-0-provider-is-not-registered-on-the-local-machine
+
+        'http://stackoverflow.com/questions/15828/reading-excel-files-from-c-sharp
+        'Dim connectionString As String = String.Format("Provider=Microsoft.Jet.OLEDB.4.0; data source={0}; Extended Properties=Excel 8.0;", fileName)
+
+        'http://social.msdn.microsoft.com/Forums/es/vbes/thread/b62c5037-0695-445b-97ba-f573073ea840
+        Dim connectionString As String = String.Format("Provider=Microsoft.ACE.OLEDB.12.0; data source={0}; Extended Properties=Excel 8.0;", fileName)
+
+
+
+
+
+        Using conn As OleDbConnection = New OleDbConnection(connectionString)
+
+
+            conn.Open()
+
+            If workSheetName = "" Then
+                Dim dtSchema = conn.GetOleDbSchemaTable(OleDbSchemaGuid.Tables, New Object() {Nothing, Nothing, Nothing, "TABLE"})
+                workSheetName = dtSchema.Rows(0)("TABLE_NAME")
+                workSheetName = workSheetName.Replace("$", "").Replace("'", "")
+            End If
+
+
+
+
+
+            'Connection = new OleDbConnection(string.Format((Spreadsheet.EndsWith(".xlsx") ?
+            '          "Provider=Microsoft.ACE.OLEDB.12.0;Data Source={0}; Extended Properties=Excel 12.0;" :
+            '          "Provider=Microsoft.Jet.OLEDB.4.0; data source={0}; Extended Properties=Excel 8.0;"), Spreadsheet));
+
+
+
+            Try
+
+
+                Dim adapter = New Data.OleDb.OleDbDataAdapter("SELECT * FROM [" & workSheetName & "$]", conn)
+                Dim ds As DataSet = New DataSet()
+
+                adapter.Fill(ds, "anyNameHere")
+
+                Dim data = ds.Tables("anyNameHere")
+                Return data
+            Catch ex As Exception
+                MandarMailDeError("error getExcel2. Existe esa hoja? Si es el 'OleDbException Unspecified error', REINICIÁ el IIS, parece que es por eso.   Es por usar impersonation?  Uso Jet o ACE?????   archivo:" & fileName & "," & workSheetName & "                " & ex.ToString)
+                'error al hacer el fill? Uso Jet o ACE?????
+
+
+                'My(experience)  In production servers the OleDb components loaded on 
+                'ASP.NET worker process seems to missfunction ocassionally. Restarting the IIS the problem will go away.
+                '---------------------------------------------------
+
+                '        Error Message : System.Data.OleDb.OleDbException()
+                'Unspecified error
+                '   at System.Data.OleDb.OleDbConnectionInternal..ctor(OleDbConnectionString constr, OleDbConnection connection)
+                '   at System.Data.OleDb.OleDbConnectionFactory.CreateConnection(DbConnectionOptions options, Object poolGroupProviderInfo, DbConnectionPool pool, DbConnection owningObject)
+
+
+
+                'My(experience)  In production servers the OleDb components loaded on 
+                'ASP.NET worker process seems to missfunction ocassionally. Restarting the IIS the problem will go away.
+                '---------------------------------------------------
+
+                'Efectivamente! reinicie el iis y ahora anda. Pero es tambien porque antes ya habia cambiado el impersonate a false???
+                'http://forums.asp.net/t/314899.aspx?System+Data+OleDb+OleDbException+Unspecified+error
+                'solved. this has to do with impersonation. in web.config, i set impersonate back to false and it works. i read 
+                'in another article on this forum that because when .net reads an excel file, it creats a temp folder to store the data
+                ', and that temp folder can only be access by the ASPNET account. so if you impersonate as another user on the computer / network and 
+                '    tried to use ASPNET to read the data in the excel file, you will not be able to.
+                '---------------------------------------------------
+
+                '            i think the point here is that the asp.net user are not able to create files
+                'in the temporary folder!
+                'you can go to the temp folder ( ex. Document settings\servername\aspnet\)
+                'and there on the temp folder give the full right access for the asp.net
+                'user. i hope this may solve the problem
+                '--------------------------
+                'Changing (actually inserting) the <identity impersonate="false" /> has fixed it.
+                '------------------------------------
+
+
+
+                Throw
+            End Try
+        End Using
 
     End Function
 

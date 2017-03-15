@@ -80,6 +80,10 @@ Partial Class SituacionCalidad
             BindTypeDropDown()
             refrescaPeriodo()
 
+            cmbPeriodo.Text = "Personalizar"
+            txtFechaDesde.Text = DateAdd(DateInterval.Day, -2, Today)
+            txtFechaHasta.Text = Today
+            cmbEstado.Enabled = False
 
 
             BloqueosDeEdicion()
@@ -103,7 +107,7 @@ Partial Class SituacionCalidad
 
 
 
-
+asdasdasd
 
 
 

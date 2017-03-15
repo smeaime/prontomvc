@@ -631,10 +631,19 @@ FCESupport\FCESupportImpl.h, 42.
             ClassFlexicapture.Log(idthread + "Se apagó el hilo de pegatinas");
 
 
-
-
-
         }
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -697,6 +706,22 @@ FCESupport\FCESupportImpl.h, 42.
             return resultado;
 
         }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
