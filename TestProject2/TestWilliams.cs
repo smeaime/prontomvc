@@ -840,6 +840,29 @@ namespace ProntoMVC.Tests
 
 
 
+        [TestMethod]
+        public void ImportacionDeExcel()
+        {
+            string ArchivoExcelDestino = @"C:\Users\Administrador\Desktop\lala.xls";
+            //string archivoExcel = @"C:\Users\Administrador\Documents\bdl\pronto\docstest\Urenport_ 953-29122016.xlsx";
+            //string archivoExcel = @"C:\Users\Administrador\Documents\bdl\pronto\docstest\Posicion-161229-0945.xls"
+
+
+            var ds3 = ExcelImportadorManager.GetExcel2(ArchivoExcelDestino);
+            var ds4 = ExcelImportadorManager.GetExcel2(@"C:\Users\Administrador\Documents\bdl\pronto\docstest\Urenport_ 953-29122016.xlsx");
+            var ds5 = ExcelImportadorManager.GetExcel2(@"C:\Users\Administrador\Documents\bdl\pronto\docstest\Posicion-161229-0945.xls");
+
+            var dt1 = FuncionesGenericasCSharp.GetExcel3_XLSX_EEPLUS(ArchivoExcelDestino);
+
+            var ds2 = ExcelImportadorManager.GetExcel(ArchivoExcelDestino);
+
+
+
+        }
+
+
+
+
 
         [TestMethod]
         public void InformeMapaEstrategico_31206()
@@ -1259,6 +1282,33 @@ La interface será procesa por Syngenta y si la misma no puede ser procesada cor
         }
 
 
+
+        [TestMethod]
+        public void Urenport_32235_conotroarchivo()
+        {
+
+            string archivoExcel = @"C:\Users\Administrador\Documents\bdl\pronto\docstest\Posicion-161229-0945.xls";
+
+
+            //explota
+
+            string ms = "";
+
+            int m_IdMaestro = 0;
+            Pronto.ERP.BO.CartaDePorte carta;
+
+
+            string log = "";
+            //hay que pasar el formato como parametro 
+            ExcelImportadorManager.FormatearExcelImportadoEnDLL(ref m_IdMaestro, archivoExcel,
+                                    LogicaImportador.FormatosDeExcel.Urenport, SC, 0, ref log, "", 0, "");
+
+            var dt = LogicaImportador.TraerExcelDeBase(SC, ref m_IdMaestro);
+
+        }
+
+
+
         [TestMethod]
         public void Urenport_32235()
         {
@@ -1266,6 +1316,7 @@ La interface será procesa por Syngenta y si la misma no puede ser procesada cor
             //string archivoExcel = @"C:\Users\Administrador\Documents\bdl\pronto\docstest\Urenport_ 953-29122016.xlsx";
             string archivoExcel = @"C:\Users\Administrador\Documents\bdl\pronto\docstest\Urenport_1450-23022017.xls";
 
+            //string archivoExcel = @"C:\Users\Administrador\Documents\bdl\pronto\docstest\Posicion-161229-0945.xls"
 
 
             //explota
@@ -4675,45 +4726,45 @@ Adjunto un ejemplo que tiene cartas de porte de 8 entregadores que no son Willia
 
 
 
-            Assert.IsTrue (FuncionesGenericasCSharp.CUITValido("30-70914230-1"));
+            Assert.IsTrue(FuncionesGenericasCSharp.CUITValido("30-70914230-1"));
             Assert.IsFalse(FuncionesGenericasCSharp.CUITValido("30703142301"));
             Assert.IsFalse(FuncionesGenericasCSharp.CUITValido("30700142301"));
             Assert.IsFalse(FuncionesGenericasCSharp.CUITValido("30-70814230-1"));
 
 
 
-//            ACA:
-//10-50012088-2
-//30 50012088-2
-      Assert.IsTrue (FuncionesGenericasCSharp.CUITValido("30-50012088-2"));
+            //            ACA:
+            //10-50012088-2
+            //30 50012088-2
+            Assert.IsTrue(FuncionesGenericasCSharp.CUITValido("30-50012088-2"));
             Assert.IsFalse(FuncionesGenericasCSharp.CUITValido("10-50012088-2"));
-       
 
-//NIDERA:
-//33 50673744 9
-//31506732449
 
-          Assert.IsFalse(FuncionesGenericasCSharp.CUITValido("31506732449"));
+            //NIDERA:
+            //33 50673744 9
+            //31506732449
+
+            Assert.IsFalse(FuncionesGenericasCSharp.CUITValido("31506732449"));
             Assert.IsTrue(FuncionesGenericasCSharp.CUITValido("33 50673744 9"));
-//COMODITIES:
-//30 64087256 6
+            //COMODITIES:
+            //30 64087256 6
 
             Assert.IsTrue(FuncionesGenericasCSharp.CUITValido("30 64087256 6"));
 
-//VICENTIN:
-//30600959629
-//30 50095962 9
-          Assert.IsFalse(FuncionesGenericasCSharp.CUITValido("30600959629"));
+            //VICENTIN:
+            //30600959629
+            //30 50095962 9
+            Assert.IsFalse(FuncionesGenericasCSharp.CUITValido("30600959629"));
             Assert.IsTrue(FuncionesGenericasCSharp.CUITValido("30 50095962 9"));
 
-//OLEAGINOSA MORENO:
-//33502232223
+            //OLEAGINOSA MORENO:
+            //33502232223
 
-          Assert.IsFalse(FuncionesGenericasCSharp.CUITValido("33502232223"));
-//BLD:
-//30703599053
+            Assert.IsFalse(FuncionesGenericasCSharp.CUITValido("33502232223"));
+            //BLD:
+            //30703599053
 
-          Assert.IsFalse(FuncionesGenericasCSharp.CUITValido("30703599053"));
+            Assert.IsFalse(FuncionesGenericasCSharp.CUITValido("30703599053"));
             // TENEMOS UN GANADOR!!!!!!!
 
 
