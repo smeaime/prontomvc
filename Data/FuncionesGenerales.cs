@@ -37,8 +37,10 @@ namespace ProntoMVC.Data
 
 
                 // http://stackoverflow.com/questions/13396604/excel-to-datatable-using-epplus-excel-locked-for-editing
-        public static DataTable GetDataTableFromExcel(string path, bool hasHeader = true)
+        public static DataTable GetExcel3_XLSX_EEPLUS(string path, bool hasHeader = true)
         {
+
+
             using (var pck = new OfficeOpenXml.ExcelPackage())
             {
                 using (var stream = File.OpenRead(path))
@@ -49,7 +51,7 @@ namespace ProntoMVC.Data
                 DataTable tbl = new DataTable();
                 foreach (var firstRowCell in ws.Cells[1, 1, 1, ws.Dimension.End.Column])
                 {
-                    tbl.Columns.Add(hasHeader ? firstRowCell.Text : string.Format("Column {0}", firstRowCell.Start.Column));
+                    tbl.Columns.Add(hasHeader ? firstRowCell.Text : string.Format("column{0}", firstRowCell.Start.Column));
                 }
                 var startRow = hasHeader ? 2 : 1;
                 for (int rowNum = startRow; rowNum <= ws.Dimension.End.Row; rowNum++)

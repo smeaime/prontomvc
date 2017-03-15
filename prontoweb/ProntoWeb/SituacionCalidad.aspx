@@ -90,7 +90,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                         <td class="EncabezadoCell" style="width: 160px; height: 18px;">Estado</td>
                         <td class="" style="width: 400px; height: 18px;">
                             <asp:DropDownList ID="cmbEstado" runat="server" Style="text-align: right; margin-left: 0px;"
-                                CssClass="CssCombo" ToolTip="Estado de la carta de porte" Font-Size="Small" Height="22px" Width="300px" Enabled="false">
+                                CssClass="CssCombo" ToolTip="Estado de la carta de porte" Font-Size="Small" Height="22px" Width="350px" Enabled="false">
                                 <%--dejo el combito deshablitado porque las funciones no tienen todavia el parametro de "estado", estan harcodeadas en "11" --%>
 
                                 <asp:ListItem Text="DESCARGAS de hoy + POSICIONES filtradas" Value="DescargasDeHoyMasTodasLasPosicionesEnRangoFecha"
