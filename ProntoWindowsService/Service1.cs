@@ -64,6 +64,13 @@ namespace ProntoWindowsService
         {
 
 
+            // matar procesos FCEngine huerfanos
+            foreach (var process in Process.GetProcessesByName("FCEngine"))
+            {
+                process.Kill();
+            }
+
+
             // create the manual reset event and
             // set it to an initial state of unsignaled
             m_shutdownEvent = new ManualResetEvent(false);
@@ -273,6 +280,11 @@ namespace ProntoWindowsService
 
                     try
                     {
+                        if (idthread == "")
+                        {
+                            throw new System.Runtime.InteropServices.COMException();
+                        }
+
 
 
                         if ((bSignaled == true && !Debugger.IsAttached) || bForzarShutdown) break;
@@ -366,10 +378,48 @@ namespace ProntoWindowsService
                         ClassFlexicapture.unloadEngine(ref engine, ref engineLoader);
                         processor = null;
 
-                        ClassFlexicapture.IniciaMotor(ref engine, ref  engineLoader, ref  processor, plantilla); // explota en loadengine
-                        //cuantas veces debo probar de nuevo?
 
-                        ClassFlexicapture.Log(idthread + "funciona?");
+                        bool exito = false;
+                        for (int n = 0; n < 800; n++)
+                        {
+
+                            ClassFlexicapture.Log(idthread + "Reconexion intento n°" + n.ToString());
+
+
+                            try
+                            {
+                                ClassFlexicapture.IniciaMotor(ref engine, ref  engineLoader, ref  processor, plantilla); // explota en loadengine
+                                //cuantas veces debo probar de nuevo?
+
+                                ClassFlexicapture.Log(idthread + "Reconectó al intento n°" + n.ToString());
+
+                                exito = true;
+
+                                break;
+                            }
+                            catch (Exception ex4)
+                            {
+
+                                ClassFlexicapture.Log(ex4.ToString());
+                            }
+
+
+                            System.Threading.Thread.Sleep(1000 * 60); //espero un minuto
+
+                        }
+
+                        if (!exito)
+                        {
+
+                            ClassFlexicapture.Log(idthread + " no se pudo reconectar");
+                            return;
+                        }
+
+
+
+
+
+                        //ClassFlexicapture.Log(idthread + "funciona?");
 
                     }
 
@@ -383,7 +433,7 @@ namespace ProntoWindowsService
                     }
                     finally
                     {
-                        ClassFlexicapture.Log(idthread + " se retira");
+                        //ClassFlexicapture.Log(idthread + " se retira");
                     }
 
 
@@ -419,6 +469,11 @@ namespace ProntoWindowsService
 
         }
 
+
+        public static void ThrowAnException(string message)
+        {
+            throw new ApplicationException(message);
+        }
 
 
 

@@ -19,7 +19,7 @@ Imports System.Web.Security
 Imports System.Xml
 
 Imports System.Reflection
-Imports Excel = Microsoft.Office.Interop.Excel
+Imports ExcelOffice = Microsoft.Office.Interop.Excel
 Imports Word = Microsoft.Office.Interop.Word
 Imports System.IO
 
@@ -211,15 +211,15 @@ Public Module ProntoFuncionesUIWeb
         'AUTOMATION, OOXML, EPPLUS, qué??????????????
 
 
-        Dim oXL As Excel.Application
-        Dim oWB As Excel.Workbook
-        Dim oSheet As Excel.Worksheet
-        Dim oRng As Excel.Range
-        Dim oWBs As Excel.Workbooks
+        Dim oXL As ExcelOffice.Application
+        Dim oWB As ExcelOffice.Workbook
+        Dim oSheet As ExcelOffice.Worksheet
+        Dim oRng As ExcelOffice.Range
+        Dim oWBs As ExcelOffice.Workbooks
 
         Try
             '  creat a Application object
-            oXL = New Excel.ApplicationClass()
+            oXL = New ExcelOffice.ApplicationClass()
             '   get   WorkBook  object
             oWBs = oXL.Workbooks
 
@@ -255,14 +255,14 @@ Public Module ProntoFuncionesUIWeb
             End Try
 
             'dejé de usar .Sheets
-            oSheet = CType(oWB.Worksheets(SheetNumero), Microsoft.Office.Interop.Excel.Worksheet)
+            oSheet = CType(oWB.Worksheets(SheetNumero), ExcelOffice.Worksheet)
             '   get   WorkSheet object
             'Try
             '    'dejé de usar .Sheets 'http://stackoverflow.com/questions/2695229/why-cant-set-cast-an-object-from-excel-interop
-            '    oSheet = CType(oWB.Sheets(SheetNumero), Microsoft.Office.Interop.Excel.Worksheet)
+            '    oSheet = CType(oWB.Sheets(SheetNumero), Microsoft.Office.Interop.ExcelOffice.Worksheet)
             'Catch ex As Exception
             '    'http://stackoverflow.com/questions/2695229/why-cant-set-cast-an-object-from-excel-interop
-            '    oSheet = CType(oWB.Worksheets(SheetNumero), Microsoft.Office.Interop.Excel.Worksheet)
+            '    oSheet = CType(oWB.Worksheets(SheetNumero), Microsoft.Office.Interop.ExcelOffice.Worksheet)
             'End Try
 
 
@@ -296,7 +296,7 @@ Public Module ProntoFuncionesUIWeb
                 For j As Integer = 1 To MAXCOLS
 
                     'traigo la celda y la pongo en una variable Range (no sé por qué)
-                    oRng = CType(oSheet.Cells(i, j), Microsoft.Office.Interop.Excel.Range)
+                    oRng = CType(oSheet.Cells(i, j), ExcelOffice.Range)
 
 
 
@@ -372,7 +372,7 @@ Public Module ProntoFuncionesUIWeb
 
 
 
-    
+
 
 
     Function TraerListaSQL(ByVal g As GridView, ByVal sc As String, ByVal sesionIdentificador As String)
@@ -1290,7 +1290,7 @@ Public Module ProntoFuncionesUIWeb
         'http://social.msdn.microsoft.com/Forums/en-US/vsreportcontrols/thread/505ffb1c-324e-4623-9cce-d84662d92b1a
     End Function
 
- 
+
 
 
     Function DatatableToHtml(dt As DataTable) As String
@@ -1761,7 +1761,7 @@ Public Module ProntoFuncionesUIWeb
     '/////////////////////////////////////////////////////////////////////
 
 
-    
+
     Public ReadOnly Property AplicacionConImagenes() As String 'si lo uso desde prontoclientes, debo apuntar hacia el de pronto a secas
         Get
             Return ConfigurationManager.AppSettings("AplicacionConImagenes")
@@ -1999,15 +1999,15 @@ Public Module ProntoFuncionesUIWeb
 
     Public Function TextToExcel(ByVal pFileName As String, Optional ByVal titulo As String = "", Optional ByVal sSufijoNombreArchivo As String = "Notas de Entrega") As String
 
-        Dim vFormato As Excel.XlRangeAutoFormat
-        Dim Exc As Excel.Application = CreateObject("Excel.Application")
+        Dim vFormato As ExcelOffice.XlRangeAutoFormat
+        Dim Exc As ExcelOffice.Application = CreateObject("ExcelOffice.Application")
         Exc.Visible = False
         Exc.DisplayAlerts = False
 
         'importa el archivo de texto
         'cómo hacer para abrir el .tmp (que es un TAB SEPARATED) para que tome el punto decimal
         'http://bdlconsultores.ddns.net/Consultas/Admin/verConsultas1.php?recordid=12722
-        Exc.Workbooks.OpenText(pFileName, , , , Excel.XlTextQualifier.xlTextQualifierNone, , True, , , , , , , , ".", ",")
+        Exc.Workbooks.OpenText(pFileName, , , , ExcelOffice.XlTextQualifier.xlTextQualifierNone, , True, , , , , , , , ".", ",")
 
 
         '        Workbooks.OpenText(Filename:=myFile.Name _
@@ -2018,10 +2018,10 @@ Public Module ProntoFuncionesUIWeb
         'TrailingMinusNumbers:=True)
 
 
-       
 
-        Dim Wb As Excel.Workbook = Exc.ActiveWorkbook
-        Dim Ws As Excel.Worksheet = CType(Wb.ActiveSheet, Excel.Worksheet)
+
+        Dim Wb As ExcelOffice.Workbook = Exc.ActiveWorkbook
+        Dim Ws As ExcelOffice.Worksheet = CType(Wb.ActiveSheet, ExcelOffice.Worksheet)
 
 
         'Se le indica el formato al que queremos exportarlo
@@ -2029,7 +2029,7 @@ Public Module ProntoFuncionesUIWeb
 
         If valor > -1 Then
             Select Case (valor)
-                Case 10 : vFormato = Excel.XlRangeAutoFormat.xlRangeAutoFormatClassic1
+                Case 10 : vFormato = ExcelOffice.XlRangeAutoFormat.xlRangeAutoFormatClassic1
             End Select
             Ws.Range(Ws.Cells(1, 1), Ws.Cells(Ws.UsedRange.Rows.Count, Ws.UsedRange.Columns.Count)).AutoFormat(vFormato) 'le hace autoformato
 
@@ -2065,7 +2065,7 @@ Public Module ProntoFuncionesUIWeb
 
             '/////////////////////////////////
             'insertar link
-            'Dim rg As Excel.Range = Ws.Cells(3, 10)
+            'Dim rg As ExcelOffice.Range = Ws.Cells(3, 10)
             ''rg.hip()
             ''rg.Hyperlinks(1).Address = "www.williamsentregas.com.ar"
             ''rg.Hyperlinks(1).TextToDisplay=
@@ -2096,7 +2096,7 @@ Public Module ProntoFuncionesUIWeb
             'pFileName = "C:\Archivo.xls"
             'File.Delete(pFileName) 'si no borro, va a aparecer el cartelote de sobreescribir. entonces necesito el .DisplayAlerts = False
 
-            Exc.ActiveWorkbook.SaveAs(pFileName, Excel.XlTextQualifier.xlTextQualifierNone - 1, )
+            Exc.ActiveWorkbook.SaveAs(pFileName, ExcelOffice.XlTextQualifier.xlTextQualifierNone - 1, )
         End If
 
 
@@ -2145,8 +2145,8 @@ Public Module ProntoFuncionesUIWeb
         '/////////////////////////////////////////////////
 
 
-        Dim oBooks As Excel.Workbooks 'haciendolo así, no queda abierto el proceso en el servidor http://support.microsoft.com/?kbid=317109
-        Dim oBook As Excel.Workbook
+        Dim oBooks As ExcelOffice.Workbooks 'haciendolo así, no queda abierto el proceso en el servidor http://support.microsoft.com/?kbid=317109
+        Dim oBook As ExcelOffice.Workbook
 
 
 
@@ -2171,7 +2171,7 @@ Public Module ProntoFuncionesUIWeb
         Dim mTotalPagina7 As Double, mTotalPagina8 As Double, mTotalPagina9 As Double
         Dim mTotalPagina10 As Double
         Dim mTotalizar As Boolean, mFinTransporte As Boolean
-        Dim oEx As Excel.Application
+        Dim oEx As ExcelOffice.Application
 
         Dim oL As GridViewRow ' ex ListItem
         Dim oS As TableCell ' ex ListSubItem 
@@ -2282,7 +2282,7 @@ Public Module ProntoFuncionesUIWeb
 
         If mColumnaTransporte = 0 Then mColumnaTransporte = 3
 
-        oEx = CreateObject("Excel.Application")
+        oEx = CreateObject("ExcelOffice.Application")
 
         Try
             oEx.Visible = False
@@ -2559,10 +2559,10 @@ Public Module ProntoFuncionesUIWeb
                         oEx.Run("ArmarFormato")
 
                         .Rows("1:1").Select()
-                        oEx.Selection.Insert(Shift:=Excel.XlDirection.xlDown)
+                        oEx.Selection.Insert(Shift:=ExcelOffice.XlDirection.xlDown)
                         If Not IsNothing(mVector) Then
                             For i = 0 To UBound(mVector)
-                                oEx.Selection.Insert(Shift:=Excel.XlDirection.xlDown)
+                                oEx.Selection.Insert(Shift:=ExcelOffice.XlDirection.xlDown)
                             Next
 
                             For i = 0 To UBound(mVector)
@@ -3114,7 +3114,7 @@ Public Module ProntoFuncionesUIWeb
 
         Dim oW As Word.Application
         Dim oDoc As Word.Document
-        'Dim oBooks As Excel.Workbooks 'haciendolo así, no queda abierto el proceso en el servidor http://support.microsoft.com/?kbid=317109
+        'Dim oBooks As ExcelOffice.Workbooks 'haciendolo así, no queda abierto el proceso en el servidor http://support.microsoft.com/?kbid=317109
 
 
         Try
@@ -3459,7 +3459,7 @@ Public Module ProntoFuncionesUIWeb
 
         Dim oW As Word.Application
         Dim oDoc As Word.Document
-        'Dim oBooks As Excel.Workbooks 'haciendolo así, no queda abierto el proceso en el servidor http://support.microsoft.com/?kbid=317109
+        'Dim oBooks As ExcelOffice.Workbooks 'haciendolo así, no queda abierto el proceso en el servidor http://support.microsoft.com/?kbid=317109
 
 
         Try
@@ -3795,13 +3795,13 @@ Public Module ProntoFuncionesUIWeb
 
 
 
-        Dim oEx As Excel.Application
-        Dim oBooks As Excel.Workbooks 'haciendolo así, no queda abierto el proceso en el servidor http://support.microsoft.com/?kbid=317109
-        Dim oBook As Excel.Workbook
+        Dim oEx As ExcelOffice.Application
+        Dim oBooks As ExcelOffice.Workbooks 'haciendolo así, no queda abierto el proceso en el servidor http://support.microsoft.com/?kbid=317109
+        Dim oBook As ExcelOffice.Workbook
 
 
         Try
-            oEx = CreateObject("Excel.Application")
+            oEx = CreateObject("ExcelOffice.Application")
             oEx.Visible = False
 
             oBooks = oEx.Workbooks

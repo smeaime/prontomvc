@@ -1929,9 +1929,11 @@ Public Class ExcelImportadorManager
         'loguear apertura del excel q puede fallar
         Dim ds As DataSet
         Try
-            'ds = GetExcel(pFileName, 1)
-
-            ds = GetExcel2(pFileName).DataSet
+            If True Then
+                ds = GetExcel(pFileName, 1)
+            Else
+                ds = GetExcel2_ODBC(pFileName).DataSet
+            End If
 
 
         Catch ex As Exception
@@ -2021,7 +2023,11 @@ Public Class ExcelImportadorManager
                         Try
                             r(c) = ""
                         Catch ex As Exception
-                            r(c) = 0
+                            Try
+                                r(c) = 0
+                            Catch ex2 As Exception
+                                ErrHandler2.WriteError("Error al limpiar la tabla " + ex2.ToString())
+                            End Try
                         End Try
                     End If
 
@@ -2414,16 +2420,17 @@ Public Class ExcelImportadorManager
 
 
         dr(29) = "HUMEDAD"
-        dr(30) = "MERMA"
-        'la columna 31 (32 en el excel) es la merma total, o sea la 30+32
-        dr(32) = "OTRASMERMAS"
+        'en 30 va el porcentaje de merma equivalente de la medicion de humedad
+        dr(31) = "MERMA"
+        'la columna 32 (33 en el excel) es la merma total, o sea la 31+33
+        dr(33) = "OTRASMERMAS"
 
 
 
 
         dr(42) = "CALIDAD"
-        dr(43) = "INTERMEDIARIO"
-        dr(45) = "REMITENTE COMERCIAL"
+        dr(43) = "REMITENTE COMERCIAL"  'intercambiado con la pos del intermediario en la consulta 36711
+        dr(45) = "INTERMEDIARIO"
 
         dr(49) = "CEE"
 
@@ -4319,7 +4326,41 @@ Public Class ExcelImportadorManager
 
 
 
-    Public Shared Function GetExcel2(ByVal fileName As String, Optional ByVal workSheetName As String = "") As DataTable
+    'Public Shared Function GetExcel4(ByVal filePath As String, Optional ByVal workSheetName As String = "") As DataTable
+
+
+
+    '    Dim stream As FileStream = File.Open(filePath, FileMode.Open, FileAccess.Read)
+
+    '    '1. Reading from a binary Excel file ('97-2003 format; *.xls)
+    '    Dim excelReader As Excel.IExcelDataReader = Excel.ExcelReaderFactory.CreateBinaryReader(stream)
+
+    '    '2. Reading from a OpenXml Excel file (2007 format; *.xlsx)
+    '    'Dim excelReader As Excel.IExcelDataReader = ExcelReaderFactory.CreateOpenXmlReader(stream)
+
+    '    '3. DataSet - The result of each spreadsheet will be created in the result.Tables
+    '    Dim result As DataSet = excelReader.AsDataSet()
+
+    '    ''4. DataSet - Create column names from first row
+    '    'excelReader.IsFirstRowAsColumnNames = True
+    '    'Dim result As DataSet = excelReader.AsDataSet()
+
+    '    ''5. Data Reader methods
+    '    'While excelReader.Read()
+    '    '    'excelReader.GetInt32(0);
+    '    'End While
+
+    '    '6. Free resources (IExcelDataReader is IDisposable)
+    '    excelReader.Close()
+
+
+    'End Function
+
+
+
+
+
+    Public Shared Function GetExcel2_ODBC(ByVal fileName As String, Optional ByVal workSheetName As String = "") As DataTable
 
 
 
@@ -4331,16 +4372,42 @@ Public Class ExcelImportadorManager
         'Dim connectionString As String = String.Format("Provider=Microsoft.Jet.OLEDB.4.0; data source={0}; Extended Properties=Excel 8.0;", fileName)
 
         'http://social.msdn.microsoft.com/Forums/es/vbes/thread/b62c5037-0695-445b-97ba-f573073ea840
-        Dim connectionString As String = String.Format("Provider=Microsoft.ACE.OLEDB.12.0; data source={0}; Extended Properties=Excel 8.0;", fileName)
+        Dim connectionString As String = String.Format("Provider=Microsoft.ACE.OLEDB.12.0; data source={0}; Extended Properties=Excel 12.0;", fileName)
 
 
-
+        'Dim connectionString As String = String.Format("Provider=Microsoft.Jet.OLEDB.4.0; data source={0}; Extended Properties=""Excel 8.0;HDR=YES;""", fileName)
 
 
         Using conn As OleDbConnection = New OleDbConnection(connectionString)
 
+            Try
+                conn.Open()
 
-            conn.Open()
+                '        // es precisamente así:
+                '/*
+                ' * http://stackoverflow.com/questions/1139390/excel-external-table-is-not-in-the-expected-format
+                ' * Just add my case. My xls file was created by a data export function from a website, the file extention is xls, 
+                'it can be normally opened by MS Excel 2003. But both Microsoft.Jet.OLEDB.4.0 and Microsoft.ACE.OLEDB.12.0 got 
+                '    an "External table is not in the expected format" exception.
+                '        Finally, the problem is, just as the exception said, "it's not in the expected format". Though 
+                '    it() 's extention name is xls, but when I open it with a text editor, it is actually a well-formed html file, 
+                'all data are in a <table>, each <tr> is a row and each <td> is a cell. Then I think I can parse it in a html way.
+                '*/
+
+
+            Catch ex As System.Data.OleDb.OleDbException
+                'http://stackoverflow.com/questions/1139390/excel-external-table-is-not-in-the-expected-format
+                Dim connectionString2 As String = String.Format("Provider=Microsoft.Jet.OLEDB.4.0; data source={0}; Extended Properties=""Excel 8.0;HDR=YES;""", fileName)
+                Dim conn2 = New OleDbConnection(connectionString2)
+                conn2.Open()
+
+
+                Throw
+            End Try
+
+
+
+
 
             If workSheetName = "" Then
                 Dim dtSchema = conn.GetOleDbSchemaTable(OleDbSchemaGuid.Tables, New Object() {Nothing, Nothing, Nothing, "TABLE"})

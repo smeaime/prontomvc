@@ -1,0 +1,13 @@
+
+Log Entry : 
+03/21/2017 12:32:28
+Error in: . Error Message:C:\Users\Administrador\Documents\bdl\pronto\docstest\Urenport_1130-21032017.xls  No pudo extraer el excel. INCREIBLE: en 2008, en el directorio  C:\Windows\SysWOW64\config\systemprofile\ hay que crear una carpeta Desktop!!!!!!!!!!!!!!!!!!!!!  System.Runtime.InteropServices.COMException (0x800A03EC): No se puede leer el archivo.
+   en Microsoft.Office.Interop.Excel.Workbooks.Open(String Filename, Object UpdateLinks, Object ReadOnly, Object Format, Object Password, Object WriteResPassword, Object IgnoreReadOnlyRecommended, Object Origin, Object Delimiter, Object Editable, Object Notify, Object Converter, Object AddToMru, Object Local, Object CorruptLoad)
+   en ExcelImportadorManager.GetExcel(String fileName, Int32 SheetNumero) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ExcelImportador.vb:línea 4489
+__________________________
+
+Log Entry : 
+03/21/2017 12:32:56
+Error in: . Error Message:No pudo extraer el excel. System.NullReferenceException: Referencia a objeto no establecida como instancia de un objeto.
+   en ExcelImportadorManager.GetExcel(String fileName, Int32 SheetNumero) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ExcelImportador.vb:línea 4533
+__________________________
