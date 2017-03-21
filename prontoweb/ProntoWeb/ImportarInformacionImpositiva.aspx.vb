@@ -245,7 +245,7 @@ Partial Class ImportacionInformacionImpositiva
     Public Sub ImportacionComprobantesVenta1()
 
         '        Dim oAp 
-        '        Dim oEx As Excel.Application
+        '        Dim oEx As ExcelOffice.Application
         '        Dim oFac 'As ComPronto.Factura 
         '        Dim oDeb 'As ComPronto.NotaDebito 
         '        Dim oCre 'As ComPronto.NotaCredito 

@@ -841,6 +841,206 @@ namespace ProntoMVC.Tests
 
 
         [TestMethod]
+        public void OCR_alta_automatica_de_clientes_22172_36722()
+        {
+
+
+            Assert.IsFalse(FuncionesGenericasCSharp.CUITValido("13050795084"));
+
+
+            Assert.IsFalse(FuncionesGenericasCSharp.CUITValido(""));
+            Assert.IsFalse(FuncionesGenericasCSharp.CUITValido("asfasdfasdfasdf"));
+            Assert.IsFalse(FuncionesGenericasCSharp.CUITValido(null));
+            Assert.IsFalse(FuncionesGenericasCSharp.CUITValido("20"));
+            Assert.IsFalse(FuncionesGenericasCSharp.CUITValido("30-53777127-4"));
+            Assert.IsTrue(FuncionesGenericasCSharp.CUITValido("30-53772127-4"));
+            Assert.IsTrue(FuncionesGenericasCSharp.CUITValido("30714018082"));
+            Assert.IsFalse(FuncionesGenericasCSharp.CUITValido("30-71401308-2"));
+            Assert.IsTrue(FuncionesGenericasCSharp.CUITValido("30-70359905-9"));
+            Assert.IsFalse(FuncionesGenericasCSharp.CUITValido("30703539059"));
+            Assert.IsTrue(FuncionesGenericasCSharp.CUITValido("30511355040"));
+
+
+
+
+            Assert.IsTrue(FuncionesGenericasCSharp.CUITValido("30-70914230-1"));
+            Assert.IsFalse(FuncionesGenericasCSharp.CUITValido("30703142301"));
+            Assert.IsFalse(FuncionesGenericasCSharp.CUITValido("30700142301"));
+            Assert.IsFalse(FuncionesGenericasCSharp.CUITValido("30-70814230-1"));
+
+
+
+            //            ACA:
+            //10-50012088-2
+            //30 50012088-2
+            Assert.IsTrue(FuncionesGenericasCSharp.CUITValido("30-50012088-2"));
+            Assert.IsFalse(FuncionesGenericasCSharp.CUITValido("10-50012088-2"));
+
+
+            //NIDERA:
+            //33 50673744 9
+            //31506732449
+
+            Assert.IsFalse(FuncionesGenericasCSharp.CUITValido("31506732449"));
+            Assert.IsTrue(FuncionesGenericasCSharp.CUITValido("33 50673744 9"));
+            //COMODITIES:
+            //30 64087256 6
+
+            Assert.IsTrue(FuncionesGenericasCSharp.CUITValido("30 64087256 6"));
+
+            //VICENTIN:
+            //30600959629
+            //30 50095962 9
+            Assert.IsFalse(FuncionesGenericasCSharp.CUITValido("30600959629"));
+            Assert.IsTrue(FuncionesGenericasCSharp.CUITValido("30 50095962 9"));
+
+            //OLEAGINOSA MORENO:
+            //33502232223
+
+            Assert.IsFalse(FuncionesGenericasCSharp.CUITValido("33502232223"));
+            //BLD:
+            //30703599053
+
+            Assert.IsFalse(FuncionesGenericasCSharp.CUITValido("30703599053"));
+            // TENEMOS UN GANADOR!!!!!!!
+
+
+            // validar todos los cuits de la base
+            var scEF = ProntoMVC.Data.Models.Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC));
+            DemoProntoEntities db = new DemoProntoEntities(scEF);
+
+            var cuits = db.Clientes.Where(x => x.Cuit != null && x.Cuit != "").Select(x => x.Cuit).Take(5000).ToList();
+            foreach (string c in cuits)
+            {
+                if (FuncionesGenericasCSharp.CUITValido(c))
+                {
+
+                }
+                else
+                {
+                }
+
+
+            }
+
+
+
+
+            /*
+
+
+
+            Assert.IsFalse(CartaDePorteManager.VerificaCUIT("20"));
+            Assert.IsFalse(CartaDePorteManager.VerificaCUIT("30-53777127-4"));
+            Assert.IsTrue(CartaDePorteManager.VerificaCUIT("30-53772127-4"));
+
+            Assert.IsTrue(CartaDePorteManager.VerificaCUIT("30714018082"));
+            Assert.IsFalse(CartaDePorteManager.VerificaCUIT("30-71401308-2"));
+            Assert.IsTrue(CartaDePorteManager.VerificaCUIT("30-70359905-9"));
+            Assert.IsFalse(CartaDePorteManager.VerificaCUIT("30703539059"));
+            Assert.IsTrue(CartaDePorteManager.VerificaCUIT("30511355040"));  // falla, me devuelve false. en el pronto anda. qué codigo usa el CUIT32.OCX????
+
+
+
+            // buscavendedorporcuit y buscaclienteporcuit llaman a los dos validadores. por ahora estoy haciendo que verfcuit devuelva true
+
+
+
+            // y por qué no explota en la validacion del form?
+
+
+            //            MAROUN S.A	COLON 369 - Pº 6	30714018082	BAHIA BLANCA - BS AS	Delete
+            //Editar	0	MAROUN SA.		30-71401308-2
+
+            //    BLD S.A	MADRES DE PLAZA DE MAYO 3020 - OF. 14-03	30-70359905-9	ROSARIO (STA FE)	Delete
+            //Editar	0	BLD S.A.		30703539059	
+
+            Assert.IsFalse(FuncionesGenericasCSharp.mkf_validacuit("20"));
+            Assert.IsFalse(FuncionesGenericasCSharp.mkf_validacuit("30-53777127-4"));
+            Assert.IsTrue(FuncionesGenericasCSharp.mkf_validacuit("30-53772127-4"));
+
+            Assert.IsTrue(FuncionesGenericasCSharp.mkf_validacuit("30714018082"));
+            Assert.IsFalse(FuncionesGenericasCSharp.mkf_validacuit("30-71401308-2"));  // me devuelve true! si uso el form de corredor de pronto, este cuit es bochado. pedirle la funcion a edu
+
+
+            Assert.IsTrue(FuncionesGenericasCSharp.mkf_validacuit("30-70359905-9"));
+            Assert.IsFalse(FuncionesGenericasCSharp.mkf_validacuit("30703539059"));  // tambien me devuelve true!!! -tiene sentido, ya que en efecto el sistema (erroneamente) lo dio de alta 
+
+            Assert.IsTrue(FuncionesGenericasCSharp.mkf_validacuit("30511355040"));
+
+
+
+
+
+
+
+            Assert.IsFalse(CartaDePorteManager.VerfCuit("20"));
+            Assert.IsFalse(CartaDePorteManager.VerfCuit("30-53777127-4"));
+            Assert.IsTrue(CartaDePorteManager.VerfCuit("30-53772127-4"));
+
+            var g = CartaDePorteManager.VerfCuit("30714018082");
+            Assert.IsTrue(g);
+            var h = CartaDePorteManager.VerfCuit("30-71401308-2"); //deberia haber dado false
+            Assert.IsFalse(h);
+
+            var i = CartaDePorteManager.VerfCuit("30-70359905-9");
+            Assert.IsTrue(i);
+            var j = CartaDePorteManager.VerfCuit("30703539059"); //deberia haber dado false -ok el cuit no existe, pero es invalido?
+            Assert.IsFalse(j);
+
+            Assert.IsTrue(CartaDePorteManager.VerfCuit("30511355040"));
+            */
+        }
+
+
+        [TestMethod]
+        public void Urenport_32235_excelqueesHtml()
+        {
+
+            // es precisamente así:
+            /*
+             * http://stackoverflow.com/questions/1139390/excel-external-table-is-not-in-the-expected-format
+             * Just add my case. My xls file was created by a data export function from a website, the file extention is xls, 
+            it can be normally opened by MS Excel 2003. But both Microsoft.Jet.OLEDB.4.0 and Microsoft.ACE.OLEDB.12.0 got 
+                an "External table is not in the expected format" exception.
+                    Finally, the problem is, just as the exception said, "it's not in the expected format". Though 
+            it's extention name is xls, but when I open it with a text editor, it is actually a well-formed html file, 
+            all data are in a <table>, each <tr> is a row and each <td> is a cell. Then I think I can parse it in a html way.
+            */
+
+
+            string archivoExcel = @"C:\Users\Administrador\Documents\bdl\pronto\docstest\Urenport_1130-21032017.xls";
+
+            FuncionesGenericasCSharp.GetExcel5_HTML_AgilityPack(archivoExcel);
+            FuncionesGenericasCSharp.GetExcel4_ExcelDataReader(archivoExcel);
+
+            //explota
+
+            string ms = "";
+
+            int m_IdMaestro = 0;
+            Pronto.ERP.BO.CartaDePorte carta;
+
+
+            string log = "";
+            //hay que pasar el formato como parametro 
+            ExcelImportadorManager.FormatearExcelImportadoEnDLL(ref m_IdMaestro, archivoExcel,
+                                    LogicaImportador.FormatosDeExcel.Urenport, SC, 0, ref log, "", 0, "");
+
+            var dt = LogicaImportador.TraerExcelDeBase(SC, ref m_IdMaestro);
+
+        }
+
+
+
+
+
+
+
+
+
+
+        [TestMethod]
         public void ImportacionDeExcel()
         {
             string ArchivoExcelDestino = @"C:\Users\Administrador\Desktop\lala.xls";
@@ -848,9 +1048,9 @@ namespace ProntoMVC.Tests
             //string archivoExcel = @"C:\Users\Administrador\Documents\bdl\pronto\docstest\Posicion-161229-0945.xls"
 
 
-            var ds3 = ExcelImportadorManager.GetExcel2(ArchivoExcelDestino);
-            var ds4 = ExcelImportadorManager.GetExcel2(@"C:\Users\Administrador\Documents\bdl\pronto\docstest\Urenport_ 953-29122016.xlsx");
-            var ds5 = ExcelImportadorManager.GetExcel2(@"C:\Users\Administrador\Documents\bdl\pronto\docstest\Posicion-161229-0945.xls");
+            var ds3 = ExcelImportadorManager.GetExcel2_ODBC(ArchivoExcelDestino);
+            var ds4 = ExcelImportadorManager.GetExcel2_ODBC(@"C:\Users\Administrador\Documents\bdl\pronto\docstest\Urenport_ 953-29122016.xlsx");
+            var ds5 = ExcelImportadorManager.GetExcel2_ODBC(@"C:\Users\Administrador\Documents\bdl\pronto\docstest\Posicion-161229-0945.xls");
 
             var dt1 = FuncionesGenericasCSharp.GetExcel3_XLSX_EEPLUS(ArchivoExcelDestino);
 
@@ -1306,6 +1506,9 @@ La interface será procesa por Syngenta y si la misma no puede ser procesada cor
             var dt = LogicaImportador.TraerExcelDeBase(SC, ref m_IdMaestro);
 
         }
+
+
+
 
 
 
@@ -3767,7 +3970,7 @@ Adjunto un ejemplo que tiene cartas de porte de 8 entregadores que no son Willia
 
 
         [TestMethod]
-        public void PegatinaRamalloBunge_23529()
+        public void PegatinaRamalloBunge_23529_36711()
         {
 
             //explota
@@ -4704,156 +4907,6 @@ Adjunto un ejemplo que tiene cartas de porte de 8 entregadores que no son Willia
 
 
 
-
-        [TestMethod]
-        public void OCR_alta_automatica_de_clientes_22172()
-        {
-
-
-
-            Assert.IsFalse(FuncionesGenericasCSharp.CUITValido(""));
-            Assert.IsFalse(FuncionesGenericasCSharp.CUITValido("asfasdfasdfasdf"));
-            Assert.IsFalse(FuncionesGenericasCSharp.CUITValido(null));
-            Assert.IsFalse(FuncionesGenericasCSharp.CUITValido("20"));
-            Assert.IsFalse(FuncionesGenericasCSharp.CUITValido("30-53777127-4"));
-            Assert.IsTrue(FuncionesGenericasCSharp.CUITValido("30-53772127-4"));
-            Assert.IsTrue(FuncionesGenericasCSharp.CUITValido("30714018082"));
-            Assert.IsFalse(FuncionesGenericasCSharp.CUITValido("30-71401308-2"));
-            Assert.IsTrue(FuncionesGenericasCSharp.CUITValido("30-70359905-9"));
-            Assert.IsFalse(FuncionesGenericasCSharp.CUITValido("30703539059"));
-            Assert.IsTrue(FuncionesGenericasCSharp.CUITValido("30511355040"));
-
-
-
-
-            Assert.IsTrue(FuncionesGenericasCSharp.CUITValido("30-70914230-1"));
-            Assert.IsFalse(FuncionesGenericasCSharp.CUITValido("30703142301"));
-            Assert.IsFalse(FuncionesGenericasCSharp.CUITValido("30700142301"));
-            Assert.IsFalse(FuncionesGenericasCSharp.CUITValido("30-70814230-1"));
-
-
-
-            //            ACA:
-            //10-50012088-2
-            //30 50012088-2
-            Assert.IsTrue(FuncionesGenericasCSharp.CUITValido("30-50012088-2"));
-            Assert.IsFalse(FuncionesGenericasCSharp.CUITValido("10-50012088-2"));
-
-
-            //NIDERA:
-            //33 50673744 9
-            //31506732449
-
-            Assert.IsFalse(FuncionesGenericasCSharp.CUITValido("31506732449"));
-            Assert.IsTrue(FuncionesGenericasCSharp.CUITValido("33 50673744 9"));
-            //COMODITIES:
-            //30 64087256 6
-
-            Assert.IsTrue(FuncionesGenericasCSharp.CUITValido("30 64087256 6"));
-
-            //VICENTIN:
-            //30600959629
-            //30 50095962 9
-            Assert.IsFalse(FuncionesGenericasCSharp.CUITValido("30600959629"));
-            Assert.IsTrue(FuncionesGenericasCSharp.CUITValido("30 50095962 9"));
-
-            //OLEAGINOSA MORENO:
-            //33502232223
-
-            Assert.IsFalse(FuncionesGenericasCSharp.CUITValido("33502232223"));
-            //BLD:
-            //30703599053
-
-            Assert.IsFalse(FuncionesGenericasCSharp.CUITValido("30703599053"));
-            // TENEMOS UN GANADOR!!!!!!!
-
-
-            // validar todos los cuits de la base
-            var scEF = ProntoMVC.Data.Models.Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC));
-            DemoProntoEntities db = new DemoProntoEntities(scEF);
-
-            var cuits = db.Clientes.Where(x => x.Cuit != null && x.Cuit != "").Select(x => x.Cuit).Take(5000).ToList();
-            foreach (string c in cuits)
-            {
-                if (FuncionesGenericasCSharp.CUITValido(c))
-                {
-
-                }
-                else
-                {
-                }
-
-
-            }
-
-
-
-
-            /*
-
-
-
-            Assert.IsFalse(CartaDePorteManager.VerificaCUIT("20"));
-            Assert.IsFalse(CartaDePorteManager.VerificaCUIT("30-53777127-4"));
-            Assert.IsTrue(CartaDePorteManager.VerificaCUIT("30-53772127-4"));
-
-            Assert.IsTrue(CartaDePorteManager.VerificaCUIT("30714018082"));
-            Assert.IsFalse(CartaDePorteManager.VerificaCUIT("30-71401308-2"));
-            Assert.IsTrue(CartaDePorteManager.VerificaCUIT("30-70359905-9"));
-            Assert.IsFalse(CartaDePorteManager.VerificaCUIT("30703539059"));
-            Assert.IsTrue(CartaDePorteManager.VerificaCUIT("30511355040"));  // falla, me devuelve false. en el pronto anda. qué codigo usa el CUIT32.OCX????
-
-
-
-            // buscavendedorporcuit y buscaclienteporcuit llaman a los dos validadores. por ahora estoy haciendo que verfcuit devuelva true
-
-
-
-            // y por qué no explota en la validacion del form?
-
-
-            //            MAROUN S.A	COLON 369 - Pº 6	30714018082	BAHIA BLANCA - BS AS	Delete
-            //Editar	0	MAROUN SA.		30-71401308-2
-
-            //    BLD S.A	MADRES DE PLAZA DE MAYO 3020 - OF. 14-03	30-70359905-9	ROSARIO (STA FE)	Delete
-            //Editar	0	BLD S.A.		30703539059	
-
-            Assert.IsFalse(FuncionesGenericasCSharp.mkf_validacuit("20"));
-            Assert.IsFalse(FuncionesGenericasCSharp.mkf_validacuit("30-53777127-4"));
-            Assert.IsTrue(FuncionesGenericasCSharp.mkf_validacuit("30-53772127-4"));
-
-            Assert.IsTrue(FuncionesGenericasCSharp.mkf_validacuit("30714018082"));
-            Assert.IsFalse(FuncionesGenericasCSharp.mkf_validacuit("30-71401308-2"));  // me devuelve true! si uso el form de corredor de pronto, este cuit es bochado. pedirle la funcion a edu
-
-
-            Assert.IsTrue(FuncionesGenericasCSharp.mkf_validacuit("30-70359905-9"));
-            Assert.IsFalse(FuncionesGenericasCSharp.mkf_validacuit("30703539059"));  // tambien me devuelve true!!! -tiene sentido, ya que en efecto el sistema (erroneamente) lo dio de alta 
-
-            Assert.IsTrue(FuncionesGenericasCSharp.mkf_validacuit("30511355040"));
-
-
-
-
-
-
-
-            Assert.IsFalse(CartaDePorteManager.VerfCuit("20"));
-            Assert.IsFalse(CartaDePorteManager.VerfCuit("30-53777127-4"));
-            Assert.IsTrue(CartaDePorteManager.VerfCuit("30-53772127-4"));
-
-            var g = CartaDePorteManager.VerfCuit("30714018082");
-            Assert.IsTrue(g);
-            var h = CartaDePorteManager.VerfCuit("30-71401308-2"); //deberia haber dado false
-            Assert.IsFalse(h);
-
-            var i = CartaDePorteManager.VerfCuit("30-70359905-9");
-            Assert.IsTrue(i);
-            var j = CartaDePorteManager.VerfCuit("30703539059"); //deberia haber dado false -ok el cuit no existe, pero es invalido?
-            Assert.IsFalse(j);
-
-            Assert.IsTrue(CartaDePorteManager.VerfCuit("30511355040"));
-            */
-        }
 
 
 

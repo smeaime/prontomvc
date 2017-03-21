@@ -11,7 +11,7 @@ Imports System.Text
 Imports System.Data
 Imports System.Diagnostics
 Imports System.Web.UI
-Imports Excel = Microsoft.Office.Interop.Excel
+Imports ExcelOffice = Microsoft.Office.Interop.Excel
 
 Imports CartaDePorteManager
 
