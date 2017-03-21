@@ -15477,6 +15477,7 @@ Public Class CartaDePorteManager
 
                     cp.entregador = If(dbc.DestinatarioDesc, "")
 
+
                     cp.fechadescarga = If(dbc.FechaDescarga, DateTime.MinValue)
                     cp.fechaposicion = If(dbc.FechaIngreso, DateTime.MinValue)
                     cp.horadescarga = "" ' If(dbc.Hora, "")
