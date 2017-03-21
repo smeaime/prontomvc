@@ -14,7 +14,7 @@ Imports Pronto.ERP.Bll.InformesCartaDePorteManager
 Imports System.Xml
 Imports System.Collections.Generic
 
-Imports Excel = Microsoft.Office.Interop.Excel
+Imports ExcelOffice = Microsoft.Office.Interop.Excel
 Imports System.Data.SqlClient
 
 Imports CartaDePorteManager

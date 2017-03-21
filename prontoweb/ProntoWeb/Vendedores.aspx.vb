@@ -2,7 +2,7 @@
 
 Imports Pronto.ERP.BO
 Imports System.Diagnostics 'para usar Debug.Print
-Imports Excel = Microsoft.Office.Interop.Excel
+Imports ExcelOffice = Microsoft.Office.Interop.Excel
 Imports System.IO
 Imports System.Data
 Imports Pronto.ERP.Bll.EntidadManager

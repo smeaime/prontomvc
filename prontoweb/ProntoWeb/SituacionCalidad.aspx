@@ -1222,6 +1222,12 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
 
         $(elem).autocomplete({
+
+            select: function( event, ui ) {
+                $(elem).trigger('change');
+            },
+
+
             source: function (request, response) {
                 $.ajax({
                     type: "POST",
@@ -1294,6 +1300,12 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
 
         $(elem).autocomplete({
+            
+            select: function( event, ui ) {
+                $(elem).trigger('change');
+            },
+
+
             source: function (request, response) {
                 $.ajax({
                     type: "POST",
@@ -1365,6 +1377,12 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
 
         $(elem).autocomplete({
+            
+            select: function( event, ui ) {
+                $(elem).trigger('change');
+            },
+
+
             source: function (request, response) {
                 $.ajax({
                     type: "POST",
@@ -1436,6 +1454,12 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
 
         $(elem).autocomplete({
+            
+            select: function( event, ui ) {
+                $(elem).trigger('change');
+            },
+
+
             source: function (request, response) {
                 $.ajax({
                     type: "POST",
@@ -1509,6 +1533,12 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
 
         $(elem).autocomplete({
+            
+            select: function( event, ui ) {
+                $(elem).trigger('change');
+            },
+
+
             source: function (request, response) {
                 $.ajax({
                     type: "POST",
@@ -1582,6 +1612,12 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
 
         $(elem).autocomplete({
+            
+            select: function( event, ui ) {
+                $(elem).trigger('change');
+            },
+
+
             source: function (request, response) {
                 $.ajax({
                     type: "POST",
@@ -1654,6 +1690,12 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
 
             $(elem).autocomplete({
+                
+                select: function( event, ui ) {
+                    $(elem).trigger('change');
+                },
+
+
                 source: function (request, response) {
                     $.ajax({
                         type: "POST",
@@ -1761,6 +1803,12 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
 
         $(elem).autocomplete({
+            
+            select: function( event, ui ) {
+                $(elem).trigger('change');
+            },
+
+
             source: function (request, response) {
                 $.ajax({
                     type: "POST",
@@ -1834,6 +1882,12 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
 
         $(elem).autocomplete({
+
+            select: function( event, ui ) {
+                $(elem).val(ui.item.value);
+                $(elem).trigger('change');
+            },
+
             source: function (request, response) {
                 $.ajax({
                     type: "POST",
@@ -1865,6 +1919,9 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                         //else {
                         //    alert("No existe el artículo"); // se está bancando que no sea identica la descripcion
                         //}
+
+
+                        
 
                         response($.map(data, function (item) {
                             return {

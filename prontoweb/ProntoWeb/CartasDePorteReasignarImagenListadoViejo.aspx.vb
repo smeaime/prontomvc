@@ -2,7 +2,7 @@
 
 Imports Pronto.ERP.BO
 Imports System.Diagnostics 'para usar Debug.Print
-Imports Excel = Microsoft.Office.Interop.Excel
+Imports ExcelOffice = Microsoft.Office.Interop.Excel
 Imports System.IO
 Imports System.Data
 Imports Pronto.ERP.Bll.EntidadManager
@@ -916,16 +916,16 @@ Partial Class CartasDePorteReasignarImagenListadoViejo
 
     Public Function TextToExcel(ByVal pFileName As String, Optional ByVal titulo As String = "") As String
 
-        Dim vFormato As Excel.XlRangeAutoFormat
-        Dim Exc As Excel.Application = CreateObject("Excel.Application")
+        Dim vFormato As ExcelOffice.XlRangeAutoFormat
+        Dim Exc As ExcelOffice.Application = CreateObject("Excel.Application")
         Exc.Visible = False
         Exc.DisplayAlerts = False
 
         'importa el archivo de texto
-        Exc.Workbooks.OpenText(pFileName, , , , Excel.XlTextQualifier.xlTextQualifierNone, , True)
+        Exc.Workbooks.OpenText(pFileName, , , , ExcelOffice.XlTextQualifier.xlTextQualifierNone, , True)
 
-        Dim Wb As Excel.Workbook = Exc.ActiveWorkbook
-        Dim Ws As Excel.Worksheet = CType(Wb.ActiveSheet, Excel.Worksheet)
+        Dim Wb As ExcelOffice.Workbook = Exc.ActiveWorkbook
+        Dim Ws As ExcelOffice.Worksheet = CType(Wb.ActiveSheet, ExcelOffice.Worksheet)
 
 
         'Se le indica el formato al que queremos exportarlo
@@ -933,7 +933,7 @@ Partial Class CartasDePorteReasignarImagenListadoViejo
 
         If valor > -1 Then
             Select Case (valor)
-                Case 10 : vFormato = Excel.XlRangeAutoFormat.xlRangeAutoFormatClassic1
+                Case 10 : vFormato = ExcelOffice.XlRangeAutoFormat.xlRangeAutoFormatClassic1
             End Select
             Ws.Range(Ws.Cells(1, 1), Ws.Cells(Ws.UsedRange.Rows.Count, Ws.UsedRange.Columns.Count)).AutoFormat(vFormato) 'le hace autoformato
 
@@ -969,7 +969,7 @@ Partial Class CartasDePorteReasignarImagenListadoViejo
 
             '/////////////////////////////////
             'insertar link
-            Dim rg As Excel.Range = Ws.Cells(3, 10)
+            Dim rg As ExcelOffice.Range = Ws.Cells(3, 10)
             'rg.hip()
             'rg.Hyperlinks(1).Address = "www.williamsentregas.com.ar"
             'rg.Hyperlinks(1).TextToDisplay=
@@ -1000,7 +1000,7 @@ Partial Class CartasDePorteReasignarImagenListadoViejo
             'pFileName = "C:\Archivo.xls"
             'File.Delete(pFileName) 'si no borro, va a aparecer el cartelote de sobreescribir. entonces necesito el .DisplayAlerts = False
 
-            Exc.ActiveWorkbook.SaveAs(pFileName, Excel.XlTextQualifier.xlTextQualifierNone - 1, )
+            Exc.ActiveWorkbook.SaveAs(pFileName, ExcelOffice.XlTextQualifier.xlTextQualifierNone - 1, )
         End If
 
 

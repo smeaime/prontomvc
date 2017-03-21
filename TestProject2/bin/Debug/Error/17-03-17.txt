@@ -1,0 +1,14 @@
+
+Log Entry : 
+03/17/2017 20:18:08
+Error in: . Error Message:System.InvalidCastException
+El operador '=' no está definido para tipo 'DBNull' ni para cadena "BarraCP".
+   en Microsoft.VisualBasic.CompilerServices.Operators.ConditionalCompareObjectEqual(Object Left, Object Right, Boolean TextCompare)
+   en ExcelImportadorManager.FormatearColumnasFlexicapture(DataTable& dt) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ExcelImportador.vb:línea 5311
+Microsoft.VisualBasic
+__________________________
+
+Log Entry : 
+03/17/2017 20:18:08
+Error in: . Error Message:Los encabezados de columna [][][][][][][][][][][][][][][][][][][][][][][][][][TRANSPCUIT][][][][][][][][][][][][][][][][][][][][][VAGON][][][][][][][][][][][][][] no son reconocidos. Cambielos por los estándar. Ya ha sido enviado un mail notificando la incongruencia.
+__________________________

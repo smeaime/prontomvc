@@ -26,7 +26,7 @@ using System.Data;
 using OfficeOpenXml; //EPPLUS, no confundir con el OOXML
 
 
-
+using HtmlAgilityPack;
 
 
 namespace ProntoMVC.Data
@@ -35,8 +35,109 @@ namespace ProntoMVC.Data
     {
 
 
+        public static DataTable GetExcel5_HTML_AgilityPack(string filePath)
+        {
 
-                // http://stackoverflow.com/questions/13396604/excel-to-datatable-using-epplus-excel-locked-for-editing
+
+            HtmlDocument doc = new HtmlDocument();
+            string texto = System.IO.File.ReadAllText(filePath);
+            doc.LoadHtml(texto);  
+
+            
+            
+            DataTable dt = new DataTable();
+            dt.Columns.Add("Name", typeof(string));
+            dt.Columns.Add("Value", typeof(string));
+
+            int count = 0;
+
+
+            foreach (HtmlNode table in doc.DocumentNode.SelectNodes("//table"))
+            {
+
+                foreach (HtmlNode row in table.SelectNodes("tr"))
+                {
+
+                    if (table.Id == "table2")
+                    {
+                        DataRow dr = dt.NewRow();
+
+                        foreach (var cell in row.SelectNodes("td"))
+                        {
+                            if ((count % 2 == 0))
+                            {
+                                dr["Name"] = cell.InnerText.Replace("&nbsp;", " ");
+                            }
+                            else
+                            {
+
+                                dr["Value"] = cell.InnerText.Replace("&nbsp;", " ");
+
+                                dt.Rows.Add(dr);
+                            }
+                            count++;
+
+                        }
+
+
+                    }
+
+                }
+
+
+
+            }
+
+            return dt;
+        }
+
+
+
+
+
+
+
+
+
+        // http://stackoverflow.com/questions/13396604/excel-to-datatable-using-epplus-excel-locked-for-editing
+        public static DataTable GetExcel4_ExcelDataReader(string filePath)
+        {
+
+            FileStream stream = File.Open(filePath, FileMode.Open, FileAccess.Read);
+
+            //1. Reading from a binary Excel file ('97-2003 format; *.xls)
+            Excel.IExcelDataReader excelReader = Excel.ExcelReaderFactory.CreateBinaryReader(stream);
+            //...
+            ////2. Reading from a OpenXml Excel file (2007 format; *.xlsx)
+            //IExcelDataReader excelReader = ExcelReaderFactory.CreateOpenXmlReader(stream);
+            ////...
+            //3. DataSet - The result of each spreadsheet will be created in the result.Tables
+            DataSet result = excelReader.AsDataSet();
+            //...
+            ////4. DataSet - Create column names from first row
+            //excelReader.IsFirstRowAsColumnNames = true;
+            //DataSet result = excelReader.AsDataSet();
+
+            ////5. Data Reader methods
+            //while (excelReader.Read())
+            //{
+            //    //excelReader.GetInt32(0);
+            //}
+
+            //6. Free resources (IExcelDataReader is IDisposable)
+            excelReader.Close();
+
+            return result.Tables[0];
+
+        }
+
+
+
+
+
+
+
+        // http://stackoverflow.com/questions/13396604/excel-to-datatable-using-epplus-excel-locked-for-editing
         public static DataTable GetExcel3_XLSX_EEPLUS(string path, bool hasHeader = true)
         {
 
@@ -66,7 +167,7 @@ namespace ProntoMVC.Data
                 return tbl;
             }
         }
-    
+
 
 
 
@@ -288,10 +389,15 @@ namespace ProntoMVC.Data
         {
             if (_CUIT == null) return false;
 
-            _CUIT= _CUIT.Replace("-", "").Replace(" ", "");
+            _CUIT = _CUIT.Replace("-", "").Replace(" ", "");
 
             if (_CUIT.Length != 11) return false;
 
+
+
+            string[] prefijos = { "30", "33", "34", "20", "23", "24", "27" };
+
+            if (!prefijos.Contains(_CUIT.Substring(0, 2))) return false;
 
             string CUITValidado = string.Empty;
             bool Valido = false;
@@ -1565,6 +1671,15 @@ namespace CerealNet.WSCartasDePorte
         public string titular;
         public string usuario;
         public int vagon;
+
+
+
+
+
+
+
+
+
 
 
         //public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
