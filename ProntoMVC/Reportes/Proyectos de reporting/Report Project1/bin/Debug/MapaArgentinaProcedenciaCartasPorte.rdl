@@ -3,7 +3,10 @@
   <AutoRefresh>0</AutoRefresh>
   <DataSources>
     <DataSource Name="TestHarcodeada">
-      <DataSourceReference>/DataSourceProduccion</DataSourceReference>
+      <ConnectionProperties>
+        <DataProvider>SQL</DataProvider>
+        <ConnectString>Data Source=SERVERSQL3;Initial Catalog=Williams2</ConnectString>
+      </ConnectionProperties>
       <rd:SecurityType>DataBase</rd:SecurityType>
       <rd:DataSourceID>19dde040-c46f-477a-8048-5f0c1971f8dd</rd:DataSourceID>
     </DataSource>
@@ -13,23 +16,8 @@
       <Query>
         <DataSourceName>TestHarcodeada</DataSourceName>
         <QueryParameters>
-          <QueryParameter Name="@TonsDesde">
-            <Value>=Parameters!TonsDesde.Value</Value>
-          </QueryParameter>
-          <QueryParameter Name="@cliente">
-            <Value>=Parameters!Cliente.Value</Value>
-          </QueryParameter>
-          <QueryParameter Name="@producto">
-            <Value>=Parameters!Producto.Value</Value>
-          </QueryParameter>
-          <QueryParameter Name="@puerto">
-            <Value>=Parameters!Puerto.Value</Value>
-          </QueryParameter>
           <QueryParameter Name="@Modo">
             <Value>=Parameters!Modo.Value</Value>
-          </QueryParameter>
-          <QueryParameter Name="@TonsHasta">
-            <Value>=Parameters!TonsHasta.Value</Value>
           </QueryParameter>
           <QueryParameter Name="@FechaDesde">
             <Value>=Parameters!FechaDesde.Value</Value>
@@ -85,26 +73,26 @@ from
 
 
 
-LEFT OUTER JOIN Localidades LOCORI ON CDP.Procedencia = LOCORI.IdLocalidad          
+RIGHT OUTER JOIN Localidades LOCORI ON CDP.Procedencia = LOCORI.IdLocalidad          
 LEFT OUTER JOIN Provincias PROVORI ON LOCORI.IdProvincia = PROVORI.IdProvincia           
-where 
-	procedencia is not null
-	and netoproc &gt; 0
+where   1=1
+	--procedencia is not null
+	--and netoproc &gt; 0
 	
-	and (producto like @producto or isnull(@producto,'')=''  )
-	and (titulardesc like @cliente or
-	    rcomercialdesc like @cliente  or
-	    intermediariodesc like @cliente  or
-	    destinatariodesc like @cliente 
-		or  isnull(@cliente,'')='' )
-	and (destinodesc like @puerto or  isnull(@puerto,'')='')
+	--and (producto like @producto or isnull(@producto,'')=''  )
+	--and (titulardesc like @cliente or
+	--    rcomercialdesc like @cliente  or
+	--    intermediariodesc like @cliente  or
+	--    destinatariodesc like @cliente 
+	--	or  isnull(@cliente,'')='' )
+	--and (destinodesc like @puerto or  isnull(@puerto,'')='')
 
 
 group by LOCORI.Nombre,PROVORI.Nombre
 
 ) as C
-where kilos &gt;= isnull(@TonsDesde,0)
-and kilos &lt;= isnull(@TonsHasta,999999999)
+--where kilos &gt;= isnull(@TonsDesde,0)
+--and kilos &lt;= isnull(@TonsHasta,999999999)
 
 order by kilos desc</CommandText>
         <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
@@ -38143,6 +38131,6 @@ select idlocalidad, nombre from localidades</CommandText>
     </ReportParameter>
   </ReportParameters>
   <rd:ReportUnitType>Mm</rd:ReportUnitType>
-  <rd:ReportServerUrl>http://localhost/reportserver</rd:ReportServerUrl>
+  <rd:ReportServerUrl>http://bdlconsultores.sytes.net:10080/ReportServer</rd:ReportServerUrl>
   <rd:ReportID>61fdb02c-239c-40b0-9135-be7685d7778c</rd:ReportID>
 </Report>
