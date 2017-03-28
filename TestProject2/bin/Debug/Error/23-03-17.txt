@@ -1,0 +1,485 @@
+
+Log Entry : 
+03/23/2017 19:26:23
+Error in: . Error Message:Leo listado de dirs
+__________________________
+
+Log Entry : 
+03/23/2017 19:26:25
+Error in: . Error Message:Leo Lote 23mar174048 nveron PV2
+__________________________
+
+Log Entry : 
+03/23/2017 19:26:33
+Error in: . Error Message:Filtro los marcados
+__________________________
+
+Log Entry : 
+03/23/2017 19:26:33
+Error in: . Error Message:Salgo
+__________________________
+
+Log Entry : 
+03/23/2017 23:41:27
+Error in: . Error Message:Leo listado de dirs
+__________________________
+
+Log Entry : 
+03/23/2017 23:41:27
+Error in: . Error Message:Leo Lote 23mar154502 nveron PV2
+__________________________
+
+Log Entry : 
+03/23/2017 23:41:27
+Error in: . Error Message:Leo Lote 23mar154855 nveron PV2
+__________________________
+
+Log Entry : 
+03/23/2017 23:41:27
+Error in: . Error Message:Leo Lote 23mar155233 nveron PV2
+__________________________
+
+Log Entry : 
+03/23/2017 23:41:27
+Error in: . Error Message:Leo Lote 23mar155544 nveron PV2
+__________________________
+
+Log Entry : 
+03/23/2017 23:41:27
+Error in: . Error Message:Leo Lote 23mar155923 nveron PV2
+__________________________
+
+Log Entry : 
+03/23/2017 23:41:27
+Error in: . Error Message:Leo Lote 23mar160308 nveron PV2
+__________________________
+
+Log Entry : 
+03/23/2017 23:41:27
+Error in: . Error Message:Leo Lote 23mar161134 nveron PV2
+__________________________
+
+Log Entry : 
+03/23/2017 23:41:27
+Error in: . Error Message:Leo Lote 23mar162008 nveron PV2
+__________________________
+
+Log Entry : 
+03/23/2017 23:41:27
+Error in: . Error Message:Leo Lote 23mar162705 nveron PV2
+__________________________
+
+Log Entry : 
+03/23/2017 23:41:27
+Error in: . Error Message:Leo Lote 23mar163353 nveron PV2
+__________________________
+
+Log Entry : 
+03/23/2017 23:41:27
+Error in: . Error Message:Leo Lote 23mar163913 nveron PV2
+__________________________
+
+Log Entry : 
+03/23/2017 23:41:27
+Error in: . Error Message:Leo Lote 23mar165942 nveron PV2
+__________________________
+
+Log Entry : 
+03/23/2017 23:41:27
+Error in: . Error Message:Leo Lote 23mar170445 nveron PV2
+__________________________
+
+Log Entry : 
+03/23/2017 23:41:27
+Error in: . Error Message:Leo Lote 23mar173629 nveron PV2
+__________________________
+
+Log Entry : 
+03/23/2017 23:41:27
+Error in: . Error Message:Leo Lote 23mar174048 nveron PV2
+__________________________
+
+Log Entry : 
+03/23/2017 23:41:27
+Error in: . Error Message:Leo Lote 23mar174825 nveron PV2
+__________________________
+
+Log Entry : 
+03/23/2017 23:41:27
+Error in: . Error Message:Leo Lote 23mar175520 nveron PV2
+__________________________
+
+Log Entry : 
+03/23/2017 23:41:27
+Error in: . Error Message:Leo Lote 23mar193431 nveron PV2
+__________________________
+
+Log Entry : 
+03/23/2017 23:41:27
+Error in: . Error Message:Leo Lote 23mar204819 nveron PV2
+__________________________
+
+Log Entry : 
+03/23/2017 23:41:27
+Error in: . Error Message:Leo Lote 23mar205412 nveron PV2
+__________________________
+
+Log Entry : 
+03/23/2017 23:41:27
+Error in: . Error Message:Leo Lote 23mar205715 nveron PV2
+__________________________
+
+Log Entry : 
+03/23/2017 23:41:27
+Error in: . Error Message:Leo Lote 23mar210228 nveron PV2
+__________________________
+
+Log Entry : 
+03/23/2017 23:41:27
+Error in: . Error Message:Leo Lote 23mar210746 nveron PV2
+__________________________
+
+Log Entry : 
+03/23/2017 23:41:27
+Error in: . Error Message:Leo Lote 23mar211154 nveron PV2
+__________________________
+
+Log Entry : 
+03/23/2017 23:41:27
+Error in: . Error Message:Leo Lote 23mar211708 nveron PV2
+__________________________
+
+Log Entry : 
+03/23/2017 23:41:27
+Error in: . Error Message:Leo Lote 23mar212102 nveron PV2
+__________________________
+
+Log Entry : 
+03/23/2017 23:41:27
+Error in: . Error Message:Leo Lote 23mar212721 nveron PV2
+__________________________
+
+Log Entry : 
+03/23/2017 23:41:27
+Error in: . Error Message:Filtro los marcados
+__________________________
+
+Log Entry : 
+03/23/2017 23:41:30
+Error in: . Error Message:Salgo
+__________________________
+
+Log Entry : 
+03/23/2017 23:42:57
+Error in: . Error Message:Leo listado de dirs
+__________________________
+
+Log Entry : 
+03/23/2017 23:42:57
+Error in: . Error Message:Leo Lote 23mar154502 nveron PV2
+__________________________
+
+Log Entry : 
+03/23/2017 23:42:57
+Error in: . Error Message:Leo Lote 23mar154855 nveron PV2
+__________________________
+
+Log Entry : 
+03/23/2017 23:42:57
+Error in: . Error Message:Leo Lote 23mar155233 nveron PV2
+__________________________
+
+Log Entry : 
+03/23/2017 23:42:57
+Error in: . Error Message:Leo Lote 23mar155544 nveron PV2
+__________________________
+
+Log Entry : 
+03/23/2017 23:42:57
+Error in: . Error Message:Leo Lote 23mar155923 nveron PV2
+__________________________
+
+Log Entry : 
+03/23/2017 23:42:57
+Error in: . Error Message:Leo Lote 23mar160308 nveron PV2
+__________________________
+
+Log Entry : 
+03/23/2017 23:42:57
+Error in: . Error Message:Leo Lote 23mar161134 nveron PV2
+__________________________
+
+Log Entry : 
+03/23/2017 23:42:57
+Error in: . Error Message:Leo Lote 23mar162008 nveron PV2
+__________________________
+
+Log Entry : 
+03/23/2017 23:42:57
+Error in: . Error Message:Leo Lote 23mar162705 nveron PV2
+__________________________
+
+Log Entry : 
+03/23/2017 23:42:57
+Error in: . Error Message:Leo Lote 23mar163353 nveron PV2
+__________________________
+
+Log Entry : 
+03/23/2017 23:42:57
+Error in: . Error Message:Leo Lote 23mar163913 nveron PV2
+__________________________
+
+Log Entry : 
+03/23/2017 23:42:57
+Error in: . Error Message:Leo Lote 23mar165942 nveron PV2
+__________________________
+
+Log Entry : 
+03/23/2017 23:42:57
+Error in: . Error Message:Leo Lote 23mar170445 nveron PV2
+__________________________
+
+Log Entry : 
+03/23/2017 23:42:57
+Error in: . Error Message:Leo Lote 23mar173629 nveron PV2
+__________________________
+
+Log Entry : 
+03/23/2017 23:42:57
+Error in: . Error Message:Leo Lote 23mar174048 nveron PV2
+__________________________
+
+Log Entry : 
+03/23/2017 23:42:57
+Error in: . Error Message:Leo Lote 23mar174825 nveron PV2
+__________________________
+
+Log Entry : 
+03/23/2017 23:42:57
+Error in: . Error Message:Leo Lote 23mar175520 nveron PV2
+__________________________
+
+Log Entry : 
+03/23/2017 23:42:57
+Error in: . Error Message:Leo Lote 23mar193431 nveron PV2
+__________________________
+
+Log Entry : 
+03/23/2017 23:42:57
+Error in: . Error Message:Leo Lote 23mar204819 nveron PV2
+__________________________
+
+Log Entry : 
+03/23/2017 23:42:57
+Error in: . Error Message:Leo Lote 23mar205412 nveron PV2
+__________________________
+
+Log Entry : 
+03/23/2017 23:42:57
+Error in: . Error Message:Leo Lote 23mar205715 nveron PV2
+__________________________
+
+Log Entry : 
+03/23/2017 23:42:57
+Error in: . Error Message:Leo Lote 23mar210228 nveron PV2
+__________________________
+
+Log Entry : 
+03/23/2017 23:42:57
+Error in: . Error Message:Leo Lote 23mar210746 nveron PV2
+__________________________
+
+Log Entry : 
+03/23/2017 23:42:57
+Error in: . Error Message:Leo Lote 23mar211154 nveron PV2
+__________________________
+
+Log Entry : 
+03/23/2017 23:42:57
+Error in: . Error Message:Leo Lote 23mar211708 nveron PV2
+__________________________
+
+Log Entry : 
+03/23/2017 23:42:57
+Error in: . Error Message:Leo Lote 23mar212102 nveron PV2
+__________________________
+
+Log Entry : 
+03/23/2017 23:42:57
+Error in: . Error Message:Leo Lote 23mar212721 nveron PV2
+__________________________
+
+Log Entry : 
+03/23/2017 23:50:42
+Error in: . Error Message:Leo listado de dirs
+__________________________
+
+Log Entry : 
+03/23/2017 23:50:42
+Error in: . Error Message:Leo Lote 23mar154502 nveron PV2
+__________________________
+
+Log Entry : 
+03/23/2017 23:50:42
+Error in: . Error Message:Leo Lote 23mar154855 nveron PV2
+__________________________
+
+Log Entry : 
+03/23/2017 23:50:42
+Error in: . Error Message:Leo Lote 23mar155233 nveron PV2
+__________________________
+
+Log Entry : 
+03/23/2017 23:50:42
+Error in: . Error Message:Leo Lote 23mar155544 nveron PV2
+__________________________
+
+Log Entry : 
+03/23/2017 23:50:42
+Error in: . Error Message:Leo Lote 23mar155923 nveron PV2
+__________________________
+
+Log Entry : 
+03/23/2017 23:50:42
+Error in: . Error Message:Leo Lote 23mar160308 nveron PV2
+__________________________
+
+Log Entry : 
+03/23/2017 23:50:42
+Error in: . Error Message:Leo Lote 23mar161134 nveron PV2
+__________________________
+
+Log Entry : 
+03/23/2017 23:50:42
+Error in: . Error Message:Leo Lote 23mar162008 nveron PV2
+__________________________
+
+Log Entry : 
+03/23/2017 23:50:42
+Error in: . Error Message:Leo Lote 23mar162705 nveron PV2
+__________________________
+
+Log Entry : 
+03/23/2017 23:50:42
+Error in: . Error Message:Leo Lote 23mar163353 nveron PV2
+__________________________
+
+Log Entry : 
+03/23/2017 23:50:42
+Error in: . Error Message:Leo Lote 23mar163913 nveron PV2
+__________________________
+
+Log Entry : 
+03/23/2017 23:50:42
+Error in: . Error Message:Leo Lote 23mar165942 nveron PV2
+__________________________
+
+Log Entry : 
+03/23/2017 23:50:42
+Error in: . Error Message:Leo Lote 23mar170445 nveron PV2
+__________________________
+
+Log Entry : 
+03/23/2017 23:50:42
+Error in: . Error Message:Leo Lote 23mar173629 nveron PV2
+__________________________
+
+Log Entry : 
+03/23/2017 23:50:42
+Error in: . Error Message:Leo Lote 23mar174048 nveron PV2
+__________________________
+
+Log Entry : 
+03/23/2017 23:50:42
+Error in: . Error Message:Leo Lote 23mar174825 nveron PV2
+__________________________
+
+Log Entry : 
+03/23/2017 23:50:42
+Error in: . Error Message:Leo Lote 23mar175520 nveron PV2
+__________________________
+
+Log Entry : 
+03/23/2017 23:50:42
+Error in: . Error Message:Leo Lote 23mar193431 nveron PV2
+__________________________
+
+Log Entry : 
+03/23/2017 23:50:42
+Error in: . Error Message:Leo Lote 23mar204819 nveron PV2
+__________________________
+
+Log Entry : 
+03/23/2017 23:50:42
+Error in: . Error Message:Leo Lote 23mar205412 nveron PV2
+__________________________
+
+Log Entry : 
+03/23/2017 23:50:42
+Error in: . Error Message:Leo Lote 23mar205715 nveron PV2
+__________________________
+
+Log Entry : 
+03/23/2017 23:50:42
+Error in: . Error Message:Leo Lote 23mar210228 nveron PV2
+__________________________
+
+Log Entry : 
+03/23/2017 23:50:42
+Error in: . Error Message:Leo Lote 23mar210746 nveron PV2
+__________________________
+
+Log Entry : 
+03/23/2017 23:50:42
+Error in: . Error Message:Leo Lote 23mar211154 nveron PV2
+__________________________
+
+Log Entry : 
+03/23/2017 23:50:43
+Error in: . Error Message:Leo Lote 23mar211708 nveron PV2
+__________________________
+
+Log Entry : 
+03/23/2017 23:50:43
+Error in: . Error Message:Leo Lote 23mar212102 nveron PV2
+__________________________
+
+Log Entry : 
+03/23/2017 23:50:43
+Error in: . Error Message:Leo Lote 23mar212721 nveron PV2
+__________________________
+
+Log Entry : 
+03/23/2017 23:50:43
+Error in: . Error Message:Leo Lote 23mar213220 nveron PV2
+__________________________
+
+Log Entry : 
+03/23/2017 23:50:43
+Error in: . Error Message:Leo Lote 23mar213506 nveron PV2
+__________________________
+
+Log Entry : 
+03/23/2017 23:50:43
+Error in: . Error Message:Leo Lote 23mar214028 nveron PV2
+__________________________
+
+Log Entry : 
+03/23/2017 23:50:43
+Error in: . Error Message:Leo Lote 23mar214418 nveron PV2
+__________________________
+
+Log Entry : 
+03/23/2017 23:50:43
+Error in: . Error Message:Leo Lote 23mar215032 nveron PV2
+__________________________
+
+Log Entry : 
+03/23/2017 23:50:46
+Error in: . Error Message:Filtro los marcados
+__________________________
+
+Log Entry : 
+03/23/2017 23:50:50
+Error in: . Error Message:Salgo
+__________________________
