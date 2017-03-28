@@ -41,16 +41,68 @@ namespace ProntoMVC.Data
 
             HtmlDocument doc = new HtmlDocument();
             string texto = System.IO.File.ReadAllText(filePath);
-            doc.LoadHtml(texto);  
+            doc.LoadHtml(texto);
 
-            
-            
+
+
             DataTable dt = new DataTable();
-            dt.Columns.Add("Name", typeof(string));
-            dt.Columns.Add("Value", typeof(string));
-
-            int count = 0;
-
+            dt.Columns.Add();
+            dt.Columns.Add();
+            dt.Columns.Add();
+            dt.Columns.Add();
+            dt.Columns.Add();
+            dt.Columns.Add();
+            dt.Columns.Add();
+            dt.Columns.Add();
+            dt.Columns.Add();
+            dt.Columns.Add();
+            dt.Columns.Add();
+            dt.Columns.Add();
+            dt.Columns.Add();
+            dt.Columns.Add();
+            dt.Columns.Add();
+            dt.Columns.Add();
+            dt.Columns.Add();
+            dt.Columns.Add();
+            dt.Columns.Add();
+            dt.Columns.Add();
+            dt.Columns.Add();
+            dt.Columns.Add();
+            dt.Columns.Add();
+            dt.Columns.Add();
+            dt.Columns.Add();
+            dt.Columns.Add();
+            dt.Columns.Add();
+            dt.Columns.Add();
+            dt.Columns.Add();
+            dt.Columns.Add();
+            dt.Columns.Add();
+            dt.Columns.Add();
+            dt.Columns.Add();
+            dt.Columns.Add();
+            dt.Columns.Add();
+            dt.Columns.Add();
+            dt.Columns.Add();
+            dt.Columns.Add();
+            dt.Columns.Add();
+            dt.Columns.Add();
+            dt.Columns.Add();
+            dt.Columns.Add();
+            dt.Columns.Add();
+            dt.Columns.Add();
+            dt.Columns.Add();
+            dt.Columns.Add();
+            dt.Columns.Add();
+            dt.Columns.Add();
+            dt.Columns.Add();
+            dt.Columns.Add();
+            dt.Columns.Add();
+            dt.Columns.Add();
+            dt.Columns.Add();
+            dt.Columns.Add();
+            dt.Columns.Add();
+    
+          
 
             foreach (HtmlNode table in doc.DocumentNode.SelectNodes("//table"))
             {
@@ -58,35 +110,21 @@ namespace ProntoMVC.Data
                 foreach (HtmlNode row in table.SelectNodes("tr"))
                 {
 
-                    if (table.Id == "table2")
+                    DataRow dr = dt.NewRow();
+                    int count = 0;
+
+                    foreach (var cell in row.SelectNodes("td"))
                     {
-                        DataRow dr = dt.NewRow();
-
-                        foreach (var cell in row.SelectNodes("td"))
-                        {
-                            if ((count % 2 == 0))
-                            {
-                                dr["Name"] = cell.InnerText.Replace("&nbsp;", " ");
-                            }
-                            else
-                            {
-
-                                dr["Value"] = cell.InnerText.Replace("&nbsp;", " ");
-
-                                dt.Rows.Add(dr);
-                            }
-                            count++;
-
-                        }
-
-
+                        dr[count] = cell.InnerText.Replace("&nbsp;", " ");
+                        count++;
                     }
 
+                    dt.Rows.Add(dr);
+
                 }
-
-
-
             }
+
+
 
             return dt;
         }

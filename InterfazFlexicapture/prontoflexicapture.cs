@@ -975,6 +975,10 @@ namespace ProntoFlexicapture
         public static List<string> ExtraerListaDeImagenesQueNoHanSidoProcesadas(int cuantas, string DirApp)
         {
 
+            const int ARCHI = 10000; //max de archivos
+            const int HORAS = 4;      // horas tope
+
+
             string dir = DirApp + @"\Temp\";
             var l = new List<string>();
 
@@ -990,7 +994,7 @@ namespace ProntoFlexicapture
 
             // qué tal si levanto los directorios, me fijo cuales son nuevos, y sobre esos hago el getfiles?
 
-            var desde = DateTime.Now.AddHours(-4);
+            var desde = DateTime.Now.AddHours(-HORAS);
 
 
             if (true)
@@ -1019,7 +1023,7 @@ namespace ProntoFlexicapture
                     if (files == null) files = subd.GetFiles("*.*", SearchOption.TopDirectoryOnly);
                     else files = files.Concat(subd.GetFiles("*.*", SearchOption.TopDirectoryOnly)).ToArray();
 
-                    if (files.Count() > 1000) break;
+                    if (files.Count() > ARCHI) break;
                 }
 
 

@@ -726,7 +726,7 @@ Partial Class Configuracion
                     ImportarEstablecimientosLosGrobo(ds)
                 Else
                     Dim ds As New DataSet
-                    Dim dt = ExcelImportadorManager.GetExcel2(nombrenuevo, "bwF1C") 'buscar primera pagina o avisar por lo menos
+                    Dim dt = ExcelImportadorManager.GetExcel2_ODBC(nombrenuevo, "bwF1C") 'buscar primera pagina o avisar por lo menos
                     ds.Tables.Add(dt.Copy)
                     ImportarEstablecimientosLosGrobo(ds)
                 End If

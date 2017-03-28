@@ -1929,10 +1929,12 @@ Public Class ExcelImportadorManager
         'loguear apertura del excel q puede fallar
         Dim ds As DataSet
         Try
-            If True Then
-                ds = GetExcel(pFileName, 1)
+            If pFileName.Contains("Urenport_") Then 'es html
+
+                ds = New DataSet()
+                ds.Tables.Add(FuncionesGenericasCSharp.GetExcel5_HTML_AgilityPack(pFileName))
             Else
-                ds = GetExcel2_ODBC(pFileName).DataSet
+                ds = GetExcel2_ODBC(pFileName).DataSet                'ds = GetExcel(pFileName, 1)
             End If
 
 
@@ -2026,7 +2028,7 @@ Public Class ExcelImportadorManager
                             Try
                                 r(c) = 0
                             Catch ex2 As Exception
-                                ErrHandler2.WriteError("Error al limpiar la tabla " + ex2.ToString())
+                                'ErrHandler2.WriteError("Error al limpiar la tabla " + ex2.ToString())
                             End Try
                         End Try
                     End If
@@ -2083,8 +2085,14 @@ Public Class ExcelImportadorManager
 
                     If (Not bEditadaManual) Then
 
+                        Try
+                            .FechaArribo = DateTime.Parse(iisValidSqlDate(Left(r(3), 10), DateTime.Now))
+                        Catch ex As Exception
 
-                        .FechaArribo = DateTime.Parse(iisValidSqlDate(Left(r(3), 10), DateTime.Now))
+                        End Try
+                        If .FechaArribo < #1/1/1980# Then .FechaArribo = DateTime.Today
+
+
                         .FechaModificacion = DateTime.Now
 
                         If actua(.Turno, r(1)) Then log += "Turno; "
