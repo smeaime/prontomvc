@@ -837,31 +837,80 @@ namespace ProntoMVC.Tests
         /// ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
+
+
         [TestMethod]
-        public void CampoEditableDeClientesRelacionadosAlUsuarioParaTirarInforme_28320()
+        public void SincroBragadense_36755()
         {
+
+            //string DIRFTP = DirApp + @"\DataBackupear\";
+            //string ArchivoExcelDestino = DIRFTP + "ControlKilos_" + DateTime.Now.ToString("ddMMMyyyy_HHmmss") + ".xlsx";
+
 
             string sErrores = "", sTitulo = "";
             LinqCartasPorteDataContext db = null;
-            DemoProntoEntities db2 = null;
 
-            var clientes = CartaDePorteManager.TraerCUITClientesSegunUsuario("BLD25MAYO", SC).Where(x => x != "");
-            String aaa = ParametroManager.TraerValorParametro2(SC, "ClienteBLDcorredorCUIT").NullSafeToString() ?? "";
-            var sss = aaa.Split('|').ToList();
+            // el _CONST_MAXROWS sale del app.config
+
+            int registrosf = 0;
+
+            int idcli = CartaDePorteManager.BuscarClientePorCUIT("30-55549549-4", SC, "");
+
+            var output = SincronismosWilliamsManager.GenerarSincro("La Bragadense", ref sErrores, SC, "dominio", ref sTitulo
+                                , CartaDePorteManager.enumCDPestado.DescargasMasFacturadas,
+                     "", idcli, -1,
+                -1, idcli,
+                 idcli, -1, -1, -1,
+                 CartaDePorteManager.FiltroANDOR.FiltroOR, "Entregas",
+                new DateTime(2016, 1, 14), new DateTime(2016, 1, 14),
+                -1, "Ambas", false, "", "", -1, ref registrosf, 4000);
 
 
-            var q = CartaDePorteManager.CartasLINQlocalSimplificadoTipadoConCalada3(SC,
-                     "", "", "", 1, 10,
-                      CartaDePorteManager.enumCDPestado.Todas, "", -1, -1,
-                     -1, -1,
-                     -1, -1, -1, -1, CartaDePorteManager.FiltroANDOR.FiltroOR, "Ambas",
-                      new DateTime(2013, 1, 1),
-                      new DateTime(2014, 1, 1),
-                      -1, ref sTitulo, "Ambas", false, "", ref db2, "", -1, -1, 0, "", "Ambas")
 
-                        .Where(x => clientes.Contains(x.TitularCUIT) || clientes.Contains(x.IntermediarioCUIT) || clientes.Contains(x.RComercialCUIT))
-                        .ToList();
+            //File.Copy(output, @"C:\Users\Administrador\Desktop\"   Path.GetFileName(output), true);
+            System.Diagnostics.Process.Start(output);
         }
+
+
+
+
+
+
+        [TestMethod]
+        public void UrenportMasModificaciones_35603()
+        {
+
+            string filtro = "{\"groupOp\":\"OR\",\"rules\":[{\"field\":\"Producto\",\"op\":\"eq\",\"data\":\"Trigo Pan\"},{\"field\":\"Producto\",\"op\":\"eq\",\"data\":\"MAIZ\"}]}";
+
+            var scEF = ProntoMVC.Data.Models.Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC));
+            DemoProntoEntities db = new DemoProntoEntities(scEF);
+
+            var s = new ServicioCartaPorte.servi();
+            var sqlquery4 = s.CartasPorte_DynamicGridData("IdCartaDePorte", "desc", 1, 999999, true, filtro,
+                                                 "01/12/2016",
+                                                 "30/01/2017",
+                                                 0, -1, SC, "Mariano");
+
+
+        }
+
+
+
+
+
+        [TestMethod]
+        public void MostrarLogEnCartadeUrenport()
+        {
+
+
+            var dt = CartaDePorteManager.TraerLogDeCartaPorte(SC, 2737266, false);
+            var s = CartaDePorteManager.TraerLogDeCartaPorteHtml(SC, 2737266, false);
+
+        }
+
+
+
+
 
 
 
@@ -908,12 +957,57 @@ namespace ProntoMVC.Tests
 
 
 
+
+
+
+        [TestMethod]
+        public void CampoEditableDeClientesRelacionadosAlUsuarioParaTirarInforme_28320()
+        {
+
+            string sErrores = "", sTitulo = "";
+            LinqCartasPorteDataContext db = null;
+            DemoProntoEntities db2 = null;
+
+            var clientes = CartaDePorteManager.TraerCUITClientesSegunUsuario("BLD25MAYO", SC).Where(x => x != "");
+            String aaa = ParametroManager.TraerValorParametro2(SC, "ClienteBLDcorredorCUIT").NullSafeToString() ?? "";
+            var sss = aaa.Split('|').ToList();
+
+
+            var q = CartaDePorteManager.CartasLINQlocalSimplificadoTipadoConCalada3(SC,
+                     "", "", "", 1, 10,
+                      CartaDePorteManager.enumCDPestado.Todas, "", -1, -1,
+                     -1, -1,
+                     -1, -1, -1, -1, CartaDePorteManager.FiltroANDOR.FiltroOR, "Ambas",
+                      new DateTime(2013, 1, 1),
+                      new DateTime(2014, 1, 1),
+                      -1, ref sTitulo, "Ambas", false, "", ref db2, "", -1, -1, 0, "", "Ambas")
+
+                        .Where(x => clientes.Contains(x.TitularCUIT) || clientes.Contains(x.IntermediarioCUIT) || clientes.Contains(x.RComercialCUIT))
+                        .ToList();
+        }
+
+
+
+
+
+
+
+
+
+
         [TestMethod]
         public void OCR_alta_automatica_de_clientes_22172_36722()
         {
 
+            Assert.IsFalse(FuncionesGenericasCSharp.CUITValido("30700809818")); // este pasa por verdadero. está bien?
+
 
             Assert.IsFalse(FuncionesGenericasCSharp.CUITValido("13050795084"));
+            Assert.IsFalse(FuncionesGenericasCSharp.CUITValido("38763599059"));
+            Assert.IsFalse(FuncionesGenericasCSharp.CUITValido("38711815519"));
+            Assert.IsFalse(FuncionesGenericasCSharp.CUITValido("32769425127"));
+            Assert.IsFalse(FuncionesGenericasCSharp.CUITValido("33506737440"));
+            Assert.IsFalse(FuncionesGenericasCSharp.CUITValido("36700869918"));
 
 
             Assert.IsFalse(FuncionesGenericasCSharp.CUITValido(""));

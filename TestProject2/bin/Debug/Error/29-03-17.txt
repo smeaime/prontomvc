@@ -1,0 +1,30 @@
+
+Log Entry : 
+03/29/2017 10:10:00
+Error in: . Error Message:Generando sincro para La Bragadense
+__________________________
+
+Log Entry : 
+03/29/2017 10:13:02
+Error in: . Error Message:Generando sincro para La Bragadense
+__________________________
+
+Log Entry : 
+03/29/2017 10:16:48
+Error in: . Error Message:Generando sincro para La Bragadense
+__________________________
+
+Log Entry : 
+03/29/2017 10:22:34
+Error in: . Error Message:Generando sincro para La Bragadense
+__________________________
+
+Log Entry : 
+03/29/2017 10:33:27
+Error in: . Error Message:Generando sincro para La Bragadense
+__________________________
+
+Log Entry : 
+03/29/2017 10:35:37
+Error in: . Error Message:Generando sincro para La Bragadense
+__________________________
