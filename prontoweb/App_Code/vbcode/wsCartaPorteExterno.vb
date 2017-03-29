@@ -146,5 +146,56 @@ Public Class wsCartaPorteExterno
 
 
 
+    <WebMethod(Description:="Devuelve un listado de descargas", EnableSession:=False)> _
+    Public Function obtenerDescargas_v2(usuario As String, password As String, cuit As String, fechadesde As DateTime, fechahasta As DateTime) As CerealNet.WSCartasDePorte.respuestaEntrega_v2_00
+
+
+        Try
+
+            Dim scs As String
+
+            If System.Diagnostics.Debugger.IsAttached() Or ConfigurationManager.AppSettings("UrlDominio").Contains("localhost") Then
+                scs = scLocal
+            Else
+                scs = scWilliamsRelease
+            End If
+
+            Return CartaDePorteManager.BajarListadoDeCartaPorte_CerealNet_DLL_v2_00(usuario, password, cuit, fechadesde, fechahasta, Encriptar(scs), AplicacionConImagenes, Encriptar(scConexBDLmaster))
+        Catch ex As Exception
+
+            ErrHandler2.WriteError(ex)
+        End Try
+
+
+
+    End Function
+
+
+
+
+    <WebMethod(Description:="Devuelve un listado de posiciones", EnableSession:=False)> _
+    Public Function obtenerPosiciones_v2(usuario As String, password As String, cuit As String, fechadesde As DateTime, fechahasta As DateTime) As CerealNet.WSCartasDePorte.respuestaEntrega_v2_00
+
+
+        Try
+
+            Dim scs As String
+
+            If System.Diagnostics.Debugger.IsAttached() Or ConfigurationManager.AppSettings("UrlDominio").Contains("localhost") Then
+                scs = scLocal
+            Else
+                scs = scWilliamsRelease
+            End If
+
+            Return CartaDePorteManager.BajarListadoDeCartaPorte_CerealNet_DLL_v2_00(usuario, password, cuit, fechadesde, fechahasta, Encriptar(scs), AplicacionConImagenes, Encriptar(scConexBDLmaster))
+        Catch ex As Exception
+
+            ErrHandler2.WriteError(ex)
+        End Try
+
+
+
+    End Function
+
 
 End Class
