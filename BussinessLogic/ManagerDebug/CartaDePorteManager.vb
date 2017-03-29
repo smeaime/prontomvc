@@ -676,7 +676,7 @@ Public Class CartaDePorteManager
         Dim db As DemoProntoEntities = New DemoProntoEntities(Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC)))
 
 
-        Dim q = (From c In db.Transportistas Where c.Cuit.Trim.Replace("-", "").Replace(" ", "")  = cuit.Trim.Replace("-", "").Replace(" ", "") ).FirstOrDefault()
+        Dim q = (From c In db.Transportistas Where c.Cuit.Trim.Replace("-", "").Replace(" ", "") = cuit.Trim.Replace("-", "").Replace(" ", "")).FirstOrDefault()
 
 
 
@@ -718,7 +718,7 @@ Public Class CartaDePorteManager
         Dim db As DemoProntoEntities = New DemoProntoEntities(Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC)))
 
 
-        Dim q = (From c In db.Choferes Where c.Cuil.Trim.Replace("-", "").Replace(" ", "")  = cuit.Trim.Replace("-", "").Replace(" ", "") ).FirstOrDefault()
+        Dim q = (From c In db.Choferes Where c.Cuil.Trim.Replace("-", "").Replace(" ", "") = cuit.Trim.Replace("-", "").Replace(" ", "")).FirstOrDefault()
 
 
 
@@ -772,7 +772,7 @@ Public Class CartaDePorteManager
                                                                     i.IdLocalidad = CInt(dest.IdLocalidad)
                                                                         ).DefaultIfEmpty()
                      Select dest, locdes
-                     Where dest.CUIT.Trim.Replace("-", "").Replace(" ", "")  = cuit.Trim.Replace("-", "").Replace(" ", "") ).ToList()
+                     Where dest.CUIT.Trim.Replace("-", "").Replace(" ", "") = cuit.Trim.Replace("-", "").Replace(" ", "")).ToList()
 
 
 
@@ -855,22 +855,22 @@ Public Class CartaDePorteManager
 
 
                 q = New ProntoMVC.Data.Models.Cliente
-                    q.RazonSocial = RazonSocial
+                q.RazonSocial = RazonSocial
 
-                    'hay q guardarlo con guiones????? -sí!!!!!
-                    q.Cuit = cuit
+                'hay q guardarlo con guiones????? -sí!!!!!
+                q.Cuit = cuit
 
 
                 'http://consultas.bdlconsultores.com.ar/Admin/verConsultas1.php?recordid=32254
                 'Los clientes que da de alta el ocr, no se pueden identificar en algun lugar como "cliente provisorio" para que dsp completemos los datos y pasen a "cliente activo".
 
 
-                    'acá había un insertonsubmit
-                    db.Clientes.Add(q)
-                    db.SaveChanges()
-                    Return q.IdCliente
-                Else
-                    Return 0
+                'acá había un insertonsubmit
+                db.Clientes.Add(q)
+                db.SaveChanges()
+                Return q.IdCliente
+            Else
+                Return 0
             End If
 
         Else
@@ -5480,7 +5480,7 @@ Public Class CartaDePorteManager
 
         Dim outputImage As Bitmap = New Bitmap(outputImageWidth, outputImageHeight, System.Drawing.Imaging.PixelFormat.Format32bppArgb)
 
-        Using graphics As Graphics = Graphics.FromImage(outputImage)
+        Using graphics As Graphics = graphics.FromImage(outputImage)
 
             graphics.DrawImage(firstImage, New Rectangle(New Point(), firstImage.Size),
                 New Rectangle(New Point(), firstImage.Size), GraphicsUnit.Pixel)
@@ -15258,7 +15258,9 @@ Public Class CartaDePorteManager
     End Function
 
 
-    Public Shared Function BajarListadoDeCartaPorte_CerealNet_DLL_v2_00(usuario As String, password As String, cuit As String, fechadesde As DateTime, fechahasta As DateTime, SC As String, DirApp As String, ConexBDLmaster As String) As CerealNet.WSCartasDePorte.respuestaEntrega
+
+
+    Public Shared Function BajarListadoDeCartaPorte_CerealNet_DLL_v2_00(usuario As String, password As String, cuit As String, fechadesde As DateTime, fechahasta As DateTime, SC As String, DirApp As String, ConexBDLmaster As String) As CerealNet.WSCartasDePorte.respuestaEntrega_v2_00
 
         'var scEF = ProntoMVC.Data.Models.Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC));
         '      DemoProntoEntities db = new DemoProntoEntities(scEF);
@@ -15329,14 +15331,14 @@ Public Class CartaDePorteManager
 
             Dim dbcartas = ListadoSegunCliente(SC, idcliente, fechadesde, fechahasta)
 
-            Dim cartas As New CerealNet.WSCartasDePorte.respuestaEntrega
-            Dim cps(dbcartas.Count - 1) As CerealNet.WSCartasDePorte.cartaPorte
+            Dim cartas As New CerealNet.WSCartasDePorte.respuestaEntrega_v2_00
+            Dim cps(dbcartas.Count - 1) As CerealNet.WSCartasDePorte.cartaPorte_v2_00
 
             For n = 0 To dbcartas.Count - 1
 
                 Try
 
-                    Dim cp As New CerealNet.WSCartasDePorte.cartaPorte
+                    Dim cp As New CerealNet.WSCartasDePorte.cartaPorte_v2_00
                     Dim dbc = dbcartas(n)
 
                     'HECHO
@@ -15501,7 +15503,30 @@ Public Class CartaDePorteManager
                     cp.vagon = dbc.SubnumeroVagon
 
 
-
+                    cp.CEE = dbc.CEE
+                    cp.fechaEmisionCarga = dbc.FechaDeCarga
+                    cp.fechavencimiento = dbc.FechaVencimiento
+                    cp.CTG = dbc.CTG
+                    cp.CupoTurno = dbc.Turno
+                    cp.HoraArribo = dbc.FechaArribo
+                    cp.brutoproc = dbc.BrutoPto
+                    cp.taraproc = dbc.TaraPto
+                    cp.Humedad = dbc.Humedad
+                    cp.MermaHumedad = dbc.HumedadDesnormalizada
+                    cp.OtrasMermas = dbc.Merma
+                    cp.NetoFinal = dbc.NetoFinal
+                    cp.ClienteObserv = dbc.ClienteAuxiliarDesc
+                    cp.CorredorObs = dbc.CorredorDesc
+                    cp.cuitchofer = dbc.ChoferCUIT
+                    cp.Chofer = dbc.ChoferDesc
+                    cp.cuittransportista = dbc.TransportistaCUIT
+                    cp.transportista = dbc.TransportistaDesc
+                    cp.acoplado = dbc.Acoplado
+                    cp.kmarecorrer = dbc.KmARecorrer
+                    cp.tarifa = dbc.Tarifa
+                    cp.Establecimiento = dbc.EstablecimientoDesc
+                    cp.IdPosicionEstado = dbc.Situacion
+                    cp.PosicionEstado = dbc.Situacion
 
 
 
@@ -15955,7 +15980,7 @@ Public Class CartaDePorteManager
 
 
                     'cuando dicen 'puerto' se refieren al destino tambien
-                 
+
                     cp.puerto = If(dbc.DestinoDesc, "")
                     cp.codonccapuerto = Val(dbc.DestinoCodigoONCAA)
                     cp.localidaddestino = dbc.DestinoLocalidadDesc
@@ -16683,6 +16708,78 @@ Public Class CartaDePorteManager
     End Function
 
 
+
+
+
+    Public Shared Function TraerLogDeCartaPorteHtml(SC As String, ByVal idcarta As Long, bTraerImputaciones As Boolean) As String
+
+
+        Dim dt = CartaDePorteManager.TraerLogDeCartaPorte(SC, idcarta, bTraerImputaciones)
+
+        If dt Is Nothing Then Exit Function
+
+        Debug.Print(dt.Rows.Count)
+
+        Dim s As String = "<br/>"
+
+        For Each r In dt.Rows
+            s &= IIf(r.Item("Detalle").ToString.Contains("Imputa"), "IMPUT " & r.Item("Detalle").ToString, "") _
+                & IIf(r.Item("Detalle").ToString.Contains("esimputa"), "DESIMPUT " & r.Item("Detalle").ToString, "") _
+                & JustificadoDerecha(r.Item(0), 10) & " " & JustificadoDerecha(r.Item(7), 15) & " " & " " _
+                & JustificadoDerecha(r.Item(3), 30) & " " & " " _
+                & IIf(r.Item("Tipo").ToString = "IMAG", "<a href=""..\DataBackupear\" + r.Item("Detalle").ToString + """>" + r.Item("Detalle").ToString + "</a>", "") _
+                & "<br/>"
+            '& r.Item(5)  & r.Item(0) & " " & r.Item(1)& " " & r.Item(4)  " " & r.Item(7)& " " & r.Item(3)
+        Next
+
+        Return s
+
+    End Function
+
+
+
+
+    Public Shared Function TraerLogDeCartaPorte(SC As String, ByVal idcarta As Long, bTraerImputaciones As Boolean) As Data.DataTable
+
+
+        If idcarta <= 0 Then Return Nothing
+        'lo que hace que tarde es el ultimo where con el like que tiene el comodin al principio
+        'lo que hace que tarde es el ultimo where con el like que tiene el comodin al principio
+        'lo que hace que tarde es el ultimo where con el like que tiene el comodin al principio
+        'lo que hace que tarde es el ultimo where con el like que tiene el comodin al principio
+        Dim s = "select * from log    where  (IdComprobante=" & idcarta & " AND  Detalle='Tabla : CartaPorte' )  " & _
+                                        " or   (IdComprobante=" & idcarta & " AND  Tipo='IMAG') " & _
+                                        " or   (IdComprobante=" & idcarta & " AND  Tipo='IMPUR') "
+
+        If bTraerImputaciones Then s = s & " or (detalle like 'Imputacion de IdCartaPorte" & idcarta & "C%' ) " & _
+                                        " or  (detalle like 'Desimputacion%" & idcarta & "-%' ) " & _
+                                        " or (detalle like 'Se desimputa la carta id" & idcarta & " %')  "
+
+        s += "   ORDER BY FechaRegistro ASC"
+
+
+
+        'para ver las q se desfacturaron a mano:
+        'select * from log where detalle like '%desimputa%'
+
+
+
+
+        '"Log_InsertarRegistro", "IMPORT", _
+        '                                      .Id, 0, Now, 0, "Tabla : CartaPorte", 
+
+        Debug.Print(s)
+        Try
+            Return EntidadManager.ExecDinamico(SC, s, 200)
+        Catch ex As Exception
+            ErrHandler2.WriteError(ex)
+        End Try
+
+
+        'EntidadManager.ExecDinamico(SC, "UPDATE CartasDePorte SET IdFacturaImputada=" & idfactura & "  WHERE IdCartaDePorte=" & oCDP.Id)
+        'EntidadManager.LogPronto(SC, idfactura, "Imputacion de IdCartaPorte" & oCDP.Id & "CDP:" & oCDP.NumeroCartaDePorte & " " & oCDP.SubnumeroVagon & "  IdFacturaImputada " & idfactura, nombreUsuario)
+
+    End Function
 
 
 

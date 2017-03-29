@@ -687,6 +687,24 @@ namespace ProntoMVC.Data.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<wCartasDePorte_TX_EstadisticasDeDescarga_Result1>("wCartasDePorte_TX_EstadisticasDeDescarga", startRowIndexParameter, maximumRowsParameter, estadoParameter, queContengaParameter, idVendedorParameter, idCorredorParameter, idDestinatarioParameter, idIntermediarioParameter, idRemComercialParameter, idArticuloParameter, idProcedenciaParameter, idDestinoParameter, aplicarANDuORalFiltroParameter, modoExportacionParameter, fechadesdeParameter, fechahastaParameter, puntoventaParameter, optDivisionSyngentaParameter, contratoParameter, queContenga2Parameter, idClienteAuxiliarintParameter, agrupadorDeTandaPeriodosParameter, vagonParameter, patenteParameter, optCamionVagonParameter, fechadesdeAnteriorParameter, fechahastaAnteriorParameter);
         }
     
+        public virtual int Requerimientos_TX_PendientesDeAsignacion(string depositos)
+        {
+            var depositosParameter = depositos != null ?
+                new ObjectParameter("Depositos", depositos) :
+                new ObjectParameter("Depositos", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Requerimientos_TX_PendientesDeAsignacion", depositosParameter);
+        }
+    
+        public virtual int Requerimientos_TX_PendientesDeAsignacion1(string depositos)
+        {
+            var depositosParameter = depositos != null ?
+                new ObjectParameter("Depositos", depositos) :
+                new ObjectParameter("Depositos", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Requerimientos_TX_PendientesDeAsignacion1", depositosParameter);
+        }
+    
         [DbFunction("DemoProntoEntities", "fSQL_GetDataTableFiltradoYPaginado")]
         public virtual IQueryable<fSQL_GetDataTableFiltradoYPaginado_Result3> fSQL_GetDataTableFiltradoYPaginado(Nullable<int> startRowIndex, Nullable<int> maximumRows, Nullable<int> estado, string queContenga, Nullable<int> idVendedor, Nullable<int> idCorredor, Nullable<int> idDestinatario, Nullable<int> idIntermediario, Nullable<int> idRemComercial, Nullable<int> idArticulo, Nullable<int> idProcedencia, Nullable<int> idDestino, Nullable<int> aplicarANDuORalFiltro, string modoExportacion, Nullable<System.DateTime> fechadesde, Nullable<System.DateTime> fechahasta, Nullable<int> puntoventa, Nullable<int> idAcopio, Nullable<bool> bTraerDuplicados, string contrato, string queContenga2, Nullable<int> idClienteAuxiliarint, Nullable<int> agrupadorDeTandaPeriodos, Nullable<int> vagon, string patente, string optCamionVagon)
         {
@@ -795,24 +813,6 @@ namespace ProntoMVC.Data.Models
                 new ObjectParameter("optCamionVagon", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.CreateQuery<fSQL_GetDataTableFiltradoYPaginado_Result3>("[DemoProntoEntities].[fSQL_GetDataTableFiltradoYPaginado](@startRowIndex, @maximumRows, @estado, @QueContenga, @idVendedor, @idCorredor, @idDestinatario, @idIntermediario, @idRemComercial, @idArticulo, @idProcedencia, @idDestino, @AplicarANDuORalFiltro, @ModoExportacion, @fechadesde, @fechahasta, @puntoventa, @IdAcopio, @bTraerDuplicados, @Contrato, @QueContenga2, @idClienteAuxiliarint, @AgrupadorDeTandaPeriodos, @Vagon, @Patente, @optCamionVagon)", startRowIndexParameter, maximumRowsParameter, estadoParameter, queContengaParameter, idVendedorParameter, idCorredorParameter, idDestinatarioParameter, idIntermediarioParameter, idRemComercialParameter, idArticuloParameter, idProcedenciaParameter, idDestinoParameter, aplicarANDuORalFiltroParameter, modoExportacionParameter, fechadesdeParameter, fechahastaParameter, puntoventaParameter, idAcopioParameter, bTraerDuplicadosParameter, contratoParameter, queContenga2Parameter, idClienteAuxiliarintParameter, agrupadorDeTandaPeriodosParameter, vagonParameter, patenteParameter, optCamionVagonParameter);
-        }
-    
-        public virtual int Requerimientos_TX_PendientesDeAsignacion(string depositos)
-        {
-            var depositosParameter = depositos != null ?
-                new ObjectParameter("Depositos", depositos) :
-                new ObjectParameter("Depositos", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Requerimientos_TX_PendientesDeAsignacion", depositosParameter);
-        }
-    
-        public virtual int Requerimientos_TX_PendientesDeAsignacion1(string depositos)
-        {
-            var depositosParameter = depositos != null ?
-                new ObjectParameter("Depositos", depositos) :
-                new ObjectParameter("Depositos", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Requerimientos_TX_PendientesDeAsignacion1", depositosParameter);
         }
     }
 }

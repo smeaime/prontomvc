@@ -1,0 +1,1 @@
+select top 10 * from log order by fecharegistro desc
