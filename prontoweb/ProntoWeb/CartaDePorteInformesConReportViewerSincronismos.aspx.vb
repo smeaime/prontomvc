@@ -2394,7 +2394,7 @@ Partial Class CartaDePorteInformesConReportViewerSincronismos
 
                         FiltrarCopias(dt)
                         dt = DataTableWHERE(dt, sWHERE)
-                        output = Sincronismo_LaBragadense(dt, sErrores, "")
+                        output = Sincronismo_LaBragadense(dt, sErrores, "", HFSC.Value)
 
                         lblErrores.Text = sErrores
                         UpdatePanel2.Update()

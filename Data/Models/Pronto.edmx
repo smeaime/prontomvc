@@ -5106,6 +5106,7 @@ warning 6002: The table/view 'Pronto.dbo.EjerciciosPeriodos' does not have a pri
           <Property Name="FechaInicioVigenciaCodigoNormaCapital" Type="datetime" />
           <Property Name="FechaFinVigenciaCodigoNormaCapital" Type="datetime" />
           <Property Name="IdObraDefault" Type="int" />
+          <Property Name="RegimenSimplificadoIIBB" Type="varchar" MaxLength="2" />
         </EntityType>
         <EntityType Name="Provincias">
           <Key>
@@ -5416,6 +5417,8 @@ warning 6002: The table/view 'Pronto.dbo.EjerciciosPeriodos' does not have a pri
           <Property Name="HoraSalida" Type="varchar" MaxLength="10" />
           <Property Name="PesoBruto" Type="numeric" Precision="18" Scale="2" />
           <Property Name="Tara" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="NumeroCAI" Type="numeric" Precision="19" Scale="0" />
+          <Property Name="FechaVencimientoCAI" Type="datetime" />
         </EntityType>
         <EntityType Name="Requerimientos">
           <Key>
@@ -5784,6 +5787,8 @@ warning 6002: The table/view 'Pronto.dbo.EjerciciosPeriodos' does not have a pri
           <Property Name="CodigoAFIP3_Letra_B" Type="varchar" MaxLength="2" />
           <Property Name="CodigoAFIP3_Letra_C" Type="varchar" MaxLength="2" />
           <Property Name="CodigoAFIP3_Letra_E" Type="varchar" MaxLength="2" />
+          <Property Name="IdUsuarioModifico" Type="int" />
+          <Property Name="FechaModifico" Type="datetime" />
         </EntityType>
         <EntityType Name="TiposCuenta">
           <Key>
@@ -9724,55 +9729,17 @@ warning 6002: The table/view 'Pronto.dbo.wGrillaPersistencia' does not have a pr
                 <Property Name="SojaSustentableCondicion" Type="varchar" MaxLength="50" />
                 <Property Name="SojaSustentableNroEstablecimientoDeProduccion" Type="varchar" MaxLength="50" />
                 <Property Name="IdClientePagadorFlete" Type="int" />
+                <Property Name="SubnumeroVagonEnTextoParaBusqueda" Type="varchar" MaxLength="50" />
                 <Property Name="IdCorredor2" Type="int" />
                 <Property Name="Acopio1" Type="int" />
                 <Property Name="Acopio2" Type="int" />
                 <Property Name="Acopio3" Type="int" />
                 <Property Name="Acopio4" Type="int" />
                 <Property Name="Acopio5" Type="int" />
-                <Property Name="SubnumeroVagonEnTextoParaBusqueda" Type="varchar" MaxLength="50" />
+                <Property Name="Acopio6" Type="int" />
                 <Property Name="AcopioFacturarleA" Type="int" />
                 <Property Name="CalidadGranosDanadosRebaja" Type="numeric" Precision="18" Scale="2" />
                 <Property Name="CalidadGranosExtranosRebaja" Type="numeric" Precision="18" Scale="2" />
-                <Property Name="CalidadGranosExtranosMerma" Type="numeric" Precision="18" Scale="2" />
-                <Property Name="CalidadQuebradosMerma" Type="numeric" Precision="18" Scale="2" />
-                <Property Name="CalidadDanadosMerma" Type="numeric" Precision="18" Scale="2" />
-                <Property Name="CalidadChamicoMerma" Type="numeric" Precision="18" Scale="2" />
-                <Property Name="CalidadRevolcadosMerma" Type="numeric" Precision="18" Scale="2" />
-                <Property Name="CalidadObjetablesMerma" Type="numeric" Precision="18" Scale="2" />
-                <Property Name="CalidadAmohosadosMerma" Type="numeric" Precision="18" Scale="2" />
-                <Property Name="CalidadPuntaSombreadaMerma" Type="numeric" Precision="18" Scale="2" />
-                <Property Name="CalidadHectolitricoMerma" Type="numeric" Precision="18" Scale="2" />
-                <Property Name="CalidadCarbonMerma" Type="numeric" Precision="18" Scale="2" />
-                <Property Name="CalidadPanzaBlancaMerma" Type="numeric" Precision="18" Scale="2" />
-                <Property Name="CalidadPicadosMerma" Type="numeric" Precision="18" Scale="2" />
-                <Property Name="CalidadVerdesMerma" Type="numeric" Precision="18" Scale="2" />
-                <Property Name="CalidadQuemadosMerma" Type="numeric" Precision="18" Scale="2" />
-                <Property Name="CalidadTierraMerma" Type="numeric" Precision="18" Scale="2" />
-                <Property Name="CalidadZarandeoMerma" Type="numeric" Precision="18" Scale="2" />
-                <Property Name="CalidadDescuentoFinalMerma" Type="numeric" Precision="18" Scale="2" />
-                <Property Name="CalidadHumedadMerma" Type="numeric" Precision="18" Scale="2" />
-                <Property Name="CalidadGastosFumigacionMerma" Type="numeric" Precision="18" Scale="2" />
-                <Property Name="CalidadQuebradosRebaja" Type="numeric" Precision="18" Scale="2" />
-                <Property Name="CalidadChamicoRebaja" Type="numeric" Precision="18" Scale="2" />
-                <Property Name="CalidadRevolcadosRebaja" Type="numeric" Precision="18" Scale="2" />
-                <Property Name="CalidadObjetablesRebaja" Type="numeric" Precision="18" Scale="2" />
-                <Property Name="CalidadAmohosadosRebaja" Type="numeric" Precision="18" Scale="2" />
-                <Property Name="CalidadPuntaSombreadaRebaja" Type="numeric" Precision="18" Scale="2" />
-                <Property Name="CalidadHectolitricoRebaja" Type="numeric" Precision="18" Scale="2" />
-                <Property Name="CalidadCarbonRebaja" Type="numeric" Precision="18" Scale="2" />
-                <Property Name="CalidadPanzaBlancaRebaja" Type="numeric" Precision="18" Scale="2" />
-                <Property Name="CalidadPicadosRebaja" Type="numeric" Precision="18" Scale="2" />
-                <Property Name="CalidadVerdesRebaja" Type="numeric" Precision="18" Scale="2" />
-                <Property Name="CalidadQuemadosRebaja" Type="numeric" Precision="18" Scale="2" />
-                <Property Name="CalidadTierraRebaja" Type="numeric" Precision="18" Scale="2" />
-                <Property Name="CalidadZarandeoRebaja" Type="numeric" Precision="18" Scale="2" />
-                <Property Name="CalidadDescuentoFinalRebaja" Type="numeric" Precision="18" Scale="2" />
-                <Property Name="CalidadHumedadRebaja" Type="numeric" Precision="18" Scale="2" />
-                <Property Name="CalidadGastosFumigacionRebaja" Type="numeric" Precision="18" Scale="2" />
-                <Property Name="CalidadHumedadResultado" Type="numeric" Precision="18" Scale="2" />
-                <Property Name="CalidadGastosFumigacionResultado" Type="numeric" Precision="18" Scale="2" />
-                <Property Name="Acopio6" Type="int" />
                 <Property Name="ConDuplicados" Type="int" />
                 <Property Name="TieneRecibidorOficial" Type="varchar" MaxLength="2" />
                 <Property Name="EstadoRecibidor" Type="int" />
@@ -9817,6 +9784,7 @@ warning 6002: The table/view 'Pronto.dbo.wGrillaPersistencia' does not have a pr
                 <Property Name="ProcedenciaCodigoPostal" Type="varchar" MaxLength="20" Nullable="false" />
                 <Property Name="ProcedenciaCodigoONCAA" Type="varchar" MaxLength="20" Nullable="false" />
                 <Property Name="ProcedenciaProvinciaDesc" Type="varchar" MaxLength="50" Nullable="false" />
+                <Property Name="ProcedenciaProvinciaCodigo" Type="int" Nullable="false" />
                 <Property Name="ProcedenciaProvinciaPartido" Type="varchar" MaxLength="60" Nullable="false" />
                 <Property Name="ProcedenciaPartidoNormalizada" Type="varchar" MaxLength="100" Nullable="false" />
                 <Property Name="ProcedenciaPartidoNormalizadaCodigo" Type="varchar" MaxLength="15" Nullable="false" />
@@ -9828,6 +9796,7 @@ warning 6002: The table/view 'Pronto.dbo.wGrillaPersistencia' does not have a pr
                 <Property Name="DestinoLocalidadCodigoONCAA" Type="varchar" MaxLength="20" Nullable="false" />
                 <Property Name="DestinoLocalidadDesc" Type="varchar" MaxLength="50" Nullable="false" />
                 <Property Name="DestinoProvinciaDesc" Type="varchar" MaxLength="50" Nullable="false" />
+                <Property Name="DestinoProvinciaCodigo" Type="int" Nullable="false" />
                 <Property Name="EstablecimientoDesc" Type="varchar" MaxLength="202" Nullable="false" />
                 <Property Name="EstablecimientoCodigo" Type="varchar" MaxLength="50" />
                 <Property Name="EstablecimientoCUIT" Type="varchar" MaxLength="50" />
@@ -13114,34 +13083,6 @@ warning 6002: The table/view 'Pronto.dbo.wGrillaPersistencia' does not have a pr
             <Parameter Name="fechadesdeAnterior" Mode="In" Type="DateTime" />
             <Parameter Name="fechahastaAnterior" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="fSQL_GetDataTableFiltradoYPaginado" IsComposable="true" ReturnType="Collection(DemoProntoModel.fSQL_GetDataTableFiltradoYPaginado_Result3)">
-            <Parameter Name="startRowIndex" Mode="In" Type="Int32" />
-            <Parameter Name="maximumRows" Mode="In" Type="Int32" />
-            <Parameter Name="estado" Mode="In" Type="Int32" />
-            <Parameter Name="QueContenga" Mode="In" Type="String" />
-            <Parameter Name="idVendedor" Mode="In" Type="Int32" />
-            <Parameter Name="idCorredor" Mode="In" Type="Int32" />
-            <Parameter Name="idDestinatario" Mode="In" Type="Int32" />
-            <Parameter Name="idIntermediario" Mode="In" Type="Int32" />
-            <Parameter Name="idRemComercial" Mode="In" Type="Int32" />
-            <Parameter Name="idArticulo" Mode="In" Type="Int32" />
-            <Parameter Name="idProcedencia" Mode="In" Type="Int32" />
-            <Parameter Name="idDestino" Mode="In" Type="Int32" />
-            <Parameter Name="AplicarANDuORalFiltro" Mode="In" Type="Int32" />
-            <Parameter Name="ModoExportacion" Mode="In" Type="String" />
-            <Parameter Name="fechadesde" Mode="In" Type="DateTime" />
-            <Parameter Name="fechahasta" Mode="In" Type="DateTime" />
-            <Parameter Name="puntoventa" Mode="In" Type="Int32" />
-            <Parameter Name="IdAcopio" Mode="In" Type="Int32" />
-            <Parameter Name="bTraerDuplicados" Mode="In" Type="Boolean" />
-            <Parameter Name="Contrato" Mode="In" Type="String" />
-            <Parameter Name="QueContenga2" Mode="In" Type="String" />
-            <Parameter Name="idClienteAuxiliarint" Mode="In" Type="Int32" />
-            <Parameter Name="AgrupadorDeTandaPeriodos" Mode="In" Type="Int32" />
-            <Parameter Name="Vagon" Mode="In" Type="Int32" />
-            <Parameter Name="Patente" Mode="In" Type="String" />
-            <Parameter Name="optCamionVagon" Mode="In" Type="String" />
-          </FunctionImport>
           <FunctionImport Name="Requerimientos_TX_PendientesDeAsignacion">
           <Parameter Name="Depositos" Mode="In" Type="String" />
           </FunctionImport>
@@ -13180,6 +13121,34 @@ warning 6002: The table/view 'Pronto.dbo.wGrillaPersistencia' does not have a pr
             <End Role="DetalleFactura" EntitySet="DetalleFacturas" />
             <End Role="CartasDePorte" EntitySet="CartasDePortes" />
           </AssociationSet>
+          <FunctionImport Name="fSQL_GetDataTableFiltradoYPaginado" IsComposable="true" ReturnType="Collection(DemoProntoModel.fSQL_GetDataTableFiltradoYPaginado_Result3)">
+            <Parameter Name="startRowIndex" Mode="In" Type="Int32" />
+            <Parameter Name="maximumRows" Mode="In" Type="Int32" />
+            <Parameter Name="estado" Mode="In" Type="Int32" />
+            <Parameter Name="QueContenga" Mode="In" Type="String" />
+            <Parameter Name="idVendedor" Mode="In" Type="Int32" />
+            <Parameter Name="idCorredor" Mode="In" Type="Int32" />
+            <Parameter Name="idDestinatario" Mode="In" Type="Int32" />
+            <Parameter Name="idIntermediario" Mode="In" Type="Int32" />
+            <Parameter Name="idRemComercial" Mode="In" Type="Int32" />
+            <Parameter Name="idArticulo" Mode="In" Type="Int32" />
+            <Parameter Name="idProcedencia" Mode="In" Type="Int32" />
+            <Parameter Name="idDestino" Mode="In" Type="Int32" />
+            <Parameter Name="AplicarANDuORalFiltro" Mode="In" Type="Int32" />
+            <Parameter Name="ModoExportacion" Mode="In" Type="String" />
+            <Parameter Name="fechadesde" Mode="In" Type="DateTime" />
+            <Parameter Name="fechahasta" Mode="In" Type="DateTime" />
+            <Parameter Name="puntoventa" Mode="In" Type="Int32" />
+            <Parameter Name="IdAcopio" Mode="In" Type="Int32" />
+            <Parameter Name="bTraerDuplicados" Mode="In" Type="Boolean" />
+            <Parameter Name="Contrato" Mode="In" Type="String" />
+            <Parameter Name="QueContenga2" Mode="In" Type="String" />
+            <Parameter Name="idClienteAuxiliarint" Mode="In" Type="Int32" />
+            <Parameter Name="AgrupadorDeTandaPeriodos" Mode="In" Type="Int32" />
+            <Parameter Name="Vagon" Mode="In" Type="Int32" />
+            <Parameter Name="Patente" Mode="In" Type="String" />
+            <Parameter Name="optCamionVagon" Mode="In" Type="String" />
+          </FunctionImport>
           </EntityContainer>
         <EntityType Name="Articulo">
           <Key>
@@ -15359,6 +15328,8 @@ warning 6002: The table/view 'Pronto.dbo.wGrillaPersistencia' does not have a pr
           <Property Type="String" Name="CodigoAFIP3_Letra_E" MaxLength="2" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Valores" Relationship="DemoProntoModel.FK_Valores_TiposComprobante_IdTipoComprobante" FromRole="TiposComprobante" ToRole="Valore" />
           <NavigationProperty Name="Valores1" Relationship="DemoProntoModel.FK_Valores_TiposComprobante_IdTipoValor" FromRole="TiposComprobante" ToRole="Valore" />
+          <Property Name="IdUsuarioModifico" Type="Int32" />
+          <Property Name="FechaModifico" Type="DateTime" Precision="3" />
         </EntityType>
         <Association Name="FK_Clientes_LocalidadEntrega">
           <End Type="DemoProntoModel.Localidad" Role="Localidade" Multiplicity="0..1" />
@@ -16061,6 +16032,7 @@ warning 6002: The table/view 'Pronto.dbo.wGrillaPersistencia' does not have a pr
           <Property Name="FechaInicioVigenciaCodigoNormaCapital" Type="DateTime" Precision="3" />
           <Property Name="FechaFinVigenciaCodigoNormaCapital" Type="DateTime" Precision="3" />
           <Property Name="IdObraDefault" Type="Int32" />
+          <Property Name="RegimenSimplificadoIIBB" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="Rubro">
           <Key>
@@ -16780,6 +16752,8 @@ warning 6002: The table/view 'Pronto.dbo.wGrillaPersistencia' does not have a pr
           <NavigationProperty Name="ListasPrecio" Relationship="DemoProntoModel.FK_Remitos_ListasPrecios" FromRole="Remito" ToRole="ListasPrecio" />
           <NavigationProperty Name="Obra" Relationship="DemoProntoModel.FK_Remitos_Obras" FromRole="Remito" ToRole="Obra" />
           <NavigationProperty Name="Transportista" Relationship="DemoProntoModel.FK_Remitos_Transportistas" FromRole="Remito" ToRole="Transportista" />
+          <Property Name="NumeroCAI" Type="Decimal" Precision="19" Scale="0" />
+          <Property Name="FechaVencimientoCAI" Type="DateTime" Precision="3" />
         </EntityType>
         <Association Name="FK_DetalleOrdenesCompra_Articulos">
           <End Type="DemoProntoModel.Articulo" Role="Articulo" Multiplicity="0..1" />
@@ -24960,44 +24934,6 @@ warning 6002: The table/view 'Pronto.dbo.wGrillaPersistencia' does not have a pr
           <Property Type="String" Name="CorredorCUIT2" Nullable="false" MaxLength="13" />
           <Property Type="String" Name="EntregadorCUIT" Nullable="false" MaxLength="13" />
           <Property Type="Int32" Name="CodigoAFIP" Nullable="false" />
-          <Property Type="Decimal" Name="CalidadGranosExtranosMerma" Nullable="true" Precision="18" Scale="2" />
-          <Property Type="Decimal" Name="CalidadQuebradosMerma" Nullable="true" Precision="18" Scale="2" />
-          <Property Type="Decimal" Name="CalidadDanadosMerma" Nullable="true" Precision="18" Scale="2" />
-          <Property Type="Decimal" Name="CalidadChamicoMerma" Nullable="true" Precision="18" Scale="2" />
-          <Property Type="Decimal" Name="CalidadRevolcadosMerma" Nullable="true" Precision="18" Scale="2" />
-          <Property Type="Decimal" Name="CalidadObjetablesMerma" Nullable="true" Precision="18" Scale="2" />
-          <Property Type="Decimal" Name="CalidadAmohosadosMerma" Nullable="true" Precision="18" Scale="2" />
-          <Property Type="Decimal" Name="CalidadPuntaSombreadaMerma" Nullable="true" Precision="18" Scale="2" />
-          <Property Type="Decimal" Name="CalidadHectolitricoMerma" Nullable="true" Precision="18" Scale="2" />
-          <Property Type="Decimal" Name="CalidadCarbonMerma" Nullable="true" Precision="18" Scale="2" />
-          <Property Type="Decimal" Name="CalidadPanzaBlancaMerma" Nullable="true" Precision="18" Scale="2" />
-          <Property Type="Decimal" Name="CalidadPicadosMerma" Nullable="true" Precision="18" Scale="2" />
-          <Property Type="Decimal" Name="CalidadVerdesMerma" Nullable="true" Precision="18" Scale="2" />
-          <Property Type="Decimal" Name="CalidadQuemadosMerma" Nullable="true" Precision="18" Scale="2" />
-          <Property Type="Decimal" Name="CalidadTierraMerma" Nullable="true" Precision="18" Scale="2" />
-          <Property Type="Decimal" Name="CalidadZarandeoMerma" Nullable="true" Precision="18" Scale="2" />
-          <Property Type="Decimal" Name="CalidadDescuentoFinalMerma" Nullable="true" Precision="18" Scale="2" />
-          <Property Type="Decimal" Name="CalidadHumedadMerma" Nullable="true" Precision="18" Scale="2" />
-          <Property Type="Decimal" Name="CalidadGastosFumigacionMerma" Nullable="true" Precision="18" Scale="2" />
-          <Property Type="Decimal" Name="CalidadQuebradosRebaja" Nullable="true" Precision="18" Scale="2" />
-          <Property Type="Decimal" Name="CalidadChamicoRebaja" Nullable="true" Precision="18" Scale="2" />
-          <Property Type="Decimal" Name="CalidadRevolcadosRebaja" Nullable="true" Precision="18" Scale="2" />
-          <Property Type="Decimal" Name="CalidadObjetablesRebaja" Nullable="true" Precision="18" Scale="2" />
-          <Property Type="Decimal" Name="CalidadAmohosadosRebaja" Nullable="true" Precision="18" Scale="2" />
-          <Property Type="Decimal" Name="CalidadPuntaSombreadaRebaja" Nullable="true" Precision="18" Scale="2" />
-          <Property Type="Decimal" Name="CalidadHectolitricoRebaja" Nullable="true" Precision="18" Scale="2" />
-          <Property Type="Decimal" Name="CalidadCarbonRebaja" Nullable="true" Precision="18" Scale="2" />
-          <Property Type="Decimal" Name="CalidadPanzaBlancaRebaja" Nullable="true" Precision="18" Scale="2" />
-          <Property Type="Decimal" Name="CalidadPicadosRebaja" Nullable="true" Precision="18" Scale="2" />
-          <Property Type="Decimal" Name="CalidadVerdesRebaja" Nullable="true" Precision="18" Scale="2" />
-          <Property Type="Decimal" Name="CalidadQuemadosRebaja" Nullable="true" Precision="18" Scale="2" />
-          <Property Type="Decimal" Name="CalidadTierraRebaja" Nullable="true" Precision="18" Scale="2" />
-          <Property Type="Decimal" Name="CalidadZarandeoRebaja" Nullable="true" Precision="18" Scale="2" />
-          <Property Type="Decimal" Name="CalidadDescuentoFinalRebaja" Nullable="true" Precision="18" Scale="2" />
-          <Property Type="Decimal" Name="CalidadHumedadRebaja" Nullable="true" Precision="18" Scale="2" />
-          <Property Type="Decimal" Name="CalidadGastosFumigacionRebaja" Nullable="true" Precision="18" Scale="2" />
-          <Property Type="Decimal" Name="CalidadHumedadResultado" Nullable="true" Precision="18" Scale="2" />
-          <Property Type="Decimal" Name="CalidadGastosFumigacionResultado" Nullable="true" Precision="18" Scale="2" />
           <Property Type="Int32" Name="ConDuplicados" Nullable="true" />
           <Property Type="String" Name="TieneRecibidorOficial" Nullable="true" MaxLength="2" />
           <Property Type="Int32" Name="EstadoRecibidor" Nullable="true" />
@@ -25020,6 +24956,8 @@ warning 6002: The table/view 'Pronto.dbo.wGrillaPersistencia' does not have a pr
           <Property Type="String" Name="DestinoLocalidadDesc" Nullable="false" MaxLength="50" />
           <Property Type="String" Name="Turno" Nullable="true" MaxLength="10" />
           <Property Type="DateTime" Name="FechaEnvioASyngenta" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="ProcedenciaProvinciaCodigo" Nullable="false" />
+          <Property Type="Int32" Name="DestinoProvinciaCodigo" Nullable="false" />
         </ComplexType>
         <EntityType Name="NovedadesUsuario">
           <Key>
@@ -25578,6 +25516,219 @@ warning 6002: The table/view 'Pronto.dbo.wGrillaPersistencia' does not have a pr
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <ComplexType Name="fSQL_GetDataTableFiltradoYPaginado_Result4">
+          <Property Type="Int32" Name="IdCartaDePorte" Nullable="false" />
+          <Property Type="Int64" Name="NumeroCartaDePorte" Nullable="true" />
+          <Property Type="Int32" Name="IdUsuarioIngreso" Nullable="true" />
+          <Property Type="DateTime" Name="FechaIngreso" Nullable="true" Precision="23" />
+          <Property Type="String" Name="Anulada" Nullable="true" MaxLength="2" />
+          <Property Type="Int32" Name="IdUsuarioAnulo" Nullable="true" />
+          <Property Type="DateTime" Name="FechaAnulacion" Nullable="true" Precision="23" />
+          <Property Type="String" Name="Observaciones" Nullable="true" MaxLength="200" />
+          <Property Type="Binary" Name="FechaTimeStamp" Nullable="true" MaxLength="8" />
+          <Property Type="Int32" Name="Vendedor" Nullable="true" />
+          <Property Type="Int32" Name="CuentaOrden1" Nullable="true" />
+          <Property Type="Int32" Name="CuentaOrden2" Nullable="true" />
+          <Property Type="Int32" Name="Corredor" Nullable="true" />
+          <Property Type="Int32" Name="Entregador" Nullable="true" />
+          <Property Type="String" Name="Procedencia" Nullable="true" MaxLength="30" />
+          <Property Type="String" Name="Patente" Nullable="true" MaxLength="30" />
+          <Property Type="Int32" Name="IdArticulo" Nullable="true" />
+          <Property Type="Int32" Name="IdStock" Nullable="true" />
+          <Property Type="String" Name="Partida" Nullable="true" MaxLength="20" />
+          <Property Type="Int32" Name="IdUnidad" Nullable="true" />
+          <Property Type="Int32" Name="IdUbicacion" Nullable="true" />
+          <Property Type="Decimal" Name="Cantidad" Nullable="true" Precision="12" Scale="2" />
+          <Property Type="String" Name="Cupo" Nullable="true" MaxLength="30" />
+          <Property Type="Decimal" Name="NetoProc" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="String" Name="Calidad" Nullable="true" MaxLength="30" />
+          <Property Type="Decimal" Name="BrutoPto" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="TaraPto" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="NetoPto" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="String" Name="Acoplado" Nullable="true" MaxLength="30" />
+          <Property Type="Decimal" Name="Humedad" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="Merma" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="NetoFinal" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="DateTime" Name="FechaDeCarga" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="FechaVencimiento" Nullable="true" Precision="23" />
+          <Property Type="String" Name="CEE" Nullable="true" MaxLength="20" />
+          <Property Type="Int32" Name="IdTransportista" Nullable="true" />
+          <Property Type="String" Name="TransportistaCUITdesnormalizado" Nullable="true" MaxLength="13" />
+          <Property Type="Int32" Name="IdChofer" Nullable="true" />
+          <Property Type="String" Name="ChoferCUITdesnormalizado" Nullable="true" MaxLength="13" />
+          <Property Type="Int32" Name="CTG" Nullable="true" />
+          <Property Type="String" Name="Contrato" Nullable="true" MaxLength="20" />
+          <Property Type="Int32" Name="Destino" Nullable="true" />
+          <Property Type="Int32" Name="Subcontr1" Nullable="true" />
+          <Property Type="Int32" Name="Subcontr2" Nullable="true" />
+          <Property Type="Int32" Name="Contrato1" Nullable="true" />
+          <Property Type="Int32" Name="contrato2" Nullable="true" />
+          <Property Type="Decimal" Name="KmARecorrer" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="Tarifa" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="DateTime" Name="FechaDescarga" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="Hora" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="NRecibo" Nullable="true" />
+          <Property Type="Int32" Name="CalidadDe" Nullable="true" />
+          <Property Type="Decimal" Name="TaraFinal" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="BrutoFinal" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="Fumigada" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="Secada" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="String" Name="Exporta" Nullable="true" MaxLength="2" />
+          <Property Type="Decimal" Name="NobleExtranos" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="NobleNegros" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="NobleQuebrados" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="NobleDaniados" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="NobleChamico" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="NobleChamico2" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="NobleRevolcado" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="NobleObjetables" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="NobleAmohosados" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="NobleHectolitrico" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="NobleCarbon" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="NoblePanzaBlanca" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="NoblePicados" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="NobleMGrasa" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="NobleAcidezGrasa" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="NobleVerdes" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Int32" Name="NobleGrado" Nullable="true" />
+          <Property Type="String" Name="NobleConforme" Nullable="true" MaxLength="2" />
+          <Property Type="String" Name="NobleACamara" Nullable="true" MaxLength="2" />
+          <Property Type="String" Name="Cosecha" Nullable="true" MaxLength="20" />
+          <Property Type="Decimal" Name="HumedadDesnormalizada" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="Factor" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Int32" Name="IdFacturaImputada" Nullable="true" />
+          <Property Type="Int32" Name="PuntoVenta" Nullable="true" />
+          <Property Type="Int32" Name="SubnumeroVagon" Nullable="true" />
+          <Property Type="Decimal" Name="TarifaFacturada" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="TarifaSubcontratista1" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="TarifaSubcontratista2" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="DateTime" Name="FechaArribo" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="Version" Nullable="true" />
+          <Property Type="String" Name="MotivoAnulacion" Nullable="true" MaxLength="100" />
+          <Property Type="Int32" Name="NumeroSubfijo" Nullable="true" />
+          <Property Type="Int32" Name="IdEstablecimiento" Nullable="true" />
+          <Property Type="String" Name="EnumSyngentaDivision" Nullable="true" MaxLength="10" />
+          <Property Type="Int32" Name="Corredor2" Nullable="true" />
+          <Property Type="Int32" Name="IdUsuarioModifico" Nullable="true" />
+          <Property Type="DateTime" Name="FechaModificacion" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="FechaEmision" Nullable="true" Precision="23" />
+          <Property Type="String" Name="EstaArchivada" Nullable="true" MaxLength="2" />
+          <Property Type="String" Name="ExcluirDeSubcontratistas" Nullable="true" MaxLength="2" />
+          <Property Type="Int32" Name="IdTipoMovimiento" Nullable="true" />
+          <Property Type="Int32" Name="IdClienteAFacturarle" Nullable="true" />
+          <Property Type="Int32" Name="SubnumeroDeFacturacion" Nullable="true" />
+          <Property Type="String" Name="AgregaItemDeGastosAdministrativos" Nullable="true" MaxLength="2" />
+          <Property Type="Decimal" Name="CalidadGranosQuemados" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="String" Name="CalidadGranosQuemadosBonifica_o_Rebaja" Nullable="true" MaxLength="2" />
+          <Property Type="Decimal" Name="CalidadTierra" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="String" Name="CalidadTierraBonifica_o_Rebaja" Nullable="true" MaxLength="2" />
+          <Property Type="Decimal" Name="CalidadMermaChamico" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="String" Name="CalidadMermaChamicoBonifica_o_Rebaja" Nullable="true" MaxLength="2" />
+          <Property Type="Decimal" Name="CalidadMermaZarandeo" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="String" Name="CalidadMermaZarandeoBonifica_o_Rebaja" Nullable="true" MaxLength="2" />
+          <Property Type="String" Name="FueraDeEstandar" Nullable="true" MaxLength="2" />
+          <Property Type="Decimal" Name="CalidadPuntaSombreada" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="String" Name="CobraAcarreo" Nullable="true" MaxLength="2" />
+          <Property Type="String" Name="LiquidaViaje" Nullable="true" MaxLength="2" />
+          <Property Type="Int32" Name="IdClienteAuxiliar" Nullable="true" />
+          <Property Type="Decimal" Name="CalidadDescuentoFinal" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="String" Name="PathImagen" Nullable="true" MaxLength="150" />
+          <Property Type="String" Name="PathImagen2" Nullable="true" MaxLength="150" />
+          <Property Type="Int32" Name="AgrupadorDeTandaPeriodos" Nullable="true" />
+          <Property Type="String" Name="ClaveEncriptada" Nullable="true" MaxLength="150" />
+          <Property Type="String" Name="NumeroCartaEnTextoParaBusqueda" Nullable="true" MaxLength="20" />
+          <Property Type="Int32" Name="IdClienteEntregador" Nullable="true" />
+          <Property Type="Int32" Name="IdDetalleFactura" Nullable="true" />
+          <Property Type="String" Name="SojaSustentableCodCondicion" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="SojaSustentableCondicion" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="SojaSustentableNroEstablecimientoDeProduccion" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="IdClientePagadorFlete" Nullable="true" />
+          <Property Type="String" Name="SubnumeroVagonEnTextoParaBusqueda" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="IdCorredor2" Nullable="true" />
+          <Property Type="Int32" Name="Acopio1" Nullable="true" />
+          <Property Type="Int32" Name="Acopio2" Nullable="true" />
+          <Property Type="Int32" Name="Acopio3" Nullable="true" />
+          <Property Type="Int32" Name="Acopio4" Nullable="true" />
+          <Property Type="Int32" Name="Acopio5" Nullable="true" />
+          <Property Type="Int32" Name="Acopio6" Nullable="true" />
+          <Property Type="Int32" Name="AcopioFacturarleA" Nullable="true" />
+          <Property Type="Decimal" Name="CalidadGranosDanadosRebaja" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="CalidadGranosExtranosRebaja" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Int32" Name="ConDuplicados" Nullable="true" />
+          <Property Type="String" Name="TieneRecibidorOficial" Nullable="true" MaxLength="2" />
+          <Property Type="Int32" Name="EstadoRecibidor" Nullable="true" />
+          <Property Type="Int32" Name="ClienteAcondicionador" Nullable="true" />
+          <Property Type="Int32" Name="MotivoRechazo" Nullable="true" />
+          <Property Type="Boolean" Name="FacturarA_Manual" Nullable="false" />
+          <Property Type="String" Name="EntregaSAP" Nullable="true" MaxLength="20" />
+          <Property Type="Int32" Name="Situacion" Nullable="true" />
+          <Property Type="Int32" Name="SituacionAntesDeEditarManualmente" Nullable="true" />
+          <Property Type="DateTime" Name="FechaActualizacionAutomatica" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="FechaAutorizacion" Nullable="true" Precision="23" />
+          <Property Type="String" Name="ObservacionesSituacion" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="SituacionLog" Nullable="true" MaxLength="300" />
+          <Property Type="String" Name="Turno" Nullable="true" MaxLength="10" />
+          <Property Type="DateTime" Name="FechaEnvioASyngenta" Nullable="true" Precision="23" />
+          <Property Type="String" Name="NumeroCompleto" Nullable="true" MaxLength="93" />
+          <Property Type="Int32" Name="MinutosModifico" Nullable="true" />
+          <Property Type="String" Name="EspecieONCAA" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="CodigoSAJPYA" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="txtCodigoZeni" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="TitularDesc" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="TitularCUIT" Nullable="false" MaxLength="13" />
+          <Property Type="String" Name="IntermediarioDesc" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="IntermediarioCUIT" Nullable="false" MaxLength="13" />
+          <Property Type="String" Name="RComercialDesc" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="RComercialCUIT" Nullable="false" MaxLength="13" />
+          <Property Type="String" Name="CorredorDesc" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="CorredorCUIT" Nullable="false" MaxLength="13" />
+          <Property Type="String" Name="DestinatarioDesc" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="EntregadorDesc" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="DestinatarioCUIT" Nullable="false" MaxLength="13" />
+          <Property Type="String" Name="ClienteAuxiliarDesc" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="ClienteAuxiliarCUIT" Nullable="false" MaxLength="13" />
+          <Property Type="String" Name="Subcontr1Desc" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="Subcontr2Desc" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="Producto" Nullable="false" MaxLength="256" />
+          <Property Type="String" Name="TransportistaCUIT" Nullable="true" MaxLength="13" />
+          <Property Type="String" Name="TransportistaDesc" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="ChoferCUIT" Nullable="true" MaxLength="13" />
+          <Property Type="String" Name="ChoferDesc" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="ProcedenciaDesc" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="ProcedenciaCodigoPostal" Nullable="false" MaxLength="20" />
+          <Property Type="String" Name="ProcedenciaCodigoONCAA" Nullable="false" MaxLength="20" />
+          <Property Type="String" Name="ProcedenciaProvinciaDesc" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="ProcedenciaProvinciaCodigo" Nullable="false" />
+          <Property Type="String" Name="ProcedenciaProvinciaPartido" Nullable="false" MaxLength="60" />
+          <Property Type="String" Name="ProcedenciaPartidoNormalizada" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="ProcedenciaPartidoNormalizadaCodigo" Nullable="false" MaxLength="15" />
+          <Property Type="String" Name="DestinoDesc" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="DestinoCodigoPostal" Nullable="false" MaxLength="30" />
+          <Property Type="String" Name="DestinoCodigoONCAA" Nullable="false" MaxLength="20" />
+          <Property Type="String" Name="DestinoCUIT" Nullable="false" MaxLength="13" />
+          <Property Type="Int32" Name="DestinoLocalidadAFIP" Nullable="false" />
+          <Property Type="String" Name="DestinoLocalidadCodigoONCAA" Nullable="false" MaxLength="20" />
+          <Property Type="String" Name="DestinoLocalidadDesc" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="DestinoProvinciaDesc" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="DestinoProvinciaCodigo" Nullable="false" />
+          <Property Type="String" Name="EstablecimientoDesc" Nullable="false" MaxLength="202" />
+          <Property Type="String" Name="EstablecimientoCodigo" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="EstablecimientoCUIT" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="EstablecimientoNombre" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Mes" Nullable="true" MaxLength="30" />
+          <Property Type="Int32" Name="Ano" Nullable="true" />
+          <Property Type="String" Name="Factura" Nullable="true" MaxLength="63" />
+          <Property Type="DateTime" Name="FechaFactura" Nullable="true" Precision="23" />
+          <Property Type="String" Name="ClienteFacturado" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="ClienteFacturadoCUIT" Nullable="false" MaxLength="13" />
+          <Property Type="String" Name="CalidadDesc" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="UsuarioIngreso" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="ClientePagadorFleteDesc" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="CorredorDesc2" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="CorredorCUIT2" Nullable="false" MaxLength="13" />
+          <Property Type="String" Name="EntregadorCUIT" Nullable="false" MaxLength="13" />
+          <Property Type="Int32" Name="CodigoAFIP" Nullable="false" />
+        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -27097,6 +27248,8 @@ warning 6002: The table/view 'Pronto.dbo.wGrillaPersistencia' does not have a pr
           <EntitySetMapping Name="TiposComprobantes">
             <EntityTypeMapping TypeName="DemoProntoModel.TiposComprobante">
               <MappingFragment StoreEntitySet="TiposComprobante">
+                <ScalarProperty Name="FechaModifico" ColumnName="FechaModifico" />
+                <ScalarProperty Name="IdUsuarioModifico" ColumnName="IdUsuarioModifico" />
                 <ScalarProperty Name="CodigoAFIP3_Letra_E" ColumnName="CodigoAFIP3_Letra_E" />
                 <ScalarProperty Name="CodigoAFIP3_Letra_C" ColumnName="CodigoAFIP3_Letra_C" />
                 <ScalarProperty Name="CodigoAFIP3_Letra_B" ColumnName="CodigoAFIP3_Letra_B" />
@@ -27380,6 +27533,7 @@ warning 6002: The table/view 'Pronto.dbo.wGrillaPersistencia' does not have a pr
           <EntitySetMapping Name="Proveedores">
             <EntityTypeMapping TypeName="DemoProntoModel.Proveedor">
               <MappingFragment StoreEntitySet="Proveedores">
+                <ScalarProperty Name="RegimenSimplificadoIIBB" ColumnName="RegimenSimplificadoIIBB" />
                 <ScalarProperty Name="IdObraDefault" ColumnName="IdObraDefault" />
                 <ScalarProperty Name="FechaFinVigenciaCodigoNormaCapital" ColumnName="FechaFinVigenciaCodigoNormaCapital" />
                 <ScalarProperty Name="FechaInicioVigenciaCodigoNormaCapital" ColumnName="FechaInicioVigenciaCodigoNormaCapital" />
@@ -27851,6 +28005,8 @@ warning 6002: The table/view 'Pronto.dbo.wGrillaPersistencia' does not have a pr
           <EntitySetMapping Name="Remitos">
             <EntityTypeMapping TypeName="DemoProntoModel.Remito">
               <MappingFragment StoreEntitySet="Remitos">
+                <ScalarProperty Name="FechaVencimientoCAI" ColumnName="FechaVencimientoCAI" />
+                <ScalarProperty Name="NumeroCAI" ColumnName="NumeroCAI" />
                 <ScalarProperty Name="Tara" ColumnName="Tara" />
                 <ScalarProperty Name="PesoBruto" ColumnName="PesoBruto" />
                 <ScalarProperty Name="HoraSalida" ColumnName="HoraSalida" />
@@ -32210,259 +32366,6 @@ warning 6002: The table/view 'Pronto.dbo.wGrillaPersistencia' does not have a pr
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="fSQL_GetDataTableFiltradoYPaginado" FunctionName="DemoProntoModel.Store.fSQL_GetDataTableFiltradoYPaginado">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="DemoProntoModel.fSQL_GetDataTableFiltradoYPaginado_Result3">
-                <ScalarProperty Name="IdCartaDePorte" ColumnName="IdCartaDePorte" />
-                <ScalarProperty Name="NumeroCartaDePorte" ColumnName="NumeroCartaDePorte" />
-                <ScalarProperty Name="IdUsuarioIngreso" ColumnName="IdUsuarioIngreso" />
-                <ScalarProperty Name="FechaIngreso" ColumnName="FechaIngreso" />
-                <ScalarProperty Name="Anulada" ColumnName="Anulada" />
-                <ScalarProperty Name="IdUsuarioAnulo" ColumnName="IdUsuarioAnulo" />
-                <ScalarProperty Name="FechaAnulacion" ColumnName="FechaAnulacion" />
-                <ScalarProperty Name="Observaciones" ColumnName="Observaciones" />
-                <ScalarProperty Name="FechaTimeStamp" ColumnName="FechaTimeStamp" />
-                <ScalarProperty Name="Vendedor" ColumnName="Vendedor" />
-                <ScalarProperty Name="CuentaOrden1" ColumnName="CuentaOrden1" />
-                <ScalarProperty Name="CuentaOrden2" ColumnName="CuentaOrden2" />
-                <ScalarProperty Name="Corredor" ColumnName="Corredor" />
-                <ScalarProperty Name="Entregador" ColumnName="Entregador" />
-                <ScalarProperty Name="Procedencia" ColumnName="Procedencia" />
-                <ScalarProperty Name="Patente" ColumnName="Patente" />
-                <ScalarProperty Name="IdArticulo" ColumnName="IdArticulo" />
-                <ScalarProperty Name="IdStock" ColumnName="IdStock" />
-                <ScalarProperty Name="Partida" ColumnName="Partida" />
-                <ScalarProperty Name="IdUnidad" ColumnName="IdUnidad" />
-                <ScalarProperty Name="IdUbicacion" ColumnName="IdUbicacion" />
-                <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
-                <ScalarProperty Name="Cupo" ColumnName="Cupo" />
-                <ScalarProperty Name="NetoProc" ColumnName="NetoProc" />
-                <ScalarProperty Name="Calidad" ColumnName="Calidad" />
-                <ScalarProperty Name="BrutoPto" ColumnName="BrutoPto" />
-                <ScalarProperty Name="TaraPto" ColumnName="TaraPto" />
-                <ScalarProperty Name="NetoPto" ColumnName="NetoPto" />
-                <ScalarProperty Name="Acoplado" ColumnName="Acoplado" />
-                <ScalarProperty Name="Humedad" ColumnName="Humedad" />
-                <ScalarProperty Name="Merma" ColumnName="Merma" />
-                <ScalarProperty Name="NetoFinal" ColumnName="NetoFinal" />
-                <ScalarProperty Name="FechaDeCarga" ColumnName="FechaDeCarga" />
-                <ScalarProperty Name="FechaVencimiento" ColumnName="FechaVencimiento" />
-                <ScalarProperty Name="CEE" ColumnName="CEE" />
-                <ScalarProperty Name="IdTransportista" ColumnName="IdTransportista" />
-                <ScalarProperty Name="TransportistaCUITdesnormalizado" ColumnName="TransportistaCUITdesnormalizado" />
-                <ScalarProperty Name="IdChofer" ColumnName="IdChofer" />
-                <ScalarProperty Name="ChoferCUITdesnormalizado" ColumnName="ChoferCUITdesnormalizado" />
-                <ScalarProperty Name="CTG" ColumnName="CTG" />
-                <ScalarProperty Name="Contrato" ColumnName="Contrato" />
-                <ScalarProperty Name="Destino" ColumnName="Destino" />
-                <ScalarProperty Name="Subcontr1" ColumnName="Subcontr1" />
-                <ScalarProperty Name="Subcontr2" ColumnName="Subcontr2" />
-                <ScalarProperty Name="Contrato1" ColumnName="Contrato1" />
-                <ScalarProperty Name="contrato2" ColumnName="contrato2" />
-                <ScalarProperty Name="KmARecorrer" ColumnName="KmARecorrer" />
-                <ScalarProperty Name="Tarifa" ColumnName="Tarifa" />
-                <ScalarProperty Name="FechaDescarga" ColumnName="FechaDescarga" />
-                <ScalarProperty Name="Hora" ColumnName="Hora" />
-                <ScalarProperty Name="NRecibo" ColumnName="NRecibo" />
-                <ScalarProperty Name="CalidadDe" ColumnName="CalidadDe" />
-                <ScalarProperty Name="TaraFinal" ColumnName="TaraFinal" />
-                <ScalarProperty Name="BrutoFinal" ColumnName="BrutoFinal" />
-                <ScalarProperty Name="Fumigada" ColumnName="Fumigada" />
-                <ScalarProperty Name="Secada" ColumnName="Secada" />
-                <ScalarProperty Name="Exporta" ColumnName="Exporta" />
-                <ScalarProperty Name="NobleExtranos" ColumnName="NobleExtranos" />
-                <ScalarProperty Name="NobleNegros" ColumnName="NobleNegros" />
-                <ScalarProperty Name="NobleQuebrados" ColumnName="NobleQuebrados" />
-                <ScalarProperty Name="NobleDaniados" ColumnName="NobleDaniados" />
-                <ScalarProperty Name="NobleChamico" ColumnName="NobleChamico" />
-                <ScalarProperty Name="NobleChamico2" ColumnName="NobleChamico2" />
-                <ScalarProperty Name="NobleRevolcado" ColumnName="NobleRevolcado" />
-                <ScalarProperty Name="NobleObjetables" ColumnName="NobleObjetables" />
-                <ScalarProperty Name="NobleAmohosados" ColumnName="NobleAmohosados" />
-                <ScalarProperty Name="NobleHectolitrico" ColumnName="NobleHectolitrico" />
-                <ScalarProperty Name="NobleCarbon" ColumnName="NobleCarbon" />
-                <ScalarProperty Name="NoblePanzaBlanca" ColumnName="NoblePanzaBlanca" />
-                <ScalarProperty Name="NoblePicados" ColumnName="NoblePicados" />
-                <ScalarProperty Name="NobleMGrasa" ColumnName="NobleMGrasa" />
-                <ScalarProperty Name="NobleAcidezGrasa" ColumnName="NobleAcidezGrasa" />
-                <ScalarProperty Name="NobleVerdes" ColumnName="NobleVerdes" />
-                <ScalarProperty Name="NobleGrado" ColumnName="NobleGrado" />
-                <ScalarProperty Name="NobleConforme" ColumnName="NobleConforme" />
-                <ScalarProperty Name="NobleACamara" ColumnName="NobleACamara" />
-                <ScalarProperty Name="Cosecha" ColumnName="Cosecha" />
-                <ScalarProperty Name="HumedadDesnormalizada" ColumnName="HumedadDesnormalizada" />
-                <ScalarProperty Name="Factor" ColumnName="Factor" />
-                <ScalarProperty Name="IdFacturaImputada" ColumnName="IdFacturaImputada" />
-                <ScalarProperty Name="PuntoVenta" ColumnName="PuntoVenta" />
-                <ScalarProperty Name="SubnumeroVagon" ColumnName="SubnumeroVagon" />
-                <ScalarProperty Name="TarifaFacturada" ColumnName="TarifaFacturada" />
-                <ScalarProperty Name="TarifaSubcontratista1" ColumnName="TarifaSubcontratista1" />
-                <ScalarProperty Name="TarifaSubcontratista2" ColumnName="TarifaSubcontratista2" />
-                <ScalarProperty Name="FechaArribo" ColumnName="FechaArribo" />
-                <ScalarProperty Name="Version" ColumnName="Version" />
-                <ScalarProperty Name="MotivoAnulacion" ColumnName="MotivoAnulacion" />
-                <ScalarProperty Name="NumeroSubfijo" ColumnName="NumeroSubfijo" />
-                <ScalarProperty Name="IdEstablecimiento" ColumnName="IdEstablecimiento" />
-                <ScalarProperty Name="EnumSyngentaDivision" ColumnName="EnumSyngentaDivision" />
-                <ScalarProperty Name="Corredor2" ColumnName="Corredor2" />
-                <ScalarProperty Name="IdUsuarioModifico" ColumnName="IdUsuarioModifico" />
-                <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
-                <ScalarProperty Name="FechaEmision" ColumnName="FechaEmision" />
-                <ScalarProperty Name="EstaArchivada" ColumnName="EstaArchivada" />
-                <ScalarProperty Name="ExcluirDeSubcontratistas" ColumnName="ExcluirDeSubcontratistas" />
-                <ScalarProperty Name="IdTipoMovimiento" ColumnName="IdTipoMovimiento" />
-                <ScalarProperty Name="IdClienteAFacturarle" ColumnName="IdClienteAFacturarle" />
-                <ScalarProperty Name="SubnumeroDeFacturacion" ColumnName="SubnumeroDeFacturacion" />
-                <ScalarProperty Name="AgregaItemDeGastosAdministrativos" ColumnName="AgregaItemDeGastosAdministrativos" />
-                <ScalarProperty Name="CalidadGranosQuemados" ColumnName="CalidadGranosQuemados" />
-                <ScalarProperty Name="CalidadGranosQuemadosBonifica_o_Rebaja" ColumnName="CalidadGranosQuemadosBonifica_o_Rebaja" />
-                <ScalarProperty Name="CalidadTierra" ColumnName="CalidadTierra" />
-                <ScalarProperty Name="CalidadTierraBonifica_o_Rebaja" ColumnName="CalidadTierraBonifica_o_Rebaja" />
-                <ScalarProperty Name="CalidadMermaChamico" ColumnName="CalidadMermaChamico" />
-                <ScalarProperty Name="CalidadMermaChamicoBonifica_o_Rebaja" ColumnName="CalidadMermaChamicoBonifica_o_Rebaja" />
-                <ScalarProperty Name="CalidadMermaZarandeo" ColumnName="CalidadMermaZarandeo" />
-                <ScalarProperty Name="CalidadMermaZarandeoBonifica_o_Rebaja" ColumnName="CalidadMermaZarandeoBonifica_o_Rebaja" />
-                <ScalarProperty Name="FueraDeEstandar" ColumnName="FueraDeEstandar" />
-                <ScalarProperty Name="CalidadPuntaSombreada" ColumnName="CalidadPuntaSombreada" />
-                <ScalarProperty Name="CobraAcarreo" ColumnName="CobraAcarreo" />
-                <ScalarProperty Name="LiquidaViaje" ColumnName="LiquidaViaje" />
-                <ScalarProperty Name="IdClienteAuxiliar" ColumnName="IdClienteAuxiliar" />
-                <ScalarProperty Name="CalidadDescuentoFinal" ColumnName="CalidadDescuentoFinal" />
-                <ScalarProperty Name="PathImagen" ColumnName="PathImagen" />
-                <ScalarProperty Name="PathImagen2" ColumnName="PathImagen2" />
-                <ScalarProperty Name="AgrupadorDeTandaPeriodos" ColumnName="AgrupadorDeTandaPeriodos" />
-                <ScalarProperty Name="ClaveEncriptada" ColumnName="ClaveEncriptada" />
-                <ScalarProperty Name="NumeroCartaEnTextoParaBusqueda" ColumnName="NumeroCartaEnTextoParaBusqueda" />
-                <ScalarProperty Name="IdClienteEntregador" ColumnName="IdClienteEntregador" />
-                <ScalarProperty Name="IdDetalleFactura" ColumnName="IdDetalleFactura" />
-                <ScalarProperty Name="SojaSustentableCodCondicion" ColumnName="SojaSustentableCodCondicion" />
-                <ScalarProperty Name="SojaSustentableCondicion" ColumnName="SojaSustentableCondicion" />
-                <ScalarProperty Name="SojaSustentableNroEstablecimientoDeProduccion" ColumnName="SojaSustentableNroEstablecimientoDeProduccion" />
-                <ScalarProperty Name="IdClientePagadorFlete" ColumnName="IdClientePagadorFlete" />
-                <ScalarProperty Name="SubnumeroVagonEnTextoParaBusqueda" ColumnName="SubnumeroVagonEnTextoParaBusqueda" />
-                <ScalarProperty Name="IdCorredor2" ColumnName="IdCorredor2" />
-                <ScalarProperty Name="Acopio1" ColumnName="Acopio1" />
-                <ScalarProperty Name="Acopio2" ColumnName="Acopio2" />
-                <ScalarProperty Name="Acopio3" ColumnName="Acopio3" />
-                <ScalarProperty Name="Acopio4" ColumnName="Acopio4" />
-                <ScalarProperty Name="Acopio5" ColumnName="Acopio5" />
-                <ScalarProperty Name="Acopio6" ColumnName="Acopio6" />
-                <ScalarProperty Name="AcopioFacturarleA" ColumnName="AcopioFacturarleA" />
-                <ScalarProperty Name="CalidadGranosDanadosRebaja" ColumnName="CalidadGranosDanadosRebaja" />
-                <ScalarProperty Name="CalidadGranosExtranosRebaja" ColumnName="CalidadGranosExtranosRebaja" />
-                <ScalarProperty Name="NumeroCompleto" ColumnName="NumeroCompleto" />
-                <ScalarProperty Name="MinutosModifico" ColumnName="MinutosModifico" />
-                <ScalarProperty Name="EspecieONCAA" ColumnName="EspecieONCAA" />
-                <ScalarProperty Name="CodigoSAJPYA" ColumnName="CodigoSAJPYA" />
-                <ScalarProperty Name="txtCodigoZeni" ColumnName="txtCodigoZeni" />
-                <ScalarProperty Name="TitularDesc" ColumnName="TitularDesc" />
-                <ScalarProperty Name="TitularCUIT" ColumnName="TitularCUIT" />
-                <ScalarProperty Name="IntermediarioDesc" ColumnName="IntermediarioDesc" />
-                <ScalarProperty Name="IntermediarioCUIT" ColumnName="IntermediarioCUIT" />
-                <ScalarProperty Name="RComercialDesc" ColumnName="RComercialDesc" />
-                <ScalarProperty Name="RComercialCUIT" ColumnName="RComercialCUIT" />
-                <ScalarProperty Name="CorredorDesc" ColumnName="CorredorDesc" />
-                <ScalarProperty Name="CorredorCUIT" ColumnName="CorredorCUIT" />
-                <ScalarProperty Name="DestinatarioDesc" ColumnName="DestinatarioDesc" />
-                <ScalarProperty Name="EntregadorDesc" ColumnName="EntregadorDesc" />
-                <ScalarProperty Name="DestinatarioCUIT" ColumnName="DestinatarioCUIT" />
-                <ScalarProperty Name="ClienteAuxiliarDesc" ColumnName="ClienteAuxiliarDesc" />
-                <ScalarProperty Name="ClienteAuxiliarCUIT" ColumnName="ClienteAuxiliarCUIT" />
-                <ScalarProperty Name="Subcontr1Desc" ColumnName="Subcontr1Desc" />
-                <ScalarProperty Name="Subcontr2Desc" ColumnName="Subcontr2Desc" />
-                <ScalarProperty Name="Producto" ColumnName="Producto" />
-                <ScalarProperty Name="TransportistaCUIT" ColumnName="TransportistaCUIT" />
-                <ScalarProperty Name="TransportistaDesc" ColumnName="TransportistaDesc" />
-                <ScalarProperty Name="ChoferCUIT" ColumnName="ChoferCUIT" />
-                <ScalarProperty Name="ChoferDesc" ColumnName="ChoferDesc" />
-                <ScalarProperty Name="ProcedenciaDesc" ColumnName="ProcedenciaDesc" />
-                <ScalarProperty Name="ProcedenciaCodigoPostal" ColumnName="ProcedenciaCodigoPostal" />
-                <ScalarProperty Name="ProcedenciaCodigoONCAA" ColumnName="ProcedenciaCodigoONCAA" />
-                <ScalarProperty Name="ProcedenciaProvinciaDesc" ColumnName="ProcedenciaProvinciaDesc" />
-                <ScalarProperty Name="DestinoDesc" ColumnName="DestinoDesc" />
-                <ScalarProperty Name="DestinoCodigoPostal" ColumnName="DestinoCodigoPostal" />
-                <ScalarProperty Name="DestinoCodigoONCAA" ColumnName="DestinoCodigoONCAA" />
-                <ScalarProperty Name="Mes" ColumnName="Mes" />
-                <ScalarProperty Name="Ano" ColumnName="Ano" />
-                <ScalarProperty Name="Factura" ColumnName="Factura" />
-                <ScalarProperty Name="FechaFactura" ColumnName="FechaFactura" />
-                <ScalarProperty Name="ClienteFacturado" ColumnName="ClienteFacturado" />
-                <ScalarProperty Name="ClienteFacturadoCUIT" ColumnName="ClienteFacturadoCUIT" />
-                <ScalarProperty Name="CalidadDesc" ColumnName="CalidadDesc" />
-                <ScalarProperty Name="UsuarioIngreso" ColumnName="UsuarioIngreso" />
-                <ScalarProperty Name="EstablecimientoDesc" ColumnName="EstablecimientoDesc" />
-                <ScalarProperty Name="ClientePagadorFleteDesc" ColumnName="ClientePagadorFleteDesc" />
-                <ScalarProperty Name="ProcedenciaProvinciaPartido" ColumnName="ProcedenciaProvinciaPartido" />
-                <ScalarProperty Name="ProcedenciaPartidoNormalizadaCodigo" ColumnName="ProcedenciaPartidoNormalizadaCodigo" />
-                <ScalarProperty Name="DestinoProvinciaDesc" ColumnName="DestinoProvinciaDesc" />
-                <ScalarProperty Name="ProcedenciaPartidoNormalizada" ColumnName="ProcedenciaPartidoNormalizada" />
-                <ScalarProperty Name="CorredorDesc2" ColumnName="CorredorDesc2" />
-                <ScalarProperty Name="CorredorCUIT2" ColumnName="CorredorCUIT2" />
-                <ScalarProperty Name="EntregadorCUIT" ColumnName="EntregadorCUIT" />
-                <ScalarProperty Name="CodigoAFIP" ColumnName="CodigoAFIP" />
-                <ScalarProperty Name="CalidadGranosExtranosMerma" ColumnName="CalidadGranosExtranosMerma" />
-                <ScalarProperty Name="CalidadQuebradosMerma" ColumnName="CalidadQuebradosMerma" />
-                <ScalarProperty Name="CalidadDanadosMerma" ColumnName="CalidadDanadosMerma" />
-                <ScalarProperty Name="CalidadChamicoMerma" ColumnName="CalidadChamicoMerma" />
-                <ScalarProperty Name="CalidadRevolcadosMerma" ColumnName="CalidadRevolcadosMerma" />
-                <ScalarProperty Name="CalidadObjetablesMerma" ColumnName="CalidadObjetablesMerma" />
-                <ScalarProperty Name="CalidadAmohosadosMerma" ColumnName="CalidadAmohosadosMerma" />
-                <ScalarProperty Name="CalidadPuntaSombreadaMerma" ColumnName="CalidadPuntaSombreadaMerma" />
-                <ScalarProperty Name="CalidadHectolitricoMerma" ColumnName="CalidadHectolitricoMerma" />
-                <ScalarProperty Name="CalidadCarbonMerma" ColumnName="CalidadCarbonMerma" />
-                <ScalarProperty Name="CalidadPanzaBlancaMerma" ColumnName="CalidadPanzaBlancaMerma" />
-                <ScalarProperty Name="CalidadPicadosMerma" ColumnName="CalidadPicadosMerma" />
-                <ScalarProperty Name="CalidadVerdesMerma" ColumnName="CalidadVerdesMerma" />
-                <ScalarProperty Name="CalidadQuemadosMerma" ColumnName="CalidadQuemadosMerma" />
-                <ScalarProperty Name="CalidadTierraMerma" ColumnName="CalidadTierraMerma" />
-                <ScalarProperty Name="CalidadZarandeoMerma" ColumnName="CalidadZarandeoMerma" />
-                <ScalarProperty Name="CalidadDescuentoFinalMerma" ColumnName="CalidadDescuentoFinalMerma" />
-                <ScalarProperty Name="CalidadHumedadMerma" ColumnName="CalidadHumedadMerma" />
-                <ScalarProperty Name="CalidadGastosFumigacionMerma" ColumnName="CalidadGastosFumigacionMerma" />
-                <ScalarProperty Name="CalidadQuebradosRebaja" ColumnName="CalidadQuebradosRebaja" />
-                <ScalarProperty Name="CalidadChamicoRebaja" ColumnName="CalidadChamicoRebaja" />
-                <ScalarProperty Name="CalidadRevolcadosRebaja" ColumnName="CalidadRevolcadosRebaja" />
-                <ScalarProperty Name="CalidadObjetablesRebaja" ColumnName="CalidadObjetablesRebaja" />
-                <ScalarProperty Name="CalidadAmohosadosRebaja" ColumnName="CalidadAmohosadosRebaja" />
-                <ScalarProperty Name="CalidadPuntaSombreadaRebaja" ColumnName="CalidadPuntaSombreadaRebaja" />
-                <ScalarProperty Name="CalidadHectolitricoRebaja" ColumnName="CalidadHectolitricoRebaja" />
-                <ScalarProperty Name="CalidadCarbonRebaja" ColumnName="CalidadCarbonRebaja" />
-                <ScalarProperty Name="CalidadPanzaBlancaRebaja" ColumnName="CalidadPanzaBlancaRebaja" />
-                <ScalarProperty Name="CalidadPicadosRebaja" ColumnName="CalidadPicadosRebaja" />
-                <ScalarProperty Name="CalidadVerdesRebaja" ColumnName="CalidadVerdesRebaja" />
-                <ScalarProperty Name="CalidadQuemadosRebaja" ColumnName="CalidadQuemadosRebaja" />
-                <ScalarProperty Name="CalidadTierraRebaja" ColumnName="CalidadTierraRebaja" />
-                <ScalarProperty Name="CalidadZarandeoRebaja" ColumnName="CalidadZarandeoRebaja" />
-                <ScalarProperty Name="CalidadDescuentoFinalRebaja" ColumnName="CalidadDescuentoFinalRebaja" />
-                <ScalarProperty Name="CalidadHumedadRebaja" ColumnName="CalidadHumedadRebaja" />
-                <ScalarProperty Name="CalidadGastosFumigacionRebaja" ColumnName="CalidadGastosFumigacionRebaja" />
-                <ScalarProperty Name="CalidadHumedadResultado" ColumnName="CalidadHumedadResultado" />
-                <ScalarProperty Name="CalidadGastosFumigacionResultado" ColumnName="CalidadGastosFumigacionResultado" />
-                <ScalarProperty Name="ConDuplicados" ColumnName="ConDuplicados" />
-                <ScalarProperty Name="TieneRecibidorOficial" ColumnName="TieneRecibidorOficial" />
-                <ScalarProperty Name="EstadoRecibidor" ColumnName="EstadoRecibidor" />
-                <ScalarProperty Name="ClienteAcondicionador" ColumnName="ClienteAcondicionador" />
-                <ScalarProperty Name="MotivoRechazo" ColumnName="MotivoRechazo" />
-                <ScalarProperty Name="FacturarA_Manual" ColumnName="FacturarA_Manual" />
-                <ScalarProperty Name="EntregaSAP" ColumnName="EntregaSAP" />
-                <ScalarProperty Name="DestinoCUIT" ColumnName="DestinoCUIT" />
-                <ScalarProperty Name="EstablecimientoCodigo" ColumnName="EstablecimientoCodigo" />
-                <ScalarProperty Name="EstablecimientoCUIT" ColumnName="EstablecimientoCUIT" />
-                <ScalarProperty Name="EstablecimientoNombre" ColumnName="EstablecimientoNombre" />
-                <ScalarProperty Name="DestinoLocalidadAFIP" ColumnName="DestinoLocalidadAFIP" />
-                <ScalarProperty Name="Situacion" ColumnName="Situacion" />
-                <ScalarProperty Name="SituacionAntesDeEditarManualmente" ColumnName="SituacionAntesDeEditarManualmente" />
-                <ScalarProperty Name="FechaActualizacionAutomatica" ColumnName="FechaActualizacionAutomatica" />
-                <ScalarProperty Name="FechaAutorizacion" ColumnName="FechaAutorizacion" />
-                <ScalarProperty Name="ObservacionesSituacion" ColumnName="ObservacionesSituacion" />
-                <ScalarProperty Name="SituacionLog" ColumnName="SituacionLog" />
-                <ScalarProperty Name="DestinoLocalidadCodigoONCAA" ColumnName="DestinoLocalidadCodigoONCAA" />
-                <ScalarProperty Name="DestinoLocalidadDesc" ColumnName="DestinoLocalidadDesc" />
-                <ScalarProperty Name="Turno" ColumnName="Turno" />
-                <ScalarProperty Name="FechaEnvioASyngenta" ColumnName="FechaEnvioASyngenta" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
           <EntitySetMapping Name="CartasDePortes">
             <EntityTypeMapping TypeName="DemoProntoModel.CartasDePorte">
               <MappingFragment StoreEntitySet="CartasDePorte">
@@ -32659,6 +32562,223 @@ warning 6002: The table/view 'Pronto.dbo.wGrillaPersistencia' does not have a pr
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="fSQL_GetDataTableFiltradoYPaginado" FunctionName="DemoProntoModel.Store.fSQL_GetDataTableFiltradoYPaginado">
+          <ResultMapping>
+              <ComplexTypeMapping TypeName="DemoProntoModel.fSQL_GetDataTableFiltradoYPaginado_Result3">
+                <ScalarProperty Name="IdCartaDePorte" ColumnName="IdCartaDePorte" />
+                <ScalarProperty Name="NumeroCartaDePorte" ColumnName="NumeroCartaDePorte" />
+                <ScalarProperty Name="IdUsuarioIngreso" ColumnName="IdUsuarioIngreso" />
+                <ScalarProperty Name="FechaIngreso" ColumnName="FechaIngreso" />
+                <ScalarProperty Name="Anulada" ColumnName="Anulada" />
+                <ScalarProperty Name="IdUsuarioAnulo" ColumnName="IdUsuarioAnulo" />
+                <ScalarProperty Name="FechaAnulacion" ColumnName="FechaAnulacion" />
+                <ScalarProperty Name="Observaciones" ColumnName="Observaciones" />
+                <ScalarProperty Name="FechaTimeStamp" ColumnName="FechaTimeStamp" />
+                <ScalarProperty Name="Vendedor" ColumnName="Vendedor" />
+                <ScalarProperty Name="CuentaOrden1" ColumnName="CuentaOrden1" />
+                <ScalarProperty Name="CuentaOrden2" ColumnName="CuentaOrden2" />
+                <ScalarProperty Name="Corredor" ColumnName="Corredor" />
+                <ScalarProperty Name="Entregador" ColumnName="Entregador" />
+                <ScalarProperty Name="Procedencia" ColumnName="Procedencia" />
+                <ScalarProperty Name="Patente" ColumnName="Patente" />
+                <ScalarProperty Name="IdArticulo" ColumnName="IdArticulo" />
+                <ScalarProperty Name="IdStock" ColumnName="IdStock" />
+                <ScalarProperty Name="Partida" ColumnName="Partida" />
+                <ScalarProperty Name="IdUnidad" ColumnName="IdUnidad" />
+                <ScalarProperty Name="IdUbicacion" ColumnName="IdUbicacion" />
+                <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+                <ScalarProperty Name="Cupo" ColumnName="Cupo" />
+                <ScalarProperty Name="NetoProc" ColumnName="NetoProc" />
+                <ScalarProperty Name="Calidad" ColumnName="Calidad" />
+                <ScalarProperty Name="BrutoPto" ColumnName="BrutoPto" />
+                <ScalarProperty Name="TaraPto" ColumnName="TaraPto" />
+                <ScalarProperty Name="NetoPto" ColumnName="NetoPto" />
+                <ScalarProperty Name="Acoplado" ColumnName="Acoplado" />
+                <ScalarProperty Name="Humedad" ColumnName="Humedad" />
+                <ScalarProperty Name="Merma" ColumnName="Merma" />
+                <ScalarProperty Name="NetoFinal" ColumnName="NetoFinal" />
+                <ScalarProperty Name="FechaDeCarga" ColumnName="FechaDeCarga" />
+                <ScalarProperty Name="FechaVencimiento" ColumnName="FechaVencimiento" />
+                <ScalarProperty Name="CEE" ColumnName="CEE" />
+                <ScalarProperty Name="IdTransportista" ColumnName="IdTransportista" />
+                <ScalarProperty Name="TransportistaCUITdesnormalizado" ColumnName="TransportistaCUITdesnormalizado" />
+                <ScalarProperty Name="IdChofer" ColumnName="IdChofer" />
+                <ScalarProperty Name="ChoferCUITdesnormalizado" ColumnName="ChoferCUITdesnormalizado" />
+                <ScalarProperty Name="CTG" ColumnName="CTG" />
+                <ScalarProperty Name="Contrato" ColumnName="Contrato" />
+                <ScalarProperty Name="Destino" ColumnName="Destino" />
+                <ScalarProperty Name="Subcontr1" ColumnName="Subcontr1" />
+                <ScalarProperty Name="Subcontr2" ColumnName="Subcontr2" />
+                <ScalarProperty Name="Contrato1" ColumnName="Contrato1" />
+                <ScalarProperty Name="contrato2" ColumnName="contrato2" />
+                <ScalarProperty Name="KmARecorrer" ColumnName="KmARecorrer" />
+                <ScalarProperty Name="Tarifa" ColumnName="Tarifa" />
+                <ScalarProperty Name="FechaDescarga" ColumnName="FechaDescarga" />
+                <ScalarProperty Name="Hora" ColumnName="Hora" />
+                <ScalarProperty Name="NRecibo" ColumnName="NRecibo" />
+                <ScalarProperty Name="CalidadDe" ColumnName="CalidadDe" />
+                <ScalarProperty Name="TaraFinal" ColumnName="TaraFinal" />
+                <ScalarProperty Name="BrutoFinal" ColumnName="BrutoFinal" />
+                <ScalarProperty Name="Fumigada" ColumnName="Fumigada" />
+                <ScalarProperty Name="Secada" ColumnName="Secada" />
+                <ScalarProperty Name="Exporta" ColumnName="Exporta" />
+                <ScalarProperty Name="NobleExtranos" ColumnName="NobleExtranos" />
+                <ScalarProperty Name="NobleNegros" ColumnName="NobleNegros" />
+                <ScalarProperty Name="NobleQuebrados" ColumnName="NobleQuebrados" />
+                <ScalarProperty Name="NobleDaniados" ColumnName="NobleDaniados" />
+                <ScalarProperty Name="NobleChamico" ColumnName="NobleChamico" />
+                <ScalarProperty Name="NobleChamico2" ColumnName="NobleChamico2" />
+                <ScalarProperty Name="NobleRevolcado" ColumnName="NobleRevolcado" />
+                <ScalarProperty Name="NobleObjetables" ColumnName="NobleObjetables" />
+                <ScalarProperty Name="NobleAmohosados" ColumnName="NobleAmohosados" />
+                <ScalarProperty Name="NobleHectolitrico" ColumnName="NobleHectolitrico" />
+                <ScalarProperty Name="NobleCarbon" ColumnName="NobleCarbon" />
+                <ScalarProperty Name="NoblePanzaBlanca" ColumnName="NoblePanzaBlanca" />
+                <ScalarProperty Name="NoblePicados" ColumnName="NoblePicados" />
+                <ScalarProperty Name="NobleMGrasa" ColumnName="NobleMGrasa" />
+                <ScalarProperty Name="NobleAcidezGrasa" ColumnName="NobleAcidezGrasa" />
+                <ScalarProperty Name="NobleVerdes" ColumnName="NobleVerdes" />
+                <ScalarProperty Name="NobleGrado" ColumnName="NobleGrado" />
+                <ScalarProperty Name="NobleConforme" ColumnName="NobleConforme" />
+                <ScalarProperty Name="NobleACamara" ColumnName="NobleACamara" />
+                <ScalarProperty Name="Cosecha" ColumnName="Cosecha" />
+                <ScalarProperty Name="HumedadDesnormalizada" ColumnName="HumedadDesnormalizada" />
+                <ScalarProperty Name="Factor" ColumnName="Factor" />
+                <ScalarProperty Name="IdFacturaImputada" ColumnName="IdFacturaImputada" />
+                <ScalarProperty Name="PuntoVenta" ColumnName="PuntoVenta" />
+                <ScalarProperty Name="SubnumeroVagon" ColumnName="SubnumeroVagon" />
+                <ScalarProperty Name="TarifaFacturada" ColumnName="TarifaFacturada" />
+                <ScalarProperty Name="TarifaSubcontratista1" ColumnName="TarifaSubcontratista1" />
+                <ScalarProperty Name="TarifaSubcontratista2" ColumnName="TarifaSubcontratista2" />
+                <ScalarProperty Name="FechaArribo" ColumnName="FechaArribo" />
+                <ScalarProperty Name="Version" ColumnName="Version" />
+                <ScalarProperty Name="MotivoAnulacion" ColumnName="MotivoAnulacion" />
+                <ScalarProperty Name="NumeroSubfijo" ColumnName="NumeroSubfijo" />
+                <ScalarProperty Name="IdEstablecimiento" ColumnName="IdEstablecimiento" />
+                <ScalarProperty Name="EnumSyngentaDivision" ColumnName="EnumSyngentaDivision" />
+                <ScalarProperty Name="Corredor2" ColumnName="Corredor2" />
+                <ScalarProperty Name="IdUsuarioModifico" ColumnName="IdUsuarioModifico" />
+                <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
+                <ScalarProperty Name="FechaEmision" ColumnName="FechaEmision" />
+                <ScalarProperty Name="EstaArchivada" ColumnName="EstaArchivada" />
+                <ScalarProperty Name="ExcluirDeSubcontratistas" ColumnName="ExcluirDeSubcontratistas" />
+                <ScalarProperty Name="IdTipoMovimiento" ColumnName="IdTipoMovimiento" />
+                <ScalarProperty Name="IdClienteAFacturarle" ColumnName="IdClienteAFacturarle" />
+                <ScalarProperty Name="SubnumeroDeFacturacion" ColumnName="SubnumeroDeFacturacion" />
+                <ScalarProperty Name="AgregaItemDeGastosAdministrativos" ColumnName="AgregaItemDeGastosAdministrativos" />
+                <ScalarProperty Name="CalidadGranosQuemados" ColumnName="CalidadGranosQuemados" />
+                <ScalarProperty Name="CalidadGranosQuemadosBonifica_o_Rebaja" ColumnName="CalidadGranosQuemadosBonifica_o_Rebaja" />
+                <ScalarProperty Name="CalidadTierra" ColumnName="CalidadTierra" />
+                <ScalarProperty Name="CalidadTierraBonifica_o_Rebaja" ColumnName="CalidadTierraBonifica_o_Rebaja" />
+                <ScalarProperty Name="CalidadMermaChamico" ColumnName="CalidadMermaChamico" />
+                <ScalarProperty Name="CalidadMermaChamicoBonifica_o_Rebaja" ColumnName="CalidadMermaChamicoBonifica_o_Rebaja" />
+                <ScalarProperty Name="CalidadMermaZarandeo" ColumnName="CalidadMermaZarandeo" />
+                <ScalarProperty Name="CalidadMermaZarandeoBonifica_o_Rebaja" ColumnName="CalidadMermaZarandeoBonifica_o_Rebaja" />
+                <ScalarProperty Name="FueraDeEstandar" ColumnName="FueraDeEstandar" />
+                <ScalarProperty Name="CalidadPuntaSombreada" ColumnName="CalidadPuntaSombreada" />
+                <ScalarProperty Name="CobraAcarreo" ColumnName="CobraAcarreo" />
+                <ScalarProperty Name="LiquidaViaje" ColumnName="LiquidaViaje" />
+                <ScalarProperty Name="IdClienteAuxiliar" ColumnName="IdClienteAuxiliar" />
+                <ScalarProperty Name="CalidadDescuentoFinal" ColumnName="CalidadDescuentoFinal" />
+                <ScalarProperty Name="PathImagen" ColumnName="PathImagen" />
+                <ScalarProperty Name="PathImagen2" ColumnName="PathImagen2" />
+                <ScalarProperty Name="AgrupadorDeTandaPeriodos" ColumnName="AgrupadorDeTandaPeriodos" />
+                <ScalarProperty Name="ClaveEncriptada" ColumnName="ClaveEncriptada" />
+                <ScalarProperty Name="NumeroCartaEnTextoParaBusqueda" ColumnName="NumeroCartaEnTextoParaBusqueda" />
+                <ScalarProperty Name="IdClienteEntregador" ColumnName="IdClienteEntregador" />
+                <ScalarProperty Name="IdDetalleFactura" ColumnName="IdDetalleFactura" />
+                <ScalarProperty Name="SojaSustentableCodCondicion" ColumnName="SojaSustentableCodCondicion" />
+                <ScalarProperty Name="SojaSustentableCondicion" ColumnName="SojaSustentableCondicion" />
+                <ScalarProperty Name="SojaSustentableNroEstablecimientoDeProduccion" ColumnName="SojaSustentableNroEstablecimientoDeProduccion" />
+                <ScalarProperty Name="IdClientePagadorFlete" ColumnName="IdClientePagadorFlete" />
+                <ScalarProperty Name="SubnumeroVagonEnTextoParaBusqueda" ColumnName="SubnumeroVagonEnTextoParaBusqueda" />
+                <ScalarProperty Name="IdCorredor2" ColumnName="IdCorredor2" />
+                <ScalarProperty Name="Acopio1" ColumnName="Acopio1" />
+                <ScalarProperty Name="Acopio2" ColumnName="Acopio2" />
+                <ScalarProperty Name="Acopio3" ColumnName="Acopio3" />
+                <ScalarProperty Name="Acopio4" ColumnName="Acopio4" />
+                <ScalarProperty Name="Acopio5" ColumnName="Acopio5" />
+                <ScalarProperty Name="Acopio6" ColumnName="Acopio6" />
+                <ScalarProperty Name="AcopioFacturarleA" ColumnName="AcopioFacturarleA" />
+                <ScalarProperty Name="CalidadGranosDanadosRebaja" ColumnName="CalidadGranosDanadosRebaja" />
+                <ScalarProperty Name="CalidadGranosExtranosRebaja" ColumnName="CalidadGranosExtranosRebaja" />
+                <ScalarProperty Name="NumeroCompleto" ColumnName="NumeroCompleto" />
+                <ScalarProperty Name="MinutosModifico" ColumnName="MinutosModifico" />
+                <ScalarProperty Name="EspecieONCAA" ColumnName="EspecieONCAA" />
+                <ScalarProperty Name="CodigoSAJPYA" ColumnName="CodigoSAJPYA" />
+                <ScalarProperty Name="txtCodigoZeni" ColumnName="txtCodigoZeni" />
+                <ScalarProperty Name="TitularDesc" ColumnName="TitularDesc" />
+                <ScalarProperty Name="TitularCUIT" ColumnName="TitularCUIT" />
+                <ScalarProperty Name="IntermediarioDesc" ColumnName="IntermediarioDesc" />
+                <ScalarProperty Name="IntermediarioCUIT" ColumnName="IntermediarioCUIT" />
+                <ScalarProperty Name="RComercialDesc" ColumnName="RComercialDesc" />
+                <ScalarProperty Name="RComercialCUIT" ColumnName="RComercialCUIT" />
+                <ScalarProperty Name="CorredorDesc" ColumnName="CorredorDesc" />
+                <ScalarProperty Name="CorredorCUIT" ColumnName="CorredorCUIT" />
+                <ScalarProperty Name="DestinatarioDesc" ColumnName="DestinatarioDesc" />
+                <ScalarProperty Name="EntregadorDesc" ColumnName="EntregadorDesc" />
+                <ScalarProperty Name="DestinatarioCUIT" ColumnName="DestinatarioCUIT" />
+                <ScalarProperty Name="ClienteAuxiliarDesc" ColumnName="ClienteAuxiliarDesc" />
+                <ScalarProperty Name="ClienteAuxiliarCUIT" ColumnName="ClienteAuxiliarCUIT" />
+                <ScalarProperty Name="Subcontr1Desc" ColumnName="Subcontr1Desc" />
+                <ScalarProperty Name="Subcontr2Desc" ColumnName="Subcontr2Desc" />
+                <ScalarProperty Name="Producto" ColumnName="Producto" />
+                <ScalarProperty Name="TransportistaCUIT" ColumnName="TransportistaCUIT" />
+                <ScalarProperty Name="TransportistaDesc" ColumnName="TransportistaDesc" />
+                <ScalarProperty Name="ChoferCUIT" ColumnName="ChoferCUIT" />
+                <ScalarProperty Name="ChoferDesc" ColumnName="ChoferDesc" />
+                <ScalarProperty Name="ProcedenciaDesc" ColumnName="ProcedenciaDesc" />
+                <ScalarProperty Name="ProcedenciaCodigoPostal" ColumnName="ProcedenciaCodigoPostal" />
+                <ScalarProperty Name="ProcedenciaCodigoONCAA" ColumnName="ProcedenciaCodigoONCAA" />
+                <ScalarProperty Name="ProcedenciaProvinciaDesc" ColumnName="ProcedenciaProvinciaDesc" />
+                <ScalarProperty Name="DestinoDesc" ColumnName="DestinoDesc" />
+                <ScalarProperty Name="DestinoCodigoPostal" ColumnName="DestinoCodigoPostal" />
+                <ScalarProperty Name="DestinoCodigoONCAA" ColumnName="DestinoCodigoONCAA" />
+                <ScalarProperty Name="Mes" ColumnName="Mes" />
+                <ScalarProperty Name="Ano" ColumnName="Ano" />
+                <ScalarProperty Name="Factura" ColumnName="Factura" />
+                <ScalarProperty Name="FechaFactura" ColumnName="FechaFactura" />
+                <ScalarProperty Name="ClienteFacturado" ColumnName="ClienteFacturado" />
+                <ScalarProperty Name="ClienteFacturadoCUIT" ColumnName="ClienteFacturadoCUIT" />
+                <ScalarProperty Name="CalidadDesc" ColumnName="CalidadDesc" />
+                <ScalarProperty Name="UsuarioIngreso" ColumnName="UsuarioIngreso" />
+                <ScalarProperty Name="EstablecimientoDesc" ColumnName="EstablecimientoDesc" />
+                <ScalarProperty Name="ClientePagadorFleteDesc" ColumnName="ClientePagadorFleteDesc" />
+                <ScalarProperty Name="ProcedenciaProvinciaPartido" ColumnName="ProcedenciaProvinciaPartido" />
+                <ScalarProperty Name="ProcedenciaPartidoNormalizadaCodigo" ColumnName="ProcedenciaPartidoNormalizadaCodigo" />
+                <ScalarProperty Name="DestinoProvinciaDesc" ColumnName="DestinoProvinciaDesc" />
+                <ScalarProperty Name="ProcedenciaPartidoNormalizada" ColumnName="ProcedenciaPartidoNormalizada" />
+                <ScalarProperty Name="CorredorDesc2" ColumnName="CorredorDesc2" />
+                <ScalarProperty Name="CorredorCUIT2" ColumnName="CorredorCUIT2" />
+                <ScalarProperty Name="EntregadorCUIT" ColumnName="EntregadorCUIT" />
+                <ScalarProperty Name="CodigoAFIP" ColumnName="CodigoAFIP" />
+                <ScalarProperty Name="ConDuplicados" ColumnName="ConDuplicados" />
+                <ScalarProperty Name="TieneRecibidorOficial" ColumnName="TieneRecibidorOficial" />
+                <ScalarProperty Name="EstadoRecibidor" ColumnName="EstadoRecibidor" />
+                <ScalarProperty Name="ClienteAcondicionador" ColumnName="ClienteAcondicionador" />
+                <ScalarProperty Name="MotivoRechazo" ColumnName="MotivoRechazo" />
+                <ScalarProperty Name="FacturarA_Manual" ColumnName="FacturarA_Manual" />
+                <ScalarProperty Name="EntregaSAP" ColumnName="EntregaSAP" />
+                <ScalarProperty Name="DestinoCUIT" ColumnName="DestinoCUIT" />
+                <ScalarProperty Name="EstablecimientoCodigo" ColumnName="EstablecimientoCodigo" />
+                <ScalarProperty Name="EstablecimientoCUIT" ColumnName="EstablecimientoCUIT" />
+                <ScalarProperty Name="EstablecimientoNombre" ColumnName="EstablecimientoNombre" />
+                <ScalarProperty Name="DestinoLocalidadAFIP" ColumnName="DestinoLocalidadAFIP" />
+                <ScalarProperty Name="Situacion" ColumnName="Situacion" />
+                <ScalarProperty Name="SituacionAntesDeEditarManualmente" ColumnName="SituacionAntesDeEditarManualmente" />
+                <ScalarProperty Name="FechaActualizacionAutomatica" ColumnName="FechaActualizacionAutomatica" />
+                <ScalarProperty Name="FechaAutorizacion" ColumnName="FechaAutorizacion" />
+                <ScalarProperty Name="ObservacionesSituacion" ColumnName="ObservacionesSituacion" />
+                <ScalarProperty Name="SituacionLog" ColumnName="SituacionLog" />
+                <ScalarProperty Name="DestinoLocalidadCodigoONCAA" ColumnName="DestinoLocalidadCodigoONCAA" />
+                <ScalarProperty Name="DestinoLocalidadDesc" ColumnName="DestinoLocalidadDesc" />
+                <ScalarProperty Name="Turno" ColumnName="Turno" />
+                <ScalarProperty Name="FechaEnvioASyngenta" ColumnName="FechaEnvioASyngenta" />
+                <ScalarProperty Name="ProcedenciaProvinciaCodigo" ColumnName="ProcedenciaProvinciaCodigo" />
+                <ScalarProperty Name="DestinoProvinciaCodigo" ColumnName="DestinoProvinciaCodigo" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
