@@ -1381,7 +1381,7 @@ namespace ProntoMVC.Tests
 
             int idcliente = 4333; //syngenta
 
-            var dbcartas = CartaDePorteManager.ListadoSegunCliente(SC, idcliente, new DateTime(2016, 11, 1), new DateTime(2016, 11, 30));
+            var dbcartas = CartaDePorteManager.ListadoSegunCliente(SC, idcliente, new DateTime(2016, 11, 1), new DateTime(2016, 11, 30), CartaDePorteManager.enumCDPestado.DescargasMasFacturadas);
 
             var s = new ServicioCartaPorte.servi();
 

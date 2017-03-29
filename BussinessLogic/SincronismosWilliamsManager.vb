@@ -6712,7 +6712,7 @@ Namespace Pronto.ERP.Bll
                 sb &= "&" & Left(Val(iisNull(dr("CodigoEstablecimientoProcedencia"), "0")).ToString, 6).PadLeft(6)
 
 
-                sb &= "&" & Int(dr("Km")).ToString.PadLeft(10)                        '33 -Kilómetros	Numérico	10	Valor entero. Se completa con Cero por defecto.
+                sb &= "&" & Int(iisNull(dr("Km"), 0)).ToString.PadLeft(10)                        '33 -Kilómetros	Numérico	10	Valor entero. Se completa con Cero por defecto.
 
 
 
@@ -6985,14 +6985,14 @@ Namespace Pronto.ERP.Bll
             If InStr(productoDescripcion, "MAIZ") > 0 Then
                 Return "06"
             End If
+            If InStr(productoDescripcion, "SOJA EPA") > 0 Then
+                Return "99"
+            End If
             If InStr(productoDescripcion, "SOJA") > 0 Then
                 Return "08"
             End If
             If InStr(productoDescripcion, "SORGO") > 0 Then
                 Return "07"
-            End If
-            If InStr(productoDescripcion, "SOJA EPA") > 0 Then
-                Return "99"
             End If
 
             Return productoDescripcion

@@ -532,6 +532,31 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
         })
 
+        
+
+
+
+
+        function filtrarArticulosDefault_35603()
+        {
+                        var myfilter = { groupOp: "OR", rules: [] };
+                        myfilter.rules.push({ field: "Producto", op: "eq", data: "Maiz" });
+                        myfilter.rules.push({ field: "Producto", op: "eq", data: "Soja" });
+                        myfilter.rules.push({ field: "Producto", op: "eq", data: "Trigo Pan" });
+                        myfilter.rules.push({ field: "Producto", op: "eq", data: "Trigo Duro" });
+                        myfilter.rules.push({ field: "Producto", op: "eq", data: "Sorgo Granifero" });
+                        myfilter.rules.push({ field: "Producto", op: "eq", data: "Girasol" });
+                        myfilter.rules.push({ field: "Producto", op: "eq", data: "Girasol Alto Oleico" });
+                        myfilter.rules.push({ field: "Producto", op: "eq", data: "Girasol Confitero" });
+                        myfilter.rules.push({ field: "Producto", op: "eq", data: "Cebada Forrajera" });
+                        myfilter.rules.push({ field: "Producto", op: "eq", data: "Cebada Cervecera" });
+
+                        jqGridFilter(JSON.stringify(myfilter) , $('#Lista'));
+
+
+            //Los aceites y Pellets y Harinas dejar como están.
+
+        }
 
 
         function jqGridFilter(filtersparam, grid) {
@@ -1745,39 +1770,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
                 }
 
-            ,
-                select: function (e, ui) {
-                    //http://stackoverflow.com/questions/27635689/jqgrid-autocomplete-cannot-post-id-column
-                    // Oleg
-                    //UPDATED: It's really important to know which editing mode you use because 
-                    //id of input fields will be set based on different rules. The below code detect
-                    //whether form editing, inline editing or toolbar filter will be used which to choose the corresponding id.
-
-                    try {
-                        var id;
-                        if ($(elem).hasClass("FormElement")) {
-                            // form editing
-                            id = "IdWilliamsDestino";
-                        } else if ($(elem).closest(".ui-search-toolbar").length > 0) {
-                            // filter foolbar
-                            id = "gs_IdWilliamsDestino";
-                        } else if ($(elem).closest("tr.jqgrow").length > 0) {
-                            //id = $(elem).closest("tr.jqgrow").attr("id") + "_IdWilliamsDestino";
-
-                            var rowId = $("#Lista").jqGrid('getGridParam', 'selrow');
-                            var rowData = $("#Lista").jqGrid('getRowData', rowId);
-                            rowData.Descripcion = ui.item.value;
-                            rowData.IdWilliamsDestino = ui.item.id;
-                            // $("#Lista").jqGrid('setRowData', rowId, rowData);
-
-                            $("#Lista").jqGrid("setCell", rowId, "IdWilliamsDestino", rowData.IdWilliamsDestino);
-                        }
-                        //$("#" + id).val(ui.item.id);
-
-                    } catch (e) {
-
-                    }
-                }
+         
             });
 
 
