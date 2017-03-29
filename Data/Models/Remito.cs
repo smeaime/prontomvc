@@ -59,6 +59,8 @@ namespace ProntoMVC.Data.Models
         public string HoraSalida { get; set; }
         public Nullable<decimal> PesoBruto { get; set; }
         public Nullable<decimal> Tara { get; set; }
+        public Nullable<decimal> NumeroCAI { get; set; }
+        public Nullable<System.DateTime> FechaVencimientoCAI { get; set; }
     
         public virtual Cliente Cliente { get; set; }
         public virtual Proveedor Proveedore { get; set; }

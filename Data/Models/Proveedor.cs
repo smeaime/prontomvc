@@ -153,6 +153,7 @@ namespace ProntoMVC.Data.Models
         public Nullable<System.DateTime> FechaInicioVigenciaCodigoNormaCapital { get; set; }
         public Nullable<System.DateTime> FechaFinVigenciaCodigoNormaCapital { get; set; }
         public Nullable<int> IdObraDefault { get; set; }
+        public string RegimenSimplificadoIIBB { get; set; }
     
         public virtual ICollection<DetalleProveedor> DetalleProveedoresContactos { get; set; }
         public virtual ICollection<DetalleProveedoresIB> DetalleProveedoresIBs { get; set; }

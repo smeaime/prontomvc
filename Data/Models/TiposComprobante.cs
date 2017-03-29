@@ -55,6 +55,8 @@ namespace ProntoMVC.Data.Models
         public string CodigoAFIP3_Letra_B { get; set; }
         public string CodigoAFIP3_Letra_C { get; set; }
         public string CodigoAFIP3_Letra_E { get; set; }
+        public Nullable<int> IdUsuarioModifico { get; set; }
+        public Nullable<System.DateTime> FechaModifico { get; set; }
     
         public virtual ICollection<PuntosVenta> PuntosVentas { get; set; }
         public virtual ICollection<DetalleOrdenesPagoValore> DetalleOrdenesPagoValores { get; set; }

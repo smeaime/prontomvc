@@ -1732,7 +1732,7 @@ Namespace Pronto.ERP.Bll
                             FiltrarCopias(dt)
                             dt = DataTableWHERE(dt, sWHERE)
                             Dim sErrores As String
-                            output = Sincronismo_LaBragadense(dt, sErrores, "")
+                            output = Sincronismo_LaBragadense(dt, sErrores, "", SC)
 
                             sErroresRef = sErrores
                             registrosFiltrados = dt.Rows.Count
@@ -6571,7 +6571,15 @@ Namespace Pronto.ERP.Bll
 
         End Function
 
-        Public Shared Function Sincronismo_LaBragadense(ByVal pDataTable As DataTable, ByRef sErrores As String, ByVal titulo As String) As String
+
+
+
+
+
+
+
+
+        Public Shared Function Sincronismo_LaBragadense(ByVal pDataTable As DataTable, ByRef sErrores As String, ByVal titulo As String, SC As String) As String
 
 
             'Los de LosGrobo y TomasHnos, creo que usan el esquema de AlgoritmoSoftHouse. Algún otro lo hace?
@@ -6590,6 +6598,10 @@ Namespace Pronto.ERP.Bll
 
             'Dim vFileName As String = "c:\archivo.txt"
             Dim nF = FreeFile()
+
+
+            Dim db = New ProntoMVC.Data.Models.DemoProntoEntities(ProntoMVC.Data.Models.Auxiliares.FormatearConexParaEntityFramework(Encriptar(SC)))
+
 
             FileOpen(nF, vFileName, OpenMode.Output)
             Dim sb As String = ""
@@ -6659,14 +6671,30 @@ Namespace Pronto.ERP.Bll
                 sb &= "&" & FechaANSI(iisValidSqlDate(dr("Desc.")))     '21 - Fecha Descarga	Numérico	8	Se completa con la fecha de Descarga – Formato AAAAMMDD
 
 
-                sb &= "&" & DecimalToString(dr("H.%")).PadLeft(5)                         '22 -Porcentaje Humedad	Numérico	5	Hasta 7 posiciones para parte entera y 4 para decimales. Cero por defecto.
+                sb &= "&" & DecimalToString(iisNull(dr("H.%"), 0)).PadLeft(5)                         '22 -Porcentaje Humedad	Numérico	5	Hasta 7 posiciones para parte entera y 4 para decimales. Cero por defecto.
                 sb &= "&" & Int(iisNull(dr("Mer.Kg."), 0)).ToString.PadLeft(10)                         '23 -Kilos Merma Humedad	Alfa	10	Kilos de Merma registrados por Secada. Valor entero. Cero por defecto.
-                sb &= "&" & cero.ToString.PadLeft(5)                         '24 -Porcentaje Merma Zarandeo	Numérico	5	Hasta 7 posiciones para parte entera y 4 para decimales. Cero por defecto.
-                sb &= "&" & cero.ToString.PadLeft(5)                         '25 -Porcentaje Merma Volátil	Numérico	5	Hasta 7 posiciones para parte entera y 4 para decimales. Cero por defecto.
 
-                sb &= "&" & Int(iisNull(dr("Otras"), 0)).ToString.PadLeft(10)            '26 -Kilos Merma Zarandeo	Numérico	10	Kilos de Merma registrados por Zaranda. Valor entero. Cero por defecto.
-                sb &= "&" & cero.ToString.PadLeft(10)                        '27 -Kilos Merma Volátil	Numérico	10	Kilos de Merma registrados por Manipuleo. Valor entero. Cero por defecto.
-                sb &= "&" & cero.ToString.PadLeft(10)                         '28 -Kilos Servicio	Numérico	10	Valor entero. Se completa con Cero por defecto.
+
+
+                Dim cp = db.CartasDePortes.Find(dr("IdCartaDePorte"))
+                Dim cp2 = CartaDePorteManager.GetItem(SC, dr("IdCartaDePorte"))
+
+                
+                sb &= "&" & cp2.CalidadMermaZarandeo.ToString.PadLeft(5)                         '24 -Porcentaje Merma Zarandeo	Numérico	5	Hasta 7 posiciones para parte entera y 4 para decimales. Cero por defecto.
+                sb &= "&" & cp2.CalidadMermaVolatil.ToString.PadLeft(5)                         '25 -Porcentaje Merma Volátil	Numérico	5	Hasta 7 posiciones para parte entera y 4 para decimales. Cero por defecto.
+
+
+
+
+                sb &= "&" & cp2.CalidadZarandeoMerma.ToString.PadLeft(10)            '26 -Kilos Merma Zarandeo	Numérico	10	Kilos de Merma registrados por Zaranda. Valor entero. Cero por defecto.
+                sb &= "&" & cp2.CalidadMermaVolatilMerma.ToString.PadLeft(10)                        '27 -Kilos Merma Volátil	Numérico	10	Kilos de Merma registrados por Manipuleo. Valor entero. Cero por defecto.
+
+
+
+                sb &= "&" & Int(Int(iisNull(dr("Otras"), 0)) - cp2.CalidadMermaVolatilMerma - cp2.CalidadZarandeoMerma).ToString.PadLeft(10)                         '28 -Kilos Servicio	Numérico	10	Valor entero. Se completa con Cero por defecto.
+
+
+
                 sb &= "&" & Int(dr("Kg.Netos")).ToString.PadLeft(10)                      '29 -Kilos Netos	Numérico	10	Bruto – Tara – Mermas. Valor entero. Se completa con Cero por defecto.
 
 
@@ -6962,6 +6990,9 @@ Namespace Pronto.ERP.Bll
             End If
             If InStr(productoDescripcion, "SORGO") > 0 Then
                 Return "07"
+            End If
+            If InStr(productoDescripcion, "SOJA EPA") > 0 Then
+                Return "99"
             End If
 
             Return productoDescripcion
@@ -8212,7 +8243,7 @@ Namespace Pronto.ERP.Bll
                     sb &= JustificadoDerecha(CInt(If(.HumedadDesnormalizada, 0)), 10, "0") & SEP
                     sb &= If(.CalidadMermaZarandeo, 0).ToString("0000.00").Replace(",", ".") & SEP
                     sb &= "0000000" & SEP  '	25 -Porcentaje Merma Volátil
-                    sb &= JustificadoDerecha(If(.CalidadZarandeoMerma, ""), 10, "0") & SEP
+                    sb &= "0000000000" & SEP  'JustificadoDerecha(If(.CalidadZarandeoMerma, ""), 10, "0") & SEP
                     sb &= "0000000000" & SEP  '27 -Kilos Merma Volátil
                     sb &= "0000000000" & SEP '28 -Kilos Servicio
                     sb &= JustificadoDerecha(CInt(.NetoProc).ToString, 10, "0") & SEP '29 -Kilos Netos

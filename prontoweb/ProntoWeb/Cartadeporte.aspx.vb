@@ -310,48 +310,6 @@ Partial Class CartadeporteABM
 
 
 
-    Function TraerLogDeCartaPorte(ByVal idcarta As Long, bTraerImputaciones As Boolean) As Data.DataTable
-
-
-        If idcarta <= 0 Then Return Nothing
-        'lo que hace que tarde es el ultimo where con el like que tiene el comodin al principio
-        'lo que hace que tarde es el ultimo where con el like que tiene el comodin al principio
-        'lo que hace que tarde es el ultimo where con el like que tiene el comodin al principio
-        'lo que hace que tarde es el ultimo where con el like que tiene el comodin al principio
-        Dim s = "select * from log    where  (IdComprobante=" & idcarta & " AND  Detalle='Tabla : CartaPorte' )  " & _
-                                        " or   (IdComprobante=" & idcarta & " AND  Tipo='IMAG') "
-
-        If bTraerImputaciones Then s = s & " or (detalle like 'Imputacion de IdCartaPorte" & idcarta & "C%' ) " & _
-                                        " or  (detalle like 'Desimputacion%" & idcarta & "-%' ) " & _
-                                        " or (detalle like 'Se desimputa la carta id" & idcarta & " %')  "
-
-        s += "   ORDER BY FechaRegistro ASC"
-
-
-
-        'para ver las q se desfacturaron a mano:
-        'select * from log where detalle like '%desimputa%'
-
-
-
-
-        '"Log_InsertarRegistro", "IMPORT", _
-        '                                      .Id, 0, Now, 0, "Tabla : CartaPorte", 
-
-        Debug.Print(s)
-        Try
-            Return ExecDinamico(SC, s, 200)
-        Catch ex As Exception
-            ErrHandler2.WriteError(ex)
-        End Try
-
-
-        'EntidadManager.ExecDinamico(SC, "UPDATE CartasDePorte SET IdFacturaImputada=" & idfactura & "  WHERE IdCartaDePorte=" & oCDP.Id)
-        'EntidadManager.LogPronto(SC, idfactura, "Imputacion de IdCartaPorte" & oCDP.Id & "CDP:" & oCDP.NumeroCartaDePorte & " " & oCDP.SubnumeroVagon & "  IdFacturaImputada " & idfactura, nombreUsuario)
-
-    End Function
-
-
     'comentario en develop
 
 
@@ -365,26 +323,10 @@ Partial Class CartadeporteABM
 
             If IdEntity <= 0 Then Return
 
-            Dim dt = TraerLogDeCartaPorte(IdEntity, bTraerImputaciones)
-
-            If dt Is Nothing Then Exit Sub
-
-            Debug.Print(dt.Rows.Count)
-            Dim s As String = "" '= dt.ToString()
-            'Join(", ", dt.Rows(0).ItemArray)
-            For Each r In dt.Rows
-                s &= IIf(r.Item("Detalle").ToString.Contains("Imputa"), "IMPUT " & r.Item("Detalle").ToString, "") _
-      & IIf(r.Item("Detalle").ToString.Contains("esimputa"), "DESIMPUT " & r.Item("Detalle").ToString, "") _
-      & JustificadoDerecha(r.Item(0), 10) & " " & JustificadoDerecha(r.Item(7), 15) & " " & " " _
-      & JustificadoDerecha(r.Item(3), 30) & " " & " " _
-       & IIf(r.Item("Tipo").ToString = "IMAG", "<a href=""..\DataBackupear\" + r.Item("Detalle").ToString + """>" + r.Item("Detalle").ToString + "</a>", "") _
-                    & "<br/>"
-                '& r.Item(5)  & r.Item(0) & " " & r.Item(1)& " " & r.Item(4)  " " & r.Item(7)& " " & r.Item(3)
-            Next
 
             'MsgBoxAjax(Me, s)
 
-            lblLog.Text = "<br/>" & s
+            lblLog.Text = CartaDePorteManager.TraerLogDeCartaPorteHtml(SC, IdEntity, bTraerImputaciones)
             upLog.Update()
             '        "Log_InsertarRegistro", IIf(myCartaDePorte.Id <= 0, "ALTA", "MODIF"), _
             '                                              CartaDePorteId, 0, Now, 0, "Tabla : CartaPorte", "", NombreUsuario, _

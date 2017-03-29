@@ -365,6 +365,31 @@ namespace ProntoWindowsService
                          * */
 
 
+                        if ((uint)x2.ErrorCode == 0x80080005)
+                        { // (0x80080005) 80080005 Server execution failed (Exception from HRESULT: 0x80080005 (CO_E_SERVER_EXEC_FAILURE)).
+
+                            ClassFlexicapture.Log(idthread + "Problemas CO_E_SERVER_EXEC_FAILURE");
+
+                        }
+                        else if ((uint)x2.ErrorCode == 0x80004005)
+                        {  //(0x80004005): Error communicating with ABBYY Product 
+
+                            ClassFlexicapture.Log(idthread + "Problemas al conectarse al licenciador");
+
+                        }
+
+
+
+
+                        //                     Error in: . Error Message:System.Runtime.InteropServices.COMException (0x80080005): Retrieving the COM class factory for component with CLSID {B0003004-0000-48FF-9197-57B7554849BA} failed due to the following error: 80080005 Server execution failed (Exception from HRESULT: 0x80080005 (CO_E_SERVER_EXEC_FAILURE)).
+                        //at System.RuntimeTypeHandle.CreateInstance(RuntimeType type, Boolean publicOnly, Boolean noCheck, Boolean& canBeCached, RuntimeMethodHandleInternal& ctor, Boolean& bNeedSecurityCheck)
+                        //at System.RuntimeType.CreateInstanceSlow(Boolean publicOnly, Boolean skipCheckThis, Boolean fillCache)
+                        //at System.RuntimeType.CreateInstanceDefaultCtor(Boolean publicOnly, Boolean skipVisibilityChecks, Boolean skipCheckThis, Boolean fillCache)
+                        //at System.Activator.CreateInstance(Type type, Boolean nonPublic)
+                        //at System.Activator.CreateInstance(Type type)
+                        //at ProntoFlexicapture.ClassFlexicapture.loadEngine(EngineLoadingMode _engineLoadingMode, IEngineLoader& engineLoader) in c:\Users\Administrador\Documents\bdl\pronto\InterfazFlexicapture\prontoflexicapture.cs:line 2741
+
+
 
 
                         CartaDePorteManager.MandarMailDeError(x2);
