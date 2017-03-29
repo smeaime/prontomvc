@@ -15118,7 +15118,7 @@ Public Class CartaDePorteManager
     End Function
 
 
-    Public Shared Function ListadoSegunCliente(SC As String, idcliente As Integer, fechadesde As DateTime, fechahasta As DateTime) As List(Of fSQL_GetDataTableFiltradoYPaginado_Result3)
+    Public Shared Function ListadoSegunCliente(SC As String, idcliente As Integer, fechadesde As DateTime, fechahasta As DateTime, estado As enumCDPestado) As List(Of fSQL_GetDataTableFiltradoYPaginado_Result3)
 
 
 
@@ -15193,8 +15193,9 @@ Public Class CartaDePorteManager
         Dim db As ProntoMVC.Data.Models.DemoProntoEntities = New ProntoMVC.Data.Models.DemoProntoEntities(ProntoMVC.Data.Models.Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC)))
 
         Try
+            'enumCDPestado.DescargasMasFacturadas
 
-            Dim dbcartas = (From c In db.fSQL_GetDataTableFiltradoYPaginado(Nothing, limitedecartas, enumCDPestado.DescargasMasFacturadas,
+            Dim dbcartas = (From c In db.fSQL_GetDataTableFiltradoYPaginado(Nothing, limitedecartas, estado,
                                                                             Nothing, idVendedor,
                                         idCorredor, idDestinatario, idIntermediario, idRComercial,
                                         idArticulo, idProcedencia, idDestino, FiltroANDOR.FiltroOR, "Ambos",
@@ -15329,7 +15330,8 @@ Public Class CartaDePorteManager
 
 
 
-            Dim dbcartas = ListadoSegunCliente(SC, idcliente, fechadesde, fechahasta)
+            Dim dbcartas = ListadoSegunCliente(SC, idcliente, fechadesde, fechahasta, enumCDPestado.DescargasMasFacturadas)
+            'Dim dbcartas = ListadoSegunCliente(SC, idcliente, fechadesde, fechahasta, enumCDPestado.Posicion)
 
             Dim cartas As New CerealNet.WSCartasDePorte.respuestaEntrega_v2_00
             Dim cps(dbcartas.Count - 1) As CerealNet.WSCartasDePorte.cartaPorte_v2_00
@@ -15883,7 +15885,7 @@ Public Class CartaDePorteManager
 
 
 
-            Dim dbcartas = ListadoSegunCliente(SC, idcliente, fechadesde, fechahasta)
+            Dim dbcartas = ListadoSegunCliente(SC, idcliente, fechadesde, fechahasta, enumCDPestado.DescargasMasFacturadas)
 
             Dim cartas As New CerealNet.WSCartasDePorte.respuestaEntrega
             Dim cps(dbcartas.Count - 1) As CerealNet.WSCartasDePorte.cartaPorte
