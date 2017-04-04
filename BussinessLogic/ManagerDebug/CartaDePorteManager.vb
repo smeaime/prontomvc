@@ -593,10 +593,31 @@ Public Class CartaDePorteManager
             Dim dt As DataTable
 
 
+            If False Then
 
-            dt = GetListDataTableDinamicoConWHERE_2(SC, estado, sWHERE, bInsertarEnTablaTemporal, maximumRows)  'de ultima se puede safar con esto tambien...
+
+                'y si acá finalmente hacemos la llamada directa a fSQL_GetDatatable
+
+                Dim acopio = Nothing
+
+                'dt = EntidadManager.ExecDinamico(SC, "select * from  dbo.fSQL_GetDataTableFiltradoYPaginado",
+                dt = EntidadManager.GetStoreProcedure(SC, "wCartasPorte_WraperDeLaTVF",
+                                            0, maximumRows, estado, QueContenga, idVendedor, idCorredor,
+                                            idDestinatario, idIntermediario, idRemComercial, idArticulo, idProcedencia,
+                                            idDestino, AplicarANDuORalFiltro, ModoExportacion, fechadesde,
+                                            fechahasta, puntoventa, acopio, Contrato, QueContenga2,
+                                            idClienteAuxiliar, AgrupadorDeTandaPeriodos, Vagon, Patente, "Todos")
 
 
+            Else
+
+
+
+
+
+                dt = GetListDataTableDinamicoConWHERE_2(SC, estado, sWHERE, bInsertarEnTablaTemporal, maximumRows)  'de ultima se puede safar con esto tambien...
+
+            End If
 
 
 
@@ -4234,6 +4255,9 @@ Public Class CartaDePorteManager
 
             ElseIf ModoImpresion = "HImag2" Then
                 rdl = "Listado general de Cartas de Porte (simulando original) para html con imagenes"
+
+            ElseIf ModoImpresion = "Amaggi" Then
+                rdl = "Listado general de Cartas de Porte (simulando original) Amaggi"
 
             ElseIf ModoImpresion = "GrobHc" Then
                 rdl = "Listado general de Cartas de Porte (simulando original) con foto  - Grobo 2.rdl"
@@ -7935,7 +7959,8 @@ Public Class CartaDePorteManager
 "			isnull(CLICOR2.Nombre,'') AS CorredorDesc2, " &
 "            isnull(CLICOR2.cuit,'') AS CorredorCUIT2, " &
 "			isnull(CLIENTREG.cuit,'') AS EntregadorCUIT, " &
-"		isnull(LOCORI.CodigoAFIP,'') AS CodigoAFIP "
+"		isnull(LOCORI.CodigoAFIP,'') AS CodigoAFIP, " &
+"			90 AS MermaVolatil "
 )
 
 
@@ -14826,7 +14851,21 @@ Public Class CartaDePorteManager
     End Function
 
 
-    Shared Function TraerCUITClientesSegunUsuario(usuario As String, SC As String) As List(Of String)
+    Shared Function TraerCUITClientesSegunUsuario(usuario As String, SC As String, scbdlmaster As String) As List(Of String)
+
+
+        Dim db = New LinqBDLmasterDataContext(Encriptar(scbdlmaster))
+
+        Dim guid = (From p In db.aspnet_Users
+                    Where p.UserName = usuario
+                    Select p).SingleOrDefault.UserId
+
+
+        Dim clis = UserDatosExtendidosManager.TraerClientesRelacionadoslDelUsuario(guid.ToString, scbdlmaster)
+        Dim cc = iisNull(clis, "").Split("|")
+
+
+
 
         'http://bdlconsultores.ddns.net/Consultas/Admin/VerConsultasCumplidos1.php?recordid=14187
 
@@ -15097,9 +15136,9 @@ Public Class CartaDePorteManager
                     }
 
 
-        c1 = c1.Union(a0).ToArray
-        c2 = c2.Union(a1).ToArray
-        c3 = c3.Union(a2).ToArray
+        c1 = c1.Union(a0).Union(cc).ToArray
+        c2 = c2.Union(a1).Union(cc).ToArray
+        c3 = c3.Union(a2).Union(cc).ToArray
 
 
 
@@ -20391,6 +20430,31 @@ Public Class CDPMailFiltrosManager2
 
                     Select Case ModoImpresion
 
+
+                        Case "Amaggi"
+
+
+                            dr("ModoImpresion") = "HImag2"
+                            Dim outputHtml = generarNotasDeEntregaConReportViewer_ConServidorDeInformes(SC, fechadesde, fechahasta, dr, estado, l, titulo, "", puntoventa, tiemposql, tiempoinforme, bDescargaHtml)
+                            dr("ModoImpresion") = "Amaggi"
+
+                            Dim grid As New GridView
+                            Dim html = ExcelToHtml(outputHtml, grid)
+
+                            MandaEmail_Nuevo(destinatario,
+                                                              asunto,
+                                                            cuerpo + html,
+                                                         De,
+                                                         SmtpServer,
+                                                                  SmtpUser,
+                                                                  SmtpPass,
+                                                                    output,
+                                                                  SmtpPort,
+                                                          ,
+                                                          CCOaddress, , , De, , inlinePNG, inlinePNG2)
+
+
+
                         Case "ExcHtm"
 
                             Dim grid As New GridView
@@ -21086,6 +21150,16 @@ Public Class LogicaInformesWilliams
     '////////////////////////////////////////////////////////////////////////////////////////////////////////////
     '////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+    Shared Function f(ByVal i As Integer) As String
+        Dim TiposMovs() As String = {"Préstamo", "Transferencia", "Devolución", "Embarque", "Venta"}
+        Try
+            Return TiposMovs(i - 1)
+        Catch ex As Exception
+            Return ""
+        End Try
+    End Function
+
+
 
 
 
@@ -21118,29 +21192,28 @@ Public Class LogicaInformesWilliams
 
 
 
-        Dim movs = (From i In db.CartasPorteMovimientos
+
+
+        '(i.IdExportadorOrigen = idDestinatario) _                                Or
+        Dim temp = (From i In db.CartasPorteMovimientos
                     Join c In db.linqClientes On i.IdExportadorOrigen Equals c.IdCliente
                     Where
                         (i.FechaIngreso >= desde And i.FechaIngreso <= hasta) _
                         And (i.IdArticulo = idarticulo) _
                         And (i.Puerto = idDestino) _
                         And (
-                                (i.IdExportadorOrigen = idDestinatario) _
-                                Or (i.IdExportadorDestino = idDestinatario)
+                                (i.IdExportadorDestino = idDestinatario) _
                         ) _
                         And If(i.Anulada, "NO") <> "SI"
                     Select Tipo = f(i.Tipo),
                                 ExportadorOrigen = c.RazonSocial, i.FechaIngreso,
-                                i.Entrada_o_Salida, i.Cantidad, i.Vapor, i.Contrato, i.IdCDPMovimiento, i.Numero
+                                i.Entrada_o_Salida, i.Cantidad, i.Vapor, i.Contrato, i.IdCDPMovimiento, i.Numero, i.IdExportadorDestino, i.IdExportadorOrigen
                 ).ToList
 
 
 
 
-
-
-
-        dtMOVs = movs
+        dtMOVs = temp
 
         'Dim dsVistaMOVS = CDPStockMovimientoManager.GetList(sc)
 
@@ -21180,20 +21253,16 @@ Public Class LogicaInformesWilliams
 
     End Sub
 
-    Shared Function f(ByVal i As Integer) As String
-        Dim TiposMovs() As String = {"Préstamo", "Transferencia", "Devolución", "Embarque", "Venta"}
-        Try
-            Return TiposMovs(i - 1)
-        Catch ex As Exception
-            Return ""
-        End Try
-    End Function
+    
+
+
+
 
 
 
     Shared Function ExistenciasAlDiaPorPuerto(ByVal sc As String, ByVal Fecha As DateTime,
                                               ByVal IdArticulo As Integer, ByVal IdDestinoWilliams As Integer,
-                                              ByVal iddestinatario As Integer) As Double
+                                              ByVal idcliente As Integer) As Double
 
         Dim entradasMOV, entradasCDP, salidasMOV As Double
         Dim db As New LinqCartasPorteDataContext(Encriptar(sc))
@@ -21215,7 +21284,7 @@ Public Class LogicaInformesWilliams
             Dim sql = CartaDePorteManager.GetDataTableFiltradoYPaginado_CadenaSQL(sc,
                     "", "", "", 1, 0,
                  enumCDPestado.TodasMenosLasRechazadas, "", -1, -1,
-                    iddestinatario, -1,
+                    idcliente, -1,
                     -1, IdArticulo, -1, IdDestinoWilliams,
                    "1", "Export",
                       #1/1/1750#, DateAdd(DateInterval.Second, -1, Fecha), -1, , , , , , , , , , )
@@ -21231,7 +21300,7 @@ Public Class LogicaInformesWilliams
             Dim q As IQueryable(Of CartasConCalada) = CartasLINQlocalSimplificadoTipadoConCalada(sc,
                     "", "", "", 1, 0,
                     enumCDPestado.TodasMenosLasRechazadas, "", -1, -1,
-                     iddestinatario, -1,
+                     idcliente, -1,
                     -1, IdArticulo, -1, IdDestinoWilliams,
                     FiltroANDOR.FiltroOR, enumCDPexportacion.Export,
                      #1/1/1980#, Fecha, -1)
@@ -21257,7 +21326,7 @@ Public Class LogicaInformesWilliams
                         And i.Anulada <> "SI" _
                         And If(i.Destino, 0) = IdDestinoWilliams _
                         And If(i.IdArticulo, 0) = IdArticulo _
-                        And If(i.Entregador, 0) = iddestinatario
+                        And If(i.Entregador, 0) = idcliente
                     Into Sum(CType(i.NetoProc, Decimal?))
 
             entradasCDP = iisNull(q, 0)
@@ -21268,14 +21337,15 @@ Public Class LogicaInformesWilliams
         'movimientos:
         '///////////////////////////////////////////////
 
+        ' (i.IdExportadorOrigen = idcliente) _ Or 
+
         Dim temp = From i In db.CartasPorteMovimientos
                    Where
                         (i.FechaIngreso < Fecha) _
                     And (i.IdArticulo = IdArticulo) _
                     And (i.Puerto = IdDestinoWilliams) _
                     And (
-                            (i.IdExportadorOrigen = iddestinatario) _
-                            Or (i.IdExportadorDestino = iddestinatario)
+                            (i.IdExportadorDestino = idcliente) _
                         ) _
                     And If(i.Anulada, "NO") <> "SI"
         '///////////////////////////////////////////////
@@ -21289,13 +21359,17 @@ Public Class LogicaInformesWilliams
 
 
 
-
+        '///////////////////////////////////////////////
+        '///////////////////////////////////////////////
+        ' SUMAS
+        '    ...        ---->  idcliente     Entrada_o_Salida=normal
+        '   idcliente   <----    .....       Entrada_o_Salida=invertida
 
         Dim etemp = temp.Where(Function(i) (
                                                 (
-                                                    (i.Entrada_o_Salida = 1 And i.IdExportadorDestino = iddestinatario) _
+                                                    (i.Entrada_o_Salida = 1 And i.IdExportadorDestino = idcliente) _
                                                         Or
-                                                    (i.Entrada_o_Salida = 2 And i.IdExportadorOrigen = iddestinatario)
+                                                    (i.Entrada_o_Salida = 2 And i.IdExportadorOrigen = idcliente)
                                                 ) _
                                                 And (i.FechaIngreso < Fecha))).DefaultIfEmpty
 
@@ -21308,12 +21382,16 @@ Public Class LogicaInformesWilliams
 
         '///////////////////////////////////////////////
         '///////////////////////////////////////////////
+        ' RESTAS
+        '    ...        <----  idcliente     Entrada_o_Salida=invertida
+        '   idcliente   ---->    .....       Entrada_o_Salida=normal
+
 
         Dim stemp = temp.Where(Function(i) (
                                                 (
-                                                    (i.Entrada_o_Salida = 2 And i.IdExportadorDestino = iddestinatario) _
+                                                    (i.Entrada_o_Salida = 2 And i.IdExportadorDestino = idcliente) _
                                                         Or
-                                                    (i.Entrada_o_Salida = 1 And i.IdExportadorOrigen = iddestinatario)
+                                                    (i.Entrada_o_Salida = 1 And i.IdExportadorOrigen = idcliente)
                                                 ) _
                                                 And (i.FechaIngreso < Fecha))).DefaultIfEmpty
 
@@ -21408,6 +21486,22 @@ Public Class UserDatosExtendidosManager
 
         Return Convert.ToInt32(uext.RazonSocial)
     End Function
+
+
+
+    Public Shared Function TraerClientesRelacionadoslDelUsuario(ByVal UserId As String, ConexBDLmaster As String) As Integer
+
+
+        Using db As New BDLMasterEntities(Encriptar(ConexBDLmaster))
+
+            Dim uext = (From p In db.UserDatosExtendidos
+                        Where p.UserId.ToString = UserId
+                        Select p).SingleOrDefault
+
+            Return Convert.ToInt32(uext.TextoAuxiliar)
+        End Using
+    End Function
+
 
 
     Public Shared Function TraerRazonSocialDelUsuario(ByVal UserId As String, ConexBDLmaster As String, SC As String) As String

@@ -3199,7 +3199,20 @@ Sum(Fields!NetoProc.Value, "DataSetCartasDePorte_TX_InformesCorregido")+Sum(Fiel
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Sum( iif(Fields!Entrada_o_Salida.Value=1,Fields!Cantidad.Value,-Fields!Cantidad.Value  ))</Value>
+                              <Value>=Sum( iif(  
+
+
+(Fields!IdExportadorOrigen.Value=1234    and Fields!Entrada_o_Salida.Value=1)    
+
+or  
+
+(Fields!IdExportadorDestino.Value=1234    and Fields!Entrada_o_Salida.Value=2)  
+
+
+
+,Fields!Cantidad.Value
+,
+-Fields!Cantidad.Value  ))</Value>
                               <Style>
                                 <FontSize>7pt</FontSize>
                                 <Format>N0</Format>

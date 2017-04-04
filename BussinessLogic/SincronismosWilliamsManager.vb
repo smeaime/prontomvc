@@ -29,7 +29,7 @@ Imports Pronto.ERP.Bll.InformesCartaDePorteManager
 Imports System.Xml
 Imports LogicaInformesWilliamsGerenc
 
-
+Imports OfficeOpenXml
 
 
 Imports System.Web.UI.WebControls
@@ -1416,6 +1416,23 @@ Namespace Pronto.ERP.Bll
                                     Select c).Take(3000).ToList
 
                             output = Sincronismo_Pelayo(dbcartas, , "")
+                            registrosFiltrados = dbcartas.Count
+
+
+
+                        Case "ESTANAR"
+                            Dim db As ProntoMVC.Data.Models.DemoProntoEntities = New ProntoMVC.Data.Models.DemoProntoEntities(ProntoMVC.Data.Models.Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC)))
+
+                            Dim dbcartas = (From c In db.fSQL_GetDataTableFiltradoYPaginado(Nothing, 3000, enumCDPestado.DescargasMasFacturadas,
+                                                                     Nothing, idVendedor,
+                                 idCorredor, idDestinatario, idIntermediario, idRComercial,
+                                 idArticulo, idProcedencia, idDestino, FiltroANDOR.FiltroOR, "Ambos",
+                                  sDesde, sHasta, 0,
+                                 Nothing, False, Nothing, Nothing, Nothing,
+                                  Nothing, Nothing, Nothing, Nothing)
+                                    Select c).Take(3000).ToList
+
+                            output = Sincronismo_Estanar(dbcartas, SC)
                             registrosFiltrados = dbcartas.Count
 
 
@@ -6679,7 +6696,7 @@ Namespace Pronto.ERP.Bll
                 Dim cp = db.CartasDePortes.Find(dr("IdCartaDePorte"))
                 Dim cp2 = CartaDePorteManager.GetItem(SC, dr("IdCartaDePorte"))
 
-                
+
                 sb &= "&" & cp2.CalidadMermaZarandeo.ToString.PadLeft(5)                         '24 -Porcentaje Merma Zarandeo	Numérico	5	Hasta 7 posiciones para parte entera y 4 para decimales. Cero por defecto.
                 sb &= "&" & cp2.CalidadMermaVolatil.ToString.PadLeft(5)                         '25 -Porcentaje Merma Volátil	Numérico	5	Hasta 7 posiciones para parte entera y 4 para decimales. Cero por defecto.
 
@@ -8308,6 +8325,121 @@ Namespace Pronto.ERP.Bll
             Return vFileName
             'Return TextToExcel(vFileName, titulo)
         End Function
+
+
+
+        Public Shared Function Sincronismo_Estanar(ByVal pDataTable As List(Of ProntoMVC.Data.Models.fSQL_GetDataTableFiltradoYPaginado_Result3), SC As String) As String
+
+
+
+
+
+            'Dim vFileName As String = Path.GetTempFileName() & ".txt"
+            Dim vFileName As String = Path.GetTempPath & "SincroEstanar " & Now.ToString("ddMMMyyyy_HHmmss") & ".xlsx" 'http://stackoverflow.com/questions/581570/how-can-i-create-a-temp-file-with-a-specific-extension-with-net
+            'Dim vFileName As String = Path.GetTempPath & "SincroLosGrobo.txt" 'http://stackoverflow.com/questions/581570/how-can-i-create-a-temp-file-with-a-specific-extension-with-net
+
+            'Dim vFileName As String = "c:\archivo.txt"
+            Dim dc As DataColumn
+            'For Each dc In pDataTable.Columns
+            '    sb &= dc.Caption & Microsoft.VisualBasic.ControlChars.Tab
+            'Next
+
+            'PrintLine(nF, sb) 'encabezado
+            Dim i As Integer = 0
+            Dim dr As DataRow
+
+
+
+
+            Dim dt As DataTable = New DataTable()
+
+
+            dt.Columns.Add("CERTIFICADO", GetType(String))
+            dt.Columns.Add("CARTAPORTE", GetType(String))
+            dt.Columns.Add("FECHA", GetType(String))
+            dt.Columns.Add("PRODUCTO", GetType(String))
+            dt.Columns.Add("CANTIDADRECIBIDA", GetType(Integer))
+            dt.Columns.Add("HUMEDAD", GetType(Decimal))
+            dt.Columns.Add("MERMAOTROS", GetType(Integer))
+            dt.Columns.Add("PORCMERMAVOLATIL", GetType(Decimal))
+            dt.Columns.Add("DIMENSION", GetType(String))
+            dt.Columns.Add("DIMENSIONVALOR", GetType(String))
+
+
+
+            Using db = New ProntoMVC.Data.Models.DemoProntoEntities(ProntoMVC.Data.Models.Auxiliares.FormatearConexParaEntityFramework(Encriptar(SC)))
+
+
+                'http://msdn.microsoft.com/en-us/magazine/cc163877.aspx
+                For Each cdp As ProntoMVC.Data.Models.fSQL_GetDataTableFiltradoYPaginado_Result3 In pDataTable
+                    With cdp
+
+
+
+                        Dim sb = dt.NewRow()
+
+
+
+                        sb(1) = "COE-000" + .NumeroCartaDePorte.ToString
+                        sb(2) = If(.FechaDescarga, DateTime.MinValue).ToString("dd/MM/yyyy")
+
+
+                        If InStr(.Producto.ToUpper, "GIRASOL") > 0 Then
+                            sb(3) = "GGI"
+                            sb(9) = "AC-GIRASOL-C1617"
+                        ElseIf InStr(.Producto.ToUpper, "TRIGO") > 0 Then
+                            sb(3) = "GTR"
+                            sb(9) = "AC-TRIGO-C1617"
+                        ElseIf InStr(.Producto.ToUpper, "MAIZ") > 0 Then
+                            sb(3) = "GMAIZ"
+                            sb(9) = "AC-MAIZ-C1617"
+                        ElseIf InStr(.Producto.ToUpper, "SOJA") > 0 Then
+                            sb(3) = "GSJ"
+                            sb(9) = "AC-SOJA-C1617"
+                        Else
+                            sb(3) = .Producto
+                            sb(9) = "AC-SOJA-C1617"
+                        End If
+
+                        sb(4) = .NetoFinal
+
+                        sb(5) = .Humedad
+                        sb(6) = .Merma
+                        sb(7) = GetDetalle("CalidadMermaVolatil", db, .IdCartaDePorte)
+                        sb(8) = "DIMCTC"
+
+
+
+
+                        dt.Rows.Add(sb)
+                    End With
+                Next
+
+            End Using
+
+
+
+
+            Using pck As ExcelPackage = New ExcelPackage(New FileInfo(vFileName))
+
+                '//Create the worksheet
+                Dim ws As ExcelWorksheet = pck.Workbook.Worksheets.Add("Hoja1")
+                '//Load the datatable into the sheet, starting from cell A1. Print the column names on row 1
+                ws.Cells("A1").LoadFromDataTable(dt, True)
+                pck.Save()
+            End Using
+
+
+
+
+            Return vFileName
+
+        End Function
+
+
+
+
+
 
         Public Shared Function Sincronismo_GranosDelLitoral(ByVal pDataTable As WillyInformesDataSet.wCartasDePorte_TX_InformesCorregidoDataTable, Optional ByVal titulo As String = "", Optional ByVal sWHERE As String = "") As String
 
