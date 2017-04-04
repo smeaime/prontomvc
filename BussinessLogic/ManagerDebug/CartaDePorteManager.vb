@@ -14856,12 +14856,12 @@ Public Class CartaDePorteManager
 
         Dim db = New LinqBDLmasterDataContext(Encriptar(scbdlmaster))
 
-        Dim guid = (From p In db.aspnet_Users
+        Dim u As aspnet_User = (From p In db.aspnet_Users
                     Where p.UserName = usuario
-                    Select p).SingleOrDefault.UserId
+                    Select p).SingleOrDefault
 
 
-        Dim clis = UserDatosExtendidosManager.TraerClientesRelacionadoslDelUsuario(guid.ToString, scbdlmaster)
+        Dim clis = UserDatosExtendidosManager.TraerClientesRelacionadoslDelUsuario(usuario, scbdlmaster)
         Dim cc = iisNull(clis, "").Split("|")
 
 
@@ -21501,28 +21501,31 @@ Public Class UserDatosExtendidosManager
 
 
 
-    Public Shared Function TraerClientesRelacionadoslDelUsuario(ByVal UserId As String, ConexBDLmaster As String) As Integer
+    Public Shared Function TraerClientesRelacionadoslDelUsuario(ByVal UserName As String, ConexBDLmaster As String) As String
 
 
-        Using db As New BDLMasterEntities(Encriptar(ConexBDLmaster))
+
+        Using db As New BDLMasterEntities(Auxiliares.FormatearConexParaEntityFrameworkBDLMASTER_2(Encriptar(ConexBDLmaster)))
 
             Dim uext = (From p In db.UserDatosExtendidos
-                        Where p.UserId.ToString = UserId
+                        Join u In db.aspnet_Users On u.UserId Equals p.UserId
+                            Where u.UserName = UserName
                         Select p).SingleOrDefault
 
-            Return Convert.ToInt32(uext.TextoAuxiliar)
+            Return uext.TextoAuxiliar
         End Using
     End Function
 
 
-    Public Shared Function UpdateClientesRelacionadoslDelUsuario(ByVal UserId As String, ConexBDLmaster As String, listado As String) As Integer
+    Public Shared Function UpdateClientesRelacionadoslDelUsuario(ByVal UserName As String, ConexBDLmaster As String, listado As String)
 
 
-        Using db = New BDLMasterEntities(Encriptar(ConexBDLmaster))
+        Using db = New BDLMasterEntities(Auxiliares.FormatearConexParaEntityFrameworkBDLMASTER_2(Encriptar(ConexBDLmaster)))
 
             Dim ue = (From p In db.UserDatosExtendidos
-                      Where p.UserId.ToString = UserId
-                      Select p).SingleOrDefault
+                        Join u In db.aspnet_Users On u.UserId Equals p.UserId
+                            Where u.UserName = UserName
+                        Select p).SingleOrDefault
 
 
             If IsNothing(ue) Then
