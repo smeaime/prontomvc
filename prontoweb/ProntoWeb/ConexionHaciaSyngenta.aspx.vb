@@ -486,28 +486,41 @@ Partial Class ConexionHaciaSyngenta
 
 
     Protected Sub btnExportarGrilla_Click(sender As Object, e As EventArgs) Handles btnExportarGrilla.Click
-        'asdfasdf()
-        Dim idDestino = BuscaIdWilliamsDestinoPreciso(txtDestino.Text, HFSC.Value)
 
-        Dim Filtro = ""
 
-        Dim ReporteLocal As ReportViewer = New Microsoft.Reporting.WebForms.ReportViewer()
 
-        Dim output As String = Path.GetTempPath() + "Listado " + DateTime.Now.ToString("ddMMMyyyy_HHmmss") + ".xls"
+        Dim dFechaDesde = New DateTime(1980, 1, 1)
+        Dim dFechaHasta = New DateTime(2050, 1, 1)
+
+        Try
+
+            dFechaDesde = DateTime.ParseExact(txtFechaDesde.Text, "dd/MM/yyyy", Nothing)
+        Catch ex As Exception
+
+        End Try
+
+        Try
+            dFechaHasta = DateTime.ParseExact(txtFechaHasta.Text, "dd/MM/yyyy", Nothing)
+
+        Catch ex As Exception
+
+        End Try
+
+
+        Dim idcliente = 4333 ' //syngenta
+
+        Dim dbcartas = CartaDePorteManager.ListadoSegunCliente(HFSC.Value, idcliente, dFechaDesde, dFechaHasta, CartaDePorteManager.enumCDPestado.DescargasMasFacturadas)
+
+        Dim output As String = Path.GetTempPath() + "Syngenta_" + DateTime.Now.ToString("ddMMMyyyy_HHmmss") + ".xlsx"
 
         Dim s = New ServicioCartaPorte.servi()
+        Dim x = s.WebServiceSyngenta(dbcartas)
+        s.GenerarExcelSyngentaWebService(x, output)
 
-        'Dim output3 = s.CartasPorte_DynamicGridData_ExcelExportacion("IdCartaDePorte", "desc", 1, 999999, True, Filtro,
-        '                                     txtFechaDesde.Text,
-        '                                     txtFechaHasta.Text,
-        '                                      -1, idDestino, HFSC.Value, "Mariano")
 
-        Dim sqlquery4 = s.CartasPorte_DynamicGridData_ExcelExportacion_UsandoInternalQuery("IdCartaDePorte", "desc", 1, 999999, True, Filtro,
-                                             txtFechaDesde.Text,
-                                             txtFechaHasta.Text,
-                                              -1, idDestino, HFSC.Value, "Mariano")
 
-        CartaDePorteManager.RebindReportViewer_ServidorExcel(ReporteLocal, "Sincronismo BLD.rdl", sqlquery4, HFSC.Value, False, output)
+
+
 
 
         Try

@@ -91,7 +91,9 @@ Partial Class Admin_EditarUsuario
             End If
 
 
-            
+            txtListadoCuits.Text = UserDatosExtendidosManager.TraerClientesRelacionadoslDelUsuario(membershipUser.ProviderUserKey.ToString, ConexBDLmaster)
+
+
 
             RebindRoles()
             ReBindGrillaModulos()
@@ -216,6 +218,7 @@ Partial Class Admin_EditarUsuario
 
         
         UserDatosExtendidosManager.Update(membershipUser.ProviderUserKey.ToString, BuscaIdClientePreciso(txtRazonSocial.Text, HFSC.Value), "", ConexBDLmaster)
+        UserDatosExtendidosManager.UpdateClientesRelacionadoslDelUsuario(membershipUser.ProviderUserKey.ToString, ConexBDLmaster, txtListadoCuits.Text)
 
 
 
