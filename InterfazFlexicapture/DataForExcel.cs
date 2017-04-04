@@ -10,6 +10,8 @@ using System.IO;
 using System.Globalization;
 
 namespace jqGridWeb {
+    
+    // esto es usando openxml a lo macho (ni eeplus, ni closedxml)
     public class DataForExcel {
         public enum DataType {
             String,

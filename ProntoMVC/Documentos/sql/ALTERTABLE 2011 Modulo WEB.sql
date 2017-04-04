@@ -1965,3 +1965,12 @@ GO
 
 
 
+
+
+alter table  bdlmaster.dbo.UserDatosExtendidos ADD
+	TextoAuxiliar		varchar(500) NULL
+go
+
+
+
+

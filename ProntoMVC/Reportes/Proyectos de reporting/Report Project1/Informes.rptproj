@@ -299,6 +299,10 @@
       <FullPath>Listado general de Cartas de Porte (simulando original) para html con imagenes.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
+      <Name>MapaArgentinaProcedenciaCartasPorte.rdl</Name>
+      <FullPath>MapaArgentinaProcedenciaCartasPorte.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
       <Name>Mayor.rdl</Name>
       <FullPath>Mayor.rdl</FullPath>
     </ProjectItem>
@@ -483,8 +487,8 @@
       <FullPath>Williams - Sincro LaBiznaga2.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
-      <Name>MapaArgentinaProcedenciaCartasPorte.rdl</Name>
-      <FullPath>MapaArgentinaProcedenciaCartasPorte.rdl</FullPath>
+      <Name>Listado general de Cartas de Porte (simulando original) Amaggi.rdl</Name>
+      <FullPath>Listado general de Cartas de Porte (simulando original) Amaggi.rdl</FullPath>
     </ProjectItem>
   </Reports>
   <Configurations>
@@ -494,7 +498,7 @@
       <Options>
         <OutputPath>bin\Debug</OutputPath>
         <TargetServerVersion>SSRS2008R2</TargetServerVersion>
-        <TargetServerURL>http://serversql4/ReportServer</TargetServerURL>
+        <TargetServerURL>http://serversql3/ReportServer</TargetServerURL>
         <TargetFolder>Pronto informes</TargetFolder>
         <TargetDataSourceFolder>Data Sources</TargetDataSourceFolder>
         <OverwriteDataSources>true</OverwriteDataSources>
