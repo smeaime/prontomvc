@@ -243,9 +243,9 @@ isnull(CLIENTFLET.Razonsocial,'') AS ClientePagadorFleteDesc,
 isnull(CLICOR2.Nombre,'') AS CorredorDesc2,    
 isnull(CLICOR2.cuit,'') AS CorredorCUIT2,
 isnull(CLIENTREG.cuit,'') AS EntregadorCUIT, 		
-isnull(LOCORI.CodigoAFIP,'') AS CodigoAFIP,
+isnull(LOCORI.CodigoAFIP,'') AS CodigoAFIP
 
-CDPDET.Valor as CalidadMermaVolatilMerma
+--,CDPDET.Valor as CalidadMermaVolatilMerma
 
 
 
@@ -282,7 +282,7 @@ LEFT OUTER JOIN Partidos PARTORI ON LOCORI.IdPartido = PARTORI.IdPartido
 LEFT OUTER JOIN Empleados E1 ON CDP.IdUsuarioIngreso = E1.IdEmpleado  
 
 
-LEFT OUTER JOIN CartasDePorteDetalle CDPDET ON CDP.IdCartaDePorte = CDPDET.IdCartaDePorte And CDPDET.Campo = 'CalidadMermaVolatilMerma'   -- Return oDet.Valor
+--LEFT OUTER JOIN CartasDePorteDetalle CDPDET ON CDP.IdCartaDePorte = CDPDET.IdCartaDePorte And CDPDET.Campo = 'CalidadMermaVolatilMerma'   -- Return oDet.Valor
 -- http://stackoverflow.com/questions/958949/difference-between-select-and-selectmany
 		 --.CalidadMermaVolatil = GetDetalle("CalidadMermaVolatil", db, id)
    --             .CalidadMermaVolatilRebaja = GetDetalle("CalidadMermaVolatilRebaja", db, id)

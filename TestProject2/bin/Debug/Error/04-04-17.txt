@@ -403,3 +403,243 @@ Log Entry :
 04/04/2017 11:15:19
 Error in: . Error Message:error html row 407
 __________________________
+
+Log Entry : 
+04/04/2017 14:27:19
+Error in: . Error Message:Por generar el archivo C:\Users\Administrador\AppData\Local\Temp\Listado general 04abr2017_142708_ITU.xls
+__________________________
+
+Log Entry : 
+04/04/2017 14:27:19
+Error in: . Error Message:Archivo generado C:\Users\Administrador\AppData\Local\Temp\Listado general 04abr2017_142708_ITU.xls
+__________________________
+
+Log Entry : 
+04/04/2017 14:27:24
+Error in: . Error Message:Por generar el archivo C:\Users\Administrador\AppData\Local\Temp\Listado general 04abr2017_142720_IUM.xls
+__________________________
+
+Log Entry : 
+04/04/2017 14:27:24
+Error in: . Error Message:Archivo generado C:\Users\Administrador\AppData\Local\Temp\Listado general 04abr2017_142720_IUM.xls
+__________________________
+
+Log Entry : 
+04/04/2017 14:27:28
+Error in: . Error Message:Nombre  'Listado general de Cartas de Po$'
+__________________________
+
+Log Entry : 
+04/04/2017 14:27:28
+Error in: . Error Message:Tablas  1
+__________________________
+
+Log Entry : 
+04/04/2017 14:27:28
+Error in: . Error Message:Convertido C:\Users\Administrador\AppData\Local\Temp\Listado general 04abr2017_142720_IUM.xls Lineas: 412
+__________________________
+
+Log Entry : 
+04/04/2017 14:27:28
+Error in: . Error Message:error html row 404
+__________________________
+
+Log Entry : 
+04/04/2017 14:27:28
+Error in: . Error Message:error html row 405
+__________________________
+
+Log Entry : 
+04/04/2017 14:27:28
+Error in: . Error Message:error html row 406
+__________________________
+
+Log Entry : 
+04/04/2017 14:27:31
+Error in: . Error Message:System.Net.Mail.SmtpException
+Error al enviar correo.
+   en System.Net.Mail.SmtpClient.Send(MailMessage message)
+   en Pronto.ERP.Bll.EntidadManager.MandaEmail_Nuevo(String Para, String Asunto, String Cuerpo, String De, String SmtpServer, String SmtpUser, String SmtpPass, String sFileNameAdjunto, Int64 SmtpPort, Int32 EnableSSL, String CCO, String img, String friendlyname, String replyTo, Boolean isHtml, String inlinePNG, String inlinePNG2) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\EntidadManager.vb:línea 303
+System
+__________________________
+
+Log Entry : 
+04/04/2017 14:27:31
+Error in: . Error Message:buenosaires@williamsentregas.com.ar
+__________________________
+
+Log Entry : 
+04/04/2017 14:27:31
+Error in: . Error Message:mscalella911@gmail.com
+__________________________
+
+Log Entry : 
+04/04/2017 14:27:31
+Error in: . Error Message:Error en EnviarMailFiltroPorId() System.Net.Mail.SmtpException: Error al enviar correo. ---> System.IO.IOException: No se puede escribir datos de en la conexión de transporte: net_io_connectionclosed.
+   en System.Net.Mail.SmtpReplyReaderFactory.ProcessRead(Byte[] buffer, Int32 offset, Int32 read, Boolean readLine)
+   en System.Net.Mail.SmtpReplyReaderFactory.ReadLines(SmtpReplyReader caller, Boolean oneLine)
+   en System.Net.Mail.SmtpReplyReaderFactory.ReadLine(SmtpReplyReader caller)
+   en System.Net.Mail.CheckCommand.Send(SmtpConnection conn, String& response)
+   en System.Net.Mail.MailCommand.Send(SmtpConnection conn, Byte[] command, MailAddress from, Boolean allowUnicode)
+   en System.Net.Mail.SmtpTransport.SendMail(MailAddress sender, MailAddressCollection recipients, String deliveryNotify, Boolean allowUnicode, SmtpFailedRecipientException& exception)
+   en System.Net.Mail.SmtpClient.Send(MailMessage message)
+   --- Fin del seguimiento de la pila de la excepción interna ---
+   en System.Net.Mail.SmtpClient.Send(MailMessage message)
+   en Pronto.ERP.Bll.EntidadManager.MandaEmail_Nuevo(String Para, String Asunto, String Cuerpo, String De, String SmtpServer, String SmtpUser, String SmtpPass, String sFileNameAdjunto, Int64 SmtpPort, Int32 EnableSSL, String CCO, String img, String friendlyname, String replyTo, Boolean isHtml, String inlinePNG, String inlinePNG2) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\EntidadManager.vb:línea 439
+   en CDPMailFiltrosManager2.EnviarMailFiltroPorRegistro_DLL(String SC, DateTime fechadesde, DateTime fechahasta, Int32 puntoventa, String titulo, enumCDPestado estado, DataRow& dr, String& sError, Boolean bVistaPrevia, String SmtpServer, String SmtpUser, String SmtpPass, Int32 SmtpPort, String CCOaddress, String& sError2, String inlinePNG, String inlinePNG2) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 20444
+__________________________
+
+Log Entry : 
+04/04/2017 14:27:31
+Error in: . Error Message:Nombre  'Listado general de Cartas de Po$'
+__________________________
+
+Log Entry : 
+04/04/2017 14:27:31
+Error in: . Error Message:Tablas  1
+__________________________
+
+Log Entry : 
+04/04/2017 14:27:31
+Error in: . Error Message:Convertido C:\Users\Administrador\AppData\Local\Temp\Listado general 04abr2017_142708_ITU.xls Lineas: 413
+__________________________
+
+Log Entry : 
+04/04/2017 14:27:31
+Error in: . Error Message:error html row 404
+__________________________
+
+Log Entry : 
+04/04/2017 14:27:31
+Error in: . Error Message:error html row 405
+__________________________
+
+Log Entry : 
+04/04/2017 14:27:31
+Error in: . Error Message:error html row 406
+__________________________
+
+Log Entry : 
+04/04/2017 14:27:31
+Error in: . Error Message:error html row 407
+__________________________
+
+Log Entry : 
+04/04/2017 14:30:08
+Error in: . Error Message:Por generar el archivo C:\Users\Administrador\AppData\Local\Temp\Listado general 04abr2017_143002_KLX.xls
+__________________________
+
+Log Entry : 
+04/04/2017 14:30:08
+Error in: . Error Message:Archivo generado C:\Users\Administrador\AppData\Local\Temp\Listado general 04abr2017_143002_KLX.xls
+__________________________
+
+Log Entry : 
+04/04/2017 14:30:13
+Error in: . Error Message:Por generar el archivo C:\Users\Administrador\AppData\Local\Temp\Listado general 04abr2017_143009_NSD.xls
+__________________________
+
+Log Entry : 
+04/04/2017 14:30:13
+Error in: . Error Message:Archivo generado C:\Users\Administrador\AppData\Local\Temp\Listado general 04abr2017_143009_NSD.xls
+__________________________
+
+Log Entry : 
+04/04/2017 14:30:13
+Error in: . Error Message:Nombre  'Listado general de Cartas de Po$'
+__________________________
+
+Log Entry : 
+04/04/2017 14:30:13
+Error in: . Error Message:Tablas  1
+__________________________
+
+Log Entry : 
+04/04/2017 14:30:13
+Error in: . Error Message:Convertido C:\Users\Administrador\AppData\Local\Temp\Listado general 04abr2017_143009_NSD.xls Lineas: 412
+__________________________
+
+Log Entry : 
+04/04/2017 14:30:14
+Error in: . Error Message:error html row 404
+__________________________
+
+Log Entry : 
+04/04/2017 14:30:14
+Error in: . Error Message:error html row 405
+__________________________
+
+Log Entry : 
+04/04/2017 14:30:14
+Error in: . Error Message:error html row 406
+__________________________
+
+Log Entry : 
+04/04/2017 14:30:15
+Error in: . Error Message:System.Net.Mail.SmtpException
+Error al enviar correo.
+   en System.Net.Mail.SmtpClient.Send(MailMessage message)
+   en Pronto.ERP.Bll.EntidadManager.MandaEmail_Nuevo(String Para, String Asunto, String Cuerpo, String De, String SmtpServer, String SmtpUser, String SmtpPass, String sFileNameAdjunto, Int64 SmtpPort, Int32 EnableSSL, String CCO, String img, String friendlyname, String replyTo, Boolean isHtml, String inlinePNG, String inlinePNG2) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\EntidadManager.vb:línea 303
+System
+__________________________
+
+Log Entry : 
+04/04/2017 14:30:15
+Error in: . Error Message:buenosaires@williamsentregas.com.ar
+__________________________
+
+Log Entry : 
+04/04/2017 14:30:15
+Error in: . Error Message:mscalella911@gmail.com
+__________________________
+
+Log Entry : 
+04/04/2017 14:30:15
+Error in: . Error Message:Error en EnviarMailFiltroPorId() System.Net.Mail.SmtpException: Error al enviar correo. ---> System.IO.IOException: No se puede escribir datos de en la conexión de transporte: net_io_connectionclosed.
+   en System.Net.Mail.SmtpReplyReaderFactory.ProcessRead(Byte[] buffer, Int32 offset, Int32 read, Boolean readLine)
+   en System.Net.Mail.SmtpReplyReaderFactory.ReadLines(SmtpReplyReader caller, Boolean oneLine)
+   en System.Net.Mail.SmtpReplyReaderFactory.ReadLine(SmtpReplyReader caller)
+   en System.Net.Mail.CheckCommand.Send(SmtpConnection conn, String& response)
+   en System.Net.Mail.MailCommand.Send(SmtpConnection conn, Byte[] command, MailAddress from, Boolean allowUnicode)
+   en System.Net.Mail.SmtpTransport.SendMail(MailAddress sender, MailAddressCollection recipients, String deliveryNotify, Boolean allowUnicode, SmtpFailedRecipientException& exception)
+   en System.Net.Mail.SmtpClient.Send(MailMessage message)
+   --- Fin del seguimiento de la pila de la excepción interna ---
+   en System.Net.Mail.SmtpClient.Send(MailMessage message)
+   en Pronto.ERP.Bll.EntidadManager.MandaEmail_Nuevo(String Para, String Asunto, String Cuerpo, String De, String SmtpServer, String SmtpUser, String SmtpPass, String sFileNameAdjunto, Int64 SmtpPort, Int32 EnableSSL, String CCO, String img, String friendlyname, String replyTo, Boolean isHtml, String inlinePNG, String inlinePNG2) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\EntidadManager.vb:línea 439
+   en CDPMailFiltrosManager2.EnviarMailFiltroPorRegistro_DLL(String SC, DateTime fechadesde, DateTime fechahasta, Int32 puntoventa, String titulo, enumCDPestado estado, DataRow& dr, String& sError, Boolean bVistaPrevia, String SmtpServer, String SmtpUser, String SmtpPass, Int32 SmtpPort, String CCOaddress, String& sError2, String inlinePNG, String inlinePNG2) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 20444
+__________________________
+
+Log Entry : 
+04/04/2017 14:30:15
+Error in: . Error Message:Nombre  'Listado general de Cartas de Po$'
+__________________________
+
+Log Entry : 
+04/04/2017 14:30:15
+Error in: . Error Message:Tablas  1
+__________________________
+
+Log Entry : 
+04/04/2017 14:30:15
+Error in: . Error Message:Convertido C:\Users\Administrador\AppData\Local\Temp\Listado general 04abr2017_143002_KLX.xls Lineas: 413
+__________________________
+
+Log Entry : 
+04/04/2017 14:30:15
+Error in: . Error Message:error html row 404
+__________________________
+
+Log Entry : 
+04/04/2017 14:30:15
+Error in: . Error Message:error html row 405
+__________________________
+
+Log Entry : 
+04/04/2017 14:30:15
+Error in: . Error Message:error html row 406
+__________________________
+
+Log Entry : 
+04/04/2017 14:30:15
+Error in: . Error Message:error html row 407
+__________________________
