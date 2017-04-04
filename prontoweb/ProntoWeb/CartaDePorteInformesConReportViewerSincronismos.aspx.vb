@@ -3509,6 +3509,9 @@ Partial Class CartaDePorteInformesConReportViewerSincronismos
 
                     GeneroDataTablesDeMovimientosDeStock(dtCDPs, dt2, dtMOVs, idDestinatario, idDestino, idArticulo, fechadesde, fechahasta, HFSC.Value)
 
+
+                    'al informe le llega "entrada" y solo toma eso en cuenta
+
                     Movimientos_RebindReportViewer("ProntoWeb\Informes\Movimientos.rdl", dtCDPs, dt2, dtMOVs, _
                                                   fechadesde, fechahasta, idDestino, idArticulo, idDestinatario)
 
