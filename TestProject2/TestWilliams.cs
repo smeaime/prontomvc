@@ -839,6 +839,242 @@ namespace ProntoMVC.Tests
 
 
 
+
+        [TestMethod]
+        public void movimientos_37806()
+        {
+
+
+            // originalmente era un movimiento simple, no un "asiento". lo que pasa
+            // ahora es que toma los dos clientes como destinos o como origenes. es un embrollo
+
+
+            int pv = 2;
+            int idarticulo = SQLdinamico.BuscaIdArticuloPreciso("TRIGO PAN", SC);
+            int destino = SQLdinamico.BuscaIdWilliamsDestinoPreciso("ACA SAN LORENZO", SC);
+            int destinatario = SQLdinamico.BuscaIdClientePreciso("AMAGGI ARGENTINA S.A.", SC);
+            DateTime desde = new DateTime(2016, 1, 1);
+            DateTime hasta = new DateTime(2015, 7, 27);
+
+            var ex1 = LogicaInformesWilliams.ExistenciasAlDiaPorPuerto(SC, desde, idarticulo, destino, destinatario);
+            Debug.Print(ex1.ToString());
+            var ex2 = LogicaInformesWilliams.ExistenciasAlDiaPorPuerto(SC, hasta, idarticulo, destino, destinatario);
+
+            string sTitulo = "";
+
+            // esto es cómo lo calcula GeneroDataTablesDeMovimientosDeStock
+            //var dtCDPs = CartaDePorteManager.GetDataTableFiltradoYPaginado(SC,
+            //        "", "", "", 1, 0,
+            //        CartaDePorteManager.enumCDPestado.TodasMenosLasRechazadas, "", -1, -1,
+            //        destinatario, -1,
+            //        -1, idarticulo, -1, destino,
+            //        CartaDePorteManager.FiltroANDOR.FiltroAND, "Export",
+            //         desde, hasta, -1, ref sTitulo, "Ambas");
+
+            var sql = CartaDePorteManager.GetDataTableFiltradoYPaginado_CadenaSQL(SC,
+                    "", "", "", 1, 0,
+                    CartaDePorteManager.enumCDPestado.TodasMenosLasRechazadas, "", -1, -1,
+                    destinatario, -1,
+                    -1, idarticulo, -1, destino,
+                    CartaDePorteManager.FiltroANDOR.FiltroAND, "Export",
+                     desde, hasta, -1, ref sTitulo, "Ambas");
+
+            var dt = EntidadManager.ExecDinamico(SC, "select isnull(sum(netoproc),0) as total  from (" + sql + ") as C");
+
+            decimal total = Convert.ToDecimal(dt.Rows[0][0]);
+
+
+
+            DataTable dtCDPs=null;
+            object dtMOVs = null, dt2 = null;
+
+            LogicaInformesWilliams.GeneroDataTablesDeMovimientosDeStock(ref dtCDPs, ref dt2, ref dtMOVs, destinatario, destino, idarticulo, desde, hasta, SC);
+        }
+
+
+
+
+
+
+        [TestMethod]
+        public void SincroEstanar_36699()
+        {
+
+            //string DIRFTP = DirApp + @"\DataBackupear\";
+            //string ArchivoExcelDestino = DIRFTP + "ControlKilos_" + DateTime.Now.ToString("ddMMMyyyy_HHmmss") + ".xlsx";
+
+
+            string sErrores = "", sTitulo = "";
+            LinqCartasPorteDataContext db = null;
+
+            // el _CONST_MAXROWS sale del app.config
+
+            int registrosf = 0;
+
+            int idcli = CartaDePorteManager.BuscarClientePorCUIT("30-50930520-6", SC, "");
+
+            var output = SincronismosWilliamsManager.GenerarSincro("Estanar", ref sErrores, SC, "dominio", ref sTitulo
+                                , CartaDePorteManager.enumCDPestado.DescargasMasFacturadas,
+                     "", idcli, -1,
+                -1, idcli,
+                 idcli, -1, -1, -1,
+                 CartaDePorteManager.FiltroANDOR.FiltroOR, "Entregas",
+                new DateTime(2016, 1, 1), new DateTime(2016, 3, 31),
+                -1, "Ambas", false, "", "", -1, ref registrosf, 4000);
+
+
+
+            //File.Copy(output, @"C:\Users\Administrador\Desktop\"   Path.GetFileName(output), true);
+            System.Diagnostics.Process.Start(output);
+        }
+
+
+
+
+
+
+
+        [TestMethod]
+        public void MailAmaggi_29728()
+        {
+
+            //aaaaaa
+            //Agregar el campos de AMBAS ( Excel + HTML ), asi no hay que agregar repetidamente
+            //otro grupo de mail para elegir el otro forma, y que en el mismo correo llegue de las dos manera, pegado en el cuerpo del mail + archivo Excel. - PENDIENTE
+
+            var fechadesde = new DateTime(2014, 1, 1);
+            var fechahasta = new DateTime(2014, 1, 2);
+            int pventa = 0;
+
+
+            var dr = CDPMailFiltrosManager2.TraerMetadata(SC, -1).NewRow();
+
+            dr["ModoImpresion"] = "Amaggi"; // este es el excel angosto con adjunto html angosto ("Listado general de Cartas de Porte (simulando original) con foto 2 .rdl"). Lo que quieren es el excel ANCHO manteniendo el MISMO html. 
+            //dr["ModoImpresion"] = "ExcHc";
+
+
+            //ElseIf iisNull(.Item("ModoImpresion"), "") = "ExcHtm" Then
+            //    'este es de servidor, así que saco el path
+            //    rdl = "Listado general de Cartas de Porte (simulando original) con foto 2"
+
+            //ElseIf iisNull(.Item("ModoImpresion"), "") = "EHOlav" Then
+            //    rdl = "Listado general de Cartas de Porte (simulando original) Olavarria"
+
+            //ElseIf iisNull(.Item("ModoImpresion"), "") = "HImag2" Then
+            //    rdl = "Listado general de Cartas de Porte (simulando original) para html con imagenes"
+
+
+
+
+
+            //dr["ModoImpresion"] = "HtmlIm";
+
+            dr["Emails"] = "mscalella911@gmail.com";
+
+            dr["Vendedor"] = -1;
+            dr["CuentaOrden1"] = -1;
+            dr["CuentaOrden2"] = -1;
+            dr["IdClienteAuxiliar"] = -1; ;
+            dr["Corredor"] = -1;
+            dr["Entregador"] = -1;
+            dr["Destino"] = -1;
+            dr["Procedencia"] = -1;
+            dr["FechaDesde"] = fechadesde;
+            dr["FechaHasta"] = fechahasta;
+            dr["AplicarANDuORalFiltro"] = 0; // CartaDePorteManager.FiltroANDOR.FiltroOR;
+            dr["Modo"] = "Ambos";
+            //dr["Orden"] = "";
+            //dr["Contrato"] = "";
+            dr["EnumSyngentaDivision"] = "";
+            dr["EsPosicion"] = false;
+            dr["IdArticulo"] = -1;
+            CartaDePorteManager.enumCDPestado estado = CartaDePorteManager.enumCDPestado.DescargasMasFacturadas;
+
+
+            string output = "";
+            string sError = "", sError2 = "";
+            string inlinePNG = DirApp + @"\imagenes\Unnamed.png";
+            string inlinePNG2 = DirApp + @"\imagenes\twitterwilliams.jpg";
+
+
+
+
+
+            try
+            {
+
+                output = CDPMailFiltrosManager2.EnviarMailFiltroPorRegistro_DLL(SC, fechadesde, fechahasta,
+                                                       pventa, "", estado,
+                                                    ref dr, ref sError, false,
+                                                   ConfigurationManager.AppSettings["SmtpServer"],
+                                                     ConfigurationManager.AppSettings["SmtpUser"],
+                                                     ConfigurationManager.AppSettings["SmtpPass"],
+                                                     Convert.ToInt16(ConfigurationManager.AppSettings["SmtpPort"]),
+                                                       "", ref sError2, inlinePNG, inlinePNG2);
+
+
+            }
+            catch (Exception)
+            {
+
+                //throw;
+            }
+
+
+
+            System.Web.UI.WebControls.GridView grid = new System.Web.UI.WebControls.GridView();
+            string html = CartaDePorteManager.ExcelToHtml(output, grid);
+
+
+            System.Diagnostics.Process.Start(output);
+
+        }
+
+
+
+
+
+
+
+
+        [TestMethod]
+        public void CampoEditableDeClientesRelacionadosAlUsuarioParaTirarInforme_28320()
+        {
+
+            string sErrores = "", sTitulo = "";
+            LinqCartasPorteDataContext db = null;
+            DemoProntoEntities db2 = null;
+
+
+
+            var clientes = CartaDePorteManager.TraerCUITClientesSegunUsuario("BLD25MAYO", SC, bdlmasterappconfig).Where(x => x != "");
+            String aaa = ParametroManager.TraerValorParametro2(SC, "ClienteBLDcorredorCUIT").NullSafeToString() ?? "";
+            var sss = aaa.Split('|').ToList();
+
+
+            var q = CartaDePorteManager.CartasLINQlocalSimplificadoTipadoConCalada3(SC,
+                     "", "", "", 1, 10,
+                      CartaDePorteManager.enumCDPestado.Todas, "", -1, -1,
+                     -1, -1,
+                     -1, -1, -1, -1, CartaDePorteManager.FiltroANDOR.FiltroOR, "Ambas",
+                      new DateTime(2013, 1, 1),
+                      new DateTime(2014, 1, 1),
+                      -1, ref sTitulo, "Ambas", false, "", ref db2, "", -1, -1, 0, "", "Ambas")
+
+                        .Where(x => clientes.Contains(x.TitularCUIT) || clientes.Contains(x.IntermediarioCUIT) || clientes.Contains(x.RComercialCUIT))
+                        .ToList();
+        }
+
+
+
+
+
+
+
+
+
+
+
         [TestMethod]
         public void SincroBragadense_36755()
         {
@@ -960,34 +1196,6 @@ namespace ProntoMVC.Tests
 
 
 
-        [TestMethod]
-        public void CampoEditableDeClientesRelacionadosAlUsuarioParaTirarInforme_28320()
-        {
-
-            string sErrores = "", sTitulo = "";
-            LinqCartasPorteDataContext db = null;
-            DemoProntoEntities db2 = null;
-
-            var clientes = CartaDePorteManager.TraerCUITClientesSegunUsuario("BLD25MAYO", SC).Where(x => x != "");
-            String aaa = ParametroManager.TraerValorParametro2(SC, "ClienteBLDcorredorCUIT").NullSafeToString() ?? "";
-            var sss = aaa.Split('|').ToList();
-
-
-            var q = CartaDePorteManager.CartasLINQlocalSimplificadoTipadoConCalada3(SC,
-                     "", "", "", 1, 10,
-                      CartaDePorteManager.enumCDPestado.Todas, "", -1, -1,
-                     -1, -1,
-                     -1, -1, -1, -1, CartaDePorteManager.FiltroANDOR.FiltroOR, "Ambas",
-                      new DateTime(2013, 1, 1),
-                      new DateTime(2014, 1, 1),
-                      -1, ref sTitulo, "Ambas", false, "", ref db2, "", -1, -1, 0, "", "Ambas")
-
-                        .Where(x => clientes.Contains(x.TitularCUIT) || clientes.Contains(x.IntermediarioCUIT) || clientes.Contains(x.RComercialCUIT))
-                        .ToList();
-        }
-
-
-
 
 
 
@@ -999,7 +1207,14 @@ namespace ProntoMVC.Tests
         public void OCR_alta_automatica_de_clientes_22172_36722()
         {
 
-            Assert.IsFalse(FuncionesGenericasCSharp.CUITValido("30700809818")); // este pasa por verdadero. está bien?
+            // FuncionesGenericasCSharp.CUITValido_DigitoVerificador
+            // este son verdaderos. no les encontré cuit existente, pero tampoco a las otras 9 variantes de digito verificador
+            Assert.IsTrue(FuncionesGenericasCSharp.CUITValido("30708142391"));
+            Assert.IsTrue(FuncionesGenericasCSharp.CUITValido("30164632845")); // este pasa por verdadero. está bien? no le encontré cuit existente, pero tampoco a las otras 9 variantes de digito verificador
+            Assert.IsTrue(FuncionesGenericasCSharp.CUITValido("30700809818")); // este pasa por verdadero. está bien? no le encontré cuit existente, pero tampoco a las otras 9 variantes de digito verificador
+            // no hay algun servicio web de la afip para buscar cuits?
+
+
 
 
             Assert.IsFalse(FuncionesGenericasCSharp.CUITValido("13050795084"));
@@ -2786,7 +3001,7 @@ Adjunto un ejemplo que tiene cartas de porte de 8 entregadores que no son Willia
             LinqCartasPorteDataContext db = null;
             DemoProntoEntities db2 = null;
 
-            var clientes = CartaDePorteManager.TraerCUITClientesSegunUsuario("BLD25MAYO", SC).Where(x => x != "");
+            var clientes = CartaDePorteManager.TraerCUITClientesSegunUsuario("BLD25MAYO", SC, bdlmasterappconfig).Where(x => x != "");
             String aaa = ParametroManager.TraerValorParametro2(SC, "ClienteBLDcorredorCUIT").NullSafeToString() ?? "";
             var sss = aaa.Split('|').ToList();
 
@@ -4247,7 +4462,7 @@ Adjunto un ejemplo que tiene cartas de porte de 8 entregadores que no son Willia
         [TestMethod]
         public void ClientesEspecificosDelUsuarioBLD_23822()
         {
-            var q = CartaDePorteManager.TraerCUITClientesSegunUsuario("Mariano", SC);
+            var q = CartaDePorteManager.TraerCUITClientesSegunUsuario("Mariano", SC, bdlmasterappconfig);
         }
 
 
@@ -6100,8 +6315,8 @@ Adjunto un ejemplo que tiene cartas de porte de 8 entregadores que no son Willia
             }
             db.SaveChanges();
 
-            var q = CartaDePorteManager.TraerCUITClientesSegunUsuario("BLDPIRULO", SC);
-            var q2 = CartaDePorteManager.TraerCUITClientesSegunUsuario("BLD_ALABERN", SC);
+            var q = CartaDePorteManager.TraerCUITClientesSegunUsuario("BLDPIRULO", SC, bdlmasterappconfig);
+            var q2 = CartaDePorteManager.TraerCUITClientesSegunUsuario("BLD_ALABERN", SC, bdlmasterappconfig);
             Assert.AreNotEqual(q.Count, q2.Count);
         }
 

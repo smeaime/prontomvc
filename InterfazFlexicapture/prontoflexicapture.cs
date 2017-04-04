@@ -3567,6 +3567,9 @@ Formato localidad-provincia	destination	x
 
 
 
+
+        
+
         public virtual void GenerarExcelSyngentaWebService(List<InterfazFlexicapture.ServiceReference1.DT_DeliveryDelivery> cps, string fExcel)
         {
 
@@ -3665,7 +3668,7 @@ Formato localidad-provincia	destination	x
         }
 
 
-
+    
 
 
         public bool CopyFileFTP(string FileToCopy, string userName, string password)
