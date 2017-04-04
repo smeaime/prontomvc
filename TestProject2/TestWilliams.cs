@@ -945,7 +945,7 @@ La interface será procesa por Syngenta y si la misma no puede ser procesada cor
 
 
 
-            DataTable dtCDPs=null;
+            DataTable dtCDPs = null;
             object dtMOVs = null, dt2 = null;
 
             LogicaInformesWilliams.GeneroDataTablesDeMovimientosDeStock(ref dtCDPs, ref dt2, ref dtMOVs, destinatario, destino, idarticulo, desde, hasta, SC);
@@ -1106,8 +1106,13 @@ La interface será procesa por Syngenta y si la misma no puede ser procesada cor
             DemoProntoEntities db2 = null;
 
 
+            string usuario = "Mariano"; //"BLD25MAYO"
 
-            var clientes = CartaDePorteManager.TraerCUITClientesSegunUsuario("BLD25MAYO", SC, bdlmasterappconfig).Where(x => x != "");
+
+            UserDatosExtendidosManager.UpdateClientesRelacionadoslDelUsuario(usuario, bdlmasterappconfig, "20-12345678-1|20-12345678-1");
+
+
+            var clientes = CartaDePorteManager.TraerCUITClientesSegunUsuario(usuario, SC, bdlmasterappconfig).Where(x => x != "");
             String aaa = ParametroManager.TraerValorParametro2(SC, "ClienteBLDcorredorCUIT").NullSafeToString() ?? "";
             var sss = aaa.Split('|').ToList();
 
