@@ -91,7 +91,7 @@ Partial Class Admin_EditarUsuario
             End If
 
 
-            txtListadoCuits.Text = UserDatosExtendidosManager.TraerClientesRelacionadoslDelUsuario(membershipUser.ProviderUserKey.ToString, ConexBDLmaster)
+            txtListadoCuits.Text = UserDatosExtendidosManager.TraerClientesRelacionadoslDelUsuario(membershipUser.UserName, ConexBDLmaster)
 
 
 
@@ -218,7 +218,7 @@ Partial Class Admin_EditarUsuario
 
         
         UserDatosExtendidosManager.Update(membershipUser.ProviderUserKey.ToString, BuscaIdClientePreciso(txtRazonSocial.Text, HFSC.Value), "", ConexBDLmaster)
-        UserDatosExtendidosManager.UpdateClientesRelacionadoslDelUsuario(membershipUser.ProviderUserKey.ToString, ConexBDLmaster, txtListadoCuits.Text)
+        UserDatosExtendidosManager.UpdateClientesRelacionadoslDelUsuario(membershipUser.UserName, ConexBDLmaster, txtListadoCuits.Text)
 
 
 
