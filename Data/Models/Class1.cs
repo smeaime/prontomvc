@@ -67,6 +67,32 @@ namespace ProntoMVC.Data.Models
 
             return SC;
         }
+
+
+
+        public static string FormatearConexParaEntityFrameworkBDLMASTER_2(string s)
+        {
+
+            var parser = new System.Data.SqlClient.SqlConnectionStringBuilder(s);
+            string servidorSQL = parser.DataSource; // "MARIANO-PC\\SQLEXPRESS";
+            string basePronto = parser.InitialCatalog;  // "Autotrol";
+            string user = parser.UserID;
+            string pass = parser.Password;
+
+
+            string SC =
+                   "metadata=res://*/Models.bdlmaster.csdl|res://*/Models.bdlmaster.ssdl|res://*/Models.bdlmaster.msl;" +
+                   "provider=System.Data.SqlClient;provider connection string=\"" +
+                   "data source=" + servidorSQL + ";" +
+                   "initial catalog=" + basePronto + ";" +
+                   "persist security info=True;user id=" + user + ";" +
+                   "password=" + pass + ";" +
+                    "multipleactiveresultsets=True;App=EntityFramework\"";
+
+            return SC;
+        }
+
+
     }
 
 }
