@@ -20,18 +20,16 @@
                             Editar Usuario&nbsp;
                         </td>
                     </tr>
-                --%></tr>
+                --%>
+            </tr>
             <tr>
-                <td style="width: 91px; height: 15px" align="right">
-                    Usuario
+                <td style="width: 91px; height: 15px" align="right">Usuario
                 </td>
-                <td style="height: 15px">
-                    &nbsp;<asp:Label ID="LblNombre" runat="server" Font-Bold="True" Font-Size="10pt"></asp:Label>
+                <td style="height: 15px">&nbsp;<asp:Label ID="LblNombre" runat="server" Font-Bold="True" Font-Size="10pt"></asp:Label>
                 </td>
             </tr>
             <tr>
-                <td style="width: 91px" align="right">
-                    Email
+                <td style="width: 91px" align="right">Email
                 </td>
                 <td>
                     <asp:TextBox ID="TxTEmail" runat="server" CssClass="" ValidationGroup="Validate"
@@ -41,8 +39,7 @@
                 </td>
             </tr>
             <tr style="visibility: hidden; display: none;">
-                <td style="width: 91px" align="right">
-                    Cambiar contraseña
+                <td style="width: 91px" align="right">Cambiar contraseña
                 </td>
                 <td>
                     <asp:TextBox ID="TextBox1" runat="server" CssClass="" ValidationGroup="Validate"
@@ -59,8 +56,7 @@
                                 <br />
                                 <table class="" style="width: 200px">
                                     <tr>
-                                        <td class="">
-                                            Empresas
+                                        <td class="">Empresas
                                             <asp:DropDownList ID="DDLEmpresas" runat="server" Width="160px" CssClass="" AutoPostBack="True"
                                                 DataSourceID="ObjDsEmpresasDes" DataTextField="Descripcion" DataValueField="Id">
                                             </asp:DropDownList>
@@ -94,8 +90,7 @@
                         </ContentTemplate>
                     </asp:UpdatePanel>
                 </td>
-                <td style="width: 50px;">
-                </td>
+                <td style="width: 50px;"></td>
                 <td>
                     <asp:UpdatePanel ID="UpdatePanel2" runat="server">
                         <ContentTemplate>
@@ -140,16 +135,13 @@
                 </td>
             </tr>
             <tr>
-                <td style="width: 91px" align="right">
-                </td>
+                <td style="width: 91px" align="right"></td>
             </tr>
             <tr>
-                <td style="width: 91px" align="right">
-                </td>
+                <td style="width: 91px" align="right"></td>
             </tr>
             <tr>
-                <td style="width: 91px" align="right">
-                </td>
+                <td style="width: 91px" align="right"></td>
                 <td>
                     <asp:UpdatePanel runat="server">
                         <ContentTemplate>
@@ -183,8 +175,7 @@
                 </td>
             </tr>
             <tr style="visibility: hidden; display: none;">
-                <td style="width: 91px" align="right">
-                    Confirmar contraseña
+                <td style="width: 91px" align="right">Confirmar contraseña
                 </td>
                 <td>
                     <asp:TextBox ID="TextBox2" runat="server" CssClass="" ValidationGroup="Validate"
@@ -194,8 +185,7 @@
                 </td>
             </tr>
             <tr id="RenglonCliente" runat="server">
-                <td style="width: 91px" align="right">
-                    Cliente relacionado
+                <td style="width: 91px" align="right">Cliente relacionado
                 </td>
                 <td>
                     <asp:TextBox ID="txtRazonSocial" runat="server" CssClass="" ValidationGroup="Validate"
@@ -208,6 +198,17 @@
                     </cc1:AutoCompleteExtender>
                 </td>
             </tr>
+
+            <tr id="Tr1" runat="server">
+                <td style="width: 91px" align="right">CUITS de clientes relacionados
+                </td>
+                <td>
+                    <asp:TextBox ID="txtListadoCuits" runat="server" CssClass="" ValidationGroup="Validate" TextMode="MultiLine" Height="300px"
+                        Width="225px"></asp:TextBox>
+                </td>
+            </tr>
+
+
             <tr style="visibility: hidden; display: none;">
                 <td style="width: 91px" align="right">
                     <strong><span style="color: #ffffff">Rol: &nbsp;</span></strong>
@@ -272,7 +273,7 @@
                     </EditItemTemplate>
                     <ItemTemplate>
                         <asp:CheckBox ID="CheckBox2" runat="server" Checked='<%# Eval("PuedeModificar") %>'
-                            Visible='<%# IIf(Eval("Modulo") <> "CDPs VerHistorial" And Eval("Modulo") <> "CDPs VerFacturaImputada" And Eval("Modulo") <> "CDPs ImagenesDescarga", True, False)%>' />  
+                            Visible='<%# IIf(Eval("Modulo") <> "CDPs VerHistorial" And Eval("Modulo") <> "CDPs VerFacturaImputada" And Eval("Modulo") <> "CDPs ImagenesDescarga", True, False)%>' />
                     </ItemTemplate>
                 </asp:TemplateField>
                 <asp:TemplateField Visible="true">
@@ -287,8 +288,8 @@
                     </EditItemTemplate>
                     <ItemTemplate>
                         <asp:CheckBox ID="CheckBox3" runat="server" Checked='<%# Eval("PuedeEliminar") %>'
-                            Visible='<%# IIf(Eval("Modulo") <> "CDPs VerHistorial" And Eval("Modulo") <> "CDPs VerFacturaImputada" And Eval("Modulo") <> "CDPs ImagenesDescarga", True, False)%>' />  
-                         
+                            Visible='<%# IIf(Eval("Modulo") <> "CDPs VerHistorial" And Eval("Modulo") <> "CDPs VerFacturaImputada" And Eval("Modulo") <> "CDPs ImagenesDescarga", True, False)%>' />
+
                     </ItemTemplate>
                 </asp:TemplateField>
                 <asp:TemplateField Visible="true">

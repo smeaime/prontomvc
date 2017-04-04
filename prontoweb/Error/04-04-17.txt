@@ -1,0 +1,117 @@
+
+Log Entry : 
+04/04/2017 15:46:48
+Error in: http://localhost:58911/login.aspx?ReturnUrl=/. Error Message:System.Threading.ThreadAbortException
+Subproceso anulado.
+   en System.Threading.Thread.AbortInternal()
+   en System.Threading.Thread.Abort(Object stateInfo)
+   en System.Web.HttpResponse.AbortCurrentThread()
+   en System.Web.HttpResponse.End()
+   en System.Web.HttpResponse.Redirect(String url, Boolean endResponse, Boolean permanent)
+   en System.Web.HttpResponse.Redirect(String url)
+   en Login.Page_Load(Object sender, EventArgs e) en C:\Users\Administrador\Documents\bdl\pronto\prontoweb\Login.aspx.vb:línea 169
+mscorlib
+__________________________
+
+Log Entry : 
+04/04/2017 15:52:15
+Error in: http://localhost:58911/ProntoWeb/ConexionHaciaSyngenta.aspx. Error Message:System.InvalidCastException
+La conversión de la cadena "" en el tipo 'Date' no es válida.
+   en Microsoft.VisualBasic.CompilerServices.Conversions.ToDate(String Value)
+   en ConexionHaciaSyngenta.btnExportarGrilla_Click(Object sender, EventArgs e) en C:\Users\Administrador\Documents\bdl\pronto\prontoweb\ProntoWeb\ConexionHaciaSyngenta.aspx.vb:línea 492
+   en System.Web.UI.WebControls.Button.OnClick(EventArgs e)
+   en System.Web.UI.WebControls.Button.RaisePostBackEvent(String eventArgument)
+   en System.Web.UI.WebControls.Button.System.Web.UI.IPostBackEventHandler.RaisePostBackEvent(String eventArgument)
+   en System.Web.UI.Page.RaisePostBackEvent(IPostBackEventHandler sourceControl, String eventArgument)
+   en System.Web.UI.Page.RaisePostBackEvent(NameValueCollection postData)
+   en System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+Microsoft.VisualBasic
+__________________________
+
+Log Entry : 
+04/04/2017 15:53:10
+Error in: http://localhost:58911/ProntoWeb/ConexionHaciaSyngenta.aspx. Error Message:System.ServiceModel.ProtocolException
+La operación unidireccional devolvió un mensaje no Null con Action=''.
+
+Server stack trace: 
+   en System.ServiceModel.Dispatcher.RequestChannelBinder.ValidateNullReply(Message message)
+   en System.ServiceModel.Dispatcher.RequestChannelBinder.Send(Message message, TimeSpan timeout)
+   en System.ServiceModel.Channels.ServiceChannel.Call(String action, Boolean oneway, ProxyOperationRuntime operation, Object[] ins, Object[] outs, TimeSpan timeout)
+   en System.ServiceModel.Channels.ServiceChannelProxy.InvokeService(IMethodCallMessage methodCall, ProxyOperationRuntime operation)
+   en System.ServiceModel.Channels.ServiceChannelProxy.Invoke(IMessage message)
+
+Exception rethrown at [0]: 
+   en System.Runtime.Remoting.Proxies.RealProxy.HandleReturnMessage(IMessage reqMsg, IMessage retMsg)
+   en System.Runtime.Remoting.Proxies.RealProxy.PrivateInvoke(MessageData& msgData, Int32 type)
+   en InterfazFlexicapture.ServiceReference1.LoadDeclarationSoap_send_out_asy.LoadDeclarationSoap_send_out_asy(LoadDeclarationSoap_send_out_asy1 request)
+   en InterfazFlexicapture.ServiceReference1.LoadDeclarationSoap_send_out_asyClient.InterfazFlexicapture.ServiceReference1.LoadDeclarationSoap_send_out_asy.LoadDeclarationSoap_send_out_asy(LoadDeclarationSoap_send_out_asy1 request) en c:\Users\Administrador\Documents\bdl\pronto\InterfazFlexicapture\Service References\ServiceReference1\Reference.cs:línea 499
+   en InterfazFlexicapture.ServiceReference1.LoadDeclarationSoap_send_out_asyClient.LoadDeclarationSoap_send_out_asy(DT_DeliveryDelivery[] MT_Delivery) en c:\Users\Administrador\Documents\bdl\pronto\InterfazFlexicapture\Service References\ServiceReference1\Reference.cs:línea 505
+   en ServicioCartaPorte.servi.WebServiceSyngenta(List`1 dbcartas) en c:\Users\Administrador\Documents\bdl\pronto\InterfazFlexicapture\prontoflexicapture.cs:línea 3547
+mscorlib
+__________________________
+
+Log Entry : 
+04/04/2017 15:53:17
+Error in: http://localhost:58911/ProntoWeb/ConexionHaciaSyngenta.aspx. Error Message:System.Threading.ThreadAbortException: Subproceso anulado.
+   en System.Threading.Thread.AbortInternal()
+   en System.Threading.Thread.Abort(Object stateInfo)
+   en System.Web.HttpResponse.AbortCurrentThread()
+   en System.Web.HttpResponse.End()
+   en ConexionHaciaSyngenta.btnExportarGrilla_Click(Object sender, EventArgs e) en C:\Users\Administrador\Documents\bdl\pronto\prontoweb\ProntoWeb\ConexionHaciaSyngenta.aspx.vb:línea 535
+__________________________
+
+Log Entry : 
+04/04/2017 15:55:45
+Error in: http://localhost:58911/ProntoWeb/ConexionHaciaSyngenta.aspx. Error Message:System.ServiceModel.ProtocolException
+La operación unidireccional devolvió un mensaje no Null con Action=''.
+
+Server stack trace: 
+   en System.ServiceModel.Dispatcher.RequestChannelBinder.ValidateNullReply(Message message)
+   en System.ServiceModel.Dispatcher.RequestChannelBinder.Send(Message message, TimeSpan timeout)
+   en System.ServiceModel.Channels.ServiceChannel.Call(String action, Boolean oneway, ProxyOperationRuntime operation, Object[] ins, Object[] outs, TimeSpan timeout)
+   en System.ServiceModel.Channels.ServiceChannelProxy.InvokeService(IMethodCallMessage methodCall, ProxyOperationRuntime operation)
+   en System.ServiceModel.Channels.ServiceChannelProxy.Invoke(IMessage message)
+
+Exception rethrown at [0]: 
+   en System.Runtime.Remoting.Proxies.RealProxy.HandleReturnMessage(IMessage reqMsg, IMessage retMsg)
+   en System.Runtime.Remoting.Proxies.RealProxy.PrivateInvoke(MessageData& msgData, Int32 type)
+   en InterfazFlexicapture.ServiceReference1.LoadDeclarationSoap_send_out_asy.LoadDeclarationSoap_send_out_asy(LoadDeclarationSoap_send_out_asy1 request)
+   en InterfazFlexicapture.ServiceReference1.LoadDeclarationSoap_send_out_asyClient.InterfazFlexicapture.ServiceReference1.LoadDeclarationSoap_send_out_asy.LoadDeclarationSoap_send_out_asy(LoadDeclarationSoap_send_out_asy1 request) en c:\Users\Administrador\Documents\bdl\pronto\InterfazFlexicapture\Service References\ServiceReference1\Reference.cs:línea 499
+   en InterfazFlexicapture.ServiceReference1.LoadDeclarationSoap_send_out_asyClient.LoadDeclarationSoap_send_out_asy(DT_DeliveryDelivery[] MT_Delivery) en c:\Users\Administrador\Documents\bdl\pronto\InterfazFlexicapture\Service References\ServiceReference1\Reference.cs:línea 505
+   en ServicioCartaPorte.servi.WebServiceSyngenta(List`1 dbcartas) en c:\Users\Administrador\Documents\bdl\pronto\InterfazFlexicapture\prontoflexicapture.cs:línea 3547
+mscorlib
+__________________________
+
+Log Entry : 
+04/04/2017 15:55:46
+Error in: http://localhost:58911/ProntoWeb/ConexionHaciaSyngenta.aspx. Error Message:System.Threading.ThreadAbortException: Subproceso anulado.
+   en System.Threading.Thread.AbortInternal()
+   en System.Threading.Thread.Abort(Object stateInfo)
+   en System.Web.HttpResponse.AbortCurrentThread()
+   en System.Web.HttpResponse.End()
+   en ConexionHaciaSyngenta.btnExportarGrilla_Click(Object sender, EventArgs e) en C:\Users\Administrador\Documents\bdl\pronto\prontoweb\ProntoWeb\ConexionHaciaSyngenta.aspx.vb:línea 535
+__________________________
+
+Log Entry : 
+04/04/2017 16:21:37
+Error in: http://localhost:58911/Admin/EditarUsuario.aspx?opcion=UnoMismo. Error Message:System.Data.Entity.Infrastructure.UnintentionalCodeFirstException
+The context is being used in Code First mode with code that was generated from an EDMX file for either Database First or Model First development.  This will not work correctly. To fix this problem do not remove the line of code that throws this exception. If you wish to use Database First or Model First, then make sure that the Entity Framework connection string is included in the app.config or web.config of the start-up project. If you are creating your own DbConnection, then make sure that it is an EntityConnection and not some other type of DbConnection, and that you pass it to one of the base DbContext constructors that take a DbConnection. To learn more about Code First, Database First, and Model First see the Entity Framework documentation here: http://go.microsoft.com/fwlink/?LinkId=394715
+   en ProntoMVC.Data.Models.BDLMasterEntities.OnModelCreating(DbModelBuilder modelBuilder) en c:\Users\Administrador\Documents\bdl\pronto\Data\Models\bdlmaster.Context.cs:línea 25
+   en System.Data.Entity.DbContext.CallOnModelCreating(DbModelBuilder modelBuilder)
+   en System.Data.Entity.Internal.LazyInternalContext.CreateModelBuilder()
+   en System.Data.Entity.Internal.LazyInternalContext.CreateModel(LazyInternalContext internalContext)
+   en System.Data.Entity.Internal.RetryLazy`2.GetValue(TInput input)
+   en System.Data.Entity.Internal.LazyInternalContext.InitializeContext()
+   en System.Data.Entity.Internal.InternalContext.Initialize()
+   en System.Data.Entity.Internal.InternalContext.GetEntitySetAndBaseTypeForType(Type entityType)
+   en System.Data.Entity.Internal.Linq.InternalSet`1.Initialize()
+   en System.Data.Entity.Internal.Linq.InternalSet`1.get_InternalContext()
+   en System.Data.Entity.Infrastructure.DbQuery`1.System.Linq.IQueryable.get_Provider()
+   en System.Linq.Queryable.Where[TSource](IQueryable`1 source, Expression`1 predicate)
+   en UserDatosExtendidosManager.TraerClientesRelacionadoslDelUsuario(String UserId, String ConexBDLmaster) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 21509
+   en Admin_EditarUsuario.Page_Load(Object sender, EventArgs e) en C:\Users\Administrador\Documents\bdl\pronto\prontoweb\Admin\EditarUsuario.aspx.vb:línea 94
+   en System.Web.UI.Control.OnLoad(EventArgs e)
+   en System.Web.UI.Control.LoadRecursive()
+   en System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+ProntoMVC.Data
+__________________________
