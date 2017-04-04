@@ -7960,7 +7960,7 @@ Public Class CartaDePorteManager
 "            isnull(CLICOR2.cuit,'') AS CorredorCUIT2, " &
 "			isnull(CLIENTREG.cuit,'') AS EntregadorCUIT, " &
 "		isnull(LOCORI.CodigoAFIP,'') AS CodigoAFIP, " &
-"			90 AS MermaVolatil "
+"		CDPDET.Valor as MermaVolatil"
 )
 
 
@@ -7991,8 +7991,8 @@ Public Class CartaDePorteManager
         "            LEFT OUTER JOIN Clientes CLIFAC ON CLIFAC.IdCliente = FAC.IdCliente " &
         "            LEFT OUTER JOIN Partidos PARTORI ON LOCORI.IdPartido = PARTORI.IdPartido " &
         "            LEFT OUTER JOIN Provincias PROVDEST ON LOCDES.IdProvincia = PROVDEST.IdProvincia " &
-        "  LEFT OUTER JOIN Empleados E1 ON CDP.IdUsuarioIngreso = E1.IdEmpleado "
-
+        "  LEFT OUTER JOIN Empleados E1 ON CDP.IdUsuarioIngreso = E1.IdEmpleado " &
+        " LEFT OUTER JOIN CartasDePorteDetalle CDPDET ON CDP.IdCartaDePorte = CDPDET.IdCartaDePorte And CDPDET.Campo = 'CalidadMermaVolatilMerma'  "
 
 
 
@@ -21488,6 +21488,18 @@ Public Class UserDatosExtendidosManager
     End Function
 
 
+    Public Shared Function TraerRazonSocialDelUsuario(ByVal UserId As String, ConexBDLmaster As String, SC As String) As String
+
+        Dim db = New LinqBDLmasterDataContext(Encriptar(ConexBDLmaster))
+
+        Dim uext = (From p In db.UserDatosExtendidos
+                    Where p.UserId.ToString = UserId
+                    Select p).SingleOrDefault
+
+        Return NombreCliente(SC, uext.RazonSocial)
+    End Function
+
+
 
     Public Shared Function TraerClientesRelacionadoslDelUsuario(ByVal UserId As String, ConexBDLmaster As String) As Integer
 
@@ -21503,16 +21515,24 @@ Public Class UserDatosExtendidosManager
     End Function
 
 
+    Public Shared Function UpdateClientesRelacionadoslDelUsuario(ByVal UserId As String, ConexBDLmaster As String, listado As String) As Integer
 
-    Public Shared Function TraerRazonSocialDelUsuario(ByVal UserId As String, ConexBDLmaster As String, SC As String) As String
 
-        Dim db = New LinqBDLmasterDataContext(Encriptar(ConexBDLmaster))
+        Using db = New BDLMasterEntities(Encriptar(ConexBDLmaster))
 
-        Dim uext = (From p In db.UserDatosExtendidos
-                    Where p.UserId.ToString = UserId
-                    Select p).SingleOrDefault
+            Dim ue = (From p In db.UserDatosExtendidos
+                      Where p.UserId.ToString = UserId
+                      Select p).SingleOrDefault
 
-        Return NombreCliente(SC, uext.RazonSocial)
+
+            If IsNothing(ue) Then
+                Throw New Exception("No existe el usuario")
+            Else
+                ue.TextoAuxiliar = listado
+            End If
+
+            db.SaveChanges()
+        End Using
     End Function
 
 

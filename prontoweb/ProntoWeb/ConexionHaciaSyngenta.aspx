@@ -34,7 +34,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
         Web Service de Syngenta
     </div>
 
-<br />
+    <br />
 
     <style>
         /* Start by setting display:none to make this hidden.
@@ -81,11 +81,14 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
             id="m1s">Select(Unselect) row 13</a>--%>
 
 
-        Log de conexiones con Syngenta
 
-        Exportar Excel manual
 
-        Enviar por ftp
+
+
+
+
+
+
 
 
         <asp:UpdatePanel ID="UpdatePanelResumen" runat="server">
@@ -168,30 +171,35 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
 
         <br />
-        <asp:Button ID="btnExportarGrilla" Text="EXCEL" runat="server" Visible="false" CssClass="btn btn-primary"
-            Width="150" Height="40" />
 
-        <input type="button" id="btnExportarGrillaAjax2" value="Excel" class="btn btn-primary" />
+        <asp:Button ID="Button1" Text="Enviar con WebService" runat="server" Visible="false" CssClass="btn btn-primary" />
 
-        <input type="button" id="btnExportarGrillaAjax" value="Excel BLD demorados" class="btn btn-primary" />
+        <asp:Button ID="btnExportarGrilla" Text="Enviar con WebService" runat="server" Visible="true" CssClass="btn btn-primary"
+          Height="40" />
+
+        <%--<input type="button" id="btnExportarGrillaAjax2" value="Enviar con WebService"   class="btn btn-primary" />--%>
+
+        <input type="button" id="btnExportarGrillaAjax" value="Exportar Excel manual" class="btn btn-primary" />
 
 
-        <input type="button" id="btnPanelInformeAjax" value="Resumen" class="btn btn-primary" />
+        <input type="button" id="btnPanelInformeAjax" value="Log de conexiones con Syngenta" class="btn btn-primary" />
 
-        <asp:Button ID="btnPanelInforme" Text="RESUMEN" runat="server" Visible="false" CssClass="btn btn-primary" />
+
+
+        <asp:Button ID="btnPanelInforme" Text="Enviar por ftp" runat="server" Visible="false" CssClass="btn btn-primary" />
         <br />
         <div id="Salida2"></div>
         <asp:Literal ID="salida" runat="server"></asp:Literal>
-        
+
 
         <%--<input type="text" class="span4" id="text1" name="agent" value=""  "/>--%>
 
-        <br />
+        <%--<br />
         <table id="Lista" class="scroll" cellpadding="0" cellspacing="0" style="font-size: 12px;" width="700px">
         </table>
         <div id="ListaPager" class="scroll" style="text-align: center; height: 30px">
         </div>
-
+        --%>
 
 
 
@@ -2167,7 +2175,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
     </div>
     <style type="text/css">
         .myAltRowClassDemorado {
-            background-color:  red;
+            background-color: red;
             background-image: none;
         }
 
@@ -2177,10 +2185,9 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
         }
 
         .myAltRowClassRechazado {
-            background-color:   violet;
+            background-color: violet;
             background-image: none;
         }
-
     </style>
     <%--   /////////////////////////////////////////////////////////////////////        
  /////////////////////////////////////////////////////////////////////    --%>
