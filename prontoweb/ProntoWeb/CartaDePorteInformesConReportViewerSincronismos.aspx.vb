@@ -646,6 +646,7 @@ Partial Class CartaDePorteInformesConReportViewerSincronismos
 
             If cmbSincronismo.Text.ToUpper <> "YPF" And cmbSincronismo.Text.ToUpper <> "SYNGENTA FACTURACIÓN" _
                 And cmbSincronismo.Text.ToUpper <> "PELAYO" _
+                And cmbSincronismo.Text.ToUpper <> "ESTANAR" _
                 And InStr(cmbSincronismo.Text.ToUpper, "DOW") = 0 _
                 And (InStr(cmbSincronismo.Text.ToUpper, "BLD") = 0 Or cmbSincronismo.Text.ToUpper = "BLD (CALIDADES)") Then
 
