@@ -197,6 +197,12 @@ Namespace Pronto.ERP.Bll
                 Case "EL ENLACE"
                     txtTitular.Text = "EL ENLACE S.A."
 
+                Case "ESTANAR"
+                    txtTitular.Text = "ESTANAR S.A."
+                    txtRcomercial.Text = "ESTANAR S.A." 'NombreCliente(SC, BuscarClientePorCUIT(DowCUIT, SC, ""))
+                    txtIntermediario.Text = "ESTANAR S.A." 'NombreCliente(SC, BuscarClientePorCUIT(DowCUIT, SC, ""))
+
+
                 Case "GRANAR"
                     txtTitular.Text = ""
                     txtCorredor.Text = "GRANAR S.A.C"
@@ -6655,7 +6661,9 @@ Namespace Pronto.ERP.Bll
                 sb &= "&" & cero.ToString.PadLeft(10)                         '6 - Número Ticket Entrada	Numérico	10	Se completa con Cero si no esta.)
                 sb &= "&" & cero.ToString.PadLeft(10)                         '7 - Sucursal Ticket Salida	Numérico	10	Se completa con Cero si no esta.
                 sb &= "&" & cero.ToString.PadLeft(10)                         '8 - Número Ticket Salida	Numérico	10	Se completa con Cero si no esta.
-                sb &= "&" & dr("R. ComercialCUIT").ToString.Replace("-", "").PadLeft(11)                          '9 - Remitente	Numérico	11	Código de SoftCereal ó CUIT del Remitente. Por defecto se toma al Productor como Remitente.
+
+
+                sb &= "&" & dr("TitularCUIT").ToString.Replace("-", "").PadLeft(11)                          '9 - Remitente	Numérico	11	Código de SoftCereal ó CUIT del Remitente. Por defecto se toma al Productor como Remitente.
 
 
                 'https://mail.google.com/mail/u/0/#inbox/13b47cc0a40eb6e4
@@ -8397,14 +8405,15 @@ Namespace Pronto.ERP.Bll
                             sb(3) = "GSJ"
                             sb(9) = "AC-SOJA-C1617"
                         Else
+                            Continue For
                             sb(3) = .Producto
                             sb(9) = "AC-SOJA-C1617"
                         End If
 
-                        sb(4) = .NetoFinal
+                        sb(4) = If(.NetoFinal, 0)
 
-                        sb(5) = .Humedad
-                        sb(6) = .Merma
+                        sb(5) = If(.Humedad, 0)
+                        sb(6) = If(.Merma, 0)
                         sb(7) = GetDetalle("CalidadMermaVolatil", db, .IdCartaDePorte)
                         sb(8) = "DIMCTC"
 
