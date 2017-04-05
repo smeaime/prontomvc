@@ -471,7 +471,7 @@ Partial Class CartaDePorteInformesAccesoClientesBLDcorredor
 
         
 
-        Dim clientes As List(Of String) = TraerCUITClientesSegunUsuario(Membership.GetUser().UserName, HFSC.Value).Where(Function(x) x <> "").ToList  'c.ToList()
+        Dim clientes As List(Of String) = TraerCUITClientesSegunUsuario(Membership.GetUser().UserName, HFSC.Value, ConexBDLmaster()).Where(Function(x) x <> "").ToList  'c.ToList()
         Dim aaa As String = iisNull(ParametroManager.TraerValorParametro2(HFSC.Value, "ClienteBLDcorredorCUIT"), "")
         Dim sss As List(Of String) = aaa.Split("|").ToList
 
@@ -1723,7 +1723,7 @@ Partial Class CartaDePorteInformesAccesoClientesBLDcorredor
 
 
 
-        Dim clientes As List(Of String) = TraerCUITClientesSegunUsuario(Membership.GetUser().UserName, HFSC.Value)  'c.ToList()
+        Dim clientes As List(Of String) = TraerCUITClientesSegunUsuario(Membership.GetUser().UserName, HFSC.Value, ConexBDLmaster())  'c.ToList()
 
         'Dim clientes() As String = { _
         '                              "20268165178" _
