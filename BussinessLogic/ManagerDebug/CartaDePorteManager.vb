@@ -2746,164 +2746,164 @@ Public Class CartaDePorteManager
 
 
 
-        Dim q2 As IQueryable(Of CartasConCalada) = (From cdp In db.CartasDePortes
-                                                    From art In db.Articulos.Where(Function(i) i.IdArticulo = cdp.IdArticulo).DefaultIfEmpty
-                                                    From clitit In db.Clientes.Where(Function(i) i.IdCliente = cdp.Vendedor).DefaultIfEmpty
-                                                    From clidest In db.Clientes.Where(Function(i) i.IdCliente = cdp.Entregador).DefaultIfEmpty
-                                                    From cliint In db.Clientes.Where(Function(i) i.IdCliente = cdp.CuentaOrden1).DefaultIfEmpty
-                                                    From clircom In db.Clientes.Where(Function(i) i.IdCliente = cdp.CuentaOrden2).DefaultIfEmpty
-                                                    From corr In db.Vendedores.Where(Function(i) i.IdVendedor = cdp.Corredor).DefaultIfEmpty
-                                                    From dest In db.WilliamsDestinos.Where(Function(i) i.IdWilliamsDestino = cdp.Destino).DefaultIfEmpty
-                                                    From loc In db.Localidades.Where(Function(i) i.IdLocalidad = CInt(cdp.Procedencia)).DefaultIfEmpty
-                                                    From cal In db.Calidade_EF.Where(Function(i) i.IdCalidad = cdp.Calidad).DefaultIfEmpty
-                                                    From estab In db.CDPEstablecimientos.Where(Function(i) i.IdEstablecimiento = cdp.IdEstablecimiento).DefaultIfEmpty
-                                                    From tr In db.Transportistas.Where(Function(i) i.IdTransportista = cdp.IdTransportista).DefaultIfEmpty
-                                                    From chf In db.Choferes.Where(Function(i) i.IdChofer = cdp.IdChofer).DefaultIfEmpty
-                                                    From emp In db.Empleados.Where(Function(i) i.IdEmpleado = cdp.IdUsuarioIngreso).DefaultIfEmpty
-                                                    From fac In db.Facturas.Where(Function(i) i.IdFactura = cdp.IdFacturaImputada).DefaultIfEmpty
-                                                    From detfac In db.DetalleFacturas.Where(Function(i) i.IdDetalleFactura = cdp.IdDetalleFactura).DefaultIfEmpty
-                                                    From clifac In db.Clientes.Where(Function(i) i.IdCliente = fac.IdCliente).DefaultIfEmpty
-                                                    From locdes In db.Localidades.Where(Function(i) i.IdLocalidad = CInt(dest.IdLocalidad)).DefaultIfEmpty
-                                                    From part In db.Partidos.Where(Function(i) i.IdPartido = loc.IdPartido).DefaultIfEmpty
-                                                    Where
-                                                cdp.Vendedor > 0 _
-                                                And (cdp.FechaDescarga >= fechadesde And cdp.FechaDescarga <= fechahasta) _
-                                                And (estado <> enumCDPestado.Facturadas Or If(cdp.IdFacturaImputada, 0) > 0) _
-                                                And (estado = enumCDPestado.Rechazadas Or cdp.Anulada <> "SI") _
-                                                And (ModoExportacion = enumCDPexportacion.Ambas _
-                                                        Or (ModoExportacion = enumCDPexportacion.Export And cdp.Exporta = "SI") _
-                                                        Or (ModoExportacion = enumCDPexportacion.Entregas And cdp.Exporta <> "SI")) _
-                                                And (cdp.Vendedor.HasValue And cdp.Corredor.HasValue And cdp.Entregador.HasValue) _
-                                                And (
-                                                      (idVendedor = -1 And idIntermediario = -1 And idRemComercial = -1) _
-                                                      Or
-                                                      (AplicarANDuORalFiltro = FiltroANDOR.FiltroAND _
-                                                        And (idVendedor = -1 Or cdp.Vendedor = idVendedor) _
-                                                        And (idIntermediario = -1 Or cdp.CuentaOrden1 = idIntermediario) _
-                                                        And (idRemComercial = -1 Or cdp.CuentaOrden2 = idRemComercial)
-                                                      ) _
-                                                      Or
-                                                      (AplicarANDuORalFiltro = FiltroANDOR.FiltroOR And
-                                                        (cdp.Vendedor = idVendedor Or cdp.CuentaOrden1 = idIntermediario Or cdp.CuentaOrden2 = idRemComercial)
-                                                       )
-                                                    ) _
-                                                And (idCorredor = -1 Or cdp.Corredor = idCorredor Or cdp.Corredor2 = idCorredor) _
-                                                And (idDestinatario = -1 Or cdp.Entregador = idDestinatario) _
-                                                And (idArticulo = -1 Or cdp.IdArticulo = idArticulo) _
-                                                And (idDestino = -1 Or cdp.Destino = idDestino) _
-                                                And (puntoventa = -1 Or cdp.PuntoVenta = puntoventa) _
-                                                And (idClienteAuxiliar = -1 Or cdp.IdClienteAuxiliar = idClienteAuxiliar) _
-                                                And (QueContenga2 = "" Or cdp.NumeroCartaEnTextoParaBusqueda.Contains(QueContenga2))
-                                                    Order By cdp.FechaModificacion Descending
-                                                    Select New CartasConCalada With {
-                                                     .IdCartaDePorte = cdp.IdCartaDePorte,
-                                                     .NumeroCartaDePorte = cdp.NumeroCartaDePorte,
-                                                     .NumeroCartaDePorteFormateada = "000" & SqlFunctions.StringConvert(cdp.NumeroCartaDePorte).Substring(1, 1) & "-" & SqlFunctions.StringConvert(cdp.NumeroCartaDePorte).Substring(2, 8),
-                                                     .NumeroSubfijo = cdp.NumeroSubfijo,
-                                                     .SubnumeroVagon = cdp.SubnumeroVagon,
-                                                     .FechaArribo = If(cdp.FechaArribo, DateTime.MinValue),
-                                                     .FechaModificacion = If(cdp.FechaModificacion, DateTime.MinValue),
-                                                     .FechaDescarga = If(cdp.FechaDescarga, DateTime.MinValue),
-                                                     .FechaVencimiento = If(cdp.FechaVencimiento, DateTime.MinValue),
-                                                     .Observaciones = cdp.Observaciones,
-                                                     .CTG = If(cdp.CTG, 0), _
- _
-                                                    .NetoProc = cdp.NetoProc,
-                                                    .NetoFinal = cdp.NetoFinal,
-                                                    .TaraFinal = cdp.TaraFinal,
-                                                    .BrutoFinal = cdp.BrutoFinal,
-                                                    .NetoPto = cdp.NetoPto,
-                                                    .TaraPto = cdp.TaraPto,
-                                                    .BrutoPto = cdp.BrutoPto,
-                                                    .Humedad = cdp.Humedad,
-                                                    .HumedadDesnormalizada = cdp.HumedadDesnormalizada,
-                                                    .Merma = cdp.Merma,
-                                                    .CalidadDesc = If(cal.Descripcion, ""),
-                                                     .Tarifa = cdp.Tarifa,
-                                                     .KmArecorrer = cdp.KmARecorrer, _
- _
-                                                     .TitularDesc = clitit.RazonSocial,
-                                                     .IntermediarioDesc = cliint.RazonSocial,
-                                                     .RComercialDesc = clircom.RazonSocial,
-                                                     .CorredorDesc = corr.Nombre,
-                                                     .DestinatarioDesc = clidest.RazonSocial,
-                                                     .TitularCUIT = clitit.Cuit.Replace("-", ""),
-                                                     .IntermediarioCUIT = cliint.Cuit.Replace("-", ""),
-                                                     .RComercialCUIT = clircom.Cuit.Replace("-", ""),
-                                                     .CorredorCUIT = corr.Cuit.Replace("-", ""),
-                                                     .DestinatarioCUIT = clidest.Cuit.Replace("-", ""), _
- _
-                                                     .Producto = art.Descripcion,
-                                                     .ProductoSagpya = art.AuxiliarString6,
-                                                     .IdProcedencia = cdp.Procedencia,
-                                                     .ProcedenciaDesc = loc.Nombre,
-                                                     .DestinoDesc = dest.Descripcion,
-                                                     .UsuarioIngreso = "",
-                                                    .FechaDeCarga = If(cdp.FechaDeCarga, cdp.FechaArribo),
-                                                    .NobleExtranos = cdp.NobleExtranos,
-                                                    .NobleNegros = cdp.NobleNegros,
-                                                    .NobleQuebrados = cdp.NobleQuebrados,
-                                                    .NobleDaniados = cdp.NobleDaniados,
-                                                    .NobleChamico = cdp.NobleChamico,
-                                                    .NobleChamico2 = cdp.NobleChamico2,
-                                                    .NobleRevolcado = cdp.NobleRevolcado,
-                                                    .NobleObjetables = cdp.NobleObjetables,
-                                                    .NobleAmohosados = cdp.NobleAmohosados,
-                                                    .NobleHectolitrico = cdp.NobleObjetables,
-                                                    .NobleCarbon = cdp.NobleHectolitrico,
-                                                     .NoblePanzaBlanca = cdp.NoblePanzaBlanca,
-                                                    .NoblePicados = cdp.NoblePicados,
-                                                    .NobleMGrasa = cdp.NobleMGrasa,
-                                                    .NobleAcidezGrasa = cdp.NobleAcidezGrasa,
-                                                    .NobleVerdes = cdp.NobleVerdes,
-                                                    .NobleGrado = cdp.NobleGrado,
-                                                    .NobleConforme = cdp.NobleConforme,
-                                                    .NobleACamara = (cdp.NobleACamara = "SI"),
-                                                    .CalidadPuntaSombreada = If(cdp.CalidadPuntaSombreada, 0),
-                                                    .CalidadGranosQuemados = If(cdp.CalidadGranosQuemados, 0),
-                                                    .CalidadGranosQuemadosBonifRebaja = 0,
-                                                    .CalidadTierra = If(cdp.CalidadTierra, 0),
-                                                    .CalidadTierraBonifRebaja = If(cdp.CalidadPuntaSombreada, 0),
-                                                    .CalidadMermaChamico = If(cdp.CalidadMermaChamico, 0),
-                                                    .CalidadMermaChamicoBonifRebaja = 0,
-                                                    .CalidadMermaZarandeo = If(cdp.CalidadMermaZarandeo, 0),
-                                                    .CalidadMermaZarandeoBonifRebaja = 0, _
- _
-                                                    .ProcedenciaLocalidadONCCA_SAGPYA = loc.CodigoONCAA,
-                                                    .ProcedenciaPartidoONCCA = part.CodigoONCCA,
-                                                  .ProcedenciaLocalidadAFIP = loc.CodigoAfip,
-                                                    .DestinoLocalidadAFIP = locdes.CodigoAfip, _
- _
-                                                     .Patente = cdp.Patente,
-                                                    .Acoplado = cdp.Acoplado,
-                                                     .DestinoCUIT = dest.CUIT.Replace("-", ""),
-                                                    .DestinoCodigoYPF = dest.CodigoYPF,
-                                                    .DestinoCodigoSAGPYA = dest.CodigoONCAA,
-                                                    .TransportistaCUIT = tr.Cuit.Replace("-", ""),
-                                                    .ChoferCUIT = chf.Cuil.Replace("-", ""),
-                                                    .TransportistaDesc = tr.RazonSocial,
-                                                    .ChoferDesc = chf.Nombre,
-                                                    .EspecieONCCA = art.AuxiliarString6,
-                                                    .Cosecha = cdp.Cosecha.Replace("/", "-20"),
-                                                    .Cosecha2 = cdp.Cosecha.Replace("20", "").Replace("/", ""),
-                                                    .Establecimiento = estab.Descripcion, _
- _
-                                                    .IdFacturaImputada = If(cdp.IdFacturaImputada, -1),
-                                                    .IdClienteAFacturarle = If(cdp.IdClienteAFacturarle, -1),
-                                                    .IdDetalleFacturaImputada = If(cdp.IdDetalleFactura, -1),
-                                                    .PrecioUnitarioTotal = If(detfac.PrecioUnitarioTotal, 0),
-                                                    .ClienteFacturado = clifac.RazonSocial,
-                                                    .PathImagen = cdp.PathImagen, _
- _
-                                                        .CEE_CAU = cdp.CEE _
-                                                , .Contrato = cdp.Contrato _
-                                              , .PuntoVenta = If(cdp.PuntoVenta, 0) _
-                                          , .NRecibo = cdp.NRecibo,
-                                             .CalidadGranosDanadosRebaja = 0.01,
-                                                     .CalidadGranosExtranosRebaja = 0.01,
-                                                 .DestinoCodigoPostal = dest.CodigoPostal _
-                                                , .ProcedenciaCodigoPostal = loc.CodigoPostal
-                                                   }) 'cosecha2 queda 1415, cosecha queda 2014/2015, original es 2014/15
+        '       Dim q2 As IQueryable(Of CartasConCalada) = (From cdp In db.CartasDePortes
+        '                                                   From art In db.Articulos.Where(Function(i) i.IdArticulo = cdp.IdArticulo).DefaultIfEmpty
+        '                                                   From clitit In db.Clientes.Where(Function(i) i.IdCliente = cdp.Vendedor).DefaultIfEmpty
+        '                                                   From clidest In db.Clientes.Where(Function(i) i.IdCliente = cdp.Entregador).DefaultIfEmpty
+        '                                                   From cliint In db.Clientes.Where(Function(i) i.IdCliente = cdp.CuentaOrden1).DefaultIfEmpty
+        '                                                   From clircom In db.Clientes.Where(Function(i) i.IdCliente = cdp.CuentaOrden2).DefaultIfEmpty
+        '                                                   From corr In db.Vendedores.Where(Function(i) i.IdVendedor = cdp.Corredor).DefaultIfEmpty
+        '                                                   From dest In db.WilliamsDestinos.Where(Function(i) i.IdWilliamsDestino = cdp.Destino).DefaultIfEmpty
+        '                                                   From loc In db.Localidades.Where(Function(i) i.IdLocalidad = CInt(cdp.Procedencia)).DefaultIfEmpty
+        '                                                   From cal In db.Calidade_EF.Where(Function(i) i.IdCalidad = cdp.Calidad).DefaultIfEmpty
+        '                                                   From estab In db.CDPEstablecimientos.Where(Function(i) i.IdEstablecimiento = cdp.IdEstablecimiento).DefaultIfEmpty
+        '                                                   From tr In db.Transportistas.Where(Function(i) i.IdTransportista = cdp.IdTransportista).DefaultIfEmpty
+        '                                                   From chf In db.Choferes.Where(Function(i) i.IdChofer = cdp.IdChofer).DefaultIfEmpty
+        '                                                   From emp In db.Empleados.Where(Function(i) i.IdEmpleado = cdp.IdUsuarioIngreso).DefaultIfEmpty
+        '                                                   From fac In db.Facturas.Where(Function(i) i.IdFactura = cdp.IdFacturaImputada).DefaultIfEmpty
+        '                                                   From detfac In db.DetalleFacturas.Where(Function(i) i.IdDetalleFactura = cdp.IdDetalleFactura).DefaultIfEmpty
+        '                                                   From clifac In db.Clientes.Where(Function(i) i.IdCliente = fac.IdCliente).DefaultIfEmpty
+        '                                                   From locdes In db.Localidades.Where(Function(i) i.IdLocalidad = CInt(dest.IdLocalidad)).DefaultIfEmpty
+        '                                                   From part In db.Partidos.Where(Function(i) i.IdPartido = loc.IdPartido).DefaultIfEmpty
+        '                                                   Where
+        '                                               cdp.Vendedor > 0 _
+        '                                               And (cdp.FechaDescarga >= fechadesde And cdp.FechaDescarga <= fechahasta) _
+        '                                               And (estado <> enumCDPestado.Facturadas Or If(cdp.IdFacturaImputada, 0) > 0) _
+        '                                               And (estado = enumCDPestado.Rechazadas Or cdp.Anulada <> "SI") _
+        '                                               And (ModoExportacion = enumCDPexportacion.Ambas _
+        '                                                       Or (ModoExportacion = enumCDPexportacion.Export And cdp.Exporta = "SI") _
+        '                                                       Or (ModoExportacion = enumCDPexportacion.Entregas And cdp.Exporta <> "SI")) _
+        '                                               And (cdp.Vendedor.HasValue And cdp.Corredor.HasValue And cdp.Entregador.HasValue) _
+        '                                               And (
+        '                                                     (idVendedor = -1 And idIntermediario = -1 And idRemComercial = -1) _
+        '                                                     Or
+        '                                                     (AplicarANDuORalFiltro = FiltroANDOR.FiltroAND _
+        '                                                       And (idVendedor = -1 Or cdp.Vendedor = idVendedor) _
+        '                                                       And (idIntermediario = -1 Or cdp.CuentaOrden1 = idIntermediario) _
+        '                                                       And (idRemComercial = -1 Or cdp.CuentaOrden2 = idRemComercial)
+        '                                                     ) _
+        '                                                     Or
+        '                                                     (AplicarANDuORalFiltro = FiltroANDOR.FiltroOR And
+        '                                                       (cdp.Vendedor = idVendedor Or cdp.CuentaOrden1 = idIntermediario Or cdp.CuentaOrden2 = idRemComercial)
+        '                                                      )
+        '                                                   ) _
+        '                                               And (idCorredor = -1 Or cdp.Corredor = idCorredor Or cdp.Corredor2 = idCorredor) _
+        '                                               And (idDestinatario = -1 Or cdp.Entregador = idDestinatario) _
+        '                                               And (idArticulo = -1 Or cdp.IdArticulo = idArticulo) _
+        '                                               And (idDestino = -1 Or cdp.Destino = idDestino) _
+        '                                               And (puntoventa = -1 Or cdp.PuntoVenta = puntoventa) _
+        '                                               And (idClienteAuxiliar = -1 Or cdp.IdClienteAuxiliar = idClienteAuxiliar) _
+        '                                               And (QueContenga2 = "" Or cdp.NumeroCartaEnTextoParaBusqueda.Contains(QueContenga2))
+        '                                                   Order By cdp.FechaModificacion Descending
+        '                                                   Select New CartasConCalada With {
+        '                                                    .IdCartaDePorte = cdp.IdCartaDePorte,
+        '                                                    .NumeroCartaDePorte = cdp.NumeroCartaDePorte,
+        '                                                    .NumeroCartaDePorteFormateada = "000" & SqlFunctions.StringConvert(cdp.NumeroCartaDePorte).Substring(1, 1) & "-" & SqlFunctions.StringConvert(cdp.NumeroCartaDePorte).Substring(2, 8),
+        '                                                    .NumeroSubfijo = cdp.NumeroSubfijo,
+        '                                                    .SubnumeroVagon = cdp.SubnumeroVagon,
+        '                                                    .FechaArribo = If(cdp.FechaArribo, DateTime.MinValue),
+        '                                                    .FechaModificacion = If(cdp.FechaModificacion, DateTime.MinValue),
+        '                                                    .FechaDescarga = If(cdp.FechaDescarga, DateTime.MinValue),
+        '                                                    .FechaVencimiento = If(cdp.FechaVencimiento, DateTime.MinValue),
+        '                                                    .Observaciones = cdp.Observaciones,
+        '                                                    .CTG = If(cdp.CTG, 0), _
+        '_
+        '                                                   .NetoProc = cdp.NetoProc,
+        '                                                   .NetoFinal = cdp.NetoFinal,
+        '                                                   .TaraFinal = cdp.TaraFinal,
+        '                                                   .BrutoFinal = cdp.BrutoFinal,
+        '                                                   .NetoPto = cdp.NetoPto,
+        '                                                   .TaraPto = cdp.TaraPto,
+        '                                                   .BrutoPto = cdp.BrutoPto,
+        '                                                   .Humedad = cdp.Humedad,
+        '                                                   .HumedadDesnormalizada = cdp.HumedadDesnormalizada,
+        '                                                   .Merma = cdp.Merma,
+        '                                                   .CalidadDesc = If(cal.Descripcion, ""),
+        '                                                    .Tarifa = cdp.Tarifa,
+        '                                                    .KmArecorrer = cdp.KmARecorrer, _
+        '_
+        '                                                    .TitularDesc = clitit.RazonSocial,
+        '                                                    .IntermediarioDesc = cliint.RazonSocial,
+        '                                                    .RComercialDesc = clircom.RazonSocial,
+        '                                                    .CorredorDesc = corr.Nombre,
+        '                                                    .DestinatarioDesc = clidest.RazonSocial,
+        '                                                    .TitularCUIT = clitit.Cuit.Replace("-", ""),
+        '                                                    .IntermediarioCUIT = cliint.Cuit.Replace("-", ""),
+        '                                                    .RComercialCUIT = clircom.Cuit.Replace("-", ""),
+        '                                                    .CorredorCUIT = corr.Cuit.Replace("-", ""),
+        '                                                    .DestinatarioCUIT = clidest.Cuit.Replace("-", ""), _
+        '_
+        '                                                    .Producto = art.Descripcion,
+        '                                                    .ProductoSagpya = art.AuxiliarString6,
+        '                                                    .IdProcedencia = cdp.Procedencia,
+        '                                                    .ProcedenciaDesc = loc.Nombre,
+        '                                                    .DestinoDesc = dest.Descripcion,
+        '                                                    .UsuarioIngreso = "",
+        '                                                   .FechaDeCarga = If(cdp.FechaDeCarga, cdp.FechaArribo),
+        '                                                   .NobleExtranos = cdp.NobleExtranos,
+        '                                                   .NobleNegros = cdp.NobleNegros,
+        '                                                   .NobleQuebrados = cdp.NobleQuebrados,
+        '                                                   .NobleDaniados = cdp.NobleDaniados,
+        '                                                   .NobleChamico = cdp.NobleChamico,
+        '                                                   .NobleChamico2 = cdp.NobleChamico2,
+        '                                                   .NobleRevolcado = cdp.NobleRevolcado,
+        '                                                   .NobleObjetables = cdp.NobleObjetables,
+        '                                                   .NobleAmohosados = cdp.NobleAmohosados,
+        '                                                   .NobleHectolitrico = cdp.NobleObjetables,
+        '                                                   .NobleCarbon = cdp.NobleHectolitrico,
+        '                                                    .NoblePanzaBlanca = cdp.NoblePanzaBlanca,
+        '                                                   .NoblePicados = cdp.NoblePicados,
+        '                                                   .NobleMGrasa = cdp.NobleMGrasa,
+        '                                                   .NobleAcidezGrasa = cdp.NobleAcidezGrasa,
+        '                                                   .NobleVerdes = cdp.NobleVerdes,
+        '                                                   .NobleGrado = cdp.NobleGrado,
+        '                                                   .NobleConforme = cdp.NobleConforme,
+        '                                                   .NobleACamara = (cdp.NobleACamara = "SI"),
+        '                                                   .CalidadPuntaSombreada = If(cdp.CalidadPuntaSombreada, 0),
+        '                                                   .CalidadGranosQuemados = If(cdp.CalidadGranosQuemados, 0),
+        '                                                   .CalidadGranosQuemadosBonifRebaja = 0,
+        '                                                   .CalidadTierra = If(cdp.CalidadTierra, 0),
+        '                                                   .CalidadTierraBonifRebaja = If(cdp.CalidadPuntaSombreada, 0),
+        '                                                   .CalidadMermaChamico = If(cdp.CalidadMermaChamico, 0),
+        '                                                   .CalidadMermaChamicoBonifRebaja = 0,
+        '                                                   .CalidadMermaZarandeo = If(cdp.CalidadMermaZarandeo, 0),
+        '                                                   .CalidadMermaZarandeoBonifRebaja = 0, _
+        '_
+        '                                                   .ProcedenciaLocalidadONCCA_SAGPYA = loc.CodigoONCAA,
+        '                                                   .ProcedenciaPartidoONCCA = part.CodigoONCCA,
+        '                                                 .ProcedenciaLocalidadAFIP = loc.CodigoAfip,
+        '                                                   .DestinoLocalidadAFIP = locdes.CodigoAfip, _
+        '_
+        '                                                    .Patente = cdp.Patente,
+        '                                                   .Acoplado = cdp.Acoplado,
+        '                                                    .DestinoCUIT = dest.CUIT.Replace("-", ""),
+        '                                                   .DestinoCodigoYPF = dest.CodigoYPF,
+        '                                                   .DestinoCodigoSAGPYA = dest.CodigoONCAA,
+        '                                                   .TransportistaCUIT = tr.Cuit.Replace("-", ""),
+        '                                                   .ChoferCUIT = chf.Cuil.Replace("-", ""),
+        '                                                   .TransportistaDesc = tr.RazonSocial,
+        '                                                   .ChoferDesc = chf.Nombre,
+        '                                                   .EspecieONCCA = art.AuxiliarString6,
+        '                                                   .Cosecha = cdp.Cosecha.Replace("/", "-20"),
+        '                                                   .Cosecha2 = cdp.Cosecha.Replace("20", "").Replace("/", ""),
+        '                                                   .Establecimiento = estab.Descripcion, _
+        '_
+        '                                                   .IdFacturaImputada = If(cdp.IdFacturaImputada, -1),
+        '                                                   .IdClienteAFacturarle = If(cdp.IdClienteAFacturarle, -1),
+        '                                                   .IdDetalleFacturaImputada = If(cdp.IdDetalleFactura, -1),
+        '                                                   .PrecioUnitarioTotal = If(detfac.PrecioUnitarioTotal, 0),
+        '                                                   .ClienteFacturado = clifac.RazonSocial,
+        '                                                   .PathImagen = cdp.PathImagen, _
+        '_
+        '                                                       .CEE_CAU = cdp.CEE _
+        '                                               , .Contrato = cdp.Contrato _
+        '                                             , .PuntoVenta = If(cdp.PuntoVenta, 0) _
+        '                                         , .NRecibo = cdp.NRecibo,
+        '                                            .CalidadGranosDanadosRebaja = 0.01,
+        '                                                    .CalidadGranosExtranosRebaja = 0.01,
+        '                                                .DestinoCodigoPostal = dest.CodigoPostal _
+        '                                               , .ProcedenciaCodigoPostal = loc.CodigoPostal
+        '                                                  }) 'cosecha2 queda 1415, cosecha queda 2014/2015, original es 2014/15
 
 
 
@@ -14861,7 +14861,7 @@ Public Class CartaDePorteManager
                     Select p).SingleOrDefault
 
 
-        Dim clis = UserDatosExtendidosManager.TraerClientesRelacionadoslDelUsuario(usuario, scbdlmaster)
+        Dim clis = UserDatosExtendidosManager.TraerClientesRelacionadoslDelUsuario(usuario, scbdlmaster).Replace("-", "")
         Dim cc = iisNull(clis, "").Split("|")
 
 
@@ -15300,7 +15300,7 @@ Public Class CartaDePorteManager
 
 
 
-    Public Shared Function BajarListadoDeCartaPorte_CerealNet_DLL_v2_00(usuario As String, password As String, cuit As String, fechadesde As DateTime, fechahasta As DateTime, SC As String, DirApp As String, ConexBDLmaster As String) As CerealNet.WSCartasDePorte.respuestaEntrega_v2_00
+    Public Shared Function BajarListadoDeCartaPorte_CerealNet_DLL_v2_00(usuario As String, password As String, cuit As String, fechadesde As DateTime, fechahasta As DateTime, estado As enumCDPestado, SC As String, DirApp As String, ConexBDLmaster As String) As CerealNet.WSCartasDePorte.respuestaEntrega_v2_00
 
         'var scEF = ProntoMVC.Data.Models.Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC));
         '      DemoProntoEntities db = new DemoProntoEntities(scEF);
@@ -15355,7 +15355,7 @@ Public Class CartaDePorteManager
 
 
             Else
-                idcliente = 13648
+                idcliente = 13648 'fyo si está el depurador
             End If
 
 
@@ -15369,7 +15369,7 @@ Public Class CartaDePorteManager
 
 
 
-            Dim dbcartas = ListadoSegunCliente(SC, idcliente, fechadesde, fechahasta, enumCDPestado.DescargasMasFacturadas)
+            Dim dbcartas = ListadoSegunCliente(SC, idcliente, fechadesde, fechahasta, estado)
             'Dim dbcartas = ListadoSegunCliente(SC, idcliente, fechadesde, fechahasta, enumCDPestado.Posicion)
 
             Dim cartas As New CerealNet.WSCartasDePorte.respuestaEntrega_v2_00
@@ -15410,7 +15410,7 @@ Public Class CartaDePorteManager
 
 
 
-                    cp.cartaporte = dbc.NumeroCartaDePorte
+                    cp.cartaporte = If(dbc.NumeroCartaDePorte, 0)
                     cp.brutodest = dbc.BrutoFinal
 
 
@@ -15544,18 +15544,18 @@ Public Class CartaDePorteManager
                     cp.vagon = dbc.SubnumeroVagon
 
 
-                    cp.CEE = dbc.CEE
-                    cp.fechaEmisionCarga = dbc.FechaDeCarga
-                    cp.fechavencimiento = dbc.FechaVencimiento
-                    cp.CTG = dbc.CTG
+                    cp.CEE = Val(dbc.CEE)
+                    cp.fechaEmisionCarga = If(dbc.FechaDeCarga, DateTime.MinValue)
+                    cp.fechavencimiento = If(dbc.FechaVencimiento, DateTime.MinValue)
+                    cp.CTG = If(dbc.CTG, DateTime.MinValue)
                     cp.CupoTurno = dbc.Turno
-                    cp.HoraArribo = dbc.FechaArribo
-                    cp.brutoproc = dbc.BrutoPto
-                    cp.taraproc = dbc.TaraPto
-                    cp.Humedad = dbc.Humedad
-                    cp.MermaHumedad = dbc.HumedadDesnormalizada
-                    cp.OtrasMermas = dbc.Merma
-                    cp.NetoFinal = dbc.NetoFinal
+                    cp.HoraArribo = If(dbc.FechaArribo, 0)
+                    cp.brutoproc = If(dbc.BrutoPto, 0)
+                    cp.taraproc = If(dbc.TaraPto, 0)
+                    cp.Humedad = If(dbc.Humedad, 0)
+                    cp.MermaHumedad = If(dbc.HumedadDesnormalizada, 0)
+                    cp.OtrasMermas = If(dbc.Merma, 0)
+                    cp.NetoFinal = If(dbc.NetoFinal, 0)
                     cp.ClienteObserv = dbc.ClienteAuxiliarDesc
                     cp.CorredorObs = dbc.CorredorDesc
                     cp.cuitchofer = dbc.ChoferCUIT
@@ -15563,129 +15563,11 @@ Public Class CartaDePorteManager
                     cp.cuittransportista = dbc.TransportistaCUIT
                     cp.transportista = dbc.TransportistaDesc
                     cp.acoplado = dbc.Acoplado
-                    cp.kmarecorrer = dbc.KmARecorrer
-                    cp.tarifa = dbc.Tarifa
+                    cp.kmarecorrer = If(dbc.KmARecorrer, 0)
+                    cp.tarifa = If(dbc.Tarifa, 0)
                     cp.Establecimiento = dbc.EstablecimientoDesc
-                    cp.IdPosicionEstado = dbc.Situacion
-                    cp.PosicionEstado = dbc.Situacion
-
-
-
-
-
-
-
-                    '5.       De 1000 descargas que pude importar de Williams sólo 451 tienen rubros de calidad. 
-                    '            1 - Todos estos registros informan el mismo código de rubro. Error o coincidencia?
-                    '            2 - Ese codigo  es un número, mientras que CerealNet informa un código de entre 2 y 3 letras. Adjunto tabla con Rubros de Calidad actuales
-                    '6.       Los códigos de producto que informa no se corresponden con los de CerealNet. Ej.: CerealNet informa para maíz el número 19 y Williams el 501. Adjunto tabla con Codigos de Productos
-
-                    'Descripcion_RubroCalidad
-                    '                    Descripcion_GradoCerealNet
-                    '                    Descripcion_Producto
-                    '                    Codigo_CerealNet
-                    '                    HUMEDAD
-                    '                    HD
-                    '                    TRIGO
-                    '15
-                    'REVOLCADO EN TIERRA
-                    'REV
-                    '                    MAÍZ
-                    '19
-                    'PTA.SOMB.POR TIERRA
-                    'TIE
-                    '                    SORGO
-                    '22
-                    'PTA.NEGRA POR CARBON
-                    'p/ n 
-                    'CEBADA FORRAJERA
-                    '11
-                    'GRANOS MANCHADOS
-                    'M/ C 
-                    'TRIGO CANDEAL
-                    '14
-                    'INSECTOS VIVOS
-                    'INS
-                    '                    GIRASOL
-                    '2
-                    'PESO HECTOLITRICO
-                    'PH
-                    '                    SOJA
-                    '23
-                    'GNOS.ARD.Y DAÑ.POR CALOR
-                    'ADC
-                    '                    ACEITE DE SOJA
-                    '50
-                    'GRANOS PZA.BCA.
-                    'PBA
-                    'MAIZ FLINT
-                    '26
-                    'GRANOS PICADOS
-                    'Pic
-                    '                    CEBADA CERVECERA
-                    '17
-                    'CHAMICOS
-                    '                    CHA
-                    '                    HARINA DE SOJA
-                    '41
-                    'SEM.TREBOL OLOR
-                    'Str()
-                    '                    SOJA
-                    '414
-                    'Color
-                    '                    COL
-                    '                    GRADO
-                    '                    GRA
-                    '                    CUERPOS EXTRAÑOS
-                    'C.E
-                    '                    HUMEDAD CAMARA
-                    'GMA
-                    '                    GRANOS DAÑADOS
-                    'DAN
-                    '                    OLORES OBJETABLES
-                    'OLR
-                    '                    GRANOS AMOHOSADOS
-                    'MOH
-                    '                    MATERIA GRASA
-                    'MG
-                    '                    ACIDEZ
-                    '                    AMG
-                    '                    GRANOS QUEBRADOS
-                    'QUB
-                    '                    TIPO
-                    '                    TIP
-                    '                    DESCASCARADO y ROTO
-                    'd/ R 
-                    'GRANOS NEGROS
-                    'GN
-                    '                    CONTENIDO PROTEICO
-                    'C/ p 
-                    'TOTAL DAÑADO
-                    'TDÑ
-                    '                    GRANOS CON CARBON
-                    'GC
-                    '                    GRANOS QUEMADOS O DE AVERÍA
-                    'q/ A 
-                    'AVERIA
-                    '                    AVE
-                    '                    ESCLEROTOS
-                    '                    ESC
-                    '                    TEMPERATURA
-                    '                    TMP
-                    '                    GRANOS VERDES
-                    'GV
-                    '                    FONDO
-                    '                    FDO
-                    '                    OTRO TIPO
-                    'OT
-
-
-
-
-
-
-
-
+                    cp.IdPosicionEstado = If(dbc.Situacion, 0)
+                    cp.PosicionEstado = ExcelImportadorManager.Situaciones(If(dbc.Situacion, 0))
 
 
 

@@ -841,6 +841,104 @@ namespace ProntoMVC.Tests
 
 
 
+
+
+
+
+        [TestMethod]
+        public void ServicioWebDescargas_36705_y_36749__incluir_posicion_para_bld_y_ctg_para_fyo()
+        {
+
+            ////Trust all certificates
+            //System.Net.ServicePointManager.ServerCertificateValidationCallback = delegate(object sender, X509Certificate certificate, X509Chain chain, SslPolicyErrors sslPolicyErrors) { return true; };
+
+            //var cerealnet = new WS_CartasDePorteClient();
+
+            string usuario = "Mariano"; //"fyo";
+            string clave = "pirulo!"; // "76075";
+            string cuit = "30703605105";
+
+            // var respEntrega = cerealnet.obtenerDescargas(usuario, clave, cuit, "2016-10-01", "2016-10-25");
+            var respEntrega = CartaDePorteManager.BajarListadoDeCartaPorte_CerealNet_DLL_v2_00(usuario, clave, cuit,
+                                            new DateTime(2016, 9, 1),
+                                            new DateTime(2017, 1, 1), CartaDePorteManager.enumCDPestado.Posicion,
+                                            SC, DirApp, bdlmasterappconfig);
+
+
+            foreach (var desc in respEntrega.descargas)
+            {
+                Console.WriteLine(string.Format("CP {0}", desc.cartaporte));
+
+                if (desc.listaAnalisis != null && desc.listaAnalisis.Length > 0)
+                {
+                    foreach (CerealNet.WSCartasDePorte.analisis anal in desc.listaAnalisis)
+                    {
+                        Console.WriteLine(string.Format("\tRubro: {0} - %Analisis: {1} - %Merma: {2} - KgsMerma: {3}", anal.rubro.Trim(), anal.porcentajeAnalisis, anal.porcentajeMerma, anal.kilosMermas));
+                    }
+                }
+            }
+            //Console.ReadKey();
+        }
+
+
+
+
+
+
+
+        [TestMethod]
+        public void CampoEditableDeClientesRelacionadosAlUsuarioParaTirarInforme_28320()
+        {
+
+            string sErrores = "", sTitulo = "";
+            LinqCartasPorteDataContext db = null;
+            DemoProntoEntities db2 = null;
+
+
+            string usuario = "Mariano"; //"BLD25MAYO"
+
+
+            UserDatosExtendidosManager.UpdateClientesRelacionadoslDelUsuario(usuario, bdlmasterappconfig, "20-12345678-1|20-20100767-5");
+
+
+
+
+
+
+
+            var clientes = CartaDePorteManager.TraerCUITClientesSegunUsuario(usuario, SC, bdlmasterappconfig).Where(x => x != "").ToList();
+
+            //String aaa = ParametroManager.TraerValorParametro2(SC, "ClienteBLDcorredorCUIT").NullSafeToString() ?? "";
+            //var sss = aaa.Split('|').ToList();
+
+
+            var q = CartaDePorteManager.CartasLINQlocalSimplificadoTipadoConCalada3(SC,
+                     "", "", "", 1, 99999,
+                      CartaDePorteManager.enumCDPestado.Todas, "", -1, -1,
+                     -1, -1,
+                     -1, -1, -1, -1, CartaDePorteManager.FiltroANDOR.FiltroOR, "Ambas",
+                      new DateTime(2013, 1, 1),
+                      new DateTime(2014, 1, 1),
+                      -1, ref sTitulo, "Ambas", false, "", ref db2, "", -1, -1, 0, "", "Ambas");
+
+
+            var q2 = q.Where(x => clientes.Contains(x.TitularCUIT) || clientes.Contains(x.IntermediarioCUIT) || clientes.Contains(x.RComercialCUIT))
+                                    .ToList();
+
+
+        }
+
+
+
+
+
+
+
+
+
+
+
+
         [TestMethod]
         public void syngenta_webservice_30920()
         {
@@ -1098,49 +1196,6 @@ La interface será procesa por Syngenta y si la misma no puede ser procesada cor
 
 
         [TestMethod]
-        public void CampoEditableDeClientesRelacionadosAlUsuarioParaTirarInforme_28320()
-        {
-
-            string sErrores = "", sTitulo = "";
-            LinqCartasPorteDataContext db = null;
-            DemoProntoEntities db2 = null;
-
-
-            string usuario = "Mariano"; //"BLD25MAYO"
-
-
-            UserDatosExtendidosManager.UpdateClientesRelacionadoslDelUsuario(usuario, bdlmasterappconfig, "20-12345678-1|20-12345678-1");
-
-
-            var clientes = CartaDePorteManager.TraerCUITClientesSegunUsuario(usuario, SC, bdlmasterappconfig).Where(x => x != "");
-            String aaa = ParametroManager.TraerValorParametro2(SC, "ClienteBLDcorredorCUIT").NullSafeToString() ?? "";
-            var sss = aaa.Split('|').ToList();
-
-
-            var q = CartaDePorteManager.CartasLINQlocalSimplificadoTipadoConCalada3(SC,
-                     "", "", "", 1, 10,
-                      CartaDePorteManager.enumCDPestado.Todas, "", -1, -1,
-                     -1, -1,
-                     -1, -1, -1, -1, CartaDePorteManager.FiltroANDOR.FiltroOR, "Ambas",
-                      new DateTime(2013, 1, 1),
-                      new DateTime(2014, 1, 1),
-                      -1, ref sTitulo, "Ambas", false, "", ref db2, "", -1, -1, 0, "", "Ambas")
-
-                        .Where(x => clientes.Contains(x.TitularCUIT) || clientes.Contains(x.IntermediarioCUIT) || clientes.Contains(x.RComercialCUIT))
-                        .ToList();
-        }
-
-
-
-
-
-
-
-
-
-
-
-        [TestMethod]
         public void SincroBragadense_36755()
         {
 
@@ -1211,45 +1266,6 @@ La interface será procesa por Syngenta y si la misma no puede ser procesada cor
 
 
 
-
-
-
-
-
-        [TestMethod]
-        public void ServicioWebDescargas_36705_y_36749__incluir_posicion_para_bld_y_ctg_para_fyo()
-        {
-
-            ////Trust all certificates
-            //System.Net.ServicePointManager.ServerCertificateValidationCallback = delegate(object sender, X509Certificate certificate, X509Chain chain, SslPolicyErrors sslPolicyErrors) { return true; };
-
-            //var cerealnet = new WS_CartasDePorteClient();
-
-            string usuario = "Mariano"; //"fyo";
-            string clave = "pirulo!"; // "76075";
-            string cuit = "30703605105";
-
-            // var respEntrega = cerealnet.obtenerDescargas(usuario, clave, cuit, "2016-10-01", "2016-10-25");
-            var respEntrega = CartaDePorteManager.BajarListadoDeCartaPorte_CerealNet_DLL_v2_00(usuario, clave, cuit,
-                                            new DateTime(2016, 9, 1),
-                                            new DateTime(2017, 1, 1),
-                                            SC, DirApp, bdlmasterappconfig);
-
-
-            foreach (var desc in respEntrega.descargas)
-            {
-                Console.WriteLine(string.Format("CP {0}", desc.cartaporte));
-
-                if (desc.listaAnalisis != null && desc.listaAnalisis.Length > 0)
-                {
-                    foreach (CerealNet.WSCartasDePorte.analisis anal in desc.listaAnalisis)
-                    {
-                        Console.WriteLine(string.Format("\tRubro: {0} - %Analisis: {1} - %Merma: {2} - KgsMerma: {3}", anal.rubro.Trim(), anal.porcentajeAnalisis, anal.porcentajeMerma, anal.kilosMermas));
-                    }
-                }
-            }
-            //Console.ReadKey();
-        }
 
 
 
