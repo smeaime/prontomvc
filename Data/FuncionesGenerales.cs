@@ -2737,7 +2737,7 @@ namespace CerealNet.WSCartasDePorte
         //public bool brutodestSpecified;
         public string CPoriginal;
         public string calidad;
-        public int cartaporte;
+        public long cartaporte;
         public int codmerca;
         //public bool codmercaSpecified;
         public int codonccalocalidadpuerto;
@@ -2793,7 +2793,7 @@ namespace CerealNet.WSCartasDePorte
 
 
         // version 2
-        public int CEE;
+        public long CEE;
         public System.DateTime fechaEmisionCarga;
         public System.DateTime fechavencimiento;
         public int CTG;
