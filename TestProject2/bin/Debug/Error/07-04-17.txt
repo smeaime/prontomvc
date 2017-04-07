@@ -1,0 +1,36 @@
+
+Log Entry : 
+04/07/2017 11:53:50
+Error in: . Error Message:System.InvalidCastException
+La conversión de la cadena "" en el tipo 'Long' no es válida.
+   en Microsoft.VisualBasic.CompilerServices.Conversions.ToLong(String Value)
+   en CartaDePorteManager.BajarListadoDeCartaPorte_CerealNet_DLL_v2_00(String usuario, String password, String cuit, DateTime fechadesde, DateTime fechahasta, enumCDPestado estado, String SC, String DirApp, String ConexBDLmaster) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 15547
+Microsoft.VisualBasic
+__________________________
+
+Log Entry : 
+04/07/2017 11:56:28
+Error in: . Error Message:System.InvalidCastException
+La conversión de la cadena "" en el tipo 'Long' no es válida.
+   en Microsoft.VisualBasic.CompilerServices.Conversions.ToLong(String Value)
+   en CartaDePorteManager.BajarListadoDeCartaPorte_CerealNet_DLL_v2_00(String usuario, String password, String cuit, DateTime fechadesde, DateTime fechahasta, enumCDPestado estado, String SC, String DirApp, String ConexBDLmaster) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 15547
+Microsoft.VisualBasic
+__________________________
+
+Log Entry : 
+04/07/2017 11:57:14
+Error in: . Error Message:System.InvalidCastException
+La conversión de la cadena "" en el tipo 'Long' no es válida.
+   en Microsoft.VisualBasic.CompilerServices.Conversions.ToLong(String Value)
+   en CartaDePorteManager.BajarListadoDeCartaPorte_CerealNet_DLL_v2_00(String usuario, String password, String cuit, DateTime fechadesde, DateTime fechahasta, enumCDPestado estado, String SC, String DirApp, String ConexBDLmaster) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 15547
+Microsoft.VisualBasic
+__________________________
+
+Log Entry : 
+04/07/2017 11:58:47
+Error in: . Error Message:System.InvalidCastException
+La conversión de la cadena "" en el tipo 'Long' no es válida.
+   en Microsoft.VisualBasic.CompilerServices.Conversions.ToLong(String Value)
+   en CartaDePorteManager.BajarListadoDeCartaPorte_CerealNet_DLL_v2_00(String usuario, String password, String cuit, DateTime fechadesde, DateTime fechahasta, enumCDPestado estado, String SC, String DirApp, String ConexBDLmaster) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 15547
+Microsoft.VisualBasic
+__________________________
