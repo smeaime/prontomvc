@@ -160,7 +160,7 @@ Public Class wsCartaPorteExterno
                 scs = scWilliamsRelease
             End If
 
-            Return CartaDePorteManager.BajarListadoDeCartaPorte_CerealNet_DLL_v2_00(usuario, password, cuit, fechadesde, fechahasta, Encriptar(scs), AplicacionConImagenes, Encriptar(scConexBDLmaster))
+            Return CartaDePorteManager.BajarListadoDeCartaPorte_CerealNet_DLL_v2_00(usuario, password, cuit, fechadesde, fechahasta, CartaDePorteManager.enumCDPestado.DescargasMasFacturadas, Encriptar(scs), AplicacionConImagenes, Encriptar(scConexBDLmaster))
         Catch ex As Exception
 
             ErrHandler2.WriteError(ex)
@@ -187,7 +187,7 @@ Public Class wsCartaPorteExterno
                 scs = scWilliamsRelease
             End If
 
-            Return CartaDePorteManager.BajarListadoDeCartaPorte_CerealNet_DLL_v2_00(usuario, password, cuit, fechadesde, fechahasta, Encriptar(scs), AplicacionConImagenes, Encriptar(scConexBDLmaster))
+            Return CartaDePorteManager.BajarListadoDeCartaPorte_CerealNet_DLL_v2_00(usuario, password, cuit, fechadesde, fechahasta, CartaDePorteManager.enumCDPestado.Posicion, Encriptar(scs), AplicacionConImagenes, Encriptar(scConexBDLmaster))
         Catch ex As Exception
 
             ErrHandler2.WriteError(ex)

@@ -4,27 +4,27 @@
 
 
 
-	<siteMapNode title="Inicio"  description="Home" roles="*">
+  <siteMapNode title="Inicio"  description="Home" roles="*">
 
 
 
 
 
 
-		<!--<siteMapNode url="" title="ADMINISTRADOR" description="" roles="Administrador,Demo,*">
+    <!--<siteMapNode url="" title="ADMINISTRADOR" description="" roles="Administrador,Demo,*">
       <siteMapNode url="Admin/ListadoUsuarios.aspx" title="Listado de usuarios"  description="Listado de usuarios" roles="Administrador,Demo,*" />
       <siteMapNode url="Admin/AgregarUsuarios.aspx" title="Agregar usuarios"  description="Agregar usuarios" roles="Administrador,Demo,*" />
       <siteMapNode url="Admin/AsignarEmpresa.aspx" title="Asignar a empresas"  description="Asignar a empresas" roles="Administrador,Demo,*" />
     </siteMapNode>-->
 
-		<!--//////////////////////////////////////////////////////////////////////
+    <!--//////////////////////////////////////////////////////////////////////
       //////////////////////////////////////////////////////////////////////
       //////////////////////////////////////////////////////////////////////
                 RESPETAR EL ORDEN DEL TREEVIEW DEL PRONTO ORIGINAL!!!!
       //////////////////////////////////////////////////////////////////////
       //////////////////////////////////////////////////////////////////////-->
 
-		<!--<siteMapNode url="" title="Tablas"  description="Tablas" roles="Usuario">
+    <!--<siteMapNode url="" title="Tablas"  description="Tablas" roles="Usuario">
         
         <siteMapNode url="ProntoWeb/Articulos.aspx" title="Articulos"  description="Articulos" roles="Usuario" />
         <siteMapNode url="ProntoWeb/Tablas.aspx?Tabla=Localidades" title="Localidades"  description="Localidades" roles="Usuario" />
@@ -35,7 +35,7 @@
       </siteMapNode>-->
 
 
-		<!--//////////////////////////////////////////////////////////////////////
+    <!--//////////////////////////////////////////////////////////////////////
       //////////////////////////////////////////////////////////////////////
       //////////////////////////////////////////////////////////////////////
         SOLUCION!!!!!!SOLUCION!!!!!!SOLUCION!!!!!!SOLUCION!!!!!!SOLUCION!!!!!!SOLUCION!!!!!!
@@ -78,11 +78,11 @@
       //////////////////////////////////////////////////////////////////////-->
 
 
-		<!--<siteMapNode url="" title="FIRMAS"  description="Documentos a Firmar" roles="Administrador,Firmas">
+    <!--<siteMapNode url="" title="FIRMAS"  description="Documentos a Firmar" roles="Administrador,Firmas">
         <siteMapNode url="ProntoWeb/Firmas/DocumentosAFirmar.aspx" title="Documentos a Firmar"  description="Documentos a Firmar" roles="Administrador,Firmas" />
       </siteMapNode>-->
 
-		<!--<siteMapNode url="" title="CUENTA CORRIENTE"  description="Consulta de Cuenta Corriente" roles="Cliente,Administrador,Firmas">
+    <!--<siteMapNode url="" title="CUENTA CORRIENTE"  description="Consulta de Cuenta Corriente" roles="Cliente,Administrador,Firmas">
         <siteMapNode url="Comprobantes.aspx" title="Comprobantes"  description="Todos" roles="Cliente,Firmas" />
         <siteMapNode url="OrdenesPagoEnCaja.aspx" title="Ordenes de Pago en Caja"  description="Todos" roles="Cliente,Firmas" />
         <siteMapNode url="NotasDePedido.aspx" title="Pedidos"  description="Todos" roles="Cliente,Firmas" />
@@ -92,36 +92,36 @@
       <siteMapNode url="ProntoWeb/Consultas.aspx" title="SSRS Consultas"  description="SSRS Consultas" roles="Administrador" />
     </siteMapNode>-->
 
-		<!--<siteMapNode url="" title="FAVORITOS"  description="" roles="Usuario,Administrador,Compras" />-->
-		<siteMapNode url="" title="PRODUCTOS"  description="" roles="Usuario,Administrador,Compras,WilliamsAdmin,WilliamsComercial,WilliamsFacturacion">
-			<siteMapNode url="ProntoWeb/Articulos.aspx" title="Productos"  description="Artículos" roles="Usuario,Administrador,Comercial,WilliamsAdmin,WilliamsComercial,WilliamsFacturacion" />
+    <!--<siteMapNode url="" title="FAVORITOS"  description="" roles="Usuario,Administrador,Compras" />-->
+    <siteMapNode url="" title="PRODUCTOS"  description="" roles="Usuario,Administrador,Compras,WilliamsAdmin,WilliamsComercial,WilliamsFacturacion">
+      <siteMapNode url="ProntoWeb/Articulos.aspx" title="Productos"  description="Artículos" roles="Usuario,Administrador,Comercial,WilliamsAdmin,WilliamsComercial,WilliamsFacturacion" />
 
-		</siteMapNode>
-		<siteMapNode url="" title="GENERAL"  description="Artículos" roles="Usuario,Administrador,Comercial,Demo,WilliamsAdmin,WilliamsComercial,WilliamsFacturacion,WilliamsFacturacion">
-			<siteMapNode url="CambiaPassword.aspx?tipo=Confirmados" title="Cambiar contraseña"  description="Cambiar contraseña" roles="Administrador,Comercial,WilliamsAdmin,WilliamsComercial,WilliamsFacturacion" />
+    </siteMapNode>
+    <siteMapNode url="" title="GENERAL"  description="Artículos" roles="Usuario,Administrador,Comercial,Demo,WilliamsAdmin,WilliamsComercial,WilliamsFacturacion,WilliamsFacturacion">
+      <siteMapNode url="CambiaPassword.aspx?tipo=Confirmados" title="Cambiar contraseña"  description="Cambiar contraseña" roles="Administrador,Comercial,WilliamsAdmin,WilliamsComercial,WilliamsFacturacion" />
 
 
-			<siteMapNode url="ProntoWeb/Choferes.aspx?tipo=Confirmados" title="Choferes"  description="Choferes" roles="Administrador,Comercial,WilliamsAdmin,WilliamsComercial,WilliamsFacturacion" />
-			<siteMapNode url="ProntoWeb/Cotizaciones.aspx" title="Cotizaciones"  description="Cotizaciones" roles="Administrador,Comercial,WilliamsAdmin,WilliamsComercial,WilliamsFacturacion" />
+      <siteMapNode url="ProntoWeb/Choferes.aspx?tipo=Confirmados" title="Choferes"  description="Choferes" roles="Administrador,Comercial,WilliamsAdmin,WilliamsComercial,WilliamsFacturacion" />
+      <siteMapNode url="ProntoWeb/Cotizaciones.aspx" title="Cotizaciones"  description="Cotizaciones" roles="Administrador,Comercial,WilliamsAdmin,WilliamsComercial,WilliamsFacturacion" />
       <siteMapNode url="ProntoWeb/Localidades.aspx?tipo=Confirmados" title="Localidades"  description="Localidades" roles="Administrador,Comercial,WilliamsAdmin,WilliamsComercial,WilliamsFacturacion" />
       <siteMapNode url="ProntoWeb/Partidos.aspx?tipo=Confirmados" title="Partidos"  description="Partidos" roles="Administrador,Comercial,WilliamsAdmin,WilliamsComercial,WilliamsFacturacion" />
       <siteMapNode url="ProntoWeb/Transportistas.aspx?tipo=Confirmados" title="Transportistas"  description="Transportistas" roles="Administrador,Comercial,WilliamsAdmin,WilliamsComercial,WilliamsFacturacion" />
-			<siteMapNode url="ProntoWeb/Calidades.aspx?tipo=Confirmados" title="Calidad"  description="Calidades" roles="Administrador,Comercial,WilliamsAdmin,WilliamsComercial,WilliamsFacturacion" />
-			<siteMapNode url="ProntoWeb/DiccionarioEquivalencias.aspx?tipo=Confirmados" title="Equivalencias"  description="Equivalencias" roles="Administrador,Comercial,WilliamsAdmin,WilliamsComercial,WilliamsFacturacion" />
+      <siteMapNode url="ProntoWeb/Calidades.aspx?tipo=Confirmados" title="Calidad"  description="Calidades" roles="Administrador,Comercial,WilliamsAdmin,WilliamsComercial,WilliamsFacturacion" />
+      <siteMapNode url="ProntoWeb/DiccionarioEquivalencias.aspx?tipo=Confirmados" title="Equivalencias"  description="Equivalencias" roles="Administrador,Comercial,WilliamsAdmin,WilliamsComercial,WilliamsFacturacion" />
 
-			<siteMapNode url="ProntoWeb/CDPHumedades.aspx?tipo=Confirmados" title="Humedad"  description="Humedad" roles="Administrador,Comercial,WilliamsAdmin,WilliamsComercial,WilliamsFacturacion" />
-			<siteMapNode url="ProntoWeb/CDPDestinos.aspx?tipo=Confirmados" title="Destinos"  description="Humedad" roles="Administrador,Comercial,WilliamsAdmin,WilliamsComercial,WilliamsFacturacion" />
-			<siteMapNode url="ProntoWeb/CDPEstablecimientos.aspx?tipo=Confirmados" title="Establecimientos"  description="Establecimientos" roles="Administrador,Comercial,WilliamsAdmin,WilliamsComercial,WilliamsFacturacion" />
+      <siteMapNode url="ProntoWeb/CDPHumedades.aspx?tipo=Confirmados" title="Humedad"  description="Humedad" roles="Administrador,Comercial,WilliamsAdmin,WilliamsComercial,WilliamsFacturacion" />
+      <siteMapNode url="ProntoWeb/CDPDestinos.aspx?tipo=Confirmados" title="Destinos"  description="Humedad" roles="Administrador,Comercial,WilliamsAdmin,WilliamsComercial,WilliamsFacturacion" />
+      <siteMapNode url="ProntoWeb/CDPEstablecimientos.aspx?tipo=Confirmados" title="Establecimientos"  description="Establecimientos" roles="Administrador,Comercial,WilliamsAdmin,WilliamsComercial,WilliamsFacturacion" />
 
-		</siteMapNode>
+    </siteMapNode>
 
-		<!--<siteMapNode url="" title="REQUERIM. DE MATERIAL"  description="Requerimientos de Materiales" roles="Usuario,Administrador,Compras">
+    <!--<siteMapNode url="" title="REQUERIM. DE MATERIAL"  description="Requerimientos de Materiales" roles="Usuario,Administrador,Compras">
 			<siteMapNode url="ProntoWeb/Requerimiento.aspx?Id=-1" title="Nuevo"  description="Nuevo" roles="Usuario,Administrador,Compras" />
 			<siteMapNode url="ProntoWeb/Requerimientos.aspx" title="Todas"  description="Todos" roles="Usuario,Administrador,Compras" />
 		</siteMapNode>-->
 
 
-		<!--<siteMapNode url="" title="CARTAS DE PORTE desarrollo"  description="Cartas de Porte" roles="Administrador,Comercial,Demo" >
+    <!--<siteMapNode url="" title="CARTAS DE PORTE desarrollo"  description="Cartas de Porte" roles="Administrador,Comercial,Demo" >
       <siteMapNode url="ProntoWeb/CartaDePorteInformes.aspx?tipo=Confirmados" title="CDPs Informes"  description="Informes" roles="Administrador,Comercial" />
     </siteMapNode>-->
 
@@ -132,12 +132,12 @@
 
 
 
-		<siteMapNode url="" title="COMERCIAL"  description="Ventas" roles="Usuario,Ventas,Administrador,Comercial,Demo,WilliamsAdmin,WilliamsComercial,WilliamsFacturacion">
-			<siteMapNode url="ProntoWeb/Clientes.aspx" title="Clientes"  description="Clientes" roles="Usuario,Administrador,Comercial,WilliamsAdmin,WilliamsComercial,WilliamsFacturacion" />
-			<siteMapNode url="ProntoWeb/Vendedores.aspx?tipo=Confirmados" title="Corredores"  description="Humedad" roles="Administrador,Comercial,WilliamsAdmin,WilliamsComercial,WilliamsFacturacion" />
-			<siteMapNode url="ProntoWeb/ListasPrecios.aspx?tipo=Confirmados" title="Listas de precios"  description="Humedad" roles="Administrador,Comercial,WilliamsAdmin,WilliamsFacturacion" />
-			<siteMapNode url="ProntoWeb/Facturas.aspx" title="Facturas"  description="Facturas" roles="Administrador,Ventas,WilliamsFacturacion" />
-			<siteMapNode url="ProntoWeb/NotaDeCreditos.aspx" title="Notas de crédito"  description="Notas de crédito" roles="Administrador,Ventas,WilliamsFacturacion" />
+    <siteMapNode url="" title="COMERCIAL"  description="Ventas" roles="Usuario,Ventas,Administrador,Comercial,Demo,WilliamsAdmin,WilliamsComercial,WilliamsFacturacion">
+      <siteMapNode url="ProntoWeb/Clientes.aspx" title="Clientes"  description="Clientes" roles="Usuario,Administrador,Comercial,WilliamsAdmin,WilliamsComercial,WilliamsFacturacion" />
+      <siteMapNode url="ProntoWeb/Vendedores.aspx?tipo=Confirmados" title="Corredores"  description="Humedad" roles="Administrador,Comercial,WilliamsAdmin,WilliamsComercial,WilliamsFacturacion" />
+      <siteMapNode url="ProntoWeb/ListasPrecios.aspx?tipo=Confirmados" title="Listas de precios"  description="Humedad" roles="Administrador,Comercial,WilliamsAdmin,WilliamsFacturacion" />
+      <siteMapNode url="ProntoWeb/Facturas.aspx" title="Facturas"  description="Facturas" roles="Administrador,Ventas,WilliamsFacturacion" />
+      <siteMapNode url="ProntoWeb/NotaDeCreditos.aspx" title="Notas de crédito"  description="Notas de crédito" roles="Administrador,Ventas,WilliamsFacturacion" />
       <siteMapNode url="ProntoWeb/Reporte.aspx?ReportName=Listado de Clientes incompletos" title="Clientes incompletos"  description="Informes" roles="Administrador,Comercial,WilliamsAdmin,WilliamsFacturacion,WilliamsComercial" />
       <siteMapNode url="ProntoWeb/Reporte.aspx?ReportName=MapaArgentinaProcedenciaCartasPorte" title="Mapa Comercial"  description="Informes" roles="Administrador,Comercial,WilliamsAdmin,WilliamsFacturacion,WilliamsComercial" />
 
@@ -146,44 +146,43 @@
 
     </siteMapNode>
 
-		<siteMapNode url="" title="ADMINISTRADOR" description="" roles="Administrador,WilliamsAdmin,AdministradorLimitado">
-			<siteMapNode url="Admin/AgregarUsuarios.aspx" title="Nuevo usuario"  description="Nuevo usuario" roles="Administrador,WilliamsAdmin,AdministradorLimitado" />
-			<siteMapNode url="Admin/EditarUsuario.aspx?opcion=UnoMismo" title="Mi usuario"  description="Nuevo usuario" roles="Administrador,WilliamsAdmin,AdministradorLimitado" />
-			<siteMapNode url="Admin/ListadoUsuarios.aspx" title="Usuarios"  description="Usuarios" roles="Administrador,WilliamsAdmin,AdministradorLimitado" />
-			<!--<siteMapNode url="Admin/AsignarEmpresa.aspx" title="Asignar a empresas"  description="Asignar a empresas" roles="Administrador,WilliamsAdmin" />-->
-			<siteMapNode url="ProntoWeb/Empleados.aspx" title="Empleados"  description="Empleados" roles="Administrador,WilliamsAdmin" />
-			<siteMapNode url="ProntoWeb/Configuracion.aspx" title="Parámetros"  description="Parámetros" roles="Administrador,WilliamsAdmin" />
+    <siteMapNode url="" title="ADMINISTRADOR" description="" roles="Administrador,WilliamsAdmin,AdministradorLimitado">
+      <siteMapNode url="Admin/AgregarUsuarios.aspx" title="Nuevo usuario"  description="Nuevo usuario" roles="Administrador,WilliamsAdmin,AdministradorLimitado" />
+      <siteMapNode url="Admin/EditarUsuario.aspx?opcion=UnoMismo" title="Mi usuario"  description="Nuevo usuario" roles="Administrador,WilliamsAdmin,AdministradorLimitado" />
+      <siteMapNode url="Admin/ListadoUsuarios.aspx" title="Usuarios"  description="Usuarios" roles="Administrador,WilliamsAdmin,AdministradorLimitado" />
+      <!--<siteMapNode url="Admin/AsignarEmpresa.aspx" title="Asignar a empresas"  description="Asignar a empresas" roles="Administrador,WilliamsAdmin" />-->
+      <siteMapNode url="ProntoWeb/Empleados.aspx" title="Empleados"  description="Empleados" roles="Administrador,WilliamsAdmin" />
+      <siteMapNode url="ProntoWeb/Configuracion.aspx" title="Parámetros"  description="Parámetros" roles="Administrador,WilliamsAdmin" />
       <siteMapNode url="ProntoWeb/Configuracion.aspx?Id=-1" title="Ver Log"  description="Ver Log" roles="Administrador,WilliamsAdmin" />
 
 
-      <siteMapNode url="ProntoWeb/WebServiceCartas.asmx?op=BajarImagenDeCartaPorte" title="Servicio Web"  description="Servicio Web" roles="Administrador,WilliamsAdmin" />
-      <siteMapNode url="ProntoWeb/WebServiceCartas.asmx/BajarImagenDeCartaPorte?usuario=Mariano&amp;password=pirulito!&amp;numerocarta=551316582" title="Servicio Web BLD"  description="Servicio Web" roles="Administrador,WilliamsAdmin" />
-      <siteMapNode url="ProntoWeb/WebServiceCartas.asmx/BajarListadoDeCartaPorte_CerealNet?usuario=Mariano&amp;password=pirulo!&amp;cuit=551316582&amp;fechadesde=10/30/16&amp;fechahasta=1/1/17" title="Servicio Web Cerealnet"  description="Servicio Web Cerealnet" roles="Administrador,WilliamsAdmin" />
-      <siteMapNode url="ProntoWeb/WebServiceCartas.asmx/BajarListadoDeCartaPorte_CerealNet?usuario=fyo&amp;password=cambiar!&amp;cuit=30703605105&amp;fechadesde=2017-01-01T00:00:00&amp;fechahasta=2017-01-31T00:00:00" title="Servicio Web Cerealnet"  description="Servicio Web Cerealnet" roles="Administrador,WilliamsAdmin" />
-
-      <siteMapNode url="ProntoWeb/ConexionHaciaSyngenta.aspx" title="Servicio Web Syngenta"  description="Servicio Web Syngenta" roles="Administrador,WilliamsAdmin" />
+      <siteMapNode title="WS de Imagenes >>          "    description="Servicio Web"   url="ProntoWeb/WebServiceCartas.asmx/BajarImagenDeCartaPorte?usuario=Mariano&amp;password=pirulito!&amp;numerocarta=551316582" roles="Administrador,WilliamsAdmin" />
+      <siteMapNode title="WS de Cartas >>            "  description="Servicio Web Cerealnet" url="ProntoWeb/WebServiceCartas.asmx/BajarListadoDeCartaPorte_CerealNet?usuario=Mariano&amp;password=pirulo!&amp;cuit=551316582&amp;fechadesde=10/30/16&amp;fechahasta=1/1/17"  roles="Administrador,WilliamsAdmin" />
+      <siteMapNode title="WS de Cartas >>           "  description="Servicio Web Cerealnet" url="ProntoWeb/WebServiceCartas.asmx/BajarListadoDeCartaPorte_CerealNet?usuario=fyo&amp;password=cambiar!&amp;cuit=30703605105&amp;fechadesde=2017-01-01T00:00:00&amp;fechahasta=2017-01-31T00:00:00"  roles="Administrador,WilliamsAdmin" />
+      <siteMapNode title="WS posicion v2 >>           "  description="Servicio Web Cerealnet" url="ProntoWeb/wsCartaPorteExterno.asmx/obtenerPosiciones_v2?usuario=fyo&amp;password=cambiar!&amp;cuit=30703605105&amp;fechadesde=2017-01-01T00:00:00&amp;fechahasta=2017-01-31T00:00:00"  roles="Administrador,WilliamsAdmin" />
+      <siteMapNode title="WS en Syngenta           "  description=">> WS en Syngenta" url="ProntoWeb/ConexionHaciaSyngenta.aspx" roles="Administrador,WilliamsAdmin" />
 
     </siteMapNode>
-    
 
 
-		<siteMapNode url="" title="UTILIDADES"  description="Cartas de Porte" roles="Administrador,Comercial,Demo,WilliamsAdmin,WilliamsFacturacion" >
-			<siteMapNode url="ProntoWeb/ImportarInformacionImpositiva.aspx" title="Inform. impositiva"  description="Importador" roles="Usuario,Administrador,Comercial,Demo,WilliamsAdmin,WilliamsFacturacion" />
-			<!--<siteMapNode url="ProntoWeb/Firmas/DocumentosAFirmar.aspx" title="Documentos a firmar"  description="Documentos a Firmar" roles="Administrador,Firmas" />-->
-			<siteMapNode url="ProntoWeb/Resolucion1361.aspx" title="Resolución 1361"  description="Importador" roles="Usuario,Administrador,Comercial,Demo,WilliamsAdmin,WilliamsFacturacion" />
+
+    <siteMapNode url="" title="UTILIDADES"  description="Cartas de Porte" roles="Administrador,Comercial,Demo,WilliamsAdmin,WilliamsFacturacion" >
+      <siteMapNode url="ProntoWeb/ImportarInformacionImpositiva.aspx" title="Inform. impositiva"  description="Importador" roles="Usuario,Administrador,Comercial,Demo,WilliamsAdmin,WilliamsFacturacion" />
+      <!--<siteMapNode url="ProntoWeb/Firmas/DocumentosAFirmar.aspx" title="Documentos a firmar"  description="Documentos a Firmar" roles="Administrador,Firmas" />-->
+      <siteMapNode url="ProntoWeb/Resolucion1361.aspx" title="Resolución 1361"  description="Importador" roles="Usuario,Administrador,Comercial,Demo,WilliamsAdmin,WilliamsFacturacion" />
       <siteMapNode url="ProntoWeb/ArchivosLosGrobo.aspx?Id=-1"  title="Importadores"  description="Importador Grobo" roles="Usuario,Administrador,Comercial,Demo,WilliamsFacturacion" />
-		</siteMapNode>
+    </siteMapNode>
 
 
-		<siteMapNode url="" title="CARTAS DE PORTE"  description="Cartas de Porte" roles="Administrador,Comercial,Demo,WilliamsAdmin,WilliamsComercial,WilliamsFacturacion,WilliamsFacturacion" >
-			<siteMapNode url="ProntoWeb/CartaDePorte.aspx?Id=-1" title="Nueva carta"  description="Nueva" roles="Usuario,Administrador,Comercial,Demo,WilliamsAdmin,WilliamsComercial,WilliamsFacturacion" />
-			<siteMapNode url="ProntoWeb/CartasDePortes.aspx?tipo=Todas" title="Todas"  description="Todas" roles="Administrador,Comercial,Demo,WilliamsAdmin,WilliamsComercial,WilliamsFacturacion" />
-			<siteMapNode url="ProntoWeb/CartasDePortes.aspx?tipo=Posicion" title="en Posición"  description="Posición" roles="Administrador,Comercial,Demo,WilliamsAdmin,WilliamsComercial,WilliamsFacturacion" />
-			<siteMapNode url="ProntoWeb/CartasDePortes.aspx?tipo=Descargas" title="en Descarga"  description="Descarga" roles="Administrador,Comercial,Demo,WilliamsAdmin,WilliamsComercial,WilliamsFacturacion" />
-			<siteMapNode url="ProntoWeb/CartasDePorteImportador.aspx?Id=-1" title="Importador EXCEL"  description="Importador" roles="Usuario,Administrador,Comercial,Demo,WilliamsFacturacion" />
-			<siteMapNode url="ProntoWeb/DiccionarioEquivalencias.aspx?opcion=1" title="Equivalencias"  description="Equivalencias" roles="Administrador,Comercial,WilliamsAdmin,WilliamsComercial,WilliamsFacturacion" />
-			<siteMapNode url="ProntoWeb/CDPMailing.aspx" title="Mails"  description="Mails" roles="Administrador,Comercial,Demo,WilliamsFacturacion" />
-			<siteMapNode url="ProntoWeb/CDPStockMovimientos.aspx" title="Movimientos"  description="Movimientos de stock" roles="Administrador,Comercial,Demo,WilliamsFacturacion" />
+    <siteMapNode url="" title="CARTAS DE PORTE"  description="Cartas de Porte" roles="Administrador,Comercial,Demo,WilliamsAdmin,WilliamsComercial,WilliamsFacturacion,WilliamsFacturacion" >
+      <siteMapNode url="ProntoWeb/CartaDePorte.aspx?Id=-1" title="Nueva carta"  description="Nueva" roles="Usuario,Administrador,Comercial,Demo,WilliamsAdmin,WilliamsComercial,WilliamsFacturacion" />
+      <siteMapNode url="ProntoWeb/CartasDePortes.aspx?tipo=Todas" title="Todas"  description="Todas" roles="Administrador,Comercial,Demo,WilliamsAdmin,WilliamsComercial,WilliamsFacturacion" />
+      <siteMapNode url="ProntoWeb/CartasDePortes.aspx?tipo=Posicion" title="en Posición"  description="Posición" roles="Administrador,Comercial,Demo,WilliamsAdmin,WilliamsComercial,WilliamsFacturacion" />
+      <siteMapNode url="ProntoWeb/CartasDePortes.aspx?tipo=Descargas" title="en Descarga"  description="Descarga" roles="Administrador,Comercial,Demo,WilliamsAdmin,WilliamsComercial,WilliamsFacturacion" />
+      <siteMapNode url="ProntoWeb/CartasDePorteImportador.aspx?Id=-1" title="Importador EXCEL"  description="Importador" roles="Usuario,Administrador,Comercial,Demo,WilliamsFacturacion" />
+      <siteMapNode url="ProntoWeb/DiccionarioEquivalencias.aspx?opcion=1" title="Equivalencias"  description="Equivalencias" roles="Administrador,Comercial,WilliamsAdmin,WilliamsComercial,WilliamsFacturacion" />
+      <siteMapNode url="ProntoWeb/CDPMailing.aspx" title="Mails"  description="Mails" roles="Administrador,Comercial,Demo,WilliamsFacturacion" />
+      <siteMapNode url="ProntoWeb/CDPStockMovimientos.aspx" title="Movimientos"  description="Movimientos de stock" roles="Administrador,Comercial,Demo,WilliamsFacturacion" />
 
       <siteMapNode url="ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados" title="Informes"  description="Informes" roles="Administrador,Comercial,WilliamsFacturacion" />
       <siteMapNode url="ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=2" title="Sincronismos"  description="Informes" roles="Administrador,Comercial,WilliamsFacturacion" />
@@ -194,17 +193,17 @@
 
 
 
-      
 
-      
+
+
       <siteMapNode url="ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados" title="Facturación"  description="Humedad" roles="Administrador,Comercial,WilliamsAdmin,WilliamsFacturacion,WilliamsComercial" />
       <siteMapNode url="ProntoWeb/Facturas.aspx?tipo=Confirmados" title="Facturas"  description="Facturas" roles="Administrador,Ventas,WilliamsFacturacion" />
 
 
 
       <siteMapNode url="ProntoWeb/Cliente.aspx?Id=-1" title="Nuevo cliente"  description="Clientes" roles="Usuario,Administrador,Comercial,WilliamsAdmin,WilliamsComercial,WilliamsFacturacion" />
-			<siteMapNode url="ProntoWeb/Transportistas.aspx?Id=-1" title="Nuevo transportista"  description="Transportistas" roles="Administrador,Comercial,WilliamsAdmin,WilliamsComercial,WilliamsFacturacion" />
-			<siteMapNode url="ProntoWeb/Choferes.aspx?Id=-1" title="Nuevo chofer"  description="Choferes" roles="Administrador,Comercial,WilliamsAdmin,WilliamsComercial,WilliamsFacturacion" />
+      <siteMapNode url="ProntoWeb/Transportistas.aspx?Id=-1" title="Nuevo transportista"  description="Transportistas" roles="Administrador,Comercial,WilliamsAdmin,WilliamsComercial,WilliamsFacturacion" />
+      <siteMapNode url="ProntoWeb/Choferes.aspx?Id=-1" title="Nuevo chofer"  description="Choferes" roles="Administrador,Comercial,WilliamsAdmin,WilliamsComercial,WilliamsFacturacion" />
 
 
 
@@ -236,19 +235,19 @@
       <siteMapNode url="ProntoWeb/FertilizantesInformes.aspx?tipo=2" title="Informes"  description="Informes" roles="Administrador,Comercial,WilliamsFacturacion" />
 
     </siteMapNode>
-    
-    
-      <siteMapNode url="" title="ACCESO CLIENTES"  description="Cartas de Porte" roles="Cliente,Administrador,WilliamsClientes,WilliamsAdmin,AdministradorLimitado" >
-			<siteMapNode url="ProntoWeb/CartaDePorteInformesAccesoClientes.aspx" title="Informes"  description="Informes" roles="Cliente,Administrador,Comercial,WilliamsFacturacion,WilliamsClientes,AdministradorLimitado" />
-			<siteMapNode url="CambiaPassword.aspx?tipo=a" title="Cambiar contraseña"  description="Cambiar contraseña" roles="Cliente,Administrador,Comercial,WilliamsAdmin,WilliamsComercial,WilliamsFacturacion,WilliamsClientes,AdministradorLimitado" />
-		</siteMapNode>
+
+
+    <siteMapNode url="" title="ACCESO CLIENTES"  description="Cartas de Porte" roles="Cliente,Administrador,WilliamsClientes,WilliamsAdmin,AdministradorLimitado" >
+      <siteMapNode url="ProntoWeb/CartaDePorteInformesAccesoClientes.aspx" title="Informes"  description="Informes" roles="Cliente,Administrador,Comercial,WilliamsFacturacion,WilliamsClientes,AdministradorLimitado" />
+      <siteMapNode url="CambiaPassword.aspx?tipo=a" title="Cambiar contraseña"  description="Cambiar contraseña" roles="Cliente,Administrador,Comercial,WilliamsAdmin,WilliamsComercial,WilliamsFacturacion,WilliamsClientes,AdministradorLimitado" />
+    </siteMapNode>
 
     <siteMapNode url="" title="SUPERADMIN" description="" roles="SuperAdmin">
       <siteMapNode url="ProntoWeb/CartaDePorteInformesAccesoClientes1.aspx" title="Tests"  description="Informes" roles="Cliente,Administrador,Comercial,WilliamsFacturacion,WilliamsClientes,AdministradorLimitado" />
     </siteMapNode>
 
 
-      <!--<siteMapNode url="" title="CONSULTAS"  description="Consultas" roles="Administrador,Usuario" >
+    <!--<siteMapNode url="" title="CONSULTAS"  description="Consultas" roles="Administrador,Usuario" >
       <siteMapNode url="ProntoWeb/Informes.aspx?Id=-1" title="Proveedores"  description="Informes" roles="Administrador,Usuario" />
       <siteMapNode url="ProntoWeb/Informes.aspx?Id=-2" title="Clientes"  description="Informes" roles="Administrador,Usuario" />
       <siteMapNode url="ProntoWeb/Informes.aspx?Id=-3" title="Contabilidad"  description="Informes" roles="Administrador,Usuario" />

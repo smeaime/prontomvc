@@ -1,0 +1,154 @@
+
+Log Entry : 
+04/07/2017 10:05:04
+Error in: http://localhost:58911/login.aspx?ReturnUrl=/. Error Message:System.Threading.ThreadAbortException
+Subproceso anulado.
+   en System.Threading.Thread.AbortInternal()
+   en System.Threading.Thread.Abort(Object stateInfo)
+   en System.Web.HttpResponse.AbortCurrentThread()
+   en System.Web.HttpResponse.End()
+   en System.Web.HttpResponse.Redirect(String url, Boolean endResponse, Boolean permanent)
+   en System.Web.HttpResponse.Redirect(String url)
+   en Login.Page_Load(Object sender, EventArgs e) en C:\Users\Administrador\Documents\bdl\pronto\prontoweb\Login.aspx.vb:línea 169
+mscorlib
+__________________________
+
+Log Entry : 
+04/07/2017 10:16:33
+Error in: http://localhost:58911/ProntoWeb/WebServiceCartas.asmx/BajarImagenDeCartaPorte?usuario=Mariano&password=pirulito!&numerocarta=551316582. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartaDePorteManager.IdClienteEquivalenteDelIdVendedor(Int64 IdVendedor, String SC) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 11940
+BusinessLogic
+__________________________
+
+Log Entry : 
+04/07/2017 10:16:33
+Error in: http://localhost:58911/ProntoWeb/WebServiceCartas.asmx/BajarImagenDeCartaPorte?usuario=Mariano&password=pirulito!&numerocarta=551316582. Error Message:La carta no corresponde al usuario
+__________________________
+
+Log Entry : 
+04/07/2017 10:17:36
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesAccesoClientes.aspx. Error Message:  Informe: Descargas,  del 01/04/2017 al 30/04/2017 Titular: BLD S.A Intermediario BLD S.A R.Comercial: BLD S.A        (Exporta: Entregas, Punto de venta: Todos, Criterio: ALGUNOS Contiene: BLD S.A)
+__________________________
+
+Log Entry : 
+04/07/2017 10:38:34
+Error in: http://localhost:58911/ProntoWeb/WebServiceCartas.asmx/BajarImagenDeCartaPorte?usuario=Mariano&password=pirulito!&numerocarta=551316582. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartaDePorteManager.IdClienteEquivalenteDelIdVendedor(Int64 IdVendedor, String SC) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 11940
+BusinessLogic
+__________________________
+
+Log Entry : 
+04/07/2017 10:38:34
+Error in: http://localhost:58911/ProntoWeb/WebServiceCartas.asmx/. Error Message:System.InvalidOperationException
+Formato de solicitud no reconocido para la dirección URL, finaliza de manera inesperada en '/'.
+   en System.Web.Services.Protocols.WebServiceHandlerFactory.CoreGetHandler(Type type, HttpContext context, HttpRequest request, HttpResponse response)
+   en System.Web.Services.Protocols.WebServiceHandlerFactory.GetHandler(HttpContext context, String verb, String url, String filePath)
+   en System.Web.Script.Services.ScriptHandlerFactory.GetHandler(HttpContext context, String requestType, String url, String pathTranslated)
+   en System.Web.HttpApplication.MaterializeHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   en System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+System.Web.Services
+__________________________
+
+Log Entry : 
+04/07/2017 10:38:36
+Error in: http://localhost:58911/ProntoWeb/WebServiceCartas.asmx/BajarImagenDeCartaPorte?usuario=Mariano&password=pirulito!&numerocarta=551316582. Error Message:ResizeImage C:\Users\Administrador\Documents\bdl\pronto\prontoweb\DataBackupear\51\5143907mar2016_214608_551316582-CP.jpg
+__________________________
+
+Log Entry : 
+04/07/2017 10:38:36
+Error in: http://localhost:58911/ProntoWeb/WebServiceCartas.asmx/BajarImagenDeCartaPorte?usuario=Mariano&password=pirulito!&numerocarta=551316582. Error Message:System.IO.FileNotFoundException
+C:\Users\Administrador\Documents\bdl\pronto\prontoweb\DataBackupear\51\5143907mar2016_214608_551316582-CP.jpg
+   en System.Drawing.Image.FromFile(String filename, Boolean useEmbeddedColorManagement)
+   en System.Drawing.Image.FromFile(String filename)
+   en CartaDePorteManager.ResizeImage(String image, Int32 width, Int32 height, String newimagename, String sDirVirtual, String DirApp) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 6431
+   en CartaDePorteManager.ImagenPDF(String SC, Int64 IdCarta, String DirApp) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 6260
+System.Drawing
+__________________________
+
+Log Entry : 
+04/07/2017 10:38:36
+Error in: http://localhost:58911/ProntoWeb/WebServiceCartas.asmx/BajarImagenDeCartaPorte?usuario=Mariano&password=pirulito!&numerocarta=551316582. Error Message:ResizeImage C:\Users\Administrador\Documents\bdl\pronto\prontoweb\DataBackupear\68\6894607mar2016_214612_551316582-TK.jpg
+__________________________
+
+Log Entry : 
+04/07/2017 10:38:36
+Error in: http://localhost:58911/ProntoWeb/WebServiceCartas.asmx/BajarImagenDeCartaPorte?usuario=Mariano&password=pirulito!&numerocarta=551316582. Error Message:System.IO.FileNotFoundException
+C:\Users\Administrador\Documents\bdl\pronto\prontoweb\DataBackupear\68\6894607mar2016_214612_551316582-TK.jpg
+   en System.Drawing.Image.FromFile(String filename, Boolean useEmbeddedColorManagement)
+   en System.Drawing.Image.FromFile(String filename)
+   en CartaDePorteManager.ResizeImage(String image, Int32 width, Int32 height, String newimagename, String sDirVirtual, String DirApp) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 6431
+   en CartaDePorteManager.ImagenPDF(String SC, Int64 IdCarta, String DirApp) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 6267
+System.Drawing
+__________________________
+
+Log Entry : 
+04/07/2017 10:38:36
+Error in: http://localhost:58911/ProntoWeb/WebServiceCartas.asmx/BajarImagenDeCartaPorte?usuario=Mariano&password=pirulito!&numerocarta=551316582. Error Message:PDFcon_iTextSharp C:\Users\Administrador\AppData\Local\Temp\CP551316582__07abr2017_103835_MRQ.pdf  C:\Users\Administrador\Documents\bdl\pronto\prontoweb\DataBackupear\51\5143907mar2016_214608_551316582-CP.jpg.temp..jpg   C:\Users\Administrador\Documents\bdl\pronto\prontoweb\DataBackupear\68\6894607mar2016_214612_551316582-TK.jpg.temp..jpg
+__________________________
+
+Log Entry : 
+04/07/2017 10:38:36
+Error in: http://localhost:58911/ProntoWeb/WebServiceCartas.asmx/BajarImagenDeCartaPorte?usuario=Mariano&password=pirulito!&numerocarta=551316582. Error Message:System.IO.FileNotFoundException
+No se pudo encontrar el archivo 'C:\Users\Administrador\Documents\bdl\pronto\prontoweb\DataBackupear\51\5143907mar2016_214608_551316582-CP.jpg.temp..jpg'.
+   en System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   en System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   en System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share)
+   en CartaDePorteManager.PDFcon_iTextSharp(String filepdf, String filejpg, String filejpg2, Decimal propor) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 6323
+mscorlib
+__________________________
+
+Log Entry : 
+04/07/2017 10:38:36
+Error in: http://localhost:58911/ProntoWeb/WebServiceCartas.asmx/BajarImagenDeCartaPorte?usuario=Mariano&password=pirulito!&numerocarta=551316582. Error Message:System.IO.FileNotFoundException
+No se pudo encontrar el archivo 'C:\Users\Administrador\Documents\bdl\pronto\prontoweb\DataBackupear\68\6894607mar2016_214612_551316582-TK.jpg.temp..jpg'.
+   en System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   en System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   en System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share)
+   en CartaDePorteManager.PDFcon_iTextSharp(String filepdf, String filejpg, String filejpg2, Decimal propor) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 6349
+mscorlib
+__________________________
+
+Log Entry : 
+04/07/2017 10:38:41
+Error in: http://localhost:58911/ProntoWeb/WebServiceCartas.asmx/BajarImagenDeCartaPorte?usuario=Mariano&password=pirulito!&numerocarta=551316582. Error Message:System.IO.IOException: The document has no pages.
+   en iTextSharp.text.pdf.PdfPages.WritePageTree()
+   en iTextSharp.text.pdf.PdfWriter.Close()
+   en iTextSharp.text.pdf.PdfDocument.Close()
+   en iTextSharp.text.Document.Close()
+   en CartaDePorteManager.PDFcon_iTextSharp(String filepdf, String filejpg, String filejpg2, Decimal propor) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 6368 C:\Users\Administrador\Documents\bdl\pronto\prontoweb\DataBackupear\51\5143907mar2016_214608_551316582-CP.jpg.temp..jpg C:\Users\Administrador\Documents\bdl\pronto\prontoweb\DataBackupear\68\6894607mar2016_214612_551316582-TK.jpg.temp..jpg
+__________________________
+
+Log Entry : 
+04/07/2017 10:38:42
+Error in: http://localhost:58911/ProntoWeb/WebServiceCartas.asmx/BajarImagenDeCartaPorte?usuario=Mariano&password=pirulito!&numerocarta=551316582. Error Message:System.IO.IOException
+The document has no pages.
+   en iTextSharp.text.pdf.PdfPages.WritePageTree()
+   en iTextSharp.text.pdf.PdfWriter.Close()
+   en iTextSharp.text.pdf.PdfDocument.Close()
+   en iTextSharp.text.Document.Close()
+   en CartaDePorteManager.PDFcon_iTextSharp(String filepdf, String filejpg, String filejpg2, Decimal propor) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 6384
+   en CartaDePorteManager.ImagenPDF(String SC, Int64 IdCarta, String DirApp) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 6277
+itextsharp
+__________________________
+
+Log Entry : 
+04/07/2017 10:38:42
+Error in: http://localhost:58911/ProntoWeb/WebServiceCartas.asmx/BajarImagenDeCartaPorte?usuario=Mariano&password=pirulito!&numerocarta=551316582. Error Message:System.ArgumentException
+No se puede dejar vacío el nombre de la ruta de acceso.
+   en System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   en System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share)
+   en System.IO.File.Open(String path, FileMode mode, FileAccess access)
+   en CartaDePorteManager.BajarImagenDeCartaPorte_DLL(String usuario, String password, Int64 numerocarta, String SC, String DirApp, String ConexBDLmaster) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 16704
+mscorlib
+__________________________
+
+Log Entry : 
+04/07/2017 10:41:56
+Error in: http://localhost:58911/ProntoWeb/wsCartaPorteExterno.asmx/obtenerPosiciones_v2?usuario=fyo&password=cambiar!&cuit=30703605105&fechadesde=2017-01-01T00:00:00&fechahasta=2017-01-31T00:00:00. Error Message:System.OverflowException
+La operación aritmética ha provocado un desbordamiento.
+   en Microsoft.VisualBasic.CompilerServices.Conversions.ToInteger(String Value)
+   en CartaDePorteManager.BajarListadoDeCartaPorte_CerealNet_DLL_v2_00(String usuario, String password, String cuit, DateTime fechadesde, DateTime fechahasta, String SC, String DirApp, String ConexBDLmaster) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 15547
+Microsoft.VisualBasic
+__________________________
