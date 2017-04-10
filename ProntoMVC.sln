@@ -89,28 +89,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ProntoWebforms", "ProntoWeb
 		..\prontoweb\ProntoWeb\Facturas.aspx.vb = ..\prontoweb\ProntoWeb\Facturas.aspx.vb
 	EndProjectSection
 EndProject
-Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "prontoweb(3)", "http://localhost:58911", "{F2E9A38D-5788-4D2D-8F20-3FC9E2B2D144}"
-	ProjectSection(WebsiteProperties) = preProject
-		UseIISExpress = "true"
-		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.0"
-		ProjectReferences = "{ab8bb713-ffa1-4440-b49b-1857e61367c9}|BusinessLogic.dll;{2F9B9020-304C-44A6-BCC4-9E434C687D31}|ProntoMVC.Data.dll;{cca1e32e-7c60-4312-b521-11a6e4ccfca2}|InterfazFlexicapture.dll;"
-		Debug.AspNetCompiler.VirtualPath = "/localhost_58911"
-		Debug.AspNetCompiler.PhysicalPath = "prontoweb\"
-		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_58911\"
-		Debug.AspNetCompiler.Updateable = "true"
-		Debug.AspNetCompiler.ForceOverwrite = "true"
-		Debug.AspNetCompiler.FixedNames = "false"
-		Debug.AspNetCompiler.Debug = "True"
-		Release.AspNetCompiler.VirtualPath = "/localhost_58911"
-		Release.AspNetCompiler.PhysicalPath = "prontoweb\"
-		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_58911\"
-		Release.AspNetCompiler.Updateable = "true"
-		Release.AspNetCompiler.ForceOverwrite = "true"
-		Release.AspNetCompiler.FixedNames = "false"
-		Release.AspNetCompiler.Debug = "False"
-		SlnRelativePath = "prontoweb\"
-	EndProjectSection
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{17DF5DFF-FC64-437F-9843-AD0B9728948C}"
 	ProjectSection(SolutionItems) = preProject
 		Performance1.psess = Performance1.psess
@@ -424,31 +402,6 @@ Global
 		{7D5126A2-B2CA-441C-8D73-2AD8F3EF7FDB}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{7D5126A2-B2CA-441C-8D73-2AD8F3EF7FDB}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{7D5126A2-B2CA-441C-8D73-2AD8F3EF7FDB}.Release|x86.ActiveCfg = Release|Any CPU
-		{F2E9A38D-5788-4D2D-8F20-3FC9E2B2D144}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F2E9A38D-5788-4D2D-8F20-3FC9E2B2D144}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F2E9A38D-5788-4D2D-8F20-3FC9E2B2D144}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{F2E9A38D-5788-4D2D-8F20-3FC9E2B2D144}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
-		{F2E9A38D-5788-4D2D-8F20-3FC9E2B2D144}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{F2E9A38D-5788-4D2D-8F20-3FC9E2B2D144}.DebugLocal|Any CPU.ActiveCfg = Debug|Any CPU
-		{F2E9A38D-5788-4D2D-8F20-3FC9E2B2D144}.DebugLocal|Any CPU.Build.0 = Debug|Any CPU
-		{F2E9A38D-5788-4D2D-8F20-3FC9E2B2D144}.DebugLocal|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{F2E9A38D-5788-4D2D-8F20-3FC9E2B2D144}.DebugLocal|Mixed Platforms.Build.0 = Debug|Any CPU
-		{F2E9A38D-5788-4D2D-8F20-3FC9E2B2D144}.DebugLocal|x86.ActiveCfg = Debug|Any CPU
-		{F2E9A38D-5788-4D2D-8F20-3FC9E2B2D144}.DebugWilly|Any CPU.ActiveCfg = Debug|Any CPU
-		{F2E9A38D-5788-4D2D-8F20-3FC9E2B2D144}.DebugWilly|Any CPU.Build.0 = Debug|Any CPU
-		{F2E9A38D-5788-4D2D-8F20-3FC9E2B2D144}.DebugWilly|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{F2E9A38D-5788-4D2D-8F20-3FC9E2B2D144}.DebugWilly|Mixed Platforms.Build.0 = Debug|Any CPU
-		{F2E9A38D-5788-4D2D-8F20-3FC9E2B2D144}.DebugWilly|x86.ActiveCfg = Debug|Any CPU
-		{F2E9A38D-5788-4D2D-8F20-3FC9E2B2D144}.Development|Any CPU.ActiveCfg = Debug|Any CPU
-		{F2E9A38D-5788-4D2D-8F20-3FC9E2B2D144}.Development|Any CPU.Build.0 = Debug|Any CPU
-		{F2E9A38D-5788-4D2D-8F20-3FC9E2B2D144}.Development|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{F2E9A38D-5788-4D2D-8F20-3FC9E2B2D144}.Development|Mixed Platforms.Build.0 = Debug|Any CPU
-		{F2E9A38D-5788-4D2D-8F20-3FC9E2B2D144}.Development|x86.ActiveCfg = Debug|Any CPU
-		{F2E9A38D-5788-4D2D-8F20-3FC9E2B2D144}.Release|Any CPU.ActiveCfg = Debug|Any CPU
-		{F2E9A38D-5788-4D2D-8F20-3FC9E2B2D144}.Release|Any CPU.Build.0 = Debug|Any CPU
-		{F2E9A38D-5788-4D2D-8F20-3FC9E2B2D144}.Release|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{F2E9A38D-5788-4D2D-8F20-3FC9E2B2D144}.Release|Mixed Platforms.Build.0 = Debug|Any CPU
-		{F2E9A38D-5788-4D2D-8F20-3FC9E2B2D144}.Release|x86.ActiveCfg = Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
