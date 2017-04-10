@@ -5022,7 +5022,11 @@ Namespace Pronto.ERP.Bll
                 sb &= "&" & Right(dr("Cosecha"), 5).Replace("/", "").PadLeft(4)                         '35 –Cosecha	Numérico	4	Se completa con Formato NNNN Por ej 0607 para 2006/2007. (3)
 
 
-                sb &= "&" & IIf(dr("CorredorCUIT").ToString.Replace("-", "") = "88000000122", "0", dr("CorredorCUIT")).ToString.Replace("-", "").PadLeft(11)                        '36 - Codigo Corredor	Numérico	11	Se completa con el código  de SoftCereal ó CUIT del Corredor o 0 Si no existe el Dato.
+
+                'http://consultas.bdlconsultores.com.ar/AdminTest/template/desarrollo/Consulta.php?IdReclamo=37840&SinMenu=1
+                'Si figura algún corredor en la carga ( ejemplo Maroun), que el sincronismo siempre tire como corredor: DIRECTO .
+                'sb &= "&" & IIf(dr("CorredorCUIT").ToString.Replace("-", "") = "88000000122", "0", dr("CorredorCUIT")).ToString.Replace("-", "").PadLeft(11)                        '36 - Codigo Corredor	Numérico	11	Se completa con el código  de SoftCereal ó CUIT del Corredor o 0 Si no existe el Dato.
+                sb &= "&" & IIf(dr("CorredorCUIT").ToString.Replace("-", "") = "", "0", "88-00000012-2").ToString.Replace("-", "").PadLeft(11)
 
 
                 sb &= "&" & dr("DestinatarioCUIT").ToString.Replace("-", "").PadLeft(11)                        '37 -Codigo Comprador/Vendedor 	Numérico	11	Se completa con el Código de SoftCereal ó CUIT de Comprador del Contrato de Venta al que se aplicará la Carta de Porte o 0 Si no existe el Dato. (4)

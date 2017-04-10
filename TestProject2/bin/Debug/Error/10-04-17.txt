@@ -1,0 +1,10 @@
+
+Log Entry : 
+04/10/2017 12:17:14
+Error in: . Error Message:Generando sincro para LOS GROBO
+__________________________
+
+Log Entry : 
+04/10/2017 12:20:58
+Error in: . Error Message:La localidad NOGOYA es usada en el sincro de LosGrobo y no tiene codigo LosGrobo
+__________________________
