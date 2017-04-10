@@ -838,6 +838,39 @@ namespace ProntoMVC.Tests
 
 
 
+        [TestMethod]
+        public void SincroLosGrobo_36699()
+        {
+
+            //string DIRFTP = DirApp + @"\DataBackupear\";
+            //string ArchivoExcelDestino = DIRFTP + "ControlKilos_" + DateTime.Now.ToString("ddMMMyyyy_HHmmss") + ".xlsx";
+
+
+            string sErrores = "", sTitulo = "";
+            LinqCartasPorteDataContext db = null;
+
+            // el _CONST_MAXROWS sale del app.config
+
+            int registrosf = 0;
+
+            int idcli = CartaDePorteManager.BuscarClientePorCUIT("30-50930520-6", SC, "");
+
+            var output = SincronismosWilliamsManager.GenerarSincro("LOS GROBO", ref sErrores, SC, "dominio", ref sTitulo
+                                , CartaDePorteManager.enumCDPestado.DescargasMasFacturadas,
+                     "", idcli, -1,
+                -1, idcli,
+                 idcli, -1, -1, -1,
+                 CartaDePorteManager.FiltroANDOR.FiltroOR, "Entregas",
+                new DateTime(2016, 1, 1), new DateTime(2016, 3, 31),
+                -1, "Ambas", false, "", "", -1, ref registrosf, 4000);
+
+
+
+            //File.Copy(output, @"C:\Users\Administrador\Desktop\"   Path.GetFileName(output), true);
+            System.Diagnostics.Process.Start(output);
+        }
+
+
 
 
 
