@@ -21045,7 +21045,271 @@ Public Class LogicaInformesWilliams
 
 
 
+
+
     Shared Sub GeneroDataTablesDeMovimientosDeStock(ByRef dtCDPs As DataTable, ByRef dtRenglonUnicoConLasExistencias As Object,
+                                             ByRef dtMOVs As Object,
+                                             ByVal idDestinatario As Integer, ByVal idDestino As Integer, ByVal idarticulo As Integer,
+                                             ByVal desde As Date, ByVal hasta As Date, ByVal sc As String)
+
+
+        'http://bdlconsultores.dyndns.org/Consultas/Admin/verConsultas1.php?recordid=10263  rechazadas están saliendo en el informe de existencias
+        'no tengo que incluir los rechazos!, ni los duplicados
+
+        'aca uso el _informes, y en el .rdl uso _informescorregido ....
+        'efectivamente, ahí usa VendedorDesc en lugar de TitularDesc....
+
+
+        Dim sTitulo As String = ""
+
+        dtCDPs = CartaDePorteManager.GetDataTableFiltradoYPaginado(sc,
+                "", "", "", 1, 0,
+                enumCDPestado.TodasMenosLasRechazadas, "", -1, -1,
+                idDestinatario, -1,
+                -1, idarticulo, -1, idDestino,
+                "1", "Export",
+                 desde, hasta, -1, sTitulo, , , , , , , , , )
+
+
+
+        Dim db As New LinqCartasPorteDataContext(Encriptar(sc))
+
+
+
+        Dim movs = (From i In db.CartasPorteMovimientos
+                    Join c In db.linqClientes On i.IdExportadorOrigen Equals c.IdCliente
+                    Where
+                        (i.FechaIngreso >= desde And i.FechaIngreso <= hasta) _
+                        And (i.IdArticulo = idarticulo) _
+                        And (i.Puerto = idDestino) _
+                        And (
+                                (i.IdExportadorOrigen = idDestinatario) _
+                                Or (i.IdExportadorDestino = idDestinatario)
+                        ) _
+                        And If(i.Anulada, "NO") <> "SI"
+                    Select Tipo = f(i.Tipo),
+                                ExportadorOrigen = c.RazonSocial, i.FechaIngreso,
+                                i.Entrada_o_Salida, i.Cantidad, i.Vapor, i.Contrato, i.IdCDPMovimiento, i.Numero
+                ).ToList
+
+
+
+
+
+
+
+        dtMOVs = movs
+
+        'Dim dsVistaMOVS = CDPStockMovimientoManager.GetList(sc)
+
+
+
+
+
+
+
+        '/////////////////////////////////////////////////////
+        '/////////////////////////////////////////////////////
+        '/////////////////////////////////////////////////////
+        'mejunje: le estoy pasando un segundo dataset con las existencias calculadas
+        'en VBasic. Tambien se podría usar la funcion SQL wExistencias......, pero es mas
+        'piola calcularlo por visual. -Sí, pero así haces al informe dependiente del codigo... qué
+        'se hace en un caso así?
+        '/////////////////////////////////////////////////////
+
+        'dt2 = New DataTable
+        'dt2.Columns.Add("Existencias", GetType(Double))
+        'dt2.Rows.Add(dt2.NewRow)
+        ''dt2 = EntidadManager.ExecDinamico(HFSC.Value, "SELECT dbo.wExistenciasCartaPorteMovimientos (null,null,null) as Existencias")
+        Dim ex = ExistenciasAlDiaPorPuerto(sc, desde, idarticulo, idDestino, idDestinatario)
+
+        dtRenglonUnicoConLasExistencias = (From i In db.CartasDePortes.Take(1) Select Existencias = ex, CampoDummyParaQueGuardeElNombre = 0).ToList
+
+
+        '/////////////////////////////////////////////////////
+        '/////////////////////////////////////////////////////
+        '/////////////////////////////////////////////////////
+        '/////////////////////////////////////////////////////
+
+
+
+
+
+
+    End Sub
+
+
+    Shared Function ExistenciasAlDiaPorPuerto(ByVal sc As String, ByVal Fecha As DateTime,
+                                              ByVal IdArticulo As Integer, ByVal IdDestinoWilliams As Integer,
+                                              ByVal iddestinatario As Integer) As Double
+
+        Dim entradasMOV, entradasCDP, salidasMOV As Double
+        Dim db As New LinqCartasPorteDataContext(Encriptar(sc))
+
+
+        '///////////////////////////////////////////////
+        'entradas por cartas de porte
+        '///////////////////////////////////////////////
+
+        'por qué no incluye acá la id 2092346? -por el subnumero de facturacion
+
+
+        If True Then
+
+            'acá tenes un tema con usar Fecha o Fecha-1
+            '-si el tipo elige desde hoy hasta hoy, tenes que llamar a la funcion con el ultimo segundo de ayer, porque GetDataTableFiltradoYPaginado_CadenaSQL usa menor o igual
+
+
+            Dim sql = CartaDePorteManager.GetDataTableFiltradoYPaginado_CadenaSQL(sc,
+                    "", "", "", 1, 0,
+                 enumCDPestado.TodasMenosLasRechazadas, "", -1, -1,
+                    iddestinatario, -1,
+                    -1, IdArticulo, -1, IdDestinoWilliams,
+                   "1", "Export",
+                      #1/1/1750#, DateAdd(DateInterval.Second, -1, Fecha), -1, , , , , , , , , , )
+
+
+
+            entradasCDP = EntidadManager.ExecDinamico(sc, "select isnull(sum(netoproc),0) as total  from (" + sql + ") as C").Rows(0).Item(0)
+
+
+
+        ElseIf False Then
+
+            Dim q As IQueryable(Of CartasConCalada) = CartasLINQlocalSimplificadoTipadoConCalada(sc,
+                    "", "", "", 1, 0,
+                    enumCDPestado.TodasMenosLasRechazadas, "", -1, -1,
+                     iddestinatario, -1,
+                    -1, IdArticulo, -1, IdDestinoWilliams,
+                    FiltroANDOR.FiltroOR, enumCDPexportacion.Export,
+                     #1/1/1980#, Fecha, -1)
+
+            Dim c = q.Count
+            If c = 0 Then
+                entradasCDP = 0
+            Else
+                'parece que si no trae registros, me explota el sum
+                entradasCDP = q.DefaultIfEmpty.Sum(Function(x) x.NetoProc)
+            End If
+
+        Else
+
+            'el true está obviando la condicion de SubnumeroDeFacturacion
+            'el tema es que no puedo tomar solo la original, porque la que suele estar marcada como exportacion es una copia
+
+
+            Dim q = Aggregate i In db.CartasDePortes
+                    Where (If(i.FechaDescarga, i.FechaDeCarga) < Fecha) _
+                        And (If(i.SubnumeroDeFacturacion, 0) <= 0) _
+                        And db.CartasDePortes.Any(Function(x) x.Exporta = "SI" And x.NumeroCartaDePorte = i.NumeroCartaDePorte) _
+                        And i.Anulada <> "SI" _
+                        And If(i.Destino, 0) = IdDestinoWilliams _
+                        And If(i.IdArticulo, 0) = IdArticulo _
+                        And If(i.Entregador, 0) = iddestinatario
+                    Into Sum(CType(i.NetoProc, Decimal?))
+
+            entradasCDP = iisNull(q, 0)
+        End If
+
+
+        '///////////////////////////////////////////////
+        'movimientos:
+        '///////////////////////////////////////////////
+
+        Dim temp = From i In db.CartasPorteMovimientos
+                   Where
+                        (i.FechaIngreso < Fecha) _
+                    And (i.IdArticulo = IdArticulo) _
+                    And (i.Puerto = IdDestinoWilliams) _
+                    And (
+                            (i.IdExportadorOrigen = iddestinatario) _
+                            Or (i.IdExportadorDestino = iddestinatario)
+                        ) _
+                    And If(i.Anulada, "NO") <> "SI"
+        '///////////////////////////////////////////////
+        '///////////////////////////////////////////////
+        '///////////////////////////////////////////////
+        '///////////////////////////////////////////////
+
+        'Throw New Exception("revisar este asunto, porque lo de entrada salida confunde")
+
+        'http://bdlconsultores.ddns.net/Consultas/Admin/VerConsultas1.php?recordid=12386
+
+
+
+
+
+        Dim etemp = temp.Where(Function(i) (
+                                                (
+                                                    (i.Entrada_o_Salida = 1 And i.IdExportadorDestino = iddestinatario) _
+                                                        Or
+                                                    (i.Entrada_o_Salida = 2 And i.IdExportadorOrigen = iddestinatario)
+                                                ) _
+                                                And (i.FechaIngreso < Fecha))).DefaultIfEmpty
+
+        etemp = temp.Where(Function(i) ((i.Entrada_o_Salida = 1) And (i.FechaIngreso < Fecha))).DefaultIfEmpty
+
+        Debug.Print(etemp.Count)
+        entradasMOV = etemp.Sum(Function(i) If(i.Cantidad, 0))
+
+
+
+        '///////////////////////////////////////////////
+        '///////////////////////////////////////////////
+
+        Dim stemp = temp.Where(Function(i) (
+                                                (
+                                                    (i.Entrada_o_Salida = 2 And i.IdExportadorDestino = iddestinatario) _
+                                                        Or
+                                                    (i.Entrada_o_Salida = 1 And i.IdExportadorOrigen = iddestinatario)
+                                                ) _
+                                                And (i.FechaIngreso < Fecha))).DefaultIfEmpty
+
+
+        stemp = temp.Where(Function(i) ((i.Entrada_o_Salida = 2) And (i.FechaIngreso < Fecha))).DefaultIfEmpty
+
+
+
+        Debug.Print(stemp.Count)
+        salidasMOV = stemp.Sum(Function(i) If(i.Cantidad, 0))
+
+
+        '///////////////////////////////////////////////
+        '///////////////////////////////////////////////
+        '///////////////////////////////////////////////
+        '///////////////////////////////////////////////
+
+
+        ErrHandler2.WriteError("entradasCDP: " & entradasCDP)
+        ErrHandler2.WriteError("entradasMOV: " & entradasMOV)
+        ErrHandler2.WriteError("salidas: " & salidasMOV)
+        ErrHandler2.WriteError("total: " & (entradasCDP + entradasMOV - salidasMOV))
+
+
+        Dim a5 = From x In stemp Order By x.IdCDPMovimiento Select CStr(x.IdCDPMovimiento)
+
+        ErrHandler2.WriteError(vbCrLf & Join(a5.ToArray, vbCrLf))
+
+        '///////////////////////////////////////////////
+        '///////////////////////////////////////////////
+        '///////////////////////////////////////////////
+        '///////////////////////////////////////////////
+
+
+
+
+        Return entradasCDP + entradasMOV - salidasMOV
+
+    End Function
+
+
+
+
+
+
+
+
+    Shared Sub GeneroDataTablesDeMovimientosDeStock_v2(ByRef dtCDPs As DataTable, ByRef dtRenglonUnicoConLasExistencias As Object,
                                              ByRef dtMOVs As Object,
                                              ByVal idDestinatario As Integer, ByVal idDestino As Integer, ByVal idarticulo As Integer,
                                              ByVal desde As Date, ByVal hasta As Date, ByVal sc As String)
@@ -21135,14 +21399,14 @@ Public Class LogicaInformesWilliams
 
     End Sub
 
-    
 
 
 
 
 
 
-    Shared Function ExistenciasAlDiaPorPuerto(ByVal sc As String, ByVal Fecha As DateTime,
+
+    Shared Function ExistenciasAlDiaPorPuerto_v2(ByVal sc As String, ByVal Fecha As DateTime,
                                               ByVal IdArticulo As Integer, ByVal IdDestinoWilliams As Integer,
                                               ByVal idcliente As Integer) As Double
 
