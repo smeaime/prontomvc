@@ -1,0 +1,80 @@
+
+Log Entry : 
+04/11/2017 11:51:50
+Error in: http://localhost:58911/login.aspx?ReturnUrl=/. Error Message:System.Threading.ThreadAbortException
+Subproceso anulado.
+   en System.Threading.Thread.AbortInternal()
+   en System.Threading.Thread.Abort(Object stateInfo)
+   en System.Web.HttpResponse.AbortCurrentThread()
+   en System.Web.HttpResponse.End()
+   en System.Web.HttpResponse.Redirect(String url, Boolean endResponse, Boolean permanent)
+   en System.Web.HttpResponse.Redirect(String url)
+   en Login.Page_Load(Object sender, EventArgs e) en C:\Users\Administrador\Documents\bdl\pronto\prontoweb\Login.aspx.vb:línea 169
+mscorlib
+__________________________
+
+Log Entry : 
+04/11/2017 11:52:06
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Generando informe para Cartas Duplicadas pendientes de asignar
+__________________________
+
+Log Entry : 
+04/11/2017 11:52:31
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Generando informe para Planilla de movimientos
+__________________________
+
+Log Entry : 
+04/11/2017 11:52:31
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Generando informe para Planilla de movimientos
+__________________________
+
+Log Entry : 
+04/11/2017 11:52:33
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Generando informe para Planilla de movimientos
+__________________________
+
+Log Entry : 
+04/11/2017 11:52:58
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Generando informe para Planilla de movimientos
+__________________________
+
+Log Entry : 
+04/11/2017 11:54:01
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Generando informe para Planilla de movimientos
+__________________________
+
+Log Entry : 
+04/11/2017 11:55:01
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Generando informe para Planilla de movimientos
+__________________________
+
+Log Entry : 
+04/11/2017 11:55:15
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Generando informe para Planilla de movimientos
+__________________________
+
+Log Entry : 
+04/11/2017 11:55:26
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:entradasCDP: 0
+__________________________
+
+Log Entry : 
+04/11/2017 11:55:26
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:entradasMOV: 0
+__________________________
+
+Log Entry : 
+04/11/2017 11:55:26
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:salidas: 0
+__________________________
+
+Log Entry : 
+04/11/2017 11:55:26
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:total: 0
+__________________________
+
+Log Entry : 
+04/11/2017 11:55:26
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:
+
+__________________________

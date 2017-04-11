@@ -630,6 +630,16 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
         </div>
         <div class="row">
             <div class="col-md-2">
+                <asp:CheckBox ID="CheckBoxEstanar" runat="server" Checked="true" />
+                Estanar
+            </div>
+            <div class="col-md-10">
+                <asp:TextBox CssClass="col-md-8" ID="txtMailEstanar" runat="server" Text='' AutoPostBack="false"
+                    autocomplete="off"></asp:TextBox>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-2">
                 <asp:CheckBox ID="CheckBoxLartirigoyen" runat="server" Checked="true" />
                 Lartirigoyen
             </div>

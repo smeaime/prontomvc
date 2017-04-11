@@ -2150,8 +2150,10 @@ Public Class ExcelImportadorManager
 
 
 
-
-                        If actua(.Destino, BuscaIdWilliamsDestinoPreciso(DiccionarioEquivalenciasManager.BuscarEquivalencia(SC, r(16)), SC)) Then log += "Destino; "
+                        If actua(.Destino, BuscaIdWilliamsDestinoPreciso(r(16), SC)) Then log += "Destino; "
+                        If .Destino <= 0 Then
+                            If actua(.Destino, BuscaIdWilliamsDestinoPreciso(DiccionarioEquivalenciasManager.BuscarEquivalencia(SC, r(16)), SC)) Then log += "Destino; "
+                        End If
                         If .Destino <= 0 Then .Destino = Nothing
                         If If(NombreDestino(SC, .Destino), "").Trim.ToUpper = "ACA SAN LORENZO" Then
                             Continue For
@@ -2171,7 +2173,7 @@ Public Class ExcelImportadorManager
 
 
 
-                        Dim proc = BuscaIdLocalidadPreciso(R(24), SC)
+                        Dim proc = BuscaIdLocalidadPreciso(r(24), SC)
                         If proc = -1 Then
                             proc = BuscaIdLocalidadPreciso(DiccionarioEquivalenciasManager.BuscarEquivalencia(SC, r(24)), SC)
                         End If

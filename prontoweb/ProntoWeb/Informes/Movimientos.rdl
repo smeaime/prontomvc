@@ -850,6 +850,10 @@ FROM
           <DataField>DestinoCUIT</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
+        <Field Name="MermaVolatil">
+          <DataField>MermaVolatil</DataField>
+          <rd:UserDefined>true</rd:UserDefined>
+        </Field>
       </Fields>
       <Query>
         <DataSourceName>DataSource1</DataSourceName>
@@ -1156,7 +1160,7 @@ FROM
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Sum(Fields!NetoProc.Value)</Value>
+                              <Value>=Sum(Fields!NetoProc.Value-Fields!MermaVolatil.Value)</Value>
                               <Style>
                                 <FontSize>7pt</FontSize>
                                 <Format>N0</Format>
@@ -1293,7 +1297,7 @@ FROM
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Sum(Fields!NetoProc.Value)</Value>
+                              <Value>=Sum(Fields!NetoProc.Value-Fields!MermaVolatil.Value)</Value>
                               <Style>
                                 <FontSize>7pt</FontSize>
                                 <Format>N0</Format>
@@ -2695,7 +2699,7 @@ FROM
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>=Sum(Fields!NetoProc.Value, "DataSetCartasDePorte_TX_InformesCorregido")</Value>
+                <Value>=Sum(Fields!NetoProc.Value, "DataSetCartasDePorte_TX_InformesCorregido")-Sum(Fields!MermaVolatil.Value, "DataSetCartasDePorte_TX_InformesCorregido")</Value>
                 <Style>
                   <FontSize>8pt</FontSize>
                   <Format>N0</Format>
@@ -2839,7 +2843,7 @@ FROM
               <TextRun>
                 <Value>=
 Sum( iif(Fields!Entrada_o_Salida.Value=1,Fields!Cantidad.Value,-Fields!Cantidad.Value  ) , "DataSetVistaCartasPorteMovimientos")
-+Sum(Fields!NetoProc.Value, "DataSetCartasDePorte_TX_InformesCorregido")+Sum(Fields!Existencias.Value, "DataSet2")</Value>
++Sum(Fields!NetoProc.Value, "DataSetCartasDePorte_TX_InformesCorregido")-Sum(Fields!MermaVolatil.Value, "DataSetCartasDePorte_TX_InformesCorregido")+Sum(Fields!Existencias.Value, "DataSet2")</Value>
                 <Style>
                   <FontSize>8pt</FontSize>
                   <FontWeight>Bold</FontWeight>
