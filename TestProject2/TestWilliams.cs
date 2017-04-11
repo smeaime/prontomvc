@@ -839,6 +839,16 @@ namespace ProntoMVC.Tests
 
 
         [TestMethod]
+        public void carta559344519_35603()
+        {
+
+            var ii=SQLdinamico.BuscaIdWilliamsDestinoPreciso(DiccionarioEquivalenciasManager.BuscarEquivalencia(SC, "TERMINAL 6"), SC);
+
+        }
+
+
+
+        [TestMethod]
         public void SincroLosGrobo_36699()
         {
 
