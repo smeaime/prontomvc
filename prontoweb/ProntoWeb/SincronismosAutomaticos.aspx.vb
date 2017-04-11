@@ -108,6 +108,7 @@ Partial Class SincronismosAutomaticos
             txtMailDOW.Text = ParametroManager.TraerValorParametro2(HFSC.Value, "CasillaCartasPorteDOW" & pv).ToString
             txtMailDukarevich.Text = ParametroManager.TraerValorParametro2(HFSC.Value, "CasillaCartasPorteDukarevich" & pv).ToString
             txtMailElEnlace.Text = ParametroManager.TraerValorParametro2(HFSC.Value, "CasillaCartasPorteElEnlace" & pv).ToString
+            txtMailEstanar.Text = ParametroManager.TraerValorParametro2(HFSC.Value, "CasillaCartasPorteEstanar" & pv).ToString
             txtMailLartirigoyen.Text = ParametroManager.TraerValorParametro2(HFSC.Value, "CasillaCartasPorteLartirigoyen" & pv).ToString
             txtMailBiznaga.Text = ParametroManager.TraerValorParametro2(HFSC.Value, "CasillaCartasPorteBiznaga" & pv).ToString
             txtMailBragadense.Text = ParametroManager.TraerValorParametro2(HFSC.Value, "CasillaCartasPorteBragadense" & pv).ToString
@@ -361,6 +362,7 @@ Partial Class SincronismosAutomaticos
         ParametroManager.GuardarValorParametro2(HFSC.Value, "CasillaCartasPorteDOW" & pv, txtMailDOW.Text)
         ParametroManager.GuardarValorParametro2(HFSC.Value, "CasillaCartasPorteDukarevich" & pv, txtMailDukarevich.Text)
         ParametroManager.GuardarValorParametro2(HFSC.Value, "CasillaCartasPorteElEnlace" & pv, txtMailElEnlace.Text)
+        ParametroManager.GuardarValorParametro2(HFSC.Value, "CasillaCartasPorteEstanar" & pv, txtMailElEnlace.Text)
         ParametroManager.GuardarValorParametro2(HFSC.Value, "CasillaCartasPorteLartirigoyen" & pv, txtMailLartirigoyen.Text)
         ParametroManager.GuardarValorParametro2(HFSC.Value, "CasillaCartasPorteBiznaga" & pv, txtMailBiznaga.Text)
         ParametroManager.GuardarValorParametro2(HFSC.Value, "CasillaCartasPorteBragadense" & pv, txtMailBragadense.Text)
@@ -443,6 +445,7 @@ Partial Class SincronismosAutomaticos
         If (CheckBoxDOW.Checked) Then sTodosErr += Enviar("DOW", txtMailDOW.Text, sErr, bVistaPrevia)
         If (CheckBoxDukarevich.Checked) Then sTodosErr += Enviar("Dukarevich", txtMailDukarevich.Text, sErr, bVistaPrevia)
         If (CheckBoxElEnlace.Checked) Then sTodosErr += Enviar("El Enlace", txtMailElEnlace.Text, sErr, bVistaPrevia)
+        If (CheckBoxEstanar.Checked) Then sTodosErr += Enviar("El Enlace", txtMailEstanar.Text, sErr, bVistaPrevia)
         If (CheckBoxLartirigoyen.Checked) Then sTodosErr += Enviar("Lartirigoyen", txtMailLartirigoyen.Text, sErr, bVistaPrevia)
         If (CheckBoxBiznaga.Checked) Then sTodosErr += Enviar("La Biznaga", txtMailBiznaga.Text, sErr, bVistaPrevia)
         If (CheckBoxBragadense.Checked) Then sTodosErr += Enviar("La Bragadense", txtMailBragadense.Text, sErr, bVistaPrevia)
@@ -465,6 +468,18 @@ Partial Class SincronismosAutomaticos
         If (CheckBoxRivara.Checked) Then sTodosErr += Enviar("Rivara", txtMailRivara.Text, sErr, bVistaPrevia)
         If (CheckBoxSantaCatalina.Checked) Then sTodosErr += Enviar("Santa Catalina", txtMailSantaCatalina.Text, sErr, bVistaPrevia)
         If (CheckBoxSyngenta.Checked) Then sTodosErr += Enviar("Syngenta", txtMailSyngenta.Text, sErr, bVistaPrevia)
+        If (CheckBoxSyngenta.Checked) Then
+            Dim idcliente = 4333 'syngenta
+
+            Dim dbcartas = CartaDePorteManager.ListadoSegunCliente(HFSC.Value, idcliente, globalDesde, globalHasta, CartaDePorteManager.enumCDPestado.DescargasMasFacturadas)
+
+            Dim s = New ServicioCartaPorte.servi()
+
+            Dim x = s.WebServiceSyngenta(dbcartas)
+
+            sTodosErr += vbCrLf + "Enviado a Syngenta Webservice" + vbCrLf
+        End If
+
         If (CheckBoxTomas.Checked) Then sTodosErr += Enviar("Tomas Hnos", txtMailTomas.Text, sErr, bVistaPrevia)
         If (CheckBoxTecnocampo.Checked) Then sTodosErr += Enviar("Tecnocampo", txtMailTecnocampo.Text, sErr, bVistaPrevia)
         If (CheckBoxZENI.Checked) Then sTodosErr += Enviar("Zeni", txtMailZENI.Text, sErr, bVistaPrevia)
