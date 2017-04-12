@@ -193,7 +193,7 @@ Namespace Pronto.ERP.Bll
         Public Shared Function TextToExcelWilliams(ByVal pFileName As String, Optional ByVal titulo As String = "", Optional ByVal sImgLogoWilliamsPath As String = "") As String
 
             Dim vFormato As ExcelOffice.XlRangeAutoFormat
-            Dim Exc As ExcelOffice.Application = CreateObject("ExcelOffice.Application")
+            Dim Exc As ExcelOffice.Application = CreateObject("Excel.Application")
             Exc.Visible = False
             Exc.DisplayAlerts = False
 
