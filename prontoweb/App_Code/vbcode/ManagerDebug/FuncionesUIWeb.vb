@@ -2000,7 +2000,7 @@ Public Module ProntoFuncionesUIWeb
     Public Function TextToExcel(ByVal pFileName As String, Optional ByVal titulo As String = "", Optional ByVal sSufijoNombreArchivo As String = "Notas de Entrega") As String
 
         Dim vFormato As ExcelOffice.XlRangeAutoFormat
-        Dim Exc As ExcelOffice.Application = CreateObject("ExcelOffice.Application")
+        Dim Exc As ExcelOffice.Application = CreateObject("Excel.Application")
         Exc.Visible = False
         Exc.DisplayAlerts = False
 
@@ -2282,7 +2282,7 @@ Public Module ProntoFuncionesUIWeb
 
         If mColumnaTransporte = 0 Then mColumnaTransporte = 3
 
-        oEx = CreateObject("ExcelOffice.Application")
+        oEx = CreateObject("Excel.Application")
 
         Try
             oEx.Visible = False
@@ -3801,7 +3801,7 @@ Public Module ProntoFuncionesUIWeb
 
 
         Try
-            oEx = CreateObject("ExcelOffice.Application")
+            oEx = CreateObject("Excel.Application")
             oEx.Visible = False
 
             oBooks = oEx.Workbooks

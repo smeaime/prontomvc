@@ -7685,6 +7685,7 @@ Public Class LogicaFacturacion
         'Si le facturan al titular, el strPresentesEnEstaFactura tiene corredores. Lo muestro si solo hay uno, y si es separado
         'solo mostrarlo si está separado al corredor, o si se eligió explicitamente el corredor como filtro
 
+
         Dim flagForzar = False
         Dim VariosCorredores = False
 
