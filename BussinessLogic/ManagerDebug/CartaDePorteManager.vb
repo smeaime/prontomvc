@@ -6636,7 +6636,7 @@ Public Class CartaDePorteManager
 
 
     'Este filtro lo uso en los sincronismos, porque ahí está el dataset tipado
-    Public Shared Function generarWHEREparaDatasetParametrizadoConFechaEnNumerales(
+    Public Shared Function generarWHEREparaDatasetParametrizadoConFechaEnNumerales2(
                     ByVal sc As String, ByRef sTituloFiltroUsado As String,
                     ByVal estado As CartaDePorteManager.enumCDPestado,
                     ByVal QueContenga As String,
@@ -6653,10 +6653,15 @@ Public Class CartaDePorteManager
                     ByVal fechadesde As DateTime, ByVal fechahasta As DateTime,
                     ByVal puntoventa As Integer,
                     Optional ByVal optDivisionSyngenta As String = "Ambas",
+                    Optional ByVal bTraerDuplicados As Boolean = False,
+                    Optional ByVal Contrato As String = "",
+                    Optional ByVal QueContenga2 As String = "", Optional ByVal idClienteAuxiliar As Integer = -1,
                     Optional ByVal Vagon As Integer = Nothing, Optional ByVal Patente As String = "",
-                    Optional ByVal optCamionVagon As String = "Ambas",
-                    Optional ByVal idClienteAuxiliar As Integer = -1
+                    Optional ByVal optCamionVagon As String = "Ambas"
                 ) As String
+
+
+
 
 
         Dim strWHERE As String = "1=1 "
@@ -6766,6 +6771,13 @@ Public Class CartaDePorteManager
             strWHERE += "AND (CDP.PuntoVenta=" & puntoventa & ")"  ' OR PuntoVenta=0)"  'lo del punto de venta=0 era por las importaciones donde alguien (con acceso a todos los puntos de venta) no tenía donde elegir cual 
         End If
 
+
+        If Contrato <> "" And Contrato <> "0" Then
+            strWHERE += "  AND Contrato='" & Contrato & "' "
+        End If
+
+
+
         Dim desde As String = iisValidSqlDate(fechadesde.ToString)
         Dim hasta As String = iisValidSqlDate(fechahasta.ToString)
         'no se por qué no está andando el formateaFecha
@@ -6810,8 +6822,7 @@ Public Class CartaDePorteManager
         End If
 
 
-
-
+    
 
         sTituloFiltroUsado &= FormatearTitulo(sc,
                               sTituloFiltroUsado,
@@ -14865,7 +14876,7 @@ Public Class CartaDePorteManager
 
 
         Dim clis = UserDatosExtendidosManager.TraerClientesRelacionadoslDelUsuario(usuario, scbdlmaster).Replace("-", "")
-        Dim cc = iisNull(clis, "").Split("|")
+        Dim cc = iisNull(clis, "").ToString.Split(New [Char]() {CChar(","), CChar("|"), CChar(";")})
 
 
 
