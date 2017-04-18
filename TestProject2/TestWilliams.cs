@@ -49,6 +49,11 @@ using System.Text;
 using System.Reflection;
 
 
+using OpenQA.Selenium.Firefox;
+using OpenQA.Selenium;
+
+
+
 
 
 //test de java lopez
@@ -837,9 +842,111 @@ namespace ProntoMVC.Tests
         /// ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-//        36711 - Ramallo – PRIORIDAD     ????
+        //        36711 - Ramallo – PRIORIDAD     ????
 
-//31206 - MAPA DE MERCADO ESTRATEGICO- PRIORIDAD
+        //31206 - MAPA DE MERCADO ESTRATEGICO- PRIORIDAD
+
+
+
+
+
+
+
+        [TestMethod]
+        public void SincroBTG_noFiltraElContrato()
+        {
+            //            Estoy necesitando que en la exportación de los TXT se agregue el campo de Calidad conforme.
+
+            //51 – Calidad Conforme
+            //Alfa
+            //2
+            //Acepta los valores Sí/No
+
+            //string DIRFTP = DirApp + @"\DataBackupear\";
+            //string ArchivoExcelDestino = DIRFTP + "ControlKilos_" + DateTime.Now.ToString("ddMMMyyyy_HHmmss") + ".xlsx";
+
+            string contrato = "9";
+
+
+            string sErrores = "", sTitulo = "";
+            LinqCartasPorteDataContext db = null;
+
+            // el _CONST_MAXROWS sale del app.config
+
+            int registrosf = 0;
+
+            int idcli = CartaDePorteManager.BuscarClientePorCUIT("30-50930520-6", SC, "");
+
+            var output = SincronismosWilliamsManager.GenerarSincro("BTG PACTUAL [BIT]", ref sErrores, SC, "dominio", ref sTitulo
+                                , CartaDePorteManager.enumCDPestado.DescargasMasFacturadas,
+                     "", idcli, -1,
+                -1, idcli,
+                 idcli, -1, -1, -1,
+                 CartaDePorteManager.FiltroANDOR.FiltroOR, "Entregas",
+                new DateTime(2016, 1, 1), new DateTime(2016, 3, 31),
+                -1, "Ambas", false, contrato, "", -1, ref registrosf, 4000);
+
+
+
+            //File.Copy(output, @"C:\Users\Administrador\Desktop\"   Path.GetFileName(output), true);
+            System.Diagnostics.Process.Start(output);
+        }
+
+
+
+
+
+
+        [TestMethod]
+        public void loginEnUrenport2()
+        {
+
+            IWebDriver driver = new FirefoxDriver();
+
+            //Notice navigation is slightly different than the Java version
+            //This is because 'get' is a keyword in C#
+            driver.Navigate().GoToUrl("http://www.google.com/");
+            IWebElement query = driver.FindElement(By.Name("q"));
+            query.SendKeys("Cheese");
+            System.Console.WriteLine("Page title is: " + driver.Title);
+            driver.Quit();
+        }
+
+
+        [TestMethod]
+        public void loginEnUrenport()
+        {
+
+            // http://stackoverflow.com/questions/975426/how-to-programmatically-log-in-to-a-website-to-screenscape?noredirect=1&lq=1
+
+            // url  = "http://extranet.urenport.com/Login.aspx?ReturnUrl=%2fextraform%2findex.aspx"
+            //    string user="williams";
+            //string pass = "santiago1177";
+
+
+            //    HttpWebRequest http = WebRequest.Create(url) as HttpWebRequest;
+            //    http.KeepAlive = true;
+            //    http.Method = "POST";
+            //    http.ContentType = "application/x-www-form-urlencoded";
+            //    string postData = "FormNameForUserId=" + strUserId + "&FormNameForPassword=" + strPassword;
+            //    byte[] dataBytes = UTF8Encoding.UTF8.GetBytes(postData);
+            //    http.ContentLength = dataBytes.Length;
+            //    using (Stream postStream = http.GetRequestStream())
+            //    {
+            //        postStream.Write(dataBytes, 0, dataBytes.Length);
+            //    }
+            //    HttpWebResponse httpResponse = http.GetResponse() as HttpWebResponse;
+            //    // Probably want to inspect the http.Headers here first
+            //    http = WebRequest.Create(url2) as HttpWebRequest;
+            //    http.CookieContainer = new CookieContainer();
+            //    http.CookieContainer.Add(httpResponse.Cookies);
+            //    HttpWebResponse httpResponse2 = http.GetResponse() as HttpWebResponse;
+
+
+
+
+        }
+
 
 
 
@@ -893,9 +1000,9 @@ namespace ProntoMVC.Tests
         [TestMethod]
         public void SincroGESAGRO_37858()
         {
-       
 
-    
+
+
 
             string sErrores = "", sTitulo = "";
             LinqCartasPorteDataContext db = null;
@@ -925,12 +1032,12 @@ namespace ProntoMVC.Tests
         [TestMethod]
         public void SincroLosGrobo_37815()
         {
-//            Estoy necesitando que en la exportación de los TXT se agregue el campo de Calidad conforme.
+            //            Estoy necesitando que en la exportación de los TXT se agregue el campo de Calidad conforme.
 
-//51 – Calidad Conforme
-//Alfa
-//2
-//Acepta los valores Sí/No
+            //51 – Calidad Conforme
+            //Alfa
+            //2
+            //Acepta los valores Sí/No
 
             //string DIRFTP = DirApp + @"\DataBackupear\";
             //string ArchivoExcelDestino = DIRFTP + "ControlKilos_" + DateTime.Now.ToString("ddMMMyyyy_HHmmss") + ".xlsx";
@@ -963,7 +1070,7 @@ namespace ProntoMVC.Tests
 
 
 
-        
+
 
         [TestMethod]
         public void FormatoSpeedagro_37831()
@@ -1079,7 +1186,7 @@ namespace ProntoMVC.Tests
         {
 
 
-    
+
 
             int pv = 2;
             int idarticulo = SQLdinamico.BuscaIdArticuloPreciso("MAIZ", SC);
@@ -1095,7 +1202,7 @@ namespace ProntoMVC.Tests
             string sTitulo = "";
 
             // esto es cómo lo calcula GeneroDataTablesDeMovimientosDeStock
-    
+
             var sql = CartaDePorteManager.GetDataTableFiltradoYPaginado_CadenaSQL(SC,
                     "", "", "", 1, 0,
                     CartaDePorteManager.enumCDPestado.TodasMenosLasRechazadas, "", -1, -1,
@@ -1104,7 +1211,7 @@ namespace ProntoMVC.Tests
                     CartaDePorteManager.FiltroANDOR.FiltroAND, "Export",
                      desde, hasta, -1, ref sTitulo, "Ambas");
 
-            var dt = EntidadManager.ExecDinamico(SC, "select isnull(sum(netoproc),0) as total  from (" + sql + ") as C",200);
+            var dt = EntidadManager.ExecDinamico(SC, "select isnull(sum(netoproc),0) as total  from (" + sql + ") as C", 200);
 
             decimal total = Convert.ToDecimal(dt.Rows[0][0]);
 
@@ -1127,7 +1234,7 @@ namespace ProntoMVC.Tests
         public void carta559344519_35603()
         {
 
-            var ii=SQLdinamico.BuscaIdWilliamsDestinoPreciso(DiccionarioEquivalenciasManager.BuscarEquivalencia(SC, "TERMINAL 6"), SC);
+            var ii = SQLdinamico.BuscaIdWilliamsDestinoPreciso(DiccionarioEquivalenciasManager.BuscarEquivalencia(SC, "TERMINAL 6"), SC);
 
         }
 

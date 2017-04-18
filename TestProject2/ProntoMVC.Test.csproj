@@ -180,6 +180,9 @@
     <Reference Include="Trirand.Web.Mvc">
       <HintPath>..\ProntoMVC\bin\Trirand.Web.Mvc.dll</HintPath>
     </Reference>
+    <Reference Include="WebDriver">
+      <HintPath>..\..\packages\Selenium.WebDriver.3.3.0\lib\net40\WebDriver.dll</HintPath>
+    </Reference>
     <Reference Include="WindowsBase" />
     <Reference Include="WSAFIPFE">
       <HintPath>..\ProntoMVC\bin\WSAFIPFE.dll</HintPath>
