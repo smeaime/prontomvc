@@ -632,7 +632,7 @@ Namespace Pronto.ERP.Bll
                 Try
 
 
-                    sWHERE = CartaDePorteManager.generarWHEREparaDatasetParametrizadoConFechaEnNumerales(SC, _
+                    sWHERE = CartaDePorteManager.generarWHEREparaDatasetParametrizadoConFechaEnNumerales2(SC, _
                                                 sTitulo, _
                                                 CartaDePorteManager.enumCDPestado.DescargasMasFacturadas, "", idVendedor, idCorredor, _
                                                 idDestinatario, idIntermediario, _
@@ -640,7 +640,7 @@ Namespace Pronto.ERP.Bll
                                                 AplicarANDuORalFiltro, ModoExportacion, _
                                                 Convert.ToDateTime(sDesde), _
                                                 Convert.ToDateTime(sHasta), _
-                                                puntoventa, optDivisionSyngenta, , , , idClienteAuxiliar)
+                                                puntoventa, optDivisionSyngenta, , Contrato, , idClienteAuxiliar)
                     sWHERE = sWHERE.Replace("CDP.", "")
 
 
@@ -687,7 +687,7 @@ Namespace Pronto.ERP.Bll
                             Try
 
 
-                                sWHERE = CartaDePorteManager.generarWHEREparaDatasetParametrizadoConFechaEnNumerales(SC, _
+                                sWHERE = CartaDePorteManager.generarWHEREparaDatasetParametrizadoConFechaEnNumerales2(SC, _
                                                             sTitulo, _
                                                             CartaDePorteManager.enumCDPestado.DescargasMasFacturadas, "A.C.A", idVendedor, idCorredor, _
                                                             idDestinatario, idIntermediario, _
@@ -695,7 +695,7 @@ Namespace Pronto.ERP.Bll
                                                            AplicarANDuORalFiltro, ModoExportacion, _
                                                             Convert.ToDateTime(sDesde), _
                                                             Convert.ToDateTime(sHasta), _
-                                                          Val(puntoventa), optDivisionSyngenta, , , , idClienteAuxiliar)
+                                                          Val(puntoventa), optDivisionSyngenta, , Contrato, , idClienteAuxiliar)
                                 sWHERE = sWHERE.Replace("CDP.", "")
 
 
@@ -930,7 +930,7 @@ Namespace Pronto.ERP.Bll
 
                         Case "BTG PACTUAL [BIT]"
 
-
+                     
                             Dim sErrores As String
 
                             output = Sincronismo_BTGDescargas(ds.wCartasDePorte_TX_InformesCorregido, , sWHERE, sErrores)
