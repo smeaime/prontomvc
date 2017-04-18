@@ -99,3 +99,153 @@ Error in: . Error Message:
 3880
 3882
 __________________________
+
+Log Entry : 
+04/18/2017 07:25:37
+Error in: . Error Message:Generando sincro para Gesagro
+__________________________
+
+Log Entry : 
+04/18/2017 07:36:35
+Error in: . Error Message:Generando sincro para Gesagro
+__________________________
+
+Log Entry : 
+04/18/2017 07:41:35
+Error in: . Error Message:Generando sincro para LOS GROBO
+__________________________
+
+Log Entry : 
+04/18/2017 07:45:20
+Error in: . Error Message:La localidad NOGOYA es usada en el sincro de LosGrobo y no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+04/18/2017 07:46:23
+Error in: . Error Message:Por generar el archivo C:\Users\Administrador\AppData\Local\Temp\Listado general 18abr2017_074607_GLG.xls
+__________________________
+
+Log Entry : 
+04/18/2017 07:46:23
+Error in: . Error Message:Archivo generado C:\Users\Administrador\AppData\Local\Temp\Listado general 18abr2017_074607_GLG.xls
+__________________________
+
+Log Entry : 
+04/18/2017 07:46:25
+Error in: . Error Message:System.Net.Mail.SmtpException
+Error al enviar correo.
+   en System.Net.Mail.SmtpClient.Send(MailMessage message)
+   en Pronto.ERP.Bll.EntidadManager.MandaEmail_Nuevo(String Para, String Asunto, String Cuerpo, String De, String SmtpServer, String SmtpUser, String SmtpPass, String sFileNameAdjunto, Int64 SmtpPort, Int32 EnableSSL, String CCO, String img, String friendlyname, String replyTo, Boolean isHtml, String inlinePNG, String inlinePNG2) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\EntidadManager.vb:línea 303
+System
+__________________________
+
+Log Entry : 
+04/18/2017 07:46:25
+Error in: . Error Message:buenosaires@williamsentregas.com.ar
+__________________________
+
+Log Entry : 
+04/18/2017 07:46:25
+Error in: . Error Message:mscalella911@gmail.com
+__________________________
+
+Log Entry : 
+04/18/2017 07:46:25
+Error in: . Error Message:Error en EnviarMailFiltroPorId() System.Net.Mail.SmtpException: Error al enviar correo. ---> System.IO.IOException: No se puede escribir datos de en la conexión de transporte: net_io_connectionclosed.
+   en System.Net.Mail.SmtpReplyReaderFactory.ProcessRead(Byte[] buffer, Int32 offset, Int32 read, Boolean readLine)
+   en System.Net.Mail.SmtpReplyReaderFactory.ReadLines(SmtpReplyReader caller, Boolean oneLine)
+   en System.Net.Mail.SmtpReplyReaderFactory.ReadLine(SmtpReplyReader caller)
+   en System.Net.Mail.CheckCommand.Send(SmtpConnection conn, String& response)
+   en System.Net.Mail.MailCommand.Send(SmtpConnection conn, Byte[] command, MailAddress from, Boolean allowUnicode)
+   en System.Net.Mail.SmtpTransport.SendMail(MailAddress sender, MailAddressCollection recipients, String deliveryNotify, Boolean allowUnicode, SmtpFailedRecipientException& exception)
+   en System.Net.Mail.SmtpClient.Send(MailMessage message)
+   --- Fin del seguimiento de la pila de la excepción interna ---
+   en System.Net.Mail.SmtpClient.Send(MailMessage message)
+   en Pronto.ERP.Bll.EntidadManager.MandaEmail_Nuevo(String Para, String Asunto, String Cuerpo, String De, String SmtpServer, String SmtpUser, String SmtpPass, String sFileNameAdjunto, Int64 SmtpPort, Int32 EnableSSL, String CCO, String img, String friendlyname, String replyTo, Boolean isHtml, String inlinePNG, String inlinePNG2) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\EntidadManager.vb:línea 439
+   en CDPMailFiltrosManager2.EnviarMailFiltroPorRegistro_DLL(String SC, DateTime fechadesde, DateTime fechahasta, Int32 puntoventa, String titulo, enumCDPestado estado, DataRow& dr, String& sError, Boolean bVistaPrevia, String SmtpServer, String SmtpUser, String SmtpPass, Int32 SmtpPort, String CCOaddress, String& sError2, String inlinePNG, String inlinePNG2) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 20514
+__________________________
+
+Log Entry : 
+04/18/2017 07:46:28
+Error in: . Error Message:Nombre  'Listado general de Cartas de Po$'
+__________________________
+
+Log Entry : 
+04/18/2017 07:46:28
+Error in: . Error Message:Tablas  1
+__________________________
+
+Log Entry : 
+04/18/2017 07:46:28
+Error in: . Error Message:Convertido C:\Users\Administrador\AppData\Local\Temp\Listado general 18abr2017_074607_GLG.xls Lineas: 413
+__________________________
+
+Log Entry : 
+04/18/2017 07:46:29
+Error in: . Error Message:error html row 404
+__________________________
+
+Log Entry : 
+04/18/2017 07:46:29
+Error in: . Error Message:error html row 405
+__________________________
+
+Log Entry : 
+04/18/2017 07:46:29
+Error in: . Error Message:error html row 406
+__________________________
+
+Log Entry : 
+04/18/2017 07:46:29
+Error in: . Error Message:error html row 407
+__________________________
+
+Log Entry : 
+04/18/2017 07:51:26
+Error in: . Error Message:Generando sincro para Gesagro
+__________________________
+
+Log Entry : 
+04/18/2017 07:52:25
+Error in: . Error Message:Generando sincro para LOS GROBO
+__________________________
+
+Log Entry : 
+04/18/2017 07:55:43
+Error in: . Error Message:La localidad NOGOYA es usada en el sincro de LosGrobo y no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+04/18/2017 07:58:11
+Error in: . Error Message:Generando sincro para LOS GROBO
+__________________________
+
+Log Entry : 
+04/18/2017 08:01:51
+Error in: . Error Message:La localidad NOGOYA es usada en el sincro de LosGrobo y no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+04/18/2017 08:05:16
+Error in: . Error Message:Generando sincro para LOS GROBO
+__________________________
+
+Log Entry : 
+04/18/2017 08:08:37
+Error in: . Error Message:La localidad NOGOYA es usada en el sincro de LosGrobo y no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+04/18/2017 08:15:03
+Error in: . Error Message:La localidad NOGOYA es usada en el sincro de LosGrobo y no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+04/18/2017 08:27:32
+Error in: . Error Message:Generando sincro para LOS GROBO
+__________________________
+
+Log Entry : 
+04/18/2017 08:31:18
+Error in: . Error Message:La localidad NOGOYA es usada en el sincro de LosGrobo y no tiene codigo LosGrobo
+__________________________

@@ -837,6 +837,238 @@ namespace ProntoMVC.Tests
         /// ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
+//        36711 - Ramallo – PRIORIDAD     ????
+
+//31206 - MAPA DE MERCADO ESTRATEGICO- PRIORIDAD
+
+
+
+
+
+        [TestMethod]
+        public void InformeMapaEstrategico_31206()
+        {
+
+
+
+            string sErrores = "", sTitulo = "";
+            LinqCartasPorteDataContext db = null;
+
+            string ArchivoExcelDestino = @"C:\Users\Administrador\Desktop\lala.xls";
+
+            Microsoft.Reporting.WebForms.ReportViewer rep = new Microsoft.Reporting.WebForms.ReportViewer();
+
+
+
+            ReportParameter[] yourParams = new ReportParameter[9];
+            yourParams[0] = new ReportParameter("CadenaConexion", ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC));
+            yourParams[1] = new ReportParameter("Producto", "");
+            yourParams[2] = new ReportParameter("Puerto", "");
+            yourParams[3] = new ReportParameter("Cliente", "");
+            yourParams[4] = new ReportParameter("TonsDesde", "0");
+            yourParams[5] = new ReportParameter("TonsHasta", "9999");
+            yourParams[6] = new ReportParameter("FechaDesde", (new DateTime(1000, 1, 1)).ToString());
+            yourParams[7] = new ReportParameter("FechaHasta", (new DateTime(3000, 1, 1)).ToString());
+            yourParams[8] = new ReportParameter("Modo", "entregas");
+
+
+            // Armar un informe de tipo de tabla dinámica que se pueda filtrar por Producto, Puerto, Clientes, Toneladas (desde / hasta) y Modo.
+            // El reporte será una tabla dinámica, el primer nivel la localidad de procedencia y el segundo el titular. El dato son las TN descargadas.
+
+
+
+            var output = CartaDePorteManager.RebindReportViewer_ServidorExcel(ref rep,
+                                  "MapaArgentinaProcedenciaCartasPorte.rdl", yourParams, ref ArchivoExcelDestino, false);
+
+
+
+            System.Diagnostics.Process.Start(output);
+
+
+        }
+
+
+
+
+        [TestMethod]
+        public void SincroGESAGRO_37858()
+        {
+       
+
+    
+
+            string sErrores = "", sTitulo = "";
+            LinqCartasPorteDataContext db = null;
+
+            // el _CONST_MAXROWS sale del app.config
+
+            int registrosf = 0;
+
+            int idcli = CartaDePorteManager.BuscarClientePorCUIT("30-50930520-6", SC, "");
+
+            var output = SincronismosWilliamsManager.GenerarSincro("Gesagro", ref sErrores, SC, "dominio", ref sTitulo
+                                , CartaDePorteManager.enumCDPestado.DescargasMasFacturadas,
+                     "", idcli, -1,
+                -1, idcli,
+                 idcli, -1, -1, -1,
+                 CartaDePorteManager.FiltroANDOR.FiltroOR, "Entregas",
+                new DateTime(2016, 1, 1), new DateTime(2016, 3, 31),
+                -1, "Ambas", false, "", "", -1, ref registrosf, 4000);
+
+
+            System.Diagnostics.Process.Start(output);
+        }
+
+
+
+
+        [TestMethod]
+        public void SincroLosGrobo_37815()
+        {
+//            Estoy necesitando que en la exportación de los TXT se agregue el campo de Calidad conforme.
+
+//51 – Calidad Conforme
+//Alfa
+//2
+//Acepta los valores Sí/No
+
+            //string DIRFTP = DirApp + @"\DataBackupear\";
+            //string ArchivoExcelDestino = DIRFTP + "ControlKilos_" + DateTime.Now.ToString("ddMMMyyyy_HHmmss") + ".xlsx";
+
+
+            string sErrores = "", sTitulo = "";
+            LinqCartasPorteDataContext db = null;
+
+            // el _CONST_MAXROWS sale del app.config
+
+            int registrosf = 0;
+
+            int idcli = CartaDePorteManager.BuscarClientePorCUIT("30-50930520-6", SC, "");
+
+            var output = SincronismosWilliamsManager.GenerarSincro("LOS GROBO", ref sErrores, SC, "dominio", ref sTitulo
+                                , CartaDePorteManager.enumCDPestado.DescargasMasFacturadas,
+                     "", idcli, -1,
+                -1, idcli,
+                 idcli, -1, -1, -1,
+                 CartaDePorteManager.FiltroANDOR.FiltroOR, "Entregas",
+                new DateTime(2016, 1, 1), new DateTime(2016, 3, 31),
+                -1, "Ambas", false, "", "", -1, ref registrosf, 4000);
+
+
+
+            //File.Copy(output, @"C:\Users\Administrador\Desktop\"   Path.GetFileName(output), true);
+            System.Diagnostics.Process.Start(output);
+        }
+
+
+
+
+        
+
+        [TestMethod]
+        public void FormatoSpeedagro_37831()
+        {
+
+
+            //-Les acabo de pasar correo con la solicitud del cliente nuevo SPEEDAGRO para que en el exel de descargas que pasa el sistema, salga el cuit a su lado titular, intermediario, rem comercial, corredor, transporte, chofer, etc, etc
+            //    -Martín,Lo que deben hacer es cuando arman el mail de Speedagro, elegir el formato "Excel GroboCuits" que es el formato que se está usando con Grobocopatel.
+            //    -Andres, ahi me hace la devolucion SpeedAgro, y estarian faltando los cuit del destinatario y corredor. Resto estaria ok.Podes avanzar con esto ? Abrazo Martin
+
+            //aaaaaa
+            //Agregar el campos de AMBAS ( Excel + HTML ), asi no hay que agregar repetidamente
+            //otro grupo de mail para elegir el otro forma, y que en el mismo correo llegue de las dos manera, pegado en el cuerpo del mail + archivo Excel. - PENDIENTE
+
+            var fechadesde = new DateTime(2014, 1, 1);
+            var fechahasta = new DateTime(2014, 1, 2);
+            int pventa = 0;
+
+
+            var dr = CDPMailFiltrosManager2.TraerMetadata(SC, -1).NewRow();
+
+            dr["ModoImpresion"] = "Speed"; // este es el excel angosto con adjunto html angosto ("Listado general de Cartas de Porte (simulando original) con foto 2 .rdl"). Lo que quieren es el excel ANCHO manteniendo el MISMO html. 
+            //dr["ModoImpresion"] = "ExcHc";
+
+
+            //ElseIf iisNull(.Item("ModoImpresion"), "") = "ExcHtm" Then
+            //    'este es de servidor, así que saco el path
+            //    rdl = "Listado general de Cartas de Porte (simulando original) con foto 2"
+
+            //ElseIf iisNull(.Item("ModoImpresion"), "") = "EHOlav" Then
+            //    rdl = "Listado general de Cartas de Porte (simulando original) Olavarria"
+
+            //ElseIf iisNull(.Item("ModoImpresion"), "") = "HImag2" Then
+            //    rdl = "Listado general de Cartas de Porte (simulando original) para html con imagenes"
+
+
+
+
+
+            //dr["ModoImpresion"] = "HtmlIm";
+
+            dr["Emails"] = "mscalella911@gmail.com";
+
+            dr["Vendedor"] = -1;
+            dr["CuentaOrden1"] = -1;
+            dr["CuentaOrden2"] = -1;
+            dr["IdClienteAuxiliar"] = -1; ;
+            dr["Corredor"] = -1;
+            dr["Entregador"] = -1;
+            dr["Destino"] = -1;
+            dr["Procedencia"] = -1;
+            dr["FechaDesde"] = fechadesde;
+            dr["FechaHasta"] = fechahasta;
+            dr["AplicarANDuORalFiltro"] = 0; // CartaDePorteManager.FiltroANDOR.FiltroOR;
+            dr["Modo"] = "Ambos";
+            //dr["Orden"] = "";
+            //dr["Contrato"] = "";
+            dr["EnumSyngentaDivision"] = "";
+            dr["EsPosicion"] = false;
+            dr["IdArticulo"] = -1;
+            CartaDePorteManager.enumCDPestado estado = CartaDePorteManager.enumCDPestado.DescargasMasFacturadas;
+
+
+            string output = "";
+            string sError = "", sError2 = "";
+            string inlinePNG = DirApp + @"\imagenes\Unnamed.png";
+            string inlinePNG2 = DirApp + @"\imagenes\twitterwilliams.jpg";
+
+
+
+
+
+            try
+            {
+
+                output = CDPMailFiltrosManager2.EnviarMailFiltroPorRegistro_DLL(SC, fechadesde, fechahasta,
+                                                       pventa, "", estado,
+                                                    ref dr, ref sError, false,
+                                                   ConfigurationManager.AppSettings["SmtpServer"],
+                                                     ConfigurationManager.AppSettings["SmtpUser"],
+                                                     ConfigurationManager.AppSettings["SmtpPass"],
+                                                     Convert.ToInt16(ConfigurationManager.AppSettings["SmtpPort"]),
+                                                       "", ref sError2, inlinePNG, inlinePNG2);
+
+
+            }
+            catch (Exception)
+            {
+
+                //throw;
+            }
+
+
+
+            System.Web.UI.WebControls.GridView grid = new System.Web.UI.WebControls.GridView();
+            string html = CartaDePorteManager.ExcelToHtml(output, grid);
+
+
+            System.Diagnostics.Process.Start(output);
+
+        }
+
+
+
+
 
 
 
@@ -847,9 +1079,7 @@ namespace ProntoMVC.Tests
         {
 
 
-            // originalmente era un movimiento simple, no un "asiento". lo que pasa
-            // ahora es que toma los dos clientes como destinos o como origenes. es un embrollo
-
+    
 
             int pv = 2;
             int idarticulo = SQLdinamico.BuscaIdArticuloPreciso("MAIZ", SC);
@@ -865,14 +1095,7 @@ namespace ProntoMVC.Tests
             string sTitulo = "";
 
             // esto es cómo lo calcula GeneroDataTablesDeMovimientosDeStock
-            //var dtCDPs = CartaDePorteManager.GetDataTableFiltradoYPaginado(SC,
-            //        "", "", "", 1, 0,
-            //        CartaDePorteManager.enumCDPestado.TodasMenosLasRechazadas, "", -1, -1,
-            //        destinatario, -1,
-            //        -1, idarticulo, -1, destino,
-            //        CartaDePorteManager.FiltroANDOR.FiltroAND, "Export",
-            //         desde, hasta, -1, ref sTitulo, "Ambas");
-
+    
             var sql = CartaDePorteManager.GetDataTableFiltradoYPaginado_CadenaSQL(SC,
                     "", "", "", 1, 0,
                     CartaDePorteManager.enumCDPestado.TodasMenosLasRechazadas, "", -1, -1,
@@ -1688,50 +1911,6 @@ La interface será procesa por Syngenta y si la misma no puede ser procesada cor
         }
 
 
-
-
-
-        [TestMethod]
-        public void InformeMapaEstrategico_31206()
-        {
-
-
-
-            string sErrores = "", sTitulo = "";
-            LinqCartasPorteDataContext db = null;
-
-            string ArchivoExcelDestino = @"C:\Users\Administrador\Desktop\lala.xls";
-
-            Microsoft.Reporting.WebForms.ReportViewer rep = new Microsoft.Reporting.WebForms.ReportViewer();
-
-
-
-            ReportParameter[] yourParams = new ReportParameter[9];
-            yourParams[0] = new ReportParameter("CadenaConexion", ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC));
-            yourParams[1] = new ReportParameter("Producto", "");
-            yourParams[2] = new ReportParameter("Puerto", "");
-            yourParams[3] = new ReportParameter("Cliente", "");
-            yourParams[4] = new ReportParameter("TonsDesde", "0");
-            yourParams[5] = new ReportParameter("TonsHasta", "9999");
-            yourParams[6] = new ReportParameter("FechaDesde", (new DateTime(1000, 1, 1)).ToString());
-            yourParams[7] = new ReportParameter("FechaHasta", (new DateTime(3000, 1, 1)).ToString());
-            yourParams[8] = new ReportParameter("Modo", "entregas");
-
-
-            // Armar un informe de tipo de tabla dinámica que se pueda filtrar por Producto, Puerto, Clientes, Toneladas (desde / hasta) y Modo.
-            // El reporte será una tabla dinámica, el primer nivel la localidad de procedencia y el segundo el titular. El dato son las TN descargadas.
-
-
-
-            var output = CartaDePorteManager.RebindReportViewer_ServidorExcel(ref rep,
-                                  "MapaArgentinaProcedenciaCartasPorte.rdl", yourParams, ref ArchivoExcelDestino, false);
-
-
-
-            System.Diagnostics.Process.Start(output);
-
-
-        }
 
 
 

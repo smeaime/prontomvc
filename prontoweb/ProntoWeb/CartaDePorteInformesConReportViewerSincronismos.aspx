@@ -151,7 +151,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                             <asp:ListItem Enabled="True">Amaggi (calidades) [BIT]</asp:ListItem>
                             <asp:ListItem Enabled="True">Andreoli</asp:ListItem>
                             <asp:ListItem Enabled="True">Argencer</asp:ListItem>
-                            <asp:ListItem Enabled="True">Beraza</asp:ListItem>
+                            <asp:ListItem Enabled="True">Beraza</asp:ListItem> <%-- [Algoritmo]--%>
                             <asp:ListItem Enabled="True">BLD</asp:ListItem>
                             <asp:ListItem Enabled="True">BLDCONVERTIR</asp:ListItem>
                             <asp:ListItem Enabled="True">BLD (calidades)</asp:ListItem>
@@ -175,6 +175,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                             <asp:ListItem Enabled="True">Los Grobo [Algoritmo]</asp:ListItem>
                             <asp:ListItem Enabled="true">FYO</asp:ListItem>
                             <asp:ListItem Enabled="true">FYO (posición)</asp:ListItem>
+                            <asp:ListItem Enabled="true">Gesagro</asp:ListItem>
                             <asp:ListItem Enabled="true">Granar</asp:ListItem>
                             <asp:ListItem Enabled="true">Granos del Parana</asp:ListItem>
                             <asp:ListItem Enabled="true">Granos del Litoral</asp:ListItem>
@@ -196,7 +197,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                             <asp:ListItem Enabled="true">Santa Catalina</asp:ListItem>
                             <asp:ListItem Enabled="true">Syngenta</asp:ListItem>
                             <asp:ListItem Enabled="true">Syngenta Facturación</asp:ListItem>
-                            <asp:ListItem Enabled="true">Tomas Hnos</asp:ListItem>
+                            <asp:ListItem Enabled="true">Tomas Hnos</asp:ListItem> <%-- [Algoritmo]--%>
                             <asp:ListItem Enabled="True">Tecnocampo</asp:ListItem>
                             <asp:ListItem Enabled="true">YPF</asp:ListItem>
                             <asp:ListItem Enabled="false">YPF 2</asp:ListItem>
