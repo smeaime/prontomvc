@@ -21169,9 +21169,9 @@ Public Class LogicaInformesWilliams
 
 
 
-        entradasCDP = EntidadManager.ExecDinamico(sc, "select isnull(sum(netoproc-MermaVolatil),0) as total  from (" + sql + ") as C").Rows(0).Item(0)
 
 
+        entradasCDP = EntidadManager.ExecDinamico(sc, "select isnull(sum(netoproc),0) as total  from (" + sql + ") as C", 200).Rows(0).Item(0)
 
 
 
@@ -21386,62 +21386,23 @@ Public Class LogicaInformesWilliams
         'por qué no incluye acá la id 2092346? -por el subnumero de facturacion
 
 
-        If True Then
 
-            'acá tenes un tema con usar Fecha o Fecha-1
-            '-si el tipo elige desde hoy hasta hoy, tenes que llamar a la funcion con el ultimo segundo de ayer, porque GetDataTableFiltradoYPaginado_CadenaSQL usa menor o igual
-
-
-            Dim sql = CartaDePorteManager.GetDataTableFiltradoYPaginado_CadenaSQL(sc,
-                    "", "", "", 1, 0,
-                 enumCDPestado.TodasMenosLasRechazadas, "", -1, -1,
-                    idcliente, -1,
-                    -1, IdArticulo, -1, IdDestinoWilliams,
-                   "1", "Export",
-                      #1/1/1750#, DateAdd(DateInterval.Second, -1, Fecha), -1, , , , , , , , , , )
+        'acá tenes un tema con usar Fecha o Fecha-1
+        '-si el tipo elige desde hoy hasta hoy, tenes que llamar a la funcion con el ultimo segundo de ayer, porque GetDataTableFiltradoYPaginado_CadenaSQL usa menor o igual
 
 
-
-            entradasCDP = EntidadManager.ExecDinamico(sc, "select isnull(sum(netoproc),0) as total  from (" + sql + ") as C").Rows(0).Item(0)
+        Dim sql = CartaDePorteManager.GetDataTableFiltradoYPaginado_CadenaSQL(sc,
+                "", "", "", 1, 0,
+             enumCDPestado.TodasMenosLasRechazadas, "", -1, -1,
+                idcliente, -1,
+                -1, IdArticulo, -1, IdDestinoWilliams,
+               "1", "Export",
+                  #1/1/1750#, DateAdd(DateInterval.Second, -1, Fecha), -1, , , , , , , , , , )
 
 
 
-        ElseIf False Then
+        entradasCDP = EntidadManager.ExecDinamico(sc, "select isnull(sum(netoproc-MermaVolatil),0) as total  from (" + sql + ") as C").Rows(0).Item(0)
 
-            Dim q As IQueryable(Of CartasConCalada) = CartasLINQlocalSimplificadoTipadoConCalada(sc,
-                    "", "", "", 1, 0,
-                    enumCDPestado.TodasMenosLasRechazadas, "", -1, -1,
-                     idcliente, -1,
-                    -1, IdArticulo, -1, IdDestinoWilliams,
-                    FiltroANDOR.FiltroOR, enumCDPexportacion.Export,
-                     #1/1/1980#, Fecha, -1)
-
-            Dim c = q.Count
-            If c = 0 Then
-                entradasCDP = 0
-            Else
-                'parece que si no trae registros, me explota el sum
-                entradasCDP = q.DefaultIfEmpty.Sum(Function(x) x.NetoProc)
-            End If
-
-        Else
-
-            'el true está obviando la condicion de SubnumeroDeFacturacion
-            'el tema es que no puedo tomar solo la original, porque la que suele estar marcada como exportacion es una copia
-
-
-            Dim q = Aggregate i In db.CartasDePortes
-                    Where (If(i.FechaDescarga, i.FechaDeCarga) < Fecha) _
-                        And (If(i.SubnumeroDeFacturacion, 0) <= 0) _
-                        And db.CartasDePortes.Any(Function(x) x.Exporta = "SI" And x.NumeroCartaDePorte = i.NumeroCartaDePorte) _
-                        And i.Anulada <> "SI" _
-                        And If(i.Destino, 0) = IdDestinoWilliams _
-                        And If(i.IdArticulo, 0) = IdArticulo _
-                        And If(i.Entregador, 0) = idcliente
-                    Into Sum(CType(i.NetoProc, Decimal?))
-
-            entradasCDP = iisNull(q, 0)
-        End If
 
 
         '///////////////////////////////////////////////
