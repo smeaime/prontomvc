@@ -838,6 +838,68 @@ namespace ProntoMVC.Tests
 
 
 
+
+
+
+
+        [TestMethod]
+        public void movimientos_37806_2()
+        {
+
+
+            // originalmente era un movimiento simple, no un "asiento". lo que pasa
+            // ahora es que toma los dos clientes como destinos o como origenes. es un embrollo
+
+
+            int pv = 2;
+            int idarticulo = SQLdinamico.BuscaIdArticuloPreciso("MAIZ", SC);
+            int destino = SQLdinamico.BuscaIdWilliamsDestinoPreciso("EL TRANSITO - ALFRED C TOEPFER", SC);
+            int destinatario = SQLdinamico.BuscaIdClientePreciso("AMAGGI ARGENTINA S.A.", SC);
+            DateTime desde = new DateTime(2012, 1, 1);
+            DateTime hasta = new DateTime(2017, 3, 31);
+
+            var ex1 = LogicaInformesWilliams.ExistenciasAlDiaPorPuerto(SC, desde, idarticulo, destino, destinatario);
+            Debug.Print(ex1.ToString());
+            var ex2 = LogicaInformesWilliams.ExistenciasAlDiaPorPuerto(SC, hasta, idarticulo, destino, destinatario);
+
+            string sTitulo = "";
+
+            // esto es cómo lo calcula GeneroDataTablesDeMovimientosDeStock
+            //var dtCDPs = CartaDePorteManager.GetDataTableFiltradoYPaginado(SC,
+            //        "", "", "", 1, 0,
+            //        CartaDePorteManager.enumCDPestado.TodasMenosLasRechazadas, "", -1, -1,
+            //        destinatario, -1,
+            //        -1, idarticulo, -1, destino,
+            //        CartaDePorteManager.FiltroANDOR.FiltroAND, "Export",
+            //         desde, hasta, -1, ref sTitulo, "Ambas");
+
+            var sql = CartaDePorteManager.GetDataTableFiltradoYPaginado_CadenaSQL(SC,
+                    "", "", "", 1, 0,
+                    CartaDePorteManager.enumCDPestado.TodasMenosLasRechazadas, "", -1, -1,
+                    destinatario, -1,
+                    -1, idarticulo, -1, destino,
+                    CartaDePorteManager.FiltroANDOR.FiltroAND, "Export",
+                     desde, hasta, -1, ref sTitulo, "Ambas");
+
+            var dt = EntidadManager.ExecDinamico(SC, "select isnull(sum(netoproc),0) as total  from (" + sql + ") as C",200);
+
+            decimal total = Convert.ToDecimal(dt.Rows[0][0]);
+
+
+
+            DataTable dtCDPs = null;
+            object dtMOVs = null, dt2 = null;
+
+            LogicaInformesWilliams.GeneroDataTablesDeMovimientosDeStock(ref dtCDPs, ref dt2, ref dtMOVs, destinatario, destino, idarticulo, desde, hasta, SC);
+        }
+
+
+
+
+
+
+
+
         [TestMethod]
         public void carta559344519_35603()
         {
@@ -1042,7 +1104,7 @@ La interface será procesa por Syngenta y si la misma no puede ser procesada cor
 
 
         [TestMethod]
-        public void movimientos_37806()
+        public void movimientos_37806_1()
         {
 
 
