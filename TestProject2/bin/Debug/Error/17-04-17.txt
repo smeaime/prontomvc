@@ -1,0 +1,52 @@
+
+Log Entry : 
+04/17/2017 11:55:02
+Error in: . Error Message:entradasCDP: 0
+__________________________
+
+Log Entry : 
+04/17/2017 11:55:02
+Error in: . Error Message:entradasMOV: 0
+__________________________
+
+Log Entry : 
+04/17/2017 11:55:02
+Error in: . Error Message:salidas: 0
+__________________________
+
+Log Entry : 
+04/17/2017 11:55:02
+Error in: . Error Message:total: 0
+__________________________
+
+Log Entry : 
+04/17/2017 11:55:02
+Error in: . Error Message:
+
+__________________________
+
+Log Entry : 
+04/17/2017 11:56:08
+Error in: . Error Message:entradasCDP: 0
+__________________________
+
+Log Entry : 
+04/17/2017 11:56:08
+Error in: . Error Message:entradasMOV: 0
+__________________________
+
+Log Entry : 
+04/17/2017 11:56:08
+Error in: . Error Message:salidas: 0
+__________________________
+
+Log Entry : 
+04/17/2017 11:56:08
+Error in: . Error Message:total: 0
+__________________________
+
+Log Entry : 
+04/17/2017 11:56:08
+Error in: . Error Message:
+
+__________________________
