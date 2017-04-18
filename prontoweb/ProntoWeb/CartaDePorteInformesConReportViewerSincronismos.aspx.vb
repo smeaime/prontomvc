@@ -817,7 +817,7 @@ Partial Class CartaDePorteInformesConReportViewerSincronismos
             Try
 
 
-                sWHERE = CartaDePorteManager.generarWHEREparaDatasetParametrizadoConFechaEnNumerales(HFSC.Value, _
+                sWHERE = CartaDePorteManager.generarWHEREparaDatasetParametrizadoConFechaEnNumerales2(HFSC.Value, _
                                             sTitulo, _
                                             enumCDPestado.DescargasMasFacturadas, "", idVendedor, idCorredor, _
                                             idDestinatario, idIntermediario, _
@@ -826,7 +826,11 @@ Partial Class CartaDePorteInformesConReportViewerSincronismos
                                             DropDownList2.Text, _
                                             Convert.ToDateTime(iisValidSqlDate(txtFechaDesde.Text, #1/1/1753#)), _
                                             Convert.ToDateTime(iisValidSqlDate(txtFechaHasta.Text, #1/1/2100#)), _
-                                            cmbPuntoVenta.SelectedValue, optDivisionSyngenta.SelectedValue, , , optCamionVagon.SelectedValue, idClienteAuxiliar)
+                cmbPuntoVenta.SelectedValue, optDivisionSyngenta.SelectedValue, , txtContrato.Text, , idClienteAuxiliar, Val(txtVagon.Text), txtPatente.Text, optCamionVagon.SelectedValue)
+
+
+
+
                 sWHERE = sWHERE.Replace("CDP.", "")
 
 
@@ -912,7 +916,7 @@ Partial Class CartaDePorteInformesConReportViewerSincronismos
                         Try
 
 
-                            sWHERE = CartaDePorteManager.generarWHEREparaDatasetParametrizadoConFechaEnNumerales(HFSC.Value, _
+                            sWHERE = CartaDePorteManager.generarWHEREparaDatasetParametrizadoConFechaEnNumerales2(HFSC.Value, _
                                                         sTitulo, _
                                                         enumCDPestado.DescargasMasFacturadas, "A.C.A", idVendedor, idCorredor, _
                                                         idDestinatario, idIntermediario, _
@@ -920,7 +924,8 @@ Partial Class CartaDePorteInformesConReportViewerSincronismos
                                                        IIf(cmbCriterioWHERE.SelectedValue = "todos", CartaDePorteManager.FiltroANDOR.FiltroAND, CartaDePorteManager.FiltroANDOR.FiltroOR), DropDownList2.Text, _
                                                         Convert.ToDateTime(iisValidSqlDate(txtFechaDesde.Text, #1/1/1753#)), _
                                                         Convert.ToDateTime(iisValidSqlDate(txtFechaHasta.Text, #1/1/2100#)), _
-                                                        cmbPuntoVenta.SelectedValue, optDivisionSyngenta.SelectedValue, Val(txtVagon.Text), txtPatente.Text, , idClienteAuxiliar)
+                                cmbPuntoVenta.SelectedValue, optDivisionSyngenta.SelectedValue, , txtContrato.Text, , idClienteAuxiliar, Val(txtVagon.Text), txtPatente.Text, optCamionVagon.SelectedValue)
+
                             sWHERE = sWHERE.Replace("CDP.", "")
 
 
@@ -1947,7 +1952,7 @@ Partial Class CartaDePorteInformesConReportViewerSincronismos
                         Try
 
 
-                            sWHERE = CartaDePorteManager.generarWHEREparaDatasetParametrizadoConFechaEnNumerales(HFSC.Value, _
+                            sWHERE = CartaDePorteManager.generarWHEREparaDatasetParametrizadoConFechaEnNumerales2(HFSC.Value, _
                                                         sTitulo, _
                                                          enumCDPestado.Posicion, "", idVendedor, idCorredor, _
                                                         idDestinatario, idIntermediario, _
@@ -1955,7 +1960,8 @@ Partial Class CartaDePorteInformesConReportViewerSincronismos
                                                        IIf(cmbCriterioWHERE.SelectedValue = "todos", CartaDePorteManager.FiltroANDOR.FiltroAND, CartaDePorteManager.FiltroANDOR.FiltroOR), DropDownList2.Text, _
                                                         Convert.ToDateTime(iisValidSqlDate(txtFechaDesde.Text, #1/1/1753#)), _
                                                         Convert.ToDateTime(iisValidSqlDate(txtFechaHasta.Text, #1/1/2100#)), _
-                                                        cmbPuntoVenta.SelectedValue, optDivisionSyngenta.SelectedValue, , , , idClienteAuxiliar)
+                                                             cmbPuntoVenta.SelectedValue, optDivisionSyngenta.SelectedValue, , txtContrato.Text, , idClienteAuxiliar, Val(txtVagon.Text), txtPatente.Text, optCamionVagon.SelectedValue)
+
                             sWHERE = sWHERE.Replace("CDP.", "")
 
 

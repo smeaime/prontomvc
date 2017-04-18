@@ -249,3 +249,13 @@ Log Entry :
 04/18/2017 08:31:18
 Error in: . Error Message:La localidad NOGOYA es usada en el sincro de LosGrobo y no tiene codigo LosGrobo
 __________________________
+
+Log Entry : 
+04/18/2017 10:30:15
+Error in: . Error Message:Generando sincro para BTG PACTUAL [BIT]
+__________________________
+
+Log Entry : 
+04/18/2017 10:49:30
+Error in: . Error Message:Generando sincro para BTG PACTUAL [BIT]
+__________________________
