@@ -4253,6 +4253,9 @@ Public Class CartaDePorteManager
             ElseIf ModoImpresion = "EHOlav" Then
                 rdl = "Listado general de Cartas de Porte (simulando original) Olavarria"
 
+            ElseIf ModoImpresion = "Speed" Then
+                rdl = "Listado general de Cartas de Porte (simulando original) con foto  - SpeedAgro.rdl"
+
             ElseIf ModoImpresion = "HImag2" Then
                 rdl = "Listado general de Cartas de Porte (simulando original) para html con imagenes"
 
@@ -7604,7 +7607,7 @@ Public Class CartaDePorteManager
     "          NumeroSubfijo as SufijoCartaDePorte, " &
     "          Tarifa as Tarifa, " &
     "          CDP.IdArticulo, " &
-    "           Calidad, " &
+    "           Calidad,CalidadDe, " &
     "          Cosecha, NobleGrado,Factor, ESTAB.Descripcion as CodigoEstablecimientoProcedencia, ESTAB.AuxiliarString1 as DescripcionEstablecimientoProcedencia, " &
     "           CTG as CTG, CEE, FechaAnulacion,MotivoAnulacion, " &
     "          '' as CadenaVacia, NetoProc, EnumSyngentaDivision, IdTipoMovimiento,CobraAcarreo,LiquidaViaje,IdCartaDePorte,SubNumeroVagon,Procedencia, Corredor2, IdClienteAuxiliar  " &

@@ -2160,6 +2160,25 @@ Partial Class CartaDePorteInformesConReportViewerSincronismos
                         registrosFiltrados = ds.wCartasDePorte_TX_InformesCorregido.Count
 
 
+                    Case "GESAGRO"
+
+
+                        output = SincronismosWilliamsManager.GenerarSincro("GESAGRO", sErrores, _
+                                                   HFSC.Value, ConfigurationManager.AppSettings("UrlDominio"), _
+                                                   "", estadofiltro, "", idVendedor, idCorredor, _
+                                                  idDestinatario, idIntermediario, _
+                                                  idRComercial, idArticulo, idProcedencia, idDestino, _
+                                                  IIf(cmbCriterioWHERE.SelectedValue = "todos", _
+                                                      CartaDePorteManager.FiltroANDOR.FiltroAND, _
+                                                    CartaDePorteManager.FiltroANDOR.FiltroOR), _
+                                                  DropDownList2.Text, _
+                                                   iisValidSqlDate(txtFechaDesde.Text, #1/1/1753#),
+                                                   iisValidSqlDate(txtFechaHasta.Text, #1/1/2100#), _
+                                                     cmbPuntoVenta.SelectedValue, optDivisionSyngenta.SelectedValue, , , , idClienteAuxiliar, registrosFiltrados)
+                        'lblErrores.Text = sErrores
+                        sErrores = ""
+
+
 
                     Case "MONSANTO"
 

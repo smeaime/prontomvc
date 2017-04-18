@@ -267,6 +267,10 @@
       <FullPath>Listado de pedidos.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
+      <Name>Listado general de Cartas de Porte (simulando original) Amaggi.rdl</Name>
+      <FullPath>Listado general de Cartas de Porte (simulando original) Amaggi.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
       <Name>Listado general de Cartas de Porte (simulando original) con foto  - Dow.rdl</Name>
       <FullPath>Listado general de Cartas de Porte (simulando original) con foto  - Dow.rdl</FullPath>
     </ProjectItem>
@@ -487,8 +491,8 @@
       <FullPath>Williams - Sincro LaBiznaga2.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
-      <Name>Listado general de Cartas de Porte (simulando original) Amaggi.rdl</Name>
-      <FullPath>Listado general de Cartas de Porte (simulando original) Amaggi.rdl</FullPath>
+      <Name>Listado general de Cartas de Porte (simulando original) con foto  - SpeedAgro.rdl</Name>
+      <FullPath>Listado general de Cartas de Porte (simulando original) con foto  - SpeedAgro.rdl</FullPath>
     </ProjectItem>
   </Reports>
   <Configurations>
