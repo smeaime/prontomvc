@@ -14867,18 +14867,22 @@ Public Class CartaDePorteManager
 
     Shared Function TraerCUITClientesSegunUsuario(usuario As String, SC As String, scbdlmaster As String) As List(Of String)
 
+        Dim cc As String()
+        Try
 
-        Dim db = New LinqBDLmasterDataContext(Encriptar(scbdlmaster))
+            Dim db = New LinqBDLmasterDataContext(Encriptar(scbdlmaster))
 
-        Dim u As aspnet_User = (From p In db.aspnet_Users
-                    Where p.UserName = usuario
-                    Select p).SingleOrDefault
-
-
-        Dim clis = UserDatosExtendidosManager.TraerClientesRelacionadoslDelUsuario(usuario, scbdlmaster).Replace("-", "")
-        Dim cc = iisNull(clis, "").ToString.Split(New [Char]() {CChar(","), CChar("|"), CChar(";")})
+            Dim u As aspnet_User = (From p In db.aspnet_Users
+                        Where p.UserName = usuario
+                        Select p).SingleOrDefault
 
 
+            Dim clis = UserDatosExtendidosManager.TraerClientesRelacionadoslDelUsuario(usuario, scbdlmaster).Replace("-", "")
+            cc = iisNull(clis, "").ToString.Split(New [Char]() {CChar(","), CChar("|"), CChar(";")})
+
+        Catch ex As Exception
+            ErrHandler2.WriteError(ex)
+        End Try
 
 
         'http://bdlconsultores.ddns.net/Consultas/Admin/VerConsultasCumplidos1.php?recordid=14187
@@ -21576,13 +21580,20 @@ Public Class UserDatosExtendidosManager
 
     Public Shared Function TraerRazonSocialDelUsuario(ByVal UserId As String, ConexBDLmaster As String, SC As String) As String
 
+        Try
+
+      
         Dim db = New LinqBDLmasterDataContext(Encriptar(ConexBDLmaster))
 
         Dim uext = (From p In db.UserDatosExtendidos
                     Where p.UserId.ToString = UserId
                     Select p).SingleOrDefault
 
-        Return NombreCliente(SC, uext.RazonSocial)
+            Return NombreCliente(SC, uext.RazonSocial)
+        Catch ex As Exception
+            ErrHandler2.WriteError(ex)
+            Return ""
+        End Try
     End Function
 
 

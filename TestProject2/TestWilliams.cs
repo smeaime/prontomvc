@@ -51,7 +51,7 @@ using System.Reflection;
 
 using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium;
-
+using OpenQA.Selenium.Support.UI;
 
 
 
@@ -901,8 +901,10 @@ namespace ProntoMVC.Tests
         public void loginEnUrenport2()
         {
 
-            IWebDriver driver = new FirefoxDriver();
+            // el geckodriver tiene q estar en el path. actualizar version firefox (version 48)
 
+            IWebDriver browser = new FirefoxDriver();
+            /*
             //Notice navigation is slightly different than the Java version
             //This is because 'get' is a keyword in C#
             driver.Navigate().GoToUrl("http://www.google.com/");
@@ -910,7 +912,145 @@ namespace ProntoMVC.Tests
             query.SendKeys("Cheese");
             System.Console.WriteLine("Page title is: " + driver.Title);
             driver.Quit();
+
+            */
+
+            
+
+            browser.Navigate().GoToUrl("http://entregadores.cerealnet.com/");
+
+            // WebDriverWait(browser, 10).until(EC.presence_of_element_located((By.ID, "txtUsuario")))
+            new WebDriverWait(browser, TimeSpan.FromSeconds(10)).Until(ExpectedConditions.ElementExists((By.Id("txtUsuario"))));
+
+            
+            var user_name = browser.FindElement(By.Name("txtUsuario"));
+            user_name.SendKeys("williams");
+
+            var password = browser.FindElement(By.Name("txtPass"));
+            password.SendKeys("santiago1177");
+
+
+            var button = browser.FindElement(By.Name("btnInicio"));
+            button.Click();
+
+            //if os.path.isfile(filename):            os.remove(filename)
+            //WebDriverWait(browser, 20).until(            EC.presence_of_element_located((By.ID, "CPHPrincipal_btnExcel")))
+
+
+            button = browser.FindElement(By.Name("CPHPrincipal_btnExcel"));
+            button.Click();
+
+
+
+            /*
+
+                        #!/usr/bin/python
+            # -*- coding: utf-8 -*-
+            import os
+            from time import sleep
+            from selenium import webdriver
+            from pyvirtualdisplay import Display
+            from selenium.webdriver.support.ui import WebDriverWait
+            from selenium.webdriver.support import expected_conditions as EC
+            from selenium.webdriver.common.by import By
+
+
+            def download_excel(silent=True):
+                if silent:
+                    display = Display(visible=0, size=(1366, 768))
+                    display.start()
+                 #Instalar Firefox
+                # instalar el ejecutable geckodriver de https://github.com/mozilla/geckodriver/releases
+                binpath = 'E:/SistemaPronto/Robot' # Directorio donde está geckodriver
+                os.environ["PATH"] += os.pathsep + binpath
+
+                filename = 'Urenport.xls'
+
+                profile = webdriver.FirefoxProfile()
+                profile.set_preference('browser.download.folderList', 2)    # 2 = custom location
+                profile.set_preference('browser.download.manager.showWhenStarting', False)
+                profile.set_preference('browser.download.dir', os.getcwd())
+                profile.set_preference('browser.helperApps.neverAsk.saveToDisk', "application/ms-excel;application/xls;text/csv;application/vnd.ms-excel")
+                profile.set_preference('browser.helperApps.alwaysAsk.force', False)
+                browser = webdriver.Firefox(firefox_profile=profile)
+                try:
+                    browser.get('http://entregadores.cerealnet.com/')
+
+                    WebDriverWait(browser, 10).until(
+                        EC.presence_of_element_located((By.ID, "txtUsuario")))
+
+                    user_name = browser.find_element_by_id('txtUsuario')
+                    user_name.send_keys('williams')
+
+                    password = browser.find_element_by_id('txtPass')
+                    password.send_keys('santiago1177')
+
+                    button = browser.find_element_by_id('btnInicio')
+                    button.click()
+
+                    if os.path.isfile(filename):
+                        os.remove(filename)
+
+                    WebDriverWait(browser, 20).until(
+                        EC.presence_of_element_located((By.ID, "CPHPrincipal_btnExcel")))
+
+
+                    button = browser.find_element_by_id('CPHPrincipal_btnExcel')
+                    button.click()
+
+
+                    sleep(30)
+
+                    browser.get('http://extranet.urenport.com/login.aspx')
+
+                    WebDriverWait(browser, 10).until(
+                        EC.presence_of_element_located((By.ID, "Logins_UserName")))
+
+                    user_name = browser.find_element_by_id('Logins_UserName')
+                    user_name.send_keys('williams')
+
+                    password = browser.find_element_by_id('Logins_Password')
+                    password.send_keys('santiago1177')
+
+                    button = browser.find_element_by_id('Logins_LoginButton')
+                    button.click()
+
+                    WebDriverWait(browser, 20).until(
+                        EC.presence_of_element_located((By.ID, "ContentPlaceHolder1_GridView2")))
+
+                    button = browser.find_element_by_id('ContentPlaceHolder1_ASPxMenu2_DXI0_T')
+                    button.click()
+
+                    sleep(15)
+
+		
+                    bashCommand = "ren Urenport.xls \"Urenport_%time:~0,2%%time:~3,2%-%DATE:/=%.xls\" "
+                    os.system(bashCommand)
+		
+                    sleep(2)
+		 
+                    bashCommand = "robocopy E:\SistemaPronto\Robot\  E:\Sites\ProntoTesting\Temp\Pegatinas *.xls /MOV /LOG+:LogRobot.txt "
+                    os.system(bashCommand)
+
+                finally:
+                    #browser.quit()
+                    bashCommand = "Taskkill /IM Firefox.exe /F >nul 2>&1"
+                    os.system(bashCommand)
+		
+                    bashCommand = "ren Urenport.xls \"Urenport_%time:~0,2%%time:~3,2%-%DATE:/=%.xls\" "
+                    os.system(bashCommand)
+		
+                    sleep(2)
+		
+                    bashCommand = "robocopy E:\SistemaPronto\Robot\  E:\Sites\ProntoTesting\Temp\Pegatinas *.xls /MOV /LOG+:LogRobot.txt"
+                    os.system(bashCommand)
+
+            download_excel(silent=False)
+                        */
         }
+
+
+
 
 
         [TestMethod]
