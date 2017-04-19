@@ -223,4 +223,41 @@ Public Class WebServiceCartas
 
 
 
+
+
+
+
+
+    <WebMethod(Description:="Devuelve un listado de descargas con formato Cerealnet", EnableSession:=False)> _
+    Public Function MapaGeoJSON(usuario As String, password As String, cuit As String, fechadesde As DateTime, fechahasta As DateTime) As String
+
+
+
+
+        Try
+
+            Dim scs As String
+
+            If System.Diagnostics.Debugger.IsAttached() Or ConfigurationManager.AppSettings("UrlDominio").Contains("localhost") Then
+                scs = scLocal
+            Else
+                scs = scWilliamsRelease
+            End If
+
+
+
+            Dim s = New ServicioCartaPorte.servi()
+            Return s.MapaGeoJSON_DLL(Encriptar(scs))
+
+
+        Catch ex As Exception
+
+            ErrHandler2.WriteError(ex)
+        End Try
+
+
+
+    End Function
+
+
 End Class
