@@ -54,6 +54,8 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 
 
+using System.Net;
+using System.Xml.Linq;
 
 
 //test de java lopez
@@ -849,7 +851,25 @@ namespace ProntoMVC.Tests
 
 
 
+        [TestMethod]
+        public void geocode()
+        {
 
+
+
+            var address = "123 something st, somewhere";
+            var requestUri = string.Format("http://maps.googleapis.com/maps/api/geocode/xml?address={0}&sensor=false", Uri.EscapeDataString(address));
+
+            var request = WebRequest.Create(requestUri);
+            var response = request.GetResponse();
+            var xdoc = XDocument.Load(response.GetResponseStream());
+
+            var result = xdoc.Element("GeocodeResponse").Element("result");
+            var locationElement = result.Element("geometry").Element("location");
+            var lat = locationElement.Element("lat");
+            var lng = locationElement.Element("lng");
+
+        }
 
 
         [TestMethod]
@@ -897,6 +917,9 @@ namespace ProntoMVC.Tests
         [TestMethod]
         public void loginEnUrenport3()
         {
+            var s = new ServicioCartaPorte.servi();
+            s.UrenportSelenium();
+
 
             IWebDriver browser = new FirefoxDriver();
 
@@ -964,14 +987,14 @@ namespace ProntoMVC.Tests
 
             */
 
-            
+
 
             browser.Navigate().GoToUrl("http://entregadores.cerealnet.com/");
 
             // WebDriverWait(browser, 10).until(EC.presence_of_element_located((By.ID, "txtUsuario")))
             new WebDriverWait(browser, TimeSpan.FromSeconds(10)).Until(ExpectedConditions.ElementExists((By.Id("txtUsuario"))));
 
-            
+
             var user_name = browser.FindElement(By.Name("txtUsuario"));
             user_name.SendKeys("williams");
 
@@ -985,10 +1008,10 @@ namespace ProntoMVC.Tests
             //if os.path.isfile(filename):            os.remove(filename)
             //WebDriverWait(browser, 20).until(            EC.presence_of_element_located((By.ID, "CPHPrincipal_btnExcel")))
             //new WebDriverWait(browser, TimeSpan.FromSeconds(10));
-            var aaaa= new WebDriverWait(browser, TimeSpan.FromSeconds(20)).Until(ExpectedConditions.ElementExists((By.Id("CPHPrincipal_btnExcel"))));
+            var aaaa = new WebDriverWait(browser, TimeSpan.FromSeconds(20)).Until(ExpectedConditions.ElementExists((By.Id("CPHPrincipal_btnExcel"))));
 
             aaaa.Click();
-            
+
             //button = browser.FindElement(By.Name("CPHPrincipal_btnExcel"));
             //button.Click();
 
