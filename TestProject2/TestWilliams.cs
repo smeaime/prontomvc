@@ -894,11 +894,60 @@ namespace ProntoMVC.Tests
 
 
 
+        [TestMethod]
+        public void loginEnUrenport3()
+        {
 
+            IWebDriver browser = new FirefoxDriver();
+
+
+            //////////////////////////////////////////////////////////////////////////////
+
+
+
+
+            browser.Navigate().GoToUrl("http://extranet.urenport.com/login.aspx");
+
+            new WebDriverWait(browser, TimeSpan.FromSeconds(10)).Until(ExpectedConditions.ElementExists((By.Id("Logins_UserName"))));
+
+
+            var user_name2 = browser.FindElement(By.Name("Logins_UserName"));
+            user_name2.SendKeys("williams");
+
+            var password2 = browser.FindElement(By.Name("Logins_Password"));
+            password2.SendKeys("santiago1177");
+
+
+            var button2 = browser.FindElement(By.Name("Logins_LoginButton"));
+            button2.Click();
+
+            //if os.path.isfile(filename):            os.remove(filename)
+            //WebDriverWait(browser, 20).until(            EC.presence_of_element_located((By.ID, "CPHPrincipal_btnExcel")))
+            //new WebDriverWait(browser, TimeSpan.FromSeconds(10));
+            var aaaad = new WebDriverWait(browser, TimeSpan.FromSeconds(20)).Until(ExpectedConditions.ElementExists((By.Id("ContentPlaceHolder1_GridView2"))));
+
+            var button3 = browser.FindElement(By.Name("ContentPlaceHolder1_ASPxMenu2_DXI0_T"));
+            button3.Click();
+
+
+
+
+
+            //bashCommand = "ren Urenport.xls \"Urenport_%time:~0,2%%time:~3,2%-%DATE:/=%.xls\" "
+            //os.system(bashCommand)
+
+            //sleep(2)
+
+            //bashCommand = "robocopy E:\SistemaPronto\Robot\  E:\Sites\ProntoTesting\Temp\Pegatinas *.xls /MOV /LOG+:LogRobot.txt "
+            //os.system(bashCommand)
+
+
+
+        }
 
 
         [TestMethod]
-        public void loginEnUrenport2()
+        public void loginEnCerealnet2()
         {
 
             // el geckodriver tiene q estar en el path. actualizar version firefox (version 48)
@@ -935,10 +984,19 @@ namespace ProntoMVC.Tests
 
             //if os.path.isfile(filename):            os.remove(filename)
             //WebDriverWait(browser, 20).until(            EC.presence_of_element_located((By.ID, "CPHPrincipal_btnExcel")))
+            //new WebDriverWait(browser, TimeSpan.FromSeconds(10));
+            var aaaa= new WebDriverWait(browser, TimeSpan.FromSeconds(20)).Until(ExpectedConditions.ElementExists((By.Id("CPHPrincipal_btnExcel"))));
+
+            aaaa.Click();
+            
+            //button = browser.FindElement(By.Name("CPHPrincipal_btnExcel"));
+            //button.Click();
 
 
-            button = browser.FindElement(By.Name("CPHPrincipal_btnExcel"));
-            button.Click();
+
+
+
+
 
 
 
