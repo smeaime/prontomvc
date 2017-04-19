@@ -974,6 +974,10 @@ llama explicitamente al show y update (acordate que este panel es condicional)
                                             <td class="EncabezadoCell" style="width: 197px">
                                                 <asp:DropDownList ID="cmbPopModoImpresion" runat="server" TabIndex="14">
                                                     <%--eInformesGeneralFormatos--%>
+                                                   <%-- Si agregas un informe nuevo, agregalo tambien en el array informesHtml!!!!!!!!
+                                                    Si agregas un informe nuevo, agregalo tambien en el array informesHtml!!!!!!!!
+                                                    Si agregas un informe nuevo, agregalo tambien en el array informesHtml!!!!!!!!
+                                                    Si agregas un informe nuevo, agregalo tambien en el array informesHtml!!!!!!!!--%>
                                                     <asp:ListItem Value="Excel"     Text="Excel" />
                                                     <asp:ListItem Value="Imagen"    Text="Excel con imágenes " />
                                                     <asp:ListItem Value="ExcRec"    Text="Excel con n°recibo" />
@@ -989,6 +993,12 @@ llama explicitamente al show y update (acordate que este panel es condicional)
                                                     <asp:ListItem Value="GrobHc"    Text="Excel GroboCuits + Html corto" />
                                                     <asp:ListItem Value="ExcHc"     Text="Excel + Html corto" />
 
+                                                 <%--   Si agregas un informe nuevo, agregalo tambien en el array informesHtml!!!!!!!!
+                                                    Si agregas un informe nuevo, agregalo tambien en el array informesHtml!!!!!!!!
+                                                    Si agregas un informe nuevo, agregalo tambien en el array informesHtml!!!!!!!!
+                                                    Si agregas un informe nuevo, agregalo tambien en el array informesHtml!!!!!!!!
+                                                    Si agregas un informe nuevo, agregalo tambien en el array informesHtml!!!!!!!!
+                                                    Si agregas un informe nuevo, agregalo tambien en el array informesHtml!!!!!!!!--%>
                                                 </asp:DropDownList>
                                             </td>
                                             <td class="EncabezadoCell"></td>

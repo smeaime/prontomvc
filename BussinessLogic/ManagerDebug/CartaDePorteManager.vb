@@ -4163,7 +4163,7 @@ Public Class CartaDePorteManager
 
 
 
-    Public Shared informesHtml As String() = New String() {"Html", "HtmlIm", "EHOlav", "HOlav", "HImag2", "GrobHc", "ExcHc", "Amaggi"}
+    Public Shared informesHtml As String() = New String() {"Html", "HtmlIm", "EHOlav", "HOlav", "HImag2", "GrobHc", "ExcHc", "Amaggi", "Speed"}
 
     Enum eInformesGeneralFormatos
         Html
@@ -4246,6 +4246,17 @@ Public Class CartaDePorteManager
                 '    'formato normal para clientes (incluye la foto)
                 '    rdl = AppDomain.CurrentDomain.BaseDirectory & "ProntoWeb\Informes\Listado general de Cartas de Porte (simulando original) con foto .rdl"
 
+
+                'Si agregas un informe nuevo, agregalo tambien en el array informesHtml!!!!!!!!
+                'Si agregas un informe nuevo, agregalo tambien en el array informesHtml!!!!!!!!
+                'Si agregas un informe nuevo, agregalo tambien en el array informesHtml!!!!!!!!
+                'Si agregas un informe nuevo, agregalo tambien en el array informesHtml!!!!!!!!
+                'Si agregas un informe nuevo, agregalo tambien en el array informesHtml!!!!!!!!
+                'Si agregas un informe nuevo, agregalo tambien en el array informesHtml!!!!!!!!
+                'Si agregas un informe nuevo, agregalo tambien en el array informesHtml!!!!!!!!
+                'Si agregas un informe nuevo, agregalo tambien en el array informesHtml!!!!!!!!
+                'Si agregas un informe nuevo, agregalo tambien en el array informesHtml!!!!!!!!
+
             ElseIf ModoImpresion = "ExcHtm" Then
                 'este es de servidor, así que saco el path
                 rdl = "Listado general de Cartas de Porte (simulando original) con foto 2"
@@ -4269,6 +4280,15 @@ Public Class CartaDePorteManager
                 rdl = "Listado general de Cartas de Porte (simulando original) con foto 2"
 
 
+                'Si agregas un informe nuevo, agregalo tambien en el array informesHtml!!!!!!!!
+                'Si agregas un informe nuevo, agregalo tambien en el array informesHtml!!!!!!!!
+                'Si agregas un informe nuevo, agregalo tambien en el array informesHtml!!!!!!!!
+                'Si agregas un informe nuevo, agregalo tambien en el array informesHtml!!!!!!!!
+                'Si agregas un informe nuevo, agregalo tambien en el array informesHtml!!!!!!!!
+                'Si agregas un informe nuevo, agregalo tambien en el array informesHtml!!!!!!!!
+                'Si agregas un informe nuevo, agregalo tambien en el array informesHtml!!!!!!!!
+                'Si agregas un informe nuevo, agregalo tambien en el array informesHtml!!!!!!!!
+                'Si agregas un informe nuevo, agregalo tambien en el array informesHtml!!!!!!!!
 
 
             Else

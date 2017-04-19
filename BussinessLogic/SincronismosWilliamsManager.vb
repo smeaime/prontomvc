@@ -23779,7 +23779,12 @@ Namespace Pronto.ERP.Bll
                 sb &= "&" & Int(dr("Kg.Tara Desc.")).ToString.PadLeft(10)                         '19 - Kilos Tara	Numérico	10	Se completa con la Tara registrada en la Balanza. Valor entero. Cero por defecto.
                 sb &= "&" & Int(dr("Kg.Neto Desc.")).ToString.PadLeft(10)                         '20 - Kilos Descargados	Numérico	10	Se completa con Peso Bruto – Tara. Valor entero. Cero por defecto.
                 sb &= "&" & FechaANSI(iisValidSqlDate(iisNull(dr("Desc."))))     '21 - Fecha Descarga	Numérico	8	Se completa con la fecha de Descarga – Formato AAAAMMDD
-                sb &= "&" & DecimalToString(dr("H.%")).PadLeft(5)                         '22 -Porcentaje Humedad	Numérico	5	Hasta 7 posiciones para parte entera y 4 para decimales. Cero por defecto.
+
+
+                'La conversión del tipo 'DBNull' en el tipo 'Decimal' no es válida.   
+                sb &= "&" & DecimalToString(iisNull(dr("H.%"), 0)).PadLeft(5)                         '22 -Porcentaje Humedad	Numérico	5	Hasta 7 posiciones para parte entera y 4 para decimales. Cero por defecto.
+
+
                 sb &= "&" & Int(iisNull(dr("Mer.Kg."), 0)).ToString.PadLeft(10)                         '23 -Kilos Merma Humedad	Alfa	10	Kilos de Merma registrados por Secada. Valor entero. Cero por defecto.
                 sb &= "&" & cero.ToString.PadLeft(5)                         '24 -Porcentaje Merma Zarandeo	Numérico	5	Hasta 7 posiciones para parte entera y 4 para decimales. Cero por defecto.
                 sb &= "&" & cero.ToString.PadLeft(5)                         '25 -Porcentaje Merma Volátil	Numérico	5	Hasta 7 posiciones para parte entera y 4 para decimales. Cero por defecto.
