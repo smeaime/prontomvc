@@ -60,11 +60,18 @@
     <Reference Include="EPPlus">
       <HintPath>..\packages\EPPlus.4.1.0\lib\net40\EPPlus.dll</HintPath>
     </Reference>
+    <Reference Include="GeoJSON.Net">
+      <HintPath>..\..\packages\GeoJSON.Net.0.1.55\lib\portable-net40+sl5+wp80+win8+wpa81\GeoJSON.Net.dll</HintPath>
+    </Reference>
     <Reference Include="Interop.FCEngine">
       <HintPath>..\prontoweb\Bin\Interop.FCEngine.dll</HintPath>
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </Reference>
     <Reference Include="Microsoft.VisualBasic" />
+    <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Newtonsoft.Json.7.0.1\lib\net40\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
@@ -84,6 +91,12 @@
     <Reference Include="System.Xml" />
     <Reference Include="TiffCP">
       <HintPath>..\packages\libtiff\TiffCP.exe</HintPath>
+    </Reference>
+    <Reference Include="WebDriver">
+      <HintPath>..\..\packages\Selenium.WebDriver.3.3.0\lib\net40\WebDriver.dll</HintPath>
+    </Reference>
+    <Reference Include="WebDriver.Support">
+      <HintPath>..\..\packages\Selenium.Support.3.3.0\lib\net40\WebDriver.Support.dll</HintPath>
     </Reference>
     <Reference Include="WindowsBase" />
   </ItemGroup>

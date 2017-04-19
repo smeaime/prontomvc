@@ -22,6 +22,74 @@
     <div id="map"></div>
     <script>
 
+
+
+        function geocode() {
+            var geocoder = new google.maps.Geocoder();
+            geocoder.geocode({ 'address': 'miami, us' }, function (results, status) {
+                if (status == google.maps.GeocoderStatus.OK) {
+                    alert("location : " + results[0].geometry.location.lat() + " " + results[0].geometry.location.lng());
+                } else {
+                    alert("Something got wrong " + status);
+                }
+            });
+        }
+
+
+
+
+
+        function datos() {
+
+
+
+
+            //$.ajax({
+            //    type: 'POST',
+            //    contentType: 'application/json; charset=utf-8',
+            //    url: "WebServiceCartas.asmx/GrabarSituacion",
+            //    dataType: 'json',
+            //    data: JSON.stringify({
+            //        idcarta: gridId,
+            //        idsituacion: datos.idsituacion,
+            //        sObservacionesSituacion: dataFromTheRow.ObservacionesSituacion
+            //    }),
+            //    success: function (result) {
+            //    },
+            //    error: function (xhr, textStatus, exceptionThrown) {
+            //    },
+            //});
+
+
+
+            var dataRows = [{
+                id: 1,
+                geom: "LINESTRING(-1.131510412 52.65531, -1.13286 52.65559)"
+            }];
+            features = [];
+            dataRows.forEach(function (row) {
+                var coords = row.geom.replace("(", "[").replace(")", "]").substring(row.geom.indexOf("("), row.geom.length);
+                features.push({
+                    "type": "Feature",
+                    "properties": {
+                        "id": row.id
+                    },
+                    "geometry": {
+                        "type": row.geom.substring(0, row.geom.indexOf("(")),
+                        "coordinates": coords
+                    }
+                });
+            });
+
+            return features;
+        }
+
+
+
+
+
+
+
         // [START script-body]
         var map;
 
@@ -31,6 +99,9 @@
                 zoom: 6
             });
 
+
+
+
             // Get the earthquake data (JSONP format)
             // This feed is a copy from the USGS feed, you can find the originals here:
             //   http://earthquake.usgs.gov/earthquakes/feed/v1.0/geojson.php
@@ -39,6 +110,10 @@
                 'src',
                 'https://storage.googleapis.com/mapsdevsite/json/quakes.geo.json');
             document.getElementsByTagName('head')[0].appendChild(script);
+
+
+
+
 
             // Add a basic style.
             map.data.setStyle(function (feature) {

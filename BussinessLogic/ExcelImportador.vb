@@ -2075,11 +2075,11 @@ Public Class ExcelImportadorManager
 
 
 
-
-
-
+                    'http://consultas.bdlconsultores.com.ar/AdminTest/template/desarrollo/Consulta.php?IdReclamo=37950&SinMenu=1
+                    'no pisar si fue editada manual o pasó la ocr (o sea, si tiene una imagen adjunta)
                     Dim bEditadaManual As Boolean = (If(.FechaModificacion, DateTime.MinValue) >
-                                                            If(.FechaActualizacionAutomatica, DateTime.MinValue).AddSeconds(60))
+                                                            If(.FechaActualizacionAutomatica, DateTime.MinValue).AddSeconds(60)) _
+                                                        Or .PathImagen <> "" Or .PathImagen2 <> ""
 
 
 
@@ -2147,7 +2147,8 @@ Public Class ExcelImportadorManager
                         'Y en este caso?
 
 
-
+                        http://consultas.bdlconsultores.com.ar/AdminTest/template/desarrollo/Consulta.php?IdReclamo=37950&SinMenu=1
+                        If Not eswilliams Then .Exporta = SI
 
 
                         If actua(.Destino, BuscaIdWilliamsDestinoPreciso(r(16), SC)) Then log += "Destino; "

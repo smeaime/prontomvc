@@ -32,13 +32,10 @@ using DocumentFormat.OpenXml.Packaging;
 using DocumentFormat.OpenXml.Spreadsheet;
 
 
-using System.Drawing;
-
 using BitMiracle.LibTiff.Classic;
 
 using System.Configuration;
 
-using System.Text;
 using System.Reflection;
 
 using System.Data.Objects;
@@ -48,7 +45,17 @@ using System.Data;
 
 using System.ServiceModel;
 
-using System.Data;
+
+using OpenQA.Selenium.Firefox;
+using OpenQA.Selenium;
+using OpenQA.Selenium.Support.UI;
+
+
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using Newtonsoft.Json.Serialization;
+//using GeoJSON.Net.Geometry;
+using System.Text.RegularExpressions;
 
 
 
@@ -3568,7 +3575,7 @@ Formato localidad-provincia	destination	x
 
 
 
-        
+
 
         public virtual void GenerarExcelSyngentaWebService(List<InterfazFlexicapture.ServiceReference1.DT_DeliveryDelivery> cps, string fExcel)
         {
@@ -3668,7 +3675,7 @@ Formato localidad-provincia	destination	x
         }
 
 
-    
+
 
 
         public bool CopyFileFTP(string FileToCopy, string userName, string password)
@@ -4493,9 +4500,300 @@ Formato localidad-provincia	destination	x
 
 
 
+        public virtual string MapaGeoJSON_DLL(string SC)
+        {
 
 
 
+
+            var scEF = ProntoMVC.Data.Models.Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC));
+
+            using (DemoProntoEntities db = new DemoProntoEntities(scEF))
+            {
+                var iddestino = 1;
+                var desde = new DateTime(2014, 1, 20);
+                var hasta = new DateTime(2014, 1, 20);
+
+
+
+                var q2 = from x in db.fSQL_GetDataTableFiltradoYPaginado(
+                                                        0, 9999999, estado, "", -1, -1,
+                                                        -1, -1, -1, -1, -1,
+                                                        iddestino, 0, "Ambas"
+                                                        , desde, hasta,
+                                                        0, null, false, "", "",
+                                                        -1, null, 0, "", "Todos")
+                         group x by new { x.ProcedenciaDesc, x.ProcedenciaProvinciaDesc } into grp
+                         select new { total = grp.Sum(t => t.NetoProc), grp.Key.ProcedenciaDesc, grp.Key.ProcedenciaProvinciaDesc };
+
+
+
+            }
+
+
+
+
+            /*
+            select
+*
+from
+(
+select
+ FLOOR( sum(netoproc) /1000) as kilos, LOCORI.Nombre as localidad, isnull(PROVORI.Nombre,'BUENOS AIRES' ) as provincia
+from 
+ dbo.fSQL_GetDataTableFiltradoYPaginado  
+				(  
+
+ NULL, 
+					10, 
+					0,
+					NULL, 
+					-1,
+					 
+-1,-1,
+-1,
+-1,
+-1,
+
+					-1, 
+					NULL, 
+					0,
+					@Modo,
+					@FechaDesde,
+
+					@FechaHasta,
+					NULL, 
+					NULL,
+					 'FALSE',
+					NULL, 
+					NULL, 
+
+					NULL, 
+					NULL, 
+					NULL,
+					NULL, 
+					NULL
+
+					)
+    
+ as CDP
+
+
+
+
+RIGHT OUTER JOIN Localidades LOCORI ON CDP.Procedencia = LOCORI.IdLocalidad          
+LEFT OUTER JOIN Provincias PROVORI ON LOCORI.IdProvincia = PROVORI.IdProvincia           
+where   1=1
+	--procedencia is not null
+	--and netoproc > 0
+	
+	--and (producto like @producto or isnull(@producto,'')=''  )
+	--and (titulardesc like @cliente or
+	--    rcomercialdesc like @cliente  or
+	--    intermediariodesc like @cliente  or
+	--    destinatariodesc like @cliente 
+	--	or  isnull(@cliente,'')='' )
+	--and (destinodesc like @puerto or  isnull(@puerto,'')='')
+
+
+group by LOCORI.Nombre,PROVORI.Nombre
+
+) as C
+--where kilos >= isnull(@TonsDesde,0)
+--and kilos <= isnull(@TonsHasta,999999999)
+
+order by kilos desc
+
+
+            */
+
+
+            //var coordinates = new List<GeographicPosition> 
+            //    { 
+            //        new GeographicPosition(52.370725881211314, 4.889259338378906), 
+            //        new GeographicPosition(52.3711451105601, 4.895267486572266), 
+            //        new GeographicPosition(52.36931095278263, 4.892091751098633), 
+            //        new GeographicPosition(52.370725881211314, 4.889259338378906) 
+            //    }.ToList<IPosition>();
+
+            //var model = new Polygon(new List<LineString> { new LineString(coordinates) });
+
+
+
+
+
+            var serializedData = JsonConvert.SerializeObject(model, Formatting.Indented); //, DefaultJsonSerializerSettings);
+
+            return serializedData;
+
+            return "";
+
+
+        }
+
+
+
+
+
+        public void UrenportSelenium()
+        {
+
+            // el geckodriver tiene q estar en el path. actualizar version firefox (version 48)
+
+            IWebDriver browser = new FirefoxDriver();
+            /*
+            //Notice navigation is slightly different than the Java version
+            //This is because 'get' is a keyword in C#
+            driver.Navigate().GoToUrl("http://www.google.com/");
+            IWebElement query = driver.FindElement(By.Name("q"));
+            query.SendKeys("Cheese");
+            System.Console.WriteLine("Page title is: " + driver.Title);
+            driver.Quit();
+
+            */
+
+
+
+            browser.Navigate().GoToUrl("http://entregadores.cerealnet.com/");
+
+            // WebDriverWait(browser, 10).until(EC.presence_of_element_located((By.ID, "txtUsuario")))
+            new WebDriverWait(browser, TimeSpan.FromSeconds(10)).Until(ExpectedConditions.ElementExists((By.Id("txtUsuario"))));
+
+
+            var user_name = browser.FindElement(By.Name("txtUsuario"));
+            user_name.SendKeys("williams");
+
+            var password = browser.FindElement(By.Name("txtPass"));
+            password.SendKeys("santiago1177");
+
+
+            var button = browser.FindElement(By.Name("btnInicio"));
+            button.Click();
+
+            //if os.path.isfile(filename):            os.remove(filename)
+            //WebDriverWait(browser, 20).until(            EC.presence_of_element_located((By.ID, "CPHPrincipal_btnExcel")))
+            //new WebDriverWait(browser, TimeSpan.FromSeconds(10));
+            var aaaa = new WebDriverWait(browser, TimeSpan.FromSeconds(20)).Until(ExpectedConditions.ElementExists((By.Id("CPHPrincipal_btnExcel"))));
+
+            aaaa.Click();
+
+            //button = browser.FindElement(By.Name("CPHPrincipal_btnExcel"));
+            //button.Click();
+
+
+
+
+
+
+
+
+
+            /*
+
+                        #!/usr/bin/python
+            # -*- coding: utf-8 -*-
+            import os
+            from time import sleep
+            from selenium import webdriver
+            from pyvirtualdisplay import Display
+            from selenium.webdriver.support.ui import WebDriverWait
+            from selenium.webdriver.support import expected_conditions as EC
+            from selenium.webdriver.common.by import By
+
+
+            def download_excel(silent=True):
+                if silent:
+                    display = Display(visible=0, size=(1366, 768))
+                    display.start()
+                 #Instalar Firefox
+                # instalar el ejecutable geckodriver de https://github.com/mozilla/geckodriver/releases
+                binpath = 'E:/SistemaPronto/Robot' # Directorio donde está geckodriver
+                os.environ["PATH"] += os.pathsep + binpath
+
+                filename = 'Urenport.xls'
+
+                profile = webdriver.FirefoxProfile()
+                profile.set_preference('browser.download.folderList', 2)    # 2 = custom location
+                profile.set_preference('browser.download.manager.showWhenStarting', False)
+                profile.set_preference('browser.download.dir', os.getcwd())
+                profile.set_preference('browser.helperApps.neverAsk.saveToDisk', "application/ms-excel;application/xls;text/csv;application/vnd.ms-excel")
+                profile.set_preference('browser.helperApps.alwaysAsk.force', False)
+                browser = webdriver.Firefox(firefox_profile=profile)
+                try:
+                    browser.get('http://entregadores.cerealnet.com/')
+
+                    WebDriverWait(browser, 10).until(
+                        EC.presence_of_element_located((By.ID, "txtUsuario")))
+
+                    user_name = browser.find_element_by_id('txtUsuario')
+                    user_name.send_keys('williams')
+
+                    password = browser.find_element_by_id('txtPass')
+                    password.send_keys('santiago1177')
+
+                    button = browser.find_element_by_id('btnInicio')
+                    button.click()
+
+                    if os.path.isfile(filename):
+                        os.remove(filename)
+
+                    WebDriverWait(browser, 20).until(
+                        EC.presence_of_element_located((By.ID, "CPHPrincipal_btnExcel")))
+
+
+                    button = browser.find_element_by_id('CPHPrincipal_btnExcel')
+                    button.click()
+
+
+                    sleep(30)
+
+                    browser.get('http://extranet.urenport.com/login.aspx')
+
+                    WebDriverWait(browser, 10).until(
+                        EC.presence_of_element_located((By.ID, "Logins_UserName")))
+
+                    user_name = browser.find_element_by_id('Logins_UserName')
+                    user_name.send_keys('williams')
+
+                    password = browser.find_element_by_id('Logins_Password')
+                    password.send_keys('santiago1177')
+
+                    button = browser.find_element_by_id('Logins_LoginButton')
+                    button.click()
+
+                    WebDriverWait(browser, 20).until(
+                        EC.presence_of_element_located((By.ID, "ContentPlaceHolder1_GridView2")))
+
+                    button = browser.find_element_by_id('ContentPlaceHolder1_ASPxMenu2_DXI0_T')
+                    button.click()
+
+                    sleep(15)
+
+		
+                    bashCommand = "ren Urenport.xls \"Urenport_%time:~0,2%%time:~3,2%-%DATE:/=%.xls\" "
+                    os.system(bashCommand)
+		
+                    sleep(2)
+		 
+                    bashCommand = "robocopy E:\SistemaPronto\Robot\  E:\Sites\ProntoTesting\Temp\Pegatinas *.xls /MOV /LOG+:LogRobot.txt "
+                    os.system(bashCommand)
+
+                finally:
+                    #browser.quit()
+                    bashCommand = "Taskkill /IM Firefox.exe /F >nul 2>&1"
+                    os.system(bashCommand)
+		
+                    bashCommand = "ren Urenport.xls \"Urenport_%time:~0,2%%time:~3,2%-%DATE:/=%.xls\" "
+                    os.system(bashCommand)
+		
+                    sleep(2)
+		
+                    bashCommand = "robocopy E:\SistemaPronto\Robot\  E:\Sites\ProntoTesting\Temp\Pegatinas *.xls /MOV /LOG+:LogRobot.txt"
+                    os.system(bashCommand)
+
+            download_excel(silent=False)
+                        */
+        }
 
 
 

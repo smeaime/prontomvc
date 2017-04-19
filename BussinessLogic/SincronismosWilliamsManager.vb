@@ -23775,9 +23775,9 @@ Namespace Pronto.ERP.Bll
                 sb &= "&" & IIf(dr("CobraAcarreo").ToString = "SI", "SI", "NO")                        '16 - Cobra Acarreo	Alfa	2	Acepta los valores Sí/No
 
                 sb &= "&" & IIf(iisNull(dr("Tarifa"), 0) = 0, 0, iisNull(dr("Tarifa"), 0)).ToString.PadLeft(10)                         '17 - Tarifa de Flete	Numérico	10	Hasta 9 posiciones para parte entera y 4 para decimales. Se completa con Cero si  no esta.
-                sb &= "&" & Int(dr("Kg.Bruto Desc.")).ToString.PadLeft(10)                         '18 - Kilos Brutos	Numérico	10	Se completa con el Peso Bruto registrado en la Balanza. Valor entero. Cero por defecto.
-                sb &= "&" & Int(dr("Kg.Tara Desc.")).ToString.PadLeft(10)                         '19 - Kilos Tara	Numérico	10	Se completa con la Tara registrada en la Balanza. Valor entero. Cero por defecto.
-                sb &= "&" & Int(dr("Kg.Neto Desc.")).ToString.PadLeft(10)                         '20 - Kilos Descargados	Numérico	10	Se completa con Peso Bruto – Tara. Valor entero. Cero por defecto.
+                sb &= "&" & Int(iisNull(dr("Kg.Bruto Desc."), 0)).ToString.PadLeft(10)                         '18 - Kilos Brutos	Numérico	10	Se completa con el Peso Bruto registrado en la Balanza. Valor entero. Cero por defecto.
+                sb &= "&" & Int(iisNull(dr("Kg.Tara Desc."), 0)).ToString.PadLeft(10)                         '19 - Kilos Tara	Numérico	10	Se completa con la Tara registrada en la Balanza. Valor entero. Cero por defecto.
+                sb &= "&" & Int(iisNull(dr("Kg.Neto Desc."), 0)).ToString.PadLeft(10)                         '20 - Kilos Descargados	Numérico	10	Se completa con Peso Bruto – Tara. Valor entero. Cero por defecto.
                 sb &= "&" & FechaANSI(iisValidSqlDate(iisNull(dr("Desc."))))     '21 - Fecha Descarga	Numérico	8	Se completa con la fecha de Descarga – Formato AAAAMMDD
 
 
@@ -23793,7 +23793,7 @@ Namespace Pronto.ERP.Bll
                 sb &= "&" & Int(iisNull(dr("Otras"), 0)).ToString.PadLeft(10)            '26 -Kilos Merma Zarandeo	Numérico	10	Kilos de Merma registrados por Zaranda. Valor entero. Cero por defecto.
                 sb &= "&" & cero.ToString.PadLeft(10)                        '27 -Kilos Merma Volátil	Numérico	10	Kilos de Merma registrados por Manipuleo. Valor entero. Cero por defecto.
                 sb &= "&" & cero.ToString.PadLeft(10)                         '28 -Kilos Servicio	Numérico	10	Valor entero. Se completa con Cero por defecto.
-                sb &= "&" & Int(dr("Kg.Netos")).ToString.PadLeft(10)                      '29 -Kilos Netos	Numérico	10	Bruto – Tara – Mermas. Valor entero. Se completa con Cero por defecto.
+                sb &= "&" & Int(iisNull(dr("Kg.Netos"), 0)).ToString.PadLeft(10)                      '29 -Kilos Netos	Numérico	10	Bruto – Tara – Mermas. Valor entero. Se completa con Cero por defecto.
                 sb &= "&" & JustificadoDerecha(dr("Contrato").ToString, 14)           '30 -Número de Contrato de Compra	Numérico	14	Se completa con Cero por defecto.
 
 
@@ -23803,9 +23803,9 @@ Namespace Pronto.ERP.Bll
                 'sb &= "&" & iisNull(dr("CodigoEstablecimientoProcedencia"), "").ToString.PadLeft(5)
 
 
-                sb &= "&" & Int(dr("Km")).ToString.PadLeft(10)                        '33 -Kilómetros	Numérico	10	Valor entero. Se completa con Cero por defecto.
+                sb &= "&" & Int(iisNull(dr("Km"), 0)).ToString.PadLeft(10)                        '33 -Kilómetros	Numérico	10	Valor entero. Se completa con Cero por defecto.
                 sb &= "&" & dr("EspecieONCAA").ToString.PadLeft(4, "0")                         '34 -Especie  	Numérico	3	SOJA/MAIZ/TRIG.(3)
-                sb &= "&" & Right(dr("Cosecha"), 5).Replace("/", "").PadLeft(4)                         '35 –Cosecha	Numérico	4	Se completa con Formato NNNN Por ej 0607 para 2006/2007. (3)
+                sb &= "&" & Right(dr("Cosecha").ToString, 5).Replace("/", "").PadLeft(4)                         '35 –Cosecha	Numérico	4	Se completa con Formato NNNN Por ej 0607 para 2006/2007. (3)
                 sb &= "&" & dr("CorredorCUIT").ToString.Replace("-", "").PadLeft(11)                        '36 - Codigo Corredor	Numérico	11	Se completa con el código  de SoftCereal ó CUIT del Corredor o 0 Si no existe el Dato.
                 sb &= "&" & dr("DestinatarioCUIT").ToString.Replace("-", "").PadLeft(11)                        '37 -Codigo Comprador/Vendedor 	Numérico	11	Se completa con el Código de SoftCereal ó CUIT de Comprador del Contrato de Venta al que se aplicará la Carta de Porte o 0 Si no existe el Dato. (4)
                 sb &= "&" & dr("LocalidadDestinoCodigoONCAA").ToString.PadLeft(5)                         '38 -Localidad ONCCA Destino	Numérico	5	Se completa con la Localidad ONCCA asociada al Puerto (Destino)
