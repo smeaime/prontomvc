@@ -2,15 +2,15 @@
     CodeFile="Clientes.aspx.vb" Inherits="Clientes" Title="Clientes" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
-<br />
-<br />
+    <br />
+    <br />
     <asp:UpdatePanel ID="UpdatePanel2" runat="server">
         <ContentTemplate>
             <asp:LinkButton ID="lnkNuevo" runat="server" Font-Bold="false" CssClass="butCrear but"
                 Font-Underline="False" ForeColor="White" CausesValidation="true" Font-Size="Small">+ Nuevo Cliente</asp:LinkButton>
             <asp:TextBox ID="txtBuscar" runat="server" Style="text-align: right;" Text="" AutoPostBack="True"></asp:TextBox>
-            <asp:DropDownList ID="cmbBuscarEsteCampo" runat="server" Style="text-align: right;
-                margin-left: 0px;" Width="119px" Height="22px">
+            <asp:DropDownList ID="cmbBuscarEsteCampo" runat="server" Style="text-align: right; margin-left: 0px;"
+                Width="119px" Height="22px">
                 <asp:ListItem Text="Razon Social" Value="[Razon Social]" Selected="True" />
                 <asp:ListItem Text="Direccion" Value="Direccion" />
                 <asp:ListItem Text="CUIT" Value="CUIT" />
@@ -37,7 +37,7 @@
                         <tr>
                             <td align="left">
                                 <div style="width: 850px; overflow: auto;">
-                                    <asp:GridView ID="GridView1" runat="server" AllowPaging="True" AutoGenerateColumns="False" BorderStyle="None" 
+                                    <asp:GridView ID="GridView1" runat="server" AllowPaging="True" AutoGenerateColumns="False" BorderStyle="None"
                                         CellPadding="3" DataKeyNames="Id" Width="99%" GridLines="none" EnableSortingAndPagingCallbacks="True"
                                         PageSize="20">
                                         <FooterStyle BackColor="#B5C7DE" ForeColor="#4A3C8C" />
@@ -48,8 +48,8 @@
                                             <%--<asp:BoundField DataField="Razon Social" HeaderText="RazonSocial" SortExpression="Razon Social">
                                                 <ItemStyle Wrap="False" />
                                             </asp:BoundField>--%>
-                                          
-                                          <asp:BoundField DataField="RazonSocial" HeaderText="RazonSocial" SortExpression="RazonSocial">
+
+                                            <asp:BoundField DataField="RazonSocial" HeaderText="RazonSocial" SortExpression="RazonSocial">
                                                 <ItemStyle Wrap="False" />
                                             </asp:BoundField>
 
@@ -59,7 +59,7 @@
                                             <asp:BoundField DataField="Email" HeaderText="Email" SortExpression="Email">
                                                 <ItemStyle Wrap="False" />
                                             </asp:BoundField>
-                                          
+
                                             <asp:BoundField DataField="CUIT" HeaderText="CUIT" SortExpression="Direccion">
                                                 <ItemStyle Wrap="False" />
                                             </asp:BoundField>
@@ -99,4 +99,45 @@
             <asp:HiddenField ID="HFSC" runat="server" />
         </ContentTemplate>
     </asp:UpdatePanel>
+
+
+
+    <script type='text/javascript' src='https://www.gstatic.com/charts/loader.js'></script>
+    <script type='text/javascript'>
+        google.charts.load('current', { 'packages': ['geochart'] });
+        google.charts.setOnLoadCallback(drawMarkersMap);
+
+        function drawMarkersMap() {
+            var data = google.visualization.arrayToDataTable([
+              ['City', 'Population', 'Area'],
+              ['Rome', 2761477, 1285.31],
+              ['Milan', 1324110, 181.76],
+              ['Naples', 959574, 117.27],
+              ['Turin', 907563, 130.17],
+              ['Palermo', 655875, 158.9],
+              ['Genoa', 607906, 243.60],
+              ['Bologna', 380181, 140.7],
+              ['Florence', 371282, 102.41],
+              ['Fiumicino', 67370, 213.44],
+              ['Anzio', 52192, 43.43],
+              ['Ciampino', 38262, 11]
+            ]);
+
+            var options = {
+                region: 'IT',
+                displayMode: 'markers',
+                colorAxis: { colors: ['green', 'blue'] }
+            };
+
+            var chart = new google.visualization.GeoChart(document.getElementById('chart_div'));
+            chart.draw(data, options);
+        };
+    </script>
+
+
+    <div id="chart_div" style="width: 900px; height: 500px;"></div>
+
+
+
+
 </asp:Content>
