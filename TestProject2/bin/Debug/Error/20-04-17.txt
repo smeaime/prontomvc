@@ -1,0 +1,16 @@
+
+Log Entry : 
+04/20/2017 09:57:41
+Error in: . Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en UserDatosExtendidosManager.TraerClientesRelacionadoslDelUsuario(String UserName, String ConexBDLmaster) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 21635
+BusinessLogic
+__________________________
+
+Log Entry : 
+04/20/2017 09:57:53
+Error in: . Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en UserDatosExtendidosManager.TraerClientesRelacionadoslDelUsuario(String UserName, String ConexBDLmaster) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 21635
+BusinessLogic
+__________________________

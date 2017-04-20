@@ -4617,14 +4617,11 @@ order by kilos desc
             //    }.ToList<IPosition>();
 
             //var model = new Polygon(new List<LineString> { new LineString(coordinates) });
+            //var serializedData = JsonConvert.SerializeObject(model, Formatting.Indented); //, DefaultJsonSerializerSettings);
+            //return serializedData;
 
 
 
-
-
-            var serializedData = JsonConvert.SerializeObject(model, Formatting.Indented); //, DefaultJsonSerializerSettings);
-
-            return serializedData;
 
             return "";
 
