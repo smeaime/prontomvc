@@ -5108,14 +5108,6 @@ Namespace Pronto.ERP.Bll
 
 
 
-                sb &= "&" & "" '47
-                sb &= "&" & "" '48
-                sb &= "&" & "" '49
-                sb &= "&" & "" '50
-                sb &= "&" & "" '51
-
-
-
 
                 sb &= "&" & JustificadoDerecha(iisNull(dr("Chofer"), "").ToString, 20) '47 – Código de Chofer en Softcereal	Alfa	20 	Código del chofer en el sistema Softcereal
                 sb &= "&" & JustificadoDerecha(iisNull(dr("Pat. Chasis"), "").ToString, 10) '48 – Patente del Camión	Alfa	10 	Matrícula del camión
@@ -5139,11 +5131,11 @@ Namespace Pronto.ERP.Bll
                 '60 – Número de Oblea	Numérico	8	Numero Guía Cerealera, 0 si no existe el dato o 9999999 si no se tiene el numero
 
                 'sb &= "&" & JustificadoDerecha(IIf(iisNull(dr(""), "") = "CO", "Si", "No").ToString, 2)
-                sb &= "&" & IIf(dr("CalidadDe") = 25, "Sí", "No")
+                sb &= "&" & IIf(dr("CalidadDe") = 25, "Sí", "No") '51
                 
                 'Dim subvagon = iisNull(dr("SubNumeroVagon"), "0")
                 'If subvagon = "0" Then subvagon = ""
-                'sb &= "&" & JustificadoDerecha(subvagon.ToString, 30)
+                'sb &= "&" & JustificadoDerecha(subvagon.ToString, 30) '52
 
 
                 'sb &= "&" & dr("DestinoCUIT").ToString.Replace("-", "").PadLeft(11)

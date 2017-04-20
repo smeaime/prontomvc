@@ -844,6 +844,48 @@ namespace ProntoMVC.Tests
         /// ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
+
+
+        [TestMethod]
+        public void Urenport_32235_excelqueesHtml_2()
+        {
+
+            // es precisamente así:
+            /*
+             * http://stackoverflow.com/questions/1139390/excel-external-table-is-not-in-the-expected-format
+             * Just add my case. My xls file was created by a data export function from a website, the file extention is xls, 
+            it can be normally opened by MS Excel 2003. But both Microsoft.Jet.OLEDB.4.0 and Microsoft.ACE.OLEDB.12.0 got 
+                an "External table is not in the expected format" exception.
+                    Finally, the problem is, just as the exception said, "it's not in the expected format". Though 
+            it's extention name is xls, but when I open it with a text editor, it is actually a well-formed html file, 
+            all data are in a <table>, each <tr> is a row and each <td> is a cell. Then I think I can parse it in a html way.
+            */
+
+
+            string archivoExcel = @"C:\Users\Administrador\Documents\bdl\pronto\docstest\prueba.xls";
+
+            //FuncionesGenericasCSharp.GetExcel5_HTML_AgilityPack(archivoExcel);
+            //FuncionesGenericasCSharp.GetExcel4_ExcelDataReader(archivoExcel);
+
+            //explota
+
+            string ms = "";
+
+            int m_IdMaestro = 0;
+            Pronto.ERP.BO.CartaDePorte carta;
+
+
+            string log = "";
+            //hay que pasar el formato como parametro 
+            ExcelImportadorManager.FormatearExcelImportadoEnDLL(ref m_IdMaestro, archivoExcel,
+                                    LogicaImportador.FormatosDeExcel.Urenport, SC, 0, ref log, "", 0, "");
+
+            var dt = LogicaImportador.TraerExcelDeBase(SC, ref m_IdMaestro);
+
+        }
+
+
+
         //        36711 - Ramallo – PRIORIDAD     ????
 
         //31206 - MAPA DE MERCADO ESTRATEGICO- PRIORIDAD
@@ -1955,6 +1997,10 @@ La interface será procesa por Syngenta y si la misma no puede ser procesada cor
         public void OCR_alta_automatica_de_clientes_22172_36722()
         {
 
+
+            Assert.IsTrue(FuncionesGenericasCSharp.CUITValido("30710337892"));
+
+            
             // FuncionesGenericasCSharp.CUITValido_DigitoVerificador
             // este son verdaderos. no les encontré cuit existente, pero tampoco a las otras 9 variantes de digito verificador
             Assert.IsTrue(FuncionesGenericasCSharp.CUITValido("30708142391"));
