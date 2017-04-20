@@ -91,7 +91,7 @@ namespace ProntoMVC.Tests
         //const string nombreempresa = "DemoProntoWeb";
         const string usuario = "Mariano";
         //string bdlmasterappconfig = ConfigurationManager.ConnectionStrings["ApplicationServices"].ConnectionString;
-        string bdlmasterappconfig; //  = "Data Source=SERVERSQL3\\TESTING;Initial catalog=BDLMaster;User ID=sa; Password=.SistemaPronto.;Connect Timeout=8";
+        string scbdlmasterappconfig; //  = "Data Source=SERVERSQL3\\TESTING;Initial catalog=BDLMaster;User ID=sa; Password=.SistemaPronto.;Connect Timeout=8";
 
         string DirApp;
         string SC;
@@ -127,7 +127,7 @@ namespace ProntoMVC.Tests
             }
 
 
-            bdlmasterappconfig = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(ConfigurationManager.ConnectionStrings["ApplicationServices"].ConnectionString);
+            scbdlmasterappconfig = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(ConfigurationManager.ConnectionStrings["ApplicationServices"].ConnectionString);
 
             /*
 
@@ -850,6 +850,17 @@ namespace ProntoMVC.Tests
 
 
 
+        [TestMethod]
+        public void InfoAdicionalDelUsuario()
+        {
+
+            var a = CartaDePorteManager.TraerCUITClientesSegunUsuario("alalal", SC ,scbdlmasterappconfig);
+            var b = UserDatosExtendidosManager.TraerClientesRelacionadoslDelUsuario("alalal", scbdlmasterappconfig);
+            var d = UserDatosExtendidosManager.UpdateClientesRelacionadoslDelUsuario("alalal", scbdlmasterappconfig,"asfsafas");
+        }
+
+
+
 
         [TestMethod]
         public void geocode()
@@ -1518,7 +1529,7 @@ namespace ProntoMVC.Tests
             var respEntrega = CartaDePorteManager.BajarListadoDeCartaPorte_CerealNet_DLL_v2_00(usuario, clave, cuit,
                                             new DateTime(2016, 9, 1),
                                             new DateTime(2017, 1, 1), CartaDePorteManager.enumCDPestado.Posicion,
-                                            SC, DirApp, bdlmasterappconfig);
+                                            SC, DirApp, scbdlmasterappconfig);
 
 
             foreach (var desc in respEntrega.descargas)
@@ -1554,7 +1565,7 @@ namespace ProntoMVC.Tests
             string usuario = "Mariano"; //"BLD25MAYO"
 
 
-            UserDatosExtendidosManager.UpdateClientesRelacionadoslDelUsuario(usuario, bdlmasterappconfig, "20-12345678-1|20-20100767-5");
+            UserDatosExtendidosManager.UpdateClientesRelacionadoslDelUsuario(usuario, scbdlmasterappconfig, "20-12345678-1|20-20100767-5");
 
 
 
@@ -1562,7 +1573,7 @@ namespace ProntoMVC.Tests
 
 
 
-            var clientes = CartaDePorteManager.TraerCUITClientesSegunUsuario(usuario, SC, bdlmasterappconfig).Where(x => x != "").ToList();
+            var clientes = CartaDePorteManager.TraerCUITClientesSegunUsuario(usuario, SC, scbdlmasterappconfig).Where(x => x != "").ToList();
 
             //String aaa = ParametroManager.TraerValorParametro2(SC, "ClienteBLDcorredorCUIT").NullSafeToString() ?? "";
             //var sss = aaa.Split('|').ToList();
@@ -3292,7 +3303,7 @@ Adjunto un ejemplo que tiene cartas de porte de 8 entregadores que no son Willia
             var respEntrega = CartaDePorteManager.BajarListadoDeCartaPorte_CerealNet_DLL(usuario, clave, cuit,
                                             new DateTime(2016, 9, 1),
                                             new DateTime(2017, 1, 1),
-                                            SC, DirApp, bdlmasterappconfig);
+                                            SC, DirApp, scbdlmasterappconfig);
 
 
             foreach (var desc in respEntrega.descargas)
@@ -3637,7 +3648,7 @@ Adjunto un ejemplo que tiene cartas de porte de 8 entregadores que no son Willia
             LinqCartasPorteDataContext db = null;
             DemoProntoEntities db2 = null;
 
-            var clientes = CartaDePorteManager.TraerCUITClientesSegunUsuario("BLD25MAYO", SC, bdlmasterappconfig).Where(x => x != "");
+            var clientes = CartaDePorteManager.TraerCUITClientesSegunUsuario("BLD25MAYO", SC, scbdlmasterappconfig).Where(x => x != "");
             String aaa = ParametroManager.TraerValorParametro2(SC, "ClienteBLDcorredorCUIT").NullSafeToString() ?? "";
             var sss = aaa.Split('|').ToList();
 
@@ -4529,7 +4540,7 @@ Adjunto un ejemplo que tiene cartas de porte de 8 entregadores que no son Willia
             //WSRef.FileDownload ls1 = new WSRef.FileDownload();
             byte[] b1 = null;
 
-            b1 = CartaDePorteManager.BajarListadoDeCartaPorte_DLL("Mariano", "pirulo!", new DateTime(10, 10, 2015), new DateTime(10, 10, 2015), SC, DirApp, bdlmasterappconfig);
+            b1 = CartaDePorteManager.BajarListadoDeCartaPorte_DLL("Mariano", "pirulo!", new DateTime(10, 10, 2015), new DateTime(10, 10, 2015), SC, DirApp, scbdlmasterappconfig);
             //{920688e1-7e8f-4da7-a793-9d0dac7968e6}
 
             fs1 = new FileStream(archivodestino, FileMode.Create);
@@ -5098,7 +5109,7 @@ Adjunto un ejemplo que tiene cartas de porte de 8 entregadores que no son Willia
         [TestMethod]
         public void ClientesEspecificosDelUsuarioBLD_23822()
         {
-            var q = CartaDePorteManager.TraerCUITClientesSegunUsuario("Mariano", SC, bdlmasterappconfig);
+            var q = CartaDePorteManager.TraerCUITClientesSegunUsuario("Mariano", SC, scbdlmasterappconfig);
         }
 
 
@@ -6353,7 +6364,7 @@ Adjunto un ejemplo que tiene cartas de porte de 8 entregadores que no son Willia
             //WSRef.FileDownload ls1 = new WSRef.FileDownload();
             byte[] b1 = null;
 
-            b1 = CartaDePorteManager.BajarImagenDeCartaPorte_DLL("Mariano", "pirulo!", 20488343, SC, DirApp, bdlmasterappconfig);
+            b1 = CartaDePorteManager.BajarImagenDeCartaPorte_DLL("Mariano", "pirulo!", 20488343, SC, DirApp, scbdlmasterappconfig);
             //{920688e1-7e8f-4da7-a793-9d0dac7968e6}
 
             fs1 = new FileStream(archivodestino, FileMode.Create);
@@ -6951,8 +6962,8 @@ Adjunto un ejemplo que tiene cartas de porte de 8 entregadores que no son Willia
             }
             db.SaveChanges();
 
-            var q = CartaDePorteManager.TraerCUITClientesSegunUsuario("BLDPIRULO", SC, bdlmasterappconfig);
-            var q2 = CartaDePorteManager.TraerCUITClientesSegunUsuario("BLD_ALABERN", SC, bdlmasterappconfig);
+            var q = CartaDePorteManager.TraerCUITClientesSegunUsuario("BLDPIRULO", SC, scbdlmasterappconfig);
+            var q2 = CartaDePorteManager.TraerCUITClientesSegunUsuario("BLD_ALABERN", SC, scbdlmasterappconfig);
             Assert.AreNotEqual(q.Count, q2.Count);
         }
 

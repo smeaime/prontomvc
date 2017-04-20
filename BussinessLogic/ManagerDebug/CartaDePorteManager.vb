@@ -14887,7 +14887,9 @@ Public Class CartaDePorteManager
 
     Shared Function TraerCUITClientesSegunUsuario(usuario As String, SC As String, scbdlmaster As String) As List(Of String)
 
-        Dim cc As String()
+        Dim cc As String()       = New String() {}
+
+        
         Try
 
             Dim db = New LinqBDLmasterDataContext(Encriptar(scbdlmaster))
@@ -21621,6 +21623,7 @@ Public Class UserDatosExtendidosManager
     Public Shared Function TraerClientesRelacionadoslDelUsuario(ByVal UserName As String, ConexBDLmaster As String) As String
 
 
+        Try
 
         Using db As New BDLMasterEntities(Auxiliares.FormatearConexParaEntityFrameworkBDLMASTER_2(Encriptar(ConexBDLmaster)))
 
@@ -21631,6 +21634,10 @@ Public Class UserDatosExtendidosManager
 
             Return uext.TextoAuxiliar
         End Using
+        Catch ex As Exception
+            ErrHandler2.WriteError(ex)
+            Return ""
+        End Try
     End Function
 
 
