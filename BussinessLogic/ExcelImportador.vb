@@ -2147,8 +2147,8 @@ Public Class ExcelImportadorManager
                         'Y en este caso?
 
 
-                        http://consultas.bdlconsultores.com.ar/AdminTest/template/desarrollo/Consulta.php?IdReclamo=37950&SinMenu=1
-                        If Not eswilliams Then .Exporta = SI
+                        'http://consultas.bdlconsultores.com.ar/AdminTest/template/desarrollo/Consulta.php?IdReclamo=37950&SinMenu=1
+                        If If(.IdClienteEntregador, 0) <> 12454 Then .Exporta = "SI"
 
 
                         If actua(.Destino, BuscaIdWilliamsDestinoPreciso(r(16), SC)) Then log += "Destino; "
