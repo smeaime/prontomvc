@@ -1160,7 +1160,7 @@ FROM
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Sum(Fields!NetoProc.Value)-Sum(Fields!MermaVolatil.Value)</Value>
+                              <Value>=Sum(Fields!NetoProc.Value)</Value>
                               <Style>
                                 <FontSize>7pt</FontSize>
                                 <Format>N0</Format>
@@ -1297,7 +1297,7 @@ FROM
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Sum(Fields!NetoProc.Value)-Sum(Fields!MermaVolatil.Value)</Value>
+                              <Value>=Sum(Fields!NetoProc.Value)</Value>
                               <Style>
                                 <FontSize>7pt</FontSize>
                                 <Format>N0</Format>
@@ -2699,7 +2699,7 @@ FROM
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>=Sum(Fields!NetoProc.Value, "DataSetCartasDePorte_TX_InformesCorregido")-Sum(Fields!MermaVolatil.Value, "DataSetCartasDePorte_TX_InformesCorregido")</Value>
+                <Value>=Sum(Fields!NetoProc.Value, "DataSetCartasDePorte_TX_InformesCorregido")</Value>
                 <Style>
                   <FontSize>8pt</FontSize>
                   <Format>N0</Format>
@@ -2749,7 +2749,7 @@ FROM
         </Paragraphs>
         <rd:DefaultName>Textbox72</rd:DefaultName>
         <Top>158.93291mm</Top>
-        <Left>153.05841mm</Left>
+        <Left>153.05733mm</Left>
         <Height>6.87917mm</Height>
         <Width>18.7717mm</Width>
         <ZIndex>12</ZIndex>
@@ -2843,7 +2843,7 @@ FROM
               <TextRun>
                 <Value>=
 Sum( iif(Fields!Entrada_o_Salida.Value=1,Fields!Cantidad.Value,-Fields!Cantidad.Value  ) , "DataSetVistaCartasPorteMovimientos")
-+Sum(Fields!NetoProc.Value, "DataSetCartasDePorte_TX_InformesCorregido")-Sum(Fields!MermaVolatil.Value, "DataSetCartasDePorte_TX_InformesCorregido")+Sum(Fields!Existencias.Value, "DataSet2")</Value>
++Sum(Fields!NetoProc.Value, "DataSetCartasDePorte_TX_InformesCorregido")+Sum(Fields!Existencias.Value, "DataSet2")</Value>
                 <Style>
                   <FontSize>8pt</FontSize>
                   <FontWeight>Bold</FontWeight>

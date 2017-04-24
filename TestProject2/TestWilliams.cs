@@ -846,8 +846,56 @@ namespace ProntoMVC.Tests
 
 
 
+
         [TestMethod]
-        public void Urenport_32235_excelqueesHtml_2()
+        public void movimientos_37806_3()
+        {
+
+            //no filtras por punto de venta
+
+
+
+            int pv = 1;
+            int idarticulo = SQLdinamico.BuscaIdArticuloPreciso("SOJA", SC);
+            int destino = SQLdinamico.BuscaIdWilliamsDestinoPreciso("ZARATE - TERMINAL LAS PALMAS", SC);
+            int destinatario = SQLdinamico.BuscaIdClientePreciso("AMAGGI ARGENTINA S.A.", SC);
+            DateTime desde = new DateTime(2017, 4, 19);
+            DateTime hasta = new DateTime(2017, 4, 20);
+
+
+            var ex1 = LogicaInformesWilliams.ExistenciasAlDiaPorPuerto(SC, desde, idarticulo, destino, destinatario, pv);
+            Debug.Print(ex1.ToString());
+            var ex2 = LogicaInformesWilliams.ExistenciasAlDiaPorPuerto(SC, hasta, idarticulo, destino, destinatario, pv);
+
+            string sTitulo = "";
+
+            // esto es cómo lo calcula GeneroDataTablesDeMovimientosDeStock
+
+            var sql = CartaDePorteManager.GetDataTableFiltradoYPaginado_CadenaSQL(SC,
+                    "", "", "", 1, 0,
+                    CartaDePorteManager.enumCDPestado.TodasMenosLasRechazadas, "", -1, -1,
+                    destinatario, -1,
+                     -1, idarticulo, -1, destino,
+                    CartaDePorteManager.FiltroANDOR.FiltroAND, "Export",
+                     desde, hasta, pv, ref sTitulo, "Ambas");
+
+            var dt = EntidadManager.ExecDinamico(SC, "select isnull(sum(netoproc),0) as total  from (" + sql + ") as C", 200);
+
+            decimal total = Convert.ToDecimal(dt.Rows[0][0]);
+
+
+
+            DataTable dtCDPs = null;
+            object dtMOVs = null, dt2 = null;
+
+            LogicaInformesWilliams.GeneroDataTablesDeMovimientosDeStock(ref dtCDPs, ref dt2, ref dtMOVs, destinatario, destino, idarticulo, desde, hasta, SC,pv);
+        }
+
+
+
+
+        [TestMethod]
+        public void Urenport_32235_excelqueesHtml_3()
         {
 
             // es precisamente así:
@@ -1469,9 +1517,9 @@ namespace ProntoMVC.Tests
             DateTime desde = new DateTime(2012, 1, 1);
             DateTime hasta = new DateTime(2017, 3, 31);
 
-            var ex1 = LogicaInformesWilliams.ExistenciasAlDiaPorPuerto(SC, desde, idarticulo, destino, destinatario);
+            var ex1 = LogicaInformesWilliams.ExistenciasAlDiaPorPuerto(SC, desde, idarticulo, destino, destinatario, pv);
             Debug.Print(ex1.ToString());
-            var ex2 = LogicaInformesWilliams.ExistenciasAlDiaPorPuerto(SC, hasta, idarticulo, destino, destinatario);
+            var ex2 = LogicaInformesWilliams.ExistenciasAlDiaPorPuerto(SC, hasta, idarticulo, destino, destinatario, pv);
 
             string sTitulo = "";
 
@@ -1494,7 +1542,7 @@ namespace ProntoMVC.Tests
             DataTable dtCDPs = null;
             object dtMOVs = null, dt2 = null;
 
-            LogicaInformesWilliams.GeneroDataTablesDeMovimientosDeStock(ref dtCDPs, ref dt2, ref dtMOVs, destinatario, destino, idarticulo, desde, hasta, SC);
+            LogicaInformesWilliams.GeneroDataTablesDeMovimientosDeStock(ref dtCDPs, ref dt2, ref dtMOVs, destinatario, destino, idarticulo, desde, hasta, SC, pv);
         }
 
 
@@ -1723,9 +1771,9 @@ La interface será procesa por Syngenta y si la misma no puede ser procesada cor
             DateTime desde = new DateTime(2016, 1, 1);
             DateTime hasta = new DateTime(2015, 7, 27);
 
-            var ex1 = LogicaInformesWilliams.ExistenciasAlDiaPorPuerto(SC, desde, idarticulo, destino, destinatario);
+            var ex1 = LogicaInformesWilliams.ExistenciasAlDiaPorPuerto(SC, desde, idarticulo, destino, destinatario, pv);
             Debug.Print(ex1.ToString());
-            var ex2 = LogicaInformesWilliams.ExistenciasAlDiaPorPuerto(SC, hasta, idarticulo, destino, destinatario);
+            var ex2 = LogicaInformesWilliams.ExistenciasAlDiaPorPuerto(SC, hasta, idarticulo, destino, destinatario, pv);
 
             string sTitulo = "";
 
@@ -1755,7 +1803,7 @@ La interface será procesa por Syngenta y si la misma no puede ser procesada cor
             DataTable dtCDPs = null;
             object dtMOVs = null, dt2 = null;
 
-            LogicaInformesWilliams.GeneroDataTablesDeMovimientosDeStock(ref dtCDPs, ref dt2, ref dtMOVs, destinatario, destino, idarticulo, desde, hasta, SC);
+            LogicaInformesWilliams.GeneroDataTablesDeMovimientosDeStock(ref dtCDPs, ref dt2, ref dtMOVs, destinatario, destino, idarticulo, desde, hasta, SC, pv);
         }
 
 
@@ -7772,9 +7820,9 @@ Adjunto un ejemplo que tiene cartas de porte de 8 entregadores que no son Willia
             DateTime desde = new DateTime(2016, 1, 1);
             DateTime hasta = new DateTime(2015, 7, 27);
 
-            var ex1 = LogicaInformesWilliams.ExistenciasAlDiaPorPuerto(SC, desde, idarticulo, destino, destinatario);
+            var ex1 = LogicaInformesWilliams.ExistenciasAlDiaPorPuerto(SC, desde, idarticulo, destino, destinatario, pv);
             Debug.Print(ex1.ToString());
-            var ex2 = LogicaInformesWilliams.ExistenciasAlDiaPorPuerto(SC, hasta, idarticulo, destino, destinatario);
+            var ex2 = LogicaInformesWilliams.ExistenciasAlDiaPorPuerto(SC, hasta, idarticulo, destino, destinatario, pv);
 
             string sTitulo = "";
 
@@ -7825,17 +7873,17 @@ Saldo Final: 19.999.120 kg
 Entiendo que está mal el saldo inicial en el segundo caso.
             */
 
-
+            int pv = 2;
             int idarticulo = SQLdinamico.BuscaIdArticuloPreciso("TRIGO PAN", SC);
             int destino = SQLdinamico.BuscaIdWilliamsDestinoPreciso("SASETRU - Sarandi ", SC);
             int destinatario = SQLdinamico.BuscaIdClientePreciso("BTG PACTUAL COMMODITIES S.A.", SC);
 
-            var ex1 = LogicaInformesWilliams.ExistenciasAlDiaPorPuerto(SC, new DateTime(2015, 7, 26), idarticulo, destino, destinatario);
+            var ex1 = LogicaInformesWilliams.ExistenciasAlDiaPorPuerto(SC, new DateTime(2015, 7, 26), idarticulo, destino, destinatario, pv);
             Debug.Print(ex1.ToString());
-            var ex2 = LogicaInformesWilliams.ExistenciasAlDiaPorPuerto(SC, new DateTime(2015, 7, 27), idarticulo, destino, destinatario);
-            var ex3 = LogicaInformesWilliams.ExistenciasAlDiaPorPuerto(SC, new DateTime(2015, 10, 30), idarticulo, destino, destinatario);
-            var ex4 = LogicaInformesWilliams.ExistenciasAlDiaPorPuerto(SC, new DateTime(2015, 10, 31), idarticulo, destino, destinatario);
-            var ex5 = LogicaInformesWilliams.ExistenciasAlDiaPorPuerto(SC, new DateTime(2015, 11, 1), idarticulo, destino, destinatario);
+            var ex2 = LogicaInformesWilliams.ExistenciasAlDiaPorPuerto(SC, new DateTime(2015, 7, 27), idarticulo, destino, destinatario, pv);
+            var ex3 = LogicaInformesWilliams.ExistenciasAlDiaPorPuerto(SC, new DateTime(2015, 10, 30), idarticulo, destino, destinatario, pv);
+            var ex4 = LogicaInformesWilliams.ExistenciasAlDiaPorPuerto(SC, new DateTime(2015, 10, 31), idarticulo, destino, destinatario, pv);
+            var ex5 = LogicaInformesWilliams.ExistenciasAlDiaPorPuerto(SC, new DateTime(2015, 11, 1), idarticulo, destino, destinatario, pv);
 
 
         }
