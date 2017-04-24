@@ -738,6 +738,9 @@ Partial Class CartasDePorteReasignarImagenListado
 
         '7     segs aca
 
+si esta dormido, aca tarda banda
+
+
         Dim a As List(Of ProntoMVC.Data.Models.CartasDePorteLogDeOCR) = ProntoFlexicapture.ClassFlexicapture.ExtraerListaDeImagenesProcesadas(DirApp, HFSC.Value).ToList
         'And i.FechaModificacion > (DateAdd(DateInterval.Hour, -23, DateTime.Now)) 
         'From e In db.Empleados.Where(Function(x) i.IdUsuarioModifico = x.IdEmpleado).DefaultIfEmpty _
