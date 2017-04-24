@@ -3552,7 +3552,7 @@ Partial Class CartaDePorteInformesConReportViewerSincronismos
                     'http://bdlconsultores.dyndns.org/Consultas/Admin/verConsultas1.php?recordid=10263  rechazadas están saliendo en el informe de existencias
                     'no tengo que incluir los rechazos!
 
-                    GeneroDataTablesDeMovimientosDeStock(dtCDPs, dt2, dtMOVs, idDestinatario, idDestino, idArticulo, fechadesde, fechahasta, HFSC.Value)
+                    GeneroDataTablesDeMovimientosDeStock(dtCDPs, dt2, dtMOVs, idDestinatario, idDestino, idArticulo, fechadesde, fechahasta, HFSC.Value, cmbPuntoVenta.SelectedValue)
 
 
                     'al informe le llega "entrada" y solo toma eso en cuenta

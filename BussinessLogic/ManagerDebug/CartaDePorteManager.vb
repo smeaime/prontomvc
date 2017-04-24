@@ -21090,7 +21090,7 @@ Public Class LogicaInformesWilliams
     Shared Sub GeneroDataTablesDeMovimientosDeStock(ByRef dtCDPs As DataTable, ByRef dtRenglonUnicoConLasExistencias As Object,
                                              ByRef dtMOVs As Object,
                                              ByVal idDestinatario As Integer, ByVal idDestino As Integer, ByVal idarticulo As Integer,
-                                             ByVal desde As Date, ByVal hasta As Date, ByVal sc As String)
+                                             ByVal desde As Date, ByVal hasta As Date, ByVal sc As String, pv As Integer)
 
 
         'http://bdlconsultores.dyndns.org/Consultas/Admin/verConsultas1.php?recordid=10263  rechazadas están saliendo en el informe de existencias
@@ -21161,7 +21161,7 @@ Public Class LogicaInformesWilliams
         'dt2.Columns.Add("Existencias", GetType(Double))
         'dt2.Rows.Add(dt2.NewRow)
         ''dt2 = EntidadManager.ExecDinamico(HFSC.Value, "SELECT dbo.wExistenciasCartaPorteMovimientos (null,null,null) as Existencias")
-        Dim ex = ExistenciasAlDiaPorPuerto(sc, desde, idarticulo, idDestino, idDestinatario)
+        Dim ex = ExistenciasAlDiaPorPuerto(sc, desde, idarticulo, idDestino, idDestinatario, pv)
 
         dtRenglonUnicoConLasExistencias = (From i In db.CartasDePortes.Take(1) Select Existencias = ex, CampoDummyParaQueGuardeElNombre = 0).ToList
 
@@ -21182,7 +21182,7 @@ Public Class LogicaInformesWilliams
 
     Shared Function ExistenciasAlDiaPorPuerto(ByVal sc As String, ByVal Fecha As DateTime,
                                               ByVal IdArticulo As Integer, ByVal IdDestinoWilliams As Integer,
-                                              ByVal iddestinatario As Integer) As Double
+                                              ByVal iddestinatario As Integer, ByVal pv As Integer) As Double
 
         Dim entradasMOV, entradasCDP, salidasMOV As Double
         Dim db As New LinqCartasPorteDataContext(Encriptar(sc))
@@ -21199,13 +21199,14 @@ Public Class LogicaInformesWilliams
         '-si el tipo elige desde hoy hasta hoy, tenes que llamar a la funcion con el ultimo segundo de ayer, porque GetDataTableFiltradoYPaginado_CadenaSQL usa menor o igual
 
 
+
         Dim sql = CartaDePorteManager.GetDataTableFiltradoYPaginado_CadenaSQL(sc,
                 "", "", "", 1, 0,
              enumCDPestado.TodasMenosLasRechazadas, "", -1, -1,
                 iddestinatario, -1,
                 -1, IdArticulo, -1, IdDestinoWilliams,
-               "1", "Export",
-                  #1/1/1750#, DateAdd(DateInterval.Second, -1, Fecha), -1, , , , , , , , , , )
+               CartaDePorteManager.FiltroANDOR.FiltroAND, "Export",
+                  #1/1/1750#, DateAdd(DateInterval.Second, -1, Fecha), pv, , , , , , , , , )
 
 
 
@@ -21317,7 +21318,7 @@ Public Class LogicaInformesWilliams
     Shared Sub GeneroDataTablesDeMovimientosDeStock_v2(ByRef dtCDPs As DataTable, ByRef dtRenglonUnicoConLasExistencias As Object,
                                              ByRef dtMOVs As Object,
                                              ByVal idDestinatario As Integer, ByVal idDestino As Integer, ByVal idarticulo As Integer,
-                                             ByVal desde As Date, ByVal hasta As Date, ByVal sc As String)
+                                             ByVal desde As Date, ByVal hasta As Date, ByVal sc As String, ByVal pv As Integer)
 
 
         'http://bdlconsultores.dyndns.org/Consultas/Admin/verConsultas1.php?recordid=10263  rechazadas están saliendo en el informe de existencias
@@ -21387,7 +21388,7 @@ Public Class LogicaInformesWilliams
         'dt2.Columns.Add("Existencias", GetType(Double))
         'dt2.Rows.Add(dt2.NewRow)
         ''dt2 = EntidadManager.ExecDinamico(HFSC.Value, "SELECT dbo.wExistenciasCartaPorteMovimientos (null,null,null) as Existencias")
-        Dim ex = ExistenciasAlDiaPorPuerto(sc, desde, idarticulo, idDestino, idDestinatario)
+        Dim ex = ExistenciasAlDiaPorPuerto(sc, desde, idarticulo, idDestino, idDestinatario, PV)
 
         dtRenglonUnicoConLasExistencias = (From i In db.CartasDePortes.Take(1) Select Existencias = ex, CampoDummyParaQueGuardeElNombre = 0).ToList
 
