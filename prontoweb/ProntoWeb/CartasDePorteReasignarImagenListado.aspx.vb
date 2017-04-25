@@ -738,6 +738,8 @@ Partial Class CartasDePorteReasignarImagenListado
 
         '7     segs aca
 
+
+
 si esta dormido, aca tarda banda
 
 
