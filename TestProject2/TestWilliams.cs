@@ -70,12 +70,17 @@ namespace ProntoMVC.Tests
 
 
 
-
-
-
     [TestClass]
     public class TestsWilliams
     {
+
+
+
+
+        #region MyRegion
+
+
+
 
         //const string scbdlmaster =
         //          @"metadata=res://*/Models.bdlmaster.csdl|res://*/Models.bdlmaster.ssdl|res://*/Models.bdlmaster.msl;provider=System.Data.SqlClient;provider connection string=""data source=SERVERSQL3\TESTING;initial catalog=BDLMaster;user id=sa;password=.SistemaPronto.;multipleactiveresultsets=True;connect timeout=8;application name=EntityFramework""";
@@ -846,6 +851,126 @@ namespace ProntoMVC.Tests
 
 
 
+        #endregion
+
+
+        /// ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+        [TestMethod]
+        public void SincroGESAGRO_37858()
+        {
+
+
+
+
+            string sErrores = "", sTitulo = "";
+            LinqCartasPorteDataContext db = null;
+
+            // el _CONST_MAXROWS sale del app.config
+
+            int registrosf = 0;
+
+            int idcli = CartaDePorteManager.BuscarClientePorCUIT("30-50930520-6", SC, "");
+
+           
+            var output2 = SincronismosWilliamsManager.GenerarSincro("AMAGGI (DESCARGAS)", ref sErrores, SC, "dominio", ref sTitulo
+                          , CartaDePorteManager.enumCDPestado.DescargasMasFacturadas,
+                       "", idcli, -1,
+                  -1, idcli,
+                   idcli, -1, -1, -1,
+                   CartaDePorteManager.FiltroANDOR.FiltroOR, "Entregas",
+                  new DateTime(2016, 1, 1), new DateTime(2016, 3, 31),
+                  -1, "Ambas", false, "", "", -1, ref registrosf, 4000);
+
+
+            var output = SincronismosWilliamsManager.GenerarSincro("Gesagro", ref sErrores, SC, "dominio", ref sTitulo
+                                , CartaDePorteManager.enumCDPestado.DescargasMasFacturadas,
+                     "", idcli, -1,
+                -1, idcli,
+                 idcli, -1, -1, -1,
+                 CartaDePorteManager.FiltroANDOR.FiltroOR, "Entregas",
+                new DateTime(2016, 1, 1), new DateTime(2016, 3, 31),
+                -1, "Ambas", false, "", "", -1, ref registrosf, 4000);
+
+
+
+
+
+
+
+
+            System.Diagnostics.Process.Start(output);
+            System.Diagnostics.Process.Start(output2);
+        }
+
+
+
+
+
+
+        [TestMethod]
+        public void problema_informe_totalespormes()
+        {
+            ReportParameter p2 = null;
+            string sTitulo = "";
+
+            var q4 = ConsultasLinq.totpormes(SC,
+             "", "", "", 1, 10,
+              CartaDePorteManager.enumCDPestado.Todas, "", -1, -1,
+             -1, -1,
+             -1, -1, -1, -1, CartaDePorteManager.FiltroANDOR.FiltroOR, "Ambas",
+              new DateTime(2014, 1, 1),
+              new DateTime(2014, 2, 1),
+              -1, ref sTitulo, "Ambas", false, "");
+
+
+            var q = ConsultasLinq.totpormesmodo(SC,
+                       "", "", "", 1, 10,
+                        CartaDePorteManager.enumCDPestado.Todas, "", -1, -1,
+                       -1, -1,
+                       -1, -1, -1, -1, CartaDePorteManager.FiltroANDOR.FiltroOR, "Ambas",
+                        new DateTime(2014, 1, 1),
+                        new DateTime(2014, 1, 1),
+                        -1, ref sTitulo, "Ambas", false, "");
+
+
+            var q2 = ConsultasLinq.totpormessucursal(SC,
+              "", "", "", 1, 10,
+               CartaDePorteManager.enumCDPestado.Todas, "", -1, -1,
+              -1, -1,
+              -1, -1, -1, -1, CartaDePorteManager.FiltroANDOR.FiltroOR, "Ambas",
+               new DateTime(2014, 1, 1),
+               new DateTime(2014, 1, 1),
+               -1, ref sTitulo, "Ambas", false, "");
+
+
+            //An Error Has Occurred! System.NotSupportedException: This function can only be invoked from LINQ to Entities. at System.Data.Entity.SqlServer.SqlFunctions.StringConvert(Nullable`1 number) at Read_VB$AnonymousType_98`10(ObjectMaterializer`1 ) at System.Data.Linq.SqlClient.ObjectReaderCompiler.ObjectReader`2.MoveNext() at System.Collections.Generic.List`1..ctor(IEnumerable`1 collection) at System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source) at ConsultasLinq.totpormessucursal(String SC, String ColumnaParaFiltrar, String TextoParaFiltrar, String sortExpression, Int64 startRowIndex, Int64 maximumRows, enumCDPestado estado, String QueContenga, Int32 idVendedor, Int32 idCorredor, Int32 idDestinatario, Int32 idIntermediario, Int32 idRemComercial, Int32 idArticulo, Int32 idProcedencia, Int32 idDestino, FiltroANDOR AplicarANDuORalFiltro, String ModoExportacion, DateTime fechadesde, DateTime fechahasta, Int32 puntoventa, String& sTituloFiltroUsado, String optDiv
+
+            var q3 = ConsultasLinq.totpormesmodoysucursal(SC,
+              "", "", "", 1, 10,
+               CartaDePorteManager.enumCDPestado.Todas, "", -1, -1,
+              -1, -1,
+              -1, -1, -1, -1, CartaDePorteManager.FiltroANDOR.FiltroOR, "Ambas",
+               new DateTime(2014, 1, 1),
+               new DateTime(2014, 1, 1),
+               -1, ref sTitulo, "Ambas", false, "");
+
+        }
+
+
+
+
+
 
         [TestMethod]
         public void movimientos_37806_3()
@@ -888,7 +1013,7 @@ namespace ProntoMVC.Tests
             DataTable dtCDPs = null;
             object dtMOVs = null, dt2 = null;
 
-            LogicaInformesWilliams.GeneroDataTablesDeMovimientosDeStock(ref dtCDPs, ref dt2, ref dtMOVs, destinatario, destino, idarticulo, desde, hasta, SC,pv);
+            LogicaInformesWilliams.GeneroDataTablesDeMovimientosDeStock(ref dtCDPs, ref dt2, ref dtMOVs, destinatario, destino, idarticulo, desde, hasta, SC, pv);
         }
 
 
@@ -944,9 +1069,9 @@ namespace ProntoMVC.Tests
         public void InfoAdicionalDelUsuario()
         {
 
-            var a = CartaDePorteManager.TraerCUITClientesSegunUsuario("alalal", SC ,scbdlmasterappconfig);
+            var a = CartaDePorteManager.TraerCUITClientesSegunUsuario("alalal", SC, scbdlmasterappconfig);
             var b = UserDatosExtendidosManager.TraerClientesRelacionadoslDelUsuario("alalal", scbdlmasterappconfig);
-            var d = UserDatosExtendidosManager.UpdateClientesRelacionadoslDelUsuario("alalal", scbdlmasterappconfig,"asfsafas");
+            var d = UserDatosExtendidosManager.UpdateClientesRelacionadoslDelUsuario("alalal", scbdlmasterappconfig, "asfsafas");
         }
 
 
@@ -1317,36 +1442,6 @@ namespace ProntoMVC.Tests
         }
 
 
-
-
-        [TestMethod]
-        public void SincroGESAGRO_37858()
-        {
-
-
-
-
-            string sErrores = "", sTitulo = "";
-            LinqCartasPorteDataContext db = null;
-
-            // el _CONST_MAXROWS sale del app.config
-
-            int registrosf = 0;
-
-            int idcli = CartaDePorteManager.BuscarClientePorCUIT("30-50930520-6", SC, "");
-
-            var output = SincronismosWilliamsManager.GenerarSincro("Gesagro", ref sErrores, SC, "dominio", ref sTitulo
-                                , CartaDePorteManager.enumCDPestado.DescargasMasFacturadas,
-                     "", idcli, -1,
-                -1, idcli,
-                 idcli, -1, -1, -1,
-                 CartaDePorteManager.FiltroANDOR.FiltroOR, "Entregas",
-                new DateTime(2016, 1, 1), new DateTime(2016, 3, 31),
-                -1, "Ambas", false, "", "", -1, ref registrosf, 4000);
-
-
-            System.Diagnostics.Process.Start(output);
-        }
 
 
 
@@ -2048,7 +2143,7 @@ La interface será procesa por Syngenta y si la misma no puede ser procesada cor
 
             Assert.IsTrue(FuncionesGenericasCSharp.CUITValido("30710337892"));
 
-            
+
             // FuncionesGenericasCSharp.CUITValido_DigitoVerificador
             // este son verdaderos. no les encontré cuit existente, pero tampoco a las otras 9 variantes de digito verificador
             Assert.IsTrue(FuncionesGenericasCSharp.CUITValido("30708142391"));
@@ -4985,55 +5080,6 @@ Adjunto un ejemplo que tiene cartas de porte de 8 entregadores que no son Willia
 
         }
 
-
-
-
-        [TestMethod]
-        public void problema_informe_totalespormes()
-        {
-            ReportParameter p2 = null;
-            string sTitulo = "";
-
-            var q4 = ConsultasLinq.totpormes(SC,
-             "", "", "", 1, 10,
-              CartaDePorteManager.enumCDPestado.Todas, "", -1, -1,
-             -1, -1,
-             -1, -1, -1, -1, CartaDePorteManager.FiltroANDOR.FiltroOR, "Ambas",
-              new DateTime(2014, 1, 1),
-              new DateTime(2014, 2, 1),
-              -1, ref sTitulo, "Ambas", false, "");
-
-
-            var q = ConsultasLinq.totpormesmodo(SC,
-                       "", "", "", 1, 10,
-                        CartaDePorteManager.enumCDPestado.Todas, "", -1, -1,
-                       -1, -1,
-                       -1, -1, -1, -1, CartaDePorteManager.FiltroANDOR.FiltroOR, "Ambas",
-                        new DateTime(2014, 1, 1),
-                        new DateTime(2014, 1, 1),
-                        -1, ref sTitulo, "Ambas", false, "");
-
-
-            var q2 = ConsultasLinq.totpormessucursal(SC,
-              "", "", "", 1, 10,
-               CartaDePorteManager.enumCDPestado.Todas, "", -1, -1,
-              -1, -1,
-              -1, -1, -1, -1, CartaDePorteManager.FiltroANDOR.FiltroOR, "Ambas",
-               new DateTime(2014, 1, 1),
-               new DateTime(2014, 1, 1),
-               -1, ref sTitulo, "Ambas", false, "");
-
-
-            var q3 = ConsultasLinq.totpormesmodoysucursal(SC,
-              "", "", "", 1, 10,
-               CartaDePorteManager.enumCDPestado.Todas, "", -1, -1,
-              -1, -1,
-              -1, -1, -1, -1, CartaDePorteManager.FiltroANDOR.FiltroOR, "Ambas",
-               new DateTime(2014, 1, 1),
-               new DateTime(2014, 1, 1),
-               -1, ref sTitulo, "Ambas", false, "");
-
-        }
 
 
 
