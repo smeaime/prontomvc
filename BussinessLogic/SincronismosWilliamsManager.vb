@@ -13846,21 +13846,25 @@ Namespace Pronto.ERP.Bll
                     sb &= CDate(If(.FechaArribo, DateTime.MinValue)).ToString("ddMMyyyy")       'FecIng	STRING(8)	Fecha de entrada del camión Formato (DDMMYYYY) ej: 01052001)    11)    18
 
 
-                    'If .IsHoraNull Then
-                    '    sb &= #12:00:00 AM#.ToString("hhmmss")  'HorIng	STRING(8)	Hora de entrada del camión Formato (HHMISS) ej:092556)    19)    26
-                    'Else
-                    '    sb &= Convert.ToDateTime(.Hora).ToString("hhmmss")  'HorIng	STRING(8)	Hora de entrada del camión Formato (HHMISS) ej:092556)    19)    26
-                    'End If
 
 
-                    'sb &= "  "
-
-                    'If .IsFechaDescargaNull Then .FechaDescarga = Nothing
-                    'sb &= .FechaDescarga.ToString("ddMMyyyy")  'FecSal	STRING(8)	Fecha de salida o Descarga del camión Formato(DDMMYYYY) ej:01052001)    27)    34
-                    'sb &= Convert.ToDateTime(iisNull(.FechaDescarga, #12:00:00 AM#)).ToString("hhmmss") 'HorSal	STRING(8)	Hora de salida o Descarga del camión  Formato (HHMISS) ej:092556)    35)    42
+                    If .Hora Is Nothing Then
+                        sb &= #12:00:00 AM#.ToString("hhmmss")  'HorIng	STRING(8)	Hora de entrada del camión Formato (HHMISS) ej:092556)    19)    26
+                    Else
+                        sb &= Convert.ToDateTime(.Hora).ToString("hhmmss")  'HorIng	STRING(8)	Hora de entrada del camión Formato (HHMISS) ej:092556)    19)    26
+                    End If
 
 
                     sb &= "  "
+
+
+                    sb &= Convert.ToDateTime(iisNull(.FechaDescarga, #12:00:00 AM#)).ToString("ddMMyyyy") 'FecSal	STRING(8)	Fecha de salida o Descarga del camión Formato(DDMMYYYY) ej:01052001)    27)    34
+                    sb &= Convert.ToDateTime(iisNull(.FechaDescarga, #12:00:00 AM#)).ToString("hhmmss") 'HorSal	STRING(8)	Hora de salida o Descarga del camión  Formato (HHMISS) ej:092556)    35)    42
+
+
+                    sb &= "  "
+
+
 
 
 
@@ -14037,7 +14041,7 @@ Namespace Pronto.ERP.Bll
 
 
 
-                    sb &= Left("".Replace("-", ""), 14).PadRight(14) 'CUITPuerto	STRING(14)	CUIT PUERTO)    43)    56
+                    sb &= Left(.DestinoCUIT.Replace("-", ""), 14).PadRight(14) 'CUITPuerto	STRING(14)	CUIT PUERTO)    43)    56
                     sb &= Left(.DestinoDesc.ToString, 30).PadRight(30) 'NomPuerto	STRING(30)	Nombre Puerto)    57)    86
 
                     sb &= Left(wilycuit.ToString.Replace("-", ""), 14).PadRight(14) 'CUITRecibidor	STRING(14)	CUIT Recibidor)    87)    100
@@ -14275,6 +14279,9 @@ Namespace Pronto.ERP.Bll
                     sb &= Left(.Observaciones.ToString, 100).PadRight(100) 'Observac	STRING(100)	Observaciones)    862)    961
 
 
+
+
+
                     'ConCalidad	STRING(4)	Condición Calidad Grado(G1,G2 o G3), Camara(CC) o Fuera de standart (FE)
                     Dim sCalidad As String
 
@@ -14296,51 +14303,52 @@ Namespace Pronto.ERP.Bll
                         ErrHandler2.WriteError("Sincro amaggi")
                         ErrHandler2.WriteError(ex)
                     End Try
-                    'If .IsCalidadDescNull Then sCalidad = "FE"
-                    'sb &= sCalidad.PadRight(4) 'ConCalidad	STRING(4)	Condición Calidad Grado(G1,G2 o G3), Camara(CC) o Fuera de standart (FE)
+
+                    If .CalidadDesc Is Nothing Then sCalidad = "FE"
+                    sb &= sCalidad.PadRight(4) 'ConCalidad	STRING(4)	Condición Calidad Grado(G1,G2 o G3), Camara(CC) o Fuera de standart (FE)
 
 
 
-                    'sb &= IIf(True, 0, 1).ToString.PadRight(1) 'MovStock	STRING(1)	Señal 1=Movió mercadería)       0=No movió mercadería)    966)    966
-                    'sb &= Left(.Observaciones.ToString, 100).PadRight(100) 'ObsAna	STRING(100)	Observaciones Analisis)    967)    1066
-
-
-
-
-
-
-
-
-                    ''68	DOCUME	1045	1055	S
-                    'sb &= JustificadoIzquierda(If(.IschoferCUITNull, "", .ChoferCUIT.Replace("-", "")), 11)
+                    sb &= IIf(True, 0, 1).ToString.PadRight(1) 'MovStock	STRING(1)	Señal 1=Movió mercadería)       0=No movió mercadería)    966)    966
+                    sb &= Left(.Observaciones.ToString, 100).PadRight(100) 'ObsAna	STRING(100)	Observaciones Analisis)    967)    1066
 
 
 
 
 
-                    ''66	CTATRANSPOR	1056	1066	N
-                    'sb &= JustificadoIzquierda(If(.IsTransportistaCUITNull, "", .TransportistaCUIT.Replace("-", "")), 11)
+
+
+
+                    '68	DOCUME	1045	1055	S
+                    sb &= JustificadoIzquierda(If(.ChoferCUIT Is Nothing, "", .ChoferCUIT.Replace("-", "")), 11)
+
+
+
+
+
+                    '66	CTATRANSPOR	1056	1066	N
+                    sb &= JustificadoIzquierda(If(.TransportistaCUIT Is Nothing, "", .TransportistaCUIT.Replace("-", "")), 11)
 
 
 
                     '/////////////////////////////////////////
                     'ensartado
                     '35	PATCHA	1067	1072	S    
-                    'sb &= JustificadoIzquierda(If(.IsPatenteNull, "", .Patente), 6)
-                    ''//////////////////////////////////////////
+                    sb &= JustificadoIzquierda(If(.Patente Is Nothing, "", .Patente), 6)
+                    '//////////////////////////////////////////
 
-                    ''69	PATACO	1073	1078	S
-                    'sb &= JustificadoIzquierda(If(.IsAcopladoNull, "", .Acoplado), 6)
-
-
-
-
-                    'sb &= Space(12)
+                    '69	PATACO	1073	1078	S
+                    sb &= JustificadoIzquierda(If(.Acoplado Is Nothing, "", .Acoplado), 6)
 
 
 
-                    ''67	NOMCONDUC	1091	1120	S
-                    'sb &= JustificadoIzquierda(If(.IsChoferDescNull, "", .ChoferDesc), 30)
+
+                    sb &= Space(12)
+
+
+
+                    '67	NOMCONDUC	1091	1120	S
+                    sb &= JustificadoIzquierda(If(.ChoferDesc Is Nothing, "", .ChoferDesc), 30)
 
 
 
@@ -14351,11 +14359,11 @@ Namespace Pronto.ERP.Bll
                     '70	KMSTIER	1134	1143	N
                     sb &= JustificadoIzquierda(0, 10)
                     '71	KMSASFA	1144	1153	N
-                    sb &= JustificadoIzquierda(0, 10)
+                    sb &= JustificadoIzquierda(If(.KmARecorrer Is Nothing, 0, .KmARecorrer), 10)
                     '72	TARIKMS	1154	1163	N
-                    sb &= JustificadoIzquierda(0, 10)  'cobran distinto los kilometros en tierra vs asfalto?
+                    sb &= JustificadoIzquierda(If(.Tarifa Is Nothing, 0, .Tarifa), 10)  'cobran distinto los kilometros en tierra vs asfalto?
                     '73	TARITIE	1164	1173	N
-                    sb &= JustificadoIzquierda(0, 10)
+                    sb &= JustificadoIzquierda(If(.Tarifa Is Nothing, 0, .Tarifa), 10)
 
 
 
@@ -14363,38 +14371,39 @@ Namespace Pronto.ERP.Bll
 
 
                     '64	NROCAU	1191	1205	N
-                    'sb &= JustificadoIzquierda(.CEE, 14)
+                    sb &= JustificadoIzquierda(.CEE, 14)
 
-                    'sb &= Space(14)
+                    sb &= Space(14)
 
-                    ''74	FECVTOCAU	1219	1226	S
-                    'sb &= JustificadoIzquierda(If(.IsFechaVencimientoNull, Nothing, .FechaVencimiento.ToString("ddMMyyyy")), 8)
-                    ''76	CTGNRO	1227	1234	N
-                    'sb &= JustificadoIzquierda(If(.IsCTGNull, 0, .CTG), 8)
+                    '74	FECVTOCAU	1219	1226	S
 
-
-                    'sb &= Space(9)
-
-                    ''77	TIPORTA	1244	1244	N
-                    'sb &= JustificadoIzquierda(" ", 1)
+                    sb &= JustificadoIzquierda(If(.FechaVencimiento Is Nothing, "", Convert.ToDateTime(iisNull(.FechaVencimiento, #12:00:00 AM#)).ToString("ddMMyyyy")), 8)
+                    '76	CTGNRO	1227	1234	N
+                    sb &= JustificadoIzquierda(If(.CTG Is Nothing, 0, .CTG), 8)
 
 
-                    'sb &= Space(1)
+                    sb &= Space(9)
+
+                    '77	TIPORTA	1244	1244	N
+                    sb &= JustificadoIzquierda(" ", 1)
 
 
-                    ''78	CODRTA	1246	1250	S
-                    'sb &= JustificadoIzquierda(If(.IsCEENull, "", .CEE), 5)
-                    ''79	NRO PLANTA ONCCA	1251	1257	N
-                    'sb &= JustificadoIzquierda(If(.IsDestinoCodigoONCAANull, "", .DestinoCodigoONCAA), 7)
+                    sb &= Space(1)
 
 
-                    'If If(.IsDestinoCodigoONCAANull, "", .DestinoCodigoONCAA) = "" AndAlso InStr(sErroresDestinos, .DestinoDesc) = 0 Then
-                    '    'si no tiene codigo ni está ya en sErrores, lo meto
+                    '78	CODRTA	1246	1250	S
+                    sb &= JustificadoIzquierda(If(.CEE Is Nothing, "", .CEE), 5)
+                    '79	NRO PLANTA ONCCA	1251	1257	N
+                    sb &= JustificadoIzquierda(If(.DestinoCodigoONCAA Is Nothing, "", .DestinoCodigoONCAA), 7)
 
-                    '    ErrHandler2.WriteError("Falta el codigo ONCCA para el destino " & .DestinoDesc)
 
-                    '    sErroresDestinos &= "<a href=""CDPDestinos.aspx?Id=" & .Destino & """ target=""_blank"">" & .DestinoDesc & "</a>; "
-                    'End If
+                    If If(.DestinoCodigoONCAA Is Nothing, "", .DestinoCodigoONCAA) = "" AndAlso InStr(sErroresDestinos, .DestinoDesc) = 0 Then
+                        'si no tiene codigo ni está ya en sErrores, lo meto
+
+                        ErrHandler2.WriteError("Falta el codigo ONCCA para el destino " & .DestinoDesc)
+
+                        sErroresDestinos &= "<a href=""CDPDestinos.aspx?Id=" & .Destino & """ target=""_blank"">" & .DestinoDesc & "</a>; "
+                    End If
 
 
 
@@ -14405,6 +14414,10 @@ Namespace Pronto.ERP.Bll
                     '79           NUMVAGON    1260             1270        N
                     sb &= "  "
                     sb &= JustificadoIzquierda(.SubnumeroVagon, 11)
+
+
+
+
 
 
 
@@ -15234,6 +15247,9 @@ Namespace Pronto.ERP.Bll
 
 
         End Function
+
+
+
 
         Public Shared Function Sincronismo_AmaggiDescargas(ByVal pDataTable As WillyInformesDataSet.wCartasDePorte_TX_InformesCorregidoDataTable, Optional ByVal titulo As String = "", Optional ByVal sWHERE As String = "", Optional ByRef sErrores As String = "") As String
 
