@@ -1188,9 +1188,9 @@ namespace ProntoFlexicapture
 
         public static List<CartasDePorteLogDeOCR> ExtraerListaDeImagenesProcesadas(string DirApp, string SC)
         {
-            string dir = DirApp + @"\Temp\";
-            DirectoryInfo d = new DirectoryInfo(dir);//Assuming Test is your Folder
-            FileInfo[] files = d.GetFiles("*.*", SearchOption.AllDirectories); //Getting Text files
+            //string dir = DirApp + @"\Temp\";
+            //DirectoryInfo d = new DirectoryInfo(dir);//Assuming Test is your Folder
+            //FileInfo[] files = d.GetFiles("*.*", SearchOption.AllDirectories); //Getting Text files
 
 
             using (DemoProntoEntities db =
