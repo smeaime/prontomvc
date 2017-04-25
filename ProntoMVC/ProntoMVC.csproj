@@ -1393,6 +1393,8 @@
     <Content Include="Views\ValeSalida\Index.cshtml" />
     <Content Include="Views\ValeSalida\Delete.cshtml" />
     <Content Include="Views\ValeSalida\Edit.cshtml" />
+    <Content Include="Views\PresupuestoObra\Edit.cshtml" />
+    <Content Include="Views\PresupuestoObra\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Controllers\Content\bootstrap.css" />

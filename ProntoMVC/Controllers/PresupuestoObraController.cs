@@ -74,6 +74,24 @@ namespace ProntoMVC.Controllers
             return View(PresupuestoObra);
         }
 
+
+        [HttpGet]
+        public virtual ActionResult Edit(int page = 1)
+        {
+            var PresupuestoObra = db.PresupuestoObrasNodos
+                .OrderBy(s => s.Descripcion)
+                .Skip((page - 1) * pageSize)
+                .Take(pageSize)
+                .ToList();
+
+            ViewBag.CurrentPage = page;
+            ViewBag.pageSize = pageSize;
+            ViewBag.TotalPages = Math.Ceiling((double)db.Sectores.Count() / pageSize);
+
+            return View(PresupuestoObra);
+        }
+
+
         public virtual JsonResult GetPresupuestoObraEtapas(int IdObra)
         {
             var SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString(), oStaticMembershipService));
