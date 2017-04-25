@@ -132,6 +132,20 @@ namespace ProntoMVC.Tests
 
 
 
+        [TestMethod]
+        public void EditPrepuestoObraMoq()
+        {
+
+            var c = new PresupuestoObraController();
+
+            GetMockedControllerGenerico(c);  //  new ComprobanteProveedorController();
+
+            //var result = c.Edit(-1);
+
+        }
+
+
+
 
    
 
