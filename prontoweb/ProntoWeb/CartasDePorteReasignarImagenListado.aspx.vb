@@ -740,7 +740,7 @@ Partial Class CartasDePorteReasignarImagenListado
 
 
 
-si esta dormido, aca tarda banda
+        ' si esta dormido, aca tarda banda
 
 
         Dim a As List(Of ProntoMVC.Data.Models.CartasDePorteLogDeOCR) = ProntoFlexicapture.ClassFlexicapture.ExtraerListaDeImagenesProcesadas(DirApp, HFSC.Value).ToList

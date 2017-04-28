@@ -58,37 +58,48 @@ namespace ProntoMVC.Controllers
 {
     public partial class PresupuestoObraController : ProntoBaseController
     {
-        [HttpGet]
-        public virtual ActionResult Index(int page = 1)
+
+
+        public virtual ActionResult Index()
         {
-            var PresupuestoObra = db.PresupuestoObrasNodos
-                .OrderBy(s => s.Descripcion)
-                .Skip((page - 1) * pageSize)
-                .Take(pageSize)
-                .ToList();
-
-            ViewBag.CurrentPage = page;
-            ViewBag.pageSize = pageSize;
-            ViewBag.TotalPages = Math.Ceiling((double)db.Sectores.Count() / pageSize);
-
-            return View(PresupuestoObra);
+            return View();
         }
 
 
+
+        //[HttpGet]
+        //public virtual ActionResult Index(int page = 1)
+        //{
+        //    var PresupuestoObra = db.PresupuestoObrasNodos
+        //        .OrderBy(s => s.Descripcion)
+        //        .Skip((page - 1) * pageSize)
+        //        .Take(pageSize)
+        //        .ToList();
+
+        //    ViewBag.CurrentPage = page;
+        //    ViewBag.pageSize = pageSize;
+        //    ViewBag.TotalPages = Math.Ceiling((double)db.Sectores.Count() / pageSize);
+
+        //    return View(PresupuestoObra);
+        //}
+
+
         [HttpGet]
-        public virtual ActionResult Edit(int page = 1)
+        public virtual ActionResult Edit(int id)
         {
-            var PresupuestoObra = db.PresupuestoObrasNodos
-                .OrderBy(s => s.Descripcion)
-                .Skip((page - 1) * pageSize)
-                .Take(pageSize)
-                .ToList();
+            //var PresupuestoObra = db.PresupuestoObrasNodos
+            //    .OrderBy(s => s.Descripcion)
+            //    .Skip((page - 1) * pageSize)
+            //    .Take(pageSize)
+            //    .ToList();
 
-            ViewBag.CurrentPage = page;
-            ViewBag.pageSize = pageSize;
-            ViewBag.TotalPages = Math.Ceiling((double)db.Sectores.Count() / pageSize);
+            //ViewBag.CurrentPage = page;
+            //ViewBag.pageSize = pageSize;
+            //ViewBag.TotalPages = Math.Ceiling((double)db.Sectores.Count() / pageSize);
 
-            return View(PresupuestoObra);
+            //return View(PresupuestoObra);
+
+            return View();
         }
 
 
@@ -100,11 +111,11 @@ namespace ProntoMVC.Controllers
             IEnumerable<DataRow> Entidad = dt.AsEnumerable();
 
             var data1 = (from a in Entidad
-                    select new
-                    {
-                        id = a["IdPresupuestoObrasNodo"].ToString(),
-                        value = a["Titulo"].ToString()
-                    }).ToList();
+                         select new
+                         {
+                             id = a["IdPresupuestoObrasNodo"].ToString(),
+                             value = a["Titulo"].ToString()
+                         }).ToList();
             return Json(data1, JsonRequestBehavior.AllowGet);
         }
 
@@ -160,7 +171,290 @@ namespace ProntoMVC.Controllers
 
 
 
-    // [Authorize(Roles = "Administrador,SuperAdmin,Compras")] //ojo que el web.config tambien te puede bochar hacia el login
+
+        // Migrar LlenarGrilla de frmPresupuestoObrasArbol del Pronto VB6
+        public virtual string LlenarGrilla(string sidx, string sord, int page, int rows, bool _search, string filters,
+                                                int Nodo)
+        {
+
+            /*
+
+            // Migrar LlenarGrilla de frmPresupuestoObrasArbol del Pronto VB6
+
+
+            //de donde salen estas?
+            int Cant_Columnas;
+            int IdObra ;
+            bool mvarComparativaActiva;
+             DateTime FechaInicialObra ;
+            int mvarCodigoPresupuesto, mvarCompara1, mvarCompara2;
+            //////////////
+
+            
+const int   COL_NODO = 0;
+const int  COL_NODOPADRE = 1;
+const int  COL_DESCRIPCION = 2;
+const int  COL_ITEM = 3;
+const int  COL_TIPO = 4;
+const int  COL_CANTIDADAVAN = 14;
+const int  COL_CANTIDAD = 6;
+const int  COL_UNIMEDIDA = 7;
+const int  COL_IMPORTE = 8;
+const int  COL_ANO = 9;
+const int  COL_DEPTH = 10;
+const int  COL_LINEAGE = 11;
+const int  COL_TOTAL = 12;
+const int  COL_OBRA = 13;
+const int  COL_IDARTICULO = 5;
+
+const int  ANCHO_COL_ID = 0;
+
+const int  TIPO_OBRA = 1;
+const int  TIPO_PRESUPUESTO = 2;;
+const int  TIPO_ETAPA = 3;
+const int  TIPO_ARTICULO = 4;
+const int  TIPO_RUBRO = 5;
+
+
+            
+   int  i , j , mCol , mIconoRubro ;
+   long tempc , tempr , PosI_R , PosI_C , mPos ;
+            double mCant , mCantidad1 , mCantidad2 , mImporte1 , mImporte2 ;
+   double mDiferencia , mDesvio ;
+   bool EsRaiz ;
+   string mIcono ;
+
+
+
+            DataTable oRs = EntidadManager.ExecDinamico(SC, "PresupuestoObrasNodos_tx_PorNodo " + Nodo );
+
+      
+             string[][] TextMatrix  ;
+            
+            foreach (DataRow r in oRs.Rows)
+            {
+                
+            TextMatrix[i][COL_NODO] = r["IdPresupuestoObrasNodo"].NullSafeToString();
+            TextMatrix[i][COL_NODOPADRE] = (r["IdNodoPadre"] ?? 0).NullSafeToString();
+            TextMatrix[i][COL_DEPTH] = r["Depth"].NullSafeToString();
+            TextMatrix[i][ COL_LINEAGE] = r["Lineage"].NullSafeToString();
+            TextMatrix[i][ COL_OBRA] = r["IdObra"].NullSafeToString();
+            TextMatrix[i ][COL_ITEM] = (r["Item"] ?? "").NullSafeToString();
+            TextMatrix[i ][COL_CANTIDAD] =  (r["Cantidad"] ?? 0).NullSafeToString();
+            TextMatrix[i][ COL_UNIMEDIDA] =(r["Unidad"] ??  "").NullSafeToString();
+            TextMatrix[i][ COL_IMPORTE] = (r["Importe"] ?? 0).NullSafeToString();
+            TextMatrix[i][ COL_TOTAL] = (Convert.ToInt16(r["Cantidad"] ?? 0) * Convert.ToInt16(r["Importe"] ?? 0)).NullSafeToString();
+            
+                switch (Convert.ToInt16(r["TipoNodo"] ?? 0))
+                {   
+                    case TIPO_OBRA:
+                    TextMatrix[i][ COL_DESCRIPCION] = r["DescripcionObra"].NullSafeToString();
+                    TextMatrix[i][ COL_TIPO] = "";
+                    
+                    default:
+                    TextMatrix[i][ COL_DESCRIPCION] = r["Descripcion"].NullSafeToString();
+                    TextMatrix[i ][COL_TIPO] = "<DIR>";
+            }
+
+            TextMatrix[i][ COL_CANTIDADAVAN] = r["UnidadAvance1"].NullSafeToString();
+
+            //If Len(IIf(IsNull(r["Rubro"]), "", r["Rubro"])) > 0 Then
+            //   On Error Resume Next
+            //   mIcono = glbPathPlantillas & "\..\Imagenes\" & r["Rubro"] & ".ico"
+            //   If Len(Trim(Dir(mIcono))) <> 0 Then
+            //      .row = i
+            //      .col = COL_IDARTICULO
+            //      Picture1.Width = .CellWidth
+            //      Picture1.Height = .CellHeight
+            //      Image1.Width = .CellWidth
+            //      Image1.Height = .CellHeight
+            //      Image1.Stretch = True
+            //      'Image1.Picture = img16.ListImages(mIconoRubro).Picture
+            //      Image1.Picture = LoadPicture(mIcono)
+            //      Picture1.AutoRedraw = True
+            //      Picture1.Cls
+            //      Picture1.PaintPicture Image1.Picture, 0, 0, Picture1.Width, Picture1.Height
+            //      Image1.Picture = LoadPicture("")
+            //      Picture1.AutoRedraw = False
+            //      Set .CellPicture = Picture1.Image
+            //      Picture1.Picture = LoadPicture("")
+            //   End If
+            //   On Error GoTo ErrorHandler
+            //End If
+            
+            if (IdObra > 0)
+            {  
+                DataTable oRs1;
+
+                     mCant = 0;
+               
+                    
+                    if (mvarComparativaActiva) 
+                            oRs1 = EntidadManager.GetStoreProcedure(SC, "PresupuestoObrasNodos_tx_DetallePxQ ",r[0], mvarCodigoPresupuesto, mvarCompara1, mvarCompara2)
+                    else
+                            oRs1 = EntidadManager.GetStoreProcedure(SC, "PresupuestoObrasNodos_tx_DetallePxQ ", r[0], mvarCodigoPresupuesto);
+              
+
+               
+            foreach ( DataRow s in oRs1.Rows)
+            {
+                j = (int)   (FechaInicialObra -  new DateTime(Convert.ToInt16( s["Año"]), (int) s["Mes"], 1) ).TotalDays/30;
+                     mCol = Cant_Columnas + (j * 4);
+                     
+                    //if (mCol > .Cols)
+                    //{          
+                    //    //MsgBox "La obra tiene como fecha de inicio " & Me.FechaInicialObra & ", " & vbCrLf & _
+                    //    //         "y datos de presupuesto/consumo del mes " & oRs1.Fields("Mes"] & "/" & oRs1.Fields("Año"] & vbCrLf & _
+                    //    //         "que genera mas columnas de las soportadas por el sistema, revise los datos", vbExclamation
+                    //    break ; //Exit Do
+                    //}
+
+
+                     if (mCol >= 0)
+                     {     
+                        mCant = mCant +  (double)  s["Cantidad"];
+                        mCantidad1 = (double) s["Cantidad"] ;
+                        mCantidad2 = (double)  s["CantidadReal"];
+                        mImporte1 = (double)  s["Importe"];
+                        mImporte2 =  (double) s["ImporteReal"] ;
+                        mDiferencia = mImporte1 - mImporte2;
+                        mDesvio = 0;
+                        
+                         if (mImporte1 != 0)  mDesvio = Math.Round(mDiferencia / mImporte1 * 100, 2);
+                        
+                        if (mvarComparativaActiva)
+                        {   TextMatrix[i][ mCol + 1] = ((mImporte1 == 0)? "": mImporte1.ToString());
+                            TextMatrix[i][ mCol + 2] = ((mImporte2 == 0)? "": mImporte2.ToString());
+                            TextMatrix[i][ mCol + 3] = ((mDiferencia == 0)? "": mDiferencia.ToString());
+                            TextMatrix[i][ mCol + 4] = ((mDesvio == 0)? "": mDesvio.ToString());
+                         }
+                        else
+                         {
+                            TextMatrix[i][ mCol + 1]= ((mCantidad1 == 0) ? "" : mCantidad1.ToString());
+                            TextMatrix[i][ mCol + 2]= ((mImporte1 == 0) ? "" : mImporte1.ToString());
+                            TextMatrix[i][ mCol + 3] =((mCantidad2== 0) ? "" : mCantidad2.ToString());
+                            TextMatrix[i][mCol + 4] = ((mImporte2 == 0) ? "" : mImporte2.ToString());
+                        }
+    
+                }
+    
+            }
+            
+            i = i + 1;
+            
+        }
+            */
+
+
+
+
+
+
+                /*
+
+            int totalPages = (int)Math.Ceiling((float)totalRecords / (float)pageSize);
+
+            var data = (from a in Entidad
+                        select a
+                        )//.Where(campo).OrderBy(sidx + " " + sord)
+                        .ToList();
+
+
+            var jsonData = new jqGridJson()
+            {
+                total = totalPages,
+                page = currentPage,
+                records = totalRecords,
+                rows = (from a in  TextMatrix
+                        select new jqGridRowJson
+                        {
+                            id = a.IdCartaDePorte.ToString(),
+                            cell = new string[] {
+                                "", //"<a href="+ Url.Action("Edit",new {id = a.IdPedido} ) + "  >Editar</>" ,
+                                
+
+                                // CP	TURNO	SITUACION	MERC	TITULAR_CP	INTERMEDIARIO	RTE CIAL	CORREDOR	DESTINATARIO	DESTINO	ENTREGADOR	PROC	KILOS	OBSERVACION
+
+                                a.IdCartaDePorte.ToString(),
+
+                                "<a href=\"CartaDePorte.aspx?Id=" +  a.IdCartaDePorte + "\"  target=\"_blank\" >" +  a.NumeroCartaEnTextoParaBusqueda.NullSafeToString() + "</>" ,
+
+                                a.Turno, //turno
+
+                                (a.Situacion ?? 0).NullSafeToString(),
+                                //((a.Situacion ?? 0) >= 0)  ?  ExcelImportadorManager.Situaciones[a.Situacion ?? 0] : "",
+
+                               
+                            }
+                        }).ToArray()
+            };
+                */
+            //return Json(jsonData, JsonRequestBehavior.AllowGet);
+                var jsonData="";
+            System.Web.Script.Serialization.JavaScriptSerializer jsonSerializer = new System.Web.Script.Serialization.JavaScriptSerializer();
+            return jsonSerializer.Serialize(jsonData);
+
+
+        }
+
+
+
+
+        public virtual string CargarArbol(string sidx, string sord, int page, int rows, bool _search, string filters)
+        {
+
+         /*   
+   Dim oRs As ADOR.Recordset
+   Dim mvarIdObra As Long, mIdEtapa As Long
+   Dim Imagen As String, mver As String
+   Dim mTipoConsumo As Integer, mpresu As Integer
+   Dim oNode As Node
+   
+   mver = ultimaopcion
+   
+   On Error Resume Next
+   
+   Set oRs = Aplicacion.PresupuestoObrasNodos.TraerFiltrado("_ParaArbol")
+   
+   Arbol.Nodes.Clear
+   If Lista.ColumnHeaders.Count > 0 Then
+      Lista.ListItems.Clear
+      Lista.ColumnHeaders.Clear
+   End If
+   
+   With Arbol.Nodes
+      .Add , , "O/", "OBRAS", "Obras", "Obras"
+      mvarIdObra = 0
+      If oRs.RecordCount > 0 Then
+         oRs.MoveFirst
+         Do While Not oRs.EOF
+            If oRs!TipoNodo <> TIPO_ARTICULO And oRs!TipoNodo <> TIPO_RUBRO Then ' And ors!TipoNodo <> TIPO_PRESUPUESTO Then
+               Select Case oRs!TipoNodo
+                  Case TIPO_OBRA
+                      Imagen = "Obras"
+                  Case Else
+                      Imagen = "Etapas"
+               End Select
+               .Add "O" & oRs!Lineage, tvwChild, "O" & oRs!Lineage & oRs!IdPresupuestoObrasNodo & "/", iisnull(oRs.Fields("Descripcion").Value, ""), Imagen
+            End If
+            oRs.MoveNext
+         Loop
+      End If
+      .Item("O/").Expanded = True
+   End With
+   
+   oRs.Close
+   Set oRs = Nothing
+
+       */
+
+            var jsonData = "";
+            System.Web.Script.Serialization.JavaScriptSerializer jsonSerializer = new System.Web.Script.Serialization.JavaScriptSerializer();
+            return jsonSerializer.Serialize(jsonData);
+
+        }
+
+
 
 
         public virtual ActionResult PresupuestosObra(string sidx, string sord, int? page, int? rows, bool _search, string searchField, string searchOper, string searchString,
@@ -397,7 +691,7 @@ namespace ProntoMVC.Controllers
 
             var data = from a in Req//.Where(campo)
                            // .OrderBy(sidx + " " + sord)
-                           
+
 //.Skip((currentPage - 1) * pageSize).Take(pageSize)
 .ToList()
                        select a; //supongo que tengo que hacer la paginacion antes de hacer un select, para que me llene las colecciones anidadas
