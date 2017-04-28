@@ -2220,8 +2220,11 @@ Public Class ExcelImportadorManager
 
 
 
-
-                        If actua(.CalidadDe, BuscaIdCalidadPreciso(DiccionarioEquivalenciasManager.BuscarEquivalencia(SC, r(34)), SC)) Then log += "Calidad; "
+                        Dim cal = BuscaIdCalidadPreciso(Trim(r(34)), SC)
+                        If cal = -1 Then cal = BuscaIdCalidadPreciso(DiccionarioEquivalenciasManager.BuscarEquivalencia(SC, Trim(r(34))), SC)
+                        If cal <> -1 Then
+                            If actua(.CalidadDe, cal) Then log += "Calidad; "
+                        End If
                         If .CalidadDe <= 0 Then .CalidadDe = Nothing
                         '.CalidadDe = BuscaIdCalidadPreciso(DiccionarioEquivalenciasManager.BuscarEquivalencia(SC, r(34)), SC)
 
