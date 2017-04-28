@@ -128,4 +128,238 @@
         pageLayout.hide('south');
     });
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    // http: //stackoverflow.com/questions/9192276/send-expanded-treegrid-nodes-in-cookie/9202378#9202378
+    var bPersisteArbol = true; // no me anda... pinta que Oleg en su persistencia, ya tiene todos los nodos cargados, o sea
+    //  que no vuelve a llamar al servidor cuando se aprieta un nodo
+
+    var eslaprimeravez = true;
+
+
+    var $grid = $('#addtree')
+
+
+    // creo que la posta está por acá
+    // http: //stackoverflow.com/questions/9242601/how-to-remove-flashing-on-persisting-remotely-populated-jqgrid-tree-node/9244023#9244023
+
+    var idsOfExpandedRows = []
+
+    if (bPersisteArbol) {
+
+        var
+            saveObjectInLocalStorage = function (storageItemName, object) {
+                if (typeof window.localStorage !== 'undefined') {
+                    window.localStorage.setItem(storageItemName, JSON.stringify(object));
+                }
+            },
+            removeObjectFromLocalStorage = function (storageItemName) {
+                if (typeof window.localStorage !== 'undefined') {
+                    window.localStorage.removeItem(storageItemName);
+                }
+            },
+            getObjectFromLocalStorage = function (storageItemName) {
+                if (typeof window.localStorage !== 'undefined') {
+                    return JSON.parse(window.localStorage.getItem(storageItemName));
+                }
+            },
+            myColumnStateName = function (g) {
+                if (g[0] == undefined) return undefined;
+                // return window.location.pathname + '#' + g[0].id; // para devolver uno por pagina
+                return '#' + g[0].id;
+
+            },
+            updateIdsOfExpandedRows = function (id, isExpanded) {
+                var index = $.inArray(id, idsOfExpandedRows);
+                if (!isExpanded && index >= 0) {
+                    idsOfExpandedRows.splice(index, 1); // remove id from the list
+                } else if (index < 0) {
+                    idsOfExpandedRows.push(id);
+                }
+                saveObjectInLocalStorage(myColumnStateName($grid), idsOfExpandedRows);
+            },
+            orgExpandRow = $.fn.jqGrid.expandRow,
+            orgCollapseRow = $.fn.jqGrid.collapseRow;
+
+        if ($grid[0] != undefined) {
+            idsOfExpandedRows = getObjectFromLocalStorage(myColumnStateName($grid)) || [];
+        }
+
+    }
+
+
+
+
+    // pruebas para árbol usando cookie
+    // con cookies no va. probar usando localstorage http://www.w3schools.com/html/html5_webstorage.asp
+
+    //if ($.cookie("arbol") == null) {
+    //    RecargarCookieArbol();
+    //}
+
+    if (localStorage.arbol == null) {
+        RecargarCookieArbol();
+    }
+
+    function RecargarCookieArbol() {
+        $.ajax({
+            type: "POST",
+            contentType: "application/json; charset=utf-8",
+            url: ROOT + "Home/TreeGrid_ParaGrillaNoTreeviewEnLocalStorage",
+            dataType: "json",
+            success: function (data) {
+                var lala = JSON.stringify(data);
+                // $.cookie("arbol", lala, { path: '/' });
+                localStorage.arbol = lala;
+                RefrescarArbol();
+
+            }
+        });
+    }
+
+
+    if (localStorage.arbol != null) {
+        $("#addtree2").jqGrid({
+            data: JSON.parse(localStorage.arbol).rows,//$.cookie("arbol"),
+            datatype: "jsonstring", // "local",  //http://stackoverflow.com/questions/6831306/load-local-json-data-in-jqgrid-without-addjsonrows
+            colModel: [
+                { name: "id", width: 1 },
+                { name: "descr", width: 400, searchoptions: { sopt: ['cn', 'eq'] } },
+                { name: "Name2", width: 1, hidden: true },
+                { name: "Name3", width: 1, hidden: true },
+                { name: "Name4", width: 1, hidden: true },
+                { name: "Name5", width: 1, hidden: true },
+            ],
+
+            ignoreCase: true,
+
+            loadComplete: function (data) {
+                refrescarFondo_addtree();
+
+                if (eslaprimeravez) {
+                    cargarTopPositionDelArbol();
+                    eslaprimeravez = false;
+                }
+
+                var gridId = $("#addtree2").attr('id');
+                var gridParentWidth = $('#gbox_' + gridId).parent().width();
+                $('#' + gridId).setGridWidth(gridParentWidth);
+
+            },
+
+            // pager: "#addtree2Pager",
+            rowNum: 500,
+            //rowList: [1, 2, 10],
+            viewrecords: true,
+            height: "auto",
+            //autoencode: true,
+            //gridview: true,
+            //ignoreCase: true,
+
+            //treeGrid: true,
+            caption: ""
+
+        });
+
+        jQuery("#addtree2").filterToolbar({
+            stringResult: true, searchOnEnter: true,
+            defaultSearch: 'cn',
+            enableClear: false
+        });
+
+    }
+
+
+    ///////////////////////////////////////////
+    /////////////////////////////////////
+    /////////////////////////////////////
+    // scroll
+    $(".ui-jqgrid").css("overflow-x", "hidden");
+    $(".ui-jqgrid-bdiv").css("overflow-x", "hidden");
+    /////////////////////////////////////
+    /////////////////////////////////////
+    /////////////////////////////////////
+    // transparente
+    //$("#addtree > .ui-jqgrid tr.jqgrow").css(" background-color", "yellow !important;");
+    $("#addtree > .ui-widget-content").css("background", "transparent");
+    $("#gbox_addtree").css("background", "transparent");
+    $("#gbox_addtree").css("border", "0");
+    /////////////////////////////////////
+    /////////////////////////////////////
+    // http://stackoverflow.com/questions/1195374/jqgrid-change-theme
+    //     $('#myGrid .ui-widget').addClass('jqgrid-widget');
+    $('#addtree .ui-widget-content').addClass('jqgrid-widget-content');
+
+
+
+    function refrescarFondo_addtree() {
+
+        $('#addtree .ui-widget-content').addClass('jqgrid-widget-content');
+        $('#addtree2 .ui-widget-content').addClass('jqgrid-widget-content');
+
+    }
+
+
+
+    ///////////////////
+    // para borrar el encabezado
+    var gview = $("#addtree").parents("div.ui-jqgrid-view");
+    gview.children("div.ui-jqgrid-hdiv").hide();
+
+
+
+    ////////////////
+
+
+    if (bPersisteArbol) {
+
+
+
+
+        $grid.jqGrid('navButtonAdd', '#paddtree', {
+            caption: "",
+            buttonicon: "ui-icon-closethick",
+            title: "Clear saved grid's settings",
+            onClickButton: function () {
+                removeObjectFromLocalStorage(myColumnStateName($(this)));
+                window.location.reload();
+            }
+        });
+        $.jgrid.extend({
+            expandRow: function (rc) {
+                //alert('before expandNode: rowid="' + rc._id_ + '", name="' + rc.name + '"');
+                updateIdsOfExpandedRows(rc._id_, true);
+                return orgExpandRow.call(this, rc);
+            },
+            collapseRow: function (rc) {
+                //alert('before collapseNode: rowid="' + rc._id_ + '", name="' + rc.name + '"');
+                updateIdsOfExpandedRows(rc._id_, false);
+                return orgCollapseRow.call(this, rc);
+            }
+        });
+    }
+
+
+
+
+
+
+    ///////////////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////////////
+
+
+
+
 </script>
