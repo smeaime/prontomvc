@@ -104,6 +104,8 @@ public static class Generales
             return Roles.IsUserInRole(username, role);
         }
 
+
+
         public bool EsSuperAdmin()
         {
             return Roles.IsUserInRole(Membership.GetUser().UserName, "SuperAdmin");

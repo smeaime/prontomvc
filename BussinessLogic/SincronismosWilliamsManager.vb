@@ -23848,7 +23848,9 @@ Namespace Pronto.ERP.Bll
 
                 sb &= "&" & "" '50
                 sb &= "&" & "" '51
-                sb &= "&" & iisNull(dr("SubNumeroVagon"), "0")
+
+                Dim v = iisNull(dr("SubNumeroVagon"), "0").ToString
+                sb &= "&" & IIf(v = "0", "", v)
 
                 'sb &= "&" & dr("Contrato").ToString.PadLeft(14) '
                 'sb &= "&" & dr("Contrato").ToString.PadLeft(14)

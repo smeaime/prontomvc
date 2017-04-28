@@ -2200,6 +2200,79 @@ namespace ProntoMVC.Controllers
         /// /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         /// /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         /// /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        public IQueryable<Tablas.Tree> TablaTree_PresupuestoObra(string parentId)
+        {
+
+            // cómo filtrar esto?, en especial en el nodo raíz (parentId="01")
+            //    y si es externo?
+
+            string usuario = ViewBag.NombreUsuario;
+            int IdUsuario;
+            try
+            {
+                IdUsuario = db.Empleados.Where(x => x.Nombre == usuario || x.UsuarioNT == usuario).Select(x => x.IdEmpleado).FirstOrDefault();
+            }
+            catch (Exception)
+            {
+                throw; // Exception("No se encuentra el usuario");
+            }
+
+            bool essuperadmin = oStaticMembershipService.UsuarioTieneElRol(usuario, "SuperAdmin");
+            bool esadmin = oStaticMembershipService.UsuarioTieneElRol(usuario, "Administrador");
+            bool escomercial = oStaticMembershipService.UsuarioTieneElRol(usuario, "Comercial");
+            bool esfactura = oStaticMembershipService.UsuarioTieneElRol(usuario, "FacturaElectronica");
+            bool esreq = oStaticMembershipService.UsuarioTieneElRol(usuario, "Requerimientos");
+            bool esExterno = oStaticMembershipService.UsuarioTieneElRol(usuario, "AdminExterno") ||
+                           oStaticMembershipService.UsuarioTieneElRol(usuario, "Externo") ||
+                           oStaticMembershipService.UsuarioTieneElRol(usuario, "ExternoPresupuestos") ||
+                           oStaticMembershipService.UsuarioTieneElRol(usuario, "ExternoCuentaCorrienteProveedor") ||
+                           oStaticMembershipService.UsuarioTieneElRol(usuario, "ExternoCuentaCorrienteCliente") ||
+                           oStaticMembershipService.UsuarioTieneElRol(usuario, "ExternoOrdenesPagoListas");
+            bool escompras = oStaticMembershipService.UsuarioTieneElRol(usuario, "Compras");
+            bool esFondoFijo = oStaticMembershipService.UsuarioTieneElRol(usuario, "FondosFijos");
+
+
+            if (esExterno || true)
+            {
+
+                // agregarExterno() // hasta que metas el agregar externa, deberás usar TablaTree
+                return TablaTree().AsQueryable();
+
+            }
+
+
+            var permisos = (from i in db.EmpleadosAccesos where i.IdEmpleado == IdUsuario select i); //.ToList();
+
+
+
+            var q = from n in db.Trees
+                    join p in permisos on n.Clave equals p.Nodo
+                    where (n.ParentId == parentId)
+                    select new Tablas.Tree()
+                    {
+                        IdItem = n.IdItem,
+                        Clave = n.Clave,
+                        Descripcion = n.Descripcion,
+                        ParentId = n.ParentId,
+                        Orden = n.Orden ?? 0,
+                        Parametros = n.Parametros,
+                        Link = n.Link.Replace("Pronto2", ROOT),
+                        Imagen = n.Imagen,
+                        EsPadre = n.EsPadre,
+                        nivel = p.Nivel ?? 9
+
+                        // , Orden = n.Orden
+                    };
+
+
+
+
+            return q;
+        }
+
+
+        
         /// /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         /// /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -2224,21 +2297,19 @@ namespace ProntoMVC.Controllers
                 throw; // Exception("No se encuentra el usuario");
             }
 
-
-
-            bool essuperadmin = Roles.IsUserInRole(usuario, "SuperAdmin");
-            bool esadmin = Roles.IsUserInRole(usuario, "Administrador");
-            bool escomercial = Roles.IsUserInRole(usuario, "Comercial");
-            bool esfactura = Roles.IsUserInRole(usuario, "FacturaElectronica");
-            bool esreq = Roles.IsUserInRole(usuario, "Requerimientos");
-            bool esExterno = Roles.IsUserInRole(usuario, "AdminExterno") ||
-                            Roles.IsUserInRole(usuario, "Externo") ||
-                            Roles.IsUserInRole(usuario, "ExternoPresupuestos") ||
-                            Roles.IsUserInRole(usuario, "ExternoCuentaCorrienteProveedor") ||
-                            Roles.IsUserInRole(usuario, "ExternoCuentaCorrienteCliente") ||
-                            Roles.IsUserInRole(usuario, "ExternoOrdenesPagoListas");
-            bool escompras = Roles.IsUserInRole(usuario, "Compras");
-            bool esFondoFijo = Roles.IsUserInRole(usuario, "FondosFijos");
+            bool essuperadmin =oStaticMembershipService.UsuarioTieneElRol(usuario, "SuperAdmin");
+            bool esadmin =oStaticMembershipService.UsuarioTieneElRol(usuario, "Administrador");
+            bool escomercial =oStaticMembershipService.UsuarioTieneElRol(usuario, "Comercial");
+            bool esfactura =oStaticMembershipService.UsuarioTieneElRol(usuario, "FacturaElectronica");
+            bool esreq =oStaticMembershipService.UsuarioTieneElRol(usuario, "Requerimientos");
+            bool esExterno =oStaticMembershipService.UsuarioTieneElRol(usuario, "AdminExterno") ||
+                           oStaticMembershipService.UsuarioTieneElRol(usuario, "Externo") ||
+                           oStaticMembershipService.UsuarioTieneElRol(usuario, "ExternoPresupuestos") ||
+                           oStaticMembershipService.UsuarioTieneElRol(usuario, "ExternoCuentaCorrienteProveedor") ||
+                           oStaticMembershipService.UsuarioTieneElRol(usuario, "ExternoCuentaCorrienteCliente") ||
+                           oStaticMembershipService.UsuarioTieneElRol(usuario, "ExternoOrdenesPagoListas");
+            bool escompras =oStaticMembershipService.UsuarioTieneElRol(usuario, "Compras");
+            bool esFondoFijo =oStaticMembershipService.UsuarioTieneElRol(usuario, "FondosFijos");
 
 
             if (esExterno || true)
