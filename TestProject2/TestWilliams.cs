@@ -865,6 +865,110 @@ namespace ProntoMVC.Tests
 
 
 
+        [TestMethod]
+        public void Urenport_4()
+        {
+
+            // es precisamente así:
+            /*
+             * http://stackoverflow.com/questions/1139390/excel-external-table-is-not-in-the-expected-format
+             * Just add my case. My xls file was created by a data export function from a website, the file extention is xls, 
+            it can be normally opened by MS Excel 2003. But both Microsoft.Jet.OLEDB.4.0 and Microsoft.ACE.OLEDB.12.0 got 
+                an "External table is not in the expected format" exception.
+                    Finally, the problem is, just as the exception said, "it's not in the expected format". Though 
+            it's extention name is xls, but when I open it with a text editor, it is actually a well-formed html file, 
+            all data are in a <table>, each <tr> is a row and each <td> is a cell. Then I think I can parse it in a html way.
+            */
+
+
+            string archivoExcel = @"C:\Users\Administrador\Documents\bdl\pronto\docstest\Urenport_ 951-28042017.xls";
+
+            //FuncionesGenericasCSharp.GetExcel5_HTML_AgilityPack(archivoExcel);
+            //FuncionesGenericasCSharp.GetExcel4_ExcelDataReader(archivoExcel);
+
+            //explota
+
+            string ms = "";
+
+            int m_IdMaestro = 0;
+            Pronto.ERP.BO.CartaDePorte carta;
+
+
+            string log = "";
+            //hay que pasar el formato como parametro 
+            ExcelImportadorManager.FormatearExcelImportadoEnDLL(ref m_IdMaestro, archivoExcel,
+                                    LogicaImportador.FormatosDeExcel.Urenport, SC, 0, ref log, "", 0, "");
+
+            var dt = LogicaImportador.TraerExcelDeBase(SC, ref m_IdMaestro);
+
+        }
+
+
+
+
+
+        [TestMethod]
+        public void excelDetalladoPaso2AsistenteFactur_37875()
+        {
+
+
+//            Log Entry : 
+//04/27/2017 15:10:49
+//Error in: https://prontoweb.williamsentregas.com.ar/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message: PreviewDetalladoDeLaGeneracionEnPaso2() Convierto a Excel
+//__________________________
+
+//Log Entry : 
+//04/27/2017 15:10:49
+//Error in: https://prontoweb.williamsentregas.com.ar/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:System.IO.IOException
+//El archivo ya está abierto.
+//   at Microsoft.VisualBasic.FileSystem.FileOpen(Int32 FileNumber, String FileName, OpenMode Mode, OpenAccess Access, OpenShare Share, Int32 RecordLength)
+//   at LogicaFacturacion.DataTableToExcel(DataTable pDataTable, String titulo) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\LogicaFacturacion.vb:line 8587
+//   at LogicaFacturacion.PreviewDetalladoDeLaGeneracionEnPaso2(Int32 optFacturarA, String txtFacturarATerceros, String SC, Boolean EsteUsuarioPuedeVerTarifa, Object ViewState, String txtFechaDesde, String txtFechaHasta, String fListaIDs, String SessionID, Int32 cmbPuntoVenta, String cmbAgruparArticulosPor, Boolean SeEstaSeparandoPorCorredor) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\LogicaFacturacion.vb:line 8571
+//   at CDPFacturacion.PreviewDetalladoDeLaGeneracionEnPaso2()
+//   at CDPFacturacion.lnkVistaDetallada_Click(Object sender, EventArgs e)
+//   at System.Web.UI.WebControls.LinkButton.OnClick(EventArgs e)
+//   at System.Web.UI.WebControls.LinkButton.RaisePostBackEvent(String eventArgument)
+//   at System.Web.UI.WebControls.LinkButton.System.Web.UI.IPostBackEventHandler.RaisePostBackEvent(String eventArgument)
+//   at System.Web.UI.Page.RaisePostBackEvent(IPostBackEventHandler sourceControl, String eventArgument)
+//   at System.Web.UI.Page.RaisePostBackEvent(NameValueCollection postData)
+//   at System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+//Microsoft.VisualBasic
+//__________________________
+
+
+
+            int optFacturarA = 3;
+            string txtFacturarATerceros = "";
+            bool EsteUsuarioPuedeVerTarifa = true;
+            System.Web.UI.StateBag ViewState = new System.Web.UI.StateBag();
+            string txtFechaDesde = "12/1/2015";
+            string txtFechaHasta = "12/31/2015";
+            string fListaIDs = "99500,99501";
+            string SessionID = "sfsfasfd12asdfsa3123";
+            int cmbPuntoVenta = -1;
+            string cmbAgruparArticulosPor = "";
+            bool SeEstaSeparandoPorCorredor = false;
+
+            ViewState["pagina"] = 1;
+            ViewState["sesionId"] = SessionID;
+            ViewState["filas"] = 10;
+
+            string[] tokens = fListaIDs.Split(',');
+            var l = tokens.ToList();
+
+
+            LogicaFacturacion.GridCheckboxPersistenciaBulk(SC, SessionID, l.Select(int.Parse).ToList());
+
+
+            var output = LogicaFacturacion.PreviewDetalladoDeLaGeneracionEnPaso2(optFacturarA, txtFacturarATerceros, SC,
+                                                   EsteUsuarioPuedeVerTarifa, ViewState, txtFechaDesde, txtFechaHasta,
+                                                   fListaIDs, SessionID, cmbPuntoVenta, cmbAgruparArticulosPor,
+                                                   SeEstaSeparandoPorCorredor);
+
+            System.Diagnostics.Process.Start(output);
+        }
+
+
 
         [TestMethod]
         public void SincroGESAGRO_37858()
@@ -980,7 +1084,7 @@ namespace ProntoMVC.Tests
 
 
 
-            int pv = 1;
+            int pv = -1;
             int idarticulo = SQLdinamico.BuscaIdArticuloPreciso("SOJA", SC);
             int destino = SQLdinamico.BuscaIdWilliamsDestinoPreciso("ZARATE - TERMINAL LAS PALMAS", SC);
             int destinatario = SQLdinamico.BuscaIdClientePreciso("AMAGGI ARGENTINA S.A.", SC);

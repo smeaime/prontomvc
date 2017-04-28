@@ -5659,6 +5659,23 @@ Public Class LogicaFacturacion
 
 
 
+                        'http://consultas.bdlconsultores.com.ar/AdminTest/template/desarrollo/Consulta.php?IdReclamo=29472&SinMenu=1
+                        'Al generar la factura, completar el campo IdTipoNegocioVentas completar de la siguiente manera:
+                        'Elevacion: 1                         'Entrega: 3                         'Buque: 9
+                        Dim tiponegocio As Integer = 3
+
+                        If listEmbarques.Count > 0 Then
+                            tiponegocio = 9 '                         'Elevacion: 1   'Entrega: 3  'Buque: 9
+                        ElseIf oListaCDP(0).Exporta = "SI" Then
+                            tiponegocio = 1
+                        Else
+                            tiponegocio = 3
+                        End If
+                        .Fields("IdTipoNegocioVentas").Value = tiponegocio    'Elevacion: 1   'Entrega: 3  'Buque: 9
+
+
+
+
                     End With
 
 
@@ -8569,7 +8586,39 @@ Public Class LogicaFacturacion
         '/////////////////////////////////////
         ErrHandler2.WriteError(" PreviewDetalladoDeLaGeneracionEnPaso2() Convierto a Excel")
         output = DataTableToExcel(dt)
+
+
+
+        '        Log Entry
+        '04/27/2017 15:10:49
+        'Error in: https://prontoweb.williamsentregas.com.ar/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message: PreviewDetalladoDeLaGeneracionEnPaso2() Convierto a Excel
+        '        __________________________()
+
+        '        Log Entry
+        '04/27/2017 15:10:49
+        'Error in: https://prontoweb.williamsentregas.com.ar/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:System.IO.IOException
+        'El archivo ya está abierto.
+        '   at Microsoft.VisualBasic.FileSystem.FileOpen(Int32 FileNumber, String FileName, OpenMode Mode, OpenAccess Access, OpenShare Share, Int32 RecordLength)
+        '   at LogicaFacturacion.DataTableToExcel(DataTable pDataTable, String titulo) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\LogicaFacturacion.vb:line 8587
+        '   at LogicaFacturacion.PreviewDetalladoDeLaGeneracionEnPaso2(Int32 optFacturarA, String txtFacturarATerceros, String SC, Boolean EsteUsuarioPuedeVerTarifa, Object ViewState, String txtFechaDesde, String txtFechaHasta, String fListaIDs, String SessionID, Int32 cmbPuntoVenta, String cmbAgruparArticulosPor, Boolean SeEstaSeparandoPorCorredor) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\LogicaFacturacion.vb:line 8571
+        '        at CDPFacturacion.PreviewDetalladoDeLaGeneracionEnPaso2()
+        '   at CDPFacturacion.lnkVistaDetallada_Click(Object sender, EventArgs e)
+        '   at System.Web.UI.WebControls.LinkButton.OnClick(EventArgs e)
+        '   at System.Web.UI.WebControls.LinkButton.RaisePostBackEvent(String eventArgument)
+        '   at System.Web.UI.WebControls.LinkButton.System.Web.UI.IPostBackEventHandler.RaisePostBackEvent(String eventArgument)
+        '   at System.Web.UI.Page.RaisePostBackEvent(IPostBackEventHandler sourceControl, String eventArgument)
+        '   at System.Web.UI.Page.RaisePostBackEvent(NameValueCollection postData)
+        '   at System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+        '        Microsoft.VisualBasic()
+        '        __________________________()
+
+
+
         ErrHandler2.WriteError(" PreviewDetalladoDeLaGeneracionEnPaso2() Se descarga")
+
+
+
+
 
 
 
@@ -8582,15 +8631,40 @@ Public Class LogicaFacturacion
 
     Public Shared Function DataTableToExcel(ByVal pDataTable As DataTable, Optional ByVal titulo As String = "") As String
 
+
+
+
         Dim vFileName As String = Path.GetTempFileName()
         'Dim vFileName As String = "c:\archivo.txt"
-        FileOpen(1, vFileName, OpenMode.Output)
+
+        
+
+        Dim nF = FreeFile()
+        Try
+
+            FileOpen(nF, vFileName, OpenMode.Output)
+        Catch ex As Exception
+            '            Log Entry
+            '04/27/2017 15:10:49
+            'Error in: https://prontoweb.williamsentregas.com.ar/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:System.IO.IOException
+            'El archivo ya está abierto.
+            '   at Microsoft.VisualBasic.FileSystem.FileOpen(Int32 FileNumber, String FileName, OpenMode Mode, OpenAccess Access, OpenShare Share, Int32 RecordLength)
+            '   at LogicaFacturacion.DataTableToExcel(DataTable pDataTable, String titulo) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\LogicaFacturacion.vb:line 8587
+            '   at LogicaFacturacion.PreviewDetalladoDeLaGeneracionEnPaso2(Int32 optFacturarA, String txtFacturarATerceros, String SC, Boolean EsteUsuarioPuedeVerTarifa, Object ViewState, String txtFechaDesde, String txtFechaHasta, String fListaIDs, String SessionID, Int32 cmbPuntoVenta, String cmbAgruparArticulosPor, Boolean SeEstaSeparandoPorCorredor) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\LogicaFacturacion.vb:line 8571
+
+            ErrHandler2.WriteError("el problema de fileopen?")
+
+            Throw
+        End Try
+
+
+
         Dim sb As String = ""
         Dim dc As DataColumn
         For Each dc In pDataTable.Columns
             sb &= dc.Caption & Microsoft.VisualBasic.ControlChars.Tab
         Next
-        PrintLine(1, sb)
+        PrintLine(nF, sb)
         Dim i As Integer = 0
         Dim dr As DataRow
         For Each dr In pDataTable.Rows
@@ -8611,11 +8685,11 @@ Public Class LogicaFacturacion
                 End If
                 i += 1
             Next
-            PrintLine(1, sb)
+            PrintLine(nF, sb)
         Next
 
 
-        FileClose(1)
+        FileClose(nF)
 
 
 
