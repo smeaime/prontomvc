@@ -191,10 +191,8 @@ namespace ProntoMVC.Tests
 
             GetMockedControllerGenerico(c);  //  new ComprobanteProveedorController();
 
-            var result = c.Edit(-1);
-
-
-                      var result2 = c.CargarArbol_PresupuestoObra_ParaGrillaNoTreeviewEnLocalStorage
+            var f = new FormCollection();
+            var result2 = c.CargarArbol_PresupuestoObra_ParaGrillaNoTreeviewEnLocalStorage(f);
 
         }
 
