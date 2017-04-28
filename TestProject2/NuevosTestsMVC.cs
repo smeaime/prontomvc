@@ -89,7 +89,7 @@ namespace ProntoMVC.Tests
 
 
 
-                /// <summary>
+        /// <summary>
         /// /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         /// /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -130,24 +130,65 @@ namespace ProntoMVC.Tests
         /// </summary>
 
 
+        [TestMethod]
+        public void EditPresupuestoObraMoq_2()
+        {
+
+            //        Dim oRs As ADOR.Recordset
+            //Set oRs = Aplicacion.PresupuestoObrasNodos.TraerTodos
+            //If oRs.RecordCount = 0 Then Aplicacion.Tarea "PresupuestoObrasNodos_Inicializar"
+            //oRs.Close
+
+            //Set DataCombo1(0).RowSource = Aplicacion.Obras.TraerFiltrado("_TodasParaCombo")
+            //CargarArbol
+            //CargarArbolOpciones
+
+            //CambiarLenguaje Me, "esp", glbIdiomaActual
+
+            //ConfiguraGrilla
+            //MostrarNodo (0)
+
+
+
+
+            //     cargararbol
+
+            //         configuraGrilla
+
+            //     MostrarNodo (mIdPresupuestoObrasNodo)
+
+
+            var c = new PresupuestoObraController();
+
+            GetMockedControllerGenerico(c);  //  new ComprobanteProveedorController();
+
+
+            //var result = c.CargarArbol();
+
+            //var result2 = c.LlenarGrilla(-1);
+
+
+
+        }
+
 
 
         [TestMethod]
-        public void EditPrepuestoObraMoq()
+        public void EditPresupuestoObraMoq()
         {
 
             var c = new PresupuestoObraController();
 
             GetMockedControllerGenerico(c);  //  new ComprobanteProveedorController();
 
-            //var result = c.Edit(-1);
+            var result = c.Edit(-1);
 
         }
 
 
 
 
-   
+
 
 
 
@@ -201,7 +242,7 @@ namespace ProntoMVC.Tests
 
 
 
-     [TestMethod]
+        [TestMethod]
         public void probar_context_del_rms_pendientes()
         {
 
@@ -933,7 +974,7 @@ namespace ProntoMVC.Tests
             m.Setup(s => s.EsSuperAdmin()).Returns(true);
             m.Setup(s => s.UsuarioTieneElRol(It.IsAny<string>(), It.IsAny<string>())).Returns(true);
             c.oStaticMembershipService = m.Object;
- 
+
 
 
 

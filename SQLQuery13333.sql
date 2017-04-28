@@ -1,1 +1,10 @@
-select top 10 * from log order by fecharegistro desc
+  
+
+  --PresupuestoObrasNodos_tx_ParaArbol
+
+  --sp_helptext PresupuestoObrasNodos_Inicializar
+
+
+  --sp_helptext PresupuestoObrasNodos_tx_PorNodo 
+
+  --PresupuestoObrasNodos_tx_PorNodo 0
