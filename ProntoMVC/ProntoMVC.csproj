@@ -1608,7 +1608,6 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_LogOnPartial.cshtml" />
-    <Content Include="Views\Shared\_Layout_Original.cshtml" />
     <Content Include="Views\Web.config" />
     <Content Include="Views\Shared\_Layout.cshtml" />
   </ItemGroup>
@@ -1645,7 +1644,6 @@
     <None Include="Documentos\vb6\frmIBCondiciones.frmzzz" />
     <None Include="Documentos\vb6\frmIGCondiciones.frmzzz" />
     <None Include="Documentos\vb6\frmPuntosVenta.frmzzz" />
-    <Content Include="Views\Shared\_Layout_Prueba.cshtml" />
     <Content Include="Views\Account\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_LayoutVacio.cshtml" />
     <Content Include="Views\Factura\Index.cshtml" />
