@@ -44,7 +44,7 @@
         $('.ui-jqgrid .ui-jqgrid-htable th div').css('white-space', 'normal');
 
         $('#Lista').jqGrid({
-            url: '@Url.Action("TT", "Obra")',
+            url: '@Url.Action("TT", "PresupuestoObra")',
             postData: { 'Activas': function () { return $("#Activas").val(); } },
             datatype: 'json',
             mtype: 'POST',
@@ -115,7 +115,7 @@
             altRows: false,
             footerrow: false,
             userDataOnFooter: true,
-            caption: '<b>OBRAS</b>'
+            caption: '<b>PRESUPUESTOS DE OBRA</b>'
         });
         jQuery("#Lista").jqGrid('navGrid', '#ListaPager', { refresh: true, add: false, edit: false, del: false }, {}, {}, {}, { sopt: ["cn"], width: 700, closeOnEscape: true, closeAfterSearch: true });
         //jQuery("#Lista").jqGrid('gridResize', { minWidth: 350, maxWidth: 1500, minHeight: 80, maxHeight: 500 });

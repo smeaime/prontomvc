@@ -865,6 +865,29 @@ namespace ProntoMVC.Tests
 
 
 
+
+        [TestMethod]
+        public void btnPaginaAvanza2()
+        {
+            http://ltuttini.blogspot.com.ar/2012/02/
+
+            ProntoCSharp.FuncionesUIWebCSharpEnDllAparte.KeepSelection(GridView2);
+
+ RestoreSelection(GridView2)
+            //            System.NullReferenceException
+            //Message:	Object reference not set to an instance of an object.
+
+            //            Trace:	at ProntoCSharp.FuncionesUIWebCSharpEnDllAparte.b__5(<>f__AnonymousType0`2 <>h__TransparentIdentifier2) in E:\Backup\BDL\ProntoWeb\Soluciones\ClassLibrary1\Class1.cs:line 97
+            //at System.Linq.Enumerable.WhereSelectEnumerableIterator`2.MoveNext()
+            //at System.Collections.Generic.List`1..ctor(IEnumerable`1 collection)
+            //at System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
+            //at ProntoCSharp.FuncionesUIWebCSharpEnDllAparte.KeepSelection(GridView grid) in E:\Backup\BDL\ProntoWeb\Soluciones\ClassLibrary1\Class1.cs:line 104
+            //at CDPFacturacion.btnPaginaAvanza2_Click(Object sender, EventArgs e)
+        }
+
+
+
+
         [TestMethod]
         public void Urenport_4()
         {
@@ -912,28 +935,28 @@ namespace ProntoMVC.Tests
         {
 
 
-//            Log Entry : 
-//04/27/2017 15:10:49
-//Error in: https://prontoweb.williamsentregas.com.ar/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message: PreviewDetalladoDeLaGeneracionEnPaso2() Convierto a Excel
-//__________________________
+            //            Log Entry : 
+            //04/27/2017 15:10:49
+            //Error in: https://prontoweb.williamsentregas.com.ar/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message: PreviewDetalladoDeLaGeneracionEnPaso2() Convierto a Excel
+            //__________________________
 
-//Log Entry : 
-//04/27/2017 15:10:49
-//Error in: https://prontoweb.williamsentregas.com.ar/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:System.IO.IOException
-//El archivo ya está abierto.
-//   at Microsoft.VisualBasic.FileSystem.FileOpen(Int32 FileNumber, String FileName, OpenMode Mode, OpenAccess Access, OpenShare Share, Int32 RecordLength)
-//   at LogicaFacturacion.DataTableToExcel(DataTable pDataTable, String titulo) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\LogicaFacturacion.vb:line 8587
-//   at LogicaFacturacion.PreviewDetalladoDeLaGeneracionEnPaso2(Int32 optFacturarA, String txtFacturarATerceros, String SC, Boolean EsteUsuarioPuedeVerTarifa, Object ViewState, String txtFechaDesde, String txtFechaHasta, String fListaIDs, String SessionID, Int32 cmbPuntoVenta, String cmbAgruparArticulosPor, Boolean SeEstaSeparandoPorCorredor) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\LogicaFacturacion.vb:line 8571
-//   at CDPFacturacion.PreviewDetalladoDeLaGeneracionEnPaso2()
-//   at CDPFacturacion.lnkVistaDetallada_Click(Object sender, EventArgs e)
-//   at System.Web.UI.WebControls.LinkButton.OnClick(EventArgs e)
-//   at System.Web.UI.WebControls.LinkButton.RaisePostBackEvent(String eventArgument)
-//   at System.Web.UI.WebControls.LinkButton.System.Web.UI.IPostBackEventHandler.RaisePostBackEvent(String eventArgument)
-//   at System.Web.UI.Page.RaisePostBackEvent(IPostBackEventHandler sourceControl, String eventArgument)
-//   at System.Web.UI.Page.RaisePostBackEvent(NameValueCollection postData)
-//   at System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
-//Microsoft.VisualBasic
-//__________________________
+            //Log Entry : 
+            //04/27/2017 15:10:49
+            //Error in: https://prontoweb.williamsentregas.com.ar/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:System.IO.IOException
+            //El archivo ya está abierto.
+            //   at Microsoft.VisualBasic.FileSystem.FileOpen(Int32 FileNumber, String FileName, OpenMode Mode, OpenAccess Access, OpenShare Share, Int32 RecordLength)
+            //   at LogicaFacturacion.DataTableToExcel(DataTable pDataTable, String titulo) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\LogicaFacturacion.vb:line 8587
+            //   at LogicaFacturacion.PreviewDetalladoDeLaGeneracionEnPaso2(Int32 optFacturarA, String txtFacturarATerceros, String SC, Boolean EsteUsuarioPuedeVerTarifa, Object ViewState, String txtFechaDesde, String txtFechaHasta, String fListaIDs, String SessionID, Int32 cmbPuntoVenta, String cmbAgruparArticulosPor, Boolean SeEstaSeparandoPorCorredor) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\LogicaFacturacion.vb:line 8571
+            //   at CDPFacturacion.PreviewDetalladoDeLaGeneracionEnPaso2()
+            //   at CDPFacturacion.lnkVistaDetallada_Click(Object sender, EventArgs e)
+            //   at System.Web.UI.WebControls.LinkButton.OnClick(EventArgs e)
+            //   at System.Web.UI.WebControls.LinkButton.RaisePostBackEvent(String eventArgument)
+            //   at System.Web.UI.WebControls.LinkButton.System.Web.UI.IPostBackEventHandler.RaisePostBackEvent(String eventArgument)
+            //   at System.Web.UI.Page.RaisePostBackEvent(IPostBackEventHandler sourceControl, String eventArgument)
+            //   at System.Web.UI.Page.RaisePostBackEvent(NameValueCollection postData)
+            //   at System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+            //Microsoft.VisualBasic
+            //__________________________
 
 
 
@@ -986,7 +1009,7 @@ namespace ProntoMVC.Tests
 
             int idcli = CartaDePorteManager.BuscarClientePorCUIT("30-50930520-6", SC, "");
 
-           
+
             var output2 = SincronismosWilliamsManager.GenerarSincro("AMAGGI (DESCARGAS)", ref sErrores, SC, "dominio", ref sTitulo
                           , CartaDePorteManager.enumCDPestado.DescargasMasFacturadas,
                        "", idcli, -1,

@@ -466,16 +466,356 @@ namespace ProntoMVC.Controllers
 
           */
 
-            var jsonData = "";
-            System.Web.Script.Serialization.JavaScriptSerializer jsonSerializer = new System.Web.Script.Serialization.JavaScriptSerializer();
-            return jsonSerializer.Serialize(jsonData);
+            // PresupuestoObrasNodos_Inicializar
+            int Nodo = -1;
+            DataTable oRs = EntidadManager.ExecDinamico(SCsql(), "PresupuestoObrasNodos_tx_ParaArbol " + Nodo);
 
+
+
+
+            //    var children = new List<GetTreeGridValuesResult>();
+            int level = 0;
+            int parentId = 0;
+
+            List<Tablas.Tree> q;
+            List<string> v = new List<string>();
+
+
+
+
+
+
+            // If we found out a level, we enter the if
+            //if (role != -1)
+            //{
+            //    // A very important thing to consider is that there
+            //    // are two keys being send from the treegrid component:
+            //    // 1. [nodeid] that is the id of the node we are expanding
+            //    // 2. [n_level] the root is 0, so, if we expand the first child
+            //    // of the root element the level will be 1... also if we expand the second
+            //    // child of the root, level is 1. And so... 
+            //    // If [nodeid] is not found it means that we are not expanding anything,
+            //    // so we are at root level.
+            if (collection["idsOfExpandedRows"].NullSafeToString() == "" && collection["nodeid"].NullSafeToString() == "")
+            {
+                // q = TablaTree("01").Where(x => x.ParentId == "01").ToList(); ; // podrias devolver un queryable
+                //q = q.Where(x => x.ParentId == "01").ToList();
+                q = TablaTree_PresupuestoObra("01").ToList();
+                //como hacer si es esxterno, o si tiene permisos a todos los nodos raiz?
+
+                //no hay cacheados nodos expandidos ni el nodo apretado. Debe ser la primera pantalla de la sesión. entonces, debo 
+                // mostrar todos los nodos raíces de los que tenga permiso...
+
+            }
+            else if (collection.AllKeys.Contains("idsOfExpandedRows"))
+            {
+                // recbo los nodos por postdata
+                // List<string> v = collection["idsOfExpandedRows"].ToList();
+
+                q = TablaTree_PresupuestoObra(); //podrias devolver un queryable
+
+
+                if (collection["nodeid"].NullSafeToString() == "")
+                {
+                    // es la primera llamada, debo incluir las raices
+
+                    if (collection["idsOfExpandedRows"] != "") v = collection["idsOfExpandedRows"].ToString().Split(',').ToList();
+                    v.Add("01");
+                }
+                else
+                {
+                    // apretaron el nodo
+                    v.Add(collection["nodeid"].NullSafeToString());
+                }
+
+                q = q.Where(x => v.Contains(x.ParentId)).ToList();
+            }
+            else if (collection.AllKeys.Contains("nodeid"))
+            {
+
+
+                q = TablaTree_PresupuestoObra(); //podrias devolver un queryable
+
+                //In case we are expanding a level, we retrieve the level we are right now
+                //In this example i'll explain the 
+                //Tree with id's so you can imagine the way i'm concatenating the id's:
+                // In this case we are at Agent level that have 2 dealers and each dealer 3 service writters
+                // Agent: 5
+                //  |_Dealer1: 5_25
+                //      |_SW1: 5_25_1
+                //      |_SW2: 5_25_2
+                //      |_SW3: 5_25_3
+                //  |_Dealer2: 5_26
+                //      |_SW4: 5_26_4
+                //      |_SW5: 5_26_5
+                //      |_SW6: 5_26_6
+                // So, if we clic over the SW6: the id will be 5_26_6, his parent will be 5_26
+                // Dealer2 Id is 5_26 and his parent will be 5.
+                level = Generales.Val(collection["n_level"] ?? "0") + 1;
+                //First we split the nodeid with '_' that is our split character.
+                var stringSplitted = collection["nodeid"].Split('-');
+                //the parent id will be located at the last position of the splitted array.
+                parentId = int.Parse(stringSplitted[stringSplitted.Length - 1]);
+            }
+            else
+            {
+
+                q = TablaTree_PresupuestoObra();// podrias devolver un queryable
+
+            }
+
+            //Getting childrens
+            //var userId = new Guid(Session["UserId"].ToString());
+            // children = GetTreeGridValues(role, userId, parentId, level);
+            //if (!collection.AllKeys.Contains("idsOfExpandedRows"))
+            //{
+            //    if (collection["nodeid"].NullSafeToString() != "")
+            //    {
+            //        q = q.Where(x => x.ParentId == collection["nodeid"].ToString()).ToList();
+            //    }
+            //    else
+            //    {
+            //        q = q.Where(x => x.ParentId == "01").ToList();
+            //    }
+            //}
+            //Each children have a name, an id, and a rolename (rolename is just for control)
+            //So if we are are root level we send the parameters and we have in return all the children of the root.
+
+
+
+            // http://stackoverflow.com/questions/3672041/how-to-use-jqgrid-treegrid-in-mvc-net-2
+            // http://stackoverflow.com/questions/16651620/jqgrid-treegrid-cant-collapsing-and-expanding
+            //Preparing result
+            var filesData = new
+            {
+                rows = (from child in q
+                        select new
+                        {
+                            descr = (new String('_', ((child.IdItem.Replace("-", "").Length) / 2 - 2) * 5)).Replace("_", "&nbsp;") +
+                                    (((child.Link ?? "") == "") ? child.Descripcion : child.Link), // Correspond to the colmodel NAME in javascript
+
+                            // The next one correspond to the colmodel ID in javascript Id
+                            // If we are are the root level the [nodeid] will be empty as i explained above
+                            // So the id will be clean. Following the example, just 5
+                            // If we are expanding the Agent 5 so, the [nodeid] will not be empty
+                            // so we take the Agent id, 5 and concatenate the child id, so 5_25
+                            child.IdItem,
+                            child.Link, //Correspond to the colmodel ROLE in javascript 
+
+
+                            //////////////////////////////////////////////////////////////////////////
+                            //////////////////////////////////////////////////////////////////////////
+                            //////////////////////////////////////////////////////////////////////////
+                            //////////////////////////////////////////////////////////////////////////
+                            //////////////////////////////////////////////////////////////////////////
+                            //////////////////////////////////////////////////////////////////////////
+                            //The next attributes are obligatory and defines the behavior of the TreeGrid 
+
+                            //////////////////////////////////////////////////////////////////////////
+                            //////////////////////////////////////////////////////////////////////////
+                            //LEVEL: This is the actual level of the child so, root will be 0, that's why i'm adding
+                            // one to the level above.
+                            l = ((child.IdItem.Replace("-", "").Length) / 2 - 2).ToString(),  // level.ToString(),
+
+
+                            //////////////////////////////////////////////////////////////////////////
+                            //////////////////////////////////////////////////////////////////////////
+                            //PARENT ID: If we are at the root [nodeid] will be empty so the parent id is ""
+                            // In case of a service writter the parent id is the nodeid, because is the node
+                            // we are expanding
+                            parentid = child.ParentId ?? string.Empty, //  child.ParentId,  // collection["nodeid"] ?? string.Empty,
+
+
+                            //////////////////////////////////////////////////////////////////////////
+                            //////////////////////////////////////////////////////////////////////////
+                            //IS NOT EXPANDABLE: One thing that was tricky here was that I was using c# true, false
+                            //and to make it work it's needed to be strings "true" or "false"
+                            // The Child.Role the role name, so i know that if it's a ServiceWriter i'm the last level
+                            // so it's not expandable, the optimal way is to get from the database store procedure
+                            // if the leaf has children.
+                            espadre = (child.EsPadre != "SI" ? "true" : "false").ToString(),
+
+
+                            //////////////////////////////////////////////////////////////////////////
+                            //////////////////////////////////////////////////////////////////////////
+                            //IS EXPANDED: I use that is always false,
+                            iditem = (v.Contains(child.IdItem) ? "true" : "false").ToString()
+
+                            //////////////////////////////////////////////////////////////////////////
+                            //////////////////////////////////////////////////////////////////////////
+                            // LOADED: si está puesto en true, no vuelve a llamar al servidor
+                            // , "false" 
+
+                            // http://stackoverflow.com/questions/6508838/in-jqgrid-treegrid-how-can-i-specify-that-i-want-to-load-the-entire-tree-up-fro
+                            //                If I understand your question correct, the most important lines of the Tree Grid code to answer on 
+                            //                your question you will find here and here. I can describe the code fragment so: 
+                            //if the user try to expand a node it will be examined the contain of the hidden column 'loaded' of the node. 
+                            //    You can post the contain of 'loaded' column together with the JSON/XML row data. 
+                            //    If the 'loaded' column contains false (or the 'loaded' is not set by the server) 
+                            //    the parameters nodeid, parentid and n_level will be set and the tree grid will be reloaded.
+
+                        }
+                       ).ToArray()
+            };
+
+            //Returning json data
+            return Json(filesData);
 
 
 
         }
 
 
+
+        public virtual ActionResult TT(string sidx, string sord, int? page, int? rows, bool _search, string searchField, string searchOper, string searchString, string activas)
+        {
+            if (activas == "") { activas = "SI"; }
+            string campo = String.Empty;
+            int pageSize = rows ?? 20;
+            int currentPage = page ?? 1;
+
+            if (_search)
+            {
+                switch (searchField.ToLower())
+                {
+                    case "numeroProveedor":
+                        campo = String.Format("{0} = {1}", searchField, searchString);
+                        break;
+                    case "fechaProveedor":
+                        //No anda
+                        campo = String.Format("{0}.Contains(\"{1}\")", searchField, searchString);
+                        break;
+                    default:
+                        campo = String.Format("{0}.Contains(\"{1}\")", searchField, searchString);
+                        break;
+                }
+            }
+            else
+            {
+                campo = "true";
+            }
+
+            var data = (from a in db.Obras.Where(p => (p.Activa ?? "NO") == activas).AsQueryable()
+                        from b in db.Clientes.Where(o => o.IdCliente == a.IdCliente).DefaultIfEmpty()
+                        from c in db.UnidadesOperativas.Where(o => o.IdUnidadOperativa == a.IdUnidadOperativa).DefaultIfEmpty()
+                        from d in db.Monedas.Where(o => o.IdMoneda == a.IdMonedaValorObra).DefaultIfEmpty()
+                        from e in db.Articulos.Where(o => o.IdArticulo == a.IdArticuloAsociado).DefaultIfEmpty()
+                        from f in db.GruposObras.Where(o => o.IdGrupoObra == a.IdGrupoObra).DefaultIfEmpty()
+                        from g in db.Cuentas.Where(o => o.IdCuenta == a.IdCuentaContableFF).DefaultIfEmpty()
+                        from h in db.Localidades.Where(o => o.IdLocalidad == a.IdLocalidad).DefaultIfEmpty()
+                        from i in db.Provincias.Where(o => o.IdProvincia == a.IdProvincia).DefaultIfEmpty()
+                        from j in db.Paises.Where(o => o.IdPais == a.IdPais).DefaultIfEmpty()
+                        from k in db.Empleados.Where(o => o.IdEmpleado == a.IdJefeRegional).DefaultIfEmpty()
+                        from l in db.Empleados.Where(o => o.IdEmpleado == a.IdJefe).DefaultIfEmpty()
+                        from m in db.Empleados.Where(o => o.IdEmpleado == a.IdSubjefe).DefaultIfEmpty()
+                        select new
+                        {
+                            a.IdObra,
+                            a.Descripcion,
+                            a.NumeroObra,
+                            TipoObraDescripcion = (a.TipoObra ?? 1) == 1 ? "Taller" : ((a.TipoObra ?? 1) == 2 ? "Montaje" : ((a.TipoObra ?? 1) == 3 ? "Servicio" : "")),
+                            a.Activa,
+                            a.FechaInicio,
+                            a.FechaFinalizacion,
+                            a.FechaEntrega,
+                            a.Jerarquia,
+                            JefeRegional = k != null ? k.Nombre : "",
+                            Jefe = l != null ? l.Nombre : "",
+                            Subjefe = m != null ? m.Nombre : "",
+                            CuentaContableFF = g != null ? g.Descripcion : "",
+                            GrupoObra = f != null ? f.Descripcion : "",
+                            ArticuloAsociado = e != null ? e.Descripcion : "",
+                            a.ValorObra,
+                            Moneda = d != null ? d.Abreviatura : "",
+                            a.Direccion,
+                            Localidad = h != null ? h.Nombre : "",
+                            a.CodigoPostal,
+                            Provincia = i != null ? i.Nombre : "",
+                            Pais = j != null ? j.Descripcion : "",
+                            a.Telefono,
+                            a.Responsable,
+                            a.LugarPago,
+                            a.ProximoNumeroAutorizacionCompra,
+                            a.OrdenamientoSecundario,
+                            a.ActivarPresupuestoObra,
+                            a.DiasLiquidacionCertificados,
+                            a.Observaciones,
+                            a.ArchivoAdjunto1,
+                            a.ArchivoAdjunto2,
+                            a.ArchivoAdjunto3,
+                            a.ArchivoAdjunto4,
+                            a.ArchivoAdjunto5,
+                            a.ArchivoAdjunto6,
+                            a.ArchivoAdjunto7,
+                            a.ArchivoAdjunto8,
+                            a.ArchivoAdjunto9,
+                            a.ArchivoAdjunto10
+                        }).Where(campo).AsQueryable();
+
+            int totalRecords = data.Count();
+            int totalPages = (int)Math.Ceiling((float)totalRecords / (float)pageSize);
+
+            var data1 = (from a in data select a)
+                        .OrderBy(x => x.Descripcion)
+
+//.Skip((currentPage - 1) * pageSize).Take(pageSize)
+.ToList();
+
+            var jsonData = new jqGridJson()
+            {
+                total = totalPages,
+                page = currentPage,
+                records = totalRecords,
+                rows = (from a in data1
+                        select new jqGridRowJson
+                        {
+                            id = a.IdObra.ToString(),
+                            cell = new string[] { 
+                                "<a href="+ Url.Action("Edit",new {id = a.IdObra} ) +" >Editar</>",
+                                a.IdObra.NullSafeToString(),
+                                a.Descripcion.NullSafeToString(),
+                                a.NumeroObra.NullSafeToString(),
+                                a.TipoObraDescripcion.NullSafeToString(),
+                                a.Activa.NullSafeToString(),
+                                a.FechaInicio == null ? "" : a.FechaInicio.GetValueOrDefault().ToString("dd/MM/yyyy"),
+                                a.FechaFinalizacion == null ? "" : a.FechaFinalizacion.GetValueOrDefault().ToString("dd/MM/yyyy"),
+                                a.FechaEntrega == null ? "" : a.FechaEntrega.GetValueOrDefault().ToString("dd/MM/yyyy"),
+                                a.Jerarquia.NullSafeToString(),
+                                a.JefeRegional.NullSafeToString(),
+                                a.Jefe.NullSafeToString(),
+                                a.Subjefe.NullSafeToString(),
+                                a.CuentaContableFF.NullSafeToString(),
+                                a.GrupoObra.NullSafeToString(),
+                                a.ArticuloAsociado.NullSafeToString(),
+                                a.ValorObra.NullSafeToString(),
+                                a.Moneda.NullSafeToString(),
+                                a.Direccion.NullSafeToString(),
+                                a.Localidad.NullSafeToString(),
+                                a.CodigoPostal.NullSafeToString(),
+                                a.Provincia.NullSafeToString(),
+                                a.Pais.NullSafeToString(),
+                                a.Telefono.NullSafeToString(),
+                                a.Responsable.NullSafeToString(),
+                                a.LugarPago.NullSafeToString(),
+                                a.ProximoNumeroAutorizacionCompra.NullSafeToString(),
+                                a.OrdenamientoSecundario.NullSafeToString(),
+                                a.DiasLiquidacionCertificados.NullSafeToString(),
+                                a.Observaciones.NullSafeToString(),
+                                a.ArchivoAdjunto1.NullSafeToString(),
+                                a.ArchivoAdjunto2.NullSafeToString(),
+                                a.ArchivoAdjunto3.NullSafeToString(),
+                                a.ArchivoAdjunto4.NullSafeToString(),
+                                a.ArchivoAdjunto5.NullSafeToString(),
+                                a.ArchivoAdjunto6.NullSafeToString(),
+                                a.ArchivoAdjunto7.NullSafeToString(),
+                                a.ArchivoAdjunto8.NullSafeToString(),
+                                a.ArchivoAdjunto9.NullSafeToString(),
+                                a.ArchivoAdjunto10.NullSafeToString()
+                            }
+                        }).ToArray()
+            };
+            return Json(jsonData, JsonRequestBehavior.AllowGet);
+        }
 
 
         public virtual ActionResult PresupuestosObra(string sidx, string sord, int? page, int? rows, bool _search, string searchField, string searchOper, string searchString,
