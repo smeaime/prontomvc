@@ -59,7 +59,8 @@ namespace ProntoMVC.Tests
         // la cadena de conexion a la bdlmaster se saca del App.config (no web.config) de este proyecto 
         // la cadena de conexion a la bdlmaster se saca del App.config (no web.config) de este proyecto 
         // la cadena de conexion a la bdlmaster se saca del App.config (no web.config) de este proyecto 
-        const string nombreempresa = "Pronto_Alemarsa";
+        const string nombreempresa = "VialAgro";
+        //const string nombreempresa = "Pronto_Alemarsa";
         //const string nombreempresa = "Williams2";
         //const string nombreempresa = "Pronto";
         //const string nombreempresa = "DemoProntoWeb";
@@ -165,7 +166,16 @@ namespace ProntoMVC.Tests
 
             //var result = c.CargarArbol();
 
-            //var result2 = c.LlenarGrilla(-1);
+
+            int nodo = -1;
+            string sidx = "NumeroPedido";
+            string sord = "desc";
+            int page = 1;
+            int rows = 100;
+            bool _search = false;
+            string filters = "";
+
+            var result2 = c.LlenarGrilla(sidx, sord, page, rows, _search, filters, nodo);
 
 
 
@@ -182,6 +192,9 @@ namespace ProntoMVC.Tests
             GetMockedControllerGenerico(c);  //  new ComprobanteProveedorController();
 
             var result = c.Edit(-1);
+
+
+                      var result2 = c.CargarArbol_PresupuestoObra_ParaGrillaNoTreeviewEnLocalStorage
 
         }
 
