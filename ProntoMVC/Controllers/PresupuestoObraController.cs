@@ -467,8 +467,8 @@ namespace ProntoMVC.Controllers
           */
 
             // PresupuestoObrasNodos_Inicializar
-            int Nodo = -1;
-            DataTable oRs = EntidadManager.ExecDinamico(SCsql(), "PresupuestoObrasNodos_tx_ParaArbol " + Nodo);
+            int IdObra= -1;
+            DataTable oRs = EntidadManager.ExecDinamico(SCsql(), "PresupuestoObrasNodos_tx_ParaArbol " + IdObra);
 
 
 

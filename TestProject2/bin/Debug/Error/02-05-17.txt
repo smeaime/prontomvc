@@ -1,0 +1,445 @@
+
+Log Entry : 
+05/02/2017 11:02:33
+Error in: . Error Message: PreviewDetalladoDeLaGeneracionEnPaso2() Empiezo
+__________________________
+
+Log Entry : 
+05/02/2017 11:02:33
+Error in: . Error Message: PreviewDetalladoDeLaGeneracionEnPaso2()  Levanto las cartas de la tanda
+__________________________
+
+Log Entry : 
+05/02/2017 11:02:33
+Error in: . Error Message:entrando en GetDatatableAsignacionAutomatica . tanda sfsfasfd12asdfsa3123
+__________________________
+
+Log Entry : 
+05/02/2017 11:02:35
+Error in: . Error Message:Cartas sin automatico encontrado (pero este es el modo no automatico!!!)1
+__________________________
+
+Log Entry : 
+05/02/2017 11:02:35
+Error in: . Error Message:entro a Preprocesos 0
+__________________________
+
+Log Entry : 
+05/02/2017 11:02:36
+Error in: . Error Message:despues de AgregarEmbarques0
+__________________________
+
+Log Entry : 
+05/02/2017 11:02:36
+Error in: . Error Message:despues de ExcluirDeGastosAdministrativos0
+__________________________
+
+Log Entry : 
+05/02/2017 11:02:36
+Error in: . Error Message:despues de ReasignarAquellosQueSeLeFacturanForzosamenteAlCorredor0
+__________________________
+
+Log Entry : 
+05/02/2017 11:02:36
+Error in: . Error Message:despues de CasosSyngenta_y_Acopios0
+__________________________
+
+Log Entry : 
+05/02/2017 11:02:36
+Error in: . Error Message:entro en PostProcesos 0
+__________________________
+
+Log Entry : 
+05/02/2017 11:02:36
+Error in: . Error Message:despues de EmparcharClienteSeparadoParaCasosQueSuperenUnMontoDeterminado 0
+__________________________
+
+Log Entry : 
+05/02/2017 11:02:36
+Error in: . Error Message:despues de EmparcharClienteSeparadoParaFacturasQueSuperanCantidadDeRenglones 0
+__________________________
+
+Log Entry : 
+05/02/2017 11:02:36
+Error in: . Error Message:despues de SepararAcopiosLDCyACA 0
+__________________________
+
+Log Entry : 
+05/02/2017 11:02:36
+Error in: . Error Message:despues de PostProcesoFacturacion_ReglaExportadores 0
+__________________________
+
+Log Entry : 
+05/02/2017 11:02:37
+Error in: . Error Message:punto 2 en GetDatatableAsignacionAutomatica . tanda 7080
+__________________________
+
+Log Entry : 
+05/02/2017 11:02:37
+Error in: . Error Message:punto 3 en GetDatatableAsignacionAutomatica . tanda 7080
+__________________________
+
+Log Entry : 
+05/02/2017 11:02:37
+Error in: . Error Message:punto 4 en GetDatatableAsignacionAutomatica . tanda 7080
+__________________________
+
+Log Entry : 
+05/02/2017 11:02:37
+Error in: . Error Message: PreviewDetalladoDeLaGeneracionEnPaso2() Llamo a ActualizarCampoClienteSeparador
+__________________________
+
+Log Entry : 
+05/02/2017 11:02:37
+Error in: . Error Message:ActualizarCampoClienteSeparador 0 filas
+__________________________
+
+Log Entry : 
+05/02/2017 11:02:37
+Error in: . Error Message: PreviewDetalladoDeLaGeneracionEnPaso2() Actualizo la tarifa
+__________________________
+
+Log Entry : 
+05/02/2017 11:02:46
+Error in: . Error Message: PreviewDetalladoDeLaGeneracionEnPaso2() Convierto a Excel
+__________________________
+
+Log Entry : 
+05/02/2017 11:03:14
+Error in: . Error Message: PreviewDetalladoDeLaGeneracionEnPaso2() Se descarga
+__________________________
+
+Log Entry : 
+05/02/2017 11:33:25
+Error in: . Error Message: PreviewDetalladoDeLaGeneracionEnPaso2() Empiezo
+__________________________
+
+Log Entry : 
+05/02/2017 11:33:25
+Error in: . Error Message: PreviewDetalladoDeLaGeneracionEnPaso2()  Levanto las cartas de la tanda
+__________________________
+
+Log Entry : 
+05/02/2017 11:33:25
+Error in: . Error Message:entrando en GetDatatableAsignacionAutomatica . tanda sfsfasfd12asdfsa3123
+__________________________
+
+Log Entry : 
+05/02/2017 11:33:26
+Error in: . Error Message:Cartas sin automatico encontrado (pero este es el modo no automatico!!!)1
+__________________________
+
+Log Entry : 
+05/02/2017 11:33:27
+Error in: . Error Message:entro a Preprocesos 0
+__________________________
+
+Log Entry : 
+05/02/2017 11:33:27
+Error in: . Error Message:despues de AgregarEmbarques0
+__________________________
+
+Log Entry : 
+05/02/2017 11:33:27
+Error in: . Error Message:despues de ExcluirDeGastosAdministrativos0
+__________________________
+
+Log Entry : 
+05/02/2017 11:33:27
+Error in: . Error Message:despues de ReasignarAquellosQueSeLeFacturanForzosamenteAlCorredor0
+__________________________
+
+Log Entry : 
+05/02/2017 11:33:27
+Error in: . Error Message:despues de CasosSyngenta_y_Acopios0
+__________________________
+
+Log Entry : 
+05/02/2017 11:33:27
+Error in: . Error Message:entro en PostProcesos 0
+__________________________
+
+Log Entry : 
+05/02/2017 11:33:27
+Error in: . Error Message:despues de EmparcharClienteSeparadoParaCasosQueSuperenUnMontoDeterminado 0
+__________________________
+
+Log Entry : 
+05/02/2017 11:33:27
+Error in: . Error Message:despues de EmparcharClienteSeparadoParaFacturasQueSuperanCantidadDeRenglones 0
+__________________________
+
+Log Entry : 
+05/02/2017 11:33:27
+Error in: . Error Message:despues de SepararAcopiosLDCyACA 0
+__________________________
+
+Log Entry : 
+05/02/2017 11:33:27
+Error in: . Error Message:despues de PostProcesoFacturacion_ReglaExportadores 0
+__________________________
+
+Log Entry : 
+05/02/2017 11:33:27
+Error in: . Error Message:punto 2 en GetDatatableAsignacionAutomatica . tanda 5840
+__________________________
+
+Log Entry : 
+05/02/2017 11:33:27
+Error in: . Error Message:punto 3 en GetDatatableAsignacionAutomatica . tanda 5840
+__________________________
+
+Log Entry : 
+05/02/2017 11:33:27
+Error in: . Error Message:punto 4 en GetDatatableAsignacionAutomatica . tanda 5840
+__________________________
+
+Log Entry : 
+05/02/2017 11:33:27
+Error in: . Error Message: PreviewDetalladoDeLaGeneracionEnPaso2() Llamo a ActualizarCampoClienteSeparador
+__________________________
+
+Log Entry : 
+05/02/2017 11:33:27
+Error in: . Error Message:ActualizarCampoClienteSeparador 0 filas
+__________________________
+
+Log Entry : 
+05/02/2017 11:33:27
+Error in: . Error Message: PreviewDetalladoDeLaGeneracionEnPaso2() Actualizo la tarifa
+__________________________
+
+Log Entry : 
+05/02/2017 11:33:33
+Error in: . Error Message: PreviewDetalladoDeLaGeneracionEnPaso2() Convierto a Excel
+__________________________
+
+Log Entry : 
+05/02/2017 11:33:34
+Error in: . Error Message: PreviewDetalladoDeLaGeneracionEnPaso2() Se descarga
+__________________________
+
+Log Entry : 
+05/02/2017 11:39:29
+Error in: . Error Message: PreviewDetalladoDeLaGeneracionEnPaso2() Empiezo
+__________________________
+
+Log Entry : 
+05/02/2017 11:39:42
+Error in: . Error Message: PreviewDetalladoDeLaGeneracionEnPaso2()  Levanto las cartas de la tanda
+__________________________
+
+Log Entry : 
+05/02/2017 11:39:43
+Error in: . Error Message:entrando en GetDatatableAsignacionAutomatica . tanda sfsfasfd12asdfsa3123
+__________________________
+
+Log Entry : 
+05/02/2017 11:39:44
+Error in: . Error Message:Cartas sin automatico encontrado (pero este es el modo no automatico!!!)1
+__________________________
+
+Log Entry : 
+05/02/2017 11:39:44
+Error in: . Error Message:entro a Preprocesos 0
+__________________________
+
+Log Entry : 
+05/02/2017 11:39:45
+Error in: . Error Message:despues de AgregarEmbarques0
+__________________________
+
+Log Entry : 
+05/02/2017 11:39:45
+Error in: . Error Message:despues de ExcluirDeGastosAdministrativos0
+__________________________
+
+Log Entry : 
+05/02/2017 11:39:45
+Error in: . Error Message:despues de ReasignarAquellosQueSeLeFacturanForzosamenteAlCorredor0
+__________________________
+
+Log Entry : 
+05/02/2017 11:39:45
+Error in: . Error Message:despues de CasosSyngenta_y_Acopios0
+__________________________
+
+Log Entry : 
+05/02/2017 11:39:45
+Error in: . Error Message:entro en PostProcesos 0
+__________________________
+
+Log Entry : 
+05/02/2017 11:39:45
+Error in: . Error Message:despues de EmparcharClienteSeparadoParaCasosQueSuperenUnMontoDeterminado 0
+__________________________
+
+Log Entry : 
+05/02/2017 11:39:45
+Error in: . Error Message:despues de EmparcharClienteSeparadoParaFacturasQueSuperanCantidadDeRenglones 0
+__________________________
+
+Log Entry : 
+05/02/2017 11:39:45
+Error in: . Error Message:despues de SepararAcopiosLDCyACA 0
+__________________________
+
+Log Entry : 
+05/02/2017 11:39:45
+Error in: . Error Message:despues de PostProcesoFacturacion_ReglaExportadores 0
+__________________________
+
+Log Entry : 
+05/02/2017 11:39:45
+Error in: . Error Message:punto 2 en GetDatatableAsignacionAutomatica . tanda 3876
+__________________________
+
+Log Entry : 
+05/02/2017 11:39:46
+Error in: . Error Message:punto 3 en GetDatatableAsignacionAutomatica . tanda 3876
+__________________________
+
+Log Entry : 
+05/02/2017 11:39:46
+Error in: . Error Message:punto 4 en GetDatatableAsignacionAutomatica . tanda 3876
+__________________________
+
+Log Entry : 
+05/02/2017 11:39:49
+Error in: . Error Message: PreviewDetalladoDeLaGeneracionEnPaso2() Llamo a ActualizarCampoClienteSeparador
+__________________________
+
+Log Entry : 
+05/02/2017 11:39:50
+Error in: . Error Message:ActualizarCampoClienteSeparador 0 filas
+__________________________
+
+Log Entry : 
+05/02/2017 11:39:52
+Error in: . Error Message: PreviewDetalladoDeLaGeneracionEnPaso2() Actualizo la tarifa
+__________________________
+
+Log Entry : 
+05/02/2017 11:40:42
+Error in: . Error Message: PreviewDetalladoDeLaGeneracionEnPaso2() Convierto a Excel
+__________________________
+
+Log Entry : 
+05/02/2017 11:40:44
+Error in: . Error Message: PreviewDetalladoDeLaGeneracionEnPaso2() Se descarga
+__________________________
+
+Log Entry : 
+05/02/2017 11:41:09
+Error in: . Error Message: PreviewDetalladoDeLaGeneracionEnPaso2() Empiezo
+__________________________
+
+Log Entry : 
+05/02/2017 11:42:41
+Error in: . Error Message: PreviewDetalladoDeLaGeneracionEnPaso2()  Levanto las cartas de la tanda
+__________________________
+
+Log Entry : 
+05/02/2017 11:42:43
+Error in: . Error Message:entrando en GetDatatableAsignacionAutomatica . tanda sfsfasfd12asdfsa3123
+__________________________
+
+Log Entry : 
+05/02/2017 11:42:44
+Error in: . Error Message:Cartas sin automatico encontrado (pero este es el modo no automatico!!!)1
+__________________________
+
+Log Entry : 
+05/02/2017 11:42:45
+Error in: . Error Message:entro a Preprocesos 0
+__________________________
+
+Log Entry : 
+05/02/2017 11:42:45
+Error in: . Error Message:despues de AgregarEmbarques0
+__________________________
+
+Log Entry : 
+05/02/2017 11:42:45
+Error in: . Error Message:despues de ExcluirDeGastosAdministrativos0
+__________________________
+
+Log Entry : 
+05/02/2017 11:42:45
+Error in: . Error Message:despues de ReasignarAquellosQueSeLeFacturanForzosamenteAlCorredor0
+__________________________
+
+Log Entry : 
+05/02/2017 11:42:45
+Error in: . Error Message:despues de CasosSyngenta_y_Acopios0
+__________________________
+
+Log Entry : 
+05/02/2017 11:42:45
+Error in: . Error Message:entro en PostProcesos 0
+__________________________
+
+Log Entry : 
+05/02/2017 11:42:45
+Error in: . Error Message:despues de EmparcharClienteSeparadoParaCasosQueSuperenUnMontoDeterminado 0
+__________________________
+
+Log Entry : 
+05/02/2017 11:42:45
+Error in: . Error Message:despues de EmparcharClienteSeparadoParaFacturasQueSuperanCantidadDeRenglones 0
+__________________________
+
+Log Entry : 
+05/02/2017 11:42:45
+Error in: . Error Message:despues de SepararAcopiosLDCyACA 0
+__________________________
+
+Log Entry : 
+05/02/2017 11:42:45
+Error in: . Error Message:despues de PostProcesoFacturacion_ReglaExportadores 0
+__________________________
+
+Log Entry : 
+05/02/2017 11:42:45
+Error in: . Error Message:punto 2 en GetDatatableAsignacionAutomatica . tanda 2636
+__________________________
+
+Log Entry : 
+05/02/2017 11:42:45
+Error in: . Error Message:punto 3 en GetDatatableAsignacionAutomatica . tanda 2636
+__________________________
+
+Log Entry : 
+05/02/2017 11:42:45
+Error in: . Error Message:punto 4 en GetDatatableAsignacionAutomatica . tanda 2636
+__________________________
+
+Log Entry : 
+05/02/2017 11:42:56
+Error in: . Error Message:entrando en GetDatatableAsignacionAutomatica . tanda 2636
+__________________________
+
+Log Entry : 
+05/02/2017 11:42:56
+Error in: . Error Message:punto 2 en GetDatatableAsignacionAutomatica . tanda 2636
+__________________________
+
+Log Entry : 
+05/02/2017 11:42:56
+Error in: . Error Message:punto 3 en GetDatatableAsignacionAutomatica . tanda 2636
+__________________________
+
+Log Entry : 
+05/02/2017 11:42:56
+Error in: . Error Message:punto 4 en GetDatatableAsignacionAutomatica . tanda 2636
+__________________________
+
+Log Entry : 
+05/02/2017 11:43:23
+Error in: . Error Message:entrando en GetDatatableAsignacionAutomatica . tanda 2636
+__________________________
+
+Log Entry : 
+05/02/2017 11:43:31
+Error in: . Error Message:punto 2 en GetDatatableAsignacionAutomatica . tanda 2636
+__________________________

@@ -2240,29 +2240,36 @@ Public Class LogicaFacturacion
             ErrHandler2.WriteError("punto 2 en GetDatatableAsignacionAutomatica . tanda " & sesionId)
 
 
-            Dim db As New LinqCartasPorteDataContext(Encriptar(SC))
-            Dim o = (From i In db.wTempCartasPorteFacturacionAutomaticas
-                     Where i.IdSesion = ids
-                     Order By CStr(IIf(i.TarifaFacturada = 0, " ", "")) & CStr(i.FacturarselaA) & CStr(i.NumeroCartaDePorte.ToString) Ascending
-                     Select i.ColumnaTilde, i.IdCartaDePorte, i.IdArticulo, i.NumeroCartaDePorte, i.SubNumeroVagon, i.SubnumeroDeFacturacion,
-                             i.FechaArribo, i.FechaDescarga, i.FacturarselaA, i.IdFacturarselaA, i.Confirmado, i.IdCodigoIVA,
-                             i.CUIT, i.ClienteSeparado, i.TarifaFacturada, i.Producto, i.KgNetos, i.IdCorredor, i.IdTitular,
-                             i.IdIntermediario, i.IdRComercial,
-                             idDestinatario = 0, i.Titular, Intermediario = "", i.RComercial, i.Corredor, i.Destinatario,
-                             i.DestinoDesc, i.Procedcia, i.IdDestino, i.IdTempCartasPorteFacturacionAutomatica, i.AgregaItemDeGastosAdministrativos
-                     Skip (pag - 1) * iPageSize Take iPageSize
-                    ).ToList
+            Dim dtlistaAuto As DataTable
 
-            db = Nothing
+            'Dim db As New LinqCartasPorteDataContext(Encriptar(SC))
+            'db As New DemoProntoEntities(Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC)))
+            Using db As New LinqCartasPorteDataContext(Encriptar(SC))
 
-            'RecalcGastosAdminDeCambioDeCartaUsandoTablaTemporal()
+                Dim o = (From i In db.wTempCartasPorteFacturacionAutomaticas
+                         Where i.IdSesion = ids
+                         Order By CStr(IIf(i.TarifaFacturada = 0, " ", "")) & CStr(i.FacturarselaA) & CStr(i.NumeroCartaDePorte.ToString) Ascending
+                         Select i.ColumnaTilde, i.IdCartaDePorte, i.IdArticulo, i.NumeroCartaDePorte, i.SubNumeroVagon, i.SubnumeroDeFacturacion,
+                                 i.FechaArribo, i.FechaDescarga, i.FacturarselaA, i.IdFacturarselaA, i.Confirmado, i.IdCodigoIVA,
+                                 i.CUIT, i.ClienteSeparado, i.TarifaFacturada, i.Producto, i.KgNetos, i.IdCorredor, i.IdTitular,
+                                 i.IdIntermediario, i.IdRComercial,
+                                 idDestinatario = 0, i.Titular, Intermediario = "", i.RComercial, i.Corredor, i.Destinatario,
+                                 i.DestinoDesc, i.Procedcia, i.IdDestino, i.IdTempCartasPorteFacturacionAutomatica, i.AgregaItemDeGastosAdministrativos
+                         Skip (pag - 1) * iPageSize Take iPageSize
+                        ).ToList
 
 
-            ErrHandler2.WriteError("punto 3 en GetDatatableAsignacionAutomatica . tanda " & sesionId)
 
-            Dim dtlistaAuto As DataTable = ToDataTableNull(o)
-            dtlistaAuto.Columns.Remove("IdTempCartasPorteFacturacionAutomatica") 'parece q tengo q incluirla en LINQ porque sql2000 llora si no incluyo el ID al usa Skip
-            'dtlistaAuto.Columns.Remove("IdSesion")
+                'RecalcGastosAdminDeCambioDeCartaUsandoTablaTemporal()
+
+
+                ErrHandler2.WriteError("punto 3 en GetDatatableAsignacionAutomatica . tanda " & sesionId)
+
+                dtlistaAuto = ToDataTableNull(o)
+                dtlistaAuto.Columns.Remove("IdTempCartasPorteFacturacionAutomatica") 'parece q tengo q incluirla en LINQ porque sql2000 llora si no incluyo el ID al usa Skip
+                'dtlistaAuto.Columns.Remove("IdSesion")
+            End Using
+
 
             ErrHandler2.WriteError("punto 4 en GetDatatableAsignacionAutomatica . tanda " & sesionId)
 
@@ -7886,6 +7893,7 @@ Public Class LogicaFacturacion
         Catch ex As Exception
             'se estaria quejando porque en el IN (123123,4444,......) hay una banda de ids
             MandarMailDeError("se estaria quejando porque en el IN (123123,4444,......) hay una banda de ids   " + ex.ToString)
+
             Throw
 
             '        http://stackoverflow.com/questions/7804201/sql-server-query-processor-ran-out-of-internal-resources
@@ -8493,7 +8501,7 @@ Public Class LogicaFacturacion
         '////////////////////////////////////////////////////////////////////////////
         '////////////////////////////////////////////////////////////////////////////
         '////////////////////////////////////////////////////////////////////////////
-        'creo que es esto lo que tarda banda
+        'creo que es esto lo que tarda banda -Este tarda un poco, pero es el paso siguiente el que te mata! (el "Actualizo la tarifa")
 
         ErrHandler2.WriteError(" PreviewDetalladoDeLaGeneracionEnPaso2() Llamo a ActualizarCampoClienteSeparador")
 
@@ -8501,6 +8509,29 @@ Public Class LogicaFacturacion
 
 
 
+
+        '        Log Entry
+        '05/02/2017 09:59:43
+        'Error in: https://prontoweb.williamsentregas.com.ar/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message: PreviewDetalladoDeLaGeneracionEnPaso2()  Levanto las cartas de la tanda
+
+        '        Log Entry
+        '05/02/2017 09:59:44
+        'Error in: https://prontoweb.williamsentregas.com.ar/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message: PreviewDetalladoDeLaGeneracionEnPaso2() Llamo a ActualizarCampoClienteSeparador
+
+        '        Log Entry
+        '05/02/2017 10:00:51
+        'Error in: https://prontoweb.williamsentregas.com.ar/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message: PreviewDetalladoDeLaGeneracionEnPaso2() Actualizo la tarifa
+
+        '        Log Entry
+        '05/02/2017 10:09:47
+        'Error in: https://prontoweb.williamsentregas.com.ar/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message: PreviewDetalladoDeLaGeneracionEnPaso2() Convierto a Excel
+
+        '        Log Entry
+        '05/02/2017 10:09:49
+        'Error in: https://prontoweb.williamsentregas.com.ar/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message: PreviewDetalladoDeLaGeneracionEnPaso2() Se descarga
+
+
+
         '////////////////////////////////////////////////////////////////////////////
         '////////////////////////////////////////////////////////////////////////////
         '////////////////////////////////////////////////////////////////////////////
@@ -8514,13 +8545,21 @@ Public Class LogicaFacturacion
         '////////////////////////////////////////////////////////////////////////////
         '////////////////////////////////////////////////////////////////////////////
 
+        
         Dim dt = tablaEditadaDeFacturasParaGenerar
 
 
 
         ErrHandler2.WriteError(" PreviewDetalladoDeLaGeneracionEnPaso2() Actualizo la tarifa")
 
-        Dim db As New DemoProntoEntities(Auxiliares.FormatearConexParaEntityFramework(Encriptar(SC)))
+
+        Dim IBNumInscrip As Dictionary(Of Integer, String)
+
+        Using db As New DemoProntoEntities(Auxiliares.FormatearConexParaEntityFramework(Encriptar(SC)))
+            IBNumInscrip = (From c In db.Clientes
+                             Select c.IdCliente, c.IBNumeroInscripcion).ToDictionary(Function(x) x.IdCliente, Function(y) y.IBNumeroInscripcion)
+
+        End Using
 
         dt.Columns.Add("Total", Type.GetType("System.Decimal"))
         dt.Columns.Add("NroIIBB", Type.GetType("System.String"))
@@ -8539,9 +8578,11 @@ Public Class LogicaFacturacion
 
 
             Try
-                row("NroIIBB") = db.Clientes.Find(row("IdFacturarselaA")).IBNumeroInscripcion
+                Dim ibnum As String
+                IBNumInscrip.TryGetValue(row("IdFacturarselaA"), ibnum)
+                row("NroIIBB") = ibnum
             Catch ex As Exception
-
+                ErrHandler2.WriteError(ex)
             End Try
 
 

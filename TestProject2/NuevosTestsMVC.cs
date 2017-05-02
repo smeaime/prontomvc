@@ -184,14 +184,18 @@ namespace ProntoMVC.Tests
 
 
         [TestMethod]
-        public void EditPresupuestoObraMoq()
+        public void PresupuestoObra_CargarArbol()
         {
 
             var c = new PresupuestoObraController();
 
             GetMockedControllerGenerico(c);  //  new ComprobanteProveedorController();
+            
+            int IdObra = -1;
 
             var f = new FormCollection();
+            //collection["idsOfExpandedRows"]
+            //    collection["nodeid"]
             var result2 = c.CargarArbol_PresupuestoObra_ParaGrillaNoTreeviewEnLocalStorage(f);
 
         }
