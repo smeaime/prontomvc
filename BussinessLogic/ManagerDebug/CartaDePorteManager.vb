@@ -8086,6 +8086,8 @@ Public Class CartaDePorteManager
 
         Body.Replace(Environment.NewLine, "<br />")
 
+        ErrHandler2.WriteError(sErr)
+
         Try
             'apgurisatti@bdlconsultores.com.ar", _
             MandaEmailSimple(direccion,
