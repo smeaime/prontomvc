@@ -864,7 +864,7 @@ namespace ProntoMVC.Tests
 
 
 
-
+        /*
 
         [TestMethod]
         public void btnPaginaAvanza2()
@@ -887,6 +887,86 @@ namespace ProntoMVC.Tests
 
 
 
+        public static void KeepProductInfo(GridView grid)
+        {
+            //
+            // se obtienen la lista de producto con informacion proporcionada por el usuario
+            //
+            var listProd = from item in grid.Rows.Cast<GridViewRow>()
+                           let amount = ((TextBox)item.FindControl("txtAmount")).Text
+                           let shipper = ((DropDownList)item.FindControl("ddlShippers")).SelectedValue
+                           where !(string.IsNullOrEmpty(amount) || shipper == "0")
+                           select new ProductInfo()
+                           {
+                               Id = Convert.ToInt32(grid.DataKeys[item.RowIndex].Value),
+                               Amount = Convert.ToInt32(amount),
+                               Shipper = Convert.ToInt32(shipper)
+                           };
+
+            //
+            // se recupera de session la lista de seleccionados previamente
+            //
+            List<ProductInfo> prodInfo = HttpContext.Current.Session["ProdInfo"] as List<ProductInfo>;
+
+            if (prodInfo == null)
+                prodInfo = new List<ProductInfo>();
+
+            //
+            // se cruzan todos los ingresados en la pagina actual, con los previamente conservados 
+            // en Session, devolviendo solo aquellos donde no hay coincidencia
+            //
+            prodInfo = (from item in prodInfo
+                        join item2 in listProd
+                           on item.Id equals item2.Id into g
+                        where !g.Any()
+                        select item).ToList();
+
+            //
+            // se agregan la actualizacion realizada por el usuario
+            //
+            prodInfo.AddRange(listProd);
+
+            HttpContext.Current.Session["ProdInfo"] = prodInfo;
+
+        }
+
+
+
+
+        public static void RestoreProductInfo(GridView grid)
+        {
+
+            List<ProductInfo> prodInfo = HttpContext.Current.Session["ProdInfo"] as List<ProductInfo>;
+
+            if (prodInfo == null)
+                return;
+
+            //
+            // se comparan los registros de la pagina del grid con los recuperados de la Session
+            // los coincidentes se devuelven para ser seleccionados
+            //
+            var result = (from item in grid.Rows.Cast<GridViewRow>()
+                          join item2 in prodInfo
+                              on Convert.ToInt32(grid.DataKeys[item.RowIndex].Value) equals item2.Id into g
+                          where g.Any()
+                          select new
+                          {
+                              gridrow = item,
+                              prodonfo = g.First()
+                          }).ToList();
+
+            //
+            // se recorre cada item para asignar la informacion 
+            //
+            result.ForEach(x =>
+            {
+                ((TextBox)x.gridrow.FindControl("txtAmount")).Text = Convert.ToString(x.prodonfo.Amount);
+                ((DropDownList)x.gridrow.FindControl("ddlShippers")).SelectedValue = Convert.ToString(x.prodonfo.Shipper);
+            });
+
+        }
+
+        */
 
         [TestMethod]
         public void Urenport_4()
@@ -964,9 +1044,9 @@ namespace ProntoMVC.Tests
             string txtFacturarATerceros = "";
             bool EsteUsuarioPuedeVerTarifa = true;
             System.Web.UI.StateBag ViewState = new System.Web.UI.StateBag();
-            string txtFechaDesde = "12/1/2015";
-            string txtFechaHasta = "12/31/2015";
-            string fListaIDs = "99500,99501";
+            string txtFechaDesde = "3/1/2012";
+            string txtFechaHasta = "3/31/2012";
+            string ListaCartasIDs = "99500,99501";
             string SessionID = "sfsfasfd12asdfsa3123";
             int cmbPuntoVenta = -1;
             string cmbAgruparArticulosPor = "";
@@ -976,20 +1056,24 @@ namespace ProntoMVC.Tests
             ViewState["sesionId"] = SessionID;
             ViewState["filas"] = 10;
 
-            string[] tokens = fListaIDs.Split(',');
+
+
+            string[] tokens = ListaCartasIDs.Split(',');
             var l = tokens.ToList();
-
-
             LogicaFacturacion.GridCheckboxPersistenciaBulk(SC, SessionID, l.Select(int.Parse).ToList());
 
 
             var output = LogicaFacturacion.PreviewDetalladoDeLaGeneracionEnPaso2(optFacturarA, txtFacturarATerceros, SC,
                                                    EsteUsuarioPuedeVerTarifa, ViewState, txtFechaDesde, txtFechaHasta,
-                                                   fListaIDs, SessionID, cmbPuntoVenta, cmbAgruparArticulosPor,
+                                                    ListaCartasIDs, SessionID, cmbPuntoVenta, cmbAgruparArticulosPor,
                                                    SeEstaSeparandoPorCorredor);
 
             System.Diagnostics.Process.Start(output);
         }
+
+
+
+
 
 
 
