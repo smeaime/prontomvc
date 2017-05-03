@@ -1974,3 +1974,15 @@ go
 
 
 
+
+
+--sp_help [wGrillaPersistencia]
+
+CREATE NONCLUSTERED INDEX IDX_wGrillaPersistencia_Sesion
+ON [dbo].[wGrillaPersistencia] ([Sesion],[IdRenglon])
+go
+
+
+alter table [wGrillaPersistencia] ADD
+	constraint U_Unicidad unique NONCLUSTERED (IdRenglon,Sesion)
+go

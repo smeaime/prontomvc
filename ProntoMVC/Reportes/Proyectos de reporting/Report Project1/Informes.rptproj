@@ -283,6 +283,10 @@
       <FullPath>Listado general de Cartas de Porte (simulando original) con foto  - Grobo.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
+      <Name>Listado general de Cartas de Porte (simulando original) con foto  - SpeedAgro.rdl</Name>
+      <FullPath>Listado general de Cartas de Porte (simulando original) con foto  - SpeedAgro.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
       <Name>Listado general de Cartas de Porte (simulando original) con foto 2 .rdl</Name>
       <FullPath>Listado general de Cartas de Porte (simulando original) con foto 2 .rdl</FullPath>
     </ProjectItem>
@@ -491,8 +495,8 @@
       <FullPath>Williams - Sincro LaBiznaga2.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
-      <Name>Listado general de Cartas de Porte (simulando original) con foto  - SpeedAgro.rdl</Name>
-      <FullPath>Listado general de Cartas de Porte (simulando original) con foto  - SpeedAgro.rdl</FullPath>
+      <Name>Williams - Resumen de Totales Generales.rdl</Name>
+      <FullPath>Williams - Resumen de Totales Generales.rdl</FullPath>
     </ProjectItem>
   </Reports>
   <Configurations>
