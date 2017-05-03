@@ -17,8 +17,8 @@
       <Query>
         <DataSourceName>TestHarcodeada</DataSourceName>
         <QueryParameters>
-          <QueryParameter Name="@Modo">
-            <Value>=Parameters!Modo.Value</Value>
+          <QueryParameter Name="@FechaHastaAnterior">
+            <Value>=Parameters!FechaHastaAnterior.Value</Value>
           </QueryParameter>
           <QueryParameter Name="@FechaDesde">
             <Value>=Parameters!FechaDesde.Value</Value>
@@ -26,14 +26,25 @@
           <QueryParameter Name="@FechaHasta">
             <Value>=Parameters!FechaHasta.Value</Value>
           </QueryParameter>
+          <QueryParameter Name="@FechaDesdeAnterior">
+            <Value>=Parameters!FechaDesdeAnterior.Value</Value>
+          </QueryParameter>
         </QueryParameters>
         <CommandText>select
 
                    puntoventa as Sucursal,
 			Exporta as Modo,
 			Count(*) as CantCartas,
-			sum(NetoPto) as NetoFinal
-           
+			sum(
+				case when FechaDescarga&lt;= @FechaHastaAnterior 
+				then NetoPto
+				else 0 	end
+			   ) as NetoFinal,
+			sum(
+				case when FechaDescarga&gt;= @FechaDesde
+				then NetoPto
+				else 0 	end
+			   ) as PeriodoAnterior  
 
 from 
  dbo.fSQL_GetDataTableFiltradoYPaginado  
@@ -53,8 +64,8 @@ from
 					-1, 
 					NULL, 
 					0,
-					@Modo,
-					@FechaDesde,
+					-1,
+					@FechaDesdeAnterior,
 
 					@FechaHasta,
 					NULL, 
@@ -95,7 +106,19 @@ select
                    IdStock as Sucursal,
 			'Buque' as Modo,
 			Count(*) as CantCartas,
-			sum(Cantidad) as NetoFinal
+			sum(
+				case when i.FechaIngreso &lt;= @FechaHastaAnterior 
+				then cantidad 
+				else 0 	end
+			   ) as NetoFinal,
+			sum(
+				case when i.FechaIngreso &gt;= @FechaDesde
+				then cantidad 
+				else 0 	end
+			   ) as PeriodoAnterior           
+			         
+
+
 
 From CartasPorteMovimientos i
 Where (
@@ -103,6 +126,15 @@ Where (
                                 And isnull(i.Anulada, 'NO') &lt;&gt; 'SI' 
                                 And i.FechaIngreso &gt;= @FechaDesde And i.FechaIngreso &lt;= @FechaHasta 
                            )
+
+
+
+
+
+
+
+
+
  
 
  Group by  IdStock</CommandText>
@@ -113,16 +145,20 @@ Where (
           <DataField>Sucursal</DataField>
           <rd:TypeName>System.Int32</rd:TypeName>
         </Field>
-        <Field Name="CantCartas">
-          <DataField>CantCartas</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
-        </Field>
         <Field Name="Modo">
           <DataField>Modo</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
+        <Field Name="CantCartas">
+          <DataField>CantCartas</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
         <Field Name="NetoFinal">
           <DataField>NetoFinal</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="PeriodoAnterior">
+          <DataField>PeriodoAnterior</DataField>
           <rd:TypeName>System.Decimal</rd:TypeName>
         </Field>
       </Fields>
@@ -580,21 +616,24 @@ select idlocalidad, nombre from localidades</CommandText>
                   <Width>25mm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>25mm</Width>
+                  <Width>21.68295mm</Width>
                 </TablixColumn>
                 <TablixColumn>
                   <Width>10.44792mm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>18.91458mm</Width>
+                  <Width>23.14792mm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>25mm</Width>
+                  <Width>15.73958mm</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>14.94583mm</Width>
                 </TablixColumn>
               </TablixColumns>
               <TablixRows>
                 <TablixRow>
-                  <Height>6.44097mm</Height>
+                  <Height>6.17639mm</Height>
                   <TablixCells>
                     <TablixCell>
                       <CellContents>
@@ -605,10 +644,10 @@ select idlocalidad, nombre from localidades</CommandText>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>Neto Final</Value>
+                                  <Value>Entrega</Value>
                                   <Style>
                                     <FontFamily>Tahoma</FontFamily>
-                                    <FontSize>11pt</FontSize>
+                                    <FontSize>8pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                     <Color>White</Color>
                                   </Style>
@@ -641,10 +680,10 @@ select idlocalidad, nombre from localidades</CommandText>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value />
+                                  <Value>Elevacion</Value>
                                   <Style>
                                     <FontFamily>Tahoma</FontFamily>
-                                    <FontSize>11pt</FontSize>
+                                    <FontSize>8pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                     <Color>White</Color>
                                   </Style>
@@ -677,11 +716,10 @@ select idlocalidad, nombre from localidades</CommandText>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value />
+                                  <Value>%</Value>
                                   <Style>
                                     <FontFamily>Tahoma</FontFamily>
-                                    <FontSize>11pt</FontSize>
-                                    <FontWeight>Bold</FontWeight>
+                                    <FontSize>8pt</FontSize>
                                     <Color>White</Color>
                                   </Style>
                                 </TextRun>
@@ -706,17 +744,17 @@ select idlocalidad, nombre from localidades</CommandText>
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="Textbox60">
+                        <Textbox Name="Textbox72">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value />
+                                  <Value>Period Ant</Value>
                                   <Style>
                                     <FontFamily>Tahoma</FontFamily>
-                                    <FontSize>11pt</FontSize>
+                                    <FontSize>8pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                     <Color>White</Color>
                                   </Style>
@@ -725,7 +763,7 @@ select idlocalidad, nombre from localidades</CommandText>
                               <Style />
                             </Paragraph>
                           </Paragraphs>
-                          <rd:DefaultName>Textbox60</rd:DefaultName>
+                          <rd:DefaultName>Textbox57</rd:DefaultName>
                           <Style>
                             <Border>
                               <Color>#7292cc</Color>
@@ -749,10 +787,10 @@ select idlocalidad, nombre from localidades</CommandText>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value />
+                                  <Value>Dif Tns</Value>
                                   <Style>
                                     <FontFamily>Tahoma</FontFamily>
-                                    <FontSize>11pt</FontSize>
+                                    <FontSize>8pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                     <Color>White</Color>
                                   </Style>
@@ -762,6 +800,42 @@ select idlocalidad, nombre from localidades</CommandText>
                             </Paragraph>
                           </Paragraphs>
                           <rd:DefaultName>Textbox57</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>#7292cc</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <BackgroundColor>#4c68a2</BackgroundColor>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox69">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>Dif %</Value>
+                                  <Style>
+                                    <FontFamily>Tahoma</FontFamily>
+                                    <FontSize>8pt</FontSize>
+                                    <FontWeight>Bold</FontWeight>
+                                    <Color>White</Color>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox69</rd:DefaultName>
                           <Style>
                             <Border>
                               <Color>#7292cc</Color>
@@ -856,7 +930,7 @@ select idlocalidad, nombre from localidades</CommandText>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value />
+                                  <Value>=  Sum(Fields!Total.Value) / Parameters!GranTotal.Value</Value>
                                   <Style>
                                     <FontFamily>Tahoma</FontFamily>
                                     <Color>#4d4d4d</Color>
@@ -889,9 +963,10 @@ select idlocalidad, nombre from localidades</CommandText>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value />
+                                  <Value>=Fields!PeriodoAnterior.Value</Value>
                                   <Style>
                                     <FontFamily>Tahoma</FontFamily>
+                                    <Format>N0</Format>
                                     <Color>#4d4d4d</Color>
                                   </Style>
                                 </TextRun>
@@ -915,16 +990,17 @@ select idlocalidad, nombre from localidades</CommandText>
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="Textbox58">
+                        <Textbox Name="Diferen4">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value />
+                                  <Value>=Fields!Total.Value - Fields!PeriodoAnterior.Value</Value>
                                   <Style>
                                     <FontFamily>Tahoma</FontFamily>
+                                    <Format>N0</Format>
                                     <Color>#4d4d4d</Color>
                                   </Style>
                                 </TextRun>
@@ -932,10 +1008,44 @@ select idlocalidad, nombre from localidades</CommandText>
                               <Style />
                             </Paragraph>
                           </Paragraphs>
-                          <rd:DefaultName>Textbox58</rd:DefaultName>
+                          <rd:DefaultName>Diferen</rd:DefaultName>
                           <Style>
                             <Border>
                               <Color>#e5e5e5</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox107">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=(Fields!Total.Value - Fields!PeriodoAnterior.Value) / Fields!PeriodoAnterior.Value</Value>
+                                  <Style>
+                                    <FontFamily>Tahoma</FontFamily>
+                                    <Format>0.00%</Format>
+                                    <Color>#4d4d4d</Color>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox104</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>#e6eefc</Color>
                               <Style>Solid</Style>
                             </Border>
                             <PaddingLeft>2pt</PaddingLeft>
@@ -1126,6 +1236,41 @@ select idlocalidad, nombre from localidades</CommandText>
                         </Textbox>
                       </CellContents>
                     </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox71">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value />
+                                  <Style>
+                                    <FontFamily>Tahoma</FontFamily>
+                                    <FontWeight>Bold</FontWeight>
+                                    <Color>White</Color>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox71</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>#9eb6e4</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <BackgroundColor>#7292cc</BackgroundColor>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
                   </TablixCells>
                 </TablixRow>
               </TablixRows>
@@ -1137,13 +1282,14 @@ select idlocalidad, nombre from localidades</CommandText>
                 <TablixMember />
                 <TablixMember />
                 <TablixMember />
+                <TablixMember />
               </TablixMembers>
             </TablixColumnHierarchy>
             <TablixRowHierarchy>
               <TablixMembers>
                 <TablixMember>
                   <TablixHeader>
-                    <Size>27.91042mm</Size>
+                    <Size>15.475mm</Size>
                     <CellContents>
                       <Textbox Name="Textbox53">
                         <CanGrow>true</CanGrow>
@@ -1152,10 +1298,10 @@ select idlocalidad, nombre from localidades</CommandText>
                           <Paragraph>
                             <TextRuns>
                               <TextRun>
-                                <Value>Sucursal1</Value>
+                                <Value>Sucursal</Value>
                                 <Style>
                                   <FontFamily>Tahoma</FontFamily>
-                                  <FontSize>11pt</FontSize>
+                                  <FontSize>8pt</FontSize>
                                   <FontWeight>Bold</FontWeight>
                                   <Color>White</Color>
                                 </Style>
@@ -1195,7 +1341,7 @@ select idlocalidad, nombre from localidades</CommandText>
                     </SortExpression>
                   </SortExpressions>
                   <TablixHeader>
-                    <Size>27.91042mm</Size>
+                    <Size>15.475mm</Size>
                     <CellContents>
                       <Textbox Name="Sucursal1">
                         <CanGrow>true</CanGrow>
@@ -1236,7 +1382,7 @@ select idlocalidad, nombre from localidades</CommandText>
                 </TablixMember>
                 <TablixMember>
                   <TablixHeader>
-                    <Size>27.91042mm</Size>
+                    <Size>15.475mm</Size>
                     <CellContents>
                       <Textbox Name="Textbox55">
                         <CanGrow>true</CanGrow>
@@ -1278,8 +1424,8 @@ select idlocalidad, nombre from localidades</CommandText>
             <DataSetName>DataSet1</DataSetName>
             <Top>45.77292mm</Top>
             <Left>5.85389mm</Left>
-            <Height>19.32292mm</Height>
-            <Width>132.27292mm</Width>
+            <Height>19.05833mm</Height>
+            <Width>126.4392mm</Width>
             <ZIndex>1</ZIndex>
             <Style>
               <Border>
@@ -1554,6 +1700,14 @@ select idlocalidad, nombre from localidades</CommandText>
         </Values>
       </DefaultValue>
       <Prompt>Fecha Hasta</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="FechaHastaAnterior">
+      <DataType>String</DataType>
+      <Prompt>Fecha Hasta Anterior</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="FechaDesdeAnterior">
+      <DataType>String</DataType>
+      <Prompt>Fecha Desde Anterior</Prompt>
     </ReportParameter>
   </ReportParameters>
   <rd:ReportUnitType>Mm</rd:ReportUnitType>
