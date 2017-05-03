@@ -111,12 +111,13 @@ namespace ProntoWindowsService
 
 
             ////http://stackoverflow.com/questions/11985308/multiple-threads-in-windows-service
-
-            m_thread4 = new Thread(DoWorkSoloOCR);
-            m_thread4.Name = "MyWorker4";
-            m_thread4.IsBackground = false;
-            m_thread4.Start();
-
+            if (false)
+            {
+                m_thread4 = new Thread(DoWorkSoloOCR);
+                m_thread4.Name = "MyWorker4";
+                m_thread4.IsBackground = false;
+                m_thread4.Start();
+            }
 
             ////FlexiCapture Engine must be accessed on the same thread as it was initialized
             /*
