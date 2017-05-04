@@ -139,9 +139,11 @@
       <siteMapNode url="ProntoWeb/Facturas.aspx" title="Facturas"  description="Facturas" roles="Administrador,Ventas,WilliamsFacturacion" />
       <siteMapNode url="ProntoWeb/NotaDeCreditos.aspx" title="Notas de crédito"  description="Notas de crédito" roles="Administrador,Ventas,WilliamsFacturacion" />
       <siteMapNode url="ProntoWeb/Reporte.aspx?ReportName=Listado de Clientes incompletos" title="Clientes incompletos"  description="Informes" roles="Administrador,Comercial,WilliamsAdmin,WilliamsFacturacion,WilliamsComercial" />
+
       <siteMapNode url="ProntoWeb/Reporte.aspx?ReportName=MapaArgentinaProcedenciaCartasPorte" title="Mapa Comercial"  description="Informes" roles="Administrador,Comercial,WilliamsAdmin,WilliamsFacturacion,WilliamsComercial" />
 
 
+      <siteMapNode url="ProntoWeb/ReporteResumenEstad.aspx" title=""  description="Informes" roles="Administrador,Comercial,WilliamsAdmin,WilliamsFacturacion,WilliamsComercial" />
 
 
     </siteMapNode>
