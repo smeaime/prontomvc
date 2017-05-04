@@ -1020,7 +1020,7 @@ select idlocalidad, nombre from localidades</CommandText>
 (
 (Fields!Elevacion.Value + Fields!Entrega.Value) 
 - (Fields!PeriodoAnteriorEntrega.Value + Fields!PeriodoAnteriorElevacion.Value) 
-)&lt;0 
+)&gt;0 
 ,  "Gold","White")</Color>
                                   </Style>
                                 </TextRun>
@@ -1907,7 +1907,7 @@ select idlocalidad, nombre from localidades</CommandText>
 (
 (Fields!Elevacion.Value + Fields!Entrega.Value) 
 - (Fields!PeriodoAnteriorEntrega.Value + Fields!PeriodoAnteriorElevacion.Value) 
-)&lt;0 
+)&gt;0 
 ,  "Gold","White")</Color>
                                   </Style>
                                 </TextRun>
@@ -2635,7 +2635,7 @@ select idlocalidad, nombre from localidades</CommandText>
                                   <Style>
                                     <FontFamily>Tahoma</FontFamily>
                                     <Format>0.00%</Format>
-                                    <Color>= iif( (Fields!Buques.Value - Fields!PeriodoAnteriorBuques.Value)&lt;0 ,  "Gold","White")</Color>
+                                    <Color>= iif( (Fields!Buques.Value - Fields!PeriodoAnteriorBuques.Value)&gt;0 ,  "Gold","White")</Color>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -3511,7 +3511,7 @@ select idlocalidad, nombre from localidades</CommandText>
 (
 (Fields!Elevacion.Value + Fields!Entrega.Value) 
 - (Fields!PeriodoAnteriorEntrega.Value + Fields!PeriodoAnteriorElevacion.Value) 
-)&lt;0 
+)&gt;0 
 ,  "Gold","White")</Color>
                                   </Style>
                                 </TextRun>
@@ -4540,7 +4540,7 @@ select idlocalidad, nombre from localidades</CommandText>
 (
 (Fields!Elevacion.Value + Fields!Entrega.Value) 
 - (Fields!PeriodoAnteriorEntrega.Value + Fields!PeriodoAnteriorElevacion.Value) 
-)&lt;0 
+)&gt;0 
 ,  "Gold","White")</Color>
                                   </Style>
                                 </TextRun>
@@ -6482,7 +6482,7 @@ select idlocalidad, nombre from localidades</CommandText>
       <Nullable>true</Nullable>
       <DefaultValue>
         <Values>
-          <Value>=Now()</Value>
+          <Value>=DateAdd( "m",-7,Now())</Value>
         </Values>
       </DefaultValue>
       <Prompt>Fecha Desde</Prompt>
@@ -6492,7 +6492,7 @@ select idlocalidad, nombre from localidades</CommandText>
       <Nullable>true</Nullable>
       <DefaultValue>
         <Values>
-          <Value>=Now()</Value>
+          <Value>=DateAdd( "m",-7,Now())</Value>
         </Values>
       </DefaultValue>
       <Prompt>Fecha Hasta</Prompt>
@@ -6502,7 +6502,7 @@ select idlocalidad, nombre from localidades</CommandText>
       <Nullable>true</Nullable>
       <DefaultValue>
         <Values>
-          <Value>=DateAdd( "m",-1,Now())</Value>
+          <Value>=DateAdd( "m",-8,Now())</Value>
         </Values>
       </DefaultValue>
       <Prompt>Fecha Desde Anterior</Prompt>
@@ -6512,7 +6512,7 @@ select idlocalidad, nombre from localidades</CommandText>
       <Nullable>true</Nullable>
       <DefaultValue>
         <Values>
-          <Value>=DateAdd( "m",-1,Now())</Value>
+          <Value>=DateAdd( "m",-8,Now())</Value>
         </Values>
       </DefaultValue>
       <Prompt>Fecha Hasta Anterior</Prompt>
