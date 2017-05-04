@@ -77,7 +77,7 @@ Namespace ProntoMVC.Reportes
             AutoCompleteExtender3.ContextKey = HFSC.Value
             AutoCompleteExtender4.ContextKey = HFSC.Value
             AutoCompleteExtender11.ContextKey = HFSC.Value
-            AutoCompleteExtender1.ContextKey = HFSC.Value
+            'AutoCompleteExtender1.ContextKey = HFSC.Value
 
 
         End Sub
@@ -87,6 +87,7 @@ Namespace ProntoMVC.Reportes
             refrescaPeriodo()
 
         End Sub
+
 
         Sub refrescaPeriodo()
             txtFechaDesde.Visible = False
@@ -111,10 +112,19 @@ Namespace ProntoMVC.Reportes
                 Case "Mes anterior"
                     txtFechaDesde.Text = GetFirstDayInMonth(DateAdd(DateInterval.Month, -1, Today))
                     txtFechaHasta.Text = GetLastDayInMonth(DateAdd(DateInterval.Month, -1, Today))
+
+
                 Case "Personalizar"
                     txtFechaDesde.Visible = True
                     txtFechaHasta.Visible = True
             End Select
+
+
+            Dim fechadesde As Date = iisValidSqlDate(txtFechaDesde.Text, #1/1/1753#)
+            Dim fechahasta As Date = iisValidSqlDate(txtFechaHasta.Text, #1/1/2100#)
+            txtFechaDesdeAnterior.Text = DateAdd(DateInterval.Year, -1, fechadesde)
+            txtFechaHastaAnterior.Text = DateAdd(DateInterval.Year, -1, fechahasta)
+
 
 
         End Sub
@@ -390,8 +400,8 @@ Namespace ProntoMVC.Reportes
 
                     yourParams(0) = New ReportParameter("FechaDesde", txtFechaDesde.Text) ' )
                     yourParams(1) = New ReportParameter("FechaHasta", txtFechaHasta.Text) ', txtFechaHasta.Text)
-                    yourParams(2) = New ReportParameter("FechaDesdeAnterior", New DateTime(2012, 11, 1)) ' txtFechaDesde.Text)
-                    yourParams(3) = New ReportParameter("FechaHastaAnterior", New DateTime(2012, 11, 1)) ', txtFechaHasta.Text)
+                    yourParams(2) = New ReportParameter("FechaDesdeAnterior", txtFechaDesdeAnterior.Text) ' txtFechaDesde.Text)
+                    yourParams(3) = New ReportParameter("FechaHastaAnterior", txtFechaHastaAnterior.Text) ', txtFechaHasta.Text)
 
 
                     If Diagnostics.Debugger.IsAttached Then
