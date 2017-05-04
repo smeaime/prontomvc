@@ -864,13 +864,51 @@ namespace ProntoMVC.Tests
 
 
 
+  
+            
+        [TestMethod]
+        public void OCR_Preprocesamiento_paginacion()
+        {
+
+        //  probar los picos de IIS en las subidas de imagenes (en los dos importadores) -apuesto a que es la paginacion
+
+
+
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            string zipFile;
+            zipFile = @"C:\Users\Administrador\Documents\bdl\pronto\docstest\1271214feb2017.tif";
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+            VaciarDirectorioTemp();
+
+
+            var l = ClassFlexicapture.PreprocesarArchivoSubido(zipFile, "Mariano", DirApp, false, false, false, 1);
+
+
+            string sError = "";
+
+
+
+            //CartaDePorteManager.ProcesarImagenesConCodigosDeBarraYAdjuntar(SC, lista, -1, ref sError, DirApp);
+            //ClassFlexicapture.ActivarMotor(SC, l, ref sError, DirApp, "SI");
+        }
+
+
+
+
+
+
+
         [TestMethod]
         public void btnIrAlPaso2_Click()
         {
             // se estaria quejando porque en el IN (123123,4444,......) hay una banda de ids  -No. En este caso es por timeout (y no son tantos ids)
       //- Falta un indice en wGrillaPersistencia. Lo volaron en alguna actualizacion??
 
-            sssssss
       /*  
         SELECT DISTINCT 0 as ColumnaTilde ,IdCartaDePorte, CDP.IdArticulo,               
         NumeroCartaDePorte, SubNumeroVagon,CDP.SubnumeroDeFacturacion, FechaArribo, FechaDescarga,  
@@ -930,9 +968,9 @@ Timeout expired.  The timeout period elapsed prior to completion of the operatio
        * 
        * */
 
-        SQLSTRING_FacturacionCartas_por_Titular
+        //SQLSTRING_FacturacionCartas_por_Titular
 
-                GetDatatableAsignacionAutomatica
+        //        GetDatatableAsignacionAutomatica
 
 
         }
