@@ -12,7 +12,22 @@
     <DataSet Name="DataSet1">
       <Query>
         <DataSourceName>TestHarcodeada</DataSourceName>
-        <CommandText>declare @FechaDesde datetime
+        <QueryParameters>
+          <QueryParameter Name="@FechaDesde">
+            <Value>=Parameters!FechaDesde.Value</Value>
+          </QueryParameter>
+          <QueryParameter Name="@FechaHastaAnterior">
+            <Value>=Parameters!FechaHastaAnterior.Value</Value>
+          </QueryParameter>
+          <QueryParameter Name="@FechaDesdeAnterior">
+            <Value>=Parameters!FechaDesdeAnterior.Value</Value>
+          </QueryParameter>
+          <QueryParameter Name="@FechaHasta">
+            <Value>=Parameters!FechaHasta.Value</Value>
+          </QueryParameter>
+        </QueryParameters>
+        <CommandText>/*
+declare @FechaDesde datetime
 declare @FechaHasta datetime
 declare @FechaDesdeAnterior datetime
 declare @FechaHastaAnterior datetime
@@ -20,7 +35,7 @@ set @FechaDesdeAnterior ='20170101'
 set @FechaHastaAnterior='20170131'
 set @FechaDesde='20170201'
 set @FechaHasta='20170228'
-
+*/
 
 select 
 		*
@@ -6453,7 +6468,9 @@ select idlocalidad, nombre from localidades</CommandText>
         <TopMargin>2cm</TopMargin>
         <BottomMargin>2cm</BottomMargin>
         <ColumnSpacing>0.13cm</ColumnSpacing>
-        <Style />
+        <Style>
+          <BackgroundColor>White</BackgroundColor>
+        </Style>
       </Page>
     </ReportSection>
   </ReportSections>
@@ -6461,6 +6478,11 @@ select idlocalidad, nombre from localidades</CommandText>
     <ReportParameter Name="FechaDesde">
       <DataType>DateTime</DataType>
       <Nullable>true</Nullable>
+      <DefaultValue>
+        <Values>
+          <Value>=Now()</Value>
+        </Values>
+      </DefaultValue>
       <Prompt>Fecha Desde</Prompt>
     </ReportParameter>
     <ReportParameter Name="FechaHasta">
@@ -6468,7 +6490,7 @@ select idlocalidad, nombre from localidades</CommandText>
       <Nullable>true</Nullable>
       <DefaultValue>
         <Values>
-          <Value>02/28/2016 00:00:00</Value>
+          <Value>=Now()</Value>
         </Values>
       </DefaultValue>
       <Prompt>Fecha Hasta</Prompt>
