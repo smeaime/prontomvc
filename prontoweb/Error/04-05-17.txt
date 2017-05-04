@@ -1,0 +1,169 @@
+
+Log Entry : 
+05/04/2017 14:13:23
+Error in: http://localhost:58911/login.aspx?ReturnUrl=/. Error Message:System.Threading.ThreadAbortException
+Subproceso anulado.
+   en System.Threading.Thread.AbortInternal()
+   en System.Threading.Thread.Abort(Object stateInfo)
+   en System.Web.HttpResponse.AbortCurrentThread()
+   en System.Web.HttpResponse.End()
+   en System.Web.HttpResponse.Redirect(String url, Boolean endResponse, Boolean permanent)
+   en System.Web.HttpResponse.Redirect(String url)
+   en Login.Page_Load(Object sender, EventArgs e) en C:\Users\Administrador\Documents\bdl\pronto\prontoweb\Login.aspx.vb:línea 169
+mscorlib
+__________________________
+
+Log Entry : 
+05/04/2017 14:17:29
+Error in: http://localhost:58911/ProntoWeb/Reporte.aspx?ReportName=Listado de Clientes incompletos. Error Message:Cli 1
+__________________________
+
+Log Entry : 
+05/04/2017 14:17:30
+Error in: http://localhost:58911/ProntoWeb/Reporte.aspx?ReportName=Listado de Clientes incompletos. Error Message:Cli 2
+__________________________
+
+Log Entry : 
+05/04/2017 14:17:31
+Error in: http://localhost:58911/ProntoWeb/Reporte.aspx?ReportName=Listado de Clientes incompletos. Error Message:Cli 3
+__________________________
+
+Log Entry : 
+05/04/2017 14:51:58
+Error in: http://localhost:58911/ProntoWeb/ReporteResumenEstad.aspx. Error Message:Vamos bien?
+__________________________
+
+Log Entry : 
+05/04/2017 14:51:59
+Error in: http://localhost:58911/ProntoWeb/ReporteResumenEstad.aspx. Error Message:http://bdlconsultores.sytes.net:10080/ReportServer - administrador - .xza2190lkm. - 
+__________________________
+
+Log Entry : 
+05/04/2017 14:51:59
+Error in: http://localhost:58911/ProntoWeb/ReporteResumenEstad.aspx. Error Message:parece
+__________________________
+
+Log Entry : 
+05/04/2017 14:51:59
+Error in: http://localhost:58911/ProntoWeb/ReporteResumenEstad.aspx. Error Message:Cli 3
+__________________________
+
+Log Entry : 
+05/04/2017 15:09:29
+Error in: http://localhost:58911/ProntoWeb/ReporteResumenEstad.aspx. Error Message:Vamos bien?
+__________________________
+
+Log Entry : 
+05/04/2017 15:09:29
+Error in: http://localhost:58911/ProntoWeb/ReporteResumenEstad.aspx. Error Message:http://bdlconsultores.sytes.net:10080/ReportServer - administrador - .xza2190lkm. - 
+__________________________
+
+Log Entry : 
+05/04/2017 15:09:29
+Error in: http://localhost:58911/ProntoWeb/ReporteResumenEstad.aspx. Error Message:parece
+__________________________
+
+Log Entry : 
+05/04/2017 15:09:30
+Error in: http://localhost:58911/ProntoWeb/ReporteResumenEstad.aspx. Error Message:Cli 3
+__________________________
+
+Log Entry : 
+05/04/2017 15:11:22
+Error in: http://localhost:58911/ProntoWeb/ReporteResumenEstad.aspx. Error Message:Vamos bien?
+__________________________
+
+Log Entry : 
+05/04/2017 15:11:22
+Error in: http://localhost:58911/ProntoWeb/ReporteResumenEstad.aspx. Error Message:http://bdlconsultores.sytes.net:10080/ReportServer - administrador - .xza2190lkm. - 
+__________________________
+
+Log Entry : 
+05/04/2017 15:11:22
+Error in: http://localhost:58911/ProntoWeb/ReporteResumenEstad.aspx. Error Message:parece
+__________________________
+
+Log Entry : 
+05/04/2017 15:11:23
+Error in: http://localhost:58911/ProntoWeb/ReporteResumenEstad.aspx. Error Message:Cli 3
+__________________________
+
+Log Entry : 
+05/04/2017 15:14:13
+Error in: http://localhost:58911/ProntoWeb/ReporteResumenEstad.aspx. Error Message:Vamos bien?
+__________________________
+
+Log Entry : 
+05/04/2017 15:14:13
+Error in: http://localhost:58911/ProntoWeb/ReporteResumenEstad.aspx. Error Message:http://bdlconsultores.sytes.net:10080/ReportServer - administrador - .xza2190lkm. - 
+__________________________
+
+Log Entry : 
+05/04/2017 15:14:13
+Error in: http://localhost:58911/ProntoWeb/ReporteResumenEstad.aspx. Error Message:parece
+__________________________
+
+Log Entry : 
+05/04/2017 15:14:14
+Error in: http://localhost:58911/ProntoWeb/ReporteResumenEstad.aspx. Error Message:Cli 3
+__________________________
+
+Log Entry : 
+05/04/2017 15:14:31
+Error in: http://localhost:58911/ProntoWeb/ReporteResumenEstad.aspx. Error Message:Vamos bien?
+__________________________
+
+Log Entry : 
+05/04/2017 15:14:31
+Error in: http://localhost:58911/ProntoWeb/ReporteResumenEstad.aspx. Error Message:http://bdlconsultores.sytes.net:10080/ReportServer - administrador - .xza2190lkm. - 
+__________________________
+
+Log Entry : 
+05/04/2017 15:14:32
+Error in: http://localhost:58911/ProntoWeb/ReporteResumenEstad.aspx. Error Message:parece
+__________________________
+
+Log Entry : 
+05/04/2017 15:14:32
+Error in: http://localhost:58911/ProntoWeb/ReporteResumenEstad.aspx. Error Message:Cli 3
+__________________________
+
+Log Entry : 
+05/04/2017 15:22:25
+Error in: http://localhost:58911/ProntoWeb/ReporteResumenEstad.aspx. Error Message:Vamos bien?
+__________________________
+
+Log Entry : 
+05/04/2017 15:22:25
+Error in: http://localhost:58911/ProntoWeb/ReporteResumenEstad.aspx. Error Message:http://bdlconsultores.sytes.net:10080/ReportServer - administrador - .xza2190lkm. - 
+__________________________
+
+Log Entry : 
+05/04/2017 15:22:26
+Error in: http://localhost:58911/ProntoWeb/ReporteResumenEstad.aspx. Error Message:parece
+__________________________
+
+Log Entry : 
+05/04/2017 15:22:26
+Error in: http://localhost:58911/ProntoWeb/ReporteResumenEstad.aspx. Error Message:Cli 3
+__________________________
+
+Log Entry : 
+05/04/2017 15:46:12
+Error in: http://localhost:58911/ProntoWeb/ReporteResumenEstad.aspx. Error Message:Vamos bien?
+__________________________
+
+Log Entry : 
+05/04/2017 15:46:12
+Error in: http://localhost:58911/ProntoWeb/ReporteResumenEstad.aspx. Error Message:http://bdlconsultores.sytes.net:10080/ReportServer - administrador - .xza2190lkm. - 
+__________________________
+
+Log Entry : 
+05/04/2017 15:46:12
+Error in: http://localhost:58911/ProntoWeb/ReporteResumenEstad.aspx. Error Message:parece
+__________________________
+
+Log Entry : 
+05/04/2017 15:46:13
+Error in: http://localhost:58911/ProntoWeb/ReporteResumenEstad.aspx. Error Message:Cli 3
+__________________________
