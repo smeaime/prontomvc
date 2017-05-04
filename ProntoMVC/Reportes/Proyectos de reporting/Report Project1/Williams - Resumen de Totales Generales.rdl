@@ -27,7 +27,9 @@ set @FechaHasta='20170228'
 
 select 
 		*
-,sum (Elevacion)  OVER () as TotalElevacion
+, sum (Elevacion)  OVER () as TotalElevacion
+, sum (Entrega)  OVER () as TotalEntrega
+, sum (Buques)  OVER () as TotalBuques
 
 from
 (
@@ -223,6 +225,14 @@ group by sucursal
           <DataField>TotalElevacion</DataField>
           <rd:TypeName>System.Decimal</rd:TypeName>
         </Field>
+        <Field Name="TotalEntrega">
+          <DataField>TotalEntrega</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="TotalBuques">
+          <DataField>TotalBuques</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
       </Fields>
     </DataSet>
     <DataSet Name="DataSet2">
@@ -287,390 +297,6 @@ select idlocalidad, nombre from localidades</CommandText>
     <ReportSection>
       <Body>
         <ReportItems>
-          <Chart Name="Chart3">
-            <ChartCategoryHierarchy>
-              <ChartMembers>
-                <ChartMember>
-                  <Group Name="Chart3_CategoryGroup">
-                    <GroupExpressions>
-                      <GroupExpression>=Fields!Sucursal.Value</GroupExpression>
-                    </GroupExpressions>
-                  </Group>
-                  <SortExpressions>
-                    <SortExpression>
-                      <Value>=Fields!Sucursal.Value</Value>
-                    </SortExpression>
-                  </SortExpressions>
-                  <Label>=Fields!Sucursal.Value</Label>
-                </ChartMember>
-              </ChartMembers>
-            </ChartCategoryHierarchy>
-            <ChartSeriesHierarchy>
-              <ChartMembers>
-                <ChartMember>
-                  <Label>Cant Cartas</Label>
-                </ChartMember>
-              </ChartMembers>
-            </ChartSeriesHierarchy>
-            <ChartData>
-              <ChartSeriesCollection>
-                <ChartSeries Name="CantCartas">
-                  <ChartDataPoints>
-                    <ChartDataPoint>
-                      <ChartDataPointValues>
-                        <Y>=Sum(Fields!CantCartas.Value)</Y>
-                      </ChartDataPointValues>
-                      <ChartDataLabel>
-                        <Style>
-                          <FontFamily>Tahoma</FontFamily>
-                          <FontSize>8pt</FontSize>
-                        </Style>
-                      </ChartDataLabel>
-                      <ToolTip>#VALY</ToolTip>
-                      <Style />
-                      <ChartMarker>
-                        <Style />
-                      </ChartMarker>
-                      <DataElementOutput>Output</DataElementOutput>
-                    </ChartDataPoint>
-                  </ChartDataPoints>
-                  <Type>Shape</Type>
-                  <Style>
-                    <ShadowOffset>1.5pt</ShadowOffset>
-                  </Style>
-                  <ChartEmptyPoints>
-                    <Style />
-                    <ChartMarker>
-                      <Style />
-                    </ChartMarker>
-                    <ChartDataLabel>
-                      <Style />
-                    </ChartDataLabel>
-                  </ChartEmptyPoints>
-                  <CustomProperties>
-                    <CustomProperty>
-                      <Name>PieDrawingStyle</Name>
-                      <Value>Concave</Value>
-                    </CustomProperty>
-                  </CustomProperties>
-                  <ValueAxisName>Primary</ValueAxisName>
-                  <CategoryAxisName>Primary</CategoryAxisName>
-                  <ChartSmartLabel>
-                    <CalloutLineColor>Black</CalloutLineColor>
-                    <MinMovingDistance>0pt</MinMovingDistance>
-                  </ChartSmartLabel>
-                </ChartSeries>
-              </ChartSeriesCollection>
-            </ChartData>
-            <ChartAreas>
-              <ChartArea Name="Default">
-                <ChartCategoryAxes>
-                  <ChartAxis Name="Primary">
-                    <Style>
-                      <Border>
-                        <Color>LightGrey</Color>
-                      </Border>
-                      <FontFamily>Tahoma</FontFamily>
-                      <FontSize>8pt</FontSize>
-                    </Style>
-                    <ChartAxisTitle>
-                      <Caption>Título del eje</Caption>
-                      <Style>
-                        <FontFamily>Tahoma</FontFamily>
-                        <FontSize>8pt</FontSize>
-                      </Style>
-                    </ChartAxisTitle>
-                    <ChartMajorGridLines>
-                      <Enabled>False</Enabled>
-                      <Style>
-                        <Border>
-                          <Color>Gainsboro</Color>
-                        </Border>
-                      </Style>
-                    </ChartMajorGridLines>
-                    <ChartMinorGridLines>
-                      <Style>
-                        <Border>
-                          <Color>Gainsboro</Color>
-                          <Style>Dotted</Style>
-                        </Border>
-                      </Style>
-                    </ChartMinorGridLines>
-                    <ChartMajorTickMarks>
-                      <Style>
-                        <Border>
-                          <Color>LightGrey</Color>
-                        </Border>
-                      </Style>
-                    </ChartMajorTickMarks>
-                    <ChartMinorTickMarks>
-                      <Style>
-                        <Border>
-                          <Color>LightGrey</Color>
-                        </Border>
-                      </Style>
-                      <Length>0.5</Length>
-                    </ChartMinorTickMarks>
-                    <CrossAt>NaN</CrossAt>
-                    <Minimum>NaN</Minimum>
-                    <Maximum>NaN</Maximum>
-                    <ChartAxisScaleBreak>
-                      <Style />
-                    </ChartAxisScaleBreak>
-                  </ChartAxis>
-                  <ChartAxis Name="Secondary">
-                    <Style>
-                      <Border>
-                        <Color>LightGrey</Color>
-                      </Border>
-                      <FontFamily>Tahoma</FontFamily>
-                      <FontSize>8pt</FontSize>
-                    </Style>
-                    <ChartAxisTitle>
-                      <Caption>Título del eje</Caption>
-                      <Style>
-                        <FontFamily>Tahoma</FontFamily>
-                        <FontSize>8pt</FontSize>
-                      </Style>
-                    </ChartAxisTitle>
-                    <ChartMajorGridLines>
-                      <Enabled>False</Enabled>
-                      <Style>
-                        <Border>
-                          <Color>Gainsboro</Color>
-                        </Border>
-                      </Style>
-                    </ChartMajorGridLines>
-                    <ChartMinorGridLines>
-                      <Style>
-                        <Border>
-                          <Color>Gainsboro</Color>
-                          <Style>Dotted</Style>
-                        </Border>
-                      </Style>
-                    </ChartMinorGridLines>
-                    <ChartMajorTickMarks>
-                      <Style>
-                        <Border>
-                          <Color>LightGrey</Color>
-                        </Border>
-                      </Style>
-                    </ChartMajorTickMarks>
-                    <ChartMinorTickMarks>
-                      <Style>
-                        <Border>
-                          <Color>LightGrey</Color>
-                        </Border>
-                      </Style>
-                      <Length>0.5</Length>
-                    </ChartMinorTickMarks>
-                    <CrossAt>NaN</CrossAt>
-                    <Location>Opposite</Location>
-                    <Minimum>NaN</Minimum>
-                    <Maximum>NaN</Maximum>
-                    <ChartAxisScaleBreak>
-                      <Style />
-                    </ChartAxisScaleBreak>
-                  </ChartAxis>
-                </ChartCategoryAxes>
-                <ChartValueAxes>
-                  <ChartAxis Name="Primary">
-                    <Style>
-                      <Border>
-                        <Color>LightGrey</Color>
-                      </Border>
-                      <FontFamily>Tahoma</FontFamily>
-                      <FontSize>8pt</FontSize>
-                    </Style>
-                    <ChartAxisTitle>
-                      <Caption>Título del eje</Caption>
-                      <Style>
-                        <FontFamily>Tahoma</FontFamily>
-                        <FontSize>8pt</FontSize>
-                      </Style>
-                    </ChartAxisTitle>
-                    <ChartMajorGridLines>
-                      <Style>
-                        <Border>
-                          <Color>Gainsboro</Color>
-                        </Border>
-                      </Style>
-                    </ChartMajorGridLines>
-                    <ChartMinorGridLines>
-                      <Style>
-                        <Border>
-                          <Color>Gainsboro</Color>
-                          <Style>Dotted</Style>
-                        </Border>
-                      </Style>
-                    </ChartMinorGridLines>
-                    <ChartMajorTickMarks>
-                      <Style>
-                        <Border>
-                          <Color>LightGrey</Color>
-                        </Border>
-                      </Style>
-                    </ChartMajorTickMarks>
-                    <ChartMinorTickMarks>
-                      <Style>
-                        <Border>
-                          <Color>LightGrey</Color>
-                        </Border>
-                      </Style>
-                      <Length>0.5</Length>
-                    </ChartMinorTickMarks>
-                    <CrossAt>NaN</CrossAt>
-                    <Minimum>NaN</Minimum>
-                    <Maximum>NaN</Maximum>
-                    <ChartAxisScaleBreak>
-                      <Style />
-                    </ChartAxisScaleBreak>
-                  </ChartAxis>
-                  <ChartAxis Name="Secondary">
-                    <Style>
-                      <Border>
-                        <Color>LightGrey</Color>
-                      </Border>
-                      <FontFamily>Tahoma</FontFamily>
-                      <FontSize>8pt</FontSize>
-                    </Style>
-                    <ChartAxisTitle>
-                      <Caption>Título del eje</Caption>
-                      <Style>
-                        <FontFamily>Tahoma</FontFamily>
-                        <FontSize>8pt</FontSize>
-                      </Style>
-                    </ChartAxisTitle>
-                    <ChartMajorGridLines>
-                      <Style>
-                        <Border>
-                          <Color>Gainsboro</Color>
-                        </Border>
-                      </Style>
-                    </ChartMajorGridLines>
-                    <ChartMinorGridLines>
-                      <Style>
-                        <Border>
-                          <Color>Gainsboro</Color>
-                          <Style>Dotted</Style>
-                        </Border>
-                      </Style>
-                    </ChartMinorGridLines>
-                    <ChartMajorTickMarks>
-                      <Style>
-                        <Border>
-                          <Color>LightGrey</Color>
-                        </Border>
-                      </Style>
-                    </ChartMajorTickMarks>
-                    <ChartMinorTickMarks>
-                      <Style>
-                        <Border>
-                          <Color>LightGrey</Color>
-                        </Border>
-                      </Style>
-                      <Length>0.5</Length>
-                    </ChartMinorTickMarks>
-                    <CrossAt>NaN</CrossAt>
-                    <Location>Opposite</Location>
-                    <Minimum>NaN</Minimum>
-                    <Maximum>NaN</Maximum>
-                    <ChartAxisScaleBreak>
-                      <Style />
-                    </ChartAxisScaleBreak>
-                  </ChartAxis>
-                </ChartValueAxes>
-                <Style>
-                  <BackgroundColor>White</BackgroundColor>
-                  <BackgroundGradientType>None</BackgroundGradientType>
-                </Style>
-              </ChartArea>
-            </ChartAreas>
-            <ChartLegends>
-              <ChartLegend Name="Default">
-                <Style>
-                  <Border>
-                    <Color>#7292cc</Color>
-                  </Border>
-                  <BackgroundColor>#e6eefc</BackgroundColor>
-                  <BackgroundGradientType>TopBottom</BackgroundGradientType>
-                  <BackgroundGradientEndColor>#c6daf8</BackgroundGradientEndColor>
-                  <FontFamily>Tahoma</FontFamily>
-                  <FontSize>8pt</FontSize>
-                </Style>
-                <ChartLegendTitle>
-                  <Caption />
-                  <Style>
-                    <FontFamily>Tahoma</FontFamily>
-                    <FontSize>8pt</FontSize>
-                    <FontWeight>Bold</FontWeight>
-                    <TextAlign>Center</TextAlign>
-                  </Style>
-                </ChartLegendTitle>
-                <HeaderSeparatorColor>Black</HeaderSeparatorColor>
-                <ColumnSeparatorColor>Black</ColumnSeparatorColor>
-              </ChartLegend>
-            </ChartLegends>
-            <ChartTitles>
-              <ChartTitle Name="Default">
-                <Caption>Título del gráfico</Caption>
-                <Style>
-                  <BackgroundGradientType>None</BackgroundGradientType>
-                  <FontFamily>Tahoma</FontFamily>
-                  <FontSize>14pt</FontSize>
-                  <FontWeight>Bold</FontWeight>
-                  <TextAlign>General</TextAlign>
-                  <VerticalAlign>Top</VerticalAlign>
-                </Style>
-              </ChartTitle>
-            </ChartTitles>
-            <Palette>Custom</Palette>
-            <ChartCustomPaletteColors>
-              <ChartCustomPaletteColor>#4c68a2</ChartCustomPaletteColor>
-              <ChartCustomPaletteColor>#b5dddf</ChartCustomPaletteColor>
-              <ChartCustomPaletteColor>#7292cc</ChartCustomPaletteColor>
-              <ChartCustomPaletteColor>#89bcc5</ChartCustomPaletteColor>
-              <ChartCustomPaletteColor>#c4d5f3</ChartCustomPaletteColor>
-              <ChartCustomPaletteColor>#c6c595</ChartCustomPaletteColor>
-              <ChartCustomPaletteColor>#87acf3</ChartCustomPaletteColor>
-              <ChartCustomPaletteColor>#7b9291</ChartCustomPaletteColor>
-              <ChartCustomPaletteColor>#a8c4ec</ChartCustomPaletteColor>
-              <ChartCustomPaletteColor>#a49ed4</ChartCustomPaletteColor>
-            </ChartCustomPaletteColors>
-            <ChartBorderSkin>
-              <ChartBorderSkinType>Emboss</ChartBorderSkinType>
-              <Style>
-                <BackgroundColor>Gray</BackgroundColor>
-                <BackgroundGradientType>None</BackgroundGradientType>
-                <Color>White</Color>
-              </Style>
-            </ChartBorderSkin>
-            <ChartNoDataMessage Name="NoDataMessage">
-              <Caption>Sin datos disponibles</Caption>
-              <Style>
-                <BackgroundGradientType>None</BackgroundGradientType>
-                <FontFamily>Tahoma</FontFamily>
-                <FontSize>8pt</FontSize>
-                <TextAlign>General</TextAlign>
-                <VerticalAlign>Top</VerticalAlign>
-              </Style>
-            </ChartNoDataMessage>
-            <DataSetName>DataSet1</DataSetName>
-            <Top>77.7875mm</Top>
-            <Left>144.4103mm</Left>
-            <Height>50mm</Height>
-            <Width>68.91458mm</Width>
-            <Style>
-              <Border>
-                <Color>#7292cc</Color>
-                <Style>Solid</Style>
-                <Width>2pt</Width>
-              </Border>
-              <BackgroundColor>#c6daf8</BackgroundColor>
-              <BackgroundGradientType>TopBottom</BackgroundGradientType>
-              <BackgroundGradientEndColor>#e6eefc</BackgroundGradientEndColor>
-            </Style>
-          </Chart>
           <Tablix Name="Tablix4">
             <TablixBody>
               <TablixColumns>
@@ -964,7 +590,7 @@ select idlocalidad, nombre from localidades</CommandText>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Sum(Fields!Entregal.Value)</Value>
+                                  <Value>=Fields!Entrega.Value</Value>
                                   <Style>
                                     <FontFamily>Tahoma</FontFamily>
                                     <Color>#4d4d4d</Color>
@@ -997,7 +623,7 @@ select idlocalidad, nombre from localidades</CommandText>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Fields!Elevacion.Value</Value>
+                                  <Value>=Sum(Fields!Elevacion.Value)</Value>
                                   <Style>
                                     <FontFamily>Tahoma</FontFamily>
                                     <Color>#4d4d4d</Color>
@@ -1023,16 +649,17 @@ select idlocalidad, nombre from localidades</CommandText>
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="Textbox4">
+                        <Textbox Name="Diferen5">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value />
+                                  <Value>=Sum(Fields!Elevacion.Value) +  Sum(Fields!Entrega.Value)</Value>
                                   <Style>
                                     <FontFamily>Tahoma</FontFamily>
+                                    <Format>N0</Format>
                                     <Color>#4d4d4d</Color>
                                   </Style>
                                 </TextRun>
@@ -1040,7 +667,7 @@ select idlocalidad, nombre from localidades</CommandText>
                               <Style />
                             </Paragraph>
                           </Paragraphs>
-                          <rd:DefaultName>Textbox4</rd:DefaultName>
+                          <rd:DefaultName>Diferen</rd:DefaultName>
                           <Style>
                             <Border>
                               <Color>#e5e5e5</Color>
@@ -1063,7 +690,7 @@ select idlocalidad, nombre from localidades</CommandText>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=  Sum(Fields!Total.Value) / Parameters!GranTotal.Value</Value>
+                                  <Value>=  Fields!Entrega.Value / Fields!TotalEntrega.Value</Value>
                                   <Style>
                                     <FontFamily>Tahoma</FontFamily>
                                     <Color>#4d4d4d</Color>
@@ -1123,17 +750,16 @@ select idlocalidad, nombre from localidades</CommandText>
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="Diferen4">
+                        <Textbox Name="Textbox9">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Fields!Total.Value - Fields!PeriodoAnterior.Value</Value>
+                                  <Value />
                                   <Style>
                                     <FontFamily>Tahoma</FontFamily>
-                                    <Format>N0</Format>
                                     <Color>#4d4d4d</Color>
                                   </Style>
                                 </TextRun>
@@ -1141,7 +767,7 @@ select idlocalidad, nombre from localidades</CommandText>
                               <Style />
                             </Paragraph>
                           </Paragraphs>
-                          <rd:DefaultName>Diferen</rd:DefaultName>
+                          <rd:DefaultName>Textbox9</rd:DefaultName>
                           <Style>
                             <Border>
                               <Color>#e5e5e5</Color>
@@ -1157,17 +783,16 @@ select idlocalidad, nombre from localidades</CommandText>
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="Textbox107">
+                        <Textbox Name="Textbox10">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=(Fields!Total.Value - Fields!PeriodoAnterior.Value) / Fields!PeriodoAnterior.Value</Value>
+                                  <Value />
                                   <Style>
                                     <FontFamily>Tahoma</FontFamily>
-                                    <Format>0.00%</Format>
                                     <Color>#4d4d4d</Color>
                                   </Style>
                                 </TextRun>
@@ -1175,7 +800,7 @@ select idlocalidad, nombre from localidades</CommandText>
                               <Style />
                             </Paragraph>
                           </Paragraphs>
-                          <rd:DefaultName>Textbox104</rd:DefaultName>
+                          <rd:DefaultName>Textbox10</rd:DefaultName>
                           <Style>
                             <Border>
                               <Color>#e6eefc</Color>
@@ -1196,14 +821,14 @@ select idlocalidad, nombre from localidades</CommandText>
                   <TablixCells>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="NetoFinal3">
+                        <Textbox Name="Textbox8">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Sum(Fields!Entregal.Value)</Value>
+                                  <Value />
                                   <Style>
                                     <FontFamily>Tahoma</FontFamily>
                                     <Color>#4d4d4d</Color>
@@ -1213,7 +838,7 @@ select idlocalidad, nombre from localidades</CommandText>
                               <Style />
                             </Paragraph>
                           </Paragraphs>
-                          <rd:DefaultName>NetoFinal</rd:DefaultName>
+                          <rd:DefaultName>Textbox8</rd:DefaultName>
                           <Style>
                             <Border>
                               <Color>#e5e5e5</Color>
@@ -1497,27 +1122,17 @@ select idlocalidad, nombre from localidades</CommandText>
                   </TablixMembers>
                 </TablixMember>
                 <TablixMember>
-                  <Group Name="Sucursal1">
-                    <GroupExpressions>
-                      <GroupExpression>=Fields!Sucursal.Value</GroupExpression>
-                    </GroupExpressions>
-                  </Group>
-                  <SortExpressions>
-                    <SortExpression>
-                      <Value>=Fields!Sucursal.Value</Value>
-                    </SortExpression>
-                  </SortExpressions>
                   <TablixHeader>
                     <Size>20.69127mm</Size>
                     <CellContents>
-                      <Textbox Name="Sucursal1">
+                      <Textbox Name="Textbox7">
                         <CanGrow>true</CanGrow>
                         <KeepTogether>true</KeepTogether>
                         <Paragraphs>
                           <Paragraph>
                             <TextRuns>
                               <TextRun>
-                                <Value>=Fields!Sucursal.Value</Value>
+                                <Value />
                                 <Style>
                                   <FontFamily>Tahoma</FontFamily>
                                   <FontWeight>Bold</FontWeight>
@@ -1528,7 +1143,7 @@ select idlocalidad, nombre from localidades</CommandText>
                             <Style />
                           </Paragraph>
                         </Paragraphs>
-                        <rd:DefaultName>Sucursal1</rd:DefaultName>
+                        <rd:DefaultName>Textbox7</rd:DefaultName>
                         <Style>
                           <Border>
                             <Color>#c6daf8</Color>
@@ -1584,7 +1199,6 @@ select idlocalidad, nombre from localidades</CommandText>
                       </Textbox>
                     </CellContents>
                   </TablixHeader>
-                  <KeepWithGroup>Before</KeepWithGroup>
                 </TablixMember>
               </TablixMembers>
             </TablixRowHierarchy>
@@ -1593,7 +1207,6 @@ select idlocalidad, nombre from localidades</CommandText>
             <Left>5.85389mm</Left>
             <Height>23.02708mm</Height>
             <Width>208.06002mm</Width>
-            <ZIndex>1</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -1625,7 +1238,7 @@ select idlocalidad, nombre from localidades</CommandText>
             <Left>0.58539cm</Left>
             <Height>10.16mm</Height>
             <Width>207.47093mm</Width>
-            <ZIndex>2</ZIndex>
+            <ZIndex>1</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -1657,7 +1270,7 @@ select idlocalidad, nombre from localidades</CommandText>
             <Left>162.52488mm</Left>
             <Height>6.35mm</Height>
             <Width>50.8mm</Width>
-            <ZIndex>3</ZIndex>
+            <ZIndex>2</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -1676,7 +1289,7 @@ select idlocalidad, nombre from localidades</CommandText>
             <Left>5.85389mm</Left>
             <Height>12.96457mm</Height>
             <Width>72.60587mm</Width>
-            <ZIndex>4</ZIndex>
+            <ZIndex>3</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -1717,7 +1330,7 @@ select idlocalidad, nombre from localidades</CommandText>
             <Left>151.22014mm</Left>
             <Height>11.02708mm</Height>
             <Width>62.10468mm</Width>
-            <ZIndex>5</ZIndex>
+            <ZIndex>4</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -1761,7 +1374,7 @@ select idlocalidad, nombre from localidades</CommandText>
             <Left>5.85389mm</Left>
             <Height>5.85258mm</Height>
             <Width>207.47093mm</Width>
-            <ZIndex>6</ZIndex>
+            <ZIndex>5</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -1840,22 +1453,12 @@ select idlocalidad, nombre from localidades</CommandText>
   <ReportParameters>
     <ReportParameter Name="FechaDesde">
       <DataType>DateTime</DataType>
-      <DefaultValue>
-        <Values>
-          <Value>01/02/2016 00:00:00</Value>
-        </Values>
-      </DefaultValue>
+      <Nullable>true</Nullable>
       <Prompt>Fecha Desde</Prompt>
-      <ValidValues>
-        <ParameterValues>
-          <ParameterValue>
-            <Value>01/01/2016 00:00:00</Value>
-          </ParameterValue>
-        </ParameterValues>
-      </ValidValues>
     </ReportParameter>
     <ReportParameter Name="FechaHasta">
       <DataType>DateTime</DataType>
+      <Nullable>true</Nullable>
       <DefaultValue>
         <Values>
           <Value>02/28/2016 00:00:00</Value>
@@ -1865,20 +1468,12 @@ select idlocalidad, nombre from localidades</CommandText>
     </ReportParameter>
     <ReportParameter Name="FechaHastaAnterior">
       <DataType>DateTime</DataType>
-      <DefaultValue>
-        <Values>
-          <Value>31/01/2016 0:00:00</Value>
-        </Values>
-      </DefaultValue>
+      <Nullable>true</Nullable>
       <Prompt>Fecha Hasta Anterior</Prompt>
     </ReportParameter>
     <ReportParameter Name="FechaDesdeAnterior">
       <DataType>DateTime</DataType>
-      <DefaultValue>
-        <Values>
-          <Value>01/01/2016 0:00:00</Value>
-        </Values>
-      </DefaultValue>
+      <Nullable>true</Nullable>
       <Prompt>Fecha Desde Anterior</Prompt>
     </ReportParameter>
   </ReportParameters>
