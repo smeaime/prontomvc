@@ -6482,7 +6482,7 @@ select idlocalidad, nombre from localidades</CommandText>
       <Nullable>true</Nullable>
       <DefaultValue>
         <Values>
-          <Value>=Now()</Value>
+          <Value>=DateAdd( "m",-7,Now())</Value>
         </Values>
       </DefaultValue>
       <Prompt>Fecha Desde</Prompt>
@@ -6492,7 +6492,7 @@ select idlocalidad, nombre from localidades</CommandText>
       <Nullable>true</Nullable>
       <DefaultValue>
         <Values>
-          <Value>=Now()</Value>
+          <Value>=DateAdd( "m",-7,Now())</Value>
         </Values>
       </DefaultValue>
       <Prompt>Fecha Hasta</Prompt>
@@ -6502,7 +6502,7 @@ select idlocalidad, nombre from localidades</CommandText>
       <Nullable>true</Nullable>
       <DefaultValue>
         <Values>
-          <Value>=DateAdd( "m",-1,Now())</Value>
+          <Value>=DateAdd( "m",-8,Now())</Value>
         </Values>
       </DefaultValue>
       <Prompt>Fecha Desde Anterior</Prompt>
@@ -6512,7 +6512,7 @@ select idlocalidad, nombre from localidades</CommandText>
       <Nullable>true</Nullable>
       <DefaultValue>
         <Values>
-          <Value>=DateAdd( "m",-1,Now())</Value>
+          <Value>=DateAdd( "m",-8,Now())</Value>
         </Values>
       </DefaultValue>
       <Prompt>Fecha Hasta Anterior</Prompt>
