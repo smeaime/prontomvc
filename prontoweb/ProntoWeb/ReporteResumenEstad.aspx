@@ -42,7 +42,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                         Informe
                     </td>--%>
                     <td style="width: 300px; height: 24px;" align="">
-                        <asp:Button ID="btnRefrescar" Text="Buscar cartas" runat="server" Visible="True" CssClass="butcancela"
+                        <asp:Button ID="btnRefrescar" Text="VER INFORME" runat="server" Visible="True" CssClass="butcancela"
                             Height="32" Width="" />
                         <%--<asp:ListBox ID="ListBox1" runat="server" Width="500px" AutoPostBack="true" Font-Size="14px"
                             Height="650px" Style="margin-left: 0px;">--%>

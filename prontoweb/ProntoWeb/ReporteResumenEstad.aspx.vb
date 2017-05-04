@@ -335,7 +335,7 @@ Namespace ProntoMVC.Reportes
 
             ' reportName = Me.Request.QueryString("ReportName").NullSafeToString()
 
-            reportName = "Williams - Resumen de Totales Generales.rdl"
+            reportName = "Williams - Resumen de Totales Generales"
 
 
             ReportViewerRemoto.ServerReport.ReportPath = "/Pronto informes/" & reportName
@@ -383,112 +383,15 @@ Namespace ProntoMVC.Reportes
                     ' !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
                     ' !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-                    Dim yourParams As ReportParameter() = New ReportParameter(8) {}
-
-                    yourParams(0) = New ReportParameter("webservice", _
-                        ConfigurationManager.AppSettings("UrlDominio") & "ProntoWeb/WebServiceCartas.asmx?op=GetCartas" & _
-                            "&partedelnumero=" & TextBox1.Text & _
-                            "&desde=" & txtFechaDesde.Text & _
-                            "&hasta=" & txtFechaHasta.Text & _
-                            "&quecontenga=" & TextBox1.Text & _
-                            "&iddestino=" & idDestino & _
-                            "&idproducto=" & idArticulo _
-                    )
-
-                    yourParams(7) = New ReportParameter("Consulta", _
-                            " exec wCartasDePorte_TX_InformesCorregido -1 " & _
-                            ", '" & FechaANSI(fechadesde) & "'" & _
-                            ", '" & FechaANSI(fechahasta) & "'" & _
-                            ", -1 , -1 , -1 , -1, -1  " & _
-                            "," & idArticulo & _
-                             ", -1  " & _
-                            "," & idDestino & _
-                            ", -1,-1  " & _
-                            "" _
-                    )
-
-
-
-                    '- Pueden poner el número completo o bien los últimos dígitos
-                    '- El período de fechas a buscar es los últimos 60 días por defecto, pero se tiene que poder cambiar.
-                    '- Filtros: 
-                    '* "Que contenga" buscar en todos los campos de cliente
-                    '* "Destino" 
-                    '* "Producto"
-
-                    Dim consulta As String
-
-
-                    If False Then
-
-                        Dim s = "(ISNULL(FechaDescarga, '1/1/1753') BETWEEN '" & FechaANSI(iisValidSqlDate(txtFechaDesde.Text, #1/1/1753#)) & _
-                                       "'     AND   '" & FechaANSI(iisValidSqlDate(txtFechaHasta.Text, #1/1/2100#)) & "' )"
-                        consulta = strSQLsincronismo() & " WHERE " & s
-                    End If
-
-
-
-                    Dim quecontenga = BuscaIdClientePreciso(TextBox1.Text, HFSC.Value)
-                    Dim quecontenga2 As String
-                    If quecontenga = -1 Then quecontenga2 = TextBox1.Text 'buscar por numero
-
-
-                    consulta = GetDataTableFiltradoYPaginado_CadenaSQL(HFSC.Value, _
-                                 "", "", "", 1, 3000, _
-                               enumCDPestado.Todas, TextBox1.Text, idVendedor, idCorredor, _
-                               idDestinatario, idIntermediario, _
-                                idRComercial, idArticulo, idProcedencia, idDestino, _
-                               IIf(cmbCriterioWHERE.SelectedValue = "todos", CartaDePorteManager.FiltroANDOR.FiltroAND, CartaDePorteManager.FiltroANDOR.FiltroOR), DropDownList2.Text, _
-                               Convert.ToDateTime(iisValidSqlDate(txtFechaDesde.Text, #1/1/1753#)), _
-                               Convert.ToDateTime(iisValidSqlDate(txtFechaHasta.Text, #1/1/2100#)), _
-                               Val(cmbPuntoVenta.SelectedValue), sTitulo, optDivisionSyngenta.SelectedValue, , txtContrato.Text, quecontenga2)
+                    Dim yourParams As ReportParameter() = New ReportParameter(3) {}
 
 
 
 
-
-
-
-                    If False Then
-
-
-                        consulta = CartasLINQlocalSimplificadoTipadoConCalada(HFSC.Value, _
-                                "", "", "", 1, 3000, _
-                               enumCDPestado.Todas, "", idVendedor, idCorredor, _
-                               idDestinatario, idIntermediario, _
-                                idRComercial, idArticulo, idProcedencia, idDestino, _
-                               IIf(cmbCriterioWHERE.SelectedValue = "todos", CartaDePorteManager.FiltroANDOR.FiltroAND, CartaDePorteManager.FiltroANDOR.FiltroOR), DropDownList2.Text, _
-                               Convert.ToDateTime(iisValidSqlDate(txtFechaDesde.Text, #1/1/1753#)), _
-                               Convert.ToDateTime(iisValidSqlDate(txtFechaHasta.Text, #1/1/2100#)), _
-                               Val(cmbPuntoVenta.SelectedValue), sTitulo, optDivisionSyngenta.SelectedValue, , txtContrato.Text).ToString()
-                    End If
-
-                    yourParams(7) = New ReportParameter("Consulta", consulta)
-
-
-                    '                        @IdCartaDePorte INT = NULL,
-                    '    @FechaDesde DATETIME = NULL,
-                    '    @FechaHasta DATETIME = NULL,
-                    '@idVendedor  INT = NULL,
-                    '@idCorredor INT = NULL, 
-                    '@idDestinatario INT = NULL, 
-                    '@idIntermediario INT = NULL,
-                    '@idRComercial INT = NULL, 
-                    '@idArticulo INT = NULL, 
-                    '@idProcedencia INT = NULL,
-                    '@idDestino INT = NULL,
-                    '@top INT = NULL,
-                    '@Estado INT = NULL
-
-
-
-
-                    yourParams(1) = New ReportParameter("sServidor", ConfigurationManager.AppSettings("UrlDominio"))
-                    yourParams(2) = New ReportParameter("idArticulo", idArticulo)
-                    yourParams(3) = New ReportParameter("idDestino", idDestino)
-                    yourParams(4) = New ReportParameter("desde", New DateTime(2012, 11, 1)) ' txtFechaDesde.Text)
-                    yourParams(5) = New ReportParameter("hasta", New DateTime(2012, 11, 1)) ', txtFechaHasta.Text)
-                    yourParams(6) = New ReportParameter("quecontenga", TextBox1.Text)
+                    yourParams(0) = New ReportParameter("FechaDesde", txtFechaDesde.Text) ' )
+                    yourParams(1) = New ReportParameter("FechaHasta", txtFechaHasta.Text) ', txtFechaHasta.Text)
+                    yourParams(2) = New ReportParameter("FechaDesdeAnterior", New DateTime(2012, 11, 1)) ' txtFechaDesde.Text)
+                    yourParams(3) = New ReportParameter("FechaHastaAnterior", New DateTime(2012, 11, 1)) ', txtFechaHasta.Text)
 
 
                     If Diagnostics.Debugger.IsAttached Then
@@ -496,8 +399,6 @@ Namespace ProntoMVC.Reportes
                         'estoy teniendo problemas al usar el reporteador desde un servidor distinto que el que tiene la base
                     End If
 
-
-                    yourParams(8) = New ReportParameter("sServidorSQL", Encriptar(sc))
 
 
                     ReportViewerRemoto.ShowParameterPrompts = False
