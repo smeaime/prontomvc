@@ -7892,8 +7892,8 @@ Public Class LogicaFacturacion
 
         Catch ex As Exception
             'se estaria quejando porque en el IN (123123,4444,......) hay una banda de ids
-            MandarMailDeError("se estaria quejando porque en el IN (123123,4444,......) hay una banda de ids   " + ex.ToString)
-            Falta un indice en wGrillaPersistencia. Lo volaron en alguna actualizacion??
+            MandarMailDeError(" Falta un indice en wGrillaPersistencia. Lo volaron en alguna actualizacion??. O se estaria quejando porque en el IN (123123,4444,......) hay una banda de ids   " + ex.ToString)
+
 
             Throw
 
