@@ -186,7 +186,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                             cellpadding="1" cellspacing="1">
 
 
-                            <tr>
+                          <%--  <tr>
                                 <td class="EncabezadoCell" style="width: 100px; height: 18px;">Que contenga
                                 </td>
                                 <td>
@@ -200,7 +200,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                                     </cc1:AutoCompleteExtender>
                                 </td>
 
-                            </tr>
+                            </tr>--%>
                             <tr>
                                 <td class="EncabezadoCell" style="width: 100px; height: 18px;">Estado
                                 </td>
@@ -260,6 +260,47 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                                         WatermarkText="hasta" WatermarkCssClass="watermarked" />
                                 </td>
                             </tr>
+
+                            <tr>
+                                <td></td>
+                                <td></td>
+
+                                <td class="EncabezadoCell" style="width: 162px; height: 18px;">Período anterior
+                                </td>
+
+                                <td>
+
+
+                                    <asp:TextBox ID="txtFechaDesdeAnterior" runat="server" Width="72px" MaxLength="1" autocomplete="off"
+                                        TabIndex="2" AutoPostBack="false"></asp:TextBox>
+                                    <cc1:CalendarExtender ID="CalendarExtender1" runat="server" Format="dd/MM/yyyy" TargetControlID="txtFechaDesdeAnterior"
+                                        Enabled="True">
+                                    </cc1:CalendarExtender>
+                                    <cc1:MaskedEditExtender ID="MaskedEditExtender1" runat="server" ErrorTooltipEnabled="True"
+                                        Mask="99/99/9999" MaskType="Date" TargetControlID="txtFechaDesdeAnterior" CultureAMPMPlaceholder=""
+                                        CultureCurrencySymbolPlaceholder="" CultureDateFormat="" CultureDatePlaceholder=""
+                                        CultureDecimalPlaceholder="" CultureThousandsPlaceholder="" CultureTimePlaceholder=""
+                                        UserDateFormat="DayMonthYear" Enabled="True">
+                                    </cc1:MaskedEditExtender>
+                                    <cc1:TextBoxWatermarkExtender ID="TextBoxWatermarkExtender1" runat="server" TargetControlID="txtFechaDesdeAnterior"
+                                        WatermarkText="desde" WatermarkCssClass="watermarked" />
+                                    <asp:TextBox ID="txtFechaHastaAnterior" runat="server" Width="72px" MaxLength="1" TabIndex="2"
+                                        AutoPostBack="false"></asp:TextBox>
+                                    <cc1:CalendarExtender ID="CalendarExtender2" runat="server" Format="dd/MM/yyyy" TargetControlID="txtFechaHastaAnterior"
+                                        Enabled="True">
+                                    </cc1:CalendarExtender>
+                                    <cc1:MaskedEditExtender ID="MaskedEditExtender2" runat="server" ErrorTooltipEnabled="True"
+                                        Mask="99/99/9999" MaskType="Date" TargetControlID="txtFechaHastaAnterior" CultureAMPMPlaceholder=""
+                                        CultureCurrencySymbolPlaceholder="" CultureDateFormat="" CultureDatePlaceholder=""
+                                        CultureDecimalPlaceholder="" CultureThousandsPlaceholder="" CultureTimePlaceholder=""
+                                        Enabled="True">
+                                    </cc1:MaskedEditExtender>
+                                    <cc1:TextBoxWatermarkExtender ID="TextBoxWatermarkExtender2" runat="server" TargetControlID="txtFechaHastaAnterior"
+                                        WatermarkText="hasta" WatermarkCssClass="watermarked" />
+
+                                </td>
+                            </tr>
+
                             <tr>
 
                                 <td class="EncabezadoCell" style="width: 160px; height: 18px;">Punto venta
