@@ -167,3 +167,43 @@ Log Entry :
 05/04/2017 15:46:13
 Error in: http://localhost:58911/ProntoWeb/ReporteResumenEstad.aspx. Error Message:Cli 3
 __________________________
+
+Log Entry : 
+05/04/2017 15:59:54
+Error in: http://localhost:58911/ProntoWeb/ReporteResumenEstad.aspx. Error Message:Vamos bien?
+__________________________
+
+Log Entry : 
+05/04/2017 15:59:54
+Error in: http://localhost:58911/ProntoWeb/ReporteResumenEstad.aspx. Error Message:http://bdlconsultores.sytes.net:10080/ReportServer - administrador - .xza2190lkm. - 
+__________________________
+
+Log Entry : 
+05/04/2017 15:59:54
+Error in: http://localhost:58911/ProntoWeb/ReporteResumenEstad.aspx. Error Message:parece
+__________________________
+
+Log Entry : 
+05/04/2017 15:59:55
+Error in: http://localhost:58911/ProntoWeb/ReporteResumenEstad.aspx. Error Message:Cli 3
+__________________________
+
+Log Entry : 
+05/04/2017 16:01:26
+Error in: http://localhost:58911/ProntoWeb/ReporteResumenEstad.aspx. Error Message:Vamos bien?
+__________________________
+
+Log Entry : 
+05/04/2017 16:01:26
+Error in: http://localhost:58911/ProntoWeb/ReporteResumenEstad.aspx. Error Message:http://bdlconsultores.sytes.net:10080/ReportServer - administrador - .xza2190lkm. - 
+__________________________
+
+Log Entry : 
+05/04/2017 16:01:26
+Error in: http://localhost:58911/ProntoWeb/ReporteResumenEstad.aspx. Error Message:parece
+__________________________
+
+Log Entry : 
+05/04/2017 16:01:26
+Error in: http://localhost:58911/ProntoWeb/ReporteResumenEstad.aspx. Error Message:Cli 3
+__________________________
