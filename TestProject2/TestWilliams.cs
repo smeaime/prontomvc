@@ -864,7 +864,7 @@ namespace ProntoMVC.Tests
 
 
 
-  
+
             
         [TestMethod]
         public void OCR_Preprocesamiento_paginacion()
@@ -887,7 +887,7 @@ namespace ProntoMVC.Tests
 
 
             var l = ClassFlexicapture.PreprocesarArchivoSubido(zipFile, "Mariano", DirApp, false, false, false, 1);
-
+            //PreprocesarImagenesTiff
 
             string sError = "";
 
@@ -900,6 +900,26 @@ namespace ProntoMVC.Tests
 
 
 
+
+        
+
+          [TestMethod]
+        public void btnGenerarFacturas_Click()
+        {
+
+              //son todos lios con el KeepSelection q bien pueden venir por problemas con la sesion
+
+//  at ProntoCSharp.FuncionesUIWebCSharpEnDllAparte.b__5(<>f__AnonymousType0`2 <>h__TransparentIdentifier2) in E:\Backup\BDL\ProntoWeb\Soluciones\ClassLibrary1\Class1.cs:line 97
+//at System.Linq.Enumerable.WhereSelectEnumerableIterator`2.MoveNext()
+//at System.Collections.Generic.List`1..ctor(IEnumerable`1 collection)
+//at System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
+//at ProntoCSharp.FuncionesUIWebCSharpEnDllAparte.KeepSelection(GridView grid) in E:\Backup\BDL\ProntoWeb\Soluciones\ClassLibrary1\Class1.cs:line 104
+//at ProntoCSharp.FuncionesUIWebCSharpEnDllAparte.TraerLista(GridView grid) in E:\Backup\BDL\ProntoWeb\Soluciones\ClassLibrary1\Class1.cs:line 58
+//at ProntoCSharp.FuncionesUIWebCSharpEnDllAparte.TraerListaEnStringConComas(GridView grid) in E:\Backup\BDL\ProntoWeb\Soluciones\ClassLibrary1\Class1.cs:line 70
+//at CDPFacturacion.Validar2doPaso(DataTable& tablaEditadaDeFacturasParaGenerar)
+//at CDPFacturacion.btnGenerarFacturas_Click(Object sender, EventArgs e)
+
+          }
 
 
 

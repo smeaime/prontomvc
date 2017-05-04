@@ -143,7 +143,6 @@
       <siteMapNode url="ProntoWeb/Reporte.aspx?ReportName=MapaArgentinaProcedenciaCartasPorte" title="Mapa Comercial"  description="Informes" roles="Administrador,Comercial,WilliamsAdmin,WilliamsFacturacion,WilliamsComercial" />
 
 
-      <siteMapNode url="ProntoWeb/ReporteResumenEstad.aspx" title=""  description="Informes" roles="Administrador,Comercial,WilliamsAdmin,WilliamsFacturacion,WilliamsComercial" />
 
 
     </siteMapNode>
@@ -227,6 +226,8 @@
       <siteMapNode url="ProntoWeb/ControlesDiarios.aspx"  title="Estd. d/descargas"  description="Control" roles="Usuario,Administrador,Comercial,Demo,WilliamsFacturacion" />
 
       <siteMapNode url="ProntoWeb/SituacionCalidad.aspx"  title="Calidad Situacion"  description="" roles="Usuario,Administrador,Comercial,Demo,WilliamsFacturacion" />
+
+          <siteMapNode url="ProntoWeb/ReporteResumenEstad.aspx" title="Resumen Estad."  description="Informes" roles="Administrador,Comercial,WilliamsAdmin,WilliamsFacturacion,WilliamsComercial" />
 
     </siteMapNode>
 

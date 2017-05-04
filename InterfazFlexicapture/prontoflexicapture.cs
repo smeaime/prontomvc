@@ -1168,7 +1168,7 @@ namespace ProntoFlexicapture
                     q.IdCartaDePorte = cdp.Id;
                     q.TextoAux1 = usu;
                     q.Observaciones = cdp.MotivoAnulacion;
-                    nombre original
+                    //nombre original
 
                     db.CartasDePorteLogDeOCRs.Add(q);
                     db.SaveChanges();
@@ -1375,7 +1375,6 @@ namespace ProntoFlexicapture
         public static List<string> PreprocesarImagenesTiff(string archivo, bool bEsFormatoCPTK, bool bGirar180grados, bool bProcesarConOCR)
         {
 
-            fffff
 
 
             if (!Path.GetExtension(archivo).ToLower().Contains("tif"))
@@ -1507,7 +1506,6 @@ namespace ProntoFlexicapture
             foreach (string f in l)
             {
 
-                ddddd
                     // ineficiente?
                 ext = PreprocesarImagenesTiff(f, bEsFormatoCPTK, bGirar180grados, bProcesarConOCR);
 
@@ -2281,7 +2279,7 @@ namespace ProntoFlexicapture
 
                     string NombreUsuario = "";
                     EntidadManager.Tarea(SC, "Log_InsertarRegistro", "OCR",
-                                                      id, 0, DateTime.Now, 0, nombrenuevo,  archivoOriginal.Substring()  50, NombreUsuario,
+                                                      id, 0, DateTime.Now, 0, nombrenuevo, archivoOriginal.Substring(archivoOriginal.Length - 51, 50), NombreUsuario,
                                                      DBNull.Value, DBNull.Value, DBNull.Value, DBNull.Value, DBNull.Value,
                                                     DBNull.Value, DBNull.Value, DBNull.Value, DBNull.Value, DBNull.Value,
                                                     DBNull.Value, DBNull.Value, DBNull.Value);

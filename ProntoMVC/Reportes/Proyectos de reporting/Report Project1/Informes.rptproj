@@ -10,6 +10,10 @@
       <Name>TestHarcodeada.rds</Name>
       <FullPath>TestHarcodeada.rds</FullPath>
     </ProjectItem>
+    <ProjectItem>
+      <Name>WilliamsTest.rds</Name>
+      <FullPath>WilliamsTest.rds</FullPath>
+    </ProjectItem>
   </DataSources>
   <DataSets>
     <ProjectItem>
@@ -487,16 +491,16 @@
       <FullPath>Williams - Nidera con Webservice.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
+      <Name>Williams - Resumen de Totales Generales.rdl</Name>
+      <FullPath>Williams - Resumen de Totales Generales.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
       <Name>Williams - Sincro LaBiznaga.rdl</Name>
       <FullPath>Williams - Sincro LaBiznaga.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
       <Name>Williams - Sincro LaBiznaga2.rdl</Name>
       <FullPath>Williams - Sincro LaBiznaga2.rdl</FullPath>
-    </ProjectItem>
-    <ProjectItem>
-      <Name>Williams - Resumen de Totales Generales.rdl</Name>
-      <FullPath>Williams - Resumen de Totales Generales.rdl</FullPath>
     </ProjectItem>
   </Reports>
   <Configurations>
