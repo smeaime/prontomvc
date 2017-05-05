@@ -455,9 +455,11 @@ namespace ProntoMVC.Controllers
             };
 
             //Returning json data
-            return Json(filesData);
+            //return Json(filesData);
 
-
+            var jsonResult = Json(filesData, JsonRequestBehavior.AllowGet);
+            jsonResult.MaxJsonLength = int.MaxValue;
+            return jsonResult;
         }
 
         [HttpPost]
