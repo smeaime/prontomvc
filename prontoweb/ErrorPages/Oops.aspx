@@ -25,10 +25,10 @@
     <br />
     <br />
     <br />
-    Por favor, llamanos al (011) 4983-0976
+    <%-- Por favor, llamanos al (011) 4983-0976 --%>
     <br />
     <br />
-    El administrador ya recibió detalles del error con tu nombre y la hora <%--con el título "Usuario Hora"--%>
+    El administrador ya recibiï¿½ detalles del error con tu nombre y la hora <%--con el tï¿½tulo "Usuario Hora"--%>
     <br />
     <br /><br /><br />
     BDL Consultores
@@ -48,7 +48,7 @@ Perhaps even provide direct contact information if they're really stuck and desp
 <%--    bdlconsultores@
     <br />
     detalles--%>
-    <%--Podés indicarselo con la descripcion ""
+    <%--Podï¿½s indicarselo con la descripcion ""
     Usuario   hora
     pagina
     Informacion
@@ -57,10 +57,10 @@ Perhaps even provide direct contact information if they're really stuck and desp
     <br />
     <br />
     <br />
-<%--    <asp:HyperLink NavigateUrl="../ProntoWeb/Principal.aspx" Text="Volver a la página principal"
+<%--    <asp:HyperLink NavigateUrl="../ProntoWeb/Principal.aspx" Text="Volver a la pï¿½gina principal"
         runat="server" TabIndex="-1" ForeColor="#2200C1" Font-Size="" ID="lnkBDL"></asp:HyperLink>--%>
 
-        <a href='javascript:history.go(-1)'  >Volver a la página anterior</a>
+        <a href='javascript:history.go(-1)'  >Volver a la pï¿½gina anterior</a>
         
 
 <%--        volve a intentar lo que hiciste
@@ -83,7 +83,7 @@ Perhaps even provide direct contact information if they're really stuck and desp
      
      <asp:LinkButton runat="server"  ID="lnkLogOut" visible=false> Salir del sistema</asp:LinkButton>
 
-    <%--si no eligió empresa, no hay que redirigirlo al principal!!!--%>
+    <%--si no eligiï¿½ empresa, no hay que redirigirlo al principal!!!--%>
 
 
     <%--http://www.bestbusinesssoftware.info/accounting-billing-software/microsoft-office-accounting-express-2008/--%>

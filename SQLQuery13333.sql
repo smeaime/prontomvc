@@ -10,4 +10,4 @@
 
   --sp_helptext PresupuestoObrasNodos_tx_PorNodo 
 
-  PresupuestoObrasNodos_tx_PorNodo -1
+  PresupuestoObrasNodos_tx_PorNodo 0 -1
