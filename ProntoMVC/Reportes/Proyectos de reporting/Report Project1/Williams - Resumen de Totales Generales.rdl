@@ -6410,7 +6410,7 @@ select idlocalidad, nombre from localidades</CommandText>
             </Style>
           </Chart>
         </ReportItems>
-        <Height>323.33505mm</Height>
+        <Height>341.32671mm</Height>
         <Style>
           <Border>
             <Style>None</Style>
