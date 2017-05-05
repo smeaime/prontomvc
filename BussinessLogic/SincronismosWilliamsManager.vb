@@ -5131,7 +5131,7 @@ Namespace Pronto.ERP.Bll
                 '60 – Número de Oblea	Numérico	8	Numero Guía Cerealera, 0 si no existe el dato o 9999999 si no se tiene el numero
 
                 'sb &= "&" & JustificadoDerecha(IIf(iisNull(dr(""), "") = "CO", "Si", "No").ToString, 2)
-                sb &= "&" & IIf(dr("CalidadDe") = 25, "Si", "No") '51
+                sb &= "&" & IIf(iisNull(dr("CalidadDe"), 0) = 25, "Si", "No") '51
                 
                 'Dim subvagon = iisNull(dr("SubNumeroVagon"), "0")
                 'If subvagon = "0" Then subvagon = ""
