@@ -1020,7 +1020,7 @@ select idlocalidad, nombre from localidades</CommandText>
 (
 (Fields!Elevacion.Value + Fields!Entrega.Value) 
 - (Fields!PeriodoAnteriorEntrega.Value + Fields!PeriodoAnteriorElevacion.Value) 
-)&lt;0 
+)&gt;0 
 ,  "Gold","White")</Color>
                                   </Style>
                                 </TextRun>
@@ -1907,7 +1907,7 @@ select idlocalidad, nombre from localidades</CommandText>
 (
 (Fields!Elevacion.Value + Fields!Entrega.Value) 
 - (Fields!PeriodoAnteriorEntrega.Value + Fields!PeriodoAnteriorElevacion.Value) 
-)&lt;0 
+)&gt;0 
 ,  "Gold","White")</Color>
                                   </Style>
                                 </TextRun>
@@ -2635,7 +2635,7 @@ select idlocalidad, nombre from localidades</CommandText>
                                   <Style>
                                     <FontFamily>Tahoma</FontFamily>
                                     <Format>0.00%</Format>
-                                    <Color>= iif( (Fields!Buques.Value - Fields!PeriodoAnteriorBuques.Value)&lt;0 ,  "Gold","White")</Color>
+                                    <Color>= iif( (Fields!Buques.Value - Fields!PeriodoAnteriorBuques.Value)&gt;0 ,  "Gold","White")</Color>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -3511,7 +3511,7 @@ select idlocalidad, nombre from localidades</CommandText>
 (
 (Fields!Elevacion.Value + Fields!Entrega.Value) 
 - (Fields!PeriodoAnteriorEntrega.Value + Fields!PeriodoAnteriorElevacion.Value) 
-)&lt;0 
+)&gt;0 
 ,  "Gold","White")</Color>
                                   </Style>
                                 </TextRun>
@@ -4540,7 +4540,7 @@ select idlocalidad, nombre from localidades</CommandText>
 (
 (Fields!Elevacion.Value + Fields!Entrega.Value) 
 - (Fields!PeriodoAnteriorEntrega.Value + Fields!PeriodoAnteriorElevacion.Value) 
-)&lt;0 
+)&gt;0 
 ,  "Gold","White")</Color>
                                   </Style>
                                 </TextRun>
@@ -6410,7 +6410,7 @@ select idlocalidad, nombre from localidades</CommandText>
             </Style>
           </Chart>
         </ReportItems>
-        <Height>323.33505mm</Height>
+        <Height>341.32671mm</Height>
         <Style>
           <Border>
             <Style>None</Style>
