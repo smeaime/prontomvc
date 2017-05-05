@@ -175,7 +175,7 @@ namespace ProntoMVC.Controllers
 
 
         // Migrar LlenarGrilla de frmPresupuestoObrasArbol del Pronto VB6
-        public virtual string LlenarGrilla(string sidx, string sord, int page, int rows, bool _search, string filters,
+        public virtual ActionResult LlenarGrilla(string sidx, string sord, int page, int rows, bool _search, string filters,
                                                 int Nodo)
         {
 
@@ -405,10 +405,11 @@ namespace ProntoMVC.Controllers
             };
 
 
-            //return Json(jsonData, JsonRequestBehavior.AllowGet);
-            //    var jsonData="";
-            System.Web.Script.Serialization.JavaScriptSerializer jsonSerializer = new System.Web.Script.Serialization.JavaScriptSerializer();
-            return jsonSerializer.Serialize(jsonData);
+            return Json(jsonData, JsonRequestBehavior.AllowGet);
+            
+            //var jsonData="";
+            //System.Web.Script.Serialization.JavaScriptSerializer jsonSerializer = new System.Web.Script.Serialization.JavaScriptSerializer();
+            //return jsonSerializer.Serialize(jsonData);
 
 
         }
