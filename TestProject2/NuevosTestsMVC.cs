@@ -167,7 +167,7 @@ namespace ProntoMVC.Tests
             //var result = c.CargarArbol();
 
 
-            int nodo = -1;
+            int nodo = 0;
             string sidx = "NumeroPedido";
             string sord = "desc";
             int page = 1;
