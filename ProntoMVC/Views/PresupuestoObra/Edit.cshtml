@@ -32,316 +32,326 @@
 </div>
 
 <script type="text/javascript">
-            $(document).ready(function () {
-                var lastSelectedId;
-                var inEdit;
-                grid = $("#Lista");
 
-                $("input[name=gr]:radio").change(function () {
-                    if ($("#r1").attr("checked")) {
-                        $("#Activas").val("SI");
+    function RefrescarArbolPresupuestoObra() {
+        $('#ArbolPresup').trigger("reloadGrid");
+    }
+
+
+    function RecargarCookieArbolPresupuestoObra() {
+        $.ajax({
+            type: "POST",
+            contentType: "application/json; charset=utf-8",
+            //url: ROOT + "Home/TreeGrid_ParaGrillaNoTreeviewEnLocalStorage",
+            url: ROOT + "PresupuestoObra/CargarArbol_PresupuestoObra_ParaGrillaNoTreeviewEnLocalStorage",
+            dataType: "json",
+            success: function (data) {
+                var lala = JSON.stringify(data);
+                // $.cookie("arbol", lala, { path: '/' });
+                localStorage.arbolPresupuestosObra = lala;
+                RefrescarArbolPresupuestoObra();
+
+            }
+        });
+    }
+
+
+    $(document).ready(function () {
+        var lastSelectedId;
+        var inEdit;
+        grid = $("#Lista");
+
+        $("input[name=gr]:radio").change(function () {
+            if ($("#r1").attr("checked")) {
+                $("#Activas").val("SI");
+            }
+            else {
+                $("#Activas").val("NO");
+            }
+            jQuery("#Lista").trigger("reloadGrid");
+        })
+
+        //Para que haga wrap en las celdas
+        $('.ui-jqgrid .ui-jqgrid-htable th div').css('white-space', 'normal');
+
+        $('#Lista').jqGrid({
+            url: '@Url.Action("LlenarGrilla", "PresupuestoObra")',
+            postData: { 'Nodo': 0 },
+            datatype: 'json',
+            mtype: 'POST',
+            colNames: ['', 'IdObra', 'Descripcion', 'Codigo', 'Tipo de obra', 'Activa?', 'Fecha inicio', 'Fecha finalizacion', 'Fecha entrega', 'Jerarquia', 'Jefe regional', 'Jefe local', 'Subjefe',
+                        'Cuenta contable fondo fijo', 'Grupo de obra', 'Articulo asociado', 'Valor de la obra', 'Mon.', 'Direccion', 'Localidad', 'Codigo Postal', 'Provincia', 'Pais', 'Telefono', 'Responsable',
+                        'Lugar de pago', 'Prox. nro. aut. compra', 'Orden sec.', 'Dias liq. certif.', 'Observaciones', 'Archivo adjunto 1', 'Archivo adjunto 2', 'Archivo adjunto 3', 'Archivo adjunto 4',
+                        'Archivo adjunto 5', 'Archivo adjunto 6', 'Archivo adjunto 7', 'Archivo adjunto 8', 'Archivo adjunto 9', 'Archivo adjunto 10'],
+            colModel: [
+                        { name: 'ver', index: 'ver', hidden: false, width: 50 },
+                        { name: 'IdObra', index: 'IdOrdenPago', align: 'center', width: 80, sortable: false, editable: false, search: false, hidden: true },
+                        { name: 'Descripcion', index: 'Descripcion', align: 'left', width: 300, editable: false, search: true, searchoptions: { sopt: ['cn', 'eq'] } },
+                        { name: 'NumeroObra', index: 'NumeroObra', align: 'left', width: 80, editable: false, hidden: false },
+                        { name: 'TipoObraDescripcion', index: 'TipoObraDescripcion', align: 'left', width: 80, editable: false, hidden: false },
+                        { name: 'Activa', index: 'Activa', align: 'center', width: 50, editable: false, hidden: false },
+                        { name: 'FechaInicio', index: 'FechaInicio', width: 80, align: 'center', sorttype: 'date', hidden: false, editable: false, formatoptions: { newformat: 'dd/mm/yy' }, datefmt: 'dd/mm/yy', search: false },
+                        { name: 'FechaFinalizacion', index: 'FechaFinalizacion', width: 80, align: 'center', sorttype: 'date', hidden: false, editable: false, formatoptions: { newformat: 'dd/mm/yy' }, datefmt: 'dd/mm/yy', search: false },
+                        { name: 'FechaEntrega', index: 'FechaEntrega', width: 80, align: 'center', sorttype: 'date', hidden: false, editable: false, formatoptions: { newformat: 'dd/mm/yy' }, datefmt: 'dd/mm/yy', search: false },
+                        { name: 'Jerarquia', index: 'Jerarquia', align: 'center', width: 120, editable: false, hidden: false },
+                        { name: 'JefeRegional', index: 'JefeRegional', align: 'left', width: 120, editable: false, hidden: false },
+                        { name: 'Jefe', index: 'Jefe', align: 'left', width: 120, editable: false, hidden: false },
+                        { name: 'Subjefe', index: 'Subjefe', align: 'left', width: 120, editable: false, hidden: false },
+                        { name: 'CuentaContableFF', index: 'CuentaContableFF', align: 'left', width: 200, editable: false, hidden: false },
+                        { name: 'GrupoObra', index: 'GrupoObra', align: 'left', width: 200, editable: false, hidden: false },
+                        { name: 'ArticuloAsociado', index: 'ArticuloAsociado', align: 'left', width: 300, editable: false, hidden: false },
+                        { name: 'ValorObra', index: 'ValorObra', align: 'right', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'Moneda', index: 'Moneda', align: 'left', width: 40, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'Direccion', index: 'Direccion', align: 'left', width: 200, editable: false, hidden: false },
+                        { name: 'Localidad', index: 'Localidad', align: 'left', width: 200, editable: false, hidden: false },
+                        { name: 'CodigoPostal', index: 'CodigoPostal', align: 'left', width: 80, editable: false, hidden: false },
+                        { name: 'Provincia', index: 'Provincia', align: 'left', width: 200, editable: false, hidden: false },
+                        { name: 'Pais', index: 'Pais', align: 'left', width: 120, editable: false, hidden: false },
+                        { name: 'Telefono', index: 'Telefono', align: 'left', width: 120, editable: false, hidden: false },
+                        { name: 'Responsable', index: 'Responsable', align: 'left', width: 120, editable: false, hidden: false },
+                        { name: 'LugarPago', index: 'LugarPago', align: 'left', width: 120, editable: false, hidden: false },
+                        { name: 'ProximoNumeroAutorizacionCompra', index: 'ProximoNumeroAutorizacionCompra', align: 'right', width: 80, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'OrdenamientoSecundario', index: 'OrdenamientoSecundario', align: 'right', width: 80, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'DiasLiquidacionCertificados', index: 'DiasLiquidacionCertificados', align: 'right', width: 80, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'Observaciones', index: 'Observaciones', align: 'left', width: 200, editable: false, hidden: false },
+                        { name: 'ArchivoAdjunto1', index: 'ArchivoAdjunto1', align: 'left', width: 150, editable: false, hidden: false },
+                        { name: 'ArchivoAdjunto2', index: 'ArchivoAdjunto2', align: 'left', width: 150, editable: false, hidden: false },
+                        { name: 'ArchivoAdjunto3', index: 'ArchivoAdjunto3', align: 'left', width: 150, editable: false, hidden: false },
+                        { name: 'ArchivoAdjunto4', index: 'ArchivoAdjunto4', align: 'left', width: 150, editable: false, hidden: false },
+                        { name: 'ArchivoAdjunto5', index: 'ArchivoAdjunto5', align: 'left', width: 150, editable: false, hidden: false },
+                        { name: 'ArchivoAdjunto6', index: 'ArchivoAdjunto6', align: 'left', width: 150, editable: false, hidden: false },
+                        { name: 'ArchivoAdjunto7', index: 'ArchivoAdjunto7', align: 'left', width: 150, editable: false, hidden: false },
+                        { name: 'ArchivoAdjunto8', index: 'ArchivoAdjunto8', align: 'left', width: 150, editable: false, hidden: false },
+                        { name: 'ArchivoAdjunto9', index: 'ArchivoAdjunto9', align: 'left', width: 150, editable: false, hidden: false },
+                        { name: 'ArchivoAdjunto10', index: 'ArchivoAdjunto10', align: 'left', width: 150, editable: false, hidden: false }
+            ],
+            onSelectRow: function (id) {
+                if (id && id !== lastSelectedId) {
+                    if (typeof lastSelectedId !== "undefined") {
+                        grid.jqGrid('restoreRow', lastSelectedId);
                     }
-                    else {
-                        $("#Activas").val("NO");
+                    lastSelectedId = id;
+                }
+            },
+            pager: $('#ListaPager'),
+            rowNum: 15,
+            rowList: [10, 20, 50, 20000],
+            sortname: 'Descripcion',
+            sortorder: 'asc',
+            viewrecords: true,
+            width: 'auto', // 'auto',
+            autowidth: true,
+            shrinkToFit: false,
+            height: '100%',
+            altRows: false,
+            footerrow: false,
+            userDataOnFooter: true,
+            caption: ''
+        });
+
+
+        jQuery("#Lista").jqGrid('navGrid', '#ListaPager', { refresh: true, add: false, edit: false, del: false }, {}, {}, {}, { sopt: ["cn"], width: 700, closeOnEscape: true, closeAfterSearch: true });
+        //jQuery("#Lista").jqGrid('gridResize', { minWidth: 350, maxWidth: 1500, minHeight: 80, maxHeight: 500 });
+        //jQuery("#Lista").jqGrid('setFrozenColumns');
+
+        $(window).resize(function () {
+            RefrescaAnchoJqgrids();
+        });
+
+        pageLayout.hide('east');
+        pageLayout.hide('south');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        // http: //stackoverflow.com/questions/9192276/send-expanded-treegrid-nodes-in-cookie/9202378#9202378
+        var bPersisteArbol = true; // no me anda... pinta que Oleg en su persistencia, ya tiene todos los nodos cargados, o sea
+        //  que no vuelve a llamar al servidor cuando se aprieta un nodo
+
+        var eslaprimeravez = true;
+
+
+        var $grid = $('#ArbolPresup')
+
+
+        // creo que la posta está por acá
+        // http: //stackoverflow.com/questions/9242601/how-to-remove-flashing-on-persisting-remotely-populated-jqgrid-tree-node/9244023#9244023
+
+        var idsOfExpandedRows = []
+
+        if (bPersisteArbol) {
+
+            var
+                saveObjectInLocalStorage = function (storageItemName, object) {
+                    if (typeof window.localStorage !== 'undefined') {
+                        window.localStorage.setItem(storageItemName, JSON.stringify(object));
                     }
-                    jQuery("#Lista").trigger("reloadGrid");
-                })
+                },
+                removeObjectFromLocalStorage = function (storageItemName) {
+                    if (typeof window.localStorage !== 'undefined') {
+                        window.localStorage.removeItem(storageItemName);
+                    }
+                },
+                getObjectFromLocalStorage = function (storageItemName) {
+                    if (typeof window.localStorage !== 'undefined') {
+                        return JSON.parse(window.localStorage.getItem(storageItemName));
+                    }
+                },
+                myColumnStateName = function (g) {
+                    if (g[0] == undefined) return undefined;
+                    // return window.location.pathname + '#' + g[0].id; // para devolver uno por pagina
+                    return '#' + g[0].id;
 
-                //Para que haga wrap en las celdas
-                $('.ui-jqgrid .ui-jqgrid-htable th div').css('white-space', 'normal');
+                },
+                updateIdsOfExpandedRows = function (id, isExpanded) {
+                    var index = $.inArray(id, idsOfExpandedRows);
+                    if (!isExpanded && index >= 0) {
+                        idsOfExpandedRows.splice(index, 1); // remove id from the list
+                    } else if (index < 0) {
+                        idsOfExpandedRows.push(id);
+                    }
+                    saveObjectInLocalStorage(myColumnStateName($grid), idsOfExpandedRows);
+                },
+                orgExpandRow = $.fn.jqGrid.expandRow,
+                orgCollapseRow = $.fn.jqGrid.collapseRow;
 
-                $('#Lista').jqGrid({
-                    url: '@Url.Action("LlenarGrilla", "PresupuestoObra")',
-                    postData: { 'Nodo': 0 },
-                    datatype: 'json',
-                    mtype: 'POST',
-                    colNames: ['', 'IdObra', 'Descripcion', 'Codigo', 'Tipo de obra', 'Activa?', 'Fecha inicio', 'Fecha finalizacion', 'Fecha entrega', 'Jerarquia', 'Jefe regional', 'Jefe local', 'Subjefe',
-                                'Cuenta contable fondo fijo', 'Grupo de obra', 'Articulo asociado', 'Valor de la obra', 'Mon.', 'Direccion', 'Localidad', 'Codigo Postal', 'Provincia', 'Pais', 'Telefono', 'Responsable',
-                                'Lugar de pago', 'Prox. nro. aut. compra', 'Orden sec.', 'Dias liq. certif.', 'Observaciones', 'Archivo adjunto 1', 'Archivo adjunto 2', 'Archivo adjunto 3', 'Archivo adjunto 4',
-                                'Archivo adjunto 5', 'Archivo adjunto 6', 'Archivo adjunto 7', 'Archivo adjunto 8', 'Archivo adjunto 9', 'Archivo adjunto 10'],
-                    colModel: [
-                                { name: 'ver', index: 'ver', hidden: false, width: 50 },
-                                { name: 'IdObra', index: 'IdOrdenPago', align: 'center', width: 80, sortable: false, editable: false, search: false, hidden: true },
-                                { name: 'Descripcion', index: 'Descripcion', align: 'left', width: 300, editable: false, search: true, searchoptions: { sopt: ['cn', 'eq'] } },
-                                { name: 'NumeroObra', index: 'NumeroObra', align: 'left', width: 80, editable: false, hidden: false },
-                                { name: 'TipoObraDescripcion', index: 'TipoObraDescripcion', align: 'left', width: 80, editable: false, hidden: false },
-                                { name: 'Activa', index: 'Activa', align: 'center', width: 50, editable: false, hidden: false },
-                                { name: 'FechaInicio', index: 'FechaInicio', width: 80, align: 'center', sorttype: 'date', hidden: false, editable: false, formatoptions: { newformat: 'dd/mm/yy' }, datefmt: 'dd/mm/yy', search: false },
-                                { name: 'FechaFinalizacion', index: 'FechaFinalizacion', width: 80, align: 'center', sorttype: 'date', hidden: false, editable: false, formatoptions: { newformat: 'dd/mm/yy' }, datefmt: 'dd/mm/yy', search: false },
-                                { name: 'FechaEntrega', index: 'FechaEntrega', width: 80, align: 'center', sorttype: 'date', hidden: false, editable: false, formatoptions: { newformat: 'dd/mm/yy' }, datefmt: 'dd/mm/yy', search: false },
-                                { name: 'Jerarquia', index: 'Jerarquia', align: 'center', width: 120, editable: false, hidden: false },
-                                { name: 'JefeRegional', index: 'JefeRegional', align: 'left', width: 120, editable: false, hidden: false },
-                                { name: 'Jefe', index: 'Jefe', align: 'left', width: 120, editable: false, hidden: false },
-                                { name: 'Subjefe', index: 'Subjefe', align: 'left', width: 120, editable: false, hidden: false },
-                                { name: 'CuentaContableFF', index: 'CuentaContableFF', align: 'left', width: 200, editable: false, hidden: false },
-                                { name: 'GrupoObra', index: 'GrupoObra', align: 'left', width: 200, editable: false, hidden: false },
-                                { name: 'ArticuloAsociado', index: 'ArticuloAsociado', align: 'left', width: 300, editable: false, hidden: false },
-                                { name: 'ValorObra', index: 'ValorObra', align: 'right', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
-                                { name: 'Moneda', index: 'Moneda', align: 'left', width: 40, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
-                                { name: 'Direccion', index: 'Direccion', align: 'left', width: 200, editable: false, hidden: false },
-                                { name: 'Localidad', index: 'Localidad', align: 'left', width: 200, editable: false, hidden: false },
-                                { name: 'CodigoPostal', index: 'CodigoPostal', align: 'left', width: 80, editable: false, hidden: false },
-                                { name: 'Provincia', index: 'Provincia', align: 'left', width: 200, editable: false, hidden: false },
-                                { name: 'Pais', index: 'Pais', align: 'left', width: 120, editable: false, hidden: false },
-                                { name: 'Telefono', index: 'Telefono', align: 'left', width: 120, editable: false, hidden: false },
-                                { name: 'Responsable', index: 'Responsable', align: 'left', width: 120, editable: false, hidden: false },
-                                { name: 'LugarPago', index: 'LugarPago', align: 'left', width: 120, editable: false, hidden: false },
-                                { name: 'ProximoNumeroAutorizacionCompra', index: 'ProximoNumeroAutorizacionCompra', align: 'right', width: 80, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
-                                { name: 'OrdenamientoSecundario', index: 'OrdenamientoSecundario', align: 'right', width: 80, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
-                                { name: 'DiasLiquidacionCertificados', index: 'DiasLiquidacionCertificados', align: 'right', width: 80, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
-                                { name: 'Observaciones', index: 'Observaciones', align: 'left', width: 200, editable: false, hidden: false },
-                                { name: 'ArchivoAdjunto1', index: 'ArchivoAdjunto1', align: 'left', width: 150, editable: false, hidden: false },
-                                { name: 'ArchivoAdjunto2', index: 'ArchivoAdjunto2', align: 'left', width: 150, editable: false, hidden: false },
-                                { name: 'ArchivoAdjunto3', index: 'ArchivoAdjunto3', align: 'left', width: 150, editable: false, hidden: false },
-                                { name: 'ArchivoAdjunto4', index: 'ArchivoAdjunto4', align: 'left', width: 150, editable: false, hidden: false },
-                                { name: 'ArchivoAdjunto5', index: 'ArchivoAdjunto5', align: 'left', width: 150, editable: false, hidden: false },
-                                { name: 'ArchivoAdjunto6', index: 'ArchivoAdjunto6', align: 'left', width: 150, editable: false, hidden: false },
-                                { name: 'ArchivoAdjunto7', index: 'ArchivoAdjunto7', align: 'left', width: 150, editable: false, hidden: false },
-                                { name: 'ArchivoAdjunto8', index: 'ArchivoAdjunto8', align: 'left', width: 150, editable: false, hidden: false },
-                                { name: 'ArchivoAdjunto9', index: 'ArchivoAdjunto9', align: 'left', width: 150, editable: false, hidden: false },
-                                { name: 'ArchivoAdjunto10', index: 'ArchivoAdjunto10', align: 'left', width: 150, editable: false, hidden: false }
-                    ],
-                    onSelectRow: function (id) {
-                        if (id && id !== lastSelectedId) {
-                            if (typeof lastSelectedId !== "undefined") {
-                                grid.jqGrid('restoreRow', lastSelectedId);
-                            }
-                            lastSelectedId = id;
-                        }
-                    },
-                    pager: $('#ListaPager'),
-                    rowNum: 15,
-                    rowList: [10, 20, 50, 20000],
-                    sortname: 'Descripcion',
-                    sortorder: 'asc',
-                    viewrecords: true,
-                    width: 'auto', // 'auto',
-                    autowidth: true,
-                    shrinkToFit: false,
-                    height: '100%',
-                    altRows: false,
-                    footerrow: false,
-                    userDataOnFooter: true,
-                    caption: ''
-                });
-                jQuery("#Lista").jqGrid('navGrid', '#ListaPager', { refresh: true, add: false, edit: false, del: false }, {}, {}, {}, { sopt: ["cn"], width: 700, closeOnEscape: true, closeAfterSearch: true });
-                //jQuery("#Lista").jqGrid('gridResize', { minWidth: 350, maxWidth: 1500, minHeight: 80, maxHeight: 500 });
-                //jQuery("#Lista").jqGrid('setFrozenColumns');
+            if ($grid[0] != undefined) {
+                idsOfExpandedRows = getObjectFromLocalStorage(myColumnStateName($grid)) || [];
+            }
 
-                $(window).resize(function () {
-                    RefrescaAnchoJqgrids();
-                });
+        }
 
-                pageLayout.hide('east');
-                pageLayout.hide('south');
+
+
+
+
+        // pruebas para árbol usando cookie
+        // con cookies no va. probar usando localstorage http://www.w3schools.com/html/html5_webstorage.asp
+
+        //if ($.cookie("arbol") == null) {
+        //    RecargarCookieArbol();
+        //}
+
+        if (localStorage.arbolPresupuestosObra == null) {
+            RecargarCookieArbolPresupuestoObra();
+        }
+
+
+
+
+
+        if (localStorage.arbolPresupuestosObra != null) {
+            $('#ArbolPresup').jqGrid({
+                data: JSON.parse(localStorage.arbolPresupuestosObra).rows,//$.cookie("arbol"),
+                datatype: "jsonstring", // "local",  //http://stackoverflow.com/questions/6831306/load-local-json-data-in-jqgrid-without-addjsonrows
+                colModel: [
+                    { name: "id", width: 1 },
+                    { name: "descr", width: 400, searchoptions: { sopt: ['cn', 'eq'] } },
+                    { name: "Name2", width: 1, hidden: true },
+                    { name: "Name3", width: 1, hidden: true },
+                    { name: "Name4", width: 1, hidden: true },
+                    { name: "Name5", width: 1, hidden: true },
+                ],
+
+                ignoreCase: true,
+
+                loadComplete: function (data) {
+                    //refrescarFondo_addtree();
+
+                    if (eslaprimeravez) {
+                        cargarTopPositionDelArbol();
+                        eslaprimeravez = false;
+                    }
+
+                    var gridId = $grid.attr('id');
+                    var gridParentWidth = $('#gbox_' + gridId).parent().width();
+                    $('#' + gridId).setGridWidth(gridParentWidth);
+
+                },
+
+                // pager: "#addtree2Pager",
+                rowNum: 500,
+                //rowList: [1, 2, 10],
+                viewrecords: true,
+                height: "auto",
+                //autoencode: true,
+                //gridview: true,
+                //ignoreCase: true,
+
+                //treeGrid: true,
+                caption: ""
+
             });
 
+            $('#ArbolPresup').filterToolbar({
+                stringResult: true, searchOnEnter: true,
+                defaultSearch: 'cn',
+                enableClear: false
+            });
+
+            RefrescarArbolPresupuestoObra();
+
+          
+
+        }
 
 
 
 
 
 
+        ////////////////
+
+
+        if (bPersisteArbol) {
 
 
 
 
-
-
-
-
-            // http: //stackoverflow.com/questions/9192276/send-expanded-treegrid-nodes-in-cookie/9202378#9202378
-            var bPersisteArbol = true; // no me anda... pinta que Oleg en su persistencia, ya tiene todos los nodos cargados, o sea
-            //  que no vuelve a llamar al servidor cuando se aprieta un nodo
-
-            var eslaprimeravez = true;
-
-
-            var $grid = $('#ArbolPresup')
-
-
-            // creo que la posta está por acá
-            // http: //stackoverflow.com/questions/9242601/how-to-remove-flashing-on-persisting-remotely-populated-jqgrid-tree-node/9244023#9244023
-
-            var idsOfExpandedRows = []
-
-            if (bPersisteArbol) {
-
-                var
-                    saveObjectInLocalStorage = function (storageItemName, object) {
-                        if (typeof window.localStorage !== 'undefined') {
-                            window.localStorage.setItem(storageItemName, JSON.stringify(object));
-                        }
-                    },
-                    removeObjectFromLocalStorage = function (storageItemName) {
-                        if (typeof window.localStorage !== 'undefined') {
-                            window.localStorage.removeItem(storageItemName);
-                        }
-                    },
-                    getObjectFromLocalStorage = function (storageItemName) {
-                        if (typeof window.localStorage !== 'undefined') {
-                            return JSON.parse(window.localStorage.getItem(storageItemName));
-                        }
-                    },
-                    myColumnStateName = function (g) {
-                        if (g[0] == undefined) return undefined;
-                        // return window.location.pathname + '#' + g[0].id; // para devolver uno por pagina
-                        return '#' + g[0].id;
-
-                    },
-                    updateIdsOfExpandedRows = function (id, isExpanded) {
-                        var index = $.inArray(id, idsOfExpandedRows);
-                        if (!isExpanded && index >= 0) {
-                            idsOfExpandedRows.splice(index, 1); // remove id from the list
-                        } else if (index < 0) {
-                            idsOfExpandedRows.push(id);
-                        }
-                        saveObjectInLocalStorage(myColumnStateName($grid), idsOfExpandedRows);
-                    },
-                    orgExpandRow = $.fn.jqGrid.expandRow,
-                    orgCollapseRow = $.fn.jqGrid.collapseRow;
-
-                if ($grid[0] != undefined) {
-                    idsOfExpandedRows = getObjectFromLocalStorage(myColumnStateName($grid)) || [];
+            $grid.jqGrid('navButtonAdd', '#paddtree', {
+                caption: "",
+                buttonicon: "ui-icon-closethick",
+                title: "Clear saved grid's settings",
+                onClickButton: function () {
+                    removeObjectFromLocalStorage(myColumnStateName($(this)));
+                    window.location.reload();
                 }
-
-            }
-
-
-
-
-            function RefrescarArbolPresupuestoObra() {
-                $('#ArbolPresup').trigger("reloadGrid");
-            }
-
-
-
-            // pruebas para árbol usando cookie
-            // con cookies no va. probar usando localstorage http://www.w3schools.com/html/html5_webstorage.asp
-
-            //if ($.cookie("arbol") == null) {
-            //    RecargarCookieArbol();
-            //}
-
-            if (localStorage.arbolPresupuestosObra == null) {
-                RecargarCookieArbolPresupuestoObra();
-            }
-
-            function RecargarCookieArbolPresupuestoObra() {
-                $.ajax({
-                    type: "POST",
-                    contentType: "application/json; charset=utf-8",
-                    //url: ROOT + "Home/TreeGrid_ParaGrillaNoTreeviewEnLocalStorage",
-                    url: ROOT + "PresupuestoObra/CargarArbol_PresupuestoObra_ParaGrillaNoTreeviewEnLocalStorage",
-                    dataType: "json",
-                    success: function (data) {
-                        var lala = JSON.stringify(data);
-                        // $.cookie("arbol", lala, { path: '/' });
-                        localStorage.arbolPresupuestosObra = lala;
-                        RefrescarArbolPresupuestoObra();
-
-                    }
-                });
-            }
-
-    
-
-            if (localStorage.arbolPresupuestosObra != null) {
-                $('#ArbolPresup').jqGrid({
-                    data: JSON.parse(localStorage.arbolPresupuestosObra).rows,//$.cookie("arbol"),
-                    datatype: "jsonstring", // "local",  //http://stackoverflow.com/questions/6831306/load-local-json-data-in-jqgrid-without-addjsonrows
-                    colModel: [
-                        { name: "id", width: 1 },
-                        { name: "descr", width: 400, searchoptions: { sopt: ['cn', 'eq'] } },
-                        { name: "Name2", width: 1, hidden: true },
-                        { name: "Name3", width: 1, hidden: true },
-                        { name: "Name4", width: 1, hidden: true },
-                        { name: "Name5", width: 1, hidden: true },
-                    ],
-
-                    ignoreCase: true,
-
-                    loadComplete: function (data) {
-                        //refrescarFondo_addtree();
-
-                        if (eslaprimeravez) {
-                            cargarTopPositionDelArbol();
-                            eslaprimeravez = false;
-                        }
-
-                        var gridId = $grid.attr('id');
-                        var gridParentWidth = $('#gbox_' + gridId).parent().width();
-                        $('#' + gridId).setGridWidth(gridParentWidth);
-
-                    },
-
-                    // pager: "#addtree2Pager",
-                    rowNum: 500,
-                    //rowList: [1, 2, 10],
-                    viewrecords: true,
-                    height: "auto",
-                    //autoencode: true,
-                    //gridview: true,
-                    //ignoreCase: true,
-
-                    //treeGrid: true,
-                    caption: ""
-
-                });
-
-                $grid.filterToolbar({
-                    stringResult: true, searchOnEnter: true,
-                    defaultSearch: 'cn',
-                    enableClear: false
-                });
-
-            }
+            });
+            $.jgrid.extend({
+                expandRow: function (rc) {
+                    //alert('before expandNode: rowid="' + rc._id_ + '", name="' + rc.name + '"');
+                    updateIdsOfExpandedRows(rc._id_, true);
+                    return orgExpandRow.call(this, rc);
+                },
+                collapseRow: function (rc) {
+                    //alert('before collapseNode: rowid="' + rc._id_ + '", name="' + rc.name + '"');
+                    updateIdsOfExpandedRows(rc._id_, false);
+                    return orgCollapseRow.call(this, rc);
+                }
+            });
+        }
 
 
 
 
 
 
-            ////////////////
+        ///////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////////
 
 
-            if (bPersisteArbol) {
-
-
-
-
-                $grid.jqGrid('navButtonAdd', '#paddtree', {
-                    caption: "",
-                    buttonicon: "ui-icon-closethick",
-                    title: "Clear saved grid's settings",
-                    onClickButton: function () {
-                        removeObjectFromLocalStorage(myColumnStateName($(this)));
-                        window.location.reload();
-                    }
-                });
-                $.jgrid.extend({
-                    expandRow: function (rc) {
-                        //alert('before expandNode: rowid="' + rc._id_ + '", name="' + rc.name + '"');
-                        updateIdsOfExpandedRows(rc._id_, true);
-                        return orgExpandRow.call(this, rc);
-                    },
-                    collapseRow: function (rc) {
-                        //alert('before collapseNode: rowid="' + rc._id_ + '", name="' + rc.name + '"');
-                        updateIdsOfExpandedRows(rc._id_, false);
-                        return orgCollapseRow.call(this, rc);
-                    }
-                });
-            }
-
-
-
-
-
-
-            ///////////////////////////////////////////////////////////////////////////////////
-            ///////////////////////////////////////////////////////////////////////////////////
-
-
+    });
 
 
 </script>
