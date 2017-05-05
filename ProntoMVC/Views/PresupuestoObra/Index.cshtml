@@ -9,15 +9,15 @@
 
 <div style="padding-left: 15px; padding-right: 15px;">
     <div class="row-fluid">
-        <div class="span9 lightblue">
+        @*<div class="span9 lightblue">
             <button onclick="window.location.href='@Url.Action("Edit", new { id = -1 })'" class="btn btn-primary">Nueva Obra</button>
-        </div>
-        <div class="span1 lightblue">
+        </div>*@
+        @*<div class="span1 lightblue">
             <input type="radio" id="r1" value="1" name="gr" checked="true"/>Activas
         </div>
         <div class="span1 lightblue">
             <input type="radio" id="r2" value="2" name="gr" />Inactivas
-        </div>
+        </div>*@
     </div>
     <br />
     <table id="Lista" class="scroll" cellpadding="0" cellspacing="0" style="font-size: 16px; "></table>
@@ -115,7 +115,7 @@
             altRows: false,
             footerrow: false,
             userDataOnFooter: true,
-            caption: '<b>PRESUPUESTOS DE OBRA</b>'
+            caption: '<b>PRESUPUESTOS DE OBRA (Obras activas)</b>'
         });
         jQuery("#Lista").jqGrid('navGrid', '#ListaPager', { refresh: true, add: false, edit: false, del: false }, {}, {}, {}, { sopt: ["cn"], width: 700, closeOnEscape: true, closeAfterSearch: true });
         //jQuery("#Lista").jqGrid('gridResize', { minWidth: 350, maxWidth: 1500, minHeight: 80, maxHeight: 500 });

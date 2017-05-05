@@ -51,8 +51,8 @@
                 $('.ui-jqgrid .ui-jqgrid-htable th div').css('white-space', 'normal');
 
                 $('#Lista').jqGrid({
-                    url: '@Url.Action("TT", "Obra")',
-                    postData: { 'Activas': function () { return $("#Activas").val(); } },
+                    url: '@Url.Action("LlenarGrilla", "PresupuestoObra")',
+                    postData: { 'Nodo': 0 },
                     datatype: 'json',
                     mtype: 'POST',
                     colNames: ['', 'IdObra', 'Descripcion', 'Codigo', 'Tipo de obra', 'Activa?', 'Fecha inicio', 'Fecha finalizacion', 'Fecha entrega', 'Jerarquia', 'Jefe regional', 'Jefe local', 'Subjefe',
@@ -122,7 +122,7 @@
                     altRows: false,
                     footerrow: false,
                     userDataOnFooter: true,
-                    caption: '<b>OBRAS</b>'
+                    caption: ''
                 });
                 jQuery("#Lista").jqGrid('navGrid', '#ListaPager', { refresh: true, add: false, edit: false, del: false }, {}, {}, {}, { sopt: ["cn"], width: 700, closeOnEscape: true, closeAfterSearch: true });
                 //jQuery("#Lista").jqGrid('gridResize', { minWidth: 350, maxWidth: 1500, minHeight: 80, maxHeight: 500 });
@@ -210,6 +210,12 @@
 
 
 
+            function RefrescarArbolPresupuestoObra() {
+                $('#ArbolPresup').trigger("reloadGrid");
+            }
+
+
+
             // pruebas para árbol usando cookie
             // con cookies no va. probar usando localstorage http://www.w3schools.com/html/html5_webstorage.asp
 
@@ -217,30 +223,32 @@
             //    RecargarCookieArbol();
             //}
 
-            if (localStorage.arbol == null) {
-                RecargarCookieArbol();
+            if (localStorage.arbolPresupuestosObra == null) {
+                RecargarCookieArbolPresupuestoObra();
             }
 
-            function RecargarCookieArbol() {
+            function RecargarCookieArbolPresupuestoObra() {
                 $.ajax({
                     type: "POST",
                     contentType: "application/json; charset=utf-8",
+                    //url: ROOT + "Home/TreeGrid_ParaGrillaNoTreeviewEnLocalStorage",
                     url: ROOT + "PresupuestoObra/CargarArbol_PresupuestoObra_ParaGrillaNoTreeviewEnLocalStorage",
                     dataType: "json",
                     success: function (data) {
                         var lala = JSON.stringify(data);
                         // $.cookie("arbol", lala, { path: '/' });
-                        localStorage.arbol = lala;
-                        RefrescarArbol();
+                        localStorage.arbolPresupuestosObra = lala;
+                        RefrescarArbolPresupuestoObra();
 
                     }
                 });
             }
 
+    
 
-            if (localStorage.arbol != null) {
-                $grid.jqGrid({
-                    data: JSON.parse(localStorage.arbol).rows,//$.cookie("arbol"),
+            if (localStorage.arbolPresupuestosObra != null) {
+                $('#ArbolPresup').jqGrid({
+                    data: JSON.parse(localStorage.arbolPresupuestosObra).rows,//$.cookie("arbol"),
                     datatype: "jsonstring", // "local",  //http://stackoverflow.com/questions/6831306/load-local-json-data-in-jqgrid-without-addjsonrows
                     colModel: [
                         { name: "id", width: 1 },
