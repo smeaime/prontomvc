@@ -233,7 +233,7 @@ namespace ProntoMVC.Controllers
 
             DataTable oRs = EntidadManager.ExecDinamico(SCsql(), "PresupuestoObrasNodos_tx_PorNodo " + Nodo);
 
-            
+
             // http://stackoverflow.com/questions/597720/what-are-the-differences-between-a-multidimensional-array-and-an-array-of-arrays
             //string[,] TextMatrix = new string[100, 1000];
             string[][] TextMatrix = new string[1000][];
@@ -244,7 +244,7 @@ namespace ProntoMVC.Controllers
 
             foreach (DataRow r in oRs.Rows)
             {
-                TextMatrix[i]=new string[100];
+                TextMatrix[i] = new string[100];
 
                 TextMatrix[i][COL_NODO] = r["IdPresupuestoObrasNodo"].NullSafeToString();
                 TextMatrix[i][COL_NODOPADRE] = (r["IdNodoPadre"] ?? 0).NullSafeToString();
@@ -255,7 +255,7 @@ namespace ProntoMVC.Controllers
                 TextMatrix[i][COL_CANTIDAD] = (r["Cantidad"] ?? 0).NullSafeToString();
                 TextMatrix[i][COL_UNIMEDIDA] = (r["Unidad"] ?? "").NullSafeToString();
                 TextMatrix[i][COL_IMPORTE] = (r["Importe"] ?? 0).NullSafeToString();
-                TextMatrix[i][COL_TOTAL] = (Convert.ToInt16(r["Cantidad"] ?? 0) * Convert.ToInt16(r["Importe"] ?? 0)).NullSafeToString();
+                TextMatrix[i][COL_TOTAL] = (Convert.ToInt32(r["Cantidad"] == DBNull.Value ? 0 : r["Cantidad"]) * Convert.ToInt32(r["Importe"] == DBNull.Value ? 0 : r["Importe"])).NullSafeToString();
 
                 //                const int TIPO_OBRA = 1;
                 //const int TIPO_PRESUPUESTO = 2;
@@ -359,10 +359,10 @@ namespace ProntoMVC.Controllers
 
                     }
 
-                    i = i + 1;
 
                 }
 
+                i = i + 1;
 
             }
 
@@ -381,7 +381,7 @@ namespace ProntoMVC.Controllers
                 page = 0, //currentPage,
                 records = TextMatrix.ToList().Count, //totalRecords,
                 rows = (from a in TextMatrix.ToList()
-                        where a!=null
+                        where a != null
                         select new jqGridRowJson
                         {
                             id = a[0], // a.IdCartaDePorte.ToString(),
@@ -395,6 +395,17 @@ namespace ProntoMVC.Controllers
 
                                "<a href=\"CartaDePorte.aspx?Id=" +  a[0] + "\"  target=\"_blank\" >" +  a[0] + "</>" ,  // "<a href=\"CartaDePorte.aspx?Id=" +  a.IdCartaDePorte + "\"  target=\"_blank\" >" +  a.NumeroCartaEnTextoParaBusqueda.NullSafeToString() + "</>" ,
 
+                a[COL_NODO] ,
+                a[COL_NODOPADRE] ,
+                a[COL_DEPTH] ,
+                a[COL_LINEAGE] ,
+                a[COL_OBRA] ,
+                a[COL_ITEM] ,
+                a[COL_CANTIDAD] ,
+                a[COL_UNIMEDIDA] ,
+                a[COL_IMPORTE] ,
+                a[COL_TOTAL] 
+
                                 //a.Turno, //turno
 
                                 //(a.Situacion ?? 0).NullSafeToString(),
@@ -407,7 +418,7 @@ namespace ProntoMVC.Controllers
 
 
             return Json(jsonData, JsonRequestBehavior.AllowGet);
-            
+
             //var jsonData="";
             //System.Web.Script.Serialization.JavaScriptSerializer jsonSerializer = new System.Web.Script.Serialization.JavaScriptSerializer();
             //return jsonSerializer.Serialize(jsonData);
@@ -661,9 +672,12 @@ namespace ProntoMVC.Controllers
             };
 
             //Returning json data
-            return Json(filesData);
+            //return Json(filesData);
+            //return Json(filesData, JsonRequestBehavior.AllowGet);
 
-
+            var jsonResult = Json(filesData, JsonRequestBehavior.AllowGet);
+            jsonResult.MaxJsonLength = int.MaxValue;
+            return jsonResult;
 
         }
 
@@ -697,122 +711,45 @@ namespace ProntoMVC.Controllers
                 campo = "true";
             }
 
-            var data = (from a in db.Obras.Where(p => (p.Activa ?? "NO") == activas).AsQueryable()
-                        from b in db.Clientes.Where(o => o.IdCliente == a.IdCliente).DefaultIfEmpty()
-                        from c in db.UnidadesOperativas.Where(o => o.IdUnidadOperativa == a.IdUnidadOperativa).DefaultIfEmpty()
-                        from d in db.Monedas.Where(o => o.IdMoneda == a.IdMonedaValorObra).DefaultIfEmpty()
-                        from e in db.Articulos.Where(o => o.IdArticulo == a.IdArticuloAsociado).DefaultIfEmpty()
-                        from f in db.GruposObras.Where(o => o.IdGrupoObra == a.IdGrupoObra).DefaultIfEmpty()
-                        from g in db.Cuentas.Where(o => o.IdCuenta == a.IdCuentaContableFF).DefaultIfEmpty()
-                        from h in db.Localidades.Where(o => o.IdLocalidad == a.IdLocalidad).DefaultIfEmpty()
-                        from i in db.Provincias.Where(o => o.IdProvincia == a.IdProvincia).DefaultIfEmpty()
-                        from j in db.Paises.Where(o => o.IdPais == a.IdPais).DefaultIfEmpty()
-                        from k in db.Empleados.Where(o => o.IdEmpleado == a.IdJefeRegional).DefaultIfEmpty()
-                        from l in db.Empleados.Where(o => o.IdEmpleado == a.IdJefe).DefaultIfEmpty()
-                        from m in db.Empleados.Where(o => o.IdEmpleado == a.IdSubjefe).DefaultIfEmpty()
-                        select new
-                        {
-                            a.IdObra,
-                            a.Descripcion,
-                            a.NumeroObra,
-                            TipoObraDescripcion = (a.TipoObra ?? 1) == 1 ? "Taller" : ((a.TipoObra ?? 1) == 2 ? "Montaje" : ((a.TipoObra ?? 1) == 3 ? "Servicio" : "")),
-                            a.Activa,
-                            a.FechaInicio,
-                            a.FechaFinalizacion,
-                            a.FechaEntrega,
-                            a.Jerarquia,
-                            JefeRegional = k != null ? k.Nombre : "",
-                            Jefe = l != null ? l.Nombre : "",
-                            Subjefe = m != null ? m.Nombre : "",
-                            CuentaContableFF = g != null ? g.Descripcion : "",
-                            GrupoObra = f != null ? f.Descripcion : "",
-                            ArticuloAsociado = e != null ? e.Descripcion : "",
-                            a.ValorObra,
-                            Moneda = d != null ? d.Abreviatura : "",
-                            a.Direccion,
-                            Localidad = h != null ? h.Nombre : "",
-                            a.CodigoPostal,
-                            Provincia = i != null ? i.Nombre : "",
-                            Pais = j != null ? j.Descripcion : "",
-                            a.Telefono,
-                            a.Responsable,
-                            a.LugarPago,
-                            a.ProximoNumeroAutorizacionCompra,
-                            a.OrdenamientoSecundario,
-                            a.ActivarPresupuestoObra,
-                            a.DiasLiquidacionCertificados,
-                            a.Observaciones,
-                            a.ArchivoAdjunto1,
-                            a.ArchivoAdjunto2,
-                            a.ArchivoAdjunto3,
-                            a.ArchivoAdjunto4,
-                            a.ArchivoAdjunto5,
-                            a.ArchivoAdjunto6,
-                            a.ArchivoAdjunto7,
-                            a.ArchivoAdjunto8,
-                            a.ArchivoAdjunto9,
-                            a.ArchivoAdjunto10
-                        }).Where(campo).AsQueryable();
 
-            int totalRecords = data.Count();
-            int totalPages = (int)Math.Ceiling((float)totalRecords / (float)pageSize);
 
-            var data1 = (from a in data select a)
-                        .OrderBy(x => x.Descripcion)
+            DataTable oRs = EntidadManager.GetStoreProcedure(SCsql(), "obras_tx_activas ", "SI", "SI");
+
+
+
+
+            //int totalRecords = data.Count();
+            //int totalPages = (int)Math.Ceiling((float)totalRecords / (float)pageSize);
+
+            //var data1 = (from a in data select a)
+            //            .OrderBy(x => x.Descripcion)
 
 //.Skip((currentPage - 1) * pageSize).Take(pageSize)
-.ToList();
+//.ToList();
 
             var jsonData = new jqGridJson()
             {
-                total = totalPages,
-                page = currentPage,
-                records = totalRecords,
-                rows = (from a in data1
+                total = 1,
+                page = 0,
+                records = oRs.Rows.Count,
+                rows = (from DataRow a in oRs.Rows
                         select new jqGridRowJson
                         {
-                            id = a.IdObra.ToString(),
+                            id = a[0].NullSafeToString(),
                             cell = new string[] { 
-                                "<a href="+ Url.Action("Edit",new {id = a.IdObra} ) +" >Editar</>",
-                                a.IdObra.NullSafeToString(),
-                                a.Descripcion.NullSafeToString(),
-                                a.NumeroObra.NullSafeToString(),
-                                a.TipoObraDescripcion.NullSafeToString(),
-                                a.Activa.NullSafeToString(),
-                                a.FechaInicio == null ? "" : a.FechaInicio.GetValueOrDefault().ToString("dd/MM/yyyy"),
-                                a.FechaFinalizacion == null ? "" : a.FechaFinalizacion.GetValueOrDefault().ToString("dd/MM/yyyy"),
-                                a.FechaEntrega == null ? "" : a.FechaEntrega.GetValueOrDefault().ToString("dd/MM/yyyy"),
-                                a.Jerarquia.NullSafeToString(),
-                                a.JefeRegional.NullSafeToString(),
-                                a.Jefe.NullSafeToString(),
-                                a.Subjefe.NullSafeToString(),
-                                a.CuentaContableFF.NullSafeToString(),
-                                a.GrupoObra.NullSafeToString(),
-                                a.ArticuloAsociado.NullSafeToString(),
-                                a.ValorObra.NullSafeToString(),
-                                a.Moneda.NullSafeToString(),
-                                a.Direccion.NullSafeToString(),
-                                a.Localidad.NullSafeToString(),
-                                a.CodigoPostal.NullSafeToString(),
-                                a.Provincia.NullSafeToString(),
-                                a.Pais.NullSafeToString(),
-                                a.Telefono.NullSafeToString(),
-                                a.Responsable.NullSafeToString(),
-                                a.LugarPago.NullSafeToString(),
-                                a.ProximoNumeroAutorizacionCompra.NullSafeToString(),
-                                a.OrdenamientoSecundario.NullSafeToString(),
-                                a.DiasLiquidacionCertificados.NullSafeToString(),
-                                a.Observaciones.NullSafeToString(),
-                                a.ArchivoAdjunto1.NullSafeToString(),
-                                a.ArchivoAdjunto2.NullSafeToString(),
-                                a.ArchivoAdjunto3.NullSafeToString(),
-                                a.ArchivoAdjunto4.NullSafeToString(),
-                                a.ArchivoAdjunto5.NullSafeToString(),
-                                a.ArchivoAdjunto6.NullSafeToString(),
-                                a.ArchivoAdjunto7.NullSafeToString(),
-                                a.ArchivoAdjunto8.NullSafeToString(),
-                                a.ArchivoAdjunto9.NullSafeToString(),
-                                a.ArchivoAdjunto10.NullSafeToString()
+                                "<a href="+ Url.Action("Edit",new {id = a[0]} ) +" >Editar</>",
+                                a[0].NullSafeToString(),
+                                a[1].NullSafeToString(),
+                                a[2].NullSafeToString(),
+                                a[3].NullSafeToString(),
+                                a[4].NullSafeToString(),
+                                a[5].NullSafeToString(),
+                                a[6].NullSafeToString(),
+                                a[7].NullSafeToString(),
+                                a[8].NullSafeToString(),
+                                a[9].NullSafeToString(),
+                                a[10].NullSafeToString(),
+                   
                             }
                         }).ToArray()
             };
