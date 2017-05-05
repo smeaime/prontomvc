@@ -480,8 +480,8 @@ namespace ProntoMVC.Controllers
           */
 
             // PresupuestoObrasNodos_Inicializar
-            int IdObra = -1;
-            DataTable oRs = EntidadManager.ExecDinamico(SCsql(), "PresupuestoObrasNodos_tx_ParaArbol " + IdObra);
+            int IdObra = 77;
+            // DataTable oRs = EntidadManager.ExecDinamico(SCsql(), "PresupuestoObrasNodos_tx_ParaArbol " + IdObra); // esta llamada se hace en el  TablaTree_PresupuestoObra
 
 
 
@@ -604,15 +604,14 @@ namespace ProntoMVC.Controllers
                 rows = (from child in q
                         select new
                         {
-                            descr = (new String('_', ((child.IdItem.Replace("-", "").Length) / 2) * 5)).Replace("_", "&nbsp;") +
-                                    (((child.Link ?? "") == "") ? child.Descripcion : child.Link), // Correspond to the colmodel NAME in javascript
+                            id = child.IdItem,
+                            descr =child.Descripcion , // Correspond to the colmodel NAME in javascript
 
                             // The next one correspond to the colmodel ID in javascript Id
                             // If we are are the root level the [nodeid] will be empty as i explained above
                             // So the id will be clean. Following the example, just 5
                             // If we are expanding the Agent 5 so, the [nodeid] will not be empty
                             // so we take the Agent id, 5 and concatenate the child id, so 5_25
-                            child.IdItem,
                             child.Link, //Correspond to the colmodel ROLE in javascript 
 
 
@@ -628,7 +627,7 @@ namespace ProntoMVC.Controllers
                             //////////////////////////////////////////////////////////////////////////
                             //LEVEL: This is the actual level of the child so, root will be 0, that's why i'm adding
                             // one to the level above.
-                            l = ((child.IdItem.Replace("-", "").Length) / 2 - 2).ToString(),  // level.ToString(),
+                            level = (child.Link.Count(f => f == '/') - 1).ToString(),  // level.ToString(),
 
 
                             //////////////////////////////////////////////////////////////////////////
@@ -636,7 +635,7 @@ namespace ProntoMVC.Controllers
                             //PARENT ID: If we are at the root [nodeid] will be empty so the parent id is ""
                             // In case of a service writter the parent id is the nodeid, because is the node
                             // we are expanding
-                            parentid = child.ParentId ?? string.Empty, //  child.ParentId,  // collection["nodeid"] ?? string.Empty,
+                            parent = child.ParentId , //  child.ParentId,  // collection["nodeid"] ?? string.Empty,
 
 
                             //////////////////////////////////////////////////////////////////////////
@@ -646,18 +645,18 @@ namespace ProntoMVC.Controllers
                             // The Child.Role the role name, so i know that if it's a ServiceWriter i'm the last level
                             // so it's not expandable, the optimal way is to get from the database store procedure
                             // if the leaf has children.
-                            espadre = (child.EsPadre != "SI" ? "true" : "false").ToString(),
+                            isLeaf = (child.EsPadre != "SI" ? "true" : "false").ToString(),
 
 
                             //////////////////////////////////////////////////////////////////////////
                             //////////////////////////////////////////////////////////////////////////
                             //IS EXPANDED: I use that is always false,
-                            iditem = (v.Contains(child.IdItem) ? "true" : "false").ToString()
-
+                            expanded = (v.Contains(child.IdItem) ? "true" : "false").ToString()
+                         
                             //////////////////////////////////////////////////////////////////////////
                             //////////////////////////////////////////////////////////////////////////
                             // LOADED: si está puesto en true, no vuelve a llamar al servidor
-                            // , "false" 
+                             , loaded= "true" 
 
                             // http://stackoverflow.com/questions/6508838/in-jqgrid-treegrid-how-can-i-specify-that-i-want-to-load-the-entire-tree-up-fro
                             //                If I understand your question correct, the most important lines of the Tree Grid code to answer on 

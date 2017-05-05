@@ -243,66 +243,165 @@
         //    RecargarCookieArbol();
         //}
 
-        if (localStorage.arbolPresupuestosObra == null) {
+        if (localStorage.arbolPresupuestosObra == null || true) {
             RecargarCookieArbolPresupuestoObra();
         }
 
 
 
 
+       // http://stackoverflow.com/questions/7330572/sorting-of-jqgrid-v4-1-2-treegrid-not-working-with-ajacency-model/7332627#7332627
 
         if (localStorage.arbolPresupuestosObra != null) {
-            $('#ArbolPresup').jqGrid({
-                data: JSON.parse(localStorage.arbolPresupuestosObra).rows,//$.cookie("arbol"),
-                datatype: "jsonstring", // "local",  //http://stackoverflow.com/questions/6831306/load-local-json-data-in-jqgrid-without-addjsonrows
+
+
+            var mydata = [
+        { id: "1", name: "Cash", num: "100", debit: "400.00", credit: "250.00", balance: "150.00", enbl: "1", level: "0", parent: "null", isLeaf: false, expanded: false, loaded: true },
+        { id: "2", name: "Cash 1", num: "1", debit: "300.00", credit: "200.00", balance: "100.00", enbl: "0", level: "1", parent: "1", isLeaf: false, expanded: false, loaded: true },
+        { id: "3", name: "Sub Cash 1", num: "1", debit: "300.00", credit: "200.00", balance: "100.00", enbl: "1", level: "2", parent: "2", isLeaf: true, expanded: false, loaded: true },
+        { id: "4", name: "Cash 2", num: "2", debit: "100.00", credit: "50.00", balance: "50.00", enbl: "0", level: "1", parent: "1", isLeaf: true, expanded: false, loaded: true },
+        { id: "5", name: "Bank\'s", num: "200", debit: "1500.00", credit: "1000.00", balance: "500.00", enbl: "1", level: "0", parent: "null", isLeaf: false, expanded: true, loaded: true },
+        { id: "6", name: "Bank 1", num: "1", debit: "500.00", credit: "0.00", balance: "500.00", enbl: "0", level: "1", parent: "5", isLeaf: true, expanded: false, loaded: true },
+        { id: "7", name: "Bank 2", num: "2", debit: "1000.00", credit: "1000.00", balance: "0.00", enbl: "1", level: "1", parent: "5", isLeaf: true, expanded: false, loaded: true },
+        { id: "8", name: "Fixed asset", num: "300", debit: "0.00", credit: "1000.00", balance: "-1000.00", enbl: "0", level: "0", parent: "null", isLeaf: true, expanded: false, loaded: true }
+            ],
+    grid = $('#ArbolPresup')
+
+            $.jgrid.formatter.integer.thousandsSeparator = ',';
+            $.jgrid.formatter.number.thousandsSeparator = ',';
+            $.jgrid.formatter.currency.thousandsSeparator = ',';
+            grid.jqGrid({
+                datatype: "jsonstring",
+                // datastr: mydata,
+                datastr: JSON.parse(localStorage.arbolPresupuestosObra).rows,
+                colNames: [/*"Id", */"Account" , "Acc Num" /*, "Debit" , "Credit", "Balance", "Enabled"*/],
                 colModel: [
-                    { name: "id", width: 1 },
-                    { name: "descr", width: 400, searchoptions: { sopt: ['cn', 'eq'] } },
-                    { name: "Name2", width: 1, hidden: true },
-                    { name: "Name3", width: 1, hidden: true },
-                    { name: "Name4", width: 1, hidden: true },
-                    { name: "Name5", width: 1, hidden: true },
+                    //{name: 'id', index: 'id', width: 1, hidden: true, key: true},
+                    { name: 'descr', index: 'descr', width: 250 },
+                    // { name: 'IdItem', index: 'IdItem', width: 80, formatter: 'integer', sorttype: 'int', align: 'center' },
+                    { name: 'Link', index: 'Link', width: 80, formatter: 'number', sorttype: 'number', align: 'right', hidden: true },
+                    //{ name: 'credit', index: 'credit', width: 80, formatter: 'number', sorttype: 'number', align: 'right' },
+                    //{ name: 'balance', index: 'balance', width: 80, formatter: 'number', sorttype: 'number', align: 'right' },
+                    //{
+                    //    name: 'enbl', index: 'enbl', width: 60, align: 'center',
+                    //    formatter: 'checkbox', editoptions: { value: '1:0' },
+                    //    formatoptions: { disabled: false }
+                    //}
                 ],
-
-                ignoreCase: true,
-
-                loadComplete: function (data) {
-                    //refrescarFondo_addtree();
-
-                    if (eslaprimeravez) {
-                        cargarTopPositionDelArbol();
-                        eslaprimeravez = false;
-                    }
-
-                    var gridId = $grid.attr('id');
-                    var gridParentWidth = $('#gbox_' + gridId).parent().width();
-                    $('#' + gridId).setGridWidth(gridParentWidth);
-
-                },
-
-                // pager: "#addtree2Pager",
-                rowNum: 500,
-                //rowList: [1, 2, 10],
-                viewrecords: true,
-                height: "auto",
-                //autoencode: true,
-                //gridview: true,
-                //ignoreCase: true,
-
-                //treeGrid: true,
-                caption: ""
-
+                height: 'auto',
+                gridview: true,
+                rowNum: 10000,
+                sortname: 'id',
+                treeGrid: true,
+                treeGridModel: 'adjacency',
+                treedatatype: "local",
+                ExpandColumn: 'descr',
+                //caption: "Demonstrate how to use Tree Grid for the Adjacency Set Model",
+                jsonReader: {
+                    repeatitems: false,
+                    root: function (obj) { return obj; },
+                    page: function () { return 1; },
+                    total: function () { return 1; },
+                    records: function (obj) { return obj.length; }
+                }
             });
 
-            $('#ArbolPresup').filterToolbar({
-                stringResult: true, searchOnEnter: true,
-                defaultSearch: 'cn',
-                enableClear: false
-            });
+
+
+
+            //$('#ArbolPresup').jqGrid({
+            //    datastr: mydataOleg,
+            //    //  data: JSON.parse(localStorage.arbolPresupuestosObra).rows,
+            //    datatype: "jsonstring", // "local",  //http://stackoverflow.com/questions/6831306/load-local-json-data-in-jqgrid-without-addjsonrows
+
+            //    /*
+            //    colModel: [
+            //        { name: "id", width: 1 },
+            //        { name: "descr", index: 'descr', width: 400, searchoptions: { sopt: ['cn', 'eq'] } },
+            //        { name: "Name2", width: 1, hidden: true },
+            //        { name: "Name3", width: 1, hidden: true },
+            //        { name: "Name4", width: 1, hidden: true },
+            //        { name: "Name5", width: 1, hidden: true },
+            //    ],
+            //    */
+
+            //    colNames: ["Id", "Account", "Acc Num", "Debit", "Credit", "Balance", "Enabled"],
+            //    colModel: [
+            //        { name: 'id', index: 'id', width: 1, hidden: true, key: true },
+            //        { name: 'name', index: 'name', width: 180 },
+            //        { name: 'num', index: 'acc_num', width: 80, align: "center" },
+            //        { name: 'debit', index: 'debit', width: 80, align: "right" },
+            //        { name: 'credit', index: 'credit', width: 80, align: "right" },
+            //        { name: 'balance', index: 'balance', width: 80, align: "right" },
+            //        {
+            //            name: 'enbl', index: 'enbl', width: 60, align: 'center',
+            //            formatter: 'checkbox', editoptions: { value: '1:0' },
+            //            formatoptions: { disabled: false }
+            //        }
+            //    ],
+
+
+
+            //    ignoreCase: true,
+
+            //    loadComplete: function (data) {
+            //      /*
+            //        if (eslaprimeravez) {
+            //            cargarTopPositionDelArbol();
+            //            eslaprimeravez = false;
+            //        }
+
+            //        var gridId = $grid.attr('id');
+            //        var gridParentWidth = $('#gbox_' + gridId).parent().width();
+            //        $('#' + gridId).setGridWidth(gridParentWidth);
+            //        */
+            //    },
+
+            //    /*
+            //    // pager: "#addtree2Pager",
+            //    rowNum: 500,
+            //    //rowList: [1, 2, 10],
+            //    viewrecords: true,
+            //    height: "auto",
+            //    //autoencode: true,
+            //    //gridview: true,
+            //    //ignoreCase: true,
+
+            //    //treeGrid: true,
+            //    caption: ""
+            //    */
+
+
+            //    height: 'auto',
+            //gridview: true,
+            //rowNum: 10000,
+            //sortname: 'id',
+            //treeGrid: true,
+            //treeGridModel: 'adjacency',
+            //treedatatype: "local",
+            //ExpandColumn: 'descr',
+            ////caption: "",
+            //jsonReader: {
+            //    repeatitems: false,
+            //    root: function (obj) { return obj; },
+            //    page: function (obj) { return 1; },
+            //    total: function (obj) { return 1; },
+            //    records: function (obj) { return obj.length; }
+            //}
+
+
+
+            //});
+
+            //$('#ArbolPresup').filterToolbar({
+            //    stringResult: true, searchOnEnter: true,
+            //    defaultSearch: 'cn',
+            //    enableClear: false
+            //});
 
             RefrescarArbolPresupuestoObra();
 
-          
+
 
         }
 
