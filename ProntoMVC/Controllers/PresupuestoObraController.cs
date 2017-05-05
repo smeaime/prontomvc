@@ -244,6 +244,7 @@ namespace ProntoMVC.Controllers
 
             foreach (DataRow r in oRs.Rows)
             {
+                TextMatrix[i]=new string[100];
 
                 TextMatrix[i][COL_NODO] = r["IdPresupuestoObrasNodo"].NullSafeToString();
                 TextMatrix[i][COL_NODOPADRE] = (r["IdNodoPadre"] ?? 0).NullSafeToString();
@@ -416,11 +417,11 @@ namespace ProntoMVC.Controllers
 
 
 
-        
+
         [HttpPost]
         public virtual ActionResult CargarArbol_PresupuestoObra_ParaGrillaNoTreeviewEnLocalStorage(FormCollection collection)
         {
- 
+
 
             /*   
       Dim oRs As ADOR.Recordset
@@ -468,7 +469,7 @@ namespace ProntoMVC.Controllers
           */
 
             // PresupuestoObrasNodos_Inicializar
-            int IdObra= -1;
+            int IdObra = -1;
             DataTable oRs = EntidadManager.ExecDinamico(SCsql(), "PresupuestoObrasNodos_tx_ParaArbol " + IdObra);
 
 
@@ -592,7 +593,7 @@ namespace ProntoMVC.Controllers
                 rows = (from child in q
                         select new
                         {
-                            descr = (new String('_', ((child.IdItem.Replace("-", "").Length) / 2 ) * 5)).Replace("_", "&nbsp;") +
+                            descr = (new String('_', ((child.IdItem.Replace("-", "").Length) / 2) * 5)).Replace("_", "&nbsp;") +
                                     (((child.Link ?? "") == "") ? child.Descripcion : child.Link), // Correspond to the colmodel NAME in javascript
 
                             // The next one correspond to the colmodel ID in javascript Id
