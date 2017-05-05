@@ -5671,14 +5671,19 @@ Public Class LogicaFacturacion
                         'Elevacion: 1                         'Entrega: 3                         'Buque: 9
                         Dim tiponegocio As Integer = 3
 
-                        If listEmbarques.Count > 0 Then
-                            tiponegocio = 9 '                         'Elevacion: 1   'Entrega: 3  'Buque: 9
-                        ElseIf oListaCDP(0).Exporta = "SI" Then
-                            tiponegocio = 1
-                        Else
-                            tiponegocio = 3
-                        End If
-                        .Fields("IdTipoNegocioVentas").Value = tiponegocio    'Elevacion: 1   'Entrega: 3  'Buque: 9
+                        Try
+
+                            If listEmbarques.Count > 0 Then
+                                tiponegocio = 9 '                         'Elevacion: 1   'Entrega: 3  'Buque: 9
+                            ElseIf oListaCDP(0).Exporta Then
+                                tiponegocio = 1
+                            Else
+                                tiponegocio = 3
+                            End If
+                            .Fields("IdTipoNegocioVentas").Value = tiponegocio    'Elevacion: 1   'Entrega: 3  'Buque: 9
+                        Catch ex As Exception
+                            ErrHandler2.WriteError("Falla la marca de IdTipoNegocioVentas. " + ex.ToString())
+                        End Try
 
 
 
