@@ -2223,7 +2223,7 @@ namespace ProntoMVC.Controllers
 
 
 
-            int obra = -1; 
+            int obra = 77; 
                 //obra= parentId;
 
             DataTable dt = Pronto.ERP.Bll.EntidadManager.GetStoreProcedure(SCsql(), "PresupuestoObrasNodos_tx_ParaArbol", obra );
@@ -2240,7 +2240,7 @@ namespace ProntoMVC.Controllers
                         ParentId = n["IdNodoPadre"].NullSafeToString(),
                         Orden = 0 , //n.Orden ?? 0,
                         Parametros = "" , //n.Parametros,
-                        Link = "" , //n.Link.Replace("Pronto2", ROOT),
+                        Link = n["Lineage"].NullSafeToString() , //n.Link.Replace("Pronto2", ROOT),
                         Imagen = "", // n.Imagen,
                         EsPadre = "SI", // n.EsPadre,
                         nivel =9 // p.Nivel ?? 9

@@ -4,7 +4,7 @@ presupuestosobras_
   select * from wTempCartasPorteFacturacionAutomatica
 
   --sp_helptext   PresupuestoObrasNodos_tx_ParaArbol
-  PresupuestoObrasNodos_tx_ParaArbol   '01' -- -1
+  PresupuestoObrasNodos_tx_ParaArbol   '77' -- -1
 
   --sp_helptext 
   PresupuestoObrasNodos_Inicializar
