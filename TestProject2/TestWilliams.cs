@@ -893,11 +893,15 @@ namespace ProntoMVC.Tests
             /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+            //ClassFlexicapture.TiffSplit_dea2(zipFile);
+            //ClassFlexicapture.TiffSplit(zipFile);
+            
 
             VaciarDirectorioTemp();
 
 
-            var l = ClassFlexicapture.PreprocesarArchivoSubido(zipFile, "Mariano", DirApp, false, false, false, 1);
+            //var l = ClassFlexicapture.PreprocesarArchivoSubido(zipFile, "Mariano", DirApp, false, false, false, 1);
+            var l = ClassFlexicapture.PreprocesarArchivoSubido(zipFile, "Mariano", DirApp, true, false, false, 1);
             //PreprocesarImagenesTiff
 
             string sError = "";
