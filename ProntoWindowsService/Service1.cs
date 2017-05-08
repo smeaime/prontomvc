@@ -324,7 +324,7 @@ namespace ProntoWindowsService
 
 
 
-
+/*
 
 Log Entry : 
 05/05/2017 01:10:18
@@ -354,8 +354,7 @@ __________________________
 
 
 
-
-
+                  
 
 Log Entry : 
 05/05/2017 19:32:10
@@ -381,6 +380,7 @@ Si después de hacer todo lo que se indica en la pregunta sigue tirando ese erro
 
 -seria raro... cuando falla de esa manera, no lo resucito más por más intentos q haga. necesito reiniciar el servicio (y engancha enseguida)
 
+  */
 
                     catch (System.Runtime.InteropServices.COMException x2)
                     {
@@ -438,11 +438,11 @@ Si después de hacer todo lo que se indica en la pregunta sigue tirando ese erro
                             ClassFlexicapture.Log(idthread + "Problemas al conectarse al licenciador");
 
                         }
-else
-{
+                        else
+                        {
+                            ClassFlexicapture.Log(idthread + " Error no reconocido. Codigo: " + (uint)x2.ErrorCode);
 
-    asdasd
-}
+                        }
 
 
 
@@ -467,8 +467,9 @@ else
 
                         ClassFlexicapture.unloadEngine(ref engine, ref engineLoader);
                         processor = null;
+                        engine = null;
+                        engineLoader = null;
 
-pruebo poner en null el engine y engineloader?
 
                         bool exito = false;
                         for (int n = 0; n < 800; n++)

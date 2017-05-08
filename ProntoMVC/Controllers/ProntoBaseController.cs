@@ -2212,7 +2212,7 @@ namespace ProntoMVC.Controllers
 
             DataTable dt = Pronto.ERP.Bll.EntidadManager.GetStoreProcedure(SCsql(), "PresupuestoObrasNodos_tx_ParaArbol", obra);
 
-
+            var idsPadres = (from DataRow r in dt.Rows where r["IdNodoPadre"] !=null select Convert.ToInt32 (r["IdNodoPadre"])).Distinct();
 
             var q = from DataRow n in dt.Rows
                     //where (n["IdNodoPadre"] == parentId)
@@ -2226,7 +2226,7 @@ namespace ProntoMVC.Controllers
                         Parametros = "", //n.Parametros,
                         Link = n["Lineage"].NullSafeToString(), //n.Link.Replace("Pronto2", ROOT),
                         Imagen = "", // n.Imagen,
-                        EsPadre = "SI", // n.EsPadre,
+                        EsPadre = idsPadres.Contains(Convert.ToInt32 ( n["IdPresupuestoObrasNodo"]))  ? "SI" : "NO", // n.EsPadre,
                         nivel = 9 // p.Nivel ?? 9
 
                         // , Orden = n.Orden

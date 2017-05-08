@@ -569,7 +569,7 @@ namespace ProntoMVC.Controllers
                             //PARENT ID: If we are at the root [nodeid] will be empty so the parent id is ""
                             // In case of a service writter the parent id is the nodeid, because is the node
                             // we are expanding
-                            parent = child.ParentId , //  child.ParentId,  // collection["nodeid"] ?? string.Empty,
+                            parent = (child.ParentId ?? "") == "" ? "null" : child.ParentId, //  child.ParentId,  // collection["nodeid"] ?? string.Empty,
 
 
                             //////////////////////////////////////////////////////////////////////////

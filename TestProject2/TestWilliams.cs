@@ -865,12 +865,23 @@ namespace ProntoMVC.Tests
 
 
 
-            
+
+        [TestMethod]
+        public void OCR_Postprocesamiento_ManotearExcel()
+        {
+            var excel = @"C:\Users\Administrador\Documents\bdl\pronto\docstest\ExportToXLS.xls";
+
+            ClassFlexicapture.ManotearExcel(excel, "asdfasdf", "232324423");
+
+        }
+
+
+
         [TestMethod]
         public void OCR_Preprocesamiento_paginacion()
         {
 
-        //  probar los picos de IIS en las subidas de imagenes (en los dos importadores) -apuesto a que es la paginacion
+            //  probar los picos de IIS en las subidas de imagenes (en los dos importadores) -apuesto a que es la paginacion
 
 
 
@@ -901,25 +912,25 @@ namespace ProntoMVC.Tests
 
 
 
-        
 
-          [TestMethod]
+
+        [TestMethod]
         public void btnGenerarFacturas_Click()
         {
 
-              //son todos lios con el KeepSelection q bien pueden venir por problemas con la sesion
+            //son todos lios con el KeepSelection q bien pueden venir por problemas con la sesion
 
-//  at ProntoCSharp.FuncionesUIWebCSharpEnDllAparte.b__5(<>f__AnonymousType0`2 <>h__TransparentIdentifier2) in E:\Backup\BDL\ProntoWeb\Soluciones\ClassLibrary1\Class1.cs:line 97
-//at System.Linq.Enumerable.WhereSelectEnumerableIterator`2.MoveNext()
-//at System.Collections.Generic.List`1..ctor(IEnumerable`1 collection)
-//at System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
-//at ProntoCSharp.FuncionesUIWebCSharpEnDllAparte.KeepSelection(GridView grid) in E:\Backup\BDL\ProntoWeb\Soluciones\ClassLibrary1\Class1.cs:line 104
-//at ProntoCSharp.FuncionesUIWebCSharpEnDllAparte.TraerLista(GridView grid) in E:\Backup\BDL\ProntoWeb\Soluciones\ClassLibrary1\Class1.cs:line 58
-//at ProntoCSharp.FuncionesUIWebCSharpEnDllAparte.TraerListaEnStringConComas(GridView grid) in E:\Backup\BDL\ProntoWeb\Soluciones\ClassLibrary1\Class1.cs:line 70
-//at CDPFacturacion.Validar2doPaso(DataTable& tablaEditadaDeFacturasParaGenerar)
-//at CDPFacturacion.btnGenerarFacturas_Click(Object sender, EventArgs e)
+            //  at ProntoCSharp.FuncionesUIWebCSharpEnDllAparte.b__5(<>f__AnonymousType0`2 <>h__TransparentIdentifier2) in E:\Backup\BDL\ProntoWeb\Soluciones\ClassLibrary1\Class1.cs:line 97
+            //at System.Linq.Enumerable.WhereSelectEnumerableIterator`2.MoveNext()
+            //at System.Collections.Generic.List`1..ctor(IEnumerable`1 collection)
+            //at System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
+            //at ProntoCSharp.FuncionesUIWebCSharpEnDllAparte.KeepSelection(GridView grid) in E:\Backup\BDL\ProntoWeb\Soluciones\ClassLibrary1\Class1.cs:line 104
+            //at ProntoCSharp.FuncionesUIWebCSharpEnDllAparte.TraerLista(GridView grid) in E:\Backup\BDL\ProntoWeb\Soluciones\ClassLibrary1\Class1.cs:line 58
+            //at ProntoCSharp.FuncionesUIWebCSharpEnDllAparte.TraerListaEnStringConComas(GridView grid) in E:\Backup\BDL\ProntoWeb\Soluciones\ClassLibrary1\Class1.cs:line 70
+            //at CDPFacturacion.Validar2doPaso(DataTable& tablaEditadaDeFacturasParaGenerar)
+            //at CDPFacturacion.btnGenerarFacturas_Click(Object sender, EventArgs e)
 
-          }
+        }
 
 
 
@@ -927,70 +938,70 @@ namespace ProntoMVC.Tests
         public void btnIrAlPaso2_Click()
         {
             // se estaria quejando porque en el IN (123123,4444,......) hay una banda de ids  -No. En este caso es por timeout (y no son tantos ids)
-      //- Falta un indice en wGrillaPersistencia. Lo volaron en alguna actualizacion??
+            //- Falta un indice en wGrillaPersistencia. Lo volaron en alguna actualizacion??
 
-      /*  
-        SELECT DISTINCT 0 as ColumnaTilde ,IdCartaDePorte, CDP.IdArticulo,               
-        NumeroCartaDePorte, SubNumeroVagon,CDP.SubnumeroDeFacturacion, FechaArribo, FechaDescarga,  
-        CLIVEN.razonsocial as FacturarselaA,  CLIVEN.idcliente as IdFacturarselaA              		  ,isnull(CLIVEN.Confirmado,'NO') as Confirmado,           
-        CLIVEN.IdCodigoIVA  		  ,CLIVEN.CUIT,           '' as ClienteSeparado ,  		 dbo.wTarifaWilliams(CLIVEN.idcliente,CDP.IdArticulo,CDP.Destino, case when isnull(Exporta,'NO')='SI' then 1 else 0 end,0) as TarifaFacturada            ,
-        Articulos.Descripcion as  Producto,         NetoFinal  as  KgNetos , Corredor as IdCorredor, Vendedor as IdTitular,   
-       CDP.CuentaOrden1 as IdIntermediario, CDP.CuentaOrden2 as IdRComercial, CDP.Entregador as IdDestinatario,             		 
-       CLIVEN.Razonsocial as   Titular  ,        CLICO1.Razonsocial as   Intermediario  ,     		 CLICO2.Razonsocial as   [R. Comercial]  ,        CLICOR.Nombre as    [Corredor ],      		 
-       CLIENT.Razonsocial  as  [Destinatario],          LOCDES.Descripcion   as  DestinoDesc  		 ,         		 LOCORI.Nombre as    [Procedcia.] ,            CDP.Destino as IdDestino, CDP.AgregaItemDeGastosAdministrativos    from CartasDePorte CDP  inner join wGrillaPersistencia  on CDP.IdCartaDePorte=wGrillaPersistencia.idrenglon and wGrillaPersistencia.Sesion='0vrbvt41i4ikbcrkkfle5s5r'   LEFT OUTER JOIN Clientes CLIVEN ON CDP.Vendedor = CLIVEN.IdCliente     LEFT OUTER JOIN ListasPreciosDetalle LPD ON CLIVEN.idListaPrecios = LPD.idListaPrecios    LEFT OUTER JOIN Clientes CLICO1 ON CDP.CuentaOrden1 = CLICO1.IdCliente     LEFT OUTER JOIN Clientes CLICO2 ON CDP.CuentaOrden2 = CLICO2.IdCliente     LEFT OUTER JOIN Vendedores CLICOR ON CDP.Corredor = CLICOR.IdVendedor     LEFT OUTER JOIN Clientes CLICORCLI ON CLICORCLI.idcliente  = (select top 1 idcliente from clientes c1 where c1.RazonSocial = CLICOR.Nombre)     LEFT OUTER JOIN Clientes CLIENT ON CDP.Entregador = CLIENT.IdCliente     LEFT OUTER JOIN Articulos ON CDP.IdArticulo = Articulos.IdArticulo   
-            LEFT OUTER JOIN Transportistas TRANS ON CDP.IdTransportista = TRANS.IdTransportista    
-                LEFT OUTER JOIN Choferes CHOF ON CDP.IdChofer = CHOF.IdChofer   
-                    LEFT OUTER JOIN Localidades LOCORI ON CDP.Procedencia = LOCORI.IdLocalidad     
-       LEFT OUTER JOIN WilliamsDestinos LOCDES ON CDP.Destino = LOCDES.IdWilliamsDestino    
-       where isnull(CDP.IdClienteAFacturarle,-1) <= 0  
-        AND IdCartaDePorte IN (2864169,2861327,2861328,2838096,2869161,2836224,2836220,2836221,2834120,2838028,2838029,2834108,2878352,
-        2881439,2864225,
-        2856459,2858824,2853489,2853464,2856473,2851214,2851208,2858840,2861306,2861304,2863776,2884665,2884663,2881551,2881542,
-        2855520,2855525,2839318,2829393,2829395,2829396,2829397,2829398,2829399,2829357,2829337,2829344,2829361,2830267,2829855,
-        2830232,2830235,2830237,2883414,2883415,2881537,2883405,2883391,2863743,2863734,2865422,2865417,2867685,2867674,2866646,
-        2863670,2866021,2865428,2865447,2883407,2839719,2844618,2837396,2841689,2872127,2872128,2872129,2866406,2866407,2867894
-        ,2866172,2865262,2862972,2865257,2871188,2871189,2871209,2871211,2865284,2879207,2880075,2880076,2880100,2870756,2870757,
-        2870758,2870759,2870760,2870761,2876849,2877457,2877118,2881951,2882819,2881201,2874745,2852148,2880079,2882843,2837472,
-        2837474,2837475,2831137,2833519,2860281,2855434,2860284,2860298,2860277,2860295,2862975,2862980,2882816,2880087,2866183,2866191,
-        2842239,2836339,2835962,2842502,2842503,2864192,2864209,2862513,2865317,2862129,2864195,2864189,2861665,2861666,2862125,2864218,
-        2864219,2864601,2865409,2865391,2865393,
-        2865395,2867897,2869257,2864495,2869164,2869165,2865320,2869995,2869253,2873795,2873780,2873776,2860472) 
+            /*  
+              SELECT DISTINCT 0 as ColumnaTilde ,IdCartaDePorte, CDP.IdArticulo,               
+              NumeroCartaDePorte, SubNumeroVagon,CDP.SubnumeroDeFacturacion, FechaArribo, FechaDescarga,  
+              CLIVEN.razonsocial as FacturarselaA,  CLIVEN.idcliente as IdFacturarselaA              		  ,isnull(CLIVEN.Confirmado,'NO') as Confirmado,           
+              CLIVEN.IdCodigoIVA  		  ,CLIVEN.CUIT,           '' as ClienteSeparado ,  		 dbo.wTarifaWilliams(CLIVEN.idcliente,CDP.IdArticulo,CDP.Destino, case when isnull(Exporta,'NO')='SI' then 1 else 0 end,0) as TarifaFacturada            ,
+              Articulos.Descripcion as  Producto,         NetoFinal  as  KgNetos , Corredor as IdCorredor, Vendedor as IdTitular,   
+             CDP.CuentaOrden1 as IdIntermediario, CDP.CuentaOrden2 as IdRComercial, CDP.Entregador as IdDestinatario,             		 
+             CLIVEN.Razonsocial as   Titular  ,        CLICO1.Razonsocial as   Intermediario  ,     		 CLICO2.Razonsocial as   [R. Comercial]  ,        CLICOR.Nombre as    [Corredor ],      		 
+             CLIENT.Razonsocial  as  [Destinatario],          LOCDES.Descripcion   as  DestinoDesc  		 ,         		 LOCORI.Nombre as    [Procedcia.] ,            CDP.Destino as IdDestino, CDP.AgregaItemDeGastosAdministrativos    from CartasDePorte CDP  inner join wGrillaPersistencia  on CDP.IdCartaDePorte=wGrillaPersistencia.idrenglon and wGrillaPersistencia.Sesion='0vrbvt41i4ikbcrkkfle5s5r'   LEFT OUTER JOIN Clientes CLIVEN ON CDP.Vendedor = CLIVEN.IdCliente     LEFT OUTER JOIN ListasPreciosDetalle LPD ON CLIVEN.idListaPrecios = LPD.idListaPrecios    LEFT OUTER JOIN Clientes CLICO1 ON CDP.CuentaOrden1 = CLICO1.IdCliente     LEFT OUTER JOIN Clientes CLICO2 ON CDP.CuentaOrden2 = CLICO2.IdCliente     LEFT OUTER JOIN Vendedores CLICOR ON CDP.Corredor = CLICOR.IdVendedor     LEFT OUTER JOIN Clientes CLICORCLI ON CLICORCLI.idcliente  = (select top 1 idcliente from clientes c1 where c1.RazonSocial = CLICOR.Nombre)     LEFT OUTER JOIN Clientes CLIENT ON CDP.Entregador = CLIENT.IdCliente     LEFT OUTER JOIN Articulos ON CDP.IdArticulo = Articulos.IdArticulo   
+                  LEFT OUTER JOIN Transportistas TRANS ON CDP.IdTransportista = TRANS.IdTransportista    
+                      LEFT OUTER JOIN Choferes CHOF ON CDP.IdChofer = CHOF.IdChofer   
+                          LEFT OUTER JOIN Localidades LOCORI ON CDP.Procedencia = LOCORI.IdLocalidad     
+             LEFT OUTER JOIN WilliamsDestinos LOCDES ON CDP.Destino = LOCDES.IdWilliamsDestino    
+             where isnull(CDP.IdClienteAFacturarle,-1) <= 0  
+              AND IdCartaDePorte IN (2864169,2861327,2861328,2838096,2869161,2836224,2836220,2836221,2834120,2838028,2838029,2834108,2878352,
+              2881439,2864225,
+              2856459,2858824,2853489,2853464,2856473,2851214,2851208,2858840,2861306,2861304,2863776,2884665,2884663,2881551,2881542,
+              2855520,2855525,2839318,2829393,2829395,2829396,2829397,2829398,2829399,2829357,2829337,2829344,2829361,2830267,2829855,
+              2830232,2830235,2830237,2883414,2883415,2881537,2883405,2883391,2863743,2863734,2865422,2865417,2867685,2867674,2866646,
+              2863670,2866021,2865428,2865447,2883407,2839719,2844618,2837396,2841689,2872127,2872128,2872129,2866406,2866407,2867894
+              ,2866172,2865262,2862972,2865257,2871188,2871189,2871209,2871211,2865284,2879207,2880075,2880076,2880100,2870756,2870757,
+              2870758,2870759,2870760,2870761,2876849,2877457,2877118,2881951,2882819,2881201,2874745,2852148,2880079,2882843,2837472,
+              2837474,2837475,2831137,2833519,2860281,2855434,2860284,2860298,2860277,2860295,2862975,2862980,2882816,2880087,2866183,2866191,
+              2842239,2836339,2835962,2842502,2842503,2864192,2864209,2862513,2865317,2862129,2864195,2864189,2861665,2861666,2862125,2864218,
+              2864219,2864601,2865409,2865391,2865393,
+              2865395,2867897,2869257,2864495,2869164,2869165,2865320,2869995,2869253,2873795,2873780,2873776,2860472) 
 
-       * 
-       * 
-       * 
-       * 
-       * 
-       * __________________________
+             * 
+             * 
+             * 
+             * 
+             * 
+             * __________________________
 
-Log Entry : 
-05/03/2017 14:08:06
-Error in: https://prontoweb.williamsentregas.com.ar/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:Timeout expired.  The timeout period elapsed prior to completion of the operation or the server is not responding.
-__________________________
+      Log Entry : 
+      05/03/2017 14:08:06
+      Error in: https://prontoweb.williamsentregas.com.ar/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:Timeout expired.  The timeout period elapsed prior to completion of the operation or the server is not responding.
+      __________________________
 
 
 
-                Error in: https://prontoweb.williamsentregas.com.ar/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:System.Data.SqlClient.SqlException
-Timeout expired.  The timeout period elapsed prior to completion of the operation or the server is not responding.
-   at Microsoft.VisualBasic.CompilerServices.Symbols.Container.InvokeMethod(Method TargetProcedure, Object[] Arguments, Boolean[] CopyBack, BindingFlags Flags)
-   at Microsoft.VisualBasic.CompilerServices.NewLateBinding.CallMethod(Container BaseReference, String MethodName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack, BindingFlags InvocationFlags, Boolean ReportErrors, ResolutionFailure& Failure)
-   at Microsoft.VisualBasic.CompilerServices.NewLateBinding.ObjectLateCall(Object Instance, Type Type, String MemberName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack, Boolean IgnoreReturn)
-   at Microsoft.VisualBasic.CompilerServices.NewLateBinding.LateCall(Object Instance, Type Type, String MemberName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack, Boolean IgnoreReturn)
-   at Pronto.ERP.Dal.GeneralDB.ExecDinamico(String SC, String comandoSQLdinamico, Int32 timeoutSegundos)
-   at Pronto.ERP.Bll.EntidadManager.ExecDinamico(String SC, String sComandoDinamico, Int32 timeoutSegundos) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\EntidadManager.vb:line 816
-   at LogicaFacturacion.SQLSTRING_FacturacionCartas_por_Titular(String sWHEREadicional, String sc, String sesionid) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\LogicaFacturacion.vb:line 7872
-   at LogicaFacturacion.generarTabla(String SC, Object& pag, Object& sesionId, Int64 iPageSize, Int32 puntoVenta, DateTime desde, DateTime hasta, String sLista, Boolean bNoUsarLista, Int64 optFacturarA, String agruparArticulosPor, Object& filas, Object& slinks, String sesionIdposta) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\LogicaFacturacion.vb:line 2159
-   at LogicaFacturacion.GetDatatableAsignacionAutomatica(String SC, Object& pag, Object& sesionId, Int64 iPageSize, Int32 puntoVenta, DateTime desde, DateTime hasta, String sLista, String sWHEREadicional, Int64 optFacturarA, String txtFacturarATerceros, String HFSC, String txtTitular, String txtCorredor, String txtDestinatario, String txtIntermediario, String txtRcomercial, String txt_AC_Articulo, String txtProcedencia, String txtDestino, String txtBuscar, String cmbCriterioWHERE, String cmbmodo, String optDivisionSyngenta, Int64 startRowIndex, Int64 maximumRows, String txtPopClienteAuxiliar, String& sErrores, String txtFacturarA, String agruparArticulosPor, Object& filas, Object& slinks, String sesionIdposta) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\LogicaFacturacion.vb:line 2277
-   at CDPFacturacion.dtDatasourcePaso2(String& sErr, Int64 startRowIndex, Int64 maximumRows)
-   at CDPFacturacion.getGrillaPaso2(Boolean bRefrescarTarifa, String& sErr, Int64 startRowIndex, Int64 maximumRows)
-   at CDPFacturacion.gv2ReBind(Boolean bRefrescarTarifa)
-   at CDPFacturacion.btnIrAlPaso2_Click(Object sender, EventArgs e)
-       * 
-       * */
+                      Error in: https://prontoweb.williamsentregas.com.ar/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:System.Data.SqlClient.SqlException
+      Timeout expired.  The timeout period elapsed prior to completion of the operation or the server is not responding.
+         at Microsoft.VisualBasic.CompilerServices.Symbols.Container.InvokeMethod(Method TargetProcedure, Object[] Arguments, Boolean[] CopyBack, BindingFlags Flags)
+         at Microsoft.VisualBasic.CompilerServices.NewLateBinding.CallMethod(Container BaseReference, String MethodName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack, BindingFlags InvocationFlags, Boolean ReportErrors, ResolutionFailure& Failure)
+         at Microsoft.VisualBasic.CompilerServices.NewLateBinding.ObjectLateCall(Object Instance, Type Type, String MemberName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack, Boolean IgnoreReturn)
+         at Microsoft.VisualBasic.CompilerServices.NewLateBinding.LateCall(Object Instance, Type Type, String MemberName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack, Boolean IgnoreReturn)
+         at Pronto.ERP.Dal.GeneralDB.ExecDinamico(String SC, String comandoSQLdinamico, Int32 timeoutSegundos)
+         at Pronto.ERP.Bll.EntidadManager.ExecDinamico(String SC, String sComandoDinamico, Int32 timeoutSegundos) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\EntidadManager.vb:line 816
+         at LogicaFacturacion.SQLSTRING_FacturacionCartas_por_Titular(String sWHEREadicional, String sc, String sesionid) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\LogicaFacturacion.vb:line 7872
+         at LogicaFacturacion.generarTabla(String SC, Object& pag, Object& sesionId, Int64 iPageSize, Int32 puntoVenta, DateTime desde, DateTime hasta, String sLista, Boolean bNoUsarLista, Int64 optFacturarA, String agruparArticulosPor, Object& filas, Object& slinks, String sesionIdposta) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\LogicaFacturacion.vb:line 2159
+         at LogicaFacturacion.GetDatatableAsignacionAutomatica(String SC, Object& pag, Object& sesionId, Int64 iPageSize, Int32 puntoVenta, DateTime desde, DateTime hasta, String sLista, String sWHEREadicional, Int64 optFacturarA, String txtFacturarATerceros, String HFSC, String txtTitular, String txtCorredor, String txtDestinatario, String txtIntermediario, String txtRcomercial, String txt_AC_Articulo, String txtProcedencia, String txtDestino, String txtBuscar, String cmbCriterioWHERE, String cmbmodo, String optDivisionSyngenta, Int64 startRowIndex, Int64 maximumRows, String txtPopClienteAuxiliar, String& sErrores, String txtFacturarA, String agruparArticulosPor, Object& filas, Object& slinks, String sesionIdposta) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\LogicaFacturacion.vb:line 2277
+         at CDPFacturacion.dtDatasourcePaso2(String& sErr, Int64 startRowIndex, Int64 maximumRows)
+         at CDPFacturacion.getGrillaPaso2(Boolean bRefrescarTarifa, String& sErr, Int64 startRowIndex, Int64 maximumRows)
+         at CDPFacturacion.gv2ReBind(Boolean bRefrescarTarifa)
+         at CDPFacturacion.btnIrAlPaso2_Click(Object sender, EventArgs e)
+             * 
+             * */
 
-        //SQLSTRING_FacturacionCartas_por_Titular
+            //SQLSTRING_FacturacionCartas_por_Titular
 
-        //        GetDatatableAsignacionAutomatica
+            //        GetDatatableAsignacionAutomatica
 
 
         }
