@@ -1442,6 +1442,70 @@ namespace ProntoFlexicapture
 
 
 
+        public static List<string> TiffSplit(string filename)
+        {
+            List<string> l = new List<string>();
+
+            Stream imageStreamSource = new FileStream(filename, FileMode.Open, FileAccess.Read, FileShare.Read);
+            System.Windows.Media.Imaging.TiffBitmapDecoder decoder = new System.Windows.Media.Imaging.TiffBitmapDecoder(imageStreamSource, System.Windows.Media.Imaging.BitmapCreateOptions.PreservePixelFormat, System.Windows.Media.Imaging.BitmapCacheOption.Default);
+
+            int pagecount = decoder.Frames.Count;
+            if (pagecount > 1)
+            {
+                string fNameBase = Path.GetFileNameWithoutExtension(filename);
+                string filePath = Path.GetDirectoryName(filename);
+                for (int i = 0; i < pagecount; i++)
+                {
+                    //string outputName = string.Format(@"{0}\SplitImages\{1}-{2}.tif", filePath, fNameBase, i.ToString());
+                    string outputName = string.Format(@"{0}\{1}_pag{2}.tif", filePath, fNameBase, i.ToString());
+                    FileStream stream = new FileStream(outputName, FileMode.Create, FileAccess.Write);
+                    System.Windows.Media.Imaging.TiffBitmapEncoder encoder = new System.Windows.Media.Imaging.TiffBitmapEncoder();
+                    encoder.Frames.Add(decoder.Frames[i]);
+                    encoder.Save(stream);
+                    l.Add(outputName);
+                    stream.Dispose();
+                }
+                imageStreamSource.Dispose();
+            }
+
+            return l;
+
+        }
+
+
+        public static List<string> TiffSplit_dea2(string filename)
+        {
+            List<string> l = new List<string>();
+
+            Stream imageStreamSource = new FileStream(filename, FileMode.Open, FileAccess.Read, FileShare.Read);
+            System.Windows.Media.Imaging.TiffBitmapDecoder decoder = new System.Windows.Media.Imaging.TiffBitmapDecoder(imageStreamSource, System.Windows.Media.Imaging.BitmapCreateOptions.PreservePixelFormat, System.Windows.Media.Imaging.BitmapCacheOption.Default);
+
+            int pagecount = decoder.Frames.Count;
+            if (pagecount > 1)
+            {
+                string fNameBase = Path.GetFileNameWithoutExtension(filename);
+                string filePath = Path.GetDirectoryName(filename);
+                for (int i = 0; i < pagecount; i += 2)
+                {
+                    //string outputName = string.Format(@"{0}\SplitImages\{1}-{2}.tif", filePath, fNameBase, i.ToString());
+                    string outputName = string.Format(@"{0}\{1}_pag{2}_unido.tif", filePath, fNameBase, (i / 2).ToString());
+                    FileStream stream = new FileStream(outputName, FileMode.Create, FileAccess.Write);
+                    System.Windows.Media.Imaging.TiffBitmapEncoder encoder = new System.Windows.Media.Imaging.TiffBitmapEncoder();
+                    encoder.Frames.Add(decoder.Frames[i]);
+                    encoder.Frames.Add(decoder.Frames[i + 1]);
+                    encoder.Save(stream);
+                    l.Add(outputName);
+                    stream.Dispose();
+                }
+                imageStreamSource.Dispose();
+            }
+
+            return l;
+
+        }
+
+
+
         public static List<string> PreprocesarImagenesTiff(string archivo, bool bEsFormatoCPTK, bool bGirar180grados, bool bProcesarConOCR)
         {
 
@@ -1453,94 +1517,113 @@ namespace ProntoFlexicapture
             if (bGirar180grados) MarcarArchivoComoProcesandose(archivo); // me anticipo para que no lo tome el servicio mientras creo los tiff individuales
 
 
-            List<System.Drawing.Image> listapaginas;
 
-            try
-            {
-                listapaginas = ProntoMVC.Data.FuncionesGenericasCSharp.GetAllPages(archivo);
 
-            }
-            catch (Exception)
+            if (false)
             {
 
-                ErrHandler2.WriteError("Nombre archivo: " + archivo);
 
-                throw;
-            }
+                List<System.Drawing.Image> listapaginas;
 
-
-            List<string> l = new List<string>();
-            int n = 0;
-            if (listapaginas.Count > 1)
-            {
-                for (n = 0; n <= listapaginas.Count - 1; n++)
+                //aca empezaria el show: tarda para cargar el tif en memoria, y despues tarda más aun al grabar las paginas
+                try
                 {
-                    var nombre = archivo + "_pag" + n.ToString() + ".tif";
+                    listapaginas = ProntoMVC.Data.FuncionesGenericasCSharp.GetAllPages(archivo);
 
-                    if (bGirar180grados) nombre += ".temp"; // para que no lo tome el servicio
-
-                    listapaginas[n].Save(nombre, System.Drawing.Imaging.ImageFormat.Tiff);
-
-                    if (bGirar180grados)
-                    {
-                        var rotado = nombre + "_rotado.tif";
-                        OrientarImagen(nombre, rotado);
-                        CartaDePorteManager.BorroArchivo(nombre);
-                        nombre = rotado;
-                    }
-
-                    l.Add(nombre);
                 }
-            }
-
-
-            if ((bEsFormatoCPTK))
-            {
-
-                for (n = 0; n + 1 <= listapaginas.Count - 1; n += 2)
+                catch (Exception)
                 {
-                    var pagina1 = archivo + "_pag" + n.ToString() + ".tif";
-                    var pagina2 = archivo + "_pag" + (n + 1).ToString() + ".tif";
-                    var final = archivo + "_pag" + (n).ToString() + "_unido.tif";
 
-                    string[] arguments = {
+                    ErrHandler2.WriteError("Nombre archivo: " + archivo);
+
+                    throw;
+                }
+
+
+                List<string> l = new List<string>();
+                int n = 0;
+                if (listapaginas.Count > 1)
+                {
+                    for (n = 0; n <= listapaginas.Count - 1; n++)
+                    {
+                        var nombre = archivo + "_pag" + n.ToString() + ".tif";
+
+                        if (bGirar180grados) nombre += ".temp"; // para que no lo tome el servicio
+
+                        listapaginas[n].Save(nombre, System.Drawing.Imaging.ImageFormat.Tiff);
+
+                        if (bGirar180grados)
+                        {
+                            var rotado = nombre + "_rotado.tif";
+                            OrientarImagen(nombre, rotado);
+                            CartaDePorteManager.BorroArchivo(nombre);
+                            nombre = rotado;
+                        }
+
+                        l.Add(nombre);
+                    }
+                }
+
+
+                if ((bEsFormatoCPTK))
+                {
+
+                    for (n = 0; n + 1 <= listapaginas.Count - 1; n += 2)
+                    {
+                        var pagina1 = archivo + "_pag" + n.ToString() + ".tif";
+                        var pagina2 = archivo + "_pag" + (n + 1).ToString() + ".tif";
+                        var final = archivo + "_pag" + (n).ToString() + "_unido.tif";
+
+                        string[] arguments = {
                         pagina1,
                         pagina2,
                         final
                     };
 
-                    BitMiracle.TiffCP.Program.Main(arguments);
+                        BitMiracle.TiffCP.Program.Main(arguments);
 
-                    if (!bProcesarConOCR) MarcarArchivoComoProcesandose(final);
+                        if (!bProcesarConOCR) MarcarArchivoComoProcesandose(final);
 
-                    //Dim p As System.Diagnostics.Process = New System.Diagnostics.Process()
-                    //p.StartInfo.UseShellExecute = False
-                    //p.StartInfo.RedirectStandardOutput = True
-                    //p.StartInfo.FileName = @"C:\PathToExe\TiffCP.exe"
-                    //Dim path1 = @"C:\PathToImage\image.tiff"
-                    //dim path2 = @"C:\PathToImage\imagePage1.tiff"
-                    //p.StartInfo.Arguments = "\"" + path1 + " \ "" + ",0 \"" + path2 + " \ ""
-                    //p.Start()
-                    //string t = p.StandardOutput.ReadToEnd()
+                        //Dim p As System.Diagnostics.Process = New System.Diagnostics.Process()
+                        //p.StartInfo.UseShellExecute = False
+                        //p.StartInfo.RedirectStandardOutput = True
+                        //p.StartInfo.FileName = @"C:\PathToExe\TiffCP.exe"
+                        //Dim path1 = @"C:\PathToImage\image.tiff"
+                        //dim path2 = @"C:\PathToImage\imagePage1.tiff"
+                        //p.StartInfo.Arguments = "\"" + path1 + " \ "" + ",0 \"" + path2 + " \ ""
+                        //p.Start()
+                        //string t = p.StandardOutput.ReadToEnd()
 
-                    CartaDePorteManager.BorroArchivo(pagina1);
-                    CartaDePorteManager.BorroArchivo(pagina2);
+                        CartaDePorteManager.BorroArchivo(pagina1);
+                        CartaDePorteManager.BorroArchivo(pagina2);
 
 
 
-                    l.Remove(pagina1);
-                    l.Remove(pagina2);
-                    l.Add(final);
+                        l.Remove(pagina1);
+                        l.Remove(pagina2);
+                        l.Add(final);
+                    }
+
                 }
 
+
+                return l;
+
+            }
+            else
+            {
+
+                if (bEsFormatoCPTK) return TiffSplit_dea2(archivo);
+                else return TiffSplit(archivo);
 
 
             }
 
 
+
+
             // CartaDePorteManager.BorroArchivo(archivo);  //no borrar el original, total ya está marcado como procesado
 
-            return l;
 
         }
 
