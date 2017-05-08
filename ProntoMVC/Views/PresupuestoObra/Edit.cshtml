@@ -91,7 +91,7 @@
 
         $('#Lista').jqGrid({
             url: '@Url.Action("LlenarGrilla", "PresupuestoObra")',
-            postData: { 'Nodo': 77 },
+            postData: { 'Nodo': 0 },
             datatype: 'json',
             mtype: 'POST',
             colNames: ['', 'IdObra', 'Descripcion', 'Codigo', 'Tipo de obra', 'Activa?', 'Fecha inicio', 'Fecha finalizacion', 'Fecha entrega', 'Jerarquia', 'Jefe regional', 'Jefe local', 'Subjefe',
@@ -286,7 +286,7 @@
             $.jgrid.formatter.number.thousandsSeparator = ',';
             $.jgrid.formatter.currency.thousandsSeparator = ',';
             grid.jqGrid({
-                postData: { 'idObra': @Html.Raw(Json.Encode(Model.IdObra))  },
+                postData: { 'idObra':  77 }, 
 
                 datatype: "jsonstring",
                 // datastr: mydata,
@@ -325,7 +325,7 @@
                 height: 600, //'auto',
                 gridview: true,
                 rowNum: 10000,
-                sortname: 'id',
+                //sortname: 'id',
                 treeGrid: true,
                 treeGridModel: 'adjacency',
                 treedatatype: "local",
