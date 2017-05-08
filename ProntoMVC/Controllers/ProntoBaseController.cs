@@ -2201,32 +2201,16 @@ namespace ProntoMVC.Controllers
         /// /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         /// /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        public List<Tablas.Tree> TablaTree_PresupuestoObra(string parentId)
+        public List<Tablas.Tree> TablaTree_PresupuestoObra(int obra )
         {
 
-            // cómo filtrar esto?, en especial en el nodo raíz (parentId="01")
-            //    y si es externo?
-
-            string usuario = ViewBag.NombreUsuario;
-            int IdUsuario;
-            try
-            {
-                IdUsuario = db.Empleados.Where(x => x.Nombre == usuario || x.UsuarioNT == usuario).Select(x => x.IdEmpleado).FirstOrDefault();
-            }
-            catch (Exception)
-            {
-                throw; // Exception("No se encuentra el usuario");
-            }
-
-
-            var permisos = (from i in db.EmpleadosAccesos where i.IdEmpleado == IdUsuario select i); //.ToList();
 
 
 
-            int obra = 77; 
-                //obra= parentId;
 
-            DataTable dt = Pronto.ERP.Bll.EntidadManager.GetStoreProcedure(SCsql(), "PresupuestoObrasNodos_tx_ParaArbol", obra );
+            //obra= parentId;
+
+            DataTable dt = Pronto.ERP.Bll.EntidadManager.GetStoreProcedure(SCsql(), "PresupuestoObrasNodos_tx_ParaArbol", obra);
 
 
 
@@ -2238,12 +2222,12 @@ namespace ProntoMVC.Controllers
                         Clave = n["IdPresupuestoObrasNodo"].NullSafeToString(),
                         Descripcion = n["Descripcion"].NullSafeToString(),
                         ParentId = n["IdNodoPadre"].NullSafeToString(),
-                        Orden = 0 , //n.Orden ?? 0,
-                        Parametros = "" , //n.Parametros,
-                        Link = n["Lineage"].NullSafeToString() , //n.Link.Replace("Pronto2", ROOT),
+                        Orden = 0, //n.Orden ?? 0,
+                        Parametros = "", //n.Parametros,
+                        Link = n["Lineage"].NullSafeToString(), //n.Link.Replace("Pronto2", ROOT),
                         Imagen = "", // n.Imagen,
                         EsPadre = "SI", // n.EsPadre,
-                        nivel =9 // p.Nivel ?? 9
+                        nivel = 9 // p.Nivel ?? 9
 
                         // , Orden = n.Orden
                     };
@@ -2255,7 +2239,7 @@ namespace ProntoMVC.Controllers
         }
 
 
-        
+
         /// /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         /// /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -2280,19 +2264,19 @@ namespace ProntoMVC.Controllers
                 throw; // Exception("No se encuentra el usuario");
             }
 
-            bool essuperadmin =oStaticMembershipService.UsuarioTieneElRol(usuario, "SuperAdmin");
-            bool esadmin =oStaticMembershipService.UsuarioTieneElRol(usuario, "Administrador");
-            bool escomercial =oStaticMembershipService.UsuarioTieneElRol(usuario, "Comercial");
-            bool esfactura =oStaticMembershipService.UsuarioTieneElRol(usuario, "FacturaElectronica");
-            bool esreq =oStaticMembershipService.UsuarioTieneElRol(usuario, "Requerimientos");
-            bool esExterno =oStaticMembershipService.UsuarioTieneElRol(usuario, "AdminExterno") ||
+            bool essuperadmin = oStaticMembershipService.UsuarioTieneElRol(usuario, "SuperAdmin");
+            bool esadmin = oStaticMembershipService.UsuarioTieneElRol(usuario, "Administrador");
+            bool escomercial = oStaticMembershipService.UsuarioTieneElRol(usuario, "Comercial");
+            bool esfactura = oStaticMembershipService.UsuarioTieneElRol(usuario, "FacturaElectronica");
+            bool esreq = oStaticMembershipService.UsuarioTieneElRol(usuario, "Requerimientos");
+            bool esExterno = oStaticMembershipService.UsuarioTieneElRol(usuario, "AdminExterno") ||
                            oStaticMembershipService.UsuarioTieneElRol(usuario, "Externo") ||
                            oStaticMembershipService.UsuarioTieneElRol(usuario, "ExternoPresupuestos") ||
                            oStaticMembershipService.UsuarioTieneElRol(usuario, "ExternoCuentaCorrienteProveedor") ||
                            oStaticMembershipService.UsuarioTieneElRol(usuario, "ExternoCuentaCorrienteCliente") ||
                            oStaticMembershipService.UsuarioTieneElRol(usuario, "ExternoOrdenesPagoListas");
-            bool escompras =oStaticMembershipService.UsuarioTieneElRol(usuario, "Compras");
-            bool esFondoFijo =oStaticMembershipService.UsuarioTieneElRol(usuario, "FondosFijos");
+            bool escompras = oStaticMembershipService.UsuarioTieneElRol(usuario, "Compras");
+            bool esFondoFijo = oStaticMembershipService.UsuarioTieneElRol(usuario, "FondosFijos");
 
 
             if (esExterno || true)
@@ -2841,380 +2825,6 @@ namespace ProntoMVC.Controllers
 
         }
 
-        public List<Tablas.Tree> TablaTree_PresupuestoObra()
-        {
-            // return RedirectToAction("Arbol", "Acceso");
-
-            //esta llamada tarda // y no se puede usar linqtosql acá??????
-            List<Tablas.Tree> Tree = TablasDAL.Arbol(this.Session["BasePronto"].ToString(), oStaticMembershipService);
-
-            List<Tablas.Tree> TreeDest = new List<Tablas.Tree>();
-            List<Tablas.Tree> TreeDest2 = new List<Tablas.Tree>();
-
-
-            // if (System.Diagnostics.Debugger.IsAttached) return Tree;
-
-
-
-            string usuario = ViewBag.NombreUsuario;
-            int IdUsuario;
-            try
-            {
-                IdUsuario = db.Empleados.Where(x => x.Nombre == usuario || x.UsuarioNT == usuario).Select(x => x.IdEmpleado).FirstOrDefault();
-            }
-            catch (Exception)
-            {
-                throw; // Exception("No se encuentra el usuario");
-            }
-
-            var permisos = (from i in db.EmpleadosAccesos where i.IdEmpleado == IdUsuario select i).ToList();
-            var z = from n in db.Trees
-                    join p in permisos on n.Clave equals p.Nodo
-                    select new { n, p };
-
-            TreeDest = new List<Tablas.Tree>(Tree); //la duplico
-
-            var archivoapp = LeerArchivoAPP(IdUsuario, this.Session["BasePronto"].ToString(), usuario, db, new Guid(oStaticMembershipService.GetUser().ProviderUserKey.ToString()));
-
-
-            bool essuperadmin = Roles.IsUserInRole(usuario, "SuperAdmin");
-            bool esadmin = Roles.IsUserInRole(usuario, "Administrador");
-            bool escomercial = Roles.IsUserInRole(usuario, "Comercial");
-            bool esfactura = Roles.IsUserInRole(usuario, "FacturaElectronica");
-            bool esreq = Roles.IsUserInRole(usuario, "Requerimientos");
-            bool esExterno = Roles.IsUserInRole(usuario, "AdminExterno") ||
-                        Roles.IsUserInRole(usuario, "Externo") ||
-                        Roles.IsUserInRole(usuario, "ExternoPresupuestos") ||
-                        Roles.IsUserInRole(usuario, "ExternoCuentaCorrienteProveedor") ||
-                        Roles.IsUserInRole(usuario, "ExternoCuentaCorrienteCliente") ||
-                        Roles.IsUserInRole(usuario, "ExternoOrdenesPagoListas");
-            bool escompras = Roles.IsUserInRole(usuario, "Compras");
-            bool esFondoFijo = Roles.IsUserInRole(usuario, "FondosFijos");
-
-
-
-            foreach (Tablas.Tree o in Tree)
-            {
-
-
-                int? nivel;
-
-
-                nivel = 9;
-
-
-                if (essuperadmin)
-                {
-                    nivel = 1;
-                }
-
-
-                /*
-
-            else if (escomercial &&
-                (o.Clave.Contains("Comercial")
-                || o.Clave.Contains("IBCondici")
-                || o.Clave.Contains("Ganancia")
-                || o.Clave.Contains("IGCondici")
-                || o.Clave.Contains("Cliente")
-                || o.Clave.Contains("ListasPrecio")
-                || o.Clave.Contains("PuntosVenta")
-                || o.Clave.Contains("Concepto")
-                || o.Clave.Contains("OrdenesCom")
-                || o.Clave.Contains("Remito")
-                || o.Clave.Contains("OPago")
-                || o.Clave.Contains("Recibo")
-                || o.Clave.Contains("NotasCredito")
-                || o.Clave.Contains("NotasDebito")
-                || o.Clave.Contains("CondicionesCompra")
-                || o.Clave.Contains("Factura")
-                || o.Clave.Contains("CtasCtesD")
-                || o.Clave.Contains("Compras")
-                || o.Clave.Contains("Comparativa")
-                ))
-            {
-                nivel = 1;
-            }
-            else if (esfactura &&
-                (o.Clave.Contains("Comercial")
-                || o.Clave.Contains("IBCondici")
-                || o.Clave.Contains("Ganancia")
-                || o.Clave.Contains("IGCondici")
-                || o.Clave.Contains("Cliente")
-                || o.Clave.Contains("ListasPrecio")
-                || o.Clave.Contains("PuntosVenta")
-                || o.Clave.Contains("Concepto")
-                || o.Clave.Contains("CondicionesCompra")
-                || o.Clave.Contains("Factura")
-                || o.Clave.Contains("CtasCtesD")
-                ))
-            {
-                nivel = 1;
-            }
-            else if ((escomercial || esfactura) && (o.Clave.Contains("Factura") || o.Clave.Contains("Articulo") || o.Clave.Contains("Comercial") || o.Clave.Contains("CtasCtesD")))
-            {
-                nivel = 1;
-            }
-            else if ((esreq) && (o.Clave.Contains("Requerimiento") || o.Clave.Contains("Articulo")))
-            {
-                nivel = 1;
-            }
-
-            else if ((escompras) && (o.Clave.Contains("Comparativa") || o.Clave.Contains("Compras") || o.Clave.Contains("Presupuesto") || o.Clave.Contains("Pedido") || o.Clave.Contains("Cotizaci") || o.Clave.Contains("CtasCtesA") || o.Clave.Contains("ComprobantesPrv") || o.Clave.Contains("ComprobanteProveedor")))
-            {
-                nivel = 1;
-            }
-            else if (esExterno && o.Clave.Contains("Presupuesto"))
-            {
-                nivel = 1;
-            }
-            else if (esFondoFijo && (o.Clave.Contains("FondoFijo") || o.Clave.Contains("FondosFijos") || o.Clave.Contains("Compras") || o.Clave.Contains("ComprobantesPrv") || o.Clave.Contains("ComprobanteProveedor")))
-            {
-                nivel = 1;
-            }
-
-            else if (o.Clave.Contains("Ppal"))
-            {
-                nivel = 1;
-            }
-            else
-            {
-                nivel = 9;
-            }
-
-            */
-
-
-
-
-                int? nivelpronto = permisos.Where(x => x.Nodo == o.Clave).Select(x => x.Nivel).FirstOrDefault();
-                if (nivelpronto != null)
-                {
-                    if (nivelpronto > nivel || true)
-                    {
-                        nivel = nivelpronto; // si el nivel del pronto es mas bajo (mayor) que el de web, tiene prioridad el nivel pronto 
-                    }
-                }
-                else
-                {
-
-                }
-
-
-
-                if (!essuperadmin && !archivoapp.Contains(o.Clave))
-                {
-                    nivel = 9;
-                }
-
-
-                if (!(!(o.Clave.Contains("Agrupad") || o.Clave.Contains("RequerimientosPorObra")) || o.Clave == "RequerimientosPorObra" || o.Clave == "RequerimientosAgrupados" || o.Clave == "PedidosAgrupados"))
-                {
-                    //  los nodos hijos de agrupados, como no estan en la coleccion del APP, hay que incluirlos de prepo
-                    nivel = 1;
-
-                }
-
-
-
-
-
-                o.nivel = nivel ?? 9;
-
-
-
-
-                if (nivel >= 9)
-                {
-                    o.Descripcion = "Bloqueado!";
-                    eliminarNodoySusHijos(o, ref TreeDest);
-                }
-                else
-                {
-                    // TreeDest.Add(o);
-                }
-            }
-
-            if (esExterno)
-            {
-                string nombreproveedor = "";
-                var n = new Tablas.Tree();
-
-                if (esExterno)
-                {
-                    try
-                    {
-                        Guid oGuid = (Guid)oStaticMembershipService.GetUser().ProviderUserKey;
-                        string cuit = DatosExtendidosDelUsuario_GrupoUsuarios(oGuid);
-                        int idproveedor = buscaridproveedorporcuit(cuit);
-                        if (idproveedor <= 0)
-                        {
-                            idproveedor = buscaridclienteporcuit(cuit);
-                            if (idproveedor > 0) nombreproveedor = db.Clientes.Find(idproveedor).RazonSocial;
-                        }
-                        else
-                        {
-                            nombreproveedor = db.Proveedores.Find(idproveedor).RazonSocial;
-                        }
-
-                    }
-                    catch (Exception)
-                    {
-
-                        nombreproveedor = "Sin CUIT";
-                    }
-
-                    if (nombreproveedor == "") nombreproveedor = "Sin CUIT";
-
-                    n.Link = nombreproveedor; // "<a href=\"#\">" + nombreproveedor + "</a>";
-                    n.Descripcion = "CUIT";
-                    n.Clave = "CUIT";
-                    n.EsPadre = "NO"; // "SI";
-                    n.IdItem = "1";
-                    n.ParentId = "01";
-                    n.Orden = 1;
-                    TreeDest.Add(n);
-                }
-
-
-                if (nombreproveedor != "Sin CUIT")
-                {
-
-
-                    string urldominio = ConfigurationManager.AppSettings["UrlDominio"];
-
-                    n = new Tablas.Tree();
-                    if (Roles.IsUserInRole(usuario, "ExternoPresupuestos"))
-                    {
-                        n.Link = "<a href='" + urldominio + "Presupuesto/IndexExterno'>Mis Presupuestos</a>";
-                        n.Descripcion = "Presupuesto";
-                        n.Clave = "Presupuesto";
-                        n.EsPadre = "NO";
-                        n.IdItem = "1";
-                        n.ParentId = "01";
-                        n.Orden = 1;
-                        TreeDest.Add(n);
-                    }
-
-                    if (Roles.IsUserInRole(usuario, "ExternoCuentaCorrienteProveedor"))
-                    {
-
-                        //n = new Tablas.Tree();
-                        //n.Link = "<a href=\"/Pronto2/CuentaCorriente/IndexExterno\">Mi Cuenta Corriente</a>";
-                        //n.Descripcion = "CuentasDeudor";
-                        //n.Clave = "CuentasDeudor";
-                        //n.EsPadre = "NO";
-                        //n.IdItem = "1";
-                        //n.ParentId = "";
-                        //n.Orden = 1;
-                        //TreeDest.Add(n);
-
-
-                        n = new Tablas.Tree();
-                        n.Link = "<a href='" + urldominio + "Reporte.aspx?ReportName=Resumen Cuenta Corriente Acreedores Por Mayor'>Mi Cuenta Corriente</a>";
-                        n.Descripcion = "CuentasAcreedor";
-                        n.Clave = "CuentasAcreedor";
-                        n.EsPadre = "NO";
-                        n.IdItem = "1";
-                        n.ParentId = "01";
-                        n.Orden = 1;
-                        TreeDest.Add(n);
-                    }
-
-                    if (Roles.IsUserInRole(usuario, "ExternoCuentaCorrienteCliente"))
-                    {
-
-                        //n = new Tablas.Tree();
-                        //n.Link = "<a href=\"/Pronto2/CuentaCorriente/IndexExterno\">Mi Cuenta Corriente</a>";
-                        //n.Descripcion = "CuentasDeudor";
-                        //n.Clave = "CuentasDeudor";
-                        //n.EsPadre = "NO";
-                        //n.IdItem = "1";
-                        //n.ParentId = "";
-                        //n.Orden = 1;
-                        //TreeDest.Add(n);
-
-
-                        n = new Tablas.Tree();
-                        n.Link = "<a href='" + urldominio + "Reporte.aspx?ReportName=Resumen Cuenta Corriente Deudores'>Mi Cuenta Corriente</a>";
-                        n.Descripcion = "CuentasDeudor";
-                        n.Clave = "CuentasDeudor";
-                        n.EsPadre = "NO";
-                        n.IdItem = "1";
-                        n.ParentId = "01";
-                        n.Orden = 1;
-                        TreeDest.Add(n);
-                    }
-                    if (Roles.IsUserInRole(usuario, "ExternoOrdenesPagoListas"))
-                    {
-
-                        n = new Tablas.Tree();
-                        n.Link = "<a href='" + urldominio + "OrdenPago/IndexExterno'>Mis Pagos en Caja</a>";
-                        n.Descripcion = "OrdenesPago";
-                        n.Clave = "OrdenesPago";
-                        n.EsPadre = "NO";
-                        n.IdItem = "1";
-                        n.ParentId = "01";
-                        n.Orden = 1;
-                        TreeDest.Add(n);
-
-
-                    }
-                }
-
-
-            }
-            //return Json(Tree);
-
-            //foreach (Tablas.Tree o in TreeDest)
-            //{
-            //    var padre = TreeDest.Where(x => x.IdItem == o.ParentId).SingleOrDefault();
-            //    if (padre == null) continue;
-
-            //    TreeDest2.Add(o);
-            //}
-
-
-            //////////////////////////////////////////////////////////////////////////////
-            //////////////////////////////////////////////////////////////////////////////
-            //////////////////////////////////////////////////////////////////////////////
-            //////////////////////////////////////////////////////////////////////////////
-            //////////////////////////////////////////////////////////////////////////////
-
-            //hay que volar los nodos de fondo fijo
-            if (glbUsuario != null) // puede ser que el usuarioweb no esté definido en esta base como empleado
-            {
-                if ((glbUsuario.IdCuentaFondoFijo ?? 0) > 0)
-                {
-                    string nombrecuentaff = db.Cuentas.Find(glbUsuario.IdCuentaFondoFijo ?? 0).Descripcion;
-                    nombrecuentaff = nombrecuentaff.Substring(0, (nombrecuentaff.Length > 30) ? 30 : nombrecuentaff.Length);
-                    var l = TreeDest.Where(n => n.ParentId == "01-11-16-07" && n.Descripcion != nombrecuentaff).ToList();
-                    foreach (Tablas.Tree n in l)
-                    {
-                        eliminarNodoySusHijos(n, ref TreeDest);
-                    }
-                }
-            }
-            //////////////////////////////////////////////////////////////////////////////
-            //////////////////////////////////////////////////////////////////////////////
-            //////////////////////////////////////////////////////////////////////////////
-            //////////////////////////////////////////////////////////////////////////////
-
-
-
-
-            //reemplazo el directorio falso de sql por el parametro ROOT
-            foreach (Tablas.Tree n in TreeDest)
-            {
-                n.Link = n.Link.Replace("Pronto2", ROOT);
-            }
-
-
-
-
-            return TreeDest;
-
-        }
 
         public List<Tablas.Tree> TablaMenu()
         {
