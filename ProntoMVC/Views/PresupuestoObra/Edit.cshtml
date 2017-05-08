@@ -74,9 +74,24 @@
         //Para que haga wrap en las celdas
         $('.ui-jqgrid .ui-jqgrid-htable th div').css('white-space', 'normal');
 
+
+        function LlenarGrilla(id)
+        {
+            var mypostData = $('#Lista').jqGrid("getGridParam", "postData");
+            mypostData.Nodo=id;
+
+            $('#Lista').jqGrid('setGridParam', {postData:mypostData} ).trigger("reloadGrid");
+            //delete mypostData.sess_date;
+            //delete mypostData.sess_type;
+            //$('#Lista').jqGrid('setGridParam', { 'Nodo': id }).trigger("reloadGrid");
+        }
+
+
+
+
         $('#Lista').jqGrid({
             url: '@Url.Action("LlenarGrilla", "PresupuestoObra")',
-            postData: { 'Nodo': 0 },
+            postData: { 'Nodo': 77 },
             datatype: 'json',
             mtype: 'POST',
             colNames: ['', 'IdObra', 'Descripcion', 'Codigo', 'Tipo de obra', 'Activa?', 'Fecha inicio', 'Fecha finalizacion', 'Fecha entrega', 'Jerarquia', 'Jefe regional', 'Jefe local', 'Subjefe',
@@ -142,7 +157,7 @@
             width: 'auto', // 'auto',
             autowidth: true,
             shrinkToFit: false,
-            height: '100%',
+            height: 600, // '100%',
             altRows: false,
             footerrow: false,
             userDataOnFooter: true,
@@ -271,6 +286,8 @@
             $.jgrid.formatter.number.thousandsSeparator = ',';
             $.jgrid.formatter.currency.thousandsSeparator = ',';
             grid.jqGrid({
+                postData: { 'idObra': @Html.Raw(Json.Encode(Model.IdObra))  },
+
                 datatype: "jsonstring",
                 // datastr: mydata,
                 datastr: JSON.parse(localStorage.arbolPresupuestosObra).rows,
@@ -288,7 +305,24 @@
                     //    formatoptions: { disabled: false }
                     //}
                 ],
-                height: 'auto',
+
+                ondblClickRow: function (rowId) {
+                    LlenarGrilla(rowId);
+                    //alert(rowId);
+
+                    //var rowData = jQuery(this).getRowData(rowId);
+                    //var jobNumber = rowData['jobNumber'];
+                    //var jobName = rowData['description'];
+                    //var jobCustomer = rowData['customerName'];
+                    //var jobStatus = rowData['jobStatus'];
+                    //jobName = jobName.replace(/&/g, "``");
+                    //jobName = jobName.replace(/#/, "__");
+                    //var aQryStr = "jobNumber=" + jobNumber + "&jobName=" + jobName + "&jobCustomer=" + jobCustomer;
+                    //console.log("./jobflow?token=view&" + aQryStr);
+                    //document.location.href = "./jobflow?token=view&" + aQryStr;
+                },
+
+                height: 600, //'auto',
                 gridview: true,
                 rowNum: 10000,
                 sortname: 'id',

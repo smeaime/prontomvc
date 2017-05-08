@@ -191,12 +191,12 @@ namespace ProntoMVC.Tests
 
             GetMockedControllerGenerico(c);  //  new ComprobanteProveedorController();
             
-            int IdObra = -1;
+            int IdObra = 77;
 
-            var f = new FormCollection();
+            //var f = new FormCollection();
             //collection["idsOfExpandedRows"]
             //    collection["nodeid"]
-            var result2 = c.CargarArbol_PresupuestoObra_ParaGrillaNoTreeviewEnLocalStorage(f);
+            var result2 = c.CargarArbol_PresupuestoObra_ParaGrillaNoTreeviewEnLocalStorage(IdObra);
 
         }
 
