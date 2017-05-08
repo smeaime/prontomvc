@@ -101,7 +101,19 @@ namespace ProntoMVC.Controllers
 
             //return View(PresupuestoObra);
 
-            return View();
+            Obra o;
+            if (id <= 0)
+            {
+                o = new Obra();
+            }
+            else
+            {
+                o = db.Obras.SingleOrDefault(x => x.IdObra == id);
+            }
+            //CargarViewBag(o);
+            return View(o);
+
+          
         }
 
 
@@ -430,7 +442,7 @@ namespace ProntoMVC.Controllers
 
 
         [HttpPost]
-        public virtual ActionResult CargarArbol_PresupuestoObra_ParaGrillaNoTreeviewEnLocalStorage(FormCollection collection)
+        public virtual ActionResult CargarArbol_PresupuestoObra_ParaGrillaNoTreeviewEnLocalStorage(int idObra)
         {
 
 
@@ -480,7 +492,7 @@ namespace ProntoMVC.Controllers
           */
 
             // PresupuestoObrasNodos_Inicializar
-            int IdObra = 77;
+            
             // DataTable oRs = EntidadManager.ExecDinamico(SCsql(), "PresupuestoObrasNodos_tx_ParaArbol " + IdObra); // esta llamada se hace en el  TablaTree_PresupuestoObra
 
 
@@ -496,87 +508,9 @@ namespace ProntoMVC.Controllers
 
 
 
+            q = TablaTree_PresupuestoObra(idObra);// podrias devolver un queryable
 
-
-            // If we found out a level, we enter the if
-            //if (role != -1)
-            //{
-            //    // A very important thing to consider is that there
-            //    // are two keys being send from the treegrid component:
-            //    // 1. [nodeid] that is the id of the node we are expanding
-            //    // 2. [n_level] the root is 0, so, if we expand the first child
-            //    // of the root element the level will be 1... also if we expand the second
-            //    // child of the root, level is 1. And so... 
-            //    // If [nodeid] is not found it means that we are not expanding anything,
-            //    // so we are at root level.
-            if (collection["idsOfExpandedRows"].NullSafeToString() == "" && collection["nodeid"].NullSafeToString() == "")
-            {
-                // q = TablaTree("01").Where(x => x.ParentId == "01").ToList(); ; // podrias devolver un queryable
-                //q = q.Where(x => x.ParentId == "01").ToList();
-                q = TablaTree_PresupuestoObra("01").ToList();
-                //como hacer si es esxterno, o si tiene permisos a todos los nodos raiz?
-
-                //no hay cacheados nodos expandidos ni el nodo apretado. Debe ser la primera pantalla de la sesión. entonces, debo 
-                // mostrar todos los nodos raíces de los que tenga permiso...
-
-            }
-            else if (collection.AllKeys.Contains("idsOfExpandedRows"))
-            {
-                // recbo los nodos por postdata
-                // List<string> v = collection["idsOfExpandedRows"].ToList();
-
-                q = TablaTree_PresupuestoObra(); //podrias devolver un queryable
-
-
-                if (collection["nodeid"].NullSafeToString() == "")
-                {
-                    // es la primera llamada, debo incluir las raices
-
-                    if (collection["idsOfExpandedRows"] != "") v = collection["idsOfExpandedRows"].ToString().Split(',').ToList();
-                    v.Add("01");
-                }
-                else
-                {
-                    // apretaron el nodo
-                    v.Add(collection["nodeid"].NullSafeToString());
-                }
-
-                q = q.Where(x => v.Contains(x.ParentId)).ToList();
-            }
-            else if (collection.AllKeys.Contains("nodeid"))
-            {
-
-
-                q = TablaTree_PresupuestoObra(); //podrias devolver un queryable
-
-                //In case we are expanding a level, we retrieve the level we are right now
-                //In this example i'll explain the 
-                //Tree with id's so you can imagine the way i'm concatenating the id's:
-                // In this case we are at Agent level that have 2 dealers and each dealer 3 service writters
-                // Agent: 5
-                //  |_Dealer1: 5_25
-                //      |_SW1: 5_25_1
-                //      |_SW2: 5_25_2
-                //      |_SW3: 5_25_3
-                //  |_Dealer2: 5_26
-                //      |_SW4: 5_26_4
-                //      |_SW5: 5_26_5
-                //      |_SW6: 5_26_6
-                // So, if we clic over the SW6: the id will be 5_26_6, his parent will be 5_26
-                // Dealer2 Id is 5_26 and his parent will be 5.
-                level = Generales.Val(collection["n_level"] ?? "0") + 1;
-                //First we split the nodeid with '_' that is our split character.
-                var stringSplitted = collection["nodeid"].Split('-');
-                //the parent id will be located at the last position of the splitted array.
-                parentId = int.Parse(stringSplitted[stringSplitted.Length - 1]);
-            }
-            else
-            {
-
-                q = TablaTree_PresupuestoObra();// podrias devolver un queryable
-
-            }
-
+            
             //Getting childrens
             //var userId = new Guid(Session["UserId"].ToString());
             // children = GetTreeGridValues(role, userId, parentId, level);
