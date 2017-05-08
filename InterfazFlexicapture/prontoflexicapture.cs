@@ -591,7 +591,15 @@ namespace ProntoFlexicapture
 
                         // en este momento yo se que en el excel está escrito en la ultima posicion la info de este documento
                         //explota aca con la carta invalida
-                        ManotearExcel(dirExport + @"ExportToXLS.xls", "numero " + output.numerocarta + "  archivo: " + exportParams.ImageExportParams.Prefix + ".tif" + " id" + output.IdCarta, "#" + output.numerocarta.ToString());
+                        try
+                        {
+                            ManotearExcel(dirExport + @"ExportToXLS.xls", "numero " + output.numerocarta + "  archivo: " + exportParams.ImageExportParams.Prefix + ".tif" + " id" + output.IdCarta, "#" + output.numerocarta.ToString());
+
+                        }
+                        catch (Exception ex)
+                        {
+                            ErrHandler2.WriteError(ex);
+                        }
 
 
 
@@ -680,51 +688,113 @@ namespace ProntoFlexicapture
         }
 
 
-        static void ManotearExcel(string nombreexcel, string dato, string numerocarta)
+
+
+        public static void ManotearExcel(string nombreexcel, string dato, string numerocarta)
         {
 
 
+
+
+            Excel.Application oXL = null;
+            Microsoft.Office.Interop.Excel.Workbook oWB = null;
             //OpenXMLWindowsApp.UpdateCell(nombreexcel, dato, 2, "BB");
             //return;
 
+            try
+            {
+
+                oXL = new Excel.Application();
+                oWB = oXL.Workbooks.Open(nombreexcel);
+                Microsoft.Office.Interop.Excel.Worksheet sheet = oWB.ActiveSheet;
+                Microsoft.Office.Interop.Excel.Range range = sheet.UsedRange;
+
+                oXL.Visible = false;
+                oXL.DisplayAlerts = false;
 
 
-            Excel.Application excel = new Excel.Application();
-            Microsoft.Office.Interop.Excel.Workbook workBook = excel.Workbooks.Open(nombreexcel);
-            Microsoft.Office.Interop.Excel.Worksheet sheet = workBook.ActiveSheet;
-            Microsoft.Office.Interop.Excel.Range range = sheet.UsedRange;
+                //string address = range.get_Address();
+                //string[] cells = address.Split(new char[] { ':' });
+                //string beginCell = cells[0].Replace("$", "");
+                //string endCell = cells[1].Replace("$", "");
 
-            excel.Visible = false;
-            excel.DisplayAlerts = false;
+                //int lastColumn = range.Columns.Count;
+                //int lastRow = range.Rows.Count;
 
+                var r = oWB.ActiveSheet.UsedRange.Rows.Count;
+                var c = oWB.ActiveSheet.UsedRange.Columns.Count;
 
-            //string address = range.get_Address();
-            //string[] cells = address.Split(new char[] { ':' });
-            //string beginCell = cells[0].Replace("$", "");
-            //string endCell = cells[1].Replace("$", "");
+                Excel.Range row2, row1;
 
-            //int lastColumn = range.Columns.Count;
-            //int lastRow = range.Rows.Count;
+                //row1 = sheet.Rows.Cells[r, 52]; // pinta que no le gusta si se la quiero pasar en una columna fuera de las que usa
+                //row1.Value = numerocarta;
 
-            var r = workBook.ActiveSheet.UsedRange.Rows.Count;
-            var c = workBook.ActiveSheet.UsedRange.Columns.Count;
+                row2 = sheet.Rows.Cells[r, 52];
+                row2.Value = dato;
 
-            Excel.Range row2, row1;
+                oXL.Application.ActiveWorkbook.SaveAs(nombreexcel);
 
-            //row1 = sheet.Rows.Cells[r, 52]; // pinta que no le gusta si se la quiero pasar en una columna fuera de las que usa
-            //row1.Value = numerocarta;
-
-            row2 = sheet.Rows.Cells[r, 52];
-            row2.Value = dato;
+            }
 
 
-            excel.Application.ActiveWorkbook.SaveAs(nombreexcel);
-            excel.Application.Quit();
-            excel.Quit();
 
+            catch (Exception ex)
+            {
+                ErrHandler2.WriteError(ex);
+            }
+
+            finally
+            {
+                // http://stackoverflow.com/questions/17777545/closing-excel-application-process-in-c-sharp-after-data-access
+                // http://stackoverflow.com/questions/18154315/excel-process-not-closing
+
+                try
+                {
+
+
+                    //'The service (excel.exe) will continue to run
+
+                    if (oWB != null) oWB.Close(false);
+                    NAR(oWB);
+                    //'quit and dispose app
+                    oXL.Quit();
+                    NAR(oXL);
+                }
+                catch (Exception ex2)
+                {
+                    ErrHandler2.WriteError("No pudo cerrar el servicio excel. " + ex2.ToString());
+
+
+                }
+
+
+                //'VERY IMPORTANT
+                GC.Collect();
+
+            }
 
 
         }
+
+
+        static private void NAR(object o)
+        {
+            try
+            {
+                System.Runtime.InteropServices.Marshal.FinalReleaseComObject(o);
+            }
+            catch { }
+            finally
+            {
+                o = null;
+            }
+        }
+
+
+
+
+
+
 
 
         public static string GenerarHtmlConResultado(List<ProntoMVC.Data.FuncionesGenericasCSharp.Resultados> l, string err)
@@ -1506,7 +1576,7 @@ namespace ProntoFlexicapture
             foreach (string f in l)
             {
 
-                    // ineficiente?
+                // ineficiente?
                 ext = PreprocesarImagenesTiff(f, bEsFormatoCPTK, bGirar180grados, bProcesarConOCR);
 
                 if (ext != null && ext.Count > 0)
@@ -2275,7 +2345,7 @@ namespace ProntoFlexicapture
 
 
 
-                    
+
 
                     string NombreUsuario = "";
                     EntidadManager.Tarea(SC, "Log_InsertarRegistro", "OCR",
