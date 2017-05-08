@@ -322,6 +322,66 @@ namespace ProntoWindowsService
 
                     }
 
+
+
+
+
+Log Entry : 
+05/05/2017 01:10:18
+Error in: . Error Message:System.Runtime.InteropServices.COMException (0x80004005): Error: No se ha podido exportar a 'Destino de exportación definido por el usuario' debido a un error en la exportación
+   at FCEngine.IFlexiCaptureProcessor.ExportDocumentEx(IDocument Document, String ExportRootFolder, String FileName, IFileExportParams ExportParams)
+   at ProntoFlexicapture.ClassFlexicapture.ProcesarCartasBatchConFlexicapture(IEngine& engine, IFlexiCaptureProcessor& processor, String plantilla, List`1 imagenes, String SC, String DirApp, Boolean bProcesar, String& sError) in c:\Users\Administrador\Documents\bdl\pronto\InterfazFlexicapture\prontoflexicapture.cs:line 555
+   at ProntoFlexicapture.ClassFlexicapture.ProcesarCartasBatchConFlexicapture_SacandoImagenesDelDirectorio(IEngine& engine, IFlexiCaptureProcessor& processor, String plantilla, Int32 cuantasImagenes, String SC, String DirApp, Boolean bProcesar, String& sError) in c:\Users\Administrador\Documents\bdl\pronto\InterfazFlexicapture\prontoflexicapture.cs:line 310
+   at ProntoWindowsService.Service1.Tanda(String SC, String DirApp, IEngine& engine, IFlexiCaptureProcessor& processor, String idthread) in c:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\Service1.cs:line 755
+
+
+
+
+
+
+
+
+Log Entry : 
+05/05/2017 17:57:07
+Error in: . Error Message:System.Runtime.InteropServices.COMException (0x80004005): No se puede acceder a E:\Sites\Pronto\Temp\Lote 05may174347 cgoycochea PV4\ExportToXLS.xls.
+Otro usuario bloqueó este proyecto.
+   at FCEngine.IFlexiCaptureProcessor.ExportDocumentEx(IDocument Document, String ExportRootFolder, String FileName, IFileExportParams ExportParams)
+   at ProntoFlexicapture.ClassFlexicapture.ProcesarCartasBatchConFlexicapture(IEngine& engine, IFlexiCaptureProcessor& processor, String plantilla, List`1 imagenes, String SC, String DirApp, Boolean bProcesar, String& sError) in c:\Users\Administrador\Documents\bdl\pronto\InterfazFlexicapture\prontoflexicapture.cs:line 555
+   at ProntoFlexicapture.ClassFlexicapture.ProcesarCartasBatchConFlexicapture_SacandoImagenesDelDirectorio(IEngine& engine, IFlexiCaptureProcessor& processor, String plantilla, Int32 cuantasImagenes, String SC, String DirApp, Boolean bProcesar, String& sError) in c:\Users\Administrador\Documents\bdl\pronto\InterfazFlexicapture\prontoflexicapture.cs:line 310
+   at ProntoWindowsService.Service1.Tanda(String SC, String DirApp, IEngine& engine, IFlexiCaptureProcessor& processor, String idthread) in c:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\Service1.cs:line 746
+__________________________
+
+
+
+
+
+
+
+Log Entry : 
+05/05/2017 19:32:10
+Error in: . Error Message:System.Runtime.InteropServices.COMException (0x80080005): Retrieving the COM class factory for component
+ with CLSID {B0003004-0000-48FF-9197-57B7554849BA} 
+failed due to the following error: 80080005 Server execution failed (Exception from HRESULT: 0x80080005 (CO_E_SERVER_EXEC_FAILURE)).
+   at System.RuntimeTypeHandle.CreateInstance(RuntimeType type, Boolean publicOnly, Boolean noCheck, Boolean& canBeCached, RuntimeMethodHandleInternal& ctor, Boolean& bNeedSecurityCheck)
+   at System.RuntimeType.CreateInstanceSlow(Boolean publicOnly, Boolean skipCheckThis, Boolean fillCache)
+   at System.RuntimeType.CreateInstanceDefaultCtor(Boolean publicOnly, Boolean skipVisibilityChecks, Boolean skipCheckThis, Boolean fillCache)
+   at System.Activator.CreateInstance(Type type, Boolean nonPublic)
+   at System.Activator.CreateInstance(Type type)
+   at ProntoFlexicapture.ClassFlexicapture.loadEngine(EngineLoadingMode _engineLoadingMode, IEngineLoader& engineLoader) 
+in c:\Users\Administrador\Documents\bdl\pronto\InterfazFlexicapture\prontoflexicapture.cs:line 2748
+   at ProntoFlexicapture.ClassFlexicapture.IniciaMotor(IEngine& engine, IEngineLoader& engineLoader, IFlexiCaptureProcessor& processor, String plantilla,
+ EngineLoadingMode engineLoadingMode) in c:\Users\Administrador\Documents\bdl\pronto\InterfazFlexicapture\prontoflexicapture.cs:line 2398
+   at ProntoWindowsService.Service1.DoWorkSoloOCR() in c:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\Service1.cs:line 417
+__________________________
+
+
+We will see in a second what can cause this, but the idea is that under heavy CPU load the machine can be pretty slow, and some out-of-process COM servers will fail to initialize properly. 
+
+Si después de hacer todo lo que se indica en la pregunta sigue tirando ese error, el motivo es muy sencillo: Carga de CPU
+
+-seria raro... cuando falla de esa manera, no lo resucito más por más intentos q haga. necesito reiniciar el servicio (y engancha enseguida)
+
+
                     catch (System.Runtime.InteropServices.COMException x2)
                     {
                         /*
@@ -378,7 +438,11 @@ namespace ProntoWindowsService
                             ClassFlexicapture.Log(idthread + "Problemas al conectarse al licenciador");
 
                         }
+else
+{
 
+    asdasd
+}
 
 
 
@@ -404,6 +468,7 @@ namespace ProntoWindowsService
                         ClassFlexicapture.unloadEngine(ref engine, ref engineLoader);
                         processor = null;
 
+pruebo poner en null el engine y engineloader?
 
                         bool exito = false;
                         for (int n = 0; n < 800; n++)
