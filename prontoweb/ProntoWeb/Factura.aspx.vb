@@ -195,7 +195,7 @@ Partial Class FacturaABM
             txtPorcentajeCertificacion.Attributes.Add("onKeyUp", "jsRecalcularItem()")
 
 
-
+            comprobar q existe porq si no explota
             BloqueosDeEdicion(myFactura)
 
 
