@@ -892,7 +892,6 @@ Namespace Pronto.ERP.Bll
 
 
 
-
                             Dim iq = CartasLINQlocalSimplificadoTipadoConCalada3(SC, _
                                "", "", "", 1, maximumRows, _
                                estado, "", idVendedor, idCorredor, _

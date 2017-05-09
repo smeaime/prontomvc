@@ -2599,6 +2599,7 @@ Public Class CartaDePorteManager
         ''db.ObjectTrackingEnabled = False
 
 
+
         Dim ModoExportacion As enumCDPexportacion
         Select Case ModoExportacionString
             Case "Entregas"
@@ -2608,7 +2609,7 @@ Public Class CartaDePorteManager
             Case "Ambas"
                 ModoExportacion = enumCDPexportacion.Ambas
             Case Else
-                Throw New Exception("Exportacion desconocida")
+                Throw New Exception("Exportacion desconocida " + ModoExportacionString)
         End Select
 
 
