@@ -2210,31 +2210,33 @@ namespace ProntoMVC.Controllers
             public bool isLeaf { get; set; }
         }
 
+        // http://stackoverflow.com/questions/17404603/c-sharp-sorting-data-from-an-adjacency-tree
+        // http://stackoverflow.com/questions/17404603/c-sharp-sorting-data-from-an-adjacency-tree
 
-        IEnumerable<TreeNode> TreeOrder(
-            IEnumerable<TreeNode> nodes)
+        IEnumerable<Tablas.Tree> TreeOrder(
+            IEnumerable<Tablas.Tree> nodes)
         {
             //Find the root node
-            var root = nodes.Single(node => node.parent == null);
+            var root = nodes.Single(node => node.ParentId == "");
 
             //Build an inverse lookup from parent id to children ids
             var childrenLookup = nodes
-                .Where(node => node.parent != null)
-                .ToLookup(node => node.parent.Value);
+                .Where(node => node.ParentId != "")
+                .ToLookup(node => node.ParentId);
 
             return TreeOrder(root, childrenLookup);
         }
 
-        IEnumerable<TreeNode> TreeOrder(
-            TreeNode root,
-            ILookup<Guid, TreeNode> childrenLookup)
+        IEnumerable<Tablas.Tree> TreeOrder(
+            Tablas.Tree root,
+            ILookup<string, Tablas.Tree> childrenLookup)
         {
             yield return root;
 
-            if (!childrenLookup.Contains(root.id))
+            if (!childrenLookup.Contains(root.IdItem))
                 yield break;
 
-            foreach (var child in childrenLookup[root.id])
+            foreach (var child in childrenLookup[root.IdItem])
                 foreach (var node in TreeOrder(child, childrenLookup))
                     yield return node;
         }
@@ -2266,16 +2268,15 @@ namespace ProntoMVC.Controllers
                         Parametros = "", //n.Parametros,
                         Link = n["Lineage"].NullSafeToString(), //n.Link.Replace("Pronto2", ROOT),
                         Imagen = "", // n.Imagen,
-                        EsPadre = idsPadres.Contains(Convert.ToInt32 ( n["IdPresupuestoObrasNodo"]))  ? "SI" : "NO", // n.EsPadre,
+                        EsPadre = "SI", // idsPadres.Contains(Convert.ToInt32 ( n["IdPresupuestoObrasNodo"]))  ? "SI" : "NO", // n.EsPadre,
                         nivel = 9 // p.Nivel ?? 9
 
                         // , Orden = n.Orden
                     };
 
 
-
-
-            return q.ToList();
+            return TreeOrder(q).ToList();
+            //return q.ToList();
         }
 
 
