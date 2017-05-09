@@ -36,6 +36,8 @@ namespace ProntoWindowsService
 
         static bool bForzarShutdown = false;
 
+        static bool bUsar3OCR = true;
+
         static string DirApp1, DirApp2;
         static string SC1, SC2;
         static string plantilla;
@@ -111,7 +113,7 @@ namespace ProntoWindowsService
 
 
             ////http://stackoverflow.com/questions/11985308/multiple-threads-in-windows-service
-            if (false)
+            if (bUsar3OCR)
             {
                 m_thread4 = new Thread(DoWorkSoloOCR);
                 m_thread4.Name = "MyWorker4";
