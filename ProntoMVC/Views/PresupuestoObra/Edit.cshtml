@@ -44,6 +44,7 @@
             contentType: "application/json; charset=utf-8",
             //url: ROOT + "Home/TreeGrid_ParaGrillaNoTreeviewEnLocalStorage",
             url: ROOT + "PresupuestoObra/CargarArbol_PresupuestoObra_ParaGrillaNoTreeviewEnLocalStorage",
+            data: JSON.stringify( { idObra:  @Html.Raw(Json.Encode(Model.IdObra))}),
             dataType: "json",
             success: function (data) {
                 var lala = JSON.stringify(data);
@@ -94,10 +95,10 @@
             postData: { 'Nodo': 0 },
             datatype: 'json',
             mtype: 'POST',
-            colNames: ['', 'IdObra', 'Descripcion', 'Codigo', 'Tipo de obra', 'Activa?', 'Fecha inicio', 'Fecha finalizacion', 'Fecha entrega', 'Jerarquia', 'Jefe regional', 'Jefe local', 'Subjefe',
-                        'Cuenta contable fondo fijo', 'Grupo de obra', 'Articulo asociado', 'Valor de la obra', 'Mon.', 'Direccion', 'Localidad', 'Codigo Postal', 'Provincia', 'Pais', 'Telefono', 'Responsable',
-                        'Lugar de pago', 'Prox. nro. aut. compra', 'Orden sec.', 'Dias liq. certif.', 'Observaciones', 'Archivo adjunto 1', 'Archivo adjunto 2', 'Archivo adjunto 3', 'Archivo adjunto 4',
-                        'Archivo adjunto 5', 'Archivo adjunto 6', 'Archivo adjunto 7', 'Archivo adjunto 8', 'Archivo adjunto 9', 'Archivo adjunto 10'],
+            colNames: ['', 'IdObra', 'Descripcion', 'Item', 'Tipo', 'Rub', 'Un.', 'Cant. Base', 'Rendimiento', 'Incidencia', 'Precio Un.', 'Cantidad', 'Avance',
+                        '|| % Distr', 'Cant Presup', 'Pre Presup', 'Imp Presup', 'Cant Real', 'Pre Pagado', 'Imp. Real', 'Certificado ||', '|| % Distr', '', '', '',
+                        '', '', '', '', '', '', '', '', '',
+                        '', '', '', '', '', ''],
             colModel: [
                         { name: 'ver', index: 'ver', hidden: true, width: 50 },
                         { name: 'IdObra', index: 'IdOrdenPago', align: 'center', width: 80, sortable: false, editable: false, search: false, hidden: true },
@@ -265,7 +266,7 @@
 
 
 
-       // http://stackoverflow.com/questions/7330572/sorting-of-jqgrid-v4-1-2-treegrid-not-working-with-ajacency-model/7332627#7332627
+        // http://stackoverflow.com/questions/7330572/sorting-of-jqgrid-v4-1-2-treegrid-not-working-with-ajacency-model/7332627#7332627
 
         if (localStorage.arbolPresupuestosObra != null) {
 
@@ -286,7 +287,7 @@
             $.jgrid.formatter.number.thousandsSeparator = ',';
             $.jgrid.formatter.currency.thousandsSeparator = ',';
             grid.jqGrid({
-                //postData: { 'idObra':  77 },  //tml.Raw(Json.Encode(Model.IdObra))  
+                //postData: { 'idObra':  77 },  //tml.Raw(Json.Encode(Model.IdObra))
 
                 datatype: "jsonstring",
                 // datastr: mydata,
@@ -306,8 +307,8 @@
                     //}
                 ],
 
-                onSelectRow: function(rowId) { 
-                //ondblClickRow: function (rowId) {
+                onSelectRow: function(rowId) {
+                    //ondblClickRow: function (rowId) {
                     LlenarGrilla(rowId);
                     //alert(rowId);
 
@@ -331,6 +332,7 @@
                 treeGridModel: 'adjacency',
                 treedatatype: "local",
                 ExpandColumn: 'descr',
+                loadui: 'disable', // es la unica manera q encontré de sacar el cartelote "loading" q no se iba
                 //caption: "Demonstrate how to use Tree Grid for the Adjacency Set Model",
                 jsonReader: {
                     repeatitems: false,

@@ -409,7 +409,7 @@ namespace ProntoMVC.Controllers
 
                 a[COL_NODO] ,
                 a[COL_NODOPADRE] ,
-                "<a href="+ Url.Action("Edit",new {id = a[COL_NODO]} ) + "  target=\"_blank\" >" +    a[COL_DESCRIPCION] + "</>" ,  // "<a href=\"CartaDePorte.aspx?Id=" +  a.IdCartaDePorte + "\"  target=\"_blank\" >" +  a.NumeroCartaEnTextoParaBusqueda.NullSafeToString() + "</>" ,
+                "<a href="+ Url.Action("Edit","PresupuestoObraItem",new {id = a[COL_NODO]} ) + "  target=\"_blank\" >" +    a[COL_DESCRIPCION] + "</>" ,  // "<a href=\"CartaDePorte.aspx?Id=" +  a.IdCartaDePorte + "\"  target=\"_blank\" >" +  a.NumeroCartaEnTextoParaBusqueda.NullSafeToString() + "</>" ,
                 a[COL_DEPTH] ,
                 a[COL_LINEAGE] ,
                 a[COL_OBRA] ,
@@ -443,7 +443,7 @@ namespace ProntoMVC.Controllers
 
 
         [HttpPost]
-        public virtual ActionResult CargarArbol_PresupuestoObra_ParaGrillaNoTreeviewEnLocalStorage(int idObra = 77)
+        public virtual ActionResult CargarArbol_PresupuestoObra_ParaGrillaNoTreeviewEnLocalStorage(int idObra)
         {
 
 
