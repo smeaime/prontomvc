@@ -2072,14 +2072,16 @@ Public Class ExcelImportadorManager
 
 
 
-
+                    
 
 
                     'http://consultas.bdlconsultores.com.ar/AdminTest/template/desarrollo/Consulta.php?IdReclamo=37950&SinMenu=1
                     'no pisar si fue editada manual o pasó la ocr (o sea, si tiene una imagen adjunta)
-                    Dim bEditadaManual As Boolean = (If(.FechaModificacion, DateTime.MinValue) >
-                                                            If(.FechaActualizacionAutomatica, DateTime.MinValue).AddSeconds(60)) _
-                                                        Or .PathImagen <> "" Or .PathImagen2 <> ""
+                    '-no puedo comparar contra FechaActualizacionAutomatica porque esa se actualiza aunque no pise el resto de los datos.
+                    ' (If(.FechaModificacion, DateTime.MinValue) > If(.FechaActualizacionAutomatica, DateTime.MinValue).AddSeconds(60))
+                    Dim bEditadaManual As Boolean = .IdUsuarioModifico IsNot Nothing _
+                                                    Or .PathImagen <> "" Or .PathImagen2 <> ""
+
 
 
 
