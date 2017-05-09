@@ -113,7 +113,7 @@ namespace ProntoMVC.Controllers
             //CargarViewBag(o);
             return View(o);
 
-          
+
         }
 
 
@@ -442,7 +442,7 @@ namespace ProntoMVC.Controllers
 
 
         [HttpPost]
-        public virtual ActionResult CargarArbol_PresupuestoObra_ParaGrillaNoTreeviewEnLocalStorage(int idObra)
+        public virtual ActionResult CargarArbol_PresupuestoObra_ParaGrillaNoTreeviewEnLocalStorage(int idObra = 77)
         {
 
 
@@ -492,7 +492,7 @@ namespace ProntoMVC.Controllers
           */
 
             // PresupuestoObrasNodos_Inicializar
-            
+
             // DataTable oRs = EntidadManager.ExecDinamico(SCsql(), "PresupuestoObrasNodos_tx_ParaArbol " + IdObra); // esta llamada se hace en el  TablaTree_PresupuestoObra
 
 
@@ -510,7 +510,7 @@ namespace ProntoMVC.Controllers
 
             q = TablaTree_PresupuestoObra(idObra);// podrias devolver un queryable
 
-            
+
             //Getting childrens
             //var userId = new Guid(Session["UserId"].ToString());
             // children = GetTreeGridValues(role, userId, parentId, level);
@@ -539,7 +539,7 @@ namespace ProntoMVC.Controllers
                         select new
                         {
                             id = child.IdItem,
-                            descr =child.Descripcion , // Correspond to the colmodel NAME in javascript
+                            descr = child.Descripcion, // Correspond to the colmodel NAME in javascript
 
                             // The next one correspond to the colmodel ID in javascript Id
                             // If we are are the root level the [nodeid] will be empty as i explained above
@@ -586,11 +586,12 @@ namespace ProntoMVC.Controllers
                             //////////////////////////////////////////////////////////////////////////
                             //IS EXPANDED: I use that is always false,
                             expanded = (v.Contains(child.IdItem) ? "true" : "false").ToString()
-                         
+
                             //////////////////////////////////////////////////////////////////////////
-                            //////////////////////////////////////////////////////////////////////////
-                            // LOADED: si está puesto en true, no vuelve a llamar al servidor
-                             , loaded= "true" 
+                                //////////////////////////////////////////////////////////////////////////
+                                // LOADED: si está puesto en true, no vuelve a llamar al servidor
+                             ,
+                            loaded = "true"
 
                             // http://stackoverflow.com/questions/6508838/in-jqgrid-treegrid-how-can-i-specify-that-i-want-to-load-the-entire-tree-up-fro
                             //                If I understand your question correct, the most important lines of the Tree Grid code to answer on 
@@ -614,6 +615,7 @@ namespace ProntoMVC.Controllers
 
         }
 
+    
 
 
         public virtual ActionResult TT(string sidx, string sord, int? page, int? rows, bool _search, string searchField, string searchOper, string searchString, string activas)
@@ -657,8 +659,8 @@ namespace ProntoMVC.Controllers
             //var data1 = (from a in data select a)
             //            .OrderBy(x => x.Descripcion)
 
-//.Skip((currentPage - 1) * pageSize).Take(pageSize)
-//.ToList();
+            //.Skip((currentPage - 1) * pageSize).Take(pageSize)
+            //.ToList();
 
             var jsonData = new jqGridJson()
             {

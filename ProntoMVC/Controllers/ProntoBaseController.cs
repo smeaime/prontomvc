@@ -2201,6 +2201,46 @@ namespace ProntoMVC.Controllers
         /// /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         /// /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+        public class TreeNode
+        {
+            public Guid id { get; set; }
+            public string name { get; set; }
+            public int level { get; set; }
+            public Guid? parent { get; set; }
+            public bool isLeaf { get; set; }
+        }
+
+
+        IEnumerable<TreeNode> TreeOrder(
+            IEnumerable<TreeNode> nodes)
+        {
+            //Find the root node
+            var root = nodes.Single(node => node.parent == null);
+
+            //Build an inverse lookup from parent id to children ids
+            var childrenLookup = nodes
+                .Where(node => node.parent != null)
+                .ToLookup(node => node.parent.Value);
+
+            return TreeOrder(root, childrenLookup);
+        }
+
+        IEnumerable<TreeNode> TreeOrder(
+            TreeNode root,
+            ILookup<Guid, TreeNode> childrenLookup)
+        {
+            yield return root;
+
+            if (!childrenLookup.Contains(root.id))
+                yield break;
+
+            foreach (var child in childrenLookup[root.id])
+                foreach (var node in TreeOrder(child, childrenLookup))
+                    yield return node;
+        }
+
+
+
         public List<Tablas.Tree> TablaTree_PresupuestoObra(int obra )
         {
 
@@ -2212,7 +2252,7 @@ namespace ProntoMVC.Controllers
 
             DataTable dt = Pronto.ERP.Bll.EntidadManager.GetStoreProcedure(SCsql(), "PresupuestoObrasNodos_tx_ParaArbol", obra);
 
-            var idsPadres = (from DataRow r in dt.Rows where r["IdNodoPadre"] !=null select Convert.ToInt32 (r["IdNodoPadre"])).Distinct();
+            var idsPadres = (from DataRow r in dt.Rows where r["IdNodoPadre"] !=null select Convert.ToInt32 (r["IdNodoPadre"] ?? -1 )).Distinct();
 
             var q = from DataRow n in dt.Rows
                     //where (n["IdNodoPadre"] == parentId)
