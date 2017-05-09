@@ -1,0 +1,115 @@
+
+Log Entry : 
+05/09/2017 14:15:22
+Error in: . Error Message:Arranca motor
+__________________________
+
+Log Entry : 
+05/09/2017 14:15:29
+Error in: . Error Message:Reconoció la licencia
+__________________________
+
+Log Entry : 
+05/09/2017 14:17:16
+Error in: . Error Message:Procesó carta: titular GANADERA SALLIQUELO S A C 1 C F 1A
+__________________________
+
+Log Entry : 
+05/09/2017 14:17:22
+Error in: . Error Message:Detectó bien el numero con el Flexicapture: 559196149
+__________________________
+
+Log Entry : 
+05/09/2017 14:17:42
+Error in: . Error Message:Llamo a IsValid y Save
+__________________________
+
+Log Entry : 
+05/09/2017 14:17:54
+Error in: . Error Message:Llamo a GrabarImagen
+__________________________
+
+Log Entry : 
+05/09/2017 14:17:54
+Error in: . Error Message:GrabarImagen 1
+__________________________
+
+Log Entry : 
+05/09/2017 14:17:54
+Error in: . Error Message:GrabarImagen 2
+__________________________
+
+Log Entry : 
+05/09/2017 14:17:56
+Error in: . Error Message:grabo en base
+__________________________
+
+Log Entry : 
+05/09/2017 14:17:56
+Error in: . Error Message:grabado
+__________________________
+
+Log Entry : 
+05/09/2017 14:17:56
+Error in: . Error Message:Archivo C:\Users\Administrador\Documents\bdl\pronto\prontoweb\Temp\Lote 09may141520 Mariano PV1\ExportToXLS_931006.tif numcarta 559196149
+__________________________
+
+Log Entry : 
+05/09/2017 14:18:23
+Error in: . Error Message:Procesó carta: titular 
+__________________________
+
+Log Entry : 
+05/09/2017 14:18:36
+Error in: . Error Message:System.FormatException
+No se puede reconocer la cadena como valor DateTime válido.
+   en System.DateTimeParse.Parse(String s, DateTimeFormatInfo dtfi, DateTimeStyles styles)
+   en System.Convert.ToDateTime(String value)
+   en ProntoFlexicapture.ClassFlexicapture.ProcesaCarta(IDocument document, String SC, String archivoOriginal, String DirApp) en c:\Users\Administrador\Documents\bdl\pronto\InterfazFlexicapture\prontoflexicapture.cs:línea 2272
+mscorlib
+__________________________
+
+Log Entry : 
+05/09/2017 14:18:36
+Error in: . Error Message:Llamo a IsValid y Save
+__________________________
+
+Log Entry : 
+05/09/2017 14:18:44
+Error in: . Error Message:Llamo a GrabarImagen
+__________________________
+
+Log Entry : 
+05/09/2017 14:18:44
+Error in: . Error Message:GrabarImagen 1
+__________________________
+
+Log Entry : 
+05/09/2017 14:18:44
+Error in: . Error Message:GrabarImagen 2
+__________________________
+
+Log Entry : 
+05/09/2017 14:18:45
+Error in: . Error Message:grabo en base
+__________________________
+
+Log Entry : 
+05/09/2017 14:18:45
+Error in: . Error Message:grabado
+__________________________
+
+Log Entry : 
+05/09/2017 14:18:45
+Error in: . Error Message:Archivo C:\Users\Administrador\Documents\bdl\pronto\prontoweb\Temp\Lote 09may141520 Mariano PV1\ExportToXLS_684568.tif numcarta 559196149
+__________________________
+
+Log Entry : 
+05/09/2017 14:19:30
+Error in: . Error Message:Termina motor
+__________________________
+
+Log Entry : 
+05/09/2017 14:19:32
+Error in: . Error Message:Proceso cerrado
+__________________________
