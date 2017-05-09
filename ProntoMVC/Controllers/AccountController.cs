@@ -84,13 +84,12 @@ namespace ProntoMVC.Controllers
         {
 
             // var sc=   sCadenaConexSQL(string nombreEmpresa, Guid userGuid = new Guid());
-
+      
             var sConexBDLMaster = ConfigurationManager.ConnectionStrings["ApplicationServices"].ConnectionString;
 
             //var sConexSQL = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(sConexBDLMaster);
 
-
-
+      
 
             try
             {
