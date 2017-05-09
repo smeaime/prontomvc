@@ -12,7 +12,7 @@ presupuestosobras_
 
   --sp_helptext PresupuestoObrasNodos_tx_PorNodo 
 
-  PresupuestoObrasNodos_tx_PorNodo 0 -1
+  PresupuestoObrasNodos_tx_PorNodo 39255 
 
   obras_tx_activas 'SI','SI'
    Aplicacion.Obras.TraerFiltrado("_Activas", Array("SI", "SI", glbIdUsuario))

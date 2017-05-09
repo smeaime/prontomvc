@@ -99,7 +99,7 @@
                         'Lugar de pago', 'Prox. nro. aut. compra', 'Orden sec.', 'Dias liq. certif.', 'Observaciones', 'Archivo adjunto 1', 'Archivo adjunto 2', 'Archivo adjunto 3', 'Archivo adjunto 4',
                         'Archivo adjunto 5', 'Archivo adjunto 6', 'Archivo adjunto 7', 'Archivo adjunto 8', 'Archivo adjunto 9', 'Archivo adjunto 10'],
             colModel: [
-                        { name: 'ver', index: 'ver', hidden: false, width: 50 },
+                        { name: 'ver', index: 'ver', hidden: true, width: 50 },
                         { name: 'IdObra', index: 'IdOrdenPago', align: 'center', width: 80, sortable: false, editable: false, search: false, hidden: true },
                         { name: 'Descripcion', index: 'Descripcion', align: 'left', width: 300, editable: false, search: true, searchoptions: { sopt: ['cn', 'eq'] } },
                         { name: 'NumeroObra', index: 'NumeroObra', align: 'left', width: 80, editable: false, hidden: false },
@@ -291,7 +291,7 @@
                 datatype: "jsonstring",
                 // datastr: mydata,
                 datastr: JSON.parse(localStorage.arbolPresupuestosObra).rows,
-                colNames: [/*"Id", */"Account" , "Acc Num" /*, "Debit" , "Credit", "Balance", "Enabled"*/],
+                colNames: [/*"Id", */"" , "Acc Num" /*, "Debit" , "Credit", "Balance", "Enabled"*/],
                 colModel: [
                     //{name: 'id', index: 'id', width: 1, hidden: true, key: true},
                     { name: 'descr', index: 'descr', width: 250 },
@@ -306,7 +306,8 @@
                     //}
                 ],
 
-                ondblClickRow: function (rowId) {
+                onSelectRow: function(rowId) { 
+                //ondblClickRow: function (rowId) {
                     LlenarGrilla(rowId);
                     //alert(rowId);
 

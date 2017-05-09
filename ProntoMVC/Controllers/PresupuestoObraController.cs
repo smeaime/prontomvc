@@ -398,17 +398,18 @@ namespace ProntoMVC.Controllers
                         {
                             id = a[0], // a.IdCartaDePorte.ToString(),
                             cell = new string[] {
-                                "", //"<a href="+ Url.Action("Edit",new {id = a.IdPedido} ) + "  >Editar</>" ,
+                                //"", //"<a href="+ Url.Action("Edit",new {id = a.IdPedido} ) + "  >Editar</>" ,
                                 
 
                                 // CP	TURNO	SITUACION	MERC	TITULAR_CP	INTERMEDIARIO	RTE CIAL	CORREDOR	DESTINATARIO	DESTINO	ENTREGADOR	PROC	KILOS	OBSERVACION
 
-                                a[0], // a.IdCartaDePorte.ToString(),
+                                 // a[0], // a.IdCartaDePorte.ToString(),
 
-                               "<a href=\"CartaDePorte.aspx?Id=" +  a[0] + "\"  target=\"_blank\" >" +  a[0] + "</>" ,  // "<a href=\"CartaDePorte.aspx?Id=" +  a.IdCartaDePorte + "\"  target=\"_blank\" >" +  a.NumeroCartaEnTextoParaBusqueda.NullSafeToString() + "</>" ,
+                               
 
                 a[COL_NODO] ,
                 a[COL_NODOPADRE] ,
+                "<a href="+ Url.Action("Edit",new {id = a[COL_NODO]} ) + "  target=\"_blank\" >" +    a[COL_DESCRIPCION] + "</>" ,  // "<a href=\"CartaDePorte.aspx?Id=" +  a.IdCartaDePorte + "\"  target=\"_blank\" >" +  a.NumeroCartaEnTextoParaBusqueda.NullSafeToString() + "</>" ,
                 a[COL_DEPTH] ,
                 a[COL_LINEAGE] ,
                 a[COL_OBRA] ,
