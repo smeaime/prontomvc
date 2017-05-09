@@ -358,8 +358,11 @@ namespace ProntoFlexicapture
             // The sample image source will use these files by reference:
             foreach (string s in imagenes)
             {
-                imageSource.AddImageFileByRef(s);
-                MarcarArchivoComoProcesandose(s);
+                if (!SeEstaProcesandoEsteArchivo(s))
+                {
+                    MarcarArchivoComoProcesandose(s);
+                    imageSource.AddImageFileByRef(s);
+                }
             }
             //imageSource.AddImageFileByRef(SamplesFolder + "\\SampleImages\\ZXING BIEN 545459461 (300dpi).jpg");
             //imageSource.AddImageFileByRef(SamplesFolder + "\\SampleImages\\Invoices_2.tif");
@@ -1202,6 +1205,14 @@ namespace ProntoFlexicapture
             return 0;
 
         }
+
+        public static bool SeEstaProcesandoEsteArchivo(string archivo)
+        {
+
+            return File.Exists(archivo + ".bdl");
+
+        }
+
 
 
         static int MarcarImagenComoProcesada(string archivo)
