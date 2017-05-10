@@ -641,10 +641,13 @@ select idlocalidad, nombre from localidades</CommandText>
               </Style>
             </ChartNoDataMessage>
             <DataSetName>DataSet1</DataSetName>
-            <Top>101.04732mm</Top>
-            <Left>158.59354mm</Left>
+            <Top>103.53404mm</Top>
+            <Left>162.84293mm</Left>
             <Height>48.4125mm</Height>
             <Width>51.01111mm</Width>
+            <Visibility>
+              <Hidden>= ((Parameters!BitFlags.Value mod 2)&lt;&gt;1)</Hidden>
+            </Visibility>
             <Style>
               <Border>
                 <Color>#7292cc</Color>
@@ -660,19 +663,19 @@ select idlocalidad, nombre from localidades</CommandText>
             <TablixBody>
               <TablixColumns>
                 <TablixColumn>
-                  <Width>20.1199mm</Width>
+                  <Width>24.75591mm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>20.1199mm</Width>
+                  <Width>24.75591mm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>20.1199mm</Width>
+                  <Width>24.75591mm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>20.1199mm</Width>
+                  <Width>24.75591mm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>20.1199mm</Width>
+                  <Width>24.75591mm</Width>
                 </TablixColumn>
               </TablixColumns>
               <TablixRows>
@@ -1244,7 +1247,7 @@ select idlocalidad, nombre from localidades</CommandText>
               <TablixMembers>
                 <TablixMember>
                   <TablixHeader>
-                    <Size>20.1199mm</Size>
+                    <Size>24.75591mm</Size>
                     <CellContents>
                       <Textbox Name="Textbox29">
                         <CanGrow>true</CanGrow>
@@ -1296,7 +1299,7 @@ select idlocalidad, nombre from localidades</CommandText>
                     </SortExpression>
                   </SortExpressions>
                   <TablixHeader>
-                    <Size>20.1199mm</Size>
+                    <Size>24.75591mm</Size>
                     <CellContents>
                       <Textbox Name="sucursal">
                         <CanGrow>true</CanGrow>
@@ -1337,7 +1340,7 @@ select idlocalidad, nombre from localidades</CommandText>
                 </TablixMember>
                 <TablixMember>
                   <TablixHeader>
-                    <Size>20.1199mm</Size>
+                    <Size>24.75591mm</Size>
                     <CellContents>
                       <Textbox Name="Textbox31">
                         <CanGrow>true</CanGrow>
@@ -1380,8 +1383,11 @@ select idlocalidad, nombre from localidades</CommandText>
             <Top>52.29931mm</Top>
             <Left>5.85389mm</Left>
             <Height>18.79374mm</Height>
-            <Width>120.7194mm</Width>
+            <Width>148.53544mm</Width>
             <ZIndex>1</ZIndex>
+            <Visibility>
+              <Hidden>= not Parameters!bMostrar1.Value</Hidden>
+            </Visibility>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -1547,19 +1553,19 @@ select idlocalidad, nombre from localidades</CommandText>
             <TablixBody>
               <TablixColumns>
                 <TablixColumn>
-                  <Width>20.1199mm</Width>
+                  <Width>24.7559mm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>20.1199mm</Width>
+                  <Width>24.7559mm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>20.1199mm</Width>
+                  <Width>24.7559mm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>20.1199mm</Width>
+                  <Width>24.7559mm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>20.1199mm</Width>
+                  <Width>24.7559mm</Width>
                 </TablixColumn>
               </TablixColumns>
               <TablixRows>
@@ -2131,7 +2137,7 @@ select idlocalidad, nombre from localidades</CommandText>
               <TablixMembers>
                 <TablixMember>
                   <TablixHeader>
-                    <Size>20.1199mm</Size>
+                    <Size>24.7559mm</Size>
                     <CellContents>
                       <Textbox Name="Textbox30">
                         <CanGrow>true</CanGrow>
@@ -2183,7 +2189,7 @@ select idlocalidad, nombre from localidades</CommandText>
                     </SortExpression>
                   </SortExpressions>
                   <TablixHeader>
-                    <Size>20.1199mm</Size>
+                    <Size>24.7559mm</Size>
                     <CellContents>
                       <Textbox Name="sucursal2">
                         <CanGrow>true</CanGrow>
@@ -2224,7 +2230,7 @@ select idlocalidad, nombre from localidades</CommandText>
                 </TablixMember>
                 <TablixMember>
                   <TablixHeader>
-                    <Size>20.1199mm</Size>
+                    <Size>24.7559mm</Size>
                     <CellContents>
                       <Textbox Name="Textbox35">
                         <CanGrow>true</CanGrow>
@@ -2264,11 +2270,14 @@ select idlocalidad, nombre from localidades</CommandText>
               </TablixMembers>
             </TablixRowHierarchy>
             <DataSetName>DataSet1</DataSetName>
-            <Top>101.04732mm</Top>
-            <Left>5.85389mm</Left>
+            <Top>103.53404mm</Top>
+            <Left>5.85392mm</Left>
             <Height>18.52916mm</Height>
-            <Width>120.7194mm</Width>
+            <Width>148.53541mm</Width>
             <ZIndex>6</ZIndex>
+            <Visibility>
+              <Hidden>= ((Parameters!BitFlags.Value mod 2)&lt;&gt;1)</Hidden>
+            </Visibility>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -2279,19 +2288,19 @@ select idlocalidad, nombre from localidades</CommandText>
             <TablixBody>
               <TablixColumns>
                 <TablixColumn>
-                  <Width>20.1199mm</Width>
+                  <Width>24.7559mm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>20.1199mm</Width>
+                  <Width>24.7559mm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>20.1199mm</Width>
+                  <Width>24.7559mm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>20.1199mm</Width>
+                  <Width>24.7559mm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>20.1199mm</Width>
+                  <Width>24.7559mm</Width>
                 </TablixColumn>
               </TablixColumns>
               <TablixRows>
@@ -2856,7 +2865,7 @@ select idlocalidad, nombre from localidades</CommandText>
               <TablixMembers>
                 <TablixMember>
                   <TablixHeader>
-                    <Size>20.1199mm</Size>
+                    <Size>24.7559mm</Size>
                     <CellContents>
                       <Textbox Name="Textbox32">
                         <CanGrow>true</CanGrow>
@@ -2908,7 +2917,7 @@ select idlocalidad, nombre from localidades</CommandText>
                     </SortExpression>
                   </SortExpressions>
                   <TablixHeader>
-                    <Size>20.1199mm</Size>
+                    <Size>24.7559mm</Size>
                     <CellContents>
                       <Textbox Name="sucursal3">
                         <CanGrow>true</CanGrow>
@@ -2949,7 +2958,7 @@ select idlocalidad, nombre from localidades</CommandText>
                 </TablixMember>
                 <TablixMember>
                   <TablixHeader>
-                    <Size>20.1199mm</Size>
+                    <Size>24.7559mm</Size>
                     <CellContents>
                       <Textbox Name="Textbox39">
                         <CanGrow>true</CanGrow>
@@ -2992,7 +3001,7 @@ select idlocalidad, nombre from localidades</CommandText>
             <Top>155.18732mm</Top>
             <Left>5.85389mm</Left>
             <Height>19.32291mm</Height>
-            <Width>120.7194mm</Width>
+            <Width>148.53541mm</Width>
             <ZIndex>7</ZIndex>
             <Style>
               <Border>
@@ -5320,7 +5329,7 @@ select idlocalidad, nombre from localidades</CommandText>
                 </Style>
               </ChartArea>
             </ChartAreas>
-            <Palette>Excel</Palette>
+            <Palette>Custom</Palette>
             <ChartCustomPaletteColors>
               <ChartCustomPaletteColor>#4c68a2</ChartCustomPaletteColor>
               <ChartCustomPaletteColor>#b5dddf</ChartCustomPaletteColor>
@@ -5353,10 +5362,13 @@ select idlocalidad, nombre from localidades</CommandText>
             </ChartNoDataMessage>
             <DataSetName>DataSet1</DataSetName>
             <Top>52.29931mm</Top>
-            <Left>158.91159mm</Left>
+            <Left>162.8429mm</Left>
             <Height>47.35417mm</Height>
             <Width>50.48193mm</Width>
             <ZIndex>10</ZIndex>
+            <Visibility>
+              <Hidden>= not Parameters!bMostrar1.Value</Hidden>
+            </Visibility>
             <Style>
               <Border>
                 <Color>#7292cc</Color>
@@ -5700,7 +5712,7 @@ select idlocalidad, nombre from localidades</CommandText>
             </ChartNoDataMessage>
             <DataSetName>DataSet1</DataSetName>
             <Top>155.18732mm</Top>
-            <Left>158.91159mm</Left>
+            <Left>162.84293mm</Left>
             <Height>48.4125mm</Height>
             <Width>51.01111mm</Width>
             <ZIndex>11</ZIndex>
@@ -6047,7 +6059,7 @@ select idlocalidad, nombre from localidades</CommandText>
             </ChartNoDataMessage>
             <DataSetName>DataSet1</DataSetName>
             <Top>210.39703mm</Top>
-            <Left>158.91159mm</Left>
+            <Left>162.31372mm</Left>
             <Height>48.4125mm</Height>
             <Width>51.01111mm</Width>
             <ZIndex>12</ZIndex>
@@ -6394,7 +6406,7 @@ select idlocalidad, nombre from localidades</CommandText>
             </ChartNoDataMessage>
             <DataSetName>DataSet1</DataSetName>
             <Top>266.838mm</Top>
-            <Left>158.91159mm</Left>
+            <Left>162.31372mm</Left>
             <Height>48.4125mm</Height>
             <Width>51.01111mm</Width>
             <ZIndex>13</ZIndex>
@@ -6525,6 +6537,51 @@ select idlocalidad, nombre from localidades</CommandText>
         </Values>
       </DefaultValue>
       <Prompt>BitFlags</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="bMostrar1">
+      <DataType>Boolean</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>true</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>bMostrar1</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="bMostrar2">
+      <DataType>Boolean</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>true</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>bMostrar2</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="bMostrar3">
+      <DataType>Boolean</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>true</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>bMostrar3</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="bMostrar4">
+      <DataType>Boolean</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>true</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>bMostrar4</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="bMostrar5">
+      <DataType>Boolean</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>true</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>bMostrar5</Prompt>
     </ReportParameter>
   </ReportParameters>
   <rd:ReportUnitType>Mm</rd:ReportUnitType>
