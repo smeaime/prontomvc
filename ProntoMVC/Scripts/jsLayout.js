@@ -84,7 +84,9 @@ if (bPersisteArbol) {
 
 
 /////////////////////////////////////////////
-if (true) {
+if (false) {
+
+    // arbol normal, q carga los nodos a medida q se los usa
 
     jQuery("#addtree").jqGrid({
 
