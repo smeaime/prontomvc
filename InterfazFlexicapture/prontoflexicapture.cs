@@ -1202,6 +1202,8 @@ namespace ProntoFlexicapture
 
             CreateEmptyFile(archivo + ".bdl");
 
+            MarcarComoProcesandoseColaOCR(archivo, "");
+
             return 0;
 
         }
@@ -1214,12 +1216,32 @@ namespace ProntoFlexicapture
         }
 
 
+        public static void AgregarColaOCR(string file, string SC)
+        {
+            //System.Data.DataTable dt = EntidadManager.ExecDinamico(SC, "insert CartasDePorteColaOCR " + nombreusuario + "'");
+            //asd
+        }
+
+        public static void MarcarComoProcesandoseColaOCR(string file, string SC)
+        {
+            //System.Data.DataTable dt = EntidadManager.ExecDinamico(SC, "update CartasDePorteColaOCR " + nombreusuario + "'");
+
+        }
+
+        public static void LeerPendientesColaOCR(string file, string SC)
+        {
+
+        }
+
+
+
 
         static int MarcarImagenComoProcesada(string archivo)
         {
             return 0;
 
         }
+
 
 
         public static void MarcarCartaComoProcesada(ref Pronto.ERP.BO.CartaDePorte cdp, string usu, string SC)
@@ -1661,6 +1683,7 @@ namespace ProntoFlexicapture
                 l.Add(destarchivo);
             }
 
+            AgregarColaOCR(destarchivo,"");
 
             foreach (string f in l)
             {
