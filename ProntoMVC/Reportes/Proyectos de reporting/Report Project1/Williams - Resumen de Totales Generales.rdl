@@ -646,7 +646,7 @@ select idlocalidad, nombre from localidades</CommandText>
             <Height>48.4125mm</Height>
             <Width>51.01111mm</Width>
             <Visibility>
-              <Hidden>= ((Parameters!BitFlags.Value mod 2)&lt;&gt;1)</Hidden>
+              <Hidden>= not Parameters!bMostrar2.Value</Hidden>
             </Visibility>
             <Style>
               <Border>
@@ -2276,7 +2276,7 @@ select idlocalidad, nombre from localidades</CommandText>
             <Width>148.53541mm</Width>
             <ZIndex>6</ZIndex>
             <Visibility>
-              <Hidden>= ((Parameters!BitFlags.Value mod 2)&lt;&gt;1)</Hidden>
+              <Hidden>= not Parameters!bMostrar2.Value</Hidden>
             </Visibility>
             <Style>
               <Border>
@@ -3003,6 +3003,9 @@ select idlocalidad, nombre from localidades</CommandText>
             <Height>19.32291mm</Height>
             <Width>148.53541mm</Width>
             <ZIndex>7</ZIndex>
+            <Visibility>
+              <Hidden>= not Parameters!bMostrar3.Value</Hidden>
+            </Visibility>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -3956,6 +3959,9 @@ select idlocalidad, nombre from localidades</CommandText>
             <Height>18.52916mm</Height>
             <Width>148.53544mm</Width>
             <ZIndex>8</ZIndex>
+            <Visibility>
+              <Hidden>= not Parameters!bMostrar4.Value</Hidden>
+            </Visibility>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -5023,6 +5029,9 @@ select idlocalidad, nombre from localidades</CommandText>
             <Height>18.79374mm</Height>
             <Width>148.53541mm</Width>
             <ZIndex>9</ZIndex>
+            <Visibility>
+              <Hidden>= not Parameters!bMostrar5.Value</Hidden>
+            </Visibility>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -5716,6 +5725,9 @@ select idlocalidad, nombre from localidades</CommandText>
             <Height>48.4125mm</Height>
             <Width>51.01111mm</Width>
             <ZIndex>11</ZIndex>
+            <Visibility>
+              <Hidden>= not Parameters!bMostrar3.Value</Hidden>
+            </Visibility>
             <Style>
               <Border>
                 <Color>#7292cc</Color>
@@ -6063,6 +6075,9 @@ select idlocalidad, nombre from localidades</CommandText>
             <Height>48.4125mm</Height>
             <Width>51.01111mm</Width>
             <ZIndex>12</ZIndex>
+            <Visibility>
+              <Hidden>= not Parameters!bMostrar4.Value</Hidden>
+            </Visibility>
             <Style>
               <Border>
                 <Color>#7292cc</Color>
@@ -6410,6 +6425,9 @@ select idlocalidad, nombre from localidades</CommandText>
             <Height>48.4125mm</Height>
             <Width>51.01111mm</Width>
             <ZIndex>13</ZIndex>
+            <Visibility>
+              <Hidden>= not Parameters!bMostrar5.Value</Hidden>
+            </Visibility>
             <Style>
               <Border>
                 <Color>#7292cc</Color>
@@ -6528,15 +6546,6 @@ select idlocalidad, nombre from localidades</CommandText>
         </Values>
       </DefaultValue>
       <Prompt>Fecha Hasta Anterior</Prompt>
-    </ReportParameter>
-    <ReportParameter Name="BitFlags">
-      <DataType>Integer</DataType>
-      <DefaultValue>
-        <Values>
-          <Value>31</Value>
-        </Values>
-      </DefaultValue>
-      <Prompt>BitFlags</Prompt>
     </ReportParameter>
     <ReportParameter Name="bMostrar1">
       <DataType>Boolean</DataType>
