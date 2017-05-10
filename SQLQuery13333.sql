@@ -16,3 +16,9 @@ presupuestosobras_
 
   obras_tx_activas 'SI','SI'
    Aplicacion.Obras.TraerFiltrado("_Activas", Array("SI", "SI", glbIdUsuario))
+
+
+
+
+   Requerimientos_TX_PendientesDeAsignacion
+
