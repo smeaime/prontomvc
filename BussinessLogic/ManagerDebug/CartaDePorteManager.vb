@@ -6551,69 +6551,88 @@ Public Class CartaDePorteManager
         ErrHandler2.WriteError("ResizeImage " & sDir & image)
 
 
+        'http://stackoverflow.com/questions/1108607/out-of-memory-exception-on-system-drawing-image-fromfile
+        'usar FromStream en lugar de FromFile
+        'using (FileStream fs = new FileStream(filePath, FileMode.Open, FileAccess.Read))
+        '{
+        '   using (Image original = Image.FromStream(fs))
+        '   {
+        '      ...
 
-        'Dim oImg As System.Drawing.Image = System.Drawing.Image.FromFile(HttpContext.Current.Server.MapPath("~/" + ConfigurationManager.AppSettings(Okey) & image))
-        Dim oImg As System.Drawing.Image = System.Drawing.Image.FromFile(sDir & image)
+        Using fs As FileStream = New FileStream(sDir & image, FileMode.Open, FileAccess.Read)
 
-        'http://siderite.blogspot.com/2009/09/outofmemoryexception-in.html
-        oImg = oImg.GetThumbnailImage(oImg.Width, oImg.Height, Nothing, IntPtr.Zero)
-        If height = 0 And width = 0 Then
-            height = oImg.Height
-            width = oImg.Width
-        End If
+            Dim oImg As System.Drawing.Image
 
+            Try
 
-        Dim oThumbNail As System.Drawing.Image = New System.Drawing.Bitmap(width, height)
-        ', System.Drawing.Imaging.PixelFormat.Format24bppRgb
-        Dim oGraphic As System.Drawing.Graphics = System.Drawing.Graphics.FromImage(oThumbNail)
+                oImg = System.Drawing.Image.FromStream(fs)
 
-        oGraphic.CompositingQuality = System.Drawing.Drawing2D.CompositingQuality.HighSpeed
-
-        'set smoothing mode to high quality
-        oGraphic.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality
-        'set the interpolation mode
-        oGraphic.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic
-        'set the offset mode
-        oGraphic.PixelOffsetMode = System.Drawing.Drawing2D.PixelOffsetMode.HighSpeed
+                'http://siderite.blogspot.com/2009/09/outofmemoryexception-in.html
+                oImg = oImg.GetThumbnailImage(oImg.Width, oImg.Height, Nothing, IntPtr.Zero)
+                If height = 0 And width = 0 Then
+                    height = oImg.Height
+                    width = oImg.Width
+                End If
 
 
-        Dim oRectangle As New System.Drawing.Rectangle(0, 0, width, height)
+                Dim oThumbNail As System.Drawing.Image = New System.Drawing.Bitmap(width, height)
+                ', System.Drawing.Imaging.PixelFormat.Format24bppRgb
+                Dim oGraphic As System.Drawing.Graphics = System.Drawing.Graphics.FromImage(oThumbNail)
 
-        oGraphic.DrawImage(oImg, oRectangle)
+                oGraphic.CompositingQuality = System.Drawing.Drawing2D.CompositingQuality.HighSpeed
 
-
-        Try
-
-            Dim encoderInfo As ImageCodecInfo = GetEncoderInfo("image/tiff")
-            Dim encoderParams As EncoderParameters = New EncoderParameters(1)
-
-            Dim parameter As EncoderParameter = New EncoderParameter(Imaging.Encoder.Compression, EncoderValue.CompressionCCITT4)
-            'Dim parameter As EncoderParameter = New EncoderParameter(Imaging.Encoder.Compression, EncoderValue.CompressionCCITT3)
-
-            encoderParams.Param(0) = parameter
-            'parameter = New EncoderParameter(Imaging.Encoder.SaveFlag, EncoderValue.)
-            'encoderParams.Param(1) = parameter
+                'set smoothing mode to high quality
+                oGraphic.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality
+                'set the interpolation mode
+                oGraphic.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic
+                'set the offset mode
+                oGraphic.PixelOffsetMode = System.Drawing.Drawing2D.PixelOffsetMode.HighSpeed
 
 
+                Dim oRectangle As New System.Drawing.Rectangle(0, 0, width, height)
 
-            oThumbNail.Save(sDirDest & newimagename, encoderInfo, encoderParams)
+                oGraphic.DrawImage(oImg, oRectangle)
 
-        Catch ex As Exception
-            'acá está pasando lo del gdi
-            'A generic error occurred in GDI+.
-            'parece ser que el archivo ya existe?
-            'NO!!!! es por el subdirectorio de destino!!! 
-            'http://stackoverflow.com/questions/1053052/a-generic-error-occurred-in-gdi-jpeg-image-to-memorystream
-            'If you are getting that error , then I can say that your application doesn't have a write permission on some directory.
-            ErrHandler2.WriteError("If you are getting that error , then I can say that your application doesn't have a write permission on some directory.")
-            ErrHandler2.WriteError("estabas metiendo _temp como prefijo sobre el subdirectorio en lugar del nombre del archivo!!!")
-            ErrHandler2.WriteError(ex)
-            ErrHandler2.WriteError(sDirDest & "---" & image & "---" & newimagename)
-        End Try
+
+                Try
+
+                    Dim encoderInfo As ImageCodecInfo = GetEncoderInfo("image/tiff")
+                    Dim encoderParams As EncoderParameters = New EncoderParameters(1)
+
+                    Dim parameter As EncoderParameter = New EncoderParameter(Imaging.Encoder.Compression, EncoderValue.CompressionCCITT4)
+                    'Dim parameter As EncoderParameter = New EncoderParameter(Imaging.Encoder.Compression, EncoderValue.CompressionCCITT3)
+
+                    encoderParams.Param(0) = parameter
+                    'parameter = New EncoderParameter(Imaging.Encoder.SaveFlag, EncoderValue.)
+                    'encoderParams.Param(1) = parameter
 
 
 
-        oImg.Dispose()
+                    oThumbNail.Save(sDirDest & newimagename, encoderInfo, encoderParams)
+
+                Catch ex As Exception
+                    'acá está pasando lo del gdi
+                    'A generic error occurred in GDI+.
+                    'parece ser que el archivo ya existe?
+                    'NO!!!! es por el subdirectorio de destino!!! 
+                    'http://stackoverflow.com/questions/1053052/a-generic-error-occurred-in-gdi-jpeg-image-to-memorystream
+                    'If you are getting that error , then I can say that your application doesn't have a write permission on some directory.
+                    ErrHandler2.WriteError("If you are getting that error , then I can say that your application doesn't have a write permission on some directory.")
+                    ErrHandler2.WriteError("estabas metiendo _temp como prefijo sobre el subdirectorio en lugar del nombre del archivo!!!")
+                    ErrHandler2.WriteError(ex)
+                    ErrHandler2.WriteError(sDirDest & "---" & image & "---" & newimagename)
+                End Try
+
+            Catch ex As Exception
+                ErrHandler2.WriteError(ex)
+            Finally
+
+                oImg.Dispose()
+
+            End Try
+
+
+        End Using
     End Sub
 
 
