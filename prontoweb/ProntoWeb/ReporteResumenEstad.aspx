@@ -1,7 +1,6 @@
-﻿<%@ Page Language="VB" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" CodeFile="ReporteResumenEstad.aspx.vb" 
-    Inherits="ProntoMVC.Reportes.ReporteResumenEstad" Title="Informe" 
-     EnableEventValidation="false"
-    %>
+﻿<%@ Page Language="VB" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" CodeFile="ReporteResumenEstad.aspx.vb"
+    Inherits="ProntoMVC.Reportes.ReporteResumenEstad" Title="Informe"
+    EnableEventValidation="false" %>
 
 
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %>
@@ -67,7 +66,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                         </asp:DropDownList>
                     </td>
                     <td colspan="2">
-                        
+
                         <asp:Button ID="btnExcel" Text="Descargar excel" runat="server" Visible="false" />
                         <asp:Button ID="btnTexto" Text="Descargar Notas de Entrega" runat="server" Visible="false" />
                         <asp:Button ID="Button1" Text="SubcontratistaFix" runat="server" Height="30" Visible="false" />
@@ -164,15 +163,15 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
             <br />
 
 
-            
 
-<%--                    '                    - Pueden poner el número completo o bien los últimos dígitos
+
+            <%--                    '                    - Pueden poner el número completo o bien los últimos dígitos
                     '- El período de fechas a buscar es los últimos 60 días por defecto, pero se tiene que poder cambiar.
                     '- Filtros: 
                     '* "Que contenga" buscar en todos los campos de cliente
                     '* "Destino" 
                     '* "Producto"
---%>
+            --%>
 
 
             <asp:UpdatePanel ID="UpdatePanel3" runat="server" UpdateMode="Conditional">
@@ -186,7 +185,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                             cellpadding="1" cellspacing="1">
 
 
-                          <%--  <tr>
+                            <%--  <tr>
                                 <td class="EncabezadoCell" style="width: 100px; height: 18px;">Que contenga
                                 </td>
                                 <td>
@@ -201,6 +200,20 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                                 </td>
 
                             </tr>--%>
+
+                               <tr>
+                                    <td class="EncabezadoCell" style="width: 100px; height: 18px;">Sectores
+                                </td>
+                                <td class="EncabezadoCell" style="height: 18px;" colspan="3" >
+                                   
+                                    <asp:CheckBox runat="server" ID="CheckBox1" Text="Entregas" Checked="true" />
+                                    <asp:CheckBox runat="server" ID="CheckBox2" Text="Elevación" Checked="true" />
+                                    <asp:CheckBox runat="server" ID="CheckBox3" Text="Buques" Checked="true" />
+                                    <asp:CheckBox runat="server" ID="CheckBox4" Text="Entrega+Elev" Checked="true" />
+                                    <asp:CheckBox runat="server" ID="CheckBox5" Text="Entrg+Elev+Buq" Checked="true" />
+                               
+                                </td>
+                                   </tr>
                             <tr>
                                 <td class="EncabezadoCell" style="width: 100px; height: 18px;">Estado
                                 </td>
@@ -262,10 +275,12 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                             </tr>
 
                             <tr>
-                                <td></td>
+                                <td class="EncabezadoCell" style="width: 100px; height: 18px;">
+                                </td>
                                 <td></td>
 
-                                <td class="EncabezadoCell" style="width: 162px; height: 18px;">Período anterior
+
+                                <td class="EncabezadoCell" style="width: 162px; height: 18px;">Per.anterior
                                 </td>
 
                                 <td>
@@ -429,7 +444,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                                 </td>
 
                             </tr>
-                             <tr style="display: none">
+                            <tr style="display: none">
                                 <td class="EncabezadoCell" style="width: 100px; height: 18px;">
                                     <asp:Label runat="server" ID="lblTopClientes" Text="Top clientes" />
                                 </td>
@@ -498,7 +513,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                             </tr>
 
                             <tr></tr>
-                            <tr style="visibility:hidden">
+                            <tr style="visibility: hidden">
                                 <td class="EncabezadoCell" colspan="2">Max. Clientes en grafico (dif de destinos)
                                 </td>
                                 <td class="EncabezadoCell" style="width: 50px">
