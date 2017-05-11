@@ -126,9 +126,9 @@ Partial Class CartaDePorteInformesGerenciales
         Dim p = BDLmasterPermisosManager.Fetch(ConexBDLmaster, Session(SESSIONPRONTO_UserId), BDLmasterPermisosManager.EntidadesPermisos.CDPs_Facturacion)
 
 
-        Dim admins = New String() {"mariano", "andres", "hwilliams"}
+        Dim admins = New String() {"mariano", "andres", "hwilliams", "twilliams2"}
         'http://bdlconsultores.ddns.net/Consultas/Admin/VerConsultas1.php?recordid=21999
-        Dim encargados = New String() {"cflores", "dberzoni", "gradice", "mcabrera", "lcesar", "jtropea", "mgarcia", "twilliams2","mgarcia2" ,"jtropea2"}
+        Dim encargados = New String() {"cflores", "dberzoni", "gradice", "mcabrera", "lcesar", "jtropea", "mgarcia", "mgarcia2", "jtropea2"}
 
         If Not admins.Union(encargados).Contains(Session(SESSIONPRONTO_UserName).ToString().ToLower()) Then
             MsgBoxAjaxAndRedirect(Me, "No tenés acceso a esta página", String.Format("Principal.aspx"))
@@ -1093,6 +1093,143 @@ Partial Class CartaDePorteInformesGerenciales
     '///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
+
+
+    Sub rankcereales()
+
+
+
+
+
+        '////////////////////////////////////////////////////
+        '////////////////////////////////////////////////////
+        Dim fechadesde As Date = iisValidSqlDate(txtFechaDesde.Text, #1/1/1753#)
+        Dim fechahasta As Date = iisValidSqlDate(txtFechaHasta.Text, #1/1/2100#)
+        Dim fechadesde2 As Date
+
+        'la fecha del periodo anterior a comparar
+        If cmbPeriodo.Text = "Este mes" Or cmbPeriodo.Text = "Mes anterior" Then
+            fechadesde2 = GetFirstDayInMonth(DateAdd(DateInterval.Month, -1, fechadesde))
+        Else
+            fechadesde2 = fechadesde - (fechahasta - fechadesde)
+        End If
+        '////////////////////////////////////////////////////
+        '////////////////////////////////////////////////////
+
+
+
+        Dim sTitulo As String = ""
+        Dim idVendedor = BuscaIdClientePreciso(txtTitular.Text, HFSC.Value)
+        Dim idCorredor = BuscaIdVendedorPreciso(txtCorredor.Text, HFSC.Value)
+        Dim idIntermediario = BuscaIdClientePreciso(txtIntermediario.Text, HFSC.Value)
+        Dim idRComercial = BuscaIdClientePreciso(txtRcomercial.Text, HFSC.Value)
+        Dim idDestinatario = BuscaIdClientePreciso(txtDestinatario.Text, HFSC.Value)
+        Dim idArticulo = BuscaIdArticuloPreciso(txt_AC_Articulo.Text, HFSC.Value)
+        Dim idProcedencia = BuscaIdLocalidadPreciso(txtProcedencia.Text, HFSC.Value)
+        Dim idDestino = BuscaIdWilliamsDestinoPreciso(txtDestino.Text, HFSC.Value)
+        Dim pv As Integer = cmbPuntoVenta.SelectedValue
+
+
+
+        Dim q = ConsultasLinq.rankcereales(HFSC.Value, _
+                                    sTitulo, _
+                                    "", "", 0, 999999, CartaDePorteManager.enumCDPestado.Todas, "", _
+                                    idVendedor, idCorredor, _
+                                    idDestinatario, idIntermediario, _
+                                    idRComercial, idArticulo, idProcedencia, idDestino, _
+                                    IIf(cmbCriterioWHERE.SelectedValue = "todos", FiltroANDOR.FiltroAND, FiltroANDOR.FiltroOR), _
+                                       DropDownList2.Text, _
+                                   fechadesde, fechahasta, pv, fechadesde2)
+
+
+
+
+
+        'dt = q.ToDataTable 'revisar cómo mandar directo la lista de linq en lugar de convertir a datatable
+        If cmbPuntoVenta.SelectedValue > 0 Then
+            RebindReportViewerLINQ("ProntoWeb\Informes\Ranking de Cereales (un solo punto venta).rdl", q, New ReportParameter() {New ReportParameter("Titulo", PuntoVentaWilliams.NombrePuntoVentaWilliams2(cmbPuntoVenta.SelectedValue))})
+        Else
+            RebindReportViewerLINQ("ProntoWeb\Informes\Ranking de Cereales.rdl", q)
+        End If
+
+
+        'RebindReportViewer("ProntoWeb\Informes\Ranking de Cereales.rdl", dt)
+
+
+    End Sub
+
+
+
+
+    Sub rankingclientes()
+
+
+        Dim topclie As Integer = IIf(Val(txtTopClientes.Text) = 0, 99999, Val(txtTopClientes.Text))
+
+
+
+        Dim sTitulo As String = ""
+        Dim idVendedor = BuscaIdClientePreciso(txtTitular.Text, HFSC.Value)
+        Dim idCorredor = BuscaIdVendedorPreciso(txtCorredor.Text, HFSC.Value)
+        Dim idIntermediario = BuscaIdClientePreciso(txtIntermediario.Text, HFSC.Value)
+        Dim idRComercial = BuscaIdClientePreciso(txtRcomercial.Text, HFSC.Value)
+        Dim idDestinatario = BuscaIdClientePreciso(txtDestinatario.Text, HFSC.Value)
+        Dim idArticulo = BuscaIdArticuloPreciso(txt_AC_Articulo.Text, HFSC.Value)
+        Dim idProcedencia = BuscaIdLocalidadPreciso(txtProcedencia.Text, HFSC.Value)
+        Dim idDestino = BuscaIdWilliamsDestinoPreciso(txtDestino.Text, HFSC.Value)
+        Dim pv As Integer = cmbPuntoVenta.SelectedValue
+
+
+        '////////////////////////////////////////////////////
+        '////////////////////////////////////////////////////
+        Dim fechadesde As Date = iisValidSqlDate(txtFechaDesde.Text, #1/1/1753#)
+        Dim fechahasta As Date = iisValidSqlDate(txtFechaHasta.Text, #1/1/2100#)
+        Dim fechadesde2 As Date
+
+        'la fecha del periodo anterior a comparar
+        If cmbPeriodo.Text = "Este mes" Or cmbPeriodo.Text = "Mes anterior" Then
+            fechadesde2 = GetFirstDayInMonth(DateAdd(DateInterval.Month, -1, fechadesde))
+        Else
+            fechadesde2 = fechadesde - (fechahasta - fechadesde)
+        End If
+        fechadesde2 = iisValidSqlDate(fechadesde2, #1/1/1753#)
+        '////////////////////////////////////////////////////
+        '////////////////////////////////////////////////////
+
+
+
+        Dim q9 = ConsultasLinq.rankingclientes(HFSC.Value, _
+                                    sTitulo, _
+                                    "", "", 0, 999999, CartaDePorteManager.enumCDPestado.Todas, "", _
+                                    idVendedor, idCorredor, _
+                                    idDestinatario, idIntermediario, _
+                                    idRComercial, idArticulo, idProcedencia, idDestino, _
+                                    IIf(cmbCriterioWHERE.SelectedValue = "todos", FiltroANDOR.FiltroAND, FiltroANDOR.FiltroOR), _
+                                       DropDownList2.Text, _
+                                   fechadesde, fechahasta, pv, fechadesde2, Val(txtMinimoNeto.Text), topclie)
+
+
+
+
+
+        Dim p1 = New ReportParameter("TopClientes", Val(txtTopClientes.Text))
+        Dim p2 = New ReportParameter("MinimoNeto", Val(txtMinimoNeto.Text))
+        Dim params = New ReportParameter() {p1, p2}
+
+        RebindReportViewerLINQ("ProntoWeb\Informes\Ranking de Clientes.rdl", q9)
+
+
+    End Sub
+
+
+
+
+
+
+
+
+
+
     Function estadmodosuc()
 
 
@@ -1309,107 +1446,6 @@ Partial Class CartaDePorteInformesGerenciales
 
 
     End Function
-
-
-    Sub rankcereales()
-        '////////////////////////////////////////////////////
-        '////////////////////////////////////////////////////
-        Dim fechadesde As Date = iisValidSqlDate(txtFechaDesde.Text, #1/1/1753#)
-        Dim fechahasta As Date = iisValidSqlDate(txtFechaHasta.Text, #1/1/2100#)
-        Dim fechadesde2 As Date
-
-        'la fecha del periodo anterior a comparar
-        If cmbPeriodo.Text = "Este mes" Or cmbPeriodo.Text = "Mes anterior" Then
-            fechadesde2 = GetFirstDayInMonth(DateAdd(DateInterval.Month, -1, fechadesde))
-        Else
-            fechadesde2 = fechadesde - (fechahasta - fechadesde)
-        End If
-        '////////////////////////////////////////////////////
-        '////////////////////////////////////////////////////
-
-
-        Dim db As New LinqCartasPorteDataContext(Encriptar(HFSC.Value))
-
-
-
-        Dim sTitulo As String = ""
-        Dim idVendedor = BuscaIdClientePreciso(txtTitular.Text, HFSC.Value)
-        Dim idCorredor = BuscaIdVendedorPreciso(txtCorredor.Text, HFSC.Value)
-        Dim idIntermediario = BuscaIdClientePreciso(txtIntermediario.Text, HFSC.Value)
-        Dim idRComercial = BuscaIdClientePreciso(txtRcomercial.Text, HFSC.Value)
-        Dim idDestinatario = BuscaIdClientePreciso(txtDestinatario.Text, HFSC.Value)
-        Dim idArticulo = BuscaIdArticuloPreciso(txt_AC_Articulo.Text, HFSC.Value)
-        Dim idProcedencia = BuscaIdLocalidadPreciso(txtProcedencia.Text, HFSC.Value)
-        Dim idDestino = BuscaIdWilliamsDestinoPreciso(txtDestino.Text, HFSC.Value)
-        Dim pv As Integer = cmbPuntoVenta.SelectedValue
-
-
-
-        'TO DO:mover a dll
-
-
-        Dim q = (From cdp In db.CartasDePortes _
-                Join cli In db.linqClientes On cli.IdCliente Equals cdp.Vendedor _
-                Join art In db.linqArticulos On art.IdArticulo Equals cdp.IdArticulo _
-                Where cdp.Vendedor > 0 _
-                   And cli.RazonSocial IsNot Nothing _
-                   And (cdp.FechaDescarga >= fechadesde2 And cdp.FechaDescarga <= fechahasta) _
-                  And (cdp.Anulada <> "SI") _
-                                      And ((DropDownList2.Text = "Ambos") Or (DropDownList2.Text = "Entregas" And If(cdp.Exporta, "NO") = "NO") Or (DropDownList2.Text = "Export" And If(cdp.Exporta, "NO") = "SI")) _
-       And (cdp.PuntoVenta = cmbPuntoVenta.SelectedValue Or cmbPuntoVenta.SelectedValue = -1) _
-                    And (idVendedor = -1 Or cdp.Vendedor = idVendedor) _
-                    And (idCorredor = -1 Or cdp.Corredor = idCorredor) _
-                    And (idDestinatario = -1 Or cdp.Entregador = idDestinatario) _
-                    And (idIntermediario = -1 Or cdp.CuentaOrden1 = idIntermediario) _
-                    And (idArticulo = -1 Or cdp.IdArticulo = idArticulo) _
-                    And (idDestino = -1 Or cdp.Destino = idDestino) _
-        Group cdp By Producto = art.Descripcion Into g = Group _
-                Select New With { _
-                        .Producto = Producto, _
-                        .PV1 = g.Sum(Function(i) IIf(i.PuntoVenta = 1 And i.FechaDescarga >= fechadesde, CInt(i.NetoFinal / 1000), 0)), _
-                        .PV2 = g.Sum(Function(i) IIf(i.PuntoVenta = 2 And i.FechaDescarga >= fechadesde, CInt(i.NetoFinal / 1000), 0)), _
-                        .PV3 = g.Sum(Function(i) IIf(i.PuntoVenta = 3 And i.FechaDescarga >= fechadesde, CInt(i.NetoFinal / 1000), 0)), _
-                        .PV4 = g.Sum(Function(i) IIf(i.PuntoVenta = 4 And i.FechaDescarga >= fechadesde, CInt(i.NetoFinal / 1000), 0)), _
-                        .Total = g.Sum(Function(i) IIf(i.FechaDescarga >= fechadesde, CInt(i.NetoFinal / 1000), 0)), _
-                        .Porcent = 0, _
-                        .PeriodoAnterior = g.Sum(Function(i) IIf((cmbPuntoVenta.SelectedValue = 0 Or i.PuntoVenta = cmbPuntoVenta.SelectedValue) And i.FechaDescarga >= fechadesde, CInt(i.NetoFinal / 1000), 0)), _
-                        .Diferen = 0, _
-                        .DiferencPorcent = 0 _
-                    } _
-                ).Where(Function(i) i.Total > 0).ToList
-
-
-
-
-        '
-
-
-
-        'Cereal
-        'BA (Tn sin mermas de Buenos Aires si se saca de todos los PV)
-        'SL (Tn sin mermas de San Lorenzo si se saca de todos los PV)
-        'AS (Tn sin mermas de Arroyo Seco si se saca de todos los PV)
-        'BB (Tn sin mermas de Bahia Blanca si se saca de todos los PV)
-        'Total (Tn netas sin mermas)
-        '% (Sobre la suma de todos los clientes)
-        'Total Periodo Anterior (*)
-        'Diferencia (Total - Total Periodo Anterior)
-        '%Dif (Diferencia/Total).
-
-
-
-
-        'dt = q.ToDataTable 'revisar cómo mandar directo la lista de linq en lugar de convertir a datatable
-        If cmbPuntoVenta.SelectedValue > 0 Then
-            RebindReportViewerLINQ("ProntoWeb\Informes\Ranking de Cereales (un solo punto venta).rdl", q, New ReportParameter() {New ReportParameter("Titulo", PuntoVentaWilliams.NombrePuntoVentaWilliams2(cmbPuntoVenta.SelectedValue))})
-        Else
-            RebindReportViewerLINQ("ProntoWeb\Informes\Ranking de Cereales.rdl", q)
-        End If
-
-
-        'RebindReportViewer("ProntoWeb\Informes\Ranking de Cereales.rdl", dt)
-
-    End Sub
 
 
 
@@ -1810,99 +1846,7 @@ Partial Class CartaDePorteInformesGerenciales
 
 
 
-    Sub rankingclientes()
 
-
-        Dim sTitulo As String = ""
-        Dim idVendedor = BuscaIdClientePreciso(txtTitular.Text, HFSC.Value)
-        Dim idCorredor = BuscaIdVendedorPreciso(txtCorredor.Text, HFSC.Value)
-        Dim idIntermediario = BuscaIdClientePreciso(txtIntermediario.Text, HFSC.Value)
-        Dim idRComercial = BuscaIdClientePreciso(txtRcomercial.Text, HFSC.Value)
-        Dim idDestinatario = BuscaIdClientePreciso(txtDestinatario.Text, HFSC.Value)
-        Dim idArticulo = BuscaIdArticuloPreciso(txt_AC_Articulo.Text, HFSC.Value)
-        Dim idProcedencia = BuscaIdLocalidadPreciso(txtProcedencia.Text, HFSC.Value)
-        Dim idDestino = BuscaIdWilliamsDestinoPreciso(txtDestino.Text, HFSC.Value)
-        Dim pv As Integer = cmbPuntoVenta.SelectedValue
-
-
-        '////////////////////////////////////////////////////
-        '////////////////////////////////////////////////////
-        Dim fechadesde As Date = iisValidSqlDate(txtFechaDesde.Text, #1/1/1753#)
-        Dim fechahasta As Date = iisValidSqlDate(txtFechaHasta.Text, #1/1/2100#)
-        Dim fechadesde2 As Date
-
-        'la fecha del periodo anterior a comparar
-        If cmbPeriodo.Text = "Este mes" Or cmbPeriodo.Text = "Mes anterior" Then
-            fechadesde2 = GetFirstDayInMonth(DateAdd(DateInterval.Month, -1, fechadesde))
-        Else
-            fechadesde2 = fechadesde - (fechahasta - fechadesde)
-        End If
-        fechadesde2 = iisValidSqlDate(fechadesde2, #1/1/1753#)
-        '////////////////////////////////////////////////////
-        '////////////////////////////////////////////////////
-
-        Dim c = New asdasd
-        'Dim db As New LinqCartasPorteDataContext(Encriptar(HFSC.Value))
-        Dim db As LinqCartasPorteDataContext = c.asfsdf(Encriptar(HFSC.Value))
-
-        'mostrar(top)
-        'pedir(minimo)
-
-        Dim topclie As Integer = IIf(Val(txtTopClientes.Text) = 0, 99999, Val(txtTopClientes.Text))
-
-
-        db.CommandTimeout = 300
-
-
-
-        Dim q9 = (From cdp In db.CartasDePortes _
-                From fac In db.linqFacturas.Where(Function(i) cdp.IdFacturaImputada = i.IdFactura).DefaultIfEmpty() _
-                From clifac In db.linqClientes.Where(Function(i) fac.IdCliente = i.IdCliente).DefaultIfEmpty() _
-                Join cli In db.linqClientes On cli.IdCliente Equals cdp.Vendedor _
-                Join art In db.linqArticulos On art.IdArticulo Equals cdp.IdArticulo _
-                Where cdp.Vendedor > 0 _
-                And (cdp.PuntoVenta = cmbPuntoVenta.SelectedValue Or cmbPuntoVenta.SelectedValue = -1) _
-                   And cli.RazonSocial IsNot Nothing _
-                   And (cdp.FechaDescarga >= fechadesde2 And cdp.FechaDescarga <= fechahasta) _
-                   And (cdp.IdFacturaImputada > 0) _
-                                     And ((DropDownList2.Text = "Ambos") Or (DropDownList2.Text = "Entregas" And If(cdp.Exporta, "NO") = "NO") Or (DropDownList2.Text = "Export" And If(cdp.Exporta, "NO") = "SI")) _
-                   And (cdp.Vendedor.HasValue And cdp.Corredor.HasValue And cdp.Entregador.HasValue) _
-                    And (idVendedor = -1 Or cdp.Vendedor = idVendedor) _
-                    And (idCorredor = -1 Or cdp.Corredor = idCorredor) _
-                    And (idDestinatario = -1 Or cdp.Entregador = idDestinatario) _
-                    And (idIntermediario = -1 Or cdp.CuentaOrden1 = idIntermediario) _
-                    And (idArticulo = -1 Or cdp.IdArticulo = idArticulo) _
-                    And (idDestino = -1 Or cdp.Destino = idDestino) _
-                    And (pv = -1 Or cdp.PuntoVenta = pv) _
-                Group cdp By Cliente = clifac.RazonSocial Into g = Group _
-                Select New With { _
-                        .Producto = Cliente, _
-                        .PV1 = g.Sum(Function(i) IIf(i.PuntoVenta = 1 And i.FechaDescarga >= fechadesde, CInt(i.NetoFinal / 1000), 0)), _
-                        .PV2 = g.Sum(Function(i) IIf(i.PuntoVenta = 2 And i.FechaDescarga >= fechadesde, CInt(i.NetoFinal / 1000), 0)), _
-                        .PV3 = g.Sum(Function(i) IIf(i.PuntoVenta = 3 And i.FechaDescarga >= fechadesde, CInt(i.NetoFinal / 1000), 0)), _
-                        .PV4 = g.Sum(Function(i) IIf(i.PuntoVenta = 4 And i.FechaDescarga >= fechadesde, CInt(i.NetoFinal / 1000), 0)), _
-                        .Total = g.Sum(Function(i) IIf(i.FechaDescarga >= fechadesde, CInt(i.NetoFinal / 1000), 0)), _
-                        .Porcent = 0, _
-                        .PeriodoAnterior = g.Sum(Function(i) IIf(i.FechaDescarga < fechadesde, CInt(i.NetoFinal / 1000), 0)), _
-                        .Diferen = 0, _
-                        .DiferencPorcent = 0 _
-                    } _
-                ).Where(Function(i) i.Total > Val(txtMinimoNeto.Text)).OrderByDescending(Function(i) i.Total).Take(topclie).tolist
-
-
-
-
-
-
-
-        Dim p1 = New ReportParameter("TopClientes", Val(txtTopClientes.Text))
-        Dim p2 = New ReportParameter("MinimoNeto", Val(txtMinimoNeto.Text))
-        Dim params = New ReportParameter() {p1, p2}
-
-        RebindReportViewerLINQ("ProntoWeb\Informes\Ranking de Clientes.rdl", q9)
-
-
-    End Sub
 
     Function AgruparYPaginarOrdenandoPorNumeroDeCarta(ByVal dt As DataTable)
 
@@ -2094,7 +2038,7 @@ Partial Class CartaDePorteInformesGerenciales
                             Producto = art.Descripcion, _
                             CalidadDesc = "", _
                             TarifaFacturada = cdp.Cantidad
-                    
+
 
 
 
@@ -3005,7 +2949,7 @@ Partial Class CartaDePorteInformesGerenciales
                 txtFechaDesde.Text = GetFirstDayInMonth(DateAdd(DateInterval.Month, -1, Today))
                 txtFechaHasta.Text = GetLastDayInMonth(DateAdd(DateInterval.Month, -1, Today))
 
-                
+
             Case "Personalizar"
                 txtFechaDesde.Visible = True
                 txtFechaHasta.Visible = True

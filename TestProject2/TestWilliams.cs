@@ -865,6 +865,92 @@ namespace ProntoMVC.Tests
 
 
 
+        [TestMethod]
+        public void DESCARGA_IMAGENES_22373_2_38132()
+        {
+
+
+            string archivo = @"C:\Users\Administrador\Documents\bdl\pronto\docstest\2501323ago2016_100401_555332208-CP.jpg";
+            string output = archivo + ".salida.jpg";
+            string output2 = archivo + ".salida.tif";
+
+            if (true)
+                CartaDePorteManager.ResizeImage_ToTIFF(archivo, 0, 0, output2, "", "");
+            else
+            {
+                CartaDePorteManager.ResizeImage(archivo, 300, 450, output, "", "");
+
+                CartaDePorteManager.ResizeImage_ToTIFF(output, 800, 1100, output2, "", "");
+            }
+
+
+            System.Diagnostics.Process.Start(output2);
+        }
+
+
+
+
+
+
+        [TestMethod]
+        public void _38132()
+        {
+
+
+            // con        560133361 falla
+            // -si hago un filtro más chico que la incluya, la baja bien. Pinta q lo q 
+            // jode es la 000560133357 o la 000560133362, q pesan mas de un mega cada una.
+
+
+            /*
+
+        Log Entry : 
+05/11/2017 13:34:06
+Error in: http://prontoclientes.williamsentregas.com.ar/ProntoWeb/CartaDePorteInformesAccesoClientes.aspx. Error Message:System.OutOfMemoryException
+Out of memory.
+   at System.Drawing.Image.FromFile(String filename, Boolean useEmbeddedColorManagement)
+   at System.Drawing.Image.FromFile(String filename)
+   at CartaDePorteManager.ResizeImage_ToTIFF(String image, Int32 width, Int32 height, String newimagename, String sDirVirtual, String DirApp) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:line 6555
+   at CartaDePorteManager.DescargarImagenesAdjuntas_TIFF(DataTable dt, String SC, Boolean bJuntarCPconTK, String DirApp, Boolean reducir) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:line 6058
+System.Drawing
+
+            */
+
+
+
+            if (false)
+            {
+                string[] sss = {@"C:\Users\Administrador\Documents\bdl\New folder\550466649-cp.jpg",
+                                              @"C:\Users\Administrador\Documents\bdl\New folder\550558123-cp.jpg"};
+
+                ClassFlexicapture.SaveAsMultiPageTiff(
+                                                     @"C:\Users\Administrador\Documents\bdl\New folder\assadfasdf.tiff",
+                                                     sss
+                                                     );
+            }
+
+
+            string titulo = "";
+            var dt = CartaDePorteManager.GetDataTableFiltradoYPaginado(SC, "",
+                 "", "", 0, 10, CartaDePorteManager.enumCDPestado.DescargasMasFacturadas,
+                     "", -1, -1,
+                -1, -1,
+                -1, -1, -1, -1,
+                CartaDePorteManager.FiltroANDOR.FiltroOR, "Ambos",
+                new DateTime(2016, 5, 29), new DateTime(2016, 5, 30),
+                0, ref titulo, "Ambas", false);
+
+
+            var output = CartaDePorteManager.DescargarImagenesAdjuntas_TIFF(dt, SC, false, DirApp, true);
+            System.Diagnostics.Process.Start(output);
+
+        }
+
+
+
+
+
+
 
         [TestMethod]
         public void OCR_Postprocesamiento_ManotearExcel()
@@ -895,7 +981,7 @@ namespace ProntoMVC.Tests
 
             //ClassFlexicapture.TiffSplit_dea2(zipFile);
             //ClassFlexicapture.TiffSplit(zipFile);
-            
+
 
             VaciarDirectorioTemp();
 
@@ -6146,32 +6232,6 @@ Adjunto un ejemplo que tiene cartas de porte de 8 entregadores que no son Willia
                 }
             }
         }
-
-
-
-
-        [TestMethod]
-        public void DESCARGA_IMAGENES_22373_2()
-        {
-
-
-            string archivo = @"C:\Users\Administrador\Documents\bdl\pronto\docstest\2501323ago2016_100401_555332208-CP.jpg";
-            string output = archivo + ".salida.jpg";
-            string output2 = archivo + ".salida.tif";
-
-            if (true)
-                CartaDePorteManager.ResizeImage_ToTIFF(archivo, 0, 0, output2, "", "");
-            else
-            {
-                CartaDePorteManager.ResizeImage(archivo, 300, 450, output, "", "");
-
-                CartaDePorteManager.ResizeImage_ToTIFF(output, 800, 1100, output2, "", "");
-            }
-
-
-            System.Diagnostics.Process.Start(output2);
-        }
-
 
 
 

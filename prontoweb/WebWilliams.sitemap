@@ -163,6 +163,9 @@
       <siteMapNode title="WS posicion v2 >>           "  description="Servicio Web Cerealnet" url="ProntoWeb/wsCartaPorteExterno.asmx/obtenerPosiciones_v2?usuario=fyo&amp;password=cambiar!&amp;cuit=30703605105&amp;fechadesde=2017-01-01T00:00:00&amp;fechahasta=2017-01-31T00:00:00"  roles="Administrador,WilliamsAdmin" />
       <siteMapNode title="WS en Syngenta           "  description=">> WS en Syngenta" url="ProntoWeb/ConexionHaciaSyngenta.aspx" roles="Administrador,WilliamsAdmin" />
 
+
+      <siteMapNode url="ProntoWeb/ReporteResumenEstad.aspx" title="Resumen Estad."  description="Informes" roles="Administrador,WilliamsAdmin" />
+
     </siteMapNode>
 
 
@@ -227,7 +230,6 @@
 
       <siteMapNode url="ProntoWeb/SituacionCalidad.aspx"  title="Calidad Situacion"  description="" roles="Usuario,Administrador,Comercial,Demo,WilliamsFacturacion" />
 
-          <siteMapNode url="ProntoWeb/ReporteResumenEstad.aspx" title="Resumen Estad."  description="Informes" roles="Administrador,Comercial,WilliamsAdmin,WilliamsFacturacion,WilliamsComercial" />
 
     </siteMapNode>
 
