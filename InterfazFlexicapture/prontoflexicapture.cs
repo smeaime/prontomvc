@@ -555,7 +555,62 @@ namespace ProntoFlexicapture
                     dirExport = imagenAprocesar.Substring(0, sd + w + 6) + @"\"; // es seguro el directorio de esa tanda? -estás confiando en q imagenes[count] es tomado en el mismo orden en la queue
                 }
 
-                processor.ExportDocumentEx(document, dirExport, "ExportToXLS", exportParams);
+
+
+
+
+
+                try
+                {
+                    processor.ExportDocumentEx(document, dirExport, "ExportToXLS", exportParams);
+                }
+                catch (System.Runtime.InteropServices.COMException x2)
+                {
+                    //		que hacer si explota ? no reiniciar el fcengine por lo menos
+
+
+                    //Log Entry : 
+                    //05/11/2017 15:39:13
+                    //Error in: . Error Message:hilo #10: System.Runtime.InteropServices.COMException (0x80004005): Error: No se ha podido exportar a 'Destino de exportación definido por el usuario' debido a un error en la exportación
+                    //   at FCEngine.IFlexiCaptureProcessor.ExportDocumentEx(IDocument Document, String ExportRootFolder, String FileName, IFileExportParams ExportParams)
+                    //   at ProntoFlexicapture.ClassFlexicapture.ProcesarCartasBatchConFlexicapture(IEngine& engine, IFlexiCaptureProcessor& processor, String plantilla, List`1 imagenes, String SC, String DirApp, Boolean bProcesar, String& sError) in c:\Users\Administrador\Documents\bdl\pronto\InterfazFlexicapture\prontoflexicapture.cs:line 558
+                    //   at ProntoFlexicapture.ClassFlexicapture.ProcesarCartasBatchConFlexicapture_SacandoImagenesDelDirectorio(IEngine& engine, IFlexiCaptureProcessor& processor, String plantilla, Int32 cuantasImagenes, String SC, String DirApp, Boolean bProcesar, String& sError) in c:\Users\Administrador\Documents\bdl\pronto\InterfazFlexicapture\prontoflexicapture.cs:line 310
+                    //   at ProntoWindowsService.Service1.Tanda(String SC, String DirApp, IEngine& engine, IFlexiCaptureProcessor& processor, String idthread) in c:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\Service1.cs:line 851
+                    //   at ProntoWindowsService.Service1.DoWorkSoloOCR() in c:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\Service1.cs:line 298
+                    //__________________________
+
+                    //Log Entry : 
+                    //05/11/2017 15:39:13
+                    //Error in: . Error Message:hilo #10: Problemas con la licencia? Paro y reinicio
+                    //__________________________
+                    jjkhj
+                    ClassFlexicapture.Log(x2);
+                    if ((uint)x2.ErrorCode == 0x80004005)
+                    { // (0x80080005) 80080005 Server execution failed (Exception from HRESULT: 0x80080005 (CO_E_SERVER_EXEC_FAILURE)).
+
+                        ClassFlexicapture.Log("Problemas CO_E_SERVER_EXEC_FAILURE");
+
+                    }
+                    processor.ResumeProcessing
+                }
+                catch (Exception ex)
+                {
+                    throw;
+
+                }
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
                 if (document.DocumentDefinition == null)
@@ -743,6 +798,15 @@ namespace ProntoFlexicapture
 
             catch (Exception ex)
             {
+                
+Log Entry : 
+05/11/2017 17:46:54
+Error in: . Error Message:System.Runtime.InteropServices.COMException
+No se puede obtener acceso a un documento de sólo lectura "ExportToXLS.xls".
+   at Microsoft.Office.Interop.Excel._Workbook.SaveAs(Object Filename, Object FileFormat, Object Password, Object WriteResPassword, Object ReadOnlyRecommended, Object CreateBackup, XlSaveAsAccessMode AccessMode, Object ConflictResolution, Object AddToMru, Object TextCodepage, Object TextVisualLayout, Object Local)
+   at ProntoFlexicapture.ClassFlexicapture.ManotearExcel(String nombreexcel, String dato, String numerocarta) in c:\Users\Administrador\Documents\bdl\pronto\InterfazFlexicapture\prontoflexicapture.cs:line 738
+Microsoft Excel
+
                 ErrHandler2.WriteError(ex);
             }
 
@@ -1683,7 +1747,7 @@ namespace ProntoFlexicapture
                 l.Add(destarchivo);
             }
 
-            AgregarColaOCR(destarchivo,"");
+            AgregarColaOCR(destarchivo, "");
 
             foreach (string f in l)
             {
