@@ -30,6 +30,7 @@ Namespace ProntoMVC.Reportes
 
 
                 refrescaPeriodo()
+                BloqueosDeEdicion()
 
                 Try
 
@@ -78,6 +79,28 @@ Namespace ProntoMVC.Reportes
             AutoCompleteExtender4.ContextKey = HFSC.Value
             AutoCompleteExtender11.ContextKey = HFSC.Value
             'AutoCompleteExtender1.ContextKey = HFSC.Value
+
+
+        End Sub
+
+
+        Sub BloqueosDeEdicion()
+            '////////////////////////////////////////////
+            '////////////////////////////////////////////
+            'Bloqueos de edicion
+            '////////////////////////////////////////////
+            '////////////////////////////////////////////
+            'If ProntoFuncionesUIWeb.EstaEsteRol("Cliente") Or
+
+
+            Dim admins = New String() {"mariano", "andres", "hwilliams"}
+            'http://bdlconsultores.ddns.net/Consultas/Admin/VerConsultas1.php?recordid=21999
+            Dim encargados = New String() {"cflores", "dberzoni", "gradice", "mcabrera", "lcesar", "jtropea", "mgarcia", "twilliams2", "mgarcia2", "jtropea2"}
+
+            If Not admins.Union(encargados).Contains(Session(SESSIONPRONTO_UserName).ToString().ToLower()) Then
+                MsgBoxAjaxAndRedirect(Me, "No tenés acceso a esta página", String.Format("Principal.aspx"))
+                Exit Sub
+            End If
 
 
         End Sub
@@ -393,7 +416,7 @@ Namespace ProntoMVC.Reportes
                     ' !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
                     ' !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-                    Dim yourParams As ReportParameter() = New ReportParameter(3) {}
+                    Dim yourParams As ReportParameter() = New ReportParameter(8) {}
 
 
 
@@ -402,6 +425,12 @@ Namespace ProntoMVC.Reportes
                     yourParams(1) = New ReportParameter("FechaHasta", txtFechaHasta.Text) ', txtFechaHasta.Text)
                     yourParams(2) = New ReportParameter("FechaDesdeAnterior", txtFechaDesdeAnterior.Text) ' txtFechaDesde.Text)
                     yourParams(3) = New ReportParameter("FechaHastaAnterior", txtFechaHastaAnterior.Text) ', txtFechaHasta.Text)
+
+                    yourParams(4) = New ReportParameter("bMostrar1", CheckBox1.Checked) ', txtFechaHasta.Text)
+                    yourParams(5) = New ReportParameter("bMostrar2", CheckBox2.Checked) ', txtFechaHasta.Text)
+                    yourParams(6) = New ReportParameter("bMostrar3", CheckBox3.Checked) ', txtFechaHasta.Text)
+                    yourParams(7) = New ReportParameter("bMostrar4", CheckBox4.Checked) ', txtFechaHasta.Text)
+                    yourParams(8) = New ReportParameter("bMostrar5", CheckBox5.Checked) ', txtFechaHasta.Text)
 
 
                     If Diagnostics.Debugger.IsAttached Then
@@ -412,6 +441,8 @@ Namespace ProntoMVC.Reportes
 
 
                     ReportViewerRemoto.ShowParameterPrompts = False
+                    ReportViewerRemoto.PromptAreaCollapsed = True
+                    ReportViewerRemoto.ShowPromptAreaButton = False
 
                     ' es fundamental que los parametros esten bien pasados y con el tipo correspondiente, porque creo que si
                     ' no, explota y no te dice bien por qué
