@@ -69,10 +69,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\AutoMapper.4.0.4\lib\net40\AutoMapper.dll</HintPath>
     </Reference>
-    <Reference Include="BusinessLogic, Version=1.0.7.23148, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\BussinessLogic\bin\Debug\BusinessLogic.dll</HintPath>
-    </Reference>
     <Reference Include="BusinessObject, Version=1.0.2.33688, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>bin\BusinessObject.dll</HintPath>
@@ -179,10 +175,6 @@
     <Reference Include="PagedList.Mvc, Version=3.18.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\PagedList.Mvc.3.18.0.0\lib\net40\PagedList.Mvc.dll</HintPath>
-    </Reference>
-    <Reference Include="ProntoMVC.Data, Version=1.0.0.0, Culture=neutral, processorArchitecture=x86">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Data\bin\x86\Debug\ProntoMVC.Data.dll</HintPath>
     </Reference>
     <Reference Include="Repositorio">
       <HintPath>..\Repositorio\bin\Debug\Repositorio.dll</HintPath>
@@ -1671,6 +1663,14 @@
     <Content Include="Views\ListaPrecio\MyViewModel.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\BussinessLogic\BusinessLogic.vbproj">
+      <Project>{ab8bb713-ffa1-4440-b49b-1857e61367c9}</Project>
+      <Name>BusinessLogic</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Data\ProntoMVC.Data.csproj">
+      <Project>{2f9b9020-304c-44a6-bcc4-9e434c687d31}</Project>
+      <Name>ProntoMVC.Data</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Data\ProntoMVC.Data.csproj">
       <Project>{2f9b9020-304c-44a6-bcc4-9e434c687d31}</Project>
       <Name>ProntoMVC.Data</Name>
