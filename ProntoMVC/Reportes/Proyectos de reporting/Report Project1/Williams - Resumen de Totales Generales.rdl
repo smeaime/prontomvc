@@ -1383,7 +1383,7 @@ select idlocalidad, nombre from localidades</CommandText>
             <Top>52.29931mm</Top>
             <Left>5.85389mm</Left>
             <Height>18.79374mm</Height>
-            <Width>148.53544mm</Width>
+            <Width>148.53546mm</Width>
             <ZIndex>1</ZIndex>
             <Visibility>
               <Hidden>= not Parameters!bMostrar1.Value</Hidden>
@@ -2273,7 +2273,7 @@ select idlocalidad, nombre from localidades</CommandText>
             <Top>103.53404mm</Top>
             <Left>5.85392mm</Left>
             <Height>18.52916mm</Height>
-            <Width>148.53541mm</Width>
+            <Width>148.5354mm</Width>
             <ZIndex>6</ZIndex>
             <Visibility>
               <Hidden>= not Parameters!bMostrar2.Value</Hidden>
@@ -3001,7 +3001,7 @@ select idlocalidad, nombre from localidades</CommandText>
             <Top>155.18732mm</Top>
             <Left>5.85389mm</Left>
             <Height>19.32291mm</Height>
-            <Width>148.53541mm</Width>
+            <Width>148.5354mm</Width>
             <ZIndex>7</ZIndex>
             <Visibility>
               <Hidden>= not Parameters!bMostrar3.Value</Hidden>
@@ -6440,7 +6440,7 @@ select idlocalidad, nombre from localidades</CommandText>
             </Style>
           </Chart>
         </ReportItems>
-        <Height>341.32671mm</Height>
+        <Height>368.31421mm</Height>
         <Style>
           <Border>
             <Style>None</Style>
