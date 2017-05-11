@@ -1704,12 +1704,194 @@ Public Class ConsultasLinq
 
 
 
+
+    Public Shared Function rankcereales(ByVal SC As String,
+          ByVal ColumnaParaFiltrar As String,
+          ByVal TextoParaFiltrar As String,
+          ByVal sortExpression As String,
+          ByVal startRowIndex As Long,
+          ByVal maximumRows As Long,
+          ByVal estado As CartaDePorteManager.enumCDPestado,
+          ByVal QueContenga As String,
+          ByVal idVendedor As Integer,
+          ByVal idCorredor As Integer,
+          ByVal idDestinatario As Integer,
+          ByVal idIntermediario As Integer,
+          ByVal idRemComercial As Integer,
+          ByVal idArticulo As Integer,
+          ByVal idProcedencia As Integer,
+          ByVal idDestino As Integer,
+          ByVal AplicarANDuORalFiltro As CartaDePorteManager.FiltroANDOR,
+          ByVal ModoExportacion As String,
+          ByVal fechadesde As DateTime, ByVal fechahasta As DateTime,
+          ByVal puntoventa As Integer, fechadesde2 As DateTime) As Object
+
+
+
+        Dim db As LinqCartasPorteDataContext = New LinqCartasPorteDataContext(Encriptar(SC))
+
+
+        'TO DO:mover a dll
+
+
+        Dim q = (From cdp In db.CartasDePortes _
+                Join cli In db.linqClientes On cli.IdCliente Equals cdp.Vendedor _
+                Join art In db.linqArticulos On art.IdArticulo Equals cdp.IdArticulo _
+                Where cdp.Vendedor > 0 _
+                    And cli.RazonSocial IsNot Nothing _
+                    And (cdp.FechaDescarga >= fechadesde2 And cdp.FechaDescarga <= fechahasta) _
+                    And (cdp.Anulada <> "SI") _
+                    And ((ModoExportacion = "Ambos") Or (ModoExportacion = "Entregas" And If(cdp.Exporta, "NO") = "NO") Or (ModoExportacion = "Export" And If(cdp.Exporta, "NO") = "SI")) _
+                    And (cdp.PuntoVenta = puntoventa Or puntoventa = -1) _
+                    And (idVendedor = -1 Or cdp.Vendedor = idVendedor) _
+                    And (idCorredor = -1 Or cdp.Corredor = idCorredor) _
+                    And (idDestinatario = -1 Or cdp.Entregador = idDestinatario) _
+                    And (idIntermediario = -1 Or cdp.CuentaOrden1 = idIntermediario) _
+                    And (idArticulo = -1 Or cdp.IdArticulo = idArticulo) _
+                    And (idDestino = -1 Or cdp.Destino = idDestino) _
+        Group cdp By Producto = art.Descripcion Into g = Group _
+                Select New With { _
+                        .Producto = Producto, _
+                        .PV1 = g.Sum(Function(i) IIf(i.PuntoVenta = 1 And i.FechaDescarga >= fechadesde, CInt(i.NetoFinal / 1000), 0)), _
+                        .PV2 = g.Sum(Function(i) IIf(i.PuntoVenta = 2 And i.FechaDescarga >= fechadesde, CInt(i.NetoFinal / 1000), 0)), _
+                        .PV3 = g.Sum(Function(i) IIf(i.PuntoVenta = 3 And i.FechaDescarga >= fechadesde, CInt(i.NetoFinal / 1000), 0)), _
+                        .PV4 = g.Sum(Function(i) IIf(i.PuntoVenta = 4 And i.FechaDescarga >= fechadesde, CInt(i.NetoFinal / 1000), 0)), _
+                        .Total = g.Sum(Function(i) IIf(i.FechaDescarga >= fechadesde, CInt(i.NetoFinal / 1000), 0)), _
+                        .Porcent = 0, _
+                        .PeriodoAnterior = g.Sum(Function(i) IIf((puntoventa = 0 Or i.PuntoVenta = puntoventa) And i.FechaDescarga >= fechadesde, CInt(i.NetoFinal / 1000), 0)), _
+                        .Diferen = 0, _
+                        .DiferencPorcent = 0 _
+                    } _
+                ).Where(Function(i) i.Total > 0).ToList
+
+
+
+
+
+
+        Return q
+
+        'Cereal
+        'BA (Tn sin mermas de Buenos Aires si se saca de todos los PV)
+        'SL (Tn sin mermas de San Lorenzo si se saca de todos los PV)
+        'AS (Tn sin mermas de Arroyo Seco si se saca de todos los PV)
+        'BB (Tn sin mermas de Bahia Blanca si se saca de todos los PV)
+        'Total (Tn netas sin mermas)
+        '% (Sobre la suma de todos los clientes)
+        'Total Periodo Anterior (*)
+        'Diferencia (Total - Total Periodo Anterior)
+        '%Dif (Diferencia/Total).
+
+
+
+    End Function
+
+
+
+
+    Public Shared Function rankingclientes(ByVal SC As String,
+          ByVal ColumnaParaFiltrar As String,
+          ByVal TextoParaFiltrar As String,
+          ByVal sortExpression As String,
+          ByVal startRowIndex As Long,
+          ByVal maximumRows As Long,
+          ByVal estado As CartaDePorteManager.enumCDPestado,
+          ByVal QueContenga As String,
+          ByVal idVendedor As Integer,
+          ByVal idCorredor As Integer,
+          ByVal idDestinatario As Integer,
+          ByVal idIntermediario As Integer,
+          ByVal idRemComercial As Integer,
+          ByVal idArticulo As Integer,
+          ByVal idProcedencia As Integer,
+          ByVal idDestino As Integer,
+          ByVal AplicarANDuORalFiltro As CartaDePorteManager.FiltroANDOR,
+          ByVal ModoExportacion As String,
+          ByVal fechadesde As DateTime, ByVal fechahasta As DateTime,
+          ByVal puntoventa As Integer,
+            fechadesde2 As DateTime, MinimoNeto As Integer, topclie As Integer) As Object
+
+
+
+
+
+
+
+        'Dim db As New LinqCartasPorteDataContext(Encriptar(HFSC.Value))
+        Dim db As LinqCartasPorteDataContext = New LinqCartasPorteDataContext(Encriptar(SC))
+
+
+
+        'mostrar(top)
+        'pedir(minimo)
+
+
+
+
+        db.CommandTimeout = 300
+
+
+
+        Dim q9 = (From cdp In db.CartasDePortes _
+                From fac In db.linqFacturas.Where(Function(i) cdp.IdFacturaImputada = i.IdFactura).DefaultIfEmpty() _
+                From clifac In db.linqClientes.Where(Function(i) fac.IdCliente = i.IdCliente).DefaultIfEmpty() _
+                Join cli In db.linqClientes On cli.IdCliente Equals cdp.Vendedor _
+                Join art In db.linqArticulos On art.IdArticulo Equals cdp.IdArticulo _
+                Where cdp.Vendedor > 0 _
+                    And (cdp.PuntoVenta = puntoventa Or puntoventa = -1) _
+                    And cli.RazonSocial IsNot Nothing _
+                    And (cdp.FechaDescarga >= fechadesde2 And cdp.FechaDescarga <= fechahasta) _
+                    And (cdp.IdFacturaImputada > 0) _
+                    And ((ModoExportacion = "Ambos") Or (ModoExportacion = "Entregas" And If(cdp.Exporta, "NO") = "NO") Or (ModoExportacion = "Export" And If(cdp.Exporta, "NO") = "SI")) _
+                    And (cdp.Vendedor.HasValue And cdp.Corredor.HasValue And cdp.Entregador.HasValue) _
+                    And (idVendedor = -1 Or cdp.Vendedor = idVendedor) _
+                    And (idCorredor = -1 Or cdp.Corredor = idCorredor) _
+                    And (idDestinatario = -1 Or cdp.Entregador = idDestinatario) _
+                    And (idIntermediario = -1 Or cdp.CuentaOrden1 = idIntermediario) _
+                    And (idArticulo = -1 Or cdp.IdArticulo = idArticulo) _
+                    And (idDestino = -1 Or cdp.Destino = idDestino) _
+                Group cdp By Cliente = clifac.RazonSocial Into g = Group _
+                Select New With { _
+                        .Producto = Cliente, _
+                        .PV1 = g.Sum(Function(i) IIf(i.PuntoVenta = 1 And i.FechaDescarga >= fechadesde, CInt(i.NetoFinal / 1000), 0)), _
+                        .PV2 = g.Sum(Function(i) IIf(i.PuntoVenta = 2 And i.FechaDescarga >= fechadesde, CInt(i.NetoFinal / 1000), 0)), _
+                        .PV3 = g.Sum(Function(i) IIf(i.PuntoVenta = 3 And i.FechaDescarga >= fechadesde, CInt(i.NetoFinal / 1000), 0)), _
+                        .PV4 = g.Sum(Function(i) IIf(i.PuntoVenta = 4 And i.FechaDescarga >= fechadesde, CInt(i.NetoFinal / 1000), 0)), _
+                        .Total = g.Sum(Function(i) IIf(i.FechaDescarga >= fechadesde, CInt(i.NetoFinal / 1000), 0)), _
+                        .Porcent = 0, _
+                        .PeriodoAnterior = g.Sum(Function(i) IIf(i.FechaDescarga < fechadesde, CInt(i.NetoFinal / 1000), 0)), _
+                        .Diferen = 0, _
+                        .DiferencPorcent = 0 _
+                    } _
+                ).Where(Function(i) i.Total > MinimoNeto).OrderByDescending(Function(i) i.Total).Take(topclie).tolist
+
+
+
+
+
+
+        Return q9
+
+
+    End Function
+
+
+
+
+
+
+
+
+
     'aca deberia bancarme el destino y el articulo, pero y los demas filtros???
     Shared Function EstadisticasDescargas(ByRef p2 As ReportParameter, txtFechaDesde As String, txtFechaHasta As String,
                                            txtFechaDesdeAnterior As String, txtFechaHastaAnterior As String,
                                           cmbPeriodo As String, cmbPuntoVenta As Integer, ModoExportacion As String, SC As String _
                                 , idDestinatario As Integer, idDestino As Integer, IdArticulo As Integer
                     ) As Object
+
+
+
         Dim dt = New DataTable
 
         '////////////////////////////////////////////////////
