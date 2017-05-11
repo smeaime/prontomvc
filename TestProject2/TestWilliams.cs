@@ -863,6 +863,25 @@ namespace ProntoMVC.Tests
         /// ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
+        
+Log Entry : 
+05/11/2017 15:39:13
+Error in: . Error Message:hilo #10: System.Runtime.InteropServices.COMException (0x80004005): Error: No se ha podido exportar a 'Destino de exportación definido por el usuario' debido a un error en la exportación
+   at FCEngine.IFlexiCaptureProcessor.ExportDocumentEx(IDocument Document, String ExportRootFolder, String FileName, IFileExportParams ExportParams)
+   at ProntoFlexicapture.ClassFlexicapture.ProcesarCartasBatchConFlexicapture(IEngine& engine, IFlexiCaptureProcessor& processor, String plantilla, List`1 imagenes, String SC, String DirApp, Boolean bProcesar, String& sError) in c:\Users\Administrador\Documents\bdl\pronto\InterfazFlexicapture\prontoflexicapture.cs:line 558
+   at ProntoFlexicapture.ClassFlexicapture.ProcesarCartasBatchConFlexicapture_SacandoImagenesDelDirectorio(IEngine& engine, IFlexiCaptureProcessor& processor, String plantilla, Int32 cuantasImagenes, String SC, String DirApp, Boolean bProcesar, String& sError) in c:\Users\Administrador\Documents\bdl\pronto\InterfazFlexicapture\prontoflexicapture.cs:line 310
+   at ProntoWindowsService.Service1.Tanda(String SC, String DirApp, IEngine& engine, IFlexiCaptureProcessor& processor, String idthread) in c:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\Service1.cs:line 851
+   at ProntoWindowsService.Service1.DoWorkSoloOCR() in c:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\Service1.cs:line 298
+__________________________
+
+Log Entry : 
+05/11/2017 15:39:13
+Error in: . Error Message:hilo #10: Problemas con la licencia? Paro y reinicio
+__________________________
+
+
+
+
 
 
         [TestMethod]

@@ -1,0 +1,5 @@
+
+Log Entry : 
+05/11/2017 15:39:51
+Error in: . Error Message:ResizeImage C:\Users\Administrador\Documents\bdl\pronto\docstest\2501323ago2016_100401_555332208-CP.jpg
+__________________________

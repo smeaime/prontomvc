@@ -5331,9 +5331,9 @@ Public Class CartaDePorteManager
         ' limitar la cantidad de archivos que se puede bajar (o el tamaño)
         ' limitar la cantidad de archivos que se puede bajar (o el tamaño)
         ' limitar la cantidad de archivos que se puede bajar (o el tamaño)
-        ' limitar la cantidad de archivos que se puede bajar (o el tamaño)
+        'limitar la cantidad de archivos que se puede bajar (o el tamaño)
 
-
+        s "Para mas de 100 cartas de porte, unicamente estaran disponibles las opciones TIFF y PDF reducidos"
 
 
         'Dim sDirFTP As String = "~/" + "..\Pronto\DataBackupear\" ' Cannot use a leading .. to exit above the top directory..
@@ -5651,7 +5651,7 @@ Public Class CartaDePorteManager
 
 
 
-
+        s "Para mas de 100 cartas de porte, unicamente estaran disponibles las opciones TIFF y PDF reducidos"
 
 
         Dim wordFiles As New List(Of String)
@@ -5975,9 +5975,10 @@ Public Class CartaDePorteManager
         ' limitar la cantidad de archivos que se puede bajar (o el tamaño)
         ' limitar la cantidad de archivos que se puede bajar (o el tamaño)
         ' limitar la cantidad de archivos que se puede bajar (o el tamaño)
-        ' limitar la cantidad de archivos que se puede bajar (o el tamaño)
+         limitar la cantidad de archivos que se puede bajar (o el tamaño)
 
 
+        s "Para mas de 100 cartas de porte, unicamente estaran disponibles las opciones TIFF y PDF reducidos"
 
 
         'Dim sDirFTP As String = "~/" + "..\Pronto\DataBackupear\" ' Cannot use a leading .. to exit above the top directory..
