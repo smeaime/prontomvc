@@ -93,11 +93,10 @@ Namespace ProntoMVC.Reportes
             'If ProntoFuncionesUIWeb.EstaEsteRol("Cliente") Or
 
 
-            Dim admins = New String() {"mariano", "andres", "hwilliams"}
-            'http://bdlconsultores.ddns.net/Consultas/Admin/VerConsultas1.php?recordid=21999
-            Dim encargados = New String() {"cflores", "dberzoni", "gradice", "mcabrera", "lcesar", "jtropea", "mgarcia", "twilliams2", "mgarcia2", "jtropea2"}
+            Dim admins = New String() {"mariano", "andres", "hwilliams", "twilliams2"}
+       
 
-            If Not admins.Union(encargados).Contains(Session(SESSIONPRONTO_UserName).ToString().ToLower()) Then
+            If Not admins.Contains(Session(SESSIONPRONTO_UserName).ToString().ToLower()) Then
                 MsgBoxAjaxAndRedirect(Me, "No tenés acceso a esta página", String.Format("Principal.aspx"))
                 Exit Sub
             End If
