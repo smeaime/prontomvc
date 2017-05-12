@@ -107,36 +107,37 @@ SELECT  art.Descripcion as Producto, cdp.Exporta as Modo, cdp.PuntoVenta as Sucu
 --from CartasDePorte cdp
 from dbo.fSQL_GetDataTableFiltradoYPaginado
 ( 
-					NULL, 
-					NULL, 
-					NULL,
-					NULL, 
-					NULL, 
+						@startRowIndex, 
+							@maximumRows, 
+							@estado,
+							@QueContenga, 
+							@idVendedor, 
 
-					NULL, 
-					NULL, 
-					NULL,
-					NULL, 
-					@idArticulo,
+							@idCorredor, 
+							@idDestinatario, 
+							@idIntermediario,
+							@idRemComercial, 
+							@idArticulo,
 
-					NULL, --@idProcedencia,
-					@idDestino,
-					NULL, --@AplicarANDuORalFiltro,
-					@ModoExportacion,
-					@fechadesdeAnterior,
+							@idProcedencia,
+							@idDestino,
+					
+							@AplicarANDuORalFiltro,
+							@ModoExportacion,
+							@fechadesdeAnterior,
 
-					@fechahasta, 
-					NULL, 
-					NULL,
-					'FALSE',
-					NULL, 
-					NULL, 
+							@fechahasta, 
+							@puntoventa, 
+							NULL,
+							 'FALSE',--duplicados?
+							@Contrato, 
+							@QueContenga2, 
 
-					NULL, 
-					NULL, 
-					NULL,
-					NULL, 
-					NULL
+							@idClienteAuxiliarint, 
+							@AgrupadorDeTandaPeriodos, 
+							@Vagon,
+							@Patente, 
+							@optCamionVagon
 
 					) as cdp
 
@@ -144,18 +145,19 @@ from dbo.fSQL_GetDataTableFiltradoYPaginado
 
 join Articulos art On art.IdArticulo = cdp.IdArticulo 
 
-Where	cdp.Vendedor > 0 
-        And ( 
+Where	
+		--		cdp.Vendedor > 0  and
+          ( 
                 (cdp.FechaDescarga >= @fechadesde And cdp.FechaDescarga <= @fechahasta) 
                 Or 
                 (cdp.FechaDescarga >= @fechadesdeAnterior And cdp.FechaDescarga <= @fechahastaAnterior) 
             ) 
-        And (cdp.Anulada <> 'SI') 
-        And ((@ModoExportacion = 'Ambos') 
-                Or (@ModoExportacion = 'Todos') 
-                Or (@ModoExportacion = 'Entregas' And isnull(cdp.Exporta, 'NO') = 'NO') 
-                Or (@ModoExportacion = 'Export' And isnull(cdp.Exporta, 'NO') = 'SI')) 
-        And (@puntoventa IS NULL OR @puntoventa = -1 Or cdp.PuntoVenta = @puntoventa)
+        -- And (cdp.Anulada <> 'SI') 
+        --And ((@ModoExportacion = 'Ambos') 
+        --        Or (@ModoExportacion = 'Todos') 
+        --        Or (@ModoExportacion = 'Entregas' And isnull(cdp.Exporta, 'NO') = 'NO') 
+        --        Or (@ModoExportacion = 'Export' And isnull(cdp.Exporta, 'NO') = 'SI')) 
+       -- And (@puntoventa IS NULL OR @puntoventa = -1 Or cdp.PuntoVenta = @puntoventa)
 
 Group BY  art.Descripcion, cdp.Exporta, cdp.PuntoVenta 
 
@@ -163,6 +165,10 @@ go
 
 
 
+
+
+
+select * from
 [wCartasDePorte_TX_EstadisticasDeDescarga] 
 					NULL, 
 					NULL, 
@@ -180,9 +186,9 @@ go
 					-1,---1, --@idDestino,
 					NULL, --@AplicarANDuORalFiltro,
 					'Ambos', --'Buques',
-					'2016-08-03 00:00:00',
+					'20161101',
 					
-					'2016-08-03 00:00:00',
+					'20170510',
 					NULL, 
 					NULL,
 					NULL, 
@@ -194,11 +200,14 @@ go
 					NULL, 
 					NULL
 
-					,'2015-08-03 00:00:00','2015-08-03 00:00:00'
+					,'20151101','20160510'
 
 go
 
-
+     --var desde = new DateTime(2016, 11, 1);
+     --       var hasta = new DateTime(2017, 5, 10);
+     --       var desdeAnt = new DateTime(2015, 11, 1); //nov
+     --       var hastaAnt = new DateTime(2016, 5, 10); //mayo
 
 /*
 
@@ -246,7 +255,8 @@ go
 
 
 
-select top 10 * from cartasdeporte order by idcartadeporte desc
+--select top 10 * from cartasdeporte order by idcartadeporte desc
+
 
 
 
