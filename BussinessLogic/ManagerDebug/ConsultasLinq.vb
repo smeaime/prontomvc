@@ -1827,11 +1827,11 @@ Public Class ConsultasLinq
         '        GO()
 
 
-        Dim q = (From cdp In db.fSQL_GetDataTableFiltradoYPaginado(Nothing, Nothing, Nothing, Nothing, idVendedor,
+        Dim q = (From cdp In db.fSQL_GetDataTableFiltradoYPaginado(Nothing, Nothing, estado, Nothing, idVendedor,
                                         idCorredor, idDestinatario, idIntermediario, idRemComercial,
                                         idArticulo, idProcedencia, idDestino, AplicarANDuORalFiltro, ModoExportacion,
                                         fechadesde2, fechahasta, puntoventa,
-                                         Nothing, True, Nothing, Nothing, Nothing,
+                                         Nothing, False, Nothing, Nothing, Nothing,
                                         Nothing, Nothing, Nothing, Nothing) _
                  Where cdp.FechaDescarga IsNot Nothing And _
                          ((If(cdp.FechaDescarga, fechadesde) >= fechadesde And If(cdp.FechaDescarga, fechadesde) <= fechahasta) Or
@@ -1841,9 +1841,11 @@ Public Class ConsultasLinq
                         ClienteDesc,
                         pv,
                         EsAnterior,
-                        .NetoFinal = g.Sum(Function(i) CInt(i.NetoFinal / 1000))
+                        .NetoFinal = g.Sum(Function(i) i.NetoFinal / 1000)
                }).ToList()
 
+
+        Dim tot = q.Where(Function(i) i.EsAnterior).Sum(Function(i) i.NetoFinal)
 
 
 
@@ -1851,19 +1853,20 @@ Public Class ConsultasLinq
                   Group cdp By cdp.ClienteDesc Into g = Group _
                   Select New With { _
                         .Producto = ClienteDesc, _
-                        .PV1 = g.Where(Function(i) i.pv = 1 And Not i.EsAnterior).Sum(Function(i) CInt(i.NetoFinal)), _
-                        .PV2 = g.Where(Function(i) i.pv = 2 And Not i.EsAnterior).Sum(Function(i) CInt(i.NetoFinal)), _
-                        .PV3 = g.Where(Function(i) i.pv = 3 And Not i.EsAnterior).Sum(Function(i) CInt(i.NetoFinal)), _
-                        .PV4 = g.Where(Function(i) i.pv = 4 And Not i.EsAnterior).Sum(Function(i) CInt(i.NetoFinal)), _
-                        .Total = g.Where(Function(i) Not i.EsAnterior).Sum(Function(i) CInt(i.NetoFinal)), _
+                        .PV1 = g.Where(Function(i) i.pv = 1 And Not i.EsAnterior).Sum(Function(i) i.NetoFinal), _
+                        .PV2 = g.Where(Function(i) i.pv = 2 And Not i.EsAnterior).Sum(Function(i) i.NetoFinal), _
+                        .PV3 = g.Where(Function(i) i.pv = 3 And Not i.EsAnterior).Sum(Function(i) i.NetoFinal), _
+                        .PV4 = g.Where(Function(i) i.pv = 4 And Not i.EsAnterior).Sum(Function(i) i.NetoFinal), _
+                        .Total = g.Where(Function(i) Not i.EsAnterior).Sum(Function(i) i.NetoFinal), _
                         .Porcent = 0, _
-                        .PeriodoAnterior = g.Where(Function(i) i.EsAnterior).Sum(Function(i) CInt(i.NetoFinal)), _
+                        .PeriodoAnterior = g.Where(Function(i) i.EsAnterior).Sum(Function(i) i.NetoFinal), _
                         .Diferen = 0, _
                         .DiferencPorcent = 0 _
                     } _
-                ).Where(Function(i) i.Total > MinimoNeto).OrderByDescending(Function(i) i.Total).Take(topclie).tolist
+                ).Where(Function(i) i.Total >= MinimoNeto).OrderByDescending(Function(i) i.Total).Take(topclie).tolist
 
 
+        Dim tot2 = q9.Sum(Function(i) i.PeriodoAnterior)
 
 
 
@@ -1994,18 +1997,18 @@ Public Class ConsultasLinq
                            .Importe = g.Sum(Function(i) CDec(
                                                             CDec(If(i.TarifaFacturada, 0)) * CDec(If(i.NetoPto, 0)) / 1000
                                                            )),
-                           .PV1 = CInt(g.Where(Function(i) i.PuntoVenta = 1 And i.FechaIngreso >= fechadesde).DefaultIfEmpty().Sum(Function(i) If(i.NetoFinal, 0)) / 1000),
-                           .PV2 = CInt(g.Where(Function(i) i.PuntoVenta = 2 And i.FechaIngreso >= fechadesde).DefaultIfEmpty().Sum(Function(i) If(i.NetoFinal, 0)) / 1000),
-                           .PV3 = CInt(g.Where(Function(i) i.PuntoVenta = 3 And i.FechaIngreso >= fechadesde).DefaultIfEmpty().Sum(Function(i) If(i.NetoFinal, 0)) / 1000),
-                           .PV4 = CInt(g.Where(Function(i) i.PuntoVenta = 4 And i.FechaIngreso >= fechadesde).DefaultIfEmpty().Sum(Function(i) If(i.NetoFinal, 0)) / 1000),
+                           .PV1 = g.Where(Function(i) i.PuntoVenta = 1 And i.FechaIngreso >= fechadesde).DefaultIfEmpty().Sum(Function(i) If(i.NetoFinal, 0)) / 1000,
+                           .PV2 = g.Where(Function(i) i.PuntoVenta = 2 And i.FechaIngreso >= fechadesde).DefaultIfEmpty().Sum(Function(i) If(i.NetoFinal, 0)) / 1000,
+                           .PV3 = g.Where(Function(i) i.PuntoVenta = 3 And i.FechaIngreso >= fechadesde).DefaultIfEmpty().Sum(Function(i) If(i.NetoFinal, 0)) / 1000,
+                           .PV4 = g.Where(Function(i) i.PuntoVenta = 4 And i.FechaIngreso >= fechadesde).DefaultIfEmpty().Sum(Function(i) If(i.NetoFinal, 0)) / 1000,
                            .TotalEntrega = CInt(g.Where(Function(i) i.FechaDescarga >= fechadesde And If(Modo, "NO") = "NO") _
                                                .DefaultIfEmpty().Sum(Function(i) If(i.NetoFinal, 0)) / 1000),
                            .TotalExportacion = CInt(g.Where(Function(i) i.FechaDescarga >= fechadesde And If(Modo, "NO") = "SI") _
                                                .DefaultIfEmpty().Sum(Function(i) If(i.NetoFinal, 0)) / 1000),
                            .TotalBuques = 0,
-                           .Total = CInt(g.Where(Function(i) i.FechaDescarga >= fechadesde).DefaultIfEmpty().Sum(Function(i) If(i.NetoFinal, 0)) / 1000),
+                           .Total = g.Where(Function(i) i.FechaDescarga >= fechadesde).DefaultIfEmpty().Sum(Function(i) If(i.NetoFinal, 0)) / 1000,
                            .Porcent = 0,
-                           .PeriodoAnterior = CInt(g.Where(Function(i) i.FechaDescarga < fechadesde).DefaultIfEmpty().Sum(Function(i) If(i.NetoFinal, 0)) / 1000),
+                           .PeriodoAnterior = g.Where(Function(i) i.FechaDescarga < fechadesde).DefaultIfEmpty().Sum(Function(i) If(i.NetoFinal, 0)) / 1000,
                            .Diferen = 0,
                            .DiferencPorcent = 0
                        }
@@ -2057,18 +2060,18 @@ Public Class ConsultasLinq
                           .Merma = CDec(0),
                           .NetoFinal = CDec(0),
                           .Importe = CDec(0),
-                          .PV1 = CInt(g.Where(Function(i) i.IdStock = 1 And i.FechaIngreso >= fechadesde).DefaultIfEmpty().Sum(Function(i) If(If(i, New ProntoMVC.Data.Models.CartasPorteMovimiento).Cantidad, 0)) / 1000),
-                          .PV2 = CInt(g.Where(Function(i) i.IdStock = 2 And i.FechaIngreso >= fechadesde).DefaultIfEmpty().Sum(Function(i) If(If(i, New ProntoMVC.Data.Models.CartasPorteMovimiento).Cantidad, 0)) / 1000),
-                          .PV3 = CInt(g.Where(Function(i) i.IdStock = 3 And i.FechaIngreso >= fechadesde).DefaultIfEmpty().Sum(Function(i) If(If(i, New ProntoMVC.Data.Models.CartasPorteMovimiento).Cantidad, 0)) / 1000),
-                          .PV4 = CInt(g.Where(Function(i) i.IdStock = 4 And i.FechaIngreso >= fechadesde).DefaultIfEmpty().Sum(Function(i) If(If(i, New ProntoMVC.Data.Models.CartasPorteMovimiento).Cantidad, 0)) / 1000),
+                          .PV1 = g.Where(Function(i) i.IdStock = 1 And i.FechaIngreso >= fechadesde).DefaultIfEmpty().Sum(Function(i) If(If(i, New ProntoMVC.Data.Models.CartasPorteMovimiento).Cantidad, 0)) / 1000,
+                          .PV2 = g.Where(Function(i) i.IdStock = 2 And i.FechaIngreso >= fechadesde).DefaultIfEmpty().Sum(Function(i) If(If(i, New ProntoMVC.Data.Models.CartasPorteMovimiento).Cantidad, 0)) / 1000,
+                          .PV3 = g.Where(Function(i) i.IdStock = 3 And i.FechaIngreso >= fechadesde).DefaultIfEmpty().Sum(Function(i) If(If(i, New ProntoMVC.Data.Models.CartasPorteMovimiento).Cantidad, 0)) / 1000,
+                          .PV4 = g.Where(Function(i) i.IdStock = 4 And i.FechaIngreso >= fechadesde).DefaultIfEmpty().Sum(Function(i) If(If(i, New ProntoMVC.Data.Models.CartasPorteMovimiento).Cantidad, 0)) / 1000,
                           .TotalEntrega = 0,
                           .TotalExportacion = 0,
-                          .TotalBuques = CInt(g.Where(Function(i) i.FechaIngreso >= fechadesde).DefaultIfEmpty().Sum(Function(i) If(If(i, New ProntoMVC.Data.Models.CartasPorteMovimiento).Cantidad, 0)) / 1000),
-                          .Total = CInt(g.Where(Function(i) i.FechaIngreso >= fechadesde).DefaultIfEmpty().Sum(Function(i) If(If(i, New ProntoMVC.Data.Models.CartasPorteMovimiento).Cantidad, 0)) / 1000),
+                          .TotalBuques = g.Where(Function(i) i.FechaIngreso >= fechadesde).DefaultIfEmpty().Sum(Function(i) If(If(i, New ProntoMVC.Data.Models.CartasPorteMovimiento).Cantidad, 0)) / 1000,
+                          .Total = g.Where(Function(i) i.FechaIngreso >= fechadesde).DefaultIfEmpty().Sum(Function(i) If(If(i, New ProntoMVC.Data.Models.CartasPorteMovimiento).Cantidad, 0)) / 1000,
                           .Porcent = 0,
-                          .PeriodoAnterior = CInt(g.Where(Function(i) i.FechaIngreso <= fechahastaAnterior).DefaultIfEmpty().Sum(Function(i) If(If(i, New ProntoMVC.Data.Models.CartasPorteMovimiento).Cantidad, 0)) / 1000),
+                          .PeriodoAnterior = g.Where(Function(i) i.FechaIngreso <= fechahastaAnterior).DefaultIfEmpty().Sum(Function(i) If(If(i, New ProntoMVC.Data.Models.CartasPorteMovimiento).Cantidad, 0)) / 1000,
                           .Diferen = 0,
-                          .DiferencPorcent = 0
+            .DiferencPorcent = 0
                       }).ToList
 
             x = x.Union(bb).ToList()

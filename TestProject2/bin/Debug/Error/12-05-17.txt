@@ -83,3 +83,172 @@ Log Entry :
 05/12/2017 13:56:05
 Error in: . Error Message:estadidesc   01/11/2015   01/11/2015   01/11/2016    10/05/2017
 __________________________
+
+Log Entry : 
+05/12/2017 14:09:59
+Error in: . Error Message:estadidesc   01/11/2015   01/11/2015   01/11/2016    10/05/2017
+__________________________
+
+Log Entry : 
+05/12/2017 14:17:25
+Error in: . Error Message:estadidesc   01/11/2015   01/11/2015   01/11/2016    10/05/2017
+__________________________
+
+Log Entry : 
+05/12/2017 14:22:18
+Error in: . Error Message:estadidesc   01/11/2015   01/11/2015   01/11/2016    10/05/2017
+__________________________
+
+Log Entry : 
+05/12/2017 14:34:42
+Error in: . Error Message:estadidesc   01/11/2015   01/11/2015   01/11/2016    10/05/2017
+__________________________
+
+Log Entry : 
+05/12/2017 14:39:51
+Error in: . Error Message:estadidesc   01/11/2015   01/11/2015   01/11/2016    10/05/2017
+__________________________
+
+Log Entry : 
+05/12/2017 14:56:24
+Error in: . Error Message:estadidesc   01/11/2015   01/11/2015   01/11/2016    10/05/2017
+__________________________
+
+Log Entry : 
+05/12/2017 15:23:58
+Error in: . Error Message:estadidesc   01/11/2015   01/11/2015   01/11/2016    10/05/2017
+__________________________
+
+Log Entry : 
+05/12/2017 15:31:26
+Error in: . Error Message:estadidesc   01/11/2015   01/11/2015   01/11/2016    10/05/2017
+__________________________
+
+Log Entry : 
+05/12/2017 15:43:53
+Error in: . Error Message:ResizeImage C:\Users\Administrador\Documents\bdl\pronto\prontoweb\DataBackupear\
+__________________________
+
+Log Entry : 
+05/12/2017 15:44:58
+Error in: . Error Message:System.IO.DirectoryNotFoundException
+No se puede encontrar una parte de la ruta de acceso 'C:\Users\Administrador\Documents\bdl\pronto\prontoweb\DataBackupear\'.
+   en System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   en System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   en System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access)
+   en CartaDePorteManager.ResizeImage_ToTIFF(String image, Int32 width, Int32 height, String newimagename, String sDirVirtual, String DirApp) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 6560
+   en CartaDePorteManager.DescargarImagenesAdjuntas_TIFF(DataTable dt, String SC, Boolean bJuntarCPconTK, String DirApp, Boolean reducir) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 6049
+mscorlib
+__________________________
+
+Log Entry : 
+05/12/2017 15:44:58
+Error in: . Error Message:ResizeImage C:\Users\Administrador\Documents\bdl\pronto\prontoweb\DataBackupear\
+__________________________
+
+Log Entry : 
+05/12/2017 15:45:00
+Error in: . Error Message:System.IO.DirectoryNotFoundException
+No se puede encontrar una parte de la ruta de acceso 'C:\Users\Administrador\Documents\bdl\pronto\prontoweb\DataBackupear\'.
+   en System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   en System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   en System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access)
+   en CartaDePorteManager.ResizeImage_ToTIFF(String image, Int32 width, Int32 height, String newimagename, String sDirVirtual, String DirApp) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 6560
+   en CartaDePorteManager.DescargarImagenesAdjuntas_TIFF(DataTable dt, String SC, Boolean bJuntarCPconTK, String DirApp, Boolean reducir) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 6057
+mscorlib
+__________________________
+
+Log Entry : 
+05/12/2017 15:45:01
+Error in: . Error Message:ResizeImage C:\Users\Administrador\Documents\bdl\pronto\prontoweb\DataBackupear\
+__________________________
+
+Log Entry : 
+05/12/2017 15:45:02
+Error in: . Error Message:System.IO.DirectoryNotFoundException
+No se puede encontrar una parte de la ruta de acceso 'C:\Users\Administrador\Documents\bdl\pronto\prontoweb\DataBackupear\'.
+   en System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   en System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   en System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access)
+   en CartaDePorteManager.ResizeImage_ToTIFF(String image, Int32 width, Int32 height, String newimagename, String sDirVirtual, String DirApp) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 6560
+   en CartaDePorteManager.DescargarImagenesAdjuntas_TIFF(DataTable dt, String SC, Boolean bJuntarCPconTK, String DirApp, Boolean reducir) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 6049
+mscorlib
+__________________________
+
+Log Entry : 
+05/12/2017 15:45:02
+Error in: . Error Message:ResizeImage C:\Users\Administrador\Documents\bdl\pronto\prontoweb\DataBackupear\
+__________________________
+
+Log Entry : 
+05/12/2017 15:45:03
+Error in: . Error Message:System.IO.DirectoryNotFoundException
+No se puede encontrar una parte de la ruta de acceso 'C:\Users\Administrador\Documents\bdl\pronto\prontoweb\DataBackupear\'.
+   en System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   en System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   en System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access)
+   en CartaDePorteManager.ResizeImage_ToTIFF(String image, Int32 width, Int32 height, String newimagename, String sDirVirtual, String DirApp) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 6560
+   en CartaDePorteManager.DescargarImagenesAdjuntas_TIFF(DataTable dt, String SC, Boolean bJuntarCPconTK, String DirApp, Boolean reducir) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 6057
+mscorlib
+__________________________
+
+Log Entry : 
+05/12/2017 15:45:04
+Error in: . Error Message:ResizeImage C:\Users\Administrador\Documents\bdl\pronto\prontoweb\DataBackupear\
+__________________________
+
+Log Entry : 
+05/12/2017 15:45:05
+Error in: . Error Message:System.IO.DirectoryNotFoundException
+No se puede encontrar una parte de la ruta de acceso 'C:\Users\Administrador\Documents\bdl\pronto\prontoweb\DataBackupear\'.
+   en System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   en System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   en System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access)
+   en CartaDePorteManager.ResizeImage_ToTIFF(String image, Int32 width, Int32 height, String newimagename, String sDirVirtual, String DirApp) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 6560
+   en CartaDePorteManager.DescargarImagenesAdjuntas_TIFF(DataTable dt, String SC, Boolean bJuntarCPconTK, String DirApp, Boolean reducir) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 6049
+mscorlib
+__________________________
+
+Log Entry : 
+05/12/2017 15:45:05
+Error in: . Error Message:ResizeImage C:\Users\Administrador\Documents\bdl\pronto\prontoweb\DataBackupear\
+__________________________
+
+Log Entry : 
+05/12/2017 15:45:05
+Error in: . Error Message:System.IO.DirectoryNotFoundException
+No se puede encontrar una parte de la ruta de acceso 'C:\Users\Administrador\Documents\bdl\pronto\prontoweb\DataBackupear\'.
+   en System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   en System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   en System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access)
+   en CartaDePorteManager.ResizeImage_ToTIFF(String image, Int32 width, Int32 height, String newimagename, String sDirVirtual, String DirApp) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 6560
+   en CartaDePorteManager.DescargarImagenesAdjuntas_TIFF(DataTable dt, String SC, Boolean bJuntarCPconTK, String DirApp, Boolean reducir) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 6057
+mscorlib
+__________________________
+
+Log Entry : 
+05/12/2017 15:45:07
+Error in: . Error Message:ResizeImage C:\Users\Administrador\Documents\bdl\pronto\prontoweb\DataBackupear\
+__________________________
+
+Log Entry : 
+05/12/2017 15:45:07
+Error in: . Error Message:System.IO.DirectoryNotFoundException
+No se puede encontrar una parte de la ruta de acceso 'C:\Users\Administrador\Documents\bdl\pronto\prontoweb\DataBackupear\'.
+   en System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   en System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   en System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access)
+   en CartaDePorteManager.ResizeImage_ToTIFF(String image, Int32 width, Int32 height, String newimagename, String sDirVirtual, String DirApp) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 6560
+   en CartaDePorteManager.DescargarImagenesAdjuntas_TIFF(DataTable dt, String SC, Boolean bJuntarCPconTK, String DirApp, Boolean reducir) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 6049
+mscorlib
+__________________________
+
+Log Entry : 
+05/12/2017 15:45:07
+Error in: . Error Message:ResizeImage C:\Users\Administrador\Documents\bdl\pronto\prontoweb\DataBackupear\
+__________________________
+
+Log Entry : 
+05/12/2017 15:45:55
+Error in: . Error Message:ResizeImage C:\Users\Administrador\Documents\bdl\pronto\docstest\2501323ago2016_100401_555332208-CP.jpg
+__________________________
