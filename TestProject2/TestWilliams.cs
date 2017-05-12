@@ -887,6 +887,8 @@ namespace ProntoMVC.Tests
 
 
 
+
+            // [wCartasDePorte_TX_EstadisticasDeDescarga]
             var q = ConsultasLinq.EstadisticasDescargas(ref p2,
                                             desde.ToString(), hasta.ToString(),
                                             desdeAnt.ToString(), hastaAnt.ToString(),
@@ -911,14 +913,13 @@ namespace ProntoMVC.Tests
 
 
 
-
             var q2 = ConsultasLinq.rankingclientes(SC, "",
                  "", "", 0, 10, CartaDePorteManager.enumCDPestado.DescargasMasFacturadas,
                      "", -1, -1,
                 -1, -1,
                 -1, -1, -1, -1,
                 CartaDePorteManager.FiltroANDOR.FiltroOR, ModoExportacion, desde, hasta,
-               pv, desdeAnt, MinimoNeto, topclie);
+               pv, desdeAnt,hastaAnt, MinimoNeto, topclie);
 
 
 
@@ -933,6 +934,12 @@ namespace ProntoMVC.Tests
             CartaDePorteManager.RebindReportViewerLINQ_Excel(ref ReporteLocal2, @"C:\Users\Administrador\Documents\bdl\pronto\prontoweb\ProntoWeb\Informes\Ranking de Clientes.rdl", q2, ref output2, yourParams2);
 
             System.Diagnostics.Process.Start(output2);
+
+
+
+
+
+
 
 
         }
