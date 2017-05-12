@@ -583,15 +583,27 @@ namespace ProntoFlexicapture
                     //05/11/2017 15:39:13
                     //Error in: . Error Message:hilo #10: Problemas con la licencia? Paro y reinicio
                     //__________________________
-                    jjkhj
-                    ClassFlexicapture.Log(x2);
+                    
+
+                    ClassFlexicapture.Log(x2.ToString());
+
                     if ((uint)x2.ErrorCode == 0x80004005)
-                    { // (0x80080005) 80080005 Server execution failed (Exception from HRESULT: 0x80080005 (CO_E_SERVER_EXEC_FAILURE)).
-
-                        ClassFlexicapture.Log("Problemas CO_E_SERVER_EXEC_FAILURE");
-
+                    { 
+                        ClassFlexicapture.Log("Problemas con la exportacion");
                     }
-                    processor.ResumeProcessing
+                    else{
+                        ClassFlexicapture.Log("NO IDENTIFICADO!! " + (uint)x2.ErrorCode);
+                    }
+
+
+                    IProcessingError lastProcessingError = processor.GetLastProcessingError();
+                    if (lastProcessingError != null)
+                    {
+                        String errormsg = lastProcessingError.MessageText();
+                        ClassFlexicapture.Log(errormsg);
+                    }
+                    processor.ResumeProcessing(false);
+
                 }
                 catch (Exception ex)
                 {
@@ -793,19 +805,16 @@ namespace ProntoFlexicapture
                 oXL.Application.ActiveWorkbook.SaveAs(nombreexcel);
 
             }
-
-
-
             catch (Exception ex)
             {
-                
-Log Entry : 
-05/11/2017 17:46:54
-Error in: . Error Message:System.Runtime.InteropServices.COMException
-No se puede obtener acceso a un documento de sólo lectura "ExportToXLS.xls".
-   at Microsoft.Office.Interop.Excel._Workbook.SaveAs(Object Filename, Object FileFormat, Object Password, Object WriteResPassword, Object ReadOnlyRecommended, Object CreateBackup, XlSaveAsAccessMode AccessMode, Object ConflictResolution, Object AddToMru, Object TextCodepage, Object TextVisualLayout, Object Local)
-   at ProntoFlexicapture.ClassFlexicapture.ManotearExcel(String nombreexcel, String dato, String numerocarta) in c:\Users\Administrador\Documents\bdl\pronto\InterfazFlexicapture\prontoflexicapture.cs:line 738
-Microsoft Excel
+
+                //Log Entry : 
+                //05/11/2017 17:46:54
+                //Error in: . Error Message:System.Runtime.InteropServices.COMException
+                //No se puede obtener acceso a un documento de sólo lectura "ExportToXLS.xls".
+                //   at Microsoft.Office.Interop.Excel._Workbook.SaveAs(Object Filename, Object FileFormat, Object Password, Object WriteResPassword, Object ReadOnlyRecommended, Object CreateBackup, XlSaveAsAccessMode AccessMode, Object ConflictResolution, Object AddToMru, Object TextCodepage, Object TextVisualLayout, Object Local)
+                //   at ProntoFlexicapture.ClassFlexicapture.ManotearExcel(String nombreexcel, String dato, String numerocarta) in c:\Users\Administrador\Documents\bdl\pronto\InterfazFlexicapture\prontoflexicapture.cs:line 738
+                //Microsoft Excel
 
                 ErrHandler2.WriteError(ex);
             }
@@ -1572,33 +1581,58 @@ Microsoft Excel
 
         public static List<string> TiffSplit_dea2(string filename)
         {
+
+            // http://stackoverflow.com/questions/21992799/tiffbitmapencoder-memory-bug-causing-insufficient-memory-exception-in-c-wpf
+
+            //            Insufficient memory to continue the execution of the program.
+            //Stack Trace:	at MS.Internal.HRESULT.Check(Int32 hr)
+            //at System.Windows.Media.Imaging.BitmapEncoder.SaveFrame(SafeMILHandle frameEncodeHandle, SafeMILHandle encoderOptions, BitmapFrame frame)
+            //at System.Windows.Media.Imaging.BitmapEncoder.Save(Stream stream)
+            //at ProntoFlexicapture.ClassFlexicapture.TiffSplit_dea2(String filename) in c:\Users\Administrador\Documents\bdl\pronto\InterfazFlexicapture\prontoflexicapture.cs:line 1507
+            //at ProntoFlexicapture.ClassFlexicapture.PreprocesarImagenesTiff(String archivo, Boolean bEsFormatoCPTK, Boolean bGirar180grados, Boolean bProcesarConOCR) in c:\Users\Administrador\Documents\bdl\pronto\InterfazFlexicap
+
+
             List<string> l = new List<string>();
 
-            Stream imageStreamSource = new FileStream(filename, FileMode.Open, FileAccess.Read, FileShare.Read);
-            System.Windows.Media.Imaging.TiffBitmapDecoder decoder = new System.Windows.Media.Imaging.TiffBitmapDecoder(imageStreamSource, System.Windows.Media.Imaging.BitmapCreateOptions.PreservePixelFormat, System.Windows.Media.Imaging.BitmapCacheOption.Default);
+            System.Windows.Media.Imaging.TiffBitmapDecoder decoder;
 
-            int pagecount = decoder.Frames.Count;
-            if (pagecount > 1)
+
+            using (Stream imageStreamSource = new FileStream(filename, FileMode.Open, FileAccess.Read, FileShare.Read))
             {
-                string fNameBase = Path.GetFileNameWithoutExtension(filename);
-                string filePath = Path.GetDirectoryName(filename);
-                for (int i = 0; i < pagecount; i += 2)
+                decoder = new System.Windows.Media.Imaging.TiffBitmapDecoder(imageStreamSource, System.Windows.Media.Imaging.BitmapCreateOptions.PreservePixelFormat, System.Windows.Media.Imaging.BitmapCacheOption.Default);
+
+                int pagecount = decoder.Frames.Count;
+                if (pagecount > 1)
                 {
-                    //string outputName = string.Format(@"{0}\SplitImages\{1}-{2}.tif", filePath, fNameBase, i.ToString());
-                    string outputName = string.Format(@"{0}\{1}_pag{2}_unido.tif", filePath, fNameBase, (i / 2).ToString());
-                    FileStream stream = new FileStream(outputName, FileMode.Create, FileAccess.Write);
-                    System.Windows.Media.Imaging.TiffBitmapEncoder encoder = new System.Windows.Media.Imaging.TiffBitmapEncoder();
-                    encoder.Frames.Add(decoder.Frames[i]);
-                    encoder.Frames.Add(decoder.Frames[i + 1]);
-                    encoder.Save(stream);
-                    l.Add(outputName);
-                    stream.Dispose();
+                    string fNameBase = Path.GetFileNameWithoutExtension(filename);
+                    string filePath = Path.GetDirectoryName(filename);
+                    for (int i = 0; i < pagecount; i += 2)
+                    {
+                        //string outputName = string.Format(@"{0}\SplitImages\{1}-{2}.tif", filePath, fNameBase, i.ToString());
+                        string outputName = string.Format(@"{0}\{1}_pag{2}_unido.tif", filePath, fNameBase, (i / 2).ToString());
+
+
+                        using (FileStream stream = new FileStream(outputName, FileMode.Create, FileAccess.Write))
+                        {
+                            System.Windows.Media.Imaging.TiffBitmapEncoder encoder = new System.Windows.Media.Imaging.TiffBitmapEncoder();
+                            encoder.Frames.Add(decoder.Frames[i]);
+                            if (i + 1 < pagecount) encoder.Frames.Add(decoder.Frames[i + 1]);
+                            encoder.Save(stream);
+                            l.Add(outputName);
+                            stream.Close();
+                            //stream.Dispose();
+                        }
+
+                    }
+                    //imageStreamSource.Dispose();
+                    imageStreamSource.Close();
                 }
-                imageStreamSource.Dispose();
             }
 
             return l;
 
+
+         
         }
 
 

@@ -1815,51 +1815,45 @@ Public Class ConsultasLinq
 
 
 
+        Dim db As ProntoMVC.Data.Models.DemoProntoEntities = New ProntoMVC.Data.Models.DemoProntoEntities(ProntoMVC.Data.Models.Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC)))
+
+        db.Database.CommandTimeout = 300
 
 
-        'Dim db As New LinqCartasPorteDataContext(Encriptar(HFSC.Value))
-        Dim db As LinqCartasPorteDataContext = New LinqCartasPorteDataContext(Encriptar(SC))
-
-
-
-        'mostrar(top)
-        'pedir(minimo)
-
-
-
-
-        db.CommandTimeout = 300
+        ''Dim db As New LinqCartasPorteDataContext(Encriptar(HFSC.Value))
+        'Dim db As LinqCartasPorteDataContext = New LinqCartasPorteDataContext(Encriptar(SC))
+        'db.CommandTimeout = 300
 
 
 
-        Dim q9 = (From cdp In db.CartasDePortes _
-                From fac In db.linqFacturas.Where(Function(i) cdp.IdFacturaImputada = i.IdFactura).DefaultIfEmpty() _
-                From clifac In db.linqClientes.Where(Function(i) fac.IdCliente = i.IdCliente).DefaultIfEmpty() _
-                Join cli In db.linqClientes On cli.IdCliente Equals cdp.Vendedor _
-                Join art In db.linqArticulos On art.IdArticulo Equals cdp.IdArticulo _
-                Where cdp.Vendedor > 0 _
-                    And (cdp.PuntoVenta = puntoventa Or puntoventa = -1) _
-                    And cli.RazonSocial IsNot Nothing _
-                    And (cdp.FechaDescarga >= fechadesde2 And cdp.FechaDescarga <= fechahasta) _
-                    And (cdp.IdFacturaImputada > 0) _
-                    And ((ModoExportacion = "Ambos") Or (ModoExportacion = "Entregas" And If(cdp.Exporta, "NO") = "NO") Or (ModoExportacion = "Export" And If(cdp.Exporta, "NO") = "SI")) _
-                    And (cdp.Vendedor.HasValue And cdp.Corredor.HasValue And cdp.Entregador.HasValue) _
-                    And (idVendedor = -1 Or cdp.Vendedor = idVendedor) _
-                    And (idCorredor = -1 Or cdp.Corredor = idCorredor) _
-                    And (idDestinatario = -1 Or cdp.Entregador = idDestinatario) _
-                    And (idIntermediario = -1 Or cdp.CuentaOrden1 = idIntermediario) _
-                    And (idArticulo = -1 Or cdp.IdArticulo = idArticulo) _
-                    And (idDestino = -1 Or cdp.Destino = idDestino) _
-                Group cdp By Cliente = clifac.RazonSocial Into g = Group _
-                Select New With { _
-                        .Producto = Cliente, _
-                        .PV1 = g.Sum(Function(i) IIf(i.PuntoVenta = 1 And i.FechaDescarga >= fechadesde, CInt(i.NetoFinal / 1000), 0)), _
-                        .PV2 = g.Sum(Function(i) IIf(i.PuntoVenta = 2 And i.FechaDescarga >= fechadesde, CInt(i.NetoFinal / 1000), 0)), _
-                        .PV3 = g.Sum(Function(i) IIf(i.PuntoVenta = 3 And i.FechaDescarga >= fechadesde, CInt(i.NetoFinal / 1000), 0)), _
-                        .PV4 = g.Sum(Function(i) IIf(i.PuntoVenta = 4 And i.FechaDescarga >= fechadesde, CInt(i.NetoFinal / 1000), 0)), _
-                        .Total = g.Sum(Function(i) IIf(i.FechaDescarga >= fechadesde, CInt(i.NetoFinal / 1000), 0)), _
+        Dim aaa = (From cdp In db.fSQL_GetDataTableFiltradoYPaginado(Nothing, Nothing, Nothing, Nothing, idVendedor,
+                                        idCorredor, idDestinatario, idIntermediario, idRemComercial,
+                                        idArticulo, idProcedencia, idDestino, AplicarANDuORalFiltro, ModoExportacion,
+                                        fechadesde2, fechahasta, puntoventa,
+                                        Nothing, True, Nothing, Nothing, Nothing,
+                                        Nothing, Nothing, Nothing, Nothing) _
+                  Group cdp By ClienteDesc = cdp.ClienteFacturado, pv = puntoventa, EsAnterior = (cdp.FechaDescarga < fechadesde) Into g = Group _
+                  Select New With { _
+                        ClienteDesc,
+                        pv,
+                        EsAnterior,
+                        .NetoFinal = g.Sum(Function(i) CInt(i.NetoFinal / 1000))
+               }).ToList()
+
+
+
+
+        Dim q9 = (From cdp In aaa _
+                  Group cdp By cdp.ClienteDesc Into g = Group _
+                  Select New With { _
+                        .Producto = ClienteDesc, _
+                        .PV1 = g.Where(Function(i) i.pv = 1 And Not i.EsAnterior).Sum(Function(i) CInt(i.NetoFinal)), _
+                        .PV2 = g.Where(Function(i) i.pv = 2 And Not i.EsAnterior).Sum(Function(i) CInt(i.NetoFinal)), _
+                        .PV3 = g.Where(Function(i) i.pv = 3 And Not i.EsAnterior).Sum(Function(i) CInt(i.NetoFinal)), _
+                        .PV4 = g.Where(Function(i) i.pv = 4 And Not i.EsAnterior).Sum(Function(i) CInt(i.NetoFinal)), _
+                        .Total = g.Where(Function(i) Not i.EsAnterior).Sum(Function(i) CInt(i.NetoFinal)), _
                         .Porcent = 0, _
-                        .PeriodoAnterior = g.Sum(Function(i) IIf(i.FechaDescarga < fechadesde, CInt(i.NetoFinal / 1000), 0)), _
+                        .PeriodoAnterior = g.Where(Function(i) i.EsAnterior).Sum(Function(i) CInt(i.NetoFinal)), _
                         .Diferen = 0, _
                         .DiferencPorcent = 0 _
                     } _
