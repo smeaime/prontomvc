@@ -1184,15 +1184,21 @@ Partial Class CartaDePorteInformesGerenciales
         '////////////////////////////////////////////////////
         Dim fechadesde As Date = iisValidSqlDate(txtFechaDesde.Text, #1/1/1753#)
         Dim fechahasta As Date = iisValidSqlDate(txtFechaHasta.Text, #1/1/2100#)
-        Dim fechadesde2 As Date
 
-        'la fecha del periodo anterior a comparar
-        If cmbPeriodo.Text = "Este mes" Or cmbPeriodo.Text = "Mes anterior" Then
-            fechadesde2 = GetFirstDayInMonth(DateAdd(DateInterval.Month, -1, fechadesde))
-        Else
-            fechadesde2 = fechadesde - (fechahasta - fechadesde)
-        End If
-        fechadesde2 = iisValidSqlDate(fechadesde2, #1/1/1753#)
+        Dim fechadesde2 As Date = iisValidSqlDate(txtFechaDesdeAnterior.Text, #1/1/1753#)
+        Dim fechahasta2 As Date = iisValidSqlDate(txtFechaHastaAnterior.Text, #1/1/2100#)
+
+
+        'Dim fechadesde2 As Date
+
+        ''la fecha del periodo anterior a comparar
+        'If cmbPeriodo.Text = "Este mes" Or cmbPeriodo.Text = "Mes anterior" Then
+        '    fechadesde2 = GetFirstDayInMonth(DateAdd(DateInterval.Month, -1, fechadesde))
+        'Else
+        '    fechadesde2 = fechadesde - (fechahasta - fechadesde)
+        'End If
+        'fechadesde2 = iisValidSqlDate(fechadesde2, #1/1/1753#)
+
         '////////////////////////////////////////////////////
         '////////////////////////////////////////////////////
 
@@ -1206,7 +1212,7 @@ Partial Class CartaDePorteInformesGerenciales
                                     idRComercial, idArticulo, idProcedencia, idDestino, _
                                     IIf(cmbCriterioWHERE.SelectedValue = "todos", FiltroANDOR.FiltroAND, FiltroANDOR.FiltroOR), _
                                        DropDownList2.Text, _
-                                   fechadesde, fechahasta, pv, fechadesde2, Val(txtMinimoNeto.Text), topclie)
+                                   fechadesde, fechahasta, pv, fechadesde2, fechahasta2, Val(txtMinimoNeto.Text), topclie)
 
 
 
