@@ -891,6 +891,7 @@
                               <Value>=Fields!PV1.Value</Value>
                               <Style>
                                 <FontFamily>Tahoma</FontFamily>
+                                <Format>N0</Format>
                                 <Color>#4d4d4d</Color>
                               </Style>
                             </TextRun>
@@ -924,6 +925,7 @@
                               <Value>=Fields!PV2.Value</Value>
                               <Style>
                                 <FontFamily>Tahoma</FontFamily>
+                                <Format>N0</Format>
                                 <Color>#4d4d4d</Color>
                               </Style>
                             </TextRun>
@@ -957,6 +959,7 @@
                               <Value>=Fields!PV3.Value</Value>
                               <Style>
                                 <FontFamily>Tahoma</FontFamily>
+                                <Format>N0</Format>
                                 <Color>#4d4d4d</Color>
                               </Style>
                             </TextRun>
@@ -990,6 +993,7 @@
                               <Value>=Fields!PV4.Value</Value>
                               <Style>
                                 <FontFamily>Tahoma</FontFamily>
+                                <Format>N0</Format>
                                 <Color>#4d4d4d</Color>
                               </Style>
                             </TextRun>
@@ -1024,6 +1028,7 @@
                               <Style>
                                 <FontFamily>Tahoma</FontFamily>
                                 <FontWeight>Bold</FontWeight>
+                                <Format>N0</Format>
                                 <Color>#4d4d4d</Color>
                               </Style>
                             </TextRun>
@@ -1091,6 +1096,7 @@
                               <Value>=Fields!PeriodoAnterior.Value</Value>
                               <Style>
                                 <FontFamily>Tahoma</FontFamily>
+                                <Format>N0</Format>
                                 <Color>#4d4d4d</Color>
                               </Style>
                             </TextRun>
@@ -1124,6 +1130,7 @@
                               <Value>=Fields!Total.Value - Fields!PeriodoAnterior.Value</Value>
                               <Style>
                                 <FontFamily>Tahoma</FontFamily>
+                                <Format>N0</Format>
                                 <Color>#4d4d4d</Color>
                               </Style>
                             </TextRun>
@@ -1196,6 +1203,7 @@
                               <Value>=Sum(Fields!PV1.Value)</Value>
                               <Style>
                                 <FontFamily>Tahoma</FontFamily>
+                                <Format>N0</Format>
                                 <Color>#4d4d4d</Color>
                               </Style>
                             </TextRun>
@@ -1229,6 +1237,7 @@
                               <Value>=Sum(Fields!PV2.Value)</Value>
                               <Style>
                                 <FontFamily>Tahoma</FontFamily>
+                                <Format>N0</Format>
                                 <Color>#4d4d4d</Color>
                               </Style>
                             </TextRun>
@@ -1262,6 +1271,7 @@
                               <Value>=Sum(Fields!PV3.Value)</Value>
                               <Style>
                                 <FontFamily>Tahoma</FontFamily>
+                                <Format>N0</Format>
                                 <Color>#4d4d4d</Color>
                               </Style>
                             </TextRun>
@@ -1295,6 +1305,7 @@
                               <Value>=Sum(Fields!PV4.Value)</Value>
                               <Style>
                                 <FontFamily>Tahoma</FontFamily>
+                                <Format>N0</Format>
                                 <Color>#4d4d4d</Color>
                               </Style>
                             </TextRun>
@@ -1329,6 +1340,7 @@
                               <Style>
                                 <FontFamily>Tahoma</FontFamily>
                                 <FontWeight>Bold</FontWeight>
+                                <Format>N0</Format>
                                 <Color>#4d4d4d</Color>
                               </Style>
                             </TextRun>
@@ -1395,6 +1407,7 @@
                               <Value>=Sum(Fields!PeriodoAnterior.Value)</Value>
                               <Style>
                                 <FontFamily>Tahoma</FontFamily>
+                                <Format>N0</Format>
                                 <Color>#4d4d4d</Color>
                               </Style>
                             </TextRun>
@@ -1428,6 +1441,7 @@
                               <Value />
                               <Style>
                                 <FontFamily>Tahoma</FontFamily>
+                                <Format>N0</Format>
                                 <Color>#4d4d4d</Color>
                               </Style>
                             </TextRun>
