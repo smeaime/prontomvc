@@ -863,21 +863,82 @@ namespace ProntoMVC.Tests
         /// ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-        
-Log Entry : 
-05/11/2017 15:39:13
-Error in: . Error Message:hilo #10: System.Runtime.InteropServices.COMException (0x80004005): Error: No se ha podido exportar a 'Destino de exportación definido por el usuario' debido a un error en la exportación
-   at FCEngine.IFlexiCaptureProcessor.ExportDocumentEx(IDocument Document, String ExportRootFolder, String FileName, IFileExportParams ExportParams)
-   at ProntoFlexicapture.ClassFlexicapture.ProcesarCartasBatchConFlexicapture(IEngine& engine, IFlexiCaptureProcessor& processor, String plantilla, List`1 imagenes, String SC, String DirApp, Boolean bProcesar, String& sError) in c:\Users\Administrador\Documents\bdl\pronto\InterfazFlexicapture\prontoflexicapture.cs:line 558
-   at ProntoFlexicapture.ClassFlexicapture.ProcesarCartasBatchConFlexicapture_SacandoImagenesDelDirectorio(IEngine& engine, IFlexiCaptureProcessor& processor, String plantilla, Int32 cuantasImagenes, String SC, String DirApp, Boolean bProcesar, String& sError) in c:\Users\Administrador\Documents\bdl\pronto\InterfazFlexicapture\prontoflexicapture.cs:line 310
-   at ProntoWindowsService.Service1.Tanda(String SC, String DirApp, IEngine& engine, IFlexiCaptureProcessor& processor, String idthread) in c:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\Service1.cs:line 851
-   at ProntoWindowsService.Service1.DoWorkSoloOCR() in c:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\Service1.cs:line 298
-__________________________
 
-Log Entry : 
-05/11/2017 15:39:13
-Error in: . Error Message:hilo #10: Problemas con la licencia? Paro y reinicio
-__________________________
+
+
+
+        [TestMethod]
+        public void problema_informe_38136()
+        {
+            ReportParameter p2 = null;
+
+            var desde = new DateTime(2016, 11, 1);
+            var hasta = new DateTime(2017, 5, 10);
+            var desdeAnt = new DateTime(2015, 11, 1); //nov
+            var hastaAnt = new DateTime(2016, 5, 10); //mayo
+            var MinimoNeto = 0;
+            var topclie = 99999;
+            var pv = -1;
+            var ModoExportacion = "Ambos";
+
+
+
+
+
+
+
+            var q = ConsultasLinq.EstadisticasDescargas(ref p2,
+                                            desde.ToString(), hasta.ToString(),
+                                            desdeAnt.ToString(), hastaAnt.ToString(),
+                                            "Personalizar",
+                                            pv, ModoExportacion, SC, -1, -1, -1);
+
+
+            ReportViewer ReporteLocal = new Microsoft.Reporting.WebForms.ReportViewer();
+            string output = "";
+
+            ReportParameter[] yourParams = new ReportParameter[2];
+            yourParams[0] = new ReportParameter("Titulo", "jhjh");
+            yourParams[1] = p2;
+
+            CartaDePorteManager.RebindReportViewerLINQ_Excel(ref ReporteLocal, @"C:\Users\Administrador\Documents\bdl\pronto\prontoweb\ProntoWeb\Informes\Estadísticas de Toneladas descargadas Sucursal-Modo.rdl", q, ref output, yourParams);
+
+            System.Diagnostics.Process.Start(output);
+
+
+
+
+
+
+
+
+            var q2 = ConsultasLinq.rankingclientes(SC, "",
+                 "", "", 0, 10, CartaDePorteManager.enumCDPestado.DescargasMasFacturadas,
+                     "", -1, -1,
+                -1, -1,
+                -1, -1, -1, -1,
+                CartaDePorteManager.FiltroANDOR.FiltroOR, ModoExportacion, desde, hasta,
+               pv, desdeAnt, MinimoNeto, topclie);
+
+
+
+
+            ReportViewer ReporteLocal2 = new Microsoft.Reporting.WebForms.ReportViewer();
+            string output2 = "";
+
+            ReportParameter[] yourParams2 = new ReportParameter[2];
+            yourParams2[0] = new ReportParameter("TopClientes", topclie.ToString());
+            yourParams2[1] = new ReportParameter("MinimoNeto", MinimoNeto.ToString());
+
+            CartaDePorteManager.RebindReportViewerLINQ_Excel(ref ReporteLocal2, @"C:\Users\Administrador\Documents\bdl\pronto\prontoweb\ProntoWeb\Informes\Ranking de Clientes.rdl", q2, ref output2, yourParams2);
+
+            System.Diagnostics.Process.Start(output2);
+
+
+        }
+
+
+
 
 
 
@@ -981,6 +1042,42 @@ System.Drawing
         }
 
 
+        [TestMethod]
+        public void OCR_Preprocesamiento_paginacion_2()
+        {
+
+            //  probar los picos de IIS en las subidas de imagenes (en los dos importadores) -apuesto a que es la paginacion
+
+
+
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            string zipFile;
+            //zipFile = @"C:\Users\Administrador\Documents\bdl\pronto\docstest\Lote 09nov190213 cgoycochea PV4\Xerox WorkCentre 3550_20161109190032.tif";
+            zipFile = @"C:\Users\Administrador\Documents\bdl\pronto\docstest\Xerox WorkCentre 3550_20170511174612.tif";
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+            //ClassFlexicapture.TiffSplit_dea2(zipFile);
+            //ClassFlexicapture.TiffSplit(zipFile);
+
+
+            VaciarDirectorioTemp();
+
+
+            //var l = ClassFlexicapture.PreprocesarArchivoSubido(zipFile, "Mariano", DirApp, false, false, false, 1);
+            var l = ClassFlexicapture.PreprocesarArchivoSubido(zipFile, "Mariano", DirApp, true, false, false, 1);
+            //PreprocesarImagenesTiff
+
+            string sError = "";
+
+
+
+            //CartaDePorteManager.ProcesarImagenesConCodigosDeBarraYAdjuntar(SC, lista, -1, ref sError, DirApp);
+            //ClassFlexicapture.ActivarMotor(SC, l, ref sError, DirApp, "SI");
+        }
+
 
         [TestMethod]
         public void OCR_Preprocesamiento_paginacion()
@@ -994,7 +1091,8 @@ System.Drawing
             /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             string zipFile;
-            zipFile = @"C:\Users\Administrador\Documents\bdl\pronto\docstest\Lote 09nov190213 cgoycochea PV4\Xerox WorkCentre 3550_20161109190032.tif";
+            //zipFile = @"C:\Users\Administrador\Documents\bdl\pronto\docstest\Lote 09nov190213 cgoycochea PV4\Xerox WorkCentre 3550_20161109190032.tif";
+            zipFile = @"C:\Users\Administrador\Documents\bdl\pronto\docstest\Xerox WorkCentre 3550_20170511174612.tif";
             /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -1006,7 +1104,7 @@ System.Drawing
 
 
             //var l = ClassFlexicapture.PreprocesarArchivoSubido(zipFile, "Mariano", DirApp, false, false, false, 1);
-            var l = ClassFlexicapture.PreprocesarArchivoSubido(zipFile, "Mariano", DirApp, true, false, false, 1);
+            var l = ClassFlexicapture.PreprocesarArchivoSubido(zipFile, "Mariano", DirApp, false, false, false, 1);
             //PreprocesarImagenesTiff
 
             string sError = "";
