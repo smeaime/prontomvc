@@ -1809,30 +1809,34 @@ Public Class ConsultasLinq
           ByVal ModoExportacion As String,
           ByVal fechadesde As DateTime, ByVal fechahasta As DateTime,
           ByVal puntoventa As Integer,
-            fechadesde2 As DateTime, MinimoNeto As Integer, topclie As Integer) As Object
-
-
-
+            fechadesde2 As DateTime, fechahasta2 As DateTime, MinimoNeto As Integer, topclie As Integer) As Object
 
 
         Dim db As ProntoMVC.Data.Models.DemoProntoEntities = New ProntoMVC.Data.Models.DemoProntoEntities(ProntoMVC.Data.Models.Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC)))
-
         db.Database.CommandTimeout = 300
 
 
-        ''Dim db As New LinqCartasPorteDataContext(Encriptar(HFSC.Value))
-        'Dim db As LinqCartasPorteDataContext = New LinqCartasPorteDataContext(Encriptar(SC))
-        'db.CommandTimeout = 300
 
 
 
-        Dim aaa = (From cdp In db.fSQL_GetDataTableFiltradoYPaginado(Nothing, Nothing, Nothing, Nothing, idVendedor,
+        'CREATE NONCLUSTERED INDEX IDX_CartasDePorte_FechaDescarga
+        'ON [dbo].[CartasDePorte] ([FechaDescarga])
+        '        INCLUDE([NumeroCartaDePorte], [Anulada], [Vendedor], [CuentaOrden1], [CuentaOrden2], [Corredor], [Entregador],
+        '        [Procedencia], [Patente], [idArticulo], [NetoProc], [NetoFinal], [Contrato], [Destino], [IdFacturaImputada], [puntoventa],
+        '        [SubnumeroVagon], [FechaArribo], [Corredor2], [SubnumeroDeFacturacion], [IdClienteAuxiliar], [Acopio1], [Acopio2], [Acopio3], [Acopio4], [Acopio5], [Acopio6])
+        '        GO()
+
+
+        Dim q = (From cdp In db.fSQL_GetDataTableFiltradoYPaginado(Nothing, Nothing, Nothing, Nothing, idVendedor,
                                         idCorredor, idDestinatario, idIntermediario, idRemComercial,
                                         idArticulo, idProcedencia, idDestino, AplicarANDuORalFiltro, ModoExportacion,
                                         fechadesde2, fechahasta, puntoventa,
-                                        Nothing, True, Nothing, Nothing, Nothing,
+                                         Nothing, True, Nothing, Nothing, Nothing,
                                         Nothing, Nothing, Nothing, Nothing) _
-                  Group cdp By ClienteDesc = cdp.ClienteFacturado, pv = puntoventa, EsAnterior = (cdp.FechaDescarga < fechadesde) Into g = Group _
+                 Where cdp.FechaDescarga IsNot Nothing And _
+                         ((If(cdp.FechaDescarga, fechadesde) >= fechadesde And If(cdp.FechaDescarga, fechadesde) <= fechahasta) Or
+                          (If(cdp.FechaDescarga, fechadesde) >= fechadesde2 And If(cdp.FechaDescarga, fechadesde) <= fechahasta2))
+                  Group cdp By ClienteDesc = cdp.ClienteFacturado, pv = cdp.PuntoVenta, EsAnterior = (If(cdp.FechaDescarga, fechadesde) <= fechahasta2) Into g = Group _
                   Select New With { _
                         ClienteDesc,
                         pv,
@@ -1843,7 +1847,7 @@ Public Class ConsultasLinq
 
 
 
-        Dim q9 = (From cdp In aaa _
+        Dim q9 = (From cdp In q _
                   Group cdp By cdp.ClienteDesc Into g = Group _
                   Select New With { _
                         .Producto = ClienteDesc, _
@@ -1944,7 +1948,8 @@ Public Class ConsultasLinq
 
         'If ModoExportacion <> "Buques" Then
 
-        Dim aaa = From xz In db.wCartasDePorte_TX_EstadisticasDeDescarga(Nothing, Nothing, Nothing, Nothing, Nothing,
+        Dim aaa = From xz In db.wCartasDePorte_TX_EstadisticasDeDescarga(Nothing, Nothing, CartaDePorteManager.enumCDPestado.DescargasMasFacturadas, _
+                                                                         Nothing, Nothing,
                                                                           Nothing, idDestinatario, Nothing, Nothing, Nothing, Nothing, idDestino,
                                                                            Nothing,
                                                                              ModoExportacion, fechadesde, fechahasta, pv,

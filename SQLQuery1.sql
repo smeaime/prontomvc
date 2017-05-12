@@ -1,44 +1,30 @@
-﻿select * from parametros2 where valor like '%esag%'
+declare @startRowIndex int,@maximumRows int,@estado int,@QueContenga nvarchar(4000),@idVendedor int,@idCorredor int,@idDestinatario int,@idIntermediario int,@idRemComercial int,@idArticulo int,@idProcedencia int,@idDestino int,@AplicarANDuORalFiltro int,@ModoExportacion nvarchar(4000),@fechadesde datetime2(7),@fechahasta datetime2(7),@puntoventa int,@IdAcopio int,@bTraerDuplicados bit,@Contrato nvarchar(4000),@QueContenga2 nvarchar(4000),@idClienteAuxiliarint int,@AgrupadorDeTandaPeriodos int,@Vagon int,@Patente nvarchar(4000),@optCamionVagon nvarchar(4000),@p__linq__0 datetime2(7),@p__linq__1 datetime2(7)
+select @startRowIndex=NULL,@maximumRows=NULL,@estado=NULL,@QueContenga=NULL,@idVendedor=-1,@idCorredor=-1,@idDestinatario=-1,@idIntermediario=-1,@idRemComercial=-1,@idArticulo=-1,@idProcedencia=-1,@idDestino=-1,@AplicarANDuORalFiltro=0,@ModoExportacion=N'Ambos',@fechadesde='2015-11-01 00:00:00',@fechahasta='2017-05-10 00:00:00',@puntoventa=-1,@IdAcopio=NULL,@bTraerDuplicados=1,@Contrato=NULL,@QueContenga2=NULL,@idClienteAuxiliarint=NULL,@AgrupadorDeTandaPeriodos=NULL,@Vagon=NULL,@Patente=NULL,@optCamionVagon=NULL,@p__linq__0='2016-11-01 00:00:00',@p__linq__1='2016-11-01 00:00:00'
 
-select * from puntosventa
-
-select ImporteTopeMinimoPercepcion,AlicuotaPercepcionConvenio,AlicuotaPercepcion,* from ibcondiciones
-
-select top 10 ibcondicion, * from clientes where idcliente=30446
-
-select * from provincias
-
-select * from localidades
-select * from CDPEstablecimientos 
-select * from  WilliamsDestinos
-
-delete from WilliamsMailFiltrosCola
-select EstadoDeCartaPorte, * from WilliamsMailFiltrosCola
-
-
-select top 10 * from cartasdeporte order by fechadescarga
-select top 10 * from cartasdeporte order by fechamodificacion
-
-select vendedor,* from cartasdeporte where idcartadeporte=2638292
-
-
-SELECT * FROM DiccionarioEquivalencias WHERE Palabra like '%girasol%' 
-
-
-
-
-
-
-
---////////////////////////////////////////////////////////////////////////////////////////
--- horas
-
-use AdministradorProyecto
-
-select R.IdReclamo, R.TituloReclamo + CAST( C.Comentario as varchar(2000)) ,  R.TituloReclamo,C.Comentario,c.FechaComentario  
-from comentariosreclamo  C --para ver qué hiciste, revisá tus visitas a stackoverflow
-left join Reclamos R on C.idreclamo=R.IdReclamo
-where idusuario=125 and 
-        FechaComentario between '9/28/2016' and '11/5/2016'
-and (comentario like '%Test%' ) -- or not comentario like '%Reclamo%' )
-order by idcomentario asc 
+SELECT 
+    1 AS [C1], 
+    [GroupBy1].[K2] AS [ClienteFacturado], 
+    [GroupBy1].[K1] AS [PuntoVenta], 
+    [GroupBy1].[K3] AS [C2], 
+    [GroupBy1].[A1] AS [C3]
+    FROM ( SELECT 
+        [Project1].[K1] AS [K1], 
+        [Project1].[K2] AS [K2], 
+        [Project1].[K3] AS [K3], 
+        SUM([Project1].[A1]) AS [A1]
+        FROM ( SELECT 
+            [Project1].[PuntoVenta] AS [K1], 
+            [Project1].[ClienteFacturado] AS [K2], 
+            CASE WHEN ((CASE WHEN ([Project1].[FechaDescarga] IS NULL) THEN @p__linq__0 ELSE [Project1].[FechaDescarga] END) < @p__linq__1) THEN cast(1 as bit) WHEN ( NOT ((CASE WHEN ([Project1].[FechaDescarga] IS NULL) THEN @p__linq__0 ELSE [Project1].[FechaDescarga] END) < @p__linq__1)) THEN cast(0 as bit) END AS [K3], 
+             CAST( [Project1].[NetoFinal] / cast(1000 as decimal(18)) AS int) AS [A1]
+            FROM ( SELECT 
+                [Extent1].[NetoFinal] AS [NetoFinal], 
+                [Extent1].[FechaDescarga] AS [FechaDescarga], 
+                [Extent1].[PuntoVenta] AS [PuntoVenta], 
+                [Extent1].[ClienteFacturado] AS [ClienteFacturado]
+                FROM [dbo].[fSQL_GetDataTableFiltradoYPaginado](@startRowIndex, @maximumRows, @estado, @QueContenga, @idVendedor, @idCorredor, @idDestinatario, @idIntermediario, @idRemComercial, @idArticulo, @idProcedencia, @idDestino, @AplicarANDuORalFiltro, @ModoExportacion, @fechadesde, @fechahasta, @puntoventa, @IdAcopio, @bTraerDuplicados, @Contrato, @QueContenga2, @idClienteAuxiliarint, @AgrupadorDeTandaPeriodos, @Vagon, @Patente, @optCamionVagon) AS [Extent1]
+                WHERE [Extent1].[FechaDescarga] IS NOT NULL
+            )  AS [Project1]
+        )  AS [Project1]
+        GROUP BY [K1], [K2], [K3]
+    )  AS [GroupBy1]
