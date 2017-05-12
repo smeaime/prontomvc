@@ -121,7 +121,6 @@ from dbo.fSQL_GetDataTableFiltradoYPaginado
 
 							@idProcedencia,
 							@idDestino,
-					
 							@AplicarANDuORalFiltro,
 							@ModoExportacion,
 							@fechadesdeAnterior,
@@ -131,12 +130,13 @@ from dbo.fSQL_GetDataTableFiltradoYPaginado
 							NULL,
 							 'FALSE',--duplicados?
 							@Contrato, 
-							@QueContenga2, 
 
+							@QueContenga2, 
 							@idClienteAuxiliarint, 
 							@AgrupadorDeTandaPeriodos, 
 							@Vagon,
 							@Patente, 
+
 							@optCamionVagon
 
 					) as cdp
@@ -147,6 +147,7 @@ join Articulos art On art.IdArticulo = cdp.IdArticulo
 
 Where	
 		--		cdp.Vendedor > 0  and
+			not cdp.FechaDescarga is null and
           ( 
                 (cdp.FechaDescarga >= @fechadesde And cdp.FechaDescarga <= @fechahasta) 
                 Or 
@@ -168,11 +169,10 @@ go
 
 
 
-select * from
 [wCartasDePorte_TX_EstadisticasDeDescarga] 
 					NULL, 
 					NULL, 
-					NULL,
+					4,
 					NULL, 
 					NULL, 
 
@@ -209,14 +209,15 @@ go
      --       var desdeAnt = new DateTime(2015, 11, 1); //nov
      --       var hastaAnt = new DateTime(2016, 5, 10); //mayo
 
-/*
+
 
 select  sum(cdp.netofinal)
 from 
  dbo.fSQL_GetDataTableFiltradoYPaginado(
+
 					NULL, 
 					NULL, 
-					NULL,
+					4,
 					NULL, 
 					NULL, 
 
@@ -230,9 +231,9 @@ from
 					NULL, --@idDestino,
 					NULL, --@AplicarANDuORalFiltro,
 					'Ambos', --'Buques',
-					'2014-06-01 00:00:00',
-					
-					'2015-06-01 00:00:00',
+					'20161101',
+
+					'20170510',
 					NULL, 
 					NULL,
 					NULL, 
@@ -241,12 +242,52 @@ from
 					NULL, 
 					NULL, 
 					NULL,
+					NULL, 
 					NULL, 
 					NULL
 )
 as cdp
 
-*/
+
+
+
+select  sum(cdp.netofinal)
+from 
+ dbo.fSQL_GetDataTableFiltradoYPaginado(
+
+					NULL, 
+					NULL, 
+					4,
+					NULL, 
+					NULL, 
+
+					NULL, 
+					NULL, 
+					NULL,
+					NULL, 
+					NULL, --@idArticulo,
+
+					NULL, --@idProcedencia,
+					NULL, --@idDestino,
+					NULL, --@AplicarANDuORalFiltro,
+					'Ambos', --'Buques',
+					'20151101',
+					
+					'20160510',
+					NULL, 
+					NULL,
+					'FALSE', 
+					NULL, 
+
+					NULL, 
+					NULL, 
+					NULL,
+					NULL, 
+					NULL, 
+					NULL
+)
+as cdp
+
 
 --'2015-06-01 00:00:00','2015-06-01 00:00:00','2014-06-01 00:00:00','2014-06-01 00:00:00'
 
