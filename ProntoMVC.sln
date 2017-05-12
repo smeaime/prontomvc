@@ -9,6 +9,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Archivos Compartidos", "Arc
 		..\ProntoWeb\Documentos\otros\comparar cabeza y detalle req.sql = ..\ProntoWeb\Documentos\otros\comparar cabeza y detalle req.sql
 		..\ProntoWeb\ProntoWeb\Comparativa.aspx.vb = ..\ProntoWeb\ProntoWeb\Comparativa.aspx.vb
 		..\ProntoWeb\Documentos\Factura_Williams.dot = ..\ProntoWeb\Documentos\Factura_Williams.dot
+		ProntoMVC\Documentos\sql\fSQL_GetDataTableFiltradoYPaginado  wCartasPorte_WraperDeLaTVF.sql = ProntoMVC\Documentos\sql\fSQL_GetDataTableFiltradoYPaginado  wCartasPorte_WraperDeLaTVF.sql
 		..\ProntoWeb\Documentos\dev\instalacion.docx = ..\ProntoWeb\Documentos\dev\instalacion.docx
 		..\ProntoWeb\Documentos\dev\Nuevas_Tablas WEB.sql = ..\ProntoWeb\Documentos\dev\Nuevas_Tablas WEB.sql
 		..\ProntoWeb\Documentos\dev\Nuevos_SP WEB desarrollo.sql = ..\ProntoWeb\Documentos\dev\Nuevos_SP WEB desarrollo.sql
