@@ -4241,12 +4241,16 @@ Public Module ProntoFuncionesUIWeb
 
     Function GetConnectionString(ByVal Server As System.Web.HttpServerUtility, ByVal Session As System.Web.SessionState.HttpSessionState) As String
         Dim stringConn As String = String.Empty
+
+
         If Not (Session(SESSIONPRONTO_USUARIO) Is Nothing) Then
             stringConn = DirectCast(Session(SESSIONPRONTO_USUARIO), Usuario).StringConnection
             If stringConn = "" Then Server.Transfer("~/Login.aspx")
         Else
             Server.Transfer("~/Login.aspx")
         End If
+
+
         Return stringConn
     End Function
 

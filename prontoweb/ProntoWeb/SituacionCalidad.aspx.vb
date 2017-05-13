@@ -426,6 +426,9 @@ Partial Class SituacionCalidad
 
         Return url
     End Function
+
+
+
     <WebMethod()> _
     <System.Web.Script.Services.ScriptMethod(ResponseFormat:=System.Web.Script.Services.ResponseFormat.Json)> _
     Public Shared Function ExportarGrillaNormal(filters As String, fechadesde As String, fechahasta As String, destino As String) As String
