@@ -17,7 +17,20 @@ Partial Class CartasDePortes
     Inherits System.Web.UI.Page
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
+
+        If Membership.GetUser() Is Nothing Then
+            ErrHandler2.WriteError("sin loguearse")
+        Else
+            ErrHandler2.WriteError(Membership.GetUser().UserName)
+        End If
+
+
+
+        'HFSC.Value = DirectCast(Session(SESSIONPRONTO_USUARIO), Usuario).StringConnection
         HFSC.Value = GetConnectionString(Server, Session)
+
+
+
         'HFIdObra.Value = IIf(IsDBNull(session(SESSIONPRONTO_glbIdObraAsignadaUsuario)), -1, session(SESSIONPRONTO_glbIdObraAsignadaUsuario))
         'Session.Add("SC", ConfigurationManager.ConnectionStrings("Pronto").ConnectionString)
 
