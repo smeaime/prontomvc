@@ -3,6 +3,7 @@ Imports System.Diagnostics 'para usar Debug.Print
 
 Imports CartaDePorteManager
 
+Imports System.Web.Services
 
 Partial Class Login
 
@@ -124,7 +125,7 @@ Partial Class Login
 
 
 
-        If Debugger.IsAttached And ConfigurationManager.AppSettings("Debug") = "SI" Then ' Session("DebugPronto") <> "NO" Then ' And InStr(Encriptar(SC).ToUpper, "MARIANO") <> 0 Then
+        If False And Debugger.IsAttached And ConfigurationManager.AppSettings("Debug") = "SI" Then ' Session("DebugPronto") <> "NO" Then ' And InStr(Encriptar(SC).ToUpper, "MARIANO") <> 0 Then
 
             'probar si conecta a la base, si no hacer como siempre
 
@@ -221,6 +222,125 @@ Partial Class Login
 
 
     End Sub
+
+
+
+
+
+
+  
+    <WebMethod()> _
+    <System.Web.Script.Services.ScriptMethod(ResponseFormat:=System.Web.Script.Services.ResponseFormat.Json)> _
+    Public Shared Function LoginCookie(user As String, pass As String) As String
+        'http://stackoverflow.com/questions/4939533/cookie-confusion-with-formsauthentication-setauthcookie-method
+        'http://stackoverflow.com/questions/12840410/how-to-get-a-cookie-from-an-ajax-response
+        'http://stackoverflow.com/questions/23109810/cant-retrieve-cookie-value-in-php-for-cookie-set-using-asp-net
+
+
+
+        If Not Membership.ValidateUser(user, pass) Then Return "NO AUTENTICADO"
+
+
+        Dim bRecordame As Boolean = False
+
+
+        Dim t = FormsAuthentication.GetAuthCookie(user, bRecordame)
+
+
+
+
+        '        FormsAuthentication.SetAuthCookie(user, bRecordame)
+
+
+        '//////////////////////////////////////////////////////////////////
+        '//////////////////////////////////////////////////////////////////
+        '//////////////////////////////////////////////////////////////////
+        '//////////////////////////////////////////////////////////////////
+        '//////////////////////////////////////////////////////////////////
+        'Quilombos con la session
+
+        Dim mu As MembershipUser
+        mu = Membership.GetUser(user)
+        HttpContext.Current.Session(SESSIONPRONTO_UserId) = mu.ProviderUserKey.ToString
+        HttpContext.Current.Session(SESSIONPRONTO_UserName) = mu.UserName
+
+        'el problema es q va a buscar datos de la session...  -el ID de la session tambien se manda por cookie
+
+        Dim lista As Pronto.ERP.BO.EmpresaList
+        'Como las conexiones del web.config que apuntan a la BDLmaster no estan encriptadas,
+        'las encripto para que la capa inferior la use desencriptada cuando
+        'cree que la encripta por primera vez
+        Dim sConex As String
+        sConex = ConexBDLmaster()
+        lista = EmpresaManager.GetEmpresasPorUsuario(sConex, mu.ProviderUserKey.ToString)
+
+        Dim usuario As Usuario = Nothing
+        usuario = New Usuario
+        usuario.UserId = mu.ProviderUserKey.ToString
+        usuario.Nombre = mu.UserName
+        usuario.IdEmpresa = 18
+        If Debugger.IsAttached Then usuario.IdEmpresa = 52
+
+        usuario.StringConnection = Encriptar(BDLMasterEmpresasManager.GetConnectionStringEmpresa(usuario.UserId, usuario.IdEmpresa, sConex, "XXXXXX"))
+
+        HttpContext.Current.Session(SESSIONPRONTO_USUARIO) = usuario
+        '//////////////////////////////////////////////////////////////////
+        '//////////////////////////////////////////////////////////////////
+        '//////////////////////////////////////////////////////////////////
+        '//////////////////////////////////////////////////////////////////
+        '//////////////////////////////////////////////////////////////////
+        '//////////////////////////////////////////////////////////////////
+        '//////////////////////////////////////////////////////////////////
+
+
+
+        '//create a cookie
+        Dim myCookie As HttpCookie = New HttpCookie("Holaaaa")
+        '//Add key-values in the cookie
+        myCookie.Values.Add("trulala", "lalalalal")
+        '//set cookie expiry date-time. Made it to last for next 12 hours.
+        myCookie.Expires = DateTime.Now.AddHours(12)
+        '//Most important, write the cookie to client.
+        HttpContext.Current.Response.Cookies.Add(myCookie)
+
+
+
+        If False Then
+            'si es Tomás Williams, reducir el timeout
+            Dim expira As Date
+            If user = "twilliams2" Then
+                expira = DateTime.Now.AddMinutes(3)
+            Else
+                expira = DateTime.Now.AddDays(15)
+            End If
+
+            '// http://stackoverflow.com/questions/13276368/asp-net-mvc-4-custom-authorization-ticket-redirect-issue
+            Dim authTicket As FormsAuthenticationTicket = New  _
+                     FormsAuthenticationTicket(1, _
+                     user, _
+                     DateTime.Now, _
+                     expira, _
+                     True, _
+                       "")
+
+            Dim ck As HttpCookie = New HttpCookie(FormsAuthentication.FormsCookieName, _
+                            FormsAuthentication.Encrypt(authTicket))
+            ck.Path = FormsAuthentication.FormsCookiePath
+
+            'ck.Value
+
+            HttpContext.Current.Response.Cookies.Add(ck)
+        End If
+
+
+        Return t.Value
+
+    End Function
+
+
+
+
+
 
 
     Sub ConfiguracionDeLaEmpresa()
@@ -631,7 +751,9 @@ Partial Class Login
 
     End Sub
 
-    Protected Function AddUserToSession() As String
+
+
+    Function AddUserToSession() As String
         Dim mu As MembershipUser
         mu = Membership.GetUser(Login1.UserName)
         Session(SESSIONPRONTO_UserId) = mu.ProviderUserKey.ToString

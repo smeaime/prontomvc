@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<head>
+
+<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+
+</head>
+
+<body>
+	Holaaaaaaa
+  
+   <input type="button" id="btnMariano" value="Mariano">  </>
+   
+   <input type="button" id="btnAndres" value="Andres">  </>
+   
+   
+   <script type="text/javascript">
+
+
+
+                    function Loguearse(u, p) {
+                        var d = {
+                            user: u,  // si viene en undefined es porque no se puso ningun filtro
+                            pass: p
+                        }
+
+			//habilitar cross domain llegado el caso en el browser
+			// Login.aspx debe estar con allow users="?"
+
+                        $.ajax({
+                            type: "POST",
+                          url: "http://prontotesting.williamsentregas.com.ar/Login.aspx/LoginCookie",
+//                            url: "http://localhost:58911/Login.aspx/LoginCookie",
+                            
+                            dataType: "json",
+                            contentType: "application/json; charset=utf-8",
+
+                            data: JSON.stringify(d),
+
+                            success: function (data) {
+                                alert(data.d);
+                                createCookie(".ASPXAUTH",data.d,1);
+//                                window.location.replace("http://prontotesting.williamsentregas.com.ar/ProntoWeb/CartasDePortes.aspx?tipo=Todas");
+                                //window.location.href ="http://prontotesting.williamsentregas.com.ar/ProntoWeb/CartasDePortes.aspx?tipo=Todas";
+//                                window.location.href ="http://localhost:58911/ProntoWeb/CartasDePortes.aspx?tipo=Todas";
+                            }
+
+
+                            ,
+                            beforeSend: function () {
+                                //$('.loading').html('some predefined loading img html');
+                                $("#loading").show();
+                                $('#grabar2').attr("disabled", true).val("Espere...");
+
+                            },
+                            complete: function () {
+                                $("#loading").hide();
+                            }
+
+
+                        })
+                    }
+
+
+
+function createCookie(name,value,days) {
+    var expires = "";
+    if (days) {
+        var date = new Date();
+        date.setTime(date.getTime() + (days*24*60*60*1000));
+        expires = "; expires=" + date.toUTCString();
+    }
+    document.cookie = name + "=" + value + expires + "; path=/";
+}
+
+
+
+                    $(document).ready(function () {
+
+                        //alert("hola");
+
+
+                        $('#btnMariano').click(function () {
+                        
+
+// createCookie(".ASPXAUTH","B0C89C160F82A97C23ECC6D3EA3B4DE487811CF519321A7EBD6FEE873AE271193A9CB778C561C85D7DD2ED5E0339240E4603786998DAA56ABF60502C347FDC44B868C9022418CCC1AB84BB482A39B359A1769BBD60CC1811C2BB43F9B6EBBEBCEE9E04CECA96EAC4538B2C1A33F03F36CE340AA0D3716EFA2F2E5B18A30A7DB58F1837A3F4B4EDCB6FEBF49A13C37860",1);
+
+                            Loguearse("Mariano", "pirulo!");
+                        })
+
+
+
+                        $('#btnAndres').click(function () {
+                            Loguearse("Andres", "Andre5!");
+
+                        })
+
+  			$('#btnandres').click(function () {
+                            Loguearse("andres", "Andre5!");
+
+                        })
+                    });
+
+
+
+                </script>
+</body>

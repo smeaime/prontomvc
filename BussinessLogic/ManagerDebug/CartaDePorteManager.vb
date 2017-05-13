@@ -6016,7 +6016,7 @@ Public Class CartaDePorteManager
         '                  And c.SubnumeroDeFacturacion = 0 Select c.IdCartaDePorte).FirstOrDefault
 
 
-        Const MAXIMO = 200
+        Const MAXIMO = 500
 
         For Each c As DataRow In dt.Rows
             Dim id As Long = c.Item("IdCartaDePorte")

@@ -3,11 +3,23 @@
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
+
+<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+
+
+
+
 <head runat="server">
     <title>Untitled Page</title>
     <link id="Link1" href="Css/Styles.css" rel="stylesheet" type="text/css" runat="server" />
     <%--<link rel="shortcut icon" type="image/ico" href="Imagenes/favicon.ico" />--%>
     <link rel="shortcut icon" type="image/ico" href="favicon.png" />
+
+
+
+
     <%--<script language="JavaScript">
 //http://4guysfromrolla.com/webtech/082400-1.shtml
 
@@ -56,495 +68,520 @@ document.cookie = 'killme' + escape('nothing')
     <%--esto del onload para lo de revisar si esta habilitado javascript--%>
     <center>
         <form id="form1" runat="server">
-        <ajaxToolkit:ToolkitScriptManager ID="ScriptManager1" runat="server" LoadScriptsBeforeUI="False"
-            EnablePageMethods="False" AsyncPostBackTimeout="360000">
-        </ajaxToolkit:ToolkitScriptManager>
-        <br />
-        <br />
-        <br />
-        <table style="border-style: none; font-family: arial,sans-serif;" width="980px">
-            <tr>
-                <td width="20">
-                </td>
-                <td align="centre" width="" style="margin-left: 0px">
-                    <asp:Panel ID="PanelBDL" runat="server" HorizontalAlign="Center">
-                        <div>
-                            <%--                    /////////////////////////////////////////////////
+            <ajaxToolkit:ToolkitScriptManager ID="ScriptManager1" runat="server" LoadScriptsBeforeUI="False"
+                EnablePageMethods="False" AsyncPostBackTimeout="360000">
+            </ajaxToolkit:ToolkitScriptManager>
+            <br />
+            <br />
+            <br />
+            <table style="border-style: none; font-family: arial,sans-serif;" width="980px">
+                <tr>
+                    <td width="20"></td>
+                    <td align="centre" width="" style="margin-left: 0px">
+                        <asp:Panel ID="PanelBDL" runat="server" HorizontalAlign="Center">
+                            <div>
+                                <%--                    /////////////////////////////////////////////////
                     /////////////////////////////////////////////////
                     bdl
                     /////////////////////////////////////////////////
                     /////////////////////////////////////////////////
                     /////////////////////////////////////////////////--%>
-                            <div align="centre">
-                                <asp:Image ID="LogoImage" runat="server" BorderColor="Black" BorderWidth="1px" BorderStyle="None"
-                                    Height="130px" ImageUrl="~/Imagenes/loguito/0bak.gif" Style="margin-top: 0px"
-                                    Visible="false" Width="400px" />
-                                <table style="width: 100%">
-                                    <tr>
-                                        <td style="width: 200px">
-                                            <asp:Image ID="Image13" runat="server" Width="200px" ImageUrl="~/Imagenes/logosolo.gif"
-                                                CssClass="LoginLogo" />
-                                        </td>
-                                        <td style="width: 200px">
-                                            <div style="text-align: left; font-size: 32px; width: 200px; font-family: Verdana, Arial, Helvetica, sans-serif;
-                                                color: #CC3300; font-weight: bold; text-shadow: #6374AB 3px 3px 5px;">
-                                                BDL
+                                <div align="centre">
+                                    <asp:Image ID="LogoImage" runat="server" BorderColor="Black" BorderWidth="1px" BorderStyle="None"
+                                        Height="130px" ImageUrl="~/Imagenes/loguito/0bak.gif" Style="margin-top: 0px"
+                                        Visible="false" Width="400px" />
+                                    <table style="width: 100%">
+                                        <tr>
+                                            <td style="width: 200px">
+                                                <asp:Image ID="Image13" runat="server" Width="200px" ImageUrl="~/Imagenes/logosolo.gif"
+                                                    CssClass="LoginLogo" />
+                                            </td>
+                                            <td style="width: 200px">
+                                                <div style="text-align: left; font-size: 32px; width: 200px; font-family: Verdana, Arial, Helvetica, sans-serif; color: #CC3300; font-weight: bold; text-shadow: #6374AB 3px 3px 5px;">
+                                                    BDL
                                                 <br />
-                                                Consultores</div>
-                                        </td>
-                                        <td>
-                                        </td>
-                                    </tr>
-                                </table>
+                                                    Consultores
+                                                </div>
+                                            </td>
+                                            <td></td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <br />
+                                <div style="text-align: center; font-size: x-large; width: ; margin-left: 50px; font-family: Tahoma; width: 400px; text-shadow: 0 1px 1px white;">
+                                    <b>BDL Consultores es la fusión de la experiencia</b>
+                                </div>
+                                <div style="text-align: center; font-size: large; width: 400px; margin-left: 50px; font-family: Tahoma;">
+                                    <br />
+                                    BDL Consultores es la fusión de la experiencia de 5 años de trabajo en implementación
+                                de sistemas en empresas representantes de soluciones para el Área Técnica y Desarrolladores
+                                de Sistemas
+                                </div>
                             </div>
                             <br />
-                            <div style="text-align: center; font-size: x-large; width: ; margin-left: 50px; font-family: Tahoma;
-                                width: 400px; text-shadow: 0 1px 1px white;">
-                                <b>BDL Consultores es la fusión de la experiencia</b></div>
-                            <div style="text-align: center; font-size: large; width: 400px; margin-left: 50px;
-                                font-family: Tahoma;">
-                                <br />
-                                BDL Consultores es la fusión de la experiencia de 5 años de trabajo en implementación
-                                de sistemas en empresas representantes de soluciones para el Área Técnica y Desarrolladores
-                                de Sistemas</div>
-                        </div>
-                        <br />
-                        <br />
-                        <br />
-                        <table style="display: none; text-align: center;">
-                            <tr>
-                                <td>
-                                    <asp:Image ID="Image2" runat="server" BorderColor="Black" BorderWidth="1px" BorderStyle="None"
-                                        Height="50px" ImageUrl="~/Imagenes/loguito/0bak.gif" Style="margin-top: 5px"
-                                        Width="50px" Visible="false" />
-                                    <asp:Image ID="premio" runat="server" BorderColor="Black" BorderWidth="1px" BorderStyle="None"
-                                        Height="50px" ImageUrl="~/Imagenes/it-works-award1.png" Style="margin-top: 5px"
-                                        Width="50px" Visible="false" />
-                                </td>
-                                <td>
-                                </td>
-                                <td>
-                                </td>
-                                <td style="font-size: small">
-                                    <b>Representantes de Soluciones</b>
-                                    <br />
-                                    <br />
-                                    para el Área Técnica y Desarrolladores de Sistemas Administrativos, de Producción,
+                            <br />
+                            <br />
+                            <table style="display: none; text-align: center;">
+                                <tr>
+                                    <td>
+                                        <asp:Image ID="Image2" runat="server" BorderColor="Black" BorderWidth="1px" BorderStyle="None"
+                                            Height="50px" ImageUrl="~/Imagenes/loguito/0bak.gif" Style="margin-top: 5px"
+                                            Width="50px" Visible="false" />
+                                        <asp:Image ID="premio" runat="server" BorderColor="Black" BorderWidth="1px" BorderStyle="None"
+                                            Height="50px" ImageUrl="~/Imagenes/it-works-award1.png" Style="margin-top: 5px"
+                                            Width="50px" Visible="false" />
+                                    </td>
+                                    <td></td>
+                                    <td></td>
+                                    <td style="font-size: small">
+                                        <b>Representantes de Soluciones</b>
+                                        <br />
+                                        <br />
+                                        para el Área Técnica y Desarrolladores de Sistemas Administrativos, de Producción,
                                     RRHH, Contables y Financieros
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <asp:Image ID="Image1" runat="server" BorderColor="Black" BorderWidth="1px" BorderStyle="None"
-                                        Height="50px" ImageUrl="~/Imagenes/it-works-award1.png" Style="margin-top: 5px"
-                                        Width="50px" Visible="false" />
-                                </td>
-                                <td>
-                                </td>
-                                <td>
-                                </td>
-                                <td style="font-size: small">
-                                    <b>Representantes de Soluciones</b> para el Área Técnica y Desarrolladores de Sistemas
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <asp:Image ID="Image1" runat="server" BorderColor="Black" BorderWidth="1px" BorderStyle="None"
+                                            Height="50px" ImageUrl="~/Imagenes/it-works-award1.png" Style="margin-top: 5px"
+                                            Width="50px" Visible="false" />
+                                    </td>
+                                    <td></td>
+                                    <td></td>
+                                    <td style="font-size: small">
+                                        <b>Representantes de Soluciones</b> para el Área Técnica y Desarrolladores de Sistemas
                                     Administrativos, de Producción, RRHH, Contables y Financieros
-                                </td>
-                            </tr>
-                            <tr style="display: none;">
-                                <%-- <tr style="display:none;">--%>
-                                <td>
-                                    <asp:Image ID="premio3" runat="server" BorderColor="Black" BorderWidth="1px" BorderStyle="None"
-                                        Height="50px" ImageUrl="~/ProntoWeb/Imagenes/images (1).jpg" Style="margin-top: 5px"
-                                        Width="50px" Visible="true" />
-                                </td>
-                                <td>
-                                </td>
-                                <td>
-                                </td>
-                                <td style="font-size: small">
-                                    <b>Casi listo</b>
-                                    <br />
-                                    <br />
-                                    para el Área Técnica y Desarrolladores de Sistemas Administrativos, de Producción,
+                                    </td>
+                                </tr>
+                                <tr style="display: none;">
+                                    <%-- <tr style="display:none;">--%>
+                                    <td>
+                                        <asp:Image ID="premio3" runat="server" BorderColor="Black" BorderWidth="1px" BorderStyle="None"
+                                            Height="50px" ImageUrl="~/ProntoWeb/Imagenes/images (1).jpg" Style="margin-top: 5px"
+                                            Width="50px" Visible="true" />
+                                    </td>
+                                    <td></td>
+                                    <td></td>
+                                    <td style="font-size: small">
+                                        <b>Casi listo</b>
+                                        <br />
+                                        <br />
+                                        para el Área Técnica y Desarrolladores de Sistemas Administrativos, de Producción,
                                     RRHH, Contables y Financieros
-                                </td>
-                            </tr>
-                        </table>
-                        </div>
-                    </asp:Panel>
-                    <%--                    /////////////////////////////////////////////////
+                                    </td>
+                                </tr>
+                            </table>
+                            </div>
+                        </asp:Panel>
+                        <%--                    /////////////////////////////////////////////////
                     /////////////////////////////////////////////////
                     esuco
                     /////////////////////////////////////////////////
                     /////////////////////////////////////////////////
                     /////////////////////////////////////////////////--%>
-                    <asp:Panel ID="PanelWilliams" runat="server">
-                        <div>
-                            
-                            
-                            <style>
-                                .LoginLogo2
-                                {
-                                    width: 489px;
-                                    margin-left: 1px;
-                                }
-                            </style>
-                            <div align="left">
-                                <asp:Image ID="Image3" runat="server" ImageUrl="~/Imagenes/williamslogin.gif" CssClass="LoginLogo LoginLogo2" />
-                                <%--Williams Entregas S.A.--%>
-                            </div>
-                            
-                            <div style="text-align: center; font-size: 28px; width: ; margin-left: 50px; font-family: Tahoma;
-                                width: 400px; text-shadow: 0 1px 1px white;">
-                                <%--<div style="font-size: x-large; width: 400px; margin-left: 50px; font-family: Tahoma;">--%>
-                                Junto a nuestros clientes</b></div>
-                            <div style="text-align: center; font-size: 16px; width: 400px; margin-left: 50px;
-                                font-family: Tahoma;">
+                        <asp:Panel ID="PanelWilliams" runat="server">
+                            <div>
+
+
+                                <style>
+                                    .LoginLogo2 {
+                                        width: 489px;
+                                        margin-left: 1px;
+                                    }
+                                </style>
+                                <div align="left">
+                                    <asp:Image ID="Image3" runat="server" ImageUrl="~/Imagenes/williamslogin.gif" CssClass="LoginLogo LoginLogo2" />
+                                    <%--Williams Entregas S.A.--%>
+                                </div>
+
+                                <div style="text-align: center; font-size: 28px; width: ; margin-left: 50px; font-family: Tahoma; width: 400px; text-shadow: 0 1px 1px white;">
+                                    <%--<div style="font-size: x-large; width: 400px; margin-left: 50px; font-family: Tahoma;">--%>
+                                Junto a nuestros clientes</b>
+                                </div>
+                                <div style="text-align: center; font-size: 16px; width: 400px; margin-left: 50px; font-family: Tahoma;">
+                                    <br />
+                                    Williams Entregas S.A. nació en 1989 de la mano de nuestros clientes con un objetivo
+                                bien definido: estar junto a ellos brindándole el mejor servicio.
+                                </div>
                                 <br />
-                                Williams Entregas S.A. nació en 1989 de la mano de nuestros clientes con un objetivo
-                                bien definido: estar junto a ellos brindándole el mejor servicio.</div>
-                            <br />
-                            <br />
-                            <table>
-                                <tr>
-                                    <td>
-                                        <asp:Image ID="Image4" runat="server" BorderColor="Black" BorderWidth="1px" BorderStyle="None"
-                                            Height="50px" ImageUrl="~/Imagenes/loguito/0bak.gif" Style="margin-top: 5px"
-                                            Width="50px" Visible="false" />
-                                        <asp:Image ID="Image10" runat="server" BorderColor="Black" BorderWidth="1px" BorderStyle="None"
-                                            Height="50px" ImageUrl="~/Imagenes/it-works-award1.png" Style="margin-top: 5px"
-                                            Width="50px" Visible="false" />
-                                    </td>
-                                    <td>
-                                    </td>
-                                    <td>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <asp:Image ID="Image11" runat="server" BorderColor="Black" BorderWidth="1px" BorderStyle="None"
-                                            Height="50px" ImageUrl="~/Imagenes/it-works-award1.png" Style="margin-top: 5px"
-                                            Width="50px" Visible="false" />
-                                    </td>
-                                    <td>
-                                    </td>
-                                    <td>
-                                    </td>
-                                </tr>
-                                <tr style="display: none;">
-                                    <%-- <tr style="display:none;">--%>
-                                    <td>
-                                        <asp:Image ID="Image12" runat="server" BorderColor="Black" BorderWidth="1px" BorderStyle="None"
-                                            Height="50px" ImageUrl="~/ProntoWeb/Imagenes/images (1).jpg" Style="margin-top: 5px"
-                                            Width="50px" Visible="true" />
-                                    </td>
-                                    <td>
-                                    </td>
-                                    <td>
-                                    </td>
-                                    <td style="font-size: small">
-                                        <b>Casi listo</b>
-                                        <br />
-                                        para el Área Técnica y Desarrolladores de Sistemas Administrativos, de Producción,
+                                <br />
+                                <table>
+                                    <tr>
+                                        <td>
+                                            <asp:Image ID="Image4" runat="server" BorderColor="Black" BorderWidth="1px" BorderStyle="None"
+                                                Height="50px" ImageUrl="~/Imagenes/loguito/0bak.gif" Style="margin-top: 5px"
+                                                Width="50px" Visible="false" />
+                                            <asp:Image ID="Image10" runat="server" BorderColor="Black" BorderWidth="1px" BorderStyle="None"
+                                                Height="50px" ImageUrl="~/Imagenes/it-works-award1.png" Style="margin-top: 5px"
+                                                Width="50px" Visible="false" />
+                                        </td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <asp:Image ID="Image11" runat="server" BorderColor="Black" BorderWidth="1px" BorderStyle="None"
+                                                Height="50px" ImageUrl="~/Imagenes/it-works-award1.png" Style="margin-top: 5px"
+                                                Width="50px" Visible="false" />
+                                        </td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr style="display: none;">
+                                        <%-- <tr style="display:none;">--%>
+                                        <td>
+                                            <asp:Image ID="Image12" runat="server" BorderColor="Black" BorderWidth="1px" BorderStyle="None"
+                                                Height="50px" ImageUrl="~/ProntoWeb/Imagenes/images (1).jpg" Style="margin-top: 5px"
+                                                Width="50px" Visible="true" />
+                                        </td>
+                                        <td></td>
+                                        <td></td>
+                                        <td style="font-size: small">
+                                            <b>Casi listo</b>
+                                            <br />
+                                            para el Área Técnica y Desarrolladores de Sistemas Administrativos, de Producción,
                                         RRHH, Contables y Financieros
-                                    </td>
-                                </tr>
-                            </table>
-                        </div>
-                    </asp:Panel>
-                    <asp:Panel ID="PanelEsuco" runat="server">
-                        <div>
-                            <div align="left">
-                                <asp:Image ID="Image5" runat="server" BorderColor="Black" BorderWidth="1px" BorderStyle="None"
-                                    Height="79px" ImageUrl="~/Imagenes/esuco.gif" Style="margin-top: 5px" Width="235px" />
+                                        </td>
+                                    </tr>
+                                </table>
                             </div>
-                            <br />
-                            <div style="font-size: large">
-                                Construir, una pasión</div>
-                            <div style="font-size: small">
+                        </asp:Panel>
+                        <asp:Panel ID="PanelEsuco" runat="server">
+                            <div>
+                                <div align="left">
+                                    <asp:Image ID="Image5" runat="server" BorderColor="Black" BorderWidth="1px" BorderStyle="None"
+                                        Height="79px" ImageUrl="~/Imagenes/esuco.gif" Style="margin-top: 5px" Width="235px" />
+                                </div>
                                 <br />
-                                ESUCO es una empresa de capitales nacionales, con una trayectoria de más de cincuenta
+                                <div style="font-size: large">
+                                    Construir, una pasión
+                                </div>
+                                <div style="font-size: small">
+                                    <br />
+                                    ESUCO es una empresa de capitales nacionales, con una trayectoria de más de cincuenta
                                 años de trabajo ininterrumpido en el País. Con gran participación en el diseño y
-                                construcción de obras de infraestructura social y económica</div>
-                            <br />
-                            <br />
-                            <br />
-                            <table>
-                                <tr>
-                                    <td>
-                                        <asp:Image ID="Image6" runat="server" BorderColor="Black" BorderWidth="1px" BorderStyle="None"
-                                            Height="50px" ImageUrl="~/Imagenes/loguito/0bak.gif" Style="margin-top: 5px"
-                                            Width="50px" Visible="false" />
-                                        <asp:Image ID="Image7" runat="server" BorderColor="Black" BorderWidth="1px" BorderStyle="None"
-                                            Height="50px" ImageUrl="~/Imagenes/it-works-award1.png" Style="margin-top: 5px"
-                                            Width="50px" Visible="false" />
-                                    </td>
-                                    <td>
-                                    </td>
-                                    <td>
-                                    </td>
-                                    <td style="font-size: small">
-                                        <b>Representantes de Soluciones</b>
-                                        <br />
-                                        Tiene presencia en el proceso de apertura al capital privado a través de concesiones
+                                construcción de obras de infraestructura social y económica
+                                </div>
+                                <br />
+                                <br />
+                                <br />
+                                <table>
+                                    <tr>
+                                        <td>
+                                            <asp:Image ID="Image6" runat="server" BorderColor="Black" BorderWidth="1px" BorderStyle="None"
+                                                Height="50px" ImageUrl="~/Imagenes/loguito/0bak.gif" Style="margin-top: 5px"
+                                                Width="50px" Visible="false" />
+                                            <asp:Image ID="Image7" runat="server" BorderColor="Black" BorderWidth="1px" BorderStyle="None"
+                                                Height="50px" ImageUrl="~/Imagenes/it-works-award1.png" Style="margin-top: 5px"
+                                                Width="50px" Visible="false" />
+                                        </td>
+                                        <td></td>
+                                        <td></td>
+                                        <td style="font-size: small">
+                                            <b>Representantes de Soluciones</b>
+                                            <br />
+                                            Tiene presencia en el proceso de apertura al capital privado a través de concesiones
                                         de servicios operando corredores viales en Argentina, Uruguay y Brasil, servicios
                                         de potabilización y suministro de agua y verificación técnica automotriz construcción,
                                         operación y mantenimiento de interconexión eléctrica.
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <asp:Image ID="Image8" runat="server" BorderColor="Black" BorderWidth="1px" BorderStyle="None"
-                                            Height="50px" ImageUrl="~/Imagenes/it-works-award1.png" Style="margin-top: 5px"
-                                            Width="50px" Visible="false" />
-                                    </td>
-                                    <td>
-                                    </td>
-                                    <td>
-                                    </td>
-                                    <td style="font-size: small">
-                                        <b>Representantes de Soluciones</b>
-                                        <br />
-                                        para el Área Técnica y Desarrolladores de Sistemas Administrativos, de Producción,
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <asp:Image ID="Image8" runat="server" BorderColor="Black" BorderWidth="1px" BorderStyle="None"
+                                                Height="50px" ImageUrl="~/Imagenes/it-works-award1.png" Style="margin-top: 5px"
+                                                Width="50px" Visible="false" />
+                                        </td>
+                                        <td></td>
+                                        <td></td>
+                                        <td style="font-size: small">
+                                            <b>Representantes de Soluciones</b>
+                                            <br />
+                                            para el Área Técnica y Desarrolladores de Sistemas Administrativos, de Producción,
                                         RRHH, Contables y Financieros
-                                    </td>
-                                </tr>
-                                <tr style="display: none;">
-                                    <%-- <tr style="display:none;">--%>
-                                    <td>
-                                        <asp:Image ID="Image9" runat="server" BorderColor="Black" BorderWidth="1px" BorderStyle="None"
-                                            Height="50px" ImageUrl="~/ProntoWeb/Imagenes/images (1).jpg" Style="margin-top: 5px"
-                                            Width="50px" Visible="true" />
-                                    </td>
-                                    <td>
-                                    </td>
-                                    <td>
-                                    </td>
-                                    <td style="font-size: small">
-                                        <b>Casi listo</b>
-                                        <br />
-                                        para el Área Técnica y Desarrolladores de Sistemas Administrativos, de Producción,
+                                        </td>
+                                    </tr>
+                                    <tr style="display: none;">
+                                        <%-- <tr style="display:none;">--%>
+                                        <td>
+                                            <asp:Image ID="Image9" runat="server" BorderColor="Black" BorderWidth="1px" BorderStyle="None"
+                                                Height="50px" ImageUrl="~/ProntoWeb/Imagenes/images (1).jpg" Style="margin-top: 5px"
+                                                Width="50px" Visible="true" />
+                                        </td>
+                                        <td></td>
+                                        <td></td>
+                                        <td style="font-size: small">
+                                            <b>Casi listo</b>
+                                            <br />
+                                            para el Área Técnica y Desarrolladores de Sistemas Administrativos, de Producción,
                                         RRHH, Contables y Financieros
-                                    </td>
-                                </tr>
-                            </table>
-                        </div>
-                    </asp:Panel>
-                    <asp:Panel ID="PanelAutotrol" runat="server" HorizontalAlign="Center">
-                        <br />
-                        <br />
-                        <div>
-                            <%--                    /////////////////////////////////////////////////
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </asp:Panel>
+                        <asp:Panel ID="PanelAutotrol" runat="server" HorizontalAlign="Center">
+                            <br />
+                            <br />
+                            <div>
+                                <%--                    /////////////////////////////////////////////////
                     /////////////////////////////////////////////////
                     bdl
                     /////////////////////////////////////////////////
                     /////////////////////////////////////////////////
                     /////////////////////////////////////////////////--%>
-                            <div align="centre">
-                                <table>
-                                    <tr>
-                                        <td>
-                                            <asp:Image ID="Image15" runat="server" Width="420px" ImageUrl="~/Imagenes/autotrolgrande.png"
-                                                CssClass="LoginLogo" />
-                                        </td>
-                                        <td>
-                                            <div style="text-align: left; font-size: 32px; font-family: Verdana, Arial, Helvetica, sans-serif;
-                                                color: #CC3300; font-weight: bold;">
-                                                <br />
-                                            </div>
-                                        </td>
-                                    </tr>
-                                </table>
+                                <div align="centre">
+                                    <table>
+                                        <tr>
+                                            <td>
+                                                <asp:Image ID="Image15" runat="server" Width="420px" ImageUrl="~/Imagenes/autotrolgrande.png"
+                                                    CssClass="LoginLogo" />
+                                            </td>
+                                            <td>
+                                                <div style="text-align: left; font-size: 32px; font-family: Verdana, Arial, Helvetica, sans-serif; color: #CC3300; font-weight: bold;">
+                                                    <br />
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
                             </div>
-                        </div>
-                        <br />
-                        <br />
-                        <br />
-                        <div style="text-align: centre; font-size: x-large; width: 400px; margin-left: 50px;
-                            font-family: Tahoma;">
-                            <b></b>
-                        </div>
-                        <div style="text-align: centre; font-size: 16px; width: 400px; margin-left: 50px;
-                            font-family: Tahoma;">
                             <br />
-                            AUTOTROL S.A. es una empresa argentina que nació el 10 de octubre de 1962 y que
+                            <br />
+                            <br />
+                            <div style="text-align: centre; font-size: x-large; width: 400px; margin-left: 50px; font-family: Tahoma;">
+                                <b></b>
+                            </div>
+                            <div style="text-align: centre; font-size: 16px; width: 400px; margin-left: 50px; font-family: Tahoma;">
+                                <br />
+                                AUTOTROL S.A. es una empresa argentina que nació el 10 de octubre de 1962 y que
                             ha hecho realidad la meta fijada en sus comienzos: Desempeñar un rol protagónico
-                            en el campo de la ingeniería de la Información y Control.</div>
-                        <br />
-                        <br />
-                        <br />
-                        <table style="display: none;">
-                            <tr>
-                                <td>
-                                    <asp:Image ID="Image16" runat="server" BorderColor="Black" BorderWidth="1px" BorderStyle="None"
-                                        Height="50px" ImageUrl="~/Imagenes/loguito/0bak.gif" Style="margin-top: 5px"
-                                        Width="50px" Visible="false" />
-                                    <asp:Image ID="Image17" runat="server" BorderColor="Black" BorderWidth="1px" BorderStyle="None"
-                                        Height="50px" ImageUrl="~/Imagenes/it-works-award1.png" Style="margin-top: 5px"
-                                        Width="50px" Visible="false" />
-                                </td>
-                                <td>
-                                </td>
-                                <td>
-                                </td>
-                                <td style="font-size: small">
-                                    <b>Representantes de Soluciones</b>
-                                    <br />
-                                    <br />
-                                    para el Área Técnica y Desarrolladores de Sistemas Administrativos, de Producción,
+                            en el campo de la ingeniería de la Información y Control.
+                            </div>
+                            <br />
+                            <br />
+                            <br />
+                            <table style="display: none;">
+                                <tr>
+                                    <td>
+                                        <asp:Image ID="Image16" runat="server" BorderColor="Black" BorderWidth="1px" BorderStyle="None"
+                                            Height="50px" ImageUrl="~/Imagenes/loguito/0bak.gif" Style="margin-top: 5px"
+                                            Width="50px" Visible="false" />
+                                        <asp:Image ID="Image17" runat="server" BorderColor="Black" BorderWidth="1px" BorderStyle="None"
+                                            Height="50px" ImageUrl="~/Imagenes/it-works-award1.png" Style="margin-top: 5px"
+                                            Width="50px" Visible="false" />
+                                    </td>
+                                    <td></td>
+                                    <td></td>
+                                    <td style="font-size: small">
+                                        <b>Representantes de Soluciones</b>
+                                        <br />
+                                        <br />
+                                        para el Área Técnica y Desarrolladores de Sistemas Administrativos, de Producción,
                                     RRHH, Contables y Financieros
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <asp:Image ID="Image18" runat="server" BorderColor="Black" BorderWidth="1px" BorderStyle="None"
-                                        Height="50px" ImageUrl="~/Imagenes/it-works-award1.png" Style="margin-top: 5px"
-                                        Width="50px" Visible="false" />
-                                </td>
-                                <td>
-                                </td>
-                                <td>
-                                </td>
-                                <td style="font-size: small">
-                                    <b>Representantes de Soluciones</b> para el Área Técnica y Desarrolladores de Sistemas
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <asp:Image ID="Image18" runat="server" BorderColor="Black" BorderWidth="1px" BorderStyle="None"
+                                            Height="50px" ImageUrl="~/Imagenes/it-works-award1.png" Style="margin-top: 5px"
+                                            Width="50px" Visible="false" />
+                                    </td>
+                                    <td></td>
+                                    <td></td>
+                                    <td style="font-size: small">
+                                        <b>Representantes de Soluciones</b> para el Área Técnica y Desarrolladores de Sistemas
                                     Administrativos, de Producción, RRHH, Contables y Financieros
-                                </td>
-                            </tr>
-                            <tr style="display: none;">
-                                <%-- <tr style="display:none;">--%>
-                                <td>
-                                    <asp:Image ID="Image19" runat="server" BorderColor="Black" BorderWidth="1px" BorderStyle="None"
-                                        Height="50px" ImageUrl="~/ProntoWeb/Imagenes/images (1).jpg" Style="margin-top: 5px"
-                                        Width="50px" Visible="true" />
-                                </td>
-                                <td>
-                                </td>
-                                <td>
-                                </td>
-                                <td style="font-size: small">
-                                    <b>Casi listo</b>
-                                    <br />
-                                    <br />
-                                    para el Área Técnica y Desarrolladores de Sistemas Administrativos, de Producción,
+                                    </td>
+                                </tr>
+                                <tr style="display: none;">
+                                    <%-- <tr style="display:none;">--%>
+                                    <td>
+                                        <asp:Image ID="Image19" runat="server" BorderColor="Black" BorderWidth="1px" BorderStyle="None"
+                                            Height="50px" ImageUrl="~/ProntoWeb/Imagenes/images (1).jpg" Style="margin-top: 5px"
+                                            Width="50px" Visible="true" />
+                                    </td>
+                                    <td></td>
+                                    <td></td>
+                                    <td style="font-size: small">
+                                        <b>Casi listo</b>
+                                        <br />
+                                        <br />
+                                        para el Área Técnica y Desarrolladores de Sistemas Administrativos, de Producción,
                                     RRHH, Contables y Financieros
-                                </td>
-                            </tr>
-                        </table>
-                        </div>
-                    </asp:Panel>
-                </td>
-                <td>
-                </td>
-                <td align="right">
-                    <div align="center" class="boxLogin" style="border: 1px solid #CCCCFF; width: 290px;
-                        height: 245px; background-color: #F0F0FF; color: #000000; vertical-align: middle;">
-                        <br />
-                        <%--         http://stackoverflow.com/questions/4891655/why-doesnt-the-password-recovery-link-show-up-in-my-login-control--%>
-                        <asp:Login ID="Login1" runat="server" DestinationPageUrl="~/SeleccionarEmpresa.aspx"
-                            ForeColor="Black" TitleText="" Font-Size="Small" LoginButtonText="Entrar" RememberMeText="Recordar contraseña"
-                            UserNameLabelText="Usuario" PasswordLabelText="Contraseña " Font-Bold="False"
-                            PasswordRecoveryUrl="OlvidoPassword.aspx" PasswordRecoveryText="Forgot Your Password?">
-                            <LayoutTemplate>
-                                <div style="text-align: left;">
-                                    <asp:Label ID="UserNameLabel" runat="server" AssociatedControlID="UserName" Font-Size=""
-                                        Font-Bold="true">Usuario</asp:Label>
-                                </div>
-                                <asp:TextBox ID="UserName" Width="240" runat="server" Font-Size="Medium" Style="padding: 5px;"></asp:TextBox>
-                                <br />
-                                <br />
-                                <div style="text-align: left;">
-                                    <asp:Label ID="PasswordLabel" runat="server" AssociatedControlID="Password" Font-Size="Small"
-                                        Font-Bold="true">Contraseña</asp:Label><br />
-                                </div>
-                                <asp:TextBox ID="Password" runat="server" TextMode="Password" Font-Size="Medium"
-                                    Style="padding: 5px;" Width="240"></asp:TextBox><br />
-                                <br />
-                                <asp:Button ID="LoginButton" runat="server" CommandName="Login" Text=" Entrar " Height="30"
-                                    Font-Size="11" Font-Bold="true" Width="100" CssClass="but" ValidationGroup="LoginUserValidationGroup"
-                                    Font-Names="'Lucida Grande', Tahoma" Style="margin-left: 0px; background-color: #4F6AA3;
-                                    color: White; border: 1px solid #2F5BB7;" />
-                                <loginbuttonstyle cssclass="but" />
-                                <asp:CheckBox ID="RememberMe" runat="server" TextAlign="Left" Style="margin-left: 30px;
-                                    vertical-align: middle" />
-                                <asp:Label ID="RememberMeLabel" runat="server" AssociatedControlID="RememberMe" CssClass="inline"
-                                    Font-Size="Small" Style="text-align: right; vertical-align: middle">No cerrar sesión</asp:Label>
-                                <br />
-                                <br />
-                                <asp:LinkButton runat="server" Style="margin-top: 10px;" PostBackUrl="OlvidoPassword.aspx">¿Olvidaste tu contraseña?</asp:LinkButton>
-                                <div style="text-align: left;">
+                                    </td>
+                                </tr>
+                            </table>
+                            </div>
+                        </asp:Panel>
+                    </td>
+                    <td></td>
+                    <td align="right">
+                        <div align="center" class="boxLogin" style="border: 1px solid #CCCCFF; width: 290px; height: 245px; background-color: #F0F0FF; color: #000000; vertical-align: middle;">
+                            <br />
+                            <%--         http://stackoverflow.com/questions/4891655/why-doesnt-the-password-recovery-link-show-up-in-my-login-control--%>
+                            <asp:Login ID="Login1" runat="server" DestinationPageUrl="~/SeleccionarEmpresa.aspx"
+                                ForeColor="Black" TitleText="" Font-Size="Small" LoginButtonText="Entrar" RememberMeText="Recordar contraseña"
+                                UserNameLabelText="Usuario" PasswordLabelText="Contraseña " Font-Bold="False"
+                                PasswordRecoveryUrl="OlvidoPassword.aspx" PasswordRecoveryText="Forgot Your Password?">
+                                <LayoutTemplate>
+                                    <div style="text-align: left;">
+                                        <asp:Label ID="UserNameLabel" runat="server" AssociatedControlID="UserName" Font-Size=""
+                                            Font-Bold="true">Usuario</asp:Label>
+                                    </div>
+                                    <asp:TextBox ID="UserName" Width="240" runat="server" Font-Size="Medium" Style="padding: 5px;"></asp:TextBox>
                                     <br />
-                                    <asp:Label ID="FailureText" runat="server" EnableViewState="false" Width="230" Font-Bold="true"
-                                        ForeColor="#DD4B39" BackColor="transparent" CssClass="Alerta" BorderWidth="0" />
-                                </div>
-                            </LayoutTemplate>
-                            <FailureTextStyle ForeColor="White" BackColor="#6E7E91" Wrap="true" Width="230">
-                            </FailureTextStyle>
-                        </asp:Login>
-                        <script>                            $(document).ready(function () { $('div:empty').remove(); });  // para no mostrar la celda vacía del FailureText....
-                        </script>
-                        <asp:UpdatePanel runat="server">
-                            <ContentTemplate>
-                                <asp:Label ID="lblMensajeErrorSuplementario" runat="server" ForeColor="#FF0066"></asp:Label>
-                            </ContentTemplate>
-                        </asp:UpdatePanel>
-                    </div>
-                </td>
-                <td style="width: 40px">
-                </td>
-            </tr>
-        </table>
-        <div>
-            <%--<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/chrome-frame/1/CFInstall.min.js"> </script>
+                                    <br />
+                                    <div style="text-align: left;">
+                                        <asp:Label ID="PasswordLabel" runat="server" AssociatedControlID="Password" Font-Size="Small"
+                                            Font-Bold="true">Contraseña</asp:Label><br />
+                                    </div>
+                                    <asp:TextBox ID="Password" runat="server" TextMode="Password" Font-Size="Medium"
+                                        Style="padding: 5px;" Width="240"></asp:TextBox><br />
+                                    <br />
+                                    <asp:Button ID="LoginButton" runat="server" CommandName="Login" Text=" Entrar " Height="30"
+                                        Font-Size="11" Font-Bold="true" Width="100" CssClass="but" ValidationGroup="LoginUserValidationGroup"
+                                        Font-Names="'Lucida Grande', Tahoma" Style="margin-left: 0px; background-color: #4F6AA3; color: White; border: 1px solid #2F5BB7;" />
+                                    <loginbuttonstyle cssclass="but" />
+                                    <asp:CheckBox ID="RememberMe" runat="server" TextAlign="Left" Style="margin-left: 30px; vertical-align: middle" />
+                                    <asp:Label ID="RememberMeLabel" runat="server" AssociatedControlID="RememberMe" CssClass="inline"
+                                        Font-Size="Small" Style="text-align: right; vertical-align: middle">No cerrar sesión</asp:Label>
+                                    <br />
+                                    <br />
+                                    <asp:LinkButton runat="server" Style="margin-top: 10px;" PostBackUrl="OlvidoPassword.aspx">¿Olvidaste tu contraseña?</asp:LinkButton>
+                                    <div style="text-align: left;">
+                                        <br />
+                                        <asp:Label ID="FailureText" runat="server" EnableViewState="false" Width="230" Font-Bold="true"
+                                            ForeColor="#DD4B39" BackColor="transparent" CssClass="Alerta" BorderWidth="0" />
+                                    </div>
+                                </LayoutTemplate>
+                                <FailureTextStyle ForeColor="White" BackColor="#6E7E91" Wrap="true" Width="230"></FailureTextStyle>
+                            </asp:Login>
+                            <script>                            $(document).ready(function () { $('div:empty').remove(); });  // para no mostrar la celda vacía del FailureText....
+                            </script>
+                            <asp:UpdatePanel runat="server">
+                                <ContentTemplate>
+                                    <asp:Label ID="lblMensajeErrorSuplementario" runat="server" ForeColor="#FF0066"></asp:Label>
+                                </ContentTemplate>
+                            </asp:UpdatePanel>
+                        </div>
+                    </td>
+                    <td style="width: 40px"></td>
+                </tr>
+            </table>
+            <div>
+                <%--<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/chrome-frame/1/CFInstall.min.js"> </script>
             <script type="text/javascript">
                 CFInstall.check();
             </script>--%>
-            <script type="text/javascript">
+                <script type="text/javascript">
 
 
-                if (navigator.appName == 'Microsoft Internet Explorer') {
-                    var str = "Podés seguir usando Explorer y ver mejor el sistema con el plugin de Chrome Frame";
-                    document.write(str.link("http://www.google.com/chromeframe/eula.html?extra=betachannel&hl=es&quickenable=true"));
-                    //                           
-                }
-        
-            </script>
-        </div>
-        <table align="center" style="font-size: x-small; text-align: center">
-            <tr>
-                <td>
-                    <%--                                    <td style="vertical-align: top; text-align: left;" >
+                    if (navigator.appName == 'Microsoft Internet Explorer') {
+                        var str = "Podés seguir usando Explorer y ver mejor el sistema con el plugin de Chrome Frame";
+                        document.write(str.link("http://www.google.com/chromeframe/eula.html?extra=betachannel&hl=es&quickenable=true"));
+                        //                           
+                    }
+
+
+
+
+
+
+                    function Loguearse(u, p) {
+                        var d = {
+                            user: u,  // si viene en undefined es porque no se puso ningun filtro
+                            pass: p
+                        }
+
+                        $.ajax({
+                            type: "POST",
+                            //method: "POST",
+                            url: "Login.aspx/LoginCookie",
+                            dataType: "json",
+                            contentType: "application/json; charset=utf-8",
+
+                            data: JSON.stringify(d),
+
+                            success: function (data) {
+                                alert(data.d);
+                                //window.open(data.d);
+                            }
+
+
+                            ,
+                            beforeSend: function () {
+                                //$('.loading').html('some predefined loading img html');
+                                $("#loading").show();
+                                $('#grabar2').attr("disabled", true).val("Espere...");
+
+                            },
+                            complete: function () {
+                                $("#loading").hide();
+                            }
+
+
+                        })
+                    }
+
+
+
+                    $(document).ready(function () {
+
+                        //alert("hola");
+
+                        $('#btnLoguearse').click(function () {
+                            Loguearse();
+
+                        })
+
+
+
+
+                    });
+
+
+
+                </script>
+            </div>
+            <table align="center" style="font-size: x-small; text-align: center">
+                <tr>
+                    <td>
+                        <%--                                    <td style="vertical-align: top; text-align: left;" >
                     &nbsp;
                 </td>
                 <td style="vertical-align: top; text-align: left;" class="style4" rowspan="100%"
                     height="2000" width="300px"></td>--%>
-                    <br />
-                    <br />
-                    <br />
-                    <br />
-                    <asp:Label ID="lblAvisoTipoDeSitio" runat="server" Font-Size="X-Large" CssClass="Alerta"
-                        Width="150px"></asp:Label>
-                    <br />
-                    <br />
-                    <br />
+                        <br />
+                        <br />
+                        <br />
+                        <br />
+                        <asp:Label ID="lblAvisoTipoDeSitio" runat="server" Font-Size="X-Large" CssClass="Alerta"
+                            Width="150px"></asp:Label>
+                        <br />
+                        <br />
+                        <br />
+                    </td>
+                </tr>
+                <tr>
+                </tr>
+                <td valign="bottom" style="height: 15px; text-align: center" align="center">
+                    <asp:HyperLink NavigateUrl="http://www.bdlconsultores.com.ar/" Text="©2013 BDL" runat="server"
+                        Font-Bold="false" Font-Underline="false" ForeColor="#4F6AA3" Font-Size="Small"
+                        ID="lnkBDL" CssClass="linkHoverSubrayado"></asp:HyperLink>
+                    <asp:Label ID="lblVersion" runat="server"></asp:Label>
                 </td>
-            </tr>
-            <tr>
-            </tr>
-            <td valign="bottom" style="height: 15px; text-align: center" align="center">
-                <asp:HyperLink NavigateUrl="http://www.bdlconsultores.com.ar/" Text="©2013 BDL" runat="server"
-                    Font-Bold="false" Font-Underline="false" ForeColor="#4F6AA3" Font-Size="Small"
-                    ID="lnkBDL" CssClass="linkHoverSubrayado"></asp:HyperLink>
-                <asp:Label ID="lblVersion" runat="server"></asp:Label>
-            </td>
-            <td valign="bottom" style="position: absolute; bottom: 0 !important; height: 15px;">
-            </td>
-            <%--            <br />
+                <td valign="bottom" style="position: absolute; bottom: 0 !important; height: 15px;"></td>
+                <%--            <br />
             <br />
             <br />--%>
             </tr>
-        </table>
-        <%--http://www.4guysfromrolla.com/webtech/082400-1.shtml--%>
-        <input type="hidden" name="cookieexists" value="false">
-        <div style="visibility: hidden; display: none">
-            Haga clic en Herramientas, luego en Opciones de Internet. Haga clic en la carpeta
+            </table>
+            <%--http://www.4guysfromrolla.com/webtech/082400-1.shtml--%>
+            <input type="hidden" name="cookieexists" value="false">
+            <div style="visibility: hidden; display: none">
+                Haga clic en Herramientas, luego en Opciones de Internet. Haga clic en la carpeta
             de Seguridad. Haga clic en el botón Nivel personalizado. Vaya a la sección de Automatización.
             Seleccione Activar en Automatización de los subprogramas de Java, Permitir operaciones
             de pegado por medio de una secuencia de comandos y Secuencias de comandos ActiveX.
@@ -567,7 +604,7 @@ document.cookie = 'killme' + escape('nothing')
             allow administrator approved controls, or place their internal site in a security
             zone where this will not be a problem. And they can push all of this down as a domain
             policy template...any MCSE should be able to lock this down.
-        </div>
+            </div>
         </form>
     </center>
     <%--http://dotnet.itags.org/dotnet-security/37902/
