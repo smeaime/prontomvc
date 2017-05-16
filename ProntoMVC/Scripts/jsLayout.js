@@ -262,9 +262,9 @@ else {
 
             colModel: [
                 //{ name: "id", width: 1 },
-                { name: "descr", width: 400 }, // , searchoptions: { sopt: ['cn', 'eq'] }  },
+                { name: "descr", width: 200 }, // , searchoptions: { sopt: ['cn', 'eq'] }  },
                 { name: "Name2", width: 1 , hidden:true },
-                { name: "Name3", width: 1, hidden: true },
+                //{ name: "Name3", width: 1, hidden: true },
                 //{ name: "Name4", width: 1, hidden: true },
                 //{ name: "Name5", width: 1, hidden: true },
             ],
