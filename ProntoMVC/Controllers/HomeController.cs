@@ -411,7 +411,7 @@ namespace ProntoMVC.Controllers
                             //////////////////////////////////////////////////////////////////////////
                             //LEVEL: This is the actual level of the child so, root will be 0, that's why i'm adding
                             // one to the level above.
-                           l= ((child.IdItem.Replace("-","").Length) / 2-2).ToString()  ,  // level.ToString(),
+                            level = ((child.IdItem.Replace("-", "").Length) / 2 - 2).ToString(),  // level.ToString(),
                             
                            
                             //////////////////////////////////////////////////////////////////////////
@@ -419,8 +419,8 @@ namespace ProntoMVC.Controllers
                            //PARENT ID: If we are at the root [nodeid] will be empty so the parent id is ""
                             // In case of a service writter the parent id is the nodeid, because is the node
                             // we are expanding
-                            parentid= child.ParentId ?? string.Empty, //  child.ParentId,  // collection["nodeid"] ?? string.Empty,
-                            
+                            //parent = child.ParentId ?? string.Empty, //  child.ParentId,  // collection["nodeid"] ?? string.Empty,
+                            parent = (child.ParentId ?? "") == "" ? "null" : child.ParentId,
                            
                             //////////////////////////////////////////////////////////////////////////
                             //////////////////////////////////////////////////////////////////////////
@@ -429,18 +429,20 @@ namespace ProntoMVC.Controllers
                             // The Child.Role the role name, so i know that if it's a ServiceWriter i'm the last level
                             // so it's not expandable, the optimal way is to get from the database store procedure
                             // if the leaf has children.
-                            espadre= (child.EsPadre!="SI" ? "true" : "false" ).ToString(),
+                            isLeaf = (child.EsPadre != "SI" ? "true" : "false").ToString(),
                            
                             
                             //////////////////////////////////////////////////////////////////////////
                             //////////////////////////////////////////////////////////////////////////
                             //IS EXPANDED: I use that is always false,
-                          iditem=   (v.Contains(child.IdItem)  ? "true" : "false" ).ToString()
+                            expanded = (v.Contains(child.IdItem) ? "true" : "false").ToString()
                             
                             //////////////////////////////////////////////////////////////////////////
                             //////////////////////////////////////////////////////////////////////////
                             // LOADED: si está puesto en true, no vuelve a llamar al servidor
                            // , "false" 
+                                ,
+                            loaded = "true"
 
                             // http://stackoverflow.com/questions/6508838/in-jqgrid-treegrid-how-can-i-specify-that-i-want-to-load-the-entire-tree-up-fro
                    //                If I understand your question correct, the most important lines of the Tree Grid code to answer on 
