@@ -1504,9 +1504,9 @@ Released   : 20120723
                                 line-height: 25px; /*  font-size: 12px; */
                             }
                         </style>
-                        <a style="width: 7px; height: 47px; border: 0; margin-top: 1px; padding: 0;" id="botonizq "
+                        @*<a style="width: 7px; height: 47px; border: 0; margin-top: 1px; padding: 0;" id="botonizq "
                            class="pull-left btn btn-small " onclick="conmutarPanelesIzq();   pageLayout.hide('north'); RefrescaAnchoGrillaDetalle();">
-                        </a>
+                        </a>*@
                         <a style="width: 7px; height: 47px; border: 0; margin-top: 0px; padding: 0;"
                            id="botonder " class="btn btn-small pull-right " onclick="conmutarPanelesDerecho();   pageLayout.hide('north'); RefrescaAnchoGrillaDetalle();">
                         </a>@*http://stackoverflow.com/questions/11851820/twitter-bootstrap-how-to-span-links-in-the-navbar
@@ -1522,7 +1522,7 @@ Released   : 20120723
                                 {
 
                                     <li class="pull-right ">
-                                        <a class="pull-right" onclick="" title="Configuración">
+                                        <a class="pull-right" title="Configuración" onclick="conmutarPanelesIzq();   pageLayout.hide('north'); RefrescaAnchoGrillaDetalle();">
                                             <i class=" icon-align-justify"></i>
                                         </a>
                                     </li>
@@ -2509,7 +2509,7 @@ Released   : 20120723
                             }
                             else {
 
-                                $("#btnConmutarPanelIzquierdo").show();
+                                // $("#btnConmutarPanelIzquierdo").show();
                                 pageLayout.hide('west');
 
 
