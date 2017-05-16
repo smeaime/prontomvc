@@ -256,52 +256,76 @@ else {
 
     if (localStorage.arbol != null) {
         $("#addtree2").jqGrid({
-            data: JSON.parse(localStorage.arbol).rows,//$.cookie("arbol"),
+            //data: JSON.parse(localStorage.arbol).rows,//$.cookie("arbol"),
             datatype: "jsonstring", // "local",  //http://stackoverflow.com/questions/6831306/load-local-json-data-in-jqgrid-without-addjsonrows
+            datastr: JSON.parse(localStorage.arbol).rows,
+
             colModel: [
-                { name: "id", width: 1 },
-                { name: "descr", width: 400  , searchoptions: { sopt: ['cn', 'eq'] }  },
+                //{ name: "id", width: 1 },
+                { name: "descr", width: 400 }, // , searchoptions: { sopt: ['cn', 'eq'] }  },
                 { name: "Name2", width: 1 , hidden:true },
                 { name: "Name3", width: 1, hidden: true },
-                { name: "Name4", width: 1, hidden: true },
-                { name: "Name5", width: 1, hidden: true },
+                //{ name: "Name4", width: 1, hidden: true },
+                //{ name: "Name5", width: 1, hidden: true },
             ],
 
-            ignoreCase: true,
-
-            loadComplete: function (data) {
-                refrescarFondo_addtree();
-
-                if (eslaprimeravez) {
-                    cargarTopPositionDelArbol();
-                    eslaprimeravez = false;
-                }
-
-                var gridId = $("#addtree2").attr('id');
-                var gridParentWidth = $('#gbox_' + gridId).parent().width();
-                $('#' + gridId).setGridWidth(gridParentWidth);
-
-            },
-
-            // pager: "#addtree2Pager",
-            rowNum: 500,
-            //rowList: [1, 2, 10],
-            viewrecords: true,
-            height: "auto",
-            //autoencode: true,
-            //gridview: true,
             //ignoreCase: true,
 
-            //treeGrid: true,
-            caption: ""
+            //loadComplete: function (data) {
+            //    refrescarFondo_addtree();
+
+            //    if (eslaprimeravez) {
+            //        cargarTopPositionDelArbol();
+            //        eslaprimeravez = false;
+            //    }
+
+            //    var gridId = $("#addtree2").attr('id');
+            //    var gridParentWidth = $('#gbox_' + gridId).parent().width();
+            //    $('#' + gridId).setGridWidth(gridParentWidth);
+
+            //},
+
+            //// pager: "#addtree2Pager",
+            //rowNum: 500,
+            ////rowList: [1, 2, 10],
+            //viewrecords: true,
+            
+            ////autoencode: true,
+            ////gridview: true,
+            ////ignoreCase: true,
+
+            ////treeGrid: true,
+         
+            height: "auto",
+
+         
+        gridview: true,
+        rowNum: 10000,
+        //sortname: 'id',
+        treeGrid: true,
+        treeGridModel: 'adjacency',
+        treedatatype: "local",
+        ExpandColumn: 'descr',
+        loadui: 'disable', // es la unica manera q encontré de sacar el cartelote "loading" q no se iba
+        //caption: "Demonstrate how to use Tree Grid for the Adjacency Set Model",
+        jsonReader: {
+            repeatitems: false,
+            root: function (obj) { return obj; },
+            page: function () { return 1; },
+            total: function () { return 1; },
+            records: function (obj) { return obj.length; }
+        }
+
+
+
 
         });
 
-        jQuery("#addtree2").filterToolbar({
-            stringResult: true, searchOnEnter: true,
-            defaultSearch: 'cn',
-            enableClear: false
-        });
+        //jQuery("#addtree2").filterToolbar({
+        //    stringResult: true, searchOnEnter: true,
+        //    defaultSearch: 'cn',
+        //    enableClear: false
+        //});
 
     }
 }
