@@ -562,7 +562,7 @@ namespace ProntoMVC.Controllers
                             //////////////////////////////////////////////////////////////////////////
                             //LEVEL: This is the actual level of the child so, root will be 0, that's why i'm adding
                             // one to the level above.
-                            level = (child.Link.Count(f => f == '/') - 1).ToString(),  // level.ToString(),
+                            level = (child.Link.Count(f => f == '/') - 1).ToString().Replace("&nbsp;",""),  // level.ToString(),
 
 
                             //////////////////////////////////////////////////////////////////////////
