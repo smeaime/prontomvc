@@ -416,16 +416,20 @@ namespace ProntoMVC.Controllers
             DateTime FechaDesde, FechaHasta;
             try
             {
-                FechaDesde = DateTime.ParseExact(FechaInicial, "dd/MM/yyyy", null);
+                if (FechaInicial == "") FechaDesde = DateTime.MinValue;
+                else FechaDesde = DateTime.ParseExact(FechaInicial, "dd/MM/yyyy", null);
             }
             catch (Exception)
             {
 
                 FechaDesde = DateTime.MinValue;
             }
+
+
             try
             {
-                FechaHasta = DateTime.ParseExact(FechaFinal, "dd/MM/yyyy", null);
+                if (FechaFinal == "") FechaHasta = DateTime.MinValue;
+                else FechaHasta = DateTime.ParseExact(FechaFinal, "dd/MM/yyyy", null);
             }
             catch (Exception)
             {
