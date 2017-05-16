@@ -387,6 +387,7 @@ namespace ProntoMVC.Controllers
                 rows = (from child in q
                         select new
                         {
+                            id = child.IdItem,
                             descr = (new String('_', ((child.IdItem.Replace("-", "").Length) / 2 - 2) * 5)).Replace("_", "&nbsp;")  +
                                     (((child.Link ?? "")  =="") ?    child.Descripcion :  child.Link ), // Correspond to the colmodel NAME in javascript
                             
@@ -395,7 +396,7 @@ namespace ProntoMVC.Controllers
                             // So the id will be clean. Following the example, just 5
                             // If we are expanding the Agent 5 so, the [nodeid] will not be empty
                             // so we take the Agent id, 5 and concatenate the child id, so 5_25
-                             child.IdItem,
+                            // child.IdItem,
                             child.Link, //Correspond to the colmodel ROLE in javascript 
                             
                             
