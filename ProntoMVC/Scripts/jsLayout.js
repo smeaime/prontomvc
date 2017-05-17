@@ -86,10 +86,10 @@ if (bPersisteArbol) {
 /////////////////////////////////////////////
 
 
-if (false) // no cargar ningun arbol. -si, porque lo que pone lento todo es la carga de la jqgrid con semejante localstorage
+if (true) // no cargar ningun arbol. -si, porque lo que pone lento todo es la carga de la jqgrid con semejante localstorage
 {
 
-    if (false) {
+    if (true) {
 
         // arbol normal, q carga los nodos a medida q se los usa
 
@@ -267,7 +267,7 @@ if (false) // no cargar ningun arbol. -si, porque lo que pone lento todo es la c
 
                 colModel: [
                     //{ name: "id", width: 1 },
-                    { name: "descr", width: 200 }, // , searchoptions: { sopt: ['cn', 'eq'] }  },
+                    { name: "descr", width: 180 , searchoptions: { sopt: ['cn', 'eq'] }  },
                     //{ name: "Name2", width: 1, hidden: true },
                     //{ name: "Name3", width: 1, hidden: true },
                     //{ name: "Name4", width: 1, hidden: true },
@@ -297,7 +297,7 @@ if (false) // no cargar ningun arbol. -si, porque lo que pone lento todo es la c
 
                 ////autoencode: true,
                 ////gridview: true,
-                ////ignoreCase: true,
+                ignoreCase: true,
 
                 ////treeGrid: true,
 
@@ -306,13 +306,15 @@ if (false) // no cargar ningun arbol. -si, porque lo que pone lento todo es la c
 
                 gridview: true,
                 rowNum: 10000,
-                //sortname: 'id',
+                ////sortname: 'id',
+
                 treeGrid: true,
                 treeGridModel: 'adjacency',
                 treedatatype: "local",
                 ExpandColumn: 'descr',
+
+
                 loadui: 'disable', // es la unica manera q encontré de sacar el cartelote "loading" q no se iba
-                //caption: "Demonstrate how to use Tree Grid for the Adjacency Set Model",
                 jsonReader: {
                     repeatitems: false,
                     root: function (obj) { return obj; },
@@ -326,11 +328,11 @@ if (false) // no cargar ningun arbol. -si, porque lo que pone lento todo es la c
 
             });
 
-            //jQuery("#addtree2").filterToolbar({
-            //    stringResult: true, searchOnEnter: true,
-            //    defaultSearch: 'cn',
-            //    enableClear: false
-            //});
+            jQuery("#addtree2").filterToolbar({
+                stringResult: true, searchOnEnter: true,
+                defaultSearch: 'cn',
+                enableClear: false
+            });
 
         }
     }
