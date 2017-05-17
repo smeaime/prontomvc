@@ -34,6 +34,8 @@ var lastSelectedId;
 
 var mIdControlCalidadDefault = -1;
 var mDescControlCalidadDefault = "rrr";
+
+
 $(function () {
 
     $.post(ROOT + 'Articulo/GetParametro?param=IdControlCalidadDefault',
