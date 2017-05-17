@@ -238,6 +238,36 @@ Partial Class Login
 
 
 
+        '/////////////////////////////////////////////////////////////////////////////////////////
+        'configurar en el web.config!!!!!
+        '/////////////////////////////////////////////////////////////////////////////////////////
+        '<system.web>
+        '       <httpCookies domain=".williamsentregas.com.ar"/>
+        '</system.web>
+        '
+        'y esto:
+        '
+        '<httpProtocol>
+        '  <customHeaders>
+        '    <add name="Access-Control-Allow-Origin" value="*" />
+        '    <add name="Access-Control-Allow-Headers" value="Content-Type" />
+        '    <add name="Access-Control-Allow-Methods" value="GET, POST, PUT, DELETE, OPTIONS" />
+        '  </customHeaders>
+        '</httpProtocol>
+
+        '/////////////////////////////////////////////////////////////////////////////////////////
+        'y despues poniendo explicito todo en la llamada desde la pagina php (poniendo el dominio)
+
+        'document.cookie = ".ASPXAUTH=40C9C30616F0BDA11B77ED39C12E716FCE37FCACDA845F257F65B3FF34EA6F209AE6D27D227CB86E9AC05E3623675505FDEF949A6D7AB108DC6BBDDF34A4D2F3B2E8B3086CD763AA9F4B0B63B658C2B2E3DA6FAC5951EB80F7639B926204FE1B092733D337E6385E5297BD40AC339CDFCE9B6700D861AFC580934F84D5FD6866E19D98D611C1114E66031E58ED0D685C;path=/; expires=Fri, 19 May 2017 19:59:57 GMT;domain=williamsentregas.com.ar"
+
+        '/////////////////////////////////////////////////////////////////////////////////////////
+        '/////////////////////////////////////////////////////////////////////////////////////////
+        '/////////////////////////////////////////////////////////////////////////////////////////
+        '/////////////////////////////////////////////////////////////////////////////////////////
+        '/////////////////////////////////////////////////////////////////////////////////////////
+
+
+
         If Not Membership.ValidateUser(user, pass) Then Return "NO AUTENTICADO"
 
 
@@ -245,11 +275,10 @@ Partial Class Login
 
 
         Dim t = FormsAuthentication.GetAuthCookie(user, bRecordame)
+        t.Path = "\"
+        t.Domain = ".williamsentregas.com.ar"
 
-
-
-
-        '        FormsAuthentication.SetAuthCookie(user, bRecordame)
+        FormsAuthentication.SetAuthCookie(user, bRecordame, "\")
 
 
         '//////////////////////////////////////////////////////////////////
@@ -292,7 +321,7 @@ Partial Class Login
         '//////////////////////////////////////////////////////////////////
         '//////////////////////////////////////////////////////////////////
 
-
+        ' document.cookie = "cucu=2222;domain=.williamsentregas.com.ar;path=/"
 
         '//create a cookie
         Dim myCookie As HttpCookie = New HttpCookie("Holaaaa")
@@ -300,9 +329,13 @@ Partial Class Login
         myCookie.Values.Add("trulala", "lalalalal")
         '//set cookie expiry date-time. Made it to last for next 12 hours.
         myCookie.Expires = DateTime.Now.AddHours(12)
+
+        myCookie.Domain = ".williamsentregas.com.ar"
+        myCookie.Path = "/"
         '//Most important, write the cookie to client.
         HttpContext.Current.Response.Cookies.Add(myCookie)
 
+        HttpContext.Current.Response.Cookies.Add(t)
 
 
         If False Then
@@ -331,6 +364,10 @@ Partial Class Login
 
             HttpContext.Current.Response.Cookies.Add(ck)
         End If
+
+
+        'HttpContext.Current.Response.AppendHeader("Access-Control-Allow-Origin", "*") 'no lo repitas aca si esta en el web.config
+
 
 
         Return t.Value
