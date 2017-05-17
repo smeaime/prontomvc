@@ -5,6 +5,7 @@
 }
 
 <div style="padding-left: 15px; padding-right: 15px;">
+    <br />
     <div class="row-fluid">
         <div class="span9 lightblue">
             <button onclick="window.location.href='@Url.Action("Edit", new { id = -1 })'" class="btn btn-primary">Nuevo punto de venta</button>
@@ -63,14 +64,19 @@
             sortname: 'PuntoVenta',
             sortorder: 'asc',
             viewrecords: true,
-            width: 'auto',
+
+            width: 'auto', // 'auto',
+            autowidth: true,
+            shrinkToFit: false,
+
+
             height: '100%',
             altRows: false,
             footerrow: true,
             userDataOnFooter: true,
             //imgpath: '/content/cupertino/images',
             //loadonce: true,
-            caption: '<b>Puntos de venta</b>'
+            //caption: '<b>Puntos de venta</b>'
         });
         //jQuery("#Lista").jqGrid('navGrid', '#ListaPager', { edit: false, add: false, del: false, refresh: true, search: true });
         jQuery("#Lista").jqGrid('navGrid', '#ListaPager', { refresh: true, add: false, edit: false, del: false }, {}, {}, {}, { sopt: ["cn"], width: 700, closeOnEscape: true, closeAfterSearch: true });

@@ -174,18 +174,38 @@
 
                 <div class="row-fluid" style="margin-bottom: 15px; margin-top: 5px;">
                     @* <div class="span5 lightblue" style="font-weight: bold; font-size: 34px; vertical-align: "> *@
-                    <div class="span12">
 
 
-
+                    <div class="span6">
                         <div class="" style='font-size: 34px; margin-top: 5px; height: 45px; font-weight: 400;
                             text-shadow: 0 1px 0  lightgray; font-family: "Segoe UI Web Regular", "Segoe UI", "Lucida", Tahoma, Arial,"sans-serif"'>
-                            @Html.TextBox("sss",  "Presupuesto "+ @Model.Numero.ToString() + " /" ,  new { style = "height: 50px ;  font-weight: 400; text-shadow: 0 1px 0  lightgray; font-size: 34px; border: 0; padding: 0 ; text-align: left; background: transparent;  font-family: 'Segoe UI Web Regular', 'Segoe UI', 'Lucida', Tahoma, Arial,'sans-serif';                    -webkit-box-shadow: none; -moz-box-shadow: none; box-shadow: none;                   ", @class = "span4", @readonly = "readonly" })
+
+
+                            <span class="span1" style="padding-top: 15px; width: 200px">Presupuesto </span>
+                            @Html.TextBoxFor(model => model.Numero, new { style = "height: 50px ;  font-weight: 400; text-shadow: 0 1px 0  lightgray; font-size: 34px; border: 0; padding: 0 ; text-align: right; background: transparent;  font-family: 'Segoe UI Web Regular', 'Segoe UI', 'Lucida', Tahoma, Arial,'sans-serif';                    -webkit-box-shadow: none; -moz-box-shadow: none; box-shadow: none;                   ", @class = "span3", @readonly = "readonly" })
+                            <span class="" style="padding-top: 15px; width: 10px">/ </span>
                             @Html.TextBoxFor(model => model.SubNumero, new { style = "width: 40px; height: 50px; font-weight: 400; text-shadow: 0 1px 0  lightgray; font-size: 34px; border: 0; padding: ; text-align: left; background: ;  font-family: 'Segoe UI Web Regular', 'Segoe UI', 'Lucida', Tahoma, Arial,'sans-serif';  ", @class = "span1" })
                         </div>
-
-                       
                     </div>
+
+                    <div class="span6">
+                        @*  <input type="button" id="grabar2" value="Aceptar" style="margin-top: 15px;" class="btn  btn-large btn-primary pull-right" />*@
+                    </div>
+                    <script>
+                        $(function () {
+
+                            function resizeInput() {
+                                // $(this).attr('size', $(this).val().length + 2);
+                                $(this).css('width', $(this).val().length * 32);
+                            }
+
+
+                            $('#SubNumero').keyup(resizeInput).each(resizeInput);
+
+                            $('#Numero').css('width', $('#Numero').val().length * 21);
+
+                        })
+                    </script>
 
 
 
@@ -408,21 +428,30 @@
                            style="margin: 0px 0px 0px 0px; height: 100; padding: 0px; border-style: none;
             border-width: thin; border-spacing: 0px; font-size: xx-small">
                         <tr>
-                            <td width="100" colspan="2">
-                                SUBTOTAL
-                            </td>
-                            <td width="100" align="right">
-                                <input type="text" name="Subtotal1" id="Subtotal1" style="width: 85%; text-align: right;"
-                                       readonly="readonly" />
-                            </td>
+
                             <td width="100">
                                 MONEDA :
                             </td>
                             <td width="100">
                                 @Html.DropDownList("IdMoneda", null, String.Empty, new { @class = "span12" })
                             </td>
+                            <td width="100" colspan="2">
+                                SUBTOTAL
+                            </td>
+                            <td width="100" align="">
+                                <input type="text" name="Subtotal1" id="Subtotal1" style="width: 85%; text-align: right ;"
+                                       readonly="readonly" />
+                            </td>
+
                         </tr>
                         <tr>
+                            <td width="100">
+                                CONV.PESOS :
+                            </td>
+                            <td width="100">
+                                @Html.TextBoxFor(model => model.CotizacionMoneda, new { @readonly = "readonly" })
+                            </td>
+
                             <td width="100" colspan="2">
                                 BONIFICACION ITEMS
                             </td>
@@ -430,14 +459,11 @@
                                 <input type="text" name="TotalBonificacionItems" id="TotalBonificacionItems" style="width: 85%;
                         text-align: right;" readonly="readonly" />
                             </td>
-                            <td width="100">
-                                CONV.PESOS :
-                            </td>
-                            <td width="100">
-                                @Html.TextBoxFor(model => model.CotizacionMoneda, new { @readonly = "readonly" })
-                            </td>
+
                         </tr>
                         <tr>
+                            <td width="100"></td>
+                            <td width="100"></td>
                             <td width="100">
                                 BONIF GLOBAL
                             </td>
@@ -451,6 +477,8 @@
                             </td>
                         </tr>
                         <tr>
+                            <td width="100"></td>
+                            <td width="100"></td>
                             <td width="100" colspan="2">
                                 SUBTOTAL
                             </td>
@@ -460,6 +488,8 @@
                             </td>
                         </tr>
                         <tr>
+                            <td width="100"></td>
+                            <td width="100"></td>
                             <td width="100" colspan="2">
                                 IVA
                             </td>
@@ -469,6 +499,8 @@
                             </td>
                         </tr>
                         <tr>
+                            <td width="100"></td>
+                            <td width="100"></td>
                             <td width="100" colspan="2">
                                 TOTAL
                             </td>

@@ -1505,8 +1505,8 @@ Released   : 20120723
                             }
                         </style>
                         @*<a style="width: 7px; height: 47px; border: 0; margin-top: 1px; padding: 0;" id="botonizq "
-                           class="pull-left btn btn-small " onclick="conmutarPanelesIzq();   pageLayout.hide('north'); RefrescaAnchoGrillaDetalle();">
-                        </a>*@
+                               class="pull-left btn btn-small " onclick="conmutarPanelesIzq();   pageLayout.hide('north'); RefrescaAnchoGrillaDetalle();">
+                            </a>*@
                         <a style="width: 7px; height: 47px; border: 0; margin-top: 0px; padding: 0;"
                            id="botonder " class="btn btn-small pull-right " onclick="conmutarPanelesDerecho();   pageLayout.hide('north'); RefrescaAnchoGrillaDetalle();">
                         </a>@*http://stackoverflow.com/questions/11851820/twitter-bootstrap-how-to-span-links-in-the-navbar
@@ -1542,152 +1542,156 @@ Released   : 20120723
                                             </a>
                                             @if (Roles.IsUserInRole(ViewBag.NombreUsuario, "SuperAdmin"))
                                             {
-                                                <ul class="dropdown-menu pull-right" id="333311111" style="left: 60px; width: 900px;
+                                            <ul class="dropdown-menu pull-right" id="333311111" style="left: 60px; width: 900px;
                                         top: 42px">
-                                                    <li style="line-height: 40px;">
-                                                        <div class="row-fluid" style="width: 100%x; font-size: 26px; padding: 12px">
-                                                            <ul class="unstyled span3" style="line-height: 30px;">
-                                                                <li style="line-height: 30px;"><a href="@Url.Content("~")Home/">Inicio</a></li>
-                                                                <li style="line-height: 30px;"><a href="#">...</a> </li>
-                                                                <li style="line-height: 30px;">
-                                                                    <a href="@Url.Content("~")Articulo/Index/-1">Artículos</a><a class="pull-right" href="@Url.Content("~")Articulo/Edit/-1">
-                                                                        +
-                                                                    </a>
-                                                                </li>
-                                                                <li style="line-height: 30px;"><a href="#">...</a> </li>
-                                                                <li style="line-height: 30px;">
-                                                                    <a href="@Url.Content("~")MvcMembership/UserAdministration">
-                                                                        Usuarios
-                                                                    </a>
-                                                                </li>
-                                                                <li style="line-height: 30px;">
-                                                                    <a href="@Url.Content("~")Empleado">Empleados</a>
-                                                                </li>
-                                                                <li style="line-height: 30px;"><a href="@Url.Content("~")CotizacionMoneda">Cotiz Dolar</a></li>
-                                                                <li style="line-height: 30px;"><a href="#">...</a> </li>
-                                                                <li style="line-height: 30px;"><a href="#">...</a> </li>
-                                                                <li style="line-height: 30px;"><a href="@Url.Content("~")Cuenta">Cuentas</a></li>
-                                                                <li style="line-height: 30px;"><a href="@Url.Content("~")Subdiario">Subdiarios</a></li>
-                                                                <li style="line-height: 30px;"><a href="@Url.Content("~")Asiento">Asientos</a></li>
-                                                            </ul>
-                                                            <ul class="span1"></ul>
-                                                            <ul class="unstyled span3" style="line-height: 30px;">
-                                                                <li style="line-height: 30px;">
-                                                                    <a href="@Url.Content("~")Proveedor/Index/-1">Proveedores</a><a class="pull-right" href="@Url.Content("~")Proveedor/Edit/-1">
-                                                                        +
-                                                                    </a>
-                                                                </li>
-                                                                <li style="line-height: 30px;">
-                                                                    <a href="@Url.Content("~")Obra/Index/">Obras</a><a class="pull-right" href="@Url.Content("~")Requerimiento/Edit/-1">
-                                                                        +
-                                                                    </a>
-                                                                </li>
-                                                                <li style="line-height: 30px;">
-                                                                    <a class="" href="@Url.Content("~")Requerimiento/Index/">
-                                                                        Requerimientos
-                                                                    </a> <a class="pull-right" href="@Url.Content("~")Requerimiento/Edit/-1">
-                                                                        +
-                                                                    </a>
-                                                                </li>
+                                                <li style="line-height: 40px;">
+                                                    <div class="row-fluid" style="width: 100%x; font-size: 26px; padding: 12px">
+                                                        <ul class="unstyled span3" style="line-height: 30px;">
+                                                            <li style="line-height: 30px;"><a href="@Url.Content("~")Home/">Inicio</a></li>
+                                                            <li style="line-height: 30px;"><a href="#">...</a> </li>
+                                                            <li style="line-height: 30px;">
+                                                                <a href="@Url.Content("~")Articulo/Index/-1">Artículos</a><a class="pull-right" href="@Url.Content("~")Articulo/Edit/-1">
+                                                                    +
+                                                                </a>
+                                                            </li>
+                                                            <li style="line-height: 30px;"><a href="#">...</a> </li>
+                                                            <li style="line-height: 30px;">
+                                                                <a href="@Url.Content("~")MvcMembership/UserAdministration">
+                                                                    Usuarios
+                                                                </a>
+                                                            </li>
+                                                            <li style="line-height: 30px;">
+                                                                <a href="@Url.Content("~")Empleado">Empleados</a>
+                                                            </li>
+                                                            <li style="line-height: 30px;"><a href="@Url.Content("~")CotizacionMoneda">Cotiz Dolar</a></li>
+                                                            <li style="line-height: 30px;"><a href="#">...</a> </li>
+                                                            <li style="line-height: 30px;"><a href="#">...</a> </li>
+                                                            <li style="line-height: 30px;"><a href="@Url.Content("~")Cuenta">Cuentas</a></li>
+                                                            <li style="line-height: 30px;"><a href="@Url.Content("~")Subdiario">Subdiarios</a></li>
+                                                            <li style="line-height: 30px;"><a href="@Url.Content("~")Asiento">Asientos</a></li>
+                                                        </ul>
+                                                        <ul class="span1"></ul>
+                                                        <ul class="unstyled span3" style="line-height: 30px;">
+                                                            <li style="line-height: 30px;">
+                                                                <a href="@Url.Content("~")Proveedor/Index/-1">Proveedores</a><a class="pull-right" href="@Url.Content("~")Proveedor/Edit/-1">
+                                                                    +
+                                                                </a>
+                                                            </li>
+                                                            <li style="line-height: 30px;">
+                                                                <a href="@Url.Content("~")Obra/Index/">Obras</a><a class="pull-right" href="@Url.Content("~")Requerimiento/Edit/-1">
+                                                                    +
+                                                                </a>
+                                                            </li>
+                                                            <li style="line-height: 30px;">
+                                                                <a class="" href="@Url.Content("~")Requerimiento/Index/">
+                                                                    Requerimientos
+                                                                </a> <a class="pull-right" href="@Url.Content("~")Requerimiento/Edit/-1">
+                                                                    +
+                                                                </a>
+                                                            </li>
 
-                                                                <li style="line-height: 30px;">
-                                                                    <a href="@Url.Content("~")Presupuesto/Index/-1">Presupuestos</a><a class="pull-right" href="@Url.Content("~")Presupuesto/Edit/-1">
-                                                                        +
-                                                                    </a>
-                                                                </li>
-                                                                <li style="line-height: 30px;">
-                                                                    <a href="@Url.Content("~")Comparativa/Index/-1">Comparativas</a><a class="pull-right" href="@Url.Content("~")Comparativa/Edit/-1">
-                                                                        +
-                                                                    </a>
-                                                                </li>
-                                                                <li style="line-height: 30px;"><a href="#">...</a> </li>
-                                                                <li style="line-height: 30px;"><a href="#">...</a> </li>
-                                                                <li style="line-height: 30px;">
-                                                                    <a href="@Url.Content("~")Pedido/Index/-1">Pedidos</a>
-                                                                    <a class="pull-right" href="@Url.Content("~")Pedido/Edit/-1">+</a>
-                                                                </li>
-                                                                <li style="line-height: 30px;">
-                                                                    <a href="@Url.Content("~")ComprobanteProveedor/Index/-1">
-                                                                        Comp prov
-                                                                    </a><a class="pull-right" href="@Url.Content("~")ComprobanteProveedor/Edit/-1">
-                                                                        +
-                                                                    </a>
-                                                                </li>
-                                                                <li style="line-height: 30px;">
-                                                                    <a href="@Url.Content("~")ComprobanteProveedor/IndexFF/-1">
-                                                                        Fondo fijo
-                                                                    </a><a class="pull-right" href="@Url.Content("~")ComprobanteProveedor/EditFF/-1">
-                                                                        +
-                                                                    </a>
-                                                                </li>
-                                                                <li style="line-height: 30px;"><a href="#">...</a> </li>
-                                                                <li style="line-height: 30px;">
-                                                                    <a href="@Url.Content("~")OrdenPago/Index/-1">
-                                                                        Orden de
-                                                                        pago
-                                                                    </a><a class="pull-right" href="@Url.Content("~")OrdenPago/EditCC/-1"> +</a>
-                                                                </li>
-                                                                <li style="line-height: 30px;">
-                                                                    <a href="@Url.Content("~/Reporte.aspx?ReportName=Resumen Cuenta Corriente Acreedores")">
-                                                                        Cta corr Acreed
-                                                                    </a>
-                                                                </li>
-                                                            </ul>
-                                                            <ul class="span1"></ul>
-                                                            <ul class="unstyled span3" style="line-height: 30px;">
-                                                                @* http://stackoverflow.com/questions/13562658/twitter-bootstrap-multi-column-dropdown*@
-                                                                <li style="line-height: 30px;">
-                                                                    <a href="@Url.Content("~")Cliente/Index/-1">Clientes</a><a class="pull-right" href="@Url.Content("~")Cliente/Edit/-1">
-                                                                        +
-                                                                    </a>
-                                                                </li>
-                                                                <li style="line-height: 30px;"><a href="#">...</a> </li>
-                                                                <li style="line-height: 30px;"><a href="#">...</a> </li>
-                                                                <li style="line-height: 30px;"><a href="#">...</a> </li>
+                                                            <li style="line-height: 30px;">
+                                                                <a href="@Url.Content("~")Presupuesto/Index/-1">Presupuestos</a><a class="pull-right" href="@Url.Content("~")Presupuesto/Edit/-1">
+                                                                    +
+                                                                </a>
+                                                            </li>
+                                                            <li style="line-height: 30px;">
+                                                                <a href="@Url.Content("~")Comparativa/Index/-1">Comparativas</a><a class="pull-right" href="@Url.Content("~")Comparativa/Edit/-1">
+                                                                    +
+                                                                </a>
+                                                            </li>
+                                                            <li style="line-height: 30px;"><a href="#">...</a> </li>
+                                                            <li style="line-height: 30px;">
+                                                                <a href="@Url.Content("~")Pedido/Index/-1">Pedidos</a>
+                                                                <a class="pull-right" href="@Url.Content("~")Pedido/Edit/-1">+</a>
+                                                            </li>
+                                                           
+                                                            <li style="line-height: 30px;">
+                                                                <a href="@Url.Content("~")Recepcion/Index/-1">Recepciones</a>
+                                                                <a class="pull-right" href="@Url.Content("~")Recepcion/Edit/-1">+</a>
+                                                            </li>
+                                                            <li style="line-height: 30px;">
+                                                                <a href="@Url.Content("~")ComprobanteProveedor/Index/-1">
+                                                                    Comp prov
+                                                                </a><a class="pull-right" href="@Url.Content("~")ComprobanteProveedor/Edit/-1">
+                                                                    +
+                                                                </a>
+                                                            </li>
+                                                            <li style="line-height: 30px;">
+                                                                <a href="@Url.Content("~")ComprobanteProveedor/IndexFF/-1">
+                                                                    Fondo fijo
+                                                                </a><a class="pull-right" href="@Url.Content("~")ComprobanteProveedor/EditFF/-1">
+                                                                    +
+                                                                </a>
+                                                            </li>
+                                                            <li style="line-height: 30px;"><a href="#">...</a> </li>
+                                                            <li style="line-height: 30px;">
+                                                                <a href="@Url.Content("~")OrdenPago/Index/-1">
+                                                                    Orden de
+                                                                    pago
+                                                                </a><a class="pull-right" href="@Url.Content("~")OrdenPago/EditCC/-1"> +</a>
+                                                            </li>
+                                                            <li style="line-height: 30px;">
+                                                                <a href="@Url.Content("~/Reporte.aspx?ReportName=Resumen Cuenta Corriente Acreedores")">
+                                                                    Cta corr Acreed
+                                                                </a>
+                                                            </li>
+                                                        </ul>
+                                                        <ul class="span1"></ul>
+                                                        <ul class="unstyled span3" style="line-height: 30px;">
+                                                            @* http://stackoverflow.com/questions/13562658/twitter-bootstrap-multi-column-dropdown*@
+                                                            <li style="line-height: 30px;">
+                                                                <a href="@Url.Content("~")Cliente/Index/-1">Clientes</a><a class="pull-right" href="@Url.Content("~")Cliente/Edit/-1">
+                                                                    +
+                                                                </a>
+                                                            </li>
+                                                            <li style="line-height: 30px;"><a href="#">...</a> </li>
+                                                            <li style="line-height: 30px;"><a href="#">...</a> </li>
+                                                            <li style="line-height: 30px;"><a href="#">...</a> </li>
 
-                                                                <li style="line-height: 30px;"><a href="#">...</a> </li>
-                                                                <li style="line-height: 30px;"><a href="#">...</a> </li>
-                                                                <li style="line-height: 30px;">
-                                                                    <a href="@Url.Content("~")OrdenCompra/Index/-1">
-                                                                        O de
-                                                                        compra
-                                                                    </a><a class="pull-right" href="@Url.Content("~")OrdenCompra/Edit/-1"> +</a>
-                                                                </li>
-                                                                <li style="line-height: 30px;">
-                                                                    <a href="@Url.Content("~")Remito/Index/-1">Remitos</a><a class="pull-right" href="@Url.Content("~")Remito/Edit/-1">
-                                                                        +
-                                                                    </a>
-                                                                </li>
-                                                                <li style="line-height: 30px;">
-                                                                    <a href="@Url.Content("~")Factura/Index/-1">Facturas</a><a class="pull-right" href="@Url.Content("~")Factura/Edit/-1">
-                                                                        +
-                                                                    </a>
-                                                                </li>
-                                                                <li style="line-height: 30px;">
-                                                                    <a href="@Url.Content("~")NotaCredito/Index/-1">Notas Crédito</a><a class="pull-right" href="@Url.Content("~")NotaCredito/Edit/-1">
-                                                                        +
-                                                                    </a>
-                                                                </li>
-                                                                <li style="line-height: 30px;">
-                                                                    <a href="@Url.Content("~")NotaDebito/Index/-1">Notas Débito</a><a class="pull-right" href="@Url.Content("~")NotaDebito/Edit/-1">
-                                                                        +
-                                                                    </a>
-                                                                </li>
-                                                                <li style="line-height: 30px;">
-                                                                    <a href="@Url.Content("~")Recibo/Index/-1">Recibos</a><a class="pull-right" href="@Url.Content("~")Recibo/EditCC/-1">
-                                                                        +
-                                                                    </a>
-                                                                </li>
+                                                            <li style="line-height: 30px;"><a href="#">...</a> </li>
+                                                            <li style="line-height: 30px;"><a href="#">...</a> </li>
+                                                            <li style="line-height: 30px;">
+                                                                <a href="@Url.Content("~")OrdenCompra/Index/-1">
+                                                                    O de
+                                                                    compra
+                                                                </a><a class="pull-right" href="@Url.Content("~")OrdenCompra/Edit/-1"> +</a>
+                                                            </li>
+                                                            <li style="line-height: 30px;">
+                                                                <a href="@Url.Content("~")Remito/Index/-1">Remitos</a><a class="pull-right" href="@Url.Content("~")Remito/Edit/-1">
+                                                                    +
+                                                                </a>
+                                                            </li>
+                                                            <li style="line-height: 30px;">
+                                                                <a href="@Url.Content("~")Factura/Index/-1">Facturas</a><a class="pull-right" href="@Url.Content("~")Factura/Edit/-1">
+                                                                    +
+                                                                </a>
+                                                            </li>
+                                                            <li style="line-height: 30px;">
+                                                                <a href="@Url.Content("~")NotaCredito/Index/-1">Notas Crédito</a><a class="pull-right" href="@Url.Content("~")NotaCredito/Edit/-1">
+                                                                    +
+                                                                </a>
+                                                            </li>
+                                                            <li style="line-height: 30px;">
+                                                                <a href="@Url.Content("~")NotaDebito/Index/-1">Notas Débito</a><a class="pull-right" href="@Url.Content("~")NotaDebito/Edit/-1">
+                                                                    +
+                                                                </a>
+                                                            </li>
+                                                            <li style="line-height: 30px;">
+                                                                <a href="@Url.Content("~")Recibo/Index/-1">Recibos</a><a class="pull-right" href="@Url.Content("~")Recibo/EditCC/-1">
+                                                                    +
+                                                                </a>
+                                                            </li>
 
-                                                                <li style="line-height: 30px;">
-                                                                    <a href="@Url.Content("~/Reporte.aspx?ReportName=Resumen Cuenta Corriente Deudores")">
-                                                                        Cta Corr Deudor
-                                                                    </a>
-                                                                </li>
-                                                            </ul>
-                                                        </div>
-                                                    </li>
-                                                </ul>
+                                                            <li style="line-height: 30px;">
+                                                                <a href="@Url.Content("~/Reporte.aspx?ReportName=Resumen Cuenta Corriente Deudores")">
+                                                                    Cta Corr Deudor
+                                                                </a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </li>
+                                            </ul>
                                             }
                                         </li>
                                     </button>
@@ -1707,12 +1711,12 @@ Released   : 20120723
                             }
                         }
                         <div id="spanDelSuperbuscador" class="span3 ">
-                            <div class="span10" style="margin-top: 9px; width: 100%;">
+                            <div class="span12" style="margin-top: 9px; width: 100%; ">
                                 <div class="input-prepend input-append" style="width: 100%">
                                     @if (Roles.IsUserInRole(ViewBag.NombreUsuario, "SuperAdmin"))
                                     {
 
-                                        <input id="SuperBuscador2" type="text" class="span12" placeholder="" />
+                                        <input id="SuperBuscador2" type="text" class="span12" placeholder=""   style="margin-left: -25px;" />
                                     }
                                     @*<select id="campos " class="span4  " data-toggle="dropdown">
                                             <option>Requerimientos</option>
@@ -2518,6 +2522,31 @@ Released   : 20120723
 
 
 
+                        function mostrarPanelesDerecho() {
+
+                            pageLayout.show('east', true);
+                            pageLayout.open('east');
+
+                            $("#btnConmutarPanelDerecho").hide();
+                        }
+
+                        function ocultarPanelesDerecho() {
+
+
+                            $("#btnConmutarPanelDerecho").show();
+
+                            pageLayout.hide('east');
+                        }
+
+                        function deshabilitarPanelesDerecho() {
+
+
+                            $("#btnConmutarPanelDerecho").hide();
+
+                            pageLayout.hide('east');
+                        }
+
+
                         function conmutarPanelesDerecho() {
 
                             //pageLayout.toggle('east');
@@ -2527,19 +2556,17 @@ Released   : 20120723
                                 // http://layout.jquery-dev.net/demos/complex.html#
                                 //http://layout.jquery-dev.net/documentation.cfm#Properties_Methods
 
-                                pageLayout.show('east', true);
-                                pageLayout.open('east');
-
-                                $("#btnConmutarPanelDerecho").hide();
+                                mostrarPanelesDerecho()
                             }
                             else {
 
-                                $("#btnConmutarPanelDerecho").show();
-
-                                pageLayout.hide('east');
+                                ocultarPanelesDerecho()
 
                             }
                         }
+
+
+
 
                         function conmutarPanelesNorte() {
 
@@ -2729,7 +2756,7 @@ Released   : 20120723
 
 
 
-                                        @if (true)
+                                        @if (false)
                                         {
                                             <button type="button" class="btn btn-small"
                                                     id="btnConmutarPanelIzquierdo"
@@ -2742,7 +2769,11 @@ Released   : 20120723
                                         RefrescaAnchoGrillaDetalle(); ">
                                                 > @*Arbol*@
                                             </button>
+                                        }
 
+                                        @if (true)
+                                        {
+                                            
 
 
                                             <button type="button" class="btn btn-small clearfix"
@@ -2863,7 +2894,7 @@ Released   : 20120723
                                 &times;
                             </button>
                         }
-                        <div class="container-fluid" style="margin-left: 15px;">
+                        <div class="container-fluid" style="margin-left: 0px;">
                             <div>
                                 <div class="row-fluid ">
                                     @if ((TempData["Alerta"] ?? "").ToString().Contains("Grabado"))
