@@ -1,6 +1,8 @@
 ﻿$(function () {
     $("#loading").hide();
 
+
+
     'use strict';
 
     var $grid = "", lastSelectedId, lastSelectediCol, lastSelectediRow, lastSelectediCol2, lastSelectediRow2, inEdit, selICol, selIRow, gridCellWasClicked = false, grillaenfoco = false, dobleclic;
@@ -349,16 +351,24 @@
 
         loadComplete: function () { 
             //AgregarItemVacio(jQuery("#ListaArticulos"));
+            AgregarRenglonesEnBlanco({ "IdDetalleFactura": "0", "IdArticulo": "0", "PrecioUnitario": "0", "Articulo": "" },"#ListaArticulos");
+
         },
+
+
         pager: $('#ListaPager1'),
         rowNum: 100,
         rowList: [10, 20, 50, 100],
         sortname: 'IdDetalleFactura',
         sortorder: 'asc',
         viewrecords: true,
+
         width: 'auto', // 'auto',
         autowidth: true,
         shrinkToFit: false,
+
+
+
         height: '150px', // 'auto',
         rownumbers: true,
         multiselect: true,
@@ -373,6 +383,8 @@
         // caption: '<b>DETALLE DE ARTICULOS</b>',
         cellEdit: true,
         cellsubmit: 'clientArray'
+
+
     });
     jQuery("#ListaArticulos").jqGrid('navGrid', '#ListaPager1', { refresh: false, add: false, edit: false, del: false, search: false }, {}, {}, {}, { sopt: ["cn"], width: 700, closeOnEscape: true, closeAfterSearch: true });
     jQuery("#ListaArticulos").jqGrid('navButtonAdd', '#ListaPager1',
@@ -392,6 +404,16 @@
     jQuery("#ListaArticulos").jqGrid('gridResize', { minWidth: 350, maxWidth: 910, minHeight: 100, maxHeight: 500 });
 
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+
+
+
+
+
 
     $("#ListaDrag").jqGrid({
         url: ROOT + 'OrdenCompra/TT_DynamicGridData',
@@ -479,6 +501,9 @@
             grid = $(this);
             $("#ListaDrag td", grid[0]).css({ background: 'rgb(234, 234, 234)' });
         },
+
+
+
         pager: $('#ListaDragPager'),
         rowNum: 15,
         rowList: [10, 20, 50],
@@ -486,9 +511,11 @@
         sortorder: "desc",
         viewrecords: true,
         emptyrecords: 'No hay registros para mostrar', //,
+
         width: 'auto', // 'auto',
         autowidth: true,
         shrinkToFit: false,
+
         height: $(window).height() - ALTOLISTADO, // '100%'
         altRows: false,
         footerrow: false, //true,
@@ -497,6 +524,8 @@
         multiboxonly: true,
         multipleSearch: true
     })
+
+
     //    jQuery("#ListaDrag").jqGrid('navGrid', '#ListaDragPager', { refresh: true, add: false, edit: false, del: false }, {}, {}, {}, { sopt: ["cn"], width: 700, closeOnEscape: true, closeAfterSearch: true });
     jQuery("#ListaDrag").jqGrid('navGrid', '#ListaDragPager',
             { csv: true, refresh: true, add: false, edit: false, del: false }, {}, {}, {}, { width: 700, closeOnEscape: true, closeAfterSearch: true, multipleSearch: true, overlay: false } );
@@ -524,6 +553,12 @@
         });
 
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+
 
     $("#ListaDrag2").jqGrid({
         url: ROOT + 'Remito/TT_DynamicGridData',
@@ -605,16 +640,22 @@
             grid = $(this);
             $("#ListaDrag2 td", grid[0]).css({ background: 'rgb(234, 234, 234)' });
         },
+
+
+
         pager: $('#ListaDragPager2'),
         rowNum: 15,
         rowList: [10, 20, 50],
         sortname: 'NumeroRemito',//,NumeroOrdenCompra',
         sortorder: "desc",
+
         viewrecords: true,
         emptyrecords: 'No hay registros para mostrar', //,
+
         width: 'auto', // 'auto',
         autowidth: true,
         shrinkToFit: false,
+
         height: $(window).height() - ALTOLISTADO, // '100%'
         altRows: false,
         footerrow: false, //true,
@@ -622,7 +663,13 @@
         gridview: true,
         multiboxonly: true,
         multipleSearch: true
+
+
+
+
     })
+
+
     // jQuery("#ListaDrag2").jqGrid('navGrid', '#ListaDragPager2', { refresh: true, add: false, edit: false, del: false }, {}, {}, {}, { sopt: ["cn"], width: 700, closeOnEscape: true, closeAfterSearch: true });
     jQuery("#ListaDrag2").jqGrid('navGrid', '#ListaDragPager2',
          { csv: true, refresh: true, add: false, edit: false, del: false }, {}, {}, {}, { width: 700, closeOnEscape: true, closeAfterSearch: true, multipleSearch: true, overlay: false } );
@@ -645,6 +692,13 @@
     jQuery("#ListaDrag2").jqGrid('navButtonAdd', '#ListaDragPager2', { caption: "Filter", title: "Toggle Searching Toolbar", buttonicon: 'ui-icon-pin-s', onClickButton: function () { myGrid[0].toggleToolbar(); } });
 
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+
+
 
     $("#ListaDrag3").jqGrid({
         //url: ROOT + 'Articulo/ArticulosGridDataResumido', // '@Url.Action("ArticulosGridData", "Articulo")',
@@ -728,6 +782,9 @@
             buttonicon: 'ui-icon-pin-s',
             onClickButton: function () { myGrid[0].toggleToolbar(); }
         });
+
+
+
 
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
