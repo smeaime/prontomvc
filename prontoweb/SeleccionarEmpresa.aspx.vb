@@ -36,31 +36,33 @@ Partial Class SeleccionarEmpresa
             'Dim Usuario = New Usuario
             'Usuario = session(SESSIONPRONTO_USUARIO)
 
-            If Not Request.IsAuthenticated And Session(SESSIONPRONTO_UserId) Is Nothing Then
-                'qué pasó?
-                ErrHandler2.WriteError("Está autenticado y no hay UserId?")
-                'http://forums.asp.net/t/1260615.aspx/1
-                FormsAuthentication.SignOut()
-                Response.Redirect(FormsAuthentication.LoginUrl)
-                Return
-            End If
+            If False Then
+                If Not Request.IsAuthenticated And Session(SESSIONPRONTO_UserId) Is Nothing Then
+                    'qué pasó?
+                    ErrHandler2.WriteError("Está autenticado y no hay UserId?")
+                    'http://forums.asp.net/t/1260615.aspx/1
+                    FormsAuthentication.SignOut()
+                    Response.Redirect(FormsAuthentication.LoginUrl)
+                    Return
+                End If
 
-            If Session(SESSIONPRONTO_UserId) Is Nothing Then
-                'qué pasó?
-                ErrHandler2.WriteError("Está autenticado y no hay UserId?")
-                'http://forums.asp.net/t/1260615.aspx/1
-                FormsAuthentication.SignOut()
-                Response.Redirect(FormsAuthentication.LoginUrl)
-                Return
-            End If
+                If Session(SESSIONPRONTO_UserId) Is Nothing Then
+                    'qué pasó?
+                    ErrHandler2.WriteError("Está autenticado y no hay UserId?")
+                    'http://forums.asp.net/t/1260615.aspx/1
+                    FormsAuthentication.SignOut()
+                    Response.Redirect(FormsAuthentication.LoginUrl)
+                    Return
+                End If
 
-            If Not Request.IsAuthenticated Then
-                'qué pasó?
-                ErrHandler2.WriteError("Está autenticado y no hay UserId?")
-                'http://forums.asp.net/t/1260615.aspx/1
-                FormsAuthentication.SignOut()
-                Response.Redirect(FormsAuthentication.LoginUrl)
-                Return
+                If Not Request.IsAuthenticated Then
+                    'qué pasó?
+                    ErrHandler2.WriteError("Está autenticado y no hay UserId?")
+                    'http://forums.asp.net/t/1260615.aspx/1
+                    FormsAuthentication.SignOut()
+                    Response.Redirect(FormsAuthentication.LoginUrl)
+                    Return
+                End If
             End If
 
             ''que pasa si el usuario es Nothing? Qué se rompió? Y qué pasa si YA ESTA autenticado y solo falta el UserId,
