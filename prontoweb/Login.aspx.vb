@@ -276,7 +276,7 @@ Partial Class Login
 
         Dim t = FormsAuthentication.GetAuthCookie(user, bRecordame)
         t.Path = "\"
-        t.Domain = ".williamsentregas.com.ar"
+        t.Domain = "williamsentregas.com.ar"
 
         FormsAuthentication.SetAuthCookie(user, bRecordame, "\")
 
@@ -302,14 +302,12 @@ Partial Class Login
         Dim sConex As String
         sConex = ConexBDLmaster()
         lista = EmpresaManager.GetEmpresasPorUsuario(sConex, mu.ProviderUserKey.ToString)
-
         Dim usuario As Usuario = Nothing
         usuario = New Usuario
         usuario.UserId = mu.ProviderUserKey.ToString
         usuario.Nombre = mu.UserName
         usuario.IdEmpresa = 18
         If Debugger.IsAttached Then usuario.IdEmpresa = 52
-
         usuario.StringConnection = Encriptar(BDLMasterEmpresasManager.GetConnectionStringEmpresa(usuario.UserId, usuario.IdEmpresa, sConex, "XXXXXX"))
 
         HttpContext.Current.Session(SESSIONPRONTO_USUARIO) = usuario
@@ -330,12 +328,14 @@ Partial Class Login
         '//set cookie expiry date-time. Made it to last for next 12 hours.
         myCookie.Expires = DateTime.Now.AddHours(12)
 
-        myCookie.Domain = ".williamsentregas.com.ar"
+        myCookie.Domain = "williamsentregas.com.ar"
         myCookie.Path = "/"
         '//Most important, write the cookie to client.
         HttpContext.Current.Response.Cookies.Add(myCookie)
 
         HttpContext.Current.Response.Cookies.Add(t)
+
+
 
 
         If False Then
