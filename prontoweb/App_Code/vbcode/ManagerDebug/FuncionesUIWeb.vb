@@ -4245,9 +4245,22 @@ Public Module ProntoFuncionesUIWeb
 
         If Not (Session(SESSIONPRONTO_USUARIO) Is Nothing) Then
             stringConn = DirectCast(Session(SESSIONPRONTO_USUARIO), Usuario).StringConnection
-            If stringConn = "" Then Server.Transfer("~/Login.aspx")
+
+            If stringConn = "" Then
+                If Membership.GetUser() IsNot Nothing Then
+                    ErrHandler2.WriteError(Membership.GetUser().UserName + " esta logueado, pero lo redirijo al login porque faltan los datos de session. No deberia mejor mandarlo a SeleccionarEmpresa? Ademas, no hago el LogOut y le queda el cookie!!!")
+                    Server.Transfer("~/SeleccionarEmpresa.aspx")
+                Else
+                    Server.Transfer("~/Login.aspx")
+                End If
+            End If
         Else
-            Server.Transfer("~/Login.aspx")
+            If Membership.GetUser() IsNot Nothing Then
+                ErrHandler2.WriteError(Membership.GetUser().UserName + " esta logueado, pero lo redirijo al login porque faltan los datos de session. No deberia mejor mandarlo a SeleccionarEmpresa? Ademas, no hago el LogOut y le queda el cookie!!!")
+                Server.Transfer("~/SeleccionarEmpresa.aspx")
+            Else
+                Server.Transfer("~/Login.aspx")
+            End If
         End If
 
 
