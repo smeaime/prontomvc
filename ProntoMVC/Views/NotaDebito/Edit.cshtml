@@ -20,10 +20,12 @@
             font-weight: bold;
             background-color: #e8eef4;
         }
-        .subtotales input[readonly] {
-            background: transparent;
-            border: 0;
-        }
+
+            .subtotales input[readonly] {
+                background: transparent;
+                border: 0;
+            }
+
         .subtotales select {
             /* height : 16px; */
             min-height: 18px !important;
@@ -32,6 +34,7 @@
             margin: 0;
             font-size: 10px;
         }
+
         table td {
             padding: 0px;
             border: solid 1px;
@@ -71,12 +74,12 @@
                             @Html.RadioButtonFor(model => model.CtaCte, "NO") Interna
                         </div>
                         <div class="span1 lightblue">
-                            @Html.LabelFor(model => model.IdPuntoVenta, "Punto de venta")
+                            @Html.LabelFor(model => model.IdPuntoVenta, "Punto de venta - Numero")
                             @Html.DropDownList("IdPuntoVenta", null, "", new { @class = "span12", @style = "height: 15px;   line-height: 14px;" })
                             @Html.ValidationMessageFor(model => model.IdPuntoVenta)
                         </div>
                         <div class="span2 lightblue">
-                            @Html.LabelFor(model => model.NumeroNotaDebito, "Numero")
+                            @Html.LabelFor(model => model.NumeroNotaDebito, ".")
                             @Html.TextBoxFor(model => model.NumeroNotaDebito, new { style = "text-align: center; font-weight: bold; font-size: 18px;", @class = "span12", @readonly = "readonly" })
                             @Html.ValidationMessageFor(model => model.NumeroNotaDebito)
                         </div>
@@ -96,7 +99,7 @@
                                 });
                             </script>
                         </div>
-                
+
                         <div class="span2 lightblue">
                             @Html.LabelFor(model => model.IdObra, "Obra")
                             @Html.DropDownList("IdObra", null, "", new { @class = "span12", @style = "height: 15px;   line-height: 14px;" })
@@ -164,7 +167,7 @@
 
                     <div class="row-fluid">
                         <div class="span1 lightblue">
-                            <label for="CodigoPostal">Codigo postal</label>
+                            <label for="CodigoPostal">Cod. postal</label>
                             <input type="text" name="CodigoPostal" id="CodigoPostal" style="font-size: 15px; text-align: left;" readonly="readonly" class="span12" />
                         </div>
                         <div class="span4 lightblue">
@@ -301,58 +304,64 @@
                 <div id="pie" style="position: absolute; bottom: -26px; background: rgb(236, 236, 236); width: 100%; height: 68px; padding-left: 0; margin-right: 15px;">
                     <hr style="margin: 0; border-top-color: #D8D4D4; border-bottom: 0px solid #ffffff;  " />
                     <div class="row-fluid " style="padding: 11px 0px 0px 0px">
-                        <div class="span8 lightblue"></div>
+                        <div class="span4 lightblue"></div>
 
-                            <div class="span4 lightblue">
-                                <input type="button" id="grabar2" value="Aceptar" class="btn  btn-large btn-primary " usesubmitbehavior="false" />
-                                @if (Model.IdNotaDebito > 0)
-                                {
-                                    <input type="button" id="anular" value="Anular" class="btn  btn-large btn-primary" />
-                                    <a class="btn  btn-large" style="color: Black" href="@Url.Action("ImprimirConInteropPDF", new { @id = Model.IdNotaDebito })">
-                                        <i class="icon-print"></i>&nbsp;Imprimir
-                                    </a>
-                                }
-                                <script>
-                                    $(function () {
-                                        $("#anular").click(function () {
-                                            $("#dialog-password").dialog({
-                                                buttons: {
-                                                    'Aceptar': function () {
-                                                        //window.location.href = ROOT + 'OrdenPago/Anular/' + $("#IdOrdenPago").val();
-                                                        var idAux = $("#Aux1").val();
-                                                        $("#Anulada").val("SI");
-                                                        $("#FechaAnulacion").val(Hoy());
-                                                        $("#IdUsuarioAnulacion").val(idAux);
-                                                        $('#grabar2').click();
-                                                    },
-                                                    'Cancelar': function () {
-                                                        $(this).dialog('close');
-                                                    }
+                        <div class="span8 lightblue">
+                            @Html.ActionLink("Volver al listado", "Index", null, new { @class = "btn btn-link  pull-right" })
+
+
+                            @if (Model.IdNotaDebito > 0)
+                            {
+                                <a class="btn  btn-large  pull-right" style="color: Black" href="@Url.Action("ImprimirConInteropPDF", new { @id = Model.IdNotaDebito })">
+                                    <i class="icon-print"></i>&nbsp;Imprimir
+                                </a>
+                                <input type="button" id="anular" value="Anular" class="btn  btn-large btn-primary  pull-right" />
+                                
+                            }
+                           <input type="button" id="grabar2" value="Aceptar" class="btn  btn-large btn-primary  pull-right" usesubmitbehavior="false" />
+
+
+                            <script>
+                                $(function () {
+                                    $("#anular").click(function () {
+                                        $("#dialog-password").dialog({
+                                            buttons: {
+                                                'Aceptar': function () {
+                                                    //window.location.href = ROOT + 'OrdenPago/Anular/' + $("#IdOrdenPago").val();
+                                                    var idAux = $("#Aux1").val();
+                                                    $("#Anulada").val("SI");
+                                                    $("#FechaAnulacion").val(Hoy());
+                                                    $("#IdUsuarioAnulacion").val(idAux);
+                                                    $('#grabar2').click();
                                                 },
-                                                open: function () {
+                                                'Cancelar': function () {
+                                                    $(this).dialog('close');
                                                 }
-                                            });
-                                            $('#dialog-password').dialog('open');
-                                            $('#mySelect').prop("disabled", false);
-                                            CargarUsuariosConPermisoDeAnulacion();
+                                            },
+                                            open: function () {
+                                            }
                                         });
+                                        $('#dialog-password').dialog('open');
+                                        $('#mySelect').prop("disabled", false);
+                                        CargarUsuariosConPermisoDeAnulacion();
+                                    });
 
-                                        function CargarUsuariosConPermisoDeAnulacion() {
-                                            var combo = $("#mySelect")
-                                            combo.find("option:gt(0)").remove();
-                                            combo.find("option:first").text("Cargando...");
-                                            $.getJSON(ROOT + 'Articulo/GetStoreProc?sp=Empleados_TX_ParaAnularPorFormulario&p1=26', {
-                                            }, function (json) {
-                                                combo.find("option:first").text("");
-                                                for (var i = 0; i < json.length; i++) {
-                                                    $("<option/>").attr("value", json[i].value).text(json[i].title).appendTo(combo);
-                                                }
-                                            });
-                                        }
-                                    })
-                                </script>
-                            </div>
+                                    function CargarUsuariosConPermisoDeAnulacion() {
+                                        var combo = $("#mySelect")
+                                        combo.find("option:gt(0)").remove();
+                                        combo.find("option:first").text("Cargando...");
+                                        $.getJSON(ROOT + 'Articulo/GetStoreProc?sp=Empleados_TX_ParaAnularPorFormulario&p1=26', {
+                                        }, function (json) {
+                                            combo.find("option:first").text("");
+                                            for (var i = 0; i < json.length; i++) {
+                                                $("<option/>").attr("value", json[i].value).text(json[i].title).appendTo(combo);
+                                            }
+                                        });
+                                    }
+                                })
+                            </script>
                         </div>
+                    </div>
                 </div>
             </div>
         </form>

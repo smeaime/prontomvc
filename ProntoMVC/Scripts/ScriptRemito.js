@@ -364,7 +364,7 @@
         pgtext: "",
         pginput: false,
         rowList: "",
-        caption: '<b>DETALLE DE ARTICULOS</b>',
+        //caption: '<b>DETALLE DE ARTICULOS</b>',
         cellEdit: true,
         cellsubmit: 'clientArray'
     });
