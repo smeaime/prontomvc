@@ -60,6 +60,13 @@
             @Html.TextBoxFor(m => m.PathPlantillas, new { id = "Aviso", @class = "span6" })
 
 
+    @*<br />
+    @Html.LabelFor(model => model.BaseMantenimiento, "Base Mantenimiento (opcional)") 
+    <br />
+    @Html.TextBoxFor(m => m.BaseMantenimiento, new { id = "Aviso", @class = "span2" })*@
+
+
+
             using (Html.BeginForm("SubirPlantilla", "UserAdministration"))
             {
 
