@@ -866,6 +866,57 @@ namespace ProntoMVC.Tests
 
 
 
+        [TestMethod]
+        public void SincroYPF_40143()
+        {
+
+//        http://consultas.bdlconsultores.com.ar/AdminTest/template/desarrollo/Consulta.php?IdReclamo=40143&SinMenu=1
+//            "En el campo CUIT del proveedor debe ir el proveedor de YPF no el CUIT de YPF."
+
+//            Te adjunto ejemplo. El "cuit del proveedor" tira el de ypf y tiene que tirar:
+//* si solamente hay "titular de cp" el del titular.
+//*Si hay titular y remitente comercial.. el del "remitente comercial".
+//*Si hay titular, intermediario y remitente.. el del "remitente comercial".
+
+
+            string sErrores = "", sTitulo = "";
+            DemoProntoEntities db = null;
+
+
+
+            var q = CartaDePorteManager.CartasLINQlocalSimplificadoTipadoConCalada3(SC,
+               "", "", "", 0, 1000, CartaDePorteManager.enumCDPestado.Facturadas
+                  , "", 4333, -1,
+               -1, 4333, 4333,
+               -1, -1, -1,
+               CartaDePorteManager.FiltroANDOR.FiltroOR, "Ambas",
+               new DateTime(2016, 1, 1), new DateTime(2016, 1, 30),
+                -1, ref sTitulo, "Ambas", false, "", ref db, "", -1, -1, 0, "", "Ambas").ToList();
+
+
+            var output = SincronismosWilliamsManager.Sincronismo_YPF_ConLINQ(q, ref sErrores, "", SC);
+
+
+
+            //registrosFiltrados = q.Count
+
+            //If registrosFiltrados > 0 Then 'And sErrores = "" Then
+            //    output = ProntoFuncionesUIWeb.RebindReportViewerExcel(HFSC.Value, _
+            //                "ProntoWeb\Informes\Sincronismo YPF.rdl", _
+            //                      q.ToDataTable, ArchivoExcelDestino) 'sTitulo)
+
+            //    CambiarElNombreDeLaPrimeraHojaDeYPF(output)
+            //End If
+
+            //var sForzarNombreDescarga = "ENTREGADOR.CSV";
+            //File.Copy(output, @"C:\Users\Administrador\Desktop\" + sForzarNombreDescarga, true);
+
+
+        }
+
+
+
+
 
         [TestMethod]
         public void problema_informe_38136()
