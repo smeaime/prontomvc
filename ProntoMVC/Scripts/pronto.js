@@ -297,10 +297,12 @@ function TodaLaGrillaEnEditMode(grilla) {
 }
 
 function sacarDeEditMode2(grilla) {
+    var r, c;
+  
 
     for (r = 0; r < grilla.rows.length; c++) {
         for (c = 0; c < l; c++) {
-            jQuery('#Lista').jqGrid('saveCell', r, c);
+            grilla.jqGrid('saveCell', r, c);
         }
     }
 
