@@ -2,6 +2,8 @@
 @{
     ViewBag.Title = "Pedido " + ((Model.IdPedido <= 0) ? "Nuevo" : Model.NumeroPedido.NullSafeToString()); ;
 }
+
+
 @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "formid" }))
 {
 

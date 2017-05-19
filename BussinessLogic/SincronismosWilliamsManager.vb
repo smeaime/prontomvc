@@ -5660,12 +5660,30 @@ Namespace Pronto.ERP.Bll
                 '·         Columnas Patente Camión, Patente Acoplado: no deben existir espacios en blanco entre las letras y números
 
 
+
+
+
+
+
+
                 'el titulardesc lo uso en la columna de "cuit de proveedor", y la segunda columna es el "cuit titular
+                '  http://consultas.bdlconsultores.com.ar/AdminTest/template/desarrollo/Consulta.php?IdReclamo=40143&SinMenu=1
+                '//"En el campo CUIT del proveedor debe ir el proveedor de YPF no el CUIT de YPF."
+                '//Te adjunto ejemplo. El "cuit del proveedor" tira el de ypf y tiene que tirar:
+                '//* si solamente hay "titular de cp" el del titular.
+                '//*Si hay titular y remitente comercial.. el del "remitente comercial".
+                '//*Si hay titular, intermediario y remitente.. el del "remitente comercial".
 
                 cdp.TitularDesc = cdp.TitularCUIT
                 If cdp.RComercialCUIT <> cuitYPF And cdp.RComercialCUIT <> "" Then cdp.TitularDesc = cdp.RComercialCUIT
                 If cdp.IntermediarioCUIT <> cuitYPF And cdp.IntermediarioCUIT <> "" Then cdp.TitularDesc = cdp.IntermediarioCUIT
                 If cdp.Producto = "SOJA" Then cdp.TitularDesc = cuitYPF
+
+
+
+
+
+
 
 
 
