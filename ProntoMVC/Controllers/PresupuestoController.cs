@@ -380,29 +380,34 @@ namespace ProntoMVC.Controllers
                 return View(presupuesto);
             }
         }
-        [HttpPost]
-        public virtual ActionResult Edit(Presupuesto presupuesto)
-        {
 
-            if (!oStaticMembershipService.UsuarioTieneElRol(oStaticMembershipService.GetUser().UserName, "SuperAdmin") &&
-               !oStaticMembershipService.UsuarioTieneElRol(oStaticMembershipService.GetUser().UserName, "Administrador")
-               ) throw new Exception("No tenés permisos");
 
-            if (ModelState.IsValid)
-            {
-                db.Entry(presupuesto).State = System.Data.Entity.EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            ViewBag.IdCondicionCompra = new SelectList(db.Condiciones_Compras, "IdCondicionCompra", "Descripcion", presupuesto.IdCondicionCompra);
-            ViewBag.IdMoneda = new SelectList(db.Monedas, "IdMoneda", "Nombre", presupuesto.IdMoneda);
-            ViewBag.IdPlazoEntrega = new SelectList(db.PlazosEntregas, "IdPlazoEntrega", "Descripcion", presupuesto.IdPlazoEntrega);
-            ViewBag.RazonSocial = presupuesto.Proveedor.RazonSocial;
-            ViewBag.IdComprador = new SelectList(db.Empleados, "IdEmpleado", "Nombre", presupuesto.IdComprador);
-            ViewBag.Aprobo = new SelectList(db.Empleados, "IdEmpleado", "Nombre", presupuesto.Aprobo);
-            ViewBag.Proveedor = db.Proveedores.Find(presupuesto.IdProveedor).RazonSocial;
-            return View(presupuesto);
-        }
+
+
+
+        //[HttpPost]
+        //public virtual ActionResult Edit(Presupuesto presupuesto)
+        //{
+
+        //    if (!oStaticMembershipService.UsuarioTieneElRol(oStaticMembershipService.GetUser().UserName, "SuperAdmin") &&
+        //       !oStaticMembershipService.UsuarioTieneElRol(oStaticMembershipService.GetUser().UserName, "Administrador")
+        //       ) throw new Exception("No tenés permisos");
+
+        //    if (ModelState.IsValid)
+        //    {
+        //        db.Entry(presupuesto).State = System.Data.Entity.EntityState.Modified;
+        //        db.SaveChanges();
+        //        return RedirectToAction("Index");
+        //    }
+        //    ViewBag.IdCondicionCompra = new SelectList(db.Condiciones_Compras, "IdCondicionCompra", "Descripcion", presupuesto.IdCondicionCompra);
+        //    ViewBag.IdMoneda = new SelectList(db.Monedas, "IdMoneda", "Nombre", presupuesto.IdMoneda);
+        //    ViewBag.IdPlazoEntrega = new SelectList(db.PlazosEntregas, "IdPlazoEntrega", "Descripcion", presupuesto.IdPlazoEntrega);
+        //    ViewBag.RazonSocial = presupuesto.Proveedor.RazonSocial;
+        //    ViewBag.IdComprador = new SelectList(db.Empleados, "IdEmpleado", "Nombre", presupuesto.IdComprador);
+        //    ViewBag.Aprobo = new SelectList(db.Empleados, "IdEmpleado", "Nombre", presupuesto.Aprobo);
+        //    ViewBag.Proveedor = db.Proveedores.Find(presupuesto.IdProveedor).RazonSocial;
+        //    return View(presupuesto);
+        //}
 
         public virtual ActionResult Delete(int id)
         {

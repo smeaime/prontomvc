@@ -3822,19 +3822,22 @@ Formato localidad-provincia	destination	x
             binding.Security.Message.ClientCredentialType = BasicHttpMessageCredentialType.UserName;
             binding.Security.Message.AlgorithmSuite = System.ServiceModel.Security.SecurityAlgorithmSuite.Default;
 
+            
+            
+            
+            
             //'Define the endpoint address'
-            var endpointStr = @"https://oasis-pi-nonprod.syngenta.com/dev/XISOAPAdapter/MessageServlet?senderParty=&senderService=Srv_BIT_BarterService&receiverParty=&receiverService=&interface=LoadDeclarationSoap_send_out_asy&interfaceNamespace=urn:broker:o2c:s:global:delivery:loaddeclaration:100";
+            //var endpointStr = @"https://oasis-pi-nonprod.syngenta.com/dev/XISOAPAdapter/MessageServlet?senderParty=&senderService=Srv_BIT_BarterService&receiverParty=&receiverService=&interface=LoadDeclarationSoap_send_out_asy&interfaceNamespace=urn:broker:o2c:s:global:delivery:loaddeclaration:100";
+            //ser.ClientCredentials.UserName.UserName = "BROKERDEV";
+            //ser.ClientCredentials.UserName.Password = "Welcome@1";
+
+            var endpointStr = @"https://oasis-pi-nonprod.syngenta.com/uat/XISOAPAdapter/MessageServlet?senderParty=&senderService=Srv_BIT_BarterService&receiverParty=&receiverService=&interface=LoadDeclarationSoap_send_out_asy&interfaceNamespace=urn:broker:o2c:s:global:delivery:loaddeclaration:100";
             var endpoint = new EndpointAddress(endpointStr);
-            //'Instantiate the SOAP client using the binding and endpoint'
-            //'that were defined above'
-
-
-            //var client = new MyServicesSoapClient(binding, endpoint);
-
-
             var ser = new InterfazFlexicapture.ServiceReference1.LoadDeclarationSoap_send_out_asyClient(binding, endpoint);
-            ser.ClientCredentials.UserName.UserName = "BROKERDEV";
+            ser.ClientCredentials.UserName.UserName = "BROKERUAT";
             ser.ClientCredentials.UserName.Password = "Welcome@1";
+
+
 
             try
             {
