@@ -5676,8 +5676,8 @@ Namespace Pronto.ERP.Bll
 
                 cdp.TitularDesc = cdp.TitularCUIT
                 If cdp.RComercialCUIT <> cuitYPF And cdp.RComercialCUIT <> "" Then cdp.TitularDesc = cdp.RComercialCUIT
-                If cdp.IntermediarioCUIT <> cuitYPF And cdp.IntermediarioCUIT <> "" Then cdp.TitularDesc = cdp.IntermediarioCUIT
-                If cdp.Producto = "SOJA" Then cdp.TitularDesc = cuitYPF
+                If cdp.IntermediarioCUIT <> cuitYPF And cdp.IntermediarioCUIT <> "" Then cdp.TitularDesc = cdp.RComercialCUIT 'cdp.IntermediarioCUIT
+                'If cdp.Producto = "SOJA" Then cdp.TitularDesc = cuitYPF
 
 
 

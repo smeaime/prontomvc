@@ -206,7 +206,7 @@
         pgtext: "",
         pginput: false,
         rowList: "",
-        caption: '<b>DETALLE DE CONCEPTOS</b>',
+        //caption: '<b>DETALLE DE CONCEPTOS</b>',
         cellEdit: true,
         cellsubmit: 'clientArray'
     });
