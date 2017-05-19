@@ -33,8 +33,8 @@
                 data: JSON.stringify(d),
 
                 success: function (data) {
-                    alert(data.d);
-                    // createCookie(".ASPXAUTH", data.d, 1);
+                    //alert(data.d);
+                    createCookie(".ASPXAUTH", data.d, 1);
                     window.location.href = "http://prontotesting.williamsentregas.com.ar/ProntoWeb/CartasDePortes.aspx?tipo=Todas";
                     //                                window.location.href ="http://localhost:58911/ProntoWeb/CartasDePortes.aspx?tipo=Todas";
                 }
@@ -50,7 +50,7 @@
                 date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
                 expires = "; expires=" + date.toUTCString();
             }
-            document.cookie = name + "=" + value + expires + "; path=/";
+            document.cookie = name + "=" + value + expires + "; path=/;domain=williamsentregas.com.ar";
         }
 
 
