@@ -261,7 +261,15 @@ Namespace Pronto.ERP.Bll
                 Case "LOS GROBO", "LOS GROBO [ALGORITMO]"
                     txtTitular.Text = "LOS GROBO  AGROPECUARIA S.A."
                     txtCorredor.Text = ""
+
+
+                Case "LEIVA"
+
+                    txtCorredor.Text = "LEIVA HNOS."
+
+
                 Case "NIDERA"
+
                     txtTitular.Text = ""
                     txtIntermediario.Text = ""
                     txtCorredor.Text = ""
@@ -759,6 +767,48 @@ Namespace Pronto.ERP.Bll
                             sErroresRef = sErrores
 
                             registrosFiltrados = dt.Rows.Count
+
+
+
+
+
+                        Case "LEIVA"
+                            Dim s = "(ISNULL(FechaDescarga, '1/1/1753') BETWEEN '" & FechaANSI(sDesde) & _
+                                         "'     AND   '" & FechaANSI(sHasta) & "' )"
+                            Dim dt = EntidadManager.ExecDinamico(SC, strSQLsincronismo() & " WHERE " & s)
+                            'txtTitular.Text = "LOS GROBO  AGROPECUARIA S.A."
+                            'dt = DataTableWHERE(dt, "Titular='LOS GROBO  AGROPECUARIA S.A.'") '30-60445647-5
+                            'TODO: cnflicto por el where a puntoventa?
+                            'Log Entry : 
+                            '08/10/2012 18:34:28
+                            'Error in: https://prontoweb.williamsentregas.com.ar/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=2. Error 'Message:Generando sincro para Los Grobo
+                            '__________________________'''
+                            '
+                            'Log Entry : 
+                            '08/10/2012 18:34:31
+                            'Error in: https://prontoweb.williamsentregas.com.ar/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=2. Error 'Message:Error en DataTableWHERECannot perform '=' operation on System.String and System.Int32.1=1  AND (1=0              OR 'CuentaOrden2=2871             OR  Entregador=3749  )               AND Destino=14 AND NOT (Vendedor IS NULL OR Corredor IS NULL 'OR Entregador IS NULL OR IdArticulo IS NULL) AND ISNULL(NetoProc,0)>0 AND ISNULL(Anulada,'NO')<>'SI'    AND isnull(FechaDescarga, 'FechaArribo) >= #2012/08/01#     AND isnull(FechaDescarga, FechaArribo) <= #2012/08/31#   AND ISNULL(Exporta,'NO')='NO'  AND '(PuntoVenta=1)
+                            '__________________________'
+                            '
+                            'Log Entry : 
+                            '08/10/2012 18:34:31
+                            'Error in: https://prontoweb.williamsentregas.com.ar/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=2. Error 'Message:System.Data.EvaluateException
+
+                            'estoy usando "destino=16" como filtro, pero strSQLsincronismo me devuelve una cadena ahi...
+                            Try
+                                dt = DataTableWHERE(dt, sWHERE)
+                            Catch ex As Exception
+                                ErrHandler2.WriteAndRaiseError("Error al filtrar destino")
+                            End Try
+
+                            FiltrarCopias(dt)
+                            'dt = ProntoFuncionesGenerales.DataTableWHERE(dt, generarWHERE())
+                            Dim sErrores As String
+                            output = Sincronismo_Leiva(dt, sErrores, "", SC)
+
+                            sErroresRef = sErrores
+
+                            registrosFiltrados = dt.Rows.Count
+
 
 
 
@@ -5132,6 +5182,273 @@ Namespace Pronto.ERP.Bll
                 'sb &= "&" & JustificadoDerecha(IIf(iisNull(dr(""), "") = "CO", "Si", "No").ToString, 2)
                 sb &= "&" & IIf(iisNull(dr("CalidadDe"), 0) = 25, "Si", "No") '51
                 
+                'Dim subvagon = iisNull(dr("SubNumeroVagon"), "0")
+                'If subvagon = "0" Then subvagon = ""
+                'sb &= "&" & JustificadoDerecha(subvagon.ToString, 30) '52
+
+
+                'sb &= "&" & dr("DestinoCUIT").ToString.Replace("-", "").PadLeft(11)
+                'sb &= "&" & JustificadoDerecha("Si", 2)
+
+                'sb &= "&" & JustificadoDerecha("0", 5)
+                'sb &= "&" & JustificadoDerecha("0", 4)
+                'sb &= "&" & JustificadoDerecha("0", 8)
+                'sb &= "&" & JustificadoDerecha("Si", 2)
+                'sb &= "&" & JustificadoDerecha("A", 1)
+                'sb &= "&" & JustificadoDerecha("99999999", 8)
+
+
+
+
+
+
+
+
+
+                sb = sb.Replace(".", ",") 'solucion cabeza por los decimales
+                PrintLine(nF, sb)
+            Next
+
+
+
+            FileClose(nF)
+
+
+            ' sErrores = "Procedencias sin código LosGrobo:<br/> " & sErroresProcedencia & "<br/>Destinos sin código LosGrobo: <br/>" & sErroresDestinos
+            sErrores &= sErroresOtros
+
+            If True Then
+                'If sErroresProcedencia <> "" Or sErroresDestinos <> "" Or 
+                If sErroresOtros <> "" Then vFileName = vFileName + "" Else sErrores = "" 'si hay errores, no devuelvo el archivo así no hay problema del updatepanel con el response.write
+            End If
+
+            Return vFileName
+            'Return TextToExcel(vFileName, titulo)
+        End Function
+
+
+
+        Public Shared Function Sincronismo_Leiva(ByVal pDataTable As DataTable, ByRef sErrores As String, ByVal titulo As String, SC As String) As String
+
+
+            'Los de LosGrobo y TomasHnos, creo que usan el esquema de AlgoritmoSoftHouse. Algún otro lo hace?
+            'Los de LosGrobo y TomasHnos, creo que usan el esquema de AlgoritmoSoftHouse. Algún otro lo hace?
+            'Los de LosGrobo y TomasHnos, creo que usan el esquema de AlgoritmoSoftHouse. Algún otro lo hace?
+            'Los de LosGrobo y TomasHnos, creo que usan el esquema de AlgoritmoSoftHouse. Algún otro lo hace?
+            'Los de LosGrobo y TomasHnos, creo que usan el esquema de AlgoritmoSoftHouse. Algún otro lo hace?
+            'Los de LosGrobo y TomasHnos, creo que usan el esquema de AlgoritmoSoftHouse. Algún otro lo hace?
+
+            'Dim codigoBahiaBlanca As String
+            'Using db As New LinqCartasPorteDataContext(Encriptar(SC))
+            '    codigoBahiaBlanca = (From x In db.WilliamsDestinos Where x.Descripcion = "Bahia Blanca" Select x.CodigoLosGrobo).FirstOrDefault
+            '    If codigoBahiaBlanca = "" Then Throw New Exception("Falta asignar código al destino 'Bahia Blanca'")
+            'End Using
+            'Dim l As String = iisNull(ParametroManager.TraerValorParametro2(SC, "Williams_SincroGrobo_BahiaBlancaGrupo"), "")
+            ''la dichosa tabla Parametros no tiene los campos de valor muy largos
+            'If l = "" Or True Then
+            '    l = "CANGREJALES;LDC - PUERTO GALVAN;CARGILL BAHIA BLANCA;TERMINAL BAHIA BLANCA SA;ACTIAR SRL;PUERTO GALVAN. O.M.H.S.A"  '"LDC - PUERTO GALVAN"
+            '    ParametroManager.GuardarValorParametro2(SC, "Williams_SincroGrobo_BahiaBlancaGrupo", l)
+            'End If
+            'Dim bahiablanca = Split(l, ";").ToList
+
+
+
+
+
+            Dim sErroresProcedencia, sErroresDestinos As String
+
+            Dim sErroresOtros As String
+
+            'Dim vFileName As String = Path.GetTempFileName() & ".txt"
+            Dim vFileName As String = Path.GetTempPath & "SincroLeiva " & Now.ToString("ddMMMyyyy_HHmmss") & ".csv" 'http://stackoverflow.com/questions/581570/how-can-i-create-a-temp-file-with-a-specific-extension-with-net
+            'Dim vFileName As String = Path.GetTempPath & "SincroLosGrobo.txt" 'http://stackoverflow.com/questions/581570/how-can-i-create-a-temp-file-with-a-specific-extension-with-net
+
+            'Dim vFileName As String = "c:\archivo.txt"
+            Dim nF = FreeFile()
+
+            FileOpen(nF, vFileName, OpenMode.Output)
+            Dim sb As String = ""
+            Dim dc As DataColumn
+            For Each dc In pDataTable.Columns
+                sb &= dc.Caption & Microsoft.VisualBasic.ControlChars.Tab
+            Next
+            'PrintLine(nF, sb) 'encabezado
+            Dim i As Integer = 0
+            Dim dr As DataRow
+            For Each dr In pDataTable.Rows
+                i = 0 : sb = ""
+
+                '                                                           Descripción	Tipo de Dato	Longitud        Observaciones()
+
+                'Agregar un control para que no salgan cartas de porte con titulares y destinatarios sin cuit
+                If dr("TitularCUIT").ToString = "" Then
+                    sErroresOtros &= "<br/> Cliente " & dr("Titular").ToString & " sin CUIT. Carta " & dr("C.Porte").ToString
+                End If
+
+                If dr("DestinatarioCUIT").ToString = "" Then
+                    sErroresOtros &= "<br/> Cliente " & dr("Destinatario").ToString & " sin CUIT. Carta " & dr("C.Porte").ToString
+                End If
+
+
+                Dim cero = 0
+                sb &= "30707386076"                                           '1 - CUIT Williams (Entregador	Numérico	11	Código de SoftCereal ó CUIT del Entregador.
+                sb &= "&" & dr("TitularCUIT").ToString.Replace("-", "").PadLeft(11)                        '2 - Productor	Numérico	11	Código de SoftCereal ó CUIT del Productor.
+
+                ForzarPrefijo5(dr("C.Porte"))
+                sb &= "&" & Left(dr("C.Porte").ToString, IIf(Len(dr("C.Porte").ToString) > 8, Len(dr("C.Porte").ToString) - 8, 0)).PadLeft(4, "0")
+
+                sb &= "&" & Right(dr("C.Porte").ToString, 8).PadLeft(8, "0")                      '4 - Número Carta de Porte	Numérico	8	Siguientes 8 posiciones del número de CP
+                sb &= "&" & cero.ToString.PadLeft(10)                         '5 -Sucursal Ticket Entrada	Numérico	10	Se completa con Cero si no esta.
+                sb &= "&" & cero.ToString.PadLeft(10)                         '6 - Número Ticket Entrada	Numérico	10	Se completa con Cero si no esta.)
+                sb &= "&" & cero.ToString.PadLeft(10)                         '7 - Sucursal Ticket Salida	Numérico	10	Se completa con Cero si no esta.
+                sb &= "&" & cero.ToString.PadLeft(10)                         '8 - Número Ticket Salida	Numérico	10	Se completa con Cero si no esta.
+                sb &= "&" & dr("R. ComercialCUIT").ToString.Replace("-", "").PadLeft(11)                          '9 - Remitente	Numérico	11	Código de SoftCereal ó CUIT del Remitente. Por defecto se toma al Productor como Remitente.
+                sb &= "&" & Left(dr("CEE").ToString, 14).PadLeft(14)                         '10 - Número de CAU	Numérico	14	Se completa con valor defecto informado a la Oncca (99999999999999) o Ceros. (1) Código de Autorización de Uso (C.A.U.) 
+
+
+                Dim stringFechaVencimiento As String
+                'If iisValidSqlDate(dr("Vencim.CP")) Then
+                stringFechaVencimiento = FechaANSI(iisValidSqlDate(dr("Vencim.CP"))) '11 - Fecha Vencimiento CAU	Numérico	8	Se completa con Cero si no esta. Formato AAAAMMDD (1)
+                'Else
+                'stringFechaVencimiento = Space(8)
+                'End If
+                sb &= "&" & IIf(stringFechaVencimiento = "00010101", Space(8), stringFechaVencimiento)
+
+
+                sb &= "&" & dr("CUIT Transp.").ToString.Replace("-", "").PadLeft(11)           '12 - Código Empresa de Transporte	Numérico	11	Código de SoftCereal ó CUIT de la E.T. (2)
+                sb &= "&" & Left(dr("Trasportista").ToString, 30).PadLeft(30).Replace("&", " ")                          '13 - Nombre Empresa de Transporte	Alfa	30	Razón Social del Transportista.
+                sb &= "&" & dr("CUIT chofer").ToString.Replace("-", "").PadLeft(11)                         '14 - CUIT Empresa de Transporte	Alfa 	11	CUIT del Transportista
+
+
+                sb &= "&" & IIf(dr("LiquidaViaje").ToString = "SI", "SI", "NO")                         '15 - Liquida Viaje	Alfa	2	Acepta los valores Sí/No
+                sb &= "&" & IIf(dr("CobraAcarreo").ToString = "SI", "SI", "NO")                        '16 - Cobra Acarreo	Alfa	2	Acepta los valores Sí/No
+
+
+                sb &= "&" & IIf(iisNull(dr("Tarifa"), 0) = 0, 0, iisNull(dr("Tarifa"), 0)).ToString.PadLeft(10)                         '17 - Tarifa de Flete	Numérico	10	Hasta 9 posiciones para parte entera y 4 para decimales. Se completa con Cero si  no esta.
+                sb &= "&" & Int(dr("Kg.Bruto Desc.")).ToString.PadLeft(10)                         '18 - Kilos Brutos	Numérico	10	Se completa con el Peso Bruto registrado en la Balanza. Valor entero. Cero por defecto.
+                sb &= "&" & Int(dr("Kg.Tara Desc.")).ToString.PadLeft(10)                         '19 - Kilos Tara	Numérico	10	Se completa con la Tara registrada en la Balanza. Valor entero. Cero por defecto.
+                sb &= "&" & Int(dr("Kg.Neto Desc.")).ToString.PadLeft(10)                         '20 - Kilos Descargados	Numérico	10	Se completa con Peso Bruto – Tara. Valor entero. Cero por defecto.
+                sb &= "&" & FechaANSI(iisValidSqlDate(dr("Desc.")))     '21 - Fecha Descarga	Numérico	8	Se completa con la fecha de Descarga – Formato AAAAMMDD
+
+
+                sb &= "&" & DecimalToString(dr("H.%")).PadLeft(5)                         '22 -Porcentaje Humedad	Numérico	5	Hasta 7 posiciones para parte entera y 4 para decimales. Cero por defecto.
+                sb &= "&" & Int(iisNull(dr("Mer.Kg."), 0)).ToString.PadLeft(10)                         '23 -Kilos Merma Humedad	Alfa	10	Kilos de Merma registrados por Secada. Valor entero. Cero por defecto.
+                sb &= "&" & cero.ToString.PadLeft(5)                         '24 -Porcentaje Merma Zarandeo	Numérico	5	Hasta 7 posiciones para parte entera y 4 para decimales. Cero por defecto.
+                sb &= "&" & cero.ToString.PadLeft(5)                         '25 -Porcentaje Merma Volátil	Numérico	5	Hasta 7 posiciones para parte entera y 4 para decimales. Cero por defecto.
+
+                sb &= "&" & cero.ToString.PadLeft(10)            '26 -Kilos Merma Zarandeo	Numérico	10	Kilos de Merma registrados por Zaranda. Valor entero. Cero por defecto.
+                sb &= "&" & cero.ToString.PadLeft(10)                        '27 -Kilos Merma Volátil	Numérico	10	Kilos de Merma registrados por Manipuleo. Valor entero. Cero por defecto.
+                sb &= "&" & Int(iisNull(dr("Otras"), 0)).ToString.PadLeft(10)                         '28 -Kilos Servicio	Numérico	10	Valor entero. Se completa con Cero por defecto.
+                sb &= "&" & Int(dr("Kg.Netos")).ToString.PadLeft(10)                      '29 -Kilos Netos	Numérico	10	Bruto – Tara – Mermas. Valor entero. Se completa con Cero por defecto.
+
+                sb &= "&" & Left(dr("Contrato"), 14).ToString.PadLeft(14)                           '30 -Número de Contrato de Compra	Numérico	14	Se completa con Cero por defecto.
+
+                sb &= "&" & cero.ToString.PadLeft(14)                          '31 -Número de Contrato de Venta	Numérico	14	Se completa con Cero por defecto.
+
+
+                'sb &= "& " & Left(dr("LocalidadProcedenciaCodigoLosGrobo").ToString, 5).PadLeft(5)                         '32 -Código Localidad ONCCA	Numérico	5	Se obtiene en base a la procedencia indicada en la Descarga.
+                sb &= "&" & Left(iisNull(dr("CodigoEstablecimientoProcedencia"), "").ToString, 6).PadLeft(6)
+
+
+                sb &= "&" & Int(dr("Km")).ToString.PadLeft(10)                        '33 -Kilómetros	Numérico	10	Valor entero. Se completa con Cero por defecto.
+                sb &= "&" & dr("EspecieONCAA").ToString.PadLeft(4, " ")                         '34 -Especie  	Numérico	3	SOJA/MAIZ/TRIG.(3)
+                sb &= "&" & Right(dr("Cosecha"), 5).Replace("/", "").PadLeft(4)                         '35 –Cosecha	Numérico	4	Se completa con Formato NNNN Por ej 0607 para 2006/2007. (3)
+
+
+
+                'http://consultas.bdlconsultores.com.ar/AdminTest/template/desarrollo/Consulta.php?IdReclamo=37840&SinMenu=1
+                'Si figura algún corredor en la carga ( ejemplo Maroun), que el sincronismo siempre tire como corredor: DIRECTO .
+                'sb &= "&" & IIf(dr("CorredorCUIT").ToString.Replace("-", "") = "88000000122", "0", dr("CorredorCUIT")).ToString.Replace("-", "").PadLeft(11)                        '36 - Codigo Corredor	Numérico	11	Se completa con el código  de SoftCereal ó CUIT del Corredor o 0 Si no existe el Dato.
+                sb &= "&" & IIf(dr("CorredorCUIT").ToString.Replace("-", "") = "", "0", "88-00000012-2").ToString.Replace("-", "").PadLeft(11)
+
+
+                sb &= "&" & dr("DestinatarioCUIT").ToString.Replace("-", "").PadLeft(11)                        '37 -Codigo Comprador/Vendedor 	Numérico	11	Se completa con el Código de SoftCereal ó CUIT de Comprador del Contrato de Venta al que se aplicará la Carta de Porte o 0 Si no existe el Dato. (4)
+
+
+
+
+
+                'http://bdlconsultores.dyndns.org/Consultas/Admin/VerConsultas1.php?recordid=11337
+
+                'If bahiablanca.Contains(dr("DestinoDesc").ToString.ToUpper) Then
+                '    dr("LocalidadDestinoCodigoLosGrobo") = codigoBahiaBlanca ' codigo "Bahia Blanca"
+                'End If
+
+                sb &= "&" & LeftMasPadLeft(dr("LocalidadDestinoCodigoLosGrobo").ToString, 5)                         '38 -Localidad ONCCA Destino	Numérico	5	Se completa con la Localidad ONCCA asociada al Puerto (Destino)
+                sb &= "&" & LeftMasPadLeft(dr("LocalidadProcedenciaCodigoLosGrobo").ToString, 5)                       '39 –Localidad ONCCA Procedencia 	Numérico	5	Se completa con la Localidad ONCCA asociada al Campo (Procedencia)
+
+
+
+                'If dr("LocalidadProcedenciaCodigoONCAA").ToString = "" And InStr(sErroresProcedencia, dr("Procedcia.").ToString) = 0 Then
+                If dr("LocalidadProcedenciaCodigoLosGrobo").ToString = "" And InStr(sErroresProcedencia, dr("Procedcia.").ToString) = 0 Then
+                    'si no tiene codigo ni está ya en sErrores, lo meto
+
+                    ErrHandler2.WriteError("La localidad " & dr("Procedcia.").ToString & " es usada en el sincro de LosGrobo y no tiene codigo LosGrobo")
+
+                    sErroresProcedencia &= "<a href=""Localidades.aspx?Id=" & dr("IdLocalidad") & """ target=""_blank"">" & dr("Procedcia.") & "</a>; "
+                End If
+
+                'If dr("LocalidadDestinoCodigoONCAA").ToString = "" And InStr(sErroresDestinos, dr("DestinoDesc").ToString) = 0 Then
+                If dr("LocalidadDestinoCodigoLosGrobo").ToString = "" And InStr(sErroresDestinos, dr("DestinoDesc").ToString) = 0 Then
+                    'si no tiene codigo ni está ya en sErrores, lo meto
+
+                    ErrHandler2.WriteError("La localidad " & dr("DestinoDesc").ToString & " es usada en el sincro de LosGrobo y no tiene codigo LosGrobo")
+
+                    sErroresDestinos &= "<a href=""CDPDestinos.aspx?Id=" & dr("IdWilliamsDestino") & """ target=""_blank"">" & dr("DestinoDesc") & "</a>; "
+                End If
+
+
+
+
+
+
+                sb &= "&" & dr("SufijoCartaDePorte").ToString.PadLeft(4)                         '40 – Sufijo Carta de Porte	Numérico	4	Sufijo de la carta de Porte.
+                sb &= "&" & dr("DestinatarioCUIT").ToString.Replace("-", "").PadLeft(11)                          '41 – Destinatario CP	Numérico	11	Se completa con el Código de SoftCereal ó CUIT del destinatario de la Carta de Porte o 0 Si no existe el Dato.
+                sb &= "&" & dr("CTG").ToString.PadLeft(8)                         '42 – Numero de CTG	Numérico	8	Número de CTG presente en la CP.
+                sb &= "&" & Left(dr("Cal.-Observaciones").ToString.Replace(vbCrLf, "").Replace(vbLf, "").Replace(vbCr, "").Replace("&", " "), 125).PadRight(125)                      '43 – Comentario	Alfa	125	Campo que permita indicar algún mensaje de datos faltantes.
+
+                sb &= "&" & cero.ToString.PadLeft(6) '44 – Código de Establecimiento  Destino	Numérico	6	Código de Establecimiento Destino
+
+                sb &= "&" & iisNull(dr("CodigoEstablecimientoProcedencia"), "").ToString.PadLeft(6)   '45 - Código de Establecimiento  Procedencia	Numérico	6	Código de Establecimiento Procedencia
+                sb &= "&" & iisNull(dr("IdTipoMovimiento"), "").ToString.PadLeft(4) '46 – Código de Tipo de Movimiento	Numérico	4	Código de Tipo de Movimiento
+                '                                                       1.	Egresos contratos de Venta
+                '                                                       2.	Egreso Directo a Destino Productor
+                '                                                       3.	Directo Destino contrato de Compra
+                '                                                       4.	Ingreso Entregado Productor
+                '                                                       5.	Ingreso Contrato de Compra
+                '                                                       6.	Reingreso de Mercadería
+                '                                                       7.	Transferencia desde otra Planta
+
+
+
+
+
+
+
+                sb &= "&" & JustificadoDerecha(iisNull(dr("Chofer"), "").ToString, 20) '47 – Código de Chofer en Softcereal	Alfa	20 	Código del chofer en el sistema Softcereal
+                sb &= "&" & JustificadoDerecha(iisNull(dr("Pat. Chasis"), "").ToString, 10) '48 – Patente del Camión	Alfa	10 	Matrícula del camión
+                sb &= "&" & JustificadoDerecha(iisNull(dr("Pat. Acoplado"), "").ToString, 10) '49 – Patente del Acoplado	Alfa	10 	Matrícula del acoplado
+                sb &= "&" & JustificadoDerecha(iisNull(dr("CodigoEstablecimientoProcedencia"), "").ToString, 5) '50 – Código de planta	Numérico	5 	Código de la planta. 
+
+
+
+
+                'sacado de Beraza. 
+
+                '51 – Calidad Conforme	Alfa	2	Acepta los valores Sí/No
+                '52-Vagon	Alfa	30	Campo a utilizar para informar el número de vagón en caso de cartas de porte ferroviarias. se debe informar un renglón del txt por cada vagón.
+                '53 – Entidad destino	Numérico	11	Código de SoftCereal o CUIT del Productor.
+                '54- Guía Propia	Alfa	2	Acepta valores Sí / No. Indicar Sí, si la guía es del Acopio (Lartirigoyen) Indicar No, si la guía corresponde a otra entidad.
+                '55 – Localidad ONCCA Municipio Guía	Numérico	5	Código ONCCA del municipio de la guía. 0 si no existe el datoO 9999 si no se pudo determinar el municipio
+                '56 – Prefijo Guía	Numérico	4	Prefijo Guía cerealera, 0 si no existe el dato
+                '57 – Numero Guia	Numérico	8	Numero Guía Cerealera, 0 si no existe el dato 
+                '58 – Oblea Propia	Alfa	2	Acepta valores Sí / No. Indicar Sí, si la Oblea es del Acopio (Lartirigoyen) Indicar No, si la Oblea corresponde a otra entidad.
+                '59 – Tipo de Oblea	Alfa	1	Tipo de oblea  acepta los valores A, B, C, D, X o ZO Blanco si no se tiene el dato
+                '60 – Número de Oblea	Numérico	8	Numero Guía Cerealera, 0 si no existe el dato o 9999999 si no se tiene el numero
+
+                'sb &= "&" & JustificadoDerecha(IIf(iisNull(dr(""), "") = "CO", "Si", "No").ToString, 2)
+                sb &= "&" & IIf(iisNull(dr("CalidadDe"), 0) = 25, "Si", "No") '51
+
                 'Dim subvagon = iisNull(dr("SubNumeroVagon"), "0")
                 'If subvagon = "0" Then subvagon = ""
                 'sb &= "&" & JustificadoDerecha(subvagon.ToString, 30) '52
@@ -24477,7 +24794,11 @@ Namespace Pronto.ERP.Bll
 
 
                     '                    Directo()  boolean	S: Si es verdadero; N: si  si es falso
-                    sb &= IIf(True, "S", "N")
+                    '                   	Se refieren al campo "Directo" de posicion 14.
+                    'Estamos mandando una S siempre, habría que mandar una N.
+                    'S si el corredor es DIRECTO unicamente
+
+                    sb &= IIf(.CorredorDesc = "DIRECTO", "S", "N")
                     sb &= SEPARADOR
 
 
