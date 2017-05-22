@@ -864,19 +864,83 @@ namespace ProntoMVC.Tests
 
 
 
+        [TestMethod]
+        public void SincroMonsanto_40195()
+        {
+
+            string sErrores = "", sTitulo = "";
+            LinqCartasPorteDataContext db = null;
+
+            // el _CONST_MAXROWS sale del app.config
+
+            int registrosf = 0;
+
+
+
+            var output = SincronismosWilliamsManager.GenerarSincro("Monsanto", ref sErrores, SC, "dominio", ref sTitulo
+                                , CartaDePorteManager.enumCDPestado.DescargasMasFacturadas,
+                     "", 3208, -1,
+                -1, 3208,
+                3208, -1, -1, -1,
+                 CartaDePorteManager.FiltroANDOR.FiltroOR, "Entregas",
+                new DateTime(2017, 1, 1), new DateTime(2017, 1, 31),
+                -1, "Ambas", false, "", "", -1, ref registrosf, 4000);
+
+
+
+            //File.Copy(output, @"C:\Users\Administrador\Desktop\"   Path.GetFileName(output), true);
+            System.Diagnostics.Process.Start(output);
+        }
+
+
+
+
+
+        [TestMethod]
+        public void SincroLeiva_40189()
+        {
+
+            string sErrores = "", sTitulo = "";
+            LinqCartasPorteDataContext db = null;
+
+            // el _CONST_MAXROWS sale del app.config
+
+            int registrosf = 0;
+
+            int idcorr = CartaDePorteManager.BuscarVendedorPorCUIT("30-71077157-6", SC, "");
+
+            var output = SincronismosWilliamsManager.GenerarSincro("LEIVA", ref sErrores, SC, "dominio", ref sTitulo
+                                , CartaDePorteManager.enumCDPestado.DescargasMasFacturadas,
+                     "", -1, idcorr,
+                -1, -1,
+                 -1, -1, -1, -1,
+                 CartaDePorteManager.FiltroANDOR.FiltroOR, "Entregas",
+                new DateTime(2016, 3, 1), new DateTime(2016, 3, 15),
+                -1, "Ambas", false, "", "", -1, ref registrosf, 4000);
+
+
+
+            //File.Copy(output, @"C:\Users\Administrador\Desktop\"   Path.GetFileName(output), true);
+            System.Diagnostics.Process.Start(output);
+        }
+
+
+
+
+
 
 
         [TestMethod]
         public void SincroYPF_40143()
         {
 
-//        http://consultas.bdlconsultores.com.ar/AdminTest/template/desarrollo/Consulta.php?IdReclamo=40143&SinMenu=1
-//            "En el campo CUIT del proveedor debe ir el proveedor de YPF no el CUIT de YPF."
+            //        http://consultas.bdlconsultores.com.ar/AdminTest/template/desarrollo/Consulta.php?IdReclamo=40143&SinMenu=1
+            //            "En el campo CUIT del proveedor debe ir el proveedor de YPF no el CUIT de YPF."
 
-//            Te adjunto ejemplo. El "cuit del proveedor" tira el de ypf y tiene que tirar:
-//* si solamente hay "titular de cp" el del titular.
-//*Si hay titular y remitente comercial.. el del "remitente comercial".
-//*Si hay titular, intermediario y remitente.. el del "remitente comercial".
+            //            Te adjunto ejemplo. El "cuit del proveedor" tira el de ypf y tiene que tirar:
+            //* si solamente hay "titular de cp" el del titular.
+            //*Si hay titular y remitente comercial.. el del "remitente comercial".
+            //*Si hay titular, intermediario y remitente.. el del "remitente comercial".
 
 
             string sErrores = "", sTitulo = "";
@@ -970,7 +1034,7 @@ namespace ProntoMVC.Tests
                 -1, -1,
                 -1, -1, -1, -1,
                 CartaDePorteManager.FiltroANDOR.FiltroOR, ModoExportacion, desde, hasta,
-               pv, desdeAnt,hastaAnt, MinimoNeto, topclie);
+               pv, desdeAnt, hastaAnt, MinimoNeto, topclie);
 
 
 
