@@ -1,0 +1,73 @@
+
+Log Entry : 
+05/22/2017 12:15:05
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx. Error Message:supervisor esta logueado, pero lo redirijo al login porque faltan los datos de session. No deberia mejor mandarlo a SeleccionarEmpresa? Ademas, no hago el LogOut y le queda el cookie!!!
+__________________________
+
+Log Entry : 
+05/22/2017 12:15:43
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx. Error Message:System.ArgumentNullException
+El valor no puede ser nulo.
+Nombre del parámetro: source
+   en System.Linq.Enumerable.Select[TSource,TResult](IEnumerable`1 source, Func`2 selector)
+   en CartaDePorteInformesConReportViewerSincronismos.BindTypeDropDown() en C:\Users\Administrador\Documents\bdl\pronto\prontoweb\ProntoWeb\CartaDePorteInformesConReportViewerSincronismos.aspx.vb:línea 2879
+   en CartaDePorteInformesConReportViewerSincronismos.Page_Load(Object sender, EventArgs e) en C:\Users\Administrador\Documents\bdl\pronto\prontoweb\ProntoWeb\CartaDePorteInformesConReportViewerSincronismos.aspx.vb:línea 80
+   en System.Web.UI.Control.OnLoad(EventArgs e)
+   en System.Web.UI.Control.LoadRecursive()
+   en System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+System.Core
+__________________________
+
+Log Entry : 
+05/22/2017 12:16:08
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx. Error Message:supervisor esta logueado, pero lo redirijo al login porque faltan los datos de session. No deberia mejor mandarlo a SeleccionarEmpresa? Ademas, no hago el LogOut y le queda el cookie!!!
+__________________________
+
+Log Entry : 
+05/22/2017 12:17:30
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx. Error Message:System.ArgumentNullException
+El valor no puede ser nulo.
+Nombre del parámetro: source
+   en System.Linq.Enumerable.Select[TSource,TResult](IEnumerable`1 source, Func`2 selector)
+   en CartaDePorteInformesConReportViewerSincronismos.BindTypeDropDown() en C:\Users\Administrador\Documents\bdl\pronto\prontoweb\ProntoWeb\CartaDePorteInformesConReportViewerSincronismos.aspx.vb:línea 2879
+   en CartaDePorteInformesConReportViewerSincronismos.Page_Load(Object sender, EventArgs e) en C:\Users\Administrador\Documents\bdl\pronto\prontoweb\ProntoWeb\CartaDePorteInformesConReportViewerSincronismos.aspx.vb:línea 80
+   en System.Web.UI.Control.OnLoad(EventArgs e)
+   en System.Web.UI.Control.LoadRecursive()
+   en System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+System.Core
+__________________________
+
+Log Entry : 
+05/22/2017 12:18:35
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx. Error Message:Generando sincro para Leiva 01/04/2017 10/04/2017 -1 403 -1 -1 -1 -1 -1 -1 Mariano
+__________________________
+
+Log Entry : 
+05/22/2017 12:18:41
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx. Error Message:Generando sincro para LEIVA
+__________________________
+
+Log Entry : 
+05/22/2017 12:19:19
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx. Error Message:La localidad TOLOSA es usada en el sincro de LosGrobo y no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+05/22/2017 12:19:19
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx. Error Message:La localidad LUCAS SUD es usada en el sincro de LosGrobo y no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+05/22/2017 12:19:19
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx. Error Message:La localidad LAS CAMELIAS - Villaguay es usada en el sincro de LosGrobo y no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+05/22/2017 12:19:19
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx. Error Message:System.Threading.ThreadAbortException: Subproceso anulado.
+   en System.Threading.Thread.AbortInternal()
+   en System.Threading.Thread.Abort(Object stateInfo)
+   en System.Web.HttpResponse.AbortCurrentThread()
+   en System.Web.HttpResponse.End()
+   en CartaDePorteInformesConReportViewerSincronismos.btnDescargaSincro_Click(Object sender, EventArgs e) en C:\Users\Administrador\Documents\bdl\pronto\prontoweb\ProntoWeb\CartaDePorteInformesConReportViewerSincronismos.aspx.vb:línea 2546
+__________________________
