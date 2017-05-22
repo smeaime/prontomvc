@@ -19,7 +19,7 @@
 
             <p>@*Version de storeproc*@    </p>
 
-            
+
             <a href="@System.Configuration.ConfigurationManager.AppSettings["ReportServer"]">Servidor de informes</a>
             <br />
             <a href="localhost/Reports_MSSQLSERVER2/Pages/Folder.aspx?ViewMode=Detail">
@@ -56,14 +56,14 @@
             <br /><br />
 
             @Html.LabelFor(model => model.PathPlantillas, "Directorio de plantillas y archivo .APP") @*para que quede el espacio*@
-    <br />
+            <br />
             @Html.TextBoxFor(m => m.PathPlantillas, new { id = "Aviso", @class = "span6" })
 
 
-    @*<br />
-    @Html.LabelFor(model => model.BaseMantenimiento, "Base Mantenimiento (opcional)") 
-    <br />
-    @Html.TextBoxFor(m => m.BaseMantenimiento, new { id = "Aviso", @class = "span2" })*@
+            <br />
+            @Html.LabelFor(model => model.BasePRONTOMantenimiento, "Base Mantenimiento (opcional)")
+            <br />
+            @Html.TextBoxFor(m => m.BasePRONTOMantenimiento, new { id = "Aviso", @class = "span2" })
 
 
 

@@ -1,0 +1,35 @@
+
+Log Entry : 
+05/22/2017 11:45:53
+Error in: . Error Message:Generando sincro para LEIVA
+__________________________
+
+Log Entry : 
+05/22/2017 11:52:24
+Error in: . Error Message:Generando sincro para LEIVA
+__________________________
+
+Log Entry : 
+05/22/2017 11:54:40
+Error in: . Error Message:Generando sincro para LEIVA
+__________________________
+
+Log Entry : 
+05/22/2017 11:58:47
+Error in: . Error Message:Generando sincro para LEIVA
+__________________________
+
+Log Entry : 
+05/22/2017 12:02:14
+Error in: . Error Message:Generando sincro para LEIVA
+__________________________
+
+Log Entry : 
+05/22/2017 12:04:58
+Error in: . Error Message:Generando sincro para LEIVA
+__________________________
+
+Log Entry : 
+05/22/2017 12:07:31
+Error in: . Error Message:Generando sincro para Monsanto
+__________________________

@@ -992,6 +992,25 @@ Partial Class CartaDePorteInformesConReportViewerSincronismos
 
                         registrosFiltrados = dt.Rows.Count
 
+                    Case "LEIVA"
+                        output = SincronismosWilliamsManager.GenerarSincro("LEIVA", sErrores, _
+                           HFSC.Value, ConfigurationManager.AppSettings("UrlDominio"), _
+                           "", estadofiltro, "", idVendedor, idCorredor, _
+                          idDestinatario, idIntermediario, _
+                          idRComercial, idArticulo, idProcedencia, idDestino, _
+                          IIf(cmbCriterioWHERE.SelectedValue = "todos", _
+                              CartaDePorteManager.FiltroANDOR.FiltroAND, _
+                            CartaDePorteManager.FiltroANDOR.FiltroOR), _
+                          DropDownList2.Text, _
+                   Convert.ToDateTime(iisValidSqlDate(txtFechaDesde.Text, #1/1/1753#)),
+                   Convert.ToDateTime(iisValidSqlDate(txtFechaHasta.Text, #1/1/2100#)), _
+                             cmbPuntoVenta.SelectedValue, optDivisionSyngenta.SelectedValue, , , , idClienteAuxiliar, registrosFiltrados)
+
+                        lblErrores.Text = sErrores
+                        sErrores = ""
+
+
+
                     Case "AGROSUR"
                         Dim s = "(ISNULL(FechaDescarga, '1/1/1753') BETWEEN '" & FechaANSI(iisValidSqlDate(txtFechaDesde.Text, #1/1/1753#)) & _
                                      "'     AND   '" & FechaANSI(iisValidSqlDate(txtFechaHasta.Text, #1/1/2100#)) & "' )"

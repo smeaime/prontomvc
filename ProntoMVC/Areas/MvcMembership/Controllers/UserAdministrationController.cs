@@ -1976,7 +1976,8 @@ namespace ProntoMVC.Areas.MvcMembership.Controllers
             m.ArchivoAyuda = parametros.ArchivoAyuda;
             m.PathPlantillas = parametros.PathPlantillas;
 
-
+            m.BasePRONTOMantenimiento = parametros.BasePRONTOMantenimiento; 
+           
 
             return View(m);
         }
@@ -2015,6 +2016,11 @@ namespace ProntoMVC.Areas.MvcMembership.Controllers
             parametros.ArchivoAyuda = configuracionViewModel.ArchivoAyuda;
             parametros.ArchivoAyuda = configuracionViewModel.ArchivoAyuda;
             parametros.PathPlantillas = configuracionViewModel.PathPlantillas;
+
+
+            parametros.BasePRONTOMantenimiento = configuracionViewModel.BasePRONTOMantenimiento;
+           
+
 
             db.SaveChanges();
 
