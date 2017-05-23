@@ -109,6 +109,7 @@ Partial Class SincronismosAutomaticos
             txtMailDukarevich.Text = ParametroManager.TraerValorParametro2(HFSC.Value, "CasillaCartasPorteDukarevich" & pv).ToString
             txtMailElEnlace.Text = ParametroManager.TraerValorParametro2(HFSC.Value, "CasillaCartasPorteElEnlace" & pv).ToString
             txtMailEstanar.Text = ParametroManager.TraerValorParametro2(HFSC.Value, "CasillaCartasPorteEstanar" & pv).ToString
+            txtMailLeiva.Text = ParametroManager.TraerValorParametro2(HFSC.Value, "CasillaCartasPorteLeiva" & pv).ToString
             txtMailLartirigoyen.Text = ParametroManager.TraerValorParametro2(HFSC.Value, "CasillaCartasPorteLartirigoyen" & pv).ToString
             txtMailBiznaga.Text = ParametroManager.TraerValorParametro2(HFSC.Value, "CasillaCartasPorteBiznaga" & pv).ToString
             txtMailBragadense.Text = ParametroManager.TraerValorParametro2(HFSC.Value, "CasillaCartasPorteBragadense" & pv).ToString
@@ -123,6 +124,7 @@ Partial Class SincronismosAutomaticos
             txtMailMonsanto.Text = ParametroManager.TraerValorParametro2(HFSC.Value, "CasillaCartasPorteMonsanto" & pv).ToString
             txtMailNoble.Text = ParametroManager.TraerValorParametro2(HFSC.Value, "CasillaCartasPorteNoble" & pv).ToString
             txtMailNobleCalidad.Text = ParametroManager.TraerValorParametro2(HFSC.Value, "CasillaCartasPorteNobleCalidad" & pv).ToString
+            txtMailPelayo.Text = ParametroManager.TraerValorParametro2(HFSC.Value, "CasillaCartasPortePelayo" & pv).ToString
             txtMailPetroagro.Text = ParametroManager.TraerValorParametro2(HFSC.Value, "CasillaCartasPortePetroAgro" & pv).ToString
             txtMailPSA.Text = ParametroManager.TraerValorParametro2(HFSC.Value, "CasillaCartasPortePSA" & pv).ToString
             txtMailPSAcalid.Text = ParametroManager.TraerValorParametro2(HFSC.Value, "CasillaCartasPortePSAcalid" & pv).ToString
@@ -363,6 +365,7 @@ Partial Class SincronismosAutomaticos
         ParametroManager.GuardarValorParametro2(HFSC.Value, "CasillaCartasPorteDukarevich" & pv, txtMailDukarevich.Text)
         ParametroManager.GuardarValorParametro2(HFSC.Value, "CasillaCartasPorteElEnlace" & pv, txtMailElEnlace.Text)
         ParametroManager.GuardarValorParametro2(HFSC.Value, "CasillaCartasPorteEstanar" & pv, txtMailElEnlace.Text)
+        ParametroManager.GuardarValorParametro2(HFSC.Value, "CasillaCartasPorteLeiva" & pv, txtMailLeiva.Text)
         ParametroManager.GuardarValorParametro2(HFSC.Value, "CasillaCartasPorteLartirigoyen" & pv, txtMailLartirigoyen.Text)
         ParametroManager.GuardarValorParametro2(HFSC.Value, "CasillaCartasPorteBiznaga" & pv, txtMailBiznaga.Text)
         ParametroManager.GuardarValorParametro2(HFSC.Value, "CasillaCartasPorteBragadense" & pv, txtMailBragadense.Text)
@@ -376,6 +379,7 @@ Partial Class SincronismosAutomaticos
         ParametroManager.GuardarValorParametro2(HFSC.Value, "CasillaCartasPorteMonsanto" & pv, txtMailMonsanto.Text)
         ParametroManager.GuardarValorParametro2(HFSC.Value, "CasillaCartasPorteMorgan" & pv, txtMailMorgan.Text)
         ParametroManager.GuardarValorParametro2(HFSC.Value, "CasillaCartasPorteNoble" & pv, txtMailNoble.Text)
+        ParametroManager.GuardarValorParametro2(HFSC.Value, "CasillaCartasPortePelayo" & pv, txtMailPelayo.Text)
         ParametroManager.GuardarValorParametro2(HFSC.Value, "CasillaCartasPortePetroAgro" & pv, txtMailPetroagro.Text)
         ParametroManager.GuardarValorParametro2(HFSC.Value, "CasillaCartasPortePSA" & pv, txtMailPSA.Text)
         ParametroManager.GuardarValorParametro2(HFSC.Value, "CasillaCartasPorteRivara" & pv, txtMailRivara.Text)
@@ -446,6 +450,7 @@ Partial Class SincronismosAutomaticos
         If (CheckBoxDukarevich.Checked) Then sTodosErr += Enviar("Dukarevich", txtMailDukarevich.Text, sErr, bVistaPrevia)
         If (CheckBoxElEnlace.Checked) Then sTodosErr += Enviar("El Enlace", txtMailElEnlace.Text, sErr, bVistaPrevia)
         If (CheckBoxEstanar.Checked) Then sTodosErr += Enviar("El Enlace", txtMailEstanar.Text, sErr, bVistaPrevia)
+        If (CheckBoxLeiva.Checked) Then sTodosErr += Enviar("Leiva", txtMailLeiva.Text, sErr, bVistaPrevia)
         If (CheckBoxLartirigoyen.Checked) Then sTodosErr += Enviar("Lartirigoyen", txtMailLartirigoyen.Text, sErr, bVistaPrevia)
         If (CheckBoxBiznaga.Checked) Then sTodosErr += Enviar("La Biznaga", txtMailBiznaga.Text, sErr, bVistaPrevia)
         If (CheckBoxBragadense.Checked) Then sTodosErr += Enviar("La Bragadense", txtMailBragadense.Text, sErr, bVistaPrevia)
@@ -462,6 +467,7 @@ Partial Class SincronismosAutomaticos
         If (CheckBoxNoble.Checked) Then sTodosErr += Enviar("Noble", txtMailNoble.Text, sErr, bVistaPrevia)
         If (CheckBoxNobleCalidad.Checked) Then sTodosErr += Enviar("Noble (anexo calidades)", txtMailNobleCalidad.Text, sErr, bVistaPrevia)
         If (CheckBoxOjeda.Checked) Then sTodosErr += Enviar("Ojeda", txtMailOjeda.Text, sErr, bVistaPrevia)
+        If (CheckBoxPelayo.Checked) Then sTodosErr += Enviar("Pelayo", txtMailPelayo.Text, sErr, bVistaPrevia)
         If (CheckBoxPetroagro.Checked) Then sTodosErr += Enviar("PetroAgro", txtMailPetroagro.Text, sErr, bVistaPrevia)
         If (CheckBoxPSA.Checked) Then sTodosErr += Enviar("PSA La California", txtMailPSA.Text, sErr, bVistaPrevia)
         'If (CheckBoxPSAcalid.Checked) Then sTodosErr += Enviar("PSA La California (calidades)", txtMailPSA.Text, sErr, bVistaPrevia)
