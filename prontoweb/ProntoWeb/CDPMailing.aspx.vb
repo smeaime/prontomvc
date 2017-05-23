@@ -72,7 +72,12 @@ Partial Class CDPMailing
             ResetChecks()
 
             lnkCuentaGMail.NavigateUrl = "https://mail.google.com/mail"
-            txtRedirigirA.Text = UsuarioSesion.Mail(HFSC.Value, Session)
+            
+            Try
+            	txtRedirigirA.Text = UsuarioSesion.Mail(HFSC.Value, Session)
+ 			Catch ex As Exception
+                ErrHandler2.WriteError(ex.ToString)
+            End Try
 
             BindTypeDropDown()
 
