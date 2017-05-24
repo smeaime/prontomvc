@@ -57,6 +57,7 @@ using Newtonsoft.Json.Serialization;
 //using GeoJSON.Net.Geometry;
 using System.Text.RegularExpressions;
 
+using System.Net;
 
 
 namespace Fenton.Example
@@ -3969,25 +3970,57 @@ Formato localidad-provincia	destination	x
 
 
 
+        public void UploadFtpFile(string ftpsitio,string folderName, string fileName,string user,string pass)
+        {
+
+            FtpWebRequest request;
+            try
+            {
+                string absoluteFileName = Path.GetFileName(fileName);
+
+                request = WebRequest.Create(new Uri(string.Format(@"ftp://{0}/{1}/{2}", ftpsitio, folderName, absoluteFileName))) as FtpWebRequest;
+                request.Method = WebRequestMethods.Ftp.UploadFile;
+                request.UseBinary = true;
+                request.UsePassive = true;
+                request.KeepAlive = true;
+                request.Credentials = new NetworkCredential(user, pass);
+                request.ConnectionGroupName = "group";
+
+                using (FileStream fs = File.OpenRead(fileName))
+                {
+                    byte[] buffer = new byte[fs.Length];
+                    fs.Read(buffer, 0, buffer.Length);
+                    fs.Close();
+                    Stream requestStream = request.GetRequestStream();
+                    requestStream.Write(buffer, 0, buffer.Length);
+                    requestStream.Flush();
+                    requestStream.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                ErrHandler2.WriteError(ex);
+            }
+        }
+
 
         public bool CopyFileFTP(string FileToCopy, string userName, string password)
         {
             // http://stackoverflow.com/questions/16005388/how-to-copy-a-file-on-an-ftp-server
 
-
             try
             {
                 // download
-                //FtpWebRequest request = (FtpWebRequest)WebRequest.Create("ftp://ftp.mysite.net/" + fileName);
+                System.Net.FtpWebRequest request = (System.Net.FtpWebRequest)System.Net.WebRequest.Create("ftp://ftp.mysite.net/" + FileToCopy);
                 //request.Method = WebRequestMethods.Ftp.DownloadFile;
 
 
                 //upload
-                //request.Credentials = new System.Net.NetworkCredential(userName, password);
-                //System.Net.FtpWebResponse response = (System.Net.FtpWebResponse)request.GetResponse();
-                //Stream responseStream = response.GetResponseStream();
-                //Upload("ftp://ftp.mysite.net/" + FileToCopy, ToByteArray(responseStream), userName, password);
-                //responseStream.Close();
+                request.Credentials = new System.Net.NetworkCredential(userName, password);
+                System.Net.FtpWebResponse response = (System.Net.FtpWebResponse)request.GetResponse();
+                Stream responseStream = response.GetResponseStream();
+                Upload("ftp://ftp.mysite.net/" + FileToCopy, ToByteArray(responseStream), userName, password);
+                responseStream.Close();
                 return true;
             }
             catch
@@ -3995,6 +4028,10 @@ Formato localidad-provincia	destination	x
                 return false;
             }
         }
+
+
+
+
 
 
         public static Byte[] ToByteArray(Stream stream)
