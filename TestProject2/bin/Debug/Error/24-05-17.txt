@@ -1,0 +1,59 @@
+
+Log Entry : 
+05/24/2017 16:12:44
+Error in: . Error Message:idfac 89323
+__________________________
+
+Log Entry : 
+05/24/2017 16:12:55
+Error in: . Error Message:cli 4866 karinaahmad@roagro.com.ar;marcosfedele@roagro.com.ar 166 2370
+__________________________
+
+Log Entry : 
+05/24/2017 16:13:02
+Error in: . Error Message:idfac 89324
+__________________________
+
+Log Entry : 
+05/24/2017 16:13:03
+Error in: . Error Message:cli 4866 karinaahmad@roagro.com.ar;marcosfedele@roagro.com.ar 166 7602
+__________________________
+
+Log Entry : 
+05/24/2017 16:21:48
+Error in: . Error Message:idfac 89323
+__________________________
+
+Log Entry : 
+05/24/2017 16:21:55
+Error in: . Error Message:cli 4866 karinaahmad@roagro.com.ar;marcosfedele@roagro.com.ar 166 2370
+__________________________
+
+Log Entry : 
+05/24/2017 16:22:01
+Error in: . Error Message:idfac 89324
+__________________________
+
+Log Entry : 
+05/24/2017 16:22:01
+Error in: . Error Message:cli 4866 karinaahmad@roagro.com.ar;marcosfedele@roagro.com.ar 166 7602
+__________________________
+
+Log Entry : 
+05/24/2017 16:25:43
+Error in: . Error Message:System.InvalidCastException
+El operador '=' no está definido para tipo 'DBNull' ni para cadena "BarraCP".
+   en Microsoft.VisualBasic.CompilerServices.Operators.ConditionalCompareObjectEqual(Object Left, Object Right, Boolean TextCompare)
+   en ExcelImportadorManager.FormatearColumnasFlexicapture(DataTable& dt) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ExcelImportador.vb:línea 5405
+Microsoft.VisualBasic
+__________________________
+
+Log Entry : 
+05/24/2017 16:25:43
+Error in: . Error Message:Los encabezados de columna [][][][][][][][][][][][][][][][][][][][][][][][][][TRANSPCUIT][][][][][][][][][][][][][][][][][][][][][VAGON][][][][][][][][][][][][][] no son reconocidos. Cambielos por los estándar. Ya ha sido enviado un mail notificando la incongruencia.
+__________________________
+
+Log Entry : 
+05/24/2017 16:26:18
+Error in: . Error Message:Valor de Timeout caducado. El período de tiempo de espera caducó antes de completar la operación o el servidor no responde.
+__________________________

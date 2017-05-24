@@ -2625,6 +2625,18 @@ Public Class ExcelImportadorManager
 
 
 
+                'consulta 36711
+                'Cuando solo viene completo el campo 44 y no el 46, entonces el que viene en el 44 es el remitente comercial.
+                'Si vienen los dos completos, el 44 es el intermediario y el 46 el remitente comercial.
+                If r(45) <> "" And r(43) <> "" Then
+                    Dim temp = r(43)
+                    r(43) = r(45)
+                    r(45) = temp
+                End If
+
+
+
+
 
 
                 'calidad

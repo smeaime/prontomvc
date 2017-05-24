@@ -780,7 +780,7 @@ Partial Class CartasDePortes
         ElseIf True Then
 
 
-            
+
             Dim s As String = _
 "            exec sp_executesql N'SELECT '''' as Producto, '''' as UsuarioIngreso, [t10].[IdCartaDePorte] AS [id], [t10].[NumeroCartaDePorte], [t10].[NumeroSubfijo], [t10].[SubnumeroVagon], [t10].[FechaArribo], [t10].[FechaModificacion], [t10].[FechaDescarga], [t10].[Observaciones] AS [Obs], [t10].[NetoFinal], [t10].[value] AS [TitularDesc], [t10].[value2] AS [IntermediarioDesc], [t10].[value3] AS [RComercialDesc], [t10].[value4] AS [CorredorDesc], [t10].[value5] AS [DestinatarioDesc], [t10].[value6] AS [ProcedenciaDesc], [t10].[value7] AS [DestinoDesc] " & _
 "  FROM ( " & _
@@ -834,27 +834,11 @@ Partial Class CartasDePortes
 
 
             Try
-                Dim dt = EntidadManager.ExecDinamico(HFSC.Value, s)
+                'Dim dt = EntidadManager.ExecDinamico(HFSC.Value, s)
+                Dim dt As DataTable = CartaDePorteManager.ListaditoPrincipal(HFSC.Value)
 
 
-
-                With dt
-                    '.Columns("IdCartaDePorte").ColumnName = "Id"
-
-                    '    .Columns("VendedorDesc").ColumnName = "TitularDesc"
-                    '    .Columns("EntregadorDesc").ColumnName = "DestinatarioDesc"
-                    '    .Columns("CuentaOrden1Desc").ColumnName = "IntermediarioDesc"
-                    '    .Columns("CuentaOrden2Desc").ColumnName = "RComercialDesc"
-                    '    '.Columns("VendedorDesc").ColumnName = "TitularDesc"
-                End With
-
-
-                If False Then
-                    dt = DataTableWHERE(dt, generarWHERE)
-
-                    Dim b As Data.DataView = DataTableORDER(dt, "FechaModificacion DESC")
-                    ViewState("Sort") = b.Sort
-                End If
+          
 
                 GridView1.DataSource = dt 'b
             Catch ex As Exception
@@ -877,6 +861,8 @@ Partial Class CartasDePortes
         GridView1.DataBind()
         'ForzarPagerow()
     End Sub
+
+
 
 
     Sub ReBind()

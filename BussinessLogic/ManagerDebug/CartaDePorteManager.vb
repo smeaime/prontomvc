@@ -6860,7 +6860,7 @@ Public Class CartaDePorteManager
         End If
 
 
-    
+
 
         sTituloFiltroUsado &= FormatearTitulo(sc,
                               sTituloFiltroUsado,
@@ -14907,9 +14907,9 @@ Public Class CartaDePorteManager
 
     Shared Function TraerCUITClientesSegunUsuario(usuario As String, SC As String, scbdlmaster As String) As List(Of String)
 
-        Dim cc As String()       = New String() {}
+        Dim cc As String() = New String() {}
 
-        
+
         Try
 
             Dim db = New LinqBDLmasterDataContext(Encriptar(scbdlmaster))
@@ -16769,6 +16769,73 @@ Public Class CartaDePorteManager
 
 
 
+
+    Public Shared Function ListaditoPrincipal(SC As String) As DataTable
+
+
+
+        Dim s As String = _
+    "            exec sp_executesql N'SELECT '''' as Producto, '''' as UsuarioIngreso, [t10].[IdCartaDePorte] AS [id], [t10].[NumeroCartaDePorte], [t10].[NumeroSubfijo], [t10].[SubnumeroVagon], [t10].[FechaArribo], [t10].[FechaModificacion], [t10].[FechaDescarga], [t10].[Observaciones] AS [Obs], [t10].[NetoFinal], [t10].[value] AS [TitularDesc], [t10].[value2] AS [IntermediarioDesc], [t10].[value3] AS [RComercialDesc], [t10].[value4] AS [CorredorDesc], [t10].[value5] AS [DestinatarioDesc], [t10].[value6] AS [ProcedenciaDesc], [t10].[value7] AS [DestinoDesc] " & _
+    "  FROM ( " & _
+    "  SELECT ROW_NUMBER() OVER (ORDER BY [t9].[FechaModificacion] DESC) AS [ROW_NUMBER], [t9].[IdCartaDePorte], [t9].[NumeroCartaDePorte], [t9].[NumeroSubfijo], [t9].[SubnumeroVagon], [t9].[FechaArribo], [t9].[FechaModificacion], [t9].[FechaDescarga], [t9].[Observaciones], [t9].[NetoFinal], [t9].[value], [t9].[value2], [t9].[value3], [t9].[value4], [t9].[value5], [t9].[value6], [t9].[value7] " & _
+    "  FROM ( " & _
+    "  SELECT [t0].[IdCartaDePorte], [t0].[NumeroCartaDePorte], [t0].[NumeroSubfijo], [t0].[SubnumeroVagon], [t0].[FechaArribo], [t0].[FechaModificacion], [t0].[FechaDescarga], [t0].[Observaciones], [t0].[NetoFinal], [t2].[RazonSocial] AS [value], [t4].[RazonSocial] AS [value2], [t5].[RazonSocial] AS [value3], [t6].[Nombre] AS [value4], [t3].[RazonSocial] AS [value5], [t8].[Nombre] AS [value6], [t7].[Descripcion] AS [value7] " & _
+    "  FROM [dbo].[CartasDePorte] AS [t0] " & _
+    "   LEFT OUTER JOIN [dbo].[Articulos] AS [t1] ON ([t1].[IdArticulo]) = [t0].[IdArticulo] " & _
+    "  LEFT OUTER JOIN [dbo].[Clientes] AS [t2] ON ([t2].[IdCliente]) = [t0].[Vendedor] " & _
+    "  LEFT OUTER JOIN [dbo].[Clientes] AS [t3] ON ([t3].[IdCliente]) = [t0].[Entregador] " & _
+    "  LEFT OUTER JOIN [dbo].[Clientes] AS [t4] ON ([t4].[IdCliente]) = [t0].[CuentaOrden1] " & _
+    "  LEFT OUTER JOIN [dbo].[Clientes] AS [t5] ON ([t5].[IdCliente]) = [t0].[CuentaOrden2] " & _
+    "  LEFT OUTER JOIN [dbo].[Vendedores] AS [t6] ON ([t6].[IdVendedor]) = [t0].[Corredor] " & _
+    "  LEFT OUTER JOIN [dbo].[WilliamsDestinos] AS [t7] ON ([t7].[IdWilliamsDestino]) = [t0].[Destino] " & _
+    "  LEFT OUTER JOIN [dbo].[Localidades] AS [t8] ON [t8].[IdLocalidad] = (CONVERT(Int,[t0].[Procedencia])) " & _
+    " where FechaModificacion > ''" & FechaANSI(DateAdd(DateInterval.Day, -7, Today)) & "'' " & _
+    "  ) AS [t9] " & _
+    "  ) AS [t10] " & _
+    "  WHERE [t10].[ROW_NUMBER] BETWEEN @p0 + 1 AND @p0 + @p1 " & _
+    "  ORDER BY [t10].[ROW_NUMBER]',N'@p0 int,@p1 int',@p0=0,@p1=8"
+        'al agregar lo de ultimasemana, el cambio es brutal en el uso del índice
+        'al agregar lo de ultimasemana, el cambio es brutal en el uso del índice
+        'al agregar lo de ultimasemana, el cambio es brutal en el uso del índice
+        'al agregar lo de ultimasemana, el cambio es brutal en el uso del índice
+        'al agregar lo de ultimasemana, el cambio es brutal en el uso del índice
+        'al agregar lo de ultimasemana, el cambio es brutal en el uso del índice
+
+
+
+
+
+
+
+        Dim s2 = "SELECT TOP 10  " & _
+    "                                                 IdCartaDePorte as Id  " & _
+    "  , '' as Producto " & _
+    "             , '' as Obs " & _
+    "                     , '' as   TitularDesc " & _
+    "            , '' as IntermediarioDesc " & _
+    "             , '' as RComercialDesc " & _
+    "             , '' as CorredorDesc " & _
+    "             , '' as DestinatarioDesc  " & _
+    " , '' as ProcedenciaDesc  " & _
+    "             , '' as DestinoDesc  " & _
+    "            , '' as UsuarioIngreso  " & _
+    "            ,NumeroCartaDePorte, NumeroSubfijo, SubnumeroVagon,  " & _
+    "            FechaArribo, FechaModificacion, FechaDescarga,  " & _
+    "            NetoFinal ,  " & _
+    "            Anulada " & _
+    " FROM CartasDePorte ORDER BY IdCartaDePorte DESC"
+
+
+        Dim dt = EntidadManager.ExecDinamico(SC, s)
+
+
+
+        Return dt
+    End Function
+
+
+
+
 End Class
 
 
@@ -17248,12 +17315,36 @@ Public Class barras
 
 
             Dim qqq = "Estimado cliente " & NombreCliente(SC, idcli) & ", " & "<br/><br/>  " + vbCrLf &
-                        "Nos ponemos en contacto con usted para hacerle llegar la factura " & numerodefactura & ",  " & linkalafacturaelectronica & "<br/> " + vbCrLf &
+                        "Nos ponemos en contacto con usted para hacerle llegar la <b>factura " & numerodefactura & "</b>,  " & linkalafacturaelectronica & "<br/> " + vbCrLf &
                        IIf(cli.CartaPorteTipoDeAdjuntoDeFacturacion > 0, "<br/>Si desea ver un detalle de las cartas de porte correspondientes a esta factura, " & linkalosadjuntos, "") & "<br/> " + vbCrLf &
                         "<br/> Los documentos son PDF, para poder verlos, es necesario que tenga instalado el Acrobat Reader, si no lo tiene, hágalo desde " & "<a href='http://get.adobe.com/es/reader/?no_ab=1'> AQUÍ</a>" & "<br/> " + vbCrLf &
-                        "<br/>ATENCION: NO RESPONDER A ESTA DIRECCION DE MAIL, HACERLO A ciglesias@williamsentregas.com.ar; sgomez@williamsentregas.com.ar <br/>" &
-                        "<br/>Atentamente, <br/>" &
+"<br/>También le hacemos saber que dicha factura puede cancelarla mediante depósito o transferencia en las cuentas detalladas más abajo o enviar por correo un <b><u>cheque cruzado no a la orden, </u></b>a nombre de Williams Entregas SA, calle Moreno 584, piso 12 ""A"", C1091AAL - CABA" &
+"<br/><br/>Le solicitamos que, una vez realizado el pago, nos envíe un mail para confirmarlo y en caso de efectuar retenciones, nos las pasen escaneadas en el mismo mail." &
+"<br/><br/>Cualquier duda que tenga, no responder este mail, hacerlo a ciglesias@williamsentregas.com.ar; sgomez@williamsentregas.com.ar <br/>" &
+"<br/>WILLIAMS ENTREGAS S.A." &
+"<br/>BANCO DE GALICIA" &
+"<br/>CTA. CTE.  PESOS   67127-9 999-9   -  SUC. 999" &
+"<br/>CBU: 0070999020000067127999" &
+"<br/>CBU ALIAS: williamsgal3" &
+"<br/>CUIT N º  30-70738607-6" &
+"<br/><br/>WILLIAMS ENTREGAS S.A." &
+            "<br/>Banco CREDICOOP" &
+"<br/>CTA CTE. N º 45586/5 – SUCURSAL 001" &
+"<br/>CBU ALIAS: williamscoop1" &
+"<br/>CBU N º  1910001855000104558650" &
+"<br/>CUIT N º  30-70738607-6" &
+"<br/><br/>WILLIAMS ENTREGAS S.A." &
+ "<br/>BANCO  PROVINCIA DE BUENOS AIRES" &
+"<br/>CTA CTE. N º 1859/7  -  CASA CENTRAL 1000" &
+"<br/>CBU ALIAS: williamsprov2" &
+"<br/>CBU 0140000701100000185974" &
+"<br/>CUIT N º  30-70738607-6" &
+ "<br/><br/><br/>Atentamente, <br/>" &
                         "Williams Entregas SA "
+
+
+
+
 
             cuerpo += qqq
             cuerpo += "</body></html>"
@@ -21408,7 +21499,7 @@ Public Class LogicaInformesWilliams
         'dt2.Columns.Add("Existencias", GetType(Double))
         'dt2.Rows.Add(dt2.NewRow)
         ''dt2 = EntidadManager.ExecDinamico(HFSC.Value, "SELECT dbo.wExistenciasCartaPorteMovimientos (null,null,null) as Existencias")
-        Dim ex = ExistenciasAlDiaPorPuerto(sc, desde, idarticulo, idDestino, idDestinatario, PV)
+        Dim ex = ExistenciasAlDiaPorPuerto(sc, desde, idarticulo, idDestino, idDestinatario, pv)
 
         dtRenglonUnicoConLasExistencias = (From i In db.CartasDePortes.Take(1) Select Existencias = ex, CampoDummyParaQueGuardeElNombre = 0).ToList
 
@@ -21625,12 +21716,12 @@ Public Class UserDatosExtendidosManager
 
         Try
 
-      
-        Dim db = New LinqBDLmasterDataContext(Encriptar(ConexBDLmaster))
 
-        Dim uext = (From p In db.UserDatosExtendidos
-                    Where p.UserId.ToString = UserId
-                    Select p).SingleOrDefault
+            Dim db = New LinqBDLmasterDataContext(Encriptar(ConexBDLmaster))
+
+            Dim uext = (From p In db.UserDatosExtendidos
+                        Where p.UserId.ToString = UserId
+                        Select p).SingleOrDefault
 
             Return NombreCliente(SC, uext.RazonSocial)
         Catch ex As Exception
@@ -21646,15 +21737,15 @@ Public Class UserDatosExtendidosManager
 
         Try
 
-        Using db As New BDLMasterEntities(Auxiliares.FormatearConexParaEntityFrameworkBDLMASTER_2(Encriptar(ConexBDLmaster)))
+            Using db As New BDLMasterEntities(Auxiliares.FormatearConexParaEntityFrameworkBDLMASTER_2(Encriptar(ConexBDLmaster)))
 
-            Dim uext = (From p In db.UserDatosExtendidos
-                        Join u In db.aspnet_Users On u.UserId Equals p.UserId
-                            Where u.UserName = UserName
-                        Select p).SingleOrDefault
+                Dim uext = (From p In db.UserDatosExtendidos
+                            Join u In db.aspnet_Users On u.UserId Equals p.UserId
+                                Where u.UserName = UserName
+                            Select p).SingleOrDefault
 
-            Return uext.TextoAuxiliar
-        End Using
+                Return uext.TextoAuxiliar
+            End Using
         Catch ex As Exception
             ErrHandler2.WriteError(ex)
             Return ""
