@@ -865,6 +865,28 @@ namespace ProntoMVC.Tests
 
 
 
+        [TestMethod]
+        public void syngenta_webservice_30920_2_ftp()
+        {
+
+            //            sFTP: 192.208.44.90
+            //Carpeta: /UAT/Ready
+            //Usuario: sappo_test
+            //Password: 4R04475j
+
+            string archivoExcel = @"C:\Users\Administrador\Documents\bdl\pronto\docstest\Syngenta_10feb2017_115941.xlsx";
+
+            var s = new ServicioCartaPorte.servi();
+
+            s.UploadFtpFile("goragora.com.ar", "/public_ftp/incoming", archivoExcel, "maruxs", "ns5aK!cvai0C");
+            
+            //s.CopyFileFTP("ftp://192.208.44.90/", "/UAT/Ready", archivoExcel, "sappo_test", "4R04475j");
+            s.UploadFtpFile("192.208.44.90", "/UAT/Ready", archivoExcel, "sappo_test", "4R04475j");
+
+           
+
+        }
+
 
 
         [TestMethod]
