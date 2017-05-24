@@ -864,6 +864,164 @@ namespace ProntoMVC.Tests
 
 
 
+
+
+
+        [TestMethod]
+        public void syngenta_webservice_30920()
+        {
+            // mandar una tanda
+
+            int idcliente = 4333; //syngenta
+
+            var dbcartas = CartaDePorteManager.ListadoSegunCliente(SC, idcliente, new DateTime(2016, 11, 1), new DateTime(2016, 11, 30), CartaDePorteManager.enumCDPestado.DescargasMasFacturadas);
+
+            var s = new ServicioCartaPorte.servi();
+
+            var x = s.WebServiceSyngenta(dbcartas);
+
+            // marcar fecha de cartas enviadas, loguar tanda de cartas enviadas para que 
+            // sepan qué excel tienen que generar (el webservice solo manda un mail si hubo error, no tengo notificacion de otro tipo)
+
+            // pagina de log o por lo menos de estado del envio de datos a syngenta.
+            //                 noenviadas=Func();
+
+
+            string DIRFTP = DirApp + @"\DataBackupear\";
+            string nombre = DIRFTP + "Syngenta_" + DateTime.Now.ToString("ddMMMyyyy_HHmmss") + ".xlsx";
+
+
+            s.GenerarExcelSyngentaWebService(x, nombre); // 3 horas 
+
+            System.Diagnostics.Process.Start(nombre);
+
+            return;
+
+
+            s.CopyFileFTP(nombre, "username", "password#");   // 4 horas
+
+            //return Log; // pagina de log o por lo menos de estado del envio de datos a syngenta. 3 horas 
+
+
+            /*
+            . El Web Service no devolverá ningún dato que haga referencia en cuanto a si se procesó bien o tuvo errores la interface.
+La interface será procesa por Syngenta y si la misma no puede ser procesada correctamente por contener errores en los datos 
+    u otra validación; se enviara un mail con el detalle del procesamiento y error al mail indicado por el entregador para esta 
+            interface como así también dicho mail será enviado de la misma forma al responsable de Canje por parte de Syngenta.
+             * 
+             * 
+             * */
+
+
+            // que pasa si alguien anula una carta de syngenta?
+            //carta.anular();
+            // -bueno, el que levanta la lista de cartas tiene que comparar la fecha de enviado con la de ultima modificacion
+
+
+
+        }
+
+
+
+
+
+
+
+        [TestMethod]
+        public void nuevoTextoenFacturaElectronica_39138()
+        {
+            // https://prontoweb.williamsentregas.com.ar/ProntoWeb/Factura.aspx?Id=91981
+
+            barras.EnviarFacturaElectronicaEMail(new List<int> { 89323, 89324 }, SC, false, "mscalella911@gmail.com");
+
+
+        }
+
+
+        [TestMethod]
+        public void SessionDelLogin()
+        {
+
+            //explota BindTypeDropDown al buscar  Session(SESSIONPRONTO_glbIdUsuario) . No explota en el formulario de carta porque esta dentro de un try
+
+        }
+
+
+
+
+        [TestMethod]
+        public void PegatinaRamalloBunge_23529_36711()
+        {
+
+            //explota
+
+            string ms = "";
+
+            string archivoExcel = @"C:\Users\Administrador\Documents\bdl\pronto\docstest\PORTE050041ramallo175.txt";  // tabs
+            // string archivoExcel = @"C:\Users\Administrador\Documents\bdl\pronto\prontoweb\Documentos\pegatinas\bungeramallo.txt";
+            //archivoExcel = @"C:\Users\Administrador\Desktop\Anali19.d";   // punto y coma
+
+            int m_IdMaestro = 0;
+            Pronto.ERP.BO.CartaDePorte carta;
+
+
+            // escribir descarga de una carta
+            //carta = null;
+            //carta = CartaDePorteManager.GetItemPorNumero(SC, 549768066, 0, 0);
+            //carta.NobleGrado = 2;
+            //CartaDePorteManager.Save(SC, carta, 1, "lalala", true, ref ms);
+            //Assert.AreEqual(30000, carta.NetoFinalIncluyendoMermas);
+
+
+
+
+            string log = "";
+            //hay que pasar el formato como parametro 
+            ExcelImportadorManager.FormatearExcelImportadoEnDLL(ref m_IdMaestro, archivoExcel,
+                                    LogicaImportador.FormatosDeExcel.BungeRamalloDescargaTexto, SC, 0,
+                                    ref log, new DateTime(2016, 5, 1).ToShortDateString(), 0, "");
+
+            var dt = LogicaImportador.TraerExcelDeBase(SC, ref m_IdMaestro);
+
+            foreach (System.Data.DataRow r in dt.Rows)
+            {
+                var dr = r;
+                var c = LogicaImportador.GrabaRenglonEnTablaCDP(ref dr, SC, null, null, null,
+                                                        null, null, null, null,
+                                                        null, null);
+            }
+
+
+
+
+            //verificar que sigue así
+            carta = null;
+            carta = CartaDePorteManager.GetItemPorNumero(SC, 549768066, 0, 0);
+            carta.NobleGrado = 2;
+            CartaDePorteManager.Save(SC, carta, 1, "lalala", true, ref ms);
+            Assert.AreEqual(30000, carta.NetoFinalIncluyendoMermas);
+
+
+        }
+
+
+
+
+
+        [TestMethod]
+        public void ListadoPrincipal()
+        {
+
+            CartaDePorteManager.ListaditoPrincipal(SC);
+
+
+        }
+
+
+
+
+
+
         [TestMethod]
         public void SincroMonsanto_40195()
         {
@@ -2472,65 +2630,6 @@ System.Drawing
 
 
 
-
-
-
-
-
-
-        [TestMethod]
-        public void syngenta_webservice_30920()
-        {
-            // mandar una tanda
-
-            int idcliente = 4333; //syngenta
-
-            var dbcartas = CartaDePorteManager.ListadoSegunCliente(SC, idcliente, new DateTime(2016, 11, 1), new DateTime(2016, 11, 30), CartaDePorteManager.enumCDPestado.DescargasMasFacturadas);
-
-            var s = new ServicioCartaPorte.servi();
-
-            var x = s.WebServiceSyngenta(dbcartas);
-
-            // marcar fecha de cartas enviadas, loguar tanda de cartas enviadas para que 
-            // sepan qué excel tienen que generar (el webservice solo manda un mail si hubo error, no tengo notificacion de otro tipo)
-
-            // pagina de log o por lo menos de estado del envio de datos a syngenta.
-            //                 noenviadas=Func();
-
-
-            string DIRFTP = DirApp + @"\DataBackupear\";
-            string nombre = DIRFTP + "Syngenta_" + DateTime.Now.ToString("ddMMMyyyy_HHmmss") + ".xlsx";
-
-
-            s.GenerarExcelSyngentaWebService(x, nombre); // 3 horas 
-
-            System.Diagnostics.Process.Start(nombre);
-
-            return;
-
-
-            s.CopyFileFTP(nombre, "username", "password#");   // 4 horas
-
-            //return Log; // pagina de log o por lo menos de estado del envio de datos a syngenta. 3 horas 
-
-
-            /*
-            . El Web Service no devolverá ningún dato que haga referencia en cuanto a si se procesó bien o tuvo errores la interface.
-La interface será procesa por Syngenta y si la misma no puede ser procesada correctamente por contener errores en los datos 
-    u otra validación; se enviara un mail con el detalle del procesamiento y error al mail indicado por el entregador para esta 
-            interface como así también dicho mail será enviado de la misma forma al responsable de Canje por parte de Syngenta.
-             * 
-             * 
-             * */
-
-
-            // que pasa si alguien anula una carta de syngenta?
-            //carta.anular();
-            // -bueno, el que levanta la lista de cartas tiene que comparar la fecha de enviado con la de ultima modificacion
-
-
-
-        }
 
 
 
@@ -5858,64 +5957,6 @@ Adjunto un ejemplo que tiene cartas de porte de 8 entregadores que no son Willia
             System.Diagnostics.Process.Start(output2);
         }
 
-
-
-
-
-        [TestMethod]
-        public void PegatinaRamalloBunge_23529_36711()
-        {
-
-            //explota
-
-            string ms = "";
-
-            string archivoExcel = @"C:\Users\Administrador\Desktop\PORTE050041.txt";  // tabs
-            // string archivoExcel = @"C:\Users\Administrador\Documents\bdl\pronto\prontoweb\Documentos\pegatinas\bungeramallo.txt";
-            //archivoExcel = @"C:\Users\Administrador\Desktop\Anali19.d";   // punto y coma
-
-            int m_IdMaestro = 0;
-            Pronto.ERP.BO.CartaDePorte carta;
-
-
-            // escribir descarga de una carta
-            //carta = null;
-            //carta = CartaDePorteManager.GetItemPorNumero(SC, 549768066, 0, 0);
-            //carta.NobleGrado = 2;
-            //CartaDePorteManager.Save(SC, carta, 1, "lalala", true, ref ms);
-            //Assert.AreEqual(30000, carta.NetoFinalIncluyendoMermas);
-
-
-
-
-            string log = "";
-            //hay que pasar el formato como parametro 
-            ExcelImportadorManager.FormatearExcelImportadoEnDLL(ref m_IdMaestro, archivoExcel,
-                                    LogicaImportador.FormatosDeExcel.BungeRamalloDescargaTexto, SC, 0,
-                                    ref log, new DateTime(2016, 5, 1).ToShortDateString(), 0, "");
-
-            var dt = LogicaImportador.TraerExcelDeBase(SC, ref m_IdMaestro);
-
-            foreach (System.Data.DataRow r in dt.Rows)
-            {
-                var dr = r;
-                var c = LogicaImportador.GrabaRenglonEnTablaCDP(ref dr, SC, null, null, null,
-                                                        null, null, null, null,
-                                                        null, null);
-            }
-
-
-
-
-            //verificar que sigue así
-            carta = null;
-            carta = CartaDePorteManager.GetItemPorNumero(SC, 549768066, 0, 0);
-            carta.NobleGrado = 2;
-            CartaDePorteManager.Save(SC, carta, 1, "lalala", true, ref ms);
-            Assert.AreEqual(30000, carta.NetoFinalIncluyendoMermas);
-
-
-        }
 
 
 
