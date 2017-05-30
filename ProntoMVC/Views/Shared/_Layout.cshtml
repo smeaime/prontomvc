@@ -1007,8 +1007,9 @@ Released   : 20120723
                 // load & used 'saved-state' to override defaults
                 pageLayout = $("body").layout($.extend(myDefaultSettings, layoutState.load('pageLayout')));
 
-                $("#LogoEmpresa").css('width', parseInt($("#panelOeste").css('width')) - MARGENLOGO);
 
+                $("#LogoEmpresa").css('width', parseInt($("#panelOeste").css('width')) - MARGENLOGO);
+               // $("#SuperBuscador2").hide();
 
                 pageLayout.options.center.onresize = function () { RefrescaAnchoJqgrids(); };
                 pageLayout.options.east.onresize = function () { RefrescaAnchoJqgrids(); };
@@ -1713,7 +1714,7 @@ Released   : 20120723
                         <div id="spanDelSuperbuscador" class="span3 ">
                             <div class="span12" style="margin-top: 9px; width: 100%; ">
                                 <div class="input-prepend input-append" style="width: 100%">
-                                    @if (Roles.IsUserInRole(ViewBag.NombreUsuario, "SuperAdmin"))
+                                    @if (Roles.IsUserInRole(ViewBag.NombreUsuario, "SuperAdmin") && false)
                                     {
 
                                         <input id="SuperBuscador2" type="text" class="span12" placeholder=""   style="margin-left: -25px;" />
