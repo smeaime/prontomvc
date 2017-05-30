@@ -1776,6 +1776,46 @@ Public Module ProntoFuncionesUIWeb
 
 
 
+
+
+    Sub DatosDeSesion(SC As String, UsuarioNombre As String, session As Object, ConexBDLmaster As String, yo As Login, idempresa As Integer)
+
+        Try
+            BDLMasterEmpresasManagerMigrar.AddEmpresaToSession(idempresa, session, ConexBDLmaster, yo)
+
+            Dim emp As EmpresaList = EmpresaManager.GetList(ConexBDLmaster)
+
+            Dim eee = emp.Find(Function(x) x.Id = idempresa)
+
+            session(SESSIONPRONTO_NombreEmpresa) = eee.Descripcion
+
+
+        Catch ex As Exception
+            ErrHandler2.WriteError(ex)
+        End Try
+
+
+        'HttpContext.Current.Session(SESSIONPRONTO_glbIdUsuario) 'esto es el idempleado en la base elegida
+        'no tendria q llamar a AddEmpresaToSession? estoy sacando de ahi este codigo
+
+        'Dim dt = EntidadManager.ExecDinamico(SC, "Empleados_TX_UsuarioNT '" & UsuarioNombre & "'", 15)
+
+        'If dt.Rows.Count > 0 Then
+        '    'Lo encontró, y me traigo sus datos
+        '    With dt.Rows(0)
+        '        session(SESSIONPRONTO_glbIdUsuario) = .Item(0)
+        '        session(SESSIONPRONTO_glbIdSector) = .Item("IdSector")
+        '        session(SESSIONPRONTO_glbLegajo) = .Item("Legajo")
+        '        session(SESSIONPRONTO_glbIdCuentaFFUsuario) = .Item("IdCuentaFondoFijo")
+        '        session(SESSIONPRONTO_glbIdObraAsignadaUsuario) = .Item("IdObraAsignada")
+        '    End With
+        'End If
+
+
+    End Sub
+
+
+
     Function ConexBDLmaster() As String
         Dim sCadena As String
 
@@ -4258,6 +4298,7 @@ Public Module ProntoFuncionesUIWeb
                     HttpContext.Current.Session(SESSIONPRONTO_UserId) = mu.ProviderUserKey.ToString
                     HttpContext.Current.Session(SESSIONPRONTO_UserName) = mu.UserName
 
+
                     'el problema es q va a buscar datos de la session...  -el ID de la session tambien se manda por cookie
 
                     Dim lista As Pronto.ERP.BO.EmpresaList
@@ -4277,6 +4318,7 @@ Public Module ProntoFuncionesUIWeb
 
                     HttpContext.Current.Session(SESSIONPRONTO_USUARIO) = usuario
 
+                    DatosDeSesion(usuario.StringConnection, usuario.Nombre, HttpContext.Current.Session, sConex, Nothing, usuario.IdEmpresa)
 
                     Return usuario.StringConnection
                     '//////////////////////////////////////////////////////////////////
@@ -4319,6 +4361,8 @@ Public Module ProntoFuncionesUIWeb
                 usuario.StringConnection = Encriptar(BDLMasterEmpresasManager.GetConnectionStringEmpresa(usuario.UserId, usuario.IdEmpresa, sConex, "XXXXXX"))
 
                 HttpContext.Current.Session(SESSIONPRONTO_USUARIO) = usuario
+
+                DatosDeSesion(usuario.StringConnection, usuario.Nombre, HttpContext.Current.Session, sConex, Nothing, usuario.IdEmpresa)
 
                 Return usuario.StringConnection
 

@@ -1,0 +1,335 @@
+
+Log Entry : 
+05/30/2017 13:29:16
+Error in: http://localhost:53829/ErrorPages/Oops.aspx. Error Message:supervisor esta logueado, pero lo redirijo al login porque faltan los datos de session. No deberia mejor mandarlo a SeleccionarEmpresa? Ademas, no hago el LogOut y le queda el cookie!!!
+__________________________
+
+Log Entry : 
+05/30/2017 13:29:16
+Error in: http://localhost:53829/ErrorPages/Oops.aspx. Error Message: -  Error en ExecDinamico. - System.InvalidOperationException: No se ha inicializado la propiedad ConnectionString.
+   en System.Data.SqlClient.SqlConnection.PermissionDemand()
+   en System.Data.SqlClient.SqlConnectionFactory.PermissionDemand(DbConnection outerConnection)
+   en System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.Open()
+   en Pronto.ERP.Dal.GeneralDB.ExecDinamico(String SC, String comandoSQLdinamico, Int32 timeoutSegundos) - Empleados_TX_UsuarioNT 'supervisor' 15 15
+__________________________
+
+Log Entry : 
+05/30/2017 13:29:16
+Error in: http://localhost:53829/ErrorPages/Oops.aspx. Error Message:No se ha inicializado la propiedad ConnectionString.
+__________________________
+
+Log Entry : 
+05/30/2017 13:29:31
+Error in: http://localhost:53829/ErrorPages/Oops.aspx. Error Message:System.InvalidOperationException
+No se ha inicializado la propiedad ConnectionString.
+   en System.Data.SqlClient.SqlConnection.PermissionDemand()
+   en System.Data.SqlClient.SqlConnectionFactory.PermissionDemand(DbConnection outerConnection)
+   en System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.Open()
+   en Pronto.ERP.Dal.GeneralDB.ExecDinamico(String SC, String comandoSQLdinamico, Int32 timeoutSegundos)
+   en Pronto.ERP.Bll.EntidadManager.ExecDinamico(String SC, String sComandoDinamico, Int32 timeoutSegundos) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\EntidadManager.vb:línea 816
+   en ProntoFuncionesUIWeb.DatosDeSesion(String SC, String UsuarioNombre, Object session) en Y:\pronto\prontoweb\App_Code\vbcode\ManagerDebug\FuncionesUIWeb.vb:línea 1785
+   en ProntoFuncionesUIWeb.GetConnectionString(HttpServerUtility Server, HttpSessionState Session) en Y:\pronto\prontoweb\App_Code\vbcode\ManagerDebug\FuncionesUIWeb.vb:línea 4348
+   en ProntoWeb_Principal.Page_Load(Object sender, EventArgs e) en Y:\pronto\prontoweb\ErrorPages\Oops.aspx.vb:línea 17
+   en System.Web.UI.Control.OnLoad(EventArgs e)
+   en System.Web.UI.Control.LoadRecursive()
+   en System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+System.Data
+__________________________
+
+Log Entry : 
+05/30/2017 13:29:34
+Error in: http://localhost:53829/ProntoWeb/Principal.aspx. Error Message:Mariano esta logueado, pero lo redirijo al login porque faltan los datos de session. No deberia mejor mandarlo a SeleccionarEmpresa? Ademas, no hago el LogOut y le queda el cookie!!!
+__________________________
+
+Log Entry : 
+05/30/2017 13:29:36
+Error in: http://localhost:53829/ProntoWeb/CartasDePortes.aspx?tipo=Todas. Error Message:Mariano
+__________________________
+
+Log Entry : 
+05/30/2017 13:29:50
+Error in: http://localhost:53829/ProntoWeb/CartasDePortes.aspx?tipo=Todas. Error Message:System.NullReferenceException
+Variable de objeto o de bloque With no establecida.
+   en Microsoft.VisualBasic.CompilerServices.Symbols.Container..ctor(Object Instance)
+   en Microsoft.VisualBasic.CompilerServices.NewLateBinding.LateGet(Object Instance, Type Type, String MemberName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack)
+   en MasterPage.Page_Load(Object sender, EventArgs e) en Y:\pronto\prontoweb\MasterPage.master.vb:línea 225
+Microsoft.VisualBasic
+__________________________
+
+Log Entry : 
+05/30/2017 13:30:17
+Error in: http://localhost:53829/ProntoWeb/CartasDePortes.aspx?tipo=Todas. Error Message:Mariano
+__________________________
+
+Log Entry : 
+05/30/2017 13:30:49
+Error in: http://localhost:53829/ProntoWeb/CartasDePortes.aspx?tipo=Todas. Error Message:System.NullReferenceException
+Variable de objeto o de bloque With no establecida.
+   en Microsoft.VisualBasic.CompilerServices.Symbols.Container..ctor(Object Instance)
+   en Microsoft.VisualBasic.CompilerServices.NewLateBinding.LateGet(Object Instance, Type Type, String MemberName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack)
+   en MasterPage.Page_Load(Object sender, EventArgs e) en Y:\pronto\prontoweb\MasterPage.master.vb:línea 225
+Microsoft.VisualBasic
+__________________________
+
+Log Entry : 
+05/30/2017 13:31:27
+Error in: http://localhost:53829/ProntoWeb/CartasDePortes.aspx?tipo=Todas. Error Message:Mariano
+__________________________
+
+Log Entry : 
+05/30/2017 13:31:33
+Error in: http://localhost:53829/ProntoWeb/CartasDePortes.aspx?tipo=Todas. Error Message:Mariano esta logueado, pero lo redirijo al login porque faltan los datos de session. No deberia mejor mandarlo a SeleccionarEmpresa? Ademas, no hago el LogOut y le queda el cookie!!!
+__________________________
+
+Log Entry : 
+05/30/2017 13:31:55
+Error in: http://localhost:53829/ProntoWeb/CartasDePortes.aspx?tipo=Todas. Error Message:System.NullReferenceException
+Variable de objeto o de bloque With no establecida.
+   en Microsoft.VisualBasic.CompilerServices.Symbols.Container..ctor(Object Instance)
+   en Microsoft.VisualBasic.CompilerServices.NewLateBinding.LateGet(Object Instance, Type Type, String MemberName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack)
+   en MasterPage.Page_Load(Object sender, EventArgs e) en Y:\pronto\prontoweb\MasterPage.master.vb:línea 225
+Microsoft.VisualBasic
+__________________________
+
+Log Entry : 
+05/30/2017 13:48:40
+Error in: http://localhost:53829/ProntoWeb/Principal.aspx. Error Message:Mariano esta logueado, pero lo redirijo al login porque faltan los datos de session. No deberia mejor mandarlo a SeleccionarEmpresa? Ademas, no hago el LogOut y le queda el cookie!!!
+__________________________
+
+Log Entry : 
+05/30/2017 13:48:41
+Error in: http://localhost:53829/ProntoWeb/CartasDePortes.aspx?tipo=Todas. Error Message:Mariano
+__________________________
+
+Log Entry : 
+05/30/2017 13:48:43
+Error in: http://localhost:53829/ProntoWeb/CartasDePortes.aspx?tipo=Todas. Error Message:System.NullReferenceException
+Variable de objeto o de bloque With no establecida.
+   en Microsoft.VisualBasic.CompilerServices.Symbols.Container..ctor(Object Instance)
+   en Microsoft.VisualBasic.CompilerServices.NewLateBinding.LateGet(Object Instance, Type Type, String MemberName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack)
+   en MasterPage.Page_Load(Object sender, EventArgs e) en Y:\pronto\prontoweb\MasterPage.master.vb:línea 225
+Microsoft.VisualBasic
+__________________________
+
+Log Entry : 
+05/30/2017 13:50:23
+Error in: http://localhost:53829/ProntoWeb/CartasDePortes.aspx?tipo=Todas. Error Message:Mariano
+__________________________
+
+Log Entry : 
+05/30/2017 13:50:24
+Error in: http://localhost:53829/ProntoWeb/CartasDePortes.aspx?tipo=Todas. Error Message:System.NullReferenceException
+Variable de objeto o de bloque With no establecida.
+   en Microsoft.VisualBasic.CompilerServices.Symbols.Container..ctor(Object Instance)
+   en Microsoft.VisualBasic.CompilerServices.NewLateBinding.LateGet(Object Instance, Type Type, String MemberName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack)
+   en MasterPage.Page_Load(Object sender, EventArgs e) en Y:\pronto\prontoweb\MasterPage.master.vb:línea 225
+Microsoft.VisualBasic
+__________________________
+
+Log Entry : 
+05/30/2017 14:03:09
+Error in: http://localhost:53829/ProntoWeb/Principal.aspx. Error Message:Mariano esta logueado, pero lo redirijo al login porque faltan los datos de session. No deberia mejor mandarlo a SeleccionarEmpresa? Ademas, no hago el LogOut y le queda el cookie!!!
+__________________________
+
+Log Entry : 
+05/30/2017 14:03:10
+Error in: http://localhost:53829/ProntoWeb/CartasDePortes.aspx?tipo=Todas. Error Message:Mariano
+__________________________
+
+Log Entry : 
+05/30/2017 14:03:12
+Error in: http://localhost:53829/ProntoWeb/CartasDePortes.aspx?tipo=Todas. Error Message:System.NullReferenceException
+Variable de objeto o de bloque With no establecida.
+   en Microsoft.VisualBasic.CompilerServices.Symbols.Container..ctor(Object Instance)
+   en Microsoft.VisualBasic.CompilerServices.NewLateBinding.LateGet(Object Instance, Type Type, String MemberName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack)
+   en MasterPage.Page_Load(Object sender, EventArgs e) en Y:\pronto\prontoweb\MasterPage.master.vb:línea 225
+Microsoft.VisualBasic
+__________________________
+
+Log Entry : 
+05/30/2017 14:04:32
+Error in: http://localhost:53829/ProntoWeb/CartasDePortes.aspx?tipo=Todas. Error Message:Mariano
+__________________________
+
+Log Entry : 
+05/30/2017 14:04:34
+Error in: http://localhost:53829/ProntoWeb/CartasDePortes.aspx?tipo=Todas. Error Message:System.NullReferenceException
+Variable de objeto o de bloque With no establecida.
+   en Microsoft.VisualBasic.CompilerServices.Symbols.Container..ctor(Object Instance)
+   en Microsoft.VisualBasic.CompilerServices.NewLateBinding.LateGet(Object Instance, Type Type, String MemberName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack)
+   en MasterPage.Page_Load(Object sender, EventArgs e) en Y:\pronto\prontoweb\MasterPage.master.vb:línea 225
+Microsoft.VisualBasic
+__________________________
+
+Log Entry : 
+05/30/2017 14:07:49
+Error in: http://localhost:53829/ProntoWeb/CartasDePortes.aspx?tipo=Todas. Error Message:Mariano
+__________________________
+
+Log Entry : 
+05/30/2017 14:07:50
+Error in: http://localhost:53829/ProntoWeb/CartasDePortes.aspx?tipo=Todas. Error Message:System.NullReferenceException
+Variable de objeto o de bloque With no establecida.
+   en Microsoft.VisualBasic.CompilerServices.Symbols.Container..ctor(Object Instance)
+   en Microsoft.VisualBasic.CompilerServices.NewLateBinding.LateGet(Object Instance, Type Type, String MemberName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack)
+   en MasterPage.Page_Load(Object sender, EventArgs e) en Y:\pronto\prontoweb\MasterPage.master.vb:línea 225
+Microsoft.VisualBasic
+__________________________
+
+Log Entry : 
+05/30/2017 14:16:13
+Error in: http://localhost:53829/ProntoWeb/CartasDePortes.aspx?tipo=Todas. Error Message:Mariano
+__________________________
+
+Log Entry : 
+05/30/2017 14:16:14
+Error in: http://localhost:53829/ProntoWeb/CartasDePortes.aspx?tipo=Todas. Error Message:System.NullReferenceException
+Variable de objeto o de bloque With no establecida.
+   en Microsoft.VisualBasic.CompilerServices.Symbols.Container..ctor(Object Instance)
+   en Microsoft.VisualBasic.CompilerServices.NewLateBinding.LateGet(Object Instance, Type Type, String MemberName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack)
+   en MasterPage.Page_Load(Object sender, EventArgs e) en Y:\pronto\prontoweb\MasterPage.master.vb:línea 225
+Microsoft.VisualBasic
+__________________________
+
+Log Entry : 
+05/30/2017 14:16:17
+Error in: http://localhost:53829/ProntoWeb/CartasDePortes.aspx?tipo=Todas. Error Message:Mariano
+__________________________
+
+Log Entry : 
+05/30/2017 14:16:19
+Error in: http://localhost:53829/ProntoWeb/CartasDePortes.aspx?tipo=Todas. Error Message:System.NullReferenceException
+Variable de objeto o de bloque With no establecida.
+   en Microsoft.VisualBasic.CompilerServices.Symbols.Container..ctor(Object Instance)
+   en Microsoft.VisualBasic.CompilerServices.NewLateBinding.LateGet(Object Instance, Type Type, String MemberName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack)
+   en MasterPage.Page_Load(Object sender, EventArgs e) en Y:\pronto\prontoweb\MasterPage.master.vb:línea 225
+Microsoft.VisualBasic
+__________________________
+
+Log Entry : 
+05/30/2017 14:21:08
+Error in: http://localhost:53829/ProntoWeb/CartasDePortes.aspx?tipo=Todas. Error Message:Mariano
+__________________________
+
+Log Entry : 
+05/30/2017 14:21:09
+Error in: http://localhost:53829/ProntoWeb/CartasDePortes.aspx?tipo=Todas. Error Message:System.NullReferenceException
+Variable de objeto o de bloque With no establecida.
+   en Microsoft.VisualBasic.CompilerServices.Symbols.Container..ctor(Object Instance)
+   en Microsoft.VisualBasic.CompilerServices.NewLateBinding.LateGet(Object Instance, Type Type, String MemberName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack)
+   en MasterPage.Page_Load(Object sender, EventArgs e) en Y:\pronto\prontoweb\MasterPage.master.vb:línea 225
+Microsoft.VisualBasic
+__________________________
+
+Log Entry : 
+05/30/2017 14:24:00
+Error in: http://localhost:53829/ProntoWeb/CartasDePortes.aspx?tipo=Todas. Error Message:Mariano
+__________________________
+
+Log Entry : 
+05/30/2017 14:24:01
+Error in: http://localhost:53829/ProntoWeb/CartasDePortes.aspx?tipo=Todas. Error Message:System.NullReferenceException
+Variable de objeto o de bloque With no establecida.
+   en Microsoft.VisualBasic.CompilerServices.Symbols.Container..ctor(Object Instance)
+   en Microsoft.VisualBasic.CompilerServices.NewLateBinding.LateGet(Object Instance, Type Type, String MemberName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack)
+   en MasterPage.Page_Load(Object sender, EventArgs e) en Y:\pronto\prontoweb\MasterPage.master.vb:línea 225
+Microsoft.VisualBasic
+__________________________
+
+Log Entry : 
+05/30/2017 14:29:14
+Error in: http://localhost:53829/ProntoWeb/Principal.aspx. Error Message:Mariano esta logueado, pero lo redirijo al login porque faltan los datos de session. No deberia mejor mandarlo a SeleccionarEmpresa? Ademas, no hago el LogOut y le queda el cookie!!!
+__________________________
+
+Log Entry : 
+05/30/2017 14:30:17
+Error in: http://localhost:53829/ProntoWeb/CartasDePortes.aspx?tipo=Todas. Error Message:Mariano
+__________________________
+
+Log Entry : 
+05/30/2017 14:30:24
+Error in: http://localhost:53829/ProntoWeb/CartasDePortes.aspx?tipo=Todas. Error Message:System.NullReferenceException
+Variable de objeto o de bloque With no establecida.
+   en Microsoft.VisualBasic.CompilerServices.Symbols.Container..ctor(Object Instance)
+   en Microsoft.VisualBasic.CompilerServices.NewLateBinding.LateGet(Object Instance, Type Type, String MemberName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack)
+   en MasterPage.Page_Load(Object sender, EventArgs e) en Y:\pronto\prontoweb\MasterPage.master.vb:línea 225
+Microsoft.VisualBasic
+__________________________
+
+Log Entry : 
+05/30/2017 14:35:55
+Error in: http://localhost:53829/ProntoWeb/Principal.aspx. Error Message:Mariano esta logueado, pero lo redirijo al login porque faltan los datos de session. No deberia mejor mandarlo a SeleccionarEmpresa? Ademas, no hago el LogOut y le queda el cookie!!!
+__________________________
+
+Log Entry : 
+05/30/2017 14:35:56
+Error in: http://localhost:53829/ProntoWeb/CartasDePortes.aspx?tipo=Todas. Error Message:Mariano
+__________________________
+
+Log Entry : 
+05/30/2017 14:36:21
+Error in: http://localhost:53829/ProntoWeb/CartasDePortes.aspx?tipo=Todas. Error Message:Mariano
+__________________________
+
+Log Entry : 
+05/30/2017 14:36:21
+Error in: http://localhost:53829/ProntoWeb/CartasDePortes.aspx?tipo=Todas. Error Message:Mariano esta logueado, pero lo redirijo al login porque faltan los datos de session. No deberia mejor mandarlo a SeleccionarEmpresa? Ademas, no hago el LogOut y le queda el cookie!!!
+__________________________
+
+Log Entry : 
+05/30/2017 14:38:05
+Error in: http://localhost:53829/ProntoWeb/CartasDePortes.aspx?tipo=Descargas. Error Message:Mariano
+__________________________
+
+Log Entry : 
+05/30/2017 14:42:15
+Error in: http://localhost:53829/ProntoWeb/CartasDePortes.aspx?tipo=Todas. Error Message:Mariano
+__________________________
+
+Log Entry : 
+05/30/2017 14:43:20
+Error in: http://localhost:53829/ProntoWeb/CDPMailing.aspx. Error Message:Mariano esta logueado, pero lo redirijo al login porque faltan los datos de session. No deberia mejor mandarlo a SeleccionarEmpresa? Ademas, no hago el LogOut y le queda el cookie!!!
+__________________________
+
+Log Entry : 
+05/30/2017 14:46:43
+Error in: http://localhost:53829/ProntoWeb/CDPMailing.aspx. Error Message:Mariano esta logueado, pero lo redirijo al login porque faltan los datos de session. No deberia mejor mandarlo a SeleccionarEmpresa? Ademas, no hago el LogOut y le queda el cookie!!!
+__________________________
+
+Log Entry : 
+05/30/2017 14:47:23
+Error in: http://localhost:53829/ProntoWeb/Principal.aspx. Error Message:Mariano esta logueado, pero lo redirijo al login porque faltan los datos de session. No deberia mejor mandarlo a SeleccionarEmpresa? Ademas, no hago el LogOut y le queda el cookie!!!
+__________________________
+
+Log Entry : 
+05/30/2017 14:47:32
+Error in: http://localhost:53829/ProntoWeb/CartasDePortes.aspx?tipo=Todas. Error Message:Mariano
+__________________________
+
+Log Entry : 
+05/30/2017 14:50:00
+Error in: http://localhost:53829/ProntoWeb/CDPMailing.aspx. Error Message:Mariano esta logueado, pero lo redirijo al login porque faltan los datos de session. No deberia mejor mandarlo a SeleccionarEmpresa? Ademas, no hago el LogOut y le queda el cookie!!!
+__________________________
+
+Log Entry : 
+05/30/2017 14:50:44
+Error in: http://localhost:53829/ProntoWeb/CDPMailing.aspx. Error Message:Mariano esta logueado, pero lo redirijo al login porque faltan los datos de session. No deberia mejor mandarlo a SeleccionarEmpresa? Ademas, no hago el LogOut y le queda el cookie!!!
+__________________________
+
+Log Entry : 
+05/30/2017 14:58:05
+Error in: http://localhost:53829/ProntoWeb/ConexionHaciaSyngenta.aspx. Error Message:System.UriFormatException
+URI no válido: no se puede analizar el nombre de host.
+   en System.Uri.CreateThis(String uri, Boolean dontEscape, UriKind uriKind)
+   en System.Uri..ctor(String uriString)
+   en ServicioCartaPorte.servi.UploadFtpFile(String ftpsitio, String folderName, String fileName, String user, String pass) en c:\Users\Administrador\Documents\bdl\pronto\InterfazFlexicapture\prontoflexicapture.cs:línea 3986
+System
+__________________________

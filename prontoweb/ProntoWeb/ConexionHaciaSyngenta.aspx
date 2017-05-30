@@ -172,11 +172,12 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
         <br />
 
-        <asp:Button ID="Button1" Text="Enviar con WebService" runat="server" Visible="false" CssClass="btn btn-primary" />
 
         <asp:Button ID="btnExportarGrilla" Text="Enviar con WebService" runat="server" Visible="true" CssClass="btn btn-primary"
           Height="40" />
 
+        <asp:Button ID="Button1" Text="Enviar con WebService" runat="server" Visible="false" CssClass="btn btn-primary" />
+        <asp:Button ID="btnFTP" Text="Enviar con FTP" runat="server" Visible="true" CssClass="btn btn-primary" />
         <%--<input type="button" id="btnExportarGrillaAjax2" value="Enviar con WebService"   class="btn btn-primary" />--%>
 
         <input type="button" id="btnExportarGrillaAjax" value="Exportar Excel manual" class="btn btn-primary" />

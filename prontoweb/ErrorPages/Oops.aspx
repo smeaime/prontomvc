@@ -28,7 +28,7 @@
     <%-- Por favor, llamanos al (011) 4983-0976 --%>
     <br />
     <br />
-    El administrador ya recibi� detalles del error con tu nombre y la hora <%--con el t�tulo "Usuario Hora"--%>
+    El administrador ya recibió detalles del error con tu nombre y la hora <%--con el t�tulo "Usuario Hora"--%>
     <br />
     <br /><br /><br />
     BDL Consultores
