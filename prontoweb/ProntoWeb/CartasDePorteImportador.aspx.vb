@@ -94,7 +94,10 @@ Partial Class CartasDePorteImportador
         usuario = Session(SESSIONPRONTO_USUARIO)
 
         'que pasa si el usuario es Nothing? Qué se rompió?
-        If usuario Is Nothing Then Response.Redirect(String.Format("../Login.aspx"))
+        If usuario Is Nothing Then
+            Response.Redirect(String.Format("../Login.aspx"))
+            'DatosDeSesion()
+        End If
 
         SC = usuario.StringConnection
         HFSC.Value = SC
