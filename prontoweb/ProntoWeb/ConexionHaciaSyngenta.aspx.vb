@@ -485,6 +485,50 @@ Partial Class ConexionHaciaSyngenta
 
 
 
+
+    Protected Sub btnFTP_Click(sender As Object, e As EventArgs) Handles btnFTP.Click
+
+
+
+        Dim dFechaDesde = New DateTime(1980, 1, 1)
+        Dim dFechaHasta = New DateTime(2050, 1, 1)
+
+        Try
+
+            dFechaDesde = DateTime.ParseExact(txtFechaDesde.Text, "dd/MM/yyyy", Nothing)
+        Catch ex As Exception
+
+        End Try
+
+        Try
+            dFechaHasta = DateTime.ParseExact(txtFechaHasta.Text, "dd/MM/yyyy", Nothing)
+
+        Catch ex As Exception
+
+        End Try
+
+
+        Dim idcliente = 4333 ' //syngenta
+
+        Dim dbcartas = CartaDePorteManager.ListadoSegunCliente(HFSC.Value, idcliente, dFechaDesde, dFechaHasta, CartaDePorteManager.enumCDPestado.DescargasMasFacturadas)
+
+        Dim output As String = Path.GetTempPath() + "Syngenta_" + DateTime.Now.ToString("ddMMMyyyy_HHmmss") + ".xlsx"
+
+        Dim s = New ServicioCartaPorte.servi()
+
+
+
+        s.UploadFtpFile(ConfigurationManager.AppSettings("SyngentaFTPdominio"),
+                            ConfigurationManager.AppSettings("SyngentaFTPdir"),
+                            output,
+                            ConfigurationManager.AppSettings("SyngentaFTPuser"),
+                            ConfigurationManager.AppSettings("SyngentaFTPpass"))
+
+    End Sub
+
+
+
+
     Protected Sub btnExportarGrilla_Click(sender As Object, e As EventArgs) Handles btnExportarGrilla.Click
 
 
