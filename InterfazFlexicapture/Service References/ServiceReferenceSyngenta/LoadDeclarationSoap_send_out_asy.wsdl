@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:p1="urn:broker:o2c:s:global:delivery:loaddeclaration:100" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" name="LoadDeclarationSoap_send_out_asy" targetNamespace="urn:broker:o2c:s:global:delivery:loaddeclaration:100" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:documentation />
+  <wsp:UsingPolicy wsdl:required="true" />
+  <wsp:Policy wsu:Id="OP_LoadDeclarationSoap_send_out_asy" />
+  <wsdl:types>
+    <xsd:schema xmlns="urn:broker:o2c:s:global:delivery:loaddeclaration:100" targetNamespace="urn:broker:o2c:s:global:delivery:loaddeclaration:100" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <xsd:element name="MT_Delivery" type="p1:DT_Delivery" />
+      <xsd:complexType name="DT_Delivery">
+        <xsd:annotation>
+          <xsd:appinfo source="http://sap.com/xi/VersionID">f7cd0294e79911e69c770000002094d3</xsd:appinfo>
+        </xsd:annotation>
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="delivery">
+            <xsd:annotation>
+              <xsd:appinfo source="http://sap.com/xi/TextID">57458c09e77c11e6c9bc00059a3c7800</xsd:appinfo>
+            </xsd:annotation>
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element minOccurs="0" name="action" type="xsd:string">
+                  <xsd:annotation>
+                    <xsd:appinfo source="http://sap.com/xi/TextID">574491c9e77c11e69bae00059a3c7800</xsd:appinfo>
+                  </xsd:annotation>
+                </xsd:element>
+                <xsd:element minOccurs="0" name="delivery_type" type="xsd:string">
+                  <xsd:annotation>
+                    <xsd:appinfo source="http://sap.com/xi/TextID">5744c784e77c11e6811900059a3c7800</xsd:appinfo>
+                  </xsd:annotation>
+                </xsd:element>
+                <xsd:element minOccurs="0" name="carta_porte" type="xsd:string">
+                  <xsd:annotation>
+                    <xsd:appinfo source="http://sap.com/xi/TextID">5745001ae77c11e68e5400059a3c7800</xsd:appinfo>
+                  </xsd:annotation>
+                </xsd:element>
+                <xsd:element minOccurs="0" name="grain_receiver" type="xsd:string">
+                  <xsd:annotation>
+                    <xsd:appinfo source="http://sap.com/xi/TextID">f9408639e79911e6ac8d00059a3c7800</xsd:appinfo>
+                  </xsd:annotation>
+                </xsd:element>
+                <xsd:element minOccurs="0" name="CTG_number" type="xsd:string">
+                  <xsd:annotation>
+                    <xsd:appinfo source="http://sap.com/xi/TextID">5745001be77c11e6853b00059a3c7800</xsd:appinfo>
+                  </xsd:annotation>
+                </xsd:element>
+                <xsd:element minOccurs="0" name="titular" type="xsd:string">
+                  <xsd:annotation>
+                    <xsd:appinfo source="http://sap.com/xi/TextID">5745001ce77c11e6af7800059a3c7800</xsd:appinfo>
+                  </xsd:annotation>
+                </xsd:element>
+                <xsd:element minOccurs="0" name="titular_CUIT" type="xsd:string">
+                  <xsd:annotation>
+                    <xsd:appinfo source="http://sap.com/xi/TextID">5745001de77c11e6cbe900059a3c7800</xsd:appinfo>
+                  </xsd:annotation>
+                </xsd:element>
+                <xsd:element minOccurs="0" name="Intermediario" type="xsd:string">
+                  <xsd:annotation>
+                    <xsd:appinfo source="http://sap.com/xi/TextID">5745001ee77c11e68ff000059a3c7800</xsd:appinfo>
+                  </xsd:annotation>
+                </xsd:element>
+                <xsd:element minOccurs="0" name="Intermediario_CUIT" type="xsd:string">
+                  <xsd:annotation>
+                    <xsd:appinfo source="http://sap.com/xi/TextID">f940863ae79911e6ae2d00059a3c7800</xsd:appinfo>
+                  </xsd:annotation>
+                </xsd:element>
+                <xsd:element minOccurs="0" name="remitente" type="xsd:string">
+                  <xsd:annotation>
+                    <xsd:appinfo source="http://sap.com/xi/TextID">f940863be79911e68cdc00059a3c7800</xsd:appinfo>
+                  </xsd:annotation>
+                </xsd:element>
+                <xsd:element minOccurs="0" name="remitente_CUIT" type="xsd:string">
+                  <xsd:annotation>
+                    <xsd:appinfo source="http://sap.com/xi/TextID">f940863ce79911e6c43200059a3c7800</xsd:appinfo>
+                  </xsd:annotation>
+                </xsd:element>
+                <xsd:element minOccurs="0" name="corredor_CUIT" type="xsd:string">
+                  <xsd:annotation>
+                    <xsd:appinfo source="http://sap.com/xi/TextID">f940863de79911e6807700059a3c7800</xsd:appinfo>
+                  </xsd:annotation>
+                </xsd:element>
+                <xsd:element minOccurs="0" name="entregador" type="xsd:string">
+                  <xsd:annotation>
+                    <xsd:appinfo source="http://sap.com/xi/TextID">f940863ee79911e696f100059a3c7800</xsd:appinfo>
+                  </xsd:annotation>
+                </xsd:element>
+                <xsd:element minOccurs="0" name="entregador_CUIT" type="xsd:string">
+                  <xsd:annotation>
+                    <xsd:appinfo source="http://sap.com/xi/TextID">f940863fe79911e6ae8300059a3c7800</xsd:appinfo>
+                  </xsd:annotation>
+                </xsd:element>
+                <xsd:element minOccurs="0" name="destinatario" type="xsd:string">
+                  <xsd:annotation>
+                    <xsd:appinfo source="http://sap.com/xi/TextID">f9408640e79911e6ab4300059a3c7800</xsd:appinfo>
+                  </xsd:annotation>
+                </xsd:element>
+                <xsd:element minOccurs="0" name="destinatario_CUIT" type="xsd:string">
+                  <xsd:annotation>
+                    <xsd:appinfo source="http://sap.com/xi/TextID">f9408641e79911e68a6700059a3c7800</xsd:appinfo>
+                  </xsd:annotation>
+                </xsd:element>
+                <xsd:element minOccurs="0" name="destino" type="xsd:string">
+                  <xsd:annotation>
+                    <xsd:appinfo source="http://sap.com/xi/TextID">f9408642e79911e69b5300059a3c7800</xsd:appinfo>
+                  </xsd:annotation>
+                </xsd:element>
+                <xsd:element minOccurs="0" name="destino_CUIT" type="xsd:string">
+                  <xsd:annotation>
+                    <xsd:appinfo source="http://sap.com/xi/TextID">f9408643e79911e6ad0300059a3c7800</xsd:appinfo>
+                  </xsd:annotation>
+                </xsd:element>
+                <xsd:element minOccurs="0" name="transportista" type="xsd:string">
+                  <xsd:annotation>
+                    <xsd:appinfo source="http://sap.com/xi/TextID">f940b0a9e79911e6c03800059a3c7800</xsd:appinfo>
+                  </xsd:annotation>
+                </xsd:element>
+                <xsd:element minOccurs="0" name="transportista_CUIT" type="xsd:string">
+                  <xsd:annotation>
+                    <xsd:appinfo source="http://sap.com/xi/TextID">f940b0aae79911e69dbb00059a3c7800</xsd:appinfo>
+                  </xsd:annotation>
+                </xsd:element>
+                <xsd:element minOccurs="0" name="delivery_date" type="xsd:string">
+                  <xsd:annotation>
+                    <xsd:appinfo source="http://sap.com/xi/TextID">f940b0abe79911e6af8b00059a3c7800</xsd:appinfo>
+                  </xsd:annotation>
+                </xsd:element>
+                <xsd:element minOccurs="0" maxOccurs="unbounded" name="item">
+                  <xsd:annotation>
+                    <xsd:appinfo source="http://sap.com/xi/TextID">5745756ae77c11e6c45800059a3c7800</xsd:appinfo>
+                  </xsd:annotation>
+                  <xsd:complexType>
+                    <xsd:sequence>
+                      <xsd:element minOccurs="0" name="grain" type="xsd:string">
+                        <xsd:annotation>
+                          <xsd:appinfo source="http://sap.com/xi/TextID">57451d11e77c11e6ceec00059a3c7800</xsd:appinfo>
+                        </xsd:annotation>
+                      </xsd:element>
+                      <xsd:element minOccurs="0" name="quantity" type="xsd:string">
+                        <xsd:annotation>
+                          <xsd:appinfo source="http://sap.com/xi/TextID">57452adae77c11e6c82b00059a3c7800</xsd:appinfo>
+                        </xsd:annotation>
+                      </xsd:element>
+                      <xsd:element minOccurs="0" name="UOM" type="xsd:string">
+                        <xsd:annotation>
+                          <xsd:appinfo source="http://sap.com/xi/TextID">57452adbe77c11e6985c00059a3c7800</xsd:appinfo>
+                        </xsd:annotation>
+                      </xsd:element>
+                      <xsd:element minOccurs="0" name="origin" type="xsd:string">
+                        <xsd:annotation>
+                          <xsd:appinfo source="http://sap.com/xi/TextID">57452adce77c11e6c98d00059a3c7800</xsd:appinfo>
+                        </xsd:annotation>
+                      </xsd:element>
+                      <xsd:element minOccurs="0" name="destination" type="xsd:string">
+                        <xsd:annotation>
+                          <xsd:appinfo source="http://sap.com/xi/TextID">57452adde77c11e6985500059a3c7800</xsd:appinfo>
+                        </xsd:annotation>
+                      </xsd:element>
+                      <xsd:element minOccurs="0" name="year_of_Harvest" type="xsd:string">
+                        <xsd:annotation>
+                          <xsd:appinfo source="http://sap.com/xi/TextID">57452adee77c11e6cf2200059a3c7800</xsd:appinfo>
+                        </xsd:annotation>
+                      </xsd:element>
+                    </xsd:sequence>
+                  </xsd:complexType>
+                </xsd:element>
+              </xsd:sequence>
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:sequence>
+      </xsd:complexType>
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="MT_Delivery">
+    <wsdl:documentation />
+    <wsdl:part name="MT_Delivery" element="p1:MT_Delivery" />
+  </wsdl:message>
+  <wsdl:portType name="LoadDeclarationSoap_send_out_asy">
+    <wsdl:documentation />
+    <wsdl:operation name="LoadDeclarationSoap_send_out_asy">
+      <wsdl:documentation />
+      <wsp:Policy>
+        <wsp:PolicyReference URI="#OP_LoadDeclarationSoap_send_out_asy" />
+      </wsp:Policy>
+      <wsdl:input message="p1:MT_Delivery" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="LoadDeclarationSoap_send_out_asyBinding" type="p1:LoadDeclarationSoap_send_out_asy">
+    <binding transport="http://schemas.xmlsoap.org/soap/http" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+    <wsdl:operation name="LoadDeclarationSoap_send_out_asy">
+      <operation soapAction="http://sap.com/xi/WebService/soap1.1" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <wsdl:input>
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </wsdl:input>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="LoadDeclarationSoap_send_out_asyService">
+    <wsdl:port name="HTTP_Port" binding="p1:LoadDeclarationSoap_send_out_asyBinding">
+      <address location="http://sappod.prc.syngenta.org:50000/XISOAPAdapter/MessageServlet?senderParty=&amp;senderService=Srv_BIT_BarterService&amp;receiverParty=&amp;receiverService=&amp;interface=LoadDeclarationSoap_send_out_asy&amp;interfaceNamespace=urn%3Abroker%3Ao2c%3As%3Aglobal%3Adelivery%3Aloaddeclaration%3A100" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+    </wsdl:port>
+    <wsdl:port name="HTTPS_Port" binding="p1:LoadDeclarationSoap_send_out_asyBinding">
+      <address location="https://sappod.prc.syngenta.org:50001/XISOAPAdapter/MessageServlet?senderParty=&amp;senderService=Srv_BIT_BarterService&amp;receiverParty=&amp;receiverService=&amp;interface=LoadDeclarationSoap_send_out_asy&amp;interfaceNamespace=urn%3Abroker%3Ao2c%3As%3Aglobal%3Adelivery%3Aloaddeclaration%3A100" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
