@@ -863,7 +863,7 @@ namespace ProntoMVC.Tests
         /// ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-
+     
 
         [TestMethod]
         public void syngenta_webservice_30920_2_ftp()
@@ -873,6 +873,7 @@ namespace ProntoMVC.Tests
             //Carpeta: /UAT/Ready
             //Usuario: sappo_test
             //Password: 4R04475j
+    
 
             string archivoExcel = @"C:\Users\Administrador\Documents\bdl\pronto\docstest\Syngenta_10feb2017_115941.xlsx";
 
@@ -881,7 +882,11 @@ namespace ProntoMVC.Tests
             s.UploadFtpFile("goragora.com.ar", "/public_ftp/incoming", archivoExcel, "maruxs", "ns5aK!cvai0C");
             
             //s.CopyFileFTP("ftp://192.208.44.90/", "/UAT/Ready", archivoExcel, "sappo_test", "4R04475j");
-            s.UploadFtpFile("192.208.44.90", "/UAT/Ready", archivoExcel, "sappo_test", "4R04475j");
+            s.UploadFtpFile(ConfigurationManager.AppSettings["SyngentaFTPdominio"],
+                            ConfigurationManager.AppSettings["SyngentaFTPdir"], 
+                            archivoExcel,
+                            ConfigurationManager.AppSettings["SyngentaFTPuser"],
+                            ConfigurationManager.AppSettings["SyngentaFTPpass"]);
 
            
 
@@ -900,7 +905,14 @@ namespace ProntoMVC.Tests
 
             var s = new ServicioCartaPorte.servi();
 
-            var x = s.WebServiceSyngenta(dbcartas);
+             
+                                                     
+
+            var endpointStr =ConfigurationManager.AppSettings["SyngentaServiceEndpoint"]; //  @"https://oasis-pi-nonprod.syngenta.com/uat/XISOAPAdapter/MessageServlet?senderParty=&senderService=Srv_BIT_BarterService&receiverParty=&receiverService=&interface=LoadDeclarationSoap_send_out_asy&interfaceNamespace=urn:broker:o2c:s:global:delivery:loaddeclaration:100";
+            var UserName = ConfigurationManager.AppSettings["SyngentaServiceUser"];
+            var Password =ConfigurationManager.AppSettings["SyngentaServicePass"];
+
+            var x = s.WebServiceSyngenta(dbcartas,endpointStr,UserName,Password);
 
             // marcar fecha de cartas enviadas, loguar tanda de cartas enviadas para que 
             // sepan qué excel tienen que generar (el webservice solo manda un mail si hubo error, no tengo notificacion de otro tipo)
