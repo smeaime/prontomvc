@@ -480,8 +480,11 @@ Partial Class SincronismosAutomaticos
             Dim dbcartas = CartaDePorteManager.ListadoSegunCliente(HFSC.Value, idcliente, globalDesde, globalHasta, CartaDePorteManager.enumCDPestado.DescargasMasFacturadas)
 
             Dim s = New ServicioCartaPorte.servi()
+            Dim endpointStr = ConfigurationManager.AppSettings("SyngentaServiceEndpoint")
+            Dim UserName = ConfigurationManager.AppSettings("SyngentaServiceUser")
+            Dim Password = ConfigurationManager.AppSettings("SyngentaServicePass")
+            Dim x = s.WebServiceSyngenta(dbcartas, endpointStr, UserName, Password)
 
-            Dim x = s.WebServiceSyngenta(dbcartas)
 
             sTodosErr += vbCrLf + "Enviado a Syngenta Webservice" + vbCrLf
         End If

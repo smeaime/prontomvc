@@ -293,6 +293,9 @@ Partial Class Login
         HttpContext.Current.Session(SESSIONPRONTO_UserId) = mu.ProviderUserKey.ToString
         HttpContext.Current.Session(SESSIONPRONTO_UserName) = mu.UserName
 
+        'HttpContext.Current.Session(SESSIONPRONTO_glbIdUsuario) 'esto es el idempleado en la base elegida
+
+
         'el problema es q va a buscar datos de la session...  -el ID de la session tambien se manda por cookie
 
         Dim lista As Pronto.ERP.BO.EmpresaList
@@ -311,6 +314,9 @@ Partial Class Login
         usuario.StringConnection = Encriptar(BDLMasterEmpresasManager.GetConnectionStringEmpresa(usuario.UserId, usuario.IdEmpresa, sConex, "XXXXXX"))
 
         HttpContext.Current.Session(SESSIONPRONTO_USUARIO) = usuario
+
+
+        DatosDeSesion(usuario.StringConnection, usuario.Nombre, HttpContext.Current.Session, sConex, Nothing, usuario.IdEmpresa)
         '//////////////////////////////////////////////////////////////////
         '//////////////////////////////////////////////////////////////////
         '//////////////////////////////////////////////////////////////////
