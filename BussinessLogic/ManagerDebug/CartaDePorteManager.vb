@@ -17318,7 +17318,7 @@ Public Class barras
                         "Nos ponemos en contacto con usted para hacerle llegar la <b>factura " & numerodefactura & "</b>,  " & linkalafacturaelectronica & "<br/> " + vbCrLf &
                        IIf(cli.CartaPorteTipoDeAdjuntoDeFacturacion > 0, "<br/>Si desea ver un detalle de las cartas de porte correspondientes a esta factura, " & linkalosadjuntos, "") & "<br/> " + vbCrLf &
                         "<br/> Los documentos son PDF, para poder verlos, es necesario que tenga instalado el Acrobat Reader, si no lo tiene, hágalo desde " & "<a href='http://get.adobe.com/es/reader/?no_ab=1'> AQUÍ</a>" & "<br/> " + vbCrLf &
-"<br/>También le hacemos saber que dicha factura puede cancelarla mediante depósito o transferencia en las cuentas detalladas más abajo o enviar por correo un <b><u>cheque cruzado no a la orden, </u></b>a nombre de Williams Entregas SA, calle Moreno 584, piso 12 ""A"", C1091AAL - CABA" &
+"<br/>También le hacemos saber que dicha factura puede cancelarla mediante depósito o transferencia en las cuentas detalladas al pie o enviar por correo un <b><u>cheque cruzado no a la orden, </u></b>a nombre de Williams Entregas SA, calle Moreno 584, piso 12 ""A"", C1091AAL - CABA" &
 "<br/><br/>Le solicitamos que, una vez realizado el pago, nos envíe un mail para confirmarlo y en caso de efectuar retenciones, nos las pasen escaneadas en el mismo mail." &
 "<br/><br/>Cualquier duda que tenga, no responder este mail, hacerlo a ciglesias@williamsentregas.com.ar; sgomez@williamsentregas.com.ar <br/>" &
 "<br/>WILLIAMS ENTREGAS S.A." &
