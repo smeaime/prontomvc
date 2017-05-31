@@ -596,7 +596,7 @@ $(function () {
         datatype: 'json',
         mtype: 'POST',
         colNames: ['', 'IdDetalleRequerimiento', 'IdArticulo', 'IdUnidad', '#', 'Cant.', 'Un.', 'Codigo', 'Artículo', 'Descripción', 'Entrega', 'Observaciones', 'Cump', 'Adjunto',
-                   'OrigenDescripcion', '', 'IdCalidad', 'Calidad'],
+                   'OrigenDescripcion', '', 'IdCalidad', 'Calidad', 'IdEquipoDestino', 'EquipoDestino'],
         colModel: [     { formoptions: { rowpos: 1, colpos: 1 }, name: 'act', index: 'act', align: 'centre', width: 30, hidden: true, sortable: false, editable: false, formatter: 'actions',
                             formatoptions: {
                                 editformbutton: true,
@@ -612,7 +612,8 @@ $(function () {
                         { name: 'NumeroItem', formoptions: { rowpos: 3, colpos: 1 }, index: 'NumeroItem', label: 'TB', align: 'center', width: 30, editable: true, edittype: 'text', editoptions: { disabled: true }, editrules: { readonly: 'readonly' } },
                         { name: 'Cantidad', formoptions: { rowpos: 9, colpos: 1 }, index: 'Cantidad', label: 'TB', align: 'right', width: 60, editable: true, edittype: 'text', editoptions: { maxlength: 20 }, editrules: { required: true } }, 
                         {
-                            name: 'Unidad', formoptions: { rowpos: 9, colpos: 2 }, index: 'Unidad', align: 'left', width: 60, editable: true, edittype: 'select', editrules: { required: true },
+                            name: 'Unidad', formoptions: { rowpos: 9, colpos: 2 }, index: 'Unidad', align: 'left', width: 60,
+                            editable: true, edittype: 'select', editrules: { required: true },
                             editoptions: {
                                 dataUrl: ROOT + 'Articulo/Unidades',
                                 dataEvents: [{
@@ -820,7 +821,9 @@ $(function () {
                     },
                     { name: 'IdRequerimiento', index: 'IdRequerimiento', label: 'TB', hidden: true }, 
                     { formoptions: { rowpos: 2, colpos: 2 }, name: 'IdControlCalidad', index: 'IdControlCalidad', label: 'TB', hidden: true }, 
-                    { name: 'ControlCalidad', formoptions: { rowpos: 12, colpos: 2 }, index: 'ControlCalidad', align: 'center', label: '', width: 150, editable: true, edittype: 'select', editrules: { required: false },
+                    {
+                        name: 'ControlCalidad', formoptions: { rowpos: 12, colpos: 2 }, index: 'ControlCalidad', align: 'center', label: '',
+                        width: 150, editable: true, edittype: 'select', editrules: { required: false },
                         editoptions: { dataUrl: ROOT + 'ControlCalidad/ControlCalidades', 
                         dataEvents: [{type: 'change', fn: function (e) {
                                $('#IdControlCalidad').val(this.value);
@@ -828,8 +831,86 @@ $(function () {
                                RefrescarRenglon(this);
                            }
                         }]
-                   }
-               },
+                        }
+                    },
+
+
+                     { name: 'IdEquipoDestino', index: 'IdEquipoDestino', label: 'TB', hidden: true },
+                     {
+                         name: 'EquipoDestino', formoptions: { rowpos: 22, colpos: 1, label: "EquipoDestino" },
+                         index: 'EquipoDestino', align: 'left', width: 450, hidden: false, editable: true, edittype: 'text',
+                         editoptions: {
+                             rows: '1', cols: '1',
+                             dataInit: function (elem) {
+                                 var NoResultsLabel = "No se encontraron resultados";
+                                 $(elem).autocomplete({
+                                     source: ROOT + "Articulo/GetArticulosAutocomplete2", minLength: 0,
+                                     select: function (event, ui) {
+                                         if (ui.item.value === NoResultsLabel) {
+                                             event.preventDefault();
+                                             return;
+                                         }
+                                         $("#IdArticulo").val(ui.item.id);
+                                         $("#Codigo").val(ui.item.codigo);
+                                         $("#IdUnidad").val(ui.item.IdUnidad);
+                                         //$("#Unidad").val(ui.item.Unidad);
+                                         $("#Unidad").val(ui.item.IdUnidad); // hay que ponerle el id para elegir el item... por eso es que cuando salis del form en la celda queda con el id como texto...  no?
+
+                                         UltimoIdArticulo = ui.item.id;
+                                         UltimoIdUnidad = ui.item.IdUnidad;
+                                     },
+                                     focus: function (event, ui) {
+                                         if (ui.item.value === NoResultsLabel) {
+                                             event.preventDefault();
+                                         }
+                                     }
+                                 })
+                                 .data("ui-autocomplete")._renderItem = function (ul, item) {
+                                     return $("<li></li>")
+                                         .data("ui-autocomplete-item", item)
+                                         .append("<a><span style='display:inline-block;width:500px;font-size:12px'><b>" + item.value + " [" + item.codigo + "]</b></span></a>")
+                                         .appendTo(ul);
+                                 };
+                             },
+                             dataEvents: [{
+                                 type: 'change',
+                                 fn: function (e) {
+                                     if (this.value == "No se encontraron resultados") {
+                                         $("#Descripcion").val("");
+                                         return;
+                                     }
+                                     $.post(ROOT + 'Articulo/GetArticulosAutocomplete2',  // ?term=' + val
+                                         { term: this.value },
+                                         function (data) {
+                                             if (data.length == 1 || data.length > 1) { // qué pasa si encuentra más de uno?????
+                                                 var ui = data[0];
+
+                                                 if (ui.codigo == "") {
+                                                     alert("No existe el artículo"); // se está bancando que no sea identica la descripcion
+                                                     $("#Descripcion").val("");
+                                                     return;
+                                                 }
+                                                 $("#IdArticulo").val(ui.id);
+                                                 $("#Codigo").val(ui.codigo);
+                                                 $("#IdUnidad").val(ui.IdUnidad);
+                                                 //$("#Unidad").val(ui.item.Unidad);
+                                                 $("#Unidad").val(ui.IdUnidad); // hay que ponerle el id para elegir el item... por eso es que cuando salis del form en la celda queda con el id como texto...  no?
+
+                                                 UltimoIdArticulo = ui.id;
+                                                 UltimoIdUnidad = ui.IdUnidad;
+                                             }
+                                             else {
+                                                 alert("No existe el artículo"); // se está bancando que no sea identica la descripcion
+                                             }
+                                         }
+                                     );
+                                 }
+                             }]
+                         },
+                         editrules: { required: true }
+                     },
+
+
         ],
         onSelectRow: function (id, status, e) {
             if (dobleclic) {
