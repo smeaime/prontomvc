@@ -8,6 +8,11 @@
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+const bCARGAR_MENU = false;
+const bCARGAR_ARBOL = false;
+
+
+
 
 
 function RefrescarArbol() {
@@ -86,7 +91,7 @@ if (bPersisteArbol) {
 /////////////////////////////////////////////
 
 
-if (true) // no cargar ningun arbol. -si, porque lo que pone lento todo es la carga de la jqgrid con semejante localstorage
+if (bCARGAR_ARBOL) // no cargar ningun arbol. -si, porque lo que pone lento todo es la carga de la jqgrid con semejante localstorage
 {
 
     if (true) {
@@ -440,6 +445,8 @@ function removeJqgridUiStyles() {
 
 
 function armarMenu() {
+
+    if (!bCARGAR_MENU) return;
 
     // https: //github.com/twitter/bootstrap/issues/160
     //                http: //stackoverflow.com/questions/9758587/twitter-bootstrap-multilevel-dropdown-menu
