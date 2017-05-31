@@ -140,12 +140,12 @@
         </style>
         <form class="form-horizontal" style=" margin-bottom: 0px;">
             <div id="cuerpomaspie" class="" style="padding-bottom:2px; position: relative; height: 100%  " @*Height of the footer *@>
-                
+
                 <div id="conscroll" style="height: 600px; margin-bottom: 40px; overflow-y: scroll; top: 50px;
                 padding-left: 25px; padding-right: 25px; overflow-x: hidden;">
 
 
-                                    <div class="row-fluid" style="margin-bottom: 15px; margin-top: 5px;">
+                    <div class="row-fluid" style="margin-bottom: 15px; margin-top: 5px;">
 
                         <div class="span6">
                             <div class="" style='font-size: 34px; margin-top: 5px; height: 45px; font-weight: 400;
@@ -279,15 +279,15 @@
                             <form>
                                 @{
 
-        // con jquery se llama despues a  "Requerimiento/Autorizaciones" para tildar y a Aprobado() para el primer check
-        <input type="checkbox" id="chk0" readonly="readonly" disabled="disabled" class="GridCheckBox"
-               title="" />
+// con jquery se llama despues a  "Requerimiento/Autorizaciones" para tildar y a Aprobado() para el primer check
+                                    <input type="checkbox" id="chk0" readonly="readonly" disabled="disabled" class="GridCheckBox"
+                                           title="" />
 
-        int ca = ViewBag.CantidadAutorizaciones;
+                                    int ca = ViewBag.CantidadAutorizaciones;
 
-        int j = 1;
-        for (var i = 1; i <= ca; i++)
-        { <input type="checkbox" id="chk@(i)" readonly="readonly" disabled="disabled" class="GridCheckBox" title="" /> }
+                                    int j = 1;
+                                    for (var i = 1; i <= ca; i++)
+                                    { <input type="checkbox" id="chk@(i)" readonly="readonly" disabled="disabled" class="GridCheckBox" title="" /> }
                                 }
                             </form>
                         </div>
@@ -503,7 +503,17 @@
                     </div>
                     <!--/row-->
                     <div class="row-fluid">
-                        <!--/span-->
+
+                        <div class="span3 lightblue">
+                            @Html.LabelFor(model => model.IdEquipoDestino, "Equipo destino (opc.)")
+                            @Html.TextBoxFor(model => model.IdEquipoDestino, new { @class = "span12" })
+                        </div>
+                        <div class="span9 lightblue">
+                            @Html.LabelFor(model => model.IdEquipoDestino, ".")
+                            @Html.DropDownList("Aprobo", null, "", new { @class = "span12" })
+                            @Html.ValidationMessageFor(model => model.IdEquipoDestino)
+                        </div>
+
                     </div>
                     <!--/row-->
                     <div id="RManulada" class="row-fluid" style="display: none; font-weight: bold; background-color: red">
@@ -594,8 +604,7 @@
                                     height: 36px; /* jugar entre .AltoRenglones y el style de font de la grilla */
                                 }
                             </style>
-                            <table id="Lista" class="scroll separacion AltoRenglones" cellpadding="0" cellspacing="0"
-                                   >
+                            <table id="Lista" class="scroll separacion AltoRenglones" cellpadding="0" cellspacing="0">
                                 @*/* jugar entre .AltoRenglones y el style de font de la grilla */*@
                             </table>
                             <div id="ListaPager" class="scroll">
@@ -726,7 +735,7 @@
 
                     <div class="row-fluid " style="padding: 11px 0px 0px 0px">
                         @*style="background: rgba(234, 234, 234, 0.84); border: 1px solid lightgray;  height: 54px; padding-top: 2px;"*@
-                        
+
 
                         <div class="span7 ">
                         </div>
@@ -874,4 +883,4 @@
         });
 
     </script>
-}
+                                    }
