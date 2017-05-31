@@ -1798,7 +1798,7 @@ System.Drawing
 
 
         [TestMethod]
-        public void problema_informe_totalespormes()
+        public void problema_informe_totalespormes_4()
         {
             ReportParameter p2 = null;
             string sTitulo = "";
@@ -1811,7 +1811,14 @@ System.Drawing
               new DateTime(2014, 1, 1),
               new DateTime(2014, 2, 1),
               -1, ref sTitulo, "Ambas", false, "");
+        }
 
+
+        [TestMethod]
+        public void problema_informe_totalespormes_totpormesmodo()
+        {
+            ReportParameter p2 = null;
+            string sTitulo = "";
 
             var q = ConsultasLinq.totpormesmodo(SC,
                        "", "", "", 1, 10,
@@ -1823,6 +1830,15 @@ System.Drawing
                         -1, ref sTitulo, "Ambas", false, "");
 
 
+        }
+
+
+        [TestMethod]
+        public void problema_informe_totalespormes_totpormessucursal()
+        {
+            ReportParameter p2 = null;
+            string sTitulo = "";
+
             var q2 = ConsultasLinq.totpormessucursal(SC,
               "", "", "", 1, 10,
                CartaDePorteManager.enumCDPestado.Todas, "", -1, -1,
@@ -1832,6 +1848,15 @@ System.Drawing
                new DateTime(2014, 1, 1),
                -1, ref sTitulo, "Ambas", false, "");
 
+
+        }
+
+
+        [TestMethod]
+        public void problema_informe_totalespormes_totpormesmodoysucursal()
+        {
+            ReportParameter p2 = null;
+            string sTitulo = "";
 
             //An Error Has Occurred! System.NotSupportedException: This function can only be invoked from LINQ to Entities. at System.Data.Entity.SqlServer.SqlFunctions.StringConvert(Nullable`1 number) at Read_VB$AnonymousType_98`10(ObjectMaterializer`1 ) at System.Data.Linq.SqlClient.ObjectReaderCompiler.ObjectReader`2.MoveNext() at System.Collections.Generic.List`1..ctor(IEnumerable`1 collection) at System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source) at ConsultasLinq.totpormessucursal(String SC, String ColumnaParaFiltrar, String TextoParaFiltrar, String sortExpression, Int64 startRowIndex, Int64 maximumRows, enumCDPestado estado, String QueContenga, Int32 idVendedor, Int32 idCorredor, Int32 idDestinatario, Int32 idIntermediario, Int32 idRemComercial, Int32 idArticulo, Int32 idProcedencia, Int32 idDestino, FiltroANDOR AplicarANDuORalFiltro, String ModoExportacion, DateTime fechadesde, DateTime fechahasta, Int32 puntoventa, String& sTituloFiltroUsado, String optDiv
 

@@ -1,0 +1,44 @@
+
+Log Entry : 
+05/31/2017 11:02:23
+Error in: . Error Message:Valor de Timeout caducado. El período de tiempo de espera caducó antes de completar la operación o el servidor no responde.
+__________________________
+
+Log Entry : 
+05/31/2017 11:02:27
+Error in: . Error Message:System.Data.SqlClient.SqlException
+Valor de Timeout caducado. El período de tiempo de espera caducó antes de completar la operación o el servidor no responde.
+   en Microsoft.VisualBasic.CompilerServices.Symbols.Container.InvokeMethod(Method TargetProcedure, Object[] Arguments, Boolean[] CopyBack, BindingFlags Flags)
+   en Microsoft.VisualBasic.CompilerServices.NewLateBinding.CallMethod(Container BaseReference, String MethodName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack, BindingFlags InvocationFlags, Boolean ReportErrors, ResolutionFailure& Failure)
+   en Microsoft.VisualBasic.CompilerServices.NewLateBinding.ObjectLateCall(Object Instance, Type Type, String MemberName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack, Boolean IgnoreReturn)
+   en Microsoft.VisualBasic.CompilerServices.NewLateBinding.LateCall(Object Instance, Type Type, String MemberName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack, Boolean IgnoreReturn)
+   en Pronto.ERP.Dal.GeneralDB.ExecDinamico(String SC, String comandoSQLdinamico, Int32 timeoutSegundos)
+   en Pronto.ERP.Bll.EntidadManager.ExecDinamico(String SC, String sComandoDinamico, Int32 timeoutSegundos) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\EntidadManager.vb:línea 816
+   en ConsultasLinq.totpormesmodoysucursal(String SC, String ColumnaParaFiltrar, String TextoParaFiltrar, String sortExpression, Int64 startRowIndex, Int64 maximumRows, enumCDPestado estado, String QueContenga, Int32 idVendedor, Int32 idCorredor, Int32 idDestinatario, Int32 idIntermediario, Int32 idRemComercial, Int32 idArticulo, Int32 idProcedencia, Int32 idDestino, FiltroANDOR AplicarANDuORalFiltro, String ModoExportacion, DateTime fechadesde, DateTime fechahasta, Int32 puntoventa, String& sTituloFiltroUsado, String optDivisionSyngenta, Boolean bTraerDuplicados, String Contrato) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\ConsultasLinq.vb:línea 1216
+.Net SqlClient Data Provider
+__________________________
+
+Log Entry : 
+05/31/2017 11:03:09
+Error in: . Error Message:Valor de Timeout caducado. El período de tiempo de espera caducó antes de completar la operación o el servidor no responde.
+__________________________
+
+Log Entry : 
+05/31/2017 11:03:13
+Error in: . Error Message:System.Data.SqlClient.SqlException
+Valor de Timeout caducado. El período de tiempo de espera caducó antes de completar la operación o el servidor no responde.
+   en Microsoft.VisualBasic.CompilerServices.Symbols.Container.InvokeMethod(Method TargetProcedure, Object[] Arguments, Boolean[] CopyBack, BindingFlags Flags)
+   en Microsoft.VisualBasic.CompilerServices.NewLateBinding.CallMethod(Container BaseReference, String MethodName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack, BindingFlags InvocationFlags, Boolean ReportErrors, ResolutionFailure& Failure)
+   en Microsoft.VisualBasic.CompilerServices.NewLateBinding.ObjectLateCall(Object Instance, Type Type, String MemberName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack, Boolean IgnoreReturn)
+   en Microsoft.VisualBasic.CompilerServices.NewLateBinding.LateCall(Object Instance, Type Type, String MemberName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack, Boolean IgnoreReturn)
+   en Pronto.ERP.Dal.GeneralDB.ExecDinamico(String SC, String comandoSQLdinamico, Int32 timeoutSegundos)
+   en Pronto.ERP.Bll.EntidadManager.ExecDinamico(String SC, String sComandoDinamico, Int32 timeoutSegundos) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\EntidadManager.vb:línea 816
+   en ConsultasLinq.totpormesmodoysucursal(String SC, String ColumnaParaFiltrar, String TextoParaFiltrar, String sortExpression, Int64 startRowIndex, Int64 maximumRows, enumCDPestado estado, String QueContenga, Int32 idVendedor, Int32 idCorredor, Int32 idDestinatario, Int32 idIntermediario, Int32 idRemComercial, Int32 idArticulo, Int32 idProcedencia, Int32 idDestino, FiltroANDOR AplicarANDuORalFiltro, String ModoExportacion, DateTime fechadesde, DateTime fechahasta, Int32 puntoventa, String& sTituloFiltroUsado, String optDivisionSyngenta, Boolean bTraerDuplicados, String Contrato) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\ConsultasLinq.vb:línea 1222
+.Net SqlClient Data Provider
+__________________________
+
+Log Entry : 
+05/31/2017 11:09:27
+Error in: . Error Message:Valor de Timeout caducado. El período de tiempo de espera caducó antes de completar la operación o el servidor no responde.
+Se terminó la instrucción.
+__________________________

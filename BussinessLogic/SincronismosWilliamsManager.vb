@@ -4961,6 +4961,8 @@ Namespace Pronto.ERP.Bll
         End Function
 
 
+
+
         Public Shared Function Sincronismo_LosGrobo(ByVal pDataTable As DataTable, ByRef sErrores As String, ByVal titulo As String, SC As String) As String
 
 
