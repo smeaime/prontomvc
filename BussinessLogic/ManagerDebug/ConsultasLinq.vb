@@ -74,10 +74,13 @@ Public Class ConsultasLinq
           Optional ByVal Contrato As String = "") As Object
 
 
-        Dim db As New LinqCartasPorteDataContext(Encriptar(SC))
-        'Dim db As ProntoMVC.Data.Models.DemoProntoEntities = New ProntoMVC.Data.Models.DemoProntoEntities(ProntoMVC.Data.Models.Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC)))
+        'Dim db As New LinqCartasPorteDataContext(Encriptar(SC))
+        'db.CommandTimeout = 5 * 60 ' 3 Mins
 
-        db.CommandTimeout = 5 * 60 ' 3 Mins
+        Dim db As ProntoMVC.Data.Models.DemoProntoEntities = New ProntoMVC.Data.Models.DemoProntoEntities(ProntoMVC.Data.Models.Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC)))
+
+
+
         'If False Then
 
         '    ''Dim fechadesde As Date = iisValidSqlDate(txtFechaDesde.Text, #1/1/1753#)
@@ -146,9 +149,9 @@ Public Class ConsultasLinq
         'Dim fechahasta As Date = iisValidSqlDate(txtFechaHasta.Text, #1/1/2100#)
 
         Dim q = (From cdp In db.CartasDePortes
-                 Join cli In db.linqClientes On cli.IdCliente Equals cdp.Vendedor
-                 From art In db.linqArticulos.Where(Function(i) i.IdArticulo = cdp.IdArticulo).DefaultIfEmpty
-                 From clitit In db.linqClientes.Where(Function(i) i.IdCliente = cdp.Vendedor).DefaultIfEmpty
+                 Join cli In db.Clientes On cli.IdCliente Equals cdp.Vendedor
+                 From art In db.Articulos.Where(Function(i) i.IdArticulo = cdp.IdArticulo).DefaultIfEmpty
+                 From clitit In db.Clientes.Where(Function(i) i.IdCliente = cdp.Vendedor).DefaultIfEmpty
                  Where
                      cdp.Vendedor > 0 _
                      And cli.RazonSocial IsNot Nothing _
@@ -171,15 +174,14 @@ Public Class ConsultasLinq
                  Select New With {
                           .Sucursal = SqlFunctions.StringConvert(Sucursal),
                      .Ano = Ano,
-                     .Mes = MonthName(MesNumero),
+                     .Mes = MesNumero,
                      .Producto = Producto,
                      .CantCartas = g.Count,
-                 .NetoPto = g.Sum(Function(i) i.NetoFinal.GetValueOrDefault) / 1000,
-                     .Merma = g.Sum(Function(i) (i.Merma.GetValueOrDefault + i.HumedadDesnormalizada.GetValueOrDefault)) / 1000,
-                     .NetoFinal = g.Sum(Function(i) i.NetoProc.GetValueOrDefault) / 1000,
+                 .NetoPto = g.Sum(Function(i) i.NetoFinal) / 1000,
+                     .Merma = g.Sum(Function(i) (i.Merma + i.HumedadDesnormalizada)) / 1000,
+                     .NetoFinal = g.Sum(Function(i) i.NetoProc) / 1000,
                      .MesNumero = MesNumero,
-                     .Importe = g.Sum(Function(i) CDec(CDec(If(i.TarifaFacturada, 0)) * CDec(If(i.NetoPto, 0)) / 1000
-                                         ))
+                     .Importe = g.Sum(Function(i) CDec(CDec(If(i.TarifaFacturada, 0)) * CDec(If(i.NetoPto, 0)) / 1000))
                  }).ToList
 
 
@@ -916,11 +918,11 @@ Public Class ConsultasLinq
 
 
 
-        Dim db As New LinqCartasPorteDataContext(Encriptar(SC))
-        'Dim db As ProntoMVC.Data.Models.DemoProntoEntities = New ProntoMVC.Data.Models.DemoProntoEntities(ProntoMVC.Data.Models.Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC)))
+        'Dim db As New LinqCartasPorteDataContext(Encriptar(SC))
+        Dim db As ProntoMVC.Data.Models.DemoProntoEntities = New ProntoMVC.Data.Models.DemoProntoEntities(ProntoMVC.Data.Models.Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC)))
 
 
-        db.CommandTimeout = 5 * 60 ' 3 Mins
+        'db.CommandTimeout = 5 * 60 ' 3 Mins
 
 
         'If False Then
@@ -991,9 +993,9 @@ Public Class ConsultasLinq
         'Dim fechahasta As Date = iisValidSqlDate(txtFechaHasta.Text, #1/1/2100#)
 
         Dim q = (From cdp In db.CartasDePortes
-                 Join cli In db.linqClientes On cli.IdCliente Equals cdp.Vendedor
-                 From art In db.linqArticulos.Where(Function(i) i.IdArticulo = cdp.IdArticulo).DefaultIfEmpty
-                 From clitit In db.linqClientes.Where(Function(i) i.IdCliente = cdp.Vendedor).DefaultIfEmpty
+                 Join cli In db.Clientes On cli.IdCliente Equals cdp.Vendedor
+                 From art In db.Articulos.Where(Function(i) i.IdArticulo = cdp.IdArticulo).DefaultIfEmpty
+                 From clitit In db.Clientes.Where(Function(i) i.IdCliente = cdp.Vendedor).DefaultIfEmpty
                  Where
                      cdp.Vendedor > 0 _
                      And cli.RazonSocial IsNot Nothing _
@@ -1016,16 +1018,14 @@ Public Class ConsultasLinq
                  Select New With {
                      .Sucursal = Sucursal,
                      .Ano = Ano,
-                     .Mes = MonthName(MesNumero),
+                     .Mes = MesNumero,
                      .Producto = Producto,
                      .CantCartas = g.Count,
-                     .NetoPto = g.Sum(Function(i) i.NetoFinal.GetValueOrDefault) / 1000,
-                     .Merma = g.Sum(Function(i) (i.Merma.GetValueOrDefault + i.HumedadDesnormalizada.GetValueOrDefault)) / 1000,
-                     .NetoFinal = g.Sum(Function(i) i.NetoProc.GetValueOrDefault) / 1000,
+                     .NetoPto = g.Sum(Function(i) i.NetoFinal) / 1000,
+                     .Merma = g.Sum(Function(i) (i.Merma + i.HumedadDesnormalizada)) / 1000,
+                     .NetoFinal = g.Sum(Function(i) i.NetoProc) / 1000,
                      .MesNumero = MesNumero,
-                      .Importe = g.Sum(Function(i) CDec(
-                                                      CDec(If(i.TarifaFacturada, 0)) * CDec(If(i.NetoPto, 0)) / 1000
-                                                     ))
+                      .Importe = g.Sum(Function(i) CDec(CDec(If(i.TarifaFacturada, 0)) * CDec(If(i.NetoPto, 0)) / 1000))
                  }).ToList
 
         'CDec(IIf(False Or i.TarifaFacturada > 0, _
@@ -1054,7 +1054,7 @@ Public Class ConsultasLinq
 
             Dim q3 = LogicaFacturacion.ListaEmbarquesQueryable(SC, fechadesde, fechahasta).ToList
             Dim a = (From i In q3
-                     Join art In db.linqArticulos On art.IdArticulo Equals i.IdArticulo
+                     Join art In db.Articulos On art.IdArticulo Equals i.IdArticulo
                      Group i By Ano = i.FechaIngreso.Value.Year,
                              MesNumero = i.FechaIngreso.Value.Month,
                              Producto = art.Descripcion
@@ -1062,12 +1062,12 @@ Public Class ConsultasLinq
                      Select New With {
                      .Sucursal = "Buque",
                      .Ano = Ano,
-                     .Mes = MonthName(MesNumero),
+                     .Mes = MesNumero,
                      .Producto = Producto,
                      .CantCartas = g.Count,
-                     .NetoPto = g.Sum(Function(i) i.Cantidad.GetValueOrDefault) / 1000,
+                     .NetoPto = g.Sum(Function(i) i.Cantidad) / 1000,
                      .Merma = CDec(0),
-                     .NetoFinal = g.Sum(Function(i) i.Cantidad.GetValueOrDefault) / 1000,
+                     .NetoFinal = g.Sum(Function(i) i.Cantidad) / 1000,
                      .MesNumero = MesNumero,
                       .Importe = CDec(0)
                      }).ToList
@@ -1138,11 +1138,11 @@ Public Class ConsultasLinq
         'An Error Has Occurred! System.NotSupportedException: This function can only be invoked from LINQ to Entities. at System.Data.Entity.SqlServer.SqlFunctions.StringConvert(Nullable`1 number) at Read_VB$AnonymousType_98`10(ObjectMaterializer`1 ) at System.Data.Linq.SqlClient.ObjectReaderCompiler.ObjectReader`2.MoveNext() at System.Collections.Generic.List`1..ctor(IEnumerable`1 collection) at System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source) at ConsultasLinq.totpormessucursal(String SC, String ColumnaParaFiltrar, String TextoParaFiltrar, String sortExpression, Int64 startRowIndex, Int64 maximumRows, enumCDPestado estado, String QueContenga, Int32 idVendedor, Int32 idCorredor, Int32 idDestinatario, Int32 idIntermediario, Int32 idRemComercial, Int32 idArticulo, Int32 idProcedencia, Int32 idDestino, FiltroANDOR AplicarANDuORalFiltro, String ModoExportacion, DateTime fechadesde, DateTime fechahasta, Int32 puntoventa, String& sTituloFiltroUsado, String optDiv
 
 
-        Dim db As New LinqCartasPorteDataContext(Encriptar(SC))
-        'Dim db As ProntoMVC.Data.Models.DemoProntoEntities = New ProntoMVC.Data.Models.DemoProntoEntities(ProntoMVC.Data.Models.Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC)))
+        'Dim db As New LinqCartasPorteDataContext(Encriptar(SC))
+        'db.CommandTimeout = 5 * 60 ' 3 Mins
+        Dim db As ProntoMVC.Data.Models.DemoProntoEntities = New ProntoMVC.Data.Models.DemoProntoEntities(ProntoMVC.Data.Models.Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC)))
 
 
-        db.CommandTimeout = 5 * 60 ' 3 Mins
 
 
         'If False Then
@@ -1247,9 +1247,9 @@ Public Class ConsultasLinq
         'Dim fechahasta As Date = iisValidSqlDate(txtFechaHasta.Text, #1/1/2100#)
 
         Dim q = (From cdp In db.CartasDePortes
-                 Join cli In db.linqClientes On cli.IdCliente Equals cdp.Vendedor
-                 From art In db.linqArticulos.Where(Function(i) i.IdArticulo = cdp.IdArticulo).DefaultIfEmpty
-                 From clitit In db.linqClientes.Where(Function(i) i.IdCliente = cdp.Vendedor).DefaultIfEmpty
+                 Join cli In db.Clientes On cli.IdCliente Equals cdp.Vendedor
+                 From art In db.Articulos.Where(Function(i) i.IdArticulo = cdp.IdArticulo).DefaultIfEmpty
+                 From clitit In db.Clientes.Where(Function(i) i.IdCliente = cdp.Vendedor).DefaultIfEmpty
                  Where
                      cdp.Vendedor > 0 _
                      And cli.RazonSocial IsNot Nothing _
@@ -1272,19 +1272,17 @@ Public Class ConsultasLinq
                          Into g = Group
                  Select New With {
                      .Sucursal = SqlFunctions.StringConvert(Sucursal),
-                     .Modo = IIf(Modo = "SI", "Exportación", "Entrega").ToString,
+                     .Modo = If(Modo = "SI", "Exportación", "Entrega").ToString,
                      .Ano = Ano,
-                     .Mes = MonthName(MesNumero),
+                     .Mes = MesNumero,
                      .Producto = Producto,
                      .CantCartas = g.Count,
-                     .NetoPto = g.Sum(Function(i) i.NetoFinal.GetValueOrDefault) / 1000,
-                     .Merma = g.Sum(Function(i) (i.Merma.GetValueOrDefault + i.HumedadDesnormalizada.GetValueOrDefault)) / 1000,
-                     .NetoFinal = g.Sum(Function(i) i.NetoProc.GetValueOrDefault) / 1000,
+                     .NetoPto = g.Sum(Function(i) i.NetoFinal) / 1000,
+                     .Merma = g.Sum(Function(i) (i.Merma + i.HumedadDesnormalizada)) / 1000,
+                     .NetoFinal = g.Sum(Function(i) i.NetoProc) / 1000,
                      .MesNumero = MesNumero,
-                     .Importe = g.Sum(Function(i) CDec(
-                                                      CDec(i.TarifaFacturada.GetValueOrDefault) * CDec(i.NetoPto) / 1000
-                                                    ))
-                         }).ToList
+                     .Importe = g.Sum(Function(i) CDec(CDec(If(i.TarifaFacturada, 0)) * CDec(If(i.NetoPto, 0)) / 1000))
+                 }).ToList
 
 
         '.Importe = g.Sum(Function(i) CDec(IIf(False Or i.TarifaFacturada > 0, _
@@ -1307,7 +1305,7 @@ Public Class ConsultasLinq
 
             Dim q3 = LogicaFacturacion.ListaEmbarquesQueryable(SC, fechadesde, fechahasta).ToList
             Dim a = (From i In q3
-                     Join art In db.linqArticulos On art.IdArticulo Equals i.IdArticulo
+                     Join art In db.Articulos On art.IdArticulo Equals i.IdArticulo
                      Group i By Ano = i.FechaIngreso.Value.Year,
                              MesNumero = i.FechaIngreso.Value.Month,
                              Producto = art.Descripcion,
@@ -1318,12 +1316,12 @@ Public Class ConsultasLinq
                      .Sucursal = SqlFunctions.StringConvert(Sucursal),
                      .Modo = Modo,
                      .Ano = Ano,
-                     .Mes = MonthName(MesNumero),
+                     .Mes = MesNumero,
                      .Producto = Producto,
                      .CantCartas = g.Count,
-                     .NetoPto = g.Sum(Function(i) i.Cantidad.GetValueOrDefault) / 1000,
+                     .NetoPto = g.Sum(Function(i) i.Cantidad) / 1000,
                      .Merma = CDec(0),
-                     .NetoFinal = g.Sum(Function(i) i.Cantidad.GetValueOrDefault) / 1000,
+                     .NetoFinal = g.Sum(Function(i) i.Cantidad) / 1000,
                      .MesNumero = MesNumero,
                       .Importe = CDec(0)
                      }).ToList
@@ -1369,6 +1367,9 @@ Public Class ConsultasLinq
 
 
     End Function
+
+
+
 
     Private Shared Function CartasLINQxxxx(ByVal SC As String,
         ByVal ColumnaParaFiltrar As String,
