@@ -1383,7 +1383,8 @@
                                 editoptions: { maxlength: 20, dataEvents: [{ type: 'change', fn: function (e) { CalcularImportes(); } }] }, editrules: { required: true }
                             },
                             {
-                                name: 'Unidad', formoptions: { rowpos: 7, colpos: 2 }, index: 'Unidad', align: 'center', width: 60, editable: true, edittype: 'select', editrules: { required: true },
+                                name: 'Unidad', formoptions: { rowpos: 7, colpos: 2 }, index: 'Unidad', align: 'center', width: 60,
+                                editable: true, edittype: 'select', editrules: { required: true },
                                 editoptions: {
                                     dataUrl: '@Url.Action("Unidades", "Articulo")',
                                     dataEvents: [{ type: 'change', fn: function (e) { $('#IdUnidad').val(this.value); } }]
