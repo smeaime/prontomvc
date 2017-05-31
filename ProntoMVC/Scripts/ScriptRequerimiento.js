@@ -268,6 +268,8 @@ function RefrescarRenglon(x) {
 
 function RefrescarOrigenDescripcion() {
 
+    // return;
+
     var dataIds = $('#Lista').jqGrid('getDataIDs'); // me traigo los datos
 
     for (var i = 0; i < dataIds.length; i++) {
@@ -288,6 +290,7 @@ function RefrescarOrigenDescripcion() {
 
         var tipoDesc = data['OrigenDescripcion'] || 1;
         var sDesc = data['Descripcion'];
+        var sObs = data['Observaciones'];
 
         // "0:Solo el material; 1:Solo las observaciones; 2:Material mas observaciones"
 
@@ -809,16 +812,36 @@ $(function () {
                                 }]
                             }
                         },
-                    {
-                        name: 'OrigenDescripcion', label: 'TB', formoptions: { rowpos: 11, colpos: 2, label: "Tomar desc. de" }, index: 'OrigenDescripcion', align: 'center', width: 35, editable: true, hidden: true, edittype: 'select', 
-                        editrules: {
-                            required: true
-                        },
-                        editoptions: {
-                            defaultValue: OrigenDescripcionDefault,
-                            value: "1:Solo el material; 2:Solo las observaciones; 3:Material mas observaciones", size: 3
-                        }
-                    },
+
+
+
+                     {
+                         name: 'OrigenDescripcion', label: 'TB', formoptions: { rowpos: 11, colpos: 2, label: "Tomar" } , // "Tomar la descripción de" }
+                         index: 'OrigenDescripcion',align: 'center', width: 35, editable: true, hidden: true, edittype: 'select', // edittype: 'custom',
+                         // formatter: radioFormatter, unformat: unformatRadio,
+                         editrules: {
+                             required: false
+                             //                                      , readonly: ( (OrigenDescripcionDefault==3 || true) ?  'readonly' : ''  ) 
+                             //                                      , disabled: 'disabled'
+                         },
+
+                         editoptions: {
+                             //                         readonly: true,
+                             //   disabled:  ( (OrigenDescripcionDefault==3 ) ?  'disabled' : ''  )  ,
+                             defaultValue: OrigenDescripcionDefault,
+                             value: "1:Solo el material;2:Solo las observaciones;3:Material mas observaciones", size: 3
+                             //,
+                             //     custom_element: myelem, custom_value: myvalue
+                         }
+                     },
+
+
+
+
+
+
+
+
                     { name: 'IdRequerimiento', index: 'IdRequerimiento', label: 'TB', hidden: true }, 
                     { formoptions: { rowpos: 2, colpos: 2 }, name: 'IdControlCalidad', index: 'IdControlCalidad', label: 'TB', hidden: true }, 
                     {
@@ -907,7 +930,7 @@ $(function () {
                                  }
                              }]
                          },
-                         editrules: { required: true }
+                         editrules: { required: false }
                      },
 
 
@@ -1083,7 +1106,10 @@ $(function () {
     jQuery("#ListaDrag").jqGrid('navButtonAdd', '#ListaDragPager', { caption: "", buttonicon: "ui-icon-calculator", title: "Choose columns",
         onClickButton: function () {
             $(this).jqGrid('columnChooser',
-                { width: 550, msel_opts: { dividerLocation: 0.5 }, modal: true });
+                {
+                    width: 550, msel_opts: { dividerLocation: 0.5 },
+                    modal: true
+                });
             $("#colchooser_" + $.jgrid.jqID(this.id) + ' div.available>div.actions')
                 .prepend('<label style="float:left;position:relative;margin-left:0.6em;top:0.6em">Search:</label>');
         }
