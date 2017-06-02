@@ -1,0 +1,275 @@
+
+Log Entry : 
+06/02/2017 11:15:39
+Error in: . Error Message:estadidesc   01/11/2015   01/11/2015   01/11/2016    10/05/2017
+__________________________
+
+Log Entry : 
+06/02/2017 11:20:04
+Error in: . Error Message:estadidesc   01/11/2015   01/11/2015   01/11/2016    10/05/2017
+__________________________
+
+Log Entry : 
+06/02/2017 11:22:03
+Error in: . Error Message:estadidesc   01/11/2015   01/11/2015   01/11/2016    10/05/2017
+__________________________
+
+Log Entry : 
+06/02/2017 11:22:47
+Error in: . Error Message:Por generar el archivo 
+__________________________
+
+Log Entry : 
+06/02/2017 11:24:20
+Error in: . Error Message:estadidesc   01/11/2015   01/11/2015   01/11/2016    10/05/2017
+__________________________
+
+Log Entry : 
+06/02/2017 11:24:43
+Error in: . Error Message:Por generar el archivo C:\Users\Administrador\Desktop\lala.xls
+__________________________
+
+Log Entry : 
+06/02/2017 11:24:43
+Error in: . Error Message:Archivo generado C:\Users\Administrador\Desktop\lala.xls
+__________________________
+
+Log Entry : 
+06/02/2017 11:31:10
+Error in: . Error Message:estadidesc   01/11/2015   01/11/2015   01/11/2016    10/05/2017
+__________________________
+
+Log Entry : 
+06/02/2017 11:31:36
+Error in: . Error Message:Por generar el archivo C:\Users\Administrador\Desktop\Informe02jun2017_113129.xls
+__________________________
+
+Log Entry : 
+06/02/2017 11:31:36
+Error in: . Error Message:Archivo generado C:\Users\Administrador\Desktop\Informe02jun2017_113129.xls
+__________________________
+
+Log Entry : 
+06/02/2017 11:32:42
+Error in: . Error Message:estadidesc   01/11/2015   01/11/2015   01/11/2016    10/05/2017
+__________________________
+
+Log Entry : 
+06/02/2017 11:33:04
+Error in: . Error Message:Por generar el archivo C:\Users\Administrador\Desktop\Informe02jun2017_113257.xls
+__________________________
+
+Log Entry : 
+06/02/2017 11:33:04
+Error in: . Error Message:Archivo generado C:\Users\Administrador\Desktop\Informe02jun2017_113257.xls
+__________________________
+
+Log Entry : 
+06/02/2017 12:49:04
+Error in: . Error Message:estadidesc   01/11/2015   01/11/2015   01/11/2016    10/05/2017
+__________________________
+
+Log Entry : 
+06/02/2017 12:50:05
+Error in: . Error Message:Por generar el archivo C:\Users\Administrador\Desktop\Informe02jun2017_124956.xls
+__________________________
+
+Log Entry : 
+06/02/2017 12:50:05
+Error in: . Error Message:Archivo generado C:\Users\Administrador\Desktop\Informe02jun2017_124956.xls
+__________________________
+
+Log Entry : 
+06/02/2017 13:52:54
+Error in: . Error Message:estadidesc   01/11/2015   01/11/2015   01/11/2016    10/05/2017
+__________________________
+
+Log Entry : 
+06/02/2017 13:53:25
+Error in: . Error Message:Por generar el archivo C:\Users\Administrador\Desktop\Informe02jun2017_135318.xls
+__________________________
+
+Log Entry : 
+06/02/2017 13:53:25
+Error in: . Error Message:Archivo generado C:\Users\Administrador\Desktop\Informe02jun2017_135318.xls
+__________________________
+
+Log Entry : 
+06/02/2017 13:57:30
+Error in: . Error Message:Por generar el archivo C:\Users\Administrador\AppData\Local\Temp\Listado general 02jun2017_135329_PHA.xls
+__________________________
+
+Log Entry : 
+06/02/2017 13:57:30
+Error in: . Error Message:Archivo generado C:\Users\Administrador\AppData\Local\Temp\Listado general 02jun2017_135329_PHA.xls
+__________________________
+
+Log Entry : 
+06/02/2017 13:58:34
+Error in: . Error Message:estadidesc   01/11/2015   01/11/2015   01/11/2016    10/05/2017
+__________________________
+
+Log Entry : 
+06/02/2017 14:01:11
+Error in: . Error Message:estadidesc   01/11/2015   01/11/2015   01/11/2016    10/05/2017
+__________________________
+
+Log Entry : 
+06/02/2017 14:02:07
+Error in: . Error Message:Por generar el archivo C:\Users\Administrador\Desktop\Informe02jun2017_140159.xls
+__________________________
+
+Log Entry : 
+06/02/2017 14:02:07
+Error in: . Error Message:Archivo generado C:\Users\Administrador\Desktop\Informe02jun2017_140159.xls
+__________________________
+
+Log Entry : 
+06/02/2017 14:05:12
+Error in: . Error Message:Por generar el archivo C:\Users\Administrador\AppData\Local\Temp\Listado general 02jun2017_140211_TFF.xls
+__________________________
+
+Log Entry : 
+06/02/2017 14:05:12
+Error in: . Error Message:Archivo generado C:\Users\Administrador\AppData\Local\Temp\Listado general 02jun2017_140211_TFF.xls
+__________________________
+
+Log Entry : 
+06/02/2017 14:13:38
+Error in: . Error Message:estadidesc   01/11/2015   01/11/2015   01/11/2016    10/05/2017
+__________________________
+
+Log Entry : 
+06/02/2017 14:14:03
+Error in: . Error Message:Por generar el archivo C:\Users\Administrador\Desktop\Informe02jun2017_141356.xls
+__________________________
+
+Log Entry : 
+06/02/2017 14:14:03
+Error in: . Error Message:Archivo generado C:\Users\Administrador\Desktop\Informe02jun2017_141356.xls
+__________________________
+
+Log Entry : 
+06/02/2017 14:19:07
+Error in: . Error Message:estadidesc   01/11/2015   01/11/2015   01/11/2016    10/05/2017
+__________________________
+
+Log Entry : 
+06/02/2017 14:19:32
+Error in: . Error Message:Por generar el archivo C:\Users\Administrador\Desktop\Informe02jun2017_141926.xls
+__________________________
+
+Log Entry : 
+06/02/2017 14:19:32
+Error in: . Error Message:Archivo generado C:\Users\Administrador\Desktop\Informe02jun2017_141926.xls
+__________________________
+
+Log Entry : 
+06/02/2017 14:39:44
+Error in: . Error Message:estadidesc   01/11/2015   01/11/2015   01/11/2015    31/05/2016
+__________________________
+
+Log Entry : 
+06/02/2017 14:47:07
+Error in: . Error Message:estadidesc   01/11/2015   01/11/2015   01/11/2016    10/05/2017
+__________________________
+
+Log Entry : 
+06/02/2017 14:47:55
+Error in: . Error Message:Por generar el archivo C:\Users\Administrador\Desktop\Informe02jun2017_144747.xls
+__________________________
+
+Log Entry : 
+06/02/2017 14:47:55
+Error in: . Error Message:Archivo generado C:\Users\Administrador\Desktop\Informe02jun2017_144747.xls
+__________________________
+
+Log Entry : 
+06/02/2017 14:55:20
+Error in: . Error Message:estadidesc   01/11/2015   01/11/2015   01/11/2016    10/05/2017
+__________________________
+
+Log Entry : 
+06/02/2017 14:55:47
+Error in: . Error Message:Por generar el archivo C:\Users\Administrador\Desktop\Informe02jun2017_145541.xls
+__________________________
+
+Log Entry : 
+06/02/2017 14:55:47
+Error in: . Error Message:Archivo generado C:\Users\Administrador\Desktop\Informe02jun2017_145541.xls
+__________________________
+
+Log Entry : 
+06/02/2017 14:55:53
+Error in: . Error Message:Por generar el archivo C:\Users\Administrador\Desktop\Informe02jun2017_145547.xls
+__________________________
+
+Log Entry : 
+06/02/2017 14:55:53
+Error in: . Error Message:Archivo generado C:\Users\Administrador\Desktop\Informe02jun2017_145547.xls
+__________________________
+
+Log Entry : 
+06/02/2017 14:57:09
+Error in: . Error Message:estadidesc   01/11/2015   01/11/2015   01/11/2016    10/05/2017
+__________________________
+
+Log Entry : 
+06/02/2017 14:57:33
+Error in: . Error Message:Por generar el archivo C:\Users\Administrador\Desktop\Informe02jun2017_145726.xls
+__________________________
+
+Log Entry : 
+06/02/2017 14:57:33
+Error in: . Error Message:Archivo generado C:\Users\Administrador\Desktop\Informe02jun2017_145726.xls
+__________________________
+
+Log Entry : 
+06/02/2017 14:57:37
+Error in: . Error Message:Por generar el archivo C:\Users\Administrador\Desktop\Informe02jun2017_145733.xls
+__________________________
+
+Log Entry : 
+06/02/2017 14:57:37
+Error in: . Error Message:Archivo generado C:\Users\Administrador\Desktop\Informe02jun2017_145733.xls
+__________________________
+
+Log Entry : 
+06/02/2017 15:10:39
+Error in: . Error Message:estadidesc   01/11/2015   01/11/2015   01/11/2016    10/05/2017
+__________________________
+
+Log Entry : 
+06/02/2017 15:11:31
+Error in: . Error Message:Por generar el archivo C:\Users\Administrador\Desktop\Informe02jun2017_151122.xls
+__________________________
+
+Log Entry : 
+06/02/2017 15:11:31
+Error in: . Error Message:Archivo generado C:\Users\Administrador\Desktop\Informe02jun2017_151122.xls
+__________________________
+
+Log Entry : 
+06/02/2017 15:11:36
+Error in: . Error Message:Por generar el archivo C:\Users\Administrador\Desktop\Informe02jun2017_151131.xls
+__________________________
+
+Log Entry : 
+06/02/2017 15:11:36
+Error in: . Error Message:Archivo generado C:\Users\Administrador\Desktop\Informe02jun2017_151131.xls
+__________________________
+
+Log Entry : 
+06/02/2017 15:26:18
+Error in: . Error Message:estadidesc   01/11/2015   01/11/2015   01/11/2016    10/05/2017
+__________________________
+
+Log Entry : 
+06/02/2017 15:26:44
+Error in: . Error Message:Por generar el archivo C:\Users\Administrador\Desktop\Informe02jun2017_152637.xls
+__________________________
+
+Log Entry : 
+06/02/2017 15:26:44
+Error in: . Error Message:Archivo generado C:\Users\Administrador\Desktop\Informe02jun2017_152637.xls
+__________________________

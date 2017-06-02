@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Report xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner" xmlns:cl="http://schemas.microsoft.com/sqlserver/reporting/2010/01/componentdefinition" xmlns="http://schemas.microsoft.com/sqlserver/reporting/2010/01/reportdefinition">
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
   <AutoRefresh>0</AutoRefresh>
   <DataSources>
     <DataSource Name="TestHarcodeada">
@@ -945,7 +945,7 @@ select idlocalidad, nombre from localidades</CommandText>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Fields!PeriodoAnteriorEntrega.Value + Fields!PeriodoAnteriorElevacion.Value</Value>
+                                  <Value>=Fields!PeriodoAnteriorEntrega.Value</Value>
                                   <Style>
                                     <FontFamily>Tahoma</FontFamily>
                                     <Format>N0</Format>
@@ -980,7 +980,7 @@ select idlocalidad, nombre from localidades</CommandText>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=(Fields!Elevacion.Value + Fields!Entrega.Value) - (Fields!PeriodoAnteriorEntrega.Value + Fields!PeriodoAnteriorElevacion.Value)</Value>
+                                  <Value>=(Fields!Entrega.Value) - (Fields!PeriodoAnteriorEntrega.Value)</Value>
                                   <Style>
                                     <FontFamily>Tahoma</FontFamily>
                                     <Format>N0</Format>
@@ -1131,7 +1131,7 @@ select idlocalidad, nombre from localidades</CommandText>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Sum(Fields!PeriodoAnteriorEntrega.Value) + Sum(Fields!PeriodoAnteriorElevacion.Value)</Value>
+                                  <Value>=Sum(Fields!PeriodoAnteriorEntrega.Value)</Value>
                                   <Style>
                                     <FontFamily>Tahoma</FontFamily>
                                     <FontWeight>Bold</FontWeight>
@@ -2570,7 +2570,7 @@ select idlocalidad, nombre from localidades</CommandText>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Fields!PeriodoAnteriorEntrega.Value + Fields!PeriodoAnteriorElevacion.Value</Value>
+                                  <Value>=Fields!PeriodoAnteriorBuques.Value</Value>
                                   <Style>
                                     <FontFamily>Tahoma</FontFamily>
                                     <Format>N0</Format>
@@ -2751,7 +2751,7 @@ select idlocalidad, nombre from localidades</CommandText>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Sum(Fields!PeriodoAnteriorEntrega.Value) + Sum(Fields!PeriodoAnteriorElevacion.Value)</Value>
+                                  <Value>=Sum(Fields!PeriodoAnteriorBuques.Value)</Value>
                                   <Style>
                                     <FontFamily>Tahoma</FontFamily>
                                     <FontWeight>Bold</FontWeight>
@@ -6593,6 +6593,59 @@ select idlocalidad, nombre from localidades</CommandText>
       <Prompt>bMostrar5</Prompt>
     </ReportParameter>
   </ReportParameters>
+  <ReportParametersLayout>
+    <GridLayoutDefinition>
+      <NumberOfColumns>2</NumberOfColumns>
+      <NumberOfRows>5</NumberOfRows>
+      <CellDefinitions>
+        <CellDefinition>
+          <ColumnIndex>0</ColumnIndex>
+          <RowIndex>0</RowIndex>
+          <ParameterName>FechaDesde</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>1</ColumnIndex>
+          <RowIndex>0</RowIndex>
+          <ParameterName>FechaHasta</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>0</ColumnIndex>
+          <RowIndex>1</RowIndex>
+          <ParameterName>FechaDesdeAnterior</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>1</ColumnIndex>
+          <RowIndex>1</RowIndex>
+          <ParameterName>FechaHastaAnterior</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>0</ColumnIndex>
+          <RowIndex>2</RowIndex>
+          <ParameterName>bMostrar1</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>1</ColumnIndex>
+          <RowIndex>2</RowIndex>
+          <ParameterName>bMostrar2</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>0</ColumnIndex>
+          <RowIndex>3</RowIndex>
+          <ParameterName>bMostrar3</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>1</ColumnIndex>
+          <RowIndex>3</RowIndex>
+          <ParameterName>bMostrar4</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>0</ColumnIndex>
+          <RowIndex>4</RowIndex>
+          <ParameterName>bMostrar5</ParameterName>
+        </CellDefinition>
+      </CellDefinitions>
+    </GridLayoutDefinition>
+  </ReportParametersLayout>
   <rd:ReportUnitType>Mm</rd:ReportUnitType>
   <rd:ReportID>61fdb02c-239c-40b0-9135-be7685d7778c</rd:ReportID>
 </Report>
