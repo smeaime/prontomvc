@@ -146,20 +146,13 @@ from dbo.fSQL_GetDataTableFiltradoYPaginado
 join Articulos art On art.IdArticulo = cdp.IdArticulo 
 
 Where	
-		--		cdp.Vendedor > 0  and
 			not cdp.FechaDescarga is null and
           ( 
                 (cdp.FechaDescarga >= @fechadesde And cdp.FechaDescarga <= @fechahasta) 
                 Or 
                 (cdp.FechaDescarga >= @fechadesdeAnterior And cdp.FechaDescarga <= @fechahastaAnterior) 
             ) 
-        -- And (cdp.Anulada <> 'SI') 
-        --And ((@ModoExportacion = 'Ambos') 
-        --        Or (@ModoExportacion = 'Todos') 
-        --        Or (@ModoExportacion = 'Entregas' And isnull(cdp.Exporta, 'NO') = 'NO') 
-        --        Or (@ModoExportacion = 'Export' And isnull(cdp.Exporta, 'NO') = 'SI')) 
-       -- And (@puntoventa IS NULL OR @puntoventa = -1 Or cdp.PuntoVenta = @puntoventa)
-
+        
 Group BY  art.Descripcion, cdp.Exporta, cdp.PuntoVenta 
 
 go
@@ -185,7 +178,7 @@ go
 					NULL, --@idProcedencia,
 					-1,---1, --@idDestino,
 					NULL, --@AplicarANDuORalFiltro,
-					'Ambos', --'Buques',
+					'Entregas', --'Ambos', --'Buques',
 					'20161101',
 					
 					'20170510',
@@ -211,7 +204,7 @@ go
 
 
 
-select  sum(cdp.netofinal)
+select * -- sum(cdp.netofinal)
 from 
  dbo.fSQL_GetDataTableFiltradoYPaginado(
 
@@ -230,7 +223,7 @@ from
 					NULL, --@idProcedencia,
 					NULL, --@idDestino,
 					NULL, --@AplicarANDuORalFiltro,
-					'Ambos', --'Buques',
+					'Entregas', --'Ambos', --'Buques',
 					'20161101',
 
 					'20170510',
@@ -247,7 +240,7 @@ from
 					NULL
 )
 as cdp
-
+where cdp.exporta='SI'
 
 
 
