@@ -130,37 +130,41 @@ from
  dbo.fSQL_GetDataTableFiltradoYPaginado  
 				(  
 
-					NULL, 
-					0, 
-					0,   --estado
-					NULL, 
-					-1,
-					 
-					-1, --Corredor
-					-1,
-					-1,
-					-1,
-					-1,
+					
 
-					-1,  --Procedencia
-					NULL, 
-					0,   --AplicarANDuORalFiltro
-					NULL,  --ModoExportacion
+					@startRowIndex, 
+							@maximumRows, 
+							@estado,
+							@QueContenga, 
+							@idVendedor, 
+
+							@idCorredor, 
+							@idDestinatario, 
+							@idIntermediario,
+							@idRemComercial, 
+							@idArticulo,
+
+							@idProcedencia,
+							@idDestino,
+							@AplicarANDuORalFiltro,
+							@ModoExportacion,
+				
 					@FechaDesdeAnterior,
 
 					@FechaHasta,
-					NULL, 
-					NULL,
-					'FALSE', --TraerDuplicados
-					NULL, 
-					NULL, 
+				
+							@puntoventa, 
+							NULL,
+							 'FALSE',--duplicados?
+							@Contrato, 
 
-					NULL, --ClienteAuxiliarint
-					NULL, 
-					NULL,
-					NULL, 
-					NULL
+							@QueContenga2, 
+							@idClienteAuxiliarint, 
+							@AgrupadorDeTandaPeriodos, 
+							@Vagon,
+							@Patente, 
 
+							@optCamionVagon
 					)
     
  as CDP
