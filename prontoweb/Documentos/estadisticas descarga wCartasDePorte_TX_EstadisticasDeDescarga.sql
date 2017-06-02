@@ -146,7 +146,7 @@ from dbo.fSQL_GetDataTableFiltradoYPaginado
 join Articulos art On art.IdArticulo = cdp.IdArticulo 
 
 Where	
-			not cdp.FechaDescarga is null and
+			--not cdp.FechaDescarga is null and
           ( 
                 (cdp.FechaDescarga >= @fechadesde And cdp.FechaDescarga <= @fechahasta) 
                 Or 
@@ -165,7 +165,7 @@ go
 [wCartasDePorte_TX_EstadisticasDeDescarga] 
 					NULL, 
 					NULL, 
-					4,
+					0,
 					NULL, 
 					NULL, 
 
