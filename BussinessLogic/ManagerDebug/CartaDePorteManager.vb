@@ -3848,7 +3848,7 @@ Public Class CartaDePorteManager
                                                          Optional ByRef tiemposql As Integer = 0,
                                                          Optional ByRef tiempoinforme As Integer = 0,
                                                          Optional ByVal bDescargaHtml As Boolean = False,
-                                                         Optional grid As GridView = Nothing) As String
+                                                         Optional grid As GridView = Nothing, Optional maximumRows As Long = 10000) As String
 
 
         Dim sExcelFileName As String
@@ -3932,7 +3932,7 @@ Public Class CartaDePorteManager
 
 
                 Dim count = CartaDePorteManager.GetDataTableFiltradoYPaginado_CadenaSQL(SC,
-                              "", "", "", 1, 10000,
+                              "", "", "", 1, maximumRows,
                               estado, "", idVendedor, idCorredor,
                               idDestinatario, idIntermediario,
                               idRemComercial, idArticulo, idProcedencia, idDestino,
@@ -3948,7 +3948,7 @@ Public Class CartaDePorteManager
 
 
                 strSQL = CartaDePorteManager.GetDataTableFiltradoYPaginado_CadenaSQL(SC,
-                               "", "", "", 1, 10000,
+                               "", "", "", 1, maximumRows,
                                estado, "", idVendedor, idCorredor,
                                idDestinatario, idIntermediario,
                                idRemComercial, idArticulo, idProcedencia, idDestino,

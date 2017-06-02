@@ -1889,7 +1889,7 @@ Public Class ConsultasLinq
     Shared Function EstadisticasDescargas(ByRef p2 As ReportParameter, txtFechaDesde As String, txtFechaHasta As String,
                                            txtFechaDesdeAnterior As String, txtFechaHastaAnterior As String,
                                           cmbPeriodo As String, cmbPuntoVenta As Integer, ModoExportacion As String, SC As String _
-                                , idDestinatario As Integer, idDestino As Integer, IdArticulo As Integer
+                                , idDestinatario As Integer, idDestino As Integer, IdArticulo As Integer, ByVal estado As CartaDePorteManager.enumCDPestado
                     ) As Object
 
 
@@ -1952,7 +1952,7 @@ Public Class ConsultasLinq
 
         'If ModoExportacion <> "Buques" Then
 
-        Dim aaa = From xz In db.wCartasDePorte_TX_EstadisticasDeDescarga(Nothing, Nothing, CartaDePorteManager.enumCDPestado.DescargasMasFacturadas, _
+        Dim aaa = From xz In db.wCartasDePorte_TX_EstadisticasDeDescarga(Nothing, Nothing, estado,
                                                                          Nothing, Nothing,
                                                                           Nothing, idDestinatario, Nothing, Nothing, Nothing, Nothing, idDestino,
                                                                            Nothing,
@@ -2002,10 +2002,10 @@ Public Class ConsultasLinq
                            .PV2 = g.Where(Function(i) i.PuntoVenta = 2 And i.FechaIngreso >= fechadesde).DefaultIfEmpty().Sum(Function(i) If(i.NetoFinal, 0)) / 1000,
                            .PV3 = g.Where(Function(i) i.PuntoVenta = 3 And i.FechaIngreso >= fechadesde).DefaultIfEmpty().Sum(Function(i) If(i.NetoFinal, 0)) / 1000,
                            .PV4 = g.Where(Function(i) i.PuntoVenta = 4 And i.FechaIngreso >= fechadesde).DefaultIfEmpty().Sum(Function(i) If(i.NetoFinal, 0)) / 1000,
-                           .TotalEntrega = CInt(g.Where(Function(i) i.FechaDescarga >= fechadesde And If(Modo, "NO") = "NO") _
-                                               .DefaultIfEmpty().Sum(Function(i) If(i.NetoFinal, 0)) / 1000),
-                           .TotalExportacion = CInt(g.Where(Function(i) i.FechaDescarga >= fechadesde And If(Modo, "NO") = "SI") _
-                                               .DefaultIfEmpty().Sum(Function(i) If(i.NetoFinal, 0)) / 1000),
+                           .TotalEntrega = g.Where(Function(i) i.FechaDescarga >= fechadesde And If(Modo, "NO") = "NO") _
+                                               .DefaultIfEmpty().Sum(Function(i) If(i.NetoFinal, 0)) / 1000,
+                           .TotalExportacion = g.Where(Function(i) i.FechaDescarga >= fechadesde And If(Modo, "NO") = "SI") _
+                                               .DefaultIfEmpty().Sum(Function(i) If(i.NetoFinal, 0)) / 1000,
                            .TotalBuques = 0,
                            .Total = g.Where(Function(i) i.FechaDescarga >= fechadesde).DefaultIfEmpty().Sum(Function(i) If(i.NetoFinal, 0)) / 1000,
                            .Porcent = 0,

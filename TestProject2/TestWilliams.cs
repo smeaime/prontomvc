@@ -863,7 +863,175 @@ namespace ProntoMVC.Tests
         /// ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-     
+
+
+
+
+        [TestMethod]
+        public void diferencias_estadisticasdescargas_y_resumen_41321()
+        {
+            ReportParameter p2 = null;
+
+            var desde = new DateTime(2016, 11, 1);
+            var hasta = new DateTime(2017, 5, 10);
+            var desdeAnt = new DateTime(2015, 11, 1); //nov
+            var hastaAnt = new DateTime(2016, 5, 10); //mayo
+            var MinimoNeto = 0;
+            var topclie = 99999;
+            var pv = -1;
+            var ModoExportacion = "Entregas";
+            CartaDePorteManager.enumCDPestado estado = CartaDePorteManager.enumCDPestado.Todas;
+
+
+
+
+
+
+
+            
+            var scEF = ProntoMVC.Data.Models.Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC));
+            DemoProntoEntities db = new DemoProntoEntities(scEF);
+            var q4 = db.fSQL_GetDataTableFiltradoYPaginado(
+                                0, 9999999, (int)estado, "", -1, -1,
+                                -1, -1, -1, -1, -1,
+                                -1, 0, ModoExportacion,
+                                    desde, hasta, pv,
+                                    null, false, "", "",
+                                -1, null, 0, "", "Todos")
+                          .Select(x => new { x.IdCartaDePorte, x.NetoFinal }).ToList();
+
+            var tot = q4.Sum(x => x.NetoFinal);
+
+
+
+
+
+
+            // por qué me muestra exportaciones si las estoy excluyendo? -porque pueden tener una 
+            // copia de entregas. -Entonces por qué en produccion no se estan colando???
+            // -creo q alla en produccion estaban desactualizados la funcsql y el store. Ahora sí se cuelan alla tambien... 
+
+            var q = ConsultasLinq.EstadisticasDescargas(ref p2,
+                                            desde.ToString(), hasta.ToString(),
+                                            desdeAnt.ToString(), hastaAnt.ToString(),
+                                            "Personalizar",
+                                            pv, ModoExportacion, SC, -1, -1, -1,estado);
+
+
+            ReportViewer ReporteLocal = new Microsoft.Reporting.WebForms.ReportViewer();
+            string output = "";
+
+            ReportParameter[] yourParams = new ReportParameter[2];
+            yourParams[0] = new ReportParameter("Titulo", "jhjh");
+            yourParams[1] = p2;
+
+            CartaDePorteManager.RebindReportViewerLINQ_Excel(ref ReporteLocal, @"C:\Users\Administrador\Documents\bdl\pronto\prontoweb\ProntoWeb\Informes\Estadísticas de Toneladas descargadas Sucursal-Modo.rdl", q, ref output, yourParams);
+
+            System.Diagnostics.Process.Start(output);
+
+
+
+
+
+
+
+
+            string output2 = @"C:\Users\Administrador\Desktop\Informe" + DateTime.Now.ToString("ddMMMyyyy_HHmmss") + ".xls";
+            ReportParameter[] yourParams2 = new ReportParameter[9];
+            yourParams2[0] = new ReportParameter("FechaDesde", desde.ToString());
+            yourParams2[1] = new ReportParameter("FechaHasta", hasta.ToString());
+            yourParams2[2] = new ReportParameter("FechaDesdeAnterior", desdeAnt.ToString());
+            yourParams2[3] = new ReportParameter("FechaHastaAnterior", hastaAnt.ToString());
+            yourParams2[4] = new ReportParameter("bMostrar1", "true");
+            yourParams2[5] = new ReportParameter("bMostrar2", "true");
+            yourParams2[6] = new ReportParameter("bMostrar3", "true");
+            yourParams2[7] = new ReportParameter("bMostrar4", "true");
+            yourParams2[8] = new ReportParameter("bMostrar5", "true");
+
+            var s = CartaDePorteManager.RebindReportViewer_ServidorExcel(ref ReporteLocal,
+                      "Williams - Resumen de Totales Generales.rdl", yourParams2, ref output2, false);
+
+            System.Diagnostics.Process.Start(output2);
+
+
+
+
+
+
+            if (false)
+            {
+
+                string output4 = @"C:\Users\Administrador\Desktop\Informe" + DateTime.Now.ToString("ddMMMyyyy_HHmmss") + ".xls";
+                ReportParameter[] yourParams4 = new ReportParameter[9];
+                yourParams4[0] = new ReportParameter("FechaDesde", desdeAnt.ToString());
+                yourParams4[1] = new ReportParameter("FechaHasta", hastaAnt.ToString());
+                yourParams4[2] = new ReportParameter("FechaDesdeAnterior", desdeAnt.ToString());
+                yourParams4[3] = new ReportParameter("FechaHastaAnterior", hastaAnt.ToString());
+                yourParams4[4] = new ReportParameter("bMostrar1", "true");
+                yourParams4[5] = new ReportParameter("bMostrar2", "true");
+                yourParams4[6] = new ReportParameter("bMostrar3", "true");
+                yourParams4[7] = new ReportParameter("bMostrar4", "true");
+                yourParams4[8] = new ReportParameter("bMostrar5", "true");
+
+                var s4 = CartaDePorteManager.RebindReportViewer_ServidorExcel(ref ReporteLocal,
+                          "Williams - Resumen de Totales Generales.rdl", yourParams4, ref output4, false);
+
+                System.Diagnostics.Process.Start(output4);
+
+            }
+
+
+
+
+
+
+
+            if (false)
+            {
+                // no tiene sentido, son una banda...  -Si, son una banda, pero es util igual!!!
+
+                string output3 = "";
+                var dr = CDPMailFiltrosManager2.TraerMetadata(SC, -1).NewRow();
+                dr["ModoImpresion"] = "Speed"; // este es el excel angosto con adjunto html angosto ("Listado general de Cartas de Porte (simulando original) con foto 2 .rdl"). Lo que quieren es el excel ANCHO manteniendo el MISMO html. 
+                dr["Emails"] = "mscalella911@gmail.com";
+                dr["Vendedor"] = -1;
+                dr["CuentaOrden1"] = -1;
+                dr["CuentaOrden2"] = -1;
+                dr["IdClienteAuxiliar"] = -1; ;
+                dr["Corredor"] = -1;
+                dr["Entregador"] = -1;
+                dr["Destino"] = -1;
+                dr["Procedencia"] = -1;
+                dr["FechaDesde"] = desde;
+                dr["FechaHasta"] = hasta;
+                dr["AplicarANDuORalFiltro"] = 0; // CartaDePorteManager.FiltroANDOR.FiltroOR;
+                dr["Modo"] = ModoExportacion;
+                dr["EnumSyngentaDivision"] = "";
+                dr["EsPosicion"] = false;
+                dr["IdArticulo"] = -1;
+
+                string titulo = "";
+                string sError = "", sError2 = "";
+                string inlinePNG = DirApp + @"\imagenes\Unnamed.png";
+                string inlinePNG2 = DirApp + @"\imagenes\twitterwilliams.jpg";
+                long lineas = 0;
+                int tiemposql = 0;
+                int tiempoinf = 0;
+
+                output3 = CartaDePorteManager.generarNotasDeEntregaConReportViewer_ConServidorDeInformes(SC, desde, hasta, dr, estado, ref lineas, ref titulo, inlinePNG, pv, ref tiemposql, ref tiempoinf,false,null,9999999);
+
+
+                System.Diagnostics.Process.Start(output3);
+
+
+            }
+        }
+
+
+
+
+
+
 
         [TestMethod]
         public void syngenta_webservice_30920_2_ftp()
@@ -873,22 +1041,22 @@ namespace ProntoMVC.Tests
             //Carpeta: /UAT/Ready
             //Usuario: sappo_test
             //Password: 4R04475j
-    
+
 
             string archivoExcel = @"C:\Users\Administrador\Documents\bdl\pronto\docstest\Syngenta_10feb2017_115941.xlsx";
 
             var s = new ServicioCartaPorte.servi();
 
             s.UploadFtpFile("goragora.com.ar", "/public_ftp/incoming", archivoExcel, "maruxs", "ns5aK!cvai0C");
-            
+
             //s.CopyFileFTP("ftp://192.208.44.90/", "/UAT/Ready", archivoExcel, "sappo_test", "4R04475j");
             s.UploadFtpFile(ConfigurationManager.AppSettings["SyngentaFTPdominio"],
-                            ConfigurationManager.AppSettings["SyngentaFTPdir"], 
+                            ConfigurationManager.AppSettings["SyngentaFTPdir"],
                             archivoExcel,
                             ConfigurationManager.AppSettings["SyngentaFTPuser"],
                             ConfigurationManager.AppSettings["SyngentaFTPpass"]);
 
-           
+
 
         }
 
@@ -905,14 +1073,14 @@ namespace ProntoMVC.Tests
 
             var s = new ServicioCartaPorte.servi();
 
-             
-                                                     
 
-            var endpointStr =ConfigurationManager.AppSettings["SyngentaServiceEndpoint"]; //  @"https://oasis-pi-nonprod.syngenta.com/uat/XISOAPAdapter/MessageServlet?senderParty=&senderService=Srv_BIT_BarterService&receiverParty=&receiverService=&interface=LoadDeclarationSoap_send_out_asy&interfaceNamespace=urn:broker:o2c:s:global:delivery:loaddeclaration:100";
+
+
+            var endpointStr = ConfigurationManager.AppSettings["SyngentaServiceEndpoint"]; //  @"https://oasis-pi-nonprod.syngenta.com/uat/XISOAPAdapter/MessageServlet?senderParty=&senderService=Srv_BIT_BarterService&receiverParty=&receiverService=&interface=LoadDeclarationSoap_send_out_asy&interfaceNamespace=urn:broker:o2c:s:global:delivery:loaddeclaration:100";
             var UserName = ConfigurationManager.AppSettings["SyngentaServiceUser"];
-            var Password =ConfigurationManager.AppSettings["SyngentaServicePass"];
+            var Password = ConfigurationManager.AppSettings["SyngentaServicePass"];
 
-            var x = s.WebServiceSyngenta(dbcartas,endpointStr,UserName,Password);
+            var x = s.WebServiceSyngenta(dbcartas, endpointStr, UserName, Password);
 
             // marcar fecha de cartas enviadas, loguar tanda de cartas enviadas para que 
             // sepan qué excel tienen que generar (el webservice solo manda un mail si hubo error, no tengo notificacion de otro tipo)
@@ -1200,7 +1368,7 @@ La interface será procesa por Syngenta y si la misma no puede ser procesada cor
                                             desde.ToString(), hasta.ToString(),
                                             desdeAnt.ToString(), hastaAnt.ToString(),
                                             "Personalizar",
-                                            pv, ModoExportacion, SC, -1, -1, -1);
+                                            pv, ModoExportacion, SC, -1, -1, -1, CartaDePorteManager.enumCDPestado.Todas);
 
 
             ReportViewer ReporteLocal = new Microsoft.Reporting.WebForms.ReportViewer();
@@ -7320,7 +7488,7 @@ Adjunto un ejemplo que tiene cartas de porte de 8 entregadores que no son Willia
 
             var q = ConsultasLinq.EstadisticasDescargas(ref p2, "1/11/2015", "31/5/2016", "1/11/2015", "31/5/2016",
                                             "Personalizar",
-                                            1, "Todos", SC, -1, -1, -1);
+                                            1, "Todos", SC, -1, -1, -1, CartaDePorteManager.enumCDPestado.Todas);
 
         }
 
