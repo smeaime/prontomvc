@@ -870,14 +870,19 @@ namespace ProntoMVC.Tests
         [TestMethod]
         public void diferencias_estadisticasdescargas_y_resumen_41321()
         {
+
+            // En el periodo anterior sigue habiendo bnastante diferencia
+            // Si filtra por "entrega", aparecen cartas en "exportacion" porque de esas familias hay "Originales" en ese modo
+
+
             ReportParameter p2 = null;
 
             var desde = new DateTime(2016, 11, 1);
-            var hasta = new DateTime(2017, 5, 10);
+            var hasta = new DateTime(2017, 5, 31);
             var desdeAnt = new DateTime(2015, 11, 1); //nov
-            var hastaAnt = new DateTime(2016, 5, 10); //mayo
-            desde = desdeAnt;
-            hasta = hastaAnt;
+            var hastaAnt = new DateTime(2016, 5, 31); //mayo
+            //desde = desdeAnt;
+            //hasta = hastaAnt;
 
             var MinimoNeto = 0;
             var topclie = 99999;
@@ -901,11 +906,11 @@ namespace ProntoMVC.Tests
                                     desde, hasta, pv,
                                     null, false, "", "",
                                 -1, null, 0, "", "Todos")
-                          .Select(x => new { x.IdCartaDePorte, x.NetoFinal, x.Exporta }).ToList();
+                          .Select(x => new { x.IdCartaDePorte, x.NetoFinal, x.Exporta,x.PuntoVenta }).ToList();
 
             var tot = q4.Sum(x => x.NetoFinal);
-            var totelev = q4.Where(x => x.Exporta == "SI").Sum(x => x.NetoFinal);
-            var totentreg = q4.Where(x => x.Exporta != "SI").Sum(x => x.NetoFinal);
+            var totelev = q4.Where(x => x.Exporta == "SI" && x.PuntoVenta==1).Sum(x => x.NetoFinal);
+            var totentreg = q4.Where(x => x.Exporta != "SI" && x.PuntoVenta == 1).Sum(x => x.NetoFinal);
 
 
 

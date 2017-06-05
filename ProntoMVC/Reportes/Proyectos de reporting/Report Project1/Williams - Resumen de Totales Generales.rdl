@@ -3882,28 +3882,28 @@ select idlocalidad, nombre from localidades</CommandText>
             <TablixBody>
               <TablixColumns>
                 <TablixColumn>
-                  <Width>17.10024mm</Width>
+                  <Width>18.29855mm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>17.10024mm</Width>
+                  <Width>18.29855mm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>17.10024mm</Width>
+                  <Width>18.29855mm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>17.10024mm</Width>
+                  <Width>18.29855mm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>17.10024mm</Width>
+                  <Width>18.29855mm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>17.89399mm</Width>
+                  <Width>19.0923mm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>17.10024mm</Width>
+                  <Width>18.29855mm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>17.10024mm</Width>
+                  <Width>18.29855mm</Width>
                 </TablixColumn>
               </TablixColumns>
               <TablixRows>
@@ -4805,7 +4805,7 @@ select idlocalidad, nombre from localidades</CommandText>
               <TablixMembers>
                 <TablixMember>
                   <TablixHeader>
-                    <Size>15.31131mm</Size>
+                    <Size>12.9147mm</Size>
                     <CellContents>
                       <Textbox Name="Textbox47">
                         <CanGrow>true</CanGrow>
@@ -4814,7 +4814,7 @@ select idlocalidad, nombre from localidades</CommandText>
                           <Paragraph>
                             <TextRuns>
                               <TextRun>
-                                <Value>Sucursal</Value>
+                                <Value>Suc</Value>
                                 <Style>
                                   <FontFamily>Tahoma</FontFamily>
                                   <FontSize>8pt</FontSize>
@@ -4857,7 +4857,7 @@ select idlocalidad, nombre from localidades</CommandText>
                     </SortExpression>
                   </SortExpressions>
                   <TablixHeader>
-                    <Size>15.31131mm</Size>
+                    <Size>12.9147mm</Size>
                     <CellContents>
                       <Textbox Name="sucursal5">
                         <CanGrow>true</CanGrow>
@@ -4898,7 +4898,7 @@ select idlocalidad, nombre from localidades</CommandText>
                 </TablixMember>
                 <TablixMember>
                   <TablixHeader>
-                    <Size>15.31131mm</Size>
+                    <Size>12.9147mm</Size>
                     <CellContents>
                       <Textbox Name="Textbox48">
                         <CanGrow>true</CanGrow>
@@ -4941,7 +4941,7 @@ select idlocalidad, nombre from localidades</CommandText>
             <Top>266.838mm</Top>
             <Left>5.85389mm</Left>
             <Height>18.79374mm</Height>
-            <Width>152.90701mm</Width>
+            <Width>160.09685mm</Width>
             <ZIndex>9</ZIndex>
             <Visibility>
               <Hidden>= not Parameters!bMostrar5.Value</Hidden>
@@ -6409,9 +6409,9 @@ select idlocalidad, nombre from localidades</CommandText>
             </ChartNoDataMessage>
             <DataSetName>DataSet1</DataSetName>
             <Top>266.838mm</Top>
-            <Left>162.31372mm</Left>
+            <Left>171.30955mm</Left>
             <Height>53.96875mm</Height>
-            <Width>51.01111mm</Width>
+            <Width>42.01528mm</Width>
             <ZIndex>13</ZIndex>
             <Visibility>
               <Hidden>= not Parameters!bMostrar5.Value</Hidden>
@@ -6428,7 +6428,7 @@ select idlocalidad, nombre from localidades</CommandText>
             </Style>
           </Chart>
         </ReportItems>
-        <Height>368.31421mm</Height>
+        <Height>400.32879mm</Height>
         <Style>
           <Border>
             <Style>None</Style>
