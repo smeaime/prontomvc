@@ -457,9 +457,11 @@ where 1=1
 	AND (@bTraerDuplicados='TRUE' OR ISNULL(CDP.SubnumeroDeFacturacion, 0) <= 0)  --solo trae el original de una familia
 
 
-	--LENTOS
-
+	------------------------------------------------
+	--                  LENTOS  (faltan indices?)
+	------------------------------------------------
 	
+	--tener en cuenta que las opciones de este filtro no son excluyentes
 	AND EXISTS ( SELECT * FROM CartasDePorte COPIAS  
 			where COPIAS.NumeroCartaDePorte=CDP.NumeroCartaDePorte
 			and COPIAS.SubnumeroVagon=CDP.SubnumeroVagon    
@@ -467,11 +469,12 @@ where 1=1
 				@ModoExportacion is null
 				or (@ModoExportacion = 'Ambos' or @ModoExportacion = 'Ambas') 
 				Or (@ModoExportacion = 'Todos') 
-				Or (@ModoExportacion = 'Entregas' And isnull(COPIAS.Exporta, 'NO') = 'NO' AND ISNULL(COPIAS.Anulada,'NO')<>'SI') 
+				Or (@ModoExportacion = 'Entregas' And isnull(COPIAS.Exporta, 'NO') = 'NO' AND ISNULL(COPIAS.Anulada,'NO')<>'SI')  
 				Or (@ModoExportacion = 'Export' And isnull(COPIAS.Exporta, 'NO') = 'SI' AND ISNULL(COPIAS.Anulada,'NO')<>'SI')
 						
 			) 
 		)
+
 
     AND (@Contrato IS NULL OR @Contrato ='' OR @Contrato ='-1' Or cdp.Contrato = @Contrato)
 	AND	(@Vagon IS NULL OR  @Vagon=0 or CDP.SubnumeroVagon=@Vagon) 
@@ -617,7 +620,7 @@ go
 
 
 
-select  exporta, * --count(*)
+select  exporta --count(*)
 from dbo.fSQL_GetDataTableFiltradoYPaginado  
 				(  
 
