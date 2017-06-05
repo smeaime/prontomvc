@@ -109,7 +109,7 @@ from dbo.fSQL_GetDataTableFiltradoYPaginado
 ( 
 						@startRowIndex, 
 							@maximumRows, 
-							@estado,
+							4, --@estado, hasta que modifiques el de "Resumen de Totales" para que tome el estado tambien, dejalo fijo
 							@QueContenga, 
 							@idVendedor, 
 

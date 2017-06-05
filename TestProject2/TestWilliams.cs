@@ -888,7 +888,7 @@ namespace ProntoMVC.Tests
             var topclie = 99999;
             var pv = -1;
             var ModoExportacion = "Entregas";
-            CartaDePorteManager.enumCDPestado estado = CartaDePorteManager.enumCDPestado.Todas;
+            CartaDePorteManager.enumCDPestado estado = CartaDePorteManager.enumCDPestado.DescargasMasFacturadas; //CartaDePorteManager.enumCDPestado.Todas;
 
 
 
