@@ -338,7 +338,6 @@ where 1=1
 			@optCamionVagon = 'Todos' OR  @optCamionVagon = 'Ambas'  OR @optCamionVagon  IS NULL
 		)
 
-	AND (@bTraerDuplicados='TRUE' OR ISNULL(CDP.SubnumeroDeFacturacion, 0) <= 0)  --solo trae el original de una familia
 	
 
 
@@ -455,9 +454,24 @@ where 1=1
     AND (@Patente IS NULL OR @Patente ='' Or cdp.Patente = @Patente)
 
 
+	AND (@bTraerDuplicados='TRUE' OR ISNULL(CDP.SubnumeroDeFacturacion, 0) <= 0)  --solo trae el original de una familia
+
+
 	--LENTOS
 
-
+	
+	AND EXISTS ( SELECT * FROM CartasDePorte COPIAS  
+			where COPIAS.NumeroCartaDePorte=CDP.NumeroCartaDePorte
+			and COPIAS.SubnumeroVagon=CDP.SubnumeroVagon    
+			and (
+				@ModoExportacion is null
+				or (@ModoExportacion = 'Ambos' or @ModoExportacion = 'Ambas') 
+				Or (@ModoExportacion = 'Todos') 
+				Or (@ModoExportacion = 'Entregas' And isnull(COPIAS.Exporta, 'NO') = 'NO' AND ISNULL(COPIAS.Anulada,'NO')<>'SI') 
+				Or (@ModoExportacion = 'Export' And isnull(COPIAS.Exporta, 'NO') = 'SI' AND ISNULL(COPIAS.Anulada,'NO')<>'SI')
+						
+			) 
+		)
 
     AND (@Contrato IS NULL OR @Contrato ='' OR @Contrato ='-1' Or cdp.Contrato = @Contrato)
 	AND	(@Vagon IS NULL OR  @Vagon=0 or CDP.SubnumeroVagon=@Vagon) 
@@ -474,18 +488,6 @@ where 1=1
 
 
 
-	AND EXISTS ( SELECT * FROM CartasDePorte COPIAS  
-			where COPIAS.NumeroCartaDePorte=CDP.NumeroCartaDePorte
-			and COPIAS.SubnumeroVagon=CDP.SubnumeroVagon    
-			and (
-				@ModoExportacion is null
-				or (@ModoExportacion = 'Ambos' or @ModoExportacion = 'Ambas') 
-				Or (@ModoExportacion = 'Todos') 
-				Or (@ModoExportacion = 'Entregas' And isnull(COPIAS.Exporta, 'NO') = 'NO' AND ISNULL(COPIAS.Anulada,'NO')<>'SI') 
-				Or (@ModoExportacion = 'Export' And isnull(COPIAS.Exporta, 'NO') = 'SI' AND ISNULL(COPIAS.Anulada,'NO')<>'SI')
-						
-			) 
-		)
 	--FIN LENTOS
 
 		
