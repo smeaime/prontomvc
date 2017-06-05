@@ -876,6 +876,9 @@ namespace ProntoMVC.Tests
             var hasta = new DateTime(2017, 5, 10);
             var desdeAnt = new DateTime(2015, 11, 1); //nov
             var hastaAnt = new DateTime(2016, 5, 10); //mayo
+            desde = desdeAnt;
+            hasta = hastaAnt;
+
             var MinimoNeto = 0;
             var topclie = 99999;
             var pv = -1;
@@ -888,7 +891,7 @@ namespace ProntoMVC.Tests
 
 
 
-            
+
             var scEF = ProntoMVC.Data.Models.Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC));
             DemoProntoEntities db = new DemoProntoEntities(scEF);
             var q4 = db.fSQL_GetDataTableFiltradoYPaginado(
@@ -898,9 +901,11 @@ namespace ProntoMVC.Tests
                                     desde, hasta, pv,
                                     null, false, "", "",
                                 -1, null, 0, "", "Todos")
-                          .Select(x => new { x.IdCartaDePorte, x.NetoFinal }).ToList();
+                          .Select(x => new { x.IdCartaDePorte, x.NetoFinal, x.Exporta }).ToList();
 
             var tot = q4.Sum(x => x.NetoFinal);
+            var totelev = q4.Where(x => x.Exporta == "SI").Sum(x => x.NetoFinal);
+            var totentreg = q4.Where(x => x.Exporta != "SI").Sum(x => x.NetoFinal);
 
 
 
@@ -915,7 +920,7 @@ namespace ProntoMVC.Tests
                                             desde.ToString(), hasta.ToString(),
                                             desdeAnt.ToString(), hastaAnt.ToString(),
                                             "Personalizar",
-                                            pv, ModoExportacion, SC, -1, -1, -1,estado);
+                                            pv, ModoExportacion, SC, -1, -1, -1, estado);
 
 
             ReportViewer ReporteLocal = new Microsoft.Reporting.WebForms.ReportViewer();
@@ -1018,7 +1023,7 @@ namespace ProntoMVC.Tests
                 int tiemposql = 0;
                 int tiempoinf = 0;
 
-                output3 = CartaDePorteManager.generarNotasDeEntregaConReportViewer_ConServidorDeInformes(SC, desde, hasta, dr, estado, ref lineas, ref titulo, inlinePNG, pv, ref tiemposql, ref tiempoinf,false,null,9999999);
+                output3 = CartaDePorteManager.generarNotasDeEntregaConReportViewer_ConServidorDeInformes(SC, desde, hasta, dr, estado, ref lineas, ref titulo, inlinePNG, pv, ref tiemposql, ref tiempoinf, false, null, 9999999);
 
 
                 System.Diagnostics.Process.Start(output3);

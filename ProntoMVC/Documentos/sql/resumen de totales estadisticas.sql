@@ -256,9 +256,9 @@ go
 					-1,---1, --@idDestino,
 					NULL, --@AplicarANDuORalFiltro,
 					'Entregas', --'Ambos', --'Buques',
-					'20161101',
-					
-					'20170510',
+						
+					'20151101','20160510', --'20161101','20170510',
+
 					NULL, 
 					NULL,
 					NULL, 
@@ -296,9 +296,9 @@ go
 					-1,---1, --@idDestino,
 					NULL, --@AplicarANDuORalFiltro,
 					'Entregas', --'Ambos', --'Buques',
-					'20161101',
 					
-					'20170510',
+					'20151101','20160510', --'20161101','20170510',
+					
 					NULL, 
 					NULL,
 					NULL, 
