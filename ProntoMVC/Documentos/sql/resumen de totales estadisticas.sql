@@ -1,13 +1,3 @@
-/*
-declare @FechaDesde datetime
-declare @FechaHasta datetime
-declare @FechaDesdeAnterior datetime
-declare @FechaHastaAnterior datetime
-set @FechaDesdeAnterior ='20170101'
-set @FechaHastaAnterior='20170131'
-set @FechaDesde='20170201'
-set @FechaHasta='20170228'
-*/
 
 
 
@@ -116,13 +106,13 @@ select
 			Exporta as Modo,
 			Count(*) as CantCartas,
 			sum(
-				case when FechaDescarga>= @FechaDesde
-				then NetoPto/1000
+				case when FechaDescarga between @FechaDesde and @FechaHasta
+				then NetoFinal/1000
 				else 0 	end
 			   ) as NetoFinal,
 			sum(
-				case when FechaDescarga<= @FechaHastaAnterior  
-				then NetoPto/1000
+				case when FechaDescarga between @FechaDesdeAnterior and @FechaHastaAnterior  
+				then NetoFinal/1000
 				else 0 	end
 			   ) as PeriodoAnterior  
 
@@ -234,12 +224,20 @@ go
 
 
 
+declare @FechaDesde datetime
+declare @FechaHasta datetime
+declare @FechaDesdeAnterior datetime
+declare @FechaHastaAnterior datetime
+set @FechaDesdeAnterior ='20151101'
+set @FechaHastaAnterior='20160531'
+set @FechaDesde='20161101'
+set @FechaHasta='20170531'
 
 
 
 
 
-[wCartasDePorte_TX_ResumenDeTotalesEstadisticas] 
+exec [wCartasDePorte_TX_ResumenDeTotalesEstadisticas] 
 					NULL, 
 					NULL, 
 					4,
@@ -257,7 +255,9 @@ go
 					NULL, --@AplicarANDuORalFiltro,
 					'Entregas', --'Ambos', --'Buques',
 						
-					'20151101','20160510', --'20161101','20170510',
+					
+@FechaDesde, @FechaHasta,
+
 
 					NULL, 
 					NULL,
@@ -270,16 +270,16 @@ go
 					NULL, 
 					NULL
 
-					,'20151101','20160510'
-
-go
+,@FechaDesdeAnterior , @FechaHastaAnterior
 
 
 
 
 
 
-[wCartasDePorte_TX_EstadisticasDeDescarga] 
+
+
+exec [wCartasDePorte_TX_EstadisticasDeDescarga] 
 					NULL, 
 					NULL, 
 					4,
@@ -297,7 +297,8 @@ go
 					NULL, --@AplicarANDuORalFiltro,
 					'Entregas', --'Ambos', --'Buques',
 					
-					'20151101','20160510', --'20161101','20170510',
+					
+				@FechaDesde, @FechaHasta,
 					
 					NULL, 
 					NULL,
@@ -310,7 +311,7 @@ go
 					NULL, 
 					NULL
 
-					,'20151101','20160510'
+,@FechaDesdeAnterior , @FechaHastaAnterior
 
 go
 
