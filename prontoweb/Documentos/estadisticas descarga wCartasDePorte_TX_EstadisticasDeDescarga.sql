@@ -155,6 +155,13 @@ Where
         
 Group BY  art.Descripcion, cdp.Exporta, cdp.PuntoVenta 
 
+order by  cdp.PuntoVenta 
+
+
+
+
+
+
 go
 
 
@@ -204,7 +211,7 @@ go
 
 
 
-select * -- sum(cdp.netofinal)
+select sum(cdp.netofinal)
 from 
  dbo.fSQL_GetDataTableFiltradoYPaginado(
 

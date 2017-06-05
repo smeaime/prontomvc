@@ -16,14 +16,14 @@
           <QueryParameter Name="@FechaDesde">
             <Value>=Parameters!FechaDesde.Value</Value>
           </QueryParameter>
-          <QueryParameter Name="@FechaHastaAnterior">
-            <Value>=Parameters!FechaHastaAnterior.Value</Value>
+          <QueryParameter Name="@FechaHasta">
+            <Value>=Parameters!FechaHasta.Value</Value>
           </QueryParameter>
           <QueryParameter Name="@FechaDesdeAnterior">
             <Value>=Parameters!FechaDesdeAnterior.Value</Value>
           </QueryParameter>
-          <QueryParameter Name="@FechaHasta">
-            <Value>=Parameters!FechaHasta.Value</Value>
+          <QueryParameter Name="@FechaHastaAnterior">
+            <Value>=Parameters!FechaHastaAnterior.Value</Value>
           </QueryParameter>
         </QueryParameters>
         <CommandText>/*
@@ -35,174 +35,45 @@ set @FechaDesdeAnterior ='20170101'
 set @FechaHastaAnterior='20170131'
 set @FechaDesde='20170201'
 set @FechaHasta='20170228'
+
 */
 
-select 
-		*
-, sum (Elevacion)  OVER () as TotalElevacion
-, sum (Entrega)  OVER () as TotalEntrega
-, sum (Buques)  OVER () as TotalBuques
 
-from
-(
-select 
-
-sucursal,
-sum(
-				case when Modo='SI'
-				then NetoFinal
-				else 0 	end
-			   ) as Elevacion,
-sum(
-				case when Modo='NO'
-				then NetoFinal
-				else 0 	end
-			   ) as Entrega,
-sum(
-				case when Modo='Buque'
-				then NetoFinal
-				else 0 	end
-			   ) as Buques,
-
-sum(
-				case when Modo='NO'
-				then PeriodoAnterior  
-				else 0 	end
-			   ) as PeriodoAnteriorEntrega,
-
-sum(
-				case when Modo='SI'
-				then PeriodoAnterior  
-				else 0 	end
-			   ) as PeriodoAnteriorElevacion,
-
-sum(
-				case when Modo='Buque'
-				then PeriodoAnterior  
-				else 0 	end
-			   ) as PeriodoAnteriorBuques
-
-
-
-from
-(
-
-select
-
-                   puntoventa as Sucursal,
-			Exporta as Modo,
-			Count(*) as CantCartas,
-			sum(
-				case when FechaDescarga&gt;= @FechaDesde
-				then NetoPto/1000
-				else 0 	end
-			   ) as NetoFinal,
-			sum(
-				case when FechaDescarga&lt;= @FechaHastaAnterior  
-				then NetoPto/1000
-				else 0 	end
-			   ) as PeriodoAnterior  
-
-from 
- dbo.fSQL_GetDataTableFiltradoYPaginado  
-				(  
-
+[wCartasDePorte_TX_ResumenDeTotalesEstadisticas] 
 					NULL, 
-					0, 
-					0,
 					NULL, 
-					-1,
-					 
-					-1, --Corredor
-					-1,
-					-1,
-					-1,
-					-1,
-
-					-1,  --Procedencia
-					NULL, 
-					0,   --AplicarANDuORalFiltro
-					NULL,  --ModoExportacion
-					@FechaDesdeAnterior,
-
-					@FechaHasta,
-					NULL, 
-					NULL,
-					'FALSE', --TraerDuplicados
+					4,
 					NULL, 
 					NULL, 
 
-					NULL, --ClienteAuxiliarint
+					NULL, 
 					NULL, 
 					NULL,
 					NULL, 
-					NULL
+					-1, --@idArticulo,
 
-					)
-    
- as CDP
-
-
-
-
-
-
+					NULL, --@idProcedencia,
+					-1,---1, --@idDestino,
+					NULL, --@AplicarANDuORalFiltro,
+					'Entregas', --'Ambos', --'Buques',
+						
+@FechaDesde,
+@FechaHasta,
 
 
+					NULL, 
+					NULL,
+					NULL, 
+					NULL, 
 
+					NULL, 
+					NULL, 
+					NULL,
+					NULL, 
+					NULL,
 
- Group by  cdp.PuntoVenta,cdp.exporta
-
-
-
-
-union 
-
-select 
-
-
-                   IdStock as Sucursal,
-			'Buque' as Modo,
-			Count(*) as CantCartas,
-			sum(
-				case when i.FechaIngreso &gt;= @FechaDesde
-				then cantidad /1000
-				else 0 	end
-			   ) as NetoFinal,
-			sum(
-				case when i.FechaIngreso &lt;= @FechaHastaAnterior 
-				then cantidad /1000
-				else 0 	end
-			   ) as PeriodoAnterior           
-			         
-
-
-
-From CartasPorteMovimientos i
-Where (
-                                i.Tipo = 4 
-                                And isnull(i.Anulada, 'NO') &lt;&gt; 'SI' 
-                                And i.FechaIngreso &gt;= @FechaDesdeAnterior And i.FechaIngreso &lt;= @FechaHasta 
-                           )
-
-
-
-
-
-
-
-
-
- 
-
- Group by  IdStock
-
-) as Q
-
-where sucursal &gt;0
-group by sucursal
-
-) as Q2</CommandText>
+@FechaDesdeAnterior,
+@FechaHastaAnterior</CommandText>
         <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
       </Query>
       <Fields>
@@ -609,7 +480,25 @@ select idlocalidad, nombre from localidades</CommandText>
                 </Style>
               </ChartArea>
             </ChartAreas>
-            <Palette>Custom</Palette>
+            <ChartLegends>
+              <ChartLegend Name="Legend1">
+                <Style>
+                  <BackgroundGradientType>None</BackgroundGradientType>
+                  <FontSize>8pt</FontSize>
+                </Style>
+                <ChartLegendTitle>
+                  <Caption />
+                  <Style>
+                    <FontSize>8pt</FontSize>
+                    <FontWeight>Bold</FontWeight>
+                    <TextAlign>Center</TextAlign>
+                  </Style>
+                </ChartLegendTitle>
+                <HeaderSeparatorColor>Black</HeaderSeparatorColor>
+                <ColumnSeparatorColor>Black</ColumnSeparatorColor>
+              </ChartLegend>
+            </ChartLegends>
+            <Palette>Excel</Palette>
             <ChartCustomPaletteColors>
               <ChartCustomPaletteColor>#4c68a2</ChartCustomPaletteColor>
               <ChartCustomPaletteColor>#b5dddf</ChartCustomPaletteColor>
@@ -1203,12 +1092,16 @@ select idlocalidad, nombre from localidades</CommandText>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value />
+                                  <Value>=( Sum( Fields!Entrega.Value) - Sum( Fields!PeriodoAnteriorEntrega.Value)) / Sum(Fields!PeriodoAnteriorEntrega.Value)</Value>
                                   <Style>
                                     <FontFamily>Tahoma</FontFamily>
-                                    <FontWeight>Bold</FontWeight>
                                     <Format>0.00%</Format>
-                                    <Color>Gold</Color>
+                                    <Color>= iif(
+(
+(Fields!Elevacion.Value + Fields!Entrega.Value) 
+- (Fields!PeriodoAnteriorEntrega.Value + Fields!PeriodoAnteriorElevacion.Value) 
+)&gt;0 
+,  "Gold","White")</Color>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -1489,7 +1382,9 @@ select idlocalidad, nombre from localidades</CommandText>
                   </TextRun>
                   <TextRun>
                     <Value>=Parameters!FechaDesde.Value</Value>
-                    <Style />
+                    <Style>
+                      <Format>dd/MM/yyyy</Format>
+                    </Style>
                   </TextRun>
                   <TextRun>
                     <Value> hasta </Value>
@@ -1497,7 +1392,9 @@ select idlocalidad, nombre from localidades</CommandText>
                   </TextRun>
                   <TextRun>
                     <Value>=Parameters!FechaHasta.Value</Value>
-                    <Style />
+                    <Style>
+                      <Format>dd/MM/yyyy</Format>
+                    </Style>
                   </TextRun>
                   <TextRun>
                     <Value>. </Value>
@@ -1516,7 +1413,9 @@ select idlocalidad, nombre from localidades</CommandText>
                   </TextRun>
                   <TextRun>
                     <Value>=Parameters!FechaDesdeAnterior.Value</Value>
-                    <Style />
+                    <Style>
+                      <Format>dd/MM/yyyy</Format>
+                    </Style>
                   </TextRun>
                   <TextRun>
                     <Value> hasta </Value>
@@ -1524,7 +1423,9 @@ select idlocalidad, nombre from localidades</CommandText>
                   </TextRun>
                   <TextRun>
                     <Value>=Parameters!FechaHastaAnterior.Value</Value>
-                    <Style />
+                    <Style>
+                      <Format>dd/MM/yyyy</Format>
+                    </Style>
                   </TextRun>
                 </TextRuns>
                 <Style>
@@ -2093,12 +1994,16 @@ select idlocalidad, nombre from localidades</CommandText>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value />
+                                  <Value>=(Sum(Fields!Elevacion.Value) - Sum(Fields!PeriodoAnteriorElevacion.Value)) / Sum(Fields!PeriodoAnteriorElevacion.Value)</Value>
                                   <Style>
                                     <FontFamily>Tahoma</FontFamily>
-                                    <FontWeight>Bold</FontWeight>
                                     <Format>0.00%</Format>
-                                    <Color>Gold</Color>
+                                    <Color>= iif(
+(
+(Fields!Elevacion.Value + Fields!Entrega.Value) 
+- (Fields!PeriodoAnteriorEntrega.Value + Fields!PeriodoAnteriorElevacion.Value) 
+)&gt;0 
+,  "Gold","White")</Color>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -2823,10 +2728,11 @@ select idlocalidad, nombre from localidades</CommandText>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value />
+                                  <Value>=(Sum(Fields!Buques.Value) - Sum(Fields!PeriodoAnteriorBuques.Value) ) / Sum(Fields!PeriodoAnteriorBuques.Value)</Value>
                                   <Style>
                                     <FontFamily>Tahoma</FontFamily>
-                                    <Color>Yellow</Color>
+                                    <Format>0.00%</Format>
+                                    <Color>= iif( (Fields!Buques.Value - Fields!PeriodoAnteriorBuques.Value)&gt;0 ,  "Gold","White")</Color>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -3768,29 +3674,33 @@ select idlocalidad, nombre from localidades</CommandText>
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="Textbox105">
+                        <Textbox Name="Textbox76">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value />
+                                  <Value>=((Sum(Fields!Elevacion.Value) + Sum(Fields!Entrega.Value)) - (Sum(Fields!PeriodoAnteriorEntrega.Value) + Sum(Fields!PeriodoAnteriorElevacion.Value))) / (Sum(Fields!PeriodoAnteriorEntrega.Value) + Sum(Fields!PeriodoAnteriorElevacion.Value))</Value>
                                   <Style>
                                     <FontFamily>Tahoma</FontFamily>
-                                    <FontWeight>Bold</FontWeight>
                                     <Format>0.00%</Format>
-                                    <Color>Gold</Color>
+                                    <Color>= iif(
+(
+(Fields!Elevacion.Value + Fields!Entrega.Value) 
+- (Fields!PeriodoAnteriorEntrega.Value + Fields!PeriodoAnteriorElevacion.Value) 
+)&gt;0 
+,  "Gold","White")</Color>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
                               <Style />
                             </Paragraph>
                           </Paragraphs>
-                          <rd:DefaultName>Textbox74</rd:DefaultName>
+                          <rd:DefaultName>Textbox54</rd:DefaultName>
                           <Style>
                             <Border>
-                              <Color>#9eb6e4</Color>
+                              <Color>#e5e5e5</Color>
                               <Style>Solid</Style>
                             </Border>
                             <BackgroundColor>#538dd5</BackgroundColor>
@@ -3972,28 +3882,28 @@ select idlocalidad, nombre from localidades</CommandText>
             <TablixBody>
               <TablixColumns>
                 <TablixColumn>
-                  <Width>16.41574mm</Width>
+                  <Width>17.10024mm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>16.41574mm</Width>
+                  <Width>17.10024mm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>16.41574mm</Width>
+                  <Width>17.10024mm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>16.41574mm</Width>
+                  <Width>17.10024mm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>16.41574mm</Width>
+                  <Width>17.10024mm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>17.20949mm</Width>
+                  <Width>17.89399mm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>16.41574mm</Width>
+                  <Width>17.10024mm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>16.41574mm</Width>
+                  <Width>17.10024mm</Width>
                 </TablixColumn>
               </TablixColumns>
               <TablixRows>
@@ -4837,29 +4747,33 @@ select idlocalidad, nombre from localidades</CommandText>
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="Textbox113">
+                        <Textbox Name="Textbox105">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value />
+                                  <Value>=((Sum(Fields!Elevacion.Value) + Sum(Fields!Entrega.Value) + Sum(Fields!Buques.Value)) - (Sum(Fields!PeriodoAnteriorEntrega.Value) + Sum(Fields!PeriodoAnteriorElevacion.Value))) / (Sum(Fields!PeriodoAnteriorEntrega.Value) + Sum(Fields!PeriodoAnteriorElevacion.Value) + Sum(Fields!PeriodoAnteriorBuques.Value))</Value>
                                   <Style>
                                     <FontFamily>Tahoma</FontFamily>
-                                    <FontWeight>Bold</FontWeight>
                                     <Format>0.00%</Format>
-                                    <Color>Gold</Color>
+                                    <Color>= iif(
+(
+(Fields!Elevacion.Value + Fields!Entrega.Value) 
+- (Fields!PeriodoAnteriorEntrega.Value + Fields!PeriodoAnteriorElevacion.Value) 
+)&gt;0 
+,  "Gold","White")</Color>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
                               <Style />
                             </Paragraph>
                           </Paragraphs>
-                          <rd:DefaultName>Textbox74</rd:DefaultName>
+                          <rd:DefaultName>Textbox54</rd:DefaultName>
                           <Style>
                             <Border>
-                              <Color>#9eb6e4</Color>
+                              <Color>#e5e5e5</Color>
                               <Style>Solid</Style>
                             </Border>
                             <BackgroundColor>#538dd5</BackgroundColor>
@@ -4891,7 +4805,7 @@ select idlocalidad, nombre from localidades</CommandText>
               <TablixMembers>
                 <TablixMember>
                   <TablixHeader>
-                    <Size>16.41574mm</Size>
+                    <Size>15.31131mm</Size>
                     <CellContents>
                       <Textbox Name="Textbox47">
                         <CanGrow>true</CanGrow>
@@ -4943,7 +4857,7 @@ select idlocalidad, nombre from localidades</CommandText>
                     </SortExpression>
                   </SortExpressions>
                   <TablixHeader>
-                    <Size>16.41574mm</Size>
+                    <Size>15.31131mm</Size>
                     <CellContents>
                       <Textbox Name="sucursal5">
                         <CanGrow>true</CanGrow>
@@ -4984,7 +4898,7 @@ select idlocalidad, nombre from localidades</CommandText>
                 </TablixMember>
                 <TablixMember>
                   <TablixHeader>
-                    <Size>16.41574mm</Size>
+                    <Size>15.31131mm</Size>
                     <CellContents>
                       <Textbox Name="Textbox48">
                         <CanGrow>true</CanGrow>
@@ -5027,7 +4941,7 @@ select idlocalidad, nombre from localidades</CommandText>
             <Top>266.838mm</Top>
             <Left>5.85389mm</Left>
             <Height>18.79374mm</Height>
-            <Width>148.53541mm</Width>
+            <Width>152.90701mm</Width>
             <ZIndex>9</ZIndex>
             <Visibility>
               <Hidden>= not Parameters!bMostrar5.Value</Hidden>
@@ -5338,7 +5252,27 @@ select idlocalidad, nombre from localidades</CommandText>
                 </Style>
               </ChartArea>
             </ChartAreas>
-            <Palette>Custom</Palette>
+            <ChartLegends>
+              <ChartLegend Name="Legend1">
+                <Style>
+                  <BackgroundGradientType>None</BackgroundGradientType>
+                  <FontSize>8pt</FontSize>
+                </Style>
+                <Position>RightCenter</Position>
+                <DockOutsideChartArea>true</DockOutsideChartArea>
+                <ChartLegendTitle>
+                  <Caption />
+                  <Style>
+                    <FontSize>8pt</FontSize>
+                    <FontWeight>Bold</FontWeight>
+                    <TextAlign>Center</TextAlign>
+                  </Style>
+                </ChartLegendTitle>
+                <HeaderSeparatorColor>Black</HeaderSeparatorColor>
+                <ColumnSeparatorColor>Black</ColumnSeparatorColor>
+              </ChartLegend>
+            </ChartLegends>
+            <Palette>Excel</Palette>
             <ChartCustomPaletteColors>
               <ChartCustomPaletteColor>#4c68a2</ChartCustomPaletteColor>
               <ChartCustomPaletteColor>#b5dddf</ChartCustomPaletteColor>
@@ -5688,7 +5622,25 @@ select idlocalidad, nombre from localidades</CommandText>
                 </Style>
               </ChartArea>
             </ChartAreas>
-            <Palette>Custom</Palette>
+            <ChartLegends>
+              <ChartLegend Name="Legend1">
+                <Style>
+                  <BackgroundGradientType>None</BackgroundGradientType>
+                  <FontSize>8pt</FontSize>
+                </Style>
+                <ChartLegendTitle>
+                  <Caption />
+                  <Style>
+                    <FontSize>8pt</FontSize>
+                    <FontWeight>Bold</FontWeight>
+                    <TextAlign>Center</TextAlign>
+                  </Style>
+                </ChartLegendTitle>
+                <HeaderSeparatorColor>Black</HeaderSeparatorColor>
+                <ColumnSeparatorColor>Black</ColumnSeparatorColor>
+              </ChartLegend>
+            </ChartLegends>
+            <Palette>Excel</Palette>
             <ChartCustomPaletteColors>
               <ChartCustomPaletteColor>#4c68a2</ChartCustomPaletteColor>
               <ChartCustomPaletteColor>#b5dddf</ChartCustomPaletteColor>
@@ -6038,7 +5990,25 @@ select idlocalidad, nombre from localidades</CommandText>
                 </Style>
               </ChartArea>
             </ChartAreas>
-            <Palette>Custom</Palette>
+            <ChartLegends>
+              <ChartLegend Name="Legend1">
+                <Style>
+                  <BackgroundGradientType>None</BackgroundGradientType>
+                  <FontSize>8pt</FontSize>
+                </Style>
+                <ChartLegendTitle>
+                  <Caption />
+                  <Style>
+                    <FontSize>8pt</FontSize>
+                    <FontWeight>Bold</FontWeight>
+                    <TextAlign>Center</TextAlign>
+                  </Style>
+                </ChartLegendTitle>
+                <HeaderSeparatorColor>Black</HeaderSeparatorColor>
+                <ColumnSeparatorColor>Black</ColumnSeparatorColor>
+              </ChartLegend>
+            </ChartLegends>
+            <Palette>Excel</Palette>
             <ChartCustomPaletteColors>
               <ChartCustomPaletteColor>#4c68a2</ChartCustomPaletteColor>
               <ChartCustomPaletteColor>#b5dddf</ChartCustomPaletteColor>
@@ -6388,7 +6358,25 @@ select idlocalidad, nombre from localidades</CommandText>
                 </Style>
               </ChartArea>
             </ChartAreas>
-            <Palette>Custom</Palette>
+            <ChartLegends>
+              <ChartLegend Name="Legend1">
+                <Style>
+                  <BackgroundGradientType>None</BackgroundGradientType>
+                  <FontSize>8pt</FontSize>
+                </Style>
+                <ChartLegendTitle>
+                  <Caption />
+                  <Style>
+                    <FontSize>8pt</FontSize>
+                    <FontWeight>Bold</FontWeight>
+                    <TextAlign>Center</TextAlign>
+                  </Style>
+                </ChartLegendTitle>
+                <HeaderSeparatorColor>Black</HeaderSeparatorColor>
+                <ColumnSeparatorColor>Black</ColumnSeparatorColor>
+              </ChartLegend>
+            </ChartLegends>
+            <Palette>Excel</Palette>
             <ChartCustomPaletteColors>
               <ChartCustomPaletteColor>#4c68a2</ChartCustomPaletteColor>
               <ChartCustomPaletteColor>#b5dddf</ChartCustomPaletteColor>
@@ -6422,7 +6410,7 @@ select idlocalidad, nombre from localidades</CommandText>
             <DataSetName>DataSet1</DataSetName>
             <Top>266.838mm</Top>
             <Left>162.31372mm</Left>
-            <Height>48.4125mm</Height>
+            <Height>53.96875mm</Height>
             <Width>51.01111mm</Width>
             <ZIndex>13</ZIndex>
             <Visibility>
@@ -6522,7 +6510,7 @@ select idlocalidad, nombre from localidades</CommandText>
       <Nullable>true</Nullable>
       <DefaultValue>
         <Values>
-          <Value>=DateAdd( "m",-7,Now())</Value>
+          <Value>=DateAdd( "m",-6,Now())</Value>
         </Values>
       </DefaultValue>
       <Prompt>Fecha Hasta</Prompt>
@@ -6532,7 +6520,7 @@ select idlocalidad, nombre from localidades</CommandText>
       <Nullable>true</Nullable>
       <DefaultValue>
         <Values>
-          <Value>=DateAdd( "m",-8,Now())</Value>
+          <Value>=DateAdd( "m",-10,Now())</Value>
         </Values>
       </DefaultValue>
       <Prompt>Fecha Desde Anterior</Prompt>
@@ -6542,7 +6530,7 @@ select idlocalidad, nombre from localidades</CommandText>
       <Nullable>true</Nullable>
       <DefaultValue>
         <Values>
-          <Value>=DateAdd( "m",-8,Now())</Value>
+          <Value>=DateAdd( "m",-9,Now())</Value>
         </Values>
       </DefaultValue>
       <Prompt>Fecha Hasta Anterior</Prompt>
