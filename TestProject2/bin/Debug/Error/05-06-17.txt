@@ -1,0 +1,30 @@
+
+Log Entry : 
+06/05/2017 07:36:58
+Error in: . Error Message:estadidesc   01/11/2015   01/11/2015   01/11/2015    10/05/2016
+__________________________
+
+Log Entry : 
+06/05/2017 07:39:22
+Error in: . Error Message:Por generar el archivo C:\Users\Administrador\Desktop\Informe05jun2017_073716.xls
+__________________________
+
+Log Entry : 
+06/05/2017 07:39:22
+Error in: . Error Message:Archivo generado C:\Users\Administrador\Desktop\Informe05jun2017_073716.xls
+__________________________
+
+Log Entry : 
+06/05/2017 08:01:07
+Error in: . Error Message:estadidesc   01/11/2015   01/11/2015   01/11/2015    10/05/2016
+__________________________
+
+Log Entry : 
+06/05/2017 08:01:30
+Error in: . Error Message:Por generar el archivo C:\Users\Administrador\Desktop\Informe05jun2017_080121.xls
+__________________________
+
+Log Entry : 
+06/05/2017 08:01:30
+Error in: . Error Message:Archivo generado C:\Users\Administrador\Desktop\Informe05jun2017_080121.xls
+__________________________

@@ -338,7 +338,7 @@ where 1=1
 			@optCamionVagon = 'Todos' OR  @optCamionVagon = 'Ambas'  OR @optCamionVagon  IS NULL
 		)
 
-	AND (@bTraerDuplicados='TRUE' OR ISNULL(CDP.SubnumeroDeFacturacion, 0) <= 0)  
+	AND (@bTraerDuplicados='TRUE' OR ISNULL(CDP.SubnumeroDeFacturacion, 0) <= 0)  --solo trae el original de una familia
 	
 
 
