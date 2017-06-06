@@ -30,6 +30,7 @@
     <TypeScriptToolsVersion>1.0</TypeScriptToolsVersion>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
+    <UseGlobalApplicationHostFile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -736,6 +737,7 @@
     <Content Include="Documentos\sql\FK_Pronto mariano manual.sql" />
     <Content Include="Documentos\sql\FK_Pronto.sql" />
     <Content Include="Documentos\sql\Levenshtein2.sql" />
+    <Content Include="Documentos\sql\resumen de totales estadisticas.sql" />
     <Content Include="Documentos\sql\wCartasPorte_LiquidacionSubcontratistas.sql" />
     <Content Include="Documentos\sql\fSQL_GetDataTableFiltradoYPaginado  wCartasPorte_WraperDeLaTVF.sql" />
     <Content Include="Documentos\sql\Para los cubos\Generacion de tablas para cubos.sql" />

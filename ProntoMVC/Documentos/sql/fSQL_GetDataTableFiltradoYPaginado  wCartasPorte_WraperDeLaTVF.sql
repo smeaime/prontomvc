@@ -454,11 +454,15 @@ where 1=1
     AND (@Patente IS NULL OR @Patente ='' Or cdp.Patente = @Patente)
 
 
-	AND (@bTraerDuplicados='TRUE' OR ISNULL(CDP.SubnumeroDeFacturacion, 0) <= 0)  --solo trae el original de una familia
+
+
+	AND (@bTraerDuplicados='TRUE' OR 
+			ISNULL(CDP.SubnumeroDeFacturacion, 0) <= 0)  --solo trae el original de una familia
+	--deberia traer solo uno de la familia, pero uno que cumpla la condicion de @ModoExportacion
 
 
 	------------------------------------------------
-	--                  LENTOS  (faltan indices?)
+	--                  FILTROS LENTOS  (faltan indices?)
 	------------------------------------------------
 	
 	--tener en cuenta que las opciones de este filtro no son excluyentes
@@ -474,6 +478,8 @@ where 1=1
 						
 			) 
 		)
+
+
 
 
     AND (@Contrato IS NULL OR @Contrato ='' OR @Contrato ='-1' Or cdp.Contrato = @Contrato)
@@ -616,6 +622,54 @@ from dbo.fSQL_GetDataTableFiltradoYPaginado
 					) as cdp
             
 go
+
+
+
+
+
+
+WITH summary AS (
+    SELECT *,
+           ROW_NUMBER() OVER(PARTITION BY cdp.numerocartadeporte
+                                 ORDER BY cdp.NetoFinal DESC) AS rk
+      FROM 
+	  dbo.fSQL_GetDataTableFiltradoYPaginado  
+				(  
+					NULL, 
+					10, 
+					11,
+					NULL, 
+					-1,
+					 
+					-1,-1,-1,-1,-1,
+
+					NULL, 
+					NULL, 
+					NULL,
+					'Ambas',
+					'2016-01-01 00:00:00',
+
+					'2016-02-01 00:00:00',
+					NULL, 
+					NULL,
+					'TRUE', --tengo que traer los duplicados
+					NULL, 
+					NULL, 
+
+					NULL, 
+					NULL, 
+					NULL,
+					NULL, 
+					NULL
+
+					) as cdp
+	  )
+SELECT s.*
+  FROM summary s
+ --WHERE s.rk = 1
+
+
+
 
 
 
