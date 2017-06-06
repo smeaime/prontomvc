@@ -1,8 +1,0 @@
-<asp:GridView runat="server" CellPadding="4" GridLines="None">
-  <FooterStyle CssClass="FooterStyle" />
-  <RowStyle CssClass="RowStyle" />
-  <SelectedRowStyle CssClass="SelectedRowStyle" />
-  <PagerStyle CssClass="PagerStyle" />
-  <HeaderStyle CssClass="HeaderStyle" />
-  <AlternatingRowStyle CssClass="AlternatingRowStyle" />
-</asp:GridView>
