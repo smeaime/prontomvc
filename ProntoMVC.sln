@@ -1,13 +1,14 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.31101.0
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Archivos Compartidos", "Archivos Compartidos", "{A7AAB93D-0E57-4580-96C8-51710EF8D2FA}"
 	ProjectSection(SolutionItems) = preProject
 		ProntoMVC\Documentos\sql\ALTERTABLE 2011 Modulo WEB.sql = ProntoMVC\Documentos\sql\ALTERTABLE 2011 Modulo WEB.sql
 		..\ProntoWeb\Documentos\otros\comparar cabeza y detalle req.sql = ..\ProntoWeb\Documentos\otros\comparar cabeza y detalle req.sql
 		..\ProntoWeb\ProntoWeb\Comparativa.aspx.vb = ..\ProntoWeb\ProntoWeb\Comparativa.aspx.vb
+		prontoweb\Documentos\estadisticas descarga wCartasDePorte_TX_EstadisticasDeDescarga.sql = prontoweb\Documentos\estadisticas descarga wCartasDePorte_TX_EstadisticasDeDescarga.sql
 		..\ProntoWeb\Documentos\Factura_Williams.dot = ..\ProntoWeb\Documentos\Factura_Williams.dot
 		ProntoMVC\Documentos\sql\fSQL_GetDataTableFiltradoYPaginado  wCartasPorte_WraperDeLaTVF.sql = ProntoMVC\Documentos\sql\fSQL_GetDataTableFiltradoYPaginado  wCartasPorte_WraperDeLaTVF.sql
 		..\ProntoWeb\Documentos\dev\instalacion.docx = ..\ProntoWeb\Documentos\dev\instalacion.docx

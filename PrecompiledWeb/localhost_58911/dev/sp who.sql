@@ -1,5 +1,0 @@
-sp_who2
-
-
-DBCC INPUTBUFFER (51)
-
