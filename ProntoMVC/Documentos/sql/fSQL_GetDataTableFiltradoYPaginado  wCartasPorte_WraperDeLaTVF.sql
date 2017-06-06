@@ -629,15 +629,15 @@ go
 
 
 WITH summary AS (
-    SELECT *,
-           ROW_NUMBER() OVER(PARTITION BY cdp.numerocartadeporte
+    SELECT cdp.numerocartadeporte,cdp.subnumerovagon, --*,
+           ROW_NUMBER() OVER(PARTITION BY cdp.numerocartadeporte,cdp.subnumerovagon
                                  ORDER BY cdp.NetoFinal DESC) AS rk
       FROM 
 	  dbo.fSQL_GetDataTableFiltradoYPaginado  
 				(  
 					NULL, 
-					10, 
-					11,
+					NULL, 
+					0,
 					NULL, 
 					-1,
 					 
@@ -649,7 +649,7 @@ WITH summary AS (
 					'Ambas',
 					'2016-01-01 00:00:00',
 
-					'2016-02-01 00:00:00',
+					'2016-04-01 00:00:00',
 					NULL, 
 					NULL,
 					'TRUE', --tengo que traer los duplicados
