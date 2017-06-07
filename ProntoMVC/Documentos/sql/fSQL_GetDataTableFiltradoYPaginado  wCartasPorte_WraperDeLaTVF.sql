@@ -457,25 +457,36 @@ where 1=1
 
 
 	AND (@bTraerDuplicados='TRUE' OR 
-			ISNULL(CDP.SubnumeroDeFacturacion, 0) <= 0)  --solo trae el original de una familia
+			(
+				ISNULL(CDP.SubnumeroDeFacturacion, 0) <= 0
+			)
+	)  --solo trae el original de una familia
 	--deberia traer solo uno de la familia, pero uno que cumpla la condicion de @ModoExportacion
 
 
 	------------------------------------------------
 	--                  FILTROS LENTOS  (faltan indices?)
 	------------------------------------------------
-	
-	--tener en cuenta que las opciones de este filtro no son excluyentes
+
+	/*
+	si no pide duplicados, debería hacer el favor de devolver uno de la familia que 
+	AND (
+			@bTraerDuplicados='' OR 
+
+				@ModoExportacion is null or (@ModoExportacion = 'Ambos' or @ModoExportacion = 'Ambas') Or (@ModoExportacion = 'Todos') 
+				Or (@ModoExportacion = 'Entregas' And isnull(CDP.Exporta, 'NO') = 'NO' )  
+				Or (@ModoExportacion = 'Export' And isnull(CDP.Exporta, 'NO') = 'SI' )
+			) 
+	*/
 	AND EXISTS ( SELECT * FROM CartasDePorte COPIAS  
 			where COPIAS.NumeroCartaDePorte=CDP.NumeroCartaDePorte
 			and COPIAS.SubnumeroVagon=CDP.SubnumeroVagon    
 			and (
-				@ModoExportacion is null
-				or (@ModoExportacion = 'Ambos' or @ModoExportacion = 'Ambas') 
-				Or (@ModoExportacion = 'Todos') 
+				@ModoExportacion is null or (@ModoExportacion = 'Ambos' or @ModoExportacion = 'Ambas') Or (@ModoExportacion = 'Todos') 
+				Or (@ModoExportacion = 'EntregasExcluyente' And isnull(CDP.Exporta, 'NO') = 'NO')  
+				Or (@ModoExportacion = 'ExportExcluyente' And isnull(CDP.Exporta, 'NO') = 'SI')
 				Or (@ModoExportacion = 'Entregas' And isnull(COPIAS.Exporta, 'NO') = 'NO' AND ISNULL(COPIAS.Anulada,'NO')<>'SI')  
 				Or (@ModoExportacion = 'Export' And isnull(COPIAS.Exporta, 'NO') = 'SI' AND ISNULL(COPIAS.Anulada,'NO')<>'SI')
-						
 			) 
 		)
 
@@ -628,10 +639,17 @@ go
 
 
 
+
+
+
+declare @ModoExportacion  VARCHAR(20)
+set  @ModoExportacion ='Export' --'Entregas'
+
 WITH summary AS (
-    SELECT cdp.numerocartadeporte,cdp.subnumerovagon, --*,
+    SELECT cdp.numerocartadeporte,cdp.subnumerovagon, exporta, --*,
            ROW_NUMBER() OVER(PARTITION BY cdp.numerocartadeporte,cdp.subnumerovagon
-                                 ORDER BY cdp.NetoFinal DESC) AS rk
+									ORDER BY cdp.idcartadeporte
+							) AS rk
       FROM 
 	  dbo.fSQL_GetDataTableFiltradoYPaginado  
 				(  
@@ -663,6 +681,13 @@ WITH summary AS (
 					NULL
 
 					) as cdp
+					where
+						@ModoExportacion is null
+						or (@ModoExportacion = 'Ambos' or @ModoExportacion = 'Ambas') 
+						Or (@ModoExportacion = 'Todos') 
+						Or (@ModoExportacion = 'Entregas' And isnull(cdp.Exporta, 'NO') = 'NO')  
+						Or (@ModoExportacion = 'Export' And isnull(cdp.Exporta, 'NO') = 'SI' )
+
 	  )
 SELECT s.*
   FROM summary s
