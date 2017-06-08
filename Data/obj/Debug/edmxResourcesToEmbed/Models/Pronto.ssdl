@@ -690,8 +690,8 @@
     <Property Name="Campo" Type="varchar" MaxLength="40" />
     <Property Name="Valor" Type="numeric" Precision="18" Scale="2" />
   </EntityType>
-  <!--Errors Found During Generation:
-warning 6002: The table/view 'Pronto.dbo.CartasDePorteHistorico' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'Pronto.dbo.CartasDePorteHistorico' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
   <EntityType Name="CartasDePorteHistorico">
     <Key>
       <PropertyRef Name="IdCartaDePorte" />
@@ -848,8 +848,8 @@ warning 6002: The table/view 'Pronto.dbo.CartasDePorteHistorico' does not have a
     <Property Name="Descripcion" Type="varchar" MaxLength="60" Nullable="false" />
     <Property Name="IdCliente" Type="int" />
   </EntityType>
-  <!--Errors Found During Generation:
-warning 6002: The table/view 'Pronto.dbo.CartasPorteMovimientos' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'Pronto.dbo.CartasPorteMovimientos' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
   <EntityType Name="CartasPorteMovimientos">
     <Key>
       <PropertyRef Name="IdCDPMovimiento" />
@@ -1212,6 +1212,8 @@ warning 6002: The table/view 'Pronto.dbo.CartasPorteMovimientos' does not have a
     <Property Name="CompensacionGastosProveedorCliente" Type="varchar" MaxLength="2" />
     <Property Name="CircuitoLiquidacionFlete" Type="int" />
     <Property Name="AcumularParaSUSS" Type="varchar" MaxLength="2" />
+    <Property Name="BloqueadoFirma" Type="varchar" MaxLength="2" />
+    <Property Name="IdUsuarioBloqueo" Type="int" />
   </EntityType>
   <EntityType Name="Conceptos">
     <Key>
@@ -3194,8 +3196,8 @@ warning 6002: The table/view 'Pronto.dbo.CartasPorteMovimientos' does not have a
     <Property Name="FechaInicio" Type="datetime" />
     <Property Name="FechaFinalizacion" Type="datetime" />
   </EntityType>
-  <!--Errors Found During Generation:
-warning 6002: The table/view 'Pronto.dbo.EjerciciosPeriodos' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
   <EntityType Name="EjerciciosPeriodos">
     <Key>
       <PropertyRef Name="IdEjercicioPeriodo" />
@@ -3792,6 +3794,8 @@ warning 6002: The table/view 'Pronto.dbo.EjerciciosPeriodos' does not have a pri
     <Property Name="IdPartido" Type="int" />
     <Property Name="CodigoAfip" Type="int" />
     <Property Name="CodigoCGG" Type="varchar" MaxLength="10" />
+    <Property Name="lat" Type="decimal" Precision="15" Scale="12" />
+    <Property Name="lng" Type="decimal" Precision="15" Scale="12" />
   </EntityType>
   <EntityType Name="Log">
     <Key>
@@ -3972,6 +3976,7 @@ warning 6002: The table/view 'Pronto.dbo.EjerciciosPeriodos' does not have a pri
     <Property Name="IdComprobanteProveedor_Compensacion" Type="int" />
     <Property Name="IdLiquidacionFlete" Type="int" />
     <Property Name="CircuitoLiquidacionFlete" Type="int" />
+    <Property Name="IdViajeAsociado" Type="int" />
   </EntityType>
   <EntityType Name="NotasDebito">
     <Key>
@@ -4147,6 +4152,10 @@ warning 6002: The table/view 'Pronto.dbo.EjerciciosPeriodos' does not have a pri
     <Property Name="IdObraRelacionada" Type="int" />
     <Property Name="OrdenamientoSecundario" Type="int" />
     <Property Name="RegimenMinero" Type="varchar" MaxLength="2" />
+    <Property Name="AnticipoFinancieroPorcentual" Type="numeric" Precision="6" Scale="2" />
+    <Property Name="FondoReparoPorcentual" Type="numeric" Precision="6" Scale="2" />
+    <Property Name="PlazoCobroDias" Type="int" />
+    <Property Name="CantidadEstimadaCertificados" Type="int" />
   </EntityType>
   <EntityType Name="OrdenesCompra">
     <Key>
@@ -4759,6 +4768,8 @@ warning 6002: The table/view 'Pronto.dbo.EjerciciosPeriodos' does not have a pri
     <Property Name="NotasSeguimiento" Type="ntext" />
     <Property Name="CoeficienteCompra" Type="numeric" Precision="5" Scale="2" />
     <Property Name="Detalle" Type="varchar" MaxLength="100" />
+    <Property Name="BloqueadoFirma" Type="varchar" MaxLength="2" />
+    <Property Name="IdUsuarioBloqueo" Type="int" />
   </EntityType>
   <EntityType Name="PlazosEntrega">
     <Key>
@@ -5102,6 +5113,7 @@ warning 6002: The table/view 'Pronto.dbo.EjerciciosPeriodos' does not have a pri
     <Property Name="FechaFinVigenciaCodigoNormaCapital" Type="datetime" />
     <Property Name="IdObraDefault" Type="int" />
     <Property Name="RegimenSimplificadoIIBB" Type="varchar" MaxLength="2" />
+    <Property Name="IdIBCondicionAnterior" Type="int" />
   </EntityType>
   <EntityType Name="Provincias">
     <Key>
@@ -5898,8 +5910,8 @@ warning 6002: The table/view 'Pronto.dbo.EjerciciosPeriodos' does not have a pri
     <Property Name="IdProveedor" Type="int" />
     <Property Name="Codigo" Type="int" />
   </EntityType>
-  <!--Errors Found During Generation:
-warning 6002: The table/view 'Pronto.dbo.Tree' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'Pronto.dbo.Tree' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
   <EntityType Name="Tree">
     <Key>
       <PropertyRef Name="IdItem" />
@@ -6111,8 +6123,8 @@ warning 6002: The table/view 'Pronto.dbo.Tree' does not have a primary key defin
     <Property Name="EmiteComision" Type="varchar" MaxLength="2" />
     <Property Name="IdsVendedoresAsignados" Type="varchar" MaxLength="1000" />
   </EntityType>
-  <!--Errors Found During Generation:
-warning 6002: The table/view 'Pronto.dbo.wGrillaPersistencia' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'Pronto.dbo.wGrillaPersistencia' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
   <EntityType Name="wGrillaPersistencia">
     <Key>
       <PropertyRef Name="IdRenglon" />
@@ -6186,6 +6198,7 @@ warning 6002: The table/view 'Pronto.dbo.wGrillaPersistencia' does not have a pr
     <Property Name="AgrupadorDeTandaPeriodos" Type="int" />
     <Property Name="ModoImpresion" Type="varchar" MaxLength="6" />
     <Property Name="Corredor2" Type="int" />
+    <Property Name="EnumSyngentaDivision" Type="varchar" MaxLength="10" />
   </EntityType>
   <EntityType Name="wTempCartasPorteFacturacionAutomatica">
     <Key>
@@ -6221,6 +6234,7 @@ warning 6002: The table/view 'Pronto.dbo.wGrillaPersistencia' does not have a pr
     <Property Name="Procedcia" Type="varchar" MaxLength="50" />
     <Property Name="DestinoDesc" Type="varchar" MaxLength="50" />
     <Property Name="IdDestino" Type="int" />
+    <Property Name="AgregaItemDeGastosAdministrativos" Type="varchar" MaxLength="2" />
   </EntityType>
   <Association Name="FK__CartasDeP__Acopi__5498535D">
     <End Role="CartasPorteAcopios" Type="Self.CartasPorteAcopios" Multiplicity="0..1" />
@@ -6315,6 +6329,18 @@ warning 6002: The table/view 'Pronto.dbo.wGrillaPersistencia' does not have a pr
       </Principal>
       <Dependent Role="CartasDePorte">
         <PropertyRef Name="IdDetalleFactura" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__CartasDeP__Vende__6D4EF28E">
+    <End Role="Clientes" Type="Self.Clientes" Multiplicity="0..1" />
+    <End Role="CartasDePorte" Type="Self.CartasDePorte" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Clientes">
+        <PropertyRef Name="IdCliente" />
+      </Principal>
+      <Dependent Role="CartasDePorte">
+        <PropertyRef Name="Vendedor" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -10338,6 +10364,10 @@ warning 6002: The table/view 'Pronto.dbo.wGrillaPersistencia' does not have a pr
     </AssociationSet>
     <AssociationSet Name="FK__CartasDeP__IdDet__55D69059" Association="Self.FK__CartasDeP__IdDet__55D69059">
       <End Role="DetalleFacturas" EntitySet="DetalleFacturas" />
+      <End Role="CartasDePorte" EntitySet="CartasDePorte" />
+    </AssociationSet>
+    <AssociationSet Name="FK__CartasDeP__Vende__6D4EF28E" Association="Self.FK__CartasDeP__Vende__6D4EF28E">
+      <End Role="Clientes" EntitySet="Clientes" />
       <End Role="CartasDePorte" EntitySet="CartasDePorte" />
     </AssociationSet>
     <AssociationSet Name="FK__CartasPor__IdCli__4496F5BE" Association="Self.FK__CartasPor__IdCli__4496F5BE">

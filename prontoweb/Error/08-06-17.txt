@@ -1,0 +1,430 @@
+
+Log Entry : 
+06/08/2017 18:26:42
+Error in: http://localhost:58911/ProntoWeb/Principal.aspx. Error Message:supervisor esta logueado, pero lo redirijo al login porque faltan los datos de session. No deberia mejor mandarlo a SeleccionarEmpresa? Ademas, no hago el LogOut y le queda el cookie!!!
+__________________________
+
+Log Entry : 
+06/08/2017 18:26:43
+Error in: http://localhost:58911/ProntoWeb/Principal.aspx. Error Message:Es conveniente cambiar por IPs a las canalizaciones sin nombre al usar conexiones remotas --> System.ArgumentException: El valor del argumento 'Length' debe ser mayor o igual que cero.
+   en Microsoft.VisualBasic.Strings.Mid(String str, Int32 Start, Int32 Length)
+   en Pronto.ERP.Bll.BDLMasterEmpresasManagerMigrar.AddEmpresaToSession(String IdEmpresa, Object& Session, String sConexBDLMaster, Object Yo) en C:\Users\Administrador\Documents\bdl\pronto\prontoweb\App_Code\vbcode\ManagerDebug\BDLMasterManagerAppCode.vb:línea 273 
+__________________________
+
+Log Entry : 
+06/08/2017 18:26:43
+Error in: http://localhost:58911/ProntoWeb/Principal.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en ProntoFuncionesUIWeb.DatosDeSesion(String SC, String UsuarioNombre, Object session, String ConexBDLmaster, Login yo, Int32 idempresa) en C:\Users\Administrador\Documents\bdl\pronto\prontoweb\App_Code\vbcode\ManagerDebug\FuncionesUIWeb.vb:línea 1790
+App_SubCode_vbcode
+__________________________
+
+Log Entry : 
+06/08/2017 18:26:43
+Error in: http://localhost:58911/ProntoWeb/Principal.aspx. Error Message:System.InvalidOperationException
+No se ha inicializado la propiedad ConnectionString.
+   en System.Data.SqlClient.SqlConnection.PermissionDemand()
+   en System.Data.SqlClient.SqlConnectionFactory.PermissionDemand(DbConnection outerConnection)
+   en System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.Open()
+   en Pronto.ERP.Dal.GeneralDB.TraerDatos(String SC, String Nombre, Object[] ParametrosQueLeQuieroMandarAsql)
+System.Data
+__________________________
+
+Log Entry : 
+06/08/2017 18:26:43
+Error in: http://localhost:58911/ProntoWeb/Principal.aspx. Error Message:System.InvalidOperationException
+No se ha inicializado la propiedad ConnectionString.
+   en System.Data.SqlClient.SqlConnection.PermissionDemand()
+   en System.Data.SqlClient.SqlConnectionFactory.PermissionDemand(DbConnection outerConnection)
+   en System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.Open()
+   en Pronto.ERP.Dal.GeneralDB.TraerDatos(String SC, String Nombre, Object[] ParametrosQueLeQuieroMandarAsql)
+System.Data
+__________________________
+
+Log Entry : 
+06/08/2017 18:26:43
+Error in: http://localhost:58911/ProntoWeb/Principal.aspx. Error Message:System.ApplicationException
+Error en la ejecucion del SP: Parametros_TX_Parametros2BuscarClave conexion:   - System.InvalidOperationException: No se ha inicializado la propiedad ConnectionString.
+   en System.Data.SqlClient.SqlConnection.PermissionDemand()
+   en System.Data.SqlClient.SqlConnectionFactory.PermissionDemand(DbConnection outerConnection)
+   en System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.Open()
+   en Pronto.ERP.Dal.GeneralDB.TraerDatos(String SC, String Nombre, Object[] ParametrosQueLeQuieroMandarAsql)
+   en Pronto.ERP.Dal.GeneralDB.TraerDatos(String SC, String Nombre, Object[] ParametrosQueLeQuieroMandarAsql)
+   en Pronto.ERP.Bll.ParametroManager.TraerValorParametro2(String SC, String Campo) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ParametroManager.vb:línea 530
+   en Pronto.ERP.Bll.ParametroManager.TraerValorParametro2(String SC, eParam2 Campo) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ParametroManager.vb:línea 516
+   en Pronto.ERP.Bll.BDLMasterEmpresasManager.EmpresaPropietariaDeLaBase(String conexionBase) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\BDLMasterManager.vb:línea 25
+DataAccess
+__________________________
+
+Log Entry : 
+06/08/2017 18:26:43
+Error in: http://localhost:58911/ProntoWeb/Principal.aspx. Error Message:System.InvalidOperationException
+No se ha inicializado la propiedad ConnectionString.
+   en System.Data.SqlClient.SqlConnection.PermissionDemand()
+   en System.Data.SqlClient.SqlConnectionFactory.PermissionDemand(DbConnection outerConnection)
+   en System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.Open()
+   en Pronto.ERP.Dal.GeneralDB.TraerDatos(String SC, String Nombre, Object[] ParametrosQueLeQuieroMandarAsql)
+System.Data
+__________________________
+
+Log Entry : 
+06/08/2017 18:26:43
+Error in: http://localhost:58911/ProntoWeb/Principal.aspx. Error Message:System.ApplicationException
+Error en la ejecucion del SP: Parametros_TX_Parametros2BuscarClave conexion:   - System.InvalidOperationException: No se ha inicializado la propiedad ConnectionString.
+   en System.Data.SqlClient.SqlConnection.PermissionDemand()
+   en System.Data.SqlClient.SqlConnectionFactory.PermissionDemand(DbConnection outerConnection)
+   en System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.Open()
+   en Pronto.ERP.Dal.GeneralDB.TraerDatos(String SC, String Nombre, Object[] ParametrosQueLeQuieroMandarAsql)
+   en Pronto.ERP.Dal.GeneralDB.TraerDatos(String SC, String Nombre, Object[] ParametrosQueLeQuieroMandarAsql)
+   en Pronto.ERP.Bll.ParametroManager.TraerValorParametro2(String SC, String Campo) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ParametroManager.vb:línea 530
+   en Pronto.ERP.Bll.ParametroManager.TraerValorParametro2(String SC, eParam2 Campo) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ParametroManager.vb:línea 516
+   en Pronto.ERP.Bll.BDLMasterEmpresasManager.EmpresaPropietariaDeLaBase(String conexionBase) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\BDLMasterManager.vb:línea 25
+DataAccess
+__________________________
+
+Log Entry : 
+06/08/2017 18:26:43
+Error in: http://localhost:58911/ProntoWeb/Principal.aspx. Error Message:System.InvalidOperationException
+No se ha inicializado la propiedad ConnectionString.
+   en System.Data.SqlClient.SqlConnection.PermissionDemand()
+   en System.Data.SqlClient.SqlConnectionFactory.PermissionDemand(DbConnection outerConnection)
+   en System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.Open()
+   en Pronto.ERP.Dal.GeneralDB.TraerDatos(String SC, String Nombre, Object[] ParametrosQueLeQuieroMandarAsql)
+System.Data
+__________________________
+
+Log Entry : 
+06/08/2017 18:26:43
+Error in: http://localhost:58911/ProntoWeb/Principal.aspx. Error Message:System.ApplicationException
+Error en la ejecucion del SP: Parametros_TX_Parametros2BuscarClave conexion:   - System.InvalidOperationException: No se ha inicializado la propiedad ConnectionString.
+   en System.Data.SqlClient.SqlConnection.PermissionDemand()
+   en System.Data.SqlClient.SqlConnectionFactory.PermissionDemand(DbConnection outerConnection)
+   en System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.Open()
+   en Pronto.ERP.Dal.GeneralDB.TraerDatos(String SC, String Nombre, Object[] ParametrosQueLeQuieroMandarAsql)
+   en Pronto.ERP.Dal.GeneralDB.TraerDatos(String SC, String Nombre, Object[] ParametrosQueLeQuieroMandarAsql)
+   en Pronto.ERP.Bll.ParametroManager.TraerValorParametro2(String SC, String Campo) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ParametroManager.vb:línea 530
+   en Pronto.ERP.Bll.ParametroManager.TraerValorParametro2(String SC, eParam2 Campo) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ParametroManager.vb:línea 516
+   en Pronto.ERP.Bll.BDLMasterEmpresasManager.EmpresaPropietariaDeLaBase(String conexionBase) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\BDLMasterManager.vb:línea 25
+DataAccess
+__________________________
+
+Log Entry : 
+06/08/2017 18:26:43
+Error in: http://localhost:58911/ProntoWeb/Principal.aspx. Error Message:System.InvalidOperationException
+No se ha inicializado la propiedad ConnectionString.
+   en System.Data.SqlClient.SqlConnection.PermissionDemand()
+   en System.Data.SqlClient.SqlConnectionFactory.PermissionDemand(DbConnection outerConnection)
+   en System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.Open()
+   en Pronto.ERP.Dal.GeneralDB.TraerDatos(String SC, String Nombre, Object[] ParametrosQueLeQuieroMandarAsql)
+System.Data
+__________________________
+
+Log Entry : 
+06/08/2017 18:26:43
+Error in: http://localhost:58911/ProntoWeb/Principal.aspx. Error Message:System.ApplicationException
+Error en la ejecucion del SP: Parametros_TX_Parametros2BuscarClave conexion:   - System.InvalidOperationException: No se ha inicializado la propiedad ConnectionString.
+   en System.Data.SqlClient.SqlConnection.PermissionDemand()
+   en System.Data.SqlClient.SqlConnectionFactory.PermissionDemand(DbConnection outerConnection)
+   en System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.Open()
+   en Pronto.ERP.Dal.GeneralDB.TraerDatos(String SC, String Nombre, Object[] ParametrosQueLeQuieroMandarAsql)
+   en Pronto.ERP.Dal.GeneralDB.TraerDatos(String SC, String Nombre, Object[] ParametrosQueLeQuieroMandarAsql)
+   en Pronto.ERP.Bll.ParametroManager.TraerValorParametro2(String SC, String Campo) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ParametroManager.vb:línea 530
+   en Pronto.ERP.Bll.ParametroManager.TraerValorParametro2(String SC, eParam2 Campo) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ParametroManager.vb:línea 516
+   en Pronto.ERP.Bll.BDLMasterEmpresasManagerMigrar.SetLogoImage_MasterPage(Usuario Usuario) en C:\Users\Administrador\Documents\bdl\pronto\prontoweb\App_Code\vbcode\ManagerDebug\BDLMasterManagerAppCode.vb:línea 202
+   en MasterPage.ConfiguracionDeLaEmpresa() en C:\Users\Administrador\Documents\bdl\pronto\prontoweb\MasterPage.master.vb:línea 543
+   en MasterPage.Page_Load(Object sender, EventArgs e) en C:\Users\Administrador\Documents\bdl\pronto\prontoweb\MasterPage.master.vb:línea 60
+   en System.Web.UI.Control.OnLoad(EventArgs e)
+   en System.Web.UI.Control.LoadRecursive()
+   en System.Web.UI.Control.LoadRecursive()
+   en System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+DataAccess
+__________________________
+
+Log Entry : 
+06/08/2017 18:37:13
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesGerenciales.aspx. Error Message:supervisor esta logueado, pero lo redirijo al login porque faltan los datos de session. No deberia mejor mandarlo a SeleccionarEmpresa? Ademas, no hago el LogOut y le queda el cookie!!!
+__________________________
+
+Log Entry : 
+06/08/2017 18:37:27
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesGerenciales.aspx. Error Message:Es conveniente cambiar por IPs a las canalizaciones sin nombre al usar conexiones remotas --> System.ArgumentException: El valor del argumento 'Length' debe ser mayor o igual que cero.
+   en Microsoft.VisualBasic.Strings.Mid(String str, Int32 Start, Int32 Length)
+   en Pronto.ERP.Bll.BDLMasterEmpresasManagerMigrar.AddEmpresaToSession(String IdEmpresa, Object& Session, String sConexBDLMaster, Object Yo) en C:\Users\Administrador\Documents\bdl\pronto\prontoweb\App_Code\vbcode\ManagerDebug\BDLMasterManagerAppCode.vb:línea 273 
+__________________________
+
+Log Entry : 
+06/08/2017 18:37:32
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesGerenciales.aspx. Error Message:System.ArgumentNullException
+El valor no puede ser nulo.
+Nombre del parámetro: source
+   en System.Linq.Enumerable.Select[TSource,TResult](IEnumerable`1 source, Func`2 selector)
+   en CartaDePorteInformesGerenciales.BindTypeDropDown() en C:\Users\Administrador\Documents\bdl\pronto\prontoweb\ProntoWeb\CartaDePorteInformesGerenciales.aspx.vb:línea 422
+   en CartaDePorteInformesGerenciales.Page_Load(Object sender, EventArgs e) en C:\Users\Administrador\Documents\bdl\pronto\prontoweb\ProntoWeb\CartaDePorteInformesGerenciales.aspx.vb:línea 78
+   en System.Web.UI.Control.OnLoad(EventArgs e)
+   en System.Web.UI.Control.LoadRecursive()
+   en System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+System.Core
+__________________________
+
+Log Entry : 
+06/08/2017 18:37:59
+Error in: http://localhost:58911/ProntoWeb/Principal.aspx. Error Message:supervisor esta logueado, pero lo redirijo al login porque faltan los datos de session. No deberia mejor mandarlo a SeleccionarEmpresa? Ademas, no hago el LogOut y le queda el cookie!!!
+__________________________
+
+Log Entry : 
+06/08/2017 18:38:46
+Error in: http://localhost:58911/ProntoWeb/Principal.aspx. Error Message:Es conveniente cambiar por IPs a las canalizaciones sin nombre al usar conexiones remotas --> System.ArgumentException: El valor del argumento 'Length' debe ser mayor o igual que cero.
+   en Microsoft.VisualBasic.Strings.Mid(String str, Int32 Start, Int32 Length)
+   en Pronto.ERP.Bll.BDLMasterEmpresasManagerMigrar.AddEmpresaToSession(String IdEmpresa, Object& Session, String sConexBDLMaster, Object Yo) en C:\Users\Administrador\Documents\bdl\pronto\prontoweb\App_Code\vbcode\ManagerDebug\BDLMasterManagerAppCode.vb:línea 273 
+__________________________
+
+Log Entry : 
+06/08/2017 18:38:46
+Error in: http://localhost:58911/ProntoWeb/Principal.aspx. Error Message:System.InvalidOperationException
+No se ha inicializado la propiedad ConnectionString.
+   en System.Data.SqlClient.SqlConnection.PermissionDemand()
+   en System.Data.SqlClient.SqlConnectionFactory.PermissionDemand(DbConnection outerConnection)
+   en System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.Open()
+   en Pronto.ERP.Dal.GeneralDB.TraerDatos(String SC, String Nombre, Object[] ParametrosQueLeQuieroMandarAsql)
+System.Data
+__________________________
+
+Log Entry : 
+06/08/2017 18:38:49
+Error in: http://localhost:58911/ProntoWeb/Principal.aspx. Error Message:System.InvalidOperationException
+No se ha inicializado la propiedad ConnectionString.
+   en System.Data.SqlClient.SqlConnection.PermissionDemand()
+   en System.Data.SqlClient.SqlConnectionFactory.PermissionDemand(DbConnection outerConnection)
+   en System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.Open()
+   en Pronto.ERP.Dal.GeneralDB.TraerDatos(String SC, String Nombre, Object[] ParametrosQueLeQuieroMandarAsql)
+System.Data
+__________________________
+
+Log Entry : 
+06/08/2017 18:38:51
+Error in: http://localhost:58911/ProntoWeb/Principal.aspx. Error Message:System.ApplicationException
+Error en la ejecucion del SP: Parametros_TX_Parametros2BuscarClave conexion:   - System.InvalidOperationException: No se ha inicializado la propiedad ConnectionString.
+   en System.Data.SqlClient.SqlConnection.PermissionDemand()
+   en System.Data.SqlClient.SqlConnectionFactory.PermissionDemand(DbConnection outerConnection)
+   en System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.Open()
+   en Pronto.ERP.Dal.GeneralDB.TraerDatos(String SC, String Nombre, Object[] ParametrosQueLeQuieroMandarAsql)
+   en Pronto.ERP.Dal.GeneralDB.TraerDatos(String SC, String Nombre, Object[] ParametrosQueLeQuieroMandarAsql)
+   en Pronto.ERP.Bll.ParametroManager.TraerValorParametro2(String SC, String Campo) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ParametroManager.vb:línea 530
+   en Pronto.ERP.Bll.ParametroManager.TraerValorParametro2(String SC, eParam2 Campo) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ParametroManager.vb:línea 516
+   en Pronto.ERP.Bll.BDLMasterEmpresasManager.EmpresaPropietariaDeLaBase(String conexionBase) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\BDLMasterManager.vb:línea 25
+DataAccess
+__________________________
+
+Log Entry : 
+06/08/2017 18:38:51
+Error in: http://localhost:58911/ProntoWeb/Principal.aspx. Error Message:System.InvalidOperationException
+No se ha inicializado la propiedad ConnectionString.
+   en System.Data.SqlClient.SqlConnection.PermissionDemand()
+   en System.Data.SqlClient.SqlConnectionFactory.PermissionDemand(DbConnection outerConnection)
+   en System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.Open()
+   en Pronto.ERP.Dal.GeneralDB.TraerDatos(String SC, String Nombre, Object[] ParametrosQueLeQuieroMandarAsql)
+System.Data
+__________________________
+
+Log Entry : 
+06/08/2017 18:38:52
+Error in: http://localhost:58911/ProntoWeb/Principal.aspx. Error Message:System.ApplicationException
+Error en la ejecucion del SP: Parametros_TX_Parametros2BuscarClave conexion:   - System.InvalidOperationException: No se ha inicializado la propiedad ConnectionString.
+   en System.Data.SqlClient.SqlConnection.PermissionDemand()
+   en System.Data.SqlClient.SqlConnectionFactory.PermissionDemand(DbConnection outerConnection)
+   en System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.Open()
+   en Pronto.ERP.Dal.GeneralDB.TraerDatos(String SC, String Nombre, Object[] ParametrosQueLeQuieroMandarAsql)
+   en Pronto.ERP.Dal.GeneralDB.TraerDatos(String SC, String Nombre, Object[] ParametrosQueLeQuieroMandarAsql)
+   en Pronto.ERP.Bll.ParametroManager.TraerValorParametro2(String SC, String Campo) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ParametroManager.vb:línea 530
+   en Pronto.ERP.Bll.ParametroManager.TraerValorParametro2(String SC, eParam2 Campo) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ParametroManager.vb:línea 516
+   en Pronto.ERP.Bll.BDLMasterEmpresasManager.EmpresaPropietariaDeLaBase(String conexionBase) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\BDLMasterManager.vb:línea 25
+DataAccess
+__________________________
+
+Log Entry : 
+06/08/2017 18:38:52
+Error in: http://localhost:58911/ProntoWeb/Principal.aspx. Error Message:System.InvalidOperationException
+No se ha inicializado la propiedad ConnectionString.
+   en System.Data.SqlClient.SqlConnection.PermissionDemand()
+   en System.Data.SqlClient.SqlConnectionFactory.PermissionDemand(DbConnection outerConnection)
+   en System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.Open()
+   en Pronto.ERP.Dal.GeneralDB.TraerDatos(String SC, String Nombre, Object[] ParametrosQueLeQuieroMandarAsql)
+System.Data
+__________________________
+
+Log Entry : 
+06/08/2017 18:38:54
+Error in: http://localhost:58911/ProntoWeb/Principal.aspx. Error Message:System.ApplicationException
+Error en la ejecucion del SP: Parametros_TX_Parametros2BuscarClave conexion:   - System.InvalidOperationException: No se ha inicializado la propiedad ConnectionString.
+   en System.Data.SqlClient.SqlConnection.PermissionDemand()
+   en System.Data.SqlClient.SqlConnectionFactory.PermissionDemand(DbConnection outerConnection)
+   en System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.Open()
+   en Pronto.ERP.Dal.GeneralDB.TraerDatos(String SC, String Nombre, Object[] ParametrosQueLeQuieroMandarAsql)
+   en Pronto.ERP.Dal.GeneralDB.TraerDatos(String SC, String Nombre, Object[] ParametrosQueLeQuieroMandarAsql)
+   en Pronto.ERP.Bll.ParametroManager.TraerValorParametro2(String SC, String Campo) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ParametroManager.vb:línea 530
+   en Pronto.ERP.Bll.ParametroManager.TraerValorParametro2(String SC, eParam2 Campo) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ParametroManager.vb:línea 516
+   en Pronto.ERP.Bll.BDLMasterEmpresasManager.EmpresaPropietariaDeLaBase(String conexionBase) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\BDLMasterManager.vb:línea 25
+DataAccess
+__________________________
+
+Log Entry : 
+06/08/2017 18:38:54
+Error in: http://localhost:58911/ProntoWeb/Principal.aspx. Error Message:System.InvalidOperationException
+No se ha inicializado la propiedad ConnectionString.
+   en System.Data.SqlClient.SqlConnection.PermissionDemand()
+   en System.Data.SqlClient.SqlConnectionFactory.PermissionDemand(DbConnection outerConnection)
+   en System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.Open()
+   en Pronto.ERP.Dal.GeneralDB.TraerDatos(String SC, String Nombre, Object[] ParametrosQueLeQuieroMandarAsql)
+System.Data
+__________________________
+
+Log Entry : 
+06/08/2017 18:38:56
+Error in: http://localhost:58911/ProntoWeb/Principal.aspx. Error Message:System.ApplicationException
+Error en la ejecucion del SP: Parametros_TX_Parametros2BuscarClave conexion:   - System.InvalidOperationException: No se ha inicializado la propiedad ConnectionString.
+   en System.Data.SqlClient.SqlConnection.PermissionDemand()
+   en System.Data.SqlClient.SqlConnectionFactory.PermissionDemand(DbConnection outerConnection)
+   en System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.Open()
+   en Pronto.ERP.Dal.GeneralDB.TraerDatos(String SC, String Nombre, Object[] ParametrosQueLeQuieroMandarAsql)
+   en Pronto.ERP.Dal.GeneralDB.TraerDatos(String SC, String Nombre, Object[] ParametrosQueLeQuieroMandarAsql)
+   en Pronto.ERP.Bll.ParametroManager.TraerValorParametro2(String SC, String Campo) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ParametroManager.vb:línea 530
+   en Pronto.ERP.Bll.ParametroManager.TraerValorParametro2(String SC, eParam2 Campo) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ParametroManager.vb:línea 516
+   en Pronto.ERP.Bll.BDLMasterEmpresasManagerMigrar.SetLogoImage_MasterPage(Usuario Usuario) en C:\Users\Administrador\Documents\bdl\pronto\prontoweb\App_Code\vbcode\ManagerDebug\BDLMasterManagerAppCode.vb:línea 202
+   en MasterPage.ConfiguracionDeLaEmpresa() en C:\Users\Administrador\Documents\bdl\pronto\prontoweb\MasterPage.master.vb:línea 543
+   en MasterPage.Page_Load(Object sender, EventArgs e) en C:\Users\Administrador\Documents\bdl\pronto\prontoweb\MasterPage.master.vb:línea 60
+   en System.Web.UI.Control.OnLoad(EventArgs e)
+   en System.Web.UI.Control.LoadRecursive()
+   en System.Web.UI.Control.LoadRecursive()
+   en System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+DataAccess
+__________________________
+
+Log Entry : 
+06/08/2017 18:39:41
+Error in: http://localhost:58911/ProntoWeb/CartasDePortes.aspx?tipo=Todas. Error Message:Mariano
+__________________________
+
+Log Entry : 
+06/08/2017 18:42:18
+Error in: http://localhost:58911/ProntoWeb/WebServiceCartas.asmx/MapaGeoJSON_DLL. Error Message:System.ArgumentException
+Método web MapaGeoJSON_DLL desconocido.
+Nombre del parámetro: methodName
+   en System.Web.Script.Services.WebServiceData.GetMethodData(String methodName)
+   en System.Web.Script.Services.RestHandler.CreateHandler(WebServiceData webServiceData, String methodName)
+   en System.Web.Script.Services.RestHandler.CreateHandler(HttpContext context)
+   en System.Web.Script.Services.RestHandlerFactory.GetHandler(HttpContext context, String requestType, String url, String pathTranslated)
+   en System.Web.Script.Services.ScriptHandlerFactory.GetHandler(HttpContext context, String requestType, String url, String pathTranslated)
+   en System.Web.HttpApplication.MaterializeHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   en System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+System.Web.Extensions
+__________________________
+
+Log Entry : 
+06/08/2017 18:48:59
+Error in: http://localhost:58911/ProntoWeb/WebServiceCartas.asmx/MapaGeoJSON. Error Message:System.Data.Entity.Core.EntityException
+The underlying provider failed on Open.
+   en System.Data.Entity.Core.EntityClient.EntityConnection.Open()
+   en System.Data.Entity.Core.Objects.ObjectContext.EnsureConnection(Boolean shouldMonitorTransactions)
+   en System.Data.Entity.Core.Objects.ObjectContext.ExecuteInTransaction[T](Func`1 func, IDbExecutionStrategy executionStrategy, Boolean startLocalTransaction, Boolean releaseConnectionOnSuccess)
+   en System.Data.Entity.Core.Objects.ObjectQuery`1.<>c__DisplayClass3.<GetResults>b__1()
+   en System.Data.Entity.SqlServer.DefaultSqlExecutionStrategy.Execute[TResult](Func`1 operation)
+   en System.Data.Entity.Core.Objects.ObjectQuery`1.GetResults(Nullable`1 forMergeOption)
+   en System.Data.Entity.Core.Objects.ObjectQuery`1.<System.Collections.Generic.IEnumerable<T>.GetEnumerator>b__0()
+   en System.Data.Entity.Internal.LazyEnumerator`1.MoveNext()
+   en System.Collections.Generic.List`1..ctor(IEnumerable`1 collection)
+   en System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
+   en ServicioCartaPorte.servi.MapaGeoJSON_DLL(String SC) en C:\Users\Administrador\Documents\bdl\pronto\InterfazFlexicapture\prontoflexicapture.cs:línea 4854
+   en WebServiceCartas.MapaGeoJSON() en C:\Users\Administrador\Documents\bdl\pronto\prontoweb\App_Code\vbcode\WebServiceCartas.vb:línea 250
+EntityFramework
+__________________________
+
+Log Entry : 
+06/08/2017 18:48:59
+Error in: http://localhost:58911/ProntoWeb/WebServiceCartas.asmx/MapaGeoJSON. Error Message:System.Data.Entity.Core.EntityException
+The underlying provider failed on Open.
+   en System.Data.Entity.Core.EntityClient.EntityConnection.Open()
+   en System.Data.Entity.Core.Objects.ObjectContext.EnsureConnection(Boolean shouldMonitorTransactions)
+   en System.Data.Entity.Core.Objects.ObjectContext.ExecuteInTransaction[T](Func`1 func, IDbExecutionStrategy executionStrategy, Boolean startLocalTransaction, Boolean releaseConnectionOnSuccess)
+   en System.Data.Entity.Core.Objects.ObjectQuery`1.<>c__DisplayClass3.<GetResults>b__1()
+   en System.Data.Entity.SqlServer.DefaultSqlExecutionStrategy.Execute[TResult](Func`1 operation)
+   en System.Data.Entity.Core.Objects.ObjectQuery`1.GetResults(Nullable`1 forMergeOption)
+   en System.Data.Entity.Core.Objects.ObjectQuery`1.<System.Collections.Generic.IEnumerable<T>.GetEnumerator>b__0()
+   en System.Data.Entity.Internal.LazyEnumerator`1.MoveNext()
+   en System.Collections.Generic.List`1..ctor(IEnumerable`1 collection)
+   en System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
+   en ServicioCartaPorte.servi.MapaGeoJSON_DLL(String SC) en C:\Users\Administrador\Documents\bdl\pronto\InterfazFlexicapture\prontoflexicapture.cs:línea 4854
+   en WebServiceCartas.MapaGeoJSON() en C:\Users\Administrador\Documents\bdl\pronto\prontoweb\App_Code\vbcode\WebServiceCartas.vb:línea 250
+EntityFramework
+__________________________

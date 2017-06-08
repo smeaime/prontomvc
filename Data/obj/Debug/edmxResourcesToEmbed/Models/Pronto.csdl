@@ -1735,6 +1735,10 @@
       <Parameter Name="Patente" Mode="In" Type="String" />
       <Parameter Name="optCamionVagon" Mode="In" Type="String" />
     </FunctionImport>
+    <AssociationSet Name="FK__CartasDeP__Vende__6D4EF28E" Association="DemoProntoModel.FK__CartasDeP__Vende__6D4EF28E">
+      <End Role="Cliente" EntitySet="Clientes" />
+      <End Role="CartasDePorte" EntitySet="CartasDePortes" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="Articulo">
     <Key>
@@ -2198,6 +2202,10 @@
     <NavigationProperty Name="RubrosContables" Relationship="DemoProntoModel.FK_RubrosContables_IdObra" FromRole="Obra" ToRole="RubrosContable" />
     <NavigationProperty Name="DetalleAsientos" Relationship="DemoProntoModel.FK_DetalleAsientos_IdObra" FromRole="Obra" ToRole="DetalleAsiento" />
     <Property Name="RegimenMinero" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+    <Property Name="AnticipoFinancieroPorcentual" Type="Decimal" Precision="6" Scale="2" />
+    <Property Name="FondoReparoPorcentual" Type="Decimal" Precision="6" Scale="2" />
+    <Property Name="PlazoCobroDias" Type="Int32" />
+    <Property Name="CantidadEstimadaCertificados" Type="Int32" />
   </EntityType>
   <EntityType Name="Requerimiento">
     <Key>
@@ -2885,6 +2893,7 @@
     <Property Name="FechaInicioVigenciaCodigoNormaCapital" Type="DateTime" Precision="3" />
     <Property Name="FechaFinVigenciaCodigoNormaCapital" Type="DateTime" Precision="3" />
     <NavigationProperty Name="CartasDePortes" Relationship="DemoProntoModel.FK__CartasDeP__Clien__25735020" FromRole="Cliente" ToRole="CartasDePorte" />
+    <NavigationProperty Name="CartasDePortes1" Relationship="DemoProntoModel.FK__CartasDeP__Vende__6D4EF28E" FromRole="Cliente" ToRole="CartasDePorte" />
   </EntityType>
   <EntityType Name="PuntosVenta">
     <Key>
@@ -3372,6 +3381,8 @@
     <Property Name="NotasSeguimiento" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="CoeficienteCompra" Type="Decimal" Precision="5" Scale="2" />
     <Property Name="Detalle" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="BloqueadoFirma" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+    <Property Name="IdUsuarioBloqueo" Type="Int32" />
   </EntityType>
   <EntityType Name="Presupuesto">
     <Key>
@@ -3774,6 +3785,8 @@
     <NavigationProperty Name="WilliamsDestinos1" Relationship="DemoProntoModel.FK__WilliamsD__IdLoc__0A8A4FBA" FromRole="Localidad" ToRole="WilliamsDestino" />
     <NavigationProperty Name="WilliamsDestinos11" Relationship="DemoProntoModel.FK__WilliamsD__IdLoc__0B7E73F3" FromRole="Localidad" ToRole="WilliamsDestino" />
     <NavigationProperty Name="WilliamsDestinos2" Relationship="DemoProntoModel.FK__WilliamsD__IdLoc__0C72982C" FromRole="Localidad" ToRole="WilliamsDestino" />
+    <Property Name="lat" Type="Decimal" Precision="15" Scale="12" />
+    <Property Name="lng" Type="Decimal" Precision="15" Scale="12" />
   </EntityType>
   <EntityType Name="Moneda">
     <Key>
@@ -4608,6 +4621,7 @@
     <Property Name="FechaFinVigenciaCodigoNormaCapital" Type="DateTime" Precision="3" />
     <Property Name="IdObraDefault" Type="Int32" />
     <Property Name="RegimenSimplificadoIIBB" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+    <Property Name="IdIBCondicionAnterior" Type="Int32" />
   </EntityType>
   <EntityType Name="Rubro">
     <Key>
@@ -6960,6 +6974,8 @@
     <Property Name="CompensacionGastosProveedorCliente" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
     <Property Name="CircuitoLiquidacionFlete" Type="Int32" />
     <Property Name="AcumularParaSUSS" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+    <Property Name="BloqueadoFirma" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+    <Property Name="IdUsuarioBloqueo" Type="Int32" />
   </EntityType>
   <EntityType Name="DetalleComprobantesProveedore">
     <Key>
@@ -7460,6 +7476,7 @@
     <Property Name="IdComprobanteProveedor_Compensacion" Type="Int32" />
     <Property Name="IdLiquidacionFlete" Type="Int32" />
     <Property Name="CircuitoLiquidacionFlete" Type="Int32" />
+    <Property Name="IdViajeAsociado" Type="Int32" />
   </EntityType>
   <EntityType Name="NotasDebito">
     <Key>
@@ -12314,6 +12331,7 @@
     <Property Name="AgrupadorDeTandaPeriodos" Type="Int32" />
     <Property Name="ModoImpresion" Type="String" MaxLength="6" FixedLength="false" Unicode="false" />
     <Property Name="Corredor2" Type="Int32" />
+    <Property Name="EnumSyngentaDivision" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
   </EntityType>
   <Association Name="FK__CDPHumeda__IdArt__48D19AF6">
     <End Type="DemoProntoModel.Articulo" Role="Articulo" Multiplicity="0..1" />
@@ -12531,6 +12549,7 @@
     <Property Name="Procedcia" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="DestinoDesc" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="IdDestino" Type="Int32" />
+    <Property Name="AgregaItemDeGastosAdministrativos" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
   </EntityType>
   <EntityType Name="wGrillaPersistencia_EF">
     <Key>
@@ -14018,6 +14037,7 @@
     <NavigationProperty Name="CartasDePorteDetalles" Relationship="DemoProntoModel.FK__CartasDeP__IdCar__5A512CB3" FromRole="CartasDePorte" ToRole="CartasDePorteDetalle_EF" />
     <NavigationProperty Name="Vendedore" Relationship="DemoProntoModel.FK__CartasDeP__IdCor__7D7A6D5F" FromRole="CartasDePorte" ToRole="Vendedor" />
     <NavigationProperty Name="DetalleFactura" Relationship="DemoProntoModel.FK__CartasDeP__IdDet__55D69059" FromRole="CartasDePorte" ToRole="DetalleFactura" />
+    <NavigationProperty Name="Cliente1" Relationship="DemoProntoModel.FK__CartasDeP__Vende__6D4EF28E" FromRole="CartasDePorte" ToRole="Cliente" />
   </EntityType>
   <Association Name="FK__CartasDeP__Acopi__5498535D">
     <End Type="DemoProntoModel.CartasPorteAcopio" Role="CartasPorteAcopio" Multiplicity="0..1" />
@@ -14304,4 +14324,16 @@
     <Property Type="String" Name="EntregadorCUIT" Nullable="false" MaxLength="13" />
     <Property Type="Int32" Name="CodigoAFIP" Nullable="false" />
   </ComplexType>
+  <Association Name="FK__CartasDeP__Vende__6D4EF28E">
+    <End Type="DemoProntoModel.Cliente" Role="Cliente" Multiplicity="0..1" />
+    <End Type="DemoProntoModel.CartasDePorte" Role="CartasDePorte" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Cliente">
+        <PropertyRef Name="IdCliente" />
+      </Principal>
+      <Dependent Role="CartasDePorte">
+        <PropertyRef Name="Vendedor" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema>
