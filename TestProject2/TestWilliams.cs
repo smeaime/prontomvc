@@ -870,6 +870,8 @@ namespace ProntoMVC.Tests
             public string prov;
             public string loc;
             public int id;
+            public decimal? lat;
+            public decimal? lng;
         }
 
 
@@ -882,18 +884,22 @@ namespace ProntoMVC.Tests
 
 
             List<xxzc> locs = (from l in db.Localidades
-                        join p in db.Provincias on l.IdProvincia equals p.IdProvincia
-                        // join p in db.Partidos on l.IdPartido equals p.IdPartido
-                        select new xxzc { prov = p.Nombre, loc = l.Nombre, id=l.IdLocalidad }).ToList();
+                               join p in db.Provincias on l.IdProvincia equals p.IdProvincia
+                               // join p in db.Partidos on l.IdPartido equals p.IdPartido
+                               select new xxzc { prov = p.Nombre, loc = l.Nombre, id = l.IdLocalidad, lat = l.lat, lng = l.lng }).ToList();
+
+
 
             foreach (xxzc l in locs)
             {
-
+                string address = "";
                 try
                 {
+                    if (l.lat != null) continue;
+
                     // actualizar geocode (long,lat) de la tabla localidades
 
-                    var address = l.loc + ", " + l.prov; // = "123 something st, somewhere";
+                    address = l.loc + ", " + l.prov + " ,Argentina"; // = "123 something st, somewhere";
                     var requestUri = string.Format("http://maps.googleapis.com/maps/api/geocode/xml?address={0}&sensor=false", Uri.EscapeDataString(address));
 
                     var request = WebRequest.Create(requestUri);
@@ -909,15 +915,28 @@ namespace ProntoMVC.Tests
                 }
                 catch (Exception ex)
                 {
-                    ErrHandler2.WriteError(ex);
+                    ErrHandler2.WriteError(address);
                 }
 
 
 
             }
 
-            // llamar al mapa
         }
+
+
+
+        [TestMethod]
+        public void mapa_con_googlemaps_40288_2()
+        {
+
+            // llamar al mapa
+            var s = new ServicioCartaPorte.servi();
+            var q = s.MapaGeoJSON_DLL(SC);
+
+        }
+
+
 
 
 

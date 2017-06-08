@@ -2465,6 +2465,7 @@
         <edmx:AssociationConnector Association="DemoProntoModel.FK__CartasDeP__IdCar__5A512CB3" />
         <edmx:AssociationConnector Association="DemoProntoModel.FK__CartasDeP__IdCor__7D7A6D5F" />
         <edmx:AssociationConnector Association="DemoProntoModel.FK__CartasDeP__IdDet__55D69059" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK__CartasDeP__Vende__6D4EF28E" />
         </edmx:Diagram>
       <edmx:Diagram DiagramId="969036793a6c4ca0892bc2dcadf55b7a" Name="Diagram1" ZoomLevel="100">
         <edmx:EntityTypeShape EntityType="DemoProntoModel.Articulo" Width="2" PointX="3" PointY="132.125" IsExpanded="true" />
