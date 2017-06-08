@@ -1264,7 +1264,7 @@ Partial Class CartaDePorteInformesGerenciales
         Dim p2 As ReportParameter
         Dim q = ConsultasLinq.EstadisticasDescargas(p2, txtFechaDesde.Text, txtFechaHasta.Text _
                                                     , txtFechaDesdeAnterior.Text, txtFechaHastaAnterior.Text _
-                                                    , cmbPeriodo.Text, cmbPuntoVenta.SelectedValue, DropDownList2.Text, HFSC.Value, idDestinatario, idDestino, idArticulo)
+                                                    , cmbPeriodo.Text, cmbPuntoVenta.SelectedValue, DropDownList2.Text, HFSC.Value, idDestinatario, idDestino, idArticulo, enumCDPestado.DescargasMasFacturadas)
 
         RebindReportViewerLINQ("ProntoWeb\Informes\Estadísticas de Toneladas descargadas.rdl", q, New ReportParameter() _
                                {New ReportParameter("Titulo", _
@@ -1303,9 +1303,9 @@ Partial Class CartaDePorteInformesGerenciales
 
         Dim p2 As ReportParameter
 
-        Dim q = ConsultasLinq.EstadisticasDescargas(p2, txtFechaDesde.Text, txtFechaHasta.Text, _
-                                                    txtFechaDesdeAnterior.Text, txtFechaHastaAnterior.Text, _
-                                                    cmbPeriodo.Text, cmbPuntoVenta.SelectedValue, DropDownList2.Text, HFSC.Value, idDestinatario, idDestino, idArticulo)
+        Dim q = ConsultasLinq.EstadisticasDescargas(p2, txtFechaDesde.Text, txtFechaHasta.Text,
+                                                    txtFechaDesdeAnterior.Text, txtFechaHastaAnterior.Text,
+                                                    cmbPeriodo.Text, cmbPuntoVenta.SelectedValue, DropDownList2.Text, HFSC.Value, idDestinatario, idDestino, idArticulo, enumCDPestado.DescargasMasFacturadas)
 
         RebindReportViewerLINQ("ProntoWeb\Informes\Estadísticas de Toneladas descargadas Sucursal-Modo.rdl", q, New ReportParameter() _
                                {New ReportParameter("Titulo", _
@@ -1344,9 +1344,9 @@ Partial Class CartaDePorteInformesGerenciales
         Dim fechahasta2 As Date = iisValidSqlDate(txtFechaHastaAnterior.Text, #1/1/2100#)
         Dim p2 As ReportParameter
 
-        Dim q = ConsultasLinq.EstadisticasDescargas(p2, txtFechaDesde.Text, txtFechaHasta.Text, _
-                                                    txtFechaDesdeAnterior.Text, txtFechaHastaAnterior.Text, _
-                                                    cmbPeriodo.Text, cmbPuntoVenta.SelectedValue, "Todos", HFSC.Value, idDestinatario, idDestino, idArticulo)
+        Dim q = ConsultasLinq.EstadisticasDescargas(p2, txtFechaDesde.Text, txtFechaHasta.Text,
+                                                    txtFechaDesdeAnterior.Text, txtFechaHastaAnterior.Text,
+                                                    cmbPeriodo.Text, cmbPuntoVenta.SelectedValue, "Todos", HFSC.Value, idDestinatario, idDestino, idArticulo, enumCDPestado.DescargasMasFacturadas)
 
         RebindReportViewerLINQ("ProntoWeb\Informes\Estadísticas de Toneladas descargadas Sucursal-Modo.rdl", q, New ReportParameter() _
                                {New ReportParameter("Titulo", _

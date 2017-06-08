@@ -345,6 +345,10 @@
     <EntitySetMapping Name="Obras">
       <EntityTypeMapping TypeName="DemoProntoModel.Obra">
         <MappingFragment StoreEntitySet="Obras">
+          <ScalarProperty Name="CantidadEstimadaCertificados" ColumnName="CantidadEstimadaCertificados" />
+          <ScalarProperty Name="PlazoCobroDias" ColumnName="PlazoCobroDias" />
+          <ScalarProperty Name="FondoReparoPorcentual" ColumnName="FondoReparoPorcentual" />
+          <ScalarProperty Name="AnticipoFinancieroPorcentual" ColumnName="AnticipoFinancieroPorcentual" />
           <ScalarProperty Name="RegimenMinero" ColumnName="RegimenMinero" />
           <ScalarProperty Name="OrdenamientoSecundario" ColumnName="OrdenamientoSecundario" />
           <ScalarProperty Name="IdObraRelacionada" ColumnName="IdObraRelacionada" />
@@ -1281,6 +1285,8 @@
     <EntitySetMapping Name="Pedidos">
       <EntityTypeMapping TypeName="DemoProntoModel.Pedido">
         <MappingFragment StoreEntitySet="Pedidos">
+          <ScalarProperty Name="IdUsuarioBloqueo" ColumnName="IdUsuarioBloqueo" />
+          <ScalarProperty Name="BloqueadoFirma" ColumnName="BloqueadoFirma" />
           <ScalarProperty Name="Detalle" ColumnName="Detalle" />
           <ScalarProperty Name="CoeficienteCompra" ColumnName="CoeficienteCompra" />
           <ScalarProperty Name="NotasSeguimiento" ColumnName="NotasSeguimiento" />
@@ -1465,6 +1471,8 @@
     <EntitySetMapping Name="Localidades">
       <EntityTypeMapping TypeName="DemoProntoModel.Localidad">
         <MappingFragment StoreEntitySet="Localidades">
+          <ScalarProperty Name="lng" ColumnName="lng" />
+          <ScalarProperty Name="lat" ColumnName="lat" />
           <ScalarProperty Name="CodigoCGG" ColumnName="CodigoCGG" />
           <ScalarProperty Name="CodigoAfip" ColumnName="CodigoAfip" />
           <ScalarProperty Name="CodigoONCAA" ColumnName="CodigoONCAA" />
@@ -1826,6 +1834,7 @@
     <EntitySetMapping Name="Proveedores">
       <EntityTypeMapping TypeName="DemoProntoModel.Proveedor">
         <MappingFragment StoreEntitySet="Proveedores">
+          <ScalarProperty Name="IdIBCondicionAnterior" ColumnName="IdIBCondicionAnterior" />
           <ScalarProperty Name="RegimenSimplificadoIIBB" ColumnName="RegimenSimplificadoIIBB" />
           <ScalarProperty Name="IdObraDefault" ColumnName="IdObraDefault" />
           <ScalarProperty Name="FechaFinVigenciaCodigoNormaCapital" ColumnName="FechaFinVigenciaCodigoNormaCapital" />
@@ -3421,6 +3430,8 @@
     <EntitySetMapping Name="ComprobantesProveedor">
       <EntityTypeMapping TypeName="DemoProntoModel.ComprobanteProveedor">
         <MappingFragment StoreEntitySet="ComprobantesProveedores">
+          <ScalarProperty Name="IdUsuarioBloqueo" ColumnName="IdUsuarioBloqueo" />
+          <ScalarProperty Name="BloqueadoFirma" ColumnName="BloqueadoFirma" />
           <ScalarProperty Name="AcumularParaSUSS" ColumnName="AcumularParaSUSS" />
           <ScalarProperty Name="CircuitoLiquidacionFlete" ColumnName="CircuitoLiquidacionFlete" />
           <ScalarProperty Name="CompensacionGastosProveedorCliente" ColumnName="CompensacionGastosProveedorCliente" />
@@ -3867,6 +3878,7 @@
     <EntitySetMapping Name="NotasCreditoes">
       <EntityTypeMapping TypeName="DemoProntoModel.NotasCredito">
         <MappingFragment StoreEntitySet="NotasCredito">
+          <ScalarProperty Name="IdViajeAsociado" ColumnName="IdViajeAsociado" />
           <ScalarProperty Name="CircuitoLiquidacionFlete" ColumnName="CircuitoLiquidacionFlete" />
           <ScalarProperty Name="IdLiquidacionFlete" ColumnName="IdLiquidacionFlete" />
           <ScalarProperty Name="IdComprobanteProveedor_Compensacion" ColumnName="IdComprobanteProveedor_Compensacion" />
@@ -6343,6 +6355,7 @@
     <EntitySetMapping Name="WilliamsMailFiltrosColas">
       <EntityTypeMapping TypeName="DemoProntoModel.WilliamsMailFiltrosCola">
         <MappingFragment StoreEntitySet="WilliamsMailFiltrosCola">
+          <ScalarProperty Name="EnumSyngentaDivision" ColumnName="EnumSyngentaDivision" />
           <ScalarProperty Name="Corredor2" ColumnName="Corredor2" />
           <ScalarProperty Name="ModoImpresion" ColumnName="ModoImpresion" />
           <ScalarProperty Name="AgrupadorDeTandaPeriodos" ColumnName="AgrupadorDeTandaPeriodos" />
@@ -6454,6 +6467,7 @@
     <EntitySetMapping Name="wTempCartasPorteFacturacionAutomatica_EF">
       <EntityTypeMapping TypeName="DemoProntoModel.wTempCartasPorteFacturacionAutomatica_EF">
         <MappingFragment StoreEntitySet="wTempCartasPorteFacturacionAutomatica">
+          <ScalarProperty Name="AgregaItemDeGastosAdministrativos" ColumnName="AgregaItemDeGastosAdministrativos" />
           <ScalarProperty Name="IdDestino" ColumnName="IdDestino" />
           <ScalarProperty Name="DestinoDesc" ColumnName="DestinoDesc" />
           <ScalarProperty Name="Procedcia" ColumnName="Procedcia" />

@@ -228,8 +228,8 @@ Public Class WebServiceCartas
 
 
 
-    <WebMethod(Description:="Devuelve un listado de descargas con formato Cerealnet", EnableSession:=False)> _
-    Public Function MapaGeoJSON(usuario As String, password As String, cuit As String, fechadesde As DateTime, fechahasta As DateTime) As String
+    <WebMethod(Description:="Devuelve un listado de descargas con formato Cerealnet", EnableSession:=False)>
+    Public Function MapaGeoJSON() As String
 
 
 
