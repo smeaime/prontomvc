@@ -1330,7 +1330,8 @@ $(function () {
                             name: 'FechaEntrega', formoptions: { rowpos: 15, colpos: 1 },
                             index: 'FechaEntrega', label: 'TB', width: 300, align: 'center',
                             sorttype: 'date', editable: true,
-                            formatoptions: { newformat: 'dd/mm/yy' }, datefmt: 'dd/mm/yy',
+                            formatter: FormatterFecha,
+                            // formatoptions: { newformat: 'dd/mm/yy' }, datefmt: 'dd/mm/yy',
                             editoptions: { size: 10, maxlengh: 10, dataInit: initDateEdit }, editrules: { required: false }
                         },
                         {

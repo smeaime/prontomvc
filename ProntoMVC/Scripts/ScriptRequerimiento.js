@@ -589,6 +589,10 @@ $(function () {
 
     }
 
+
+
+ 
+
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //////////////////////////DEFINICION DE GRILLAS   ///////////////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -789,8 +793,15 @@ $(function () {
                         {
                             name: 'FechaEntrega', formoptions: { rowpos: 3, colpos: 2 }, index: 'FechaEntrega',
                             label: 'TB', width: 250, align: 'center', sorttype: 'date', editable: true,
+
+                            formatter: FormatterFecha,
+                            //formatter: function (cellvalue, options, rowObject) {
+                            //    return cellvalue === null ? "N/A" : $.fn.fmatter.call(this, "date", cellvalue, options, rowObject);
+                            //}, formatoptions: { newformat: 'dd/mm/yy' },
                             //formatter:'date', 
-                            formatoptions: { newformat: 'dd/mm/yy' }, datefmt: 'dd/mm/yy',
+                            //formatoptions: { newformat: 'dd/mm/yy', defaultvalue: null }, datefmt: 'dd/mm/yy',
+
+
                             editoptions: { size: 10, maxlengh: 10, dataInit: initDateEdit }, editrules: { required: false }
                         },
                         { formoptions: { rowpos: 11, colpos: 1, label: 'Obs' }, name: 'Observaciones', index: 'Observaciones', classes: "textInDiv", label: 'TB', align: 'left', editable: true, edittype: 'text', width: 300, editoptions: { rows: '4', cols: '40' } },

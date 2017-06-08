@@ -865,6 +865,63 @@ namespace ProntoMVC.Tests
 
 
 
+        class xxzc
+        {
+            public string prov;
+            public string loc;
+            public int id;
+        }
+
+
+        [TestMethod]
+        public void mapa_con_googlemaps_40288()
+        {
+
+            var scEF = ProntoMVC.Data.Models.Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC));
+            DemoProntoEntities db = new DemoProntoEntities(scEF);
+
+
+            List<xxzc> locs = (from l in db.Localidades
+                        join p in db.Provincias on l.IdProvincia equals p.IdProvincia
+                        // join p in db.Partidos on l.IdPartido equals p.IdPartido
+                        select new xxzc { prov = p.Nombre, loc = l.Nombre, id=l.IdLocalidad }).ToList();
+
+            foreach (xxzc l in locs)
+            {
+
+                try
+                {
+                    // actualizar geocode (long,lat) de la tabla localidades
+
+                    var address = l.loc + ", " + l.prov; // = "123 something st, somewhere";
+                    var requestUri = string.Format("http://maps.googleapis.com/maps/api/geocode/xml?address={0}&sensor=false", Uri.EscapeDataString(address));
+
+                    var request = WebRequest.Create(requestUri);
+                    var response = request.GetResponse();
+                    var xdoc = XDocument.Load(response.GetResponseStream());
+
+                    var result = xdoc.Element("GeocodeResponse").Element("result");
+                    var locationElement = result.Element("geometry").Element("location");
+                    var lat = locationElement.Element("lat");
+                    var lng = locationElement.Element("lng");
+
+                    EntidadManager.ExecDinamico(SC, "UPDATE Localidades SET lat=" + lat.Value + " ,lng=" + lng.Value + " WHERE idlocalidad=" + l.id);
+                }
+                catch (Exception ex)
+                {
+                    ErrHandler2.WriteError(ex);
+                }
+
+
+
+            }
+
+            // llamar al mapa
+        }
+
+
+
+
 
 
         [TestMethod]
@@ -906,10 +963,10 @@ namespace ProntoMVC.Tests
                                     desde, hasta, pv,
                                     null, false, "", "",
                                 -1, null, 0, "", "Todos")
-                          .Select(x => new { x.IdCartaDePorte, x.NetoFinal, x.Exporta,x.PuntoVenta }).ToList();
+                          .Select(x => new { x.IdCartaDePorte, x.NetoFinal, x.Exporta, x.PuntoVenta }).ToList();
 
             var tot = q4.Sum(x => x.NetoFinal);
-            var totelev = q4.Where(x => x.Exporta == "SI" && x.PuntoVenta==1).Sum(x => x.NetoFinal);
+            var totelev = q4.Where(x => x.Exporta == "SI" && x.PuntoVenta == 1).Sum(x => x.NetoFinal);
             var totentreg = q4.Where(x => x.Exporta != "SI" && x.PuntoVenta == 1).Sum(x => x.NetoFinal);
 
 
@@ -2157,27 +2214,6 @@ System.Drawing
         }
 
 
-
-
-        [TestMethod]
-        public void geocode()
-        {
-
-
-
-            var address = "123 something st, somewhere";
-            var requestUri = string.Format("http://maps.googleapis.com/maps/api/geocode/xml?address={0}&sensor=false", Uri.EscapeDataString(address));
-
-            var request = WebRequest.Create(requestUri);
-            var response = request.GetResponse();
-            var xdoc = XDocument.Load(response.GetResponseStream());
-
-            var result = xdoc.Element("GeocodeResponse").Element("result");
-            var locationElement = result.Element("geometry").Element("location");
-            var lat = locationElement.Element("lat");
-            var lng = locationElement.Element("lng");
-
-        }
 
 
         [TestMethod]

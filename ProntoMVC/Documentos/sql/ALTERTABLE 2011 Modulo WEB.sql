@@ -1986,3 +1986,17 @@ go
 alter table [wGrillaPersistencia] ADD
 	constraint U_Unicidad unique NONCLUSTERED (IdRenglon,Sesion)
 go
+
+
+
+
+
+
+
+alter table localidades ADD
+	lat decimal(15, 12)  NULL   ,
+    lng decimal(15, 12)  NULL   
+go
+
+
+
