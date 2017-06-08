@@ -48,6 +48,9 @@ jQuery.extend($.fn.fmatter, {
 
     }
 });
+
+
+
 jQuery.extend($.fn.fmatter.SiNoFormatter, {
     unformat: function (cellvalue, options) {
 
@@ -70,7 +73,14 @@ jQuery.extend($.fn.fmatter.SiNoFormatter, {
 
 
 
-
+function FormatterFecha(cellvalue, options, rowObject) {
+    if (cellvalue == null || cellvalue == "01/01/0001") {
+        return "";
+    }
+    else {
+        return $.fn.fmatter.call(this, "date", cellvalue, options, rowObject);
+    }
+}
 
 
 

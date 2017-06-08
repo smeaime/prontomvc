@@ -1,0 +1,16 @@
+
+Log Entry : 
+06/08/2017 12:49:22
+Error in: . Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en ProntoMVC.Tests.TestsWilliams.mapa_con_googlemaps_40288() en C:\Users\Administrador\Documents\bdl\pronto\TestProject2\TestWilliams.cs:línea 904
+TestProject2
+__________________________
+
+Log Entry : 
+06/08/2017 12:50:16
+Error in: . Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en ProntoMVC.Tests.TestsWilliams.mapa_con_googlemaps_40288() en C:\Users\Administrador\Documents\bdl\pronto\TestProject2\TestWilliams.cs:línea 904
+TestProject2
+__________________________
