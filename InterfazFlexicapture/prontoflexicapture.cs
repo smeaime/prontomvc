@@ -584,15 +584,16 @@ namespace ProntoFlexicapture
                     //05/11/2017 15:39:13
                     //Error in: . Error Message:hilo #10: Problemas con la licencia? Paro y reinicio
                     //__________________________
-                    
+
 
                     ClassFlexicapture.Log(x2.ToString());
 
                     if ((uint)x2.ErrorCode == 0x80004005)
-                    { 
+                    {
                         ClassFlexicapture.Log("Problemas con la exportacion");
                     }
-                    else{
+                    else
+                    {
                         ClassFlexicapture.Log("NO IDENTIFICADO!! " + (uint)x2.ErrorCode);
                     }
 
@@ -1633,7 +1634,7 @@ namespace ProntoFlexicapture
             return l;
 
 
-         
+
         }
 
 
@@ -3693,7 +3694,7 @@ Formato localidad-provincia	destination	x
 
 
         public virtual List<InterfazFlexicapture.ServiceReferenceSyngenta.DT_DeliveryDelivery> WebServiceSyngenta
-                (List<fSQL_GetDataTableFiltradoYPaginado_Result3> dbcartas,string endpointStr, string UserName , string Password )
+                (List<fSQL_GetDataTableFiltradoYPaginado_Result3> dbcartas, string endpointStr, string UserName, string Password)
 
         {
 
@@ -3825,17 +3826,17 @@ Formato localidad-provincia	destination	x
             binding.Security.Message.ClientCredentialType = BasicHttpMessageCredentialType.UserName;
             binding.Security.Message.AlgorithmSuite = System.ServiceModel.Security.SecurityAlgorithmSuite.Default;
 
-            
-            
-            
-            
+
+
+
+
             //'Define the endpoint address'
             //var endpointStr = @"https://oasis-pi-nonprod.syngenta.com/dev/XISOAPAdapter/MessageServlet?senderParty=&senderService=Srv_BIT_BarterService&receiverParty=&receiverService=&interface=LoadDeclarationSoap_send_out_asy&interfaceNamespace=urn:broker:o2c:s:global:delivery:loaddeclaration:100";
             //ser.ClientCredentials.UserName.UserName = "BROKERDEV";
             //ser.ClientCredentials.UserName.Password = "Welcome@1";
 
 
-            
+
 
             //var endpointStr =  @"https://oasis-pi-nonprod.syngenta.com/uat/XISOAPAdapter/MessageServlet?senderParty=&senderService=Srv_BIT_BarterService&receiverParty=&receiverService=&interface=LoadDeclarationSoap_send_out_asy&interfaceNamespace=urn:broker:o2c:s:global:delivery:loaddeclaration:100"
             var endpoint = new EndpointAddress(endpointStr);
@@ -3975,7 +3976,7 @@ Formato localidad-provincia	destination	x
 
 
 
-        public void UploadFtpFile(string ftpsitio,string folderName, string fileName,string user,string pass)
+        public void UploadFtpFile(string ftpsitio, string folderName, string fileName, string user, string pass)
         {
 
             FtpWebRequest request;
@@ -4347,14 +4348,14 @@ Formato localidad-provincia	destination	x
             //if (searchField == "Numero") searchField = "NumeroPedido"; 
 
             var Entidad = pagedQuery
-                //.Include(x => x.Moneda)
-                //.Include(x => x.Proveedor)
-                //.Include(x => x.DetallePedidos
-                //            .Select(y => y.DetalleRequerimiento
-                //                )
-                //        )
-                //.Include("DetallePedidos.DetalleRequerimiento.Requerimientos.Obra") // funciona tambien
-                //.Include(x => x.Comprador)
+                          //.Include(x => x.Moneda)
+                          //.Include(x => x.Proveedor)
+                          //.Include(x => x.DetallePedidos
+                          //            .Select(y => y.DetalleRequerimiento
+                          //                )
+                          //        )
+                          //.Include("DetallePedidos.DetalleRequerimiento.Requerimientos.Obra") // funciona tambien
+                          //.Include(x => x.Comprador)
                           .AsQueryable();
 
 
@@ -4795,14 +4796,14 @@ Formato localidad-provincia	destination	x
 
 
             var excelData = new jqGridWeb.DataForExcel(
-                // column Header
+                    // column Header
                     new[] { "Col1", "Col2", "Col3" },
                     new[]{jqGridWeb.DataForExcel.DataType.String, jqGridWeb.DataForExcel.DataType.Integer,
                           jqGridWeb.DataForExcel.DataType.String},
-                //      new List<string[]> {
-                //    new[] {"a", "1", "c1"},
-                //    new[] {"a", "2", "c2"}
-                //},
+                    //      new List<string[]> {
+                    //    new[] {"a", "1", "c1"},
+                    //    new[] {"a", "2", "c2"}
+                    //},
                     lista,
 
                     "Test Grid");
@@ -4844,23 +4845,41 @@ Formato localidad-provincia	destination	x
 
             using (DemoProntoEntities db = new DemoProntoEntities(scEF))
             {
-                var iddestino = 1;
+                var iddestino = -1;
                 var desde = new DateTime(2014, 1, 20);
                 var hasta = new DateTime(2014, 1, 20);
 
 
 
-                var q2 = from x in db.fSQL_GetDataTableFiltradoYPaginado(
-                                                        0, 9999999, estado, "", -1, -1,
+                var q2 = (from x in db.fSQL_GetDataTableFiltradoYPaginado(
+                                                        0, 9999999, 0, "", -1, -1,
                                                         -1, -1, -1, -1, -1,
                                                         iddestino, 0, "Ambas"
                                                         , desde, hasta,
                                                         0, null, false, "", "",
                                                         -1, null, 0, "", "Todos")
-                         group x by new { x.ProcedenciaDesc, x.ProcedenciaProvinciaDesc } into grp
-                         select new { total = grp.Sum(t => t.NetoProc), grp.Key.ProcedenciaDesc, grp.Key.ProcedenciaProvinciaDesc };
+                          from l in db.Localidades.Where(y => System.Data.Entity.SqlServer.SqlFunctions.StringConvert((double?)y.IdLocalidad).Trim() == x.Procedencia)
+                          group x by new { x.ProcedenciaDesc, x.ProcedenciaProvinciaDesc, x.Procedencia,  l.lat, l.lng } into grp
+                          select new
+                          {
+                              total = grp.Sum(t => t.NetoProc),
+                              grp.Key.ProcedenciaDesc,
+                              grp.Key.ProcedenciaProvinciaDesc,
+                              grp.Key.Procedencia,
+                              grp.Key.lat,grp.Key.lng
+                          }
+                         ).ToList();
 
 
+
+                
+
+
+                System.Web.Script.Serialization.JavaScriptSerializer jsonSerializer = new System.Web.Script.Serialization.JavaScriptSerializer();
+                return jsonSerializer.Serialize(q2);
+
+                //string serializedData = JsonConvert.SerializeObject(q2.ToList(), Formatting.Indented);
+                //return serializedData;
 
             }
 
@@ -4942,14 +4961,13 @@ order by kilos desc
             */
 
 
-            //var coordinates = new List<GeographicPosition> 
-            //    { 
-            //        new GeographicPosition(52.370725881211314, 4.889259338378906), 
-            //        new GeographicPosition(52.3711451105601, 4.895267486572266), 
-            //        new GeographicPosition(52.36931095278263, 4.892091751098633), 
-            //        new GeographicPosition(52.370725881211314, 4.889259338378906) 
+            //var coordinates = new List<GeographicPosition>
+            //    {
+            //        new GeographicPosition(52.370725881211314, 4.889259338378906),
+            //        new GeographicPosition(52.3711451105601, 4.895267486572266),
+            //        new GeographicPosition(52.36931095278263, 4.892091751098633),
+            //        new GeographicPosition(52.370725881211314, 4.889259338378906)
             //    }.ToList<IPosition>();
-
             //var model = new Polygon(new List<LineString> { new LineString(coordinates) });
             //var serializedData = JsonConvert.SerializeObject(model, Formatting.Indented); //, DefaultJsonSerializerSettings);
             //return serializedData;
