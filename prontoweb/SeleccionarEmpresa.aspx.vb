@@ -72,17 +72,64 @@ Partial Class SeleccionarEmpresa
             'End If
 
 
-            If Session(SESSIONPRONTO_UserName) <> Membership.GetUser.UserName Then
-                Dim mu As MembershipUser
-                mu = Membership.GetUser(Membership.GetUser.UserName)
-                Session(SESSIONPRONTO_UserId) = mu.ProviderUserKey.ToString
-                Session(SESSIONPRONTO_UserName) = mu.UserName
+            ErrHandler2.WriteError("sesion: " & Session(SESSIONPRONTO_UserName) & " " & Request.IsAuthenticated)
 
-                'AddUserToSession()
-                'Throw New Exception("ojo, que en el session(SESSIONPRONTO_UserId) te puede quedar un usuario distinto que en el membership!!!!")
+            If Membership.GetUser IsNot Nothing Then
+                ErrHandler2.WriteError("Pasa nomas. membership: " & Membership.GetUser.UserName)
+            Else
+                'me está pasando cuando ANDREOLI está logueado en prontoclientes, y aparece en prontoweb
+                ErrHandler2.WriteError("No hay usuario membership!!! echemoslo")
 
+                ' verificá el <httpCookies domain=".williamsentregas.com.ar"/> para q todos los cookies se generen en el mismo dominio
+
+                'https://stackoverflow.com/questions/412300/formsauthentication-signout-does-not-log-the-user-out
+                FormsAuthentication.SignOut()
+                Session.Abandon()
+
+                '// clear authentication cookie
+                Dim cookie1 As HttpCookie = New HttpCookie(FormsAuthentication.FormsCookieName, "")
+                cookie1.Expires = DateTime.Now.AddYears(-1)
+                Response.Cookies.Add(cookie1)
+
+                '// clear session cookie (Not necessary for your current problem but i would recommend you do it anyway)
+                Dim sessionStateSection As System.Web.Configuration.SessionStateSection = System.Web.Configuration.WebConfigurationManager.GetSection("system.web/sessionState")
+                Dim cookie2 As HttpCookie = New HttpCookie(sessionStateSection.CookieName, "")
+                cookie2.Expires = DateTime.Now.AddYears(-1)
+                Response.Cookies.Add(cookie2)
+
+                FormsAuthentication.RedirectToLoginPage()
+                Return
             End If
 
+
+
+
+
+
+
+            Try
+
+
+
+                If Session(SESSIONPRONTO_UserName) <> Membership.GetUser.UserName Then
+                    Dim mu As MembershipUser
+                    mu = Membership.GetUser(Membership.GetUser.UserName)
+                    Session(SESSIONPRONTO_UserId) = mu.ProviderUserKey.ToString
+                    Session(SESSIONPRONTO_UserName) = mu.UserName
+
+                    'AddUserToSession()
+                    'Throw New Exception("ojo, que en el session(SESSIONPRONTO_UserId) te puede quedar un usuario distinto que en el membership!!!!")
+
+                End If
+
+            Catch ex As Exception
+                ErrHandler2.WriteError(ex)
+            End Try
+
+
+            'If Membership.GetUser Is Nothing Then
+            '    Session(SESSIONPRONTO_UserName) = "SINUSUARIO"
+            'End If
             '//////////////////////////////////////////////////////////
             '//////////////////////////////////////////////////////////
 

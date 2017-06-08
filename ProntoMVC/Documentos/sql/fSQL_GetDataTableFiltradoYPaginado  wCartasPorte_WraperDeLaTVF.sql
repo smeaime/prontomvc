@@ -123,7 +123,21 @@ SELECT
 ,CDP.IdTransportista      ,CDP.TransportistaCUITdesnormalizado      ,CDP.IdChofer      ,CDP.ChoferCUITdesnormalizado      ,CDP.CTG  
 ,CDP.Contrato      ,CDP.Destino      ,CDP.Subcontr1      ,CDP.Subcontr2      ,CDP.Contrato1       ,CDP.contrato2      ,CDP.KmARecorrer
 ,CDP.Tarifa      ,CDP.FechaDescarga      ,CDP.Hora      ,CDP.NRecibo      ,CDP.CalidadDe      ,CDP.TaraFinal     
-,CDP.BrutoFinal      ,CDP.Fumigada      ,CDP.Secada      ,CDP.Exporta      ,CDP.NobleExtranos      ,CDP.NobleNegros
+,CDP.BrutoFinal      ,CDP.Fumigada      ,CDP.Secada      
+
+
+--truco hasta resolver este asunto del @ModoExportacion y @bTraerDuplicados 
+--Si solo piden originales, truchea el original para que cumpla con el filtro
+,  CASE 
+		--WHEN  @ModoExportacion is null or (@ModoExportacion = 'Ambos' or @ModoExportacion = 'Ambas') Or (@ModoExportacion = 'Todos')  THEN CDP.Exporta
+		WHEN  (@bTraerDuplicados='FALSE' AND @ModoExportacion = 'Entregas')  then 'NO'
+		WHEN  (@bTraerDuplicados='FALSE' AND @ModoExportacion = 'Export') then 'SI'
+		ELSE  CDP.Exporta
+   END as Exporta
+
+
+
+   ,CDP.NobleExtranos      ,CDP.NobleNegros
 ,CDP.NobleQuebrados      ,CDP.NobleDaniados      ,CDP.NobleChamico      ,CDP.NobleChamico2      ,CDP.NobleRevolcado
 ,CDP.NobleObjetables      ,CDP.NobleAmohosados      ,CDP.NobleHectolitrico      ,CDP.NobleCarbon      
 ,CDP.NoblePanzaBlanca      ,CDP.NoblePicados      ,CDP.NobleMGrasa      ,CDP.NobleAcidezGrasa     

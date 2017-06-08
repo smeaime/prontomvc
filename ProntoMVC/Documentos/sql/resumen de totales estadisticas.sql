@@ -119,10 +119,9 @@ select
 from 
  dbo.fSQL_GetDataTableFiltradoYPaginado  
 				(  
+								
 
-					
-
-					@startRowIndex, 
+							@startRowIndex, 
 							@maximumRows, 
 							@estado,
 							@QueContenga, 
@@ -139,9 +138,9 @@ from
 							@AplicarANDuORalFiltro,
 							@ModoExportacion,
 				
-					@FechaDesdeAnterior,
+							@FechaDesdeAnterior,
 
-					@FechaHasta,
+							@FechaHasta,
 				
 							@puntoventa, 
 							NULL,
