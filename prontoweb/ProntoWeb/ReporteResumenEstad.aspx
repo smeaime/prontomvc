@@ -409,9 +409,9 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                                 <td>
                                     <asp:DropDownList ID="DropDownList2" runat="server" AutoPostBack="false" CssClass="CssTextBox"
                                         Width="110px">
-                                        <asp:ListItem Selected="True">Entregas</asp:ListItem>
+                                        <asp:ListItem>Entregas</asp:ListItem>
                                         <asp:ListItem>Export</asp:ListItem>
-                                        <asp:ListItem>Ambos</asp:ListItem>
+                                        <asp:ListItem Selected="True">Ambos</asp:ListItem>
                                         <asp:ListItem>Buques</asp:ListItem>
                                     </asp:DropDownList>
                                 </td>

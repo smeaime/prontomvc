@@ -142,6 +142,7 @@
 
       <siteMapNode url="ProntoWeb/Reporte.aspx?ReportName=MapaArgentinaProcedenciaCartasPorte" title="Mapa Comercial"  description="Informes" roles="Administrador,Comercial,WilliamsAdmin,WilliamsFacturacion,WilliamsComercial" />
 
+      <siteMapNode url="ProntoWeb/MapaComercialGoogleMaps.aspx" title="Mapa Google Maps"  description="Informes" roles="Administrador,Comercial,WilliamsAdmin,WilliamsFacturacion,WilliamsComercial" />
 
 
 

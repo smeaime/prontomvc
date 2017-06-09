@@ -13,6 +13,9 @@
       <Query>
         <DataSourceName>TestHarcodeada</DataSourceName>
         <QueryParameters>
+          <QueryParameter Name="@ModoExportacion">
+            <Value>=Parameters!ModoExportacion.Value</Value>
+          </QueryParameter>
           <QueryParameter Name="@FechaDesde">
             <Value>=Parameters!FechaDesde.Value</Value>
           </QueryParameter>
@@ -55,7 +58,7 @@ set @FechaHasta='20170228'
 					NULL, --@idProcedencia,
 					-1,---1, --@idDestino,
 					NULL, --@AplicarANDuORalFiltro,
-					'Entregas', --'Ambos', --'Buques',
+					@ModoExportacion, 
 						
 @FechaDesde,
 @FechaHasta,
@@ -6580,6 +6583,11 @@ select idlocalidad, nombre from localidades</CommandText>
       </DefaultValue>
       <Prompt>bMostrar5</Prompt>
     </ReportParameter>
+    <ReportParameter Name="ModoExportacion">
+      <DataType>String</DataType>
+      <Nullable>true</Nullable>
+      <Prompt>ModoExportacion</Prompt>
+    </ReportParameter>
   </ReportParameters>
   <ReportParametersLayout>
     <GridLayoutDefinition>
@@ -6630,6 +6638,11 @@ select idlocalidad, nombre from localidades</CommandText>
           <ColumnIndex>0</ColumnIndex>
           <RowIndex>4</RowIndex>
           <ParameterName>bMostrar5</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>1</ColumnIndex>
+          <RowIndex>4</RowIndex>
+          <ParameterName>ModoExportacion</ParameterName>
         </CellDefinition>
       </CellDefinitions>
     </GridLayoutDefinition>

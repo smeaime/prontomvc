@@ -252,7 +252,7 @@ exec [wCartasDePorte_TX_ResumenDeTotalesEstadisticas]
 					NULL, --@idProcedencia,
 					-1,---1, --@idDestino,
 					NULL, --@AplicarANDuORalFiltro,
-					'Entregas', --'Ambos', --'Buques',
+					'Export', --'Entregas', --'Ambos', --'Buques',
 						
 					
 @FechaDesde, @FechaHasta,

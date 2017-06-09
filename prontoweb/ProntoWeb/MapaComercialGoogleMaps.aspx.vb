@@ -14,7 +14,7 @@ Imports CartaDePorteManager
 
 
 Namespace ProntoMVC.Reportes
-    Partial Public Class ReporteResumenEstad
+    Partial Public Class MapaComercialGoogleMaps
         Inherits System.Web.UI.Page
         Protected Sub Page_Load(sender As Object, e As EventArgs)
             HFSC.Value = GetConnectionString(Server, Session)
@@ -71,14 +71,7 @@ Namespace ProntoMVC.Reportes
 
             AutoCompleteExtender2.ContextKey = HFSC.Value
             AutoCompleteExtender21.ContextKey = HFSC.Value
-            AutoCompleteExtender24.ContextKey = HFSC.Value
-            AutoCompleteExtender25.ContextKey = HFSC.Value
-            AutoCompleteExtender26.ContextKey = HFSC.Value
             AutoCompleteExtender27.ContextKey = HFSC.Value
-            AutoCompleteExtender3.ContextKey = HFSC.Value
-            AutoCompleteExtender4.ContextKey = HFSC.Value
-            AutoCompleteExtender11.ContextKey = HFSC.Value
-            'AutoCompleteExtender1.ContextKey = HFSC.Value
 
 
         End Sub
@@ -94,7 +87,7 @@ Namespace ProntoMVC.Reportes
 
 
             Dim admins = New String() {"mariano", "andres", "hwilliams", "twilliams2"}
-       
+
 
             If Not admins.Contains(Session(SESSIONPRONTO_UserName).ToString().ToLower()) Then
                 MsgBoxAjaxAndRedirect(Me, "No tenés acceso a esta página", String.Format("Principal.aspx"))
@@ -144,8 +137,6 @@ Namespace ProntoMVC.Reportes
 
             Dim fechadesde As Date = iisValidSqlDate(txtFechaDesde.Text, #1/1/1753#)
             Dim fechahasta As Date = iisValidSqlDate(txtFechaHasta.Text, #1/1/2100#)
-            txtFechaDesdeAnterior.Text = DateAdd(DateInterval.Year, -1, fechadesde)
-            txtFechaHastaAnterior.Text = DateAdd(DateInterval.Year, -1, fechahasta)
 
 
 
@@ -169,14 +160,8 @@ Namespace ProntoMVC.Reportes
 
             Dim sTitulo As String = ""
             Dim idVendedor = BuscaIdClientePreciso(txtTitular.Text, HFSC.Value)
-            Dim idCorredor = BuscaIdVendedorPreciso(txtCorredor.Text, HFSC.Value)
-            Dim idIntermediario = BuscaIdClientePreciso(txtIntermediario.Text, HFSC.Value)
-            Dim idRComercial = BuscaIdClientePreciso(txtRcomercial.Text, HFSC.Value)
-            Dim idClienteAuxiliar = BuscaIdClientePreciso(txtPopClienteAuxiliar.Text, HFSC.Value)
-            Dim idDestinatario = BuscaIdClientePreciso(txtDestinatario.Text, HFSC.Value)
             Dim idArticulo = BuscaIdArticuloPreciso(txt_AC_Articulo.Text, HFSC.Value)
             Dim idProcedencia = BuscaIdLocalidadPreciso(txtProcedencia.Text, HFSC.Value)
-            Dim idDestino = BuscaIdWilliamsDestinoPreciso(txtDestino.Text, HFSC.Value)
 
 
             Dim fechadesde As Date = iisValidSqlDate(txtFechaDesde.Text, #1/1/1753#)
@@ -422,16 +407,7 @@ Namespace ProntoMVC.Reportes
 
                     yourParams(0) = New ReportParameter("FechaDesde", txtFechaDesde.Text) ' )
                     yourParams(1) = New ReportParameter("FechaHasta", txtFechaHasta.Text) ', txtFechaHasta.Text)
-                    yourParams(2) = New ReportParameter("FechaDesdeAnterior", txtFechaDesdeAnterior.Text) ' txtFechaDesde.Text)
-                    yourParams(3) = New ReportParameter("FechaHastaAnterior", txtFechaHastaAnterior.Text) ', txtFechaHasta.Text)
 
-                    yourParams(4) = New ReportParameter("bMostrar1", CheckBox1.Checked) ', txtFechaHasta.Text)
-                    yourParams(5) = New ReportParameter("bMostrar2", CheckBox2.Checked) ', txtFechaHasta.Text)
-                    yourParams(6) = New ReportParameter("bMostrar3", CheckBox3.Checked) ', txtFechaHasta.Text)
-                    yourParams(7) = New ReportParameter("bMostrar4", CheckBox4.Checked) ', txtFechaHasta.Text)
-                    yourParams(8) = New ReportParameter("bMostrar5", CheckBox5.Checked) ', txtFechaHasta.Text)
-
-                    yourParams(9) = New ReportParameter("ModoExportacion", DropDownList2.SelectedItem.Text) ', txtFechaHasta.Text)
 
 
 
@@ -487,9 +463,9 @@ Namespace ProntoMVC.Reportes
                         '''///////////////////////////////////////////////////////////////////////////////////////////////////
                         '''///////////////////////////////////////////////////////////////////////////////////////////////////
 
-                        ProntoFuncionesGenerales.MandaEmailSimple("mscalella911@gmail.com", "getparam", _
-                        "Ojo que este es el primer acceso al servidor de informes.  Fijate si estan en distintos servidores el reporteador y la base. Fijate si la consulta puede ejecutarse en la base que elegiste. " & _
-                        Convert.ToString(scsql) & " " & ex.ToString(), ConfigurationManager.AppSettings("SmtpUser"), ConfigurationManager.AppSettings("SmtpServer"), ConfigurationManager.AppSettings("SmtpUser"), _
+                        ProntoFuncionesGenerales.MandaEmailSimple("mscalella911@gmail.com", "getparam",
+                        "Ojo que este es el primer acceso al servidor de informes.  Fijate si estan en distintos servidores el reporteador y la base. Fijate si la consulta puede ejecutarse en la base que elegiste. " &
+                        Convert.ToString(scsql) & " " & ex.ToString(), ConfigurationManager.AppSettings("SmtpUser"), ConfigurationManager.AppSettings("SmtpServer"), ConfigurationManager.AppSettings("SmtpUser"),
                             ConfigurationManager.AppSettings("SmtpPass"), "", Convert.ToInt16(ConfigurationManager.AppSettings("SmtpPort")))
                     End Try
 
@@ -694,7 +670,7 @@ Namespace ProntoMVC.Reportes
                         '''///////////////////////////////////////////////////////////////////////////////////////////////////
                         '''///////////////////////////////////////////////////////////////////////////////////////////////////
 
-                        ProntoFuncionesGenerales.MandaEmailSimple("mscalella911@gmail.com", "getparam", Convert.ToString(scsql) & " " & ex.ToString(), ConfigurationManager.AppSettings("SmtpUser"), ConfigurationManager.AppSettings("SmtpServer"), ConfigurationManager.AppSettings("SmtpUser"), _
+                        ProntoFuncionesGenerales.MandaEmailSimple("mscalella911@gmail.com", "getparam", Convert.ToString(scsql) & " " & ex.ToString(), ConfigurationManager.AppSettings("SmtpUser"), ConfigurationManager.AppSettings("SmtpServer"), ConfigurationManager.AppSettings("SmtpUser"),
                             ConfigurationManager.AppSettings("SmtpPass"), "", Convert.ToInt16(ConfigurationManager.AppSettings("SmtpPort")))
                     End Try
 
