@@ -625,3 +625,591 @@ Nombre del parámetro: parameters
    en ProntoMVC.Reportes.MapaComercialGoogleMaps.Informe() en C:\Users\Administrador\Documents\bdl\pronto\prontoweb\ProntoWeb\MapaComercialGoogleMaps.aspx.vb:línea 497
 Microsoft.ReportViewer.WebForms
 __________________________
+
+Log Entry : 
+06/09/2017 13:58:28
+Error in: http://localhost:58911/ProntoWeb/Reporte.aspx?ReportName=MapaArgentinaProcedenciaCartasPorte. Error Message:Cli 1
+__________________________
+
+Log Entry : 
+06/09/2017 13:58:28
+Error in: http://localhost:58911/ProntoWeb/Reporte.aspx?ReportName=MapaArgentinaProcedenciaCartasPorte. Error Message:Cli 2
+__________________________
+
+Log Entry : 
+06/09/2017 13:58:28
+Error in: http://localhost:58911/ProntoWeb/Reporte.aspx?ReportName=MapaArgentinaProcedenciaCartasPorte. Error Message:Cli 3
+__________________________
+
+Log Entry : 
+06/09/2017 13:59:32
+Error in: http://localhost:58911/ProntoWeb/MapaComercialGoogleMaps.aspx. Error Message:Vamos bien?
+__________________________
+
+Log Entry : 
+06/09/2017 13:59:32
+Error in: http://localhost:58911/ProntoWeb/MapaComercialGoogleMaps.aspx. Error Message:http://bdlconsultores.sytes.net:10080/ReportServer - administrador - .xza2190lkm. - 
+__________________________
+
+Log Entry : 
+06/09/2017 13:59:32
+Error in: http://localhost:58911/ProntoWeb/MapaComercialGoogleMaps.aspx. Error Message:System.ArgumentNullException
+El valor no puede ser nulo.
+Nombre del parámetro: parameters
+   en Microsoft.Reporting.WebForms.ServerReport.SetParameters(IEnumerable`1 parameters)
+   en ProntoMVC.Reportes.MapaComercialGoogleMaps.Informe() en C:\Users\Administrador\Documents\bdl\pronto\prontoweb\ProntoWeb\MapaComercialGoogleMaps.aspx.vb:línea 497
+Microsoft.ReportViewer.WebForms
+__________________________
+
+Log Entry : 
+06/09/2017 14:03:14
+Error in: http://localhost:58911/ProntoWeb/MapaComercialGoogleMaps.aspx. Error Message:Vamos bien?
+__________________________
+
+Log Entry : 
+06/09/2017 14:03:14
+Error in: http://localhost:58911/ProntoWeb/MapaComercialGoogleMaps.aspx. Error Message:http://bdlconsultores.sytes.net:10080/ReportServer - administrador - .xza2190lkm. - 
+__________________________
+
+Log Entry : 
+06/09/2017 14:03:14
+Error in: http://localhost:58911/ProntoWeb/MapaComercialGoogleMaps.aspx. Error Message:System.ArgumentNullException
+El valor no puede ser nulo.
+Nombre del parámetro: parameters
+   en Microsoft.Reporting.WebForms.ServerReport.SetParameters(IEnumerable`1 parameters)
+   en ProntoMVC.Reportes.MapaComercialGoogleMaps.Informe() en C:\Users\Administrador\Documents\bdl\pronto\prontoweb\ProntoWeb\MapaComercialGoogleMaps.aspx.vb:línea 497
+Microsoft.ReportViewer.WebForms
+__________________________
+
+Log Entry : 
+06/09/2017 14:10:40
+Error in: http://localhost:58911/ProntoWeb/Reporte.aspx?ReportName=MapaArgentinaProcedenciaCartasPorte. Error Message:Cli 1
+__________________________
+
+Log Entry : 
+06/09/2017 14:10:40
+Error in: http://localhost:58911/ProntoWeb/Reporte.aspx?ReportName=MapaArgentinaProcedenciaCartasPorte. Error Message:Cli 2
+__________________________
+
+Log Entry : 
+06/09/2017 14:10:40
+Error in: http://localhost:58911/ProntoWeb/Reporte.aspx?ReportName=MapaArgentinaProcedenciaCartasPorte. Error Message:Cli 3
+__________________________
+
+Log Entry : 
+06/09/2017 14:20:14
+Error in: http://localhost:58911/Reserved.ReportViewerWebControl.axd?OpType=SessionKeepAlive&ControlID=f633f88233cb43479d05471711f1f40e. Error Message:Microsoft.Reporting.WebForms.AspNetSessionExpiredException
+ASP.NET session has expired or could not be found
+   en Microsoft.Reporting.WebForms.ViewerDataOperation..ctor()
+   en Microsoft.Reporting.WebForms.HttpHandler.GetHandler(String operationType)
+   en Microsoft.Reporting.WebForms.HttpHandler.ProcessRequest(HttpContext context)
+   en System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   en System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+Microsoft.ReportViewer.WebForms
+__________________________
+
+Log Entry : 
+06/09/2017 14:20:14
+Error in: http://localhost:58911/Reserved.ReportViewerWebControl.axd?OpType=SessionKeepAlive&ControlID=f633f88233cb43479d05471711f1f40e. Error Message:error del AspNetSessionExpiredException
+__________________________
+
+Log Entry : 
+06/09/2017 14:22:30
+Error in: http://localhost:58911/Reserved.ReportViewerWebControl.axd?OpType=SessionKeepAlive&ControlID=f81dbf7efc2041aaaf879aba3afe2784. Error Message:Microsoft.Reporting.WebForms.AspNetSessionExpiredException
+ASP.NET session has expired or could not be found
+   en Microsoft.Reporting.WebForms.ViewerDataOperation..ctor()
+   en Microsoft.Reporting.WebForms.HttpHandler.GetHandler(String operationType)
+   en Microsoft.Reporting.WebForms.HttpHandler.ProcessRequest(HttpContext context)
+   en System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   en System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+Microsoft.ReportViewer.WebForms
+__________________________
+
+Log Entry : 
+06/09/2017 14:22:30
+Error in: http://localhost:58911/Reserved.ReportViewerWebControl.axd?OpType=SessionKeepAlive&ControlID=f81dbf7efc2041aaaf879aba3afe2784. Error Message:error del AspNetSessionExpiredException
+__________________________
+
+Log Entry : 
+06/09/2017 14:22:30
+Error in: http://localhost:58911/Reserved.ReportViewerWebControl.axd?OpType=SessionKeepAlive&ControlID=50d427bd81d947deb7854ec630d36f8c&Mode=true. Error Message:Microsoft.Reporting.WebForms.AspNetSessionExpiredException
+ASP.NET session has expired or could not be found
+   en Microsoft.Reporting.WebForms.ViewerDataOperation..ctor()
+   en Microsoft.Reporting.WebForms.HttpHandler.GetHandler(String operationType)
+   en Microsoft.Reporting.WebForms.HttpHandler.ProcessRequest(HttpContext context)
+   en System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   en System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+Microsoft.ReportViewer.WebForms
+__________________________
+
+Log Entry : 
+06/09/2017 14:22:30
+Error in: http://localhost:58911/Reserved.ReportViewerWebControl.axd?OpType=SessionKeepAlive&ControlID=50d427bd81d947deb7854ec630d36f8c&Mode=true. Error Message:error del AspNetSessionExpiredException
+__________________________
+
+Log Entry : 
+06/09/2017 14:28:35
+Error in: http://localhost:58911/Reserved.ReportViewerWebControl.axd?OpType=SessionKeepAlive&ControlID=f633f88233cb43479d05471711f1f40e. Error Message:Microsoft.Reporting.WebForms.AspNetSessionExpiredException
+ASP.NET session has expired or could not be found
+   en Microsoft.Reporting.WebForms.ViewerDataOperation..ctor()
+   en Microsoft.Reporting.WebForms.HttpHandler.GetHandler(String operationType)
+   en Microsoft.Reporting.WebForms.HttpHandler.ProcessRequest(HttpContext context)
+   en System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   en System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+Microsoft.ReportViewer.WebForms
+__________________________
+
+Log Entry : 
+06/09/2017 15:05:32
+Error in: http://localhost:58911/ProntoWeb/Reporte.aspx?ReportName=MapaArgentinaProcedenciaCartasPorte. Error Message:Mariano esta logueado, pero lo redirijo al login porque faltan los datos de session. No deberia mejor mandarlo a SeleccionarEmpresa? Ademas, no hago el LogOut y le queda el cookie!!!
+__________________________
+
+Log Entry : 
+06/09/2017 15:05:33
+Error in: http://localhost:58911/ProntoWeb/Reporte.aspx?ReportName=MapaArgentinaProcedenciaCartasPorte. Error Message:Es conveniente cambiar por IPs a las canalizaciones sin nombre al usar conexiones remotas --> System.ArgumentException: El valor del argumento 'Length' debe ser mayor o igual que cero.
+   en Microsoft.VisualBasic.Strings.Mid(String str, Int32 Start, Int32 Length)
+   en Pronto.ERP.Bll.BDLMasterEmpresasManagerMigrar.AddEmpresaToSession(String IdEmpresa, Object& Session, String sConexBDLMaster, Object Yo) en C:\Users\Administrador\Documents\bdl\pronto\prontoweb\App_Code\vbcode\ManagerDebug\BDLMasterManagerAppCode.vb:línea 273 
+__________________________
+
+Log Entry : 
+06/09/2017 15:05:33
+Error in: http://localhost:58911/ProntoWeb/Reporte.aspx?ReportName=MapaArgentinaProcedenciaCartasPorte. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en ProntoFuncionesUIWeb.DatosDeSesion(String SC, String UsuarioNombre, Object session, String ConexBDLmaster, Login yo, Int32 idempresa) en C:\Users\Administrador\Documents\bdl\pronto\prontoweb\App_Code\vbcode\ManagerDebug\FuncionesUIWeb.vb:línea 1790
+App_SubCode_vbcode
+__________________________
+
+Log Entry : 
+06/09/2017 15:05:34
+Error in: http://localhost:58911/ProntoWeb/Reporte.aspx?ReportName=MapaArgentinaProcedenciaCartasPorte. Error Message:Cli 1
+__________________________
+
+Log Entry : 
+06/09/2017 15:05:34
+Error in: http://localhost:58911/ProntoWeb/Reporte.aspx?ReportName=MapaArgentinaProcedenciaCartasPorte. Error Message:Cli 2
+__________________________
+
+Log Entry : 
+06/09/2017 15:05:34
+Error in: http://localhost:58911/ProntoWeb/Reporte.aspx?ReportName=MapaArgentinaProcedenciaCartasPorte. Error Message:Cli 3
+__________________________
+
+Log Entry : 
+06/09/2017 15:05:34
+Error in: http://localhost:58911/ProntoWeb/Reporte.aspx?ReportName=MapaArgentinaProcedenciaCartasPorte. Error Message:System.InvalidOperationException
+No se ha inicializado la propiedad ConnectionString.
+   en System.Data.SqlClient.SqlConnection.PermissionDemand()
+   en System.Data.SqlClient.SqlConnectionFactory.PermissionDemand(DbConnection outerConnection)
+   en System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.Open()
+   en Pronto.ERP.Dal.GeneralDB.TraerDatos(String SC, String Nombre, Object[] ParametrosQueLeQuieroMandarAsql)
+System.Data
+__________________________
+
+Log Entry : 
+06/09/2017 15:05:34
+Error in: http://localhost:58911/ProntoWeb/Reporte.aspx?ReportName=MapaArgentinaProcedenciaCartasPorte. Error Message:System.ApplicationException
+Error en la ejecucion del SP: Parametros_TX_Parametros2BuscarClave conexion:   - System.InvalidOperationException: No se ha inicializado la propiedad ConnectionString.
+   en System.Data.SqlClient.SqlConnection.PermissionDemand()
+   en System.Data.SqlClient.SqlConnectionFactory.PermissionDemand(DbConnection outerConnection)
+   en System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.Open()
+   en Pronto.ERP.Dal.GeneralDB.TraerDatos(String SC, String Nombre, Object[] ParametrosQueLeQuieroMandarAsql)
+   en Pronto.ERP.Dal.GeneralDB.TraerDatos(String SC, String Nombre, Object[] ParametrosQueLeQuieroMandarAsql)
+   en Pronto.ERP.Bll.ParametroManager.TraerValorParametro2(String SC, String Campo) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ParametroManager.vb:línea 530
+   en Pronto.ERP.Bll.ParametroManager.TraerValorParametro2(String SC, eParam2 Campo) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ParametroManager.vb:línea 516
+   en Pronto.ERP.Bll.BDLMasterEmpresasManager.EmpresaPropietariaDeLaBase(String conexionBase) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\BDLMasterManager.vb:línea 25
+DataAccess
+__________________________
+
+Log Entry : 
+06/09/2017 15:05:34
+Error in: http://localhost:58911/ProntoWeb/Reporte.aspx?ReportName=MapaArgentinaProcedenciaCartasPorte. Error Message:System.InvalidOperationException
+No se ha inicializado la propiedad ConnectionString.
+   en System.Data.SqlClient.SqlConnection.PermissionDemand()
+   en System.Data.SqlClient.SqlConnectionFactory.PermissionDemand(DbConnection outerConnection)
+   en System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.Open()
+   en Pronto.ERP.Dal.GeneralDB.TraerDatos(String SC, String Nombre, Object[] ParametrosQueLeQuieroMandarAsql)
+System.Data
+__________________________
+
+Log Entry : 
+06/09/2017 15:05:35
+Error in: http://localhost:58911/ProntoWeb/Reporte.aspx?ReportName=MapaArgentinaProcedenciaCartasPorte. Error Message:System.ApplicationException
+Error en la ejecucion del SP: Parametros_TX_Parametros2BuscarClave conexion:   - System.InvalidOperationException: No se ha inicializado la propiedad ConnectionString.
+   en System.Data.SqlClient.SqlConnection.PermissionDemand()
+   en System.Data.SqlClient.SqlConnectionFactory.PermissionDemand(DbConnection outerConnection)
+   en System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.Open()
+   en Pronto.ERP.Dal.GeneralDB.TraerDatos(String SC, String Nombre, Object[] ParametrosQueLeQuieroMandarAsql)
+   en Pronto.ERP.Dal.GeneralDB.TraerDatos(String SC, String Nombre, Object[] ParametrosQueLeQuieroMandarAsql)
+   en Pronto.ERP.Bll.ParametroManager.TraerValorParametro2(String SC, String Campo) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ParametroManager.vb:línea 530
+   en Pronto.ERP.Bll.ParametroManager.TraerValorParametro2(String SC, eParam2 Campo) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ParametroManager.vb:línea 516
+   en Pronto.ERP.Bll.BDLMasterEmpresasManagerMigrar.SetLogoImage_MasterPage(Usuario Usuario) en C:\Users\Administrador\Documents\bdl\pronto\prontoweb\App_Code\vbcode\ManagerDebug\BDLMasterManagerAppCode.vb:línea 202
+   en MasterPage.ConfiguracionDeLaEmpresa() en C:\Users\Administrador\Documents\bdl\pronto\prontoweb\MasterPage.master.vb:línea 543
+   en MasterPage.Page_Load(Object sender, EventArgs e) en C:\Users\Administrador\Documents\bdl\pronto\prontoweb\MasterPage.master.vb:línea 60
+   en System.Web.UI.Control.OnLoad(EventArgs e)
+   en System.Web.UI.Control.LoadRecursive()
+   en System.Web.UI.Control.LoadRecursive()
+   en System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+DataAccess
+__________________________
+
+Log Entry : 
+06/09/2017 15:08:32
+Error in: http://localhost:58911/ProntoWeb/Reporte.aspx?ReportName=MapaArgentinaProcedenciaCartasPorte. Error Message:Mariano esta logueado, pero lo redirijo al login porque faltan los datos de session. No deberia mejor mandarlo a SeleccionarEmpresa? Ademas, no hago el LogOut y le queda el cookie!!!
+__________________________
+
+Log Entry : 
+06/09/2017 15:08:33
+Error in: http://localhost:58911/ProntoWeb/Reporte.aspx?ReportName=MapaArgentinaProcedenciaCartasPorte. Error Message:Es conveniente cambiar por IPs a las canalizaciones sin nombre al usar conexiones remotas --> System.ArgumentException: El valor del argumento 'Length' debe ser mayor o igual que cero.
+   en Microsoft.VisualBasic.Strings.Mid(String str, Int32 Start, Int32 Length)
+   en Pronto.ERP.Bll.BDLMasterEmpresasManagerMigrar.AddEmpresaToSession(String IdEmpresa, Object& Session, String sConexBDLMaster, Object Yo) en C:\Users\Administrador\Documents\bdl\pronto\prontoweb\App_Code\vbcode\ManagerDebug\BDLMasterManagerAppCode.vb:línea 273 
+__________________________
+
+Log Entry : 
+06/09/2017 15:08:33
+Error in: http://localhost:58911/ProntoWeb/Reporte.aspx?ReportName=MapaArgentinaProcedenciaCartasPorte. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en ProntoFuncionesUIWeb.DatosDeSesion(String SC, String UsuarioNombre, Object session, String ConexBDLmaster, Login yo, Int32 idempresa) en C:\Users\Administrador\Documents\bdl\pronto\prontoweb\App_Code\vbcode\ManagerDebug\FuncionesUIWeb.vb:línea 1790
+App_SubCode_vbcode
+__________________________
+
+Log Entry : 
+06/09/2017 15:08:33
+Error in: http://localhost:58911/ProntoWeb/Reporte.aspx?ReportName=MapaArgentinaProcedenciaCartasPorte. Error Message:Cli 1
+__________________________
+
+Log Entry : 
+06/09/2017 15:08:33
+Error in: http://localhost:58911/ProntoWeb/Reporte.aspx?ReportName=MapaArgentinaProcedenciaCartasPorte. Error Message:Cli 2
+__________________________
+
+Log Entry : 
+06/09/2017 15:08:33
+Error in: http://localhost:58911/ProntoWeb/Reporte.aspx?ReportName=MapaArgentinaProcedenciaCartasPorte. Error Message:Cli 3
+__________________________
+
+Log Entry : 
+06/09/2017 15:08:33
+Error in: http://localhost:58911/ProntoWeb/Reporte.aspx?ReportName=MapaArgentinaProcedenciaCartasPorte. Error Message:System.InvalidOperationException
+No se ha inicializado la propiedad ConnectionString.
+   en System.Data.SqlClient.SqlConnection.PermissionDemand()
+   en System.Data.SqlClient.SqlConnectionFactory.PermissionDemand(DbConnection outerConnection)
+   en System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.Open()
+   en Pronto.ERP.Dal.GeneralDB.TraerDatos(String SC, String Nombre, Object[] ParametrosQueLeQuieroMandarAsql)
+System.Data
+__________________________
+
+Log Entry : 
+06/09/2017 15:08:33
+Error in: http://localhost:58911/ProntoWeb/Reporte.aspx?ReportName=MapaArgentinaProcedenciaCartasPorte. Error Message:System.ApplicationException
+Error en la ejecucion del SP: Parametros_TX_Parametros2BuscarClave conexion:   - System.InvalidOperationException: No se ha inicializado la propiedad ConnectionString.
+   en System.Data.SqlClient.SqlConnection.PermissionDemand()
+   en System.Data.SqlClient.SqlConnectionFactory.PermissionDemand(DbConnection outerConnection)
+   en System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.Open()
+   en Pronto.ERP.Dal.GeneralDB.TraerDatos(String SC, String Nombre, Object[] ParametrosQueLeQuieroMandarAsql)
+   en Pronto.ERP.Dal.GeneralDB.TraerDatos(String SC, String Nombre, Object[] ParametrosQueLeQuieroMandarAsql)
+   en Pronto.ERP.Bll.ParametroManager.TraerValorParametro2(String SC, String Campo) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ParametroManager.vb:línea 530
+   en Pronto.ERP.Bll.ParametroManager.TraerValorParametro2(String SC, eParam2 Campo) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ParametroManager.vb:línea 516
+   en Pronto.ERP.Bll.BDLMasterEmpresasManager.EmpresaPropietariaDeLaBase(String conexionBase) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\BDLMasterManager.vb:línea 25
+DataAccess
+__________________________
+
+Log Entry : 
+06/09/2017 15:08:33
+Error in: http://localhost:58911/ProntoWeb/Reporte.aspx?ReportName=MapaArgentinaProcedenciaCartasPorte. Error Message:System.InvalidOperationException
+No se ha inicializado la propiedad ConnectionString.
+   en System.Data.SqlClient.SqlConnection.PermissionDemand()
+   en System.Data.SqlClient.SqlConnectionFactory.PermissionDemand(DbConnection outerConnection)
+   en System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.Open()
+   en Pronto.ERP.Dal.GeneralDB.TraerDatos(String SC, String Nombre, Object[] ParametrosQueLeQuieroMandarAsql)
+System.Data
+__________________________
+
+Log Entry : 
+06/09/2017 15:08:33
+Error in: http://localhost:58911/ProntoWeb/Reporte.aspx?ReportName=MapaArgentinaProcedenciaCartasPorte. Error Message:System.ApplicationException
+Error en la ejecucion del SP: Parametros_TX_Parametros2BuscarClave conexion:   - System.InvalidOperationException: No se ha inicializado la propiedad ConnectionString.
+   en System.Data.SqlClient.SqlConnection.PermissionDemand()
+   en System.Data.SqlClient.SqlConnectionFactory.PermissionDemand(DbConnection outerConnection)
+   en System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.Open()
+   en Pronto.ERP.Dal.GeneralDB.TraerDatos(String SC, String Nombre, Object[] ParametrosQueLeQuieroMandarAsql)
+   en Pronto.ERP.Dal.GeneralDB.TraerDatos(String SC, String Nombre, Object[] ParametrosQueLeQuieroMandarAsql)
+   en Pronto.ERP.Bll.ParametroManager.TraerValorParametro2(String SC, String Campo) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ParametroManager.vb:línea 530
+   en Pronto.ERP.Bll.ParametroManager.TraerValorParametro2(String SC, eParam2 Campo) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ParametroManager.vb:línea 516
+   en Pronto.ERP.Bll.BDLMasterEmpresasManagerMigrar.SetLogoImage_MasterPage(Usuario Usuario) en C:\Users\Administrador\Documents\bdl\pronto\prontoweb\App_Code\vbcode\ManagerDebug\BDLMasterManagerAppCode.vb:línea 202
+   en MasterPage.ConfiguracionDeLaEmpresa() en C:\Users\Administrador\Documents\bdl\pronto\prontoweb\MasterPage.master.vb:línea 543
+   en MasterPage.Page_Load(Object sender, EventArgs e) en C:\Users\Administrador\Documents\bdl\pronto\prontoweb\MasterPage.master.vb:línea 60
+   en System.Web.UI.Control.OnLoad(EventArgs e)
+   en System.Web.UI.Control.LoadRecursive()
+   en System.Web.UI.Control.LoadRecursive()
+   en System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+DataAccess
+__________________________
+
+Log Entry : 
+06/09/2017 15:08:43
+Error in: http://localhost:58911/ProntoWeb/CartasDePortes.aspx?tipo=Todas. Error Message:Mariano
+__________________________
+
+Log Entry : 
+06/09/2017 15:08:43
+Error in: http://localhost:58911/ProntoWeb/CartasDePortes.aspx?tipo=Todas. Error Message:Mariano esta logueado, pero lo redirijo al login porque faltan los datos de session. No deberia mejor mandarlo a SeleccionarEmpresa? Ademas, no hago el LogOut y le queda el cookie!!!
+__________________________
+
+Log Entry : 
+06/09/2017 15:08:43
+Error in: http://localhost:58911/ProntoWeb/CartasDePortes.aspx?tipo=Todas. Error Message:Es conveniente cambiar por IPs a las canalizaciones sin nombre al usar conexiones remotas --> System.ArgumentException: El valor del argumento 'Length' debe ser mayor o igual que cero.
+   en Microsoft.VisualBasic.Strings.Mid(String str, Int32 Start, Int32 Length)
+   en Pronto.ERP.Bll.BDLMasterEmpresasManagerMigrar.AddEmpresaToSession(String IdEmpresa, Object& Session, String sConexBDLMaster, Object Yo) en C:\Users\Administrador\Documents\bdl\pronto\prontoweb\App_Code\vbcode\ManagerDebug\BDLMasterManagerAppCode.vb:línea 273 
+__________________________
+
+Log Entry : 
+06/09/2017 15:08:43
+Error in: http://localhost:58911/ProntoWeb/CartasDePortes.aspx?tipo=Todas. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en ProntoFuncionesUIWeb.DatosDeSesion(String SC, String UsuarioNombre, Object session, String ConexBDLmaster, Login yo, Int32 idempresa) en C:\Users\Administrador\Documents\bdl\pronto\prontoweb\App_Code\vbcode\ManagerDebug\FuncionesUIWeb.vb:línea 1790
+App_SubCode_vbcode
+__________________________
+
+Log Entry : 
+06/09/2017 15:08:43
+Error in: http://localhost:58911/ProntoWeb/CartasDePortes.aspx?tipo=Todas. Error Message: -  Error en ExecDinamico. - System.InvalidOperationException: No se ha inicializado la propiedad ConnectionString.
+   en System.Data.SqlClient.SqlConnection.PermissionDemand()
+   en System.Data.SqlClient.SqlConnectionFactory.PermissionDemand(DbConnection outerConnection)
+   en System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.Open()
+   en Pronto.ERP.Dal.GeneralDB.ExecDinamico(String SC, String comandoSQLdinamico, Int32 timeoutSegundos) - SELECT DISTINCT PuntoVenta FROM PuntosVenta WHERE not PuntoVenta is null 15 0
+__________________________
+
+Log Entry : 
+06/09/2017 15:08:43
+Error in: http://localhost:58911/ProntoWeb/CartasDePortes.aspx?tipo=Todas. Error Message:No se ha inicializado la propiedad ConnectionString.
+__________________________
+
+Log Entry : 
+06/09/2017 15:08:43
+Error in: http://localhost:58911/ProntoWeb/CartasDePortes.aspx?tipo=Todas. Error Message:System.InvalidOperationException
+No se ha inicializado la propiedad ConnectionString.
+   en System.Data.SqlClient.SqlConnection.PermissionDemand()
+   en System.Data.SqlClient.SqlConnectionFactory.PermissionDemand(DbConnection outerConnection)
+   en System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.Open()
+   en Pronto.ERP.Dal.GeneralDB.ExecDinamico(String SC, String comandoSQLdinamico, Int32 timeoutSegundos)
+   en Pronto.ERP.Bll.EntidadManager.ExecDinamico(String SC, String sComandoDinamico, Int32 timeoutSegundos) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\EntidadManager.vb:línea 816
+   en PuntoVentaWilliams.IniciaComboPuntoVentaWilliams3(String SC) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 17636
+   en CartasDePortes.BindTypeDropDown() en C:\Users\Administrador\Documents\bdl\pronto\prontoweb\ProntoWeb\CartasDePortes.aspx.vb:línea 89
+   en CartasDePortes.Page_Load(Object sender, EventArgs e) en C:\Users\Administrador\Documents\bdl\pronto\prontoweb\ProntoWeb\CartasDePortes.aspx.vb:línea 47
+   en System.Web.UI.Control.OnLoad(EventArgs e)
+   en System.Web.UI.Control.LoadRecursive()
+   en System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+System.Data
+__________________________
+
+Log Entry : 
+06/09/2017 15:08:44
+Error in: http://localhost:58911/ProntoWeb/CartasDePortes.aspx?tipo=Todas. Error Message: -  Error en ExecDinamico. - System.Data.SqlClient.SqlException (0x80131904): No se puede abrir la base de datos "Williams2" solicitada por el inicio de sesión. Error de inicio de sesión.
+Error de inicio de sesión del usuario 'sa'.
+   en System.Data.SqlClient.SqlInternalConnectionTds..ctor(DbConnectionPoolIdentity identity, SqlConnectionString connectionOptions, SqlCredential credential, Object providerInfo, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance, SqlConnectionString userConnectionOptions, SessionData reconnectSessionData, DbConnectionPool pool, String accessToken, Boolean applyTransientFaultHandling)
+   en System.Data.SqlClient.SqlConnectionFactory.CreateConnection(DbConnectionOptions options, DbConnectionPoolKey poolKey, Object poolGroupProviderInfo, DbConnectionPool pool, DbConnection owningConnection, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionFactory.CreatePooledConnection(DbConnectionPool pool, DbConnection owningObject, DbConnectionOptions options, DbConnectionPoolKey poolKey, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionPool.CreateObject(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   en System.Data.ProviderBase.DbConnectionPool.UserCreateRequest(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   en System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.Open()
+   en Pronto.ERP.Dal.GeneralDB.ExecDinamico(String SC, String comandoSQLdinamico, Int32 timeoutSegundos)
+ClientConnectionId:8d6d6b77-99ed-4c33-9041-973f12f99511
+Error Number:4060,State:1,Class:11 - EXEC sp_who2 8 0
+__________________________
+
+Log Entry : 
+06/09/2017 15:08:44
+Error in: http://localhost:58911/ProntoWeb/CartasDePortes.aspx?tipo=Todas. Error Message:No se puede abrir la base de datos "Williams2" solicitada por el inicio de sesión. Error de inicio de sesión.
+Error de inicio de sesión del usuario 'sa'.
+__________________________
+
+Log Entry : 
+06/09/2017 15:08:44
+Error in: http://localhost:58911/ProntoWeb/CartasDePortes.aspx?tipo=Todas. Error Message:System.Data.SqlClient.SqlException
+No se puede abrir la base de datos "Williams2" solicitada por el inicio de sesión. Error de inicio de sesión.
+Error de inicio de sesión del usuario 'sa'.
+   en System.Data.SqlClient.SqlInternalConnectionTds..ctor(DbConnectionPoolIdentity identity, SqlConnectionString connectionOptions, SqlCredential credential, Object providerInfo, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance, SqlConnectionString userConnectionOptions, SessionData reconnectSessionData, DbConnectionPool pool, String accessToken, Boolean applyTransientFaultHandling)
+   en System.Data.SqlClient.SqlConnectionFactory.CreateConnection(DbConnectionOptions options, DbConnectionPoolKey poolKey, Object poolGroupProviderInfo, DbConnectionPool pool, DbConnection owningConnection, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionFactory.CreatePooledConnection(DbConnectionPool pool, DbConnection owningObject, DbConnectionOptions options, DbConnectionPoolKey poolKey, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionPool.CreateObject(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   en System.Data.ProviderBase.DbConnectionPool.UserCreateRequest(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   en System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.Open()
+   en Pronto.ERP.Dal.GeneralDB.ExecDinamico(String SC, String comandoSQLdinamico, Int32 timeoutSegundos)
+   en Pronto.ERP.Bll.EntidadManager.ExecDinamico(String SC, String sComandoDinamico, Int32 timeoutSegundos) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\EntidadManager.vb:línea 816
+   en CartaDePorteManager.Log_sp_who2(String sc) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 8222
+   en ASP.global_asax.Application_Error(Object sender, EventArgs e) en C:\Users\Administrador\Documents\bdl\pronto\prontoweb\global.asax:línea 433
+.Net SqlClient Data Provider
+__________________________
+
+Log Entry : 
+06/09/2017 15:09:32
+Error in: http://localhost:58911/ProntoWeb/Reporte.aspx?ReportName=MapaArgentinaProcedenciaCartasPorte. Error Message:Mariano esta logueado, pero lo redirijo al login porque faltan los datos de session. No deberia mejor mandarlo a SeleccionarEmpresa? Ademas, no hago el LogOut y le queda el cookie!!!
+__________________________
+
+Log Entry : 
+06/09/2017 15:09:32
+Error in: http://localhost:58911/ProntoWeb/Reporte.aspx?ReportName=MapaArgentinaProcedenciaCartasPorte. Error Message:Es conveniente cambiar por IPs a las canalizaciones sin nombre al usar conexiones remotas --> System.ArgumentException: El valor del argumento 'Length' debe ser mayor o igual que cero.
+   en Microsoft.VisualBasic.Strings.Mid(String str, Int32 Start, Int32 Length)
+   en Pronto.ERP.Bll.BDLMasterEmpresasManagerMigrar.AddEmpresaToSession(String IdEmpresa, Object& Session, String sConexBDLMaster, Object Yo) en C:\Users\Administrador\Documents\bdl\pronto\prontoweb\App_Code\vbcode\ManagerDebug\BDLMasterManagerAppCode.vb:línea 273 
+__________________________
+
+Log Entry : 
+06/09/2017 15:09:32
+Error in: http://localhost:58911/ProntoWeb/Reporte.aspx?ReportName=MapaArgentinaProcedenciaCartasPorte. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en ProntoFuncionesUIWeb.DatosDeSesion(String SC, String UsuarioNombre, Object session, String ConexBDLmaster, Login yo, Int32 idempresa) en C:\Users\Administrador\Documents\bdl\pronto\prontoweb\App_Code\vbcode\ManagerDebug\FuncionesUIWeb.vb:línea 1790
+App_SubCode_vbcode
+__________________________
+
+Log Entry : 
+06/09/2017 15:09:32
+Error in: http://localhost:58911/ProntoWeb/Reporte.aspx?ReportName=MapaArgentinaProcedenciaCartasPorte. Error Message:Cli 1
+__________________________
+
+Log Entry : 
+06/09/2017 15:09:32
+Error in: http://localhost:58911/ProntoWeb/Reporte.aspx?ReportName=MapaArgentinaProcedenciaCartasPorte. Error Message:Cli 2
+__________________________
+
+Log Entry : 
+06/09/2017 15:09:32
+Error in: http://localhost:58911/ProntoWeb/Reporte.aspx?ReportName=MapaArgentinaProcedenciaCartasPorte. Error Message:Cli 3
+__________________________
+
+Log Entry : 
+06/09/2017 15:09:32
+Error in: http://localhost:58911/ProntoWeb/Reporte.aspx?ReportName=MapaArgentinaProcedenciaCartasPorte. Error Message:System.InvalidOperationException
+No se ha inicializado la propiedad ConnectionString.
+   en System.Data.SqlClient.SqlConnection.PermissionDemand()
+   en System.Data.SqlClient.SqlConnectionFactory.PermissionDemand(DbConnection outerConnection)
+   en System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.Open()
+   en Pronto.ERP.Dal.GeneralDB.TraerDatos(String SC, String Nombre, Object[] ParametrosQueLeQuieroMandarAsql)
+System.Data
+__________________________
+
+Log Entry : 
+06/09/2017 15:09:32
+Error in: http://localhost:58911/ProntoWeb/Reporte.aspx?ReportName=MapaArgentinaProcedenciaCartasPorte. Error Message:System.ApplicationException
+Error en la ejecucion del SP: Parametros_TX_Parametros2BuscarClave conexion:   - System.InvalidOperationException: No se ha inicializado la propiedad ConnectionString.
+   en System.Data.SqlClient.SqlConnection.PermissionDemand()
+   en System.Data.SqlClient.SqlConnectionFactory.PermissionDemand(DbConnection outerConnection)
+   en System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.Open()
+   en Pronto.ERP.Dal.GeneralDB.TraerDatos(String SC, String Nombre, Object[] ParametrosQueLeQuieroMandarAsql)
+   en Pronto.ERP.Dal.GeneralDB.TraerDatos(String SC, String Nombre, Object[] ParametrosQueLeQuieroMandarAsql)
+   en Pronto.ERP.Bll.ParametroManager.TraerValorParametro2(String SC, String Campo) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ParametroManager.vb:línea 530
+   en Pronto.ERP.Bll.ParametroManager.TraerValorParametro2(String SC, eParam2 Campo) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ParametroManager.vb:línea 516
+   en Pronto.ERP.Bll.BDLMasterEmpresasManager.EmpresaPropietariaDeLaBase(String conexionBase) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\BDLMasterManager.vb:línea 25
+DataAccess
+__________________________
+
+Log Entry : 
+06/09/2017 15:09:32
+Error in: http://localhost:58911/ProntoWeb/Reporte.aspx?ReportName=MapaArgentinaProcedenciaCartasPorte. Error Message:System.InvalidOperationException
+No se ha inicializado la propiedad ConnectionString.
+   en System.Data.SqlClient.SqlConnection.PermissionDemand()
+   en System.Data.SqlClient.SqlConnectionFactory.PermissionDemand(DbConnection outerConnection)
+   en System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.Open()
+   en Pronto.ERP.Dal.GeneralDB.TraerDatos(String SC, String Nombre, Object[] ParametrosQueLeQuieroMandarAsql)
+System.Data
+__________________________
+
+Log Entry : 
+06/09/2017 15:09:32
+Error in: http://localhost:58911/ProntoWeb/Reporte.aspx?ReportName=MapaArgentinaProcedenciaCartasPorte. Error Message:System.ApplicationException
+Error en la ejecucion del SP: Parametros_TX_Parametros2BuscarClave conexion:   - System.InvalidOperationException: No se ha inicializado la propiedad ConnectionString.
+   en System.Data.SqlClient.SqlConnection.PermissionDemand()
+   en System.Data.SqlClient.SqlConnectionFactory.PermissionDemand(DbConnection outerConnection)
+   en System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.Open()
+   en Pronto.ERP.Dal.GeneralDB.TraerDatos(String SC, String Nombre, Object[] ParametrosQueLeQuieroMandarAsql)
+   en Pronto.ERP.Dal.GeneralDB.TraerDatos(String SC, String Nombre, Object[] ParametrosQueLeQuieroMandarAsql)
+   en Pronto.ERP.Bll.ParametroManager.TraerValorParametro2(String SC, String Campo) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ParametroManager.vb:línea 530
+   en Pronto.ERP.Bll.ParametroManager.TraerValorParametro2(String SC, eParam2 Campo) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ParametroManager.vb:línea 516
+   en Pronto.ERP.Bll.BDLMasterEmpresasManagerMigrar.SetLogoImage_MasterPage(Usuario Usuario) en C:\Users\Administrador\Documents\bdl\pronto\prontoweb\App_Code\vbcode\ManagerDebug\BDLMasterManagerAppCode.vb:línea 202
+   en MasterPage.ConfiguracionDeLaEmpresa() en C:\Users\Administrador\Documents\bdl\pronto\prontoweb\MasterPage.master.vb:línea 543
+   en MasterPage.Page_Load(Object sender, EventArgs e) en C:\Users\Administrador\Documents\bdl\pronto\prontoweb\MasterPage.master.vb:línea 60
+   en System.Web.UI.Control.OnLoad(EventArgs e)
+   en System.Web.UI.Control.LoadRecursive()
+   en System.Web.UI.Control.LoadRecursive()
+   en System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+DataAccess
+__________________________
+
+Log Entry : 
+06/09/2017 15:55:37
+Error in: http://localhost:58911/ProntoWeb/Principal.aspx. Error Message:Mariano esta logueado, pero lo redirijo al login porque faltan los datos de session. No deberia mejor mandarlo a SeleccionarEmpresa? Ademas, no hago el LogOut y le queda el cookie!!!
+__________________________
+
+Log Entry : 
+06/09/2017 15:55:38
+Error in: http://localhost:58911/ProntoWeb/CartasDePortes.aspx?tipo=Todas. Error Message:Mariano
+__________________________

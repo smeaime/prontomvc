@@ -228,8 +228,8 @@ Public Class WebServiceCartas
 
 
 
-    <WebMethod(Description:="Devuelve un listado de descargas con formato Cerealnet", EnableSession:=False)>
-    Public Function MapaGeoJSON() As String
+    <WebMethod(Description:="", EnableSession:=False)>
+    Public Function MapaGeoJSON(modoExportacion As String, fechadesde As Date, fechahasta As Date, idprocedencia As Integer, idarticulo As Integer, idclientefacturado As Integer, tonsdesde As Integer, tonshasta As Integer) As String
 
 
 
@@ -247,7 +247,7 @@ Public Class WebServiceCartas
 
 
             Dim s = New ServicioCartaPorte.servi()
-            Return s.MapaGeoJSON_DLL(Encriptar(scs))
+            Return s.MapaGeoJSON_DLL(Encriptar(scs), modoExportacion, fechadesde, fechahasta, idprocedencia, idarticulo, idclientefacturado, tonsdesde, tonshasta)
 
 
         Catch ex As Exception

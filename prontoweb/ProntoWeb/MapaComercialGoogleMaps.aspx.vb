@@ -352,7 +352,7 @@ Namespace ProntoMVC.Reportes
 
             ' reportName = Me.Request.QueryString("ReportName").NullSafeToString()
 
-            reportName = "Williams - Resumen de Totales Generales"
+            reportName = "MapaArgentinaProcedenciaCartasPorte"
 
 
             ReportViewerRemoto.ServerReport.ReportPath = "/Pronto informes/" & reportName
