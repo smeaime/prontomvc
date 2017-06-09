@@ -4835,44 +4835,40 @@ Formato localidad-provincia	destination	x
 
 
 
-        public virtual string MapaGeoJSON_DLL(string SC)
+        public virtual string MapaGeoJSON_DLL(string SC, string modoExportacion, DateTime fechadesde, DateTime fechahasta, 
+                                                    int idprocedencia, int idarticulo, int idclientefacturado, int tonsdesde, int tonshasta)
         {
-
-
-
-
+            
             var scEF = ProntoMVC.Data.Models.Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC));
 
             using (DemoProntoEntities db = new DemoProntoEntities(scEF))
             {
-                var iddestino = -1;
-                var desde = new DateTime(2014, 1, 10);
-                var hasta = new DateTime(2014, 1, 20);
-
+                
 
 
                 var q2 = (from x in db.fSQL_GetDataTableFiltradoYPaginado(
                                                         0, 9999999, 0, "", -1, -1,
-                                                        -1, -1, -1, -1, -1,
-                                                        iddestino, 0, "Ambas"
-                                                        , desde, hasta,
+                                                        -1, -1, -1, idarticulo, idprocedencia,
+                                                        -1, 0,  modoExportacion,
+                                                        fechadesde, fechahasta,
                                                         0, null, false, "", "",
                                                         -1, null, 0, "", "Todos")
                           from l in db.Localidades.Where(y => System.Data.Entity.SqlServer.SqlFunctions.StringConvert((double?)y.IdLocalidad).Trim() == x.Procedencia)
-                          group x by new { x.ProcedenciaDesc, x.ProcedenciaProvinciaDesc, x.Procedencia,  l.lat, l.lng } into grp
+                          group x by new { x.ProcedenciaDesc, x.ProcedenciaProvinciaDesc, x.Procedencia, l.lat, l.lng } into grp
                           select new
                           {
                               total = grp.Sum(t => t.NetoProc),
                               grp.Key.ProcedenciaDesc,
                               grp.Key.ProcedenciaProvinciaDesc,
                               grp.Key.Procedencia,
-                              grp.Key.lat,grp.Key.lng
+                              grp.Key.lat,
+                              grp.Key.lng
                           }
                          ).ToList();
 
 
 
-                
+
 
 
                 System.Web.Script.Serialization.JavaScriptSerializer jsonSerializer = new System.Web.Script.Serialization.JavaScriptSerializer();
@@ -4976,6 +4972,71 @@ order by kilos desc
 
 
             return "";
+
+
+        }
+
+
+
+
+        private class xxzc
+        {
+            public string prov;
+            public string loc;
+            public int id;
+            public decimal? lat;
+            public decimal? lng;
+        }
+
+
+        public void ReasignarGeocodeLocalidades(bool bIncluirLasQueYaTienenGeocode, string SC)
+        {
+
+
+
+            var scEF = ProntoMVC.Data.Models.Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC));
+            DemoProntoEntities db = new DemoProntoEntities(scEF);
+
+
+            List<xxzc> locs = (from l in db.Localidades
+                               join p in db.Provincias on l.IdProvincia equals p.IdProvincia
+                               // join p in db.Partidos on l.IdPartido equals p.IdPartido
+                               select new xxzc { prov = p.Nombre, loc = l.Nombre, id = l.IdLocalidad, lat = l.lat, lng = l.lng }).ToList();
+
+
+
+            foreach (xxzc l in locs)
+            {
+                string address = "";
+                try
+                {
+                    if (l.lat != null && !bIncluirLasQueYaTienenGeocode) continue;
+
+                    // actualizar geocode (long,lat) de la tabla localidades
+
+                    address = l.loc + ", " + l.prov + ", Argentina"; // = "123 something st, somewhere";
+                    var requestUri = string.Format("http://maps.googleapis.com/maps/api/geocode/xml?address={0}&sensor=false", Uri.EscapeDataString(address));
+
+                    var request = WebRequest.Create(requestUri);
+                    var response = request.GetResponse();
+                    var xdoc = System.Xml.Linq.XDocument.Load(response.GetResponseStream());
+
+                    var result = xdoc.Element("GeocodeResponse").Element("result");
+                    var locationElement = result.Element("geometry").Element("location");
+                    var lat = locationElement.Element("lat");
+                    var lng = locationElement.Element("lng");
+
+                    EntidadManager.ExecDinamico(SC, "UPDATE Localidades SET lat=" + lat.Value + " ,lng=" + lng.Value + " WHERE idlocalidad=" + l.id);
+                }
+                catch (Exception ex)
+                {
+                    ErrHandler2.WriteError(address);
+                }
+
+
+
+            }
+
 
 
         }

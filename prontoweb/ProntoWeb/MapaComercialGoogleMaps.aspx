@@ -17,7 +17,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
             
             <br />
-            <a href="GoogleMapsHtml.html">ver mapa  </a>
+            <a href="GoogleMapsHtml.html" target="_blank">ver mapa  </a>
             <br />
             <br />
             reasignar geocode de localidades
