@@ -1,0 +1,205 @@
+
+Log Entry : 
+06/09/2017 14:20:25
+Error in: . Error Message:ARRECIFES BS AS, BUENOS AIRES ,Argentina
+__________________________
+
+Log Entry : 
+06/09/2017 14:22:20
+Error in: . Error Message:ERECHIN, BUENOS AIRES ,Argentina
+__________________________
+
+Log Entry : 
+06/09/2017 14:31:24
+Error in: . Error Message:ADROGUE, BUENOS AIRES ,Argentina
+__________________________
+
+Log Entry : 
+06/09/2017 14:31:37
+Error in: . Error Message:ARRECIFES BS AS, BUENOS AIRES ,Argentina
+__________________________
+
+Log Entry : 
+06/09/2017 14:33:05
+Error in: . Error Message:ERECHIN, BUENOS AIRES ,Argentina
+__________________________
+
+Log Entry : 
+06/09/2017 14:35:00
+Error in: . Error Message:LA BRIANZA, CORDOBA ,Argentina
+__________________________
+
+Log Entry : 
+06/09/2017 14:35:34
+Error in: . Error Message:ONCATIVA, BUENOS AIRES ,Argentina
+__________________________
+
+Log Entry : 
+06/09/2017 14:38:11
+Error in: . Error Message:ARRECIFES BS AS, BUENOS AIRES, Argentina
+__________________________
+
+Log Entry : 
+06/09/2017 14:38:14
+Error in: . Error Message:ERECHIN, BUENOS AIRES, Argentina
+__________________________
+
+Log Entry : 
+06/09/2017 14:38:16
+Error in: . Error Message:LA BRIANZA, CORDOBA, Argentina
+__________________________
+
+Log Entry : 
+06/09/2017 14:38:18
+Error in: . Error Message:ONCATIVA, BUENOS AIRES, Argentina
+__________________________
+
+Log Entry : 
+06/09/2017 14:38:19
+Error in: . Error Message:CAMPO SALUSSO, LA PAMPA, Argentina
+__________________________
+
+Log Entry : 
+06/09/2017 14:38:46
+Error in: . Error Message:BARRANQUITAS, LA RIOJA, Argentina
+__________________________
+
+Log Entry : 
+06/09/2017 14:38:49
+Error in: . Error Message:CAMPO COYUNDA, CORDOBA, Argentina
+__________________________
+
+Log Entry : 
+06/09/2017 14:38:50
+Error in: . Error Message:CAMPO BOTTO, SANTA FE , Argentina
+__________________________
+
+Log Entry : 
+06/09/2017 14:40:22
+Error in: . Error Message:CAÑADA LA RICA, BUENOS AIRES, Argentina
+__________________________
+
+Log Entry : 
+06/09/2017 14:40:26
+Error in: . Error Message:CARLOS MARIA NAON, SANTA CRUZ, Argentina
+__________________________
+
+Log Entry : 
+06/09/2017 14:40:28
+Error in: . Error Message:COPETONAS - BS AS, BUENOS AIRES, Argentina
+__________________________
+
+Log Entry : 
+06/09/2017 14:40:30
+Error in: . Error Message:CAMPO HORQUESCO, SANTA FE , Argentina
+__________________________
+
+Log Entry : 
+06/09/2017 14:40:34
+Error in: . Error Message:COLONIA DOLORES  GRAL. CABRERA, CORDOBA, Argentina
+__________________________
+
+Log Entry : 
+06/09/2017 14:40:37
+Error in: . Error Message:BARRIO RUTA 90, CHACO, Argentina
+__________________________
+
+Log Entry : 
+06/09/2017 14:40:40
+Error in: . Error Message:HUMBERTO I"	2309	FACT ENV A BLD SA", SANTA FE , Argentina
+__________________________
+
+Log Entry : 
+06/09/2017 14:40:42
+Error in: . Error Message:ARROYO CARABALLO, BUENOS AIRES, Argentina
+__________________________
+
+Log Entry : 
+06/09/2017 14:40:44
+Error in: . Error Message:ARROYO ANDRESITO, BUENOS AIRES, Argentina
+__________________________
+
+Log Entry : 
+06/09/2017 14:44:28
+Error in: . Error Message:COLONIA CALCHAQUI, CORDOBA, Argentina
+__________________________
+
+Log Entry : 
+06/09/2017 14:44:30
+Error in: . Error Message:HARAS EL SALASO, BUENOS AIRES, Argentina
+__________________________
+
+Log Entry : 
+06/09/2017 14:44:32
+Error in: . Error Message:ANTONIO CATALANO, CORDOBA, Argentina
+__________________________
+
+Log Entry : 
+06/09/2017 14:44:34
+Error in: . Error Message:COLONIA LOS TRES USTARIS, BUENOS AIRES, Argentina
+__________________________
+
+Log Entry : 
+06/09/2017 14:44:36
+Error in: . Error Message:COLONIA BERNARDINO RIVADAVIA, CHACO, Argentina
+__________________________
+
+Log Entry : 
+06/09/2017 14:44:39
+Error in: . Error Message:ALELOY, CHACO, Argentina
+__________________________
+
+Log Entry : 
+06/09/2017 14:44:40
+Error in: . Error Message:BARRIO INDIO TROMPA, BUENOS AIRES, Argentina
+__________________________
+
+Log Entry : 
+06/09/2017 14:44:43
+Error in: . Error Message:BARADERO (Dpto. Tala), SALTA , Argentina
+__________________________
+
+Log Entry : 
+06/09/2017 14:44:45
+Error in: . Error Message:BARRIO CREMONTE, ENTRE RIOS, Argentina
+__________________________
+
+Log Entry : 
+06/09/2017 14:44:47
+Error in: . Error Message:GALPON CHICO, CORDOBA, Argentina
+__________________________
+
+Log Entry : 
+06/09/2017 14:44:50
+Error in: . Error Message:COLONIA LA MAGDALENA DE ORO, CORDOBA, Argentina
+__________________________
+
+Log Entry : 
+06/09/2017 14:44:52
+Error in: . Error Message:HAASENKAMP, SANTIAGO DEL ESTERO, Argentina
+__________________________
+
+Log Entry : 
+06/09/2017 14:44:55
+Error in: . Error Message:CAMPO EL JACARANDA, CHACO, Argentina
+__________________________
+
+Log Entry : 
+06/09/2017 14:53:21
+Error in: . Error Message:COLONIA ARGENTINA, TUCUMAN, Argentina
+__________________________
+
+Log Entry : 
+06/09/2017 14:53:24
+Error in: . Error Message:CORRALITO, NEUQUEN01, Argentina
+__________________________
+
+Log Entry : 
+06/09/2017 14:53:26
+Error in: . Error Message:ARROYO BOTIJA FALSA, BUENOS AIRES, Argentina
+__________________________
+
+Log Entry : 
+06/09/2017 14:53:30
+Error in: . Error Message:ALTO LA POLVORA, TUCUMAN, Argentina
+__________________________

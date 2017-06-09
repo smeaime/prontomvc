@@ -865,63 +865,16 @@ namespace ProntoMVC.Tests
 
 
 
-        class xxzc
-        {
-            public string prov;
-            public string loc;
-            public int id;
-            public decimal? lat;
-            public decimal? lng;
-        }
+
 
 
         [TestMethod]
         public void mapa_con_googlemaps_40288()
         {
+            //agregar en la grilla de localidades la edicion de lat y lng
 
-            var scEF = ProntoMVC.Data.Models.Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC));
-            DemoProntoEntities db = new DemoProntoEntities(scEF);
-
-
-            List<xxzc> locs = (from l in db.Localidades
-                               join p in db.Provincias on l.IdProvincia equals p.IdProvincia
-                               // join p in db.Partidos on l.IdPartido equals p.IdPartido
-                               select new xxzc { prov = p.Nombre, loc = l.Nombre, id = l.IdLocalidad, lat = l.lat, lng = l.lng }).ToList();
-
-
-
-            foreach (xxzc l in locs)
-            {
-                string address = "";
-                try
-                {
-                    if (l.lat != null) continue;
-
-                    // actualizar geocode (long,lat) de la tabla localidades
-
-                    address = l.loc + ", " + l.prov + " ,Argentina"; // = "123 something st, somewhere";
-                    var requestUri = string.Format("http://maps.googleapis.com/maps/api/geocode/xml?address={0}&sensor=false", Uri.EscapeDataString(address));
-
-                    var request = WebRequest.Create(requestUri);
-                    var response = request.GetResponse();
-                    var xdoc = XDocument.Load(response.GetResponseStream());
-
-                    var result = xdoc.Element("GeocodeResponse").Element("result");
-                    var locationElement = result.Element("geometry").Element("location");
-                    var lat = locationElement.Element("lat");
-                    var lng = locationElement.Element("lng");
-
-                    EntidadManager.ExecDinamico(SC, "UPDATE Localidades SET lat=" + lat.Value + " ,lng=" + lng.Value + " WHERE idlocalidad=" + l.id);
-                }
-                catch (Exception ex)
-                {
-                    ErrHandler2.WriteError(address);
-                }
-
-
-
-            }
-
+            var s = new ServicioCartaPorte.servi();
+            s.ReasignarGeocodeLocalidades(false, SC);
         }
 
 
@@ -930,9 +883,18 @@ namespace ProntoMVC.Tests
         public void mapa_con_googlemaps_40288_2()
         {
 
+            string modoExportacion = "Ambos";
+            DateTime fechadesde = new DateTime(2016, 11, 1);
+            DateTime fechahasta = new DateTime(2016, 11, 1);
+            int idprocedencia = -1;
+            int idarticulo = -1;
+            int idclientefacturado = -1;
+            int tonsdesde = 1000;
+            int tonshasta = 999999;
+
             // llamar al mapa
             var s = new ServicioCartaPorte.servi();
-            var q = s.MapaGeoJSON_DLL(SC);
+            var q = s.MapaGeoJSON_DLL(SC, modoExportacion, fechadesde, fechahasta, idprocedencia, idarticulo, idclientefacturado, tonsdesde, tonshasta);
 
         }
 
