@@ -5,17 +5,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="initial-scale=1.0" />
     <style type="text/css">
-         /* Always set the map height explicitly to define the size of the div
+        /* Always set the map height explicitly to define the size of the div
         * element that contains the map. */
-         #map {
-             height: 100%;
-         }
-         /* Optional: Makes the sample page fill the window. */
-         html, body {
-             height: 100%;
-             margin: 0;
-             padding: 0;
-         }
+        #map {
+            height: 100%;
+        }
+        /* Optional: Makes the sample page fill the window. */
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
     </style>
 </head>
 <body id="map-container">
@@ -23,7 +23,6 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
 
-    <!--<script src="https://cdn.rawgit.com/googlemaps/v3-utility-library/master/infobox/src/infobox.js"></script>-->
 
     <!--<script type="text/javascript"
             src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDWNbUasHY_ay5SMIpz02pu534Y1cif72k&libraries=visualization&callback=initMap">
@@ -46,7 +45,7 @@
 
 
         function initMap() {
-     
+
 
             map = new google.maps.Map(document.getElementById('map'), {
                 center: { lat: -32, lng: -60 },
@@ -88,7 +87,7 @@
 
                     for (var city in dat) {
                         // Add the circle for this city to the map.
-                        if (dat[city].lat==null) continue;
+                        if (dat[city].lat == null) continue;
 
                         var pos = { lat: dat[city].lat, lng: dat[city].lng }
 
@@ -105,10 +104,14 @@
 
                             var marker = new google.maps.Marker({
                                 position: { lat: dat[city].lat, lng: dat[city].lng },
-                                label: dat[city].ProcedenciaDesc,
+                                label: {
+                                    text: dat[city].ProcedenciaDesc + ' ' + parseInt(dat[city].total / 1000) + 'Tn',
+                                    color: 'blue',
+                                    fontSize: "12px"
+                                },
+                                icon: "",
                                 map: map
                             });
-
 
 
                             var circle = new google.maps.Circle({
@@ -121,7 +124,7 @@
                                 map: map,
 
                                 center: { lat: dat[city].lat, lng: dat[city].lng },
-                                radius: Math.sqrt(dat[city].total) * 50
+                                radius: Math.sqrt(dat[city].total) * 40
 
                             });
 
@@ -129,27 +132,29 @@
                             marker.setVisible(false);
 
 
-                            //var labelText = "1";
-                            //var myOptions = {
-                            //    content: dat[city].ProcedenciaDesc,
-                            //    boxStyle: {
-                            //        border: "none",
-                            //        textAlign: "center",
-                            //        fontSize: "10pt",
-                            //        width: "50px"
-                            //    },
-                            //    disableAutoPan: true,
-                            //    pixelOffset: new google.maps.Size(-25, -5),
-                            //    position: pos,
-                            //    closeBoxURL: "",
-                            //    isHidden: false,
-                            //    pane: "floatPane",
-                            //    enableEventPropagation: true
-                            //};
 
-                            //var ibLabel = new InfoBox(myOptions);
-                            //ibLabel.open(map);
+                            if (false) {
+                                var labelText = "1";
+                                var myOptions = {
+                                    content: dat[city].ProcedenciaDesc,
+                                    boxStyle: {
+                                        border: "none",
+                                        textAlign: "center",
+                                        fontSize: "10pt",
+                                        width: "50px"
+                                    },
+                                    disableAutoPan: true,
+                                    pixelOffset: new google.maps.Size(-25, -5),
+                                    position: pos,
+                                    closeBoxURL: "",
+                                    isHidden: false,
+                                    pane: "floatPane",
+                                    enableEventPropagation: true
+                                };
 
+                                var ibLabel = new InfoBox(myOptions);
+                                ibLabel.open(map);
+                            }
 
 
                         }
@@ -221,7 +226,9 @@
 
     </script>
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDWNbUasHY_ay5SMIpz02pu534Y1cif72k&libraries=visualization&callback=initMap"></script>
-    <script src="https://github.com/googlemaps/js-map-label/blob/gh-pages/src/maplabel-compiled.js"></script>
+    <!--<script src="https://github.com/googlemaps/js-map-label/blob/gh-pages/src/maplabel-compiled.js"></script>-->
+    <!--<script async defer  src="https://cdn.rawgit.com/googlemaps/v3-utility-library/master/infobox/src/infobox.js"></script>-->
+
 </body>
 </html>
 
@@ -229,7 +236,7 @@
 
 
 
-<!-- 
+<!--
 
 
 <!DOCTYPE html>
