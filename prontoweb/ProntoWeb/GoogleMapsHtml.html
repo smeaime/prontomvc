@@ -28,7 +28,11 @@
             src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDWNbUasHY_ay5SMIpz02pu534Y1cif72k&libraries=visualization&callback=initMap">
     </script>-->
 
-
+    <div id="floating-panel">
+        <input onclick="clearMarkers();" type=button value="Hide Markers">
+        <input onclick="showMarkers();" type=button value="Show All Markers">
+        <input onclick="deleteMarkers();" type=button value="Delete Markers">
+    </div>
 
     <div id="map"></div>
 
@@ -41,7 +45,7 @@
 
 
         var map
-
+        var markers = [];
 
 
         function initMap() {
@@ -61,6 +65,32 @@
 
 
 
+        // Sets the map on all markers in the array.
+        function setMapOnAll(map) {
+            for (var i = 0; i < markers.length; i++) {
+                markers[i].setMap(map);
+            }
+        }
+
+        // Removes the markers from the map, but keeps them in the array.
+        function clearMarkers() {
+            setMapOnAll(null);
+        }
+
+        // Shows any markers currently in the array.
+        function showMarkers() {
+            setMapOnAll(map);
+        }
+
+        // Deletes all markers in the array by removing references to them.
+        function deleteMarkers() {
+            clearMarkers();
+            markers = [];
+        }
+
+
+
+
 
         function datos() {
 
@@ -75,19 +105,30 @@
                 contentType: 'application/json; charset=utf-8',
                 url: "WebServiceCartas.asmx/MapaGeoJSON",
                 dataType: 'json',
-                //data: JSON.stringify({
-                //    idcarta: gridId,
-                //    idsituacion: datos.idsituacion,
-                //    sObservacionesSituacion: dataFromTheRow.ObservacionesSituacion
-                //}),
+                data: JSON.stringify({
+                    modoExportacion: "Ambos",
+                    fechadesde: "2017/1/1",
+                    fechahasta: "2017/2/1",
+                    idprocedencia: -1,
+                    idarticulo: -1,
+                    idclientefacturado: -1,
+                    tonsdesde: 0,
+                    tonshasta: 999999
+                }),
                 success: function (result) {
                     var dat = JSON.parse(result.d);
                     var heatMapData = [];// [ { location: new google.maps.LatLng(0, 0), weight: 0 } ] ;
                     var hcont = 0;
 
+                    var maxtotal = Math.max.apply(Math, dat.map(function (o) { return o.total; }))
+
+
                     for (var city in dat) {
                         // Add the circle for this city to the map.
                         if (dat[city].lat == null) continue;
+
+
+
 
                         var pos = { lat: dat[city].lat, lng: dat[city].lng }
 
@@ -109,7 +150,7 @@
                                     color: 'blue',
                                     fontSize: "12px"
                                 },
-                                icon: "",
+                                icon: "/imagenes/vacio.png",
                                 map: map
                             });
 
@@ -124,13 +165,15 @@
                                 map: map,
 
                                 center: { lat: dat[city].lat, lng: dat[city].lng },
-                                radius: Math.sqrt(dat[city].total) * 40
+                                radius: Math.sqrt(dat[city].total / maxtotal) * 50000  //Math.sqrt(
 
                             });
 
                             circle.bindTo('center', marker, 'position');
-                            marker.setVisible(false);
+                            marker.setVisible(true);
 
+
+                            markers.push(marker);
 
 
                             if (false) {
@@ -177,6 +220,12 @@
                 error: function (xhr, textStatus, exceptionThrown) {
                 },
             });
+
+
+
+
+
+
 
 
 
