@@ -14,10 +14,24 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
     <asp:UpdatePanel ID="UpdatePanelResumen" runat="server">
         <ContentTemplate>
             <br />
-
+      
             
             <br />
-            <a href="GoogleMapsHtml.html" target="_blank">ver mapa  </a>
+
+            <a href="GoogleMapsHtml.html?modoExportacion=Ambas&idprocedencia=-1&fechadesde=2017/1/1&fechahasta=2017/3/1&idarticulo=-1&idclientefacturado=-1&tonsdesde=0&tonshasta=999999" target="_blank">ver mapa  </a>
+
+
+            <script>
+                function sdfsfd()
+                {
+                    var link= $("#")
+
+
+                }
+
+
+            </script>
+
             <br />
             <br />
             reasignar geocode de localidades
@@ -215,13 +229,13 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                                 <td class="EncabezadoCell" colspan="">Tons Desde
                                 </td>
                                 <td class="EncabezadoCell" style="width: 50px">
-                                    <asp:TextBox ID="txtTopeClientesDifDestinos" runat="server" autocomplete="off" AutoPostBack="false"
+                                    <asp:TextBox ID="txtTonsDesde" runat="server" autocomplete="off" AutoPostBack="false"
                                         CssClass="CssTextBox" TabIndex="8" Width="40px">5</asp:TextBox>
                                 </td>
                                 <td class="EncabezadoCell" colspan="">Tons Hasta
                                 </td>
                                 <td class="EncabezadoCell" style="width: 50px">
-                                    <asp:TextBox ID="TextBox1" runat="server" autocomplete="off" AutoPostBack="false"
+                                    <asp:TextBox ID="txtTonsHasta" runat="server" autocomplete="off" AutoPostBack="false"
                                         CssClass="CssTextBox" TabIndex="8" Width="40px">5</asp:TextBox>
                                 </td>
                             </tr>

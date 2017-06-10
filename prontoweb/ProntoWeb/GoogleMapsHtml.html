@@ -48,6 +48,9 @@
         var markers = [];
 
 
+
+        
+
         function initMap() {
 
 
@@ -89,10 +92,17 @@
         }
 
 
+        var infowindow = new google.maps.InfoWindow(
+          {
+              content: 'safasdfasgasg',
+              size: new google.maps.Size(150, 50)
+          });
+
 
 
 
         function datos() {
+
 
             var dataRows;
             //var dataRows = [{
@@ -100,20 +110,27 @@
             //    geom: "LINESTRING(-1.131510412 52.65531, -1.13286 52.65559)"
             //}];
 
+            var url_string = document.location.href  // "http://www.example.com/t.html?a=1&b=3&c=m2-m3-m4-m5";
+            var url = new URL(url_string);
+            var c = url.searchParams.get("modoExportacion");
+            console.log(c);
+
+
+
             $.ajax({
                 type: 'POST',
                 contentType: 'application/json; charset=utf-8',
                 url: "WebServiceCartas.asmx/MapaGeoJSON",
                 dataType: 'json',
                 data: JSON.stringify({
-                    modoExportacion: "Ambos",
-                    fechadesde: "2017/1/1",
-                    fechahasta: "2017/2/1",
-                    idprocedencia: -1,
-                    idarticulo: -1,
-                    idclientefacturado: -1,
-                    tonsdesde: 0,
-                    tonshasta: 999999
+                    modoExportacion: url.searchParams.get("modoExportacion"),
+                    fechadesde: url.searchParams.get("fechadesde"),
+                    fechahasta: url.searchParams.get("fechahasta"),
+                    idprocedencia: url.searchParams.get("idprocedencia"),
+                    idarticulo: url.searchParams.get("idarticulo"),
+                    idclientefacturado: url.searchParams.get("idclientefacturado"),
+                    tonsdesde: url.searchParams.get("tonsdesde"),
+                    tonshasta: url.searchParams.get("tonshasta")
                 }),
                 success: function (result) {
                     var dat = JSON.parse(result.d);
@@ -144,11 +161,11 @@
 
 
                             var marker = new google.maps.Marker({
-                                position: { lat: dat[city].lat, lng: dat[city].lng },
+                                position: pos,
                                 label: {
                                     text: dat[city].ProcedenciaDesc + ' ' + parseInt(dat[city].total / 1000) + 'Tn',
                                     color: 'blue',
-                                    fontSize: "12px"
+                                    fontSize: "14px"
                                 },
                                 icon: "/imagenes/vacio.png",
                                 map: map
@@ -163,14 +180,29 @@
                                 fillColor: '#FF0000',
                                 fillOpacity: 0.35,
                                 map: map,
-
-                                center: { lat: dat[city].lat, lng: dat[city].lng },
+                                clickable: true,
+                                center: pos,
                                 radius: Math.sqrt(dat[city].total / maxtotal) * 50000  //Math.sqrt(
 
                             });
 
                             circle.bindTo('center', marker, 'position');
                             marker.setVisible(true);
+
+
+                            google.maps.event.addListener(circle, 'click', function (ev) {
+                                infoWindow.setPosition(pos);
+                                infoWindow.open(map);
+                            });
+
+                            marker.addListener('mouseover', function () {
+                                infowindow.open(map, this);
+                            });
+
+                            // assuming you also want to hide the infowindow when user mouses-out
+                            marker.addListener('mouseout', function () {
+                                infowindow.close();
+                            });
 
 
                             markers.push(marker);
@@ -216,41 +248,16 @@
                     heatmap.setMap(map);
 
 
+
+                    clearMarkers();
+
                 },
                 error: function (xhr, textStatus, exceptionThrown) {
                 },
             });
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-            //features = [];
-            //dataRows.forEach(function (row) {
-            //    var coords = row.geom.replace("(", "[").replace(")", "]").substring(row.geom.indexOf("("), row.geom.length);
-            //    features.push({
-            //        "type": "Feature",
-            //        "properties": {
-            //            "id": row.id
-            //        },
-            //        "geometry": {
-            //            "type": row.geom.substring(0, row.geom.indexOf("(")),
-            //            "coordinates": coords
-            //        }
-            //    });
-            //});
-
-            //return features;
+            
         }
 
 
