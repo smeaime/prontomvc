@@ -1213,3 +1213,103 @@ Log Entry :
 06/09/2017 15:55:38
 Error in: http://localhost:58911/ProntoWeb/CartasDePortes.aspx?tipo=Todas. Error Message:Mariano
 __________________________
+
+Log Entry : 
+06/09/2017 16:15:48
+Error in: http://localhost:58911/ProntoWeb/MapaComercialGoogleMaps.aspx. Error Message:Vamos bien?
+__________________________
+
+Log Entry : 
+06/09/2017 16:15:48
+Error in: http://localhost:58911/ProntoWeb/MapaComercialGoogleMaps.aspx. Error Message:http://bdlconsultores.sytes.net:10080/ReportServer - administrador - .xza2190lkm. - 
+__________________________
+
+Log Entry : 
+06/09/2017 16:15:52
+Error in: http://localhost:58911/ProntoWeb/MapaComercialGoogleMaps.aspx. Error Message:System.ArgumentNullException
+El valor no puede ser nulo.
+Nombre del parámetro: parameters
+   en Microsoft.Reporting.WebForms.ServerReport.SetParameters(IEnumerable`1 parameters)
+   en ProntoMVC.Reportes.MapaComercialGoogleMaps.Informe() en C:\Users\Administrador\Documents\bdl\pronto\prontoweb\ProntoWeb\MapaComercialGoogleMaps.aspx.vb:línea 497
+Microsoft.ReportViewer.WebForms
+__________________________
+
+Log Entry : 
+06/09/2017 16:33:00
+Error in: http://localhost:58911/ProntoWeb/MapaComercialGoogleMaps.aspx. Error Message:Vamos bien?
+__________________________
+
+Log Entry : 
+06/09/2017 16:33:00
+Error in: http://localhost:58911/ProntoWeb/MapaComercialGoogleMaps.aspx. Error Message:http://bdlconsultores.sytes.net:10080/ReportServer - administrador - .xza2190lkm. - 
+__________________________
+
+Log Entry : 
+06/09/2017 16:33:03
+Error in: http://localhost:58911/ProntoWeb/MapaComercialGoogleMaps.aspx. Error Message:System.ArgumentNullException
+El valor no puede ser nulo.
+Nombre del parámetro: parameters
+   en Microsoft.Reporting.WebForms.ServerReport.SetParameters(IEnumerable`1 parameters)
+   en ProntoMVC.Reportes.MapaComercialGoogleMaps.Informe() en C:\Users\Administrador\Documents\bdl\pronto\prontoweb\ProntoWeb\MapaComercialGoogleMaps.aspx.vb:línea 497
+Microsoft.ReportViewer.WebForms
+__________________________
+
+Log Entry : 
+06/09/2017 16:36:21
+Error in: http://localhost:58911/ProntoWeb/MapaComercialGoogleMaps.aspx. Error Message:Vamos bien?
+__________________________
+
+Log Entry : 
+06/09/2017 16:36:21
+Error in: http://localhost:58911/ProntoWeb/MapaComercialGoogleMaps.aspx. Error Message:http://bdlconsultores.sytes.net:10080/ReportServer - administrador - .xza2190lkm. - 
+__________________________
+
+Log Entry : 
+06/09/2017 16:36:23
+Error in: http://localhost:58911/ProntoWeb/MapaComercialGoogleMaps.aspx. Error Message:System.ArgumentNullException
+El valor no puede ser nulo.
+Nombre del parámetro: parameters
+   en Microsoft.Reporting.WebForms.ServerReport.SetParameters(IEnumerable`1 parameters)
+   en ProntoMVC.Reportes.MapaComercialGoogleMaps.Informe() en C:\Users\Administrador\Documents\bdl\pronto\prontoweb\ProntoWeb\MapaComercialGoogleMaps.aspx.vb:línea 497
+Microsoft.ReportViewer.WebForms
+__________________________
+
+Log Entry : 
+06/09/2017 16:38:35
+Error in: http://localhost:58911/ProntoWeb/MapaComercialGoogleMaps.aspx. Error Message:Vamos bien?
+__________________________
+
+Log Entry : 
+06/09/2017 16:38:35
+Error in: http://localhost:58911/ProntoWeb/MapaComercialGoogleMaps.aspx. Error Message:http://bdlconsultores.sytes.net:10080/ReportServer - administrador - .xza2190lkm. - 
+__________________________
+
+Log Entry : 
+06/09/2017 16:38:36
+Error in: http://localhost:58911/ProntoWeb/MapaComercialGoogleMaps.aspx. Error Message:System.ArgumentNullException
+El valor no puede ser nulo.
+Nombre del parámetro: parameters
+   en Microsoft.Reporting.WebForms.ServerReport.SetParameters(IEnumerable`1 parameters)
+   en ProntoMVC.Reportes.MapaComercialGoogleMaps.Informe() en C:\Users\Administrador\Documents\bdl\pronto\prontoweb\ProntoWeb\MapaComercialGoogleMaps.aspx.vb:línea 497
+Microsoft.ReportViewer.WebForms
+__________________________
+
+Log Entry : 
+06/09/2017 16:40:26
+Error in: http://localhost:58911/ProntoWeb/MapaComercialGoogleMaps.aspx. Error Message:Vamos bien?
+__________________________
+
+Log Entry : 
+06/09/2017 16:40:26
+Error in: http://localhost:58911/ProntoWeb/MapaComercialGoogleMaps.aspx. Error Message:http://bdlconsultores.sytes.net:10080/ReportServer - administrador - .xza2190lkm. - 
+__________________________
+
+Log Entry : 
+06/09/2017 16:40:28
+Error in: http://localhost:58911/ProntoWeb/MapaComercialGoogleMaps.aspx. Error Message:System.ArgumentNullException
+El valor no puede ser nulo.
+Nombre del parámetro: parameters
+   en Microsoft.Reporting.WebForms.ServerReport.SetParameters(IEnumerable`1 parameters)
+   en ProntoMVC.Reportes.MapaComercialGoogleMaps.Informe() en C:\Users\Administrador\Documents\bdl\pronto\prontoweb\ProntoWeb\MapaComercialGoogleMaps.aspx.vb:línea 497
+Microsoft.ReportViewer.WebForms
+__________________________
