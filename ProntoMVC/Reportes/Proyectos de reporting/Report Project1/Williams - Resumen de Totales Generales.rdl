@@ -912,9 +912,8 @@ select idlocalidad, nombre from localidades</CommandText>
                                     <FontFamily>Tahoma</FontFamily>
                                     <Format>0.00%</Format>
                                     <Color>= iif(
-(
-(Fields!Elevacion.Value + Fields!Entrega.Value) 
-- (Fields!PeriodoAnteriorEntrega.Value + Fields!PeriodoAnteriorElevacion.Value) 
+( 
+    (( Fields!Entrega.Value) - ( Fields!PeriodoAnteriorEntrega.Value)) / (Fields!PeriodoAnteriorEntrega.Value)           
 )&gt;0 
 ,  "Gold","White")</Color>
                                   </Style>
@@ -1101,8 +1100,7 @@ select idlocalidad, nombre from localidades</CommandText>
                                     <Format>0.00%</Format>
                                     <Color>= iif(
 (
-(Fields!Elevacion.Value + Fields!Entrega.Value) 
-- (Fields!PeriodoAnteriorEntrega.Value + Fields!PeriodoAnteriorElevacion.Value) 
+( Sum( Fields!Entrega.Value) - Sum( Fields!PeriodoAnteriorEntrega.Value)) / Sum(Fields!PeriodoAnteriorEntrega.Value) 
 )&gt;0 
 ,  "Gold","White")</Color>
                                   </Style>
@@ -1814,10 +1812,8 @@ select idlocalidad, nombre from localidades</CommandText>
                                     <FontFamily>Tahoma</FontFamily>
                                     <Format>0.00%</Format>
                                     <Color>= iif(
-(
-(Fields!Elevacion.Value + Fields!Entrega.Value) 
-- (Fields!PeriodoAnteriorEntrega.Value + Fields!PeriodoAnteriorElevacion.Value) 
-)&gt;0 
+(    ((Fields!Elevacion.Value) - (Fields!PeriodoAnteriorElevacion.Value)) / (Fields!PeriodoAnteriorElevacion.Value)   
+   )  &gt;0 
 ,  "Gold","White")</Color>
                                   </Style>
                                 </TextRun>
@@ -2003,8 +1999,7 @@ select idlocalidad, nombre from localidades</CommandText>
                                     <Format>0.00%</Format>
                                     <Color>= iif(
 (
-(Fields!Elevacion.Value + Fields!Entrega.Value) 
-- (Fields!PeriodoAnteriorEntrega.Value + Fields!PeriodoAnteriorElevacion.Value) 
+   (Sum(Fields!Elevacion.Value) - Sum(Fields!PeriodoAnteriorElevacion.Value)) / Sum(Fields!PeriodoAnteriorElevacion.Value) 
 )&gt;0 
 ,  "Gold","White")</Color>
                                   </Style>
@@ -2552,7 +2547,7 @@ select idlocalidad, nombre from localidades</CommandText>
                                   <Style>
                                     <FontFamily>Tahoma</FontFamily>
                                     <Format>0.00%</Format>
-                                    <Color>= iif( (Fields!Buques.Value - Fields!PeriodoAnteriorBuques.Value)&gt;0 ,  "Gold","White")</Color>
+                                    <Color>= iif((     (Fields!Buques.Value - Fields!PeriodoAnteriorBuques.Value ) / Fields!PeriodoAnteriorBuques.Value   )&gt;0 ,  "Gold","White")</Color>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -2735,7 +2730,7 @@ select idlocalidad, nombre from localidades</CommandText>
                                   <Style>
                                     <FontFamily>Tahoma</FontFamily>
                                     <Format>0.00%</Format>
-                                    <Color>= iif( (Fields!Buques.Value - Fields!PeriodoAnteriorBuques.Value)&gt;0 ,  "Gold","White")</Color>
+                                    <Color>= iif(   (  (  Sum(Fields!Buques.Value) - Sum(Fields!PeriodoAnteriorBuques.Value)  ) / Sum(Fields!PeriodoAnteriorBuques.Value)     )&gt;0 ,  "Gold","White")</Color>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -2755,6 +2750,7 @@ select idlocalidad, nombre from localidades</CommandText>
                             <PaddingBottom>2pt</PaddingBottom>
                           </Style>
                         </Textbox>
+                        <rd:Selected>true</rd:Selected>
                       </CellContents>
                     </TablixCell>
                   </TablixCells>
@@ -3430,8 +3426,7 @@ select idlocalidad, nombre from localidades</CommandText>
                                     <Format>0.00%</Format>
                                     <Color>= iif(
 (
-(Fields!Elevacion.Value + Fields!Entrega.Value) 
-- (Fields!PeriodoAnteriorEntrega.Value + Fields!PeriodoAnteriorElevacion.Value) 
+    ((Fields!Elevacion.Value + Fields!Entrega.Value) - (Fields!PeriodoAnteriorEntrega.Value + Fields!PeriodoAnteriorElevacion.Value)) / (Fields!PeriodoAnteriorEntrega.Value + Fields!PeriodoAnteriorElevacion.Value)        
 )&gt;0 
 ,  "Gold","White")</Color>
                                   </Style>
@@ -3690,9 +3685,7 @@ select idlocalidad, nombre from localidades</CommandText>
                                     <Format>0.00%</Format>
                                     <Color>= iif(
 (
-(Fields!Elevacion.Value + Fields!Entrega.Value) 
-- (Fields!PeriodoAnteriorEntrega.Value + Fields!PeriodoAnteriorElevacion.Value) 
-)&gt;0 
+           ((Sum(Fields!Elevacion.Value) + Sum(Fields!Entrega.Value)) - (Sum(Fields!PeriodoAnteriorEntrega.Value) + Sum(Fields!PeriodoAnteriorElevacion.Value))) / (Sum(Fields!PeriodoAnteriorEntrega.Value) + Sum(Fields!PeriodoAnteriorElevacion.Value))               )&gt;0 
 ,  "Gold","White")</Color>
                                   </Style>
                                 </TextRun>
@@ -4466,9 +4459,7 @@ select idlocalidad, nombre from localidades</CommandText>
                                     <Format>0.00%</Format>
                                     <Color>= iif(
 (
-(Fields!Elevacion.Value + Fields!Entrega.Value) 
-- (Fields!PeriodoAnteriorEntrega.Value + Fields!PeriodoAnteriorElevacion.Value) 
-)&gt;0 
+    ((Fields!Elevacion.Value + Fields!Entrega.Value + Fields!Buques.Value) - (Fields!PeriodoAnteriorEntrega.Value + Fields!PeriodoAnteriorElevacion.Value)) / (Fields!PeriodoAnteriorEntrega.Value + Fields!PeriodoAnteriorElevacion.Value+ Fields!PeriodoAnteriorBuques.Value)      )&gt;0 
 ,  "Gold","White")</Color>
                                   </Style>
                                 </TextRun>
@@ -4763,9 +4754,7 @@ select idlocalidad, nombre from localidades</CommandText>
                                     <Format>0.00%</Format>
                                     <Color>= iif(
 (
-(Fields!Elevacion.Value + Fields!Entrega.Value) 
-- (Fields!PeriodoAnteriorEntrega.Value + Fields!PeriodoAnteriorElevacion.Value) 
-)&gt;0 
+  ((Sum(Fields!Elevacion.Value) + Sum(Fields!Entrega.Value) + Sum(Fields!Buques.Value)) - (Sum(Fields!PeriodoAnteriorEntrega.Value) + Sum(Fields!PeriodoAnteriorElevacion.Value))) / (Sum(Fields!PeriodoAnteriorEntrega.Value) + Sum(Fields!PeriodoAnteriorElevacion.Value) + Sum(Fields!PeriodoAnteriorBuques.Value))     )&gt;0 
 ,  "Gold","White")</Color>
                                   </Style>
                                 </TextRun>
