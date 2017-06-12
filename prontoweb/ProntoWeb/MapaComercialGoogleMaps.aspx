@@ -14,17 +14,14 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
     <asp:UpdatePanel ID="UpdatePanelResumen" runat="server">
         <ContentTemplate>
             <br />
-      
-            
-            <br />
+<br />
 
-            <a href="GoogleMapsHtml.html?modoExportacion=Ambas&idprocedencia=-1&fechadesde=2017/1/1&fechahasta=2017/3/1&idarticulo=-1&idclientefacturado=-1&tonsdesde=0&tonshasta=999999" target="_blank">ver mapa  </a>
+
 
 
             <script>
-                function sdfsfd()
-                {
-                    var link= $("#")
+                function sdfsfd() {
+                    var link = $("#")
 
 
                 }
@@ -32,12 +29,19 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
             </script>
 
-            <br />
-            <br />
-            reasignar geocode de localidades
 
-            <br />
-            <br />
+            <%--<a href="GoogleMapsHtml.html?modoExportacion=Ambas&idprocedencia=-1&fechadesde=2017/1/1&fechahasta=2017/3/1&idarticulo=-1&idclientefacturado=-1&tonsdesde=0&tonshasta=999999" target="_blank">ver mapa  </a>--%>
+
+
+            <%--<iframe id="frame1" src='<%= Frame_A_Url %>' runat="server" />--%>
+
+            <asp:UpdateProgress ID="UpdateProgress2" runat="server">
+                <ProgressTemplate>
+                    <img src="Imagenes/25-1.gif" alt="" style="height: 30px" />
+                    <asp:Label ID="Label342" runat="server" Text="Actualizando datos..." ForeColor="White" Font-Size="Medium"
+                        Visible="true"></asp:Label>
+                </ProgressTemplate>
+            </asp:UpdateProgress>
 
 
             <table style="padding: 0px; border: none #FFFFFF; width: 696px; margin-right: 0px;"
@@ -46,9 +50,11 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                     <td style="width: 300px; height: 24px;" align="">
                         <asp:Button ID="btnRefrescar" Text="VER INFORME" runat="server" Visible="True" CssClass="butcancela"
                             Height="32" Width="" />
+                  
+
                     </td>
-                    <td colspan="2">
-                    </td>
+                    <td colspan="2">      <asp:Button ID="btngeocode" Text="reasignar geocode de localidades" runat="server" Visible="True" CssClass="butcancela"
+                            Height="32" Width="" /></td>
                     <td class="EncabezadoCell" style="width: 200px; height: 18px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         <%--Sincronismo--%>
                     </td>
@@ -57,10 +63,6 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                             Height="32" Width="100" />
                     </td>
                 </tr>
-            </table>
-            <br />
-            <table style="padding: 0px; border: none #FFFFFF; width: 696px; margin-right: 0px;"
-                cellpadding="1" cellspacing="1">
             </table>
             <br />
 
@@ -94,13 +96,12 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
                             </tr>--%>
 
-                               <tr>
-                                    <td class="EncabezadoCell" style="width: 100px; height: 18px;">
-                                </td>
-                             
-                                   </tr>
                             <tr>
-                                  <td class="EncabezadoCell">Modo
+                                <td class="EncabezadoCell" style="width: 100px; height: 18px;"></td>
+
+                            </tr>
+                            <tr>
+                                <td class="EncabezadoCell">Modo
                                 </td>
                                 <td>
                                     <asp:DropDownList ID="DropDownList2" runat="server" AutoPostBack="false" CssClass="CssTextBox"
@@ -111,7 +112,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                                         <asp:ListItem>Buques</asp:ListItem>
                                     </asp:DropDownList>
                                 </td>
-                           
+
                                 <td class="EncabezadoCell" style="width: 162px; height: 18px;">Descarga
                                 </td>
                                 <td class="EncabezadoCell" style="width: 600px; height: 18px;">
@@ -169,7 +170,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                                         ServicePath="WebServiceLocalidades.asmx" TargetControlID="txtProcedencia" UseContextKey="True">
                                     </cc1:AutoCompleteExtender>
                                 </td>
-                                
+
                             </tr>
                             <tr>
                                 <td class="EncabezadoCell" style="width: 100px; height: 18px;">Producto
@@ -183,11 +184,11 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                                         ServicePath="WebServiceArticulos.asmx" TargetControlID="txt_AC_Articulo" UseContextKey="True">
                                     </cc1:AutoCompleteExtender>
                                 </td>
-                               
+
                             </tr>
-                            
-                            
-                            
+
+
+
                             <tr style="display: none">
                                 <td class="EncabezadoCell" style="width: 100px; height: 18px;">
                                     <asp:Label runat="server" ID="lblTopClientes" Text="Top clientes" />
@@ -206,7 +207,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                             <tr>
                                 <td></td>
                             </tr>
-                         
+
                             <tr>
                                 <td class="EncabezadoCell" style="width: 100px; height: 18px;">Cliente
                                 </td>
@@ -220,9 +221,9 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                                         Enabled="True">
                                     </cc1:AutoCompleteExtender>
                                 </td>
-                                
+
                             </tr>
-                            
+
 
                             <tr></tr>
                             <tr style="visibility: ">
@@ -230,13 +231,13 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                                 </td>
                                 <td class="EncabezadoCell" style="width: 50px">
                                     <asp:TextBox ID="txtTonsDesde" runat="server" autocomplete="off" AutoPostBack="false"
-                                        CssClass="CssTextBox" TabIndex="8" Width="40px">5</asp:TextBox>
+                                        CssClass="CssTextBox" TabIndex="8" Width="60px">1</asp:TextBox>
                                 </td>
                                 <td class="EncabezadoCell" colspan="">Tons Hasta
                                 </td>
                                 <td class="EncabezadoCell" style="width: 50px">
                                     <asp:TextBox ID="txtTonsHasta" runat="server" autocomplete="off" AutoPostBack="false"
-                                        CssClass="CssTextBox" TabIndex="8" Width="40px">5</asp:TextBox>
+                                        CssClass="CssTextBox" TabIndex="8" Width="60px">9999999</asp:TextBox>
                                 </td>
                             </tr>
 

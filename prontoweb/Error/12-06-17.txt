@@ -1,0 +1,637 @@
+
+Log Entry : 
+06/12/2017 13:32:18
+Error in: http://localhost:58911/ProntoWeb/MapaComercialGoogleMaps.aspx. Error Message:Vamos bien?
+__________________________
+
+Log Entry : 
+06/12/2017 13:32:18
+Error in: http://localhost:58911/ProntoWeb/MapaComercialGoogleMaps.aspx. Error Message:http://bdlconsultores.sytes.net:10080/ReportServer - administrador - .xza2190lkm. - 
+__________________________
+
+Log Entry : 
+06/12/2017 13:32:18
+Error in: http://localhost:58911/ProntoWeb/MapaComercialGoogleMaps.aspx. Error Message:parece
+__________________________
+
+Log Entry : 
+06/12/2017 13:32:19
+Error in: http://localhost:58911/ProntoWeb/MapaComercialGoogleMaps.aspx. Error Message:Cli 3
+__________________________
+
+Log Entry : 
+06/12/2017 13:33:07
+Error in: http://localhost:58911/ProntoWeb/MapaComercialGoogleMaps.aspx. Error Message:Vamos bien?
+__________________________
+
+Log Entry : 
+06/12/2017 13:33:07
+Error in: http://localhost:58911/ProntoWeb/MapaComercialGoogleMaps.aspx. Error Message:http://bdlconsultores.sytes.net:10080/ReportServer - administrador - .xza2190lkm. - 
+__________________________
+
+Log Entry : 
+06/12/2017 13:33:07
+Error in: http://localhost:58911/ProntoWeb/MapaComercialGoogleMaps.aspx. Error Message:parece
+__________________________
+
+Log Entry : 
+06/12/2017 13:33:07
+Error in: http://localhost:58911/ProntoWeb/MapaComercialGoogleMaps.aspx. Error Message:Cli 3
+__________________________
+
+Log Entry : 
+06/12/2017 13:38:28
+Error in: http://localhost:58911/ProntoWeb/MapaComercialGoogleMaps.aspx. Error Message:Vamos bien?
+__________________________
+
+Log Entry : 
+06/12/2017 13:38:28
+Error in: http://localhost:58911/ProntoWeb/MapaComercialGoogleMaps.aspx. Error Message:http://bdlconsultores.sytes.net:10080/ReportServer - administrador - .xza2190lkm. - 
+__________________________
+
+Log Entry : 
+06/12/2017 13:38:29
+Error in: http://localhost:58911/ProntoWeb/MapaComercialGoogleMaps.aspx. Error Message:parece
+__________________________
+
+Log Entry : 
+06/12/2017 13:38:29
+Error in: http://localhost:58911/ProntoWeb/MapaComercialGoogleMaps.aspx. Error Message:Cli 3
+__________________________
+
+Log Entry : 
+06/12/2017 13:40:26
+Error in: http://localhost:58911/ProntoWeb/MapaComercialGoogleMaps.aspx. Error Message:Vamos bien?
+__________________________
+
+Log Entry : 
+06/12/2017 13:40:26
+Error in: http://localhost:58911/ProntoWeb/MapaComercialGoogleMaps.aspx. Error Message:http://bdlconsultores.sytes.net:10080/ReportServer - administrador - .xza2190lkm. - 
+__________________________
+
+Log Entry : 
+06/12/2017 13:40:26
+Error in: http://localhost:58911/ProntoWeb/MapaComercialGoogleMaps.aspx. Error Message:parece
+__________________________
+
+Log Entry : 
+06/12/2017 13:40:26
+Error in: http://localhost:58911/ProntoWeb/MapaComercialGoogleMaps.aspx. Error Message:Cli 3
+__________________________
+
+Log Entry : 
+06/12/2017 13:47:24
+Error in: http://localhost:58911/ProntoWeb/MapaComercialGoogleMaps.aspx. Error Message:Vamos bien?
+__________________________
+
+Log Entry : 
+06/12/2017 13:47:24
+Error in: http://localhost:58911/ProntoWeb/MapaComercialGoogleMaps.aspx. Error Message:http://bdlconsultores.sytes.net:10080/ReportServer - administrador - .xza2190lkm. - 
+__________________________
+
+Log Entry : 
+06/12/2017 13:47:25
+Error in: http://localhost:58911/ProntoWeb/MapaComercialGoogleMaps.aspx. Error Message:parece
+__________________________
+
+Log Entry : 
+06/12/2017 13:47:25
+Error in: http://localhost:58911/ProntoWeb/MapaComercialGoogleMaps.aspx. Error Message:Cli 3
+__________________________
+
+Log Entry : 
+06/12/2017 14:11:49
+Error in: http://localhost:58911/ProntoWeb/MapaComercialGoogleMaps.aspx. Error Message:Mariano esta logueado, pero lo redirijo al login porque faltan los datos de session. No deberia mejor mandarlo a SeleccionarEmpresa? Ademas, no hago el LogOut y le queda el cookie!!!
+__________________________
+
+Log Entry : 
+06/12/2017 14:11:53
+Error in: http://localhost:58911/ProntoWeb/MapaComercialGoogleMaps.aspx. Error Message:Vamos bien?
+__________________________
+
+Log Entry : 
+06/12/2017 14:11:53
+Error in: http://localhost:58911/ProntoWeb/MapaComercialGoogleMaps.aspx. Error Message:http://bdlconsultores.sytes.net:10080/ReportServer - administrador - .xza2190lkm. - 
+__________________________
+
+Log Entry : 
+06/12/2017 14:11:54
+Error in: http://localhost:58911/ProntoWeb/MapaComercialGoogleMaps.aspx. Error Message:parece
+__________________________
+
+Log Entry : 
+06/12/2017 14:11:54
+Error in: http://localhost:58911/ProntoWeb/MapaComercialGoogleMaps.aspx. Error Message:Cli 3
+__________________________
+
+Log Entry : 
+06/12/2017 14:13:29
+Error in: http://localhost:58911/ProntoWeb/MapaComercialGoogleMaps.aspx. Error Message:Vamos bien?
+__________________________
+
+Log Entry : 
+06/12/2017 14:13:29
+Error in: http://localhost:58911/ProntoWeb/MapaComercialGoogleMaps.aspx. Error Message:http://bdlconsultores.sytes.net:10080/ReportServer - administrador - .xza2190lkm. - 
+__________________________
+
+Log Entry : 
+06/12/2017 14:13:29
+Error in: http://localhost:58911/ProntoWeb/MapaComercialGoogleMaps.aspx. Error Message:parece
+__________________________
+
+Log Entry : 
+06/12/2017 14:13:30
+Error in: http://localhost:58911/ProntoWeb/MapaComercialGoogleMaps.aspx. Error Message:Cli 3
+__________________________
+
+Log Entry : 
+06/12/2017 14:15:24
+Error in: http://localhost:58911/ProntoWeb/MapaComercialGoogleMaps.aspx. Error Message:Vamos bien?
+__________________________
+
+Log Entry : 
+06/12/2017 14:15:24
+Error in: http://localhost:58911/ProntoWeb/MapaComercialGoogleMaps.aspx. Error Message:http://bdlconsultores.sytes.net:10080/ReportServer - administrador - .xza2190lkm. - 
+__________________________
+
+Log Entry : 
+06/12/2017 14:15:25
+Error in: http://localhost:58911/ProntoWeb/MapaComercialGoogleMaps.aspx. Error Message:parece
+__________________________
+
+Log Entry : 
+06/12/2017 14:15:25
+Error in: http://localhost:58911/ProntoWeb/MapaComercialGoogleMaps.aspx. Error Message:Cli 3
+__________________________
+
+Log Entry : 
+06/12/2017 14:15:31
+Error in: http://localhost:58911/ProntoWeb/MapaComercialGoogleMaps.aspx. Error Message:Vamos bien?
+__________________________
+
+Log Entry : 
+06/12/2017 14:15:31
+Error in: http://localhost:58911/ProntoWeb/MapaComercialGoogleMaps.aspx. Error Message:http://bdlconsultores.sytes.net:10080/ReportServer - administrador - .xza2190lkm. - 
+__________________________
+
+Log Entry : 
+06/12/2017 14:15:31
+Error in: http://localhost:58911/ProntoWeb/MapaComercialGoogleMaps.aspx. Error Message:parece
+__________________________
+
+Log Entry : 
+06/12/2017 14:15:32
+Error in: http://localhost:58911/ProntoWeb/MapaComercialGoogleMaps.aspx. Error Message:Cli 3
+__________________________
+
+Log Entry : 
+06/12/2017 14:15:37
+Error in: http://localhost:58911/ProntoWeb/MapaComercialGoogleMaps.aspx. Error Message:Vamos bien?
+__________________________
+
+Log Entry : 
+06/12/2017 14:15:37
+Error in: http://localhost:58911/ProntoWeb/MapaComercialGoogleMaps.aspx. Error Message:http://bdlconsultores.sytes.net:10080/ReportServer - administrador - .xza2190lkm. - 
+__________________________
+
+Log Entry : 
+06/12/2017 14:15:38
+Error in: http://localhost:58911/ProntoWeb/MapaComercialGoogleMaps.aspx. Error Message:parece
+__________________________
+
+Log Entry : 
+06/12/2017 14:15:38
+Error in: http://localhost:58911/ProntoWeb/MapaComercialGoogleMaps.aspx. Error Message:Cli 3
+__________________________
+
+Log Entry : 
+06/12/2017 14:16:23
+Error in: http://localhost:58911/ProntoWeb/MapaComercialGoogleMaps.aspx. Error Message:ARRECIFES BS AS, BUENOS AIRES, Argentina
+__________________________
+
+Log Entry : 
+06/12/2017 14:21:02
+Error in: http://localhost:58911/ProntoWeb/MapaComercialGoogleMaps.aspx. Error Message:Mariano esta logueado, pero lo redirijo al login porque faltan los datos de session. No deberia mejor mandarlo a SeleccionarEmpresa? Ademas, no hago el LogOut y le queda el cookie!!!
+__________________________
+
+Log Entry : 
+06/12/2017 14:21:24
+Error in: http://localhost:58911/ProntoWeb/MapaComercialGoogleMaps.aspx. Error Message:Vamos bien?
+__________________________
+
+Log Entry : 
+06/12/2017 14:21:24
+Error in: http://localhost:58911/ProntoWeb/MapaComercialGoogleMaps.aspx. Error Message:http://bdlconsultores.sytes.net:10080/ReportServer - administrador - .xza2190lkm. - 
+__________________________
+
+Log Entry : 
+06/12/2017 14:21:24
+Error in: http://localhost:58911/ProntoWeb/MapaComercialGoogleMaps.aspx. Error Message:parece
+__________________________
+
+Log Entry : 
+06/12/2017 14:21:24
+Error in: http://localhost:58911/ProntoWeb/MapaComercialGoogleMaps.aspx. Error Message:Cli 3
+__________________________
+
+Log Entry : 
+06/12/2017 14:22:14
+Error in: http://localhost:58911/ProntoWeb/MapaComercialGoogleMaps.aspx. Error Message:Vamos bien?
+__________________________
+
+Log Entry : 
+06/12/2017 14:22:14
+Error in: http://localhost:58911/ProntoWeb/MapaComercialGoogleMaps.aspx. Error Message:http://bdlconsultores.sytes.net:10080/ReportServer - administrador - .xza2190lkm. - 
+__________________________
+
+Log Entry : 
+06/12/2017 14:22:14
+Error in: http://localhost:58911/ProntoWeb/MapaComercialGoogleMaps.aspx. Error Message:parece
+__________________________
+
+Log Entry : 
+06/12/2017 14:22:14
+Error in: http://localhost:58911/ProntoWeb/MapaComercialGoogleMaps.aspx. Error Message:Cli 3
+__________________________
+
+Log Entry : 
+06/12/2017 14:23:24
+Error in: http://localhost:58911/ProntoWeb/MapaComercialGoogleMaps.aspx. Error Message:Vamos bien?
+__________________________
+
+Log Entry : 
+06/12/2017 14:23:24
+Error in: http://localhost:58911/ProntoWeb/MapaComercialGoogleMaps.aspx. Error Message:http://bdlconsultores.sytes.net:10080/ReportServer - administrador - .xza2190lkm. - 
+__________________________
+
+Log Entry : 
+06/12/2017 14:23:24
+Error in: http://localhost:58911/ProntoWeb/MapaComercialGoogleMaps.aspx. Error Message:parece
+__________________________
+
+Log Entry : 
+06/12/2017 14:23:25
+Error in: http://localhost:58911/ProntoWeb/MapaComercialGoogleMaps.aspx. Error Message:Cli 3
+__________________________
+
+Log Entry : 
+06/12/2017 14:23:51
+Error in: http://localhost:58911/ProntoWeb/MapaComercialGoogleMaps.aspx. Error Message:Vamos bien?
+__________________________
+
+Log Entry : 
+06/12/2017 14:23:51
+Error in: http://localhost:58911/ProntoWeb/MapaComercialGoogleMaps.aspx. Error Message:http://bdlconsultores.sytes.net:10080/ReportServer - administrador - .xza2190lkm. - 
+__________________________
+
+Log Entry : 
+06/12/2017 14:23:51
+Error in: http://localhost:58911/ProntoWeb/MapaComercialGoogleMaps.aspx. Error Message:parece
+__________________________
+
+Log Entry : 
+06/12/2017 14:23:51
+Error in: http://localhost:58911/ProntoWeb/MapaComercialGoogleMaps.aspx. Error Message:Cli 3
+__________________________
+
+Log Entry : 
+06/12/2017 14:24:45
+Error in: http://localhost:58911/ProntoWeb/MapaComercialGoogleMaps.aspx. Error Message:Vamos bien?
+__________________________
+
+Log Entry : 
+06/12/2017 14:24:45
+Error in: http://localhost:58911/ProntoWeb/MapaComercialGoogleMaps.aspx. Error Message:http://bdlconsultores.sytes.net:10080/ReportServer - administrador - .xza2190lkm. - 
+__________________________
+
+Log Entry : 
+06/12/2017 14:24:45
+Error in: http://localhost:58911/ProntoWeb/MapaComercialGoogleMaps.aspx. Error Message:parece
+__________________________
+
+Log Entry : 
+06/12/2017 14:24:46
+Error in: http://localhost:58911/ProntoWeb/MapaComercialGoogleMaps.aspx. Error Message:Cli 3
+__________________________
+
+Log Entry : 
+06/12/2017 14:25:27
+Error in: http://localhost:58911/ProntoWeb/MapaComercialGoogleMaps.aspx. Error Message:ARRECIFES BS AS, BUENOS AIRES, Argentina
+__________________________
+
+Log Entry : 
+06/12/2017 14:25:28
+Error in: http://localhost:58911/ProntoWeb/MapaComercialGoogleMaps.aspx. Error Message:ERECHIN, BUENOS AIRES, Argentina
+__________________________
+
+Log Entry : 
+06/12/2017 14:25:29
+Error in: http://localhost:58911/ProntoWeb/MapaComercialGoogleMaps.aspx. Error Message:LA BRIANZA, CORDOBA, Argentina
+__________________________
+
+Log Entry : 
+06/12/2017 14:25:30
+Error in: http://localhost:58911/ProntoWeb/MapaComercialGoogleMaps.aspx. Error Message:ONCATIVA, BUENOS AIRES, Argentina
+__________________________
+
+Log Entry : 
+06/12/2017 14:25:31
+Error in: http://localhost:58911/ProntoWeb/MapaComercialGoogleMaps.aspx. Error Message:CAMPO SALUSSO, LA PAMPA, Argentina
+__________________________
+
+Log Entry : 
+06/12/2017 14:25:32
+Error in: http://localhost:58911/ProntoWeb/MapaComercialGoogleMaps.aspx. Error Message:BARRANQUITAS, LA RIOJA, Argentina
+__________________________
+
+Log Entry : 
+06/12/2017 14:25:33
+Error in: http://localhost:58911/ProntoWeb/MapaComercialGoogleMaps.aspx. Error Message:CAMPO COYUNDA, CORDOBA, Argentina
+__________________________
+
+Log Entry : 
+06/12/2017 14:25:34
+Error in: http://localhost:58911/ProntoWeb/MapaComercialGoogleMaps.aspx. Error Message:CAMPO BOTTO, SANTA FE , Argentina
+__________________________
+
+Log Entry : 
+06/12/2017 14:28:36
+Error in: http://localhost:58911/ProntoWeb/MapaComercialGoogleMaps.aspx. Error Message:Vamos bien?
+__________________________
+
+Log Entry : 
+06/12/2017 14:28:36
+Error in: http://localhost:58911/ProntoWeb/MapaComercialGoogleMaps.aspx. Error Message:http://bdlconsultores.sytes.net:10080/ReportServer - administrador - .xza2190lkm. - 
+__________________________
+
+Log Entry : 
+06/12/2017 14:28:37
+Error in: http://localhost:58911/ProntoWeb/MapaComercialGoogleMaps.aspx. Error Message:parece
+__________________________
+
+Log Entry : 
+06/12/2017 14:28:37
+Error in: http://localhost:58911/ProntoWeb/MapaComercialGoogleMaps.aspx. Error Message:Cli 3
+__________________________
+
+Log Entry : 
+06/12/2017 14:47:11
+Error in: http://localhost:58911/ProntoWeb/MapaComercialGoogleMaps.aspx. Error Message:Vamos bien?
+__________________________
+
+Log Entry : 
+06/12/2017 14:47:11
+Error in: http://localhost:58911/ProntoWeb/MapaComercialGoogleMaps.aspx. Error Message:http://bdlconsultores.sytes.net:10080/ReportServer - administrador - .xza2190lkm. - 
+__________________________
+
+Log Entry : 
+06/12/2017 14:47:12
+Error in: http://localhost:58911/ProntoWeb/MapaComercialGoogleMaps.aspx. Error Message:parece
+__________________________
+
+Log Entry : 
+06/12/2017 14:47:12
+Error in: http://localhost:58911/ProntoWeb/MapaComercialGoogleMaps.aspx. Error Message:Cli 3
+__________________________
+
+Log Entry : 
+06/12/2017 14:54:25
+Error in: http://localhost:58911/ProntoWeb/MapaComercialGoogleMaps.aspx. Error Message:Vamos bien?
+__________________________
+
+Log Entry : 
+06/12/2017 14:54:25
+Error in: http://localhost:58911/ProntoWeb/MapaComercialGoogleMaps.aspx. Error Message:http://bdlconsultores.sytes.net:10080/ReportServer - administrador - .xza2190lkm. - 
+__________________________
+
+Log Entry : 
+06/12/2017 14:54:25
+Error in: http://localhost:58911/ProntoWeb/MapaComercialGoogleMaps.aspx. Error Message:parece
+__________________________
+
+Log Entry : 
+06/12/2017 14:54:26
+Error in: http://localhost:58911/ProntoWeb/MapaComercialGoogleMaps.aspx. Error Message:Cli 3
+__________________________
+
+Log Entry : 
+06/12/2017 14:55:40
+Error in: http://localhost:58911/ProntoWeb/MapaComercialGoogleMaps.aspx. Error Message:Vamos bien?
+__________________________
+
+Log Entry : 
+06/12/2017 14:55:40
+Error in: http://localhost:58911/ProntoWeb/MapaComercialGoogleMaps.aspx. Error Message:http://bdlconsultores.sytes.net:10080/ReportServer - administrador - .xza2190lkm. - 
+__________________________
+
+Log Entry : 
+06/12/2017 14:55:41
+Error in: http://localhost:58911/ProntoWeb/MapaComercialGoogleMaps.aspx. Error Message:parece
+__________________________
+
+Log Entry : 
+06/12/2017 14:55:42
+Error in: http://localhost:58911/ProntoWeb/MapaComercialGoogleMaps.aspx. Error Message:Cli 3
+__________________________
+
+Log Entry : 
+06/12/2017 15:00:55
+Error in: http://localhost:58911/ProntoWeb/MapaComercialGoogleMaps.aspx. Error Message:Vamos bien?
+__________________________
+
+Log Entry : 
+06/12/2017 15:00:55
+Error in: http://localhost:58911/ProntoWeb/MapaComercialGoogleMaps.aspx. Error Message:http://bdlconsultores.sytes.net:10080/ReportServer - administrador - .xza2190lkm. - 
+__________________________
+
+Log Entry : 
+06/12/2017 15:00:56
+Error in: http://localhost:58911/ProntoWeb/MapaComercialGoogleMaps.aspx. Error Message:parece
+__________________________
+
+Log Entry : 
+06/12/2017 15:00:56
+Error in: http://localhost:58911/ProntoWeb/MapaComercialGoogleMaps.aspx. Error Message:Cli 3
+__________________________
+
+Log Entry : 
+06/12/2017 15:03:39
+Error in: http://localhost:58911/ProntoWeb/MapaComercialGoogleMaps.aspx. Error Message:System.Web.HttpCompileException
+C:\Users\Administrador\Documents\bdl\pronto\prontoweb\ProntoWeb\MapaComercialGoogleMaps.aspx.vb(555): error BC30198: ')' expected.
+   en System.Web.Compilation.AssemblyBuilder.Compile()
+   en System.Web.Compilation.BuildProvidersCompiler.PerformBuild()
+   en System.Web.Compilation.BuildManager.CompileWebFile(VirtualPath virtualPath)
+   en System.Web.Compilation.BuildManager.GetVPathBuildResultInternal(VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean throwIfNotFound, Boolean ensureIsUpToDate)
+   en System.Web.Compilation.BuildManager.GetVPathBuildResultWithNoAssert(HttpContext context, VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean throwIfNotFound, Boolean ensureIsUpToDate)
+   en System.Web.Compilation.BuildManager.GetVirtualPathObjectFactory(VirtualPath virtualPath, HttpContext context, Boolean allowCrossApp, Boolean throwIfNotFound)
+   en System.Web.Compilation.BuildManager.CreateInstanceFromVirtualPath(VirtualPath virtualPath, Type requiredBaseType, HttpContext context, Boolean allowCrossApp)
+   en System.Web.UI.PageHandlerFactory.GetHandlerHelper(HttpContext context, String requestType, VirtualPath virtualPath, String physicalPath)
+   en System.Web.UI.PageHandlerFactory.GetHandler(HttpContext context, String requestType, String virtualPath, String path)
+   en System.Web.HttpApplication.MaterializeHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   en System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+System.Web
+__________________________
+
+Log Entry : 
+06/12/2017 15:03:40
+Error in: http://localhost:58911/ProntoWeb/MapaComercialGoogleMaps.aspx. Error Message: -  Error en ExecDinamico. - System.Data.SqlClient.SqlException (0x80131904): No se puede abrir la base de datos "Williams2" solicitada por el inicio de sesión. Error de inicio de sesión.
+Error de inicio de sesión del usuario 'sa'.
+   en System.Data.SqlClient.SqlInternalConnectionTds..ctor(DbConnectionPoolIdentity identity, SqlConnectionString connectionOptions, SqlCredential credential, Object providerInfo, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance, SqlConnectionString userConnectionOptions, SessionData reconnectSessionData, DbConnectionPool pool, String accessToken, Boolean applyTransientFaultHandling)
+   en System.Data.SqlClient.SqlConnectionFactory.CreateConnection(DbConnectionOptions options, DbConnectionPoolKey poolKey, Object poolGroupProviderInfo, DbConnectionPool pool, DbConnection owningConnection, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionFactory.CreatePooledConnection(DbConnectionPool pool, DbConnection owningObject, DbConnectionOptions options, DbConnectionPoolKey poolKey, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionPool.CreateObject(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   en System.Data.ProviderBase.DbConnectionPool.UserCreateRequest(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   en System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.Open()
+   en Pronto.ERP.Dal.GeneralDB.ExecDinamico(String SC, String comandoSQLdinamico, Int32 timeoutSegundos)
+ClientConnectionId:355f1b0d-b2ff-4fa6-9690-2f1b87cdfa88
+Error Number:4060,State:1,Class:11 - EXEC sp_who2 8 0
+__________________________
+
+Log Entry : 
+06/12/2017 15:03:40
+Error in: http://localhost:58911/ProntoWeb/MapaComercialGoogleMaps.aspx. Error Message:No se puede abrir la base de datos "Williams2" solicitada por el inicio de sesión. Error de inicio de sesión.
+Error de inicio de sesión del usuario 'sa'.
+__________________________
+
+Log Entry : 
+06/12/2017 15:03:40
+Error in: http://localhost:58911/ProntoWeb/MapaComercialGoogleMaps.aspx. Error Message:System.Data.SqlClient.SqlException
+No se puede abrir la base de datos "Williams2" solicitada por el inicio de sesión. Error de inicio de sesión.
+Error de inicio de sesión del usuario 'sa'.
+   en System.Data.SqlClient.SqlInternalConnectionTds..ctor(DbConnectionPoolIdentity identity, SqlConnectionString connectionOptions, SqlCredential credential, Object providerInfo, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance, SqlConnectionString userConnectionOptions, SessionData reconnectSessionData, DbConnectionPool pool, String accessToken, Boolean applyTransientFaultHandling)
+   en System.Data.SqlClient.SqlConnectionFactory.CreateConnection(DbConnectionOptions options, DbConnectionPoolKey poolKey, Object poolGroupProviderInfo, DbConnectionPool pool, DbConnection owningConnection, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionFactory.CreatePooledConnection(DbConnectionPool pool, DbConnection owningObject, DbConnectionOptions options, DbConnectionPoolKey poolKey, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionPool.CreateObject(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   en System.Data.ProviderBase.DbConnectionPool.UserCreateRequest(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   en System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.Open()
+   en Pronto.ERP.Dal.GeneralDB.ExecDinamico(String SC, String comandoSQLdinamico, Int32 timeoutSegundos)
+   en Pronto.ERP.Bll.EntidadManager.ExecDinamico(String SC, String sComandoDinamico, Int32 timeoutSegundos) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\EntidadManager.vb:línea 816
+   en CartaDePorteManager.Log_sp_who2(String sc) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 8222
+   en ASP.global_asax.Application_Error(Object sender, EventArgs e) en C:\Users\Administrador\Documents\bdl\pronto\prontoweb\global.asax:línea 433
+.Net SqlClient Data Provider
+__________________________
+
+Log Entry : 
+06/12/2017 15:03:54
+Error in: http://localhost:58911/ProntoWeb/MapaComercialGoogleMaps.aspx. Error Message:System.Web.HttpCompileException
+C:\Users\Administrador\Documents\bdl\pronto\prontoweb\ProntoWeb\MapaComercialGoogleMaps.aspx.vb(555): error BC30198: ')' expected.
+   en System.Web.Compilation.AssemblyBuilder.Compile()
+   en System.Web.Compilation.BuildProvidersCompiler.PerformBuild()
+   en System.Web.Compilation.BuildManager.CompileWebFile(VirtualPath virtualPath)
+   en System.Web.Compilation.BuildManager.GetVPathBuildResultInternal(VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean throwIfNotFound, Boolean ensureIsUpToDate)
+   en System.Web.Compilation.BuildManager.GetVPathBuildResultWithNoAssert(HttpContext context, VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean throwIfNotFound, Boolean ensureIsUpToDate)
+   en System.Web.Compilation.BuildManager.GetVirtualPathObjectFactory(VirtualPath virtualPath, HttpContext context, Boolean allowCrossApp, Boolean throwIfNotFound)
+   en System.Web.Compilation.BuildManager.CreateInstanceFromVirtualPath(VirtualPath virtualPath, Type requiredBaseType, HttpContext context, Boolean allowCrossApp)
+   en System.Web.UI.PageHandlerFactory.GetHandlerHelper(HttpContext context, String requestType, VirtualPath virtualPath, String physicalPath)
+   en System.Web.UI.PageHandlerFactory.GetHandler(HttpContext context, String requestType, String virtualPath, String path)
+   en System.Web.HttpApplication.MaterializeHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   en System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+System.Web
+__________________________
+
+Log Entry : 
+06/12/2017 15:03:54
+Error in: http://localhost:58911/ProntoWeb/MapaComercialGoogleMaps.aspx. Error Message: -  Error en ExecDinamico. - System.Data.SqlClient.SqlException (0x80131904): No se puede abrir la base de datos "Williams2" solicitada por el inicio de sesión. Error de inicio de sesión.
+Error de inicio de sesión del usuario 'sa'.
+   en System.Data.SqlClient.SqlInternalConnectionTds..ctor(DbConnectionPoolIdentity identity, SqlConnectionString connectionOptions, SqlCredential credential, Object providerInfo, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance, SqlConnectionString userConnectionOptions, SessionData reconnectSessionData, DbConnectionPool pool, String accessToken, Boolean applyTransientFaultHandling)
+   en System.Data.SqlClient.SqlConnectionFactory.CreateConnection(DbConnectionOptions options, DbConnectionPoolKey poolKey, Object poolGroupProviderInfo, DbConnectionPool pool, DbConnection owningConnection, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionFactory.CreatePooledConnection(DbConnectionPool pool, DbConnection owningObject, DbConnectionOptions options, DbConnectionPoolKey poolKey, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionPool.CreateObject(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   en System.Data.ProviderBase.DbConnectionPool.UserCreateRequest(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   en System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.Open()
+   en Pronto.ERP.Dal.GeneralDB.ExecDinamico(String SC, String comandoSQLdinamico, Int32 timeoutSegundos)
+ClientConnectionId:b8cb31a0-8942-4706-938d-be5ff555e1db
+Error Number:4060,State:1,Class:11 - EXEC sp_who2 8 0
+__________________________
+
+Log Entry : 
+06/12/2017 15:03:54
+Error in: http://localhost:58911/ProntoWeb/MapaComercialGoogleMaps.aspx. Error Message:No se puede abrir la base de datos "Williams2" solicitada por el inicio de sesión. Error de inicio de sesión.
+Error de inicio de sesión del usuario 'sa'.
+__________________________
+
+Log Entry : 
+06/12/2017 15:03:54
+Error in: http://localhost:58911/ProntoWeb/MapaComercialGoogleMaps.aspx. Error Message:System.Data.SqlClient.SqlException
+No se puede abrir la base de datos "Williams2" solicitada por el inicio de sesión. Error de inicio de sesión.
+Error de inicio de sesión del usuario 'sa'.
+   en System.Data.SqlClient.SqlInternalConnectionTds..ctor(DbConnectionPoolIdentity identity, SqlConnectionString connectionOptions, SqlCredential credential, Object providerInfo, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance, SqlConnectionString userConnectionOptions, SessionData reconnectSessionData, DbConnectionPool pool, String accessToken, Boolean applyTransientFaultHandling)
+   en System.Data.SqlClient.SqlConnectionFactory.CreateConnection(DbConnectionOptions options, DbConnectionPoolKey poolKey, Object poolGroupProviderInfo, DbConnectionPool pool, DbConnection owningConnection, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionFactory.CreatePooledConnection(DbConnectionPool pool, DbConnection owningObject, DbConnectionOptions options, DbConnectionPoolKey poolKey, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionPool.CreateObject(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   en System.Data.ProviderBase.DbConnectionPool.UserCreateRequest(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   en System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.Open()
+   en Pronto.ERP.Dal.GeneralDB.ExecDinamico(String SC, String comandoSQLdinamico, Int32 timeoutSegundos)
+   en Pronto.ERP.Bll.EntidadManager.ExecDinamico(String SC, String sComandoDinamico, Int32 timeoutSegundos) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\EntidadManager.vb:línea 816
+   en CartaDePorteManager.Log_sp_who2(String sc) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 8222
+   en ASP.global_asax.Application_Error(Object sender, EventArgs e) en C:\Users\Administrador\Documents\bdl\pronto\prontoweb\global.asax:línea 433
+.Net SqlClient Data Provider
+__________________________
+
+Log Entry : 
+06/12/2017 15:05:53
+Error in: http://localhost:58911/ProntoWeb/MapaComercialGoogleMaps.aspx. Error Message:Vamos bien?
+__________________________
+
+Log Entry : 
+06/12/2017 15:05:53
+Error in: http://localhost:58911/ProntoWeb/MapaComercialGoogleMaps.aspx. Error Message:http://bdlconsultores.sytes.net:10080/ReportServer - administrador - .xza2190lkm. - 
+__________________________
+
+Log Entry : 
+06/12/2017 15:05:53
+Error in: http://localhost:58911/ProntoWeb/MapaComercialGoogleMaps.aspx. Error Message:parece
+__________________________
+
+Log Entry : 
+06/12/2017 15:05:54
+Error in: http://localhost:58911/ProntoWeb/MapaComercialGoogleMaps.aspx. Error Message:Cli 3
+__________________________
+
+Log Entry : 
+06/12/2017 15:07:35
+Error in: http://localhost:58911/ProntoWeb/MapaComercialGoogleMaps.aspx. Error Message:Vamos bien?
+__________________________
+
+Log Entry : 
+06/12/2017 15:07:35
+Error in: http://localhost:58911/ProntoWeb/MapaComercialGoogleMaps.aspx. Error Message:http://bdlconsultores.sytes.net:10080/ReportServer - administrador - .xza2190lkm. - 
+__________________________
+
+Log Entry : 
+06/12/2017 15:07:35
+Error in: http://localhost:58911/ProntoWeb/MapaComercialGoogleMaps.aspx. Error Message:parece
+__________________________
+
+Log Entry : 
+06/12/2017 15:07:35
+Error in: http://localhost:58911/ProntoWeb/MapaComercialGoogleMaps.aspx. Error Message:Cli 3
+__________________________
