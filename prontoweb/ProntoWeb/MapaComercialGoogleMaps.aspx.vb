@@ -14,8 +14,15 @@ Imports CartaDePorteManager
 
 
 Namespace ProntoMVC.Reportes
+
+
     Partial Public Class MapaComercialGoogleMaps
         Inherits System.Web.UI.Page
+
+
+        Protected Frame_A_Url As String
+
+
         Protected Sub Page_Load(sender As Object, e As EventArgs)
             HFSC.Value = GetConnectionString(Server, Session)
             HFIdObra.Value = IIf(IsDBNull(Session(SESSIONPRONTO_glbIdObraAsignadaUsuario)), -1, Session(SESSIONPRONTO_glbIdObraAsignadaUsuario))
@@ -34,7 +41,7 @@ Namespace ProntoMVC.Reportes
 
                 Try
 
-                    Informe()
+                    'Informe()
 
                 Catch ex2 As System.Net.WebException
                     'The request failed with HTTP status 503: Service Unavailable.
@@ -408,7 +415,7 @@ Namespace ProntoMVC.Reportes
             yourParams(0) = New ReportParameter("Modo", DropDownList2.SelectedItem.Text) ' )
             yourParams(1) = New ReportParameter("Producto", txt_AC_Articulo.Text)
             yourParams(2) = New ReportParameter("Puerto", txtProcedencia.Text) ' )
-            yourParams(3) = New ReportParameter("Cliente", BuscaIdClientePreciso(txtTitular.Text, sc)) ' )
+            yourParams(3) = New ReportParameter("Cliente", BuscaIdClientePreciso(txtTitular.Text, SC)) ' )
             yourParams(4) = New ReportParameter("TonsDesde", txtTonsDesde.Text) ', txtFechaHasta.Text)
             yourParams(5) = New ReportParameter("TonsHasta", txtTonsHasta.Text) ', txtFechaHasta.Text)
             yourParams(6) = New ReportParameter("FechaDesde", txtFechaDesde.Text) ' )
@@ -420,7 +427,7 @@ Namespace ProntoMVC.Reportes
 
 
             If Diagnostics.Debugger.IsAttached Then
-                sc = Encriptar("Data Source=serversql3\TESTING;Initial catalog=Pronto;User ID=sa; Password=.SistemaPronto.;Connect Timeout=500")
+                SC = Encriptar("Data Source=serversql3\TESTING;Initial catalog=Pronto;User ID=sa; Password=.SistemaPronto.;Connect Timeout=500")
                 'estoy teniendo problemas al usar el reporteador desde un servidor distinto que el que tiene la base
             End If
 
@@ -527,9 +534,34 @@ Namespace ProntoMVC.Reportes
             ErrHandler2.WriteError("Cli 3")
 
 
-            Response.Write("<script>window.open('http://www.google.com.hk/','_blank');</script>");
+            yourParams(0) = New ReportParameter("Modo", DropDownList2.SelectedItem.Text) ' )
+            yourParams(1) = New ReportParameter("Producto", BuscaIdArticuloPreciso(txt_AC_Articulo.Text, SC))
+            yourParams(2) = New ReportParameter("Puerto", BuscaIdLocalidadPreciso(txtProcedencia.Text, SC)) ' )
+            yourParams(3) = New ReportParameter("Cliente", BuscaIdClientePreciso(txtTitular.Text, SC)) ' )
+            yourParams(4) = New ReportParameter("TonsDesde", txtTonsDesde.Text) ', txtFechaHasta.Text)
+            yourParams(5) = New ReportParameter("TonsHasta", txtTonsHasta.Text) ', txtFechaHasta.Text)
+            yourParams(6) = New ReportParameter("FechaDesde", txtFechaDesde.Text) ' )
+            yourParams(7) = New ReportParameter("FechaHasta", txtFechaHasta.Text) ', txtFechaHasta.Text)
 
-               <a href = "GoogleMapsHtml.html?modoExportacion=Ambas&idprocedencia=-1&fechadesde=2017/1/1&fechahasta=2017/3/1&idarticulo=-1&idclientefacturado=-1&tonsdesde=0&tonshasta=999999" target="_blank">ver mapa  </a>
+
+
+            Dim link As String = "GoogleMapsHtml.html?modoExportacion=" & DropDownList2.SelectedItem.Text &
+                                                "&idprocedencia=" & BuscaIdLocalidadPreciso(txtProcedencia.Text, SC).ToString &
+                                                "&fechadesde=" & Convert.ToDateTime(txtFechaDesde.Text).ToString("yyyy/MM/dd") &
+                                                "&fechahasta=" & Convert.ToDateTime(txtFechaHasta.Text).ToString("yyyy/MM/dd") &
+                                                "&idarticulo=" & BuscaIdArticuloPreciso(txt_AC_Articulo.Text, SC).ToString &
+                                                "&idclientefacturado=" + BuscaIdClientePreciso(txtTitular.Text, SC).ToString &
+                                                "&tonsdesde=" & txtTonsDesde.Text &
+                                                "&tonshasta=" & txtTonsHasta.Text
+
+            'Frame_A_Url = link
+
+
+            AjaxControlToolkit.ToolkitScriptManager.RegisterStartupScript(Me.Page, Me.GetType, "alrt", "window.open('" & link & "','_blank');", True)
+
+
+            'Response.Write("<script>window.open('" & link & "','_blank');</script>")
+            '             <a href = "GoogleMapsHtml.html?modoExportacion=Ambas&idprocedencia=-1&fechadesde=2017/1/1&fechahasta=2017/3/1&idarticulo=-1&idclientefacturado=-1&tonsdesde=0&tonshasta=999999" target="_blank">ver mapa  </a>
 
 
 
@@ -567,6 +599,20 @@ Namespace ProntoMVC.Reportes
         Protected Sub btnRefrescar_Click(sender As Object, e As EventArgs) Handles btnRefrescar.Click
             Informe()
         End Sub
+
+
+
+
+
+        Private Sub btngeocode_Click(sender As Object, e As EventArgs) Handles btngeocode.Click
+
+            Dim s = New ServicioCartaPorte.servi()
+            Dim err = s.ReasignarGeocodeLocalidades(False, HFSC.Value)
+            MsgBoxAlert(err)
+            'Response.Write(err)
+
+        End Sub
+
     End Class
 
 

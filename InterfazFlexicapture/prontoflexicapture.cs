@@ -4989,10 +4989,10 @@ order by kilos desc
         }
 
 
-        public void ReasignarGeocodeLocalidades(bool bIncluirLasQueYaTienenGeocode, string SC)
+        public string ReasignarGeocodeLocalidades(bool bIncluirLasQueYaTienenGeocode, string SC)
         {
 
-
+            string err="";
 
             var scEF = ProntoMVC.Data.Models.Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC));
             DemoProntoEntities db = new DemoProntoEntities(scEF);
@@ -5030,6 +5030,8 @@ order by kilos desc
                 }
                 catch (Exception ex)
                 {
+                    err += address + "   <br/>";
+
                     ErrHandler2.WriteError(address);
                 }
 
@@ -5037,6 +5039,7 @@ order by kilos desc
 
             }
 
+            return err;
 
 
         }
