@@ -21213,23 +21213,26 @@ Public Class LogicaInformesWilliams
 
         Dim sTitulo As String = ""
 
+
         dtCDPs = CartaDePorteManager.GetDataTableFiltradoYPaginado(sc,
                 "", "", "", 1, 0,
                 enumCDPestado.TodasMenosLasRechazadas, "", -1, -1,
                 idDestinatario, -1,
                 -1, idarticulo, -1, idDestino,
-                "1", "Export",
-                 desde, hasta, -1, sTitulo, , , , , , , , , )
+                CartaDePorteManager.FiltroANDOR.FiltroAND, "Export",
+                 desde, hasta, pv, sTitulo, , , , , , , , , )
 
 
 
-        Dim db As New LinqCartasPorteDataContext(Encriptar(sc))
+        'Dim db As New LinqCartasPorteDataContext(Encriptar(sc))
+        Dim db As DemoProntoEntities = New DemoProntoEntities(Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(sc)))
 
 
 
-        Dim movs = (From i In db.CartasPorteMovimientos
-                    Join c In db.linqClientes On i.IdExportadorOrigen Equals c.IdCliente
-                    Where
+
+        Dim movs2 = (From i In db.CartasPorteMovimientos
+                     Join c In db.Clientes On i.IdExportadorOrigen Equals c.IdCliente
+                     Where
                         (i.FechaIngreso >= desde And i.FechaIngreso <= hasta) _
                         And (i.IdArticulo = idarticulo) _
                         And (i.Puerto = idDestino) _
@@ -21238,13 +21241,16 @@ Public Class LogicaInformesWilliams
                                 Or (i.IdExportadorDestino = idDestinatario)
                         ) _
                         And If(i.Anulada, "NO") <> "SI"
-                    Select Tipo = f(i.Tipo),
+                     Select i.Tipo,
                                 ExportadorOrigen = c.RazonSocial, i.FechaIngreso,
                                 i.Entrada_o_Salida, i.Cantidad, i.Vapor, i.Contrato, i.IdCDPMovimiento, i.Numero
                 ).ToList
 
 
-
+        Dim movs = From i In movs2
+                   Select Tipo = f(i.Tipo),
+                                i.ExportadorOrigen, i.FechaIngreso,
+                                i.Entrada_o_Salida, i.Cantidad, i.Vapor, i.Contrato, i.IdCDPMovimiento, i.Numero
 
 
 
@@ -21296,7 +21302,8 @@ Public Class LogicaInformesWilliams
                                               ByVal iddestinatario As Integer, ByVal pv As Integer) As Double
 
         Dim entradasMOV, entradasCDP, salidasMOV As Double
-        Dim db As New LinqCartasPorteDataContext(Encriptar(sc))
+        'Dim db As New LinqCartasPorteDataContext(Encriptar(sc))
+        Dim db As DemoProntoEntities = New DemoProntoEntities(Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(sc)))
 
 
         '///////////////////////////////////////////////
