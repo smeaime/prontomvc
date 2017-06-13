@@ -92,16 +92,17 @@
         }
 
 
-        var infowindow = new google.maps.InfoWindow(
-          {
-              content: 'safasdfasgasg',
-              size: new google.maps.Size(150, 50)
-          });
-
-
-
 
         function datos() {
+
+
+            var infowindow = new google.maps.InfoWindow(
+              {
+                  content: 'safasdfasgasg',
+                  size: new google.maps.Size(150, 50)
+              });
+
+
 
 
             var dataRows;
@@ -136,6 +137,7 @@
                     var dat = JSON.parse(result.d);
                     var heatMapData = [];// [ { location: new google.maps.LatLng(0, 0), weight: 0 } ] ;
                     var hcont = 0;
+                    var i = 0;
 
                     var maxtotal = Math.max.apply(Math, dat.map(function (o) { return o.total; }))
 
@@ -162,14 +164,21 @@
 
 
 
+
+
+
                             var marker = new google.maps.Marker({
                                 position: pos,
                                 label: {
-                                    text: dat[city].ProcedenciaDesc + ' ' + parseInt(dat[city].total / 1000) + 'Tn',
+                                    text: ' ', //dat[city].ProcedenciaDesc + ' ' + parseInt(dat[city].total / 1000) + 'Tn',
                                     color: 'blue',
-                                    fontSize: "14px"
+                                    fontSize: "14px",
                                 },
                                 map: map,
+                                
+
+                                name: dat[city].ProcedenciaDesc + ' ' + parseInt(dat[city].total / 1000) + 'Tn',
+                                address: '   ', //dat[city].ProcedenciaDesc + ' ' + parseInt(dat[city].total / 1000) + 'Tn',
 
 
                                 // icon: "/imagenes/vacio.png",
@@ -180,105 +189,134 @@
                                     fillColor: '#FF0000',
                                     fillOpacity: 0.5,
                                     path: google.maps.SymbolPath.CIRCLE,
-                                    scale: Math.sqrt(dat[city].total / maxtotal) * 50,
+                                    scale: Math.sqrt(dat[city].total / maxtotal) * 25,
                                     anchor: new google.maps.Point(0, 0),
-                            },
+                                },
 
                                 zIndex: Math.round(dat[city].lat * -100000) << 5
 
-                        });
+                            });
 
 
 
 
 
-                        var circle = new google.maps.Circle({
+                            var circle = new google.maps.Circle({
 
-                            strokeColor: '#FF0000',
-                            strokeOpacity: 0.8,
-                            strokeWeight: 2,
-                            fillColor: '#FF0000',
-                            fillOpacity: 0.35,
-                            map: map,
-                            clickable: true,
-                            center: pos,
-                            radius: Math.sqrt(dat[city].total / maxtotal) * 50000  //Math.sqrt(
+                                strokeColor: '#FF0000',
+                                strokeOpacity: 0.8,
+                                strokeWeight: 2,
+                                fillColor: '#FF0000',
+                                fillOpacity: 0.35,
+                                map: map,
+                                clickable: true,
+                                center: pos,
+                                radius: Math.sqrt(dat[city].total / maxtotal) * 50000  //Math.sqrt(
 
-                        });
+                            });
 
-                        circle.bindTo('center', marker, 'position');
-
-
+                            circle.bindTo('center', marker, 'position');
 
 
-                        marker.setVisible(true);
-                        circle.setVisible(false);
-
-                        google.maps.event.addListener(circle, 'click', function (ev) {
-                            infoWindow.setPosition(pos);
-                            infoWindow.open(map);
-                        });
-
-                        marker.addListener('mouseover', function () {
-                            infowindow.open(map, this);
-                        });
-
-                        // assuming you also want to hide the infowindow when user mouses-out
-                        marker.addListener('mouseout', function () {
-                            infowindow.close();
-                        });
 
 
-                        markers.push(marker);
+
+                            //var infowindow = new google.maps.InfoWindow({
+                            //    content: dat[city].ProcedenciaDesc + ' ' + parseInt(dat[city].total / 1000) + 'Tn'
+                            //});
 
 
-                        if (false) {
-                            var labelText = "1";
-                            var myOptions = {
-                                content: dat[city].ProcedenciaDesc,
-                                boxStyle: {
-                                    border: "none",
-                                    textAlign: "center",
-                                    fontSize: "10pt",
-                                    width: "50px"
-                                },
-                                disableAutoPan: true,
-                                pixelOffset: new google.maps.Size(-25, -5),
-                                position: pos,
-                                closeBoxURL: "",
-                                isHidden: false,
-                                pane: "floatPane",
-                                enableEventPropagation: true
-                            };
+                            google.maps.event.addListener(marker, 'click', (function (marker, i) {
+                                return function () {
+                                    var name = markers[i].name;
+                                    var address = markers[i].address;
+                                    var html = "<b>" + name + "</b> <br/>" + address;
+                                    infowindow.setContent(html);
+                                    infowindow.open(map, marker, html);
+                                    // infowindow.setContent(html);
+                                    // infowindow.open(map, marker);
+                                }
+                            })(marker, i));
 
-                            var ibLabel = new InfoBox(myOptions);
-                            ibLabel.open(map);
+
+                            //google.maps.event.addListener(circle, 'click', function (ev) {
+                            //    infoWindow.setPosition(pos);
+                            //    infoWindow.open(map);
+                            //});
+
+                            //marker.addListener('mouseover', function () {
+                            //    infowindow.open(map, this);
+                            //});
+
+                            //// assuming you also want to hide the infowindow when user mouses-out
+                            //marker.addListener('mouseout', function () {
+                            //    infowindow.close();
+                            //});
+
+                      
+
+
+                            marker.setVisible(true);
+                            circle.setVisible(false);
+
+
+
+
+                      
+
+
+
+
+                            markers.push(marker); i++;
+
+
+                            if (false) {
+                                var labelText = "1";
+                                var myOptions = {
+                                    content: dat[city].ProcedenciaDesc,
+                                    boxStyle: {
+                                        border: "none",
+                                        textAlign: "center",
+                                        fontSize: "10pt",
+                                        width: "50px"
+                                    },
+                                    disableAutoPan: true,
+                                    pixelOffset: new google.maps.Size(-25, -5),
+                                    position: pos,
+                                    closeBoxURL: "",
+                                    isHidden: false,
+                                    pane: "floatPane",
+                                    enableEventPropagation: true
+                                };
+
+                                var ibLabel = new InfoBox(myOptions);
+                                ibLabel.open(map);
+                            }
+
+
                         }
-
-
-                    }
-                else {
+                        else {
 
                             var h = { location: new google.maps.LatLng(dat[city].lat, dat[city].lng), weight: Math.sqrt(dat[city].total) * 100000 };
-                    heatMapData[hcont] = h;
-                    hcont++;
-                }
-            }
+                            heatMapData[hcont] = h;
+                            hcont++;
+                        }
+                    }
 
 
                     var heatmap = new google.maps.visualization.HeatmapLayer({
-            data: heatMapData
-        });
-        heatmap.setMap(map);
+                        data: heatMapData
+                    });
+                    heatmap.setMap(map);
 
 
 
-        //clearMarkers();
+                    //clearMarkers();
 
-        },
-        error: function (xhr, textStatus, exceptionThrown) {
-        },
-        });
+                },
+                error: function (xhr, textStatus, exceptionThrown) {
+                },
+            });
 
 
 
