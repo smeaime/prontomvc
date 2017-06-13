@@ -271,22 +271,22 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
         "use strict";
 
-        $(function() {
+        $(function () {
             //$('#MenuPrincipal').fadeOut(); 
-            $('#MenuPrincipal').hide(); 
+            $('#MenuPrincipal').hide();
 
             $("#searchmodfbox_Lista").parent().css('z-index', 50);
-               
+
 
         });
-           
+
 
         $('#btnMostrarMenu').click(function () {
-            $('#MenuPrincipal').show(); 
+            $('#MenuPrincipal').show();
         })
 
 
-            
+
         $('#btnExportarGrillaAjax3').click(function () {
 
             var d = {
@@ -441,14 +441,14 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                 success: function (data) {
                     // http://stackoverflow.com/questions/10439798/how-to-laod-raw-html-using-jquery-ajax-call-to-asp-net-webmethod
                     $("#Salida2").html("").append(data.d)
-                        
+
                     $('#titDemorado').click(function () {
                         //modificar el filtro para que incluya demorado y rechazado
                         var myfilter = { groupOp: "OR", rules: [] };
                         myfilter.rules.push({ field: "Situacion", op: "eq", data: "1" });
                         myfilter.rules.push({ field: "Situacion", op: "eq", data: "5" });
 
-                        jqGridFilter(JSON.stringify(myfilter) , $('#Lista'));
+                        jqGridFilter(JSON.stringify(myfilter), $('#Lista'));
                     })
 
                     $('#titAutorizado').click(function () {
@@ -456,7 +456,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                         var myfilter = { groupOp: "OR", rules: [] };
                         myfilter.rules.push({ field: "Situacion", op: "eq", data: "0" });
 
-                        jqGridFilter(JSON.stringify(myfilter) , $('#Lista'));
+                        jqGridFilter(JSON.stringify(myfilter), $('#Lista'));
                     })
 
                     $('#titPosicion').click(function () {
@@ -464,7 +464,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                         var myfilter = { groupOp: "OR", rules: [] };
                         myfilter.rules.push({ field: "Situacion", op: "eq", data: "2" });
 
-                        jqGridFilter(JSON.stringify(myfilter) , $('#Lista'));
+                        jqGridFilter(JSON.stringify(myfilter), $('#Lista'));
                     })
 
 
@@ -474,7 +474,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                         var myfilter = { groupOp: "OR", rules: [] };
                         myfilter.rules.push({ field: "Situacion", op: "eq", data: "4" });
 
-                        jqGridFilter(JSON.stringify(myfilter) , $('#Lista'));
+                        jqGridFilter(JSON.stringify(myfilter), $('#Lista'));
                     })
 
                     $('#titDescargado').click(function () {
@@ -482,7 +482,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                         var myfilter = { groupOp: "OR", rules: [] };
                         myfilter.rules.push({ field: "Situacion", op: "eq", data: "3" });
 
-                        jqGridFilter(JSON.stringify(myfilter) , $('#Lista'));
+                        jqGridFilter(JSON.stringify(myfilter), $('#Lista'));
                     })
 
 
@@ -491,7 +491,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                         var myfilter = { groupOp: "OR", rules: [] };
                         myfilter.rules.push({ field: "Situacion", op: "eq", data: "6" });
 
-                        jqGridFilter(JSON.stringify(myfilter) , $('#Lista'));
+                        jqGridFilter(JSON.stringify(myfilter), $('#Lista'));
                     })
 
 
@@ -500,7 +500,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                         var myfilter = { groupOp: "OR", rules: [] };
                         myfilter.rules.push({ field: "Situacion", op: "eq", data: "7" });
 
-                        jqGridFilter(JSON.stringify(myfilter) , $('#Lista'));
+                        jqGridFilter(JSON.stringify(myfilter), $('#Lista'));
                     })
 
                     $('#titSinCupo').click(function () {
@@ -508,7 +508,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                         var myfilter = { groupOp: "OR", rules: [] };
                         myfilter.rules.push({ field: "Situacion", op: "eq", data: "8" });
 
-                        jqGridFilter(JSON.stringify(myfilter) , $('#Lista'));
+                        jqGridFilter(JSON.stringify(myfilter), $('#Lista'));
                     })
                     //alert(data.d);
 
@@ -532,26 +532,25 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
         })
 
-        
 
 
 
 
-        function filtrarArticulosDefault_35603()
-        {
-                        var myfilter = { groupOp: "OR", rules: [] };
-                        myfilter.rules.push({ field: "Producto", op: "eq", data: "Maiz" });
-                        myfilter.rules.push({ field: "Producto", op: "eq", data: "Soja" });
-                        myfilter.rules.push({ field: "Producto", op: "eq", data: "Trigo Pan" });
-                        myfilter.rules.push({ field: "Producto", op: "eq", data: "Trigo Duro" });
-                        myfilter.rules.push({ field: "Producto", op: "eq", data: "Sorgo Granifero" });
-                        myfilter.rules.push({ field: "Producto", op: "eq", data: "Girasol" });
-                        myfilter.rules.push({ field: "Producto", op: "eq", data: "Girasol Alto Oleico" });
-                        myfilter.rules.push({ field: "Producto", op: "eq", data: "Girasol Confitero" });
-                        myfilter.rules.push({ field: "Producto", op: "eq", data: "Cebada Forrajera" });
-                        myfilter.rules.push({ field: "Producto", op: "eq", data: "Cebada Cervecera" });
 
-                        jqGridFilter(JSON.stringify(myfilter) , $('#Lista'));
+        function filtrarArticulosDefault_35603() {
+            var myfilter = { groupOp: "OR", rules: [] };
+            myfilter.rules.push({ field: "Producto", op: "eq", data: "Maiz" });
+            myfilter.rules.push({ field: "Producto", op: "eq", data: "Soja" });
+            myfilter.rules.push({ field: "Producto", op: "eq", data: "Trigo Pan" });
+            myfilter.rules.push({ field: "Producto", op: "eq", data: "Trigo Duro" });
+            myfilter.rules.push({ field: "Producto", op: "eq", data: "Sorgo Granifero" });
+            myfilter.rules.push({ field: "Producto", op: "eq", data: "Girasol" });
+            myfilter.rules.push({ field: "Producto", op: "eq", data: "Girasol Alto Oleico" });
+            myfilter.rules.push({ field: "Producto", op: "eq", data: "Girasol Confitero" });
+            myfilter.rules.push({ field: "Producto", op: "eq", data: "Cebada Forrajera" });
+            myfilter.rules.push({ field: "Producto", op: "eq", data: "Cebada Cervecera" });
+
+            jqGridFilter(JSON.stringify(myfilter), $('#Lista'));
 
 
             //Los aceites y Pellets y Harinas dejar como están.
@@ -737,30 +736,29 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
         }
 
-        function RefrescarFondoRenglon(grilla)
-        {
+        function RefrescarFondoRenglon(grilla) {
 
-            var iCol = getColumnIndexByName($(grilla),'Situacion'),
+            var iCol = getColumnIndexByName($(grilla), 'Situacion'),
                        cRows = grilla.rows.length, iRow, row, className;
 
-            for (iRow=0; iRow<cRows; iRow++) {
+            for (iRow = 0; iRow < cRows; iRow++) {
                 row = grilla.rows[iRow];
                 className = row.className;
                 if ($.inArray('jqgrow', className.split(' ')) > 0) {
                     var x = ($(row.cells[iCol]))[0].childNodes[0].data; //.children("input:checked");
 
                     //Autorizado: verde        Demorado: rojo            Rechazado: Violeta 
-                    if (x=="Autorizado") {
+                    if (x == "Autorizado") {
                         if ($.inArray('myAltRowClassAutorizado', className.split(' ')) === -1) {
                             row.className = className + ' myAltRowClassAutorizado';
                         }
                     }
-                    else if (x=="Demorado") {
+                    else if (x == "Demorado") {
                         if ($.inArray('myAltRowClassDemorado', className.split(' ')) === -1) {
                             row.className = className + ' myAltRowClassDemorado';
                         }
                     }
-                    else if (x=="Rechazado") {
+                    else if (x == "Rechazado") {
                         if ($.inArray('myAltRowClassRechazado', className.split(' ')) === -1) {
                             row.className = className + ' myAltRowClassRechazado';
                         }
@@ -1162,6 +1160,19 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
             var UltimoIdArticulo;
 
+
+
+
+
+
+
+
+
+
+
+
+
+
             $('#Lista').jqGrid({
                 //url: ROOT + 'CotizacionWilliamsDestino/Cotizaciones/',
                 url: 'HandlerCartaPorte.ashx',
@@ -1183,7 +1194,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
                 colNames: ['', 'Id', 'Nro CP', 'Turno', 'Situacion',
                             'Producto', 'Titular', 'Intermediario', 'R Comercial', 'Corredor',
-                            'Destinatario', 'Destino', 'IdDestino' ,'Entregador','Procedencia',
+                            'Destinatario', 'Destino', 'IdDestino', 'Entregador', 'Procedencia',
                             'Kilos Procedencia', 'Obs Situacion', 'Arribo', 'Descarga', 'Punto Venta',
                             'Fecha actualizacion', 'Patente', 'Kilos Descargados'
                 ],
@@ -1217,7 +1228,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
     }
 },
 
-{ name: 'Turno', index: ' Turno', align: 'left', width: 20, editable: false, hidden: false, edittype: 'text' ,searchoptions: { sopt: ['bw', 'cn', 'eq'] },},
+{ name: 'Turno', index: ' Turno', align: 'left', width: 20, editable: false, hidden: false, edittype: 'text', searchoptions: { sopt: ['bw', 'cn', 'eq'] }, },
 
 {
     name: 'Situacion', index: 'Situacion', align: 'left', width: 120, hidden: false, editable: true, edittype: 'select', sortable: false,
@@ -1248,7 +1259,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
         $(elem).autocomplete({
 
-            select: function( event, ui ) {
+            select: function (event, ui) {
                 $(elem).trigger('change');
             },
 
@@ -1325,8 +1336,8 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
 
         $(elem).autocomplete({
-            
-            select: function( event, ui ) {
+
+            select: function (event, ui) {
                 $(elem).trigger('change');
             },
 
@@ -1402,8 +1413,8 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
 
         $(elem).autocomplete({
-            
-            select: function( event, ui ) {
+
+            select: function (event, ui) {
                 $(elem).trigger('change');
             },
 
@@ -1479,8 +1490,8 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
 
         $(elem).autocomplete({
-            
-            select: function( event, ui ) {
+
+            select: function (event, ui) {
                 $(elem).trigger('change');
             },
 
@@ -1558,8 +1569,8 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
 
         $(elem).autocomplete({
-            
-            select: function( event, ui ) {
+
+            select: function (event, ui) {
                 $(elem).trigger('change');
             },
 
@@ -1637,8 +1648,8 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
 
         $(elem).autocomplete({
-            
-            select: function( event, ui ) {
+
+            select: function (event, ui) {
                 $(elem).trigger('change');
             },
 
@@ -1715,8 +1726,8 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
 
             $(elem).autocomplete({
-                
-                select: function( event, ui ) {
+
+                select: function (event, ui) {
                     $(elem).trigger('change');
                 },
 
@@ -1770,7 +1781,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
                 }
 
-         
+
             });
 
 
@@ -1796,8 +1807,8 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
 
         $(elem).autocomplete({
-            
-            select: function( event, ui ) {
+
+            select: function (event, ui) {
                 $(elem).trigger('change');
             },
 
@@ -1876,7 +1887,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
         $(elem).autocomplete({
 
-            select: function( event, ui ) {
+            select: function (event, ui) {
                 $(elem).val(ui.item.value);
                 $(elem).trigger('change');
             },
@@ -1914,7 +1925,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                         //}
 
 
-                        
+
 
                         response($.map(data, function (item) {
                             return {
@@ -2065,19 +2076,19 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                     //    }
                     //jQuery("#Lista").jqGrid('addRowData', Id, data, "last");
                     //AgregarItemVacio(grid)
-                    
-                        
+
+
                 },
 
 
 
-                loadComplete: function() {
+                loadComplete: function () {
                     // http://stackoverflow.com/questions/6575192/jqgrid-change-background-color-of-row-based-on-row-cell-value-by-column-name
 
                     RefrescarFondoRenglon(this);
 
 
-                       
+
                 },
 
 
@@ -2117,7 +2128,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
                 pager: $('#ListaPager'),
                 rowNum: 1000,
-                rowList: [10, 20, 50, 100,500,1000],
+                rowList: [10, 20, 50, 100, 500, 1000],
                 sortname: 'IdCartaDePorte',  //'FechaDescarga', //'NumeroCartaDePorte',
                 sortorder: 'desc',
                 viewrecords: true,
@@ -2151,7 +2162,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
              {
                  //sopt: ["cn"]
                  //sopt: ['eq', 'ne', 'lt', 'le', 'gt', 'ge', 'bw', 'bn', 'ew', 'en', 'cn', 'nc', 'nu', 'nn', 'in', 'ni'],
-                 zIndex:50,  width: 700, closeOnEscape: true, closeAfterSearch: true, multipleSearch: true, overlay: false
+                 zIndex: 50, width: 700, closeOnEscape: true, closeAfterSearch: true, multipleSearch: true, overlay: false
 
              }
                 // http://stackoverflow.com/questions/11228764/jqgrid-setting-zindex-for-alertmod
@@ -2199,17 +2210,17 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
         });
 
 
-        var getColumnIndexByName = function(grid, columnName) {
-            var cm = grid.jqGrid('getGridParam','colModel'),i=0,l=cm.length;
-            for (; i<l; i++) {
-                if (cm[i].name===columnName) {
+        var getColumnIndexByName = function (grid, columnName) {
+            var cm = grid.jqGrid('getGridParam', 'colModel'), i = 0, l = cm.length;
+            for (; i < l; i++) {
+                if (cm[i].name === columnName) {
                     return i; // return the index
                 }
             }
             return -1;
         };
 
-            
+
 
     </script>
 

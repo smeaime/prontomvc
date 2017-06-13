@@ -866,6 +866,95 @@ namespace ProntoMVC.Tests
 
 
 
+        [TestMethod]
+        public void movimientos_37806_4()
+        {
+
+            //no filtras por punto de venta
+
+
+
+            int pv = -1;
+            int idarticulo = SQLdinamico.BuscaIdArticuloPreciso("SOJA", SC);
+            int destino = SQLdinamico.BuscaIdWilliamsDestinoPreciso("ZARATE - TERMINAL LAS PALMAS", SC);
+            int destinatario = SQLdinamico.BuscaIdClientePreciso("AMAGGI ARGENTINA S.A.", SC);
+            DateTime desde = new DateTime(2017, 3, 23);
+            DateTime desde2 = new DateTime(2017, 5, 9);
+            DateTime hasta = new DateTime(2017, 5, 10);
+
+
+            var existencias1 = LogicaInformesWilliams.ExistenciasAlDiaPorPuerto(SC, desde, idarticulo, destino, destinatario, pv);
+            var existencias2 = LogicaInformesWilliams.ExistenciasAlDiaPorPuerto(SC, desde2, idarticulo, destino, destinatario, pv);
+            Debug.Print(existencias1.ToString());
+            var existenciasTotales = LogicaInformesWilliams.ExistenciasAlDiaPorPuerto(SC, hasta, idarticulo, destino, destinatario, pv);
+
+            string sTitulo = "";
+
+
+
+
+
+            // esto es cómo lo calcula GeneroDataTablesDeMovimientosDeStock
+
+            var sql = CartaDePorteManager.GetDataTableFiltradoYPaginado_CadenaSQL(SC,
+                    "", "", "", 1, 0,
+                    CartaDePorteManager.enumCDPestado.TodasMenosLasRechazadas, "", -1, -1,
+                    destinatario, -1,
+                     -1, idarticulo, -1, destino,
+                    CartaDePorteManager.FiltroANDOR.FiltroAND, "Export",
+                     desde, hasta, pv, ref sTitulo, "Ambas");
+
+            var dt = EntidadManager.ExecDinamico(SC, "select isnull(sum(netoproc),0) as total  from (" + sql + ") as C", 200);
+
+            decimal totalperiodo1 = Convert.ToDecimal(dt.Rows[0][0]);
+            decimal tot1 = Convert.ToDecimal(existencias1) + totalperiodo1;
+
+            Assert.AreEqual(tot1, existenciasTotales);
+
+
+
+
+
+
+
+            var sql2 = CartaDePorteManager.GetDataTableFiltradoYPaginado_CadenaSQL(SC,
+                    "", "", "", 1, 0,
+                    CartaDePorteManager.enumCDPestado.TodasMenosLasRechazadas, "", -1, -1,
+                    destinatario, -1,
+                     -1, idarticulo, -1, destino,
+                    CartaDePorteManager.FiltroANDOR.FiltroAND, "Export",
+                     desde2, hasta, pv, ref sTitulo, "Ambas");
+
+            var dt2 = EntidadManager.ExecDinamico(SC, "select isnull(sum(netoproc),0) as total  from (" + sql2 + ") as C", 200);
+
+            decimal totalperiodo2 = Convert.ToDecimal(dt2.Rows[0][0]);
+            decimal tot2 = Convert.ToDecimal(existencias1) + totalperiodo1;
+
+            Assert.AreEqual(tot2, existenciasTotales);
+
+
+
+
+
+
+
+
+
+            DataTable dtCDPs = null;
+            object dtMOVs = null, dt3 = null;
+
+            LogicaInformesWilliams.GeneroDataTablesDeMovimientosDeStock(ref dtCDPs, ref dt3, ref dtMOVs, destinatario, destino, idarticulo, desde, hasta, SC, pv);
+
+            // no puedo usar el RebindReportViewerLINQ_Excel porq este informe tiene su funcion especial para pasarle varios datasets
+            //Movimientos_RebindReportViewer("ProntoWeb\Informes\Movimientos.rdl", dtCDPs, dt2, dtMOVs, fechadesde, fechahasta, idDestino, idArticulo, idDestinatario)
+
+
+
+        }
+
+
+
+
 
 
         [TestMethod]
