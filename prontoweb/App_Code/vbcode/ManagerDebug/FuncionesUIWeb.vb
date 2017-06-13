@@ -1791,6 +1791,9 @@ Public Module ProntoFuncionesUIWeb
 
 
         Catch ex As Exception
+            ErrHandler2.WriteError(ConexBDLmaster)
+            ErrHandler2.WriteError(idempresa)
+            ErrHandler2.WriteError(Membership.GetUser.UserName)
             ErrHandler2.WriteError(ex)
         End Try
 
@@ -4277,6 +4280,55 @@ Public Module ProntoFuncionesUIWeb
 
 
 
+    Function asdfsdg() As String
+
+        '//////////////////////////////////////////////////////////////////
+        'Quilombos con la session
+
+        Dim mu As MembershipUser
+        mu = Membership.GetUser()
+        HttpContext.Current.Session(SESSIONPRONTO_UserId) = mu.ProviderUserKey.ToString
+        HttpContext.Current.Session(SESSIONPRONTO_UserName) = mu.UserName
+
+
+        'el problema es q va a buscar datos de la session...  -el ID de la session tambien se manda por cookie
+
+        Dim lista As Pronto.ERP.BO.EmpresaList
+        'Como las conexiones del web.config que apuntan a la BDLmaster no estan encriptadas,
+        'las encripto para que la capa inferior la use desencriptada cuando
+        'cree que la encripta por primera vez
+        Dim sConex As String
+        sConex = ConexBDLmaster()
+        lista = EmpresaManager.GetEmpresasPorUsuario(sConex, mu.ProviderUserKey.ToString)
+        Dim usuario As Usuario = Nothing
+        usuario = New Usuario
+        usuario.UserId = mu.ProviderUserKey.ToString
+        usuario.Nombre = mu.UserName
+
+
+        'arreglar esto
+        If Encriptar(sConex).Contains("SERVERSQL3") Then
+            usuario.IdEmpresa = 52
+        Else
+            usuario.IdEmpresa = 18
+        End If
+
+
+
+
+        usuario.StringConnection = Encriptar(BDLMasterEmpresasManager.GetConnectionStringEmpresa(usuario.UserId, usuario.IdEmpresa, sConex, "XXXXXX"))
+
+        HttpContext.Current.Session(SESSIONPRONTO_USUARIO) = usuario
+
+        DatosDeSesion(usuario.StringConnection, usuario.Nombre, HttpContext.Current.Session, sConex, Nothing, usuario.IdEmpresa)
+
+
+        Return usuario.StringConnection
+
+
+    End Function
+
+
 
 
     Function GetConnectionString(ByVal Server As System.Web.HttpServerUtility, ByVal Session As System.Web.SessionState.HttpSessionState) As String
@@ -4286,41 +4338,15 @@ Public Module ProntoFuncionesUIWeb
         If Not (Session(SESSIONPRONTO_USUARIO) Is Nothing) Then
             stringConn = DirectCast(Session(SESSIONPRONTO_USUARIO), Usuario).StringConnection
 
+
+
             If stringConn = "" Then
                 If Membership.GetUser() IsNot Nothing Then
                     ErrHandler2.WriteError(Membership.GetUser().UserName + " esta logueado, pero lo redirijo al login porque faltan los datos de session. No deberia mejor mandarlo a SeleccionarEmpresa? Ademas, no hago el LogOut y le queda el cookie!!!")
 
-                    '//////////////////////////////////////////////////////////////////
-                    'Quilombos con la session
-
-                    Dim mu As MembershipUser
-                    mu = Membership.GetUser()
-                    HttpContext.Current.Session(SESSIONPRONTO_UserId) = mu.ProviderUserKey.ToString
-                    HttpContext.Current.Session(SESSIONPRONTO_UserName) = mu.UserName
 
 
-                    'el problema es q va a buscar datos de la session...  -el ID de la session tambien se manda por cookie
-
-                    Dim lista As Pronto.ERP.BO.EmpresaList
-                    'Como las conexiones del web.config que apuntan a la BDLmaster no estan encriptadas,
-                    'las encripto para que la capa inferior la use desencriptada cuando
-                    'cree que la encripta por primera vez
-                    Dim sConex As String
-                    sConex = ConexBDLmaster()
-                    lista = EmpresaManager.GetEmpresasPorUsuario(sConex, mu.ProviderUserKey.ToString)
-                    Dim usuario As Usuario = Nothing
-                    usuario = New Usuario
-                    usuario.UserId = mu.ProviderUserKey.ToString
-                    usuario.Nombre = mu.UserName
-                    usuario.IdEmpresa = 18
-                    If Debugger.IsAttached Then usuario.IdEmpresa = 52
-                    usuario.StringConnection = Encriptar(BDLMasterEmpresasManager.GetConnectionStringEmpresa(usuario.UserId, usuario.IdEmpresa, sConex, "XXXXXX"))
-
-                    HttpContext.Current.Session(SESSIONPRONTO_USUARIO) = usuario
-
-                    DatosDeSesion(usuario.StringConnection, usuario.Nombre, HttpContext.Current.Session, sConex, Nothing, usuario.IdEmpresa)
-
-                    Return usuario.StringConnection
+                    Return asdfsdg()
                     '//////////////////////////////////////////////////////////////////
                     '//////////////////////////////////////////////////////////////////
                     '//////////////////////////////////////////////////////////////////
@@ -4335,36 +4361,7 @@ Public Module ProntoFuncionesUIWeb
 
 
 
-                '//////////////////////////////////////////////////////////////////
-                'Quilombos con la session
-
-                Dim mu As MembershipUser
-                mu = Membership.GetUser()
-                HttpContext.Current.Session(SESSIONPRONTO_UserId) = mu.ProviderUserKey.ToString
-                HttpContext.Current.Session(SESSIONPRONTO_UserName) = mu.UserName
-
-                'el problema es q va a buscar datos de la session...  -el ID de la session tambien se manda por cookie
-
-                Dim lista As Pronto.ERP.BO.EmpresaList
-                'Como las conexiones del web.config que apuntan a la BDLmaster no estan encriptadas,
-                'las encripto para que la capa inferior la use desencriptada cuando
-                'cree que la encripta por primera vez
-                Dim sConex As String
-                sConex = ConexBDLmaster()
-                lista = EmpresaManager.GetEmpresasPorUsuario(sConex, mu.ProviderUserKey.ToString)
-                Dim usuario As Usuario = Nothing
-                usuario = New Usuario
-                usuario.UserId = mu.ProviderUserKey.ToString
-                usuario.Nombre = mu.UserName
-                usuario.IdEmpresa = 18
-                If Debugger.IsAttached Then usuario.IdEmpresa = 52
-                usuario.StringConnection = Encriptar(BDLMasterEmpresasManager.GetConnectionStringEmpresa(usuario.UserId, usuario.IdEmpresa, sConex, "XXXXXX"))
-
-                HttpContext.Current.Session(SESSIONPRONTO_USUARIO) = usuario
-
-                DatosDeSesion(usuario.StringConnection, usuario.Nombre, HttpContext.Current.Session, sConex, Nothing, usuario.IdEmpresa)
-
-                Return usuario.StringConnection
+                Return asdfsdg()
 
                 '//////////////////////////////////////////////////////////////////
                 '//////////////////////////////////////////////////////////////////
@@ -4373,7 +4370,7 @@ Public Module ProntoFuncionesUIWeb
 
 
             Else
-                Server.Transfer("~/Login.aspx")
+                    Server.Transfer("~/Login.aspx")
             End If
         End If
 

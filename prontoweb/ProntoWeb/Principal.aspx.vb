@@ -22,21 +22,21 @@ Partial Class ProntoWeb_Principal
 
 
 
-        If BDLMasterEmpresasManager.EmpresaPropietariaDeLaBase(HFSC.Value) = "Williams" Then
+        'If BDLMasterEmpresasManager.EmpresaPropietariaDeLaBase(HFSC.Value) = "Williams" Then
 
-            Dim rol = Roles.GetRolesForUser(Session(SESSIONPRONTO_UserName))
+        Dim rol = Roles.GetRolesForUser(Membership.GetUser().UserName) ' (Session(SESSIONPRONTO_UserName))
 
-            If rol.Count > 0 AndAlso rol(0) = "WilliamsCliente" Then
-                Response.Redirect(String.Format("~/ProntoWeb/CartaDePorteInformesAccesoClientes.aspx"))
-            Else
-                Response.Redirect(String.Format("~/ProntoWeb/CartasDePortes.aspx?tipo=Todas"))
-                'Server.Transfer(String.Format("~/ProntoWeb/CartasDePortes.aspx?tipo=Descargas"))
-            End If
-
-        ElseIf BDLMasterEmpresasManager.EmpresaPropietariaDeLaBase(HFSC.Value) = "Autotrol" Then
-            Response.Redirect(String.Format("~/ProntoWeb/RequerimientosB.aspx?tipo=Todas"))
-
+        If rol.Count > 0 AndAlso rol(0) = "WilliamsCliente" Then
+            Response.Redirect(String.Format("~/ProntoWeb/CartaDePorteInformesAccesoClientes.aspx"))
+        Else
+            Response.Redirect(String.Format("~/ProntoWeb/CartasDePortes.aspx?tipo=Todas"))
+            'Server.Transfer(String.Format("~/ProntoWeb/CartasDePortes.aspx?tipo=Descargas"))
         End If
+
+        'ElseIf BDLMasterEmpresasManager.EmpresaPropietariaDeLaBase(HFSC.Value) = "Autotrol" Then
+        '    Response.Redirect(String.Format("~/ProntoWeb/RequerimientosB.aspx?tipo=Todas"))
+
+        'End If
 
         If InStr(Request.Url.ToString, "Principal") = 0 Then
             Response.Redirect(String.Format("~/ProntoWeb/Principal.aspx"))
