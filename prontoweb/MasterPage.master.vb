@@ -36,7 +36,7 @@ Partial Class MasterPage
 
 
 
-    
+
 
 
     'http://forums.asp.net/t/1370779.aspx para tener acceso a la imagen de fondo en otros directorios
@@ -53,8 +53,12 @@ Partial Class MasterPage
 
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
+
+
+        Dim asdasd = GetConnectionString(Server, Session)  'para que lo redirija al login si hay algo raro
+
         SC = ConexBDLmaster()
-        HFSC.Value = SC  'por qué uso ac´´a la conexion de la bdlmaster? despues me confundo con el autocomplete
+        HFSC.Value = SC  'por qué uso aca la conexion de la bdlmaster? despues me confundo con el autocomplete
 
 
         ConfiguracionDeLaEmpresa()
@@ -149,7 +153,7 @@ Partial Class MasterPage
             If nodo IsNot Nothing Then rmArbol.FindNode(nodo).Select()
 
 
-            
+
 
         End If
 
@@ -177,7 +181,7 @@ Partial Class MasterPage
         Catch ex As Exception
             ErrHandler2.WriteError(ex)
         End Try
-    
+
         ArbolSiteMap.Visible = False
 
         ValidarEspacioLibre()
@@ -188,10 +192,10 @@ Partial Class MasterPage
 
 
 
-            lblNotificaciones.Text &= ParametroManager.TraerValorParametro2(Usuario.StringConnection, ParametroManager.eParam2.NotificacionesWeb) & _
-                                     ParametroManager.TraerValorParametro2(Usuario.StringConnection, ParametroManager.eParam2.NotificacionesWeb2) & _
-                                      ParametroManager.TraerValorParametro2(Usuario.StringConnection, ParametroManager.eParam2.NotificacionesWeb3) & _
-                                       ParametroManager.TraerValorParametro2(Usuario.StringConnection, ParametroManager.eParam2.NotificacionesWeb4) & _
+            lblNotificaciones.Text &= ParametroManager.TraerValorParametro2(Usuario.StringConnection, ParametroManager.eParam2.NotificacionesWeb) &
+                                     ParametroManager.TraerValorParametro2(Usuario.StringConnection, ParametroManager.eParam2.NotificacionesWeb2) &
+                                      ParametroManager.TraerValorParametro2(Usuario.StringConnection, ParametroManager.eParam2.NotificacionesWeb3) &
+                                       ParametroManager.TraerValorParametro2(Usuario.StringConnection, ParametroManager.eParam2.NotificacionesWeb4) &
                                         ParametroManager.TraerValorParametro2(Usuario.StringConnection, ParametroManager.eParam2.NotificacionesWeb5)
 
 
@@ -230,7 +234,7 @@ Partial Class MasterPage
         Catch ex As Exception
             ErrHandler2.WriteError(ex)
         End Try
-        
+
         'smdsHarriyott.SiteMapProvider =
         'smdsHarriyott.SiteMapProvider = "main"
 
@@ -536,13 +540,20 @@ Partial Class MasterPage
 
 
     Sub ConfiguracionDeLaEmpresa()
-        Dim Usuario = New Usuario
+        Try
+
+            Dim Usuario = New Usuario
         Usuario = Session(SESSIONPRONTO_USUARIO)
 
 
         LogoImage.ImageUrl = BDLMasterEmpresasManagerMigrar.SetLogoImage_MasterPage(Usuario)
         SiteMapDataSource.SiteMapProvider = BDLMasterEmpresasManagerMigrar.SetSiteMap(Usuario)
 
+
+        Catch ex As Exception
+
+            ErrHandler.WriteError(ex)
+        End Try
 
     End Sub
 
