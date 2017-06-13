@@ -166,14 +166,14 @@ function getBaseURL() {
     if (url.indexOf('bdlconsultores') != -1) {
         return "https://prontotesting.bdlconsultores.com.ar/";
     }
+    else if (url.indexOf('prontotesting') != -1 || url.indexOf('190.12.108.166') != -1) {
+        return "http://prontotesting.williamsentregas.com.ar/";
+    }
     else if (url.indexOf('williamsentregas') != -1) {
         return "https://prontoweb.williamsentregas.com.ar/";
     }
     else if (url.indexOf('williamsdebug') != -1) {
         return "http://190.12.108.166/williamsdebug/";
-    }
-    else if (url.indexOf('prontotesting') != -1 || url.indexOf('190.12.108.166') != -1) {
-        return "http://190.12.108.166/prontotesting/";
     }
     else if (url.indexOf('190.2.243.5') != -1) {
         return "http://190.2.243.5/pronto/";
