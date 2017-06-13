@@ -49,7 +49,7 @@
 
 
 
-        
+
 
         function initMap() {
 
@@ -160,6 +160,8 @@
                             //mapLabel.set('position', new google.maps.LatLng(dat[city].lat, dat[city].lng));
 
 
+
+
                             var marker = new google.maps.Marker({
                                 position: pos,
                                 label: {
@@ -167,97 +169,119 @@
                                     color: 'blue',
                                     fontSize: "14px"
                                 },
-                                icon: "/imagenes/vacio.png",
-                                map: map
-                            });
-
-
-                            var circle = new google.maps.Circle({
-
-                                strokeColor: '#FF0000',
-                                strokeOpacity: 0.8,
-                                strokeWeight: 2,
-                                fillColor: '#FF0000',
-                                fillOpacity: 0.35,
                                 map: map,
-                                clickable: true,
-                                center: pos,
-                                radius: Math.sqrt(dat[city].total / maxtotal) * 50000  //Math.sqrt(
-
-                            });
-
-                            circle.bindTo('center', marker, 'position');
-                            marker.setVisible(true);
 
 
-                            google.maps.event.addListener(circle, 'click', function (ev) {
-                                infoWindow.setPosition(pos);
-                                infoWindow.open(map);
-                            });
+                                // icon: "/imagenes/vacio.png",
+                                icon: {
+                                    strokeColor: '#FF0000',
+                                    strokeOpacity: 1.0,
+                                    strokeWeight: 2,
+                                    fillColor: '#FF0000',
+                                    fillOpacity: 0.5,
+                                    path: google.maps.SymbolPath.CIRCLE,
+                                    scale: Math.sqrt(dat[city].total / maxtotal) * 50,
+                                    anchor: new google.maps.Point(0, 0),
+                            },
 
-                            marker.addListener('mouseover', function () {
-                                infowindow.open(map, this);
-                            });
+                                zIndex: Math.round(dat[city].lat * -100000) << 5
 
-                            // assuming you also want to hide the infowindow when user mouses-out
-                            marker.addListener('mouseout', function () {
-                                infowindow.close();
-                            });
-
-
-                            markers.push(marker);
-
-
-                            if (false) {
-                                var labelText = "1";
-                                var myOptions = {
-                                    content: dat[city].ProcedenciaDesc,
-                                    boxStyle: {
-                                        border: "none",
-                                        textAlign: "center",
-                                        fontSize: "10pt",
-                                        width: "50px"
-                                    },
-                                    disableAutoPan: true,
-                                    pixelOffset: new google.maps.Size(-25, -5),
-                                    position: pos,
-                                    closeBoxURL: "",
-                                    isHidden: false,
-                                    pane: "floatPane",
-                                    enableEventPropagation: true
-                                };
-
-                                var ibLabel = new InfoBox(myOptions);
-                                ibLabel.open(map);
-                            }
+                        });
 
 
+
+
+
+                        var circle = new google.maps.Circle({
+
+                            strokeColor: '#FF0000',
+                            strokeOpacity: 0.8,
+                            strokeWeight: 2,
+                            fillColor: '#FF0000',
+                            fillOpacity: 0.35,
+                            map: map,
+                            clickable: true,
+                            center: pos,
+                            radius: Math.sqrt(dat[city].total / maxtotal) * 50000  //Math.sqrt(
+
+                        });
+
+                        circle.bindTo('center', marker, 'position');
+
+
+
+
+                        marker.setVisible(true);
+                        circle.setVisible(false);
+
+                        google.maps.event.addListener(circle, 'click', function (ev) {
+                            infoWindow.setPosition(pos);
+                            infoWindow.open(map);
+                        });
+
+                        marker.addListener('mouseover', function () {
+                            infowindow.open(map, this);
+                        });
+
+                        // assuming you also want to hide the infowindow when user mouses-out
+                        marker.addListener('mouseout', function () {
+                            infowindow.close();
+                        });
+
+
+                        markers.push(marker);
+
+
+                        if (false) {
+                            var labelText = "1";
+                            var myOptions = {
+                                content: dat[city].ProcedenciaDesc,
+                                boxStyle: {
+                                    border: "none",
+                                    textAlign: "center",
+                                    fontSize: "10pt",
+                                    width: "50px"
+                                },
+                                disableAutoPan: true,
+                                pixelOffset: new google.maps.Size(-25, -5),
+                                position: pos,
+                                closeBoxURL: "",
+                                isHidden: false,
+                                pane: "floatPane",
+                                enableEventPropagation: true
+                            };
+
+                            var ibLabel = new InfoBox(myOptions);
+                            ibLabel.open(map);
                         }
-                        else {
+
+
+                    }
+                else {
 
                             var h = { location: new google.maps.LatLng(dat[city].lat, dat[city].lng), weight: Math.sqrt(dat[city].total) * 100000 };
-                            heatMapData[hcont] = h;
-                            hcont++;
-                        }
-                    }
+                    heatMapData[hcont] = h;
+                    hcont++;
+                }
+            }
 
 
                     var heatmap = new google.maps.visualization.HeatmapLayer({
-                        data: heatMapData
-                    });
-                    heatmap.setMap(map);
+            data: heatMapData
+        });
+        heatmap.setMap(map);
 
 
 
-                    clearMarkers();
+        //clearMarkers();
 
-                },
-                error: function (xhr, textStatus, exceptionThrown) {
-                },
-            });
+        },
+        error: function (xhr, textStatus, exceptionThrown) {
+        },
+        });
 
 
-            
+
         }
 
 
