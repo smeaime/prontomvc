@@ -28,11 +28,11 @@
             src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDWNbUasHY_ay5SMIpz02pu534Y1cif72k&libraries=visualization&callback=initMap">
     </script>-->
 
-    <div id="floating-panel">
+    <!--<div id="floating-panel">
         <input onclick="clearMarkers();" type=button value="Ocultar">
         <input onclick="showMarkers();" type=button value="Ver Nombres">
-        <!--<input onclick="deleteMarkers();" type=button value="Delete Markers">-->
-    </div>
+        <input onclick="deleteMarkers();" type=button value="Delete Markers">
+    </div>-->
 
     <div id="map"></div>
 
@@ -244,14 +244,22 @@
                             //    infoWindow.open(map);
                             //});
 
-                            //marker.addListener('mouseover', function () {
-                            //    infowindow.open(map, this);
-                            //});
+                            marker.addListener('mouseover', (function (marker, i) {
+                                return function () {
+                                    var name = markers[i].name;
+                                    var address = markers[i].address;
+                                    var html = "<b>" + name + "</b> <br/>" + address;
+                                    infowindow.setContent(html);
+                                    infowindow.open(map, marker, html);
+                                    // infowindow.setContent(html);
+                                    // infowindow.open(map, marker);
+                                }
+                            })(marker, i));
 
-                            //// assuming you also want to hide the infowindow when user mouses-out
-                            //marker.addListener('mouseout', function () {
-                            //    infowindow.close();
-                            //});
+                            // assuming you also want to hide the infowindow when user mouses-out
+                            marker.addListener('mouseout', function () {
+                                infowindow.close();
+                            });
 
                       
 

@@ -881,6 +881,7 @@ namespace ProntoMVC.Tests
             DateTime desde = new DateTime(2017, 3, 23);
             DateTime desde2 = new DateTime(2017, 5, 9);
             DateTime hasta = new DateTime(2017, 5, 10);
+            DateTime hasta2 = new DateTime(2017, 5, 11);
 
 
             var existencias1 = LogicaInformesWilliams.ExistenciasAlDiaPorPuerto(SC, desde, idarticulo, destino, destinatario, pv);
@@ -888,23 +889,20 @@ namespace ProntoMVC.Tests
             Debug.Print(existencias1.ToString());
             var existenciasTotales = LogicaInformesWilliams.ExistenciasAlDiaPorPuerto(SC, hasta, idarticulo, destino, destinatario, pv);
 
+            var existencias3 = LogicaInformesWilliams.ExistenciasAlDiaPorPuerto(SC, hasta2, idarticulo, destino, destinatario, pv);
+
             string sTitulo = "";
 
 
 
 
-            dtCDPs = CartaDePorteManager.GetDataTableFiltradoYPaginado(sc,
-                    "", "", "", 1, 0,
-                    enumCDPestado.TodasMenosLasRechazadas, "", -1, -1,
-                    idDestinatario, -1,
-                    -1, idarticulo, -1, idDestino,
-                    "1", "Export",
-                     desde, hasta, -1, sTitulo, , , , , , , , , )
-
-
 
 
             // esto es cómo lo calcula GeneroDataTablesDeMovimientosDeStock
+
+
+        
+
 
             var sql = CartaDePorteManager.GetDataTableFiltradoYPaginado_CadenaSQL(SC,
                     "", "", "", 1, 0,
@@ -912,12 +910,15 @@ namespace ProntoMVC.Tests
                     destinatario, -1,
                      -1, idarticulo, -1, destino,
                     CartaDePorteManager.FiltroANDOR.FiltroAND, "Export",
-                     desde, hasta, pv, ref sTitulo, "Ambas");
+                     desde, hasta, pv, ref sTitulo);
+
+            decimal MOVperiodo1 = 0;
+
 
             var dt = EntidadManager.ExecDinamico(SC, "select isnull(sum(netoproc),0) as total  from (" + sql + ") as C", 200);
 
-            decimal totalperiodo1 = Convert.ToDecimal(dt.Rows[0][0]);
-            decimal tot1 = Convert.ToDecimal(existencias1) + totalperiodo1;
+            decimal CPperiodo1 = Convert.ToDecimal(dt.Rows[0][0]);
+            decimal tot1 = Convert.ToDecimal(existencias1) + CPperiodo1 + MOVperiodo1;
 
             //Assert.AreEqual(tot1, existenciasTotales);
 
@@ -926,6 +927,7 @@ namespace ProntoMVC.Tests
 
 
 
+            decimal MOVperiodo2 = 0;
 
             var sql2 = CartaDePorteManager.GetDataTableFiltradoYPaginado_CadenaSQL(SC,
                     "", "", "", 1, 0,
@@ -933,12 +935,12 @@ namespace ProntoMVC.Tests
                     destinatario, -1,
                      -1, idarticulo, -1, destino,
                     CartaDePorteManager.FiltroANDOR.FiltroAND, "Export",
-                     desde2, hasta, pv, ref sTitulo, "Ambas");
+                     desde2, hasta, pv, ref sTitulo);
 
             var dt2 = EntidadManager.ExecDinamico(SC, "select isnull(sum(netoproc),0) as total  from (" + sql2 + ") as C", 200);
 
-            decimal totalperiodo2 = Convert.ToDecimal(dt2.Rows[0][0]);
-            decimal tot2 = Convert.ToDecimal(existencias2) + totalperiodo2;
+            decimal CPperiodo2 = Convert.ToDecimal(dt2.Rows[0][0]);
+            decimal tot2 = Convert.ToDecimal(existencias2) + CPperiodo2 + MOVperiodo2;
 
             //Assert.AreEqual(tot2, existenciasTotales);
 
