@@ -21246,13 +21246,10 @@ Public Class LogicaInformesWilliams
                                 i.Entrada_o_Salida, i.Cantidad, i.Vapor, i.Contrato, i.IdCDPMovimiento, i.Numero
                 ).ToList
 
-
         Dim movs = From i In movs2
                    Select Tipo = f(i.Tipo),
                                 i.ExportadorOrigen, i.FechaIngreso,
                                 i.Entrada_o_Salida, i.Cantidad, i.Vapor, i.Contrato, i.IdCDPMovimiento, i.Numero
-
-
 
 
         dtMOVs = movs
