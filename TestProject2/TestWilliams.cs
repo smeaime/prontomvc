@@ -865,6 +865,57 @@ namespace ProntoMVC.Tests
 
 
 
+        [TestMethod]
+        public void mapa_con_googlemaps_40288()
+        {
+            //agregar en la grilla de localidades la edicion de lat y lng
+
+            var s = new ServicioCartaPorte.servi();
+            s.ReasignarGeocodeLocalidades(false, SC);
+        }
+
+
+
+        [TestMethod]
+        public void mapa_con_googlemaps_40288_2()
+        {
+
+            string modoExportacion = "Ambos";
+            DateTime fechadesde = new DateTime(2016, 11, 1);
+            DateTime fechahasta = new DateTime(2017, 11, 1);
+            int idprocedencia = -1;
+            int idarticulo = -1;
+            int idclientefacturado = -1;
+            int tonsdesde = 1000;
+            int tonshasta = 999999;
+
+            // llamar al mapa
+            var s = new ServicioCartaPorte.servi();
+            var q = s.MapaGeoJSON_DLL(SC, modoExportacion, fechadesde, fechahasta, idprocedencia, idarticulo, idclientefacturado, tonsdesde, tonshasta);
+
+        }
+
+
+
+
+        [TestMethod]
+        public void movimientos_37806_5()
+        {
+
+            //no filtras por punto de venta
+            int pv = -1;
+            int idarticulo = SQLdinamico.BuscaIdArticuloPreciso("SOJA", SC);
+            int destino = SQLdinamico.BuscaIdWilliamsDestinoPreciso("ZARATE - TERMINAL LAS PALMAS", SC);
+            int destinatario = SQLdinamico.BuscaIdClientePreciso("AMAGGI ARGENTINA S.A.", SC);
+            DateTime desde = new DateTime(2017, 5, 9);
+
+            var existencias1 = LogicaInformesWilliams.ExistenciasAlDiaPorPuerto(SC, desde, idarticulo, destino, destinatario, pv);
+
+            Debug.Assert(existencias1 != -74353677);
+
+        }
+
+
 
         [TestMethod]
         public void movimientos_37806_4()
@@ -901,7 +952,7 @@ namespace ProntoMVC.Tests
             // esto es cómo lo calcula GeneroDataTablesDeMovimientosDeStock
 
 
-        
+
 
 
             var sql = CartaDePorteManager.GetDataTableFiltradoYPaginado_CadenaSQL(SC,
@@ -967,40 +1018,6 @@ namespace ProntoMVC.Tests
 
         }
 
-
-
-
-
-
-        [TestMethod]
-        public void mapa_con_googlemaps_40288()
-        {
-            //agregar en la grilla de localidades la edicion de lat y lng
-
-            var s = new ServicioCartaPorte.servi();
-            s.ReasignarGeocodeLocalidades(false, SC);
-        }
-
-
-
-        [TestMethod]
-        public void mapa_con_googlemaps_40288_2()
-        {
-
-            string modoExportacion = "Ambos";
-            DateTime fechadesde = new DateTime(2016, 11, 1);
-            DateTime fechahasta = new DateTime(2016, 11, 1);
-            int idprocedencia = -1;
-            int idarticulo = -1;
-            int idclientefacturado = -1;
-            int tonsdesde = 1000;
-            int tonshasta = 999999;
-
-            // llamar al mapa
-            var s = new ServicioCartaPorte.servi();
-            var q = s.MapaGeoJSON_DLL(SC, modoExportacion, fechadesde, fechahasta, idprocedencia, idarticulo, idclientefacturado, tonsdesde, tonshasta);
-
-        }
 
 
 
