@@ -4835,25 +4835,28 @@ Formato localidad-provincia	destination	x
 
 
 
-        public virtual string MapaGeoJSON_DLL(string SC, string modoExportacion, DateTime fechadesde, DateTime fechahasta, 
+        public virtual string MapaGeoJSON_DLL(string SC, string modoExportacion, DateTime fechadesde, DateTime fechahasta,
                                                     int idprocedencia, int idarticulo, int idclientefacturado, int tonsdesde, int tonshasta)
         {
-            
+
             var scEF = ProntoMVC.Data.Models.Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC));
 
             using (DemoProntoEntities db = new DemoProntoEntities(scEF))
             {
-                
 
+                db.Database.CommandTimeout = 200;
 
                 var q2 = (from x in db.fSQL_GetDataTableFiltradoYPaginado(
                                                         0, 9999999, 0, "", -1, -1,
                                                         -1, -1, -1, idarticulo, idprocedencia,
-                                                        -1, 0,  modoExportacion,
+                                                        -1, 0, modoExportacion,
                                                         fechadesde, fechahasta,
                                                         0, null, false, "", "",
                                                         -1, null, 0, "", "Todos")
                           from l in db.Localidades.Where(y => System.Data.Entity.SqlServer.SqlFunctions.StringConvert((double?)y.IdLocalidad).Trim() == x.Procedencia)
+                          //from f in db.Facturas.Where(y => y.IdFactura == (x.IdFacturaImputada ?? 0))
+                          //where (idarticulo == -1 || (x.IdArticulo ?? 0) == idarticulo)
+                          //   && (idclientefacturado == -1 || (f.IdCliente ?? 0) == idclientefacturado)  && x.Procedencia!=""
                           group x by new { x.ProcedenciaDesc, x.ProcedenciaProvinciaDesc, x.Procedencia, l.lat, l.lng } into grp
                           select new
                           {
@@ -4867,8 +4870,11 @@ Formato localidad-provincia	destination	x
                          ).ToList();
 
 
-
-
+                //var q3 = (from x in q2
+                //          where (idprocedencia == -1 || Convert.ToInt32(x.Procedencia) == idprocedencia)
+                //             && (x.total >= tonsdesde && x.total <= tonshasta)
+                //          select x
+                //        ).ToList();
 
 
                 System.Web.Script.Serialization.JavaScriptSerializer jsonSerializer = new System.Web.Script.Serialization.JavaScriptSerializer();
@@ -4992,7 +4998,7 @@ order by kilos desc
         public string ReasignarGeocodeLocalidades(bool bIncluirLasQueYaTienenGeocode, string SC)
         {
 
-            string err="";
+            string err = "";
 
             var scEF = ProntoMVC.Data.Models.Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC));
             DemoProntoEntities db = new DemoProntoEntities(scEF);
@@ -5033,6 +5039,7 @@ order by kilos desc
                     err += address + "   <br/>";
 
                     ErrHandler2.WriteError(address);
+                    ErrHandler2.WriteError(ex);
                 }
 
 
