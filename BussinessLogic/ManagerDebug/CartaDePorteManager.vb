@@ -7692,7 +7692,7 @@ Public Class CartaDePorteManager
         'lo que sea dinámico, lo tendré que migrar para evitar inyeccion
 
         If maxrows > 0 Then
-            maxrows = Min(maxrows, _CONST_MAXROWS)
+            'maxrows = Min(maxrows, _CONST_MAXROWS)
         Else
             maxrows = _CONST_MAXROWS
         End If
@@ -7877,7 +7877,7 @@ Public Class CartaDePorteManager
         'lo que sea dinámico, lo tendré que migrar para evitar inyeccion
 
         If maxrows > 0 Then
-            maxrows = Min(maxrows, _CONST_MAXROWS)
+            'maxrows = Min(maxrows, _CONST_MAXROWS)
         Else
             maxrows = _CONST_MAXROWS
         End If
@@ -7939,7 +7939,7 @@ Public Class CartaDePorteManager
         'lo que sea dinámico, lo tendré que migrar para evitar inyeccion
 
         If maxrows > 0 Then
-            maxrows = Min(maxrows, _CONST_MAXROWS)
+            'maxrows = Min(maxrows, _CONST_MAXROWS)
         Else
             maxrows = _CONST_MAXROWS
         End If
@@ -21316,7 +21316,7 @@ Public Class LogicaInformesWilliams
 
 
         Dim sql = CartaDePorteManager.GetDataTableFiltradoYPaginado_CadenaSQL(sc,
-                "", "", "", 1, 0,
+                "", "", "", 1, 999999999,
              enumCDPestado.TodasMenosLasRechazadas, "", -1, -1,
                 iddestinatario, -1,
                 -1, IdArticulo, -1, IdDestinoWilliams,

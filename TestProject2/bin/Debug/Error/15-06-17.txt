@@ -1,0 +1,131 @@
+
+Log Entry : 
+06/15/2017 08:31:21
+Error in: . Error Message:entradasCDP: 1083412176
+__________________________
+
+Log Entry : 
+06/15/2017 08:31:21
+Error in: . Error Message:entradasMOV: 333359003
+__________________________
+
+Log Entry : 
+06/15/2017 08:31:21
+Error in: . Error Message:salidas: 1397535265
+__________________________
+
+Log Entry : 
+06/15/2017 08:31:21
+Error in: . Error Message:total: 19235914
+__________________________
+
+Log Entry : 
+06/15/2017 08:31:21
+Error in: . Error Message:
+11
+42
+83
+89
+93
+239
+266
+268
+269
+298
+299
+301
+302
+330
+376
+404
+407
+408
+608
+634
+648
+663
+684
+698
+706
+850
+857
+866
+896
+1391
+1462
+1489
+1574
+1585
+1586
+1670
+1695
+1801
+1802
+2047
+2048
+2142
+2853
+2904
+2935
+2947
+2964
+2990
+3006
+3026
+3032
+3043
+3083
+3095
+3106
+3117
+3119
+3129
+3329
+3482
+3490
+3904
+3915
+3929
+3935
+3947
+3951
+__________________________
+
+Log Entry : 
+06/15/2017 09:02:28
+Error in: . Error Message:ARRECIFES BS AS, BUENOS AIRES, Argentina
+__________________________
+
+Log Entry : 
+06/15/2017 09:02:28
+Error in: . Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en ServicioCartaPorte.servi.ReasignarGeocodeLocalidades(Boolean bIncluirLasQueYaTienenGeocode, String SC) en C:\Users\Administrador\Documents\bdl\pronto\InterfazFlexicapture\prontoflexicapture.cs:línea 5031
+InterfazFlexicapture
+__________________________
+
+Log Entry : 
+06/15/2017 09:04:12
+Error in: . Error Message:ERECHIN, BUENOS AIRES, Argentina
+__________________________
+
+Log Entry : 
+06/15/2017 09:04:12
+Error in: . Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en ServicioCartaPorte.servi.ReasignarGeocodeLocalidades(Boolean bIncluirLasQueYaTienenGeocode, String SC) en C:\Users\Administrador\Documents\bdl\pronto\InterfazFlexicapture\prontoflexicapture.cs:línea 5031
+InterfazFlexicapture
+__________________________
+
+Log Entry : 
+06/15/2017 09:05:34
+Error in: . Error Message:GRAMADO, BUENOS AIRES, Argentina
+__________________________
+
+Log Entry : 
+06/15/2017 09:05:34
+Error in: . Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en ServicioCartaPorte.servi.ReasignarGeocodeLocalidades(Boolean bIncluirLasQueYaTienenGeocode, String SC) en C:\Users\Administrador\Documents\bdl\pronto\InterfazFlexicapture\prontoflexicapture.cs:línea 5031
+InterfazFlexicapture
+__________________________
