@@ -21446,7 +21446,7 @@ Public Class LogicaInformesWilliams
         Dim sTitulo As String = ""
 
         dtCDPs = CartaDePorteManager.GetDataTableFiltradoYPaginado(sc,
-                "", "", "", 1, 0,
+                "", "", "", 1, 999999999,
                 enumCDPestado.TodasMenosLasRechazadas, "", -1, -1,
                 idDestinatario, -1,
                 -1, idarticulo, -1, idDestino,
