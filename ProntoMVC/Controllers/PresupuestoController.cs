@@ -429,7 +429,7 @@ namespace ProntoMVC.Controllers
 
 
         public virtual ActionResult Presupuestos_DynamicGridData
-            (string sidx, string sord, int page, int rows, bool _search, string filters)
+            (string sidx, string sord, int page, int rows, bool _search, string filters, string FechaInicial, string FechaFinal)
         {
             string campo = String.Empty;
             //int pageSize = rows ?? 20;
