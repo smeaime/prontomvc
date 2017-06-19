@@ -8,6 +8,7 @@ using ProntoMVC.Controllers;
 using System.Web;
 using Repo;
 using Servicio;
+using MVCent = ProntoMVC.Data.Models;
 using ProntoMVC.Data.Models;
 using System.Web.Mvc;
 using System.Web.Security;
@@ -30,6 +31,9 @@ using System.Transactions;
 using ProntoFlexicapture;
 
 using System.IO;
+
+
+
 
 //test de java lopez
 // https://github.com/ajlopez/TddAppAspNetMvc/blob/master/Src/MyLibrary.Web.Tests/Controllers/HomeControllerTests.cs
@@ -131,6 +135,275 @@ namespace ProntoMVC.Tests
         /// </summary>
 
 
+
+
+
+
+
+        //Sub TestCompras_CP3_OP_Equimac(ByVal Yo As Object, ByVal SC As String, ByRef Session As Object)
+        //    '//////////////////////////////////////////////////
+        //    '//////////////////////////////////////////////////
+        //    'DEMO CON CERTIFICACIONES
+
+        //    'resumen:
+        //    'CTACTE: revisas
+        //    'OC: me piden una autopista y una docena de planchuelas
+        //    'FAC 1: anticipo de la autopista
+        //    'REC 1: me pagan el anticipo?
+        //    'REM 1: le mando media docena de las planchuelas (la autopista no)
+        //    'FAC 2: contrato por las planchuelas -y esto incluye recibo? -NO ES AL CONTADO. El recibo se hace aparte. 
+        //    'REC 2: me pagan las planchuelas?
+        //    'FAC 3: con devolucion de anticipo. 1er tramo de la autopista 
+        //    'REC 3: pagan la FAC 3
+        //    'CONSULTA Clientes-Desarrollo de Items de OC: ves los anticipos
+        //    'FAC 4, terminan rapidamente la autopista.
+        //    'REC 4: pagan la FAC
+        //    'CTACTE: revisas
+        //    '//////////////////////////////////////////////////
+        //    '//////////////////////////////////////////////////
+        //    '//////////////////////////////////////////////////
+        //    '//////////////////////////////////////////////////
+
+        //    Dim myCP As ComprobanteProveedor
+        //    Dim myDetCP As ComprobanteProveedorItem
+
+
+        //    '//////////////////////////////////////////////////
+        //    '//////////////////////////////////////////////////
+        //    '//////////////////////////////////////////////////
+        //    '//////////////////////////////////////////////////
+        //    '//////////////////////////////////////////////////
+        //    '//////////////////////////////////////////////////
+
+
+
+        //    myCP = New ComprobanteProveedor
+        //    With myCP
+
+
+        //        '.IdCliente = BuscaIdCliente("CAMINO DEL ATLANTICO S.A. CONCESIONARIA VIAL", SC)
+        //        '.PuntoVenta = 1
+        //        .IdMoneda = 1
+        //        .NumeroComprobante1 = Rnd(1000)
+        //        .NumeroComprobante2 = Rnd(100000)
+        //        .CotizacionMoneda = 1
+
+
+
+        //        .IdTipoComprobante = BuscaIdTipoComprobantePreciso("Factura compra", SC)
+        //        If.IdTipoComprobante = -1 Then Stop
+
+        //        '.Fecha = Now
+        //        .FechaComprobante = Now
+        //        .FechaIngreso = Now
+        //        .FechaVencimiento = Now
+        //        .FechaRecepcion = Now
+        //        .Confirmado = "SI"
+        //        '.FechaAprobacion = Now
+        //        '.FechaNotaCredito = Now
+
+        //        '.Detalle = "Esta solicitud fue creada para Demo de Web"
+
+        //        .Observaciones = "Solicitud para Demo de Web"
+        //        '.IdComprador = 3 'IdUsuarioEnProntoVB6()
+
+
+
+
+
+        //        myDetCP = New ComprobanteProveedorItem
+        //        With myDetCP
+        //            .Nuevo = True
+        //            .IdCuenta = BuscaIdConceptoPreciso("Instalación y Mantenimiento de Obra 1022892", SC)
+        //            .Importe = 542.11
+        //            '.IdConcepto = BuscaIdConceptoPreciso("Ajuste", SC)
+        //            '.Gravado = "SI"
+        //            '.IdCaja = 2
+        //            '.ImporteTotalItem = 232
+        //        End With
+
+        //        .Detalles.Add(myDetCP)
+        //        myDetCP = Nothing
+
+
+
+
+
+
+        //    End With
+
+        //    ComprobanteProveedorManager.Save(SC, myCP)
+        //    myCP = Nothing
+
+        //    '//////////////////////////////////////////////////
+        //    '//////////////////////////////////////////////////
+        //    '//////////////////////////////////////////////////
+        //    '//////////////////////////////////////////////////
+        //    '//////////////////////////////////////////////////
+        //    '//////////////////////////////////////////////////
+
+        //    '//////////////////////////////////////////////////
+        //    'Alta de Orden de Pago para asignar un monto tope a la cuenta de fondo fijo (ver manual)
+        //    '//////////////////////////////////////////////////
+        //    '//////////////////////////////////////////////////
+
+
+        //    Dim myOP As OrdenPago
+        //    Dim myDetOP As OrdenPagoItem
+        //    Dim myDetOPvalor As OrdenPagoValoresItem
+        //    Dim myDetOPcuenta As OrdenPagoCuentasItem
+        //    Dim myDetOPrubro As OrdenPagoRubrosContablesItem
+        //    Dim myDetOPimpuest As OrdenPagoImpuestosItem
+        //    Dim myDetOPanticipo As OrdenPagoAnticiposAlPersonalItem
+
+
+
+        //    myOP = New OrdenPago
+        //    With myOP
+
+        //        .IdProveedor = BuscaIdCliente("CAMINO DEL ATLANTICO S.A. CONCESIONARIA VIAL", SC)
+        //        .IdMoneda = 1
+        //        '.PuntoVenta = 1
+        //        .NumeroOrdenPago = Rnd() * 100000
+        //        .CotizacionMoneda = 4
+        //        .FechaIngreso = Now
+        //        .FechaOrdenPago = Now
+        //        '.FechaRecibo = Now
+        //        .Observaciones = "OrdenPago para Demo de Web"
+
+
+
+        //        myDetOP = New OrdenPagoItem
+        //        With myDetOP
+        //            .Nuevo = True
+        //            .IdImputacion = 100 'BuscaIdComprobante("FACTURA 10110-2136464", SC)
+        //            .Importe = 215.48
+        //        End With
+        //        .DetallesImputaciones.Add(myDetOP)
+
+
+        //        myDetOPvalor = New OrdenPagoValoresItem
+        //        With myDetOPvalor
+        //            .Nuevo = True
+        //            .IdTipoValor = 6
+        //            .FechaVencimiento = #1/1/2050#
+        //            .IdBanco = 1
+        //            .NumeroInterno = Int(Rnd() * 1000000)
+        //            .NumeroValor = Int(Rnd() * 1000000)
+        //            .Importe = 215.48
+        //        End With
+        //        .DetallesValores.Add(myDetOPvalor)
+
+
+        //        myDetOPimpuest = New OrdenPagoImpuestosItem
+        //        With myDetOPimpuest
+        //            .Nuevo = True
+        //            '.IdImtacion = 100 'BuscaIdComprobante("FACTURA 10110-2136464", SC)
+        //            '.Importe = 215.48
+        //        End With
+        //        .DetallesImpuestos.Add(myDetOPimpuest)
+
+
+        //        myDetOPrubro = New OrdenPagoRubrosContablesItem
+        //        With myDetOPrubro
+        //            .Nuevo = True
+        //            .IdRubroContable = 100 'BuscaIdComprobante("FACTURA 10110-2136464", SC)
+        //            .Importe = 215.48
+        //        End With
+        //        .DetallesRubrosContables.Add(myDetOPrubro)
+
+
+        //        myDetOPanticipo = New OrdenPagoAnticiposAlPersonalItem
+        //        With myDetOPanticipo
+        //            .Nuevo = True
+        //            '.IdImputacion = 100 'BuscaIdComprobante("FACTURA 10110-2136464", SC)
+        //            '.Importe = 215.48
+        //        End With
+        //        .DetallesAnticiposAlPersonal.Add(myDetOPanticipo)
+
+
+        //        myDetOPcuenta = New OrdenPagoCuentasItem
+        //        With myDetOPcuenta
+        //            .Nuevo = True
+        //            .IdCuenta = 100 'BuscaIdComprobante("FACTURA 10110-2136464", SC)
+        //            '.Importe = 215.48
+        //        End With
+        //        .DetallesCuentas.Add(myDetOPcuenta)
+
+
+
+
+        //    End With
+
+
+        //    'OrdenPagoManager.Save(SC, myOP)
+
+
+
+        //    '//////////////////////////////////////////////////
+
+        //End Sub
+
+
+
+
+
+
+        [TestMethod]
+        public void CircuitoDeCompras()
+        {
+
+
+            // hago un RM por 
+            // RMsPEND: en la grilla de RM pendientes le asigno un 
+            // 3 COTIZ: el empleado toma el RM y pide presupuestos a 3 proveedores
+            // COMP:  el empleado hace la comparativa
+            // PED:  hay un ganador, hago el pedido
+
+
+            var c = new RequerimientoController();
+            GetMockedControllerGenerico(c);
+
+
+            DemoProntoEntities db = new DemoProntoEntities(sc);
+
+
+
+            Requerimiento o = new Requerimiento(); // db.Requerimientos.OrderByDescending(x => x.IdRequerimiento).First();
+
+            var det = new ProntoMVC.Data.Models.DetalleRequerimiento();
+            det.IdArticulo = 12;
+            det.Cantidad = 230;
+            o.DetalleRequerimientos.Add(det);
+            o.DetalleRequerimientos.Add(new MVCent.DetalleRequerimiento { IdArticulo = 11, Cantidad = 3255 });
+
+
+
+            var result = c.BatchUpdate(o);
+
+
+
+
+
+
+          
+            c.DarPorCumplido((new int[] { 48631 }).ToList(), "administrador", "", "administrador", "observacion de cumplido");
+
+
+
+            // Assert.AreEqual(expected, actual);
+
+        }
+
+
+
+
+
+
+
+
+
+
         [TestMethod]
         public void EditPresupuestoObraMoq_2()
         {
@@ -190,7 +463,7 @@ namespace ProntoMVC.Tests
             var c = new PresupuestoObraController();
 
             GetMockedControllerGenerico(c);  //  new ComprobanteProveedorController();
-            
+
             int IdObra = 77;
 
             //var f = new FormCollection();
@@ -531,14 +804,14 @@ namespace ProntoMVC.Tests
 
 
             var excelData = new jqGridWeb.DataForExcel(
-                // column Header
+                    // column Header
                     new[] { "Col1", "Col2", "Col3" },
                     new[]{jqGridWeb.DataForExcel.DataType.String, jqGridWeb.DataForExcel.DataType.Integer,
                           jqGridWeb.DataForExcel.DataType.String},
-                //      new List<string[]> {
-                //    new[] {"a", "1", "c1"},
-                //    new[] {"a", "2", "c2"}
-                //},
+                    //      new List<string[]> {
+                    //    new[] {"a", "1", "c1"},
+                    //    new[] {"a", "2", "c2"}
+                    //},
                     lista,
 
 
@@ -932,7 +1205,7 @@ namespace ProntoMVC.Tests
 
 
             // si queres que te funcionen las llamadas a Url.Action(...), tenes que mandar una url mockeada
-        http://stackoverflow.com/questions/15258669/mocking-controller-url-actionstring-string-object-string-in-asp-net-mvc
+            http://stackoverflow.com/questions/15258669/mocking-controller-url-actionstring-string-object-string-in-asp-net-mvc
 
             var routes = new System.Web.Routing.RouteCollection();
             MvcApplication.RegisterRoutes(routes);

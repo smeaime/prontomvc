@@ -36,8 +36,6 @@ namespace ProntoWindowsService
 
         static bool bForzarShutdown = false;
 
-        static bool bUsar3OCR = true;
-
         static string DirApp1, DirApp2;
         static string SC1, SC2;
         static string plantilla;
@@ -113,7 +111,7 @@ namespace ProntoWindowsService
 
 
             ////http://stackoverflow.com/questions/11985308/multiple-threads-in-windows-service
-            if (bUsar3OCR)
+            if (false)
             {
                 m_thread4 = new Thread(DoWorkSoloOCR);
                 m_thread4.Name = "MyWorker4";
@@ -326,7 +324,31 @@ namespace ProntoWindowsService
 
 
 
-/*
+
+
+
+
+Log Entry : 
+05/07/2017 21:57:22
+Error in: . Error Message:System.Runtime.InteropServices.COMException
+Retrieving the COM class factory for component with CLSID {00024500-0000-0000-C000-000000000046} failed due to the following error: 80080005 Server execution failed (Exception from HRESULT: 0x80080005 (CO_E_SERVER_EXEC_FAILURE)).
+   at System.Runtime.Remoting.RemotingServices.AllocateUninitializedObject(RuntimeType objectType)
+   at System.Runtime.Remoting.Activation.ActivationServices.CreateInstance(RuntimeType serverType)
+   at System.Runtime.Remoting.Activation.ActivationServices.IsCurrentContextOK(RuntimeType serverType, Object[] props, Boolean bNewObj)
+   at System.RuntimeTypeHandle.CreateInstance(RuntimeType type, Boolean publicOnly, Boolean noCheck, Boolean& canBeCached, RuntimeMethodHandleInternal& ctor, Boolean& bNeedSecurityCheck)
+   at System.RuntimeType.CreateInstanceSlow(Boolean publicOnly, Boolean skipCheckThis, Boolean fillCache)
+   at System.RuntimeType.CreateInstanceDefaultCtor(Boolean publicOnly, Boolean skipVisibilityChecks, Boolean skipCheckThis, Boolean fillCache)
+   at System.Activator.CreateInstance(Type type, Boolean nonPublic)
+   at System.Activator.CreateInstance(Type type)
+   at ProntoFlexicapture.ClassFlexicapture.ManotearExcel(String nombreexcel, String dato, String numerocarta) in c:\Users\Administrador\Documents\bdl\pronto\InterfazFlexicapture\prontoflexicapture.cs:line 692
+   at ProntoFlexicapture.ClassFlexicapture.ProcesarCartasBatchConFlexicapture(IEngine& engine, IFlexiCaptureProcessor& processor, String plantilla, List`1 imagenes, String SC, String DirApp, Boolean bProcesar, String& sError) in c:\Users\Administrador\Documents\bdl\pronto\InterfazFlexicapture\prontoflexicapture.cs:line 594
+mscorlib
+__________________________
+
+
+
+
+
 
 Log Entry : 
 05/05/2017 01:10:18
@@ -356,7 +378,8 @@ __________________________
 
 
 
-                  
+
+
 
 Log Entry : 
 05/05/2017 19:32:10
@@ -382,7 +405,6 @@ Si después de hacer todo lo que se indica en la pregunta sigue tirando ese erro
 
 -seria raro... cuando falla de esa manera, no lo resucito más por más intentos q haga. necesito reiniciar el servicio (y engancha enseguida)
 
-  */
 
                     catch (System.Runtime.InteropServices.COMException x2)
                     {
@@ -440,11 +462,11 @@ Si después de hacer todo lo que se indica en la pregunta sigue tirando ese erro
                             ClassFlexicapture.Log(idthread + "Problemas al conectarse al licenciador");
 
                         }
-                        else
-                        {
-                            ClassFlexicapture.Log(idthread + " Error no reconocido. Codigo: " + (uint)x2.ErrorCode);
+else
+{
 
-                        }
+    asdasd
+}
 
 
 
@@ -469,9 +491,8 @@ Si después de hacer todo lo que se indica en la pregunta sigue tirando ese erro
 
                         ClassFlexicapture.unloadEngine(ref engine, ref engineLoader);
                         processor = null;
-                        engine = null;
-                        engineLoader = null;
 
+pruebo poner en null el engine y engineloader?
 
                         bool exito = false;
                         for (int n = 0; n < 800; n++)
