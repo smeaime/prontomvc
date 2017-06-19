@@ -4318,6 +4318,10 @@ Public Module ProntoFuncionesUIWeb
 
         usuario.StringConnection = Encriptar(BDLMasterEmpresasManager.GetConnectionStringEmpresa(usuario.UserId, usuario.IdEmpresa, sConex, "XXXXXX"))
 
+ La conversión de la cadena "No se encontró empresa para el u" en el tipo 'Integer' no es válida
+ah, el usuario gradice no tiene empresa asignada en la bdlmaster de clientes
+
+
         HttpContext.Current.Session(SESSIONPRONTO_USUARIO) = usuario
 
         DatosDeSesion(usuario.StringConnection, usuario.Nombre, HttpContext.Current.Session, sConex, Nothing, usuario.IdEmpresa)
