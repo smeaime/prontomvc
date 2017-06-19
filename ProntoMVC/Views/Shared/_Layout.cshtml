@@ -1826,7 +1826,7 @@ Released   : 20120723
                                                         </a>
                                                     </li>
                                                 }
-                                                @if (Roles.IsUserInRole(ViewBag.NombreUsuario, "SuperAdmin"))
+                                                @if (Roles.IsUserInRole(ViewBag.NombreUsuario, "SuperAdmin") && false)
                                                 {
                                                     <li class="divider"></li>
 
@@ -1852,7 +1852,7 @@ Released   : 20120723
 
                                                 }
                                                 else { }
-                                                @if (Roles.IsUserInRole(ViewBag.NombreUsuario, "SuperAdmin"))
+                                                @if (Roles.IsUserInRole(ViewBag.NombreUsuario, "SuperAdmin") && false)
                                                 {
                                                     <li class="divider"></li>
                                                     <li><a href="#">Super Admin BDL</a></li>
