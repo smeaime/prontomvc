@@ -63,11 +63,13 @@ namespace ProntoMVC.Tests
         // la cadena de conexion a la bdlmaster se saca del App.config (no web.config) de este proyecto 
         // la cadena de conexion a la bdlmaster se saca del App.config (no web.config) de este proyecto 
         // la cadena de conexion a la bdlmaster se saca del App.config (no web.config) de este proyecto 
-        const string nombreempresa = "VialAgro";
+
+        const string nombreempresa = "DemoProntoWeb";
+        //const string nombreempresa = "VialAgro";
         //const string nombreempresa = "Pronto_Alemarsa";
         //const string nombreempresa = "Williams2";
         //const string nombreempresa = "Pronto";
-        //const string nombreempresa = "DemoProntoWeb";
+        
         //const string usuario = "administrador";
         const string usuario = "supervisor";
         //string bldmasterappconfig = ConfigurationManager.ConnectionStrings["ApplicationServices"].ConnectionString;
@@ -375,33 +377,65 @@ namespace ProntoMVC.Tests
 
 
             var cRM = new RequerimientoController();
-            GetMockedControllerGenerico(cRM);
             var cPED = new PedidoController();
+            var cCOMP = new ComparativaController();
+            var cPRES = new PresupuestoController();
+            var cOP = new OrdenPagoController();
+            var cCP = new ComprobanteProveedorController();
+            var cRECEP = new RecepcionController();
             GetMockedControllerGenerico(cRM);
+            GetMockedControllerGenerico(cPRES);
+            GetMockedControllerGenerico(cCOMP);
+            GetMockedControllerGenerico(cPED);
             DemoProntoEntities db = new DemoProntoEntities(sc);
 
 
 
 
-            Requerimiento rm = new Requerimiento(); // db.Requerimientos.OrderByDescending(x => x.IdRequerimiento).First();
 
+            Requerimiento rm = new Requerimiento();
             var rmdet = new ProntoMVC.Data.Models.DetalleRequerimiento();
             rmdet.IdArticulo = 12;
             rmdet.Cantidad = 230;
             rm.DetalleRequerimientos.Add(rmdet);
             rm.DetalleRequerimientos.Add(new MVCent.DetalleRequerimiento { IdArticulo = 11, Cantidad = 3255 });
-
-            var result = cRM.BatchUpdate(rm);
-
-
+            JsonResult result = cRM.BatchUpdate(rm);
+            //Console.WriteLine(result.Data);
 
 
-            //cRM.AsignaComprador()
+            cRM.AsignaComprador((new int[] { rm.IdRequerimiento }).ToList(), "administrador", "");
 
 
 
 
-            Pedido ped = new Pedido(); // db.Requerimientos.OrderByDescending(x => x.IdRequerimiento).First();
+
+
+
+            Presupuesto pre = new Presupuesto();
+            var predet = new ProntoMVC.Data.Models.DetallePresupuesto();
+            predet.IdArticulo = 12;
+            predet.Cantidad = 230;
+            pre.DetallePresupuestos.Add(predet);
+            pre.DetallePresupuestos.Add(new MVCent.DetallePresupuesto { IdArticulo = 11, Cantidad = 3255 });
+            JsonResult resultpre = cPRES.BatchUpdate(pre);
+
+
+
+
+
+
+
+            Comparativa comp = new Comparativa(); 
+            comp.DetalleComparativas.Add(new MVCent.DetalleComparativa { IdPresupuesto=22,  Cantidad = 3255 });
+            JsonResult resultcomp = cCOMP.BatchUpdate(comp);
+
+
+            
+
+
+
+
+            Pedido ped = new Pedido(); 
 
             var peddet = new ProntoMVC.Data.Models.DetallePedido();
             peddet.IdArticulo = 12;
@@ -409,9 +443,8 @@ namespace ProntoMVC.Tests
             ped.DetallePedidos.Add(peddet);
             ped.DetallePedidos.Add(new MVCent.DetallePedido { IdArticulo = 11, Cantidad = 3255 });
 
-            var result2 = cPED.BatchUpdate(ped);
-
-
+            JsonResult result2 = cPED.BatchUpdate(ped);
+            //Console.WriteLine(result2.Data.Message);
 
 
 
@@ -420,6 +453,30 @@ namespace ProntoMVC.Tests
 
 
             cRM.DarPorCumplido((new int[] { 48631 }).ToList(), "administrador", "", "administrador", "observacion de cumplido");
+
+
+
+
+
+
+
+
+            OrdenPago op = new OrdenPago();
+            op.DetalleOrdenesPagoes.Add(new MVCent.DetalleOrdenesPago { IdImputacion = 11, Importe = 3255 });
+            JsonResult resultop = cOP.BatchUpdate(op);
+
+
+
+
+            Recepcione recep = new Recepcione();
+            recep.DetalleRecepciones.Add(new MVCent.DetalleRecepcione { IdArticulo = 11, Cantidad = 3255 });
+            JsonResult resultorecep = cRECEP.BatchUpdate(recep);
+
+
+
+            ViewModelComprobanteProveedor cp = new  ViewModelComprobanteProveedor();
+            cp.DetalleComprobantesProveedores.Add(new MVCent.DetalleComprobantesProveedore { IdArticulo = 11, Cantidad = 3255 });
+            JsonResult resultocp = cCP.BatchUpdate(cp);
 
 
 
