@@ -1132,9 +1132,10 @@ namespace ProntoMVC.Tests
 
             GetMockedControllerGenerico(c);  //  new ComprobanteProveedorController();
 
-            var result = c.Presupuestos_DynamicGridData("Numero", "desc", 0, 50, false, "");
+            var result = c.Presupuestos_DynamicGridData("Numero", "desc", 0, 50, false, "","","");
 
         }
+
 
         [TestMethod]
         public void MaestroComparativasMoq()
