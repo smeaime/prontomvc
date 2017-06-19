@@ -347,6 +347,19 @@ namespace ProntoMVC.Tests
 
 
 
+        [TestMethod]
+        public void probar_context_de_rms()
+        {
+
+            var c = new RequerimientoController();
+            GetMockedControllerGenerico(c);
+
+            c.AsignaComprador((new int[] { 48858 }).ToList(), "administrador", "");
+            //c.MarcarComoImpresa
+        }
+
+
+
 
 
         [TestMethod]
@@ -361,39 +374,59 @@ namespace ProntoMVC.Tests
             // PED:  hay un ganador, hago el pedido
 
 
-            var c = new RequerimientoController();
-            GetMockedControllerGenerico(c);
-
-
+            var cRM = new RequerimientoController();
+            GetMockedControllerGenerico(cRM);
+            var cPED = new PedidoController();
+            GetMockedControllerGenerico(cRM);
             DemoProntoEntities db = new DemoProntoEntities(sc);
 
 
 
-            Requerimiento o = new Requerimiento(); // db.Requerimientos.OrderByDescending(x => x.IdRequerimiento).First();
 
-            var det = new ProntoMVC.Data.Models.DetalleRequerimiento();
-            det.IdArticulo = 12;
-            det.Cantidad = 230;
-            o.DetalleRequerimientos.Add(det);
-            o.DetalleRequerimientos.Add(new MVCent.DetalleRequerimiento { IdArticulo = 11, Cantidad = 3255 });
+            Requerimiento rm = new Requerimiento(); // db.Requerimientos.OrderByDescending(x => x.IdRequerimiento).First();
 
+            var rmdet = new ProntoMVC.Data.Models.DetalleRequerimiento();
+            rmdet.IdArticulo = 12;
+            rmdet.Cantidad = 230;
+            rm.DetalleRequerimientos.Add(rmdet);
+            rm.DetalleRequerimientos.Add(new MVCent.DetalleRequerimiento { IdArticulo = 11, Cantidad = 3255 });
 
-
-            var result = c.BatchUpdate(o);
-
+            var result = cRM.BatchUpdate(rm);
 
 
 
 
+            //cRM.AsignaComprador()
 
-          
-            c.DarPorCumplido((new int[] { 48631 }).ToList(), "administrador", "", "administrador", "observacion de cumplido");
+
+
+
+            Pedido ped = new Pedido(); // db.Requerimientos.OrderByDescending(x => x.IdRequerimiento).First();
+
+            var peddet = new ProntoMVC.Data.Models.DetallePedido();
+            peddet.IdArticulo = 12;
+            peddet.Cantidad = 230;
+            ped.DetallePedidos.Add(peddet);
+            ped.DetallePedidos.Add(new MVCent.DetallePedido { IdArticulo = 11, Cantidad = 3255 });
+
+            var result2 = cPED.BatchUpdate(ped);
+
+
+
+
+
+
+
+
+
+            cRM.DarPorCumplido((new int[] { 48631 }).ToList(), "administrador", "", "administrador", "observacion de cumplido");
 
 
 
             // Assert.AreEqual(expected, actual);
 
         }
+
 
 
 
