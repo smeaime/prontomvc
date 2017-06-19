@@ -42,12 +42,12 @@
             },
             search: true
         });
-        grid.trigger("reloadGrid");
+        grid.trigger("reloadGrid");  // tenes que agregar datatype local  en la definicion de la grilla para que no la cargue en ese momento
     }
 
     var myfilter = { groupOp: "AND", rules: [] };
-    myfilter.rules.push({ field: "FechaIngreso", op: "ge", data: $("#FechaInicial").val() });
-    myfilter.rules.push({ field: "FechaIngreso", op: "le", data: $("#FechaFinal").val() });
+    if ($("#FechaInicial").val()!="") myfilter.rules.push({ field: "FechaIngreso", op: "ge", data: $("#FechaInicial").val() });
+    if ($("#FechaFinal").val() != "") myfilter.rules.push({ field: "FechaIngreso", op: "le", data: $("#FechaFinal").val() });
 
 
 
@@ -66,129 +66,130 @@
 
 
 
-    $('#Lista').jqGrid({
-        url: '@Url.Action("Presupuestos_DynamicGridData", "Presupuesto")',
-        postData: {
-            //filters: JSON.stringify(myfilter),
-            'FechaInicial': function () { return $("#FechaInicial").val(); },
-            'FechaFinal': function () { return $("#FechaFinal").val(); }
-        },
-        //datatype: 'json',
-        datatype: 'local', //para pasarle despues los parametros
-        mtype: 'POST',
-        colNames: ['Acciones', 'IdPresupuesto', 'Numero', 'Orden', 'Fecha', 'Proveedor', 'Validez', 'Bonif.', '% Iva', 'Mon', 'Subtotal', 'Imp.Bon.', 'Imp.Iva', 'Imp.Total',
-                   'Plazo_entrega', 'Condicion_compra', 'Garantia', 'Lugar_entrega', 'Comprador', 'Aprobo', 'Referencia', 'Detalle', 'Contacto', 'Observaciones'],
-        colModel: [
-                    { name: 'act', index: 'act', align: 'center', width: 80, sortable: false, editable: false, search: false }, //, formatter: 'showlink', formatoptions: { baseLinkUrl: '@Url.Action("Edit")'} },
-                    { name: 'IdPresupuesto', index: 'IdPresupuesto', align: 'left', width: 100, editable: false, hidden: true },
-                    { name: 'Numero', index: 'Numero', align: 'right', width: 50, editable: false, search: true, searchoptions: { sopt: ['cn','eq'] } },
-                    { name: 'Orden', index: 'SubNumero', align: 'right', width: 50, editable: false, search: true, searchoptions: { sopt: ['cn', 'eq'] } },
-                     {
-                         name: 'FechaIngreso', index: 'FechaIngreso', width: 100, align: 'center',
-                         sorttype: 'date', hidden: false, editable: false, formatoptions: { newformat: 'dd/mm/yy' },
-                         datefmt: 'dd/mm/yy',
+        $('#Lista').jqGrid({
+            url: '@Url.Action("Presupuestos_DynamicGridData", "Presupuesto")',
+            postData: {
+                //filters: JSON.stringify(myfilter),
+                'FechaInicial': function () { return $("#FechaInicial").val(); },
+                'FechaFinal': function () { return $("#FechaFinal").val(); }
+            },
+            //datatype: 'json',
+            datatype: 'local', //para pasarle despues los parametros
+            mtype: 'POST',
+            colNames: ['Acciones', 'IdPresupuesto', 'Numero', 'Orden', 'Fecha', 'Proveedor', 'Validez', 'Bonif.', '% Iva', 'Mon', 'Subtotal', 'Imp.Bon.', 'Imp.Iva', 'Imp.Total',
+                       'Plazo_entrega', 'Condicion_compra', 'Garantia', 'Lugar_entrega', 'Comprador', 'Aprobo', 'Referencia', 'Detalle', 'Contacto', 'Observaciones'],
+            colModel: [
+                        { name: 'act', index: 'act', align: 'center', width: 80, sortable: false, editable: false, search: false }, //, formatter: 'showlink', formatoptions: { baseLinkUrl: '@Url.Action("Edit")'} },
+                        { name: 'IdPresupuesto', index: 'IdPresupuesto', align: 'left', width: 100, editable: false, hidden: true },
+                        { name: 'Numero', index: 'Numero', align: 'right', width: 50, editable: false, search: true, searchoptions: { sopt: ['cn', 'eq'] } },
+                        { name: 'Orden', index: 'SubNumero', align: 'right', width: 50, editable: false, search: true, searchoptions: { sopt: ['cn', 'eq'] } },
+                         {
+                             name: 'FechaIngreso', index: 'FechaIngreso', width: 100, align: 'center',
+                             sorttype: 'date', hidden: false, editable: false, formatoptions: { newformat: 'dd/mm/yy' },
+                             datefmt: 'dd/mm/yy',
 
-                         search: true,
-                         searchrules: {
-                             date: true
-                         },
-                         searchoptions: { // http://stackoverflow.com/questions/14632735/jqgrid-searching-dates
-                             sopt: ['ge', 'le', 'eq'],
-                             dataInit: function (elem) {
-                                 $(elem).datepicker({
-                                     dateFormat: 'dd/mm/yy',
-                                     changeYear: true,
-                                     changeMonth: true,
-                                     showButtonPanel: true,
-                                     onSelect: function () {
-                                         $(this).keydown();
-                                     }
-                                 });
+                             search: true,
+                             searchrules: {
+                                 date: true
+                             },
+                             searchoptions: { // http://stackoverflow.com/questions/14632735/jqgrid-searching-dates
+                                 sopt: ['ge', 'le', 'eq'],
+                                 dataInit: function (elem) {
+                                     $(elem).datepicker({
+                                         dateFormat: 'dd/mm/yy',
+                                         changeYear: true,
+                                         changeMonth: true,
+                                         showButtonPanel: true,
+                                         onSelect: function () {
+                                             $(this).keydown();
+                                         }
+                                     });
+                                 }
                              }
-                         }
 
-                     },
+                         },
 
-                    { name: 'Proveedor', index: 'Proveedor.RazonSocial', align: 'left', width: 250, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
-                    { name: 'Validez', index: 'Validez', align: 'left', width: 150, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-                    { name: 'Bonificacion', index: 'Bonificacion', align: 'right', width: 50, editable: false, search: true, searchoptions: { sopt: ['cn','eq'] } },
-                    { name: 'PorcentajeIva1', index: 'PorcentajeIva1', align: 'right', width: 40, editable: false, hidden: true },
-                    { name: 'Moneda', index: 'Moneda', align: 'center', width: 30, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-                    { name: 'Subtotal', index: 'Subtotal', align: 'right', width: 70, editable: false, search: true, searchoptions: { sopt: ['cn','eq'] } },
-                    { name: 'ImporteBonificacion', index: 'ImporteBonificacion', align: 'right', width: 70, editable: false, search: true, searchoptions: { sopt: ['cn','eq'] } },
-                    { name: 'ImporteIva1', index: 'ImporteIva1', align: 'right', width: 70, editable: false, search: true, searchoptions: { sopt: ['cn','eq'] } },
-                    { name: 'ImporteTotal', index: 'ImporteTotal', align: 'right', width: 70, editable: false, search: true, searchoptions: { sopt: ['cn','eq'] } },
-                    { name: 'PlazoEntrega', index: 'PlazoEntrega', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-                    { name: 'CondicionCompra', index: 'CondicionCompra', align: 'left', width: 200, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-                    { name: 'Garantia', index: 'Garantia', align: 'left', width: 200, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-                    { name: 'LugarEntrega', index: 'LugarEntrega', align: 'left', width: 200, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-                    { name: 'Comprador', index: 'Comprador.Nombre', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
-                    { name: 'Aprobo', index: 'Aprobo', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-                    { name: 'Referencia', index: 'Referencia', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-                    { name: 'Detalle', index: 'Detalle', align: 'left', width: 300, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-                    { name: 'Contacto', index: 'Contacto', align: 'left', width: 200, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-                    { name: 'Observaciones', index: 'Observaciones', align: 'left', width: 200, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-        ],
-        onSelectRow: function (id) {
-            if (id && id !== lastSelectedId) {
-                if (typeof lastSelectedId !== "undefined") {
-                    grid.jqGrid('restoreRow', lastSelectedId);
+                        { name: 'Proveedor', index: 'Proveedor.RazonSocial', align: 'left', width: 250, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'Validez', index: 'Validez', align: 'left', width: 150, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'Bonificacion', index: 'Bonificacion', align: 'right', width: 50, editable: false, search: true, searchoptions: { sopt: ['cn', 'eq'] } },
+                        { name: 'PorcentajeIva1', index: 'PorcentajeIva1', align: 'right', width: 40, editable: false, hidden: true },
+                        { name: 'Moneda', index: 'Moneda', align: 'center', width: 30, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'Subtotal', index: 'Subtotal', align: 'right', width: 70, editable: false, search: true, searchoptions: { sopt: ['cn', 'eq'] } },
+                        { name: 'ImporteBonificacion', index: 'ImporteBonificacion', align: 'right', width: 70, editable: false, search: true, searchoptions: { sopt: ['cn', 'eq'] } },
+                        { name: 'ImporteIva1', index: 'ImporteIva1', align: 'right', width: 70, editable: false, search: true, searchoptions: { sopt: ['cn', 'eq'] } },
+                        { name: 'ImporteTotal', index: 'ImporteTotal', align: 'right', width: 70, editable: false, search: true, searchoptions: { sopt: ['cn', 'eq'] } },
+                        { name: 'PlazoEntrega', index: 'PlazoEntrega', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'CondicionCompra', index: 'CondicionCompra', align: 'left', width: 200, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'Garantia', index: 'Garantia', align: 'left', width: 200, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'LugarEntrega', index: 'LugarEntrega', align: 'left', width: 200, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'Comprador', index: 'Comprador.Nombre', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'Aprobo', index: 'Aprobo', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'Referencia', index: 'Referencia', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'Detalle', index: 'Detalle', align: 'left', width: 300, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'Contacto', index: 'Contacto', align: 'left', width: 200, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'Observaciones', index: 'Observaciones', align: 'left', width: 200, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+            ],
+            onSelectRow: function (id) {
+                if (id && id !== lastSelectedId) {
+                    if (typeof lastSelectedId !== "undefined") {
+                        grid.jqGrid('restoreRow', lastSelectedId);
+                    }
+                    lastSelectedId = id;
                 }
-                lastSelectedId = id;
-            }
-        },
+            },
 
 
-        pager: $('#ListaPager'),
-        rowNum: 15,
-        rowList: [10, 20, 50, 100],
-        sortname: 'Numero',
-        sortorder: 'asc',
-        viewrecords: true,
-        emptyrecords: 'No hay registros para mostrar', //,
+            pager: $('#ListaPager'),
+            rowNum: 15,
+            rowList: [10, 20, 50, 100],
+            sortname: 'Numero',
+            sortorder: 'asc',
+            viewrecords: true,
+            emptyrecords: 'No hay registros para mostrar', //,
 
 
-        ///////////////////////////////
-        width: 'auto', // 'auto',
-        autowidth: true,
-        shrinkToFit: false,
-        //////////////////////////////
+            ///////////////////////////////
+            width: 'auto', // 'auto',
+            autowidth: true,
+            shrinkToFit: false,
+            //////////////////////////////
 
-        height: $(window).height() - ALTOLISTADO, // '100%'
-        altRows: false,
-        footerrow: false, //true,
-        userDataOnFooter: true
-        // ,caption: '<b>FACTURAS</b>'
+            height: $(window).height() - ALTOLISTADO, // '100%'
+            altRows: false,
+            footerrow: false, //true,
+            userDataOnFooter: true
+            // ,caption: '<b>FACTURAS</b>'
 
-        , gridview: true
-        , multiboxonly: true
-        , multipleSearch: true
+            , gridview: true
+            , multiboxonly: true
+            , multipleSearch: true
 
 
 
-        //footerrow: true,
-        //userDataOnFooter: true,
-        //caption: '<b>SOLICITUDES DE COTIZACION</b>'
-    });
+            //footerrow: true,
+            //userDataOnFooter: true,
+            //caption: '<b>SOLICITUDES DE COTIZACION</b>'
+        });
 
-    jQuery("#Lista").jqGrid('navGrid', '#ListaPager', { refresh: true, add: false, edit: false, del: false }, {}, {}, {}, { sopt: ["cn"], width: 700, closeOnEscape: true, closeAfterSearch: true });
-    //        jQuery("#Lista").jqGrid('gridResize', { minWidth: 350, maxWidth: 1500, minHeight: 80, maxHeight: 500 });
+        //jQuery("#Lista").jqGrid('navGrid', '#ListaPager', { refresh: true, add: false, edit: false, del: false }, {}, {}, {},
+        //    { sopt: ["cn"], width: 700, closeOnEscape: true, closeAfterSearch: true });
+        //        jQuery("#Lista").jqGrid('gridResize', { minWidth: 350, maxWidth: 1500, minHeight: 80, maxHeight: 500 });
 
-    jQuery("#Lista").jqGrid('navGrid', '#ListaPager',
-{ csv: true, refresh: true, add: false, edit: false, del: false }, {}, {}, {},
-{
-    //sopt: ["cn"]
-    //sopt: ['eq', 'ne', 'lt', 'le', 'gt', 'ge', 'bw', 'bn', 'ew', 'en', 'cn', 'nc', 'nu', 'nn', 'in', 'ni'],
-    width: 700, closeOnEscape: true, closeAfterSearch: true, multipleSearch: true, overlay: false
-}
-);
+        jQuery("#Lista").jqGrid('navGrid', '#ListaPager',
+                        { csv: true, refresh: true, add: false, edit: false, del: false }, {}, {}, {},
+                                {
+                                    //sopt: ["cn"]
+                                    //sopt: ['eq', 'ne', 'lt', 'le', 'gt', 'ge', 'bw', 'bn', 'ew', 'en', 'cn', 'nc', 'nu', 'nn', 'in', 'ni'],
+                                    width: 700, closeOnEscape: true, closeAfterSearch: true, multipleSearch: true, overlay: false
+                                }
+        );
 
 
-    jQuery("#Lista").filterToolbar({
-        stringResult: true, searchOnEnter: true,
-        defaultSearch: 'cn',
-        enableClear: false
-    }); // si queres sacar el enableClear, definilo en las searchoptions de la columna específica http://www.trirand.com/blog/?page_id=393/help/clearing-the-clear-icon-in-a-filtertoolbar/
+        jQuery("#Lista").filterToolbar({
+            stringResult: true, searchOnEnter: true,
+            defaultSearch: 'cn',
+            enableClear: false
+        }); // si queres sacar el enableClear, definilo en las searchoptions de la columna específica http://www.trirand.com/blog/?page_id=393/help/clearing-the-clear-icon-in-a-filtertoolbar/
 
 
 
@@ -200,7 +201,7 @@
 
         //myfilter.rules.push({ field: "FechaIngreso", op: "ge", data: '2017/1/1' });
         //myfilter.rules.push({ field: "FechaIngreso", op: "le", data: '2017/1/1' });
-    jqGridFilter(JSON.stringify(myfilter), $('#Lista'));
+        jqGridFilter(JSON.stringify(myfilter), $('#Lista'));
 
 
 
@@ -209,9 +210,9 @@
 
 
 
-    $(window).resize(function () {
-        RefrescaAnchoJqgrids();
-    });
+        $(window).resize(function () {
+            RefrescaAnchoJqgrids();
+        });
 
 
 
@@ -219,10 +220,10 @@
 
 
 
-    $(function () {
-        deshabilitarPanelesDerecho();
+        $(function () {
+            deshabilitarPanelesDerecho();
 
-    })
+        })
 
 
 
