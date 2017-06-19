@@ -120,6 +120,12 @@
         "></table>
         <div id="ListaPager" class="scroll" style="text-align: center;">
         </div>
+        <input type="button" class="btn btn-small" id="addData" value="Generar en Word" />
+        <input type="button" class="btn btn-small" id="edtData" value="marcar RM como impresa" />
+        <input type="button" class="btn btn-small" id="delData" value="desmarcar rm como impresa" />
+        <input type="button" class="btn btn-small" id="delData" value="Enviar RM a proveedores por correo" />
+        <input type="button" class="btn btn-small" id="delData" value="Enviar RM a proveedores por fax" />
+
         <div class="contextMenu" id="myMenu1" style="display:none">
             <ul style="width: 200px">
                 <li id="add">
@@ -136,6 +142,7 @@
                 </li>
             </ul>
         </div>
+
     </div>
 </div>
 
@@ -218,6 +225,10 @@
         //Para que haga wrap en las celdas
         //$('.ui-jqgrid .ui-jqgrid-htable th div').css('white-space', 'normal');
 
+
+
+
+
         $('#Lista').jqGrid({
             url: '@Url.Action("Requerimientos_DynamicGridData", "Requerimiento")',
             postData: {
@@ -231,7 +242,7 @@
                     return $('#bALiberar').is(":checked");
                 }
             },
-            datatype: 'json',
+            datatype: 'local', //'json',
             mtype: 'POST',
             colNames: ['', '', 'IdRequerimiento', 'Numero', 'Fecha', 'Cump.', 'Recep.', 'Entreg.', 'Impresa', 'Detalle', 'Obra', 'Presupuestos', 'Comparativas',
                        'Pedidos', 'Recepciones', 'Salidas', 'Libero', 'Solicito', 'Sector', 'Usuario anulo', 'Fecha anulacion', 'Motivo anulacion', 'Fechas liberacion',
@@ -444,6 +455,39 @@
         });
 
         //$("#Requerimientos").click();
+
+
+
+
+
+
+
+        function jqGridFilter(filtersparam, grid) {
+            grid.setGridParam({
+                datatype: 'json',
+                postData: {
+                    filters: filtersparam,
+                    'FechaInicial': $("#FechaInicial").val(),
+                    'FechaFinal': $("#FechaFinal").val()
+                },
+                search: true
+            });
+            grid.trigger("reloadGrid");  // tenes que agregar datatype local  en la definicion de la grilla para que no la cargue en ese momento
+        }
+
+        var myfilter = { groupOp: "AND", rules: [] };
+        if ($("#FechaInicial").val() != "")  myfilter.rules.push({ field: "FechaRequerimiento", op: "ge", data: $("#FechaInicial").val() });
+        if ($("#FechaFinal").val() != "") myfilter.rules.push({ field: "FechaRequerimiento", op: "le", data: $("#FechaFinal").val() });
+
+
+        jqGridFilter(JSON.stringify(myfilter), $('#Lista'));
+
+
+
+
+
+
+
 
         $(function () {
             deshabilitarPanelesDerecho();
