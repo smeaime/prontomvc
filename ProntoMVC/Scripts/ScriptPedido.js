@@ -3634,7 +3634,7 @@ $(function () {
         rowNum: 15,
         rowList: [10, 20, 50, 100],
         sortname: 'Numero',
-        sortorder: 'asc',
+        sortorder: 'desc',
         viewrecords: true,
         emptyrecords: 'No hay registros para mostrar', //,
 
