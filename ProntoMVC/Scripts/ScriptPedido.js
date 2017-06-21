@@ -1062,12 +1062,19 @@ $(function () {
                                         //                             
 
                                         //                                    UltimoIdUnidad = this.value;
-                                        //                                    $('#IdUnidad').val(this.value);
+                                        //$('#IdUnidad').val(this.value);
 
                                     }
                                 }]
                             }
                         },
+
+
+
+                       
+
+
+
                         {
                             name: 'Codigo', formoptions: { rowpos: 8, colpos: 1 }, index: 'Codigo', align: 'left', width: 120,
                             editable: true, edittype: 'text',
@@ -3210,6 +3217,10 @@ $(function () {
         });
     });
 
+
+
+
+
     $("#edtData").click(function () {
 
         sacarDeEditMode();
@@ -3248,6 +3259,14 @@ $(function () {
             onClose: function (data) {
                 RefrescarOrigenDescripcion();
                 PonerRenglonesInline();
+            },
+            beforeSubmit: function (postdata, formid) {
+                //alert(postdata.Unidad + " " + $("#Unidad").children("option").filter(":selected").text());
+                //postdata.Unidad es un numero?????
+                postdata.Unidad = $("#Unidad").children("option").filter(":selected").text()
+                postdata.ControlCalidad = $("#ControlCalidad").children("option").filter(":selected").text()
+
+                return [true, 'no se puede'];
             }
         });
         else alert("Debe seleccionar un item!");
