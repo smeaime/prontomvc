@@ -211,6 +211,10 @@
                 overflow: auto;
             }
         </style>
+
+
+
+
         <form class="form-horizontal">
             <div id="cuerpomaspie" class="" style="padding-bottom:2px; position: relative;  " @*Height of the footer *@>
                 <div id="conscroll" style="height: 600px; margin-bottom: 40px; overflow-y: scroll;
@@ -236,19 +240,19 @@
                             @*  <input type="button" id="grabar2" value="Aceptar" style="margin-top: 15px;" class="btn  btn-large btn-primary pull-right" />*@
                         </div>
                         <script>
-                                $(function () {
+                            $(function () {
 
-                                    function resizeInput() {
-                                        // $(this).attr('size', $(this).val().length + 2);
-                                        $(this).css('width', $(this).val().length * 32);
-                                    }
+                                function resizeInput() {
+                                    // $(this).attr('size', $(this).val().length + 2);
+                                    $(this).css('width', $(this).val().length * 32);
+                                }
 
 
-                                    $('#SubNumero').keyup(resizeInput).each(resizeInput);
+                                $('#SubNumero').keyup(resizeInput).each(resizeInput);
 
-                                    $('#NumeroPedido').css('width', $('#NumeroPedido').val().length * 21);
+                                $('#NumeroPedido').css('width', $('#NumeroPedido').val().length * 21);
 
-                                })
+                            })
                         </script>
                     </div>
                     <div class="accordion" id="accordionA">
@@ -534,17 +538,17 @@
                                             <form>
                                                 @{
 
-        // con jquery se llama despues a  "Requerimiento/Autorizaciones" para tildar y a Aprobado() para el primer check
-        <input type="checkbox" id="chk0" readonly="readonly" disabled="disabled" class="GridCheckBox"
-               title="" />
+// con jquery se llama despues a  "Requerimiento/Autorizaciones" para tildar y a Aprobado() para el primer check
+                                                    <input type="checkbox" id="chk0" readonly="readonly" disabled="disabled" class="GridCheckBox"
+                                                           title="" />
 
-        int ca = ViewBag.CantidadAutorizaciones;
+                                                    int ca = ViewBag.CantidadAutorizaciones;
 
-        int j = 1;
-        for (var i = 1; i <= ca; i++)
-        {
-            <input type="checkbox" id="chk@(i)" readonly="readonly" disabled="disabled" class="GridCheckBox" title="" />
-        }
+                                                    int j = 1;
+                                                    for (var i = 1; i <= ca; i++)
+                                                    {
+                                                        <input type="checkbox" id="chk@(i)" readonly="readonly" disabled="disabled" class="GridCheckBox" title="" />
+                                                    }
                                                 }
                                             </form>
                                         </div>
@@ -941,22 +945,7 @@
                                         @if (System.Diagnostics.Debugger.IsAttached && false)
                                         {
                                             <input type="button" class="btn btn-small" id="addDataSinPopup" value="+ Agregar"
-                                                   onclick="
-
-
-
-
-
-
-
-                      var id;
-                id = Math.ceil(Math.random() * 1000000);
-                      $('#Lista').jqGrid('addRowData',id, {});
-
-
-
-
-                       " />
+                                                   onclick="var id;id = Math.ceil(Math.random() * 1000000);$('#Lista').jqGrid('addRowData',id, {});" />
                                         }
                                         <input type="button" class="btn btn-small" id="addData" value="+ Agregar" />
                                         <input type="button" class="btn btn-small" id="edtData" value="Modificar" />
@@ -1573,91 +1562,42 @@
         </form>
     </div>
     <!--/.fluid-container-->
-    <script type="text/javascript">
+                                                    <script type="text/javascript">
 
 
-        $(window).resize(function () {
-            RefrescaAnchoGrillaDetalle();
+                                                        $(window).resize(function () {
+                                                            RefrescaAnchoGrillaDetalle();
 
-            $("#conscroll").height($(window).height() - 120);
-        });
-
-
-
-        function RefrescaAnchoGrillaDetalle() {
-            // $("#Lista").setGridWidth($(window).width());
-            // la zona de drop se te complica si estas arrastrando un renglon muy largo de una grilla ancha sobre una grilla angosta
-
-            $("#Lista").setGridWidth($("#divGrilla").width());
-
-            //        $("#ListaDrag").setGridWidth(jQuery("#ListaDrag").parent().width());
-            //        $("#ListaDrag2").setGridWidth(jQuery("#ListaDrag").parent().width());
-        }
-
-
-        $(function () {
-
-
-            //            $("body").on({
-            //                ajaxStart: function () {
-            //                    $(this).addClass("loading");
-            //                },
-            //                ajaxStop: function () {
-            //                    $(this).removeClass("loading");
-            //                }
-            //            });
-
-
-            var OrigenDescripcionDefault = 0; // ViewBag.OrigenDescripcionDefault
+                                                            $("#conscroll").height($(window).height() - 120);
+                                                        });
 
 
 
+                                                        function RefrescaAnchoGrillaDetalle() {
+                                                            // $("#Lista").setGridWidth($(window).width());
+                                                            // la zona de drop se te complica si estas arrastrando un renglon muy largo de una grilla ancha sobre una grilla angosta
+
+                                                            $("#Lista").setGridWidth($("#divGrilla").width());
+
+                                                            //        $("#ListaDrag").setGridWidth(jQuery("#ListaDrag").parent().width());
+                                                            //        $("#ListaDrag2").setGridWidth(jQuery("#ListaDrag").parent().width());
+                                                        }
 
 
+                                                        $(function () {
 
 
-
-            // vuelvo a llenar el mySelect (se hace por primera vez en el Layout) porque no sé qué pasa que algo me lo vacía
-            $.post(ROOT + 'Empleado/EmpleadosParaComboSectorCompras/',
-            function (data) {
-                var select = $('#mySelect').empty();
-                for (var i = 0; i < data.length; i++) {
-                    select.append('<option value="' + data[i].IdEmpleado + '">' + data[i].Nombre + '</option>');
-                }
-            }, "json");
-
+                                                            //            $("body").on({
+                                                            //                ajaxStart: function () {
+                                                            //                    $(this).addClass("loading");
+                                                            //                },
+                                                            //                ajaxStop: function () {
+                                                            //                    $(this).removeClass("loading");
+                                                            //                }
+                                                            //            });
 
 
-            $.ajax({
-                type: "GET",
-                contentType: "application/json; charset=utf-8",
-                url: ROOT + 'Pedido/Autorizaciones/',
-                data: { IdPedido: $("#IdPedido").val() },
-                dataType: "Json",
-                success: function (data) {
-                    for (var i = 0; i < data.length; i++) {
-                        var j = i + 1;
-                        $("#chk" + j).attr('checked', true);
-                        $("#chk" + j).attr('title', data[i].Nombre);
-                    }
-
-
-                }
-            });
-            Aprobado();
-
-            function Aprobado() {
-                if ($('#Aprobo').val() != "") {
-                    //if ($('#FechaAprobacion').val() != null) {
-                    $("#chk0").attr('checked', true);
-                    var Aprobo = $("#Aprobo > option:selected").html();
-                    $("#chk0").attr('title', Aprobo);
-                }
-                else {
-                    $("#chk0").attr('checked', false);
-                    $("#chk0").attr('title', "");
-                }
-            }
+                                                            var OrigenDescripcionDefault = 0; // ViewBag.OrigenDescripcionDefault
 
 
 
@@ -1666,21 +1606,70 @@
 
 
 
-            $(function () {
-
-                if ($("#Aprobo").val() > 0 || $("#FechaAnulacion").val() > 0) {
-                    //si está aprobada, bloqueo los controles y la grilla
-                    deshabilitar();
-                }
-
-
-                pageLayout.hide('south');
-                //pageLayout.show('south');
+                                                            // vuelvo a llenar el mySelect (se hace por primera vez en el Layout) porque no sé qué pasa que algo me lo vacía
+                                                            $.post(ROOT + 'Empleado/EmpleadosParaComboSectorCompras/',
+                                                            function (data) {
+                                                                var select = $('#mySelect').empty();
+                                                                for (var i = 0; i < data.length; i++) {
+                                                                    select.append('<option value="' + data[i].IdEmpleado + '">' + data[i].Nombre + '</option>');
+                                                                }
+                                                            }, "json");
 
 
-            });
+
+                                                            $.ajax({
+                                                                type: "GET",
+                                                                contentType: "application/json; charset=utf-8",
+                                                                url: ROOT + 'Pedido/Autorizaciones/',
+                                                                data: { IdPedido: $("#IdPedido").val() },
+                                                                dataType: "Json",
+                                                                success: function (data) {
+                                                                    for (var i = 0; i < data.length; i++) {
+                                                                        var j = i + 1;
+                                                                        $("#chk" + j).attr('checked', true);
+                                                                        $("#chk" + j).attr('title', data[i].Nombre);
+                                                                    }
 
 
-        })
-    </script>
-}
+                                                                }
+                                                            });
+                                                            Aprobado();
+
+                                                            function Aprobado() {
+                                                                if ($('#Aprobo').val() != "") {
+                                                                    //if ($('#FechaAprobacion').val() != null) {
+                                                                    $("#chk0").attr('checked', true);
+                                                                    var Aprobo = $("#Aprobo > option:selected").html();
+                                                                    $("#chk0").attr('title', Aprobo);
+                                                                }
+                                                                else {
+                                                                    $("#chk0").attr('checked', false);
+                                                                    $("#chk0").attr('title', "");
+                                                                }
+                                                            }
+
+
+
+
+
+
+
+
+                                                            $(function () {
+
+                                                                if ($("#Aprobo").val() > 0 || $("#FechaAnulacion").val() > 0) {
+                                                                    //si está aprobada, bloqueo los controles y la grilla
+                                                                    deshabilitar();
+                                                                }
+
+
+                                                                pageLayout.hide('south');
+                                                                //pageLayout.show('south');
+
+
+                                                            });
+
+
+                                                        })
+                                                    </script>
+                                                    }
