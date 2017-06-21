@@ -146,7 +146,24 @@ If you want additionally remove vertical border between the cells in the grid yo
     <input type="button" class="btn btn-small" id="delData" value="desmarcar PED como impresa" />
     <input type="button" class="btn btn-small" id="delData" value="Registrar fecha de salida del pedido" />
 
+    <div class="contextMenu" id="myMenu1" style="display:none">
+        <ul style="width: 200px">
+            <li id="add">
+                <span class="ui-icon ui-icon-plus" style="float:left"></span>
+                <span style="font-size:11px; font-family:Verdana">Generar en Word</span>
+            </li>
+            <li id="edit">
+                <span class="ui-icon ui-icon-pencil" style="float:left"></span>
+                <span style="font-size:11px; font-family:Verdana">Marcar RM como impresa</span>
+            </li>
+            <li id="del">
+                <span class="ui-icon ui-icon-trash" style="float:left"></span>
+                <span style="font-size:11px; font-family:Verdana">Desmarcar rm como impresa</span>
+            </li>
 
+
+        </ul>
+    </div>
 
 
 </div>
@@ -337,6 +354,53 @@ If you want additionally remove vertical border between the cells in the grid yo
                 //   
 
             },
+            loadComplete: function () {
+                $("tr.jqgrow", this).contextMenu('myMenu1', {
+                    bindings: {
+                        'edit': function (trigger) {
+                            // trigger is the DOM element ("tr.jqgrow") which are triggered
+                            //   grid.editGridRow(trigger.id, editSettings);
+                        },
+                        'add': function (/*trigger*/) {
+                            //  grid.editGridRow("new", addSettings);
+                        },
+                        'del': function (trigger) {
+                            if ($('#del').hasClass('ui-state-disabled') === false) {
+                                // disabled item can do be choosed
+                                //      grid.delGridRow(trigger.id, delSettings);
+                            }
+                        }
+                    },
+                    onContextMenu: function (event/*, menu*/) {
+                        var rowId = $(event.target).closest("tr.jqgrow").attr("id");
+                        //grid.setSelection(rowId);
+                        // disable menu for rows with even rowids
+                        //$('#del').attr("disabled", Number(rowId) % 2 === 0);
+                        //if (Number(rowId) % 2 === 0) {
+                        //    $('#del').attr("disabled", "disabled").addClass('ui-state-disabled');
+                        //} else {
+                        //    $('#del').removeAttr("disabled").removeClass('ui-state-disabled');
+                        //}
+                        return true;
+                    },
+
+                    //http://stackoverflow.com/questions/8451982/custom-values-to-context-menu-items-in-jqgrid
+                    menuStyle: {
+                        backgroundColor: '#fcfdfd',
+                        border: '1px solid #a6c9e2',
+                        maxWidth: '600px', // to be sure
+                        width: '100%' // to have good width of the menu
+                    },
+                    itemHoverStyle: {
+                        border: '1px solid #79b7e7',
+                        color: '#1d5987',
+                        backgroundColor: '#d0e5f5'
+                    }
+
+
+                });
+            },
+
 
 
 

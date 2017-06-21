@@ -69,7 +69,7 @@ namespace ProntoMVC.Tests
         //const string nombreempresa = "Pronto_Alemarsa";
         //const string nombreempresa = "Williams2";
         //const string nombreempresa = "Pronto";
-        
+
         //const string usuario = "administrador";
         const string usuario = "supervisor";
         //string bldmasterappconfig = ConfigurationManager.ConnectionStrings["ApplicationServices"].ConnectionString;
@@ -349,6 +349,25 @@ namespace ProntoMVC.Tests
 
 
 
+
+
+
+        [TestMethod]
+        public void probar_context_de_Pedidos()
+        {
+
+            var c = new PedidoController();
+            GetMockedControllerGenerico(c);
+
+            //c.GenerarEnWord((new int[] { 48858 }).ToList(), "administrador", "");
+            //c.BorradorWord((new int[] { 48858 }).ToList(), "administrador", "");
+            //c.MarcarComoImpresa((new int[] { 48858 }).ToList(), "administrador", "");
+            //c.DesmarcarComoImpresa((new int[] { 48858 }).ToList(), "administrador", "");
+            //c.RegistrarSalidaDelPedido((new int[] { 48858 }).ToList(), "administrador", "");
+
+        }
+
+
         [TestMethod]
         public void probar_context_de_rms()
         {
@@ -356,10 +375,14 @@ namespace ProntoMVC.Tests
             var c = new RequerimientoController();
             GetMockedControllerGenerico(c);
 
-            c.AsignaComprador((new int[] { 48858 }).ToList(), "administrador", "");
-            //c.MarcarComoImpresa
-        }
+            //c.AsignaComprador((new int[] { 48858 }).ToList(), "administrador", "");
+            //c.MarcarComoImpresa((new int[] { 48858 }).ToList(), "administrador", "");
+            //c.DesmarcarComoImpresa((new int[] { 48858 }).ToList(), "administrador", "");
+            //c.EnviarAProveedoresPorCorreo((new int[] { 48858 }).ToList(), "administrador", "");
+            //c.EnviarAProveedoresPorFax((new int[] { 48858 }).ToList(), "administrador", "");
 
+
+        }
 
 
 
@@ -425,17 +448,17 @@ namespace ProntoMVC.Tests
 
 
 
-            Comparativa comp = new Comparativa(); 
-            comp.DetalleComparativas.Add(new MVCent.DetalleComparativa { IdPresupuesto=22,  Cantidad = 3255 });
+            Comparativa comp = new Comparativa();
+            comp.DetalleComparativas.Add(new MVCent.DetalleComparativa { IdPresupuesto = 22, Cantidad = 3255 });
             JsonResult resultcomp = cCOMP.BatchUpdate(comp);
 
 
-            
 
 
 
 
-            Pedido ped = new Pedido(); 
+
+            Pedido ped = new Pedido();
 
             var peddet = new ProntoMVC.Data.Models.DetallePedido();
             peddet.IdArticulo = 12;
@@ -474,7 +497,7 @@ namespace ProntoMVC.Tests
 
 
 
-            ViewModelComprobanteProveedor cp = new  ViewModelComprobanteProveedor();
+            ViewModelComprobanteProveedor cp = new ViewModelComprobanteProveedor();
             cp.DetalleComprobantesProveedores.Add(new MVCent.DetalleComprobantesProveedore { IdArticulo = 11, Cantidad = 3255 });
             JsonResult resultocp = cCP.BatchUpdate(cp);
 
@@ -1189,7 +1212,7 @@ namespace ProntoMVC.Tests
 
             GetMockedControllerGenerico(c);  //  new ComprobanteProveedorController();
 
-            var result = c.Presupuestos_DynamicGridData("Numero", "desc", 0, 50, false, "","","");
+            var result = c.Presupuestos_DynamicGridData("Numero", "desc", 0, 50, false, "", "", "");
 
         }
 
