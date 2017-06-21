@@ -1957,8 +1957,8 @@ function EditarItem(rowid) {
             beforeSubmit: function (postdata, formid) {
                 //alert(postdata.Unidad + " " + $("#Unidad").children("option").filter(":selected").text());
                 //postdata.Unidad es un numero?????
-               // postdata.Unidad = $("#Unidad").children("option").filter(":selected").text()
-               // postdata.ControlCalidad = $("#ControlCalidad").children("option").filter(":selected").text()
+                postdata.Unidad = $("#Unidad").children("option").filter(":selected").text()
+                postdata.ControlCalidad = $("#ControlCalidad").children("option").filter(":selected").text()
 
                 return [true, 'no se puede'];
             }
