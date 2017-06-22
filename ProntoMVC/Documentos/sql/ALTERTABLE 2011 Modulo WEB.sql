@@ -2000,3 +2000,41 @@ go
 
 
 
+
+
+
+
+
+
+
+create table CartaPorteRubrosCalidad
+(	
+	IdCartaPorteRubroCalidad int IDENTITY (1, 1) PRIMARY KEY,
+	Descripcion  varchar(60) not null,
+
+	constraint U_CartaPorteRubrosCalidad unique NONCLUSTERED (Descripcion)
+)
+
+
+create table CartaPorteNormasCalidad
+(
+		IdCartaPorteNormaCalidad  int IDENTITY (1, 1) PRIMARY KEY,
+
+		IdCartaPorteRubroCalidad int references CartaPorteRubrosCalidad(IdCartaPorteRubroCalidad),
+		ResultadoDesde  numeric(18,2),
+		ResultadoHasta  numeric(18,2),
+		RebajaIncremento  numeric(18,2),
+		IdArticulo int NULL  references Articulos(IdArticulo) ,
+		IdDestino int NULL references WilliamsDestinos(IdWilliamsDestino)
+)
+
+
+
+
+
+
+
+
+
+
+

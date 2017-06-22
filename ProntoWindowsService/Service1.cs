@@ -824,6 +824,145 @@ FCESupport\FCESupportImpl.h, 42.
 
 
 
+        static public void DoWorkEnvioCorreos()
+        {
+
+
+            //IEngine engine = null;
+            //IEngineLoader engineLoader = null;
+            //IFlexiCaptureProcessor processor = null;
+
+
+            string idthread = "hilo #" + Thread.CurrentThread.ManagedThreadId.ToString() + ": ";
+
+
+            //if (Debugger.IsAttached) Debugger.Break();
+
+            Pronto.ERP.Bll.ErrHandler2.WriteError(idthread + "ssdssss");
+
+
+            ClassFlexicapture.Log(idthread + "Empieza");
+            
+
+            string cadena = Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC1));
+
+            ClassFlexicapture.Log(idthread + "CONEXION: " + cadena);
+            Console.WriteLine(idthread + "CONEXION: " + cadena);
+
+            try
+            {
+                DemoProntoEntities db = new DemoProntoEntities(cadena);
+                var q = db.Clientes.Take(1).ToList();
+
+            }
+            catch (Exception x)
+            {
+                ClassFlexicapture.Log(idthread + x.ToString());
+                CartaDePorteManager.MandarMailDeError(x);
+                Console.WriteLine(idthread + x.ToString());
+                return;
+            }
+
+
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            
+            bool bSignaled = false;
+
+            List<ProntoMVC.Data.FuncionesGenericasCSharp.Resultados> resultado, resultado2;
+
+            while (true)
+            {
+                // wait for the event to be signaled
+                // or for the configured delay
+
+                // let's do some work
+                //no volver a cargar planilla!!!!
+
+
+                try
+                {
+
+
+                    if ((bSignaled == true && !Debugger.IsAttached) || bForzarShutdown) break;
+                    bSignaled = m_shutdownEvent.WaitOne(m_delay, true);
+                    if ((bSignaled == true && !Debugger.IsAttached) || bForzarShutdown) break;
+
+                    resultado = null;
+                    //resultado = Tanda(SC1, DirApp1, ref engine, ref processor, idthread);
+
+
+                    resultado2 = null;
+                    //resultado2 = Tanda(SC2, DirApp2, ref engine, ref processor, idthread);
+
+
+
+                    TandaCorreos(SC1, idthread);
+                    TandaCorreos(SC2,  idthread);
+
+
+                    // esta bien hacerlo asi? -separar la tarea de pegatinas en un hilo aparte
+
+
+
+
+                    if (resultado == null && resultado2 == null)
+                    {
+                        bSignaled = m_shutdownEvent.WaitOne(m_delay, true);
+                        if ((bSignaled == true && !Debugger.IsAttached) || bForzarShutdown) break;
+                        System.Threading.Thread.Sleep(1000 * 15);
+                        if ((bSignaled == true && !Debugger.IsAttached) || bForzarShutdown) break;
+                        System.Threading.Thread.Sleep(1000 * 15);
+                        Console.Write(".");
+                    }
+
+                }
+
+                catch (System.Runtime.InteropServices.COMException x2)
+                {
+                    
+
+                    CartaDePorteManager.MandarMailDeError(x2);
+
+                    ClassFlexicapture.Log(idthread + x2.ToString());
+                    //ClassFlexicapture.Log(idthread + "Problemas con la licencia? Paro y reinicio");
+                    Pronto.ERP.Bll.ErrHandler2.WriteError(idthread + x2);
+
+                    //hacer un unload y cargar de nuevo?
+
+                    //ClassFlexicapture.unloadEngine(ref engine, ref engineLoader);
+                    //processor = null;
+
+                    //ClassFlexicapture.IniciaMotor(ref engine, ref  engineLoader, ref  processor, plantilla); // explota en loadengine
+                    //cuantas veces debo probar de nuevo?
+
+                    //ClassFlexicapture.Log(idthread + "funciona?");
+
+                }
+
+                catch (Exception x)
+                {
+
+                    CartaDePorteManager.MandarMailDeError(x);
+
+                    ClassFlexicapture.Log(idthread + x.ToString());
+                    Pronto.ERP.Bll.ErrHandler2.WriteError(x);
+                }
+                finally
+                {
+
+                }
+
+
+            }
+            //ClassFlexicapture.Log(x.ToString());
+
+            //ClassFlexicapture.unloadEngine(ref engine, ref engineLoader);
+            ClassFlexicapture.Log(idthread + "Se apagó el hilo de pegatinas");
+
+
+        }
+
+
 
 
 
@@ -957,6 +1096,53 @@ FCESupport\FCESupportImpl.h, 42.
 
         }
 
+
+
+
+        public static List<ProntoMVC.Data.FuncionesGenericasCSharp.Resultados> TandaCorreos(string SC, string idthread)
+        {
+            List<ProntoMVC.Data.FuncionesGenericasCSharp.Resultados> resultado = null;
+
+            try
+            {
+
+                ClassFlexicapture.Log(idthread + "busco pegatinas");
+
+
+                var lista =new List<string>() ; // = ClassFlexicapture.ExtraerListaDeCorreosQueNoHanSidoProcesados(sc,5);
+
+
+                string log = "";
+                //hay que pasar el formato como parametro 
+
+                foreach (string f in lista)
+                {
+                    int m_IdMaestro = 0;
+
+                    ClassFlexicapture.MarcarArchivoComoProcesandose(f);
+
+
+                    barras.EnviarFacturaElectronicaEMail(new List<int> { 89323, 89324 }, SC, false, "mscalella911@gmail.com");
+                    
+                  
+
+
+                }
+
+
+            }
+
+            catch (Exception x)
+            {
+              
+                ClassFlexicapture.Log(x.ToString());
+                // throw;
+
+            }
+
+            return resultado;
+
+        }
 
     }
 

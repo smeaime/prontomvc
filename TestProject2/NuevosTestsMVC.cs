@@ -40,12 +40,17 @@ using System.IO;
 
 namespace ProntoMVC.Tests
 {
+
+
+    #region MyRegion        
+
+
     using System.Web.Mvc;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 
 
-
+    
 
 
 
@@ -75,6 +80,7 @@ namespace ProntoMVC.Tests
         //string bldmasterappconfig = ConfigurationManager.ConnectionStrings["ApplicationServices"].ConnectionString;
         string bldmasterappconfig; //  = "Data Source=SERVERSQL3\\TESTING;Initial catalog=BDLMaster;User ID=sa; Password=.SistemaPronto.;Connect Timeout=8";
         string sc;
+        string DirApp;
         // la cadena de conexion a la bdlmaster se saca del App.config (no web.config) de este proyecto 
         // la cadena de conexion a la bdlmaster se saca del App.config (no web.config) de este proyecto 
         // la cadena de conexion a la bdlmaster se saca del App.config (no web.config) de este proyecto 
@@ -89,6 +95,8 @@ namespace ProntoMVC.Tests
             bldmasterappconfig = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(bldmastersql);
 
             sc = ProntoMVC.Data.Models.Auxiliares.FormatearConexParaEntityFramework(Generales.conexPorEmpresa(nombreempresa, bldmasterappconfig, usuario, true));
+
+            DirApp = ConfigurationManager.AppSettings["AplicacionConImagenes"];
 
         }
 
@@ -136,217 +144,237 @@ namespace ProntoMVC.Tests
         /// /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         /// </summary>
 
+        #endregion
 
 
 
 
 
+        [TestMethod]
+        public void testenviomailsdeniro_41340()
+        {
+            ProntoWindowsService.Service1.TandaCorreos(sc, "12345678");
 
-        //Sub TestCompras_CP3_OP_Equimac(ByVal Yo As Object, ByVal SC As String, ByRef Session As Object)
-        //    '//////////////////////////////////////////////////
-        //    '//////////////////////////////////////////////////
-        //    'DEMO CON CERTIFICACIONES
+//                El mensajes seria: Estimado proveedor le informamos que tiene un pago disponible, 
+//            para mas información ingrese en nuestra web de proveedores www.niroconstrucciones.com.ar / proveedores
 
-        //    'resumen:
-        //    'CTACTE: revisas
-        //    'OC: me piden una autopista y una docena de planchuelas
-        //    'FAC 1: anticipo de la autopista
-        //    'REC 1: me pagan el anticipo?
-        //    'REM 1: le mando media docena de las planchuelas (la autopista no)
-        //    'FAC 2: contrato por las planchuelas -y esto incluye recibo? -NO ES AL CONTADO. El recibo se hace aparte. 
-        //    'REC 2: me pagan las planchuelas?
-        //    'FAC 3: con devolucion de anticipo. 1er tramo de la autopista 
-        //    'REC 3: pagan la FAC 3
-        //    'CONSULTA Clientes-Desarrollo de Items de OC: ves los anticipos
-        //    'FAC 4, terminan rapidamente la autopista.
-        //    'REC 4: pagan la FAC
-        //    'CTACTE: revisas
-        //    '//////////////////////////////////////////////////
-        //    '//////////////////////////////////////////////////
-        //    '//////////////////////////////////////////////////
-        //    '//////////////////////////////////////////////////
+            //......................................................................
 
-        //    Dim myCP As ComprobanteProveedor
-        //    Dim myDetCP As ComprobanteProveedorItem
+        }
 
 
-        //    '//////////////////////////////////////////////////
-        //    '//////////////////////////////////////////////////
-        //    '//////////////////////////////////////////////////
-        //    '//////////////////////////////////////////////////
-        //    '//////////////////////////////////////////////////
-        //    '//////////////////////////////////////////////////
 
 
+        [TestMethod]
+        public void testdecompras()
+        {
 
-        //    myCP = New ComprobanteProveedor
-        //    With myCP
 
+            //Sub TestCompras_CP3_OP_Equimac(ByVal Yo As Object, ByVal SC As String, ByRef Session As Object)
+            //    '//////////////////////////////////////////////////
+            //    '//////////////////////////////////////////////////
+            //    'DEMO CON CERTIFICACIONES
 
-        //        '.IdCliente = BuscaIdCliente("CAMINO DEL ATLANTICO S.A. CONCESIONARIA VIAL", SC)
-        //        '.PuntoVenta = 1
-        //        .IdMoneda = 1
-        //        .NumeroComprobante1 = Rnd(1000)
-        //        .NumeroComprobante2 = Rnd(100000)
-        //        .CotizacionMoneda = 1
+            //    'resumen:
+            //    'CTACTE: revisas
+            //    'OC: me piden una autopista y una docena de planchuelas
+            //    'FAC 1: anticipo de la autopista
+            //    'REC 1: me pagan el anticipo?
+            //    'REM 1: le mando media docena de las planchuelas (la autopista no)
+            //    'FAC 2: contrato por las planchuelas -y esto incluye recibo? -NO ES AL CONTADO. El recibo se hace aparte. 
+            //    'REC 2: me pagan las planchuelas?
+            //    'FAC 3: con devolucion de anticipo. 1er tramo de la autopista 
+            //    'REC 3: pagan la FAC 3
+            //    'CONSULTA Clientes-Desarrollo de Items de OC: ves los anticipos
+            //    'FAC 4, terminan rapidamente la autopista.
+            //    'REC 4: pagan la FAC
+            //    'CTACTE: revisas
+            //    '//////////////////////////////////////////////////
+            //    '//////////////////////////////////////////////////
+            //    '//////////////////////////////////////////////////
+            //    '//////////////////////////////////////////////////
 
+            //    Dim myCP As ComprobanteProveedor
+            //    Dim myDetCP As ComprobanteProveedorItem
 
 
-        //        .IdTipoComprobante = BuscaIdTipoComprobantePreciso("Factura compra", SC)
-        //        If.IdTipoComprobante = -1 Then Stop
+            //    '//////////////////////////////////////////////////
+            //    '//////////////////////////////////////////////////
+            //    '//////////////////////////////////////////////////
+            //    '//////////////////////////////////////////////////
+            //    '//////////////////////////////////////////////////
+            //    '//////////////////////////////////////////////////
 
-        //        '.Fecha = Now
-        //        .FechaComprobante = Now
-        //        .FechaIngreso = Now
-        //        .FechaVencimiento = Now
-        //        .FechaRecepcion = Now
-        //        .Confirmado = "SI"
-        //        '.FechaAprobacion = Now
-        //        '.FechaNotaCredito = Now
 
-        //        '.Detalle = "Esta solicitud fue creada para Demo de Web"
 
-        //        .Observaciones = "Solicitud para Demo de Web"
-        //        '.IdComprador = 3 'IdUsuarioEnProntoVB6()
+            //    myCP = New ComprobanteProveedor
+            //    With myCP
 
 
+            //        '.IdCliente = BuscaIdCliente("CAMINO DEL ATLANTICO S.A. CONCESIONARIA VIAL", SC)
+            //        '.PuntoVenta = 1
+            //        .IdMoneda = 1
+            //        .NumeroComprobante1 = Rnd(1000)
+            //        .NumeroComprobante2 = Rnd(100000)
+            //        .CotizacionMoneda = 1
 
 
 
-        //        myDetCP = New ComprobanteProveedorItem
-        //        With myDetCP
-        //            .Nuevo = True
-        //            .IdCuenta = BuscaIdConceptoPreciso("Instalación y Mantenimiento de Obra 1022892", SC)
-        //            .Importe = 542.11
-        //            '.IdConcepto = BuscaIdConceptoPreciso("Ajuste", SC)
-        //            '.Gravado = "SI"
-        //            '.IdCaja = 2
-        //            '.ImporteTotalItem = 232
-        //        End With
+            //        .IdTipoComprobante = BuscaIdTipoComprobantePreciso("Factura compra", SC)
+            //        If.IdTipoComprobante = -1 Then Stop
 
-        //        .Detalles.Add(myDetCP)
-        //        myDetCP = Nothing
+            //        '.Fecha = Now
+            //        .FechaComprobante = Now
+            //        .FechaIngreso = Now
+            //        .FechaVencimiento = Now
+            //        .FechaRecepcion = Now
+            //        .Confirmado = "SI"
+            //        '.FechaAprobacion = Now
+            //        '.FechaNotaCredito = Now
 
+            //        '.Detalle = "Esta solicitud fue creada para Demo de Web"
 
+            //        .Observaciones = "Solicitud para Demo de Web"
+            //        '.IdComprador = 3 'IdUsuarioEnProntoVB6()
 
 
 
 
-        //    End With
 
-        //    ComprobanteProveedorManager.Save(SC, myCP)
-        //    myCP = Nothing
+            //        myDetCP = New ComprobanteProveedorItem
+            //        With myDetCP
+            //            .Nuevo = True
+            //            .IdCuenta = BuscaIdConceptoPreciso("Instalación y Mantenimiento de Obra 1022892", SC)
+            //            .Importe = 542.11
+            //            '.IdConcepto = BuscaIdConceptoPreciso("Ajuste", SC)
+            //            '.Gravado = "SI"
+            //            '.IdCaja = 2
+            //            '.ImporteTotalItem = 232
+            //        End With
 
-        //    '//////////////////////////////////////////////////
-        //    '//////////////////////////////////////////////////
-        //    '//////////////////////////////////////////////////
-        //    '//////////////////////////////////////////////////
-        //    '//////////////////////////////////////////////////
-        //    '//////////////////////////////////////////////////
+            //        .Detalles.Add(myDetCP)
+            //        myDetCP = Nothing
 
-        //    '//////////////////////////////////////////////////
-        //    'Alta de Orden de Pago para asignar un monto tope a la cuenta de fondo fijo (ver manual)
-        //    '//////////////////////////////////////////////////
-        //    '//////////////////////////////////////////////////
 
 
-        //    Dim myOP As OrdenPago
-        //    Dim myDetOP As OrdenPagoItem
-        //    Dim myDetOPvalor As OrdenPagoValoresItem
-        //    Dim myDetOPcuenta As OrdenPagoCuentasItem
-        //    Dim myDetOPrubro As OrdenPagoRubrosContablesItem
-        //    Dim myDetOPimpuest As OrdenPagoImpuestosItem
-        //    Dim myDetOPanticipo As OrdenPagoAnticiposAlPersonalItem
 
 
 
-        //    myOP = New OrdenPago
-        //    With myOP
+            //    End With
 
-        //        .IdProveedor = BuscaIdCliente("CAMINO DEL ATLANTICO S.A. CONCESIONARIA VIAL", SC)
-        //        .IdMoneda = 1
-        //        '.PuntoVenta = 1
-        //        .NumeroOrdenPago = Rnd() * 100000
-        //        .CotizacionMoneda = 4
-        //        .FechaIngreso = Now
-        //        .FechaOrdenPago = Now
-        //        '.FechaRecibo = Now
-        //        .Observaciones = "OrdenPago para Demo de Web"
+            //    ComprobanteProveedorManager.Save(SC, myCP)
+            //    myCP = Nothing
 
+            //    '//////////////////////////////////////////////////
+            //    '//////////////////////////////////////////////////
+            //    '//////////////////////////////////////////////////
+            //    '//////////////////////////////////////////////////
+            //    '//////////////////////////////////////////////////
+            //    '//////////////////////////////////////////////////
 
+            //    '//////////////////////////////////////////////////
+            //    'Alta de Orden de Pago para asignar un monto tope a la cuenta de fondo fijo (ver manual)
+            //    '//////////////////////////////////////////////////
+            //    '//////////////////////////////////////////////////
 
-        //        myDetOP = New OrdenPagoItem
-        //        With myDetOP
-        //            .Nuevo = True
-        //            .IdImputacion = 100 'BuscaIdComprobante("FACTURA 10110-2136464", SC)
-        //            .Importe = 215.48
-        //        End With
-        //        .DetallesImputaciones.Add(myDetOP)
 
+            //    Dim myOP As OrdenPago
+            //    Dim myDetOP As OrdenPagoItem
+            //    Dim myDetOPvalor As OrdenPagoValoresItem
+            //    Dim myDetOPcuenta As OrdenPagoCuentasItem
+            //    Dim myDetOPrubro As OrdenPagoRubrosContablesItem
+            //    Dim myDetOPimpuest As OrdenPagoImpuestosItem
+            //    Dim myDetOPanticipo As OrdenPagoAnticiposAlPersonalItem
 
-        //        myDetOPvalor = New OrdenPagoValoresItem
-        //        With myDetOPvalor
-        //            .Nuevo = True
-        //            .IdTipoValor = 6
-        //            .FechaVencimiento = #1/1/2050#
-        //            .IdBanco = 1
-        //            .NumeroInterno = Int(Rnd() * 1000000)
-        //            .NumeroValor = Int(Rnd() * 1000000)
-        //            .Importe = 215.48
-        //        End With
-        //        .DetallesValores.Add(myDetOPvalor)
 
 
-        //        myDetOPimpuest = New OrdenPagoImpuestosItem
-        //        With myDetOPimpuest
-        //            .Nuevo = True
-        //            '.IdImtacion = 100 'BuscaIdComprobante("FACTURA 10110-2136464", SC)
-        //            '.Importe = 215.48
-        //        End With
-        //        .DetallesImpuestos.Add(myDetOPimpuest)
+            //    myOP = New OrdenPago
+            //    With myOP
 
+            //        .IdProveedor = BuscaIdCliente("CAMINO DEL ATLANTICO S.A. CONCESIONARIA VIAL", SC)
+            //        .IdMoneda = 1
+            //        '.PuntoVenta = 1
+            //        .NumeroOrdenPago = Rnd() * 100000
+            //        .CotizacionMoneda = 4
+            //        .FechaIngreso = Now
+            //        .FechaOrdenPago = Now
+            //        '.FechaRecibo = Now
+            //        .Observaciones = "OrdenPago para Demo de Web"
 
-        //        myDetOPrubro = New OrdenPagoRubrosContablesItem
-        //        With myDetOPrubro
-        //            .Nuevo = True
-        //            .IdRubroContable = 100 'BuscaIdComprobante("FACTURA 10110-2136464", SC)
-        //            .Importe = 215.48
-        //        End With
-        //        .DetallesRubrosContables.Add(myDetOPrubro)
 
 
-        //        myDetOPanticipo = New OrdenPagoAnticiposAlPersonalItem
-        //        With myDetOPanticipo
-        //            .Nuevo = True
-        //            '.IdImputacion = 100 'BuscaIdComprobante("FACTURA 10110-2136464", SC)
-        //            '.Importe = 215.48
-        //        End With
-        //        .DetallesAnticiposAlPersonal.Add(myDetOPanticipo)
+            //        myDetOP = New OrdenPagoItem
+            //        With myDetOP
+            //            .Nuevo = True
+            //            .IdImputacion = 100 'BuscaIdComprobante("FACTURA 10110-2136464", SC)
+            //            .Importe = 215.48
+            //        End With
+            //        .DetallesImputaciones.Add(myDetOP)
 
 
-        //        myDetOPcuenta = New OrdenPagoCuentasItem
-        //        With myDetOPcuenta
-        //            .Nuevo = True
-        //            .IdCuenta = 100 'BuscaIdComprobante("FACTURA 10110-2136464", SC)
-        //            '.Importe = 215.48
-        //        End With
-        //        .DetallesCuentas.Add(myDetOPcuenta)
+            //        myDetOPvalor = New OrdenPagoValoresItem
+            //        With myDetOPvalor
+            //            .Nuevo = True
+            //            .IdTipoValor = 6
+            //            .FechaVencimiento = #1/1/2050#
+            //            .IdBanco = 1
+            //            .NumeroInterno = Int(Rnd() * 1000000)
+            //            .NumeroValor = Int(Rnd() * 1000000)
+            //            .Importe = 215.48
+            //        End With
+            //        .DetallesValores.Add(myDetOPvalor)
 
 
+            //        myDetOPimpuest = New OrdenPagoImpuestosItem
+            //        With myDetOPimpuest
+            //            .Nuevo = True
+            //            '.IdImtacion = 100 'BuscaIdComprobante("FACTURA 10110-2136464", SC)
+            //            '.Importe = 215.48
+            //        End With
+            //        .DetallesImpuestos.Add(myDetOPimpuest)
 
 
-        //    End With
+            //        myDetOPrubro = New OrdenPagoRubrosContablesItem
+            //        With myDetOPrubro
+            //            .Nuevo = True
+            //            .IdRubroContable = 100 'BuscaIdComprobante("FACTURA 10110-2136464", SC)
+            //            .Importe = 215.48
+            //        End With
+            //        .DetallesRubrosContables.Add(myDetOPrubro)
 
 
-        //    'OrdenPagoManager.Save(SC, myOP)
+            //        myDetOPanticipo = New OrdenPagoAnticiposAlPersonalItem
+            //        With myDetOPanticipo
+            //            .Nuevo = True
+            //            '.IdImputacion = 100 'BuscaIdComprobante("FACTURA 10110-2136464", SC)
+            //            '.Importe = 215.48
+            //        End With
+            //        .DetallesAnticiposAlPersonal.Add(myDetOPanticipo)
 
 
+            //        myDetOPcuenta = New OrdenPagoCuentasItem
+            //        With myDetOPcuenta
+            //            .Nuevo = True
+            //            .IdCuenta = 100 'BuscaIdComprobante("FACTURA 10110-2136464", SC)
+            //            '.Importe = 215.48
+            //        End With
+            //        .DetallesCuentas.Add(myDetOPcuenta)
 
-        //    '//////////////////////////////////////////////////
 
-        //End Sub
 
 
+            //    End With
+
+
+            //    'OrdenPagoManager.Save(SC, myOP)
+
+
+
+            //    '//////////////////////////////////////////////////
+
+            //End Sub
+
+        }
 
 
 

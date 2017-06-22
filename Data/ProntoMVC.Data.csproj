@@ -209,6 +209,12 @@
     <Compile Include="Models\Cargo.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\CartaPorteNormasCalidad.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CartaPorteRubrosCalidad.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\CartasDePorte.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
