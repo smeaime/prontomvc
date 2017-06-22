@@ -110,6 +110,8 @@
       <siteMapNode url="ProntoWeb/DiccionarioEquivalencias.aspx?tipo=Confirmados" title="Equivalencias"  description="Equivalencias" roles="Administrador,Comercial,WilliamsAdmin,WilliamsComercial,WilliamsFacturacion" />
 
       <siteMapNode url="ProntoWeb/CDPHumedades.aspx?tipo=Confirmados" title="Humedad"  description="Humedad" roles="Administrador,Comercial,WilliamsAdmin,WilliamsComercial,WilliamsFacturacion" />
+      <siteMapNode url="ProntoWeb/NormasCalidad.aspx?tipo=Confirmados" title="Humedad"  description="Normas Calidad" roles="Administrador,Comercial,WilliamsAdmin,WilliamsComercial,WilliamsFacturacion" />
+      
       <siteMapNode url="ProntoWeb/CDPDestinos.aspx?tipo=Confirmados" title="Destinos"  description="Humedad" roles="Administrador,Comercial,WilliamsAdmin,WilliamsComercial,WilliamsFacturacion" />
       <siteMapNode url="ProntoWeb/CDPEstablecimientos.aspx?tipo=Confirmados" title="Establecimientos"  description="Establecimientos" roles="Administrador,Comercial,WilliamsAdmin,WilliamsComercial,WilliamsFacturacion" />
 
