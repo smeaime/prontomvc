@@ -19,6 +19,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Archivos Compartidos", "Arc
 		..\prontoweb\Documentos\dev\superbuscador williams.sql = ..\prontoweb\Documentos\dev\superbuscador williams.sql
 		..\ProntoWeb\Documentos\dev\superbuscador.sql = ..\ProntoWeb\Documentos\dev\superbuscador.sql
 		..\prontoweb\Documentos\dev\wCartasDePorte_TX_FacturacionAutomatica_con_wGrillaPersistencia y wCartasDePorte_TX_FacturacionAutomatica original.sql = ..\prontoweb\Documentos\dev\wCartasDePorte_TX_FacturacionAutomatica_con_wGrillaPersistencia y wCartasDePorte_TX_FacturacionAutomatica original.sql
+		prontoweb\Documentos\wCartasDePorte_TX_MapaEstrategico.sql = prontoweb\Documentos\wCartasDePorte_TX_MapaEstrategico.sql
 		..\ProntoWeb\web.config = ..\ProntoWeb\web.config
 		..\ProntoWeb\Documentos\otros\williams.sql = ..\ProntoWeb\Documentos\otros\williams.sql
 	EndProjectSection
