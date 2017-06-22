@@ -864,6 +864,156 @@ namespace ProntoMVC.Tests
 
 
 
+        public decimal RebajaCalculo(string SC, int idrubro, decimal resultado, int idarticulo, int iddestino)
+        {
+            var scEF = ProntoMVC.Data.Models.Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC));
+            DemoProntoEntities db = new DemoProntoEntities(scEF);
+
+            var q = from n in db.CartaPorteNormasCalidads
+                    where (n.ResultadoDesde > resultado && resultado < n.ResultadoHasta)
+                           && n.IdArticulo == idarticulo
+                           && n.IdDestino == iddestino
+                    orderby idarticulo descending, iddestino descending
+                    select n;
+
+            if (q.Count() == 0)
+                return 0;
+            else
+                return q.First().RebajaIncremento ?? 0;
+
+        }
+
+
+        public string NormaCalidadBatchUpdate(CartaPorteNormasCalidad o)
+        {
+
+
+            return "";
+
+        }
+
+
+
+
+
+
+
+
+
+        [TestMethod]
+        public void RangosResultadoCalidadesCalculoRebajaYMerma_37774_3()
+        {
+
+            string filtro = ""; // "{\"groupOp\":\"OR\",\"rules\":[{\"field\":\"Producto\",\"op\":\"eq\",\"data\":\"Trigo Pan\"},{\"field\":\"Producto\",\"op\":\"eq\",\"data\":\"MAIZ\"}]}";
+
+            var scEF = ProntoMVC.Data.Models.Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC));
+            DemoProntoEntities db = new DemoProntoEntities(scEF);
+
+            var s = new ServicioCartaPorte.servi();
+
+
+
+
+
+            var sqlquery4 = s.NormaCalidad_DynamicGridData("IdCartaDePorte", "desc", 1, 999999, true, filtro,
+                                                 "01/12/2016",
+                                                 "30/01/2017",
+                                                 0, -1, SC, "Mariano");
+
+
+        }
+
+
+
+
+        [TestMethod]
+        public void RangosResultadoCalidadesCalculoRebajaYMerma_37774_2()
+        {
+
+            
+            
+            NormaCalidadBatchUpdate();
+        }
+
+
+
+
+        [TestMethod]
+        public void RangosResultadoCalidadesCalculoRebajaYMerma_37774()
+        {
+            var scEF = ProntoMVC.Data.Models.Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC));
+            DemoProntoEntities db = new DemoProntoEntities(scEF);
+
+
+
+
+            db.CartaPorteRubrosCalidads.Add(new CartaPorteRubrosCalidad { Descripcion = "Materias Extrañas" });
+            db.CartaPorteRubrosCalidads.Add(new CartaPorteRubrosCalidad { Descripcion = "Tierra" });
+            db.SaveChanges();
+
+
+            //            MATERIAS
+            //EXTRAÑAS 1,0 3,0
+            //Para valores
+            //superiores al 1,0 %
+            //y hasta el 3,0 % a
+            //razón del 1,0 % por
+            //cada por ciento o
+            //fracción
+            //proporcional.Para
+            //valores superiores
+            //al 3,0 % a razón
+            // del 1,5 % por cada
+            //  por ciento o
+            //fracción
+            //proporcional.
+            //incluido
+
+
+            db.CartaPorteNormasCalidads.Add(new CartaPorteNormasCalidad
+            {
+                IdCartaPorteRubroCalidad = 1,
+                ResultadoDesde = 1,
+                ResultadoHasta = 3,
+                RebajaIncremento = 1
+            });
+            db.CartaPorteNormasCalidads.Add(new CartaPorteNormasCalidad
+            {
+                IdCartaPorteRubroCalidad = 1,
+                ResultadoDesde = 3,
+                ResultadoHasta = 999,
+                RebajaIncremento = (decimal)1.5
+            });
+
+
+
+            //TIERRA 0,5 0,5
+            //Para valores
+            //superiores al 0,5 %
+            //a razón del 1,5 %
+            //por cada por ciento
+            //o fracción
+            //proporcional.
+            db.CartaPorteNormasCalidads.Add(new CartaPorteNormasCalidad
+            {
+                IdCartaPorteRubroCalidad = 2,
+                ResultadoDesde = 0.5M,
+                ResultadoHasta = 999,
+                RebajaIncremento = 1.5M
+            });
+
+            db.SaveChanges();
+
+
+
+
+            var ss = RebajaCalculo(1, 2.5M, -1, -1);
+
+
+        }
+
+
+
 
         [TestMethod]
         public void mapa_con_googlemaps_40288()

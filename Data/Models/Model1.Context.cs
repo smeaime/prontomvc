@@ -252,6 +252,8 @@ namespace ProntoMVC.Data.Models
         public virtual DbSet<DetalleEventosDelSistema> DetalleEventosDelSistemas { get; set; }
         public virtual DbSet<EventosDelSistema> EventosDelSistemas { get; set; }
         public virtual DbSet<CartasDePorte> CartasDePortes { get; set; }
+        public virtual DbSet<CartaPorteNormasCalidad> CartaPorteNormasCalidads { get; set; }
+        public virtual DbSet<CartaPorteRubrosCalidad> CartaPorteRubrosCalidads { get; set; }
     
         public virtual int Requerimientos_ActualizarEstado(Nullable<int> idRequerimiento, Nullable<int> idDetalleRequerimiento)
         {
