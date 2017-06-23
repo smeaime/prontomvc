@@ -39,3 +39,28 @@ Log Entry :
 06/23/2017 01:20:21
 Error in: http://localhost:58911/ProntoWeb/NormasCalidad.aspx. Error Message:Mariano esta logueado, pero lo redirijo al login porque faltan los datos de session. No deberia mejor mandarlo a SeleccionarEmpresa? Ademas, no hago el LogOut y le queda el cookie!!!
 __________________________
+
+Log Entry : 
+06/23/2017 02:02:26
+Error in: http://localhost:58911/ProntoWeb/NormasCalidad.aspx. Error Message:Mariano esta logueado, pero lo redirijo al login porque faltan los datos de session. No deberia mejor mandarlo a SeleccionarEmpresa? Ademas, no hago el LogOut y le queda el cookie!!!
+__________________________
+
+Log Entry : 
+06/23/2017 02:02:26
+Error in: http://localhost:58911/ProntoWeb/NormasCalidad.aspx. Error Message:Mariano esta logueado, pero lo redirijo al login porque faltan los datos de session. No deberia mejor mandarlo a SeleccionarEmpresa? Ademas, no hago el LogOut y le queda el cookie!!!
+__________________________
+
+Log Entry : 
+06/23/2017 02:09:12
+Error in: http://localhost:58911/ProntoWeb/NormasCalidad.aspx. Error Message:Mariano esta logueado, pero lo redirijo al login porque faltan los datos de session. No deberia mejor mandarlo a SeleccionarEmpresa? Ademas, no hago el LogOut y le queda el cookie!!!
+__________________________
+
+Log Entry : 
+06/23/2017 02:31:47
+Error in: http://localhost:58911/ProntoWeb/NormasCalidad.aspx. Error Message:Mariano esta logueado, pero lo redirijo al login porque faltan los datos de session. No deberia mejor mandarlo a SeleccionarEmpresa? Ademas, no hago el LogOut y le queda el cookie!!!
+__________________________
+
+Log Entry : 
+06/23/2017 02:31:47
+Error in: http://localhost:58911/ProntoWeb/NormasCalidad.aspx. Error Message:Mariano esta logueado, pero lo redirijo al login porque faltan los datos de session. No deberia mejor mandarlo a SeleccionarEmpresa? Ademas, no hago el LogOut y le queda el cookie!!!
+__________________________
