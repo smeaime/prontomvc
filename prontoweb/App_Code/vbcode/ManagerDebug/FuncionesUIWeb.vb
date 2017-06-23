@@ -4314,12 +4314,20 @@ Public Module ProntoFuncionesUIWeb
         End If
 
 
+        Try
+            usuario.StringConnection = Encriptar(BDLMasterEmpresasManager.GetConnectionStringEmpresa(usuario.UserId, usuario.IdEmpresa, sConex, "XXXXXX"))
+
+        Catch ex As Exception
+
+            ErrHandler2.WriteError(ex)
+            ErrHandler2.WriteError("Verificar que el usuario tenga una empresa asignada")
+            Throw
+            'La conversión de la cadena "No se encontró empresa para el u" en el tipo 'Integer' no es válida
+            'ah, el usuario gradice no tiene empresa asignada en la bdlmaster de clientes
 
 
-        usuario.StringConnection = Encriptar(BDLMasterEmpresasManager.GetConnectionStringEmpresa(usuario.UserId, usuario.IdEmpresa, sConex, "XXXXXX"))
+        End Try
 
- La conversión de la cadena "No se encontró empresa para el u" en el tipo 'Integer' no es válida
-ah, el usuario gradice no tiene empresa asignada en la bdlmaster de clientes
 
 
         HttpContext.Current.Session(SESSIONPRONTO_USUARIO) = usuario

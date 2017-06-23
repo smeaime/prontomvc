@@ -74,7 +74,7 @@ Partial Class NormasCalidad
             '////////////////////////////////////////////
 
 
-            Me.Title = "Estadísticas de Descargas"
+            Me.Title = "Normas de Calidad"
 
             BindTypeDropDown()
             refrescaPeriodo()

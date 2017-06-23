@@ -13,13 +13,13 @@ Imports ProntoMVC.Data.Models
 
 Imports CartaDePorteManager
 
-<WebService(Namespace:="http://tempuri.org/")> _
-<WebServiceBinding(ConformsTo:=WsiProfiles.BasicProfile1_1)> _
-<System.Web.Script.Services.ScriptService()> _
+<WebService(Namespace:="http://tempuri.org/")>
+<WebServiceBinding(ConformsTo:=WsiProfiles.BasicProfile1_1)>
+<System.Web.Script.Services.ScriptService()>
 Public Class WebServiceClientes
     Inherits System.Web.Services.WebService
 
-    <WebMethod()> _
+    <WebMethod()>
     Public Function GetCompletionList(ByVal prefixText As String, ByVal count As Integer, ByVal contextKey As String) As String()
         'Dim c1 As Char
         'Dim c2 As Char
@@ -132,7 +132,7 @@ Public Class WebServiceClientes
     End Function
 
 
-    <WebMethod()> _
+    <WebMethod()>
     Public Function AcopiosPorCliente(NombreCliente As String, SC As String) As List(Of aaa) 'As String()
 
         'Pronto.ERP.Bll.CartaPorteManagerAux()
@@ -175,8 +175,8 @@ Public Class WebServiceClientes
     End Class
 
 
-    <ScriptMethod(ResponseFormat:=ResponseFormat.Json)> _
-    <WebMethod()> _
+    <ScriptMethod(ResponseFormat:=ResponseFormat.Json)>
+    <WebMethod()>
     Public Function WilliamsDestinoGetWilliamsDestinos(term As String) As String ' As List(Of autocomplete) 'As String()
 
         Dim SC As String
@@ -205,13 +205,13 @@ Public Class WebServiceClientes
 
 
         Dim q = (From item In db.WilliamsDestinos
-                   Where item.Descripcion.ToLower().Contains(term.ToLower()) And (puntovent = 0 Or item.PuntoVenta = puntovent)
-                   Order By item.Descripcion
-                   Select New autocomplete With
-                   {
-                       .id = item.IdWilliamsDestino,
-                       .value = item.Descripcion
-                   }).Take(10).ToList()
+                 Where item.Descripcion.ToLower().Contains(term.ToLower()) And (puntovent = 0 Or item.PuntoVenta = puntovent)
+                 Order By item.Descripcion
+                 Select New autocomplete With
+                 {
+                     .id = item.IdWilliamsDestino,
+                     .value = item.Descripcion
+                 }).Take(10).ToList()
 
 
         'Return q
@@ -229,8 +229,131 @@ Public Class WebServiceClientes
     End Function
 
 
-    <ScriptMethod(ResponseFormat:=ResponseFormat.Json)> _
-    <WebMethod()> _
+
+
+    <ScriptMethod(ResponseFormat:=ResponseFormat.Json)>
+    <WebMethod()>
+    Public Function NormasCalidad_DynamicGridData(sidx As String, sord As String, page As Integer, rows As Integer, _search As Boolean, filters As String) As String
+
+        Dim SC As String
+
+        If Not Diagnostics.Debugger.IsAttached Then
+            'SC = Encriptar("Data Source=10.2.64.30;Initial catalog=Williams;User ID=pronto; Password=MeDuV8NSlxRlnYxhMFL3;Connect Timeout=200")
+            SC = Encriptar(scWilliamsRelease())
+            'dddddd()
+        Else
+            SC = Encriptar(scLocal())
+            'SC = Encriptar("Data Source=serversql3;Initial catalog=Williams2;User ID=sa; Password=.SistemaPronto.;Connect Timeout=200")
+        End If
+
+
+
+        Dim s = New ServicioCartaPorte.servi()
+
+        Dim q = s.NormasCalidad_DynamicGridData(SC, sidx, sord, page, rows, _search, filters)
+
+
+        Dim TheSerializer As JavaScriptSerializer = New JavaScriptSerializer()
+
+
+        Dim TheJson As String = TheSerializer.Serialize(q)
+
+        Return TheJson
+
+
+    End Function
+
+
+
+
+
+
+    <WebMethod()>
+    Public Function NormaCalidadBatchUpdate(o As Object) As String
+        'Public Function DestinoBatchUpdate(o As ProntoMVC.Data.Models.CartasDePorteControlDescarga) As String
+        ' (o As ProntoMVC.Data.Models.CartasDePorteControlDescarga)
+
+
+
+
+        'http://stackoverflow.com/questions/6292510/passing-data-from-jqgrid-to-webmethod/6296601#6296601
+        'http://stackoverflow.com/questions/6292510/passing-data-from-jqgrid-to-webmethod/6296601#6296601
+        'http://stackoverflow.com/questions/6292510/passing-data-from-jqgrid-to-webmethod/6296601#6296601
+        'http://stackoverflow.com/questions/6292510/passing-data-from-jqgrid-to-webmethod/6296601#6296601
+
+        Dim SC As String
+
+        If Not Diagnostics.Debugger.IsAttached Then
+            'SC = Encriptar("Data Source=10.2.64.30;Initial catalog=Williams;User ID=pronto; Password=MeDuV8NSlxRlnYxhMFL3;Connect Timeout=200")
+            SC = Encriptar(scWilliamsRelease())
+            'dddddd()
+        Else
+            SC = Encriptar(scLocal())
+            'SC = Encriptar("Data Source=serversql3;Initial catalog=Williams2;User ID=sa; Password=.SistemaPronto.;Connect Timeout=200")
+        End If
+
+
+
+        Dim s = New ServicioCartaPorte.servi()
+
+        Dim q = s.NormaCalidadBatchUpdate(SC, o)
+
+
+
+
+
+    End Function
+
+
+
+
+
+
+    <ScriptMethod(ResponseFormat:=ResponseFormat.Json)>
+    <WebMethod()>
+    Public Function GetNormasCalidad(term As String) As String ' As List(Of autocomplete) 'As String()
+
+        Dim SC As String
+
+
+
+
+        If Not Diagnostics.Debugger.IsAttached Then
+            'SC = Encriptar("Data Source=10.2.64.30;Initial catalog=Williams;User ID=pronto; Password=MeDuV8NSlxRlnYxhMFL3;Connect Timeout=200")
+            SC = Encriptar(scWilliamsRelease())
+            'dddddd()
+        Else
+            SC = Encriptar(scLocal())
+            'SC = Encriptar("Data Source=serversql3;Initial catalog=Williams2;User ID=sa; Password=.SistemaPronto.;Connect Timeout=200")
+        End If
+
+
+
+        Dim s = New ServicioCartaPorte.servi()
+
+        Dim q = s.GetNormasCalidad(SC, term)
+
+
+        'Return q
+
+        '    return Json(q, JsonRequestBehavior.AllowGet);
+
+        Dim TheSerializer As JavaScriptSerializer = New JavaScriptSerializer()
+
+
+        Dim TheJson As String = TheSerializer.Serialize(q)
+
+        Return TheJson
+
+
+    End Function
+
+
+
+
+
+    <ScriptMethod(ResponseFormat:=ResponseFormat.Json)>
+    <WebMethod()>
     Public Function GetCorredores(term As String) As String ' As List(Of autocomplete) 'As String()
 
         Dim SC As String
@@ -259,13 +382,13 @@ Public Class WebServiceClientes
 
 
         Dim q = (From item In db.Vendedores
-                   Where item.Nombre.ToLower().Contains(term.ToLower())
-                   Order By item.Nombre
-                   Select New autocomplete With
-                   {
-                       .id = item.IdVendedor,
-                       .value = item.Nombre
-                   }).Take(10).ToList()
+                 Where item.Nombre.ToLower().Contains(term.ToLower())
+                 Order By item.Nombre
+                 Select New autocomplete With
+                 {
+                     .id = item.IdVendedor,
+                     .value = item.Nombre
+                 }).Take(10).ToList()
 
 
         'Return q
@@ -282,8 +405,11 @@ Public Class WebServiceClientes
 
     End Function
 
-    <ScriptMethod(ResponseFormat:=ResponseFormat.Json)> _
-    <WebMethod()> _
+
+
+
+    <ScriptMethod(ResponseFormat:=ResponseFormat.Json)>
+    <WebMethod()>
     Public Function GetLocalidades(term As String) As String ' As List(Of autocomplete) 'As String()
 
         Dim SC As String
@@ -312,13 +438,13 @@ Public Class WebServiceClientes
 
 
         Dim q = (From item In db.Localidades
-                   Where item.Nombre.ToLower().Contains(term.ToLower())
-                   Order By item.Nombre
-                   Select New autocomplete With
-                   {
-                       .id = item.IdLocalidad,
-                       .value = item.Nombre
-                   }).Take(10).ToList()
+                 Where item.Nombre.ToLower().Contains(term.ToLower())
+                 Order By item.Nombre
+                 Select New autocomplete With
+                 {
+                     .id = item.IdLocalidad,
+                     .value = item.Nombre
+                 }).Take(10).ToList()
 
 
         'Return q
@@ -336,8 +462,8 @@ Public Class WebServiceClientes
     End Function
 
 
-    <ScriptMethod(ResponseFormat:=ResponseFormat.Json)> _
-    <WebMethod()> _
+    <ScriptMethod(ResponseFormat:=ResponseFormat.Json)>
+    <WebMethod()>
     Public Function GetProductos(term As String) As String ' As List(Of autocomplete) 'As String()
 
         Dim SC As String
@@ -366,13 +492,13 @@ Public Class WebServiceClientes
 
 
         Dim q = (From item In db.Articulos
-                   Where item.Descripcion.ToLower().Contains(term.ToLower())
-                   Order By item.Descripcion
-                   Select New autocomplete With
-                   {
-                       .id = item.IdArticulo,
-                       .value = item.Descripcion
-                   }).Take(10).ToList()
+                 Where item.Descripcion.ToLower().Contains(term.ToLower())
+                 Order By item.Descripcion
+                 Select New autocomplete With
+                 {
+                     .id = item.IdArticulo,
+                     .value = item.Descripcion
+                 }).Take(10).ToList()
 
 
         'Return q
@@ -389,8 +515,8 @@ Public Class WebServiceClientes
 
     End Function
 
-    <ScriptMethod(ResponseFormat:=ResponseFormat.Json)> _
-    <WebMethod()> _
+    <ScriptMethod(ResponseFormat:=ResponseFormat.Json)>
+    <WebMethod()>
     Public Function GetClientes(term As String) As String ' As List(Of autocomplete) 'As String()
 
         Dim SC As String
@@ -419,13 +545,13 @@ Public Class WebServiceClientes
 
 
         Dim q = (From item In db.Clientes
-                   Where item.RazonSocial.ToLower().Contains(term.ToLower())
-                   Order By item.RazonSocial
-                   Select New autocomplete With
-                   {
-                       .id = item.IdCliente,
-                       .value = item.RazonSocial
-                   }).Take(10).ToList()
+                 Where item.RazonSocial.ToLower().Contains(term.ToLower())
+                 Order By item.RazonSocial
+                 Select New autocomplete With
+                 {
+                     .id = item.IdCliente,
+                     .value = item.RazonSocial
+                 }).Take(10).ToList()
 
 
         'Return q
@@ -442,8 +568,8 @@ Public Class WebServiceClientes
 
     End Function
 
-    <ScriptMethod(ResponseFormat:=ResponseFormat.Json)> _
-    <WebMethod()> _
+    <ScriptMethod(ResponseFormat:=ResponseFormat.Json)>
+    <WebMethod()>
     Public Function DestinoDelete(id As Integer) As String ' As List(Of autocomplete) 'As String()
 
         Dim SC As String
@@ -461,7 +587,7 @@ Public Class WebServiceClientes
 
 
         Dim q = (From item In db.CartasDePorteControlDescargas
-                   Where item.IdCartasDePorteControlDescarga = id).FirstOrDefault()
+                 Where item.IdCartasDePorteControlDescarga = id).FirstOrDefault()
 
         db.CartasDePorteControlDescargas.Remove(q)
 
@@ -483,7 +609,7 @@ Public Class WebServiceClientes
     End Function
 
 
-    <WebMethod()> _
+    <WebMethod()>
     Public Function DestinoBatchUpdate(o As Object) As String
         'Public Function DestinoBatchUpdate(o As ProntoMVC.Data.Models.CartasDePorteControlDescarga) As String
         ' (o As ProntoMVC.Data.Models.CartasDePorteControlDescarga)
@@ -574,13 +700,19 @@ Public Class WebServiceClientes
 
 
 
+
+
+
+
+
+
     Class bbbb
         Public IdWilliamsDestino As Integer
         Public Descripcion As String
 
     End Class
 
-    <WebMethod()> _
+    <WebMethod()>
     Public Function DestinosPorPuntoVenta(term As String, puntoventa As Integer, SC As String) As String 'As List(Of bbbb) 'As String()
 
         'Pronto.ERP.Bll.CartaPorteManagerAux()
@@ -606,9 +738,9 @@ Public Class WebServiceClientes
 
 
 
-            Dim q = (From i In db.WilliamsDestinos _
-                    Where (i.PuntoVenta = puntoventa Or i.PuntoVenta Is Nothing) And i.Descripcion.Contains(term)
-                    Select New bbbb With {.IdWilliamsDestino = i.IdWilliamsDestino, .Descripcion = i.Descripcion}).ToList()
+            Dim q = (From i In db.WilliamsDestinos
+                     Where (i.PuntoVenta = puntoventa Or i.PuntoVenta Is Nothing) And i.Descripcion.Contains(term)
+                     Select New bbbb With {.IdWilliamsDestino = i.IdWilliamsDestino, .Descripcion = i.Descripcion}).ToList()
 
             ' instantiate a serializer
             Dim TheSerializer = New System.Web.Script.Serialization.JavaScriptSerializer()

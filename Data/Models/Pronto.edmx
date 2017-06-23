@@ -1051,6 +1051,16 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.CartasPorteMovimientos' no tiene 
           <Property Name="FechaInicioVigenciaCodigoNormaCapital" Type="datetime" />
           <Property Name="FechaFinVigenciaCodigoNormaCapital" Type="datetime" />
         </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'Pronto.dbo.ColaCorreosComprobantes' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="ColaCorreosComprobantes">
+          <Key>
+            <PropertyRef Name="IdTipoComprobante" />
+            <PropertyRef Name="IdComprobante" />
+          </Key>
+          <Property Name="IdTipoComprobante" Type="int" Nullable="false" />
+          <Property Name="IdComprobante" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="Colores">
           <Key>
             <PropertyRef Name="IdColor" />
@@ -10367,6 +10377,12 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.wGrillaPersistencia' no tiene def
     [CartasPorteMovimientos].[IdDetalleFactura] AS [IdDetalleFactura]
     FROM [dbo].[CartasPorteMovimientos] AS [CartasPorteMovimientos]</DefiningQuery>
           </EntitySet>
+          <EntitySet Name="ColaCorreosComprobantes" EntityType="Self.ColaCorreosComprobantes" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [ColaCorreosComprobantes].[IdTipoComprobante] AS [IdTipoComprobante], 
+    [ColaCorreosComprobantes].[IdComprobante] AS [IdComprobante]
+    FROM [dbo].[ColaCorreosComprobantes] AS [ColaCorreosComprobantes]</DefiningQuery>
+          </EntitySet>
           <EntitySet Name="EjerciciosPeriodos" EntityType="Self.EjerciciosPeriodos" store:Type="Tables" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [EjerciciosPeriodos].[IdEjercicioPeriodo] AS [IdEjercicioPeriodo], 
@@ -13266,6 +13282,7 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.wGrillaPersistencia' no tiene def
             <End Role="WilliamsDestino" EntitySet="WilliamsDestinos" />
             <End Role="CartaPorteNormasCalidad" EntitySet="CartaPorteNormasCalidads" />
           </AssociationSet>
+          <EntitySet Name="ColaCorreosComprobantes" EntityType="DemoProntoModel.ColaCorreosComprobante" />
           </EntityContainer>
         <EntityType Name="Articulo">
           <Key>
@@ -25935,6 +25952,14 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.wGrillaPersistencia' no tiene def
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="ColaCorreosComprobante">
+          <Key>
+            <PropertyRef Name="IdTipoComprobante" />
+            <PropertyRef Name="IdComprobante" />
+          </Key>
+          <Property Name="IdTipoComprobante" Type="Int32" Nullable="false" />
+          <Property Name="IdComprobante" Type="Int32" Nullable="false" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -33017,6 +33042,14 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.wGrillaPersistencia' no tiene def
               <MappingFragment StoreEntitySet="CartaPorteRubrosCalidad">
                 <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
                 <ScalarProperty Name="IdCartaPorteRubroCalidad" ColumnName="IdCartaPorteRubroCalidad" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ColaCorreosComprobantes">
+            <EntityTypeMapping TypeName="DemoProntoModel.ColaCorreosComprobante">
+              <MappingFragment StoreEntitySet="ColaCorreosComprobantes">
+                <ScalarProperty Name="IdComprobante" ColumnName="IdComprobante" />
+                <ScalarProperty Name="IdTipoComprobante" ColumnName="IdTipoComprobante" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
