@@ -4305,7 +4305,7 @@ Formato localidad-provincia	destination	x
 
 
 
-        public virtual string NormasCalidad_DynamicGridData(string SC, string sidx, string sord, int page, int rows, bool _search, string filters)
+        public virtual jqGridJson NormasCalidad_DynamicGridData(string SC, string sidx, string sord, int page, int rows, bool _search, string filters)
         {
 
 
@@ -4432,9 +4432,11 @@ Formato localidad-provincia	destination	x
             };
 
 
-            System.Web.Script.Serialization.JavaScriptSerializer jsonSerializer = new System.Web.Script.Serialization.JavaScriptSerializer();
-            return jsonSerializer.Serialize(jsonData);
 
+            //System.Web.Script.Serialization.JavaScriptSerializer jsonSerializer = new System.Web.Script.Serialization.JavaScriptSerializer();
+            //return jsonSerializer.Serialize(jsonData);
+
+            return jsonData;
         }
 
 
