@@ -1739,6 +1739,21 @@
       <End Role="Cliente" EntitySet="Clientes" />
       <End Role="CartasDePorte" EntitySet="CartasDePortes" />
     </AssociationSet>
+    <EntitySet Name="CartaPorteNormasCalidads" EntityType="DemoProntoModel.CartaPorteNormasCalidad" />
+    <EntitySet Name="CartaPorteRubrosCalidads" EntityType="DemoProntoModel.CartaPorteRubrosCalidad" />
+    <AssociationSet Name="FK__CartaPort__IdArt__7E797E90" Association="DemoProntoModel.FK__CartaPort__IdArt__7E797E90">
+      <End Role="Articulo" EntitySet="Articulos" />
+      <End Role="CartaPorteNormasCalidad" EntitySet="CartaPorteNormasCalidads" />
+    </AssociationSet>
+    <AssociationSet Name="FK__CartaPort__IdCar__7D855A57" Association="DemoProntoModel.FK__CartaPort__IdCar__7D855A57">
+      <End Role="CartaPorteRubrosCalidad" EntitySet="CartaPorteRubrosCalidads" />
+      <End Role="CartaPorteNormasCalidad" EntitySet="CartaPorteNormasCalidads" />
+    </AssociationSet>
+    <AssociationSet Name="FK__CartaPort__IdDes__7F6DA2C9" Association="DemoProntoModel.FK__CartaPort__IdDes__7F6DA2C9">
+      <End Role="WilliamsDestino" EntitySet="WilliamsDestinos" />
+      <End Role="CartaPorteNormasCalidad" EntitySet="CartaPorteNormasCalidads" />
+    </AssociationSet>
+    <EntitySet Name="ColaCorreosComprobantes" EntityType="DemoProntoModel.ColaCorreosComprobante" />
   </EntityContainer>
   <EntityType Name="Articulo">
     <Key>
@@ -2024,6 +2039,7 @@
     <NavigationProperty Name="FertilizantesCupos10" Relationship="DemoProntoModel.FK__Fertiliza__IdArt__536F24FA" FromRole="Articulo" ToRole="FertilizantesCupos" />
     <NavigationProperty Name="FertilizantesCupos11" Relationship="DemoProntoModel.FK__Fertiliza__IdArt__54634933" FromRole="Articulo" ToRole="FertilizantesCupos" />
     <NavigationProperty Name="CDPHumedades" Relationship="DemoProntoModel.FK__CDPHumeda__IdArt__48D19AF6" FromRole="Articulo" ToRole="CDPHumedade" />
+    <NavigationProperty Name="CartaPorteNormasCalidads" Relationship="DemoProntoModel.FK__CartaPort__IdArt__7E797E90" FromRole="Articulo" ToRole="CartaPorteNormasCalidad" />
   </EntityType>
   <EntityType Name="ControlCalidad">
     <Key>
@@ -12295,6 +12311,7 @@
     <NavigationProperty Name="Localidade11" Relationship="DemoProntoModel.FK__WilliamsD__IdLoc__0B7E73F3" FromRole="WilliamsDestino" ToRole="Localidad" />
     <NavigationProperty Name="Localidade2" Relationship="DemoProntoModel.FK__WilliamsD__IdLoc__0C72982C" FromRole="WilliamsDestino" ToRole="Localidad" />
     <NavigationProperty Name="CartasDePorteControlDescargas" Relationship="DemoProntoModel.FK__CartasDeP__IdDes__4C581317" FromRole="WilliamsDestino" ToRole="CartasDePorteControlDescarga" />
+    <NavigationProperty Name="CartaPorteNormasCalidads" Relationship="DemoProntoModel.FK__CartaPort__IdDes__7F6DA2C9" FromRole="WilliamsDestino" ToRole="CartaPorteNormasCalidad" />
   </EntityType>
   <EntityType Name="WilliamsMailFiltrosCola">
     <Key>
@@ -14336,4 +14353,71 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <EntityType Name="CartaPorteNormasCalidad">
+    <Key>
+      <PropertyRef Name="IdCartaPorteNormaCalidad" />
+    </Key>
+    <Property Name="IdCartaPorteNormaCalidad" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IdCartaPorteRubroCalidad" Type="Int32" />
+    <Property Name="ResultadoDesde" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="ResultadoHasta" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="RebajaIncremento" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="IdArticulo" Type="Int32" />
+    <Property Name="IdDestino" Type="Int32" />
+    <NavigationProperty Name="Articulo" Relationship="DemoProntoModel.FK__CartaPort__IdArt__7E797E90" FromRole="CartaPorteNormasCalidad" ToRole="Articulo" />
+    <NavigationProperty Name="CartaPorteRubrosCalidad" Relationship="DemoProntoModel.FK__CartaPort__IdCar__7D855A57" FromRole="CartaPorteNormasCalidad" ToRole="CartaPorteRubrosCalidad" />
+    <NavigationProperty Name="WilliamsDestino" Relationship="DemoProntoModel.FK__CartaPort__IdDes__7F6DA2C9" FromRole="CartaPorteNormasCalidad" ToRole="WilliamsDestino" />
+  </EntityType>
+  <EntityType Name="CartaPorteRubrosCalidad">
+    <Key>
+      <PropertyRef Name="IdCartaPorteRubroCalidad" />
+    </Key>
+    <Property Name="IdCartaPorteRubroCalidad" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="60" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="CartaPorteNormasCalidads" Relationship="DemoProntoModel.FK__CartaPort__IdCar__7D855A57" FromRole="CartaPorteRubrosCalidad" ToRole="CartaPorteNormasCalidad" />
+  </EntityType>
+  <Association Name="FK__CartaPort__IdArt__7E797E90">
+    <End Type="DemoProntoModel.Articulo" Role="Articulo" Multiplicity="0..1" />
+    <End Type="DemoProntoModel.CartaPorteNormasCalidad" Role="CartaPorteNormasCalidad" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Articulo">
+        <PropertyRef Name="IdArticulo" />
+      </Principal>
+      <Dependent Role="CartaPorteNormasCalidad">
+        <PropertyRef Name="IdArticulo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__CartaPort__IdCar__7D855A57">
+    <End Type="DemoProntoModel.CartaPorteRubrosCalidad" Role="CartaPorteRubrosCalidad" Multiplicity="0..1" />
+    <End Type="DemoProntoModel.CartaPorteNormasCalidad" Role="CartaPorteNormasCalidad" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CartaPorteRubrosCalidad">
+        <PropertyRef Name="IdCartaPorteRubroCalidad" />
+      </Principal>
+      <Dependent Role="CartaPorteNormasCalidad">
+        <PropertyRef Name="IdCartaPorteRubroCalidad" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__CartaPort__IdDes__7F6DA2C9">
+    <End Type="DemoProntoModel.WilliamsDestino" Role="WilliamsDestino" Multiplicity="0..1" />
+    <End Type="DemoProntoModel.CartaPorteNormasCalidad" Role="CartaPorteNormasCalidad" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="WilliamsDestino">
+        <PropertyRef Name="IdWilliamsDestino" />
+      </Principal>
+      <Dependent Role="CartaPorteNormasCalidad">
+        <PropertyRef Name="IdDestino" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="ColaCorreosComprobante">
+    <Key>
+      <PropertyRef Name="IdTipoComprobante" />
+      <PropertyRef Name="IdComprobante" />
+    </Key>
+    <Property Name="IdTipoComprobante" Type="Int32" Nullable="false" />
+    <Property Name="IdComprobante" Type="Int32" Nullable="false" />
+  </EntityType>
 </Schema>

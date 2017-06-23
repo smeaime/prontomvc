@@ -255,6 +255,9 @@
     <Compile Include="Models\Cliente.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ColaCorreosComprobante.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Colore.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
