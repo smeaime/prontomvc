@@ -231,9 +231,9 @@ Public Class WebServiceClientes
 
 
 
-    <ScriptMethod(ResponseFormat:=ResponseFormat.Json)>
+    '<ScriptMethod(ResponseFormat:=ResponseFormat.Json)>
     <WebMethod()>
-    Public Function NormasCalidad_DynamicGridData(sidx As String, sord As String, page As Integer, rows As Integer, _search As Boolean, filters As String) As String
+    Public Function NormasCalidad_DynamicGridData(sidx As String, sord As String, page As Integer, rows As Integer, _search As Boolean, filters As String) As ServicioCartaPorte.jqGridJson
 
         Dim SC As String
 
@@ -252,14 +252,7 @@ Public Class WebServiceClientes
 
         Dim q = s.NormasCalidad_DynamicGridData(SC, sidx, sord, page, rows, _search, filters)
 
-
-        Dim TheSerializer As JavaScriptSerializer = New JavaScriptSerializer()
-
-
-        Dim TheJson As String = TheSerializer.Serialize(q)
-
-        Return TheJson
-
+        Return q
 
     End Function
 

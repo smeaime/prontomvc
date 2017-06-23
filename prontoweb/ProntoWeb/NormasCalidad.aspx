@@ -860,18 +860,21 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                     //url: 'Handler.ashx',
                     
                     
+                    datatype: 'xml',
+                    type: 'POST',
+                    //ajaxGridOptions: { contentType: 'application/json; charset=utf-8' },
 
+                    xmlReader: { root: "rows", row: "jqGridRowJson", cell: "cell" }, // ahi enganchó. una bronca q no me esté andando con json (al usar ASMX. con el ASHX sí anduvo, sin tener que especificar el jsonReader)
 
-                    //postData: {},
-                    //postData: {
-                    //    'FechaInicial': function () { return $("#ctl00_ContentPlaceHolder1_txtFechaDesde").val(); },
-                    //    'FechaFinal': function () { return $("#ctl00_ContentPlaceHolder1_txtFechaHasta").val(); },
-                    //    'puntovent': function () { return $("#ctl00_ContentPlaceHolder1_cmbPuntoVenta").val(); },
-                    //    'destino': function () { return $("#ctl00_ContentPlaceHolder1_txtDestino").val(); }
+                    //jsonReader: {
+                    //    id: "IdCartaPorteNormaCalidad",
+                    //    cell: "",
+                    //    root: function (obj) { return obj.rows; },
+                    //    page: function () { return 1; },
+                    //    total: function () { return 1; },
+                    //    records: function (obj) { return obj.rows.length; },
+                    //    repeatitems: false
                     //},
-                    datatype: 'xml', //'json',
-                    mtype: 'POST',
-
 
 
                     colNames: ['', 'Id', 'Fecha', 'Destino', 'IdDestino', 'TOTAL Puerto', 'Sucursal'
