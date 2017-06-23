@@ -896,6 +896,19 @@ namespace ProntoMVC.Tests
 
 
 
+        [TestMethod]
+        public void RangosResultadoCalidadesCalculoRebajaYMerma_37774_4()
+        {
+
+
+            //    falta el automcplete de rubros
+
+            var s = new ServicioCartaPorte.servi();
+
+            s.GetNormasCalidad(SC,"a");
+
+        }
+
 
 
 
@@ -915,10 +928,7 @@ namespace ProntoMVC.Tests
 
 
 
-            var sqlquery4 = s.NormaCalidad_DynamicGridData("IdCartaDePorte", "desc", 1, 999999, true, filtro,
-                                                 "01/12/2016",
-                                                 "30/01/2017",
-                                                 0, -1, SC, "Mariano");
+            var sqlquery4 = s.NormasCalidad_DynamicGridData(SC, "IdCartaPorteNormaCalidad", "desc", 1, 999999, true, filtro);
 
 
         }
@@ -930,9 +940,9 @@ namespace ProntoMVC.Tests
         public void RangosResultadoCalidadesCalculoRebajaYMerma_37774_2()
         {
 
+            var o=new CartaPorteNormasCalidad() ;
             
-            
-            NormaCalidadBatchUpdate();
+            NormaCalidadBatchUpdate(o);
         }
 
 
@@ -1007,7 +1017,7 @@ namespace ProntoMVC.Tests
 
 
 
-            var ss = RebajaCalculo(1, 2.5M, -1, -1);
+            var ss = RebajaCalculo(SC,1, 2.5M, -1, -1);
 
 
         }

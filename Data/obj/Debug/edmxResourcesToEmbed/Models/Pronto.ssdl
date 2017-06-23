@@ -475,6 +475,25 @@
     <Property Name="IdCargo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Descripcion" Type="varchar" MaxLength="50" />
   </EntityType>
+  <EntityType Name="CartaPorteNormasCalidad">
+    <Key>
+      <PropertyRef Name="IdCartaPorteNormaCalidad" />
+    </Key>
+    <Property Name="IdCartaPorteNormaCalidad" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IdCartaPorteRubroCalidad" Type="int" />
+    <Property Name="ResultadoDesde" Type="numeric" Precision="18" Scale="2" />
+    <Property Name="ResultadoHasta" Type="numeric" Precision="18" Scale="2" />
+    <Property Name="RebajaIncremento" Type="numeric" Precision="18" Scale="2" />
+    <Property Name="IdArticulo" Type="int" />
+    <Property Name="IdDestino" Type="int" />
+  </EntityType>
+  <EntityType Name="CartaPorteRubrosCalidad">
+    <Key>
+      <PropertyRef Name="IdCartaPorteRubroCalidad" />
+    </Key>
+    <Property Name="IdCartaPorteRubroCalidad" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Descripcion" Type="varchar" MaxLength="60" Nullable="false" />
+  </EntityType>
   <EntityType Name="CartasDePorte">
     <Key>
       <PropertyRef Name="IdCartaDePorte" />
@@ -1026,6 +1045,16 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.CartasPorteMovimientos' no tiene 
     <Property Name="CodigoNormaCapital" Type="int" />
     <Property Name="FechaInicioVigenciaCodigoNormaCapital" Type="datetime" />
     <Property Name="FechaFinVigenciaCodigoNormaCapital" Type="datetime" />
+  </EntityType>
+  <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'Pronto.dbo.ColaCorreosComprobantes' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+  <EntityType Name="ColaCorreosComprobantes">
+    <Key>
+      <PropertyRef Name="IdTipoComprobante" />
+      <PropertyRef Name="IdComprobante" />
+    </Key>
+    <Property Name="IdTipoComprobante" Type="int" Nullable="false" />
+    <Property Name="IdComprobante" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="Colores">
     <Key>
@@ -6236,6 +6265,42 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.wGrillaPersistencia' no tiene def
     <Property Name="IdDestino" Type="int" />
     <Property Name="AgregaItemDeGastosAdministrativos" Type="varchar" MaxLength="2" />
   </EntityType>
+  <Association Name="FK__CartaPort__IdArt__7E797E90">
+    <End Role="Articulos" Type="Self.Articulos" Multiplicity="0..1" />
+    <End Role="CartaPorteNormasCalidad" Type="Self.CartaPorteNormasCalidad" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Articulos">
+        <PropertyRef Name="IdArticulo" />
+      </Principal>
+      <Dependent Role="CartaPorteNormasCalidad">
+        <PropertyRef Name="IdArticulo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__CartaPort__IdCar__7D855A57">
+    <End Role="CartaPorteRubrosCalidad" Type="Self.CartaPorteRubrosCalidad" Multiplicity="0..1" />
+    <End Role="CartaPorteNormasCalidad" Type="Self.CartaPorteNormasCalidad" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CartaPorteRubrosCalidad">
+        <PropertyRef Name="IdCartaPorteRubroCalidad" />
+      </Principal>
+      <Dependent Role="CartaPorteNormasCalidad">
+        <PropertyRef Name="IdCartaPorteRubroCalidad" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__CartaPort__IdDes__7F6DA2C9">
+    <End Role="WilliamsDestinos" Type="Self.WilliamsDestinos" Multiplicity="0..1" />
+    <End Role="CartaPorteNormasCalidad" Type="Self.CartaPorteNormasCalidad" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="WilliamsDestinos">
+        <PropertyRef Name="IdWilliamsDestino" />
+      </Principal>
+      <Dependent Role="CartaPorteNormasCalidad">
+        <PropertyRef Name="IdDestino" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK__CartasDeP__Acopi__5498535D">
     <End Role="CartasPorteAcopios" Type="Self.CartasPorteAcopios" Multiplicity="0..1" />
     <End Role="CartasDePorte" Type="Self.CartasDePorte" Multiplicity="*" />
@@ -9955,6 +10020,8 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.wGrillaPersistencia' no tiene def
     <EntitySet Name="Calidades" EntityType="Self.Calidades" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Calles" EntityType="Self.Calles" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Cargos" EntityType="Self.Cargos" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CartaPorteNormasCalidad" EntityType="Self.CartaPorteNormasCalidad" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CartaPorteRubrosCalidad" EntityType="Self.CartaPorteRubrosCalidad" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="CartasDePorte" EntityType="Self.CartasDePorte" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="CartasDePorteControlDescarga" EntityType="Self.CartasDePorteControlDescarga" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="CartasDePorteDetalle" EntityType="Self.CartasDePorteDetalle" Schema="dbo" store:Type="Tables" />
@@ -10305,6 +10372,12 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.wGrillaPersistencia' no tiene def
     [CartasPorteMovimientos].[IdDetalleFactura] AS [IdDetalleFactura]
     FROM [dbo].[CartasPorteMovimientos] AS [CartasPorteMovimientos]</DefiningQuery>
     </EntitySet>
+    <EntitySet Name="ColaCorreosComprobantes" EntityType="Self.ColaCorreosComprobantes" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [ColaCorreosComprobantes].[IdTipoComprobante] AS [IdTipoComprobante], 
+    [ColaCorreosComprobantes].[IdComprobante] AS [IdComprobante]
+    FROM [dbo].[ColaCorreosComprobantes] AS [ColaCorreosComprobantes]</DefiningQuery>
+    </EntitySet>
     <EntitySet Name="EjerciciosPeriodos" EntityType="Self.EjerciciosPeriodos" store:Type="Tables" store:Schema="dbo">
       <DefiningQuery>SELECT 
     [EjerciciosPeriodos].[IdEjercicioPeriodo] AS [IdEjercicioPeriodo], 
@@ -10334,6 +10407,18 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.wGrillaPersistencia' no tiene def
     [wGrillaPersistencia].[Tilde] AS [Tilde]
     FROM [dbo].[wGrillaPersistencia] AS [wGrillaPersistencia]</DefiningQuery>
     </EntitySet>
+    <AssociationSet Name="FK__CartaPort__IdArt__7E797E90" Association="Self.FK__CartaPort__IdArt__7E797E90">
+      <End Role="Articulos" EntitySet="Articulos" />
+      <End Role="CartaPorteNormasCalidad" EntitySet="CartaPorteNormasCalidad" />
+    </AssociationSet>
+    <AssociationSet Name="FK__CartaPort__IdCar__7D855A57" Association="Self.FK__CartaPort__IdCar__7D855A57">
+      <End Role="CartaPorteRubrosCalidad" EntitySet="CartaPorteRubrosCalidad" />
+      <End Role="CartaPorteNormasCalidad" EntitySet="CartaPorteNormasCalidad" />
+    </AssociationSet>
+    <AssociationSet Name="FK__CartaPort__IdDes__7F6DA2C9" Association="Self.FK__CartaPort__IdDes__7F6DA2C9">
+      <End Role="WilliamsDestinos" EntitySet="WilliamsDestinos" />
+      <End Role="CartaPorteNormasCalidad" EntitySet="CartaPorteNormasCalidad" />
+    </AssociationSet>
     <AssociationSet Name="FK__CartasDeP__Acopi__5498535D" Association="Self.FK__CartasDeP__Acopi__5498535D">
       <End Role="CartasPorteAcopios" EntitySet="CartasPorteAcopios" />
       <End Role="CartasDePorte" EntitySet="CartasDePorte" />

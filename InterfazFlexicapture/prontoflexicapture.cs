@@ -3578,6 +3578,9 @@ namespace ExtensionMethods
 
 namespace ServicioCartaPorte // migrar esto a una biblioteca aparte
 {
+
+    using ProntoMVC.Data.Models;
+
     public class jqGridJson
     {
         public int total { get; set; }
@@ -3872,6 +3875,40 @@ Formato localidad-provincia	destination	x
         }
 
 
+
+
+        public class autocomplete
+        {
+            public int id;
+            public string value;
+        }
+
+
+        public virtual List<autocomplete> GetNormasCalidad(string SC, string term)
+        {
+
+            //Dim usuario = Membership.GetUser()
+            //Dim dt As System.Data.DataTable = EntidadManager.ExecDinamico(SC, "Empleados_TX_UsuarioNT '" + usuario.UserName + "'")
+            //Dim idUsuario As Integer = Convert.ToInt32(dt.Rows(0)(0))
+            //Dim puntovent As Integer = EmpleadoManager.GetItem(SC, idUsuario).PuntoVentaAsociado
+
+
+
+            DemoProntoEntities db = new DemoProntoEntities(Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC)));
+
+
+            var q = (from item in db.CartaPorteRubrosCalidads
+                     where item.Descripcion.ToLower().Contains(term.ToLower())
+                     orderby item.Descripcion
+                     select new autocomplete
+                     {
+                         id = item.IdCartaPorteRubroCalidad,
+                         value = item.Descripcion
+                     }
+                    ).Take(10).ToList();
+
+            return q;
+        }
 
 
 
@@ -4240,54 +4277,67 @@ Formato localidad-provincia	destination	x
 
 
 
-
-        public virtual string NormasCalidad_DynamicGridData(string sidx, string sord, int page, int rows, bool _search, string filters, string FechaInicial, string FechaFinal, int puntovent, int iddestino)
+        public virtual string NormaCalidadBatchUpdate(string SC, ProntoMVC.Data.Models.CartaPorteNormasCalidad o)
         {
 
-            // An ASHX is a generic HttpHandler. An ASMX file is a web service. ASHX is a good lean way to provide a response to AJAX calls, but if you want to provide a response which changes based on conditions (such as variable inputs) it can become a bit of a handful - lots of if else etc. ASMX can house mulitple methods which can take parameters.
+            DemoProntoEntities db = new DemoProntoEntities(Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC)));
 
-            string SC;
-            //string SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(ConfigurationManager.AppSettings["scWilliamsRelease"]);
-            if (System.Diagnostics.Debugger.IsAttached)
-                SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(ConfigurationManager.AppSettings["scLocal"]);
+            if (o.IdCartaPorteNormaCalidad > 0)
+            {
+                var EntidadOriginal = db.CartaPorteNormasCalidads.Where(p => p.IdCartaPorteNormaCalidad == o.IdCartaPorteNormaCalidad).SingleOrDefault();
+                var EntidadEntry = db.Entry(EntidadOriginal);
+                EntidadEntry.CurrentValues.SetValues(o);
+
+                db.Entry(EntidadOriginal).State = System.Data.Entity.EntityState.Modified;
+            }
             else
-                SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(ConfigurationManager.AppSettings["scWilliamsRelease"]);
-
-            //If System.Diagnostics.Debugger.IsAttached() Or ConfigurationManager.AppSettings("UrlDominio").Contains("localhost") Then
-            //     scs = scLocal
-            // Else
-            //     scs = scWilliamsRelease
-            // End If
-
-
-            var usuario = Membership.GetUser();
-            System.Data.DataTable dt = EntidadManager.ExecDinamico(SC, "Empleados_TX_UsuarioNT '" + usuario.UserName + "'");
-            int idUsuario = Convert.ToInt32(dt.Rows[0][0]);
-            // int puntovent = EmpleadoManager.GetItem(SC, idUsuario).PuntoVentaAsociado;
-
-
-            DateTime FechaDesde = new DateTime(1980, 1, 1);
-            DateTime FechaHasta = new DateTime(2050, 1, 1);
-
-            try
             {
-
-                FechaDesde = DateTime.ParseExact(FechaInicial, "dd/MM/yyyy", null);
-            }
-            catch (Exception)
-            {
-
+                db.CartaPorteNormasCalidads.Add(o);
             }
 
-            try
-            {
-                FechaHasta = DateTime.ParseExact(FechaFinal, "dd/MM/yyyy", null);
+            db.SaveChanges();
 
-            }
-            catch (Exception)
-            {
+            return "";
+        }
 
-            }
+
+
+
+
+
+        public virtual string NormasCalidad_DynamicGridData(string SC, string sidx, string sord, int page, int rows, bool _search, string filters)
+        {
+
+
+
+            //var usuario = Membership.GetUser();
+            //System.Data.DataTable dt = EntidadManager.ExecDinamico(SC, "Empleados_TX_UsuarioNT '" + usuario.UserName + "'");
+            //int idUsuario = Convert.ToInt32(dt.Rows[0][0]);
+            //// int puntovent = EmpleadoManager.GetItem(SC, idUsuario).PuntoVentaAsociado;
+
+
+            //DateTime FechaDesde = new DateTime(1980, 1, 1);
+            //DateTime FechaHasta = new DateTime(2050, 1, 1);
+
+            //try
+            //{
+
+            //    FechaDesde = DateTime.ParseExact(FechaInicial, "dd/MM/yyyy", null);
+            //}
+            //catch (Exception)
+            //{
+
+            //}
+
+            //try
+            //{
+            //    FechaHasta = DateTime.ParseExact(FechaFinal, "dd/MM/yyyy", null);
+
+            //}
+            //catch (Exception)
+            //{
+
+            //}
 
 
 
@@ -4306,18 +4356,10 @@ Formato localidad-provincia	destination	x
             int totalRecords = 0;
 
 
-            var pagedQuery = Filtrador.Filters.FiltroGenerico_UsandoIQueryable<CartasDePorteControlDescarga>
+            var pagedQuery = Filtrador.Filters.FiltroGenerico_UsandoIQueryable<ProntoMVC.Data.Models.CartaPorteNormasCalidad>
                             (sidx, sord, page, rows, _search, filters, db, ref totalRecords,
-                                    db.CartasDePorteControlDescargas
-                                            .Where(x =>
-                                                    //(x.IdPuntoVenta == puntovent || puntovent == 0)
-                                                    //&&
-                                                    (x.Fecha >= FechaDesde && x.Fecha <= FechaHasta)
-                                                     &&
-                                                    (x.WilliamsDestino.PuntoVenta == puntovent || puntovent <= 0)
-                                                     &&
-                                                    (x.WilliamsDestino.IdWilliamsDestino == iddestino || iddestino <= 0)
-                                                 )
+                                    db.CartaPorteNormasCalidads
+
                                             );
 
 
@@ -4373,72 +4415,25 @@ Formato localidad-provincia	destination	x
                 rows = (from a in data
                         select new jqGridRowJson
                         {
-                            id = a.IdCartasDePorteControlDescarga.ToString(),
+                            id = a.IdCartaPorteNormaCalidad.ToString(),
                             cell = new string[] {
                                 "", //"<a href="+ Url.Action("Edit",new {id = a.IdPedido} ) + "  >Editar</>" ,
                                 
-                                a.IdCartasDePorteControlDescarga.ToString(),
+                                a.IdCartaPorteNormaCalidad.ToString(),
 
-                                 a.Fecha.ToShortDateString(),
+                        a.CartaPorteRubrosCalidad.Descripcion.NullSafeToString(),
 
-                                a.WilliamsDestino==null ? "" : a.WilliamsDestino.Descripcion,
+                                a.ResultadoDesde.NullSafeToString(),
+                      a.ResultadoHasta.NullSafeToString(),
+                      a.RebajaIncremento.NullSafeToString(),
 
-                                 a.IdDestino.ToString(),
-
-                                 a.TotalDescargaDia.ToString(),
-
-                                 a.IdPuntoVenta.ToString()
-                                 
-                                 
-                                 // a.FechaSalida==null ? "" :  a.FechaSalida.GetValueOrDefault().ToString("dd/MM/yyyy"),
-                                //a.Cumplido.NullSafeToString(), 
-
-
-                                //string.Join(" ",  a.DetallePedidos.Select(x=>(x.DetalleRequerimiento==null) ? "" : 
-                                //                     x.DetalleRequerimiento.Requerimientos == null ? "" :   
-                                //                         x.DetalleRequerimiento.Requerimientos.NumeroRequerimiento.NullSafeToString() ).Distinct()),
-                                //string.Join(" ",  a.DetallePedidos.Select(x=>(x.DetalleRequerimiento==null) ? "" : 
-                                //                        x.DetalleRequerimiento.Requerimientos == null ? ""  :
-                                //                            x.DetalleRequerimiento.Requerimientos.Obra == null ? ""  :
-                                //                             x.DetalleRequerimiento.Requerimientos.Obra.NumeroObra.NullSafeToString()).Distinct()),
-                              
-                                                             
-                                //a.Proveedor==null ? "" :  a.Proveedor.RazonSocial.NullSafeToString(), 
-                                //(a.TotalPedido- a.TotalIva1+a.Bonificacion- (a.ImpuestosInternos ?? 0)- (a.OtrosConceptos1 ?? 0) - (a.OtrosConceptos2 ?? 0)-    (a.OtrosConceptos3 ?? 0) -( a.OtrosConceptos4 ?? 0) - (a.OtrosConceptos5 ?? 0)).ToString(),  
-                                //a.Bonificacion.NullSafeToString(), 
-                                //a.TotalIva1.NullSafeToString(), 
-                                //a.Moneda==null ? "" :   a.Moneda.Abreviatura.NullSafeToString(),  
-                                //a.Comprador==null ? "" :    a.Comprador.Nombre.NullSafeToString(),  
-                                //a.Empleado==null ? "" :  a.Empleado.Nombre.NullSafeToString(),  
-                                //a.DetallePedidos.Count().NullSafeToString(),  
-                                //a.IdPedido.NullSafeToString(), 
-                                //a.NumeroComparativa.NullSafeToString(),  
-                                //a.IdTipoCompraRM.NullSafeToString(), 
-                                //a.Observaciones.NullSafeToString(),   
-                                //a.DetalleCondicionCompra.NullSafeToString(),   
-                                //a.PedidoExterior.NullSafeToString(),  
-                                //a.IdPedidoAbierto.NullSafeToString(), 
-                                //a.NumeroLicitacion .NullSafeToString(), 
-                                //a.Impresa.NullSafeToString(), 
-                                //a.UsuarioAnulacion.NullSafeToString(), 
-                                //a.FechaAnulacion.NullSafeToString(),  
-                                //a.MotivoAnulacion.NullSafeToString(),  
-                                //a.ImpuestosInternos.NullSafeToString(), 
-                                //"", // #Auxiliar1.Equipos , 
-                                //a.CircuitoFirmasCompleto.NullSafeToString(), 
-                                //a.Proveedor==null ? "" : a.Proveedor.IdCodigoIva.NullSafeToString() ,
-                                //a.IdComprador.NullSafeToString(),
-                                //a.IdProveedor.NullSafeToString(),
-                                //a.ConfirmadoPorWeb_1.NullSafeToString()
-                               
                             }
                         }).ToArray()
             };
 
-            //return Json(jsonData, JsonRequestBehavior.AllowGet);
-            JavaScriptSerializer jsonSerializer = new JavaScriptSerializer();
-            return jsonSerializer.Serialize(jsonData);
 
+            System.Web.Script.Serialization.JavaScriptSerializer jsonSerializer = new System.Web.Script.Serialization.JavaScriptSerializer();
+            return jsonSerializer.Serialize(jsonData);
 
         }
 
@@ -5060,9 +5055,9 @@ Formato localidad-provincia	destination	x
                                                         0, null, false, "", "",
                                                         -1, null, 0, "", "Todos")
                           from l in db.Localidades.Where(y => System.Data.Entity.SqlServer.SqlFunctions.StringConvert((double?)y.IdLocalidad).Trim() == x.Procedencia)
-                          //from f in db.Facturas.Where(y => y.IdFactura == (x.IdFacturaImputada ?? 0))
-                          //where (idarticulo == -1 || (x.IdArticulo ?? 0) == idarticulo)
-                          //   && (idclientefacturado == -1 || (f.IdCliente ?? 0) == idclientefacturado)  && x.Procedencia!=""
+                              //from f in db.Facturas.Where(y => y.IdFactura == (x.IdFacturaImputada ?? 0))
+                              //where (idarticulo == -1 || (x.IdArticulo ?? 0) == idarticulo)
+                              //   && (idclientefacturado == -1 || (f.IdCliente ?? 0) == idclientefacturado)  && x.Procedencia!=""
                           group x by new { x.ProcedenciaDesc, x.ProcedenciaProvinciaDesc, x.Procedencia, l.lat, l.lng } into grp
                           select new
                           {

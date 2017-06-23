@@ -32,7 +32,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
     <br />
 
     <div class="titulos" style="color: white">
-        Estadísticas de Descargas
+        Normas
     </div>
     <br />
     <br />
@@ -46,14 +46,13 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
             id="m1s">Select(Unselect) row 13</a>--%>
 
 
-        <asp:Button ID="informe" Text="VER INFORME" runat="server" Visible="True" CssClass="btn btn-primary"
-            Width="150" Height="40" />
-        <br />
-        <br />
+        <asp:Button ID="informe" Text="VER INFORME" runat="server" Visible="false" CssClass="btn btn-primary"
+            Width="150" Height="40"  />
 
 
 
-        <asp:UpdatePanel ID="UpdatePanelResumen" runat="server">
+
+        <asp:UpdatePanel ID="UpdatePanelResumen" runat="server" Visible="false">
             <ContentTemplate>
 
                 <table>
@@ -849,16 +848,28 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                 var UltimoIdArticulo;
 
                 $('#Lista').jqGrid({
-                    //url: ROOT + 'CotizacionWilliamsDestino/Cotizaciones/',
-                    url: 'Handler.ashx',
-                    //postData: {},
-                    postData: {
-                        'FechaInicial': function () { return $("#ctl00_ContentPlaceHolder1_txtFechaDesde").val(); },
-                        'FechaFinal': function () { return $("#ctl00_ContentPlaceHolder1_txtFechaHasta").val(); },
-                        'puntovent': function () { return $("#ctl00_ContentPlaceHolder1_cmbPuntoVenta").val(); },
-                        'destino': function () { return $("#ctl00_ContentPlaceHolder1_txtDestino").val(); }
+
+
+                    // si se queja de que no le estas pasando el filters https://stackoverflow.com/questions/20091730/jqgrid-toolbar-filter-parameters-in-link-with-asmx-web-service
+                    serializeGridData: function (postData) {
+                        if (postData.filters === undefined) postData.filters = null;
+                        //return JSON.stringify(postData);
+                        return postData;
                     },
-                    datatype: 'json',
+                    url: 'WebServiceClientes.asmx/NormasCalidad_DynamicGridData',
+                    //url: 'Handler.ashx',
+                    
+                    
+
+
+                    //postData: {},
+                    //postData: {
+                    //    'FechaInicial': function () { return $("#ctl00_ContentPlaceHolder1_txtFechaDesde").val(); },
+                    //    'FechaFinal': function () { return $("#ctl00_ContentPlaceHolder1_txtFechaHasta").val(); },
+                    //    'puntovent': function () { return $("#ctl00_ContentPlaceHolder1_cmbPuntoVenta").val(); },
+                    //    'destino': function () { return $("#ctl00_ContentPlaceHolder1_txtDestino").val(); }
+                    //},
+                    datatype: 'xml', //'json',
                     mtype: 'POST',
 
 
@@ -1098,7 +1109,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                     pager: $('#ListaPager'),
                     rowNum: 10,
                     rowList: [10, 20, 50, 100],
-                    sortname: 'Fecha',
+                    sortname: 'IdCartaPorteNormaCalidad',
                     sortorder: 'desc',
                     viewrecords: true,
                     multiselect: true,
