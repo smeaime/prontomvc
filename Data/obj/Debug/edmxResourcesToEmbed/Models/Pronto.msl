@@ -7086,5 +7086,34 @@
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
+    <EntitySetMapping Name="CartaPorteNormasCalidads">
+      <EntityTypeMapping TypeName="DemoProntoModel.CartaPorteNormasCalidad">
+        <MappingFragment StoreEntitySet="CartaPorteNormasCalidad">
+          <ScalarProperty Name="IdDestino" ColumnName="IdDestino" />
+          <ScalarProperty Name="IdArticulo" ColumnName="IdArticulo" />
+          <ScalarProperty Name="RebajaIncremento" ColumnName="RebajaIncremento" />
+          <ScalarProperty Name="ResultadoHasta" ColumnName="ResultadoHasta" />
+          <ScalarProperty Name="ResultadoDesde" ColumnName="ResultadoDesde" />
+          <ScalarProperty Name="IdCartaPorteRubroCalidad" ColumnName="IdCartaPorteRubroCalidad" />
+          <ScalarProperty Name="IdCartaPorteNormaCalidad" ColumnName="IdCartaPorteNormaCalidad" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CartaPorteRubrosCalidads">
+      <EntityTypeMapping TypeName="DemoProntoModel.CartaPorteRubrosCalidad">
+        <MappingFragment StoreEntitySet="CartaPorteRubrosCalidad">
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="IdCartaPorteRubroCalidad" ColumnName="IdCartaPorteRubroCalidad" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ColaCorreosComprobantes">
+      <EntityTypeMapping TypeName="DemoProntoModel.ColaCorreosComprobante">
+        <MappingFragment StoreEntitySet="ColaCorreosComprobantes">
+          <ScalarProperty Name="IdComprobante" ColumnName="IdComprobante" />
+          <ScalarProperty Name="IdTipoComprobante" ColumnName="IdTipoComprobante" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>
