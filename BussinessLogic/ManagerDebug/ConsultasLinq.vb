@@ -1924,7 +1924,7 @@ Public Class ConsultasLinq
         'Dim db As New LinqCartasPorteDataContext(Encriptar(SC))
         Dim db As ProntoMVC.Data.Models.DemoProntoEntities = New ProntoMVC.Data.Models.DemoProntoEntities(ProntoMVC.Data.Models.Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC)))
 
-        db.Database.CommandTimeout = 80
+        db.Database.CommandTimeout = 80  'configurar
 
         Dim pv As Integer = cmbPuntoVenta
         'ListaEmbarquesQueryable
