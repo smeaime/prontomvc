@@ -231,9 +231,9 @@ Public Class WebServiceClientes
 
 
 
-    '<ScriptMethod(ResponseFormat:=ResponseFormat.Json)>
+    <ScriptMethod(ResponseFormat:=ResponseFormat.Json)>
     <WebMethod()>
-    Public Function NormasCalidad_DynamicGridData(sidx As String, sord As String, page As Integer, rows As Integer, _search As Boolean, filters As String) As ServicioCartaPorte.jqGridJson
+    Public Function NormasCalidad_DynamicGridData(sidx As String, sord As String, page As Integer, rows As Integer, _search As Boolean, filters As String) As String 'As ServicioCartaPorte.jqGridJson
 
         Dim SC As String
 
@@ -252,11 +252,46 @@ Public Class WebServiceClientes
 
         Dim q = s.NormasCalidad_DynamicGridData(SC, sidx, sord, page, rows, _search, filters)
 
-        Return q
+
+        'Dim TheSerializer As JavaScriptSerializer = New JavaScriptSerializer()
+        'Dim TheJson As String = TheSerializer.Serialize()
+
+        Dim TheJson As String = Newtonsoft.Json.JsonConvert.SerializeObject(q)
+
+
+        Return TheJson
 
     End Function
 
 
+
+
+    '<ScriptMethod(ResponseFormat:=ResponseFormat.Json)>
+    <WebMethod()>
+    Public Function NormasCalidad_DynamicGridData_2(sidx As String, sord As String, page As Integer, rows As Integer, _search As Boolean, filters As String) As ServicioCartaPorte.jqGridJson
+
+        Dim SC As String
+
+        If Not Diagnostics.Debugger.IsAttached Then
+            'SC = Encriptar("Data Source=10.2.64.30;Initial catalog=Williams;User ID=pronto; Password=MeDuV8NSlxRlnYxhMFL3;Connect Timeout=200")
+            SC = Encriptar(scWilliamsRelease())
+            'dddddd()
+        Else
+            SC = Encriptar(scLocal())
+            'SC = Encriptar("Data Source=serversql3;Initial catalog=Williams2;User ID=sa; Password=.SistemaPronto.;Connect Timeout=200")
+        End If
+
+
+
+        Dim s = New ServicioCartaPorte.servi()
+
+        Dim q = s.NormasCalidad_DynamicGridData(SC, sidx, sord, page, rows, _search, filters)
+
+
+
+        Return q
+
+    End Function
 
 
 

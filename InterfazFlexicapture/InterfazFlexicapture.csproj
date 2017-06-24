@@ -60,9 +60,6 @@
     <Reference Include="EPPlus">
       <HintPath>..\packages\EPPlus.4.1.0\lib\net40\EPPlus.dll</HintPath>
     </Reference>
-    <Reference Include="GeoJSON.Net">
-      <HintPath>..\..\packages\GeoJSON.Net.0.1.55\lib\portable-net40+sl5+wp80+win8+wpa81\GeoJSON.Net.dll</HintPath>
-    </Reference>
     <Reference Include="Interop.FCEngine">
       <HintPath>..\prontoweb\Bin\Interop.FCEngine.dll</HintPath>
       <EmbedInteropTypes>True</EmbedInteropTypes>

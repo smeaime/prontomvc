@@ -853,28 +853,60 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                     // si se queja de que no le estas pasando el filters https://stackoverflow.com/questions/20091730/jqgrid-toolbar-filter-parameters-in-link-with-asmx-web-service
                     serializeGridData: function (postData) {
                         if (postData.filters === undefined) postData.filters = null;
-                        //return JSON.stringify(postData);
-                        return postData;
+                        return JSON.stringify(postData); // no usar este si usas xml
+                        //return postData; 
                     },
                     url: 'WebServiceClientes.asmx/NormasCalidad_DynamicGridData',
                     //url: 'Handler.ashx',
                     
                     
-                    datatype: 'xml',
-                    type: 'POST',
-                    //ajaxGridOptions: { contentType: 'application/json; charset=utf-8' },
+                    datatype: 'json',
+                    mtype: 'POST',
+                    contentType: 'application/json; charset=utf-8',
+                    ajaxGridOptions: { contentType: 'application/json; charset=utf-8' },
 
-                    xmlReader: { root: "rows", row: "jqGridRowJson", cell: "cell" }, // ahi enganchó. una bronca q no me esté andando con json (al usar ASMX. con el ASHX sí anduvo, sin tener que especificar el jsonReader)
+                    //xmlReader: { root: "rows", row: "jqGridRowJson", cell: "string" }, // ahi enganchó. una bronca q no me esté andando con json (al usar ASMX. con el ASHX sí anduvo, sin tener que especificar el jsonReader)
 
+                    jsonReader: {
+                        root: "d.rows",
+                        page: "d.page",
+                        total: "d.total",
+                        records: "d.records",
+                        repeatitems: true,
+                        //cell: "cell",
+                        id: "id",
+
+                        ////id: "id",
+                        ////cell: "",
+                        //root: function (obj) {
+                        //    //return JSON.parse(obj.d); 
+                        //    return obj.d;
+                        //},
+                        //page: function () { return 1; },
+                        //total: function () { return 3; },
+                        //records: function (obj) {
+                        //    return 3;
+                        //    //return JSON.parse(obj.d).records;
+                        //    //return obj.d.records;
+                        //},
+                        //repeatitems: true
+                    },
                     //jsonReader: {
-                    //    id: "IdCartaPorteNormaCalidad",
-                    //    cell: "",
-                    //    root: function (obj) { return obj.rows; },
-                    //    page: function () { return 1; },
-                    //    total: function () { return 1; },
-                    //    records: function (obj) { return obj.rows.length; },
-                    //    repeatitems: false
+                    //    root: "rows",
+                    //    page: "page",
+                    //    total: "total",
+                    //    records: "records",
+                    //    repeatitems: true,
+                    //    cell: "cell",
+                    //    id: "id",
+                    //    userdata: "userdata",
+                    //    subgrid: {
+                    //        root: "rows",
+                    //        repeatitems: true,
+                    //        cell: "cell"
+                    //    }
                     //},
+
 
 
                     colNames: ['', 'Id', 'Fecha', 'Destino', 'IdDestino', 'TOTAL Puerto', 'Sucursal'
