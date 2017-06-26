@@ -851,22 +851,24 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
 
                     // si se queja de que no le estas pasando el filters https://stackoverflow.com/questions/20091730/jqgrid-toolbar-filter-parameters-in-link-with-asmx-web-service
-                    serializeGridData: function (postData) {
-                        if (postData.filters === undefined) postData.filters = null;
-                        return JSON.stringify(postData); // no usar este si usas xml
-                        //return postData; 
-                    },
-                    url: 'WebServiceClientes.asmx/NormasCalidad_DynamicGridData',
-                    //url: 'Handler.ashx',
+
+                    //url: 'WebServiceClientes.asmx/NormasCalidad_DynamicGridData',
+                    url: 'HandlerNormas.ashx', //sigo teniendo problemas si quiero reemplazar el ASHX por un ASMX (probablemente por el wrapper ".d" con el que se vuelve del ASMX) 
                     
                     
                     datatype: 'json',
                     mtype: 'POST',
-                    contentType: 'application/json; charset=utf-8',
-                    ajaxGridOptions: { contentType: 'application/json; charset=utf-8' },
+                    //contentType: 'application/json; charset=utf-8',
+                    //ajaxGridOptions: { contentType: 'application/json; charset=utf-8' },
 
+
+                    /*serializeGridData: function (postData) {
+                        if (postData.filters === undefined) postData.filters = null;
+                        return JSON.stringify(postData); // no usar este si usas xml
+                        //return postData; 
+                    },*/
                     //xmlReader: { root: "rows", row: "jqGridRowJson", cell: "string" }, // ahi enganchó. una bronca q no me esté andando con json (al usar ASMX. con el ASHX sí anduvo, sin tener que especificar el jsonReader)
-
+/*
                     jsonReader: {
                         root: "d.rows",
                         page: "d.page",
@@ -890,7 +892,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                         //    //return obj.d.records;
                         //},
                         //repeatitems: true
-                    },
+                    },*/
                     //jsonReader: {
                     //    root: "rows",
                     //    page: "page",
