@@ -864,26 +864,6 @@ namespace ProntoMVC.Tests
 
 
 
-        public decimal RebajaCalculo(string SC, int idrubro, decimal resultado, int idarticulo, int iddestino)
-        {
-            var scEF = ProntoMVC.Data.Models.Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC));
-            DemoProntoEntities db = new DemoProntoEntities(scEF);
-
-            var q = from n in db.CartaPorteNormasCalidads
-                    where (n.ResultadoDesde > resultado && resultado < n.ResultadoHasta)
-                           && n.IdArticulo == idarticulo
-                           && n.IdDestino == iddestino
-                    orderby idarticulo descending, iddestino descending
-                    select n;
-
-            if (q.Count() == 0)
-                return 0;
-            else
-                return q.First().RebajaIncremento ?? 0;
-
-        }
-
-
         public string NormaCalidadBatchUpdate(CartaPorteNormasCalidad o)
         {
 
@@ -951,6 +931,7 @@ namespace ProntoMVC.Tests
         [TestMethod]
         public void RangosResultadoCalidadesCalculoRebajaYMerma_37774()
         {
+            var s = new ServicioCartaPorte.servi();
             var scEF = ProntoMVC.Data.Models.Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC));
             DemoProntoEntities db = new DemoProntoEntities(scEF);
 
@@ -1017,7 +998,7 @@ namespace ProntoMVC.Tests
 
 
 
-            var ss = RebajaCalculo(SC,1, 2.5M, -1, -1);
+            var ss = s.RebajaCalculo(SC,1, 2.5M, -1, -1);
 
 
         }
