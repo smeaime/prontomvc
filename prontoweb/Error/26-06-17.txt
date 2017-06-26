@@ -32,3 +32,28 @@ c:\Users\Administrador\Documents\bdl\pronto\prontoweb\ProntoWeb\HandlerNormas.as
    en System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
 System.Web
 __________________________
+
+Log Entry : 
+06/26/2017 10:43:43
+Error in: http://localhost:58911/ProntoWeb/CartaDePorte.aspx?Id=-1. Error Message:PV 0 0
+__________________________
+
+Log Entry : 
+06/26/2017 11:15:27
+Error in: http://localhost:58911/ProntoWeb/Cartadeporte.aspx. Error Message:Mariano esta logueado, pero lo redirijo al login porque faltan los datos de session. No deberia mejor mandarlo a SeleccionarEmpresa? Ademas, no hago el LogOut y le queda el cookie!!!
+__________________________
+
+Log Entry : 
+06/26/2017 11:15:56
+Error in: http://localhost:58911/ProntoWeb/CartaDePorte.aspx?Id=-1. Error Message:PV 0 0
+__________________________
+
+Log Entry : 
+06/26/2017 11:16:14
+Error in: http://localhost:58911/ProntoWeb/CartaDePorte.aspx?Id=-1. Error Message:PV 0 0
+__________________________
+
+Log Entry : 
+06/26/2017 11:18:39
+Error in: http://localhost:58911/ProntoWeb/CartaDePorte.aspx?Id=-1. Error Message:PV 0 0
+__________________________
