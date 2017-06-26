@@ -2150,7 +2150,9 @@ Public Class ExcelImportadorManager
 
 
                         'http://consultas.bdlconsultores.com.ar/AdminTest/template/desarrollo/Consulta.php?IdReclamo=37950&SinMenu=1
-                        If If(.IdClienteEntregador, 0) <> 12454 Then .Exporta = "SI"
+                        If If(.IdClienteEntregador, 0) <> 12454 And If(.IdClienteEntregador, 0) <> 0 Then
+                            .Exporta = "SI"
+                        End If
 
 
                         If actua(.Destino, BuscaIdWilliamsDestinoPreciso(r(16), SC)) Then log += "Destino; "

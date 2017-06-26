@@ -910,7 +910,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
 
 
-                    colNames: ['', 'Id', 'Rubro', 'IdRubro', 'Resultado Desde', 'Resultado Hasta', 'Rebaja'
+                    colNames: ['', 'Id', 'Rubro', 'IdRubro', 'Resultad Desde', 'Resultad Hasta', 'Rebaja Inc'
 
                     ],
 

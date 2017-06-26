@@ -334,7 +334,7 @@ Public Class WebServiceClientes
 
 
     <WebMethod()>
-    Public Function RebajaCalculo(SC As String, idrubro As Integer, resultado As Decimal, idarticulo As Integer, iddestino As Integer) As Decimal 'As String()
+    Public Function RebajaCalculo(SC As String, rubrodesc As String, resultado As Decimal, articulodesc As String, destinodesc As String) As Decimal 'As String()
 
         'Pronto.ERP.Bll.CartaPorteManagerAux()
 
@@ -350,10 +350,19 @@ Public Class WebServiceClientes
         'ErrHandler2.WriteError("AcopiosPorCliente " & NombreCliente & " - " & Encriptar(SC))
 
 
+        Dim db As ProntoMVC.Data.Models.DemoProntoEntities = New ProntoMVC.Data.Models.DemoProntoEntities(ProntoMVC.Data.Models.Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC)))
+
+
+        Dim idrubro = (From item In db.CartaPorteRubrosCalidads Where item.Descripcion = rubrodesc Select item.IdCartaPorteRubroCalidad).Single()
+        Dim idarticulo = BuscaIdArticuloPreciso(articulodesc, SC)
+        Dim iddestino = BuscaIdWilliamsDestinoPreciso(destinodesc, SC)
+
+
 
         Try
             Dim s = New ServicioCartaPorte.servi()
-            Return s.RebajaCalculo(SC, idrubro, resultado, idarticulo, iddestino)
+            Dim r = s.RebajaCalculo(SC, idrubro, resultado, idarticulo, iddestino)
+            Return r
 
         Catch ex As Exception
             ErrHandler2.WriteError(ex.ToString)
