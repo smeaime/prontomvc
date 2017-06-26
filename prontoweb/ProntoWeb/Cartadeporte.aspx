@@ -616,8 +616,8 @@
 
 
 
-                                        
-                                 
+
+
 
 
                                         function jsAcopiosPorCliente(textbox, combo) {
@@ -1780,7 +1780,7 @@
                                         <td class="EncabezadoCell" style="width: 4px;">&#160;&nbsp;
                                         </td>
                                         <td class="EncabezadoCell" style="">
-                                            <asp:TextBox ID="txtCalidadGranosExtranosRebaja" runat="server" CssClass="CssTextBox" Width="66px"></asp:TextBox>Kg
+                                            <asp:TextBox ID="txtCalidadGranosExtranosRebaja" runat="server" CssClass="CssTextBox" Width="66px"></asp:TextBox>
 
                                         </td>
                                         <td class="EncabezadoCell" style="">
@@ -1822,7 +1822,7 @@
                                         <td class="EncabezadoCell" style="width: 4px;">&#160;&nbsp;
                                         </td>
                                         <td class="EncabezadoCell" style="">
-                                            <asp:TextBox ID="txtCalidadQuebradosRebaja" runat="server" CssClass="CssTextBox" Width="66px"></asp:TextBox>Kg
+                                            <asp:TextBox ID="txtCalidadQuebradosRebaja" runat="server" CssClass="CssTextBox" Width="66px"></asp:TextBox>
 
                                         </td>
                                         <td class="EncabezadoCell" style="">
@@ -1850,7 +1850,7 @@
                                         <td class="EncabezadoCell" style="width: 4px;">&#160;&nbsp;
                                         </td>
                                         <td class="EncabezadoCell" style="">
-                                            <asp:TextBox ID="txtCalidadGranosDanadosRebaja" runat="server" CssClass="CssTextBox" Width="66px"></asp:TextBox>Kg
+                                            <asp:TextBox ID="txtCalidadGranosDanadosRebaja" runat="server" CssClass="CssTextBox" Width="66px"></asp:TextBox>
                                             
 
                                         </td>
@@ -1879,7 +1879,7 @@
                                         <td class="EncabezadoCell" style="width: 4px;">&#160;&nbsp;
                                         </td>
                                         <td class="EncabezadoCell" style="">
-                                            <asp:TextBox ID="txtCalidadChamicoRebaja" runat="server" CssClass="CssTextBox" Width="66px"></asp:TextBox>Kg<cc1:FilteredTextBoxExtender
+                                            <asp:TextBox ID="txtCalidadChamicoRebaja" runat="server" CssClass="CssTextBox" Width="66px"></asp:TextBox><cc1:FilteredTextBoxExtender
                                                 ID="TextBox31_FilteredTextBoxExtender" runat="server" TargetControlID="txtCalidadChamicoRebaja"
                                                 ValidChars=".1234567890">
                                             </cc1:FilteredTextBoxExtender>
@@ -1908,7 +1908,7 @@
                                         <td class="EncabezadoCell" style="width: 4px;">&#160;&nbsp;
                                         </td>
                                         <td class="EncabezadoCell" style="">
-                                            <asp:TextBox ID="txtCalidadRevolcadoRebaja" runat="server" CssClass="CssTextBox" Width="66px"></asp:TextBox>Kg<cc1:FilteredTextBoxExtender
+                                            <asp:TextBox ID="txtCalidadRevolcadoRebaja" runat="server" CssClass="CssTextBox" Width="66px"></asp:TextBox><cc1:FilteredTextBoxExtender
                                                 ID="TextBox32_FilteredTextBoxExtender" runat="server" TargetControlID="txtCalidadRevolcadoRebaja"
                                                 ValidChars=".1234567890">
                                             </cc1:FilteredTextBoxExtender>
@@ -1935,7 +1935,7 @@
                                         <td class="EncabezadoCell" style="width: 4px;">&#160;&nbsp;
                                         </td>
                                         <td class="EncabezadoCell" style="">
-                                            <asp:TextBox ID="txtCalidadObjetablesRebaja" runat="server" CssClass="CssTextBox" Width="66px"></asp:TextBox>Kg<cc1:FilteredTextBoxExtender
+                                            <asp:TextBox ID="txtCalidadObjetablesRebaja" runat="server" CssClass="CssTextBox" Width="66px"></asp:TextBox><cc1:FilteredTextBoxExtender
                                                 ID="TextBox33_FilteredTextBoxExtender" runat="server" TargetControlID="txtCalidadObjetablesRebaja"
                                                 ValidChars=".1234567890">
                                             </cc1:FilteredTextBoxExtender>
@@ -1962,7 +1962,7 @@
                                         <td class="EncabezadoCell" style="width: 4px;">&#160;&nbsp;
                                         </td>
                                         <td class="EncabezadoCell" style="">
-                                            <asp:TextBox ID="txtCalidadAmohosadosRebaja" runat="server" CssClass="CssTextBox" Width="66px"></asp:TextBox>Kg<cc1:FilteredTextBoxExtender
+                                            <asp:TextBox ID="txtCalidadAmohosadosRebaja" runat="server" CssClass="CssTextBox" Width="66px"></asp:TextBox><cc1:FilteredTextBoxExtender
                                                 ID="TextBox34_FilteredTextBoxExtender" runat="server" TargetControlID="txtCalidadAmohosadosRebaja"
                                                 ValidChars=".1234567890">
                                             </cc1:FilteredTextBoxExtender>
@@ -1989,7 +1989,7 @@
                                         <td class="EncabezadoCell" style="width: 4px;">&#160;&nbsp;
                                         </td>
                                         <td class="EncabezadoCell" style="">
-                                            <asp:TextBox ID="txtCalidadPuntaSombreadaRebaja" runat="server" CssClass="CssTextBox" Width="66px"></asp:TextBox>Kg<cc1:FilteredTextBoxExtender
+                                            <asp:TextBox ID="txtCalidadPuntaSombreadaRebaja" runat="server" CssClass="CssTextBox" Width="66px"></asp:TextBox><cc1:FilteredTextBoxExtender
                                                 ID="FilteredTextBoxExtender15" runat="server" TargetControlID="txtCalidadPuntaSombreadaRebaja"
                                                 ValidChars=".1234567890">
                                             </cc1:FilteredTextBoxExtender>
@@ -2018,7 +2018,7 @@
                                         <td class="EncabezadoCell" style="width: 4px;">&#160;&nbsp;
                                         </td>
                                         <td class="EncabezadoCell" style="">
-                                            <asp:TextBox ID="txtCalidadHectolitricoRebaja" runat="server" CssClass="CssTextBox" Width="66px"></asp:TextBox>Kg
+                                            <asp:TextBox ID="txtCalidadHectolitricoRebaja" runat="server" CssClass="CssTextBox" Width="66px"></asp:TextBox>
 
                                         </td>
                                         <td class="EncabezadoCell" style="">
@@ -2045,7 +2045,7 @@
                                         <td class="EncabezadoCell" style="width: 4px;">&#160;&nbsp;
                                         </td>
                                         <td class="EncabezadoCell" style="">
-                                            <asp:TextBox ID="txtCalidadCarbonRebaja" runat="server" CssClass="CssTextBox" Width="66px"></asp:TextBox>Kg
+                                            <asp:TextBox ID="txtCalidadCarbonRebaja" runat="server" CssClass="CssTextBox" Width="66px"></asp:TextBox>
 
                                         </td>
                                         <td class="EncabezadoCell" style="">
@@ -2072,7 +2072,7 @@
                                         <td class="EncabezadoCell" style="width: 4px;">&#160;&nbsp;
                                         </td>
                                         <td class="EncabezadoCell" style="">
-                                            <asp:TextBox ID="txtCalidadPanzaBlancaRebaja" runat="server" CssClass="CssTextBox" Width="66px"></asp:TextBox>Kg
+                                            <asp:TextBox ID="txtCalidadPanzaBlancaRebaja" runat="server" CssClass="CssTextBox" Width="66px"></asp:TextBox>
 
                                         </td>
                                         <td class="EncabezadoCell" style="">
@@ -2099,7 +2099,7 @@
                                         <td class="EncabezadoCell" style="width: 4px;">&#160;&nbsp;
                                         </td>
                                         <td class="EncabezadoCell" style="">
-                                            <asp:TextBox ID="txtCalidadPicadosRebaja" runat="server" CssClass="CssTextBox" Width="66px"></asp:TextBox>Kg
+                                            <asp:TextBox ID="txtCalidadPicadosRebaja" runat="server" CssClass="CssTextBox" Width="66px"></asp:TextBox>
 
                                         </td>
                                         <td class="EncabezadoCell" style="">
@@ -2156,7 +2156,7 @@
                                         <td class="EncabezadoCell" style="width: 4px;">&#160;&nbsp;
                                         </td>
                                         <td class="EncabezadoCell" style="">
-                                            <asp:TextBox ID="txtCalidadVerdesRebaja" runat="server" CssClass="CssTextBox" Width="66px"></asp:TextBox>Kg
+                                            <asp:TextBox ID="txtCalidadVerdesRebaja" runat="server" CssClass="CssTextBox" Width="66px"></asp:TextBox>
 
                                         </td>
                                         <td class="EncabezadoCell" style="">
@@ -2188,7 +2188,7 @@
                                             </asp:DropDownList>
                                         </td>
                                         <td class="EncabezadoCell" style="">
-                                            <asp:TextBox ID="txtCalidadQuemadosRebaja" runat="server" CssClass="CssTextBox" Width="66px"></asp:TextBox>Kg
+                                            <asp:TextBox ID="txtCalidadQuemadosRebaja" runat="server" CssClass="CssTextBox" Width="66px"></asp:TextBox>
 
                                         </td>
                                         <td class="EncabezadoCell" style="">
@@ -2220,7 +2220,7 @@
                                             </asp:DropDownList>
                                         </td>
                                         <td class="EncabezadoCell" style="">
-                                            <asp:TextBox ID="txtCalidadTierraRebaja" runat="server" CssClass="CssTextBox" Width="66px"></asp:TextBox>Kg
+                                            <asp:TextBox ID="txtCalidadTierraRebaja" runat="server" CssClass="CssTextBox" Width="66px"></asp:TextBox>
 
                                         </td>
                                         <td class="EncabezadoCell" style="">
@@ -2284,7 +2284,7 @@
                                             </asp:DropDownList>
                                         </td>
                                         <td class="EncabezadoCell" style="">
-                                            <asp:TextBox ID="txtCalidadZarandeoRebaja" runat="server" CssClass="CssTextBox" Width="66px"></asp:TextBox>Kg
+                                            <asp:TextBox ID="txtCalidadZarandeoRebaja" runat="server" CssClass="CssTextBox" Width="66px"></asp:TextBox>
 
                                         </td>
                                         <td class="EncabezadoCell" style="">
@@ -2311,7 +2311,7 @@
                                         <td class="EncabezadoCell" style="width: 4px;">&#160;&nbsp;
                                         </td>
                                         <td class="EncabezadoCell" style="">
-                                            <asp:TextBox ID="txtCalidadHumedadRebaja" runat="server" CssClass="CssTextBox" Width="66px"></asp:TextBox>Kg
+                                            <asp:TextBox ID="txtCalidadHumedadRebaja" runat="server" CssClass="CssTextBox" Width="66px"></asp:TextBox>
 
                                         </td>
                                         <td class="EncabezadoCell" style="">
@@ -2339,7 +2339,7 @@
                                         <td class="EncabezadoCell" style="width: 4px;">&#160;&nbsp;
                                         </td>
                                         <td class="EncabezadoCell" style="">
-                                            <asp:TextBox ID="txtCalidadGastosFumigacionRebaja" runat="server" CssClass="CssTextBox" Width="66px"></asp:TextBox>Kg
+                                            <asp:TextBox ID="txtCalidadGastosFumigacionRebaja" runat="server" CssClass="CssTextBox" Width="66px"></asp:TextBox>
 
                                         </td>
                                         <td class="EncabezadoCell" style="">
@@ -2370,7 +2370,7 @@
                                         <td class="EncabezadoCell" style="width: 4px;">&#160;&nbsp;
                                         </td>
                                         <td class="EncabezadoCell" style="">
-                                            <asp:TextBox ID="txtCalidadGastoDeSecadaRebaja" runat="server" CssClass="CssTextBox" Width="66px"></asp:TextBox>Kg
+                                            <asp:TextBox ID="txtCalidadGastoDeSecadaRebaja" runat="server" CssClass="CssTextBox" Width="66px"></asp:TextBox>
 
                                         </td>
                                         <td class="EncabezadoCell" style="">
@@ -2400,7 +2400,7 @@
                                         <td class="EncabezadoCell" style="width: 4px;">&#160;&nbsp;
                                         </td>
                                         <td class="EncabezadoCell" style="">
-                                            <asp:TextBox ID="txtCalidadMermaVolatilRebaja" runat="server" CssClass="CssTextBox" Width="66px"></asp:TextBox>Kg
+                                            <asp:TextBox ID="txtCalidadMermaVolatilRebaja" runat="server" CssClass="CssTextBox" Width="66px"></asp:TextBox>
 
                                         </td>
                                         <td class="EncabezadoCell" style="">
@@ -2430,7 +2430,7 @@
                                         <td class="EncabezadoCell" style="width: 4px;">&#160;&nbsp;
                                         </td>
                                         <td class="EncabezadoCell" style="">
-                                            <asp:TextBox ID="txtCalidadFondoNideraRebaja" runat="server" CssClass="CssTextBox" Width="66px"></asp:TextBox>Kg
+                                            <asp:TextBox ID="txtCalidadFondoNideraRebaja" runat="server" CssClass="CssTextBox" Width="66px"></asp:TextBox>
 
                                         </td>
                                         <td class="EncabezadoCell" style="">
@@ -2459,7 +2459,7 @@
                                         <td class="EncabezadoCell" style="width: 4px;">&#160;&nbsp;
                                         </td>
                                         <td class="EncabezadoCell" style="">
-                                            <asp:TextBox ID="txtCalidadMermaConvenidaRebaja" runat="server" CssClass="CssTextBox" Width="66px"></asp:TextBox>Kg
+                                            <asp:TextBox ID="txtCalidadMermaConvenidaRebaja" runat="server" CssClass="CssTextBox" Width="66px"></asp:TextBox>
 
                                         </td>
                                         <td class="EncabezadoCell" style="">
@@ -2487,7 +2487,7 @@
                                         <td class="EncabezadoCell" style="width: 4px;">&#160;&nbsp;
                                         </td>
                                         <td class="EncabezadoCell" style="">
-                                            <asp:TextBox ID="txtCalidadTalCualVicentinRebaja" runat="server" CssClass="CssTextBox" Width="66px"></asp:TextBox>Kg
+                                            <asp:TextBox ID="txtCalidadTalCualVicentinRebaja" runat="server" CssClass="CssTextBox" Width="66px"></asp:TextBox>
 
                                         </td>
                                         <td class="EncabezadoCell" style="">
@@ -2518,7 +2518,7 @@
                                         <td class="EncabezadoCell" style="width: 4px;">&#160;&nbsp;
                                         </td>
                                         <td class="EncabezadoCell" style="">
-                                            <asp:TextBox ID="txtCalidadDescuentoFinalRebaja" runat="server" CssClass="CssTextBox" Width="66px"></asp:TextBox>Kg
+                                            <asp:TextBox ID="txtCalidadDescuentoFinalRebaja" runat="server" CssClass="CssTextBox" Width="66px"></asp:TextBox>
 
                                         </td>
                                         <td class="EncabezadoCell" style="">
@@ -3233,26 +3233,53 @@
 
 
 
-        function jsRebajaRubro(textbox, combo) {
-
-            var $txttitular = $("#" + textbox.id + "")
-            var $select = $("#" + combo.id + "")
+        function sumarTotalOtrasMerma() {
 
 
+            var tot = parseFloat($('#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadGranosExtranosMerma').val()) +
+           parseFloat($('#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadQuebradosMerma').val()) +
+            parseFloat($('#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadGranosDanadosMerma').val())
 
-            var myJSONString = JSON.stringify($("#ctl00_ContentPlaceHolder1_HFSC").val());
-            var myEscapedJSONString = myJSONString.escapeSpecialChars();
+            //alert(tot);
 
-            var aaa = addslashes($("#ctl00_ContentPlaceHolder1_HFSC").val())
+
+            $('#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel3_txtMerma').val = tot;
+
+            $('#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel3_txtNetoFinalTotalMenosMermas').val =
+                    parseFloat($('#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel3_txtNetoDescarga').val())
+                    - parseFloat($('#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel3_txtHumedadTotal').val())
+                    - parseFloat($('#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadGranosDanadosMerma').val());
+
+
+
+        }
+
+
+
+
+        function jsRebajaRubro(resultado, rubroDescripcion) {
+
+            //var $txttitular = $("#" + textbox.id + "")
+            //var $select = $("#" + combo.id + "")
+
+
+
+            //var myJSONString = JSON.stringify($("#ctl00_ContentPlaceHolder1_HFSC").val());
+            //var myEscapedJSONString = myJSONString.escapeSpecialChars();
+
+            //var aaa = addslashes($("#ctl00_ContentPlaceHolder1_HFSC").val())
 
 
             var dat = {
                 SC: "",
-                idrubro: 1,
-                resultado: 2,
-                idarticulo: 3,
-                iddestino: 4
+                rubrodesc: rubroDescripcion,
+                resultado: resultado,
+                articulodesc:  $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel2_txt_AC_Articulo").val() ,
+                destinodesc: $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel2_txtDestino").val() 
             }
+
+
+
 
 
             $.ajax({
@@ -3280,28 +3307,10 @@
 
                     var x = data.d;
 
-                    //var $select= $('select#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel2_optDivisionSyngenta');
+                    //alert(x);
 
-                    var guardoelactualId = $select.val()
-                    $select.find('option').remove();
+                    sumarTotalOtrasMerma();
 
-
-
-                    $.each(x, function (i, val) {
-
-
-                        $select.append('<option value=' + val.idacopio + '>' + val.desc + '</option>');
-
-                        //$('select#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel2_optDivisionSyngenta').append(
-                        //$("<option></option>")
-                        //    .val(val.idacopio).text(val.desc));
-
-                    });
-
-                    $select.val(guardoelactualId)
-
-                    if (x.length > 1) combo.style.visibility = "visible";
-                    else combo.style.visibility = "hidden";
 
                 },
                 error: function (xhr) {
@@ -3321,16 +3330,56 @@
 
 
 
-            $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_TextBox26").keydown(function () {
-                alert('hola');
+            $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_TextBox26").keyup(function () {
 
-                jsRebajaRubro(txttitular, optDivisionSyngenta);
+                var rebaja = jsRebajaRubro($("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_TextBox26").val(), "Materias Extrañas");
+                $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadGranosExtranosRebaja").val = rebaja;
+                merma = rebaja * Number($("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel3_txtNetoDescarga").val());
+                
+                if ($("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_cmbTipoMermaGranosExtranos").val==0)              
+                    $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadGranosExtranosMerma").val = merma;
+
+
+
+                sumarTotalOtrasMerma();
+            });
+
+
+            $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadQuebradosResultado").keydown(function () {
+
+                var rebaja = jsRebajaRubro($("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadQuebradosResultado").val(), "Quebrados partidos");
+                $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadQuebradosRebaja").val = rebaja;
+                merma = rebaja * Number($("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel3_txtNetoDescarga").val());
+
+                if ($("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_cmbTipoMermaQuebrados").val == 0)
+                    $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadQuebradosMerma").val = merma;
+
+                sumarTotalOtrasMerma();
+            });
+
+
+            $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_TextBox29").keydown(function () {
+
+                var rebaja = jsRebajaRubro($("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_TextBox29").val(), "Dañados");
+                $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadGranosDanadosRebaja").val = rebaja;
+                merma = rebaja * Number($("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel3_txtNetoDescarga").val());
+
+                if ($("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_cmbTipoMermaDaniados").val == 0)
+                    $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadGranosDanadosMerma").val = merma;
+
+
+                sumarTotalOtrasMerma();
             });
 
 
 
 
-      
+
+
+
+
+
+
 
 
         });

@@ -4422,7 +4422,7 @@ Formato localidad-provincia	destination	x
                                 a.IdCartaPorteNormaCalidad.ToString(),
 
                         a.CartaPorteRubrosCalidad.Descripcion.NullSafeToString(),
-
+                        a.IdCartaPorteRubroCalidad.NullSafeToString(),
                                 a.ResultadoDesde.NullSafeToString(),
                       a.ResultadoHasta.NullSafeToString(),
                       a.RebajaIncremento.NullSafeToString(),
@@ -4450,15 +4450,15 @@ Formato localidad-provincia	destination	x
 
             var q = from n in db.CartaPorteNormasCalidads
                     where (n.ResultadoDesde > resultado && resultado < n.ResultadoHasta)
-                           && n.IdArticulo == idarticulo
-                           && n.IdDestino == iddestino
+                           && (n.IdArticulo == idarticulo || n.IdArticulo==null || idarticulo==-1)
+                           && (n.IdDestino == iddestino || n.IdDestino == null || iddestino == -1)
                     orderby idarticulo descending, iddestino descending
                     select n;
 
             if (q.Count() == 0)
                 return 0;
             else
-                return q.First().RebajaIncremento ?? 0;
+                return (q.First().RebajaIncremento ?? 0) * resultado;
 
         }
 
