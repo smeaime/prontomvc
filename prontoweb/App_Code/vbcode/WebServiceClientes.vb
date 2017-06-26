@@ -297,7 +297,7 @@ Public Class WebServiceClientes
 
 
     <WebMethod()>
-    Public Function NormaCalidadBatchUpdate(o As Object) As String
+    Public Function NormaCalidadBatchUpdate(o As CartaPorteNormasCalidad) As String
         'Public Function DestinoBatchUpdate(o As ProntoMVC.Data.Models.CartasDePorteControlDescarga) As String
         ' (o As ProntoMVC.Data.Models.CartasDePorteControlDescarga)
 
