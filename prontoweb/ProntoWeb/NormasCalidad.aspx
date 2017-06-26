@@ -46,7 +46,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
 
         <asp:Button ID="informe" Text="VER INFORME" runat="server" Visible="false" CssClass="btn btn-primary"
-            Width="150" Height="40"  />
+            Width="150" Height="40" />
 
 
 
@@ -59,7 +59,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
                         <td class="EncabezadoCell" style="width: 160px; height: 18px;">Período descarga</td>
                         <td class="EncabezadoCell" style="width: 400px; height: 18px;">
-                            <asp:DropDownList ID="cmbPeriodo" runat="server" AutoPostBack="true" Height="22px" 
+                            <asp:DropDownList ID="cmbPeriodo" runat="server" AutoPostBack="true" Height="22px"
                                 Visible="true">
                                 <asp:ListItem Text="Hoy" />
                                 <asp:ListItem Text="Ayer" />
@@ -116,7 +116,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                             <asp:TextBox ID="txtDestino" runat="server" Text='<%# Bind("DestinoDesc") %>' AutoPostBack="false"
                                 autocomplete="off" CssClass="CssTextBox" Width="200px"></asp:TextBox>
                             <cc1:AutoCompleteExtender CompletionInterval="100" ID="AutoCompleteExtender26" runat="server"
-                                 OnClientItemSelected="RefrescaGrilla()"
+                                OnClientItemSelected="RefrescaGrilla()"
                                 CompletionSetCount="12" TargetControlID="txtDestino" MinimumPrefixLength="1"
                                 ServiceMethod="GetCompletionList" ServicePath="WebServiceWilliamsDestinos.asmx"
                                 UseContextKey="True" FirstRowSelected="True" CompletionListCssClass="AutoCompleteScroll"
@@ -519,18 +519,26 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                 var err;
 
 
-                datos.IdCartasDePorteControlDescarga = gridId;
-                datos.Fecha = dataFromTheRow.Fecha;
-                datos.IdWilliamsDestino = dataFromTheRow.IdWilliamsDestino;
-                //datos.Cotizacion = dataFromTheRow.Cotizacion;
-                datos.TotalDescargaDia = dataFromTheRow.TotalDescargaDia;
-                datos.IdPuntoVenta = dataFromTheRow.IdPuntoVenta;
+                datos.IdCartaPorteNormaCalidad = gridId;
+                datos.IdCartaPorteRubroCalidad = dataFromTheRow.IdCartaPorteRubroCalidad;
+                datos.ResultadoDesde = dataFromTheRow.ResultadoDesde;
+                datos.ResultadoHasta = dataFromTheRow.ResultadoHasta;
+                datos.RebajaIncremento = dataFromTheRow.RebajaIncremento;
+                datos.IdArticulo = dataFromTheRow.IdArticulo;
+                datos.IdDestino = dataFromTheRow.IdDestino;
+
 
 
                 err = ""
-                if (datos.Fecha == "" || datos.Fecha == undefined) err = err + "Falta definir la fecha.\n"
-                if (datos.IdWilliamsDestino == "" || datos.IdWilliamsDestino == undefined) err = err + "Falta el destino.\n"
-                if (datos.TotalDescargaDia == "" || datos.TotalDescargaDia == undefined) err = err + "Faltan los kilos de descarga\n"
+                //if (datos.Fecha == "" || datos.Fecha == undefined) err = err + "Falta definir la fecha.\n"
+                //if (datos.IdWilliamsDestino == "" || datos.IdWilliamsDestino == undefined) err = err + "Falta el destino.\n"
+                //if (datos.TotalDescargaDia == "" || datos.TotalDescargaDia == undefined) err = err + "Faltan los kilos de descarga\n"
+
+
+
+
+
+
 
                 if (err != "") {
                     alert('No se pudo grabar el registro.\n' + err);
@@ -821,12 +829,12 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                 $('#Lista').trigger("reloadGrid")
             });
 
-            
+
             $('#ctl00_ContentPlaceHolder1_txtFechaDesde').change(function () {
                 $('#Lista').trigger("reloadGrid")
             });
 
-            
+
             $('#ctl00_ContentPlaceHolder1_txtFechaHasta').change(function () {
                 $('#Lista').trigger("reloadGrid")
             });
@@ -834,7 +842,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
             $('#ctl00_ContentPlaceHolder1_cmbPeriodo').change(function () {
                 $('#Lista').trigger("reloadGrid")
             });
-            
+
 
             function RefrescaGrilla() {
                 $('#Lista').trigger("reloadGrid");
@@ -853,8 +861,8 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
                     //url: 'WebServiceClientes.asmx/NormasCalidad_DynamicGridData',
                     url: 'HandlerNormas.ashx', //sigo teniendo problemas si quiero reemplazar el ASHX por un ASMX (probablemente por el wrapper ".d" con el que se vuelve del ASMX) 
-                    
-                    
+
+
                     datatype: 'json',
                     mtype: 'POST',
                     //contentType: 'application/json; charset=utf-8',
@@ -867,31 +875,31 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                         //return postData; 
                     },*/
                     //xmlReader: { root: "rows", row: "jqGridRowJson", cell: "string" }, // ahi enganchó. una bronca q no me esté andando con json (al usar ASMX. con el ASHX sí anduvo, sin tener que especificar el jsonReader)
-/*
-                    jsonReader: {
-                        root: "d.rows",
-                        page: "d.page",
-                        total: "d.total",
-                        records: "d.records",
-                        repeatitems: true,
-                        //cell: "cell",
-                        id: "id",
-
-                        ////id: "id",
-                        ////cell: "",
-                        //root: function (obj) {
-                        //    //return JSON.parse(obj.d); 
-                        //    return obj.d;
-                        //},
-                        //page: function () { return 1; },
-                        //total: function () { return 3; },
-                        //records: function (obj) {
-                        //    return 3;
-                        //    //return JSON.parse(obj.d).records;
-                        //    //return obj.d.records;
-                        //},
-                        //repeatitems: true
-                    },*/
+                    /*
+                                        jsonReader: {
+                                            root: "d.rows",
+                                            page: "d.page",
+                                            total: "d.total",
+                                            records: "d.records",
+                                            repeatitems: true,
+                                            //cell: "cell",
+                                            id: "id",
+                    
+                                            ////id: "id",
+                                            ////cell: "",
+                                            //root: function (obj) {
+                                            //    //return JSON.parse(obj.d); 
+                                            //    return obj.d;
+                                            //},
+                                            //page: function () { return 1; },
+                                            //total: function () { return 3; },
+                                            //records: function (obj) {
+                                            //    return 3;
+                                            //    //return JSON.parse(obj.d).records;
+                                            //    //return obj.d.records;
+                                            //},
+                                            //repeatitems: true
+                                        },*/
                     //jsonReader: {
                     //    root: "rows",
                     //    page: "page",
@@ -910,9 +918,11 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
 
 
-                    colNames: ['', 'Id', 'Rubro', 'IdRubro', 'Resultad Desde', 'Resultad Hasta', 'Rebaja Inc'
+                    colNames: ['', 'Id', 'Rubro', 'IdRubro', 'Resultad Desde', 'Resultad Hasta', 'Rebaja Inc', 'Articulo', 'IdArticulo', 'Destino', 'IdDestino'
 
                     ],
+
+
 
 
 
@@ -921,12 +931,17 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                                     name: 'act', index: 'act', align: 'center', width: 110, editable: false, hidden: false,
                                     search: false,
                                 },
-                                { name: ' IdCartasDePorteControlDescarga', index: ' IdCartasDePorteControlDescarga', align: 'left', width: 100, editable: false, hidden: true },
+                                { name: ' IdCartaPorteNormaCalidad', index: ' IdCartaPorteNormaCalidad', align: 'left', width: 100, editable: false, hidden: true },
+
+
+
+
+
 
 
 
                                  {
-                                     name: 'WilliamsDestino.Descripcion', index: 'WilliamsDestino.Descripcion',
+                                     name: 'CartaPorteRubrosCalidad.Descripcion', index: 'CartaPorteRubrosCalidad.Descripcion',
                                      formoptions: { rowpos: 5, colpos: 2, label: "Descripción" }, align: 'left', width: 250, hidden: false, editable: true, edittype: 'text',
                                      editoptions: {
                                          rows: '1', cols: '1',
@@ -938,7 +953,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                                                  source: function (request, response) {
                                                      $.ajax({
                                                          type: "POST",
-                                                         url: "WebServiceClientes.asmx/WilliamsDestinoGetWilliamsDestinos",
+                                                         url: "WebServiceClientes.asmx/GetNormasCalidad",
                                                          dataType: "json",
                                                          contentType: "application/json; charset=utf-8",
 
@@ -1030,10 +1045,10 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                                      },
                                      editrules: { required: true }
                                  },
-                                          { name: 'IdWilliamsDestino', index: 'IdWilliamsDestino', align: 'left', width: 10, editable: false, hidden: true, label: 'TB' },
+                                          { name: 'IdCartaPorteRubroCalidad', index: 'IdCartaPorteRubroCalidad', align: 'left', width: 10, editable: false, hidden: true, label: 'TB' },
 
                                 {
-                                    name: 'TotalDescargaDia', index: 'TotalDescargaDia', width: 100, align: 'right', sorttype: "number"
+                                    name: 'ResultadoDesde', index: 'ResultadoDesde', width: 100, align: 'right', sorttype: "number"
                 , editable: true, editrules: { required: false, number: true }, edittype: 'text', label: 'TB',
 
                                     searchoptions: { sopt: ['eq'] },
@@ -1057,9 +1072,9 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
 
 
-   
+
             {
-                name: 'TotalDescargaDia', index: 'TotalDescargaDia', width: 100, align: 'right', sorttype: "number"
+                name: 'ResultadoHasta', index: 'ResultadoHasta', width: 100, align: 'right', sorttype: "number"
                 , editable: true, editrules: { required: false, number: true }, edittype: 'text', label: 'TB',
 
                 searchoptions: { sopt: ['eq'] },
@@ -1078,9 +1093,9 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                 }
             }
                                 ,
-            
+
             {
-                name: 'TotalDescargaDia', index: 'TotalDescargaDia', width: 100, align: 'right', sorttype: "number"
+                name: 'RebajaIncremento', index: 'RebajaIncremento', width: 100, align: 'right', sorttype: "number"
                 , editable: true, editrules: { required: false, number: true }, edittype: 'text', label: 'TB',
 
                 searchoptions: { sopt: ['eq'] },
@@ -1097,8 +1112,235 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                         }
                     }]
                 }
+            },
+
+
+
+
+
+            {
+                name: 'WilliamsDestino.Descripcion', index: 'WilliamsDestino.Descripcion',
+                formoptions: { rowpos: 5, colpos: 2, label: "Descripción" }, align: 'left', width: 250, hidden: false, editable: true, edittype: 'text',
+                editoptions: {
+                    rows: '1', cols: '1',
+                    dataInit: function (elem) {
+                        var NoResultsLabel = "No se encontraron resultados";
+
+
+                        $(elem).autocomplete({
+                            source: function (request, response) {
+                                $.ajax({
+                                    type: "POST",
+                                    url: "WebServiceClientes.asmx/GetProductos",
+                                    dataType: "json",
+                                    contentType: "application/json; charset=utf-8",
+
+                                    data: JSON.stringify({
+                                        term: request.term
+                                        //, idpuntoventa: function () { return $("#ctl00_ContentPlaceHolder1_txtFechaHasta").val(); }
+                                    }),
+
+
+                                    success: function (data2) {
+                                        var data = JSON.parse(data2.d) // por qué tengo que usar parse?
+
+                                        if (data.length == 1 || data.length > 1) { // qué pasa si encuentra más de uno?????
+                                            var ui = data[0];
+
+                                            if (ui.id == "") {
+                                                alert("No existe el artículo"); // se está bancando que no sea identica la descripcion
+                                                $("#Descripcion").val("");
+                                                return;
+                                            }
+                                            $("#IdWilliamsDestino").val(ui.id);
+
+                                            UltimoIdArticulo = ui.id;
+                                        }
+                                        else {
+                                            alert("No existe el artículo"); // se está bancando que no sea identica la descripcion
+                                        }
+
+                                        response($.map(data, function (item) {
+                                            return {
+                                                label: item.value,
+                                                value: item.value //item.id
+                                                , id: item.id
+                                            }
+                                        }));
+
+                                    }
+
+
+
+                                })
+
+
+                            }
+
+                             ,
+                            select: function (e, ui) {
+                                //http://stackoverflow.com/questions/27635689/jqgrid-autocomplete-cannot-post-id-column
+                                // Oleg
+                                //UPDATED: It's really important to know which editing mode you use because 
+                                //id of input fields will be set based on different rules. The below code detect
+                                //whether form editing, inline editing or toolbar filter will be used which to choose the corresponding id.
+
+                                try {
+                                    var id;
+                                    if ($(elem).hasClass("FormElement")) {
+                                        // form editing
+                                        id = "IdWilliamsDestino";
+                                    } else if ($(elem).closest(".ui-search-toolbar").length > 0) {
+                                        // filter foolbar
+                                        id = "gs_IdWilliamsDestino";
+                                    } else if ($(elem).closest("tr.jqgrow").length > 0) {
+                                        //id = $(elem).closest("tr.jqgrow").attr("id") + "_IdWilliamsDestino";
+
+                                        var rowId = $("#Lista").jqGrid('getGridParam', 'selrow');
+                                        var rowData = $("#Lista").jqGrid('getRowData', rowId);
+                                        rowData.Descripcion = ui.item.value;
+                                        rowData.IdWilliamsDestino = ui.item.id;
+                                        // $("#Lista").jqGrid('setRowData', rowId, rowData);
+
+                                        $("#Lista").jqGrid("setCell", rowId, "IdWilliamsDestino", rowData.IdWilliamsDestino);
+                                    }
+                                    //$("#" + id).val(ui.item.id);
+
+                                } catch (e) {
+
+                                }
+                            }
+                        });
+
+
+
+
+
+
+                    }
+
+
+                },
+                editrules: { required: true }
             }
 
+
+
+
+
+            ,
+                                          { name: 'IdArticulo', index: 'IdArticulo', align: 'left', width: 10, editable: false, hidden: true, label: 'TB' },
+
+
+
+
+
+                    {
+                        name: 'WilliamsDestino.Descripcion', index: 'WilliamsDestino.Descripcion',
+                        formoptions: { rowpos: 5, colpos: 2, label: "Descripción" }, align: 'left', width: 250, hidden: false, editable: true, edittype: 'text',
+                        editoptions: {
+                            rows: '1', cols: '1',
+                            dataInit: function (elem) {
+                                var NoResultsLabel = "No se encontraron resultados";
+
+
+                                $(elem).autocomplete({
+                                    source: function (request, response) {
+                                        $.ajax({
+                                            type: "POST",
+                                            url: "WebServiceClientes.asmx/WilliamsDestinoGetWilliamsDestinos",
+                                            dataType: "json",
+                                            contentType: "application/json; charset=utf-8",
+
+                                            data: JSON.stringify({
+                                                term: request.term
+                                                //, idpuntoventa: function () { return $("#ctl00_ContentPlaceHolder1_txtFechaHasta").val(); }
+                                            }),
+
+
+                                            success: function (data2) {
+                                                var data = JSON.parse(data2.d) // por qué tengo que usar parse?
+
+                                                if (data.length == 1 || data.length > 1) { // qué pasa si encuentra más de uno?????
+                                                    var ui = data[0];
+
+                                                    if (ui.id == "") {
+                                                        alert("No existe el artículo"); // se está bancando que no sea identica la descripcion
+                                                        $("#Descripcion").val("");
+                                                        return;
+                                                    }
+                                                    $("#IdWilliamsDestino").val(ui.id);
+
+                                                    UltimoIdArticulo = ui.id;
+                                                }
+                                                else {
+                                                    alert("No existe el artículo"); // se está bancando que no sea identica la descripcion
+                                                }
+
+                                                response($.map(data, function (item) {
+                                                    return {
+                                                        label: item.value,
+                                                        value: item.value //item.id
+                                                        , id: item.id
+                                                    }
+                                                }));
+
+                                            }
+
+
+
+                                        })
+
+
+                                    }
+
+                                     ,
+                                    select: function (e, ui) {
+                                        //http://stackoverflow.com/questions/27635689/jqgrid-autocomplete-cannot-post-id-column
+                                        // Oleg
+                                        //UPDATED: It's really important to know which editing mode you use because 
+                                        //id of input fields will be set based on different rules. The below code detect
+                                        //whether form editing, inline editing or toolbar filter will be used which to choose the corresponding id.
+
+                                        try {
+                                            var id;
+                                            if ($(elem).hasClass("FormElement")) {
+                                                // form editing
+                                                id = "IdWilliamsDestino";
+                                            } else if ($(elem).closest(".ui-search-toolbar").length > 0) {
+                                                // filter foolbar
+                                                id = "gs_IdWilliamsDestino";
+                                            } else if ($(elem).closest("tr.jqgrow").length > 0) {
+                                                //id = $(elem).closest("tr.jqgrow").attr("id") + "_IdWilliamsDestino";
+
+                                                var rowId = $("#Lista").jqGrid('getGridParam', 'selrow');
+                                                var rowData = $("#Lista").jqGrid('getRowData', rowId);
+                                                rowData.Descripcion = ui.item.value;
+                                                rowData.IdWilliamsDestino = ui.item.id;
+                                                // $("#Lista").jqGrid('setRowData', rowId, rowData);
+
+                                                $("#Lista").jqGrid("setCell", rowId, "IdWilliamsDestino", rowData.IdWilliamsDestino);
+                                            }
+                                            //$("#" + id).val(ui.item.id);
+
+                                        } catch (e) {
+
+                                        }
+                                    }
+                                });
+
+
+
+
+
+
+                            }
+
+
+                        },
+                        editrules: { required: true }
+                    },
+                                          { name: 'IdWilliamsDestino', index: 'IdWilliamsDestino', align: 'left', width: 10, editable: false, hidden: true, label: 'TB' },
 
 
 
@@ -1152,7 +1394,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                     sortname: 'IdCartaPorteNormaCalidad',
                     sortorder: 'desc',
                     viewrecords: true,
-                    multiselect: true,
+                    //multiselect: true,
                     shrinkToFit: true,
                     width: 'auto',
                     height: $(window).height() - 300, // '100%'
@@ -1167,8 +1409,8 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                     toppager: true,
 
                     gridview: true
-            , multiboxonly: true
-            , multipleSearch: true
+        , multiboxonly: true
+        , multipleSearch: true
 
                 });
 
