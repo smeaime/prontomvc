@@ -615,6 +615,11 @@
 
 
 
+
+                                        
+                                 
+
+
                                         function jsAcopiosPorCliente(textbox, combo) {
                                             //var txttitular = getObj("ctl00_ContentPlaceHolder1_TabContainer2_TabPanel2_txtTitular");
 
@@ -679,10 +684,6 @@
                                             });
 
                                         }
-
-
-
-
 
 
                                         function comboCasosEspeciales(textbox, combo) {
@@ -1751,11 +1752,27 @@
                                         <td class="EncabezadoCell" style="">Tipo merma
                                         </td>
                                     </tr>
+
+
+
+
+
+
+
+
+
+
+
                                     <tr>
                                         <td class="EncabezadoCell" style="width: 215px;">Cuerpos extraños/ materias
                                         </td>
                                         <td class="EncabezadoCell" style="width: 15%;">
-                                            <asp:TextBox ID="TextBox26" runat="server" CssClass="CssTextBox" Width="66px"></asp:TextBox>%<cc1:FilteredTextBoxExtender
+                                            <asp:TextBox ID="TextBox26" runat="server" CssClass="CssTextBox" Width="66px">
+
+
+                                             
+
+                                            </asp:TextBox>%<cc1:FilteredTextBoxExtender
                                                 ID="TextBox26_FilteredTextBoxExtender" runat="server" TargetControlID="TextBox26"
                                                 ValidChars=".1234567890">
                                             </cc1:FilteredTextBoxExtender>
@@ -2593,7 +2610,8 @@
                     <u>S</u>ituación
                 </HeaderTemplate>
                 <ContentTemplate>
-                    <br /><br />
+                    <br />
+                    <br />
                     <table style="padding: 0px; border: none #FFFFFF; width: 696px; height: 202px; margin-left: 5px; margin-right: 0px;"
                         cellpadding="1" cellspacing="1">
                         <tr>
@@ -2629,7 +2647,7 @@
 
                         </tr>
 
-                        
+
 
                         <tr>
 
@@ -2652,7 +2670,7 @@
 
                         </tr>
 
-    
+
                         <tr>
 
                             <td class="EncabezadoCell" style="width: 150px;">Fecha de autorización
@@ -3213,8 +3231,108 @@
         }
 
 
+
+
+        function jsRebajaRubro(textbox, combo) {
+
+            var $txttitular = $("#" + textbox.id + "")
+            var $select = $("#" + combo.id + "")
+
+
+
+            var myJSONString = JSON.stringify($("#ctl00_ContentPlaceHolder1_HFSC").val());
+            var myEscapedJSONString = myJSONString.escapeSpecialChars();
+
+            var aaa = addslashes($("#ctl00_ContentPlaceHolder1_HFSC").val())
+
+
+            var dat = {
+                SC: "",
+                idrubro: 1,
+                resultado: 2,
+                idarticulo: 3,
+                iddestino: 4
+            }
+
+
+            $.ajax({
+                url: "WebServiceClientes.asmx/RebajaCalculo",
+                type: 'POST',
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                //dataType: "xml",
+
+
+                //data: "{'NombreCliente':'" +
+                //       addslashes($txttitular.val()) +
+                //     "', 'SC':'" + aaa + "' }",
+                data: JSON.stringify(dat),
+
+
+
+
+
+                //data: {
+                //    NombreCliente: 'asdfasdf',
+                //    SC:  'asdfsadfsa' // $("#HFSC").val()
+                //},
+                success: function (data) {
+
+                    var x = data.d;
+
+                    //var $select= $('select#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel2_optDivisionSyngenta');
+
+                    var guardoelactualId = $select.val()
+                    $select.find('option').remove();
+
+
+
+                    $.each(x, function (i, val) {
+
+
+                        $select.append('<option value=' + val.idacopio + '>' + val.desc + '</option>');
+
+                        //$('select#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel2_optDivisionSyngenta').append(
+                        //$("<option></option>")
+                        //    .val(val.idacopio).text(val.desc));
+
+                    });
+
+                    $select.val(guardoelactualId)
+
+                    if (x.length > 1) combo.style.visibility = "visible";
+                    else combo.style.visibility = "hidden";
+
+                },
+                error: function (xhr) {
+                    // alert("Something seems Wrong");
+                }
+            });
+
+        }
+
+
         $(function () {
             reasignarAutocomplete();
+
+
+
+
+
+
+
+            $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_TextBox26").keydown(function () {
+                alert('hola');
+
+                jsRebajaRubro(txttitular, optDivisionSyngenta);
+            });
+
+
+
+
+      
+
+
         });
 
 

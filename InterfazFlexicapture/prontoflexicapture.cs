@@ -4443,6 +4443,26 @@ Formato localidad-provincia	destination	x
 
 
 
+        public decimal RebajaCalculo(string SC, int idrubro, decimal resultado, int idarticulo, int iddestino)
+        {
+            var scEF = ProntoMVC.Data.Models.Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC));
+            DemoProntoEntities db = new DemoProntoEntities(scEF);
+
+            var q = from n in db.CartaPorteNormasCalidads
+                    where (n.ResultadoDesde > resultado && resultado < n.ResultadoHasta)
+                           && n.IdArticulo == idarticulo
+                           && n.IdDestino == iddestino
+                    orderby idarticulo descending, iddestino descending
+                    select n;
+
+            if (q.Count() == 0)
+                return 0;
+            else
+                return q.First().RebajaIncremento ?? 0;
+
+        }
+
+
 
 
 
