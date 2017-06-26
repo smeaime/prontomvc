@@ -4448,12 +4448,13 @@ Formato localidad-provincia	destination	x
             var scEF = ProntoMVC.Data.Models.Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC));
             DemoProntoEntities db = new DemoProntoEntities(scEF);
 
-            var q = from n in db.CartaPorteNormasCalidads
-                    where (n.ResultadoDesde > resultado && resultado < n.ResultadoHasta)
+            var q = (from n in db.CartaPorteNormasCalidads
+                    where (n.ResultadoDesde <= resultado && resultado <= n.ResultadoHasta)
+                           && (idrubro == n.IdCartaPorteRubroCalidad)
                            && (n.IdArticulo == idarticulo || n.IdArticulo==null || idarticulo==-1)
                            && (n.IdDestino == iddestino || n.IdDestino == null || iddestino == -1)
                     orderby idarticulo descending, iddestino descending
-                    select n;
+                    select n).ToList();
 
             if (q.Count() == 0)
                 return 0;

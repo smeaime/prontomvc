@@ -1851,7 +1851,7 @@
                                         </td>
                                         <td class="EncabezadoCell" style="">
                                             <asp:TextBox ID="txtCalidadGranosDanadosRebaja" runat="server" CssClass="CssTextBox" Width="66px"></asp:TextBox>
-                                            
+
 
                                         </td>
                                         <td class="EncabezadoCell" style="">
@@ -3236,19 +3236,43 @@
         function sumarTotalOtrasMerma() {
 
 
-            var tot = parseFloat($('#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadGranosExtranosMerma').val()) +
-           parseFloat($('#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadQuebradosMerma').val()) +
-            parseFloat($('#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadGranosDanadosMerma').val())
+            var tot =   parseFloat($('#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadGranosExtranosMerma').val()) +
+                        parseFloat($('#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadQuebradosMerma').val()) +
+                        parseFloat($('#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadGranosDanadosMerma').val()) +
+                        parseFloat($('#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadChamicoMerma').val()) +
+                        parseFloat($('#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadRevolcadoMerma').val()) +
+                        parseFloat($('#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadObjetablesMerma').val()) +
+                        parseFloat($('#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadAmohosadosMerma').val()) +
+                        parseFloat($('#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadPuntaSombreadaMerma').val()) +
+                        parseFloat($('#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadHectolitricoMerma').val()) +
+                        parseFloat($('#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadCarbonMerma').val()) +
+                        parseFloat($('#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadPanzaBlancaMerma').val()) +
+                        parseFloat($('#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadPicadosMerma').val()) +
+                        parseFloat($('#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadVerdesMerma').val()) +
+                        parseFloat($('#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadQuemadosMerma').val()) +
+                        parseFloat($('#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadTierraMerma').val()) +
+                        parseFloat($('#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadZarandeoMerma').val()) +
+                        parseFloat($('#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadHumedadMerma').val()) +
+                        parseFloat($('#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadGastosFumigacionMerma').val()) +
+                        parseFloat($('#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadGastoDeSecadaMerma').val()) +
+                        parseFloat($('#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadMermaVolatilMerma').val()) +
+                        parseFloat($('#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadFondoNideraMerma').val()) +
+                        parseFloat($('#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadMermaConvenidaMerma').val()) +
+                        parseFloat($('#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadTalCualVicentinMerma').val()) +
+                        parseFloat($('#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadDescuentoFinalMerma').val()) 
+             
+
 
             //alert(tot);
 
 
-            $('#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel3_txtMerma').val = tot;
+            $('#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel3_txtMerma').val(tot);
 
-            $('#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel3_txtNetoFinalTotalMenosMermas').val =
+            $('#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel3_txtNetoFinalTotalMenosMermas').val(
                     parseFloat($('#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel3_txtNetoDescarga').val())
                     - parseFloat($('#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel3_txtHumedadTotal').val())
-                    - parseFloat($('#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadGranosDanadosMerma').val());
+                    - parseFloat($('#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel3_txtMerma').val())
+                );
 
 
 
@@ -3257,7 +3281,7 @@
 
 
 
-        function jsRebajaRubro(resultado, rubroDescripcion) {
+        function jsRebajaRubro(rubroDescripcion, textboxResultado, textboxRebaja, textboxMerma, dropdownTipo) {
 
             //var $txttitular = $("#" + textbox.id + "")
             //var $select = $("#" + combo.id + "")
@@ -3273,9 +3297,9 @@
             var dat = {
                 SC: "",
                 rubrodesc: rubroDescripcion,
-                resultado: resultado,
-                articulodesc:  $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel2_txt_AC_Articulo").val() ,
-                destinodesc: $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel2_txtDestino").val() 
+                resultado: textboxResultado.val(),
+                articulodesc: $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel2_txt_AC_Articulo").val(),
+                destinodesc: $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel2_txtDestino").val()
             }
 
 
@@ -3305,9 +3329,21 @@
                 //},
                 success: function (data) {
 
-                    var x = data.d;
+                    var rebaja = data.d;
 
                     //alert(x);
+
+
+                    //callback(rebaja);
+                    textboxRebaja.val(rebaja);
+                    merma = Math.round(rebaja * Number(textboxResultado.val()));
+
+                    if (dropdownTipo.val() == 0) {
+                        textboxMerma.val(merma);
+                    }
+                    else {
+                        textboxMerma.val(0);
+                    }
 
                     sumarTotalOtrasMerma();
 
@@ -3330,45 +3366,100 @@
 
 
 
-            $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_TextBox26").keyup(function () {
+            $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_TextBox26").on('input', function (e) {
 
-                var rebaja = jsRebajaRubro($("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_TextBox26").val(), "Materias Extrañas");
-                $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadGranosExtranosRebaja").val = rebaja;
-                merma = rebaja * Number($("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel3_txtNetoDescarga").val());
-                
-                if ($("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_cmbTipoMermaGranosExtranos").val==0)              
-                    $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadGranosExtranosMerma").val = merma;
-
-
-
-                sumarTotalOtrasMerma();
+                jsRebajaRubro("Materias Extrañas",
+                                $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_TextBox26"),
+                                $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadGranosExtranosRebaja"),
+                                $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadGranosExtranosMerma"),
+                                $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_cmbTipoMermaGranosExtranos")
+                    );
             });
 
 
-            $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadQuebradosResultado").keydown(function () {
+            $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadQuebradosResultado").on('input', function (e) {
 
-                var rebaja = jsRebajaRubro($("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadQuebradosResultado").val(), "Quebrados partidos");
-                $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadQuebradosRebaja").val = rebaja;
-                merma = rebaja * Number($("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel3_txtNetoDescarga").val());
+                jsRebajaRubro("Quebrados partidos",
+                                $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadQuebradosResultado"),
+                                $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadQuebradosRebaja"),
+                                $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadQuebradosMerma"),
+                                $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_cmbTipoMermaQuebrados")
+                    );
 
-                if ($("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_cmbTipoMermaQuebrados").val == 0)
-                    $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadQuebradosMerma").val = merma;
-
-                sumarTotalOtrasMerma();
             });
 
 
-            $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_TextBox29").keydown(function () {
+            $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_TextBox29").on('input', function (e) {
 
-                var rebaja = jsRebajaRubro($("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_TextBox29").val(), "Dañados");
-                $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadGranosDanadosRebaja").val = rebaja;
-                merma = rebaja * Number($("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel3_txtNetoDescarga").val());
+                jsRebajaRubro("Dañados",
+                              $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_TextBox29"),
+                              $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadGranosDanadosRebaja"),
+                              $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadGranosDanadosMerma"),
+                              $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_cmbTipoMermaDaniados")
+                  );
 
-                if ($("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_cmbTipoMermaDaniados").val == 0)
-                    $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadGranosDanadosMerma").val = merma;
+            });
 
 
-                sumarTotalOtrasMerma();
+
+
+            $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadChamicoResultado").on('input', function (e) {
+
+                jsRebajaRubro("Semilla de chamico",
+                              $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadChamicoResultado"),
+                              $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadChamicoRebaja"),
+                              $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadChamicoMerma"),
+                              $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadChamicoMerma")
+                  );
+
+            });
+
+
+
+
+
+            $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadRevolcadoResultado").on('input', function (e) {
+
+                jsRebajaRubro("Revolcado en tierra",
+                              $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadRevolcadoResultado"),
+                              $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadRevolcadoRebaja"),
+                              $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadRevolcadoMerma"),
+                              $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_cmbTipoMermaRevolcado")
+                  );
+
+            });
+
+
+
+
+
+            $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadObjetablesResultado").on('input', function (e) {
+
+                jsRebajaRubro("Olores objetables",
+                              $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadObjetablesResultado"),
+                              $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadObjetablesRebaja"),
+                              $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadObjetablesMerma"),
+                              $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_cmbTipoMermaObjetables")
+                  );
+
+            });
+
+
+
+
+
+
+
+
+            $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_TextBox2").on('input', function (e) {
+
+                jsRebajaRubro("Tierra",
+                              $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_TextBox2"),
+                              $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadTierraRebaja"),
+                              $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadTierraMerma"),
+                              $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_cmbTipoMermaTierra")
+                  );
+
             });
 
 
