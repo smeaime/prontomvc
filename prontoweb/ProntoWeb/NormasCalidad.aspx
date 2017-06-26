@@ -35,7 +35,6 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
         Normas
     </div>
     <br />
-    <br />
     <div>
         <%--   <table id="list9">
         </table>
@@ -911,7 +910,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
 
 
-                    colNames: ['', 'Id', 'Fecha', 'Destino', 'IdDestino', 'TOTAL Puerto', 'Sucursal'
+                    colNames: ['', 'Id', 'Rubro', 'IdRubro', 'Resultado Desde', 'Resultado Hasta', 'Rebaja'
 
                     ],
 
@@ -923,43 +922,12 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                                     search: false,
                                 },
                                 { name: ' IdCartasDePorteControlDescarga', index: ' IdCartasDePorteControlDescarga', align: 'left', width: 100, editable: false, hidden: true },
-                                {
-                                    name: 'Fecha', index: 'Fecha', width: 200, sortable: false, align: 'right', editable: true,
-                                    editoptions: {
-                                        size: 10,
-                                        maxlengh: 10,
-                                        dataInit: function (element) {
-                                            $(element).datepicker({
-                                                dateFormat: 'dd/mm/yy',
-                                                constrainInput: false,
-                                                showOn: 'button',
-                                                buttonText: '...'
-                                            });
-                                        }
-                                    },
-                                    formatoptions: { newformat: "dd/mm/yy" }, datefmt: 'dd/mm/yy'
-                                    //, formatter: 'date'
-                                    , sorttype: 'date'
-
-
-                                    , searchoptions: {
-                                        sopt: ['eq', 'ne'],
-                                        dataInit: function (elem) {
-                                            $(elem).datepicker({
-                                                dateFormat: 'dd/mm/yy',
-                                                showButtonPanel: true
-                                            })
-                                        }
-                                    }
-                                },
-
-
 
 
 
                                  {
                                      name: 'WilliamsDestino.Descripcion', index: 'WilliamsDestino.Descripcion',
-                                     formoptions: { rowpos: 5, colpos: 2, label: "Descripción" }, align: 'left', width: 450, hidden: false, editable: true, edittype: 'text',
+                                     formoptions: { rowpos: 5, colpos: 2, label: "Descripción" }, align: 'left', width: 250, hidden: false, editable: true, edittype: 'text',
                                      editoptions: {
                                          rows: '1', cols: '1',
                                          dataInit: function (elem) {
@@ -1062,9 +1030,34 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                                      },
                                      editrules: { required: true }
                                  },
+                                          { name: 'IdWilliamsDestino', index: 'IdWilliamsDestino', align: 'left', width: 10, editable: false, hidden: true, label: 'TB' },
+
+                                {
+                                    name: 'TotalDescargaDia', index: 'TotalDescargaDia', width: 100, align: 'right', sorttype: "number"
+                , editable: true, editrules: { required: false, number: true }, edittype: 'text', label: 'TB',
+
+                                    searchoptions: { sopt: ['eq'] },
+
+                                    editoptions: {
+                                        maxlength: 20, defaultValue: '0.00',
+                                        dataEvents: [
+                                        {
+                                            type: 'keypress',
+                                            fn: function (e) {
+                                                var key = e.charCode || e.keyCode;
+                                                if (key == 13) { setTimeout("jQuery('#Lista').editCell(" + selIRow + " + 1, " + selICol + ", true);", 100); }
+                                                if ((key < 48 || key > 57) && key !== 46 && key !== 44 && key !== 8 && key !== 37 && key !== 39) { return false; }
+                                            }
+                                        }]
+                                    }
+                                },
 
 
-            { name: 'IdWilliamsDestino', index: 'IdWilliamsDestino', align: 'left', width: 10, editable: false, hidden: true, label: 'TB' },
+
+
+
+
+   
             {
                 name: 'TotalDescargaDia', index: 'TotalDescargaDia', width: 100, align: 'right', sorttype: "number"
                 , editable: true, editrules: { required: false, number: true }, edittype: 'text', label: 'TB',
@@ -1085,16 +1078,26 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                 }
             }
                                 ,
+            
             {
-                name: 'IdPuntoVenta', index: 'IdPuntoVenta',
+                name: 'TotalDescargaDia', index: 'TotalDescargaDia', width: 100, align: 'right', sorttype: "number"
+                , editable: true, editrules: { required: false, number: true }, edittype: 'text', label: 'TB',
 
-                width: 100, resizable: true,
-                align: "left", sorttype: "number", editable: true, edittype: "select", hidden: true,
-                editoptions: { value: "1:1;2:2;3:3;4:4" }, // { value: "1:Buenos Aires;2:San Lorenzo;3:Arroyo Seco;4:Bahía Blanca" },
                 searchoptions: { sopt: ['eq'] },
-                editrules: { required: true }
-            }
 
+                editoptions: {
+                    maxlength: 20, defaultValue: '0.00',
+                    dataEvents: [
+                    {
+                        type: 'keypress',
+                        fn: function (e) {
+                            var key = e.charCode || e.keyCode;
+                            if (key == 13) { setTimeout("jQuery('#Lista').editCell(" + selIRow + " + 1, " + selICol + ", true);", 100); }
+                            if ((key < 48 || key > 57) && key !== 46 && key !== 44 && key !== 8 && key !== 37 && key !== 39) { return false; }
+                        }
+                    }]
+                }
+            }
 
 
 

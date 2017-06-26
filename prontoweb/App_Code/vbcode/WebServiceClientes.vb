@@ -333,7 +333,39 @@ Public Class WebServiceClientes
     End Function
 
 
+    <WebMethod()>
+    Public Function RebajaCalculo(SC As String, idrubro As Integer, resultado As Decimal, idarticulo As Integer, iddestino As Integer) As Decimal 'As String()
 
+        'Pronto.ERP.Bll.CartaPorteManagerAux()
+
+
+        If Not Diagnostics.Debugger.IsAttached Then
+            'SC = Encriptar("Data Source=10.2.64.30;Initial catalog=Williams;User ID=pronto; Password=MeDuV8NSlxRlnYxhMFL3;Connect Timeout=200")
+            SC = Encriptar(scWilliamsRelease())
+            'dddddd()
+        Else
+            SC = Encriptar("Data Source=serversql3;Initial catalog=Williams;User ID=sa; Password=.SistemaPronto.;Connect Timeout=200")
+        End If
+
+        'ErrHandler2.WriteError("AcopiosPorCliente " & NombreCliente & " - " & Encriptar(SC))
+
+
+
+        Try
+            Dim s = New ServicioCartaPorte.servi()
+            Return s.RebajaCalculo(SC, idrubro, resultado, idarticulo, iddestino)
+
+        Catch ex As Exception
+            ErrHandler2.WriteError(ex.ToString)
+
+        End Try
+
+
+        'Return New String() {"asdas", "ddd"}
+
+
+
+    End Function
 
 
 
