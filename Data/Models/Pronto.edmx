@@ -9995,6 +9995,16 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.wGrillaPersistencia' no tiene def
           <Parameter Name="fechadesdeAnterior" Type="datetime" Mode="In" />
           <Parameter Name="fechahastaAnterior" Type="datetime" Mode="In" />
         </Function>
+        <Function Name="wCartasDePorte_TX_MapaEstrategico" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Modo" Type="varchar" Mode="In" />
+          <Parameter Name="FechaDesde" Type="datetime" Mode="In" />
+          <Parameter Name="FechaHasta" Type="datetime" Mode="In" />
+          <Parameter Name="idArticulo" Type="int" Mode="In" />
+          <Parameter Name="idProcedencia" Type="int" Mode="In" />
+          <Parameter Name="idClienteFacturado" Type="int" Mode="In" />
+          <Parameter Name="Tonsdesde" Type="int" Mode="In" />
+          <Parameter Name="TonsHasta" Type="int" Mode="In" />
+        </Function>
         <Function Name="wTarifaWilliams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="money">
           <Parameter Name="idCliente" Type="int" Mode="In" />
           <Parameter Name="IdArticulo" Type="int" Mode="In" />
@@ -13283,6 +13293,16 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.wGrillaPersistencia' no tiene def
             <End Role="CartaPorteNormasCalidad" EntitySet="CartaPorteNormasCalidads" />
           </AssociationSet>
           <EntitySet Name="ColaCorreosComprobantes" EntityType="DemoProntoModel.ColaCorreosComprobante" />
+          <FunctionImport Name="wCartasDePorte_TX_MapaEstrategico" ReturnType="Collection(DemoProntoModel.wCartasDePorte_TX_MapaEstrategico_Result)">
+            <Parameter Name="Modo" Mode="In" Type="String" />
+            <Parameter Name="FechaDesde" Mode="In" Type="DateTime" />
+            <Parameter Name="FechaHasta" Mode="In" Type="DateTime" />
+            <Parameter Name="idArticulo" Mode="In" Type="Int32" />
+            <Parameter Name="idProcedencia" Mode="In" Type="Int32" />
+            <Parameter Name="idClienteFacturado" Mode="In" Type="Int32" />
+            <Parameter Name="Tonsdesde" Mode="In" Type="Int32" />
+            <Parameter Name="TonsHasta" Mode="In" Type="Int32" />
+          </FunctionImport>
           </EntityContainer>
         <EntityType Name="Articulo">
           <Key>
@@ -25960,6 +25980,15 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.wGrillaPersistencia' no tiene def
           <Property Name="IdTipoComprobante" Type="Int32" Nullable="false" />
           <Property Name="IdComprobante" Type="Int32" Nullable="false" />
         </EntityType>
+        <ComplexType Name="wCartasDePorte_TX_MapaEstrategico_Result">
+          <Property Type="Decimal" Name="kilos" Nullable="true" Precision="38" Scale="0" />
+          <Property Type="String" Name="localidad" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="provincia" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="RazonSocial" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Procedencia" Nullable="true" MaxLength="30" />
+          <Property Type="Decimal" Name="lat" Nullable="true" Precision="15" Scale="12" />
+          <Property Type="Decimal" Name="lng" Nullable="true" Precision="15" Scale="12" />
+        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -33053,6 +33082,19 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.wGrillaPersistencia' no tiene def
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="wCartasDePorte_TX_MapaEstrategico" FunctionName="DemoProntoModel.Store.wCartasDePorte_TX_MapaEstrategico">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DemoProntoModel.wCartasDePorte_TX_MapaEstrategico_Result">
+                <ScalarProperty Name="kilos" ColumnName="kilos" />
+                <ScalarProperty Name="localidad" ColumnName="localidad" />
+                <ScalarProperty Name="provincia" ColumnName="provincia" />
+                <ScalarProperty Name="RazonSocial" ColumnName="RazonSocial" />
+                <ScalarProperty Name="Procedencia" ColumnName="Procedencia" />
+                <ScalarProperty Name="lat" ColumnName="lat" />
+                <ScalarProperty Name="lng" ColumnName="lng" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

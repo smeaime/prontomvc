@@ -5095,43 +5095,57 @@ Formato localidad-provincia	destination	x
 
                 db.Database.CommandTimeout = 200;
 
-                var q2 = (from x in db.fSQL_GetDataTableFiltradoYPaginado(
-                                                        0, 9999999, 0, "", -1, -1,
-                                                        -1, -1, -1, idarticulo, idprocedencia,
-                                                        -1, 0, modoExportacion,
-                                                        fechadesde, fechahasta,
-                                                        0, null, false, "", "",
-                                                        -1, null, 0, "", "Todos")
-                          from l in db.Localidades.Where(y => System.Data.Entity.SqlServer.SqlFunctions.StringConvert((double?)y.IdLocalidad).Trim() == x.Procedencia)
-                              //from f in db.Facturas.Where(y => y.IdFactura == (x.IdFacturaImputada ?? 0))
-                              //where (idarticulo == -1 || (x.IdArticulo ?? 0) == idarticulo)
-                              //   && (idclientefacturado == -1 || (f.IdCliente ?? 0) == idclientefacturado)  && x.Procedencia!=""
-                          group x by new { x.ProcedenciaDesc, x.ProcedenciaProvinciaDesc, x.Procedencia, l.lat, l.lng } into grp
+
+                //@Modo VARCHAR(20) = NULL,
+
+                //@FechaDesde datetime,
+                //@FechaHasta datetime,
+
+                //@idArticulo int = NULL,
+                //@idProcedencia int = NULL,
+                //@idClienteFacturado int = NULL,
+
+                //@Tonsdesde int = NULL,
+                //@TonsHasta int = NULL
+
+
+                var sp= db.wCartasDePorte_TX_MapaEstrategico( modoExportacion, fechadesde, fechahasta, idarticulo, idprocedencia, idclientefacturado, tonsdesde,  tonshasta );
+
+                var q2 = (from r in sp
                           select new
                           {
-                              total = grp.Sum(t => t.NetoProc),
-                              grp.Key.ProcedenciaDesc,
-                              grp.Key.ProcedenciaProvinciaDesc,
-                              grp.Key.Procedencia,
-                              grp.Key.lat,
-                              grp.Key.lng
+                              total = r.kilos,
+                              ProcedenciaDesc = r.localidad,
+                              ProcedenciaProvinciaDesc = r.provincia,
+                              Procedencia = r.provincia,
+                              lat = r.lat,
+                              lng = r.lng
                           }
                          ).ToList();
 
+                //DataTable dt= EntidadManager.GetStoreProcedure(SC, "wCartasDePorte_TX_MapaEstrategico", modoExportacion, fechadesde,fechahasta, idarticulo,idprocedencia, idclientefacturado,tonsdesde,tonshasta);
+                // DataTable dt = EntidadManager.GetStoreProcedure(SC, "wCartasDePorte_TX_MapaEstrategico", modoExportacion, fechadesde, fechahasta, idarticulo, idprocedencia, idclientefacturado, tonsdesde, tonshasta);
 
-                //var q3 = (from x in q2
-                //          where (idprocedencia == -1 || Convert.ToInt32(x.Procedencia) == idprocedencia)
-                //             && (x.total >= tonsdesde && x.total <= tonshasta)
-                //          select x
-                //        ).ToList();
+
+                // var q2 = (from DataRow dr in dt.Rows
+                //           select new
+                //           {
+                //               total = dr["kilos"] , 
+                //               ProcedenciaDesc = dr["localidad"],
+                //               ProcedenciaProvinciaDesc = dr["provincia"],
+                //               Procedencia = dr["Procedencia"],
+                //               lat = dr["lat"],
+                //               lng = dr["lng"]
+                //           }
+                //          ).ToList();
+
+
 
 
                 System.Web.Script.Serialization.JavaScriptSerializer jsonSerializer = new System.Web.Script.Serialization.JavaScriptSerializer();
                 return jsonSerializer.Serialize(q2);
 
-                //string serializedData = JsonConvert.SerializeObject(q2.ToList(), Formatting.Indented);
-                //return serializedData;
-
+                
             }
 
 

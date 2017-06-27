@@ -15358,7 +15358,445 @@ Public Class CartaDePorteManager
     End Function
 
 
+    Public Shared Function BajarListadoDeCartaPorte_CerealNet_DLL_v3(usuario As String, password As String, cuit As String, fechadesde As DateTime, fechahasta As DateTime, estado As enumCDPestado, SC As String, DirApp As String, ConexBDLmaster As String) As CerealNet.WSCartasDePorte.respuestaEntrega_v3
 
+        'var scEF = ProntoMVC.Data.Models.Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC));
+        '      DemoProntoEntities db = new DemoProntoEntities(scEF);
+
+        'Dim IdCartaDePorte = EntidadManager.decryptQueryString(identificador)
+
+        ' ir a http://codebeautify.org/base64-to-image-converter  para probar la respuesta
+        ' ir a http://codebeautify.org/base64-to-image-converter  para probar la respuesta
+        ' ir a http://codebeautify.org/base64-to-image-converter  para probar la respuesta
+
+        Dim idcliente As Integer = 0
+
+        Try
+
+            'validar pass
+
+            If Not Debugger.IsAttached Then
+                If Not Membership.ValidateUser(usuario, password) Then
+                    ErrHandler2.WriteError("No logra autenticarse " & usuario)
+                    Return Nothing
+                End If
+
+
+
+
+                ''verificar q la carta tenga como cliente ese usuario
+                ''pero como se qué empresa tiene vinculada ese usuario?
+
+                ''agregar al where que aparezca la razon social de este cliente
+                'Dim rs As String
+                'Try
+                '    Dim idusuario As String
+                '    '
+                '    If Debugger.IsAttached Then
+                '        idusuario = "920688e1-7e8f-4da7-a793-9d0dac7968e6"
+                '    Else
+                Dim idusuario = Membership.GetUser(usuario).ProviderUserKey.ToString
+                '    End If
+
+                Dim rs = UserDatosExtendidosManager.TraerRazonSocialDelUsuario(idusuario, ConexBDLmaster, SC)
+                'Catch ex As Exception
+                '    ErrHandler2.WriteError(ex)
+                '    Return Nothing
+                'End Try
+
+
+                idcliente = BuscaIdClientePreciso(rs, SC)
+                If idcliente <= 0 Then
+                    ErrHandler2.WriteError("No se encontró usuario equivalente")
+                    Return Nothing
+                End If
+
+
+            Else
+                idcliente = 13648 'fyo si está el depurador
+            End If
+
+
+
+
+
+
+
+
+
+
+
+
+            Dim dbcartas = ListadoSegunCliente(SC, idcliente, fechadesde, fechahasta, estado)
+            'Dim dbcartas = ListadoSegunCliente(SC, idcliente, fechadesde, fechahasta, enumCDPestado.Posicion)
+
+            Dim cartas As New CerealNet.WSCartasDePorte.respuestaEntrega_v3
+            Dim cps(dbcartas.Count - 1) As CerealNet.WSCartasDePorte.cartaPorte_v3
+
+            For n = 0 To dbcartas.Count - 1
+
+                Try
+
+                    Dim cp As New CerealNet.WSCartasDePorte.cartaPorte_v3
+                    Dim dbc = dbcartas(n)
+
+                    'HECHO
+                    '• Los CUITs los informa con guiones (20-12123123-2) cuando debería informarlo sin guiones (20121231232)
+                    '• La cosecha a veces no se informa y cuando se informa tiene el formato “20xx/yy” cuando debería ser “xxyy”. Ej.: Se informa 2015/16, debería informar 1516
+                    '• En la mayoría de las veces no está informando el CUIT remitente y CUIT remitente comercial. Esto se usa para el mapeo de la empresa compradora.
+                    '• Cuando se informa el CuitPuerto (cuitpuerto) informa un número entero (parecería ser un código de 2 dígitos) en vez de un CUIT.
+
+
+
+                    'HECHO PERO NO ANDABA
+
+                    '• Los CodigoOnccaProducto (codmerca) no se está informando -Estoy mandando el EspecieONCAA. qué falló?
+                    '• No se está informando fecha de descarga (fechadescarga) y fecha de posición (fechaposicion). -Eu, lo estoy mandando                
+
+
+
+                    'FALTA
+                    '• KGDescarga (netodest) no se está informando.
+
+                    '• No está informando el campo CodigoOnccaLocalidadProcedencia (codonccalocalproc)
+                    '• CodigoOnccaPuerto (codonccapuerto), CodigoOnccaLocalidadPuerto (codonccalocalidadpuerto) y CodigoOnccaProvinciaPuerto (codonccaprovinciapuerto) no se está informando.
+
+                    '• No está informando las mermas.
+
+
+
+
+
+
+                    cp.cartaporte = If(dbc.NumeroCartaDePorte, 0)
+                    cp.brutodest = dbc.BrutoFinal
+
+
+                    Select Case dbc.CalidadDesc
+                        Case "CONFORME"
+                            cp.calidad = "" ' "CO"
+                        Case "GRADO 1"
+                            cp.calidad = "G1"
+                        Case "GRADO 2"
+                            cp.calidad = "G2"
+                        Case "GRADO 3"
+                            cp.calidad = "G3"
+                        Case "COND. CAMARA"
+                            cp.calidad = "CC"
+                        Case "FUERA DE STANDARD"
+                            cp.calidad = "FE"
+                        Case Else
+                            cp.calidad = ""
+                    End Select
+                    'cp.calidad = ExcelImportadorManager.CodigoCalidad(If(dbc.CalidadDe, 0)) ' dbc.CalidadDesc
+
+
+
+
+
+
+                    'codigos oncaa    -qué tenemos que usar acá
+
+                    '6.       Los códigos de producto que informa no se corresponden con los de CerealNet. Ej.: CerealNet informa para maíz el número 19 y Williams el 501. Adjunto tabla con Codigos de Productos
+                    cp.codmerca = Val(dbc.CodigoSAJPYA) 'dbc.EspecieONCAA) kljlkjlkjljlkjl
+
+
+
+
+
+
+
+
+                    '1.       El Código Oncca Localidad Destino (codonccalocalidadpuerto) y Código Oncca Provincia Destino (codonccaprovinciapuerto) son iguales.
+                    '                         Aparentemente la Provincia.
+                    '2.       El Código Oncca Localidad Procedencia (codonccalocalproc) y Código Oncca Provincia Procedencia (codonccaprovincialproc) son iguales.
+                    '                         Aparentemente la Provincia. 
+                    '3.       El Código Oncca Puerto (codonccapuerto) siempre es 0. 
+
+
+                    '4.       Los Códigos Oncca de Localidad Procedencia que nos mandan parecen estar iguales a los que usa la AFIP, pero encuentro 
+                    '                        inconsistencias entre los códigos de destino y las descripciones del campo localidaddestino. Puede ser que esté mal la descripción o puede estar mal el código.
+
+
+                    'puerto: Nombre Destino
+                    'CodOnccaPuerto: Codigo Oncca Destino
+                    'Localidad Destino: Localidad relacionada al Destino
+                    'codonccalocalidadpuerto: codigo oncca de la localidad relacionada al destino
+
+
+                    'cuando dicen 'puerto' se refieren al destino tambien
+
+                    cp.puerto = If(dbc.DestinoDesc, "")
+                    cp.codonccapuerto = Val(dbc.DestinoCodigoONCAA)
+                    cp.localidaddestino = dbc.DestinoLocalidadDesc
+                    cp.codonccalocalidadpuerto = Val(dbc.DestinoLocalidadCodigoONCAA)
+                    cp.codonccaprovinciapuerto = CodigoProvincia(dbc.DestinoProvinciaDesc)
+
+
+                    cp.procedencia = If(dbc.ProcedenciaDesc, "")
+                    cp.codonccalocalproc = Val(dbc.ProcedenciaCodigoONCAA)
+                    cp.codonccaprovincialproc = CodigoProvincia(dbc.ProcedenciaProvinciaDesc) 'ProcedenciaCodigoONCAA)
+
+
+
+
+
+
+                    cp.contrato = dbc.Contrato
+                    cp.cosecha = Right(dbc.Cosecha, 5).Replace("/", "").PadLeft(4)
+
+                    cp.CPoriginal = dbc.NumeroCartaDePorte
+
+                    cp.cuitcorredor = dbc.CorredorCUIT.Replace("-", "")
+                    cp.cuitentregador = dbc.DestinatarioCUIT.Replace("-", "")
+                    cp.cuitexport = dbc.DestinatarioCUIT.Replace("-", "")
+                    cp.cuitinter = dbc.IntermediarioCUIT.Replace("-", "")
+                    cp.cuitpuerto = If(dbc.DestinoCUIT, "").Replace("-", "")
+
+                    cp.cuittitu = If(dbc.TitularCUIT, "").Replace("-", "")
+
+
+
+                    cp.titular = If(dbc.TitularDesc, "")
+                    cp.intermediario = If(dbc.IntermediarioDesc, "")
+                    cp.nomcorre = If(dbc.CorredorDesc, "")
+                    cp.nomExport = If(dbc.DestinatarioDesc, "")
+
+
+                    cp.cuitremic = If(dbc.RComercialCUIT, "").Replace("-", "")
+                    cp.nomRemic = If(dbc.RComercialDesc, "")
+                    If (cp.cuitremic) = "" Then
+                        cp.cuitremic = cp.cuittitu
+                        cp.nomRemic = cp.titular
+                    End If
+
+
+                    cp.cuitremitente = If(dbc.TitularCUIT, "").Replace("-", "")
+                    cp.remitente = If(dbc.TitularDesc, "")
+
+
+                    cp.entregador = If(dbc.DestinatarioDesc, "")
+
+
+                    cp.fechadescarga = If(dbc.FechaDescarga, DateTime.MinValue)
+                    cp.fechaposicion = If(dbc.FechaIngreso, DateTime.MinValue)
+                    cp.horadescarga = "" ' If(dbc.Hora, "")
+
+
+                    cp.netodest = dbc.NetoFinal
+                    cp.netoproc = dbc.NetoPto
+                    cp.taradest = dbc.TaraFinal
+
+
+
+                    cp.mercaderia = If(dbc.Producto, "")
+
+
+                    cp.nroRecibo = If(dbc.NRecibo, "")
+                    cp.observaciones = dbc.Observaciones
+                    cp.observado = ""
+                    cp.patente = If(dbc.Patente, "")
+
+
+                    cp.usuario = "" 'dbc.UsuarioIngreso
+                    cp.vagon = dbc.SubnumeroVagon
+
+
+                    cp.CEE = Val(dbc.CEE)
+                    cp.fechaEmisionCarga = If(dbc.FechaDeCarga, DateTime.MinValue)
+                    cp.fechavencimiento = If(dbc.FechaVencimiento, DateTime.MinValue)
+                    cp.CTG = If(dbc.CTG, DateTime.MinValue)
+                    cp.CupoTurno = dbc.Turno
+                    cp.HoraArribo = If(dbc.FechaArribo, 0)
+                    cp.brutoproc = If(dbc.BrutoPto, 0)
+                    cp.taraproc = If(dbc.TaraPto, 0)
+                    cp.Humedad = If(dbc.Humedad, 0)
+                    cp.MermaHumedad = If(dbc.HumedadDesnormalizada, 0)
+                    cp.OtrasMermas = If(dbc.Merma, 0)
+                    cp.NetoFinal = If(dbc.NetoFinal, 0)
+                    cp.ClienteObserv = dbc.ClienteAuxiliarDesc
+                    cp.CorredorObs = dbc.CorredorDesc
+                    cp.cuitchofer = dbc.ChoferCUIT
+                    cp.Chofer = dbc.ChoferDesc
+                    cp.cuittransportista = dbc.TransportistaCUIT
+                    cp.transportista = dbc.TransportistaDesc
+                    cp.acoplado = dbc.Acoplado
+                    cp.kmarecorrer = If(dbc.KmARecorrer, 0)
+                    cp.tarifa = If(dbc.Tarifa, 0)
+                    cp.Establecimiento = dbc.EstablecimientoDesc
+                    cp.IdPosicionEstado = If(dbc.Situacion, 0)
+                    cp.PosicionEstado = ExcelImportadorManager.Situaciones(If(dbc.Situacion, 0))
+
+
+                    cp.SojaSustentableCodCondicion = dbc.SojaSustentableCodCondicion
+                    cp.SojaSustentableCondicion = dbc.SojaSustentableCondicion
+                    cp.SojaSustentableNroEstablecimientoDeProduccion = dbc.SojaSustentableNroEstablecimientoDeProduccion
+
+
+
+
+
+
+                    Dim anas As New List(Of CerealNet.WSCartasDePorte.analisis)
+
+
+
+
+                    RenglonCerealnetCalidad(dbc, 1, dbc.NobleExtranos, If(dbc.CalidadGranosExtranosRebaja, 0), dbc.CalidadGranosExtranosRebaja, Nothing, "C.E", "Extraños", 0, False, anas) ', dbc.CalidadGranosExtranosMerma, False)
+
+
+                    RenglonCerealnetCalidad(dbc, 2, dbc.NobleQuebrados, dbc.CalidadMermaChamicoBonifica_o_Rebaja, dbc.NobleQuebrados, Nothing, "QUB", "Quebrados", 0, False, anas)  ', dbc.CalidadQuebradosMerma, _TipoMerma(s.Quebrados, dbc.Secada))
+
+
+                    RenglonCerealnetCalidad(dbc, 3, dbc.NobleDaniados, dbc.CalidadGranosDanadosRebaja, dbc.CalidadGranosDanadosRebaja, Nothing, "DAN", "Dañado", 0, False, anas)
+
+
+                    RenglonCerealnetCalidad(dbc, 4, dbc.NobleChamico, dbc.CalidadGranosDanadosRebaja, dbc.NobleChamico2, Nothing, "CHA", "Chamico", 0, False, anas)
+
+                    RenglonCerealnetCalidad(dbc, 5, dbc.NobleRevolcado, dbc.CalidadGranosDanadosRebaja, dbc.NobleRevolcado, Nothing, "REV", "Revolcados", 0, False, anas)
+
+
+
+                    RenglonCerealnetCalidad(dbc, 6, dbc.NobleObjetables, dbc.CalidadMermaChamicoBonifica_o_Rebaja, dbc.NobleObjetables, Nothing, "OLR", "Objetables", 0, False, anas)
+
+                    RenglonCerealnetCalidad(dbc, 7, dbc.NobleAmohosados, dbc.CalidadMermaChamicoBonifica_o_Rebaja, dbc.NobleObjetables, Nothing, "MOH", "Amohosados", 0, False, anas)
+
+
+
+                    RenglonCerealnetCalidad(dbc, 8, dbc.CalidadPuntaSombreada, dbc.CalidadGranosDanadosRebaja, dbc.NobleObjetables, Nothing, "TIE", "PuntaSombreada", 0, False, anas)
+
+                    RenglonCerealnetCalidad(dbc, 9, dbc.NobleHectolitrico, dbc.CalidadGranosDanadosRebaja, dbc.NobleObjetables, Nothing, "PH", "Hectolítrico", 0, False, anas)
+
+                    RenglonCerealnetCalidad(dbc, 10, dbc.NobleCarbon, dbc.CalidadGranosDanadosRebaja, dbc.NobleObjetables, Nothing, "GC", "Carbon", 0, False, anas)
+
+
+                    RenglonCerealnetCalidad(dbc, 12, dbc.NoblePicados, dbc.CalidadGranosDanadosRebaja, dbc.NobleObjetables, Nothing, "PIC", "Picados", 0, False, anas)
+
+
+
+                    RenglonCerealnetCalidad(dbc, 13, dbc.NobleVerdes, dbc.CalidadMermaChamicoBonifica_o_Rebaja, dbc.NobleObjetables, Nothing, "GV", "Granos Verdes", 0, False, anas)
+
+
+                    RenglonCerealnetCalidad(dbc, 14, dbc.CalidadGranosQuemados, dbc.CalidadGranosDanadosRebaja, dbc.NobleObjetables, Nothing, "Q/A", "Quemados", 0, False, anas)
+
+
+                    'RenglonCerealnetCalidad(dbc, 15, dbc.CalidadTierra, dbc.CalidadMermaChamicoBonifica_o_Rebaja, dbc.NobleObjetables, Nothing, "TIE", "Tierra", 0, False, anas)
+
+
+
+                    RenglonCerealnetCalidad(dbc, 16, dbc.CalidadMermaZarandeo, dbc.CalidadGranosDanadosRebaja, dbc.NobleObjetables, Nothing, "OT", "Zarandeo", 0, False, anas)
+
+                    'RenglonCerealnetCalidad(dbc, 11, dbc.NoblePanzaBlanca, dbc.CalidadGranosDanadosRebaja, dbc.NobleObjetables, Nothing, "OT", "PanzaBlanca", 0, False, anas)
+
+                    'RenglonCerealnetCalidad(dbc, 17, dbc.CalidadDescuentoFinal, dbc.CalidadGranosDanadosRebaja, dbc.NobleObjetables, Nothing, "OT", "DescuentoFinal", 0, False, anas)
+
+
+
+
+
+
+                    'RenglonCerealnetCalidad(dbc, 18, cc.CalidadHumedadResultado, dbc.CalidadGranosDanadosRebaja, dbc.NobleObjetables, Nothing, "01", "Humedad", 0, False, anas)
+                    Dim porcentajemerma As Decimal
+                    Try
+                        If If(dbc.NetoFinal, 0) > 0 Then
+                            porcentajemerma = If(dbc.HumedadDesnormalizada, 0) * 100 / dbc.NetoFinal
+                        Else
+                            porcentajemerma = 0
+                        End If
+
+                    Catch ex As Exception
+                        porcentajemerma = 0
+                    End Try
+
+                    RenglonCerealnetCalidad(dbc, 18, If(dbc.Humedad, 0), porcentajemerma, porcentajemerma, Nothing, "HD", "Humedad", If(dbc.HumedadDesnormalizada, 0), False, anas)
+
+
+
+
+
+
+                    If False Then  'lento por cargar la carta
+                        Dim cc = CartaDePorteManager.GetItem(SC, dbc.IdCartaDePorte)
+
+
+                        RenglonCerealnetCalidad(dbc, 19, cc.CalidadGastosFumigacionResultado, dbc.CalidadGranosDanadosRebaja, cc.CalidadGastosFumigacionRebaja, Nothing, "OT", "GastosFumigacion", 0, False, anas)
+
+
+                        RenglonCerealnetCalidad(dbc, 20, cc.CalidadGastoDeSecada, cc.CalidadGastoDeSecadaRebaja, cc.CalidadGastoDeSecadaRebaja, Nothing, "OT", "GastoDeSecada", 0, False, anas)
+
+                        RenglonCerealnetCalidad(dbc, 21, cc.CalidadMermaVolatil, cc.CalidadMermaVolatilRebaja, cc.CalidadMermaVolatilRebaja, Nothing, "OT", "MermaVolatil", 0, False, anas)
+
+                        RenglonCerealnetCalidad(dbc, 22, cc.CalidadFondoNidera, cc.CalidadFondoNideraRebaja, cc.CalidadFondoNideraRebaja, Nothing, "OT", "FondoNidera", 0, False, anas)
+
+                        RenglonCerealnetCalidad(dbc, 23, cc.CalidadMermaConvenida, cc.CalidadMermaConvenidaRebaja, cc.CalidadMermaConvenidaRebaja, Nothing, "OT", "MermaConvenida", 0, False, anas)
+
+                        RenglonCerealnetCalidad(dbc, 24, cc.CalidadTalCualVicentin, cc.CalidadTalCualVicentinRebaja, cc.CalidadTalCualVicentinRebaja, Nothing, "OT", "TalCualVicentin", 0, False, anas)
+
+                    End If
+
+                    'For i = 0 To 3
+                    '    Dim a As New CerealNet.WSCartasDePorte.analisis
+                    '    a.kilosMermas
+                    '    a.porcentajeAnalisis
+                    '    a.porcentajeMerma
+                    '    a.rubro
+
+                    '    anas(i) = a
+                    'Next
+
+                    cp.listaAnalisis = anas.ToArray
+                    cps(n) = cp
+                Catch ex As Exception
+                    ErrHandler2.WriteError(ex)
+                    Return Nothing
+
+                End Try
+
+            Next
+
+            cartas.descargas = cps.ToArray
+
+
+
+            Return cartas
+            'Return b1
+
+            ' ir a http://codebeautify.org/base64-to-image-converter  para probar la respuesta
+            ' ir a http://codebeautify.org/base64-to-image-converter  para probar la respuesta
+            ' ir a http://codebeautify.org/base64-to-image-converter  para probar la respuesta
+            ' ir a http://codebeautify.org/base64-to-image-converter  para probar la respuesta
+
+        Catch ex As Exception
+            ErrHandler2.WriteError(ex)
+            Return Nothing
+        End Try
+
+        'usaria la descarga que usa bld en el informe?
+
+        'usando response para que baje el archivo
+
+
+        'Response.Clear()
+        'Response.ClearHeaders()
+        'Response.ContentType = "text/html; charset=UTF-8"
+        'Response.AddHeader("Content-Disposition", "attachment; filename=\"" & filePath & " \ "")
+        'Response.AddHeader("Content-Length", b1.Length)
+        'Response.OutputStream.Write(b1, 0, b1.Length)
+        'Response.Flush()
+        'Response.End()
+
+        'pdfreducido()
+        'oenjpg()
+
+
+        'If Not b Then
+        '    output = CartaDePorteManager.DescargarImagenesAdjuntas(dt, HFSC.Value, True)
+        'Else
+        '    output = CartaDePorteManager.DescargarImagenesAdjuntas_PDF(dt, HFSC.Value, False)
+        'End If
+
+
+    End Function
 
     Public Shared Function BajarListadoDeCartaPorte_CerealNet_DLL_v2_00(usuario As String, password As String, cuit As String, fechadesde As DateTime, fechahasta As DateTime, estado As enumCDPestado, SC As String, DirApp As String, ConexBDLmaster As String) As CerealNet.WSCartasDePorte.respuestaEntrega_v2_00
 

@@ -7115,5 +7115,18 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="wCartasDePorte_TX_MapaEstrategico" FunctionName="DemoProntoModel.Store.wCartasDePorte_TX_MapaEstrategico">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="DemoProntoModel.wCartasDePorte_TX_MapaEstrategico_Result">
+          <ScalarProperty Name="kilos" ColumnName="kilos" />
+          <ScalarProperty Name="localidad" ColumnName="localidad" />
+          <ScalarProperty Name="provincia" ColumnName="provincia" />
+          <ScalarProperty Name="RazonSocial" ColumnName="RazonSocial" />
+          <ScalarProperty Name="Procedencia" ColumnName="Procedencia" />
+          <ScalarProperty Name="lat" ColumnName="lat" />
+          <ScalarProperty Name="lng" ColumnName="lng" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
   </EntityContainerMapping>
 </Mapping>
