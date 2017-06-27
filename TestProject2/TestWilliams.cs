@@ -885,7 +885,7 @@ namespace ProntoMVC.Tests
 
             var s = new ServicioCartaPorte.servi();
 
-            s.GetNormasCalidad(SC,"a");
+            s.GetNormasCalidad(SC, "a");
 
         }
 
@@ -920,8 +920,8 @@ namespace ProntoMVC.Tests
         public void RangosResultadoCalidadesCalculoRebajaYMerma_37774_2()
         {
 
-            var o=new CartaPorteNormasCalidad() ;
-            
+            var o = new CartaPorteNormasCalidad();
+
             NormaCalidadBatchUpdate(o);
         }
 
@@ -938,9 +938,10 @@ namespace ProntoMVC.Tests
 
 
 
-            db.CartaPorteRubrosCalidads.Add(new CartaPorteRubrosCalidad { Descripcion = "Materias Extrañas" });
-            db.CartaPorteRubrosCalidads.Add(new CartaPorteRubrosCalidad { Descripcion = "Tierra" });
-            db.SaveChanges();
+            //db.CartaPorteRubrosCalidads.Add(new CartaPorteRubrosCalidad { Descripcion = "Materias Extrañas" });
+            //db.CartaPorteRubrosCalidads.Add(new CartaPorteRubrosCalidad { Descripcion = "Tierra" });
+
+            //db.SaveChanges();
 
 
             //            MATERIAS
@@ -976,6 +977,15 @@ namespace ProntoMVC.Tests
                 RebajaIncremento = (decimal)1.5
             });
 
+            db.CartaPorteNormasCalidads.Add(new CartaPorteNormasCalidad
+            {
+                IdCartaPorteRubroCalidad = 1,
+                ResultadoDesde = 1,
+                ResultadoHasta = 3,
+                RebajaIncremento = 5,
+                IdArticulo = 1
+            });
+
 
 
             //TIERRA 0,5 0,5
@@ -998,7 +1008,8 @@ namespace ProntoMVC.Tests
 
 
 
-            var ss = s.RebajaCalculo(SC,1, 2.5M, -1, -1);
+            var ss1 = s.RebajaCalculo(SC, 1, 2.5M, -1, -1);
+            var ss2 = s.RebajaCalculo(SC, 1, 2.5M, 01, -1);
 
 
         }

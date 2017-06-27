@@ -4426,6 +4426,11 @@ Formato localidad-provincia	destination	x
                                 a.ResultadoDesde.NullSafeToString(),
                       a.ResultadoHasta.NullSafeToString(),
                       a.RebajaIncremento.NullSafeToString(),
+                       (a.Articulo==null) ?  "" : a.Articulo.Descripcion.NullSafeToString(),
+                      a.IdArticulo.NullSafeToString(),
+                      (a.WilliamsDestino==null) ?  "" : a.WilliamsDestino.Descripcion.NullSafeToString(),
+                      a.IdDestino.NullSafeToString()
+
 
                             }
                         }).ToArray()
