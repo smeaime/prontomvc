@@ -418,6 +418,48 @@ Public Class WebServiceClientes
     End Function
 
 
+    <ScriptMethod(ResponseFormat:=ResponseFormat.Json)>
+    <WebMethod()>
+    Public Function NormaCalidadDelete(id As Integer) As String
+
+        Dim SC As String
+
+        If Not Diagnostics.Debugger.IsAttached Then
+            'SC = Encriptar("Data Source=10.2.64.30;Initial catalog=Williams;User ID=pronto; Password=MeDuV8NSlxRlnYxhMFL3;Connect Timeout=200")
+            SC = Encriptar(scWilliamsRelease())
+            'dddddd()
+        Else
+            SC = Encriptar(scLocal())
+            'SC = Encriptar("Data Source=serversql3;Initial catalog=Williams2;User ID=sa; Password=.SistemaPronto.;Connect Timeout=200")
+        End If
+
+        Dim db As ProntoMVC.Data.Models.DemoProntoEntities = New ProntoMVC.Data.Models.DemoProntoEntities(ProntoMVC.Data.Models.Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC)))
+
+
+        Dim q = (From item In db.CartaPorteNormasCalidads
+                 Where item.IdCartaPorteNormaCalidad = id).FirstOrDefault()
+
+        db.CartaPorteNormasCalidads.Remove(q)
+
+        db.SaveChanges()
+
+
+        'Return q
+
+        '    return Json(q, JsonRequestBehavior.AllowGet);
+
+        Dim TheSerializer As JavaScriptSerializer = New JavaScriptSerializer()
+
+
+        Dim TheJson As String = TheSerializer.Serialize(q)
+
+        Return TheJson
+
+
+    End Function
+
+
+
 
 
 
