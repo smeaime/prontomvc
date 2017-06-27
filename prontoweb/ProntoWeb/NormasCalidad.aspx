@@ -974,9 +974,9 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                                                                      $("#Descripcion").val("");
                                                                      return;
                                                                  }
-                                                                 $("#IdWilliamsDestino").val(ui.id);
+                                                                 $("#IdCartaPorteRubroCalidad").val(ui.id);
 
-                                                                 UltimoIdArticulo = ui.id;
+                                                                 //IdCartaPorteRubroCalidad = ui.id;
                                                              }
                                                              else {
                                                                  alert("No existe el artículo"); // se está bancando que no sea identica la descripcion
@@ -1011,20 +1011,20 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                                                          var id;
                                                          if ($(elem).hasClass("FormElement")) {
                                                              // form editing
-                                                             id = "IdWilliamsDestino";
+                                                             id = "IdCartaPorteRubroCalidad";
                                                          } else if ($(elem).closest(".ui-search-toolbar").length > 0) {
                                                              // filter foolbar
-                                                             id = "gs_IdWilliamsDestino";
+                                                             id = "gs_IdCartaPorteRubroCalidad";
                                                          } else if ($(elem).closest("tr.jqgrow").length > 0) {
                                                              //id = $(elem).closest("tr.jqgrow").attr("id") + "_IdWilliamsDestino";
 
                                                              var rowId = $("#Lista").jqGrid('getGridParam', 'selrow');
                                                              var rowData = $("#Lista").jqGrid('getRowData', rowId);
                                                              rowData.Descripcion = ui.item.value;
-                                                             rowData.IdWilliamsDestino = ui.item.id;
+                                                             rowData.IdCartaPorteRubroCalidad = ui.item.id;
                                                              // $("#Lista").jqGrid('setRowData', rowId, rowData);
 
-                                                             $("#Lista").jqGrid("setCell", rowId, "IdWilliamsDestino", rowData.IdWilliamsDestino);
+                                                             $("#Lista").jqGrid("setCell", rowId, "IdCartaPorteRubroCalidad", rowData.IdCartaPorteRubroCalidad);
                                                          }
                                                          //$("#" + id).val(ui.item.id);
 
@@ -1119,7 +1119,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
 
             {
-                name: 'WilliamsDestino.Descripcion', index: 'WilliamsDestino.Descripcion',
+                name: 'Articulo.Descripcion', index: 'Articulo.Descripcion',
                 formoptions: { rowpos: 5, colpos: 2, label: "Descripción" }, align: 'left', width: 250, hidden: false, editable: true, edittype: 'text',
                 editoptions: {
                     rows: '1', cols: '1',
@@ -1152,9 +1152,9 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                                                 $("#Descripcion").val("");
                                                 return;
                                             }
-                                            $("#IdWilliamsDestino").val(ui.id);
+                                            $("#IdArticulo").val(ui.id);
 
-                                            UltimoIdArticulo = ui.id;
+                                            //IdArticulo = ui.id;
                                         }
                                         else {
                                             alert("No existe el artículo"); // se está bancando que no sea identica la descripcion
@@ -1189,20 +1189,20 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                                     var id;
                                     if ($(elem).hasClass("FormElement")) {
                                         // form editing
-                                        id = "IdWilliamsDestino";
+                                        id = "IdArticulo";
                                     } else if ($(elem).closest(".ui-search-toolbar").length > 0) {
                                         // filter foolbar
-                                        id = "gs_IdWilliamsDestino";
+                                        id = "gs_IdArticulo";
                                     } else if ($(elem).closest("tr.jqgrow").length > 0) {
                                         //id = $(elem).closest("tr.jqgrow").attr("id") + "_IdWilliamsDestino";
 
                                         var rowId = $("#Lista").jqGrid('getGridParam', 'selrow');
                                         var rowData = $("#Lista").jqGrid('getRowData', rowId);
                                         rowData.Descripcion = ui.item.value;
-                                        rowData.IdWilliamsDestino = ui.item.id;
+                                        rowData.IdArticulo = ui.item.id;
                                         // $("#Lista").jqGrid('setRowData', rowId, rowData);
 
-                                        $("#Lista").jqGrid("setCell", rowId, "IdWilliamsDestino", rowData.IdWilliamsDestino);
+                                        $("#Lista").jqGrid("setCell", rowId, "IdArticulo", rowData.IdArticulo);
                                     }
                                     //$("#" + id).val(ui.item.id);
 
@@ -1269,9 +1269,9 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                                                         $("#Descripcion").val("");
                                                         return;
                                                     }
-                                                    $("#IdWilliamsDestino").val(ui.id);
+                                                    $("#IdDestino").val(ui.id);
 
-                                                    UltimoIdArticulo = ui.id;
+                                                    //UltimoIdArticulo = ui.id;
                                                 }
                                                 else {
                                                     alert("No existe el artículo"); // se está bancando que no sea identica la descripcion
@@ -1306,20 +1306,20 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                                             var id;
                                             if ($(elem).hasClass("FormElement")) {
                                                 // form editing
-                                                id = "IdWilliamsDestino";
+                                                id = "IdDestino";
                                             } else if ($(elem).closest(".ui-search-toolbar").length > 0) {
                                                 // filter foolbar
-                                                id = "gs_IdWilliamsDestino";
+                                                id = "gs_IdDestino";
                                             } else if ($(elem).closest("tr.jqgrow").length > 0) {
                                                 //id = $(elem).closest("tr.jqgrow").attr("id") + "_IdWilliamsDestino";
 
                                                 var rowId = $("#Lista").jqGrid('getGridParam', 'selrow');
                                                 var rowData = $("#Lista").jqGrid('getRowData', rowId);
-                                                rowData.Descripcion = ui.item.value;
-                                                rowData.IdWilliamsDestino = ui.item.id;
+                                                rowData["WilliamsDestino.Descripcion"]= ui.item.value;
+                                                rowData.IdDestino = ui.item.id;
                                                 // $("#Lista").jqGrid('setRowData', rowId, rowData);
 
-                                                $("#Lista").jqGrid("setCell", rowId, "IdWilliamsDestino", rowData.IdWilliamsDestino);
+                                                $("#Lista").jqGrid("setCell", rowId, "IdDestino", rowData.IdDestino);
                                             }
                                             //$("#" + id).val(ui.item.id);
 
@@ -1340,7 +1340,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                         },
                         editrules: { required: true }
                     },
-                                          { name: 'IdWilliamsDestino', index: 'IdWilliamsDestino', align: 'left', width: 10, editable: false, hidden: true, label: 'TB' },
+                                          { name: 'IdDestino', index: 'IdDestino', align: 'left', width: 10, editable: false, hidden: true, label: 'TB' },
 
 
 
