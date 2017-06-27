@@ -5112,14 +5112,15 @@ Formato localidad-provincia	destination	x
                 var sp= db.wCartasDePorte_TX_MapaEstrategico( modoExportacion, fechadesde, fechahasta, idarticulo, idprocedencia, idclientefacturado, tonsdesde,  tonshasta );
 
                 var q2 = (from r in sp
+                          group r by new { r.localidad, r.provincia,r.Procedencia, r.lat, r.lng  } into g
                           select new
                           {
-                              total = r.kilos,
-                              ProcedenciaDesc = r.localidad,
-                              ProcedenciaProvinciaDesc = r.provincia,
-                              Procedencia = r.provincia,
-                              lat = r.lat,
-                              lng = r.lng
+                              total = g.Sum(x=>x.kilos),
+                              ProcedenciaDesc = g.Key.localidad,
+                              ProcedenciaProvinciaDesc = g.Key.provincia,
+                              Procedencia = g.Key.Procedencia,
+                              lat = g.Key.lat,
+                              lng = g.Key.lng
                           }
                          ).ToList();
 

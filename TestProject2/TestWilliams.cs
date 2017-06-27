@@ -1096,7 +1096,7 @@ namespace ProntoMVC.Tests
             int idprocedencia = -1;
             int idarticulo = -1;
             int idclientefacturado = -1;
-            int tonsdesde = 1000;
+            int tonsdesde = 1;
             int tonshasta = 999999;
 
             // llamar al mapa
