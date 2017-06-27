@@ -4453,18 +4453,38 @@ Formato localidad-provincia	destination	x
             var scEF = ProntoMVC.Data.Models.Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC));
             DemoProntoEntities db = new DemoProntoEntities(scEF);
 
-            var q = (from n in db.CartaPorteNormasCalidads
+
+            var qexacto = (from n in db.CartaPorteNormasCalidads
+                     where (n.ResultadoDesde <= resultado && resultado <= n.ResultadoHasta)
+                            && (idrubro == n.IdCartaPorteRubroCalidad)
+                            && (n.IdArticulo == idarticulo || (n.IdArticulo == null && idarticulo == -1))
+                            && (n.IdDestino == iddestino || (n.IdDestino == null && iddestino == -1))
+                     orderby n.IdArticulo descending, n.IdDestino descending
+                     select n).ToList();
+
+            if (qexacto.Count() > 0)
+            {
+                var rebaja = qexacto.First().RebajaIncremento ?? 0;
+                return rebaja * resultado;
+            }
+
+
+
+            var qaprox = (from n in db.CartaPorteNormasCalidads
                     where (n.ResultadoDesde <= resultado && resultado <= n.ResultadoHasta)
                            && (idrubro == n.IdCartaPorteRubroCalidad)
                            && (n.IdArticulo == idarticulo || n.IdArticulo==null || idarticulo==-1)
                            && (n.IdDestino == iddestino || n.IdDestino == null || iddestino == -1)
-                    orderby idarticulo descending, iddestino descending
+                    orderby n.IdArticulo descending, n.IdDestino descending
                     select n).ToList();
 
-            if (q.Count() == 0)
+            if (qaprox.Count() == 0)
                 return 0;
             else
-                return (q.First().RebajaIncremento ?? 0) * resultado;
+            {
+                var rebaja = qaprox.First().RebajaIncremento ?? 0;
+                return rebaja * resultado;
+            }
 
         }
 
