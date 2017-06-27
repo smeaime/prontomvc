@@ -2034,6 +2034,39 @@ create table CartaPorteNormasCalidad
 
 
 
+INSERT  INTO CartaPorteRubrosCalidad ( Descripcion)  VALUES  (  'Materias extrañas' ) 
+INSERT  INTO CartaPorteRubrosCalidad ( Descripcion)  VALUES  (  'Quebrados partidos' ) 
+INSERT  INTO CartaPorteRubrosCalidad ( Descripcion)  VALUES  (  'Dañados' ) 
+INSERT  INTO CartaPorteRubrosCalidad ( Descripcion)  VALUES  (  'Semilla de chamico' ) 
+INSERT  INTO CartaPorteRubrosCalidad ( Descripcion)  VALUES  (  'Revolcado en tierra' ) 
+INSERT  INTO CartaPorteRubrosCalidad ( Descripcion)  VALUES  (  'Olores objetables' ) 
+INSERT  INTO CartaPorteRubrosCalidad ( Descripcion)  VALUES  (  'Granos amohosados' ) 
+INSERT  INTO CartaPorteRubrosCalidad ( Descripcion)  VALUES  (  'Punta sombreada' ) 
+INSERT  INTO CartaPorteRubrosCalidad ( Descripcion)  VALUES  (  'Peso hectolítrico' ) 
+INSERT  INTO CartaPorteRubrosCalidad ( Descripcion)  VALUES  (  'Granos con carbón' ) 
+
+INSERT  INTO CartaPorteRubrosCalidad ( Descripcion)  VALUES  (  'Panza blanca' ) 
+INSERT  INTO CartaPorteRubrosCalidad ( Descripcion)  VALUES  (  'Picados' ) 
+INSERT  INTO CartaPorteRubrosCalidad ( Descripcion)  VALUES  (  'Granos verdes' ) 
+INSERT  INTO CartaPorteRubrosCalidad ( Descripcion)  VALUES  (  'Granos Quemados o de Avería' ) 
+INSERT  INTO CartaPorteRubrosCalidad ( Descripcion)  VALUES  (  'Tierra' ) 
+
+
+INSERT  INTO CartaPorteRubrosCalidad ( Descripcion)  VALUES  (  'Mermas por Zarandeo' ) 
+INSERT  INTO CartaPorteRubrosCalidad ( Descripcion)  VALUES  (  'Humedad' ) 
+INSERT  INTO CartaPorteRubrosCalidad ( Descripcion)  VALUES  (  'Gastos de fumigación' ) 
+INSERT  INTO CartaPorteRubrosCalidad ( Descripcion)  VALUES  (  'Gastos de Secada' ) 
+INSERT  INTO CartaPorteRubrosCalidad ( Descripcion)  VALUES  (  'Merma Volatil' ) 
+INSERT  INTO CartaPorteRubrosCalidad ( Descripcion)  VALUES  (  'Fondo Nidera' ) 
+INSERT  INTO CartaPorteRubrosCalidad ( Descripcion)  VALUES  (  'Merma Convenida' ) 
+INSERT  INTO CartaPorteRubrosCalidad ( Descripcion)  VALUES  (  'Tal Cual Vicentin' ) 
+INSERT  INTO CartaPorteRubrosCalidad ( Descripcion)  VALUES  (  'Descuento Final' ) 
+	
+
+
+
+
+
 
 
 

@@ -3409,7 +3409,7 @@
                               $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadChamicoResultado"),
                               $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadChamicoRebaja"),
                               $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadChamicoMerma"),
-                              $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadChamicoMerma")
+                              $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_cmbTipoMermaChamico")
                   );
 
             });
@@ -3468,13 +3468,18 @@
                 jsRebajaRubro("Punta sombreada",
                               $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtPuntaSombreada"),
                               $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadPuntaSombreadaRebaja"),
-                              $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadAmohosadosMerma"),
+                              $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadPuntaSombreadaMerma"),
                               $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_cmbTipoMermaAmohosados")
                   );
 
             });
 
 
+
+
+
+
+      
 
 
 
@@ -3488,7 +3493,6 @@
                   );
 
             });
-
 
 
             $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_TextBox36").on('input', function (e) {
@@ -3506,13 +3510,68 @@
 
 
 
-            $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_TextBox2").on('input', function (e) {
 
-                jsRebajaRubro("zarandeo",
-                              $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_TextBox2"),
-                              $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadTierraRebaja"),
-                              $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadTierraMerma"),
-                              $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_cmbTipoMermaTierra")
+
+
+
+
+
+
+            $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_TextBox37").on('input', function (e) {
+
+                jsRebajaRubro( 'Panza blanca',
+                              $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_TextBox37"),
+                              $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadPanzaBlancaRebaja"),
+                              $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadPanzaBlancaMerma"),
+                              $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_cmbTipoMermaPanzaBlanca")
+                  );
+
+            });
+
+
+
+
+
+            $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_TextBox38").on('input', function (e) {
+
+                jsRebajaRubro('Picados',
+                              $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_TextBox38"),
+                              $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadPicadosRebaja"),
+                              $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadPicadosMerma"),
+                              $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_cmbTipoMermaPicados")
+                  );
+
+            });
+
+
+
+            
+            $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_TextBox41").on('input', function (e) {
+
+                jsRebajaRubro('Granos verdes',
+                              $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_TextBox41"),
+                              $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadVerdesRebaja"),
+                              $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadVerdesMerma"),
+                              $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_cmbTipoMermaVerdes")
+                  );
+
+            });
+
+
+            
+
+
+
+
+
+
+            $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_TextBox1").on('input', function (e) {
+
+                jsRebajaRubro('Granos Quemados o de Avería',
+                              $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_TextBox1"),
+                              $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadQuemadosRebaja"),
+                              $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadQuemadosMerma"),
+                              $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_cmbTipoMermaQuemados")
                   );
 
             });
@@ -3522,86 +3581,7 @@
 
             $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_TextBox2").on('input', function (e) {
 
-                jsRebajaRubro("humedad",
-                              $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_TextBox2"),
-                              $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadTierraRebaja"),
-                              $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadTierraMerma"),
-                              $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_cmbTipoMermaTierra")
-                  );
-
-            });
-
-
-            $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_TextBox2").on('input', function (e) {
-
-                jsRebajaRubro("fumigacion",
-                              $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_TextBox2"),
-                              $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadTierraRebaja"),
-                              $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadTierraMerma"),
-                              $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_cmbTipoMermaTierra")
-                  );
-
-            });
-
-
-            $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_TextBox2").on('input', function (e) {
-
-                jsRebajaRubro("secada",
-                              $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_TextBox2"),
-                              $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadTierraRebaja"),
-                              $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadTierraMerma"),
-                              $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_cmbTipoMermaTierra")
-                  );
-
-            });
-
-
-
-
-            $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_TextBox2").on('input', function (e) {
-
-                jsRebajaRubro("volatil",
-                              $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_TextBox2"),
-                              $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadTierraRebaja"),
-                              $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadTierraMerma"),
-                              $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_cmbTipoMermaTierra")
-                  );
-
-            });
-
-
-
-
-            $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_TextBox2").on('input', function (e) {
-
-                jsRebajaRubro("nidera",
-                              $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_TextBox2"),
-                              $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadTierraRebaja"),
-                              $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadTierraMerma"),
-                              $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_cmbTipoMermaTierra")
-                  );
-
-            });
-
-
-
-            $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_TextBox2").on('input', function (e) {
-
-                jsRebajaRubro("convenida",
-                              $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_TextBox2"),
-                              $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadTierraRebaja"),
-                              $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadTierraMerma"),
-                              $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_cmbTipoMermaTierra")
-                  );
-
-            });
-
-
-
-
-            $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_TextBox2").on('input', function (e) {
-
-                jsRebajaRubro("tal cual",
+                jsRebajaRubro('Tierra' ,
                               $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_TextBox2"),
                               $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadTierraRebaja"),
                               $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadTierraMerma"),
@@ -3614,14 +3594,125 @@
 
 
 
+            $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_TextBox4").on('input', function (e) {
 
-            $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_TextBox2").on('input', function (e) {
+                jsRebajaRubro('Mermas por Zarandeo',
+                              $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_TextBox4"),
+                              $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadZarandeoRebaja"),
+                              $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadZarandeoMerma"),
+                              $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_cmbTipoMermaZarandeo")
+                  );
 
-                jsRebajaRubro("descuento",
-                              $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_TextBox2"),
-                              $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadTierraRebaja"),
-                              $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadTierraMerma"),
-                              $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_cmbTipoMermaTierra")
+            });
+
+
+
+
+            $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadHumedadResultado").on('input', function (e) {
+
+                jsRebajaRubro("Humedad",
+                                   $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadHumedadResultado"),
+                              $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadHumedadRebaja"),
+                              $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadHumedadMerma"),
+                              $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_cmbTipoMermaHumedad")
+                  );
+
+            });
+
+
+            $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadGastosFumigacionResultado").on('input', function (e) {
+
+                jsRebajaRubro( 'Gastos de fumigación',
+                              $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadGastosFumigacionResultado"),
+                              $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadGastosFumigacionRebaja"),
+                              $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadGastosFumigacionMerma"),
+                              $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_cmbTipoMermaFumigacion")
+                  );
+
+            });
+
+
+            $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadGastoDeSecada").on('input', function (e) {
+
+                jsRebajaRubro('Gastos de Secada',
+                              $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadGastoDeSecada"),
+                              $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadGastoDeSecadaRebaja"),
+                              $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadGastoDeSecadaMerma"),
+                              $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_cmbTipoMermaGastoDeSecada")
+                  );
+
+            });
+
+
+
+
+
+
+
+            $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadMermaVolatil").on('input', function (e) {
+
+                jsRebajaRubro( 'Merma Volatil',
+                              $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadMermaVolatil"),
+                              $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadMermaVolatilRebaja"),
+                              $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadMermaVolatilMerma"),
+                              $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_cmbTipoMermaVolatil")
+                  );
+
+            });
+
+
+
+
+            $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadFondoNidera").on('input', function (e) {
+
+                jsRebajaRubro('Fondo Nidera',
+                              $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadFondoNidera"),
+                              $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadFondoNideraRebaja"),
+                              $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadFondoNideraMerma"),
+                              $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_cmbTipoMermaFondoNidera")
+                  );
+
+            });
+
+
+          
+            $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadMermaConvenida").on('input', function (e) {
+
+                jsRebajaRubro('Merma Convenida',
+                              $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadMermaConvenida"),
+                              $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadMermaConvenidaRebaja"),
+                              $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadMermaConvenidaMerma"),
+                              $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_cmbTipoMermaConvenida")
+                  );
+
+            });
+
+
+
+
+            $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadTalCualVicentin").on('input', function (e) {
+
+                jsRebajaRubro('Tal Cual Vicentin',
+                              $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadTalCualVicentin"),
+                              $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadTalCualVicentinRebaja"),
+                              $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadTalCualVicentinMerma"),
+                              $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_cmbTipoMermaTalCualVicentin")
+                  );
+
+            });
+
+
+
+
+
+
+            $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadDescuentoFinal").on('input', function (e) {
+
+                jsRebajaRubro('Descuento Final',
+                              $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadDescuentoFinal"),
+                              $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadDescuentoFinalRebaja"),
+                              $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadDescuentoFinalMerma"),
+                              $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_cmbTipoMermaDescuentoFinal")
                   );
 
             });
