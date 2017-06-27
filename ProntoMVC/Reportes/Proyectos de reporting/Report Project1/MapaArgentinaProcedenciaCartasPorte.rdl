@@ -22,6 +22,15 @@
           <QueryParameter Name="@FechaHasta">
             <Value>=Parameters!FechaHasta.Value</Value>
           </QueryParameter>
+          <QueryParameter Name="@Producto">
+            <Value>=Parameters!Producto.Value</Value>
+          </QueryParameter>
+          <QueryParameter Name="@Cliente">
+            <Value>=Parameters!Cliente.Value</Value>
+          </QueryParameter>
+          <QueryParameter Name="@Puerto">
+            <Value>=Parameters!Puerto.Value</Value>
+          </QueryParameter>
           <QueryParameter Name="@TonsDesde">
             <Value>=Parameters!TonsDesde.Value</Value>
           </QueryParameter>
@@ -29,80 +38,7 @@
             <Value>=Parameters!TonsHasta.Value</Value>
           </QueryParameter>
         </QueryParameters>
-        <CommandText>select
-*
-from
-(
-select
- FLOOR( sum(netoproc) /1000) as kilos, 
-LOCORI.Nombre as localidad, 
-isnull(PROVORI.Nombre,'BUENOS AIRES' ) as provincia,
-Clientes.RazonSocial
-from 
- dbo.fSQL_GetDataTableFiltradoYPaginado  
-				(  
-
- NULL, 
-					6, 
-					0,
-					NULL, 
-					-1,
-					 
--1,-1,
--1,
--1,
--1,
-
-					-1, 
-					NULL, 
-					0,
-					@Modo,
-					@FechaDesde,
-
-					@FechaHasta,
-					NULL, 
-					NULL,
-					 'FALSE',
-					NULL, 
-					NULL, 
-
-					NULL, 
-					NULL, 
-					NULL,
-					NULL, 
-					NULL
-
-					)
-    
- as CDP
-
-
-
-
-RIGHT OUTER JOIN Localidades LOCORI ON CDP.Procedencia = LOCORI.IdLocalidad          
-LEFT OUTER JOIN Provincias PROVORI ON LOCORI.IdProvincia = PROVORI.IdProvincia           
-inner JOIN Facturas ON CDP.idfacturaimputada = Facturas.IdFactura
-inner  JOIN Clientes ON Facturas.IdCliente= Clientes.IdCliente
-where   1=1
-	--procedencia is not null
-	--and netoproc &gt; 0
-	
-	--and (producto like @producto or isnull(@producto,'')=''  )
-	--and (titulardesc like @cliente or
-	--    rcomercialdesc like @cliente  or
-	--    intermediariodesc like @cliente  or
-	--    destinatariodesc like @cliente 
-	--	or  isnull(@cliente,'')='' )
-	--and (destinodesc like @puerto or  isnull(@puerto,'')='')
-
-
-group by LOCORI.Nombre,PROVORI.Nombre,Clientes.RazonSocial,CDP.idClienteAFacturarle
-
-) as C
-where kilos &gt;= isnull(@TonsDesde,0)
-and kilos &lt;= isnull(@TonsHasta,999999999)
-
-order by kilos desc</CommandText>
+        <CommandText>exec wCartasDePorte_tx_MapaEstrategico  @Modo, @FechaDesde,@FechaHasta,@Producto, @Puerto, @Cliente , @TonsDesde, @TonsHasta</CommandText>
         <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
       </Query>
       <Fields>
@@ -121,6 +57,18 @@ order by kilos desc</CommandText>
         <Field Name="RazonSocial">
           <DataField>RazonSocial</DataField>
           <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Procedencia">
+          <DataField>Procedencia</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="lat">
+          <DataField>lat</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="lng">
+          <DataField>lng</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
         </Field>
       </Fields>
     </DataSet>
@@ -311,7 +259,6 @@ select idlocalidad, nombre from localidades</CommandText>
                             <PaddingBottom>2pt</PaddingBottom>
                           </Style>
                         </Textbox>
-                        <rd:Selected>true</rd:Selected>
                       </CellContents>
                     </TablixCell>
                   </TablixCells>

@@ -9990,6 +9990,16 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.wGrillaPersistencia' no tiene def
     <Parameter Name="fechadesdeAnterior" Type="datetime" Mode="In" />
     <Parameter Name="fechahastaAnterior" Type="datetime" Mode="In" />
   </Function>
+  <Function Name="wCartasDePorte_TX_MapaEstrategico" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Modo" Type="varchar" Mode="In" />
+    <Parameter Name="FechaDesde" Type="datetime" Mode="In" />
+    <Parameter Name="FechaHasta" Type="datetime" Mode="In" />
+    <Parameter Name="idArticulo" Type="int" Mode="In" />
+    <Parameter Name="idProcedencia" Type="int" Mode="In" />
+    <Parameter Name="idClienteFacturado" Type="int" Mode="In" />
+    <Parameter Name="Tonsdesde" Type="int" Mode="In" />
+    <Parameter Name="TonsHasta" Type="int" Mode="In" />
+  </Function>
   <Function Name="wTarifaWilliams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="money">
     <Parameter Name="idCliente" Type="int" Mode="In" />
     <Parameter Name="IdArticulo" Type="int" Mode="In" />

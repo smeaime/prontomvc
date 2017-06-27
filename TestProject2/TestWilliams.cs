@@ -864,17 +864,49 @@ namespace ProntoMVC.Tests
 
 
 
-        public string NormaCalidadBatchUpdate(CartaPorteNormasCalidad o)
+
+
+
+        [TestMethod]
+        public void ServicioWebDescargas_41486_bld()
         {
 
+            ////Trust all certificates
+            //System.Net.ServicePointManager.ServerCertificateValidationCallback = delegate(object sender, X509Certificate certificate, X509Chain chain, SslPolicyErrors sslPolicyErrors) { return true; };
 
-            return "";
+            //var cerealnet = new WS_CartasDePorteClient();
 
+            string usuario = "Mariano"; //"fyo";
+            string clave = "pirulo!"; // "76075";
+            string cuit = "30703605105";
+
+            // var respEntrega = cerealnet.obtenerDescargas(usuario, clave, cuit, "2016-10-01", "2016-10-25");
+            var respEntrega = CartaDePorteManager.BajarListadoDeCartaPorte_CerealNet_DLL_v3(usuario, clave, cuit,
+                                            new DateTime(2016, 9, 1),
+                                            new DateTime(2017, 1, 1), CartaDePorteManager.enumCDPestado.Posicion,
+                                            SC, DirApp, scbdlmasterappconfig);
+
+
+            foreach (var desc in respEntrega.descargas)
+            {
+                Console.WriteLine(string.Format("CP {0}", desc.cartaporte));
+
+                if (desc.listaAnalisis != null && desc.listaAnalisis.Length > 0)
+                {
+                    foreach (CerealNet.WSCartasDePorte.analisis anal in desc.listaAnalisis)
+                    {
+                        Console.WriteLine(string.Format("\tRubro: {0} - %Analisis: {1} - %Merma: {2} - KgsMerma: {3}", anal.rubro.Trim(), anal.porcentajeAnalisis, anal.porcentajeMerma, anal.kilosMermas));
+                    }
+                }
+            }
+            //Console.ReadKey();
         }
 
 
 
 
+
+ 
 
         [TestMethod]
         public void RangosResultadoCalidadesCalculoRebajaYMerma_37774_4()
@@ -921,8 +953,9 @@ namespace ProntoMVC.Tests
         {
 
             var o = new CartaPorteNormasCalidad();
+            var s = new ServicioCartaPorte.servi();
 
-            NormaCalidadBatchUpdate(o);
+            s.NormaCalidadBatchUpdate(SC,o);
         }
 
 
