@@ -121,7 +121,7 @@ wCartasDePorte_TX_MapaEstrategico
 					
 					NULL, 
 					NULL, 
-					NULL, 
+					2303, 
 					
 					NULL, NULL
 go

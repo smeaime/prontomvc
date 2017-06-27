@@ -817,5 +817,42 @@ namespace ProntoMVC.Data.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.CreateQuery<fSQL_GetDataTableFiltradoYPaginado_Result3>("[DemoProntoEntities].[fSQL_GetDataTableFiltradoYPaginado](@startRowIndex, @maximumRows, @estado, @QueContenga, @idVendedor, @idCorredor, @idDestinatario, @idIntermediario, @idRemComercial, @idArticulo, @idProcedencia, @idDestino, @AplicarANDuORalFiltro, @ModoExportacion, @fechadesde, @fechahasta, @puntoventa, @IdAcopio, @bTraerDuplicados, @Contrato, @QueContenga2, @idClienteAuxiliarint, @AgrupadorDeTandaPeriodos, @Vagon, @Patente, @optCamionVagon)", startRowIndexParameter, maximumRowsParameter, estadoParameter, queContengaParameter, idVendedorParameter, idCorredorParameter, idDestinatarioParameter, idIntermediarioParameter, idRemComercialParameter, idArticuloParameter, idProcedenciaParameter, idDestinoParameter, aplicarANDuORalFiltroParameter, modoExportacionParameter, fechadesdeParameter, fechahastaParameter, puntoventaParameter, idAcopioParameter, bTraerDuplicadosParameter, contratoParameter, queContenga2Parameter, idClienteAuxiliarintParameter, agrupadorDeTandaPeriodosParameter, vagonParameter, patenteParameter, optCamionVagonParameter);
         }
+    
+        public virtual ObjectResult<wCartasDePorte_TX_MapaEstrategico_Result> wCartasDePorte_TX_MapaEstrategico(string modo, Nullable<System.DateTime> fechaDesde, Nullable<System.DateTime> fechaHasta, Nullable<int> idArticulo, Nullable<int> idProcedencia, Nullable<int> idClienteFacturado, Nullable<int> tonsdesde, Nullable<int> tonsHasta)
+        {
+            var modoParameter = modo != null ?
+                new ObjectParameter("Modo", modo) :
+                new ObjectParameter("Modo", typeof(string));
+    
+            var fechaDesdeParameter = fechaDesde.HasValue ?
+                new ObjectParameter("FechaDesde", fechaDesde) :
+                new ObjectParameter("FechaDesde", typeof(System.DateTime));
+    
+            var fechaHastaParameter = fechaHasta.HasValue ?
+                new ObjectParameter("FechaHasta", fechaHasta) :
+                new ObjectParameter("FechaHasta", typeof(System.DateTime));
+    
+            var idArticuloParameter = idArticulo.HasValue ?
+                new ObjectParameter("idArticulo", idArticulo) :
+                new ObjectParameter("idArticulo", typeof(int));
+    
+            var idProcedenciaParameter = idProcedencia.HasValue ?
+                new ObjectParameter("idProcedencia", idProcedencia) :
+                new ObjectParameter("idProcedencia", typeof(int));
+    
+            var idClienteFacturadoParameter = idClienteFacturado.HasValue ?
+                new ObjectParameter("idClienteFacturado", idClienteFacturado) :
+                new ObjectParameter("idClienteFacturado", typeof(int));
+    
+            var tonsdesdeParameter = tonsdesde.HasValue ?
+                new ObjectParameter("Tonsdesde", tonsdesde) :
+                new ObjectParameter("Tonsdesde", typeof(int));
+    
+            var tonsHastaParameter = tonsHasta.HasValue ?
+                new ObjectParameter("TonsHasta", tonsHasta) :
+                new ObjectParameter("TonsHasta", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<wCartasDePorte_TX_MapaEstrategico_Result>("wCartasDePorte_TX_MapaEstrategico", modoParameter, fechaDesdeParameter, fechaHastaParameter, idArticuloParameter, idProcedenciaParameter, idClienteFacturadoParameter, tonsdesdeParameter, tonsHastaParameter);
+        }
     }
 }

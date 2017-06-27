@@ -1754,6 +1754,16 @@
       <End Role="CartaPorteNormasCalidad" EntitySet="CartaPorteNormasCalidads" />
     </AssociationSet>
     <EntitySet Name="ColaCorreosComprobantes" EntityType="DemoProntoModel.ColaCorreosComprobante" />
+    <FunctionImport Name="wCartasDePorte_TX_MapaEstrategico" ReturnType="Collection(DemoProntoModel.wCartasDePorte_TX_MapaEstrategico_Result)">
+      <Parameter Name="Modo" Mode="In" Type="String" />
+      <Parameter Name="FechaDesde" Mode="In" Type="DateTime" />
+      <Parameter Name="FechaHasta" Mode="In" Type="DateTime" />
+      <Parameter Name="idArticulo" Mode="In" Type="Int32" />
+      <Parameter Name="idProcedencia" Mode="In" Type="Int32" />
+      <Parameter Name="idClienteFacturado" Mode="In" Type="Int32" />
+      <Parameter Name="Tonsdesde" Mode="In" Type="Int32" />
+      <Parameter Name="TonsHasta" Mode="In" Type="Int32" />
+    </FunctionImport>
   </EntityContainer>
   <EntityType Name="Articulo">
     <Key>
@@ -14420,4 +14430,13 @@
     <Property Name="IdTipoComprobante" Type="Int32" Nullable="false" />
     <Property Name="IdComprobante" Type="Int32" Nullable="false" />
   </EntityType>
+  <ComplexType Name="wCartasDePorte_TX_MapaEstrategico_Result">
+    <Property Type="Decimal" Name="kilos" Nullable="true" Precision="38" Scale="0" />
+    <Property Type="String" Name="localidad" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="provincia" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="RazonSocial" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="Procedencia" Nullable="true" MaxLength="30" />
+    <Property Type="Decimal" Name="lat" Nullable="true" Precision="15" Scale="12" />
+    <Property Type="Decimal" Name="lng" Nullable="true" Precision="15" Scale="12" />
+  </ComplexType>
 </Schema>

@@ -2722,6 +2722,110 @@ namespace CerealNet.WSCartasDePorte
 
 
 
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1067.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    //[System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://wsPosicion/")]
+    public partial class cartaPorte_v3
+    {
+
+        public int brutodest;
+        //public bool brutodestSpecified;
+        public string CPoriginal;
+        public string calidad;
+        public long cartaporte;
+        public int codmerca;
+        //public bool codmercaSpecified;
+        public int codonccalocalidadpuerto;
+        //public bool codonccalocalidadpuertoSpecified;
+        public int codonccalocalproc;
+        //public bool codonccalocalprocSpecified;
+        public int codonccaprovincialproc;
+        //public bool codonccaprovincialprocSpecified;
+        public int codonccaprovinciapuerto;
+        //public bool codonccaprovinciapuertoSpecified;
+        public int codonccapuerto;
+        //public bool codonccapuertoSpecified;
+        public string codpostalprocedencia;
+        public string contrato;
+        public string cosecha;
+        public string cuitcorredor;
+        public string cuitentregador;
+        public string cuitexport;
+        public string cuitinter;
+        public string cuitpuerto;
+        public string cuitremic;
+        public string cuitremitente;
+        public string cuittitu;
+        public string entregador;
+        public System.DateTime fechadescarga;
+        //public bool fechadescargaSpecified;
+        public System.DateTime fechaposicion;
+        //public bool fechaposicionSpecified;
+        public string horadescarga;
+        public string intermediario;
+        public analisis[] listaAnalisis;
+        public string localidaddestino;
+        public string mercaderia;
+        public int netodest;
+        //public bool netodestSpecified;
+        public int netoproc;
+        //public bool netoprocSpecified;
+        public string nomExport;
+        public string nomRemic;
+        public string nomcorre;
+        public string nroRecibo;
+        public string observaciones;
+        public string observado;
+        public string patente;
+        public string procedencia;
+        public string puerto;
+        public string remitente;
+        public int taradest;
+        //public bool taradestSpecified;
+        public string titular;
+        public string usuario;
+        public int vagon;
+
+
+        // version 2
+        public long CEE;
+        public System.DateTime fechaEmisionCarga;
+        public System.DateTime fechavencimiento;
+        public int CTG;
+        public string CupoTurno;
+        public System.DateTime HoraArribo;
+        public int brutoproc;
+        public int taraproc;
+        public int Humedad;
+        public int MermaHumedad;
+        public int OtrasMermas;
+        public int NetoFinal;
+        public string ClienteObserv;
+        public string CorredorObs;
+        public string cuitchofer;
+        public string Chofer;
+        public string cuittransportista;
+        public string transportista;
+        public string acoplado;
+        public int kmarecorrer;
+        public decimal tarifa;
+        public string Establecimiento;
+        public int IdPosicionEstado;
+        public string PosicionEstado;
+
+
+
+        public string SojaSustentableCodCondicion;
+        public string SojaSustentableCondicion;
+        public string SojaSustentableNroEstablecimientoDeProduccion;
+
+        
+    }
+
+
 
 
     /// <remarks/>
@@ -3946,6 +4050,85 @@ namespace CerealNet.WSCartasDePorte
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute("descargas", Form = System.Xml.Schema.XmlSchemaForm.Unqualified, IsNullable = true, Order = 1)]
         public  cartaPorte_v2_00[] descargas
+        {
+            get
+            {
+                return this.descargasField;
+            }
+            set
+            {
+                this.descargasField = value;
+                this.RaisePropertyChanged("descargas");
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 2)]
+        public string descripcion
+        {
+            get
+            {
+                return this.descripcionField;
+            }
+            set
+            {
+                this.descripcionField = value;
+                this.RaisePropertyChanged("descripcion");
+            }
+        }
+
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+
+        protected void RaisePropertyChanged(string propertyName)
+        {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null))
+            {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+
+
+
+
+
+
+
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1067.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    //[System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://wsPosicion/")]
+    public partial class respuestaEntrega_v3 : object, System.ComponentModel.INotifyPropertyChanged
+    {
+
+        private string codigoResultadoField;
+
+        private cartaPorte_v3[] descargasField;
+
+        private string descripcionField;
+
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 0)]
+        public string codigoResultado
+        {
+            get
+            {
+                return this.codigoResultadoField;
+            }
+            set
+            {
+                this.codigoResultadoField = value;
+                this.RaisePropertyChanged("codigoResultado");
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("descargas", Form = System.Xml.Schema.XmlSchemaForm.Unqualified, IsNullable = true, Order = 1)]
+        public cartaPorte_v3[] descargas
         {
             get
             {
