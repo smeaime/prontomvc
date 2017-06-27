@@ -427,8 +427,9 @@ Namespace ProntoMVC.Reportes
 
 
             If Diagnostics.Debugger.IsAttached Then
-                SC = Encriptar("Data Source=serversql3\TESTING;Initial catalog=Pronto;User ID=sa; Password=.SistemaPronto.;Connect Timeout=500")
-                'estoy teniendo problemas al usar el reporteador desde un servidor distinto que el que tiene la base
+                'Stop
+                'SC = Encriptar("Data Source=serversql3\TESTING;Initial catalog=Pronto;User ID=sa; Password=.SistemaPronto.;Connect Timeout=500")
+                'estoy teniendo problemas al usar el reporteador desde un servidor distinto del que tiene la base
             End If
 
 

@@ -164,3 +164,178 @@ Log Entry :
 06/27/2017 09:30:27
 Error in: http://localhost:58911/ProntoWeb/CartaDePorte.aspx?Id=2969230. Error Message:PV 2 0
 __________________________
+
+Log Entry : 
+06/27/2017 10:30:18
+Error in: http://localhost:58911/ProntoWeb/Principal.aspx. Error Message:Mariano esta logueado, pero lo redirijo al login porque faltan los datos de session. No deberia mejor mandarlo a SeleccionarEmpresa? Ademas, no hago el LogOut y le queda el cookie!!!
+__________________________
+
+Log Entry : 
+06/27/2017 10:30:20
+Error in: http://localhost:58911/ProntoWeb/CartasDePortes.aspx?tipo=Todas. Error Message:Mariano
+__________________________
+
+Log Entry : 
+06/27/2017 10:36:46
+Error in: http://localhost:58911/ProntoWeb/MapaComercialGoogleMaps.aspx. Error Message:Vamos bien?
+__________________________
+
+Log Entry : 
+06/27/2017 10:36:46
+Error in: http://localhost:58911/ProntoWeb/MapaComercialGoogleMaps.aspx. Error Message:http://bdlconsultores.sytes.net:10080/ReportServer - administrador - .xza2190lkm. - 
+__________________________
+
+Log Entry : 
+06/27/2017 10:36:47
+Error in: http://localhost:58911/ProntoWeb/MapaComercialGoogleMaps.aspx. Error Message:parece
+__________________________
+
+Log Entry : 
+06/27/2017 10:36:48
+Error in: http://localhost:58911/ProntoWeb/MapaComercialGoogleMaps.aspx. Error Message:Cli 3
+__________________________
+
+Log Entry : 
+06/27/2017 10:40:36
+Error in: http://localhost:58911/ProntoWeb/CartasDePortes.aspx?tipo=Todas. Error Message:Mariano
+__________________________
+
+Log Entry : 
+06/27/2017 10:40:50
+Error in: http://localhost:58911/ProntoWeb/MapaComercialGoogleMaps.aspx. Error Message:Vamos bien?
+__________________________
+
+Log Entry : 
+06/27/2017 10:40:50
+Error in: http://localhost:58911/ProntoWeb/MapaComercialGoogleMaps.aspx. Error Message:http://bdlconsultores.sytes.net:10080/ReportServer - administrador - .xza2190lkm. - 
+__________________________
+
+Log Entry : 
+06/27/2017 10:40:50
+Error in: http://localhost:58911/ProntoWeb/MapaComercialGoogleMaps.aspx. Error Message:parece
+__________________________
+
+Log Entry : 
+06/27/2017 10:40:50
+Error in: http://localhost:58911/ProntoWeb/MapaComercialGoogleMaps.aspx. Error Message:Cli 3
+__________________________
+
+Log Entry : 
+06/27/2017 10:42:19
+Error in: http://localhost:58911/ProntoWeb/MapaComercialGoogleMaps.aspx. Error Message:Vamos bien?
+__________________________
+
+Log Entry : 
+06/27/2017 10:42:19
+Error in: http://localhost:58911/ProntoWeb/MapaComercialGoogleMaps.aspx. Error Message:http://bdlconsultores.sytes.net:10080/ReportServer - administrador - .xza2190lkm. - 
+__________________________
+
+Log Entry : 
+06/27/2017 10:42:20
+Error in: http://localhost:58911/ProntoWeb/MapaComercialGoogleMaps.aspx. Error Message:parece
+__________________________
+
+Log Entry : 
+06/27/2017 10:42:20
+Error in: http://localhost:58911/ProntoWeb/MapaComercialGoogleMaps.aspx. Error Message:Cli 3
+__________________________
+
+Log Entry : 
+06/27/2017 10:42:55
+Error in: http://localhost:58911/ProntoWeb/MapaComercialGoogleMaps.aspx. Error Message:Vamos bien?
+__________________________
+
+Log Entry : 
+06/27/2017 10:42:55
+Error in: http://localhost:58911/ProntoWeb/MapaComercialGoogleMaps.aspx. Error Message:http://bdlconsultores.sytes.net:10080/ReportServer - administrador - .xza2190lkm. - 
+__________________________
+
+Log Entry : 
+06/27/2017 10:42:55
+Error in: http://localhost:58911/ProntoWeb/MapaComercialGoogleMaps.aspx. Error Message:parece
+__________________________
+
+Log Entry : 
+06/27/2017 10:42:56
+Error in: http://localhost:58911/ProntoWeb/MapaComercialGoogleMaps.aspx. Error Message:Cli 3
+__________________________
+
+Log Entry : 
+06/27/2017 10:44:12
+Error in: http://localhost:58911/ProntoWeb/MapaComercialGoogleMaps.aspx. Error Message:Vamos bien?
+__________________________
+
+Log Entry : 
+06/27/2017 10:44:12
+Error in: http://localhost:58911/ProntoWeb/MapaComercialGoogleMaps.aspx. Error Message:http://bdlconsultores.sytes.net:10080/ReportServer - administrador - .xza2190lkm. - 
+__________________________
+
+Log Entry : 
+06/27/2017 10:44:12
+Error in: http://localhost:58911/ProntoWeb/MapaComercialGoogleMaps.aspx. Error Message:parece
+__________________________
+
+Log Entry : 
+06/27/2017 10:44:12
+Error in: http://localhost:58911/ProntoWeb/MapaComercialGoogleMaps.aspx. Error Message:Cli 3
+__________________________
+
+Log Entry : 
+06/27/2017 10:49:14
+Error in: http://localhost:58911/ProntoWeb/MapaComercialGoogleMaps.aspx. Error Message:Vamos bien?
+__________________________
+
+Log Entry : 
+06/27/2017 10:49:14
+Error in: http://localhost:58911/ProntoWeb/MapaComercialGoogleMaps.aspx. Error Message:http://bdlconsultores.sytes.net:10080/ReportServer - administrador - .xza2190lkm. - 
+__________________________
+
+Log Entry : 
+06/27/2017 10:49:14
+Error in: http://localhost:58911/ProntoWeb/MapaComercialGoogleMaps.aspx. Error Message:parece
+__________________________
+
+Log Entry : 
+06/27/2017 10:49:15
+Error in: http://localhost:58911/ProntoWeb/MapaComercialGoogleMaps.aspx. Error Message:Cli 3
+__________________________
+
+Log Entry : 
+06/27/2017 10:52:53
+Error in: http://localhost:58911/ProntoWeb/MapaComercialGoogleMaps.aspx. Error Message:Vamos bien?
+__________________________
+
+Log Entry : 
+06/27/2017 10:52:53
+Error in: http://localhost:58911/ProntoWeb/MapaComercialGoogleMaps.aspx. Error Message:http://bdlconsultores.sytes.net:10080/ReportServer - administrador - .xza2190lkm. - 
+__________________________
+
+Log Entry : 
+06/27/2017 10:52:54
+Error in: http://localhost:58911/ProntoWeb/MapaComercialGoogleMaps.aspx. Error Message:parece
+__________________________
+
+Log Entry : 
+06/27/2017 10:52:54
+Error in: http://localhost:58911/ProntoWeb/MapaComercialGoogleMaps.aspx. Error Message:Cli 3
+__________________________
+
+Log Entry : 
+06/27/2017 10:55:30
+Error in: http://localhost:58911/ProntoWeb/MapaComercialGoogleMaps.aspx. Error Message:Vamos bien?
+__________________________
+
+Log Entry : 
+06/27/2017 10:55:30
+Error in: http://localhost:58911/ProntoWeb/MapaComercialGoogleMaps.aspx. Error Message:http://bdlconsultores.sytes.net:10080/ReportServer - administrador - .xza2190lkm. - 
+__________________________
+
+Log Entry : 
+06/27/2017 10:55:31
+Error in: http://localhost:58911/ProntoWeb/MapaComercialGoogleMaps.aspx. Error Message:parece
+__________________________
+
+Log Entry : 
+06/27/2017 10:55:31
+Error in: http://localhost:58911/ProntoWeb/MapaComercialGoogleMaps.aspx. Error Message:Cli 3
+__________________________
