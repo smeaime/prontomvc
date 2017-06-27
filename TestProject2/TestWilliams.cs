@@ -986,7 +986,31 @@ namespace ProntoMVC.Tests
                 IdArticulo = 1
             });
 
+            db.CartaPorteNormasCalidads.Add(new CartaPorteNormasCalidad
+            {
+                IdCartaPorteRubroCalidad = 1,
+                ResultadoDesde = 1,
+                ResultadoHasta = 3,
+                RebajaIncremento = 6,
+                IdArticulo = null,
+                IdDestino= 1
+            });
 
+
+
+
+            var rubs = db.CartaPorteRubrosCalidads.Select(x => x.IdCartaPorteRubroCalidad).ToList();
+
+            foreach (var r in rubs)
+            {
+                db.CartaPorteNormasCalidads.Add(new CartaPorteNormasCalidad
+                {
+                    IdCartaPorteRubroCalidad = r,
+                    ResultadoDesde = 1,
+                    ResultadoHasta = 3,
+                    RebajaIncremento = 1
+                });
+            }
 
             //TIERRA 0,5 0,5
             //Para valores
@@ -1010,6 +1034,7 @@ namespace ProntoMVC.Tests
 
             var ss1 = s.RebajaCalculo(SC, 1, 2.5M, -1, -1);
             var ss2 = s.RebajaCalculo(SC, 1, 2.5M, 01, -1);
+            var ss3 = s.RebajaCalculo(SC, 1, 2.5M, -1, 1);
 
 
         }
