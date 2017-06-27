@@ -1109,25 +1109,39 @@ FCESupport\FCESupportImpl.h, 42.
                 ClassFlexicapture.Log(idthread + "busco pegatinas");
 
 
-                var lista =new List<string>() ; // = ClassFlexicapture.ExtraerListaDeCorreosQueNoHanSidoProcesados(sc,5);
+                DemoProntoEntities db = new DemoProntoEntities(SC);
+                var q = db.ColaCorreosComprobantes.ToList();
+
+                //var lista =new List<string>() ; // = ClassFlexicapture.ExtraerListaDeCorreosQueNoHanSidoProcesados(sc,5);
 
 
                 string log = "";
                 //hay que pasar el formato como parametro 
 
-                foreach (string f in lista)
+                foreach (var f in q)
                 {
                     int m_IdMaestro = 0;
 
-                    ClassFlexicapture.MarcarArchivoComoProcesandose(f);
 
 
-                    barras.EnviarFacturaElectronicaEMail(new List<int> { 89323, 89324 }, SC, false, "mscalella911@gmail.com");
-                    
-                  
+                    //busco el proveedor del f.IdComprobante
+                    // depues busco el cuit entre los usuarios de la web para mandarselo a ese mail
+                    string mail = "sdfdaf";
 
 
+                    //ClassFlexicapture.MarcarArchivoComoProcesandose(f);
+
+
+                    barras.EnviarFacturaElectronicaEMail(new List<int> { f.IdComprobante }, SC, false, mail);
+
+
+
+                    db.ColaCorreosComprobantes.Remove(f);
+                    db.SaveChanges();
                 }
+
+                
+
 
 
             }
