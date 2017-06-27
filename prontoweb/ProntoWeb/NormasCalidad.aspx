@@ -585,14 +585,14 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
             function EliminarFila(gridId) {
                 $grid = $('#Lista');
                 var dataFromTheRow = $grid.jqGrid('getRowData', gridId);
-                var idprincipal = dataFromTheRow[' IdCartasDePorteControlDescarga'];
+                var idprincipal = dataFromTheRow[' IdCartaPorteNormaCalidad'];
                 if (idprincipal <= 0) {
                     $grid.jqGrid('delRowData', gridId);
                 } else {
                     $.ajax({
                         type: 'POST',
                         contentType: 'application/json; charset=utf-8',
-                        url: "WebServiceClientes.asmx/DestinoDelete",
+                        url: "WebServiceClientes.asmx/NormaCalidadDelete",
                         dataType: 'json',
                         data: JSON.stringify({ id: idprincipal }),
                         success: function (result) {
@@ -645,8 +645,10 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                 var i, Id;
                 for (i = selectedIds.length - 1; i >= 0; i--) {
                     Id = selectedIds[i];
-                    var se = "<input style='height:22px;width:20px;' type='button' value='B' onclick=\"EliminarFila('" + Id + "');\"  />";
-                    grid.jqGrid('setRowData', Id, { act: se });
+                    EliminarFila(Id)
+
+                    //var se = "<input style='height:22px;width:20px;' type='button' value='B' onclick=\"EliminarFila('" + Id + "');\"  />";
+                    //grid.jqGrid('setRowData', Id, { act: se });
                     //grid.jqGrid('delRowData', selectedIds[i]);
                 }
             };
@@ -1394,7 +1396,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                     sortname: 'IdCartaPorteNormaCalidad',
                     sortorder: 'desc',
                     viewrecords: true,
-                    //multiselect: true,
+                    multiselect: true,
                     shrinkToFit: true,
                     width: 'auto',
                     height: $(window).height() - 300, // '100%'
