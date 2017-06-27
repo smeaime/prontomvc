@@ -339,3 +339,43 @@ Log Entry :
 06/27/2017 10:55:31
 Error in: http://localhost:58911/ProntoWeb/MapaComercialGoogleMaps.aspx. Error Message:Cli 3
 __________________________
+
+Log Entry : 
+06/27/2017 14:45:14
+Error in: http://localhost:58911/. Error Message:System.IO.FileLoadException
+No se puede cargar el archivo o ensamblado 'MiniProfiler, Version=3.1.1.140, Culture=neutral, PublicKeyToken=b44f9351044011a3' ni una de sus dependencias. La definición del manifiesto del ensamblado no coincide con la referencia al ensamblado. (Excepción de HRESULT: 0x80131040)
+   en ASP.global_asax.Application_BeginRequest(Object sender, EventArgs e)
+   en System.Web.HttpApplication.SyncEventExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   en System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+App_global.asax
+__________________________
+
+Log Entry : 
+06/27/2017 14:50:32
+Error in: http://localhost:58911/ProntoWeb/Principal.aspx. Error Message:Mariano esta logueado, pero lo redirijo al login porque faltan los datos de session. No deberia mejor mandarlo a SeleccionarEmpresa? Ademas, no hago el LogOut y le queda el cookie!!!
+__________________________
+
+Log Entry : 
+06/27/2017 14:50:33
+Error in: http://localhost:58911/ProntoWeb/CartasDePortes.aspx?tipo=Todas. Error Message:Mariano
+__________________________
+
+Log Entry : 
+06/27/2017 14:51:14
+Error in: http://localhost:58911/ProntoWeb/MapaComercialGoogleMaps.aspx. Error Message:Vamos bien?
+__________________________
+
+Log Entry : 
+06/27/2017 14:51:14
+Error in: http://localhost:58911/ProntoWeb/MapaComercialGoogleMaps.aspx. Error Message:http://bdlconsultores.sytes.net:10080/ReportServer - administrador - .xza2190lkm. - 
+__________________________
+
+Log Entry : 
+06/27/2017 14:51:14
+Error in: http://localhost:58911/ProntoWeb/MapaComercialGoogleMaps.aspx. Error Message:parece
+__________________________
+
+Log Entry : 
+06/27/2017 14:51:15
+Error in: http://localhost:58911/ProntoWeb/MapaComercialGoogleMaps.aspx. Error Message:Cli 3
+__________________________
