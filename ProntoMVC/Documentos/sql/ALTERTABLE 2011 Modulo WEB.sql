@@ -2068,3 +2068,9 @@ select * from tiposcomprobante
 
 
 
+CREATE TABLE [dbo].[ColaCorreosComprobantes] (
+    [IdTipoComprobante] INT NOT NULL,
+    [IdComprobante]     INT NOT NULL
+);
+
+
