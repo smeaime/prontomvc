@@ -2059,12 +2059,8 @@ INSERT  INTO CartaPorteRubrosCalidad ( Descripcion)  VALUES  (  'Merma Convenida
 INSERT  INTO CartaPorteRubrosCalidad ( Descripcion)  VALUES  (  'Tal Cual Vicentin' ) 
 INSERT  INTO CartaPorteRubrosCalidad ( Descripcion)  VALUES  (  'Descuento Final' ) 
 	
-select * from CartaPorteRubrosCalidad
-
-
-
-
-select * from tiposcomprobante
+--select * from CartaPorteRubrosCalidad
+--select * from tiposcomprobante
 
 
 
@@ -2072,9 +2068,19 @@ CREATE TABLE [dbo].[ColaCorreosComprobantes] (
     [IdTipoComprobante] INT NOT NULL,
     [IdComprobante]     INT NOT NULL
 );
+go
+
+--select idcartadeporte, numerocartadeporte,idfacturaimputada, fechaingreso, fechadescarga from cartasdeporte where iddetallefactura=1 order by idcartadeporte desc
 
 
+alter table [ColaCorreosComprobantes] add
+	IdColaCorreoComprobante int IDENTITY (1, 1) PRIMARY KEY
+go
 
 
-select idcartadeporte, numerocartadeporte,idfacturaimputada, fechaingreso, fechadescarga from cartasdeporte where iddetallefactura=1 order by idcartadeporte desc
+INSERT  INTO [ColaCorreosComprobantes] ( IdTipoComprobante,IdComprobante)  VALUES  (  17,10 ) 
+INSERT  INTO [ColaCorreosComprobantes] ( IdTipoComprobante,IdComprobante)  VALUES  (  15,9 ) 
+INSERT  INTO [ColaCorreosComprobantes] ( IdTipoComprobante,IdComprobante)  VALUES  (  17,11 ) 
 
+
+select * from bdlmaster.dbo. 
