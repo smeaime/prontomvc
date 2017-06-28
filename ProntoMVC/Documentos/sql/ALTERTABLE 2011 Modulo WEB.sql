@@ -2074,3 +2074,7 @@ CREATE TABLE [dbo].[ColaCorreosComprobantes] (
 );
 
 
+
+
+select idcartadeporte, numerocartadeporte,idfacturaimputada, fechaingreso, fechadescarga from cartasdeporte where iddetallefactura=1 order by idcartadeporte desc
+

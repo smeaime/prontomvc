@@ -52,9 +52,9 @@ Partial Class CartaDePorteAnalisisTarifa
             'LogicaFacturacion.CorrectorSubnumeroFacturacion(HFSC.Value, ms)
 
 
-            If Not Debugger.IsAttached Then
-                EntidadManager.ExecDinamico(HFSC.Value, "RefrescarCartasPorteDetalleFacturas", 300)
-            End If
+            'If Not Debugger.IsAttached Then
+            '    EntidadManager.ExecDinamico(HFSC.Value, "RefrescarCartasPorteDetalleFacturas", 300)
+            'End If
 
 
 
