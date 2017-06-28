@@ -438,6 +438,10 @@ CREATE PROCEDURE [dbo].[RefrescarCartasPorteDetalleFacturas]
 )
 as
 
+
+	RETURN --storeproc obsoleto
+
+
 	SET @ForzarReimputacion = ISNULL(@ForzarReimputacion, 0)
 
 
