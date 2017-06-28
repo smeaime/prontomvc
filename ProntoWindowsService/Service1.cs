@@ -330,11 +330,11 @@ namespace ProntoWindowsService
                         if ((bSignaled == true && !Debugger.IsAttached) || bForzarShutdown) break;
 
                         resultado = null;
-                        resultado = Tanda(SC1, DirApp1, ref engine, ref processor, idthread);
+                        resultado = TandaOCR(SC1, DirApp1, ref engine, ref processor, idthread);
 
 
                         resultado2 = null;
-                        resultado2 = Tanda(SC2, DirApp2, ref engine, ref processor, idthread);
+                        resultado2 = TandaOCR(SC2, DirApp2, ref engine, ref processor, idthread);
 
 
 
@@ -489,6 +489,46 @@ namespace ProntoWindowsService
                          * */
 
 
+
+
+
+
+                        Log Entry : 
+06 / 28 / 2017 15:36:23
+Error in: . Error Message:hilo #10: Problemas con la licencia? Paro y reinicio
+__________________________
+
+Log Entry : 
+06 / 28 / 2017 15:36:23
+Error in: . Error Message:hilo #10: System.Runtime.InteropServices.COMException (0x800706BA): The RPC server is unavailable. (Exception from HRESULT: 0x800706BA)
+   at FCEngine.IFlexiCaptureProcessor.SetCustomImageSource(IImageSource ImageSource)
+   at ProntoFlexicapture.ClassFlexicapture.ProcesarCartasBatchConFlexicapture(IEngine & engine, IFlexiCaptureProcessor & processor, String plantilla, List`1 imagenes, String SC, String DirApp, Boolean bProcesar, String & sError) in c: \Users\Administrador\Documents\bdl\pronto\InterfazFlexicapture\prontoflexicapture.cs:line 402
+   at ProntoFlexicapture.ClassFlexicapture.ProcesarCartasBatchConFlexicapture_SacandoImagenesDelDirectorio(IEngine & engine, IFlexiCaptureProcessor & processor, String plantilla, Int32 cuantasImagenes, String SC, String DirApp, Boolean bProcesar, String & sError) in c: \Users\Administrador\Documents\bdl\pronto\InterfazFlexicapture\prontoflexicapture.cs:line 310
+   at ProntoWindowsService.Service1.Tanda(String SC, String DirApp, IEngine & engine, IFlexiCaptureProcessor & processor, String idthread) in c: \Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\Service1.cs:line 851
+   at ProntoWindowsService.Service1.DoWorkSoloOCR() in c: \Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\Service1.cs:line 298
+__________________________
+
+Log Entry:
+                        06 / 28 / 2017 15:36:23
+Error in: . Error Message:hilo #10: System.Runtime.InteropServices.COMException (0x800706BA): The RPC server is unavailable. (Exception from HRESULT: 0x800706BA)
+   at FCEngine.IEngineLoader.Unload()
+   at ProntoFlexicapture.ClassFlexicapture.unloadEngine(IEngine & engine, IEngineLoader & engineLoader) in c: \Users\Administrador\Documents\bdl\pronto\InterfazFlexicapture\prontoflexicapture.cs:line 2714
+   at ProntoWindowsService.Service1.DoWorkSoloOCR() in c: \Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\Service1.cs:line 470
+__________________________
+
+Log Entry:
+                        06 / 28 / 2017 15:36:23
+Error in: . Error Message:hilo #10: Se apagó el motor, chau
+
+
+
+
+                        
+
+
+                        
+
+
                         if ((uint)x2.ErrorCode == 0x80080005)
                         { // (0x80080005) 80080005 Server execution failed (Exception from HRESULT: 0x80080005 (CO_E_SERVER_EXEC_FAILURE)).
 
@@ -508,8 +548,11 @@ namespace ProntoWindowsService
                             ClassFlexicapture.Log(idthread + "Problemas al conectarse al licenciador");
 
 
-
-
+                        }
+                        else if ((uint)x2.ErrorCode == 0x800706BA)
+                        {
+                            ClassFlexicapture.Log(idthread + "Problemas RPC server is unavailable");
+                            //System.Runtime.InteropServices.COMException(0x800706BA): The RPC server is unavailable. (Exception from HRESULT: 0x800706BA)
                         }
                         else
                         {
@@ -537,8 +580,15 @@ namespace ProntoWindowsService
                         Pronto.ERP.Bll.ErrHandler2.WriteError(idthread + x2);
 
                         //hacer un unload y cargar de nuevo?
+                        try
+                        {
+                            ClassFlexicapture.unloadEngine(ref engine, ref engineLoader);
+                        }
+                        catch (Exception x3)
+                        {
+                            ClassFlexicapture.Log(idthread + "No me dejó hacer el unloadengine: " + x3.ToString());
+                        }
 
-                        ClassFlexicapture.unloadEngine(ref engine, ref engineLoader);
                         processor = null;
 
                         //pruebo poner en null el engine y engineloader?
@@ -1007,7 +1057,7 @@ FCESupport\FCESupportImpl.h, 42.
 
 
 
-        static List<ProntoMVC.Data.FuncionesGenericasCSharp.Resultados> Tanda(string SC, string DirApp, ref IEngine engine,
+        static List<ProntoMVC.Data.FuncionesGenericasCSharp.Resultados> TandaOCR(string SC, string DirApp, ref IEngine engine,
             ref IFlexiCaptureProcessor processor, string idthread)
         {
             List<ProntoMVC.Data.FuncionesGenericasCSharp.Resultados> resultado = null;
@@ -1016,6 +1066,12 @@ FCESupport\FCESupportImpl.h, 42.
             {
 
                 ClassFlexicapture.Log(idthread + "busco imagenes");
+
+
+
+                
+
+
 
 
                 string sError = "";
@@ -1138,17 +1194,17 @@ FCESupport\FCESupportImpl.h, 42.
         {
             List<ProntoMVC.Data.FuncionesGenericasCSharp.Resultados> resultado = null;
 
-            
+
 
             try
             {
 
                 ClassFlexicapture.Log(idthread + "busco pegatinas");
 
-
+                
 
                 DemoProntoEntities db = new DemoProntoEntities(SC);
-                BDLMasterEntities dbmaster = new BDLMasterEntities(scBdlMaster);
+                BDLMasterEntities dbmaster = new BDLMasterEntities(Auxiliares.FormatearConexParaEntityFrameworkBDLMASTER_2(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(scBdlMaster)));
 
                 var q = db.ColaCorreosComprobantes.ToList();
 
@@ -1166,19 +1222,31 @@ FCESupport\FCESupportImpl.h, 42.
                     {
 
                         var op = db.OrdenesPago.Find(c.IdComprobante);
+                        if (op.Proveedore == null) continue; //es una op que usa el idcuenta, no el idproveedor
                         var cuitproveedor = op.Proveedore.Cuit;
-                        
 
-                        
+
+                        string mail = op.Proveedore.Email;
+
 
                         //busco el proveedor del f.IdComprobante
                         // depues busco el cuit entre los usuarios de la web para mandarselo a ese mail
-                        var guid = dbmaster.UserDatosExtendidos.Where(x => x.CUIT.ToString() == cuitproveedor).First().UserId;
+                        var l = dbmaster.UserDatosExtendidos.Where(x => x.CUIT.ToString() == cuitproveedor);
+                        if (l.Count() > 0)
+                        {
+                            var guid = l.First().UserId;
+                            var qq = dbmaster.aspnet_Membership.Where(x => x.UserId == guid).FirstOrDefault();
+                            if (qq != null)
+                            {
+                                mail = qq.Email;
+                            }
+                        }
                         //ClassFlexicapture.MarcarArchivoComoProcesandose(f);
-                        
-                        string mail = op.Proveedore.Email;
-                        string cuerpo="Estimado proveedor le informamos que tiene un pago disponible, para mas información ingrese en nuestra web de proveedores www.niroconstrucciones.com.ar ";
 
+
+                        string cuerpo = "Estimado proveedor le informamos que tiene un pago disponible, para mas información ingrese en nuestra web de proveedores www.niroconstrucciones.com.ar ";
+
+                        ErrHandler.WriteError("enviando mail a" mail
 
 
                         Pronto.ERP.Bll.EntidadManager.MandaEmail_Nuevo(mail,
@@ -1192,8 +1260,10 @@ FCESupport\FCESupportImpl.h, 42.
                            Convert.ToInt16(ConfigurationManager.AppSettings["SmtpPort"]));
 
 
+
+
                         db.ColaCorreosComprobantes.Remove(c);
-                        db.SaveChanges();
+                        //db.SaveChanges();
                     }
                 }
 
