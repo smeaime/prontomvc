@@ -155,18 +155,18 @@ namespace ProntoMVC.Tests
         {
             DemoProntoEntities db = new DemoProntoEntities(sc);
 
-            db.ColaCorreosComprobantes.Add(new ColaCorreosComprobante
-            {
-                IdComprobante = 121,
-                IdTipoComprobante = 17 // orden de pago
-            });
-            db.ColaCorreosComprobantes.Add(new ColaCorreosComprobante
-            {
-                IdComprobante = 122,
-                IdTipoComprobante = 17 // orden de pago
-            });
+            //db.ColaCorreosComprobantes.Add(new ColaCorreosComprobante
+            //{
+            //    IdComprobante = 121,
+            //    IdTipoComprobante = 17 // orden de pago
+            //});
+            //db.ColaCorreosComprobantes.Add(new ColaCorreosComprobante
+            //{
+            //    IdComprobante = 122,
+            //    IdTipoComprobante = 17 // orden de pago
+            //});
             
-            db.SaveChanges();
+            //db.SaveChanges();
 
             ProntoWindowsService.Service1.TandaCorreos(sc, bldmasterappconfig, "12345678");
 
