@@ -3,3 +3,123 @@ Log Entry :
 06/28/2017 12:00:36
 Error in: . Error Message:Error relacionado con la red o específico de la instancia mientras se establecía una conexión con el servidor SQL Server. No se encontró el servidor o éste no estaba accesible. Compruebe que el nombre de la instancia es correcto y que SQL Server está configurado para admitir conexiones remotas. (provider: Named Pipes Provider, error: 40 - No se pudo abrir una conexión con SQL Server)
 __________________________
+
+Log Entry : 
+06/28/2017 15:26:21
+Error in: . Error Message:12345678busco pegatinas
+__________________________
+
+Log Entry : 
+06/28/2017 15:41:22
+Error in: . Error Message:12345678busco pegatinas
+__________________________
+
+Log Entry : 
+06/28/2017 15:43:18
+Error in: . Error Message:12345678busco pegatinas
+__________________________
+
+Log Entry : 
+06/28/2017 15:44:48
+Error in: . Error Message:12345678busco pegatinas
+__________________________
+
+Log Entry : 
+06/28/2017 15:46:14
+Error in: . Error Message:12345678busco pegatinas
+__________________________
+
+Log Entry : 
+06/28/2017 15:54:06
+Error in: . Error Message:System.Data.Entity.Core.EntityCommandExecutionException: An error occurred while executing the command definition. See the inner exception for details. ---> System.Data.SqlClient.SqlException: El nombre de columna 'DocumentacionCompleta' no es válido.
+   en System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   en System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   en System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   en System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   en System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   en System.Data.SqlClient.SqlDataReader.get_MetaData()
+   en System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption)
+   en System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   en System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   en System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   en System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   en System.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   en System.Data.Common.DbCommand.ExecuteReader(CommandBehavior behavior)
+   en System.Data.Entity.Infrastructure.Interception.DbCommandDispatcher.<Reader>b__c(DbCommand t, DbCommandInterceptionContext`1 c)
+   en System.Data.Entity.Infrastructure.Interception.InternalDispatcher`1.Dispatch[TTarget,TInterceptionContext,TResult](TTarget target, Func`3 operation, TInterceptionContext interceptionContext, Action`3 executing, Action`3 executed)
+   en System.Data.Entity.Infrastructure.Interception.DbCommandDispatcher.Reader(DbCommand command, DbCommandInterceptionContext interceptionContext)
+   en System.Data.Entity.Internal.InterceptableDbCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   en System.Data.Common.DbCommand.ExecuteReader(CommandBehavior behavior)
+   en System.Data.Entity.Core.EntityClient.Internal.EntityCommandDefinition.ExecuteStoreCommands(EntityCommand entityCommand, CommandBehavior behavior)
+   --- Fin del seguimiento de la pila de la excepción interna ---
+   en System.Data.Entity.Core.EntityClient.Internal.EntityCommandDefinition.ExecuteStoreCommands(EntityCommand entityCommand, CommandBehavior behavior)
+   en System.Data.Entity.Core.Objects.Internal.ObjectQueryExecutionPlan.Execute[TResultType](ObjectContext context, ObjectParameterCollection parameterValues)
+   en System.Data.Entity.Core.Objects.ObjectQuery`1.<>c__DisplayClass3.<GetResults>b__2()
+   en System.Data.Entity.Core.Objects.ObjectContext.ExecuteInTransaction[T](Func`1 func, IDbExecutionStrategy executionStrategy, Boolean startLocalTransaction, Boolean releaseConnectionOnSuccess)
+   en System.Data.Entity.Core.Objects.ObjectQuery`1.<>c__DisplayClass3.<GetResults>b__1()
+   en System.Data.Entity.SqlServer.DefaultSqlExecutionStrategy.Execute[TResult](Func`1 operation)
+   en System.Data.Entity.Core.Objects.ObjectQuery`1.GetResults(Nullable`1 forMergeOption)
+   en System.Data.Entity.Core.Objects.ObjectQuery`1.<System.Collections.Generic.IEnumerable<T>.GetEnumerator>b__0()
+   en System.Data.Entity.Internal.LazyEnumerator`1.MoveNext()
+   en System.Linq.Enumerable.SingleOrDefault[TSource](IEnumerable`1 source)
+   en System.Data.Entity.Core.Objects.ELinq.ObjectQueryProvider.<GetElementFunction>b__2[TResult](IEnumerable`1 sequence)
+   en System.Data.Entity.Core.Objects.ELinq.ObjectQueryProvider.ExecuteSingle[TResult](IEnumerable`1 query, Expression queryRoot)
+   en System.Data.Entity.Core.Objects.ELinq.ObjectQueryProvider.System.Linq.IQueryProvider.Execute[TResult](Expression expression)
+   en System.Linq.Queryable.SingleOrDefault[TSource](IQueryable`1 source)
+   en System.Data.Entity.Internal.Linq.InternalSet`1.FindInStore(WrappedEntityKey key, String keyValuesParamName)
+   en System.Data.Entity.Internal.Linq.InternalSet`1.Find(Object[] keyValues)
+   en System.Data.Entity.DbSet`1.Find(Object[] keyValues)
+   en ProntoWindowsService.Service1.TandaCorreos(String SC, String scBdlMaster, String idthread) en C:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\Service1.cs:línea 1168
+__________________________
+
+Log Entry : 
+06/28/2017 15:54:35
+Error in: . Error Message:12345678busco pegatinas
+__________________________
+
+Log Entry : 
+06/28/2017 15:54:41
+Error in: . Error Message:System.NullReferenceException: Referencia a objeto no establecida como instancia de un objeto.
+   en ProntoWindowsService.Service1.TandaCorreos(String SC, String scBdlMaster, String idthread) en C:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\Service1.cs:línea 1169
+__________________________
+
+Log Entry : 
+06/28/2017 15:56:03
+Error in: . Error Message:12345678busco pegatinas
+__________________________
+
+Log Entry : 
+06/28/2017 15:57:31
+Error in: . Error Message:System.NullReferenceException: Referencia a objeto no establecida como instancia de un objeto.
+   en ProntoWindowsService.Service1.TandaCorreos(String SC, String scBdlMaster, String idthread) en C:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\Service1.cs:línea 1169
+__________________________
+
+Log Entry : 
+06/28/2017 15:58:09
+Error in: . Error Message:12345678busco pegatinas
+__________________________
+
+Log Entry : 
+06/28/2017 16:01:33
+Error in: . Error Message:12345678busco pegatinas
+__________________________
+
+Log Entry : 
+06/28/2017 16:23:58
+Error in: . Error Message:12345678busco pegatinas
+__________________________
+
+Log Entry : 
+06/28/2017 16:27:30
+Error in: . Error Message:12345678busco pegatinas
+__________________________
+
+Log Entry : 
+06/28/2017 16:28:41
+Error in: . Error Message:12345678busco pegatinas
+__________________________
+
+Log Entry : 
+06/28/2017 16:32:18
+Error in: . Error Message:12345678busco pegatinas
+__________________________

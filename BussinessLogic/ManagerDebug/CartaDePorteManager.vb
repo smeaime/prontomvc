@@ -3262,10 +3262,10 @@ Public Class CartaDePorteManager
     End Function
 
 
-    Shared Function RefrescarCartasPorteDetalleFacturas(sc)
-        Return 'obsoleto
-        'ExecDinamico(sc, "EXEC dbo.RefrescarCartasPorteDetalleFacturas", 120)
-    End Function
+    'Shared Function RefrescarCartasPorteDetalleFacturas(sc)
+    '    'obsoleto
+    '    'ExecDinamico(sc, "EXEC dbo.RefrescarCartasPorteDetalleFacturas", 120)
+    'End Function
 
 
 
