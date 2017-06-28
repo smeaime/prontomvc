@@ -2157,6 +2157,10 @@ Public Class ExcelImportadorManager
 
                         If actua(.Destino, BuscaIdWilliamsDestinoPreciso(r(16), SC)) Then log += "Destino; "
                         If .Destino <= 0 Then
+                            'primero busco la equivalencia con excepcion prefijada
+                            If actua(.Destino, BuscaIdWilliamsDestinoPreciso(DiccionarioEquivalenciasManager.BuscarEquivalencia(SC, "DESTINO|" + r(16)), SC)) Then log += "Destino; "
+                        End If
+                        If .Destino <= 0 Then
                             If actua(.Destino, BuscaIdWilliamsDestinoPreciso(DiccionarioEquivalenciasManager.BuscarEquivalencia(SC, r(16)), SC)) Then log += "Destino; "
                         End If
                         If .Destino <= 0 Then .Destino = Nothing

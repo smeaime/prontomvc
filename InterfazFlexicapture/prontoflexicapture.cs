@@ -3698,7 +3698,6 @@ Formato localidad-provincia	destination	x
 
         public virtual List<InterfazFlexicapture.ServiceReferenceSyngenta.DT_DeliveryDelivery> WebServiceSyngenta
                 (List<fSQL_GetDataTableFiltradoYPaginado_Result3> dbcartas, string endpointStr, string UserName, string Password)
-
         {
 
 
@@ -4387,14 +4386,14 @@ Formato localidad-provincia	destination	x
             //if (searchField == "Numero") searchField = "NumeroPedido"; 
 
             var Entidad = pagedQuery
-                          //.Include(x => x.Moneda)
-                          //.Include(x => x.Proveedor)
-                          //.Include(x => x.DetallePedidos
-                          //            .Select(y => y.DetalleRequerimiento
-                          //                )
-                          //        )
-                          //.Include("DetallePedidos.DetalleRequerimiento.Requerimientos.Obra") // funciona tambien
-                          //.Include(x => x.Comprador)
+                //.Include(x => x.Moneda)
+                //.Include(x => x.Proveedor)
+                //.Include(x => x.DetallePedidos
+                //            .Select(y => y.DetalleRequerimiento
+                //                )
+                //        )
+                //.Include("DetallePedidos.DetalleRequerimiento.Requerimientos.Obra") // funciona tambien
+                //.Include(x => x.Comprador)
                           .AsQueryable();
 
 
@@ -4455,12 +4454,12 @@ Formato localidad-provincia	destination	x
 
 
             var qexacto = (from n in db.CartaPorteNormasCalidads
-                     where (n.ResultadoDesde <= resultado && resultado <= n.ResultadoHasta)
-                            && (idrubro == n.IdCartaPorteRubroCalidad)
-                            && (n.IdArticulo == idarticulo || (n.IdArticulo == null && idarticulo == -1))
-                            && (n.IdDestino == iddestino || (n.IdDestino == null && iddestino == -1))
-                     orderby n.IdArticulo descending, n.IdDestino descending
-                     select n).ToList();
+                           where (n.ResultadoDesde <= resultado && resultado <= n.ResultadoHasta)
+                                  && (idrubro == n.IdCartaPorteRubroCalidad)
+                                  && (n.IdArticulo == idarticulo || (n.IdArticulo == null && idarticulo == -1))
+                                  && (n.IdDestino == iddestino || (n.IdDestino == null && iddestino == -1))
+                           orderby n.IdArticulo descending, n.IdDestino descending
+                           select n).ToList();
 
             if (qexacto.Count() > 0)
             {
@@ -4471,12 +4470,12 @@ Formato localidad-provincia	destination	x
 
 
             var qaprox = (from n in db.CartaPorteNormasCalidads
-                    where (n.ResultadoDesde <= resultado && resultado <= n.ResultadoHasta)
-                           && (idrubro == n.IdCartaPorteRubroCalidad)
-                           && (n.IdArticulo == idarticulo || n.IdArticulo==null || idarticulo==-1)
-                           && (n.IdDestino == iddestino || n.IdDestino == null || iddestino == -1)
-                    orderby n.IdArticulo descending, n.IdDestino descending
-                    select n).ToList();
+                          where (n.ResultadoDesde <= resultado && resultado <= n.ResultadoHasta)
+                                 && (idrubro == n.IdCartaPorteRubroCalidad)
+                                 && (n.IdArticulo == idarticulo || n.IdArticulo == null || idarticulo == -1)
+                                 && (n.IdDestino == iddestino || n.IdDestino == null || iddestino == -1)
+                          orderby n.IdArticulo descending, n.IdDestino descending
+                          select n).ToList();
 
             if (qaprox.Count() == 0)
                 return 0;
@@ -4597,14 +4596,14 @@ Formato localidad-provincia	destination	x
             //if (searchField == "Numero") searchField = "NumeroPedido"; 
 
             var Entidad = pagedQuery
-                          //.Include(x => x.Moneda)
-                          //.Include(x => x.Proveedor)
-                          //.Include(x => x.DetallePedidos
-                          //            .Select(y => y.DetalleRequerimiento
-                          //                )
-                          //        )
-                          //.Include("DetallePedidos.DetalleRequerimiento.Requerimientos.Obra") // funciona tambien
-                          //.Include(x => x.Comprador)
+                //.Include(x => x.Moneda)
+                //.Include(x => x.Proveedor)
+                //.Include(x => x.DetallePedidos
+                //            .Select(y => y.DetalleRequerimiento
+                //                )
+                //        )
+                //.Include("DetallePedidos.DetalleRequerimiento.Requerimientos.Obra") // funciona tambien
+                //.Include(x => x.Comprador)
                           .AsQueryable();
 
 
@@ -5045,14 +5044,14 @@ Formato localidad-provincia	destination	x
 
 
             var excelData = new jqGridWeb.DataForExcel(
-                    // column Header
+                // column Header
                     new[] { "Col1", "Col2", "Col3" },
                     new[]{jqGridWeb.DataForExcel.DataType.String, jqGridWeb.DataForExcel.DataType.Integer,
                           jqGridWeb.DataForExcel.DataType.String},
-                    //      new List<string[]> {
-                    //    new[] {"a", "1", "c1"},
-                    //    new[] {"a", "2", "c2"}
-                    //},
+                //      new List<string[]> {
+                //    new[] {"a", "1", "c1"},
+                //    new[] {"a", "2", "c2"}
+                //},
                     lista,
 
                     "Test Grid");
@@ -5109,13 +5108,13 @@ Formato localidad-provincia	destination	x
                 //@TonsHasta int = NULL
 
 
-                var sp= db.wCartasDePorte_TX_MapaEstrategico( modoExportacion, fechadesde, fechahasta, idarticulo, idprocedencia, idclientefacturado, tonsdesde,  tonshasta );
+                var sp = db.wCartasDePorte_TX_MapaEstrategico(modoExportacion, fechadesde, fechahasta, idarticulo, idprocedencia, idclientefacturado, tonsdesde, tonshasta);
 
                 var q2 = (from r in sp
-                          group r by new { r.localidad, r.provincia,r.Procedencia, r.lat, r.lng  } into g
+                          group r by new { r.localidad, r.provincia, r.Procedencia, r.lat, r.lng } into g
                           select new
                           {
-                              total = g.Sum(x=>x.kilos),
+                              total = g.Sum(x => x.kilos),
                               ProcedenciaDesc = g.Key.localidad,
                               ProcedenciaProvinciaDesc = g.Key.provincia,
                               Procedencia = g.Key.Procedencia,
@@ -5146,7 +5145,7 @@ Formato localidad-provincia	destination	x
                 System.Web.Script.Serialization.JavaScriptSerializer jsonSerializer = new System.Web.Script.Serialization.JavaScriptSerializer();
                 return jsonSerializer.Serialize(q2);
 
-                
+
             }
 
 
@@ -5268,10 +5267,15 @@ order by kilos desc
             DemoProntoEntities db = new DemoProntoEntities(scEF);
 
 
+            //db.CartasDePortes.Where(x=>x.FechaIngreso > dateadd  DateAndTime.Today)
+            //ordenar desc por uso q se le hace en las cartas
+
+
             List<xxzc> locs = (from l in db.Localidades
                                join p in db.Provincias on l.IdProvincia equals p.IdProvincia
                                // join p in db.Partidos on l.IdPartido equals p.IdPartido
                                select new xxzc { prov = p.Nombre, loc = l.Nombre, id = l.IdLocalidad, lat = l.lat, lng = l.lng }).ToList();
+
 
 
 
@@ -5284,19 +5288,14 @@ order by kilos desc
 
                     // actualizar geocode (long,lat) de la tabla localidades
 
+
                     address = l.loc + ", " + l.prov + ", Argentina"; // = "123 something st, somewhere";
-                    var requestUri = string.Format("http://maps.googleapis.com/maps/api/geocode/xml?address={0}&sensor=false", Uri.EscapeDataString(address));
 
-                    var request = WebRequest.Create(requestUri);
-                    var response = request.GetResponse();
-                    var xdoc = System.Xml.Linq.XDocument.Load(response.GetResponseStream());
+                    decimal lng = 0, lat = 0;
+                    geocode(address, ref lat, ref lng);
 
-                    var result = xdoc.Element("GeocodeResponse").Element("result");
-                    var locationElement = result.Element("geometry").Element("location");
-                    var lat = locationElement.Element("lat");
-                    var lng = locationElement.Element("lng");
 
-                    EntidadManager.ExecDinamico(SC, "UPDATE Localidades SET lat=" + lat.Value + " ,lng=" + lng.Value + " WHERE idlocalidad=" + l.id);
+                    EntidadManager.ExecDinamico(SC, "UPDATE Localidades SET lat=" + lat + " ,lng=" + lng + " WHERE idlocalidad=" + l.id);
                 }
                 catch (Exception ex)
                 {
@@ -5315,6 +5314,23 @@ order by kilos desc
 
         }
 
+
+
+        public int geocode(string address, ref decimal lat, ref decimal lng)
+        {
+            var requestUri = string.Format("http://maps.googleapis.com/maps/api/geocode/xml?address={0}&sensor=false", Uri.EscapeDataString(address));
+
+            var request = WebRequest.Create(requestUri);
+            var response = request.GetResponse();
+            var xdoc = System.Xml.Linq.XDocument.Load(response.GetResponseStream());
+
+            var result = xdoc.Element("GeocodeResponse").Element("result");
+            var locationElement = result.Element("geometry").Element("location");
+            lat = decimal.Parse(locationElement.Element("lat").Value);
+            lng = decimal.Parse(locationElement.Element("lng").Value);
+
+            return 0;
+        }
 
 
 
