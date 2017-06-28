@@ -2064,7 +2064,7 @@ select * from CartaPorteRubrosCalidad
 
 
 
-
+select * from tiposcomprobante
 
 
 

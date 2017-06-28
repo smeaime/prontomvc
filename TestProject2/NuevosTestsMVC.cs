@@ -153,10 +153,28 @@ namespace ProntoMVC.Tests
         [TestMethod]
         public void testenviomailsdeniro_41340()
         {
-            ProntoWindowsService.Service1.TandaCorreos(sc, "12345678");
+            DemoProntoEntities db = new DemoProntoEntities(sc);
 
-//                El mensajes seria: Estimado proveedor le informamos que tiene un pago disponible, 
-//            para mas información ingrese en nuestra web de proveedores www.niroconstrucciones.com.ar / proveedores
+            db.ColaCorreosComprobantes.Add(new ColaCorreosComprobante
+            {
+                IdComprobante = 121,
+                IdTipoComprobante = 17 // orden de pago
+            });
+            db.ColaCorreosComprobantes.Add(new ColaCorreosComprobante
+            {
+                IdComprobante = 122,
+                IdTipoComprobante = 17 // orden de pago
+            });
+            
+            db.SaveChanges();
+
+            ProntoWindowsService.Service1.TandaCorreos(sc, bldmasterappconfig, "12345678");
+
+                
+
+
+            //                El mensajes seria: Estimado proveedor le informamos que tiene un pago disponible, 
+            //            para mas información ingrese en nuestra web de proveedores www.niroconstrucciones.com.ar / proveedores
 
             //......................................................................
 

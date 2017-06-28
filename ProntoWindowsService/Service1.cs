@@ -30,6 +30,7 @@ namespace ProntoWindowsService
         protected Thread m_thread2;
         protected Thread m_thread3;
         protected Thread m_thread4;
+        protected Thread m_thread5;
 
         static protected ManualResetEvent m_shutdownEvent;
         static protected TimeSpan m_delay;
@@ -37,8 +38,14 @@ namespace ProntoWindowsService
         static bool bForzarShutdown = false;
 
         static string DirApp1, DirApp2;
-        static string SC1, SC2;
+        static string SC1, SC2, scBdlMaster;
         static string plantilla;
+        static bool bWorker1Habilitado;
+        static bool bWorker2Habilitado;
+        static bool bWorker3Habilitado;
+        static bool bWorker4Habilitado;
+        static bool bWorker5Habilitado;
+
 
         ///static string TempFolder;
 
@@ -78,45 +85,68 @@ namespace ProntoWindowsService
 
             DebugMode();
 
-            m_thread = new Thread(DoWorkSoloOCR);
-            m_thread.Name = "MyWorker1";
-            m_thread.IsBackground = false;
-            m_thread.Start();
 
-
-
-            System.Threading.Thread.Sleep(1000);
-
-
-            ////http://stackoverflow.com/questions/11985308/multiple-threads-in-windows-service
-
-            m_thread2 = new Thread(DoWorkSoloPegatinas);
-            m_thread2.Name = "MyWorker2";
-            m_thread2.IsBackground = false;
-            m_thread2.Start();
-
-
-            System.Threading.Thread.Sleep(1000);
-
-
-            ////http://stackoverflow.com/questions/11985308/multiple-threads-in-windows-service
-
-            m_thread3 = new Thread(DoWorkSoloOCR);
-            m_thread3.Name = "MyWorker3";
-            m_thread3.IsBackground = false;
-            m_thread3.Start();
-
-
-            System.Threading.Thread.Sleep(1000);
-
-
-            ////http://stackoverflow.com/questions/11985308/multiple-threads-in-windows-service
-            if (false)
+            if (bWorker1Habilitado)
             {
+
+                m_thread = new Thread(DoWorkSoloOCR);
+                m_thread.Name = "MyWorker1";
+                m_thread.IsBackground = false;
+                m_thread.Start();
+
+                System.Threading.Thread.Sleep(1000);
+            }
+
+
+
+            if (bWorker2Habilitado)
+            {
+                ////http://stackoverflow.com/questions/11985308/multiple-threads-in-windows-service
+
+                m_thread2 = new Thread(DoWorkSoloPegatinas);
+                m_thread2.Name = "MyWorker2";
+                m_thread2.IsBackground = false;
+                m_thread2.Start();
+
+                System.Threading.Thread.Sleep(1000);
+            }
+
+
+
+            if (bWorker3Habilitado)
+            {
+                ////http://stackoverflow.com/questions/11985308/multiple-threads-in-windows-service
+
+                m_thread3 = new Thread(DoWorkSoloOCR);
+                m_thread3.Name = "MyWorker3";
+                m_thread3.IsBackground = false;
+                m_thread3.Start();
+
+
+                System.Threading.Thread.Sleep(1000);
+            }
+
+
+
+            if (bWorker4Habilitado)
+            {
+                ////http://stackoverflow.com/questions/11985308/multiple-threads-in-windows-service
+
                 m_thread4 = new Thread(DoWorkSoloOCR);
                 m_thread4.Name = "MyWorker4";
                 m_thread4.IsBackground = false;
                 m_thread4.Start();
+            }
+
+
+            if (bWorker5Habilitado)
+            {
+                ////http://stackoverflow.com/questions/11985308/multiple-threads-in-windows-service
+
+                m_thread5 = new Thread(DoWorkEnvioCorreos);
+                m_thread5.Name = "MyWorker5";
+                m_thread5.IsBackground = false;
+                m_thread5.Start();
             }
 
             ////FlexiCapture Engine must be accessed on the same thread as it was initialized
@@ -180,6 +210,13 @@ namespace ProntoWindowsService
             DirApp2 = ConfigurationManager.AppSettings["DirApp_Test"];
             SC2 = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(ConfigurationManager.AppSettings["SC_Test"]);
 
+            scBdlMaster = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(ConfigurationManager.AppSettings["scBdlMaster"]);
+
+            bWorker1Habilitado = (ProntoFuncionesGeneralesCOMPRONTO.Encriptar(ConfigurationManager.AppSettings["bWorker1Habilitado"]) == "SI");
+            bWorker2Habilitado = (ProntoFuncionesGeneralesCOMPRONTO.Encriptar(ConfigurationManager.AppSettings["bWorker2Habilitado"]) == "SI");
+            bWorker3Habilitado = (ProntoFuncionesGeneralesCOMPRONTO.Encriptar(ConfigurationManager.AppSettings["bWorker3Habilitado"]) == "SI");
+            bWorker4Habilitado = (ProntoFuncionesGeneralesCOMPRONTO.Encriptar(ConfigurationManager.AppSettings["bWorker4Habilitado"]) == "SI");
+            bWorker5Habilitado = (ProntoFuncionesGeneralesCOMPRONTO.Encriptar(ConfigurationManager.AppSettings["bWorker5Habilitado"]) == "SI");
 
 
 
@@ -842,7 +879,7 @@ FCESupport\FCESupportImpl.h, 42.
 
 
             ClassFlexicapture.Log(idthread + "Empieza");
-            
+
 
             string cadena = Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC1));
 
@@ -865,7 +902,7 @@ FCESupport\FCESupportImpl.h, 42.
 
 
             /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            
+
             bool bSignaled = false;
 
             List<ProntoMVC.Data.FuncionesGenericasCSharp.Resultados> resultado, resultado2;
@@ -896,9 +933,7 @@ FCESupport\FCESupportImpl.h, 42.
 
 
 
-                    TandaCorreos(SC1, idthread);
-                    TandaCorreos(SC2,  idthread);
-
+                    TandaCorreos(SC1, scBdlMaster, idthread);
 
                     // esta bien hacerlo asi? -separar la tarea de pegatinas en un hilo aparte
 
@@ -919,7 +954,7 @@ FCESupport\FCESupportImpl.h, 42.
 
                 catch (System.Runtime.InteropServices.COMException x2)
                 {
-                    
+
 
                     CartaDePorteManager.MandarMailDeError(x2);
 
@@ -1099,9 +1134,11 @@ FCESupport\FCESupportImpl.h, 42.
 
 
 
-        public static List<ProntoMVC.Data.FuncionesGenericasCSharp.Resultados> TandaCorreos(string SC, string idthread)
+        public static List<ProntoMVC.Data.FuncionesGenericasCSharp.Resultados> TandaCorreos(string SC, string scBdlMaster, string idthread)
         {
             List<ProntoMVC.Data.FuncionesGenericasCSharp.Resultados> resultado = null;
+
+            
 
             try
             {
@@ -1109,7 +1146,10 @@ FCESupport\FCESupportImpl.h, 42.
                 ClassFlexicapture.Log(idthread + "busco pegatinas");
 
 
+
                 DemoProntoEntities db = new DemoProntoEntities(SC);
+                BDLMasterEntities dbmaster = new BDLMasterEntities(scBdlMaster);
+
                 var q = db.ColaCorreosComprobantes.ToList();
 
                 //var lista =new List<string>() ; // = ClassFlexicapture.ExtraerListaDeCorreosQueNoHanSidoProcesados(sc,5);
@@ -1118,29 +1158,46 @@ FCESupport\FCESupportImpl.h, 42.
                 string log = "";
                 //hay que pasar el formato como parametro 
 
-                foreach (var f in q)
+                foreach (var c in q)
                 {
                     int m_IdMaestro = 0;
 
+                    if (c.IdTipoComprobante == 17) // es una orden de pago
+                    {
+
+                        var op = db.OrdenesPago.Find(c.IdComprobante);
+                        var cuitproveedor = op.Proveedore.Cuit;
+                        
+
+                        
+
+                        //busco el proveedor del f.IdComprobante
+                        // depues busco el cuit entre los usuarios de la web para mandarselo a ese mail
+                        var guid = dbmaster.UserDatosExtendidos.Where(x => x.CUIT.ToString() == cuitproveedor).First().UserId;
+                        //ClassFlexicapture.MarcarArchivoComoProcesandose(f);
+                        
+                        string mail = op.Proveedore.Email;
+                        string cuerpo="Estimado proveedor le informamos que tiene un pago disponible, para mas información ingrese en nuestra web de proveedores www.niroconstrucciones.com.ar ";
 
 
-                    //busco el proveedor del f.IdComprobante
-                    // depues busco el cuit entre los usuarios de la web para mandarselo a ese mail
-                    string mail = "sdfdaf";
+
+                        Pronto.ERP.Bll.EntidadManager.MandaEmail_Nuevo(mail,
+                               "asuntoasuntoasunto 2",
+                           cuerpo,
+                            ConfigurationManager.AppSettings["SmtpUser"],
+                            ConfigurationManager.AppSettings["SmtpServer"],
+                            ConfigurationManager.AppSettings["SmtpUser"],
+                            ConfigurationManager.AppSettings["SmtpPass"],
+                              "",
+                           Convert.ToInt16(ConfigurationManager.AppSettings["SmtpPort"]));
 
 
-                    //ClassFlexicapture.MarcarArchivoComoProcesandose(f);
-
-
-                    barras.EnviarFacturaElectronicaEMail(new List<int> { f.IdComprobante }, SC, false, mail);
-
-
-
-                    db.ColaCorreosComprobantes.Remove(f);
-                    db.SaveChanges();
+                        db.ColaCorreosComprobantes.Remove(c);
+                        db.SaveChanges();
+                    }
                 }
 
-                
+
 
 
 
@@ -1148,7 +1205,7 @@ FCESupport\FCESupportImpl.h, 42.
 
             catch (Exception x)
             {
-              
+
                 ClassFlexicapture.Log(x.ToString());
                 // throw;
 
