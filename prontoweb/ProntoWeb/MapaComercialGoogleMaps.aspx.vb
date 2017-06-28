@@ -411,17 +411,25 @@ Namespace ProntoMVC.Reportes
 
 
 
-
             yourParams(0) = New ReportParameter("Modo", DropDownList2.SelectedItem.Text) ' )
-            yourParams(1) = New ReportParameter("Producto", txt_AC_Articulo.Text)
-            yourParams(2) = New ReportParameter("Puerto", txtProcedencia.Text) ' )
-            yourParams(3) = New ReportParameter("Cliente", BuscaIdClientePreciso(txtTitular.Text, SC)) ' )
-            yourParams(4) = New ReportParameter("TonsDesde", txtTonsDesde.Text) ', txtFechaHasta.Text)
-            yourParams(5) = New ReportParameter("TonsHasta", txtTonsHasta.Text) ', txtFechaHasta.Text)
-            yourParams(6) = New ReportParameter("FechaDesde", txtFechaDesde.Text) ' )
-            yourParams(7) = New ReportParameter("FechaHasta", txtFechaHasta.Text) ', txtFechaHasta.Text)
+            yourParams(1) = New ReportParameter("FechaDesde", txtFechaDesde.Text) ' )
+            yourParams(2) = New ReportParameter("FechaHasta", txtFechaHasta.Text) ', txtFechaHasta.Text)
+            yourParams(3) = New ReportParameter("Producto", BuscaIdArticuloPreciso(txt_AC_Articulo.Text, SC))
+            yourParams(4) = New ReportParameter("Puerto", BuscaIdLocalidadPreciso(txtProcedencia.Text, SC)) ' )
+            yourParams(5) = New ReportParameter("Cliente", BuscaIdClientePreciso(txtTitular.Text, SC)) ' )
+            yourParams(6) = New ReportParameter("TonsDesde", txtTonsDesde.Text) ', txtFechaHasta.Text)
+            yourParams(7) = New ReportParameter("TonsHasta", txtTonsHasta.Text) ', txtFechaHasta.Text)
 
 
+
+            Dim link As String = "GoogleMapsHtml.html?modoExportacion=" & DropDownList2.SelectedItem.Text &
+                                                "&idprocedencia=" & BuscaIdLocalidadPreciso(txtProcedencia.Text, SC).ToString &
+                                                "&fechadesde=" & Convert.ToDateTime(txtFechaDesde.Text).ToString("yyyy/MM/dd") &
+                                                "&fechahasta=" & Convert.ToDateTime(txtFechaHasta.Text).ToString("yyyy/MM/dd") &
+                                                "&idarticulo=" & BuscaIdArticuloPreciso(txt_AC_Articulo.Text, SC).ToString &
+                                                "&idclientefacturado=" + BuscaIdClientePreciso(txtTitular.Text, SC).ToString &
+                                                "&tonsdesde=" & txtTonsDesde.Text &
+                                                "&tonshasta=" & txtTonsHasta.Text
 
 
 
@@ -535,25 +543,6 @@ Namespace ProntoMVC.Reportes
             ErrHandler2.WriteError("Cli 3")
 
 
-            yourParams(0) = New ReportParameter("Modo", DropDownList2.SelectedItem.Text) ' )
-            yourParams(1) = New ReportParameter("Producto", BuscaIdArticuloPreciso(txt_AC_Articulo.Text, SC))
-            yourParams(2) = New ReportParameter("Puerto", BuscaIdLocalidadPreciso(txtProcedencia.Text, SC)) ' )
-            yourParams(3) = New ReportParameter("Cliente", BuscaIdClientePreciso(txtTitular.Text, SC)) ' )
-            yourParams(4) = New ReportParameter("TonsDesde", txtTonsDesde.Text) ', txtFechaHasta.Text)
-            yourParams(5) = New ReportParameter("TonsHasta", txtTonsHasta.Text) ', txtFechaHasta.Text)
-            yourParams(6) = New ReportParameter("FechaDesde", txtFechaDesde.Text) ' )
-            yourParams(7) = New ReportParameter("FechaHasta", txtFechaHasta.Text) ', txtFechaHasta.Text)
-
-
-
-            Dim link As String = "GoogleMapsHtml.html?modoExportacion=" & DropDownList2.SelectedItem.Text &
-                                                "&idprocedencia=" & BuscaIdLocalidadPreciso(txtProcedencia.Text, SC).ToString &
-                                                "&fechadesde=" & Convert.ToDateTime(txtFechaDesde.Text).ToString("yyyy/MM/dd") &
-                                                "&fechahasta=" & Convert.ToDateTime(txtFechaHasta.Text).ToString("yyyy/MM/dd") &
-                                                "&idarticulo=" & BuscaIdArticuloPreciso(txt_AC_Articulo.Text, SC).ToString &
-                                                "&idclientefacturado=" + BuscaIdClientePreciso(txtTitular.Text, SC).ToString &
-                                                "&tonsdesde=" & txtTonsDesde.Text &
-                                                "&tonshasta=" & txtTonsHasta.Text
 
             'Frame_A_Url = link
 

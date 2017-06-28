@@ -863,6 +863,96 @@ namespace ProntoMVC.Tests
         /// ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
+        
+        [TestMethod]
+        public void CampoEditableDeClientesRelacionadosAlUsuarioParaTirarInforme_28320_42549()
+        {
+
+
+            //probe con coma, pipe, punto y coma y nunca me funciona. ese usuario el 1/6 debería traer 
+            //la cp 561439022 que es de JACIUK EUGENIO FELIPE 20-08494702-5 (titular)
+
+
+
+            string sErrores = "", sTitulo = "";
+            LinqCartasPorteDataContext db = null;
+            DemoProntoEntities db2 = null;
+
+
+            string usuario = "Mariano"; //"BLD25MAYO"
+
+
+            UserDatosExtendidosManager.UpdateClientesRelacionadoslDelUsuario(usuario, scbdlmasterappconfig, "20-12345678-1|20-20100767-5");
+
+
+
+
+            var clientes = CartaDePorteManager.TraerCUITClientesSegunUsuario(usuario, SC, scbdlmasterappconfig).Where(x => x != "").ToList();
+
+            //String aaa = ParametroManager.TraerValorParametro2(SC, "ClienteBLDcorredorCUIT").NullSafeToString() ?? "";
+            //var sss = aaa.Split('|').ToList();
+
+
+            var q = CartaDePorteManager.CartasLINQlocalSimplificadoTipadoConCalada3(SC,
+                     "", "", "", 1, 99999,
+                      CartaDePorteManager.enumCDPestado.Todas, "", -1, -1,
+                     -1, -1,
+                     -1, -1, -1, -1, CartaDePorteManager.FiltroANDOR.FiltroOR, "Ambas",
+                      new DateTime(2013, 1, 1),
+                      new DateTime(2014, 1, 1),
+                      -1, ref sTitulo, "Ambas", false, "", ref db2, "", -1, -1, 0, "", "Ambas");
+
+
+            var q2 = q.Where(x => clientes.Contains(x.TitularCUIT) || clientes.Contains(x.IntermediarioCUIT) || clientes.Contains(x.RComercialCUIT))
+                                    .ToList();
+
+
+        }
+
+
+
+
+
+        [TestMethod]
+        public void Urenport_5_37950()
+        {
+
+            // es precisamente así:
+            /*
+             * http://stackoverflow.com/questions/1139390/excel-external-table-is-not-in-the-expected-format
+             * Just add my case. My xls file was created by a data export function from a website, the file extention is xls, 
+            it can be normally opened by MS Excel 2003. But both Microsoft.Jet.OLEDB.4.0 and Microsoft.ACE.OLEDB.12.0 got 
+                an "External table is not in the expected format" exception.
+                    Finally, the problem is, just as the exception said, "it's not in the expected format". Though 
+            it's extention name is xls, but when I open it with a text editor, it is actually a well-formed html file, 
+            all data are in a <table>, each <tr> is a row and each <td> is a cell. Then I think I can parse it in a html way.
+            */
+
+
+            string archivoExcel = @"C:\Users\Administrador\Documents\bdl\pronto\docstest\Urenport_ 951-28042017.xls";
+
+            //FuncionesGenericasCSharp.GetExcel5_HTML_AgilityPack(archivoExcel);
+            //FuncionesGenericasCSharp.GetExcel4_ExcelDataReader(archivoExcel);
+
+            //explota
+
+            string ms = "";
+
+            int m_IdMaestro = 0;
+            Pronto.ERP.BO.CartaDePorte carta;
+
+
+            string log = "";
+            //hay que pasar el formato como parametro 
+            ExcelImportadorManager.FormatearExcelImportadoEnDLL(ref m_IdMaestro, archivoExcel,
+                                    LogicaImportador.FormatosDeExcel.Urenport, SC, 0, ref log, "", 0, "");
+
+            var dt = LogicaImportador.TraerExcelDeBase(SC, ref m_IdMaestro);
+
+            // verificar q Importa bien el destino especifico.
+
+        }
+
 
 
 
@@ -1072,6 +1162,28 @@ namespace ProntoMVC.Tests
 
         }
 
+
+
+
+
+
+        [TestMethod]
+        public void mapa_con_googlemaps_40288_3()
+        {
+
+            var address = "BARRIO VILLA MAILIN, BUENOS AIRES, Argentina";
+            var requestUri = string.Format("http://maps.googleapis.com/maps/api/geocode/xml?address={0}&sensor=false", Uri.EscapeDataString(address));
+
+            var request = WebRequest.Create(requestUri);
+            var response = request.GetResponse();
+            var xdoc = System.Xml.Linq.XDocument.Load(response.GetResponseStream());
+
+            var result = xdoc.Element("GeocodeResponse").Element("result");
+            var locationElement = result.Element("geometry").Element("location");
+            var lat = locationElement.Element("lat");
+            var lng = locationElement.Element("lng");
+
+        }
 
 
 
@@ -3182,10 +3294,7 @@ System.Drawing
 
             UserDatosExtendidosManager.UpdateClientesRelacionadoslDelUsuario(usuario, scbdlmasterappconfig, "20-12345678-1|20-20100767-5");
 
-
-
-
-
+            
 
 
             var clientes = CartaDePorteManager.TraerCUITClientesSegunUsuario(usuario, SC, scbdlmasterappconfig).Where(x => x != "").ToList();
