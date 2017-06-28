@@ -3263,7 +3263,8 @@ Public Class CartaDePorteManager
 
 
     Shared Function RefrescarCartasPorteDetalleFacturas(sc)
-        ExecDinamico(sc, "EXEC dbo.RefrescarCartasPorteDetalleFacturas", 120)
+        Return 'obsoleto
+        'ExecDinamico(sc, "EXEC dbo.RefrescarCartasPorteDetalleFacturas", 120)
     End Function
 
 
@@ -11863,6 +11864,7 @@ Public Class CartaDePorteManager
         EntidadManager.LogPronto(SC, idfactura, "Imputacion de IdCPorteMovimiento " & idMov & " IdFacturaImputada " & idfactura, nombreUsuario)
 
 
+        db = Nothing
     End Sub
 
 
