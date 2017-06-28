@@ -38259,18 +38259,18 @@ select idlocalidad, nombre from localidades</CommandText>
       </ValidValues>
     </ReportParameter>
     <ReportParameter Name="Producto">
-      <DataType>String</DataType>
-      <AllowBlank>true</AllowBlank>
+      <DataType>Integer</DataType>
+      <Nullable>true</Nullable>
       <Prompt>Producto</Prompt>
     </ReportParameter>
     <ReportParameter Name="Puerto">
-      <DataType>String</DataType>
-      <AllowBlank>true</AllowBlank>
+      <DataType>Integer</DataType>
+      <Nullable>true</Nullable>
       <Prompt>Puerto</Prompt>
     </ReportParameter>
     <ReportParameter Name="Cliente">
-      <DataType>String</DataType>
-      <AllowBlank>true</AllowBlank>
+      <DataType>Integer</DataType>
+      <Nullable>true</Nullable>
       <Prompt>Cliente</Prompt>
     </ReportParameter>
     <ReportParameter Name="TonsDesde">
