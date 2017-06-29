@@ -492,37 +492,6 @@ namespace ProntoWindowsService
 
 
 
-
-                        Log Entry : 
-06 / 28 / 2017 15:36:23
-Error in: . Error Message:hilo #10: Problemas con la licencia? Paro y reinicio
-__________________________
-
-Log Entry : 
-06 / 28 / 2017 15:36:23
-Error in: . Error Message:hilo #10: System.Runtime.InteropServices.COMException (0x800706BA): The RPC server is unavailable. (Exception from HRESULT: 0x800706BA)
-   at FCEngine.IFlexiCaptureProcessor.SetCustomImageSource(IImageSource ImageSource)
-   at ProntoFlexicapture.ClassFlexicapture.ProcesarCartasBatchConFlexicapture(IEngine & engine, IFlexiCaptureProcessor & processor, String plantilla, List`1 imagenes, String SC, String DirApp, Boolean bProcesar, String & sError) in c: \Users\Administrador\Documents\bdl\pronto\InterfazFlexicapture\prontoflexicapture.cs:line 402
-   at ProntoFlexicapture.ClassFlexicapture.ProcesarCartasBatchConFlexicapture_SacandoImagenesDelDirectorio(IEngine & engine, IFlexiCaptureProcessor & processor, String plantilla, Int32 cuantasImagenes, String SC, String DirApp, Boolean bProcesar, String & sError) in c: \Users\Administrador\Documents\bdl\pronto\InterfazFlexicapture\prontoflexicapture.cs:line 310
-   at ProntoWindowsService.Service1.Tanda(String SC, String DirApp, IEngine & engine, IFlexiCaptureProcessor & processor, String idthread) in c: \Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\Service1.cs:line 851
-   at ProntoWindowsService.Service1.DoWorkSoloOCR() in c: \Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\Service1.cs:line 298
-__________________________
-
-Log Entry:
-                        06 / 28 / 2017 15:36:23
-Error in: . Error Message:hilo #10: System.Runtime.InteropServices.COMException (0x800706BA): The RPC server is unavailable. (Exception from HRESULT: 0x800706BA)
-   at FCEngine.IEngineLoader.Unload()
-   at ProntoFlexicapture.ClassFlexicapture.unloadEngine(IEngine & engine, IEngineLoader & engineLoader) in c: \Users\Administrador\Documents\bdl\pronto\InterfazFlexicapture\prontoflexicapture.cs:line 2714
-   at ProntoWindowsService.Service1.DoWorkSoloOCR() in c: \Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\Service1.cs:line 470
-__________________________
-
-Log Entry:
-                        06 / 28 / 2017 15:36:23
-Error in: . Error Message:hilo #10: Se apagó el motor, chau
-
-
-
-
                         
 
 
@@ -587,6 +556,38 @@ Error in: . Error Message:hilo #10: Se apagó el motor, chau
                         catch (Exception x3)
                         {
                             ClassFlexicapture.Log(idthread + "No me dejó hacer el unloadengine: " + x3.ToString());
+
+                            /*
+
+                            Log Entry : 
+    06 / 28 / 2017 15:36:23
+    Error in: . Error Message:hilo #10: Problemas con la licencia? Paro y reinicio
+    __________________________
+
+    Log Entry : 
+    06 / 28 / 2017 15:36:23
+    Error in: . Error Message:hilo #10: System.Runtime.InteropServices.COMException (0x800706BA): The RPC server is unavailable. (Exception from HRESULT: 0x800706BA)
+       at FCEngine.IFlexiCaptureProcessor.SetCustomImageSource(IImageSource ImageSource)
+       at ProntoFlexicapture.ClassFlexicapture.ProcesarCartasBatchConFlexicapture(IEngine & engine, IFlexiCaptureProcessor & processor, String plantilla, List`1 imagenes, String SC, String DirApp, Boolean bProcesar, String & sError) in c: \Users\Administrador\Documents\bdl\pronto\InterfazFlexicapture\prontoflexicapture.cs:line 402
+       at ProntoFlexicapture.ClassFlexicapture.ProcesarCartasBatchConFlexicapture_SacandoImagenesDelDirectorio(IEngine & engine, IFlexiCaptureProcessor & processor, String plantilla, Int32 cuantasImagenes, String SC, String DirApp, Boolean bProcesar, String & sError) in c: \Users\Administrador\Documents\bdl\pronto\InterfazFlexicapture\prontoflexicapture.cs:line 310
+       at ProntoWindowsService.Service1.Tanda(String SC, String DirApp, IEngine & engine, IFlexiCaptureProcessor & processor, String idthread) in c: \Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\Service1.cs:line 851
+       at ProntoWindowsService.Service1.DoWorkSoloOCR() in c: \Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\Service1.cs:line 298
+    __________________________
+
+    Log Entry:
+                            06 / 28 / 2017 15:36:23
+    Error in: . Error Message:hilo #10: System.Runtime.InteropServices.COMException (0x800706BA): The RPC server is unavailable. (Exception from HRESULT: 0x800706BA)
+       at FCEngine.IEngineLoader.Unload()
+       at ProntoFlexicapture.ClassFlexicapture.unloadEngine(IEngine & engine, IEngineLoader & engineLoader) in c: \Users\Administrador\Documents\bdl\pronto\InterfazFlexicapture\prontoflexicapture.cs:line 2714
+       at ProntoWindowsService.Service1.DoWorkSoloOCR() in c: \Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\Service1.cs:line 470
+    __________________________
+
+    Log Entry:
+                            06 / 28 / 2017 15:36:23
+    Error in: . Error Message:hilo #10: Se apagó el motor, chau
+
+
+                            */
                         }
 
                         processor = null;
@@ -1042,7 +1043,7 @@ FCESupport\FCESupportImpl.h, 42.
             //ClassFlexicapture.Log(x.ToString());
 
             //ClassFlexicapture.unloadEngine(ref engine, ref engineLoader);
-            ClassFlexicapture.Log(idthread + "Se apagó el hilo de pegatinas");
+            ClassFlexicapture.Log(idthread + "Se apagó el hilo de correos");
 
 
         }
@@ -1223,7 +1224,12 @@ FCESupport\FCESupportImpl.h, 42.
 
                         var op = db.OrdenesPago.Find(c.IdComprobante);
                         if (op.Proveedore == null) continue; //es una op que usa el idcuenta, no el idproveedor
-                        var cuitproveedor = op.Proveedore.Cuit;
+                        var cuitproveedor = op.Proveedore.Cuit.Replace(" ", "").Replace("-", "");
+
+                        //qué uso como cuit? :  UserDatosExtendidos.razonsocial, UserDatosExtendidos.cuit o 
+                        //aspnet_Users.username????  -usa nomas el UserDatosExtendidos.razonsocial, que los que usan el cuit en el nombre de usuario tambien lo copian ahí
+
+                        
 
 
                         string mail = op.Proveedore.Email;
@@ -1231,8 +1237,9 @@ FCESupport\FCESupportImpl.h, 42.
 
                         //busco el proveedor del f.IdComprobante
                         // depues busco el cuit entre los usuarios de la web para mandarselo a ese mail
-                        var l = dbmaster.UserDatosExtendidos.Where(x => x.CUIT.ToString() == cuitproveedor);
-                        if (l.Count() > 0)
+                        //var l = dbmaster.UserDatosExtendidos.Where(x => x.CUIT.ToString().Replace(" ", "").Replace("-", "") == cuitproveedor);
+                        var l = dbmaster.UserDatosExtendidos.Where(x => x.RazonSocial.ToString().Replace(" ", "").Replace("-", "") == cuitproveedor);
+                        if (l.Count() > 0 && cuitproveedor!="")
                         {
                             var guid = l.First().UserId;
                             var qq = dbmaster.aspnet_Membership.Where(x => x.UserId == guid).FirstOrDefault();
@@ -1243,27 +1250,33 @@ FCESupport\FCESupportImpl.h, 42.
                         }
                         //ClassFlexicapture.MarcarArchivoComoProcesandose(f);
 
+                        if (mail == null) continue;
 
-                        string cuerpo = "Estimado proveedor le informamos que tiene un pago disponible, para mas información ingrese en nuestra web de proveedores www.niroconstrucciones.com.ar ";
+                        string asunto = ConfigurationManager.AppSettings["AsuntoCorreoPagoDisponible"];
+                        string cuerpo = string.Format(ConfigurationManager.AppSettings["CuerpoCorreoPagoDisponible"], op.Proveedore.RazonSocial);
+                        string friendlyname = ConfigurationManager.AppSettings["RemitentePagoDisponible"];
 
-                        ErrHandler.WriteError("enviando mail a" mail
+                        ErrHandler.WriteError("Enviando mail a " + mail + "    op id:" + op.IdOrdenPago);
 
 
                         Pronto.ERP.Bll.EntidadManager.MandaEmail_Nuevo(mail,
-                               "asuntoasuntoasunto 2",
+                               asunto,
                            cuerpo,
                             ConfigurationManager.AppSettings["SmtpUser"],
                             ConfigurationManager.AppSettings["SmtpServer"],
                             ConfigurationManager.AppSettings["SmtpUser"],
                             ConfigurationManager.AppSettings["SmtpPass"],
                               "",
-                           Convert.ToInt16(ConfigurationManager.AppSettings["SmtpPort"]));
+                           Convert.ToInt16(ConfigurationManager.AppSettings["SmtpPort"]),
+                           1,"","", friendlyname,
+                           "",true,"",""                         
+                           );
 
 
 
 
                         db.ColaCorreosComprobantes.Remove(c);
-                        //db.SaveChanges();
+                        db.SaveChanges();
                     }
                 }
 

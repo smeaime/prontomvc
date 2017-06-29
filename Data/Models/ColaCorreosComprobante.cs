@@ -16,5 +16,6 @@ namespace ProntoMVC.Data.Models
     {
         public int IdTipoComprobante { get; set; }
         public int IdComprobante { get; set; }
+        public int IdColaCorreoComprobante { get; set; }
     }
 }
