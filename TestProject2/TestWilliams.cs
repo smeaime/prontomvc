@@ -873,20 +873,18 @@ namespace ProntoMVC.Tests
             DemoProntoEntities db2 = null;
 
 
-            string usuario = "Mariano"; //"BLD25MAYO"
+            string usuario = "RODRIGORIOS"; //"BLD25MAYO"
 
 
-            UserDatosExtendidosManager.UpdateClientesRelacionadoslDelUsuario(usuario, scbdlmasterappconfig, "20-12345678-1|20-20100767-5");
+            //UserDatosExtendidosManager.UpdateClientesRelacionadoslDelUsuario(usuario, scbdlmasterappconfig, "20-12345678-1|20-20100767-5");
 
 
+            //cuando decide si usa CartaDePorteInformesAccesoClientes o CartaDePorteInformesAccesoClientesBLDcorredor? -con CartaDePorteManager.EsClienteBLDcorredor(HFSC.Value)
 
 
             var clientes = CartaDePorteManager.TraerCUITClientesSegunUsuario(usuario, SC, scbdlmasterappconfig).Where(x => x != "").ToList();
 
-            //String aaa = ParametroManager.TraerValorParametro2(SC, "ClienteBLDcorredorCUIT").NullSafeToString() ?? "";
-            //var sss = aaa.Split('|').ToList();
-
-
+            
             var q = CartaDePorteManager.CartasLINQlocalSimplificadoTipadoConCalada3(SC,
                      "", "", "", 1, 99999,
                       CartaDePorteManager.enumCDPestado.Todas, "", -1, -1,
