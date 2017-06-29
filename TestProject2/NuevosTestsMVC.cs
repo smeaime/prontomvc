@@ -186,15 +186,11 @@ namespace ProntoMVC.Tests
 
             db.SaveChanges();
 
+            var s = new ProntoWindowsService.Service1();
+
+            //ProntoWindowsService.Service1.DoWorkEnvioCorreos();
             ProntoWindowsService.Service1.TandaCorreos(sc, bldmasterappconfig, "12345678");
-
-
-
-
-            //                El mensajes seria: Estimado proveedor le informamos que tiene un pago disponible, 
-            //            para mas información ingrese en nuestra web de proveedores www.niroconstrucciones.com.ar / proveedores
-
-            //......................................................................
+          
 
         }
 
