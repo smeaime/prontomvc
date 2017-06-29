@@ -13,3 +13,8 @@ Log Entry :
 06/29/2017 09:44:25
 Error in: . Error Message:hilo #10: CONEXION: metadata=res://*/Models.Pronto.csdl|res://*/Models.Pronto.ssdl|res://*/Models.Pronto.msl;provider=System.Data.SqlClient;provider connection string="data source=;initial catalog=;persist security info=True;user id=;password=;multipleactiveresultsets=True;App=EntityFramework"
 __________________________
+
+Log Entry : 
+06/29/2017 13:04:05
+Error in: . Error Message:estadidesc   01/11/2015   01/11/2015   01/11/2016    31/05/2017
+__________________________
