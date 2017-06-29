@@ -1,4 +1,6 @@
-﻿using System;
+﻿#region MyRegion        
+
+using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Microsoft.VisualStudio.TestTools.UnitTesting.Web;
 using System.Linq;
@@ -42,7 +44,6 @@ namespace ProntoMVC.Tests
 {
 
 
-    #region MyRegion        
 
 
     using System.Web.Mvc;
@@ -50,7 +51,7 @@ namespace ProntoMVC.Tests
 
 
 
-    
+
 
 
 
@@ -154,23 +155,40 @@ namespace ProntoMVC.Tests
         public void testenviomailsdeniro_41340()
         {
             DemoProntoEntities db = new DemoProntoEntities(sc);
+            BDLMasterEntities dbmaster = new BDLMasterEntities(Auxiliares.FormatearConexParaEntityFrameworkBDLMASTER_2(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(bldmasterappconfig)));
 
-            //db.ColaCorreosComprobantes.Add(new ColaCorreosComprobante
-            //{
-            //    IdComprobante = 121,
-            //    IdTipoComprobante = 17 // orden de pago
-            //});
-            //db.ColaCorreosComprobantes.Add(new ColaCorreosComprobante
-            //{
-            //    IdComprobante = 122,
-            //    IdTipoComprobante = 17 // orden de pago
-            //});
-            
-            //db.SaveChanges();
+
+            // verificar q el cuit de la op esta como usuario
+            var opid = 11;
+            var marianoguid = new Guid("920688E1-7E8F-4DA7-A793-9D0DAC7968E6");
+            var mail = "mscalella911@gmail.com";
+
+            var op = db.OrdenesPago.Find(opid);
+            var cuitproveedor = op.Proveedore.Cuit.Replace(" ", "").Replace("-", "");
+            var marianoext = dbmaster.UserDatosExtendidos.Where(x => x.UserId == marianoguid).FirstOrDefault();
+            var marianouser = dbmaster.aspnet_Membership.Where(x => x.UserId == marianoguid).FirstOrDefault();
+            marianoext.RazonSocial = cuitproveedor;
+            marianouser.Email = mail;
+            dbmaster.SaveChanges();
+
+
+
+            db.ColaCorreosComprobantes.Add(new ColaCorreosComprobante
+            {
+                IdComprobante = opid,
+                IdTipoComprobante = 17 // orden de pago
+            });
+            db.ColaCorreosComprobantes.Add(new ColaCorreosComprobante
+            {
+                IdComprobante = opid,
+                IdTipoComprobante = 17 // orden de pago
+            });
+
+            db.SaveChanges();
 
             ProntoWindowsService.Service1.TandaCorreos(sc, bldmasterappconfig, "12345678");
 
-                
+
 
 
             //                El mensajes seria: Estimado proveedor le informamos que tiene un pago disponible, 

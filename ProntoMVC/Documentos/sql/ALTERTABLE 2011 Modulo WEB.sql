@@ -2063,6 +2063,7 @@ INSERT  INTO CartaPorteRubrosCalidad ( Descripcion)  VALUES  (  'Descuento Final
 --select * from tiposcomprobante
 
 
+--select idcartadeporte, numerocartadeporte,idfacturaimputada, fechaingreso, fechadescarga from cartasdeporte where iddetallefactura=1 order by idcartadeporte desc
 
 CREATE TABLE [dbo].[ColaCorreosComprobantes] (
     [IdTipoComprobante] INT NOT NULL,
@@ -2070,17 +2071,18 @@ CREATE TABLE [dbo].[ColaCorreosComprobantes] (
 );
 go
 
---select idcartadeporte, numerocartadeporte,idfacturaimputada, fechaingreso, fechadescarga from cartasdeporte where iddetallefactura=1 order by idcartadeporte desc
-
-
 alter table [ColaCorreosComprobantes] add
 	IdColaCorreoComprobante int IDENTITY (1, 1) PRIMARY KEY
 go
 
+select * from [ColaCorreosComprobantes]
+delete [ColaCorreosComprobantes]
 
 INSERT  INTO [ColaCorreosComprobantes] ( IdTipoComprobante,IdComprobante)  VALUES  (  17,10 ) 
 INSERT  INTO [ColaCorreosComprobantes] ( IdTipoComprobante,IdComprobante)  VALUES  (  15,9 ) 
 INSERT  INTO [ColaCorreosComprobantes] ( IdTipoComprobante,IdComprobante)  VALUES  (  17,11 ) 
 
 
-select * from bdlmaster.dbo. 
+select * from aspnet_Users
+select * from UserDatosExtendidos
+select * from aspnet_Membership

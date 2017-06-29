@@ -123,3 +123,235 @@ Log Entry :
 06/28/2017 16:32:18
 Error in: . Error Message:12345678busco pegatinas
 __________________________
+
+Log Entry : 
+06/28/2017 18:09:48
+Error in: . Error Message:12345678busco pegatinas
+__________________________
+
+Log Entry : 
+06/28/2017 20:07:11
+Error in: . Error Message:12345678busco pegatinas
+__________________________
+
+Log Entry : 
+06/28/2017 20:15:45
+Error in: . Error Message:12345678busco pegatinas
+__________________________
+
+Log Entry : 
+06/28/2017 20:21:43
+Error in: . Error Message:12345678busco pegatinas
+__________________________
+
+Log Entry : 
+06/28/2017 20:25:34
+Error in: . Error Message:12345678busco pegatinas
+__________________________
+
+Log Entry : 
+06/28/2017 20:35:21
+Error in: . Error Message:12345678busco pegatinas
+__________________________
+
+Log Entry : 
+06/28/2017 20:36:47
+Error in: . Error Message:System.IO.DirectoryNotFoundException
+No se puede encontrar una parte de la ruta de acceso 'C:\Users\Administrador\Documents\bdl\pronto\TestProject2\bin\Debug\imagenes\Unnamed.png'.
+   en System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   en System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   en System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share)
+   en System.Net.Mail.AttachmentBase.SetContentFromFile(String fileName, String mediaType)
+   en System.Net.Mail.AttachmentBase..ctor(String fileName)
+   en System.Net.Mail.Attachment..ctor(String fileName)
+   en Pronto.ERP.Bll.EntidadManager.MandaEmail_Nuevo(String Para, String Asunto, String Cuerpo, String De, String SmtpServer, String SmtpUser, String SmtpPass, String sFileNameAdjunto, Int64 SmtpPort, Int32 EnableSSL, String CCO, String img, String friendlyname, String replyTo, Boolean isHtml, String inlinePNG, String inlinePNG2) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\EntidadManager.vb:línea 217
+mscorlib
+__________________________
+
+Log Entry : 
+06/28/2017 20:37:15
+Error in: . Error Message:System.IO.DirectoryNotFoundException
+No se puede encontrar una parte de la ruta de acceso 'C:\Users\Administrador\Documents\bdl\pronto\TestProject2\bin\Debug\imagenes\Unnamed.png'.
+   en System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   en System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   en System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share)
+   en System.Net.Mail.AttachmentBase.SetContentFromFile(String fileName, String mediaType)
+   en System.Net.Mail.AttachmentBase..ctor(String fileName)
+   en System.Net.Mail.Attachment..ctor(String fileName)
+   en Pronto.ERP.Bll.EntidadManager.MandaEmail_Nuevo(String Para, String Asunto, String Cuerpo, String De, String SmtpServer, String SmtpUser, String SmtpPass, String sFileNameAdjunto, Int64 SmtpPort, Int32 EnableSSL, String CCO, String img, String friendlyname, String replyTo, Boolean isHtml, String inlinePNG, String inlinePNG2) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\EntidadManager.vb:línea 217
+mscorlib
+__________________________
+
+Log Entry : 
+06/28/2017 20:37:28
+Error in: . Error Message:System.IO.DirectoryNotFoundException
+No se puede encontrar una parte de la ruta de acceso 'C:\Users\Administrador\Documents\bdl\pronto\TestProject2\bin\Debug\imagenes\Unnamed.png'.
+   en System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   en System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   en System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share)
+   en System.Net.Mail.AttachmentBase.SetContentFromFile(String fileName, String mediaType)
+   en System.Net.Mail.AttachmentBase..ctor(String fileName)
+   en System.Net.Mail.Attachment..ctor(String fileName)
+   en Pronto.ERP.Bll.EntidadManager.MandaEmail_Nuevo(String Para, String Asunto, String Cuerpo, String De, String SmtpServer, String SmtpUser, String SmtpPass, String sFileNameAdjunto, Int64 SmtpPort, Int32 EnableSSL, String CCO, String img, String friendlyname, String replyTo, Boolean isHtml, String inlinePNG, String inlinePNG2) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\EntidadManager.vb:línea 217
+mscorlib
+__________________________
+
+Log Entry : 
+06/28/2017 20:38:07
+Error in: . Error Message:System.IO.DirectoryNotFoundException
+No se puede encontrar una parte de la ruta de acceso 'C:\Users\Administrador\Documents\bdl\pronto\TestProject2\bin\Debug\imagenes\Unnamed.png'.
+   en System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   en System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   en System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share)
+   en System.Net.Mail.AttachmentBase.SetContentFromFile(String fileName, String mediaType)
+   en System.Net.Mail.AttachmentBase..ctor(String fileName)
+   en System.Net.Mail.Attachment..ctor(String fileName)
+   en Pronto.ERP.Bll.EntidadManager.MandaEmail_Nuevo(String Para, String Asunto, String Cuerpo, String De, String SmtpServer, String SmtpUser, String SmtpPass, String sFileNameAdjunto, Int64 SmtpPort, Int32 EnableSSL, String CCO, String img, String friendlyname, String replyTo, Boolean isHtml, String inlinePNG, String inlinePNG2) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\EntidadManager.vb:línea 217
+mscorlib
+__________________________
+
+Log Entry : 
+06/28/2017 20:38:13
+Error in: . Error Message:System.IO.DirectoryNotFoundException
+No se puede encontrar una parte de la ruta de acceso 'C:\Users\Administrador\Documents\bdl\pronto\TestProject2\bin\Debug\imagenes\Unnamed.png'.
+   en System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   en System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   en System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share)
+   en System.Net.Mail.AttachmentBase.SetContentFromFile(String fileName, String mediaType)
+   en System.Net.Mail.AttachmentBase..ctor(String fileName)
+   en System.Net.Mail.Attachment..ctor(String fileName)
+   en Pronto.ERP.Bll.EntidadManager.MandaEmail_Nuevo(String Para, String Asunto, String Cuerpo, String De, String SmtpServer, String SmtpUser, String SmtpPass, String sFileNameAdjunto, Int64 SmtpPort, Int32 EnableSSL, String CCO, String img, String friendlyname, String replyTo, Boolean isHtml, String inlinePNG, String inlinePNG2) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\EntidadManager.vb:línea 217
+mscorlib
+__________________________
+
+Log Entry : 
+06/28/2017 21:17:12
+Error in: . Error Message:12345678busco pegatinas
+__________________________
+
+Log Entry : 
+06/28/2017 21:18:55
+Error in: . Error Message:System.IO.DirectoryNotFoundException
+No se puede encontrar una parte de la ruta de acceso 'C:\Users\Administrador\Documents\bdl\pronto\TestProject2\bin\Debug\imagenes\Unnamed.png'.
+   en System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   en System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   en System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share)
+   en System.Net.Mail.AttachmentBase.SetContentFromFile(String fileName, String mediaType)
+   en System.Net.Mail.AttachmentBase..ctor(String fileName)
+   en System.Net.Mail.Attachment..ctor(String fileName)
+   en Pronto.ERP.Bll.EntidadManager.MandaEmail_Nuevo(String Para, String Asunto, String Cuerpo, String De, String SmtpServer, String SmtpUser, String SmtpPass, String sFileNameAdjunto, Int64 SmtpPort, Int32 EnableSSL, String CCO, String img, String friendlyname, String replyTo, Boolean isHtml, String inlinePNG, String inlinePNG2) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\EntidadManager.vb:línea 217
+mscorlib
+__________________________
+
+Log Entry : 
+06/28/2017 21:19:01
+Error in: . Error Message:System.IO.DirectoryNotFoundException
+No se puede encontrar una parte de la ruta de acceso 'C:\Users\Administrador\Documents\bdl\pronto\TestProject2\bin\Debug\imagenes\Unnamed.png'.
+   en System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   en System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   en System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share)
+   en System.Net.Mail.AttachmentBase.SetContentFromFile(String fileName, String mediaType)
+   en System.Net.Mail.AttachmentBase..ctor(String fileName)
+   en System.Net.Mail.Attachment..ctor(String fileName)
+   en Pronto.ERP.Bll.EntidadManager.MandaEmail_Nuevo(String Para, String Asunto, String Cuerpo, String De, String SmtpServer, String SmtpUser, String SmtpPass, String sFileNameAdjunto, Int64 SmtpPort, Int32 EnableSSL, String CCO, String img, String friendlyname, String replyTo, Boolean isHtml, String inlinePNG, String inlinePNG2) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\EntidadManager.vb:línea 217
+mscorlib
+__________________________
+
+Log Entry : 
+06/28/2017 21:22:51
+Error in: . Error Message:12345678busco pegatinas
+__________________________
+
+Log Entry : 
+06/28/2017 21:23:58
+Error in: . Error Message:12345678busco pegatinas
+__________________________
+
+Log Entry : 
+06/28/2017 21:24:05
+Error in: . Error Message:System.IO.DirectoryNotFoundException
+No se puede encontrar una parte de la ruta de acceso 'C:\Users\Administrador\Documents\bdl\pronto\TestProject2\bin\Debug\imagenes\Unnamed.png'.
+   en System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   en System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   en System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share)
+   en System.Net.Mail.AttachmentBase.SetContentFromFile(String fileName, String mediaType)
+   en System.Net.Mail.AttachmentBase..ctor(String fileName)
+   en System.Net.Mail.Attachment..ctor(String fileName)
+   en Pronto.ERP.Bll.EntidadManager.MandaEmail_Nuevo(String Para, String Asunto, String Cuerpo, String De, String SmtpServer, String SmtpUser, String SmtpPass, String sFileNameAdjunto, Int64 SmtpPort, Int32 EnableSSL, String CCO, String img, String friendlyname, String replyTo, Boolean isHtml, String inlinePNG, String inlinePNG2) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\EntidadManager.vb:línea 217
+mscorlib
+__________________________
+
+Log Entry : 
+06/28/2017 21:24:09
+Error in: . Error Message:System.IO.DirectoryNotFoundException
+No se puede encontrar una parte de la ruta de acceso 'C:\Users\Administrador\Documents\bdl\pronto\TestProject2\bin\Debug\imagenes\Unnamed.png'.
+   en System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   en System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   en System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share)
+   en System.Net.Mail.AttachmentBase.SetContentFromFile(String fileName, String mediaType)
+   en System.Net.Mail.AttachmentBase..ctor(String fileName)
+   en System.Net.Mail.Attachment..ctor(String fileName)
+   en Pronto.ERP.Bll.EntidadManager.MandaEmail_Nuevo(String Para, String Asunto, String Cuerpo, String De, String SmtpServer, String SmtpUser, String SmtpPass, String sFileNameAdjunto, Int64 SmtpPort, Int32 EnableSSL, String CCO, String img, String friendlyname, String replyTo, Boolean isHtml, String inlinePNG, String inlinePNG2) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\EntidadManager.vb:línea 217
+mscorlib
+__________________________
+
+Log Entry : 
+06/28/2017 21:24:12
+Error in: . Error Message:System.IO.DirectoryNotFoundException
+No se puede encontrar una parte de la ruta de acceso 'C:\Users\Administrador\Documents\bdl\pronto\TestProject2\bin\Debug\imagenes\Unnamed.png'.
+   en System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   en System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   en System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share)
+   en System.Net.Mail.AttachmentBase.SetContentFromFile(String fileName, String mediaType)
+   en System.Net.Mail.AttachmentBase..ctor(String fileName)
+   en System.Net.Mail.Attachment..ctor(String fileName)
+   en Pronto.ERP.Bll.EntidadManager.MandaEmail_Nuevo(String Para, String Asunto, String Cuerpo, String De, String SmtpServer, String SmtpUser, String SmtpPass, String sFileNameAdjunto, Int64 SmtpPort, Int32 EnableSSL, String CCO, String img, String friendlyname, String replyTo, Boolean isHtml, String inlinePNG, String inlinePNG2) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\EntidadManager.vb:línea 217
+mscorlib
+__________________________
+
+Log Entry : 
+06/28/2017 21:24:16
+Error in: . Error Message:System.IO.DirectoryNotFoundException
+No se puede encontrar una parte de la ruta de acceso 'C:\Users\Administrador\Documents\bdl\pronto\TestProject2\bin\Debug\imagenes\Unnamed.png'.
+   en System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   en System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   en System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share)
+   en System.Net.Mail.AttachmentBase.SetContentFromFile(String fileName, String mediaType)
+   en System.Net.Mail.AttachmentBase..ctor(String fileName)
+   en System.Net.Mail.Attachment..ctor(String fileName)
+   en Pronto.ERP.Bll.EntidadManager.MandaEmail_Nuevo(String Para, String Asunto, String Cuerpo, String De, String SmtpServer, String SmtpUser, String SmtpPass, String sFileNameAdjunto, Int64 SmtpPort, Int32 EnableSSL, String CCO, String img, String friendlyname, String replyTo, Boolean isHtml, String inlinePNG, String inlinePNG2) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\EntidadManager.vb:línea 217
+mscorlib
+__________________________
+
+Log Entry : 
+06/28/2017 21:29:17
+Error in: . Error Message:12345678busco pegatinas
+__________________________
+
+Log Entry : 
+06/28/2017 21:29:18
+Error in: . Error Message:System.IO.DirectoryNotFoundException
+No se puede encontrar una parte de la ruta de acceso 'C:\Users\Administrador\Documents\bdl\pronto\TestProject2\bin\Debug\imagenes\Unnamed.png'.
+   en System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   en System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   en System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share)
+   en System.Net.Mail.AttachmentBase.SetContentFromFile(String fileName, String mediaType)
+   en System.Net.Mail.AttachmentBase..ctor(String fileName)
+   en System.Net.Mail.Attachment..ctor(String fileName)
+   en Pronto.ERP.Bll.EntidadManager.MandaEmail_Nuevo(String Para, String Asunto, String Cuerpo, String De, String SmtpServer, String SmtpUser, String SmtpPass, String sFileNameAdjunto, Int64 SmtpPort, Int32 EnableSSL, String CCO, String img, String friendlyname, String replyTo, Boolean isHtml, String inlinePNG, String inlinePNG2) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\EntidadManager.vb:línea 217
+mscorlib
+__________________________
+
+Log Entry : 
+06/28/2017 21:29:22
+Error in: . Error Message:System.IO.DirectoryNotFoundException
+No se puede encontrar una parte de la ruta de acceso 'C:\Users\Administrador\Documents\bdl\pronto\TestProject2\bin\Debug\imagenes\Unnamed.png'.
+   en System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   en System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   en System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share)
+   en System.Net.Mail.AttachmentBase.SetContentFromFile(String fileName, String mediaType)
+   en System.Net.Mail.AttachmentBase..ctor(String fileName)
+   en System.Net.Mail.Attachment..ctor(String fileName)
+   en Pronto.ERP.Bll.EntidadManager.MandaEmail_Nuevo(String Para, String Asunto, String Cuerpo, String De, String SmtpServer, String SmtpUser, String SmtpPass, String sFileNameAdjunto, Int64 SmtpPort, Int32 EnableSSL, String CCO, String img, String friendlyname, String replyTo, Boolean isHtml, String inlinePNG, String inlinePNG2) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\EntidadManager.vb:línea 217
+mscorlib
+__________________________
