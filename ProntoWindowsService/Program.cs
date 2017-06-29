@@ -66,8 +66,11 @@ namespace ProntoWindowsService
             Console.WriteLine("Services running in interactive mode.");
             Console.WriteLine();
 
+
+
             MethodInfo onStartMethod = typeof(ServiceBase).GetMethod("OnStart",
                 BindingFlags.Instance | BindingFlags.NonPublic);
+
             foreach (ServiceBase service in servicesToRun)
             {
                 Console.Write("Starting {0}...", service.ServiceName);

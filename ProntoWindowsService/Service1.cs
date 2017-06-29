@@ -70,6 +70,9 @@ namespace ProntoWindowsService
         protected override void OnStart(string[] args)
         {
 
+            Initialize();
+
+
 
             // matar procesos FCEngine huerfanos
             foreach (var process in Process.GetProcessesByName("FCEngine"))
@@ -173,13 +176,15 @@ namespace ProntoWindowsService
             m_shutdownEvent.Set();
 
             // wait for the thread to stop giving it 10 seconds
-            m_thread.Join(20000);
+            if (m_thread != null) m_thread.Join(20000);
 
-            m_thread2.Join(10000);
+            if (m_thread2 != null) m_thread2.Join(10000);
 
-            m_thread3.Join(10000);
+            if (m_thread3 != null) m_thread3.Join(10000);
 
-            m_thread4.Join(10000);
+            if (m_thread4 != null) m_thread4.Join(10000);
+
+            if (m_thread5 != null) m_thread5.Join(10000);
 
             // Temillas con la parada del servicio
             //http://stackoverflow.com/questions/22534330/windows-service-onstop-wait-for-finished-processing
@@ -192,16 +197,6 @@ namespace ProntoWindowsService
         static public void Initialize()
         {
 
-            /*
-             DirApp = @"C:\Users\Administrador\Documents\bdl\prontoweb";
-
-             SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(
-                    @"Data Source=SERVERSQL3;Initial catalog=Williams;User ID=sa; Password=.SistemaPronto.;Connect Timeout=8");
-
-             plantilla = @"C:\Users\Administrador\Documents\bdl\pronto\InterfazFlexicapture\cartaporte.afl";
-            */
-
-
             plantilla = ConfigurationManager.AppSettings["PlantillaFlexicapture"];
 
             DirApp1 = ConfigurationManager.AppSettings["DirApp"];
@@ -210,15 +205,13 @@ namespace ProntoWindowsService
             DirApp2 = ConfigurationManager.AppSettings["DirApp_Test"];
             SC2 = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(ConfigurationManager.AppSettings["SC_Test"]);
 
-            scBdlMaster = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(ConfigurationManager.AppSettings["scBdlMaster"]);
+            scBdlMaster = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(ConfigurationManager.ConnectionStrings["ApplicationServices"].ConnectionString);
 
-            bWorker1Habilitado = (ProntoFuncionesGeneralesCOMPRONTO.Encriptar(ConfigurationManager.AppSettings["bWorker1Habilitado"]) == "SI");
-            bWorker2Habilitado = (ProntoFuncionesGeneralesCOMPRONTO.Encriptar(ConfigurationManager.AppSettings["bWorker2Habilitado"]) == "SI");
-            bWorker3Habilitado = (ProntoFuncionesGeneralesCOMPRONTO.Encriptar(ConfigurationManager.AppSettings["bWorker3Habilitado"]) == "SI");
-            bWorker4Habilitado = (ProntoFuncionesGeneralesCOMPRONTO.Encriptar(ConfigurationManager.AppSettings["bWorker4Habilitado"]) == "SI");
-            bWorker5Habilitado = (ProntoFuncionesGeneralesCOMPRONTO.Encriptar(ConfigurationManager.AppSettings["bWorker5Habilitado"]) == "SI");
-
-
+            bWorker1Habilitado = ConfigurationManager.AppSettings["bWorker1Habilitado"] == "SI";
+            bWorker2Habilitado = ConfigurationManager.AppSettings["bWorker2Habilitado"] == "SI";
+            bWorker3Habilitado = ConfigurationManager.AppSettings["bWorker3Habilitado"] == "SI";
+            bWorker4Habilitado = ConfigurationManager.AppSettings["bWorker4Habilitado"] == "SI";
+            bWorker5Habilitado = ConfigurationManager.AppSettings["bWorker5Habilitado"] == "SI";
 
         }
 
@@ -249,7 +242,7 @@ namespace ProntoWindowsService
 
                 ClassFlexicapture.Log(idthread + "Empieza");
 
-                Initialize();
+                //Initialize();
 
 
 
@@ -492,10 +485,10 @@ namespace ProntoWindowsService
 
 
 
-                        
 
 
-                        
+
+
 
 
                         if ((uint)x2.ErrorCode == 0x80080005)
@@ -715,7 +708,7 @@ namespace ProntoWindowsService
 
             ClassFlexicapture.Log(idthread + "Empieza");
 
-            Initialize();
+            //Initialize();
 
 
 
@@ -916,16 +909,7 @@ FCESupport\FCESupportImpl.h, 42.
         {
 
 
-            //IEngine engine = null;
-            //IEngineLoader engineLoader = null;
-            //IFlexiCaptureProcessor processor = null;
-
-
             string idthread = "hilo #" + Thread.CurrentThread.ManagedThreadId.ToString() + ": ";
-
-
-            //if (Debugger.IsAttached) Debugger.Break();
-
             Pronto.ERP.Bll.ErrHandler2.WriteError(idthread + "ssdssss");
 
 
@@ -1070,7 +1054,7 @@ FCESupport\FCESupportImpl.h, 42.
 
 
 
-                
+
 
 
 
@@ -1200,11 +1184,11 @@ FCESupport\FCESupportImpl.h, 42.
             try
             {
 
-                ClassFlexicapture.Log(idthread + "busco pegatinas");
+                ClassFlexicapture.Log(idthread + "busco correos");
 
-                
 
-                DemoProntoEntities db = new DemoProntoEntities(SC);
+
+                DemoProntoEntities db = new DemoProntoEntities(Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC)));
                 BDLMasterEntities dbmaster = new BDLMasterEntities(Auxiliares.FormatearConexParaEntityFrameworkBDLMASTER_2(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(scBdlMaster)));
 
                 var q = db.ColaCorreosComprobantes.ToList();
@@ -1229,17 +1213,17 @@ FCESupport\FCESupportImpl.h, 42.
                         //qué uso como cuit? :  UserDatosExtendidos.razonsocial, UserDatosExtendidos.cuit o 
                         //aspnet_Users.username????  -usa nomas el UserDatosExtendidos.razonsocial, que los que usan el cuit en el nombre de usuario tambien lo copian ahí
 
-                        
+
 
 
                         string mail = op.Proveedore.Email;
-
-
+                        string razonsocial = op.Proveedore.RazonSocial ?? "";
+                        
                         //busco el proveedor del f.IdComprobante
                         // depues busco el cuit entre los usuarios de la web para mandarselo a ese mail
                         //var l = dbmaster.UserDatosExtendidos.Where(x => x.CUIT.ToString().Replace(" ", "").Replace("-", "") == cuitproveedor);
                         var l = dbmaster.UserDatosExtendidos.Where(x => x.RazonSocial.ToString().Replace(" ", "").Replace("-", "") == cuitproveedor);
-                        if (l.Count() > 0 && cuitproveedor!="")
+                        if (l.Count() > 0 && cuitproveedor != "")
                         {
                             var guid = l.First().UserId;
                             var qq = dbmaster.aspnet_Membership.Where(x => x.UserId == guid).FirstOrDefault();
@@ -1253,7 +1237,7 @@ FCESupport\FCESupportImpl.h, 42.
                         if (mail == null) continue;
 
                         string asunto = ConfigurationManager.AppSettings["AsuntoCorreoPagoDisponible"];
-                        string cuerpo = string.Format(ConfigurationManager.AppSettings["CuerpoCorreoPagoDisponible"], op.Proveedore.RazonSocial);
+                        string cuerpo = string.Format(ConfigurationManager.AppSettings["CuerpoCorreoPagoDisponible"],razonsocial );
                         string friendlyname = ConfigurationManager.AppSettings["RemitentePagoDisponible"];
 
                         ErrHandler.WriteError("Enviando mail a " + mail + "    op id:" + op.IdOrdenPago);
@@ -1268,8 +1252,8 @@ FCESupport\FCESupportImpl.h, 42.
                             ConfigurationManager.AppSettings["SmtpPass"],
                               "",
                            Convert.ToInt16(ConfigurationManager.AppSettings["SmtpPort"]),
-                           1,"","", friendlyname,
-                           "",true,"",""                         
+                           1, "", "", friendlyname,
+                           "", true, "", ""
                            );
 
 
