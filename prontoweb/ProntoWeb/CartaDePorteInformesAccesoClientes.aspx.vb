@@ -433,21 +433,19 @@ Partial Class CartaDePorteInformesAccesoClientes
         Dim idcliente = BuscaIdClientePreciso(rs, HFSC.Value)
 
 
-        Dim dt As DataTable
-        Try
+        
 
-            'dt = CartaDePorteManager.GetDataTableFiltradoYPaginado(HFSC.Value, _
-            '        "", "", "", 1, 0, _
-            '        estadofiltro, rs, idVendedor, idCorredor, _
-            '        idDestinatario, idIntermediario, _
-            '        idRComercial, idArticulo, idProcedencia, idDestino, _
-            '        IIf(cmbCriterioWHERE.SelectedValue = "todos", FiltroANDOR.FiltroAND, FiltroANDOR.FiltroOR), _
-            '                        DropDownList2.Text, _
-            '        Convert.ToDateTime(iisValidSqlDate(txtFechaDesde.Text, #1/1/1753#)), _
-            '        Convert.ToDateTime(iisValidSqlDate(txtFechaHasta.Text, #1/1/2100#)), _
-            '        cmbPuntoVenta.SelectedValue, sTitulo, optDivisionSyngenta.SelectedValue, , , txtQueContenga.Text,
-            ' idClienteAuxiliar, -1, 0, "", , "Todos")
 
+
+
+        Dim serv
+        If System.Diagnostics.Debugger.IsAttached() Then
+            serv = "http://localhost:48391/ProntoWeb"
+        Else
+            serv = "http://prontoclientes.williamsentregas.com.ar/"
+        End If
+
+        'RebindReportViewerLINQ("ProntoWeb\Informes\Cartas con Copia sin asignar.rdl", qq, New ReportParameter() {New ReportParameter("sServidor", serv)})
 
 
 
@@ -455,10 +453,7 @@ Partial Class CartaDePorteInformesAccesoClientes
 
 
 
-
-
-
-            Dim strsql = CartaDePorteManager.GetDataTableFiltradoYPaginado_CadenaSQL(HFSC.Value, _
+        Dim dt = DataTablePorCliente(HFSC.Value, _
                     "", "", "", 1, 0, _
                     estadofiltro, rs, idVendedor, idCorredor, _
                     idDestinatario, idIntermediario, _
@@ -475,94 +470,6 @@ Partial Class CartaDePorteInformesAccesoClientes
 
 
 
-
-
-            If True Then ' Usuario es bldalabern
-                '                'http://bdlconsultores.ddns.net/Consultas/Admin/verConsultas1.php?recordid=14187
-                '                Mariano, lo que precisan es que un usuario, que es de BLD vea solamente las cartas de porte en las cuales BLD sea corredor y alguno de estos clientes como Titular, Intermediario o Rte Comercial
-
-                'Esto complementario al usuario de BLD que sigue viendo todo
-
-
-                '                informe fijo para este cliente. Volar de los filtros todo lo que sea checks de clientes
-
-                '                agrego un where con la lista que nos pasan
-
-            End If
-
-
-
-
-
-
-
-
-
-            'http://stackoverflow.com/questions/6841605/get-top-1-row-of-each-group
-            'http://stackoverflow.com/questions/3800551/select-first-row-in-each-group-by-group?rq=1
-
-            '            ;WITH cte AS
-            '(
-            '   SELECT *,
-            '         ROW_NUMBER() OVER (PARTITION BY DocumentID ORDER BY DateCreated DESC) AS rn
-            '   FROM DocumentStatusLogs
-            ')
-            'SELECT *
-            'FROM cte
-            'WHERE rn = 1
-
-
-            Dim agrup = ";WITH cte AS " & _
-            "( " & _
-            "       SELECT *, " & _
-            "             ROW_NUMBER() OVER (PARTITION BY NumeroCartaDePorte,SubnumeroVagon ORDER BY IdCartaDePorte DESC) AS rn " & _
-            "       FROM ( " & _
-                     strsql & _
-            "       ) as cartas " & _
-            ") " & _
-            "SELECT * " & _
-            "FROM cte " & _
-            "WHERE rn = 1 "
-
-            dt = ExecDinamico(HFSC.Value, agrup)
-
-
-
-
-
-            'como traer solo una vez las cartas
-
-
-
-
-
-
-            'Catch timeout
-            '    adasdad()
-
-        Catch ex As Exception
-            '            Log(Entry)
-            '04/10/2014 08:57:49
-            'Error in: http://prontoclientes.williamsentregas.com.ar/ProntoWeb/CartaDePorteInformesAccesoClientes.aspx. Error Message: -  Error 
-            '   en ExecDinamico. - System.Data.SqlClient.SqlException: Timeout expired.  The timeout period elapsed prior 
-            '   to completion of the operation or the server is not responding.
-            '   at Microsoft.VisualBasic.CompilerServices.Symbols.Container.InvokeMethod(Method TargetProcedure, Object[] Arguments, Boolean[] CopyBack, BindingFlags Flags)
-            '   at Microsoft.VisualBasic.CompilerServices.NewLateBinding.CallMethod(Container BaseReference, String MethodName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack, BindingFlags InvocationFlags, Boolean ReportErrors, ResolutionFailure& Failure)
-            '   at Microsoft.VisualBasic.CompilerServices.NewLateBinding.LateCall(Object Instance, Type Type, String MemberName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack, Boolean IgnoreReturn)
-
-            MandarMailDeError(ex)
-            ErrHandler2.WriteError("Hubo un error al generar el informe. " & ex.ToString)
-            MsgBoxAjax(Me, "Hubo un error al generar el informe. " & ex.ToString)
-            Return
-        End Try
-
-
-
-
-
-        If dt.Rows.Count = CartaDePorteManager._CONST_MAXROWS Then
-            MsgBoxAjax(Me, "Se llegó al máximo de renglones (" & CartaDePorteManager._CONST_MAXROWS & "). Por favor use un filtro más restringido")
-        End If
 
 
         Try
@@ -588,19 +495,6 @@ Partial Class CartaDePorteInformesAccesoClientes
         End Try
 
 
-
-
-
-
-
-        Dim serv
-        If System.Diagnostics.Debugger.IsAttached() Then
-            serv = "http://localhost:48391/ProntoWeb"
-        Else
-            serv = "http://prontoclientes.williamsentregas.com.ar/"
-        End If
-
-        'RebindReportViewerLINQ("ProntoWeb\Informes\Cartas con Copia sin asignar.rdl", qq, New ReportParameter() {New ReportParameter("sServidor", serv)})
 
 
 
@@ -796,60 +690,9 @@ Partial Class CartaDePorteInformesAccesoClientes
     End Sub
 
 
-    'Function generarWHERE() As String
-    '    Dim idVendedor = BuscaIdClientePreciso(txtVendedor.Text, HFSC.Value)
-    '    Dim idCorredor = BuscaIdVendedorPreciso(txtCorredor.Text, HFSC.Value)
-    '    Dim idIntermediario = BuscaIdClientePreciso(txtIntermediario.Text, HFSC.Value)
-    '    Dim idRComercial = BuscaIdClientePreciso(txtRcomercial.Text, HFSC.Value)
-    '    Dim idDestinatario = BuscaIdClientePreciso(txtEntregador.Text, HFSC.Value)
-    '    Dim idArticulo = BuscaIdArticuloPreciso(txt_AC_Articulo.Text, HFSC.Value)
-    '    Dim idProcedencia = BuscaIdLocalidadPreciso(txtProcedencia.Text, HFSC.Value)
-    '    Dim idDestino = BuscaIdWilliamsDestinoPreciso(txtDestino.Text, HFSC.Value)
-
-
-    '    Dim strWHERE As String '= " WHERE " 
-
-    '    strWHERE += " 1=1 " & _
-    '    iisIdValido(idVendedor, "           AND Vendedor = " & idVendedor, "") & _
-    '    iisIdValido(idIntermediario, "           AND CuentaOrden1 = " & idIntermediario, "") & _
-    '    iisIdValido(idRComercial, "           AND CuentaOrden2 = " & idRComercial, "") & _
-    '    iisIdValido(idCorredor, "             AND Corredor=" & idCorredor, "") & _
-    '    iisIdValido(idArticulo, "           AND IdArticulo=" & idArticulo, "") & _
-    '    iisIdValido(idProcedencia, "             AND Procedencia=" & idProcedencia, "") & _
-    '    iisIdValido(idDestino, "             AND Destino=" & idDestino, "") & _
-    '    iisIdValido(idDestinatario, "             AND Entregador=" & idDestinatario, "") '& _
-
-
-    '    If DropDownList2.Text = "Local" Then
-    '        strWHERE += "  AND ISNULL(Exporta,'NO')='NO'  "
-    '    ElseIf DropDownList2.Text = "Export" Then
-    '        strWHERE += "  AND ISNULL(Exporta,'NO')='SI'  "
-    '    End If
-
-    '    If cmbPuntoVenta.SelectedValue > 0 Then
-    '        strWHERE += "AND (PuntoVenta=" & cmbPuntoVenta.SelectedValue & ")"   ' OR PuntoVenta=0)"  'lo del punto de venta=0 era por las importaciones donde alguien (con acceso a todos los puntos de venta) no tenía donde elegir cual 
-    '    End If
-
-
-    '    ' "  AND ISNULL(IdFacturaImputada,-1)<=0 " '& _
-    '    '"                               AND (FechaDescarga Between '" & iisValidSqlDate(txtFechaDesde.Text, #1/1/1753#) & "' AND '" & iisValidSqlDate(txtFechaHasta.Text, #1/1/2100#) & "')" & _
-    '    '" AND IdCartaDePorte NOT IN (" & ListaDeCDPtildadas() & ") "
 
 
 
-    '    strWHERE += CartaDePorteManager.EstadoWHERE(CartaDePorteManager.enumCDPestado.DescargasMasFacturadas, "")
-
-    '    'strWHERE += " ORDER BY " & facturarselaA & " ASC,NumeroCartaDePorte ASC "
-
-    '    Return strWHERE
-    'End Function
-
-
-
-
-    '///////////////////////////////////////////////////////////////////////////////////////////////////////
-    '///////////////////////////////////////////////////////////////////////////////////////////////////////
-    '///////////////////////////////////////////////////////////////////////////////////////////////////////
     '///////////////////////////////////////////////////////////////////////////////////////////////////////
     '///////////////////////////////////////////////////////////////////////////////////////////////////////
     '///////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -912,338 +755,11 @@ Partial Class CartaDePorteInformesAccesoClientes
 
 
 
-    Sub Movimientos_RebindReportViewer(ByVal rdlFile As String, ByVal dtCartasPorte As DataTable, ByVal dtExistencias As DataTable, ByVal dtMovimientos As DataTable, ByVal FechaDesde As DateTime, ByVal fechaHasta As DateTime, ByVal IdDestinoPuerto As Integer, ByVal IdArticulo As Integer)
-        'http://forums.asp.net/t/1183208.aspx
+    
 
 
 
-        With ReportViewer2
-            .Reset()
-            .ProcessingMode = ProcessingMode.Local
 
-            With .LocalReport
-                .ReportPath = rdlFile
-                .EnableHyperlinks = True
-
-
-
-                .DataSources.Clear()
-
-                .EnableExternalImages = True
-
-                '.DataSources.Add(New ReportDataSource("DataSet1", TraerDataset)) '//the first patameter is the name of the datasource which you bind your report table to.
-                .DataSources.Add(New ReportDataSource("DataSetVistaCartasPorteMovimientos", dtMovimientos)) '//the first parameter is the name of the datasource which you bind your report table to.
-                .DataSources.Add(New ReportDataSource("DataSet2", dtExistencias))
-                .DataSources.Add(New ReportDataSource("DataSetCartasDePorte_TX_InformesCorregido", dtCartasPorte))
-
-                '.ReportEmbeddedResource = rdlFile
-
-                '/////////////////////
-                'parametros (no uses la @ delante del parametro!!!!)
-                '/////////////////////
-
-
-
-                'Try
-                '    If .GetParameters.Count > 1 Then
-                '        If .GetParameters.Item(1).Name = "FechaDesde" Then
-                '            Dim p1 = New ReportParameter("IdCartaDePorte", -1)
-                '            Dim p2 = New ReportParameter("FechaDesde", Today)
-                '            Dim p3 = New ReportParameter("FechaHasta", Today)
-                '            .SetParameters(New ReportParameter() {p1, p2, p3})
-                '        End If
-                '    End If
-                'Catch ex As Exception
-                '    ErrHandler2.WriteError(ex.tostring)
-                'End Try
-
-
-                Dim p1 = New ReportParameter("IdCartaDePorte", -1)
-                Dim p2 = New ReportParameter("FechaDesde", FechaDesde)
-                Dim p3 = New ReportParameter("IdArticulo", IdArticulo)
-                Dim p4 = New ReportParameter("IdPuerto", IdDestinoPuerto)
-                Dim p5 = New ReportParameter("FechaHasta", fechaHasta)
-
-
-
-                .SetParameters(New ReportParameter() {p1, p2, p3, p4, p5})
-
-                '/////////////////////
-                '/////////////////////
-                '/////////////////////
-                '/////////////////////
-
-            End With
-
-            .DocumentMapCollapsed = True
-            .LocalReport.Refresh()
-            .DataBind()
-        End With
-
-
-        '////////////////////////////////////////////
-        '////////////////////////////////////////////
-        '////////////////////////////////////////////
-        '////////////////////////////////////////////
-        'ReportViewer2.Reset()
-        'Dim rep As Microsoft.Reporting.WebForms.LocalReport = ReportViewer2.LocalReport
-
-        ''rep.ReportPath = "SampleReport.rdlc"
-        'Dim myConnection As SqlConnection = New SqlConnection(HFSC.Value)
-
-        'Dim ds As Data.DataSet = RequerimientoManager.GetListTXDetallesPendientes(HFSC.Value) 'RequerimientoManager.GetListTX(HFSC.Value, )
-
-        'Dim dsSalesOrder As New Microsoft.Reporting.WebForms.ReportDataSource()
-        'dsSalesOrder.Name = "DataSet1"
-        'dsSalesOrder.Value = ds.Tables(0)
-
-        'rep.DataSources.Add(dsSalesOrder)
-
-        'ds.ReadXml(Server.MapPath("SalesDataFile.xml"))
-        'ds.ReadXml(HttpContext.Current.Request.MapPath("SalesDataFile.xml"))
-
-
-
-        'ReportViewer2.LocalReport.DataSources.Add(New Microsoft.Reporting.WebForms.ReportDataSource("DataSource1", myConnection))
-        '////////////////////////////////////////////
-        '////////////////////////////////////////////
-        '////////////////////////////////////////////
-        '////////////////////////////////////////////
-
-        'este me salvo! http://social.msdn.microsoft.com/Forums/en-US/winformsdatacontrols/thread/bd60c434-f61a-4252-a7f9-1606fdca6b41
-
-        'http://social.msdn.microsoft.com/Forums/en-US/vsreportcontrols/thread/505ffb1c-324e-4623-9cce-d84662d92b1a
-    End Sub
-
-
-    Sub RebindReportViewerExcel(ByVal rdlFile As String, ByVal dt As DataTable, Optional ByVal dt2 As DataTable = Nothing, Optional ByRef ArchivoExcelDestino As String = "")
-
-
-
-
-        If ArchivoExcelDestino = "" Then
-            ArchivoExcelDestino = Path.GetTempPath & "DescargasDetalladasPorTitular " & Now.ToString("ddMMMyyyy_HHmmss") & ".xls" 'http://stackoverflow.com/questions/581570/how-can-i-create-a-temp-file-with-a-specific-extension-with-net
-            'Dim vFileName As String = Path.GetTempPath & "SincroLosGrobo.txt" 'http://stackoverflow.com/questions/581570/how-can-i-create-a-temp-file-with-a-specific-extension-with-net
-        End If
-
-        'Dim vFileName As String = "c:\archivo.txt"
-        ' FileOpen(1, ArchivoExcelDestino, OpenMode.Output)
-
-
-
-        With ReportViewer2
-            .ProcessingMode = ProcessingMode.Local
-
-            .Visible = False
-
-            With .LocalReport
-
-                .ReportPath = rdlFile
-                .EnableHyperlinks = True
-                .DataSources.Clear()
-
-                .EnableExternalImages = True
-
-                '.DataSources.Add(New ReportDataSource("DataSet1", TraerDataset)) '//the first patameter is the name of the datasource which you bind your report table to.
-                .DataSources.Add(New ReportDataSource("DataSet1", dt)) '//the first parameter is the name of the datasource which you bind your report table to.
-                If Not IsNothing(dt2) Then .DataSources.Add(New ReportDataSource("DataSet2", dt2))
-
-            End With
-
-            .DocumentMapCollapsed = True
-
-            '.LocalReport.Refresh()
-            '.DataBind()
-
-
-
-
-            'Exportar a EXCEL directo http://msdn.microsoft.com/en-us/library/ms251839(VS.80).aspx
-            Dim warnings As Warning()
-            Dim streamids As String()
-            Dim mimeType, encoding, extension As String
-
-            Dim bytes As Byte() = ReportViewer2.LocalReport.Render( _
-                       "Excel", Nothing, mimeType, encoding, _
-                         extension, _
-                        streamids, warnings)
-
-            Dim fs = New FileStream(ArchivoExcelDestino, FileMode.Create)
-            fs.Write(bytes, 0, bytes.Length)
-            fs.Close()
-
-
-
-        End With
-
-
-    End Sub
-
-
-
-    Function RebindReportViewer(ByVal rdlFile As String, ByVal dt As DataTable, Optional ByVal dt2 As DataTable = Nothing, Optional ByVal bDescargaExcel As Boolean = False, Optional ByRef ArchivoExcelDestino As String = "") As String
-        'http://forums.asp.net/t/1183208.aspx
-
-        With ReportViewer2
-            .ProcessingMode = ProcessingMode.Local
-
-            With .LocalReport
-                .ReportPath = rdlFile
-                .EnableHyperlinks = True
-
-                .DataSources.Clear()
-
-                '.DataSources.Add(New ReportDataSource("DataSet1", TraerDataset)) '//the first patameter is the name of the datasource which you bind your report table to.
-                .DataSources.Add(New ReportDataSource("DataSet1", dt)) '//the first parameter is the name of the datasource which you bind your report table to.
-                If Not IsNothing(dt2) Then .DataSources.Add(New ReportDataSource("DataSet2", dt2))
-
-                '.ReportEmbeddedResource = rdlFile
-
-
-                .EnableExternalImages = True
-
-
-                '.DataSources.Add(New ReportDataSource("http://www.google.com/intl/en_ALL/images/logo.gif", "Image1"))
-                'DataSource.ImgPath = "http://www.google.com/intl/en_ALL/images/logo.gif";
-                '.ImgPath = "http://www.google.com/intl/en_ALL/images/logo.gif";
-
-
-
-                '/////////////////////
-                'parametros (no uses la @ delante del parametro!!!!)
-                '/////////////////////
-                'Try
-                '    If .GetParameters.Count > 1 Then
-                '        If .GetParameters.Item(1).Name = "FechaDesde" Then
-                '            Dim p1 = New ReportParameter("IdCartaDePorte", -1)
-                '            Dim p2 = New ReportParameter("FechaDesde", Today)
-                '            Dim p3 = New ReportParameter("FechaHasta", Today)
-                '            .SetParameters(New ReportParameter() {p1, p2, p3})
-                '        End If
-                '    End If
-                'Catch ex As Exception
-                '    ErrHandler2.WriteError(ex.tostring)
-                'End Try
-                '/////////////////////
-                '/////////////////////
-                '/////////////////////
-                '/////////////////////
-
-            End With
-
-
-            .DocumentMapCollapsed = True
-
-
-
-
-            If bDescargaExcel Then
-                .Visible = False
-
-                'Exportar a EXCEL directo http://msdn.microsoft.com/en-us/library/ms251839(VS.80).aspx
-                Dim warnings As Warning()
-                Dim streamids As String()
-                Dim mimeType, encoding, extension As String
-                Dim bytes As Byte()
-
-                Try
-                    bytes = ReportViewer2.LocalReport.Render( _
-                          "Excel", Nothing, mimeType, encoding, _
-                            extension, _
-                           streamids, warnings)
-
-                Catch e As System.Exception
-                    Dim inner As Exception = e.InnerException
-                    While Not (inner Is Nothing)
-                        MsgBox(inner.Message)
-                        ErrHandler2.WriteError(inner.Message)
-                        inner = inner.InnerException
-                    End While
-                End Try
-
-
-                Dim fs = New FileStream(ArchivoExcelDestino, FileMode.Create)
-                fs.Write(bytes, 0, bytes.Length)
-                fs.Close()
-
-
-                Return ArchivoExcelDestino
-            Else
-
-                .LocalReport.Refresh()
-                .DataBind()
-
-            End If
-
-        End With
-
-        '////////////////////////////////////////////
-
-        'este me salvo! http://social.msdn.microsoft.com/Forums/en-US/winformsdatacontrols/thread/bd60c434-f61a-4252-a7f9-1606fdca6b41
-
-        'http://social.msdn.microsoft.com/Forums/en-US/vsreportcontrols/thread/505ffb1c-324e-4623-9cce-d84662d92b1a
-    End Function
-
-
-
-
-
-
-
-
-
-    '///////////////////////////////////////////////////////////////////////////////////////////////////////
-    '///////////////////////////////////////////////////////////////////////////////////////////////////////
-    '///////////////////////////////////////////////////////////////////////////////////////////////////////
-    '///////////////////////////////////////////////////////////////////////////////////////////////////////
-    '///////////////////////////////////////////////////////////////////////////////////////////////////////
-    '///////////////////////////////////////////////////////////////////////////////////////////////////////
-    '///////////////////////////////////////////////////////////////////////////////////////////////////////
-    '///////////////////////////////////////////////////////////////////////////////////////////////////////
-    '///////////////////////////////////////////////////////////////////////////////////////////////////////
-    '///////////////////////////////////////////////////////////////////////////////////////////////////////
-    '///////////////////////////////////////////////////////////////////////////////////////////////////////
-    '///////////////////////////////////////////////////////////////////////////////////////////////////////
-    '////////////////////   SINCRONISMOS  //////////////////////////////////////////////////////////////////
-    '///////////////////////////////////////////////////////////////////////////////////////////////////////
-    '///////////////////////////////////////////////////////////////////////////////////////////////////////
-    '///////////////////////////////////////////////////////////////////////////////////////////////////////
-    '///////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-
-    Protected Sub DropDownList1_TextChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles DropDownList1.TextChanged
-
-        Select Case DropDownList1.Text.ToUpper
-            Case "LOS GROBO"
-                txtVendedor.Text = "LOS GROBO  AGROPECUARIA S.A."
-
-            Case "ZENI"
-
-
-
-
-            Case "BLD"
-
-
-            Case "FYO"
-                txtCorredor.Text = "FUTUROS Y OPCIONES .COM"
-
-            Case "GRANOS DEL LITORAL"
-
-            Case "GRANOS DEL PARANA"
-
-            Case "TOMAS HNOS"
-
-            Case "DUKAREVICH"
-
-            Case "GRIMALDI GRASSI"
-
-
-            Case "TECNOCAMPO"
-
-        End Select
-    End Sub
 
 
 
@@ -1396,94 +912,7 @@ Partial Class CartaDePorteInformesAccesoClientes
 
 
 
-    Sub Importar()
-
-        Dim nombreEmpresa = "wDemoWilliams"
-        Dim nombreArchivo = "C:\Users\Mariano\Desktop\Usuarios Web Consultas.xlsx"
-
-
-
-        '///////////////////////////////////////////////////////////////////
-        '///////////////////////////////////////////////////////////////////
-        '///////////////////////////////////////////////////////////////////
-        '///////////////////////////////////////////////////////////////////
-
-        Dim IdEmpresa As Integer = EntidadManager.ExecDinamico(ConexBDLmaster, "SELECT IdBD FROM bases WHERE descripcion='" & nombreEmpresa & "'").Rows(0).Item(0)
-        Dim ds As DataSet = GetExcelToDatatable(nombreArchivo, 1, 5, 2000)
-
-        Const adminRoleName As String = "WilliamsClientes"
-        If Not Roles.RoleExists(adminRoleName) Then
-            Err.Raise(2222)
-            'Roles.CreateRole(adminRoleName)
-        End If
-
-
-
-        For Each r As DataRow In ds.Tables(0).Rows
-
-
-
-            Dim sRazonSocial As String = r(0)
-            Dim CUIT As String = r(1) & "-" & r(2).ToString.PadLeft(9, "0")
-            CUIT = Left(CUIT, 11) & "-" & Right(CUIT, 1)
-            Dim UserName As String = r(3)
-            Dim Password As String = IIf(r(4).ToString.Length >= 6, r(4).ToString.Replace(" ", "") & "!", "cambiar!")
-
-
-
-
-            'verificar que hay un cliente con ese nombre
-            If BuscaIdClientePreciso(sRazonSocial, HFSC.Value) < 1 Then
-
-                Dim Idaprox = BuscaIdClientePorCUIT(CUIT, HFSC.Value)
-                'Dim Idaprox = BuscaIdClienteAproximado(sRazonSocial, HFSC.Value, 3)
-
-                If Idaprox < 1 Then
-                    ErrHandler2.WriteError("No se encontró la razon social: " & sRazonSocial)
-                    Continue For
-                Else
-                    'encontré uno parecido, lo reemplazo
-                    Dim anteriorRazon = sRazonSocial
-                    sRazonSocial = EntidadManager.NombreCliente(HFSC.Value, Idaprox)
-                    ErrHandler2.WriteError("CAMBIO RAZON SOCIAL: " & anteriorRazon & " >>> reemplazada por >>> " & sRazonSocial)
-                End If
-            End If
-
-
-
-
-            Dim status As MembershipCreateStatus
-            Dim mu As MembershipUser
-            mu = Membership.GetUser(UserName)
-            If mu Is Nothing Then
-                mu = Membership.CreateUser(UserName, Password, "a", "a", "a", True, status)
-                If status <> MembershipCreateStatus.Success Then
-                    ErrHandler2.WriteError("Error al crear usuario " & UserName & " " & status.ToString)
-                    Continue For
-                End If
-
-            Else
-                ErrHandler2.WriteError("ya existe el usuario: " & sRazonSocial)
-                'Continue For
-                'Err.Raise(2222)
-                'Exit For
-            End If
-
-
-            If Not Roles.IsUserInRole(UserName, adminRoleName) Then
-                Roles.AddUserToRole(UserName, adminRoleName)
-            End If
-
-            'asignar base default!!!!
-            EmpresaManager.AddUserInCompanies(ConexBDLmaster, mu.ProviderUserKey.ToString, IdEmpresa)
-
-            'agregar cuit a la tabla extension
-            UserDatosExtendidosManager.Update(mu.ProviderUserKey.ToString, sRazonSocial, CUIT, ConexBDLmaster)
-
-        Next
-
-
-    End Sub
+    
 
 
 
@@ -1523,13 +952,12 @@ Partial Class CartaDePorteInformesAccesoClientes
 
 
 
-    Protected Sub Button1_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles Button1.Click
-        Importar()
-    End Sub
-
     Protected Sub txtQueContenga_TextChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles txtQueContenga.TextChanged
         AsignaInformeAlReportViewer()
     End Sub
+
+
+
 
 
     Sub desc(b As Boolean, reducido As Boolean)
