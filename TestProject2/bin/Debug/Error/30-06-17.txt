@@ -1,0 +1,49 @@
+
+Log Entry : 
+06/30/2017 10:10:34
+Error in: . Error Message:Microsoft.Reporting.WebForms.ReportServerException: La ruta de acceso del elemento "/Pronto informes/ProntoWeb\Informes\Listado general de Cartas de Porte (simulando original) con foto " no es válida. Debe tener menos de 260 caracteres. Se aplican también otras restricciones. Si el servidor de informes está en modo nativo, la ruta de acceso debe comenzar por una barra diagonal. (rsInvalidItemPath)
+   en Microsoft.Reporting.WebForms.ServerReportSoapProxy.OnSoapException(SoapException e)
+   en Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.ProxyMethodInvocation.Execute[TReturn](RSExecutionConnection connection, ProxyMethod`1 initialMethod, ProxyMethod`1 retryMethod)
+   en Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.LoadReport(String Report, String HistoryID)
+   en Microsoft.Reporting.WebForms.ServerReport.EnsureExecutionSession()
+   en Microsoft.Reporting.WebForms.ServerReport.SetParameters(IEnumerable`1 parameters)
+   en CartaDePorteManager.RebindReportViewer_ServidorExcel(ReportViewer& oReportViewer, String rdlFile, IEnumerable`1 parametros, String& ArchivoExcelDestino, Boolean bDescargaHtml) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 4614
+__________________________
+
+Log Entry : 
+06/30/2017 10:15:45
+Error in: . Error Message:Error al hacer el LocalReport.Render()  No se puede leer la siguiente fila de datos del conjunto de datos DataSet1. (rsErrorReadingNextDataRow)
+__________________________
+
+Log Entry : 
+06/30/2017 10:15:45
+Error in: . Error Message:Error al hacer el LocalReport.Render()  La conversión del tipo de datos varchar en datetime produjo un valor fuera de intervalo.
+__________________________
+
+Log Entry : 
+06/30/2017 10:19:38
+Error in: . Error Message:System.ArgumentException: Parameter 'CadenaConexion' does not exist on this report
+   en Microsoft.Reporting.WebForms.ServerReport.GetIndexForParameter(String parameterName)
+   en Microsoft.Reporting.WebForms.ServerReport.SetParameters(IEnumerable`1 parameters)
+   en CartaDePorteManager.RebindReportViewer_ServidorExcel(ReportViewer& oReportViewer, String rdlFile, IEnumerable`1 parametros, String& ArchivoExcelDestino, Boolean bDescargaHtml) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 4614
+__________________________
+
+Log Entry : 
+06/30/2017 10:21:22
+Error in: . Error Message:estadidesc   01/11/2015   01/11/2015   01/11/2016    31/05/2017
+__________________________
+
+Log Entry : 
+06/30/2017 10:22:57
+Error in: . Error Message:Por generar el archivo C:\Users\Administrador\Desktop\Informe30jun2017_102243.xls
+__________________________
+
+Log Entry : 
+06/30/2017 10:23:03
+Error in: . Error Message:Archivo generado C:\Users\Administrador\Desktop\Informe30jun2017_102243.xls
+__________________________
+
+Log Entry : 
+06/30/2017 10:24:25
+Error in: . Error Message:estadidesc   01/11/2015   01/11/2015   01/11/2016    31/05/2017
+__________________________

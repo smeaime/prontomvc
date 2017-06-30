@@ -1046,15 +1046,13 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.CartasPorteMovimientos' no tiene 
     <Property Name="FechaInicioVigenciaCodigoNormaCapital" Type="datetime" />
     <Property Name="FechaFinVigenciaCodigoNormaCapital" Type="datetime" />
   </EntityType>
-  <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'Pronto.dbo.ColaCorreosComprobantes' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
   <EntityType Name="ColaCorreosComprobantes">
     <Key>
-      <PropertyRef Name="IdTipoComprobante" />
-      <PropertyRef Name="IdComprobante" />
+      <PropertyRef Name="IdColaCorreoComprobante" />
     </Key>
     <Property Name="IdTipoComprobante" Type="int" Nullable="false" />
     <Property Name="IdComprobante" Type="int" Nullable="false" />
+    <Property Name="IdColaCorreoComprobante" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
   </EntityType>
   <EntityType Name="Colores">
     <Key>
@@ -10043,6 +10041,7 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.wGrillaPersistencia' no tiene def
     <EntitySet Name="CentrosCosto" EntityType="Self.CentrosCosto" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Choferes" EntityType="Self.Choferes" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Clientes" EntityType="Self.Clientes" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ColaCorreosComprobantes" EntityType="Self.ColaCorreosComprobantes" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Colores" EntityType="Self.Colores" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Comparativas" EntityType="Self.Comparativas" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ComprobantesProveedores" EntityType="Self.ComprobantesProveedores" Schema="dbo" store:Type="Tables" />
@@ -10381,12 +10380,6 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.wGrillaPersistencia' no tiene def
     [CartasPorteMovimientos].[IdFacturaImputada] AS [IdFacturaImputada], 
     [CartasPorteMovimientos].[IdDetalleFactura] AS [IdDetalleFactura]
     FROM [dbo].[CartasPorteMovimientos] AS [CartasPorteMovimientos]</DefiningQuery>
-    </EntitySet>
-    <EntitySet Name="ColaCorreosComprobantes" EntityType="Self.ColaCorreosComprobantes" store:Type="Tables" store:Schema="dbo">
-      <DefiningQuery>SELECT 
-    [ColaCorreosComprobantes].[IdTipoComprobante] AS [IdTipoComprobante], 
-    [ColaCorreosComprobantes].[IdComprobante] AS [IdComprobante]
-    FROM [dbo].[ColaCorreosComprobantes] AS [ColaCorreosComprobantes]</DefiningQuery>
     </EntitySet>
     <EntitySet Name="EjerciciosPeriodos" EntityType="Self.EjerciciosPeriodos" store:Type="Tables" store:Schema="dbo">
       <DefiningQuery>SELECT 
