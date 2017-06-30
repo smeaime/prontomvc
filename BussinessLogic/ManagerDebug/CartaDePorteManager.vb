@@ -479,6 +479,144 @@ Public Class CartaDePorteManager
 
 
 
+    Public Shared Function DataTablePorCliente( _
+            ByVal SC As String,
+            ByVal ColumnaParaFiltrar As String,
+            ByVal TextoParaFiltrar As String,
+            ByVal sortExpression As String,
+            ByVal startRowIndex As Long,
+            ByVal maximumRows As Long,
+            ByVal estado As CartaDePorteManager.enumCDPestado,
+            ByVal QueContenga As String,
+            ByVal idVendedor As Integer,
+            ByVal idCorredor As Integer,
+            ByVal idDestinatario As Integer,
+            ByVal idIntermediario As Integer,
+            ByVal idRemComercial As Integer,
+            ByVal idArticulo As Integer,
+            ByVal idProcedencia As Integer,
+            ByVal idDestino As Integer,
+            ByVal AplicarANDuORalFiltro As FiltroANDOR,
+            ByVal ModoExportacion As String,
+            ByVal fechadesde As DateTime, ByVal fechahasta As DateTime,
+            ByVal puntoventa As Integer, usuario As String, ConexBDLmaster As String
+                    ) As DataTable
+
+
+
+        Dim dt As DataTable
+        Try
+
+
+
+
+            Dim clientes As List(Of String) = TraerCUITClientesSegunUsuario(usuario, SC, ConexBDLmaster).Where(Function(x) x <> "").ToList  'c.ToList()
+
+
+
+            Dim strsql = CartaDePorteManager.GetDataTableFiltradoYPaginado_CadenaSQL(SC, _
+                    "", "", "", 1, 0, _
+                    estado, QueContenga, idVendedor, idCorredor, _
+                    idDestinatario, idIntermediario, _
+                     idRemComercial, idArticulo, idProcedencia, idDestino, _
+                    AplicarANDuORalFiltro, _
+                                   ModoExportacion, _
+                fechadesde, _
+                     fechahasta, _
+                    puntoventa, sTituloFiltroUsado, optDivisionSyngenta, , , QueContenga2,
+             idClienteAuxiliar, -1, 0, "", , "Todos")
+
+
+
+Function(x) clientes.Contains(x.TitularCUIT) Or clientes.Contains(x.IntermediarioCUIT) Or clientes.Contains(x.RComercialCUIT)
+
+
+
+
+
+
+
+
+
+
+            'http://stackoverflow.com/questions/6841605/get-top-1-row-of-each-group
+            'http://stackoverflow.com/questions/3800551/select-first-row-in-each-group-by-group?rq=1
+
+
+            Dim agrup = ";WITH cte AS " & _
+            "( " & _
+            "       SELECT *, " & _
+            "             ROW_NUMBER() OVER (PARTITION BY NumeroCartaDePorte,SubnumeroVagon ORDER BY IdCartaDePorte DESC) AS rn " & _
+            "       FROM ( " & _
+                     strsql & _
+            "       ) as cartas " & _
+            ") " & _
+            "SELECT * " & _
+            "FROM cte " & _
+            "WHERE rn = 1 "
+
+
+
+
+
+
+
+
+
+
+
+            dt = ExecDinamico(SC, agrup)
+
+
+
+
+
+
+
+
+
+            'como traer solo una vez las cartas
+
+
+
+
+
+
+            'Catch timeout
+            '    adasdad()
+
+        Catch ex As Exception
+            '            Log(Entry)
+            '04/10/2014 08:57:49
+            'Error in: http://prontoclientes.williamsentregas.com.ar/ProntoWeb/CartaDePorteInformesAccesoClientes.aspx. Error Message: -  Error 
+            '   en ExecDinamico. - System.Data.SqlClient.SqlException: Timeout expired.  The timeout period elapsed prior 
+            '   to completion of the operation or the server is not responding.
+            '   at Microsoft.VisualBasic.CompilerServices.Symbols.Container.InvokeMethod(Method TargetProcedure, Object[] Arguments, Boolean[] CopyBack, BindingFlags Flags)
+            '   at Microsoft.VisualBasic.CompilerServices.NewLateBinding.CallMethod(Container BaseReference, String MethodName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack, BindingFlags InvocationFlags, Boolean ReportErrors, ResolutionFailure& Failure)
+            '   at Microsoft.VisualBasic.CompilerServices.NewLateBinding.LateCall(Object Instance, Type Type, String MemberName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack, Boolean IgnoreReturn)
+
+            MandarMailDeError(ex)
+            ErrHandler2.WriteError("Hubo un error al generar el informe. " & ex.ToString)
+            Throw New Exception("Hubo un error al generar el informe. " & ex.ToString)
+
+        End Try
+
+
+
+
+
+        If dt.Rows.Count = CartaDePorteManager._CONST_MAXROWS Then
+            Throw New Exception("Se llegó al máximo de renglones (" & CartaDePorteManager._CONST_MAXROWS & "). Por favor use un filtro más restringido")
+        End If
+
+
+    End Function
+
+
+
+
+
+
 
 
 

@@ -880,7 +880,8 @@ namespace ProntoMVC.Tests
             //UserDatosExtendidosManager.UpdateClientesRelacionadoslDelUsuario(usuario, scbdlmasterappconfig, "20-12345678-1|20-20100767-5");
 
 
-            //cuando decide si usa CartaDePorteInformesAccesoClientes o CartaDePorteInformesAccesoClientesBLDcorredor? -con CartaDePorteManager.EsClienteBLDcorredor(HFSC.Value)
+            //cuando decide si usa CartaDePorteInformesAccesoClientes o CartaDePorteInformesAccesoClientesBLDcorredor? 
+            //-con CartaDePorteManager.EsClienteBLDcorredor(HFSC.Value)
             //bueno, esto funciona. O sea que falla esa derivacion? -pero la pagina "..BLDCorredor" usa el filtro de corredor BLD  -y si se lo sacas?
             
             var b = CartaDePorteManager.usuariosBLD(SC).Contains(usuario);
@@ -939,8 +940,15 @@ namespace ProntoMVC.Tests
             }
 
 
-            
 
+
+
+            var dt=CartaDePorteManager.DataTablePorCliente(0, 9999999, 0, "", -1, -1,
+                                -1, cliente, -1, -1, -1,
+                                -1, 0, "Ambas"
+                                , new DateTime(2016, 10, 1), new DateTime(2016, 11, 1),
+                                0, null, false, "", "",
+                                -1, null, 0, "", "Todos");
 
 
 
