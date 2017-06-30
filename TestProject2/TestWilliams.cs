@@ -958,11 +958,12 @@ namespace ProntoMVC.Tests
             yourParams[6] = new ReportParameter("quecontenga", "ghkgk");
             yourParams[7] = new ReportParameter("Consulta", strSQL);
             yourParams[8] = new ReportParameter("sServidorSQL", ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC));
-            yourParams[9] = new ReportParameter("titulo", "");
+            yourParams[9] = new ReportParameter("titulo", "ghkj");
             var s = CartaDePorteManager.RebindReportViewer_ServidorExcel(ref ReporteLocal,
-                        @"ProntoWeb\Informes\Listado general de Cartas de Porte (simulando original) con foto .rdl", yourParams, ref output, false);
+                        @"Listado general de Cartas de Porte (simulando original) con foto 2", yourParams, ref output, false);
 
-            //RebindReportViewer_ServidorExcel explota en el setparameters, se queja del xmlserializer. RebindReportViewerLINQ_Excel no explota
+            //RebindReportViewer_ServidorExcel explota (al depurar, no al ejecutar) en el setparameters, se queja del xmlserializer. 
+            //RebindReportViewerLINQ_Excel no explota
 
 
 
@@ -975,7 +976,7 @@ namespace ProntoMVC.Tests
 
 
         [TestMethod]
-        public void Urenport_5_37950()
+        public void Urenport_5_37950_equivalencia_del_destino()
         {
 
             // es precisamente así:
@@ -990,7 +991,10 @@ namespace ProntoMVC.Tests
             */
 
 
-            string archivoExcel = @"C:\Users\Administrador\Documents\bdl\pronto\docstest\Urenport_ 951-28042017.xls";
+
+            //insertarequivalencia("DESTINO|LDC ARGENTINA S A", "LDC ARG (PTA TIMBUES)");
+
+            string archivoExcel = @"C:\Users\Administrador\Documents\bdl\pronto\docstest\Posicion-170626-1330.xls";
 
             //FuncionesGenericasCSharp.GetExcel5_HTML_AgilityPack(archivoExcel);
             //FuncionesGenericasCSharp.GetExcel4_ExcelDataReader(archivoExcel);

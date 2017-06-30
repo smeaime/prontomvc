@@ -7107,14 +7107,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="ColaCorreosComprobantes">
-      <EntityTypeMapping TypeName="DemoProntoModel.ColaCorreosComprobante">
-        <MappingFragment StoreEntitySet="ColaCorreosComprobantes">
-          <ScalarProperty Name="IdComprobante" ColumnName="IdComprobante" />
-          <ScalarProperty Name="IdTipoComprobante" ColumnName="IdTipoComprobante" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <FunctionImportMapping FunctionImportName="wCartasDePorte_TX_MapaEstrategico" FunctionName="DemoProntoModel.Store.wCartasDePorte_TX_MapaEstrategico">
       <ResultMapping>
         <ComplexTypeMapping TypeName="DemoProntoModel.wCartasDePorte_TX_MapaEstrategico_Result">
@@ -7128,5 +7120,14 @@
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
+    <EntitySetMapping Name="ColaCorreosComprobantes">
+      <EntityTypeMapping TypeName="DemoProntoModel.ColaCorreosComprobante">
+        <MappingFragment StoreEntitySet="ColaCorreosComprobantes">
+          <ScalarProperty Name="IdColaCorreoComprobante" ColumnName="IdColaCorreoComprobante" />
+          <ScalarProperty Name="IdComprobante" ColumnName="IdComprobante" />
+          <ScalarProperty Name="IdTipoComprobante" ColumnName="IdTipoComprobante" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>
