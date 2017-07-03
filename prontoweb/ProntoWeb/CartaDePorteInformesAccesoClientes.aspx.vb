@@ -373,8 +373,15 @@ Partial Class CartaDePorteInformesAccesoClientes
         If chkDestinatario.Checked Then txtEntregador.Text = rs Else txtEntregador.Text = ""
 
         If Not (chkTitular.Checked Or chkRemComercial.Checked Or chkRemComercial.Checked Or chkCorredor.Checked Or chkDestinatario.Checked Or chkClienteAuxiliar.Checked) Then
-            MsgBoxAjax(Me, "Por lo menos hay que tildar un filtro")
-            Exit Sub 'tiene que haber alguno tildado
+
+            Dim clientes As List(Of String) = TraerCUITClientesSegunUsuario(Session(SESSIONPRONTO_UserName), HFSC.Value, ConexBDLmaster).Where(Function(x) x <> "").ToList  'c.ToList()
+            If clientes.Count = 0 Then
+                MsgBoxAjax(Me, "Por lo menos hay que tildar un filtro")
+                Exit Sub 'tiene que haber alguno tildado
+            Else
+                rs = ""
+            End If
+
             '    txtQueContenga.Text = rs
             'Else
             '    txtQueContenga.Text = ""
@@ -433,7 +440,7 @@ Partial Class CartaDePorteInformesAccesoClientes
         Dim idcliente = BuscaIdClientePreciso(rs, HFSC.Value)
 
 
-        
+
 
 
 
@@ -462,8 +469,7 @@ Partial Class CartaDePorteInformesAccesoClientes
                                     DropDownList2.Text, _
                     Convert.ToDateTime(iisValidSqlDate(txtFechaDesde.Text, #1/1/1753#)), _
                     Convert.ToDateTime(iisValidSqlDate(txtFechaHasta.Text, #1/1/2100#)), _
-                    cmbPuntoVenta.SelectedValue, sTitulo, optDivisionSyngenta.SelectedValue, , , txtQueContenga.Text,
-             idClienteAuxiliar, -1, 0, "", , "Todos")
+                    cmbPuntoVenta.SelectedValue, Session(SESSIONPRONTO_UserName), ConexBDLmaster)
 
 
 
@@ -1005,13 +1011,23 @@ Partial Class CartaDePorteInformesAccesoClientes
         If chkCorredor.Checked Then txtCorredor.Text = rs Else txtCorredor.Text = ""
         If chkDestinatario.Checked Then txtEntregador.Text = rs Else txtEntregador.Text = ""
 
+
+
         If Not (chkTitular.Checked Or chkRemComercial.Checked Or chkRemComercial.Checked Or chkCorredor.Checked Or chkDestinatario.Checked Or chkClienteAuxiliar.Checked) Then
-            MsgBoxAjax(Me, "Por lo menos hay que tildar un filtro")
-            Exit Sub 'tiene que haber alguno tildado
+
+            Dim clientes As List(Of String) = TraerCUITClientesSegunUsuario(Membership.GetUser.UserName, HFSC.Value, ConexBDLmaster).Where(Function(x) x <> "").ToList  'c.ToList()
+            If clientes.Count = 0 Then
+                MsgBoxAjax(Me, "Por lo menos hay que tildar un filtro")
+                Exit Sub 'tiene que haber alguno tildado
+            Else
+                rs = ""
+            End If
+
             '    txtQueContenga.Text = rs
             'Else
             '    txtQueContenga.Text = ""
         End If
+
 
 
 
@@ -1069,16 +1085,33 @@ Partial Class CartaDePorteInformesAccesoClientes
         Dim dt As DataTable
         Try
 
-            dt = CartaDePorteManager.GetDataTableFiltradoYPaginado(HFSC.Value, _
-                    "", "", "", 1, 0, _
-                    estadofiltro, rs, idVendedor, idCorredor, _
-                    idDestinatario, idIntermediario, _
-                    idRComercial, idArticulo, idProcedencia, idDestino, _
-                    IIf(cmbCriterioWHERE.SelectedValue = "todos", FiltroANDOR.FiltroAND, FiltroANDOR.FiltroOR), _
-                                    DropDownList2.Text, _
-                    Convert.ToDateTime(iisValidSqlDate(txtFechaDesde.Text, #1/1/1753#)), _
-                    Convert.ToDateTime(iisValidSqlDate(txtFechaHasta.Text, #1/1/2100#)), _
-                    cmbPuntoVenta.SelectedValue, sTitulo, optDivisionSyngenta.SelectedValue, , , txtQueContenga.Text, idClienteAuxiliar)
+            'dt = CartaDePorteManager.GetDataTableFiltradoYPaginado(HFSC.Value, _
+            '        "", "", "", 1, 0, _
+            '        estadofiltro, rs, idVendedor, idCorredor, _
+            '        idDestinatario, idIntermediario, _
+            '        idRComercial, idArticulo, idProcedencia, idDestino, _
+            '        IIf(cmbCriterioWHERE.SelectedValue = "todos", FiltroANDOR.FiltroAND, FiltroANDOR.FiltroOR), _
+            '                        DropDownList2.Text, _
+            '        Convert.ToDateTime(iisValidSqlDate(txtFechaDesde.Text, #1/1/1753#)), _
+            '        Convert.ToDateTime(iisValidSqlDate(txtFechaHasta.Text, #1/1/2100#)), _
+            '        cmbPuntoVenta.SelectedValue, sTitulo, optDivisionSyngenta.SelectedValue, , , txtQueContenga.Text, idClienteAuxiliar)
+
+
+
+
+            dt = DataTablePorCliente(HFSC.Value, _
+                        "", "", "", 1, 0, _
+                        estadofiltro, rs, idVendedor, idCorredor, _
+                        idDestinatario, idIntermediario, _
+                        idRComercial, idArticulo, idProcedencia, idDestino, _
+                        IIf(cmbCriterioWHERE.SelectedValue = "todos", FiltroANDOR.FiltroAND, FiltroANDOR.FiltroOR), _
+                                        DropDownList2.Text, _
+                        Convert.ToDateTime(iisValidSqlDate(txtFechaDesde.Text, #1/1/1753#)), _
+                        Convert.ToDateTime(iisValidSqlDate(txtFechaHasta.Text, #1/1/2100#)), _
+                        cmbPuntoVenta.SelectedValue, Membership.GetUser.UserName, ConexBDLmaster)
+
+
+
 
 
 

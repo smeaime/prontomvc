@@ -852,7 +852,7 @@ namespace ProntoMVC.Tests
 
 
 
-        #endregion
+#endregion
 
 
 
@@ -883,7 +883,7 @@ namespace ProntoMVC.Tests
             //cuando decide si usa CartaDePorteInformesAccesoClientes o CartaDePorteInformesAccesoClientesBLDcorredor? 
             //-con CartaDePorteManager.EsClienteBLDcorredor(HFSC.Value)
             //bueno, esto funciona. O sea que falla esa derivacion? -pero la pagina "..BLDCorredor" usa el filtro de corredor BLD  -y si se lo sacas?
-            
+
             var b = CartaDePorteManager.usuariosBLD(SC).Contains(usuario);
 
             var clientes = CartaDePorteManager.TraerCUITClientesSegunUsuario(usuario, SC, scbdlmasterappconfig).Where(x => x != "").ToList();
@@ -906,7 +906,7 @@ namespace ProntoMVC.Tests
 
             Assert.IsTrue(q3.Contains(558600767));
 
-            
+
 
 
 
@@ -942,16 +942,21 @@ namespace ProntoMVC.Tests
 
 
 
+            //string razonsocial = UserDatosExtendidosManager.TraerRazonSocialDelUsuario(usuario, scbdlmasterappconfig, SC);
 
-            var dt=CartaDePorteManager.DataTablePorCliente(0, 9999999, 0, "", -1, -1,
-                                -1, cliente, -1, -1, -1,
+
+            DataTable dt = CartaDePorteManager.DataTablePorCliente(SC, "" , "", "", 0, 9999999, 0, "", -1, -1,
+                                -1, -1, -1, -1, -1,
                                 -1, 0, "Ambas"
-                                , new DateTime(2016, 10, 1), new DateTime(2016, 11, 1),
-                                0, null, false, "", "",
-                                -1, null, 0, "", "Todos");
+                                , new DateTime(2016, 10, 1), new DateTime(2017, 11, 1),
+                                0, usuario, scbdlmasterappconfig);
 
 
 
+            var l = dt.AsEnumerable().Select(x => x["NumeroCartaDePorte"].NullSafeToString()).ToList();
+
+
+            Assert.IsTrue(dt.AsEnumerable().Select(x => x["NumeroCartaDePorte"]).Contains(558600767));
 
 
             ReportViewer ReporteLocal = new Microsoft.Reporting.WebForms.ReportViewer();
@@ -961,7 +966,7 @@ namespace ProntoMVC.Tests
             yourParams[1] = new ReportParameter("sServidor", "");
             yourParams[2] = new ReportParameter("idArticulo", "-1");
             yourParams[3] = new ReportParameter("idDestino", "-1");
-            yourParams[4] = new ReportParameter("desde",desde.ToString());
+            yourParams[4] = new ReportParameter("desde", desde.ToString());
             yourParams[5] = new ReportParameter("hasta", hasta.ToString());
             yourParams[6] = new ReportParameter("quecontenga", "ghkgk");
             yourParams[7] = new ReportParameter("Consulta", strSQL);
