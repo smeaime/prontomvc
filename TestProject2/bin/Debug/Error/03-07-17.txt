@@ -1,0 +1,7 @@
+
+Log Entry : 
+07/03/2017 08:05:31
+Error in: . Error Message:Hubo un error al generar el informe. System.NotImplementedException: No se puede implementar el método o la operación.
+   en CartaDePorteManager.idClienteAuxiliar() en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 17273
+   en CartaDePorteManager.DataTablePorCliente(String SC, String ColumnaParaFiltrar, String TextoParaFiltrar, String sortExpression, Int64 startRowIndex, Int64 maximumRows, enumCDPestado estado, String QueContenga, Int32 idVendedor, Int32 idCorredor, Int32 idDestinatario, Int32 idIntermediario, Int32 idRemComercial, Int32 idArticulo, Int32 idProcedencia, Int32 idDestino, FiltroANDOR AplicarANDuORalFiltro, String ModoExportacion, DateTime fechadesde, DateTime fechahasta, Int32 puntoventa, String usuario, String ConexBDLmaster) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 515
+__________________________
