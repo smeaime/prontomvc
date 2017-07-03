@@ -345,8 +345,6 @@ Partial Class CartaDePorteInformesAccesoClientesBLDcorredor
 
         '        txtCorredor = BLD
 
-        fdhfdghfgh()
-
 
 
 
