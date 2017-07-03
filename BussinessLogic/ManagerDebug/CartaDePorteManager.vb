@@ -510,12 +510,8 @@ Public Class CartaDePorteManager
 
 
 
-            Dim clientes As List(Of String) = TraerCUITClientesSegunUsuario(usuario, SC, ConexBDLmaster).Where(Function(x) x <> "").ToList  'c.ToList()
-
-
-
             Dim strsql = CartaDePorteManager.GetDataTableFiltradoYPaginado_CadenaSQL(SC, _
-                    "", "", "", 1, 0, _
+                    "", "", "", 1, 999999999, _
                     estado, QueContenga, idVendedor, idCorredor, _
                     idDestinatario, idIntermediario, _
                      idRemComercial, idArticulo, idProcedencia, idDestino, _
@@ -523,13 +519,12 @@ Public Class CartaDePorteManager
                                    ModoExportacion, _
                 fechadesde, _
                      fechahasta, _
-                    puntoventa, sTituloFiltroUsado, optDivisionSyngenta, , , QueContenga2,
-             idClienteAuxiliar, -1, 0, "", , "Todos")
+                    puntoventa, "", "Ambas", , , ,
+             -1, -1, 0, "", , "Todos")
 
 
 
-Function(x) clientes.Contains(x.TitularCUIT) Or clientes.Contains(x.IntermediarioCUIT) Or clientes.Contains(x.RComercialCUIT)
-
+            
 
 
 
@@ -557,6 +552,15 @@ Function(x) clientes.Contains(x.TitularCUIT) Or clientes.Contains(x.Intermediari
 
 
 
+            Dim clientes As List(Of String) = TraerCUITClientesSegunUsuario(usuario, SC, ConexBDLmaster).Where(Function(x) x <> "").ToList  'c.ToList()
+            If clientes.Count = 0 And QueContenga = "" Then Return Nothing
+
+            Dim clisql = "'" & Join(clientes.ToArray, "','") & "'"
+            'Function(x) clientes.Contains(x.TitularCUIT) Or clientes.Contains(x.IntermediarioCUIT) Or clientes.Contains(x.RComercialCUIT)) _
+            agrup &= " AND  ( replace(TitularCUIT,'-','')  IN (" & clisql & " ) " & _
+                    " OR replace(IntermediarioCUIT,'-','') IN (" & clisql & " ) " & _
+                    " OR replace(RComercialCUIT,'-','') IN (" & clisql & " ) " & _
+                    ")"
 
 
 
@@ -565,7 +569,8 @@ Function(x) clientes.Contains(x.TitularCUIT) Or clientes.Contains(x.Intermediari
 
 
 
-            dt = ExecDinamico(SC, agrup)
+
+            dt = ExecDinamico(SC, agrup, 200)
 
 
 
@@ -610,6 +615,7 @@ Function(x) clientes.Contains(x.TitularCUIT) Or clientes.Contains(x.Intermediari
         End If
 
 
+        Return dt
     End Function
 
 
@@ -17264,9 +17270,6 @@ Function(x) clientes.Contains(x.TitularCUIT) Or clientes.Contains(x.Intermediari
 
     End Function
 
-    Private Shared Function idClienteAuxiliar() As Object
-        Throw New NotImplementedException
-    End Function
 
 
 

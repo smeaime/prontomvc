@@ -336,7 +336,7 @@ Namespace Pronto.ERP.Bll
                 'No lo encontró, quizás es un proveedor
                 Try
 
-                    Dim plist As ProveedorList = ProveedorManager.GetList(usuario.StringConnection)
+                    Dim plist As ProveedorList = ProveedorManager.GetList(Encriptar(usuario.StringConnection))
                     Dim p As New Proveedor
                     p = plist.Find(Function(obj) obj.Cuit = usuario.Nombre Or obj.RazonSocial = usuario.Nombre)
                     If p IsNot Nothing Then
