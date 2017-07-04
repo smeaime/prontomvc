@@ -56,6 +56,8 @@ go
 --select * from WilliamsDestinos where IdWilliamsDestino=47
 --select * from CartasDePorteControlDescarga
 
+GRANT EXECUTE ON wCartasDePorteControlDescargas_TX_InformeControlDiario to [NT AUTHORITY\ANONYMOUS LOGON]
+go
  
 exec wCartasDePorteControlDescargas_TX_InformeControlDiario '20140810','20160810',-1,0
 
