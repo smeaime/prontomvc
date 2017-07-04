@@ -4454,7 +4454,10 @@ Formato localidad-provincia	destination	x
 
 
             var qexacto = (from n in db.CartaPorteNormasCalidads
-                           where (n.ResultadoDesde <= resultado && resultado <= n.ResultadoHasta)
+                           where (
+                                    n.ResultadoDesde <= resultado
+                                    //resultado <= n.ResultadoHasta  &&  // lo comento porque ahora tengo que tomar todos los rangos por los que pasa la mediocion, no solo uno
+                                    )
                                   && (idrubro == n.IdCartaPorteRubroCalidad)
                                   && (n.IdArticulo == idarticulo || (n.IdArticulo == null && idarticulo == -1))
                                   && (n.IdDestino == iddestino || (n.IdDestino == null && iddestino == -1))
@@ -4466,6 +4469,17 @@ Formato localidad-provincia	destination	x
                 var rebaja = qexacto.First().RebajaIncremento ?? 0;
                 return rebaja * resultado;
             }
+
+
+            foreach rango in qexacto
+            {
+
+
+
+
+
+            }
+
 
 
 
