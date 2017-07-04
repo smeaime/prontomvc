@@ -499,7 +499,13 @@ Public Class CartaDePorteManager
             ByVal AplicarANDuORalFiltro As FiltroANDOR,
             ByVal ModoExportacion As String,
             ByVal fechadesde As DateTime, ByVal fechahasta As DateTime,
-            ByVal puntoventa As Integer, usuario As String, ConexBDLmaster As String
+            ByVal puntoventa As Integer, usuario As String, ConexBDLmaster As String,
+            chkTitular As Boolean,
+             chkIntermediario As Boolean,
+             chkRemComercial As Boolean,
+             chkClienteAuxiliar As Boolean,
+             chkCorredor As Boolean,
+             chkDestinatario As Boolean
                     ) As DataTable
 
 
@@ -508,7 +514,12 @@ Public Class CartaDePorteManager
 
         Try
 
-            Dim strsql = DataTablePorClienteSQL(SC, ColumnaParaFiltrar, TextoParaFiltrar, sortExpression, startRowIndex, maximumRows, estado, QueContenga, idVendedor, idCorredor, idDestinatario, idIntermediario, idRemComercial, idArticulo, idProcedencia, idDestino, AplicarANDuORalFiltro, ModoExportacion, fechadesde, fechahasta, puntoventa, usuario, ConexBDLmaster)
+            Dim strsql = DataTablePorClienteSQL(SC, ColumnaParaFiltrar, TextoParaFiltrar, sortExpression, startRowIndex, maximumRows, estado, QueContenga, idVendedor, idCorredor, idDestinatario, idIntermediario, idRemComercial, idArticulo, idProcedencia, idDestino, AplicarANDuORalFiltro, ModoExportacion, fechadesde, fechahasta, puntoventa, usuario, ConexBDLmaster, chkTitular,
+             chkIntermediario,
+             chkRemComercial,
+             chkClienteAuxiliar,
+             chkCorredor,
+             chkDestinatario)
 
 
 
@@ -587,8 +598,14 @@ Public Class CartaDePorteManager
             ByVal AplicarANDuORalFiltro As FiltroANDOR,
             ByVal ModoExportacion As String,
             ByVal fechadesde As DateTime, ByVal fechahasta As DateTime,
-            ByVal puntoventa As Integer, usuario As String, ConexBDLmaster As String
-                    ) As String
+            ByVal puntoventa As Integer, usuario As String, ConexBDLmaster As String,
+             chkTitular As Boolean,
+             chkIntermediario As Boolean,
+             chkRemComercial As Boolean,
+             chkClienteAuxiliar As Boolean,
+             chkCorredor As Boolean,
+             chkDestinatario As Boolean
+                   ) As String
 
 
 
@@ -639,12 +656,16 @@ Public Class CartaDePorteManager
         Dim clientes As List(Of String) = TraerCUITClientesSegunUsuario(usuario, SC, ConexBDLmaster).Where(Function(x) x <> "").ToList  'c.ToList()
         If clientes.Count = 0 And QueContenga = "" Then Return Nothing
         Dim idscliente As New List(Of String)
+        Dim idscorredor As New List(Of String)
         For Each c In clientes
             idscliente.Add(BuscarClientePorCUIT(c, SC, ""))
+            idscorredor.Add(BuscarVendedorPorCUIT(c, SC, ""))
         Next
 
         Dim clisql = "'" & Join(clientes.ToArray, "','") & "'"
         Dim idsclientesql = Join(idscliente.ToArray, ",")
+        Dim idscorredorsql = Join(idscorredor.ToArray, ",")
+
 
         'Function(x) clientes.Contains(x.TitularCUIT) Or clientes.Contains(x.IntermediarioCUIT) Or clientes.Contains(x.RComercialCUIT)) _
         'agrup &= " AND  ( replace(TitularCUIT,'-','')  IN (" & clisql & " ) " & _
@@ -653,12 +674,14 @@ Public Class CartaDePorteManager
         '        ")"
 
 
-        agrup &= " AND  ( Vendedor IN (" & idsclientesql & " ) " & _
-                " OR CuentaOrden1  IN (" & idsclientesql & " ) " & _
-                " OR CuentaOrden2 IN (" & idsclientesql & " ) " & _
+        agrup &= " AND  (" & _
+                IIf(chkTitular, " Vendedor IN (" & idsclientesql & " ) ", "0=1") & _
+                IIf(chkIntermediario, " OR CuentaOrden1  IN (" & idsclientesql & " ) ", " OR 0=1") & _
+                IIf(chkRemComercial, " OR CuentaOrden2 IN (" & idsclientesql & " ) ", " OR 0=1") & _
+                IIf(chkClienteAuxiliar, " OR CuentaOrden2 IN (" & idsclientesql & " ) ", " OR 0=1") & _
+                IIf(chkCorredor, " OR Corredor IN (" & idscorredorsql & " ) ", " OR 0=1") & _
+                IIf(chkDestinatario, " OR Entregador IN (" & idsclientesql & " ) ", " OR 0=1") & _
                 ")"
-
-
 
 
 

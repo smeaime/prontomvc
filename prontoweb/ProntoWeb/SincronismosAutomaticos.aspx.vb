@@ -119,6 +119,7 @@ Partial Class SincronismosAutomaticos
             txtMailGranosdelParana.Text = ParametroManager.TraerValorParametro2(HFSC.Value, "CasillaCartasPorteGranosdelParana" & pv).ToString
             txtMailGranosdelLitoral.Text = ParametroManager.TraerValorParametro2(HFSC.Value, "CasillaCartasPorteGranosdelLitoral" & pv).ToString
             txtMailGrimaldi.Text = ParametroManager.TraerValorParametro2(HFSC.Value, "CasillaCartasPorteGrimaldi" & pv).ToString
+            txtMailGualeguay.Text = ParametroManager.TraerValorParametro2(HFSC.Value, "CasillaCartasPorteGualeguay" & pv).ToString
             txtMailCinque.Text = ParametroManager.TraerValorParametro2(HFSC.Value, "CasillaCartasPorteCinque" & pv).ToString
             txtMailMorgan.Text = ParametroManager.TraerValorParametro2(HFSC.Value, "CasillaCartasPorteMorgan" & pv).ToString
             txtMailMonsanto.Text = ParametroManager.TraerValorParametro2(HFSC.Value, "CasillaCartasPorteMonsanto" & pv).ToString
@@ -375,6 +376,7 @@ Partial Class SincronismosAutomaticos
         ParametroManager.GuardarValorParametro2(HFSC.Value, "CasillaCartasPorteGranosdelParana" & pv, txtMailGranosdelParana.Text)
         ParametroManager.GuardarValorParametro2(HFSC.Value, "CasillaCartasPorteGranosdelLitoral" & pv, txtMailGranosdelLitoral.Text)
         ParametroManager.GuardarValorParametro2(HFSC.Value, "CasillaCartasPorteGrimaldi" & pv, txtMailGrimaldi.Text)
+        ParametroManager.GuardarValorParametro2(HFSC.Value, "CasillaCartasPorteGualeguay" & pv, txtMailGualeguay.Text)
         ParametroManager.GuardarValorParametro2(HFSC.Value, "CasillaCartasPorteCinque" & pv, txtMailCinque.Text)
         ParametroManager.GuardarValorParametro2(HFSC.Value, "CasillaCartasPorteMonsanto" & pv, txtMailMonsanto.Text)
         ParametroManager.GuardarValorParametro2(HFSC.Value, "CasillaCartasPorteMorgan" & pv, txtMailMorgan.Text)
@@ -461,6 +463,7 @@ Partial Class SincronismosAutomaticos
         If (CheckBoxGranosdelParana.Checked) Then sTodosErr += Enviar("Granos del Parana", txtMailGranosdelParana.Text, sErr, bVistaPrevia)
         If (CheckBoxGranosdelLitoral.Checked) Then sTodosErr += Enviar("Granos del Litoral", txtMailGranosdelLitoral.Text, sErr, bVistaPrevia)
         If (CheckBoxGrimaldi.Checked) Then sTodosErr += Enviar("Grimaldi Grassi", txtMailGrimaldi.Text, sErr, bVistaPrevia)
+        If (CheckBoxGualeguay.Checked) Then sTodosErr += Enviar("Gualeguay", txtMailGualeguay.Text, sErr, bVistaPrevia)
         If (CheckBoxCinque.Checked) Then sTodosErr += Enviar("Miguel Cinque", txtMailCinque.Text, sErr, bVistaPrevia)
         If (CheckBoxMonsanto.Checked) Then sTodosErr += Enviar("Monsanto", txtMailMonsanto.Text, sErr, bVistaPrevia)
         If (CheckBoxMorgan.Checked) Then sTodosErr += Enviar("Morgan (descargas)", txtMailMorgan.Text, sErr, bVistaPrevia)
