@@ -61,3 +61,28 @@ Log Entry :
 07/04/2017 10:54:57
 Error in: http://localhost:58911/ProntoWeb/CartaDePorte.aspx?Id=-1. Error Message:PV 0 0
 __________________________
+
+Log Entry : 
+07/04/2017 18:00:33
+Error in: http://localhost:58911/ProntoWeb/Principal.aspx. Error Message:Mariano esta logueado, pero lo redirijo al login porque faltan los datos de session. No deberia mejor mandarlo a SeleccionarEmpresa? Ademas, no hago el LogOut y le queda el cookie!!!
+__________________________
+
+Log Entry : 
+07/04/2017 18:00:36
+Error in: http://localhost:58911/ProntoWeb/CartasDePortes.aspx?tipo=Todas. Error Message:Mariano
+__________________________
+
+Log Entry : 
+07/04/2017 18:03:36
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=2. Error Message:Generando sincro para Gualeguay 03/07/2017 03/07/2017 2315 -1 -1 2315 2315 -1 -1 -1 Mariano
+__________________________
+
+Log Entry : 
+07/04/2017 18:03:38
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=2. Error Message:Generando sincro para GUALEGUAY
+__________________________
+
+Log Entry : 
+07/04/2017 18:03:40
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=2. Error Message:No se pudo generar nada Gualeguay
+__________________________

@@ -906,11 +906,11 @@ namespace ProntoMVC.Tests
 
             var output = SincronismosWilliamsManager.GenerarSincro("Gualeguay", ref sErrores, SC, "dominio", ref sTitulo
                                 , CartaDePorteManager.enumCDPestado.DescargasMasFacturadas,
-                     "", -1, idcorr,
+                     "", -1, -1,
                 -1, -1,
                  -1, -1, -1, -1,
                  CartaDePorteManager.FiltroANDOR.FiltroOR, "Entregas",
-                new DateTime(2016, 3, 1), new DateTime(2016, 3, 15),
+                new DateTime(2016, 3, 10), new DateTime(2016, 3, 15),
                 -1, "Ambas", false, "", "", -1, ref registrosf, 4000);
 
 
@@ -950,8 +950,8 @@ namespace ProntoMVC.Tests
             DataTable dt = CartaDePorteManager.DataTablePorCliente(SC, "", "", "", 0, 9999999, 0, "", -1, -1,
                                 -1, -1, -1, -1, -1,
                                 -1, 0, "Ambas"
-                                , new DateTime(2016, 10, 1), new DateTime(2017, 11, 1),
-                                0, usuario, scbdlmasterappconfig);
+                                , new DateTime(2017, 1, 1), new DateTime(2017, 1, 15),
+                                0, usuario, scbdlmasterappconfig, true, true, false, true, true, true);
 
 
 
