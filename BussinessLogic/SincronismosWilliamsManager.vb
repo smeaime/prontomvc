@@ -268,6 +268,13 @@ Namespace Pronto.ERP.Bll
                     txtCorredor.Text = "LEIVA HNOS."
 
 
+                Case "GUALEGUAY"
+                    txtTitular.Text = "GUALEGUAY CEREALES SA"
+                    txtIntermediario.Text = "GUALEGUAY CEREALES SA"
+                    txtRcomercial.Text = "GUALEGUAY CEREALES SA"
+                    txtPopClienteAuxiliar.Text = "GUALEGUAY CEREALES SA"
+
+
                 Case "NIDERA"
 
                     txtTitular.Text = ""
@@ -809,6 +816,46 @@ Namespace Pronto.ERP.Bll
 
                             registrosFiltrados = dt.Rows.Count
 
+
+
+
+
+                        Case "GUALEGUAY"
+                            Dim s = "(ISNULL(FechaDescarga, '1/1/1753') BETWEEN '" & FechaANSI(sDesde) & _
+                                         "'     AND   '" & FechaANSI(sHasta) & "' )"
+                            Dim dt = EntidadManager.ExecDinamico(SC, strSQLsincronismo() & " WHERE " & s)
+                            'txtTitular.Text = "LOS GROBO  AGROPECUARIA S.A."
+                            'dt = DataTableWHERE(dt, "Titular='LOS GROBO  AGROPECUARIA S.A.'") '30-60445647-5
+                            'TODO: cnflicto por el where a puntoventa?
+                            'Log Entry : 
+                            '08/10/2012 18:34:28
+                            'Error in: https://prontoweb.williamsentregas.com.ar/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=2. Error 'Message:Generando sincro para Los Grobo
+                            '__________________________'''
+                            '
+                            'Log Entry : 
+                            '08/10/2012 18:34:31
+                            'Error in: https://prontoweb.williamsentregas.com.ar/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=2. Error 'Message:Error en DataTableWHERECannot perform '=' operation on System.String and System.Int32.1=1  AND (1=0              OR 'CuentaOrden2=2871             OR  Entregador=3749  )               AND Destino=14 AND NOT (Vendedor IS NULL OR Corredor IS NULL 'OR Entregador IS NULL OR IdArticulo IS NULL) AND ISNULL(NetoProc,0)>0 AND ISNULL(Anulada,'NO')<>'SI'    AND isnull(FechaDescarga, 'FechaArribo) >= #2012/08/01#     AND isnull(FechaDescarga, FechaArribo) <= #2012/08/31#   AND ISNULL(Exporta,'NO')='NO'  AND '(PuntoVenta=1)
+                            '__________________________'
+                            '
+                            'Log Entry : 
+                            '08/10/2012 18:34:31
+                            'Error in: https://prontoweb.williamsentregas.com.ar/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=2. Error 'Message:System.Data.EvaluateException
+
+                            'estoy usando "destino=16" como filtro, pero strSQLsincronismo me devuelve una cadena ahi...
+                            Try
+                                dt = DataTableWHERE(dt, sWHERE)
+                            Catch ex As Exception
+                                ErrHandler2.WriteAndRaiseError("Error al filtrar destino")
+                            End Try
+
+                            FiltrarCopias(dt)
+                            'dt = ProntoFuncionesGenerales.DataTableWHERE(dt, generarWHERE())
+                            Dim sErrores As String
+                            output = Sincronismo_Gualeguay(dt, sErrores, "", SC)
+
+                            sErroresRef = sErrores
+
+                            registrosFiltrados = dt.Rows.Count
 
 
 
