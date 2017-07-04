@@ -103,6 +103,27 @@ Partial Class CartaDePorteInformesAccesoClientes
 
 
 
+            Dim clientes As List(Of String) = TraerCUITClientesSegunUsuario(Session(SESSIONPRONTO_UserName), HFSC.Value, ConexBDLmaster).Where(Function(x) x <> "").ToList  'c.ToList()
+            If clientes.Count > 0 Then
+
+                chkTitular.Checked = False
+                chkTitular.Visible = False
+                chkIntermediario.Checked = False
+                chkIntermediario.Visible = False
+                chkRemComercial.Checked = False
+                chkRemComercial.Visible = False
+                chkClienteAuxiliar.Checked = False
+                chkClienteAuxiliar.Visible = False
+                chkCorredor.Checked = False
+                chkCorredor.Visible = False
+                chkDestinatario.Checked = False
+                chkDestinatario.Visible = False
+                cmbCriterioWHERE.Visible = False
+
+            End If
+
+
+
 
             BloqueosDeEdicion()
 
@@ -460,16 +481,25 @@ Partial Class CartaDePorteInformesAccesoClientes
 
 
 
-        Dim dt = DataTablePorCliente(HFSC.Value, _
-                    "", "", "", 1, 0, _
-                    estadofiltro, rs, idVendedor, idCorredor, _
-                    idDestinatario, idIntermediario, _
-                    idRComercial, idArticulo, idProcedencia, idDestino, _
-                    IIf(cmbCriterioWHERE.SelectedValue = "todos", FiltroANDOR.FiltroAND, FiltroANDOR.FiltroOR), _
-                                    DropDownList2.Text, _
-                    Convert.ToDateTime(iisValidSqlDate(txtFechaDesde.Text, #1/1/1753#)), _
-                    Convert.ToDateTime(iisValidSqlDate(txtFechaHasta.Text, #1/1/2100#)), _
-                    cmbPuntoVenta.SelectedValue, Session(SESSIONPRONTO_UserName), ConexBDLmaster)
+
+
+
+
+
+        If False Then
+
+
+
+            Dim dt = DataTablePorCliente(HFSC.Value, _
+                        "", "", "", 1, 0, _
+                        estadofiltro, rs, idVendedor, idCorredor, _
+                        idDestinatario, idIntermediario, _
+                        idRComercial, idArticulo, idProcedencia, idDestino, _
+                        IIf(cmbCriterioWHERE.SelectedValue = "todos", FiltroANDOR.FiltroAND, FiltroANDOR.FiltroOR), _
+                                        DropDownList2.Text, _
+                        Convert.ToDateTime(iisValidSqlDate(txtFechaDesde.Text, #1/1/1753#)), _
+                        Convert.ToDateTime(iisValidSqlDate(txtFechaHasta.Text, #1/1/2100#)), _
+                        cmbPuntoVenta.SelectedValue, Session(SESSIONPRONTO_UserName), ConexBDLmaster)
 
 
 
@@ -478,58 +508,73 @@ Partial Class CartaDePorteInformesAccesoClientes
 
 
 
-        Try
+            Try
 
 
-            If dt.Rows.Count = 1 Then
-                If dt.Rows(0).Item("PathImagen").ToString <> "" Then
-                    ' lblErrores.Text = "~/ProntoWeb/CartasDePorteImagenEncriptada.aspx?Id=" & dt.Rows(0).Item("ClaveEncriptada")
-                    iframeAAAA.Attributes("src") = "CartasDePorteImagenEncriptada.aspx?Id=" & dt.Rows(0).Item("ClaveEncriptada")
-                    iframeAAAA.Visible = True
+                If dt.Rows.Count = 1 Then
+                    If dt.Rows(0).Item("PathImagen").ToString <> "" Then
+                        ' lblErrores.Text = "~/ProntoWeb/CartasDePorteImagenEncriptada.aspx?Id=" & dt.Rows(0).Item("ClaveEncriptada")
+                        iframeAAAA.Attributes("src") = "CartasDePorteImagenEncriptada.aspx?Id=" & dt.Rows(0).Item("ClaveEncriptada")
+                        iframeAAAA.Visible = True
+                    End If
+                Else
+                    iframeAAAA.Attributes("src") = ""
+                    iframeAAAA.Visible = False
                 End If
-            Else
-                iframeAAAA.Attributes("src") = ""
-                iframeAAAA.Visible = False
-            End If
 
-        Catch ex As Exception
-            Dim ms = ex.ToString & "   " & dt.Rows.Count() & " " & dt.Rows(0).Item("IdCartaDePorte") & " " & dt.Rows(0).Item("NumeroCDP")
-            MandarMailDeError(ms)
-            ErrHandler2.WriteError(ms)
+            Catch ex As Exception
+                Dim ms = ex.ToString & "   " & dt.Rows.Count() & " " & dt.Rows(0).Item("IdCartaDePorte") & " " & dt.Rows(0).Item("NumeroCDP")
+                MandarMailDeError(ms)
+                ErrHandler2.WriteError(ms)
 
-            MsgBoxAjax(Me, ms)
-        End Try
+                MsgBoxAjax(Me, ms)
+            End Try
 
 
 
+            ProntoFuncionesUIWeb.RebindReportViewer(ReportViewer2, _
+                        "ProntoWeb\Informes\Listado general de Cartas de Porte (simulando original) con foto .rdl", _
+                                dt, Nothing, , , sTitulo)
+
+
+        Else
+
+
+            Dim strSQL = DataTablePorClienteSQL(HFSC.Value, _
+                               "", "", "", 1, 0, _
+                               estadofiltro, rs, idVendedor, idCorredor, _
+                               idDestinatario, idIntermediario, _
+                               idRComercial, idArticulo, idProcedencia, idDestino, _
+                               IIf(cmbCriterioWHERE.SelectedValue = "todos", FiltroANDOR.FiltroAND, FiltroANDOR.FiltroOR), _
+                                               DropDownList2.Text, _
+                               Convert.ToDateTime(iisValidSqlDate(txtFechaDesde.Text, #1/1/1753#)), _
+                               Convert.ToDateTime(iisValidSqlDate(txtFechaHasta.Text, #1/1/2100#)), _
+                               cmbPuntoVenta.SelectedValue, Session(SESSIONPRONTO_UserName), ConexBDLmaster())
 
 
 
+            Dim yourParams As ReportParameter() = New ReportParameter(9) {}
 
-        Try
-
-            Select Case cmbInforme.Text
-                Case "Listado general de cartas de porte"
-
-                    ProntoFuncionesUIWeb.RebindReportViewer(ReportViewer2, _
-                                "ProntoWeb\Informes\Listado general de Cartas de Porte (simulando original) con foto .rdl", _
-                                        dt, Nothing, , , sTitulo)
-
-
-                Case Else
-                    'MsgBoxAjax(Me, "El informe no existe. Consulte con el administrador")
-            End Select
+            yourParams(0) = New ReportParameter("webservice", "")
+            yourParams(1) = New ReportParameter("sServidor", ConfigurationManager.AppSettings("UrlDominio"))
+            yourParams(2) = New ReportParameter("idArticulo", -1)
+            yourParams(3) = New ReportParameter("idDestino", -1)
+            yourParams(4) = New ReportParameter("desde", New DateTime(2012, 11, 1)) ' txtFechaDesde.Text)
+            yourParams(5) = New ReportParameter("hasta", New DateTime(2012, 11, 1)) ', txtFechaHasta.Text)
+            yourParams(6) = New ReportParameter("quecontenga", "ghkgk")
+            yourParams(7) = New ReportParameter("Consulta", strSQL)
+            yourParams(8) = New ReportParameter("sServidorSQL", Encriptar(HFSC.Value))
+            yourParams(9) = New ReportParameter("titulo", "Informe")
 
 
-
+            RebindReportViewer_Servidor_SalidaNormal(ReportViewer2, "Listado general de Cartas de Porte (simulando original) con foto 2", yourParams)
 
 
 
-        Catch ex As Exception
-            ErrHandler2.WriteError("Hubo un error al generar el informe. " & ex.ToString)
-            MsgBoxAjax(Me, "Hubo un error al generar el informe. " & ex.ToString)
-            Return
-        End Try
+        End If
+
+
+
 
 
 
@@ -761,7 +806,7 @@ Partial Class CartaDePorteInformesAccesoClientes
 
 
 
-    
+
 
 
 
@@ -918,7 +963,7 @@ Partial Class CartaDePorteInformesAccesoClientes
 
 
 
-    
+
 
 
 

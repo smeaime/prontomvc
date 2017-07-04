@@ -43,6 +43,7 @@ select
 			AND (D.Fecha between @FechaDesde and @FechaHasta )
 			AND (D.IdDestino=@IdDestino or @IdDestino=-1) 
 			AND ((C.FechaDescarga between @FechaDesde and @FechaHasta) or C.IdCartaDePorte is null)
+			AND C.Exporta='NO' -- reclamo 41491
 
 	group by YEAR(D.Fecha),DATENAME(month, D.Fecha),d.IdCartasDePorteControlDescarga,D.IdDestino , 
 							DEST.Descripcion, D.Fecha  , d.TotalDescargaDia ,D.idpuntoventa
