@@ -505,73 +505,14 @@ Public Class CartaDePorteManager
 
 
         Dim dt As DataTable
+
         Try
 
+            Dim strsql = DataTablePorClienteSQL(SC, ColumnaParaFiltrar, TextoParaFiltrar, sortExpression, startRowIndex, maximumRows, estado, QueContenga, idVendedor, idCorredor, idDestinatario, idIntermediario, idRemComercial, idArticulo, idProcedencia, idDestino, AplicarANDuORalFiltro, ModoExportacion, fechadesde, fechahasta, puntoventa, usuario, ConexBDLmaster)
 
 
 
-            Dim strsql = CartaDePorteManager.GetDataTableFiltradoYPaginado_CadenaSQL(SC, _
-                    "", "", "", 1, 999999999, _
-                    estado, QueContenga, idVendedor, idCorredor, _
-                    idDestinatario, idIntermediario, _
-                     idRemComercial, idArticulo, idProcedencia, idDestino, _
-                    AplicarANDuORalFiltro, _
-                                   ModoExportacion, _
-                fechadesde, _
-                     fechahasta, _
-                    puntoventa, "", "Ambas", , , ,
-             -1, -1, 0, "", , "Todos")
-
-
-
-            
-
-
-
-
-
-
-
-
-
-            'http://stackoverflow.com/questions/6841605/get-top-1-row-of-each-group
-            'http://stackoverflow.com/questions/3800551/select-first-row-in-each-group-by-group?rq=1
-
-
-            Dim agrup = ";WITH cte AS " & _
-            "( " & _
-            "       SELECT *, " & _
-            "             ROW_NUMBER() OVER (PARTITION BY NumeroCartaDePorte,SubnumeroVagon ORDER BY IdCartaDePorte DESC) AS rn " & _
-            "       FROM ( " & _
-                     strsql & _
-            "       ) as cartas " & _
-            ") " & _
-            "SELECT * " & _
-            "FROM cte " & _
-            "WHERE rn = 1 "
-
-
-
-            Dim clientes As List(Of String) = TraerCUITClientesSegunUsuario(usuario, SC, ConexBDLmaster).Where(Function(x) x <> "").ToList  'c.ToList()
-            If clientes.Count = 0 And QueContenga = "" Then Return Nothing
-
-            Dim clisql = "'" & Join(clientes.ToArray, "','") & "'"
-            'Function(x) clientes.Contains(x.TitularCUIT) Or clientes.Contains(x.IntermediarioCUIT) Or clientes.Contains(x.RComercialCUIT)) _
-            agrup &= " AND  ( replace(TitularCUIT,'-','')  IN (" & clisql & " ) " & _
-                    " OR replace(IntermediarioCUIT,'-','') IN (" & clisql & " ) " & _
-                    " OR replace(RComercialCUIT,'-','') IN (" & clisql & " ) " & _
-                    ")"
-
-
-
-
-
-
-
-
-
-            dt = ExecDinamico(SC, agrup, 200)
-
+            dt = ExecDinamico(SC, strsql, 200)
 
 
 
@@ -616,10 +557,118 @@ Public Class CartaDePorteManager
 
 
         Return dt
+
     End Function
 
 
 
+
+
+
+
+
+    Public Shared Function DataTablePorClienteSQL( _
+            ByVal SC As String,
+            ByVal ColumnaParaFiltrar As String,
+            ByVal TextoParaFiltrar As String,
+            ByVal sortExpression As String,
+            ByVal startRowIndex As Long,
+            ByVal maximumRows As Long,
+            ByVal estado As CartaDePorteManager.enumCDPestado,
+            ByVal QueContenga As String,
+            ByVal idVendedor As Integer,
+            ByVal idCorredor As Integer,
+            ByVal idDestinatario As Integer,
+            ByVal idIntermediario As Integer,
+            ByVal idRemComercial As Integer,
+            ByVal idArticulo As Integer,
+            ByVal idProcedencia As Integer,
+            ByVal idDestino As Integer,
+            ByVal AplicarANDuORalFiltro As FiltroANDOR,
+            ByVal ModoExportacion As String,
+            ByVal fechadesde As DateTime, ByVal fechahasta As DateTime,
+            ByVal puntoventa As Integer, usuario As String, ConexBDLmaster As String
+                    ) As String
+
+
+
+
+
+        Dim strsql = CartaDePorteManager.GetDataTableFiltradoYPaginado_CadenaSQL(SC, _
+                "", "", "", 1, 999999999, _
+                estado, QueContenga, idVendedor, idCorredor, _
+                idDestinatario, idIntermediario, _
+                 idRemComercial, idArticulo, idProcedencia, idDestino, _
+                AplicarANDuORalFiltro, _
+                               ModoExportacion, _
+            fechadesde, _
+                 fechahasta, _
+                puntoventa, "", "Ambas", , , ,
+         -1, -1, 0, "", , "Todos")
+
+
+
+
+
+
+
+
+
+
+
+
+
+        'http://stackoverflow.com/questions/6841605/get-top-1-row-of-each-group
+        'http://stackoverflow.com/questions/3800551/select-first-row-in-each-group-by-group?rq=1
+
+
+        Dim agrup = ";WITH cte AS " & _
+        "( " & _
+        "       SELECT *, " & _
+        "             ROW_NUMBER() OVER (PARTITION BY NumeroCartaDePorte,SubnumeroVagon ORDER BY IdCartaDePorte DESC) AS rn " & _
+        "       FROM ( " & _
+                 strsql & _
+        "       ) as cartas " & _
+        ") " & _
+        "SELECT * " & _
+        "FROM cte " & _
+        "WHERE rn = 1 "
+
+
+
+        Dim clientes As List(Of String) = TraerCUITClientesSegunUsuario(usuario, SC, ConexBDLmaster).Where(Function(x) x <> "").ToList  'c.ToList()
+        If clientes.Count = 0 And QueContenga = "" Then Return Nothing
+        Dim idscliente As New List(Of String)
+        For Each c In clientes
+            idscliente.Add(BuscarClientePorCUIT(c, SC, ""))
+        Next
+
+        Dim clisql = "'" & Join(clientes.ToArray, "','") & "'"
+        Dim idsclientesql = Join(idscliente.ToArray, ",")
+
+        'Function(x) clientes.Contains(x.TitularCUIT) Or clientes.Contains(x.IntermediarioCUIT) Or clientes.Contains(x.RComercialCUIT)) _
+        'agrup &= " AND  ( replace(TitularCUIT,'-','')  IN (" & clisql & " ) " & _
+        '        " OR replace(IntermediarioCUIT,'-','') IN (" & clisql & " ) " & _
+        '        " OR replace(RComercialCUIT,'-','') IN (" & clisql & " ) " & _
+        '        ")"
+
+
+        agrup &= " AND  ( Vendedor IN (" & idsclientesql & " ) " & _
+                " OR CuentaOrden1  IN (" & idsclientesql & " ) " & _
+                " OR CuentaOrden2 IN (" & idsclientesql & " ) " & _
+                ")"
+
+
+
+
+
+        Return agrup
+
+
+
+
+
+    End Function
 
 
 
@@ -4693,7 +4742,117 @@ Public Class CartaDePorteManager
 
 
 
+    Public Shared Function RebindReportViewer_Servidor_SalidaNormal(ByRef oReportViewer As Microsoft.Reporting.WebForms.ReportViewer,
+                                                                ByVal rdlFile As String, parametros As IEnumerable(Of ReportParameter)) As String
 
+
+        'errores
+        '   rsCredentialsNotSpecified     porque el datasource TestHarcodeada tiene las credenciales no configuradas para windows integrated
+        '   rsProcessingAborted           porque la cuenta que corre el repservice no tiene permisos: 
+        '                                         GRANT  Execute on [dbo].your_object to [public]
+        '                                         REVOKE Execute on [dbo].your_object to [public]
+        '                                         grant execute on wCar...  to [NT AUTHORITY\NETWORK SERVICE]
+        '                                         grant execute on wCar...  to [NT AUTHORITY\ANONYMOUS LOGON]
+        '                                         grant execute on wCart... to public
+
+        If parametros IsNot Nothing Then
+            For Each i In parametros
+                If i Is Nothing Then
+                    Throw New Exception("Te falta por lo menos un parametro. Recordá que el array que pasás se dimensiona con un elemento de más")
+                End If
+            Next
+        End If
+
+
+        With oReportViewer
+            .Reset()
+            .ProcessingMode = Microsoft.Reporting.WebForms.ProcessingMode.Remote
+            .Visible = False
+
+
+
+            'ReportViewerRemoto.ServerReport.ReportServerUrl = new Uri("http://localhost/ReportServer");
+            .ServerReport.ReportServerUrl = New Uri(ConfigurationManager.AppSettings("ReportServer"))
+            .ProcessingMode = ProcessingMode.Remote
+            ' IReportServerCredentials irsc = new CustomReportCredentials("administrador", ".xza2190lkm.", "");
+            Dim irsc As IReportServerCredentials = New CustomReportCredentials(ConfigurationManager.AppSettings("ReportUser"), ConfigurationManager.AppSettings("ReportPass"), ConfigurationManager.AppSettings("ReportDomain"))
+            .ServerReport.ReportServerCredentials = irsc
+            .ShowCredentialPrompts = False
+            .ShowParameterPrompts = False
+
+
+
+            'rdlFile = "/Pronto informes/" + "Resumen Cuenta Corriente Acreedores"
+            'Dim reportName = "Listado general de Cartas de Porte (simulando original) con foto Buscador sin Webservice"
+            If rdlFile = "" Then
+
+            End If
+            rdlFile = rdlFile.Replace(".rdl", "")
+            rdlFile = "/Pronto informes/" & rdlFile
+
+
+
+            With .ServerReport
+                .ReportPath = rdlFile
+
+
+
+
+
+
+                Try
+                    If parametros IsNot Nothing Then oReportViewer.ServerReport.SetParameters(parametros)
+                    'sera porque el informe tiene el datasource TestHarcodeada con credenciales NO en "integrated security"?
+
+
+                Catch ex As Exception
+                    'sera porque el informe tiene el datasource TestHarcodeada con credenciales NO en "integrated security"?
+
+
+                    ErrHandler2.WriteError(ex.ToString)
+                    Dim inner As Exception = ex.InnerException
+                    While Not (inner Is Nothing)
+                        If System.Diagnostics.Debugger.IsAttached() Then
+                            MsgBox(inner.Message)
+                            Stop
+                        End If
+                        ErrHandler2.WriteError("Error al buscar los parametros.  " & inner.Message)
+                        inner = inner.InnerException
+                    End While
+                End Try
+
+                '/////////////////////
+                '/////////////////////
+                '/////////////////////
+                '/////////////////////
+
+            End With
+
+
+            .DocumentMapCollapsed = True
+
+
+
+            '/////////////////////
+            '/////////////////////
+
+
+            .Visible = True
+
+
+
+
+
+
+        End With
+
+        '////////////////////////////////////////////
+
+        'este me salvo! http://social.msdn.microsoft.com/Forums/en-US/winformsdatacontrols/thread/bd60c434-f61a-4252-a7f9-1606fdca6b41
+
+        'http://social.msdn.microsoft.com/Forums/en-US/vsreportcontrols/thread/505ffb1c-324e-4623-9cce-d84662d92b1a
+
+    End Function
 
     Public Shared Function RebindReportViewer_ServidorExcel(ByRef oReportViewer As Microsoft.Reporting.WebForms.ReportViewer,
                                                                 ByVal rdlFile As String, parametros As IEnumerable(Of ReportParameter),

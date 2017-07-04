@@ -856,6 +856,75 @@ namespace ProntoMVC.Tests
 
 
 
+
+
+
+        [TestMethod]
+        public void InformeControlDiario_41491_AKA_estadisticas_de_descargas()
+        {
+
+
+            //wCartasDePorteControlDescargas_TX_InformeControlDiario
+
+
+            string ArchivoExcelDestino = @"C:\Users\Administrador\Desktop\lala.xls";
+            Microsoft.Reporting.WebForms.ReportViewer rep = new Microsoft.Reporting.WebForms.ReportViewer();
+
+            ReportParameter[] yourParams = new ReportParameter[6];
+            yourParams[0] = new ReportParameter("CadenaConexion", ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC));
+            yourParams[1] = new ReportParameter("sServidorWeb", ConfigurationManager.AppSettings["UrlDominio"]);
+            yourParams[2] = new ReportParameter("FechaDesde", new DateTime(2016, 7, 1).ToString());
+            yourParams[3] = new ReportParameter("FechaHasta", new DateTime(2016, 10, 30).ToString());
+            yourParams[4] = new ReportParameter("IdDestino", "-1");
+            yourParams[5] = new ReportParameter("IdPuntoVenta", "0");
+            //yourParams[7] = new ReportParameter("Consulta", strSQL);
+
+
+            var output2 = CartaDePorteManager.RebindReportViewer_ServidorExcel(ref rep,
+                                "Williams - Controles Diarios.rdl", yourParams, ref ArchivoExcelDestino, false);
+
+            System.Diagnostics.Process.Start(output2);
+        }
+
+
+
+
+
+
+        [TestMethod]
+        public void SincroGualeguayCereales_42538()
+        {
+
+            string sErrores = "", sTitulo = "";
+            LinqCartasPorteDataContext db = null;
+
+            // el _CONST_MAXROWS sale del app.config
+
+            int registrosf = 0;
+
+            int idcorr = CartaDePorteManager.BuscarVendedorPorCUIT("30-71077157-6", SC, "");
+
+            var output = SincronismosWilliamsManager.GenerarSincro("Gualeguay", ref sErrores, SC, "dominio", ref sTitulo
+                                , CartaDePorteManager.enumCDPestado.DescargasMasFacturadas,
+                     "", -1, idcorr,
+                -1, -1,
+                 -1, -1, -1, -1,
+                 CartaDePorteManager.FiltroANDOR.FiltroOR, "Entregas",
+                new DateTime(2016, 3, 1), new DateTime(2016, 3, 15),
+                -1, "Ambas", false, "", "", -1, ref registrosf, 4000);
+
+
+
+            //File.Copy(output, @"C:\Users\Administrador\Desktop\"   Path.GetFileName(output), true);
+            System.Diagnostics.Process.Start(output);
+        }
+
+
+
+
+
+        
+
         [TestMethod]
         public void CampoEditableDeClientesRelacionadosAlUsuarioParaTirarInforme_28320_42549()
         {
@@ -869,6 +938,24 @@ namespace ProntoMVC.Tests
             string usuario = "RODRIGORIOS"; //"BLD25MAYO"
             var desde = new DateTime(2017, 1, 1);
             var hasta = new DateTime(2017, 1, 31);
+
+
+
+
+
+
+
+
+
+            DataTable dt = CartaDePorteManager.DataTablePorCliente(SC, "", "", "", 0, 9999999, 0, "", -1, -1,
+                                -1, -1, -1, -1, -1,
+                                -1, 0, "Ambas"
+                                , new DateTime(2016, 10, 1), new DateTime(2017, 11, 1),
+                                0, usuario, scbdlmasterappconfig);
+
+
+
+
 
 
 
@@ -942,15 +1029,12 @@ namespace ProntoMVC.Tests
 
 
 
+
+
             //string razonsocial = UserDatosExtendidosManager.TraerRazonSocialDelUsuario(usuario, scbdlmasterappconfig, SC);
 
 
-            DataTable dt = CartaDePorteManager.DataTablePorCliente(SC, "" , "", "", 0, 9999999, 0, "", -1, -1,
-                                -1, -1, -1, -1, -1,
-                                -1, 0, "Ambas"
-                                , new DateTime(2016, 10, 1), new DateTime(2017, 11, 1),
-                                0, usuario, scbdlmasterappconfig);
-
+            
 
 
             var l = dt.AsEnumerable().Select(x => x["NumeroCartaDePorte"].NullSafeToString()).ToList();
