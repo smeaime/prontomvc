@@ -4420,7 +4420,7 @@ Formato localidad-provincia	destination	x
                                 
                                 a.IdCartaPorteNormaCalidad.ToString(),
 
-                        a.CartaPorteRubrosCalidad.Descripcion.NullSafeToString(),
+                      (a.CartaPorteRubrosCalidad==null) ?  "" :   a.CartaPorteRubrosCalidad.Descripcion.NullSafeToString(),
                         a.IdCartaPorteRubroCalidad.NullSafeToString(),
                                 a.ResultadoDesde.NullSafeToString(),
                       a.ResultadoHasta.NullSafeToString(),
