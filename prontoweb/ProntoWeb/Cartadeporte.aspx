@@ -3336,7 +3336,7 @@
 
                     //callback(rebaja);
                     textboxRebaja.val(rebaja);
-                    merma = Math.round(rebaja * Number(textboxResultado.val()));
+                    merma = Math.round(rebaja * Number(parseFloat($('#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel3_txtNetoDescarga').val()))/100);
 
                     if (dropdownTipo.val() == 0) {
                         textboxMerma.val(merma);
@@ -3476,10 +3476,6 @@
 
 
 
-
-
-
-      
 
 
 
@@ -3719,6 +3715,31 @@
 
 
 
+
+
+            
+            $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_cmbTipoMermaGranosExtranos").on('input', function (e) {
+
+                var textboxMerma = $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadGranosExtranosMerma")
+
+                if ($("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_cmbTipoMermaGranosExtranos").val() == 0) {
+                    //textboxMerma.val(merma);
+                    //textboxMerma.prop('disabled', false);
+                }
+                else {
+                    textboxMerma.val(0);
+                    //textboxMerma.prop('disabled', true);
+                }
+
+                sumarTotalOtrasMerma();
+
+            });
+
+
+
+            $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadGranosExtranosMerma").on('input', function (e) {
+                 sumarTotalOtrasMerma();
+            });
 
 
 

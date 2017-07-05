@@ -857,6 +857,45 @@ namespace ProntoMVC.Tests
 
 
 
+        [TestMethod]
+        public void RangosResultadoCalidadesCalculoRebajaYMerma_37774__()
+        {
+            var s = new ServicioCartaPorte.servi();
+            var scEF = ProntoMVC.Data.Models.Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC));
+            DemoProntoEntities db = new DemoProntoEntities(scEF);
+
+
+            var ss5 = s.RebajaCalculo(SC, 1, 6.5M, -1, 1);
+            var ss4 = s.RebajaCalculo(SC, 1, 20M, -1, 1);
+            var ss1 = s.RebajaCalculo(SC, 1, 2.5M, -1, -1);
+            var ss2 = s.RebajaCalculo(SC, 1, 2.5M, 01, -1);
+            var ss3 = s.RebajaCalculo(SC, 1, 2.5M, -1, 1);
+
+            /*
+            En ningún caso pone bien la merma en KG
+Por ejemplo, estoy poniendo:
+
+* SOJA
+* 30000KG neto descarga
+* 1.5% cuerpos extraños/materias
+
+La rebaja la calcula bien: 0.5% pero me pone 1KG de merma.
+Deberían ser 150KG
+
+Cuando hay "tramos" de mermas no está calculando bien la rebaja.
+Ejemplo:
+
+* SOJA
+* 30000KG neto descarga
+* 6.5% cuerpos extraños/materias
+
+Debería ser 6.75% de rebaja y viene 7.25%
+
+            */
+        }
+
+
+
 
 
         [TestMethod]
