@@ -950,12 +950,12 @@ namespace ProntoMVC.Tests
             DataTable dt = CartaDePorteManager.DataTablePorCliente(SC, "", "", "", 0, 9999999, 0, "", -1, -1,
                                 -1, -1, -1, -1, -1,
                                 -1, 0, "Ambas"
-                                , new DateTime(2017, 1, 1), new DateTime(2017, 1, 15),
-                                0, usuario, scbdlmasterappconfig, true, true, false, true, true, true);
+                                , new DateTime(2017, 1, 1), new DateTime(2017, 1, 31),
+                                0, usuario, scbdlmasterappconfig, true, true, true,false , false, false);
 
 
 
-
+            
 
 
 
