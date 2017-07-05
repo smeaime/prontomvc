@@ -610,6 +610,18 @@ Public Class CartaDePorteManager
 
 
 
+        Dim clientes As List(Of String) = TraerCUITClientesSegunUsuario(usuario, SC, ConexBDLmaster).Where(Function(x) x <> "").ToList  'c.ToList()
+        If clientes.Count = 0 And QueContenga = "" Then Return Nothing
+        If clientes.Count > 0 Then
+            QueContenga = ""
+            idVendedor = -1
+            idIntermediario = -1
+            idRemComercial = -1
+            idDestinatario = -1
+            idCorredor = -1
+        End If
+
+
 
         Dim strsql = CartaDePorteManager.GetDataTableFiltradoYPaginado_CadenaSQL(SC, _
                 "", "", "", 1, 999999999, _
@@ -653,9 +665,7 @@ Public Class CartaDePorteManager
 
 
 
-        Dim clientes As List(Of String) = TraerCUITClientesSegunUsuario(usuario, SC, ConexBDLmaster).Where(Function(x) x <> "").ToList  'c.ToList()
-        If clientes.Count = 0 And QueContenga = "" Then Return Nothing
-        Dim idscliente As New List(Of String)
+         Dim idscliente As New List(Of String)
         Dim idscorredor As New List(Of String)
         For Each c In clientes
             idscliente.Add(BuscarClientePorCUIT(c, SC, ""))
