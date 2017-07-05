@@ -166,3 +166,263 @@ ASP.NET session has expired or could not be found
    en System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
 Microsoft.ReportViewer.WebForms
 __________________________
+
+Log Entry : 
+07/05/2017 15:55:47
+Error in: http://localhost:58911/ProntoWeb/Cartadeporte.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartadeporteABM.BindTypeDropDown() en C:\Users\Administrador\Documents\bdl\pronto\prontoweb\ProntoWeb\Cartadeporte.aspx.vb:línea 910
+App_Web_cartadeporte.aspx.4199bbd4.ikh-icmq
+__________________________
+
+Log Entry : 
+07/05/2017 15:55:50
+Error in: http://localhost:58911/ProntoWeb/CartasDePortes.aspx?tipo=Todas. Error Message:Mariano
+__________________________
+
+Log Entry : 
+07/05/2017 15:55:50
+Error in: http://localhost:58911/ProntoWeb/CartasDePortes.aspx?tipo=Todas. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartasDePortes.BindTypeDropDown() en C:\Users\Administrador\Documents\bdl\pronto\prontoweb\ProntoWeb\CartasDePortes.aspx.vb:línea 98
+App_Web_cartasdeportes.aspx.4199bbd4.mlx46-wb
+__________________________
+
+Log Entry : 
+07/05/2017 15:55:51
+Error in: http://localhost:58911/ProntoWeb/CartasDePortes.aspx?tipo=Todas. Error Message:System.Threading.ThreadAbortException
+Subproceso anulado.
+   en System.Threading.Thread.AbortInternal()
+   en System.Threading.Thread.Abort(Object stateInfo)
+   en System.Web.HttpResponse.AbortCurrentThread()
+   en System.Web.HttpResponse.End()
+   en System.Web.HttpResponse.Redirect(String url, Boolean endResponse, Boolean permanent)
+   en System.Web.HttpResponse.Redirect(String url)
+   en CartasDePortes.Permisos() en C:\Users\Administrador\Documents\bdl\pronto\prontoweb\ProntoWeb\CartasDePortes.aspx.vb:línea 142
+mscorlib
+__________________________
+
+Log Entry : 
+07/05/2017 15:55:52
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesAccesoClientes.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartaDePorteInformesAccesoClientes.BindTypeDropDown() en C:\Users\Administrador\Documents\bdl\pronto\prontoweb\ProntoWeb\CartaDePorteInformesAccesoClientes.aspx.vb:línea 248
+App_Web_cartadeporteinformesaccesoclientes.aspx.4199bbd4.zyqudvzx
+__________________________
+
+Log Entry : 
+07/05/2017 15:56:41
+Error in: http://localhost:58911/ProntoWeb/CartaDePorte.aspx?Id=-1. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartadeporteABM.BindTypeDropDown() en C:\Users\Administrador\Documents\bdl\pronto\prontoweb\ProntoWeb\Cartadeporte.aspx.vb:línea 910
+App_Web_cartadeporte.aspx.4199bbd4.ikh-icmq
+__________________________
+
+Log Entry : 
+07/05/2017 15:56:41
+Error in: http://localhost:58911/ProntoWeb/CartasDePortes.aspx?tipo=Todas. Error Message:Mariano
+__________________________
+
+Log Entry : 
+07/05/2017 15:56:41
+Error in: http://localhost:58911/ProntoWeb/CartasDePortes.aspx?tipo=Todas. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartasDePortes.BindTypeDropDown() en C:\Users\Administrador\Documents\bdl\pronto\prontoweb\ProntoWeb\CartasDePortes.aspx.vb:línea 98
+App_Web_cartasdeportes.aspx.4199bbd4.mlx46-wb
+__________________________
+
+Log Entry : 
+07/05/2017 15:56:42
+Error in: http://localhost:58911/ProntoWeb/CartasDePortes.aspx?tipo=Todas. Error Message:System.Threading.ThreadAbortException
+Subproceso anulado.
+   en System.Threading.Thread.AbortInternal()
+   en System.Threading.Thread.Abort(Object stateInfo)
+   en System.Web.HttpResponse.AbortCurrentThread()
+   en System.Web.HttpResponse.End()
+   en System.Web.HttpResponse.Redirect(String url, Boolean endResponse, Boolean permanent)
+   en System.Web.HttpResponse.Redirect(String url)
+   en CartasDePortes.Permisos() en C:\Users\Administrador\Documents\bdl\pronto\prontoweb\ProntoWeb\CartasDePortes.aspx.vb:línea 142
+mscorlib
+__________________________
+
+Log Entry : 
+07/05/2017 15:56:42
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesAccesoClientes.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartaDePorteInformesAccesoClientes.BindTypeDropDown() en C:\Users\Administrador\Documents\bdl\pronto\prontoweb\ProntoWeb\CartaDePorteInformesAccesoClientes.aspx.vb:línea 248
+App_Web_cartadeporteinformesaccesoclientes.aspx.4199bbd4.zyqudvzx
+__________________________
+
+Log Entry : 
+07/05/2017 15:56:52
+Error in: http://localhost:58911/ProntoWeb/CartaDePorte.aspx?Id=-1. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartadeporteABM.BindTypeDropDown() en C:\Users\Administrador\Documents\bdl\pronto\prontoweb\ProntoWeb\Cartadeporte.aspx.vb:línea 910
+App_Web_cartadeporte.aspx.4199bbd4.ikh-icmq
+__________________________
+
+Log Entry : 
+07/05/2017 15:56:53
+Error in: http://localhost:58911/ProntoWeb/CartasDePortes.aspx?tipo=Todas. Error Message:Mariano
+__________________________
+
+Log Entry : 
+07/05/2017 15:56:53
+Error in: http://localhost:58911/ProntoWeb/CartasDePortes.aspx?tipo=Todas. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartasDePortes.BindTypeDropDown() en C:\Users\Administrador\Documents\bdl\pronto\prontoweb\ProntoWeb\CartasDePortes.aspx.vb:línea 98
+App_Web_cartasdeportes.aspx.4199bbd4.mlx46-wb
+__________________________
+
+Log Entry : 
+07/05/2017 15:56:53
+Error in: http://localhost:58911/ProntoWeb/CartasDePortes.aspx?tipo=Todas. Error Message:System.Threading.ThreadAbortException
+Subproceso anulado.
+   en System.Threading.Thread.AbortInternal()
+   en System.Threading.Thread.Abort(Object stateInfo)
+   en System.Web.HttpResponse.AbortCurrentThread()
+   en System.Web.HttpResponse.End()
+   en System.Web.HttpResponse.Redirect(String url, Boolean endResponse, Boolean permanent)
+   en System.Web.HttpResponse.Redirect(String url)
+   en CartasDePortes.Permisos() en C:\Users\Administrador\Documents\bdl\pronto\prontoweb\ProntoWeb\CartasDePortes.aspx.vb:línea 142
+mscorlib
+__________________________
+
+Log Entry : 
+07/05/2017 15:56:53
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesAccesoClientes.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartaDePorteInformesAccesoClientes.BindTypeDropDown() en C:\Users\Administrador\Documents\bdl\pronto\prontoweb\ProntoWeb\CartaDePorteInformesAccesoClientes.aspx.vb:línea 248
+App_Web_cartadeporteinformesaccesoclientes.aspx.4199bbd4.zyqudvzx
+__________________________
+
+Log Entry : 
+07/05/2017 15:57:03
+Error in: http://localhost:58911/ProntoWeb/CartasDePortes.aspx?tipo=Todas. Error Message:Mariano
+__________________________
+
+Log Entry : 
+07/05/2017 15:57:15
+Error in: http://localhost:58911/ProntoWeb/CartaDePorte.aspx?Id=2969369. Error Message:La carta numero 12313131 id=2969369 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+07/05/2017 15:57:15
+Error in: http://localhost:58911/ProntoWeb/CartaDePorte.aspx?Id=2969369. Error Message:PV 1 0
+__________________________
+
+Log Entry : 
+07/05/2017 15:59:55
+Error in: http://localhost:58911/ProntoWeb/CartaDePorte.aspx?Id=2969369. Error Message:La carta numero 12313131 id=2969369 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+07/05/2017 15:59:55
+Error in: http://localhost:58911/ProntoWeb/CartaDePorte.aspx?Id=2969369. Error Message:PV 1 0
+__________________________
+
+Log Entry : 
+07/05/2017 16:00:21
+Error in: http://localhost:58911/ProntoWeb/CartaDePorte.aspx?Id=2969369. Error Message:La carta numero 12313131 id=2969369 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+07/05/2017 16:00:21
+Error in: http://localhost:58911/ProntoWeb/CartaDePorte.aspx?Id=2969369. Error Message:PV 1 0
+__________________________
+
+Log Entry : 
+07/05/2017 16:00:44
+Error in: http://localhost:58911/ProntoWeb/CartaDePorte.aspx?Id=2969369. Error Message:La carta numero 12313131 id=2969369 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+07/05/2017 16:00:44
+Error in: http://localhost:58911/ProntoWeb/CartaDePorte.aspx?Id=2969369. Error Message:PV 1 0
+__________________________
+
+Log Entry : 
+07/05/2017 16:04:40
+Error in: http://localhost:58911/ProntoWeb/CartaDePorte.aspx?Id=2969369. Error Message:La carta numero 12313131 id=2969369 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+07/05/2017 16:04:40
+Error in: http://localhost:58911/ProntoWeb/CartaDePorte.aspx?Id=2969369. Error Message:PV 1 0
+__________________________
+
+Log Entry : 
+07/05/2017 16:07:04
+Error in: http://localhost:58911/ProntoWeb/HandlerNormas.ashx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en ServicioCartaPorte.servi.<NormasCalidad_DynamicGridData>b__a(CartaPorteNormasCalidad a) en c:\Users\Administrador\Documents\bdl\pronto\InterfazFlexicapture\prontoflexicapture.cs:línea 4415
+   en System.Linq.Enumerable.WhereSelectListIterator`2.MoveNext()
+   en System.Linq.Buffer`1..ctor(IEnumerable`1 source)
+   en System.Linq.Enumerable.ToArray[TSource](IEnumerable`1 source)
+   en ServicioCartaPorte.servi.NormasCalidad_DynamicGridData(String SC, String sidx, String sord, Int32 page, Int32 rows, Boolean _search, String filters) en c:\Users\Administrador\Documents\bdl\pronto\InterfazFlexicapture\prontoflexicapture.cs:línea 4409
+   en JQGridHandler.ProcessRequest(HttpContext context) en c:\Users\Administrador\Documents\bdl\pronto\prontoweb\ProntoWeb\HandlerNormas.ashx:línea 62
+   en System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   en System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+InterfazFlexicapture
+__________________________
+
+Log Entry : 
+07/05/2017 16:08:22
+Error in: http://localhost:58911/ProntoWeb/Principal.aspx. Error Message:Mariano esta logueado, pero lo redirijo al login porque faltan los datos de session. No deberia mejor mandarlo a SeleccionarEmpresa? Ademas, no hago el LogOut y le queda el cookie!!!
+__________________________
+
+Log Entry : 
+07/05/2017 16:08:23
+Error in: http://localhost:58911/ProntoWeb/CartasDePortes.aspx?tipo=Todas. Error Message:Mariano
+__________________________
+
+Log Entry : 
+07/05/2017 16:09:27
+Error in: http://localhost:58911/ProntoWeb/Principal.aspx. Error Message:Mariano esta logueado, pero lo redirijo al login porque faltan los datos de session. No deberia mejor mandarlo a SeleccionarEmpresa? Ademas, no hago el LogOut y le queda el cookie!!!
+__________________________
+
+Log Entry : 
+07/05/2017 16:09:28
+Error in: http://localhost:58911/ProntoWeb/CartasDePortes.aspx?tipo=Todas. Error Message:Mariano
+__________________________
+
+Log Entry : 
+07/05/2017 16:19:31
+Error in: http://localhost:58911/ProntoWeb/CartaDePorte.aspx?Id=2969369. Error Message:La carta numero 12313131 id=2969369 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+07/05/2017 16:19:31
+Error in: http://localhost:58911/ProntoWeb/CartaDePorte.aspx?Id=2969369. Error Message:PV 1 0
+__________________________
+
+Log Entry : 
+07/05/2017 16:20:44
+Error in: http://localhost:58911/ProntoWeb/CartaDePorte.aspx?Id=2969369. Error Message:La carta numero 12313131 id=2969369 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+07/05/2017 16:20:44
+Error in: http://localhost:58911/ProntoWeb/CartaDePorte.aspx?Id=2969369. Error Message:PV 1 0
+__________________________
+
+Log Entry : 
+07/05/2017 16:21:13
+Error in: http://localhost:58911/ProntoWeb/WebServiceClientes.asmx/RebajaCalculo. Error Message:System.NullReferenceException: Referencia a objeto no establecida como instancia de un objeto.
+   en ServicioCartaPorte.servi.RebajaCalculo(String SC, Int32 idrubro, Decimal resultado, Int32 idarticulo, Int32 iddestino) en c:\Users\Administrador\Documents\bdl\pronto\InterfazFlexicapture\prontoflexicapture.cs:línea 4484
+   en WebServiceClientes.RebajaCalculo(String SC, String rubrodesc, Decimal resultado, String articulodesc, String destinodesc)
+__________________________
+
+Log Entry : 
+07/05/2017 16:21:21
+Error in: http://localhost:58911/ProntoWeb/WebServiceClientes.asmx/RebajaCalculo. Error Message:System.NullReferenceException: Referencia a objeto no establecida como instancia de un objeto.
+   en ServicioCartaPorte.servi.RebajaCalculo(String SC, Int32 idrubro, Decimal resultado, Int32 idarticulo, Int32 iddestino) en c:\Users\Administrador\Documents\bdl\pronto\InterfazFlexicapture\prontoflexicapture.cs:línea 4484
+   en WebServiceClientes.RebajaCalculo(String SC, String rubrodesc, Decimal resultado, String articulodesc, String destinodesc)
+__________________________
+
+Log Entry : 
+07/05/2017 16:25:28
+Error in: http://localhost:58911/ProntoWeb/WebServiceClientes.asmx/RebajaCalculo. Error Message:System.NullReferenceException: Referencia a objeto no establecida como instancia de un objeto.
+   en ServicioCartaPorte.servi.RebajaCalculo(String SC, Int32 idrubro, Decimal resultado, Int32 idarticulo, Int32 iddestino) en c:\Users\Administrador\Documents\bdl\pronto\InterfazFlexicapture\prontoflexicapture.cs:línea 4484
+   en WebServiceClientes.RebajaCalculo(String SC, String rubrodesc, Decimal resultado, String articulodesc, String destinodesc)
+__________________________
