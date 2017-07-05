@@ -1317,6 +1317,7 @@ namespace ProntoMVC.Tests
 
 
 
+            var ss4 = s.RebajaCalculo(SC, 1, 20M, -1, 1);
             var ss1 = s.RebajaCalculo(SC, 1, 2.5M, -1, -1);
             var ss2 = s.RebajaCalculo(SC, 1, 2.5M, 01, -1);
             var ss3 = s.RebajaCalculo(SC, 1, 2.5M, -1, 1);
