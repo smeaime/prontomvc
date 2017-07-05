@@ -4453,60 +4453,65 @@ Formato localidad-provincia	destination	x
             DemoProntoEntities db = new DemoProntoEntities(scEF);
 
 
-            var qexacto = (from n in db.CartaPorteNormasCalidads
-                           where (
-                                    n.ResultadoDesde <= resultado
-                               // && resultado <= n.ResultadoHasta  // lo comento porque ahora tengo que tomar todos los rangos por los que pasa la mediocion, no solo uno
-                                    )
-                                  && (idrubro == n.IdCartaPorteRubroCalidad)
-                                  && (n.IdArticulo == idarticulo || (n.IdArticulo == null && idarticulo == -1))
-                                  && (n.IdDestino == iddestino || (n.IdDestino == null && iddestino == -1))
-                           orderby n.IdArticulo descending, n.IdDestino descending
-                           select n).ToList();
-
-
-            if (qexacto.Count() > 0)
-            {
-                var rebaja = qexacto.First().RebajaIncremento ?? 0;
-                return rebaja * resultado;
-            }
+            //var qexacto = (from n in db.CartaPorteNormasCalidads
+            //               where (
+            //                        n.ResultadoDesde <= resultado
+            //                   // && resultado <= n.ResultadoHasta  // lo comento porque ahora tengo que tomar todos los rangos por los que pasa la mediocion, no solo uno
+            //                        )
+            //                      && (idrubro == n.IdCartaPorteRubroCalidad)
+            //                      && (n.IdArticulo == idarticulo || (n.IdArticulo == null && idarticulo == -1))
+            //                      && (n.IdDestino == iddestino || (n.IdDestino == null && iddestino == -1))
+            //               orderby n.IdArticulo descending, n.IdDestino descending
+            //               select n).ToList();
 
 
 
-
-            var hasta = 0;
-            decimal pos = 0;
-            decimal reb = 0;
-            while (pos < resultado)
-            {
-
-                var posrango = qexacto.Where(n => n.ResultadoDesde <= pos && pos <= n.ResultadoHasta).FirstOrDefault();
-
-                reb += (posrango.RebajaIncremento ?? 0) * pos;
-
-                pos = posrango.ResultadoHasta ?? 0;
-            }
-
-
-
-
-
+            
             var qaprox = (from n in db.CartaPorteNormasCalidads
-                          where (n.ResultadoDesde <= resultado && resultado <= n.ResultadoHasta)
+                          where (n.ResultadoDesde <= resultado
                                  && (idrubro == n.IdCartaPorteRubroCalidad)
                                  && (n.IdArticulo == idarticulo || n.IdArticulo == null || idarticulo == -1)
                                  && (n.IdDestino == iddestino || n.IdDestino == null || iddestino == -1)
+                                )
                           orderby n.IdArticulo descending, n.IdDestino descending
                           select n).ToList();
 
-            if (qaprox.Count() == 0)
-                return 0;
-            else
-            {
-                var rebaja = qaprox.First().RebajaIncremento ?? 0;
-                return rebaja * resultado;
-            }
 
+
+
+
+            var rangopri = qaprox.OrderBy(n=>n.ResultadoDesde).FirstOrDefault();
+            decimal pos = rangopri.ResultadoHasta ?? 0;
+           
+
+
+            var hasta = 0;
+            decimal rebtotal = 0;
+            do
+            {
+
+
+                var posrango = qaprox.Where(n => n.ResultadoDesde <= pos && pos <= n.ResultadoHasta
+                                                 && (idrubro == n.IdCartaPorteRubroCalidad)
+                                                 && (n.IdArticulo == idarticulo || (n.IdArticulo == null && idarticulo == -1))
+                                                 && (n.IdDestino == iddestino || (n.IdDestino == null && iddestino == -1))
+                                        ).FirstOrDefault();
+                if (posrango == null) posrango = qaprox.Where(n => n.ResultadoDesde <= pos && pos <= n.ResultadoHasta).FirstOrDefault();
+
+
+
+                var rebajarango = (posrango.RebajaIncremento ?? 0) * (Math.Min(resultado, posrango.ResultadoHasta ?? 0) - posrango.ResultadoDesde ?? 0);
+
+                rebtotal += rebajarango;
+
+                pos = (posrango.ResultadoHasta ?? 0 )+ 0.001M;
+            } while (pos < resultado);
+
+
+
+
+
+            return rebtotal;
         }
 
 
