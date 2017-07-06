@@ -1,0 +1,170 @@
+
+Log Entry : 
+07/06/2017 10:49:40
+Error in: http://localhost:58911/ProntoWeb/Cartadeporte.aspx. Error Message:Mariano esta logueado, pero lo redirijo al login porque faltan los datos de session. No deberia mejor mandarlo a SeleccionarEmpresa? Ademas, no hago el LogOut y le queda el cookie!!!
+__________________________
+
+Log Entry : 
+07/06/2017 10:51:20
+Error in: http://localhost:58911/ProntoWeb/Cartadeporte.aspx. Error Message:PV 0 0
+__________________________
+
+Log Entry : 
+07/06/2017 10:51:22
+Error in: http://localhost:58911/ProntoWeb/CartasDePortes.aspx?tipo=Todas. Error Message:Mariano
+__________________________
+
+Log Entry : 
+07/06/2017 10:53:09
+Error in: http://localhost:58911/ProntoWeb/CartaDePorte.aspx?Id=2969369. Error Message:La carta numero 12313131 id=2969369 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+07/06/2017 10:53:09
+Error in: http://localhost:58911/ProntoWeb/CartaDePorte.aspx?Id=2969369. Error Message:PV 1 0
+__________________________
+
+Log Entry : 
+07/06/2017 10:53:41
+Error in: http://localhost:58911/ProntoWeb/CartaDePorte.aspx?Id=2969369. Error Message:La carta numero 12313131 id=2969369 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+07/06/2017 10:53:41
+Error in: http://localhost:58911/ProntoWeb/CartaDePorte.aspx?Id=2969369. Error Message:PV 1 0
+__________________________
+
+Log Entry : 
+07/06/2017 10:56:14
+Error in: http://localhost:58911/ProntoWeb/CartaDePorte.aspx?Id=2969369. Error Message:La carta numero 12313131 id=2969369 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+07/06/2017 10:56:14
+Error in: http://localhost:58911/ProntoWeb/CartaDePorte.aspx?Id=2969369. Error Message:PV 1 0
+__________________________
+
+Log Entry : 
+07/06/2017 10:57:14
+Error in: http://localhost:58911/ProntoWeb/CartaDePorte.aspx?Id=2969369. Error Message:La carta numero 12313131 id=2969369 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+07/06/2017 10:57:14
+Error in: http://localhost:58911/ProntoWeb/CartaDePorte.aspx?Id=2969369. Error Message:PV 1 0
+__________________________
+
+Log Entry : 
+07/06/2017 10:59:03
+Error in: http://localhost:58911/ProntoWeb/CartaDePorte.aspx?Id=2969369. Error Message:La carta numero 12313131 id=2969369 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+07/06/2017 10:59:03
+Error in: http://localhost:58911/ProntoWeb/CartaDePorte.aspx?Id=2969369. Error Message:PV 1 0
+__________________________
+
+Log Entry : 
+07/06/2017 11:04:05
+Error in: http://localhost:58911/ProntoWeb/CartaDePorte.aspx?Id=2969369. Error Message:La carta numero 12313131 id=2969369 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+07/06/2017 11:04:05
+Error in: http://localhost:58911/ProntoWeb/CartaDePorte.aspx?Id=2969369. Error Message:PV 1 0
+__________________________
+
+Log Entry : 
+07/06/2017 11:04:33
+Error in: http://localhost:58911/ProntoWeb/CartaDePorte.aspx?Id=2969369. Error Message:La carta numero 12313131 id=2969369 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+07/06/2017 11:04:33
+Error in: http://localhost:58911/ProntoWeb/CartaDePorte.aspx?Id=2969369. Error Message:PV 1 0
+__________________________
+
+Log Entry : 
+07/06/2017 11:04:58
+Error in: http://localhost:58911/ProntoWeb/CartaDePorte.aspx?Id=2969369. Error Message:La carta numero 12313131 id=2969369 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+07/06/2017 11:04:59
+Error in: http://localhost:58911/ProntoWeb/CartaDePorte.aspx?Id=2969369. Error Message:PV 1 0
+__________________________
+
+Log Entry : 
+07/06/2017 11:17:51
+Error in: http://localhost:58911/ProntoWeb/CartaDePorte.aspx?Id=2969369. Error Message:La carta numero 12313131 id=2969369 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+07/06/2017 11:17:52
+Error in: http://localhost:58911/ProntoWeb/CartaDePorte.aspx?Id=2969369. Error Message:PV 1 0
+__________________________
+
+Log Entry : 
+07/06/2017 11:21:22
+Error in: http://localhost:58911/ProntoWeb/CartaDePorte.aspx?Id=2969369. Error Message:La carta numero 12313131 id=2969369 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+07/06/2017 11:21:22
+Error in: http://localhost:58911/ProntoWeb/CartaDePorte.aspx?Id=2969369. Error Message:PV 1 0
+__________________________
+
+Log Entry : 
+07/06/2017 11:22:01
+Error in: http://localhost:58911/ProntoWeb/CartaDePorte.aspx?Id=2969369. Error Message:La carta numero 12313131 id=2969369 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+07/06/2017 11:22:01
+Error in: http://localhost:58911/ProntoWeb/CartaDePorte.aspx?Id=2969369. Error Message:PV 1 0
+__________________________
+
+Log Entry : 
+07/06/2017 11:23:14
+Error in: http://localhost:58911/ProntoWeb/CartaDePorte.aspx?Id=2969369. Error Message:La carta numero 12313131 id=2969369 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+07/06/2017 11:23:14
+Error in: http://localhost:58911/ProntoWeb/CartaDePorte.aspx?Id=2969369. Error Message:PV 1 0
+__________________________
+
+Log Entry : 
+07/06/2017 11:29:40
+Error in: http://localhost:58911/ProntoWeb/CartaDePorte.aspx?Id=2969369. Error Message:La carta numero 12313131 id=2969369 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+07/06/2017 11:29:40
+Error in: http://localhost:58911/ProntoWeb/CartaDePorte.aspx?Id=2969369. Error Message:PV 1 0
+__________________________
+
+Log Entry : 
+07/06/2017 11:33:01
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesGerenciales.aspx?tipo=Confirmados. Error Message:Generando informe para Ranking de Clientes
+__________________________
+
+Log Entry : 
+07/06/2017 11:34:33
+Error in: http://localhost:58911/ProntoWeb/CartaDePorteInformesGerenciales.aspx?tipo=Confirmados. Error Message:Generando informe para Ranking de Clientes
+__________________________
+
+Log Entry : 
+07/06/2017 11:38:35
+Error in: http://localhost:58911/ProntoWeb/CartasDePortes.aspx?tipo=Todas. Error Message:Mariano
+__________________________
+
+Log Entry : 
+07/06/2017 11:38:45
+Error in: http://localhost:58911/ProntoWeb/CartaDePorte.aspx?Id=2969370. Error Message:La carta numero 11111 id=2969370 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+07/06/2017 11:38:45
+Error in: http://localhost:58911/ProntoWeb/CartaDePorte.aspx?Id=2969370. Error Message:PV 1 0
+__________________________
