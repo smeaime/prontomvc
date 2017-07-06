@@ -4479,9 +4479,9 @@ Formato localidad-provincia	destination	x
 
 
 
-
-            var rangopri = qaprox.OrderBy(n=>n.ResultadoDesde).FirstOrDefault();
-            decimal pos = rangopri.ResultadoHasta ?? 0;
+            decimal pos=0;
+            var rangopri = qaprox.Where(n => n.ResultadoDesde >= pos).OrderBy(n => n.ResultadoDesde).FirstOrDefault();
+             pos = rangopri.ResultadoHasta ?? 0;
            
 
 
@@ -4497,8 +4497,8 @@ Formato localidad-provincia	destination	x
                                                  && (n.IdDestino == iddestino || (n.IdDestino == null && iddestino == -1))
                                         ).FirstOrDefault();
                 if (posrango == null) posrango = qaprox.Where(n => n.ResultadoDesde <= pos && pos <= n.ResultadoHasta).FirstOrDefault();
-
-
+                if (posrango == null) posrango = qaprox.Where(n => n.ResultadoDesde >= pos).OrderBy(n => n.ResultadoDesde).FirstOrDefault();
+                if (posrango == null) break;
 
                 var rebajarango = (posrango.RebajaIncremento ?? 0) * (Math.Min(resultado, posrango.ResultadoHasta ?? 0) - posrango.ResultadoDesde ?? 0);
 
