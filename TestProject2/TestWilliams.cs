@@ -864,7 +864,9 @@ namespace ProntoMVC.Tests
             var scEF = ProntoMVC.Data.Models.Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC));
             DemoProntoEntities db = new DemoProntoEntities(scEF);
 
+            
 
+            var ss6 = s.RebajaCalculo(SC, 5, 31, 5, -1); // quebrado partido, soja
             var ss5 = s.RebajaCalculo(SC, 1, 6.5M, -1, 1);
             var ss4 = s.RebajaCalculo(SC, 1, 20M, -1, 1);
             var ss1 = s.RebajaCalculo(SC, 1, 2.5M, -1, -1);

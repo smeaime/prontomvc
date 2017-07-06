@@ -1613,7 +1613,7 @@
 
                                         <td></td>
                                         <td>
-                                             <asp:Label ID="lblDiferenciaKilos" runat="server" autocomplete="off" Width="180px" TabIndex="38" />
+                                            <asp:Label ID="lblDiferenciaKilos" runat="server" autocomplete="off" Width="180px" TabIndex="38" />
 
                                         </td>
                                     </tr>
@@ -3140,6 +3140,17 @@
     <script>
 
 
+
+        function ActualizarDiferencia() {
+            $('#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel3_lblDiferenciaKilos').text(
+                "DIF de KG " +
+                (parseFloat($('#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel2_txtNetoPosicion').val())
+                - parseFloat($('#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel3_txtNetoDescarga').val()))
+            );
+        }
+
+
+
         function reasignarAutocomplete() {
 
             // al hacer una llamada a un updatepanel, los controles de jquery se pierden, y hay que volver a declararlos
@@ -3245,7 +3256,7 @@
         function sumarTotalOtrasMerma() {
 
 
-            var tot =   parseFloat($('#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadGranosExtranosMerma').val()) +
+            var tot = parseFloat($('#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadGranosExtranosMerma').val()) +
                         parseFloat($('#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadQuebradosMerma').val()) +
                         parseFloat($('#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadGranosDanadosMerma').val()) +
                         parseFloat($('#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadChamicoMerma').val()) +
@@ -3268,8 +3279,8 @@
                         parseFloat($('#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadFondoNideraMerma').val()) +
                         parseFloat($('#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadMermaConvenidaMerma').val()) +
                         parseFloat($('#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadTalCualVicentinMerma').val()) +
-                        parseFloat($('#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadDescuentoFinalMerma').val()) 
-             
+                        parseFloat($('#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadDescuentoFinalMerma').val())
+
 
 
             //alert(tot);
@@ -3287,14 +3298,6 @@
 
         }
 
-
-        function ActualizarDiferencia() {
-            $('#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel3_lblDiferenciaKilos').text(
-                "DIF de KG " +
-                (parseFloat($('#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel2_txtNetoPosicion').val())
-                - parseFloat($('#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel3_txtNetoDescarga').val()))
-            );
-        }
 
 
         function jsRebajaRubro(rubroDescripcion, textboxResultado, textboxRebaja, textboxMerma, dropdownTipo) {
@@ -3352,8 +3355,8 @@
 
                     //callback(rebaja);
                     textboxRebaja.val(rebaja);
-                    merma = Math.round(rebaja * Number(parseFloat($('#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel3_txtNetoDescarga').val()))/100);
-                    
+                    merma = Math.round(rebaja * Number(parseFloat($('#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel3_txtNetoDescarga').val())) / 100);
+
                     if (dropdownTipo.val() == 0) {
                         textboxMerma.val(merma);
                     }
@@ -3531,7 +3534,7 @@
 
             $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_TextBox37").on('input', function (e) {
 
-                jsRebajaRubro( 'Panza blanca',
+                jsRebajaRubro('Panza blanca',
                               $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_TextBox37"),
                               $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadPanzaBlancaRebaja"),
                               $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadPanzaBlancaMerma"),
@@ -3557,7 +3560,7 @@
 
 
 
-            
+
             $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_TextBox41").on('input', function (e) {
 
                 jsRebajaRubro('Granos verdes',
@@ -3570,7 +3573,7 @@
             });
 
 
-            
+
 
 
 
@@ -3593,7 +3596,7 @@
 
             $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_TextBox2").on('input', function (e) {
 
-                jsRebajaRubro('Tierra' ,
+                jsRebajaRubro('Tierra',
                               $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_TextBox2"),
                               $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadTierraRebaja"),
                               $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadTierraMerma"),
@@ -3634,7 +3637,7 @@
 
             $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadGastosFumigacionResultado").on('input', function (e) {
 
-                jsRebajaRubro( 'Gastos de fumigación',
+                jsRebajaRubro('Gastos de fumigación',
                               $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadGastosFumigacionResultado"),
                               $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadGastosFumigacionRebaja"),
                               $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadGastosFumigacionMerma"),
@@ -3663,7 +3666,7 @@
 
             $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadMermaVolatil").on('input', function (e) {
 
-                jsRebajaRubro( 'Merma Volatil',
+                jsRebajaRubro('Merma Volatil',
                               $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadMermaVolatil"),
                               $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadMermaVolatilRebaja"),
                               $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadMermaVolatilMerma"),
@@ -3687,7 +3690,7 @@
             });
 
 
-          
+
             $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadMermaConvenida").on('input', function (e) {
 
                 jsRebajaRubro('Merma Convenida',
@@ -3747,7 +3750,7 @@
 
 
 
-            
+
             $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_cmbTipoMermaGranosExtranos").on('input', function (e) {
 
                 var textboxMerma = $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadGranosExtranosMerma")
@@ -4222,7 +4225,7 @@
 
 
             $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadGranosExtranosMerma").on('input', function (e) {
-                 sumarTotalOtrasMerma();
+                sumarTotalOtrasMerma();
             });
 
             $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadQuebradosMerma").on('input', function (e) {
@@ -4333,13 +4336,13 @@
 
             ActualizarDiferencia();
 
-            $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel3_txtNetoDescarga").change( function (e) {
-                ActualizarDiferencia();
-            });
+            //$("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel3_txtNetoDescarga").change(function (e) {
+            //    ActualizarDiferencia();
+            //});
 
-            $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel2_txtNetoPosicion").change(function (e) {
-                ActualizarDiferencia();
-            });
+            //$("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel2_txtNetoPosicion").change(function (e) {
+            //    ActualizarDiferencia();
+            //});
 
             $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel3_txtNetoDescarga").on('input', function (e) {
                 ActualizarDiferencia();
@@ -4347,7 +4350,8 @@
 
             $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel2_txtNetoPosicion").on('input', function (e) {
                 ActualizarDiferencia();
-            //});
+            });
+
             //$("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel2_txtBrutoPosicion ").on('input', function (e) {
             //    ActualizarDiferencia();
             //});
@@ -4370,6 +4374,11 @@
         });
 
 
+
+
+
+
+
         var prm = Sys.WebForms.PageRequestManager.getInstance();
 
         prm.add_endRequest(function () {
@@ -4379,6 +4388,14 @@
             reasignarAutocomplete();
             // re-bind your jQuery events here
         });
+
+
+
+
+
+        function pageLoad() {
+            ActualizarDiferencia();
+        }
 
 
     </script>
