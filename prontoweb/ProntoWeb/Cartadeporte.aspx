@@ -1610,6 +1610,12 @@
                                                 DelimiterCharacters="" Enabled="True" CompletionInterval="100">
                                             </cc1:AutoCompleteExtender>
                                         </td>
+
+                                        <td></td>
+                                        <td>
+                                             <asp:Label ID="lblDiferenciaKilos" runat="server" autocomplete="off" Width="180px" TabIndex="38" />
+
+                                        </td>
                                     </tr>
                                     <tr>
                                         <td class="EncabezadoCell" style="width: 15%">Pagador Flete
@@ -2965,6 +2971,9 @@
             if (netodescarga > 0) {
                 txtnetototal.value = Math.round(netodescarga - humedad - fumigada - secada - otrasmermas);
             }
+
+            ActualizarDiferencia();
+
             return false;
         }
 
@@ -3279,6 +3288,13 @@
         }
 
 
+        function ActualizarDiferencia() {
+            $('#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel3_lblDiferenciaKilos').text(
+                "DIF de KG " +
+                (parseFloat($('#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel2_txtNetoPosicion').val())
+                - parseFloat($('#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel3_txtNetoDescarga').val()))
+            );
+        }
 
 
         function jsRebajaRubro(rubroDescripcion, textboxResultado, textboxRebaja, textboxMerma, dropdownTipo) {
@@ -3337,7 +3353,7 @@
                     //callback(rebaja);
                     textboxRebaja.val(rebaja);
                     merma = Math.round(rebaja * Number(parseFloat($('#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel3_txtNetoDescarga').val()))/100);
-
+                    
                     if (dropdownTipo.val() == 0) {
                         textboxMerma.val(merma);
                     }
@@ -3469,7 +3485,7 @@
                               $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtPuntaSombreada"),
                               $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadPuntaSombreadaRebaja"),
                               $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadPuntaSombreadaMerma"),
-                              $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_cmbTipoMermaAmohosados")
+                              $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_cmbTipoMermaPuntaSombreada")
                   );
 
             });
@@ -3717,6 +3733,20 @@
 
 
 
+            //////////////////////////////////////////////////////////////////////////////////////////////
+            //////////////////////////////////////////////////////////////////////////////////////////////
+            //////////////////////////////////////////////////////////////////////////////////////////////
+            //////////////////////////////////////////////////////////////////////////////////////////////
+            //////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+
+
+
+
             
             $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_cmbTipoMermaGranosExtranos").on('input', function (e) {
 
@@ -3736,10 +3766,601 @@
             });
 
 
+            $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_cmbTipoMermaQuebrados").on('input', function (e) {
+
+                var textboxMerma = $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadQuebradosMerma")
+
+                if ($("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_cmbTipoMermaQuebrados").val() == 0) {
+                    //textboxMerma.val(merma);
+                    //textboxMerma.prop('disabled', false);
+                }
+                else {
+                    textboxMerma.val(0);
+                    //textboxMerma.prop('disabled', true);
+                }
+
+                sumarTotalOtrasMerma();
+
+            });
+
+
+
+
+            $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_cmbTipoMermaDaniados").on('input', function (e) {
+
+                var textboxMerma = $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadGranosDanadosMerma")
+
+                if ($("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_cmbTipoMermaDaniados").val() == 0) {
+                    //textboxMerma.val(merma);
+                    //textboxMerma.prop('disabled', false);
+                }
+                else {
+                    textboxMerma.val(0);
+                    //textboxMerma.prop('disabled', true);
+                }
+
+                sumarTotalOtrasMerma();
+
+            });
+
+
+
+
+
+            $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_cmbTipoMermaChamico").on('input', function (e) {
+
+                var textboxMerma = $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadChamicoMerma")
+
+                if ($("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_cmbTipoMermaChamico").val() == 0) {
+                    //textboxMerma.val(merma);
+                    //textboxMerma.prop('disabled', false);
+                }
+                else {
+                    textboxMerma.val(0);
+                    //textboxMerma.prop('disabled', true);
+                }
+
+                sumarTotalOtrasMerma();
+
+            });
+
+
+
+
+
+
+
+            $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_cmbTipoMermaRevolcado").on('input', function (e) {
+
+                var textboxMerma = $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadRevolcadoMerma")
+
+                if ($("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_cmbTipoMermaRevolcado").val() == 0) {
+                    //textboxMerma.val(merma);
+                    //textboxMerma.prop('disabled', false);
+                }
+                else {
+                    textboxMerma.val(0);
+                    //textboxMerma.prop('disabled', true);
+                }
+
+                sumarTotalOtrasMerma();
+
+            });
+
+
+
+
+            $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_cmbTipoMermaObjetables").on('input', function (e) {
+
+                var textboxMerma = $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadObjetablesMerma")
+
+                if ($("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_cmbTipoMermaObjetables").val() == 0) {
+                    //textboxMerma.val(merma);
+                    //textboxMerma.prop('disabled', false);
+                }
+                else {
+                    textboxMerma.val(0);
+                    //textboxMerma.prop('disabled', true);
+                }
+
+                sumarTotalOtrasMerma();
+
+            });
+
+
+
+
+            $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_cmbTipoMermaAmohosados").on('input', function (e) {
+
+                var textboxMerma = $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadAmohosadosMerma")
+
+                if ($("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_cmbTipoMermaAmohosados").val() == 0) {
+                    //textboxMerma.val(merma);
+                    //textboxMerma.prop('disabled', false);
+                }
+                else {
+                    textboxMerma.val(0);
+                    //textboxMerma.prop('disabled', true);
+                }
+
+                sumarTotalOtrasMerma();
+
+            });
+
+
+
+
+
+            $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_cmbTipoMermaPuntaSombreada").on('input', function (e) {
+
+                var textboxMerma = $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadPuntaSombreadaMerma")
+
+                if ($("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_cmbTipoMermaPuntaSombreada").val() == 0) {
+                    //textboxMerma.val(merma);
+                    //textboxMerma.prop('disabled', false);
+                }
+                else {
+                    textboxMerma.val(0);
+                    //textboxMerma.prop('disabled', true);
+                }
+
+                sumarTotalOtrasMerma();
+
+            });
+
+
+
+
+
+            $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_cmbTipoMermaHectolitrico").on('input', function (e) {
+
+                var textboxMerma = $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadHectolitricoMerma")
+
+                if ($("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_cmbTipoMermaHectolitrico").val() == 0) {
+                    //textboxMerma.val(merma);
+                    //textboxMerma.prop('disabled', false);
+                }
+                else {
+                    textboxMerma.val(0);
+                    //textboxMerma.prop('disabled', true);
+                }
+
+                sumarTotalOtrasMerma();
+
+            });
+
+
+
+            $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_cmbTipoMermaCarbon").on('input', function (e) {
+
+                var textboxMerma = $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadCarbonMerma")
+
+                if ($("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_cmbTipoMermaCarbon").val() == 0) {
+                    //textboxMerma.val(merma);
+                    //textboxMerma.prop('disabled', false);
+                }
+                else {
+                    textboxMerma.val(0);
+                    //textboxMerma.prop('disabled', true);
+                }
+
+                sumarTotalOtrasMerma();
+
+            });
+
+
+            $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_cmbTipoMermaPanzaBlanca").on('input', function (e) {
+
+                var textboxMerma = $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadPanzaBlancaMerma")
+
+                if ($("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_cmbTipoMermaPanzaBlanca").val() == 0) {
+                    //textboxMerma.val(merma);
+                    //textboxMerma.prop('disabled', false);
+                }
+                else {
+                    textboxMerma.val(0);
+                    //textboxMerma.prop('disabled', true);
+                }
+
+                sumarTotalOtrasMerma();
+
+            });
+
+
+            $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_cmbTipoMermaPicados").on('input', function (e) {
+
+                var textboxMerma = $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadPicadosMerma")
+
+                if ($("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_cmbTipoMermaPicados").val() == 0) {
+                    //textboxMerma.val(merma);
+                    //textboxMerma.prop('disabled', false);
+                }
+                else {
+                    textboxMerma.val(0);
+                    //textboxMerma.prop('disabled', true);
+                }
+
+                sumarTotalOtrasMerma();
+
+            });
+
+
+
+
+            $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_cmbTipoMermaVerdes").on('input', function (e) {
+
+                var textboxMerma = $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadVerdesMerma")
+
+                if ($("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_cmbTipoMermaVerdes").val() == 0) {
+                    //textboxMerma.val(merma);
+                    //textboxMerma.prop('disabled', false);
+                }
+                else {
+                    textboxMerma.val(0);
+                    //textboxMerma.prop('disabled', true);
+                }
+
+                sumarTotalOtrasMerma();
+
+            });
+
+
+
+
+            $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_cmbTipoMermaQuemados").on('input', function (e) {
+
+                var textboxMerma = $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadQuemadosMerma")
+
+                if ($("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_cmbTipoMermaQuemados").val() == 0) {
+                    //textboxMerma.val(merma);
+                    //textboxMerma.prop('disabled', false);
+                }
+                else {
+                    textboxMerma.val(0);
+                    //textboxMerma.prop('disabled', true);
+                }
+
+                sumarTotalOtrasMerma();
+
+            });
+
+
+
+
+            $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_cmbTipoMermaTierra").on('input', function (e) {
+
+                var textboxMerma = $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadTierraMerma")
+
+                if ($("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_cmbTipoMermaTierra").val() == 0) {
+                    //textboxMerma.val(merma);
+                    //textboxMerma.prop('disabled', false);
+                }
+                else {
+                    textboxMerma.val(0);
+                    //textboxMerma.prop('disabled', true);
+                }
+
+                sumarTotalOtrasMerma();
+
+            });
+
+
+
+            $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_cmbTipoMermaZarandeo").on('input', function (e) {
+
+                var textboxMerma = $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadZarandeoMerma")
+
+                if ($("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_cmbTipoMermaZarandeo").val() == 0) {
+                    //textboxMerma.val(merma);
+                    //textboxMerma.prop('disabled', false);
+                }
+                else {
+                    textboxMerma.val(0);
+                    //textboxMerma.prop('disabled', true);
+                }
+
+                sumarTotalOtrasMerma();
+
+            });
+
+
+
+
+            $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_cmbTipoMermaHumedad").on('input', function (e) {
+
+                var textboxMerma = $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadHumedadMerma")
+
+                if ($("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_cmbTipoMermaHumedad").val() == 0) {
+                    //textboxMerma.val(merma);
+                    //textboxMerma.prop('disabled', false);
+                }
+                else {
+                    textboxMerma.val(0);
+                    //textboxMerma.prop('disabled', true);
+                }
+
+                sumarTotalOtrasMerma();
+
+            });
+
+
+            $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_cmbTipoMermaFumigacion").on('input', function (e) {
+
+                var textboxMerma = $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadGastosFumigacionMerma")
+
+                if ($("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_cmbTipoMermaFumigacion").val() == 0) {
+                    //textboxMerma.val(merma);
+                    //textboxMerma.prop('disabled', false);
+                }
+                else {
+                    textboxMerma.val(0);
+                    //textboxMerma.prop('disabled', true);
+                }
+
+                sumarTotalOtrasMerma();
+
+            });
+
+
+
+
+            $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_cmbTipoMermaGastoDeSecada").on('input', function (e) {
+
+                var textboxMerma = $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadGastoDeSecadaMerma")
+
+                if ($("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_cmbTipoMermaGastoDeSecada").val() == 0) {
+                    //textboxMerma.val(merma);
+                    //textboxMerma.prop('disabled', false);
+                }
+                else {
+                    textboxMerma.val(0);
+                    //textboxMerma.prop('disabled', true);
+                }
+
+                sumarTotalOtrasMerma();
+
+            });
+
+
+
+
+            $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_cmbTipoMermaVolatil").on('input', function (e) {
+
+                var textboxMerma = $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadMermaVolatilMerma")
+
+                if ($("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_cmbTipoMermaVolatil").val() == 0) {
+                    //textboxMerma.val(merma);
+                    //textboxMerma.prop('disabled', false);
+                }
+                else {
+                    textboxMerma.val(0);
+                    //textboxMerma.prop('disabled', true);
+                }
+
+                sumarTotalOtrasMerma();
+
+            });
+
+
+
+
+            $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_cmbTipoMermaFondoNidera").on('input', function (e) {
+
+                var textboxMerma = $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadFondoNideraMerma")
+
+                if ($("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_cmbTipoMermaFondoNidera").val() == 0) {
+                    //textboxMerma.val(merma);
+                    //textboxMerma.prop('disabled', false);
+                }
+                else {
+                    textboxMerma.val(0);
+                    //textboxMerma.prop('disabled', true);
+                }
+
+                sumarTotalOtrasMerma();
+
+            });
+
+
+
+            $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_cmbTipoMermaConvenida").on('input', function (e) {
+
+                var textboxMerma = $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadMermaConvenidaMerma")
+
+                if ($("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_cmbTipoMermaConvenida").val() == 0) {
+                    //textboxMerma.val(merma);
+                    //textboxMerma.prop('disabled', false);
+                }
+                else {
+                    textboxMerma.val(0);
+                    //textboxMerma.prop('disabled', true);
+                }
+
+                sumarTotalOtrasMerma();
+
+            });
+
+            $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_cmbTipoMermaTalCualVicentin").on('input', function (e) {
+
+                var textboxMerma = $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadTalCualVicentinMerma")
+
+                if ($("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_cmbTipoMermaTalCualVicentin").val() == 0) {
+                    //textboxMerma.val(merma);
+                    //textboxMerma.prop('disabled', false);
+                }
+                else {
+                    textboxMerma.val(0);
+                    //textboxMerma.prop('disabled', true);
+                }
+
+                sumarTotalOtrasMerma();
+
+            });
+
+            $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_cmbTipoMermaDescuentoFinal").on('input', function (e) {
+
+                var textboxMerma = $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadDescuentoFinalMerma")
+
+                if ($("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_cmbTipoMermaDescuentoFinal").val() == 0) {
+                    //textboxMerma.val(merma);
+                    //textboxMerma.prop('disabled', false);
+                }
+                else {
+                    textboxMerma.val(0);
+                    //textboxMerma.prop('disabled', true);
+                }
+
+                sumarTotalOtrasMerma();
+
+            });
+
+            //////////////////////////////////////////////////////////////////////////////////////////////
+            //////////////////////////////////////////////////////////////////////////////////////////////
+            //////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
 
             $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadGranosExtranosMerma").on('input', function (e) {
                  sumarTotalOtrasMerma();
             });
+
+            $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadQuebradosMerma").on('input', function (e) {
+                sumarTotalOtrasMerma();
+            });
+
+            $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadGranosDanadosMerma").on('input', function (e) {
+                sumarTotalOtrasMerma();
+            });
+
+            $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadChamicoMerma").on('input', function (e) {
+                sumarTotalOtrasMerma();
+            });
+
+            $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadRevolcadoMerma").on('input', function (e) {
+                sumarTotalOtrasMerma();
+            });
+
+            $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadObjetablesMerma").on('input', function (e) {
+                sumarTotalOtrasMerma();
+            });
+
+            $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadAmohosadosMerma").on('input', function (e) {
+                sumarTotalOtrasMerma();
+            });
+
+            $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadPuntaSombreadaMerma").on('input', function (e) {
+                sumarTotalOtrasMerma();
+            });
+
+            $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadHectolitricoMerma").on('input', function (e) {
+                sumarTotalOtrasMerma();
+            });
+
+            $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadCarbonMerma").on('input', function (e) {
+                sumarTotalOtrasMerma();
+            });
+
+            $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadPanzaBlancaMerma").on('input', function (e) {
+                sumarTotalOtrasMerma();
+            });
+
+            $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadPicadosMerma").on('input', function (e) {
+                sumarTotalOtrasMerma();
+            });
+
+            $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadVerdesMerma").on('input', function (e) {
+                sumarTotalOtrasMerma();
+            });
+
+            $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadQuemadosMerma").on('input', function (e) {
+                sumarTotalOtrasMerma();
+            });
+
+            $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadTierraMerma").on('input', function (e) {
+                sumarTotalOtrasMerma();
+            });
+
+            $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadZarandeoMerma").on('input', function (e) {
+                sumarTotalOtrasMerma();
+            });
+
+            $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadHumedadMerma").on('input', function (e) {
+                sumarTotalOtrasMerma();
+            });
+
+            $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadGastosFumigacionMerma").on('input', function (e) {
+                sumarTotalOtrasMerma();
+            });
+
+            $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadGastoDeSecadaMerma").on('input', function (e) {
+                sumarTotalOtrasMerma();
+            });
+
+            $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadMermaVolatilMerma").on('input', function (e) {
+                sumarTotalOtrasMerma();
+            });
+
+            $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadFondoNideraMerma").on('input', function (e) {
+                sumarTotalOtrasMerma();
+            });
+
+            $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadMermaConvenidaMerma").on('input', function (e) {
+                sumarTotalOtrasMerma();
+            });
+            $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadTalCualVicentinMerma").on('input', function (e) {
+                sumarTotalOtrasMerma();
+            });
+            $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadDescuentoFinalMerma").on('input', function (e) {
+                sumarTotalOtrasMerma();
+            });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            ActualizarDiferencia();
+
+            $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel3_txtNetoDescarga").change( function (e) {
+                ActualizarDiferencia();
+            });
+
+            $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel2_txtNetoPosicion").change(function (e) {
+                ActualizarDiferencia();
+            });
+
+            $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel3_txtNetoDescarga").on('input', function (e) {
+                ActualizarDiferencia();
+            });
+
+            $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel2_txtNetoPosicion").on('input', function (e) {
+                ActualizarDiferencia();
+            //});
+            //$("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel2_txtBrutoPosicion ").on('input', function (e) {
+            //    ActualizarDiferencia();
+            //});
+            //$("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel2_txtTaraPosicion").on('input', function (e) {
+            //    ActualizarDiferencia();
+            //});
+            //$("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel3_txtBrutoDescarga").on('input', function (e) {
+            //    ActualizarDiferencia();
+            //});
+            //$("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel3_txtTaraDescarga").on('input', function (e) {
+            //    ActualizarDiferencia();
+            //});
+
 
 
 

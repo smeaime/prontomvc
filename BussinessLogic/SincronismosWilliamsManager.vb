@@ -24296,6 +24296,10 @@ Namespace Pronto.ERP.Bll
             'Return TextToExcel(vFileName, titulo)
         End Function
 
+
+
+
+
         Public Shared Function Sincronismo_TomasHnos(ByVal pDataTable As DataTable, Optional ByVal titulo As String = "") As String
 
 
@@ -24499,7 +24503,9 @@ Namespace Pronto.ERP.Bll
                 sb &= "&" & "" '51
 
                 Dim v = iisNull(dr("SubNumeroVagon"), "0").ToString
-                sb &= "&" & IIf(v = "0", "", v)
+                sb &= "&" & IIf(v = "0", "", v) '52
+
+
 
                 'sb &= "&" & dr("Contrato").ToString.PadLeft(14) '
                 'sb &= "&" & dr("Contrato").ToString.PadLeft(14)
