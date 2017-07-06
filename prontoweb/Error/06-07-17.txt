@@ -168,3 +168,348 @@ Log Entry :
 07/06/2017 11:38:45
 Error in: http://localhost:58911/ProntoWeb/CartaDePorte.aspx?Id=2969370. Error Message:PV 1 0
 __________________________
+
+Log Entry : 
+07/06/2017 12:02:54
+Error in: http://localhost:58911/ProntoWeb/WebServiceClientes.asmx/RebajaCalculo. Error Message:System.NullReferenceException: Referencia a objeto no establecida como instancia de un objeto.
+   en ServicioCartaPorte.servi.RebajaCalculo(String SC, Int32 idrubro, Decimal resultado, Int32 idarticulo, Int32 iddestino) en c:\Users\Administrador\Documents\bdl\pronto\InterfazFlexicapture\prontoflexicapture.cs:línea 4484
+   en WebServiceClientes.RebajaCalculo(String SC, String rubrodesc, Decimal resultado, String articulodesc, String destinodesc)
+__________________________
+
+Log Entry : 
+07/06/2017 12:02:59
+Error in: http://localhost:58911/ProntoWeb/WebServiceClientes.asmx/RebajaCalculo. Error Message:System.NullReferenceException: Referencia a objeto no establecida como instancia de un objeto.
+   en ServicioCartaPorte.servi.RebajaCalculo(String SC, Int32 idrubro, Decimal resultado, Int32 idarticulo, Int32 iddestino) en c:\Users\Administrador\Documents\bdl\pronto\InterfazFlexicapture\prontoflexicapture.cs:línea 4484
+   en WebServiceClientes.RebajaCalculo(String SC, String rubrodesc, Decimal resultado, String articulodesc, String destinodesc)
+__________________________
+
+Log Entry : 
+07/06/2017 12:03:00
+Error in: http://localhost:58911/ProntoWeb/WebServiceClientes.asmx/RebajaCalculo. Error Message:System.NullReferenceException: Referencia a objeto no establecida como instancia de un objeto.
+   en ServicioCartaPorte.servi.RebajaCalculo(String SC, Int32 idrubro, Decimal resultado, Int32 idarticulo, Int32 iddestino) en c:\Users\Administrador\Documents\bdl\pronto\InterfazFlexicapture\prontoflexicapture.cs:línea 4484
+   en WebServiceClientes.RebajaCalculo(String SC, String rubrodesc, Decimal resultado, String articulodesc, String destinodesc)
+__________________________
+
+Log Entry : 
+07/06/2017 12:04:08
+Error in: http://localhost:58911/ProntoWeb/WebServiceClientes.asmx/RebajaCalculo. Error Message:System.NullReferenceException: Referencia a objeto no establecida como instancia de un objeto.
+   en ServicioCartaPorte.servi.RebajaCalculo(String SC, Int32 idrubro, Decimal resultado, Int32 idarticulo, Int32 iddestino) en c:\Users\Administrador\Documents\bdl\pronto\InterfazFlexicapture\prontoflexicapture.cs:línea 4484
+   en WebServiceClientes.RebajaCalculo(String SC, String rubrodesc, Decimal resultado, String articulodesc, String destinodesc)
+__________________________
+
+Log Entry : 
+07/06/2017 12:05:54
+Error in: http://localhost:58911/ProntoWeb/WebServiceClientes.asmx/RebajaCalculo. Error Message:System.NullReferenceException: Referencia a objeto no establecida como instancia de un objeto.
+   en ServicioCartaPorte.servi.RebajaCalculo(String SC, Int32 idrubro, Decimal resultado, Int32 idarticulo, Int32 iddestino) en c:\Users\Administrador\Documents\bdl\pronto\InterfazFlexicapture\prontoflexicapture.cs:línea 4484
+   en WebServiceClientes.RebajaCalculo(String SC, String rubrodesc, Decimal resultado, String articulodesc, String destinodesc)
+__________________________
+
+Log Entry : 
+07/06/2017 12:08:39
+Error in: http://localhost:58911/ProntoWeb/CartaDePorte.aspx?Id=2969370. Error Message:La carta numero 11111 id=2969370 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+07/06/2017 12:08:39
+Error in: http://localhost:58911/ProntoWeb/CartaDePorte.aspx?Id=2969370. Error Message:PV 1 0
+__________________________
+
+Log Entry : 
+07/06/2017 12:09:59
+Error in: http://localhost:58911/ProntoWeb/CartaDePorte.aspx?Id=2969370. Error Message:La carta numero 11111 id=2969370 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+07/06/2017 12:09:59
+Error in: http://localhost:58911/ProntoWeb/CartaDePorte.aspx?Id=2969370. Error Message:PV 1 0
+__________________________
+
+Log Entry : 
+07/06/2017 12:11:13
+Error in: http://localhost:58911/ProntoWeb/CartaDePorte.aspx?Id=2969370. Error Message:La carta numero 11111 id=2969370 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+07/06/2017 12:11:13
+Error in: http://localhost:58911/ProntoWeb/CartaDePorte.aspx?Id=2969370. Error Message:PV 1 0
+__________________________
+
+Log Entry : 
+07/06/2017 12:12:52
+Error in: http://localhost:58911/ProntoWeb/CartaDePorte.aspx?Id=2969370. Error Message:La carta numero 11111 id=2969370 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+07/06/2017 12:12:52
+Error in: http://localhost:58911/ProntoWeb/CartaDePorte.aspx?Id=2969370. Error Message:PV 1 0
+__________________________
+
+Log Entry : 
+07/06/2017 12:14:13
+Error in: http://localhost:58911/ProntoWeb/CartaDePorte.aspx?Id=2969370. Error Message:La carta numero 11111 id=2969370 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+07/06/2017 12:14:13
+Error in: http://localhost:58911/ProntoWeb/CartaDePorte.aspx?Id=2969370. Error Message:PV 1 0
+__________________________
+
+Log Entry : 
+07/06/2017 12:14:34
+Error in: http://localhost:58911/ProntoWeb/WebServiceClientes.asmx/RebajaCalculo. Error Message:System.NullReferenceException: Referencia a objeto no establecida como instancia de un objeto.
+   en ServicioCartaPorte.servi.RebajaCalculo(String SC, Int32 idrubro, Decimal resultado, Int32 idarticulo, Int32 iddestino) en c:\Users\Administrador\Documents\bdl\pronto\InterfazFlexicapture\prontoflexicapture.cs:línea 4484
+   en WebServiceClientes.RebajaCalculo(String SC, String rubrodesc, Decimal resultado, String articulodesc, String destinodesc)
+__________________________
+
+Log Entry : 
+07/06/2017 12:14:36
+Error in: http://localhost:58911/ProntoWeb/WebServiceClientes.asmx/RebajaCalculo. Error Message:System.NullReferenceException: Referencia a objeto no establecida como instancia de un objeto.
+   en ServicioCartaPorte.servi.RebajaCalculo(String SC, Int32 idrubro, Decimal resultado, Int32 idarticulo, Int32 iddestino) en c:\Users\Administrador\Documents\bdl\pronto\InterfazFlexicapture\prontoflexicapture.cs:línea 4503
+   en WebServiceClientes.RebajaCalculo(String SC, String rubrodesc, Decimal resultado, String articulodesc, String destinodesc)
+__________________________
+
+Log Entry : 
+07/06/2017 12:14:41
+Error in: http://localhost:58911/ProntoWeb/WebServiceClientes.asmx/RebajaCalculo. Error Message:System.NullReferenceException: Referencia a objeto no establecida como instancia de un objeto.
+   en ServicioCartaPorte.servi.RebajaCalculo(String SC, Int32 idrubro, Decimal resultado, Int32 idarticulo, Int32 iddestino) en c:\Users\Administrador\Documents\bdl\pronto\InterfazFlexicapture\prontoflexicapture.cs:línea 4503
+   en WebServiceClientes.RebajaCalculo(String SC, String rubrodesc, Decimal resultado, String articulodesc, String destinodesc)
+__________________________
+
+Log Entry : 
+07/06/2017 12:14:55
+Error in: http://localhost:58911/ProntoWeb/WebServiceClientes.asmx/RebajaCalculo. Error Message:System.NullReferenceException: Referencia a objeto no establecida como instancia de un objeto.
+   en ServicioCartaPorte.servi.RebajaCalculo(String SC, Int32 idrubro, Decimal resultado, Int32 idarticulo, Int32 iddestino) en c:\Users\Administrador\Documents\bdl\pronto\InterfazFlexicapture\prontoflexicapture.cs:línea 4503
+   en WebServiceClientes.RebajaCalculo(String SC, String rubrodesc, Decimal resultado, String articulodesc, String destinodesc)
+__________________________
+
+Log Entry : 
+07/06/2017 12:20:23
+Error in: http://localhost:58911/ProntoWeb/WebServiceClientes.asmx/RebajaCalculo. Error Message:System.NullReferenceException: Referencia a objeto no establecida como instancia de un objeto.
+   en ServicioCartaPorte.servi.RebajaCalculo(String SC, Int32 idrubro, Decimal resultado, Int32 idarticulo, Int32 iddestino) en c:\Users\Administrador\Documents\bdl\pronto\InterfazFlexicapture\prontoflexicapture.cs:línea 4503
+   en WebServiceClientes.RebajaCalculo(String SC, String rubrodesc, Decimal resultado, String articulodesc, String destinodesc)
+__________________________
+
+Log Entry : 
+07/06/2017 12:26:00
+Error in: http://localhost:58911/ProntoWeb/Principal.aspx. Error Message:Mariano esta logueado, pero lo redirijo al login porque faltan los datos de session. No deberia mejor mandarlo a SeleccionarEmpresa? Ademas, no hago el LogOut y le queda el cookie!!!
+__________________________
+
+Log Entry : 
+07/06/2017 12:26:01
+Error in: http://localhost:58911/ProntoWeb/CartasDePortes.aspx?tipo=Todas. Error Message:Mariano
+__________________________
+
+Log Entry : 
+07/06/2017 12:27:20
+Error in: http://localhost:58911/ProntoWeb/WebServiceClientes.asmx/RebajaCalculo. Error Message:System.NullReferenceException: Referencia a objeto no establecida como instancia de un objeto.
+   en ServicioCartaPorte.servi.RebajaCalculo(String SC, Int32 idrubro, Decimal resultado, Int32 idarticulo, Int32 iddestino) en c:\Users\Administrador\Documents\bdl\pronto\InterfazFlexicapture\prontoflexicapture.cs:línea 4503
+   en WebServiceClientes.RebajaCalculo(String SC, String rubrodesc, Decimal resultado, String articulodesc, String destinodesc)
+__________________________
+
+Log Entry : 
+07/06/2017 12:27:55
+Error in: http://localhost:58911/ProntoWeb/Principal.aspx. Error Message:Mariano esta logueado, pero lo redirijo al login porque faltan los datos de session. No deberia mejor mandarlo a SeleccionarEmpresa? Ademas, no hago el LogOut y le queda el cookie!!!
+__________________________
+
+Log Entry : 
+07/06/2017 12:27:56
+Error in: http://localhost:58911/ProntoWeb/CartasDePortes.aspx?tipo=Todas. Error Message:Mariano
+__________________________
+
+Log Entry : 
+07/06/2017 12:32:10
+Error in: http://localhost:58911/ProntoWeb/HandlerNormas.ashx. Error Message:System.Data.SqlClient.SqlException
+Error relacionado con la red o específico de la instancia mientras se establecía una conexión con el servidor SQL Server. No se encontró el servidor o éste no estaba accesible. Compruebe que el nombre de la instancia es correcto y que SQL Server está configurado para admitir conexiones remotas. (provider: Named Pipes Provider, error: 40 - No se pudo abrir una conexión con SQL Server)
+   en System.Data.SqlClient.SqlInternalConnectionTds..ctor(DbConnectionPoolIdentity identity, SqlConnectionString connectionOptions, SqlCredential credential, Object providerInfo, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance, SqlConnectionString userConnectionOptions, SessionData reconnectSessionData, DbConnectionPool pool, String accessToken, Boolean applyTransientFaultHandling)
+   en System.Data.SqlClient.SqlConnectionFactory.CreateConnection(DbConnectionOptions options, DbConnectionPoolKey poolKey, Object poolGroupProviderInfo, DbConnectionPool pool, DbConnection owningConnection, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionFactory.CreatePooledConnection(DbConnectionPool pool, DbConnection owningObject, DbConnectionOptions options, DbConnectionPoolKey poolKey, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionPool.CreateObject(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   en System.Data.ProviderBase.DbConnectionPool.UserCreateRequest(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   en System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.Open()
+   en Glimpse.Ado.AlternateType.GlimpseDbConnection.Open()
+   en System.Data.Entity.Infrastructure.Interception.DbConnectionDispatcher.<Open>b__36(DbConnection t, DbConnectionInterceptionContext c)
+   en System.Data.Entity.Infrastructure.Interception.InternalDispatcher`1.Dispatch[TTarget,TInterceptionContext](TTarget target, Action`2 operation, TInterceptionContext interceptionContext, Action`3 executing, Action`3 executed)
+   en System.Data.Entity.Infrastructure.Interception.DbConnectionDispatcher.Open(DbConnection connection, DbInterceptionContext interceptionContext)
+   en System.Data.Entity.Core.EntityClient.EntityConnection.<Open>b__2()
+   en System.Data.Entity.SqlServer.DefaultSqlExecutionStrategy.<>c__DisplayClass1.<Execute>b__0()
+   en System.Data.Entity.SqlServer.DefaultSqlExecutionStrategy.Execute[TResult](Func`1 operation)
+   en System.Data.Entity.SqlServer.DefaultSqlExecutionStrategy.Execute(Action operation)
+   en System.Data.Entity.Core.EntityClient.EntityConnection.Open()
+.Net SqlClient Data Provider
+__________________________
+
+Log Entry : 
+07/06/2017 12:32:10
+Error in: http://localhost:58911/ProntoWeb/HandlerNormas.ashx. Error Message: -  Error en ExecDinamico. - System.Data.SqlClient.SqlException (0x80131904): No se puede abrir la base de datos "Williams2" solicitada por el inicio de sesión. Error de inicio de sesión.
+Error de inicio de sesión del usuario 'sa'.
+   en System.Data.SqlClient.SqlInternalConnectionTds..ctor(DbConnectionPoolIdentity identity, SqlConnectionString connectionOptions, SqlCredential credential, Object providerInfo, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance, SqlConnectionString userConnectionOptions, SessionData reconnectSessionData, DbConnectionPool pool, String accessToken, Boolean applyTransientFaultHandling)
+   en System.Data.SqlClient.SqlConnectionFactory.CreateConnection(DbConnectionOptions options, DbConnectionPoolKey poolKey, Object poolGroupProviderInfo, DbConnectionPool pool, DbConnection owningConnection, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionFactory.CreatePooledConnection(DbConnectionPool pool, DbConnection owningObject, DbConnectionOptions options, DbConnectionPoolKey poolKey, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionPool.CreateObject(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   en System.Data.ProviderBase.DbConnectionPool.UserCreateRequest(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   en System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.Open()
+   en Pronto.ERP.Dal.GeneralDB.ExecDinamico(String SC, String comandoSQLdinamico, Int32 timeoutSegundos)
+ClientConnectionId:ede0c247-c619-4383-936c-92cb4025a22d
+Error Number:4060,State:1,Class:11 - EXEC sp_who2 8 0
+__________________________
+
+Log Entry : 
+07/06/2017 12:32:10
+Error in: http://localhost:58911/ProntoWeb/HandlerNormas.ashx. Error Message:No se puede abrir la base de datos "Williams2" solicitada por el inicio de sesión. Error de inicio de sesión.
+Error de inicio de sesión del usuario 'sa'.
+__________________________
+
+Log Entry : 
+07/06/2017 12:32:10
+Error in: http://localhost:58911/ProntoWeb/HandlerNormas.ashx. Error Message:System.Data.SqlClient.SqlException
+No se puede abrir la base de datos "Williams2" solicitada por el inicio de sesión. Error de inicio de sesión.
+Error de inicio de sesión del usuario 'sa'.
+   en System.Data.SqlClient.SqlInternalConnectionTds..ctor(DbConnectionPoolIdentity identity, SqlConnectionString connectionOptions, SqlCredential credential, Object providerInfo, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance, SqlConnectionString userConnectionOptions, SessionData reconnectSessionData, DbConnectionPool pool, String accessToken, Boolean applyTransientFaultHandling)
+   en System.Data.SqlClient.SqlConnectionFactory.CreateConnection(DbConnectionOptions options, DbConnectionPoolKey poolKey, Object poolGroupProviderInfo, DbConnectionPool pool, DbConnection owningConnection, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionFactory.CreatePooledConnection(DbConnectionPool pool, DbConnection owningObject, DbConnectionOptions options, DbConnectionPoolKey poolKey, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionPool.CreateObject(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   en System.Data.ProviderBase.DbConnectionPool.UserCreateRequest(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   en System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.Open()
+   en Pronto.ERP.Dal.GeneralDB.ExecDinamico(String SC, String comandoSQLdinamico, Int32 timeoutSegundos)
+   en Pronto.ERP.Bll.EntidadManager.ExecDinamico(String SC, String sComandoDinamico, Int32 timeoutSegundos) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\EntidadManager.vb:línea 816
+   en CartaDePorteManager.Log_sp_who2(String sc) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 8559
+   en ASP.global_asax.Application_Error(Object sender, EventArgs e) en C:\Users\Administrador\Documents\bdl\pronto\prontoweb\global.asax:línea 433
+.Net SqlClient Data Provider
+__________________________
+
+Log Entry : 
+07/06/2017 12:36:07
+Error in: http://localhost:58911/ProntoWeb/HandlerNormas.ashx. Error Message:System.Data.SqlClient.SqlException
+Error relacionado con la red o específico de la instancia mientras se establecía una conexión con el servidor SQL Server. No se encontró el servidor o éste no estaba accesible. Compruebe que el nombre de la instancia es correcto y que SQL Server está configurado para admitir conexiones remotas. (provider: Named Pipes Provider, error: 40 - No se pudo abrir una conexión con SQL Server)
+   en System.Data.SqlClient.SqlInternalConnectionTds..ctor(DbConnectionPoolIdentity identity, SqlConnectionString connectionOptions, SqlCredential credential, Object providerInfo, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance, SqlConnectionString userConnectionOptions, SessionData reconnectSessionData, DbConnectionPool pool, String accessToken, Boolean applyTransientFaultHandling)
+   en System.Data.SqlClient.SqlConnectionFactory.CreateConnection(DbConnectionOptions options, DbConnectionPoolKey poolKey, Object poolGroupProviderInfo, DbConnectionPool pool, DbConnection owningConnection, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionFactory.CreatePooledConnection(DbConnectionPool pool, DbConnection owningObject, DbConnectionOptions options, DbConnectionPoolKey poolKey, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionPool.CreateObject(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   en System.Data.ProviderBase.DbConnectionPool.UserCreateRequest(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   en System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.Open()
+   en Glimpse.Ado.AlternateType.GlimpseDbConnection.Open()
+   en System.Data.Entity.Infrastructure.Interception.DbConnectionDispatcher.<Open>b__36(DbConnection t, DbConnectionInterceptionContext c)
+   en System.Data.Entity.Infrastructure.Interception.InternalDispatcher`1.Dispatch[TTarget,TInterceptionContext](TTarget target, Action`2 operation, TInterceptionContext interceptionContext, Action`3 executing, Action`3 executed)
+   en System.Data.Entity.Infrastructure.Interception.DbConnectionDispatcher.Open(DbConnection connection, DbInterceptionContext interceptionContext)
+   en System.Data.Entity.Core.EntityClient.EntityConnection.<Open>b__2()
+   en System.Data.Entity.SqlServer.DefaultSqlExecutionStrategy.<>c__DisplayClass1.<Execute>b__0()
+   en System.Data.Entity.SqlServer.DefaultSqlExecutionStrategy.Execute[TResult](Func`1 operation)
+   en System.Data.Entity.SqlServer.DefaultSqlExecutionStrategy.Execute(Action operation)
+   en System.Data.Entity.Core.EntityClient.EntityConnection.Open()
+.Net SqlClient Data Provider
+__________________________
+
+Log Entry : 
+07/06/2017 12:36:07
+Error in: http://localhost:58911/ProntoWeb/HandlerNormas.ashx. Error Message: -  Error en ExecDinamico. - System.Data.SqlClient.SqlException (0x80131904): No se puede abrir la base de datos "Williams2" solicitada por el inicio de sesión. Error de inicio de sesión.
+Error de inicio de sesión del usuario 'sa'.
+   en System.Data.SqlClient.SqlInternalConnectionTds..ctor(DbConnectionPoolIdentity identity, SqlConnectionString connectionOptions, SqlCredential credential, Object providerInfo, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance, SqlConnectionString userConnectionOptions, SessionData reconnectSessionData, DbConnectionPool pool, String accessToken, Boolean applyTransientFaultHandling)
+   en System.Data.SqlClient.SqlConnectionFactory.CreateConnection(DbConnectionOptions options, DbConnectionPoolKey poolKey, Object poolGroupProviderInfo, DbConnectionPool pool, DbConnection owningConnection, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionFactory.CreatePooledConnection(DbConnectionPool pool, DbConnection owningObject, DbConnectionOptions options, DbConnectionPoolKey poolKey, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionPool.CreateObject(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   en System.Data.ProviderBase.DbConnectionPool.UserCreateRequest(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   en System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.Open()
+   en Pronto.ERP.Dal.GeneralDB.ExecDinamico(String SC, String comandoSQLdinamico, Int32 timeoutSegundos)
+ClientConnectionId:2e0f2a1b-fc43-429a-ad55-641b642c6a37
+Error Number:4060,State:1,Class:11 - EXEC sp_who2 8 0
+__________________________
+
+Log Entry : 
+07/06/2017 12:36:07
+Error in: http://localhost:58911/ProntoWeb/HandlerNormas.ashx. Error Message:No se puede abrir la base de datos "Williams2" solicitada por el inicio de sesión. Error de inicio de sesión.
+Error de inicio de sesión del usuario 'sa'.
+__________________________
+
+Log Entry : 
+07/06/2017 12:36:07
+Error in: http://localhost:58911/ProntoWeb/HandlerNormas.ashx. Error Message:System.Data.SqlClient.SqlException
+No se puede abrir la base de datos "Williams2" solicitada por el inicio de sesión. Error de inicio de sesión.
+Error de inicio de sesión del usuario 'sa'.
+   en System.Data.SqlClient.SqlInternalConnectionTds..ctor(DbConnectionPoolIdentity identity, SqlConnectionString connectionOptions, SqlCredential credential, Object providerInfo, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance, SqlConnectionString userConnectionOptions, SessionData reconnectSessionData, DbConnectionPool pool, String accessToken, Boolean applyTransientFaultHandling)
+   en System.Data.SqlClient.SqlConnectionFactory.CreateConnection(DbConnectionOptions options, DbConnectionPoolKey poolKey, Object poolGroupProviderInfo, DbConnectionPool pool, DbConnection owningConnection, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionFactory.CreatePooledConnection(DbConnectionPool pool, DbConnection owningObject, DbConnectionOptions options, DbConnectionPoolKey poolKey, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionPool.CreateObject(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   en System.Data.ProviderBase.DbConnectionPool.UserCreateRequest(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   en System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.Open()
+   en Pronto.ERP.Dal.GeneralDB.ExecDinamico(String SC, String comandoSQLdinamico, Int32 timeoutSegundos)
+   en Pronto.ERP.Bll.EntidadManager.ExecDinamico(String SC, String sComandoDinamico, Int32 timeoutSegundos) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\EntidadManager.vb:línea 816
+   en CartaDePorteManager.Log_sp_who2(String sc) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 8559
+   en ASP.global_asax.Application_Error(Object sender, EventArgs e) en C:\Users\Administrador\Documents\bdl\pronto\prontoweb\global.asax:línea 433
+.Net SqlClient Data Provider
+__________________________
+
+Log Entry : 
+07/06/2017 12:37:59
+Error in: http://localhost:58911/ProntoWeb/Principal.aspx. Error Message:Mariano esta logueado, pero lo redirijo al login porque faltan los datos de session. No deberia mejor mandarlo a SeleccionarEmpresa? Ademas, no hago el LogOut y le queda el cookie!!!
+__________________________
+
+Log Entry : 
+07/06/2017 12:37:59
+Error in: http://localhost:58911/ProntoWeb/NormasCalidad.aspx?tipo=Confirmados. Error Message:Mariano esta logueado, pero lo redirijo al login porque faltan los datos de session. No deberia mejor mandarlo a SeleccionarEmpresa? Ademas, no hago el LogOut y le queda el cookie!!!
+__________________________
+
+Log Entry : 
+07/06/2017 12:38:14
+Error in: http://localhost:58911/ProntoWeb/CartaDePorte.aspx?Id=2969370. Error Message:La carta numero 11111 id=2969370 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+07/06/2017 12:38:14
+Error in: http://localhost:58911/ProntoWeb/CartaDePorte.aspx?Id=2969370. Error Message:PV 1 0
+__________________________
+
+Log Entry : 
+07/06/2017 12:39:08
+Error in: http://localhost:58911/ProntoWeb/WebServiceClientes.asmx/RebajaCalculo. Error Message:System.NullReferenceException: Referencia a objeto no establecida como instancia de un objeto.
+   en ServicioCartaPorte.servi.RebajaCalculo(String SC, Int32 idrubro, Decimal resultado, Int32 idarticulo, Int32 iddestino) en c:\Users\Administrador\Documents\bdl\pronto\InterfazFlexicapture\prontoflexicapture.cs:línea 4484
+   en WebServiceClientes.RebajaCalculo(String SC, String rubrodesc, Decimal resultado, String articulodesc, String destinodesc)
+__________________________
+
+Log Entry : 
+07/06/2017 12:39:11
+Error in: http://localhost:58911/ProntoWeb/WebServiceClientes.asmx/RebajaCalculo. Error Message:System.NullReferenceException: Referencia a objeto no establecida como instancia de un objeto.
+   en ServicioCartaPorte.servi.RebajaCalculo(String SC, Int32 idrubro, Decimal resultado, Int32 idarticulo, Int32 iddestino) en c:\Users\Administrador\Documents\bdl\pronto\InterfazFlexicapture\prontoflexicapture.cs:línea 4484
+   en WebServiceClientes.RebajaCalculo(String SC, String rubrodesc, Decimal resultado, String articulodesc, String destinodesc)
+__________________________
