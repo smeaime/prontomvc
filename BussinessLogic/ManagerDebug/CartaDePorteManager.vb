@@ -679,6 +679,9 @@ Public Class CartaDePorteManager
 
         Dim idscliente As New List(Of String)
         Dim idscorredor As New List(Of String)
+        idscliente.Add(-1)
+        idscorredor.Add(-1)
+
         For Each c In clientes
             idscliente.Add(BuscarClientePorCUIT(c, SC, ""))
             idscorredor.Add(BuscarVendedorPorCUIT(c, SC, ""))
@@ -695,17 +698,21 @@ Public Class CartaDePorteManager
         '        " OR replace(RComercialCUIT,'-','') IN (" & clisql & " ) " & _
         '        ")"
 
+        If clientes.Count > 0 Then
 
-        agrup &= " AND  (" & _
-                IIf(chkTitular, " Vendedor IN (" & idsclientesql & " ) ", "0=1") & _
-                IIf(chkIntermediario, " OR CuentaOrden1  IN (" & idsclientesql & " ) ", " OR 0=1") & _
-                IIf(chkRemComercial, " OR CuentaOrden2 IN (" & idsclientesql & " ) ", " OR 0=1") & _
-                IIf(chkClienteAuxiliar, " OR CuentaOrden2 IN (" & idsclientesql & " ) ", " OR 0=1") & _
-                IIf(chkCorredor, " OR Corredor IN (" & idscorredorsql & " ) ", " OR 0=1") & _
-                IIf(chkDestinatario, " OR Entregador IN (" & idsclientesql & " ) ", " OR 0=1") & _
-                ")"
+            agrup &= " AND  (" & _
+                    IIf(chkTitular, " Vendedor IN (" & idsclientesql & " ) ", "0=1") & _
+                    IIf(chkIntermediario, " OR CuentaOrden1  IN (" & idsclientesql & " ) ", " OR 0=1") & _
+                    IIf(chkRemComercial, " OR CuentaOrden2 IN (" & idsclientesql & " ) ", " OR 0=1") & _
+                    IIf(chkClienteAuxiliar, " OR CuentaOrden2 IN (" & idsclientesql & " ) ", " OR 0=1") & _
+                    IIf(chkCorredor, " OR Corredor IN (" & idscorredorsql & " ) ", " OR 0=1") & _
+                    IIf(chkDestinatario, " OR Entregador IN (" & idsclientesql & " ) ", " OR 0=1") & _
+                    ")"
+
+        End If
 
 
+        ErrHandler2.WriteError(agrup)
 
         Return agrup
 
@@ -15552,16 +15559,20 @@ Public Class CartaDePorteManager
 
 
 
+        Dim lista1 = DirectCast(iisNull(ParametroManager.TraerValorParametro2(SC, "EsClienteBLDcorredor"), "").Split("|"), IEnumerable(Of String)).ToList
         Dim lista2 = DirectCast(iisNull(ParametroManager.TraerValorParametro2(SC, "EsClienteBLDcorredor2"), "").Split("|"), IEnumerable(Of String)).ToList
         Dim lista3 = DirectCast(iisNull(ParametroManager.TraerValorParametro2(SC, "EsClienteBLDcorredor3"), "").Split("|"), IEnumerable(Of String)).ToList
+
 
         If lista3.Contains(usuario) Then
             Return c3.ToList.Where(Function(x) x <> "").ToList
 
         ElseIf lista2.Contains(usuario) Then
             Return c2.ToList.Where(Function(x) x <> "").ToList
-        Else
+        ElseIf lista1.Contains(usuario) Then
             Return c1.ToList.Where(Function(x) x <> "").ToList
+        Else
+            Return cc.ToList
         End If
 
     End Function
