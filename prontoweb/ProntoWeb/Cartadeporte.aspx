@@ -3139,13 +3139,13 @@
 
     <script>
 
-
+        
 
         function ActualizarDiferencia() {
             $('#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel3_lblDiferenciaKilos').text(
                 "DIF de KG " +
-                (parseFloat($('#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel2_txtNetoPosicion').val())
-                - parseFloat($('#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel3_txtNetoDescarga').val()))
+                (parseFloat($('#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel3_txtNetoDescarga').val())
+                - parseFloat($('#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel2_txtNetoPosicion').val()))
             );
         }
 
