@@ -651,21 +651,33 @@ Public Class CartaDePorteManager
         'http://stackoverflow.com/questions/3800551/select-first-row-in-each-group-by-group?rq=1
 
 
-        Dim agrup = ";WITH cte AS " & _
-        "( " & _
-        "       SELECT *, " & _
-        "             ROW_NUMBER() OVER (PARTITION BY NumeroCartaDePorte,SubnumeroVagon ORDER BY IdCartaDePorte DESC) AS rn " & _
-        "       FROM ( " & _
-                 strsql & _
-        "       ) as cartas " & _
-        ") " & _
-        "SELECT * " & _
-        "FROM cte " & _
-        "WHERE rn = 1 "
+        Dim agrup As String
+        If False Then
+
+
+            agrup = ";WITH cte AS " & _
+            "( " & _
+            "       SELECT *, " & _
+            "             ROW_NUMBER() OVER (PARTITION BY NumeroCartaDePorte,SubnumeroVagon ORDER BY IdCartaDePorte DESC) AS rn " & _
+            "       FROM ( " & _
+                     strsql & _
+            "       ) as cartas " & _
+            ") " & _
+            "SELECT * " & _
+            "FROM cte " & _
+            "WHERE rn = 1 "
+
+        Else
+
+            agrup = strsql 'el WITH CTE es costosísimo. si querés seguir trayendo solo una carta por familia, llamá a la fSQL
+
+        End If
 
 
 
-         Dim idscliente As New List(Of String)
+
+
+        Dim idscliente As New List(Of String)
         Dim idscorredor As New List(Of String)
         For Each c In clientes
             idscliente.Add(BuscarClientePorCUIT(c, SC, ""))
