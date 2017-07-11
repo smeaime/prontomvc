@@ -857,19 +857,58 @@ namespace ProntoMVC.Tests
 
 
 
-        //        [11:40, 10/7/2017] Andy: ah, se inactivo también lo de la dif de kilos                        
-        //[11:43, 10/7/2017] +54 9 11 2857-9291: por ahora dejalo asi. veo como activartelo                        
-        //[11:43, 10/7/2017] Andy: dale                        
-        //[11:44, 10/7/2017] Andy: bueno, mas alla de ajustar eso, las prioridades:
 
 
-        //42725 web service entregador
-        //42686	Ranking de Clientes - Amaggi Entregas
-        //42676	Subcomisionistas CALADA + BALANZA.
-        //37816	LISTADO DE BUQUES
-        //42685	Ranking de clientes - No facturado
-        //28265	FACTURACION FUTUROS Y OPCIONES                        
-        //42549		y lo de clientes asociados (cómo hago con FYO q va como corredor, y se llamaba pasando todos los parametros [idtitular,idcorredor,etc] y ahora al cambiarlo no encanstra más )
+
+
+        [TestMethod]
+        public void liquidacionsubcon_42676()
+        {
+
+
+          var c = CartaDePorteManager.GetItem(SC, 1372987);
+            c.SubnumeroVagon = 222;
+            string ms = "";
+            CartaDePorteManager.Save(SC, c, 1, "", false, ref ms);
+
+            ParametroManager.GuardarValorParametro2(SC, "DestinosDeCartaPorteApartadosEnLiquidacionSubcontr", "NOBLE ARG. - Lima|CHIVILCOY|CARGILL - San Justo|FABRICA VICENTIN|PUERTO VICENTIN");
+
+
+            ReportViewer ReporteLocal = new Microsoft.Reporting.WebForms.ReportViewer();
+
+            ReportParameter p2 = null;
+            string sTitulo = "";
+
+            var q = ConsultasLinq.LiquidacionSubcontratistas(SC,
+                       "", "", "", 1, 2000,
+                        CartaDePorteManager.enumCDPestado.DescargasMasFacturadas, "", -1, -1,
+                       -1, -1,
+                       -1, -1, -1, -1, CartaDePorteManager.FiltroANDOR.FiltroOR, "Ambos",
+                        new DateTime(2016, 12, 1),
+                        new DateTime(2016, 12, 31),
+                        2, -1, ref sTitulo);
+
+
+
+            string titulo = EntidadManager.NombreCliente(SC, 105);
+
+
+            ReportParameter[] p = new ReportParameter[5];
+            p[0] = new ReportParameter("Concepto1", "");
+            p[1] = new ReportParameter("titulo", "");
+            p[2] = new ReportParameter("Concepto2", "");
+            p[3] = new ReportParameter("Concepto1Importe", "-1");
+            p[4] = new ReportParameter("Concepto2Importe", "-1");
+
+
+            string output = "";
+
+            CartaDePorteManager.RebindReportViewerLINQ_Excel
+                                (ref ReporteLocal, @"C:\Users\Administrador\Documents\bdl\pronto\prontoweb\ProntoWeb\Informes\Liquidación de SubContratistas 2.rdl", q, ref output, p);
+
+            System.Diagnostics.Process.Start(output);
+
+        }
 
 
 
