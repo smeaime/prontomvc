@@ -3142,6 +3142,7 @@
         
 
         function ActualizarDiferencia() {
+
             $('#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel3_lblDiferenciaKilos').text(
                 "DIF de KG " +
                 (parseFloat($('#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel3_txtNetoDescarga').val())
@@ -3254,7 +3255,7 @@
 
 
         function sumarTotalOtrasMerma() {
-
+            return;
 
             var tot = parseFloat($('#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadGranosExtranosMerma').val()) +
                         parseFloat($('#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadQuebradosMerma').val()) +
