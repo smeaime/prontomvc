@@ -3051,3 +3051,43 @@ The underlying provider failed on Open.
    en ExcelImportadorManager.UrenportExcelToDataset(String pFileName, String SC) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ExcelImportador.vb:línea 2006
 EntityFramework
 __________________________
+
+Log Entry : 
+07/11/2017 17:46:04
+Error in: http://localhost:58911/ProntoWeb/CartasDePortes.aspx?tipo=Todas. Error Message:Mariano
+__________________________
+
+Log Entry : 
+07/11/2017 17:48:12
+Error in: http://localhost:58911/ProntoWeb/CartasDePortes.aspx?tipo=Todas. Error Message:Mariano
+__________________________
+
+Log Entry : 
+07/11/2017 17:48:36
+Error in: http://localhost:58911/ProntoWeb/CartaDePorte.aspx?Id=2969496. Error Message:La carta numero 562233398 id=2969496 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+07/11/2017 17:48:36
+Error in: http://localhost:58911/ProntoWeb/CartaDePorte.aspx?Id=2969496. Error Message:PV 2 0
+__________________________
+
+Log Entry : 
+07/11/2017 17:49:42
+Error in: http://localhost:58911/ProntoWeb/CartaDePorte.aspx?Id=2969496. Error Message:La carta numero 562233398 id=2969496 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+07/11/2017 17:49:42
+Error in: http://localhost:58911/ProntoWeb/CartaDePorte.aspx?Id=2969496. Error Message:PV 2 0
+__________________________
+
+Log Entry : 
+07/11/2017 17:58:13
+Error in: http://localhost:58911/ProntoWeb/Principal.aspx. Error Message:Mariano esta logueado, pero lo redirijo al login porque faltan los datos de session. No deberia mejor mandarlo a SeleccionarEmpresa? Ademas, no hago el LogOut y le queda el cookie!!!
+__________________________
+
+Log Entry : 
+07/11/2017 17:58:14
+Error in: http://localhost:58911/ProntoWeb/CartasDePortes.aspx?tipo=Todas. Error Message:Mariano
+__________________________
