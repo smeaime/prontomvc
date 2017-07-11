@@ -15908,13 +15908,14 @@ Public Class CartaDePorteManager
 
                     cp.CPoriginal = dbc.NumeroCartaDePorte
 
+
+                    cp.cuittitu = If(dbc.TitularCUIT, "").Replace("-", "")
                     cp.cuitcorredor = dbc.CorredorCUIT.Replace("-", "")
-                    cp.cuitentregador = dbc.DestinatarioCUIT.Replace("-", "")
                     cp.cuitexport = dbc.DestinatarioCUIT.Replace("-", "")
                     cp.cuitinter = dbc.IntermediarioCUIT.Replace("-", "")
                     cp.cuitpuerto = If(dbc.DestinoCUIT, "").Replace("-", "")
+                    cp.cuitentregador = "30707386076"    ' dbc.DestinatarioCUIT.Replace("-", "")
 
-                    cp.cuittitu = If(dbc.TitularCUIT, "").Replace("-", "")
 
 
 
@@ -15922,6 +15923,8 @@ Public Class CartaDePorteManager
                     cp.intermediario = If(dbc.IntermediarioDesc, "")
                     cp.nomcorre = If(dbc.CorredorDesc, "")
                     cp.nomExport = If(dbc.DestinatarioDesc, "")
+                    cp.entregador = "WILLIAMS ENTREGAS SA" 'If(dbc.DestinatarioDesc, "")
+
 
 
                     cp.cuitremic = If(dbc.RComercialCUIT, "").Replace("-", "")
@@ -15936,7 +15939,6 @@ Public Class CartaDePorteManager
                     cp.remitente = If(dbc.TitularDesc, "")
 
 
-                    cp.entregador = If(dbc.DestinatarioDesc, "")
 
 
                     cp.fechadescarga = If(dbc.FechaDescarga, DateTime.MinValue)

@@ -1818,6 +1818,13 @@ Public Class ConsultasLinq
 
 
 
+        Dim bTraerDuplicados = True 'consulta 42686
+        '//En el ranking de clientes, si se pide Modo: Entregas Fechas: 1/11/16 al 30/06/17, viene Amaggi en el lugar 9.
+        '// Amaggi no tiene facturadas cartas de porte de entrega
+        '// -esto pasa porque son duplicadas, y al pedir entrega, estas usando un TRUCHAMIENTO (en el fsql_) para hacer pasar el original por una de entrega (q es la de AMAGGI de exportacion)
+        '// -ok, una opcion es traer tambien los duplicados (porq el TRUCHAMIENTO lo haces solo al pedir originales)!!!
+
+
 
 
         'CREATE NONCLUSTERED INDEX IDX_CartasDePorte_FechaDescarga
@@ -1832,7 +1839,7 @@ Public Class ConsultasLinq
                                         idCorredor, idDestinatario, idIntermediario, idRemComercial,
                                         idArticulo, idProcedencia, idDestino, AplicarANDuORalFiltro, ModoExportacion,
                                         fechadesde2, fechahasta, puntoventa,
-                                         Nothing, False, Nothing, Nothing, Nothing,
+                                         Nothing, bTraerDuplicados, Nothing, Nothing, Nothing,
                                         Nothing, Nothing, Nothing, Nothing) _
                  Where cdp.FechaDescarga IsNot Nothing And _
                          ((If(cdp.FechaDescarga, fechadesde) >= fechadesde And If(cdp.FechaDescarga, fechadesde) <= fechahasta) Or
