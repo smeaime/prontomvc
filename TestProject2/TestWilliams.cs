@@ -857,6 +857,97 @@ namespace ProntoMVC.Tests
 
 
 
+        //        [11:40, 10/7/2017] Andy: ah, se inactivo también lo de la dif de kilos                        
+        //[11:43, 10/7/2017] +54 9 11 2857-9291: por ahora dejalo asi. veo como activartelo                        
+        //[11:43, 10/7/2017] Andy: dale                        
+        //[11:44, 10/7/2017] Andy: bueno, mas alla de ajustar eso, las prioridades:
+
+
+        //42725
+        //42686	Ranking de Clientes - Amaggi Entregas
+        //42676	Subcomisionistas CALADA + BALANZA.
+        //37816	LISTADO DE BUQUES
+        //42685	Ranking de clientes - No facturado
+        //28265	FACTURACION FUTUROS Y OPCIONES                        
+        // ????		y lo de clientes asociados (cómo hago con FYO q va como corredor, y se llamaba pasando todos los parametros [idtitular,idcorredor,etc] y ahora al cambiarlo no encanstra más )
+
+
+
+        [TestMethod]
+        public void problema_informe__42686()
+        {
+            //En el ranking de clientes, si se pide Modo: Entregas Fechas: 1/11/16 al 30/06/17, viene Amaggi en el lugar 9.
+            // Amaggi no tiene facturadas cartas de porte de entrega
+            // -esto pasa porque son duplicadas, y al pedir entrega, estas usando un TRUCHAMIENTO (en el fsql_) para hacer pasar el original por una de entrega (q es la de AMAGGI de exportacion)
+            // -ok, una opcion es traer tambien los duplicados (porq el TRUCHAMIENTO lo haces solo al pedir originales)!!!
+
+
+            ReportParameter p2 = null;
+
+            var desde = new DateTime(2016, 11, 1);
+            var hasta = new DateTime(2017, 6, 30);
+            var desdeAnt = new DateTime(2015, 11, 1); //nov
+            var hastaAnt = new DateTime(2016, 6, 30); 
+            var MinimoNeto = 0;
+            var topclie = 99999;
+            var pv = -1;
+            var ModoExportacion = "Entregas";
+       
+            
+
+/*
+
+
+            declare	@startRowIndex int,@maximumRows int,@estado int,@QueContenga nvarchar(4000),@idVendedor int,@idCorredor int,@idDestinatario int,@idIntermediario int,@idRemComercial int,@idArticulo int,@idProcedencia int,@idDestino int,@AplicarANDuORalFiltro int,@ModoExportacion nvarchar(4000),@fechadesde datetime2(7),@fechahasta datetime2(7),@puntoventa int,@IdAcopio int,@bTraerDuplicados bit,@Contrato nvarchar(4000),@QueContenga2 nvarchar(4000),@idClienteAuxiliarint int,@AgrupadorDeTandaPeriodos int,@Vagon int,@Patente nvarchar(4000),@optCamionVagon nvarchar(4000),@p__linq__0 datetime2(7),@p__linq__1 datetime2(7),@p__linq__2 datetime2(7),@p__linq__3 datetime2(7),@p__linq__4 datetime2(7),@p__linq__5 datetime2(7),@p__linq__6 datetime2(7),@p__linq__7 datetime2(7),@p__linq__8 datetime2(7),@p__linq__9 datetime2(7)
+select @startRowIndex=NULL,@maximumRows=NULL,@estado=4,@QueContenga=NULL,@idVendedor=-1,@idCorredor=-1,@idDestinatario=-1,@idIntermediario=-1,@idRemComercial=-1,@idArticulo=-1,@idProcedencia=-1,@idDestino=-1,@AplicarANDuORalFiltro=0,@ModoExportacion=N'Entregas',@fechadesde='2015-11-01 00:00:00',@fechahasta='2017-06-30 00:00:00',@puntoventa=-1,@IdAcopio=NULL,@bTraerDuplicados=0,@Contrato=NULL,@QueContenga2=NULL,@idClienteAuxiliarint=NULL,@AgrupadorDeTandaPeriodos=NULL,@Vagon=NULL,@Patente=NULL,@optCamionVagon=NULL,@p__linq__0='2016-11-01 00:00:00',@p__linq__1='2016-11-01 00:00:00',@p__linq__2='2016-11-01 00:00:00',@p__linq__3='2017-06-30 00:00:00',@p__linq__4='2016-11-01 00:00:00',@p__linq__5='2015-11-01 00:00:00',@p__linq__6='2016-11-01 00:00:00',@p__linq__7='2016-06-30 00:00:00',@p__linq__8='2016-11-01 00:00:00',@p__linq__9='2016-06-30 00:00:00'
+
+
+select idcartadeporte, clientefacturado, exporta from 
+[fSQL_GetDataTableFiltradoYPaginado] (@startRowIndex, @maximumRows, @estado, @QueContenga, @idVendedor, @idCorredor, @idDestinatario, @idIntermediario, @idRemComercial, @idArticulo, @idProcedencia, @idDestino, @AplicarANDuORalFiltro, @ModoExportacion, @fechadesde, @fechahasta, @puntoventa, @IdAcopio, @bTraerDuplicados, @Contrato, @QueContenga2, @idClienteAuxiliarint, @AgrupadorDeTandaPeriodos, @Vagon, @Patente, @optCamionVagon) 
+where clientefacturado='AMAGGI ARGENTINA S.A.'
+
+*/
+
+
+
+
+
+            var q2 = ConsultasLinq.rankingclientes(SC, "",
+                 "", "", 0, 10, CartaDePorteManager.enumCDPestado.DescargasMasFacturadas,
+                     "", -1, -1,
+                -1, -1,
+                -1, -1, -1, -1,
+                CartaDePorteManager.FiltroANDOR.FiltroOR, ModoExportacion, desde, hasta,
+               pv, desdeAnt, hastaAnt, MinimoNeto, topclie);
+
+
+
+
+            ReportViewer ReporteLocal2 = new Microsoft.Reporting.WebForms.ReportViewer();
+            string output2 = "";
+
+            ReportParameter[] yourParams2 = new ReportParameter[2];
+            yourParams2[0] = new ReportParameter("TopClientes", topclie.ToString());
+            yourParams2[1] = new ReportParameter("MinimoNeto", MinimoNeto.ToString());
+
+            CartaDePorteManager.RebindReportViewerLINQ_Excel(ref ReporteLocal2, @"C:\Users\Administrador\Documents\bdl\pronto\prontoweb\ProntoWeb\Informes\Ranking de Clientes.rdl", q2, ref output2, yourParams2);
+
+            System.Diagnostics.Process.Start(output2);
+
+
+
+
+
+
+
+
+        }
+
+
+
+
+
+
         [TestMethod]
         public void RangosResultadoCalidadesCalculoRebajaYMerma_37774__()
         {
@@ -864,7 +955,7 @@ namespace ProntoMVC.Tests
             var scEF = ProntoMVC.Data.Models.Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC));
             DemoProntoEntities db = new DemoProntoEntities(scEF);
 
-            
+
 
             var ss6 = s.RebajaCalculo(SC, 5, 31, 5, -1); // quebrado partido, soja
             var ss5 = s.RebajaCalculo(SC, 1, 6.5M, -1, 1);
@@ -964,7 +1055,7 @@ Debería ser 6.75% de rebaja y viene 7.25%
 
 
 
-        
+
 
         [TestMethod]
         public void CampoEditableDeClientesRelacionadosAlUsuarioParaTirarInforme_28320_42549()
@@ -992,11 +1083,11 @@ Debería ser 6.75% de rebaja y viene 7.25%
                                 -1, -1, -1, -1, -1,
                                 -1, 0, "Ambas"
                                 , new DateTime(2017, 1, 1), new DateTime(2017, 1, 31),
-                                0, usuario, scbdlmasterappconfig, true, true, true,false , false, false);
+                                0, usuario, scbdlmasterappconfig, true, true, true, false, false, false);
 
 
 
-            
+
 
 
 
@@ -1075,7 +1166,7 @@ Debería ser 6.75% de rebaja y viene 7.25%
             //string razonsocial = UserDatosExtendidosManager.TraerRazonSocialDelUsuario(usuario, scbdlmasterappconfig, SC);
 
 
-            
+
 
 
             var l = dt.AsEnumerable().Select(x => x["NumeroCartaDePorte"].NullSafeToString()).ToList();

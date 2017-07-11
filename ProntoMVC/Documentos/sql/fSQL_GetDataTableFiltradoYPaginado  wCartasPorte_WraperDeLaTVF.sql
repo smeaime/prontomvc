@@ -492,19 +492,36 @@ where 1=1
 				Or (@ModoExportacion = 'Export' And isnull(CDP.Exporta, 'NO') = 'SI' )
 			) 
 	*/
-	AND EXISTS ( SELECT * FROM CartasDePorte COPIAS  
-			where COPIAS.NumeroCartaDePorte=CDP.NumeroCartaDePorte
-			and COPIAS.SubnumeroVagon=CDP.SubnumeroVagon    
-			and (
-				@ModoExportacion is null or (@ModoExportacion = 'Ambos' or @ModoExportacion = 'Ambas') Or (@ModoExportacion = 'Todos') 
-				Or (@ModoExportacion = 'EntregasExcluyente' And isnull(CDP.Exporta, 'NO') = 'NO')  
-				Or (@ModoExportacion = 'ExportExcluyente' And isnull(CDP.Exporta, 'NO') = 'SI')
-				Or (@ModoExportacion = 'Entregas' And isnull(COPIAS.Exporta, 'NO') = 'NO' AND ISNULL(COPIAS.Anulada,'NO')<>'SI')  
-				Or (@ModoExportacion = 'Export' And isnull(COPIAS.Exporta, 'NO') = 'SI' AND ISNULL(COPIAS.Anulada,'NO')<>'SI')
-			) 
+
+	AND 
+	(
+		(	
+			@bTraerDuplicados='TRUE' AND 
+			(
+				(@ModoExportacion = 'Entregas' And isnull(CDP.Exporta, 'NO') = 'NO')  
+				OR
+				(@ModoExportacion = 'Export' And isnull(CDP.Exporta, 'NO') = 'SI')
+			)
 		)
 
+		OR
 
+		(
+			@bTraerDuplicados='FALSE'
+			AND
+			EXISTS ( SELECT * FROM CartasDePorte COPIAS  
+				where COPIAS.NumeroCartaDePorte=CDP.NumeroCartaDePorte
+				and COPIAS.SubnumeroVagon=CDP.SubnumeroVagon    
+				and (
+					@ModoExportacion is null or (@ModoExportacion = 'Ambos' or @ModoExportacion = 'Ambas') Or (@ModoExportacion = 'Todos') 
+					Or (@ModoExportacion = 'EntregasExcluyente' And isnull(CDP.Exporta, 'NO') = 'NO')  
+					Or (@ModoExportacion = 'ExportExcluyente' And isnull(CDP.Exporta, 'NO') = 'SI')
+					Or (@ModoExportacion = 'Entregas' And isnull(COPIAS.Exporta, 'NO') = 'NO' AND ISNULL(COPIAS.Anulada,'NO')<>'SI')  
+					Or (@ModoExportacion = 'Export' And isnull(COPIAS.Exporta, 'NO') = 'SI' AND ISNULL(COPIAS.Anulada,'NO')<>'SI')
+				) 
+			)
+		)
+	)
 
 
     AND (@Contrato IS NULL OR @Contrato ='' OR @Contrato ='-1' Or cdp.Contrato = @Contrato)
