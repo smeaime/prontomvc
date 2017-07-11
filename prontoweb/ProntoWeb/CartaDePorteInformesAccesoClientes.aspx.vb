@@ -456,7 +456,7 @@ Partial Class CartaDePorteInformesAccesoClientes
 
 
 
-        Dim idcliente = BuscaIdClientePreciso(rs, HFSC.Value)
+        'Dim idcliente = BuscaIdClientePreciso(rs, HFSC.Value)
 
 
 
