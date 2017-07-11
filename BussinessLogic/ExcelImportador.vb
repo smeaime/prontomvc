@@ -2163,19 +2163,22 @@ Public Class ExcelImportadorManager
                             If actua(.Destino, BuscaIdWilliamsDestinoPreciso(DiccionarioEquivalenciasManager.BuscarEquivalencia(SC, "DESTINO|" + Val(r(17)).ToString), SC)) Then
                                 log += "Destino; "
                             End If
+                        End If
+                        If .Destino <= 0 Then
                             If actua(.Destino, BuscaIdWilliamsDestinoPreciso(DiccionarioEquivalenciasManager.BuscarEquivalencia(SC, "DESTINO|" + r(16)), SC)) Then
                                 log += "Destino; "
                             End If
-                            If .Destino <= 0 Then
-                                If actua(.Destino, BuscaIdWilliamsDestinoPreciso(DiccionarioEquivalenciasManager.BuscarEquivalencia(SC, r(16)), SC)) Then log += "Destino; "
-                            End If
-                            If .Destino <= 0 Then .Destino = Nothing
-                            If If(NombreDestino(SC, .Destino), "").Trim.ToUpper = "ACA SAN LORENZO" Then
-                                Continue For
-                            End If
-
-                            '.Destino = BuscaIdWilliamsDestinoPreciso(DiccionarioEquivalenciasManager.BuscarEquivalencia(SC, r(16)), SC)
                         End If
+                        If .Destino <= 0 Then
+                            If actua(.Destino, BuscaIdWilliamsDestinoPreciso(DiccionarioEquivalenciasManager.BuscarEquivalencia(SC, r(16)), SC)) Then log += "Destino; "
+                        End If
+                        If .Destino <= 0 Then .Destino = Nothing
+                        If If(NombreDestino(SC, .Destino), "").Trim.ToUpper = "ACA SAN LORENZO" Then
+                            Continue For
+                        End If
+
+                        '.Destino = BuscaIdWilliamsDestinoPreciso(DiccionarioEquivalenciasManager.BuscarEquivalencia(SC, r(16)), SC)
+
 
 
 

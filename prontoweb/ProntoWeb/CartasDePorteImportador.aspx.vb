@@ -247,6 +247,8 @@ Partial Class CartasDePorteImportador
 
                 If FormatoDelArchivo(Session("NombreArchivoSubido").ToString, cmbFormato) = ReyserAnalisis Then Exit Sub
                 If FormatoDelArchivo(Session("NombreArchivoSubido").ToString, cmbFormato) = Unidad6Analisis Then Exit Sub
+                If FormatoDelArchivo(Session("NombreArchivoSubido").ToString, cmbFormato) = Urenport Then Exit Sub
+
 
                 btnEmpezarImportacion.Visible = True
                 txtBuscarCliente.Enabled = True
@@ -323,6 +325,10 @@ Partial Class CartasDePorteImportador
                     Exit Sub
                 End If
                 If FormatoDelArchivo(Session("NombreArchivoSubido").ToString, cmbFormato) = Unidad6Analisis Then
+                    MsgBoxAjax(Me, txtLogErrores.Text)
+                    Exit Sub
+                End If
+                If FormatoDelArchivo(Session("NombreArchivoSubido").ToString, cmbFormato) = Urenport Then
                     MsgBoxAjax(Me, txtLogErrores.Text)
                     Exit Sub
                 End If
