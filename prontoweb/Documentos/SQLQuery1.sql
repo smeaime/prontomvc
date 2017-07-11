@@ -1,3 +1,6 @@
+select * from diccionarioequivalencias where iddiccionarioequivalencia=172559
+
+
 select * from cartasdeporte 
 inner join facturas 
 
