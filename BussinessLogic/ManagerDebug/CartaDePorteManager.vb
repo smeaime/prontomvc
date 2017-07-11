@@ -669,7 +669,14 @@ Public Class CartaDePorteManager
 
         Else
 
-            agrup = strsql 'el WITH CTE es costosísimo. si querés seguir trayendo solo una carta por familia, llamá a la fSQL
+
+            agrup = "SELECT TOP 20000 CDP.IdCartaDePorte, CDP.NumeroCartaDePorte, CDP.IdUsuarioIngreso, CDP.FechaIngreso, CDP.Anulada, CDP.FechaAnulacion, CDP.Observaciones, CDP.Cantidad, CDP.Cupo, CDP.NetoProc, CDP.BrutoPto, CDP.TaraPto, CDP.NetoPto, CDP.Acoplado, CDP.Humedad, CDP.Merma,HumedadDesnormalizada, CDP.NetoFinal, CDP.CTG   ,Patente   ,CDP.Contrato , CDP.FechaDeCarga, CDP.FechaVencimiento,  CDP.SubnumeroVagon , CDP.FechaArribo  , CDP.CEE     ,CDP.FechaDescarga      ,CDP.Hora      ,CDP.NRecibo      ,CDP.CalidadDe      ,CDP.TaraFinal      ,CDP.BrutoFinal , TitularDesc, TitularCUIT, 	IntermediarioDesc,              IntermediarioCUIT, 		RComercialDesc,             RComercialCUIT, 		CorredorDesc,              CorredorCUIT, DestinatarioDesc,DestinatarioCUIT             ,Producto, 			TransportistaCUIT,             TransportistaDesc, 			ChoferCUIT, 			ChoferDesc,            ProcedenciaDesc, 		ProcedenciaCodigoPostal, 		ProcedenciaCodigoONCAA,           ProcedenciaProvinciaDesc,       DestinoDesc   ,  EntregadorDesc,Cosecha, CalidadDesc,  DestinoCodigoONCAA, KmARecorrer	,Tarifa ,EstablecimientoDesc    ,CDP.PathImagen      ,CDP.PathImagen2     ,ClienteAuxiliarDesc,CorredorDesc2           FROM (" & strsql & ") AS CDP"
+
+
+
+
+
+            'agrup = strsql 'el WITH CTE es costosísimo. si querés seguir trayendo solo una carta por familia, llamá a la fSQL
 
         End If
 

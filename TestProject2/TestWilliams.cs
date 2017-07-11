@@ -993,114 +993,114 @@ namespace ProntoMVC.Tests
 
 
 
-
-
-            string sErrores = "", sTitulo = "";
-            LinqCartasPorteDataContext db = null;
-            DemoProntoEntities db2 = null;
-
-
-            //UserDatosExtendidosManager.UpdateClientesRelacionadoslDelUsuario(usuario, scbdlmasterappconfig, "20-12345678-1|20-20100767-5");
-
-
-            //cuando decide si usa CartaDePorteInformesAccesoClientes o CartaDePorteInformesAccesoClientesBLDcorredor? 
-            //-con CartaDePorteManager.EsClienteBLDcorredor(HFSC.Value)
-            //bueno, esto funciona. O sea que falla esa derivacion? -pero la pagina "..BLDCorredor" usa el filtro de corredor BLD  -y si se lo sacas?
-
-            var b = CartaDePorteManager.usuariosBLD(SC).Contains(usuario);
-
-            var clientes = CartaDePorteManager.TraerCUITClientesSegunUsuario(usuario, SC, scbdlmasterappconfig).Where(x => x != "").ToList();
-
-
-            var q = CartaDePorteManager.CartasLINQlocalSimplificadoTipadoConCalada3(SC,
-                     "", "", "", 1, 99999,
-                      CartaDePorteManager.enumCDPestado.Todas, "", -1, -1,
-                     -1, -1,
-                     -1, -1, -1, -1, CartaDePorteManager.FiltroANDOR.FiltroOR, "Ambas",
-                      desde,
-                      hasta,
-                      -1, ref sTitulo, "Ambas", false, "", ref db2, "", -1, -1, 0, "", "Ambas");
-
-
-            var q2 = q.Where(x => clientes.Contains(x.TitularCUIT) || clientes.Contains(x.IntermediarioCUIT) || clientes.Contains(x.RComercialCUIT))
-                                    .ToList();
-
-            var q3 = q2.Select(x => x.NumeroCartaDePorte).ToList();
-
-            Assert.IsTrue(q3.Contains(558600767));
-
-
-
-
-
-
-
-            System.Data.Entity.Core.Objects.ObjectQuery oq = (System.Data.Entity.Core.Objects.ObjectQuery)q;
-            string sqlquery = (oq).ToTraceString();
-            var strSQL = oq.ToTraceString();
-            List<System.Data.Entity.Core.Objects.ObjectParameter> ps = oq.Parameters.ToList();
-            for (int n = ps.Count() - 1; n >= 0; n--) //para que @QueContenga no reemplace a @QueContenga2
+            if (false)
             {
-                System.Data.Entity.Core.Objects.ObjectParameter parameter = ps[n];
-                var name = "@" + parameter.Name;
-                string value;
-                if (parameter.Value == null)
-                {
-                    value = " NULL ";
+                string sErrores = "", sTitulo = "";
+                LinqCartasPorteDataContext db = null;
+                DemoProntoEntities db2 = null;
 
-                }
-                else if (!(parameter.Value.GetType() == typeof(DateTime)))
-                {
 
-                    value = "'" + (parameter.Value ?? "").ToString() + "'";
-                }
-                else
-                {
+                //UserDatosExtendidosManager.UpdateClientesRelacionadoslDelUsuario(usuario, scbdlmasterappconfig, "20-12345678-1|20-20100767-5");
 
-                    value = "'" + (((DateTime)(parameter.Value)).ToString("s") ?? "").ToString() + "'";
+
+                //cuando decide si usa CartaDePorteInformesAccesoClientes o CartaDePorteInformesAccesoClientesBLDcorredor? 
+                //-con CartaDePorteManager.EsClienteBLDcorredor(HFSC.Value)
+                //bueno, esto funciona. O sea que falla esa derivacion? -pero la pagina "..BLDCorredor" usa el filtro de corredor BLD  -y si se lo sacas?
+
+                var b = CartaDePorteManager.usuariosBLD(SC).Contains(usuario);
+
+                var clientes = CartaDePorteManager.TraerCUITClientesSegunUsuario(usuario, SC, scbdlmasterappconfig).Where(x => x != "").ToList();
+
+
+                var q = CartaDePorteManager.CartasLINQlocalSimplificadoTipadoConCalada3(SC,
+                         "", "", "", 1, 99999,
+                          CartaDePorteManager.enumCDPestado.Todas, "", -1, -1,
+                         -1, -1,
+                         -1, -1, -1, -1, CartaDePorteManager.FiltroANDOR.FiltroOR, "Ambas",
+                          desde,
+                          hasta,
+                          -1, ref sTitulo, "Ambas", false, "", ref db2, "", -1, -1, 0, "", "Ambas");
+
+
+                var q2 = q.Where(x => clientes.Contains(x.TitularCUIT) || clientes.Contains(x.IntermediarioCUIT) || clientes.Contains(x.RComercialCUIT))
+                                        .ToList();
+
+                var q3 = q2.Select(x => x.NumeroCartaDePorte).ToList();
+
+                Assert.IsTrue(q3.Contains(558600767));
+
+
+
+
+
+
+
+                System.Data.Entity.Core.Objects.ObjectQuery oq = (System.Data.Entity.Core.Objects.ObjectQuery)q;
+                string sqlquery = (oq).ToTraceString();
+                var strSQL = oq.ToTraceString();
+                List<System.Data.Entity.Core.Objects.ObjectParameter> ps = oq.Parameters.ToList();
+                for (int n = ps.Count() - 1; n >= 0; n--) //para que @QueContenga no reemplace a @QueContenga2
+                {
+                    System.Data.Entity.Core.Objects.ObjectParameter parameter = ps[n];
+                    var name = "@" + parameter.Name;
+                    string value;
+                    if (parameter.Value == null)
+                    {
+                        value = " NULL ";
+
+                    }
+                    else if (!(parameter.Value.GetType() == typeof(DateTime)))
+                    {
+
+                        value = "'" + (parameter.Value ?? "").ToString() + "'";
+                    }
+                    else
+                    {
+
+                        value = "'" + (((DateTime)(parameter.Value)).ToString("s") ?? "").ToString() + "'";
+                    }
+                    strSQL = strSQL.Replace(name, value);
                 }
-                strSQL = strSQL.Replace(name, value);
+
+
+
+
+
+
+                //string razonsocial = UserDatosExtendidosManager.TraerRazonSocialDelUsuario(usuario, scbdlmasterappconfig, SC);
+
+
+
+
+
+                //var l = dt.AsEnumerable().Select(x => x["NumeroCartaDePorte"].NullSafeToString()).ToList();
+
+
+                //Assert.IsTrue(dt.AsEnumerable().Select(x => x["NumeroCartaDePorte"]).Contains(558600767));
+
+
+                //ReportViewer ReporteLocal = new Microsoft.Reporting.WebForms.ReportViewer();
+                //string output = @"C:\Users\Administrador\Desktop\Informe" + DateTime.Now.ToString("ddMMMyyyy_HHmmss") + ".xls";
+                //ReportParameter[] yourParams = new ReportParameter[10];
+                //yourParams[0] = new ReportParameter("webservice", "");
+                yourParams[1] = new ReportParameter("sServidor", "");
+                yourParams[2] = new ReportParameter("idArticulo", "-1");
+                yourParams[3] = new ReportParameter("idDestino", "-1");
+                yourParams[4] = new ReportParameter("desde", desde.ToString());
+                yourParams[5] = new ReportParameter("hasta", hasta.ToString());
+                yourParams[6] = new ReportParameter("quecontenga", "ghkgk");
+                yourParams[7] = new ReportParameter("Consulta", strSQL);
+                yourParams[8] = new ReportParameter("sServidorSQL", ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC));
+                yourParams[9] = new ReportParameter("titulo", "ghkj");
+                var output2 = CartaDePorteManager.RebindReportViewer_ServidorExcel(ref ReporteLocal,
+                            @"Listado general de Cartas de Porte (simulando original) con foto 2", yourParams, ref output, false);
+
+                //RebindReportViewer_ServidorExcel explota (al depurar, no al ejecutar) en el setparameters, se queja del xmlserializer. 
+                //RebindReportViewerLINQ_Excel no explota
+
+                System.Diagnostics.Process.Start(output2);
+
             }
-
-
-
-
-
-
-            //string razonsocial = UserDatosExtendidosManager.TraerRazonSocialDelUsuario(usuario, scbdlmasterappconfig, SC);
-
-
-
-
-
-            //var l = dt.AsEnumerable().Select(x => x["NumeroCartaDePorte"].NullSafeToString()).ToList();
-
-
-            //Assert.IsTrue(dt.AsEnumerable().Select(x => x["NumeroCartaDePorte"]).Contains(558600767));
-
-
-            //ReportViewer ReporteLocal = new Microsoft.Reporting.WebForms.ReportViewer();
-            //string output = @"C:\Users\Administrador\Desktop\Informe" + DateTime.Now.ToString("ddMMMyyyy_HHmmss") + ".xls";
-            //ReportParameter[] yourParams = new ReportParameter[10];
-            //yourParams[0] = new ReportParameter("webservice", "");
-            yourParams[1] = new ReportParameter("sServidor", "");
-            yourParams[2] = new ReportParameter("idArticulo", "-1");
-            yourParams[3] = new ReportParameter("idDestino", "-1");
-            yourParams[4] = new ReportParameter("desde", desde.ToString());
-            yourParams[5] = new ReportParameter("hasta", hasta.ToString());
-            yourParams[6] = new ReportParameter("quecontenga", "ghkgk");
-            yourParams[7] = new ReportParameter("Consulta", strSQL);
-            yourParams[8] = new ReportParameter("sServidorSQL", ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC));
-            yourParams[9] = new ReportParameter("titulo", "ghkj");
-            var output2 = CartaDePorteManager.RebindReportViewer_ServidorExcel(ref ReporteLocal,
-                        @"Listado general de Cartas de Porte (simulando original) con foto 2", yourParams, ref output, false);
-
-            //RebindReportViewer_ServidorExcel explota (al depurar, no al ejecutar) en el setparameters, se queja del xmlserializer. 
-            //RebindReportViewerLINQ_Excel no explota
-
-            System.Diagnostics.Process.Start(output2);
-
-
 
 
         }
