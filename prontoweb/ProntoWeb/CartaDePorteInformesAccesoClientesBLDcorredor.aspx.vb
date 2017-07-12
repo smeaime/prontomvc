@@ -501,19 +501,32 @@ Partial Class CartaDePorteInformesAccesoClientesBLDcorredor
         ErrHandler2.WriteError("BLDCORREDOR " & Convert.ToDateTime(iisValidSqlDate(txtFechaDesde.Text, #1/1/1753#)))
         ErrHandler2.WriteError("BLDCORREDOR " & Convert.ToDateTime(iisValidSqlDate(txtFechaHasta.Text, #1/1/2100#)))
 
-        Dim q As Generic.List(Of CartasConCalada) = CartasLINQlocalSimplificadoTipadoConCalada3(HFSC.Value, _
-                          "", "", "", 1, 3000, _
-                          estadofiltro, "", idVendedor, idCorredor, _
-                          idDestinatario, idIntermediario, _
-                          idRComercial, idArticulo, idProcedencia, idDestino, _
-                                                            IIf(cmbCriterioWHERE.SelectedValue = "todos", CartaDePorteManager.FiltroANDOR.FiltroAND, CartaDePorteManager.FiltroANDOR.FiltroOR), DropDownList2.Text, _
-                          Convert.ToDateTime(iisValidSqlDate(txtFechaDesde.Text, #1/1/1753#)), _
-                          Convert.ToDateTime(iisValidSqlDate(txtFechaHasta.Text, #1/1/2100#)), _
-                          -1, sTitulo, optDivisionSyngenta.SelectedValue, , "").Where( _
-                                        Function(x) clientes.Contains(x.TitularCUIT) Or clientes.Contains(x.IntermediarioCUIT) Or clientes.Contains(x.RComercialCUIT)) _
-                            .ToList()
+        'Dim q As Generic.List(Of CartasConCalada) = CartasLINQlocalSimplificadoTipadoConCalada3(HFSC.Value, _
+        '                  "", "", "", 1, 3000, _
+        '                  estadofiltro, "", idVendedor, idCorredor, _
+        '                  idDestinatario, idIntermediario, _
+        '                  idRComercial, idArticulo, idProcedencia, idDestino, _
+        '                                                    IIf(cmbCriterioWHERE.SelectedValue = "todos", CartaDePorteManager.FiltroANDOR.FiltroAND, CartaDePorteManager.FiltroANDOR.FiltroOR), DropDownList2.Text, _
+        '                  Convert.ToDateTime(iisValidSqlDate(txtFechaDesde.Text, #1/1/1753#)), _
+        '                  Convert.ToDateTime(iisValidSqlDate(txtFechaHasta.Text, #1/1/2100#)), _
+        '                  -1, sTitulo, optDivisionSyngenta.SelectedValue, , "").Where( _
+        '                                Function(x) clientes.Contains(x.TitularCUIT) Or clientes.Contains(x.IntermediarioCUIT) Or clientes.Contains(x.RComercialCUIT)) _
+        '                    .ToList()
 
-        Dim dt2 = q.ToDataTable()
+        'Dim dt2 = q.ToDataTable()
+
+
+
+        Dim dt2 = DataTablePorCliente(HFSC.Value, _
+                    "", "", "", 1, 0, _
+                    estadofiltro, "", idVendedor, idCorredor, _
+                    idDestinatario, idIntermediario, _
+                    idRComercial, idArticulo, idProcedencia, idDestino, _
+                    IIf(cmbCriterioWHERE.SelectedValue = "todos", FiltroANDOR.FiltroAND, FiltroANDOR.FiltroOR), _
+                                    DropDownList2.Text, _
+                    Convert.ToDateTime(iisValidSqlDate(txtFechaDesde.Text, #1/1/1753#)), _
+                    Convert.ToDateTime(iisValidSqlDate(txtFechaHasta.Text, #1/1/2100#)), _
+                    cmbPuntoVenta.SelectedValue, txtQueContenga.Text, Membership.GetUser.UserName, ConexBDLmaster, chkTitular.Checked, chkIntermediario.Checked, chkRemComercial.Checked, chkClienteAuxiliar.Checked, chkCorredor.Checked, chkDestinatario.Checked)
 
 
 
@@ -1202,7 +1215,7 @@ Partial Class CartaDePorteInformesAccesoClientesBLDcorredor
                                     DropDownList2.Text, _
                     Convert.ToDateTime(iisValidSqlDate(txtFechaDesde.Text, #1/1/1753#)), _
                     Convert.ToDateTime(iisValidSqlDate(txtFechaHasta.Text, #1/1/2100#)), _
-                    cmbPuntoVenta.SelectedValue, sTitulo, optDivisionSyngenta.SelectedValue, , , "",
+                    cmbPuntoVenta.SelectedValue, sTitulo, optDivisionSyngenta.SelectedValue, , , txtQueContenga.Text,
              idClienteAuxiliar, -1, 0, "", , "Todos")
 
 

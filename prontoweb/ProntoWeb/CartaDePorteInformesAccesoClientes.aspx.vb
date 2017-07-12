@@ -40,6 +40,13 @@ Partial Class CartaDePorteInformesAccesoClientes
         HFSC.Value = GetConnectionString(Server, Session)
         HFIdObra.Value = IIf(IsDBNull(Session(SESSIONPRONTO_glbIdObraAsignadaUsuario)), -1, Session(SESSIONPRONTO_glbIdObraAsignadaUsuario))
 
+
+        If HFSC.Value = "" Then
+            Response.Redirect("~/SeleccionarEmpresa.aspx")
+        End If
+
+
+
         bRecargarInforme = False
 
         'Report Viewer Error - Parameter name: panelsCreated[1]   http://ajaxcontroltoolkit.codeplex.com/workitem/26778
@@ -547,7 +554,7 @@ Partial Class CartaDePorteInformesAccesoClientes
                                                DropDownList2.Text, _
                                Convert.ToDateTime(iisValidSqlDate(txtFechaDesde.Text, #1/1/1753#)), _
                                Convert.ToDateTime(iisValidSqlDate(txtFechaHasta.Text, #1/1/2100#)), _
-                               cmbPuntoVenta.SelectedValue, Session(SESSIONPRONTO_UserName), ConexBDLmaster(), _
+                               cmbPuntoVenta.SelectedValue, txtQueContenga.Text, Session(SESSIONPRONTO_UserName), ConexBDLmaster(), _
             chkTitular.Checked, chkIntermediario.Checked, chkRemComercial.Checked, chkClienteAuxiliar.Checked, chkCorredor.Checked, chkDestinatario.Checked)
 
 
@@ -1153,7 +1160,7 @@ Partial Class CartaDePorteInformesAccesoClientes
                                         DropDownList2.Text, _
                         Convert.ToDateTime(iisValidSqlDate(txtFechaDesde.Text, #1/1/1753#)), _
                         Convert.ToDateTime(iisValidSqlDate(txtFechaHasta.Text, #1/1/2100#)), _
-                        cmbPuntoVenta.SelectedValue, Membership.GetUser.UserName, ConexBDLmaster, chkTitular.Checked, chkIntermediario.Checked, chkRemComercial.Checked, chkClienteAuxiliar.Checked, chkCorredor.Checked, chkDestinatario.Checked)
+                        cmbPuntoVenta.SelectedValue, txtQueContenga.Text, Membership.GetUser.UserName, ConexBDLmaster, chkTitular.Checked, chkIntermediario.Checked, chkRemComercial.Checked, chkClienteAuxiliar.Checked, chkCorredor.Checked, chkDestinatario.Checked)
 
 
 

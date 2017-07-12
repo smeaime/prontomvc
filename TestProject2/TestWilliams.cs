@@ -854,9 +854,210 @@ namespace ProntoMVC.Tests
 
 #endregion
 
+        [TestMethod]
+        public void CampoEditableDeClientesRelacionadosAlUsuarioParaTirarInforme_42752()
+        {
+
+            //probar fyo con mi usuario
+            //o hago top, o un select mas angosto, o un filtro de fecha
+
+
+            //probe con coma, pipe, punto y coma y nunca me funciona. ese usuario el 1/6 debería traer 
+            //la cp 561439022 que es de JACIUK EUGENIO FELIPE 20-08494702-5 (titular)
+
+            //Acá, mismo usuario, password y cuits, probando en Enero, debería traer la CP 558600767, donde 20 - 08494702 - 5(JACIUK EUGENIO FELIPE) es titular
+
+            //string usuario = "RODRIGORIOS"; 
+
+            string QueContenga2 = "556224458"; //"558575010";
+
+            string usuario = "Mariano";
+            var rs = "FUTUROS Y OPCIONES .COM";
+            var desde = new DateTime(2017, 1, 1);
+            var hasta = new DateTime(2017, 1, 31);
+            var estadofiltro = CartaDePorteManager.enumCDPestado.TodasMenosLasRechazadas;
+
+
+            var idVendedor = -1;
+            var idCorredor = SQLdinamico.BuscaIdVendedorPreciso(rs, SC);
+            var idDestinatario = -1;
+            var idIntermediario = -1;
+            var idRComercial = -1;
+            var idArticulo = -1;
+            var idProcedencia = -1;
+            var idDestino = -1;
 
 
 
+
+
+
+            string sql = CartaDePorteManager.DataTablePorClienteSQL(SC, "", "", "", 0, 9999999,
+                                estadofiltro, rs, idVendedor, idCorredor,
+                               idDestinatario, idIntermediario,
+                               idRComercial, idArticulo, idProcedencia, idDestino
+                                , 0, "Ambas"
+                                , desde, hasta,
+                                0,QueContenga2, usuario, scbdlmasterappconfig, true, true, true, false, false, false);
+
+
+
+
+
+            ReportViewer ReporteLocal = new Microsoft.Reporting.WebForms.ReportViewer();
+            string output = @"C:\Users\Administrador\Desktop\Informe" + DateTime.Now.ToString("ddMMMyyyy_HHmmss") + ".xls";
+            ReportParameter[] yourParams = new ReportParameter[10];
+            yourParams[0] = new ReportParameter("webservice", "");
+            yourParams[1] = new ReportParameter("sServidor", "");
+            yourParams[2] = new ReportParameter("idArticulo", "-1");
+            yourParams[3] = new ReportParameter("idDestino", "-1");
+            yourParams[4] = new ReportParameter("desde", desde.ToString());
+            yourParams[5] = new ReportParameter("hasta", hasta.ToString());
+            yourParams[6] = new ReportParameter("quecontenga", "ghkgk");
+            yourParams[7] = new ReportParameter("Consulta", sql);
+            yourParams[8] = new ReportParameter("sServidorSQL", ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC));
+            yourParams[9] = new ReportParameter("titulo", "ghkj");
+            string sss = CartaDePorteManager.RebindReportViewer_ServidorExcel(ref ReporteLocal,
+                        @"Listado general de Cartas de Porte (simulando original) con foto 2", yourParams, ref output, false);
+
+
+
+            System.Diagnostics.Process.Start(output);
+
+
+
+        }
+
+
+
+
+
+
+        [TestMethod]
+
+        public void generar_mas_angosto()
+        {
+
+            // En el periodo anterior sigue habiendo bnastante diferencia
+            // Si filtra por "entrega", aparecen cartas en "exportacion" porque de esas familias hay "Originales" en ese modo
+
+
+            ReportParameter p2 = null;
+
+            var desde = new DateTime(2017, 5, 10);
+            var hasta = new DateTime(2017, 5, 12);
+            var desdeAnt = new DateTime(2015, 11, 1); //nov
+            var hastaAnt = new DateTime(2016, 5, 31); //mayo
+            //desde = desdeAnt;
+            //hasta = hastaAnt;
+
+            var MinimoNeto = 0;
+            var topclie = 99999;
+            var pv = -1;
+            var ModoExportacion = "Entregas";
+            CartaDePorteManager.enumCDPestado estado = CartaDePorteManager.enumCDPestado.DescargasMasFacturadas; //CartaDePorteManager.enumCDPestado.Todas;
+
+
+
+            string output3 = "";
+            var dr = CDPMailFiltrosManager2.TraerMetadata(SC, -1).NewRow();
+            dr["ModoImpresion"] = "Speed"; // este es el excel angosto con adjunto html angosto ("Listado general de Cartas de Porte (simulando original) con foto 2 .rdl"). Lo que quieren es el excel ANCHO manteniendo el MISMO html. 
+            dr["Emails"] = "mscalella911@gmail.com";
+            dr["Vendedor"] = -1;
+            dr["CuentaOrden1"] = -1;
+            dr["CuentaOrden2"] = -1;
+            dr["IdClienteAuxiliar"] = -1; ;
+            dr["Corredor"] = -1;
+            dr["Entregador"] = -1;
+            dr["Destino"] = -1;
+            dr["Procedencia"] = -1;
+            dr["FechaDesde"] = desde;
+            dr["FechaHasta"] = hasta;
+            dr["AplicarANDuORalFiltro"] = 0; // CartaDePorteManager.FiltroANDOR.FiltroOR;
+            dr["Modo"] = ModoExportacion;
+            dr["EnumSyngentaDivision"] = "";
+            dr["EsPosicion"] = false;
+            dr["IdArticulo"] = -1;
+
+            string titulo = "";
+            string sError = "", sError2 = "";
+            string inlinePNG = DirApp + @"\imagenes\Unnamed.png";
+            string inlinePNG2 = DirApp + @"\imagenes\twitterwilliams.jpg";
+            long lineas = 0;
+            int tiemposql = 0;
+            int tiempoinf = 0;
+
+            output3 = CartaDePorteManager.generarNotasDeEntregaConReportViewer_ConServidorDeInformes(SC, desde, hasta, dr, estado, ref lineas, ref titulo, inlinePNG, pv, ref tiemposql, ref tiempoinf, false, null, 9999999);
+
+
+            System.Diagnostics.Process.Start(output3);
+
+        }
+
+
+
+
+
+        [TestMethod]
+        public void syngenta_webservice_42732()
+        {
+            // mandar una tanda
+
+            int idcliente = 4333; //syngenta
+
+            var dbcartas = CartaDePorteManager.ListadoSegunCliente(SC, idcliente, new DateTime(2016, 11, 1), new DateTime(2016, 11, 30), CartaDePorteManager.enumCDPestado.DescargasMasFacturadas);
+
+            var s = new ServicioCartaPorte.servi();
+
+
+
+
+            var endpointStr = ConfigurationManager.AppSettings["SyngentaServiceEndpoint"]; //  @"https://oasis-pi-nonprod.syngenta.com/uat/XISOAPAdapter/MessageServlet?senderParty=&senderService=Srv_BIT_BarterService&receiverParty=&receiverService=&interface=LoadDeclarationSoap_send_out_asy&interfaceNamespace=urn:broker:o2c:s:global:delivery:loaddeclaration:100";
+            var UserName = ConfigurationManager.AppSettings["SyngentaServiceUser"];
+            var Password = ConfigurationManager.AppSettings["SyngentaServicePass"];
+
+            var x = s.WebServiceSyngenta(dbcartas, endpointStr, UserName, Password);
+
+            // marcar fecha de cartas enviadas, loguar tanda de cartas enviadas para que 
+            // sepan qué excel tienen que generar (el webservice solo manda un mail si hubo error, no tengo notificacion de otro tipo)
+
+            // pagina de log o por lo menos de estado del envio de datos a syngenta.
+            //                 noenviadas=Func();
+
+
+            string DIRFTP = DirApp + @"\DataBackupear\";
+            string nombre = DIRFTP + "Syngenta_" + DateTime.Now.ToString("ddMMMyyyy_HHmmss") + ".xlsx";
+
+
+            s.GenerarExcelSyngentaWebService(x, nombre); // 3 horas 
+
+            System.Diagnostics.Process.Start(nombre);
+
+            return;
+
+
+            s.CopyFileFTP(nombre, "username", "password#");   // 4 horas
+
+            //return Log; // pagina de log o por lo menos de estado del envio de datos a syngenta. 3 horas 
+
+
+            /*
+            . El Web Service no devolverá ningún dato que haga referencia en cuanto a si se procesó bien o tuvo errores la interface.
+La interface será procesa por Syngenta y si la misma no puede ser procesada correctamente por contener errores en los datos 
+    u otra validación; se enviara un mail con el detalle del procesamiento y error al mail indicado por el entregador para esta 
+            interface como así también dicho mail será enviado de la misma forma al responsable de Canje por parte de Syngenta.
+             * 
+             * 
+             * */
+
+
+            // que pasa si alguien anula una carta de syngenta?
+            //carta.anular();
+            // -bueno, el que levanta la lista de cartas tiene que comparar la fecha de enviado con la de ultima modificacion
+
+
+
+        }
 
 
 
@@ -866,7 +1067,7 @@ namespace ProntoMVC.Tests
         {
 
 
-          var c = CartaDePorteManager.GetItem(SC, 1372987);
+            var c = CartaDePorteManager.GetItem(SC, 1372987);
             c.SubnumeroVagon = 222;
             string ms = "";
             CartaDePorteManager.Save(SC, c, 1, "", false, ref ms);
@@ -961,6 +1162,7 @@ namespace ProntoMVC.Tests
 
 
 
+        
 
 
         [TestMethod]
@@ -1004,7 +1206,7 @@ namespace ProntoMVC.Tests
                                idRComercial, idArticulo, idProcedencia, idDestino
                                 , 0, "Ambas"
                                 , desde, hasta,
-                                0, usuario, scbdlmasterappconfig, true, true, true, false, false, false);
+                                0,"", usuario, scbdlmasterappconfig, true, true, true, false, false, false);
 
 
 
