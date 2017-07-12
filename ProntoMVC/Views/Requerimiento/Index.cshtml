@@ -61,9 +61,9 @@
                         Número
                     </ul>
                 </div>*@
-                        <input id="BuscadorListado" type="text" class="" placeholder="Filtrar" style="" />
-                        @if (Roles.IsUserInRole(ViewBag.NombreUsuario, "SuperAdmin"))
+                        @if (Roles.IsUserInRole(ViewBag.NombreUsuario, "SuperAdmin") && false)
                         {
+                            <input id="BuscadorListado" type="text" class="" placeholder="Filtrar" style="" />
                             <select id="campos " class="span4">
                                 <option>Número</option>
                                 @* <option>Fecha</option>*@
@@ -120,28 +120,35 @@
         "></table>
         <div id="ListaPager" class="scroll" style="text-align: center;">
         </div>
-        <input type="button" class="btn btn-small" id="addData" value="Generar en Word" />
+        @*<input type="button" class="btn btn-small" id="addData" value="Generar en Word" />
         <input type="button" class="btn btn-small" id="edtData" value="marcar RM como impresa" />
         <input type="button" class="btn btn-small" id="delData" value="desmarcar rm como impresa" />
         <input type="button" class="btn btn-small" id="delData" value="Enviar RM a proveedores por correo" />
-        <input type="button" class="btn btn-small" id="delData" value="Enviar RM a proveedores por fax" />
+        <input type="button" class="btn btn-small" id="delData" value="Enviar RM a proveedores por fax" />*@
 
         <div class="contextMenu" id="myMenu1" style="display:none">
             <ul style="width: 200px">
                 <li id="add">
-                    <span class="ui-icon ui-icon-plus" style="float:left"></span>
+                    @*<span class="ui-icon ui-icon-plus" style="float:left"></span>*@
                     <span style="font-size:11px; font-family:Verdana">Generar en Word</span>
                 </li>
                 <li id="edit">
-                    <span class="ui-icon ui-icon-pencil" style="float:left"></span>
+                    @*<span class="ui-icon ui-icon-pencil" style="float:left"></span>*@
                     <span style="font-size:11px; font-family:Verdana">Marcar RM como impresa</span>
                 </li>
                 <li id="del">
-                    <span class="ui-icon ui-icon-trash" style="float:left"></span>
+                    @*<span class="ui-icon ui-icon-trash" style="float:left"></span>*@
                     <span style="font-size:11px; font-family:Verdana">Desmarcar rm como impresa</span>
                 </li>
 
-
+                <li id="del">
+                    @*<span class="ui-icon ui-icon-trash" style="float:left"></span>*@
+                    <span style="font-size:11px; font-family:Verdana">Enviar RM a proveedores por correo</span>
+                </li>
+                <li id="del">
+                    @*<span class="ui-icon ui-icon-trash" style="float:left"></span>*@
+                    <span style="font-size:11px; font-family:Verdana">Enviar RM a proveedores por fax</span>
+                </li>
             </ul>
         </div>
 

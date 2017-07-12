@@ -499,7 +499,9 @@ Public Class CartaDePorteManager
             ByVal AplicarANDuORalFiltro As FiltroANDOR,
             ByVal ModoExportacion As String,
             ByVal fechadesde As DateTime, ByVal fechahasta As DateTime,
-            ByVal puntoventa As Integer, usuario As String, ConexBDLmaster As String,
+               ByVal puntoventa As Integer,
+            ByVal QueContenga2 As String,
+             usuario As String, ConexBDLmaster As String,
             chkTitular As Boolean,
              chkIntermediario As Boolean,
              chkRemComercial As Boolean,
@@ -514,7 +516,7 @@ Public Class CartaDePorteManager
 
         Try
 
-            Dim strsql = DataTablePorClienteSQL(SC, ColumnaParaFiltrar, TextoParaFiltrar, sortExpression, startRowIndex, maximumRows, estado, QueContenga, idVendedor, idCorredor, idDestinatario, idIntermediario, idRemComercial, idArticulo, idProcedencia, idDestino, AplicarANDuORalFiltro, ModoExportacion, fechadesde, fechahasta, puntoventa, usuario, ConexBDLmaster, chkTitular,
+            Dim strsql = DataTablePorClienteSQL(SC, ColumnaParaFiltrar, TextoParaFiltrar, sortExpression, startRowIndex, maximumRows, estado, QueContenga, idVendedor, idCorredor, idDestinatario, idIntermediario, idRemComercial, idArticulo, idProcedencia, idDestino, AplicarANDuORalFiltro, ModoExportacion, fechadesde, fechahasta, puntoventa, QueContenga2, usuario, ConexBDLmaster, chkTitular,
              chkIntermediario,
              chkRemComercial,
              chkClienteAuxiliar,
@@ -598,7 +600,9 @@ Public Class CartaDePorteManager
             ByVal AplicarANDuORalFiltro As FiltroANDOR,
             ByVal ModoExportacion As String,
             ByVal fechadesde As DateTime, ByVal fechahasta As DateTime,
-            ByVal puntoventa As Integer, usuario As String, ConexBDLmaster As String,
+            ByVal puntoventa As Integer,
+            ByVal QueContenga2 As String,
+usuario As String, ConexBDLmaster As String,
              chkTitular As Boolean,
              chkIntermediario As Boolean,
              chkRemComercial As Boolean,
@@ -632,7 +636,7 @@ Public Class CartaDePorteManager
                                ModoExportacion, _
             fechadesde, _
                  fechahasta, _
-                puntoventa, "", "Ambas", , , ,
+                puntoventa, "", "Ambas", , , QueContenga2,
          -1, -1, 0, "", , "Todos")
 
 
@@ -670,7 +674,7 @@ Public Class CartaDePorteManager
         Else
 
 
-       
+
 
             agrup = strsql 'el WITH CTE es costosísimo. si querés seguir trayendo solo una carta por familia, llamá a la fSQL
 
@@ -4214,6 +4218,21 @@ Public Class CartaDePorteManager
                                iisValidSqlDate(fechadesde, #1/1/1753#),
                               iisValidSqlDate(fechahasta, #1/1/2100#),
                                puntoventa, titulo, EnumSyngentaDivision, , contrato, , IdClienteAuxiliar, AgrupadorDeTandaPeriodos)
+
+
+
+                strSQL = "SELECT CDP.IdCartaDePorte, CDP.NumeroCartaDePorte, CDP.IdUsuarioIngreso, CDP.FechaIngreso, CDP.Anulada, CDP.FechaAnulacion, CDP.Observaciones, CDP.Cantidad, CDP.Cupo, CDP.NetoProc, CDP.BrutoPto, CDP.TaraPto, CDP.NetoPto, CDP.Acoplado, CDP.Humedad, CDP.Merma,HumedadDesnormalizada, CDP.NetoFinal, CDP.CTG   ,Patente   ,CDP.Contrato , CDP.FechaDeCarga, CDP.FechaVencimiento,  CDP.SubnumeroVagon , CDP.FechaArribo  , CDP.CEE     ,CDP.FechaDescarga      ,CDP.Hora      ,CDP.NRecibo      ,CDP.CalidadDe      ,CDP.TaraFinal      ,CDP.BrutoFinal , TitularDesc, TitularCUIT, 	IntermediarioDesc,              IntermediarioCUIT, 		RComercialDesc,             RComercialCUIT, 		CorredorDesc,              CorredorCUIT, DestinatarioDesc,DestinatarioCUIT             ,Producto, 			TransportistaCUIT,             TransportistaDesc, 			ChoferCUIT, 			ChoferDesc,            ProcedenciaDesc, 		ProcedenciaCodigoPostal, 		ProcedenciaCodigoONCAA,           ProcedenciaProvinciaDesc,       DestinoDesc   ,  EntregadorDesc,Cosecha, CalidadDesc,  DestinoCodigoONCAA, KmARecorrer	,Tarifa ,EstablecimientoDesc    ,CDP.PathImagen      ,CDP.PathImagen2     ,ClienteAuxiliarDesc,CorredorDesc2  CorredorCUIT2,ClientePagadorFleteDesc, ProcedenciaProvinciaPartido, ProcedenciaPartidoNormalizadaCodigo, DestinoProvinciaDesc, ProcedenciaPartidoNormalizada, EntregadorCUIT, CodigoAFIP, MermaVolatil          FROM (" & strSQL & ") AS CDP"
+
+
+
+
+
+
+                      
+
+
+
+
 
 
 
@@ -15672,7 +15691,7 @@ Public Class CartaDePorteManager
                                         idCorredor, idDestinatario, idIntermediario, idRComercial,
                                         idArticulo, idProcedencia, idDestino, FiltroANDOR.FiltroOR, "Ambos",
                                         fechadesde, fechahasta, 0,
-                                        Nothing, False, Nothing, Nothing, Nothing,
+                                        Nothing, False, Nothing, Nothing, idClienteAuxiliar,
                                          Nothing, Nothing, Nothing, Nothing)
                             Select c).Take(limitedecartas).ToList
             Return dbcartas

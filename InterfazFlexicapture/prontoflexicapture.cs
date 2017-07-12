@@ -3715,7 +3715,13 @@ Formato localidad-provincia	destination	x
                 xmlcp.carta_porte = (dbcp.NumeroCartaDePorte ?? 0).NullSafeToString();
                 xmlcp.action = "I";
                 xmlcp.CTG_number = dbcp.CTG.NullSafeToString();
+
+
                 xmlcp.corredor_CUIT = dbcp.CorredorCUIT.Replace("-", "");
+                if (dbcp.CorredorDesc == "DIRECTO" && dbcp.CorredorCUIT2 != "") 
+                    xmlcp.corredor_CUIT = dbcp.CorredorCUIT2.Replace("-", "");
+
+
                 xmlcp.delivery_date = dbcp.FechaDescarga.Value.ToString("ddMMyyyy");
                 xmlcp.delivery_type = "CP";
                 xmlcp.destinatario = dbcp.DestinatarioDesc;
@@ -3858,6 +3864,14 @@ Formato localidad-provincia	destination	x
                 //        success = true;
 
 
+            }
+            catch (System.ServiceModel.ProtocolException ex2)
+            {
+                // esto es lo normal. y que el mensaje sea  "Additional information: La operación unidireccional devolvió un mensaje no Null con Action=''."
+                if (ex2.Message == "La operación unidireccional devolvió un mensaje no Null con Action=\".\"") 
+                    ErrHandler2.WriteError("Todo ok!"); 
+                else  
+                    ErrHandler2.WriteError(ex2);
             }
             catch (Exception ex)
             {
@@ -4466,7 +4480,7 @@ Formato localidad-provincia	destination	x
 
 
 
-            
+
             var qaprox = (from n in db.CartaPorteNormasCalidads
                           where (n.ResultadoDesde <= resultado
                                  && (idrubro == n.IdCartaPorteRubroCalidad)
@@ -4479,10 +4493,10 @@ Formato localidad-provincia	destination	x
 
 
 
-            decimal pos=0;
+            decimal pos = 0;
             var rangopri = qaprox.Where(n => n.ResultadoDesde >= pos).OrderBy(n => n.ResultadoDesde).FirstOrDefault();
-             pos = rangopri.ResultadoHasta ?? 0;
-           
+            pos = rangopri.ResultadoHasta ?? 0;
+
 
 
             var hasta = 0;
@@ -4504,7 +4518,7 @@ Formato localidad-provincia	destination	x
 
                 rebtotal += rebajarango;
 
-                pos = (posrango.ResultadoHasta ?? 0 )+ 0.001M;
+                pos = (posrango.ResultadoHasta ?? 0) + 0.001M;
             } while (pos < resultado);
 
 
