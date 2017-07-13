@@ -762,3 +762,11 @@ ASP.NET session has expired or could not be found
    en System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
 Microsoft.ReportViewer.WebForms
 __________________________
+
+Log Entry : 
+07/12/2017 11:48:59
+Error in: http://localhost:58911/Reserved.ReportViewerWebControl.axd?OpType=SessionKeepAlive&ControlID=6668e5990ba144c390d3a3f5e7e3134d. Error Message:System.ComponentModel.Win32Exception
+Tiempo de espera de la operación de espera agotado
+
+
+__________________________

@@ -3255,8 +3255,7 @@
 
 
         function sumarTotalOtrasMerma() {
-            return;
-
+           
             var tot = parseFloat($('#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadGranosExtranosMerma').val()) +
                         parseFloat($('#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadQuebradosMerma').val()) +
                         parseFloat($('#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadGranosDanadosMerma').val()) +

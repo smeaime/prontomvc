@@ -1212,7 +1212,7 @@ Partial Class CartaDePorteInformesAccesoClientes
             End If
 
         Catch ex As Exception
-            Dim ms = ex.ToString & "   " & dt.Rows.Count() & " " & dt.Rows(0).Item("IdCartaDePorte") & " " & dt.Rows(0).Item("NumeroCDP")
+            Dim ms = ex.ToString & "   " & dt.Rows.Count() & " " & dt.Rows(0).Item("IdCartaDePorte") '& " " & dt.Rows(0).Item("NumeroCDP") 
             MandarMailDeError(ms)
             ErrHandler2.WriteError(ms)
 
