@@ -506,6 +506,20 @@
 
 
 
+                    <asp:TemplateField HeaderText="Calada + Balanza">
+                        <EditItemTemplate>
+                            <asp:TextBox ID="txtPrecioComboCaladaMasBalanza" Width="40px" runat="server" Text='<%# Bind("PrecioComboCaladaMasBalanza", "{0:F3}")%>'></asp:TextBox>
+                        </EditItemTemplate>
+                        <FooterTemplate>
+                            <asp:TextBox ID="txtNewPrecioComboCaladaMasBalanza" Width="40px" runat="server"></asp:TextBox>
+                        </FooterTemplate>
+                        <ItemTemplate>
+                            <asp:Label ID="lblPrecioComboCaladaMasBalanza" Width="40px" runat="server" Text='<%# Bind("PrecioComboCaladaMasBalanza", "{0:F3}")%>'></asp:Label>
+                        </ItemTemplate>
+                    </asp:TemplateField>
+
+                                        
+
                     <%-- --%>
                     <%-- --%>
                     <%-- --%>

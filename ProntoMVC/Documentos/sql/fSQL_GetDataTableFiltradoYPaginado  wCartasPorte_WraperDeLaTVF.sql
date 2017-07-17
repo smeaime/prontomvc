@@ -501,6 +501,8 @@ where 1=1
 				(@ModoExportacion = 'Entregas' And isnull(CDP.Exporta, 'NO') = 'NO')  
 				OR
 				(@ModoExportacion = 'Export' And isnull(CDP.Exporta, 'NO') = 'SI')
+				OR
+				@ModoExportacion is null or (@ModoExportacion = 'Ambos' or @ModoExportacion = 'Ambas') Or (@ModoExportacion = 'Todos') 
 			)
 		)
 

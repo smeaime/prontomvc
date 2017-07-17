@@ -8032,6 +8032,7 @@
     <Property Name="PrecioVagonesBalanzaExportacion" Type="Decimal" Precision="19" Scale="4" />
     <Property Name="PrecioVagonesCaladaExportacion" Type="Decimal" Precision="19" Scale="4" />
     <Property Name="PrecioBuquesCalada" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="PrecioComboCaladaMasBalanza" Type="Decimal" Precision="19" Scale="4" />
   </EntityType>
   <Association Name="FK_ListasPreciosDetalle_Articulos">
     <End Type="DemoProntoModel.Articulo" Role="Articulo" Multiplicity="0..1" />
