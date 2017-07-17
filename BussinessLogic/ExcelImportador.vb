@@ -2065,14 +2065,16 @@ Public Class ExcelImportadorManager
 
 
                         If actua(.ObservacionesSituacion, r(35)) Then log += "ObservacionesSituacion; "
+                        actua(.Observaciones, r(35))
+
                         .FechaActualizacionAutomatica = DateTime.Now
                     End If
-                    
 
 
 
 
-                    
+
+
 
 
                     'http://consultas.bdlconsultores.com.ar/AdminTest/template/desarrollo/Consulta.php?IdReclamo=37950&SinMenu=1

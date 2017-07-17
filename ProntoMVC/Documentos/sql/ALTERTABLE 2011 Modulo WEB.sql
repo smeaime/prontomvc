@@ -2086,3 +2086,20 @@ INSERT  INTO [ColaCorreosComprobantes] ( IdTipoComprobante,IdComprobante)  VALUE
 select * from aspnet_Users
 select * from UserDatosExtendidos
 select * from aspnet_Membership
+
+
+
+
+--exec  sp_help 'listaspreciosdetalle'
+alter table listaspreciosdetalle add 
+	PrecioComboCaladaMasBalanza  money null
+go
+
+
+
+update
+select * from listaspreciosdetalle where idlistaprecios=2219
+
+
+
+

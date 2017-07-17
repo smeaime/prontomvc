@@ -555,6 +555,9 @@ Partial Class ListasPrecios
                 dr.Item("PrecioVagonesCaladaExportacion") = Val(TextoWebControl(.FindControl("txtNewPrecioVagonesCaladaExportacion")))
                 dr.Item("PrecioVagonesBalanzaExportacion") = Val(TextoWebControl(.FindControl("txtNewPrecioVagonesBalanzaExportacion")))
 
+
+                dr.Item("PrecioComboCaladaMasBalanza") = Val(TextoWebControl(.FindControl("txtNewPrecioComboCaladaMasBalanza")))
+
                 'dr.Item("PrecioCaladaLocal") = Val(TextoWebControl(.Cells(6).Controls(0)))
                 'dr.Item("PrecioCaladaExportacion") = Val(TextoWebControl(.Cells(7).Controls(0)))
                 'dr.Item("PrecioDescargaLocal") = Val(TextoWebControl(.Cells(8).Controls(0)))
@@ -625,6 +628,7 @@ Partial Class ListasPrecios
                     Or iisNull(dr.Item("PrecioVagonesCalada"), 0) <> Val(TextoWebControl(.FindControl("txtPrecioVagonesCaladaExportacion"))) _
                     Or iisNull(dr.Item("PrecioVagonesBalanza"), 0) <> Val(TextoWebControl(.FindControl("txtPrecioVagonesBalanzaExportacion"))) _
                     Or iisNull(dr.Item("PrecioBuquesCalada"), 0) <> Val(TextoWebControl(.FindControl("txtPrecioCaladaBuques"))) _
+                    Or iisNull(dr.Item("PrecioComboCaladaMasBalanza"), 0) <> Val(TextoWebControl(.FindControl("txtPrecioComboCaladaMasBalanza"))) _
                     Then
 
                     dr.Item("PrecioBuquesCalada") = Val(TextoWebControl(.FindControl("txtPrecioCaladaBuques")))
@@ -640,6 +644,7 @@ Partial Class ListasPrecios
                     dr.Item("PrecioVagonesCaladaExportacion") = Val(TextoWebControl(.FindControl("txtPrecioVagonesCaladaExportacion")))
                     dr.Item("PrecioVagonesBalanzaExportacion") = Val(TextoWebControl(.FindControl("txtPrecioVagonesBalanzaExportacion")))
 
+                    dr.Item("PrecioComboCaladaMasBalanza") = Val(TextoWebControl(.FindControl("txtPrecioComboCaladaMasBalanza")))
 
                     ListasPreciosItemManager.Update(HFSC.Value, dt)
                     CartaDePorteManager.ReasignoTarifaSubcontratistasDeTodasLasCDPsDescargadasSinFacturarYLasGrabo(HFSC.Value, Session(SESSIONPRONTO_glbIdUsuario), Session(SESSIONPRONTO_UserName), gvMaestro.SelectedDataKey.Value)
