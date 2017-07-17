@@ -855,6 +855,365 @@ namespace ProntoMVC.Tests
 #endregion
 
 
+
+
+        [TestMethod]
+        public void SincroDiazRiganti_42798()
+        {
+
+            string sErrores = "", sTitulo = "";
+            // LinqCartasPorteDataContext db = null;
+
+
+
+
+            int registrosf = 0;
+
+            var output = SincronismosWilliamsManager.GenerarSincro("Diaz Riganti", ref sErrores, SC, "dominio", ref sTitulo
+                                , CartaDePorteManager.enumCDPestado.DescargasMasFacturadas,
+                    "", -1, -1,
+                -1, -1,
+                -1, -1, -1, -1,
+                CartaDePorteManager.FiltroANDOR.FiltroOR, "Ambos",
+                new DateTime(2014, 1, 2), new DateTime(2014, 1, 2),
+                0, "Ambas", false, "", "", -1, ref registrosf);
+
+
+
+            //File.Copy(output, @"C:\Users\Administrador\Desktop\" + Path.GetFileName(output), true);
+            System.Diagnostics.Process.Start(output);
+        }
+
+
+
+
+
+
+        [TestMethod]
+        public void loginEnUrenport3_42773()
+        {
+            var s = new ServicioCartaPorte.servi();
+            s.UrenportSelenium();
+            s.CerealnetSelenium();
+
+            return;
+
+            IWebDriver browser = new FirefoxDriver();
+
+
+            //////////////////////////////////////////////////////////////////////////////
+
+
+
+
+            browser.Navigate().GoToUrl("http://extranet.urenport.com/login.aspx");
+
+            new WebDriverWait(browser, TimeSpan.FromSeconds(10)).Until(ExpectedConditions.ElementExists((By.Id("Logins_UserName"))));
+
+
+            var user_name2 = browser.FindElement(By.Name("Logins_UserName"));
+            user_name2.SendKeys("williams");
+
+            var password2 = browser.FindElement(By.Name("Logins_Password"));
+            password2.SendKeys("santiago1177");
+
+
+            var button2 = browser.FindElement(By.Name("Logins_LoginButton"));
+            button2.Click();
+
+            //if os.path.isfile(filename):            os.remove(filename)
+            //WebDriverWait(browser, 20).until(            EC.presence_of_element_located((By.ID, "CPHPrincipal_btnExcel")))
+            //new WebDriverWait(browser, TimeSpan.FromSeconds(10));
+            var aaaad = new WebDriverWait(browser, TimeSpan.FromSeconds(20)).Until(ExpectedConditions.ElementExists((By.Id("ContentPlaceHolder1_GridView2"))));
+
+            var button3 = browser.FindElement(By.Name("ContentPlaceHolder1_ASPxMenu2_DXI0_T"));
+            button3.Click();
+
+
+
+
+
+            //bashCommand = "ren Urenport.xls \"Urenport_%time:~0,2%%time:~3,2%-%DATE:/=%.xls\" "
+            //os.system(bashCommand)
+
+            //sleep(2)
+
+            //bashCommand = "robocopy E:\SistemaPronto\Robot\  E:\Sites\ProntoTesting\Temp\Pegatinas *.xls /MOV /LOG+:LogRobot.txt "
+            //os.system(bashCommand)
+
+
+
+        }
+
+        [TestMethod]
+        public void loginEnCerealnet2_42773()
+        {
+
+            // el geckodriver tiene q estar en el path. actualizar version firefox (version 48)
+
+            IWebDriver browser = new FirefoxDriver();
+            /*
+            //Notice navigation is slightly different than the Java version
+            //This is because 'get' is a keyword in C#
+            driver.Navigate().GoToUrl("http://www.google.com/");
+            IWebElement query = driver.FindElement(By.Name("q"));
+            query.SendKeys("Cheese");
+            System.Console.WriteLine("Page title is: " + driver.Title);
+            driver.Quit();
+
+            */
+
+
+
+            browser.Navigate().GoToUrl("http://entregadores.cerealnet.com/");
+
+            // WebDriverWait(browser, 10).until(EC.presence_of_element_located((By.ID, "txtUsuario")))
+            new WebDriverWait(browser, TimeSpan.FromSeconds(10)).Until(ExpectedConditions.ElementExists((By.Id("txtUsuario"))));
+
+
+            var user_name = browser.FindElement(By.Name("txtUsuario"));
+            user_name.SendKeys("williams");
+
+            var password = browser.FindElement(By.Name("txtPass"));
+            password.SendKeys("santiago1177");
+
+
+            var button = browser.FindElement(By.Name("btnInicio"));
+            button.Click();
+
+            //if os.path.isfile(filename):            os.remove(filename)
+            //WebDriverWait(browser, 20).until(            EC.presence_of_element_located((By.ID, "CPHPrincipal_btnExcel")))
+            //new WebDriverWait(browser, TimeSpan.FromSeconds(10));
+            var aaaa = new WebDriverWait(browser, TimeSpan.FromSeconds(20)).Until(ExpectedConditions.ElementExists((By.Id("CPHPrincipal_btnExcel"))));
+
+            aaaa.Click();
+
+            //button = browser.FindElement(By.Name("CPHPrincipal_btnExcel"));
+            //button.Click();
+
+
+
+
+
+
+
+
+
+            /*
+
+                        #!/usr/bin/python
+            # -*- coding: utf-8 -*-
+            import os
+            from time import sleep
+            from selenium import webdriver
+            from pyvirtualdisplay import Display
+            from selenium.webdriver.support.ui import WebDriverWait
+            from selenium.webdriver.support import expected_conditions as EC
+            from selenium.webdriver.common.by import By
+
+
+            def download_excel(silent=True):
+                if silent:
+                    display = Display(visible=0, size=(1366, 768))
+                    display.start()
+                 #Instalar Firefox
+                # instalar el ejecutable geckodriver de https://github.com/mozilla/geckodriver/releases
+                binpath = 'E:/SistemaPronto/Robot' # Directorio donde está geckodriver
+                os.environ["PATH"] += os.pathsep + binpath
+
+                filename = 'Urenport.xls'
+
+                profile = webdriver.FirefoxProfile()
+                profile.set_preference('browser.download.folderList', 2)    # 2 = custom location
+                profile.set_preference('browser.download.manager.showWhenStarting', False)
+                profile.set_preference('browser.download.dir', os.getcwd())
+                profile.set_preference('browser.helperApps.neverAsk.saveToDisk', "application/ms-excel;application/xls;text/csv;application/vnd.ms-excel")
+                profile.set_preference('browser.helperApps.alwaysAsk.force', False)
+                browser = webdriver.Firefox(firefox_profile=profile)
+                try:
+                    browser.get('http://entregadores.cerealnet.com/')
+
+                    WebDriverWait(browser, 10).until(
+                        EC.presence_of_element_located((By.ID, "txtUsuario")))
+
+                    user_name = browser.find_element_by_id('txtUsuario')
+                    user_name.send_keys('williams')
+
+                    password = browser.find_element_by_id('txtPass')
+                    password.send_keys('santiago1177')
+
+                    button = browser.find_element_by_id('btnInicio')
+                    button.click()
+
+                    if os.path.isfile(filename):
+                        os.remove(filename)
+
+                    WebDriverWait(browser, 20).until(
+                        EC.presence_of_element_located((By.ID, "CPHPrincipal_btnExcel")))
+
+
+                    button = browser.find_element_by_id('CPHPrincipal_btnExcel')
+                    button.click()
+
+
+                    sleep(30)
+
+                    browser.get('http://extranet.urenport.com/login.aspx')
+
+                    WebDriverWait(browser, 10).until(
+                        EC.presence_of_element_located((By.ID, "Logins_UserName")))
+
+                    user_name = browser.find_element_by_id('Logins_UserName')
+                    user_name.send_keys('williams')
+
+                    password = browser.find_element_by_id('Logins_Password')
+                    password.send_keys('santiago1177')
+
+                    button = browser.find_element_by_id('Logins_LoginButton')
+                    button.click()
+
+                    WebDriverWait(browser, 20).until(
+                        EC.presence_of_element_located((By.ID, "ContentPlaceHolder1_GridView2")))
+
+                    button = browser.find_element_by_id('ContentPlaceHolder1_ASPxMenu2_DXI0_T')
+                    button.click()
+
+                    sleep(15)
+
+		
+                    bashCommand = "ren Urenport.xls \"Urenport_%time:~0,2%%time:~3,2%-%DATE:/=%.xls\" "
+                    os.system(bashCommand)
+		
+                    sleep(2)
+		 
+                    bashCommand = "robocopy E:\SistemaPronto\Robot\  E:\Sites\ProntoTesting\Temp\Pegatinas *.xls /MOV /LOG+:LogRobot.txt "
+                    os.system(bashCommand)
+
+                finally:
+                    #browser.quit()
+                    bashCommand = "Taskkill /IM Firefox.exe /F >nul 2>&1"
+                    os.system(bashCommand)
+		
+                    bashCommand = "ren Urenport.xls \"Urenport_%time:~0,2%%time:~3,2%-%DATE:/=%.xls\" "
+                    os.system(bashCommand)
+		
+                    sleep(2)
+		
+                    bashCommand = "robocopy E:\SistemaPronto\Robot\  E:\Sites\ProntoTesting\Temp\Pegatinas *.xls /MOV /LOG+:LogRobot.txt"
+                    os.system(bashCommand)
+
+            download_excel(silent=False)
+                        */
+        }
+
+        [TestMethod]
+        public void loginEnUrenport_42773()
+        {
+
+            // http://stackoverflow.com/questions/975426/how-to-programmatically-log-in-to-a-website-to-screenscape?noredirect=1&lq=1
+
+            // url  = "http://extranet.urenport.com/Login.aspx?ReturnUrl=%2fextraform%2findex.aspx"
+            //    string user="williams";
+            //string pass = "santiago1177";
+
+
+            //    HttpWebRequest http = WebRequest.Create(url) as HttpWebRequest;
+            //    http.KeepAlive = true;
+            //    http.Method = "POST";
+            //    http.ContentType = "application/x-www-form-urlencoded";
+            //    string postData = "FormNameForUserId=" + strUserId + "&FormNameForPassword=" + strPassword;
+            //    byte[] dataBytes = UTF8Encoding.UTF8.GetBytes(postData);
+            //    http.ContentLength = dataBytes.Length;
+            //    using (Stream postStream = http.GetRequestStream())
+            //    {
+            //        postStream.Write(dataBytes, 0, dataBytes.Length);
+            //    }
+            //    HttpWebResponse httpResponse = http.GetResponse() as HttpWebResponse;
+            //    // Probably want to inspect the http.Headers here first
+            //    http = WebRequest.Create(url2) as HttpWebRequest;
+            //    http.CookieContainer = new CookieContainer();
+            //    http.CookieContainer.Add(httpResponse.Cookies);
+            //    HttpWebResponse httpResponse2 = http.GetResponse() as HttpWebResponse;
+
+
+
+
+        }
+
+
+
+
+
+        [TestMethod]
+        public void Buques_37816_GrillaExportacion()
+        {
+            string filtro = "{\"groupOp\":\"OR\",\"rules\":[{\"field\":\"DestinoDesc\",\"op\":\"eq\",\"data\":\"MOL. CAÑUELAS - ZARATE\"},{\"field\":\"DestinoDesc\",\"op\":\"eq\",\"data\":\"TERMINAL 6\"}]}";
+            string output = @"c:\asdad.xls";
+
+            var scEF = ProntoMVC.Data.Models.Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC));
+            DemoProntoEntities db = new DemoProntoEntities(scEF);
+
+            ReportViewer ReporteLocal = new Microsoft.Reporting.WebForms.ReportViewer();
+
+            var s = new ServicioCartaPorte.servi();
+            var sqlquery4 = s.CartasPorte_DynamicGridData_ExcelExportacion_UsandoInternalQuery("IdCartaDePorte", "desc", 1, 999999, true, filtro,
+                                                 "01/12/2016",
+                                                 "30/01/2017",
+                                                 0, -1, SC, "Mariano");
+
+            CartaDePorteManager.RebindReportViewer_ServidorExcel(ref ReporteLocal, "Carta Porte - Situacion.rdl", sqlquery4, SC, false, ref output);
+
+
+            System.Diagnostics.Process.Start(output);
+        }
+
+        [TestMethod]
+        public void Buques_37816_GrillaAutocomplete()
+        {
+           //    falta el automcplete de rubros
+            var s = new ServicioCartaPorte.servi();
+            s.GetNormasCalidad(SC, "a");
+        }
+
+        [TestMethod]
+        public void Buques_37816_GrillaPaginacion()
+        {
+
+            string filtro = ""; // "{\"groupOp\":\"OR\",\"rules\":[{\"field\":\"Producto\",\"op\":\"eq\",\"data\":\"Trigo Pan\"},{\"field\":\"Producto\",\"op\":\"eq\",\"data\":\"MAIZ\"}]}";
+
+            var scEF = ProntoMVC.Data.Models.Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC));
+            DemoProntoEntities db = new DemoProntoEntities(scEF);
+
+            var s = new ServicioCartaPorte.servi();
+
+
+
+
+
+            var sqlquery4 = s.NormasCalidad_DynamicGridData(SC, "IdCartaPorteNormaCalidad", "desc", 1, 999999, true, filtro);
+
+
+        }
+
+        [TestMethod]
+        public void Buques_37816_GrillaUpdate()
+        {
+
+            var o = new CartaPorteNormasCalidad();
+            var s = new ServicioCartaPorte.servi();
+
+            s.NormaCalidadBatchUpdate(SC, o);
+        }
+
+
+
+
+
+
+
+
+
+
         [TestMethod]
         public void liquidacionsubcon_42676()
         {
@@ -3324,262 +3683,6 @@ System.Drawing
 
             //File.Copy(output, @"C:\Users\Administrador\Desktop\"   Path.GetFileName(output), true);
             System.Diagnostics.Process.Start(output);
-        }
-
-
-
-        [TestMethod]
-        public void loginEnUrenport3()
-        {
-            var s = new ServicioCartaPorte.servi();
-            s.UrenportSelenium();
-
-
-            IWebDriver browser = new FirefoxDriver();
-
-
-            //////////////////////////////////////////////////////////////////////////////
-
-
-
-
-            browser.Navigate().GoToUrl("http://extranet.urenport.com/login.aspx");
-
-            new WebDriverWait(browser, TimeSpan.FromSeconds(10)).Until(ExpectedConditions.ElementExists((By.Id("Logins_UserName"))));
-
-
-            var user_name2 = browser.FindElement(By.Name("Logins_UserName"));
-            user_name2.SendKeys("williams");
-
-            var password2 = browser.FindElement(By.Name("Logins_Password"));
-            password2.SendKeys("santiago1177");
-
-
-            var button2 = browser.FindElement(By.Name("Logins_LoginButton"));
-            button2.Click();
-
-            //if os.path.isfile(filename):            os.remove(filename)
-            //WebDriverWait(browser, 20).until(            EC.presence_of_element_located((By.ID, "CPHPrincipal_btnExcel")))
-            //new WebDriverWait(browser, TimeSpan.FromSeconds(10));
-            var aaaad = new WebDriverWait(browser, TimeSpan.FromSeconds(20)).Until(ExpectedConditions.ElementExists((By.Id("ContentPlaceHolder1_GridView2"))));
-
-            var button3 = browser.FindElement(By.Name("ContentPlaceHolder1_ASPxMenu2_DXI0_T"));
-            button3.Click();
-
-
-
-
-
-            //bashCommand = "ren Urenport.xls \"Urenport_%time:~0,2%%time:~3,2%-%DATE:/=%.xls\" "
-            //os.system(bashCommand)
-
-            //sleep(2)
-
-            //bashCommand = "robocopy E:\SistemaPronto\Robot\  E:\Sites\ProntoTesting\Temp\Pegatinas *.xls /MOV /LOG+:LogRobot.txt "
-            //os.system(bashCommand)
-
-
-
-        }
-
-
-        [TestMethod]
-        public void loginEnCerealnet2()
-        {
-
-            // el geckodriver tiene q estar en el path. actualizar version firefox (version 48)
-
-            IWebDriver browser = new FirefoxDriver();
-            /*
-            //Notice navigation is slightly different than the Java version
-            //This is because 'get' is a keyword in C#
-            driver.Navigate().GoToUrl("http://www.google.com/");
-            IWebElement query = driver.FindElement(By.Name("q"));
-            query.SendKeys("Cheese");
-            System.Console.WriteLine("Page title is: " + driver.Title);
-            driver.Quit();
-
-            */
-
-
-
-            browser.Navigate().GoToUrl("http://entregadores.cerealnet.com/");
-
-            // WebDriverWait(browser, 10).until(EC.presence_of_element_located((By.ID, "txtUsuario")))
-            new WebDriverWait(browser, TimeSpan.FromSeconds(10)).Until(ExpectedConditions.ElementExists((By.Id("txtUsuario"))));
-
-
-            var user_name = browser.FindElement(By.Name("txtUsuario"));
-            user_name.SendKeys("williams");
-
-            var password = browser.FindElement(By.Name("txtPass"));
-            password.SendKeys("santiago1177");
-
-
-            var button = browser.FindElement(By.Name("btnInicio"));
-            button.Click();
-
-            //if os.path.isfile(filename):            os.remove(filename)
-            //WebDriverWait(browser, 20).until(            EC.presence_of_element_located((By.ID, "CPHPrincipal_btnExcel")))
-            //new WebDriverWait(browser, TimeSpan.FromSeconds(10));
-            var aaaa = new WebDriverWait(browser, TimeSpan.FromSeconds(20)).Until(ExpectedConditions.ElementExists((By.Id("CPHPrincipal_btnExcel"))));
-
-            aaaa.Click();
-
-            //button = browser.FindElement(By.Name("CPHPrincipal_btnExcel"));
-            //button.Click();
-
-
-
-
-
-
-
-
-
-            /*
-
-                        #!/usr/bin/python
-            # -*- coding: utf-8 -*-
-            import os
-            from time import sleep
-            from selenium import webdriver
-            from pyvirtualdisplay import Display
-            from selenium.webdriver.support.ui import WebDriverWait
-            from selenium.webdriver.support import expected_conditions as EC
-            from selenium.webdriver.common.by import By
-
-
-            def download_excel(silent=True):
-                if silent:
-                    display = Display(visible=0, size=(1366, 768))
-                    display.start()
-                 #Instalar Firefox
-                # instalar el ejecutable geckodriver de https://github.com/mozilla/geckodriver/releases
-                binpath = 'E:/SistemaPronto/Robot' # Directorio donde está geckodriver
-                os.environ["PATH"] += os.pathsep + binpath
-
-                filename = 'Urenport.xls'
-
-                profile = webdriver.FirefoxProfile()
-                profile.set_preference('browser.download.folderList', 2)    # 2 = custom location
-                profile.set_preference('browser.download.manager.showWhenStarting', False)
-                profile.set_preference('browser.download.dir', os.getcwd())
-                profile.set_preference('browser.helperApps.neverAsk.saveToDisk', "application/ms-excel;application/xls;text/csv;application/vnd.ms-excel")
-                profile.set_preference('browser.helperApps.alwaysAsk.force', False)
-                browser = webdriver.Firefox(firefox_profile=profile)
-                try:
-                    browser.get('http://entregadores.cerealnet.com/')
-
-                    WebDriverWait(browser, 10).until(
-                        EC.presence_of_element_located((By.ID, "txtUsuario")))
-
-                    user_name = browser.find_element_by_id('txtUsuario')
-                    user_name.send_keys('williams')
-
-                    password = browser.find_element_by_id('txtPass')
-                    password.send_keys('santiago1177')
-
-                    button = browser.find_element_by_id('btnInicio')
-                    button.click()
-
-                    if os.path.isfile(filename):
-                        os.remove(filename)
-
-                    WebDriverWait(browser, 20).until(
-                        EC.presence_of_element_located((By.ID, "CPHPrincipal_btnExcel")))
-
-
-                    button = browser.find_element_by_id('CPHPrincipal_btnExcel')
-                    button.click()
-
-
-                    sleep(30)
-
-                    browser.get('http://extranet.urenport.com/login.aspx')
-
-                    WebDriverWait(browser, 10).until(
-                        EC.presence_of_element_located((By.ID, "Logins_UserName")))
-
-                    user_name = browser.find_element_by_id('Logins_UserName')
-                    user_name.send_keys('williams')
-
-                    password = browser.find_element_by_id('Logins_Password')
-                    password.send_keys('santiago1177')
-
-                    button = browser.find_element_by_id('Logins_LoginButton')
-                    button.click()
-
-                    WebDriverWait(browser, 20).until(
-                        EC.presence_of_element_located((By.ID, "ContentPlaceHolder1_GridView2")))
-
-                    button = browser.find_element_by_id('ContentPlaceHolder1_ASPxMenu2_DXI0_T')
-                    button.click()
-
-                    sleep(15)
-
-		
-                    bashCommand = "ren Urenport.xls \"Urenport_%time:~0,2%%time:~3,2%-%DATE:/=%.xls\" "
-                    os.system(bashCommand)
-		
-                    sleep(2)
-		 
-                    bashCommand = "robocopy E:\SistemaPronto\Robot\  E:\Sites\ProntoTesting\Temp\Pegatinas *.xls /MOV /LOG+:LogRobot.txt "
-                    os.system(bashCommand)
-
-                finally:
-                    #browser.quit()
-                    bashCommand = "Taskkill /IM Firefox.exe /F >nul 2>&1"
-                    os.system(bashCommand)
-		
-                    bashCommand = "ren Urenport.xls \"Urenport_%time:~0,2%%time:~3,2%-%DATE:/=%.xls\" "
-                    os.system(bashCommand)
-		
-                    sleep(2)
-		
-                    bashCommand = "robocopy E:\SistemaPronto\Robot\  E:\Sites\ProntoTesting\Temp\Pegatinas *.xls /MOV /LOG+:LogRobot.txt"
-                    os.system(bashCommand)
-
-            download_excel(silent=False)
-                        */
-        }
-
-
-
-
-
-        [TestMethod]
-        public void loginEnUrenport()
-        {
-
-            // http://stackoverflow.com/questions/975426/how-to-programmatically-log-in-to-a-website-to-screenscape?noredirect=1&lq=1
-
-            // url  = "http://extranet.urenport.com/Login.aspx?ReturnUrl=%2fextraform%2findex.aspx"
-            //    string user="williams";
-            //string pass = "santiago1177";
-
-
-            //    HttpWebRequest http = WebRequest.Create(url) as HttpWebRequest;
-            //    http.KeepAlive = true;
-            //    http.Method = "POST";
-            //    http.ContentType = "application/x-www-form-urlencoded";
-            //    string postData = "FormNameForUserId=" + strUserId + "&FormNameForPassword=" + strPassword;
-            //    byte[] dataBytes = UTF8Encoding.UTF8.GetBytes(postData);
-            //    http.ContentLength = dataBytes.Length;
-            //    using (Stream postStream = http.GetRequestStream())
-            //    {
-            //        postStream.Write(dataBytes, 0, dataBytes.Length);
-            //    }
-            //    HttpWebResponse httpResponse = http.GetResponse() as HttpWebResponse;
-            //    // Probably want to inspect the http.Headers here first
-            //    http = WebRequest.Create(url2) as HttpWebRequest;
-            //    http.CookieContainer = new CookieContainer();
-            //    http.CookieContainer.Add(httpResponse.Cookies);
-            //    HttpWebResponse httpResponse2 = http.GetResponse() as HttpWebResponse;
-
-
-
-
         }
 
 
