@@ -1,0 +1,10 @@
+
+Log Entry : 
+07/17/2017 09:46:05
+Error in: http://localhost:58911/ProntoWeb/CartasDePortes.aspx?tipo=Todas. Error Message:Mariano
+__________________________
+
+Log Entry : 
+07/17/2017 10:27:20
+Error in: http://localhost:58911/ProntoWeb/ListasPrecios.aspx?Id=2219. Error Message:Mariano esta logueado, pero lo redirijo al login porque faltan los datos de session. No deberia mejor mandarlo a SeleccionarEmpresa? Ademas, no hago el LogOut y le queda el cookie!!!
+__________________________
