@@ -305,6 +305,7 @@ Public Class ConsultasLinq
         Public IdClienteEntregador As Integer
         Public tarif1 As Decimal?
         Public tarif2 As Decimal?
+        Public tarifcombo As Decimal?
     End Class
 
 
@@ -491,7 +492,9 @@ Public Class ConsultasLinq
                                   ), 0)),
                       .Exporta = cdp.Exporta,
                      .Corredor = cdp.Corredor,
-                      .IdClienteEntregador = If(cdp.IdClienteEntregador, 0)}).ToList
+                      .IdClienteEntregador = If(cdp.IdClienteEntregador, 0),
+                      .tarifcombo = pd1.PrecioComboCaladaMasBalanza
+                    }).ToList
         'si te tarda mucho, puede ser por el parameter sniffing!!!!!! (en especial si en la consola de sql ejecuta rapido)
         'si te tarda mucho, puede ser por el parameter sniffing!!!!!! (en especial si en la consola de sql ejecuta rapido)
         'si te tarda mucho, puede ser por el parameter sniffing!!!!!! (en especial si en la consola de sql ejecuta rapido)
@@ -580,10 +583,11 @@ Public Class ConsultasLinq
                     .tarif2 = If(pd2 Is Nothing, 0, pd2.PrecioBuquesCalada),
                     .Exporta = "SI",
                     .Corredor = cdp.IdExportadorOrigen,
-                    .IdClienteEntregador = If(cdp.IdExportadorOrigen, 0)}).ToList
+                    .IdClienteEntregador = If(cdp.IdExportadorOrigen, 0),
+                    .tarifcombo = pd1.PrecioComboCaladaMasBalanza
+                }).ToList
 
 
-            'qq = ooo
             qq = qq.Union(ooo).ToList
 
         End If
@@ -640,6 +644,7 @@ Public Class ConsultasLinq
                     Exporta,
                     .tarif1 = Group.Max(Function(x) x.tarif1),
                     .tarif2 = Group.Max(Function(x) x.tarif2),
+                    .tarifcombo = Group.Max(Function(x) x.tarifcombo),
                     Corredor,
                     IdClienteEntregador
                      }
@@ -677,8 +682,32 @@ Public Class ConsultasLinq
 
         'uso Group by, porque el distinct en vb.net es medio loco! (no anda igual que en c#)
 
+        Dim q8 As List(Of infLiqui) = (From cdp In q
+                                Where (idSubcontr = -1 Or cdp.Subcontr1 = idSubcontr) And cdp.Subcontr1 = cdp.Subcontr2
+                               Group By
+                                cdp.agrupVagon,
+                                cdp.DestinoDesc,
+                                cdp.Exporta,
+                                cdp.Subcontr1Desc,
+                                cdp.tarifcombo,
+                                cdp.NumeroCartaDePorte,
+                                cdp.NetoFinal
+                               Into Group
+                                   Select New infLiqui With {
+                                   .agrupVagon = agrupVagon,
+                                   .DestinoDesc = DestinoDesc & " Calada+Balanza" & If(
+                                       (Exporta = "SI") _
+                                              , " - Export.", " - Entrega"),
+                                   .SubcontrDesc = Subcontr1Desc,
+                                   .NetoPto = NetoFinal,
+                                   .Tarifa = If(tarifcombo, 0),
+                                   .Comision = NetoFinal * If(tarifcombo, 0) / 1000,
+                                   .numerocarta = NumeroCartaDePorte
+                                }).ToList.Distinct.ToList()
+
+
         Dim q4 As List(Of infLiqui) = (From cdp In q
-                                        Where (idSubcontr = -1 Or cdp.Subcontr1 = idSubcontr)
+                                        Where (idSubcontr = -1 Or cdp.Subcontr1 = idSubcontr) And cdp.Subcontr1 <> cdp.Subcontr2
                                        Group By
                                         cdp.agrupVagon,
                                         cdp.DestinoDesc,
@@ -702,7 +731,7 @@ Public Class ConsultasLinq
 
 
         Dim q5 As List(Of infLiqui) = (From cdp In q
-                                       Where (idSubcontr = -1 Or cdp.Subcontr2 = idSubcontr)
+                                       Where (idSubcontr = -1 Or cdp.Subcontr2 = idSubcontr) And cdp.Subcontr1 <> cdp.Subcontr2
                                         Group By
                                         cdp.agrupVagon,
                                         cdp.DestinoDesc,
@@ -728,7 +757,7 @@ Public Class ConsultasLinq
         Dim q6 As New List(Of infLiqui) '= q4.Union(q5)
         q6.AddRange(q4)
         q6.AddRange(q5)
-
+        q6.AddRange(q8)
 
 
         Dim q3 = From i In q6

@@ -4193,6 +4193,7 @@
     <EntitySetMapping Name="ListasPreciosDetalles">
       <EntityTypeMapping TypeName="DemoProntoModel.ListasPreciosDetalle">
         <MappingFragment StoreEntitySet="ListasPreciosDetalle">
+          <ScalarProperty Name="PrecioComboCaladaMasBalanza" ColumnName="PrecioComboCaladaMasBalanza" />
           <ScalarProperty Name="PrecioBuquesCalada" ColumnName="PrecioBuquesCalada" />
           <ScalarProperty Name="PrecioVagonesCaladaExportacion" ColumnName="PrecioVagonesCaladaExportacion" />
           <ScalarProperty Name="PrecioVagonesBalanzaExportacion" ColumnName="PrecioVagonesBalanzaExportacion" />
