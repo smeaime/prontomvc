@@ -3718,7 +3718,7 @@ Formato localidad-provincia	destination	x
 
 
                 xmlcp.corredor_CUIT = dbcp.CorredorCUIT.Replace("-", "");
-                if (dbcp.CorredorDesc == "DIRECTO" && dbcp.CorredorCUIT2 != "") 
+                if (dbcp.CorredorDesc == "DIRECTO" && dbcp.CorredorCUIT2 != "")
                     xmlcp.corredor_CUIT = dbcp.CorredorCUIT2.Replace("-", "");
 
 
@@ -3868,9 +3868,9 @@ Formato localidad-provincia	destination	x
             catch (System.ServiceModel.ProtocolException ex2)
             {
                 // esto es lo normal. y que el mensaje sea  "Additional information: La operación unidireccional devolvió un mensaje no Null con Action=''."
-                if (ex2.Message == "La operación unidireccional devolvió un mensaje no Null con Action=\".\"") 
-                    ErrHandler2.WriteError("Todo ok!"); 
-                else  
+                if (ex2.Message == "La operación unidireccional devolvió un mensaje no Null con Action=\".\"")
+                    ErrHandler2.WriteError("Todo ok!");
+                else
                     ErrHandler2.WriteError(ex2);
             }
             catch (Exception ex)
@@ -5379,20 +5379,214 @@ order by kilos desc
         public void UrenportSelenium()
         {
 
-            // el geckodriver tiene q estar en el path. actualizar version firefox (version 48)
+            // el geckodriver tiene q estar en el path. actualizar version firefox (version 48) 
+            //verificar version del geckodriver.exe, debe ser 0.16 o superior (la de marzo no me servia)
 
-            IWebDriver browser = new FirefoxDriver();
+
+
+
+
+            // os.environ["PATH"] += os.pathsep + binpath
+
+            string filename = "Urenport.xls";
+
+
+            FirefoxProfile profile = new FirefoxProfile();
+
+            profile.SetPreference("browser.download.folderList", 2);  // # 2 = custom location
+            //profile.SetPreference("browser.download.manager.showWhenStarting", false);
+            profile.SetPreference("browser.download.dir", @"C:\Users\Administrador\Downloads");  //os.getcwd()
+            profile.SetPreference("browser.helperApps.neverAsk.saveToDisk", "application/ms-excel;application/xls;text/csv;application/vnd.ms-excel");
+            profile.SetPreference("browser.helperApps.alwaysAsk.force", false);
+
+
+
+
+
+            IWebDriver browser = new FirefoxDriver(profile);
+
+
+
+            browser.Navigate().GoToUrl("http://extranet.urenport.com/login.aspx");
+
+            // WebDriverWait(browser, 10).until(EC.presence_of_element_located((By.ID, "txtUsuario")))
+            new WebDriverWait(browser, TimeSpan.FromSeconds(10)).Until(ExpectedConditions.ElementExists((By.Id("Logins_UserName"))));
+
+
+            var user_name = browser.FindElement(By.Id("Logins_UserName"));
+            user_name.SendKeys("williams");
+            // https://stackoverflow.com/questions/43583836/expected-object-undefined-undefined-to-be-a-string-indexoutofbounds
+            // Thank you it worked. We need to update selenium to 3.4 to support Gecko v 0.16. Once both are updated no issues
+
+            var password = browser.FindElement(By.Id("Logins_Password"));
+            password.SendKeys("santiago1177");
+
+
+            var button = browser.FindElement(By.Id("Logins_LoginButton"));
+            button.Click();
+
+            //if os.path.isfile(filename):            os.remove(filename)
+            //WebDriverWait(browser, 20).until(            EC.presence_of_element_located((By.ID, "CPHPrincipal_btnExcel")))
+            //new WebDriverWait(browser, TimeSpan.FromSeconds(10));
+            
+            
+            
+                       
+            
+            var aaaa = new WebDriverWait(browser, TimeSpan.FromSeconds(20)).Until(ExpectedConditions.ElementExists((By.Id("ContentPlaceHolder1_ASPxMenu2_DXI0_T"))));
+
+            aaaa.Click();
+
+
+            //button = browser.FindElement(By.Name("CPHPrincipal_btnExcel"));
+            //button.Click();
+
+
+
+
+            browser.Quit();
+
+
+
+
             /*
-            //Notice navigation is slightly different than the Java version
-            //This is because 'get' is a keyword in C#
-            driver.Navigate().GoToUrl("http://www.google.com/");
-            IWebElement query = driver.FindElement(By.Name("q"));
-            query.SendKeys("Cheese");
-            System.Console.WriteLine("Page title is: " + driver.Title);
-            driver.Quit();
 
-            */
+                        #!/usr/bin/python
+            # -*- coding: utf-8 -*-
+            import os
+            from time import sleep
+            from selenium import webdriver
+            from pyvirtualdisplay import Display
+            from selenium.webdriver.support.ui import WebDriverWait
+            from selenium.webdriver.support import expected_conditions as EC
+            from selenium.webdriver.common.by import By
 
+
+            def download_excel(silent=True):
+                if silent:
+                    display = Display(visible=0, size=(1366, 768))
+                    display.start()
+                 #Instalar Firefox
+                # instalar el ejecutable geckodriver de https://github.com/mozilla/geckodriver/releases
+                binpath = 'E:/SistemaPronto/Robot' # Directorio donde está geckodriver
+                os.environ["PATH"] += os.pathsep + binpath
+
+                filename = 'Urenport.xls'
+
+                profile = webdriver.FirefoxProfile()
+                profile.set_preference('browser.download.folderList', 2)    # 2 = custom location
+                profile.set_preference('browser.download.manager.showWhenStarting', False)
+                profile.set_preference('browser.download.dir', os.getcwd())
+                profile.set_preference('browser.helperApps.neverAsk.saveToDisk', "application/ms-excel;application/xls;text/csv;application/vnd.ms-excel")
+                profile.set_preference('browser.helperApps.alwaysAsk.force', False)
+                browser = webdriver.Firefox(firefox_profile=profile)
+                try:
+                    browser.get('http://entregadores.cerealnet.com/')
+
+                    WebDriverWait(browser, 10).until(
+                        EC.presence_of_element_located((By.ID, "txtUsuario")))
+
+                    user_name = browser.find_element_by_id('txtUsuario')
+                    user_name.send_keys('williams')
+
+                    password = browser.find_element_by_id('txtPass')
+                    password.send_keys('santiago1177')
+
+                    button = browser.find_element_by_id('btnInicio')
+                    button.click()
+
+                    if os.path.isfile(filename):
+                        os.remove(filename)
+
+                    WebDriverWait(browser, 20).until(
+                        EC.presence_of_element_located((By.ID, "CPHPrincipal_btnExcel")))
+
+
+                    button = browser.find_element_by_id('CPHPrincipal_btnExcel')
+                    button.click()
+
+
+                    sleep(30)
+
+                    browser.get('http://extranet.urenport.com/login.aspx')
+
+                    WebDriverWait(browser, 10).until(
+                        EC.presence_of_element_located((By.ID, "Logins_UserName")))
+
+                    user_name = browser.find_element_by_id('Logins_UserName')
+                    user_name.send_keys('williams')
+
+                    password = browser.find_element_by_id('Logins_Password')
+                    password.send_keys('santiago1177')
+
+                    button = browser.find_element_by_id('Logins_LoginButton')
+                    button.click()
+
+                    WebDriverWait(browser, 20).until(
+                        EC.presence_of_element_located((By.ID, "ContentPlaceHolder1_GridView2")))
+
+                    button = browser.find_element_by_id('ContentPlaceHolder1_ASPxMenu2_DXI0_T')
+                    button.click()
+
+                    sleep(15)
+
+		
+                    bashCommand = "ren Urenport.xls \"Urenport_%time:~0,2%%time:~3,2%-%DATE:/=%.xls\" "
+                    os.system(bashCommand)
+		
+                    sleep(2)
+		 
+                    bashCommand = "robocopy E:\SistemaPronto\Robot\  E:\Sites\ProntoTesting\Temp\Pegatinas *.xls /MOV /LOG+:LogRobot.txt "
+                    os.system(bashCommand)
+
+                finally:
+                    #browser.quit()
+                    bashCommand = "Taskkill /IM Firefox.exe /F >nul 2>&1"
+                    os.system(bashCommand)
+		
+                    bashCommand = "ren Urenport.xls \"Urenport_%time:~0,2%%time:~3,2%-%DATE:/=%.xls\" "
+                    os.system(bashCommand)
+		
+                    sleep(2)
+		
+                    bashCommand = "robocopy E:\SistemaPronto\Robot\  E:\Sites\ProntoTesting\Temp\Pegatinas *.xls /MOV /LOG+:LogRobot.txt"
+                    os.system(bashCommand)
+
+            download_excel(silent=False)
+                        */
+        }
+
+
+
+        public void CerealnetSelenium()
+        {
+
+            // el geckodriver tiene q estar en el path. actualizar version firefox (version 48) 
+            //verificar version del geckodriver.exe, debe ser 0.16 o superior (la de marzo no me servia)
+
+
+
+
+
+            // os.environ["PATH"] += os.pathsep + binpath
+
+            string filename = "Cerealnet.xls";
+
+
+            FirefoxProfile profile = new FirefoxProfile();
+
+            profile.SetPreference("browser.download.folderList", 2);  // # 2 = custom location
+            //profile.SetPreference("browser.download.manager.showWhenStarting", false);
+            profile.SetPreference("browser.download.dir", @"C:\Users\Administrador\Downloads" );  //os.getcwd()
+            profile.SetPreference("browser.helperApps.neverAsk.saveToDisk", "application/ms-excel;application/xls;text/csv;application/vnd.ms-excel");
+            profile.SetPreference("browser.helperApps.alwaysAsk.force", false);
+
+
+
+
+
+            IWebDriver browser = new FirefoxDriver(profile);
+    
 
 
             browser.Navigate().GoToUrl("http://entregadores.cerealnet.com/");
@@ -5403,6 +5597,8 @@ order by kilos desc
 
             var user_name = browser.FindElement(By.Name("txtUsuario"));
             user_name.SendKeys("williams");
+            // https://stackoverflow.com/questions/43583836/expected-object-undefined-undefined-to-be-a-string-indexoutofbounds
+            // Thank you it worked. We need to update selenium to 3.4 to support Gecko v 0.16. Once both are updated no issues
 
             var password = browser.FindElement(By.Name("txtPass"));
             password.SendKeys("santiago1177");
@@ -5424,7 +5620,7 @@ order by kilos desc
 
 
 
-
+            browser.Quit();
 
 
 

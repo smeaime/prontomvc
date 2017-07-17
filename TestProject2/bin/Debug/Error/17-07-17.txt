@@ -118545,3 +118545,8 @@ Log Entry :
 07/17/2017 10:34:20
 Error in: . Error Message:     Excluidas por nofacturarasubcontratistas o duplicadas: 0
 __________________________
+
+Log Entry : 
+07/17/2017 11:41:21
+Error in: . Error Message:Generando sincro para Diaz Riganti
+__________________________

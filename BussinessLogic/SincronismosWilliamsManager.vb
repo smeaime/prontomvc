@@ -25968,7 +25968,8 @@ Namespace Pronto.ERP.Bll
 
 
 
-
+                    'reclamo 42798 'Agregar una columna al final del sincro indicando:                    '1 si es camión                    '3 si es vagón
+                    sb &= SEPARADOR & IIf(.SubnumeroVagon > 0, "3", "1")
 
 
                     If sErroresporCarta <> "" Then
