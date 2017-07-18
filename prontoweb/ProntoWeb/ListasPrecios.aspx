@@ -506,7 +506,7 @@
 
 
 
-                    <asp:TemplateField HeaderText="Calada + Balanza">
+                    <asp:TemplateField HeaderText="Calada + Descarga">
                         <EditItemTemplate>
                             <asp:TextBox ID="txtPrecioComboCaladaMasBalanza" Width="40px" runat="server" Text='<%# Bind("PrecioComboCaladaMasBalanza", "{0:F3}")%>'></asp:TextBox>
                         </EditItemTemplate>
