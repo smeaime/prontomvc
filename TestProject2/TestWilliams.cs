@@ -857,6 +857,81 @@ namespace ProntoMVC.Tests
 
 
 
+
+
+        [TestMethod]
+        public void liquidacionsubcon_42676()
+        {
+
+
+            if (false)
+            {
+
+                var s = new ServicioCartaPorte.servi();
+                var scEF = ProntoMVC.Data.Models.Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC));
+                DemoProntoEntities db = new DemoProntoEntities(scEF);
+
+
+                var q1 = db.WilliamsDestinos.Where(x => x.Subcontratista1 == 10947 || x.Subcontratista2 == 10947).FirstOrDefault(); // ramirez jose luis
+                q1.Subcontratista1 = 10947;
+                q1.Subcontratista2 = 10947;
+
+                var q2 = db.ListasPreciosDetalles.Where(x => x.ListasPrecio.Descripcion == "RAMIREZ JOSE LUIS - Precios").ToList(); // ramirez jose luis
+                foreach (Data.Models.ListasPreciosDetalle ps in q2)
+                {
+                    ps.PrecioComboCaladaMasBalanza = 55;
+                }
+
+                db.SaveChanges();
+
+            }
+
+
+
+
+
+            ReportViewer ReporteLocal = new Microsoft.Reporting.WebForms.ReportViewer();
+
+            ReportParameter p2 = null;
+            string sTitulo = "";
+
+            var q = ConsultasLinq.LiquidacionSubcontratistas(SC,
+                       "", "", "", 1, 2000,
+                        CartaDePorteManager.enumCDPestado.DescargasMasFacturadas, "", -1, -1,
+                       -1, -1,
+                       -1, -1, -1, -1, CartaDePorteManager.FiltroANDOR.FiltroOR, "Ambos",
+                        new DateTime(2016, 12, 1),
+                        new DateTime(2016, 12, 31),
+                        2, -1, ref sTitulo);
+
+
+
+            string titulo = EntidadManager.NombreCliente(SC, 105);
+
+
+            ReportParameter[] p = new ReportParameter[5];
+            p[0] = new ReportParameter("Concepto1", "");
+            p[1] = new ReportParameter("titulo", "");
+            p[2] = new ReportParameter("Concepto2", "");
+            p[3] = new ReportParameter("Concepto1Importe", "-1");
+            p[4] = new ReportParameter("Concepto2Importe", "-1");
+
+
+            string output = "";
+
+            CartaDePorteManager.RebindReportViewerLINQ_Excel
+                                (ref ReporteLocal, @"C:\Users\Administrador\Documents\bdl\pronto\prontoweb\ProntoWeb\Informes\Liquidación de SubContratistas 2.rdl", q, ref output, p);
+
+            System.Diagnostics.Process.Start(output);
+
+        }
+
+
+
+
+
+
+
         [TestMethod]
         public void SincroDiazRiganti_42798()
         {
@@ -887,16 +962,33 @@ namespace ProntoMVC.Tests
 
 
 
+        [TestMethod]
+        public void loginEnUrenport3_42773_3()
+        {
+            var s = new ServicioCartaPorte.servi();
+            s.CerealnetSeleniumConPhantomJS(DirApp);
+        }
+
+
+        [TestMethod]
+        public void loginEnUrenport3_42773_2()
+        {
+            ProntoWindowsService.Service1.Initialize();
+            ProntoWindowsService.Service1.DoWorkSoloPegatinas();
+
+        }
+
 
 
         [TestMethod]
         public void loginEnUrenport3_42773()
         {
             var s = new ServicioCartaPorte.servi();
-            s.UrenportSelenium();
-            s.CerealnetSelenium();
+            s.CerealnetSelenium(DirApp);
+            //s.UrenportSelenium();
 
             return;
+
 
             IWebDriver browser = new FirefoxDriver();
 
@@ -944,6 +1036,9 @@ namespace ProntoMVC.Tests
 
 
         }
+
+
+
 
         [TestMethod]
         public void loginEnCerealnet2_42773()
@@ -1144,10 +1239,13 @@ namespace ProntoMVC.Tests
 
 
 
+
+
+
         [TestMethod]
         public void Buques_37816_GrillaExportacion()
         {
-            string filtro = "{\"groupOp\":\"OR\",\"rules\":[{\"field\":\"DestinoDesc\",\"op\":\"eq\",\"data\":\"MOL. CAÑUELAS - ZARATE\"},{\"field\":\"DestinoDesc\",\"op\":\"eq\",\"data\":\"TERMINAL 6\"}]}";
+            string filtro = ""; // "{\"groupOp\":\"OR\",\"rules\":[{\"field\":\"DestinoDesc\",\"op\":\"eq\",\"data\":\"MOL. CAÑUELAS - ZARATE\"},{\"field\":\"DestinoDesc\",\"op\":\"eq\",\"data\":\"TERMINAL 6\"}]}";
             string output = @"c:\asdad.xls";
 
             var scEF = ProntoMVC.Data.Models.Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC));
@@ -1155,8 +1253,13 @@ namespace ProntoMVC.Tests
 
             ReportViewer ReporteLocal = new Microsoft.Reporting.WebForms.ReportViewer();
 
+
+            var m = db.CartasPorteMovimientos.First().IdCDPMovimiento;
+
+
+
             var s = new ServicioCartaPorte.servi();
-            var sqlquery4 = s.CartasPorte_DynamicGridData_ExcelExportacion_UsandoInternalQuery("IdCartaDePorte", "desc", 1, 999999, true, filtro,
+            var sqlquery4 = s.CDPMovimientos_DynamicGridData_ExcelExportacion_UsandoInternalQuery("IdCDPMovimiento", "desc", 1, 999999, true, filtro,
                                                  "01/12/2016",
                                                  "30/01/2017",
                                                  0, -1, SC, "Mariano");
@@ -1167,10 +1270,15 @@ namespace ProntoMVC.Tests
             System.Diagnostics.Process.Start(output);
         }
 
+
+
+
+
+
         [TestMethod]
         public void Buques_37816_GrillaAutocomplete()
         {
-           //    falta el automcplete de rubros
+            //    falta el automcplete de rubros
             var s = new ServicioCartaPorte.servi();
             s.GetNormasCalidad(SC, "a");
         }
@@ -1214,77 +1322,7 @@ namespace ProntoMVC.Tests
 
 
 
-        [TestMethod]
-        public void liquidacionsubcon_42676()
-        {
 
-
-
-            var s = new ServicioCartaPorte.servi();
-            var scEF = ProntoMVC.Data.Models.Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC));
-            DemoProntoEntities db = new DemoProntoEntities(scEF);
-
-
-            var q1 = db.WilliamsDestinos.Where(x => x.Subcontratista1 == 10947 || x.Subcontratista2 == 10947).FirstOrDefault(); // ramirez jose luis
-            q1.Subcontratista1 = 10947;
-            q1.Subcontratista2 = 10947;
-
-            var q2  = db.ListasPreciosDetalles.Where(x => x.ListasPrecio.Descripcion  == "RAMIREZ JOSE LUIS - Precios").ToList(); // ramirez jose luis
-            foreach(Data.Models.ListasPreciosDetalle ps in q2)
-            {
-                ps.PrecioComboCaladaMasBalanza = 55;
-            }
-
-            db.SaveChanges();
-
-
-
-
-
-
-
-            ReportViewer ReporteLocal = new Microsoft.Reporting.WebForms.ReportViewer();
-
-            ReportParameter p2 = null;
-            string sTitulo = "";
-
-            var q = ConsultasLinq.LiquidacionSubcontratistas(SC,
-                       "", "", "", 1, 2000,
-                        CartaDePorteManager.enumCDPestado.DescargasMasFacturadas, "", -1, -1,
-                       -1, -1,
-                       -1, -1, -1, -1, CartaDePorteManager.FiltroANDOR.FiltroOR, "Ambos",
-                        new DateTime(2016, 12, 1),
-                        new DateTime(2016, 12, 31),
-                        2, -1, ref sTitulo);
-
-
-
-            string titulo = EntidadManager.NombreCliente(SC, 105);
-
-
-            ReportParameter[] p = new ReportParameter[5];
-            p[0] = new ReportParameter("Concepto1", "");
-            p[1] = new ReportParameter("titulo", "");
-            p[2] = new ReportParameter("Concepto2", "");
-            p[3] = new ReportParameter("Concepto1Importe", "-1");
-            p[4] = new ReportParameter("Concepto2Importe", "-1");
-
-
-            string output = "";
-
-            CartaDePorteManager.RebindReportViewerLINQ_Excel
-                                (ref ReporteLocal, @"C:\Users\Administrador\Documents\bdl\pronto\prontoweb\ProntoWeb\Informes\Liquidación de SubContratistas 2.rdl", q, ref output, p);
-
-            System.Diagnostics.Process.Start(output);
-
-        }
-
-
-
-
-
-        
-        
         [TestMethod]
         public void CampoEditableDeClientesRelacionadosAlUsuarioParaTirarInforme_42752()
         {
@@ -1329,7 +1367,7 @@ namespace ProntoMVC.Tests
                                idRComercial, idArticulo, idProcedencia, idDestino
                                 , 0, "Ambas"
                                 , desde, hasta,
-                                0,QueContenga2, usuario, scbdlmasterappconfig, true, true, true, false, false, false);
+                                0, QueContenga2, usuario, scbdlmasterappconfig, true, true, true, false, false, false);
 
 
 
@@ -1540,7 +1578,7 @@ La interface será procesa por Syngenta y si la misma no puede ser procesada cor
 
 
 
-        
+
 
 
         [TestMethod]
@@ -1584,7 +1622,7 @@ La interface será procesa por Syngenta y si la misma no puede ser procesada cor
                                idRComercial, idArticulo, idProcedencia, idDestino
                                 , 0, "Ambas"
                                 , desde, hasta,
-                                0,"", usuario, scbdlmasterappconfig, true, true, true, false, false, false);
+                                0, "", usuario, scbdlmasterappconfig, true, true, true, false, false, false);
 
 
 
@@ -5086,7 +5124,7 @@ System.Drawing
                                                  "30/01/2017",
                                                  0, -1, SC, "Mariano");
 
-            CartaDePorteManager.RebindReportViewer_ServidorExcel(ref ReporteLocal, "Carta Porte - Situacion.rdl", sqlquery4, SC, false, ref output);
+            CartaDePorteManager.RebindReportViewer_ServidorExcel(ref ReporteLocal, "Carta Porte - Buques.rdl", sqlquery4, SC, false, ref output);
 
 
             System.Diagnostics.Process.Start(output);

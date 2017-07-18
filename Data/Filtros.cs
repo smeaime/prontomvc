@@ -400,11 +400,51 @@ namespace Filtrador
             var qq = filteredQuery.OrderBy(sidx + " " + sord).Skip((page - 1) * rows).Take(rows);
 
 
-            System.Data.Entity.Core.Objects.ObjectQuery oq = (System.Data.Entity.Core.Objects.ObjectQuery)qq;
+
+
+            var result = QueryDeLinq<T>(qq);
+
+            return result;
+
+            ////////////////////////////////////////////   FIN DE LO QUE HAY QUE COPIAR       ////////////////////////////////////////////
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+        }
+
+
+        static string QueryDeLinq<T>(object dbQuery)
+        {
+            // https://stackoverflow.com/questions/4766122/how-can-i-convert-a-dbqueryt-to-an-objectqueryt
+
+
+            System.Data.Entity.Core.Objects.ObjectQuery oq;
+
+            try
+            {
+                var internalQueryField = dbQuery.GetType().GetFields(BindingFlags.NonPublic | BindingFlags.Instance).FirstOrDefault(ff => ff.Name.Equals("_internalQuery"));
+                var internalQuery = internalQueryField.GetValue(dbQuery);
+                var objectQueryField = internalQuery.GetType().GetFields(BindingFlags.NonPublic | BindingFlags.Instance).FirstOrDefault(ff => ff.Name.Equals("_objectQuery"));
+
+                // Here's your ObjectQuery!
+                oq = objectQueryField.GetValue(internalQuery) as ObjectQuery<T>;
+
+            }
+            catch (Exception)
+            {
+
+                oq = (System.Data.Entity.Core.Objects.ObjectQuery)dbQuery;
+            }
+
+
+
+            
             string sqlquery = (oq).ToTraceString();
-
-
-
             var result = oq.ToTraceString();
             List<ObjectParameter> ps = oq.Parameters.ToList();
             for (int n = ps.Count() - 1; n >= 0; n--) //para que @QueContenga no reemplace a @QueContenga2
@@ -429,23 +469,11 @@ namespace Filtrador
                 }
                 result = result.Replace(name, value);
             }
-
-
-
-
-
             return result;
-
-            ////////////////////////////////////////////   FIN DE LO QUE HAY QUE COPIAR       ////////////////////////////////////////////
-            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-
 
 
         }
+
 
 
 

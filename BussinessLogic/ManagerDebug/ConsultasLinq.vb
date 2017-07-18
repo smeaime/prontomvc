@@ -695,7 +695,7 @@ Public Class ConsultasLinq
                                Into Group
                                    Select New infLiqui With {
                                    .agrupVagon = agrupVagon,
-                                   .DestinoDesc = DestinoDesc & " Calada+Balanza" & If(
+                                   .DestinoDesc = DestinoDesc & " Calada y Desc. " & If(
                                        (Exporta = "SI") _
                                               , " - Export.", " - Entrega"),
                                    .SubcontrDesc = Subcontr1Desc,
@@ -743,7 +743,7 @@ Public Class ConsultasLinq
                                        Into Group
                                        Select New infLiqui With {
                                            .agrupVagon = agrupVagon,
-                                           .DestinoDesc = DestinoDesc & " Balanza" & If(
+                                           .DestinoDesc = DestinoDesc & " Descarga" & If(
                                                          (Exporta = "SI") _
                                                        , " - Export.", " - Entrega"),
                                            .SubcontrDesc = Subcontr2Desc,
