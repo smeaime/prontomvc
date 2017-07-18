@@ -660,8 +660,8 @@ Public Class ConsultasLinq
 
                 q.ToList()
 
-                Dim a = (From x In q Order By x.FechaDescarga, x.IdCartaDePorte Select x.NumeroCartaDePorte, x.IdCartaDePorte, x.tarif1, x.tarif2).ToList
-                Dim b = From x In a Select x.NumeroCartaDePorte.ToString & " " & x.IdCartaDePorte.ToString & " " & x.tarif1 & " " & x.tarif2 ' & " " & x.IdListaPreciosDetalle1 & " " & x.IdListaPreciosDetalle2
+                Dim a = (From x In q Order By x.FechaDescarga, x.IdCartaDePorte Select x.NumeroCartaDePorte, x.IdCartaDePorte, x.tarif1, x.tarif2, x.Subcontr1Desc, x.Subcontr2Desc).ToList
+                Dim b = From x In a Select x.NumeroCartaDePorte.ToString & " " & x.IdCartaDePorte.ToString & " " & x.tarif1 & " " & x.tarif2 & " " & x.Subcontr1Desc & " " & x.Subcontr1Desc  ' & " " & x.IdListaPreciosDetalle1 & " " & x.IdListaPreciosDetalle2
 
 
                 ErrHandler2.WriteError(vbCrLf & Join(b.ToArray, vbCrLf))
