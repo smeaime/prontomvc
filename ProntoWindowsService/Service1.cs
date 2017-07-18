@@ -766,6 +766,9 @@ namespace ProntoWindowsService
 
             List<ProntoMVC.Data.FuncionesGenericasCSharp.Resultados> resultado, resultado2;
 
+            var s = new ServicioCartaPorte.servi();
+
+
             while (true)
             {
                 // wait for the event to be signaled
@@ -774,6 +777,17 @@ namespace ProntoWindowsService
                 // let's do some work
                 //no volver a cargar planilla!!!!
 
+                
+                
+                
+                //  https://stackoverflow.com/questions/10399557/is-it-possible-to-run-selenium-firefox-web-driver-without-a-gui
+
+                string dir = DirApp1 + @"\Temp\Pegatinas\";
+
+                //s.CerealnetSeleniumConPhantomJS(dir);
+                s.CerealnetSelenium(dir);
+                s.UrenportSelenium(dir);
+                
 
                 try
                 {
@@ -800,16 +814,16 @@ namespace ProntoWindowsService
 
 
 
-
-                    if (resultado == null && resultado2 == null)
-                    {
-                        bSignaled = m_shutdownEvent.WaitOne(m_delay, true);
-                        if ((bSignaled == true && !Debugger.IsAttached) || bForzarShutdown) break;
-                        System.Threading.Thread.Sleep(1000 * 15);
-                        if ((bSignaled == true && !Debugger.IsAttached) || bForzarShutdown) break;
-                        System.Threading.Thread.Sleep(1000 * 15);
-                        Console.Write(".");
-                    }
+                    for (int minuto = 0; minuto < 30; minuto++)
+                        if (resultado == null && resultado2 == null)
+                        {
+                            bSignaled = m_shutdownEvent.WaitOne(m_delay, true);
+                            if ((bSignaled == true && !Debugger.IsAttached) || bForzarShutdown) break;
+                            System.Threading.Thread.Sleep(1000 * 30);
+                            if ((bSignaled == true && !Debugger.IsAttached) || bForzarShutdown) break;
+                            System.Threading.Thread.Sleep(1000 * 30);
+                            Console.Write(".");
+                        }
 
                 }
 
@@ -1218,7 +1232,7 @@ FCESupport\FCESupportImpl.h, 42.
 
                         string mail = op.Proveedore.Email;
                         string razonsocial = op.Proveedore.RazonSocial ?? "";
-                        
+
                         //busco el proveedor del f.IdComprobante
                         // depues busco el cuit entre los usuarios de la web para mandarselo a ese mail
                         //var l = dbmaster.UserDatosExtendidos.Where(x => x.CUIT.ToString().Replace(" ", "").Replace("-", "") == cuitproveedor);
@@ -1237,7 +1251,7 @@ FCESupport\FCESupportImpl.h, 42.
                         if (mail == null) continue;
 
                         string asunto = ConfigurationManager.AppSettings["AsuntoCorreoPagoDisponible"];
-                        string cuerpo = string.Format(ConfigurationManager.AppSettings["CuerpoCorreoPagoDisponible"],razonsocial );
+                        string cuerpo = string.Format(ConfigurationManager.AppSettings["CuerpoCorreoPagoDisponible"], razonsocial);
                         string friendlyname = ConfigurationManager.AppSettings["RemitentePagoDisponible"];
 
                         ErrHandler.WriteError("Enviando mail a " + mail + "    op id:" + op.IdOrdenPago);

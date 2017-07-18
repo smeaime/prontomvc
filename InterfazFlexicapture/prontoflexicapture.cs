@@ -49,7 +49,8 @@ using System.ServiceModel;
 using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
-
+using OpenQA.Selenium.Support.Extensions;
+using OpenQA.Selenium.PhantomJS;
 
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -4876,6 +4877,102 @@ Formato localidad-provincia	destination	x
         }
 
 
+        public virtual string CDPMovimientos_DynamicGridData_ExcelExportacion_UsandoInternalQuery(string sidx, string sord, int page, int rows, bool _search, string filters, string FechaInicial, string FechaFinal, int puntovent, int iddestino, string SC, string nombreusuario)
+        {
+            //asdad
+
+            // la idea seria llamar a la funcion filtrador pero sin paginar, o diciendolo de
+            // otro modo, pasandole como maxrows un numero grandisimo
+            // http://stackoverflow.com/questions/8227898/export-jqgrid-filtered-data-as-excel-or-csv
+            // I would recommend you to implement export of data on the server and just post the current searching filter to the back-end. Full information about the searching parameter defines postData parameter of jqGrid. Another boolean parameter of jqGrid search define whether the searching filter should be applied of not. You should better ignore _search property of postData parameter and use search parameter of jqGrid.
+
+            // http://stackoverflow.com/questions/9339792/jqgrid-ef-mvc-how-to-export-in-excel-which-method-you-suggest?noredirect=1&lq=1
+
+
+
+
+
+
+
+            //var usuario = Membership.GetUser();
+            System.Data.DataTable dt = EntidadManager.ExecDinamico(SC, "Empleados_TX_UsuarioNT '" + nombreusuario + "'");
+            int idUsuario = Convert.ToInt32(dt.Rows[0][0]);
+            // int puntovent = EmpleadoManager.GetItem(SC, idUsuario).PuntoVentaAsociado;
+
+
+            DateTime FechaDesde = new DateTime(1980, 1, 1);
+            DateTime FechaHasta = new DateTime(2050, 1, 1);
+
+            try
+            {
+
+                FechaDesde = DateTime.ParseExact(FechaInicial, "dd/MM/yyyy", null);
+            }
+            catch (Exception e)
+            {
+                // throw;
+            }
+
+            try
+            {
+                FechaHasta = DateTime.ParseExact(FechaFinal, "dd/MM/yyyy", null);
+
+            }
+            catch (Exception e)
+            {
+                // throw;
+
+            }
+
+
+
+
+
+            ProntoMVC.Data.Models.DemoProntoEntities db =
+                               new ProntoMVC.Data.Models.DemoProntoEntities(
+                                   Auxiliares.FormatearConexParaEntityFramework(
+                                   ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC)));
+
+
+            db.Database.CommandTimeout = 240;
+
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+            int totalrecords = 0;
+
+
+            //var pagedQuery = Filtrador.Filters.FiltroGenerico_UsandoIQueryable<ProntoMVC.Data.Models.fSQL_GetDataTableFiltradoYPaginado_Result3>
+            //                (sidx, sord, page, rows, _search, filters, db, ref totalRecords,
+            //                             db.fSQL_GetDataTableFiltradoYPaginado(
+            //                                                0, 9999999, 0, "", -1, -1,
+            //                                                -1, -1, -1, -1, -1,
+            //                                                -1, 0, "Ambas", FechaDesde,
+            //                                                FechaHasta, puntovent, null, "", "",
+            //                                                -1, null, 0, "", "Todos")
+            //                 );
+
+
+
+
+
+
+
+            //string result2 = CartasPorte_DynamicGridData(sidx, sord, 1, 200000, _search, filters, FechaInicial, FechaFinal, puntovent, iddestino, SC, nombreusuario);
+
+
+            string sqlquery4 = Filtrador.Filters.FiltroGenerico_UsandoIQueryable_DevolverInternalQuery<ProntoMVC.Data.Models.CartasPorteMovimiento>
+                                    (
+                                                            "IdCartaDePorte", "desc", 1, 999999, true, filters, db, ref totalrecords,
+                                                            db.CartasPorteMovimientos
+                                    );
+
+
+            return sqlquery4;
+
+        }
+
+
         public virtual string CartasPorte_DynamicGridData_ExcelExportacion_UsandoInternalQuery(string sidx, string sord, int page, int rows, bool _search, string filters, string FechaInicial, string FechaFinal, int puntovent, int iddestino, string SC, string nombreusuario)
         {
             //asdad
@@ -5376,7 +5473,7 @@ order by kilos desc
 
 
 
-        public void UrenportSelenium()
+        public void UrenportSelenium(string directorioDescarga)
         {
 
             // el geckodriver tiene q estar en el path. actualizar version firefox (version 48) 
@@ -5395,7 +5492,7 @@ order by kilos desc
 
             profile.SetPreference("browser.download.folderList", 2);  // # 2 = custom location
             //profile.SetPreference("browser.download.manager.showWhenStarting", false);
-            profile.SetPreference("browser.download.dir", @"C:\Users\Administrador\Downloads");  //os.getcwd()
+            profile.SetPreference("browser.download.dir", directorioDescarga);  //os.getcwd()
             profile.SetPreference("browser.helperApps.neverAsk.saveToDisk", "application/ms-excel;application/xls;text/csv;application/vnd.ms-excel");
             profile.SetPreference("browser.helperApps.alwaysAsk.force", false);
 
@@ -5442,6 +5539,7 @@ order by kilos desc
             //button.Click();
 
 
+            System.Threading.Thread.Sleep(1000 * 15);
 
 
             browser.Quit();
@@ -5558,7 +5656,7 @@ order by kilos desc
 
 
 
-        public void CerealnetSelenium()
+        public void CerealnetSelenium(string directorioDescarga)
         {
 
             // el geckodriver tiene q estar en el path. actualizar version firefox (version 48) 
@@ -5573,20 +5671,20 @@ order by kilos desc
             string filename = "Cerealnet.xls";
 
 
+           
             FirefoxProfile profile = new FirefoxProfile();
 
             profile.SetPreference("browser.download.folderList", 2);  // # 2 = custom location
             //profile.SetPreference("browser.download.manager.showWhenStarting", false);
-            profile.SetPreference("browser.download.dir", @"C:\Users\Administrador\Downloads" );  //os.getcwd()
+            profile.SetPreference("browser.download.dir", directorioDescarga);  //os.getcwd()
             profile.SetPreference("browser.helperApps.neverAsk.saveToDisk", "application/ms-excel;application/xls;text/csv;application/vnd.ms-excel");
             profile.SetPreference("browser.helperApps.alwaysAsk.force", false);
-
-
-
-
-
-            IWebDriver browser = new FirefoxDriver(profile);
     
+            IWebDriver browser = new FirefoxDriver(profile);
+           
+            
+
+            
 
 
             browser.Navigate().GoToUrl("http://entregadores.cerealnet.com/");
@@ -5617,6 +5715,7 @@ order by kilos desc
             //button = browser.FindElement(By.Name("CPHPrincipal_btnExcel"));
             //button.Click();
 
+            System.Threading.Thread.Sleep(1000 * 15);
 
 
 
@@ -5731,6 +5830,236 @@ order by kilos desc
             download_excel(silent=False)
                         */
         }
+
+        public void CerealnetSeleniumConPhantomJS(string directorioDescarga)
+        {
+
+            // el geckodriver tiene q estar en el path. actualizar version firefox (version 48) 
+            //verificar version del geckodriver.exe, debe ser 0.16 o superior (la de marzo no me servia)
+
+
+
+
+
+            // os.environ["PATH"] += os.pathsep + binpath
+
+            string filename = "Cerealnet.xls";
+
+
+            /*
+            FirefoxProfile profile = new FirefoxProfile();
+
+            profile.SetPreference("browser.download.folderList", 2);  // # 2 = custom location
+            //profile.SetPreference("browser.download.manager.showWhenStarting", false);
+            profile.SetPreference("browser.download.dir", @"C:\Users\Administrador\Downloads" );  //os.getcwd()
+            profile.SetPreference("browser.helperApps.neverAsk.saveToDisk", "application/ms-excel;application/xls;text/csv;application/vnd.ms-excel");
+            profile.SetPreference("browser.helperApps.alwaysAsk.force", false);
+    
+            IWebDriver browser = new FirefoxDriver(profile);
+            */
+
+
+            IWebDriver browser = new PhantomJSDriver();
+
+
+
+            browser.Navigate().GoToUrl("http://entregadores.cerealnet.com/");
+
+            // WebDriverWait(browser, 10).until(EC.presence_of_element_located((By.ID, "txtUsuario")))
+            new WebDriverWait(browser, TimeSpan.FromSeconds(10)).Until(ExpectedConditions.ElementExists((By.Id("txtUsuario"))));
+
+
+            var user_name = browser.FindElement(By.Name("txtUsuario"));
+            user_name.SendKeys("williams");
+            // https://stackoverflow.com/questions/43583836/expected-object-undefined-undefined-to-be-a-string-indexoutofbounds
+            // Thank you it worked. We need to update selenium to 3.4 to support Gecko v 0.16. Once both are updated no issues
+
+            var password = browser.FindElement(By.Name("txtPass"));
+            password.SendKeys("santiago1177");
+
+
+            var button = browser.FindElement(By.Name("btnInicio"));
+            button.Click();
+
+            //if os.path.isfile(filename):            os.remove(filename)
+            //WebDriverWait(browser, 20).until(            EC.presence_of_element_located((By.ID, "CPHPrincipal_btnExcel")))
+            //new WebDriverWait(browser, TimeSpan.FromSeconds(10));
+            var aaaa = new WebDriverWait(browser, TimeSpan.FromSeconds(20)).Until(ExpectedConditions.ElementExists((By.Id("CPHPrincipal_btnExcel"))));
+
+            aaaa.Click();
+
+            //button = browser.FindElement(By.Name("CPHPrincipal_btnExcel"));
+            //button.Click();
+
+            System.Threading.Thread.Sleep(1000 * 15);
+
+
+        // https://stackoverflow.com/questions/34513538/download-file-with-phantomjs?rq=1
+
+
+            browser.Quit();
+
+
+
+
+            /*
+
+                        #!/usr/bin/python
+            # -*- coding: utf-8 -*-
+            import os
+            from time import sleep
+            from selenium import webdriver
+            from pyvirtualdisplay import Display
+            from selenium.webdriver.support.ui import WebDriverWait
+            from selenium.webdriver.support import expected_conditions as EC
+            from selenium.webdriver.common.by import By
+
+
+            def download_excel(silent=True):
+                if silent:
+                    display = Display(visible=0, size=(1366, 768))
+                    display.start()
+                 #Instalar Firefox
+                # instalar el ejecutable geckodriver de https://github.com/mozilla/geckodriver/releases
+                binpath = 'E:/SistemaPronto/Robot' # Directorio donde está geckodriver
+                os.environ["PATH"] += os.pathsep + binpath
+
+                filename = 'Urenport.xls'
+
+                profile = webdriver.FirefoxProfile()
+                profile.set_preference('browser.download.folderList', 2)    # 2 = custom location
+                profile.set_preference('browser.download.manager.showWhenStarting', False)
+                profile.set_preference('browser.download.dir', os.getcwd())
+                profile.set_preference('browser.helperApps.neverAsk.saveToDisk', "application/ms-excel;application/xls;text/csv;application/vnd.ms-excel")
+                profile.set_preference('browser.helperApps.alwaysAsk.force', False)
+                browser = webdriver.Firefox(firefox_profile=profile)
+                try:
+                    browser.get('http://entregadores.cerealnet.com/')
+
+                    WebDriverWait(browser, 10).until(
+                        EC.presence_of_element_located((By.ID, "txtUsuario")))
+
+                    user_name = browser.find_element_by_id('txtUsuario')
+                    user_name.send_keys('williams')
+
+                    password = browser.find_element_by_id('txtPass')
+                    password.send_keys('santiago1177')
+
+                    button = browser.find_element_by_id('btnInicio')
+                    button.click()
+
+                    if os.path.isfile(filename):
+                        os.remove(filename)
+
+                    WebDriverWait(browser, 20).until(
+                        EC.presence_of_element_located((By.ID, "CPHPrincipal_btnExcel")))
+
+
+                    button = browser.find_element_by_id('CPHPrincipal_btnExcel')
+                    button.click()
+
+
+                    sleep(30)
+
+                    browser.get('http://extranet.urenport.com/login.aspx')
+
+                    WebDriverWait(browser, 10).until(
+                        EC.presence_of_element_located((By.ID, "Logins_UserName")))
+
+                    user_name = browser.find_element_by_id('Logins_UserName')
+                    user_name.send_keys('williams')
+
+                    password = browser.find_element_by_id('Logins_Password')
+                    password.send_keys('santiago1177')
+
+                    button = browser.find_element_by_id('Logins_LoginButton')
+                    button.click()
+
+                    WebDriverWait(browser, 20).until(
+                        EC.presence_of_element_located((By.ID, "ContentPlaceHolder1_GridView2")))
+
+                    button = browser.find_element_by_id('ContentPlaceHolder1_ASPxMenu2_DXI0_T')
+                    button.click()
+
+                    sleep(15)
+
+		
+                    bashCommand = "ren Urenport.xls \"Urenport_%time:~0,2%%time:~3,2%-%DATE:/=%.xls\" "
+                    os.system(bashCommand)
+		
+                    sleep(2)
+		 
+                    bashCommand = "robocopy E:\SistemaPronto\Robot\  E:\Sites\ProntoTesting\Temp\Pegatinas *.xls /MOV /LOG+:LogRobot.txt "
+                    os.system(bashCommand)
+
+                finally:
+                    #browser.quit()
+                    bashCommand = "Taskkill /IM Firefox.exe /F >nul 2>&1"
+                    os.system(bashCommand)
+		
+                    bashCommand = "ren Urenport.xls \"Urenport_%time:~0,2%%time:~3,2%-%DATE:/=%.xls\" "
+                    os.system(bashCommand)
+		
+                    sleep(2)
+		
+                    bashCommand = "robocopy E:\SistemaPronto\Robot\  E:\Sites\ProntoTesting\Temp\Pegatinas *.xls /MOV /LOG+:LogRobot.txt"
+                    os.system(bashCommand)
+
+            download_excel(silent=False)
+                        */
+        }
+
+
+
+        public static bool DownloadFile(string url, IWebDriver driver)
+        {
+        //https://stackoverflow.com/questions/34513538/download-file-with-phantomjs?rq=1
+
+            try
+            {
+                // Construct HTTP request to get the file
+                HttpWebRequest httpRequest = (HttpWebRequest)WebRequest.Create(url);
+                httpRequest.CookieContainer = new System.Net.CookieContainer();
+
+                for (int i = 0; i < driver.Manage().Cookies.AllCookies.Count - 1; i++)
+                {
+                    System.Net.Cookie ck = new System.Net.Cookie(driver.Manage().Cookies.AllCookies[i].Name, driver.Manage().Cookies.AllCookies[i].Value, driver.Manage().Cookies.AllCookies[i].Path, driver.Manage().Cookies.AllCookies[i].Domain);
+                    httpRequest.CookieContainer.Add(ck);
+                }
+
+                httpRequest.Accept = "text/html, application/xhtml+xml, */*";
+                httpRequest.UserAgent = "Mozilla/5.0 (Windows NT 6.1; WOW64; Trident/7.0; rv:11.0) like Gecko";
+
+                //HttpStatusCode responseStatus;
+
+                // Get back the HTTP response for web server
+                HttpWebResponse httpResponse = (HttpWebResponse)httpRequest.GetResponse();
+                Stream httpResponseStream = httpResponse.GetResponseStream();
+
+                // Define buffer and buffer size
+                int bufferSize = 1024;
+                byte[] buffer = new byte[bufferSize];
+                int bytesRead = 0;
+
+                // Read from response and write to file
+                string FilePath = "";
+                string FileName = "";
+                FileStream fileStream = File.Create(FilePath + "\\" + FileName + ".xls");
+                while ((bytesRead = httpResponseStream.Read(buffer, 0, bufferSize)) != 0)
+                {
+                    fileStream.Write(buffer, 0, bytesRead);
+                }
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
+
+
+
 
 
 
