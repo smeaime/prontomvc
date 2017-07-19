@@ -62,110 +62,101 @@ Partial Class CartaDePorteInformesAccesoClientes
         End If
 
 
+        If Not IsPostBack Then 'es decir, si es la primera vez que se carga
+            '////////////////////////////////////////////
+            '////////////////////////////////////////////
+            'PRIMERA CARGA
+            'inicializacion de varibles y preparar pantalla
+            '////////////////////////////////////////////
+            '////////////////////////////////////////////
 
 
-        If Request.Browser("IsMobileDevice") = "true" Then
-            'Response.Redirect("CartaDePorteInformesAccesoClientesMovil.aspx")
-        End If
+            Me.Title = "Informes de CDPs"
 
 
-
-
-            If Not IsPostBack Then 'es decir, si es la primera vez que se carga
-                '////////////////////////////////////////////
-                '////////////////////////////////////////////
-                'PRIMERA CARGA
-                'inicializacion de varibles y preparar pantalla
-                '////////////////////////////////////////////
-                '////////////////////////////////////////////
-
-
-                Me.Title = "Informes de CDPs"
-
-
-                Try
-                    BindTypeDropDown()
-                Catch ex As Exception
-                    MandarMailDeError(ex)
-                End Try
+            Try
+                BindTypeDropDown()
+            Catch ex As Exception
+                MandarMailDeError(ex)
+            End Try
 
 
 
 
-                refrescaPeriodo()
+            refrescaPeriodo()
 
 
-                'agregar al where que aparezca la razon social de este cliente
-                Dim rs As String
-                Try
-                    rs = UserDatosExtendidosManager.TraerRazonSocialDelUsuario(Session(SESSIONPRONTO_UserId), ConexBDLmaster, HFSC.Value)
-                Catch ex As Exception
-                    ErrHandler2.WriteError(ex)
-                    rs = Session(SESSIONPRONTO_UserName) 'como no encuentro el usuario en la tabla de datos adicionales de la bdlmaster, uso el nombre del usuario como razon social que esperaba encontrar en esa dichosa tabla
-                End Try
+            'agregar al where que aparezca la razon social de este cliente
+            Dim rs As String
+            Try
+                rs = UserDatosExtendidosManager.TraerRazonSocialDelUsuario(Session(SESSIONPRONTO_UserId), ConexBDLmaster, HFSC.Value)
+            Catch ex As Exception
+                ErrHandler2.WriteError(ex)
+                rs = Session(SESSIONPRONTO_UserName) 'como no encuentro el usuario en la tabla de datos adicionales de la bdlmaster, uso el nombre del usuario como razon social que esperaba encontrar en esa dichosa tabla
+            End Try
 
 
-                If rs <> "" Then
-                    Dim idcli = BuscaIdClientePreciso(rs, HFSC.Value)
-                    If idcli = -1 Then
+            If rs <> "" Then
+                Dim idcli = BuscaIdClientePreciso(rs, HFSC.Value)
+                If idcli = -1 Then
 
-                        MsgBoxAjax(Me, "No existe el cliente: " & rs)
-                        Exit Sub
-                    End If
+                    MsgBoxAjax(Me, "No existe el cliente: " & rs)
+                    Exit Sub
                 End If
-
-
-                lblRazonSocial.Text = rs
-
-
-
-                Dim clientes As List(Of String) = TraerCUITClientesSegunUsuario(Session(SESSIONPRONTO_UserName), HFSC.Value, ConexBDLmaster).Where(Function(x) x <> "").ToList  'c.ToList()
-                'If clientes.Count > 0 Then
-
-                '    chkTitular.Checked = False
-                '    chkTitular.Visible = False
-                '    chkIntermediario.Checked = False
-                '    chkIntermediario.Visible = False
-                '    chkRemComercial.Checked = False
-                '    chkRemComercial.Visible = False
-                '    chkClienteAuxiliar.Checked = False
-                '    chkClienteAuxiliar.Visible = False
-                '    chkCorredor.Checked = False
-                '    chkCorredor.Visible = False
-                '    chkDestinatario.Checked = False
-                '    chkDestinatario.Visible = False
-                '    cmbCriterioWHERE.Visible = False
-
-                'End If
-
-
-
-
-                BloqueosDeEdicion()
-
             End If
 
 
-            Dim tx As TextBox = Me.Master.FindControl("txtSuperbuscador")
-            tx.Visible = False
+            lblRazonSocial.Text = rs
 
 
 
-            AjaxControlToolkit.ToolkitScriptManager.GetCurrent(Me.Page).RegisterPostBackControl(btnDescargaSincro)
-            AjaxControlToolkit.ToolkitScriptManager.GetCurrent(Me.Page).RegisterPostBackControl(btnImagenes)
-            AjaxControlToolkit.ToolkitScriptManager.GetCurrent(Me.Page).RegisterPostBackControl(btnImagenesPDF)
-            AjaxControlToolkit.ToolkitScriptManager.GetCurrent(Me.Page).RegisterPostBackControl(btnImagenesTiffReducido)
-            AjaxControlToolkit.ToolkitScriptManager.GetCurrent(Me.Page).RegisterPostBackControl(btnExcel)
-            AjaxControlToolkit.ToolkitScriptManager.GetCurrent(Me.Page).RegisterPostBackControl(btnTexto)
+            Dim clientes As List(Of String) = TraerCUITClientesSegunUsuario(Session(SESSIONPRONTO_UserName), HFSC.Value, ConexBDLmaster).Where(Function(x) x <> "").ToList  'c.ToList()
+            'If clientes.Count > 0 Then
 
-            AutoCompleteExtender2.ContextKey = HFSC.Value
-            AutoCompleteExtender21.ContextKey = HFSC.Value
-            AutoCompleteExtender24.ContextKey = HFSC.Value
-            AutoCompleteExtender25.ContextKey = HFSC.Value
-            AutoCompleteExtender26.ContextKey = HFSC.Value
-            AutoCompleteExtender27.ContextKey = HFSC.Value
-            AutoCompleteExtender3.ContextKey = HFSC.Value
-            AutoCompleteExtender4.ContextKey = HFSC.Value
+            '    chkTitular.Checked = False
+            '    chkTitular.Visible = False
+            '    chkIntermediario.Checked = False
+            '    chkIntermediario.Visible = False
+            '    chkRemComercial.Checked = False
+            '    chkRemComercial.Visible = False
+            '    chkClienteAuxiliar.Checked = False
+            '    chkClienteAuxiliar.Visible = False
+            '    chkCorredor.Checked = False
+            '    chkCorredor.Visible = False
+            '    chkDestinatario.Checked = False
+            '    chkDestinatario.Visible = False
+            '    cmbCriterioWHERE.Visible = False
+
+            'End If
+
+
+
+
+            BloqueosDeEdicion()
+
+        End If
+
+
+        'Dim tx As TextBox = Me.Master.FindControl("txtSuperbuscador")
+        'tx.Visible = False
+
+
+
+        'AjaxControlToolkit.ToolkitScriptManager.GetCurrent(Me.Page).RegisterPostBackControl(btnDescargaSincro)
+        AjaxControlToolkit.ToolkitScriptManager.GetCurrent(Me.Page).RegisterPostBackControl(btnImagenes)
+        AjaxControlToolkit.ToolkitScriptManager.GetCurrent(Me.Page).RegisterPostBackControl(btnImagenesPDF)
+        AjaxControlToolkit.ToolkitScriptManager.GetCurrent(Me.Page).RegisterPostBackControl(btnImagenesTiffReducido)
+        'AjaxControlToolkit.ToolkitScriptManager.GetCurrent(Me.Page).RegisterPostBackControl(btnExcel)
+        'AjaxControlToolkit.ToolkitScriptManager.GetCurrent(Me.Page).RegisterPostBackControl(btnTexto)
+
+        AutoCompleteExtender2.ContextKey = HFSC.Value
+        AutoCompleteExtender21.ContextKey = HFSC.Value
+        AutoCompleteExtender24.ContextKey = HFSC.Value
+        AutoCompleteExtender25.ContextKey = HFSC.Value
+        AutoCompleteExtender26.ContextKey = HFSC.Value
+        AutoCompleteExtender27.ContextKey = HFSC.Value
+        AutoCompleteExtender3.ContextKey = HFSC.Value
+        AutoCompleteExtender4.ContextKey = HFSC.Value
 
 
     End Sub
@@ -207,48 +198,7 @@ Partial Class CartaDePorteInformesAccesoClientes
     End Sub
 
 
-    Protected Sub btnExcel_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnExcel.Click
-        Dim output As String
-
-
-        AsignaInformeAlReportViewer(True)
-
-        'Dim dt = EntidadManager.GetStoreProcedure(HFSC.Value, "wCartasDePorte_TX_InformesLiviano", -1, iisValidSqlDate(txtFechaDesde.Text, #1/1/1753#), iisValidSqlDate(txtFechaHasta.Text, #1/1/2100#))
-        'sacaColumnas(dt)
-        'RebindReportViewerExcel("ProntoWeb\Informes\Descargas por Titular - Detallado.rdl", DataTableWHERE(dt, generarWHERE()), Nothing, output)
-
-
-        Try
-            Dim MyFile1 = New FileInfo(output) 'quizás si me fijo de nuevo, ahora verifica que el archivo existe...
-            If MyFile1.Exists Then
-                Response.ContentType = "application/octet-stream"
-                Response.AddHeader("Content-Disposition", "attachment; filename=" & MyFile1.Name)
-                'problema: UpdatePanel and Response.Write / Response.TransmitFile http://forums.asp.net/t/1090634.aspx
-                'TENES QUE AGREGAR EN EL Page_Load (AUN CUADO ES POSTBACK)!!!!!
-                'AjaxControlToolkit.ToolkitScriptManager.GetCurrent(Me.Page).RegisterPostBackControl(Button6)
-                Response.TransmitFile(output) 'problema: UpdatePanel and Response.Write / Response.TransmitFile http://forums.asp.net/t/1090634.aspx
-                Response.End()
-            Else
-                MsgBoxAjax(Me, "No se pudo generar el sincronismo. Consulte al administrador")
-            End If
-        Catch ex As Exception
-            'ErrHandler2.WriteAndRaiseError(ex.tostring)
-            ErrHandler2.WriteError(ex.ToString)
-            'MsgBoxAjax(Me, ex.tostring)
-            Return
-        End Try
-
-
-
-    End Sub
-
-
-
-    Protected Sub cmbInforme_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles cmbInforme.SelectedIndexChanged
-        bRecargarInforme = True
-        'ReBind()
-        'TraerResumenDeCuentaFF()
-    End Sub
+  
 
     Private Sub BindTypeDropDown()
         cmbPuntoVenta.DataSource = PuntoVentaWilliams.IniciaComboPuntoVentaWilliams3(HFSC.Value)
@@ -866,52 +816,6 @@ Partial Class CartaDePorteInformesAccesoClientes
 
     End Sub
 
-
-    Protected Sub btnTexto_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnTexto.Click
-
-        'Dim sWHERE As String = CDPMailFiltrosManager.generarWHEREparaDatasetParametrizado(HFSC.Value, _
-        '                    sTitulo, _
-        '                    CartaDePorteManager.enumCDPestado.DescargasMasFacturadas, "", idVendedor, idCorredor, _
-        '                    idDestinatario, idIntermediario, _
-        '                    idRComercial, idArticulo, idProcedencia, idDestino, _
-        '                    "1", DropDownList2.Text, _
-        '                    Convert.ToDateTime(iisValidSqlDate(txtFechaDesde.Text, #1/1/1753#)), _
-        '                    Convert.ToDateTime(iisValidSqlDate(txtFechaHasta.Text, #1/1/2100#)), _
-        '                    cmbPuntoVenta.SelectedValue)
-
-
-        'Dim dt = EntidadManager.GetStoreProcedure(HFSC.Value, "wCartasDePorte_TX_InformesLiviano", -1, iisValidSqlDate(txtFechaDesde.Text, #1/1/1753#), iisValidSqlDate(txtFechaHasta.Text, #1/1/2100#))
-        Dim dt = EntidadManager.GetStoreProcedure(HFSC.Value, "wCartasDePorte_TX_Todas", -1, iisValidSqlDate(txtFechaDesde.Text, #1/1/1753#), iisValidSqlDate(txtFechaHasta.Text, #1/1/2100#))
-
-
-
-        'Dim output = RebindReportViewerTexto("ProntoWeb\Informes\Adjuntos de Facturacion (a impresora de matriz de puntos).rdl", dt)
-        Dim output = RebindReportViewerTexto("ProntoWeb\Informes\Listado general de Cartas de Porte (simulando original) .rdl", dt)
-
-        output = ImpresoraMatrizDePuntosEPSONTexto.ExcelToText(output)
-
-        Try
-            Dim MyFile1 = New FileInfo(output) 'quizás si me fijo de nuevo, ahora verifica que el archivo existe...
-            If MyFile1.Exists Then
-                Response.ContentType = "application/octet-stream"
-                Response.AddHeader("Content-Disposition", "attachment; filename=" & MyFile1.Name)
-                'problema: UpdatePanel and Response.Write / Response.TransmitFile http://forums.asp.net/t/1090634.aspx
-                'TENES QUE AGREGAR EN EL Page_Load (AUN CUADO ES POSTBACK)!!!!!
-                'AjaxControlToolkit.ToolkitScriptManager.GetCurrent(Me.Page).RegisterPostBackControl(Button6)
-                Response.TransmitFile(output) 'problema: UpdatePanel and Response.Write / Response.TransmitFile http://forums.asp.net/t/1090634.aspx
-                Response.End()
-            Else
-                MsgBoxAjax(Me, "No se pudo generar el sincronismo. Consulte al administrador")
-            End If
-        Catch ex As Exception
-            'ErrHandler2.WriteAndRaiseError(ex.tostring)
-            ErrHandler2.WriteError(ex.ToString)
-            'MsgBoxAjax(Me, ex.tostring)
-            Return
-        End Try
-
-
-    End Sub
 
 
     Function RebindReportViewerTexto(ByVal rdlFile As String, ByVal dt As DataTable, Optional ByVal dt2 As DataTable = Nothing, Optional ByRef ArchivoExcelDestino As String = "") As String

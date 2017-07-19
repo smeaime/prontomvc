@@ -42,9 +42,14 @@ Partial Class CDPStockMovimientos
 
         Permisos()
 
+        AjaxControlToolkit.ToolkitScriptManager.GetCurrent(Me.Page).RegisterPostBackControl(Button1)
 
 
     End Sub
+
+
+
+
 
     Sub Imprimir(ByVal IdCDPStockMovimiento)
         Dim output As String
@@ -364,4 +369,41 @@ Partial Class CDPStockMovimientos
     End Sub
 
 
+    Protected Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+        Dim filtro = ""
+        Dim ReporteLocal = New Microsoft.Reporting.WebForms.ReportViewer()
+        Dim output = "c:\asdad.xls"
+
+        Dim s = New ServicioCartaPorte.servi()
+        Dim sqlquery4 = s.CDPMovimientos_DynamicGridData_ExcelExportacion_UsandoInternalQuery("IdCDPMovimiento", "desc", 1, 999999, True, filtro,
+                                             "01/12/2016",
+                                             "30/01/2017",
+                                             0, -1, HFSC.Value, "Mariano")
+
+        CartaDePorteManager.RebindReportViewer_ServidorExcel(ReporteLocal, "Carta Porte - Situacion.rdl", sqlquery4, HFSC.Value, False, output)
+
+
+
+        Try
+            Dim MyFile1 = New FileInfo(output) 'quizás si me fijo de nuevo, ahora verifica que el archivo existe...
+            If MyFile1.Exists Then
+                Response.ContentType = "application/octet-stream"
+                Response.AddHeader("Content-Disposition", "attachment; filename=" & MyFile1.Name)
+                'problema: UpdatePanel and Response.Write / Response.TransmitFile http://forums.asp.net/t/1090634.aspx
+                'TENES QUE AGREGAR EN EL Page_Load (AUN CUADO ES POSTBACK)!!!!!
+                'AjaxControlToolkit.ToolkitScriptManager.GetCurrent(Me.Page).RegisterPostBackControl(Button6)
+                Response.TransmitFile(output) 'problema: UpdatePanel and Response.Write / Response.TransmitFile http://forums.asp.net/t/1090634.aspx
+                Response.End()
+            Else
+                MsgBoxAjax(Me, "No se pudo generar el sincronismo. Consulte al administrador")
+            End If
+        Catch ex As Exception
+            'ErrHandler2.WriteAndRaiseError(ex.tostring)
+            ErrHandler2.WriteError(ex.ToString)
+            'MsgBoxAjax(Me, ex.tostring)
+            Return
+        End Try
+
+
+    End Sub
 End Class
