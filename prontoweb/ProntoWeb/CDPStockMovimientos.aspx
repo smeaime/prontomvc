@@ -17,7 +17,7 @@
                         Visible="true">+   Nuevo</asp:LinkButton>
 
                    
-
+                    <asp:Button ID="Button1" Text="exportar" runat="server" Visible="true" Height="27" />
 
                     <asp:Label ID="Label12" runat="server" Text="Buscar " ForeColor="White" Style="text-align: right"
                         Visible="False"></asp:Label>
@@ -87,12 +87,12 @@
                                             <asp:Label ID="Fecha" Text='<%#   Eval( "FechaIngreso", "{0:d MMM}" )  %>' runat="server" />
                                         </ItemTemplate>
                                     </asp:TemplateField>
-                                    <asp:BoundField DataField="MovProductoDesc" HeaderText="Producto" SortExpression="MovProductoDesc" />
-                                    <asp:BoundField DataField="ExportadorOrigen" HeaderText="Origen" SortExpression="ExportadorOrigen" />
-                                    <asp:BoundField DataField="ExportadorDestino" HeaderText="Destino" SortExpression="ExportadorDestino" />
+                                    <asp:BoundField DataField="MovProductoDesc" HeaderText="Destino" SortExpression="MovProductoDesc" />
+                                    <asp:BoundField DataField="ExportadorOrigen" HeaderText="  " SortExpression="ExportadorOrigen" />
+                                    <asp:BoundField DataField="ExportadorDestino" HeaderText="Origen" SortExpression="ExportadorDestino" />
                                     <%--<asp:BoundField DataField="Tipo" HeaderText="Tipo" SortExpression="Tipo" />--%>
                                     <asp:BoundField DataField="Contrato" HeaderText="Contrato" SortExpression="Contrato" />
-                                    <asp:BoundField DataField="MovDestinoDesc" HeaderText="Puerto" SortExpression="Puerto" />
+                                    <asp:BoundField DataField="MovDestinoDesc" HeaderText="Producto" SortExpression="Puerto" />
                                     <asp:BoundField DataField="Vapor" HeaderText="Vapor" SortExpression="Vapor" />
                                        <asp:BoundField DataField="IdStock" HeaderText="PVenta" SortExpression="IdStock" />
                                     <asp:BoundField DataField="Numero" HeaderText="Numero" SortExpression="Numero" />
