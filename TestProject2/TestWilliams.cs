@@ -962,11 +962,16 @@ namespace ProntoMVC.Tests
 
 
 
+
+
         [TestMethod]
         public void loginEnUrenport3_42773_3()
         {
             var s = new ServicioCartaPorte.servi();
-            s.CerealnetSeleniumConPhantomJS(DirApp);
+
+            s.CerealnetSelenium_ConChromeHeadless(DirApp);
+
+            //s.CerealnetSeleniumConPhantomJS(DirApp);
         }
 
 
