@@ -358,3 +358,27 @@ Los parámetros afectados son:
 Quitando el origen de EventLog ProntoAgente.
 Se está quitando el servicio ProntoAgente del sistema...
 El servicio ProntoAgente se ha quitado correctamente del sistema.
+Desinstalando ensamblado 'C:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\bin\Debug\ProntoAgente.exe'.
+Los parámetros afectados son:
+   logtoconsole = 
+   logfile = C:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\bin\Debug\ProntoAgente.InstallLog
+   assemblypath = C:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\bin\Debug\ProntoAgente.exe
+Quitando el origen de EventLog ProntoAgente.
+Advertencia: el origen ProntoAgente no está registrado en el equipo local.
+Se está quitando el servicio ProntoAgente del sistema...
+Excepción durante la desinstalación del instalador System.ServiceProcess.ServiceInstaller.
+System.ComponentModel.Win32Exception: El servicio especificado no existe como servicio instalado
+Excepción al desinstalar. Esta excepción se pasará por alto y continuará el proceso de desinstalación. Sin embargo, puede que la aplicación no esté completamente desinstalada hasta que finalice la desinstalación.
+Instalando ensamblado 'C:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\bin\Debug\ProntoAgente.exe'.
+Los parámetros afectados son:
+   logtoconsole = 
+   logfile = C:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\bin\Debug\ProntoAgente.InstallLog
+   assemblypath = C:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\bin\Debug\ProntoAgente.exe
+Instalando el servicio ProntoAgente...
+El servicio ProntoAgente se ha instalado correctamente.
+Creando el origen de EventLog ProntoAgente en el registro Application...
+Confirmando ensamblado 'C:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\bin\Debug\ProntoAgente.exe'.
+Los parámetros afectados son:
+   logtoconsole = 
+   logfile = C:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\bin\Debug\ProntoAgente.InstallLog
+   assemblypath = C:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\bin\Debug\ProntoAgente.exe
