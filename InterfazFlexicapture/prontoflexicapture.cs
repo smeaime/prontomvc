@@ -51,6 +51,8 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 using OpenQA.Selenium.Support.Extensions;
 using OpenQA.Selenium.PhantomJS;
+using OpenQA.Selenium.Chrome;
+
 
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -5525,11 +5527,11 @@ order by kilos desc
             //if os.path.isfile(filename):            os.remove(filename)
             //WebDriverWait(browser, 20).until(            EC.presence_of_element_located((By.ID, "CPHPrincipal_btnExcel")))
             //new WebDriverWait(browser, TimeSpan.FromSeconds(10));
-            
-            
-            
-                       
-            
+
+
+
+
+
             var aaaa = new WebDriverWait(browser, TimeSpan.FromSeconds(20)).Until(ExpectedConditions.ElementExists((By.Id("ContentPlaceHolder1_ASPxMenu2_DXI0_T"))));
 
             aaaa.Click();
@@ -5671,7 +5673,7 @@ order by kilos desc
             string filename = "Cerealnet.xls";
 
 
-           
+
             FirefoxProfile profile = new FirefoxProfile();
 
             profile.SetPreference("browser.download.folderList", 2);  // # 2 = custom location
@@ -5679,12 +5681,12 @@ order by kilos desc
             profile.SetPreference("browser.download.dir", directorioDescarga);  //os.getcwd()
             profile.SetPreference("browser.helperApps.neverAsk.saveToDisk", "application/ms-excel;application/xls;text/csv;application/vnd.ms-excel");
             profile.SetPreference("browser.helperApps.alwaysAsk.force", false);
-    
-            IWebDriver browser = new FirefoxDriver(profile);
-           
-            
 
-            
+            IWebDriver browser = new FirefoxDriver(profile);
+
+
+
+
 
 
             browser.Navigate().GoToUrl("http://entregadores.cerealnet.com/");
@@ -5894,7 +5896,7 @@ order by kilos desc
             System.Threading.Thread.Sleep(1000 * 15);
 
 
-        // https://stackoverflow.com/questions/34513538/download-file-with-phantomjs?rq=1
+            // https://stackoverflow.com/questions/34513538/download-file-with-phantomjs?rq=1
 
 
             browser.Quit();
@@ -6011,9 +6013,107 @@ order by kilos desc
 
 
 
+
+
+        public void CerealnetSelenium_ConChromeHeadless(string directorioDescarga)
+        {
+
+
+            /*
+             * 
+             * https://stackoverflow.com/questions/26461507/running-selenium-server-chromedriver-as-a-windows-service
+             * 
+             * 
+        Right now you can't help it - it used to work fine in session 0 but for the past few days after chrome update only works for interactive sessions.
+
+        Related bugs:
+
+        https://code.google.com/p/selenium/issues/detail?id=8029 https://code.google.com/p/chromium/issues/detail?id=422218
+
+        shareedit
+        answered Oct 20 '14 at 13:15
+
+        swiniak
+        691
+  	 	
+        Is there a particular version of Chrome you know works within Session 0? If I can simply downgrade, then this would be an option. – jwa Oct 20 '14 at 13:54
+        1	 	
+        With versions of Chrome before 38 all works as windows-service fine. Since version 38 - my windows service with selenium does not work. Downgrading Chrome solved problem for me – razon Oct 30 '14 at 9:50
+        1	 	
+        I can confirm what @razon is saying. Chrome 37 is last known version working when run under service. – Stas Berkov Jul 8 '15 at 11:26
+        1	 	
+        It's been a while since the last comment on this. Do later versions of chrome still not work? – Paul Perrick Jan 24 '16 at 0:19
+
+
+                    */
+
+
+
+
+            //https://thefriendlytester.co.uk/2017/04/new-headless-chrome-with-selenium.html
+
+            ChromeOptions chromeOptions = new ChromeOptions();
+            //chromeOptions.BinaryLocation   .setBinary("/Applications/Google Chrome Canary.app/Contents/MacOS/Google Chrome Canary");
+            //chromeOptions.BinaryLocation(@"C:\Program Files (x86)\Google\Chrome\Application");
+            chromeOptions.AddArguments("--headless", "--disable-gpu", "--no-sandbox");
+
+
+            IWebDriver browser = new ChromeDriver(@"C:\Users\Administrador\Desktop", chromeOptions);
+
+
+
+
+            browser.Navigate().GoToUrl("http://entregadores.cerealnet.com/");
+
+            // WebDriverWait(browser, 10).until(EC.presence_of_element_located((By.ID, "txtUsuario")))
+            new WebDriverWait(browser, TimeSpan.FromSeconds(10)).Until(ExpectedConditions.ElementExists((By.Id("txtUsuario"))));
+
+
+            var user_name = browser.FindElement(By.Name("txtUsuario"));
+            user_name.SendKeys("williams");
+            // https://stackoverflow.com/questions/43583836/expected-object-undefined-undefined-to-be-a-string-indexoutofbounds
+            // Thank you it worked. We need to update selenium to 3.4 to support Gecko v 0.16. Once both are updated no issues
+
+            var password = browser.FindElement(By.Name("txtPass"));
+            password.SendKeys("santiago1177");
+
+
+            var button = browser.FindElement(By.Name("btnInicio"));
+            button.Click();
+
+            //if os.path.isfile(filename):            os.remove(filename)
+            //WebDriverWait(browser, 20).until(            EC.presence_of_element_located((By.ID, "CPHPrincipal_btnExcel")))
+            //new WebDriverWait(browser, TimeSpan.FromSeconds(10));
+            var aaaa = new WebDriverWait(browser, TimeSpan.FromSeconds(20)).Until(ExpectedConditions.ElementExists((By.Id("CPHPrincipal_btnExcel"))));
+
+            aaaa.Click();
+
+            //button = browser.FindElement(By.Name("CPHPrincipal_btnExcel"));
+            //button.Click();
+
+            System.Threading.Thread.Sleep(1000 * 15);
+
+
+            // https://stackoverflow.com/questions/34513538/download-file-with-phantomjs?rq=1
+
+
+            browser.Quit();
+
+
+
+            
+            
+        }
+
+
+
+
+
+
+
         public static bool DownloadFile(string url, IWebDriver driver)
         {
-        //https://stackoverflow.com/questions/34513538/download-file-with-phantomjs?rq=1
+            //https://stackoverflow.com/questions/34513538/download-file-with-phantomjs?rq=1
 
             try
             {
