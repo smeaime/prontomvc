@@ -734,7 +734,7 @@ namespace ProntoWindowsService
                 ClassFlexicapture.Log(idthread + x.ToString());
                 CartaDePorteManager.MandarMailDeError(x);
                 Console.WriteLine(idthread + x.ToString());
-                return;
+                //return;
             }
 
 
@@ -785,9 +785,12 @@ namespace ProntoWindowsService
                 string dir = DirApp1 + @"\Temp\Pegatinas\";
 
                 //s.CerealnetSeleniumConPhantomJS(dir);
-                s.CerealnetSelenium(dir);
-                s.UrenportSelenium(dir);
-                
+                //s.CerealnetSelenium(dir);
+                //s.UrenportSelenium(dir);
+                s.CerealnetSelenium_ConChromeHeadless(dir);
+
+                ClassFlexicapture.Log(idthread + " Bajado");
+
 
                 try
                 {
@@ -814,7 +817,7 @@ namespace ProntoWindowsService
 
 
 
-                    for (int minuto = 0; minuto < 30; minuto++)
+                    for (int minuto = 0; minuto < 2; minuto++)
                         if (resultado == null && resultado2 == null)
                         {
                             bSignaled = m_shutdownEvent.WaitOne(m_delay, true);
