@@ -4941,7 +4941,7 @@ Formato localidad-provincia	destination	x
             db.Database.CommandTimeout = 240;
 
 
-            
+
             int totalRecords = 0;
 
 
@@ -5174,11 +5174,11 @@ Formato localidad-provincia	destination	x
 
             string sqlquery4 = Filtrador.Filters.FiltroGenerico_UsandoIQueryable_DevolverInternalQuery<ProntoMVC.Data.Models.VistaCartasPorteMovimiento>
                                     (
-                                                            sidx , sord, 1, 999999, true, filters, db, ref totalrecords,
+                                                            sidx, sord, 1, 999999, true, filters, db, ref totalrecords,
                                                             db.VistaCartasPorteMovimientos
                                     );
 
-            
+
 
 
             return sqlquery4;
@@ -6049,6 +6049,10 @@ order by kilos desc
                         */
         }
 
+
+
+
+
         public void CerealnetSeleniumConPhantomJS(string directorioDescarga)
         {
 
@@ -6231,7 +6235,96 @@ order by kilos desc
 
 
 
-        public void CerealnetSelenium_ConChromeHeadless(string directorioDescarga)
+
+
+             public void UrenportSelenium_ConChromeHeadless(string directorioDescarga, string dirDriver)
+        {
+
+
+            // el geckodriver tiene q estar en el path. actualizar version firefox (version 48) 
+            //verificar version del geckodriver.exe, debe ser 0.16 o superior (la de marzo no me servia)
+
+
+
+
+
+            //https://thefriendlytester.co.uk/2017/04/new-headless-chrome-with-selenium.html
+
+            ChromeOptions chromeOptions = new ChromeOptions();
+            //chromeOptions.BinaryLocation   .setBinary("/Applications/Google Chrome Canary.app/Contents/MacOS/Google Chrome Canary");
+            //chromeOptions.BinaryLocation(@"C:\Program Files (x86)\Google\Chrome\Application");
+            chromeOptions.AddArguments("--headless", "--disable-gpu", "--no-sandbox", "--disable-extensions");
+            //chromeOptions.AddArguments(@"--enable-logging --log-level=0 --user-data-dir=c:\");
+
+            chromeOptions.AddUserProfilePreference("download.default_directory", directorioDescarga);
+            chromeOptions.AddUserProfilePreference("download.directory_upgrade", "true");
+            chromeOptions.AddUserProfilePreference("download.prompt_for_download", "false");
+            chromeOptions.AddUserProfilePreference("safebrowsing.enabled", "true");
+            chromeOptions.AddUserProfilePreference("disable-popup-blocking", "true");
+
+
+            var service = ChromeDriverService.CreateDefaultService(dirDriver); //@"C:\Users\Administrador\Desktop");
+            service.EnableVerboseLogging = true;
+            service.LogPath = dirDriver + @"\chromedriver.log";
+
+
+            IWebDriver browser = new ChromeDriver(service, chromeOptions);
+
+
+
+
+
+
+
+
+            browser.Navigate().GoToUrl("http://extranet.urenport.com/login.aspx");
+
+            // WebDriverWait(browser, 10).until(EC.presence_of_element_located((By.ID, "txtUsuario")))
+            new WebDriverWait(browser, TimeSpan.FromSeconds(10)).Until(ExpectedConditions.ElementExists((By.Id("Logins_UserName"))));
+
+
+            var user_name = browser.FindElement(By.Id("Logins_UserName"));
+            user_name.SendKeys("williams");
+            // https://stackoverflow.com/questions/43583836/expected-object-undefined-undefined-to-be-a-string-indexoutofbounds
+            // Thank you it worked. We need to update selenium to 3.4 to support Gecko v 0.16. Once both are updated no issues
+
+            var password = browser.FindElement(By.Id("Logins_Password"));
+            password.SendKeys("santiago1177");
+
+
+            var button = browser.FindElement(By.Id("Logins_LoginButton"));
+            button.Click();
+
+            //if os.path.isfile(filename):            os.remove(filename)
+            //WebDriverWait(browser, 20).until(            EC.presence_of_element_located((By.ID, "CPHPrincipal_btnExcel")))
+            //new WebDriverWait(browser, TimeSpan.FromSeconds(10));
+
+
+
+
+
+            var aaaa = new WebDriverWait(browser, TimeSpan.FromSeconds(20)).Until(ExpectedConditions.ElementExists((By.Id("ContentPlaceHolder1_ASPxMenu2_DXI0_T"))));
+
+            aaaa.Click();
+
+
+            //button = browser.FindElement(By.Name("CPHPrincipal_btnExcel"));
+            //button.Click();
+
+
+            System.Threading.Thread.Sleep(1000 * 15);
+
+
+            browser.Quit();
+
+        }
+
+
+
+
+
+
+        public void CerealnetSelenium_ConChromeHeadless(string directorioDescarga, string dirDriver)
         {
 
 
@@ -6261,21 +6354,70 @@ order by kilos desc
         It's been a while since the last comment on this. Do later versions of chrome still not work? – Paul Perrick Jan 24 '16 at 0:19
 
 
-                    */
+             * 
+             * 
+             * 
+             * 
+             * 
+             * 
+             * 
+             * 
+             * 
+             Comment 39 by samu...@chromium.org, Nov 5 2014
+⚐
+Cc: samu...@chromium.org
+I'm able to reproduce this issue in M38, and I've also confirmed that M37 is not affected by this. The issue only comes up when launching Chrome from a scheduled task in Windows, and the task must be running as SYSTEM.
+
+OS: Windows 7 Enterprise Service Pack 1
+Last Known Good Chrome Version: 37.0.2062.124
+First Known Bad Chrome Version: 38.0.2125.111 (current stable channel)
+
+The steps to reproduce are below. This should be enough to bisect on.
+
+1. Start "Task Scheduler" and click "Create Task..."
+2. Give it a name, and set the user account to SYSTEM
+3. Click the Actions tab, click "New..."
+4. For Program/script, give it the path to chrome.exe
+5. For "Add arguments" type "--enable-logging --log-level=0 --user-data-dir=c:\sams_user_data_dir"
+6. Click the Triggers tab, click "New..." and set the time to something soon
+7. Click OK and OK, and wait for the task to run
+8. Open up c:\sams_user_data_dir\chrome_debug.log
+
+In M38, but not in M37, the debug log contains the error message below. Full logs from my system for M37 and M38 are attached.
+
+[4620:5648:1105/142727:ERROR:child_process_launcher.cc(344)] Failed to launch child process
+
+ 	m37_chrome_debug.log 
+2.7 KB View Download
+ 	m38_chrome_debug.log 
+2.8 KB View Download  
+             * 
+             */
 
 
 
-
+            
             //https://thefriendlytester.co.uk/2017/04/new-headless-chrome-with-selenium.html
 
             ChromeOptions chromeOptions = new ChromeOptions();
             //chromeOptions.BinaryLocation   .setBinary("/Applications/Google Chrome Canary.app/Contents/MacOS/Google Chrome Canary");
             //chromeOptions.BinaryLocation(@"C:\Program Files (x86)\Google\Chrome\Application");
-            chromeOptions.AddArguments("--headless", "--disable-gpu", "--no-sandbox");
+            chromeOptions.AddArguments("--headless", "--disable-gpu", "--no-sandbox", "--disable-extensions");
+            //chromeOptions.AddArguments(@"--enable-logging --log-level=0 --user-data-dir=c:\");
+
+            chromeOptions.AddUserProfilePreference("download.default_directory", directorioDescarga );
+            chromeOptions.AddUserProfilePreference("download.directory_upgrade", "true");
+            chromeOptions.AddUserProfilePreference("download.prompt_for_download", "false");
+            chromeOptions.AddUserProfilePreference("safebrowsing.enabled", "true");
+            chromeOptions.AddUserProfilePreference("disable-popup-blocking", "true");
 
 
-            IWebDriver browser = new ChromeDriver(@"C:\Users\Administrador\Desktop", chromeOptions);
+            var service = ChromeDriverService.CreateDefaultService(dirDriver); //@"C:\Users\Administrador\Desktop");
+            service.EnableVerboseLogging = true;
+            service.LogPath =  dirDriver + @"\chromedriver.log";
 
+
+            IWebDriver browser = new ChromeDriver(service, chromeOptions);
 
 
 
@@ -6317,8 +6459,8 @@ order by kilos desc
 
 
 
-            
-            
+
+
         }
 
 
