@@ -105,6 +105,7 @@ namespace ProntoMVC.Data.Models
         public Nullable<int> IdPuntoVenta { get; set; }
         public Nullable<int> PuntoVenta { get; set; }
         public string DocumentacionCompleta { get; set; }
+        public byte[] FechaTimeStamp { get; set; }
     
         public virtual Proveedor Proveedore { get; set; }
         public virtual ICollection<DetalleOrdenesPago> DetalleOrdenesPagoes { get; set; }

@@ -20,7 +20,7 @@ AS
 			
 GO
 
---select * from cartaportemovimientos
+--select * from CartasPorteMovimientos
 --exec wCartasDePorteMovimientos_TT
 
 --/////////////////////////////////////////////////////////////////////////////
@@ -61,30 +61,40 @@ as
 			CDP.Calidad,
 			CDP.Merma,
 			CDP.NetoFinal,
-			CDP.ProcedenciaDesc,
+			--CDP.ProcedenciaDesc,
 			CDP.NRecibo,
 			'' as SubtotalPorRecibo,
 			CDP.Patente,
 			CDP.NumeroCartadePorte,
 			--CDP.FechaIngreso,
-			CDP.CorredorDesc as CDPCorredorDesc,
-			CDP.VendedorDesc as CDPVendedorDesc,
+			--CDP.CorredorDesc as CDPCorredorDesc,
+			--CDP.VendedorDesc as CDPVendedorDesc,
 			CDP.exporta,
 
 			MOVSVEN.Razonsocial AS ExportadorOrigen,
             MOVSCORR.Razonsocial AS ExportadorDestino,
             Articulos.Descripcion AS MovProductoDesc,
-            MOVSDES.Descripcion AS MovDestinoDesc
-         
+            MOVSDES.Descripcion AS MovDestinoDesc,
+
+			FAC.TipoABC + '-' + CAST(FAC.PuntoVenta AS VARCHAR) + '-' + CAST(FAC.NumeroFactura AS VARCHAR) AS Factura,
+	     	FAC.fechafactura,
+			CLIFAC.razonsocial  AS ClienteFacturado          
+
+			
+			--agregar primary keys para que el EF pueda importar la vista
+			,clifac.idcliente,fac.idfactura,movsven.IdCliente as c1,movscorr.IdCliente as c2,movsdes.IdWilliamsDestino,Articulos.IdArticulo as a
+
 
     FROM    CartasPorteMovimientos MOVS
-			LEFT OUTER JOIN [VistaCartasPorte] CDP ON MOVS.idcartadeporte=CDP.idcartadeporte
+			LEFT OUTER JOIN cartasdeporte CDP ON MOVS.idcartadeporte=CDP.idcartadeporte
 
             LEFT OUTER JOIN Clientes MOVSVEN ON MOVS.IdExportadorOrigen = MOVSVEN.IdCliente
             LEFT OUTER JOIN Clientes MOVSCORR ON MOVS.IdExportadorDestino = MOVSCORR.IdCliente
             LEFT OUTER JOIN WilliamsDestinos MOVSDES ON MOVS.Puerto = MOVSDES.IdWilliamsDestino
             LEFT OUTER JOIN Articulos ON MOVS.IdArticulo = Articulos.IdArticulo
-            
+            LEFT OUTER JOIN FACTURAS FAC ON FAC.idfactura= MOVS.idfacturaimputada
+             LEFT OUTER JOIN Clientes CLIFAC ON CLIFAC.IdCliente = FAC.IdCliente
+           
    
 
 
@@ -94,3 +104,6 @@ GO
 --/////////////////////////////////////////////////////////////////////////////
 --/////////////////////////////////////////////////////////////////////////////
 --/////////////////////////////////////////////////////////////////////////////
+
+
+exec wCartasDePorteMovimientos_TT

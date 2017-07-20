@@ -4005,6 +4005,9 @@ warning 6002: The table/view 'Pronto.dbo.EjerciciosPeriodos' does not have a pri
     <Property Name="IdLiquidacionFlete" Type="int" />
     <Property Name="CircuitoLiquidacionFlete" Type="int" />
     <Property Name="IdViajeAsociado" Type="int" />
+    <Property Name="NumeroProyecto" Type="int" />
+    <Property Name="IdCertificacionObras" Type="int" />
+    <Property Name="IdCertificacionObraDatos" Type="int" />
   </EntityType>
   <EntityType Name="NotasDebito">
     <Key>
@@ -4101,6 +4104,9 @@ warning 6002: The table/view 'Pronto.dbo.EjerciciosPeriodos' does not have a pri
     <Property Name="IdAutorizoRecuperoGastos" Type="int" />
     <Property Name="IdLiquidacionFlete" Type="int" />
     <Property Name="CircuitoLiquidacionFlete" Type="int" />
+    <Property Name="NumeroProyecto" Type="int" />
+    <Property Name="IdCertificacionObras" Type="int" />
+    <Property Name="IdCertificacionObraDatos" Type="int" />
   </EntityType>
   <EntityType Name="NovedadesUsuarios">
     <Key>
@@ -4315,6 +4321,7 @@ warning 6002: The table/view 'Pronto.dbo.EjerciciosPeriodos' does not have a pri
     <Property Name="IdPuntoVenta" Type="int" />
     <Property Name="PuntoVenta" Type="int" />
     <Property Name="DocumentacionCompleta" Type="varchar" MaxLength="2" />
+    <Property Name="FechaTimeStamp" Type="timestamp" StoreGeneratedPattern="Computed" />
   </EntityType>
   <EntityType Name="OrdenesTrabajo">
     <Key>
@@ -6263,6 +6270,64 @@ warning 6002: The table/view 'Pronto.dbo.wGrillaPersistencia' does not have a pr
     <Property Name="DestinoDesc" Type="varchar" MaxLength="50" />
     <Property Name="IdDestino" Type="int" />
     <Property Name="AgregaItemDeGastosAdministrativos" Type="varchar" MaxLength="2" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'Pronto.dbo.VistaCartasPorteMovimientos' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="VistaCartasPorteMovimientos">
+    <Key>
+      <PropertyRef Name="IdCDPMovimiento" />
+      <PropertyRef Name="SubtotalPorRecibo" />
+    </Key>
+    <Property Name="IdCDPMovimiento" Type="int" Nullable="false" />
+    <Property Name="NumeroCDPMovimiento" Type="int" />
+    <Property Name="IdUsuarioIngreso" Type="int" />
+    <Property Name="FechaIngreso" Type="datetime" />
+    <Property Name="Anulada" Type="varchar" MaxLength="2" />
+    <Property Name="IdUsuarioAnulo" Type="int" />
+    <Property Name="FechaAnulacion" Type="datetime" />
+    <Property Name="Observaciones" Type="varchar" MaxLength="200" />
+    <Property Name="FechaTimeStamp" Type="timestamp" StoreGeneratedPattern="Computed" />
+    <Property Name="IdAjusteStock" Type="int" />
+    <Property Name="IdCartaDePorte" Type="int" />
+    <Property Name="Entrada_o_Salida" Type="int" />
+    <Property Name="IdExportadorOrigen" Type="int" />
+    <Property Name="IdExportadorDestino" Type="int" />
+    <Property Name="Tipo" Type="int" />
+    <Property Name="Contrato" Type="varchar" MaxLength="40" />
+    <Property Name="Puerto" Type="int" />
+    <Property Name="Vapor" Type="varchar" MaxLength="40" />
+    <Property Name="Numero" Type="varchar" MaxLength="40" />
+    <Property Name="IdArticulo" Type="int" />
+    <Property Name="Cantidad" Type="numeric" Precision="12" Scale="2" />
+    <Property Name="IdStock" Type="int" />
+    <Property Name="Partida" Type="varchar" MaxLength="20" />
+    <Property Name="IdUnidad" Type="int" />
+    <Property Name="IdUbicacion" Type="int" />
+    <Property Name="IdFacturaImputada" Type="int" />
+    <Property Name="IdDetalleFactura" Type="int" />
+    <Property Name="NetoPto" Type="numeric" Precision="18" Scale="2" />
+    <Property Name="Humedad" Type="numeric" Precision="18" Scale="2" />
+    <Property Name="Calidad" Type="varchar" MaxLength="30" />
+    <Property Name="Merma" Type="numeric" Precision="18" Scale="2" />
+    <Property Name="NetoFinal" Type="numeric" Precision="18" Scale="2" />
+    <Property Name="NRecibo" Type="int" />
+    <Property Name="SubtotalPorRecibo" Type="varchar" MaxLength="1" Nullable="false" />
+    <Property Name="Patente" Type="varchar" MaxLength="30" />
+    <Property Name="NumeroCartadePorte" Type="bigint" />
+    <Property Name="exporta" Type="varchar" MaxLength="2" />
+    <Property Name="ExportadorOrigen" Type="varchar" MaxLength="100" />
+    <Property Name="ExportadorDestino" Type="varchar" MaxLength="100" />
+    <Property Name="MovProductoDesc" Type="varchar" MaxLength="256" />
+    <Property Name="MovDestinoDesc" Type="varchar" MaxLength="50" />
+    <Property Name="Factura" Type="varchar" MaxLength="63" />
+    <Property Name="fechafactura" Type="datetime" />
+    <Property Name="ClienteFacturado" Type="varchar" MaxLength="100" />
+    <Property Name="idcliente" Type="int" />
+    <Property Name="idfactura" Type="int" />
+    <Property Name="c1" Type="int" />
+    <Property Name="c2" Type="int" />
+    <Property Name="IdWilliamsDestino" Type="int" />
+    <Property Name="a" Type="int" />
   </EntityType>
   <Association Name="FK__CartaPort__IdArt__7E797E90">
     <End Role="Articulos" Type="Self.Articulos" Multiplicity="0..1" />
@@ -10410,6 +10475,60 @@ warning 6002: The table/view 'Pronto.dbo.wGrillaPersistencia' does not have a pr
     [wGrillaPersistencia].[Sesion] AS [Sesion], 
     [wGrillaPersistencia].[Tilde] AS [Tilde]
     FROM [dbo].[wGrillaPersistencia] AS [wGrillaPersistencia]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="VistaCartasPorteMovimientos" EntityType="Self.VistaCartasPorteMovimientos" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [VistaCartasPorteMovimientos].[IdCDPMovimiento] AS [IdCDPMovimiento], 
+    [VistaCartasPorteMovimientos].[NumeroCDPMovimiento] AS [NumeroCDPMovimiento], 
+    [VistaCartasPorteMovimientos].[IdUsuarioIngreso] AS [IdUsuarioIngreso], 
+    [VistaCartasPorteMovimientos].[FechaIngreso] AS [FechaIngreso], 
+    [VistaCartasPorteMovimientos].[Anulada] AS [Anulada], 
+    [VistaCartasPorteMovimientos].[IdUsuarioAnulo] AS [IdUsuarioAnulo], 
+    [VistaCartasPorteMovimientos].[FechaAnulacion] AS [FechaAnulacion], 
+    [VistaCartasPorteMovimientos].[Observaciones] AS [Observaciones], 
+    [VistaCartasPorteMovimientos].[FechaTimeStamp] AS [FechaTimeStamp], 
+    [VistaCartasPorteMovimientos].[IdAjusteStock] AS [IdAjusteStock], 
+    [VistaCartasPorteMovimientos].[IdCartaDePorte] AS [IdCartaDePorte], 
+    [VistaCartasPorteMovimientos].[Entrada_o_Salida] AS [Entrada_o_Salida], 
+    [VistaCartasPorteMovimientos].[IdExportadorOrigen] AS [IdExportadorOrigen], 
+    [VistaCartasPorteMovimientos].[IdExportadorDestino] AS [IdExportadorDestino], 
+    [VistaCartasPorteMovimientos].[Tipo] AS [Tipo], 
+    [VistaCartasPorteMovimientos].[Contrato] AS [Contrato], 
+    [VistaCartasPorteMovimientos].[Puerto] AS [Puerto], 
+    [VistaCartasPorteMovimientos].[Vapor] AS [Vapor], 
+    [VistaCartasPorteMovimientos].[Numero] AS [Numero], 
+    [VistaCartasPorteMovimientos].[IdArticulo] AS [IdArticulo], 
+    [VistaCartasPorteMovimientos].[Cantidad] AS [Cantidad], 
+    [VistaCartasPorteMovimientos].[IdStock] AS [IdStock], 
+    [VistaCartasPorteMovimientos].[Partida] AS [Partida], 
+    [VistaCartasPorteMovimientos].[IdUnidad] AS [IdUnidad], 
+    [VistaCartasPorteMovimientos].[IdUbicacion] AS [IdUbicacion], 
+    [VistaCartasPorteMovimientos].[IdFacturaImputada] AS [IdFacturaImputada], 
+    [VistaCartasPorteMovimientos].[IdDetalleFactura] AS [IdDetalleFactura], 
+    [VistaCartasPorteMovimientos].[NetoPto] AS [NetoPto], 
+    [VistaCartasPorteMovimientos].[Humedad] AS [Humedad], 
+    [VistaCartasPorteMovimientos].[Calidad] AS [Calidad], 
+    [VistaCartasPorteMovimientos].[Merma] AS [Merma], 
+    [VistaCartasPorteMovimientos].[NetoFinal] AS [NetoFinal], 
+    [VistaCartasPorteMovimientos].[NRecibo] AS [NRecibo], 
+    [VistaCartasPorteMovimientos].[SubtotalPorRecibo] AS [SubtotalPorRecibo], 
+    [VistaCartasPorteMovimientos].[Patente] AS [Patente], 
+    [VistaCartasPorteMovimientos].[NumeroCartadePorte] AS [NumeroCartadePorte], 
+    [VistaCartasPorteMovimientos].[exporta] AS [exporta], 
+    [VistaCartasPorteMovimientos].[ExportadorOrigen] AS [ExportadorOrigen], 
+    [VistaCartasPorteMovimientos].[ExportadorDestino] AS [ExportadorDestino], 
+    [VistaCartasPorteMovimientos].[MovProductoDesc] AS [MovProductoDesc], 
+    [VistaCartasPorteMovimientos].[MovDestinoDesc] AS [MovDestinoDesc], 
+    [VistaCartasPorteMovimientos].[Factura] AS [Factura], 
+    [VistaCartasPorteMovimientos].[fechafactura] AS [fechafactura], 
+    [VistaCartasPorteMovimientos].[ClienteFacturado] AS [ClienteFacturado], 
+    [VistaCartasPorteMovimientos].[idcliente] AS [idcliente], 
+    [VistaCartasPorteMovimientos].[idfactura] AS [idfactura], 
+    [VistaCartasPorteMovimientos].[c1] AS [c1], 
+    [VistaCartasPorteMovimientos].[c2] AS [c2], 
+    [VistaCartasPorteMovimientos].[IdWilliamsDestino] AS [IdWilliamsDestino], 
+    [VistaCartasPorteMovimientos].[a] AS [a]
+    FROM [dbo].[VistaCartasPorteMovimientos] AS [VistaCartasPorteMovimientos]</DefiningQuery>
     </EntitySet>
     <AssociationSet Name="FK__CartaPort__IdArt__7E797E90" Association="Self.FK__CartaPort__IdArt__7E797E90">
       <End Role="Articulos" EntitySet="Articulos" />

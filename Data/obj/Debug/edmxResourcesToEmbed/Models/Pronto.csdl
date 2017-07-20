@@ -1764,6 +1764,7 @@
       <Parameter Name="TonsHasta" Mode="In" Type="Int32" />
     </FunctionImport>
     <EntitySet Name="ColaCorreosComprobantes" EntityType="DemoProntoModel.ColaCorreosComprobante" />
+    <EntitySet Name="VistaCartasPorteMovimientos" EntityType="DemoProntoModel.VistaCartasPorteMovimiento" />
   </EntityContainer>
   <EntityType Name="Articulo">
     <Key>
@@ -6779,6 +6780,7 @@
     <Property Name="IdPuntoVenta" Type="Int32" />
     <Property Name="PuntoVenta" Type="Int32" />
     <Property Name="DocumentacionCompleta" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+    <Property Name="FechaTimeStamp" Type="Binary" MaxLength="8" FixedLength="true" annotation:StoreGeneratedPattern="Computed" />
   </EntityType>
   <Association Name="FK_DetalleOrdenesPagoRubrosContables_RubrosContables">
     <End Type="DemoProntoModel.RubrosContable" Role="RubrosContable" Multiplicity="0..1" />
@@ -7503,6 +7505,9 @@
     <Property Name="IdLiquidacionFlete" Type="Int32" />
     <Property Name="CircuitoLiquidacionFlete" Type="Int32" />
     <Property Name="IdViajeAsociado" Type="Int32" />
+    <Property Name="NumeroProyecto" Type="Int32" />
+    <Property Name="IdCertificacionObras" Type="Int32" />
+    <Property Name="IdCertificacionObraDatos" Type="Int32" />
   </EntityType>
   <EntityType Name="NotasDebito">
     <Key>
@@ -7609,6 +7614,9 @@
     <Property Name="IdAutorizoRecuperoGastos" Type="Int32" />
     <Property Name="IdLiquidacionFlete" Type="Int32" />
     <Property Name="CircuitoLiquidacionFlete" Type="Int32" />
+    <Property Name="NumeroProyecto" Type="Int32" />
+    <Property Name="IdCertificacionObras" Type="Int32" />
+    <Property Name="IdCertificacionObraDatos" Type="Int32" />
   </EntityType>
   <EntityType Name="TiposValore">
     <Key>
@@ -14439,5 +14447,61 @@
     <Property Name="IdTipoComprobante" Type="Int32" Nullable="false" />
     <Property Name="IdComprobante" Type="Int32" Nullable="false" />
     <Property Name="IdColaCorreoComprobante" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+  </EntityType>
+  <EntityType Name="VistaCartasPorteMovimiento">
+    <Key>
+      <PropertyRef Name="IdCDPMovimiento" />
+      <PropertyRef Name="SubtotalPorRecibo" />
+    </Key>
+    <Property Name="IdCDPMovimiento" Type="Int32" Nullable="false" />
+    <Property Name="NumeroCDPMovimiento" Type="Int32" />
+    <Property Name="IdUsuarioIngreso" Type="Int32" />
+    <Property Name="FechaIngreso" Type="DateTime" Precision="3" />
+    <Property Name="Anulada" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+    <Property Name="IdUsuarioAnulo" Type="Int32" />
+    <Property Name="FechaAnulacion" Type="DateTime" Precision="3" />
+    <Property Name="Observaciones" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="FechaTimeStamp" Type="Binary" MaxLength="8" FixedLength="true" annotation:StoreGeneratedPattern="Computed" />
+    <Property Name="IdAjusteStock" Type="Int32" />
+    <Property Name="IdCartaDePorte" Type="Int32" />
+    <Property Name="Entrada_o_Salida" Type="Int32" />
+    <Property Name="IdExportadorOrigen" Type="Int32" />
+    <Property Name="IdExportadorDestino" Type="Int32" />
+    <Property Name="Tipo" Type="Int32" />
+    <Property Name="Contrato" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+    <Property Name="Puerto" Type="Int32" />
+    <Property Name="Vapor" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+    <Property Name="Numero" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+    <Property Name="IdArticulo" Type="Int32" />
+    <Property Name="Cantidad" Type="Decimal" Precision="12" Scale="2" />
+    <Property Name="IdStock" Type="Int32" />
+    <Property Name="Partida" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="IdUnidad" Type="Int32" />
+    <Property Name="IdUbicacion" Type="Int32" />
+    <Property Name="IdFacturaImputada" Type="Int32" />
+    <Property Name="IdDetalleFactura" Type="Int32" />
+    <Property Name="NetoPto" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Humedad" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Calidad" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="Merma" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="NetoFinal" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="NRecibo" Type="Int32" />
+    <Property Name="SubtotalPorRecibo" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="false" />
+    <Property Name="Patente" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="NumeroCartadePorte" Type="Int64" />
+    <Property Name="exporta" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+    <Property Name="ExportadorOrigen" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="ExportadorDestino" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="MovProductoDesc" Type="String" MaxLength="256" FixedLength="false" Unicode="false" />
+    <Property Name="MovDestinoDesc" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Factura" Type="String" MaxLength="63" FixedLength="false" Unicode="false" />
+    <Property Name="fechafactura" Type="DateTime" Precision="3" />
+    <Property Name="ClienteFacturado" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="idcliente" Type="Int32" />
+    <Property Name="idfactura" Type="Int32" />
+    <Property Name="c1" Type="Int32" />
+    <Property Name="c2" Type="Int32" />
+    <Property Name="IdWilliamsDestino" Type="Int32" />
+    <Property Name="a" Type="Int32" />
   </EntityType>
 </Schema>
