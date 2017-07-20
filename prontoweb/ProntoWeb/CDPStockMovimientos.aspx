@@ -329,12 +329,12 @@
     search: false,
 },
 
-{ name: ' IdCDPMovimiento', index: ' IdCDPMovimiento', align: 'left', width: 150, editable: false, hidden: true },
+{ name: 'IdCDPMovimientogggg', index: 'IdCDPMovimientogggg', align: 'left', width: 150, editable: false, hidden: true },
 
-{ name: 'IdCDPMovimiento', index: ' IdCDPMovimiento', align: 'left', width: 60, editable: false, hidden: false, edittype: 'text', searchoptions: { sopt: ['bw', 'cn', 'eq'] }, },
+{ name: 'IdCDPMovimiento', index: 'IdCDPMovimiento', align: 'left', width: 60, editable: false, hidden: false, edittype: 'text' },
 
 {
-    name: 'FechaIngreso', index: 'FechaIngreso', width: 100, sortable: true, align: 'right', editable: false, sortable: false,
+    name: 'FechaIngreso', index: 'FechaIngreso', width: 100, sortable: true, align: 'right', editable: false, 
     editoptions: {
         size: 10,
         maxlengh: 10,
