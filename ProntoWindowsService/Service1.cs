@@ -747,6 +747,14 @@ namespace ProntoWindowsService
 
 
 
+            string DirChromeDriver = ConfigurationManager.AppSettings["DirChromeDriver"] ?? "";
+            if (DirChromeDriver=="")
+            {
+                DirChromeDriver = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
+            }
+
+            int minutsconf = int.Parse(ConfigurationManager.AppSettings["MinutosPausaPegatinas"]);
+
 
             //ClassFlexicapture.Log(idthread + "llamo a iniciamotor");
 
@@ -777,9 +785,9 @@ namespace ProntoWindowsService
                 // let's do some work
                 //no volver a cargar planilla!!!!
 
-                
-                
-                
+
+
+
                 //  https://stackoverflow.com/questions/10399557/is-it-possible-to-run-selenium-firefox-web-driver-without-a-gui
 
                 string dir = DirApp1 + @"\Temp\Pegatinas\";
@@ -787,9 +795,11 @@ namespace ProntoWindowsService
                 //s.CerealnetSeleniumConPhantomJS(dir);
                 //s.CerealnetSelenium(dir);
                 //s.UrenportSelenium(dir);
-                s.CerealnetSelenium_ConChromeHeadless(dir);
+                s.UrenportSelenium_ConChromeHeadless(dir, DirChromeDriver);
+                ClassFlexicapture.Log(idthread + " Bajado 1");
 
-                ClassFlexicapture.Log(idthread + " Bajado");
+                s.CerealnetSelenium_ConChromeHeadless(dir, DirChromeDriver);
+                ClassFlexicapture.Log(idthread + " Bajado 2");
 
 
                 try
@@ -817,7 +827,7 @@ namespace ProntoWindowsService
 
 
 
-                    for (int minuto = 0; minuto < 2; minuto++)
+                    for (int minuto = 0; minuto < minutsconf; minuto++)
                         if (resultado == null && resultado2 == null)
                         {
                             bSignaled = m_shutdownEvent.WaitOne(m_delay, true);

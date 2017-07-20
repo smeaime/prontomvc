@@ -480,7 +480,7 @@ Partial Class SincronismosAutomaticos
         If (CheckBoxSyngenta.Checked) Then
             Dim idcliente = 4333 'syngenta
 
-            Dim dbcartas = CartaDePorteManager.ListadoSegunCliente(HFSC.Value, idcliente, globalDesde, globalHasta, CartaDePorteManager.enumCDPestado.DescargasMasFacturadas)
+            Dim dbcartas = CartaDePorteManager.ListadoSegunCliente(HFSC.Value, idcliente, globalDesde, globalHasta, CartaDePorteManager.enumCDPestado.Todas)
 
             Dim s = New ServicioCartaPorte.servi()
             Dim endpointStr = ConfigurationManager.AppSettings("SyngentaServiceEndpoint")

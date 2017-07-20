@@ -1929,7 +1929,7 @@ Public Class ExcelImportadorManager
         'loguear apertura del excel q puede fallar
         Dim ds As DataSet
         Try
-            If pFileName.Contains("Urenport_") Then 'es html
+            If pFileName.Contains("Urenport") Then 'es html
 
                 ds = New DataSet()
                 ds.Tables.Add(FuncionesGenericasCSharp.GetExcel5_HTML_AgilityPack(pFileName))
