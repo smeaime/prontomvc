@@ -1,0 +1,70 @@
+
+Log Entry : 
+07/20/2017 06:52:28
+Error in: . Error Message:Por generar el archivo c:\asdad.xls
+__________________________
+
+Log Entry : 
+07/20/2017 06:52:28
+Error in: . Error Message:Archivo generado c:\asdad.xls
+__________________________
+
+Log Entry : 
+07/20/2017 07:01:37
+Error in: . Error Message:Por generar el archivo c:\asdad.xls
+__________________________
+
+Log Entry : 
+07/20/2017 07:01:50
+Error in: . Error Message:System.IO.IOException: El proceso no puede obtener acceso al archivo 'c:\asdad.xls' porque está siendo utilizado en otro proceso.
+   en System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   en System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   en System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy)
+   en System.IO.FileStream..ctor(String path, FileMode mode)
+   en CartaDePorteManager.RebindReportViewer_ServidorExcel(ReportViewer& oReportViewer, String rdlFile, String strSQL, String SC, Boolean bDescargaExcel, String& ArchivoExcelDestino, String titulo, Boolean bDescargaHtml) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 5396
+__________________________
+
+Log Entry : 
+07/20/2017 07:03:36
+Error in: . Error Message:Por generar el archivo c:\asdad.xls
+__________________________
+
+Log Entry : 
+07/20/2017 07:03:53
+Error in: . Error Message:System.IO.IOException: El proceso no puede obtener acceso al archivo 'c:\asdad.xls' porque está siendo utilizado en otro proceso.
+   en System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   en System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   en System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy)
+   en System.IO.FileStream..ctor(String path, FileMode mode)
+   en CartaDePorteManager.RebindReportViewer_ServidorExcel(ReportViewer& oReportViewer, String rdlFile, String strSQL, String SC, Boolean bDescargaExcel, String& ArchivoExcelDestino, String titulo, Boolean bDescargaHtml) en C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 5396
+__________________________
+
+Log Entry : 
+07/20/2017 07:05:36
+Error in: . Error Message:Por generar el archivo C:\Users\Administrador\Downloads\Informe20jul2017_070528.xls
+__________________________
+
+Log Entry : 
+07/20/2017 07:05:36
+Error in: . Error Message:Archivo generado C:\Users\Administrador\Downloads\Informe20jul2017_070528.xls
+__________________________
+
+Log Entry : 
+07/20/2017 07:07:20
+Error in: . Error Message:Por generar el archivo C:\Users\Administrador\Downloads\Informe20jul2017_070712.xls
+__________________________
+
+Log Entry : 
+07/20/2017 07:07:20
+Error in: . Error Message:Archivo generado C:\Users\Administrador\Downloads\Informe20jul2017_070712.xls
+__________________________
+
+Log Entry : 
+07/20/2017 07:23:25
+Error in: . Error Message:Por generar el archivo C:\Users\Administrador\Downloads\Informe20jul2017_072310.xls
+__________________________
+
+Log Entry : 
+07/20/2017 07:23:25
+Error in: . Error Message:Archivo generado C:\Users\Administrador\Downloads\Informe20jul2017_072310.xls
+__________________________

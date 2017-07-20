@@ -941,6 +941,9 @@
     <Compile Include="Models\Vendedor.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\VistaCartasPorteMovimiento.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\vw_aspnet_UsersInRoles.cs">
       <DependentUpon>bdlmaster.tt</DependentUpon>
     </Compile>

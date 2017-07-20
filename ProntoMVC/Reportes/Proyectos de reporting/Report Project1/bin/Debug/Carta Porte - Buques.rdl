@@ -15,10 +15,22 @@
               <Width>25mm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>24.99995mm</Width>
+              <Width>25mm</Width>
+            </TablixColumn>
+            <TablixColumn>
+              <Width>25mm</Width>
             </TablixColumn>
             <TablixColumn>
               <Width>29.49778mm</Width>
+            </TablixColumn>
+            <TablixColumn>
+              <Width>25mm</Width>
+            </TablixColumn>
+            <TablixColumn>
+              <Width>25mm</Width>
+            </TablixColumn>
+            <TablixColumn>
+              <Width>15.73958mm</Width>
             </TablixColumn>
             <TablixColumn>
               <Width>25mm</Width>
@@ -35,7 +47,7 @@
           </TablixColumns>
           <TablixRows>
             <TablixRow>
-              <Height>5.99999mm</Height>
+              <Height>8.91041mm</Height>
               <TablixCells>
                 <TablixCell>
                   <CellContents>
@@ -65,6 +77,7 @@
                           <Style>Solid</Style>
                         </Border>
                         <BackgroundColor>#e4effd</BackgroundColor>
+                        <VerticalAlign>Middle</VerticalAlign>
                         <PaddingLeft>2pt</PaddingLeft>
                         <PaddingRight>2pt</PaddingRight>
                         <PaddingTop>2pt</PaddingTop>
@@ -100,6 +113,79 @@
                           <Color>#c6daf8</Color>
                           <Style>Solid</Style>
                         </Border>
+                        <VerticalAlign>Middle</VerticalAlign>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="Textbox23">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>Exportador Origen</Value>
+                              <Style>
+                                <FontSize>8pt</FontSize>
+                                <FontWeight>Bold</FontWeight>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style>
+                            <TextAlign>Center</TextAlign>
+                          </Style>
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>Textbox23</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Color>#c6daf8</Color>
+                          <Style>Solid</Style>
+                        </Border>
+                        <VerticalAlign>Middle</VerticalAlign>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="Textbox26">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>Exportador Destino</Value>
+                              <Style>
+                                <FontSize>8pt</FontSize>
+                                <FontWeight>Bold</FontWeight>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style>
+                            <TextAlign>Center</TextAlign>
+                          </Style>
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>Textbox26</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Color>#c6daf8</Color>
+                          <Style>Solid</Style>
+                        </Border>
+                        <VerticalAlign>Middle</VerticalAlign>
                         <PaddingLeft>2pt</PaddingLeft>
                         <PaddingRight>2pt</PaddingRight>
                         <PaddingTop>2pt</PaddingTop>
@@ -135,40 +221,7 @@
                           <Color>#e6eefc</Color>
                           <Style>Solid</Style>
                         </Border>
-                        <PaddingLeft>2pt</PaddingLeft>
-                        <PaddingRight>2pt</PaddingRight>
-                        <PaddingTop>2pt</PaddingTop>
-                        <PaddingBottom>2pt</PaddingBottom>
-                      </Style>
-                    </Textbox>
-                  </CellContents>
-                </TablixCell>
-                <TablixCell>
-                  <CellContents>
-                    <Textbox Name="Textbox21">
-                      <KeepTogether>true</KeepTogether>
-                      <Paragraphs>
-                        <Paragraph>
-                          <TextRuns>
-                            <TextRun>
-                              <Value>Destino</Value>
-                              <Style>
-                                <FontSize>8pt</FontSize>
-                                <FontWeight>Bold</FontWeight>
-                              </Style>
-                            </TextRun>
-                          </TextRuns>
-                          <Style>
-                            <TextAlign>Center</TextAlign>
-                          </Style>
-                        </Paragraph>
-                      </Paragraphs>
-                      <rd:DefaultName>Textbox21</rd:DefaultName>
-                      <Style>
-                        <Border>
-                          <Color>#e6eefc</Color>
-                          <Style>Solid</Style>
-                        </Border>
+                        <VerticalAlign>Middle</VerticalAlign>
                         <PaddingLeft>2pt</PaddingLeft>
                         <PaddingRight>2pt</PaddingRight>
                         <PaddingTop>2pt</PaddingTop>
@@ -203,6 +256,7 @@
                           <Color>#c6daf8</Color>
                           <Style>Solid</Style>
                         </Border>
+                        <VerticalAlign>Middle</VerticalAlign>
                         <PaddingLeft>2pt</PaddingLeft>
                         <PaddingRight>2pt</PaddingRight>
                         <PaddingTop>2pt</PaddingTop>
@@ -213,7 +267,43 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="Textbox3">
+                    <Textbox Name="Textbox20">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>Vapor</Value>
+                              <Style>
+                                <FontSize>8pt</FontSize>
+                                <FontWeight>Bold</FontWeight>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style>
+                            <TextAlign>Center</TextAlign>
+                          </Style>
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>Textbox20</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Color>#c6daf8</Color>
+                          <Style>Solid</Style>
+                        </Border>
+                        <VerticalAlign>Middle</VerticalAlign>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="Textbox38">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
@@ -232,12 +322,13 @@
                           </Style>
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>Textbox3</rd:DefaultName>
+                      <rd:DefaultName>Textbox38</rd:DefaultName>
                       <Style>
                         <Border>
                           <Color>#c6daf8</Color>
                           <Style>Solid</Style>
                         </Border>
+                        <VerticalAlign>Middle</VerticalAlign>
                         <PaddingLeft>2pt</PaddingLeft>
                         <PaddingRight>2pt</PaddingRight>
                         <PaddingTop>2pt</PaddingTop>
@@ -273,6 +364,7 @@
                           <Color>#c6daf8</Color>
                           <Style>Solid</Style>
                         </Border>
+                        <VerticalAlign>Middle</VerticalAlign>
                         <PaddingLeft>2pt</PaddingLeft>
                         <PaddingRight>2pt</PaddingRight>
                         <PaddingTop>2pt</PaddingTop>
@@ -308,6 +400,7 @@
                           <Color>#c6daf8</Color>
                           <Style>Solid</Style>
                         </Border>
+                        <VerticalAlign>Middle</VerticalAlign>
                         <PaddingLeft>2pt</PaddingLeft>
                         <PaddingRight>2pt</PaddingRight>
                         <PaddingTop>2pt</PaddingTop>
@@ -318,7 +411,43 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="Textbox31">
+                    <Textbox Name="Textbox28">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>Cliente Facturado</Value>
+                              <Style>
+                                <FontSize>8pt</FontSize>
+                                <FontWeight>Bold</FontWeight>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style>
+                            <TextAlign>Center</TextAlign>
+                          </Style>
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>Textbox28</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Color>#c6daf8</Color>
+                          <Style>Solid</Style>
+                        </Border>
+                        <VerticalAlign>Middle</VerticalAlign>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="Textbox30">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
@@ -337,12 +466,49 @@
                           </Style>
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>Textbox31</rd:DefaultName>
+                      <rd:DefaultName>Textbox30</rd:DefaultName>
                       <Style>
                         <Border>
                           <Color>#c6daf8</Color>
                           <Style>Solid</Style>
                         </Border>
+                        <VerticalAlign>Middle</VerticalAlign>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="Textbox34">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>Fecha Factura</Value>
+                              <Style>
+                                <FontSize>8pt</FontSize>
+                                <FontWeight>Bold</FontWeight>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style>
+                            <TextAlign>Center</TextAlign>
+                          </Style>
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>Textbox34</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Color>#c6daf8</Color>
+                          <Style>Solid</Style>
+                        </Border>
+                        <VerticalAlign>Middle</VerticalAlign>
                         <PaddingLeft>2pt</PaddingLeft>
                         <PaddingRight>2pt</PaddingRight>
                         <PaddingTop>2pt</PaddingTop>
@@ -365,7 +531,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!NumeroCartaDePorte.Value</Value>
+                              <Value>=Fields!IdCDPMovimiento.Value</Value>
                               <Style>
                                 <FontSize>8pt</FontSize>
                                 <FontWeight>SemiBold</FontWeight>
@@ -402,9 +568,10 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!FechaActualizacionAutomatica.Value</Value>
+                              <Value>=Fields!FechaIngreso.Value</Value>
                               <Style>
                                 <FontSize>8pt</FontSize>
+                                <Format>dd/MM/yy</Format>
                                 <Color>#4d4d4d</Color>
                               </Style>
                             </TextRun>
@@ -429,6 +596,74 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
+                    <Textbox Name="ExportadorOrigen">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>=Fields!ExportadorOrigen.Value</Value>
+                              <Style>
+                                <FontSize>8pt</FontSize>
+                                <Color>#4d4d4d</Color>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style />
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>ExportadorOrigen</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Color>#e5e5e5</Color>
+                          <Style>Solid</Style>
+                        </Border>
+                        <BackgroundColor>White</BackgroundColor>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="ExportadorDestino">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>=Fields!ExportadorDestino.Value</Value>
+                              <Style>
+                                <FontSize>8pt</FontSize>
+                                <Color>#4d4d4d</Color>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style />
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>ExportadorDestino</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Color>#e5e5e5</Color>
+                          <Style>Solid</Style>
+                        </Border>
+                        <BackgroundColor>White</BackgroundColor>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
                     <Textbox Name="Textbox2">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
@@ -436,20 +671,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Switch 
-(
-  Fields!Situacion.Value = "0","Autorizado",
-  Fields!Situacion.Value = "1","Demorado",
-  Fields!Situacion.Value = "2","Posicion",
-  Fields!Situacion.Value = "3","Descargado",
-  Fields!Situacion.Value = "4","A Descargar",
-  Fields!Situacion.Value = "5","Rechazado",
-  Fields!Situacion.Value = "6","Desviado",
-  Fields!Situacion.Value = "7","CP p/cambiar",
-  Fields!Situacion.Value = "8","Sin Cupo",
-  Fields!Situacion.Value = "9","Calado",
-  true, ""
-)</Value>
+                              <Value>=Fields!MovProductoDesc.Value</Value>
                               <Style>
                                 <FontSize>8pt</FontSize>
                                 <Color>#4d4d4d</Color>
@@ -476,80 +698,14 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="Textbox29">
-                      <KeepTogether>true</KeepTogether>
-                      <Paragraphs>
-                        <Paragraph>
-                          <TextRuns>
-                            <TextRun>
-                              <Value>=Fields!Producto.Value</Value>
-                              <Style>
-                                <FontSize>8pt</FontSize>
-                                <Color>#4d4d4d</Color>
-                              </Style>
-                            </TextRun>
-                          </TextRuns>
-                          <Style />
-                        </Paragraph>
-                      </Paragraphs>
-                      <rd:DefaultName>Textbox3</rd:DefaultName>
-                      <Style>
-                        <Border>
-                          <Color>#e5e5e5</Color>
-                          <Style>Solid</Style>
-                        </Border>
-                        <BackgroundColor>White</BackgroundColor>
-                        <PaddingLeft>2pt</PaddingLeft>
-                        <PaddingRight>2pt</PaddingRight>
-                        <PaddingTop>2pt</PaddingTop>
-                        <PaddingBottom>2pt</PaddingBottom>
-                      </Style>
-                    </Textbox>
-                  </CellContents>
-                </TablixCell>
-                <TablixCell>
-                  <CellContents>
-                    <Textbox Name="Textbox22">
-                      <KeepTogether>true</KeepTogether>
-                      <Paragraphs>
-                        <Paragraph>
-                          <TextRuns>
-                            <TextRun>
-                              <Value>=Fields!TitularDesc.Value</Value>
-                              <Style>
-                                <FontSize>8pt</FontSize>
-                                <Color>#4d4d4d</Color>
-                              </Style>
-                            </TextRun>
-                          </TextRuns>
-                          <Style />
-                        </Paragraph>
-                      </Paragraphs>
-                      <rd:DefaultName>Textbox22</rd:DefaultName>
-                      <Style>
-                        <Border>
-                          <Color>#e5e5e5</Color>
-                          <Style>Solid</Style>
-                        </Border>
-                        <BackgroundColor>White</BackgroundColor>
-                        <PaddingLeft>2pt</PaddingLeft>
-                        <PaddingRight>2pt</PaddingRight>
-                        <PaddingTop>2pt</PaddingTop>
-                        <PaddingBottom>2pt</PaddingBottom>
-                      </Style>
-                    </Textbox>
-                  </CellContents>
-                </TablixCell>
-                <TablixCell>
-                  <CellContents>
-                    <Textbox Name="Textbox4">
+                    <Textbox Name="Textbox19">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!ObservacionesSituacion.Value</Value>
+                              <Value>=Fields!Contrato.Value</Value>
                               <Style>
                                 <FontSize>8pt</FontSize>
                                 <Color>#4d4d4d</Color>
@@ -559,7 +715,7 @@
                           <Style />
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>Textbox4</rd:DefaultName>
+                      <rd:DefaultName>Textbox19</rd:DefaultName>
                       <Style>
                         <Border>
                           <Color>#e5e5e5</Color>
@@ -576,14 +732,14 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="Textbox34">
+                    <Textbox Name="Vapor">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value />
+                              <Value>=Fields!Vapor.Value</Value>
                               <Style>
                                 <FontSize>8pt</FontSize>
                                 <Color>#4d4d4d</Color>
@@ -593,7 +749,7 @@
                           <Style />
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>Textbox34</rd:DefaultName>
+                      <rd:DefaultName>Vapor</rd:DefaultName>
                       <Style>
                         <Border>
                           <Color>#e5e5e5</Color>
@@ -610,7 +766,75 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="Textbox10">
+                    <Textbox Name="MovDestinoDesc">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>=Fields!MovDestinoDesc.Value</Value>
+                              <Style>
+                                <FontSize>8pt</FontSize>
+                                <Color>#4d4d4d</Color>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style />
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>MovDestinoDesc</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Color>#e5e5e5</Color>
+                          <Style>Solid</Style>
+                        </Border>
+                        <BackgroundColor>White</BackgroundColor>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="Textbox12">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>=Fields!IdStock.Value</Value>
+                              <Style>
+                                <FontSize>8pt</FontSize>
+                                <Color>#4d4d4d</Color>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style />
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>Textbox12</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Color>#e5e5e5</Color>
+                          <Style>Solid</Style>
+                        </Border>
+                        <BackgroundColor>White</BackgroundColor>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="Textbox13">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
@@ -627,7 +851,7 @@
                           <Style />
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>Textbox10</rd:DefaultName>
+                      <rd:DefaultName>Textbox13</rd:DefaultName>
                       <Style>
                         <Border>
                           <Color>#e5e5e5</Color>
@@ -644,14 +868,14 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="Textbox32">
+                    <Textbox Name="ClienteFacturado">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value />
+                              <Value>=Fields!ClienteFacturado.Value</Value>
                               <Style>
                                 <FontSize>8pt</FontSize>
                                 <Color>#4d4d4d</Color>
@@ -661,7 +885,76 @@
                           <Style />
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>Textbox32</rd:DefaultName>
+                      <rd:DefaultName>ClienteFacturado</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Color>#e5e5e5</Color>
+                          <Style>Solid</Style>
+                        </Border>
+                        <BackgroundColor>White</BackgroundColor>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="Factura">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>=Fields!Factura.Value</Value>
+                              <Style>
+                                <FontSize>8pt</FontSize>
+                                <Color>#4d4d4d</Color>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style />
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>Factura</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Color>#e5e5e5</Color>
+                          <Style>Solid</Style>
+                        </Border>
+                        <BackgroundColor>White</BackgroundColor>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="fechafactura">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>=Fields!fechafactura.Value</Value>
+                              <Style>
+                                <FontSize>8pt</FontSize>
+                                <Format>dd/MM/yy</Format>
+                                <Color>#4d4d4d</Color>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style />
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>fechafactura</rd:DefaultName>
                       <Style>
                         <Border>
                           <Color>#e5e5e5</Color>
@@ -691,6 +984,10 @@
             <TablixMember />
             <TablixMember />
             <TablixMember />
+            <TablixMember />
+            <TablixMember />
+            <TablixMember />
+            <TablixMember />
           </TablixMembers>
         </TablixColumnHierarchy>
         <TablixRowHierarchy>
@@ -702,14 +999,6 @@
                   <TablixMembers>
                     <TablixMember>
                       <Group Name="NumeroCartaDePorte2" />
-                      <SortExpressions>
-                        <SortExpression>
-                          <Value>=Fields!FechaArribo.Value</Value>
-                        </SortExpression>
-                        <SortExpression>
-                          <Value>=Fields!NumeroCartaDePorte.Value</Value>
-                        </SortExpression>
-                      </SortExpressions>
                       <TablixMembers>
                         <TablixMember />
                       </TablixMembers>
@@ -725,8 +1014,8 @@
         <DataSetName>DataSet1</DataSetName>
         <Top>0mm</Top>
         <Left>0mm</Left>
-        <Height>11.4709mm</Height>
-        <Width>233.60139mm</Width>
+        <Height>14.38132mm</Height>
+        <Width>324.34102mm</Width>
         <Style>
           <Border>
             <Style>None</Style>
@@ -743,7 +1032,7 @@
       <BackgroundColor>White</BackgroundColor>
     </Style>
   </Body>
-  <Width>277.36803mm</Width>
+  <Width>408.60139mm</Width>
   <Page>
     <PageFooter>
       <Height>10.90083mm</Height>
@@ -764,22 +1053,9 @@
   <AutoRefresh>0</AutoRefresh>
   <DataSources>
     <DataSource Name="DataSource1">
-      <ConnectionProperties>
-        <DataProvider>SQL</DataProvider>
-        <ConnectString>=Parameters!sServidorSQL.Value</ConnectString>
-        <IntegratedSecurity>true</IntegratedSecurity>
-      </ConnectionProperties>
+      <DataSourceReference>DataSourceProduccion</DataSourceReference>
       <rd:SecurityType>Integrated</rd:SecurityType>
       <rd:DataSourceID>e9e4095a-349d-42c1-ab0f-15d7faaff1dd</rd:DataSourceID>
-    </DataSource>
-    <DataSource Name="TestHarcodeada">
-      <ConnectionProperties>
-        <DataProvider>SQL</DataProvider>
-        <ConnectString>Data Source=SERVERSQL3;Initial Catalog=Williams2</ConnectString>
-        <Prompt>Specify a user name and password for data source TestHarcodeada:</Prompt>
-      </ConnectionProperties>
-      <rd:SecurityType>DataBase</rd:SecurityType>
-      <rd:DataSourceID>9e3b419f-a20b-4f8b-bf90-59e3cfb68bcf</rd:DataSourceID>
     </DataSource>
   </DataSources>
   <DataSets>
@@ -790,1168 +1066,205 @@
         <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
       </Query>
       <Fields>
-        <Field Name="SojaSustentableCodCondicion">
-          <DataField>SojaSustentableCodCondicion</DataField>
-          <rd:UserDefined>true</rd:UserDefined>
+        <Field Name="IdCDPMovimiento">
+          <DataField>IdCDPMovimiento</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
         </Field>
-        <Field Name="C1">
-          <DataField>C1</DataField>
+        <Field Name="NumeroCDPMovimiento">
+          <DataField>NumeroCDPMovimiento</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="IdUsuarioIngreso">
+          <DataField>IdUsuarioIngreso</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="FechaIngreso">
+          <DataField>FechaIngreso</DataField>
+          <rd:TypeName>System.DateTime</rd:TypeName>
+        </Field>
+        <Field Name="Anulada">
+          <DataField>Anulada</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="IdUsuarioAnulo">
+          <DataField>IdUsuarioAnulo</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="FechaAnulacion">
+          <DataField>FechaAnulacion</DataField>
+          <rd:TypeName>System.DateTime</rd:TypeName>
+        </Field>
+        <Field Name="Observaciones">
+          <DataField>Observaciones</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="FechaTimeStamp">
+          <DataField>FechaTimeStamp</DataField>
+          <rd:TypeName>System.Byte[]</rd:TypeName>
+        </Field>
+        <Field Name="IdAjusteStock">
+          <DataField>IdAjusteStock</DataField>
           <rd:TypeName>System.Int32</rd:TypeName>
         </Field>
         <Field Name="IdCartaDePorte">
           <DataField>IdCartaDePorte</DataField>
           <rd:TypeName>System.Int32</rd:TypeName>
-          <rd:UserDefined>true</rd:UserDefined>
         </Field>
-        <Field Name="SojaSustentableCondicion">
-          <DataField>SojaSustentableCondicion</DataField>
-          <rd:UserDefined>true</rd:UserDefined>
-        </Field>
-        <Field Name="NumeroCartaDePorte">
-          <DataField>NumeroCartaDePorte</DataField>
-          <rd:TypeName>System.Int64</rd:TypeName>
-          <rd:UserDefined>true</rd:UserDefined>
-        </Field>
-        <Field Name="SojaSustentableNroEstablecimientoDeProduccion">
-          <DataField>SojaSustentableNroEstablecimientoDeProduccion</DataField>
-          <rd:UserDefined>true</rd:UserDefined>
-        </Field>
-        <Field Name="IdUsuarioIngreso">
-          <DataField>IdUsuarioIngreso</DataField>
+        <Field Name="Entrada_o_Salida">
+          <DataField>Entrada_o_Salida</DataField>
           <rd:TypeName>System.Int32</rd:TypeName>
-          <rd:UserDefined>true</rd:UserDefined>
         </Field>
-        <Field Name="ProcedenciaProvinciaPartido">
-          <DataField>ProcedenciaProvinciaPartido</DataField>
-          <rd:UserDefined>true</rd:UserDefined>
-        </Field>
-        <Field Name="FechaAnulacion">
-          <DataField>FechaAnulacion</DataField>
-          <rd:TypeName>System.DateTime</rd:TypeName>
-          <rd:UserDefined>true</rd:UserDefined>
-        </Field>
-        <Field Name="FechaIngreso">
-          <DataField>FechaIngreso</DataField>
-          <rd:TypeName>System.DateTime</rd:TypeName>
-          <rd:UserDefined>true</rd:UserDefined>
-        </Field>
-        <Field Name="Observaciones">
-          <DataField>Observaciones</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-          <rd:UserDefined>true</rd:UserDefined>
-        </Field>
-        <Field Name="ProcedenciaProvinciaDesc">
-          <DataField>ProcedenciaProvinciaDesc</DataField>
-          <rd:UserDefined>true</rd:UserDefined>
-        </Field>
-        <Field Name="FechaTimeStamp">
-          <DataField>FechaTimeStamp</DataField>
-          <rd:TypeName>System.Byte[]</rd:TypeName>
-          <rd:UserDefined>true</rd:UserDefined>
-        </Field>
-        <Field Name="Anulada">
-          <DataField>Anulada</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-          <rd:UserDefined>true</rd:UserDefined>
-        </Field>
-        <Field Name="Vendedor">
-          <DataField>Vendedor</DataField>
+        <Field Name="IdExportadorOrigen">
+          <DataField>IdExportadorOrigen</DataField>
           <rd:TypeName>System.Int32</rd:TypeName>
-          <rd:UserDefined>true</rd:UserDefined>
         </Field>
-        <Field Name="CuentaOrden1">
-          <DataField>CuentaOrden1</DataField>
+        <Field Name="IdExportadorDestino">
+          <DataField>IdExportadorDestino</DataField>
           <rd:TypeName>System.Int32</rd:TypeName>
-          <rd:UserDefined>true</rd:UserDefined>
         </Field>
-        <Field Name="ClienteAuxiliarDesc">
-          <DataField>ClienteAuxiliarDesc</DataField>
-          <rd:UserDefined>true</rd:UserDefined>
-        </Field>
-        <Field Name="IdUsuarioAnulo">
-          <DataField>IdUsuarioAnulo</DataField>
+        <Field Name="Tipo">
+          <DataField>Tipo</DataField>
           <rd:TypeName>System.Int32</rd:TypeName>
-          <rd:UserDefined>true</rd:UserDefined>
-        </Field>
-        <Field Name="CuentaOrden2">
-          <DataField>CuentaOrden2</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
-          <rd:UserDefined>true</rd:UserDefined>
-        </Field>
-        <Field Name="ClienteAuxiliarCUIT">
-          <DataField>ClienteAuxiliarCUIT</DataField>
-          <rd:UserDefined>true</rd:UserDefined>
-        </Field>
-        <Field Name="Corredor">
-          <DataField>Corredor</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
-          <rd:UserDefined>true</rd:UserDefined>
-        </Field>
-        <Field Name="CorredorCUIT2">
-          <DataField>CorredorCUIT2</DataField>
-          <rd:UserDefined>true</rd:UserDefined>
-        </Field>
-        <Field Name="Entregador">
-          <DataField>Entregador</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
-          <rd:UserDefined>true</rd:UserDefined>
-        </Field>
-        <Field Name="CorredorDesc2">
-          <DataField>CorredorDesc2</DataField>
-          <rd:UserDefined>true</rd:UserDefined>
-        </Field>
-        <Field Name="Procedencia">
-          <DataField>Procedencia</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-          <rd:UserDefined>true</rd:UserDefined>
-        </Field>
-        <Field Name="EntregadorDesc">
-          <DataField>EntregadorDesc</DataField>
-          <rd:UserDefined>true</rd:UserDefined>
-        </Field>
-        <Field Name="Patente">
-          <DataField>Patente</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-          <rd:UserDefined>true</rd:UserDefined>
-        </Field>
-        <Field Name="EntregadorCUIT">
-          <DataField>EntregadorCUIT</DataField>
-          <rd:UserDefined>true</rd:UserDefined>
-        </Field>
-        <Field Name="IdArticulo">
-          <DataField>IdArticulo</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
-          <rd:UserDefined>true</rd:UserDefined>
-        </Field>
-        <Field Name="CodigoAFIP">
-          <DataField>CodigoAFIP</DataField>
-          <rd:UserDefined>true</rd:UserDefined>
-        </Field>
-        <Field Name="IdStock">
-          <DataField>IdStock</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
-          <rd:UserDefined>true</rd:UserDefined>
-        </Field>
-        <Field Name="Partida">
-          <DataField>Partida</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-          <rd:UserDefined>true</rd:UserDefined>
-        </Field>
-        <Field Name="IdUnidad">
-          <DataField>IdUnidad</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
-          <rd:UserDefined>true</rd:UserDefined>
-        </Field>
-        <Field Name="IdUbicacion">
-          <DataField>IdUbicacion</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
-          <rd:UserDefined>true</rd:UserDefined>
-        </Field>
-        <Field Name="Cantidad">
-          <DataField>Cantidad</DataField>
-          <rd:TypeName>System.Decimal</rd:TypeName>
-          <rd:UserDefined>true</rd:UserDefined>
-        </Field>
-        <Field Name="Cupo">
-          <DataField>Cupo</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-          <rd:UserDefined>true</rd:UserDefined>
-        </Field>
-        <Field Name="NetoProc">
-          <DataField>NetoProc</DataField>
-          <rd:TypeName>System.Decimal</rd:TypeName>
-          <rd:UserDefined>true</rd:UserDefined>
-        </Field>
-        <Field Name="Calidad">
-          <DataField>Calidad</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-          <rd:UserDefined>true</rd:UserDefined>
-        </Field>
-        <Field Name="BrutoPto">
-          <DataField>BrutoPto</DataField>
-          <rd:TypeName>System.Decimal</rd:TypeName>
-          <rd:UserDefined>true</rd:UserDefined>
-        </Field>
-        <Field Name="TaraPto">
-          <DataField>TaraPto</DataField>
-          <rd:TypeName>System.Decimal</rd:TypeName>
-          <rd:UserDefined>true</rd:UserDefined>
-        </Field>
-        <Field Name="NetoPto">
-          <DataField>NetoPto</DataField>
-          <rd:TypeName>System.Decimal</rd:TypeName>
-          <rd:UserDefined>true</rd:UserDefined>
-        </Field>
-        <Field Name="Acoplado">
-          <DataField>Acoplado</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-          <rd:UserDefined>true</rd:UserDefined>
-        </Field>
-        <Field Name="Humedad">
-          <DataField>Humedad</DataField>
-          <rd:TypeName>System.Decimal</rd:TypeName>
-          <rd:UserDefined>true</rd:UserDefined>
-        </Field>
-        <Field Name="Merma">
-          <DataField>Merma</DataField>
-          <rd:TypeName>System.Decimal</rd:TypeName>
-          <rd:UserDefined>true</rd:UserDefined>
-        </Field>
-        <Field Name="NetoFinal">
-          <DataField>NetoFinal</DataField>
-          <rd:TypeName>System.Decimal</rd:TypeName>
-          <rd:UserDefined>true</rd:UserDefined>
-        </Field>
-        <Field Name="FechaDeCarga">
-          <DataField>FechaDeCarga</DataField>
-          <rd:TypeName>System.DateTime</rd:TypeName>
-          <rd:UserDefined>true</rd:UserDefined>
-        </Field>
-        <Field Name="FechaVencimiento">
-          <DataField>FechaVencimiento</DataField>
-          <rd:TypeName>System.DateTime</rd:TypeName>
-          <rd:UserDefined>true</rd:UserDefined>
-        </Field>
-        <Field Name="CEE">
-          <DataField>CEE</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-          <rd:UserDefined>true</rd:UserDefined>
-        </Field>
-        <Field Name="IdTransportista">
-          <DataField>IdTransportista</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
-          <rd:UserDefined>true</rd:UserDefined>
-        </Field>
-        <Field Name="TransportistaCUITdesnormalizado">
-          <DataField>TransportistaCUITdesnormalizado</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-          <rd:UserDefined>true</rd:UserDefined>
-        </Field>
-        <Field Name="IdChofer">
-          <DataField>IdChofer</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
-          <rd:UserDefined>true</rd:UserDefined>
-        </Field>
-        <Field Name="ChoferCUITdesnormalizado">
-          <DataField>ChoferCUITdesnormalizado</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-          <rd:UserDefined>true</rd:UserDefined>
-        </Field>
-        <Field Name="CTG">
-          <DataField>CTG</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
-          <rd:UserDefined>true</rd:UserDefined>
         </Field>
         <Field Name="Contrato">
           <DataField>Contrato</DataField>
           <rd:TypeName>System.String</rd:TypeName>
-          <rd:UserDefined>true</rd:UserDefined>
         </Field>
-        <Field Name="Destino">
-          <DataField>Destino</DataField>
+        <Field Name="Puerto">
+          <DataField>Puerto</DataField>
           <rd:TypeName>System.Int32</rd:TypeName>
-          <rd:UserDefined>true</rd:UserDefined>
         </Field>
-        <Field Name="Subcontr1">
-          <DataField>Subcontr1</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
-          <rd:UserDefined>true</rd:UserDefined>
-        </Field>
-        <Field Name="Subcontr2">
-          <DataField>Subcontr2</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
-          <rd:UserDefined>true</rd:UserDefined>
-        </Field>
-        <Field Name="Contrato1">
-          <DataField>Contrato1</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
-          <rd:UserDefined>true</rd:UserDefined>
-        </Field>
-        <Field Name="contrato2">
-          <DataField>contrato2</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
-          <rd:UserDefined>true</rd:UserDefined>
-        </Field>
-        <Field Name="KmARecorrer">
-          <DataField>KmARecorrer</DataField>
-          <rd:TypeName>System.Decimal</rd:TypeName>
-          <rd:UserDefined>true</rd:UserDefined>
-        </Field>
-        <Field Name="Tarifa">
-          <DataField>Tarifa</DataField>
-          <rd:TypeName>System.Decimal</rd:TypeName>
-          <rd:UserDefined>true</rd:UserDefined>
-        </Field>
-        <Field Name="FechaDescarga">
-          <DataField>FechaDescarga</DataField>
-          <rd:TypeName>System.DateTime</rd:TypeName>
-          <rd:UserDefined>true</rd:UserDefined>
-        </Field>
-        <Field Name="Hora">
-          <DataField>Hora</DataField>
-          <rd:TypeName>System.DateTime</rd:TypeName>
-          <rd:UserDefined>true</rd:UserDefined>
-        </Field>
-        <Field Name="NRecibo">
-          <DataField>NRecibo</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
-          <rd:UserDefined>true</rd:UserDefined>
-        </Field>
-        <Field Name="CalidadDe">
-          <DataField>CalidadDe</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
-          <rd:UserDefined>true</rd:UserDefined>
-        </Field>
-        <Field Name="TaraFinal">
-          <DataField>TaraFinal</DataField>
-          <rd:TypeName>System.Decimal</rd:TypeName>
-          <rd:UserDefined>true</rd:UserDefined>
-        </Field>
-        <Field Name="BrutoFinal">
-          <DataField>BrutoFinal</DataField>
-          <rd:TypeName>System.Decimal</rd:TypeName>
-          <rd:UserDefined>true</rd:UserDefined>
-        </Field>
-        <Field Name="Fumigada">
-          <DataField>Fumigada</DataField>
-          <rd:TypeName>System.Decimal</rd:TypeName>
-          <rd:UserDefined>true</rd:UserDefined>
-        </Field>
-        <Field Name="Secada">
-          <DataField>Secada</DataField>
-          <rd:TypeName>System.Decimal</rd:TypeName>
-          <rd:UserDefined>true</rd:UserDefined>
-        </Field>
-        <Field Name="Exporta">
-          <DataField>Exporta</DataField>
+        <Field Name="Vapor">
+          <DataField>Vapor</DataField>
           <rd:TypeName>System.String</rd:TypeName>
-          <rd:UserDefined>true</rd:UserDefined>
         </Field>
-        <Field Name="NobleExtranos">
-          <DataField>NobleExtranos</DataField>
-          <rd:TypeName>System.Decimal</rd:TypeName>
-          <rd:UserDefined>true</rd:UserDefined>
+        <Field Name="Numero">
+          <DataField>Numero</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="NobleNegros">
-          <DataField>NobleNegros</DataField>
-          <rd:TypeName>System.Decimal</rd:TypeName>
-          <rd:UserDefined>true</rd:UserDefined>
-        </Field>
-        <Field Name="NobleQuebrados">
-          <DataField>NobleQuebrados</DataField>
-          <rd:TypeName>System.Decimal</rd:TypeName>
-          <rd:UserDefined>true</rd:UserDefined>
-        </Field>
-        <Field Name="NobleDaniados">
-          <DataField>NobleDaniados</DataField>
-          <rd:TypeName>System.Decimal</rd:TypeName>
-          <rd:UserDefined>true</rd:UserDefined>
-        </Field>
-        <Field Name="NobleChamico">
-          <DataField>NobleChamico</DataField>
-          <rd:TypeName>System.Decimal</rd:TypeName>
-          <rd:UserDefined>true</rd:UserDefined>
-        </Field>
-        <Field Name="NobleChamico2">
-          <DataField>NobleChamico2</DataField>
-          <rd:TypeName>System.Decimal</rd:TypeName>
-          <rd:UserDefined>true</rd:UserDefined>
-        </Field>
-        <Field Name="NobleRevolcado">
-          <DataField>NobleRevolcado</DataField>
-          <rd:TypeName>System.Decimal</rd:TypeName>
-          <rd:UserDefined>true</rd:UserDefined>
-        </Field>
-        <Field Name="NobleObjetables">
-          <DataField>NobleObjetables</DataField>
-          <rd:TypeName>System.Decimal</rd:TypeName>
-          <rd:UserDefined>true</rd:UserDefined>
-        </Field>
-        <Field Name="NobleAmohosados">
-          <DataField>NobleAmohosados</DataField>
-          <rd:TypeName>System.Decimal</rd:TypeName>
-          <rd:UserDefined>true</rd:UserDefined>
-        </Field>
-        <Field Name="NobleHectolitrico">
-          <DataField>NobleHectolitrico</DataField>
-          <rd:TypeName>System.Decimal</rd:TypeName>
-          <rd:UserDefined>true</rd:UserDefined>
-        </Field>
-        <Field Name="NobleCarbon">
-          <DataField>NobleCarbon</DataField>
-          <rd:TypeName>System.Decimal</rd:TypeName>
-          <rd:UserDefined>true</rd:UserDefined>
-        </Field>
-        <Field Name="NoblePanzaBlanca">
-          <DataField>NoblePanzaBlanca</DataField>
-          <rd:TypeName>System.Decimal</rd:TypeName>
-          <rd:UserDefined>true</rd:UserDefined>
-        </Field>
-        <Field Name="NoblePicados">
-          <DataField>NoblePicados</DataField>
-          <rd:TypeName>System.Decimal</rd:TypeName>
-          <rd:UserDefined>true</rd:UserDefined>
-        </Field>
-        <Field Name="NobleMGrasa">
-          <DataField>NobleMGrasa</DataField>
-          <rd:TypeName>System.Decimal</rd:TypeName>
-          <rd:UserDefined>true</rd:UserDefined>
-        </Field>
-        <Field Name="NobleAcidezGrasa">
-          <DataField>NobleAcidezGrasa</DataField>
-          <rd:TypeName>System.Decimal</rd:TypeName>
-          <rd:UserDefined>true</rd:UserDefined>
-        </Field>
-        <Field Name="NobleVerdes">
-          <DataField>NobleVerdes</DataField>
-          <rd:TypeName>System.Decimal</rd:TypeName>
-          <rd:UserDefined>true</rd:UserDefined>
-        </Field>
-        <Field Name="NobleGrado">
-          <DataField>NobleGrado</DataField>
+        <Field Name="IdArticulo">
+          <DataField>IdArticulo</DataField>
           <rd:TypeName>System.Int32</rd:TypeName>
-          <rd:UserDefined>true</rd:UserDefined>
         </Field>
-        <Field Name="NobleConforme">
-          <DataField>NobleConforme</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-          <rd:UserDefined>true</rd:UserDefined>
-        </Field>
-        <Field Name="NobleACamara">
-          <DataField>NobleACamara</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-          <rd:UserDefined>true</rd:UserDefined>
-        </Field>
-        <Field Name="Cosecha">
-          <DataField>Cosecha</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-          <rd:UserDefined>true</rd:UserDefined>
-        </Field>
-        <Field Name="HumedadDesnormalizada">
-          <DataField>HumedadDesnormalizada</DataField>
+        <Field Name="Cantidad">
+          <DataField>Cantidad</DataField>
           <rd:TypeName>System.Decimal</rd:TypeName>
-          <rd:UserDefined>true</rd:UserDefined>
         </Field>
-        <Field Name="Factor">
-          <DataField>Factor</DataField>
-          <rd:TypeName>System.Decimal</rd:TypeName>
-          <rd:UserDefined>true</rd:UserDefined>
+        <Field Name="IdStock">
+          <DataField>IdStock</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="Partida">
+          <DataField>Partida</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="IdUnidad">
+          <DataField>IdUnidad</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="IdUbicacion">
+          <DataField>IdUbicacion</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
         </Field>
         <Field Name="IdFacturaImputada">
           <DataField>IdFacturaImputada</DataField>
           <rd:TypeName>System.Int32</rd:TypeName>
-          <rd:UserDefined>true</rd:UserDefined>
-        </Field>
-        <Field Name="PuntoVenta">
-          <DataField>PuntoVenta</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
-          <rd:UserDefined>true</rd:UserDefined>
-        </Field>
-        <Field Name="SubnumeroVagon">
-          <DataField>SubnumeroVagon</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
-          <rd:UserDefined>true</rd:UserDefined>
-        </Field>
-        <Field Name="TarifaFacturada">
-          <DataField>TarifaFacturada</DataField>
-          <rd:TypeName>System.Decimal</rd:TypeName>
-          <rd:UserDefined>true</rd:UserDefined>
-        </Field>
-        <Field Name="TarifaSubcontratista1">
-          <DataField>TarifaSubcontratista1</DataField>
-          <rd:TypeName>System.Decimal</rd:TypeName>
-          <rd:UserDefined>true</rd:UserDefined>
-        </Field>
-        <Field Name="TarifaSubcontratista2">
-          <DataField>TarifaSubcontratista2</DataField>
-          <rd:TypeName>System.Decimal</rd:TypeName>
-          <rd:UserDefined>true</rd:UserDefined>
-        </Field>
-        <Field Name="FechaArribo">
-          <DataField>FechaArribo</DataField>
-          <rd:TypeName>System.DateTime</rd:TypeName>
-          <rd:UserDefined>true</rd:UserDefined>
-        </Field>
-        <Field Name="Version">
-          <DataField>Version</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
-          <rd:UserDefined>true</rd:UserDefined>
-        </Field>
-        <Field Name="MotivoAnulacion">
-          <DataField>MotivoAnulacion</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-          <rd:UserDefined>true</rd:UserDefined>
-        </Field>
-        <Field Name="NumeroSubfijo">
-          <DataField>NumeroSubfijo</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
-          <rd:UserDefined>true</rd:UserDefined>
-        </Field>
-        <Field Name="IdEstablecimiento">
-          <DataField>IdEstablecimiento</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
-          <rd:UserDefined>true</rd:UserDefined>
-        </Field>
-        <Field Name="EnumSyngentaDivision">
-          <DataField>EnumSyngentaDivision</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-          <rd:UserDefined>true</rd:UserDefined>
-        </Field>
-        <Field Name="Corredor2">
-          <DataField>Corredor2</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
-          <rd:UserDefined>true</rd:UserDefined>
-        </Field>
-        <Field Name="IdUsuarioModifico">
-          <DataField>IdUsuarioModifico</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
-          <rd:UserDefined>true</rd:UserDefined>
-        </Field>
-        <Field Name="FechaModificacion">
-          <DataField>FechaModificacion</DataField>
-          <rd:TypeName>System.DateTime</rd:TypeName>
-          <rd:UserDefined>true</rd:UserDefined>
-        </Field>
-        <Field Name="FechaEmision">
-          <DataField>FechaEmision</DataField>
-          <rd:TypeName>System.DateTime</rd:TypeName>
-          <rd:UserDefined>true</rd:UserDefined>
-        </Field>
-        <Field Name="EstaArchivada">
-          <DataField>EstaArchivada</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-          <rd:UserDefined>true</rd:UserDefined>
-        </Field>
-        <Field Name="ExcluirDeSubcontratistas">
-          <DataField>ExcluirDeSubcontratistas</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-          <rd:UserDefined>true</rd:UserDefined>
-        </Field>
-        <Field Name="IdTipoMovimiento">
-          <DataField>IdTipoMovimiento</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
-          <rd:UserDefined>true</rd:UserDefined>
-        </Field>
-        <Field Name="IdClienteAFacturarle">
-          <DataField>IdClienteAFacturarle</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
-          <rd:UserDefined>true</rd:UserDefined>
-        </Field>
-        <Field Name="SubnumeroDeFacturacion">
-          <DataField>SubnumeroDeFacturacion</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
-          <rd:UserDefined>true</rd:UserDefined>
-        </Field>
-        <Field Name="AgregaItemDeGastosAdministrativos">
-          <DataField>AgregaItemDeGastosAdministrativos</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-          <rd:UserDefined>true</rd:UserDefined>
-        </Field>
-        <Field Name="CalidadGranosQuemados">
-          <DataField>CalidadGranosQuemados</DataField>
-          <rd:TypeName>System.Decimal</rd:TypeName>
-          <rd:UserDefined>true</rd:UserDefined>
-        </Field>
-        <Field Name="CalidadGranosQuemadosBonifica_o_Rebaja">
-          <DataField>CalidadGranosQuemadosBonifica_o_Rebaja</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-          <rd:UserDefined>true</rd:UserDefined>
-        </Field>
-        <Field Name="CalidadTierra">
-          <DataField>CalidadTierra</DataField>
-          <rd:TypeName>System.Decimal</rd:TypeName>
-          <rd:UserDefined>true</rd:UserDefined>
-        </Field>
-        <Field Name="CalidadTierraBonifica_o_Rebaja">
-          <DataField>CalidadTierraBonifica_o_Rebaja</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-          <rd:UserDefined>true</rd:UserDefined>
-        </Field>
-        <Field Name="CalidadMermaChamico">
-          <DataField>CalidadMermaChamico</DataField>
-          <rd:TypeName>System.Decimal</rd:TypeName>
-          <rd:UserDefined>true</rd:UserDefined>
-        </Field>
-        <Field Name="CalidadMermaChamicoBonifica_o_Rebaja">
-          <DataField>CalidadMermaChamicoBonifica_o_Rebaja</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-          <rd:UserDefined>true</rd:UserDefined>
-        </Field>
-        <Field Name="CalidadMermaZarandeo">
-          <DataField>CalidadMermaZarandeo</DataField>
-          <rd:TypeName>System.Decimal</rd:TypeName>
-          <rd:UserDefined>true</rd:UserDefined>
-        </Field>
-        <Field Name="CalidadMermaZarandeoBonifica_o_Rebaja">
-          <DataField>CalidadMermaZarandeoBonifica_o_Rebaja</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-          <rd:UserDefined>true</rd:UserDefined>
-        </Field>
-        <Field Name="FueraDeEstandar">
-          <DataField>FueraDeEstandar</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-          <rd:UserDefined>true</rd:UserDefined>
-        </Field>
-        <Field Name="CalidadPuntaSombreada">
-          <DataField>CalidadPuntaSombreada</DataField>
-          <rd:TypeName>System.Decimal</rd:TypeName>
-          <rd:UserDefined>true</rd:UserDefined>
-        </Field>
-        <Field Name="CobraAcarreo">
-          <DataField>CobraAcarreo</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-          <rd:UserDefined>true</rd:UserDefined>
-        </Field>
-        <Field Name="LiquidaViaje">
-          <DataField>LiquidaViaje</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-          <rd:UserDefined>true</rd:UserDefined>
-        </Field>
-        <Field Name="IdClienteAuxiliar">
-          <DataField>IdClienteAuxiliar</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
-          <rd:UserDefined>true</rd:UserDefined>
-        </Field>
-        <Field Name="CalidadDescuentoFinal">
-          <DataField>CalidadDescuentoFinal</DataField>
-          <rd:TypeName>System.Decimal</rd:TypeName>
-          <rd:UserDefined>true</rd:UserDefined>
-        </Field>
-        <Field Name="PathImagen">
-          <DataField>PathImagen</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-          <rd:UserDefined>true</rd:UserDefined>
-        </Field>
-        <Field Name="PathImagen2">
-          <DataField>PathImagen2</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-          <rd:UserDefined>true</rd:UserDefined>
-        </Field>
-        <Field Name="AgrupadorDeTandaPeriodos">
-          <DataField>AgrupadorDeTandaPeriodos</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
-          <rd:UserDefined>true</rd:UserDefined>
-        </Field>
-        <Field Name="ClaveEncriptada">
-          <DataField>ClaveEncriptada</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-          <rd:UserDefined>true</rd:UserDefined>
-        </Field>
-        <Field Name="NumeroCartaEnTextoParaBusqueda">
-          <DataField>NumeroCartaEnTextoParaBusqueda</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-          <rd:UserDefined>true</rd:UserDefined>
-        </Field>
-        <Field Name="IdClienteEntregador">
-          <DataField>IdClienteEntregador</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
-          <rd:UserDefined>true</rd:UserDefined>
         </Field>
         <Field Name="IdDetalleFactura">
           <DataField>IdDetalleFactura</DataField>
           <rd:TypeName>System.Int32</rd:TypeName>
-          <rd:UserDefined>true</rd:UserDefined>
         </Field>
-        <Field Name="IdClientePagadorFlete">
-          <DataField>IdClientePagadorFlete</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
-          <rd:UserDefined>true</rd:UserDefined>
-        </Field>
-        <Field Name="SubnumeroVagonEnTextoParaBusqueda">
-          <DataField>SubnumeroVagonEnTextoParaBusqueda</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-          <rd:UserDefined>true</rd:UserDefined>
-        </Field>
-        <Field Name="IdCorredor2">
-          <DataField>IdCorredor2</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
-          <rd:UserDefined>true</rd:UserDefined>
-        </Field>
-        <Field Name="Acopio1">
-          <DataField>Acopio1</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
-          <rd:UserDefined>true</rd:UserDefined>
-        </Field>
-        <Field Name="Acopio2">
-          <DataField>Acopio2</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
-          <rd:UserDefined>true</rd:UserDefined>
-        </Field>
-        <Field Name="Acopio3">
-          <DataField>Acopio3</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
-          <rd:UserDefined>true</rd:UserDefined>
-        </Field>
-        <Field Name="Acopio4">
-          <DataField>Acopio4</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
-          <rd:UserDefined>true</rd:UserDefined>
-        </Field>
-        <Field Name="Acopio5">
-          <DataField>Acopio5</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
-          <rd:UserDefined>true</rd:UserDefined>
-        </Field>
-        <Field Name="Acopio6">
-          <DataField>Acopio6</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
-          <rd:UserDefined>true</rd:UserDefined>
-        </Field>
-        <Field Name="AcopioFacturarleA">
-          <DataField>AcopioFacturarleA</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
-          <rd:UserDefined>true</rd:UserDefined>
-        </Field>
-        <Field Name="CalidadGranosDanadosRebaja">
-          <DataField>CalidadGranosDanadosRebaja</DataField>
+        <Field Name="NetoPto">
+          <DataField>NetoPto</DataField>
           <rd:TypeName>System.Decimal</rd:TypeName>
-          <rd:UserDefined>true</rd:UserDefined>
         </Field>
-        <Field Name="CalidadGranosExtranosRebaja">
-          <DataField>CalidadGranosExtranosRebaja</DataField>
+        <Field Name="Humedad">
+          <DataField>Humedad</DataField>
           <rd:TypeName>System.Decimal</rd:TypeName>
-          <rd:UserDefined>true</rd:UserDefined>
         </Field>
-        <Field Name="NumeroCompleto">
-          <DataField>NumeroCompleto</DataField>
+        <Field Name="Calidad">
+          <DataField>Calidad</DataField>
           <rd:TypeName>System.String</rd:TypeName>
-          <rd:UserDefined>true</rd:UserDefined>
         </Field>
-        <Field Name="MinutosModifico">
-          <DataField>MinutosModifico</DataField>
+        <Field Name="Merma">
+          <DataField>Merma</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="NetoFinal">
+          <DataField>NetoFinal</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="NRecibo">
+          <DataField>NRecibo</DataField>
           <rd:TypeName>System.Int32</rd:TypeName>
-          <rd:UserDefined>true</rd:UserDefined>
         </Field>
-        <Field Name="EspecieONCAA">
-          <DataField>EspecieONCAA</DataField>
+        <Field Name="SubtotalPorRecibo">
+          <DataField>SubtotalPorRecibo</DataField>
           <rd:TypeName>System.String</rd:TypeName>
-          <rd:UserDefined>true</rd:UserDefined>
         </Field>
-        <Field Name="CodigoSAJPYA">
-          <DataField>CodigoSAJPYA</DataField>
+        <Field Name="Patente">
+          <DataField>Patente</DataField>
           <rd:TypeName>System.String</rd:TypeName>
-          <rd:UserDefined>true</rd:UserDefined>
         </Field>
-        <Field Name="txtCodigoZeni">
-          <DataField>txtCodigoZeni</DataField>
+        <Field Name="NumeroCartadePorte">
+          <DataField>NumeroCartadePorte</DataField>
+          <rd:TypeName>System.Int64</rd:TypeName>
+        </Field>
+        <Field Name="exporta">
+          <DataField>exporta</DataField>
           <rd:TypeName>System.String</rd:TypeName>
-          <rd:UserDefined>true</rd:UserDefined>
         </Field>
-        <Field Name="TitularDesc">
-          <DataField>TitularDesc</DataField>
+        <Field Name="ExportadorOrigen">
+          <DataField>ExportadorOrigen</DataField>
           <rd:TypeName>System.String</rd:TypeName>
-          <rd:UserDefined>true</rd:UserDefined>
         </Field>
-        <Field Name="TitularCUIT">
-          <DataField>TitularCUIT</DataField>
+        <Field Name="ExportadorDestino">
+          <DataField>ExportadorDestino</DataField>
           <rd:TypeName>System.String</rd:TypeName>
-          <rd:UserDefined>true</rd:UserDefined>
         </Field>
-        <Field Name="IntermediarioDesc">
-          <DataField>IntermediarioDesc</DataField>
+        <Field Name="MovProductoDesc">
+          <DataField>MovProductoDesc</DataField>
           <rd:TypeName>System.String</rd:TypeName>
-          <rd:UserDefined>true</rd:UserDefined>
         </Field>
-        <Field Name="IntermediarioCUIT">
-          <DataField>IntermediarioCUIT</DataField>
+        <Field Name="MovDestinoDesc">
+          <DataField>MovDestinoDesc</DataField>
           <rd:TypeName>System.String</rd:TypeName>
-          <rd:UserDefined>true</rd:UserDefined>
-        </Field>
-        <Field Name="RComercialDesc">
-          <DataField>RComercialDesc</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-          <rd:UserDefined>true</rd:UserDefined>
-        </Field>
-        <Field Name="RComercialCUIT">
-          <DataField>RComercialCUIT</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-          <rd:UserDefined>true</rd:UserDefined>
-        </Field>
-        <Field Name="CorredorDesc">
-          <DataField>CorredorDesc</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-          <rd:UserDefined>true</rd:UserDefined>
-        </Field>
-        <Field Name="CorredorCUIT">
-          <DataField>CorredorCUIT</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-          <rd:UserDefined>true</rd:UserDefined>
-        </Field>
-        <Field Name="DestinatarioDesc">
-          <DataField>DestinatarioDesc</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-          <rd:UserDefined>true</rd:UserDefined>
-        </Field>
-        <Field Name="DestinatarioCUIT">
-          <DataField>DestinatarioCUIT</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-          <rd:UserDefined>true</rd:UserDefined>
-        </Field>
-        <Field Name="Subcontr1Desc">
-          <DataField>Subcontr1Desc</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-          <rd:UserDefined>true</rd:UserDefined>
-        </Field>
-        <Field Name="Subcontr2Desc">
-          <DataField>Subcontr2Desc</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-          <rd:UserDefined>true</rd:UserDefined>
-        </Field>
-        <Field Name="Producto">
-          <DataField>Producto</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-          <rd:UserDefined>true</rd:UserDefined>
-        </Field>
-        <Field Name="TransportistaCUIT">
-          <DataField>TransportistaCUIT</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-          <rd:UserDefined>true</rd:UserDefined>
-        </Field>
-        <Field Name="TransportistaDesc">
-          <DataField>TransportistaDesc</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-          <rd:UserDefined>true</rd:UserDefined>
-        </Field>
-        <Field Name="ChoferCUIT">
-          <DataField>ChoferCUIT</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-          <rd:UserDefined>true</rd:UserDefined>
-        </Field>
-        <Field Name="ChoferDesc">
-          <DataField>ChoferDesc</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-          <rd:UserDefined>true</rd:UserDefined>
-        </Field>
-        <Field Name="ProcedenciaDesc">
-          <DataField>ProcedenciaDesc</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-          <rd:UserDefined>true</rd:UserDefined>
-        </Field>
-        <Field Name="ProcedenciaCodigoPostal">
-          <DataField>ProcedenciaCodigoPostal</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-          <rd:UserDefined>true</rd:UserDefined>
-        </Field>
-        <Field Name="ProcedenciaCodigoONCAA">
-          <DataField>ProcedenciaCodigoONCAA</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-          <rd:UserDefined>true</rd:UserDefined>
-        </Field>
-        <Field Name="DestinoDesc">
-          <DataField>DestinoDesc</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-          <rd:UserDefined>true</rd:UserDefined>
-        </Field>
-        <Field Name="DestinoCodigoPostal">
-          <DataField>DestinoCodigoPostal</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-          <rd:UserDefined>true</rd:UserDefined>
-        </Field>
-        <Field Name="DestinoCodigoONCAA">
-          <DataField>DestinoCodigoONCAA</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-          <rd:UserDefined>true</rd:UserDefined>
-        </Field>
-        <Field Name="Mes">
-          <DataField>Mes</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-          <rd:UserDefined>true</rd:UserDefined>
-        </Field>
-        <Field Name="Ano">
-          <DataField>Ano</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
-          <rd:UserDefined>true</rd:UserDefined>
         </Field>
         <Field Name="Factura">
           <DataField>Factura</DataField>
           <rd:TypeName>System.String</rd:TypeName>
-          <rd:UserDefined>true</rd:UserDefined>
         </Field>
-        <Field Name="FechaFactura">
-          <DataField>FechaFactura</DataField>
+        <Field Name="fechafactura">
+          <DataField>fechafactura</DataField>
           <rd:TypeName>System.DateTime</rd:TypeName>
-          <rd:UserDefined>true</rd:UserDefined>
         </Field>
         <Field Name="ClienteFacturado">
           <DataField>ClienteFacturado</DataField>
           <rd:TypeName>System.String</rd:TypeName>
-          <rd:UserDefined>true</rd:UserDefined>
         </Field>
-        <Field Name="ClienteFacturadoCUIT">
-          <DataField>ClienteFacturadoCUIT</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-          <rd:UserDefined>true</rd:UserDefined>
-        </Field>
-        <Field Name="CalidadDesc">
-          <DataField>CalidadDesc</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-          <rd:UserDefined>true</rd:UserDefined>
-        </Field>
-        <Field Name="UsuarioIngreso">
-          <DataField>UsuarioIngreso</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-          <rd:UserDefined>true</rd:UserDefined>
-        </Field>
-        <Field Name="EstablecimientoDesc">
-          <DataField>EstablecimientoDesc</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-          <rd:UserDefined>true</rd:UserDefined>
-        </Field>
-        <Field Name="ClientePagadorFleteDesc">
-          <DataField>ClientePagadorFleteDesc</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-          <rd:UserDefined>true</rd:UserDefined>
-        </Field>
-        <Field Name="ProcedenciaPartidoNormalizadaCodigo">
-          <DataField>ProcedenciaPartidoNormalizadaCodigo</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-          <rd:UserDefined>true</rd:UserDefined>
-        </Field>
-        <Field Name="DestinoProvinciaDesc">
-          <DataField>DestinoProvinciaDesc</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-          <rd:UserDefined>true</rd:UserDefined>
-        </Field>
-        <Field Name="ProcedenciaPartidoNormalizada">
-          <DataField>ProcedenciaPartidoNormalizada</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-          <rd:UserDefined>true</rd:UserDefined>
-        </Field>
-        <Field Name="Situacion">
-          <DataField>Situacion</DataField>
-          <rd:UserDefined>true</rd:UserDefined>
-        </Field>
-        <Field Name="ObservacionesSituacion">
-          <DataField>ObservacionesSituacion</DataField>
-          <rd:UserDefined>true</rd:UserDefined>
-        </Field>
-        <Field Name="CalidadGranosExtranosMerma">
-          <DataField>CalidadGranosExtranosMerma</DataField>
-          <rd:TypeName>System.Decimal</rd:TypeName>
-        </Field>
-        <Field Name="CalidadQuebradosMerma">
-          <DataField>CalidadQuebradosMerma</DataField>
-          <rd:TypeName>System.Decimal</rd:TypeName>
-        </Field>
-        <Field Name="CalidadDanadosMerma">
-          <DataField>CalidadDanadosMerma</DataField>
-          <rd:TypeName>System.Decimal</rd:TypeName>
-        </Field>
-        <Field Name="CalidadChamicoMerma">
-          <DataField>CalidadChamicoMerma</DataField>
-          <rd:TypeName>System.Decimal</rd:TypeName>
-        </Field>
-        <Field Name="CalidadRevolcadosMerma">
-          <DataField>CalidadRevolcadosMerma</DataField>
-          <rd:TypeName>System.Decimal</rd:TypeName>
-        </Field>
-        <Field Name="CalidadObjetablesMerma">
-          <DataField>CalidadObjetablesMerma</DataField>
-          <rd:TypeName>System.Decimal</rd:TypeName>
-        </Field>
-        <Field Name="CalidadAmohosadosMerma">
-          <DataField>CalidadAmohosadosMerma</DataField>
-          <rd:TypeName>System.Decimal</rd:TypeName>
-        </Field>
-        <Field Name="CalidadPuntaSombreadaMerma">
-          <DataField>CalidadPuntaSombreadaMerma</DataField>
-          <rd:TypeName>System.Decimal</rd:TypeName>
-        </Field>
-        <Field Name="CalidadHectolitricoMerma">
-          <DataField>CalidadHectolitricoMerma</DataField>
-          <rd:TypeName>System.Decimal</rd:TypeName>
-        </Field>
-        <Field Name="CalidadCarbonMerma">
-          <DataField>CalidadCarbonMerma</DataField>
-          <rd:TypeName>System.Decimal</rd:TypeName>
-        </Field>
-        <Field Name="CalidadPanzaBlancaMerma">
-          <DataField>CalidadPanzaBlancaMerma</DataField>
-          <rd:TypeName>System.Decimal</rd:TypeName>
-        </Field>
-        <Field Name="CalidadPicadosMerma">
-          <DataField>CalidadPicadosMerma</DataField>
-          <rd:TypeName>System.Decimal</rd:TypeName>
-        </Field>
-        <Field Name="CalidadVerdesMerma">
-          <DataField>CalidadVerdesMerma</DataField>
-          <rd:TypeName>System.Decimal</rd:TypeName>
-        </Field>
-        <Field Name="CalidadQuemadosMerma">
-          <DataField>CalidadQuemadosMerma</DataField>
-          <rd:TypeName>System.Decimal</rd:TypeName>
-        </Field>
-        <Field Name="CalidadTierraMerma">
-          <DataField>CalidadTierraMerma</DataField>
-          <rd:TypeName>System.Decimal</rd:TypeName>
-        </Field>
-        <Field Name="CalidadZarandeoMerma">
-          <DataField>CalidadZarandeoMerma</DataField>
-          <rd:TypeName>System.Decimal</rd:TypeName>
-        </Field>
-        <Field Name="CalidadDescuentoFinalMerma">
-          <DataField>CalidadDescuentoFinalMerma</DataField>
-          <rd:TypeName>System.Decimal</rd:TypeName>
-        </Field>
-        <Field Name="CalidadHumedadMerma">
-          <DataField>CalidadHumedadMerma</DataField>
-          <rd:TypeName>System.Decimal</rd:TypeName>
-        </Field>
-        <Field Name="CalidadGastosFumigacionMerma">
-          <DataField>CalidadGastosFumigacionMerma</DataField>
-          <rd:TypeName>System.Decimal</rd:TypeName>
-        </Field>
-        <Field Name="CalidadQuebradosRebaja">
-          <DataField>CalidadQuebradosRebaja</DataField>
-          <rd:TypeName>System.Decimal</rd:TypeName>
-        </Field>
-        <Field Name="CalidadChamicoRebaja">
-          <DataField>CalidadChamicoRebaja</DataField>
-          <rd:TypeName>System.Decimal</rd:TypeName>
-        </Field>
-        <Field Name="CalidadRevolcadosRebaja">
-          <DataField>CalidadRevolcadosRebaja</DataField>
-          <rd:TypeName>System.Decimal</rd:TypeName>
-        </Field>
-        <Field Name="CalidadObjetablesRebaja">
-          <DataField>CalidadObjetablesRebaja</DataField>
-          <rd:TypeName>System.Decimal</rd:TypeName>
-        </Field>
-        <Field Name="CalidadAmohosadosRebaja">
-          <DataField>CalidadAmohosadosRebaja</DataField>
-          <rd:TypeName>System.Decimal</rd:TypeName>
-        </Field>
-        <Field Name="CalidadPuntaSombreadaRebaja">
-          <DataField>CalidadPuntaSombreadaRebaja</DataField>
-          <rd:TypeName>System.Decimal</rd:TypeName>
-        </Field>
-        <Field Name="CalidadHectolitricoRebaja">
-          <DataField>CalidadHectolitricoRebaja</DataField>
-          <rd:TypeName>System.Decimal</rd:TypeName>
-        </Field>
-        <Field Name="CalidadCarbonRebaja">
-          <DataField>CalidadCarbonRebaja</DataField>
-          <rd:TypeName>System.Decimal</rd:TypeName>
-        </Field>
-        <Field Name="CalidadPanzaBlancaRebaja">
-          <DataField>CalidadPanzaBlancaRebaja</DataField>
-          <rd:TypeName>System.Decimal</rd:TypeName>
-        </Field>
-        <Field Name="CalidadPicadosRebaja">
-          <DataField>CalidadPicadosRebaja</DataField>
-          <rd:TypeName>System.Decimal</rd:TypeName>
-        </Field>
-        <Field Name="CalidadVerdesRebaja">
-          <DataField>CalidadVerdesRebaja</DataField>
-          <rd:TypeName>System.Decimal</rd:TypeName>
-        </Field>
-        <Field Name="CalidadQuemadosRebaja">
-          <DataField>CalidadQuemadosRebaja</DataField>
-          <rd:TypeName>System.Decimal</rd:TypeName>
-        </Field>
-        <Field Name="CalidadTierraRebaja">
-          <DataField>CalidadTierraRebaja</DataField>
-          <rd:TypeName>System.Decimal</rd:TypeName>
-        </Field>
-        <Field Name="CalidadZarandeoRebaja">
-          <DataField>CalidadZarandeoRebaja</DataField>
-          <rd:TypeName>System.Decimal</rd:TypeName>
-        </Field>
-        <Field Name="CalidadDescuentoFinalRebaja">
-          <DataField>CalidadDescuentoFinalRebaja</DataField>
-          <rd:TypeName>System.Decimal</rd:TypeName>
-        </Field>
-        <Field Name="CalidadHumedadRebaja">
-          <DataField>CalidadHumedadRebaja</DataField>
-          <rd:TypeName>System.Decimal</rd:TypeName>
-        </Field>
-        <Field Name="CalidadGastosFumigacionRebaja">
-          <DataField>CalidadGastosFumigacionRebaja</DataField>
-          <rd:TypeName>System.Decimal</rd:TypeName>
-        </Field>
-        <Field Name="CalidadHumedadResultado">
-          <DataField>CalidadHumedadResultado</DataField>
-          <rd:TypeName>System.Decimal</rd:TypeName>
-        </Field>
-        <Field Name="CalidadGastosFumigacionResultado">
-          <DataField>CalidadGastosFumigacionResultado</DataField>
-          <rd:TypeName>System.Decimal</rd:TypeName>
-        </Field>
-        <Field Name="ConDuplicados">
-          <DataField>ConDuplicados</DataField>
+        <Field Name="idcliente">
+          <DataField>idcliente</DataField>
           <rd:TypeName>System.Int32</rd:TypeName>
         </Field>
-        <Field Name="TieneRecibidorOficial">
-          <DataField>TieneRecibidorOficial</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="EstadoRecibidor">
-          <DataField>EstadoRecibidor</DataField>
+        <Field Name="idfactura">
+          <DataField>idfactura</DataField>
           <rd:TypeName>System.Int32</rd:TypeName>
         </Field>
-        <Field Name="ClienteAcondicionador">
-          <DataField>ClienteAcondicionador</DataField>
+        <Field Name="c1">
+          <DataField>c1</DataField>
           <rd:TypeName>System.Int32</rd:TypeName>
         </Field>
-        <Field Name="MotivoRechazo">
-          <DataField>MotivoRechazo</DataField>
+        <Field Name="c2">
+          <DataField>c2</DataField>
           <rd:TypeName>System.Int32</rd:TypeName>
         </Field>
-        <Field Name="FacturarA_Manual">
-          <DataField>FacturarA_Manual</DataField>
-          <rd:TypeName>System.Boolean</rd:TypeName>
-        </Field>
-        <Field Name="EntregaSAP">
-          <DataField>EntregaSAP</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="DestinoCUIT">
-          <DataField>DestinoCUIT</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="EstablecimientoCodigo">
-          <DataField>EstablecimientoCodigo</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="EstablecimientoCUIT">
-          <DataField>EstablecimientoCUIT</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="EstablecimientoNombre">
-          <DataField>EstablecimientoNombre</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="DestinoLocalidadAFIP">
-          <DataField>DestinoLocalidadAFIP</DataField>
+        <Field Name="IdWilliamsDestino">
+          <DataField>IdWilliamsDestino</DataField>
           <rd:TypeName>System.Int32</rd:TypeName>
         </Field>
-        <Field Name="SituacionAntesDeEditarManualmente">
-          <DataField>SituacionAntesDeEditarManualmente</DataField>
+        <Field Name="a">
+          <DataField>a</DataField>
           <rd:TypeName>System.Int32</rd:TypeName>
-        </Field>
-        <Field Name="FechaActualizacionAutomatica">
-          <DataField>FechaActualizacionAutomatica</DataField>
-          <rd:TypeName>System.DateTime</rd:TypeName>
-        </Field>
-        <Field Name="FechaAutorizacion">
-          <DataField>FechaAutorizacion</DataField>
-          <rd:TypeName>System.DateTime</rd:TypeName>
-        </Field>
-        <Field Name="SituacionLog">
-          <DataField>SituacionLog</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="DestinoLocalidadCodigoONCAA">
-          <DataField>DestinoLocalidadCodigoONCAA</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="DestinoLocalidadDesc">
-          <DataField>DestinoLocalidadDesc</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="Turno">
-          <DataField>Turno</DataField>
-          <rd:UserDefined>true</rd:UserDefined>
         </Field>
       </Fields>
     </DataSet>

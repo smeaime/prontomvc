@@ -3303,6 +3303,7 @@
     <EntitySetMapping Name="OrdenesPago">
       <EntityTypeMapping TypeName="DemoProntoModel.OrdenPago">
         <MappingFragment StoreEntitySet="OrdenesPago">
+          <ScalarProperty Name="FechaTimeStamp" ColumnName="FechaTimeStamp" />
           <ScalarProperty Name="DocumentacionCompleta" ColumnName="DocumentacionCompleta" />
           <ScalarProperty Name="PuntoVenta" ColumnName="PuntoVenta" />
           <ScalarProperty Name="IdPuntoVenta" ColumnName="IdPuntoVenta" />
@@ -3878,6 +3879,9 @@
     <EntitySetMapping Name="NotasCreditoes">
       <EntityTypeMapping TypeName="DemoProntoModel.NotasCredito">
         <MappingFragment StoreEntitySet="NotasCredito">
+          <ScalarProperty Name="IdCertificacionObraDatos" ColumnName="IdCertificacionObraDatos" />
+          <ScalarProperty Name="IdCertificacionObras" ColumnName="IdCertificacionObras" />
+          <ScalarProperty Name="NumeroProyecto" ColumnName="NumeroProyecto" />
           <ScalarProperty Name="IdViajeAsociado" ColumnName="IdViajeAsociado" />
           <ScalarProperty Name="CircuitoLiquidacionFlete" ColumnName="CircuitoLiquidacionFlete" />
           <ScalarProperty Name="IdLiquidacionFlete" ColumnName="IdLiquidacionFlete" />
@@ -3985,6 +3989,9 @@
     <EntitySetMapping Name="NotasDebitoes">
       <EntityTypeMapping TypeName="DemoProntoModel.NotasDebito">
         <MappingFragment StoreEntitySet="NotasDebito">
+          <ScalarProperty Name="IdCertificacionObraDatos" ColumnName="IdCertificacionObraDatos" />
+          <ScalarProperty Name="IdCertificacionObras" ColumnName="IdCertificacionObras" />
+          <ScalarProperty Name="NumeroProyecto" ColumnName="NumeroProyecto" />
           <ScalarProperty Name="CircuitoLiquidacionFlete" ColumnName="CircuitoLiquidacionFlete" />
           <ScalarProperty Name="IdLiquidacionFlete" ColumnName="IdLiquidacionFlete" />
           <ScalarProperty Name="IdAutorizoRecuperoGastos" ColumnName="IdAutorizoRecuperoGastos" />
@@ -7127,6 +7134,62 @@
           <ScalarProperty Name="IdColaCorreoComprobante" ColumnName="IdColaCorreoComprobante" />
           <ScalarProperty Name="IdComprobante" ColumnName="IdComprobante" />
           <ScalarProperty Name="IdTipoComprobante" ColumnName="IdTipoComprobante" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="VistaCartasPorteMovimientos">
+      <EntityTypeMapping TypeName="DemoProntoModel.VistaCartasPorteMovimiento">
+        <MappingFragment StoreEntitySet="VistaCartasPorteMovimientos">
+          <ScalarProperty Name="a" ColumnName="a" />
+          <ScalarProperty Name="IdWilliamsDestino" ColumnName="IdWilliamsDestino" />
+          <ScalarProperty Name="c2" ColumnName="c2" />
+          <ScalarProperty Name="c1" ColumnName="c1" />
+          <ScalarProperty Name="idfactura" ColumnName="idfactura" />
+          <ScalarProperty Name="idcliente" ColumnName="idcliente" />
+          <ScalarProperty Name="ClienteFacturado" ColumnName="ClienteFacturado" />
+          <ScalarProperty Name="fechafactura" ColumnName="fechafactura" />
+          <ScalarProperty Name="Factura" ColumnName="Factura" />
+          <ScalarProperty Name="MovDestinoDesc" ColumnName="MovDestinoDesc" />
+          <ScalarProperty Name="MovProductoDesc" ColumnName="MovProductoDesc" />
+          <ScalarProperty Name="ExportadorDestino" ColumnName="ExportadorDestino" />
+          <ScalarProperty Name="ExportadorOrigen" ColumnName="ExportadorOrigen" />
+          <ScalarProperty Name="exporta" ColumnName="exporta" />
+          <ScalarProperty Name="NumeroCartadePorte" ColumnName="NumeroCartadePorte" />
+          <ScalarProperty Name="Patente" ColumnName="Patente" />
+          <ScalarProperty Name="SubtotalPorRecibo" ColumnName="SubtotalPorRecibo" />
+          <ScalarProperty Name="NRecibo" ColumnName="NRecibo" />
+          <ScalarProperty Name="NetoFinal" ColumnName="NetoFinal" />
+          <ScalarProperty Name="Merma" ColumnName="Merma" />
+          <ScalarProperty Name="Calidad" ColumnName="Calidad" />
+          <ScalarProperty Name="Humedad" ColumnName="Humedad" />
+          <ScalarProperty Name="NetoPto" ColumnName="NetoPto" />
+          <ScalarProperty Name="IdDetalleFactura" ColumnName="IdDetalleFactura" />
+          <ScalarProperty Name="IdFacturaImputada" ColumnName="IdFacturaImputada" />
+          <ScalarProperty Name="IdUbicacion" ColumnName="IdUbicacion" />
+          <ScalarProperty Name="IdUnidad" ColumnName="IdUnidad" />
+          <ScalarProperty Name="Partida" ColumnName="Partida" />
+          <ScalarProperty Name="IdStock" ColumnName="IdStock" />
+          <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+          <ScalarProperty Name="IdArticulo" ColumnName="IdArticulo" />
+          <ScalarProperty Name="Numero" ColumnName="Numero" />
+          <ScalarProperty Name="Vapor" ColumnName="Vapor" />
+          <ScalarProperty Name="Puerto" ColumnName="Puerto" />
+          <ScalarProperty Name="Contrato" ColumnName="Contrato" />
+          <ScalarProperty Name="Tipo" ColumnName="Tipo" />
+          <ScalarProperty Name="IdExportadorDestino" ColumnName="IdExportadorDestino" />
+          <ScalarProperty Name="IdExportadorOrigen" ColumnName="IdExportadorOrigen" />
+          <ScalarProperty Name="Entrada_o_Salida" ColumnName="Entrada_o_Salida" />
+          <ScalarProperty Name="IdCartaDePorte" ColumnName="IdCartaDePorte" />
+          <ScalarProperty Name="IdAjusteStock" ColumnName="IdAjusteStock" />
+          <ScalarProperty Name="FechaTimeStamp" ColumnName="FechaTimeStamp" />
+          <ScalarProperty Name="Observaciones" ColumnName="Observaciones" />
+          <ScalarProperty Name="FechaAnulacion" ColumnName="FechaAnulacion" />
+          <ScalarProperty Name="IdUsuarioAnulo" ColumnName="IdUsuarioAnulo" />
+          <ScalarProperty Name="Anulada" ColumnName="Anulada" />
+          <ScalarProperty Name="FechaIngreso" ColumnName="FechaIngreso" />
+          <ScalarProperty Name="IdUsuarioIngreso" ColumnName="IdUsuarioIngreso" />
+          <ScalarProperty Name="NumeroCDPMovimiento" ColumnName="NumeroCDPMovimiento" />
+          <ScalarProperty Name="IdCDPMovimiento" ColumnName="IdCDPMovimiento" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
