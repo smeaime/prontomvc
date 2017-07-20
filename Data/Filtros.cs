@@ -846,6 +846,7 @@ namespace Filtrador
 
                     switch (propertyInfo.PropertyType.FullName)
                     {
+                        case "System.Nullable`1[[System.Decimal, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]":
                         case "System.Nullable`1[[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]":
                         case "System.Int32":  // int
                             param = new ObjectParameter("p" + iParam, Int32.Parse(rule.data));
