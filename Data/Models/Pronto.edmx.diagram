@@ -2472,6 +2472,7 @@
         <edmx:AssociationConnector Association="DemoProntoModel.FK__CartaPort__IdCar__7D855A57" />
         <edmx:AssociationConnector Association="DemoProntoModel.FK__CartaPort__IdDes__7F6DA2C9" />
         <edmx:EntityTypeShape EntityType="DemoProntoModel.ColaCorreosComprobante" Width="1.5" PointX="30.625" PointY="6.75" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.VistaCartasPorteMovimiento" Width="1.5" PointX="31.375" PointY="17.75" />
         </edmx:Diagram>
       <edmx:Diagram DiagramId="969036793a6c4ca0892bc2dcadf55b7a" Name="Diagram1" ZoomLevel="100">
         <edmx:EntityTypeShape EntityType="DemoProntoModel.Articulo" Width="2" PointX="3" PointY="132.125" IsExpanded="true" />

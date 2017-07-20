@@ -1250,8 +1250,24 @@ namespace ProntoMVC.Tests
         [TestMethod]
         public void Buques_37816_GrillaExportacion()
         {
+
+//            Filtros:
+
+//* Fecha Buque
+//* Cliente Facturado
+//* Producto
+//* Punto de Venta
+
+//Columnas:
+//Las mismas que tiene el listado actual y agregar:
+
+
+//* Factura
+//* Fecha Factura
+
+
             string filtro = ""; // "{\"groupOp\":\"OR\",\"rules\":[{\"field\":\"DestinoDesc\",\"op\":\"eq\",\"data\":\"MOL. CAÑUELAS - ZARATE\"},{\"field\":\"DestinoDesc\",\"op\":\"eq\",\"data\":\"TERMINAL 6\"}]}";
-            string output = @"c:\asdad.xls";
+            string output = @"C:\Users\Administrador\Downloads\Informe" + DateTime.Now.ToString("ddMMMyyyy_HHmmss") + ".xls";
 
             var scEF = ProntoMVC.Data.Models.Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC));
             DemoProntoEntities db = new DemoProntoEntities(scEF);
@@ -1264,12 +1280,11 @@ namespace ProntoMVC.Tests
 
 
             var s = new ServicioCartaPorte.servi();
-            var sqlquery4 = s.CDPMovimientos_DynamicGridData_ExcelExportacion_UsandoInternalQuery("IdCDPMovimiento", "desc", 1, 999999, true, filtro,
-                                                 "01/12/2016",
-                                                 "30/01/2017",
-                                                 0, -1, SC, "Mariano");
+            var sqlquery4 = s.CDPMovimientos_DynamicGridData_ExcelExportacion_UsandoInternalQuery(SC, "IdCDPMovimiento", "desc", 1, 999999, true, filtro);
 
-            CartaDePorteManager.RebindReportViewer_ServidorExcel(ref ReporteLocal, "Carta Porte - Situacion.rdl", sqlquery4, SC, false, ref output);
+            
+
+            CartaDePorteManager.RebindReportViewer_ServidorExcel(ref ReporteLocal, "Carta Porte - Buques.rdl", sqlquery4, SC, false, ref output);
 
 
             System.Diagnostics.Process.Start(output);
@@ -1288,6 +1303,7 @@ namespace ProntoMVC.Tests
             s.GetNormasCalidad(SC, "a");
         }
 
+
         [TestMethod]
         public void Buques_37816_GrillaPaginacion()
         {
@@ -1303,7 +1319,7 @@ namespace ProntoMVC.Tests
 
 
 
-            var sqlquery4 = s.NormasCalidad_DynamicGridData(SC, "IdCartaPorteNormaCalidad", "desc", 1, 999999, true, filtro);
+            var jsonData = s.CDPMovimientos_DynamicGridData(SC, "IdCDPMovimiento", "desc", 1, 100, true, filtro);
 
 
         }
