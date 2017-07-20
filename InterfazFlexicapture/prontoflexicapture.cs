@@ -5018,19 +5018,24 @@ Formato localidad-provincia	destination	x
                                 
                                 a.FechaIngreso==null ? "" :  a.FechaIngreso.GetValueOrDefault().ToShortDateString(),
 
+                                a.ExportadorOrigen,
+                                a.ExportadorDestino,
+                                 a.Contrato,
+                                 a.MovProductoDesc,
+                               
+                               
                                 a.MovDestinoDesc,
-                                a.MovProductoDesc,
-                                a.NetoFinal.ToString(),
                                 a.Vapor,
+                               
+                                a.Cantidad.ToString(),
+
                                 a.Factura,
                                 a.ClienteFacturado,
                                 a.IdStock.NullSafeToString(), //este es punto venta
                                     
                                 a.fechafactura==null ? "" :  a.fechafactura.GetValueOrDefault().ToShortDateString(),
             
-                                a.ExportadorOrigen,
-                                a.ExportadorDestino
-
+                                
                                  // a.FechaSalida==null ? "" :  a.FechaSalida.GetValueOrDefault().ToString("dd/MM/yyyy"),
                                 //a.Cumplido.NullSafeToString(), 
 
