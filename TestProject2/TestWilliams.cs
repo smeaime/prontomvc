@@ -963,13 +963,26 @@ namespace ProntoMVC.Tests
 
 
 
+        [TestMethod]
+        public void loginEnUrenport3_42773_4()
+        {
+            var s = new ServicioCartaPorte.servi();
+            string dir = DirApp + @"\Temp\Pegatinas\";
+
+            s.UrenportSelenium_ConChromeHeadless(dir, @"C:\Users\Administrador\Desktop");
+
+            //s.CerealnetSeleniumConPhantomJS(DirApp);
+        }
+
+
 
         [TestMethod]
         public void loginEnUrenport3_42773_3()
         {
             var s = new ServicioCartaPorte.servi();
+            string dir = DirApp + @"\Temp\Pegatinas\";
 
-            s.CerealnetSelenium_ConChromeHeadless(DirApp);
+            s.CerealnetSelenium_ConChromeHeadless(dir, @"C:\Users\Administrador\Desktop");
 
             //s.CerealnetSeleniumConPhantomJS(DirApp);
         }
@@ -1251,19 +1264,19 @@ namespace ProntoMVC.Tests
         public void Buques_37816_GrillaExportacion()
         {
 
-//            Filtros:
+            //            Filtros:
 
-//* Fecha Buque
-//* Cliente Facturado
-//* Producto
-//* Punto de Venta
+            //* Fecha Buque
+            //* Cliente Facturado
+            //* Producto
+            //* Punto de Venta
 
-//Columnas:
-//Las mismas que tiene el listado actual y agregar:
+            //Columnas:
+            //Las mismas que tiene el listado actual y agregar:
 
 
-//* Factura
-//* Fecha Factura
+            //* Factura
+            //* Fecha Factura
 
 
             string filtro = ""; // "{\"groupOp\":\"OR\",\"rules\":[{\"field\":\"DestinoDesc\",\"op\":\"eq\",\"data\":\"MOL. CAÑUELAS - ZARATE\"},{\"field\":\"DestinoDesc\",\"op\":\"eq\",\"data\":\"TERMINAL 6\"}]}";
@@ -1282,7 +1295,7 @@ namespace ProntoMVC.Tests
             var s = new ServicioCartaPorte.servi();
             var sqlquery4 = s.CDPMovimientos_DynamicGridData_ExcelExportacion_UsandoInternalQuery(SC, "IdCDPMovimiento", "desc", 1, 999999, true, filtro);
 
-            
+
 
             CartaDePorteManager.RebindReportViewer_ServidorExcel(ref ReporteLocal, "Carta Porte - Buques.rdl", sqlquery4, SC, false, ref output);
 

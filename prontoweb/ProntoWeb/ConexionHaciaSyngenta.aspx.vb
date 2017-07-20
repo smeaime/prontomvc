@@ -553,7 +553,7 @@ Partial Class ConexionHaciaSyngenta
 
         Dim idcliente = 4333 ' //syngenta
 
-        Dim dbcartas = CartaDePorteManager.ListadoSegunCliente(HFSC.Value, idcliente, dFechaDesde, dFechaHasta, CartaDePorteManager.enumCDPestado.DescargasMasFacturadas)
+        Dim dbcartas = CartaDePorteManager.ListadoSegunCliente(HFSC.Value, idcliente, dFechaDesde, dFechaHasta, CartaDePorteManager.enumCDPestado.Todas)
 
         Dim output As String = Path.GetTempPath() + "Syngenta_" + DateTime.Now.ToString("ddMMMyyyy_HHmmss") + ".xlsx"
 
