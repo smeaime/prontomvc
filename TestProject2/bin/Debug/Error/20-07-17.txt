@@ -68,3 +68,53 @@ Log Entry :
 07/20/2017 07:23:25
 Error in: . Error Message:Archivo generado C:\Users\Administrador\Downloads\Informe20jul2017_072310.xls
 __________________________
+
+Log Entry : 
+07/20/2017 07:30:22
+Error in: . Error Message:Por generar el archivo C:\Users\Administrador\Downloads\Informe20jul2017_073006.xls
+__________________________
+
+Log Entry : 
+07/20/2017 07:30:22
+Error in: . Error Message:Archivo generado C:\Users\Administrador\Downloads\Informe20jul2017_073006.xls
+__________________________
+
+Log Entry : 
+07/20/2017 07:33:28
+Error in: . Error Message:Por generar el archivo C:\Users\Administrador\Downloads\Informe20jul2017_073050.xls
+__________________________
+
+Log Entry : 
+07/20/2017 07:33:28
+Error in: . Error Message:Archivo generado C:\Users\Administrador\Downloads\Informe20jul2017_073050.xls
+__________________________
+
+Log Entry : 
+07/20/2017 08:05:14
+Error in: . Error Message:Por generar el archivo C:\Users\Administrador\Downloads\Informe20jul2017_080342.xls
+__________________________
+
+Log Entry : 
+07/20/2017 08:05:14
+Error in: . Error Message:Archivo generado C:\Users\Administrador\Downloads\Informe20jul2017_080342.xls
+__________________________
+
+Log Entry : 
+07/20/2017 08:12:06
+Error in: . Error Message:Por generar el archivo C:\Users\Administrador\Downloads\Informe20jul2017_081141.xls
+__________________________
+
+Log Entry : 
+07/20/2017 08:12:06
+Error in: . Error Message:Archivo generado C:\Users\Administrador\Downloads\Informe20jul2017_081141.xls
+__________________________
+
+Log Entry : 
+07/20/2017 08:14:00
+Error in: . Error Message:Por generar el archivo C:\Users\Administrador\Downloads\Informe20jul2017_081336.xls
+__________________________
+
+Log Entry : 
+07/20/2017 08:14:00
+Error in: . Error Message:Archivo generado C:\Users\Administrador\Downloads\Informe20jul2017_081336.xls
+__________________________

@@ -4862,7 +4862,7 @@ Formato localidad-provincia	destination	x
 
             string sqlquery4 = Filtrador.Filters.FiltroGenerico_UsandoIQueryable_DevolverInternalQuery<ProntoMVC.Data.Models.fSQL_GetDataTableFiltradoYPaginado_Result3>
                                     (
-                                                            "IdCartaDePorte", "desc", 1, 999999, true, filters, db, ref totalrecords,
+                                                            sidx, sord, 1, 999999, true, filters, db, ref totalrecords,
 
                                                             db.fSQL_GetDataTableFiltradoYPaginado(
                                                             0, 9999999, estado, "", -1, -1,
@@ -5167,16 +5167,23 @@ Formato localidad-provincia	destination	x
             //string result2 = CartasPorte_DynamicGridData(sidx, sord, 1, 200000, _search, filters, FechaInicial, FechaFinal, puntovent, iddestino, SC, nombreusuario);
 
 
-            string sqlquery4 = Filtrador.Filters.FiltroGenerico_UsandoIQueryable_DevolverInternalQuery<ProntoMVC.Data.Models.CartasPorteMovimiento>
+            string sqlquery4 = Filtrador.Filters.FiltroGenerico_UsandoIQueryable_DevolverInternalQuery<ProntoMVC.Data.Models.VistaCartasPorteMovimiento>
                                     (
-                                                            "IdCartaDePorte", "desc", 1, 999999, true, filters, db, ref totalrecords,
-                                                            db.CartasPorteMovimientos
+                                                            sidx , sord, 1, 999999, true, filters, db, ref totalrecords,
+                                                            db.VistaCartasPorteMovimientos
                                     );
+
+            
 
 
             return sqlquery4;
 
         }
+
+
+
+
+
 
 
         public virtual string CartasPorte_DynamicGridData_ExcelExportacion_UsandoInternalQuery(string sidx, string sord, int page, int rows, bool _search, string filters, string FechaInicial, string FechaFinal, int puntovent, int iddestino, string SC, string nombreusuario)

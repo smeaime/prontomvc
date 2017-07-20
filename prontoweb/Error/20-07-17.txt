@@ -331,3 +331,42 @@ Log Entry :
 07/20/2017 07:18:42
 Error in: http://localhost:58911/ProntoWeb/CDPStockMovimientos.aspx/ExportarGrillaNormal. Error Message:Archivo generado C:\Users\Administrador\Documents\bdl\pronto\prontoweb\DataBackupear\Listado 20jul2017_071809.xls
 __________________________
+
+Log Entry : 
+07/20/2017 07:27:49
+Error in: http://localhost:58911/ProntoWeb/CDPStockMovimientos.aspx. Error Message:System.ComponentModel.Win32Exception
+Tiempo de espera de la operación de espera agotado
+
+
+__________________________
+
+Log Entry : 
+07/20/2017 07:34:20
+Error in: http://localhost:58911/ProntoWeb/CartasDePortes.aspx?tipo=Todas. Error Message:Mariano
+__________________________
+
+Log Entry : 
+07/20/2017 07:36:32
+Error in: http://localhost:58911/ProntoWeb/CDPStockMovimientos.aspx/ExportarGrillaNormal. Error Message:Por generar el archivo C:\Users\Administrador\Documents\bdl\pronto\prontoweb\DataBackupear\Listado 20jul2017_073630.xls
+__________________________
+
+Log Entry : 
+07/20/2017 07:36:32
+Error in: http://localhost:58911/ProntoWeb/CDPStockMovimientos.aspx/ExportarGrillaNormal. Error Message:Archivo generado C:\Users\Administrador\Documents\bdl\pronto\prontoweb\DataBackupear\Listado 20jul2017_073630.xls
+__________________________
+
+Log Entry : 
+07/20/2017 07:55:46
+Error in: http://localhost:58911/ProntoWeb/HandlerMovimientos.ashx. Error Message:System.ComponentModel.Win32Exception
+Tiempo de espera de la operación de espera agotado
+
+
+__________________________
+
+Log Entry : 
+07/20/2017 07:56:21
+Error in: http://localhost:58911/ProntoWeb/HandlerMovimientos.ashx. Error Message:System.ComponentModel.Win32Exception
+Tiempo de espera de la operación de espera agotado
+
+
+__________________________

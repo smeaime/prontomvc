@@ -35,15 +35,18 @@
                         ForeColor="White" CausesValidation="true" Font-Size="Small" 
 
                         Visible="true">+   Nuevo</asp:LinkButton>
-
+                    <input type="button" id="btnExportarGrillaAjax2" value="Excel" class="btn btn-primary" />
                    
-                    <asp:Button ID="Button1" Text="exportar" runat="server" Visible="true" Height="27" />
+
+
+
+                    <asp:Button ID="Button1" Text="exportar" runat="server" Visible="false" Height="27" />
 
                     <asp:Label ID="Label12" runat="server" Text="Buscar " ForeColor="White" Style="text-align: right"
                         Visible="False"></asp:Label>
-                    <asp:TextBox ID="txtBuscar" runat="server" Style="text-align: right;" Text="" AutoPostBack="True"></asp:TextBox>
+                    <asp:TextBox ID="txtBuscar" runat="server" Style="text-align: right;" Text="" AutoPostBack="True"  Visible="false" ></asp:TextBox>
                     <asp:DropDownList ID="cmbBuscarEsteCampo" runat="server" Style="text-align: right;
-                        margin-left: 0px;" Width="119px" Height="22px">
+                        margin-left: 0px;" Width="119px" Height="22px"  Visible="false" >
                         <asp:ListItem Text="Numero" Value="IdCDPMovimiento" />
                         <asp:ListItem Text="Fecha" Value="[FechaIngreso]" />
                         <asp:ListItem Text="de Exportador" Value="ExportadorOrigen" />
@@ -55,7 +58,7 @@
                     </asp:DropDownList>
                     <cc1:TextBoxWatermarkExtender ID="TBWE1" runat="server" TargetControlID="txtBuscar"
                         WatermarkText="buscar" WatermarkCssClass="watermarkedbuscar" />
-                    <asp:TextBox ID="txtFechaDesde" runat="server" Width="80px" MaxLength="1" Style="margin-left: 10px"
+                    <asp:TextBox ID="txtFechaDesde" runat="server" Width="80px" MaxLength="1" Style="margin-left: 10px"  Visible="false" 
                         AutoPostBack="True" />
                     <ajaxToolkit:CalendarExtender ID="CalendarExtender1" runat="server" Format="dd/MM/yyyy"
                         TargetControlID="txtFechaDesde" />
@@ -64,7 +67,7 @@
                         TargetControlID="txtFechaDesde" />
                     <cc1:TextBoxWatermarkExtender ID="TBWE2" runat="server" TargetControlID="txtFechaDesde"
                         WatermarkText="desde" WatermarkCssClass="watermarkedbuscar" />
-                    <asp:TextBox ID="txtFechaHasta" runat="server" Width="80px" MaxLength="1" Style="margin-left: 10px"
+                    <asp:TextBox ID="txtFechaHasta" runat="server" Width="80px" MaxLength="1" Style="margin-left: 10px"  Visible="false" 
                         AutoPostBack="True" />
                     <ajaxToolkit:CalendarExtender ID="CalendarExtender2" runat="server" Format="dd/MM/yyyy"
                         TargetControlID="txtFechaHasta" />
@@ -93,7 +96,7 @@
         <div id="ListaPager" class="scroll" style="text-align: center; height: 30px">
         </div>
 
-                        <input type="button" id="btnExportarGrillaAjax2" value="Excel" class="btn btn-primary" />
+                        
 
             
             </asp:Panel>
@@ -514,7 +517,7 @@
 
 
         //$('#Lista').jqGrid('setGridWidth', '1000');
-        $('#Lista').jqGrid('setGridWidth', $(window).width() - 400);
+        $('#Lista').jqGrid('setGridWidth', $(window).width() - 300);
 
     });
 
