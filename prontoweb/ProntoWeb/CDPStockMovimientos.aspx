@@ -6,7 +6,7 @@
     Namespace="System.Web.UI.WebControls" TagPrefix="asp" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
 
-        <%--/////////////////////////////////////////////////////////////--%>
+    <%--/////////////////////////////////////////////////////////////--%>
     <%--//////////       jquery    /////////////////////////////////--%>
     <%--/////////////////////////////////////////////////////////////--%>
     <%--<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>--%>
@@ -26,17 +26,16 @@
     <%--/////////////////////////////////////////////////////////////--%>
     <%--/////////////////////////////////////////////////////////////--%>
     <br />
-    
+
     <asp:UpdatePanel ID="UpdatePanel2" runat="server">
         <ContentTemplate>
-            <asp:Panel  runat="server" Wrap="False">
+            <asp:Panel runat="server" Wrap="False">
                 <div style="vertical-align: middle; height: 100%; margin-top: 15px;">
-                    <asp:LinkButton ID="lnkNuevo" runat="server"  Font-Underline="False"  CssClass="butCrear but"
-                        ForeColor="White" CausesValidation="true" Font-Size="Small" 
-
+                    <asp:LinkButton ID="lnkNuevo" runat="server" Font-Underline="False" class="btn btn-primary"
+                        ForeColor="White" CausesValidation="true" 
                         Visible="true">+   Nuevo</asp:LinkButton>
                     <input type="button" id="btnExportarGrillaAjax2" value="Excel" class="btn btn-primary" />
-                   
+
 
 
 
@@ -44,9 +43,9 @@
 
                     <asp:Label ID="Label12" runat="server" Text="Buscar " ForeColor="White" Style="text-align: right"
                         Visible="False"></asp:Label>
-                    <asp:TextBox ID="txtBuscar" runat="server" Style="text-align: right;" Text="" AutoPostBack="True"  Visible="false" ></asp:TextBox>
-                    <asp:DropDownList ID="cmbBuscarEsteCampo" runat="server" Style="text-align: right;
-                        margin-left: 0px;" Width="119px" Height="22px"  Visible="false" >
+                    <asp:TextBox ID="txtBuscar" runat="server" Style="text-align: right;" Text="" AutoPostBack="True" Visible="false"></asp:TextBox>
+                    <asp:DropDownList ID="cmbBuscarEsteCampo" runat="server" Style="text-align: right; margin-left: 0px;"
+                        Width="119px" Height="22px" Visible="false">
                         <asp:ListItem Text="Numero" Value="IdCDPMovimiento" />
                         <asp:ListItem Text="Fecha" Value="[FechaIngreso]" />
                         <asp:ListItem Text="de Exportador" Value="ExportadorOrigen" />
@@ -58,7 +57,7 @@
                     </asp:DropDownList>
                     <cc1:TextBoxWatermarkExtender ID="TBWE1" runat="server" TargetControlID="txtBuscar"
                         WatermarkText="buscar" WatermarkCssClass="watermarkedbuscar" />
-                    <asp:TextBox ID="txtFechaDesde" runat="server" Width="80px" MaxLength="1" Style="margin-left: 10px"  Visible="false" 
+                    <asp:TextBox ID="txtFechaDesde" runat="server" Width="80px" MaxLength="1" Style="margin-left: 10px" Visible="false"
                         AutoPostBack="True" />
                     <ajaxToolkit:CalendarExtender ID="CalendarExtender1" runat="server" Format="dd/MM/yyyy"
                         TargetControlID="txtFechaDesde" />
@@ -67,7 +66,7 @@
                         TargetControlID="txtFechaDesde" />
                     <cc1:TextBoxWatermarkExtender ID="TBWE2" runat="server" TargetControlID="txtFechaDesde"
                         WatermarkText="desde" WatermarkCssClass="watermarkedbuscar" />
-                    <asp:TextBox ID="txtFechaHasta" runat="server" Width="80px" MaxLength="1" Style="margin-left: 10px"  Visible="false" 
+                    <asp:TextBox ID="txtFechaHasta" runat="server" Width="80px" MaxLength="1" Style="margin-left: 10px" Visible="false"
                         AutoPostBack="True" />
                     <ajaxToolkit:CalendarExtender ID="CalendarExtender2" runat="server" Format="dd/MM/yyyy"
                         TargetControlID="txtFechaHasta" />
@@ -84,24 +83,24 @@
                         </ProgressTemplate>
                     </asp:UpdateProgress>
                 </div>
-            
-            
-            
 
-                       <br />
 
-            
-        <table id="Lista" class="scroll" cellpadding="0" cellspacing="0" style="font-size: 12px;" width="700px">
-        </table>
-        <div id="ListaPager" class="scroll" style="text-align: center; height: 30px">
-        </div>
 
-                        
 
-            
+                <br />
+
+
+                <table id="Lista" class="scroll" cellpadding="0" cellspacing="0" style="font-size: 12px;" width="700px">
+                </table>
+                <div id="ListaPager" class="scroll" style="text-align: center; height: 30px">
+                </div>
+
+
+
+
             </asp:Panel>
-               <br />
-    
+            <br />
+
             <%--<hr style="border-color: #FFFFFF; width: 160px; color: #FFFFFF;" align="left" size="1" />--%>
             <table width="700">
                 <tr>
@@ -132,7 +131,7 @@
                                     <asp:BoundField DataField="Contrato" HeaderText="Contrato" SortExpression="Contrato" />
                                     <asp:BoundField DataField="MovDestinoDesc" HeaderText="Producto" SortExpression="Puerto" />
                                     <asp:BoundField DataField="Vapor" HeaderText="Vapor" SortExpression="Vapor" />
-                                       <asp:BoundField DataField="IdStock" HeaderText="PVenta" SortExpression="IdStock" />
+                                    <asp:BoundField DataField="IdStock" HeaderText="PVenta" SortExpression="IdStock" />
                                     <asp:BoundField DataField="Numero" HeaderText="Numero" SortExpression="Numero" />
                                     <asp:BoundField DataField="Cantidad" HeaderText="Cantidad" SortExpression="Cantidad" />
                                     <asp:BoundField DataField="IdUsuarioIngreso" HeaderText="IdUsuarioIngreso" Visible="false"
@@ -142,7 +141,7 @@
                                     <asp:BoundField DataField="Anulada" HeaderText="Anulada" Visible="false" SortExpression="Anulada" />
                                     <asp:BoundField DataField="IdUsuarioAnulo" HeaderText="IdUsuarioAnulo" Visible="false"
                                         SortExpression="IdUsuarioAnulo" />
-                                
+
                                     <asp:BoundField DataField="FechaAnulacion" HeaderText="FechaAnulacion" SortExpression="FechaAnulacion"
                                         Visible="false" />
                                     <asp:BoundField DataField="Observaciones" HeaderText="Observaciones" SortExpression="Obs."
@@ -233,58 +232,58 @@
     </rsweb:ReportViewer>--%>
 
 
-    
-<script>
 
-    
-    $('#btnExportarGrillaAjax2').click(function () {
+    <script>
 
-        var d = {
-            filters: jQuery('#Lista').getGridParam("postData").filters,  // si viene en undefined es porque no se puso ningun filtro
-            fechadesde: "" , //$("#ctl00_ContentPlaceHolder1_txtFechaDesde").val(),
-            fechahasta: "" , // $("#ctl00_ContentPlaceHolder1_txtFechaHasta").val(),
-            destino: "" // $("#ctl00_ContentPlaceHolder1_txtDestino").val()
-        }
 
-        if (typeof d.filters === "undefined") d.filters = "";
+        $('#btnExportarGrillaAjax2').click(function () {
 
-        $.ajax({
-            type: "POST",
-            //method: "POST",
-            url: "CDPStockMovimientos.aspx/ExportarGrillaNormal",
-            dataType: "json",
-            contentType: "application/json; charset=utf-8",
-
-            data: JSON.stringify(d),
-
-            success: function (data) {
-                //alert(data.d);
-                window.open(data.d);
+            var d = {
+                filters: jQuery('#Lista').getGridParam("postData").filters,  // si viene en undefined es porque no se puso ningun filtro
+                fechadesde: "", //$("#ctl00_ContentPlaceHolder1_txtFechaDesde").val(),
+                fechahasta: "", // $("#ctl00_ContentPlaceHolder1_txtFechaHasta").val(),
+                destino: "" // $("#ctl00_ContentPlaceHolder1_txtDestino").val()
             }
 
+            if (typeof d.filters === "undefined") d.filters = "";
 
-            ,
-            beforeSend: function () {
-                //$('.loading').html('some predefined loading img html');
-                $("#loading").show();
-                $('#grabar2').attr("disabled", true).val("Espere...");
+            $.ajax({
+                type: "POST",
+                //method: "POST",
+                url: "CDPStockMovimientos.aspx/ExportarGrillaNormal",
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
 
-            },
-            complete: function () {
-                $("#loading").hide();
-            }
+                data: JSON.stringify(d),
+
+                success: function (data) {
+                    //alert(data.d);
+                    window.open(data.d);
+                }
+
+
+                ,
+                beforeSend: function () {
+                    //$('.loading').html('some predefined loading img html');
+                    $("#loading").show();
+                    $('#grabar2').attr("disabled", true).val("Espere...");
+
+                },
+                complete: function () {
+                    $("#loading").hide();
+                }
+
+
+            })
 
 
         })
 
 
-    })
+        $().ready(function () {
+            'use strict';
 
-    
-    $().ready(function () {
-        'use strict';
-
-        var UltimoIdArticulo;
+            var UltimoIdArticulo;
 
 
 
@@ -299,230 +298,270 @@
 
 
 
-        $('#Lista').jqGrid({
-            //url: ROOT + 'CotizacionWilliamsDestino/Cotizaciones/',
-            url: 'HandlerMovimientos.ashx',
-            //postData: {},
-            //postData: {
-            //    'FechaInicial': function () { return $("#ctl00_ContentPlaceHolder1_txtFechaDesde").val(); },
-            //    'FechaFinal': function () { return $("#ctl00_ContentPlaceHolder1_txtFechaHasta").val(); },
-            //    'puntovent': function () { return $("#ctl00_ContentPlaceHolder1_cmbPuntoVenta").val(); },
-            //    'destino': function () { return $("#ctl00_ContentPlaceHolder1_txtDestino").val(); }
-            //},
-            datatype: 'json',
-            mtype: 'POST',
+            $('#Lista').jqGrid({
+                //url: ROOT + 'CotizacionWilliamsDestino/Cotizaciones/',
+                url: 'HandlerMovimientos.ashx',
+                //postData: {},
+                //postData: {
+                //    'FechaInicial': function () { return $("#ctl00_ContentPlaceHolder1_txtFechaDesde").val(); },
+                //    'FechaFinal': function () { return $("#ctl00_ContentPlaceHolder1_txtFechaHasta").val(); },
+                //    'puntovent': function () { return $("#ctl00_ContentPlaceHolder1_cmbPuntoVenta").val(); },
+                //    'destino': function () { return $("#ctl00_ContentPlaceHolder1_txtDestino").val(); }
+                //},
+                datatype: 'json',
+                mtype: 'POST',
 
 
 
 
-            // CP	TURNO	SITUACION	MERC	TITULAR_CP	INTERMEDIARIO	RTE CIAL	CORREDOR	DESTINATARIO	DESTINO	ENTREGADOR	PROC	KILOS	OBSERVACION
+                // CP	TURNO	SITUACION	MERC	TITULAR_CP	INTERMEDIARIO	RTE CIAL	CORREDOR	DESTINATARIO	DESTINO	ENTREGADOR	PROC	KILOS	OBSERVACION
 
 
-            colNames: ['', 'Id', 'Nro', 'Fecha', 'Puerto',
-                        'Producto', 'Kilos','Vapor','Factura','Cliente Fac.','Sucursal','Fecha Fac.','Origen','Destino'
-            ],
+                colNames: ['', 'Id', 'Nro', 'Fecha', 'Origen', 'Destino', 'Contrato', 'Producto', 'Puerto',
+                            'Vapor', 'Kilos', 'Factura', 'Cliente Fac.', 'Sucursal', 'Fecha Fac.'
+                ],
 
-            colModel: [
+                colModel: [
 
-{
-    name: 'act', index: 'act', align: 'center', width: 50, editable: false, hidden: false, sortable: false,
-    search: false,
-},
+    {
+        name: 'act', index: 'act', align: 'center', width: 50, editable: false, hidden: false, sortable: false,
+        search: false,
+    },
 
-{ name: 'IdCDPMovimientogggg', index: 'IdCDPMovimientogggg', align: 'left', width: 150, editable: false, hidden: true },
+    { name: 'IdCDPMovimientogggg', index: 'IdCDPMovimientogggg', align: 'left', width: 150, editable: false, hidden: true },
 
-{ name: 'IdCDPMovimiento', index: 'IdCDPMovimiento', align: 'left', width: 60, editable: false, hidden: false, edittype: 'text' },
+    { name: 'IdCDPMovimiento', index: 'IdCDPMovimiento', align: 'left', width: 60, editable: false, hidden: false, edittype: 'text' },
 
-{
-    name: 'FechaIngreso', index: 'FechaIngreso', width: 100, sortable: true, align: 'right', editable: false, 
-    editoptions: {
-        size: 10,
-        maxlengh: 10,
-        dataInit: function (element) {
-            $(element).datepicker({
-                dateFormat: 'dd/mm/yy',
-                constrainInput: false,
-                showOn: 'button',
-                buttonText: '...'
-            });
+    {
+        name: 'FechaIngreso', index: 'FechaIngreso', width: 100, sortable: true, align: 'right', editable: false,
+        editoptions: {
+            size: 10,
+            maxlengh: 10,
+            dataInit: function (element) {
+                $(element).datepicker({
+                    dateFormat: 'dd/mm/yy',
+                    constrainInput: false,
+                    showOn: 'button',
+                    buttonText: '...'
+                });
+            }
+        },
+        formatoptions: { newformat: "dd/mm/yy" }, datefmt: 'dd/mm/yy'
+        //, formatter: 'date'
+        , sorttype: 'date'
+
+
+        , searchoptions: {
+            sopt: ['eq', 'ne', 'lt', 'le', 'gt', 'ge'],
+            dataInit: function (elem) {
+                $(elem).datepicker({
+                    dateFormat: 'dd/mm/yy',
+                    showButtonPanel: true
+                })
+            }
         }
     },
-    formatoptions: { newformat: "dd/mm/yy" }, datefmt: 'dd/mm/yy'
-    //, formatter: 'date'
-    , sorttype: 'date'
-
-
-    , searchoptions: {
-        sopt: ['eq', 'ne', 'lt', 'le', 'gt', 'ge'],
-        dataInit: function (elem) {
-            $(elem).datepicker({
-                dateFormat: 'dd/mm/yy',
-                showButtonPanel: true
-            })
-        }
-    }
-},
-
-{ name: 'MovDestinoDesc', index: 'MovDestinoDesc', align: 'left', width: 150, hidden: false, editable: false, edittype: 'text', sortable: false },
 
 
 
 
+
+    
+    { name: 'ExportadorOrigen', index: 'ExportadorOrigen', align: 'left', width: 150, hidden: false, editable: false, edittype: 'text', sortable: false },
+    { name: 'ExportadorDestino', index: 'ExportadorDestino', align: 'left', width: 150, hidden: false, editable: false, edittype: 'text', sortable: false },
+    { name: 'Contrato', index: 'Contrato', align: 'left', width: 150, hidden: false, editable: false, edittype: 'text', sortable: false },
 { name: 'MovProductoDesc', index: 'MovProductoDesc', align: 'left', width: 100, hidden: false, editable: false, edittype: 'text', sortable: false },
 
-{ name: 'NetoFinal', index: 'NetoFinal', align: 'left', width: 60, hidden: false, editable: false, edittype: 'text', sortable: false },
+
+    
+    { name: 'MovDestinoDesc', index: 'MovDestinoDesc', align: 'left', width: 150, hidden: false, editable: false, edittype: 'text', sortable: false },
 
 
-            { name: 'Vapor', index: 'Vapor', align: 'left', width: 100, hidden: false, editable: false, edittype: 'text', sortable: false },
-
-{ name: 'Factura', index: 'Factura', align: 'left', width: 100, hidden: false, editable: false, edittype: 'text', sortable: false },
-
-            { name: 'ClienteFacturado', index: 'ClienteFacturado', align: 'left', width: 100, hidden: false, editable: false, edittype: 'text', sortable: false },
-
-{ name: 'IdStock', index: 'IdStock', align: 'left', width: 50, hidden: false, editable: false, edittype: 'text', sortable: false },
-            { name: 'fechafactura', index: 'fechafactura', align: 'left', width: 50, hidden: false, editable: false, edittype: 'text', sortable: false },
-
-{ name: 'ExportadorOrigen', index: 'ExportadorOrigen', align: 'left', width: 150, hidden: false, editable: false, edittype: 'text', sortable: false },
-{ name: 'ExportadorDestino', index: 'ExportadorDestino', align: 'left', width: 150, hidden: false, editable: false, edittype: 'text', sortable: false },
-            ],
-
-            gridComplete: function () {
-                //    var ids = jQuery("#Lista").jqGrid('getDataIDs');
-                //    for (var i = 0; i < ids.length; i++) {
-                //        var cl = ids[i];
-                //        var se = "<input style='height:22px;width:20px;' type='button' value='G' onclick=\"GrabarFila('" + cl + "'); \"  />";
-                //        jQuery("#Lista").jqGrid('setRowData', ids[i], { act: se });
-                //    }
-                //jQuery("#Lista").jqGrid('addRowData', Id, data, "last");
-                //AgregarItemVacio(grid)
+                { name: 'Vapor', index: 'Vapor', align: 'left', width: 100, hidden: false, editable: false, edittype: 'text', sortable: false },
 
 
-            },
+    { name: 'Cantidad', index: 'Cantidad', align: 'left', width: 60, hidden: false, editable: false, edittype: 'text', sortable: false, searchoptions: { sopt: ['eq', 'ne', 'lt', 'le', 'gt', 'ge'] } },
+
+
+    { name: 'Factura', index: 'Factura', align: 'left', width: 100, hidden: false, editable: false, edittype: 'text', sortable: false },
+
+                { name: 'ClienteFacturado', index: 'ClienteFacturado', align: 'left', width: 100, hidden: false, editable: false, edittype: 'text', sortable: false },
+
+    { name: 'IdStock', index: 'IdStock', align: 'left', width: 60, hidden: false, editable: false, edittype: 'text', sortable: false },
+
+    {
+        name: 'fechafactura', index: 'fechafactura', width: 100, sortable: true, align: 'right', editable: false,
+        editoptions: {
+            size: 10,
+            maxlengh: 10,
+            dataInit: function (element) {
+                $(element).datepicker({
+                    dateFormat: 'dd/mm/yy',
+                    constrainInput: false,
+                    showOn: 'button',
+                    buttonText: '...'
+                });
+            }
+        },
+        formatoptions: { newformat: "dd/mm/yy" }, datefmt: 'dd/mm/yy'
+        //, formatter: 'date'
+        , sorttype: 'date'
+
+
+        , searchoptions: {
+            sopt: ['eq', 'ne', 'lt', 'le', 'gt', 'ge'],
+            dataInit: function (elem) {
+                $(elem).datepicker({
+                    dateFormat: 'dd/mm/yy',
+                    showButtonPanel: true
+                })
+            }
+        }
+    },
 
 
 
-            loadComplete: function () {
-                // http://stackoverflow.com/questions/6575192/jqgrid-change-background-color-of-row-based-on-row-cell-value-by-column-name
-
-                //RefrescarFondoRenglon(this);
 
 
+                ],
 
-            },
+                gridComplete: function () {
+                    //    var ids = jQuery("#Lista").jqGrid('getDataIDs');
+                    //    for (var i = 0; i < ids.length; i++) {
+                    //        var cl = ids[i];
+                    //        var se = "<input style='height:22px;width:20px;' type='button' value='G' onclick=\"GrabarFila('" + cl + "'); \"  />";
+                    //        jQuery("#Lista").jqGrid('setRowData', ids[i], { act: se });
+                    //    }
+                    //jQuery("#Lista").jqGrid('addRowData', Id, data, "last");
+                    //AgregarItemVacio(grid)
+
+
+                },
+
+
+
+                loadComplete: function () {
+                    // http://stackoverflow.com/questions/6575192/jqgrid-change-background-color-of-row-based-on-row-cell-value-by-column-name
+
+                    //RefrescarFondoRenglon(this);
+
+
+
+                },
 
 
 
 
-            onCellSelect: function (rowid, iCol, cellcontent, e) {
-                var $this = $(this);
-                var iRow = $('#' + $.jgrid.jqID(rowid))[0].rowIndex;
-                lastSelectedId = rowid;
-                lastSelectediCol = iCol;
-                lastSelectediRow = iRow;
-            },
-            afterEditCell: function (id, name, val, iRow, iCol) {
-                //if (name == 'Fecha') {
-                //    jQuery("#" + iRow + "_Fecha", "#Lista").datepicker({ dateFormat: "dd/mm/yy" });
+                onCellSelect: function (rowid, iCol, cellcontent, e) {
+                    var $this = $(this);
+                    var iRow = $('#' + $.jgrid.jqID(rowid))[0].rowIndex;
+                    lastSelectedId = rowid;
+                    lastSelectediCol = iCol;
+                    lastSelectediRow = iRow;
+                },
+                afterEditCell: function (id, name, val, iRow, iCol) {
+                    //if (name == 'Fecha') {
+                    //    jQuery("#" + iRow + "_Fecha", "#Lista").datepicker({ dateFormat: "dd/mm/yy" });
+                    //}
+                    var se = "<input style='height:22px;width:55px;' type='button' value='Grabar' onclick=\"GrabarFila('" + id + "');\"  />";
+                    jQuery("#Lista").jqGrid('setRowData', id, { act: se });
+                },
+                //beforeSelectRow: function (rowid, e) {
+                //var $this = $(this),
+                //    $td = $(e.target).closest('td'),
+                //    $tr = $td.closest('tr'),
+                //    iRow = $tr[0].rowIndex,
+                //    iCol = $.jgrid.getCellIndex($td);
+
+                //if (typeof lastSelectediRow !== "undefined" && typeof lastSelectediCol !== "undefined" &&
+                //        (iRow !== lastSelectediRow || iCol !== lastSelectediCol)) {
+                //    $this.jqGrid('setGridParam', {cellEdit: true});
+                //    $this.jqGrid('restoreCell', lastSelectediRow, lastSelectediCol, true);
+                //    $this.jqGrid('setGridParam', {cellEdit: false});
+                //    $(this.rows[lastSelectediRow].cells[lastSelectediCol])
+                //        .removeClass("ui-state-highlight");
                 //}
-                var se = "<input style='height:22px;width:55px;' type='button' value='Grabar' onclick=\"GrabarFila('" + id + "');\"  />";
-                jQuery("#Lista").jqGrid('setRowData', id, { act: se });
-            },
-            //beforeSelectRow: function (rowid, e) {
-            //var $this = $(this),
-            //    $td = $(e.target).closest('td'),
-            //    $tr = $td.closest('tr'),
-            //    iRow = $tr[0].rowIndex,
-            //    iCol = $.jgrid.getCellIndex($td);
+                //return true;
+                //},
 
-            //if (typeof lastSelectediRow !== "undefined" && typeof lastSelectediCol !== "undefined" &&
-            //        (iRow !== lastSelectediRow || iCol !== lastSelectediCol)) {
-            //    $this.jqGrid('setGridParam', {cellEdit: true});
-            //    $this.jqGrid('restoreCell', lastSelectediRow, lastSelectediCol, true);
-            //    $this.jqGrid('setGridParam', {cellEdit: false});
-            //    $(this.rows[lastSelectediRow].cells[lastSelectediCol])
-            //        .removeClass("ui-state-highlight");
-            //}
-            //return true;
-            //},
+                pager: $('#ListaPager'),
+                rowNum: 10,
+                rowList: [10, 20, 50, 100],
+                sortname: 'IdCDPMovimiento',  //'FechaDescarga', //'NumeroCartaDePorte',
+                sortorder: 'desc',
+                viewrecords: true,
+                multiselect: false,
+                shrinkToFit: false,
+                width: 'auto',
+                height: 460, // $(window).height() - 250, // '100%'
+                altRows: false,
+                footerrow: false,
+                userDataOnFooter: true,
+                //caption: '<b>Control de Descargas</b>',
+                cellEdit: true,
+                cellsubmit: 'clientArray',
+                dataUrl: "WebServiceClientes.asmx/EmpleadoEditGridData",
 
-            pager: $('#ListaPager'),
-            rowNum: 10,
-            rowList: [10, 20, 50, 100],
-            sortname: 'IdCDPMovimiento',  //'FechaDescarga', //'NumeroCartaDePorte',
-            sortorder: 'desc',
-            viewrecords: true,
-            multiselect: false,
-            shrinkToFit: false,
-            width: 'auto',
-            height: 460, // $(window).height() - 250, // '100%'
-            altRows: false,
-            footerrow: false,
-            userDataOnFooter: true,
-            //caption: '<b>Control de Descargas</b>',
-            cellEdit: true,
-            cellsubmit: 'clientArray',
-            dataUrl: "WebServiceClientes.asmx/EmpleadoEditGridData",
+                toppager: true,
 
-            toppager: true,
+                gridview: true
+        , multiboxonly: true
+        , multipleSearch: true
 
-            gridview: true
-    , multiboxonly: true
-    , multipleSearch: true
+            });
+
+
+            jQuery('#Lista').jqGrid('gridResize');
+
+            jQuery("#Lista").jqGrid('bindKeys');
+
+            jQuery("#Lista").jqGrid('navGrid', '#ListaPager',
+             { csv: true, refresh: true, add: false, edit: false, del: false }, {}, {}, {},
+             {
+                 //sopt: ["cn"]
+                 //sopt: ['eq', 'ne', 'lt', 'le', 'gt', 'ge', 'bw', 'bn', 'ew', 'en', 'cn', 'nc', 'nu', 'nn', 'in', 'ni'],
+                 zIndex: 50, width: 700, closeOnEscape: true, closeAfterSearch: true, multipleSearch: true, overlay: false
+
+             }
+                // http://stackoverflow.com/questions/11228764/jqgrid-setting-zindex-for-alertmod
+            );
+
+            //jQuery("#Lista").jqGrid('navGrid', '#ListaPager',
+            //    { search: false, refresh: false, add: false, edit: false, del: false }, {}, {}, {}, {});
+
+
+
+            //jQuery("#Lista").jqGrid('navButtonAdd', '#ListaPager',
+            //                                {
+            //                                    caption: "", buttonicon: "ui-icon-plus", title: "Agregar",
+            //                                    onClickButton: function () {
+            //                                        AgregarItemVacio(jQuery("#Lista"));
+            //                                    },
+            //                                });
+            //jQuery("#Lista").jqGrid('navButtonAdd', '#ListaPager',
+            //                                {
+            //                                    caption: "", buttonicon: "ui-icon-trash", title: "Eliminar",
+            //                                    onClickButton: function () {
+            //                                        MarcarSeleccionadosParaEliminar(jQuery("#Lista"));
+            //                                    },
+            //                                });
+
+
+
+            jQuery("#Lista").filterToolbar({
+                stringResult: true, searchOnEnter: true,
+                defaultSearch: 'cn',
+                enableClear: false
+            }); // si queres sacar el enableClear, definilo en las searchoptions de la columna específica http://www.trirand.com/blog/?page_id=393/help/clearing-the-clear-icon-in-a-filtertoolbar/
+
+
+            //$('#Lista').jqGrid('setGridWidth', '1000');
+            $('#Lista').jqGrid('setGridWidth', $(window).width() - 300);
 
         });
 
 
-        jQuery('#Lista').jqGrid('gridResize');
-
-        jQuery("#Lista").jqGrid('bindKeys');
-
-        jQuery("#Lista").jqGrid('navGrid', '#ListaPager',
-         { csv: true, refresh: true, add: false, edit: false, del: false }, {}, {}, {},
-         {
-             //sopt: ["cn"]
-             //sopt: ['eq', 'ne', 'lt', 'le', 'gt', 'ge', 'bw', 'bn', 'ew', 'en', 'cn', 'nc', 'nu', 'nn', 'in', 'ni'],
-             zIndex: 50, width: 700, closeOnEscape: true, closeAfterSearch: true, multipleSearch: true, overlay: false
-
-         }
-            // http://stackoverflow.com/questions/11228764/jqgrid-setting-zindex-for-alertmod
-        );
-
-        //jQuery("#Lista").jqGrid('navGrid', '#ListaPager',
-        //    { search: false, refresh: false, add: false, edit: false, del: false }, {}, {}, {}, {});
-
-
-
-        //jQuery("#Lista").jqGrid('navButtonAdd', '#ListaPager',
-        //                                {
-        //                                    caption: "", buttonicon: "ui-icon-plus", title: "Agregar",
-        //                                    onClickButton: function () {
-        //                                        AgregarItemVacio(jQuery("#Lista"));
-        //                                    },
-        //                                });
-        //jQuery("#Lista").jqGrid('navButtonAdd', '#ListaPager',
-        //                                {
-        //                                    caption: "", buttonicon: "ui-icon-trash", title: "Eliminar",
-        //                                    onClickButton: function () {
-        //                                        MarcarSeleccionadosParaEliminar(jQuery("#Lista"));
-        //                                    },
-        //                                });
-
-
-
-        jQuery("#Lista").filterToolbar({
-            stringResult: true, searchOnEnter: true,
-            defaultSearch: 'cn',
-            enableClear: false
-        }); // si queres sacar el enableClear, definilo en las searchoptions de la columna específica http://www.trirand.com/blog/?page_id=393/help/clearing-the-clear-icon-in-a-filtertoolbar/
-
-
-        //$('#Lista').jqGrid('setGridWidth', '1000');
-        $('#Lista').jqGrid('setGridWidth', $(window).width() - 300);
-
-    });
-
-
-</script>
+    </script>
 </asp:Content>
 
 
