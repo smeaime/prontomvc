@@ -776,6 +776,11 @@ namespace ProntoWindowsService
 
             var s = new ServicioCartaPorte.servi();
 
+            //  https://stackoverflow.com/questions/10399557/is-it-possible-to-run-selenium-firefox-web-driver-without-a-gui
+
+            string dir1 = ConfigurationManager.AppSettings["DirDescargas"] ?? ""; //  DirApp1 + @"\Temp\Pegatinas\";
+            string dir2 = ConfigurationManager.AppSettings["DirDescargas_Test"] ?? ""; // DirApp2 + @"\Temp\Pegatinas\";
+
 
             while (true)
             {
@@ -788,18 +793,29 @@ namespace ProntoWindowsService
 
 
 
-                //  https://stackoverflow.com/questions/10399557/is-it-possible-to-run-selenium-firefox-web-driver-without-a-gui
-
-                string dir = DirApp1 + @"\Temp\Pegatinas\";
+      
+                
 
                 //s.CerealnetSeleniumConPhantomJS(dir);
                 //s.CerealnetSelenium(dir);
                 //s.UrenportSelenium(dir);
-                s.UrenportSelenium_ConChromeHeadless(dir, DirChromeDriver);
-                ClassFlexicapture.Log(idthread + " Bajado 1");
 
-                s.CerealnetSelenium_ConChromeHeadless(dir, DirChromeDriver);
-                ClassFlexicapture.Log(idthread + " Bajado 2");
+
+                if (dir1 != "")
+                {
+                    s.UrenportSelenium_ConChromeHeadless(dir1, DirChromeDriver);
+                    ClassFlexicapture.Log(idthread + " Bajado 1");
+                    s.CerealnetSelenium_ConChromeHeadless(dir1, DirChromeDriver);
+                    ClassFlexicapture.Log(idthread + " Bajado 2");
+                }
+
+                if (dir2 != "")
+                {
+                    s.UrenportSelenium_ConChromeHeadless(dir2, DirChromeDriver);
+                    ClassFlexicapture.Log(idthread + " Bajado 1");
+                    s.CerealnetSelenium_ConChromeHeadless(dir2, DirChromeDriver);
+                    ClassFlexicapture.Log(idthread + " Bajado 2");
+                }
 
 
                 try
