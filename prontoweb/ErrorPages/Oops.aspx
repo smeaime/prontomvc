@@ -28,7 +28,7 @@
     <%-- Por favor, llamanos al (011) 4983-0976 --%>
     <br />
     <br />
-    El administrador ya recibió detalles del error con tu nombre y la hora <%--con el t�tulo "Usuario Hora"--%>
+    El administrador ya recibi&oacute; detalles del error con tu nombre y la hora <%--con el t�tulo "Usuario Hora"--%>
     <br />
     <br /><br /><br />
     BDL Consultores
@@ -60,7 +60,7 @@ Perhaps even provide direct contact information if they're really stuck and desp
 <%--    <asp:HyperLink NavigateUrl="../ProntoWeb/Principal.aspx" Text="Volver a la p�gina principal"
         runat="server" TabIndex="-1" ForeColor="#2200C1" Font-Size="" ID="lnkBDL"></asp:HyperLink>--%>
 
-        <a href='javascript:history.go(-1)'  >Volver a la p�gina anterior</a>
+        <a href='javascript:history.go(-1)'  >Volver a la p&aacute;gina anterior</a>
         
 
 <%--        volve a intentar lo que hiciste
