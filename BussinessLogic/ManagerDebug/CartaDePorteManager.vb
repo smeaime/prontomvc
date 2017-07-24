@@ -11451,6 +11451,27 @@ usuario As String, ConexBDLmaster As String,
 
 
     Public Shared Function DesAnular(ByVal sc As String, ByVal myCartaDePorte As CartaDePorte, ByVal IdUsuario As Integer, ByVal NombreUsuario As String) As Integer
+
+
+
+        'verificar q no exista una igual sin anular
+
+        Using db As New DemoProntoEntities(Auxiliares.FormatearConexParaEntityFramework(Encriptar(sc)))
+
+            Dim l As Models.CartasDePorte =
+                            (From c In db.CartasDePortes Where
+                              c.NumeroCartaDePorte = myCartaDePorte.NumeroCartaDePorte And
+                              c.SubnumeroVagon = myCartaDePorte.SubnumeroVagon And
+                              c.SubnumeroDeFacturacion = myCartaDePorte.SubnumeroDeFacturacion And
+                              c.IdCartaDePorte <> myCartaDePorte.Id And
+                              c.FechaAnulacion IsNot Nothing
+                              Select c).FirstOrDefault()
+
+            If l IsNot Nothing Then Throw New Exception("Ya existe una carta con el mismo número y subnúmero de facturación")
+        End Using
+
+
+
         With myCartaDePorte
 
             'esto tiene que estar en el manager, dios!
