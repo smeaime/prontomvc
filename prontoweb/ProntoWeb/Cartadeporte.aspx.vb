@@ -3075,8 +3075,6 @@ Partial Class CartadeporteABM
 
 
 
-
-
         Dim bPassOK = False
 
         Dim usuario = cmbUsuarioAnulo.Items(cmbUsuarioAnulo.SelectedIndex).Text
@@ -3113,6 +3111,11 @@ Partial Class CartadeporteABM
 
                     If .Anulada = "SI" Then
                         'des-anula
+
+
+problemas al desanular cuando existe un numero igual!!!
+
+
                         r = CartaDePorteManager.DesAnular(SC, myCartaDePorte, Session(SESSIONPRONTO_glbIdUsuario), Session(SESSIONPRONTO_UserName))
 
                         '.Anulada = "NO"
