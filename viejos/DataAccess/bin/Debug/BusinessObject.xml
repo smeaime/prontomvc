@@ -1,0 +1,91 @@
+﻿<?xml version="1.0"?>
+<doc>
+<assembly>
+<name>
+BusinessObject
+</name>
+</assembly>
+<members>
+<member name="M:DataSetLinqOperators.ToDataTable``1(System.Collections.Generic.IEnumerable{``0})">
+	<summary>
+ Creates a <see cref="T:System.Data.DataTable"/> that contains the data from a source sequence.
+ </summary>
+	<remarks>
+ The initial schema of the DataTable is based on schema of the type T. All public property and fields are turned into DataColumns.
+ If the source sequence contains a sub-type of T, the table is automatically expanded for any addition public properties or fields.
+ </remarks>
+</member><member name="M:DataSetLinqOperators.LoadSequence``1(System.Collections.Generic.IEnumerable{``0},System.Data.DataTable,System.Nullable{System.Data.LoadOption})">
+	<summary>
+ Loads the data from a source sequence into an existing <see cref="T:System.Data.DataTable"/>.
+ </summary>
+	<remarks>
+ The schema of <paramref name="table"/> must be consistent with the schema of the type T (all public property and fields are mapped to DataColumns).
+ If the source sequence contains a sub-type of T, the table is automatically expanded for any addition public properties or fields.
+ </remarks>
+</member><member name="P:My.Resources.Resources.ResourceManager">
+	<summary>
+  Returns the cached ResourceManager instance used by this class.
+</summary>
+</member><member name="P:My.Resources.Resources.Culture">
+	<summary>
+  Overrides the current thread's CurrentUICulture property for all
+  resource lookups using this strongly typed resource class.
+</summary>
+</member><member name="T:My.Resources.Resources">
+	<summary>
+  A strongly-typed resource class, for looking up localized strings, etc.
+</summary>
+</member><member name="F:ErrHandler.DirectorioErrores">
+ Handles error by accepting the error message
+ Displays the page on which the error occured
+ 
+
+</member><member name="M:ProntoConversion.SQLtoNET(System.Data.IDataRecord,System.String,System.Object@)">
+	<summary>
+ Para cargar de un store (le paso el parametro con la @ solamente porque estoy copiando el codigo del NETtoSQL)
+ </summary>
+	<param name="myDataRecord"></param>
+	<param name="sCampo"></param>
+	<param name="oDest"></param>
+	<remarks></remarks>
+</member><member name="M:ProntoConversion.fechaNETtoSQL(System.Object,System.Object)">
+	<summary>
+ No te preocupés, que devuelve DBNull en lugar de Nothing
+ </summary>
+	<param name="Fecha"></param>
+	<param name="Y"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:ProntoFuncionesGenerales._c(System.Object)">
+	<summary>
+ Agrega caracteres de escape SQL a un string
+ </summary>
+	<param name="s"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:ProntoFuncionesGenerales.iisValidSqlDate(System.Object,System.Object)">
+	<summary>
+ Devuelve nothing si la fecha no es valida para SQL
+ </summary>
+	<param name="Fecha"></param>
+	<param name="Y"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:ProntoFuncionesGenerales.DecimalToString(System.Decimal)">
+	<summary>
+	</summary>
+	<param name="d"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:ProntoFuncionesGenerales.CheckDBNull(System.Object,ProntoFuncionesGenerales.enumObjectType)">
+	<summary>
+	</summary>
+	<param name="obj"></param>
+	<param name="ObjectType"></param>
+	<returns></returns>
+	<remarks>
+ 'http://www.freevbcode.com/ShowCode.Asp?ID=5810
+ </remarks>
+</member>
+</members>
+</doc>
