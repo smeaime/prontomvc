@@ -1,0 +1,647 @@
+﻿Imports System.Net.Mail
+Imports System.Data
+Imports System.Data.SqlClient
+Imports System.Data.OleDb
+Imports ADODB
+'Imports Microsoft.Office
+Imports System.Xml
+Imports System.Xml.XPath
+Imports System.Xml.Xsl
+Imports System.IO
+
+Public Module FuncionesGeneralesCOMPRONTO
+
+
+    Function DeTipoSQLaNET(ByVal tipoSQL As ADOR.Field) As Object
+        Select Case tipoSQL.Type
+            Case ADOR.DataTypeEnum.adDBTimeStamp
+                Return iisValidSqlDate(tipoSQL.Value)
+            Case ADOR.DataTypeEnum.adInteger, ADOR.DataTypeEnum.adUnsignedTinyInt, ADOR.DataTypeEnum.adUnsignedInt
+                If Left(tipoSQL.Name, 2).ToUpper = "ID" Then 'es un foreign key (ID)
+                    Return iisNull(tipoSQL.Value, 0)
+                Else
+                    Return iisNull(tipoSQL.Value, Nothing) 'es un numero cualquiera
+                End If
+            Case ADOR.DataTypeEnum.adChar, ADOR.DataTypeEnum.adVarChar
+                'Return iisNull(tipoSQL.Value, "")
+                Return iisNull(tipoSQL.Value, Nothing)
+            Case Else
+                Return iisNull(tipoSQL.Value, Nothing)
+        End Select
+    End Function
+
+    'Debería ser private.......... Qué hago usando ComPronto?!?!?!?! No debería....
+    Public Function CrearAppCompronto(ByVal SC As String) As ComPronto.Aplicacion
+        'metodo 1
+        'Dim MydsEncrypt As New Proyecto1.dsEncrypt 'estoy llamando a la dll "standalone" que hice del SaBrE encriptador
+        'MydsEncrypt.KeyString = ("EDS")
+
+        'metodo 2
+        Dim x As New dsEncrypt
+        x.KeyString = ("EDS")
+
+
+        CrearAppCompronto = CreateObject("ComPronto.Aplicacion")
+
+
+
+        'En el web.config figura el provider para NET.  
+        ' Al COMpronto se lo tengo que poner explicito en la cadena de conexion.
+
+        Dim a As String
+        'a = MydsEncrypt.Encrypt("Provider=SQLOLEDB.1;Persist Security Info=False;" + SC)
+        'Debug.Print(a)
+        a = x.Encrypt("Provider=SQLOLEDB.1;Persist Security Info=False;" + SC)
+        Debug.Print(a)
+
+
+
+        CrearAppCompronto.StringConexion = a
+
+    End Function
+
+
+    Function Encriptar(ByVal SC As String) As String
+        Dim x As New dsEncrypt
+        x.KeyString = ("EDS")
+        Encriptar = x.Encrypt("Provider=SQLOLEDB.1;Persist Security Info=False;" + SC)
+    End Function
+
+End Module
+
+
+Public Module ProntoFuncionesGenerales
+
+
+
+    Function TimestampToLong(ByVal timeStamp() As Byte) As Long
+        Dim l As Long
+
+        'BitConverter.ToInt64()
+
+
+        Return l
+    End Function
+
+
+
+
+    'por qué en estas funciones usas "Object"? -Porque no sé, justamente, si me pasan lo que espero. Vos fumá
+
+    '////////////////////////////////////////////////////////////////////////
+    '////////////////////////////////////////////////////////////////////////
+    '////////////////////////////////////////////////////////////////////////
+
+    'conversiones ADO 
+    'http://support.microsoft.com/default.aspx?scid=kb;en-us;316337
+
+    Public Function RecordSet_2_DataSet(ByVal rs As ADODB.Recordset) As DataTable
+
+        Dim myDA As New OleDb.OleDbDataAdapter()
+        Dim myDS As New DataSet("MyTable")
+        myDA.Fill(myDS, rs, "MyTable")
+        Return myDS.Tables(0)
+
+    End Function
+
+    'http://www.codeproject.com/KB/database/DataTableToRecordset.aspx
+
+    Public Function ConvertToRecordset(ByVal inDataSet As DataSet) As ADODB.Recordset
+        Return ConvertToRecordset(inDataSet.Tables(0))
+    End Function
+
+    Public Function ConvertToRecordset(ByVal inTable As DataTable) As ADODB.Recordset
+
+        Dim result As ADODB.Recordset = New ADODB.Recordset
+        result.CursorLocation = ADODB.CursorLocationEnum.adUseClient
+
+        Dim resultFields As ADODB.Fields = result.Fields
+        Dim inColumns As System.Data.DataColumnCollection = inTable.Columns
+
+        For Each inColumn As DataColumn In inColumns
+            resultFields.Append(inColumn.ColumnName, TranslateType(inColumn.DataType), _
+                                inColumn.MaxLength, _
+                                IIf(inColumn.AllowDBNull, ADODB.FieldAttributeEnum.adFldIsNullable, ADODB.FieldAttributeEnum.adFldUnspecified), _
+                                Nothing)
+        Next
+
+        result.Open(System.Reflection.Missing.Value, System.Reflection.Missing.Value, ADODB.CursorTypeEnum.adOpenStatic, ADODB.LockTypeEnum.adLockOptimistic, 0)
+
+        For Each dr As DataRow In inTable.Rows
+
+            result.AddNew(System.Reflection.Missing.Value, System.Reflection.Missing.Value)
+
+            For columnIndex As Integer = 0 To inColumns.Count - 1
+
+                resultFields(columnIndex).Value = dr(columnIndex)
+            Next
+        Next
+
+        If result.RecordCount > 0 Then result.MoveFirst()
+
+        Return result
+    End Function
+
+    Private Function TranslateType(ByVal columnType As Type) As ADODB.DataTypeEnum
+
+        Select Case columnType.UnderlyingSystemType.ToString()
+            Case "System.Boolean"
+                Return ADODB.DataTypeEnum.adBoolean
+
+            Case "System.Byte"
+                Return ADODB.DataTypeEnum.adUnsignedTinyInt
+
+            Case "System.Char"
+                Return ADODB.DataTypeEnum.adChar
+
+            Case "System.DateTime"
+                Return ADODB.DataTypeEnum.adDate
+
+            Case "System.Decimal"
+                Return ADODB.DataTypeEnum.adCurrency
+
+            Case "System.Double"
+                Return ADODB.DataTypeEnum.adDouble
+
+            Case "System.Int16"
+                Return ADODB.DataTypeEnum.adSmallInt
+
+            Case "System.Int32"
+                Return ADODB.DataTypeEnum.adInteger
+
+            Case "System.Int64"
+                Return ADODB.DataTypeEnum.adBigInt
+
+            Case "System.SByte"
+                Return ADODB.DataTypeEnum.adTinyInt
+
+            Case "System.Single"
+                Return ADODB.DataTypeEnum.adSingle
+
+            Case "System.UInt16"
+                Return ADODB.DataTypeEnum.adUnsignedSmallInt
+
+            Case "System.UInt32"
+                Return ADODB.DataTypeEnum.adUnsignedInt
+
+            Case "System.UInt64"
+                Return ADODB.DataTypeEnum.adUnsignedBigInt
+
+            Case "System.String"
+                Return ADODB.DataTypeEnum.adVarChar
+
+            Case Else
+                Return ADODB.DataTypeEnum.adVarChar
+        End Select
+    End Function
+
+    '////////////////////////////////////////////////////////////////////////
+    '////////////////////////////////////////////////////////////////////////
+    '////////////////////////////////////////////////////////////////////////
+    '////////////////////////////////////////////////////////////////////////
+
+
+
+    ''' <summary>
+    ''' Devuelve nothing si la fecha no es valida para SQL
+    ''' </summary>
+    ''' <param name="Fecha"></param>
+    ''' <param name="Y"></param>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
+    Public Function iisValidSqlDate(ByVal Fecha As Object, Optional ByVal Y As Object = Nothing) As Object
+        'If fehca < sqldatetime.minvalue Then
+
+        If Not IsDate(Fecha) Then Return Y
+
+        If Fecha < #1/1/1753# Then
+            iisValidSqlDate = #1/1/1753#
+        ElseIf Fecha > #12/31/9999 11:59:59 PM# Then
+            iisValidSqlDate = #12/31/9999 11:59:59 PM#
+        Else
+            iisValidSqlDate = Fecha
+        End If
+    End Function
+
+    'Public Function iisZeroThenNull(ByVal Numero As Long) As Object
+    '    If Numero = 0 Then
+    '        Return System.DBNull.Value
+    '    Else
+    '        Return Numero
+    '    End If
+    'End Function
+
+    Public Function IdNull(ByVal Id As Long)
+        If Id <= 0 Then
+            Return System.DBNull.Value
+        Else
+            Return Id
+        End If
+    End Function
+
+
+    Public Function iisNumeric(ByVal Numero As Object, Optional ByVal Y As Object = Nothing) As Object
+
+        If Not IsNumeric(Numero) Then Return Y
+
+        Return Numero
+    End Function
+
+
+    ''' <summary>
+    ''' 
+    ''' </summary>
+    ''' <param name="d"></param>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
+    Public Function DecimalToString(ByVal d As Decimal) As String
+        'taría bueno overloadear todos los decimal con un metodo directo... O mejor aún, renombrar uno que ya existe....
+        Return d.ToString(System.Globalization.CultureInfo.InvariantCulture)
+    End Function
+
+    Function IsNull(ByVal x As Object) As Boolean 'reemplazo de la vieja isnull
+        Return IsDBNull(x)
+    End Function
+
+    Public Function stod(ByVal s As String) As Decimal 'alias de StringToDecimal
+        Return StringToDecimal(s)
+    End Function
+
+    Public Function StringToDecimal(ByVal s As String) As Decimal
+        If s = "" Then
+            Return 0
+        End If
+        s = Replace(s, "$", "")
+        's = Replace(s, ",", ".")
+        'acá puede llegar un 46.548.65  !!!!!
+        If Not IsNumeric(s) Then
+            Return 0
+        End If
+
+        'Esta operación lo que hace es obtener una referencia a la "instancia cultural de todos los idiomas" la cual se basa en la referencia cultural inglesa, que como saben maneja el punto como el separador de decimales,y por tanto lo que estamos logrando es ignorar la configuración regional!!
+        Try
+            Return Decimal.Parse(s, System.Globalization.CultureInfo.InvariantCulture)
+        Catch ex As Exception
+            Return Decimal.Parse(s)
+        End Try
+
+
+
+    End Function
+
+    Public Function FF2(ByVal s As Double) As String
+        Return String.Format("{0:F2}", s)
+    End Function
+
+    Public Function FormatVB6(ByVal s As Double, ByVal Style As String) As String
+        Return Format(CSng(s), Style)
+    End Function
+
+    Public Function iisNull(ByVal X As Object, Optional ByVal Y As Object = "") As Object
+        'On Error Resume Next
+        Try
+            If X.GetType.Name = "Int32" Or X.GetType.Name = "Decimal" Or X.GetType.Name = "Double" Or X.GetType.Name = "Single" Then
+                If X Is Nothing Or X = 0 Then
+                    iisNull = Y.ToString
+                Else
+                    iisNull = X.ToString
+                End If
+            ElseIf (X.GetType.Name = "String") Then
+                'X.ToString.IsNullOrEmpty()
+                'If Valor Is DBNull.Value Then
+
+                If X Is Nothing Or X = "" Then
+                    iisNull = Y
+                Else
+                    iisNull = X
+                End If
+            ElseIf (X.GetType.Name = "Boolean") Then
+                'X.ToString.IsNullOrEmpty()
+                'If Valor Is DBNull.Value Then
+                If X Is Nothing Then
+                    iisNull = Y
+                Else
+                    iisNull = X
+                End If
+            Else
+                Try
+                    If X Is Nothing Or X = "" Then
+                        iisNull = Y
+                    Else
+                        iisNull = X
+                    End If
+                Catch e As System.Exception
+                    If IsDBNull(X) Then
+                        iisNull = Y
+                    Else
+                        'Throw New ApplicationException("Error en la grabacion " + e.Message, e)
+                        iisNull = Nothing
+                    End If
+
+                End Try
+            End If
+        Catch e As System.Exception
+            Return Y
+        End Try
+    End Function
+
+
+
+
+
+    Public Function MandaEmail(ByVal Para As String, ByVal Asunto As String, ByVal Cuerpo As String, ByVal De As String, ByVal SmtpServer As String, ByVal SmtpUser As String, ByVal SmtpPass As String, Optional ByVal sFileNameAdjunto As String = "", Optional ByVal SmtpPort As Long = 587, Optional ByVal EnableSSL As Integer = 1) As Boolean
+        '/////////////////////////////////////////////////////////////////////////////////
+        '/////////////////////////////////////////////////////////////////////////////////
+        '/////////////////////////////////////////////////////////////////////////////////
+        '/////////////////////////////////////////////////////////////////////////////////
+        'mando mail al comprador
+        '/////////////////////////////////////////////////////////////////////////////////
+
+        'metodo usa Imports System.Net.Mail
+        'http://weblogs.asp.net/scottgu/archive/2005/12/16/432854.aspx
+
+        'http://lifehacker.com/111166/how-to-use-gmail-as-your-smtp-server
+
+
+
+        'If De = "" Then De = "ProntoWebMail@gmail.com"
+        'If SmtpServer = "" Then SmtpServer = "smtp.gmail.com"
+        'If SmtpUser = "" Then SmtpUser = "ProntoWebMail"
+        'If SmtpPass = "" Then SmtpPass = ConfigurationSettings.AppSettings("SmtpPass") '"50TriplesdJQ"
+
+
+
+        Dim message As New MailMessage(De, Para, Asunto, Cuerpo)
+        message.Attachments.Add(New Attachment(sFileNameAdjunto))
+        'Seteo que el server notifique solamente en el error de entrega
+        message.DeliveryNotificationOptions = DeliveryNotificationOptions.OnFailure
+
+
+        Dim emailClient As SmtpClient
+
+
+
+        emailClient = New SmtpClient(SmtpServer)
+
+        emailClient.Port = SmtpPort
+
+
+
+        'Si se solicitó SSL, lo activo
+        If EnableSSL = 1 Then
+            emailClient.EnableSsl = True
+            'Bypass de validación de certificado (para problemas con servidores de SMTP con SSL con certificados que no validan en nuestra máquina)
+            System.Net.ServicePointManager.ServerCertificateValidationCallback = New System.Net.Security.RemoteCertificateValidationCallback(AddressOf ValidarCertificado)
+        End If
+        ''Cargo las credenciales si hacen falta
+        'If Not String.IsNullOrEmpty(SSLuser) Then
+        '    Dim credenciales As New System.Net.NetworkCredential(SSLuser, SSLpass)
+        '    oSMTP.Credentials = credenciales
+        'End If
+
+        emailClient.EnableSsl = True
+        emailClient.Credentials = New System.Net.NetworkCredential(SmtpUser, SmtpPass)
+
+
+
+
+
+
+
+
+        'Try
+        emailClient.Send(message)
+
+
+
+
+        '//////////////////////////////////////////////////////////////////////////////
+        '//////////////////////////////////////////////////////////////////////////////
+        'The remote certificate is invalid according to the validation procedure“.
+        '//////////////////////////////////////////////////////////////////////////////
+        '//////////////////////////////////////////////////////////////////////////////
+        'http://varionet.wordpress.com/category/systemnetmail/
+
+
+
+
+
+
+        '//////////////////////////////////////////////////////////////////////////////
+        '//////////////////////////////////////////////////////////////////////////////
+        '//////////////////////////////////////////////////////////////////////////////
+        'Problemas con la conexion al servidor SMTP
+        '//////////////////////////////////////////////////////////////////////////////
+        '//////////////////////////////////////////////////////////////////////////////
+
+
+        'If you have Windows XP SP2 (not sure how it works with SP1), Click CHANGE FIREWALL SETTINGS - click on ADVANCE - 
+        ' click on connection you are using for email -on the next page make sure that there is a check mark in front of 
+        '    POP3 and SMTP. Done! After hours of changing settings, this worked for me. Good luck to you!
+
+        'Also check off "TLS" under "Use secure connection." ?????
+        'http://forums.asp.net/p/1475014/3431732.aspx
+        'A connection attempt failed because the connected party did not properly respond after a period of time, 
+        'or established connection failed because connected host has failed to respond
+        'http://forum.umbraco.org/yaf_postst7439_A-connection-attempt-failed-because.aspx
+        '        Are you able to jump on the desktop of the webserver and verify that it is able to successfully 
+        'resolve and connect to the below web-service. You can just use IE to navigate to the URL.
+        'If you are unable to hit the service successfully from IE then its likely you have a misconfiguration 
+        'somewhere.I() 'd suggest first pinging the machine from dos, and veriyfing that DNS etc is setup correctly - checking IIS etc. 
+        '            cheers()
+        'http://www.TESTDOM.com/interface/webservices/TESTDOM.asmx
+
+        '        You can use localhost as your SMTP server only if you have a SMTP Service installed on the same computer hosting the application.
+
+        'In your case, I do not believe it is trying to connection to localhost (if it is trying to connect 
+        'to localhost, the IP should be 127.0.0.1).  Your application is trying to connect to 66.167.125.100 but there's no response from that IP.
+
+        'I tested connecting to this IP from my computer (over port 25) and it is responding.  
+        'The most likely cause is that the web server hosting the site does not allow outbound connection to be made
+
+        'If you have Windows XP SP2 (not sure how it works with SP1), Click CHANGE FIREWALL SETTINGS - click on ADVANCE - 
+        ' click on connection you are using for email -on the next page make sure that there is a check mark in front of 
+        '    POP3 and SMTP. Done! After hours of changing settings, this worked for me. Good luck to you!
+
+
+        'http://forums.asp.net/p/1274384/2421592.aspx
+
+        '        Please make sure it is able to connect from the production server to the server specified in ASP.NET application. 
+        '    Run a ping command from command line prompt to the server's IP address or server name to see the results. 
+        '   You should be able to see the results from command prompt which will indicate whether the connection is successful or not.
+        'According to your description, the server might locate in the same machine or in the same intranet. 
+        'For production enviroment, you might need to have similar deployment. 
+
+
+        '//////////////////////////////////////////////////////////////////////////////
+        '//////////////////////////////////////////////////////////////////////////////
+        '//////////////////////////////////////////////////////////////////////////////
+        '//////////////////////////////////////////////////////////////////////////////
+        '//////////////////////////////////////////////////////////////////////////////
+
+        'LabelError.Text = "Mensaje enviado satisfactoriamente"
+        'Catch ex As Exception
+        '    ErrHandler.WriteError(ex.Message)
+        '    Debug.Print(ex.Message)
+        '    'LabelError.Text = "ERROR: " & ex.Message
+        '    Return False
+        'End Try
+
+
+
+        '/////////////////////////////////////////////////////////////////////////////////
+        '/////////////////////////////////////////////////////////////////////////////////
+        '/////////////////////////////////////////////////////////////////////////////////
+        '/////////////////////////////////////////////////////////////////////////////////
+        '/////////////////////////////////////////////////////////////////////////////////
+        '/////////////////////////////////////////////////////////////////////////////////
+        '/////////////////////////////////////////////////////////////////////////////////
+        '/////////////////////////////////////////////////////////////////////////////////
+
+        'metodo outlook
+        'http://www.elguille.info/colabora/puntoNET/Emanon_OutlookVB.htm
+        'http://www.forosdelweb.com/f29/programacion-con-outlook-vb-net-274661/
+
+        'Try
+        '    Dim m_OutLook As Microsoft.Office.Interop.Outlook.Application
+
+        '    Dim objMail As Microsoft.Office.Interop.Outlook.MailItem
+
+        '    m_OutLook = New Microsoft.Office.Interop.Outlook.Application
+        '    objMail = m_OutLook.CreateItem(Microsoft.Office.Interop.Outlook.OlItemType.olMailItem)
+        '    objMail.To = EmpleadoManager.GetItem(SC, myPresupuesto.IdComprador).Email
+
+        '    objMail.Subject = "Respuesta a Solicitación de Presupuesto"
+
+        '    objMail.Body = "El proveedor " & ProveedorManager.GetItem(SC, myPresupuesto.IdComprador).Nombre1 & " ha respondido a la solicitación de presupuesto " & myPresupuesto.Numero
+        '    objMail.Body = objMail.Body & "URL http://localhost:3688/Pronto/ProntoWeb/Presupuesto.aspx?Id=3&Empresa=Marcalba"
+
+
+
+        '    objMail.Send()
+
+        '    'MessageBox.Show("Mail Enviado", "Integración con OutLook", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+
+        'Catch ex As Exception
+
+        '    '* Si se produce algun Error Notificar al usuario
+
+        '    'MessageBox.Show("Error enviando mail")
+        '    Debug.Print(ex.Message)
+        'Finally
+        '    'm_OutLook = Nothing
+        'End Try
+
+
+        '/////////////////////////////////////////////////////////////////////////////////
+        '/////////////////////////////////////////////////////////////////////////////////
+        '/////////////////////////////////////////////////////////////////////////////////
+        '/////////////////////////////////////////////////////////////////////////////////
+        '/////////////////////////////////////////////////////////////////////////////////
+
+        Return True
+    End Function
+
+    Private Function ValidarCertificado(ByVal sender As Object, ByVal certificate As System.Security.Cryptography.X509Certificates.X509Certificate, ByVal chain As System.Security.Cryptography.X509Certificates.X509Chain, ByVal sslPolicyErrors As System.Net.Security.SslPolicyErrors) As Boolean
+        'bypass de la validación del certificado (aplicar aquí validación personalizada si fuera el caso)
+        Return True
+    End Function
+
+
+
+
+    Enum enumObjectType
+        StrType = 0
+        IntType = 1
+        DblType = 2
+    End Enum
+
+    ''' <summary>
+    ''' 
+    ''' </summary>
+    ''' <param name="obj"></param>
+    ''' <param name="ObjectType"></param>
+    ''' <returns></returns>
+    ''' <remarks>
+    ''' 'http://www.freevbcode.com/ShowCode.Asp?ID=5810
+    ''' </remarks>
+    Public Function CheckDBNull(ByVal obj As Object, _
+    Optional ByVal ObjectType As enumObjectType = enumObjectType.StrType) As Object
+        Dim objReturn As Object
+        objReturn = obj
+        If ObjectType = enumObjectType.StrType And IsDBNull(obj) Then
+            objReturn = ""
+        ElseIf ObjectType = enumObjectType.IntType And IsDBNull(obj) Then
+            objReturn = 0
+        ElseIf ObjectType = enumObjectType.DblType And IsDBNull(obj) Then
+            objReturn = 0.0
+        End If
+        Return objReturn
+    End Function
+
+    Public Function mkf_validacuit(ByVal mk_p_nro As String) As Boolean
+        Dim mk_suma As Integer
+        Dim mk_valido As String
+        mk_p_nro = mk_p_nro.Replace("-", "")
+        If IsNumeric(mk_p_nro) Then
+            If mk_p_nro.Length <> 11 Then
+                mk_valido = False
+            Else
+                mk_suma = 0
+                mk_suma += CInt(mk_p_nro.Substring(0, 1)) * 5
+                mk_suma += CInt(mk_p_nro.Substring(1, 1)) * 4
+                mk_suma += CInt(mk_p_nro.Substring(2, 1)) * 3
+                mk_suma += CInt(mk_p_nro.Substring(3, 1)) * 2
+                mk_suma += CInt(mk_p_nro.Substring(4, 1)) * 7
+                mk_suma += CInt(mk_p_nro.Substring(5, 1)) * 6
+                mk_suma += CInt(mk_p_nro.Substring(6, 1)) * 5
+                mk_suma += CInt(mk_p_nro.Substring(7, 1)) * 4
+                mk_suma += CInt(mk_p_nro.Substring(8, 1)) * 3
+                mk_suma += CInt(mk_p_nro.Substring(9, 1)) * 2
+                mk_suma += CInt(mk_p_nro.Substring(10, 1)) * 1
+            End If
+
+            If Math.Round(mk_suma / 11, 0) = (mk_suma / 11) Then
+                mk_valido = True
+            Else
+                mk_valido = False
+            End If
+        Else
+            mk_valido = False
+        End If
+        Return (mk_valido)
+    End Function
+
+
+
+
+
+
+
+
+    Public Class ReverseIterator
+        'Iba a usarlo en los managers para filtrar las listas.
+        ''metodo 1: 'borrar marcha atras porque si no cambia el indice!!!!
+        'For Each i As Integer In New ReverseIterator(lstBorrar)
+        '    Lista.RemoveAt(i) 'al final se trula y se excede del indice
+        'Next
+        Implements IEnumerable
+        ' a low-overhead ArrayList to store references
+        Dim items As New ArrayList()
+        Sub New(ByVal collection As IEnumerable)
+            ' load all the items in the ArrayList, but in reverse order
+            Dim o As Object
+            For Each o In collection
+                items.Insert(0, o)
+            Next
+        End Sub
+        Public Function GetEnumerator() As System.Collections.IEnumerator _
+            Implements System.Collections.IEnumerable.GetEnumerator
+            ' return the enumerator of the inner ArrayList
+            Return items.GetEnumerator()
+        End Function
+    End Class
+End Module
+
+
+

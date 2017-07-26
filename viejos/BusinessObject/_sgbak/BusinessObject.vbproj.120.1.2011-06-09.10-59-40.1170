@@ -1,0 +1,260 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="3.5">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{918DDC53-B568-4181-86C3-A3A44DFA6149}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>
+    </RootNamespace>
+    <AssemblyName>BusinessObject</AssemblyName>
+    <MyType>Windows</MyType>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>2.0</OldToolsVersion>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <TargetFrameworkSubset>
+    </TargetFrameworkSubset>
+    <SccProjectName>BusinessObject</SccProjectName>
+    <SccLocalPath>2~b6f2d31a-7c39-4ab7-834b-8c2cd181f43f</SccLocalPath>
+    <SccAuxPath>http://localhost/VaultService</SccAuxPath>
+    <SccProvider>SourceGear Vault Visual Studio 2005 Client:{1EA47954-8515-402d-82D9-B5C332120A8D}</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DocumentationFile>BusinessObject.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DocumentationFile>BusinessObject.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Import Include="Microsoft.VisualBasic" />
+    <Import Include="System" />
+    <Import Include="System.Collections" />
+    <Import Include="System.Collections.Generic" />
+    <Import Include="System.Data" />
+    <Import Include="System.Diagnostics" />
+    <Import Include="System.Linq" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="CartaDePorte.vb" />
+    <Compile Include="Collections\Access.vb" />
+    <Compile Include="Collections\AccessList.vb" />
+    <Compile Include="Collections\Articulo.vb" />
+    <Compile Include="Collections\ArticuloList.vb" />
+    <Compile Include="Collections\CartaDePorteList.vb" />
+    <Compile Include="Collections\ComprobanteProveedoresItemList.vb" />
+    <Compile Include="Collections\ComprobanteProveedoresList.vb" />
+    <Compile Include="Collections\ComprobanteProveedoresPrvItemList.vb" />
+    <Compile Include="Collections\ComprobanteProveedoresPrvList.vb" />
+    <Compile Include="Collections\ComparativaItemList.vb" />
+    <Compile Include="Collections\ComparativaList.vb" />
+    <Compile Include="Collections\OrdenPagoImpuestosItemList.vb" />
+    <Compile Include="Collections\OrdenPagoAnticiposAlPersonalItemList.vb" />
+    <Compile Include="Collections\OrdenPagoCuentasItemList.vb" />
+    <Compile Include="Collections\OrdenPagoRubrosContablesItemList.vb" />
+    <Compile Include="Collections\OrdenPagoValoresItemList.vb" />
+    <Compile Include="Collections\OrdenPagoItemList.vb" />
+    <Compile Include="Collections\OrdenPagoList.vb" />
+    <Compile Include="Collections\NotaDeDebitoProvinciasItemList.vb" />
+    <Compile Include="Collections\NotaDeCreditoImpItemList.vb" />
+    <Compile Include="Collections\NotaDeCreditoOCItemList.vb" />
+    <Compile Include="Collections\NotaDeCreditoProvinciasItemList.vb" />
+    <Compile Include="Collections\ReciboRubrosContablesItemList.vb" />
+    <Compile Include="Collections\ReciboAnticiposAlPersonalItemList.vb" />
+    <Compile Include="Collections\ReciboValoresItemList.vb" />
+    <Compile Include="Collections\ReciboCuentasItemList.vb" />
+    <Compile Include="Collections\FacturaOrdenesCompraItemList.vb" />
+    <Compile Include="Collections\FacturaProvinciasItemList.vb" />
+    <Compile Include="Collections\FacturaRemitosItemList.vb" />
+    <Compile Include="Collections\ReciboItemList.vb" />
+    <Compile Include="Collections\RemitoItemList.vb" />
+    <Compile Include="Collections\NotaDeDebitoItemList.vb" />
+    <Compile Include="Collections\NotaDeDebitoList.vb" />
+    <Compile Include="Collections\ReciboList.vb" />
+    <Compile Include="Collections\RemitoList.vb" />
+    <Compile Include="Collections\OrdenCompraItemList.vb" />
+    <Compile Include="Collections\OrdenCompraList.vb" />
+    <Compile Include="Collections\NotaDeCreditoItemList.vb" />
+    <Compile Include="Collections\FacturaItemList.vb" />
+    <Compile Include="Collections\NotaDeCreditoList.vb" />
+    <Compile Include="Collections\FacturaList.vb" />
+    <Compile Include="Collections\PresupuestosItemList.vb" />
+    <Compile Include="Collections\PresupuestosList.vb" />
+    <Compile Include="Collections\EmpleadoList.vb" />
+    <Compile Include="Collections\EmpresaList.vb" />
+    <Compile Include="Collections\FirmaDocumentoList.vb" />
+    <Compile Include="Collections\LocalidadList.vb" />
+    <Compile Include="Collections\ObraList.vb" />
+    <Compile Include="Collections\PaisList.vb" />
+    <Compile Include="Collections\PedidoItemList.vb" />
+    <Compile Include="Collections\PedidoList.vb" />
+    <Compile Include="Collections\ProveedorContactoList.vb" />
+    <Compile Include="Collections\ProveedorList.vb" />
+    <Compile Include="Collections\ProvinciaList.vb" />
+    <Compile Include="Collections\RequerimientoItemList.vb" />
+    <Compile Include="Collections\RequerimientoList.vb" />
+    <Compile Include="Collections\RubroList.vb" />
+    <Compile Include="Collections\SubrubroList.vb" />
+    <Compile Include="ComprobanteProveedor.vb" />
+    <Compile Include="ComprobanteProveedorItem.vb" />
+    <Compile Include="Comparativa.vb" />
+    <Compile Include="ComparativaItem.vb" />
+    <Compile Include="Cliente.vb" />
+    <Compile Include="ComprobanteProveedorProvinciasItem.vb" />
+    <Compile Include="OrdenPagoImpuestosItem.vb" />
+    <Compile Include="OrdenPagoAnticiposAlPersonalItem.vb" />
+    <Compile Include="OrdenPagoCuentasItem.vb" />
+    <Compile Include="OrdenPagoRubrosContablesItem.vb" />
+    <Compile Include="OrdenPagoValoresItem.vb" />
+    <Compile Include="OrdenPagoItem.vb" />
+    <Compile Include="OrdenPago.vb" />
+    <Compile Include="NotaDeProvinciasDebitoItem.vb" />
+    <Compile Include="NotaDeCreditoProvinciasItem.vb" />
+    <Compile Include="NotaDeCreditoOCItem.vb" />
+    <Compile Include="NotaDeCreditoImpItem.vb" />
+    <Compile Include="ReciboRubrosContablesItem.vb" />
+    <Compile Include="ReciboAnticiposAlPersonalItem.vb" />
+    <Compile Include="ReciboValoresItem.vb" />
+    <Compile Include="ReciboCuentasItem.vb" />
+    <Compile Include="FacturaOrdenesCompraItem.vb" />
+    <Compile Include="FacturaRemitosItem.vb" />
+    <Compile Include="FacturaProvinciasItem.vb" />
+    <Compile Include="ReciboItem.vb" />
+    <Compile Include="Recibo.vb" />
+    <Compile Include="NotaDeDebitoItem.vb" />
+    <Compile Include="RemitoItem.vb" />
+    <Compile Include="NotaDeDebito.vb" />
+    <Compile Include="Remito.vb" />
+    <Compile Include="OrdenCompraItem.vb" />
+    <Compile Include="OrdenCompra.vb" />
+    <Compile Include="DataSetLinqOperators.vb" />
+    <Compile Include="dsEncrypt.vb" />
+    <Compile Include="ErrHandler.vb" />
+    <Compile Include="NotaDeCreditoItem.vb" />
+    <Compile Include="FacturaItem.vb" />
+    <Compile Include="NotaDeCredito.vb" />
+    <Compile Include="Factura.vb" />
+    <Compile Include="ObjectShreder.vb" />
+    <Compile Include="PresupuestoItem.vb" />
+    <Compile Include="Presupuesto.vb" />
+    <Compile Include="Parametro.vb" />
+    <Compile Include="Empleado.vb" />
+    <Compile Include="Empresa.vb" />
+    <Compile Include="Enums\TiposFormulario.vb" />
+    <Compile Include="FirmaDocumento.vb" />
+    <Compile Include="Localidad.vb" />
+    <Compile Include="My Project\AssemblyInfo.vb" />
+    <Compile Include="My Project\Application.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Application.myapp</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\Resources.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\Settings.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Obra.vb" />
+    <Compile Include="Pais.vb" />
+    <Compile Include="Pedido.vb" />
+    <Compile Include="PedidoItem.vb" />
+    <Compile Include="FuncionesGenerales.vb" />
+    <Compile Include="Proveedor.vb" />
+    <Compile Include="ProveedorContacto.vb" />
+    <Compile Include="Provincia.vb" />
+    <Compile Include="Requerimiento.vb" />
+    <Compile Include="RequerimientoItem.vb" />
+    <Compile Include="Rubro.vb" />
+    <Compile Include="Subrubro.vb" />
+    <Compile Include="Usuario.vb" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="My Project\Resources.resx">
+      <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.vb</LastGenOutput>
+      <CustomToolNamespace>My.Resources</CustomToolNamespace>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="My Project\Application.myapp">
+      <Generator>MyApplicationCodeGenerator</Generator>
+      <LastGenOutput>Application.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="My Project\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <CustomToolNamespace>My</CustomToolNamespace>
+      <LastGenOutput>Settings.Designer.vb</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="ADODB">
+      <Guid>{EF53050B-882E-4776-B643-EDA472E8E3F2}</Guid>
+      <VersionMajor>2</VersionMajor>
+      <VersionMinor>7</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+    </COMReference>
+    <COMReference Include="ADOR">
+      <Guid>{00000300-0000-0010-8000-00AA006D2EA4}</Guid>
+      <VersionMajor>2</VersionMajor>
+      <VersionMinor>8</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+    </COMReference>
+    <COMReference Include="ComPronto">
+      <Guid>{07D80DF1-4696-46E9-B282-46DD20EAC8B7}</Guid>
+      <VersionMajor>6</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+    </COMReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.VisualBasic.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
