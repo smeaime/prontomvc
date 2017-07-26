@@ -748,7 +748,7 @@ namespace ProntoWindowsService
 
 
             string DirChromeDriver = ConfigurationManager.AppSettings["DirChromeDriver"] ?? "";
-            if (DirChromeDriver=="")
+            if (DirChromeDriver == "")
             {
                 DirChromeDriver = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
             }
@@ -793,33 +793,33 @@ namespace ProntoWindowsService
 
 
 
-      
-                
-
-                //s.CerealnetSeleniumConPhantomJS(dir);
-                //s.CerealnetSelenium(dir);
-                //s.UrenportSelenium(dir);
-
-
-                if (dir1 != "")
-                {
-                    s.UrenportSelenium_ConChromeHeadless(dir1, DirChromeDriver);
-                    ClassFlexicapture.Log(idthread + " Bajado 1");
-                    s.CerealnetSelenium_ConChromeHeadless(dir1, DirChromeDriver);
-                    ClassFlexicapture.Log(idthread + " Bajado 2");
-                }
-
-                if (dir2 != "")
-                {
-                    s.UrenportSelenium_ConChromeHeadless(dir2, DirChromeDriver);
-                    ClassFlexicapture.Log(idthread + " Bajado 1");
-                    s.CerealnetSelenium_ConChromeHeadless(dir2, DirChromeDriver);
-                    ClassFlexicapture.Log(idthread + " Bajado 2");
-                }
 
 
                 try
                 {
+
+
+                    //s.CerealnetSeleniumConPhantomJS(dir);
+                    //s.CerealnetSelenium(dir);
+                    //s.UrenportSelenium(dir);
+
+
+                    if (dir1 != "")
+                    {
+                        s.UrenportSelenium_ConChromeHeadless(dir1, DirChromeDriver);
+                        ClassFlexicapture.Log(idthread + " Bajado 1");
+                        s.CerealnetSelenium_ConChromeHeadless(dir1, DirChromeDriver);
+                        ClassFlexicapture.Log(idthread + " Bajado 2");
+                    }
+
+                    if (dir2 != "")
+                    {
+                        s.UrenportSelenium_ConChromeHeadless(dir2, DirChromeDriver);
+                        ClassFlexicapture.Log(idthread + " Bajado 1");
+                        s.CerealnetSelenium_ConChromeHeadless(dir2, DirChromeDriver);
+                        ClassFlexicapture.Log(idthread + " Bajado 2");
+                    }
+
 
 
                     if ((bSignaled == true && !Debugger.IsAttached) || bForzarShutdown) break;
