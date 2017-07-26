@@ -3547,29 +3547,29 @@ Additionally you can manage the priority of work processes and control whether t
 
 namespace ExtensionMethods
 {
-    public static class MyExtensions
-    {
-        public static string NullStringSafe(this IField ifield)
-        {
-            try
-            {
-                if (ifield == null) return "";
-                return ifield.Value.AsString;
-            }
-            catch (Exception)
-            {
+    //public static class MyExtensions
+    //{
+    //    public static string NullStringSafe(this IField ifield)
+    //    {
+    //        try
+    //        {
+    //            if (ifield == null) return "";
+    //            return ifield.Value.AsString;
+    //        }
+    //        catch (Exception)
+    //        {
 
-                return "";
-            }
+    //            return "";
+    //        }
 
-        }
+    //    }
 
-        public static int WordCount(this String str)
-        {
-            return str.Split(new char[] { ' ', '.', '?' },
-                             StringSplitOptions.RemoveEmptyEntries).Length;
-        }
-    }
+    //    public static int WordCount(this String str)
+    //    {
+    //        return str.Split(new char[] { ' ', '.', '?' },
+    //                         StringSplitOptions.RemoveEmptyEntries).Length;
+    //    }
+    //}
 }
 
 
