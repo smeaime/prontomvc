@@ -3113,7 +3113,7 @@ Partial Class CartadeporteABM
                         'des-anula
 
 
-problemas al desanular cuando existe un numero igual!!!
+                        'problemas al desanular cuando existe un numero igual!!!
 
 
                         r = CartaDePorteManager.DesAnular(SC, myCartaDePorte, Session(SESSIONPRONTO_glbIdUsuario), Session(SESSIONPRONTO_UserName))

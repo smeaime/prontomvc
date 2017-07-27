@@ -83,7 +83,7 @@ namespace OfficeMergeControl
 
                         if (false)
                         {//metodo 1
-                            CartaDePorteManager.AppendPageBreak(mainDocument);
+                            //CartaDePorteManager.AppendPageBreak(mainDocument);
                             // este metodo no me repite el pie, pero hace necesito hacer el salto de pagina sobre maindocument, y necesito hacerlo sobre tempdocument
                         }
                         else
