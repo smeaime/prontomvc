@@ -31,7 +31,7 @@ using DocumentFormat.OpenXml;
 using DocumentFormat.OpenXml.Packaging;
 using DocumentFormat.OpenXml.Spreadsheet;
 //using DocumentFormat.OpenXml.Wordprocessing;
-using OpenXmlPowerTools;
+//using OpenXmlPowerTools;
 using System.Diagnostics;
 
 using ClosedXML.Excel;
