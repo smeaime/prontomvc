@@ -34,7 +34,7 @@ using Pronto.ERP.Bll;
 using DocumentFormat.OpenXml;
 using DocumentFormat.OpenXml.Packaging;
 using DocumentFormat.OpenXml.Wordprocessing;//using DocumentFormat.OpenXml.Spreadsheet;
-using OpenXmlPowerTools;
+//using OpenXmlPowerTools;
 using System.Diagnostics;
 using ClosedXML.Excel;
 using System.IO;
@@ -341,7 +341,7 @@ namespace ProntoMVC.Controllers
 
 
 
-            SimplifyMarkupSettings settings = new SimplifyMarkupSettings();
+            OpenXmlPowerTools.SimplifyMarkupSettings settings = new OpenXmlPowerTools.SimplifyMarkupSettings();
             var _with1 = settings;
             _with1.RemoveComments = true;
             _with1.RemoveContentControls = true;
@@ -354,7 +354,7 @@ namespace ProntoMVC.Controllers
             _with1.RemoveSmartTags = true;
             _with1.RemoveSoftHyphens = true;
             _with1.ReplaceTabsWithSpaces = true;
-            MarkupSimplifier.SimplifyMarkup(wordDoc, settings);
+            OpenXmlPowerTools.MarkupSimplifier.SimplifyMarkup(wordDoc, settings);
 
 
 
