@@ -1,0 +1,5 @@
+
+Log Entry : 
+07/27/2017 16:11:03
+Error in: http://localhost:50769/ProntoWeb/CartasDePortes.aspx?tipo=Todas. Error Message:Mariano
+__________________________
