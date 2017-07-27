@@ -1395,7 +1395,7 @@ Partial Class ClienteABM
             .RemoveSoftHyphens = True
             .ReplaceTabsWithSpaces = True
         End With
-        MarkupSimplifier.SimplifyMarkup(wordDoc, settings)
+        OpenXmlPowerTools.MarkupSimplifier.SimplifyMarkup(wordDoc, settings)
 
 
 
