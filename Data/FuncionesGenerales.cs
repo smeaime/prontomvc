@@ -26,6 +26,7 @@ using System.Data;
 using OfficeOpenXml; //EPPLUS, no confundir con el OOXML
 
 
+
 using HtmlAgilityPack;
 
 
@@ -137,37 +138,41 @@ namespace ProntoMVC.Data
 
 
 
-        // http://stackoverflow.com/questions/13396604/excel-to-datatable-using-epplus-excel-locked-for-editing
-        public static DataTable GetExcel4_ExcelDataReader(string filePath)
-        {
+        //// http://stackoverflow.com/questions/13396604/excel-to-datatable-using-epplus-excel-locked-for-editing
+        //public static DataTable GetExcel4_ExcelDataReader(string filePath)
+        //{
 
-            FileStream stream = File.Open(filePath, FileMode.Open, FileAccess.Read);
+        //    FileStream stream = File.Open(filePath, FileMode.Open, FileAccess.Read);
 
-            //1. Reading from a binary Excel file ('97-2003 format; *.xls)
-            Excel.IExcelDataReader excelReader = Excel.ExcelReaderFactory.CreateBinaryReader(stream);
-            //...
-            ////2. Reading from a OpenXml Excel file (2007 format; *.xlsx)
-            //IExcelDataReader excelReader = ExcelReaderFactory.CreateOpenXmlReader(stream);
-            ////...
-            //3. DataSet - The result of each spreadsheet will be created in the result.Tables
-            DataSet result = excelReader.AsDataSet();
-            //...
-            ////4. DataSet - Create column names from first row
-            //excelReader.IsFirstRowAsColumnNames = true;
-            //DataSet result = excelReader.AsDataSet();
+        //    //1. Reading from a binary Excel file ('97-2003 format; *.xls)
+        //    //ExcelDataReader.IExcelDataReader excelReader = ExcelDataReader.ExcelReaderFactory.CreateBinaryReader(stream);
 
-            ////5. Data Reader methods
-            //while (excelReader.Read())
-            //{
-            //    //excelReader.GetInt32(0);
-            //}
+        //    ExcelDataReader.IExcelDataReader excelReader = ExcelDataReader.ExcelReaderFactory.CreateReader(stream);
 
-            //6. Free resources (IExcelDataReader is IDisposable)
-            excelReader.Close();
 
-            return result.Tables[0];
+        //    //...
+        //    ////2. Reading from a OpenXml Excel file (2007 format; *.xlsx)
+        //    //IExcelDataReader excelReader = ExcelReaderFactory.CreateOpenXmlReader(stream);
+        //    ////...
+        //    //3. DataSet - The result of each spreadsheet will be created in the result.Tables
+        //    DataSet result = excelReader.AsDataSet();
+        //    //...
+        //    ////4. DataSet - Create column names from first row
+        //    //excelReader.IsFirstRowAsColumnNames = true;
+        //    //DataSet result = excelReader.AsDataSet();
 
-        }
+        //    ////5. Data Reader methods
+        //    //while (excelReader.Read())
+        //    //{
+        //    //    //excelReader.GetInt32(0);
+        //    //}
+
+        //    //6. Free resources (IExcelDataReader is IDisposable)
+        //    excelReader.Close();
+
+        //    return result.Tables[0];
+
+        //}
 
 
 
@@ -335,7 +340,8 @@ namespace ProntoMVC.Data
 
                 // and then create a new Image from it
                 images.Add(Image.FromStream(byteStream));
-            } return images;
+            }
+            return images;
         }
 
 
@@ -2822,7 +2828,7 @@ namespace CerealNet.WSCartasDePorte
         public string SojaSustentableCondicion;
         public string SojaSustentableNroEstablecimientoDeProduccion;
 
-        
+
     }
 
 
@@ -4027,7 +4033,7 @@ namespace CerealNet.WSCartasDePorte
 
         private string codigoResultadoField;
 
-        private  cartaPorte_v2_00[] descargasField;
+        private cartaPorte_v2_00[] descargasField;
 
         private string descripcionField;
 
@@ -4049,7 +4055,7 @@ namespace CerealNet.WSCartasDePorte
 
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute("descargas", Form = System.Xml.Schema.XmlSchemaForm.Unqualified, IsNullable = true, Order = 1)]
-        public  cartaPorte_v2_00[] descargas
+        public cartaPorte_v2_00[] descargas
         {
             get
             {
