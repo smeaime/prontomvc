@@ -852,8 +852,39 @@ namespace ProntoMVC.Tests
 
 
 
-#endregion
+        #endregion
 
+
+
+        //class xxx : IField
+        //{
+        //    string asadasd;
+
+        //    void ApplySuggest(string suggest) { return; }
+        //    string Name { get; }
+        //    string FullName { get; }
+        //    FieldTypeEnum Type { get; }
+        //    IFieldValue Value { get; }
+        //    IFields Children { get; }
+        //    IDocument Document { get; }
+        //    IFieldInstances Instances { get; }
+        //    IFieldDefinition FieldDefinition { get; }
+        //    IBlocksCollection Blocks { get; }
+        //    IStringsCollection Suggests { get; }
+
+        //}
+
+
+        [TestMethod]
+        public void _jhgjkhg()
+        {
+
+
+            //IField BarraCP = new IField(); // = Sample.AdvancedTechniques.findField(document, "BarraCP");
+            string asdad = "·$fdsasfdadf";
+            string BarraCEE = asdad.NullStringSafe();
+
+        }
 
 
 
