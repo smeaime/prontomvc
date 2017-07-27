@@ -3,3 +3,131 @@ Log Entry :
 07/27/2017 16:11:03
 Error in: http://localhost:50769/ProntoWeb/CartasDePortes.aspx?tipo=Todas. Error Message:Mariano
 __________________________
+
+Log Entry : 
+07/27/2017 18:24:09
+Error in: http://localhost:50769/ProntoWeb/Principal.aspx. Error Message:Mariano esta logueado, pero lo redirijo al login porque faltan los datos de session. No deberia mejor mandarlo a SeleccionarEmpresa? Ademas, no hago el LogOut y le queda el cookie!!!
+__________________________
+
+Log Entry : 
+07/27/2017 18:24:09
+Error in: http://localhost:50769/ProntoWeb/CartasDePortes.aspx?tipo=Todas. Error Message:Mariano
+__________________________
+
+Log Entry : 
+07/27/2017 18:28:54
+Error in: http://localhost:50769/ProntoWeb/CartasDePorteReasignarImagenListado.aspx?Id=-1. Error Message:Mariano esta logueado, pero lo redirijo al login porque faltan los datos de session. No deberia mejor mandarlo a SeleccionarEmpresa? Ademas, no hago el LogOut y le queda el cookie!!!
+__________________________
+
+Log Entry : 
+07/27/2017 18:28:55
+Error in: http://localhost:50769/ProntoWeb/CartasDePorteReasignarImagenListado.aspx?Id=-1. Error Message:grilla1
+__________________________
+
+Log Entry : 
+07/27/2017 18:28:55
+Error in: http://localhost:50769/ProntoWeb/CartasDePorteReasignarImagenListado.aspx?Id=-1. Error Message:Mariano esta logueado, pero lo redirijo al login porque faltan los datos de session. No deberia mejor mandarlo a SeleccionarEmpresa? Ademas, no hago el LogOut y le queda el cookie!!!
+__________________________
+
+Log Entry : 
+07/27/2017 18:28:57
+Error in: http://localhost:50769/ProntoWeb/CartasDePorteReasignarImagenListado.aspx?Id=-1. Error Message:grilla1
+__________________________
+
+Log Entry : 
+07/27/2017 18:28:59
+Error in: http://localhost:50769/ProntoWeb/CartasDePorteReasignarImagenListado.aspx?Id=-1. Error Message:grilla2
+__________________________
+
+Log Entry : 
+07/27/2017 18:28:59
+Error in: http://localhost:50769/ProntoWeb/CartasDePorteReasignarImagenListado.aspx?Id=-1. Error Message:System.InvalidOperationException
+El servicio ProntoAgente no se encontró en el equipo '.'.
+   en System.ServiceProcess.ServiceController.GenerateNames()
+   en System.ServiceProcess.ServiceController.get_ServiceName()
+   en System.ServiceProcess.ServiceController.GenerateStatus()
+   en System.ServiceProcess.ServiceController.get_Status()
+   en ProntoFlexicapture.ClassFlexicapture.EstadoServicio() en c:\Users\Administrador\Documents\bdl\pronto\InterfazFlexicapture\prontoflexicapture.cs:línea 1975
+   en CartasDePorteReasignarImagenListado.ReBind() en C:\bdl\pronto\prontoweb\ProntoWeb\CartasDePorteReasignarImagenListado.aspx.vb:línea 709
+System.ServiceProcess
+__________________________
+
+Log Entry : 
+07/27/2017 18:28:59
+Error in: http://localhost:50769/ProntoWeb/CartasDePorteReasignarImagenListado.aspx?Id=-1. Error Message:grilla3
+__________________________
+
+Log Entry : 
+07/27/2017 18:28:59
+Error in: http://localhost:50769/ProntoWeb/CartasDePorteReasignarImagenListado.aspx?Id=-1. Error Message:grilla3
+__________________________
+
+Log Entry : 
+07/27/2017 18:28:59
+Error in: http://localhost:50769/ProntoWeb/CartasDePorteReasignarImagenListado.aspx?Id=-1. Error Message:grilla4
+__________________________
+
+Log Entry : 
+07/27/2017 18:28:59
+Error in: http://localhost:50769/ProntoWeb/CartasDePorteReasignarImagenListado.aspx?Id=-1. Error Message:System.IO.DirectoryNotFoundException
+No se puede encontrar una parte de la ruta de acceso 'C:\Users\Administrador\Documents\bdl\pronto\prontoweb\Temp'.
+   en System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   en System.IO.FileSystemEnumerableIterator`1.CommonInit()
+   en System.IO.FileSystemEnumerableIterator`1..ctor(String path, String originalUserPath, String searchPattern, SearchOption searchOption, SearchResultHandler`1 resultHandler, Boolean checkHost)
+   en System.IO.DirectoryInfo.EnumerateDirectories()
+   en ProntoFlexicapture.ClassFlexicapture.BuscarExcelsGenerados(String DirApp) en c:\Users\Administrador\Documents\bdl\pronto\InterfazFlexicapture\prontoflexicapture.cs:línea 951
+   en CartasDePorteReasignarImagenListado.ReBind() en C:\bdl\pronto\prontoweb\ProntoWeb\CartasDePorteReasignarImagenListado.aspx.vb:línea 775
+   en CartasDePorteReasignarImagenListado.Page_Load(Object sender, EventArgs e) en C:\bdl\pronto\prontoweb\ProntoWeb\CartasDePorteReasignarImagenListado.aspx.vb:línea 120
+   en System.Web.UI.Control.OnLoad(EventArgs e)
+   en System.Web.UI.Control.LoadRecursive()
+   en System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+mscorlib
+__________________________
+
+Log Entry : 
+07/27/2017 18:28:59
+Error in: http://localhost:50769/ProntoWeb/CartasDePorteReasignarImagenListado.aspx?Id=-1. Error Message:grilla4
+__________________________
+
+Log Entry : 
+07/27/2017 18:28:59
+Error in: http://localhost:50769/ProntoWeb/CartasDePorteReasignarImagenListado.aspx?Id=-1. Error Message:System.IO.DirectoryNotFoundException
+No se puede encontrar una parte de la ruta de acceso 'C:\Users\Administrador\Documents\bdl\pronto\prontoweb\Temp'.
+   en System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   en System.IO.FileSystemEnumerableIterator`1.CommonInit()
+   en System.IO.FileSystemEnumerableIterator`1..ctor(String path, String originalUserPath, String searchPattern, SearchOption searchOption, SearchResultHandler`1 resultHandler, Boolean checkHost)
+   en System.IO.DirectoryInfo.EnumerateDirectories()
+   en ProntoFlexicapture.ClassFlexicapture.BuscarExcelsGenerados(String DirApp) en c:\Users\Administrador\Documents\bdl\pronto\InterfazFlexicapture\prontoflexicapture.cs:línea 951
+   en CartasDePorteReasignarImagenListado.ReBind() en C:\bdl\pronto\prontoweb\ProntoWeb\CartasDePorteReasignarImagenListado.aspx.vb:línea 775
+   en CartasDePorteReasignarImagenListado.Page_Load(Object sender, EventArgs e) en C:\bdl\pronto\prontoweb\ProntoWeb\CartasDePorteReasignarImagenListado.aspx.vb:línea 120
+   en System.Web.UI.Control.OnLoad(EventArgs e)
+   en System.Web.UI.Control.LoadRecursive()
+   en System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+mscorlib
+__________________________
+
+Log Entry : 
+07/27/2017 18:29:02
+Error in: http://localhost:50769/ProntoWeb/CartasDePorteReasignarImagenListado.aspx?Id=-1. Error Message:System.Net.Mail.SmtpException
+El buzón de correo no está disponible. La respuesta del servidor fue: 5.4.5 Daily user sending quota exceeded. r65sm11035224qkb.20 - gsmtp
+   en System.Net.Mail.DataCommand.CheckResponse(SmtpStatusCode statusCode, String serverResponse)
+   en System.Net.Mail.DataCommand.Send(SmtpConnection conn)
+   en System.Net.Mail.SmtpTransport.SendMail(MailAddress sender, MailAddressCollection recipients, String deliveryNotify, Boolean allowUnicode, SmtpFailedRecipientException& exception)
+   en System.Net.Mail.SmtpClient.Send(MailMessage message)
+   en ProntoFuncionesGenerales.MandaEmailSimple(String Para, String Asunto, String Cuerpo, String De, String SmtpServer, String SmtpUser, String SmtpPass, String sStringGenerarAdjunto, Int64 SmtpPort, Int32 EnableSSL, String CCO, String img)
+   en ASP.global_asax.Application_Error(Object sender, EventArgs e) en C:\bdl\pronto\prontoweb\global.asax:línea 472
+System
+__________________________
+
+Log Entry : 
+07/27/2017 18:29:02
+Error in: http://localhost:50769/ProntoWeb/CartasDePorteReasignarImagenListado.aspx?Id=-1. Error Message:System.Net.Mail.SmtpException
+El buzón de correo no está disponible. La respuesta del servidor fue: 5.4.5 Daily user sending quota exceeded. h34sm15038976qth.0 - gsmtp
+   en System.Net.Mail.DataCommand.CheckResponse(SmtpStatusCode statusCode, String serverResponse)
+   en System.Net.Mail.DataCommand.Send(SmtpConnection conn)
+   en System.Net.Mail.SmtpTransport.SendMail(MailAddress sender, MailAddressCollection recipients, String deliveryNotify, Boolean allowUnicode, SmtpFailedRecipientException& exception)
+   en System.Net.Mail.SmtpClient.Send(MailMessage message)
+   en ProntoFuncionesGenerales.MandaEmailSimple(String Para, String Asunto, String Cuerpo, String De, String SmtpServer, String SmtpUser, String SmtpPass, String sStringGenerarAdjunto, Int64 SmtpPort, Int32 EnableSSL, String CCO, String img)
+   en ASP.global_asax.Application_Error(Object sender, EventArgs e) en C:\bdl\pronto\prontoweb\global.asax:línea 472
+System
+__________________________
