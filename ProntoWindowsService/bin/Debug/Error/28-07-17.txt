@@ -1,0 +1,79 @@
+
+Log Entry : 
+07/28/2017 10:51:52
+Error in: . Error Message:hilo #3: ssdssss
+__________________________
+
+Log Entry : 
+07/28/2017 10:51:52
+Error in: . Error Message:hilo #3: Empieza
+__________________________
+
+Log Entry : 
+07/28/2017 10:51:52
+Error in: . Error Message:hilo #3: CONEXION: metadata=res://*/Models.Pronto.csdl|res://*/Models.Pronto.ssdl|res://*/Models.Pronto.msl;provider=System.Data.SqlClient;provider connection string="data source=SERVERSQL3;initial catalog=Williams;persist security info=True;user id=sa;password=.SistemaPronto.;multipleactiveresultsets=True;App=EntityFramework"
+__________________________
+
+Log Entry : 
+07/28/2017 10:52:18
+Error in: . Error Message:hilo #3: System.Data.Entity.Core.EntityException: The underlying provider failed on Open. ---> System.Data.SqlClient.SqlException: Error relacionado con la red o específico de la instancia mientras se establecía una conexión con el servidor SQL Server. No se encontró el servidor o éste no estaba accesible. Compruebe que el nombre de la instancia es correcto y que SQL Server está configurado para admitir conexiones remotas. (provider: Named Pipes Provider, error: 40 - No se pudo abrir una conexión con SQL Server) ---> System.ComponentModel.Win32Exception: No se ha encontrado la ruta de acceso de la red
+   --- Fin del seguimiento de la pila de la excepción interna ---
+   en System.Data.SqlClient.SqlInternalConnectionTds..ctor(DbConnectionPoolIdentity identity, SqlConnectionString connectionOptions, SqlCredential credential, Object providerInfo, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance, SqlConnectionString userConnectionOptions, SessionData reconnectSessionData, DbConnectionPool pool, String accessToken, Boolean applyTransientFaultHandling)
+   en System.Data.SqlClient.SqlConnectionFactory.CreateConnection(DbConnectionOptions options, DbConnectionPoolKey poolKey, Object poolGroupProviderInfo, DbConnectionPool pool, DbConnection owningConnection, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionFactory.CreatePooledConnection(DbConnectionPool pool, DbConnection owningObject, DbConnectionOptions options, DbConnectionPoolKey poolKey, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionPool.CreateObject(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   en System.Data.ProviderBase.DbConnectionPool.UserCreateRequest(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   en System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.Open()
+   en System.Data.Entity.Infrastructure.Interception.DbConnectionDispatcher.<Open>b__36(DbConnection t, DbConnectionInterceptionContext c)
+   en System.Data.Entity.Infrastructure.Interception.InternalDispatcher`1.Dispatch[TTarget,TInterceptionContext](TTarget target, Action`2 operation, TInterceptionContext interceptionContext, Action`3 executing, Action`3 executed)
+   en System.Data.Entity.Infrastructure.Interception.DbConnectionDispatcher.Open(DbConnection connection, DbInterceptionContext interceptionContext)
+   en System.Data.Entity.Core.EntityClient.EntityConnection.<Open>b__2()
+   en System.Data.Entity.SqlServer.DefaultSqlExecutionStrategy.<>c__DisplayClass1.<Execute>b__0()
+   en System.Data.Entity.SqlServer.DefaultSqlExecutionStrategy.Execute[TResult](Func`1 operation)
+   en System.Data.Entity.SqlServer.DefaultSqlExecutionStrategy.Execute(Action operation)
+   en System.Data.Entity.Core.EntityClient.EntityConnection.Open()
+   --- Fin del seguimiento de la pila de la excepción interna ---
+   en System.Data.Entity.Core.EntityClient.EntityConnection.Open()
+   en System.Data.Entity.Core.Objects.ObjectContext.EnsureConnection(Boolean shouldMonitorTransactions)
+   en System.Data.Entity.Core.Objects.ObjectContext.ExecuteInTransaction[T](Func`1 func, IDbExecutionStrategy executionStrategy, Boolean startLocalTransaction, Boolean releaseConnectionOnSuccess)
+   en System.Data.Entity.Core.Objects.ObjectQuery`1.<>c__DisplayClass3.<GetResults>b__1()
+   en System.Data.Entity.SqlServer.DefaultSqlExecutionStrategy.Execute[TResult](Func`1 operation)
+   en System.Data.Entity.Core.Objects.ObjectQuery`1.GetResults(Nullable`1 forMergeOption)
+   en System.Data.Entity.Core.Objects.ObjectQuery`1.<System.Collections.Generic.IEnumerable<T>.GetEnumerator>b__0()
+   en System.Data.Entity.Internal.LazyEnumerator`1.MoveNext()
+   en System.Collections.Generic.List`1..ctor(IEnumerable`1 collection)
+   en System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
+   en ProntoWindowsService.Service1.DoWorkSoloPegatinas() en C:\bdl\pronto\ProntoWindowsService\Service1.cs:línea 729
+__________________________
+
+Log Entry : 
+07/28/2017 10:53:52
+Error in: . Error Message:OpenQA.Selenium.WebDriverTimeoutException: Timed out after 10 seconds ---> OpenQA.Selenium.NoSuchElementException: no such element: Unable to locate element: {"method":"id","selector":"Logins_UserName"}
+  (Session info: chrome=59.0.3071.115)
+  (Driver info: chromedriver=2.31.488763 (092de99f48a300323ecf8c2a4e2e7cab51de5ba8),platform=Windows NT 10.0.15063 x86_64)
+   en OpenQA.Selenium.Remote.RemoteWebDriver.UnpackAndThrowOnError(Response errorResponse)
+   en OpenQA.Selenium.Remote.RemoteWebDriver.Execute(String driverCommandToExecute, Dictionary`2 parameters)
+   en OpenQA.Selenium.Remote.RemoteWebDriver.FindElement(String mechanism, String value)
+   en OpenQA.Selenium.Remote.RemoteWebDriver.FindElementById(String id)
+   en OpenQA.Selenium.By.<>c__DisplayClass2.<Id>b__0(ISearchContext context)
+   en OpenQA.Selenium.By.FindElement(ISearchContext context)
+   en OpenQA.Selenium.Remote.RemoteWebDriver.FindElement(By by)
+   en OpenQA.Selenium.Support.UI.ExpectedConditions.<>c__DisplayClass10.<ElementExists>b__f(IWebDriver driver)
+   en OpenQA.Selenium.Support.UI.DefaultWait`1.Until[TResult](Func`2 condition)
+   --- Fin del seguimiento de la pila de la excepción interna ---
+   en OpenQA.Selenium.Support.UI.DefaultWait`1.ThrowTimeoutException(String exceptionMessage, Exception lastException)
+   en OpenQA.Selenium.Support.UI.DefaultWait`1.Until[TResult](Func`2 condition)
+   en ServicioCartaPorte.servi.UrenportSelenium_ConChromeHeadless(String directorioDescarga, String dirDriver) en C:\bdl\pronto\InterfazFlexicapture\prontoflexicapture.cs:línea 6282
+__________________________
+
+Log Entry : 
+07/28/2017 10:54:03
+Error in: . Error Message:hilo #3:  Bajado 1
+__________________________

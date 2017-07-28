@@ -4397,14 +4397,14 @@ Formato localidad-provincia	destination	x
             //if (searchField == "Numero") searchField = "NumeroPedido"; 
 
             var Entidad = pagedQuery
-                //.Include(x => x.Moneda)
-                //.Include(x => x.Proveedor)
-                //.Include(x => x.DetallePedidos
-                //            .Select(y => y.DetalleRequerimiento
-                //                )
-                //        )
-                //.Include("DetallePedidos.DetalleRequerimiento.Requerimientos.Obra") // funciona tambien
-                //.Include(x => x.Comprador)
+                          //.Include(x => x.Moneda)
+                          //.Include(x => x.Proveedor)
+                          //.Include(x => x.DetallePedidos
+                          //            .Select(y => y.DetalleRequerimiento
+                          //                )
+                          //        )
+                          //.Include("DetallePedidos.DetalleRequerimiento.Requerimientos.Obra") // funciona tambien
+                          //.Include(x => x.Comprador)
                           .AsQueryable();
 
 
@@ -4634,14 +4634,14 @@ Formato localidad-provincia	destination	x
             //if (searchField == "Numero") searchField = "NumeroPedido"; 
 
             var Entidad = pagedQuery
-                //.Include(x => x.Moneda)
-                //.Include(x => x.Proveedor)
-                //.Include(x => x.DetallePedidos
-                //            .Select(y => y.DetalleRequerimiento
-                //                )
-                //        )
-                //.Include("DetallePedidos.DetalleRequerimiento.Requerimientos.Obra") // funciona tambien
-                //.Include(x => x.Comprador)
+                          //.Include(x => x.Moneda)
+                          //.Include(x => x.Proveedor)
+                          //.Include(x => x.DetallePedidos
+                          //            .Select(y => y.DetalleRequerimiento
+                          //                )
+                          //        )
+                          //.Include("DetallePedidos.DetalleRequerimiento.Requerimientos.Obra") // funciona tambien
+                          //.Include(x => x.Comprador)
                           .AsQueryable();
 
 
@@ -4970,14 +4970,14 @@ Formato localidad-provincia	destination	x
             //if (searchField == "Numero") searchField = "NumeroPedido"; 
 
             var Entidad = pagedQuery
-                //.Include(x => x.Moneda)
-                //.Include(x => x.Proveedor)
-                //.Include(x => x.DetallePedidos
-                //            .Select(y => y.DetalleRequerimiento
-                //                )
-                //        )
-                //.Include("DetallePedidos.DetalleRequerimiento.Requerimientos.Obra") // funciona tambien
-                //.Include(x => x.Comprador)
+                          //.Include(x => x.Moneda)
+                          //.Include(x => x.Proveedor)
+                          //.Include(x => x.DetallePedidos
+                          //            .Select(y => y.DetalleRequerimiento
+                          //                )
+                          //        )
+                          //.Include("DetallePedidos.DetalleRequerimiento.Requerimientos.Obra") // funciona tambien
+                          //.Include(x => x.Comprador)
                           .AsQueryable();
 
 
@@ -5009,18 +5009,18 @@ Formato localidad-provincia	destination	x
 
                                 "<a href=\"CDPStockMovimiento.aspx?Id=" +  a.IdCDPMovimiento + "\"  target=\"_blank\" >" +  a.IdCDPMovimiento.NullSafeToString() + "</>" ,
 
-                                
+
                                 a.FechaIngreso==null ? "" :  a.FechaIngreso.GetValueOrDefault().ToShortDateString(),
 
                                 a.ExportadorOrigen,
                                 a.ExportadorDestino,
                                  a.Contrato,
                                  a.MovProductoDesc,
-                               
-                               
+
+
                                 a.MovDestinoDesc,
                                 a.Vapor,
-                               
+
                                 a.Cantidad.ToString(),
 
                                 a.Factura,
@@ -5394,14 +5394,14 @@ Formato localidad-provincia	destination	x
 
 
             var excelData = new jqGridWeb.DataForExcel(
-                // column Header
+                    // column Header
                     new[] { "Col1", "Col2", "Col3" },
                     new[]{jqGridWeb.DataForExcel.DataType.String, jqGridWeb.DataForExcel.DataType.Integer,
                           jqGridWeb.DataForExcel.DataType.String},
-                //      new List<string[]> {
-                //    new[] {"a", "1", "c1"},
-                //    new[] {"a", "2", "c2"}
-                //},
+                    //      new List<string[]> {
+                    //    new[] {"a", "1", "c1"},
+                    //    new[] {"a", "2", "c2"}
+                    //},
                     lista,
 
                     "Test Grid");
@@ -6231,7 +6231,7 @@ order by kilos desc
 
 
 
-             public void UrenportSelenium_ConChromeHeadless(string directorioDescarga, string dirDriver)
+        public void UrenportSelenium_ConChromeHeadless(string directorioDescarga, string dirDriver)
         {
 
 
@@ -6262,54 +6262,106 @@ order by kilos desc
             service.LogPath = dirDriver + @"\chromedriver.log";
 
 
-            IWebDriver browser = new ChromeDriver(service, chromeOptions);
+
+
+
+            using (IWebDriver browser = new ChromeDriver(service, chromeOptions))
+            {
 
 
 
 
 
 
+                try
+                {
+
+                    browser.Navigate().GoToUrl("http://extranet.urenport.com/login.aspx");
+
+                    // WebDriverWait(browser, 10).until(EC.presence_of_element_located((By.ID, "txtUsuario")))
+                    new WebDriverWait(browser, TimeSpan.FromSeconds(10)).Until(ExpectedConditions.ElementExists((By.Id("Logins_UserName"))));
 
 
-            browser.Navigate().GoToUrl("http://extranet.urenport.com/login.aspx");
+                    var user_name = browser.FindElement(By.Id("Logins_UserName"));
+                    user_name.SendKeys("williams");
+                    // https://stackoverflow.com/questions/43583836/expected-object-undefined-undefined-to-be-a-string-indexoutofbounds
+                    // Thank you it worked. We need to update selenium to 3.4 to support Gecko v 0.16. Once both are updated no issues
 
-            // WebDriverWait(browser, 10).until(EC.presence_of_element_located((By.ID, "txtUsuario")))
-            new WebDriverWait(browser, TimeSpan.FromSeconds(10)).Until(ExpectedConditions.ElementExists((By.Id("Logins_UserName"))));
-
-
-            var user_name = browser.FindElement(By.Id("Logins_UserName"));
-            user_name.SendKeys("williams");
-            // https://stackoverflow.com/questions/43583836/expected-object-undefined-undefined-to-be-a-string-indexoutofbounds
-            // Thank you it worked. We need to update selenium to 3.4 to support Gecko v 0.16. Once both are updated no issues
-
-            var password = browser.FindElement(By.Id("Logins_Password"));
-            password.SendKeys("santiago1177");
+                    var password = browser.FindElement(By.Id("Logins_Password"));
+                    password.SendKeys("santiago1177");
 
 
-            var button = browser.FindElement(By.Id("Logins_LoginButton"));
-            button.Click();
+                    var button = browser.FindElement(By.Id("Logins_LoginButton"));
+                    button.Click();
 
-            //if os.path.isfile(filename):            os.remove(filename)
-            //WebDriverWait(browser, 20).until(            EC.presence_of_element_located((By.ID, "CPHPrincipal_btnExcel")))
-            //new WebDriverWait(browser, TimeSpan.FromSeconds(10));
+                    //if os.path.isfile(filename):            os.remove(filename)
+                    //WebDriverWait(browser, 20).until(            EC.presence_of_element_located((By.ID, "CPHPrincipal_btnExcel")))
+                    //new WebDriverWait(browser, TimeSpan.FromSeconds(10));
 
 
 
 
 
-            var aaaa = new WebDriverWait(browser, TimeSpan.FromSeconds(20)).Until(ExpectedConditions.ElementExists((By.Id("ContentPlaceHolder1_ASPxMenu2_DXI0_T"))));
+                    var aaaa = new WebDriverWait(browser, TimeSpan.FromSeconds(20)).Until(ExpectedConditions.ElementExists((By.Id("ContentPlaceHolder1_ASPxMenu2_DXI0_T"))));
 
-            aaaa.Click();
-
-
-            //button = browser.FindElement(By.Name("CPHPrincipal_btnExcel"));
-            //button.Click();
+                    aaaa.Click();
 
 
-            System.Threading.Thread.Sleep(1000 * 15);
+                    //button = browser.FindElement(By.Name("CPHPrincipal_btnExcel"));
+                    //button.Click();
 
 
-            browser.Quit();
+                    System.Threading.Thread.Sleep(1000 * 15);
+
+
+                }
+                catch (Exception e)
+                {
+
+                    ProntoFlexicapture.ClassFlexicapture.Log(e.ToString());
+                }
+                finally
+                {
+                    browser.Quit();
+                }
+
+                /*
+    __________________________
+
+Log Entry:
+    07 / 27 / 2017 18:05:29
+Error in: . Error Message:hilo #8: OpenQA.Selenium.WebDriverException: The HTTP request to the remote WebDriver server for URL http://localhost:63353/session/bce41a1121d80cf54cc11199098451be/element/0.38402688537807506-1/click timed out after 60 seconds. ---> System.Net.WebException: The operation has timed out
+at System.Net.HttpWebRequest.GetResponse()
+at OpenQA.Selenium.Remote.HttpCommandExecutor.CreateResponse(WebRequest request)
+-- - End of inner exception stack trace-- -
+at OpenQA.Selenium.Remote.HttpCommandExecutor.CreateResponse(WebRequest request)
+at OpenQA.Selenium.Remote.HttpCommandExecutor.Execute(Command commandToExecute)
+at OpenQA.Selenium.Remote.DriverServiceCommandExecutor.Execute(Command commandToExecute)
+at OpenQA.Selenium.Remote.RemoteWebDriver.Execute(String driverCommandToExecute, Dictionary`2 parameters)
+at OpenQA.Selenium.Remote.RemoteWebElement.Click()
+at ServicioCartaPorte.servi.CerealnetSelenium_ConChromeHeadless(String directorioDescarga, String dirDriver) in C:\bdl\pronto\InterfazFlexicapture\prontoflexicapture.cs:line 6441
+at ProntoWindowsService.Service1.DoWorkSoloPegatinas() in C:\bdl\pronto\ProntoWindowsService\Service1.cs:line 819
+__________________________
+
+Log Entry:
+07 / 27 / 2017 18:05:29
+Error in: . Error Message:OpenQA.Selenium.WebDriverException
+The HTTP request to the remote WebDriver server for URL http://localhost:63353/session/bce41a1121d80cf54cc11199098451be/element/0.38402688537807506-1/click timed out after 60 seconds.
+at OpenQA.Selenium.Remote.HttpCommandExecutor.CreateResponse(WebRequest request)
+at OpenQA.Selenium.Remote.HttpCommandExecutor.Execute(Command commandToExecute)
+at OpenQA.Selenium.Remote.DriverServiceCommandExecutor.Execute(Command commandToExecute)
+at OpenQA.Selenium.Remote.RemoteWebDriver.Execute(String driverCommandToExecute, Dictionary`2 parameters)
+at OpenQA.Selenium.Remote.RemoteWebElement.Click()
+at ServicioCartaPorte.servi.CerealnetSelenium_ConChromeHeadless(String directorioDescarga, String dirDriver) in C:\bdl\pronto\InterfazFlexicapture\prontoflexicapture.cs:line 6441
+at ProntoWindowsService.Service1.DoWorkSoloPegatinas() in C:\bdl\pronto\ProntoWindowsService\Service1.cs:line 819
+WebDriver
+__________________________
+*/
+
+            }
+
+
+
 
         }
 
@@ -6390,7 +6442,7 @@ In M38, but not in M37, the debug log contains the error message below. Full log
 
 
 
-            
+
             //https://thefriendlytester.co.uk/2017/04/new-headless-chrome-with-selenium.html
 
             ChromeOptions chromeOptions = new ChromeOptions();
@@ -6399,7 +6451,7 @@ In M38, but not in M37, the debug log contains the error message below. Full log
             chromeOptions.AddArguments("--headless", "--disable-gpu", "--no-sandbox", "--disable-extensions");
             //chromeOptions.AddArguments(@"--enable-logging --log-level=0 --user-data-dir=c:\");
 
-            chromeOptions.AddUserProfilePreference("download.default_directory", directorioDescarga );
+            chromeOptions.AddUserProfilePreference("download.default_directory", directorioDescarga);
             chromeOptions.AddUserProfilePreference("download.directory_upgrade", "true");
             chromeOptions.AddUserProfilePreference("download.prompt_for_download", "false");
             chromeOptions.AddUserProfilePreference("safebrowsing.enabled", "true");
@@ -6408,50 +6460,65 @@ In M38, but not in M37, the debug log contains the error message below. Full log
 
             var service = ChromeDriverService.CreateDefaultService(dirDriver); //@"C:\Users\Administrador\Desktop");
             service.EnableVerboseLogging = true;
-            service.LogPath =  dirDriver + @"\chromedriver.log";
-
-
-            IWebDriver browser = new ChromeDriver(service, chromeOptions);
+            service.LogPath = dirDriver + @"\chromedriver.log";
 
 
 
-            browser.Navigate().GoToUrl("http://entregadores.cerealnet.com/");
+            using (IWebDriver browser = new ChromeDriver(service, chromeOptions))
+            {
 
-            // WebDriverWait(browser, 10).until(EC.presence_of_element_located((By.ID, "txtUsuario")))
-            new WebDriverWait(browser, TimeSpan.FromSeconds(10)).Until(ExpectedConditions.ElementExists((By.Id("txtUsuario"))));
+                try
+                {
+                    browser.Navigate().GoToUrl("http://entregadores.cerealnet.com/");
 
-
-            var user_name = browser.FindElement(By.Name("txtUsuario"));
-            user_name.SendKeys("williams");
-            // https://stackoverflow.com/questions/43583836/expected-object-undefined-undefined-to-be-a-string-indexoutofbounds
-            // Thank you it worked. We need to update selenium to 3.4 to support Gecko v 0.16. Once both are updated no issues
-
-            var password = browser.FindElement(By.Name("txtPass"));
-            password.SendKeys("santiago1177");
+                    // WebDriverWait(browser, 10).until(EC.presence_of_element_located((By.ID, "txtUsuario")))
+                    new WebDriverWait(browser, TimeSpan.FromSeconds(10)).Until(ExpectedConditions.ElementExists((By.Id("txtUsuario"))));
 
 
-            var button = browser.FindElement(By.Name("btnInicio"));
-            button.Click();
+                    var user_name = browser.FindElement(By.Name("txtUsuario"));
+                    user_name.SendKeys("williams");
+                    // https://stackoverflow.com/questions/43583836/expected-object-undefined-undefined-to-be-a-string-indexoutofbounds
+                    // Thank you it worked. We need to update selenium to 3.4 to support Gecko v 0.16. Once both are updated no issues
 
-            //if os.path.isfile(filename):            os.remove(filename)
-            //WebDriverWait(browser, 20).until(            EC.presence_of_element_located((By.ID, "CPHPrincipal_btnExcel")))
-            //new WebDriverWait(browser, TimeSpan.FromSeconds(10));
-            var aaaa = new WebDriverWait(browser, TimeSpan.FromSeconds(20)).Until(ExpectedConditions.ElementExists((By.Id("CPHPrincipal_btnExcel"))));
-
-            aaaa.Click();
-
-            //button = browser.FindElement(By.Name("CPHPrincipal_btnExcel"));
-            //button.Click();
-
-            System.Threading.Thread.Sleep(1000 * 15);
+                    var password = browser.FindElement(By.Name("txtPass"));
+                    password.SendKeys("santiago1177");
 
 
-            // https://stackoverflow.com/questions/34513538/download-file-with-phantomjs?rq=1
+                    var button = browser.FindElement(By.Name("btnInicio"));
+                    button.Click();
+
+                    //if os.path.isfile(filename):            os.remove(filename)
+                    //WebDriverWait(browser, 20).until(            EC.presence_of_element_located((By.ID, "CPHPrincipal_btnExcel")))
+                    //new WebDriverWait(browser, TimeSpan.FromSeconds(10));
+                    var aaaa = new WebDriverWait(browser, TimeSpan.FromSeconds(20)).Until(ExpectedConditions.ElementExists((By.Id("CPHPrincipal_btnExcel"))));
+
+                    aaaa.Click();
+
+                    //button = browser.FindElement(By.Name("CPHPrincipal_btnExcel"));
+                    //button.Click();
+
+                    System.Threading.Thread.Sleep(1000 * 15);
 
 
-            browser.Quit();
+                    // https://stackoverflow.com/questions/34513538/download-file-with-phantomjs?rq=1
 
 
+                    browser.Quit();
+
+
+
+                }
+                catch (Exception e)
+                {
+
+                   ProntoFlexicapture.ClassFlexicapture.Log(e.ToString());
+                }
+                finally
+                {
+                    browser.Quit();
+                }
+
+            }
 
 
 

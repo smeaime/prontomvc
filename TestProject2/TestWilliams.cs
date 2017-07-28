@@ -865,6 +865,12 @@ namespace ProntoMVC.Tests
 
 
 
+        [TestMethod]
+        public void _zxinf_referencias()
+        {
+            var dd = CartaDePorteManager.ReadBarcode1D_ZXing(@"C:\bdl\pronto\docstest\000555094127-cp.jpg", 0);
+        }
+
 
 
 
@@ -1134,7 +1140,7 @@ namespace ProntoMVC.Tests
             var s = new ServicioCartaPorte.servi();
             string dir = DirApp + @"\Temp\Pegatinas\";
 
-            s.UrenportSelenium_ConChromeHeadless(dir, @"C:\Users\Administrador\Desktop");
+            s.UrenportSelenium_ConChromeHeadless(dir, @"C:\Users\Mariano\Desktop");
 
             //s.CerealnetSeleniumConPhantomJS(DirApp);
         }
@@ -1147,7 +1153,7 @@ namespace ProntoMVC.Tests
             var s = new ServicioCartaPorte.servi();
             string dir = DirApp + @"\Temp\Pegatinas\";
 
-            s.CerealnetSelenium_ConChromeHeadless(dir, @"C:\Users\Administrador\Desktop");
+            s.CerealnetSelenium_ConChromeHeadless(dir, @"C:\Users\Mariano\Desktop");
 
             //s.CerealnetSeleniumConPhantomJS(DirApp);
         }
