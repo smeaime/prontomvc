@@ -6263,6 +6263,14 @@ order by kilos desc
 
 
 
+            try
+            {
+                System.IO.File.Delete(directorioDescarga + @"\urenport.xls");
+            }
+            catch (Exception x)
+           {
+                ErrHandler2.WriteError(x);
+            }
 
 
             using (IWebDriver browser = new ChromeDriver(service, chromeOptions))
@@ -6314,6 +6322,8 @@ order by kilos desc
                     System.Threading.Thread.Sleep(1000 * 15);
 
 
+                    System.IO.File.Move(directorioDescarga + @"\urenport.xls", directorioDescarga + @"\urenport_" + DateTime.Now.ToString("ddMMMyyyy_HHmmss")  +".xls");
+
                 }
                 catch (Exception e)
                 {
@@ -6324,6 +6334,12 @@ order by kilos desc
                 {
                     browser.Quit();
                 }
+
+
+
+
+
+
 
                 /*
     __________________________
@@ -6511,7 +6527,7 @@ In M38, but not in M37, the debug log contains the error message below. Full log
                 catch (Exception e)
                 {
 
-                   ProntoFlexicapture.ClassFlexicapture.Log(e.ToString());
+                    ProntoFlexicapture.ClassFlexicapture.Log(e.ToString());
                 }
                 finally
                 {

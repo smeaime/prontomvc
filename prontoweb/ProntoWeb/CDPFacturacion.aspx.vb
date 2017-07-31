@@ -1897,10 +1897,12 @@ Partial Class CDPFacturacion
                 Dim errLog As String = ""
                 Server.ScriptTimeout = TIMEOUT_SCRIPT
                 'acá se ve que le estoy pasando un millon de parametros....
-                GenerarLoteFacturas_NUEVO(tablaEditadaDeFacturasParaGenerar, HFSC.Value, ViewState("pagina"), ViewState("sesionId"), optFacturarA.SelectedValue, gvFacturasGeneradas, _
-                                        txtFacturarATerceros.Text, SeEstaSeparandoPorCorredor, Session, cmbPuntoVenta.Text, _
-                                        dtViewstateRenglonesManuales, cmbAgruparArticulosPor.SelectedItem.Text, _
-                                        txtBuscar.Text, txtTarifaGastoAdministrativo.Text, errLog, txtCorredor.Text, chkPagaCorredor.Checked, txtOrdenCompra.Text, ViewState("PrimeraIdFacturaGenerada"), ViewState("UltimaIdFacturaGenerada"), 0)
+                GenerarLoteFacturas_NUEVO(tablaEditadaDeFacturasParaGenerar, HFSC.Value, ViewState("sesionId"), optFacturarA.SelectedValue,
+                                        gvFacturasGeneradas, txtFacturarATerceros.Text, SeEstaSeparandoPorCorredor, Session, cmbPuntoVenta.Text,
+                                        dtViewstateRenglonesManuales, cmbAgruparArticulosPor.SelectedItem.Text,
+                                        txtBuscar.Text, txtTarifaGastoAdministrativo.Text, errLog, txtCorredor.Text,
+                                          chkPagaCorredor.Checked, txtOrdenCompra.Text,
+                                          ViewState("PrimeraIdFacturaGenerada"), ViewState("UltimaIdFacturaGenerada"), 0)
 
 
 

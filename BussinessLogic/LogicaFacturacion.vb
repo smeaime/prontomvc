@@ -4082,15 +4082,17 @@ Public Class LogicaFacturacion
 
 
     Shared Sub GenerarLoteFacturas_NUEVO(ByRef grilla As DataTable, ByVal SC As String,
-                                                         ByRef pag As Object,
-                                            ByRef sesionId As Object,
+                                         ByRef sesionId As Object,
                                          ByVal optFacturarA As Long,
                                          ByRef gvFacturasGeneradas As GridView, ByVal txtFacturarATerceros As String,
-                                         ByVal SeEstaSeparandoPorCorredor As Boolean, ByRef Session As System.Web.SessionState.HttpSessionState,
+                                         ByVal SeEstaSeparandoPorCorredor As Boolean,
+                                         ByRef Session As System.Web.SessionState.HttpSessionState,
                                          ByVal PuntoVenta As Integer, ByVal dtViewstateRenglonesManuales As DataTable,
                                          ByVal agruparArticulosPor As String, ByVal txtBuscar As String,
                                          ByVal txtTarifaGastoAdministrativo As String, ByRef errLog As String,
-                                         ByVal txtCorredor As String, ByVal chkPagaCorredor As Boolean, numeroOrdenCompra As String, ByRef PrimeraIdFacturaGenerada As Object, ByRef UltimaIdFacturaGenerada As Object, idClienteObservaciones As Long)
+                                         ByVal txtCorredor As String, ByVal chkPagaCorredor As Boolean,
+                                         numeroOrdenCompra As String, ByRef PrimeraIdFacturaGenerada As Object,
+                                         ByRef UltimaIdFacturaGenerada As Object, idClienteObservaciones As Long)
 
         Dim idFactura As Long
         Dim ultimo = 0
