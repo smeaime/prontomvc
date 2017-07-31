@@ -874,6 +874,10 @@ namespace ProntoMVC.Tests
 
 
 
+
+
+
+
         [TestMethod]
         public void FACTURACION_FUTUROS_Y_OPCIONES_maximo_de_renglones_28265()
         {
@@ -993,20 +997,47 @@ Error in: https://prontoweb.williamsentregas.com.ar/ProntoWeb/CDPFacturacion.asp
 
 
    
-            var f = db.Facturas.Find(idFactura);
+            //var f = db.Facturas.Find(idFactura);
 
             //Assert.AreEqual(true, f.ImporteTotal<100);
             //Assert.AreEqual(0, f.RetencionIBrutos1);
 
             int primerId=0, ultimoId=0;
+            var gv = new System.Web.UI.WebControls.GridView();
+
+
+
+            System.Web.SessionState.HttpSessionState Session = null; // new System.Web.SessionState.HttpSessionState();
+
+            //DataTable tablaEditadaDeFacturasParaGenerar = dtDatasourcePaso2() // es casi un wrapper. esto lo puedo reemplazar con la llamada mas directa a GetDatatableAsignacionAutomatica
+
+            DataTable tablaEditadaDeFacturasParaGenerar = LogicaFacturacion.GetDatatableAsignacionAutomatica(
+                                                    SC, ViewState("pagina"), ViewState("sesionId"),
+                                                    GridView2, PuntoVenta,
+                                                    desde, 
+                                                    hasta,
+                                                     fListaIDs, "", optFacturarA, txtFacturarATerceros
+                                                     , SC, txtTitular, txtCorredor,
+                                                    txtDestinatario, txtIntermediario, txtRcomercial, txt_AC_Articulo,
+                                                    txtProcedencia, txtDestino, txtBuscar, cmbCriterioWHERE,
+                                                    cmbModo, optDivisionSyngenta,
+                                                     startRowIndex, maximumRows, txtPopClienteAuxiliar, sErr,
+                                                     txtFacturarA, cmbAgruparArticulosPor,
+                                                     filas, slinks, SessionID);
+
+
+
+            DataTable dtViewstateRenglonesManuales = null;
+
+
 
             LogicaFacturacion.GenerarLoteFacturas_NUEVO(
-                            tablaEditadaDeFacturasParaGenerar, SC, sesionId,
-                            optFacturarA, gvFacturasGeneradas,
-                            txtFacturarATerceros.Text, SeEstaSeparandoPorCorredor, null, PuntoVenta,
+                            tablaEditadaDeFacturasParaGenerar, SC, 
+                            optFacturarA, ref gv,
+                            SeEstaSeparandoPorCorredor, null, PuntoVenta,
                             dtViewstateRenglonesManuales, agruparArticulosPor,
-                            txtBuscar, txtTarifaGastoAdministrativo, txtCorredor,
-                            chkPagaCorredor, "", ref primerId, ref ultimoId,  0);
+                            txtBuscar, txtTarifaGastoAdministrativo, ref errLog, txtCorredor,
+                            chkPagaCorredor, "", ref primerId, ref ultimoId,   0);
 
             //int idFactura = LogicaFacturacion.CreaFacturaCOMpronto(lote, idClienteAfacturarle, PuntoVenta,
             //                            dtRenglonesAgregados, SC, null, optFacturarA,

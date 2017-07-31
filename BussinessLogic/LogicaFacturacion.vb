@@ -4082,9 +4082,8 @@ Public Class LogicaFacturacion
 
 
     Shared Sub GenerarLoteFacturas_NUEVO(ByRef grilla As DataTable, ByVal SC As String,
-                                         ByRef sesionId As Object,
                                          ByVal optFacturarA As Long,
-                                         ByRef gvFacturasGeneradas As GridView, ByVal txtFacturarATerceros As String,
+                                         ByRef gvFacturasGeneradas As GridView,
                                          ByVal SeEstaSeparandoPorCorredor As Boolean,
                                          ByRef Session As System.Web.SessionState.HttpSessionState,
                                          ByVal PuntoVenta As Integer, ByVal dtViewstateRenglonesManuales As DataTable,
