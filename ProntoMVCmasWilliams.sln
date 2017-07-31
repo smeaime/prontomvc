@@ -109,6 +109,7 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "prontoweb", "prontoweb\", "
 		Release.AspNetCompiler.FixedNames = "false"
 		Release.AspNetCompiler.Debug = "False"
 		VWDPort = "50769"
+		SlnRelativePath = "prontoweb\"
 	EndProjectSection
 EndProject
 Global
