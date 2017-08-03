@@ -866,64 +866,45 @@ namespace ProntoMVC.Tests
 
 
 
+        [TestMethod]
+        public void BorrarPosiciones_42952()
+        {
+
+
+            CartaDePorteManager.BorrarPosiciones();
+
+
+        }
 
 
         [TestMethod]
-        public void syngenta_webservice_42950()
+        public void syngenta_webservice_ftp_42950()
         {
-            // mandar una tanda
 
-            int idcliente = 4333; //syngenta
+            //            sFTP: 192.208.44.90
+            //Carpeta: /UAT/Ready
+            //Usuario: sappo_test
+            //Password: 4R04475j
 
-            var dbcartas = CartaDePorteManager.ListadoSegunCliente(SC, idcliente, new DateTime(2016, 11, 1), new DateTime(2016, 11, 30), CartaDePorteManager.enumCDPestado.DescargasMasFacturadas);
+
+            string archivoExcel = @"C:\bdl\pronto\docstest\Syngenta_10feb2017_115941.xlsx";
 
             var s = new ServicioCartaPorte.servi();
 
+            s.UploadFtpFile("goragora.com.ar", "/public_ftp/incoming", archivoExcel, "maruxs", "ns5aK!cvai0C");
+
+            //s.CopyFileFTP("ftp://192.208.44.90/", "/UAT/Ready", archivoExcel, "sappo_test", "4R04475j");
+            s.UploadFtpFile(ConfigurationManager.AppSettings["SyngentaFTPdominio"],
+                            ConfigurationManager.AppSettings["SyngentaFTPdir"],
+                            archivoExcel,
+                            ConfigurationManager.AppSettings["SyngentaFTPuser"],
+                            ConfigurationManager.AppSettings["SyngentaFTPpass"]);
+            
 
 
 
-            var endpointStr = ConfigurationManager.AppSettings["SyngentaServiceEndpoint"]; //  @"https://oasis-pi-nonprod.syngenta.com/uat/XISOAPAdapter/MessageServlet?senderParty=&senderService=Srv_BIT_BarterService&receiverParty=&receiverService=&interface=LoadDeclarationSoap_send_out_asy&interfaceNamespace=urn:broker:o2c:s:global:delivery:loaddeclaration:100";
-            var UserName = ConfigurationManager.AppSettings["SyngentaServiceUser"];
-            var Password = ConfigurationManager.AppSettings["SyngentaServicePass"];
+            s.CopyFileFTP(archivoExcel, "username", "password#");   // 4 horas
 
-            var x = s.WebServiceSyngenta(dbcartas, endpointStr, UserName, Password);
-
-            // marcar fecha de cartas enviadas, loguar tanda de cartas enviadas para que 
-            // sepan qué excel tienen que generar (el webservice solo manda un mail si hubo error, no tengo notificacion de otro tipo)
-
-            // pagina de log o por lo menos de estado del envio de datos a syngenta.
-            //                 noenviadas=Func();
-
-
-            string DIRFTP = DirApp + @"\DataBackupear\";
-            string nombre = DIRFTP + "Syngenta_" + DateTime.Now.ToString("ddMMMyyyy_HHmmss") + ".xlsx";
-
-
-            s.GenerarExcelSyngentaWebService(x, nombre); // 3 horas 
-
-            System.Diagnostics.Process.Start(nombre);
-
-            return;
-
-
-            s.CopyFileFTP(nombre, "username", "password#");   // 4 horas
-
-            //return Log; // pagina de log o por lo menos de estado del envio de datos a syngenta. 3 horas 
-
-
-            /*
-            . El Web Service no devolverá ningún dato que haga referencia en cuanto a si se procesó bien o tuvo errores la interface.
-La interface será procesa por Syngenta y si la misma no puede ser procesada correctamente por contener errores en los datos 
-    u otra validación; se enviara un mail con el detalle del procesamiento y error al mail indicado por el entregador para esta 
-            interface como así también dicho mail será enviado de la misma forma al responsable de Canje por parte de Syngenta.
-             * 
-             * 
-             * */
-
-
-            // que pasa si alguien anula una carta de syngenta?
-            //carta.anular();
-            // -bueno, el que levanta la lista de cartas tiene que comparar la fecha de enviado con la de ultima modificacion
 
 
 
@@ -1045,7 +1026,7 @@ Error in: https://prontoweb.williamsentregas.com.ar/ProntoWeb/CDPFacturacion.asp
 
 
 
-            
+
 
             for (int n = 1372900; n < 1372999; n++)
             {
@@ -1065,15 +1046,24 @@ Error in: https://prontoweb.williamsentregas.com.ar/ProntoWeb/CDPFacturacion.asp
 
 
 
-   
+
             //var f = db.Facturas.Find(idFactura);
 
             //Assert.AreEqual(true, f.ImporteTotal<100);
             //Assert.AreEqual(0, f.RetencionIBrutos1);
 
-            int primerId=0, ultimoId=0;
+            object primerId = 0, ultimoId = 0;
+            object pag = 1, sesionId=0;
+           
+
+
             var gv = new System.Web.UI.WebControls.GridView();
 
+            string errLog = "";
+            object filas = "", slinks = "";
+
+            var desde = new DateTime(2017, 1, 1);
+            var hasta = new DateTime(2017, 1, 31);
 
 
             System.Web.SessionState.HttpSessionState Session = null; // new System.Web.SessionState.HttpSessionState();
@@ -1081,18 +1071,18 @@ Error in: https://prontoweb.williamsentregas.com.ar/ProntoWeb/CDPFacturacion.asp
             //DataTable tablaEditadaDeFacturasParaGenerar = dtDatasourcePaso2() // es casi un wrapper. esto lo puedo reemplazar con la llamada mas directa a GetDatatableAsignacionAutomatica
 
             DataTable tablaEditadaDeFacturasParaGenerar = LogicaFacturacion.GetDatatableAsignacionAutomatica(
-                                                    SC, ViewState("pagina"), ViewState("sesionId"),
-                                                    GridView2, PuntoVenta,
-                                                    desde, 
-                                                    hasta,
-                                                     fListaIDs, "", optFacturarA, txtFacturarATerceros
-                                                     , SC, txtTitular, txtCorredor,
-                                                    txtDestinatario, txtIntermediario, txtRcomercial, txt_AC_Articulo,
-                                                    txtProcedencia, txtDestino, txtBuscar, cmbCriterioWHERE,
-                                                    cmbModo, optDivisionSyngenta,
-                                                     startRowIndex, maximumRows, txtPopClienteAuxiliar, sErr,
-                                                     txtFacturarA, cmbAgruparArticulosPor,
-                                                     filas, slinks, SessionID);
+                                                     SC, ref pag, ref sesionId,
+                                                   8, PuntoVenta,
+                                                    desde,
+                                                    hasta, 
+                                                     "", "", optFacturarA, ""
+                                                     , SC, "", "",
+                                                    "", "", "", "",
+                                                    "", "", txtBuscar, "",
+                                                     "", "",
+                                                     0, 0, "", ref errLog,
+                                                     "" , "",
+                                                     ref filas, ref slinks, sesionId.ToString());
 
 
 
@@ -1101,12 +1091,14 @@ Error in: https://prontoweb.williamsentregas.com.ar/ProntoWeb/CDPFacturacion.asp
 
 
             LogicaFacturacion.GenerarLoteFacturas_NUEVO(
-                            tablaEditadaDeFacturasParaGenerar, SC, 
+                            ref tablaEditadaDeFacturasParaGenerar, SC,
                             optFacturarA, ref gv,
-                            SeEstaSeparandoPorCorredor, null, PuntoVenta,
+                            SeEstaSeparandoPorCorredor, ref Session, PuntoVenta,
                             dtViewstateRenglonesManuales, agruparArticulosPor,
                             txtBuscar, txtTarifaGastoAdministrativo, ref errLog, txtCorredor,
-                            chkPagaCorredor, "", ref primerId, ref ultimoId,   0);
+                            chkPagaCorredor, "", ref primerId, ref ultimoId, 0);
+
+
 
             //int idFactura = LogicaFacturacion.CreaFacturaCOMpronto(lote, idClienteAfacturarle, PuntoVenta,
             //                            dtRenglonesAgregados, SC, null, optFacturarA,

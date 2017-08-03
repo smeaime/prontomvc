@@ -2164,7 +2164,10 @@ Public Class LogicaFacturacion
 
     Shared Function GetDatatableAsignacionAutomatica(ByVal SC As String, ByRef pag As Object,
                                                      ByRef sesionId As Object,
-                                                     ByVal iPageSize As Long, ByVal puntoVenta As Integer, ByVal desde As Date, ByVal hasta As Date, ByRef sErrores As String, AgruparArticulosPor As String, ByRef filas As Object, ByRef slinks As Object, sesionIdposta As String) As DataTable
+                                                     ByVal iPageSize As Long, ByVal puntoVenta As Integer,
+                                                     ByVal desde As Date, ByVal hasta As Date,
+                                                     ByRef sErrores As String, AgruparArticulosPor As String, ByRef filas As Object,
+                                                     ByRef slinks As Object, sesionIdposta As String) As DataTable
 
 
 

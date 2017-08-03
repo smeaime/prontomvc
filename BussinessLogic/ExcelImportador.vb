@@ -2042,10 +2042,12 @@ Public Class ExcelImportadorManager
 
 
                     If .SituacionAntesDeEditarManualmente = 1 And .Situacion = 0 And BuscarSituacionId(r(2)) = 1 Then
-                        '+ Si se modifica manualmente una carta de porte cambiando el estado de "Demorado" a "Autorizado", la situación de la carta de porte no deberá volver a "Demorado" si se vuelve a importar la información y vuelve a venir como demorado
+                        '+ Si se modifica manualmente una carta de porte cambiando el estado de "Demorado" a "Autorizado", 
+                        ' la situación de la carta de porte no deberá volver a "Demorado" si se vuelve a importar la información y vuelve a venir como demorado
 
                     ElseIf .SituacionAntesDeEditarManualmente = 5 And .Situacion = 6 And BuscarSituacionId(r(2)) = 5 Then
-                        '+ Si se modifica manualmente una carta de porte cambiando el estado de "Rechazado" a "Desviado", la situación de la carta de porte no deberá volver a "Rechazado" si se vuelve a importar la información y vuelve a venir como demorado
+                        '+ Si se modifica manualmente una carta de porte cambiando el estado de "Rechazado" a "Desviado", 
+                        ' la situación de la carta de porte no deberá volver a "Rechazado" si se vuelve a importar la información y vuelve a venir como demorado
 
                     ElseIf .Situacion = 0 Then
                         'correccion: ahora prohibo la actualizacion de autorizadas aun si son automaticas
@@ -2053,7 +2055,8 @@ Public Class ExcelImportadorManager
 
                     Else
 
-                        '+ Si la carta de porte fue editada manualmente no volver a importar los datos de la carta de porte. SI seguir importando los datos correspondientes a la situación del camion (Situación / Observaciones)
+                        '+ Si la carta de porte fue editada manualmente no volver a importar los datos de la carta de porte.
+                        ' Seguir importando los datos correspondientes a la situación del camion (Situación / Observaciones)
                         'correccion: ahora prohibo la actualizacion de autorizadas aun si son automaticas
 
                         Dim temp = .Situacion
@@ -2065,7 +2068,6 @@ Public Class ExcelImportadorManager
 
 
                         If actua(.ObservacionesSituacion, r(35)) Then log += "ObservacionesSituacion; "
-                        actua(.Observaciones, r(35))
 
                         .FechaActualizacionAutomatica = DateTime.Now
                     End If
@@ -2088,6 +2090,8 @@ Public Class ExcelImportadorManager
 
 
                     If (Not bEditadaManual) Then
+
+                        actua(.Observaciones, r(35))
 
                         Try
                             .FechaArribo = DateTime.Parse(iisValidSqlDate(Left(r(3), 10), DateTime.Now))
