@@ -17686,6 +17686,29 @@ usuario As String, ConexBDLmaster As String,
 
 
 
+
+
+    Public Shared Function BorrarPosiciones()
+
+        'For Each id As Long In S
+
+        '    If id = 0 Then Continue For
+
+        '    'flagHayChecksTildados = True
+        '    Dim cdp As CartaDePorte = CartaDePorteManager.GetItem(HFSC.Value, id)
+        '    If GetEstado(HFSC.Value, cdp) = enumCDPestado.Posicion Then
+        '        cdp.Anulada = "SI"
+        '        EntidadManager.LogPronto(HFSC.Value, id, "CartaPorte Anulacion de posiciones ", Session(SESSIONPRONTO_UserName))
+        '        CartaDePorteManager.Anular(HFSC.Value, cdp, Session(SESSIONPRONTO_glbIdUsuario), Session(SESSIONPRONTO_UserName))
+        '    End If
+        'Next
+
+    End Function
+
+
+
+
+
 End Class
 
 

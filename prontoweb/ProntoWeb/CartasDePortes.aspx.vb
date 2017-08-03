@@ -161,11 +161,11 @@ Partial Class CartasDePortes
         Dim strWHERE As String = "1=1  "
 
         If idVendedor <> -1 Or idCorredor <> -1 Then
-            strWHERE += "  " & _
-             "           AND (Vendedor = " & idVendedor & _
-            "           OR CuentaOrden1 = " & idVendedor & _
-            "           OR CuentaOrden2 = " & idVendedor & _
-            "             OR Corredor=" & idCorredor & _
+            strWHERE += "  " &
+             "           AND (Vendedor = " & idVendedor &
+            "           OR CuentaOrden1 = " & idVendedor &
+            "           OR CuentaOrden2 = " & idVendedor &
+            "             OR Corredor=" & idCorredor &
             "             OR Entregador=" & idVendedor & ")"
         End If
 
@@ -226,13 +226,13 @@ Partial Class CartasDePortes
 
 
 
-        Dim dt = CartaDePorteManager.GetDataTableFiltradoYPaginado(HFSC.Value, _
-                                    "", "", "", 1, 0, _
-                                   estado, txtBuscar.Text, _
-                                   -1, -1, -1, -1, -1, -1, -1, -1, _
-                                   "1", "Ambas", _
-                                   Convert.ToDateTime(iisValidSqlDate(txtFechaDesde.Text, #1/1/1753#)), _
-                                   Convert.ToDateTime(iisValidSqlDate(txtFechaHasta.Text, #1/1/2100#)), _
+        Dim dt = CartaDePorteManager.GetDataTableFiltradoYPaginado(HFSC.Value,
+                                    "", "", "", 1, 0,
+                                   estado, txtBuscar.Text,
+                                   -1, -1, -1, -1, -1, -1, -1, -1,
+                                   "1", "Ambas",
+                                   Convert.ToDateTime(iisValidSqlDate(txtFechaDesde.Text, #1/1/1753#)),
+                                   Convert.ToDateTime(iisValidSqlDate(txtFechaHasta.Text, #1/1/2100#)),
                                    cmbPuntoVenta.SelectedValue, titulo)
 
 
@@ -249,11 +249,11 @@ Partial Class CartasDePortes
             Dim idCorredorQueContiene = BuscaIdVendedorPreciso(txtBuscar.Text, HFSC.Value)
 
             If idVendedorQueContiene <> -1 Or idCorredorQueContiene <> -1 Then
-                Dim WHERE = "  " & _
-                 "            (Vendedor = " & idVendedorQueContiene & _
-                "           OR CuentaOrden1 = " & idVendedorQueContiene & _
-                "           OR CuentaOrden2 = " & idVendedorQueContiene & _
-                "             OR Corredor=" & idCorredorQueContiene & _
+                Dim WHERE = "  " &
+                 "            (Vendedor = " & idVendedorQueContiene &
+                "           OR CuentaOrden1 = " & idVendedorQueContiene &
+                "           OR CuentaOrden2 = " & idVendedorQueContiene &
+                "             OR Corredor=" & idCorredorQueContiene &
                 "             OR Entregador=" & idVendedorQueContiene & ")"
 
 
@@ -294,13 +294,13 @@ Partial Class CartasDePortes
 
         s = "1=1 "
 
-        s += " AND ( " & _
+        s += " AND ( " &
                                    "Convert(" & cmbBuscarEsteCampo.SelectedValue & ", 'System.String') LIKE '*" & txtBuscar.Text & "*' )"
 
         If cmbPuntoVenta.Text <> "-1" Then
 
-            s += "         AND ( " & _
-                                        " Convert(PuntoVenta, 'System.String')='" & cmbPuntoVenta.Text & "'" & _
+            s += "         AND ( " &
+                                        " Convert(PuntoVenta, 'System.String')='" & cmbPuntoVenta.Text & "'" &
                                 " )"
             ' "   OR " & _
             '       "  PuntoVenta=0" & _
@@ -744,12 +744,12 @@ Partial Class CartasDePortes
 
         If False Then ' True Then
 
-            Dim dt = CartaDePorteManager.GetDataTableFiltradoYPaginado(HFSC.Value, "", "", "", -1, -1, _
-                            CartaDePorteManager.enumCDPestado.Todas, "", -1, -1, _
-                            -1, -1, -1, -1, -1, -1, -1, _
-                            "1", _
-                            Convert.ToDateTime(iisValidSqlDate(txtFechaDesde.Text, #1/1/1753#)), _
-                            Convert.ToDateTime(iisValidSqlDate(txtFechaHasta.Text, #1/1/2100#)), _
+            Dim dt = CartaDePorteManager.GetDataTableFiltradoYPaginado(HFSC.Value, "", "", "", -1, -1,
+                            CartaDePorteManager.enumCDPestado.Todas, "", -1, -1,
+                            -1, -1, -1, -1, -1, -1, -1,
+                            "1",
+                            Convert.ToDateTime(iisValidSqlDate(txtFechaDesde.Text, #1/1/1753#)),
+                            Convert.ToDateTime(iisValidSqlDate(txtFechaHasta.Text, #1/1/2100#)),
                             cmbPuntoVenta.SelectedValue, , , , , , , , , , )
 
 
@@ -781,25 +781,25 @@ Partial Class CartasDePortes
 
 
 
-            Dim s As String = _
-"            exec sp_executesql N'SELECT '''' as Producto, '''' as UsuarioIngreso, [t10].[IdCartaDePorte] AS [id], [t10].[NumeroCartaDePorte], [t10].[NumeroSubfijo], [t10].[SubnumeroVagon], [t10].[FechaArribo], [t10].[FechaModificacion], [t10].[FechaDescarga], [t10].[Observaciones] AS [Obs], [t10].[NetoFinal], [t10].[value] AS [TitularDesc], [t10].[value2] AS [IntermediarioDesc], [t10].[value3] AS [RComercialDesc], [t10].[value4] AS [CorredorDesc], [t10].[value5] AS [DestinatarioDesc], [t10].[value6] AS [ProcedenciaDesc], [t10].[value7] AS [DestinoDesc] " & _
-"  FROM ( " & _
-    "  SELECT ROW_NUMBER() OVER (ORDER BY [t9].[FechaModificacion] DESC) AS [ROW_NUMBER], [t9].[IdCartaDePorte], [t9].[NumeroCartaDePorte], [t9].[NumeroSubfijo], [t9].[SubnumeroVagon], [t9].[FechaArribo], [t9].[FechaModificacion], [t9].[FechaDescarga], [t9].[Observaciones], [t9].[NetoFinal], [t9].[value], [t9].[value2], [t9].[value3], [t9].[value4], [t9].[value5], [t9].[value6], [t9].[value7] " & _
-    "  FROM ( " & _
-        "  SELECT [t0].[IdCartaDePorte], [t0].[NumeroCartaDePorte], [t0].[NumeroSubfijo], [t0].[SubnumeroVagon], [t0].[FechaArribo], [t0].[FechaModificacion], [t0].[FechaDescarga], [t0].[Observaciones], [t0].[NetoFinal], [t2].[RazonSocial] AS [value], [t4].[RazonSocial] AS [value2], [t5].[RazonSocial] AS [value3], [t6].[Nombre] AS [value4], [t3].[RazonSocial] AS [value5], [t8].[Nombre] AS [value6], [t7].[Descripcion] AS [value7] " & _
-        "  FROM [dbo].[CartasDePorte] AS [t0] " & _
-       "   LEFT OUTER JOIN [dbo].[Articulos] AS [t1] ON ([t1].[IdArticulo]) = [t0].[IdArticulo] " & _
-        "  LEFT OUTER JOIN [dbo].[Clientes] AS [t2] ON ([t2].[IdCliente]) = [t0].[Vendedor] " & _
-        "  LEFT OUTER JOIN [dbo].[Clientes] AS [t3] ON ([t3].[IdCliente]) = [t0].[Entregador] " & _
-        "  LEFT OUTER JOIN [dbo].[Clientes] AS [t4] ON ([t4].[IdCliente]) = [t0].[CuentaOrden1] " & _
-        "  LEFT OUTER JOIN [dbo].[Clientes] AS [t5] ON ([t5].[IdCliente]) = [t0].[CuentaOrden2] " & _
-        "  LEFT OUTER JOIN [dbo].[Vendedores] AS [t6] ON ([t6].[IdVendedor]) = [t0].[Corredor] " & _
-        "  LEFT OUTER JOIN [dbo].[WilliamsDestinos] AS [t7] ON ([t7].[IdWilliamsDestino]) = [t0].[Destino] " & _
-        "  LEFT OUTER JOIN [dbo].[Localidades] AS [t8] ON [t8].[IdLocalidad] = (CONVERT(Int,[t0].[Procedencia])) " & _
-        " where FechaModificacion > ''" & FechaANSI(DateAdd(DateInterval.Day, -7, Today)) & "'' " & _
-        "  ) AS [t9] " & _
-    "  ) AS [t10] " & _
-"  WHERE [t10].[ROW_NUMBER] BETWEEN @p0 + 1 AND @p0 + @p1 " & _
+            Dim s As String =
+"            exec sp_executesql N'SELECT '''' as Producto, '''' as UsuarioIngreso, [t10].[IdCartaDePorte] AS [id], [t10].[NumeroCartaDePorte], [t10].[NumeroSubfijo], [t10].[SubnumeroVagon], [t10].[FechaArribo], [t10].[FechaModificacion], [t10].[FechaDescarga], [t10].[Observaciones] AS [Obs], [t10].[NetoFinal], [t10].[value] AS [TitularDesc], [t10].[value2] AS [IntermediarioDesc], [t10].[value3] AS [RComercialDesc], [t10].[value4] AS [CorredorDesc], [t10].[value5] AS [DestinatarioDesc], [t10].[value6] AS [ProcedenciaDesc], [t10].[value7] AS [DestinoDesc] " &
+"  FROM ( " &
+    "  SELECT ROW_NUMBER() OVER (ORDER BY [t9].[FechaModificacion] DESC) AS [ROW_NUMBER], [t9].[IdCartaDePorte], [t9].[NumeroCartaDePorte], [t9].[NumeroSubfijo], [t9].[SubnumeroVagon], [t9].[FechaArribo], [t9].[FechaModificacion], [t9].[FechaDescarga], [t9].[Observaciones], [t9].[NetoFinal], [t9].[value], [t9].[value2], [t9].[value3], [t9].[value4], [t9].[value5], [t9].[value6], [t9].[value7] " &
+    "  FROM ( " &
+        "  SELECT [t0].[IdCartaDePorte], [t0].[NumeroCartaDePorte], [t0].[NumeroSubfijo], [t0].[SubnumeroVagon], [t0].[FechaArribo], [t0].[FechaModificacion], [t0].[FechaDescarga], [t0].[Observaciones], [t0].[NetoFinal], [t2].[RazonSocial] AS [value], [t4].[RazonSocial] AS [value2], [t5].[RazonSocial] AS [value3], [t6].[Nombre] AS [value4], [t3].[RazonSocial] AS [value5], [t8].[Nombre] AS [value6], [t7].[Descripcion] AS [value7] " &
+        "  FROM [dbo].[CartasDePorte] AS [t0] " &
+       "   LEFT OUTER JOIN [dbo].[Articulos] AS [t1] ON ([t1].[IdArticulo]) = [t0].[IdArticulo] " &
+        "  LEFT OUTER JOIN [dbo].[Clientes] AS [t2] ON ([t2].[IdCliente]) = [t0].[Vendedor] " &
+        "  LEFT OUTER JOIN [dbo].[Clientes] AS [t3] ON ([t3].[IdCliente]) = [t0].[Entregador] " &
+        "  LEFT OUTER JOIN [dbo].[Clientes] AS [t4] ON ([t4].[IdCliente]) = [t0].[CuentaOrden1] " &
+        "  LEFT OUTER JOIN [dbo].[Clientes] AS [t5] ON ([t5].[IdCliente]) = [t0].[CuentaOrden2] " &
+        "  LEFT OUTER JOIN [dbo].[Vendedores] AS [t6] ON ([t6].[IdVendedor]) = [t0].[Corredor] " &
+        "  LEFT OUTER JOIN [dbo].[WilliamsDestinos] AS [t7] ON ([t7].[IdWilliamsDestino]) = [t0].[Destino] " &
+        "  LEFT OUTER JOIN [dbo].[Localidades] AS [t8] ON [t8].[IdLocalidad] = (CONVERT(Int,[t0].[Procedencia])) " &
+        " where FechaModificacion > ''" & FechaANSI(DateAdd(DateInterval.Day, -7, Today)) & "'' " &
+        "  ) AS [t9] " &
+    "  ) AS [t10] " &
+"  WHERE [t10].[ROW_NUMBER] BETWEEN @p0 + 1 AND @p0 + @p1 " &
 "  ORDER BY [t10].[ROW_NUMBER]',N'@p0 int,@p1 int',@p0=0,@p1=8"
             'al agregar lo de ultimasemana, el cambio es brutal en el uso del índice
             'al agregar lo de ultimasemana, el cambio es brutal en el uso del índice
@@ -814,22 +814,22 @@ Partial Class CartasDePortes
 
 
 
-            Dim s2 = "SELECT TOP 10  " & _
-"                                                 IdCartaDePorte as Id  " & _
-"  , '' as Producto " & _
-"             , '' as Obs " & _
-"                     , '' as   TitularDesc " & _
-"            , '' as IntermediarioDesc " & _
-"             , '' as RComercialDesc " & _
-"             , '' as CorredorDesc " & _
-"             , '' as DestinatarioDesc  " & _
-" , '' as ProcedenciaDesc  " & _
-"             , '' as DestinoDesc  " & _
-"            , '' as UsuarioIngreso  " & _
-"            ,NumeroCartaDePorte, NumeroSubfijo, SubnumeroVagon,  " & _
-"            FechaArribo, FechaModificacion, FechaDescarga,  " & _
-"            NetoFinal ,  " & _
-"            Anulada " & _
+            Dim s2 = "SELECT TOP 10  " &
+"                                                 IdCartaDePorte as Id  " &
+"  , '' as Producto " &
+"             , '' as Obs " &
+"                     , '' as   TitularDesc " &
+"            , '' as IntermediarioDesc " &
+"             , '' as RComercialDesc " &
+"             , '' as CorredorDesc " &
+"             , '' as DestinatarioDesc  " &
+" , '' as ProcedenciaDesc  " &
+"             , '' as DestinoDesc  " &
+"            , '' as UsuarioIngreso  " &
+"            ,NumeroCartaDePorte, NumeroSubfijo, SubnumeroVagon,  " &
+"            FechaArribo, FechaModificacion, FechaDescarga,  " &
+"            NetoFinal ,  " &
+"            Anulada " &
 " FROM CartasDePorte ORDER BY IdCartaDePorte DESC"
 
 
@@ -838,7 +838,7 @@ Partial Class CartasDePortes
                 Dim dt As DataTable = CartaDePorteManager.ListaditoPrincipal(HFSC.Value)
 
 
-          
+
 
                 GridView1.DataSource = dt 'b
             Catch ex As Exception
@@ -847,12 +847,12 @@ Partial Class CartasDePortes
 
         Else
 
-            Dim q = CartasLINQlocalSimplificadoPrimeraPagina(HFSC.Value, "", "", "", GridView1.PageIndex * GridView1.PageSize, GridView1.PageSize, _
-                                CartaDePorteManager.enumCDPestado.Todas, "", -1, -1, _
-                                -1, -1, -1, -1, -1, -1, -1, _
-                                "1", _
-                               #1/1/1753#, _
-                                #1/1/2100#, _
+            Dim q = CartasLINQlocalSimplificadoPrimeraPagina(HFSC.Value, "", "", "", GridView1.PageIndex * GridView1.PageSize, GridView1.PageSize,
+                                CartaDePorteManager.enumCDPestado.Todas, "", -1, -1,
+                                -1, -1, -1, -1, -1, -1, -1,
+                                "1",
+                               #1/1/1753#,
+                                #1/1/2100#,
                                 cmbPuntoVenta.SelectedValue)
 
             GridView1.DataSource = q
@@ -946,19 +946,9 @@ Partial Class CartasDePortes
 
 
 
-        For Each id As Long In s
+        CartaDePorteManager.BorrarPosiciones()
 
-            If id = 0 Then Continue For
 
-            'flagHayChecksTildados = True
-
-            Dim cdp As CartaDePorte = CartaDePorteManager.GetItem(HFSC.Value, id)
-            If GetEstado(HFSC.Value, cdp) = enumCDPestado.Posicion Then
-                cdp.Anulada = "SI"
-                EntidadManager.LogPronto(HFSC.Value, id, "CartaPorte Anulacion de posiciones ", Session(SESSIONPRONTO_UserName))
-                CartaDePorteManager.Anular(HFSC.Value, cdp, Session(SESSIONPRONTO_glbIdUsuario), Session(SESSIONPRONTO_UserName))
-            End If
-        Next
 
 
         ReBind()
@@ -1216,9 +1206,9 @@ Partial Class CartasDePortes
             Dim bytes As Byte()
 
             Try
-                bytes = ReportViewer2.LocalReport.Render( _
-                      "Excel", Nothing, mimeType, encoding, _
-                        extension, _
+                bytes = ReportViewer2.LocalReport.Render(
+                      "Excel", Nothing, mimeType, encoding,
+                        extension,
                        streamids, warnings)
 
             Catch e As System.Exception
@@ -1352,8 +1342,8 @@ Partial Class CartasDePortes
         'Return
 
 
-        ProntoFuncionesUIWeb.RebindReportViewer(ReportViewer2, _
-                    "ProntoWeb\Informes\Listado general de Cartas de Porte (simulando original) .rdl", _
+        ProntoFuncionesUIWeb.RebindReportViewer(ReportViewer2,
+                    "ProntoWeb\Informes\Listado general de Cartas de Porte (simulando original) .rdl",
                             dt, Nothing, , , titulo)
 
         'ReportViewer2.Visible = True
