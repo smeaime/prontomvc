@@ -1,0 +1,531 @@
+
+Log Entry : 
+08/02/2017 13:22:42
+Error in: . Error Message:hilo #6: busco imagenes
+__________________________
+
+Log Entry : 
+08/02/2017 13:22:42
+Error in: . Error Message:Leo listado de dirs
+__________________________
+
+Log Entry : 
+08/02/2017 13:22:42
+Error in: . Error Message:Leo Lote 02ago112654 mmorelli PV1
+__________________________
+
+Log Entry : 
+08/02/2017 13:22:42
+Error in: . Error Message:Leo Lote 02ago123607 fvelazquez PV4
+__________________________
+
+Log Entry : 
+08/02/2017 13:22:42
+Error in: . Error Message:hilo #9: busco imagenes
+__________________________
+
+Log Entry : 
+08/02/2017 13:22:42
+Error in: . Error Message:Leo listado de dirs
+__________________________
+
+Log Entry : 
+08/02/2017 13:22:42
+Error in: . Error Message:Leo Lote 02ago112654 mmorelli PV1
+__________________________
+
+Log Entry : 
+08/02/2017 13:22:42
+Error in: . Error Message:Leo Lote 02ago123607 fvelazquez PV4
+__________________________
+
+Log Entry : 
+08/02/2017 13:22:42
+Error in: . Error Message:Leo Lote 02ago124348 fvelazquez PV4
+__________________________
+
+Log Entry : 
+08/02/2017 13:22:42
+Error in: . Error Message:Filtro los marcados
+__________________________
+
+Log Entry : 
+08/02/2017 13:22:42
+Error in: . Error Message:Salgo
+__________________________
+
+Log Entry : 
+08/02/2017 13:22:42
+Error in: . Error Message:hilo #6: busco imagenes
+__________________________
+
+Log Entry : 
+08/02/2017 13:22:42
+Error in: . Error Message:Leo listado de dirs
+__________________________
+
+Log Entry : 
+08/02/2017 13:22:42
+Error in: . Error Message:Salgo
+__________________________
+
+Log Entry : 
+08/02/2017 13:22:42
+Error in: . Error Message:hilo #9: busco imagenes
+__________________________
+
+Log Entry : 
+08/02/2017 13:22:42
+Error in: . Error Message:Leo listado de dirs
+__________________________
+
+Log Entry : 
+08/02/2017 13:23:12
+Error in: . Error Message:hilo #6: busco imagenes
+__________________________
+
+Log Entry : 
+08/02/2017 13:23:12
+Error in: . Error Message:Leo listado de dirs
+__________________________
+
+Log Entry : 
+08/02/2017 13:23:12
+Error in: . Error Message:Leo Lote 02ago112654 mmorelli PV1
+__________________________
+
+Log Entry : 
+08/02/2017 13:23:12
+Error in: . Error Message:Leo Lote 02ago123607 fvelazquez PV4
+__________________________
+
+Log Entry : 
+08/02/2017 13:23:12
+Error in: . Error Message:Leo Lote 02ago124348 fvelazquez PV4
+__________________________
+
+Log Entry : 
+08/02/2017 13:23:12
+Error in: . Error Message:Filtro los marcados
+__________________________
+
+Log Entry : 
+08/02/2017 13:23:12
+Error in: . Error Message:hilo #9: busco imagenes
+__________________________
+
+Log Entry : 
+08/02/2017 13:23:12
+Error in: . Error Message:Leo listado de dirs
+__________________________
+
+Log Entry : 
+08/02/2017 13:23:12
+Error in: . Error Message:Leo Lote 02ago112654 mmorelli PV1
+__________________________
+
+Log Entry : 
+08/02/2017 13:23:12
+Error in: . Error Message:Leo Lote 02ago123607 fvelazquez PV4
+__________________________
+
+Log Entry : 
+08/02/2017 13:23:12
+Error in: . Error Message:Leo Lote 02ago124348 fvelazquez PV4
+__________________________
+
+Log Entry : 
+08/02/2017 13:23:12
+Error in: . Error Message:Filtro los marcados
+__________________________
+
+Log Entry : 
+08/02/2017 13:23:12
+Error in: . Error Message:Salgo
+__________________________
+
+Log Entry : 
+08/02/2017 13:23:12
+Error in: . Error Message:hilo #6: busco imagenes
+__________________________
+
+Log Entry : 
+08/02/2017 13:23:12
+Error in: . Error Message:Leo listado de dirs
+__________________________
+
+Log Entry : 
+08/02/2017 13:23:12
+Error in: . Error Message:Salgo
+__________________________
+
+Log Entry : 
+08/02/2017 13:23:12
+Error in: . Error Message:hilo #9: busco imagenes
+__________________________
+
+Log Entry : 
+08/02/2017 13:23:12
+Error in: . Error Message:Leo listado de dirs
+__________________________
+
+Log Entry : 
+08/02/2017 13:23:19
+Error in: . Error Message:System.Net.Mail.SmtpException
+Mailbox unavailable. The server response was: 5.4.5 Daily user sending quota exceeded. z1sm22271572qtz.62 - gsmtp
+   at System.Net.Mail.DataCommand.CheckResponse(SmtpStatusCode statusCode, String serverResponse)
+   at System.Net.Mail.DataCommand.Send(SmtpConnection conn)
+   at System.Net.Mail.SmtpTransport.SendMail(MailAddress sender, MailAddressCollection recipients, String deliveryNotify, SmtpFailedRecipientException& exception)
+   at System.Net.Mail.SmtpClient.Send(MailMessage message)
+   at ProntoFuncionesGenerales.MandaEmailSimple(String Para, String Asunto, String Cuerpo, String De, String SmtpServer, String SmtpUser, String SmtpPass, String sStringGenerarAdjunto, Int64 SmtpPort, Int32 EnableSSL, String CCO, String img)
+   at CartaDePorteManager.MandarMailDeError(Exception e) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:line 8538
+System
+__________________________
+
+Log Entry : 
+08/02/2017 13:23:19
+Error in: . Error Message:hilo #8: OpenQA.Selenium.WebDriverException: A exception with a null response was thrown sending an HTTP request to the remote WebDriver server for URL http://localhost:61942/session/ba3f088b25bd07a500087ce9750b8a4b/element/0.5920111915139601-1/click. The status of the exception was ReceiveFailure, and the message was: The underlying connection was closed: An unexpected error occurred on a receive. ---> System.Net.WebException: The underlying connection was closed: An unexpected error occurred on a receive. ---> System.IO.IOException: Unable to read data from the transport connection: An existing connection was forcibly closed by the remote host. ---> System.Net.Sockets.SocketException: An existing connection was forcibly closed by the remote host
+   at System.Net.Sockets.Socket.Receive(Byte[] buffer, Int32 offset, Int32 size, SocketFlags socketFlags)
+   at System.Net.Sockets.NetworkStream.Read(Byte[] buffer, Int32 offset, Int32 size)
+   --- End of inner exception stack trace ---
+   at System.Net.Sockets.NetworkStream.Read(Byte[] buffer, Int32 offset, Int32 size)
+   at System.Net.PooledStream.Read(Byte[] buffer, Int32 offset, Int32 size)
+   at System.Net.Connection.SyncRead(HttpWebRequest request, Boolean userRetrievedStream, Boolean probeRead)
+   --- End of inner exception stack trace ---
+   at System.Net.HttpWebRequest.GetResponse()
+   at OpenQA.Selenium.Remote.HttpCommandExecutor.CreateResponse(WebRequest request)
+   --- End of inner exception stack trace ---
+   at OpenQA.Selenium.Remote.HttpCommandExecutor.CreateResponse(WebRequest request)
+   at OpenQA.Selenium.Remote.HttpCommandExecutor.Execute(Command commandToExecute)
+   at OpenQA.Selenium.Remote.DriverServiceCommandExecutor.Execute(Command commandToExecute)
+   at OpenQA.Selenium.Remote.RemoteWebDriver.Execute(String driverCommandToExecute, Dictionary`2 parameters)
+   at OpenQA.Selenium.Remote.RemoteWebElement.Click()
+   at ServicioCartaPorte.servi.UrenportSelenium_ConChromeHeadless(String directorioDescarga, String dirDriver) in C:\bdl\pronto\InterfazFlexicapture\prontoflexicapture.cs:line 6302
+   at ProntoWindowsService.Service1.DoWorkSoloPegatinas() in C:\bdl\pronto\ProntoWindowsService\Service1.cs:line 809
+__________________________
+
+Log Entry : 
+08/02/2017 13:23:19
+Error in: . Error Message:OpenQA.Selenium.WebDriverException
+A exception with a null response was thrown sending an HTTP request to the remote WebDriver server for URL http://localhost:61942/session/ba3f088b25bd07a500087ce9750b8a4b/element/0.5920111915139601-1/click. The status of the exception was ReceiveFailure, and the message was: The underlying connection was closed: An unexpected error occurred on a receive.
+   at OpenQA.Selenium.Remote.HttpCommandExecutor.CreateResponse(WebRequest request)
+   at OpenQA.Selenium.Remote.HttpCommandExecutor.Execute(Command commandToExecute)
+   at OpenQA.Selenium.Remote.DriverServiceCommandExecutor.Execute(Command commandToExecute)
+   at OpenQA.Selenium.Remote.RemoteWebDriver.Execute(String driverCommandToExecute, Dictionary`2 parameters)
+   at OpenQA.Selenium.Remote.RemoteWebElement.Click()
+   at ServicioCartaPorte.servi.UrenportSelenium_ConChromeHeadless(String directorioDescarga, String dirDriver) in C:\bdl\pronto\InterfazFlexicapture\prontoflexicapture.cs:line 6302
+   at ProntoWindowsService.Service1.DoWorkSoloPegatinas() in C:\bdl\pronto\ProntoWindowsService\Service1.cs:line 809
+WebDriver
+__________________________
+
+Log Entry : 
+08/02/2017 13:23:42
+Error in: . Error Message:hilo #6: busco imagenes
+__________________________
+
+Log Entry : 
+08/02/2017 13:23:42
+Error in: . Error Message:Leo listado de dirs
+__________________________
+
+Log Entry : 
+08/02/2017 13:23:42
+Error in: . Error Message:Leo Lote 02ago112654 mmorelli PV1
+__________________________
+
+Log Entry : 
+08/02/2017 13:23:42
+Error in: . Error Message:Leo Lote 02ago123607 fvelazquez PV4
+__________________________
+
+Log Entry : 
+08/02/2017 13:23:42
+Error in: . Error Message:Leo Lote 02ago124348 fvelazquez PV4
+__________________________
+
+Log Entry : 
+08/02/2017 13:23:42
+Error in: . Error Message:Filtro los marcados
+__________________________
+
+Log Entry : 
+08/02/2017 13:23:42
+Error in: . Error Message:hilo #9: busco imagenes
+__________________________
+
+Log Entry : 
+08/02/2017 13:23:42
+Error in: . Error Message:Leo listado de dirs
+__________________________
+
+Log Entry : 
+08/02/2017 13:23:42
+Error in: . Error Message:Leo Lote 02ago112654 mmorelli PV1
+__________________________
+
+Log Entry : 
+08/02/2017 13:23:42
+Error in: . Error Message:Leo Lote 02ago123607 fvelazquez PV4
+__________________________
+
+Log Entry : 
+08/02/2017 13:23:42
+Error in: . Error Message:Leo Lote 02ago124348 fvelazquez PV4
+__________________________
+
+Log Entry : 
+08/02/2017 13:23:42
+Error in: . Error Message:Filtro los marcados
+__________________________
+
+Log Entry : 
+08/02/2017 13:23:42
+Error in: . Error Message:Salgo
+__________________________
+
+Log Entry : 
+08/02/2017 13:23:42
+Error in: . Error Message:hilo #6: busco imagenes
+__________________________
+
+Log Entry : 
+08/02/2017 13:23:42
+Error in: . Error Message:Leo listado de dirs
+__________________________
+
+Log Entry : 
+08/02/2017 13:23:42
+Error in: . Error Message:Salgo
+__________________________
+
+Log Entry : 
+08/02/2017 13:23:42
+Error in: . Error Message:hilo #9: busco imagenes
+__________________________
+
+Log Entry : 
+08/02/2017 13:23:42
+Error in: . Error Message:Leo listado de dirs
+__________________________
+
+Log Entry : 
+08/02/2017 13:24:12
+Error in: . Error Message:hilo #6: busco imagenes
+__________________________
+
+Log Entry : 
+08/02/2017 13:24:12
+Error in: . Error Message:Leo listado de dirs
+__________________________
+
+Log Entry : 
+08/02/2017 13:24:12
+Error in: . Error Message:Leo Lote 02ago112654 mmorelli PV1
+__________________________
+
+Log Entry : 
+08/02/2017 13:24:12
+Error in: . Error Message:Leo Lote 02ago123607 fvelazquez PV4
+__________________________
+
+Log Entry : 
+08/02/2017 13:24:12
+Error in: . Error Message:Leo Lote 02ago124348 fvelazquez PV4
+__________________________
+
+Log Entry : 
+08/02/2017 13:24:12
+Error in: . Error Message:Filtro los marcados
+__________________________
+
+Log Entry : 
+08/02/2017 13:24:12
+Error in: . Error Message:hilo #9: busco imagenes
+__________________________
+
+Log Entry : 
+08/02/2017 13:24:12
+Error in: . Error Message:Leo listado de dirs
+__________________________
+
+Log Entry : 
+08/02/2017 13:24:12
+Error in: . Error Message:Leo Lote 02ago112654 mmorelli PV1
+__________________________
+
+Log Entry : 
+08/02/2017 13:24:12
+Error in: . Error Message:Leo Lote 02ago123607 fvelazquez PV4
+__________________________
+
+Log Entry : 
+08/02/2017 13:24:12
+Error in: . Error Message:Leo Lote 02ago124348 fvelazquez PV4
+__________________________
+
+Log Entry : 
+08/02/2017 13:24:12
+Error in: . Error Message:Filtro los marcados
+__________________________
+
+Log Entry : 
+08/02/2017 13:24:12
+Error in: . Error Message:Salgo
+__________________________
+
+Log Entry : 
+08/02/2017 13:24:12
+Error in: . Error Message:hilo #6: busco imagenes
+__________________________
+
+Log Entry : 
+08/02/2017 13:24:12
+Error in: . Error Message:Leo listado de dirs
+__________________________
+
+Log Entry : 
+08/02/2017 13:24:12
+Error in: . Error Message:Salgo
+__________________________
+
+Log Entry : 
+08/02/2017 13:24:12
+Error in: . Error Message:hilo #9: busco imagenes
+__________________________
+
+Log Entry : 
+08/02/2017 13:24:12
+Error in: . Error Message:Leo listado de dirs
+__________________________
+
+Log Entry : 
+08/02/2017 13:24:42
+Error in: . Error Message:hilo #6: busco imagenes
+__________________________
+
+Log Entry : 
+08/02/2017 13:24:42
+Error in: . Error Message:Leo listado de dirs
+__________________________
+
+Log Entry : 
+08/02/2017 13:24:42
+Error in: . Error Message:Leo Lote 02ago112654 mmorelli PV1
+__________________________
+
+Log Entry : 
+08/02/2017 13:24:42
+Error in: . Error Message:Leo Lote 02ago123607 fvelazquez PV4
+__________________________
+
+Log Entry : 
+08/02/2017 13:24:42
+Error in: . Error Message:Leo Lote 02ago124348 fvelazquez PV4
+__________________________
+
+Log Entry : 
+08/02/2017 13:24:42
+Error in: . Error Message:Filtro los marcados
+__________________________
+
+Log Entry : 
+08/02/2017 13:24:42
+Error in: . Error Message:hilo #9: busco imagenes
+__________________________
+
+Log Entry : 
+08/02/2017 13:24:42
+Error in: . Error Message:Leo listado de dirs
+__________________________
+
+Log Entry : 
+08/02/2017 13:24:42
+Error in: . Error Message:Leo Lote 02ago112654 mmorelli PV1
+__________________________
+
+Log Entry : 
+08/02/2017 13:24:42
+Error in: . Error Message:Leo Lote 02ago123607 fvelazquez PV4
+__________________________
+
+Log Entry : 
+08/02/2017 13:24:42
+Error in: . Error Message:Leo Lote 02ago124348 fvelazquez PV4
+__________________________
+
+Log Entry : 
+08/02/2017 13:24:42
+Error in: . Error Message:Filtro los marcados
+__________________________
+
+Log Entry : 
+08/02/2017 13:24:42
+Error in: . Error Message:Salgo
+__________________________
+
+Log Entry : 
+08/02/2017 13:24:42
+Error in: . Error Message:hilo #6: busco imagenes
+__________________________
+
+Log Entry : 
+08/02/2017 13:24:42
+Error in: . Error Message:Leo listado de dirs
+__________________________
+
+Log Entry : 
+08/02/2017 13:24:42
+Error in: . Error Message:Salgo
+__________________________
+
+Log Entry : 
+08/02/2017 13:24:42
+Error in: . Error Message:hilo #9: busco imagenes
+__________________________
+
+Log Entry : 
+08/02/2017 13:24:42
+Error in: . Error Message:Leo listado de dirs
+__________________________
+
+Log Entry : 
+08/02/2017 13:24:52
+Error in: . Error Message:System.Net.Mail.SmtpException
+Mailbox unavailable. The server response was: 5.4.5 Daily user sending quota exceeded. a123sm23979887qkc.0 - gsmtp
+   at System.Net.Mail.DataCommand.CheckResponse(SmtpStatusCode statusCode, String serverResponse)
+   at System.Net.Mail.DataCommand.Send(SmtpConnection conn)
+   at System.Net.Mail.SmtpTransport.SendMail(MailAddress sender, MailAddressCollection recipients, String deliveryNotify, SmtpFailedRecipientException& exception)
+   at System.Net.Mail.SmtpClient.Send(MailMessage message)
+   at ProntoFuncionesGenerales.MandaEmailSimple(String Para, String Asunto, String Cuerpo, String De, String SmtpServer, String SmtpUser, String SmtpPass, String sStringGenerarAdjunto, Int64 SmtpPort, Int32 EnableSSL, String CCO, String img)
+   at CartaDePorteManager.MandarMailDeError(Exception e) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:line 8538
+System
+__________________________
+
+Log Entry : 
+08/02/2017 13:24:52
+Error in: . Error Message:hilo #8: OpenQA.Selenium.WebDriverException: The HTTP request to the remote WebDriver server for URL http://localhost:61985/session/449fca4160e5b825003be1f9d5cf0f4a/element/0.636857261114598-1/click timed out after 60 seconds. ---> System.Net.WebException: The operation has timed out
+   at System.Net.HttpWebRequest.GetResponse()
+   at OpenQA.Selenium.Remote.HttpCommandExecutor.CreateResponse(WebRequest request)
+   --- End of inner exception stack trace ---
+   at OpenQA.Selenium.Remote.HttpCommandExecutor.CreateResponse(WebRequest request)
+   at OpenQA.Selenium.Remote.HttpCommandExecutor.Execute(Command commandToExecute)
+   at OpenQA.Selenium.Remote.DriverServiceCommandExecutor.Execute(Command commandToExecute)
+   at OpenQA.Selenium.Remote.RemoteWebDriver.Execute(String driverCommandToExecute, Dictionary`2 parameters)
+   at OpenQA.Selenium.Remote.RemoteWebElement.Click()
+   at ServicioCartaPorte.servi.UrenportSelenium_ConChromeHeadless(String directorioDescarga, String dirDriver) in C:\bdl\pronto\InterfazFlexicapture\prontoflexicapture.cs:line 6302
+   at ProntoWindowsService.Service1.DoWorkSoloPegatinas() in C:\bdl\pronto\ProntoWindowsService\Service1.cs:line 809
+__________________________
+
+Log Entry : 
+08/02/2017 13:24:52
+Error in: . Error Message:OpenQA.Selenium.WebDriverException
+The HTTP request to the remote WebDriver server for URL http://localhost:61985/session/449fca4160e5b825003be1f9d5cf0f4a/element/0.636857261114598-1/click timed out after 60 seconds.
+   at OpenQA.Selenium.Remote.HttpCommandExecutor.CreateResponse(WebRequest request)
+   at OpenQA.Selenium.Remote.HttpCommandExecutor.Execute(Command commandToExecute)
+   at OpenQA.Selenium.Remote.DriverServiceCommandExecutor.Execute(Command commandToExecute)
+   at OpenQA.Selenium.Remote.RemoteWebDriver.Execute(String driverCommandToExecute, Dictionary`2 parameters)
+   at OpenQA.Selenium.Remote.RemoteWebElement.Click()
+   at ServicioCartaPorte.servi.UrenportSelenium_ConChromeHeadless(String directorioDescarga, String dirDriver) in C:\bdl\pronto\InterfazFlexicapture\prontoflexicapture.cs:line 6302
+   at ProntoWindowsService.Service1.DoWorkSoloPegatinas() in C:\bdl\pronto\ProntoWindowsService\Service1.cs:line 809
+WebDriver
+__________________________
