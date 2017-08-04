@@ -2091,7 +2091,7 @@ Public Class ExcelImportadorManager
 
                     If (Not bEditadaManual) Then
 
-                        actua(.Observaciones, r(35))
+                        'actua(.Observaciones, r(35))
 
                         Try
                             .FechaArribo = DateTime.Parse(iisValidSqlDate(Left(r(3), 10), DateTime.Now))
