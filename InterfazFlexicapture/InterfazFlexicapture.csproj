@@ -51,9 +51,6 @@
     <Reference Include="BitMiracle.LibTiff.NET">
       <HintPath>..\prontoweb\Bin\BitMiracle.LibTiff.NET.dll</HintPath>
     </Reference>
-    <Reference Include="BusinessLogic">
-      <HintPath>..\packagesotros\BusinessLogic.dll</HintPath>
-    </Reference>
     <Reference Include="BusinessObject">
       <HintPath>..\packagesotros\BusinessObject.dll</HintPath>
     </Reference>
@@ -86,9 +83,6 @@
       <HintPath>..\..\packages\Newtonsoft.Json.7.0.1\lib\net40\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="PresentationCore" />
-    <Reference Include="ProntoMVC.Data">
-      <HintPath>..\packagesotros\ProntoMVC.Data.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
@@ -186,6 +180,16 @@
       <Isolated>False</Isolated>
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </COMReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BussinessLogic\BusinessLogic.vbproj">
+      <Project>{ab8bb713-ffa1-4440-b49b-1857e61367c9}</Project>
+      <Name>BusinessLogic</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Data\ProntoMVC.Data.csproj">
+      <Project>{2f9b9020-304c-44a6-bcc4-9e434c687d31}</Project>
+      <Name>ProntoMVC.Data</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />

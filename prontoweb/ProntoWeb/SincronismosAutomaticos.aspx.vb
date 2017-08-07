@@ -702,16 +702,18 @@ Partial Class SincronismosAutomaticos
 
 
 
-        's.EnviarSyngenta(HFSC.Value,
-        '                globalDesde, globalHasta,
-        '                ConfigurationManager.AppSettings("SyngentaServiceEndpoint"),
-        '                    ConfigurationManager.AppSettings("SyngentaServiceUser"),
-        '                    ConfigurationManager.AppSettings("SyngentaServicePass"),
-        '                    ConfigurationManager.AppSettings("SyngentaFTPdominio"),
-        '                    ConfigurationManager.AppSettings("SyngentaFTPdir"),
-        '                    ConfigurationManager.AppSettings("SyngentaFTPuser"),
-        '                    ConfigurationManager.AppSettings("SyngentaFTPpass"),
-        '                    DirApp)
+        s.EnviarSyngenta(HFSC.Value,
+                        globalDesde, globalHasta,
+                        ConfigurationManager.AppSettings("SyngentaServiceEndpoint"),
+                            ConfigurationManager.AppSettings("SyngentaServiceUser"),
+                            ConfigurationManager.AppSettings("SyngentaServicePass"),
+                            ConfigurationManager.AppSettings("SyngentaFTPdominio"),
+                            ConfigurationManager.AppSettings("SyngentaFTPdir"),
+                            ConfigurationManager.AppSettings("SyngentaFTPuser"),
+                            ConfigurationManager.AppSettings("SyngentaFTPpass"),
+                            DirApp)
+
+
     End Function
 
 
