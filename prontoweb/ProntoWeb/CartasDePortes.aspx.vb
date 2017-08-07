@@ -946,7 +946,7 @@ Partial Class CartasDePortes
 
 
 
-        CartaDePorteManager.BorrarPosiciones()
+        'CartaDePorteManager.BorrarPosiciones()
 
 
 
