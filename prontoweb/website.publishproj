@@ -19,9 +19,11 @@ Copyright (C) Microsoft Corporation. Todos los derechos reservados.
     <ProjectGuid>{4ea2c7ab-2d78-41f0-9d63-a23a53eba426}</ProjectGuid>
     <SourceWebPhysicalPath>$(MSBuildThisFileDirectory)</SourceWebPhysicalPath>
     <SourceWebVirtualPath>/ProntoWeb</SourceWebVirtualPath>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
-    <SourceWebProject>http://localhost:58911</SourceWebProject>
-    <SourceWebMetabasePath>/IISExpress/7.5/LM/W3SVC/8/ROOT</SourceWebMetabasePath>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <SourceWebProject>
+    </SourceWebProject>
+    <SourceWebMetabasePath>
+    </SourceWebMetabasePath>
   </PropertyGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

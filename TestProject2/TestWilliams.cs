@@ -878,7 +878,12 @@ namespace ProntoMVC.Tests
         {
 
 
-            //CartaDePorteManager.BorrarPosiciones(desde, hasta, puntoventa);
+
+            var desde = new DateTime(2017, 1, 1);
+            var hasta = new DateTime(2017, 1, 31);
+            var puntoventa = 1;
+
+            CartaDePorteManager.BorrarPosiciones(SC, desde, hasta, puntoventa);
 
 
         }
@@ -892,8 +897,8 @@ namespace ProntoMVC.Tests
             var s = new ServicioCartaPorte.servi();
 
 
-            var desde = new DateTime(2017, 1, 1);
-            var hasta = new DateTime(2017, 1, 31);
+            var desde = new DateTime(2017, 6, 1);
+            var hasta = new DateTime(2017, 8, 31);
 
             s.EnviarSyngenta(SC,
                             desde, hasta,

@@ -479,7 +479,7 @@ Public Class CartaDePorteManager
 
 
 
-    Public Shared Function DataTablePorCliente( _
+    Public Shared Function DataTablePorCliente(
             ByVal SC As String,
             ByVal ColumnaParaFiltrar As String,
             ByVal TextoParaFiltrar As String,
@@ -580,7 +580,7 @@ Public Class CartaDePorteManager
 
 
 
-    Public Shared Function DataTablePorClienteSQL( _
+    Public Shared Function DataTablePorClienteSQL(
             ByVal SC As String,
             ByVal ColumnaParaFiltrar As String,
             ByVal TextoParaFiltrar As String,
@@ -627,15 +627,15 @@ usuario As String, ConexBDLmaster As String,
 
 
 
-        Dim strsql = CartaDePorteManager.GetDataTableFiltradoYPaginado_CadenaSQL(SC, _
-                "", "", "", 1, 999999999, _
-                estado, QueContenga, idVendedor, idCorredor, _
-                idDestinatario, idIntermediario, _
-                 idRemComercial, idArticulo, idProcedencia, idDestino, _
-                AplicarANDuORalFiltro, _
-                               ModoExportacion, _
-            fechadesde, _
-                 fechahasta, _
+        Dim strsql = CartaDePorteManager.GetDataTableFiltradoYPaginado_CadenaSQL(SC,
+                "", "", "", 1, 999999999,
+                estado, QueContenga, idVendedor, idCorredor,
+                idDestinatario, idIntermediario,
+                 idRemComercial, idArticulo, idProcedencia, idDestino,
+                AplicarANDuORalFiltro,
+                               ModoExportacion,
+            fechadesde,
+                 fechahasta,
                 puntoventa, "", "Ambas", , , QueContenga2,
          -1, -1, 0, "", , "Todos")
 
@@ -659,16 +659,16 @@ usuario As String, ConexBDLmaster As String,
         If False Then
 
 
-            agrup = ";WITH cte AS " & _
-            "( " & _
-            "       SELECT *, " & _
-            "             ROW_NUMBER() OVER (PARTITION BY NumeroCartaDePorte,SubnumeroVagon ORDER BY IdCartaDePorte DESC) AS rn " & _
-            "       FROM ( " & _
-                     strsql & _
-            "       ) as cartas " & _
-            ") " & _
-            "SELECT * " & _
-            "FROM cte " & _
+            agrup = ";WITH cte AS " &
+            "( " &
+            "       SELECT *, " &
+            "             ROW_NUMBER() OVER (PARTITION BY NumeroCartaDePorte,SubnumeroVagon ORDER BY IdCartaDePorte DESC) AS rn " &
+            "       FROM ( " &
+                     strsql &
+            "       ) as cartas " &
+            ") " &
+            "SELECT * " &
+            "FROM cte " &
             "WHERE rn = 1 "
 
         Else
@@ -707,13 +707,13 @@ usuario As String, ConexBDLmaster As String,
 
         If clientes.Count > 0 Then
 
-            agrup &= " AND  (" & _
-                    IIf(chkTitular, " Vendedor IN (" & idsclientesql & " ) ", "0=1") & _
-                    IIf(chkIntermediario, " OR CuentaOrden1  IN (" & idsclientesql & " ) ", " OR 0=1") & _
-                    IIf(chkRemComercial, " OR CuentaOrden2 IN (" & idsclientesql & " ) ", " OR 0=1") & _
-                    IIf(chkClienteAuxiliar, " OR CuentaOrden2 IN (" & idsclientesql & " ) ", " OR 0=1") & _
-                    IIf(chkCorredor, " OR Corredor IN (" & idscorredorsql & " ) ", " OR 0=1") & _
-                    IIf(chkDestinatario, " OR Entregador IN (" & idsclientesql & " ) ", " OR 0=1") & _
+            agrup &= " AND  (" &
+                    IIf(chkTitular, " Vendedor IN (" & idsclientesql & " ) ", "0=1") &
+                    IIf(chkIntermediario, " OR CuentaOrden1  IN (" & idsclientesql & " ) ", " OR 0=1") &
+                    IIf(chkRemComercial, " OR CuentaOrden2 IN (" & idsclientesql & " ) ", " OR 0=1") &
+                    IIf(chkClienteAuxiliar, " OR CuentaOrden2 IN (" & idsclientesql & " ) ", " OR 0=1") &
+                    IIf(chkCorredor, " OR Corredor IN (" & idscorredorsql & " ) ", " OR 0=1") &
+                    IIf(chkDestinatario, " OR Entregador IN (" & idsclientesql & " ) ", " OR 0=1") &
                     ")"
 
         End If
@@ -4228,7 +4228,7 @@ usuario As String, ConexBDLmaster As String,
 
 
 
-                      
+
 
 
 
@@ -5914,7 +5914,7 @@ usuario As String, ConexBDLmaster As String,
 
         Dim outputImage As Bitmap = New Bitmap(outputImageWidth, outputImageHeight, System.Drawing.Imaging.PixelFormat.Format32bppArgb)
 
-        Using graphics As Graphics = graphics.FromImage(outputImage)
+        Using graphics As Graphics = Graphics.FromImage(outputImage)
 
             graphics.DrawImage(firstImage, New Rectangle(New Point(), firstImage.Size),
                 New Rectangle(New Point(), firstImage.Size), GraphicsUnit.Pixel)
@@ -11465,7 +11465,7 @@ usuario As String, ConexBDLmaster As String,
                               c.SubnumeroDeFacturacion = myCartaDePorte.SubnumeroDeFacturacion And
                               c.IdCartaDePorte <> myCartaDePorte.Id And
                               c.FechaAnulacion IsNot Nothing
-                              Select c).FirstOrDefault()
+                             Select c).FirstOrDefault()
 
             If l IsNot Nothing Then Throw New Exception("Ya existe una carta con el mismo número y subnúmero de facturación")
         End Using
@@ -15324,8 +15324,8 @@ usuario As String, ConexBDLmaster As String,
             Dim db = New LinqBDLmasterDataContext(Encriptar(scbdlmaster))
 
             Dim u As aspnet_User = (From p In db.aspnet_Users
-                        Where p.UserName = usuario
-                        Select p).SingleOrDefault
+                                    Where p.UserName = usuario
+                                    Select p).SingleOrDefault
 
 
             Dim clis = UserDatosExtendidosManager.TraerClientesRelacionadoslDelUsuario(usuario, scbdlmaster).Replace("-", "")
@@ -17580,12 +17580,12 @@ usuario As String, ConexBDLmaster As String,
         'lo que hace que tarde es el ultimo where con el like que tiene el comodin al principio
         'lo que hace que tarde es el ultimo where con el like que tiene el comodin al principio
         'lo que hace que tarde es el ultimo where con el like que tiene el comodin al principio
-        Dim s = "select * from log    where  (IdComprobante=" & idcarta & " AND  Detalle='Tabla : CartaPorte' )  " & _
-                                        " or   (IdComprobante=" & idcarta & " AND  Tipo='IMAG') " & _
+        Dim s = "select * from log    where  (IdComprobante=" & idcarta & " AND  Detalle='Tabla : CartaPorte' )  " &
+                                        " or   (IdComprobante=" & idcarta & " AND  Tipo='IMAG') " &
                                         " or   (IdComprobante=" & idcarta & " AND  Tipo='IMPUR') "
 
-        If bTraerImputaciones Then s = s & " or (detalle like 'Imputacion de IdCartaPorte" & idcarta & "C%' ) " & _
-                                        " or  (detalle like 'Desimputacion%" & idcarta & "-%' ) " & _
+        If bTraerImputaciones Then s = s & " or (detalle like 'Imputacion de IdCartaPorte" & idcarta & "C%' ) " &
+                                        " or  (detalle like 'Desimputacion%" & idcarta & "-%' ) " &
                                         " or (detalle like 'Se desimputa la carta id" & idcarta & " %')  "
 
         s += "   ORDER BY FechaRegistro ASC"
@@ -17624,25 +17624,25 @@ usuario As String, ConexBDLmaster As String,
 
 
 
-        Dim s As String = _
-    "            exec sp_executesql N'SELECT '''' as Producto, '''' as UsuarioIngreso, [t10].[IdCartaDePorte] AS [id], [t10].[NumeroCartaDePorte], [t10].[NumeroSubfijo], [t10].[SubnumeroVagon], [t10].[FechaArribo], [t10].[FechaModificacion], [t10].[FechaDescarga], [t10].[Observaciones] AS [Obs], [t10].[NetoFinal], [t10].[value] AS [TitularDesc], [t10].[value2] AS [IntermediarioDesc], [t10].[value3] AS [RComercialDesc], [t10].[value4] AS [CorredorDesc], [t10].[value5] AS [DestinatarioDesc], [t10].[value6] AS [ProcedenciaDesc], [t10].[value7] AS [DestinoDesc] " & _
-    "  FROM ( " & _
-    "  SELECT ROW_NUMBER() OVER (ORDER BY [t9].[FechaModificacion] DESC) AS [ROW_NUMBER], [t9].[IdCartaDePorte], [t9].[NumeroCartaDePorte], [t9].[NumeroSubfijo], [t9].[SubnumeroVagon], [t9].[FechaArribo], [t9].[FechaModificacion], [t9].[FechaDescarga], [t9].[Observaciones], [t9].[NetoFinal], [t9].[value], [t9].[value2], [t9].[value3], [t9].[value4], [t9].[value5], [t9].[value6], [t9].[value7] " & _
-    "  FROM ( " & _
-    "  SELECT [t0].[IdCartaDePorte], [t0].[NumeroCartaDePorte], [t0].[NumeroSubfijo], [t0].[SubnumeroVagon], [t0].[FechaArribo], [t0].[FechaModificacion], [t0].[FechaDescarga], [t0].[Observaciones], [t0].[NetoFinal], [t2].[RazonSocial] AS [value], [t4].[RazonSocial] AS [value2], [t5].[RazonSocial] AS [value3], [t6].[Nombre] AS [value4], [t3].[RazonSocial] AS [value5], [t8].[Nombre] AS [value6], [t7].[Descripcion] AS [value7] " & _
-    "  FROM [dbo].[CartasDePorte] AS [t0] " & _
-    "   LEFT OUTER JOIN [dbo].[Articulos] AS [t1] ON ([t1].[IdArticulo]) = [t0].[IdArticulo] " & _
-    "  LEFT OUTER JOIN [dbo].[Clientes] AS [t2] ON ([t2].[IdCliente]) = [t0].[Vendedor] " & _
-    "  LEFT OUTER JOIN [dbo].[Clientes] AS [t3] ON ([t3].[IdCliente]) = [t0].[Entregador] " & _
-    "  LEFT OUTER JOIN [dbo].[Clientes] AS [t4] ON ([t4].[IdCliente]) = [t0].[CuentaOrden1] " & _
-    "  LEFT OUTER JOIN [dbo].[Clientes] AS [t5] ON ([t5].[IdCliente]) = [t0].[CuentaOrden2] " & _
-    "  LEFT OUTER JOIN [dbo].[Vendedores] AS [t6] ON ([t6].[IdVendedor]) = [t0].[Corredor] " & _
-    "  LEFT OUTER JOIN [dbo].[WilliamsDestinos] AS [t7] ON ([t7].[IdWilliamsDestino]) = [t0].[Destino] " & _
-    "  LEFT OUTER JOIN [dbo].[Localidades] AS [t8] ON [t8].[IdLocalidad] = (CONVERT(Int,[t0].[Procedencia])) " & _
-    " where FechaModificacion > ''" & FechaANSI(DateAdd(DateInterval.Day, -7, Today)) & "'' " & _
-    "  ) AS [t9] " & _
-    "  ) AS [t10] " & _
-    "  WHERE [t10].[ROW_NUMBER] BETWEEN @p0 + 1 AND @p0 + @p1 " & _
+        Dim s As String =
+    "            exec sp_executesql N'SELECT '''' as Producto, '''' as UsuarioIngreso, [t10].[IdCartaDePorte] AS [id], [t10].[NumeroCartaDePorte], [t10].[NumeroSubfijo], [t10].[SubnumeroVagon], [t10].[FechaArribo], [t10].[FechaModificacion], [t10].[FechaDescarga], [t10].[Observaciones] AS [Obs], [t10].[NetoFinal], [t10].[value] AS [TitularDesc], [t10].[value2] AS [IntermediarioDesc], [t10].[value3] AS [RComercialDesc], [t10].[value4] AS [CorredorDesc], [t10].[value5] AS [DestinatarioDesc], [t10].[value6] AS [ProcedenciaDesc], [t10].[value7] AS [DestinoDesc] " &
+    "  FROM ( " &
+    "  SELECT ROW_NUMBER() OVER (ORDER BY [t9].[FechaModificacion] DESC) AS [ROW_NUMBER], [t9].[IdCartaDePorte], [t9].[NumeroCartaDePorte], [t9].[NumeroSubfijo], [t9].[SubnumeroVagon], [t9].[FechaArribo], [t9].[FechaModificacion], [t9].[FechaDescarga], [t9].[Observaciones], [t9].[NetoFinal], [t9].[value], [t9].[value2], [t9].[value3], [t9].[value4], [t9].[value5], [t9].[value6], [t9].[value7] " &
+    "  FROM ( " &
+    "  SELECT [t0].[IdCartaDePorte], [t0].[NumeroCartaDePorte], [t0].[NumeroSubfijo], [t0].[SubnumeroVagon], [t0].[FechaArribo], [t0].[FechaModificacion], [t0].[FechaDescarga], [t0].[Observaciones], [t0].[NetoFinal], [t2].[RazonSocial] AS [value], [t4].[RazonSocial] AS [value2], [t5].[RazonSocial] AS [value3], [t6].[Nombre] AS [value4], [t3].[RazonSocial] AS [value5], [t8].[Nombre] AS [value6], [t7].[Descripcion] AS [value7] " &
+    "  FROM [dbo].[CartasDePorte] AS [t0] " &
+    "   LEFT OUTER JOIN [dbo].[Articulos] AS [t1] ON ([t1].[IdArticulo]) = [t0].[IdArticulo] " &
+    "  LEFT OUTER JOIN [dbo].[Clientes] AS [t2] ON ([t2].[IdCliente]) = [t0].[Vendedor] " &
+    "  LEFT OUTER JOIN [dbo].[Clientes] AS [t3] ON ([t3].[IdCliente]) = [t0].[Entregador] " &
+    "  LEFT OUTER JOIN [dbo].[Clientes] AS [t4] ON ([t4].[IdCliente]) = [t0].[CuentaOrden1] " &
+    "  LEFT OUTER JOIN [dbo].[Clientes] AS [t5] ON ([t5].[IdCliente]) = [t0].[CuentaOrden2] " &
+    "  LEFT OUTER JOIN [dbo].[Vendedores] AS [t6] ON ([t6].[IdVendedor]) = [t0].[Corredor] " &
+    "  LEFT OUTER JOIN [dbo].[WilliamsDestinos] AS [t7] ON ([t7].[IdWilliamsDestino]) = [t0].[Destino] " &
+    "  LEFT OUTER JOIN [dbo].[Localidades] AS [t8] ON [t8].[IdLocalidad] = (CONVERT(Int,[t0].[Procedencia])) " &
+    " where FechaModificacion > ''" & FechaANSI(DateAdd(DateInterval.Day, -7, Today)) & "'' " &
+    "  ) AS [t9] " &
+    "  ) AS [t10] " &
+    "  WHERE [t10].[ROW_NUMBER] BETWEEN @p0 + 1 AND @p0 + @p1 " &
     "  ORDER BY [t10].[ROW_NUMBER]',N'@p0 int,@p1 int',@p0=0,@p1=8"
         'al agregar lo de ultimasemana, el cambio es brutal en el uso del índice
         'al agregar lo de ultimasemana, el cambio es brutal en el uso del índice
@@ -17657,22 +17657,22 @@ usuario As String, ConexBDLmaster As String,
 
 
 
-        Dim s2 = "SELECT TOP 10  " & _
-    "                                                 IdCartaDePorte as Id  " & _
-    "  , '' as Producto " & _
-    "             , '' as Obs " & _
-    "                     , '' as   TitularDesc " & _
-    "            , '' as IntermediarioDesc " & _
-    "             , '' as RComercialDesc " & _
-    "             , '' as CorredorDesc " & _
-    "             , '' as DestinatarioDesc  " & _
-    " , '' as ProcedenciaDesc  " & _
-    "             , '' as DestinoDesc  " & _
-    "            , '' as UsuarioIngreso  " & _
-    "            ,NumeroCartaDePorte, NumeroSubfijo, SubnumeroVagon,  " & _
-    "            FechaArribo, FechaModificacion, FechaDescarga,  " & _
-    "            NetoFinal ,  " & _
-    "            Anulada " & _
+        Dim s2 = "SELECT TOP 10  " &
+    "                                                 IdCartaDePorte as Id  " &
+    "  , '' as Producto " &
+    "             , '' as Obs " &
+    "                     , '' as   TitularDesc " &
+    "            , '' as IntermediarioDesc " &
+    "             , '' as RComercialDesc " &
+    "             , '' as CorredorDesc " &
+    "             , '' as DestinatarioDesc  " &
+    " , '' as ProcedenciaDesc  " &
+    "             , '' as DestinoDesc  " &
+    "            , '' as UsuarioIngreso  " &
+    "            ,NumeroCartaDePorte, NumeroSubfijo, SubnumeroVagon,  " &
+    "            FechaArribo, FechaModificacion, FechaDescarga,  " &
+    "            NetoFinal ,  " &
+    "            Anulada " &
     " FROM CartasDePorte ORDER BY IdCartaDePorte DESC"
 
 
@@ -17690,18 +17690,40 @@ usuario As String, ConexBDLmaster As String,
 
     Public Shared Function BorrarPosiciones(SC As String, desde As Date, hasta As Date, puntoventa As Integer)
 
-        'For Each id As Long In S
 
-        '    If id = 0 Then Continue For
+        Dim db As ProntoMVC.Data.Models.DemoProntoEntities = New ProntoMVC.Data.Models.DemoProntoEntities(ProntoMVC.Data.Models.Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC)))
 
-        '    'flagHayChecksTildados = True
-        '    Dim cdp As CartaDePorte = CartaDePorteManager.GetItem(HFSC.Value, id)
-        '    If GetEstado(HFSC.Value, cdp) = enumCDPestado.Posicion Then
-        '        cdp.Anulada = "SI"
-        '        EntidadManager.LogPronto(HFSC.Value, id, "CartaPorte Anulacion de posiciones ", Session(SESSIONPRONTO_UserName))
-        '        CartaDePorteManager.Anular(HFSC.Value, cdp, Session(SESSIONPRONTO_glbIdUsuario), Session(SESSIONPRONTO_UserName))
-        '    End If
-        'Next
+        'enumCDPestado.DescargasMasFacturadas
+
+        Dim dbcartas = (From c In db.fSQL_GetDataTableFiltradoYPaginado(
+                                                    Nothing, 0, enumCDPestado.Posicion,
+                                                    Nothing, -1,
+                                                    -1, -1, -1, -1,
+                                                    -1, -1, -1, FiltroANDOR.FiltroOR, "Ambos",
+                                                    desde, hasta, puntoventa,
+                                                    Nothing, False, Nothing, Nothing, -1,
+                                                     Nothing, Nothing, Nothing, Nothing)
+                        Select c.IdCartaDePorte).Take(10000).ToList
+
+
+        Dim usuario = "", idusuario = -1
+
+
+        For Each id As Long In dbcartas
+
+            If id = 0 Then Continue For
+
+            'flagHayChecksTildados = True
+            Dim cdp As CartaDePorte = CartaDePorteManager.GetItem(SC, id)
+            If GetEstado(SC, cdp) = enumCDPestado.Posicion Then
+                cdp.Anulada = "SI"
+                EntidadManager.LogPronto(SC, id, "CartaPorte Anulacion de posiciones ", Usuario)
+                CartaDePorteManager.Anular(SC, cdp, idusuario, usuario)
+            Else
+                'como pudo llegar aca?
+
+            End If
+        Next
 
     End Function
 
@@ -22343,7 +22365,7 @@ Public Class LogicaInformesWilliams
                         And (i.IdArticulo = idarticulo) _
                         And (i.Puerto = idDestino) _
                         And (
-                                (i.IdExportadorDestino = idDestinatario) _
+                                (i.IdExportadorDestino = idDestinatario)
                         ) _
                         And If(i.Anulada, "NO") <> "SI"
                     Select Tipo = f(i.Tipo),
@@ -22447,7 +22469,7 @@ Public Class LogicaInformesWilliams
                     And (i.IdArticulo = IdArticulo) _
                     And (i.Puerto = IdDestinoWilliams) _
                     And (
-                            (i.IdExportadorDestino = idcliente) _
+                            (i.IdExportadorDestino = idcliente)
                         ) _
                     And If(i.Anulada, "NO") <> "SI"
         '///////////////////////////////////////////////
@@ -22619,7 +22641,7 @@ Public Class UserDatosExtendidosManager
 
                 Dim uext = (From p In db.UserDatosExtendidos
                             Join u In db.aspnet_Users On u.UserId Equals p.UserId
-                                Where u.UserName = UserName
+                            Where u.UserName = UserName
                             Select p).SingleOrDefault
 
                 Return uext.TextoAuxiliar
@@ -22637,9 +22659,9 @@ Public Class UserDatosExtendidosManager
         Using db = New BDLMasterEntities(Auxiliares.FormatearConexParaEntityFrameworkBDLMASTER_2(Encriptar(ConexBDLmaster)))
 
             Dim ue = (From p In db.UserDatosExtendidos
-                        Join u In db.aspnet_Users On u.UserId Equals p.UserId
-                            Where u.UserName = UserName
-                        Select p).SingleOrDefault
+                      Join u In db.aspnet_Users On u.UserId Equals p.UserId
+                      Where u.UserName = UserName
+                      Select p).SingleOrDefault
 
 
             If IsNothing(ue) Then
