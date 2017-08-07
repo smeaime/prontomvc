@@ -1,0 +1,322 @@
+
+Log Entry : 
+08/07/2017 14:27:43
+Error in: http://localhost:50769/ProntoWeb/CartasDePortes.aspx?tipo=Todas. Error Message:Mariano
+__________________________
+
+Log Entry : 
+08/07/2017 14:28:10
+Error in: http://localhost:50769/ProntoWeb/SincronismosAutomaticos.aspx. Error Message:Error en la fecha
+__________________________
+
+Log Entry : 
+08/07/2017 14:28:10
+Error in: http://localhost:50769/ProntoWeb/SincronismosAutomaticos.aspx. Error Message:6/08/2017
+__________________________
+
+Log Entry : 
+08/07/2017 14:28:10
+Error in: http://localhost:50769/ProntoWeb/SincronismosAutomaticos.aspx. Error Message:6/08/2017
+__________________________
+
+Log Entry : 
+08/07/2017 14:28:10
+Error in: http://localhost:50769/ProntoWeb/SincronismosAutomaticos.aspx. Error Message:Error en la fecha:6/08/2017;6/08/2017;System.FormatException: No se puede reconocer la cadena como valor DateTime válido.
+   en System.DateTimeParse.ParseExact(String s, String format, DateTimeFormatInfo dtfi, DateTimeStyles style)
+   en System.DateTime.ParseExact(String s, String format, IFormatProvider provider)
+   en SincronismosAutomaticos.enviarTodos(Boolean bVistaPrevia) en C:\bdl\pronto\prontoweb\ProntoWeb\SincronismosAutomaticos.aspx.vb:línea 421
+__________________________
+
+Log Entry : 
+08/07/2017 14:28:15
+Error in: http://localhost:50769/ProntoWeb/CartasDePortes.aspx?tipo=Todas. Error Message:Mariano
+__________________________
+
+Log Entry : 
+08/07/2017 14:28:21
+Error in: http://localhost:50769/ProntoWeb/CartasDePortes.aspx?tipo=Todas. Error Message:Mariano
+__________________________
+
+Log Entry : 
+08/07/2017 14:28:33
+Error in: http://localhost:50769/ProntoWeb/CartasDePortes.aspx?tipo=Todas. Error Message:Mariano
+__________________________
+
+Log Entry : 
+08/07/2017 14:28:38
+Error in: http://localhost:50769/ProntoWeb/CartasDePortes.aspx?tipo=Todas. Error Message:Mariano
+__________________________
+
+Log Entry : 
+08/07/2017 14:28:50
+Error in: http://localhost:50769/ProntoWeb/CartasDePortes.aspx?tipo=Todas. Error Message:Mariano
+__________________________
+
+Log Entry : 
+08/07/2017 14:29:37
+Error in: http://localhost:50769/ProntoWeb/SincronismosAutomaticos.aspx. Error Message:Error en la fecha
+__________________________
+
+Log Entry : 
+08/07/2017 14:29:37
+Error in: http://localhost:50769/ProntoWeb/SincronismosAutomaticos.aspx. Error Message:6/08/2017
+__________________________
+
+Log Entry : 
+08/07/2017 14:29:37
+Error in: http://localhost:50769/ProntoWeb/SincronismosAutomaticos.aspx. Error Message:6/08/2017
+__________________________
+
+Log Entry : 
+08/07/2017 14:29:37
+Error in: http://localhost:50769/ProntoWeb/SincronismosAutomaticos.aspx. Error Message:Error en la fecha:6/08/2017;6/08/2017;System.FormatException: No se puede reconocer la cadena como valor DateTime válido.
+   en System.DateTimeParse.ParseExact(String s, String format, DateTimeFormatInfo dtfi, DateTimeStyles style)
+   en System.DateTime.ParseExact(String s, String format, IFormatProvider provider)
+   en SincronismosAutomaticos.enviarTodos(Boolean bVistaPrevia) en C:\bdl\pronto\prontoweb\ProntoWeb\SincronismosAutomaticos.aspx.vb:línea 421
+__________________________
+
+Log Entry : 
+08/07/2017 14:30:17
+Error in: http://localhost:50769/ProntoWeb/SincronismosAutomaticos.aspx. Error Message:Error en la fecha
+__________________________
+
+Log Entry : 
+08/07/2017 14:30:17
+Error in: http://localhost:50769/ProntoWeb/SincronismosAutomaticos.aspx. Error Message:6/08/2017
+__________________________
+
+Log Entry : 
+08/07/2017 14:30:17
+Error in: http://localhost:50769/ProntoWeb/SincronismosAutomaticos.aspx. Error Message:6/08/2017
+__________________________
+
+Log Entry : 
+08/07/2017 14:30:17
+Error in: http://localhost:50769/ProntoWeb/SincronismosAutomaticos.aspx. Error Message:Error en la fecha:6/08/2017;6/08/2017;System.FormatException: No se puede reconocer la cadena como valor DateTime válido.
+   en System.DateTimeParse.ParseExact(String s, String format, DateTimeFormatInfo dtfi, DateTimeStyles style)
+   en System.DateTime.ParseExact(String s, String format, IFormatProvider provider)
+   en SincronismosAutomaticos.enviarTodos(Boolean bVistaPrevia) en C:\bdl\pronto\prontoweb\ProntoWeb\SincronismosAutomaticos.aspx.vb:línea 421
+__________________________
+
+Log Entry : 
+08/07/2017 14:30:54
+Error in: http://localhost:50769/ProntoWeb/SincronismosAutomaticos.aspx. Error Message:Generando sincro para Syngenta
+__________________________
+
+Log Entry : 
+08/07/2017 14:30:56
+Error in: http://localhost:50769/ProntoWeb/SincronismosAutomaticos.aspx. Error Message:Syngenta renglones sincro 0
+__________________________
+
+Log Entry : 
+08/07/2017 14:31:38
+Error in: http://localhost:50769/ProntoWeb/SincronismosAutomaticos.aspx. Error Message:Generando sincro para Syngenta
+__________________________
+
+Log Entry : 
+08/07/2017 14:31:47
+Error in: http://localhost:50769/ProntoWeb/SincronismosAutomaticos.aspx. Error Message:System.Data.StrongTypingException
+The value for column 'Observaciones' in table 'wCartasDePorte_TX_InformesCorregido' is DBNull.
+   en WillyInformesDataSet.wCartasDePorte_TX_InformesCorregidoRow.get_Observaciones() en C:\bdl\pronto\BussinessLogic\WillyInformesDataSet7.Designer.vb:línea 3031
+   en Pronto.ERP.Bll.SincronismosWilliamsManager.GenerarSincro(String sSincronismo, String& sErroresRef, String SC, String sUrlDominio, String& sTituloFiltroUsado, enumCDPestado estado, String QueContenga, Int32 idVendedor, Int32 idCorredor, Int32 idDestinatario, Int32 idIntermediario, Int32 idRComercial, Int32 idArticulo, Int32 idProcedencia, Int32 idDestino, FiltroANDOR AplicarANDuORalFiltro, String ModoExportacion, DateTime sDesde, DateTime sHasta, Int32 puntoventa, String optDivisionSyngenta, Boolean bTraerDuplicados, String Contrato, String QueContenga2, Int32 idClienteAuxiliar, Int32& registrosFiltrados, Int64 maximumRows) en C:\bdl\pronto\BussinessLogic\SincronismosWilliamsManager.vb:línea 664
+BusinessLogic
+__________________________
+
+Log Entry : 
+08/07/2017 14:31:47
+Error in: http://localhost:50769/ProntoWeb/SincronismosAutomaticos.aspx. Error Message:Syngenta renglones sincro 828
+__________________________
+
+Log Entry : 
+08/07/2017 14:31:50
+Error in: http://localhost:50769/ProntoWeb/SincronismosAutomaticos.aspx. Error Message:System.Data.StrongTypingException
+The value for column 'Humedad' in table 'wCartasDePorte_TX_InformesCorregido' is DBNull.
+   en WillyInformesDataSet.wCartasDePorte_TX_InformesCorregidoRow.get_Humedad() en C:\bdl\pronto\BussinessLogic\WillyInformesDataSet7.Designer.vb:línea 3383
+   en Pronto.ERP.Bll.SincronismosWilliamsManager.Sincronismo_Syngenta(wCartasDePorte_TX_InformesCorregidoDataTable pDataTable, String titulo, String sWHERE, String& sErrores, String SC) en C:\bdl\pronto\BussinessLogic\SincronismosWilliamsManager.vb:línea 11555
+   en Pronto.ERP.Bll.SincronismosWilliamsManager.GenerarSincro(String sSincronismo, String& sErroresRef, String SC, String sUrlDominio, String& sTituloFiltroUsado, enumCDPestado estado, String QueContenga, Int32 idVendedor, Int32 idCorredor, Int32 idDestinatario, Int32 idIntermediario, Int32 idRComercial, Int32 idArticulo, Int32 idProcedencia, Int32 idDestino, FiltroANDOR AplicarANDuORalFiltro, String ModoExportacion, DateTime sDesde, DateTime sHasta, Int32 puntoventa, String optDivisionSyngenta, Boolean bTraerDuplicados, String Contrato, String QueContenga2, Int32 idClienteAuxiliar, Int32& registrosFiltrados, Int64 maximumRows) en C:\bdl\pronto\BussinessLogic\SincronismosWilliamsManager.vb:línea 1762
+BusinessLogic
+__________________________
+
+Log Entry : 
+08/07/2017 14:32:19
+Error in: http://localhost:50769/ProntoWeb/SincronismosAutomaticos.aspx. Error Message:System.Data.StrongTypingException
+The value for column 'Humedad' in table 'wCartasDePorte_TX_InformesCorregido' is DBNull.
+   en WillyInformesDataSet.wCartasDePorte_TX_InformesCorregidoRow.get_Humedad() en C:\bdl\pronto\BussinessLogic\WillyInformesDataSet7.Designer.vb:línea 3383
+   en Pronto.ERP.Bll.SincronismosWilliamsManager.Sincronismo_Syngenta(wCartasDePorte_TX_InformesCorregidoDataTable pDataTable, String titulo, String sWHERE, String& sErrores, String SC) en C:\bdl\pronto\BussinessLogic\SincronismosWilliamsManager.vb:línea 11555
+   en Pronto.ERP.Bll.SincronismosWilliamsManager.GenerarSincro(String sSincronismo, String& sErroresRef, String SC, String sUrlDominio, String& sTituloFiltroUsado, enumCDPestado estado, String QueContenga, Int32 idVendedor, Int32 idCorredor, Int32 idDestinatario, Int32 idIntermediario, Int32 idRComercial, Int32 idArticulo, Int32 idProcedencia, Int32 idDestino, FiltroANDOR AplicarANDuORalFiltro, String ModoExportacion, DateTime sDesde, DateTime sHasta, Int32 puntoventa, String optDivisionSyngenta, Boolean bTraerDuplicados, String Contrato, String QueContenga2, Int32 idClienteAuxiliar, Int32& registrosFiltrados, Int64 maximumRows) en C:\bdl\pronto\BussinessLogic\SincronismosWilliamsManager.vb:línea 1926
+   en SincronismosAutomaticos.Enviar(String sincro, String sEmail, String& sErr, Boolean bvistaPrevia) en C:\bdl\pronto\prontoweb\ProntoWeb\SincronismosAutomaticos.aspx.vb:línea 580
+BusinessLogic
+__________________________
+
+Log Entry : 
+08/07/2017 14:32:57
+Error in: http://localhost:50769/ProntoWeb/SincronismosAutomaticos.aspx. Error Message:Generando sincro para Syngenta
+__________________________
+
+Log Entry : 
+08/07/2017 14:33:28
+Error in: http://localhost:50769/ProntoWeb/SincronismosAutomaticos.aspx. Error Message:System.Data.StrongTypingException
+The value for column 'Observaciones' in table 'wCartasDePorte_TX_InformesCorregido' is DBNull.
+   en WillyInformesDataSet.wCartasDePorte_TX_InformesCorregidoRow.get_Observaciones() en C:\bdl\pronto\BussinessLogic\WillyInformesDataSet7.Designer.vb:línea 3031
+   en Pronto.ERP.Bll.SincronismosWilliamsManager.GenerarSincro(String sSincronismo, String& sErroresRef, String SC, String sUrlDominio, String& sTituloFiltroUsado, enumCDPestado estado, String QueContenga, Int32 idVendedor, Int32 idCorredor, Int32 idDestinatario, Int32 idIntermediario, Int32 idRComercial, Int32 idArticulo, Int32 idProcedencia, Int32 idDestino, FiltroANDOR AplicarANDuORalFiltro, String ModoExportacion, DateTime sDesde, DateTime sHasta, Int32 puntoventa, String optDivisionSyngenta, Boolean bTraerDuplicados, String Contrato, String QueContenga2, Int32 idClienteAuxiliar, Int32& registrosFiltrados, Int64 maximumRows) en C:\bdl\pronto\BussinessLogic\SincronismosWilliamsManager.vb:línea 664
+BusinessLogic
+__________________________
+
+Log Entry : 
+08/07/2017 14:33:34
+Error in: http://localhost:50769/ProntoWeb/SincronismosAutomaticos.aspx. Error Message:Syngenta renglones sincro 828
+__________________________
+
+Log Entry : 
+08/07/2017 14:33:53
+Error in: http://localhost:50769/ProntoWeb/SincronismosAutomaticos.aspx. Error Message:System.Data.StrongTypingException
+The value for column 'Humedad' in table 'wCartasDePorte_TX_InformesCorregido' is DBNull.
+   en WillyInformesDataSet.wCartasDePorte_TX_InformesCorregidoRow.get_Humedad() en C:\bdl\pronto\BussinessLogic\WillyInformesDataSet7.Designer.vb:línea 3383
+   en Pronto.ERP.Bll.SincronismosWilliamsManager.Sincronismo_Syngenta(wCartasDePorte_TX_InformesCorregidoDataTable pDataTable, String titulo, String sWHERE, String& sErrores, String SC) en C:\bdl\pronto\BussinessLogic\SincronismosWilliamsManager.vb:línea 11555
+   en Pronto.ERP.Bll.SincronismosWilliamsManager.GenerarSincro(String sSincronismo, String& sErroresRef, String SC, String sUrlDominio, String& sTituloFiltroUsado, enumCDPestado estado, String QueContenga, Int32 idVendedor, Int32 idCorredor, Int32 idDestinatario, Int32 idIntermediario, Int32 idRComercial, Int32 idArticulo, Int32 idProcedencia, Int32 idDestino, FiltroANDOR AplicarANDuORalFiltro, String ModoExportacion, DateTime sDesde, DateTime sHasta, Int32 puntoventa, String optDivisionSyngenta, Boolean bTraerDuplicados, String Contrato, String QueContenga2, Int32 idClienteAuxiliar, Int32& registrosFiltrados, Int64 maximumRows) en C:\bdl\pronto\BussinessLogic\SincronismosWilliamsManager.vb:línea 1762
+BusinessLogic
+__________________________
+
+Log Entry : 
+08/07/2017 14:33:53
+Error in: http://localhost:50769/ProntoWeb/SincronismosAutomaticos.aspx. Error Message:System.Data.StrongTypingException
+The value for column 'Humedad' in table 'wCartasDePorte_TX_InformesCorregido' is DBNull.
+   en WillyInformesDataSet.wCartasDePorte_TX_InformesCorregidoRow.get_Humedad() en C:\bdl\pronto\BussinessLogic\WillyInformesDataSet7.Designer.vb:línea 3383
+   en Pronto.ERP.Bll.SincronismosWilliamsManager.Sincronismo_Syngenta(wCartasDePorte_TX_InformesCorregidoDataTable pDataTable, String titulo, String sWHERE, String& sErrores, String SC) en C:\bdl\pronto\BussinessLogic\SincronismosWilliamsManager.vb:línea 11555
+   en Pronto.ERP.Bll.SincronismosWilliamsManager.GenerarSincro(String sSincronismo, String& sErroresRef, String SC, String sUrlDominio, String& sTituloFiltroUsado, enumCDPestado estado, String QueContenga, Int32 idVendedor, Int32 idCorredor, Int32 idDestinatario, Int32 idIntermediario, Int32 idRComercial, Int32 idArticulo, Int32 idProcedencia, Int32 idDestino, FiltroANDOR AplicarANDuORalFiltro, String ModoExportacion, DateTime sDesde, DateTime sHasta, Int32 puntoventa, String optDivisionSyngenta, Boolean bTraerDuplicados, String Contrato, String QueContenga2, Int32 idClienteAuxiliar, Int32& registrosFiltrados, Int64 maximumRows) en C:\bdl\pronto\BussinessLogic\SincronismosWilliamsManager.vb:línea 1926
+   en SincronismosAutomaticos.Enviar(String sincro, String sEmail, String& sErr, Boolean bvistaPrevia) en C:\bdl\pronto\prontoweb\ProntoWeb\SincronismosAutomaticos.aspx.vb:línea 580
+BusinessLogic
+__________________________
+
+Log Entry : 
+08/07/2017 14:38:07
+Error in: http://localhost:50769/ProntoWeb/Principal.aspx. Error Message:Mariano esta logueado, pero lo redirijo al login porque faltan los datos de session. No deberia mejor mandarlo a SeleccionarEmpresa? Ademas, no hago el LogOut y le queda el cookie!!!
+__________________________
+
+Log Entry : 
+08/07/2017 14:38:08
+Error in: http://localhost:50769/ProntoWeb/CartasDePortes.aspx?tipo=Todas. Error Message:Mariano
+__________________________
+
+Log Entry : 
+08/07/2017 14:42:05
+Error in: http://localhost:50769/ProntoWeb/CartasDePortes.aspx?tipo=Todas. Error Message:Mariano
+__________________________
+
+Log Entry : 
+08/07/2017 14:48:47
+Error in: http://localhost:50769/ProntoWeb/SincronismosAutomaticos.aspx. Error Message:Error en la fecha
+__________________________
+
+Log Entry : 
+08/07/2017 14:48:47
+Error in: http://localhost:50769/ProntoWeb/SincronismosAutomaticos.aspx. Error Message:6/08/2017
+__________________________
+
+Log Entry : 
+08/07/2017 14:48:47
+Error in: http://localhost:50769/ProntoWeb/SincronismosAutomaticos.aspx. Error Message:6/08/2017
+__________________________
+
+Log Entry : 
+08/07/2017 14:48:47
+Error in: http://localhost:50769/ProntoWeb/SincronismosAutomaticos.aspx. Error Message:Error en la fecha:6/08/2017;6/08/2017;System.FormatException: No se puede reconocer la cadena como valor DateTime válido.
+   en System.DateTimeParse.ParseExact(String s, String format, DateTimeFormatInfo dtfi, DateTimeStyles style)
+   en System.DateTime.ParseExact(String s, String format, IFormatProvider provider)
+   en SincronismosAutomaticos.enviarTodos(Boolean bVistaPrevia) en C:\bdl\pronto\prontoweb\ProntoWeb\SincronismosAutomaticos.aspx.vb:línea 421
+__________________________
+
+Log Entry : 
+08/07/2017 14:50:09
+Error in: http://localhost:50769/ProntoWeb/SincronismosAutomaticos.aspx. Error Message:Generando sincro para Syngenta
+__________________________
+
+Log Entry : 
+08/07/2017 14:50:29
+Error in: http://localhost:50769/ProntoWeb/SincronismosAutomaticos.aspx. Error Message:System.Data.StrongTypingException
+The value for column 'Observaciones' in table 'wCartasDePorte_TX_InformesCorregido' is DBNull.
+   en WillyInformesDataSet.wCartasDePorte_TX_InformesCorregidoRow.get_Observaciones() en C:\bdl\pronto\BussinessLogic\WillyInformesDataSet7.Designer.vb:línea 3031
+   en Pronto.ERP.Bll.SincronismosWilliamsManager.GenerarSincro(String sSincronismo, String& sErroresRef, String SC, String sUrlDominio, String& sTituloFiltroUsado, enumCDPestado estado, String QueContenga, Int32 idVendedor, Int32 idCorredor, Int32 idDestinatario, Int32 idIntermediario, Int32 idRComercial, Int32 idArticulo, Int32 idProcedencia, Int32 idDestino, FiltroANDOR AplicarANDuORalFiltro, String ModoExportacion, DateTime sDesde, DateTime sHasta, Int32 puntoventa, String optDivisionSyngenta, Boolean bTraerDuplicados, String Contrato, String QueContenga2, Int32 idClienteAuxiliar, Int32& registrosFiltrados, Int64 maximumRows) en C:\bdl\pronto\BussinessLogic\SincronismosWilliamsManager.vb:línea 664
+BusinessLogic
+__________________________
+
+Log Entry : 
+08/07/2017 14:50:29
+Error in: http://localhost:50769/ProntoWeb/SincronismosAutomaticos.aspx. Error Message:Syngenta renglones sincro 828
+__________________________
+
+Log Entry : 
+08/07/2017 14:52:41
+Error in: http://localhost:50769/ProntoWeb/SincronismosAutomaticos.aspx. Error Message:System.Data.StrongTypingException
+The value for column 'Humedad' in table 'wCartasDePorte_TX_InformesCorregido' is DBNull.
+   en WillyInformesDataSet.wCartasDePorte_TX_InformesCorregidoRow.get_Humedad() en C:\bdl\pronto\BussinessLogic\WillyInformesDataSet7.Designer.vb:línea 3383
+   en Pronto.ERP.Bll.SincronismosWilliamsManager.Sincronismo_Syngenta(wCartasDePorte_TX_InformesCorregidoDataTable pDataTable, String titulo, String sWHERE, String& sErrores, String SC) en C:\bdl\pronto\BussinessLogic\SincronismosWilliamsManager.vb:línea 11555
+   en Pronto.ERP.Bll.SincronismosWilliamsManager.GenerarSincro(String sSincronismo, String& sErroresRef, String SC, String sUrlDominio, String& sTituloFiltroUsado, enumCDPestado estado, String QueContenga, Int32 idVendedor, Int32 idCorredor, Int32 idDestinatario, Int32 idIntermediario, Int32 idRComercial, Int32 idArticulo, Int32 idProcedencia, Int32 idDestino, FiltroANDOR AplicarANDuORalFiltro, String ModoExportacion, DateTime sDesde, DateTime sHasta, Int32 puntoventa, String optDivisionSyngenta, Boolean bTraerDuplicados, String Contrato, String QueContenga2, Int32 idClienteAuxiliar, Int32& registrosFiltrados, Int64 maximumRows) en C:\bdl\pronto\BussinessLogic\SincronismosWilliamsManager.vb:línea 1762
+BusinessLogic
+__________________________
+
+Log Entry : 
+08/07/2017 14:52:46
+Error in: http://localhost:50769/ProntoWeb/SincronismosAutomaticos.aspx. Error Message:System.Data.StrongTypingException
+The value for column 'Humedad' in table 'wCartasDePorte_TX_InformesCorregido' is DBNull.
+   en WillyInformesDataSet.wCartasDePorte_TX_InformesCorregidoRow.get_Humedad() en C:\bdl\pronto\BussinessLogic\WillyInformesDataSet7.Designer.vb:línea 3383
+   en Pronto.ERP.Bll.SincronismosWilliamsManager.Sincronismo_Syngenta(wCartasDePorte_TX_InformesCorregidoDataTable pDataTable, String titulo, String sWHERE, String& sErrores, String SC) en C:\bdl\pronto\BussinessLogic\SincronismosWilliamsManager.vb:línea 11555
+   en Pronto.ERP.Bll.SincronismosWilliamsManager.GenerarSincro(String sSincronismo, String& sErroresRef, String SC, String sUrlDominio, String& sTituloFiltroUsado, enumCDPestado estado, String QueContenga, Int32 idVendedor, Int32 idCorredor, Int32 idDestinatario, Int32 idIntermediario, Int32 idRComercial, Int32 idArticulo, Int32 idProcedencia, Int32 idDestino, FiltroANDOR AplicarANDuORalFiltro, String ModoExportacion, DateTime sDesde, DateTime sHasta, Int32 puntoventa, String optDivisionSyngenta, Boolean bTraerDuplicados, String Contrato, String QueContenga2, Int32 idClienteAuxiliar, Int32& registrosFiltrados, Int64 maximumRows) en C:\bdl\pronto\BussinessLogic\SincronismosWilliamsManager.vb:línea 1926
+   en SincronismosAutomaticos.Enviar(String sincro, String sEmail, String& sErr, Boolean bvistaPrevia) en C:\bdl\pronto\prontoweb\ProntoWeb\SincronismosAutomaticos.aspx.vb:línea 580
+BusinessLogic
+__________________________
+
+Log Entry : 
+08/07/2017 15:41:07
+Error in: http://localhost:50769/ProntoWeb/Principal.aspx. Error Message:Mariano esta logueado, pero lo redirijo al login porque faltan los datos de session. No deberia mejor mandarlo a SeleccionarEmpresa? Ademas, no hago el LogOut y le queda el cookie!!!
+__________________________
+
+Log Entry : 
+08/07/2017 15:41:08
+Error in: http://localhost:50769/ProntoWeb/CartasDePortes.aspx?tipo=Todas. Error Message:Mariano
+__________________________
+
+Log Entry : 
+08/07/2017 15:42:14
+Error in: http://localhost:50769/ProntoWeb/SincronismosAutomaticos.aspx. Error Message:Generando sincro para Syngenta
+__________________________
+
+Log Entry : 
+08/07/2017 15:42:29
+Error in: http://localhost:50769/ProntoWeb/SincronismosAutomaticos.aspx. Error Message:System.Data.StrongTypingException
+The value for column 'Observaciones' in table 'wCartasDePorte_TX_InformesCorregido' is DBNull.
+   en WillyInformesDataSet.wCartasDePorte_TX_InformesCorregidoRow.get_Observaciones() en C:\bdl\pronto\BussinessLogic\WillyInformesDataSet7.Designer.vb:línea 3031
+   en Pronto.ERP.Bll.SincronismosWilliamsManager.GenerarSincro(String sSincronismo, String& sErroresRef, String SC, String sUrlDominio, String& sTituloFiltroUsado, enumCDPestado estado, String QueContenga, Int32 idVendedor, Int32 idCorredor, Int32 idDestinatario, Int32 idIntermediario, Int32 idRComercial, Int32 idArticulo, Int32 idProcedencia, Int32 idDestino, FiltroANDOR AplicarANDuORalFiltro, String ModoExportacion, DateTime sDesde, DateTime sHasta, Int32 puntoventa, String optDivisionSyngenta, Boolean bTraerDuplicados, String Contrato, String QueContenga2, Int32 idClienteAuxiliar, Int32& registrosFiltrados, Int64 maximumRows) en C:\bdl\pronto\BussinessLogic\SincronismosWilliamsManager.vb:línea 664
+BusinessLogic
+__________________________
+
+Log Entry : 
+08/07/2017 15:42:29
+Error in: http://localhost:50769/ProntoWeb/SincronismosAutomaticos.aspx. Error Message:Syngenta renglones sincro 828
+__________________________
+
+Log Entry : 
+08/07/2017 15:43:26
+Error in: http://localhost:50769/ProntoWeb/SincronismosAutomaticos.aspx. Error Message:System.Data.StrongTypingException
+The value for column 'HumedadDesnormalizada' in table 'wCartasDePorte_TX_InformesCorregido' is DBNull.
+   en WillyInformesDataSet.wCartasDePorte_TX_InformesCorregidoRow.get_HumedadDesnormalizada() en C:\bdl\pronto\BussinessLogic\WillyInformesDataSet7.Designer.vb:línea 4151
+   en Pronto.ERP.Bll.SincronismosWilliamsManager.Sincronismo_Syngenta(wCartasDePorte_TX_InformesCorregidoDataTable pDataTable, String titulo, String sWHERE, String& sErrores, String SC) en C:\bdl\pronto\BussinessLogic\SincronismosWilliamsManager.vb:línea 11563
+   en Pronto.ERP.Bll.SincronismosWilliamsManager.GenerarSincro(String sSincronismo, String& sErroresRef, String SC, String sUrlDominio, String& sTituloFiltroUsado, enumCDPestado estado, String QueContenga, Int32 idVendedor, Int32 idCorredor, Int32 idDestinatario, Int32 idIntermediario, Int32 idRComercial, Int32 idArticulo, Int32 idProcedencia, Int32 idDestino, FiltroANDOR AplicarANDuORalFiltro, String ModoExportacion, DateTime sDesde, DateTime sHasta, Int32 puntoventa, String optDivisionSyngenta, Boolean bTraerDuplicados, String Contrato, String QueContenga2, Int32 idClienteAuxiliar, Int32& registrosFiltrados, Int64 maximumRows) en C:\bdl\pronto\BussinessLogic\SincronismosWilliamsManager.vb:línea 1762
+BusinessLogic
+__________________________
+
+Log Entry : 
+08/07/2017 15:43:26
+Error in: http://localhost:50769/ProntoWeb/SincronismosAutomaticos.aspx. Error Message:System.Data.StrongTypingException
+The value for column 'HumedadDesnormalizada' in table 'wCartasDePorte_TX_InformesCorregido' is DBNull.
+   en WillyInformesDataSet.wCartasDePorte_TX_InformesCorregidoRow.get_HumedadDesnormalizada() en C:\bdl\pronto\BussinessLogic\WillyInformesDataSet7.Designer.vb:línea 4151
+   en Pronto.ERP.Bll.SincronismosWilliamsManager.Sincronismo_Syngenta(wCartasDePorte_TX_InformesCorregidoDataTable pDataTable, String titulo, String sWHERE, String& sErrores, String SC) en C:\bdl\pronto\BussinessLogic\SincronismosWilliamsManager.vb:línea 11563
+   en Pronto.ERP.Bll.SincronismosWilliamsManager.GenerarSincro(String sSincronismo, String& sErroresRef, String SC, String sUrlDominio, String& sTituloFiltroUsado, enumCDPestado estado, String QueContenga, Int32 idVendedor, Int32 idCorredor, Int32 idDestinatario, Int32 idIntermediario, Int32 idRComercial, Int32 idArticulo, Int32 idProcedencia, Int32 idDestino, FiltroANDOR AplicarANDuORalFiltro, String ModoExportacion, DateTime sDesde, DateTime sHasta, Int32 puntoventa, String optDivisionSyngenta, Boolean bTraerDuplicados, String Contrato, String QueContenga2, Int32 idClienteAuxiliar, Int32& registrosFiltrados, Int64 maximumRows) en C:\bdl\pronto\BussinessLogic\SincronismosWilliamsManager.vb:línea 1926
+   en SincronismosAutomaticos.Enviar(String sincro, String sEmail, String& sErr, Boolean bvistaPrevia) en C:\bdl\pronto\prontoweb\ProntoWeb\SincronismosAutomaticos.aspx.vb:línea 580
+BusinessLogic
+__________________________
+
+Log Entry : 
+08/07/2017 15:46:13
+Error in: http://localhost:50769/ProntoWeb/CartasDePortes.aspx?tipo=Todas. Error Message:Mariano
+__________________________

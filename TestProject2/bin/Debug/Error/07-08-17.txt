@@ -121,3 +121,34 @@ Error in: . Error Message:OpenQA.Selenium.WebDriverException: The HTTP request t
    en OpenQA.Selenium.Remote.RemoteWebElement.Click()
    en ServicioCartaPorte.servi.UrenportSelenium_ConChromeHeadless(String directorioDescarga, String dirDriver) en C:\bdl\pronto\InterfazFlexicapture\prontoflexicapture.cs:línea 6335
 __________________________
+
+Log Entry : 
+08/07/2017 15:46:45
+Error in: . Error Message:System.TimeoutException
+El canal de solicitud agotó el tiempo de espera mientras esperaba una respuesta después de 00:00:58.9086732. Aumente el valor de tiempo de espera pasado a la llamada a Request, o bien aumente el valor de SendTimeout en el enlace. El tiempo asignado a esta operación puede haber sido una parte de un tiempo de espera mayor.
+
+Server stack trace: 
+   en System.ServiceModel.Channels.RequestChannel.Request(Message message, TimeSpan timeout)
+   en System.ServiceModel.Dispatcher.RequestChannelBinder.Send(Message message, TimeSpan timeout)
+   en System.ServiceModel.Channels.ServiceChannel.Call(String action, Boolean oneway, ProxyOperationRuntime operation, Object[] ins, Object[] outs, TimeSpan timeout)
+   en System.ServiceModel.Channels.ServiceChannelProxy.InvokeService(IMethodCallMessage methodCall, ProxyOperationRuntime operation)
+   en System.ServiceModel.Channels.ServiceChannelProxy.Invoke(IMessage message)
+
+Exception rethrown at [0]: 
+   en System.Runtime.Remoting.Proxies.RealProxy.HandleReturnMessage(IMessage reqMsg, IMessage retMsg)
+   en System.Runtime.Remoting.Proxies.RealProxy.PrivateInvoke(MessageData& msgData, Int32 type)
+   en InterfazFlexicapture.ServiceReferenceSyngenta.LoadDeclarationSoap_send_out_asy.LoadDeclarationSoap_send_out_asy(LoadDeclarationSoap_send_out_asy1 request)
+   en InterfazFlexicapture.ServiceReferenceSyngenta.LoadDeclarationSoap_send_out_asyClient.InterfazFlexicapture.ServiceReferenceSyngenta.LoadDeclarationSoap_send_out_asy.LoadDeclarationSoap_send_out_asy(LoadDeclarationSoap_send_out_asy1 request) en C:\bdl\pronto\InterfazFlexicapture\Service References\ServiceReferenceSyngenta\Reference.cs:línea 499
+   en InterfazFlexicapture.ServiceReferenceSyngenta.LoadDeclarationSoap_send_out_asyClient.LoadDeclarationSoap_send_out_asy(DT_DeliveryDelivery[] MT_Delivery) en C:\bdl\pronto\InterfazFlexicapture\Service References\ServiceReferenceSyngenta\Reference.cs:línea 505
+   en ServicioCartaPorte.servi.WebServiceSyngenta(List`1 dbcartas, String endpointStr, String UserName, String Password) en C:\bdl\pronto\InterfazFlexicapture\prontoflexicapture.cs:línea 3858
+mscorlib
+__________________________
+
+Log Entry : 
+08/07/2017 15:47:25
+Error in: . Error Message:System.Net.WebException
+No es posible conectar con el servidor remoto
+   en System.Net.FtpWebRequest.GetRequestStream()
+   en ServicioCartaPorte.servi.UploadFtpFile(String ftpsitio, String folderName, String fileName, String user, String pass) en C:\bdl\pronto\InterfazFlexicapture\prontoflexicapture.cs:línea 4079
+System
+__________________________
