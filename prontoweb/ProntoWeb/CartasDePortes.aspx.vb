@@ -942,12 +942,17 @@ Partial Class CartasDePortes
     Protected Sub LinkButton1_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles LinkButton1.Click
 
 
-        Dim s() As String = Split(ListaDeCDPTildados(), ",") 'y este está trayendo otro renglon!
+        'Dim s() As String = Split(ListaDeCDPTildados(), ",") 'y este está trayendo otro renglon!
 
 
+        Dim puntoventa = Val(cmbPuntoVenta.SelectedValue)
+        If puntoventa = -1 Then puntoventa = 0
 
-        'CartaDePorteManager.BorrarPosiciones()
 
+        CartaDePorteManager.BorrarPosiciones(HFSC.Value,
+                                             iisValidSqlDate(txtFechaDesde.Text, #1/1/1753#),
+                                             iisValidSqlDate(txtFechaHasta.Text, #1/1/2100#),
+                                             puntoventa)
 
 
 
