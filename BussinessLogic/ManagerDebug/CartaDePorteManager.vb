@@ -17688,7 +17688,7 @@ usuario As String, ConexBDLmaster As String,
 
 
 
-    Public Shared Function BorrarPosiciones()
+    Public Shared Function BorrarPosiciones(SC As String, desde As Date, hasta As Date, puntoventa As Integer)
 
         'For Each id As Long In S
 
@@ -17704,6 +17704,7 @@ usuario As String, ConexBDLmaster As String,
         'Next
 
     End Function
+
 
 
 
