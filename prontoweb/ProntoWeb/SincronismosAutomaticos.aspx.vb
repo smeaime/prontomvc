@@ -700,8 +700,6 @@ Partial Class SincronismosAutomaticos
 
         's.EnviarSyngenta( )
 
-
-
         s.EnviarSyngenta(HFSC.Value,
                         globalDesde, globalHasta,
                         ConfigurationManager.AppSettings("SyngentaServiceEndpoint"),

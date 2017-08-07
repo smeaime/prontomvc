@@ -93,7 +93,7 @@ EndProject
 Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "prontoweb", "prontoweb\", "{00E21C39-77D5-4A7E-AB17-FBFFBF74FF1C}"
 	ProjectSection(WebsiteProperties) = preProject
 		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.5"
-		ProjectReferences = "{ab8bb713-ffa1-4440-b49b-1857e61367c9}|BusinessLogic.dll;{2F9B9020-304C-44A6-BCC4-9E434C687D31}|ProntoMVC.Data.dll;{cca1e32e-7c60-4312-b521-11a6e4ccfca2}|InterfazFlexicapture.dll;"
+		ProjectReferences = "{2f9b9020-304c-44a6-bcc4-9e434c687d31}|ProntoMVC.Data.dll;"
 		Debug.AspNetCompiler.VirtualPath = "/localhost_50769"
 		Debug.AspNetCompiler.PhysicalPath = "prontoweb\"
 		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_50769\"

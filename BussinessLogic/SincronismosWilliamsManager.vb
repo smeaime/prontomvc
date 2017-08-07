@@ -11552,9 +11552,22 @@ Namespace Pronto.ERP.Bll
                     '44	PBonHume	10	Porcentaje bonificación humedad (dos (2) decimales)		Derecha	694
                     '45	KgsBonHu	10	Kilos bonificación humedad		Derecha	704
 
-                    sb &= String.Format("{0:F1}", .Humedad).PadLeft(10) 'PorHume	STRING(10)	Porcentaje humedad (un (1) decimal))    666)    675
+                    If .IsHumedadNull Then
+                        sb &= String.Format("{0:F1}", 0).PadLeft(10) 'PorHume	STRING(10)	Porcentaje humedad (un (1) decimal))    666)    675
+                    Else
+                        sb &= String.Format("{0:F1}", .Humedad).PadLeft(10) 'PorHume	STRING(10)	Porcentaje humedad (un (1) decimal))    666)    675
+                    End If
+
+
                     sb &= cero.ToString.PadLeft(10) 'PorMemaHumedad	STRING(10)	Porcentaje merma humedad (dos (2) decimales))    676)    685
-                    sb &= Int(.HumedadDesnormalizada).ToString.PadLeft(10) 'KgsHume	STRING(10)	Kilos humedad (sin decimales))    686)    695
+
+                    If .IsHumedadDesnormalizadaNull Then
+                        sb &= cero.ToString.PadLeft(10) 'KgsHume	STRING(10)	Kilos humedad (sin decimales))    686)    695
+                    Else
+                        sb &= Int(.HumedadDesnormalizada).ToString.PadLeft(10)
+                    End If
+
+
                     sb &= Left(cero.ToString, 10).PadLeft(10) 'PBonHume	STRING(10)	Porcentaje bonificación humedad (dos (2) decimales))    696)    705
                     sb &= Left(cero.ToString, 10).PadLeft(10) 'KgsBonHu	STRING(10)	Kilos bonificación humedad)    706)    715
 
