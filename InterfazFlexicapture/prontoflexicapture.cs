@@ -3719,7 +3719,7 @@ Formato localidad-provincia	destination	x
                     xmlcp.corredor_CUIT = dbcp.CorredorCUIT2.Replace("-", "");
 
 
-                xmlcp.delivery_date = dbcp.FechaDescarga.Value.ToString("ddMMyyyy");
+                xmlcp.delivery_date = (dbcp.FechaDescarga != null) ? dbcp.FechaDescarga.Value.ToString("ddMMyyyy") : "";
                 xmlcp.delivery_type = "CP";
                 xmlcp.destinatario = dbcp.DestinatarioDesc;
                 xmlcp.destinatario_CUIT = dbcp.DestinatarioCUIT.NullSafeToString().Replace("-", "");
@@ -4019,6 +4019,38 @@ Formato localidad-provincia	destination	x
 
 
         }
+
+
+
+
+        public virtual void EnviarSyngenta(string SC, DateTime fechadesde, DateTime fechahasta,
+                                                string endpointStr, string UserName, string Password,
+                                                 string ftpsitio, string folderName,
+                                                 string user, string pass, string DirApp)
+        {
+
+            const int idcliente = 4333;  // syngenta
+
+            var dbcartas = CartaDePorteManager.ListadoSegunCliente(SC, idcliente, fechadesde, fechahasta, CartaDePorteManager.enumCDPestado.Todas);
+
+            var s = new ServicioCartaPorte.servi();
+            var x = s.WebServiceSyngenta(dbcartas, endpointStr, UserName, Password);
+
+
+            var DIRFTP = DirApp + @"\DataBackupear\";
+            var archivoExcel = DIRFTP + "Syngenta_" + DateTime.Now.ToString("ddMMMyyyy_HHmmss") + ".xlsx";
+
+
+            GenerarExcelSyngentaWebService(x, archivoExcel);
+
+
+            UploadFtpFile(ftpsitio, folderName, archivoExcel, user, pass);
+
+
+
+        }
+
+
 
 
 
@@ -6268,7 +6300,7 @@ order by kilos desc
                 System.IO.File.Delete(directorioDescarga + @"\urenport.xls");
             }
             catch (Exception x)
-           {
+            {
                 ErrHandler2.WriteError(x);
             }
 
@@ -6322,7 +6354,7 @@ order by kilos desc
                     System.Threading.Thread.Sleep(1000 * 15);
 
 
-                    System.IO.File.Move(directorioDescarga + @"\urenport.xls", directorioDescarga + @"\urenport_" + DateTime.Now.ToString("ddMMMyyyy_HHmmss")  +".xls");
+                    System.IO.File.Move(directorioDescarga + @"\urenport.xls", directorioDescarga + @"\urenport_" + DateTime.Now.ToString("ddMMMyyyy_HHmmss") + ".xls");
 
                 }
                 catch (Exception e)

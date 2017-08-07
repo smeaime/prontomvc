@@ -855,13 +855,20 @@ namespace ProntoMVC.Tests
         #endregion
 
 
-        //        [10:59, 27/7/2017] Andy: te paso el top 5                        
-        //[10:59, 27/7/2017] Andy: que es todo lo que queda en prog de williams
-        // [10:59, 27 / 7 / 2017]Andy: 28265	FACTURACION FUTUROS Y OPCIONES
-        //38061	No mostrar conflictos en el paso 2 cuando no es au
-        //42685	Ranking de clientes - No facturado
-        //29606	Alta de clientes por OCR
-        //32279	RENUMERACION CLIENTES
+
+//28265	FACTURACION FUTUROS Y OPCIONES
+//42952	ELIMINAR CAMIONES EN POSICION
+//42950	Web Service Syngenta - Enviar por FTP
+//38061	No mostrar conflictos en el paso 2 cuando no es au
+//42685	Ranking de clientes - No facturado
+//29606	Alta de clientes por OCR
+
+
+
+        [TestMethod]
+        public void que_el_servicio_avise_si_esta_usando_un_directorio_inexistente()
+        {
+        }
 
 
 
@@ -871,21 +878,43 @@ namespace ProntoMVC.Tests
         {
 
 
-            CartaDePorteManager.BorrarPosiciones();
+            //CartaDePorteManager.BorrarPosiciones(desde, hasta, puntoventa);
 
 
         }
 
 
+
+        [TestMethod]
+        public void syngenta_webservice_ftp_42950_2()
+        {
+
+            var s = new ServicioCartaPorte.servi();
+
+
+            var desde = new DateTime(2017, 1, 1);
+            var hasta = new DateTime(2017, 1, 31);
+
+            s.EnviarSyngenta(SC,
+                            desde, hasta,
+                            ConfigurationManager.AppSettings["SyngentaServiceEndpoint"],
+                            ConfigurationManager.AppSettings["SyngentaServiceUser"],
+                            ConfigurationManager.AppSettings["SyngentaServicePass"],
+                            ConfigurationManager.AppSettings["SyngentaFTPdominio"],
+                            ConfigurationManager.AppSettings["SyngentaFTPdir"],
+                            ConfigurationManager.AppSettings["SyngentaFTPuser"],
+                            ConfigurationManager.AppSettings["SyngentaFTPpass"],
+                            DirApp);
+
+
+        }
+
+
+
         [TestMethod]
         public void syngenta_webservice_ftp_42950()
         {
-
-            //            sFTP: 192.208.44.90
-            //Carpeta: /UAT/Ready
-            //Usuario: sappo_test
-            //Password: 4R04475j
-
+            
 
             string archivoExcel = @"C:\bdl\pronto\docstest\Syngenta_10feb2017_115941.xlsx";
 
@@ -893,20 +922,16 @@ namespace ProntoMVC.Tests
 
             s.UploadFtpFile("goragora.com.ar", "/public_ftp/incoming", archivoExcel, "maruxs", "ns5aK!cvai0C");
 
-            //s.CopyFileFTP("ftp://192.208.44.90/", "/UAT/Ready", archivoExcel, "sappo_test", "4R04475j");
+            //s.UploadFtpFile("192.208.44.90", "/UAT/Ready", archivoExcel, "sappo_test", "4R04475j");
             s.UploadFtpFile(ConfigurationManager.AppSettings["SyngentaFTPdominio"],
                             ConfigurationManager.AppSettings["SyngentaFTPdir"],
                             archivoExcel,
                             ConfigurationManager.AppSettings["SyngentaFTPuser"],
                             ConfigurationManager.AppSettings["SyngentaFTPpass"]);
+
+
+
             
-
-
-
-            s.CopyFileFTP(archivoExcel, "username", "password#");   // 4 horas
-
-
-
 
         }
 
@@ -1053,8 +1078,8 @@ Error in: https://prontoweb.williamsentregas.com.ar/ProntoWeb/CDPFacturacion.asp
             //Assert.AreEqual(0, f.RetencionIBrutos1);
 
             object primerId = 0, ultimoId = 0;
-            object pag = 1, sesionId=0;
-           
+            object pag = 1, sesionId = 0;
+
 
 
             var gv = new System.Web.UI.WebControls.GridView();
@@ -1074,14 +1099,14 @@ Error in: https://prontoweb.williamsentregas.com.ar/ProntoWeb/CDPFacturacion.asp
                                                      SC, ref pag, ref sesionId,
                                                    8, PuntoVenta,
                                                     desde,
-                                                    hasta, 
+                                                    hasta,
                                                      "", "", optFacturarA, ""
                                                      , SC, "", "",
                                                     "", "", "", "",
                                                     "", "", txtBuscar, "",
                                                      "", "",
                                                      0, 0, "", ref errLog,
-                                                     "" , "",
+                                                     "", "",
                                                      ref filas, ref slinks, sesionId.ToString());
 
 
@@ -1260,7 +1285,7 @@ Error in: https://prontoweb.williamsentregas.com.ar/ProntoWeb/CDPFacturacion.asp
             var s = new ServicioCartaPorte.servi();
             string dir = DirApp + @"\Temp\Pegatinas\";
 
-            s.UrenportSelenium_ConChromeHeadless(dir, @"C:\Users\Mariano\Desktop");
+            s.UrenportSelenium_ConChromeHeadless(dir, @"c:\bdl\pronto\InterfazFlexicapture\");
 
             //s.CerealnetSeleniumConPhantomJS(DirApp);
         }
@@ -1273,7 +1298,7 @@ Error in: https://prontoweb.williamsentregas.com.ar/ProntoWeb/CDPFacturacion.asp
             var s = new ServicioCartaPorte.servi();
             string dir = DirApp + @"\Temp\Pegatinas\";
 
-            s.CerealnetSelenium_ConChromeHeadless(dir, @"C:\Users\Mariano\Desktop");
+            s.CerealnetSelenium_ConChromeHeadless(dir, @"c:\bdl\pronto\InterfazFlexicapture\");
 
             //s.CerealnetSeleniumConPhantomJS(DirApp);
         }
@@ -5089,7 +5114,7 @@ System.Drawing
             /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             string zipFile;
-            zipFile = @"C:\Users\Administrador\Documents\bdl\pronto\docstest\1271214feb2017.tif";
+            zipFile = @"C:\bdl\pronto\docstest\1271214feb2017.tif";
             /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -10036,7 +10061,7 @@ Adjunto un ejemplo que tiene cartas de porte de 8 entregadores que no son Willia
         void VaciarDirectorioTemp()
         {
 
-            System.IO.DirectoryInfo di = new DirectoryInfo(@"C:\Users\Administrador\Documents\bdl\pronto\prontoweb\Temp");
+            System.IO.DirectoryInfo di = new DirectoryInfo(@"C:\bdl\pronto\prontoweb\Temp");
 
             foreach (FileInfo file in di.GetFiles())
             {

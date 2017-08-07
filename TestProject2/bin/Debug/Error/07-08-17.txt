@@ -1,0 +1,123 @@
+
+Log Entry : 
+08/07/2017 09:37:49
+Error in: . Error Message:System.Net.WebException
+No es posible conectar con el servidor remoto
+   en System.Net.FtpWebRequest.GetRequestStream()
+   en ServicioCartaPorte.servi.UploadFtpFile(String ftpsitio, String folderName, String fileName, String user, String pass) en C:\bdl\pronto\InterfazFlexicapture\prontoflexicapture.cs:línea 4047
+System
+__________________________
+
+Log Entry : 
+08/07/2017 10:42:41
+Error in: . Error Message:System.ServiceModel.EndpointNotFoundException
+No había ningún extremo escuchando en https://oasis-pi-nonprod.syngenta.com/uat/XISOAPAdapter/MessageServlet?senderParty=&senderService=Srv_BIT_BarterService&receiverParty=&receiverService=&interface=LoadDeclarationSoap_send_out_asy&interfaceNamespace=urn:broker:o2c:s:global:delivery:loaddeclaration:100 que pudiera aceptar el mensaje. La causa suele ser una dirección o una acción SOAP incorrecta. Consulte InnerException, si está presente, para obtener más información.
+
+Server stack trace: 
+   en System.ServiceModel.Channels.HttpOutput.WebRequestHttpOutput.GetOutputStream()
+   en System.ServiceModel.Channels.HttpOutput.Send(TimeSpan timeout)
+   en System.ServiceModel.Channels.HttpChannelFactory`1.HttpRequestChannel.HttpChannelRequest.SendRequest(Message message, TimeSpan timeout)
+   en System.ServiceModel.Channels.RequestChannel.Request(Message message, TimeSpan timeout)
+   en System.ServiceModel.Dispatcher.RequestChannelBinder.Send(Message message, TimeSpan timeout)
+   en System.ServiceModel.Channels.ServiceChannel.Call(String action, Boolean oneway, ProxyOperationRuntime operation, Object[] ins, Object[] outs, TimeSpan timeout)
+   en System.ServiceModel.Channels.ServiceChannelProxy.InvokeService(IMethodCallMessage methodCall, ProxyOperationRuntime operation)
+   en System.ServiceModel.Channels.ServiceChannelProxy.Invoke(IMessage message)
+
+Exception rethrown at [0]: 
+   en System.Runtime.Remoting.Proxies.RealProxy.HandleReturnMessage(IMessage reqMsg, IMessage retMsg)
+   en System.Runtime.Remoting.Proxies.RealProxy.PrivateInvoke(MessageData& msgData, Int32 type)
+   en InterfazFlexicapture.ServiceReferenceSyngenta.LoadDeclarationSoap_send_out_asy.LoadDeclarationSoap_send_out_asy(LoadDeclarationSoap_send_out_asy1 request)
+   en InterfazFlexicapture.ServiceReferenceSyngenta.LoadDeclarationSoap_send_out_asyClient.InterfazFlexicapture.ServiceReferenceSyngenta.LoadDeclarationSoap_send_out_asy.LoadDeclarationSoap_send_out_asy(LoadDeclarationSoap_send_out_asy1 request) en C:\bdl\pronto\InterfazFlexicapture\Service References\ServiceReferenceSyngenta\Reference.cs:línea 499
+   en InterfazFlexicapture.ServiceReferenceSyngenta.LoadDeclarationSoap_send_out_asyClient.LoadDeclarationSoap_send_out_asy(DT_DeliveryDelivery[] MT_Delivery) en C:\bdl\pronto\InterfazFlexicapture\Service References\ServiceReferenceSyngenta\Reference.cs:línea 505
+   en ServicioCartaPorte.servi.WebServiceSyngenta(List`1 dbcartas, String endpointStr, String UserName, String Password) en C:\bdl\pronto\InterfazFlexicapture\prontoflexicapture.cs:línea 3858
+mscorlib
+__________________________
+
+Log Entry : 
+08/07/2017 10:43:02
+Error in: . Error Message:System.Net.WebException
+No es posible conectar con el servidor remoto
+   en System.Net.FtpWebRequest.GetRequestStream()
+   en ServicioCartaPorte.servi.UploadFtpFile(String ftpsitio, String folderName, String fileName, String user, String pass) en C:\bdl\pronto\InterfazFlexicapture\prontoflexicapture.cs:línea 4079
+System
+__________________________
+
+Log Entry : 
+08/07/2017 10:54:18
+Error in: . Error Message:System.ServiceModel.EndpointNotFoundException
+No había ningún extremo escuchando en https://oasis-pi-nonprod.syngenta.com/uat/XISOAPAdapter/MessageServlet?senderParty=&senderService=Srv_BIT_BarterService&receiverParty=&receiverService=&interface=LoadDeclarationSoap_send_out_asy&interfaceNamespace=urn:broker:o2c:s:global:delivery:loaddeclaration:100 que pudiera aceptar el mensaje. La causa suele ser una dirección o una acción SOAP incorrecta. Consulte InnerException, si está presente, para obtener más información.
+
+Server stack trace: 
+   en System.ServiceModel.Channels.HttpOutput.WebRequestHttpOutput.GetOutputStream()
+   en System.ServiceModel.Channels.HttpOutput.Send(TimeSpan timeout)
+   en System.ServiceModel.Channels.HttpChannelFactory`1.HttpRequestChannel.HttpChannelRequest.SendRequest(Message message, TimeSpan timeout)
+   en System.ServiceModel.Channels.RequestChannel.Request(Message message, TimeSpan timeout)
+   en System.ServiceModel.Dispatcher.RequestChannelBinder.Send(Message message, TimeSpan timeout)
+   en System.ServiceModel.Channels.ServiceChannel.Call(String action, Boolean oneway, ProxyOperationRuntime operation, Object[] ins, Object[] outs, TimeSpan timeout)
+   en System.ServiceModel.Channels.ServiceChannelProxy.InvokeService(IMethodCallMessage methodCall, ProxyOperationRuntime operation)
+   en System.ServiceModel.Channels.ServiceChannelProxy.Invoke(IMessage message)
+
+Exception rethrown at [0]: 
+   en System.Runtime.Remoting.Proxies.RealProxy.HandleReturnMessage(IMessage reqMsg, IMessage retMsg)
+   en System.Runtime.Remoting.Proxies.RealProxy.PrivateInvoke(MessageData& msgData, Int32 type)
+   en InterfazFlexicapture.ServiceReferenceSyngenta.LoadDeclarationSoap_send_out_asy.LoadDeclarationSoap_send_out_asy(LoadDeclarationSoap_send_out_asy1 request)
+   en InterfazFlexicapture.ServiceReferenceSyngenta.LoadDeclarationSoap_send_out_asyClient.InterfazFlexicapture.ServiceReferenceSyngenta.LoadDeclarationSoap_send_out_asy.LoadDeclarationSoap_send_out_asy(LoadDeclarationSoap_send_out_asy1 request) en C:\bdl\pronto\InterfazFlexicapture\Service References\ServiceReferenceSyngenta\Reference.cs:línea 499
+   en InterfazFlexicapture.ServiceReferenceSyngenta.LoadDeclarationSoap_send_out_asyClient.LoadDeclarationSoap_send_out_asy(DT_DeliveryDelivery[] MT_Delivery) en C:\bdl\pronto\InterfazFlexicapture\Service References\ServiceReferenceSyngenta\Reference.cs:línea 505
+   en ServicioCartaPorte.servi.WebServiceSyngenta(List`1 dbcartas, String endpointStr, String UserName, String Password) en C:\bdl\pronto\InterfazFlexicapture\prontoflexicapture.cs:línea 3858
+mscorlib
+__________________________
+
+Log Entry : 
+08/07/2017 10:55:05
+Error in: . Error Message:System.Net.WebException
+No es posible conectar con el servidor remoto
+   en System.Net.FtpWebRequest.GetRequestStream()
+   en ServicioCartaPorte.servi.UploadFtpFile(String ftpsitio, String folderName, String fileName, String user, String pass) en C:\bdl\pronto\InterfazFlexicapture\prontoflexicapture.cs:línea 4079
+System
+__________________________
+
+Log Entry : 
+08/07/2017 11:48:30
+Error in: . Error Message:System.IO.DirectoryNotFoundException
+No se puede encontrar una parte de la ruta de acceso 'C:\bdl\pronto\prontoweb\Temp\Pegatinas\urenport.xls'.
+   en System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   en System.IO.File.InternalDelete(String path, Boolean checkHost)
+   en System.IO.File.Delete(String path)
+   en ServicioCartaPorte.servi.UrenportSelenium_ConChromeHeadless(String directorioDescarga, String dirDriver) en C:\bdl\pronto\InterfazFlexicapture\prontoflexicapture.cs:línea 6300
+mscorlib
+__________________________
+
+Log Entry : 
+08/07/2017 11:49:35
+Error in: . Error Message:System.IO.FileNotFoundException: No se pudo encontrar el archivo 'C:\bdl\pronto\prontoweb\Temp\Pegatinas\urenport.xls'.
+Nombre de archivo: 'C:\bdl\pronto\prontoweb\Temp\Pegatinas\urenport.xls'
+   en System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   en System.IO.File.InternalMove(String sourceFileName, String destFileName, Boolean checkHost)
+   en System.IO.File.Move(String sourceFileName, String destFileName)
+   en ServicioCartaPorte.servi.UrenportSelenium_ConChromeHeadless(String directorioDescarga, String dirDriver) en C:\bdl\pronto\InterfazFlexicapture\prontoflexicapture.cs:línea 6357
+__________________________
+
+Log Entry : 
+08/07/2017 11:50:22
+Error in: . Error Message:System.IO.DirectoryNotFoundException
+No se puede encontrar una parte de la ruta de acceso 'C:\bdl\pronto\prontoweb\Temp\Pegatinas\urenport.xls'.
+   en System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   en System.IO.File.InternalDelete(String path, Boolean checkHost)
+   en System.IO.File.Delete(String path)
+   en ServicioCartaPorte.servi.UrenportSelenium_ConChromeHeadless(String directorioDescarga, String dirDriver) en C:\bdl\pronto\InterfazFlexicapture\prontoflexicapture.cs:línea 6300
+mscorlib
+__________________________
+
+Log Entry : 
+08/07/2017 11:51:34
+Error in: . Error Message:OpenQA.Selenium.WebDriverException: The HTTP request to the remote WebDriver server for URL http://localhost:55215/session/8ef7a22564db6b6c15cee61c761ed983/element/0.04191308190960186-3/click timed out after 60 seconds. ---> System.Net.WebException: Se excedió el tiempo de espera de la operación
+   en System.Net.HttpWebRequest.GetResponse()
+   en OpenQA.Selenium.Remote.HttpCommandExecutor.CreateResponse(WebRequest request)
+   --- Fin del seguimiento de la pila de la excepción interna ---
+   en OpenQA.Selenium.Remote.HttpCommandExecutor.CreateResponse(WebRequest request)
+   en OpenQA.Selenium.Remote.HttpCommandExecutor.Execute(Command commandToExecute)
+   en OpenQA.Selenium.Remote.DriverServiceCommandExecutor.Execute(Command commandToExecute)
+   en OpenQA.Selenium.Remote.RemoteWebDriver.Execute(String driverCommandToExecute, Dictionary`2 parameters)
+   en OpenQA.Selenium.Remote.RemoteWebElement.Click()
+   en ServicioCartaPorte.servi.UrenportSelenium_ConChromeHeadless(String directorioDescarga, String dirDriver) en C:\bdl\pronto\InterfazFlexicapture\prontoflexicapture.cs:línea 6335
+__________________________

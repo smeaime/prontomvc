@@ -90,7 +90,7 @@ Partial Class SincronismosAutomaticos
             If pv <= 1 Then pv = ""
             txtMailAibal.Text = ParametroManager.TraerValorParametro2(HFSC.Value, "CasillaCartasPorteAibal" & pv).ToString
             txtMailACA.Text = ParametroManager.TraerValorParametro2(HFSC.Value, "CasillaCartasPorteACA" & pv).ToString
-            txtMailajnari.Text = ParametroManager.TraerValorParametro2(HFSC.Value, "CasillaCartasPorteAJNari").ToString
+            txtMailAJNari.Text = ParametroManager.TraerValorParametro2(HFSC.Value, "CasillaCartasPorteAJNari").ToString
             txtMailAlabern.Text = ParametroManager.TraerValorParametro2(HFSC.Value, "CasillaCartasPorteAlabern" & pv).ToString
             txtMailAlabernCal.Text = ParametroManager.TraerValorParametro2(HFSC.Value, "CasillaCartasPorteAlabernCal").ToString
             txtMailAlea.Text = ParametroManager.TraerValorParametro2(HFSC.Value, "CasillaCartasPorteAlea").ToString
@@ -476,21 +476,12 @@ Partial Class SincronismosAutomaticos
         'If (CheckBoxPSAcalid.Checked) Then sTodosErr += Enviar("PSA La California (calidades)", txtMailPSA.Text, sErr, bVistaPrevia)
         If (CheckBoxRivara.Checked) Then sTodosErr += Enviar("Rivara", txtMailRivara.Text, sErr, bVistaPrevia)
         If (CheckBoxSantaCatalina.Checked) Then sTodosErr += Enviar("Santa Catalina", txtMailSantaCatalina.Text, sErr, bVistaPrevia)
+
+
         If (CheckBoxSyngenta.Checked) Then sTodosErr += Enviar("Syngenta", txtMailSyngenta.Text, sErr, bVistaPrevia)
-        If (CheckBoxSyngenta.Checked) Then
-            Dim idcliente = 4333 'syngenta
-
-            Dim dbcartas = CartaDePorteManager.ListadoSegunCliente(HFSC.Value, idcliente, globalDesde, globalHasta, CartaDePorteManager.enumCDPestado.Todas)
-
-            Dim s = New ServicioCartaPorte.servi()
-            Dim endpointStr = ConfigurationManager.AppSettings("SyngentaServiceEndpoint")
-            Dim UserName = ConfigurationManager.AppSettings("SyngentaServiceUser")
-            Dim Password = ConfigurationManager.AppSettings("SyngentaServicePass")
-            Dim x = s.WebServiceSyngenta(dbcartas, endpointStr, UserName, Password)
 
 
-            sTodosErr += vbCrLf + "Enviado a Syngenta Webservice" + vbCrLf
-        End If
+
 
         If (CheckBoxTomas.Checked) Then sTodosErr += Enviar("Tomas Hnos", txtMailTomas.Text, sErr, bVistaPrevia)
         If (CheckBoxTecnocampo.Checked) Then sTodosErr += Enviar("Tecnocampo", txtMailTecnocampo.Text, sErr, bVistaPrevia)
@@ -586,16 +577,16 @@ Partial Class SincronismosAutomaticos
             End Select
 
 
-            Dim sArchivo = SincronismosWilliamsManager.GenerarSincro(sincro, sErr, _
-                                                             HFSC.Value, ConfigurationManager.AppSettings("UrlDominio"), _
-                                                             "", estadofiltro, "", idVendedor, idCorredor, _
-                                                            idDestinatario, idIntermediario, _
-                                                            idRComercial, idArticulo, idProcedencia, idDestino, _
-                                                            IIf(cmbCriterioWHERE.SelectedValue = "todos", _
-                                                                CartaDePorteManager.FiltroANDOR.FiltroAND, _
-                                                              CartaDePorteManager.FiltroANDOR.FiltroOR), _
-                                                            DropDownList2.Text, _
-                                                             globalDesde, globalHasta, _
+            Dim sArchivo = SincronismosWilliamsManager.GenerarSincro(sincro, sErr,
+                                                             HFSC.Value, ConfigurationManager.AppSettings("UrlDominio"),
+                                                             "", estadofiltro, "", idVendedor, idCorredor,
+                                                            idDestinatario, idIntermediario,
+                                                            idRComercial, idArticulo, idProcedencia, idDestino,
+                                                            IIf(cmbCriterioWHERE.SelectedValue = "todos",
+                                                                CartaDePorteManager.FiltroANDOR.FiltroAND,
+                                                              CartaDePorteManager.FiltroANDOR.FiltroOR),
+                                                            DropDownList2.Text,
+                                                             globalDesde, globalHasta,
                                                                cmbPuntoVenta.SelectedValue, optDivisionSyngenta.SelectedValue, , , , idClienteAuxiliar
 )
 
@@ -632,25 +623,37 @@ Partial Class SincronismosAutomaticos
 
                 If False Then
 
-                    EnviarEmail(dest, "Sincro automático " + sincro, cuerpo, _
-                           De, _
-                            ConfigurationManager.AppSettings("SmtpServer"), _
-                          ConfigurationManager.AppSettings("SmtpUser"), _
-                          ConfigurationManager.AppSettings("SmtpPass"), _
-                         sArchivo, _
+                    EnviarEmail(dest, "Sincro automático " + sincro, cuerpo,
+                           De,
+                            ConfigurationManager.AppSettings("SmtpServer"),
+                          ConfigurationManager.AppSettings("SmtpUser"),
+                          ConfigurationManager.AppSettings("SmtpPass"),
+                         sArchivo,
                             ConfigurationManager.AppSettings("SmtpPort"), , CCOaddress, , "Williams Entregas")
 
                 Else
 
 
-                    MandaEmail_Nuevo(dest, "Sincro automático " + sincro, cuerpo, _
-                           De, _
-                            ConfigurationManager.AppSettings("SmtpServer"), _
-                          ConfigurationManager.AppSettings("SmtpUser"), _
-                          ConfigurationManager.AppSettings("SmtpPass"), _
-                         sArchivo, _
+                    MandaEmail_Nuevo(dest, "Sincro automático " + sincro, cuerpo,
+                           De,
+                            ConfigurationManager.AppSettings("SmtpServer"),
+                          ConfigurationManager.AppSettings("SmtpUser"),
+                          ConfigurationManager.AppSettings("SmtpPass"),
+                         sArchivo,
                             ConfigurationManager.AppSettings("SmtpPort"), , CCOaddress, , "Williams Entregas", , True)
                 End If
+
+
+
+
+
+                If (sincro.ToUpper = "SYNGENTA") Then
+                    EnviarSyngenta()
+                    sErr += vbCrLf + "Enviado a Syngenta Webservice" + vbCrLf
+                End If
+
+
+
 
             End If
 
@@ -661,6 +664,54 @@ Partial Class SincronismosAutomaticos
         End Try
 
         Return sErr
+    End Function
+
+
+
+
+    Function EnviarSyngenta()
+
+
+        'Dim idcliente = 4333 'syngenta
+
+        'Dim dbcartas = CartaDePorteManager.ListadoSegunCliente(HFSC.Value, idcliente, globalDesde, globalHasta, CartaDePorteManager.enumCDPestado.Todas)
+
+        Dim s = New ServicioCartaPorte.servi()
+        'Dim endpointStr = ConfigurationManager.AppSettings("SyngentaServiceEndpoint")
+        'Dim UserName = ConfigurationManager.AppSettings("SyngentaServiceUser")
+        'Dim Password = ConfigurationManager.AppSettings("SyngentaServicePass")
+        'Dim x = s.WebServiceSyngenta(dbcartas, endpointStr, UserName, Password)
+
+
+        'Dim DIRFTP = DirApp() + @"\DataBackupear\"
+        '            Dim archivoExcel = DIRFTP + "Syngenta_" + DateTime.Now.ToString("ddMMMyyyy_HHmmss") + ".xlsx"
+
+
+        's.GenerarExcelSyngentaWebService(x, archivoExcel)
+
+
+        's.UploadFtpFile(ConfigurationManager.AppSettings("SyngentaFTPdominio"),
+        '                    ConfigurationManager.AppSettings("SyngentaFTPdir"),
+        '                    archivoExcel,
+        '                    ConfigurationManager.AppSettings("SyngentaFTPuser"),
+        '                    ConfigurationManager.AppSettings("SyngentaFTPpass"))
+
+
+
+        's.EnviarSyngenta( )
+
+
+
+        's.EnviarSyngenta(HFSC.Value,
+        '                globalDesde, globalHasta,
+        '                ConfigurationManager.AppSettings("SyngentaServiceEndpoint"),
+        '                    ConfigurationManager.AppSettings("SyngentaServiceUser"),
+        '                    ConfigurationManager.AppSettings("SyngentaServicePass"),
+        '                    ConfigurationManager.AppSettings("SyngentaFTPdominio"),
+        '                    ConfigurationManager.AppSettings("SyngentaFTPdir"),
+        '                    ConfigurationManager.AppSettings("SyngentaFTPuser"),
+        '                    ConfigurationManager.AppSettings("SyngentaFTPpass"),
+        '                    DirApp)
     End Function
 
 
@@ -677,7 +728,6 @@ Partial Class SincronismosAutomaticos
 
 
 
-    
 
 
 
