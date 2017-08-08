@@ -1,0 +1,128 @@
+
+Log Entry : 
+08/08/2017 14:15:37
+Error in: . Error Message:ImprimirFacturaElectronica idfac 87781
+__________________________
+
+Log Entry : 
+08/08/2017 14:15:45
+Error in: . Error Message:Creando docx
+__________________________
+
+Log Entry : 
+08/08/2017 14:24:02
+Error in: . Error Message:ImprimirFacturaElectronica idfac 87781
+__________________________
+
+Log Entry : 
+08/08/2017 14:24:04
+Error in: . Error Message:Creando docx
+__________________________
+
+Log Entry : 
+08/08/2017 14:24:20
+Error in: . Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en ProntoMVC.Data.FuncionesGenericasCSharp.RemoveSpecialCharacters(String str) en C:\bdl\pronto\Data\FuncionesGenerales.cs:línea 289
+   en Pronto.ERP.Bll.EntidadManager.regexReplace2(String& cadena, String buscar, String reemplazo) en C:\bdl\pronto\BussinessLogic\EntidadManager.vb:línea 61
+ProntoMVC.Data
+__________________________
+
+Log Entry : 
+08/08/2017 14:24:26
+Error in: . Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartaDePorteManager.FacturaXML_DOCX_Williams(String document, Factura oFac, String SC) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 14107
+BusinessLogic
+__________________________
+
+Log Entry : 
+08/08/2017 14:24:27
+Error in: . Error Message:docx creado
+__________________________
+
+Log Entry : 
+08/08/2017 14:24:30
+Error in: . Error Message:Creando codigo barras
+__________________________
+
+Log Entry : 
+08/08/2017 14:24:33
+Error in: . Error Message:Creando pdf
+__________________________
+
+Log Entry : 
+08/08/2017 14:24:52
+Error in: . Error Message:System.Runtime.InteropServices.COMException
+No es un nombre de archivo válido.
+Pruebe una o varias de las siguientes operaciones:
+* Compruebe la ruta de acceso para asegurarse de que se escribió correctamente.
+* Seleccione un archivo de la lista de archivos y carpetas.
+   en Microsoft.Office.Interop.Word.InlineShapes.AddPicture(String FileName, Object& LinkToFile, Object& SaveWithDocument, Object& Range)
+   en CartaDePorteManager.ConvertirEnPDF_y_PonerCodigoDeBarras(String output, String fImagenBarras, Boolean bMostrarPDF) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 13866
+Microsoft Word
+__________________________
+
+Log Entry : 
+08/08/2017 14:24:52
+Error in: . Error Message:salgo
+__________________________
+
+Log Entry : 
+08/08/2017 14:24:53
+Error in: . Error Message:ImprimirFacturaElectronica idfac 87700
+__________________________
+
+Log Entry : 
+08/08/2017 14:24:54
+Error in: . Error Message:Creando docx
+__________________________
+
+Log Entry : 
+08/08/2017 14:25:01
+Error in: . Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en ProntoMVC.Data.FuncionesGenericasCSharp.RemoveSpecialCharacters(String str) en C:\bdl\pronto\Data\FuncionesGenerales.cs:línea 289
+   en Pronto.ERP.Bll.EntidadManager.regexReplace2(String& cadena, String buscar, String reemplazo) en C:\bdl\pronto\BussinessLogic\EntidadManager.vb:línea 61
+ProntoMVC.Data
+__________________________
+
+Log Entry : 
+08/08/2017 14:25:03
+Error in: . Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartaDePorteManager.FacturaXML_DOCX_Williams(String document, Factura oFac, String SC) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 14107
+BusinessLogic
+__________________________
+
+Log Entry : 
+08/08/2017 14:25:03
+Error in: . Error Message:docx creado
+__________________________
+
+Log Entry : 
+08/08/2017 14:25:04
+Error in: . Error Message:Creando codigo barras
+__________________________
+
+Log Entry : 
+08/08/2017 14:25:06
+Error in: . Error Message:Creando pdf
+__________________________
+
+Log Entry : 
+08/08/2017 14:25:07
+Error in: . Error Message:System.Runtime.InteropServices.COMException
+No es un nombre de archivo válido.
+Pruebe una o varias de las siguientes operaciones:
+* Compruebe la ruta de acceso para asegurarse de que se escribió correctamente.
+* Seleccione un archivo de la lista de archivos y carpetas.
+   en Microsoft.Office.Interop.Word.InlineShapes.AddPicture(String FileName, Object& LinkToFile, Object& SaveWithDocument, Object& Range)
+   en CartaDePorteManager.ConvertirEnPDF_y_PonerCodigoDeBarras(String output, String fImagenBarras, Boolean bMostrarPDF) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 13866
+Microsoft Word
+__________________________
+
+Log Entry : 
+08/08/2017 14:25:08
+Error in: . Error Message:salgo
+__________________________
