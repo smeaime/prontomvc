@@ -80,6 +80,8 @@ Partial Class CartasDePorteImagenEncriptada
 
 
 
+
+
         'sDirFTP = HttpContext.Current.Server.MapPath("~/" + ConfigurationManager.AppSettings("sDirFTP")) 'no necesito usar MapPath, porque no estoy usando un dir virtual
         'sDirFTP = ConfigurationManager.AppSettings("sDirFTP")
         'sDirFTP = HttpContext.Current.Server.MapPath("~/") + "..\Pronto\DataBackupear\"

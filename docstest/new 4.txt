@@ -1,0 +1,863 @@
+<?xml version="1.0"?>
+<configuration xmlns="http://schemas.microsoft.com/.NetConfiguration/v2.0">
+  <!--
+  //////////////////////////////////////////////////////////
+  //////////////////////////////////////////////////////////
+  CADENAS DE CONEXION!!!!!
+  //////////////////////////////////////////////////////////
+  //////////////////////////////////////////////////////////
+  -->
+  <!--
+  //////////////////////////////////////////////////////////
+  //////////////////////////////////////////////////////////
+  -->
+  <!--The reason this fails is because these section definitions are already included in the root web.config in .NET 4.0 (see %windir%\\microsoft.net\\framework\\v4.0.30319\\config\\machine.config) that include all the system.web.extensions declared already.
+  esto hay que sacarlo en 4.0-->
+  <configSections>
+    <section name="glimpse" type="Glimpse.Core.Configuration.Section, Glimpse.Core"/>
+  </configSections>
+  <!--
+  //////////////////////////////////////////////////////////
+  //////////////////////////////////////////////////////////
+  -->
+  <connectionStrings>
+    <remove name="LocalSqlServer"/>
+    <!--
+    putty tunnels:
+    local                    dest
+    127.0.0.1 10022          192.168.66.3:21
+    127.0.0.1 1433           192.168.66.1:1433
+    127.0.0.1 49253          192.168.66.3:49253
+    -->
+    <!--///////////////////////////////////////////////////////////////////-->
+    <!--////////ESTO ES WEBFORMS, NO MVC!!!!!!!!!!///////////////////////-->
+    <!--si usas el putty, acordate de agregar el alias del SERVERSQL3 y SERVERSQL1 al Native Client Configuration (32 bits). 
+    Si no, tenes que usar la ip tuneleada "127.0.0.1,puertoetc" 
+    -Es que no podes usar la iptuneleada acá, porque despues te va a explotar cuando en la bdlmaster levante la cadena de conexion con el alias del servidor de bdl. 
+    Es decir, estas obligado a agregar el alias en el Native Client Configuration
+    -ok, pero tambien necesitas que en la tabla Bases de la BdlMaster se haga referencia por alias y no por ips
+    -->
+    <add name="LocalSqlServer" connectionString="Data Source=SERVERSQL3\TESTING;Initial catalog=BDLMaster;User ID=sa; Password=.SistemaPronto.;Connect Timeout=8" providerName="System.Data.SqlClient"/>
+    <!--<add name="LocalSqlServer" connectionString="Data Source=MARIANOPC;Initial Catalog=BDLMaster;Uid=sa; PWD=3D1consultore5;Connect Timeout=8;" providerName="System.Data.SqlClient" />-->
+    <!--///////////////////////////////////////////////////////////////////-->
+    <!--///////////////////////////////////////////////////////////////////-->
+    <!--///////////////////////////////////////////////////////////////////-->
+    <!--///////////////////////////////////////////////////////////////////-->
+    <add name="Mariano" connectionString="Data Source=Mariano-PC\MSSQLSERVER2;Initial Catalog=BDLMaster;Uid=sa; PWD=ok;Connect Timeout=8;" providerName="System.Data.SqlClient"/>
+    <add name="server1conputty" connectionString="Data Source=SERVERSQL1;Initial catalog=BDLMaster;User ID=sa; Password=3D1consultore5;Connect Timeout=8" providerName="System.Data.SqlClient"/>
+    <add name="server3conputty" connectionString="Data Source=SERVERSQL3\TESTING;Initial catalog=BDLMaster;User ID=sa; Password=.SistemaPronto.;Connect Timeout=8" providerName="System.Data.SqlClient"/>
+    <!--///////////////////////////////////////////////////////////////////-->
+    <!--///////////////////////////////////////////////////////////////////-->
+    <!--/// conexiones directas a la base (no a bdlmaster) para los diseñadores de modelo ///////-->
+    <!--/// estas conexiones, a nivel de dll, las podes meter en el .res (proyecto/properties/resources) del proyecto ///////-->
+    <!--///////////////////////////////////////////////////////////////////-->
+    <add name="wDemoWilliamsConnectionString" connectionString="Data Source=SERVERSQL1;Initial catalog=WilliamsEntregas;User ID=sa; Password=3D1consultore5;Connect Timeout=8" providerName="System.Data.SqlClient"/>
+  </connectionStrings>
+  <!--
+//////////////////////////////////////////////////////////
+  //////////////////////////////////////////////////////////
+  SEGURIDAD Y DIRECTORIOS
+  //////////////////////////////////////////////////////////
+  //////////////////////////////////////////////////////////
+  -->
+  <!--
+  http://stackoverflow.com/questions/4891655/why-doesnt-the-password-recovery-link-show-up-in-my-login-control
+  http://msdn.microsoft.com/en-us/library/ms178335(v=vs.100).aspx
+  -->
+  <location path="OlvidoPassword.aspx">
+    <system.web>
+      <authorization>
+        <allow users="?"/>
+      </authorization>
+    </system.web>
+  </location>
+  <location path="ProntoWeb/CartasDePorteImagenEncriptada.aspx">
+    <system.web>
+      <authorization>
+        <allow users="?"/>
+      </authorization>
+    </system.web>
+  </location>
+  <location path="ProntoWeb/FacturaElectronicaEncriptada.aspx">
+    <system.web>
+      <authorization>
+        <allow users="?"/>
+      </authorization>
+    </system.web>
+  </location>
+  <location path="ProntoWeb/WebServiceCartas.asmx">
+    <system.web>
+      <authorization>
+        <allow users="*"/>
+      </authorization>
+    </system.web>
+  </location>
+  <location path="TestCacheTimeout/WebForm1.aspx">
+    <system.web>
+      <authorization>
+        <allow users="?"/>
+      </authorization>
+    </system.web>
+  </location>
+  <location path="Admin">
+    <system.web>
+      <authorization>
+        <allow roles="SuperAdmin,Administrador,WilliamsAdmin,AdminSolo"/>
+        <deny users="*"/>
+      </authorization>
+    </system.web>
+  </location>
+  <location path="ProntoWeb/Factura.aspx">
+    <system.web>
+      <authorization>
+        <allow roles="SuperAdmin,Administrador,WilliamsComercial,Comercial,WilliamsAdmin,WilliamsFacturacion"/>
+        <deny users="*"/>
+      </authorization>
+    </system.web>
+  </location>
+  <location path="ProntoWeb/ListasPrecios.aspx">
+    <system.web>
+      <authorization>
+        <allow roles="SuperAdmin,Administrador,WilliamsComercial,Comercial,WilliamsAdmin,WilliamsFacturacion"/>
+        <deny users="*"/>
+      </authorization>
+    </system.web>
+  </location>
+  <location path="ProntoWeb/CDPFacturacion.aspx">
+    <system.web>
+      <authorization>
+        <allow roles="SuperAdmin,Administrador,WilliamsAdmin,WilliamsFacturacion,WilliamsComercial"/>
+        <deny users="*"/>
+      </authorization>
+    </system.web>
+  </location>
+  <location path="ProntoWeb/NotaDeCredito.aspx">
+    <system.web>
+      <authorization>
+        <allow roles="SuperAdmin,Administrador,WilliamsAdmin,WilliamsFacturacion"/>
+        <deny users="*"/>
+      </authorization>
+    </system.web>
+  </location>
+  <location path="ProntoWeb/NotaDeCreditos.aspx">
+    <system.web>
+      <authorization>
+        <allow roles="Administrador,WilliamsAdmin,WilliamsFacturacion"/>
+        <deny users="*"/>
+      </authorization>
+    </system.web>
+  </location>
+  <location path="ProntoWeb/Resolucion1361.aspx">
+    <system.web>
+      <authorization>
+        <allow roles="SuperAdmin,Administrador,WilliamsComercial,Comercial,WilliamsAdmin"/>
+        <deny users="*"/>
+      </authorization>
+    </system.web>
+  </location>
+  <location path="ProntoWeb/ImportarInformacionImpositiva.aspx">
+    <system.web>
+      <authorization>
+        <allow roles="SuperAdmin,Administrador,WilliamsComercial,Comercial,WilliamsAdmin"/>
+        <deny users="*"/>
+      </authorization>
+    </system.web>
+  </location>
+  <!--
+//////////////////////////////////////////////////////////
+  //////////////////////////////////////////////////////////
+  CONSTANTES
+  //////////////////////////////////////////////////////////
+  //////////////////////////////////////////////////////////
+  -->
+  <appSettings>
+    <add key="Root" value="Pronto500"/>
+    <add key="UrlDominio" value="http://prontotesting.bdlconsultores.com.ar/ProntoWilliams/"/> <!--con barra al final-->
+    <add key="DirSQL" value="c:\Backup\"/>
+
+
+    <add key="DirApp" value="C:\inetpub\wwwroot\ProntoWilliams"/>
+    <add key="AplicacionConImagenes" value="C:\inetpub\wwwroot\ProntoWilliams"/>
+
+    
+
+    <!--/////////////////////////////////////-->
+    <!--/////////////////////////////////////-->
+    <!--////////////problemas con redirect en Webforms hacia account\logon como si fuese mvc/////////////////////////////////////-->
+    <!-- http://stackoverflow.com/questions/8205368/request-redirect-to-account-loginreturnurl-2f-since-mvc-3-install-on-server   -->
+    <add key="PreserveLoginUrl" value="true"/>
+    <add key="autoFormsAuthentication" value="false"/>
+    <add key="enableSimpleMembership" value="false"/>
+    <!--/////////////////////////////////////////////////-->
+    <add key="PathInfo" value="C:\\Info.txt"/>
+    <add key="WSPronto.Service" value="http://localhost:1634/WSPronto/Service.asmx"/>
+    <add key="EmisionExePath" value="D:\Proyectos\Pronto Web\Emision\bin\Debug\Emision.exe"/>
+    <!--/////////////////////////////////////-->
+    <!--/////////////////////////////////////-->
+    <!--/////////////////////////////////////-->
+    <!--/////////////////////////////////////-->
+    <!--/////////////////////////////////////-->
+    <!--/////////////////////////////////////-->
+    <!--/////////////////////////////////////-->
+    <!--/////////////////////////////////////-->
+    <!--/////////////////////////////////////-->
+    <!--/////////////////////////////////////-->
+    <!-- no podes usar bdlconsultores.sytes.net en la publicacion en bdl, da Unauthorized    -->
+    <!--/////////////////////////////////////-->
+    <!--/////////////////////////////////////-->
+    <!--/////////////////////////////////////-->
+    <!-- <add key="ReportServer" value="http://119c994749/ReportServer" />
+    <add key="ReportUser" value="bdl" />
+    <add key="ReportPass" value="BLSeLMU4" />
+    <add key="ReportDomain" value="" />-->
+    <!--/////////////////////////////////////-->
+    <!--/////////////////////////////////////-->
+    <!--/////////////////////////////////////-->
+<add key="ReportServer" value="http://SERVERSQL3/ReportServer" />   
+    <!-- no podes usar bdlconsultores.sytes.net en la publicacion en bdl, da Unauthorized    -->
+    <!-- recien probé depurando desde mi máquina, conectandome al reporteador con bdlconsultores.sytes.net y tuve problemas. Tira:
+   Me tira   "No se puede crear una conexión al origen de datos 'DataSource1'. (rsErrorOpeningConnection)" 
+      -puede ser que haya dependido del servidor sql (serversql1 o 3) al que se conectó para chupar los datos??? 
+    SSÏIIIIIIIIIIIIIIIIIIIIIIIIIIIII es efectivamente esoo. Chupando los datos desde Serversql3\testing  anduvo bien, 
+    pero el serversql1 no!!!
+    
+    Es decir,la culpa no la tuvo el alias del sitio web, sino los permisos del servidor sql
+    -->
+    <!-- <add key="ReportServer" value="http://mariano-pc/ReportServer_MSSQLSERVER2" />-->
+    <!--/////////////////////////////////////-->
+    <!--/////////////////////////////////////-->
+    <add key="ReportUser" value="administrador"/>
+    <add key="ReportPass" value=".xza2190lkm."/>
+    <add key="ReportDomain" value=""/>
+    <!--/////////////////////////////////////-->
+    <!--/////////////////////////////////////-->
+    <!--/////////////////////////////////////-->
+    <!--/////////////////////////////////////-->
+    <!--/////////////////////////////////////-->
+    <!--/////////////////////////////////////-->
+    <!--/////////////////////////////////////-->
+    <!--/////////////////////////////////////-->
+    <!--/////////////////////////////////////-->
+    <!--/////////////////////////////////////-->
+    <!--/////////////////////////////////////-->
+    <add key="ErrorMail" value="mscalella911@gmail.com"/>
+    <add key="SmtpServer" value="smtp.gmail.com"/>
+    <add key="SmtpUser" value="ProntoWebMail@gmail.com"/>
+    <add key="SmtpUserPuntoVenta1" value="ProntoWebMail@gmail.com"/>
+    <add key="SmtpUserPuntoVenta2" value="ProntoWebMail@gmail.com"/>
+    <add key="SmtpUserPuntoVenta3" value="ProntoWebMail@gmail.com"/>
+    <add key="SmtpUserPuntoVenta4" value="ProntoWebMail@gmail.com"/>
+    <!--/////////////////////////////////////-->
+    <!--/////////////////////////////////////-->
+    <!-- <add key="SmtpUserFact" value="facturacion@williamsentregas.com.ar" />
+    <add key="SmtpPassFact" value="3dPifF" />-->
+    <add key="SmtpUserFact" value="ProntoWebMail@gmail.com"/>
+    <add key="SmtpPassFact" value="50TriplesdJQ"/>
+    <!--/////////////////////////////////////-->
+    <!--/////////////////////////////////////-->
+    <add key="SmtpPass" value="50TriplesdJQ"/>
+    <add key="SmtpPort" value="587"/>
+    <add key="PopServer" value="pop.gmail.com"/>
+    <add key="PopPort" value="995"/>
+    <!--/////////////////////////////////////-->
+    <!--/////////////////////////////////////-->
+    <add key="SyngentaServiceEndpoint" value="https://oasis-pi-nonprod.syngenta.com/dev/XISOAPAdapter/MessageServlet?senderParty=&amp;senderService=Srv_BIT_BarterService&amp;receiverParty=&amp;receiverService=&amp;interface=LoadDeclarationSoap_send_out_asy&amp;interfaceNamespace=urn:broker:o2c:s:global:delivery:loaddeclaration:100}" />
+    
+    <add key="SyngentaServiceUser" value="BROKERDEV" />
+    <add key="SyngentaServicePass" value="Welcome@1" />
+
+    <!--/////////////////////////////////////-->
+    <!--/////////////////////////////////////-->
+    <add key="UsarFlexicapture" value="SI"/>
+    <add key="Debug" value="SI"/>
+    <add key="ConfiguracionEmpresa" value="Williams"/>
+    <add key="AvisoTipoDeSitioDesarrolloDebugTestReleaseExterno" value="Desarrollo"/>
+    <!--/////////////////////////////////////-->
+    <!--/////////////WILLIAMS////////////////////////-->
+    <add key="ColaWebDeTareasActivada" value="SI"/>
+    <!-- <add key="scLocal" value="Data Source=Mariano-PC\MSSQLSERVER2;Initial Catalog=Williams;Uid=sa; PWD=ok;Connect Timeout=8;" />-->
+    <!-- <add key="scLocal" value="Data Source=SERVERSQL1;Initial catalog=WilliamsEntregas;User ID=sa; Password=3D1consultore5;Connect Timeout=8"/>-->
+    <add key="scLocal" value="Data Source=SERVERSQL3;Initial catalog=Williams;User ID=sa; Password=.SistemaPronto.;Connect Timeout=8"/>
+    <add key="scWilliamsRelease" value="Data Source=SERVERSQL3;Initial catalog=Williams;User ID=sa; Password=.SistemaPronto.;Connect Timeout=8"/>
+    <add key="scWilliamsDebug" value="Data Source=SERVERSQL3;Initial catalog=Williams;User ID=sa; Password=.SistemaPronto.;Connect Timeout=8"/>
+
+    <add key="urlLocal" value="http://localhost:59798/prontoweb/TestCacheTimeout/WebForm1.aspx"/>
+    <add key="urlWilliamsRelease" value="http://localhost/ProntoWilliams/TestCacheTimeout/WebForm1.aspx"/>
+    <!-- <add key="urlWilliamsRelease" value= "http://prontoweb.williamsentregas.com.ar/TestCacheTimeout/WebForm1.aspx" />-->
+    <add key="urlWilliamsDebug" value="http://localhost/ProntoWilliams/TestCacheTimeout/WebForm1.aspx"/>
+
+    <!--/////////////////////////////////////-->
+    <add key="CasillasEnvioCartasPendientes" value="mscalella911@gmail.com"/>
+    <add key="HoraEnvioCartasPendientes" value="8"/>
+    <add key="Debug_CantidadCopiasCartaPorte" value="2"/>
+    <add key="Debug_TopeFacturasCartaPorte" value="1000"/>
+    <add key="_CONST_MAXROWS" value="100000"/>
+    <add key="WilliamsAcopios" value=",AGRO,SEEDS,PEHUA,OLAVARR,NAON,G.VILL,IRIARTE,WRIGHT,CDC ACA,GUALEGUAY,GLGUAYCHU,RUFINO,BRAGADO,LAS FLORES,OTROS,CDC Eduardo Castex,LDC acop1,LDC acop2"/>
+    <add key="RenglonesFactura" value="15"/>
+    <add key="Glimpse:DisableAsyncSupport" value="true"/>
+  </appSettings>
+  <system.web>
+    <webServices>
+      <protocols>
+        <add name="HttpGet"/>
+        <add name="HttpPost"/>
+      </protocols>
+    </webServices>
+    <!-- <customErrors mode="RemoteOnly" 
+                  defaultRedirect="~/ErrorPages/Oops.aspx"/> -->
+    <customErrors mode="Off" defaultRedirect="/ErrorPages/Oops.aspx"/>
+    <!-- En ON para que NO muestre el YSOD -->
+    <!-- http://www.asp.net/hosting/tutorials/displaying-a-custom-error-page-cs -->
+    <!--//////////////////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////////
+    LOGIN!!!!!
+    http://aquesthosting.headtreez.com/doc/b873561c-ab7a-4a8e-9934-cc9366af8a81
+    //////////////////////////////////////////////////////////////////////////-->
+    <!--'http://stackoverflow.com/questions/287320/how-do-you-change-a-hashed-password-using-asp-net-membership-provider-if-you-don
+    'http://www.asp.net/web-forms/tutorials/security/admin/recovering-and-changing-passwords-cs (en especial el punto 3)}
+'http://team.desarrollosnea.com.ar/blogs/jfernandez/archive/2009/12/10/asp-net-membership-reset-password-with-ts-sql-por-si-las-moscas-tenerlo-a-mano.aspx
+    'But what if your client insists that administrative users should be able to change other users' passwords? Unfortunately,
+    'adding this functionality can be a bit of work. To change a user's password, both the old and new password must be supplied to
+    'the MembershipUser object's ChangePassword method, but an administrator shouldn't have to know a user's password in order to modify it.
+
+    'The problem is that this code only works if the Membership system configuration is set such that RequiresQuestionAndAnswer is
+    'False. If RequiresQuestionAndAnswer is True, as it is with our application, then the ResetPassword method needs to be passed the security
+    'answer, otherwise it will throw an exception.-->
+    <membership defaultProvider="AspNetSqlMembershipProvider">
+      <!--<providers>
+        
+        <clear/>
+        -->
+      <!--http://peterkellner.net/2007/02/15/resetpasswordaspnet/-->
+      <!--
+        <add name="SqlMembershipProviderOther" type="SqlProviderOneShot.SqlMembershipProvider"
+    requiresQuestionAndAnswer="false"
+     connectionStringName="EmailEmailConnectionString" applicationName="EmailEmail"
+    enablePasswordRetrieval="false" enablePasswordReset="true"
+    requiresUniqueEmail="true" passwordFormat="Hashed"
+    minRequiredNonalphanumericCharacters="0" writeExceptionsToEventLog="false"
+    minRequiredPasswordLength="1" passwordStrengthRegularExpression=""
+    passwordAttemptWindow="10" maxInvalidPasswordAttempts="8"/>
+      </providers>-->
+    </membership>
+    <!--<membership>
+      <providers>
+        <clear/>
+        <add name="AspNetSqlMembershipProvider"  type="System.Web.Security.SqlMembershipProvider"  enablePasswordRetrieval="false"  />
+      </providers>
+    </membership>-->
+    <!--//////////////////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////////-->
+    <identity impersonate="true"/>
+    <!--Deshacerse de esto!!!! Pero lo voy a necesitar, por ahora, cuando lo instale en un servidor que no sea pc de desarrollo-->
+    <!--<identity impersonate="true" 
+                userName="WIN2008\Administrator" password="3D1consultore5"/>-->
+    <!--//////////////////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////////-->
+    <authorization>
+      <allow roles="Administrador"/>
+      <allow roles="Cliente"/>
+      <allow roles="Usuario"/>
+      <allow roles="FondosFijos"/>
+      <allow roles="Compras"/>
+      <deny users="?"/>
+    </authorization>
+    <!--para hacer upload (en KiloBytes)-->
+    <!--y para tener margen por el Request Time Out al enviar mails (800 segundos) -->
+    <!-- <httpRuntime maxRequestLength="10000" executionTimeout="800"/> -->
+    <!-- maxRequestLength y maxAllowedContentLength-->
+    <!-- maxRequestLength y maxAllowedContentLength-->
+    <!-- maxRequestLength y maxAllowedContentLength-->
+    <httpRuntime maxRequestLength="2000000000" executionTimeout="999999"/>
+    <!--     <httpRuntime maxRequestLength="20971510" executionTimeout="7200" requestValidationMode="2.0"/> -->
+    <!-- maxRequestLength y maxAllowedContentLength http://stackoverflow.com/questions/3853767/maximum-request-length-exceeded?lq=1-->
+    <!-- maxRequestLength y maxAllowedContentLength-->
+    <!-- maxRequestLength y maxAllowedContentLength-->
+    <!--lo cambié por problemas en el importador de zips de fotos de williams-->
+    <!--//////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////-->
+    <!--//////////////////////////////////////////////////////////////////////////
+    TIMEOUT    TIMEOUT Cuál es el que sirve? el del <sessionState> o el de <authentication><forms>?
+  No se puede disablear. Solo podes poner un maximo grandote -Y cómo hacen Gmail o Facebook?
+  http://www.codinghorror.com/blog/2008/04/your-session-has-timed-out.html
+    //////////////////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////////-->
+    <!--http://forums.asp.net/t/1283350.aspx
+    http://stackoverflow.com/questions/648992/session-timeout-in-asp-net
+    http://stackoverflow.com/questions/316172/session-timeout-asp-net-->
+    <sessionState mode="InProc" timeout="1440"/>
+    <!--//////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////-->
+    <!--//////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////-->
+    <!--//////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////-->
+    <!--//////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////-->
+    <!--//////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////-->
+    <!--Para modo debug-->
+    <!-- <authentication mode="Windows"></authentication> -->
+    <!--Como corresponde-->
+    <!--http://msdn.microsoft.com/es-es/library/532aee0e(v=vs.80).aspx-->
+    <!--<authentication mode="Forms">
+      <forms loginUrl="Login.aspx" 
+             protection="All" timeout="1440" 
+             name=".ASPXAUTH" path="/" 
+             requireSSL="false" slidingExpiration="true" 
+             defaultUrl="Login.aspx" 
+             cookieless="UseDeviceProfile" enableCrossAppRedirects="false"/>
+    </authentication>-->
+    <!--///////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
+    <!--///////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
+    <!--///////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
+    <!--///////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
+    <!--///////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
+    <!--compartir el login entre aplicaciones-->
+    <!--http://msdn.microsoft.com/en-us/library/eb0zx8fc(v=vs.100).aspx-->
+    <!--http://stackoverflow.com/questions/72125/how-do-you-pass-an-authenticaticated-session-between-app-domains-->
+    <authentication mode="Forms">
+      <!--quizas no te esta dejando porque no existe el usuario en la otra aplicacion, o no tiene los roles-->
+      <!-- The name, protection, and path attributes must match 
+           exactly in each Web.config file. -->
+      <forms loginUrl="login.aspx" name=".ASPXAUTH" protection="All" path="/" domain="" enableCrossAppRedirects="true" timeout="1440"/>
+    </authentication>
+    <!-- Validation and decryption keys must exactly match and cannot
+         be set to "AutoGenerate". The validation and decryption
+         algorithms must also be the same. -->
+    <machineKey validationKey="D78ACCBFD70D5E99FD90C94B0C511CEA134BB980714E0C0BD31F7ABDDD6E56E2728C4878939CB33A4F50295695AC96C2393FF82A60F34CE993263741CBE6E9FC" decryptionKey="B82F692180CD8DE7478F7D9AFDF45A1AA28EC597D970F8A06B22B7EFCE49B663" validation="SHA1" decryption="AES"/>
+    <!--///////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
+    <!--///////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
+    <!--///////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
+    <!--///////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
+    <!--///////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
+    <!--//////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////-->
+    <siteMap defaultProvider="XmlSiteMapProvider" enabled="true">
+      <providers>
+        <clear/>
+        <add name="XmlSiteMapProvider" siteMapFile="Web.sitemap" securityTrimmingEnabled="true" description="Default SiteMap provider." type="System.Web.XmlSiteMapProvider "/>
+        <add name="SiteMapEsuco" siteMapFile="WebEsuco.sitemap" securityTrimmingEnabled="true" type="System.Web.XmlSiteMapProvider "/>
+        <!--si no se ve el sitemap, verificá que esté creado el rol WilliamsAdmin!!!!!-->
+        <!--si no se ve el sitemap, verificá que esté creado el rol WilliamsAdmin!!!!!-->
+        <!--si no se ve el sitemap, verificá que esté creado el rol WilliamsAdmin!!!!!-->
+        <!--si no se ve el sitemap, verificá que esté creado el rol WilliamsAdmin!!!!!-->
+        <add name="SiteMapWilliams" siteMapFile="WebWilliams.sitemap" securityTrimmingEnabled="true" type="System.Web.XmlSiteMapProvider "/>
+        <add name="main" siteMapFile="Web.sitemap" type="Harriyott.Web.DynamicSiteMapProvider"/>
+        <!--http://harriyott.com/2007/03/adding-dynamic-nodes-to-aspnet-site.aspx-->
+      </providers>
+    </siteMap>
+    <roleManager enabled="true"/>
+    <!--http://www.asp.net/learn/whitepapers/request-validation-->
+    <pages enableViewStateMac="true" validateRequest="false" theme="Azul" controlRenderingCompatibilityVersion="3.5" clientIDMode="AutoID">
+      <!--controlRenderingCompatibilityVersion="3.5"> para el tema del prefijo 'ctl00_' -->
+      <controls>
+        <add tagPrefix="ajaxToolkit" namespace="AjaxControlToolkit" assembly="AjaxControlToolkit"/>
+      </controls>
+    </pages>
+    <!-- opciones de debug y trace -->
+    <!-- opciones de debug y trace -->
+    <!-- opciones de debug y trace -->
+    <healthMonitoring enabled="true">
+      <eventMappings>
+        <clear/>
+        <add name="All Events" type="System.Web.Management.WebBaseEvent,System.Web,&#xA;Version=2.0.0.0,Culture=neutral,PublicKeyToken=b03f5f7f11d50a3a" startEventCode="0" endEventCode="2147483647"/>
+        <add name="Heartbeats" type="System.Web.Management.WebHeartbeatEvent,System.Web,&#xA;Version=2.0.0.0,Culture=neutral,PublicKeyToken=b03f5f7f11d50a3a" startEventCode="0" endEventCode="2147483647"/>
+        <add name="Application Lifetime Events" type="System.Web.Management.WebApplicationLifetimeEvent,System.Web,&#xA;Version=2.0.0.0,Culture=neutral,PublicKeyToken=b03f5f7f11d50a3a" startEventCode="0" endEventCode="2147483647"/>
+        <add name="Request Processing Events" type="System.Web.Management.WebRequestEvent,System.Web,&#xA;Version=2.0.0.0,Culture=neutral,PublicKeyToken=b03f5f7f11d50a3a" startEventCode="0" endEventCode="2147483647"/>
+        <add name="All Errors" type="System.Web.Management.WebBaseErrorEvent,System.Web,&#xA;Version=2.0.0.0,Culture=neutral,PublicKeyToken=b03f5f7f11d50a3a" startEventCode="0" endEventCode="2147483647"/>
+        <add name="Infrastructure Errors" type="System.Web.Management.WebErrorEvent,System.Web,&#xA;Version=2.0.0.0,Culture=neutral,PublicKeyToken=b03f5f7f11d50a3a" startEventCode="0" endEventCode="2147483647"/>
+        <add name="Request Processing Errors" type="System.Web.Management.WebRequestErrorEvent,System.Web,&#xA;Version=2.0.0.0,Culture=neutral,PublicKeyToken=b03f5f7f11d50a3a" startEventCode="0" endEventCode="2147483647"/>
+        <add name="All Audits" type="System.Web.Management.WebAuditEvent,System.Web,&#xA;Version=2.0.0.0,Culture=neutral,PublicKeyToken=b03f5f7f11d50a3a" startEventCode="0" endEventCode="2147483647"/>
+        <add name="Failure Audits" type="System.Web.Management.WebFailureAuditEvent,System.Web,&#xA;Version=2.0.0.0,Culture=neutral,PublicKeyToken=b03f5f7f11d50a3a" startEventCode="0" endEventCode="2147483647"/>
+        <add name="Success Audits" type="System.Web.Management.WebSuccessAuditEvent,System.Web,&#xA;Version=2.0.0.0,Culture=neutral,PublicKeyToken=b03f5f7f11d50a3a" startEventCode="0" endEventCode="2147483647"/>
+      </eventMappings>
+      <providers>
+        <clear/>
+        <add name="EventLogProvider" type="System.Web.Management.EventLogWebEventProvider,System.Web,Version=2.0.0.0,Culture=neutral,PublicKeyToken=b03f5f7f11d50a3a"/>
+        <add name="SqlWebEventProvider" connectionStringName="LocalSqlServer" maxEventDetailsLength="1073741823" buffer="false" bufferMode="Notification" type="System.Web.Management.SqlWebEventProvider,System.Web,&#xA;Version=2.0.0.0,Culture=neutral,PublicKeyToken=b03f5f7f11d50a3a"/>
+        <add name="WmiWebEventProvider" type="System.Web.Management.WmiWebEventProvider,System.Web,&#xA;Version=2.0.0.0,Culture=neutral,PublicKeyToken=b03f5f7f11d50a3a"/>
+      </providers>
+    </healthMonitoring>
+    <!-- opciones de debug y trace -->
+    <trace enabled="true" pageOutput="false" requestLimit="40" localOnly="false"/>
+    <!-- opciones de debug y trace -->
+    <!-- opciones de debug y trace -->
+    <!-- opciones de debug y trace -->
+    <compilation debug="true" optimizeCompilations="true" batch="false" targetFramework="4.5">
+      <!--   al usar estas opciones, tuve problemas con las referencias.     optimizeCompilations="true"    batch="false">-->
+      <!-- opciones solo para desarrollo. batch=false hace que no se compile al principio. 
+      Si uso batch=false, pinta que al hacer modificaciones en el AppCode no anda bien el depurador!!!! tambien deja de hacer hit en los breakpoints
+      Si uso batch=false, pinta que al hacer modificaciones en el AppCode no anda bien el depurador!!!!
+      Si uso batch=false, pinta que al hacer modificaciones en el AppCode no anda bien el depurador!!!!
+      Si uso batch=false, pinta que al hacer modificaciones en el AppCode no anda bien el depurador!!!!
+      Si uso batch=false, pinta que al hacer modificaciones en el AppCode no anda bien el depurador!!!!
+      http://blog.lavablast.com/post/2010/12/01/Slash-your-ASPNET-compileload-time.aspx -->
+      <assemblies>
+        <add assembly="Microsoft.ReportViewer.WebForms, Version=10.0.0.0, Culture=neutral, PublicKeyToken=B03F5F7F11D50A3A"/>
+        <add assembly="Microsoft.ReportViewer.Common, Version=10.0.0.0, Culture=neutral, PublicKeyToken=B03F5F7F11D50A3A"/>
+        <!--<add assembly="DevExpress.Web.ASPxGridView.v10.1, Version=10.1.5.0, Culture=neutral, PublicKeyToken=940CFCDE86F32EFD" />
+        <add assembly="DevExpress.Data.v10.1, Version=10.1.5.0, Culture=neutral, PublicKeyToken=940CFCDE86F32EFD" />
+        <add assembly="DevExpress.Web.v10.1, Version=10.1.5.0, Culture=neutral, PublicKeyToken=940CFCDE86F32EFD" />
+        <add assembly="DevExpress.Web.ASPxEditors.v10.1, Version=10.1.5.0, Culture=neutral, PublicKeyToken=940CFCDE86F32EFD" />-->
+        <!--   <add assembly="DocumentFormat.OpenXml, Version=2.0.5022.0, Culture=neutral, PublicKeyToken=31BF3856AD364E35"/>-->
+        <!-- PAQUETE DE OPENXML (bajar el de 3 megas)  http://www.microsoft.com/download/en/details.aspx?displaylang=en&id=5124-->
+        <add assembly="ADODB, Version=7.0.3300.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"/>
+        <!--//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
+        <!--//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
+        <!--PAQUETE SMO-->
+        <!--hay que elegir bien si es de 64 bits (ojo, lo que importa es el server WEB, no el de SQL)-->
+        <!--http://download.microsoft.com/download/E/7/0/E705FF23-8F31-40D6-A39E-11694425E758/3082/x86/SharedManagementObjects.msi-->
+        <!--quizas te pide este tambien-->
+        <!--http://download.microsoft.com/download/9/1/3/9138773A-505D-43E2-AC08-9A77E1E0490B/1033/x86/SQLSysClrTypes.msi-->
+        <add assembly="Microsoft.SqlServer.Smo, Version=10.0.0.0, Culture=neutral, PublicKeyToken=89845DCD8080CC91"/>
+        <add assembly="Microsoft.SqlServer.SmoExtended, Version=10.0.0.0, Culture=neutral, PublicKeyToken=89845DCD8080CC91"/>
+        <add assembly="Microsoft.SqlServer.SqlEnum, Version=10.0.0.0, Culture=neutral, PublicKeyToken=89845DCD8080CC91"/>
+        <add assembly="Microsoft.SqlServer.ConnectionInfo, Version=10.0.0.0, Culture=neutral, PublicKeyToken=89845DCD8080CC91"/>
+        <add assembly="Microsoft.SqlServer.Management.Sdk.Sfc, Version=10.0.0.0, Culture=neutral, PublicKeyToken=89845DCD8080CC91"/>
+        <!--//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
+        <!--//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
+        <!--//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
+        <!--//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
+        <add assembly="System.Transactions, Version=4.0.0.0, Culture=neutral, PublicKeyToken=B77A5C561934E089"/>
+        <add assembly="System.Design, Version=4.0.0.0, Culture=neutral, PublicKeyToken=B03F5F7F11D50A3A"/>
+        <add assembly="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=B77A5C561934E089"/>
+        <add assembly="Microsoft.VisualBasic.Compatibility, Version=10.0.0.0, Culture=neutral, PublicKeyToken=B03F5F7F11D50A3A"/>
+        <add assembly="System.Web.Extensions.Design, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31BF3856AD364E35"/>
+        <add assembly="WindowsBase, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31BF3856AD364E35"/>
+        <add assembly="System.Web.Entity, Version=4.0.0.0, Culture=neutral, PublicKeyToken=B77A5C561934E089"/>
+        <add assembly="System.Data.Entity, Version=4.0.0.0, Culture=neutral, PublicKeyToken=B77A5C561934E089"/>
+        <add assembly="System.Data.Linq, Version=4.0.0.0, Culture=neutral, PublicKeyToken=B77A5C561934E089"/>
+        <!--//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
+        <!--//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
+        <!--<add assembly="ClearImageNet.70, Version=7.0.0.0, Culture=neutral, PublicKeyToken=71E5888BE264AAE0"/>-->
+        <add assembly="Microsoft.ReportViewer.DataVisualization, Version=10.0.0.0, Culture=neutral, PublicKeyToken=B03F5F7F11D50A3A"/>
+        <add assembly="Microsoft.ReportViewer.ProcessingObjectModel, Version=10.0.0.0, Culture=neutral, PublicKeyToken=B03F5F7F11D50A3A"/>
+        <add assembly="System.Xml.Linq, Version=4.0.0.0, Culture=neutral, PublicKeyToken=B77A5C561934E089"/>
+        <add assembly="System.Web.ApplicationServices, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31BF3856AD364E35"/>
+        <add assembly="Microsoft.VisualBasic, Version=10.0.0.0, Culture=neutral, PublicKeyToken=B03F5F7F11D50A3A"/>
+        <add assembly="System.Web.RegularExpressions, Version=4.0.0.0, Culture=neutral, PublicKeyToken=B03F5F7F11D50A3A"/>
+        <add assembly="System.Core, Version=4.0.0.0, Culture=neutral, PublicKeyToken=B77A5C561934E089"/>
+        <add assembly="PresentationCore, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31BF3856AD364E35"/>
+        <add assembly="System.Xaml, Version=4.0.0.0, Culture=neutral, PublicKeyToken=B77A5C561934E089"/>
+      </assemblies>
+      <!--//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
+      <!--//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
+      <!--//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
+      <!--//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
+      <!--//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
+      <!--//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
+      <buildProviders>
+        <add extension=".rdlc" type="Microsoft.Reporting.RdlBuildProvider, Microsoft.ReportViewer.WebForms, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"/>
+      </buildProviders>
+      <codeSubDirectories>
+        <add directoryName="vbcode"/>
+        <add directoryName="cscode"/>
+      </codeSubDirectories>
+    </compilation>
+    <httpHandlers>
+      <add path="Reserved.ReportViewerWebControl.axd" verb="*" type="Microsoft.Reporting.WebForms.HttpHandler, Microsoft.ReportViewer.WebForms, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" validate="false"/>
+      <!--Este flaco http://madskristensen.net/post/Optimize-WebResourceaxd-and-ScriptResourceaxd.aspx explica 
+    cómo comprimir los AXD (tanto el WebResource como el ScriptResource). Servirá para el reportviewer?-->
+      <!--<add verb="*" path="*js.axd" type="ScriptCompressorHandler" />-->
+      <!--<add verb="*" path="*Reserved.ReportViewerWebControl.axd" type="ScriptCompressorHandler" />-->
+      <add path="glimpse.axd" verb="GET" type="Glimpse.AspNet.HttpHandler, Glimpse.AspNet"/>
+    </httpHandlers>
+    <httpModules>
+      <!--Este flaco http://madskristensen.net/post/Optimize-WebResourceaxd-and-ScriptResourceaxd.aspx explica 
+    cómo comprimir los AXD (tanto el WebResource como el ScriptResource). Servirá para el reportviewer?-->
+      <!--<add type="ScriptCompressorModule" name="ScriptCompressorModule" />-->
+      <add name="Glimpse" type="Glimpse.AspNet.HttpModule, Glimpse.AspNet"/>
+    </httpModules>
+    <!--//////////////////////////////////////////////////////////
+    //////  GLOBALIZATION      ///////////////////////////////-->
+    <!--//////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////-->
+    <!--<globalization culture="es-AR" uiCulture="es-AR"/>-->
+    <!--<globalization culture="en-US"/>-->
+    <globalization culture="es-PE"/>
+    <!--perú usa el punto en decimales, pero en fecha usa dd/mm-->
+    <!--//////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////-->
+    <!--//////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////-->
+  </system.web>
+  <system.webServer xmlns="">
+
+      <security>
+        <requestFiltering>
+          <!-- maxRequestLength y maxAllowedContentLength-->
+	  <!--The default size is 30000000 bytes (28.6 MB). MaxValue is 4294967295 bytes (4 GB)-->
+         <!-- 100 MB in bytes -->
+         <requestLimits maxAllowedContentLength="104857600" />          
+        </requestFiltering>
+      </security>
+
+    <validation validateIntegratedModeConfiguration="false"/>
+    <modules>
+      <remove name="ScriptModule"/>
+      <add name="ScriptModule" preCondition="managedHandler" type="System.Web.Handlers.ScriptModule, System.Web.Extensions, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31BF3856AD364E35"/>
+      <add name="Glimpse" type="Glimpse.AspNet.HttpModule, Glimpse.AspNet" preCondition="integratedMode"/>
+    </modules>
+    <handlers>
+      <!--para que ande en IIS7-->
+      <add name="ReportViewerWebControlHandler" preCondition="integratedMode" verb="*" path="Reserved.ReportViewerWebControl.axd" type="Microsoft.Reporting.WebForms.HttpHandler,        Microsoft.ReportViewer.WebForms, Version=10.0.0.0,        Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"/>
+      <remove name="WebServiceHandlerFactory-Integrated"/>
+      <remove name="ScriptHandlerFactory"/>
+      <remove name="ScriptHandlerFactoryAppServices"/>
+      <remove name="ScriptResource"/>
+      
+      <add name="ScriptHandlerFactory"
+                 verb="*" path="*.asmx"
+                 type="System.Web.Script.Services.ScriptHandlerFactory, System.Web.Extensions, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35"
+                 resourceType="Unspecified" />
+      
+      <add name="ScriptHandlerFactoryAppServices" verb="*" path="*_AppService.axd" preCondition="integratedMode" type="System.Web.Script.Services.ScriptHandlerFactory, System.Web.Extensions, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31BF3856AD364E35"/>
+      <add name="ScriptResource" verb="GET,HEAD" path="ScriptResource.axd" preCondition="integratedMode" type="System.Web.Handlers.ScriptResourceHandler, System.Web.Extensions, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31BF3856AD364E35"/>
+      <add name="Glimpse" path="glimpse.axd" verb="GET" type="Glimpse.AspNet.HttpHandler, Glimpse.AspNet" preCondition="integratedMode"/>
+      <add name="MiniProfiler" path="mini-profiler-resources/*" verb="*" type="System.Web.Routing.UrlRoutingModule" resourceType="Unspecified" preCondition="integratedMode"/>
+    </handlers>
+  </system.webServer>
+  <runtime>
+    <assemblyBinding xmlns="urn:schemas-microsoft-com:asm.v1">
+      <!--//////////////////////////////////////////////////////////////////-->
+      <!--//////////////////////////////////////////////////////////////////-->
+      <!--//////////////////////////////////////////////////////////////////-->
+      <!--///////   EL EXTRAÑO CASO DE 2007 Y 2003 INTEROPS...  ////////////-->
+      <!--///GUARDA! QUE QUIZAS ES LO DE LOS PERMISOS DE OFFICE, Y TE //////-->
+      <!--///ESTÁ CONFUNDIENDO EL MENSAJE DE ERROR!!!!!!!!!!!!!!!!    //////-->
+      <!--
+      ////////////////////////////////////////////////////////////////////////////////////////////////
+      ////////////////////////////////////////////////////////////////////////////////////////////////
+      ////////////////////////////////////////////////////////////////////////////////////////////////
+      ERROR: Retrieving the COM class factory for component with CLSID {00024500-0000-0000-C000-000000000046} failed 
+      due to the following error: 80070005.
+      http://social.technet.microsoft.com/Forums/en-US/w7itproappcompat/thread/dde69147-a01a-4eb1-8ea9-31adbf874bed
+      http://blog.crowe.co.nz/archive/2006/03/02/589.aspx
+
+      1. In DCOMCNFG, right click on the My Computer and select properties.
+      2. Choose the COM Securities tab
+      3. In Access Permissions, click "Edit Defaults" and add Network Service to it and give
+      it "Allow local access" permission. Do the same for <Machine_name>\Users.
+      4. In launch and Activation Permissions, click "Edit Defaults" and add 
+        Network Service to it and give it "Local launch" and "Local Activation" permission.
+        Do the same for <Machine_name>\Users
+        Press OK and thats it. i can run my application now.
+      ////////////////////////////////////////////////////////////////////////////////////////////////
+      ////////////////////////////////////////////////////////////////////////////////////////////////
+      ////////////////////////////////////////////////////////////////////////////////////////////////
+      ////////////////////////////////////////////////////////////////////////////////////////////////
+      ////////////////////////////////////////////////////////////////////////////////////////////////
+      ////////////////////////////////////////////////////////////////////////////////////////////////
+      ////////////////////////////////////////////////////////////////////////////////////////////////
+      ////////////////////////////////////////////////////////////////////////////////////////////////
+        
+      -->
+      <!--
+      ////////////////////////////////////////////////////////////////////////////////////////////////
+      ////////////////////////////////////////////////////////////////////////////////////////////////
+      ////////////////////////////////////////////////////////////////////////////////////////////////
+      ////////////////////////////////////////////////////////////////////////////////////////////////
+      
+      C:\Archivos de programa\Microsoft Visual Studio 9.0\Visual Studio Tools for Office\PIA\Office11\
+      http://social.msdn.microsoft.com/Forums/en-US/netfxbcl/thread/aa8c9bde-5cb5-44e4-b9e2-7608470ce08e
+      http://www.netframeworkdev.com/net-base-class-library/adding-older-excel-object-library-12399.shtml
+      http://stackoverflow.com/questions/1071535/office-interop-developing-with-2003-pias-on-a-machine-with-office-2007
+      http://social.msdn.microsoft.com/Forums/es-ES/vstoes/thread/9c70a3c4-1828-441a-b561-fec714f14eed
+      http://davehearn.spaces.live.com/blog/cns!C8A77B3543CEA659!138.entry
+      
+      Como hago para el bolonqui de Office11 vs 12 en el server de produccion?
+      
+      Also, if you need to utilize a specific DLL copy it to the application folder so that there is 
+      only your dependencies       and not the applications installed on the computer.  I have found that with
+      my minor applications copying 
+      the DLL dependencies to the application location is alot easier than trying to reference a registry entry 
+      that has the possibility of being corrupt with outside interference (hack, user-hack, viruses, etc.)
+      
+      OK, la idea sería copiar las dlls (con copy local)... pero un web site no puede hacerlo (una web app sí)!
+
+      http://stackoverflow.com/questions/2022019/why-does-asp-net-web-site-reference-assembly-from-gac-when-adding-local-referenc
+
+
+      ////////////////////////////////////////////////////////////////////////////////////////////////
+      ////////////////////////////////////////////////////////////////////////////////////////////////
+      ////////////////////////////////////////////////////////////////////////////////////////////////
+      ////////////////////////////////////////////////////////////////////////////////////////////////
+      ////////////////////////////////////////////////////////////////////////////////////////////////
+      ////////////////////////////////////////////////////////////////////////////////////////////////
+      
+      -->
+      <!--
+      ////////////////////////////////////////////////////////////////////////////////////////////////
+      http://www.pcreview.co.uk/forums/thread-3525541.php 
+      ¿se puede instalar la PIA 2007 y que ande con el office 2003 en lugar del 2007?
+      ////////////////////////////////////////////////////////////////////////////////////////////////
+      -->
+      <!--
+      http://www.visualbasicask.com/visual-basic-interop-upgrade/interopexcel-after-uninstalling-office-2007-installing-office-2003.shtml
+      
+        Hi Bill Joe/ Lanceli
+
+        I had the same problem recently. I unistalled Office 2007 and installed office 2003. 
+        My provious project using Interop.Excel stopped working.
+        I discovered that the uninstall program leaves some registry keys 
+        that made wrong references to Excel.exe in C:\Program Files\Microsoft Office\Office12\Excel.exe location instead of C:\Program Files\Microsoft Office\Office11\Excel.exe (if your office was installed to the default location)
+        What to do:
+        My solution involves modifying registry - please ensure you know exactly what 
+        you are doing! You have been warned!
+        Open RegEdit from the run menu.
+        From the edit menu of Regedit, select Find. From the Look at option, uncheck Keys and leave the other two option checked. Unchecked match whole word.
+        Type \Excel12\Excel.exe into the find what textbox to search for \Excel12\Excel.exe in the registry
+
+        Once found, simply edit the portion containing \Excel12\Excel.exe to become\Excel11\Excel.exe everywhere you find it. Becareful not to change any parameters that may be found with any entry.
+
+        Once you are through, your project should just work.
+
+        Good luck
+
+        Dennis-->
+      <!--
+      ////////////////////////////////////////////////////////////////////////////////////////////////
+      ////////////////////////////////////////////////////////////////////////////////////////////////
+      ////////////////////////////////////////////////////////////////////////////////////////////////
+      ////////////////////////////////////////////////////////////////////////////////////////////////
+      ////////////////////////////////////////////////////////////////////////////////////////////////
+      ////////////////////////////////////////////////////////////////////////////////////////////////
+      ////////////////////////////////////////////////////////////////////////////////////////////////
+      ////////////////////////////////////////////////////////////////////////////////////////////////
+      ////////////////////////////////////////////////////////////////////////////////////////////////
+      ////////////////////////////////////////////////////////////////////////////////////////////////
+      ////////////////////////////////////////////////////////////////////////////////////////////////
+      ////////////////////////////////////////////////////////////////////////////////////////////////
+
+      http://www.ms-news.net/f2581/excel-2003-using-2007-pias-8005935.html
+      
+      Gary Dunne
+        Guest
+
+        Posts: n/a
+
+        Re: Excel 2003 using 2007 PIA's !
+        The answer.... For anyone that has a similar problem.
+
+        You can manually edit the policy file at
+        C:\windows\assembly\GAC\Policy.11.0.Microsoft.Office.Interop.Excel\12.0.0.0__71e9bce111e9429c\Policy.11.0.Microsoft.Office.Interop.Excel.config
+        change the value of newVersion to "11.0.0.0"
+
+        or, take the cleaner option which is...
+
+        Open the ".Net framework 2.0 Configuration" tool from Administrative Tools
+
+        Right click on Configured Assemblies and select the "Add..." menu
+        In the list find Microsoft.Office.Interop.Excel
+        Go to the Binding Policy tab and enter 11.0.0.0 for both Requested Version
+        and New Version
+
+        Repeat for "Policy.11.0.Microsoft.Office.Interop.Excel" and any other office
+        libraries used by your app
+
+        Job done ...
+
+      Gary
+    
+    
+      ////////////////////////////////////////////////////////////////////////////////////////////////
+      ////////////////////////////////////////////////////////////////////////////////////////////////
+      ////////////////////////////////////////////////////////////////////////////////////////////////
+      ////////////////////////////////////////////////////////////////////////////////////////////////
+      ////////////////////////////////////////////////////////////////////////////////////////////////
+      ////////////////////////////////////////////////////////////////////////////////////////////////
+      ////////////////////////////////////////////////////////////////////////////////////////////////
+      ////////////////////////////////////////////////////////////////////////////////////////////////
+      ////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+      <publisherPolicy apply="no"/>
+      <dependentAssembly>
+        <assemblyIdentity name="Microsoft.Office.Interop.Excel" publicKeyToken="71e9bce111e9429c" culture="neutral"/>
+        <publisherPolicy apply="yes"/>
+        <bindingRedirect oldVersion="12.0.0.0" newVersion="11.0.0.0"/>
+      </dependentAssembly>
+      <!--///////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
+      <!--///////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
+      <!--///////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
+      <!--///////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
+      <!--///////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
+      <!--///////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
+      <!--///////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
+      <!--///////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
+      <!--///////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
+      <!--///////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
+      <!--///////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
+      <!--///////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
+      <!--///////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
+      <!--///////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
+      <!--///////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
+      <!--///////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
+      <!--///////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
+      <!--///////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
+      <!--///////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
+      <!--///////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
+      <!--///////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
+      <!--///////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
+      <!--///////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
+      <!--///////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
+      <!--///////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
+      <!--///////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
+      <!--///////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
+      <!--///////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
+      <!--///////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
+      <!--///////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
+      <!--///////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
+    </assemblyBinding>
+  </runtime>
+  <system.net>
+    <mailSettings>
+      <!--http://www.mycsharpcorner.com/Post.aspx?postID=33-->
+      <!--  http://forums.asp.net/t/1124257.aspx   no podes usar ssl solo a traves de la configuracion. tenes q usar codigo -->
+      <smtp from="ProntoWebMail@gmail.com">
+        <network host="smtp.gmail.com" password="50TriplesdJQ" port="587" defaultCredentials="true" userName="ProntoWebMail@gmail.com"/>
+        <!--<network host="10.0.0.8" password="ss9df239sdf93" port="25" defaultCredentials="true" userName="buenosaires@williamsentregas.com.ar" />-->
+      </smtp>
+    </mailSettings>
+  </system.net>
+  <glimpse defaultRuntimePolicy="Off" endpointBaseUri="~/Glimpse.axd">
+    <!-- 
+          For more information on how to configure Glimpse, please visit http://getglimpse.com/Help/Configuration
+          or access {your site}/Glimpse.axd for even more details and a Configuration Tool to support you. 
+      -->
+  </glimpse>
+  <runtime xmlns="">
+    <assemblyBinding xmlns="urn:schemas-microsoft-com:asm.v1">
+      <dependentAssembly>
+        <assemblyIdentity name="Microsoft.Office.Interop.Word" publicKeyToken="71e9bce111e9429c" culture="neutral"/>
+        <bindingRedirect oldVersion="0.0.0.0-11.0.0.0" newVersion="11.0.0.0"/>
+      </dependentAssembly>
+	  
+	      <dependentAssembly>
+        <assemblyIdentity name="HtmlAgilityPack" publicKeyToken="bd319b19eaf3b43a" culture="neutral" />
+        <bindingRedirect oldVersion="0.0.0.0-1.5.1.0" newVersion="1.5.1.0" />
+      </dependentAssembly>
+  
+	     <dependentAssembly>
+        <assemblyIdentity name="DocumentFormat.OpenXml" publicKeyToken="8fb06cb64d019a17" culture="neutral" />
+        <bindingRedirect oldVersion="0.0.0.0-2.7.2.0" newVersion="2.7.2.0" />
+      </dependentAssembly>
+	  
+    </assemblyBinding>
+  </runtime>
+  <system.web.extensions>
+    <scripting>
+      <webServices>
+        <jsonSerialization maxJsonLength="50000000"/>
+      </webServices>
+    </scripting>
+  </system.web.extensions>
+</configuration>
