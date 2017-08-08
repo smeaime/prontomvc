@@ -1,0 +1,113 @@
+
+Log Entry : 
+08/08/2017 13:49:32
+Error in: http://localhost:50769/ProntoWeb/Principal.aspx. Error Message:Mariano esta logueado, pero lo redirijo al login porque faltan los datos de session. No deberia mejor mandarlo a SeleccionarEmpresa? Ademas, no hago el LogOut y le queda el cookie!!!
+__________________________
+
+Log Entry : 
+08/08/2017 13:49:35
+Error in: http://localhost:50769/ProntoWeb/CartasDePortes.aspx?tipo=Todas. Error Message:Mariano
+__________________________
+
+Log Entry : 
+08/08/2017 14:11:18
+Error in: http://localhost:50769/ProntoWeb/Principal.aspx. Error Message:Mariano esta logueado, pero lo redirijo al login porque faltan los datos de session. No deberia mejor mandarlo a SeleccionarEmpresa? Ademas, no hago el LogOut y le queda el cookie!!!
+__________________________
+
+Log Entry : 
+08/08/2017 14:11:18
+Error in: http://localhost:50769/ProntoWeb/CartasDePortes.aspx?tipo=Todas. Error Message:Mariano
+__________________________
+
+Log Entry : 
+08/08/2017 14:11:54
+Error in: http://localhost:50769/ProntoWeb/Factura.aspx?Id=95891. Error Message:Me faltan parametros. PuntosVenta_TX_PuntosVentaPorIdTipoComprobanteLetra esperaba 6 y se le pasaron 3
+__________________________
+
+Log Entry : 
+08/08/2017 14:11:57
+Error in: http://localhost:50769/ProntoWeb/Factura.aspx?Id=95891. Error Message:Me faltan parametros. PuntosVenta_TX_PuntosVentaPorIdTipoComprobanteLetra esperaba 6 y se le pasaron 3
+__________________________
+
+Log Entry : 
+08/08/2017 14:12:10
+Error in: http://localhost:50769/ProntoWeb/Factura.aspx?Id=95891. Error Message:ImprimirFacturaElectronica idfac 95891
+__________________________
+
+Log Entry : 
+08/08/2017 14:13:37
+Error in: http://localhost:50769/ProntoWeb/Factura.aspx?Id=95891. Error Message:Problema de acceso en el directorio de plantillas. Verificar permisos. System.IO.DirectoryNotFoundException: No se puede encontrar una parte de la ruta de acceso 'C:\Users\Administrador\Documents\bdl\pronto\prontoweb\Documentos\FactElec_Williams.docx'.
+   en System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   en System.IO.File.InternalCopy(String sourceFileName, String destFileName, Boolean overwrite, Boolean checkHost)
+   en System.IO.File.Copy(String sourceFileName, String destFileName)
+   en CartaDePorteManager.ImprimirFacturaElectronica(Int32 IdFactura, Boolean bMostrarPDF, String SC, String DirApp) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 13727
+__________________________
+
+Log Entry : 
+08/08/2017 14:13:38
+Error in: http://localhost:50769/ProntoWeb/Factura.aspx?Id=95891. Error Message:System.IO.DirectoryNotFoundException
+No se puede encontrar una parte de la ruta de acceso 'C:\Users\Administrador\Documents\bdl\pronto\prontoweb\Documentos\FactElec_Williams.docx'.
+   en System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   en System.IO.File.InternalCopy(String sourceFileName, String destFileName, Boolean overwrite, Boolean checkHost)
+   en System.IO.File.Copy(String sourceFileName, String destFileName)
+   en CartaDePorteManager.ImprimirFacturaElectronica(Int32 IdFactura, Boolean bMostrarPDF, String SC, String DirApp) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 13731
+   en FacturaABM.LinkImprimirXMLFactElectronica_Click(Object sender, EventArgs e) en C:\bdl\pronto\prontoweb\ProntoWeb\Factura.aspx.vb:línea 3754
+mscorlib
+__________________________
+
+Log Entry : 
+08/08/2017 14:13:44
+Error in: http://localhost:50769/Reserved.ReportViewerWebControl.axd?OpType=SessionKeepAlive&ControlID=969af5245e134d89a3fbb425a67fd245&Mode=true. Error Message:Microsoft.Reporting.WebForms.AspNetSessionExpiredException
+ASP.NET session has expired or could not be found
+   en Microsoft.Reporting.WebForms.ViewerDataOperation..ctor()
+   en Microsoft.Reporting.WebForms.HttpHandler.GetHandler(String operationType)
+   en Microsoft.Reporting.WebForms.HttpHandler.ProcessRequest(HttpContext context)
+   en System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   en System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+Microsoft.ReportViewer.WebForms
+__________________________
+
+Log Entry : 
+08/08/2017 14:13:47
+Error in: http://localhost:50769/ProntoWeb/Factura.aspx?Id=95891. Error Message:Mariano esta logueado, pero lo redirijo al login porque faltan los datos de session. No deberia mejor mandarlo a SeleccionarEmpresa? Ademas, no hago el LogOut y le queda el cookie!!!
+__________________________
+
+Log Entry : 
+08/08/2017 14:13:51
+Error in: http://localhost:50769/ProntoWeb/Factura.aspx?Id=95891. Error Message:Me faltan parametros. PuntosVenta_TX_PuntosVentaPorIdTipoComprobanteLetra esperaba 6 y se le pasaron 3
+__________________________
+
+Log Entry : 
+08/08/2017 14:13:54
+Error in: http://localhost:50769/ProntoWeb/Factura.aspx?Id=95891. Error Message:Me faltan parametros. PuntosVenta_TX_PuntosVentaPorIdTipoComprobanteLetra esperaba 6 y se le pasaron 3
+__________________________
+
+Log Entry : 
+08/08/2017 14:14:07
+Error in: http://localhost:50769/ProntoWeb/Factura.aspx?Id=95891. Error Message:ImprimirFacturaElectronica idfac 95891
+__________________________
+
+Log Entry : 
+08/08/2017 14:14:08
+Error in: http://localhost:50769/ProntoWeb/Factura.aspx?Id=95891. Error Message:Creando docx
+__________________________
+
+Log Entry : 
+08/08/2017 14:14:21
+Error in: http://localhost:50769/ProntoWeb/Factura.aspx?Id=95891. Error Message:System.IO.FileLoadException
+No se puede cargar el archivo o ensamblado 'DocumentFormat.OpenXml, Version=0.0.1.0, Culture=neutral, PublicKeyToken=8fb06cb64d019a17' ni una de sus dependencias. La definición del manifiesto del ensamblado no coincide con la referencia al ensamblado. (Excepción de HRESULT: 0x80131040)
+   en CartaDePorteManager.FacturaXML_DOCX_Williams(String document, Factura oFac, String SC)
+   en CartaDePorteManager.ImprimirFacturaElectronica(Int32 IdFactura, Boolean bMostrarPDF, String SC, String DirApp) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 13737
+   en FacturaABM.LinkImprimirXMLFactElectronica_Click(Object sender, EventArgs e) en C:\bdl\pronto\prontoweb\ProntoWeb\Factura.aspx.vb:línea 3754
+BusinessLogic
+__________________________
+
+Log Entry : 
+08/08/2017 14:26:26
+Error in: http://localhost:50769/ProntoWeb/Principal.aspx. Error Message:Mariano esta logueado, pero lo redirijo al login porque faltan los datos de session. No deberia mejor mandarlo a SeleccionarEmpresa? Ademas, no hago el LogOut y le queda el cookie!!!
+__________________________
+
+Log Entry : 
+08/08/2017 14:26:27
+Error in: http://localhost:50769/ProntoWeb/CartasDePortes.aspx?tipo=Todas. Error Message:Mariano
+__________________________
