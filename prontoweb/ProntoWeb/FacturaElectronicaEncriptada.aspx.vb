@@ -78,6 +78,18 @@ Partial Class FacturaElectronicaEncriptada
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As EventArgs) Handles Me.Load
 
+
+
+
+        If True Then 'parche porque no anda el openxml en produccion pero sí en clientes
+
+            Response.Redirect(Request.Url.ToString.Replace("https://prontoweb.williamsentregas.com.ar", "http://prontoclientes.williamsentregas.com.ar"))
+            Return
+
+        End If
+
+
+
         'sDirFTP = HttpContext.Current.Server.MapPath("~/" + ConfigurationManager.AppSettings("sDirFTP")) 'no necesito usar MapPath, porque no estoy usando un dir virtual
         'sDirFTP = ConfigurationManager.AppSettings("sDirFTP")
         'sDirFTP = HttpContext.Current.Server.MapPath("~/") + "..\Pronto\DataBackupear\"

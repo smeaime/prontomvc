@@ -251,10 +251,6 @@
       <Project>{7d5126a2-b2ca-441c-8d73-2ad8f3ef7fdb}</Project>
       <Name>ProntoAgente</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Servicio\ProntoMVC.Servicio.csproj">
-      <Project>{562FC343-B9F1-4418-A862-2D4F2097DDC1}</Project>
-      <Name>ProntoMVC.Servicio</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
