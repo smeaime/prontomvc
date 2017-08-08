@@ -856,12 +856,23 @@ namespace ProntoMVC.Tests
 
 
 
-//28265	FACTURACION FUTUROS Y OPCIONES
-//42952	ELIMINAR CAMIONES EN POSICION
-//42950	Web Service Syngenta - Enviar por FTP
-//38061	No mostrar conflictos en el paso 2 cuando no es au
-//42685	Ranking de clientes - No facturado
-//29606	Alta de clientes por OCR
+        //28265	FACTURACION FUTUROS Y OPCIONES
+        //42952	ELIMINAR CAMIONES EN POSICION
+        //42950	Web Service Syngenta - Enviar por FTP
+        //38061	No mostrar conflictos en el paso 2 cuando no es au
+        //42685	Ranking de clientes - No facturado
+        //29606	Alta de clientes por OCR
+
+
+
+
+        [TestMethod]
+        public void facelec()
+        {
+
+            var output2 = CartaDePorteManager.ImprimirFacturaElectronica(87781, false, SC, DirApp);
+        }
+
 
 
 
@@ -6771,7 +6782,6 @@ Adjunto un ejemplo que tiene cartas de porte de 8 entregadores que no son Willia
 
             var l = ClassFlexicapture.PreprocesarArchivoSubido(zipFile, "Mariano", DirApp, false, true, true, 3);
         }
-
 
 
 
