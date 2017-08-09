@@ -129,6 +129,9 @@
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\packages\Newtonsoft.Json.4.5.9\lib\net40\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="ProntoMVC">
+      <HintPath>..\..\ProntoMVC.dll</HintPath>
+    </Reference>
     <Reference Include="Repositorio">
       <HintPath>..\Repositorio\bin\Debug\Repositorio.dll</HintPath>
     </Reference>
@@ -242,10 +245,6 @@
     <ProjectReference Include="..\InterfazFlexicapture\InterfazFlexicapture.csproj">
       <Project>{cca1e32e-7c60-4312-b521-11a6e4ccfca2}</Project>
       <Name>InterfazFlexicapture</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\ProntoMVC\ProntoMVC.csproj">
-      <Project>{17487390-6297-4d1c-8b73-57b636f0c114}</Project>
-      <Name>ProntoMVC</Name>
     </ProjectReference>
     <ProjectReference Include="..\ProntoWindowsService\ProntoAgente.csproj">
       <Project>{7d5126a2-b2ca-441c-8d73-2ad8f3ef7fdb}</Project>

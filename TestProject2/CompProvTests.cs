@@ -7,7 +7,7 @@ using ProntoMVC.Models;
 using ProntoMVC.Controllers;
 using System.Web;
 using Repo;
-using Servicio;
+//using Servicio;
 using ProntoMVC.Data.Models;
 using System.Web.Mvc;
 using System.Web.Security;
@@ -60,6 +60,7 @@ namespace ProntoMVC.Tests
             // hacer
         }
 
+        /*
 
         [TestMethod()]
         public void ProbarGrabacionDelServicioDeComprobanteProveedor()
@@ -104,7 +105,7 @@ namespace ProntoMVC.Tests
             }
         }
 
-
+        */
 
 
         ComprobanteProveedor PreparoObjeto()

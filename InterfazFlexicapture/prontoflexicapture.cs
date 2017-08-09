@@ -6490,6 +6490,10 @@ In M38, but not in M37, the debug log contains the error message below. Full log
 
 
 
+            // para q corra en el server3, necesito el chrome 49 y el chromedriver 2.22
+
+
+
 
             //https://thefriendlytester.co.uk/2017/04/new-headless-chrome-with-selenium.html
 
