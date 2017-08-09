@@ -1929,7 +1929,7 @@ Public Class ExcelImportadorManager
         'loguear apertura del excel q puede fallar
         Dim ds As DataSet
         Try
-            If pFileName.Contains("Urenport") Then 'es html
+            If pFileName.ToUpper.Contains("URENPORT") Then 'es html
 
                 ds = New DataSet()
                 ds.Tables.Add(FuncionesGenericasCSharp.GetExcel5_HTML_AgilityPack(pFileName))
@@ -1939,7 +1939,7 @@ Public Class ExcelImportadorManager
 
 
         Catch ex As Exception
-            ErrHandler2.WriteError("Error al abrir el excel. " + ex.ToString)
+            ErrHandler2.WriteError("Error al abrir el excel. " + pFileName + "   " + ex.ToString)
 
             Throw
         End Try
@@ -4426,9 +4426,10 @@ Public Class ExcelImportadorManager
 
 
         'Dim connectionString As String = String.Format("Provider=Microsoft.Jet.OLEDB.4.0; data source={0}; Extended Properties=""Excel 8.0;HDR=YES;""", fileName)
+        Dim conn As OleDbConnection
 
-
-        Using conn As OleDbConnection = New OleDbConnection(connectionString)
+        Try
+            conn = New OleDbConnection(connectionString)
 
             Try
                 conn.Open()
@@ -4444,13 +4445,22 @@ Public Class ExcelImportadorManager
                 'all data are in a <table>, each <tr> is a row and each <td> is a cell. Then I think I can parse it in a html way.
                 '*/
 
-
+                ErrHandler2.WriteError("Leyo bien con Microsoft.ACE.OLEDB")
             Catch ex As System.Data.OleDb.OleDbException
+
+
+                'si tira ""External table is not in the expected format." typically occurs when trying to use an Excel 2007 file with a connection string that uses: Microsoft.Jet.OLEDB.4.0 and Extended Properties=Excel 8.0"
+                '"External table is not in the expected format." typically occurs when trying to use an Excel 2007 file with 
+                'a Connection string that uses: Microsoft.Jet.OLEDB0.4.0 And Extended Properties=Excel 8.0
+
+                ErrHandler2.WriteError("Falló con Microsoft.ACE.OLEDB. Pruebo con Microsoft.Jet.OLEDB")
+
                 'http://stackoverflow.com/questions/1139390/excel-external-table-is-not-in-the-expected-format
                 Dim connectionString2 As String = String.Format("Provider=Microsoft.Jet.OLEDB.4.0; data source={0}; Extended Properties=""Excel 8.0;HDR=YES;""", fileName)
-                Dim conn2 = New OleDbConnection(connectionString2)
-                conn2.Open()
+                conn = New OleDbConnection(connectionString2)
+                conn.Open()
 
+                ErrHandler2.WriteError("Leyo bien con Microsoft.Jet.OLEDB")
 
                 Throw
             End Try
@@ -4486,8 +4496,13 @@ Public Class ExcelImportadorManager
                 Dim data = ds.Tables("anyNameHere")
                 Return data
             Catch ex As Exception
+                ErrHandler2.WriteError(ex)
                 MandarMailDeError("error getExcel2. Existe esa hoja? Si es el 'OleDbException Unspecified error', REINICIÁ el IIS, parece que es por eso.   Es por usar impersonation?  Uso Jet o ACE?????   archivo:" & fileName & "," & workSheetName & "                " & ex.ToString)
                 'error al hacer el fill? Uso Jet o ACE?????
+
+
+
+
 
 
                 'My(experience)  In production servers the OleDb components loaded on 
@@ -4526,7 +4541,12 @@ Public Class ExcelImportadorManager
 
                 Throw
             End Try
-        End Using
+        Finally
+            conn.Dispose()
+
+        End Try
+
+
 
     End Function
 
