@@ -15846,11 +15846,15 @@ usuario As String, ConexBDLmaster As String,
             Dim cartas As New CerealNet.WSCartasDePorte.respuestaEntrega_v3
             Dim cps(dbcartas.Count - 1) As CerealNet.WSCartasDePorte.cartaPorte_v3
 
+            ErrHandler2.WriteError("WebService: Lote de " + dbcartas.Count.ToString + " cartas. IdCliente=" + idcliente.ToString + " " + fechadesde.ToShortTimeString + " " + fechahasta.ToShortTimeString)
+
+
             For n = 0 To dbcartas.Count - 1
+
+                Dim cp As New CerealNet.WSCartasDePorte.cartaPorte_v3
 
                 Try
 
-                    Dim cp As New CerealNet.WSCartasDePorte.cartaPorte_v3
                     Dim dbc = dbcartas(n)
 
                     'HECHO
@@ -16174,8 +16178,10 @@ usuario As String, ConexBDLmaster As String,
                     cp.listaAnalisis = anas.ToArray
                     cps(n) = cp
                 Catch ex As Exception
+                    ErrHandler2.WriteError("La carta " + cp.cartaporte.ToString + " no pudo importarse. Se salta")
                     ErrHandler2.WriteError(ex)
-                    Return Nothing
+
+                    'Return Nothing
 
                 End Try
 
