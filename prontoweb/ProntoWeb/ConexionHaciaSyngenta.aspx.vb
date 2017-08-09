@@ -514,8 +514,23 @@ Partial Class ConexionHaciaSyngenta
 
         Dim output As String = Path.GetTempPath() + "Syngenta_" + DateTime.Now.ToString("ddMMMyyyy_HHmmss") + ".xlsx"
 
+
+
+
+
+
+
         Dim s = New ServicioCartaPorte.servi()
 
+
+
+        Dim endpointStr = ConfigurationManager.AppSettings("SyngentaServiceEndpoint")
+        Dim UserName = ConfigurationManager.AppSettings("SyngentaServiceUser")
+        Dim Password = ConfigurationManager.AppSettings("SyngentaServicePass")
+        Dim x = s.WebServiceSyngenta(dbcartas, endpointStr, UserName, Password)
+
+
+        s.GenerarExcelSyngentaWebService(x, output)
 
 
         s.UploadFtpFile(ConfigurationManager.AppSettings("SyngentaFTPdominio"),

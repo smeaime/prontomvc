@@ -114,8 +114,8 @@ namespace ProntoMVC.Tests
         [TestInitialize]
         public void Initialize()
         {
-            //    string bldmastersql = System.Configuration.ConfigurationManager.ConnectionStrings["ApplicationServices"].ConnectionString;
-            //    bldmasterappconfig = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(bldmastersql);
+            //    string bdlmastersql = System.Configuration.ConfigurationManager.ConnectionStrings["ApplicationServices"].ConnectionString;
+            //    bdlmasterappconfig = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(bldmastersql);
             //    sc = ProntoMVC.Data.Models.Auxiliares.FormatearConexParaEntityFramework(Generales.conexPorEmpresa(nombreempresa, bldmasterappconfig, usuario, true));
             //
 
@@ -2375,7 +2375,7 @@ Debería ser 6.75% de rebaja y viene 7.25%
 
             // var respEntrega = cerealnet.obtenerDescargas(usuario, clave, cuit, "2016-10-01", "2016-10-25");
             var respEntrega = CartaDePorteManager.BajarListadoDeCartaPorte_CerealNet_DLL_v3(usuario, clave, cuit,
-                                            new DateTime(2016, 9, 1),
+                                            new DateTime(2016, 1, 1),
                                             new DateTime(2017, 1, 1), CartaDePorteManager.enumCDPestado.Posicion,
                                             SC, DirApp, scbdlmasterappconfig);
 
