@@ -8,8 +8,8 @@ using System.Linq;
 using ProntoMVC.Models;
 using ProntoMVC.Controllers;
 using System.Web;
-using Repo;
-using Servicio;
+//using Repo;
+//using Servicio;
 using ProntoMVC.Data.Models;
 using System.Web.Mvc;
 using System.Web.Security;
@@ -856,12 +856,55 @@ namespace ProntoMVC.Tests
 
 
 
-        //28265	FACTURACION FUTUROS Y OPCIONES
-        //42952	ELIMINAR CAMIONES EN POSICION
-        //42950	Web Service Syngenta - Enviar por FTP
-        //38061	No mostrar conflictos en el paso 2 cuando no es au
-        //42685	Ranking de clientes - No facturado
-        //29606	Alta de clientes por OCR
+
+
+
+
+        [TestMethod]
+        public void Urenport_5_37950_equivalencia_del_destino_42713()
+        {
+
+            // es precisamente así:
+            /*
+             * http://stackoverflow.com/questions/1139390/excel-external-table-is-not-in-the-expected-format
+             * Just add my case. My xls file was created by a data export function from a website, the file extention is xls, 
+            it can be normally opened by MS Excel 2003. But both Microsoft.Jet.OLEDB.4.0 and Microsoft.ACE.OLEDB.12.0 got 
+                an "External table is not in the expected format" exception.
+                    Finally, the problem is, just as the exception said, "it's not in the expected format". Though 
+            it's extention name is xls, but when I open it with a text editor, it is actually a well-formed html file, 
+            all data are in a <table>, each <tr> is a row and each <td> is a cell. Then I think I can parse it in a html way.
+            */
+
+
+
+            //insertarequivalencia("DESTINO|LDC ARGENTINA S A", "LDC ARG (PTA TIMBUES)");
+
+            //string archivoExcel = @"C:\bdl\pronto\docstest\Posicion-170626-1330.xls";
+            string archivoExcel = @"C:\bdl\pronto\docstest\New folder\Posicion-170809-0850.xls";
+            //string archivoExcel = @"C:\bdl\pronto\docstest\New folder\urenport_09ago2017_085016.xls";
+
+            //FuncionesGenericasCSharp.GetExcel5_HTML_AgilityPack(archivoExcel);
+            //FuncionesGenericasCSharp.GetExcel4_ExcelDataReader(archivoExcel);
+
+            //explota
+
+            string ms = "";
+
+            int m_IdMaestro = 0;
+            Pronto.ERP.BO.CartaDePorte carta;
+
+
+            string log = "";
+            //hay que pasar el formato como parametro 
+            ExcelImportadorManager.FormatearExcelImportadoEnDLL(ref m_IdMaestro, archivoExcel,
+                                    LogicaImportador.FormatosDeExcel.Urenport, SC, 0, ref log, "", 0, "");
+
+            var dt = LogicaImportador.TraerExcelDeBase(SC, ref m_IdMaestro);
+
+            // verificar q Importa bien el destino especifico.
+
+        }
+
 
 
 
@@ -1893,54 +1936,6 @@ La interface será procesa por Syngenta y si la misma no puede ser procesada cor
 
 
         }
-
-
-
-
-
-        [TestMethod]
-        public void Urenport_5_37950_equivalencia_del_destino_42713()
-        {
-
-            // es precisamente así:
-            /*
-             * http://stackoverflow.com/questions/1139390/excel-external-table-is-not-in-the-expected-format
-             * Just add my case. My xls file was created by a data export function from a website, the file extention is xls, 
-            it can be normally opened by MS Excel 2003. But both Microsoft.Jet.OLEDB.4.0 and Microsoft.ACE.OLEDB.12.0 got 
-                an "External table is not in the expected format" exception.
-                    Finally, the problem is, just as the exception said, "it's not in the expected format". Though 
-            it's extention name is xls, but when I open it with a text editor, it is actually a well-formed html file, 
-            all data are in a <table>, each <tr> is a row and each <td> is a cell. Then I think I can parse it in a html way.
-            */
-
-
-
-            //insertarequivalencia("DESTINO|LDC ARGENTINA S A", "LDC ARG (PTA TIMBUES)");
-
-            string archivoExcel = @"C:\Users\Administrador\Documents\bdl\pronto\docstest\Posicion-170626-1330.xls";
-
-            //FuncionesGenericasCSharp.GetExcel5_HTML_AgilityPack(archivoExcel);
-            //FuncionesGenericasCSharp.GetExcel4_ExcelDataReader(archivoExcel);
-
-            //explota
-
-            string ms = "";
-
-            int m_IdMaestro = 0;
-            Pronto.ERP.BO.CartaDePorte carta;
-
-
-            string log = "";
-            //hay que pasar el formato como parametro 
-            ExcelImportadorManager.FormatearExcelImportadoEnDLL(ref m_IdMaestro, archivoExcel,
-                                    LogicaImportador.FormatosDeExcel.Urenport, SC, 0, ref log, "", 0, "");
-
-            var dt = LogicaImportador.TraerExcelDeBase(SC, ref m_IdMaestro);
-
-            // verificar q Importa bien el destino especifico.
-
-        }
-
 
 
 

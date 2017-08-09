@@ -6,8 +6,8 @@ using System.Linq;
 using ProntoMVC.Models;
 using ProntoMVC.Controllers;
 using System.Web;
-using Repo;
-using Servicio;
+//using Repo;
+//using Servicio;
 using ProntoMVC.Data.Models;
 using System.Web.Mvc;
 using System.Web.Security;
@@ -280,7 +280,7 @@ namespace ProntoMVC.Tests
         }
 
 
-
+        /*
 
         [TestMethod()]
         public void ProbarGrabacionDelServicioDeFondoFijo()
@@ -315,8 +315,8 @@ namespace ProntoMVC.Tests
             //Assert.AreEqual(o, d);
         }
 
-
-
+    */
+    /*
         [TestMethod()]
         public void TestGrabarUsandoMockDelRepositorio()
         {
@@ -340,7 +340,7 @@ namespace ProntoMVC.Tests
             //Assert.AreEqual(name, objects.Single().Name);
         }
 
-
+    */
 
         //[TestMethod]
         //public void EditAllowsUsersToEditDinnersTheyOwn()
