@@ -100,6 +100,10 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "prontoweb", "prontoweb\", "
 		VWDPort = "50769"
 		SlnRelativePath = "prontoweb\"
 	EndProjectSection
+	ProjectSection(ProjectDependencies) = postProject
+		{AB8BB713-FFA1-4440-B49B-1857E61367C9} = {AB8BB713-FFA1-4440-B49B-1857E61367C9}
+		{CCA1E32E-7C60-4312-B521-11A6E4CCFCA2} = {CCA1E32E-7C60-4312-B521-11A6E4CCFCA2}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
