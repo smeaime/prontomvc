@@ -49,10 +49,6 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="BusinessLogic, Version=1.0.37.25818, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packagesotros\BusinessLogic.dll</HintPath>
-    </Reference>
     <Reference Include="BusinessObject">
       <HintPath>..\..\bussinessobject\BusinessObject\bin\Debug\BusinessObject.dll</HintPath>
     </Reference>
@@ -65,10 +61,6 @@
     <Reference Include="Interop.FCEngine">
       <HintPath>..\prontoweb\Bin\Interop.FCEngine.dll</HintPath>
       <EmbedInteropTypes>True</EmbedInteropTypes>
-    </Reference>
-    <Reference Include="ProntoMVC.Data, Version=1.0.23.25815, Culture=neutral, processorArchitecture=x86">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packagesotros\ProntoMVC.Data.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
@@ -110,6 +102,14 @@
     <Content Include="LicensingSettings.xml" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\BussinessLogic\BusinessLogic.vbproj">
+      <Project>{ab8bb713-ffa1-4440-b49b-1857e61367c9}</Project>
+      <Name>BusinessLogic</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Data\ProntoMVC.Data.csproj">
+      <Project>{2f9b9020-304c-44a6-bcc4-9e434c687d31}</Project>
+      <Name>ProntoMVC.Data</Name>
+    </ProjectReference>
     <ProjectReference Include="..\InterfazFlexicapture\InterfazFlexicapture.csproj">
       <Project>{cca1e32e-7c60-4312-b521-11a6e4ccfca2}</Project>
       <Name>InterfazFlexicapture</Name>
