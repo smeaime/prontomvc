@@ -16040,7 +16040,19 @@ usuario As String, ConexBDLmaster As String,
                     cp.tarifa = If(dbc.Tarifa, 0)
                     cp.Establecimiento = dbc.EstablecimientoDesc
                     cp.IdPosicionEstado = If(dbc.Situacion, 0)
-                    cp.PosicionEstado = ExcelImportadorManager.Situaciones(If(dbc.Situacion, 0))
+
+
+                    Try
+
+                        Try
+                            cp.PosicionEstado = ExcelImportadorManager.Situaciones(If(dbc.Situacion, 0))
+                        Catch ex As Exception
+                            cp.PosicionEstado = ExcelImportadorManager.Situaciones(0)
+                        End Try
+                    Catch ex As Exception
+                        ErrHandler.WriteError("falla la importacion de situacion")
+                    End Try
+
 
 
                     cp.SojaSustentableCodCondicion = dbc.SojaSustentableCodCondicion
