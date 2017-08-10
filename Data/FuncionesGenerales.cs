@@ -2805,7 +2805,7 @@ namespace CerealNet.WSCartasDePorte
         public System.DateTime HoraArribo;
         public int brutoproc;
         public int taraproc;
-        public int Humedad;
+        public decimal Humedad;
         public int MermaHumedad;
         public int OtrasMermas;
         public int NetoFinal;
