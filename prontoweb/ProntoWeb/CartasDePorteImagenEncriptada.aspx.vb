@@ -82,6 +82,12 @@ Partial Class CartasDePorteImagenEncriptada
 
 
 
+
+
+
+
+
+
         'sDirFTP = HttpContext.Current.Server.MapPath("~/" + ConfigurationManager.AppSettings("sDirFTP")) 'no necesito usar MapPath, porque no estoy usando un dir virtual
         'sDirFTP = ConfigurationManager.AppSettings("sDirFTP")
         'sDirFTP = HttpContext.Current.Server.MapPath("~/") + "..\Pronto\DataBackupear\"
@@ -96,6 +102,9 @@ Partial Class CartasDePorteImagenEncriptada
             sDirFTP = "~/DataBackupear\"
             'sDirFTP = "http://localhost:48391/ProntoWeb/DataBackupear/"
         Else
+            'ssdfgsdfg
+
+
             SC = EncriptarParaCSharp(scWilliamsRelease) '    "Data Source=osvm21;Initial catalog=Williams;User ID=sa; Password=Zeekei3quo;Connect Timeout=90")
             'sDirFTP = "https://prontoweb.williamsentregas.com.ar/DataBackupear/"
         End If
@@ -175,7 +184,35 @@ Partial Class CartasDePorteImagenEncriptada
                 myCartaDePorte.PathImagen = "9675224abr2013_071802_30868007-CP.jpg"
                 myCartaDePorte.PathImagen2 = "4088624abr2013_071803_30868007-TK.jpg"
             Else
+
+
                 myCartaDePorte = CartaDePorteManager.GetItem(SC, IdCartaDePorte, True)
+
+
+                If myCartaDePorte Is Nothing Then
+                    '                Log Entry 
+                    '08/09/2017 16:58:56
+                    'Error in: https :  //prontoweb.williamsentregas.com.ar/ProntoWeb/CartasDePorteImagenEncriptada.aspx?Id=h1iKH/Ma/Mw=. Error Message:Viendo Encriptacion del ID 3033792
+                    '__________________________
+
+                    '                Log Entry 
+                    '08/09/2017 16:58:56
+                    'Error in: https :  //prontoweb.williamsentregas.com.ar/ProntoWeb/CartasDePorteImagenEncriptada.aspx?Id=h1iKH/Ma/Mw=. Error Message:System.NullReferenceException
+                    '                Object reference Not set to an instance of an object.
+                    '   at CartaDePorteManager.GetItem(String SC, Int32 id, Boolean getCartaDePorteDetalles) in C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:Line 9636
+                    'BusinessLogic
+
+                    ErrHandler2.WriteError(IdCartaDePorte.ToString + " " + Encriptar(SC))
+                End If
+
+
+
+
+
+
+
+
+
                 Response.Write("Carta " & myCartaDePorte.NumeroCartaDePorte)
                 If True Then
                     reloadimagen()

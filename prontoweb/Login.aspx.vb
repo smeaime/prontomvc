@@ -32,6 +32,16 @@ Partial Class Login
         'End If
 
 
+
+        If Request.Browser("IsMobileDevice") = "true" Then
+            'Response.Redirect("CartaDePorteInformesAccesoClientesMovil.aspx")
+        End If
+
+
+
+
+
+
         If Not IsPostBack Then
             '///////////////////////////////////
             '///////////////////////////////////
