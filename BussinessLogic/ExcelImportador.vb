@@ -4413,6 +4413,42 @@ Public Class ExcelImportadorManager
     Public Shared Function GetExcel2_ODBC(ByVal fileName As String, Optional ByVal workSheetName As String = "") As DataTable
 
 
+        ''https://stackoverflow.com/questions/3469368/how-to-handle-accessviolationexception
+        '            In .NET 4.0, the runtime handles certain exceptions raised as Windows Structured Error Handling (SEH) errors as indicators 
+        '            of Corrupted State. These Corrupted State Exceptions (CSE) are Not allowed to be caught by your standard managed code. I won't get
+        '            into the why's or how's here
+
+
+        'Application: ProntoAgente.exe
+        '        Framework Version: v4.0.30319
+        'Description: The Process was terminated due to an unhandled exception.
+        'Exception Info: System.AccessViolationException
+        'Stack:
+        '        at System.Data.OleDb.DataSourceWrapper.InitializeAndCreateSession(System.Data.OleDb.OleDbConnectionString, System.Data.OleDb.SessionWrapper ByRef)
+        '   at System.Data.OleDb.OleDbConnectionInternal..ctor(System.Data.OleDb.OleDbConnectionString, System.Data.OleDb.OleDbConnection)
+        '   at System.Data.OleDb.OleDbConnectionFactory.CreateConnection(System.Data.Common.DbConnectionOptions, System.Data.Common.DbConnectionPoolKey, System.Object, System.Data.ProviderBase.DbConnectionPool, System.Data.Common.DbConnection)
+        '   at System.Data.ProviderBase.DbConnectionFactory.CreateConnection(System.Data.Common.DbConnectionOptions, System.Data.Common.DbConnectionPoolKey, System.Object, System.Data.ProviderBase.DbConnectionPool, System.Data.Common.DbConnection, System.Data.Common.DbConnectionOptions)
+        '   at System.Data.ProviderBase.DbConnectionFactory.CreateNonPooledConnection(System.Data.Common.DbConnection, System.Data.ProviderBase.DbConnectionPoolGroup, System.Data.Common.DbConnectionOptions)
+        '   at System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(System.Data.Common.DbConnection, System.Threading.Tasks.TaskCompletionSource`1<System.Data.ProviderBase.DbConnectionInternal>, System.Data.Common.DbConnectionOptions, System.Data.ProviderBase.DbConnectionInternal ByRef)
+        '   at System.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(System.Data.Common.DbConnection, System.Data.ProviderBase.DbConnectionFactory, System.Threading.Tasks.TaskCompletionSource`1<System.Data.ProviderBase.DbConnectionInternal>, System.Data.Common.DbConnectionOptions)
+        '   at System.Data.ProviderBase.DbConnectionInternal.OpenConnection(System.Data.Common.DbConnection, System.Data.ProviderBase.DbConnectionFactory)
+        '   at System.Data.OleDb.OleDbConnection.Open()
+        '   at ExcelImportadorManager.GetExcel2_ODBC(System.String, System.String)
+        '   at ExcelImportadorManager.UrenportExcelToDataset(System.String, System.String)
+        '   at ExcelImportadorManager.FormatearExcelImportadoEnDLL(Int32 ByRef, System.String, FormatosDeExcel, System.String, Int32, System.String ByRef, System.String, Int32, System.String)
+        '   at ProntoWindowsService.Service1.TandaPegatinas(System.String, System.String, System.String)
+        '   at ProntoWindowsService.Service1.DoWorkSoloPegatinas()
+        '   at System.Threading.ThreadHelper.ThreadStart_Context(System.Object)
+        '   at System.Threading.ExecutionContext.RunInternal(System.Threading.ExecutionContext, System.Threading.ContextCallback, System.Object, Boolean)
+        '   at System.Threading.ExecutionContext.Run(System.Threading.ExecutionContext, System.Threading.ContextCallback, System.Object, Boolean)
+        '   at System.Threading.ExecutionContext.Run(System.Threading.ExecutionContext, System.Threading.ContextCallback, System.Object)
+        '   at System.Threading.ThreadHelper.ThreadStart()
+
+
+
+
+
+
 
         'http://stackoverflow.com/questions/9943065/the-microsoft-ace-oledb-12-0-provider-is-not-registered-on-the-local-machine
         'http://stackoverflow.com/questions/9943065/the-microsoft-ace-oledb-12-0-provider-is-not-registered-on-the-local-machine
@@ -4426,10 +4462,9 @@ Public Class ExcelImportadorManager
 
 
         'Dim connectionString As String = String.Format("Provider=Microsoft.Jet.OLEDB.4.0; data source={0}; Extended Properties=""Excel 8.0;HDR=YES;""", fileName)
-        Dim conn As OleDbConnection
 
-        Try
-            conn = New OleDbConnection(connectionString)
+
+        Using conn = New OleDbConnection(connectionString)
 
             Try
                 conn.Open()
@@ -4457,12 +4492,19 @@ Public Class ExcelImportadorManager
 
                 'http://stackoverflow.com/questions/1139390/excel-external-table-is-not-in-the-expected-format
                 Dim connectionString2 As String = String.Format("Provider=Microsoft.Jet.OLEDB.4.0; data source={0}; Extended Properties=""Excel 8.0;HDR=YES;""", fileName)
-                conn = New OleDbConnection(connectionString2)
-                conn.Open()
+
+                'conn = New OleDbConnection(connectionString2) 'no hagas esta asignacion. creá OTRA variable. creo 
+                '                                               q explota AccessViolationException por eso -explotó acá? o explotó en la primera llamada? porque este 
+                '                                               catch captura otra excepcion
+                'conn.Open()
+
+                Dim conn2 = New OleDbConnection(connectionString2)
+                conn2.Open()
 
                 ErrHandler2.WriteError("Leyo bien con Microsoft.Jet.OLEDB")
 
-                Throw
+                Return Nothing
+                'Throw
             End Try
 
 
@@ -4541,10 +4583,9 @@ Public Class ExcelImportadorManager
 
                 Throw
             End Try
-        Finally
-            conn.Dispose()
 
-        End Try
+
+        End Using
 
 
 

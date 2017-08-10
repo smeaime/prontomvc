@@ -693,6 +693,14 @@ namespace ProntoWindowsService
         {
 
 
+
+
+
+
+
+
+
+
             //IEngine engine = null;
             //IEngineLoader engineLoader = null;
             //IFlexiCaptureProcessor processor = null;
@@ -835,8 +843,48 @@ namespace ProntoWindowsService
 
 
 
+
+
+                    /*
+                    'https://stackoverflow.com/questions/3469368/how-to-handle-accessviolationexception
+                    In .NET 4.0, the runtime handles certain exceptions raised as Windows Structured Error Handling (SEH) errors as indicators 
+                    of Corrupted State. These Corrupted State Exceptions (CSE) are not allowed to be caught by your standard managed code. I won't get
+                    into the why's or how's here
+
+
+
+        'Application: ProntoAgente.exe
+        '        Framework Version: v4.0.30319
+        'Description: The Process was terminated due to an unhandled exception.
+        'Exception Info: System.AccessViolationException
+        'Stack:
+        '        at System.Data.OleDb.DataSourceWrapper.InitializeAndCreateSession(System.Data.OleDb.OleDbConnectionString, System.Data.OleDb.SessionWrapper ByRef)
+        '   at System.Data.OleDb.OleDbConnectionInternal..ctor(System.Data.OleDb.OleDbConnectionString, System.Data.OleDb.OleDbConnection)
+        '   at System.Data.OleDb.OleDbConnectionFactory.CreateConnection(System.Data.Common.DbConnectionOptions, System.Data.Common.DbConnectionPoolKey, System.Object, System.Data.ProviderBase.DbConnectionPool, System.Data.Common.DbConnection)
+        '   at System.Data.ProviderBase.DbConnectionFactory.CreateConnection(System.Data.Common.DbConnectionOptions, System.Data.Common.DbConnectionPoolKey, System.Object, System.Data.ProviderBase.DbConnectionPool, System.Data.Common.DbConnection, System.Data.Common.DbConnectionOptions)
+        '   at System.Data.ProviderBase.DbConnectionFactory.CreateNonPooledConnection(System.Data.Common.DbConnection, System.Data.ProviderBase.DbConnectionPoolGroup, System.Data.Common.DbConnectionOptions)
+        '   at System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(System.Data.Common.DbConnection, System.Threading.Tasks.TaskCompletionSource`1<System.Data.ProviderBase.DbConnectionInternal>, System.Data.Common.DbConnectionOptions, System.Data.ProviderBase.DbConnectionInternal ByRef)
+        '   at System.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(System.Data.Common.DbConnection, System.Data.ProviderBase.DbConnectionFactory, System.Threading.Tasks.TaskCompletionSource`1<System.Data.ProviderBase.DbConnectionInternal>, System.Data.Common.DbConnectionOptions)
+        '   at System.Data.ProviderBase.DbConnectionInternal.OpenConnection(System.Data.Common.DbConnection, System.Data.ProviderBase.DbConnectionFactory)
+        '   at System.Data.OleDb.OleDbConnection.Open()
+        '   at ExcelImportadorManager.GetExcel2_ODBC(System.String, System.String)
+        '   at ExcelImportadorManager.UrenportExcelToDataset(System.String, System.String)
+        '   at ExcelImportadorManager.FormatearExcelImportadoEnDLL(Int32 ByRef, System.String, FormatosDeExcel, System.String, Int32, System.String ByRef, System.String, Int32, System.String)
+        '   at ProntoWindowsService.Service1.TandaPegatinas(System.String, System.String, System.String)
+        '   at ProntoWindowsService.Service1.DoWorkSoloPegatinas()
+        '   at System.Threading.ThreadHelper.ThreadStart_Context(System.Object)
+        '   at System.Threading.ExecutionContext.RunInternal(System.Threading.ExecutionContext, System.Threading.ContextCallback, System.Object, Boolean)
+        '   at System.Threading.ExecutionContext.Run(System.Threading.ExecutionContext, System.Threading.ContextCallback, System.Object, Boolean)
+        '   at System.Threading.ExecutionContext.Run(System.Threading.ExecutionContext, System.Threading.ContextCallback, System.Object)
+        '   at System.Threading.ThreadHelper.ThreadStart()
+        */
+
                     TandaPegatinas(SC1, DirApp1, idthread);
                     TandaPegatinas(SC2, DirApp2, idthread);
+
+
+
+
 
 
                     // esta bien hacerlo asi? -separar la tarea de pegatinas en un hilo aparte

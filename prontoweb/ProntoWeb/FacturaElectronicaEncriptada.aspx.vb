@@ -81,7 +81,7 @@ Partial Class FacturaElectronicaEncriptada
 
 
 
-        If True Then 'parche porque no anda el openxml en produccion pero sí en clientes
+        If False Then 'parche porque no anda el openxml en produccion pero sí en clientes
 
             Response.Redirect(Request.Url.ToString.Replace("https://prontoweb.williamsentregas.com.ar", "http://prontoclientes.williamsentregas.com.ar"))
             Return
@@ -140,8 +140,10 @@ Partial Class FacturaElectronicaEncriptada
 
                 If Not (Request.QueryString.Get("Modo") Is Nothing) Then
                     If Request.QueryString.Get("Modo") = "DescargaFactura" Then
-                        Dim output = CartaDePorteManager.ImprimirFacturaElectronica(IdFactura, True, SC, DirApp)
 
+
+                        Dim output = CartaDePorteManager.ImprimirFacturaElectronica(IdFactura, True, SC, DirApp)
+                        ErrHandler2.WriteError("PDF Generado. Descargando  " & output)
 
                         Try
                             Dim MyFile1 = New FileInfo(output) 'quizás si me fijo de nuevo, ahora verifica que el archivo existe...
@@ -157,6 +159,7 @@ Partial Class FacturaElectronicaEncriptada
                                 MsgBoxAjax(Me, "No se pudo generar el informe. Consulte al administrador")
                             End If
                         Catch ex As Exception
+                            ErrHandler2.WriteError(ex)
                             MsgBoxAjax(Me, ex.ToString)
                             Return
                         End Try
@@ -164,6 +167,7 @@ Partial Class FacturaElectronicaEncriptada
                     ElseIf Request.QueryString.Get("Modo") = "DescargaFacturaDOCX" Then
                         Dim output = CartaDePorteManager.ImprimirFacturaElectronica(IdFactura, False, SC, DirApp)
 
+                        ErrHandler2.WriteError("DOCX Generado. Descargando  " & output)
 
                         Try
                             Dim MyFile1 = New FileInfo(output) 'quizás si me fijo de nuevo, ahora verifica que el archivo existe...
@@ -179,6 +183,7 @@ Partial Class FacturaElectronicaEncriptada
                                 MsgBoxAjax(Me, "No se pudo generar el informe. Consulte al administrador")
                             End If
                         Catch ex As Exception
+                            ErrHandler2.WriteError(ex)
                             MsgBoxAjax(Me, ex.ToString)
                             Return
                         End Try
@@ -198,12 +203,15 @@ Partial Class FacturaElectronicaEncriptada
 
                 'ImprimirFacturaElectronica(IdFactura)
             Else
-                ErrHandler2.WriteError("Página no autorizada")
-                MsgBoxAjax(Me, "Página no autorizada")
+                ErrHandler2.WriteError("No se pasó el identificador de la factura")
+                MsgBoxAjax(Me, "No se pasó el identificador de la factura")
                 Exit Sub
             End If
 
         Catch ex As Exception
+            ErrHandler2.WriteError("VERIFICAR QUE NO ESTEN USANDO HTTP EN LUGAR DE HTTPS!!!!! O no se encontró la factura? " & IdFactura)
+
+
             ErrHandler2.WriteError(ex)
             MsgBoxAjax(Me, "Página no autorizada")
             Exit Sub
