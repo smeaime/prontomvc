@@ -264,6 +264,9 @@ isnull(LOCORI.CodigoAFIP,'') AS CodigoAFIP
 
 
 
+
+
+
 FROM    CartasDePorte CDP          
 LEFT OUTER JOIN Clientes CLIVEN ON CDP.Vendedor = CLIVEN.IdCliente       
 LEFT OUTER JOIN Clientes CLICO1 ON CDP.CuentaOrden1 = CLICO1.IdCliente   

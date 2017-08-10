@@ -72,11 +72,9 @@ document.cookie = 'killme' + escape('nothing')
                 EnablePageMethods="False" AsyncPostBackTimeout="360000">
             </ajaxToolkit:ToolkitScriptManager>
             <br />
-            <br />
-            <br />
-            <table style="border-style: none; font-family: arial,sans-serif;" width="980px">
+            <table style="border-style: none; font-family: arial,sans-serif;">
                 <tr>
-                    <td width="20"></td>
+                    
                     <td align="centre" width="" style="margin-left: 0px">
                         <asp:Panel ID="PanelBDL" runat="server" HorizontalAlign="Center">
                             <div>
@@ -121,57 +119,7 @@ document.cookie = 'killme' + escape('nothing')
                             <br />
                             <br />
                             <br />
-                            <table style="display: none; text-align: center;">
-                                <tr>
-                                    <td>
-                                        <asp:Image ID="Image2" runat="server" BorderColor="Black" BorderWidth="1px" BorderStyle="None"
-                                            Height="50px" ImageUrl="~/Imagenes/loguito/0bak.gif" Style="margin-top: 5px"
-                                            Width="50px" Visible="false" />
-                                        <asp:Image ID="premio" runat="server" BorderColor="Black" BorderWidth="1px" BorderStyle="None"
-                                            Height="50px" ImageUrl="~/Imagenes/it-works-award1.png" Style="margin-top: 5px"
-                                            Width="50px" Visible="false" />
-                                    </td>
-                                    <td></td>
-                                    <td></td>
-                                    <td style="font-size: small">
-                                        <b>Representantes de Soluciones</b>
-                                        <br />
-                                        <br />
-                                        para el Área Técnica y Desarrolladores de Sistemas Administrativos, de Producción,
-                                    RRHH, Contables y Financieros
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <asp:Image ID="Image1" runat="server" BorderColor="Black" BorderWidth="1px" BorderStyle="None"
-                                            Height="50px" ImageUrl="~/Imagenes/it-works-award1.png" Style="margin-top: 5px"
-                                            Width="50px" Visible="false" />
-                                    </td>
-                                    <td></td>
-                                    <td></td>
-                                    <td style="font-size: small">
-                                        <b>Representantes de Soluciones</b> para el Área Técnica y Desarrolladores de Sistemas
-                                    Administrativos, de Producción, RRHH, Contables y Financieros
-                                    </td>
-                                </tr>
-                                <tr style="display: none;">
-                                    <%-- <tr style="display:none;">--%>
-                                    <td>
-                                        <asp:Image ID="premio3" runat="server" BorderColor="Black" BorderWidth="1px" BorderStyle="None"
-                                            Height="50px" ImageUrl="~/ProntoWeb/Imagenes/images (1).jpg" Style="margin-top: 5px"
-                                            Width="50px" Visible="true" />
-                                    </td>
-                                    <td></td>
-                                    <td></td>
-                                    <td style="font-size: small">
-                                        <b>Casi listo</b>
-                                        <br />
-                                        <br />
-                                        para el Área Técnica y Desarrolladores de Sistemas Administrativos, de Producción,
-                                    RRHH, Contables y Financieros
-                                    </td>
-                                </tr>
-                            </table>
+
                             </div>
                         </asp:Panel>
                         <%--                    /////////////////////////////////////////////////
@@ -195,7 +143,10 @@ document.cookie = 'killme' + escape('nothing')
                                     <%--Williams Entregas S.A.--%>
                                 </div>
 
-                                <div style="text-align: center; font-size: 28px; width: ; margin-left: 50px; font-family: Tahoma; width: 400px; text-shadow: 0 1px 1px white;">
+
+                                <br />
+                                <div style="text-align: center; font-size: 20px; width: ; margin-left: 50px; 
+                                                    font-family: Tahoma; width: 400px; ">
                                     <%--<div style="font-size: x-large; width: 400px; margin-left: 50px; font-family: Tahoma;">--%>
                                 Junto a nuestros clientes</b>
                                 </div>
@@ -416,13 +367,15 @@ document.cookie = 'killme' + escape('nothing')
                             </div>
                         </asp:Panel>
                     </td>
-                    <td></td>
-                    <td align="right">
+                    
+                </tr>
+                <tr>
+                    <td align="center">
                         <div align="center" class="boxLogin" style="border: 1px solid #CCCCFF; width: 290px; height: 245px; background-color: #F0F0FF; color: #000000; vertical-align: middle;">
                             <br />
                             <%--         http://stackoverflow.com/questions/4891655/why-doesnt-the-password-recovery-link-show-up-in-my-login-control--%>
                             <asp:Login ID="Login1" runat="server" DestinationPageUrl="~/SeleccionarEmpresa.aspx"
-                                ForeColor="Black" TitleText="" Font-Size="Small" LoginButtonText="Entrar" RememberMeText="Recordar contraseña"
+                                ForeColor="Black" TitleText="" Font-Size="Medium" LoginButtonText="Entrar" RememberMeText="Recordar contraseña"
                                 UserNameLabelText="Usuario" PasswordLabelText="Contraseña " Font-Bold="False"
                                 PasswordRecoveryUrl="OlvidoPassword.aspx" PasswordRecoveryText="Forgot Your Password?">
                                 <LayoutTemplate>
@@ -434,17 +387,18 @@ document.cookie = 'killme' + escape('nothing')
                                     <br />
                                     <br />
                                     <div style="text-align: left;">
-                                        <asp:Label ID="PasswordLabel" runat="server" AssociatedControlID="Password" Font-Size="Small"
+                                        <asp:Label ID="PasswordLabel" runat="server" AssociatedControlID="Password" Font-Size="Medium"
                                             Font-Bold="true">Contraseña</asp:Label><br />
                                     </div>
                                     <asp:TextBox ID="Password" runat="server" TextMode="Password" Font-Size="Medium"
                                         Style="padding: 5px;" Width="240"></asp:TextBox><br />
                                     <br />
-                                    <asp:Button ID="LoginButton" runat="server" CommandName="Login" Text=" Entrar " Height="30"
-                                        Font-Size="11" Font-Bold="true" Width="100" CssClass="but" ValidationGroup="LoginUserValidationGroup"
+                                    <asp:Button ID="LoginButton" runat="server" CommandName="Login" Text=" Entrar " Height="60"
+                                        Font-Size="20" Font-Bold="true" Width="150" CssClass="but" ValidationGroup="LoginUserValidationGroup"
                                         Font-Names="'Lucida Grande', Tahoma" Style="margin-left: 0px; background-color: #4F6AA3; color: White; border: 1px solid #2F5BB7;" />
                                     <loginbuttonstyle cssclass="but" />
-                                    <asp:CheckBox ID="RememberMe" runat="server" TextAlign="Left" Style="margin-left: 30px; vertical-align: middle" />
+                                    <asp:CheckBox ID="RememberMe" runat="server" TextAlign="Left" 
+                                        Style="margin-left: 30px; vertical-align: middle" />
                                     <asp:Label ID="RememberMeLabel" runat="server" AssociatedControlID="RememberMe" CssClass="inline"
                                         Font-Size="Small" Style="text-align: right; vertical-align: middle">No cerrar sesión</asp:Label>
                                     <br />
@@ -467,7 +421,7 @@ document.cookie = 'killme' + escape('nothing')
                             </asp:UpdatePanel>
                         </div>
                     </td>
-                    <td style="width: 40px"></td>
+                    
                 </tr>
             </table>
             <div>
@@ -567,7 +521,7 @@ document.cookie = 'killme' + escape('nothing')
                 <tr>
                 </tr>
                 <td valign="bottom" style="height: 15px; text-align: center" align="center">
-                    <asp:HyperLink NavigateUrl="http://www.bdlconsultores.com.ar/" Text="©2013 BDL" runat="server"
+                    <asp:HyperLink NavigateUrl="http://www.bdlconsultores.com.ar/" Text="©2017 BDL" runat="server"
                         Font-Bold="false" Font-Underline="false" ForeColor="#4F6AA3" Font-Size="Small"
                         ID="lnkBDL" CssClass="linkHoverSubrayado"></asp:HyperLink>
                     <asp:Label ID="lblVersion" runat="server"></asp:Label>

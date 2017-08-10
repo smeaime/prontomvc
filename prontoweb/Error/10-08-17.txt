@@ -1,0 +1,111 @@
+
+Log Entry : 
+08/10/2017 13:23:07
+Error in: http://localhost:50769/ProntoWeb/FacturaElectronicaEncriptada.aspx. Error Message:Página no autorizada
+__________________________
+
+Log Entry : 
+08/10/2017 13:23:26
+Error in: http://localhost:50769/ProntoWeb/Principal.aspx. Error Message:Mariano esta logueado, pero lo redirijo al login porque faltan los datos de session. No deberia mejor mandarlo a SeleccionarEmpresa? Ademas, no hago el LogOut y le queda el cookie!!!
+__________________________
+
+Log Entry : 
+08/10/2017 13:23:41
+Error in: http://localhost:50769/ProntoWeb/CartasDePortes.aspx?tipo=Todas. Error Message:Mariano
+__________________________
+
+Log Entry : 
+08/10/2017 13:25:45
+Error in: http://localhost:50769/ProntoWeb/FacturaElectronicaEncriptada.aspx?Modo=DescargaFactura&Id=Dy7tmpyyFT4=. Error Message:Viendo Encriptacion del ID 97307
+__________________________
+
+Log Entry : 
+08/10/2017 13:26:05
+Error in: http://localhost:50769/ProntoWeb/FacturaElectronicaEncriptada.aspx?Modo=DescargaFactura&Id=Dy7tmpyyFT4=. Error Message:ImprimirFacturaElectronica idfac 97307
+__________________________
+
+Log Entry : 
+08/10/2017 13:27:13
+Error in: http://localhost:50769/ProntoWeb/FacturaElectronicaEncriptada.aspx?Modo=DescargaFactura&Id=Dy7tmpyyFT4=. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartaDePorteManager.ImprimirFacturaElectronica(Int32 IdFactura, Boolean bMostrarPDF, String SC, String DirApp) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 13717
+   en FacturaElectronicaEncriptada.Page_Load(Object sender, EventArgs e) en C:\bdl\pronto\prontoweb\ProntoWeb\FacturaElectronicaEncriptada.aspx.vb:línea 143
+BusinessLogic
+__________________________
+
+Log Entry : 
+08/10/2017 13:34:18
+Error in: http://localhost:50769/ProntoWeb/FacturaElectronicaEncriptada.aspx. Error Message:No se pasó el identificador de la factura
+__________________________
+
+Log Entry : 
+08/10/2017 13:34:25
+Error in: http://localhost:50769/ProntoWeb/FacturaElectronicaEncriptada.aspx. Error Message:No se pasó el identificador de la factura
+__________________________
+
+Log Entry : 
+08/10/2017 13:34:25
+Error in: http://localhost:50769/ProntoWeb/FacturaElectronicaEncriptada.aspx. Error Message:ImprimirFacturaElectronica idfac -1
+__________________________
+
+Log Entry : 
+08/10/2017 13:34:28
+Error in: http://localhost:50769/ProntoWeb/FacturaElectronicaEncriptada.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartaDePorteManager.ImprimirFacturaElectronica(Int32 IdFactura, Boolean bMostrarPDF, String SC, String DirApp) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 13717
+   en FacturaElectronicaEncriptada.btnDescargaPDF_Click(Object sender, EventArgs e) en C:\bdl\pronto\prontoweb\ProntoWeb\FacturaElectronicaEncriptada.aspx.vb:línea 365
+   en System.Web.UI.WebControls.Button.OnClick(EventArgs e)
+   en System.Web.UI.WebControls.Button.RaisePostBackEvent(String eventArgument)
+   en System.Web.UI.WebControls.Button.System.Web.UI.IPostBackEventHandler.RaisePostBackEvent(String eventArgument)
+   en System.Web.UI.Page.RaisePostBackEvent(IPostBackEventHandler sourceControl, String eventArgument)
+   en System.Web.UI.Page.RaisePostBackEvent(NameValueCollection postData)
+   en System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+BusinessLogic
+__________________________
+
+Log Entry : 
+08/10/2017 13:34:53
+Error in: http://localhost:50769/ProntoWeb/FacturaElectronicaEncriptada.aspx?Modo=DescargaFactura&Id=Dy7tmpyyFT4=. Error Message:Viendo Encriptacion del ID 97307
+__________________________
+
+Log Entry : 
+08/10/2017 13:36:35
+Error in: http://localhost:50769/ProntoWeb/FacturaElectronicaEncriptada.aspx?Modo=DescargaFactura&Id=Dy7tmpyyFT4=. Error Message:ImprimirFacturaElectronica idfac 97307
+__________________________
+
+Log Entry : 
+08/10/2017 13:36:35
+Error in: http://localhost:50769/ProntoWeb/FacturaElectronicaEncriptada.aspx?Modo=DescargaFactura&Id=Dy7tmpyyFT4=. Error Message:No se encontró la factura? 97307
+__________________________
+
+Log Entry : 
+08/10/2017 13:36:35
+Error in: http://localhost:50769/ProntoWeb/FacturaElectronicaEncriptada.aspx?Modo=DescargaFactura&Id=Dy7tmpyyFT4=. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartaDePorteManager.ImprimirFacturaElectronica(Int32 IdFactura, Boolean bMostrarPDF, String SC, String DirApp) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 13717
+   en FacturaElectronicaEncriptada.Page_Load(Object sender, EventArgs e) en C:\bdl\pronto\prontoweb\ProntoWeb\FacturaElectronicaEncriptada.aspx.vb:línea 143
+BusinessLogic
+__________________________
+
+Log Entry : 
+08/10/2017 15:13:10
+Error in: . Error Message:System.Data.SqlClient.SqlException
+Error relacionado con la red o específico de la instancia mientras se establecía una conexión con el servidor SQL Server. No se encontró el servidor o éste no estaba accesible. Compruebe que el nombre de la instancia es correcto y que SQL Server está configurado para admitir conexiones remotas. (provider: SQL Network Interfaces, error: 26 - Error al buscar el servidor o instancia especificado)
+   en System.Data.SqlClient.SqlInternalConnectionTds..ctor(DbConnectionPoolIdentity identity, SqlConnectionString connectionOptions, SqlCredential credential, Object providerInfo, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance, SqlConnectionString userConnectionOptions, SessionData reconnectSessionData, DbConnectionPool pool, String accessToken, Boolean applyTransientFaultHandling)
+   en System.Data.SqlClient.SqlConnectionFactory.CreateConnection(DbConnectionOptions options, DbConnectionPoolKey poolKey, Object poolGroupProviderInfo, DbConnectionPool pool, DbConnection owningConnection, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionFactory.CreatePooledConnection(DbConnectionPool pool, DbConnection owningObject, DbConnectionOptions options, DbConnectionPoolKey poolKey, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionPool.CreateObject(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   en System.Data.ProviderBase.DbConnectionPool.UserCreateRequest(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   en System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.Open()
+   en Pronto.ERP.Dal.EmpresaDB.GetList(String SC)
+   en Pronto.ERP.Bll.EmpresaManager.GetList(String SC) en C:\bdl\pronto\BussinessLogic\EmpresaManager.vb:línea 13
+   en ASP.global_asax.Application_Start(Object sender, EventArgs e) en C:\bdl\pronto\prontoweb\global.asax:línea 307
+.Net SqlClient Data Provider
+__________________________

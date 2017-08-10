@@ -6643,7 +6643,7 @@ Adjunto un ejemplo que tiene cartas de porte de 8 entregadores que no son Willia
         //CartasPorte_DynamicGridData
 
         [TestMethod]
-        public void grillaParaModuloCalidad_29439()
+        public void grillaParaModuloCalidadSituacion_29439()
         {
 
             string filtro = "{\"groupOp\":\"OR\",\"rules\":[{\"field\":\"DestinoDesc\",\"op\":\"eq\",\"data\":\"MOL. CAÑUELAS - ZARATE\"},{\"field\":\"DestinoDesc\",\"op\":\"eq\",\"data\":\"TERMINAL 6\"}]}";
