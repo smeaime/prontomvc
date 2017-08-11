@@ -1,3 +1,4 @@
+
 --/////////////////////////////////////////////////////////////////////////////
 --/////////////////////////////////////////////////////////////////////////////
 
@@ -40,7 +41,68 @@ AS
 
       
     SELECT  
-			CDP.*,
+			
+			 CDP.IdCartaDePorte, CDP.NumeroCartaDePorte, CDP.IdUsuarioIngreso, CDP.FechaIngreso, 
+ CDP.Anulada, CDP.IdUsuarioAnulo, CDP.FechaAnulacion, 
+ isnull(CDP.Observaciones,''), 
+ CDP.FechaTimeStamp, CDP.Vendedor, CDP.CuentaOrden1, 
+ CDP.CuentaOrden2, CDP.Corredor, CDP.Entregador, CDP.Procedencia, CDP.Patente, CDP.IdArticulo, CDP.IdStock, CDP.Partida, CDP.IdUnidad, 
+ CDP.IdUbicacion, CDP.Cantidad, CDP.Cupo, CDP.NetoProc, CDP.Calidad       ,CDP.BrutoPto      ,CDP.TaraPto      ,CDP.NetoPto      
+,CDP.Acoplado      ,CDP.Humedad      ,CDP.Merma      ,CDP.NetoFinal      ,CDP.FechaDeCarga      ,CDP.FechaVencimiento      ,CDP.CEE  
+,CDP.IdTransportista      ,CDP.TransportistaCUITdesnormalizado      ,CDP.IdChofer      ,CDP.ChoferCUITdesnormalizado      ,CDP.CTG  
+,CDP.Contrato      ,CDP.Destino      ,CDP.Subcontr1      ,CDP.Subcontr2      ,CDP.Contrato1       ,CDP.contrato2      ,CDP.KmARecorrer
+,CDP.Tarifa      ,CDP.FechaDescarga      ,CDP.Hora      ,
+
+isnull(CDP.NRecibo,0)      ,
+CDP.CalidadDe      ,CDP.TaraFinal     
+,CDP.BrutoFinal      ,CDP.Fumigada      ,CDP.Secada,CDP.Exporta,
+
+
+   CDP.NobleExtranos      ,CDP.NobleNegros
+,CDP.NobleQuebrados      ,CDP.NobleDaniados      ,CDP.NobleChamico      ,CDP.NobleChamico2      ,CDP.NobleRevolcado
+,CDP.NobleObjetables      ,CDP.NobleAmohosados      ,CDP.NobleHectolitrico      ,CDP.NobleCarbon      
+,CDP.NoblePanzaBlanca      ,CDP.NoblePicados      ,CDP.NobleMGrasa      ,CDP.NobleAcidezGrasa     
+,CDP.NobleVerdes      ,CDP.NobleGrado      ,CDP.NobleConforme      ,CDP.NobleACamara      ,CDP.Cosecha 
+,CDP.HumedadDesnormalizada      ,CDP.Factor      ,CDP.IdFacturaImputada      ,CDP.PuntoVenta   
+,CDP.SubnumeroVagon      ,CDP.TarifaFacturada      ,CDP.TarifaSubcontratista1     
+,CDP.TarifaSubcontratista2      ,CDP.FechaArribo      ,CDP.[Version]      ,CDP.MotivoAnulacion 
+,CDP.NumeroSubfijo      ,CDP.IdEstablecimiento      ,CDP.EnumSyngentaDivision   
+,CDP.Corredor2      ,CDP.IdUsuarioModifico      ,CDP.FechaModificacion      
+,CDP.FechaEmision      ,CDP.EstaArchivada      ,CDP.ExcluirDeSubcontratistas   
+,CDP.IdTipoMovimiento      ,CDP.IdClienteAFacturarle      ,CDP.SubnumeroDeFacturacion   
+,CDP.AgregaItemDeGastosAdministrativos      ,CDP.CalidadGranosQuemados      ,CDP.CalidadGranosQuemadosBonifica_o_Rebaja      
+,CDP.CalidadTierra      ,CDP.CalidadTierraBonifica_o_Rebaja      ,CDP.CalidadMermaChamico       
+,CDP.CalidadMermaChamicoBonifica_o_Rebaja      ,CDP.CalidadMermaZarandeo      
+,CDP.CalidadMermaZarandeoBonifica_o_Rebaja      ,CDP.FueraDeEstandar      ,CDP.CalidadPuntaSombreada    
+,CDP.CobraAcarreo      ,CDP.LiquidaViaje      ,CDP.IdClienteAuxiliar      ,CDP.CalidadDescuentoFinal   
+,CDP.PathImagen      ,CDP.PathImagen2       ,CDP.AgrupadorDeTandaPeriodos      ,CDP.ClaveEncriptada     
+,CDP.NumeroCartaEnTextoParaBusqueda      ,CDP.IdClienteEntregador      ,CDP.IdDetalleFactura     
+,CDP.SojaSustentableCodCondicion      ,CDP.SojaSustentableCondicion     
+,CDP.SojaSustentableNroEstablecimientoDeProduccion      ,CDP.IdClientePagadorFlete     
+,CDP.SubnumeroVagonEnTextoParaBusqueda      ,CDP.IdCorredor2       ,CDP.Acopio1      ,CDP.Acopio2    
+,CDP.Acopio3      ,CDP.Acopio4      ,CDP.Acopio5 ,CDP.Acopio6        ,CDP.AcopioFacturarleA      
+,CDP.CalidadGranosDanadosRebaja      ,CDP.CalidadGranosExtranosRebaja 
+,CDP.ConDuplicados
+,CDP.TieneRecibidorOficial
+,CDP.EstadoRecibidor
+,CDP.ClienteAcondicionador
+,CDP.MotivoRechazo
+,CDP.FacturarA_Manual
+--,CDP.CalidadPuntaSobreadaMerma
+--,CDP.CalidadPuntaSobreadaRebaja
+,CDP.EntregaSAP
+,CDP.Situacion
+,CDP.SituacionAntesDeEditarManualmente
+,CDP.FechaActualizacionAutomatica
+,CDP.FechaAutorizacion
+,CDP.ObservacionesSituacion
+,CDP.SituacionLog
+,CDP.Turno
+,CDP.FechaEnvioASyngenta,
+
+
+
+
 
 			ISNULL(Articulos.AuxiliarString5,'') AS EspecieONCAA,	
  			ISNULL(Articulos.AuxiliarString6,'') AS CodigoSAJPYA,	

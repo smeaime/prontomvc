@@ -15998,7 +15998,10 @@ usuario As String, ConexBDLmaster As String,
 
 
                     cp.fechadescarga = If(dbc.FechaDescarga, DateTime.MinValue)
-                    cp.fechaposicion = If(dbc.FechaIngreso, DateTime.MinValue)
+                    cp.fechaposicion = If(dbc.FechaIngreso, If(dbc.FechaDeCarga, If(dbc.FechaArribo, DateTime.MinValue)))
+
+
+
                     cp.horadescarga = "" ' If(dbc.Hora, "")
 
 
