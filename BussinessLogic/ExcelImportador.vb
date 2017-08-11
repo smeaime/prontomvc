@@ -2252,6 +2252,11 @@ Public Class ExcelImportadorManager
                         If .CalidadDe <= 0 Then .CalidadDe = Nothing
                         '.CalidadDe = BuscaIdCalidadPreciso(DiccionarioEquivalenciasManager.BuscarEquivalencia(SC, r(34)), SC)
 
+                        .Calidad = ""
+                        .NRecibo = 0
+
+
+
                         If actua(.Contrato, Val(r(36))) Then log += "Contrato; "
                         '.Contrato = r(36)
                         If actua(.CEE, Val(r(37))) Then log += "CEE; "
@@ -2288,12 +2293,14 @@ Public Class ExcelImportadorManager
                         If .FechaDescarga < #1/1/1980# Then .FechaDescarga = DateTime.Today
                         If .FechaDeCarga < #1/1/1980# Then .FechaDeCarga = DateTime.Today
                         If .FechaVencimiento < #1/1/1980# Then .FechaVencimiento = DateTime.Today
+                        .FechaIngreso = .FechaDeCarga
 
 
                         '.FechaVencimiento = iisValidSqlDate(r(40))
 
                         .Patente = r(41)
                         .Acoplado = r(42)
+
 
 
 
