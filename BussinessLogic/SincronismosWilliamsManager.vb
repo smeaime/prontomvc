@@ -3826,8 +3826,12 @@ Namespace Pronto.ERP.Bll
                     sb &= Left(.NumeroCartaDePorte.ToString, 12).PadLeft(12) 'CarPorte	STRING(14)	Número de Carta de Porte)    827)    840
 
 
+                    If .IsNReciboNull Then
+                        sb &= cero.ToString.PadLeft(10)
+                    Else
+                        sb &= .NRecibo.ToString.PadLeft(10)
+                    End If
 
-                    sb &= .NRecibo.ToString.PadLeft(10)
 
 
                     'Kgs.procedencia	8	N	
@@ -3847,7 +3851,10 @@ Namespace Pronto.ERP.Bll
 
                     'Grado	3	A	Ej. CF  G1  FB
                     Dim sCalidad As String
-                    If InStr(.Calidad.ToString.ToLower, "grado 1") > 0 Then
+
+                    If .IsCalidadNull Then
+                        sCalidad = "FE"
+                    ElseIf InStr(.Calidad.ToString.ToLower, "grado 1") > 0 Then
                         sCalidad = "G1"
                     ElseIf InStr(.Calidad.ToString.ToLower, "grado 2") > 0 Then
                         sCalidad = "G2"
@@ -3861,7 +3868,14 @@ Namespace Pronto.ERP.Bll
                     sb &= sCalidad.PadRight(3) 'ConCalidad	STRING(4)	Condición Calidad Grado(G1,G2 o G3), Camara(CC) o Fuera de standart (FE)
 
                     'Observ.calidad	100	A	
-                    sb &= Left(.Observaciones.ToString, 100).PadRight(100) 'Observac	STRING(100)	Observaciones)    862)    961
+
+                    If .IsObservacionesNull Then
+                        sb &= Left("", 100).PadRight(100) 'Observac	STRING(100)	Observaciones)    862)    961
+                    Else
+
+                        sb &= Left(.Observaciones.ToString, 100).PadRight(100) 'Observac	STRING(100)	Observaciones)    862)    961
+                    End If
+
 
 
                     'CUIT cta y ord.1	11	N	
@@ -3881,8 +3895,10 @@ Namespace Pronto.ERP.Bll
 
 
                     'Contrato corredor	15	A	
+                    If .IsContratoNull Then .Contrato = ""
                     sb &= Right(.Contrato.ToString, 7).PadRight(7)
                     'Cosecha	4	N	
+                    If .IsCosechaNull Then .Cosecha = ""
                     sb &= Right(.Cosecha, 5).Replace("/", "").PadLeft(4)
 
                     'CUIT transporte	11	N	
