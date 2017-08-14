@@ -1,0 +1,22 @@
+
+Log Entry : 
+08/14/2017 10:36:11
+Error in: . Error Message:
+
+__________________________
+
+Log Entry : 
+08/14/2017 10:36:11
+Error in: . Error Message:     Excluidas por nofacturarasubcontratistas o duplicadas: 0
+__________________________
+
+Log Entry : 
+08/14/2017 10:37:07
+Error in: . Error Message:
+
+__________________________
+
+Log Entry : 
+08/14/2017 10:37:07
+Error in: . Error Message:     Excluidas por nofacturarasubcontratistas o duplicadas: 0
+__________________________
