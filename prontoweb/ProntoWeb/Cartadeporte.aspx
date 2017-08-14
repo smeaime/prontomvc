@@ -1211,15 +1211,15 @@
                                                     CssClass="CustomValidatorCalloutStyle" />
                                         </td>
                                     </tr>
-                                    <tr style="visibility: hidden; display: none">
+                                    <tr style="">
                                         <td class="EncabezadoCell" style="width: 15%;">Subcontr. 1
                                         </td>
                                         <td class="EncabezadoCell" style="width: 35%;">
-                                            <asp:TextBox ID="txtSubcontr1" runat="server" autocomplete="off" Width="180px" TabIndex="90"></asp:TextBox><cc1:AutoCompleteExtender
+                                            <asp:TextBox ID="txtSubcontr1" runat="server" autocomplete="off" Width="180px" TabIndex="90" Enabled="false"></asp:TextBox><cc1:AutoCompleteExtender
                                                 ID="AutoCompleteExtender9" runat="server" CompletionSetCount="12" MinimumPrefixLength="1"
                                                 ServiceMethod="GetCompletionList" ServicePath="WebServiceClientesCUIT.asmx" TargetControlID="txtSubcontr1"
                                                 UseContextKey="True" FirstRowSelected="True" DelimiterCharacters="" Enabled="True"
-                                                CompletionInterval="100">
+                                                CompletionInterval="100" >
                                             </cc1:AutoCompleteExtender>
                                         </td>
                                         <td class="EncabezadoCell" style="width: 15%;">Contrato
@@ -1231,11 +1231,11 @@
                                             </asp:DropDownList>
                                         </td>
                                     </tr>
-                                    <tr style="visibility: hidden; display: none">
+                                    <tr style="">
                                         <td class="EncabezadoCell" style="width: 15%">Subcontr. 2
                                         </td>
                                         <td class="EncabezadoCell" style="width: 35%;">
-                                            <asp:TextBox ID="txtSubcontr2" runat="server" autocomplete="off" Width="180px" TabIndex="90"
+                                            <asp:TextBox ID="txtSubcontr2" runat="server" autocomplete="off" Width="180px" TabIndex="90" Enabled="false"
                                                 CssClass="CssTextBox">
                                         
                                             </asp:TextBox><cc1:AutoCompleteExtender ID="AutoCompleteExtender10" runat="server"
