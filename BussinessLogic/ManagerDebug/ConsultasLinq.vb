@@ -683,8 +683,8 @@ Public Class ConsultasLinq
         'uso Group by, porque el distinct en vb.net es medio loco! (no anda igual que en c#)
 
         Dim q8 As List(Of infLiqui) = (From cdp In q
-                                Where (idSubcontr = -1 Or cdp.Subcontr1 = idSubcontr) And cdp.Subcontr1 = cdp.Subcontr2
-                               Group By
+                                       Where (idSubcontr = -1 Or cdp.Subcontr1 = idSubcontr) And (cdp.Subcontr1 = cdp.Subcontr2 And cdp.tarifcombo <> 0)
+                                       Group By
                                 cdp.agrupVagon,
                                 cdp.DestinoDesc,
                                 cdp.Exporta,
@@ -693,7 +693,7 @@ Public Class ConsultasLinq
                                 cdp.NumeroCartaDePorte,
                                 cdp.NetoFinal
                                Into Group
-                                   Select New infLiqui With {
+                                       Select New infLiqui With {
                                    .agrupVagon = agrupVagon,
                                    .DestinoDesc = DestinoDesc & " Calada y Desc. " & If(
                                        (Exporta = "SI") _
@@ -707,7 +707,7 @@ Public Class ConsultasLinq
 
 
         Dim q4 As List(Of infLiqui) = (From cdp In q
-                                        Where (idSubcontr = -1 Or cdp.Subcontr1 = idSubcontr) And cdp.Subcontr1 <> cdp.Subcontr2
+                                       Where (idSubcontr = -1 Or cdp.Subcontr1 = idSubcontr) And Not (cdp.Subcontr1 = cdp.Subcontr2 And cdp.tarifcombo <> 0)
                                        Group By
                                         cdp.agrupVagon,
                                         cdp.DestinoDesc,
@@ -717,7 +717,7 @@ Public Class ConsultasLinq
                                         cdp.NumeroCartaDePorte,
                                         cdp.NetoFinal
                                        Into Group
-                                           Select New infLiqui With {
+                                       Select New infLiqui With {
                                            .agrupVagon = agrupVagon,
                                            .DestinoDesc = DestinoDesc & " Calada" & If(
                                                (Exporta = "SI") _
@@ -731,8 +731,8 @@ Public Class ConsultasLinq
 
 
         Dim q5 As List(Of infLiqui) = (From cdp In q
-                                       Where (idSubcontr = -1 Or cdp.Subcontr2 = idSubcontr) And cdp.Subcontr1 <> cdp.Subcontr2
-                                        Group By
+                                       Where (idSubcontr = -1 Or cdp.Subcontr2 = idSubcontr) And Not (cdp.Subcontr1 = cdp.Subcontr2 And cdp.tarifcombo <> 0)
+                                       Group By
                                         cdp.agrupVagon,
                                         cdp.DestinoDesc,
                                         cdp.Exporta,

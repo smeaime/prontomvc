@@ -60,6 +60,8 @@ using System.Net;
 using System.Xml.Linq;
 
 
+
+
 //test de java lopez
 // https://github.com/ajlopez/TddAppAspNetMvc/blob/master/Src/MyLibrary.Web.Tests/Controllers/HomeControllerTests.cs
 
@@ -853,6 +855,84 @@ namespace ProntoMVC.Tests
 
 
         #endregion
+
+
+
+
+
+
+
+
+
+
+        [TestMethod]
+        public void liquidacionsubcon_43045()
+        {
+
+            var cliente= SQLdinamico.BuscaIdClientePreciso("ALVAREZ, JORGE", SC);
+
+
+
+            if (false)
+            {
+
+                var s = new ServicioCartaPorte.servi();
+                var scEF = ProntoMVC.Data.Models.Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC));
+                DemoProntoEntities db = new DemoProntoEntities(scEF);
+
+
+                var q1 = db.WilliamsDestinos.Where(x => x.Subcontratista1 == 10947 || x.Subcontratista2 == 10947).FirstOrDefault(); // ramirez jose luis
+                q1.Subcontratista1 = 10947;
+                q1.Subcontratista2 = 10947;
+
+                var q2 = db.ListasPreciosDetalles.Where(x => x.ListasPrecio.Descripcion == "RAMIREZ JOSE LUIS - Precios").ToList(); // ramirez jose luis
+                foreach (Data.Models.ListasPreciosDetalle ps in q2)
+                {
+                    ps.PrecioComboCaladaMasBalanza = 55;
+                }
+
+                db.SaveChanges();
+
+            }
+
+
+
+            
+
+
+
+            ReportViewer ReporteLocal = new Microsoft.Reporting.WebForms.ReportViewer();
+
+            ReportParameter p2 = null;
+            string sTitulo = "";
+
+            var q = ConsultasLinq.LiquidacionSubcontratistas(SC,
+                       "", "", "", 1, 2000,
+                        CartaDePorteManager.enumCDPestado.DescargasMasFacturadas, "", -1, -1,
+                       -1, -1,
+                       -1, -1, -1, -1, CartaDePorteManager.FiltroANDOR.FiltroOR, "Ambos",
+                        new DateTime(2017, 7, 1),
+                        new DateTime(2017, 7, 31),
+                        0,  cliente, ref sTitulo);
+
+
+
+            ReportParameter[] p = new ReportParameter[5];
+            p[0] = new ReportParameter("Concepto1", "");
+            p[1] = new ReportParameter("titulo", "");
+            p[2] = new ReportParameter("Concepto2", "");
+            p[3] = new ReportParameter("Concepto1Importe", "-1");
+            p[4] = new ReportParameter("Concepto2Importe", "-1");
+
+
+            string output = "";
+
+            CartaDePorteManager.RebindReportViewerLINQ_Excel
+                                (ref ReporteLocal, @"C:\bdl\pronto\prontoweb\ProntoWeb\Informes\Liquidación de SubContratistas 2.rdl", q, ref output, p);
+
+            System.Diagnostics.Process.Start(output);
+
+        }
 
 
 
