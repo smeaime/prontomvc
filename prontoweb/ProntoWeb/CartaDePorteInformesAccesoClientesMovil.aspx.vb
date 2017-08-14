@@ -165,6 +165,17 @@ Partial Class CartaDePorteInformesAccesoClientes
         'If bRecargarInforme Then AsignaInformeAlReportViewer()
     End Sub
 
+
+    Protected Sub LoginStatus1_LoggedOut(ByVal sender As Object, ByVal e As System.EventArgs)
+        Session("IdUser") = Nothing
+        FormsAuthentication.SignOut()
+        Roles.DeleteCookie()
+        Session.Clear()
+        'FormsAuthentication.RedirectToLoginPage();
+    End Sub
+
+
+
     Protected Sub btnRefrescar_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnRefrescar.Click
         AsignaInformeAlReportViewer()
         'bRecargarInforme = True
