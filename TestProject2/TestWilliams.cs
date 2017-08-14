@@ -911,7 +911,7 @@ namespace ProntoMVC.Tests
                         CartaDePorteManager.enumCDPestado.DescargasMasFacturadas, "", -1, -1,
                        -1, -1,
                        -1, -1, -1, -1, CartaDePorteManager.FiltroANDOR.FiltroOR, "Ambos",
-                        new DateTime(2017, 7, 1),
+                        new DateTime(2017, 6, 1),
                         new DateTime(2017, 7, 31),
                         0,  cliente, ref sTitulo);
 
