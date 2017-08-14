@@ -74,8 +74,6 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
         <asp:UpdatePanel ID="UpdatePanelResumen" runat="server">
             <ContentTemplate>
 
-                <asp:Button ID="btnRefrescar" Text="VER INFORME" runat="server" Visible="True" CssClass="but"
-                    Width="150" Height="40" />
                 <asp:UpdateProgress ID="UpdateProgress2" runat="server">
                     <ProgressTemplate>
                         <img src="Imagenes/25-1.gif" alt="" style="height: 30px" />
@@ -83,14 +81,30 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                             Visible="true"></asp:Label>
                     </ProgressTemplate>
                 </asp:UpdateProgress>
-                <asp:Button ID="btnImagenes" Text="Imágenes en JPG" runat="server" Visible="True" CssClass="but"
+
+                <asp:Button ID="btnRefrescar" Text="VER INFORME" runat="server" Visible="True" CssClass="but"
+                    Width="150" Height="40" />
+         
+                <asp:Button ID="btnImagenes" Text="JPG" runat="server" Visible="True" CssClass="but"
                     Width="" Height="40" />
-                <asp:Button ID="btnImagenesPDF" Text="Imágenes en PDF reducido" runat="server" Visible="True" CssClass="but"
+                <asp:Button ID="btnImagenesPDF" Text="PDF" runat="server" Visible="True" CssClass="but"
                     Width="" Height="40" />
-                <asp:Button ID="btnImagenesTiffReducido" Text="Imágenes en TIFF reducido" runat="server" Visible="True" CssClass="but"
+                <asp:Button ID="btnImagenesTiffReducido" Text="TIFF" runat="server" Visible="True" CssClass="but"
                     Width="" Height="40" />
 
-                <table width="400px">
+
+                <asp:LoginView ID="LoginView" runat="server" >
+                                                <LoggedInTemplate >
+                                                    <asp:LoginName ID="LoginName1" runat="server" Font-Bold="false" CssClass="margender"   />
+                                                    |
+                                                    <asp:LoginStatus ID="LoginStatus1" runat="server" Font-Bold="false" ForeColor="white"
+                                                        LogoutAction="RedirectToLoginPage" LogoutPageUrl="~/Login.aspx" OnLoggedOut="LoginStatus1_LoggedOut"
+                                                        TabIndex="-1" LogoutText="Salir" Font-Underline="False" CssClass="margender" />
+                                                </LoggedInTemplate>
+                                            </asp:LoginView>
+
+
+                <table width="">
                     <tr>
                         <td style="width: 101px; height: 40px;" class="EncabezadoCell" colspan="2">
                             <asp:Label ID="lblRazonSocial" runat="server" Font-Size="Large" Font-Bold="true" />
@@ -184,9 +198,9 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                         <asp:Panel ID="Panel4" runat="server">
                             <table width="100%">
                                 <tr>
-                                    <td class="EncabezadoCell" style="width: 15%; height: 18px;">Origen
+                                    <td >Origen
                                     </td>
-                                    <td class="EncabezadoCell" style="width: 30%; height: 18px;">
+                                    <td >
                                         <asp:TextBox ID="txtProcedencia" runat="server" CssClass="CssTextBox" Text='<%# Bind("ProcedenciaDesc") %>'
                                             AutoPostBack="false"></asp:TextBox>
                                         <cc1:AutoCompleteExtender CompletionInterval="100" ID="AutoCompleteExtender27" runat="server"
@@ -195,6 +209,8 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                                             ServicePath="WebServiceLocalidades.asmx" TargetControlID="txtProcedencia" UseContextKey="True">
                                         </cc1:AutoCompleteExtender>
                                     </td>
+                                    </tr>
+                                <tr>
                                     <td class="EncabezadoCell" style="width: 15%; height: 18px;">Destino
                                     </td>
                                     <td class="EncabezadoCell" style="width: 30%; height: 18px;">
@@ -219,6 +235,8 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                                             ServicePath="WebServiceArticulos.asmx" TargetControlID="txt_AC_Articulo" UseContextKey="True">
                                         </cc1:AutoCompleteExtender>
                                     </td>
+                                    </tr>
+                                <tr>
                                     <td class="EncabezadoCell" style="width: 90px; height: 18px;">Corredor (excluyente)
                                     </td>
                                     <td class="EncabezadoCell" style="height: 18px">
@@ -252,6 +270,8 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                                             <asp:ListItem>Ambos</asp:ListItem>
                                         </asp:DropDownList>
                                     </td>
+                                    </tr>
+                                <tr>
                                     <td class="EncabezadoCell" style="width: 15%; height: 18px;">Destinatario (excluyente)
                                     </td>
                                     <td class="EncabezadoCell" style="width: 30%; height: 18px;">
@@ -291,7 +311,8 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                                     </td>
                                     <td>
                                         <asp:DropDownList ID="cmbPuntoVenta" runat="server" CssClass="CssTextBox" Width="180px" />
-                                    </td>
+                                    </td> </tr>
+                                <tr>
                                     <td class="EncabezadoCell">Cliente Obs. (excl.)
                                     </td>
                                     <td>
@@ -340,7 +361,8 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                                             FirstRowSelected="True" CompletionListCssClass="AutoCompleteScroll" DelimiterCharacters=""
                                             Enabled="True">
                                         </cc1:AutoCompleteExtender>
-                                    </td>
+                                    </td> </tr>
+                                <tr>
                                     <td class="EncabezadoCell" style="width: 90px">Intermediario
                                     </td>
                                     <td class="EncabezadoCell">
@@ -430,9 +452,9 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
         </asp:UpdatePanel>
         <asp:UpdatePanel ID="UpdatePanel1" runat="server">
             <ContentTemplate>
-                <div style="background-color: #FFFFFF; width: 800px">
+                <div style="background-color: #FFFFFF; width: 300px">
                     <rsweb:ReportViewer ID="ReportViewer1" runat="server" Font-Names="Verdana" Font-Size="8pt"
-                        Width="100%" Visible="true" ZoomMode="PageWidth" Height="1200px" SizeToReportContent="True">
+                        Visible="true" ZoomMode="Percent" ZoomPercent="25" SizeToReportContent="false">
                         <%--        <LocalReport ReportPath="ProntoWeb\Informes\prueba2.rdl">
 
         </LocalReport>
