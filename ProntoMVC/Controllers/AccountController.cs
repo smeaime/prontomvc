@@ -603,7 +603,7 @@ namespace ProntoMVC.Controllers
                             return RedirectToAction("Index", "Home");
                         }
 
-                        if (BuscarUltimaBaseAccedida(oStaticMembershipService) != "")
+                        if ((BuscarUltimaBaseAccedida(oStaticMembershipService) ?? "" )!= "")
                         {
                             this.Session["BasePronto"] = BuscarUltimaBaseAccedida(oStaticMembershipService);
                             return RedirectToAction("Index", "Home");
@@ -1489,6 +1489,19 @@ namespace ProntoMVC.Controllers
                 throw;
 
             }
+
+
+
+
+            if (Membership.GetUser()==null)
+            {
+                // por qué pasa esto?  User.Identity.Name parece tener el nombre del usuario windows!
+                // porque está puesto el "windows authentication" en las propiedades del proyecto
+                throw new Exception("está puesto el windows authentication? Usuario " + User.Identity.Name);
+
+            }
+
+
 
 
             Guid userGuid = (Guid)Membership.GetUser().ProviderUserKey;

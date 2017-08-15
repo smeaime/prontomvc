@@ -1211,7 +1211,7 @@
                                                     CssClass="CustomValidatorCalloutStyle" />
                                         </td>
                                     </tr>
-                                    <tr style="">
+                                    <tr style="visibility: hidden; display: none;">
                                         <td class="EncabezadoCell" style="width: 15%;">Subcontr. 1
                                         </td>
                                         <td class="EncabezadoCell" style="width: 35%;">
@@ -1231,7 +1231,7 @@
                                             </asp:DropDownList>
                                         </td>
                                     </tr>
-                                    <tr style="">
+                                    <tr style="visibility: hidden; display: none;">
                                         <td class="EncabezadoCell" style="width: 15%">Subcontr. 2
                                         </td>
                                         <td class="EncabezadoCell" style="width: 35%;">
@@ -3254,8 +3254,33 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         function sumarTotalOtrasMerma() {
-           
+
+            return;
+
             var tot = parseFloat($('#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadGranosExtranosMerma').val()) +
                         parseFloat($('#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadQuebradosMerma').val()) +
                         parseFloat($('#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadGranosDanadosMerma').val()) +
