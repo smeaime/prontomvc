@@ -335,7 +335,7 @@ namespace ProntoMVC.Controllers
 
                 // string sBasePronto = (string)rc.HttpContext.Session["BasePronto"];
                 // db = new DemoProntoEntities(Funciones.Generales.sCadenaConex(sBasePronto));
-                ROOT = ConfigurationManager.AppSettings["Root"]; // ConfigurationManager.AppSettings["Root"] ["UrlDominio"];
+                ROOT = ConfigurationManager.AppSettings["UrlDominio"]; // ConfigurationManager.AppSettings["Root"] ["UrlDominio"];
                 asignacadena((string)rc.HttpContext.Session["BasePronto"]);
 
                 string us = oStaticMembershipService.GetUser().ProviderUserKey.ToString();
@@ -2856,7 +2856,7 @@ namespace ProntoMVC.Controllers
             //reemplazo el directorio falso de sql por el parametro ROOT
             foreach (Tablas.Tree n in TreeDest)
             {
-                n.Link = n.Link.Replace("Pronto2", ROOT);
+                n.Link = n.Link.Replace(@"/Pronto2", ROOT);
             }
 
 
