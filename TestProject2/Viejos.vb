@@ -109,6 +109,12 @@ Public Module Tests
         'FAC 4, terminan rapidamente la autopista.
         'REC 4: pagan la FAC
         'CTACTE: revisas
+
+        'despues, en para la parte de compras, tenes que hacer el presupuesto de obra de la autopista, e ir haciendo los
+        'requerimientos de asfalto 
+
+
+
         '//////////////////////////////////////////////////
         '//////////////////////////////////////////////////
         '//////////////////////////////////////////////////
