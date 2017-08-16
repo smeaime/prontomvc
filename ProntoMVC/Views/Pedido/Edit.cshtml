@@ -1671,5 +1671,19 @@
 
 
                                                         })
+
+
+
+
+
+                                                        $(window).resize(function () {
+                                                            RefrescaAnchoGrillaDetalle();
+                                                            $("#conscroll").height($(window).height() - 120);
+                                                        });
+
+                                                        $(function () {
+                                                            mostrarPanelesDerecho();
+
+                                                        })
                                                     </script>
                                                     }

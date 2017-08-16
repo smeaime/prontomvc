@@ -1,15 +1,17 @@
 ﻿@model IEnumerable<ProntoMVC.Data.Models.Requerimiento>
-@{
-    ViewBag.Title = "Requerimientos";
-}
-@*<div class="container-fluid">*@
-<br />
-@if (false)
-{    <style>
+    @{
+        ViewBag.Title = "Requerimientos";
+    }
+    @*<div class="container-fluid">*@
+    <br />
+    @if (false)
+    {
+    <style>
         /* jqGrid builds some additional divs over the main grid table. The outer div has the class ui-jqgrid. So if you need to remove right and left border existing over the whole grid you can use the following CSS: */
         .ui-widget-content {
             border: 0px solid #aaaaaa;
         }
+
         .ui-jqgrid {
             border-right-width: 0px;
             border-left-width: 0px;
@@ -20,6 +22,7 @@
             .ui-jqgrid tr.ui-row-ltr td {
                 border-right-color: #E4E4E4;
             }
+
             .ui-jqgrid tr.footrow-ltr td {
                 border-right-color: #E4E4E4 !important;
             }
@@ -37,125 +40,125 @@
             border-right-color: #E4E4E4;
         }
     </style>
-}
+    }
 
-<script src="~/Scripts/jquery.table2excel.js"></script>
+    <script src="~/Scripts/jquery.table2excel.js"></script>
 
-<div style=" padding-left: 15px;  padding-right: 15px ;">
-    <div>
-        <div class="row-fluid">
-            <div class="span12 lightblue">
-                <button onclick="window.location.href='@Url.Action("Edit", new { id = -1 })'" class="btn btn-primary span2 ">Nuevo requerimiento</button>
-                @*<div class="span1"></div>
-                <button onclick=Exportar() class="btn btn-primary span2">Exportar a Excel</button>*@
-                <div class="span4">
-                    <div class="input-prepend input-append">
-                        @* <div class="btn-group ">
-                    <button class="btn dropdown-toggle" data-toggle="dropdown">
-                        En todo <span class="caret"></span>
-                    </button>
-                    <div class="dropdown-menu">
-                        Requerimientos
+    <div style=" padding-left: 15px;  padding-right: 15px ;">
+        <div>
+            <div class="row-fluid">
+                <div class="span12 lightblue">
+                    <button onclick="window.location.href='@Url.Action("Edit", new { id = -1 })'" class="btn btn-primary span2 ">Nuevo requerimiento</button>
+                    @*<div class="span1"></div>
+                        <button onclick=Exportar() class="btn btn-primary span2">Exportar a Excel</button>*@
+                    <div class="span4">
+                        <div class="input-prepend input-append">
+                            @* <div class="btn-group ">
+                                    <button class="btn dropdown-toggle" data-toggle="dropdown">
+                                        En todo <span class="caret"></span>
+                                    </button>
+                                    <div class="dropdown-menu">
+                                        Requerimientos
+                                    </div>
+                                    <ul class="dropdown-menu">
+                                        Número
+                                    </ul>
+                                </div>*@
+                            @if (Roles.IsUserInRole(ViewBag.NombreUsuario, "SuperAdmin") && false)
+                            {
+                                <input id="BuscadorListado" type="text" class="" placeholder="Filtrar" style="" />
+                                <select id="campos " class="span4">
+                                    <option>Número</option>
+                                    @* <option>Fecha</option>*@
+                                </select>
+                                <button onclick=" jQuery('#Lista').searchGrid({}) " class="btn append ">
+                                    ...
+                                </button>
+                            }
+                        </div>
                     </div>
-                    <ul class="dropdown-menu">
-                        Número
-                    </ul>
-                </div>*@
-                        @if (Roles.IsUserInRole(ViewBag.NombreUsuario, "SuperAdmin") && false)
-                        {
-                            <input id="BuscadorListado" type="text" class="" placeholder="Filtrar" style="" />
-                            <select id="campos " class="span4">
-                                <option>Número</option>
-                                @* <option>Fecha</option>*@
-                            </select>
-                            <button onclick=" jQuery('#Lista').searchGrid({}) " class="btn append ">
-                                ...
+                    <div class="span2 pull-right" style="text-align: center; display: none">
+                        a confirmar
+                        @Html.CheckBox("bAConfirmar")
+                        a liberar
+                        @Html.CheckBox("bALiberar")
+                    </div>
+                    @*  <input id="BuscarEnLugarDeFiltrar" type="text" class="" placeholder="Buscar" style="" />*@
+                    @* <div class="btn-group  pull-right ">
+                            <button onclick="  " class="btn">
+                                <
                             </button>
-                        }
+                            <button onclick="  " class="btn ">
+                                >
+                            </button>
+                        </div>*@
+                    @if (false)
+                    {
+                        <div class="btn-group span2">
+                            <a class="btn  " style="color: Black" href="#"><i class="icon-print"></i>&nbsp;más</a>
+                            <button class="btn dropdown-toggle " data-toggle="dropdown">
+                                <span class="caret "></span>
+                            </button>
+                            <ul class="dropdown-menu ">
+                                <li><a class="" href="#"><i class="icon-print"></i>&nbsp;Excel</a></li>
+                            </ul>
+                        </div>
+                    }
+                    <div class="span1">
+                        <div>
+                            <input id="FechaInicial" name="FechaInicial" type="hidden" value=@Request.QueryString["fechainicial"]>
+                        </div>
+                        <div>
+                            <input id="FechaFinal" name="FechaFinal" type="hidden" value=@Request.QueryString["fechafinal"]>
+                        </div>
+                        <div>
+                            <input id="IdObra" name="IdObra" type="hidden" value=@Request.QueryString["idobra"]>
+                        </div>
                     </div>
                 </div>
-                <div class="span2 pull-right" style="text-align: center; display: none">
-                    a confirmar
-                    @Html.CheckBox("bAConfirmar")
-                    a liberar
-                    @Html.CheckBox("bALiberar")
-                </div>
-                @*  <input id="BuscarEnLugarDeFiltrar" type="text" class="" placeholder="Buscar" style="" />*@
-                @* <div class="btn-group  pull-right ">
-                <button onclick="  " class="btn">
-                    <
-                </button>
-                <button onclick="  " class="btn ">
-                    >
-                </button>
-            </div>*@
-                @if (false)
-                {
-                    <div class="btn-group span2">
-                        <a class="btn  " style="color: Black" href="#"><i class="icon-print"></i>&nbsp;más</a>
-                        <button class="btn dropdown-toggle " data-toggle="dropdown">
-                            <span class="caret "></span>
-                        </button>
-                        <ul class="dropdown-menu ">
-                            <li><a class="" href="#"><i class="icon-print"></i>&nbsp;Excel</a></li>
-                        </ul>
-                    </div>
-                }
-                <div class="span1">
-                    <div>
-                        <input id="FechaInicial" name="FechaInicial" type="hidden" value=@Request.QueryString["fechainicial"]>
-                    </div>
-                    <div>
-                        <input id="FechaFinal" name="FechaFinal" type="hidden" value=@Request.QueryString["fechafinal"]>
-                    </div>
-                    <div>
-                        <input id="IdObra" name="IdObra" type="hidden" value=@Request.QueryString["idobra"]>
-                    </div>
-                </div>
+                <br />
+                <br />
             </div>
             <br />
-            <br />
-        </div>
-        <table id="Lista" class="scroll" cellpadding="0" cellspacing="0" style="font-size: 16px;
-        "></table>
-        <div id="ListaPager" class="scroll" style="text-align: center;">
-        </div>
-        @*<input type="button" class="btn btn-small" id="addData" value="Generar en Word" />
-        <input type="button" class="btn btn-small" id="edtData" value="marcar RM como impresa" />
-        <input type="button" class="btn btn-small" id="delData" value="desmarcar rm como impresa" />
-        <input type="button" class="btn btn-small" id="delData" value="Enviar RM a proveedores por correo" />
-        <input type="button" class="btn btn-small" id="delData" value="Enviar RM a proveedores por fax" />*@
+            <table id="Lista" class="scroll" cellpadding="0" cellspacing="0" style="font-size: 16px;"></table>
+            <div id="ListaPager" class="scroll" style="text-align: center;">
+            </div>
+            @*<input type="button" class="btn btn-small" id="addData" value="Generar en Word" />
+                <input type="button" class="btn btn-small" id="edtData" value="marcar RM como impresa" />
+                <input type="button" class="btn btn-small" id="delData" value="desmarcar rm como impresa" />
+                <input type="button" class="btn btn-small" id="delData" value="Enviar RM a proveedores por correo" />
+                <input type="button" class="btn btn-small" id="delData" value="Enviar RM a proveedores por fax" />*@
 
-        <div class="contextMenu" id="myMenu1" style="display:none">
-            <ul style="width: 200px">
-                <li id="add">
-                    @*<span class="ui-icon ui-icon-plus" style="float:left"></span>*@
-                    <span style="font-size:11px; font-family:Verdana">Generar en Word</span>
-                </li>
-                <li id="edit">
-                    @*<span class="ui-icon ui-icon-pencil" style="float:left"></span>*@
-                    <span style="font-size:11px; font-family:Verdana">Marcar RM como impresa</span>
-                </li>
-                <li id="del">
-                    @*<span class="ui-icon ui-icon-trash" style="float:left"></span>*@
-                    <span style="font-size:11px; font-family:Verdana">Desmarcar rm como impresa</span>
-                </li>
+            <div class="contextMenu" id="myMenu1" style="display:none">
+                <ul style="width: 200px">
+                    <li id="add">
+                        @*<span class="ui-icon ui-icon-plus" style="float:left"></span>*@
+                        <span style="font-size:11px; font-family:Verdana">Generar en Word</span>
+                    </li>
+                    <li id="edit">
+                        @*<span class="ui-icon ui-icon-pencil" style="float:left"></span>*@
+                        <span style="font-size:11px; font-family:Verdana">Marcar RM como impresa</span>
+                    </li>
+                    <li id="del">
+                        @*<span class="ui-icon ui-icon-trash" style="float:left"></span>*@
+                        <span style="font-size:11px; font-family:Verdana">Desmarcar rm como impresa</span>
+                    </li>
 
-                <li id="del">
-                    @*<span class="ui-icon ui-icon-trash" style="float:left"></span>*@
-                    <span style="font-size:11px; font-family:Verdana">Enviar RM a proveedores por correo</span>
-                </li>
-                <li id="del">
-                    @*<span class="ui-icon ui-icon-trash" style="float:left"></span>*@
-                    <span style="font-size:11px; font-family:Verdana">Enviar RM a proveedores por fax</span>
-                </li>
-            </ul>
+                    <li id="del">
+                        @*<span class="ui-icon ui-icon-trash" style="float:left"></span>*@
+                        <span style="font-size:11px; font-family:Verdana">Enviar RM a proveedores por correo</span>
+                    </li>
+                    <li id="del">
+                        @*<span class="ui-icon ui-icon-trash" style="float:left"></span>*@
+                        <span style="font-size:11px; font-family:Verdana">Enviar RM a proveedores por fax</span>
+                    </li>
+                </ul>
+            </div>
+
         </div>
-
     </div>
-</div>
 
-<script type="text/javascript">
+    <script type="text/javascript">
     $(document).ready(function () {
         $("#BuscadorListado").keyup(function () {
             filtrar()
@@ -218,7 +221,7 @@
             e.preventDefault();
             Response.AddHeader("Content-Disposition", "attachment;filename=download.xls");
         }
-    
+
         function ExportDataToExcel2() {
             $("#Lista").table2excel({
                 //exclude: ".noExl",
@@ -481,6 +484,10 @@
             //imgpath: '/content/cupertino/images',
             //loadonce: true,
             //, caption: '<b>REQUERIMIENTOS</b>'
+
+            , multiselect: true
+
+
         });
         jQuery("#Lista").jqGrid('bindKeys');
 
@@ -557,77 +564,77 @@
     });
 
 
-</script>
+    </script>
 
-<style>
+    <style>
 
-</style>
+    </style>
 
-@*
-    @{
-        var grid = new WebGrid(source: Model,
-            defaultSort: "NumeroRequerimiento",
-            rowsPerPage: 10,
-            canPage: true,
-            canSort: true,
-            fieldNamePrefix: "ItemRM_",
-            selectionFieldName: "selectedRow");
-    }
+    @*
+        @{
+            var grid = new WebGrid(source: Model,
+                defaultSort: "NumeroRequerimiento",
+                rowsPerPage: 10,
+                canPage: true,
+                canSort: true,
+                fieldNamePrefix: "ItemRM_",
+                selectionFieldName: "selectedRow");
+        }
 
-    <div id="grid">
-        @grid.GetHtml(
-            tableStyle: "webgrid",
-            headerStyle: "webgrid-header",
-            footerStyle: "webgrid-footer",
-            alternatingRowStyle: "webgrid-alternating-row",
-            selectedRowStyle: "webgrid-selected-row",
-            rowStyle: "webgrid-row-style",
-            mode: WebGridPagerModes.All,
-            firstText: "<< Primera",
-            previousText: "< Anterior",
-            nextText: "Siguiente >",
-            lastText: "Última >>",
-                    columns: new[] {
-                                            grid.Column(columnName: "NumeroRequerimiento", header: "Nro.", style: "text-align-left"),
-                                            grid.Column(columnName: "FechaRequerimiento", header: "Fecha", style: "text-align-left", format: p => p.FechaRequerimiento.ToShortDateString()),
-                                            //grid.Column(columnName: "",  format: p=>p.Obra.NumeroObra, header: "Obra", style: "text-align-left"),
-                                            //grid.Column(columnName: "Empleados.Nombre", header: "Solicito", style: "text-align-left"),
-                                            //grid.Column(columnName: "Empleados1.Nombre", header: "Aprobo", style: "text-align-left"),
-                                            //grid.Column(columnName: "Sectores.Descripcion", header: "Sector", style: "text-align-left"),
-                                            grid.Column(columnName: "Detalle", header: "Detalle", style: "text-align-left"),
-                                            grid.Column("", header: "Acciones",
-                                                format: @<text>@Html.ActionLink("Editar", "Edit", new { id = item.IdRequerimiento })|
-                                                               @Html.ActionLink("Eliminar", "Delete", new { id = item.IdRequerimiento })</text>
-                                            )
-                                            }
-                                )
-    </div>
+        <div id="grid">
+            @grid.GetHtml(
+                tableStyle: "webgrid",
+                headerStyle: "webgrid-header",
+                footerStyle: "webgrid-footer",
+                alternatingRowStyle: "webgrid-alternating-row",
+                selectedRowStyle: "webgrid-selected-row",
+                rowStyle: "webgrid-row-style",
+                mode: WebGridPagerModes.All,
+                firstText: "<< Primera",
+                previousText: "< Anterior",
+                nextText: "Siguiente >",
+                lastText: "Última >>",
+                        columns: new[] {
+                                                grid.Column(columnName: "NumeroRequerimiento", header: "Nro.", style: "text-align-left"),
+                                                grid.Column(columnName: "FechaRequerimiento", header: "Fecha", style: "text-align-left", format: p => p.FechaRequerimiento.ToShortDateString()),
+                                                //grid.Column(columnName: "",  format: p=>p.Obra.NumeroObra, header: "Obra", style: "text-align-left"),
+                                                //grid.Column(columnName: "Empleados.Nombre", header: "Solicito", style: "text-align-left"),
+                                                //grid.Column(columnName: "Empleados1.Nombre", header: "Aprobo", style: "text-align-left"),
+                                                //grid.Column(columnName: "Sectores.Descripcion", header: "Sector", style: "text-align-left"),
+                                                grid.Column(columnName: "Detalle", header: "Detalle", style: "text-align-left"),
+                                                grid.Column("", header: "Acciones",
+                                                    format: @<text>@Html.ActionLink("Editar", "Edit", new { id = item.IdRequerimiento })|
+                                                                   @Html.ActionLink("Eliminar", "Delete", new { id = item.IdRequerimiento })</text>
+                                                )
+                                                }
+                                    )
+        </div>
 
-    <table>
-        <tr>
-            <th>IdRequerimiento</th>
-            <th>Numero RM</th>
-            <th>Fecha</th>
-            <th>Obra</th>
-            <th>Sector</th>
-            <th></th>
-        </tr>
+        <table>
+            <tr>
+                <th>IdRequerimiento</th>
+                <th>Numero RM</th>
+                <th>Fecha</th>
+                <th>Obra</th>
+                <th>Sector</th>
+                <th></th>
+            </tr>
 
-    @{int i = 1;}
-    @foreach (var item in Model)
-    {
-        <tr class="@(i++ % 2 == 0 ? "highlighted" : "")" >
-            <td>@Html.DisplayFor(modelItem => item.IdRequerimiento)</td>
-            <td>@Html.DisplayFor(modelItem => item.NumeroRequerimiento)</td>
-            <td>@Html.DisplayFor(modelItem => item.FechaRequerimiento)</td>
-            <td>@Html.DisplayFor(modelItem => item.Obra.NumeroObra)</td>
-            <td>@Html.DisplayFor(modelItem => item.Sectores.Descripcion)</td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.IdRequerimiento }) |
-                @Html.ActionLink("Details", "Details", new { id = item.IdRequerimiento }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.IdRequerimiento })
-            </td>
-        </tr>
-    }
-    </table>
-*@
+        @{int i = 1;}
+        @foreach (var item in Model)
+        {
+            <tr class="@(i++ % 2 == 0 ? "highlighted" : "")" >
+                <td>@Html.DisplayFor(modelItem => item.IdRequerimiento)</td>
+                <td>@Html.DisplayFor(modelItem => item.NumeroRequerimiento)</td>
+                <td>@Html.DisplayFor(modelItem => item.FechaRequerimiento)</td>
+                <td>@Html.DisplayFor(modelItem => item.Obra.NumeroObra)</td>
+                <td>@Html.DisplayFor(modelItem => item.Sectores.Descripcion)</td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.IdRequerimiento }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.IdRequerimiento }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.IdRequerimiento })
+                </td>
+            </tr>
+        }
+        </table>
+    *@
