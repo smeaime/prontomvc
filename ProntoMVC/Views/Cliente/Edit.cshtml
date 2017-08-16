@@ -533,9 +533,9 @@
                 <div id="pie" style="position: absolute; bottom: -26px; background: rgb(236, 236, 236); width: 100%; height: 68px; padding-left: 0; margin-right: 15px;">
                     <hr style="margin: 0; border-top-color: #D8D4D4; border-bottom: 0px solid #ffffff;  " />
                     <div class="row-fluid " style="padding: 11px 0px 0px 0px">
-                        <div class="span8 pull-left">
+                        <div class="span6 pull-left">
                         </div>
-                        <div class="span4 pull-right">
+                        <div class="span6 pull-right">
                             <input type="button" id="grabar2" value="Aceptar" class="btn  btn-large btn-primary" />
                             @if (Model.IdCliente > 0)
                             { @Html.ActionLink("Eliminar", "DeleteConfirmed", new { id = Model.IdCliente }, new { @class = "btn  btn-large  btn-default" }) }
@@ -553,6 +553,12 @@
             RefrescaAnchoGrillaDetalle();
 
             $("#conscroll").height($(window).height() - 120);
-        });
+                                            });
+
+        $(function () {
+            deshabilitarPanelesDerecho();
+
+        })
+
     </script>
 }
