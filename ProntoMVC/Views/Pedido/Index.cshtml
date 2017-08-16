@@ -64,7 +64,7 @@ If you want additionally remove vertical border between the cells in the grid yo
     <div class="row-fluid">
         <div class="span12 lightblue">
             <button onclick="window.location.href='@Url.Action("Edit", new { id = -1 })'" class="btn btn-primary span2 ">
-                Nuevo
+                Nuevo Pedido
             </button>
             <div class="span4">
                 <div class="input-prepend input-append">
@@ -79,9 +79,10 @@ If you want additionally remove vertical border between the cells in the grid yo
                                 Número
                             </ul>
                         </div>*@
-                    <input id="BuscadorListado" type="text" class="" placeholder="Filtrar" style="" />
-                    @if (Roles.IsUserInRole(ViewBag.NombreUsuario, "SuperAdmin"))
+                    @if (Roles.IsUserInRole(ViewBag.NombreUsuario, "SuperAdmin") && false)
                     {
+                        <input id="BuscadorListado" type="text" class="" placeholder="Filtrar" style="" />
+
                         <select id="campos " class="span4">
                             <option>Número</option>
                             @*<option>Fecha</option>*@
@@ -101,11 +102,11 @@ If you want additionally remove vertical border between the cells in the grid yo
             {
                 <div class="span2">
                 </div>                                  
-                <div class="span2">
+                @*<div class="span2">
                     <button onclick=" exportExcel($('#Lista')) " class="btn span12">
                         Excel
                     </button>
-                </div>
+                </div>*@
 
             }
         </div>
@@ -132,36 +133,51 @@ If you want additionally remove vertical border between the cells in the grid yo
                 //<select><option value="NumeroRequerimiento" selected="selected">N°</option><option value="Detalle">Detalle</option><option value="NumeroObra">Obra</option><option value="Sector">Sector</option><option value="Observaciones">Observaciones</option><option value="LugarEntrega">Lugar de necesidad</option></select>
             });
         </script>
+        
     </div>
+    <br />
     <table id="Lista" class="scroll" cellpadding="0" cellspacing="0" style="font-size: 16px;
         ">
     </table>
     <div id="ListaPager" class="scroll" style="text-align: center; background: ; height: 30px">
     </div>
 
-    <input type="button" class="btn btn-small" id="addData" value="Generar email" />
+    @*<input type="button" class="btn btn-small" id="addData" value="Generar email" />
     <input type="button" class="btn btn-small" id="addData" value="Generar en Word" />
     <input type="button" class="btn btn-small" id="addData" value="Generar borrador en Word" />
     <input type="button" class="btn btn-small" id="edtData" value="marcar PED como impresa" />
     <input type="button" class="btn btn-small" id="delData" value="desmarcar PED como impresa" />
-    <input type="button" class="btn btn-small" id="delData" value="Registrar fecha de salida del pedido" />
+    <input type="button" class="btn btn-small" id="delData" value="Registrar fecha de salida del pedido" />*@
 
     <div class="contextMenu" id="myMenu1" style="display:none">
         <ul style="width: 200px">
+
+            <li id="del">
+
+                <span style="font-size:11px; font-family:Verdana">Generar email</span>
+            </li>
             <li id="add">
-                <span class="ui-icon ui-icon-plus" style="float:left"></span>
+                @*<span class="ui-icon ui-icon-plus" style="float:left"></span>*@
                 <span style="font-size:11px; font-family:Verdana">Generar en Word</span>
             </li>
+            <li id="del">
+
+                <span style="font-size:11px; font-family:Verdana">Generar borrador en Word</span>
+            </li>
+
             <li id="edit">
-                <span class="ui-icon ui-icon-pencil" style="float:left"></span>
-                <span style="font-size:11px; font-family:Verdana">Marcar RM como impresa</span>
+                @*<span class="ui-icon ui-icon-pencil" style="float:left"></span>*@
+                <span style="font-size:11px; font-family:Verdana">Marcar PED como impreso</span>
             </li>
             <li id="del">
-                <span class="ui-icon ui-icon-trash" style="float:left"></span>
-                <span style="font-size:11px; font-family:Verdana">Desmarcar rm como impresa</span>
+                @*<span class="ui-icon ui-icon-trash" style="float:left"></span>*@
+                <span style="font-size:11px; font-family:Verdana">Desmarcar PED como impreso</span>
             </li>
 
-
+            <li id="del">
+                @*<span class="ui-icon ui-icon-trash" style="float:left"></span>*@
+                <span style="font-size:11px; font-family:Verdana">Registrar fecha de salida del pedido</span>
+            </li>
         </ul>
     </div>
 
@@ -430,7 +446,7 @@ If you want additionally remove vertical border between the cells in the grid yo
             , multiboxonly: true
             , multipleSearch: true
 
-
+            , multiselect: true
        
 
 
