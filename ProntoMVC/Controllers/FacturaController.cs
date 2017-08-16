@@ -1450,7 +1450,7 @@ namespace ProntoMVC.Controllers
                             Costo = Math.Round((double)a.Costo, 2),
                             PrecioUnitario = Math.Round((double)a.PrecioUnitario, 2),
                             a.Bonificacion,
-                            Importe = Math.Round((double)a.Cantidad * (double)a.PrecioUnitario * (double)(1 - (a.Bonificacion ?? 0) / 100), 2),
+                            Importe = Math.Round((double)(a.Cantidad ?? 0) * (double)(a.PrecioUnitario ?? 0 ) * (double)(1 - (a.Bonificacion ?? 0) / 100), 2),
                             TiposDeDescripcion = (a.OrigenDescripcion ?? 1) == 1 ? "Solo material" : ((a.OrigenDescripcion ?? 1) == 2 ? "Solo observaciones" : ((a.OrigenDescripcion ?? 1) == 3 ? "Material + observaciones" : "")),
                             a.Observaciones,
                             OrdenCompraNumero = d.OrdenesCompra.NumeroOrdenCompra,
