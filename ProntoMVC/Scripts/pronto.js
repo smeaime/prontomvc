@@ -179,7 +179,7 @@ function RefrescaAnchoJqgrids() {
         //if ($("#panelOeste").css('width')<MARGENLOGO+20)  $("#panelOeste").css('width',MARGENLOGO+20)
 
 
-        $("#LogoEmpresa").css('width', parseInt($("#panelOeste").css('width')) - MARGENLOGO);
+        //$("#LogoEmpresa").css('width', parseInt($("#panelOeste").css('width')) - MARGENLOGO);
         //$("#SuperBuscador2").show();
     }
 
