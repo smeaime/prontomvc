@@ -1470,12 +1470,17 @@ namespace ProntoMVC.Controllers
                 string errorMessage = sb.ToString();
 
 
+                ErrHandler2.WriteError(errorMessage);
+
                 JsonResponse res = new JsonResponse();
                 res.Status = Status.Error;
                 res.Message = sNombreDelEnsamblado + " " + ex.Message + " **** " + errorMessage;
-                return Json(res, JsonRequestBehavior.AllowGet);
 
-                throw;
+                if (false)
+                {
+                    return Json(res, JsonRequestBehavior.AllowGet);
+                    throw;
+                }
             }
 
             catch (Exception ex)
