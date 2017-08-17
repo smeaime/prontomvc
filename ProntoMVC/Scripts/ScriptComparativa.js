@@ -2019,7 +2019,7 @@ $(document).ready(function () {
     $('a#a_panel_este_tab1').remove();
     $('a#a_panel_este_tab2').remove();
     $('a#a_panel_este_tab3').text('Presup');
-    $('a#a_panel_este_tab4').text('Comp');
+    $('a#a_panel_este_tab4').remove(); //.text('Comp');
     $('a#a_panel_este_tab5').remove();  //    $('a#a_panel_este_tab5').text('Ped');
 
 

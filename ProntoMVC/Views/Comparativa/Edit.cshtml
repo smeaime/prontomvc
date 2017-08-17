@@ -377,6 +377,7 @@
                             <a target="_blank" href="@Url.Action("Autorizaciones", "Edit", new { @id = -1 })">
                                 @Html.Label("Autorizaciones")
                             </a>
+                            <br />
                             <form>
                                 @{
 
@@ -773,8 +774,8 @@
                 width: 100%; height: 68px; padding-left: 0; margin-right: 15px;">
                     <hr style="margin: 0; border-top-color: #D8D4D4; border-bottom: 0px solid #ffffff;  " />
                     <div class="row-fluid">
-                        <div class="span8 lightblue"></div>
-                        <div class="span4 lightblue">
+                        <div class="span5 lightblue"></div>
+                        <div class="span7 lightblue">
 
                             <br />
                             <div>
@@ -847,6 +848,13 @@
 
             $("#conscroll").height($(window).height() - 120);
         });
+
+
+                $(function () {
+            mostrarPanelesDerecho();
+
+        })
+
     </script>
 
 

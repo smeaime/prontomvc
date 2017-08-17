@@ -423,7 +423,8 @@
         width: 'auto', // 'auto',
         autowidth: true,
         shrinkToFit: false,
-        height: '100%',
+        height: $(window).height() - ALTOLISTADO, // '100%'
+        //height: '100%',
         altRows: false,
         emptyrecords: 'No hay registros para mostrar'//,
     })
