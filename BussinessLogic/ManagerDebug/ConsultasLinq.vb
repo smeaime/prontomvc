@@ -683,7 +683,7 @@ Public Class ConsultasLinq
         'uso Group by, porque el distinct en vb.net es medio loco! (no anda igual que en c#)
 
         Dim q8 As List(Of infLiqui) = (From cdp In q
-                                       Where (idSubcontr = -1 Or cdp.Subcontr1 = idSubcontr) And (cdp.Subcontr1 = cdp.Subcontr2 And cdp.tarifcombo <> 0)
+                                       Where (idSubcontr = -1 Or cdp.Subcontr1 = idSubcontr) And (cdp.Subcontr1 = cdp.Subcontr2 And If(cdp.tarifcombo, 0) <> 0)
                                        Group By
                                 cdp.agrupVagon,
                                 cdp.DestinoDesc,
@@ -707,7 +707,7 @@ Public Class ConsultasLinq
 
 
         Dim q4 As List(Of infLiqui) = (From cdp In q
-                                       Where (idSubcontr = -1 Or cdp.Subcontr1 = idSubcontr) And Not (cdp.Subcontr1 = cdp.Subcontr2 And cdp.tarifcombo <> 0)
+                                       Where (idSubcontr = -1 Or cdp.Subcontr1 = idSubcontr) And Not (cdp.Subcontr1 = cdp.Subcontr2 And If(cdp.tarifcombo, 0) <> 0)
                                        Group By
                                         cdp.agrupVagon,
                                         cdp.DestinoDesc,
@@ -731,7 +731,7 @@ Public Class ConsultasLinq
 
 
         Dim q5 As List(Of infLiqui) = (From cdp In q
-                                       Where (idSubcontr = -1 Or cdp.Subcontr2 = idSubcontr) And Not (cdp.Subcontr1 = cdp.Subcontr2 And cdp.tarifcombo <> 0)
+                                       Where (idSubcontr = -1 Or cdp.Subcontr2 = idSubcontr) And Not (cdp.Subcontr1 = cdp.Subcontr2 And If(cdp.tarifcombo, 0) <> 0)
                                        Group By
                                         cdp.agrupVagon,
                                         cdp.DestinoDesc,
