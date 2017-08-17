@@ -226,12 +226,27 @@ namespace ProntoMVC.Controllers
             }
 
             if (o.DetalleFacturas.Count <= 0) sErrorMsg += "\n" + "La factura no tiene items";
+
+
+
+            var reqsToDelete = o.DetalleFacturas.Where(x => (x.IdArticulo ?? 0) <= 0).ToList();
+            foreach (var deleteReq in reqsToDelete)
+            {
+                o.DetalleFacturas.Remove(deleteReq);
+            }
+
+
+
+
             foreach (ProntoMVC.Data.Models.DetalleFactura x in o.DetalleFacturas)
             {
-                if ((x.IdArticulo ?? 0) == 0) { sErrorMsg += "\n" + "Hay items que no tienen articulo"; }
+                if ((x.IdArticulo ?? 0) == 0) {
+                    sErrorMsg += "\n" + "Hay items que no tienen articulo";
+                }
                 mImporteDetalle = (x.Cantidad ?? 0) * (x.PrecioUnitario ?? 0);
                 mImporteDetalle = mImporteDetalle * (1 - (x.Bonificacion ?? 0) / 100);
                 mSubtotal += mImporteDetalle;
+       
                 //x.Articulo.AuxiliarNumerico1 = 0;
             }
             if (mSubtotal <= 0) sErrorMsg += "\n" + "El subtotal de la factura debe ser mayor a cero";
@@ -1081,7 +1096,7 @@ namespace ProntoMVC.Controllers
 
             try
             {
-                if (FechaFinal == "") FechaHasta = DateTime.MinValue;
+                if (FechaFinal == "") FechaHasta = DateTime.MaxValue;
                 else FechaHasta = DateTime.ParseExact(FechaFinal, "dd/MM/yyyy", null);
             }
             catch (Exception)

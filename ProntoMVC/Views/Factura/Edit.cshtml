@@ -101,7 +101,7 @@ top: 50px; padding-left: 25px; padding-right: 25px; overflow-x: hidden;">
                             @Html.TextBoxFor(model => model.TipoABC, new { style = "width: 50px; height: 50px; font-weight: 400; font-size: 20px; border: 2px solid black; padding: ; text-align: center; font-family: 'Segoe UI Web Regular', 'Segoe UI', 'Lucida', Tahoma, Arial,'sans-serif';  ", @class = "span1", @readonly = "readonly" })
                         </div>
                         <div class="span2 lightblue">
-                            @Html.LabelFor(model => model.IdCondicionVenta, "Condicion de venta")
+                            @Html.LabelFor(model => model.IdCondicionVenta, "Cond. de venta")
                             @Html.DropDownList("IdCondicionVenta", null, "", new { @class = "span12", @style = "height: 15px;   line-height: 14px;" })
                             @Html.ValidationMessageFor(model => model.IdCondicionVenta)
                         </div>
@@ -126,7 +126,7 @@ top: 50px; padding-left: 25px; padding-right: 25px; overflow-x: hidden;">
                     </div>
 
                     <div class="row-fluid">
-                        <div class="span4 lightblue">
+                        <div class="span5 lightblue">
                             <label for="ArticuloAsociado">Cliente</label>
                             <input type="text" name="Cliente" id="Cliente" style="font-size: 15px; text-align: left;" class="span12" />
                             <script type="text/jscript">
@@ -148,13 +148,13 @@ top: 50px; padding-left: 25px; padding-right: 25px; overflow-x: hidden;">
                         </div>
                         <div class="span2 lightblue">
                             <label for="CondicionIva">Condicion Iva</label>
-                            <input type="text" name="CondicionIva" id="CondicionIva" style="font-size: 15px; text-align: left;" readonly="readonly" class="span12" />
+                            <input type="text" name="CondicionIva" id="CondicionIva" style="; text-align: left;" readonly="readonly" class="span12" />
                         </div>
-                        <div class="span1 lightblue">
+                        <div class="span2 lightblue">
                             <label for="Cuit">Cuit</label>
-                            <input type="text" name="Cuit" id="Cuit" style="font-size: 10px; text-align: center;" readonly="readonly" class="span12" />
+                            <input type="text" name="Cuit" id="Cuit" style="; text-align: center;" readonly="readonly" class="span12" />
                         </div>
-                        <div class="span5 lightblue">
+                        <div class="span3 lightblue">
                             @Html.LabelFor(model => model.IdIBCondicion, "Categoria IIBB (1)")
                             @Html.DropDownList("IdIBCondicion", null, "", new { @class = "span12", @style = "height: 15px;   line-height: 14px;" })
                             @Html.ValidationMessageFor(model => model.IdIBCondicion)
@@ -162,7 +162,7 @@ top: 50px; padding-left: 25px; padding-right: 25px; overflow-x: hidden;">
                     </div>
 
                     <div class="row-fluid">
-                        <div class="span3 lightblue">
+                        <div class="span5 lightblue">
                             <label for="Direccion">Direccion</label>
                             <input type="text" name="Direccion" id="Direccion" style="font-size: 15px; text-align: left;" readonly="readonly" class="span12" />
                         </div>
@@ -174,7 +174,7 @@ top: 50px; padding-left: 25px; padding-right: 25px; overflow-x: hidden;">
                             <label for="Provincia">Provincia</label>
                             <input type="text" name="Provincia" id="Provincia" style="font-size: 15px; text-align: left;" readonly="readonly" class="span12" />
                         </div>
-                        <div class="span5 lightblue">
+                        <div class="span3 lightblue">
                             @Html.LabelFor(model => model.IdIBCondicion2, "Categoria IIBB (2)")
                             @Html.DropDownList("IdIBCondicion2", null, "", new { @class = "span12", @style = "height: 15px;   line-height: 14px;" })
                             @Html.ValidationMessageFor(model => model.IdIBCondicion2)
@@ -182,7 +182,7 @@ top: 50px; padding-left: 25px; padding-right: 25px; overflow-x: hidden;">
                     </div>
 
                     <div class="row-fluid">
-                        <div class="span1 lightblue">
+                        <div class="span2 lightblue">
                             <label for="CodigoPostal">Cod. postal</label>
                             <input type="text" name="CodigoPostal" id="CodigoPostal" style="font-size: 15px; text-align: left;" readonly="readonly" class="span12" />
                         </div>
@@ -190,11 +190,11 @@ top: 50px; padding-left: 25px; padding-right: 25px; overflow-x: hidden;">
                             <label for="Email">Email</label>
                             <input type="text" name="Email" id="Email" style="font-size: 15px; text-align: left;" readonly="readonly" class="span12" />
                         </div>
-                        <div class="span2 lightblue">
+                        <div class="span3 lightblue">
                             <label for="Telefono">Telefono</label>
                             <input type="text" name="Telefono" id="Telefono" style="font-size: 15px; text-align: left;" readonly="readonly" class="span12" />
                         </div>
-                        <div class="span5 lightblue">
+                        <div class="span3 lightblue">
                             @Html.LabelFor(model => model.IdIBCondicion3, "Categoria IIBB (3)")
                             @Html.DropDownList("IdIBCondicion3", null, "", new { @class = "span12", @style = "height: 15px;   line-height: 14px;" })
                             @Html.ValidationMessageFor(model => model.IdIBCondicion3)
@@ -358,9 +358,9 @@ top: 50px; padding-left: 25px; padding-right: 25px; overflow-x: hidden;">
  height: 68px; padding-left: 0; margin-right: 15px;">
                     <hr style="margin: 0; border-top-color: #D8D4D4; border-bottom: 0px solid #ffffff;  " />
                     <div class="row-fluid " style="padding: 11px 0px 0px 0px">
-                        <div class="span7 pull-left"></div>
+                        <div class="span4 pull-left"></div>
 
-                        <div class="span5 lightblue">
+                        <div class="span8 lightblue">
                             <input type="button" id="grabar2" value="Aceptar" class="btn  btn-large btn-primary " usesubmitbehavior="false" />
 
                             @if (Model.IdFactura > 0)
