@@ -40,7 +40,7 @@ namespace ProntoMVC.Controllers
             return View();
         }
 
-        public virtual ViewResult Edit(int id)
+        public virtual ActionResult Edit(int id)
         {
             Factura o;
 
@@ -66,6 +66,28 @@ namespace ProntoMVC.Controllers
 
             if (id <= 0)
             {
+                Int32 mIdMonedaDolar = 2;
+                var cotiz = funcMoneda_Cotizacion(DateTime.Today, mIdMonedaDolar);
+                if ((cotiz ?? 0) <= 0)
+                {
+                    /// "Falta la cotización del dólar"
+                     TempData["Alerta"] = "Falta la cotización del dólar";
+                    //return RedirectToAction("Index", "Factura");
+
+
+
+                    //JsonResponse res = new JsonResponse();
+                    //res.Status = Status.Error;
+
+                    //string[] words = errs.Split('\n');
+                    //res.Errors = words.ToList();
+                    //res.Message = "Hay datos invalidos";
+
+                    //return Json(res);
+
+                }
+
+
                 o = new Factura();
                 inic(ref o);
                 CargarViewBag(o);
@@ -114,7 +136,7 @@ namespace ProntoMVC.Controllers
 
             o.IdMoneda = 1;
 
-            var mvarCotizacion = db.Cotizaciones.OrderByDescending(x => x.IdCotizacion).FirstOrDefault().Cotizacion; //  mo  Cotizacion(Date, glbIdMonedaDolar);
+            var mvarCotizacion = funcMoneda_Cotizacion(DateTime.Today, 2); // db.Cotizaciones.OrderByDescending(x => x.IdCotizacion).FirstOrDefault().Cotizacion; //  mo  Cotizacion(Date, glbIdMonedaDolar);
             o.CotizacionMoneda = 1;
             o.CotizacionDolar = (decimal)(mvarCotizacion ?? 0);
         }
@@ -240,13 +262,14 @@ namespace ProntoMVC.Controllers
 
             foreach (ProntoMVC.Data.Models.DetalleFactura x in o.DetalleFacturas)
             {
-                if ((x.IdArticulo ?? 0) == 0) {
+                if ((x.IdArticulo ?? 0) == 0)
+                {
                     sErrorMsg += "\n" + "Hay items que no tienen articulo";
                 }
                 mImporteDetalle = (x.Cantidad ?? 0) * (x.PrecioUnitario ?? 0);
                 mImporteDetalle = mImporteDetalle * (1 - (x.Bonificacion ?? 0) / 100);
                 mSubtotal += mImporteDetalle;
-       
+
                 //x.Articulo.AuxiliarNumerico1 = 0;
             }
             if (mSubtotal <= 0) sErrorMsg += "\n" + "El subtotal de la factura debe ser mayor a cero";
@@ -1041,14 +1064,14 @@ namespace ProntoMVC.Controllers
 
 
             var excelData = new jqGridWeb.DataForExcel(
-                // column Header
+                    // column Header
                     new[] { "Col1", "Col2", "Col3" },
                     new[]{jqGridWeb.DataForExcel.DataType.String, jqGridWeb.DataForExcel.DataType.Integer,
                           jqGridWeb.DataForExcel.DataType.String},
-                //      new List<string[]> {
-                //    new[] {"a", "1", "c1"},
-                //    new[] {"a", "2", "c2"}
-                //},
+                    //      new List<string[]> {
+                    //    new[] {"a", "1", "c1"},
+                    //    new[] {"a", "2", "c2"}
+                    //},
                     lista,
 
                     "Test Grid");
@@ -1131,15 +1154,15 @@ namespace ProntoMVC.Controllers
             int currentPage = page;
 
             var data = (from a in pagedQuery
-                        //from b in db.DescripcionIvas.Where(v => v.IdCodigoIva == a.IdCodigoIva).DefaultIfEmpty()
-                        //from c in db.Obras.Where(v => v.IdObra == a.IdObra).DefaultIfEmpty()
-                        //from d in db.Vendedores.Where(v => v.IdVendedor == a.IdVendedor).DefaultIfEmpty()
-                        //from e in db.Empleados.Where(v => v.IdEmpleado == a.IdUsuarioIngreso).DefaultIfEmpty()
-                        //from f in db.Empleados.Where(y => y.IdEmpleado == a.IdAutorizaAnulacion).DefaultIfEmpty()
-                        //from g in db.Provincias.Where(v => v.IdProvincia == a.IdProvinciaDestino).DefaultIfEmpty()
-                        //from h in db.Depositos.Where(v => v.IdDeposito == a.IdDeposito).DefaultIfEmpty()
-                        //from i in db.Condiciones_Compras.Where(v => v.IdCondicionCompra == a.IdCondicionVenta).DefaultIfEmpty()
-                        //from j in db.ListasPrecios.Where(v => v.IdListaPrecios == a.IdListaPrecios).DefaultIfEmpty()
+                            //from b in db.DescripcionIvas.Where(v => v.IdCodigoIva == a.IdCodigoIva).DefaultIfEmpty()
+                            //from c in db.Obras.Where(v => v.IdObra == a.IdObra).DefaultIfEmpty()
+                            //from d in db.Vendedores.Where(v => v.IdVendedor == a.IdVendedor).DefaultIfEmpty()
+                            //from e in db.Empleados.Where(v => v.IdEmpleado == a.IdUsuarioIngreso).DefaultIfEmpty()
+                            //from f in db.Empleados.Where(y => y.IdEmpleado == a.IdAutorizaAnulacion).DefaultIfEmpty()
+                            //from g in db.Provincias.Where(v => v.IdProvincia == a.IdProvinciaDestino).DefaultIfEmpty()
+                            //from h in db.Depositos.Where(v => v.IdDeposito == a.IdDeposito).DefaultIfEmpty()
+                            //from i in db.Condiciones_Compras.Where(v => v.IdCondicionCompra == a.IdCondicionVenta).DefaultIfEmpty()
+                            //from j in db.ListasPrecios.Where(v => v.IdListaPrecios == a.IdListaPrecios).DefaultIfEmpty()
                         select new
                         {
                             a.IdFactura,
@@ -1197,7 +1220,7 @@ namespace ProntoMVC.Controllers
             int totalPages = (int)Math.Ceiling((float)totalRecords / (float)pageSize);
 
             var data1 = (from a in data select a)
-                //   .OrderByDescending(x => x.FechaFactura).ThenByDescending(y => y.NumeroFactura)
+//   .OrderByDescending(x => x.FechaFactura).ThenByDescending(y => y.NumeroFactura)
 
 //.Skip((currentPage - 1) * pageSize).Take(pageSize)
 .ToList();
@@ -1211,7 +1234,7 @@ namespace ProntoMVC.Controllers
                         select new jqGridRowJson
                         {
                             id = a.IdFactura.ToString(),
-                            cell = new string[] { 
+                            cell = new string[] {
                                 "<a href="+ Url.Action("Edit",new {id = a.IdFactura} ) + ">Editar</>",
                                 "<a href="+ Url.Action("ImprimirConInteropPDF",new {id = a.IdFactura} ) + ">Emitir</a> ",
                                 a.IdFactura.ToString(),
@@ -1369,7 +1392,7 @@ namespace ProntoMVC.Controllers
                         select new jqGridRowJson
                         {
                             id = a.IdFactura.ToString(),
-                            cell = new string[] { 
+                            cell = new string[] {
                                 "<a href="+ Url.Action("Edit",new {id = a.IdFactura} ) + ">Editar</>",
                                 "<a href="+ Url.Action("ImprimirConInteropPDF",new {id = a.IdFactura} ) + ">Emitir</a> ",
                                 a.IdFactura.ToString(),
@@ -1465,7 +1488,7 @@ namespace ProntoMVC.Controllers
                             Costo = Math.Round((double)a.Costo, 2),
                             PrecioUnitario = Math.Round((double)a.PrecioUnitario, 2),
                             a.Bonificacion,
-                            Importe = Math.Round((double)(a.Cantidad ?? 0) * (double)(a.PrecioUnitario ?? 0 ) * (double)(1 - (a.Bonificacion ?? 0) / 100), 2),
+                            Importe = Math.Round((double)(a.Cantidad ?? 0) * (double)(a.PrecioUnitario ?? 0) * (double)(1 - (a.Bonificacion ?? 0) / 100), 2),
                             TiposDeDescripcion = (a.OrigenDescripcion ?? 1) == 1 ? "Solo material" : ((a.OrigenDescripcion ?? 1) == 2 ? "Solo observaciones" : ((a.OrigenDescripcion ?? 1) == 3 ? "Material + observaciones" : "")),
                             a.Observaciones,
                             OrdenCompraNumero = d.OrdenesCompra.NumeroOrdenCompra,
@@ -1473,7 +1496,7 @@ namespace ProntoMVC.Controllers
                             RemitoNumero = f.Remito.NumeroRemito,
                             RemitoItem = f.NumeroItem
                         }).OrderBy(x => x.IdDetalleFactura)
-                //.Skip((currentPage - 1) * pageSize).Take(pageSize)
+//.Skip((currentPage - 1) * pageSize).Take(pageSize)
 .ToList();
 
             var jsonData = new jqGridJson()
@@ -1485,9 +1508,9 @@ namespace ProntoMVC.Controllers
                         select new jqGridRowJson
                         {
                             id = a.IdDetalleFactura.ToString(),
-                            cell = new string[] { 
-                            string.Empty, 
-                            a.IdDetalleFactura.ToString(), 
+                            cell = new string[] {
+                            string.Empty,
+                            a.IdDetalleFactura.ToString(),
                             a.IdArticulo.NullSafeToString(),
                             a.IdUnidad.NullSafeToString(),
                             a.IdColor.NullSafeToString(),
@@ -1585,7 +1608,7 @@ namespace ProntoMVC.Controllers
             int totalPages = (int)Math.Ceiling((float)totalRecords / (float)pageSize);
 
             var data = (from a in Fac
-                        //join c in db.IngresoBrutos on a.IdIBCondicion equals c.IdIBCondicion
+                            //join c in db.IngresoBrutos on a.IdIBCondicion equals c.IdIBCondicion
                         select a).Where(campo).OrderBy(sidx + " " + sord)
 .Skip((currentPage - 1) * pageSize).Take(pageSize)
 .ToList();
@@ -1599,9 +1622,9 @@ namespace ProntoMVC.Controllers
                         select new jqGridRowJson
                         {
                             id = a.IdDetalleRemito.NullSafeToString(),
-                            cell = new string[] { 
-                                
-                                "<a href="+ Url.Action("Edit",new {id = a.IdDetalleRemito} )  +" target='_blank' >Editar</>" 
+                            cell = new string[] {
+
+                                "<a href="+ Url.Action("Edit",new {id = a.IdDetalleRemito} )  +" target='_blank' >Editar</>"
                                 ,
                                 a.IdDetalleRemito.NullSafeToString(),
                                 a.IdArticulo.NullSafeToString(),
@@ -1664,9 +1687,9 @@ namespace ProntoMVC.Controllers
             int totalPages = (int)Math.Ceiling((float)totalRecords / (float)pageSize);
 
             var data = (from a in Fac
-                        //join c in db.IngresoBrutos on a.IdIBCondicion equals c.IdIBCondicion
+                            //join c in db.IngresoBrutos on a.IdIBCondicion equals c.IdIBCondicion
                         select a).Where(campo).OrderBy(sidx + " " + sord)
-                //.Skip((currentPage - 1) * pageSize).Take(pageSize)
+//.Skip((currentPage - 1) * pageSize).Take(pageSize)
 .ToList();
 
             var jsonData = new jqGridJson()
@@ -1678,9 +1701,9 @@ namespace ProntoMVC.Controllers
                         select new jqGridRowJson
                         {
                             id = a.IdDetalleOrdenCompra.ToString(),
-                            cell = new string[] { 
-                                
-                                "<a href="+ Url.Action("Edit",new {id = a.IdDetalleOrdenCompra} )  +" target='_blank' >Editar</>" 
+                            cell = new string[] {
+
+                                "<a href="+ Url.Action("Edit",new {id = a.IdDetalleOrdenCompra} )  +" target='_blank' >Editar</>"
                                 ,
                                    a.IdDetalleOrdenCompra.NullSafeToString(),
                                 a.IdArticulo.NullSafeToString(),
@@ -1690,9 +1713,9 @@ namespace ProntoMVC.Controllers
                                 a.Cantidad.NullSafeToString(),
                                                                 a.IdUnidad.NullSafeToString(),
                                  (a.Unidade ?? new Unidad()).Descripcion.NullSafeToString(),
-                                
+
                                 a.OrdenesCompra.Cliente.RazonSocial.NullSafeToString(),
-                           
+
                                a.OrdenesCompra.IdCliente.NullSafeToString()
                             }
                         }).ToArray()
@@ -1757,7 +1780,7 @@ namespace ProntoMVC.Controllers
             decimal mOtrasPercepciones3 = 0;
             decimal mImporteBonificacion = 0;
             decimal mAuxD1 = 0;
-            
+
             bool mResul = false;
             bool glbDebugFacturaElectronica = false;
             bool mAplicarIVANoDiscriminado = false;
@@ -1790,7 +1813,7 @@ namespace ProntoMVC.Controllers
                 if (mImporteIva == 0)
                 {
                     mAuxD1 = ((x.Cantidad ?? 0) * (x.PrecioUnitario ?? 0) * (1 - (x.Bonificacion ?? 0) / 100));
-                    mSubTotalExento +=  Math.Round((mAuxD1), 2); 
+                    mSubTotalExento += Math.Round((mAuxD1), 2);
                 }
             }
 

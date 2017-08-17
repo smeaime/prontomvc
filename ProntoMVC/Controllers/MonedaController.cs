@@ -249,21 +249,28 @@ namespace ProntoMVC.Controllers
             return Json(jsonData, JsonRequestBehavior.AllowGet);
         }
 
+
+    
+
         public virtual JsonResult Moneda_Cotizacion(DateTime? fecha, int IdMoneda)
         {
-            if (db == null) return null;
-            if (fecha == null) fecha = DateTime.Now;
+            //if (db == null) return null;
+            //if (fecha == null) fecha = DateTime.Now;
 
-            decimal cotizacion;
+            decimal? cotizacion;
 
-            DateTime desde = fecha.Value.Date;
-            DateTime hasta = desde.AddDays(1);
+            //DateTime desde = fecha.Value.Date;
+            //DateTime hasta = desde.AddDays(1);
 
-            var mvarCotizacion = db.Cotizaciones.Where(x => x.Fecha >= desde && x.Fecha <= hasta && x.IdMoneda == IdMoneda).FirstOrDefault();
-            if (mvarCotizacion == null) cotizacion = -1; else cotizacion = (mvarCotizacion.CotizacionLibre ?? mvarCotizacion.Cotizacion) ?? -1;
+            //var mvarCotizacion = db.Cotizaciones.Where(x => x.Fecha >= desde && x.Fecha <= hasta && x.IdMoneda == IdMoneda).FirstOrDefault();
+            //if (mvarCotizacion == null) cotizacion = -1; else cotizacion = (mvarCotizacion.CotizacionLibre ?? mvarCotizacion.Cotizacion) ?? -1;
+
+            cotizacion = funcMoneda_Cotizacion(fecha, IdMoneda);
 
             return Json(cotizacion, JsonRequestBehavior.AllowGet);
         }
+
+
 
         public virtual JsonResult CotizacionesPorFecha(string fecha)
         {
