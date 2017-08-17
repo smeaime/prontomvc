@@ -1635,7 +1635,7 @@ namespace ProntoMVC.Controllers
                                 a.IdUnidad.NullSafeToString(),
                                 (a.Unidade ?? new Unidad()).Descripcion.NullSafeToString(),
                                 a.Remito.IdCliente.NullSafeToString(),
-                                a.Remito.Cliente.RazonSocial.NullSafeToString()
+                                (a.Remito.Cliente==null) ? "" : a.Remito.Cliente.RazonSocial.NullSafeToString()
                             }
                         }).ToArray()
             };

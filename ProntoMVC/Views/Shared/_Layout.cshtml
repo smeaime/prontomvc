@@ -1017,8 +1017,9 @@ Released   : 20120723
                 pageLayout = $("body").layout($.extend(myDefaultSettings, layoutState.load('pageLayout')));
 
 
-                $("#LogoEmpresa").css('width', parseInt($("#panelOeste").css('width')) - MARGENLOGO);
-               // $("#SuperBuscador2").hide();
+                //$("#LogoEmpresa").css('width', parseInt($("#panelOeste").css('width')) - MARGENLOGO);
+
+                // $("#SuperBuscador2").hide();
 
                 pageLayout.options.center.onresize = function () { RefrescaAnchoJqgrids(); };
                 pageLayout.options.east.onresize = function () { RefrescaAnchoJqgrids(); };
