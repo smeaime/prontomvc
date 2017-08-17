@@ -1628,7 +1628,10 @@ $(document).ready(function () {
         colNames: ['Acciones', 'IdPresupuesto', 'Numero', 'Orden', 'Fecha', 'Proveedor', 'Validez', 'Bonif.', '% Iva', 'Mon', 'Subtotal', 'Imp.Bon.', 'Imp.Iva', 'Imp.Total',
                        'Plazo_entrega', 'Condicion_compra', 'Garantia', 'Lugar_entrega', 'Comprador', 'Aprobo', 'Referencia', 'Detalle', 'Contacto', 'Observaciones', ''],
         colModel: [
-                        { name: 'act', index: 'act', align: 'center', width: 40, sortable: false, editable: false, search: false }, //, formatter: 'showlink', formatoptions: { baseLinkUrl: '@Url.Action("Edit")'} },
+            {
+                name: 'act', index: 'act', align: 'center', width: 40,
+                sortable: false, editable: false, search: false, hidden: true
+            }, //, formatter: 'showlink', formatoptions: { baseLinkUrl: '@Url.Action("Edit")'} },
                         {name: 'IdPresupuesto', index: 'IdPresupuesto', align: 'left', width: 100, editable: false, hidden: true },
                         { name: 'Numero', index: 'Numero', align: 'right', width: 50, editable: false, search: true, searchoptions: { sopt: ['cn','eq'] } },
                         { name: 'Orden', index: 'SubNumero', align: 'right', width: 20, editable: false, search: true, searchoptions: { sopt: ['cn', 'eq'] } },
