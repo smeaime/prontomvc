@@ -224,7 +224,7 @@ namespace ProntoMVC.Controllers
 
 
             string campo = "true"; // String.Empty;
-            int pageSize = rows ; // ?? 20;
+            int pageSize = rows; // ?? 20;
             int currentPage = page; //  ?? 1;
 
             var Fac = db.Comparativas.AsQueryable();
@@ -289,7 +289,7 @@ namespace ProntoMVC.Controllers
 
 
             var Req = Fac.Where(campo);
-                        
+
 
 
 
@@ -379,10 +379,10 @@ namespace ProntoMVC.Controllers
             //}
 
             var data = (from a in pagedQuery // Fac.Where(campo)
-                        //join c in db.Clientes on a.IdCliente equals c.IdCliente
+                                             //join c in db.Clientes on a.IdCliente equals c.IdCliente
                         select a)
-                //.OrderBy(sidx + " " + sord)
-           //             .OrderByDescending(x => x.Fecha).ThenByDescending(x => x.Numero)
+//.OrderBy(sidx + " " + sord)
+//             .OrderByDescending(x => x.Fecha).ThenByDescending(x => x.Numero)
 
 //.Skip((currentPage - 1) * pageSize).Take(pageSize)
 .ToList();
@@ -396,7 +396,7 @@ namespace ProntoMVC.Controllers
                         select new jqGridRowJson
                         {
                             id = a.IdComparativa.ToString(),
-                            cell = new string[] { 
+                            cell = new string[] {
                                 "<a href="+ Url.Action("Edit",new {id = a.IdComparativa} )  +" target='_blank' >Editar</>"
                                 //+
                                 //"|" +
@@ -412,17 +412,17 @@ namespace ProntoMVC.Controllers
 
                                 a.IdComparativa.NullSafeToString(),
                                 a.Numero.NullSafeToString(),
-                                a.Fecha.NullSafeToString(),  
-                                 (a.PresupuestoSeleccionado??0)!=-1 ? "Monopresupuesto" : "Multipresupuesto",  
-                                 
-                                 
+                                a.Fecha.NullSafeToString(),
+                                 (a.PresupuestoSeleccionado??0)!=-1 ? "Monopresupuesto" : "Multipresupuesto",
+
+
                                  (db.Empleados.Find(a.IdConfecciono) ?? new Empleado()).Nombre,
                                  (db.Empleados.Find(a.IdAprobo) ?? new Empleado()).Nombre,
                                   //E1.Nombre as [Confecciono],  
                                   // E2.Nombre as [Aprobo],  
                                  
                                  
-                                 a.MontoPrevisto.NullSafeToString() ,  
+                                 a.MontoPrevisto.NullSafeToString() ,
                                  a.MontoParaCompra.NullSafeToString() ,  
 
                                  //db.AutorizacionesPorComprobante1
@@ -441,9 +441,9 @@ namespace ProntoMVC.Controllers
                               "",// "",
                                 /////////
 
-                                 a.ArchivoAdjunto1.NullSafeToString(),  
-                                 a.ArchivoAdjunto2.NullSafeToString() ,  
-                                 a.Anulada.NullSafeToString() ,  
+                                 a.ArchivoAdjunto1.NullSafeToString(),
+                                 a.ArchivoAdjunto2.NullSafeToString() ,
+                                 a.Anulada.NullSafeToString() ,
                                  a.FechaAnulacion.NullSafeToString() ,  
                                  //E3.Nombre as [Anulo],  
                                  a.MotivoAnulacion.NullSafeToString()   
@@ -597,11 +597,11 @@ namespace ProntoMVC.Controllers
             //}
 
             var data = (from a in Fac.Where(campo)
-                        //join c in db.Clientes on a.IdCliente equals c.IdCliente
+                            //join c in db.Clientes on a.IdCliente equals c.IdCliente
                         select a)
-                //.OrderBy(sidx + " " + sord)
+                        //.OrderBy(sidx + " " + sord)
                         .OrderByDescending(x => x.Fecha).ThenByDescending(x => x.Numero)
-                        
+
 //.Skip((currentPage - 1) * pageSize).Take(pageSize)
 .ToList();
 
@@ -614,7 +614,7 @@ namespace ProntoMVC.Controllers
                         select new jqGridRowJson
                         {
                             id = a.IdComparativa.ToString(),
-                            cell = new string[] { 
+                            cell = new string[] {
                                 "<a href="+ Url.Action("Edit",new {id = a.IdComparativa} )  +" target='_blank' >Editar</>"
                                 //+
                                 //"|" +
@@ -630,17 +630,17 @@ namespace ProntoMVC.Controllers
 
                                 a.IdComparativa.NullSafeToString(),
                                 a.Numero.NullSafeToString(),
-                                a.Fecha.NullSafeToString(),  
-                                 (a.PresupuestoSeleccionado??0)!=-1 ? "Monopresupuesto" : "Multipresupuesto",  
-                                 
-                                 
+                                a.Fecha.NullSafeToString(),
+                                 (a.PresupuestoSeleccionado??0)!=-1 ? "Monopresupuesto" : "Multipresupuesto",
+
+
                                  (db.Empleados.Find(a.IdConfecciono) ?? new Empleado()).Nombre,
                                  (db.Empleados.Find(a.IdAprobo) ?? new Empleado()).Nombre,
                                   //E1.Nombre as [Confecciono],  
                                   // E2.Nombre as [Aprobo],  
                                  
                                  
-                                 a.MontoPrevisto.NullSafeToString() ,  
+                                 a.MontoPrevisto.NullSafeToString() ,
                                  a.MontoParaCompra.NullSafeToString() ,  
 
                                  //db.AutorizacionesPorComprobante1
@@ -659,9 +659,9 @@ namespace ProntoMVC.Controllers
                               "",// "",
                                 /////////
 
-                                 a.ArchivoAdjunto1.NullSafeToString(),  
-                                 a.ArchivoAdjunto2.NullSafeToString() ,  
-                                 a.Anulada.NullSafeToString() ,  
+                                 a.ArchivoAdjunto1.NullSafeToString(),
+                                 a.ArchivoAdjunto2.NullSafeToString() ,
+                                 a.Anulada.NullSafeToString() ,
                                  a.FechaAnulacion.NullSafeToString() ,  
                                  //E3.Nombre as [Anulo],  
                                  a.MotivoAnulacion.NullSafeToString()   
@@ -1453,10 +1453,57 @@ namespace ProntoMVC.Controllers
 
 
 
-        void DeGrillaHaciaObjeto(List<RenglonJQgrid> grilla, Comparativa o)
+        DetalleComparativa itemObjeto(Comparativa o, RenglonJQgrid r, string total, string precio, string check, int subnumero)
         {
 
             DetalleComparativa it;
+
+            /////////////////////////////////////   
+            it = new DetalleComparativa();
+            it.IdArticulo = r.IdArticulo;
+            it.Cantidad = r.Cantidad;
+            it.IdUnidad = r.IdUnidad;
+            // it.IdDetalleComparativa = null;
+            it.IdPresupuesto = -1;
+            it.IdDetallePresupuesto = -1;
+
+
+
+            if (total == null) return null;
+            it.IdPresupuesto = int.Parse(total); // esconder en Total el IdPresupuesto
+
+
+            var p = db.Presupuestos.Find(it.IdPresupuesto);
+            var pdet = p.DetallePresupuestos.Where(x => x.IdArticulo == it.IdArticulo).FirstOrDefault();
+
+            it.IdDetallePresupuesto = pdet.IdDetallePresupuesto;
+            it.Precio = decimal.Parse(precio ?? "0");
+            it.Estado = (check == "True") ? "MR" : "";
+            it.SubNumero = subnumero; // esto hay que corregirlo
+            it.NumeroPresupuesto = p.Numero;
+            it.FechaPresupuesto = p.FechaIngreso;
+            it.IdUnidad = pdet.IdUnidad;
+            it.OrigenDescripcion = pdet.OrigenDescripcion;
+            it.CotizacionMoneda = p.CotizacionMoneda;
+            it.Observaciones = p.Observaciones;
+            it.IdMoneda = p.IdMoneda;
+            it.PorcentajeBonificacion = p.Bonificacion;
+
+
+
+            o.DetalleComparativas.Add(it);
+
+            return it;
+
+        }
+
+
+
+
+        void DeGrillaHaciaObjeto(List<RenglonJQgrid> grilla, Comparativa o)
+        {
+
+
             if (grilla == null) return;
 
             foreach (var r in grilla)
@@ -1465,160 +1512,16 @@ namespace ProntoMVC.Controllers
 
 
 
-                /////////////////////////////////////   
-                it = new DetalleComparativa();
-                it.IdArticulo = r.IdArticulo;
-                it.Cantidad = r.Cantidad;
-                it.IdUnidad = r.IdUnidad;
-                // it.IdDetalleComparativa = null;
-                it.IdPresupuesto = -1;
-                it.IdDetallePresupuesto = -1;
 
+                itemObjeto(o, r, grilla[0].Total_A, r.PrecioA, r.Check_A, 1);
+                itemObjeto(o, r, grilla[0].Total_B, r.PrecioB, r.Check_B, 2);
+                itemObjeto(o, r, grilla[0].Total_C, r.PrecioC, r.Check_C, 3);
+                itemObjeto(o, r, grilla[0].Total_D, r.PrecioD, r.Check_D, 4);
+                itemObjeto(o, r, grilla[0].Total_E, r.PrecioE, r.Check_E, 5);
+                itemObjeto(o, r, grilla[0].Total_F, r.PrecioF, r.Check_F, 6);
+                itemObjeto(o, r, grilla[0].Total_G, r.PrecioG, r.Check_G, 7);
+                itemObjeto(o, r, grilla[0].Total_H, r.PrecioH, r.Check_H, 8);
 
-
-                if (grilla[0].Total_A == null) continue;
-                it.IdPresupuesto = int.Parse(grilla[0].Total_A); // esconder en Total el IdPresupuesto
-                it.Precio = decimal.Parse(r.PrecioA ?? "0");
-                it.Estado = (r.Check_A == "True") ? "MR" : "";
-                it.SubNumero = 1; // esto hay que corregirlo
-                o.DetalleComparativas.Add(it);
-
-                /////////////////////////////////////   
-
-                it = new DetalleComparativa();
-                it.IdArticulo = r.IdArticulo;
-                it.Cantidad = r.Cantidad;
-                it.IdUnidad = r.IdUnidad;
-                // it.IdDetalleComparativa = -1;
-                it.IdPresupuesto = -1;
-                it.IdDetallePresupuesto = -1;
-
-
-                if (grilla[0].Total_B == null) continue;
-                it.IdPresupuesto = int.Parse(grilla[0].Total_B); // esconder en Total el IdPresupuesto
-                it.Precio = decimal.Parse(r.PrecioB ?? "0");
-                it.Estado = (r.Check_B == "True") ? "MR" : "";
-                it.SubNumero = 2; // esto hay que corregirlo
-                o.DetalleComparativas.Add(it);
-
-
-                /////////////////////////////////////   
-
-                it = new DetalleComparativa();
-                it.IdArticulo = r.IdArticulo;
-                it.Cantidad = r.Cantidad;
-                it.IdUnidad = r.IdUnidad;
-                //it.IdDetalleComparativa = -1;
-                it.IdPresupuesto = -1;
-                it.IdDetallePresupuesto = -1;
-
-                if (grilla[0].Total_C == null) continue;
-                it.IdPresupuesto = int.Parse(grilla[0].Total_C); // esconder en Total el IdPresupuesto
-                it.Precio = decimal.Parse(r.PrecioC ?? "0");
-                it.Estado = (r.Check_C == "True") ? "MR" : "";
-                it.SubNumero = 3; // esto hay que corregirlo
-
-                o.DetalleComparativas.Add(it);
-
-
-                /////////////////////////////////////   
-
-
-                it = new DetalleComparativa();
-                it.IdArticulo = r.IdArticulo;
-                it.Cantidad = r.Cantidad;
-                it.IdUnidad = r.IdUnidad;
-                //it.IdDetalleComparativa = -1;
-                it.IdPresupuesto = -1;
-                it.IdDetallePresupuesto = -1;
-
-                if (grilla[0].Total_D == null) continue;
-                it.IdPresupuesto = int.Parse(grilla[0].Total_D); // esconder en Total el IdPresupuesto
-                it.Precio = decimal.Parse(r.PrecioD ?? "0");
-                it.Estado = (r.Check_D == "True") ? "MR" : "";
-                it.SubNumero = 4; // esto hay que corregirlo
-
-                o.DetalleComparativas.Add(it);
-
-
-                /////////////////////////////////////  
-
-
-                it = new DetalleComparativa();
-                it.IdArticulo = r.IdArticulo;
-                it.Cantidad = r.Cantidad;
-                it.IdUnidad = r.IdUnidad;
-                //it.IdDetalleComparativa = -1;
-                it.IdPresupuesto = -1;
-                it.IdDetallePresupuesto = -1;
-
-                if (grilla[0].Total_E == null) continue;
-                it.IdPresupuesto = int.Parse(grilla[0].Total_E); // esconder en Total el IdPresupuesto
-                it.Precio = decimal.Parse(r.PrecioE ?? "0");
-                it.Estado = (r.Check_E == "True") ? "MR" : "";
-                it.SubNumero = 5; // esto hay que corregirlo
-                o.DetalleComparativas.Add(it);
-
-
-                /////////////////////////////////////  
-
-
-                it = new DetalleComparativa();
-                it.IdArticulo = r.IdArticulo;
-                it.Cantidad = r.Cantidad;
-                it.IdUnidad = r.IdUnidad;
-                //it.IdDetalleComparativa = -1;
-                it.IdPresupuesto = -1;
-                it.IdDetallePresupuesto = -1;
-
-                if (grilla[0].Total_F == null) continue;
-                it.IdPresupuesto = int.Parse(grilla[0].Total_F); // esconder en Total el IdPresupuesto
-                it.Precio = decimal.Parse(r.PrecioF ?? "0");
-                it.Estado = (r.Check_F == "True") ? "MR" : "";
-                it.SubNumero = 6; // esto hay que corregirlo
-                o.DetalleComparativas.Add(it);
-
-
-                /////////////////////////////////////  
-
-
-
-                it = new DetalleComparativa();
-                it.IdArticulo = r.IdArticulo;
-                it.Cantidad = r.Cantidad;
-                it.IdUnidad = r.IdUnidad;
-                //it.IdDetalleComparativa = -1;
-                it.IdPresupuesto = -1;
-                it.IdDetallePresupuesto = -1;
-
-                if (grilla[0].Total_G == null) continue;
-                it.IdPresupuesto = int.Parse(grilla[0].Total_G); // esconder en Total el IdPresupuesto
-                it.Precio = decimal.Parse(r.PrecioG ?? "0");
-                it.Estado = (r.Check_G == "True") ? "MR" : "";
-                it.SubNumero = 7; // esto hay que corregirlo
-                o.DetalleComparativas.Add(it);
-
-
-                /////////////////////////////////////  
-
-
-                it = new DetalleComparativa();
-                it.IdArticulo = r.IdArticulo;
-                it.Cantidad = r.Cantidad;
-                it.IdUnidad = r.IdUnidad;
-                // it.IdDetalleComparativa = -1;
-                it.IdPresupuesto = -1;
-                it.IdDetallePresupuesto = -1;
-
-                if (grilla[0].Total_H == null) continue;
-                it.IdPresupuesto = int.Parse(grilla[0].Total_H); // esconder en Total el IdPresupuesto
-                it.Precio = decimal.Parse(r.PrecioH ?? "0");
-                it.Estado = (r.Check_H == "True") ? "MR" : "";
-                it.SubNumero = 8; // esto hay que corregirlo
-                o.DetalleComparativas.Add(it);
-
-
-                /////////////////////////////////////  
             }
 
 
@@ -1633,14 +1536,15 @@ namespace ProntoMVC.Controllers
             List<int> provs2 = o.DetalleComparativas.Select(x => (x.IdPresupuesto ?? 0)).Distinct().ToList();
             var rms = db.DetallePresupuestos.Where(c => provs2.Contains(c.IdPresupuesto ?? 0)).Select(p => p.IdDetalleRequerimiento).ToList();
             var cabrms = db.DetalleRequerimientos.Where(r => rms.Contains(r.IdDetalleRequerimiento)).Select(p => p.IdRequerimiento).Distinct().ToList();
-            var aaaas = db.Requerimientos.Include(x => x.Obra).Where(r => cabrms.Contains(r.IdRequerimiento)).Select(p => p.Obra.Descripcion).ToList();
             var num = db.Requerimientos.Include(x => x.Obra).Where(r => cabrms.Contains(r.IdRequerimiento)).Select(p => p.NumeroRequerimiento).ToList();
-            var ssss = string.Join(",", aaaas);
-            var eeeee = string.Join(",", num);
+
+
+            var conobra = db.Requerimientos.Include(x => x.Obra).Where(r => cabrms.Contains(r.IdRequerimiento)).Select(p => p.Obra.Descripcion).ToList();
+            var obras = string.Join(",", conobra);
 
 
 
-            o.Obras = ssss.Substring(0, (ssss.Length > 20) ? 20 : ssss.Length);
+            o.Obras = obras.Substring(0, (obras.Length > 20) ? 20 : obras.Length);
             o.NumeroRequerimiento = 0;
             o.PresupuestoSeleccionado = 0;
             o.MontoParaCompra = "0";
@@ -1897,116 +1801,116 @@ namespace ProntoMVC.Controllers
 
 
             RenglonJQgrid pie3 = new RenglonJQgrid
-{
-    IdDetalleComparativa = null,
-    Cantidad = null,
+            {
+                IdDetalleComparativa = null,
+                Cantidad = null,
 
-    Descripcion = "Bonificacion",
-    Total_A = (pr > 0) ? db.Presupuestos.SingleOrDefault(x => x.IdPresupuesto == dd0).ImporteBonificacion.NullSafeToString() : "",
-    Total_B = (pr > 1) ? db.Presupuestos.SingleOrDefault(x => x.IdPresupuesto == dd1).ImporteBonificacion.NullSafeToString() : "",
-    Total_C = (pr > 2) ? db.Presupuestos.SingleOrDefault(x => x.IdPresupuesto == dd1).ImporteBonificacion.NullSafeToString() : "",
-    Total_D = (pr > 3) ? db.Presupuestos.SingleOrDefault(x => x.IdPresupuesto == dd1).ImporteBonificacion.NullSafeToString() : "",
-    Total_E = (pr > 4) ? db.Presupuestos.SingleOrDefault(x => x.IdPresupuesto == dd1).ImporteBonificacion.NullSafeToString() : "",
-    Total_F = (pr > 5) ? db.Presupuestos.SingleOrDefault(x => x.IdPresupuesto == dd1).ImporteBonificacion.NullSafeToString() : "",
-    Total_G = (pr > 6) ? db.Presupuestos.SingleOrDefault(x => x.IdPresupuesto == dd2).ImporteBonificacion.NullSafeToString() : "",
-    Total_H = (pr > 7) ? db.Presupuestos.SingleOrDefault(x => x.IdPresupuesto == dd1).ImporteBonificacion.NullSafeToString() : ""
+                Descripcion = "Bonificacion",
+                Total_A = (pr > 0) ? db.Presupuestos.SingleOrDefault(x => x.IdPresupuesto == dd0).ImporteBonificacion.NullSafeToString() : "",
+                Total_B = (pr > 1) ? db.Presupuestos.SingleOrDefault(x => x.IdPresupuesto == dd1).ImporteBonificacion.NullSafeToString() : "",
+                Total_C = (pr > 2) ? db.Presupuestos.SingleOrDefault(x => x.IdPresupuesto == dd1).ImporteBonificacion.NullSafeToString() : "",
+                Total_D = (pr > 3) ? db.Presupuestos.SingleOrDefault(x => x.IdPresupuesto == dd1).ImporteBonificacion.NullSafeToString() : "",
+                Total_E = (pr > 4) ? db.Presupuestos.SingleOrDefault(x => x.IdPresupuesto == dd1).ImporteBonificacion.NullSafeToString() : "",
+                Total_F = (pr > 5) ? db.Presupuestos.SingleOrDefault(x => x.IdPresupuesto == dd1).ImporteBonificacion.NullSafeToString() : "",
+                Total_G = (pr > 6) ? db.Presupuestos.SingleOrDefault(x => x.IdPresupuesto == dd2).ImporteBonificacion.NullSafeToString() : "",
+                Total_H = (pr > 7) ? db.Presupuestos.SingleOrDefault(x => x.IdPresupuesto == dd1).ImporteBonificacion.NullSafeToString() : ""
 
 
-};
+            };
             data.Add(pie3);
 
 
 
             RenglonJQgrid pie4 = new RenglonJQgrid
-{
-    IdDetalleComparativa = null,
-    Cantidad = null,
+            {
+                IdDetalleComparativa = null,
+                Cantidad = null,
 
-    Descripcion = "TOTAL",
-    Total_A = (pr > 0) ? db.Presupuestos.SingleOrDefault(x => x.IdPresupuesto == dd0).ImporteTotal.NullSafeToString() : "",
-    Total_B = (pr > 1) ? db.Presupuestos.SingleOrDefault(x => x.IdPresupuesto == dd1).ImporteTotal.NullSafeToString() : "",
-    Total_C = (pr > 2) ? db.Presupuestos.SingleOrDefault(x => x.IdPresupuesto == dd1).ImporteTotal.NullSafeToString() : "",
-    Total_D = (pr > 3) ? db.Presupuestos.SingleOrDefault(x => x.IdPresupuesto == dd1).ImporteTotal.NullSafeToString() : "",
-    Total_E = (pr > 4) ? db.Presupuestos.SingleOrDefault(x => x.IdPresupuesto == dd1).ImporteTotal.NullSafeToString() : "",
-    Total_F = (pr > 5) ? db.Presupuestos.SingleOrDefault(x => x.IdPresupuesto == dd1).ImporteTotal.NullSafeToString() : "",
-    Total_G = (pr > 6) ? db.Presupuestos.SingleOrDefault(x => x.IdPresupuesto == dd2).ImporteTotal.NullSafeToString() : "",
-    Total_H = (pr > 7) ? db.Presupuestos.SingleOrDefault(x => x.IdPresupuesto == dd1).ImporteTotal.NullSafeToString() : ""
-};
+                Descripcion = "TOTAL",
+                Total_A = (pr > 0) ? db.Presupuestos.SingleOrDefault(x => x.IdPresupuesto == dd0).ImporteTotal.NullSafeToString() : "",
+                Total_B = (pr > 1) ? db.Presupuestos.SingleOrDefault(x => x.IdPresupuesto == dd1).ImporteTotal.NullSafeToString() : "",
+                Total_C = (pr > 2) ? db.Presupuestos.SingleOrDefault(x => x.IdPresupuesto == dd1).ImporteTotal.NullSafeToString() : "",
+                Total_D = (pr > 3) ? db.Presupuestos.SingleOrDefault(x => x.IdPresupuesto == dd1).ImporteTotal.NullSafeToString() : "",
+                Total_E = (pr > 4) ? db.Presupuestos.SingleOrDefault(x => x.IdPresupuesto == dd1).ImporteTotal.NullSafeToString() : "",
+                Total_F = (pr > 5) ? db.Presupuestos.SingleOrDefault(x => x.IdPresupuesto == dd1).ImporteTotal.NullSafeToString() : "",
+                Total_G = (pr > 6) ? db.Presupuestos.SingleOrDefault(x => x.IdPresupuesto == dd2).ImporteTotal.NullSafeToString() : "",
+                Total_H = (pr > 7) ? db.Presupuestos.SingleOrDefault(x => x.IdPresupuesto == dd1).ImporteTotal.NullSafeToString() : ""
+            };
             data.Add(pie4);
 
 
             RenglonJQgrid pie5 = new RenglonJQgrid
-{
-    IdDetalleComparativa = null,
-    Cantidad = null,
+            {
+                IdDetalleComparativa = null,
+                Cantidad = null,
 
-    Descripcion = "Plazo de entrega",
-    PrecioA = (pr > 0) ? db.Presupuestos.SingleOrDefault(x => x.IdPresupuesto == dd0).Plazo.NullSafeToString() : "",
-    PrecioB = (pr > 1) ? db.Presupuestos.SingleOrDefault(x => x.IdPresupuesto == dd1).Plazo.NullSafeToString() : "",
-    PrecioC = (pr > 2) ? db.Presupuestos.SingleOrDefault(x => x.IdPresupuesto == dd1).Plazo.NullSafeToString() : "",
-    PrecioD = (pr > 3) ? db.Presupuestos.SingleOrDefault(x => x.IdPresupuesto == dd1).Plazo.NullSafeToString() : "",
-    PrecioE = (pr > 4) ? db.Presupuestos.SingleOrDefault(x => x.IdPresupuesto == dd1).Plazo.NullSafeToString() : "",
-    PrecioF = (pr > 5) ? db.Presupuestos.SingleOrDefault(x => x.IdPresupuesto == dd1).Plazo.NullSafeToString() : "",
-    PrecioG = (pr > 6) ? db.Presupuestos.SingleOrDefault(x => x.IdPresupuesto == dd2).Plazo.NullSafeToString() : "",
-    PrecioH = (pr > 7) ? db.Presupuestos.SingleOrDefault(x => x.IdPresupuesto == dd1).Plazo.NullSafeToString() : ""
-};
+                Descripcion = "Plazo de entrega",
+                PrecioA = (pr > 0) ? db.Presupuestos.SingleOrDefault(x => x.IdPresupuesto == dd0).Plazo.NullSafeToString() : "",
+                PrecioB = (pr > 1) ? db.Presupuestos.SingleOrDefault(x => x.IdPresupuesto == dd1).Plazo.NullSafeToString() : "",
+                PrecioC = (pr > 2) ? db.Presupuestos.SingleOrDefault(x => x.IdPresupuesto == dd1).Plazo.NullSafeToString() : "",
+                PrecioD = (pr > 3) ? db.Presupuestos.SingleOrDefault(x => x.IdPresupuesto == dd1).Plazo.NullSafeToString() : "",
+                PrecioE = (pr > 4) ? db.Presupuestos.SingleOrDefault(x => x.IdPresupuesto == dd1).Plazo.NullSafeToString() : "",
+                PrecioF = (pr > 5) ? db.Presupuestos.SingleOrDefault(x => x.IdPresupuesto == dd1).Plazo.NullSafeToString() : "",
+                PrecioG = (pr > 6) ? db.Presupuestos.SingleOrDefault(x => x.IdPresupuesto == dd2).Plazo.NullSafeToString() : "",
+                PrecioH = (pr > 7) ? db.Presupuestos.SingleOrDefault(x => x.IdPresupuesto == dd1).Plazo.NullSafeToString() : ""
+            };
             data.Add(pie5);
 
 
 
             RenglonJQgrid pie55 = new RenglonJQgrid
-{
-    IdDetalleComparativa = null,
-    Cantidad = null,
+            {
+                IdDetalleComparativa = null,
+                Cantidad = null,
 
-    Descripcion = "Condicion de pago",
-    PrecioA = (pr > 0) ? db.Presupuestos.Include(x => x.Condiciones_Compra).SingleOrDefault(x => x.IdPresupuesto == dd0).Condiciones_Compra.Descripcion.NullSafeToString() : "",
-    PrecioB = (pr > 1) ? db.Presupuestos.Include(x => x.Condiciones_Compra).SingleOrDefault(x => x.IdPresupuesto == dd1).Condiciones_Compra.Descripcion.NullSafeToString() : "",
-    PrecioC = (pr > 2) ? db.Presupuestos.Include(x => x.Condiciones_Compra).SingleOrDefault(x => x.IdPresupuesto == dd1).Condiciones_Compra.Descripcion.NullSafeToString() : "",
-    PrecioD = (pr > 3) ? db.Presupuestos.Include(x => x.Condiciones_Compra).SingleOrDefault(x => x.IdPresupuesto == dd1).Condiciones_Compra.Descripcion.NullSafeToString() : "",
-    PrecioE = (pr > 4) ? db.Presupuestos.Include(x => x.Condiciones_Compra).SingleOrDefault(x => x.IdPresupuesto == dd1).Condiciones_Compra.Descripcion.NullSafeToString() : "",
-    PrecioF = (pr > 5) ? db.Presupuestos.Include(x => x.Condiciones_Compra).SingleOrDefault(x => x.IdPresupuesto == dd1).Condiciones_Compra.Descripcion.NullSafeToString() : "",
-    PrecioG = (pr > 6) ? db.Presupuestos.Include(x => x.Condiciones_Compra).SingleOrDefault(x => x.IdPresupuesto == dd2).Condiciones_Compra.Descripcion.NullSafeToString() : "",
-    PrecioH = (pr > 7) ? db.Presupuestos.Include(x => x.Condiciones_Compra).SingleOrDefault(x => x.IdPresupuesto == dd1).Condiciones_Compra.Descripcion.NullSafeToString() : ""
-};
+                Descripcion = "Condicion de pago",
+                PrecioA = (pr > 0) ? db.Presupuestos.Include(x => x.Condiciones_Compra).SingleOrDefault(x => x.IdPresupuesto == dd0).Condiciones_Compra.Descripcion.NullSafeToString() : "",
+                PrecioB = (pr > 1) ? db.Presupuestos.Include(x => x.Condiciones_Compra).SingleOrDefault(x => x.IdPresupuesto == dd1).Condiciones_Compra.Descripcion.NullSafeToString() : "",
+                PrecioC = (pr > 2) ? db.Presupuestos.Include(x => x.Condiciones_Compra).SingleOrDefault(x => x.IdPresupuesto == dd1).Condiciones_Compra.Descripcion.NullSafeToString() : "",
+                PrecioD = (pr > 3) ? db.Presupuestos.Include(x => x.Condiciones_Compra).SingleOrDefault(x => x.IdPresupuesto == dd1).Condiciones_Compra.Descripcion.NullSafeToString() : "",
+                PrecioE = (pr > 4) ? db.Presupuestos.Include(x => x.Condiciones_Compra).SingleOrDefault(x => x.IdPresupuesto == dd1).Condiciones_Compra.Descripcion.NullSafeToString() : "",
+                PrecioF = (pr > 5) ? db.Presupuestos.Include(x => x.Condiciones_Compra).SingleOrDefault(x => x.IdPresupuesto == dd1).Condiciones_Compra.Descripcion.NullSafeToString() : "",
+                PrecioG = (pr > 6) ? db.Presupuestos.Include(x => x.Condiciones_Compra).SingleOrDefault(x => x.IdPresupuesto == dd2).Condiciones_Compra.Descripcion.NullSafeToString() : "",
+                PrecioH = (pr > 7) ? db.Presupuestos.Include(x => x.Condiciones_Compra).SingleOrDefault(x => x.IdPresupuesto == dd1).Condiciones_Compra.Descripcion.NullSafeToString() : ""
+            };
             data.Add(pie55);
 
 
             RenglonJQgrid pie6 = new RenglonJQgrid
-{
-    IdDetalleComparativa = null,
-    Cantidad = null,
+            {
+                IdDetalleComparativa = null,
+                Cantidad = null,
 
-    Descripcion = "Observaciones",
-    PrecioA = (pr > 0) ? db.Presupuestos.SingleOrDefault(x => x.IdPresupuesto == dd0).Observaciones.NullSafeToString() : "",
-    PrecioB = (pr > 1) ? db.Presupuestos.SingleOrDefault(x => x.IdPresupuesto == dd1).Observaciones.NullSafeToString() : "",
-    PrecioC = (pr > 2) ? db.Presupuestos.SingleOrDefault(x => x.IdPresupuesto == dd1).Observaciones.NullSafeToString() : "",
-    PrecioD = (pr > 3) ? db.Presupuestos.SingleOrDefault(x => x.IdPresupuesto == dd1).Observaciones.NullSafeToString() : "",
-    PrecioE = (pr > 4) ? db.Presupuestos.SingleOrDefault(x => x.IdPresupuesto == dd1).Observaciones.NullSafeToString() : "",
-    PrecioF = (pr > 5) ? db.Presupuestos.SingleOrDefault(x => x.IdPresupuesto == dd1).Observaciones.NullSafeToString() : "",
-    PrecioG = (pr > 6) ? db.Presupuestos.SingleOrDefault(x => x.IdPresupuesto == dd2).Observaciones.NullSafeToString() : "",
-    PrecioH = (pr > 7) ? db.Presupuestos.SingleOrDefault(x => x.IdPresupuesto == dd1).Observaciones.NullSafeToString() : ""
+                Descripcion = "Observaciones",
+                PrecioA = (pr > 0) ? db.Presupuestos.SingleOrDefault(x => x.IdPresupuesto == dd0).Observaciones.NullSafeToString() : "",
+                PrecioB = (pr > 1) ? db.Presupuestos.SingleOrDefault(x => x.IdPresupuesto == dd1).Observaciones.NullSafeToString() : "",
+                PrecioC = (pr > 2) ? db.Presupuestos.SingleOrDefault(x => x.IdPresupuesto == dd1).Observaciones.NullSafeToString() : "",
+                PrecioD = (pr > 3) ? db.Presupuestos.SingleOrDefault(x => x.IdPresupuesto == dd1).Observaciones.NullSafeToString() : "",
+                PrecioE = (pr > 4) ? db.Presupuestos.SingleOrDefault(x => x.IdPresupuesto == dd1).Observaciones.NullSafeToString() : "",
+                PrecioF = (pr > 5) ? db.Presupuestos.SingleOrDefault(x => x.IdPresupuesto == dd1).Observaciones.NullSafeToString() : "",
+                PrecioG = (pr > 6) ? db.Presupuestos.SingleOrDefault(x => x.IdPresupuesto == dd2).Observaciones.NullSafeToString() : "",
+                PrecioH = (pr > 7) ? db.Presupuestos.SingleOrDefault(x => x.IdPresupuesto == dd1).Observaciones.NullSafeToString() : ""
 
 
-};
+            };
             data.Add(pie6);
 
             RenglonJQgrid pie7 = new RenglonJQgrid
-{
-    IdDetalleComparativa = null,
-    Cantidad = null,
+            {
+                IdDetalleComparativa = null,
+                Cantidad = null,
 
-    Descripcion = "Solicitud cot. No.",
-    PrecioA = (pr > 0) ? db.Presupuestos.SingleOrDefault(x => x.IdPresupuesto == dd0).Numero.NullSafeToString() : "",
-    PrecioB = (pr > 1) ? db.Presupuestos.SingleOrDefault(x => x.IdPresupuesto == dd1).Numero.NullSafeToString() : "",
-    PrecioC = (pr > 2) ? db.Presupuestos.SingleOrDefault(x => x.IdPresupuesto == dd1).Numero.NullSafeToString() : "",
-    PrecioD = (pr > 3) ? db.Presupuestos.SingleOrDefault(x => x.IdPresupuesto == dd1).Numero.NullSafeToString() : "",
-    PrecioE = (pr > 4) ? db.Presupuestos.SingleOrDefault(x => x.IdPresupuesto == dd1).Numero.NullSafeToString() : "",
-    PrecioF = (pr > 5) ? db.Presupuestos.SingleOrDefault(x => x.IdPresupuesto == dd1).Numero.NullSafeToString() : "",
-    PrecioG = (pr > 6) ? db.Presupuestos.SingleOrDefault(x => x.IdPresupuesto == dd2).Numero.NullSafeToString() : "",
-    PrecioH = (pr > 7) ? db.Presupuestos.SingleOrDefault(x => x.IdPresupuesto == dd1).Numero.NullSafeToString() : ""
+                Descripcion = "Solicitud cot. No.",
+                PrecioA = (pr > 0) ? db.Presupuestos.SingleOrDefault(x => x.IdPresupuesto == dd0).Numero.NullSafeToString() : "",
+                PrecioB = (pr > 1) ? db.Presupuestos.SingleOrDefault(x => x.IdPresupuesto == dd1).Numero.NullSafeToString() : "",
+                PrecioC = (pr > 2) ? db.Presupuestos.SingleOrDefault(x => x.IdPresupuesto == dd1).Numero.NullSafeToString() : "",
+                PrecioD = (pr > 3) ? db.Presupuestos.SingleOrDefault(x => x.IdPresupuesto == dd1).Numero.NullSafeToString() : "",
+                PrecioE = (pr > 4) ? db.Presupuestos.SingleOrDefault(x => x.IdPresupuesto == dd1).Numero.NullSafeToString() : "",
+                PrecioF = (pr > 5) ? db.Presupuestos.SingleOrDefault(x => x.IdPresupuesto == dd1).Numero.NullSafeToString() : "",
+                PrecioG = (pr > 6) ? db.Presupuestos.SingleOrDefault(x => x.IdPresupuesto == dd2).Numero.NullSafeToString() : "",
+                PrecioH = (pr > 7) ? db.Presupuestos.SingleOrDefault(x => x.IdPresupuesto == dd1).Numero.NullSafeToString() : ""
 
-};
+            };
             data.Add(pie7);
 
 
@@ -2078,10 +1982,10 @@ namespace ProntoMVC.Controllers
                         select new jqGridRowJson
                         {
                             id = a.IdDetalleComparativa.ToString(),
-                            cell = new string[] { 
-                                string.Empty, 
-                                a.IdDetalleComparativa.NullSafeToString(), 
-                                a.IdArticulo.NullSafeToString(), 
+                            cell = new string[] {
+                                string.Empty,
+                                a.IdDetalleComparativa.NullSafeToString(),
+                                a.IdArticulo.NullSafeToString(),
                                 a.IdPresupuesto.NullSafeToString(),
                                 a.Codigo.NullSafeToString(),
                                 a.Descripcion.NullSafeToString(),
@@ -2110,7 +2014,7 @@ namespace ProntoMVC.Controllers
                                 ,a.PrecioH.NullSafeToString()
                                 ,a.Total_H.NullSafeToString()
                                 ,a.Check_H.NullSafeToString()
-                                
+
                             }
                         }).ToArray()
             };
@@ -2592,10 +2496,10 @@ namespace ProntoMVC.Controllers
                                                 case 4:
                                                     ox.Cells(ws, tab.Rows[(fl - 1)].Field<string>("Unidad"), fl + 9, cl1);
                                                     break;
-                                                //}
-                                                //2.Cells[(fl + 9), cl1] = tab.Rows[(fl - 1)].Item["Producto"];
-                                                //3.Cells[(fl + 9), cl1] = tab.Rows[(fl - 1)].Item["Cantidad"];
-                                                //4.Cells[(fl + 9), cl1] = tab.Rows[(fl - 1)].Item["Unidad"];
+                                                    //}
+                                                    //2.Cells[(fl + 9), cl1] = tab.Rows[(fl - 1)].Item["Producto"];
+                                                    //3.Cells[(fl + 9), cl1] = tab.Rows[(fl - 1)].Item["Cantidad"];
+                                                    //4.Cells[(fl + 9), cl1] = tab.Rows[(fl - 1)].Item["Unidad"];
 
                                             }
 
@@ -2997,8 +2901,8 @@ namespace ProntoMVC.Controllers
 
 
 
-            db.AutorizacionesPorComprobante_A(o, (int)Pronto.ERP.Bll.EntidadManager.EnumFormularios.Comparativa, IdComprobante, 
-                                                        OrdenAutorizacion, IdAutorizo, DateTime.Now, "SI" );
+            db.AutorizacionesPorComprobante_A(o, (int)Pronto.ERP.Bll.EntidadManager.EnumFormularios.Comparativa, IdComprobante,
+                                                        OrdenAutorizacion, IdAutorizo, DateTime.Now, "SI");
 
 
 
