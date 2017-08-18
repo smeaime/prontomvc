@@ -106,7 +106,7 @@ $(function () {
         $.ajax({
             type: 'POST',
             contentType: 'application/json; charset=utf-8',
-            url: '@Url.Action("BatchUpdate", "Presupuesto")',
+            url: ROOT + 'Presupuesto/BatchUpdate', //            url: '@Url.Action("BatchUpdate", "Presupuesto")',
             dataType: 'json',
             data: JSON.stringify(cabecera), // $.toJSON(cabecera),
             success: function (result) {
@@ -242,7 +242,7 @@ $(function () {
    , 'Rubro'
 
    , 'Subrubro'
-   , 'Nro.inv.', '', '', 'Unidad'
+            , 'Nro.inv.', '', '', 'Unidad'
 
 
         ],
@@ -290,6 +290,7 @@ $(function () {
         { name: 'IdUnidad', index: 'IdUnidad', align: 'left', width: 100, editable: false, hidden: true },
         { name: 'Unidad', index: 'Unidad', width: 100, align: 'left', search: true, stype: 'text' },
 
+        
 
         ],
 
