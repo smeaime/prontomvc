@@ -2221,7 +2221,7 @@ namespace ProntoFlexicapture
 
                     cdp.PuntoVenta = pv;
 
-
+                    hay q ver este tema
 
                     //marco la imagen como procesada por la OCR
 
