@@ -603,7 +603,7 @@ $(function () {
         datatype: 'json',
         mtype: 'POST',
         colNames: ['', 'IdDetalleRequerimiento', 'IdArticulo', 'IdUnidad', '#', 'Cant.', 'Un.', 'Codigo', 'Artículo', 'Descripción', 'Entrega', 'Observaciones', 'Cump', 'Adjunto',
-                   'OrigenDescripcion', '', 'IdCalidad', 'Calidad', 'IdEquipoDestino', 'EquipoDestino'],
+                   'Origen Descripcion', '', 'IdCalidad', 'Calidad', 'IdEquipoDestino', 'Equipo Destino'],
         colModel: [     { formoptions: { rowpos: 1, colpos: 1 }, name: 'act', index: 'act', align: 'centre', width: 30, hidden: true, sortable: false, editable: false, formatter: 'actions',
                             formatoptions: {
                                 editformbutton: true,
@@ -627,7 +627,7 @@ $(function () {
                                     type: 'change',
                                     fn: function (e) {
                                         //alert('aasasd');
-                                        RefrescarRenglon(this);
+                                        //RefrescarRenglon(this);
                                         //  UltimoIdArticulo=ui.item.id;
                                         UltimoIdUnidad = this.value;
                                         $('#IdUnidad').val(this.value);
@@ -862,7 +862,7 @@ $(function () {
                         dataEvents: [{type: 'change', fn: function (e) {
                                $('#IdControlCalidad').val(this.value);
                                UltimoIdControlCalidad = this.value;
-                               RefrescarRenglon(this);
+                               //RefrescarRenglon(this);
                            }
                         }]
                         }
