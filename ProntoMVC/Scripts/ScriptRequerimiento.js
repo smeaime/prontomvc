@@ -794,12 +794,12 @@ $(function () {
                             name: 'FechaEntrega', formoptions: { rowpos: 3, colpos: 2 }, index: 'FechaEntrega',
                             label: 'TB', width: 250, align: 'center', sorttype: 'date', editable: true,
 
-                            formatter: FormatterFecha,
+                            //formatter: FormatterFecha,
                             //formatter: function (cellvalue, options, rowObject) {
                             //    return cellvalue === null ? "N/A" : $.fn.fmatter.call(this, "date", cellvalue, options, rowObject);
                             //}, formatoptions: { newformat: 'dd/mm/yy' },
                             //formatter:'date', 
-                            //formatoptions: { newformat: 'dd/mm/yy', defaultvalue: null }, datefmt: 'dd/mm/yy',
+                            formatoptions: { newformat: 'dd/mm/yy', defaultvalue: null }, datefmt: 'dd/mm/yy',
 
 
                             editoptions: { size: 10, maxlengh: 10, dataInit: initDateEdit }, editrules: { required: false }

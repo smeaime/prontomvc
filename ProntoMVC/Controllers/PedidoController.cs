@@ -1019,7 +1019,8 @@ namespace ProntoMVC.Controllers
             //o.IdMoneda = 1;
 
             // db.Cotizaciones_TX_PorFechaMoneda(fecha,IdMoneda)
-            var mvarCotizacion = db.Cotizaciones.OrderByDescending(x => x.IdCotizacion).FirstOrDefault().Cotizacion; //  mo  Cotizacion(Date, glbIdMonedaDolar);
+            var mvarCotizacion = funcMoneda_Cotizacion(DateTime.Today, 2);
+            //var mvarCotizacion = db.Cotizaciones.OrderByDescending(x => x.IdCotizacion).FirstOrDefault().Cotizacion; //  mo  Cotizacion(Date, glbIdMonedaDolar);
             o.CotizacionMoneda = 1;
             //  o.CotizacionADolarFijo=
             o.CotizacionDolar = (decimal)(mvarCotizacion ?? 0);
