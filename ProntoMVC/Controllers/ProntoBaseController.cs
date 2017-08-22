@@ -3021,7 +3021,9 @@ namespace ProntoMVC.Controllers
 
             foreach (Tablas.Tree n in TreeDest)
             {
-                n.Link = n.Link.Replace("Pronto2", ROOT);
+                //n.Link = n.Link.Replace("Pronto2", ROOT);
+                n.Link = n.Link.Replace(@"/Pronto2", ROOT);
+
             }
 
 

@@ -288,22 +288,21 @@ namespace ProntoMVC.Controllers
 
 
             var data = (from a in Fac
-                        //join c in db.Clientes on a.IdCliente equals c.IdCliente
+                            //join c in db.Clientes on a.IdCliente equals c.IdCliente
                         select a)
-                //        .Include(x => x.Cliente)
-                //        .Include(x => x.Moneda)
-                //        .Include(x => x.Obra)
-                //        .Include(x => x.Cliente.DescripcionIva)
-                //        .Include(x => x.Vendedore)
-                //        .Include(x => x.Provincia)
-                //        .Include(x => x.DetalleFacturas)
-                ////.Include(x => x.i)
-                //        .Where(campo)
-                //.OrderBy(sidx + " " + sord)
+                        //        .Include(x => x.Cliente)
+                        //        .Include(x => x.Moneda)
+                        //        .Include(x => x.Obra)
+                        //        .Include(x => x.Cliente.DescripcionIva)
+                        //        .Include(x => x.Vendedore)
+                        //        .Include(x => x.Provincia)
+                        //        .Include(x => x.DetalleFacturas)
+                        ////.Include(x => x.i)
+                        //        .Where(campo)
+                        //.OrderBy(sidx + " " + sord)
                         .OrderBy(x => x.UserName).ThenByDescending(x => x.UserId)
-
-//.Skip((currentPage - 1) * pageSize).Take(pageSize)
-.ToList();
+                        .Skip((currentPage - 1) * pageSize).Take(pageSize)
+                        .ToList();
 
             var jsonData = new jqGridJson()
             {
