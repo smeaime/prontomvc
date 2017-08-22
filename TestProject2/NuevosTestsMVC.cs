@@ -161,6 +161,7 @@ namespace ProntoMVC.Tests
             var IdProveedor = -1;
             var pendiente = "S";
             Pronto.ERP.Bll.EntidadManager.TraerDatos2(scSQL, "CtasCtesA_TXPorTrs", IdProveedor, -1, DateTime.Now, null, null, pendiente);
+            // exec CtasCtesA_TXPorTrs -1, -1, null, null, null, 'S'
         }
 
 
