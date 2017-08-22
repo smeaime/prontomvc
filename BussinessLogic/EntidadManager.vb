@@ -732,11 +732,11 @@ Namespace Pronto.ERP.Bll
 
         <DataObjectMethod(DataObjectMethodType.Select, True)> _
         Public Shared Function GetStoreProcedure(ByVal SC As String, ByVal sStoreProcedure As String, ByVal ParamArray Parametros() As Object) As System.Data.DataTable
-            'Try
-            'Return GeneralDB.TraerDatos(SC, "w" & sStoreProcedure, Parametros)
-            'Catch ex As Exception
+
+            'Return GeneralDB.TraerDatos(SC, sStoreProcedure, Parametros).Tables(0)
+
             Return TraerDatos2(SC, sStoreProcedure, Parametros).Tables(0)
-            'End Try
+
         End Function
 
 
@@ -759,11 +759,20 @@ Namespace Pronto.ERP.Bll
 
                 ' Now you can set values of parameters in a loop
                 Dim n As Integer
-                For n = 0 To myCommand.Parameters.Count - 1
+                For n = 1 To myCommand.Parameters.Count - 1 'empiezo desde 1 para saltarme el parametro @return_value
 
                     Dim parameter As SqlParameter = myCommand.Parameters(n)
 
-                    myCommand.Parameters.AddWithValue(parameter.ParameterName, Parametros(n))
+
+                    Dim p As Object
+                    If (n - 1 >= Parametros.Count) Then
+                        p = Nothing
+                    Else
+                        p = Parametros(n - 1)
+                    End If
+
+
+                    parameter.Value = p
                 Next
 
 

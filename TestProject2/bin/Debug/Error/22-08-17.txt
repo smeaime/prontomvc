@@ -1,0 +1,10 @@
+
+Log Entry : 
+08/22/2017 09:32:15
+Error in: . Error Message:Error relacionado con la red o específico de la instancia mientras se establecía una conexión con el servidor SQL Server. No se encontró el servidor o éste no estaba accesible. Compruebe que el nombre de la instancia es correcto y que SQL Server está configurado para admitir conexiones remotas. (provider: SQL Network Interfaces, error: 26 - Error al buscar el servidor o instancia especificado)
+__________________________
+
+Log Entry : 
+08/22/2017 09:33:17
+Error in: . Error Message:Error relacionado con la red o específico de la instancia mientras se establecía una conexión con el servidor SQL Server. No se encontró el servidor o éste no estaba accesible. Compruebe que el nombre de la instancia es correcto y que SQL Server está configurado para admitir conexiones remotas. (provider: SQL Network Interfaces, error: 26 - Error al buscar el servidor o instancia especificado)
+__________________________
