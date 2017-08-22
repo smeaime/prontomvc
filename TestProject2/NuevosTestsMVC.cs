@@ -62,7 +62,7 @@ namespace ProntoMVC.Tests
         //const string scbdlmaster =
         //          @"metadata=res://*/Models.bdlmaster.csdl|res://*/Models.bdlmaster.ssdl|res://*/Models.bdlmaster.msl;provider=System.Data.SqlClient;provider connection string=""data source=SERVERSQL3\TESTING;initial catalog=BDLMaster;user id=sa;password=.SistemaPronto.;multipleactiveresultsets=True;connect timeout=8;application name=EntityFramework""";
 
-        //const string sc = "metadata=res://*/Models.Pronto.csdl|res://*/Models.Pronto.ssdl|res://*/Models.Pronto.msl;provider=System.Data.SqlClient;provider connection string='data source=SERVERSQL3\\TESTING;initial catalog=DemoProntoWeb;User ID=sa;Password=.SistemaPronto.;multipleactiveresultsets=True;App=EntityFramework'";
+        //const string scEF = "metadata=res://*/Models.Pronto.csdl|res://*/Models.Pronto.ssdl|res://*/Models.Pronto.msl;provider=System.Data.SqlClient;provider connection string='data source=SERVERSQL3\\TESTING;initial catalog=DemoProntoWeb;User ID=sa;Password=.SistemaPronto.;multipleactiveresultsets=True;App=EntityFramework'";
 
 
         // la cadena de conexion a la bdlmaster se saca del App.config (no web.config) de este proyecto 
@@ -70,8 +70,8 @@ namespace ProntoMVC.Tests
         // la cadena de conexion a la bdlmaster se saca del App.config (no web.config) de este proyecto 
         // la cadena de conexion a la bdlmaster se saca del App.config (no web.config) de este proyecto 
 
-        const string nombreempresa = "DemoProntoWeb";
-        //const string nombreempresa = "VialAgro";
+        //const string nombreempresa = "DemoProntoWeb";
+        const string nombreempresa = "VialAgro";
         //const string nombreempresa = "Pronto_Alemarsa";
         //const string nombreempresa = "Williams2";
         //const string nombreempresa = "Pronto";
@@ -80,7 +80,8 @@ namespace ProntoMVC.Tests
         const string usuario = "supervisor";
         //string bldmasterappconfig = ConfigurationManager.ConnectionStrings["ApplicationServices"].ConnectionString;
         string bldmasterappconfig; //  = "Data Source=SERVERSQL3\\TESTING;Initial catalog=BDLMaster;User ID=sa; Password=.SistemaPronto.;Connect Timeout=8";
-        string sc;
+        string scEF;
+        string scSQL;
         string DirApp;
         // la cadena de conexion a la bdlmaster se saca del App.config (no web.config) de este proyecto 
         // la cadena de conexion a la bdlmaster se saca del App.config (no web.config) de este proyecto 
@@ -95,7 +96,9 @@ namespace ProntoMVC.Tests
             string bldmastersql = System.Configuration.ConfigurationManager.ConnectionStrings["ApplicationServices"].ConnectionString;
             bldmasterappconfig = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(bldmastersql);
 
-            sc = ProntoMVC.Data.Models.Auxiliares.FormatearConexParaEntityFramework(Generales.conexPorEmpresa(nombreempresa, bldmasterappconfig, usuario, true));
+            var orig = Generales.conexPorEmpresa(nombreempresa, bldmasterappconfig, usuario, true);
+            scSQL = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(orig);
+            scEF = ProntoMVC.Data.Models.Auxiliares.FormatearConexParaEntityFramework(orig);
 
             DirApp = ConfigurationManager.AppSettings["AplicacionConImagenes"];
 
@@ -151,10 +154,27 @@ namespace ProntoMVC.Tests
 
 
 
+
+        [TestMethod]
+        public void traerdatos()
+        {
+            var IdProveedor = -1;
+            var pendiente = "S";
+            Pronto.ERP.Bll.EntidadManager.TraerDatos2(scSQL, "CtasCtesA_TXPorTrs", IdProveedor, -1, DateTime.Now, null, null, pendiente);
+        }
+
+
+
+
+
+
+
+
+
         [TestMethod]
         public void testenviomailsdeniro_41340()
         {
-            DemoProntoEntities db = new DemoProntoEntities(sc);
+            DemoProntoEntities db = new DemoProntoEntities(scEF);
             BDLMasterEntities dbmaster = new BDLMasterEntities(Auxiliares.FormatearConexParaEntityFrameworkBDLMASTER_2(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(bldmasterappconfig)));
 
 
@@ -189,8 +209,8 @@ namespace ProntoMVC.Tests
             var s = new ProntoWindowsService.Service1();
 
             //ProntoWindowsService.Service1.DoWorkEnvioCorreos();
-            ProntoWindowsService.Service1.TandaCorreos(sc, bldmasterappconfig, "12345678");
-          
+            ProntoWindowsService.Service1.TandaCorreos(scEF, bldmasterappconfig, "12345678");
+
 
         }
 
@@ -202,7 +222,7 @@ namespace ProntoMVC.Tests
         {
 
 
-            //Sub TestCompras_CP3_OP_Equimac(ByVal Yo As Object, ByVal SC As String, ByRef Session As Object)
+            //Sub TestCompras_CP3_OP_Equimac(ByVal Yo As Object, ByVal scEF As String, ByRef Session As Object)
             //    '//////////////////////////////////////////////////
             //    '//////////////////////////////////////////////////
             //    'DEMO CON CERTIFICACIONES
@@ -243,7 +263,7 @@ namespace ProntoMVC.Tests
             //    With myCP
 
 
-            //        '.IdCliente = BuscaIdCliente("CAMINO DEL ATLANTICO S.A. CONCESIONARIA VIAL", SC)
+            //        '.IdCliente = BuscaIdCliente("CAMINO DEL ATLANTICO S.A. CONCESIONARIA VIAL", scEF)
             //        '.PuntoVenta = 1
             //        .IdMoneda = 1
             //        .NumeroComprobante1 = Rnd(1000)
@@ -252,7 +272,7 @@ namespace ProntoMVC.Tests
 
 
 
-            //        .IdTipoComprobante = BuscaIdTipoComprobantePreciso("Factura compra", SC)
+            //        .IdTipoComprobante = BuscaIdTipoComprobantePreciso("Factura compra", scEF)
             //        If.IdTipoComprobante = -1 Then Stop
 
             //        '.Fecha = Now
@@ -276,9 +296,9 @@ namespace ProntoMVC.Tests
             //        myDetCP = New ComprobanteProveedorItem
             //        With myDetCP
             //            .Nuevo = True
-            //            .IdCuenta = BuscaIdConceptoPreciso("Instalación y Mantenimiento de Obra 1022892", SC)
+            //            .IdCuenta = BuscaIdConceptoPreciso("Instalación y Mantenimiento de Obra 1022892", scEF)
             //            .Importe = 542.11
-            //            '.IdConcepto = BuscaIdConceptoPreciso("Ajuste", SC)
+            //            '.IdConcepto = BuscaIdConceptoPreciso("Ajuste", scEF)
             //            '.Gravado = "SI"
             //            '.IdCaja = 2
             //            '.ImporteTotalItem = 232
@@ -294,7 +314,7 @@ namespace ProntoMVC.Tests
 
             //    End With
 
-            //    ComprobanteProveedorManager.Save(SC, myCP)
+            //    ComprobanteProveedorManager.Save(scEF, myCP)
             //    myCP = Nothing
 
             //    '//////////////////////////////////////////////////
@@ -323,7 +343,7 @@ namespace ProntoMVC.Tests
             //    myOP = New OrdenPago
             //    With myOP
 
-            //        .IdProveedor = BuscaIdCliente("CAMINO DEL ATLANTICO S.A. CONCESIONARIA VIAL", SC)
+            //        .IdProveedor = BuscaIdCliente("CAMINO DEL ATLANTICO S.A. CONCESIONARIA VIAL", scEF)
             //        .IdMoneda = 1
             //        '.PuntoVenta = 1
             //        .NumeroOrdenPago = Rnd() * 100000
@@ -338,7 +358,7 @@ namespace ProntoMVC.Tests
             //        myDetOP = New OrdenPagoItem
             //        With myDetOP
             //            .Nuevo = True
-            //            .IdImputacion = 100 'BuscaIdComprobante("FACTURA 10110-2136464", SC)
+            //            .IdImputacion = 100 'BuscaIdComprobante("FACTURA 10110-2136464", scEF)
             //            .Importe = 215.48
             //        End With
             //        .DetallesImputaciones.Add(myDetOP)
@@ -360,7 +380,7 @@ namespace ProntoMVC.Tests
             //        myDetOPimpuest = New OrdenPagoImpuestosItem
             //        With myDetOPimpuest
             //            .Nuevo = True
-            //            '.IdImtacion = 100 'BuscaIdComprobante("FACTURA 10110-2136464", SC)
+            //            '.IdImtacion = 100 'BuscaIdComprobante("FACTURA 10110-2136464", scEF)
             //            '.Importe = 215.48
             //        End With
             //        .DetallesImpuestos.Add(myDetOPimpuest)
@@ -369,7 +389,7 @@ namespace ProntoMVC.Tests
             //        myDetOPrubro = New OrdenPagoRubrosContablesItem
             //        With myDetOPrubro
             //            .Nuevo = True
-            //            .IdRubroContable = 100 'BuscaIdComprobante("FACTURA 10110-2136464", SC)
+            //            .IdRubroContable = 100 'BuscaIdComprobante("FACTURA 10110-2136464", scEF)
             //            .Importe = 215.48
             //        End With
             //        .DetallesRubrosContables.Add(myDetOPrubro)
@@ -378,7 +398,7 @@ namespace ProntoMVC.Tests
             //        myDetOPanticipo = New OrdenPagoAnticiposAlPersonalItem
             //        With myDetOPanticipo
             //            .Nuevo = True
-            //            '.IdImputacion = 100 'BuscaIdComprobante("FACTURA 10110-2136464", SC)
+            //            '.IdImputacion = 100 'BuscaIdComprobante("FACTURA 10110-2136464", scEF)
             //            '.Importe = 215.48
             //        End With
             //        .DetallesAnticiposAlPersonal.Add(myDetOPanticipo)
@@ -387,7 +407,7 @@ namespace ProntoMVC.Tests
             //        myDetOPcuenta = New OrdenPagoCuentasItem
             //        With myDetOPcuenta
             //            .Nuevo = True
-            //            .IdCuenta = 100 'BuscaIdComprobante("FACTURA 10110-2136464", SC)
+            //            .IdCuenta = 100 'BuscaIdComprobante("FACTURA 10110-2136464", scEF)
             //            '.Importe = 215.48
             //        End With
             //        .DetallesCuentas.Add(myDetOPcuenta)
@@ -398,7 +418,7 @@ namespace ProntoMVC.Tests
             //    End With
 
 
-            //    'OrdenPagoManager.Save(SC, myOP)
+            //    'OrdenPagoManager.Save(scEF, myOP)
 
 
 
@@ -470,7 +490,7 @@ namespace ProntoMVC.Tests
             GetMockedControllerGenerico(cPRES);
             GetMockedControllerGenerico(cCOMP);
             GetMockedControllerGenerico(cPED);
-            DemoProntoEntities db = new DemoProntoEntities(sc);
+            DemoProntoEntities db = new DemoProntoEntities(scEF);
 
 
 
@@ -931,7 +951,7 @@ namespace ProntoMVC.Tests
             string filters = "";
 
 
-            DemoProntoEntities db = new DemoProntoEntities(sc);
+            DemoProntoEntities db = new DemoProntoEntities(scEF);
 
 
 
@@ -1033,7 +1053,7 @@ namespace ProntoMVC.Tests
         [TestMethod]
         public void GrabaPedidoMoq()
         {
-            DemoProntoEntities db = new DemoProntoEntities(sc);
+            DemoProntoEntities db = new DemoProntoEntities(scEF);
 
             Pedido Pedido = db.Pedidos.OrderByDescending(x => x.IdPedido).First();
 
@@ -1050,7 +1070,7 @@ namespace ProntoMVC.Tests
         [TestMethod]
         public void GrabaRequerimientoMoq()
         {
-            DemoProntoEntities db = new DemoProntoEntities(sc);
+            DemoProntoEntities db = new DemoProntoEntities(scEF);
 
             Requerimiento o = db.Requerimientos.OrderByDescending(x => x.IdRequerimiento).First();
 
@@ -1067,7 +1087,7 @@ namespace ProntoMVC.Tests
         [TestMethod]
         public void GrabaPresupuestoMoq()
         {
-            DemoProntoEntities db = new DemoProntoEntities(sc);
+            DemoProntoEntities db = new DemoProntoEntities(scEF);
 
             Presupuesto o = db.Presupuestos.OrderByDescending(x => x.IdPresupuesto).First();
 
@@ -1084,7 +1104,7 @@ namespace ProntoMVC.Tests
         [TestMethod]
         public void GrabaComparativaMoq()
         {
-            DemoProntoEntities db = new DemoProntoEntities(sc);
+            DemoProntoEntities db = new DemoProntoEntities(scEF);
 
             Comparativa o = db.Comparativas.OrderByDescending(x => x.IdComparativa).First();
 
@@ -1101,7 +1121,7 @@ namespace ProntoMVC.Tests
         [TestMethod]
         public void GrabaComprobanteProveedorMoq()
         {
-            DemoProntoEntities db = new DemoProntoEntities(sc);
+            DemoProntoEntities db = new DemoProntoEntities(scEF);
 
             ComprobanteProveedor o = db.ComprobantesProveedor.OrderByDescending(x => x.IdComprobanteProveedor).First();
 
@@ -1125,7 +1145,7 @@ namespace ProntoMVC.Tests
         [TestMethod]
         public void GrabaOrdenPagoMoq()
         {
-            DemoProntoEntities db = new DemoProntoEntities(sc);
+            DemoProntoEntities db = new DemoProntoEntities(scEF);
 
             OrdenPago o = db.OrdenesPago.OrderByDescending(x => x.IdOrdenPago).First();
 
@@ -1144,7 +1164,7 @@ namespace ProntoMVC.Tests
         [TestMethod]
         public void GrabaFacturaMoq()
         {
-            DemoProntoEntities db = new DemoProntoEntities(sc);
+            DemoProntoEntities db = new DemoProntoEntities(scEF);
 
             Factura o = db.Facturas.OrderByDescending(x => x.IdFactura).First();
 
@@ -1162,7 +1182,7 @@ namespace ProntoMVC.Tests
         [TestMethod]
         public void GrabaReciboMoq()
         {
-            DemoProntoEntities db = new DemoProntoEntities(sc);
+            DemoProntoEntities db = new DemoProntoEntities(scEF);
 
             Recibo o = db.Recibos.OrderByDescending(x => x.IdRecibo).First();
 
@@ -1183,7 +1203,7 @@ namespace ProntoMVC.Tests
         public void GrabaArticuloMoq()
         {
 
-            DemoProntoEntities db = new DemoProntoEntities(sc);
+            DemoProntoEntities db = new DemoProntoEntities(scEF);
 
             Articulo o = db.Articulos.OrderByDescending(x => x.IdArticulo).First();
 
@@ -1203,7 +1223,7 @@ namespace ProntoMVC.Tests
         public void GrabaClienteMoq()
         {
 
-            DemoProntoEntities db = new DemoProntoEntities(sc);
+            DemoProntoEntities db = new DemoProntoEntities(scEF);
 
             Cliente o = db.Clientes.OrderByDescending(x => x.IdCliente).First();
 
@@ -1221,7 +1241,7 @@ namespace ProntoMVC.Tests
         [TestMethod]
         public void GrabaProveedorMoq()
         {
-            DemoProntoEntities db = new DemoProntoEntities(sc);
+            DemoProntoEntities db = new DemoProntoEntities(scEF);
 
             Proveedor o = db.Proveedores.OrderByDescending(x => x.IdProveedor).First();
 

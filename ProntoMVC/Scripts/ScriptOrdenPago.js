@@ -154,7 +154,7 @@ $(function () {
                     { name: 'Tipo', index: 'Tipo', width: 50, align: 'center', editable: false, hidden: false, editoptions: { disabled: 'disabled' }, editrules: { edithidden: false } },
                     { name: 'Numero', index: 'Numero', width: 120, align: 'center', editable: false, hidden: false, editoptions: { disabled: 'disabled' }, editrules: { edithidden: false } },
                     { name: 'Fecha', index: 'Fecha', width: 85, align: 'center', editable: false, hidden: false, editoptions: { disabled: 'disabled' }, editrules: { edithidden: false } },
-                    { name: 'ImporteOriginal', index: 'ImporteOriginal', width: 85, align: 'right', editable: false, hidden: false, editoptions: { disabled: 'disabled' }, editrules: { edithidden: false } },
+                    { name: 'ImporteOriginal', index: 'ImporteOriginal', width: 120, align: 'right', editable: false, hidden: false, editoptions: { disabled: 'disabled' }, editrules: { edithidden: false } },
                     { name: 'Saldo', index: 'Saldo', width: 85, align: 'right', editable: false, hidden: false, editoptions: { disabled: 'disabled' }, editrules: { edithidden: false } },
                     {
                         name: 'Importe', index: 'Importe', width: 85, align: 'right', editable: true, editrules: { custom: true, custom_func: ControlImportes, required: false, number: true }, edittype: 'text', label: 'TB',
@@ -213,7 +213,7 @@ $(function () {
                     { name: 'CertificadoPoliza', index: 'CertificadoPoliza', width: 120, align: 'center', editable: false, hidden: false, editoptions: { disabled: 'disabled' }, editrules: { edithidden: false } },
                     { name: 'NumeroEndosoPoliza', index: 'NumeroEndosoPoliza', width: 120, align: 'center', editable: false, hidden: false, editoptions: { disabled: 'disabled' }, editrules: { edithidden: false } },
                     { name: 'FechaVencimiento', index: 'FechaVencimiento', width: 85, align: 'center', editable: false, hidden: false, editoptions: { disabled: 'disabled' }, editrules: { edithidden: false } },
-                    { name: 'FechaComprobante', index: 'FechaComprobante', width: 85, align: 'center', editable: false, hidden: false, editoptions: { disabled: 'disabled' }, editrules: { edithidden: false } },
+                    { name: 'FechaComprobante', index: 'FechaComprobante', width: 120, align: 'center', editable: false, hidden: false, editoptions: { disabled: 'disabled' }, editrules: { edithidden: false } },
                     {
                         name: 'CategoriaIIBB', index: 'CategoriaIIBB', align: 'left', width: 150, editable: true, hidden: false, edittype: 'select', editrules: { required: false },
                         editoptions: {
@@ -301,7 +301,7 @@ $(function () {
         pgtext: "",
         pginput: false,
         rowList: "",
-        caption: '<b>DETALLE IMPUTACIONES</b>',
+        caption: 'IMPUTACIONES',
         cellEdit: true,
         cellsubmit: 'clientArray'
     });
@@ -574,7 +574,7 @@ $(function () {
         pgtext: "",
         pginput: false,
         rowList: "",
-        caption: '<b>DETALLE VALORES</b>',
+        caption: 'VALORES',
         cellEdit: true,
         cellsubmit: 'clientArray'
     });
@@ -982,7 +982,7 @@ $(function () {
         pgtext: "",
         pginput: false,
         rowList: "",
-        caption: '<b>REGISTRO CONTABLE</b>',
+        caption: 'REGISTRO CONTABLE',
         cellEdit: true,
         cellsubmit: 'clientArray',
         loadonce: true
@@ -1063,7 +1063,7 @@ $(function () {
         pgtext: "",
         pginput: false,
         rowList: "",
-        caption: '<b>DETALLE IMPUESTOS CALCULADOS</b>',
+        caption: 'IMPUESTOS CALCULADOS',
         cellEdit: true,
         cellsubmit: 'clientArray',
         loadonce: true
@@ -1147,7 +1147,7 @@ $(function () {
         pgtext: "",
         pginput: false,
         rowList: "",
-        caption: '<b>DETALLE RUBROS CONTABLES</b>',
+        caption: 'RUB. CONTABLES',
         cellEdit: true,
         cellsubmit: 'clientArray'
     });

@@ -338,10 +338,13 @@
                     <div class="row-fluid " style="padding: 11px 0px 0px 0px">
                         <div class="span1 pull-right"></div>
                         <div class="span11 pull-right">
+                            @Html.ActionLink("Volver al listado", "Index", null, new { @class = "btn btn-link  pull-right" })
+
                             <input type="button" id="ActualizarDatos" value="Calcular" class="btn  btn-large   pull-right" usesubmitbehavior="false" />
                             @if (Model.IdOrdenPago > 0)
                             {<input type="button" id="anular" value="Anular" class="btn  btn-large btn-danger  pull-right" />}
                             <input type="button" id="grabar2" value="Aceptar" class="btn  btn-large btn-primary   pull-right" usesubmitbehavior="false" />
+
                         </div>
 
                         <script>
