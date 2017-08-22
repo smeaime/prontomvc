@@ -780,7 +780,7 @@ namespace ProntoWindowsService
 
             bool bSignaled = false;
 
-            List<ProntoMVC.Data.FuncionesGenericasCSharp.Resultados> resultado, resultado2;
+            List<ProntoMVC.Data.FuncionesGenericasCSharp.Resultados> resultado=null, resultado2=null;
 
             var s = new ServicioCartaPorte.servi();
 
@@ -891,17 +891,6 @@ namespace ProntoWindowsService
 
 
 
-                    for (int minuto = 0; minuto < minutsconf; minuto++)
-                        if (resultado == null && resultado2 == null)
-                        {
-                            bSignaled = m_shutdownEvent.WaitOne(m_delay, true);
-                            if ((bSignaled == true && !Debugger.IsAttached) || bForzarShutdown) break;
-                            System.Threading.Thread.Sleep(1000 * 30);
-                            if ((bSignaled == true && !Debugger.IsAttached) || bForzarShutdown) break;
-                            System.Threading.Thread.Sleep(1000 * 30);
-                            Console.Write(".");
-                        }
-
                 }
 
                 catch (System.Runtime.InteropServices.COMException x2)
@@ -980,6 +969,21 @@ FCESupport\FCESupportImpl.h, 42.
                 {
 
                 }
+
+
+
+
+
+                for (int minuto = 0; minuto < minutsconf; minuto++)
+                    if (resultado == null && resultado2 == null)
+                    {
+                        bSignaled = m_shutdownEvent.WaitOne(m_delay, true);
+                        if ((bSignaled == true && !Debugger.IsAttached) || bForzarShutdown) break;
+                        System.Threading.Thread.Sleep(1000 * 30);
+                        if ((bSignaled == true && !Debugger.IsAttached) || bForzarShutdown) break;
+                        System.Threading.Thread.Sleep(1000 * 30);
+                        Console.Write(".");
+                    }
 
 
             }
