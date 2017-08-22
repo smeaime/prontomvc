@@ -735,9 +735,52 @@ Namespace Pronto.ERP.Bll
             'Try
             'Return GeneralDB.TraerDatos(SC, "w" & sStoreProcedure, Parametros)
             'Catch ex As Exception
-            Return GeneralDB.TraerDatos(SC, sStoreProcedure, Parametros).Tables(0)
+            Return TraerDatos2(SC, sStoreProcedure, Parametros).Tables(0)
             'End Try
         End Function
+
+
+
+
+        Public Shared Function TraerDatos2(ByVal SC As String, ByVal sStoreProcedure As String, ByVal ParamArray Parametros() As Object) As DataSet
+
+
+            Dim ds = New DataSet()
+
+            Using myConnection As SqlConnection = New SqlConnection(Encriptar(SC))
+
+                Dim myCommand As SqlCommand = New SqlCommand(sStoreProcedure, myConnection)
+                myCommand.CommandType = CommandType.StoredProcedure
+
+                myConnection.Open()
+
+
+                SqlCommandBuilder.DeriveParameters(myCommand) 'https://stackoverflow.com/a/5181871/1054200
+
+                ' Now you can set values of parameters in a loop
+                Dim n As Integer
+                For n = 0 To myCommand.Parameters.Count - 1
+
+                    Dim parameter As SqlParameter = myCommand.Parameters(n)
+
+                    myCommand.Parameters.AddWithValue(parameter.ParameterName, Parametros(n))
+                Next
+
+
+
+
+
+                Dim da = New SqlDataAdapter()
+                da.SelectCommand = myCommand
+
+                da.Fill(ds)
+
+            End Using
+
+
+            Return ds
+        End Function
+
 
 
 
