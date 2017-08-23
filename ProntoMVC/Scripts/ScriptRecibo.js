@@ -232,7 +232,7 @@ $(function () {
         pgtext: "",
         pginput: false,
         rowList: "",
-        caption: '<b>DETALLE IMPUTACIONES</b>',
+        caption: 'IMPUTACIONES',
         cellEdit: true,
         cellsubmit: 'clientArray'
     });
@@ -606,7 +606,7 @@ $(function () {
         pgtext: "",
         pginput: false,
         rowList: "",
-        caption: '<b>DETALLE VALORES</b>',
+        caption: 'VALORES',
         cellEdit: true,
         cellsubmit: 'clientArray'
     });
@@ -985,7 +985,7 @@ $(function () {
         pgtext: "",
         pginput: false,
         rowList: "",
-        caption: '<b>REGISTRO CONTABLE</b>',
+        caption: 'REGISTRO CONTABLE',
         cellEdit: true,
         cellsubmit: 'clientArray',
         loadonce: true
@@ -1089,7 +1089,7 @@ $(function () {
         pgtext: "",
         pginput: false,
         rowList: "",
-        caption: '<b>DETALLE RUBROS CONTABLES</b>',
+        caption: 'RUBROS CONTABLES',
         cellEdit: true,
         cellsubmit: 'clientArray'
     });
@@ -2776,7 +2776,11 @@ function deshabilitar() {
             left: "30%"
         }
     });
-    var $td = $($("#Lista")[0].p.pager + '_left ' + 'td[title="Agregar anticipo"]');    $td.hide();    var $td = $($("#Lista")[0].p.pager + '_left ' + 'td[title="Eliminar"]');    $td.hide();
+    var $td = $($("#Lista")[0].p.pager + '_left ' + 'td[title="Agregar anticipo"]');
+    $td.hide();
+    var $td = $($("#Lista")[0].p.pager + '_left ' + 'td[title="Eliminar"]');
+    $td.hide();
+
     $("#ListaContable").block({
         message: "",
         theme: true,
@@ -2786,12 +2790,22 @@ function deshabilitar() {
         message: "",
         theme: true,
     });
-    var $td = $($("#ListaValores")[0].p.pager + '_left ' + 'td[title="Agregar valor"]');    $td.hide();    var $td = $($("#ListaValores")[0].p.pager + '_left ' + 'td[title="Agregar caja"]');    $td.hide();    var $td = $($("#ListaValores")[0].p.pager + '_left ' + 'td[title="Eliminar"]');    $td.hide();
+    var $td = $($("#ListaValores")[0].p.pager + '_left ' + 'td[title="Agregar valor"]');
+    $td.hide();
+    var $td = $($("#ListaValores")[0].p.pager + '_left ' + 'td[title="Agregar caja"]');
+    $td.hide();
+    var $td = $($("#ListaValores")[0].p.pager + '_left ' + 'td[title="Eliminar"]');
+    $td.hide();
+
     $("#ListaRubrosContables").block({
         message: "",
         theme: true,
     });
-    var $td = $($("#ListaRubrosContables")[0].p.pager + '_left ' + 'td[title="Agregar rubro contable"]');    $td.hide();    var $td = $($("#ListaRubrosContables")[0].p.pager + '_left ' + 'td[title="Eliminar"]');    $td.hide();
+    var $td = $($("#ListaRubrosContables")[0].p.pager + '_left ' + 'td[title="Agregar rubro contable"]');
+    $td.hide();
+    var $td = $($("#ListaRubrosContables")[0].p.pager + '_left ' + 'td[title="Eliminar"]');
+    $td.hide();
+
     $("#ListaDrag").block({
         message: "",
         theme: true,
@@ -2805,9 +2819,17 @@ function ActivarAsientoManual(Activar) {
             message: "",
             theme: true,
         });
-        $td = $($("#ListaContable")[0].p.pager + '_left ' + 'td[title="Agregar item"]');        $td.show();        $td = $($("#ListaContable")[0].p.pager + '_left ' + 'td[title="Eliminar"]');        $td.show();
+
+        $td = $($("#ListaContable")[0].p.pager + '_left ' + 'td[title="Agregar item"]');
+        $td.show();
+        $td = $($("#ListaContable")[0].p.pager + '_left ' + 'td[title="Eliminar"]');
+        $td.show();
     } else {
-        $td = $($("#ListaContable")[0].p.pager + '_left ' + 'td[title="Agregar item"]');        $td.hide();        $td = $($("#ListaContable")[0].p.pager + '_left ' + 'td[title="Eliminar"]');        $td.hide();
+        $td = $($("#ListaContable")[0].p.pager + '_left ' + 'td[title="Agregar item"]');
+        $td.hide();
+        $td = $($("#ListaContable")[0].p.pager + '_left ' + 'td[title="Eliminar"]');
+        $td.hide();
+
         $("#ListaContable").block({
             message: "",
             theme: true,

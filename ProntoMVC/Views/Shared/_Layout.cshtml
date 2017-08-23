@@ -139,7 +139,7 @@ Released   : 20120723
 
         <script src="http://cdn.jsdelivr.net/jqgrid/4.5.4/plugins/jquery.contextmenu.js"></script>
         <script src="http://cdn.jsdelivr.net/jqgrid/4.5.4/plugins/jquery.searchFilter.js"></script>
-            <script src="http://cdn.jsdelivr.net/jqgrid/4.5.4/plugins/jquery.tablednd.js"></script>
+        <script src="http://cdn.jsdelivr.net/jqgrid/4.5.4/plugins/jquery.tablednd.js"></script>
 
             <link href="http://cdn.jsdelivr.net/jqgrid/4.5.4/plugins/searchFilter.css" rel="stylesheet" type="text/css" />
             <link href="http://cdn.jsdelivr.net/jqgrid/4.5.4/plugins/ui.multiselect.css" rel="stylesheet" type="text/css" />
@@ -178,13 +178,13 @@ Released   : 20120723
         <link href="@Url.Content("~/Scripts/jquery-grid/css/ui.jqgrid.css")" rel="stylesheet" type="text/css" />
 
 
-            <script src="@Url.Content("~/Scripts/jquery-grid/jquery.jqGrid.js")" type="text/javascript"></script>
+        <script src="@Url.Content("~/Scripts/jquery-grid/jquery.jqGrid.js")" type="text/javascript"></script>
         // version 4.5.1
 
 
         <script src="@Url.Content("~/Scripts/jquery-grid/grid.custom.js")" type="text/javascript"></script>
         <script src="@Url.Content("~/Scripts/jquery-grid/grid.base.js")" type="text/javascript"></script>
-            <script src="@Url.Content("~/Scripts/jquery-grid/grid.celledit.js")" type="text/javascript"></script>
+        <script src="@Url.Content("~/Scripts/jquery-grid/grid.celledit.js")" type="text/javascript"></script>
             <script src="@Url.Content("~/Scripts/jquery-grid/grid.common.js")" type="text/javascript"></script>
             <script src="@Url.Content("~/Scripts/jquery-grid/grid.formedit.js")" type="text/javascript"></script>
             <script src="@Url.Content("~/Scripts/jquery-grid/grid.inlinedit.js")" type="text/javascript"></script>
@@ -1836,29 +1836,40 @@ Released   : 20120723
                                                 </a>
                                             </li>
                                         }
-                                        @if (Roles.IsUserInRole(ViewBag.NombreUsuario, "SuperAdmin") && false)
+                                        @if (Roles.IsUserInRole(ViewBag.NombreUsuario, "SuperAdmin") && true)
                                         {
                                             <li class="divider"></li>
 
 
-                                            <li><a href="#">Administrador</a></li>
-                                                    <li>
-                                                        <a href='@(Url.Content("~") + "MvcMembership\\UserAdministration\\Details\\" + Membership.GetUser().ProviderUserKey.ToString())'>
-                                                            Mi cuenta
-                                                        </a>
-                                                    </li>
+                                            @*<li><a href="#">Administrador</a></li>*@
+                                            <li>
+                                                <a href='@(Url.Content("~") + "MvcMembership\\UserAdministration\\Details\\" + Membership.GetUser().ProviderUserKey.ToString())'>
+                                                    Mi cuenta (Admin)
+                                                </a>
+                                            </li>
 
-                                                    <li><a href="@Url.Content("~")Acceso\\Edit\\-1">Monitoreo: google analytics, traza de sql profiler, sqlnexus, perfmon.exe </a></li>
 
-                                                    <li><a href="@Url.Content("~")Acceso\\Edit\\-1">Enviar comentario/captura </a></li>
-                                                    <li>
-                                                        <a href="@Url.Content("~")Acceso\\Edit\\-1">
-                                                            Chat / TeamViewer @*http://stackoverflow.com/questions/6194127/a-web-site-with-embedded-remote-control-capabilities*@
-                                                        </a>
-                                                    </li>
-                                                    <li><a href="@Url.Content("~")Acceso/Edit/-1">Wiki</a></li>
+                                                    if (false)
+                                                    {
+                                                        <li><a href="@Url.Content("~")Acceso\\Edit\\-1">Monitoreo: google analytics, traza de sql profiler, sqlnexus, perfmon.exe </a></li>
 
-                                                    <li><a href="https://groups.google.com/forum/#!forum/prontoweb">Foro</a></li>
+                                                        <li><a href="@Url.Content("~")Acceso\\Edit\\-1">Enviar comentario/captura </a></li>
+                                                        <li>
+                                                            <a href="@Url.Content("~")Acceso\\Edit\\-1">
+                                                                Chat / TeamViewer @*http://stackoverflow.com/questions/6194127/a-web-site-with-embedded-remote-control-capabilities*@
+                                                            </a>
+                                                        </li>
+                                                        <li><a href="@Url.Content("~")Acceso/Edit/-1">Wiki</a></li>
+
+                                                        <li>
+                                                            <a href="https://groups.google.com/forum/#!forum/prontoweb">Foro</a>
+
+
+
+                                                        </li>
+                                                    }
+
+
 
                                         }
                                         else { }
@@ -1867,7 +1878,7 @@ Released   : 20120723
                                             <li class="divider"></li>
                                             <li><a href="#">Super Admin BDL</a></li>
 
-                                                    <li><a href="@Url.Content("~")Acceso/Edit/-1">Copiar base para test</a></li>
+                                            <li><a href="@Url.Content("~")Acceso/Edit/-1">Copiar base para test</a></li>
                                                     <li><a href="@Url.Content("~")Acceso/Edit/-1">Visualizar como</a></li>
                                                     <li><a href="@Url.Content("~")BugTrack.aspx">Reclamos</a></li>
                                                     <li>
@@ -1882,11 +1893,11 @@ Released   : 20120723
                                             //esto es FKs, altertables, nuevastablas y stores, tree.sql, ....
                                             <li><a href="@Url.Content("~")Acceso/Edit/-1">Backup</a></li>
                                             <li><a href="@Url.Content("~")Home/Index">Tests</a></li>
-                                                    <li>
-                                                        <a target="_blank" href="https://www.google.com/accounts/ServiceLoginAuth?continue=http%3A//mail.google.com/gmail&service=mail&Email=prontowebmail@gmail.com&Passwd=50TriplesdJQ&null=Sign+in">
-                                                            Mails enviados
-                                                        </a>
-                                                    </li>
+                                            <li>
+                                                <a target="_blank" href="https://www.google.com/accounts/ServiceLoginAuth?continue=http%3A//mail.google.com/gmail&service=mail&Email=prontowebmail@gmail.com&Passwd=50TriplesdJQ&null=Sign+in">
+                                                    Mails enviados
+                                                </a>
+                                            </li>
                                         }
                                     </ul>
 
@@ -2093,7 +2104,7 @@ Released   : 20120723
                     {
                         <li><a href="@Url.Content("~")Acceso/Edit/-1">Enviar comentario/captura </a></li>
                         <li><a href="@Url.Content("~")Acceso/Edit/-1">Visualizar como</a></li>
-                                <li><a href="@Url.Content("~")Acceso/Edit/-1">Log</a></li>
+                        <li><a href="@Url.Content("~")Acceso/Edit/-1">Log</a></li>
                                 <li>
                                     <a target="_blank" href="https://www.google.com/accounts/ServiceLoginAuth?continue=http%3A//mail.google.com/gmail&service=mail&Email=prontowebmail@gmail.com&Passwd=50TriplesdJQ&null=Sign+in">
                                         Mails enviados
@@ -2233,7 +2244,7 @@ Released   : 20120723
                         class="btn span2" style="">
                     <i class="icon-th"></i>Panel
                 </button>
-                        <br />
+                <br />
                         <br />
             }
             <br />
@@ -2699,18 +2710,18 @@ Released   : 20120723
                         <br />
                         <br />
                     </span>
-                            <script>
-                                $(document).ready(function () {
-                                    pageLayout.hide('west');
-                                });
-                            </script>
+                    <script>
+                        $(document).ready(function () {
+                            pageLayout.hide('west');
+                        });
+                    </script>
 
                             <input id="asdasd" title="2asdasd" />
-                                <div id="AccordInterno" class="span12 lightblue link-class" style="">
-                                    <div id="Accord1" class="test" style="background: none; font-family: arial, sans-serif;
+                            <div id="AccordInterno" class="span12 lightblue link-class" style="">
+                                <div id="Accord1" class="test" style="background: none; font-family: arial, sans-serif;
                             font-size: 11px; max-height: 600px;">
-                                    </div>
                                 </div>
+                            </div>
                     }
                     else
                     {
@@ -2922,7 +2933,7 @@ Released   : 20120723
                                         </button>
 
                                         <p id="textoMensajeAlerta">
-                                                @Html.Raw(TempData["Alerta"].NullSafeToString())
+                                            @Html.Raw(TempData["Alerta"].NullSafeToString())
                                         </p>
 
                                     </div>
@@ -3209,7 +3220,7 @@ Released   : 20120723
 
 
                     @*(System.Diagnostics.Debug.att.IsAttached())*@
-                    @if (System.Diagnostics.Debugger.IsAttached && System.Environment.MachineName == "MARIANOPC" && false)
+                    @if (System.Diagnostics.Debugger.IsAttached && System.Environment.MachineName == "DESKTOP-CLVUL7U" && false)
                     {
                         //var s=Url.Content("~/Content/images/Wizard-Resource-Arcane-Power.gif");
                         //var aas = "http://trolr.com/wp-content/uploads/2012/05/Witch-Doctor-Resource-Mana.gif";
