@@ -259,7 +259,7 @@ namespace ProntoMVC.Controllers
                     if (CuentasBancaria != null)
                     {
                         if (mIdMoneda != (CuentasBancaria.IdMoneda ?? 0)) { sErrorMsg += "\n" + "Hay transferencias con una moneda distinta a la del recibo"; }
-                        if ((x.IdBancoTransferencia ?? 0) != (CuentasBancaria.IdBanco ?? 0)) { sErrorMsg += "\n" + "Hay transferencias que no tienen indicado el banco destino"; }
+                        // if ((x.IdBancoTransferencia ?? 0) != (CuentasBancaria.IdBanco ?? 0)) { sErrorMsg += "\n" + "Hay transferencias que no tienen indicado el banco destino"; }
                     }
                     else
                     {
