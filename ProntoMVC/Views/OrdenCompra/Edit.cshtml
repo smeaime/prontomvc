@@ -20,10 +20,12 @@
             font-weight: bold;
             background-color: #e8eef4;
         }
-        .subtotales input[readonly] {
-            background: transparent;
-            border: 0;
-        }
+
+            .subtotales input[readonly] {
+                background: transparent;
+                border: 0;
+            }
+
         .subtotales select {
             /* height : 16px; */
             min-height: 18px !important;
@@ -32,6 +34,7 @@
             margin: 0;
             font-size: 10px;
         }
+
         table td {
             padding: 0px;
             border: solid 1px;
@@ -142,7 +145,7 @@
                             <label for="Provincia">Provincia</label>
                             <input type="text" name="Provincia" id="Provincia" style="font-size: 15px; text-align: left;" readonly="readonly" class="span12" />
                         </div>
-                        <div class="span1 lightblue">
+                        <div class="span2 lightblue">
                             <label for="CodigoPostal">Cod. postal</label>
                             <input type="text" name="CodigoPostal" id="CodigoPostal" style="font-size: 15px; text-align: left;" readonly="readonly" class="span12" />
                         </div>
@@ -272,9 +275,9 @@
 
                     <div class="row-fluid">
                         @*<div class="span3 lightblue">
-                            <input type="file" id="FileUpload" multiple />
-                            <input type="button" id="Upload" value="Adjuntar" />
-                        </div>*@
+                                <input type="file" id="FileUpload" multiple />
+                                <input type="button" id="Upload" value="Adjuntar" />
+                            </div>*@
                         <span class="btn btn-success fileinput-button">
                             <i class="glyphicon glyphicon-plus"></i>
                             <span>Agregar adjuntos...</span>
@@ -293,67 +296,70 @@
                 <div id="pie" style="position: absolute; bottom: -26px; background: rgb(236, 236, 236); width: 100%; height: 68px; padding-left: 0; margin-right: 15px;">
                     <hr style="margin: 0; border-top-color: #D8D4D4; border-bottom: 0px solid #ffffff;  " />
                     <div class="row-fluid " style="padding: 11px 0px 0px 0px">
-                        <div class="span8 lightblue"></div>
-                            <div class="span4 lightblue">
-                                <input type="button" id="grabar2" value="Aceptar" class="btn  btn-large btn-primary " usesubmitbehavior="false" />
-                                @if (Model.IdOrdenCompra > 0)
-                                {<input type="button" id="anular" value="Anular" class="btn  btn-large btn-primary" />}
-                                @*<input type="button" id="probar" value="Probar" class="btn  btn-large btn-primary " usesubmitbehavior="false" />*@
-                                <script>
-                                    $(function () {
-                                        $("#anular").click(function () {
-                                            $("#dialog-password").dialog({
-                                                buttons: {
-                                                    'Aceptar': function () {
-                                                        //window.location.href = ROOT + 'OrdenPago/Anular/' + $("#IdOrdenPago").val();
-                                                        var idAux = $("#Aux1").val();
-                                                        $("#Anulada").val("SI");
-                                                        $("#FechaAnulacion").val(Hoy());
-                                                        $("#IdUsuarioAnulacion").val(idAux);
-                                                        $('#grabar2').click();
-                                                    },
-                                                    'Cancelar': function () {
-                                                        $(this).dialog('close');
-                                                    }
-                                                },
-                                                open: function () {
-                                                }
-                                            });
-                                            $('#dialog-password').dialog('open');
-                                            $('#mySelect').prop("disabled", false);
-                                            CargarUsuariosConPermisoDeAnulacion();
-                                        });
+                        <div class="span6 lightblue"></div>
+                        <div class="span6 lightblue">
+                            <input type="button" id="grabar2" value="Aceptar" class="btn  btn-large btn-primary " usesubmitbehavior="false" />
+                            @if (Model.IdOrdenCompra > 0)
+                            {<input type="button" id="anular" value="Anular" class="btn  btn-large btn-primary" />}
+                            @*<input type="button" id="probar" value="Probar" class="btn  btn-large btn-primary " usesubmitbehavior="false" />*@
+                            @Html.ActionLink("Volver al listado", "Index", null, new { @class = "btn btn-link  pull-right" })
 
-                                        function CargarUsuariosConPermisoDeAnulacion() {
-                                            var combo = $("#mySelect")
-                                            combo.find("option:gt(0)").remove();
-                                            combo.find("option:first").text("Cargando...");
-                                            $.getJSON(ROOT + 'Articulo/GetStoreProc?sp=Empleados_TX_ParaAnularPorFormulario&p1=21', {
-                                            }, function (json) {
-                                                combo.find("option:first").text("");
-                                                for (var i = 0; i < json.length; i++) {
-                                                    $("<option/>").attr("value", json[i].value).text(json[i].title).appendTo(combo);
+
+                            <script>
+                                $(function () {
+                                    $("#anular").click(function () {
+                                        $("#dialog-password").dialog({
+                                            buttons: {
+                                                'Aceptar': function () {
+                                                    //window.location.href = ROOT + 'OrdenPago/Anular/' + $("#IdOrdenPago").val();
+                                                    var idAux = $("#Aux1").val();
+                                                    $("#Anulada").val("SI");
+                                                    $("#FechaAnulacion").val(Hoy());
+                                                    $("#IdUsuarioAnulacion").val(idAux);
+                                                    $('#grabar2').click();
+                                                },
+                                                'Cancelar': function () {
+                                                    $(this).dialog('close');
                                                 }
-                                            });
-                                        }
-                                    })
-                                </script>
-                            </div>
+                                            },
+                                            open: function () {
+                                            }
+                                        });
+                                        $('#dialog-password').dialog('open');
+                                        $('#mySelect').prop("disabled", false);
+                                        CargarUsuariosConPermisoDeAnulacion();
+                                    });
+
+                                    function CargarUsuariosConPermisoDeAnulacion() {
+                                        var combo = $("#mySelect")
+                                        combo.find("option:gt(0)").remove();
+                                        combo.find("option:first").text("Cargando...");
+                                        $.getJSON(ROOT + 'Articulo/GetStoreProc?sp=Empleados_TX_ParaAnularPorFormulario&p1=21', {
+                                        }, function (json) {
+                                            combo.find("option:first").text("");
+                                            for (var i = 0; i < json.length; i++) {
+                                                $("<option/>").attr("value", json[i].value).text(json[i].title).appendTo(combo);
+                                            }
+                                        });
+                                    }
+                                })
+                            </script>
                         </div>
+                    </div>
                 </div>
             </div>
         </form>
     </div>
 
     <script type="text/javascript">
-        $(window).resize(function () {
-            RefrescaAnchoGrillaDetalle();
-            $("#conscroll").height($(window).height() - 120);
-                                    });
+                                $(window).resize(function () {
+                                    RefrescaAnchoGrillaDetalle();
+                                    $("#conscroll").height($(window).height() - 120);
+                                });
 
-        $(function () {
-            mostrarPanelesDerecho();
+                                $(function () {
+                                    mostrarPanelesDerecho();
 
-        })
+                                })
     </script>
 }
