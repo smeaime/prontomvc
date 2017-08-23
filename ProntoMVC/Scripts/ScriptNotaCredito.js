@@ -200,7 +200,7 @@
         pgtext: "",
         pginput: false,
         rowList: "",
-        caption: '<b>DETALLE IMPUTACIONES EN CUENTA CORRIENTE</b>',
+        caption: 'IMPUTACIONES EN CUENTA CORRIENTE',
         cellEdit: true,
         cellsubmit: 'clientArray'
     });
@@ -335,7 +335,7 @@
         pgtext: "",
         pginput: false,
         rowList: "",
-        caption: '<b>DETALLE DE CONCEPTOS</b>',
+        caption: 'CONCEPTOS',
         cellEdit: true,
         cellsubmit: 'clientArray'
     });
