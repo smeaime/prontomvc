@@ -30,7 +30,13 @@
 
         $('#Lista').jqGrid({
             url: '@Url.Action(  "TT_DynamicGridData","OrdenCompra")',
-            postData: { 'FechaInicial': function () { return $("#FechaInicial").val(); }, 'FechaFinal': function () { return $("#FechaFinal").val(); } },
+            postData: {
+                'FechaInicial': function () { return $("#FechaInicial").val(); },
+                'FechaFinal': function () { return $("#FechaFinal").val(); },
+                'PendienteRemito': 'NO',
+                'PendienteFactura': 'NO',
+            },
+
             datatype: 'json',
             mtype: 'POST',
             colNames: ['', '', 'IdOrdenCompra', 'IdCliente', 'IdObra', 'IdCondicionVenta', 'IdListaPrecios', 'IdMoneda', 'Nro. OC cliente', 'Numero OC', 'Fecha', 'Producido', 'Cumplido', 'Anulada',
