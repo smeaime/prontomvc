@@ -28,7 +28,9 @@
         </style>
         <div id="">
 
-            @if (Roles.IsUserInRole(ViewBag.NombreUsuario, "SuperAdmin") && false)
+
+            @if (System.Diagnostics.Debugger.IsAttached && System.Environment.MachineName == "DESKTOP-CLVUL7U" && true)
+            //@if (Roles.IsUserInRole(ViewBag.NombreUsuario, "SuperAdmin") && false)
             {
                 <div>
 
