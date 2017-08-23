@@ -210,7 +210,7 @@
                             <input type="text" name="Provincia" id="Provincia" style="font-size: 15px; text-align: left;" readonly="readonly" class="span12" />
                         </div>
                         <div class="span1 lightblue">
-                            <label for="CodigoPostal">Codigo postal</label>
+                            <label for="CodigoPostal">Cod. postal</label>
                             <input type="text" name="CodigoPostal" id="CodigoPostal" style="font-size: 15px; text-align: left;" readonly="readonly" class="span12" />
                         </div>
                         <div class="span2 lightblue">
@@ -240,7 +240,7 @@
                             @Html.TextBoxFor(model => model.NumeroDocumento, new { @class = "span12" })
                             @Html.ValidationMessageFor(model => model.NumeroDocumento)
                         </div>
-                        <div class="span1 lightblue">
+                        <div class="span2 lightblue">
                             @Html.LabelFor(model => model.OrdenCarga, "Orden carga")
                             @Html.TextBoxFor(model => model.OrdenCarga, new { @class = "span12" })
                             @Html.ValidationMessageFor(model => model.OrdenCarga)
@@ -250,7 +250,7 @@
                             @Html.TextBoxFor(model => model.OrdenCompra, new { @class = "span12" })
                             @Html.ValidationMessageFor(model => model.OrdenCompra)
                         </div>
-                        <div class="span1 lightblue">
+                        <div class="span2 lightblue">
                             @Html.LabelFor(model => model.HoraSalida, "Hora de salida")
                             @Html.TextBoxFor(model => model.HoraSalida, new { @class = "span12" })
                             @Html.ValidationMessageFor(model => model.HoraSalida)
