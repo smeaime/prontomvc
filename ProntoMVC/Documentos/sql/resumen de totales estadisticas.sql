@@ -93,7 +93,14 @@ sum(
 				case when Modo='Buque'
 				then PeriodoAnterior  
 				else 0 	end
-			   ) as PeriodoAnteriorBuques
+			   ) as PeriodoAnteriorBuques,
+
+
+
+sum 	(Facturado) as Facturado
+
+
+
 
 
 
@@ -102,7 +109,7 @@ from
 
 select
 
-                   puntoventa as Sucursal,
+                   cdp.puntoventa as Sucursal,
 			Exporta as Modo,
 			Count(*) as CantCartas,
 			sum(
@@ -114,7 +121,17 @@ select
 				case when FechaDescarga between @FechaDesdeAnterior and @FechaHastaAnterior  
 				then NetoFinal/1000
 				else 0 	end
-			   ) as PeriodoAnterior  
+			   ) as PeriodoAnterior  ,
+			   
+			
+			  sum(
+				case when FechaDescarga between @FechaDesdeAnterior and @FechaHastaAnterior  
+				then DETFAC.PrecioUnitario * NetoFinal / 1000
+				else 0 	end
+			   ) 
+			    as Facturado
+			
+
 
 from 
  dbo.fSQL_GetDataTableFiltradoYPaginado  
@@ -158,14 +175,7 @@ from
     
  as CDP
 
-
-
-
-
-
-
-
-
+left join detallefacturas DETFAC on CDP.IdDetalleFactura=DETFAC.IdDetalleFactura
 
  Group by  cdp.PuntoVenta,cdp.exporta
 
@@ -182,19 +192,24 @@ select
 			Count(*) as CantCartas,
 			sum(
 				case when i.FechaIngreso >= @FechaDesde
-				then cantidad /1000
+				then i.cantidad /1000
 				else 0 	end
 			   ) as NetoFinal,
 			sum(
 				case when i.FechaIngreso <= @FechaHastaAnterior 
-				then cantidad /1000
+				then i.cantidad /1000
 				else 0 	end
-			   ) as PeriodoAnterior           
+			   ) as PeriodoAnterior           ,
+
+			   0 as Facturado
 			         
-
-
+			
 
 From CartasPorteMovimientos i
+
+left join detallefacturas DETFAC on i.IdDetalleFactura=DETFAC.IdDetalleFactura
+
+
 Where (
                                 i.Tipo = 4 
                                 And isnull(i.Anulada, 'NO') <> 'SI' 
@@ -221,6 +236,18 @@ go
 
 
 
+--//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+--//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+--//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+--//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+--//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+--//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+--//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+--//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
 
 
 declare @FechaDesde datetime
@@ -231,6 +258,8 @@ set @FechaDesdeAnterior ='20151101'
 set @FechaHastaAnterior='20160531'
 set @FechaDesde='20161101'
 set @FechaHasta='20170531'
+
+
 
 
 
@@ -278,6 +307,8 @@ exec [wCartasDePorte_TX_ResumenDeTotalesEstadisticas]
 
 
 
+
+
 exec [wCartasDePorte_TX_EstadisticasDeDescarga] 
 					NULL, 
 					NULL, 
@@ -314,3 +345,22 @@ exec [wCartasDePorte_TX_EstadisticasDeDescarga]
 
 go
 
+
+
+
+
+
+
+/*
+Missing Index Details from C:\bdl\pronto\ProntoMVC\Documentos\sql\resumen de totales estadisticas.sql
+The Query Processor estimates that implementing the following index could improve the query cost by 49.7958%.
+*/
+/*
+CREATE NONCLUSTERED INDEX [CartasDePorte_PuntoVenta]
+ON [dbo].[CartasDePorte] ([PuntoVenta])
+INCLUDE ([NumeroCartaDePorte],[Anulada],[Vendedor],[CuentaOrden1],[CuentaOrden2],[Corredor],[Entregador],[Procedencia],[Patente],
+[IdArticulo],[NetoProc],[NetoFinal],[Contrato],[Destino],[FechaDescarga],[Exporta],[IdFacturaImputada],[SubnumeroVagon],[FechaArribo],
+[Corredor2],[SubnumeroDeFacturacion],[IdClienteAuxiliar])
+GO
+
+*/
