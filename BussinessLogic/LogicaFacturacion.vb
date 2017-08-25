@@ -111,6 +111,8 @@ Public Class LogicaFacturacion
 
     Shared Sub CorrectorParcheSubnumeroFacturacion(SC As String, ByRef mensajes As String)
 
+        -creo q traba todo -creo q no es esto!
+
         'http://stackoverflow.com/questions/2334712/update-from-select-using-sql-server
         '--el update se va a ir haciendo parcialmente
         Dim s As String =
