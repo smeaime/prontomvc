@@ -307,13 +307,21 @@ year(FechaDescarga) as año,
 			   
 			
 			  sum(
+				case when FechaDescarga between @FechaDesde and @FechaHasta
+				then DETFAC.PrecioUnitario * NetoFinal / 1000
+				else 0 	end
+			   ) 
+			    as Facturado,
+			
+
+			
+			  sum(
 				case when FechaDescarga between @FechaDesdeAnterior and @FechaHastaAnterior  
 				then DETFAC.PrecioUnitario * NetoFinal / 1000
 				else 0 	end
 			   ) 
-			    as Facturado
+			    as FacturadoAnterior
 			
-
 
 from 
  dbo.fSQL_GetDataTableFiltradoYPaginado  
@@ -387,10 +395,22 @@ year(FechaIngreso) as año,
 				else 0 	end
 			   ) as PeriodoAnterior           ,
 
-			   0 as Facturado
-			         
 			
-
+			  sum(
+				case when i.FechaIngreso >= @FechaDesde
+				then DETFAC.PrecioUnitario * i.cantidad / 1000
+				else 0 	end
+			   ) 
+			       as Facturado,
+			   
+			  sum(
+				case when i.FechaIngreso <= @FechaHastaAnterior 
+				then DETFAC.PrecioUnitario * i.cantidad / 1000
+				else 0 	end
+			   ) 
+			    as FacturadoAnterior
+			
+			
 From CartasPorteMovimientos i
 
 left join detallefacturas DETFAC on i.IdDetalleFactura=DETFAC.IdDetalleFactura
