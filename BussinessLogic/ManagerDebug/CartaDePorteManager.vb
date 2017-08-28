@@ -16779,8 +16779,10 @@ usuario As String, ConexBDLmaster As String,
 
 
 
-                    ArithmeticException overflow
+                    'ArithmeticException overflow
                     cp.cartaporte = dbc.NumeroCartaDePorte
+
+
                     cp.brutodest = dbc.BrutoFinal
 
 
