@@ -19,6 +19,9 @@
           <QueryParameter Name="@FechaDesde">
             <Value>=Parameters!FechaDesde.Value</Value>
           </QueryParameter>
+          <QueryParameter Name="@puntoventa">
+            <Value>=Parameters!puntoventa.Value</Value>
+          </QueryParameter>
           <QueryParameter Name="@FechaHasta">
             <Value>=Parameters!FechaHasta.Value</Value>
           </QueryParameter>
@@ -38,33 +41,35 @@ set @FechaDesdeAnterior ='20170101'
 set @FechaHastaAnterior='20170131'
 set @FechaDesde='20170201'
 set @FechaHasta='20170228'
-
 */
 
 
-[wCartasDePorte_TX_ResumenDeTotalesEstadisticas] 
+
+exec [wCartasDePorte_TX_ResumenDeTotalesEstadisticas] 
 					NULL, 
 					NULL, 
 					4,
-					NULL, 
+
+NULL, 
 					NULL, 
 
 					NULL, 
 					NULL, 
 					NULL,
 					NULL, 
-					-1, --@idArticulo,
+					NULL, 
 
-					NULL, --@idProcedencia,
-					-1,---1, --@idDestino,
-					NULL, --@AplicarANDuORalFiltro,
+					NULL,
+					NULL,
+					NULL, 
 					@ModoExportacion, 
+
 						
 @FechaDesde,
 @FechaHasta,
 
 
-					NULL, 
+					@puntoventa,
 					NULL,
 					NULL, 
 					NULL, 
@@ -228,6 +233,9 @@ select idlocalidad, nombre from localidades</CommandText>
           <QueryParameter Name="@FechaHasta">
             <Value>=Parameters!FechaHasta.Value</Value>
           </QueryParameter>
+          <QueryParameter Name="@puntoventa">
+            <Value>=Parameters!puntoventa.Value</Value>
+          </QueryParameter>
           <QueryParameter Name="@FechaDesdeAnterior">
             <Value>=Parameters!FechaDesdeAnterior.Value</Value>
           </QueryParameter>
@@ -270,7 +278,7 @@ set @FechaHasta='20170228'
 @FechaHasta,
 
 
-					NULL, 
+					@puntoventa,
 					NULL,
 					NULL, 
 					NULL, 
@@ -337,6 +345,9 @@ set @FechaHasta='20170228'
           <QueryParameter Name="@FechaHasta">
             <Value>=Parameters!FechaHasta.Value</Value>
           </QueryParameter>
+          <QueryParameter Name="@puntoventa">
+            <Value>=Parameters!puntoventa.Value</Value>
+          </QueryParameter>
           <QueryParameter Name="@FechaDesdeAnterior">
             <Value>=Parameters!FechaDesdeAnterior.Value</Value>
           </QueryParameter>
@@ -379,7 +390,7 @@ set @FechaHasta='20170228'
 @FechaHasta,
 
 
-					NULL, 
+										@puntoventa,
 					NULL,
 					NULL, 
 					NULL, 
@@ -7524,9 +7535,14 @@ set @FechaHasta='20170228'
                       <ChartDataLabel>
                         <Style />
                       </ChartDataLabel>
-                      <Style />
+                      <Style>
+                        <Border>
+                          <Width>2pt</Width>
+                        </Border>
+                      </Style>
                       <ChartMarker>
-                        <Size>375pt</Size>
+                        <Type>Square</Type>
+                        <Size>4pt</Size>
                         <Style />
                       </ChartMarker>
                       <DataElementOutput>Output</DataElementOutput>
@@ -7562,7 +7578,11 @@ set @FechaHasta='20170228'
                       <ChartDataLabel>
                         <Style />
                       </ChartDataLabel>
-                      <Style />
+                      <Style>
+                        <Border>
+                          <Width>2pt</Width>
+                        </Border>
+                      </Style>
                       <ChartMarker>
                         <Size>375pt</Size>
                         <Style />
@@ -18036,11 +18056,61 @@ set @FechaHasta='20170228'
       <Nullable>true</Nullable>
       <Prompt>ModoExportacion</Prompt>
     </ReportParameter>
+    <ReportParameter Name="puntoventa">
+      <DataType>Integer</DataType>
+      <Nullable>true</Nullable>
+      <Prompt>puntoventa</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="idArticulo">
+      <DataType>Integer</DataType>
+      <Nullable>true</Nullable>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="idVendedor">
+      <DataType>Integer</DataType>
+      <Nullable>true</Nullable>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="idCorredor">
+      <DataType>Integer</DataType>
+      <Nullable>true</Nullable>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="idDestinatario">
+      <DataType>Integer</DataType>
+      <Nullable>true</Nullable>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="idIntermediario">
+      <DataType>Integer</DataType>
+      <Nullable>true</Nullable>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="idRemComercial">
+      <DataType>Integer</DataType>
+      <Nullable>true</Nullable>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="idProcedencia">
+      <DataType>Integer</DataType>
+      <Nullable>true</Nullable>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="idDestino">
+      <DataType>Integer</DataType>
+      <Nullable>true</Nullable>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="AplicarANDuORalFiltro">
+      <DataType>Integer</DataType>
+      <Nullable>true</Nullable>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
   </ReportParameters>
   <ReportParametersLayout>
     <GridLayoutDefinition>
       <NumberOfColumns>2</NumberOfColumns>
-      <NumberOfRows>5</NumberOfRows>
+      <NumberOfRows>11</NumberOfRows>
       <CellDefinitions>
         <CellDefinition>
           <ColumnIndex>0</ColumnIndex>
@@ -18091,6 +18161,56 @@ set @FechaHasta='20170228'
           <ColumnIndex>1</ColumnIndex>
           <RowIndex>4</RowIndex>
           <ParameterName>ModoExportacion</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>0</ColumnIndex>
+          <RowIndex>5</RowIndex>
+          <ParameterName>puntoventa</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>1</ColumnIndex>
+          <RowIndex>5</RowIndex>
+          <ParameterName>idArticulo</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>0</ColumnIndex>
+          <RowIndex>6</RowIndex>
+          <ParameterName>idVendedor</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>1</ColumnIndex>
+          <RowIndex>6</RowIndex>
+          <ParameterName>idCorredor</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>0</ColumnIndex>
+          <RowIndex>7</RowIndex>
+          <ParameterName>idDestinatario</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>1</ColumnIndex>
+          <RowIndex>7</RowIndex>
+          <ParameterName>idIntermediario</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>0</ColumnIndex>
+          <RowIndex>8</RowIndex>
+          <ParameterName>idRemComercial</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>1</ColumnIndex>
+          <RowIndex>8</RowIndex>
+          <ParameterName>idProcedencia</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>0</ColumnIndex>
+          <RowIndex>9</RowIndex>
+          <ParameterName>idDestino</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>1</ColumnIndex>
+          <RowIndex>9</RowIndex>
+          <ParameterName>AplicarANDuORalFiltro</ParameterName>
         </CellDefinition>
       </CellDefinitions>
     </GridLayoutDefinition>

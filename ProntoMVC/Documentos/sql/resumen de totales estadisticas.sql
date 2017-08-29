@@ -271,6 +271,7 @@ Where (
                                 i.Tipo = 4 
                                 And isnull(i.Anulada, 'NO') <> 'SI' 
                                 And i.FechaIngreso >= @FechaDesdeAnterior And i.FechaIngreso <= @FechaHasta 
+								And (isnull(@puntoventa,0)<=0  OR  @puntoventa=IdStock)
                            )
 
 
@@ -477,6 +478,7 @@ Where (
                                 i.Tipo = 4 
                                 And isnull(i.Anulada, 'NO') <> 'SI' 
                                 And i.FechaIngreso >= @FechaDesdeAnterior And i.FechaIngreso <= @FechaHasta 
+								And (isnull(@puntoventa,0)<=0  OR  @puntoventa=IdStock)
                            )
 
 
@@ -548,12 +550,12 @@ exec [wCartasDePorte_TX_DetalleDeTotalesEstadisticas]
 					NULL, 
 					NULL,
 					NULL, 
-					-1, --@idArticulo,
+					NULL, ---1, --@idArticulo,
 
 					NULL, --@idProcedencia,
-					-1,---1, --@idDestino,
+					NULL, ---1,---1, --@idDestino,
 					NULL, --@AplicarANDuORalFiltro,
-					'Export', --'Entregas', --'Ambos', --'Buques',
+					NULL, --'Export', --'Entregas', --'Ambos', --'Buques',
 						
 					
 @FechaDesde, @FechaHasta,
@@ -594,12 +596,12 @@ exec [wCartasDePorte_TX_ResumenDeTotalesEstadisticas]
 					NULL, 
 					NULL,
 					NULL, 
-					-1, --@idArticulo,
+					NULL, --@idArticulo,
 
 					NULL, --@idProcedencia,
-					-1,---1, --@idDestino,
+					NULL,---1, --@idDestino,
 					NULL, --@AplicarANDuORalFiltro,
-					'Export', --'Entregas', --'Ambos', --'Buques',
+					NULL, --  'Export', --'Entregas', --'Ambos', --'Buques',
 						
 					
 @FechaDesde, @FechaHasta,
