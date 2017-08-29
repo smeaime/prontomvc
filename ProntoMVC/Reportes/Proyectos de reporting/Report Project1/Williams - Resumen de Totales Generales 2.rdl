@@ -10738,7 +10738,7 @@ set @FechaHasta='20170228'
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>Elevacion</Value>
+                                  <Value>Fac Elevacion</Value>
                                   <Style>
                                     <FontFamily>Tahoma</FontFamily>
                                     <FontSize>8pt</FontSize>
@@ -10922,7 +10922,7 @@ set @FechaHasta='20170228'
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Sum(Fields!Elevacion.Value)</Value>
+                                  <Value>=Sum(Fields!FacElevacion.Value)</Value>
                                   <Style>
                                     <FontFamily>Tahoma</FontFamily>
                                     <Format>N0</Format>
@@ -10957,7 +10957,7 @@ set @FechaHasta='20170228'
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Fields!Elevacion.Value / Fields!TotalElevacion.Value</Value>
+                                  <Value>=Fields!FacElevacion.Value / Fields!FacTotalElevacion.Value</Value>
                                   <Style>
                                     <FontFamily>Tahoma</FontFamily>
                                     <Format>0.00%</Format>
@@ -10992,7 +10992,7 @@ set @FechaHasta='20170228'
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Fields!PeriodoAnteriorElevacion.Value</Value>
+                                  <Value>=Fields!FacPeriodoAnteriorElevacion.Value</Value>
                                   <Style>
                                     <FontFamily>Tahoma</FontFamily>
                                     <Format>N0</Format>
@@ -11027,7 +11027,7 @@ set @FechaHasta='20170228'
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Fields!Elevacion.Value - Fields!PeriodoAnteriorElevacion.Value</Value>
+                                  <Value>=Fields!FacElevacion.Value - Fields!FacPeriodoAnteriorElevacion.Value</Value>
                                   <Style>
                                     <FontFamily>Tahoma</FontFamily>
                                     <Format>N0</Format>
@@ -11062,7 +11062,7 @@ set @FechaHasta='20170228'
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=(Fields!Elevacion.Value - Fields!PeriodoAnteriorElevacion.Value) / Fields!PeriodoAnteriorElevacion.Value</Value>
+                                  <Value>=(Fields!FacElevacion.Value - Fields!FacPeriodoAnteriorElevacion.Value) / Fields!FacPeriodoAnteriorElevacion.Value</Value>
                                   <Style>
                                     <FontFamily>Tahoma</FontFamily>
                                     <Format>0.00%</Format>
@@ -11105,7 +11105,7 @@ set @FechaHasta='20170228'
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Sum(Fields!Elevacion.Value)</Value>
+                                  <Value>=Sum(Fields!FacElevacion.Value)</Value>
                                   <Style>
                                     <FontFamily>Tahoma</FontFamily>
                                     <FontWeight>Bold</FontWeight>
@@ -11141,7 +11141,7 @@ set @FechaHasta='20170228'
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Sum(Fields!Elevacion.Value) / Fields!TotalElevacion.Value</Value>
+                                  <Value>=Sum(Fields!FacElevacion.Value) / Fields!FacTotalElevacion.Value</Value>
                                   <Style>
                                     <FontFamily>Tahoma</FontFamily>
                                     <Format>0.00%</Format>
@@ -11176,7 +11176,7 @@ set @FechaHasta='20170228'
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Sum(Fields!PeriodoAnteriorElevacion.Value)</Value>
+                                  <Value>=Sum(Fields!FacPeriodoAnteriorElevacion.Value)</Value>
                                   <Style>
                                     <FontFamily>Tahoma</FontFamily>
                                     <FontWeight>Bold</FontWeight>
@@ -11212,7 +11212,7 @@ set @FechaHasta='20170228'
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Sum(Fields!Elevacion.Value) - Sum(Fields!PeriodoAnteriorElevacion.Value)</Value>
+                                  <Value>=Sum(Fields!FacElevacion.Value) - Sum(Fields!FacPeriodoAnteriorElevacion.Value)</Value>
                                   <Style>
                                     <FontFamily>Tahoma</FontFamily>
                                     <FontWeight>Bold</FontWeight>
@@ -11248,13 +11248,13 @@ set @FechaHasta='20170228'
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=(Sum(Fields!Elevacion.Value) - Sum(Fields!PeriodoAnteriorElevacion.Value)) / Sum(Fields!PeriodoAnteriorElevacion.Value)</Value>
+                                  <Value>=(Sum(Fields!FacElevacion.Value) - Sum(Fields!FacPeriodoAnteriorElevacion.Value)) / Sum(Fields!FacPeriodoAnteriorElevacion.Value)</Value>
                                   <Style>
                                     <FontFamily>Tahoma</FontFamily>
                                     <Format>0.00%</Format>
                                     <Color>= iif(
 (
-   (Sum(Fields!Elevacion.Value) - Sum(Fields!PeriodoAnteriorElevacion.Value)) / Sum(Fields!PeriodoAnteriorElevacion.Value) 
+   (Sum(Fields!FacElevacion.Value) - Sum(Fields!FacPeriodoAnteriorElevacion.Value)) / Sum(Fields!FacPeriodoAnteriorElevacion.Value) 
 )&gt;0 
 ,  "Gold","White")</Color>
                                   </Style>
@@ -11474,7 +11474,7 @@ set @FechaHasta='20170228'
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>Buques</Value>
+                                  <Value>Fac Buques</Value>
                                   <Style>
                                     <FontFamily>Tahoma</FontFamily>
                                     <FontSize>8pt</FontSize>
@@ -11658,7 +11658,7 @@ set @FechaHasta='20170228'
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Sum(Fields!Buques.Value)</Value>
+                                  <Value>=Sum(Fields!FacBuques.Value)</Value>
                                   <Style>
                                     <FontFamily>Tahoma</FontFamily>
                                     <Format>N0</Format>
@@ -11693,7 +11693,7 @@ set @FechaHasta='20170228'
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Fields!Buques.Value / Fields!TotalBuques.Value</Value>
+                                  <Value>=Fields!FacBuques.Value / Fields!FacTotalBuques.Value</Value>
                                   <Style>
                                     <FontFamily>Tahoma</FontFamily>
                                     <Format>0.00%</Format>
@@ -11728,7 +11728,7 @@ set @FechaHasta='20170228'
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Fields!PeriodoAnteriorBuques.Value</Value>
+                                  <Value>=Fields!FacPeriodoAnteriorBuques.Value</Value>
                                   <Style>
                                     <FontFamily>Tahoma</FontFamily>
                                     <Format>N0</Format>
@@ -11763,7 +11763,7 @@ set @FechaHasta='20170228'
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Fields!Buques.Value - Fields!PeriodoAnteriorBuques.Value</Value>
+                                  <Value>=Fields!FacBuques.Value - Fields!FacPeriodoAnteriorBuques.Value</Value>
                                   <Style>
                                     <FontFamily>Tahoma</FontFamily>
                                     <Format>N0</Format>
@@ -11798,11 +11798,11 @@ set @FechaHasta='20170228'
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=(Fields!Buques.Value - Fields!PeriodoAnteriorBuques.Value) / Fields!PeriodoAnteriorBuques.Value</Value>
+                                  <Value>=(Fields!FacBuques.Value - Fields!FacPeriodoAnteriorBuques.Value) / Fields!FacPeriodoAnteriorBuques.Value</Value>
                                   <Style>
                                     <FontFamily>Tahoma</FontFamily>
                                     <Format>0.00%</Format>
-                                    <Color>= iif((     (Fields!Buques.Value - Fields!PeriodoAnteriorBuques.Value ) / Fields!PeriodoAnteriorBuques.Value   )&gt;0 ,  "Gold","White")</Color>
+                                    <Color>= iif((     (Fields!FacBuques.Value - Fields!FacPeriodoAnteriorBuques.Value ) / Fields!FacPeriodoAnteriorBuques.Value   )&gt;0 ,  "Gold","White")</Color>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -11838,7 +11838,7 @@ set @FechaHasta='20170228'
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Sum(Fields!Buques.Value)</Value>
+                                  <Value>=Sum(Fields!FacBuques.Value)</Value>
                                   <Style>
                                     <FontFamily>Tahoma</FontFamily>
                                     <FontWeight>Bold</FontWeight>
@@ -11874,7 +11874,7 @@ set @FechaHasta='20170228'
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Sum(Fields!Buques.Value) / Fields!TotalBuques.Value</Value>
+                                  <Value>=Sum(Fields!FacBuques.Value) / Fields!FacTotalBuques.Value</Value>
                                   <Style>
                                     <FontFamily>Tahoma</FontFamily>
                                     <Format>0.00%</Format>
@@ -11909,7 +11909,7 @@ set @FechaHasta='20170228'
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Sum(Fields!PeriodoAnteriorBuques.Value)</Value>
+                                  <Value>=Sum(Fields!FacPeriodoAnteriorBuques.Value)</Value>
                                   <Style>
                                     <FontFamily>Tahoma</FontFamily>
                                     <FontWeight>Bold</FontWeight>
@@ -11945,7 +11945,7 @@ set @FechaHasta='20170228'
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Sum(Fields!Buques.Value) - Sum(Fields!PeriodoAnteriorBuques.Value)</Value>
+                                  <Value>=Sum(Fields!FacBuques.Value) - Sum(Fields!FacPeriodoAnteriorBuques.Value)</Value>
                                   <Style>
                                     <FontFamily>Tahoma</FontFamily>
                                     <FontWeight>Bold</FontWeight>
@@ -11981,11 +11981,11 @@ set @FechaHasta='20170228'
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=(Sum(Fields!Buques.Value) - Sum(Fields!PeriodoAnteriorBuques.Value)) / Sum(Fields!PeriodoAnteriorBuques.Value)</Value>
+                                  <Value>=(Sum(Fields!FacBuques.Value) - Sum(Fields!FacPeriodoAnteriorBuques.Value)) / Sum(Fields!FacPeriodoAnteriorBuques.Value)</Value>
                                   <Style>
                                     <FontFamily>Tahoma</FontFamily>
                                     <Format>0.00%</Format>
-                                    <Color>= iif(   (  (  Sum(Fields!Buques.Value) - Sum(Fields!PeriodoAnteriorBuques.Value)  ) / Sum(Fields!PeriodoAnteriorBuques.Value)     )&gt;0 ,  "Gold","White")</Color>
+                                    <Color>= iif(   (  (  Sum(Fields!FacBuques.Value) - Sum(Fields!FacPeriodoAnteriorBuques.Value)  ) / Sum(Fields!FacPeriodoAnteriorBuques.Value)     )&gt;0 ,  "Gold","White")</Color>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -12209,7 +12209,7 @@ set @FechaHasta='20170228'
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>Elevacion</Value>
+                                  <Value>Fac Elev</Value>
                                   <Style>
                                     <FontFamily>Tahoma</FontFamily>
                                     <FontSize>8pt</FontSize>
@@ -12245,7 +12245,7 @@ set @FechaHasta='20170228'
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>Entrega</Value>
+                                  <Value>Fac Entreg</Value>
                                   <Style>
                                     <FontFamily>Tahoma</FontFamily>
                                     <FontSize>8pt</FontSize>
@@ -12464,7 +12464,7 @@ set @FechaHasta='20170228'
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Sum(Fields!Elevacion.Value)</Value>
+                                  <Value>=Sum(Fields!FacElevacion.Value)</Value>
                                   <Style>
                                     <FontFamily>Tahoma</FontFamily>
                                     <Format>N0</Format>
@@ -12499,7 +12499,7 @@ set @FechaHasta='20170228'
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Sum(Fields!Entrega.Value)</Value>
+                                  <Value>=Sum(Fields!FacEntrega.Value)</Value>
                                   <Style>
                                     <FontFamily>Tahoma</FontFamily>
                                     <Format>N0</Format>
@@ -12534,7 +12534,7 @@ set @FechaHasta='20170228'
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Sum(Fields!Elevacion.Value) + Sum(Fields!Entrega.Value)</Value>
+                                  <Value>=Sum(Fields!FacElevacion.Value) + Sum(Fields!FacEntrega.Value)</Value>
                                   <Style>
                                     <FontFamily>Tahoma</FontFamily>
                                     <Format>N0</Format>
@@ -12569,7 +12569,7 @@ set @FechaHasta='20170228'
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Fields!Entrega.Value / Fields!TotalEntrega.Value</Value>
+                                  <Value>=Fields!FacEntrega.Value / Fields!FacTotalEntrega.Value</Value>
                                   <Style>
                                     <FontFamily>Tahoma</FontFamily>
                                     <Format>0.00%</Format>
@@ -12604,7 +12604,7 @@ set @FechaHasta='20170228'
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Fields!PeriodoAnteriorEntrega.Value + Fields!PeriodoAnteriorElevacion.Value</Value>
+                                  <Value>=Fields!FacPeriodoAnteriorEntrega.Value + Fields!FacPeriodoAnteriorElevacion.Value</Value>
                                   <Style>
                                     <FontFamily>Tahoma</FontFamily>
                                     <Format>N0</Format>
@@ -12639,7 +12639,7 @@ set @FechaHasta='20170228'
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=(Fields!Elevacion.Value + Fields!Entrega.Value) - (Fields!PeriodoAnteriorEntrega.Value + Fields!PeriodoAnteriorElevacion.Value)</Value>
+                                  <Value>=(Fields!FacElevacion.Value + Fields!FacEntrega.Value) - (Fields!PeriodoAnteriorEntrega.Value + Fields!FacPeriodoAnteriorElevacion.Value)</Value>
                                   <Style>
                                     <FontFamily>Tahoma</FontFamily>
                                     <Format>N0</Format>
@@ -12674,13 +12674,13 @@ set @FechaHasta='20170228'
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=((Fields!Elevacion.Value + Fields!Entrega.Value) - (Fields!PeriodoAnteriorEntrega.Value + Fields!PeriodoAnteriorElevacion.Value)) / (Fields!PeriodoAnteriorEntrega.Value + Fields!PeriodoAnteriorElevacion.Value)</Value>
+                                  <Value>=((Fields!FacElevacion.Value + Fields!FacEntrega.Value) - (Fields!PeriodoAnteriorEntrega.Value + Fields!FacPeriodoAnteriorElevacion.Value)) / (Fields!PeriodoAnteriorEntrega.Value + Fields!FacPeriodoAnteriorElevacion.Value)</Value>
                                   <Style>
                                     <FontFamily>Tahoma</FontFamily>
                                     <Format>0.00%</Format>
                                     <Color>= iif(
 (
-    ((Fields!Elevacion.Value + Fields!Entrega.Value) - (Fields!PeriodoAnteriorEntrega.Value + Fields!PeriodoAnteriorElevacion.Value)) / (Fields!PeriodoAnteriorEntrega.Value + Fields!PeriodoAnteriorElevacion.Value)        
+    ((Fields!FacElevacion.Value + Fields!FacEntrega.Value) - (Fields!FacPeriodoAnteriorEntrega.Value + Fields!FacPeriodoAnteriorElevacion.Value)) / (Fields!FacPeriodoAnteriorEntrega.Value + Fields!FacPeriodoAnteriorElevacion.Value)        
 )&gt;0 
 ,  "Gold","White")</Color>
                                   </Style>
@@ -12718,7 +12718,7 @@ set @FechaHasta='20170228'
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Sum(Fields!Elevacion.Value)</Value>
+                                  <Value>=Sum(Fields!FacElevacion.Value)</Value>
                                   <Style>
                                     <FontFamily>Tahoma</FontFamily>
                                     <FontWeight>Bold</FontWeight>
@@ -12754,7 +12754,7 @@ set @FechaHasta='20170228'
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Sum(Fields!Entrega.Value)</Value>
+                                  <Value>=Sum(Fields!FacEntrega.Value)</Value>
                                   <Style>
                                     <FontFamily>Tahoma</FontFamily>
                                     <FontWeight>Bold</FontWeight>
@@ -12790,7 +12790,7 @@ set @FechaHasta='20170228'
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Sum(Fields!Elevacion.Value) + Sum(Fields!Entrega.Value)</Value>
+                                  <Value>=Sum(Fields!FacElevacion.Value) + Sum(Fields!FacEntrega.Value)</Value>
                                   <Style>
                                     <FontFamily>Tahoma</FontFamily>
                                     <FontWeight>Bold</FontWeight>
@@ -12826,7 +12826,7 @@ set @FechaHasta='20170228'
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Sum(Fields!Entrega.Value) / Fields!TotalEntrega.Value</Value>
+                                  <Value>=Sum(Fields!FacEntrega.Value) / Fields!FacTotalEntrega.Value</Value>
                                   <Style>
                                     <FontFamily>Tahoma</FontFamily>
                                     <Format>0.00%</Format>
@@ -12861,7 +12861,7 @@ set @FechaHasta='20170228'
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Sum(Fields!PeriodoAnteriorEntrega.Value) + Sum(Fields!PeriodoAnteriorElevacion.Value)</Value>
+                                  <Value>=Sum(Fields!FacPeriodoAnteriorEntrega.Value) + Sum(Fields!FacPeriodoAnteriorElevacion.Value)</Value>
                                   <Style>
                                     <FontFamily>Tahoma</FontFamily>
                                     <FontWeight>Bold</FontWeight>
@@ -12897,7 +12897,7 @@ set @FechaHasta='20170228'
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=(Sum(Fields!Elevacion.Value) + Sum(Fields!Entrega.Value)) - (Sum(Fields!PeriodoAnteriorEntrega.Value) + Sum(Fields!PeriodoAnteriorElevacion.Value))</Value>
+                                  <Value>=(Sum(Fields!FacElevacion.Value) + Sum(Fields!FacEntrega.Value)) - (Sum(Fields!PeriodoAnteriorEntrega.Value) + Sum(Fields!FacPeriodoAnteriorElevacion.Value))</Value>
                                   <Style>
                                     <FontFamily>Tahoma</FontFamily>
                                     <FontWeight>Bold</FontWeight>
@@ -12933,13 +12933,13 @@ set @FechaHasta='20170228'
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=((Sum(Fields!Elevacion.Value) + Sum(Fields!Entrega.Value)) - (Sum(Fields!PeriodoAnteriorEntrega.Value) + Sum(Fields!PeriodoAnteriorElevacion.Value))) / (Sum(Fields!PeriodoAnteriorEntrega.Value) + Sum(Fields!PeriodoAnteriorElevacion.Value))</Value>
+                                  <Value>=((Sum(Fields!FacElevacion.Value) + Sum(Fields!FacEntrega.Value)) - (Sum(Fields!PeriodoAnteriorEntrega.Value) + Sum(Fields!FacPeriodoAnteriorElevacion.Value))) / (Sum(Fields!PeriodoAnteriorEntrega.Value) + Sum(Fields!FacPeriodoAnteriorElevacion.Value))</Value>
                                   <Style>
                                     <FontFamily>Tahoma</FontFamily>
                                     <Format>0.00%</Format>
                                     <Color>= iif(
 (
-           ((Sum(Fields!Elevacion.Value) + Sum(Fields!Entrega.Value)) - (Sum(Fields!PeriodoAnteriorEntrega.Value) + Sum(Fields!PeriodoAnteriorElevacion.Value))) / (Sum(Fields!PeriodoAnteriorEntrega.Value) + Sum(Fields!PeriodoAnteriorElevacion.Value))               )&gt;0 
+           ((Sum(Fields!FacElevacion.Value) + Sum(Fields!FacEntrega.Value)) - (Sum(Fields!FacPeriodoAnteriorEntrega.Value) + Sum(Fields!FacPeriodoAnteriorElevacion.Value))) / (Sum(Fields!FacPeriodoAnteriorEntrega.Value) + Sum(Fields!FacPeriodoAnteriorElevacion.Value))               )&gt;0 
 ,  "Gold","White")</Color>
                                   </Style>
                                 </TextRun>
@@ -13169,7 +13169,16 @@ set @FechaHasta='20170228'
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>Elevacion</Value>
+                                  <Value>Fac </Value>
+                                  <Style>
+                                    <FontFamily>Tahoma</FontFamily>
+                                    <FontSize>8pt</FontSize>
+                                    <FontWeight>Normal</FontWeight>
+                                    <Color>White</Color>
+                                  </Style>
+                                </TextRun>
+                                <TextRun>
+                                  <Value>Elev</Value>
                                   <Style>
                                     <FontFamily>Tahoma</FontFamily>
                                     <FontSize>8pt</FontSize>
@@ -13205,7 +13214,7 @@ set @FechaHasta='20170228'
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>Entrega</Value>
+                                  <Value>Fac Entreg</Value>
                                   <Style>
                                     <FontFamily>Tahoma</FontFamily>
                                     <FontSize>8pt</FontSize>
@@ -13241,7 +13250,7 @@ set @FechaHasta='20170228'
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>Buques</Value>
+                                  <Value>Fac Buques</Value>
                                   <Style>
                                     <FontFamily>Tahoma</FontFamily>
                                     <FontSize>8pt</FontSize>
@@ -13460,7 +13469,7 @@ set @FechaHasta='20170228'
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Sum(Fields!Elevacion.Value)</Value>
+                                  <Value>=Sum(Fields!FacElevacion.Value)</Value>
                                   <Style>
                                     <FontFamily>Tahoma</FontFamily>
                                     <Format>N0</Format>
@@ -13495,7 +13504,7 @@ set @FechaHasta='20170228'
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Sum(Fields!Entrega.Value)</Value>
+                                  <Value>=Sum(Fields!FacEntrega.Value)</Value>
                                   <Style>
                                     <FontFamily>Tahoma</FontFamily>
                                     <Format>N0</Format>
@@ -13530,7 +13539,7 @@ set @FechaHasta='20170228'
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Sum(Fields!Buques.Value)</Value>
+                                  <Value>=Sum(Fields!FacBuques.Value)</Value>
                                   <Style>
                                     <FontFamily>Tahoma</FontFamily>
                                     <Format>N0</Format>
@@ -13565,7 +13574,7 @@ set @FechaHasta='20170228'
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Sum(Fields!Elevacion.Value) + Sum(Fields!Entrega.Value) + Sum(Fields!Buques.Value)</Value>
+                                  <Value>=Sum(Fields!FacElevacion.Value) + Sum(Fields!FacEntrega.Value) + Sum(Fields!FacBuques.Value)</Value>
                                   <Style>
                                     <FontFamily>Tahoma</FontFamily>
                                     <Format>N0</Format>
@@ -13600,7 +13609,7 @@ set @FechaHasta='20170228'
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=(Fields!Entrega.Value + Fields!Elevacion.Value + Fields!Buques.Value) / (Fields!TotalEntrega.Value + Fields!TotalElevacion.Value + Fields!TotalBuques.Value)</Value>
+                                  <Value>=(Fields!FacEntrega.Value + Fields!FacElevacion.Value + Fields!FacBuques.Value) / (Fields!FacTotalEntrega.Value + Fields!FacTotalElevacion.Value + Fields!FacTotalBuques.Value)</Value>
                                   <Style>
                                     <FontFamily>Tahoma</FontFamily>
                                     <Format>0.00%</Format>
@@ -13635,7 +13644,7 @@ set @FechaHasta='20170228'
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Fields!PeriodoAnteriorEntrega.Value + Fields!PeriodoAnteriorElevacion.Value + Fields!PeriodoAnteriorBuques.Value</Value>
+                                  <Value>=Fields!FacPeriodoAnteriorEntrega.Value + Fields!FacPeriodoAnteriorElevacion.Value + Fields!FacPeriodoAnteriorBuques.Value</Value>
                                   <Style>
                                     <FontFamily>Tahoma</FontFamily>
                                     <Format>N0</Format>
@@ -13670,7 +13679,7 @@ set @FechaHasta='20170228'
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=(Fields!Elevacion.Value + Fields!Entrega.Value + Fields!Buques.Value) - (Fields!PeriodoAnteriorEntrega.Value + Fields!PeriodoAnteriorElevacion.Value + Fields!PeriodoAnteriorBuques.Value)</Value>
+                                  <Value>=(Fields!FacElevacion.Value + Fields!FacEntrega.Value + Fields!FacBuques.Value) - (Fields!FacPeriodoAnteriorEntrega.Value + Fields!FacPeriodoAnteriorElevacion.Value + Fields!FacPeriodoAnteriorBuques.Value)</Value>
                                   <Style>
                                     <FontFamily>Tahoma</FontFamily>
                                     <Format>N0</Format>
@@ -13705,7 +13714,7 @@ set @FechaHasta='20170228'
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=((Fields!Elevacion.Value + Fields!Entrega.Value + Fields!Buques.Value) - (Fields!PeriodoAnteriorEntrega.Value + Fields!PeriodoAnteriorElevacion.Value)) / (Fields!PeriodoAnteriorEntrega.Value + Fields!PeriodoAnteriorElevacion.Value + Fields!PeriodoAnteriorBuques.Value)</Value>
+                                  <Value>=((Fields!FacElevacion.Value + Fields!FacEntrega.Value + Fields!FacBuques.Value) - (Fields!FacPeriodoAnteriorEntrega.Value + Fields!FacPeriodoAnteriorElevacion.Value)) / (Fields!FacPeriodoAnteriorEntrega.Value + Fields!FacPeriodoAnteriorElevacion.Value + Fields!FacPeriodoAnteriorBuques.Value)</Value>
                                   <Style>
                                     <FontFamily>Tahoma</FontFamily>
                                     <Format>0.00%</Format>
@@ -13748,7 +13757,7 @@ set @FechaHasta='20170228'
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Sum(Fields!Elevacion.Value)</Value>
+                                  <Value>=Sum(Fields!FacElevacion.Value)</Value>
                                   <Style>
                                     <FontFamily>Tahoma</FontFamily>
                                     <FontWeight>Bold</FontWeight>
@@ -13784,7 +13793,7 @@ set @FechaHasta='20170228'
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Sum(Fields!Entrega.Value)</Value>
+                                  <Value>=Sum(Fields!FacEntrega.Value)</Value>
                                   <Style>
                                     <FontFamily>Tahoma</FontFamily>
                                     <FontWeight>Bold</FontWeight>
@@ -13820,7 +13829,7 @@ set @FechaHasta='20170228'
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Sum(Fields!Buques.Value)</Value>
+                                  <Value>=Sum(Fields!FacBuques.Value)</Value>
                                   <Style>
                                     <FontFamily>Tahoma</FontFamily>
                                     <FontWeight>Bold</FontWeight>
@@ -13856,7 +13865,7 @@ set @FechaHasta='20170228'
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Sum(Fields!Elevacion.Value) + Sum(Fields!Entrega.Value) + Sum(Fields!Buques.Value)</Value>
+                                  <Value>=Sum(Fields!FacElevacion.Value) + Sum(Fields!FacEntrega.Value) + Sum(Fields!FacBuques.Value)</Value>
                                   <Style>
                                     <FontFamily>Tahoma</FontFamily>
                                     <FontWeight>Bold</FontWeight>
@@ -13892,7 +13901,7 @@ set @FechaHasta='20170228'
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=(Fields!Entrega.Value + Fields!Elevacion.Value + Fields!Buques.Value) / (Fields!TotalEntrega.Value + Fields!TotalElevacion.Value + Fields!TotalBuques.Value)</Value>
+                                  <Value>=(Fields!FacEntrega.Value + Fields!FacElevacion.Value + Fields!FacBuques.Value) / (Fields!FacTotalEntrega.Value + Fields!FacTotalElevacion.Value + Fields!FacTotalBuques.Value)</Value>
                                   <Style>
                                     <FontFamily>Tahoma</FontFamily>
                                     <Format>0.00%</Format>
@@ -13927,7 +13936,7 @@ set @FechaHasta='20170228'
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Sum(Fields!PeriodoAnteriorEntrega.Value) + Sum(Fields!PeriodoAnteriorElevacion.Value) + Sum(Fields!PeriodoAnteriorBuques.Value)</Value>
+                                  <Value>=Sum(Fields!FacPeriodoAnteriorEntrega.Value) + Sum(Fields!FacPeriodoAnteriorElevacion.Value) + Sum(Fields!FacPeriodoAnteriorBuques.Value)</Value>
                                   <Style>
                                     <FontFamily>Tahoma</FontFamily>
                                     <FontWeight>Bold</FontWeight>
@@ -13963,7 +13972,7 @@ set @FechaHasta='20170228'
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=(Sum(Fields!Elevacion.Value) + Sum(Fields!Entrega.Value) + Sum(Fields!Buques.Value)) - (Sum(Fields!PeriodoAnteriorEntrega.Value) + Sum(Fields!PeriodoAnteriorElevacion.Value) + Sum(Fields!PeriodoAnteriorBuques.Value))</Value>
+                                  <Value>=(Sum(Fields!FacElevacion.Value) + Sum(Fields!FacEntrega.Value) + Sum(Fields!FacBuques.Value)) - (Sum(Fields!FacPeriodoAnteriorEntrega.Value) + Sum(Fields!FacPeriodoAnteriorElevacion.Value) + Sum(Fields!FacPeriodoAnteriorBuques.Value))</Value>
                                   <Style>
                                     <FontFamily>Tahoma</FontFamily>
                                     <FontWeight>Bold</FontWeight>
@@ -13999,7 +14008,7 @@ set @FechaHasta='20170228'
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=((Sum(Fields!Elevacion.Value) + Sum(Fields!Entrega.Value) + Sum(Fields!Buques.Value)) - (Sum(Fields!PeriodoAnteriorEntrega.Value) + Sum(Fields!PeriodoAnteriorElevacion.Value))) / (Sum(Fields!PeriodoAnteriorEntrega.Value) + Sum(Fields!PeriodoAnteriorElevacion.Value) + Sum(Fields!PeriodoAnteriorBuques.Value))</Value>
+                                  <Value>=((Sum(Fields!FacElevacion.Value) + Sum(Fields!FacEntrega.Value) + Sum(Fields!FacBuques.Value)) - (Sum(Fields!FacPeriodoAnteriorEntrega.Value) + Sum(Fields!FacPeriodoAnteriorElevacion.Value))) / (Sum(Fields!FacPeriodoAnteriorEntrega.Value) + Sum(Fields!FacPeriodoAnteriorElevacion.Value) + Sum(Fields!FacPeriodoAnteriorBuques.Value))</Value>
                                   <Style>
                                     <FontFamily>Tahoma</FontFamily>
                                     <Format>0.00%</Format>
