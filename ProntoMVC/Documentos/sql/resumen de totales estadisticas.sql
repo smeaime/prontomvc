@@ -162,7 +162,7 @@ select
 			   
 			
 			  sum(
-				case when FechaDescarga between @FechaDesdeAnterior and @FechaHastaAnterior  
+				case when FechaDescarga between @FechaDesde and @FechaHasta
 				then DETFAC.PrecioUnitario * NetoFinal / 1000
 				else 0 	end
 			   ) 
