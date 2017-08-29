@@ -39,6 +39,7 @@ Imports ClaseMigrar.SQLdinamico
 
 Imports System.Collections.Generic
 
+Imports System.Data.Entity.Validation
 
 Imports System.Data.Entity.SqlServer
 
@@ -22693,7 +22694,26 @@ Public Class UserDatosExtendidosManager
                 ue.TextoAuxiliar = listado
             End If
 
-            db.SaveChanges()
+            Try
+                db.SaveChanges()
+
+            Catch ex1 As DbEntityValidationException
+
+                '            For Each (var eve In e.EntityValidationErrors)
+
+                '    Console.WriteLine("Entity of type \"{0}\" in state \"{1}\" has the following validation errors:",
+                '        eve.Entry.Entity.GetType().Name, eve.Entry.State);
+                '    foreach(var ve In eve.ValidationErrors)
+                '    {
+                '        Console.WriteLine("- Property: \"{0}\", Error: \"{1}\"",
+                '            ve.PropertyName, ve.ErrorMessage);
+                '    }
+                'Next
+                Throw
+            Catch ex As Exception
+                Throw ex
+            End Try
+
         End Using
     End Function
 
