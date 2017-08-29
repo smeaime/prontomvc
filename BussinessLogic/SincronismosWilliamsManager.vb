@@ -24479,7 +24479,7 @@ Namespace Pronto.ERP.Bll
                 sb &= "&" & cero.ToString.PadLeft(5)                         '24 -Porcentaje Merma Zarandeo	Numérico	5	Hasta 7 posiciones para parte entera y 4 para decimales. Cero por defecto.
                 sb &= "&" & cero.ToString.PadLeft(5)                         '25 -Porcentaje Merma Volátil	Numérico	5	Hasta 7 posiciones para parte entera y 4 para decimales. Cero por defecto.
 
-                ddddd
+
                 sb &= "&" & Int(iisNull(dr("Otras"), 0)).ToString.PadLeft(10)            '26 -Kilos Merma Zarandeo	Numérico	10	Kilos de Merma registrados por Zaranda. Valor entero. Cero por defecto.
                 sb &= "&" & cero.ToString.PadLeft(10)                        '27 -Kilos Merma Volátil	Numérico	10	Kilos de Merma registrados por Manipuleo. Valor entero. Cero por defecto.
                 sb &= "&" & cero.ToString.PadLeft(10)                         '28 -Kilos Servicio	Numérico	10	Valor entero. Se completa con Cero por defecto.
