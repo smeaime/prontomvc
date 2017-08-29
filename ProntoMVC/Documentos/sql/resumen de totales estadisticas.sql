@@ -55,12 +55,17 @@ select
 , sum (Elevacion)  OVER () as TotalElevacion
 , sum (Entrega)  OVER () as TotalEntrega
 , sum (Buques)  OVER () as TotalBuques
+, sum (FacElevacion)  OVER () as FacTotalElevacion
+, sum (FacEntrega)  OVER () as FacTotalEntrega
+, sum (FacBuques)  OVER () as FacTotalBuques
 
 from
 (
 select 
 
 sucursal,
+
+
 sum(
 				case when Modo='SI'
 				then NetoFinal
@@ -97,7 +102,39 @@ sum(
 
 
 
-sum 	(Facturado) as Facturado
+			   sum(
+				case when Modo='SI'
+				then Facturado
+				else 0 	end
+			   ) as FacElevacion,
+sum(
+				case when Modo='NO'
+				then Facturado
+				else 0 	end
+			   ) as FacEntrega,
+sum(
+				case when Modo='Buque'
+				then Facturado
+				else 0 	end
+			   ) as FacBuques,
+
+sum(
+				case when Modo='NO'
+				then FacturadoAnterior  
+				else 0 	end
+			   ) as FacPeriodoAnteriorEntrega,
+
+sum(
+				case when Modo='SI'
+				then FacturadoAnterior  
+				else 0 	end
+			   ) as FacPeriodoAnteriorElevacion,
+
+sum(
+				case when Modo='Buque'
+				then FacturadoAnterior  
+				else 0 	end
+			   ) as FacPeriodoAnteriorBuques
 
 
 
@@ -129,7 +166,15 @@ select
 				then DETFAC.PrecioUnitario * NetoFinal / 1000
 				else 0 	end
 			   ) 
-			    as Facturado
+			    as Facturado,
+			
+			
+			  sum(
+				case when FechaDescarga between @FechaDesdeAnterior and @FechaHastaAnterior  
+				then DETFAC.PrecioUnitario * NetoFinal / 1000
+				else 0 	end
+			   ) 
+			    as FacturadoAnterior
 			
 
 
@@ -201,7 +246,19 @@ select
 				else 0 	end
 			   ) as PeriodoAnterior           ,
 
-			   0 as Facturado
+			  sum(
+				case when i.FechaIngreso >= @FechaDesde
+				then DETFAC.PrecioUnitario * i.cantidad / 1000
+				else 0 	end
+			   ) 
+			       as Facturado,
+			   
+			  sum(
+				case when i.FechaIngreso <= @FechaHastaAnterior 
+				then DETFAC.PrecioUnitario * i.cantidad / 1000
+				else 0 	end
+			   ) 
+			    as FacturadoAnterior
 			         
 			
 
