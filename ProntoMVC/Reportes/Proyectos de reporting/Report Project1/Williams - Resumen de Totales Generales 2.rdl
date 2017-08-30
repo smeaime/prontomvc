@@ -7555,9 +7555,12 @@ set @FechaHasta='20170228'
                         </Border>
                       </Style>
                       <ChartMarker>
-                        <Type>Square</Type>
                         <Size>4pt</Size>
-                        <Style />
+                        <Style>
+                          <Border>
+                            <Width>0.25pt</Width>
+                          </Border>
+                        </Style>
                       </ChartMarker>
                       <DataElementOutput>Output</DataElementOutput>
                     </ChartDataPoint>
@@ -18142,21 +18145,6 @@ set @FechaHasta='20170228'
       </DefaultValue>
       <Prompt>bMostrar5</Prompt>
     </ReportParameter>
-    <ReportParameter Name="ModoExportacion">
-      <DataType>String</DataType>
-      <Nullable>true</Nullable>
-      <Prompt>ModoExportacion</Prompt>
-    </ReportParameter>
-    <ReportParameter Name="puntoventa">
-      <DataType>Integer</DataType>
-      <Nullable>true</Nullable>
-      <Prompt>puntoventa</Prompt>
-    </ReportParameter>
-    <ReportParameter Name="idArticulo">
-      <DataType>Integer</DataType>
-      <Nullable>true</Nullable>
-      <Prompt>ReportParameter1</Prompt>
-    </ReportParameter>
     <ReportParameter Name="idVendedor">
       <DataType>Integer</DataType>
       <Nullable>true</Nullable>
@@ -18182,6 +18170,11 @@ set @FechaHasta='20170228'
       <Nullable>true</Nullable>
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
+    <ReportParameter Name="idArticulo">
+      <DataType>Integer</DataType>
+      <Nullable>true</Nullable>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
     <ReportParameter Name="idProcedencia">
       <DataType>Integer</DataType>
       <Nullable>true</Nullable>
@@ -18196,6 +18189,16 @@ set @FechaHasta='20170228'
       <DataType>Integer</DataType>
       <Nullable>true</Nullable>
       <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="ModoExportacion">
+      <DataType>String</DataType>
+      <Nullable>true</Nullable>
+      <Prompt>ModoExportacion</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="puntoventa">
+      <DataType>Integer</DataType>
+      <Nullable>true</Nullable>
+      <Prompt>puntoventa</Prompt>
     </ReportParameter>
   </ReportParameters>
   <ReportParametersLayout>
@@ -18251,57 +18254,57 @@ set @FechaHasta='20170228'
         <CellDefinition>
           <ColumnIndex>1</ColumnIndex>
           <RowIndex>4</RowIndex>
-          <ParameterName>ModoExportacion</ParameterName>
-        </CellDefinition>
-        <CellDefinition>
-          <ColumnIndex>0</ColumnIndex>
-          <RowIndex>5</RowIndex>
-          <ParameterName>puntoventa</ParameterName>
-        </CellDefinition>
-        <CellDefinition>
-          <ColumnIndex>1</ColumnIndex>
-          <RowIndex>5</RowIndex>
-          <ParameterName>idArticulo</ParameterName>
-        </CellDefinition>
-        <CellDefinition>
-          <ColumnIndex>0</ColumnIndex>
-          <RowIndex>6</RowIndex>
           <ParameterName>idVendedor</ParameterName>
         </CellDefinition>
         <CellDefinition>
-          <ColumnIndex>1</ColumnIndex>
-          <RowIndex>6</RowIndex>
+          <ColumnIndex>0</ColumnIndex>
+          <RowIndex>5</RowIndex>
           <ParameterName>idCorredor</ParameterName>
         </CellDefinition>
         <CellDefinition>
-          <ColumnIndex>0</ColumnIndex>
-          <RowIndex>7</RowIndex>
+          <ColumnIndex>1</ColumnIndex>
+          <RowIndex>5</RowIndex>
           <ParameterName>idDestinatario</ParameterName>
         </CellDefinition>
         <CellDefinition>
-          <ColumnIndex>1</ColumnIndex>
-          <RowIndex>7</RowIndex>
+          <ColumnIndex>0</ColumnIndex>
+          <RowIndex>6</RowIndex>
           <ParameterName>idIntermediario</ParameterName>
         </CellDefinition>
         <CellDefinition>
-          <ColumnIndex>0</ColumnIndex>
-          <RowIndex>8</RowIndex>
+          <ColumnIndex>1</ColumnIndex>
+          <RowIndex>6</RowIndex>
           <ParameterName>idRemComercial</ParameterName>
         </CellDefinition>
         <CellDefinition>
+          <ColumnIndex>0</ColumnIndex>
+          <RowIndex>7</RowIndex>
+          <ParameterName>idArticulo</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
           <ColumnIndex>1</ColumnIndex>
-          <RowIndex>8</RowIndex>
+          <RowIndex>7</RowIndex>
           <ParameterName>idProcedencia</ParameterName>
         </CellDefinition>
         <CellDefinition>
           <ColumnIndex>0</ColumnIndex>
-          <RowIndex>9</RowIndex>
+          <RowIndex>8</RowIndex>
           <ParameterName>idDestino</ParameterName>
         </CellDefinition>
         <CellDefinition>
           <ColumnIndex>1</ColumnIndex>
-          <RowIndex>9</RowIndex>
+          <RowIndex>8</RowIndex>
           <ParameterName>AplicarANDuORalFiltro</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>0</ColumnIndex>
+          <RowIndex>9</RowIndex>
+          <ParameterName>ModoExportacion</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>1</ColumnIndex>
+          <RowIndex>9</RowIndex>
+          <ParameterName>puntoventa</ParameterName>
         </CellDefinition>
       </CellDefinitions>
     </GridLayoutDefinition>
