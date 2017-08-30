@@ -29,6 +29,14 @@ Namespace ProntoMVC.Reportes
                 txtFechaHasta.Text = Today
 
 
+                Try
+                    BindTypeDropDown()
+                Catch ex As Exception
+                    MandarMailDeError(ex)
+                End Try
+
+
+
                 refrescaPeriodo()
                 BloqueosDeEdicion()
 
@@ -103,6 +111,50 @@ Namespace ProntoMVC.Reportes
 
 
         End Sub
+
+
+
+        Private Sub BindTypeDropDown()
+            cmbPuntoVenta.DataSource = PuntoVentaWilliams.IniciaComboPuntoVentaWilliams3(HFSC.Value)
+            'cmbPuntoVenta.DataSource = EntidadManager.ExecDinamico(HFSC.Value, "SELECT DISTINCT PuntoVenta FROM PuntosVenta WHERE not PuntoVenta is null")
+            cmbPuntoVenta.DataTextField = "PuntoVenta"
+            cmbPuntoVenta.DataValueField = "PuntoVenta"
+            cmbPuntoVenta.DataBind()
+            cmbPuntoVenta.SelectedIndex = 0
+            cmbPuntoVenta.Items.Insert(0, New ListItem("Todos los puntos de venta", -1))
+            cmbPuntoVenta.SelectedIndex = 0
+
+            Try
+                If EmpleadoManager.GetItem(HFSC.Value, Session(SESSIONPRONTO_glbIdUsuario)).PuntoVentaAsociado > 0 Then
+                    Dim pventa = EmpleadoManager.GetItem(HFSC.Value, Session(SESSIONPRONTO_glbIdUsuario)).PuntoVentaAsociado 'sector del confeccionó
+                    BuscaTextoEnCombo(cmbPuntoVenta, pventa)
+                    If iisNull(pventa, 0) <> 0 Then cmbPuntoVenta.Enabled = False 'si tiene un punto de venta, que no lo pueda elegir
+                End If
+
+            Catch ex As Exception
+                ErrHandler2.WriteError(ex)
+            End Try
+
+
+
+
+            'agregar al where que aparezca la razon social de este cliente
+            Dim rs As String
+            Try
+
+                rs = UserDatosExtendidosManager.TraerRazonSocialDelUsuario(Session(SESSIONPRONTO_UserId), ConexBDLmaster, HFSC.Value)
+            Catch ex As Exception
+                'como no encuentro el usuario en la tabla de datos adicionales de la bdlmaster, 
+                ' uso el nombre del usuario como razon social que esperaba encontrar en esa dichosa tabla
+                ErrHandler2.WriteError(ex)
+                rs = Session(SESSIONPRONTO_UserName)
+            End Try
+
+
+
+
+        End Sub
+
 
 
         Protected Sub cmbPeriodo_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles cmbPeriodo.SelectedIndexChanged
