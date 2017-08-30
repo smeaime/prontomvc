@@ -503,7 +503,7 @@ warning 6002: The table/view 'BDLmaster.dbo.vw_aspnet_UsersInRoles' does not hav
           <Property Name="CUIT" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
           <Property Name="PreCUIT" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
           <Property Name="UltimaBaseAccedida" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
-          <Property Name="TextoAuxiliar" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="TextoAuxiliar" Type="String" MaxLength="8000" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="aspnet_Applications">
           <Key>

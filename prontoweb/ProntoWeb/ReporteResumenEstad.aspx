@@ -590,7 +590,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
     <asp:UpdatePanel ID="UpdatePanel1" runat="server">
         <ContentTemplate>
             <asp:Label ID="lblErrores" CssClass="Alerta" runat="server" Font-Size="12pt" Enabled="false"></asp:Label>
-            <div style="background-color: #FFFFFF; width: 800px">
+            <div style="width: 800px">
                 <rsweb:ReportViewer ID="ReportViewer1" runat="server" Font-Names="Verdana" Font-Size="8pt"
                     Width="100%" Visible="true" ZoomMode="PageWidth" Height="1200px" SizeToReportContent="True">
                     <%--        <LocalReport ReportPath="ProntoWeb\Informes\prueba2.rdl">
