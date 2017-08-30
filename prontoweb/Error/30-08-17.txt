@@ -420,3 +420,58 @@ Hubo un error al generar el informe. System.InvalidOperationException: ExecuteRe
    en System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
 BusinessLogic
 __________________________
+
+Log Entry : 
+08/30/2017 13:25:47
+Error in: http://localhost:50769/ProntoWeb/Principal.aspx. Error Message:Mariano esta logueado, pero lo redirijo al login porque faltan los datos de session. No deberia mejor mandarlo a SeleccionarEmpresa? Ademas, no hago el LogOut y le queda el cookie!!!
+__________________________
+
+Log Entry : 
+08/30/2017 13:25:48
+Error in: http://localhost:50769/ProntoWeb/CartasDePortes.aspx?tipo=Todas. Error Message:Mariano
+__________________________
+
+Log Entry : 
+08/30/2017 13:30:37
+Error in: http://localhost:50769/ProntoWeb/ReporteResumenEstad.aspx. Error Message:Mariano esta logueado, pero lo redirijo al login porque faltan los datos de session. No deberia mejor mandarlo a SeleccionarEmpresa? Ademas, no hago el LogOut y le queda el cookie!!!
+__________________________
+
+Log Entry : 
+08/30/2017 13:30:38
+Error in: http://localhost:50769/ProntoWeb/ReporteResumenEstad.aspx. Error Message:Vamos bien?
+__________________________
+
+Log Entry : 
+08/30/2017 13:30:38
+Error in: http://localhost:50769/ProntoWeb/ReporteResumenEstad.aspx. Error Message:http://bdlconsultores.sytes.net:10080/ReportServer - administrador - .xza2190lkm. - 
+__________________________
+
+Log Entry : 
+08/30/2017 13:30:39
+Error in: http://localhost:50769/ProntoWeb/ReporteResumenEstad.aspx. Error Message:parece
+__________________________
+
+Log Entry : 
+08/30/2017 13:30:39
+Error in: http://localhost:50769/ProntoWeb/ReporteResumenEstad.aspx. Error Message:Cli 3
+__________________________
+
+Log Entry : 
+08/30/2017 13:36:22
+Error in: http://localhost:50769/ProntoWeb/ReporteResumenEstad.aspx. Error Message:Vamos bien?
+__________________________
+
+Log Entry : 
+08/30/2017 13:36:22
+Error in: http://localhost:50769/ProntoWeb/ReporteResumenEstad.aspx. Error Message:http://bdlconsultores.sytes.net:10080/ReportServer - administrador - .xza2190lkm. - 
+__________________________
+
+Log Entry : 
+08/30/2017 13:36:22
+Error in: http://localhost:50769/ProntoWeb/ReporteResumenEstad.aspx. Error Message:parece
+__________________________
+
+Log Entry : 
+08/30/2017 13:36:23
+Error in: http://localhost:50769/ProntoWeb/ReporteResumenEstad.aspx. Error Message:Cli 3
+__________________________
