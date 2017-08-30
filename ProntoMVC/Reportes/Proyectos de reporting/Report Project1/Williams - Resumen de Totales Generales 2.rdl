@@ -6733,7 +6733,11 @@ set @FechaHasta='20170228'
                       <ChartDataLabel>
                         <Style />
                       </ChartDataLabel>
-                      <Style />
+                      <Style>
+                        <Border>
+                          <Width>2pt</Width>
+                        </Border>
+                      </Style>
                       <ChartMarker>
                         <Style />
                       </ChartMarker>
@@ -6770,7 +6774,11 @@ set @FechaHasta='20170228'
                       <ChartDataLabel>
                         <Style />
                       </ChartDataLabel>
-                      <Style />
+                      <Style>
+                        <Border>
+                          <Width>2pt</Width>
+                        </Border>
+                      </Style>
                       <ChartMarker>
                         <Style />
                       </ChartMarker>
@@ -6819,6 +6827,7 @@ set @FechaHasta='20170228'
                         <Color>#5c5c5c</Color>
                       </Style>
                     </ChartAxisTitle>
+                    <Interval>1</Interval>
                     <ChartMajorGridLines>
                       <Enabled>False</Enabled>
                       <Style>
@@ -7146,7 +7155,11 @@ set @FechaHasta='20170228'
                       <ChartDataLabel>
                         <Style />
                       </ChartDataLabel>
-                      <Style />
+                      <Style>
+                        <Border>
+                          <Width>2pt</Width>
+                        </Border>
+                      </Style>
                       <ChartMarker>
                         <Style />
                       </ChartMarker>
@@ -7192,6 +7205,7 @@ set @FechaHasta='20170228'
                         <Color>#5c5c5c</Color>
                       </Style>
                     </ChartAxisTitle>
+                    <Interval>1</Interval>
                     <ChartMajorGridLines>
                       <Enabled>False</Enabled>
                       <Style>
@@ -7980,7 +7994,11 @@ set @FechaHasta='20170228'
                       <ChartDataLabel>
                         <Style />
                       </ChartDataLabel>
-                      <Style />
+                      <Style>
+                        <Border>
+                          <Width>2pt</Width>
+                        </Border>
+                      </Style>
                       <ChartMarker>
                         <Style />
                       </ChartMarker>
@@ -8017,7 +8035,11 @@ set @FechaHasta='20170228'
                       <ChartDataLabel>
                         <Style />
                       </ChartDataLabel>
-                      <Style />
+                      <Style>
+                        <Border>
+                          <Width>2pt</Width>
+                        </Border>
+                      </Style>
                       <ChartMarker>
                         <Style />
                       </ChartMarker>
@@ -8066,6 +8088,7 @@ set @FechaHasta='20170228'
                         <Color>#5c5c5c</Color>
                       </Style>
                     </ChartAxisTitle>
+                    <Interval>1</Interval>
                     <ChartMajorGridLines>
                       <Enabled>False</Enabled>
                       <Style>
@@ -8411,7 +8434,11 @@ set @FechaHasta='20170228'
                       <ChartDataLabel>
                         <Style />
                       </ChartDataLabel>
-                      <Style />
+                      <Style>
+                        <Border>
+                          <Width>2pt</Width>
+                        </Border>
+                      </Style>
                       <ChartMarker>
                         <Style />
                       </ChartMarker>
@@ -8448,7 +8475,11 @@ set @FechaHasta='20170228'
                       <ChartDataLabel>
                         <Style />
                       </ChartDataLabel>
-                      <Style />
+                      <Style>
+                        <Border>
+                          <Width>2pt</Width>
+                        </Border>
+                      </Style>
                       <ChartMarker>
                         <Style />
                       </ChartMarker>
@@ -9742,7 +9773,11 @@ set @FechaHasta='20170228'
                       <ChartDataLabel>
                         <Style />
                       </ChartDataLabel>
-                      <Style />
+                      <Style>
+                        <Border>
+                          <Width>2pt</Width>
+                        </Border>
+                      </Style>
                       <ChartMarker>
                         <Style />
                       </ChartMarker>
@@ -9779,7 +9814,11 @@ set @FechaHasta='20170228'
                       <ChartDataLabel>
                         <Style />
                       </ChartDataLabel>
-                      <Style />
+                      <Style>
+                        <Border>
+                          <Width>2pt</Width>
+                        </Border>
+                      </Style>
                       <ChartMarker>
                         <Style />
                       </ChartMarker>
@@ -9828,6 +9867,7 @@ set @FechaHasta='20170228'
                         <Color>#5c5c5c</Color>
                       </Style>
                     </ChartAxisTitle>
+                    <Interval>1</Interval>
                     <ChartMajorGridLines>
                       <Enabled>False</Enabled>
                       <Style>
@@ -15489,7 +15529,11 @@ set @FechaHasta='20170228'
                       <ChartDataLabel>
                         <Style />
                       </ChartDataLabel>
-                      <Style />
+                      <Style>
+                        <Border>
+                          <Width>2pt</Width>
+                        </Border>
+                      </Style>
                       <ChartMarker>
                         <Style />
                       </ChartMarker>
@@ -15526,7 +15570,11 @@ set @FechaHasta='20170228'
                       <ChartDataLabel>
                         <Style />
                       </ChartDataLabel>
-                      <Style />
+                      <Style>
+                        <Border>
+                          <Width>2pt</Width>
+                        </Border>
+                      </Style>
                       <ChartMarker>
                         <Style />
                       </ChartMarker>
@@ -15575,6 +15623,7 @@ set @FechaHasta='20170228'
                         <Color>#5c5c5c</Color>
                       </Style>
                     </ChartAxisTitle>
+                    <Interval>1</Interval>
                     <ChartMajorGridLines>
                       <Enabled>False</Enabled>
                       <Style>
@@ -15902,7 +15951,11 @@ set @FechaHasta='20170228'
                       <ChartDataLabel>
                         <Style />
                       </ChartDataLabel>
-                      <Style />
+                      <Style>
+                        <Border>
+                          <Width>2pt</Width>
+                        </Border>
+                      </Style>
                       <ChartMarker>
                         <Style />
                       </ChartMarker>
@@ -15948,6 +16001,7 @@ set @FechaHasta='20170228'
                         <Color>#5c5c5c</Color>
                       </Style>
                     </ChartAxisTitle>
+                    <Interval>1</Interval>
                     <ChartMajorGridLines>
                       <Enabled>False</Enabled>
                       <Style>
@@ -16291,7 +16345,11 @@ set @FechaHasta='20170228'
                       <ChartDataLabel>
                         <Style />
                       </ChartDataLabel>
-                      <Style />
+                      <Style>
+                        <Border>
+                          <Width>2pt</Width>
+                        </Border>
+                      </Style>
                       <ChartMarker>
                         <Style />
                       </ChartMarker>
@@ -16328,7 +16386,11 @@ set @FechaHasta='20170228'
                       <ChartDataLabel>
                         <Style />
                       </ChartDataLabel>
-                      <Style />
+                      <Style>
+                        <Border>
+                          <Width>2pt</Width>
+                        </Border>
+                      </Style>
                       <ChartMarker>
                         <Style />
                       </ChartMarker>
@@ -16377,6 +16439,7 @@ set @FechaHasta='20170228'
                         <Color>#5c5c5c</Color>
                       </Style>
                     </ChartAxisTitle>
+                    <Interval>1</Interval>
                     <ChartMajorGridLines>
                       <Enabled>False</Enabled>
                       <Style>
@@ -16721,7 +16784,11 @@ set @FechaHasta='20170228'
                       <ChartDataLabel>
                         <Style />
                       </ChartDataLabel>
-                      <Style />
+                      <Style>
+                        <Border>
+                          <Width>2pt</Width>
+                        </Border>
+                      </Style>
                       <ChartMarker>
                         <Style />
                       </ChartMarker>
@@ -16758,7 +16825,11 @@ set @FechaHasta='20170228'
                       <ChartDataLabel>
                         <Style />
                       </ChartDataLabel>
-                      <Style />
+                      <Style>
+                        <Border>
+                          <Width>2pt</Width>
+                        </Border>
+                      </Style>
                       <ChartMarker>
                         <Style />
                       </ChartMarker>
@@ -16807,6 +16878,7 @@ set @FechaHasta='20170228'
                         <Color>#5c5c5c</Color>
                       </Style>
                     </ChartAxisTitle>
+                    <Interval>1</Interval>
                     <ChartMajorGridLines>
                       <Enabled>False</Enabled>
                       <Style>
@@ -17128,7 +17200,11 @@ set @FechaHasta='20170228'
                       <ChartDataLabel>
                         <Style />
                       </ChartDataLabel>
-                      <Style />
+                      <Style>
+                        <Border>
+                          <Width>2pt</Width>
+                        </Border>
+                      </Style>
                       <ChartMarker>
                         <Style />
                       </ChartMarker>
@@ -17165,7 +17241,11 @@ set @FechaHasta='20170228'
                       <ChartDataLabel>
                         <Style />
                       </ChartDataLabel>
-                      <Style />
+                      <Style>
+                        <Border>
+                          <Width>2pt</Width>
+                        </Border>
+                      </Style>
                       <ChartMarker>
                         <Style />
                       </ChartMarker>
@@ -17214,6 +17294,7 @@ set @FechaHasta='20170228'
                         <Color>#5c5c5c</Color>
                       </Style>
                     </ChartAxisTitle>
+                    <Interval>1</Interval>
                     <ChartMajorGridLines>
                       <Enabled>False</Enabled>
                       <Style>
@@ -17535,7 +17616,11 @@ set @FechaHasta='20170228'
                       <ChartDataLabel>
                         <Style />
                       </ChartDataLabel>
-                      <Style />
+                      <Style>
+                        <Border>
+                          <Width>2pt</Width>
+                        </Border>
+                      </Style>
                       <ChartMarker>
                         <Style />
                       </ChartMarker>
@@ -17572,7 +17657,11 @@ set @FechaHasta='20170228'
                       <ChartDataLabel>
                         <Style />
                       </ChartDataLabel>
-                      <Style />
+                      <Style>
+                        <Border>
+                          <Width>2pt</Width>
+                        </Border>
+                      </Style>
                       <ChartMarker>
                         <Style />
                       </ChartMarker>
@@ -17621,6 +17710,7 @@ set @FechaHasta='20170228'
                         <Color>#5c5c5c</Color>
                       </Style>
                     </ChartAxisTitle>
+                    <Interval>1</Interval>
                     <ChartMajorGridLines>
                       <Enabled>False</Enabled>
                       <Style>
