@@ -617,14 +617,16 @@ usuario As String, ConexBDLmaster As String,
 
         Dim clientes As List(Of String) = TraerCUITClientesSegunUsuario(usuario, SC, ConexBDLmaster).Where(Function(x) x <> "").ToList  'c.ToList()
         If clientes.Count = 0 And QueContenga = "" Then Return Nothing
-        If clientes.Count > 0 Then
+        If clientes.Count > 0 And idCorredor <> 43 Then '43=BLD
             QueContenga = ""
             idVendedor = -1
             idIntermediario = -1
             idRemComercial = -1
             idDestinatario = -1
-            idCorredor = -1
+            idCorredor = -1     'lo de bld se debe romper porque le resetea el corredor...
         End If
+
+
 
 
 

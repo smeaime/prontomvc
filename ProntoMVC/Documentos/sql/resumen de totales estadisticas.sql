@@ -270,8 +270,9 @@ left join detallefacturas DETFAC on i.IdDetalleFactura=DETFAC.IdDetalleFactura
 Where (
                                 i.Tipo = 4 
                                 And isnull(i.Anulada, 'NO') <> 'SI' 
-                                And i.FechaIngreso >= @FechaDesdeAnterior And i.FechaIngreso <= @FechaHasta 
 								And (isnull(@puntoventa,0)<=0  OR  @puntoventa=IdStock)
+	--And i.FechaIngreso >= @FechaDesdeAnterior And i.FechaIngreso <= @FechaHasta 
+	and ((i.FechaIngreso >= @FechaDesde and i.FechaIngreso <= @FechaHasta) or (i.FechaIngreso >= @FechaDesdeAnterior and i.FechaIngreso <=@FechaHastaAnterior))
                            )
 
 

@@ -504,7 +504,7 @@ Partial Class CartaDePorteInformesAccesoClientesBLDcorredor
 
         Dim dt2 As DataTable
 
-        If True Then
+        If False Then
 
 
             Dim q As Generic.List(Of CartasConCalada) = CartasLINQlocalSimplificadoTipadoConCalada3(HFSC.Value,
@@ -530,10 +530,12 @@ Partial Class CartaDePorteInformesAccesoClientesBLDcorredor
                     idDestinatario, idIntermediario,
                     idRComercial, idArticulo, idProcedencia, idDestino,
                     IIf(cmbCriterioWHERE.SelectedValue = "todos", FiltroANDOR.FiltroAND, FiltroANDOR.FiltroOR),
-                                    DropDownList2.Text,
+                    DropDownList2.Text,
                     Convert.ToDateTime(iisValidSqlDate(txtFechaDesde.Text, #1/1/1753#)),
                     Convert.ToDateTime(iisValidSqlDate(txtFechaHasta.Text, #1/1/2100#)),
-                    cmbPuntoVenta.SelectedValue, txtQueContenga.Text, Membership.GetUser.UserName, ConexBDLmaster, chkTitular.Checked, chkIntermediario.Checked, chkRemComercial.Checked, chkClienteAuxiliar.Checked, chkCorredor.Checked, chkDestinatario.Checked)
+                    Val(cmbPuntoVenta.SelectedValue), txtQueContenga.Text, Membership.GetUser.UserName, ConexBDLmaster,
+                    chkTitular.Checked, chkIntermediario.Checked, chkRemComercial.Checked,
+                    chkClienteAuxiliar.Checked, chkCorredor.Checked, chkDestinatario.Checked)
 
 
 
