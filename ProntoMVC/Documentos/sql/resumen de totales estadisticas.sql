@@ -347,6 +347,8 @@ from
 (
 select
 
+
+
 month(FechaDescarga) as  mes  , 
 year(FechaDescarga) as año, 
             cdp.puntoventa as Sucursal,
@@ -424,6 +426,11 @@ from
  as CDP
 
 left join detallefacturas DETFAC on CDP.IdDetalleFactura=DETFAC.IdDetalleFactura
+where 
+	(FechaDescarga between @FechaDesde and @FechaHasta) or 
+	(FechaDescarga between @FechaDesdeAnterior and @FechaHastaAnterior)
+
+
 
  Group by  cdp.PuntoVenta,cdp.exporta
 
@@ -477,11 +484,12 @@ left join detallefacturas DETFAC on i.IdDetalleFactura=DETFAC.IdDetalleFactura
 Where (
                                 i.Tipo = 4 
                                 And isnull(i.Anulada, 'NO') <> 'SI' 
-                                And i.FechaIngreso >= @FechaDesdeAnterior And i.FechaIngreso <= @FechaHasta 
-								And (isnull(@puntoventa,0)<=0  OR  @puntoventa=IdStock)
-                           )
-
-
+    							And (isnull(@puntoventa,0)<=0  OR  @puntoventa=IdStock)
+	--and ((i.FechaIngreso between @FechaDesde and @FechaHasta) or (i.FechaIngreso between @FechaDesdeAnterior and @FechaHastaAnterior))
+	and ((i.FechaIngreso >= @FechaDesde and i.FechaIngreso <= @FechaHasta) or (i.FechaIngreso >= @FechaDesdeAnterior and i.FechaIngreso <=@FechaHastaAnterior))
+	--And (i.FechaIngreso >= @FechaDesdeAnterior And i.FechaIngreso <= @FechaHasta) 
+	
+)
 
  
 
@@ -523,15 +531,14 @@ go
 
 
 
-
 declare @FechaDesde datetime
 declare @FechaHasta datetime
 declare @FechaDesdeAnterior datetime
 declare @FechaHastaAnterior datetime
-set @FechaDesdeAnterior ='20151101'
-set @FechaHastaAnterior='20160531'
-set @FechaDesde='20161101'
-set @FechaHasta='20170531'
+set @FechaDesdeAnterior ='20160601'
+set @FechaHastaAnterior='20160731'
+set @FechaDesde='20170601'
+set @FechaHasta='20170731'
 
 
 
