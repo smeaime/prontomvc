@@ -94,7 +94,7 @@ Namespace ProntoMVC.Reportes
 
 
             Dim admins = New String() {"mariano", "andres", "hwilliams", "twilliams2"}
-       
+
 
             If Not admins.Contains(Session(SESSIONPRONTO_UserName).ToString().ToLower()) Then
                 MsgBoxAjaxAndRedirect(Me, "No tenés acceso a esta página", String.Format("Principal.aspx"))
@@ -413,120 +413,134 @@ Namespace ProntoMVC.Reportes
                 ' !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
                 ' !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-                Dim yourParams As ReportParameter() = New ReportParameter(9) {}
+                Dim yourParams As ReportParameter() = New ReportParameter(19) {}
 
 
 
 
-                    yourParams(0) = New ReportParameter("FechaDesde", txtFechaDesde.Text) ' )
-                    yourParams(1) = New ReportParameter("FechaHasta", txtFechaHasta.Text) ', txtFechaHasta.Text)
-                    yourParams(2) = New ReportParameter("FechaDesdeAnterior", txtFechaDesdeAnterior.Text) ' txtFechaDesde.Text)
-                    yourParams(3) = New ReportParameter("FechaHastaAnterior", txtFechaHastaAnterior.Text) ', txtFechaHasta.Text)
+                yourParams(0) = New ReportParameter("FechaDesde", txtFechaDesde.Text) ' )
+                yourParams(1) = New ReportParameter("FechaHasta", txtFechaHasta.Text) ', txtFechaHasta.Text)
+                yourParams(2) = New ReportParameter("FechaDesdeAnterior", txtFechaDesdeAnterior.Text) ' txtFechaDesde.Text)
+                yourParams(3) = New ReportParameter("FechaHastaAnterior", txtFechaHastaAnterior.Text) ', txtFechaHasta.Text)
 
-                    yourParams(4) = New ReportParameter("bMostrar1", CheckBox1.Checked) ', txtFechaHasta.Text)
-                    yourParams(5) = New ReportParameter("bMostrar2", CheckBox2.Checked) ', txtFechaHasta.Text)
-                    yourParams(6) = New ReportParameter("bMostrar3", CheckBox3.Checked) ', txtFechaHasta.Text)
-                    yourParams(7) = New ReportParameter("bMostrar4", CheckBox4.Checked) ', txtFechaHasta.Text)
-                    yourParams(8) = New ReportParameter("bMostrar5", CheckBox5.Checked) ', txtFechaHasta.Text)
-
-                    yourParams(9) = New ReportParameter("ModoExportacion", DropDownList2.SelectedItem.Text) ', txtFechaHasta.Text)
+                yourParams(4) = New ReportParameter("bMostrar1", CheckBox1.Checked) ', txtFechaHasta.Text)
+                yourParams(5) = New ReportParameter("bMostrar2", CheckBox2.Checked) ', txtFechaHasta.Text)
+                yourParams(6) = New ReportParameter("bMostrar3", CheckBox3.Checked) ', txtFechaHasta.Text)
+                yourParams(7) = New ReportParameter("bMostrar4", CheckBox4.Checked) ', txtFechaHasta.Text)
+                yourParams(8) = New ReportParameter("bMostrar5", CheckBox5.Checked) ', txtFechaHasta.Text)
 
 
+                yourParams(9) = New ReportParameter("idVendedor", -1) ', txtFechaHasta.Text)
+                yourParams(10) = New ReportParameter("idCorredor", -1) ', txtFechaHasta.Text)
+                yourParams(11) = New ReportParameter("idDestinatario", -1) ', txtFechaHasta.Text)
+                yourParams(12) = New ReportParameter("idIntermediario", -1) ', txtFechaHasta.Text)
+                yourParams(13) = New ReportParameter("idRemComercial", -1) ', txtFechaHasta.Text)
+                yourParams(14) = New ReportParameter("idArticulo", -1) ', txtFechaHasta.Text)
+                yourParams(15) = New ReportParameter("idProcedencia", -1) ', txtFechaHasta.Text)
+                yourParams(16) = New ReportParameter("idDestino", -1) ', txtFechaHasta.Text)
+                yourParams(17) = New ReportParameter("AplicarANDuORalFiltro", Val(IIf(cmbCriterioWHERE.SelectedValue = "todos", FiltroANDOR.FiltroAND, FiltroANDOR.FiltroOR))) ', txtFechaHasta.Text)
+                yourParams(18) = New ReportParameter("ModoExportacion", DropDownList2.SelectedItem.Text) ', txtFechaHasta.Text)
+                yourParams(19) = New ReportParameter("puntoventa", Val(cmbPuntoVenta.SelectedValue)) ', txtFechaHasta.Text)
 
-                    If Diagnostics.Debugger.IsAttached Then
-                        sc = Encriptar("Data Source=serversql3\TESTING;Initial catalog=Pronto;User ID=sa; Password=.SistemaPronto.;Connect Timeout=500")
-                        'estoy teniendo problemas al usar el reporteador desde un servidor distinto que el que tiene la base
+
+
+
+
+
+                If Diagnostics.Debugger.IsAttached Then
+                    sc = Encriptar("Data Source=serversql3\TESTING;Initial catalog=Pronto;User ID=sa; Password=.SistemaPronto.;Connect Timeout=500")
+                    'estoy teniendo problemas al usar el reporteador desde un servidor distinto que el que tiene la base
+                End If
+
+
+
+                ReportViewerRemoto.ShowParameterPrompts = False
+                ReportViewerRemoto.PromptAreaCollapsed = True
+                ReportViewerRemoto.ShowPromptAreaButton = False
+
+                ' es fundamental que los parametros esten bien pasados y con el tipo correspondiente, porque creo que si
+                ' no, explota y no te dice bien por qué
+
+
+                '''//////////////////////////////////////////////////////////////////////////////
+                '''//////////////////////////////////////////////////////////////////////////////
+                '''//////////////////////////////////////////////////////////////////////////////
+                ' para ahorrarse problemas con lo de la cadena de conexion dinamica, hay que repetir, como usuario SQL,
+                ' la cuenta Windows (kerberos) con la que pasamos credenciales (variables ReportUser y ReportPass)
+
+                'First, you could create a ‘shadow account’ on the reporting server by duplicating the user’s domain login and password on 
+                'the report server. Creating a shadow account can be hard to maintain, particularly if a password change policy is in effect 
+                'for the domain, because the passwords must remain synchronized.
+                'If the web application is on the same server as the Reporting Services web service, the call will authenticate 
+                'using DefaultCredentials, but you are probably seeing the “permissions are insufficient” exception. One solution to this 
+                'problem is adding the ASPNET or NETWORK SERVICE account into a role in Reporting Services, but take care before 
+                'making this decision. If you were to place the ASPNET account into the System Administrators role, for example, anyone 
+                '    with access to your web application is now a Reporting Services administrator.
+                ' http://odetocode.com/articles/216.aspx
+                '''//////////////////////////////////////////////////////////////////////////////
+                '''//////////////////////////////////////////////////////////////////////////////
+                '''//////////////////////////////////////////////////////////////////////////////
+                '''//////////////////////////////////////////////////////////////////////////////
+
+                Try
+                    If ReportViewerRemoto.ServerReport.GetParameters().Count <> yourParams.Count() Then
+                        Throw New Exception("(Ojo no usar parametros en modo INTERNAL ) Distintos parámetros")
                     End If
-
-
-
-                    ReportViewerRemoto.ShowParameterPrompts = False
-                    ReportViewerRemoto.PromptAreaCollapsed = True
-                    ReportViewerRemoto.ShowPromptAreaButton = False
-
-                    ' es fundamental que los parametros esten bien pasados y con el tipo correspondiente, porque creo que si
-                    ' no, explota y no te dice bien por qué
-
-
-                    '''//////////////////////////////////////////////////////////////////////////////
-                    '''//////////////////////////////////////////////////////////////////////////////
-                    '''//////////////////////////////////////////////////////////////////////////////
-                    ' para ahorrarse problemas con lo de la cadena de conexion dinamica, hay que repetir, como usuario SQL,
-                    ' la cuenta Windows (kerberos) con la que pasamos credenciales (variables ReportUser y ReportPass)
-
-                    'First, you could create a ‘shadow account’ on the reporting server by duplicating the user’s domain login and password on 
-                    'the report server. Creating a shadow account can be hard to maintain, particularly if a password change policy is in effect 
-                    'for the domain, because the passwords must remain synchronized.
-                    'If the web application is on the same server as the Reporting Services web service, the call will authenticate 
-                    'using DefaultCredentials, but you are probably seeing the “permissions are insufficient” exception. One solution to this 
-                    'problem is adding the ASPNET or NETWORK SERVICE account into a role in Reporting Services, but take care before 
-                    'making this decision. If you were to place the ASPNET account into the System Administrators role, for example, anyone 
-                    '    with access to your web application is now a Reporting Services administrator.
-                    ' http://odetocode.com/articles/216.aspx
-                    '''//////////////////////////////////////////////////////////////////////////////
-                    '''//////////////////////////////////////////////////////////////////////////////
-                    '''//////////////////////////////////////////////////////////////////////////////
-                    '''//////////////////////////////////////////////////////////////////////////////
-
-                    Try
-                        If ReportViewerRemoto.ServerReport.GetParameters().Count <> yourParams.Count() Then
-                            Throw New Exception("(Ojo no usar parametros en modo INTERNAL ) Distintos parámetros")
-                        End If
-                    Catch ex As Exception
-
-                        '''///////////////////////////////////////////////////////////////////////////////////////////////////
-                        '''///////////////////////////////////////////////////////////////////////////////////////////////////
-                        '''///////////////////////////////////////////////////////////////////////////////////////////////////
-                        ' El informe tiene que tener el parametro @CadenaConexion "SIN predeterminado" ("NO default") y "Preguntar al Usuario"
-                        ' Usá para las credenciales "Seguridad Integrada".
-                        ' Y en los Query Type de los Datasets usá "Store Procedure"
-                        '''///////////////////////////////////////////////////////////////////////////////////////////////////
-                        '''///////////////////////////////////////////////////////////////////////////////////////////////////
-                        '''///////////////////////////////////////////////////////////////////////////////////////////////////
-                        '''///////////////////////////////////////////////////////////////////////////////////////////////////
-
-                        ProntoFuncionesGenerales.MandaEmailSimple("mscalella911@gmail.com", "getparam",
-                        "Ojo que este es el primer acceso al servidor de informes.  Fijate si estan en distintos servidores el reporteador y la base. Fijate si la consulta puede ejecutarse en la base que elegiste. " &
-                        Convert.ToString(scsql) & " " & ex.ToString(), ConfigurationManager.AppSettings("SmtpUser"), ConfigurationManager.AppSettings("SmtpServer"), ConfigurationManager.AppSettings("SmtpUser"),
-                            ConfigurationManager.AppSettings("SmtpPass"), "", Convert.ToInt16(ConfigurationManager.AppSettings("SmtpPort")))
-                    End Try
+                Catch ex As Exception
 
                     '''///////////////////////////////////////////////////////////////////////////////////////////////////
                     '''///////////////////////////////////////////////////////////////////////////////////////////////////
                     '''///////////////////////////////////////////////////////////////////////////////////////////////////
-                    '  IMPORTANTISIMO  VITAL
-                    '  IMPORTANTISIMO  VITAL
-                    '  IMPORTANTISIMO  VITAL
-                    '  IMPORTANTISIMO  VITAL
-                    ' leer arriba
-                    '  IMPORTANTISIMO  VITAL
-                    '  IMPORTANTISIMO  VITAL
-                    '  IMPORTANTISIMO  VITAL
-                    '  IMPORTANTISIMO  VITAL
-                    '  IMPORTANTISIMO  VITAL
-
+                    ' El informe tiene que tener el parametro @CadenaConexion "SIN predeterminado" ("NO default") y "Preguntar al Usuario"
+                    ' Usá para las credenciales "Seguridad Integrada".
+                    ' Y en los Query Type de los Datasets usá "Store Procedure"
                     '''///////////////////////////////////////////////////////////////////////////////////////////////////
                     '''///////////////////////////////////////////////////////////////////////////////////////////////////
                     '''///////////////////////////////////////////////////////////////////////////////////////////////////
                     '''///////////////////////////////////////////////////////////////////////////////////////////////////
 
+                    ProntoFuncionesGenerales.MandaEmailSimple("mscalella911@gmail.com", "getparam",
+                    "Ojo que este es el primer acceso al servidor de informes.  Fijate si estan en distintos servidores el reporteador y la base. Fijate si la consulta puede ejecutarse en la base que elegiste. " &
+                    Convert.ToString(scsql) & " " & ex.ToString(), ConfigurationManager.AppSettings("SmtpUser"), ConfigurationManager.AppSettings("SmtpServer"), ConfigurationManager.AppSettings("SmtpUser"),
+                        ConfigurationManager.AppSettings("SmtpPass"), "", Convert.ToInt16(ConfigurationManager.AppSettings("SmtpPort")))
+                End Try
 
-                    ErrHandler2.WriteError("Vamos bien?")
+                '''///////////////////////////////////////////////////////////////////////////////////////////////////
+                '''///////////////////////////////////////////////////////////////////////////////////////////////////
+                '''///////////////////////////////////////////////////////////////////////////////////////////////////
+                '  IMPORTANTISIMO  VITAL
+                '  IMPORTANTISIMO  VITAL
+                '  IMPORTANTISIMO  VITAL
+                '  IMPORTANTISIMO  VITAL
+                ' leer arriba
+                '  IMPORTANTISIMO  VITAL
+                '  IMPORTANTISIMO  VITAL
+                '  IMPORTANTISIMO  VITAL
+                '  IMPORTANTISIMO  VITAL
+                '  IMPORTANTISIMO  VITAL
 
-                    ErrHandler2.WriteError(ConfigurationManager.AppSettings("ReportServer") & " - " & ConfigurationManager.AppSettings("ReportUser") & " - " & ConfigurationManager.AppSettings("ReportPass") & " - " & ConfigurationManager.AppSettings("ReportDomain"))
-
-                    Try
-                        ReportViewerRemoto.ServerReport.SetParameters(yourParams)
-                    Catch ex As Exception
-                        ErrHandler2.WriteError(ex)
-                        Throw
-                    End Try
-
-                    ErrHandler2.WriteError("parece")
+                '''///////////////////////////////////////////////////////////////////////////////////////////////////
+                '''///////////////////////////////////////////////////////////////////////////////////////////////////
+                '''///////////////////////////////////////////////////////////////////////////////////////////////////
+                '''///////////////////////////////////////////////////////////////////////////////////////////////////
 
 
+                ErrHandler2.WriteError("Vamos bien?")
 
-                Else
+                ErrHandler2.WriteError(ConfigurationManager.AppSettings("ReportServer") & " - " & ConfigurationManager.AppSettings("ReportUser") & " - " & ConfigurationManager.AppSettings("ReportPass") & " - " & ConfigurationManager.AppSettings("ReportDomain"))
+
+                Try
+                    ReportViewerRemoto.ServerReport.SetParameters(yourParams)
+                Catch ex As Exception
+                    ErrHandler2.WriteError(ex)
+                    Throw
+                End Try
+
+                ErrHandler2.WriteError("parece")
+
+
+
+            Else
 
 
 
