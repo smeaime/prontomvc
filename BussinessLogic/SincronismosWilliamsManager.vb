@@ -8797,7 +8797,7 @@ Namespace Pronto.ERP.Bll
                     sb &= Left(.NumeroCartaDePorte.ToString, 14).PadRight(14) 'CarPorte	STRING(14)	Número de Carta de Porte)    827)    840
                     sb &= IIf(True, "c", "v").ToString.PadRight(1) 'TipoTrans	STRING(1)	Tipo de transporte c=camión  v=vagón o=Otro)    841)    841
 
-                    If .IsNobleGradoNull Then .NobleGrado = 0
+
                     sb &= Left(.NobleGrado.ToString, 10).PadRight(10) 'Grado	STRING(10)	Grado)    842)    851
                     sb &= Left(.Factor.ToString, 10).PadRight(10) 'Factor	STRING(10)	Factor)    852)    861
 
@@ -14237,7 +14237,6 @@ Namespace Pronto.ERP.Bll
 
 
 
-                    If .IsNobleGradoNull Then .NobleGrado = 0
                     sb &= Left(Int(.NobleGrado).ToString, 10).PadLeft(10) 'Grado	STRING(10)	Grado)    842)    851
                     sb &= Left(Int(0).ToString, 10).PadLeft(10) 'Factor	STRING(10)	Factor)    852)    861
 
@@ -14957,8 +14956,6 @@ Namespace Pronto.ERP.Bll
 
 
 
-
-                    If .IsNobleGradoNull Then .NobleGrado = 0
                     sb &= Left(Int(.NobleGrado).ToString, 10).PadLeft(10) 'Grado	STRING(10)	Grado)    842)    851
                     sb &= Left(Int(0).ToString, 10).PadLeft(10) 'Factor	STRING(10)	Factor)    852)    861
 
@@ -24133,7 +24130,7 @@ Namespace Pronto.ERP.Bll
                     '│ MERMAHUME  │ Character │     6 │     │
                     '│ KGMERMAHUM │ Character │    10 │     │
 
-                    ssss
+
                     sb &= String.Format("{0:F1}", .HumedadDesnormalizada).ToString.PadLeft(6)
                     sb &= String.Format("{0:F1}", .Humedad).PadLeft(6)
 

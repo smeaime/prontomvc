@@ -517,7 +517,9 @@ Public Class CartaDePorteManager
 
         Try
 
-            Dim strsql = DataTablePorClienteSQL(SC, ColumnaParaFiltrar, TextoParaFiltrar, sortExpression, startRowIndex, maximumRows, estado, QueContenga, idVendedor, idCorredor, idDestinatario, idIntermediario, idRemComercial, idArticulo, idProcedencia, idDestino, AplicarANDuORalFiltro, ModoExportacion, fechadesde, fechahasta, puntoventa, QueContenga2, usuario, ConexBDLmaster, chkTitular,
+            Dim strsql = DataTablePorClienteSQL(SC, ColumnaParaFiltrar, TextoParaFiltrar, sortExpression, startRowIndex, maximumRows, estado,
+                                                QueContenga, idVendedor, idCorredor, idDestinatario, idIntermediario, idRemComercial, idArticulo, idProcedencia,
+                                                idDestino, AplicarANDuORalFiltro, ModoExportacion, fechadesde, fechahasta, puntoventa, QueContenga2, usuario, ConexBDLmaster, chkTitular,
              chkIntermediario,
              chkRemComercial,
              chkClienteAuxiliar,
@@ -614,9 +616,11 @@ usuario As String, ConexBDLmaster As String,
 
 
 
+        Dim idClienteAuxiliar = -1
 
         Dim clientes As List(Of String) = TraerCUITClientesSegunUsuario(usuario, SC, ConexBDLmaster).Where(Function(x) x <> "").ToList  'c.ToList()
-        If clientes.Count = 0 And QueContenga = "" Then Return Nothing
+
+
         If clientes.Count > 0 And idCorredor <> 43 Then '43=BLD
             QueContenga = ""
             idVendedor = -1
@@ -624,8 +628,27 @@ usuario As String, ConexBDLmaster As String,
             idRemComercial = -1
             idDestinatario = -1
             idCorredor = -1     'lo de bld se debe romper porque le resetea el corredor...
-        End If
+        ElseIf usuario = "DIAZDOW" Then
 
+            'consulta 43183 
+            '"Pero tiene que ser con un filtro especial. unicamente tiene que filtrar los camiones que vengan CORREDOR DIAZ RIGANTI. 
+            ' y que figure en "titular", "intermediario", "remitente", Cliete observaciones" "destintario" DOW AGROSCIENCES ARG. SRL . "
+
+            QueContenga = ""
+            idVendedor = -1
+            idIntermediario = -1
+            idRemComercial = -1
+            idDestinatario = -1
+            idCorredor = BuscarVendedorPorCUIT("30-55151869-4", SC)
+            idClienteAuxiliar = -1
+            AplicarANDuORalFiltro = FiltroANDOR.FiltroOR
+
+
+            'lo que me descoloca es que destinatario es excluyente en nuestro filtro.... -ok, traete todo lo del corredor ese, y despues hacé a mano el filtro de DOW
+
+        ElseIf clientes.Count = 0 And QueContenga = "" Then
+            Return Nothing
+        End If
 
 
 
@@ -640,7 +663,7 @@ usuario As String, ConexBDLmaster As String,
             fechadesde,
                  fechahasta,
                 puntoventa, "", "Ambas", , , QueContenga2,
-         -1, -1, 0, "", , "Todos")
+         idClienteAuxiliar, -1, 0, "", , "Todos")
 
 
 
@@ -662,9 +685,9 @@ usuario As String, ConexBDLmaster As String,
         If False Then
 
 
-            agrup = ";WITH cte AS " &
+            agrup = ";With cte As " &
             "( " &
-            "       SELECT *, " &
+            "       Select *, " &
             "             ROW_NUMBER() OVER (PARTITION BY NumeroCartaDePorte,SubnumeroVagon ORDER BY IdCartaDePorte DESC) AS rn " &
             "       FROM ( " &
                      strsql &
@@ -731,6 +754,22 @@ usuario As String, ConexBDLmaster As String,
 
 
 
+        If usuario = "DIAZDOW" Then
+
+            'consulta 43183 
+            '"Pero tiene que ser con un filtro especial. unicamente tiene que filtrar los camiones que vengan CORREDOR DIAZ RIGANTI. 
+            ' y que figure en "titular", "intermediario", "remitente", Cliete observaciones" "destintario" DOW AGROSCIENCES ARG. SRL . "
+
+            Dim idcli = BuscaIdClientePrecisoConCUIT("30-55151869-4", SC)
+            Dim w = " where Vendedor=4792 or CuentaOrden1=4792 or CuentaOrden2=4792 or Entregador=4792 or IdClienteAuxiliar=4792"
+
+            agrup &= w
+            'lo que me descoloca es que destinatario es excluyente en nuestro filtro.... -ok, traete todo lo del corredor ese, y despues hacé a mano el filtro de DOW
+        End If
+
+
+
+
         ErrHandler2.WriteError(agrup)
 
         Return agrup
@@ -743,6 +782,113 @@ usuario As String, ConexBDLmaster As String,
 
 
 
+
+
+    Public Shared Function ListadoSegunCliente(SC As String, idcliente As Integer, fechadesde As DateTime, fechahasta As DateTime, estado As enumCDPestado) _
+                    As List(Of fSQL_GetDataTableFiltradoYPaginado_Result3)
+
+
+
+
+        '' If cdp.Titular <> idcliente And cdp.CuentaOrden1 <> idcliente And cdp.CuentaOrden2 <> idcliente And cdp.Entregador <> idcliente And IdClienteEquivalenteDelIdVendedor(cdp.Corredor, SC) <> idcliente And _
+        ''IdClienteEquivalenteDelIdVendedor(cdp.Corredor2, SC) <> idcliente Then
+        ''     ErrHandler2.WriteError("La carta no corresponde al usuario")
+        ''     Return Nothing
+        '' End If
+
+        '' dt = CartaDePorteManager.GetDataTableFiltradoYPaginado(HFSC.Value, _
+        ''               "", "", "", 1, 0, _
+        ''               estadofiltro, "", idVendedor, idCorredor, _
+        ''               idDestinatario, idIntermediario, _
+        ''               idRComercial, idArticulo, idProcedencia, idDestino, _
+        ''                                                 IIf(cmbCriterioWHERE.SelectedValue = "todos", CartaDePorteManager.FiltroANDOR.FiltroAND, CartaDePorteManager.FiltroANDOR.FiltroOR), DropDownList2.Text, _
+        ''                Convert.ToDateTime(iisValidSqlDate(txtFechaDesde.Text, #1/1/1753#)), _
+        ''               Convert.ToDateTime(iisValidSqlDate(txtFechaHasta.Text, #1/1/2100#)), _
+        ''                cmbPuntoVenta.SelectedValue, sTitulo, optDivisionSyngenta.SelectedValue, True, txtContrato.Text, , idClienteAuxiliar, , , , )
+
+
+
+
+        'Dim FName As String
+
+        ''PDF
+        'Dim dataSet = New DataSet()
+        'dataSet.Tables.Add(dt)
+
+        'dataSet.WriteXml("C:\MyDataset.xml")
+
+
+
+
+
+
+
+        'Dim fs1 As System.IO.FileStream = Nothing
+        'fs1 = System.IO.File.Open("C:\MyDataset.xml", FileMode.Open, FileAccess.Read)
+        'Dim b1(fs1.Length) As Byte
+        'fs1.Read(b1, 0, fs1.Length)
+        'fs1.Close()
+
+
+
+
+
+        Dim sTitulo As String = ""
+        Dim idCorredor = BuscaIdVendedorPreciso(NombreCliente(SC, idcliente), SC)
+        Dim idVendedor = -1
+        Dim idIntermediario = -1
+        Dim idRComercial = -1
+        Dim idClienteAuxiliar = -1
+
+        If idCorredor = -1 Then
+            idVendedor = idcliente
+            idIntermediario = idcliente
+            idRComercial = idcliente
+            idClienteAuxiliar = idcliente
+        End If
+        Dim idDestinatario = -1
+
+
+        Dim idArticulo = -1
+        Dim idProcedencia = -1
+        Dim idDestino = -1
+
+
+        Const limitedecartas = 1000
+
+
+        Dim db As ProntoMVC.Data.Models.DemoProntoEntities = New ProntoMVC.Data.Models.DemoProntoEntities(ProntoMVC.Data.Models.Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC)))
+
+        Try
+            'enumCDPestado.DescargasMasFacturadas
+
+            Dim dbcartas = (From c In db.fSQL_GetDataTableFiltradoYPaginado(Nothing, limitedecartas, estado,
+                                                                            Nothing, idVendedor,
+                                        idCorredor, idDestinatario, idIntermediario, idRComercial,
+                                        idArticulo, idProcedencia, idDestino, FiltroANDOR.FiltroOR, "Ambos",
+                                        fechadesde, fechahasta, 0,
+                                        Nothing, False, Nothing, Nothing, idClienteAuxiliar,
+                                         Nothing, Nothing, Nothing, Nothing)
+                            Select c).Take(limitedecartas).ToList
+            Return dbcartas
+        Catch e As Exception
+            Dim inner As Exception = e.InnerException
+            While Not (inner Is Nothing)
+                If System.Diagnostics.Debugger.IsAttached() Then
+                    'MsgBox(inner.Message)
+                    Stop
+                End If
+                ErrHandler2.WriteError("ListadoSegunCliente: " & inner.Message) ' & "   Filas:" & dt.Rows.Count & " Filtro:" & titulo)
+                inner = inner.InnerException
+            End While
+            Throw
+
+
+        End Try
+
+
+
+    End Function
 
 
 
@@ -1178,7 +1324,7 @@ usuario As String, ConexBDLmaster As String,
 
 
 
-    Public Shared Function BuscarVendedorPorCUIT(cuit As String, SC As String, RazonSocial As String) As Integer
+    Public Shared Function BuscarVendedorPorCUIT(cuit As String, SC As String, Optional RazonSocial As String = "") As Integer
 
         Dim db As DemoProntoEntities = New DemoProntoEntities(Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC)))
 
@@ -1215,7 +1361,7 @@ usuario As String, ConexBDLmaster As String,
             End If
 
         Else
-            CrearEquivalencia(RazonSocial, q.Nombre, SC)
+            If RazonSocial <> "" Then CrearEquivalencia(RazonSocial, q.Nombre, SC)
 
             Return q.IdVendedor
         End If
@@ -15633,110 +15779,7 @@ usuario As String, ConexBDLmaster As String,
     End Function
 
 
-    Public Shared Function ListadoSegunCliente(SC As String, idcliente As Integer, fechadesde As DateTime, fechahasta As DateTime, estado As enumCDPestado) As List(Of fSQL_GetDataTableFiltradoYPaginado_Result3)
 
-
-
-
-        '' If cdp.Titular <> idcliente And cdp.CuentaOrden1 <> idcliente And cdp.CuentaOrden2 <> idcliente And cdp.Entregador <> idcliente And IdClienteEquivalenteDelIdVendedor(cdp.Corredor, SC) <> idcliente And _
-        ''IdClienteEquivalenteDelIdVendedor(cdp.Corredor2, SC) <> idcliente Then
-        ''     ErrHandler2.WriteError("La carta no corresponde al usuario")
-        ''     Return Nothing
-        '' End If
-
-        '' dt = CartaDePorteManager.GetDataTableFiltradoYPaginado(HFSC.Value, _
-        ''               "", "", "", 1, 0, _
-        ''               estadofiltro, "", idVendedor, idCorredor, _
-        ''               idDestinatario, idIntermediario, _
-        ''               idRComercial, idArticulo, idProcedencia, idDestino, _
-        ''                                                 IIf(cmbCriterioWHERE.SelectedValue = "todos", CartaDePorteManager.FiltroANDOR.FiltroAND, CartaDePorteManager.FiltroANDOR.FiltroOR), DropDownList2.Text, _
-        ''                Convert.ToDateTime(iisValidSqlDate(txtFechaDesde.Text, #1/1/1753#)), _
-        ''               Convert.ToDateTime(iisValidSqlDate(txtFechaHasta.Text, #1/1/2100#)), _
-        ''                cmbPuntoVenta.SelectedValue, sTitulo, optDivisionSyngenta.SelectedValue, True, txtContrato.Text, , idClienteAuxiliar, , , , )
-
-
-
-
-        'Dim FName As String
-
-        ''PDF
-        'Dim dataSet = New DataSet()
-        'dataSet.Tables.Add(dt)
-
-        'dataSet.WriteXml("C:\MyDataset.xml")
-
-
-
-
-
-
-
-        'Dim fs1 As System.IO.FileStream = Nothing
-        'fs1 = System.IO.File.Open("C:\MyDataset.xml", FileMode.Open, FileAccess.Read)
-        'Dim b1(fs1.Length) As Byte
-        'fs1.Read(b1, 0, fs1.Length)
-        'fs1.Close()
-
-
-
-
-
-        Dim sTitulo As String = ""
-        Dim idCorredor = BuscaIdVendedorPreciso(NombreCliente(SC, idcliente), SC)
-        Dim idVendedor = -1
-        Dim idIntermediario = -1
-        Dim idRComercial = -1
-        Dim idClienteAuxiliar = -1
-
-        If idCorredor = -1 Then
-            idVendedor = idcliente
-            idIntermediario = idcliente
-            idRComercial = idcliente
-            idClienteAuxiliar = idcliente
-        End If
-        Dim idDestinatario = -1
-
-
-        Dim idArticulo = -1
-        Dim idProcedencia = -1
-        Dim idDestino = -1
-
-
-        Const limitedecartas = 1000
-
-
-        Dim db As ProntoMVC.Data.Models.DemoProntoEntities = New ProntoMVC.Data.Models.DemoProntoEntities(ProntoMVC.Data.Models.Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC)))
-
-        Try
-            'enumCDPestado.DescargasMasFacturadas
-
-            Dim dbcartas = (From c In db.fSQL_GetDataTableFiltradoYPaginado(Nothing, limitedecartas, estado,
-                                                                            Nothing, idVendedor,
-                                        idCorredor, idDestinatario, idIntermediario, idRComercial,
-                                        idArticulo, idProcedencia, idDestino, FiltroANDOR.FiltroOR, "Ambos",
-                                        fechadesde, fechahasta, 0,
-                                        Nothing, False, Nothing, Nothing, idClienteAuxiliar,
-                                         Nothing, Nothing, Nothing, Nothing)
-                            Select c).Take(limitedecartas).ToList
-            Return dbcartas
-        Catch e As Exception
-            Dim inner As Exception = e.InnerException
-            While Not (inner Is Nothing)
-                If System.Diagnostics.Debugger.IsAttached() Then
-                    'MsgBox(inner.Message)
-                    Stop
-                End If
-                ErrHandler2.WriteError("ListadoSegunCliente: " & inner.Message) ' & "   Filas:" & dt.Rows.Count & " Filtro:" & titulo)
-                inner = inner.InnerException
-            End While
-            Throw
-
-
-        End Try
-
-
-
-    End Function
 
 
 
