@@ -857,6 +857,71 @@ namespace ProntoMVC.Tests
         #endregion
 
 
+        [TestMethod]
+        public void listado_especial_para_diaz_riganti_43183()
+        {
+
+
+
+            string usuario = "DIAZDOW";
+            var rs = "DIAZ  RIGANTI";
+            var desde = new DateTime(2017, 1, 1);
+            var hasta = new DateTime(2017, 1, 31);
+            var estadofiltro = CartaDePorteManager.enumCDPestado.TodasMenosLasRechazadas;
+
+
+            var idVendedor = -1;
+            var idCorredor = SQLdinamico.BuscaIdVendedorPreciso(rs, SC);
+            var idDestinatario = -1;
+            var idIntermediario = -1;
+            var idRComercial = -1;
+            var idArticulo = -1;
+            var idProcedencia = -1;
+            var idDestino = -1;
+
+
+
+
+
+            string sql = CartaDePorteManager.DataTablePorClienteSQL(SC, "", "", "", 0, 9999999,
+                                estadofiltro, rs, idVendedor, idCorredor,
+                               idDestinatario, idIntermediario,
+                               idRComercial, idArticulo, idProcedencia, idDestino
+                                , 0, "Ambas"
+                                , desde, hasta,
+                                0, "", usuario, scbdlmasterappconfig, true, true, true, false, false, false);
+
+
+
+
+            ReportViewer ReporteLocal = new Microsoft.Reporting.WebForms.ReportViewer();
+            string output = @"C:\Users\Administrador\Desktop\Informe" + DateTime.Now.ToString("ddMMMyyyy_HHmmss") + ".xls";
+            ReportParameter[] yourParams = new ReportParameter[10];
+            yourParams[0] = new ReportParameter("webservice", "");
+            yourParams[1] = new ReportParameter("sServidor", "");
+            yourParams[2] = new ReportParameter("idArticulo", "-1");
+            yourParams[3] = new ReportParameter("idDestino", "-1");
+            yourParams[4] = new ReportParameter("desde", desde.ToString());
+            yourParams[5] = new ReportParameter("hasta", hasta.ToString());
+            yourParams[6] = new ReportParameter("quecontenga", "ghkgk");
+            yourParams[7] = new ReportParameter("Consulta", sql);
+            yourParams[8] = new ReportParameter("sServidorSQL", ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC));
+            yourParams[9] = new ReportParameter("titulo", "ghkj");
+            string sss = CartaDePorteManager.RebindReportViewer_ServidorExcel(ref ReporteLocal,
+                        @"Listado general de Cartas de Porte (simulando original) con foto 2", yourParams, ref output, false);
+
+
+
+            System.Diagnostics.Process.Start(output);
+
+        }
+
+
+
+
+
+
+
 
         [TestMethod]
         public void CampoEditableDeClientesRelacionadosAlUsuarioParaTirarInforme_28320_42549()
@@ -1056,6 +1121,8 @@ namespace ProntoMVC.Tests
             String aaa = ParametroManager.TraerValorParametro2(SC, "ClienteBLDcorredorCUIT").NullSafeToString() ?? "";
             var sss = aaa.Split('|').ToList();
 
+
+            // no usar mas esto, sino el DataTablePorCliente/DataTablePorClienteSQL
 
             var q = CartaDePorteManager.CartasLINQlocalSimplificadoTipadoConCalada3(SC,
                      "", "", "", 1, 10,
