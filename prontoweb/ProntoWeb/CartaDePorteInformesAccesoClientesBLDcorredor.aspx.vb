@@ -1083,6 +1083,10 @@ Partial Class CartaDePorteInformesAccesoClientesBLDcorredor
     End Sub
 
 
+
+
+
+
     Sub desc(b As Boolean)
 
 

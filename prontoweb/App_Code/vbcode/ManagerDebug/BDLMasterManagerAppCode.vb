@@ -333,77 +333,77 @@ Namespace Pronto.ERP.Bll
                 End With
 
             Else
-                'No lo encontró, quizás es un proveedor
-                Try
+                'No lo encontró como empleado, quizás es un proveedor/cliente externo
+                'Try
 
-                    Dim plist As ProveedorList = ProveedorManager.GetList(Encriptar(usuario.StringConnection))
-                    Dim p As New Proveedor
-                    p = plist.Find(Function(obj) obj.Cuit = usuario.Nombre Or obj.RazonSocial = usuario.Nombre)
-                    If p IsNot Nothing Then
-                        'Che pero guarda, quizás es un proveedor
-                        '-como? esta obligado el proveedor a ser un empleado si quiere entrar por web?
-                        'BuscarProveedorPorCUIT(
+                '    Dim plist As ProveedorList = ProveedorManager.GetList(Encriptar(usuario.StringConnection))
+                '    Dim p As New Proveedor
+                '    p = plist.Find(Function(obj) obj.Cuit = usuario.Nombre Or obj.RazonSocial = usuario.Nombre)
+                '    If p IsNot Nothing Then
+                '        'Che pero guarda, quizás es un proveedor
+                '        '-como? esta obligado el proveedor a ser un empleado si quiere entrar por web?
+                '        'BuscarProveedorPorCUIT(
 
-                        ' en vb no se puede hacer la funcion al vuelo:
-                        'Person myLocatedObject = myList.Find(delegate(Person p) {return p.ID == 1; });
-                        'http://social.msdn.microsoft.com/Forums/en-US/vbgeneral/thread/d47ec876-7fef-4788-a983-8e34647e13df
-                        'parece que en vb9 sí se puede!!!!!
-                        'list.Find(Function(obj) obj.Name = match)
+                '        ' en vb no se puede hacer la funcion al vuelo:
+                '        'Person myLocatedObject = myList.Find(delegate(Person p) {return p.ID == 1; });
+                '        'http://social.msdn.microsoft.com/Forums/en-US/vbgeneral/thread/d47ec876-7fef-4788-a983-8e34647e13df
+                '        'parece que en vb9 sí se puede!!!!!
+                '        'list.Find(Function(obj) obj.Name = match)
 
-                        Session(SESSIONPRONTO_glbWebIdProveedor) = p.Id
-                        Session(SESSIONPRONTO_glbWebRazonSocial) = p.RazonSocial
-                        Session(SESSIONPRONTO_glbWebCUIT) = p.Cuit
+                '        Session(SESSIONPRONTO_glbWebIdProveedor) = p.Id
+                '        Session(SESSIONPRONTO_glbWebRazonSocial) = p.RazonSocial
+                '        Session(SESSIONPRONTO_glbWebCUIT) = p.Cuit
 
-                    Else
+                '    Else
 
-                        'No se puede mostrar un cuadro de diálogo o formulario modal cuando la aplicación no está en modo UserInteractive. Especifique el estilo ServiceNotification o DefaultDesktopOnly para mostrar una notificación de una aplicación de servicio.
-                        'MessageBox.Show("Mensaje ", "Titulo", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1, MessageBoxOptions.DefaultDesktopOnly)
-                        'Response.Write("El usuario Web no tiene usuario en SQL. Contacte al Administrador del sistema")
-
-
-                        Dim rol() As String
-                        'rol = Roles.GetRolesForUser()
-                        rol = Web.Security.Roles.GetRolesForUser(usuario.Nombre)
-
-                        Dim s As String
-                        Try
-                            Dim base As String = TextoEntre(Encriptar(usuario.StringConnection), "catalog=", ";")
-                            If rol(0) = "Cliente" Then
-                                'comenté los mensajes que mostraban la cadena de conexion
-                                'MsgBoxAlert("El proveedor " & session(SESSIONPRONTO_UserName) & " no se encuentra en la lista de proveedores de " & usuario.StringConnection & ". Contacte al Administrador del sistema")
-                                s = "El proveedor '" & Session(SESSIONPRONTO_UserName) & "' no se encuentra en la lista de proveedores de la base " & base & " id:" & usuario.IdEmpresa & ". Contacte al Administrador del sistema"
-                                ErrHandler2.WriteError(s)
-                                MsgBoxAjaxAndRedirect(Yo, s, "Login.aspx")
-                            Else
-                                'MsgBoxAlert("El usuario " & session(SESSIONPRONTO_UserName) & " no tiene usuario para conectarse a " & usuario.StringConnection & ". Contacte al Administrador del sistema") 
-                                s = "El usuario '" & Session(SESSIONPRONTO_UserName) & "' no tiene usuario Pronto para conectarse a la base '" & base & "' (idbase:" & usuario.IdEmpresa & "). Contacte al Administrador del sistema"
-                                ErrHandler2.WriteError(s)
-                                MsgBoxAjaxAndRedirect(Yo, s, "Login.aspx")
-                            End If
-                        Catch ex As Exception
-                            'MsgBoxAlert("El usuario " & session(SESSIONPRONTO_UserName) & " no tiene ningún rol asignado. Contacte al Administrador del sistema")
-                            s = "El usuario " & Session(SESSIONPRONTO_UserName) & " no tiene ningún rol asignado. Contacte al Administrador del sistema"
-                            ErrHandler2.WriteError(s)
-                            MsgBoxAjaxAndRedirect(Yo, s, "Login.aspx")
-                        End Try
-
-                        Return False
+                '        'No se puede mostrar un cuadro de diálogo o formulario modal cuando la aplicación no está en modo UserInteractive. Especifique el estilo ServiceNotification o DefaultDesktopOnly para mostrar una notificación de una aplicación de servicio.
+                '        'MessageBox.Show("Mensaje ", "Titulo", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1, MessageBoxOptions.DefaultDesktopOnly)
+                '        'Response.Write("El usuario Web no tiene usuario en SQL. Contacte al Administrador del sistema")
 
 
-                        Session(SESSIONPRONTO_glbIdUsuario) = ""
-                        Session("glbIdSector") = ""
-                        Session("glbLegajo") = ""
-                        Session("glbIdCuentaFFUsuario") = ""
-                        Session(SESSIONPRONTO_glbIdObraAsignadaUsuario) = ""
-                    End If
-                Catch ex As Exception
-                    ErrHandler2.WriteError(ex)
-                    If False Then
-                        Throw New Exception("No encuentro '" & usuario.Nombre & "' ni en Empleados ni en Proveedores!")
-                        'en realidad puede ser un usuario externo de williams, un proveedor que quiere ver solo el informe
-                    End If
+                '        Dim rol() As String
+                '        'rol = Roles.GetRolesForUser()
+                '        rol = Web.Security.Roles.GetRolesForUser(usuario.Nombre)
 
-                End Try
+                '        Dim s As String
+                '        Try
+                '            Dim base As String = TextoEntre(Encriptar(usuario.StringConnection), "catalog=", ";")
+                '            If rol(0) = "Cliente" Then
+                '                'comenté los mensajes que mostraban la cadena de conexion
+                '                'MsgBoxAlert("El proveedor " & session(SESSIONPRONTO_UserName) & " no se encuentra en la lista de proveedores de " & usuario.StringConnection & ". Contacte al Administrador del sistema")
+                '                s = "El proveedor '" & Session(SESSIONPRONTO_UserName) & "' no se encuentra en la lista de proveedores de la base " & base & " id:" & usuario.IdEmpresa & ". Contacte al Administrador del sistema"
+                '                ErrHandler2.WriteError(s)
+                '                MsgBoxAjaxAndRedirect(Yo, s, "Login.aspx")
+                '            Else
+                '                'MsgBoxAlert("El usuario " & session(SESSIONPRONTO_UserName) & " no tiene usuario para conectarse a " & usuario.StringConnection & ". Contacte al Administrador del sistema") 
+                '                s = "El usuario '" & Session(SESSIONPRONTO_UserName) & "' no tiene usuario Pronto para conectarse a la base '" & base & "' (idbase:" & usuario.IdEmpresa & "). Contacte al Administrador del sistema"
+                '                ErrHandler2.WriteError(s)
+                '                MsgBoxAjaxAndRedirect(Yo, s, "Login.aspx")
+                '            End If
+                '        Catch ex As Exception
+                '            'MsgBoxAlert("El usuario " & session(SESSIONPRONTO_UserName) & " no tiene ningún rol asignado. Contacte al Administrador del sistema")
+                '            s = "El usuario " & Session(SESSIONPRONTO_UserName) & " no tiene ningún rol asignado. Contacte al Administrador del sistema"
+                '            ErrHandler2.WriteError(s)
+                '            MsgBoxAjaxAndRedirect(Yo, s, "Login.aspx")
+                '        End Try
+
+                '        Return False
+
+
+                '        Session(SESSIONPRONTO_glbIdUsuario) = ""
+                '        Session("glbIdSector") = ""
+                '        Session("glbLegajo") = ""
+                '        Session("glbIdCuentaFFUsuario") = ""
+                '        Session(SESSIONPRONTO_glbIdObraAsignadaUsuario) = ""
+                '    End If
+                'Catch ex As Exception
+                '    ErrHandler2.WriteError(ex)
+                '    If False Then
+                '        Throw New Exception("No encuentro '" & usuario.Nombre & "' ni en Empleados ni en Proveedores!")
+                '        'en realidad puede ser un usuario externo de williams, un proveedor que quiere ver solo el informe
+                '    End If
+
+                'End Try
 
             End If
 
