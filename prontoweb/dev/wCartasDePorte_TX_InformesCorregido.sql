@@ -60,22 +60,22 @@ AS
  CDP.Anulada, CDP.IdUsuarioAnulo, CDP.FechaAnulacion, CDP.Observaciones, CDP.FechaTimeStamp, CDP.Vendedor, CDP.CuentaOrden1, 
  CDP.CuentaOrden2, CDP.Corredor, CDP.Entregador, CDP.Procedencia, CDP.Patente, CDP.IdArticulo, CDP.IdStock, CDP.Partida, CDP.IdUnidad, 
  CDP.IdUbicacion, CDP.Cantidad, CDP.Cupo, CDP.NetoProc, CDP.Calidad       ,CDP.BrutoPto      ,CDP.TaraPto      ,CDP.NetoPto      
-,CDP.Acoplado      ,isnull(CDP.Humedad,0)      ,CDP.Merma      ,CDP.NetoFinal      ,CDP.FechaDeCarga      ,CDP.FechaVencimiento      ,CDP.CEE  
+,CDP.Acoplado      ,isnull(CDP.Humedad,0) as  Humedad     ,CDP.Merma      ,CDP.NetoFinal      ,CDP.FechaDeCarga      ,CDP.FechaVencimiento      ,CDP.CEE  
 ,CDP.IdTransportista      ,CDP.TransportistaCUITdesnormalizado      ,CDP.IdChofer      ,CDP.ChoferCUITdesnormalizado      ,CDP.CTG  
 ,CDP.Contrato      ,CDP.Destino      ,CDP.Subcontr1      ,CDP.Subcontr2      ,CDP.Contrato1       ,CDP.contrato2      ,CDP.KmARecorrer
-,CDP.Tarifa      ,CDP.FechaDescarga      ,CDP.Hora      ,isnull(CDP.NRecibo,0)      ,CDP.CalidadDe      ,CDP.TaraFinal     
+,CDP.Tarifa      ,CDP.FechaDescarga      ,CDP.Hora      ,isnull(CDP.NRecibo,0)  as  NRecibo     ,CDP.CalidadDe      ,CDP.TaraFinal     
 ,CDP.BrutoFinal      ,CDP.Fumigada      ,CDP.Secada  ,    
 
 CDP.Exporta
 
 
 
-   ,isnull(cdp.nobleExtranos ,0)     ,isnull(cdp.nobleNegros,0)
-,isnull(cdp.nobleQuebrados  ,0)    ,isnull(cdp.nobleDaniados  ,0)    ,isnull(cdp.nobleChamico  ,0)    ,isnull(cdp.nobleChamico2  ,0)    ,isnull(cdp.nobleRevolcado,0)
-,isnull(cdp.nobleObjetables ,0)     ,isnull(cdp.nobleAmohosados ,0)     ,isnull(cdp.nobleHectolitrico,0)      ,isnull(cdp.nobleCarbon ,0)     
-,isnull(cdp.noblePanzaBlanca ,0)     ,isnull(cdp.noblePicados  ,0)    ,isnull(cdp.nobleMGrasa  ,0)    ,isnull(cdp.nobleAcidezGrasa  ,0)   
-,isnull(cdp.nobleVerdes,0)      ,isnull(cdp.nobleGrado ,0)     ,isnull(cdp.nobleConforme ,0)     ,isnull(cdp.nobleACamara ,0)     ,CDP.Cosecha 
-,isnull(CDP.HumedadDesnormalizada,0)      ,CDP.Factor      ,CDP.IdFacturaImputada      ,CDP.PuntoVenta   
+   ,isnull(cdp.nobleExtranos ,0) as  nobleExtranos    ,isnull(cdp.nobleNegros,0) as nobleNegros 
+,isnull(cdp.nobleQuebrados  ,0)  as  nobleQuebrados   ,isnull(cdp.nobleDaniados  ,0)  as  nobleDaniados   ,isnull(cdp.nobleChamico  ,0) as   nobleChamico   ,isnull(cdp.nobleChamico2  ,0)  as nobleChamico2    ,isnull(cdp.nobleRevolcado,0) as  nobleRevolcado
+,isnull(cdp.nobleObjetables ,0)   as  nobleObjetables   ,isnull(cdp.nobleAmohosados ,0)  as nobleAmohosados     ,isnull(cdp.nobleHectolitrico,0)   as   nobleHectolitrico   ,isnull(cdp.nobleCarbon ,0)   as  nobleCarbon   
+,isnull(cdp.noblePanzaBlanca ,0)   as noblePanzaBlanca    ,isnull(cdp.noblePicados  ,0) as noblePicados    ,isnull(cdp.nobleMGrasa  ,0)   as nobleMGrasa   ,isnull(cdp.nobleAcidezGrasa  ,0)   as   nobleAcidezGrasa
+,isnull(cdp.nobleVerdes,0)   as nobleVerdes     ,isnull(cdp.nobleGrado ,0)   as nobleGrado    ,isnull(cdp.nobleConforme ,0)  as nobleConforme     ,isnull(cdp.nobleACamara ,0) asnobleACamara       ,CDP.Cosecha 
+,isnull(CDP.HumedadDesnormalizada,0)  as  HumedadDesnormalizada     ,CDP.Factor      ,CDP.IdFacturaImputada      ,CDP.PuntoVenta   
 ,CDP.SubnumeroVagon      ,CDP.TarifaFacturada      ,CDP.TarifaSubcontratista1     
 ,CDP.TarifaSubcontratista2      ,CDP.FechaArribo      ,CDP.[Version]      ,CDP.MotivoAnulacion 
 ,CDP.NumeroSubfijo      ,CDP.IdEstablecimiento      ,CDP.EnumSyngentaDivision   
@@ -280,3 +280,7 @@ exec wCartasDePorte_TX_InformesCorregido   -1,'03/3/2014' ,'03/3/2014',-1,-1,-1,
 --/////////////////////////////////////////////////////////////////////
 
 --select * from CartasDePorte where destino=38
+
+
+
+

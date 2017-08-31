@@ -59,6 +59,8 @@ Partial Class CartaDePorteInformesAccesoClientes
 
         If CartaDePorteManager.EsClienteBLDcorredor(HFSC.Value) Then
             Response.Redirect("CartaDePorteInformesAccesoClientesBLDcorredor.aspx")
+        ElseIf Membership.GetUser.UserName = "DIAZDOW" Then
+            Response.Redirect("CartaDePorteInformesAccesoClientesEspecial.aspx")
         End If
 
 
