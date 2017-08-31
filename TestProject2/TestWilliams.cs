@@ -864,7 +864,7 @@ namespace ProntoMVC.Tests
 
 
             string usuario = "DIAZDOW";
-            var rs = "DIAZ  RIGANTI";
+            var rs = ""; // se usa como "QueContenga"
             var desde = new DateTime(2017, 1, 1);
             var hasta = new DateTime(2017, 1, 31);
             var estadofiltro = CartaDePorteManager.enumCDPestado.TodasMenosLasRechazadas;
@@ -895,7 +895,7 @@ namespace ProntoMVC.Tests
 
 
             ReportViewer ReporteLocal = new Microsoft.Reporting.WebForms.ReportViewer();
-            string output = @"C:\Users\Administrador\Desktop\Informe" + DateTime.Now.ToString("ddMMMyyyy_HHmmss") + ".xls";
+            string output = @"C:\Users\Mariano\Desktop\Informe" + DateTime.Now.ToString("ddMMMyyyy_HHmmss") + ".xls";
             ReportParameter[] yourParams = new ReportParameter[10];
             yourParams[0] = new ReportParameter("webservice", "");
             yourParams[1] = new ReportParameter("sServidor", "");

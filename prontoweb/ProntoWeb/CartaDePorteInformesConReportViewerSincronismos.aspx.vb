@@ -836,12 +836,11 @@ Partial Class CartaDePorteInformesConReportViewerSincronismos
 
                 For Each cdp As WillyInformesDataSet.wCartasDePorte_TX_InformesCorregidoRow In ds.wCartasDePorte_TX_InformesCorregido
                     With cdp
-                        If .IsHumedadNull Then .Humedad = 0
-                        If .IsHumedadDesnormalizadaNull Then .HumedadDesnormalizada = 0
-                        If .IsNReciboNull Then .NRecibo = 0
-                        If .n Then
+                        'If .IsHumedadNull Then .Humedad = 0
+                        'If .IsHumedadDesnormalizadaNull Then .HumedadDesnormalizada = 0
+                        'If .IsNReciboNull Then .NRecibo = 0
 
-                            If .IsObservacionesNull Then .Observaciones = ""
+                        If .IsObservacionesNull Then .Observaciones = ""
                         .Observaciones = .Observaciones.Replace(vbLf, "").Replace(vbCr, "")
                     End With
                 Next
