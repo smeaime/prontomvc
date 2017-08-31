@@ -2978,8 +2978,9 @@ Namespace Pronto.ERP.Bll
 
                     sb &= IIf(True, "c", "v").ToString.PadRight(1) 'TipoTrans	STRING(1)	Tipo de transporte c=camión  v=vagón o=Otro)    841)    841
 
+                    If .IsNobleGradoNull Then .NobleGrado = 0
+                    sb &= Left(Int(.NobleGrado).ToString, 10).PadLeft(10) 'Grado	STRING(10)	Grado)    842)    851
 
-                    sb &= Left(.NobleGrado.ToString, 10).PadRight(10) 'Grado	STRING(10)	Grado)    842)    851
                     sb &= Left(.Factor.ToString, 10).PadRight(10) 'Factor	STRING(10)	Factor)    852)    861
 
                     sb &= Left(.Observaciones.ToString, 100).PadRight(100) 'Observac	STRING(100)	Observaciones)    862)    961
@@ -3012,7 +3013,9 @@ Namespace Pronto.ERP.Bll
                         sCalidad = "FE"
                     End If
                     'sb &= sCalidad.PadRight(2) 'ConCalidad	STRING(4)	Condición Calidad Grado(G1,G2 o G3), Camara(CC) o Fuera de standart (FE)
+                    If .IsNobleGradoNull Then .NobleGrado = 0
                     sb &= .NobleGrado.ToString().PadRight(2)
+
 
 
 
@@ -8189,7 +8192,7 @@ Namespace Pronto.ERP.Bll
 
                     sb &= IIf(True, "c", "v").ToString.PadRight(1) 'TipoTrans	STRING(1)	Tipo de transporte c=camión  v=vagón o=Otro)    841)    841
 
-
+                    If .IsNobleGradoNull Then .NobleGrado = 0
                     sb &= Left(.NobleGrado.ToString, 10).PadLeft(10) 'Grado	STRING(10)	Grado)    842)    851
                     sb &= Left(.Factor.ToString, 10).PadLeft(10) 'Factor	STRING(10)	Factor)    852)    861
 
@@ -8477,7 +8480,7 @@ Namespace Pronto.ERP.Bll
                     sb &= Left(.NumeroCartaDePorte.ToString, 14).PadRight(14) 'CarPorte	STRING(14)	Número de Carta de Porte)    827)    840
                     sb &= IIf(True, "c", "v").ToString.PadRight(1) 'TipoTrans	STRING(1)	Tipo de transporte c=camión  v=vagón o=Otro)    841)    841
 
-
+                    If .IsNobleGradoNull Then .NobleGrado = 0
                     sb &= Left(.NobleGrado.ToString, 10).PadRight(10) 'Grado	STRING(10)	Grado)    842)    851
                     sb &= Left(.Factor.ToString, 10).PadRight(10) 'Factor	STRING(10)	Factor)    852)    861
 
@@ -8794,7 +8797,7 @@ Namespace Pronto.ERP.Bll
                     sb &= Left(.NumeroCartaDePorte.ToString, 14).PadRight(14) 'CarPorte	STRING(14)	Número de Carta de Porte)    827)    840
                     sb &= IIf(True, "c", "v").ToString.PadRight(1) 'TipoTrans	STRING(1)	Tipo de transporte c=camión  v=vagón o=Otro)    841)    841
 
-
+                    If .IsNobleGradoNull Then .NobleGrado = 0
                     sb &= Left(.NobleGrado.ToString, 10).PadRight(10) 'Grado	STRING(10)	Grado)    842)    851
                     sb &= Left(.Factor.ToString, 10).PadRight(10) 'Factor	STRING(10)	Factor)    852)    861
 
@@ -9790,6 +9793,7 @@ Namespace Pronto.ERP.Bll
                     sb &= IIf(True, "c", "v").ToString.PadRight(1) 'TipoTrans	STRING(1)	Tipo de transporte c=camión  v=vagón o=Otro)    841)    841
 
 
+                    If .IsNobleGradoNull Then .NobleGrado = 0
                     sb &= Left(Int(.NobleGrado).ToString, 10).PadLeft(10) 'Grado	STRING(10)	Grado)    842)    851
                     sb &= Left(Int(.Factor).ToString, 10).PadLeft(10) 'Factor	STRING(10)	Factor)    852)    861
 
@@ -11670,10 +11674,14 @@ Namespace Pronto.ERP.Bll
 
 
 
-
-
-
+                    'Grado	STRING(10)	Grado)    842)    851
+                    If .IsNobleGradoNull Then .NobleGrado = 0
                     sb &= Left(Int(.NobleGrado).ToString, 10).PadLeft(10) 'Grado	STRING(10)	Grado)    842)    851
+
+
+
+
+
                     sb &= Left(Int(.Factor).ToString, 10).PadLeft(10) 'Factor	STRING(10)	Factor)    852)    861
 
                     sb &= Left(.Observaciones.ToString, 100).PadRight(100) 'Observac	STRING(100)	Observaciones)    862)    961
@@ -13516,7 +13524,7 @@ Namespace Pronto.ERP.Bll
 
 
 
-
+                    If .IsNobleGradoNull Then .NobleGrado = 0
                     sb &= Left(Int(.NobleGrado).ToString, 10).PadLeft(10) 'Grado	STRING(10)	Grado)    842)    851
                     sb &= Left(Int(.Factor).ToString, 10).PadLeft(10) 'Factor	STRING(10)	Factor)    852)    861
 
@@ -14229,7 +14237,7 @@ Namespace Pronto.ERP.Bll
 
 
 
-
+                    If .IsNobleGradoNull Then .NobleGrado = 0
                     sb &= Left(Int(.NobleGrado).ToString, 10).PadLeft(10) 'Grado	STRING(10)	Grado)    842)    851
                     sb &= Left(Int(0).ToString, 10).PadLeft(10) 'Factor	STRING(10)	Factor)    852)    861
 
@@ -14950,7 +14958,7 @@ Namespace Pronto.ERP.Bll
 
 
 
-
+                    If .IsNobleGradoNull Then .NobleGrado = 0
                     sb &= Left(Int(.NobleGrado).ToString, 10).PadLeft(10) 'Grado	STRING(10)	Grado)    842)    851
                     sb &= Left(Int(0).ToString, 10).PadLeft(10) 'Factor	STRING(10)	Factor)    852)    861
 
@@ -15757,7 +15765,7 @@ Namespace Pronto.ERP.Bll
 
 
 
-
+                    If .IsNobleGradoNull Then .NobleGrado = 0
                     sb &= Left(Int(.NobleGrado).ToString, 10).PadLeft(10) 'Grado	STRING(10)	Grado)    842)    851
                     sb &= Left(Int(.Factor).ToString, 10).PadLeft(10) 'Factor	STRING(10)	Factor)    852)    861
 
@@ -16477,7 +16485,7 @@ Namespace Pronto.ERP.Bll
 
 
 
-
+                    If .IsNobleGradoNull Then .NobleGrado = 0
                     sb &= Left(Int(.NobleGrado).ToString, 10).PadLeft(10) 'Grado	STRING(10)	Grado)    842)    851
                     sb &= Left(Int(.Factor).ToString, 10).PadLeft(10) 'Factor	STRING(10)	Factor)    852)    861
 
@@ -17189,7 +17197,7 @@ Namespace Pronto.ERP.Bll
 
 
 
-
+                    If .IsNobleGradoNull Then .NobleGrado = 0
                     sb &= Left(Int(.NobleGrado).ToString, 10).PadLeft(10) 'Grado	STRING(10)	Grado)    842)    851
                     sb &= Left(Int(.Factor).ToString, 10).PadLeft(10) 'Factor	STRING(10)	Factor)    852)    861
 
@@ -17883,7 +17891,7 @@ Namespace Pronto.ERP.Bll
 
 
 
-
+                    If .IsNobleGradoNull Then .NobleGrado = 0
                     sb &= Left(Int(.NobleGrado).ToString, 10).PadLeft(10) 'Grado	STRING(10)	Grado)    842)    851
                     sb &= Left(Int(.Factor).ToString, 10).PadLeft(10) 'Factor	STRING(10)	Factor)    852)    861
 
@@ -19222,7 +19230,14 @@ Namespace Pronto.ERP.Bll
                     '44	PBonHume	10	Porcentaje bonificación humedad (dos (2) decimales)		Derecha	694
                     '45	KgsBonHu	10	Kilos bonificación humedad		Derecha	704
 
-                    sb &= String.Format("{0:F1}", .Humedad).PadLeft(10) 'PorHume	STRING(10)	Porcentaje humedad (un (1) decimal))    666)    675
+                    If .IsHumedadNull Then
+                        sb &= String.Format("{0:F1}", 0).PadLeft(10) 'PorHume	STRING(10)	Porcentaje humedad (un (1) decimal))    666)    675
+                    Else
+                        sb &= String.Format("{0:F1}", .Humedad).PadLeft(10) 'PorHume	STRING(10)	Porcentaje humedad (un (1) decimal))    666)    675
+                    End If
+
+
+
                     sb &= cero.ToString.PadLeft(10) 'PorMemaHumedad	STRING(10)	Porcentaje merma humedad (dos (2) decimales))    676)    685
 
 
@@ -19317,7 +19332,7 @@ Namespace Pronto.ERP.Bll
                     sb &= IIf(.SubnumeroVagon = 0, "c", "v").ToString.PadRight(1) 'TipoTrans	STRING(1)	Tipo de transporte c=camión  v=vagón o=Otro)    841)    841
 
 
-
+                    If .IsNobleGradoNull Then .NobleGrado = 0
                     sb &= Left(Int(.NobleGrado).ToString, 10).PadLeft(10) 'Grado	STRING(10)	Grado)    842)    851
 
 
@@ -19812,6 +19827,7 @@ Namespace Pronto.ERP.Bll
                         sb = RenglonBLDCalidad_VersionVieja(cdp, 66, .NobleAmohosados, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Amohosados")
 
                         '72	2	Grado 3	Arbitrado
+                        If .IsNobleGradoNull Then .NobleGrado = 0
                         If .NobleGrado = 3 Then sb = RenglonBLDCalidad_VersionVieja(cdp, 72, .NobleGrado, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Grado3")
 
                         '73	2	Proteina	Arbitrado
@@ -19866,6 +19882,7 @@ Namespace Pronto.ERP.Bll
                         sb = RenglonBLDCalidad_VersionVieja(cdp, 19, .NobleAmohosados, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Amohosados")
 
                         '55	3	Grado 1	Arbitrado
+                        If .IsNobleGradoNull Then .NobleGrado = 0
                         If .NobleGrado = 1 Then sb = RenglonBLDCalidad_VersionVieja(cdp, 55, .NoblePicados, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Grado1")
 
                         '169	3	Grado 2	Arbitrado
@@ -19906,6 +19923,7 @@ Namespace Pronto.ERP.Bll
 
                         sb = RenglonBLDCalidad_VersionVieja(cdp, 230, .NobleAmohosados, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Amohosados")
 
+                        If .IsNobleGradoNull Then .NobleGrado = 0
                         If .NobleGrado = 1 Then sb = RenglonBLDCalidad_VersionVieja(cdp, 151, .NoblePicados, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Grado1")
 
                         If .NobleGrado = 2 Then sb = RenglonBLDCalidad_VersionVieja(cdp, 170, .NoblePicados, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Grado2")
@@ -20554,6 +20572,7 @@ Namespace Pronto.ERP.Bll
                             Dim codgrado As Integer
                             Dim nombre As String
 
+                            If .IsNobleGradoNull Then .NobleGrado = 0
                             If carta.NobleGrado = 1 Then
                                 codgrado = 25
                                 nombre = "Grado_1"
@@ -20827,6 +20846,7 @@ Namespace Pronto.ERP.Bll
                             sb = RenglonBLDCalidad_VersionVieja(cdp, 66, .NobleAmohosados, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Amohosados")
 
                             '72	2	Grado 3	Arbitrado
+                            If .IsNobleGradoNull Then .NobleGrado = 0
                             If .NobleGrado = 3 Then sb = RenglonBLDCalidad_VersionVieja(cdp, 72, .NobleGrado, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Grado3")
 
                             '73	2	Proteina	Arbitrado
@@ -20881,6 +20901,7 @@ Namespace Pronto.ERP.Bll
                             sb = RenglonBLDCalidad_VersionVieja(cdp, 19, .NobleAmohosados, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Amohosados")
 
                             '55	3	Grado 1	Arbitrado
+                            If .IsNobleGradoNull Then .NobleGrado = 0
                             If .NobleGrado = 1 Then sb = RenglonBLDCalidad_VersionVieja(cdp, 55, .NoblePicados, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Grado1")
 
                             '169	3	Grado 2	Arbitrado
@@ -20921,6 +20942,7 @@ Namespace Pronto.ERP.Bll
 
                             sb = RenglonBLDCalidad_VersionVieja(cdp, 230, .NobleAmohosados, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Amohosados")
 
+                            If .IsNobleGradoNull Then .NobleGrado = 0
                             If .NobleGrado = 1 Then sb = RenglonBLDCalidad_VersionVieja(cdp, 151, .NoblePicados, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Grado1")
 
                             If .NobleGrado = 2 Then sb = RenglonBLDCalidad_VersionVieja(cdp, 170, .NoblePicados, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Grado2")
@@ -21766,6 +21788,8 @@ Namespace Pronto.ERP.Bll
                             bonifrebajagrado3 = ""
                             cantbonifgrado3 = 0
                     End Select
+
+                    If .IsNobleGradoNull Then .NobleGrado = 0
 
                     '21:         GRADO(1)
                     sb = RenglonAlabernCalidad(cdp, "GR1", 21, .NobleGrado, bonifrebajagrado1, cantbonifgrado1, nF, cantbonifgrado1)  'no tenemos la abreviatura del rubro
@@ -24109,7 +24133,7 @@ Namespace Pronto.ERP.Bll
                     '│ MERMAHUME  │ Character │     6 │     │
                     '│ KGMERMAHUM │ Character │    10 │     │
 
-
+                    ssss
                     sb &= String.Format("{0:F1}", .HumedadDesnormalizada).ToString.PadLeft(6)
                     sb &= String.Format("{0:F1}", .Humedad).PadLeft(6)
 
@@ -28146,6 +28170,7 @@ Namespace Pronto.ERP.Bll
                             sb = RenglonBLDCalidad_VersionVieja(cdp, 66, .NobleAmohosados, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Amohosados")
 
                             '72	2	Grado 3	Arbitrado
+                            If .IsNobleGradoNull Then .NobleGrado = 0
                             If .NobleGrado = 3 Then sb = RenglonBLDCalidad_VersionVieja(cdp, 72, .NobleGrado, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Grado3")
 
                             '73	2	Proteina	Arbitrado
@@ -28200,7 +28225,9 @@ Namespace Pronto.ERP.Bll
                             sb = RenglonBLDCalidad_VersionVieja(cdp, 19, .NobleAmohosados, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Amohosados")
 
                             '55	3	Grado 1	Arbitrado
+                            If .IsNobleGradoNull Then .NobleGrado = 0
                             If .NobleGrado = 1 Then sb = RenglonBLDCalidad_VersionVieja(cdp, 55, .NoblePicados, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Grado1")
+
 
                             '169	3	Grado 2	Arbitrado
                             If .NobleGrado = 2 Then sb = RenglonBLDCalidad_VersionVieja(cdp, 169, .NoblePicados, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Grado2")
@@ -28240,6 +28267,7 @@ Namespace Pronto.ERP.Bll
 
                             sb = RenglonBLDCalidad_VersionVieja(cdp, 230, .NobleAmohosados, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Amohosados")
 
+                            If .IsNobleGradoNull Then .NobleGrado = 0
                             If .NobleGrado = 1 Then sb = RenglonBLDCalidad_VersionVieja(cdp, 151, .NoblePicados, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Grado1")
 
                             If .NobleGrado = 2 Then sb = RenglonBLDCalidad_VersionVieja(cdp, 170, .NoblePicados, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Grado2")

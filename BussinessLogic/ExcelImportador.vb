@@ -2253,7 +2253,6 @@ Public Class ExcelImportadorManager
                         '.CalidadDe = BuscaIdCalidadPreciso(DiccionarioEquivalenciasManager.BuscarEquivalencia(SC, r(34)), SC)
 
                         .Calidad = ""
-                        .NRecibo = 0
 
 
 
@@ -2318,6 +2317,17 @@ Public Class ExcelImportadorManager
 
 
                         .Cosecha = "1617"
+
+
+
+                        'hay banda de campos q dejo en NULL y los sincros explotan despues
+                        .Humedad = 0
+                        .NobleGrado = 0
+                        .NobleExtranos = 0
+                        .NRecibo = 0
+
+
+
 
 
                         .SituacionLog = Left(log, 299)
