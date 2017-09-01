@@ -80,3 +80,64 @@ Log Entry :
 09/01/2017 12:04:54
 Error in: http://localhost:50769/ProntoWeb/CartasDePortes.aspx?tipo=Todas. Error Message:Mariano
 __________________________
+
+Log Entry : 
+09/01/2017 12:07:37
+Error in: http://localhost:50769/ProntoWeb/CartasDePortes.aspx?tipo=Todas. Error Message:Mariano
+__________________________
+
+Log Entry : 
+09/01/2017 12:07:56
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesAccesoClientesEspecial.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartaDePorteInformesAccesoClientesBLDcorredor.BindTypeDropDown() en C:\bdl\pronto\prontoweb\ProntoWeb\CartaDePorteInformesAccesoClientesEspecial.aspx.vb:línea 225
+App_Web_cartadeporteinformesaccesoclientesespecial.aspx.4199bbd4.carrlzay
+__________________________
+
+Log Entry : 
+09/01/2017 12:08:17
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesAccesoClientesEspecial.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartaDePorteInformesAccesoClientesBLDcorredor.BindTypeDropDown() en C:\bdl\pronto\prontoweb\ProntoWeb\CartaDePorteInformesAccesoClientesEspecial.aspx.vb:línea 225
+App_Web_cartadeporteinformesaccesoclientesespecial.aspx.4199bbd4.carrlzay
+__________________________
+
+Log Entry : 
+09/01/2017 12:08:35
+Error in: http://localhost:50769/ProntoWeb/Principal.aspx. Error Message:DIAZDOW esta logueado, pero lo redirijo al login porque faltan los datos de session. No deberia mejor mandarlo a SeleccionarEmpresa? Ademas, no hago el LogOut y le queda el cookie!!!
+__________________________
+
+Log Entry : 
+09/01/2017 12:08:36
+Error in: http://localhost:50769/ProntoWeb/CartasDePortes.aspx?tipo=Todas. Error Message:DIAZDOW
+__________________________
+
+Log Entry : 
+09/01/2017 12:08:36
+Error in: http://localhost:50769/ProntoWeb/CartasDePortes.aspx?tipo=Todas. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartasDePortes.BindTypeDropDown() en C:\bdl\pronto\prontoweb\ProntoWeb\CartasDePortes.aspx.vb:línea 98
+App_Web_cartasdeportes.aspx.4199bbd4.oqzwhasf
+__________________________
+
+Log Entry : 
+09/01/2017 12:08:37
+Error in: http://localhost:50769/ProntoWeb/CartasDePortes.aspx?tipo=Todas. Error Message:System.Threading.ThreadAbortException
+Subproceso anulado.
+   en System.Threading.Thread.AbortInternal()
+   en System.Threading.Thread.Abort(Object stateInfo)
+   en System.Web.HttpResponse.AbortCurrentThread()
+   en System.Web.HttpResponse.End()
+   en System.Web.HttpResponse.Redirect(String url, Boolean endResponse, Boolean permanent)
+   en System.Web.HttpResponse.Redirect(String url)
+   en CartasDePortes.Permisos() en C:\bdl\pronto\prontoweb\ProntoWeb\CartasDePortes.aspx.vb:línea 142
+mscorlib
+__________________________
+
+Log Entry : 
+09/01/2017 12:08:37
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesAccesoClientesEspecial.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartaDePorteInformesAccesoClientesBLDcorredor.BindTypeDropDown() en C:\bdl\pronto\prontoweb\ProntoWeb\CartaDePorteInformesAccesoClientesEspecial.aspx.vb:línea 225
+App_Web_cartadeporteinformesaccesoclientesespecial.aspx.4199bbd4.carrlzay
+__________________________
