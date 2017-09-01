@@ -760,8 +760,8 @@ usuario As String, ConexBDLmaster As String,
             '"Pero tiene que ser con un filtro especial. unicamente tiene que filtrar los camiones que vengan CORREDOR DIAZ RIGANTI. 
             ' y que figure en "titular", "intermediario", "remitente", Cliete observaciones" "destintario" DOW AGROSCIENCES ARG. SRL . "
 
-            Dim idcli = BuscaIdClientePrecisoConCUIT("30-55151869-4", SC)
-            Dim w = " where Vendedor=4792 or CuentaOrden1=4792 or CuentaOrden2=4792 or Entregador=4792 or IdClienteAuxiliar=4792"
+            Dim idcli = BuscaIdClientePrecisoConCUIT("30-63602157-8", SC)
+            Dim w = " where Vendedor=" & idcli.ToString & " or CuentaOrden1=" & idcli.ToString & "  or CuentaOrden2=" & idcli.ToString & "  or Entregador=" & idcli.ToString & "  or IdClienteAuxiliar=" & idcli.ToString
 
             agrup &= w
             'lo que me descoloca es que destinatario es excluyente en nuestro filtro.... -ok, traete todo lo del corredor ese, y despues hacé a mano el filtro de DOW
