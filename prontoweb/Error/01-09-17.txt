@@ -1,0 +1,82 @@
+
+Log Entry : 
+09/01/2017 11:45:12
+Error in: http://localhost:50769/ProntoWeb/CartasDePortes.aspx?tipo=Todas. Error Message:Mariano
+__________________________
+
+Log Entry : 
+09/01/2017 11:45:12
+Error in: http://localhost:50769/ProntoWeb/CartasDePortes.aspx?tipo=Todas. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartasDePortes.BindTypeDropDown() en C:\bdl\pronto\prontoweb\ProntoWeb\CartasDePortes.aspx.vb:línea 98
+App_Web_cartasdeportes.aspx.4199bbd4.oqzwhasf
+__________________________
+
+Log Entry : 
+09/01/2017 11:45:13
+Error in: http://localhost:50769/ProntoWeb/CartasDePortes.aspx?tipo=Todas. Error Message:System.Threading.ThreadAbortException
+Subproceso anulado.
+   en System.Threading.Thread.AbortInternal()
+   en System.Threading.Thread.Abort(Object stateInfo)
+   en System.Web.HttpResponse.AbortCurrentThread()
+   en System.Web.HttpResponse.End()
+   en System.Web.HttpResponse.Redirect(String url, Boolean endResponse, Boolean permanent)
+   en System.Web.HttpResponse.Redirect(String url)
+   en CartasDePortes.Permisos() en C:\bdl\pronto\prontoweb\ProntoWeb\CartasDePortes.aspx.vb:línea 142
+mscorlib
+__________________________
+
+Log Entry : 
+09/01/2017 11:45:13
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesAccesoClientes.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartaDePorteInformesAccesoClientes.BindTypeDropDown() en C:\bdl\pronto\prontoweb\ProntoWeb\CartaDePorteInformesAccesoClientes.aspx.vb:línea 266
+App_Web_cartadeporteinformesaccesoclientes.aspx.4199bbd4.go3l0zwk
+__________________________
+
+Log Entry : 
+09/01/2017 11:46:30
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesAccesoClientesEspecial.aspx. Error Message:Mariano esta logueado, pero lo redirijo al login porque faltan los datos de session. No deberia mejor mandarlo a SeleccionarEmpresa? Ademas, no hago el LogOut y le queda el cookie!!!
+__________________________
+
+Log Entry : 
+09/01/2017 11:55:23
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesAccesoClientesEspecial.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartaDePorteInformesAccesoClientesBLDcorredor.BindTypeDropDown() en C:\bdl\pronto\prontoweb\ProntoWeb\CartaDePorteInformesAccesoClientesEspecial.aspx.vb:línea 225
+App_Web_cartadeporteinformesaccesoclientesespecial.aspx.4199bbd4.carrlzay
+__________________________
+
+Log Entry : 
+09/01/2017 11:57:29
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesAccesoClientesEspecial.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartaDePorteInformesAccesoClientesBLDcorredor.BindTypeDropDown() en C:\bdl\pronto\prontoweb\ProntoWeb\CartaDePorteInformesAccesoClientesEspecial.aspx.vb:línea 225
+App_Web_cartadeporteinformesaccesoclientesespecial.aspx.4199bbd4.carrlzay
+__________________________
+
+Log Entry : 
+09/01/2017 11:58:34
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesAccesoClientesEspecial.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartaDePorteInformesAccesoClientesBLDcorredor.BindTypeDropDown() en C:\bdl\pronto\prontoweb\ProntoWeb\CartaDePorteInformesAccesoClientesEspecial.aspx.vb:línea 225
+App_Web_cartadeporteinformesaccesoclientesespecial.aspx.4199bbd4.carrlzay
+__________________________
+
+Log Entry : 
+09/01/2017 12:01:26
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesAccesoClientesEspecial.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartaDePorteInformesAccesoClientesBLDcorredor.BindTypeDropDown() en C:\bdl\pronto\prontoweb\ProntoWeb\CartaDePorteInformesAccesoClientesEspecial.aspx.vb:línea 225
+App_Web_cartadeporteinformesaccesoclientesespecial.aspx.4199bbd4.carrlzay
+__________________________
+
+Log Entry : 
+09/01/2017 12:04:53
+Error in: http://localhost:50769/ProntoWeb/Principal.aspx. Error Message:Mariano esta logueado, pero lo redirijo al login porque faltan los datos de session. No deberia mejor mandarlo a SeleccionarEmpresa? Ademas, no hago el LogOut y le queda el cookie!!!
+__________________________
+
+Log Entry : 
+09/01/2017 12:04:54
+Error in: http://localhost:50769/ProntoWeb/CartasDePortes.aspx?tipo=Todas. Error Message:Mariano
+__________________________

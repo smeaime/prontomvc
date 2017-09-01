@@ -50,9 +50,7 @@ Partial Class CartaDePorteInformesAccesoClientesBLDcorredor
         'Invalid postback or callback argument. Event validation is enabled using in configuration or <%@ Page EnableEventValidation="true" %> in a page. For security purposes, this feature verifies that arguments to postback or callback events originate from the server control that originally rendered them. If the data is valid and expected, use the ClientScriptManager.RegisterForEventValidation method in order to register the postback or callback data for validation.
 
 
-        If Not CartaDePorteManager.EsClienteBLDcorredor(HFSC.Value) Then
-            Return
-        End If
+
 
         If Not IsPostBack Then 'es decir, si es la primera vez que se carga
             '////////////////////////////////////////////
@@ -71,7 +69,6 @@ Partial Class CartaDePorteInformesAccesoClientesBLDcorredor
             Catch ex As Exception
                 MandarMailDeError(ex)
             End Try
-
 
 
 
