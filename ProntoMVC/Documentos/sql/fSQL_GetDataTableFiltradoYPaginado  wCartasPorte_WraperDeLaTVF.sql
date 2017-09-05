@@ -267,6 +267,80 @@ isnull(LOCORI.CodigoAFIP,'') AS CodigoAFIP
 
 
 
+   ,CDP.NobleExtranos      ,CDP.NobleNegros
+,CDP.NobleQuebrados      ,CDP.NobleDaniados      ,CDP.NobleChamico      ,CDP.NobleChamico2      ,CDP.NobleRevolcado
+,CDP.NobleObjetables      ,CDP.NobleAmohosados      ,CDP.NobleHectolitrico      ,CDP.NobleCarbon      
+,CDP.NoblePanzaBlanca      ,CDP.NoblePicados      ,CDP.NobleMGrasa      ,CDP.NobleAcidezGrasa     
+,CDP.NobleVerdes      ,CDP.NobleGrado      ,CDP.NobleConforme      ,CDP.NobleACamara      ,CDP.Cosecha 
+,CDP.HumedadDesnormalizada      ,CDP.Factor      ,CDP.IdFacturaImputada      ,CDP.PuntoVenta   
+,CDP.SubnumeroVagon      ,CDP.TarifaFacturada      ,CDP.TarifaSubcontratista1     
+,CDP.TarifaSubcontratista2      ,CDP.FechaArribo      ,CDP.[Version]      ,CDP.MotivoAnulacion 
+,CDP.NumeroSubfijo      ,CDP.IdEstablecimiento      ,CDP.EnumSyngentaDivision   
+,CDP.Corredor2      ,CDP.IdUsuarioModifico      ,CDP.FechaModificacion      
+,CDP.FechaEmision      ,CDP.EstaArchivada      ,CDP.ExcluirDeSubcontratistas   
+,CDP.IdTipoMovimiento      ,CDP.IdClienteAFacturarle      ,CDP.SubnumeroDeFacturacion   
+,CDP.AgregaItemDeGastosAdministrativos      ,CDP.CalidadGranosQuemados      ,CDP.CalidadGranosQuemadosBonifica_o_Rebaja      
+,CDP.CalidadTierra      ,CDP.CalidadTierraBonifica_o_Rebaja      ,CDP.CalidadMermaChamico       
+,CDP.CalidadMermaChamicoBonifica_o_Rebaja      ,CDP.CalidadMermaZarandeo      
+,CDP.CalidadMermaZarandeoBonifica_o_Rebaja      ,CDP.FueraDeEstandar      ,CDP.CalidadPuntaSombreada    
+,CDP.CobraAcarreo      ,CDP.LiquidaViaje      ,CDP.IdClienteAuxiliar      ,CDP.CalidadDescuentoFinal   
+,CDP.PathImagen      ,CDP.PathImagen2       ,CDP.AgrupadorDeTandaPeriodos      ,CDP.ClaveEncriptada     
+,CDP.NumeroCartaEnTextoParaBusqueda      ,CDP.IdClienteEntregador      ,CDP.IdDetalleFactura     
+,CDP.SojaSustentableCodCondicion      ,CDP.SojaSustentableCondicion     
+,CDP.SojaSustentableNroEstablecimientoDeProduccion      ,CDP.IdClientePagadorFlete     
+,CDP.SubnumeroVagonEnTextoParaBusqueda      ,CDP.IdCorredor2       ,CDP.Acopio1      ,CDP.Acopio2    
+,CDP.Acopio3      ,CDP.Acopio4      ,CDP.Acopio5 ,CDP.Acopio6        ,CDP.AcopioFacturarleA      
+,CDP.CalidadGranosDanadosRebaja      ,CDP.CalidadGranosExtranosRebaja 
+
+
+From i In db.CartasDePorteDetalle_EF
+                                                                                 Where i.IdCartaDePorte = id _
+                                                                                 And i.Campo = "CalidadGastoDeSecada"
+                                                    
+
+                                                                                 And i.Campo = "CalidadGastoDeSecada"
+
+
+                .CalidadGastoDeSecada = GetDetalle("CalidadGastoDeSecada", db, id)
+                .CalidadGastoDeSecadaRebaja = GetDetalle("CalidadGastoDeSecadaRebaja", db, id)
+                .CalidadGastoDeSecadaMerma = GetDetalle("CalidadGastoDeSecadaMerma", db, id)
+                .TipoMermaGastoDeSecada = GetDetalle("TipoMermaGastoDeSecada", db, id)
+
+
+                .CalidadMermaVolatil = GetDetalle("CalidadMermaVolatil", db, id)
+                .CalidadMermaVolatilRebaja = GetDetalle("CalidadMermaVolatilRebaja", db, id)
+                .CalidadMermaVolatilMerma = GetDetalle("CalidadMermaVolatilMerma", db, id)
+                .TipoMermaVolatil = GetDetalle("TipoMermaVolatil", db, id)
+
+
+                .CalidadFondoNidera = GetDetalle("CalidadFondoNidera", db, id)
+                .CalidadFondoNideraRebaja = GetDetalle("CalidadFondoNideraRebaja", db, id)
+                .CalidadFondoNideraMerma = GetDetalle("CalidadFondoNideraMerma", db, id)
+                .TipoMermaFondoNidera = GetDetalle("TipoMermaFondoNidera", db, id)
+
+
+                .CalidadMermaConvenida = GetDetalle("CalidadMermaConvenida", db, id)
+                .CalidadMermaConvenidaRebaja = GetDetalle("CalidadMermaConvenidaRebaja", db, id)
+                .CalidadMermaConvenidaMerma = GetDetalle("CalidadMermaConvenidaMerma", db, id)
+                .TipoMermaConvenida = GetDetalle("TipoMermaConvenida", db, id)
+
+
+                .CalidadTalCualVicentin = GetDetalle("CalidadTalCualVicentin", db, id)
+                .CalidadTalCualVicentinRebaja = GetDetalle("CalidadTalCualVicentinRebaja", db, id)
+                .CalidadTalCualVicentinMerma = GetDetalle("CalidadTalCualVicentinMerma", db, id)
+                .TipoMermaTalCualVicentin = GetDetalle("TipoMermaTalCualVicentin", db, id)
+
+
+
+
+
+
+
+
+
+
+
+
 FROM    CartasDePorte CDP          
 LEFT OUTER JOIN Clientes CLIVEN ON CDP.Vendedor = CLIVEN.IdCliente       
 LEFT OUTER JOIN Clientes CLICO1 ON CDP.CuentaOrden1 = CLICO1.IdCliente   
@@ -297,6 +371,10 @@ LEFT OUTER JOIN Facturas FAC ON CDP.idFacturaImputada = FAC.IdFactura
 LEFT OUTER JOIN Clientes CLIFAC ON CLIFAC.IdCliente = FAC.IdCliente             
 LEFT OUTER JOIN Partidos PARTORI ON LOCORI.IdPartido = PARTORI.IdPartido          
 LEFT OUTER JOIN Empleados E1 ON CDP.IdUsuarioIngreso = E1.IdEmpleado  
+
+LEFT OUTER JOIN CartasDePorteDetalle CALIDAD ON CDP.IdCartaDePorte = CALIDAD.IdCartaDePorte  
+
+
 
 
 --LEFT OUTER JOIN CartasDePorteDetalle CDPDET ON CDP.IdCartaDePorte = CDPDET.IdCartaDePorte And CDPDET.Campo = 'CalidadMermaVolatilMerma'   -- Return oDet.Valor
