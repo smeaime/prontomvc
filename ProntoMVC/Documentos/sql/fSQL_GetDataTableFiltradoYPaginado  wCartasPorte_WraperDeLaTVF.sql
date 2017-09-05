@@ -268,49 +268,6 @@ isnull(LOCORI.CodigoAFIP,'') AS CodigoAFIP
 
 
 
-'Extraños'  + CDP.NobleExtranos +  
-'Extraños'  + CDP.NobleNegros +
-
-CALIDAD.Campo + CALIDAD.Valor
-
-
-                .CalidadGastoDeSecada = GetDetalle("CalidadGastoDeSecada", db, id)
-                .CalidadGastoDeSecadaRebaja = GetDetalle("CalidadGastoDeSecadaRebaja", db, id)
-                .CalidadGastoDeSecadaMerma = GetDetalle("CalidadGastoDeSecadaMerma", db, id)
-                .TipoMermaGastoDeSecada = GetDetalle("TipoMermaGastoDeSecada", db, id)
-
-
-                .CalidadMermaVolatil = GetDetalle("CalidadMermaVolatil", db, id)
-                .CalidadMermaVolatilRebaja = GetDetalle("CalidadMermaVolatilRebaja", db, id)
-                .CalidadMermaVolatilMerma = GetDetalle("CalidadMermaVolatilMerma", db, id)
-                .TipoMermaVolatil = GetDetalle("TipoMermaVolatil", db, id)
-
-
-                .CalidadFondoNidera = GetDetalle("CalidadFondoNidera", db, id)
-                .CalidadFondoNideraRebaja = GetDetalle("CalidadFondoNideraRebaja", db, id)
-                .CalidadFondoNideraMerma = GetDetalle("CalidadFondoNideraMerma", db, id)
-                .TipoMermaFondoNidera = GetDetalle("TipoMermaFondoNidera", db, id)
-
-
-                .CalidadMermaConvenida = GetDetalle("CalidadMermaConvenida", db, id)
-                .CalidadMermaConvenidaRebaja = GetDetalle("CalidadMermaConvenidaRebaja", db, id)
-                .CalidadMermaConvenidaMerma = GetDetalle("CalidadMermaConvenidaMerma", db, id)
-                .TipoMermaConvenida = GetDetalle("TipoMermaConvenida", db, id)
-
-
-                .CalidadTalCualVicentin = GetDetalle("CalidadTalCualVicentin", db, id)
-                .CalidadTalCualVicentinRebaja = GetDetalle("CalidadTalCualVicentinRebaja", db, id)
-                .CalidadTalCualVicentinMerma = GetDetalle("CalidadTalCualVicentinMerma", db, id)
-                .TipoMermaTalCualVicentin = GetDetalle("TipoMermaTalCualVicentin", db, id)
-
-
-
-
-
-
-
-
-
 
 
 
@@ -345,7 +302,7 @@ LEFT OUTER JOIN Clientes CLIFAC ON CLIFAC.IdCliente = FAC.IdCliente
 LEFT OUTER JOIN Partidos PARTORI ON LOCORI.IdPartido = PARTORI.IdPartido          
 LEFT OUTER JOIN Empleados E1 ON CDP.IdUsuarioIngreso = E1.IdEmpleado  
 
-LEFT OUTER JOIN CartasDePorteDetalle CALIDAD ON CDP.IdCartaDePorte = CALIDAD.IdCartaDePorte  
+--LEFT OUTER JOIN CartasDePorteDetalle CALIDAD ON CDP.IdCartaDePorte = CALIDAD.IdCartaDePorte  
 
 
 
@@ -1038,16 +995,27 @@ create FUNCTION fCalidadSerializada
 RETURNS VARCHAR(8000)
 AS
 BEGIN
-DECLARE @SomeColumnList VARCHAR(8000);
+DECLARE @SomeColumnList VARCHAR(4000);
+DECLARE @SomeColumnList2 VARCHAR(4000);
 
 SELECT @SomeColumnList =
     COALESCE(@SomeColumnList + ', ', '') + CAST(Campo AS varchar(100))  + CAST(Valor AS varchar(20)) 
 FROM CartasDePorteDetalle C
-WHERE C.IdCartaDePorte= @FK_ID;
+WHERE C.IdCartaDePorte= @FK_ID and valor<>0;
+
+
+
+SELECT  
+	@SomeColumnList2=
+		case when CDP.NobleExtranos > 0 then 'Extraños' else  '' end  +
+		case when CDP.NobleExtranos > 0 then 'Extraños'  + CAST(CDP.NobleExtranos AS varchar(20))   else  ''  end
+FROM CartasDePorte CDP
+WHERE CDP.IdCartaDePorte= @FK_ID;
+
 
 RETURN 
 (
-    SELECT @SomeColumnList
+    SELECT  'gfghfjh' + COALESCE(@SomeColumnList,'') +	COALESCE(@SomeColumnList2,'')
 )
 END
 
@@ -1055,8 +1023,14 @@ go
 
 
 
-select * from CartasDePorteDetalle where valor <> 0
+--select * from CartasDePorteDetalle where valor <> 0
+--select NobleExtranos,* from CartasDePorte where NobleExtranos <> 0
+print 222
+print dbo.fCalidadSerializada(2054771)
+print dbo.fCalidadSerializada(20090)
 
-print dbo.CombineValues(957921)
+
+
+
 
 
