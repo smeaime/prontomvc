@@ -267,38 +267,11 @@ isnull(LOCORI.CodigoAFIP,'') AS CodigoAFIP
 
 
 
-   ,CDP.NobleExtranos      ,CDP.NobleNegros
-,CDP.NobleQuebrados      ,CDP.NobleDaniados      ,CDP.NobleChamico      ,CDP.NobleChamico2      ,CDP.NobleRevolcado
-,CDP.NobleObjetables      ,CDP.NobleAmohosados      ,CDP.NobleHectolitrico      ,CDP.NobleCarbon      
-,CDP.NoblePanzaBlanca      ,CDP.NoblePicados      ,CDP.NobleMGrasa      ,CDP.NobleAcidezGrasa     
-,CDP.NobleVerdes      ,CDP.NobleGrado      ,CDP.NobleConforme      ,CDP.NobleACamara      ,CDP.Cosecha 
-,CDP.HumedadDesnormalizada      ,CDP.Factor      ,CDP.IdFacturaImputada      ,CDP.PuntoVenta   
-,CDP.SubnumeroVagon      ,CDP.TarifaFacturada      ,CDP.TarifaSubcontratista1     
-,CDP.TarifaSubcontratista2      ,CDP.FechaArribo      ,CDP.[Version]      ,CDP.MotivoAnulacion 
-,CDP.NumeroSubfijo      ,CDP.IdEstablecimiento      ,CDP.EnumSyngentaDivision   
-,CDP.Corredor2      ,CDP.IdUsuarioModifico      ,CDP.FechaModificacion      
-,CDP.FechaEmision      ,CDP.EstaArchivada      ,CDP.ExcluirDeSubcontratistas   
-,CDP.IdTipoMovimiento      ,CDP.IdClienteAFacturarle      ,CDP.SubnumeroDeFacturacion   
-,CDP.AgregaItemDeGastosAdministrativos      ,CDP.CalidadGranosQuemados      ,CDP.CalidadGranosQuemadosBonifica_o_Rebaja      
-,CDP.CalidadTierra      ,CDP.CalidadTierraBonifica_o_Rebaja      ,CDP.CalidadMermaChamico       
-,CDP.CalidadMermaChamicoBonifica_o_Rebaja      ,CDP.CalidadMermaZarandeo      
-,CDP.CalidadMermaZarandeoBonifica_o_Rebaja      ,CDP.FueraDeEstandar      ,CDP.CalidadPuntaSombreada    
-,CDP.CobraAcarreo      ,CDP.LiquidaViaje      ,CDP.IdClienteAuxiliar      ,CDP.CalidadDescuentoFinal   
-,CDP.PathImagen      ,CDP.PathImagen2       ,CDP.AgrupadorDeTandaPeriodos      ,CDP.ClaveEncriptada     
-,CDP.NumeroCartaEnTextoParaBusqueda      ,CDP.IdClienteEntregador      ,CDP.IdDetalleFactura     
-,CDP.SojaSustentableCodCondicion      ,CDP.SojaSustentableCondicion     
-,CDP.SojaSustentableNroEstablecimientoDeProduccion      ,CDP.IdClientePagadorFlete     
-,CDP.SubnumeroVagonEnTextoParaBusqueda      ,CDP.IdCorredor2       ,CDP.Acopio1      ,CDP.Acopio2    
-,CDP.Acopio3      ,CDP.Acopio4      ,CDP.Acopio5 ,CDP.Acopio6        ,CDP.AcopioFacturarleA      
-,CDP.CalidadGranosDanadosRebaja      ,CDP.CalidadGranosExtranosRebaja 
 
+'Extraños'  + CDP.NobleExtranos +  
+'Extraños'  + CDP.NobleNegros +
 
-From i In db.CartasDePorteDetalle_EF
-                                                                                 Where i.IdCartaDePorte = id _
-                                                                                 And i.Campo = "CalidadGastoDeSecada"
-                                                    
-
-                                                                                 And i.Campo = "CalidadGastoDeSecada"
+CALIDAD.Campo + CALIDAD.Valor
 
 
                 .CalidadGastoDeSecada = GetDetalle("CalidadGastoDeSecada", db, id)
@@ -1026,5 +999,64 @@ exec wCartasPorte_WraperDeLaTVF @startRowIndex=0,@fechadesde='2016-01-10 00:00:0
 @ModoExportacion=N'Entregas',@puntoventa=-1,@optDivisionSyngenta=N'BANDERA',@Contrato=N'-1',@QueContenga2=N'-1',
 @idClienteAuxiliarint=6762,@AgrupadorDeTandaPeriodos=-1,@Vagon=0,@Patente=N'',@optCamionVagon=N'Todos'
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+if OBJECT_ID ('fCalidadSerializada') is not null 
+    drop function fCalidadSerializada
+go 
+
+
+create FUNCTION fCalidadSerializada
+(
+    @FK_ID INT -- The foreign key from TableA which is used 
+               -- to fetch corresponding records
+)
+RETURNS VARCHAR(8000)
+AS
+BEGIN
+DECLARE @SomeColumnList VARCHAR(8000);
+
+SELECT @SomeColumnList =
+    COALESCE(@SomeColumnList + ', ', '') + CAST(Campo AS varchar(100))  + CAST(Valor AS varchar(20)) 
+FROM CartasDePorteDetalle C
+WHERE C.IdCartaDePorte= @FK_ID;
+
+RETURN 
+(
+    SELECT @SomeColumnList
+)
+END
+
+go
+
+
+
+select * from CartasDePorteDetalle where valor <> 0
+
+print dbo.CombineValues(957921)
 
 
