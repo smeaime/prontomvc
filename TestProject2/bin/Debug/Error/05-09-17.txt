@@ -1,0 +1,10 @@
+
+Log Entry : 
+09/05/2017 10:53:24
+Error in: . Error Message:Leyo bien con Microsoft.ACE.OLEDB
+__________________________
+
+Log Entry : 
+09/05/2017 11:04:30
+Error in: . Error Message:Leyo bien con Microsoft.ACE.OLEDB
+__________________________
