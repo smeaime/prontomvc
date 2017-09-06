@@ -499,6 +499,10 @@
       <FullPath>Williams - Nidera con Webservice.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
+      <Name>Williams - Resumen de Totales Generales (Facturacion).rdl</Name>
+      <FullPath>Williams - Resumen de Totales Generales (Facturacion).rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
       <Name>Williams - Resumen de Totales Generales 2.rdl</Name>
       <FullPath>Williams - Resumen de Totales Generales 2.rdl</FullPath>
     </ProjectItem>
@@ -515,8 +519,8 @@
       <FullPath>Williams - Sincro LaBiznaga2.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
-      <Name>Williams - Resumen de Totales Generales (Facturacion).rdl</Name>
-      <FullPath>Williams - Resumen de Totales Generales (Facturacion).rdl</FullPath>
+      <Name>Listado general de Cartas de Porte (simulando original)  .rdl</Name>
+      <FullPath>Listado general de Cartas de Porte (simulando original)  .rdl</FullPath>
     </ProjectItem>
   </Reports>
   <Configurations>
