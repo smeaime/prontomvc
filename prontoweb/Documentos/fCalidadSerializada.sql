@@ -57,7 +57,7 @@ WHERE CDP.IdCartaDePorte= @FK_ID;
 
 RETURN 
 (
-    SELECT  COALESCE(@SomeColumnList2+' ','') + COALESCE(@SomeColumnList,'') 
+    SELECT  COALESCE(@SomeColumnList2+' ','') + COALESCE(@SomeColumnList,'') + '    '
 )
 END
 
