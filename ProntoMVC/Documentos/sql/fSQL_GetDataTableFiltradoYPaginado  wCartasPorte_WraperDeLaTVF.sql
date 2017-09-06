@@ -905,7 +905,7 @@ wCartasPorte_WraperDeLaTVF
 					NULL,---1, --@idDestino,
 					0, --@AplicarANDuORalFiltro,
 					'Ambos', --'Buques',
-					'2016-08-03 00:00:00',
+					'2016-30-03 00:00:00',
 					
 					'2016-30-03 00:00:00',
 					NULL, 
@@ -928,6 +928,8 @@ go
 
 
 
+/*
+
 exec wCartasPorte_WraperDeLaTVF @startRowIndex=NULL,@fechadesde='2000-01-01 00:00:00',@maximumRows=100,@fechahasta='2100-01-01 00:00:00'
 ,@estado=NULL,@idDestino=-1,@QueContenga=NULL,@idVendedor=NULL,@idCorredor=NULL,@idDestinatario=NULL,
 @idIntermediario=NULL,@idRemComercial=NULL,@idArticulo=NULL,@idProcedencia=NULL,@AplicarANDuORalFiltro=NULL,@ModoExportacion='Ambos',
@@ -935,6 +937,7 @@ exec wCartasPorte_WraperDeLaTVF @startRowIndex=NULL,@fechadesde='2000-01-01 00:0
 @optDivisionSyngenta=NULL,@Contrato=NULL,@QueContenga2=NULL,@idClienteAuxiliarint=NULL,@AgrupadorDeTandaPeriodos=NULL,@Vagon=NULL,
 @Patente=NULL,@optCamionVagon=NULL
 go
+
 
 
 exec wCartasPorte_WraperDeLaTVF @startRowIndex=NULL,@fechadesde='2015-01-01 00:00:00',@maximumRows=40,@fechahasta='2016-01-01 00:00:00',
@@ -957,6 +960,7 @@ exec wCartasPorte_WraperDeLaTVF @startRowIndex=0,@fechadesde='2016-01-10 00:00:0
 @idClienteAuxiliarint=6762,@AgrupadorDeTandaPeriodos=-1,@Vagon=0,@Patente=N'',@optCamionVagon=N'Todos'
 
 
+*/
 
 
 
@@ -971,63 +975,6 @@ exec wCartasPorte_WraperDeLaTVF @startRowIndex=0,@fechadesde='2016-01-10 00:00:0
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-if OBJECT_ID ('fCalidadSerializada') is not null 
-    drop function fCalidadSerializada
-go 
-
-
-create FUNCTION fCalidadSerializada
-(
-    @FK_ID INT -- The foreign key from TableA which is used 
-               -- to fetch corresponding records
-)
-RETURNS VARCHAR(8000)
-AS
-BEGIN
-DECLARE @SomeColumnList VARCHAR(4000);
-DECLARE @SomeColumnList2 VARCHAR(4000);
-
-SELECT @SomeColumnList =
-    COALESCE(@SomeColumnList + ', ', '') + CAST(Campo AS varchar(100))  + CAST(Valor AS varchar(20)) 
-FROM CartasDePorteDetalle C
-WHERE C.IdCartaDePorte= @FK_ID and valor<>0;
-
-
-
-SELECT  
-	@SomeColumnList2=
-		case when CDP.NobleExtranos > 0 then 'Extraños' else  '' end  +
-		case when CDP.NobleExtranos > 0 then 'Extraños'  + CAST(CDP.NobleExtranos AS varchar(20))   else  ''  end
-FROM CartasDePorte CDP
-WHERE CDP.IdCartaDePorte= @FK_ID;
-
-
-RETURN 
-(
-    SELECT  'gfghfjh' + COALESCE(@SomeColumnList,'') +	COALESCE(@SomeColumnList2,'')
-)
-END
-
-go
-
-
-
---select * from CartasDePorteDetalle where valor <> 0
---select NobleExtranos,* from CartasDePorte where NobleExtranos <> 0
-print 222
-print dbo.fCalidadSerializada(2054771)
-print dbo.fCalidadSerializada(20090)
 
 
 
