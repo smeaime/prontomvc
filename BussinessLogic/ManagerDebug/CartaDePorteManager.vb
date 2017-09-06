@@ -4710,7 +4710,7 @@ ProcedenciaProvinciaPartido, ProcedenciaPartidoNormalizadaCodigo, DestinoProvinc
             ElseIf ModoImpresion = "GrobHc" Then
                 rdl = "Listado general de Cartas de Porte (simulando original) con foto  - Grobo 2.rdl"
 
-            ElseIf ModoImpresion = "ExcHc" Then
+            ElseIf ModoImpresion = "ExcHc" Or ModoImpresion = "Imagen" Then
                 rdl = "Listado general de Cartas de Porte (simulando original) con foto 2"
 
 
@@ -4723,6 +4723,9 @@ ProcedenciaProvinciaPartido, ProcedenciaPartidoNormalizadaCodigo, DestinoProvinc
                 'Si agregas un informe nuevo, agregalo tambien en el array informesHtml!!!!!!!!
                 'Si agregas un informe nuevo, agregalo tambien en el array informesHtml!!!!!!!!
                 'Si agregas un informe nuevo, agregalo tambien en el array informesHtml!!!!!!!!
+
+            ElseIf ModoImpresion = "Excel" Then
+                rdl = "Listado general de Cartas de Porte (simulando original) "
 
 
             Else
@@ -21257,10 +21260,10 @@ Public Class CDPMailFiltrosManager2
         Dim ModoImpresion As String = iisNull(dr.Item("ModoImpresion"), "Excel")
 
 
-        If ModoImpresion = "Html" Or ModoImpresion = "HtmlIm" Or ModoImpresion = "Excel" Or ModoImpresion = "ExcelIm" Then
-            Throw New Exception("Los modos HTML,HTMLIM,Excel,ExcelIm no salen por servidor de informes, sino por modo local " &
-                                " (son los informes que se llaman desde el AppCode\FiltroManager\EnviarMailFiltroPorRegistro, y que deberiamos migrar) ")
-        End If
+        'If ModoImpresion = "Html" Or ModoImpresion = "HtmlIm" Or ModoImpresion = "Excel" Or ModoImpresion = "ExcelIm" Then
+        '    Throw New Exception("Los modos HTML,HTMLIM,Excel,ExcelIm no salen por servidor de informes, sino por modo local " &
+        '                        " (son los informes que se llaman desde el AppCode\FiltroManager\EnviarMailFiltroPorRegistro, y que deberiamos migrar) ")
+        'End If
 
 
 
