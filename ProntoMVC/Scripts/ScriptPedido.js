@@ -3463,7 +3463,9 @@ $(function () {
         //////////////////////////////
         //height: '100%',
 
-        height: '100%',
+        //height: '100%',
+        height: $(window).height() - ALTOLISTADO, // '100%'
+
         // height: $(window).height() - 350,
         //////////////////////////////
 
@@ -3556,7 +3558,9 @@ $(function () {
         autowidth: true,
         shrinkToFit: false,
         //////////////////////////////
-        height: '100%',
+        //height: '100%',
+        height: $(window).height() - ALTOLISTADO, // '100%'
+
         altRows: false,
         emptyrecords: 'No hay registros para mostrar' //,
         //caption: '<b>REQUERIMIENTOS DETALLADO</b>'
@@ -3861,7 +3865,9 @@ $(function () {
         autowidth: true,
         shrinkToFit: false,
         //////////////////////////////
-        height: '100%',
+        //height: '100%',
+        height: $(window).height() - ALTOLISTADO, // '100%'
+
         altRows: false,
         emptyrecords: 'No hay registros para mostrar' //,
         //caption: '<b>COMPARATIVAS</b>'
