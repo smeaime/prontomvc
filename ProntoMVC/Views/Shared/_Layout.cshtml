@@ -1551,7 +1551,9 @@ Released   : 20120723
                                                 {<span style="margin-left: 5px; text-align: right; margin-top: 20px; margin-right: 5px;"
                                                     class="caret"></span>}</img> si pongo el span con el caret anidandolo en el img, me tira la bronca*@
                                         </a>
-                                        @if (Roles.IsUserInRole(ViewBag.NombreUsuario, "SuperAdmin") && false)
+
+                                        @if (System.Diagnostics.Debugger.IsAttached && System.Environment.MachineName == "DESKTOP-CLVUL7U" && true)
+                                        //@if (Roles.IsUserInRole(ViewBag.NombreUsuario, "SuperAdmin") && false)
                                         {
                                             <ul class="dropdown-menu pull-right" id="333311111" style="left: 60px; width: 900px;
                                         top: 42px">
@@ -1764,6 +1766,7 @@ Released   : 20120723
 
                                         //pageLayout.toggle('east');
                                         //return;
+
 
                                         if (pageLayout.state.east.isHidden) {
 
@@ -2592,7 +2595,7 @@ Released   : 20120723
 
                     function conmutarPanelesNorte() {
 
-                        // window.location = (ROOT + "Home");
+                        window.location = (ROOT + "Home");
                         return;
 
                         if (true) {
