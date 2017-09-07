@@ -45,9 +45,7 @@
     <div id="principal" class="container-fluid" style="padding-left: 0px; padding-right: 0px;">
         <form class="form-horizontal" style=" margin-bottom: 0px;">
             <div id="cuerpomaspie" class="" style="padding-bottom:2px; position: relative; height: 100%  " @*Height of the footer *@>
-                <div id="conscroll" style="height: 600px; margin-bottom: 40px; overflow-y: scroll;
-top: 50px; padding-left: 25px; padding-right: 25px; overflow-x: hidden;">
-
+                <div id="conscroll" style="height: 600px; margin-bottom: 40px; overflow-y: scroll;top: 50px; padding-left: 25px; padding-right: 25px; overflow-x: hidden;">
                     <div class="row-fluid" style="margin-bottom: 15px; margin-top: 5px;">
                         @* <div class="span5 lightblue" style="font-weight: bold; font-size: 34px; vertical-align: "> *@
                         <div class="">
@@ -203,7 +201,7 @@ top: 50px; padding-left: 25px; padding-right: 25px; overflow-x: hidden;">
 
                     <div class="row-fluid">
                         <div class="span12 lightblue">
-                            <table id="ListaArticulos" class=" separacion AltoRenglones" cellpadding="0" cellspacing="0"></table>
+                            <table id="Lista" class=" separacion AltoRenglones" cellpadding="0" cellspacing="0"></table>
                             <div id="ListaPager1" class="scroll" style="text-align: center; height: 30px"></div>
                         </div>
                     </div>
@@ -354,67 +352,60 @@ top: 50px; padding-left: 25px; padding-right: 25px; overflow-x: hidden;">
                     </div>
                 </div>
 
-                <div id="pie" style="position: absolute; bottom: -26px; background: rgb(236, 236, 236); width: 100%;
- height: 68px; padding-left: 0; margin-right: 15px;">
+                <div id="pie" style="position: absolute; bottom: -26px; background: rgb(236, 236, 236); width: 100%;height: 68px; padding-left: 0; margin-right: 15px;">
                     <hr style="margin: 0; border-top-color: #D8D4D4; border-bottom: 0px solid #ffffff;  " />
                     <div class="row-fluid " style="padding: 11px 0px 0px 0px">
                         <div class="span4 pull-left"></div>
-
                         <div class="span8 lightblue">
                             <input type="button" id="grabar2" value="Aceptar" class="btn  btn-large btn-primary " usesubmitbehavior="false" />
-
                             @if (Model.IdFactura > 0)
-                {
+                            {
                             <input type="button" id="anular" value="Anular" class="btn  btn-large btn-primary" />
                             <a class="btn  btn-large" style="color: Black" href="@Url.Action("ImprimirConInteropPDF", new { @id = Model.IdFactura })">
                                 <i class="icon-print"></i>&nbsp;Imprimir
                             </a>
-                }
+                            }
                             @*<input type="button" id="probar" value="Probar" class="btn  btn-large btn-primary " usesubmitbehavior="false" />*@
-
                             <script>
-                    $(function () {
-                        $("#anular").click(function () {
-                            $("#dialog-password").dialog({
-                                buttons: {
-                                    'Aceptar': function () {
-                                        //window.location.href = ROOT + 'OrdenPago/Anular/' + $("#IdOrdenPago").val();
-                                        var idAux = $("#Aux1").val();
-                                        $("#Anulada").val("SI");
-                                        $("#FechaAnulacion").val(Hoy());
-                                        $("#IdAutorizaAnulacion").val(idAux);
-                                        $('#grabar2').click();
-                                    },
-                                    'Cancelar': function () {
-                                        $(this).dialog('close');
-                                    }
-                                },
-                                open: function () {
-                                }
-                            });
-                            $('#dialog-password').dialog('open');
-                            $('#mySelect').prop("disabled", false);
-                            CargarUsuariosConPermisoDeAnulacion();
-                        });
+                            $(function () {
+                                $("#anular").click(function () {
+                                    $("#dialog-password").dialog({
+                                        buttons: {
+                                            'Aceptar': function () {
+                                                //window.location.href = ROOT + 'OrdenPago/Anular/' + $("#IdOrdenPago").val();
+                                                var idAux = $("#Aux1").val();
+                                                $("#Anulada").val("SI");
+                                                $("#FechaAnulacion").val(Hoy());
+                                                $("#IdAutorizaAnulacion").val(idAux);
+                                                $('#grabar2').click();
+                                            },
+                                            'Cancelar': function () {
+                                                $(this).dialog('close');
+                                            }
+                                        },
+                                        open: function () {
+                                        }
+                                    });
+                                    $('#dialog-password').dialog('open');
+                                    $('#mySelect').prop("disabled", false);
+                                    CargarUsuariosConPermisoDeAnulacion();
+                                });
 
-                        function CargarUsuariosConPermisoDeAnulacion() {
-                            var combo = $("#mySelect")
-                            combo.find("option:gt(0)").remove();
-                            combo.find("option:first").text("Cargando...");
-                            $.getJSON(ROOT + 'Articulo/GetStoreProc?sp=Empleados_TX_ParaAnularPorFormulario&p1=23', {
-                            }, function (json) {
-                                combo.find("option:first").text("");
-                                for (var i = 0; i < json.length; i++) {
-                                    $("<option/>").attr("value", json[i].value).text(json[i].title).appendTo(combo);
+                                function CargarUsuariosConPermisoDeAnulacion() {
+                                    var combo = $("#mySelect")
+                                    combo.find("option:gt(0)").remove();
+                                    combo.find("option:first").text("Cargando...");
+                                    $.getJSON(ROOT + 'Articulo/GetStoreProc?sp=Empleados_TX_ParaAnularPorFormulario&p1=23', {
+                                    }, function (json) {
+                                        combo.find("option:first").text("");
+                                        for (var i = 0; i < json.length; i++) {
+                                            $("<option/>").attr("value", json[i].value).text(json[i].title).appendTo(combo);
+                                        }
+                                    });
                                 }
-                            });
-                        }
-                    })
+                            })
                             </script>
-
                             @Html.ActionLink("Volver al listado", "Index", null, new { @class = "btn btn-link" })
-
-
                         </div>
                     </div>
                 </div>
@@ -427,10 +418,8 @@ top: 50px; padding-left: 25px; padding-right: 25px; overflow-x: hidden;">
             RefrescaAnchoGrillaDetalle();
             $("#conscroll").height($(window).height() - 120);
         });
-
         $(function () {
             mostrarPanelesDerecho();
-
         })
     </script>
 }
