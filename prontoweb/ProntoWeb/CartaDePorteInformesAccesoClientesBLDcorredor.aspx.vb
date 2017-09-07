@@ -468,13 +468,6 @@ Partial Class CartaDePorteInformesAccesoClientesBLDcorredor
 
 
 
-        
-
-        Dim clientes As List(Of String) = TraerCUITClientesSegunUsuario(Membership.GetUser().UserName, HFSC.Value, ConexBDLmaster()).Where(Function(x) x <> "").ToList  'c.ToList()
-        'Dim aaa As String = iisNull(ParametroManager.TraerValorParametro2(HFSC.Value, "ClienteBLDcorredorCUIT"), "")
-        'Dim sss As List(Of String) = aaa.Split("|").ToList
-
-
 
         '        Andres, acabo de hablar con Brian de Bld, me dijo que le demos prioridad y tomemos como prueba este listado, dsp vemos el groso de + 350 clientes, va correo
         '• PABLO CALDERON           20-26816517-8
@@ -497,40 +490,56 @@ Partial Class CartaDePorteInformesAccesoClientesBLDcorredor
         '• BIZZAGRO                 30-71235309-7
         '• PEDRO MARON              30-51071844-1
 
+        Dim clientes As List(Of String) = TraerCUITClientesSegunUsuario(Membership.GetUser().UserName, HFSC.Value, ConexBDLmaster()).Where(Function(x) x <> "").ToList  'c.ToList()
+        'Dim aaa As String = iisNull(ParametroManager.TraerValorParametro2(HFSC.Value, "ClienteBLDcorredorCUIT"), "")
+        'Dim sss As List(Of String) = aaa.Split("|").ToList
+
+
+
+
 
         ErrHandler2.WriteError("BLDCORREDOR " & Convert.ToDateTime(iisValidSqlDate(txtFechaDesde.Text, #1/1/1753#)))
         ErrHandler2.WriteError("BLDCORREDOR " & Convert.ToDateTime(iisValidSqlDate(txtFechaHasta.Text, #1/1/2100#)))
 
-        'Dim q As Generic.List(Of CartasConCalada) = CartasLINQlocalSimplificadoTipadoConCalada3(HFSC.Value, _
-        '                  "", "", "", 1, 3000, _
-        '                  estadofiltro, "", idVendedor, idCorredor, _
-        '                  idDestinatario, idIntermediario, _
-        '                  idRComercial, idArticulo, idProcedencia, idDestino, _
-        '                                                    IIf(cmbCriterioWHERE.SelectedValue = "todos", CartaDePorteManager.FiltroANDOR.FiltroAND, CartaDePorteManager.FiltroANDOR.FiltroOR), DropDownList2.Text, _
-        '                  Convert.ToDateTime(iisValidSqlDate(txtFechaDesde.Text, #1/1/1753#)), _
-        '                  Convert.ToDateTime(iisValidSqlDate(txtFechaHasta.Text, #1/1/2100#)), _
-        '                  -1, sTitulo, optDivisionSyngenta.SelectedValue, , "").Where( _
-        '                                Function(x) clientes.Contains(x.TitularCUIT) Or clientes.Contains(x.IntermediarioCUIT) Or clientes.Contains(x.RComercialCUIT)) _
-        '                    .ToList()
 
-        'Dim dt2 = q.ToDataTable()
+        Dim dt2 As DataTable
+
+        If False Then
 
 
+            Dim q As Generic.List(Of CartasConCalada) = CartasLINQlocalSimplificadoTipadoConCalada3(HFSC.Value,
+                              "", "", "", 1, 3000,
+                              estadofiltro, "", idVendedor, idCorredor,
+                              idDestinatario, idIntermediario,
+                              idRComercial, idArticulo, idProcedencia, idDestino,
+                                                                IIf(cmbCriterioWHERE.SelectedValue = "todos", CartaDePorteManager.FiltroANDOR.FiltroAND, CartaDePorteManager.FiltroANDOR.FiltroOR), DropDownList2.Text,
+                              Convert.ToDateTime(iisValidSqlDate(txtFechaDesde.Text, #1/1/1753#)),
+                              Convert.ToDateTime(iisValidSqlDate(txtFechaHasta.Text, #1/1/2100#)),
+                              -1, sTitulo, optDivisionSyngenta.SelectedValue, , "").Where(
+                                            Function(x) clientes.Contains(x.TitularCUIT) Or clientes.Contains(x.IntermediarioCUIT) Or clientes.Contains(x.RComercialCUIT)) _
+                                .ToList()
 
-        Dim dt2 = DataTablePorCliente(HFSC.Value, _
-                    "", "", "", 1, 0, _
-                    estadofiltro, "", idVendedor, idCorredor, _
-                    idDestinatario, idIntermediario, _
-                    idRComercial, idArticulo, idProcedencia, idDestino, _
-                    IIf(cmbCriterioWHERE.SelectedValue = "todos", FiltroANDOR.FiltroAND, FiltroANDOR.FiltroOR), _
-                                    DropDownList2.Text, _
-                    Convert.ToDateTime(iisValidSqlDate(txtFechaDesde.Text, #1/1/1753#)), _
-                    Convert.ToDateTime(iisValidSqlDate(txtFechaHasta.Text, #1/1/2100#)), _
-                    cmbPuntoVenta.SelectedValue, txtQueContenga.Text, Membership.GetUser.UserName, ConexBDLmaster, chkTitular.Checked, chkIntermediario.Checked, chkRemComercial.Checked, chkClienteAuxiliar.Checked, chkCorredor.Checked, chkDestinatario.Checked)
+            dt2 = q.ToDataTable()
+
+        Else
+
+
+            dt2 = DataTablePorCliente(HFSC.Value,
+                    "", "", "", 1, 0,
+                    estadofiltro, "", idVendedor, idCorredor,
+                    idDestinatario, idIntermediario,
+                    idRComercial, idArticulo, idProcedencia, idDestino,
+                    IIf(cmbCriterioWHERE.SelectedValue = "todos", FiltroANDOR.FiltroAND, FiltroANDOR.FiltroOR),
+                    DropDownList2.Text,
+                    Convert.ToDateTime(iisValidSqlDate(txtFechaDesde.Text, #1/1/1753#)),
+                    Convert.ToDateTime(iisValidSqlDate(txtFechaHasta.Text, #1/1/2100#)),
+                    Val(cmbPuntoVenta.SelectedValue), txtQueContenga.Text, Membership.GetUser.UserName, ConexBDLmaster,
+                    chkTitular.Checked, chkIntermediario.Checked, chkRemComercial.Checked,
+                    chkClienteAuxiliar.Checked, chkCorredor.Checked, chkDestinatario.Checked)
 
 
 
-
+        End If
 
         'DataTablePorCliente()
 
@@ -1072,6 +1081,10 @@ Partial Class CartaDePorteInformesAccesoClientesBLDcorredor
     Protected Sub txtQueContenga_TextChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles txtQueContenga.TextChanged
         AsignaInformeAlReportViewer()
     End Sub
+
+
+
+
 
 
     Sub desc(b As Boolean)

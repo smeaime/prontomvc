@@ -1,0 +1,491 @@
+
+Log Entry : 
+09/06/2017 11:14:08
+Error in: . Error Message:Por generar el archivo C:\Users\Mariano\AppData\Local\Temp\Listado general 06sep.2017_111358_XDD.xls
+__________________________
+
+Log Entry : 
+09/06/2017 11:14:08
+Error in: . Error Message:Archivo generado C:\Users\Mariano\AppData\Local\Temp\Listado general 06sep.2017_111358_XDD.xls
+__________________________
+
+Log Entry : 
+09/06/2017 11:14:20
+Error in: . Error Message:Nombre  'Listado general de Cartas de Po$'
+__________________________
+
+Log Entry : 
+09/06/2017 11:14:21
+Error in: . Error Message:Tablas  1
+__________________________
+
+Log Entry : 
+09/06/2017 11:14:21
+Error in: . Error Message:Convertido C:\Users\Mariano\AppData\Local\Temp\Listado general 06sep.2017_111358_XDD.xls Lineas: 413
+__________________________
+
+Log Entry : 
+09/06/2017 11:14:34
+Error in: . Error Message:error html row 404
+__________________________
+
+Log Entry : 
+09/06/2017 11:14:36
+Error in: . Error Message:error html row 405
+__________________________
+
+Log Entry : 
+09/06/2017 11:14:36
+Error in: . Error Message:error html row 406
+__________________________
+
+Log Entry : 
+09/06/2017 11:14:37
+Error in: . Error Message:error html row 407
+__________________________
+
+Log Entry : 
+09/06/2017 11:50:45
+Error in: . Error Message:System.Exception
+ModoImpresion no encontrado: Imagen
+   en CartaDePorteManager.QueInforme_PorServidor(String SC, DataRow dr) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 4729
+   en CartaDePorteManager.generarNotasDeEntregaConReportViewer_ConServidorDeInformes(String SC, DateTime fechadesde, DateTime fechahasta, DataRow dr, enumCDPestado estado, Int64& lineasGeneradas, String& titulo, String logo, Int32 puntoventa, Int32& tiemposql, Int32& tiempoinforme, Boolean bDescargaHtml, GridView grid, Int64 maximumRows) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 4416
+BusinessLogic
+__________________________
+
+Log Entry : 
+09/06/2017 11:50:54
+Error in: . Error Message:System.Data.OleDb.OleDbException (0x80004005): Argumento no válido.
+   en System.Data.OleDb.OleDbConnectionInternal..ctor(OleDbConnectionString constr, OleDbConnection connection)
+   en System.Data.OleDb.OleDbConnectionFactory.CreateConnection(DbConnectionOptions options, DbConnectionPoolKey poolKey, Object poolGroupProviderInfo, DbConnectionPool pool, DbConnection owningObject)
+   en System.Data.ProviderBase.DbConnectionFactory.CreateConnection(DbConnectionOptions options, DbConnectionPoolKey poolKey, Object poolGroupProviderInfo, DbConnectionPool pool, DbConnection owningConnection, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionFactory.CreateNonPooledConnection(DbConnection owningConnection, DbConnectionPoolGroup poolGroup, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionInternal.OpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory)
+   en System.Data.OleDb.OleDbConnection.Open()
+   en CartaDePorteManager.ExcelToHtml(String ArchivoExcelDestino, GridView grid, Int64 constwidth) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 3942
+__________________________
+
+Log Entry : 
+09/06/2017 11:50:54
+Error in: . Error Message:excel: 
+__________________________
+
+Log Entry : 
+09/06/2017 11:51:44
+Error in: . Error Message:System.Exception
+ModoImpresion no encontrado: Imagen
+   en CartaDePorteManager.QueInforme_PorServidor(String SC, DataRow dr) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 4729
+   en CartaDePorteManager.generarNotasDeEntregaConReportViewer_ConServidorDeInformes(String SC, DateTime fechadesde, DateTime fechahasta, DataRow dr, enumCDPestado estado, Int64& lineasGeneradas, String& titulo, String logo, Int32 puntoventa, Int32& tiemposql, Int32& tiempoinforme, Boolean bDescargaHtml, GridView grid, Int64 maximumRows) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 4416
+BusinessLogic
+__________________________
+
+Log Entry : 
+09/06/2017 11:53:36
+Error in: . Error Message:System.Exception
+ModoImpresion no encontrado: Imagen
+   en CartaDePorteManager.QueInforme_PorServidor(String SC, DataRow dr) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 4729
+   en CartaDePorteManager.generarNotasDeEntregaConReportViewer_ConServidorDeInformes(String SC, DateTime fechadesde, DateTime fechahasta, DataRow dr, enumCDPestado estado, Int64& lineasGeneradas, String& titulo, String logo, Int32 puntoventa, Int32& tiemposql, Int32& tiempoinforme, Boolean bDescargaHtml, GridView grid, Int64 maximumRows) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 4416
+BusinessLogic
+__________________________
+
+Log Entry : 
+09/06/2017 12:06:14
+Error in: . Error Message:Por generar el archivo C:\Users\Mariano\AppData\Local\Temp\Listado general 06sep.2017_120606_DMB.xls
+__________________________
+
+Log Entry : 
+09/06/2017 12:06:14
+Error in: . Error Message:Archivo generado C:\Users\Mariano\AppData\Local\Temp\Listado general 06sep.2017_120606_DMB.xls
+__________________________
+
+Log Entry : 
+09/06/2017 12:06:27
+Error in: . Error Message:Nombre  'Listado general de Cartas de Po$'
+__________________________
+
+Log Entry : 
+09/06/2017 12:06:27
+Error in: . Error Message:Tablas  1
+__________________________
+
+Log Entry : 
+09/06/2017 12:06:27
+Error in: . Error Message:Convertido C:\Users\Mariano\AppData\Local\Temp\Listado general 06sep.2017_120606_DMB.xls Lineas: 413
+__________________________
+
+Log Entry : 
+09/06/2017 12:06:34
+Error in: . Error Message:error html row 404
+__________________________
+
+Log Entry : 
+09/06/2017 12:07:16
+Error in: . Error Message:error html row 405
+__________________________
+
+Log Entry : 
+09/06/2017 12:09:54
+Error in: . Error Message:error html row 406
+__________________________
+
+Log Entry : 
+09/06/2017 12:09:54
+Error in: . Error Message:error html row 407
+__________________________
+
+Log Entry : 
+09/06/2017 12:12:14
+Error in: . Error Message:Por generar el archivo C:\Users\Mariano\AppData\Local\Temp\Listado general 06sep.2017_121206_MPB.xls
+__________________________
+
+Log Entry : 
+09/06/2017 12:12:14
+Error in: . Error Message:Archivo generado C:\Users\Mariano\AppData\Local\Temp\Listado general 06sep.2017_121206_MPB.xls
+__________________________
+
+Log Entry : 
+09/06/2017 12:12:14
+Error in: . Error Message:Nombre  'Listado general de Cartas de Po$'
+__________________________
+
+Log Entry : 
+09/06/2017 12:12:14
+Error in: . Error Message:Tablas  1
+__________________________
+
+Log Entry : 
+09/06/2017 12:12:14
+Error in: . Error Message:Convertido C:\Users\Mariano\AppData\Local\Temp\Listado general 06sep.2017_121206_MPB.xls Lineas: 413
+__________________________
+
+Log Entry : 
+09/06/2017 12:12:37
+Error in: . Error Message:error html row 404
+__________________________
+
+Log Entry : 
+09/06/2017 12:12:37
+Error in: . Error Message:error html row 405
+__________________________
+
+Log Entry : 
+09/06/2017 12:12:39
+Error in: . Error Message:error html row 406
+__________________________
+
+Log Entry : 
+09/06/2017 12:12:39
+Error in: . Error Message:error html row 407
+__________________________
+
+Log Entry : 
+09/06/2017 12:12:59
+Error in: . Error Message:Nombre  'Listado general de Cartas de Po$'
+__________________________
+
+Log Entry : 
+09/06/2017 12:12:59
+Error in: . Error Message:Tablas  1
+__________________________
+
+Log Entry : 
+09/06/2017 12:12:59
+Error in: . Error Message:Convertido C:\Users\Mariano\AppData\Local\Temp\Listado general 06sep.2017_121206_MPB.xls Lineas: 413
+__________________________
+
+Log Entry : 
+09/06/2017 12:13:03
+Error in: . Error Message:error html row 404
+__________________________
+
+Log Entry : 
+09/06/2017 12:13:04
+Error in: . Error Message:error html row 405
+__________________________
+
+Log Entry : 
+09/06/2017 12:13:04
+Error in: . Error Message:error html row 406
+__________________________
+
+Log Entry : 
+09/06/2017 12:13:05
+Error in: . Error Message:error html row 407
+__________________________
+
+Log Entry : 
+09/06/2017 12:14:21
+Error in: . Error Message:Por generar el archivo C:\Users\Mariano\AppData\Local\Temp\Listado general 06sep.2017_121414_PJK.xls
+__________________________
+
+Log Entry : 
+09/06/2017 12:14:21
+Error in: . Error Message:Archivo generado C:\Users\Mariano\AppData\Local\Temp\Listado general 06sep.2017_121414_PJK.xls
+__________________________
+
+Log Entry : 
+09/06/2017 12:14:22
+Error in: . Error Message:Nombre  'Listado general de Cartas de Po$'
+__________________________
+
+Log Entry : 
+09/06/2017 12:14:22
+Error in: . Error Message:Tablas  1
+__________________________
+
+Log Entry : 
+09/06/2017 12:14:22
+Error in: . Error Message:Convertido C:\Users\Mariano\AppData\Local\Temp\Listado general 06sep.2017_121414_PJK.xls Lineas: 413
+__________________________
+
+Log Entry : 
+09/06/2017 12:17:28
+Error in: . Error Message:Por generar el archivo C:\Users\Mariano\AppData\Local\Temp\Listado general 06sep.2017_121700_UHE.xls
+__________________________
+
+Log Entry : 
+09/06/2017 12:17:28
+Error in: . Error Message:Archivo generado C:\Users\Mariano\AppData\Local\Temp\Listado general 06sep.2017_121700_UHE.xls
+__________________________
+
+Log Entry : 
+09/06/2017 12:17:28
+Error in: . Error Message:Nombre  'Listado general de Cartas de Po$'
+__________________________
+
+Log Entry : 
+09/06/2017 12:17:28
+Error in: . Error Message:Tablas  1
+__________________________
+
+Log Entry : 
+09/06/2017 12:17:28
+Error in: . Error Message:Convertido C:\Users\Mariano\AppData\Local\Temp\Listado general 06sep.2017_121700_UHE.xls Lineas: 413
+__________________________
+
+Log Entry : 
+09/06/2017 12:17:52
+Error in: . Error Message:Nombre  'Listado general de Cartas de Po$'
+__________________________
+
+Log Entry : 
+09/06/2017 12:17:52
+Error in: . Error Message:Tablas  1
+__________________________
+
+Log Entry : 
+09/06/2017 12:17:52
+Error in: . Error Message:Convertido C:\Users\Mariano\AppData\Local\Temp\Listado general 06sep.2017_121700_UHE.xls Lineas: 413
+__________________________
+
+Log Entry : 
+09/06/2017 12:18:55
+Error in: . Error Message:Por generar el archivo C:\Users\Mariano\AppData\Local\Temp\Listado general 06sep.2017_121843_OYD.xls
+__________________________
+
+Log Entry : 
+09/06/2017 12:18:55
+Error in: . Error Message:Archivo generado C:\Users\Mariano\AppData\Local\Temp\Listado general 06sep.2017_121843_OYD.xls
+__________________________
+
+Log Entry : 
+09/06/2017 12:20:01
+Error in: . Error Message:Nombre  'Listado general de Cartas de Po$'
+__________________________
+
+Log Entry : 
+09/06/2017 12:20:01
+Error in: . Error Message:Tablas  1
+__________________________
+
+Log Entry : 
+09/06/2017 12:20:01
+Error in: . Error Message:Convertido C:\Users\Mariano\AppData\Local\Temp\Listado general 06sep.2017_121843_OYD.xls Lineas: 413
+__________________________
+
+Log Entry : 
+09/06/2017 12:20:42
+Error in: . Error Message:Nombre  'Listado general de Cartas de Po$'
+__________________________
+
+Log Entry : 
+09/06/2017 12:20:42
+Error in: . Error Message:Tablas  1
+__________________________
+
+Log Entry : 
+09/06/2017 12:20:42
+Error in: . Error Message:Convertido C:\Users\Mariano\AppData\Local\Temp\Listado general 06sep.2017_121843_OYD.xls Lineas: 413
+__________________________
+
+Log Entry : 
+09/06/2017 12:35:54
+Error in: . Error Message:Por generar el archivo C:\Users\Mariano\AppData\Local\Temp\Listado general 06sep.2017_123549_KBG.xls
+__________________________
+
+Log Entry : 
+09/06/2017 12:35:54
+Error in: . Error Message:Archivo generado C:\Users\Mariano\AppData\Local\Temp\Listado general 06sep.2017_123549_KBG.xls
+__________________________
+
+Log Entry : 
+09/06/2017 12:36:06
+Error in: . Error Message:Nombre  'Listado general de Cartas de Po$'
+__________________________
+
+Log Entry : 
+09/06/2017 12:36:07
+Error in: . Error Message:Tablas  1
+__________________________
+
+Log Entry : 
+09/06/2017 12:36:07
+Error in: . Error Message:Convertido C:\Users\Mariano\AppData\Local\Temp\Listado general 06sep.2017_123549_KBG.xls Lineas: 412
+__________________________
+
+Log Entry : 
+09/06/2017 12:36:08
+Error in: . Error Message:error html row 404
+__________________________
+
+Log Entry : 
+09/06/2017 12:36:08
+Error in: . Error Message:error html row 405
+__________________________
+
+Log Entry : 
+09/06/2017 12:36:09
+Error in: . Error Message:error html row 406
+__________________________
+
+Log Entry : 
+09/06/2017 12:36:25
+Error in: . Error Message:Nombre  'Listado general de Cartas de Po$'
+__________________________
+
+Log Entry : 
+09/06/2017 12:36:25
+Error in: . Error Message:Tablas  1
+__________________________
+
+Log Entry : 
+09/06/2017 12:36:25
+Error in: . Error Message:Convertido C:\Users\Mariano\AppData\Local\Temp\Listado general 06sep.2017_123549_KBG.xls Lineas: 412
+__________________________
+
+Log Entry : 
+09/06/2017 12:36:26
+Error in: . Error Message:error html row 404
+__________________________
+
+Log Entry : 
+09/06/2017 12:36:26
+Error in: . Error Message:error html row 405
+__________________________
+
+Log Entry : 
+09/06/2017 12:36:27
+Error in: . Error Message:error html row 406
+__________________________
+
+Log Entry : 
+09/06/2017 13:04:24
+Error in: . Error Message:System.Exception
+ModoImpresion no encontrado: Excel
+   en CartaDePorteManager.QueInforme_PorServidor(String SC, DataRow dr) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 4729
+   en CartaDePorteManager.generarNotasDeEntregaConReportViewer_ConServidorDeInformes(String SC, DateTime fechadesde, DateTime fechahasta, DataRow dr, enumCDPestado estado, Int64& lineasGeneradas, String& titulo, String logo, Int32 puntoventa, Int32& tiemposql, Int32& tiempoinforme, Boolean bDescargaHtml, GridView grid, Int64 maximumRows) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 4416
+BusinessLogic
+__________________________
+
+Log Entry : 
+09/06/2017 13:13:29
+Error in: . Error Message:Por generar el archivo C:\Users\Mariano\AppData\Local\Temp\Listado general 06sep.2017_131321_HVP.xls
+__________________________
+
+Log Entry : 
+09/06/2017 13:13:29
+Error in: . Error Message:Archivo generado C:\Users\Mariano\AppData\Local\Temp\Listado general 06sep.2017_131321_HVP.xls
+__________________________
+
+Log Entry : 
+09/06/2017 13:13:50
+Error in: . Error Message:Nombre  'Listado general de Cartas de Po$'
+__________________________
+
+Log Entry : 
+09/06/2017 13:13:50
+Error in: . Error Message:Tablas  1
+__________________________
+
+Log Entry : 
+09/06/2017 13:13:50
+Error in: . Error Message:Convertido C:\Users\Mariano\AppData\Local\Temp\Listado general 06sep.2017_131321_HVP.xls Lineas: 413
+__________________________
+
+Log Entry : 
+09/06/2017 13:13:54
+Error in: . Error Message:error html row 404
+__________________________
+
+Log Entry : 
+09/06/2017 13:13:54
+Error in: . Error Message:error html row 405
+__________________________
+
+Log Entry : 
+09/06/2017 13:13:55
+Error in: . Error Message:error html row 406
+__________________________
+
+Log Entry : 
+09/06/2017 13:13:55
+Error in: . Error Message:error html row 407
+__________________________
+
+Log Entry : 
+09/06/2017 13:17:41
+Error in: . Error Message:Por generar el archivo C:\Users\Mariano\AppData\Local\Temp\Listado general 06sep.2017_131733_UEX.xls
+__________________________
+
+Log Entry : 
+09/06/2017 13:17:41
+Error in: . Error Message:Archivo generado C:\Users\Mariano\AppData\Local\Temp\Listado general 06sep.2017_131733_UEX.xls
+__________________________
+
+Log Entry : 
+09/06/2017 13:17:51
+Error in: . Error Message:Nombre  'Listado general de Cartas de Po$'
+__________________________
+
+Log Entry : 
+09/06/2017 13:17:51
+Error in: . Error Message:Tablas  1
+__________________________
+
+Log Entry : 
+09/06/2017 13:17:51
+Error in: . Error Message:Convertido C:\Users\Mariano\AppData\Local\Temp\Listado general 06sep.2017_131733_UEX.xls Lineas: 413
+__________________________
+
+Log Entry : 
+09/06/2017 13:17:52
+Error in: . Error Message:error html row 404
+__________________________
+
+Log Entry : 
+09/06/2017 13:17:53
+Error in: . Error Message:error html row 405
+__________________________
+
+Log Entry : 
+09/06/2017 13:17:53
+Error in: . Error Message:error html row 406
+__________________________
+
+Log Entry : 
+09/06/2017 13:17:53
+Error in: . Error Message:error html row 407
+__________________________

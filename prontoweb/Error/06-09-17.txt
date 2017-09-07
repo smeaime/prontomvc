@@ -1,0 +1,1796 @@
+
+Log Entry : 
+09/06/2017 12:21:38
+Error in: http://localhost:50769/ProntoWeb/CartasDePortes.aspx?tipo=Todas. Error Message:Mariano
+__________________________
+
+Log Entry : 
+09/06/2017 12:26:52
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:System.Web.HttpCompileException
+C:\bdl\pronto\prontoweb\ProntoWeb\CDPMailing.aspx.vb(481): error BC30561: 'Globalization' is ambiguous, imported from the namespaces or types 'System.Web, System'.
+   en System.Web.Compilation.AssemblyBuilder.Compile()
+   en System.Web.Compilation.BuildProvidersCompiler.PerformBuild()
+   en System.Web.Compilation.BuildManager.CompileWebFile(VirtualPath virtualPath)
+   en System.Web.Compilation.BuildManager.GetVPathBuildResultInternal(VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean throwIfNotFound, Boolean ensureIsUpToDate)
+   en System.Web.Compilation.BuildManager.GetVPathBuildResultWithNoAssert(HttpContext context, VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean throwIfNotFound, Boolean ensureIsUpToDate)
+   en System.Web.Compilation.BuildManager.GetVirtualPathObjectFactory(VirtualPath virtualPath, HttpContext context, Boolean allowCrossApp, Boolean throwIfNotFound)
+   en System.Web.Compilation.BuildManager.CreateInstanceFromVirtualPath(VirtualPath virtualPath, Type requiredBaseType, HttpContext context, Boolean allowCrossApp)
+   en System.Web.UI.PageHandlerFactory.GetHandlerHelper(HttpContext context, String requestType, VirtualPath virtualPath, String physicalPath)
+   en System.Web.UI.PageHandlerFactory.GetHandler(HttpContext context, String requestType, String virtualPath, String path)
+   en System.Web.HttpApplication.MaterializeHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   en System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+System.Web
+__________________________
+
+Log Entry : 
+09/06/2017 12:28:19
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:System.Web.HttpCompileException
+C:\bdl\pronto\prontoweb\ProntoWeb\CDPMailing.aspx.vb(481): error BC30561: 'Globalization' is ambiguous, imported from the namespaces or types 'System.Web, System'.
+   en System.Web.Compilation.AssemblyBuilder.Compile()
+   en System.Web.Compilation.BuildProvidersCompiler.PerformBuild()
+   en System.Web.Compilation.BuildManager.CompileWebFile(VirtualPath virtualPath)
+   en System.Web.Compilation.BuildManager.GetVPathBuildResultInternal(VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean throwIfNotFound, Boolean ensureIsUpToDate)
+   en System.Web.Compilation.BuildManager.GetVPathBuildResultWithNoAssert(HttpContext context, VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean throwIfNotFound, Boolean ensureIsUpToDate)
+   en System.Web.Compilation.BuildManager.GetVirtualPathObjectFactory(VirtualPath virtualPath, HttpContext context, Boolean allowCrossApp, Boolean throwIfNotFound)
+   en System.Web.Compilation.BuildManager.CreateInstanceFromVirtualPath(VirtualPath virtualPath, Type requiredBaseType, HttpContext context, Boolean allowCrossApp)
+   en System.Web.UI.PageHandlerFactory.GetHandlerHelper(HttpContext context, String requestType, VirtualPath virtualPath, String physicalPath)
+   en System.Web.UI.PageHandlerFactory.GetHandler(HttpContext context, String requestType, String virtualPath, String path)
+   en System.Web.HttpApplication.MaterializeHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   en System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+System.Web
+__________________________
+
+Log Entry : 
+09/06/2017 12:29:15
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:Mariano esta logueado, pero lo redirijo al login porque faltan los datos de session. No deberia mejor mandarlo a SeleccionarEmpresa? Ademas, no hago el LogOut y le queda el cookie!!!
+__________________________
+
+Log Entry : 
+09/06/2017 12:31:26
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:C:\Users\Mariano\AppData\Local\Temp\Listado general 06Set.2017_123126_XFP.xls  Informe: Descargas de Hoy + Posiciones filtradas,  del 04/09/2017 al 06/09/2017    Corredor: BLD S.A Destinatario: OLEAGINOSA MORENO HNOS S A C I F I A      (Exporta: Entregas, Punto de venta: Todos, Criterio: ALGUNOS)
+__________________________
+
+Log Entry : 
+09/06/2017 12:32:27
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:Por generar el archivo C:\Users\Mariano\AppData\Local\Temp\Listado general 06Sep2017_123224_WWB.xls
+__________________________
+
+Log Entry : 
+09/06/2017 12:32:27
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:Archivo generado C:\Users\Mariano\AppData\Local\Temp\Listado general 06Sep2017_123224_WWB.xls
+__________________________
+
+Log Entry : 
+09/06/2017 12:32:27
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:Nombre  'Listado general de Cartas de Po$'
+__________________________
+
+Log Entry : 
+09/06/2017 12:32:27
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:Tablas  1
+__________________________
+
+Log Entry : 
+09/06/2017 12:32:27
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:Convertido C:\Users\Mariano\AppData\Local\Temp\Listado general 06Sep2017_123224_WWB.xls Lineas: 83
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 78
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 79
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 80
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 81
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 82
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 83
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 84
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 85
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 86
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 87
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 88
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 89
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 90
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 91
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 92
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 93
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 94
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 95
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 96
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 97
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 98
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 99
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 100
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 101
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 102
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 103
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 104
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 105
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 106
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 107
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 108
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 109
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 110
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 111
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 112
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 113
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 114
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 115
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 116
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 117
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 118
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 119
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 120
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 121
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 122
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 123
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 124
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 125
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 126
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 127
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 128
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 129
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 130
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 131
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 132
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 133
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 134
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 135
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 136
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 137
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 138
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 139
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 140
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 141
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 142
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 143
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 144
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 145
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 146
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 147
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 148
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 149
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 150
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 151
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 152
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 153
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 154
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 155
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 156
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 157
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 158
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 159
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 160
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 161
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 162
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 163
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 164
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 165
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 166
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 167
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 168
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 169
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 170
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 171
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 172
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 173
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 174
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 175
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 176
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 177
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 178
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 179
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 180
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 181
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 182
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 183
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 184
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 185
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 186
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 187
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 188
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 189
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 190
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 191
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 192
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 193
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 194
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 195
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 196
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 197
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 198
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 199
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 200
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 201
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 202
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 203
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 204
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 205
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 206
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 207
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 208
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 209
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 210
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 211
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 212
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 213
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 214
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 215
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 216
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 217
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 218
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 219
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 220
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 221
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 222
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 223
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 224
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 225
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 226
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 227
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 228
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 229
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 230
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 231
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 232
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 233
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 234
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 235
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 236
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 237
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 238
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 239
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 240
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 241
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 242
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 243
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 244
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 245
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 246
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 247
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 248
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 249
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 250
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 251
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 252
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 253
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 254
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 255
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 256
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 257
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 258
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 259
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 260
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 261
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 262
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 263
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 264
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 265
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 266
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 267
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 268
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 269
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 270
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 271
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 272
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 273
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 274
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 275
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 276
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 277
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 278
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 279
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 280
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 281
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 282
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 283
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 284
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 285
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 286
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 287
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 288
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 289
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 290
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 291
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 292
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 293
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 294
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 295
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 296
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 297
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 298
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 299
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 300
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 301
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 302
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 303
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 304
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 305
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 306
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 307
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 308
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 309
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 310
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 311
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 312
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 313
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 314
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 315
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 316
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 317
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 318
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 319
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 320
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 321
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 322
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 323
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 324
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 325
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 326
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 327
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 328
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 329
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 330
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 331
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 332
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 333
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 334
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 335
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 336
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 337
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 338
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 339
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 340
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 341
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 342
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 343
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 344
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 345
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 346
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 347
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 348
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 349
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 350
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 351
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 352
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 353
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 354
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 355
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 356
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 357
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 358
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 359
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 360
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 361
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 362
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 363
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 364
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 365
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 366
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 367
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 368
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 369
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 370
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 371
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 372
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 373
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 374
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 375
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 376
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 377
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 378
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 379
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 380
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 381
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 382
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 383
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 384
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 385
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 386
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 387
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 388
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 389
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 390
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 391
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 392
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 393
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 394
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 395
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 396
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 397
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 398
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 399
+__________________________
+
+Log Entry : 
+09/06/2017 12:33:09
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:error html row 400
+__________________________
+
+Log Entry : 
+09/06/2017 12:37:20
+Error in: http://localhost:50769/ProntoWeb/Principal.aspx. Error Message:Mariano esta logueado, pero lo redirijo al login porque faltan los datos de session. No deberia mejor mandarlo a SeleccionarEmpresa? Ademas, no hago el LogOut y le queda el cookie!!!
+__________________________
+
+Log Entry : 
+09/06/2017 12:37:20
+Error in: http://localhost:50769/ProntoWeb/CartasDePortes.aspx?tipo=Todas. Error Message:Mariano
+__________________________
+
+Log Entry : 
+09/06/2017 12:41:52
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:C:\Users\Mariano\AppData\Local\Temp\Listado general 06Set.2017_124152_LSW.xls  Informe: Descargas de Hoy + Posiciones filtradas,  del 04/09/2017 al 06/09/2017    Corredor: BLD S.A Destinatario: OLEAGINOSA MORENO HNOS S A C I F I A      (Exporta: Entregas, Punto de venta: Todos, Criterio: ALGUNOS)
+__________________________
+
+Log Entry : 
+09/06/2017 12:42:59
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:Por generar el archivo C:\Users\Mariano\AppData\Local\Temp\Listado general 06Sep2017_124218_BTL.xls
+__________________________
+
+Log Entry : 
+09/06/2017 12:42:59
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:Archivo generado C:\Users\Mariano\AppData\Local\Temp\Listado general 06Sep2017_124218_BTL.xls
+__________________________
+
+Log Entry : 
+09/06/2017 12:44:57
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:Nombre  'Listado general de Cartas de Po$'
+__________________________
+
+Log Entry : 
+09/06/2017 12:44:57
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:Tablas  1
+__________________________
+
+Log Entry : 
+09/06/2017 12:44:57
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:Convertido C:\Users\Mariano\AppData\Local\Temp\Listado general 06Sep2017_124218_BTL.xls Lineas: 83
+__________________________
+
+Log Entry : 
+09/06/2017 12:52:08
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:C:\Users\Mariano\AppData\Local\Temp\Listado general 06Set.2017_125208_MHB.xls  Informe: Descargas de Hoy + Posiciones filtradas,  del 04/09/2017 al 06/09/2017    Corredor: BLD S.A Destinatario: OLEAGINOSA MORENO HNOS S A C I F I A      (Exporta: Entregas, Punto de venta: Todos, Criterio: ALGUNOS)
+__________________________
+
+Log Entry : 
+09/06/2017 12:57:00
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:Por generar el archivo C:\Users\Mariano\AppData\Local\Temp\Listado general 06Sep2017_125657_WRF.xls
+__________________________
+
+Log Entry : 
+09/06/2017 12:57:00
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:Archivo generado C:\Users\Mariano\AppData\Local\Temp\Listado general 06Sep2017_125657_WRF.xls
+__________________________
+
+Log Entry : 
+09/06/2017 12:57:00
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:Nombre  'Listado general de Cartas de Po$'
+__________________________
+
+Log Entry : 
+09/06/2017 12:57:00
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:Tablas  1
+__________________________
+
+Log Entry : 
+09/06/2017 12:57:00
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:Convertido C:\Users\Mariano\AppData\Local\Temp\Listado general 06Sep2017_125657_WRF.xls Lineas: 83
+__________________________
+
+Log Entry : 
+09/06/2017 12:58:57
+Error in: http://localhost:50769/ProntoWeb/Principal.aspx. Error Message:Mariano esta logueado, pero lo redirijo al login porque faltan los datos de session. No deberia mejor mandarlo a SeleccionarEmpresa? Ademas, no hago el LogOut y le queda el cookie!!!
+__________________________
+
+Log Entry : 
+09/06/2017 12:58:57
+Error in: http://localhost:50769/ProntoWeb/CartasDePortes.aspx?tipo=Todas. Error Message:Mariano
+__________________________
+
+Log Entry : 
+09/06/2017 13:00:05
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:Por generar el archivo C:\Users\Mariano\AppData\Local\Temp\Listado general 06Set.2017_125940_KVU.xls
+__________________________
+
+Log Entry : 
+09/06/2017 13:00:05
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:Archivo generado C:\Users\Mariano\AppData\Local\Temp\Listado general 06Set.2017_125940_KVU.xls
+__________________________
+
+Log Entry : 
+09/06/2017 13:00:07
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:Nombre  'Listado general de Cartas de Po$'
+__________________________
+
+Log Entry : 
+09/06/2017 13:00:07
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:Tablas  1
+__________________________
+
+Log Entry : 
+09/06/2017 13:00:07
+Error in: http://localhost:50769/ProntoWeb/CDPMailing.aspx. Error Message:Convertido C:\Users\Mariano\AppData\Local\Temp\Listado general 06Set.2017_125940_KVU.xls Lineas: 86
+__________________________
