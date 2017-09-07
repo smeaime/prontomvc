@@ -127,6 +127,18 @@ namespace ProntoMVC.Controllers
             mObservaciones = o.Observaciones ?? "";
             mAnulada = o.Anulada ?? "";
 
+
+
+
+            var reqsToDelete = o.DetalleOrdenesCompras.Where(x => (x.IdArticulo ?? 0) <= 0).ToList();
+            foreach (var deleteReq in reqsToDelete)
+            {
+                o.DetalleOrdenesCompras.Remove(deleteReq);
+            }
+            if (o.DetalleOrdenesCompras.Count <= 0) sErrorMsg += "\n" + "El comprobante no tiene items";
+
+
+
             if ((o.NumeroOrdenCompra ?? 0) <= 0) { sErrorMsg += "\n" + "Falta el número"; }
             if ((o.NumeroOrdenCompraCliente ?? "") == "") { sErrorMsg += "\n" + "Falta el número de orden de compra del cliente"; }
             if (mIdMoneda <= 0) { sErrorMsg += "\n" + "Falta la moneda"; }
