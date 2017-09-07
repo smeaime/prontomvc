@@ -1,13 +1,12 @@
 ﻿$(function () {
     $("#loading").hide();
 
-
-
     'use strict';
 
     var $grid = "", lastSelectedId, lastSelectediCol, lastSelectediRow, lastSelectediCol2, lastSelectediRow2, inEdit, selICol, selIRow, gridCellWasClicked = false, grillaenfoco = false, dobleclic;
-    var headerRow, rowHight, resizeSpanHeight, idaux = 0, detalle = "", mTotalImputaciones, mImporteIva1, mPercepcionIIBB1, mPercepcionIIBB2, mPercepcionIIBB3, mPercepcionIVA, mImporteTotal;
-    var mIVANoDiscriminado, mPorcentajePercepcionIIBB1, mPorcentajePercepcionIIBB2, mPorcentajePercepcionIIBB3;
+    var headerRow, rowHight, resizeSpanHeight;
+    var idaux = 0, detalle = "", mTotalImputaciones, mImporteIva1, mPercepcionIIBB1, mPercepcionIIBB2, mPercepcionIIBB3, mPercepcionIVA, mImporteTotal, mIVANoDiscriminado, mPorcentajePercepcionIIBB1;
+    var mPorcentajePercepcionIIBB2, mPorcentajePercepcionIIBB3;
 
     if ($("#Anulada").val() == "SI") {
         $("#grabar2").prop("disabled", true);
@@ -52,8 +51,8 @@
         $grid = "";
         gridCellWasClicked = false;
 
-        if (jQuery("#ListaArticulos").find(target).length) {
-            $grid = $('#ListaArticulos');
+        if (jQuery("#Lista").find(target).length) {
+            $grid = $('#Lista');
             grillaenfoco = true;
         }
 
@@ -93,31 +92,31 @@
 
     var CalcularItem = function (value, colname) {
         if (colname === "Cantidad") {
-            var rowid = $('#ListaArticulos').getGridParam('selrow');
+            var rowid = $('#Lista').getGridParam('selrow');
             value = Number(value);
             var Cantidad = value;
-            var Bonificacion = parseFloat($("#ListaArticulos").getCell(rowid, "Bonificacion").replace(",", ".")) || 0;
-            var PrecioUnitario = parseFloat($("#ListaArticulos").getCell(rowid, "PrecioUnitario").replace(",", ".")) || 0;
+            var Bonificacion = parseFloat($("#Lista").getCell(rowid, "Bonificacion").replace(",", ".")) || 0;
+            var PrecioUnitario = parseFloat($("#Lista").getCell(rowid, "PrecioUnitario").replace(",", ".")) || 0;
             var Importe = CalcularImporteItem(Cantidad, PrecioUnitario, Bonificacion) || 0;
-            $('#ListaArticulos').jqGrid('setCell', rowid, 'Importe', Importe[0]);
+            $('#Lista').jqGrid('setCell', rowid, 'Importe', Importe[0]);
         } else {
             if (colname === "Precio") {
-                var rowid = $('#ListaArticulos').getGridParam('selrow');
+                var rowid = $('#Lista').getGridParam('selrow');
                 value = Number(value);
                 var PrecioUnitario = value;
-                var Bonificacion = parseFloat($("#ListaArticulos").getCell(rowid, "Bonificacion").replace(",", ".")) || 0;
-                var Cantidad = parseFloat($("#ListaArticulos").getCell(rowid, "Cantidad").replace(",", ".")) || 0;
+                var Bonificacion = parseFloat($("#Lista").getCell(rowid, "Bonificacion").replace(",", ".")) || 0;
+                var Cantidad = parseFloat($("#Lista").getCell(rowid, "Cantidad").replace(",", ".")) || 0;
                 var Importe = CalcularImporteItem(Cantidad, PrecioUnitario, Bonificacion) || 0;
-                $('#ListaArticulos').jqGrid('setCell', rowid, 'Importe', Importe[0]);
+                $('#Lista').jqGrid('setCell', rowid, 'Importe', Importe[0]);
             } else {
                 if (colname === "% Bonif.") {
-                    var rowid = $('#ListaArticulos').getGridParam('selrow');
+                    var rowid = $('#Lista').getGridParam('selrow');
                     value = Number(value);
                     var Bonificacion = value;
-                    var PrecioUnitario = parseFloat($("#ListaArticulos").getCell(rowid, "PrecioUnitario").replace(",", ".")) || 0;
-                    var Cantidad = parseFloat($("#ListaArticulos").getCell(rowid, "Cantidad").replace(",", ".")) || 0;
+                    var PrecioUnitario = parseFloat($("#Lista").getCell(rowid, "PrecioUnitario").replace(",", ".")) || 0;
+                    var Cantidad = parseFloat($("#Lista").getCell(rowid, "Cantidad").replace(",", ".")) || 0;
                     var Importe = CalcularImporteItem(Cantidad, PrecioUnitario, Bonificacion) || 0;
-                    $('#ListaArticulos').jqGrid('setCell', rowid, 'Importe', Importe[0]);
+                    $('#Lista').jqGrid('setCell', rowid, 'Importe', Importe[0]);
                 }
             }
         }
@@ -133,11 +132,131 @@
         return [Importe];
     };
 
+
+    function RefrescarRestoDelRenglon(rowid, name, val, iRow, iCol) {
+        var dataIds = $('#Lista').jqGrid('getDataIDs'); // me traigo los datos
+        var data = $('#Lista').jqGrid('getRowData', dataIds[iRow - 1]);
+        var cm = jQuery("#Lista").jqGrid("getGridParam", "colModel");
+        var colName = cm[iCol]['index'];
+
+        if (colName == "Codigo") {
+            $.post(ROOT + 'Articulo/GetCodigosArticulosAutocomplete2',  // ?term=' + val
+                    { term: val }, // JSON.stringify(val)},
+                    function (data) {
+                        if (data.length > 0) {
+                            var ui = data[0];
+
+                            sacarDeEditMode3(lastSelectediRow,lastSelectediCol);
+
+                            var dataIds = $('#Lista').jqGrid('getDataIDs'); // me traigo los datos
+                            var data = $('#Lista').jqGrid('getRowData', dataIds[iRow - 1]);
+
+                            data['IdArticulo'] = ui.id;
+                            data['Codigo'] = ui.codigo;
+                            data['Articulo'] = ui.title;
+                            //data['PorcentajeIVA'] = ui.iva;
+                            data['IdUnidad'] = ui.IdUnidad;
+                            data['Unidad'] = ui.Unidad;
+                            data['IdDetalleFactura'] = data['IdDetalleFactura'] || 0;
+
+                            $('#Lista').jqGrid('setRowData', dataIds[iRow - 1], data); // vuelvo a grabar el renglon
+
+                            FinRefresco();
+                        }
+                        else {
+                            alert("No existe el código"); 
+                            var ui = data[0];
+                            var dataIds = $('#Lista').jqGrid('getDataIDs'); // me traigo los datos
+
+                            var data = $('#Lista').jqGrid('getRowData', dataIds[iRow - 1]);
+                            data['Articulo'] = "";
+                            data['IdArticulo'] = 0;
+                            data['Codigo'] = "";
+                            data['Cantidad'] = 0;
+
+                            $('#Lista').jqGrid('setRowData', dataIds[iRow - 1], data); // vuelvo a grabar el renglon
+                        }
+                    }
+            );
+        }
+
+        else if (colName == "Articulo") {
+            $.post(ROOT + 'Articulo/GetArticulosAutocomplete2',  
+                    { term: val }, // JSON.stringify(val)},
+                    function (data) {
+                        if (val != "No se encontraron resultados" && (data.length == 1 || data.length > 1)) { // qué pasa si encuentra más de uno?????
+                            var ui = data[0];
+
+                            sacarDeEditMode3(lastSelectediRow, lastSelectediCol);
+
+                            if (ui.value == "No se encontraron resultados") {
+                                var dataIds = $('#Lista').jqGrid('getDataIDs'); // me traigo los datos
+                                var data = $('#Lista').jqGrid('getRowData', dataIds[iRow - 1]);
+
+                                data['Articulo'] = "";
+                                data['IdArticulo'] = 0;
+                                data['Codigo'] = "";
+                                data['Cantidad'] = 0;
+
+                                $('#Lista').jqGrid('setRowData', dataIds[iRow - 1], data); // vuelvo a grabar el renglon
+                                return;
+                            }
+
+                            var dataIds = $('#Lista').jqGrid('getDataIDs'); // me traigo los datos
+                            var data = $('#Lista').jqGrid('getRowData', dataIds[iRow - 1]);
+
+                            data['IdArticulo'] = ui.id;
+                            data['Codigo'] = ui.codigo;
+                            data['Articulo'] = ui.value; 
+                            //data['PorcentajeIVA'] = ui.iva;
+                            data['IdUnidad'] = ui.IdUnidad;
+                            data['Unidad'] = ui.Unidad;
+                            data['IdDetalleFactura'] = data['IdDetalleFactura'] || 0;
+
+                            $('#Lista').jqGrid('setRowData', dataIds[iRow - 1], data); // vuelvo a grabar el renglon
+
+                            FinRefresco();
+                        }
+                        else {
+                            alert("No existe el artículo " + val); // se está bancando que no sea identica la descripcion
+                            var ui = data[0];
+                            var dataIds = $('#Lista').jqGrid('getDataIDs'); // me traigo los datos
+                            if (true) {
+
+                                var data = $('#Lista').jqGrid('getRowData', dataIds[iRow - 1]);
+                                data['Articulo'] = "";
+                                data['IdArticulo'] = 0;
+                                data['Codigo'] = "";
+                                data['Cantidad'] = 0;
+
+                                $('#Lista').jqGrid('setRowData', dataIds[iRow - 1], data); // vuelvo a grabar el renglon
+                            } else {
+                                $('#Lista').jqGrid('restoreRow', dataIds[iRow - 1]);
+                            }
+                            // hay que cancelar la grabacion
+                        }
+                    }
+            );
+
+        }
+        else if (colName == "Cantidad") { }
+
+        else {
+            FinRefresco()
+        }
+    }
+
+    function FinRefresco() {
+        calculaTotalImputaciones();
+        //RefrescarOrigenDescripcion();
+        AgregarRenglonesEnBlanco({ "IdDetalleFactura": "0", "IdArticulo": "0", "PrecioUnitario": "0", "Articulo": "" }, "#Lista");
+    }
+
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     /////////////////////////////////////////////////DEFINICION DE GRILLAS   //////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    $('#ListaArticulos').jqGrid({
+    $('#Lista').jqGrid({
         url: ROOT + 'Factura/DetFactura/',
         postData: { 'IdFactura': function () { return $("#IdFactura").val(); } },
         editurl: ROOT + 'Factura/EditGridData/',
@@ -170,11 +289,11 @@
                                         }
                                         event.preventDefault();
                                         $(elem).val(ui.item.label);
-                                        var rowid = $('#ListaArticulos').getGridParam('selrow');
-                                        $('#ListaArticulos').jqGrid('setCell', rowid, 'IdArticulo', ui.item.id);
-                                        $('#ListaArticulos').jqGrid('setCell', rowid, 'Articulo', ui.item.title);
-                                        $('#ListaArticulos').jqGrid('setCell', rowid, 'IdUnidad', ui.item.IdUnidad);
-                                        $('#ListaArticulos').jqGrid('setCell', rowid, 'Unidad', ui.item.Unidad);
+                                        var rowid = $('#Lista').getGridParam('selrow');
+                                        $('#Lista').jqGrid('setCell', rowid, 'IdArticulo', ui.item.id);
+                                        $('#Lista').jqGrid('setCell', rowid, 'Articulo', ui.item.title);
+                                        $('#Lista').jqGrid('setCell', rowid, 'IdUnidad', ui.item.IdUnidad);
+                                        $('#Lista').jqGrid('setCell', rowid, 'Unidad', ui.item.Unidad);
                                         CalcularItem(1, "Cantidad");
                                     },
                                     focus: function (event, ui) {
@@ -207,11 +326,11 @@
                                         }
                                         event.preventDefault();
                                         $(elem).val(ui.item.label);
-                                        var rowid = $('#ListaArticulos').getGridParam('selrow');
-                                        $('#ListaArticulos').jqGrid('setCell', rowid, 'IdArticulo', ui.item.id);
-                                        $('#ListaArticulos').jqGrid('setCell', rowid, 'Codigo', ui.item.codigo);
-                                        $('#ListaArticulos').jqGrid('setCell', rowid, 'IdUnidad', ui.item.IdUnidad);
-                                        $('#ListaArticulos').jqGrid('setCell', rowid, 'Unidad', ui.item.Unidad);
+                                        var rowid = $('#Lista').getGridParam('selrow');
+                                        $('#Lista').jqGrid('setCell', rowid, 'IdArticulo', ui.item.id);
+                                        $('#Lista').jqGrid('setCell', rowid, 'Codigo', ui.item.codigo);
+                                        $('#Lista').jqGrid('setCell', rowid, 'IdUnidad', ui.item.IdUnidad);
+                                        $('#Lista').jqGrid('setCell', rowid, 'Unidad', ui.item.Unidad);
                                     },
                                     focus: function (event, ui) {
                                         if (ui.item.label === NoResultsLabel) {
@@ -238,7 +357,7 @@
                                 type: 'keypress',
                                 fn: function (e) {
                                     var key = e.charCode || e.keyCode;
-                                    if (key == 13) { setTimeout("jQuery('#ListaArticulos').editCell(" + selIRow + " + 1, " + selICol + ", true);", 100); }
+                                    if (key == 13) { setTimeout("jQuery('#Lista').editCell(" + selIRow + " + 1, " + selICol + ", true);", 100); }
                                     if ((key < 48 || key > 57) && key !== 46 && key !== 44 && key !== 8 && key !== 37 && key !== 39) { return false; }
                                 }
                             }]
@@ -253,8 +372,8 @@
                             },
                             dataEvents: [{
                                 type: 'change', fn: function (e) {
-                                    var rowid = $('#ListaArticulos').getGridParam('selrow');
-                                    $('#ListaArticulos').jqGrid('setCell', rowid, 'IdUnidad', this.value);
+                                    var rowid = $('#Lista').getGridParam('selrow');
+                                    $('#Lista').jqGrid('setCell', rowid, 'IdUnidad', this.value);
                                 }
                             }]
                         },
@@ -268,7 +387,7 @@
                                 type: 'keypress',
                                 fn: function (e) {
                                     var key = e.charCode || e.keyCode;
-                                    if (key == 13) { setTimeout("jQuery('#ListaArticulos').editCell(" + selIRow + " + 1, " + selICol + ", true);", 100); }
+                                    if (key == 13) { setTimeout("jQuery('#Lista').editCell(" + selIRow + " + 1, " + selICol + ", true);", 100); }
                                     if ((key < 48 || key > 57) && key !== 46 && key !== 44 && key !== 8 && key !== 37 && key !== 39) { return false; }
                                 }
                             }]
@@ -284,7 +403,7 @@
                                 type: 'keypress',
                                 fn: function (e) {
                                     var key = e.charCode || e.keyCode;
-                                    if (key == 13) { setTimeout("jQuery('#ListaArticulos').editCell(" + selIRow + " + 1, " + selICol + ", true);", 100); }
+                                    if (key == 13) { setTimeout("jQuery('#Lista').editCell(" + selIRow + " + 1, " + selICol + ", true);", 100); }
                                     if ((key < 48 || key > 57) && key !== 46 && key !== 44 && key !== 8 && key !== 37 && key !== 39) { return false; }
                                 }
                             }]
@@ -299,7 +418,7 @@
                                 type: 'keypress',
                                 fn: function (e) {
                                     var key = e.charCode || e.keyCode;
-                                    if (key == 13) { setTimeout("jQuery('#ListaArticulos').editCell(" + selIRow + " + 1, " + selICol + ", true);", 100); }
+                                    if (key == 13) { setTimeout("jQuery('#Lista').editCell(" + selIRow + " + 1, " + selICol + ", true);", 100); }
                                     if ((key < 48 || key > 57) && key !== 46 && key !== 44 && key !== 8 && key !== 37 && key !== 39) { return false; }
                                 }
                             }]
@@ -315,8 +434,8 @@
                             },
                             dataEvents: [{
                                 type: 'change', fn: function (e) {
-                                    var rowid = $('#ListaArticulos').getGridParam('selrow');
-                                    $('#ListaArticulos').jqGrid('setCell', rowid, 'OrigenDescripcion', this.value);
+                                    var rowid = $('#Lista').getGridParam('selrow');
+                                    $('#Lista').jqGrid('setCell', rowid, 'OrigenDescripcion', this.value);
                                 }
                             }]
                         },
@@ -331,30 +450,30 @@
             lastSelectedId = rowid;
             lastSelectediCol = iCol;
             lastSelectediRow = iRow;
-            if (jQuery("#ListaArticulos").jqGrid('getCell', rowid, 'TipoCancelacion') == '1') {
-                jQuery("#ListaArticulos").jqGrid('setCell', rowid, 'PorcentajeCertificacion', '', 'not-editable-cell');
+            if (jQuery("#Lista").jqGrid('getCell', rowid, 'TipoCancelacion') == '1') {
+                jQuery("#Lista").jqGrid('setCell', rowid, 'PorcentajeCertificacion', '', 'not-editable-cell');
             }
         },
         beforeEditCell: function (rowid, cellname, value, iRow, iCol) {
+            lastSelectediRow = iRow;
+            lastSelectediCol = iCol;
         },
         afterEditCell: function (rowid, cellName, cellValue, iRow, iCol) {
             //if (cellName == 'FechaVigencia') {
             //    jQuery("#" + iRow + "_FechaVigencia", "#ListaPolizas").datepicker({ dateFormat: "dd/mm/yy" });
             //}
         },
-        afterSaveCell: function (rowid) {
-            calculaTotalImputaciones();
+        afterSaveCell: function (rowid, cellname, value, iRow, iCol) {
+            RefrescarRestoDelRenglon(rowid, cellname, value, iRow, iCol);
         },
         gridComplete: function () {
             calculaTotalImputaciones();
         },
 
         loadComplete: function () { 
-            //AgregarItemVacio(jQuery("#ListaArticulos"));
-            AgregarRenglonesEnBlanco({ "IdDetalleFactura": "0", "IdArticulo": "0", "PrecioUnitario": "0", "Articulo": "" },"#ListaArticulos");
-
+            //AgregarItemVacio(jQuery("#Lista"));
+            AgregarRenglonesEnBlanco({ "IdDetalleFactura": "0", "IdArticulo": "0", "PrecioUnitario": "0", "Articulo": "" },"#Lista");
         },
-
 
         pager: $('#ListaPager1'),
         rowNum: 100,
@@ -366,8 +485,6 @@
         width: 'auto', // 'auto',
         autowidth: true,
         shrinkToFit: false,
-
-
 
         height: '150px', // 'auto',
         rownumbers: true,
@@ -383,37 +500,25 @@
         // caption: '<b>DETALLE DE ARTICULOS</b>',
         cellEdit: true,
         cellsubmit: 'clientArray'
-
-
     });
-    jQuery("#ListaArticulos").jqGrid('navGrid', '#ListaPager1', { refresh: false, add: false, edit: false, del: false, search: false }, {}, {}, {}, { sopt: ["cn"], width: 700, closeOnEscape: true, closeAfterSearch: true });
-    jQuery("#ListaArticulos").jqGrid('navButtonAdd', '#ListaPager1',
+    jQuery("#Lista").jqGrid('navGrid', '#ListaPager1', { refresh: false, add: false, edit: false, del: false, search: false }, {}, {}, {}, { sopt: ["cn"], width: 700, closeOnEscape: true, closeAfterSearch: true });
+    jQuery("#Lista").jqGrid('navButtonAdd', '#ListaPager1',
                                  {
                                      caption: "", buttonicon: "ui-icon-plus", title: "Agregar item",
                                      onClickButton: function () {
-                                         AgregarItemVacio(jQuery("#ListaArticulos"));
+                                         AgregarItemVacio(jQuery("#Lista"));
                                      },
                                  });
-    jQuery("#ListaArticulos").jqGrid('navButtonAdd', '#ListaPager1',
+    jQuery("#Lista").jqGrid('navButtonAdd', '#ListaPager1',
                                  {
                                      caption: "", buttonicon: "ui-icon-trash", title: "Eliminar",
                                      onClickButton: function () {
-                                         EliminarSeleccionados(jQuery("#ListaArticulos"));
+                                         EliminarSeleccionados(jQuery("#Lista"));
                                      },
                                  });
-    jQuery("#ListaArticulos").jqGrid('gridResize', { minWidth: 350, maxWidth: 910, minHeight: 100, maxHeight: 500 });
+    jQuery("#Lista").jqGrid('gridResize', { minWidth: 350, maxWidth: 910, minHeight: 100, maxHeight: 500 });
 
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-
-
-
-
-
-
-
-
 
     $("#ListaDrag").jqGrid({
         url: ROOT + 'OrdenCompra/TT_DynamicGridData',
@@ -502,8 +607,6 @@
             $("#ListaDrag td", grid[0]).css({ background: 'rgb(234, 234, 234)' });
         },
 
-
-
         pager: $('#ListaDragPager'),
         rowNum: 15,
         rowList: [10, 20, 50],
@@ -524,7 +627,6 @@
         multiboxonly: true,
         multipleSearch: true
     })
-
 
     //    jQuery("#ListaDrag").jqGrid('navGrid', '#ListaDragPager', { refresh: true, add: false, edit: false, del: false }, {}, {}, {}, { sopt: ["cn"], width: 700, closeOnEscape: true, closeAfterSearch: true });
     jQuery("#ListaDrag").jqGrid('navGrid', '#ListaDragPager',
@@ -553,12 +655,6 @@
         });
 
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-
-
-
-
 
     $("#ListaDrag2").jqGrid({
         url: ROOT + 'Remito/TT_DynamicGridData',
@@ -641,8 +737,6 @@
             $("#ListaDrag2 td", grid[0]).css({ background: 'rgb(234, 234, 234)' });
         },
 
-
-
         pager: $('#ListaDragPager2'),
         rowNum: 15,
         rowList: [10, 20, 50],
@@ -663,12 +757,7 @@
         gridview: true,
         multiboxonly: true,
         multipleSearch: true
-
-
-
-
     })
-
 
     // jQuery("#ListaDrag2").jqGrid('navGrid', '#ListaDragPager2', { refresh: true, add: false, edit: false, del: false }, {}, {}, {}, { sopt: ["cn"], width: 700, closeOnEscape: true, closeAfterSearch: true });
     jQuery("#ListaDrag2").jqGrid('navGrid', '#ListaDragPager2',
@@ -692,13 +781,6 @@
     jQuery("#ListaDrag2").jqGrid('navButtonAdd', '#ListaDragPager2', { caption: "Filter", title: "Toggle Searching Toolbar", buttonicon: 'ui-icon-pin-s', onClickButton: function () { myGrid[0].toggleToolbar(); } });
 
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-
-
-
-
-
 
     $("#ListaDrag3").jqGrid({
         //url: ROOT + 'Articulo/ArticulosGridDataResumido', // '@Url.Action("ArticulosGridData", "Articulo")',
@@ -783,9 +865,6 @@
             onClickButton: function () { myGrid[0].toggleToolbar(); }
         });
 
-
-
-
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     //DEFINICION DE PANEL ESTE PARA LISTAS DRAG DROP
@@ -809,7 +888,7 @@
 
     function ConectarGrillas1() {
         $("#ListaDrag").jqGrid('gridDnD', {
-            connectWith: '#ListaArticulos',
+            connectWith: '#Lista',
             onstart: function (ev, ui) {
                 ui.helper.removeClass("ui-state-highlight myAltRowClass")
                             .addClass("ui-state-error ui-widget")
@@ -824,7 +903,7 @@
 
     function ConectarGrillas2() {
         $("#ListaDrag2").jqGrid('gridDnD', {
-            connectWith: '#ListaArticulos',
+            connectWith: '#Lista',
             onstart: function (ev, ui) {
                 ui.helper.removeClass("ui-state-highlight myAltRowClass")
                             .addClass("ui-state-error ui-widget")
@@ -839,7 +918,7 @@
 
     function ConectarGrillas3() {
         $("#ListaDrag3").jqGrid('gridDnD', {
-            connectWith: '#ListaArticulos',
+            connectWith: '#Lista',
             onstart: function (ev, ui) {
                 ui.helper.removeClass("ui-state-highlight myAltRowClass")
                             .addClass("ui-state-error ui-widget")
@@ -854,7 +933,7 @@
 
     function Copiar1(idsource, Origen) {
         var acceptId = idsource, IdOrdenCompra = 0, mPrimerItem = true, IdObra = 0, Letra = "", Precio = 0, PorcentajeBonificacion = 0, Cantidad = 0, PendienteFacturar = 0, PorcentajeIva = 0;
-        var PrecioUnitario = 0, IdCodigoIva = 0, mAux, $gridOrigen = $("#ListaDrag"), $gridDestino = $("#ListaArticulos");
+        var PrecioUnitario = 0, IdCodigoIva = 0, mAux, $gridOrigen = $("#ListaDrag"), $gridDestino = $("#Lista");
 
         var getdata = $gridOrigen.jqGrid('getRowData', acceptId);
         var tmpdata = {}, dataIds, data2, Id, Id2, i, date, displayDate;
@@ -955,7 +1034,7 @@
 
     function Copiar2(idsource, Origen) {
         var acceptId = idsource, IdRemito = 0, mPrimerItem = true, IdObra = 0, Letra = "", Precio = 0, PorcentajeBonificacion = 0, Cantidad = 0, PendienteFacturar = 0, PorcentajeIva = 0;
-        var PrecioUnitario = 0, IdCodigoIva = 0, mAux, $gridOrigen = $("#ListaDrag2"), $gridDestino = $("#ListaArticulos");
+        var PrecioUnitario = 0, IdCodigoIva = 0, mAux, $gridOrigen = $("#ListaDrag2"), $gridDestino = $("#Lista");
 
         var getdata = $gridOrigen.jqGrid('getRowData', acceptId);
         var tmpdata = {}, dataIds, data2, Id, Id2, i, date, displayDate;
@@ -1057,7 +1136,7 @@
 
     function Copiar3(idsource, Origen) {
         var acceptId = idsource, mPrimerItem = true, IdArticulo = 0, Letra = "", Precio = 0, PorcentajeBonificacion = 0, Cantidad = 0, PendienteFacturar = 0, PorcentajeIva = 0;
-        var PrecioUnitario = 0, IdCodigoIva = 0, mAux, $gridOrigen = $("#ListaDrag3"), $gridDestino = $("#ListaArticulos");
+        var PrecioUnitario = 0, IdCodigoIva = 0, mAux, $gridOrigen = $("#ListaDrag3"), $gridDestino = $("#Lista");
 
         var getdata = $gridOrigen.jqGrid('getRowData', acceptId);
         var tmpdata = {}, dataIds, data2, Id, Id2, i, date, displayDate;
@@ -1172,7 +1251,7 @@
         };
 
         cabecera.DetalleFacturas = [];
-        $grid = $('#ListaArticulos');
+        $grid = $('#Lista');
         nuevo = -1;
         colModel = $grid.jqGrid('getGridParam', 'colModel');
         dataIds = $grid.jqGrid('getDataIDs');
@@ -1206,7 +1285,7 @@
         };
 
         cabecera.DetalleFacturasOrdenesCompras = [];
-        $grid = $('#ListaArticulos');
+        $grid = $('#Lista');
         nuevo = -1;
         colModel = $grid.jqGrid('getGridParam', 'colModel');
         dataIds = $grid.jqGrid('getDataIDs');
@@ -1236,7 +1315,7 @@
         };
 
         cabecera.DetalleFacturasRemitos = [];
-        $grid = $('#ListaArticulos');
+        $grid = $('#Lista');
         nuevo = -1;
         colModel = $grid.jqGrid('getGridParam', 'colModel');
         dataIds = $grid.jqGrid('getDataIDs');
@@ -1390,9 +1469,9 @@ calculaTotalImputaciones = function () {
     mIVANoDiscriminado = 0;
     mImporteIva1 = 0;
 
-    var dataIds = $('#ListaArticulos').jqGrid('getDataIDs');
+    var dataIds = $('#Lista').jqGrid('getDataIDs');
     for (var i = 0; i < dataIds.length; i++) {
-        var data = $('#ListaArticulos').jqGrid('getRowData', dataIds[i]);
+        var data = $('#Lista').jqGrid('getRowData', dataIds[i]);
         imp = parseFloat(data['Importe'].replace(",", ".") || 0) || 0;
         if (letra == "B") {
             ivaitem = imp - (imp / (1 + (porciva / 100)));
@@ -1404,7 +1483,7 @@ calculaTotalImputaciones = function () {
     }
     imp2 = Math.round((imp2) * 10000) / 10000;
     mTotalImputaciones = imp2;
-    $("#ListaArticulos").jqGrid('footerData', 'set', { Gravado: 'TOTALES', Importe: imp2.toFixed(2) });
+    $("#Lista").jqGrid('footerData', 'set', { Gravado: 'TOTALES', Importe: imp2.toFixed(2) });
     $("#ImporteIva1").val(mImporteIva1.toFixed(2));
     $("#IVANoDiscriminado").val(mIVANoDiscriminado.toFixed(2));
 
@@ -1730,28 +1809,23 @@ function CalcularFechaVencimiento(fecha) {
     return (fechaFinal);
 }
 
-
-
-
-
-
 function ActivarControles(Activar) {
     var $td;
     if (Activar) {
         pageLayout.show('east');
         pageLayout.close('east');
-        $("#ListaArticulos").unblock({ message: "", theme: true, });
-        $td = $($("#ListaArticulos")[0].p.pager + '_left ' + 'td[title="Agregar item"]');
+        $("#Lista").unblock({ message: "", theme: true, });
+        $td = $($("#Lista")[0].p.pager + '_left ' + 'td[title="Agregar item"]');
         $td.show();
-        $td = $($("#ListaArticulos")[0].p.pager + '_left ' + 'td[title="Eliminar"]');
+        $td = $($("#Lista")[0].p.pager + '_left ' + 'td[title="Eliminar"]');
         $td.show();
     } else {
         pageLayout.hide('east');
-        $td = $($("#ListaArticulos")[0].p.pager + '_left ' + 'td[title="Agregar item"]');
+        $td = $($("#Lista")[0].p.pager + '_left ' + 'td[title="Agregar item"]');
         $td.hide();
-        $td = $($("#ListaArticulos")[0].p.pager + '_left ' + 'td[title="Eliminar"]');
+        $td = $($("#Lista")[0].p.pager + '_left ' + 'td[title="Eliminar"]');
         $td.hide();
-        $("#ListaArticulos").block({ message: "", theme: true, });
+        $("#Lista").block({ message: "", theme: true, });
         $("#Cliente").prop("disabled", true);
         $("#FechaFactura").prop("disabled", true);
         $("#IdCondicionVenta").prop("disabled", true);
