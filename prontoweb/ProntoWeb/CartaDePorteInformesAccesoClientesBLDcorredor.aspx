@@ -13,7 +13,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
     <br />
     <asp:UpdatePanel ID="UpdatePanelResumen" runat="server">
         <ContentTemplate>
-            <table width="100%" style="visibility:" >
+            <table width="100%" style="visibility: ">
                 <tr>
                     <td style="width: 101px; height: 40px;" class="EncabezadoCell" colspan="2">
                         <asp:Label ID="lblRazonSocial" runat="server" Font-Size="Large" Font-Bold="true" />
@@ -109,6 +109,12 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                             Width="" Height="40" />
                     </td>
 
+                    <td>
+                        <asp:Button ID="btnImagenesTiffReducido" Text="Imágenes en TIFF reducido" runat="server" Visible="True" CssClass="but"
+                            Width="" Height="40" />
+                    </td>
+
+
                 </tr>
                 <tr>
                     <td></td>
@@ -193,7 +199,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                         Style="margin-right: 0px; margin-top: 0px; margin-bottom: 0px; margin-left: 5px;"
                         BorderWidth="5px" Width="127px"></asp:LinkButton>
                     <asp:Panel ID="Panel4" runat="server" Visible="false">
-                        <table width="100%" >
+                        <table width="100%">
                             <tr>
                                 <td class="EncabezadoCell" style="width: 15%; height: 18px;">Origen
                                 </td>

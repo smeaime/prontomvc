@@ -1,0 +1,507 @@
+
+Log Entry : 
+08/30/2017 10:53:48
+Error in: http://localhost:50769/ProntoWeb/ReporteResumenEstad.aspx. Error Message:Mariano esta logueado, pero lo redirijo al login porque faltan los datos de session. No deberia mejor mandarlo a SeleccionarEmpresa? Ademas, no hago el LogOut y le queda el cookie!!!
+__________________________
+
+Log Entry : 
+08/30/2017 10:53:49
+Error in: http://localhost:50769/ProntoWeb/ReporteResumenEstad.aspx. Error Message:Vamos bien?
+__________________________
+
+Log Entry : 
+08/30/2017 10:53:49
+Error in: http://localhost:50769/ProntoWeb/ReporteResumenEstad.aspx. Error Message:http://bdlconsultores.sytes.net:10080/ReportServer - administrador - .xza2190lkm. - 
+__________________________
+
+Log Entry : 
+08/30/2017 10:54:38
+Error in: http://localhost:50769/ProntoWeb/ReporteResumenEstad.aspx. Error Message:Microsoft.Reporting.WebForms.ReportServerException
+El valor proporcionado para el parámetro 'puntoventa' no es válido para este tipo. (rsReportParameterTypeMismatch)
+   en Microsoft.Reporting.WebForms.ServerReportSoapProxy.OnSoapException(SoapException e)
+   en Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.ProxyMethodInvocation.Execute[TReturn](RSExecutionConnection connection, ProxyMethod`1 initialMethod, ProxyMethod`1 retryMethod)
+   en Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.SetExecutionParameters(ParameterValue[] Parameters, String ParameterLanguage)
+   en Microsoft.Reporting.WebForms.ServerReport.SetParameters(IEnumerable`1 parameters)
+   en ProntoMVC.Reportes.ReporteResumenEstad.Informe() en C:\bdl\pronto\prontoweb\ProntoWeb\ReporteResumenEstad.aspx.vb:línea 533
+Microsoft.ReportViewer.WebForms
+__________________________
+
+Log Entry : 
+08/30/2017 10:54:59
+Error in: http://localhost:50769/ProntoWeb/ReporteResumenEstad.aspx. Error Message:Mariano esta logueado, pero lo redirijo al login porque faltan los datos de session. No deberia mejor mandarlo a SeleccionarEmpresa? Ademas, no hago el LogOut y le queda el cookie!!!
+__________________________
+
+Log Entry : 
+08/30/2017 10:55:00
+Error in: http://localhost:50769/ProntoWeb/ReporteResumenEstad.aspx. Error Message:Vamos bien?
+__________________________
+
+Log Entry : 
+08/30/2017 10:55:00
+Error in: http://localhost:50769/ProntoWeb/ReporteResumenEstad.aspx. Error Message:http://bdlconsultores.sytes.net:10080/ReportServer - administrador - .xza2190lkm. - 
+__________________________
+
+Log Entry : 
+08/30/2017 10:55:27
+Error in: http://localhost:50769/ProntoWeb/ReporteResumenEstad.aspx. Error Message:Microsoft.Reporting.WebForms.ReportServerException
+El valor proporcionado para el parámetro 'AplicarANDuORalFiltro' no es válido para este tipo. (rsReportParameterTypeMismatch)
+   en Microsoft.Reporting.WebForms.ServerReportSoapProxy.OnSoapException(SoapException e)
+   en Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.ProxyMethodInvocation.Execute[TReturn](RSExecutionConnection connection, ProxyMethod`1 initialMethod, ProxyMethod`1 retryMethod)
+   en Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.SetExecutionParameters(ParameterValue[] Parameters, String ParameterLanguage)
+   en Microsoft.Reporting.WebForms.ServerReport.SetParameters(IEnumerable`1 parameters)
+   en ProntoMVC.Reportes.ReporteResumenEstad.Informe() en C:\bdl\pronto\prontoweb\ProntoWeb\ReporteResumenEstad.aspx.vb:línea 533
+Microsoft.ReportViewer.WebForms
+__________________________
+
+Log Entry : 
+08/30/2017 10:56:05
+Error in: http://localhost:50769/ProntoWeb/ReporteResumenEstad.aspx. Error Message:Mariano esta logueado, pero lo redirijo al login porque faltan los datos de session. No deberia mejor mandarlo a SeleccionarEmpresa? Ademas, no hago el LogOut y le queda el cookie!!!
+__________________________
+
+Log Entry : 
+08/30/2017 10:56:07
+Error in: http://localhost:50769/ProntoWeb/ReporteResumenEstad.aspx. Error Message:Vamos bien?
+__________________________
+
+Log Entry : 
+08/30/2017 10:56:07
+Error in: http://localhost:50769/ProntoWeb/ReporteResumenEstad.aspx. Error Message:http://bdlconsultores.sytes.net:10080/ReportServer - administrador - .xza2190lkm. - 
+__________________________
+
+Log Entry : 
+08/30/2017 10:56:50
+Error in: http://localhost:50769/ProntoWeb/ReporteResumenEstad.aspx. Error Message:Microsoft.Reporting.WebForms.ReportServerException
+El valor proporcionado para el parámetro 'AplicarANDuORalFiltro' no es válido para este tipo. (rsReportParameterTypeMismatch)
+   en Microsoft.Reporting.WebForms.ServerReportSoapProxy.OnSoapException(SoapException e)
+   en Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.ProxyMethodInvocation.Execute[TReturn](RSExecutionConnection connection, ProxyMethod`1 initialMethod, ProxyMethod`1 retryMethod)
+   en Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.SetExecutionParameters(ParameterValue[] Parameters, String ParameterLanguage)
+   en Microsoft.Reporting.WebForms.ServerReport.SetParameters(IEnumerable`1 parameters)
+   en ProntoMVC.Reportes.ReporteResumenEstad.Informe() en C:\bdl\pronto\prontoweb\ProntoWeb\ReporteResumenEstad.aspx.vb:línea 533
+Microsoft.ReportViewer.WebForms
+__________________________
+
+Log Entry : 
+08/30/2017 10:58:03
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx. Error Message:Mariano esta logueado, pero lo redirijo al login porque faltan los datos de session. No deberia mejor mandarlo a SeleccionarEmpresa? Ademas, no hago el LogOut y le queda el cookie!!!
+__________________________
+
+Log Entry : 
+08/30/2017 10:58:10
+Error in: http://localhost:50769/ProntoWeb/ReporteResumenEstad.aspx. Error Message:Vamos bien?
+__________________________
+
+Log Entry : 
+08/30/2017 10:58:10
+Error in: http://localhost:50769/ProntoWeb/ReporteResumenEstad.aspx. Error Message:http://bdlconsultores.sytes.net:10080/ReportServer - administrador - .xza2190lkm. - 
+__________________________
+
+Log Entry : 
+08/30/2017 10:58:11
+Error in: http://localhost:50769/ProntoWeb/ReporteResumenEstad.aspx. Error Message:parece
+__________________________
+
+Log Entry : 
+08/30/2017 10:58:11
+Error in: http://localhost:50769/ProntoWeb/ReporteResumenEstad.aspx. Error Message:Cli 3
+__________________________
+
+Log Entry : 
+08/30/2017 10:59:56
+Error in: http://localhost:50769/Reserved.ReportViewerWebControl.axd?OpType=SessionKeepAlive&ControlID=726c468a64ab4e29b3cbde25157f419e. Error Message:Microsoft.Reporting.WebForms.AspNetSessionExpiredException
+ASP.NET session has expired or could not be found
+   en Microsoft.Reporting.WebForms.ViewerDataOperation..ctor()
+   en Microsoft.Reporting.WebForms.HttpHandler.GetHandler(String operationType)
+   en Microsoft.Reporting.WebForms.HttpHandler.ProcessRequest(HttpContext context)
+   en System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   en System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+Microsoft.ReportViewer.WebForms
+__________________________
+
+Log Entry : 
+08/30/2017 11:51:44
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesAccesoClientesBLDcorredor.aspx. Error Message:Mariano esta logueado, pero lo redirijo al login porque faltan los datos de session. No deberia mejor mandarlo a SeleccionarEmpresa? Ademas, no hago el LogOut y le queda el cookie!!!
+__________________________
+
+Log Entry : 
+08/30/2017 11:54:21
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesAccesoClientesBLDcorredor.aspx. Error Message:BLDCORREDOR 1/01/1753
+__________________________
+
+Log Entry : 
+08/30/2017 11:54:21
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesAccesoClientesBLDcorredor.aspx. Error Message:BLDCORREDOR 1/01/2100
+__________________________
+
+Log Entry : 
+08/30/2017 11:54:50
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesAccesoClientesBLDcorredor.aspx. Error Message:System.InvalidCastException
+La conversión de la cadena "" en el tipo 'Integer' no es válida.
+   en Microsoft.VisualBasic.CompilerServices.Conversions.ToInteger(String Value)
+   en CartaDePorteInformesAccesoClientesBLDcorredor.AsignaInformeAlReportViewer(Boolean bDescargaExcel) en C:\bdl\pronto\prontoweb\ProntoWeb\CartaDePorteInformesAccesoClientesBLDcorredor.aspx.vb:línea 527
+   en CartaDePorteInformesAccesoClientesBLDcorredor.btnRefrescar_Click(Object sender, EventArgs e) en C:\bdl\pronto\prontoweb\ProntoWeb\CartaDePorteInformesAccesoClientesBLDcorredor.aspx.vb:línea 142
+   en System.Web.UI.WebControls.Button.OnClick(EventArgs e)
+   en System.Web.UI.WebControls.Button.RaisePostBackEvent(String eventArgument)
+   en System.Web.UI.WebControls.Button.System.Web.UI.IPostBackEventHandler.RaisePostBackEvent(String eventArgument)
+   en System.Web.UI.Page.RaisePostBackEvent(IPostBackEventHandler sourceControl, String eventArgument)
+   en System.Web.UI.Page.RaisePostBackEvent(NameValueCollection postData)
+   en System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+Microsoft.VisualBasic
+__________________________
+
+Log Entry : 
+08/30/2017 11:54:53
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesAccesoClientesBLDcorredor.aspx. Error Message:System.Net.Mail.SmtpException
+El buzón de correo no está disponible. La respuesta del servidor fue: 5.4.5 Daily user sending quota exceeded. f14sm3911844qte.22 - gsmtp
+   en System.Net.Mail.DataCommand.CheckResponse(SmtpStatusCode statusCode, String serverResponse)
+   en System.Net.Mail.DataCommand.Send(SmtpConnection conn)
+   en System.Net.Mail.SmtpTransport.SendMail(MailAddress sender, MailAddressCollection recipients, String deliveryNotify, Boolean allowUnicode, SmtpFailedRecipientException& exception)
+   en System.Net.Mail.SmtpClient.Send(MailMessage message)
+   en ProntoFuncionesGenerales.MandaEmailSimple(String Para, String Asunto, String Cuerpo, String De, String SmtpServer, String SmtpUser, String SmtpPass, String sStringGenerarAdjunto, Int64 SmtpPort, Int32 EnableSSL, String CCO, String img)
+   en ASP.global_asax.Application_Error(Object sender, EventArgs e) en C:\bdl\pronto\prontoweb\global.asax:línea 472
+System
+__________________________
+
+Log Entry : 
+08/30/2017 11:55:27
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesAccesoClientesBLDcorredor.aspx. Error Message:Mariano esta logueado, pero lo redirijo al login porque faltan los datos de session. No deberia mejor mandarlo a SeleccionarEmpresa? Ademas, no hago el LogOut y le queda el cookie!!!
+__________________________
+
+Log Entry : 
+08/30/2017 11:56:43
+Error in: http://localhost:50769/Reserved.ReportViewerWebControl.axd?OpType=SessionKeepAlive&ControlID=7d8845bba3264d58aeb758dcb01b7bfc. Error Message:Microsoft.Reporting.WebForms.AspNetSessionExpiredException
+ASP.NET session has expired or could not be found
+   en Microsoft.Reporting.WebForms.ViewerDataOperation..ctor()
+   en Microsoft.Reporting.WebForms.HttpHandler.GetHandler(String operationType)
+   en Microsoft.Reporting.WebForms.HttpHandler.ProcessRequest(HttpContext context)
+   en System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   en System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+Microsoft.ReportViewer.WebForms
+__________________________
+
+Log Entry : 
+08/30/2017 11:57:19
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesAccesoClientesBLDcorredor.aspx. Error Message:BLDCORREDOR 1/01/1753
+__________________________
+
+Log Entry : 
+08/30/2017 11:57:19
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesAccesoClientesBLDcorredor.aspx. Error Message:BLDCORREDOR 1/01/2100
+__________________________
+
+Log Entry : 
+08/30/2017 11:57:57
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesAccesoClientesBLDcorredor.aspx. Error Message:System.InvalidCastException
+La conversión de la cadena "" en el tipo 'Integer' no es válida.
+   en Microsoft.VisualBasic.CompilerServices.Conversions.ToInteger(String Value)
+   en CartaDePorteInformesAccesoClientesBLDcorredor.AsignaInformeAlReportViewer(Boolean bDescargaExcel) en C:\bdl\pronto\prontoweb\ProntoWeb\CartaDePorteInformesAccesoClientesBLDcorredor.aspx.vb:línea 527
+   en CartaDePorteInformesAccesoClientesBLDcorredor.btnRefrescar_Click(Object sender, EventArgs e) en C:\bdl\pronto\prontoweb\ProntoWeb\CartaDePorteInformesAccesoClientesBLDcorredor.aspx.vb:línea 142
+   en System.Web.UI.WebControls.Button.OnClick(EventArgs e)
+   en System.Web.UI.WebControls.Button.RaisePostBackEvent(String eventArgument)
+   en System.Web.UI.WebControls.Button.System.Web.UI.IPostBackEventHandler.RaisePostBackEvent(String eventArgument)
+   en System.Web.UI.Page.RaisePostBackEvent(IPostBackEventHandler sourceControl, String eventArgument)
+   en System.Web.UI.Page.RaisePostBackEvent(NameValueCollection postData)
+   en System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+Microsoft.VisualBasic
+__________________________
+
+Log Entry : 
+08/30/2017 11:57:59
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesAccesoClientesBLDcorredor.aspx. Error Message:System.Net.Mail.SmtpException
+El buzón de correo no está disponible. La respuesta del servidor fue: 5.4.5 Daily user sending quota exceeded. n125sm3657805qke.66 - gsmtp
+   en System.Net.Mail.DataCommand.CheckResponse(SmtpStatusCode statusCode, String serverResponse)
+   en System.Net.Mail.DataCommand.Send(SmtpConnection conn)
+   en System.Net.Mail.SmtpTransport.SendMail(MailAddress sender, MailAddressCollection recipients, String deliveryNotify, Boolean allowUnicode, SmtpFailedRecipientException& exception)
+   en System.Net.Mail.SmtpClient.Send(MailMessage message)
+   en ProntoFuncionesGenerales.MandaEmailSimple(String Para, String Asunto, String Cuerpo, String De, String SmtpServer, String SmtpUser, String SmtpPass, String sStringGenerarAdjunto, Int64 SmtpPort, Int32 EnableSSL, String CCO, String img)
+   en ASP.global_asax.Application_Error(Object sender, EventArgs e) en C:\bdl\pronto\prontoweb\global.asax:línea 472
+System
+__________________________
+
+Log Entry : 
+08/30/2017 11:58:59
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesAccesoClientesBLDcorredor.aspx. Error Message:Mariano esta logueado, pero lo redirijo al login porque faltan los datos de session. No deberia mejor mandarlo a SeleccionarEmpresa? Ademas, no hago el LogOut y le queda el cookie!!!
+__________________________
+
+Log Entry : 
+08/30/2017 12:02:30
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesAccesoClientesBLDcorredor.aspx. Error Message:BLDCORREDOR 1/01/1753
+__________________________
+
+Log Entry : 
+08/30/2017 12:02:30
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesAccesoClientesBLDcorredor.aspx. Error Message:BLDCORREDOR 1/01/2100
+__________________________
+
+Log Entry : 
+08/30/2017 12:02:30
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesAccesoClientesBLDcorredor.aspx. Error Message: -  Error en ExecDinamico. - System.InvalidOperationException: ExecuteReader: no se ha inicializado la propiedad CommandText
+   en Microsoft.VisualBasic.CompilerServices.Symbols.Container.InvokeMethod(Method TargetProcedure, Object[] Arguments, Boolean[] CopyBack, BindingFlags Flags)
+   en Microsoft.VisualBasic.CompilerServices.NewLateBinding.CallMethod(Container BaseReference, String MethodName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack, BindingFlags InvocationFlags, Boolean ReportErrors, ResolutionFailure& Failure)
+   en Microsoft.VisualBasic.CompilerServices.NewLateBinding.ObjectLateCall(Object Instance, Type Type, String MemberName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack, Boolean IgnoreReturn)
+   en Microsoft.VisualBasic.CompilerServices.NewLateBinding.LateCall(Object Instance, Type Type, String MemberName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack, Boolean IgnoreReturn)
+   en Pronto.ERP.Dal.GeneralDB.ExecDinamico(String SC, String comandoSQLdinamico, Int32 timeoutSegundos) -  500 200
+__________________________
+
+Log Entry : 
+08/30/2017 12:02:57
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesAccesoClientesBLDcorredor.aspx. Error Message:ExecuteReader: no se ha inicializado la propiedad CommandText
+__________________________
+
+Log Entry : 
+08/30/2017 12:02:58
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesAccesoClientesBLDcorredor.aspx. Error Message:Hubo un error al generar el informe. System.InvalidOperationException: ExecuteReader: no se ha inicializado la propiedad CommandText
+   en Microsoft.VisualBasic.CompilerServices.Symbols.Container.InvokeMethod(Method TargetProcedure, Object[] Arguments, Boolean[] CopyBack, BindingFlags Flags)
+   en Microsoft.VisualBasic.CompilerServices.NewLateBinding.CallMethod(Container BaseReference, String MethodName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack, BindingFlags InvocationFlags, Boolean ReportErrors, ResolutionFailure& Failure)
+   en Microsoft.VisualBasic.CompilerServices.NewLateBinding.ObjectLateCall(Object Instance, Type Type, String MemberName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack, Boolean IgnoreReturn)
+   en Microsoft.VisualBasic.CompilerServices.NewLateBinding.LateCall(Object Instance, Type Type, String MemberName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack, Boolean IgnoreReturn)
+   en Pronto.ERP.Dal.GeneralDB.ExecDinamico(String SC, String comandoSQLdinamico, Int32 timeoutSegundos)
+   en Pronto.ERP.Bll.EntidadManager.ExecDinamico(String SC, String sComandoDinamico, Int32 timeoutSegundos) en C:\bdl\pronto\BussinessLogic\EntidadManager.vb:línea 868
+   en CartaDePorteManager.DataTablePorCliente(String SC, String ColumnaParaFiltrar, String TextoParaFiltrar, String sortExpression, Int64 startRowIndex, Int64 maximumRows, enumCDPestado estado, String QueContenga, Int32 idVendedor, Int32 idCorredor, Int32 idDestinatario, Int32 idIntermediario, Int32 idRemComercial, Int32 idArticulo, Int32 idProcedencia, Int32 idDestino, FiltroANDOR AplicarANDuORalFiltro, String ModoExportacion, DateTime fechadesde, DateTime fechahasta, Int32 puntoventa, String QueContenga2, String usuario, String ConexBDLmaster, Boolean chkTitular, Boolean chkIntermediario, Boolean chkRemComercial, Boolean chkClienteAuxiliar, Boolean chkCorredor, Boolean chkDestinatario) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 529
+__________________________
+
+Log Entry : 
+08/30/2017 12:03:00
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesAccesoClientesBLDcorredor.aspx. Error Message:System.Exception
+Hubo un error al generar el informe. System.InvalidOperationException: ExecuteReader: no se ha inicializado la propiedad CommandText
+   en Microsoft.VisualBasic.CompilerServices.Symbols.Container.InvokeMethod(Method TargetProcedure, Object[] Arguments, Boolean[] CopyBack, BindingFlags Flags)
+   en Microsoft.VisualBasic.CompilerServices.NewLateBinding.CallMethod(Container BaseReference, String MethodName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack, BindingFlags InvocationFlags, Boolean ReportErrors, ResolutionFailure& Failure)
+   en Microsoft.VisualBasic.CompilerServices.NewLateBinding.ObjectLateCall(Object Instance, Type Type, String MemberName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack, Boolean IgnoreReturn)
+   en Microsoft.VisualBasic.CompilerServices.NewLateBinding.LateCall(Object Instance, Type Type, String MemberName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack, Boolean IgnoreReturn)
+   en Pronto.ERP.Dal.GeneralDB.ExecDinamico(String SC, String comandoSQLdinamico, Int32 timeoutSegundos)
+   en Pronto.ERP.Bll.EntidadManager.ExecDinamico(String SC, String sComandoDinamico, Int32 timeoutSegundos) en C:\bdl\pronto\BussinessLogic\EntidadManager.vb:línea 868
+   en CartaDePorteManager.DataTablePorCliente(String SC, String ColumnaParaFiltrar, String TextoParaFiltrar, String sortExpression, Int64 startRowIndex, Int64 maximumRows, enumCDPestado estado, String QueContenga, Int32 idVendedor, Int32 idCorredor, Int32 idDestinatario, Int32 idIntermediario, Int32 idRemComercial, Int32 idArticulo, Int32 idProcedencia, Int32 idDestino, FiltroANDOR AplicarANDuORalFiltro, String ModoExportacion, DateTime fechadesde, DateTime fechahasta, Int32 puntoventa, String QueContenga2, String usuario, String ConexBDLmaster, Boolean chkTitular, Boolean chkIntermediario, Boolean chkRemComercial, Boolean chkClienteAuxiliar, Boolean chkCorredor, Boolean chkDestinatario) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 529
+   en CartaDePorteManager.DataTablePorCliente(String SC, String ColumnaParaFiltrar, String TextoParaFiltrar, String sortExpression, Int64 startRowIndex, Int64 maximumRows, enumCDPestado estado, String QueContenga, Int32 idVendedor, Int32 idCorredor, Int32 idDestinatario, Int32 idIntermediario, Int32 idRemComercial, Int32 idArticulo, Int32 idProcedencia, Int32 idDestino, FiltroANDOR AplicarANDuORalFiltro, String ModoExportacion, DateTime fechadesde, DateTime fechahasta, Int32 puntoventa, String QueContenga2, String usuario, String ConexBDLmaster, Boolean chkTitular, Boolean chkIntermediario, Boolean chkRemComercial, Boolean chkClienteAuxiliar, Boolean chkCorredor, Boolean chkDestinatario) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 560
+   en CartaDePorteInformesAccesoClientesBLDcorredor.AsignaInformeAlReportViewer(Boolean bDescargaExcel) en C:\bdl\pronto\prontoweb\ProntoWeb\CartaDePorteInformesAccesoClientesBLDcorredor.aspx.vb:línea 527
+   en CartaDePorteInformesAccesoClientesBLDcorredor.btnRefrescar_Click(Object sender, EventArgs e) en C:\bdl\pronto\prontoweb\ProntoWeb\CartaDePorteInformesAccesoClientesBLDcorredor.aspx.vb:línea 142
+   en System.Web.UI.WebControls.Button.OnClick(EventArgs e)
+   en System.Web.UI.WebControls.Button.RaisePostBackEvent(String eventArgument)
+   en System.Web.UI.WebControls.Button.System.Web.UI.IPostBackEventHandler.RaisePostBackEvent(String eventArgument)
+   en System.Web.UI.Page.RaisePostBackEvent(IPostBackEventHandler sourceControl, String eventArgument)
+   en System.Web.UI.Page.RaisePostBackEvent(NameValueCollection postData)
+   en System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+BusinessLogic
+__________________________
+
+Log Entry : 
+08/30/2017 12:03:09
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesAccesoClientesBLDcorredor.aspx. Error Message:BLDCORREDOR 1/01/1753
+__________________________
+
+Log Entry : 
+08/30/2017 12:03:09
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesAccesoClientesBLDcorredor.aspx. Error Message:BLDCORREDOR 1/01/2100
+__________________________
+
+Log Entry : 
+08/30/2017 12:03:28
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesAccesoClientesBLDcorredor.aspx. Error Message: -  Error en ExecDinamico. - System.InvalidOperationException: ExecuteReader: no se ha inicializado la propiedad CommandText
+   en Microsoft.VisualBasic.CompilerServices.Symbols.Container.InvokeMethod(Method TargetProcedure, Object[] Arguments, Boolean[] CopyBack, BindingFlags Flags)
+   en Microsoft.VisualBasic.CompilerServices.NewLateBinding.CallMethod(Container BaseReference, String MethodName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack, BindingFlags InvocationFlags, Boolean ReportErrors, ResolutionFailure& Failure)
+   en Microsoft.VisualBasic.CompilerServices.NewLateBinding.ObjectLateCall(Object Instance, Type Type, String MemberName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack, Boolean IgnoreReturn)
+   en Microsoft.VisualBasic.CompilerServices.NewLateBinding.LateCall(Object Instance, Type Type, String MemberName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack, Boolean IgnoreReturn)
+   en Pronto.ERP.Dal.GeneralDB.ExecDinamico(String SC, String comandoSQLdinamico, Int32 timeoutSegundos) -  500 200
+__________________________
+
+Log Entry : 
+08/30/2017 12:03:29
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesAccesoClientesBLDcorredor.aspx. Error Message:ExecuteReader: no se ha inicializado la propiedad CommandText
+__________________________
+
+Log Entry : 
+08/30/2017 12:03:30
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesAccesoClientesBLDcorredor.aspx. Error Message:Hubo un error al generar el informe. System.InvalidOperationException: ExecuteReader: no se ha inicializado la propiedad CommandText
+   en Microsoft.VisualBasic.CompilerServices.Symbols.Container.InvokeMethod(Method TargetProcedure, Object[] Arguments, Boolean[] CopyBack, BindingFlags Flags)
+   en Microsoft.VisualBasic.CompilerServices.NewLateBinding.CallMethod(Container BaseReference, String MethodName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack, BindingFlags InvocationFlags, Boolean ReportErrors, ResolutionFailure& Failure)
+   en Microsoft.VisualBasic.CompilerServices.NewLateBinding.ObjectLateCall(Object Instance, Type Type, String MemberName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack, Boolean IgnoreReturn)
+   en Microsoft.VisualBasic.CompilerServices.NewLateBinding.LateCall(Object Instance, Type Type, String MemberName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack, Boolean IgnoreReturn)
+   en Pronto.ERP.Dal.GeneralDB.ExecDinamico(String SC, String comandoSQLdinamico, Int32 timeoutSegundos)
+   en Pronto.ERP.Bll.EntidadManager.ExecDinamico(String SC, String sComandoDinamico, Int32 timeoutSegundos) en C:\bdl\pronto\BussinessLogic\EntidadManager.vb:línea 868
+   en CartaDePorteManager.DataTablePorCliente(String SC, String ColumnaParaFiltrar, String TextoParaFiltrar, String sortExpression, Int64 startRowIndex, Int64 maximumRows, enumCDPestado estado, String QueContenga, Int32 idVendedor, Int32 idCorredor, Int32 idDestinatario, Int32 idIntermediario, Int32 idRemComercial, Int32 idArticulo, Int32 idProcedencia, Int32 idDestino, FiltroANDOR AplicarANDuORalFiltro, String ModoExportacion, DateTime fechadesde, DateTime fechahasta, Int32 puntoventa, String QueContenga2, String usuario, String ConexBDLmaster, Boolean chkTitular, Boolean chkIntermediario, Boolean chkRemComercial, Boolean chkClienteAuxiliar, Boolean chkCorredor, Boolean chkDestinatario) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 529
+__________________________
+
+Log Entry : 
+08/30/2017 12:03:31
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesAccesoClientesBLDcorredor.aspx. Error Message:System.Exception
+Hubo un error al generar el informe. System.InvalidOperationException: ExecuteReader: no se ha inicializado la propiedad CommandText
+   en Microsoft.VisualBasic.CompilerServices.Symbols.Container.InvokeMethod(Method TargetProcedure, Object[] Arguments, Boolean[] CopyBack, BindingFlags Flags)
+   en Microsoft.VisualBasic.CompilerServices.NewLateBinding.CallMethod(Container BaseReference, String MethodName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack, BindingFlags InvocationFlags, Boolean ReportErrors, ResolutionFailure& Failure)
+   en Microsoft.VisualBasic.CompilerServices.NewLateBinding.ObjectLateCall(Object Instance, Type Type, String MemberName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack, Boolean IgnoreReturn)
+   en Microsoft.VisualBasic.CompilerServices.NewLateBinding.LateCall(Object Instance, Type Type, String MemberName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack, Boolean IgnoreReturn)
+   en Pronto.ERP.Dal.GeneralDB.ExecDinamico(String SC, String comandoSQLdinamico, Int32 timeoutSegundos)
+   en Pronto.ERP.Bll.EntidadManager.ExecDinamico(String SC, String sComandoDinamico, Int32 timeoutSegundos) en C:\bdl\pronto\BussinessLogic\EntidadManager.vb:línea 868
+   en CartaDePorteManager.DataTablePorCliente(String SC, String ColumnaParaFiltrar, String TextoParaFiltrar, String sortExpression, Int64 startRowIndex, Int64 maximumRows, enumCDPestado estado, String QueContenga, Int32 idVendedor, Int32 idCorredor, Int32 idDestinatario, Int32 idIntermediario, Int32 idRemComercial, Int32 idArticulo, Int32 idProcedencia, Int32 idDestino, FiltroANDOR AplicarANDuORalFiltro, String ModoExportacion, DateTime fechadesde, DateTime fechahasta, Int32 puntoventa, String QueContenga2, String usuario, String ConexBDLmaster, Boolean chkTitular, Boolean chkIntermediario, Boolean chkRemComercial, Boolean chkClienteAuxiliar, Boolean chkCorredor, Boolean chkDestinatario) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 529
+   en CartaDePorteManager.DataTablePorCliente(String SC, String ColumnaParaFiltrar, String TextoParaFiltrar, String sortExpression, Int64 startRowIndex, Int64 maximumRows, enumCDPestado estado, String QueContenga, Int32 idVendedor, Int32 idCorredor, Int32 idDestinatario, Int32 idIntermediario, Int32 idRemComercial, Int32 idArticulo, Int32 idProcedencia, Int32 idDestino, FiltroANDOR AplicarANDuORalFiltro, String ModoExportacion, DateTime fechadesde, DateTime fechahasta, Int32 puntoventa, String QueContenga2, String usuario, String ConexBDLmaster, Boolean chkTitular, Boolean chkIntermediario, Boolean chkRemComercial, Boolean chkClienteAuxiliar, Boolean chkCorredor, Boolean chkDestinatario) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 560
+   en CartaDePorteInformesAccesoClientesBLDcorredor.AsignaInformeAlReportViewer(Boolean bDescargaExcel) en C:\bdl\pronto\prontoweb\ProntoWeb\CartaDePorteInformesAccesoClientesBLDcorredor.aspx.vb:línea 527
+   en CartaDePorteInformesAccesoClientesBLDcorredor.btnRefrescar_Click(Object sender, EventArgs e) en C:\bdl\pronto\prontoweb\ProntoWeb\CartaDePorteInformesAccesoClientesBLDcorredor.aspx.vb:línea 142
+   en System.Web.UI.WebControls.Button.OnClick(EventArgs e)
+   en System.Web.UI.WebControls.Button.RaisePostBackEvent(String eventArgument)
+   en System.Web.UI.WebControls.Button.System.Web.UI.IPostBackEventHandler.RaisePostBackEvent(String eventArgument)
+   en System.Web.UI.Page.RaisePostBackEvent(IPostBackEventHandler sourceControl, String eventArgument)
+   en System.Web.UI.Page.RaisePostBackEvent(NameValueCollection postData)
+   en System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+BusinessLogic
+__________________________
+
+Log Entry : 
+08/30/2017 12:03:42
+Error in: http://localhost:50769/login.aspx. Error Message:System.ArgumentException
+Palabra clave no admitida: 'xusv*8hautv4dvuavudfacsdimsnua(slcuaho4{makmljc0'cmf*dxotvs`'.
+   en System.Data.Common.DbConnectionOptions.ParseInternal(Hashtable parsetable, String connectionString, Boolean buildChain, Hashtable synonyms, Boolean firstKey)
+   en System.Data.Common.DbConnectionOptions..ctor(String connectionString, Hashtable synonyms, Boolean useOdbcRules)
+   en System.Data.SqlClient.SqlConnectionString..ctor(String connectionString)
+   en System.Data.SqlClient.SqlConnectionFactory.CreateConnectionOptions(String connectionString, DbConnectionOptions previous)
+   en System.Data.ProviderBase.DbConnectionFactory.GetConnectionPoolGroup(DbConnectionPoolKey key, DbConnectionPoolGroupOptions poolOptions, DbConnectionOptions& userConnectionOptions)
+   en System.Data.SqlClient.SqlConnection.ConnectionString_Set(DbConnectionPoolKey key)
+   en System.Data.SqlClient.SqlConnection.set_ConnectionString(String value)
+   en System.Data.SqlClient.SqlConnection..ctor(String connectionString, SqlCredential credential)
+   en System.Data.SqlClient.SqlConnection..ctor(String connectionString)
+   en Pronto.ERP.Dal.ProveedorDB.GetList(String SC)
+   en Pronto.ERP.Bll.ProveedorManager.GetList(String SC) en C:\bdl\pronto\BussinessLogic\ProveedorManager.vb:línea 12
+   en Pronto.ERP.Bll.BDLMasterEmpresasManagerMigrar.AddEmpresaToSession(String IdEmpresa, Object& Session, String sConexBDLMaster, Object Yo) en C:\bdl\pronto\prontoweb\App_Code\vbcode\ManagerDebug\BDLMasterManagerAppCode.vb:línea 339
+System.Data
+__________________________
+
+Log Entry : 
+08/30/2017 12:03:54
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesAccesoClientesBLDcorredor.aspx. Error Message:BLDCORREDOR 1/01/1753
+__________________________
+
+Log Entry : 
+08/30/2017 12:03:54
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesAccesoClientesBLDcorredor.aspx. Error Message:BLDCORREDOR 1/01/2100
+__________________________
+
+Log Entry : 
+08/30/2017 12:07:28
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesAccesoClientesBLDcorredor.aspx. Error Message: -  Error en ExecDinamico. - System.InvalidOperationException: ExecuteReader: no se ha inicializado la propiedad CommandText
+   en Microsoft.VisualBasic.CompilerServices.Symbols.Container.InvokeMethod(Method TargetProcedure, Object[] Arguments, Boolean[] CopyBack, BindingFlags Flags)
+   en Microsoft.VisualBasic.CompilerServices.NewLateBinding.CallMethod(Container BaseReference, String MethodName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack, BindingFlags InvocationFlags, Boolean ReportErrors, ResolutionFailure& Failure)
+   en Microsoft.VisualBasic.CompilerServices.NewLateBinding.ObjectLateCall(Object Instance, Type Type, String MemberName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack, Boolean IgnoreReturn)
+   en Microsoft.VisualBasic.CompilerServices.NewLateBinding.LateCall(Object Instance, Type Type, String MemberName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack, Boolean IgnoreReturn)
+   en Pronto.ERP.Dal.GeneralDB.ExecDinamico(String SC, String comandoSQLdinamico, Int32 timeoutSegundos) -  500 200
+__________________________
+
+Log Entry : 
+08/30/2017 12:07:29
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesAccesoClientesBLDcorredor.aspx. Error Message:ExecuteReader: no se ha inicializado la propiedad CommandText
+__________________________
+
+Log Entry : 
+08/30/2017 12:07:30
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesAccesoClientesBLDcorredor.aspx. Error Message:Hubo un error al generar el informe. System.InvalidOperationException: ExecuteReader: no se ha inicializado la propiedad CommandText
+   en Microsoft.VisualBasic.CompilerServices.Symbols.Container.InvokeMethod(Method TargetProcedure, Object[] Arguments, Boolean[] CopyBack, BindingFlags Flags)
+   en Microsoft.VisualBasic.CompilerServices.NewLateBinding.CallMethod(Container BaseReference, String MethodName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack, BindingFlags InvocationFlags, Boolean ReportErrors, ResolutionFailure& Failure)
+   en Microsoft.VisualBasic.CompilerServices.NewLateBinding.ObjectLateCall(Object Instance, Type Type, String MemberName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack, Boolean IgnoreReturn)
+   en Microsoft.VisualBasic.CompilerServices.NewLateBinding.LateCall(Object Instance, Type Type, String MemberName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack, Boolean IgnoreReturn)
+   en Pronto.ERP.Dal.GeneralDB.ExecDinamico(String SC, String comandoSQLdinamico, Int32 timeoutSegundos)
+   en Pronto.ERP.Bll.EntidadManager.ExecDinamico(String SC, String sComandoDinamico, Int32 timeoutSegundos) en C:\bdl\pronto\BussinessLogic\EntidadManager.vb:línea 868
+   en CartaDePorteManager.DataTablePorCliente(String SC, String ColumnaParaFiltrar, String TextoParaFiltrar, String sortExpression, Int64 startRowIndex, Int64 maximumRows, enumCDPestado estado, String QueContenga, Int32 idVendedor, Int32 idCorredor, Int32 idDestinatario, Int32 idIntermediario, Int32 idRemComercial, Int32 idArticulo, Int32 idProcedencia, Int32 idDestino, FiltroANDOR AplicarANDuORalFiltro, String ModoExportacion, DateTime fechadesde, DateTime fechahasta, Int32 puntoventa, String QueContenga2, String usuario, String ConexBDLmaster, Boolean chkTitular, Boolean chkIntermediario, Boolean chkRemComercial, Boolean chkClienteAuxiliar, Boolean chkCorredor, Boolean chkDestinatario) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 529
+__________________________
+
+Log Entry : 
+08/30/2017 12:07:31
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesAccesoClientesBLDcorredor.aspx. Error Message:System.Exception
+Hubo un error al generar el informe. System.InvalidOperationException: ExecuteReader: no se ha inicializado la propiedad CommandText
+   en Microsoft.VisualBasic.CompilerServices.Symbols.Container.InvokeMethod(Method TargetProcedure, Object[] Arguments, Boolean[] CopyBack, BindingFlags Flags)
+   en Microsoft.VisualBasic.CompilerServices.NewLateBinding.CallMethod(Container BaseReference, String MethodName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack, BindingFlags InvocationFlags, Boolean ReportErrors, ResolutionFailure& Failure)
+   en Microsoft.VisualBasic.CompilerServices.NewLateBinding.ObjectLateCall(Object Instance, Type Type, String MemberName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack, Boolean IgnoreReturn)
+   en Microsoft.VisualBasic.CompilerServices.NewLateBinding.LateCall(Object Instance, Type Type, String MemberName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack, Boolean IgnoreReturn)
+   en Pronto.ERP.Dal.GeneralDB.ExecDinamico(String SC, String comandoSQLdinamico, Int32 timeoutSegundos)
+   en Pronto.ERP.Bll.EntidadManager.ExecDinamico(String SC, String sComandoDinamico, Int32 timeoutSegundos) en C:\bdl\pronto\BussinessLogic\EntidadManager.vb:línea 868
+   en CartaDePorteManager.DataTablePorCliente(String SC, String ColumnaParaFiltrar, String TextoParaFiltrar, String sortExpression, Int64 startRowIndex, Int64 maximumRows, enumCDPestado estado, String QueContenga, Int32 idVendedor, Int32 idCorredor, Int32 idDestinatario, Int32 idIntermediario, Int32 idRemComercial, Int32 idArticulo, Int32 idProcedencia, Int32 idDestino, FiltroANDOR AplicarANDuORalFiltro, String ModoExportacion, DateTime fechadesde, DateTime fechahasta, Int32 puntoventa, String QueContenga2, String usuario, String ConexBDLmaster, Boolean chkTitular, Boolean chkIntermediario, Boolean chkRemComercial, Boolean chkClienteAuxiliar, Boolean chkCorredor, Boolean chkDestinatario) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 529
+   en CartaDePorteManager.DataTablePorCliente(String SC, String ColumnaParaFiltrar, String TextoParaFiltrar, String sortExpression, Int64 startRowIndex, Int64 maximumRows, enumCDPestado estado, String QueContenga, Int32 idVendedor, Int32 idCorredor, Int32 idDestinatario, Int32 idIntermediario, Int32 idRemComercial, Int32 idArticulo, Int32 idProcedencia, Int32 idDestino, FiltroANDOR AplicarANDuORalFiltro, String ModoExportacion, DateTime fechadesde, DateTime fechahasta, Int32 puntoventa, String QueContenga2, String usuario, String ConexBDLmaster, Boolean chkTitular, Boolean chkIntermediario, Boolean chkRemComercial, Boolean chkClienteAuxiliar, Boolean chkCorredor, Boolean chkDestinatario) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 560
+   en CartaDePorteInformesAccesoClientesBLDcorredor.AsignaInformeAlReportViewer(Boolean bDescargaExcel) en C:\bdl\pronto\prontoweb\ProntoWeb\CartaDePorteInformesAccesoClientesBLDcorredor.aspx.vb:línea 527
+   en CartaDePorteInformesAccesoClientesBLDcorredor.btnRefrescar_Click(Object sender, EventArgs e) en C:\bdl\pronto\prontoweb\ProntoWeb\CartaDePorteInformesAccesoClientesBLDcorredor.aspx.vb:línea 142
+   en System.Web.UI.WebControls.Button.OnClick(EventArgs e)
+   en System.Web.UI.WebControls.Button.RaisePostBackEvent(String eventArgument)
+   en System.Web.UI.WebControls.Button.System.Web.UI.IPostBackEventHandler.RaisePostBackEvent(String eventArgument)
+   en System.Web.UI.Page.RaisePostBackEvent(IPostBackEventHandler sourceControl, String eventArgument)
+   en System.Web.UI.Page.RaisePostBackEvent(NameValueCollection postData)
+   en System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+BusinessLogic
+__________________________
+
+Log Entry : 
+08/30/2017 13:25:47
+Error in: http://localhost:50769/ProntoWeb/Principal.aspx. Error Message:Mariano esta logueado, pero lo redirijo al login porque faltan los datos de session. No deberia mejor mandarlo a SeleccionarEmpresa? Ademas, no hago el LogOut y le queda el cookie!!!
+__________________________
+
+Log Entry : 
+08/30/2017 13:25:48
+Error in: http://localhost:50769/ProntoWeb/CartasDePortes.aspx?tipo=Todas. Error Message:Mariano
+__________________________
+
+Log Entry : 
+08/30/2017 13:30:37
+Error in: http://localhost:50769/ProntoWeb/ReporteResumenEstad.aspx. Error Message:Mariano esta logueado, pero lo redirijo al login porque faltan los datos de session. No deberia mejor mandarlo a SeleccionarEmpresa? Ademas, no hago el LogOut y le queda el cookie!!!
+__________________________
+
+Log Entry : 
+08/30/2017 13:30:38
+Error in: http://localhost:50769/ProntoWeb/ReporteResumenEstad.aspx. Error Message:Vamos bien?
+__________________________
+
+Log Entry : 
+08/30/2017 13:30:38
+Error in: http://localhost:50769/ProntoWeb/ReporteResumenEstad.aspx. Error Message:http://bdlconsultores.sytes.net:10080/ReportServer - administrador - .xza2190lkm. - 
+__________________________
+
+Log Entry : 
+08/30/2017 13:30:39
+Error in: http://localhost:50769/ProntoWeb/ReporteResumenEstad.aspx. Error Message:parece
+__________________________
+
+Log Entry : 
+08/30/2017 13:30:39
+Error in: http://localhost:50769/ProntoWeb/ReporteResumenEstad.aspx. Error Message:Cli 3
+__________________________
+
+Log Entry : 
+08/30/2017 13:36:22
+Error in: http://localhost:50769/ProntoWeb/ReporteResumenEstad.aspx. Error Message:Vamos bien?
+__________________________
+
+Log Entry : 
+08/30/2017 13:36:22
+Error in: http://localhost:50769/ProntoWeb/ReporteResumenEstad.aspx. Error Message:http://bdlconsultores.sytes.net:10080/ReportServer - administrador - .xza2190lkm. - 
+__________________________
+
+Log Entry : 
+08/30/2017 13:36:22
+Error in: http://localhost:50769/ProntoWeb/ReporteResumenEstad.aspx. Error Message:parece
+__________________________
+
+Log Entry : 
+08/30/2017 13:36:23
+Error in: http://localhost:50769/ProntoWeb/ReporteResumenEstad.aspx. Error Message:Cli 3
+__________________________
+
+Log Entry : 
+08/30/2017 13:45:16
+Error in: http://localhost:50769/Reserved.ReportViewerWebControl.axd?OpType=SessionKeepAlive&ControlID=ea0e94f7479c4522ab8ecb3603c0a3d6. Error Message:System.Data.SqlClient.SqlException
+Error relacionado con la red o específico de la instancia mientras se establecía una conexión con el servidor SQL Server. No se encontró el servidor o éste no estaba accesible. Compruebe que el nombre de la instancia es correcto y que SQL Server está configurado para admitir conexiones remotas. (provider: SQL Network Interfaces, error: 26 - Error al buscar el servidor o instancia especificado)
+   en System.Data.SqlClient.SqlInternalConnectionTds..ctor(DbConnectionPoolIdentity identity, SqlConnectionString connectionOptions, SqlCredential credential, Object providerInfo, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance, SqlConnectionString userConnectionOptions, SessionData reconnectSessionData, DbConnectionPool pool, String accessToken, Boolean applyTransientFaultHandling)
+   en System.Data.SqlClient.SqlConnectionFactory.CreateConnection(DbConnectionOptions options, DbConnectionPoolKey poolKey, Object poolGroupProviderInfo, DbConnectionPool pool, DbConnection owningConnection, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionFactory.CreatePooledConnection(DbConnectionPool pool, DbConnection owningObject, DbConnectionOptions options, DbConnectionPoolKey poolKey, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionPool.CreateObject(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   en System.Data.ProviderBase.DbConnectionPool.UserCreateRequest(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   en System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.Open()
+   en System.Web.DataAccess.SqlConnectionHolder.Open(HttpContext context, Boolean revertImpersonate)
+   en System.Web.DataAccess.SqlConnectionHelper.GetConnection(String connectionString, Boolean revertImpersonation)
+   en System.Web.Security.SqlRoleProvider.GetRolesForUser(String username)
+   en System.Web.Security.RolePrincipal.IsInRole(String role)
+   en System.Web.Configuration.AuthorizationRule.IsTheUserInAnyRole(StringCollection roles, IPrincipal principal)
+   en System.Web.Configuration.AuthorizationRule.IsUserAllowed(IPrincipal user, String verb)
+   en System.Web.Configuration.AuthorizationRuleCollection.IsUserAllowed(IPrincipal user, String verb)
+   en System.Web.Security.UrlAuthorizationModule.OnEnter(Object source, EventArgs eventArgs)
+   en System.Web.HttpApplication.SyncEventExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   en System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+.Net SqlClient Data Provider
+__________________________

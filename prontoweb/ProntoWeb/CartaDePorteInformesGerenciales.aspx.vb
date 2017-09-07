@@ -1179,6 +1179,30 @@ Partial Class CartaDePorteInformesGerenciales
         Dim idDestino = BuscaIdWilliamsDestinoPreciso(txtDestino.Text, HFSC.Value)
         Dim pv As Integer = cmbPuntoVenta.SelectedValue
 
+        Dim estadofiltro As CartaDePorteManager.enumCDPestado
+        Select Case cmbEstado.Text  '
+            Case "TodasMenosLasRechazadas"
+                estadofiltro = CartaDePorteManager.enumCDPestado.TodasMenosLasRechazadas
+            Case "Incompletas"
+                estadofiltro = CartaDePorteManager.enumCDPestado.Incompletas
+            Case "Posición"
+                estadofiltro = CartaDePorteManager.enumCDPestado.Posicion
+            Case "Descargas"
+                estadofiltro = CartaDePorteManager.enumCDPestado.DescargasMasFacturadas
+            Case "Facturadas"
+                estadofiltro = CartaDePorteManager.enumCDPestado.Facturadas
+            Case "NoFacturadas"
+                estadofiltro = CartaDePorteManager.enumCDPestado.NoFacturadas
+            Case "Rechazadas"
+                estadofiltro = CartaDePorteManager.enumCDPestado.Rechazadas
+            Case "EnNotaCredito"
+                estadofiltro = CartaDePorteManager.enumCDPestado.FacturadaPeroEnNotaCredito
+            Case Else
+                Return
+        End Select
+
+
+
 
         '////////////////////////////////////////////////////
         '////////////////////////////////////////////////////
@@ -1204,14 +1228,14 @@ Partial Class CartaDePorteInformesGerenciales
 
 
 
-        Dim q9 = ConsultasLinq.rankingclientes(HFSC.Value, _
-                                    sTitulo, _
-                                    "", "", 0, 999999, CartaDePorteManager.enumCDPestado.Todas, "", _
-                                    idVendedor, idCorredor, _
-                                    idDestinatario, idIntermediario, _
-                                    idRComercial, idArticulo, idProcedencia, idDestino, _
-                                    IIf(cmbCriterioWHERE.SelectedValue = "todos", FiltroANDOR.FiltroAND, FiltroANDOR.FiltroOR), _
-                                       DropDownList2.Text, _
+        Dim q9 = ConsultasLinq.rankingclientes(HFSC.Value,
+                                    sTitulo,
+                                    "", "", 0, 999999, CartaDePorteManager.enumCDPestado.Facturadas, "",
+                                    idVendedor, idCorredor,
+                                    idDestinatario, idIntermediario,
+                                    idRComercial, idArticulo, idProcedencia, idDestino,
+                                    IIf(cmbCriterioWHERE.SelectedValue = "todos", FiltroANDOR.FiltroAND, FiltroANDOR.FiltroOR),
+                                       DropDownList2.Text,
                                    fechadesde, fechahasta, pv, fechadesde2, fechahasta2, Val(txtMinimoNeto.Text), topclie)
 
 

@@ -50,7 +50,73 @@ AS
 	-- Also note that SET ROWCOUNT doesn't affect the execution plan, so using TOP is preferred in SQL 2005. 
 
       
-    SELECT  top 4000	CDP.*,
+    SELECT  top 4000	
+	
+	
+
+
+	
+ CDP.IdCartaDePorte, CDP.NumeroCartaDePorte, CDP.IdUsuarioIngreso, CDP.FechaIngreso, 
+ CDP.Anulada, CDP.IdUsuarioAnulo, CDP.FechaAnulacion, CDP.Observaciones, CDP.FechaTimeStamp, CDP.Vendedor, CDP.CuentaOrden1, 
+ CDP.CuentaOrden2, CDP.Corredor, CDP.Entregador, CDP.Procedencia, CDP.Patente, CDP.IdArticulo, CDP.IdStock, CDP.Partida, CDP.IdUnidad, 
+ CDP.IdUbicacion, CDP.Cantidad, CDP.Cupo, CDP.NetoProc, CDP.Calidad       ,CDP.BrutoPto      ,CDP.TaraPto      ,CDP.NetoPto      
+,CDP.Acoplado      ,isnull(CDP.Humedad,0) as  Humedad     ,CDP.Merma      ,CDP.NetoFinal      ,CDP.FechaDeCarga      ,CDP.FechaVencimiento      ,CDP.CEE  
+,CDP.IdTransportista      ,CDP.TransportistaCUITdesnormalizado      ,CDP.IdChofer      ,CDP.ChoferCUITdesnormalizado      ,CDP.CTG  
+,CDP.Contrato      ,CDP.Destino      ,CDP.Subcontr1      ,CDP.Subcontr2      ,CDP.Contrato1       ,CDP.contrato2      ,CDP.KmARecorrer
+,CDP.Tarifa      ,CDP.FechaDescarga      ,CDP.Hora      ,isnull(CDP.NRecibo,0)  as  NRecibo     ,CDP.CalidadDe      ,CDP.TaraFinal     
+,CDP.BrutoFinal      ,CDP.Fumigada      ,CDP.Secada  ,    
+
+CDP.Exporta
+
+
+
+   ,isnull(cdp.nobleExtranos ,0) as  nobleExtranos    ,isnull(cdp.nobleNegros,0) as nobleNegros 
+,isnull(cdp.nobleQuebrados  ,0)  as  nobleQuebrados   ,isnull(cdp.nobleDaniados  ,0)  as  nobleDaniados   ,isnull(cdp.nobleChamico  ,0) as   nobleChamico   ,isnull(cdp.nobleChamico2  ,0)  as nobleChamico2    ,isnull(cdp.nobleRevolcado,0) as  nobleRevolcado
+,isnull(cdp.nobleObjetables ,0)   as  nobleObjetables   ,isnull(cdp.nobleAmohosados ,0)  as nobleAmohosados     ,isnull(cdp.nobleHectolitrico,0)   as   nobleHectolitrico   ,isnull(cdp.nobleCarbon ,0)   as  nobleCarbon   
+,isnull(cdp.noblePanzaBlanca ,0)   as noblePanzaBlanca    ,isnull(cdp.noblePicados  ,0) as noblePicados    ,isnull(cdp.nobleMGrasa  ,0)   as nobleMGrasa   ,isnull(cdp.nobleAcidezGrasa  ,0)   as   nobleAcidezGrasa
+,isnull(cdp.nobleVerdes,0)   as nobleVerdes     ,isnull(cdp.nobleGrado ,0)   as nobleGrado    ,isnull(cdp.nobleConforme ,0)  as nobleConforme     ,isnull(cdp.nobleACamara ,0) asnobleACamara       ,CDP.Cosecha 
+,isnull(CDP.HumedadDesnormalizada,0)  as  HumedadDesnormalizada     ,CDP.Factor      ,CDP.IdFacturaImputada      ,CDP.PuntoVenta   
+,CDP.SubnumeroVagon      ,CDP.TarifaFacturada      ,CDP.TarifaSubcontratista1     
+,CDP.TarifaSubcontratista2      ,CDP.FechaArribo      ,CDP.[Version]      ,CDP.MotivoAnulacion 
+,CDP.NumeroSubfijo      ,CDP.IdEstablecimiento      ,CDP.EnumSyngentaDivision   
+,CDP.Corredor2      ,CDP.IdUsuarioModifico      ,CDP.FechaModificacion      
+,CDP.FechaEmision      ,CDP.EstaArchivada      ,CDP.ExcluirDeSubcontratistas   
+,CDP.IdTipoMovimiento      ,CDP.IdClienteAFacturarle      ,CDP.SubnumeroDeFacturacion   
+,CDP.AgregaItemDeGastosAdministrativos      ,CDP.CalidadGranosQuemados      ,CDP.CalidadGranosQuemadosBonifica_o_Rebaja      
+,CDP.CalidadTierra      ,CDP.CalidadTierraBonifica_o_Rebaja      ,CDP.CalidadMermaChamico       
+,CDP.CalidadMermaChamicoBonifica_o_Rebaja      ,CDP.CalidadMermaZarandeo      
+,CDP.CalidadMermaZarandeoBonifica_o_Rebaja      ,CDP.FueraDeEstandar      ,CDP.CalidadPuntaSombreada    
+,CDP.CobraAcarreo      ,CDP.LiquidaViaje      ,CDP.IdClienteAuxiliar      ,CDP.CalidadDescuentoFinal   
+,CDP.PathImagen      ,CDP.PathImagen2       ,CDP.AgrupadorDeTandaPeriodos      ,CDP.ClaveEncriptada     
+,CDP.NumeroCartaEnTextoParaBusqueda      ,CDP.IdClienteEntregador      ,CDP.IdDetalleFactura     
+,CDP.SojaSustentableCodCondicion      ,CDP.SojaSustentableCondicion     
+,CDP.SojaSustentableNroEstablecimientoDeProduccion      ,CDP.IdClientePagadorFlete     
+,CDP.SubnumeroVagonEnTextoParaBusqueda      ,CDP.IdCorredor2       ,CDP.Acopio1      ,CDP.Acopio2    
+,CDP.Acopio3      ,CDP.Acopio4      ,CDP.Acopio5 ,CDP.Acopio6        ,CDP.AcopioFacturarleA      
+,CDP.CalidadGranosDanadosRebaja      ,CDP.CalidadGranosExtranosRebaja 
+,CDP.ConDuplicados
+,CDP.TieneRecibidorOficial
+,CDP.EstadoRecibidor
+,CDP.ClienteAcondicionador
+,CDP.MotivoRechazo
+,CDP.FacturarA_Manual
+--,CDP.CalidadPuntaSobreadaMerma
+--,CDP.CalidadPuntaSobreadaRebaja
+,CDP.EntregaSAP
+,CDP.Situacion
+,CDP.SituacionAntesDeEditarManualmente
+,CDP.FechaActualizacionAutomatica
+,CDP.FechaAutorizacion
+,CDP.ObservacionesSituacion
+,CDP.SituacionLog
+,CDP.Turno
+,CDP.FechaEnvioASyngenta,
+
+
+
+
+
+
 
 			ISNULL(Articulos.AuxiliarString5,'') AS EspecieONCAA,	
  			ISNULL(Articulos.AuxiliarString6,'') AS CodigoSAJPYA,	
@@ -190,12 +256,12 @@ GO
 --incluir a destino en el indice SelectDinamico ?
 
 
-exec wCartasDePorte_TX_InformesCorregido   -1,'03/31/2014' ,'03/31/2014',-1,-1,-1,-1,-1,-1,-1,38
-exec wCartasDePorte_TX_InformesCorregido   -1,null ,null,-1,-1,-1,-1,-1,-1,-1,-1
+exec wCartasDePorte_TX_InformesCorregido   -1,'03/3/2014' ,'03/3/2014',-1,-1,-1,-1,-1,-1,-1,38
+--exec wCartasDePorte_TX_InformesCorregido   -1,null ,null,-1,-1,-1,-1,-1,-1,-1,-1
 
-exec wCartasDePorte_TX_InformesCorregido   -1,null ,null,-1,-1,-1,-1,-1,-1,-1,38--,15000,4
+--exec wCartasDePorte_TX_InformesCorregido   -1,null ,null,-1,-1,-1,-1,-1,-1,-1,38--,15000,4
 
-exec wCartasDePorte_TX_InformesCorregido   -1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1
+--exec wCartasDePorte_TX_InformesCorregido   -1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1
 --exec wCartasDePorte_TX_InformesCorregido @IdCartaDePorte = -1
 --exec wCartasDePorte_TX_Informes @IdCartaDePorte = -1, @FechaDesde = 'Ene  1 1753 12:00AM', @FechaHasta = 'Ene  1 2100 12:00AM'
 
@@ -213,4 +279,8 @@ exec wCartasDePorte_TX_InformesCorregido   -1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1
 --/////////////////////////////////////////////////////////////////////
 --/////////////////////////////////////////////////////////////////////
 
-select * from CartasDePorte where destino=38
+--select * from CartasDePorte where destino=38
+
+
+
+

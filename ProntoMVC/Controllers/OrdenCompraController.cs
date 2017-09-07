@@ -127,6 +127,18 @@ namespace ProntoMVC.Controllers
             mObservaciones = o.Observaciones ?? "";
             mAnulada = o.Anulada ?? "";
 
+
+
+
+            var reqsToDelete = o.DetalleOrdenesCompras.Where(x => (x.IdArticulo ?? 0) <= 0).ToList();
+            foreach (var deleteReq in reqsToDelete)
+            {
+                o.DetalleOrdenesCompras.Remove(deleteReq);
+            }
+            if (o.DetalleOrdenesCompras.Count <= 0) sErrorMsg += "\n" + "El comprobante no tiene items";
+
+
+
             if ((o.NumeroOrdenCompra ?? 0) <= 0) { sErrorMsg += "\n" + "Falta el número"; }
             if ((o.NumeroOrdenCompraCliente ?? "") == "") { sErrorMsg += "\n" + "Falta el número de orden de compra del cliente"; }
             if (mIdMoneda <= 0) { sErrorMsg += "\n" + "Falta la moneda"; }
@@ -428,7 +440,7 @@ namespace ProntoMVC.Controllers
 
             try
             {
-                if (FechaFinal == "") FechaHasta = DateTime.MinValue;
+                if (FechaFinal == "") FechaHasta = DateTime.MaxValue;
                 else FechaHasta = DateTime.ParseExact(FechaFinal, "dd/MM/yyyy", null);
             }
             catch (Exception)
@@ -439,7 +451,7 @@ namespace ProntoMVC.Controllers
 
             //        }
 
-            IQueryable<Data.Models.Factura> q = (from a in db.Facturas where a.FechaFactura >= FechaDesde && a.FechaFactura <= FechaHasta select a).AsQueryable();
+            //IQueryable<Data.Models.Factura> q = (from a in db.Facturas where a.FechaFactura >= FechaDesde && a.FechaFactura <= FechaHasta select a).AsQueryable();
 
 
 
@@ -557,7 +569,8 @@ namespace ProntoMVC.Controllers
                 // .Include("Obra,Condiciones_Compra,Empleado,ListasPrecio,Transportista,DetalleOrdenesCompra,OrdenesCompra")
                         .Where(x => (PendienteRemito != "SI" || (PendienteRemito == "SI" && x.PendienteRemitir > 0))
                                  && (PendienteFactura != "SI" || (PendienteFactura == "SI" && x.PendienteFacturar > 0)))
-                        .Where(a =>  a.FechaOrdenCompra >= FechaDesde && a.FechaOrdenCompra <= FechaHasta ).AsQueryable();
+                        .Where(a =>  a.FechaOrdenCompra >= FechaDesde && a.FechaOrdenCompra <= FechaHasta ).AsQueryable()
+                        ;
 
 
             List<OrdenesCompra2> fff = data.ToList();

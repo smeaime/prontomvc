@@ -1,0 +1,313 @@
+
+Log Entry : 
+08/29/2017 16:31:07
+Error in: http://localhost:50769/login.aspx?ReturnUrl=/. Error Message:System.ArgumentException
+Palabra clave no admitida: 'xusv*8hautv4dvuavudfacsdimsnua(slcuaho4{makmljc0'cmf*dxotvs`'.
+   en System.Data.Common.DbConnectionOptions.ParseInternal(Hashtable parsetable, String connectionString, Boolean buildChain, Hashtable synonyms, Boolean firstKey)
+   en System.Data.Common.DbConnectionOptions..ctor(String connectionString, Hashtable synonyms, Boolean useOdbcRules)
+   en System.Data.SqlClient.SqlConnectionString..ctor(String connectionString)
+   en System.Data.SqlClient.SqlConnectionFactory.CreateConnectionOptions(String connectionString, DbConnectionOptions previous)
+   en System.Data.ProviderBase.DbConnectionFactory.GetConnectionPoolGroup(DbConnectionPoolKey key, DbConnectionPoolGroupOptions poolOptions, DbConnectionOptions& userConnectionOptions)
+   en System.Data.SqlClient.SqlConnection.ConnectionString_Set(DbConnectionPoolKey key)
+   en System.Data.SqlClient.SqlConnection.set_ConnectionString(String value)
+   en System.Data.SqlClient.SqlConnection..ctor(String connectionString, SqlCredential credential)
+   en System.Data.SqlClient.SqlConnection..ctor(String connectionString)
+   en Pronto.ERP.Dal.ProveedorDB.GetList(String SC)
+   en Pronto.ERP.Bll.ProveedorManager.GetList(String SC) en C:\bdl\pronto\BussinessLogic\ProveedorManager.vb:línea 12
+   en Pronto.ERP.Bll.BDLMasterEmpresasManagerMigrar.AddEmpresaToSession(String IdEmpresa, Object& Session, String sConexBDLMaster, Object Yo) en C:\bdl\pronto\prontoweb\App_Code\vbcode\ManagerDebug\BDLMasterManagerAppCode.vb:línea 339
+System.Data
+__________________________
+
+Log Entry : 
+08/29/2017 16:31:08
+Error in: http://localhost:50769/ProntoWeb/CartasDePortes.aspx?tipo=Todas. Error Message:Mariano
+__________________________
+
+Log Entry : 
+08/29/2017 16:31:09
+Error in: http://localhost:50769/ProntoWeb/CartasDePortes.aspx?tipo=Todas. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartasDePortes.BindTypeDropDown() en C:\bdl\pronto\prontoweb\ProntoWeb\CartasDePortes.aspx.vb:línea 98
+App_Web_cartasdeportes.aspx.4199bbd4.oqzwhasf
+__________________________
+
+Log Entry : 
+08/29/2017 16:31:09
+Error in: http://localhost:50769/ProntoWeb/CartasDePortes.aspx?tipo=Todas. Error Message:System.Threading.ThreadAbortException
+Subproceso anulado.
+   en System.Threading.Thread.AbortInternal()
+   en System.Threading.Thread.Abort(Object stateInfo)
+   en System.Web.HttpResponse.AbortCurrentThread()
+   en System.Web.HttpResponse.End()
+   en System.Web.HttpResponse.Redirect(String url, Boolean endResponse, Boolean permanent)
+   en System.Web.HttpResponse.Redirect(String url)
+   en CartasDePortes.Permisos() en C:\bdl\pronto\prontoweb\ProntoWeb\CartasDePortes.aspx.vb:línea 142
+mscorlib
+__________________________
+
+Log Entry : 
+08/29/2017 16:31:10
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesAccesoClientes.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartaDePorteInformesAccesoClientes.BindTypeDropDown() en C:\bdl\pronto\prontoweb\ProntoWeb\CartaDePorteInformesAccesoClientes.aspx.vb:línea 264
+App_Web_cartadeporteinformesaccesoclientes.aspx.4199bbd4.tlartby2
+__________________________
+
+Log Entry : 
+08/29/2017 16:32:03
+Error in: http://localhost:50769/login.aspx. Error Message:System.ArgumentException
+Palabra clave no admitida: 'xusv*8hautv4dvuavudfacsdimsnua(slcuaho4{makmljc0'cmf*dxotvs`'.
+   en System.Data.Common.DbConnectionOptions.ParseInternal(Hashtable parsetable, String connectionString, Boolean buildChain, Hashtable synonyms, Boolean firstKey)
+   en System.Data.Common.DbConnectionOptions..ctor(String connectionString, Hashtable synonyms, Boolean useOdbcRules)
+   en System.Data.SqlClient.SqlConnectionString..ctor(String connectionString)
+   en System.Data.SqlClient.SqlConnectionFactory.CreateConnectionOptions(String connectionString, DbConnectionOptions previous)
+   en System.Data.ProviderBase.DbConnectionFactory.GetConnectionPoolGroup(DbConnectionPoolKey key, DbConnectionPoolGroupOptions poolOptions, DbConnectionOptions& userConnectionOptions)
+   en System.Data.SqlClient.SqlConnection.ConnectionString_Set(DbConnectionPoolKey key)
+   en System.Data.SqlClient.SqlConnection.set_ConnectionString(String value)
+   en System.Data.SqlClient.SqlConnection..ctor(String connectionString, SqlCredential credential)
+   en System.Data.SqlClient.SqlConnection..ctor(String connectionString)
+   en Pronto.ERP.Dal.ProveedorDB.GetList(String SC)
+   en Pronto.ERP.Bll.ProveedorManager.GetList(String SC) en C:\bdl\pronto\BussinessLogic\ProveedorManager.vb:línea 12
+   en Pronto.ERP.Bll.BDLMasterEmpresasManagerMigrar.AddEmpresaToSession(String IdEmpresa, Object& Session, String sConexBDLMaster, Object Yo) en C:\bdl\pronto\prontoweb\App_Code\vbcode\ManagerDebug\BDLMasterManagerAppCode.vb:línea 339
+System.Data
+__________________________
+
+Log Entry : 
+08/29/2017 16:33:18
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesAccesoClientesBLDcorredor.aspx. Error Message:BLDCORREDOR 1/01/1753
+__________________________
+
+Log Entry : 
+08/29/2017 16:33:18
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesAccesoClientesBLDcorredor.aspx. Error Message:BLDCORREDOR 1/01/2100
+__________________________
+
+Log Entry : 
+08/29/2017 16:33:22
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesAccesoClientesBLDcorredor.aspx. Error Message:System.InvalidCastException
+La conversión de la cadena "" en el tipo 'Integer' no es válida.
+   en Microsoft.VisualBasic.CompilerServices.Conversions.ToInteger(String Value)
+   en CartaDePorteInformesAccesoClientesBLDcorredor.AsignaInformeAlReportViewer(Boolean bDescargaExcel) en C:\bdl\pronto\prontoweb\ProntoWeb\CartaDePorteInformesAccesoClientesBLDcorredor.aspx.vb:línea 520
+   en CartaDePorteInformesAccesoClientesBLDcorredor.btnRefrescar_Click(Object sender, EventArgs e) en C:\bdl\pronto\prontoweb\ProntoWeb\CartaDePorteInformesAccesoClientesBLDcorredor.aspx.vb:línea 142
+   en System.Web.UI.WebControls.Button.OnClick(EventArgs e)
+   en System.Web.UI.WebControls.Button.RaisePostBackEvent(String eventArgument)
+   en System.Web.UI.WebControls.Button.System.Web.UI.IPostBackEventHandler.RaisePostBackEvent(String eventArgument)
+   en System.Web.UI.Page.RaisePostBackEvent(IPostBackEventHandler sourceControl, String eventArgument)
+   en System.Web.UI.Page.RaisePostBackEvent(NameValueCollection postData)
+   en System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+Microsoft.VisualBasic
+__________________________
+
+Log Entry : 
+08/29/2017 16:34:47
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesAccesoClientesBLDcorredor.aspx. Error Message:Mariano esta logueado, pero lo redirijo al login porque faltan los datos de session. No deberia mejor mandarlo a SeleccionarEmpresa? Ademas, no hago el LogOut y le queda el cookie!!!
+__________________________
+
+Log Entry : 
+08/29/2017 16:34:53
+Error in: http://localhost:50769/login.aspx. Error Message:System.ArgumentException
+Palabra clave no admitida: 'xusv*8hautv4dvuavudfacsdimsnua(slcuaho4{makmljc0'cmf*dxotvs`'.
+   en System.Data.Common.DbConnectionOptions.ParseInternal(Hashtable parsetable, String connectionString, Boolean buildChain, Hashtable synonyms, Boolean firstKey)
+   en System.Data.Common.DbConnectionOptions..ctor(String connectionString, Hashtable synonyms, Boolean useOdbcRules)
+   en System.Data.SqlClient.SqlConnectionString..ctor(String connectionString)
+   en System.Data.SqlClient.SqlConnectionFactory.CreateConnectionOptions(String connectionString, DbConnectionOptions previous)
+   en System.Data.ProviderBase.DbConnectionFactory.GetConnectionPoolGroup(DbConnectionPoolKey key, DbConnectionPoolGroupOptions poolOptions, DbConnectionOptions& userConnectionOptions)
+   en System.Data.SqlClient.SqlConnection.ConnectionString_Set(DbConnectionPoolKey key)
+   en System.Data.SqlClient.SqlConnection.set_ConnectionString(String value)
+   en System.Data.SqlClient.SqlConnection..ctor(String connectionString, SqlCredential credential)
+   en System.Data.SqlClient.SqlConnection..ctor(String connectionString)
+   en Pronto.ERP.Dal.ProveedorDB.GetList(String SC)
+   en Pronto.ERP.Bll.ProveedorManager.GetList(String SC) en C:\bdl\pronto\BussinessLogic\ProveedorManager.vb:línea 12
+   en Pronto.ERP.Bll.BDLMasterEmpresasManagerMigrar.AddEmpresaToSession(String IdEmpresa, Object& Session, String sConexBDLMaster, Object Yo) en C:\bdl\pronto\prontoweb\App_Code\vbcode\ManagerDebug\BDLMasterManagerAppCode.vb:línea 339
+System.Data
+__________________________
+
+Log Entry : 
+08/29/2017 16:35:38
+Error in: http://localhost:50769/login.aspx. Error Message:System.ArgumentException
+Palabra clave no admitida: 'xusv*8hautv4dvuavudfacsdimsnua(slcuaho4{makmljc0'cmf*dxotvs`'.
+   en System.Data.Common.DbConnectionOptions.ParseInternal(Hashtable parsetable, String connectionString, Boolean buildChain, Hashtable synonyms, Boolean firstKey)
+   en System.Data.Common.DbConnectionOptions..ctor(String connectionString, Hashtable synonyms, Boolean useOdbcRules)
+   en System.Data.SqlClient.SqlConnectionString..ctor(String connectionString)
+   en System.Data.SqlClient.SqlConnectionFactory.CreateConnectionOptions(String connectionString, DbConnectionOptions previous)
+   en System.Data.ProviderBase.DbConnectionFactory.GetConnectionPoolGroup(DbConnectionPoolKey key, DbConnectionPoolGroupOptions poolOptions, DbConnectionOptions& userConnectionOptions)
+   en System.Data.SqlClient.SqlConnection.ConnectionString_Set(DbConnectionPoolKey key)
+   en System.Data.SqlClient.SqlConnection.set_ConnectionString(String value)
+   en System.Data.SqlClient.SqlConnection..ctor(String connectionString, SqlCredential credential)
+   en System.Data.SqlClient.SqlConnection..ctor(String connectionString)
+   en Pronto.ERP.Dal.ProveedorDB.GetList(String SC)
+   en Pronto.ERP.Bll.ProveedorManager.GetList(String SC) en C:\bdl\pronto\BussinessLogic\ProveedorManager.vb:línea 12
+   en Pronto.ERP.Bll.BDLMasterEmpresasManagerMigrar.AddEmpresaToSession(String IdEmpresa, Object& Session, String sConexBDLMaster, Object Yo) en C:\bdl\pronto\prontoweb\App_Code\vbcode\ManagerDebug\BDLMasterManagerAppCode.vb:línea 339
+System.Data
+__________________________
+
+Log Entry : 
+08/29/2017 16:36:53
+Error in: http://localhost:50769/login.aspx. Error Message:System.ArgumentException
+Palabra clave no admitida: 'xusv*8hautv4dvuavudfacsdimsnua(slcuaho4{makmljc0'cmf*dxotvs`'.
+   en System.Data.Common.DbConnectionOptions.ParseInternal(Hashtable parsetable, String connectionString, Boolean buildChain, Hashtable synonyms, Boolean firstKey)
+   en System.Data.Common.DbConnectionOptions..ctor(String connectionString, Hashtable synonyms, Boolean useOdbcRules)
+   en System.Data.SqlClient.SqlConnectionString..ctor(String connectionString)
+   en System.Data.SqlClient.SqlConnectionFactory.CreateConnectionOptions(String connectionString, DbConnectionOptions previous)
+   en System.Data.ProviderBase.DbConnectionFactory.GetConnectionPoolGroup(DbConnectionPoolKey key, DbConnectionPoolGroupOptions poolOptions, DbConnectionOptions& userConnectionOptions)
+   en System.Data.SqlClient.SqlConnection.ConnectionString_Set(DbConnectionPoolKey key)
+   en System.Data.SqlClient.SqlConnection.set_ConnectionString(String value)
+   en System.Data.SqlClient.SqlConnection..ctor(String connectionString, SqlCredential credential)
+   en System.Data.SqlClient.SqlConnection..ctor(String connectionString)
+   en Pronto.ERP.Dal.ProveedorDB.GetList(String SC)
+   en Pronto.ERP.Bll.ProveedorManager.GetList(String SC) en C:\bdl\pronto\BussinessLogic\ProveedorManager.vb:línea 12
+   en Pronto.ERP.Bll.BDLMasterEmpresasManagerMigrar.AddEmpresaToSession(String IdEmpresa, Object& Session, String sConexBDLMaster, Object Yo) en C:\bdl\pronto\prontoweb\App_Code\vbcode\ManagerDebug\BDLMasterManagerAppCode.vb:línea 339
+System.Data
+__________________________
+
+Log Entry : 
+08/29/2017 16:38:03
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesAccesoClientesBLDcorredor.aspx. Error Message:BLDCORREDOR 1/01/2017
+__________________________
+
+Log Entry : 
+08/29/2017 16:38:03
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesAccesoClientesBLDcorredor.aspx. Error Message:BLDCORREDOR 3/01/2017
+__________________________
+
+Log Entry : 
+08/29/2017 16:38:37
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesAccesoClientesBLDcorredor.aspx. Error Message:System.InvalidCastException
+La conversión de la cadena "" en el tipo 'Integer' no es válida.
+   en Microsoft.VisualBasic.CompilerServices.Conversions.ToInteger(String Value)
+   en CartaDePorteInformesAccesoClientesBLDcorredor.AsignaInformeAlReportViewer(Boolean bDescargaExcel) en C:\bdl\pronto\prontoweb\ProntoWeb\CartaDePorteInformesAccesoClientesBLDcorredor.aspx.vb:línea 520
+   en CartaDePorteInformesAccesoClientesBLDcorredor.btnRefrescar_Click(Object sender, EventArgs e) en C:\bdl\pronto\prontoweb\ProntoWeb\CartaDePorteInformesAccesoClientesBLDcorredor.aspx.vb:línea 142
+   en System.Web.UI.WebControls.Button.OnClick(EventArgs e)
+   en System.Web.UI.WebControls.Button.RaisePostBackEvent(String eventArgument)
+   en System.Web.UI.WebControls.Button.System.Web.UI.IPostBackEventHandler.RaisePostBackEvent(String eventArgument)
+   en System.Web.UI.Page.RaisePostBackEvent(IPostBackEventHandler sourceControl, String eventArgument)
+   en System.Web.UI.Page.RaisePostBackEvent(NameValueCollection postData)
+   en System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+Microsoft.VisualBasic
+__________________________
+
+Log Entry : 
+08/29/2017 16:44:38
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesAccesoClientesBLDcorredor.aspx. Error Message:BLDCORREDOR 1/01/2017
+__________________________
+
+Log Entry : 
+08/29/2017 16:44:38
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesAccesoClientesBLDcorredor.aspx. Error Message:BLDCORREDOR 3/01/2017
+__________________________
+
+Log Entry : 
+08/29/2017 16:44:38
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesAccesoClientesBLDcorredor.aspx. Error Message:System.InvalidCastException
+La conversión de la cadena "" en el tipo 'Integer' no es válida.
+   en Microsoft.VisualBasic.CompilerServices.Conversions.ToInteger(String Value)
+   en CartaDePorteInformesAccesoClientesBLDcorredor.AsignaInformeAlReportViewer(Boolean bDescargaExcel) en C:\bdl\pronto\prontoweb\ProntoWeb\CartaDePorteInformesAccesoClientesBLDcorredor.aspx.vb:línea 520
+   en CartaDePorteInformesAccesoClientesBLDcorredor.btnRefrescar_Click(Object sender, EventArgs e) en C:\bdl\pronto\prontoweb\ProntoWeb\CartaDePorteInformesAccesoClientesBLDcorredor.aspx.vb:línea 142
+   en System.Web.UI.WebControls.Button.OnClick(EventArgs e)
+   en System.Web.UI.WebControls.Button.RaisePostBackEvent(String eventArgument)
+   en System.Web.UI.WebControls.Button.System.Web.UI.IPostBackEventHandler.RaisePostBackEvent(String eventArgument)
+   en System.Web.UI.Page.RaisePostBackEvent(IPostBackEventHandler sourceControl, String eventArgument)
+   en System.Web.UI.Page.RaisePostBackEvent(NameValueCollection postData)
+   en System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+Microsoft.VisualBasic
+__________________________
+
+Log Entry : 
+08/29/2017 16:44:40
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesAccesoClientesBLDcorredor.aspx. Error Message:System.Net.Mail.SmtpException
+El buzón de correo no está disponible. La respuesta del servidor fue: 5.4.5 Daily user sending quota exceeded. j127sm2443455qkc.75 - gsmtp
+   en System.Net.Mail.DataCommand.CheckResponse(SmtpStatusCode statusCode, String serverResponse)
+   en System.Net.Mail.DataCommand.Send(SmtpConnection conn)
+   en System.Net.Mail.SmtpTransport.SendMail(MailAddress sender, MailAddressCollection recipients, String deliveryNotify, Boolean allowUnicode, SmtpFailedRecipientException& exception)
+   en System.Net.Mail.SmtpClient.Send(MailMessage message)
+   en ProntoFuncionesGenerales.MandaEmailSimple(String Para, String Asunto, String Cuerpo, String De, String SmtpServer, String SmtpUser, String SmtpPass, String sStringGenerarAdjunto, Int64 SmtpPort, Int32 EnableSSL, String CCO, String img)
+   en ASP.global_asax.Application_Error(Object sender, EventArgs e) en C:\bdl\pronto\prontoweb\global.asax:línea 472
+System
+__________________________
+
+Log Entry : 
+08/29/2017 17:03:56
+Error in: http://localhost:50769/Admin/EditarUsuario.aspx?opcion=UnoMismo. Error Message:System.Data.Entity.Validation.DbEntityValidationException
+Validation failed for one or more entities. See 'EntityValidationErrors' property for more details.
+   en System.Data.Entity.Internal.InternalContext.SaveChanges()
+   en System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   en System.Data.Entity.DbContext.SaveChanges()
+   en UserDatosExtendidosManager.UpdateClientesRelacionadoslDelUsuario(String UserName, String ConexBDLmaster, String listado) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 22696
+   en Admin_EditarUsuario.ButAceptar_Command(Object sender, CommandEventArgs e) en C:\bdl\pronto\prontoweb\Admin\EditarUsuario.aspx.vb:línea 221
+   en System.Web.UI.WebControls.Button.OnCommand(CommandEventArgs e)
+   en System.Web.UI.WebControls.Button.RaisePostBackEvent(String eventArgument)
+   en System.Web.UI.WebControls.Button.System.Web.UI.IPostBackEventHandler.RaisePostBackEvent(String eventArgument)
+   en System.Web.UI.Page.RaisePostBackEvent(IPostBackEventHandler sourceControl, String eventArgument)
+   en System.Web.UI.Page.RaisePostBackEvent(NameValueCollection postData)
+   en System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+EntityFramework
+__________________________
+
+Log Entry : 
+08/29/2017 17:03:59
+Error in: http://localhost:50769/Admin/EditarUsuario.aspx?opcion=UnoMismo. Error Message:System.Net.Mail.SmtpException
+El buzón de correo no está disponible. La respuesta del servidor fue: 5.4.5 Daily user sending quota exceeded. p64sm2456206qkc.25 - gsmtp
+   en System.Net.Mail.DataCommand.CheckResponse(SmtpStatusCode statusCode, String serverResponse)
+   en System.Net.Mail.DataCommand.Send(SmtpConnection conn)
+   en System.Net.Mail.SmtpTransport.SendMail(MailAddress sender, MailAddressCollection recipients, String deliveryNotify, Boolean allowUnicode, SmtpFailedRecipientException& exception)
+   en System.Net.Mail.SmtpClient.Send(MailMessage message)
+   en ProntoFuncionesGenerales.MandaEmailSimple(String Para, String Asunto, String Cuerpo, String De, String SmtpServer, String SmtpUser, String SmtpPass, String sStringGenerarAdjunto, Int64 SmtpPort, Int32 EnableSSL, String CCO, String img)
+   en ASP.global_asax.Application_Error(Object sender, EventArgs e) en C:\bdl\pronto\prontoweb\global.asax:línea 472
+System
+__________________________
+
+Log Entry : 
+08/29/2017 17:05:23
+Error in: http://localhost:50769/ProntoWeb/Principal.aspx. Error Message:Mariano esta logueado, pero lo redirijo al login porque faltan los datos de session. No deberia mejor mandarlo a SeleccionarEmpresa? Ademas, no hago el LogOut y le queda el cookie!!!
+__________________________
+
+Log Entry : 
+08/29/2017 17:05:23
+Error in: http://localhost:50769/ProntoWeb/CartasDePortes.aspx?tipo=Todas. Error Message:Mariano
+__________________________
+
+Log Entry : 
+08/29/2017 17:07:51
+Error in: http://localhost:50769/Admin/EditarUsuario.aspx?opcion=UnoMismo. Error Message:System.Data.Entity.Validation.DbEntityValidationException
+Validation failed for one or more entities. See 'EntityValidationErrors' property for more details.
+   en System.Data.Entity.Internal.InternalContext.SaveChanges()
+   en System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   en System.Data.Entity.DbContext.SaveChanges()
+   en UserDatosExtendidosManager.UpdateClientesRelacionadoslDelUsuario(String UserName, String ConexBDLmaster, String listado) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 22696
+   en Admin_EditarUsuario.ButAceptar_Command(Object sender, CommandEventArgs e) en C:\bdl\pronto\prontoweb\Admin\EditarUsuario.aspx.vb:línea 221
+   en System.Web.UI.WebControls.Button.OnCommand(CommandEventArgs e)
+   en System.Web.UI.WebControls.Button.RaisePostBackEvent(String eventArgument)
+   en System.Web.UI.WebControls.Button.System.Web.UI.IPostBackEventHandler.RaisePostBackEvent(String eventArgument)
+   en System.Web.UI.Page.RaisePostBackEvent(IPostBackEventHandler sourceControl, String eventArgument)
+   en System.Web.UI.Page.RaisePostBackEvent(NameValueCollection postData)
+   en System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+EntityFramework
+__________________________
+
+Log Entry : 
+08/29/2017 17:21:05
+Error in: http://localhost:50769/ProntoWeb/Principal.aspx. Error Message:Mariano esta logueado, pero lo redirijo al login porque faltan los datos de session. No deberia mejor mandarlo a SeleccionarEmpresa? Ademas, no hago el LogOut y le queda el cookie!!!
+__________________________
+
+Log Entry : 
+08/29/2017 17:21:05
+Error in: http://localhost:50769/ProntoWeb/CartasDePortes.aspx?tipo=Todas. Error Message:Mariano
+__________________________
+
+Log Entry : 
+08/29/2017 17:23:58
+Error in: http://localhost:50769/Admin/EditarUsuario.aspx?opcion=UnoMismo. Error Message:System.Data.Entity.Validation.DbEntityValidationException
+Validation failed for one or more entities. See 'EntityValidationErrors' property for more details.
+   en System.Data.Entity.Internal.InternalContext.SaveChanges()
+   en System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   en System.Data.Entity.DbContext.SaveChanges()
+   en UserDatosExtendidosManager.UpdateClientesRelacionadoslDelUsuario(String UserName, String ConexBDLmaster, String listado) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 22712
+   en Admin_EditarUsuario.ButAceptar_Command(Object sender, CommandEventArgs e) en C:\bdl\pronto\prontoweb\Admin\EditarUsuario.aspx.vb:línea 221
+   en System.Web.UI.WebControls.Button.OnCommand(CommandEventArgs e)
+   en System.Web.UI.WebControls.Button.RaisePostBackEvent(String eventArgument)
+   en System.Web.UI.WebControls.Button.System.Web.UI.IPostBackEventHandler.RaisePostBackEvent(String eventArgument)
+   en System.Web.UI.Page.RaisePostBackEvent(IPostBackEventHandler sourceControl, String eventArgument)
+   en System.Web.UI.Page.RaisePostBackEvent(NameValueCollection postData)
+   en System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+EntityFramework
+__________________________
