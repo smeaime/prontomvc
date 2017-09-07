@@ -734,7 +734,7 @@
     <Content Include="Documentos\sql\FK_Pronto mariano manual.sql" />
     <Content Include="Documentos\sql\FK_Pronto.sql" />
     <Content Include="Documentos\sql\Levenshtein2.sql" />
-    <Content Include="Documentos\sql\resumen de totales estadisticas.sql" />
+    <Content Include="Documentos\sql\resumen de totales estadisticas [wCartasDePorte_TX_ResumenDeTotalesEstadisticas]  [wCartasDePorte_TX_DetalleDeTotalesEstadisticas].sql" />
     <Content Include="Documentos\sql\wCartasPorte_LiquidacionSubcontratistas.sql" />
     <Content Include="Documentos\sql\fSQL_GetDataTableFiltradoYPaginado  wCartasPorte_WraperDeLaTVF.sql" />
     <Content Include="Documentos\sql\Para los cubos\Generacion de tablas para cubos.sql" />

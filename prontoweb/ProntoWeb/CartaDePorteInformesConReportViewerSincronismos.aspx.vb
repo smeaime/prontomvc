@@ -836,6 +836,11 @@ Partial Class CartaDePorteInformesConReportViewerSincronismos
 
                 For Each cdp As WillyInformesDataSet.wCartasDePorte_TX_InformesCorregidoRow In ds.wCartasDePorte_TX_InformesCorregido
                     With cdp
+                        'If .IsHumedadNull Then .Humedad = 0
+                        'If .IsHumedadDesnormalizadaNull Then .HumedadDesnormalizada = 0
+                        'If .IsNReciboNull Then .NRecibo = 0
+
+                        If .IsObservacionesNull Then .Observaciones = ""
                         .Observaciones = .Observaciones.Replace(vbLf, "").Replace(vbCr, "")
                     End With
                 Next
@@ -2534,8 +2539,9 @@ Partial Class CartaDePorteInformesConReportViewerSincronismos
             Catch ex As System.Threading.ThreadAbortException
 
             Catch ex As Exception
-                ErrHandler2.WriteAndRaiseError(ex)
-
+                MandarMailDeError(ex)
+                ErrHandler2.WriteError(ex)
+                Throw
             End Try
 
         End Using

@@ -309,11 +309,11 @@ Public Class LogicaImportador
     'grabarrenglontipado
 
 
-    Public Shared Function GrabaRenglonEnTablaCDP(ByRef dr As DataRow, SC As String, Session As System.Web.SessionState.HttpSessionState, _
-                                    txtDestinatario As System.Web.UI.WebControls.TextBox, txtDestino As System.Web.UI.WebControls.TextBox, _
-                                    chkAyer As System.Web.UI.WebControls.CheckBox, txtLogErrores As System.Web.UI.WebControls.TextBox, cmbPuntoVenta As System.Web.UI.WebControls.DropDownList, _
-                                    txtFechaArribo As System.Web.UI.WebControls.TextBox, cmbFormato As System.Web.UI.WebControls.DropDownList, _
-                                    NoValidarColumnas As List(Of String) _
+    Public Shared Function GrabaRenglonEnTablaCDP(ByRef dr As DataRow, SC As String, Session As System.Web.SessionState.HttpSessionState,
+                                    txtDestinatario As System.Web.UI.WebControls.TextBox, txtDestino As System.Web.UI.WebControls.TextBox,
+                                    chkAyer As System.Web.UI.WebControls.CheckBox, txtLogErrores As System.Web.UI.WebControls.TextBox, cmbPuntoVenta As System.Web.UI.WebControls.DropDownList,
+                                    txtFechaArribo As System.Web.UI.WebControls.TextBox, cmbFormato As System.Web.UI.WebControls.DropDownList,
+                                    NoValidarColumnas As List(Of String)
         ) As String 'devuelve la columna del error si es que hubo
         'Dim dt = ViewstateToDatatable()
 
@@ -531,9 +531,9 @@ Public Class LogicaImportador
             Try
 
                 If (.Titular > 0 AndAlso (.Titular = idaca Or .Titular = idldc Or InStr(EntidadManager.NombreCliente(SC, .Titular).ToUpper, "A.C.A") > 0)) _
-                    Or _
+                    Or
                     (.CuentaOrden1 > 0 AndAlso (.CuentaOrden1 = idaca Or .CuentaOrden1 = idldc Or InStr(If(EntidadManager.NombreCliente(SC, .CuentaOrden1), "").ToUpper, "A.C.A") > 0)) _
-                    Or _
+                    Or
                     (.CuentaOrden2 > 0 AndAlso (.CuentaOrden2 = idaca Or .CuentaOrden2 = idldc Or InStr(If(EntidadManager.NombreCliente(SC, .CuentaOrden2), "").ToUpper, "A.C.A") > 0)) Then
                     Dim excep = CartaDePorteManager.excepcionesAcopios(SC)
 
@@ -784,10 +784,10 @@ Public Class LogicaImportador
 
                 actualizar(.FechaDescarga,
                            iisValidSqlDate(TextoAFecha(
-                                                    iisNull(dr.Item("FechaDescarga"), _
-                                                        IIf(.NetoFinalIncluyendoMermas > 0, _
-                                                            IIf(chkAyer.Checked, _
-                                                                DateAdd(DateInterval.Day, -1, Today), _
+                                                    iisNull(dr.Item("FechaDescarga"),
+                                                        IIf(.NetoFinalIncluyendoMermas > 0,
+                                                            IIf(chkAyer.Checked,
+                                                                DateAdd(DateInterval.Day, -1, Today),
                                                                 Today) _
                                                             , Nothing)))))  'si la fechadescarga está en null, me fijo si hay NetoFinalIncluyendoMermas
 
@@ -866,10 +866,10 @@ Public Class LogicaImportador
                     Dim s = " F:" + formato.ToString + " " + nombre
 
 
-                    EntidadManager.Tarea(SC, "Log_InsertarRegistro", "IMPORT", _
-                                              .Id, 0, Now, 0, "Tabla : CartaPorte", "", Session(SESSIONPRONTO_UserName), _
-                                             s, DBNull.Value, DBNull.Value, DBNull.Value, DBNull.Value, _
-                                            DBNull.Value, DBNull.Value, DBNull.Value, DBNull.Value, DBNull.Value, _
+                    EntidadManager.Tarea(SC, "Log_InsertarRegistro", "IMPORT",
+                                              .Id, 0, Now, 0, "Tabla : CartaPorte", "", Session(SESSIONPRONTO_UserName),
+                                             s, DBNull.Value, DBNull.Value, DBNull.Value, DBNull.Value,
+                                            DBNull.Value, DBNull.Value, DBNull.Value, DBNull.Value, DBNull.Value,
                                             DBNull.Value, DBNull.Value, DBNull.Value)
 
 
@@ -1298,7 +1298,7 @@ Public Class ExcelImportadorManager
                 '/////////////////////////////////////////////////////////////////////////
                 '/////////////////////////////////////////////////////////////////////////
 
-            Case "NETO PROC", "KG", "KG. PROC.", "KG,PROC", "KG P", _
+            Case "NETO PROC", "KG", "KG. PROC.", "KG,PROC", "KG P",
                     "KGS", "KGS ORIGEN", "NETO_PROC", "PESONETO"                '"KGS." qué va a ser? Neto proc o Neto Pto???
 
                 'conflicto "PROC": lo usa "Las Palmas" para "Procedencia"
@@ -2005,8 +2005,8 @@ Public Class ExcelImportadorManager
 
                 Dim myCartaDePorte As Models.CartasDePorte =
                                 (From c In db.CartasDePortes Where c.NumeroCartaDePorte = cpnumero
-                                  Order By c.FechaAnulacion Descending
-                                  Select c).FirstOrDefault()
+                                 Order By c.FechaAnulacion Descending
+                                 Select c).FirstOrDefault()
 
 
 
@@ -2091,7 +2091,13 @@ Public Class ExcelImportadorManager
 
                     If (Not bEditadaManual) Then
 
+                        'y si fue importada con una pegatina? no estoy seguro de que se salte este IF en ese caso. se me hace un lio -hagamos un parche feo:
+                        If If(.Observaciones, "") = "" Then .Observaciones = r(35)
                         'actua(.Observaciones, r(35))
+
+
+
+
 
                         Try
                             .FechaArribo = DateTime.Parse(iisValidSqlDate(Left(r(3), 10), DateTime.Now))
@@ -2253,7 +2259,6 @@ Public Class ExcelImportadorManager
                         '.CalidadDe = BuscaIdCalidadPreciso(DiccionarioEquivalenciasManager.BuscarEquivalencia(SC, r(34)), SC)
 
                         .Calidad = ""
-                        .NRecibo = 0
 
 
 
@@ -2318,6 +2323,17 @@ Public Class ExcelImportadorManager
 
 
                         .Cosecha = "1617"
+
+
+
+                        'hay banda de campos q dejo en NULL y los sincros explotan despues
+                        .Humedad = 0
+                        .NobleGrado = 0
+                        .NobleExtranos = 0
+                        .NRecibo = 0
+
+
+
 
 
                         .SituacionLog = Left(log, 299)
@@ -4638,9 +4654,9 @@ Public Class ExcelImportadorManager
                 'si salta un msgbox de seguridad en el servidor, la sesion del usuario se colgará
                 'si salta un msgbox de seguridad en el servidor, la sesion del usuario se colgará
                 'si salta un msgbox de seguridad en el servidor, la sesion del usuario se colgará
-                oWB = oWBs.Open(fileName, Missing.Value, Missing.Value, _
-    Missing.Value, Missing.Value, Missing.Value, Missing.Value, Missing.Value, _
-    Missing.Value, Missing.Value, Missing.Value, Missing.Value, Missing.Value, _
+                oWB = oWBs.Open(fileName, Missing.Value, Missing.Value,
+    Missing.Value, Missing.Value, Missing.Value, Missing.Value, Missing.Value,
+    Missing.Value, Missing.Value, Missing.Value, Missing.Value, Missing.Value,
     Missing.Value, Excel.XlCorruptLoad.xlExtractData)
 
                 'http://stackoverflow.com/questions/9062823/exception-when-opening-excel-file-in-c-sharp-using-interop?noredirect=1&lq=1
@@ -4697,7 +4713,7 @@ Public Class ExcelImportadorManager
 
             '  creo las columnas
             For j As Integer = 1 To MAXCOLS
-                dt.Columns.Add("column" & j, _
+                dt.Columns.Add("column" & j,
                                System.Type.GetType("System.String"))
             Next j
 
@@ -4800,8 +4816,8 @@ Public Class ExcelImportadorManager
 
 
 
-    Public Shared Function FormatearExcelImportadoEnDLL(ByRef m_IdMaestro As Integer, archivoExcel As String, cmbFormato As System.Web.UI.WebControls.DropDownList, _
-                                                        SC As String, _
+    Public Shared Function FormatearExcelImportadoEnDLL(ByRef m_IdMaestro As Integer, archivoExcel As String, cmbFormato As System.Web.UI.WebControls.DropDownList,
+                                                        SC As String,
          cmbPuntoVenta As System.Web.UI.WebControls.DropDownList, txtLogErrores As System.Web.UI.WebControls.TextBox, txtFechaArribo As System.Web.UI.WebControls.TextBox, glbIdUsuario As Integer, UserName As String) As Integer
 
 
@@ -4818,8 +4834,8 @@ Public Class ExcelImportadorManager
 
 
 
-    Public Shared Function FormatearExcelImportadoEnDLL(ByRef m_IdMaestro As Integer, archivoExcel As String, Formato As LogicaImportador.FormatosDeExcel, _
-                                                     SC As String, _
+    Public Shared Function FormatearExcelImportadoEnDLL(ByRef m_IdMaestro As Integer, archivoExcel As String, Formato As LogicaImportador.FormatosDeExcel,
+                                                     SC As String,
       cmbPuntoVenta As Integer, ByRef txtLogErrores As String, txtFechaArribo As String, glbIdUsuario As Integer, UserName As String) As Integer
 
         'FormatearExcelImportadoEnDLL()
@@ -5028,7 +5044,7 @@ Public Class ExcelImportadorManager
 
 
         If errorEncabezadoTag <> "" Then
-            ErrHandler2.WriteError("Los encabezados de columna " & errorEncabezadoTag & " no son reconocidos. " & _
+            ErrHandler2.WriteError("Los encabezados de columna " & errorEncabezadoTag & " no son reconocidos. " &
                                   "Cambielos por los estándar. Ya ha sido enviado un mail notificando la incongruencia.")
         End If
 
@@ -5095,7 +5111,7 @@ Public Class ExcelImportadorManager
         '/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
         'Excepcion de un caso raro...
-        If InStr(archivoExcel.ToUpper, "BUNGE") Or _
+        If InStr(archivoExcel.ToUpper, "BUNGE") Or
            InStr(archivoExcel.ToUpper, "CARGILL") Then
             RellenarCeldaVaciaConCeldaSuperior(dtDestino)
         End If
@@ -5196,7 +5212,7 @@ Public Class ExcelImportadorManager
                     Continue For
                 End If
 
-                If Not InStr(row.Item("EntregadorFiltrarPorWilliams").ToString.ToUpper, "WILLIAMS") > 0 And _
+                If Not InStr(row.Item("EntregadorFiltrarPorWilliams").ToString.ToUpper, "WILLIAMS") > 0 And
                     row.Item("EntregadorFiltrarPorWilliams").ToString.ToUpper <> "WE" Then
                     dtDestino.Rows.Remove(row)
                 End If
@@ -5956,7 +5972,7 @@ Public Class ExcelImportadorManager
 
             If destinatario.Contains("ADM") Or destinatario.Contains("TRADING SUR") Or destinatario.Contains("CIA. ARGENTINA DE GRANOS") Then
                 dr.Item("Exporta") = "NO"
-            ElseIf destinatario.Contains("MULTIGRAIN") Or destinatario.Contains("AMAGGI") Or destinatario.Contains("LDC") Or _
+            ElseIf destinatario.Contains("MULTIGRAIN") Or destinatario.Contains("AMAGGI") Or destinatario.Contains("LDC") Or
                     destinatario.Contains("ANDREOLI") Or destinatario.Contains("BTG") Then
                 dr.Item("Exporta") = "SI"
             Else
@@ -6215,27 +6231,27 @@ Public Class ExcelImportadorManager
         'Return EntidadManager.ExecDinamico(SC, Tabla & "_TT") 
 
         'el Trasnportistas_TT esta usando INNER JOIN
-        Dim s = "Select " & _
-     "Transportistas.IdTransportista, " & _
-     "Transportistas.RazonSocial,  " & _
-     "Transportistas.Direccion,  " & _
-     "Localidades.Nombre AS [Localidad],  " & _
-     "Transportistas.CodigoPostal,  " & _
-     "Provincias.Nombre AS [Provincia],  " & _
-     "Paises.Descripcion AS [Pais],  " & _
-     "Transportistas.Telefono,  " & _
-     "Transportistas.Fax,  " & _
-     "Transportistas.Email,  " & _
-     "Transportistas.Cuit,  " & _
-     "DescripcionIva.Descripcion AS [Condicion IVA],  " & _
-     "Transportistas.Contacto, " & _
-     "Transportistas.Horario, " & _
-        "    Transportistas.Celular " & _
-        "    FROM Transportistas " & _
-     "LEFT JOIN DescripcionIva ON Transportistas.IdCodigoIva = DescripcionIva.IdCodigoIva  " & _
-     "LEFT JOIN Localidades ON Transportistas.IdLocalidad = Localidades.IdLocalidad  " & _
-     "LEFT JOIN Provincias ON Transportistas.IdProvincia = Provincias.IdProvincia " & _
-     "LEFT JOIN Paises ON Transportistas.IdPais = Paises.IdPais " & _
+        Dim s = "Select " &
+     "Transportistas.IdTransportista, " &
+     "Transportistas.RazonSocial,  " &
+     "Transportistas.Direccion,  " &
+     "Localidades.Nombre AS [Localidad],  " &
+     "Transportistas.CodigoPostal,  " &
+     "Provincias.Nombre AS [Provincia],  " &
+     "Paises.Descripcion AS [Pais],  " &
+     "Transportistas.Telefono,  " &
+     "Transportistas.Fax,  " &
+     "Transportistas.Email,  " &
+     "Transportistas.Cuit,  " &
+     "DescripcionIva.Descripcion AS [Condicion IVA],  " &
+     "Transportistas.Contacto, " &
+     "Transportistas.Horario, " &
+        "    Transportistas.Celular " &
+        "    FROM Transportistas " &
+     "LEFT JOIN DescripcionIva ON Transportistas.IdCodigoIva = DescripcionIva.IdCodigoIva  " &
+     "LEFT JOIN Localidades ON Transportistas.IdLocalidad = Localidades.IdLocalidad  " &
+     "LEFT JOIN Provincias ON Transportistas.IdProvincia = Provincias.IdProvincia " &
+     "LEFT JOIN Paises ON Transportistas.IdPais = Paises.IdPais " &
         "ORDER BY Transportistas.RazonSocial "
 
         Return EntidadManager.ExecDinamico(SC, s)

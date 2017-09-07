@@ -267,6 +267,10 @@ isnull(LOCORI.CodigoAFIP,'') AS CodigoAFIP
 
 
 
+
+
+
+
 FROM    CartasDePorte CDP          
 LEFT OUTER JOIN Clientes CLIVEN ON CDP.Vendedor = CLIVEN.IdCliente       
 LEFT OUTER JOIN Clientes CLICO1 ON CDP.CuentaOrden1 = CLICO1.IdCliente   
@@ -297,6 +301,10 @@ LEFT OUTER JOIN Facturas FAC ON CDP.idFacturaImputada = FAC.IdFactura
 LEFT OUTER JOIN Clientes CLIFAC ON CLIFAC.IdCliente = FAC.IdCliente             
 LEFT OUTER JOIN Partidos PARTORI ON LOCORI.IdPartido = PARTORI.IdPartido          
 LEFT OUTER JOIN Empleados E1 ON CDP.IdUsuarioIngreso = E1.IdEmpleado  
+
+--LEFT OUTER JOIN CartasDePorteDetalle CALIDAD ON CDP.IdCartaDePorte = CALIDAD.IdCartaDePorte  
+
+
 
 
 --LEFT OUTER JOIN CartasDePorteDetalle CDPDET ON CDP.IdCartaDePorte = CDPDET.IdCartaDePorte And CDPDET.Campo = 'CalidadMermaVolatilMerma'   -- Return oDet.Valor
@@ -897,7 +905,7 @@ wCartasPorte_WraperDeLaTVF
 					NULL,---1, --@idDestino,
 					0, --@AplicarANDuORalFiltro,
 					'Ambos', --'Buques',
-					'2016-08-03 00:00:00',
+					'2016-30-03 00:00:00',
 					
 					'2016-30-03 00:00:00',
 					NULL, 
@@ -920,6 +928,8 @@ go
 
 
 
+/*
+
 exec wCartasPorte_WraperDeLaTVF @startRowIndex=NULL,@fechadesde='2000-01-01 00:00:00',@maximumRows=100,@fechahasta='2100-01-01 00:00:00'
 ,@estado=NULL,@idDestino=-1,@QueContenga=NULL,@idVendedor=NULL,@idCorredor=NULL,@idDestinatario=NULL,
 @idIntermediario=NULL,@idRemComercial=NULL,@idArticulo=NULL,@idProcedencia=NULL,@AplicarANDuORalFiltro=NULL,@ModoExportacion='Ambos',
@@ -927,6 +937,7 @@ exec wCartasPorte_WraperDeLaTVF @startRowIndex=NULL,@fechadesde='2000-01-01 00:0
 @optDivisionSyngenta=NULL,@Contrato=NULL,@QueContenga2=NULL,@idClienteAuxiliarint=NULL,@AgrupadorDeTandaPeriodos=NULL,@Vagon=NULL,
 @Patente=NULL,@optCamionVagon=NULL
 go
+
 
 
 exec wCartasPorte_WraperDeLaTVF @startRowIndex=NULL,@fechadesde='2015-01-01 00:00:00',@maximumRows=40,@fechahasta='2016-01-01 00:00:00',
@@ -947,6 +958,26 @@ exec wCartasPorte_WraperDeLaTVF @startRowIndex=0,@fechadesde='2016-01-10 00:00:0
 @idDestinatario=-1,@idIntermediario=6762,@idRemComercial=6762,@idArticulo=-1,@idProcedencia=-1,@AplicarANDuORalFiltro=0,
 @ModoExportacion=N'Entregas',@puntoventa=-1,@optDivisionSyngenta=N'BANDERA',@Contrato=N'-1',@QueContenga2=N'-1',
 @idClienteAuxiliarint=6762,@AgrupadorDeTandaPeriodos=-1,@Vagon=0,@Patente=N'',@optCamionVagon=N'Todos'
+
+
+*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
