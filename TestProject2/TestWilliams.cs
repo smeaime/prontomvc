@@ -79,7 +79,7 @@ namespace ProntoMVC.Tests
     {
 
 
-
+        #region blabla
 
 
 
@@ -853,9 +853,596 @@ namespace ProntoMVC.Tests
 
 
 
+        #endregion
+
 
         #endregion
 
+
+
+        [TestMethod]
+        public void FormatoNuevo_42771_2()
+        {
+
+
+            //-Les acabo de pasar correo con la solicitud del cliente nuevo SPEEDAGRO para que en el exel de descargas que pasa el sistema, salga el cuit a su lado titular, intermediario, rem comercial, corredor, transporte, chofer, etc, etc
+            //    -Martín,Lo que deben hacer es cuando arman el mail de Speedagro, elegir el formato "Excel GroboCuits" que es el formato que se está usando con Grobocopatel.
+            //    -Andres, ahi me hace la devolucion SpeedAgro, y estarian faltando los cuit del destinatario y corredor. Resto estaria ok.Podes avanzar con esto ? Abrazo Martin
+
+            //aaaaaa
+            //Agregar el campos de AMBAS ( Excel + HTML ), asi no hay que agregar repetidamente
+            //otro grupo de mail para elegir el otro forma, y que en el mismo correo llegue de las dos manera, pegado en el cuerpo del mail + archivo Excel. - PENDIENTE
+
+            var fechadesde = new DateTime(2014, 1, 1);
+            var fechahasta = new DateTime(2014, 1, 2);
+            int pventa = 0;
+
+
+            var dr = CDPMailFiltrosManager2.TraerMetadata(SC, -1).NewRow();
+
+
+            dr["ModoImpresion"] = "Excel";
+            //dr["ModoImpresion"] = "HImag2";
+            //dr["ModoImpresion"] = "ExcHtm";
+            //dr["ModoImpresion"] = "Imagen";
+
+
+            dr["Emails"] = "mscalella911@gmail.com";
+
+
+            dr["Vendedor"] = -1;
+            dr["CuentaOrden1"] = -1;
+            dr["CuentaOrden2"] = -1;
+            dr["IdClienteAuxiliar"] = -1; ;
+            dr["Corredor"] = -1;
+            dr["Entregador"] = -1;
+            dr["Destino"] = -1;
+            dr["Procedencia"] = -1;
+            dr["FechaDesde"] = fechadesde;
+            dr["FechaHasta"] = fechahasta;
+            dr["AplicarANDuORalFiltro"] = 0; // CartaDePorteManager.FiltroANDOR.FiltroOR;
+            dr["Modo"] = "Ambos";
+            //dr["Orden"] = "";
+            //dr["Contrato"] = "";
+            dr["EnumSyngentaDivision"] = "";
+            dr["EsPosicion"] = false;
+            dr["IdArticulo"] = -1;
+            CartaDePorteManager.enumCDPestado estado = CartaDePorteManager.enumCDPestado.DescargasMasFacturadas;
+
+
+            string output = "";
+            string sError = "", sError2 = "";
+            string inlinePNG = DirApp + @"\imagenes\Unnamed.png";
+            string inlinePNG2 = DirApp + @"\imagenes\twitterwilliams.jpg";
+
+
+
+
+
+            try
+            {
+
+                output = CDPMailFiltrosManager2.EnviarMailFiltroPorRegistro_DLL(SC, fechadesde, fechahasta,
+                                                       pventa, "", estado,
+                                                    ref dr, ref sError, false,
+                                                   ConfigurationManager.AppSettings["SmtpServer"],
+                                                     ConfigurationManager.AppSettings["SmtpUser"],
+                                                     ConfigurationManager.AppSettings["SmtpPass"],
+                                                     Convert.ToInt16(ConfigurationManager.AppSettings["SmtpPort"]),
+                                                       "", ref sError2, inlinePNG, inlinePNG2);
+
+
+            }
+            catch (Exception)
+            {
+
+                //throw;
+            }
+
+
+
+            System.Web.UI.WebControls.GridView grid = new System.Web.UI.WebControls.GridView();
+            string html = CartaDePorteManager.ExcelToHtml(output, grid);
+
+
+            System.Diagnostics.Process.Start(output);
+
+        }
+
+
+
+
+
+        [TestMethod]
+        public void FormatoNuevo_42771()
+        {
+
+
+            //-Les acabo de pasar correo con la solicitud del cliente nuevo SPEEDAGRO para que en el exel de descargas que pasa el sistema, salga el cuit a su lado titular, intermediario, rem comercial, corredor, transporte, chofer, etc, etc
+            //    -Martín,Lo que deben hacer es cuando arman el mail de Speedagro, elegir el formato "Excel GroboCuits" que es el formato que se está usando con Grobocopatel.
+            //    -Andres, ahi me hace la devolucion SpeedAgro, y estarian faltando los cuit del destinatario y corredor. Resto estaria ok.Podes avanzar con esto ? Abrazo Martin
+
+            //aaaaaa
+            //Agregar el campos de AMBAS ( Excel + HTML ), asi no hay que agregar repetidamente
+            //otro grupo de mail para elegir el otro forma, y que en el mismo correo llegue de las dos manera, pegado en el cuerpo del mail + archivo Excel. - PENDIENTE
+
+            var fechadesde = new DateTime(2014, 1, 1);
+            var fechahasta = new DateTime(2014, 1, 2);
+            int pventa = 0;
+
+
+            var dr = CDPMailFiltrosManager2.TraerMetadata(SC, -1).NewRow();
+
+            dr["ModoImpresion"] = "Speed"; // este es el excel angosto con adjunto html angosto ("Listado general de Cartas de Porte (simulando original) con foto 2 .rdl"). Lo que quieren es el excel ANCHO manteniendo el MISMO html. 
+           //dr["ModoImpresion"] = "ExcHc";
+            //dr["ModoImpresion"] = "HtmlIm";
+
+            dr["Emails"] = "mscalella911@gmail.com";
+
+
+            dr["Vendedor"] = -1;
+            dr["CuentaOrden1"] = -1;
+            dr["CuentaOrden2"] = -1;
+            dr["IdClienteAuxiliar"] = -1; ;
+            dr["Corredor"] = -1;
+            dr["Entregador"] = -1;
+            dr["Destino"] = -1;
+            dr["Procedencia"] = -1;
+            dr["FechaDesde"] = fechadesde;
+            dr["FechaHasta"] = fechahasta;
+            dr["AplicarANDuORalFiltro"] = 0; // CartaDePorteManager.FiltroANDOR.FiltroOR;
+            dr["Modo"] = "Ambos";
+            //dr["Orden"] = "";
+            //dr["Contrato"] = "";
+            dr["EnumSyngentaDivision"] = "";
+            dr["EsPosicion"] = false;
+            dr["IdArticulo"] = -1;
+            CartaDePorteManager.enumCDPestado estado = CartaDePorteManager.enumCDPestado.DescargasMasFacturadas;
+
+
+            string output = "";
+            string sError = "", sError2 = "";
+            string inlinePNG = DirApp + @"\imagenes\Unnamed.png";
+            string inlinePNG2 = DirApp + @"\imagenes\twitterwilliams.jpg";
+
+
+
+
+
+            try
+            {
+
+                output = CDPMailFiltrosManager2.EnviarMailFiltroPorRegistro_DLL(SC, fechadesde, fechahasta,
+                                                       pventa, "", estado,
+                                                    ref dr, ref sError, false,
+                                                   ConfigurationManager.AppSettings["SmtpServer"],
+                                                     ConfigurationManager.AppSettings["SmtpUser"],
+                                                     ConfigurationManager.AppSettings["SmtpPass"],
+                                                     Convert.ToInt16(ConfigurationManager.AppSettings["SmtpPort"]),
+                                                       "", ref sError2, inlinePNG, inlinePNG2);
+
+
+            }
+            catch (Exception)
+            {
+
+                //throw;
+            }
+
+
+
+            System.Web.UI.WebControls.GridView grid = new System.Web.UI.WebControls.GridView();
+            string html = CartaDePorteManager.ExcelToHtml(output, grid);
+
+
+            System.Diagnostics.Process.Start(output);
+
+        }
+
+
+
+
+
+
+
+
+
+
+        [TestMethod]
+        public void Se_pisan_las_observaciones_en_el_robot_43069()
+        {
+            string archivoExcel = @"C:\bdl\pronto\docstest\New folder\Posicion-170809-0850.xls";
+
+            string ms = "";
+
+            int m_IdMaestro = 0;
+            Pronto.ERP.BO.CartaDePorte carta;
+
+
+            string log = "";
+            //hay que pasar el formato como parametro 
+            ExcelImportadorManager.FormatearExcelImportadoEnDLL(ref m_IdMaestro, archivoExcel,
+                                    LogicaImportador.FormatosDeExcel.Urenport, SC, 0, ref log, "", 0, "");
+
+
+
+        }
+
+
+
+        [TestMethod]
+        public void ServicioWebDescargas_43031()
+        {
+
+            ////Trust all certificates
+            //System.Net.ServicePointManager.ServerCertificateValidationCallback = delegate(object sender, X509Certificate certificate, X509Chain chain, SslPolicyErrors sslPolicyErrors) { return true; };
+
+            //var cerealnet = new WS_CartasDePorteClient();
+
+            string usuario = "Mariano"; //"fyo";
+            string clave = "pirulo!"; // "76075";
+            string cuit = "30703605105";
+
+            // var respEntrega = cerealnet.obtenerDescargas(usuario, clave, cuit, "2016-10-01", "2016-10-25");
+            var respEntrega = CartaDePorteManager.BajarListadoDeCartaPorte_CerealNet_DLL_v3(usuario, clave, cuit,
+                                            new DateTime(2016, 1, 1),
+                                            new DateTime(2017, 1, 1), CartaDePorteManager.enumCDPestado.DescargasDeHoyMasTodasLasPosicionesEnRangoFecha,
+                                            SC, DirApp, scbdlmasterappconfig);
+
+
+            foreach (var desc in respEntrega.descargas)
+            {
+                Console.WriteLine(string.Format("CP {0}", desc.cartaporte));
+
+                if (desc.listaAnalisis != null && desc.listaAnalisis.Length > 0)
+                {
+                    foreach (CerealNet.WSCartasDePorte.analisis anal in desc.listaAnalisis)
+                    {
+                        Console.WriteLine(string.Format("\tRubro: {0} - %Analisis: {1} - %Merma: {2} - KgsMerma: {3}", anal.rubro.Trim(), anal.porcentajeAnalisis, anal.porcentajeMerma, anal.kilosMermas));
+                    }
+                }
+            }
+            //Console.ReadKey();
+        }
+
+
+
+
+        [TestMethod]
+        public void listado_especial_para_diaz_riganti_43183()
+        {
+
+
+
+            string usuario = "DIAZDOW";
+            var rs = ""; // se usa como "QueContenga"
+            var desde = new DateTime(2017, 1, 1);
+            var hasta = new DateTime(2017, 1, 31);
+            var estadofiltro = CartaDePorteManager.enumCDPestado.TodasMenosLasRechazadas;
+
+
+            var idVendedor = -1;
+            var idCorredor = SQLdinamico.BuscaIdVendedorPreciso(rs, SC);
+            var idDestinatario = -1;
+            var idIntermediario = -1;
+            var idRComercial = -1;
+            var idArticulo = -1;
+            var idProcedencia = -1;
+            var idDestino = -1;
+
+
+
+
+
+            string sql = CartaDePorteManager.DataTablePorClienteSQL(SC, "", "", "", 0, 9999999,
+                                estadofiltro, rs, idVendedor, idCorredor,
+                               idDestinatario, idIntermediario,
+                               idRComercial, idArticulo, idProcedencia, idDestino
+                                , 0, "Ambas"
+                                , desde, hasta,
+                                0, "", usuario, scbdlmasterappconfig, true, true, true, false, false, false);
+
+
+
+
+            ReportViewer ReporteLocal = new Microsoft.Reporting.WebForms.ReportViewer();
+            string output = @"C:\Users\Mariano\Desktop\Informe" + DateTime.Now.ToString("ddMMMyyyy_HHmmss") + ".xls";
+            ReportParameter[] yourParams = new ReportParameter[10];
+            yourParams[0] = new ReportParameter("webservice", "");
+            yourParams[1] = new ReportParameter("sServidor", "");
+            yourParams[2] = new ReportParameter("idArticulo", "-1");
+            yourParams[3] = new ReportParameter("idDestino", "-1");
+            yourParams[4] = new ReportParameter("desde", desde.ToString());
+            yourParams[5] = new ReportParameter("hasta", hasta.ToString());
+            yourParams[6] = new ReportParameter("quecontenga", "ghkgk");
+            yourParams[7] = new ReportParameter("Consulta", sql);
+            yourParams[8] = new ReportParameter("sServidorSQL", ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC));
+            yourParams[9] = new ReportParameter("titulo", "ghkj");
+            string sss = CartaDePorteManager.RebindReportViewer_ServidorExcel(ref ReporteLocal,
+                        @"Listado general de Cartas de Porte (simulando original) con foto 2", yourParams, ref output, false);
+
+
+
+            System.Diagnostics.Process.Start(output);
+
+        }
+
+
+
+
+
+
+
+
+        [TestMethod]
+        public void CampoEditableDeClientesRelacionadosAlUsuarioParaTirarInforme_28320_42549()
+        {
+
+            //probar fyo con mi usuario
+            //o hago top, o un select mas angosto, o un filtro de fecha
+
+
+            //probe con coma, pipe, punto y coma y nunca me funciona. ese usuario el 1/6 debería traer 
+            //la cp 561439022 que es de JACIUK EUGENIO FELIPE 20-08494702-5 (titular)
+
+            //Acá, mismo usuario, password y cuits, probando en Enero, debería traer la CP 558600767, donde 20 - 08494702 - 5(JACIUK EUGENIO FELIPE) es titular
+
+            //string usuario = "RODRIGORIOS"; 
+            string usuario = "Mariano";
+            var rs = "FUTUROS Y OPCIONES .COM";
+            var desde = new DateTime(2017, 1, 1);
+            var hasta = new DateTime(2017, 1, 31);
+            var estadofiltro = CartaDePorteManager.enumCDPestado.TodasMenosLasRechazadas;
+
+
+            var idVendedor = -1;
+            var idCorredor = SQLdinamico.BuscaIdVendedorPreciso(rs, SC);
+            var idDestinatario = -1;
+            var idIntermediario = -1;
+            var idRComercial = -1;
+            var idArticulo = -1;
+            var idProcedencia = -1;
+            var idDestino = -1;
+
+
+
+
+
+
+            string sql = CartaDePorteManager.DataTablePorClienteSQL(SC, "", "", "", 0, 9999999,
+                                estadofiltro, rs, idVendedor, idCorredor,
+                               idDestinatario, idIntermediario,
+                               idRComercial, idArticulo, idProcedencia, idDestino
+                                , 0, "Ambas"
+                                , desde, hasta,
+                                0, "", usuario, scbdlmasterappconfig, true, true, true, false, false, false);
+
+
+
+
+
+            ReportViewer ReporteLocal = new Microsoft.Reporting.WebForms.ReportViewer();
+            string output = @"C:\Users\Administrador\Desktop\Informe" + DateTime.Now.ToString("ddMMMyyyy_HHmmss") + ".xls";
+            ReportParameter[] yourParams = new ReportParameter[10];
+            yourParams[0] = new ReportParameter("webservice", "");
+            yourParams[1] = new ReportParameter("sServidor", "");
+            yourParams[2] = new ReportParameter("idArticulo", "-1");
+            yourParams[3] = new ReportParameter("idDestino", "-1");
+            yourParams[4] = new ReportParameter("desde", desde.ToString());
+            yourParams[5] = new ReportParameter("hasta", hasta.ToString());
+            yourParams[6] = new ReportParameter("quecontenga", "ghkgk");
+            yourParams[7] = new ReportParameter("Consulta", sql);
+            yourParams[8] = new ReportParameter("sServidorSQL", ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC));
+            yourParams[9] = new ReportParameter("titulo", "ghkj");
+            string sss = CartaDePorteManager.RebindReportViewer_ServidorExcel(ref ReporteLocal,
+                        @"Listado general de Cartas de Porte (simulando original) con foto 2", yourParams, ref output, false);
+
+
+
+            System.Diagnostics.Process.Start(output);
+
+
+
+            if (false)
+            {
+                string sErrores = "", sTitulo = "";
+                LinqCartasPorteDataContext db = null;
+                DemoProntoEntities db2 = null;
+
+
+                //UserDatosExtendidosManager.UpdateClientesRelacionadoslDelUsuario(usuario, scbdlmasterappconfig, "20-12345678-1|20-20100767-5");
+
+
+                //cuando decide si usa CartaDePorteInformesAccesoClientes o CartaDePorteInformesAccesoClientesBLDcorredor? 
+                //-con CartaDePorteManager.EsClienteBLDcorredor(HFSC.Value)
+                //bueno, esto funciona. O sea que falla esa derivacion? -pero la pagina "..BLDCorredor" usa el filtro de corredor BLD  -y si se lo sacas?
+
+                var b = CartaDePorteManager.usuariosBLD(SC).Contains(usuario);
+
+                var clientes = CartaDePorteManager.TraerCUITClientesSegunUsuario(usuario, SC, scbdlmasterappconfig).Where(x => x != "").ToList();
+
+
+                var q = CartaDePorteManager.CartasLINQlocalSimplificadoTipadoConCalada3(SC,
+                         "", "", "", 1, 99999,
+                          CartaDePorteManager.enumCDPestado.Todas, "", -1, -1,
+                         -1, -1,
+                         -1, -1, -1, -1, CartaDePorteManager.FiltroANDOR.FiltroOR, "Ambas",
+                          desde,
+                          hasta,
+                          -1, ref sTitulo, "Ambas", false, "", ref db2, "", -1, -1, 0, "", "Ambas");
+
+
+                var q2 = q.Where(x => clientes.Contains(x.TitularCUIT) || clientes.Contains(x.IntermediarioCUIT) || clientes.Contains(x.RComercialCUIT))
+                                        .ToList();
+
+                var q3 = q2.Select(x => x.NumeroCartaDePorte).ToList();
+
+                Assert.IsTrue(q3.Contains(558600767));
+
+
+
+
+
+
+
+                System.Data.Entity.Core.Objects.ObjectQuery oq = (System.Data.Entity.Core.Objects.ObjectQuery)q;
+                string sqlquery = (oq).ToTraceString();
+                var strSQL = oq.ToTraceString();
+                List<System.Data.Entity.Core.Objects.ObjectParameter> ps = oq.Parameters.ToList();
+                for (int n = ps.Count() - 1; n >= 0; n--) //para que @QueContenga no reemplace a @QueContenga2
+                {
+                    System.Data.Entity.Core.Objects.ObjectParameter parameter = ps[n];
+                    var name = "@" + parameter.Name;
+                    string value;
+                    if (parameter.Value == null)
+                    {
+                        value = " NULL ";
+
+                    }
+                    else if (!(parameter.Value.GetType() == typeof(DateTime)))
+                    {
+
+                        value = "'" + (parameter.Value ?? "").ToString() + "'";
+                    }
+                    else
+                    {
+
+                        value = "'" + (((DateTime)(parameter.Value)).ToString("s") ?? "").ToString() + "'";
+                    }
+                    strSQL = strSQL.Replace(name, value);
+                }
+
+
+
+
+
+
+                //string razonsocial = UserDatosExtendidosManager.TraerRazonSocialDelUsuario(usuario, scbdlmasterappconfig, SC);
+
+
+
+
+
+                //var l = dt.AsEnumerable().Select(x => x["NumeroCartaDePorte"].NullSafeToString()).ToList();
+
+
+                //Assert.IsTrue(dt.AsEnumerable().Select(x => x["NumeroCartaDePorte"]).Contains(558600767));
+
+
+                //ReportViewer ReporteLocal = new Microsoft.Reporting.WebForms.ReportViewer();
+                //string output = @"C:\Users\Administrador\Desktop\Informe" + DateTime.Now.ToString("ddMMMyyyy_HHmmss") + ".xls";
+                //ReportParameter[] yourParams = new ReportParameter[10];
+                //yourParams[0] = new ReportParameter("webservice", "");
+                yourParams[1] = new ReportParameter("sServidor", "");
+                yourParams[2] = new ReportParameter("idArticulo", "-1");
+                yourParams[3] = new ReportParameter("idDestino", "-1");
+                yourParams[4] = new ReportParameter("desde", desde.ToString());
+                yourParams[5] = new ReportParameter("hasta", hasta.ToString());
+                yourParams[6] = new ReportParameter("quecontenga", "ghkgk");
+                yourParams[7] = new ReportParameter("Consulta", strSQL);
+                yourParams[8] = new ReportParameter("sServidorSQL", ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC));
+                yourParams[9] = new ReportParameter("titulo", "ghkj");
+                var output2 = CartaDePorteManager.RebindReportViewer_ServidorExcel(ref ReporteLocal,
+                            @"Listado general de Cartas de Porte (simulando original) con foto 2", yourParams, ref output, false);
+
+                //RebindReportViewer_ServidorExcel explota (al depurar, no al ejecutar) en el setparameters, se queja del xmlserializer. 
+                //RebindReportViewerLINQ_Excel no explota
+
+                System.Diagnostics.Process.Start(output2);
+
+            }
+
+
+        }
+
+
+
+
+        [TestMethod]
+        public void bldcorredor_29608()
+        {
+
+
+
+            string sErrores = "", sTitulo = "";
+            LinqCartasPorteDataContext db = null;
+            DemoProntoEntities db2 = null;
+
+            var clientes = CartaDePorteManager.TraerCUITClientesSegunUsuario("BLD25MAYO", SC, scbdlmasterappconfig).Where(x => x != "");
+            String aaa = ParametroManager.TraerValorParametro2(SC, "ClienteBLDcorredorCUIT").NullSafeToString() ?? "";
+            var sss = aaa.Split('|').ToList();
+
+
+            // no usar mas esto, sino el DataTablePorCliente/DataTablePorClienteSQL
+
+            var q = CartaDePorteManager.CartasLINQlocalSimplificadoTipadoConCalada3(SC,
+                     "", "", "", 1, 10,
+                      CartaDePorteManager.enumCDPestado.Todas, "", -1, -1,
+                     -1, -1,
+                     -1, -1, -1, -1, CartaDePorteManager.FiltroANDOR.FiltroOR, "Ambas",
+                      new DateTime(2013, 1, 1),
+                      new DateTime(2014, 1, 1),
+                      -1, ref sTitulo, "Ambas", false, "", ref db2, "", -1, -1, 0, "", "Ambas")
+
+                        .Where(x => clientes.Contains(x.TitularCUIT) || clientes.Contains(x.IntermediarioCUIT) || clientes.Contains(x.RComercialCUIT))
+                        .ToList();
+        }
+
+
+
+
+
+
+
+
+
+        [TestMethod]
+        public void resumen_43047_43048()
+        {
+
+            // En el periodo anterior sigue habiendo bnastante diferencia
+            // Si filtra por "entrega", aparecen cartas en "exportacion" porque de esas familias hay "Originales" en ese modo
+
+
+            ReportParameter p2 = null;
+
+            var desde = new DateTime(2016, 11, 1);
+            var hasta = new DateTime(2017, 5, 31);
+            var desdeAnt = new DateTime(2015, 11, 1); //nov
+            var hastaAnt = new DateTime(2016, 5, 31); //mayo
+            //desde = desdeAnt;
+            //hasta = hastaAnt;
+
+            var MinimoNeto = 0;
+            var topclie = 99999;
+            var pv = -1;
+            var ModoExportacion = "Entregas";
+            CartaDePorteManager.enumCDPestado estado = CartaDePorteManager.enumCDPestado.DescargasMasFacturadas; //CartaDePorteManager.enumCDPestado.Todas;
+
+            ReportViewer ReporteLocal = new Microsoft.Reporting.WebForms.ReportViewer();
+
+
+
+
+
+            string output2 = @"C:\Users\Administrador\Desktop\Informe" + DateTime.Now.ToString("ddMMMyyyy_HHmmss") + ".xls";
+            ReportParameter[] yourParams2 = new ReportParameter[9];
+            yourParams2[0] = new ReportParameter("FechaDesde", desde.ToString());
+            yourParams2[1] = new ReportParameter("FechaHasta", hasta.ToString());
+            yourParams2[2] = new ReportParameter("FechaDesdeAnterior", desdeAnt.ToString());
+            yourParams2[3] = new ReportParameter("FechaHastaAnterior", hastaAnt.ToString());
+            yourParams2[4] = new ReportParameter("bMostrar1", "true");
+            yourParams2[5] = new ReportParameter("bMostrar2", "true");
+            yourParams2[6] = new ReportParameter("bMostrar3", "true");
+            yourParams2[7] = new ReportParameter("bMostrar4", "true");
+            yourParams2[8] = new ReportParameter("bMostrar5", "true");
+
+            var s = CartaDePorteManager.RebindReportViewer_ServidorExcel(ref ReporteLocal,
+                      "Williams - Resumen de Totales Generales 2.rdl", yourParams2, ref output2, false);
+
+            System.Diagnostics.Process.Start(output2);
+
+        }
 
 
 
@@ -869,7 +1456,7 @@ namespace ProntoMVC.Tests
         public void liquidacionsubcon_43045()
         {
 
-            var cliente= SQLdinamico.BuscaIdClientePreciso("ALVAREZ, JORGE", SC);
+            var cliente = SQLdinamico.BuscaIdClientePreciso("ALVAREZ, JORGE", SC);
 
 
 
@@ -897,7 +1484,7 @@ namespace ProntoMVC.Tests
 
 
 
-            
+
 
 
 
@@ -913,7 +1500,7 @@ namespace ProntoMVC.Tests
                        -1, -1, -1, -1, CartaDePorteManager.FiltroANDOR.FiltroOR, "Ambos",
                         new DateTime(2017, 6, 1),
                         new DateTime(2017, 7, 31),
-                        0,  cliente, ref sTitulo);
+                        0, cliente, ref sTitulo);
 
 
 
@@ -954,7 +1541,7 @@ namespace ProntoMVC.Tests
 
             int registrosf = 0;
 
-          //  int idcli = CartaDePorteManager.BuscarClientePorCUIT("30-55549549-4", SC, "");
+            //  int idcli = CartaDePorteManager.BuscarClientePorCUIT("30-55549549-4", SC, "");
 
             var output = SincronismosWilliamsManager.GenerarSincro("GRIMALDI GRASSI", ref sErrores, SC, "dominio", ref sTitulo
                                 , CartaDePorteManager.enumCDPestado.DescargasMasFacturadas,
@@ -1089,7 +1676,7 @@ namespace ProntoMVC.Tests
         [TestMethod]
         public void syngenta_webservice_ftp_42950()
         {
-            
+
 
             string archivoExcel = @"C:\bdl\pronto\docstest\Syngenta_10feb2017_115941.xlsx";
 
@@ -1106,7 +1693,7 @@ namespace ProntoMVC.Tests
 
 
 
-            
+
 
         }
 
@@ -2056,188 +2643,6 @@ La interface será procesa por Syngenta y si la misma no puede ser procesada cor
 
 
 
-
-
-        [TestMethod]
-        public void CampoEditableDeClientesRelacionadosAlUsuarioParaTirarInforme_28320_42549()
-        {
-
-            //probar fyo con mi usuario
-            //o hago top, o un select mas angosto, o un filtro de fecha
-
-
-            //probe con coma, pipe, punto y coma y nunca me funciona. ese usuario el 1/6 debería traer 
-            //la cp 561439022 que es de JACIUK EUGENIO FELIPE 20-08494702-5 (titular)
-
-            //Acá, mismo usuario, password y cuits, probando en Enero, debería traer la CP 558600767, donde 20 - 08494702 - 5(JACIUK EUGENIO FELIPE) es titular
-
-            //string usuario = "RODRIGORIOS"; 
-            string usuario = "Mariano";
-            var rs = "FUTUROS Y OPCIONES .COM";
-            var desde = new DateTime(2017, 1, 1);
-            var hasta = new DateTime(2017, 1, 31);
-            var estadofiltro = CartaDePorteManager.enumCDPestado.TodasMenosLasRechazadas;
-
-
-            var idVendedor = -1;
-            var idCorredor = SQLdinamico.BuscaIdVendedorPreciso(rs, SC);
-            var idDestinatario = -1;
-            var idIntermediario = -1;
-            var idRComercial = -1;
-            var idArticulo = -1;
-            var idProcedencia = -1;
-            var idDestino = -1;
-
-
-
-
-
-
-            string sql = CartaDePorteManager.DataTablePorClienteSQL(SC, "", "", "", 0, 9999999,
-                                estadofiltro, rs, idVendedor, idCorredor,
-                               idDestinatario, idIntermediario,
-                               idRComercial, idArticulo, idProcedencia, idDestino
-                                , 0, "Ambas"
-                                , desde, hasta,
-                                0, "", usuario, scbdlmasterappconfig, true, true, true, false, false, false);
-
-
-
-
-
-            ReportViewer ReporteLocal = new Microsoft.Reporting.WebForms.ReportViewer();
-            string output = @"C:\Users\Administrador\Desktop\Informe" + DateTime.Now.ToString("ddMMMyyyy_HHmmss") + ".xls";
-            ReportParameter[] yourParams = new ReportParameter[10];
-            yourParams[0] = new ReportParameter("webservice", "");
-            yourParams[1] = new ReportParameter("sServidor", "");
-            yourParams[2] = new ReportParameter("idArticulo", "-1");
-            yourParams[3] = new ReportParameter("idDestino", "-1");
-            yourParams[4] = new ReportParameter("desde", desde.ToString());
-            yourParams[5] = new ReportParameter("hasta", hasta.ToString());
-            yourParams[6] = new ReportParameter("quecontenga", "ghkgk");
-            yourParams[7] = new ReportParameter("Consulta", sql);
-            yourParams[8] = new ReportParameter("sServidorSQL", ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC));
-            yourParams[9] = new ReportParameter("titulo", "ghkj");
-            string sss = CartaDePorteManager.RebindReportViewer_ServidorExcel(ref ReporteLocal,
-                        @"Listado general de Cartas de Porte (simulando original) con foto 2", yourParams, ref output, false);
-
-
-
-            System.Diagnostics.Process.Start(output);
-
-
-
-            if (false)
-            {
-                string sErrores = "", sTitulo = "";
-                LinqCartasPorteDataContext db = null;
-                DemoProntoEntities db2 = null;
-
-
-                //UserDatosExtendidosManager.UpdateClientesRelacionadoslDelUsuario(usuario, scbdlmasterappconfig, "20-12345678-1|20-20100767-5");
-
-
-                //cuando decide si usa CartaDePorteInformesAccesoClientes o CartaDePorteInformesAccesoClientesBLDcorredor? 
-                //-con CartaDePorteManager.EsClienteBLDcorredor(HFSC.Value)
-                //bueno, esto funciona. O sea que falla esa derivacion? -pero la pagina "..BLDCorredor" usa el filtro de corredor BLD  -y si se lo sacas?
-
-                var b = CartaDePorteManager.usuariosBLD(SC).Contains(usuario);
-
-                var clientes = CartaDePorteManager.TraerCUITClientesSegunUsuario(usuario, SC, scbdlmasterappconfig).Where(x => x != "").ToList();
-
-
-                var q = CartaDePorteManager.CartasLINQlocalSimplificadoTipadoConCalada3(SC,
-                         "", "", "", 1, 99999,
-                          CartaDePorteManager.enumCDPestado.Todas, "", -1, -1,
-                         -1, -1,
-                         -1, -1, -1, -1, CartaDePorteManager.FiltroANDOR.FiltroOR, "Ambas",
-                          desde,
-                          hasta,
-                          -1, ref sTitulo, "Ambas", false, "", ref db2, "", -1, -1, 0, "", "Ambas");
-
-
-                var q2 = q.Where(x => clientes.Contains(x.TitularCUIT) || clientes.Contains(x.IntermediarioCUIT) || clientes.Contains(x.RComercialCUIT))
-                                        .ToList();
-
-                var q3 = q2.Select(x => x.NumeroCartaDePorte).ToList();
-
-                Assert.IsTrue(q3.Contains(558600767));
-
-
-
-
-
-
-
-                System.Data.Entity.Core.Objects.ObjectQuery oq = (System.Data.Entity.Core.Objects.ObjectQuery)q;
-                string sqlquery = (oq).ToTraceString();
-                var strSQL = oq.ToTraceString();
-                List<System.Data.Entity.Core.Objects.ObjectParameter> ps = oq.Parameters.ToList();
-                for (int n = ps.Count() - 1; n >= 0; n--) //para que @QueContenga no reemplace a @QueContenga2
-                {
-                    System.Data.Entity.Core.Objects.ObjectParameter parameter = ps[n];
-                    var name = "@" + parameter.Name;
-                    string value;
-                    if (parameter.Value == null)
-                    {
-                        value = " NULL ";
-
-                    }
-                    else if (!(parameter.Value.GetType() == typeof(DateTime)))
-                    {
-
-                        value = "'" + (parameter.Value ?? "").ToString() + "'";
-                    }
-                    else
-                    {
-
-                        value = "'" + (((DateTime)(parameter.Value)).ToString("s") ?? "").ToString() + "'";
-                    }
-                    strSQL = strSQL.Replace(name, value);
-                }
-
-
-
-
-
-
-                //string razonsocial = UserDatosExtendidosManager.TraerRazonSocialDelUsuario(usuario, scbdlmasterappconfig, SC);
-
-
-
-
-
-                //var l = dt.AsEnumerable().Select(x => x["NumeroCartaDePorte"].NullSafeToString()).ToList();
-
-
-                //Assert.IsTrue(dt.AsEnumerable().Select(x => x["NumeroCartaDePorte"]).Contains(558600767));
-
-
-                //ReportViewer ReporteLocal = new Microsoft.Reporting.WebForms.ReportViewer();
-                //string output = @"C:\Users\Administrador\Desktop\Informe" + DateTime.Now.ToString("ddMMMyyyy_HHmmss") + ".xls";
-                //ReportParameter[] yourParams = new ReportParameter[10];
-                //yourParams[0] = new ReportParameter("webservice", "");
-                yourParams[1] = new ReportParameter("sServidor", "");
-                yourParams[2] = new ReportParameter("idArticulo", "-1");
-                yourParams[3] = new ReportParameter("idDestino", "-1");
-                yourParams[4] = new ReportParameter("desde", desde.ToString());
-                yourParams[5] = new ReportParameter("hasta", hasta.ToString());
-                yourParams[6] = new ReportParameter("quecontenga", "ghkgk");
-                yourParams[7] = new ReportParameter("Consulta", strSQL);
-                yourParams[8] = new ReportParameter("sServidorSQL", ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC));
-                yourParams[9] = new ReportParameter("titulo", "ghkj");
-                var output2 = CartaDePorteManager.RebindReportViewer_ServidorExcel(ref ReporteLocal,
-                            @"Listado general de Cartas de Porte (simulando original) con foto 2", yourParams, ref output, false);
-
-                //RebindReportViewer_ServidorExcel explota (al depurar, no al ejecutar) en el setparameters, se queja del xmlserializer. 
-                //RebindReportViewerLINQ_Excel no explota
-
-                System.Diagnostics.Process.Start(output2);
-
-            }
-
-
-        }
 
 
 
@@ -6450,36 +6855,6 @@ Adjunto un ejemplo que tiene cartas de porte de 8 entregadores que no son Willia
 
 
 
-
-
-
-        [TestMethod]
-        public void bldcorredor_29608()
-        {
-
-
-
-            string sErrores = "", sTitulo = "";
-            LinqCartasPorteDataContext db = null;
-            DemoProntoEntities db2 = null;
-
-            var clientes = CartaDePorteManager.TraerCUITClientesSegunUsuario("BLD25MAYO", SC, scbdlmasterappconfig).Where(x => x != "");
-            String aaa = ParametroManager.TraerValorParametro2(SC, "ClienteBLDcorredorCUIT").NullSafeToString() ?? "";
-            var sss = aaa.Split('|').ToList();
-
-
-            var q = CartaDePorteManager.CartasLINQlocalSimplificadoTipadoConCalada3(SC,
-                     "", "", "", 1, 10,
-                      CartaDePorteManager.enumCDPestado.Todas, "", -1, -1,
-                     -1, -1,
-                     -1, -1, -1, -1, CartaDePorteManager.FiltroANDOR.FiltroOR, "Ambas",
-                      new DateTime(2013, 1, 1),
-                      new DateTime(2014, 1, 1),
-                      -1, ref sTitulo, "Ambas", false, "", ref db2, "", -1, -1, 0, "", "Ambas")
-
-                        .Where(x => clientes.Contains(x.TitularCUIT) || clientes.Contains(x.IntermediarioCUIT) || clientes.Contains(x.RComercialCUIT))
-                        .ToList();
-        }
 
 
 

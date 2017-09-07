@@ -478,19 +478,19 @@ Partial Class CDPMailing
             Try
 
                 Try
-                    fechadesde = iisValidSqlDate(DateTime.ParseExact(txtFechaDesde.Text, "dd/MM/yyyy", Globalization.CultureInfo.InvariantCulture), #1/1/1753#)
+                    fechadesde = iisValidSqlDate(DateTime.ParseExact(txtFechaDesde.Text, "dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture), #1/1/1753#)
 
                 Catch ex As Exception
 
-                    fechadesde = iisValidSqlDate(DateTime.ParseExact(txtFechaDesde.Text, "MM/dd/yyyy", Globalization.CultureInfo.InvariantCulture), #1/1/1753#)
+                    fechadesde = iisValidSqlDate(DateTime.ParseExact(txtFechaDesde.Text, "MM/dd/yyyy", System.Globalization.CultureInfo.InvariantCulture), #1/1/1753#)
 
                 End Try
 
                 Try
-                    fechahasta = iisValidSqlDate(DateTime.ParseExact(txtFechaHasta.Text, "dd/MM/yyyy", Globalization.CultureInfo.InvariantCulture), #1/1/2100#)
+                    fechahasta = iisValidSqlDate(DateTime.ParseExact(txtFechaHasta.Text, "dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture), #1/1/2100#)
 
                 Catch ex As Exception
-                    fechahasta = iisValidSqlDate(DateTime.ParseExact(txtFechaHasta.Text, "MM/dd/yyyy", Globalization.CultureInfo.InvariantCulture), #1/1/2100#)
+                    fechahasta = iisValidSqlDate(DateTime.ParseExact(txtFechaHasta.Text, "MM/dd/yyyy", System.Globalization.CultureInfo.InvariantCulture), #1/1/2100#)
 
                 End Try
             Catch ex As Exception

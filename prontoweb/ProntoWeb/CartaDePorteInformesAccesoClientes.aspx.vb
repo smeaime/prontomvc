@@ -59,6 +59,8 @@ Partial Class CartaDePorteInformesAccesoClientes
 
         If CartaDePorteManager.EsClienteBLDcorredor(HFSC.Value) Then
             Response.Redirect("CartaDePorteInformesAccesoClientesBLDcorredor.aspx")
+        ElseIf Membership.GetUser.UserName = "DIAZDOW" Then
+            Response.Redirect("CartaDePorteInformesAccesoClientesEspecial.aspx")
         End If
 
 
@@ -554,16 +556,16 @@ Partial Class CartaDePorteInformesAccesoClientes
         Else
 
 
-            Dim strSQL = DataTablePorClienteSQL(HFSC.Value, _
-                               "", "", "", 1, 0, _
-                               estadofiltro, rs, idVendedor, idCorredor, _
-                               idDestinatario, idIntermediario, _
-                               idRComercial, idArticulo, idProcedencia, idDestino, _
-                               IIf(cmbCriterioWHERE.SelectedValue = "todos", FiltroANDOR.FiltroAND, FiltroANDOR.FiltroOR), _
-                                               DropDownList2.Text, _
-                               Convert.ToDateTime(iisValidSqlDate(txtFechaDesde.Text, #1/1/1753#)), _
-                               Convert.ToDateTime(iisValidSqlDate(txtFechaHasta.Text, #1/1/2100#)), _
-                               cmbPuntoVenta.SelectedValue, txtQueContenga.Text, Session(SESSIONPRONTO_UserName), ConexBDLmaster(), _
+            Dim strSQL = DataTablePorClienteSQL(HFSC.Value,
+                               "", "", "", 1, 0,
+                               estadofiltro, rs, idVendedor, idCorredor,
+                               idDestinatario, idIntermediario,
+                               idRComercial, idArticulo, idProcedencia, idDestino,
+                               IIf(cmbCriterioWHERE.SelectedValue = "todos", FiltroANDOR.FiltroAND, FiltroANDOR.FiltroOR),
+                                               DropDownList2.Text,
+                               Convert.ToDateTime(iisValidSqlDate(txtFechaDesde.Text, #1/1/1753#)),
+                               Convert.ToDateTime(iisValidSqlDate(txtFechaHasta.Text, #1/1/2100#)),
+                               Val(cmbPuntoVenta.SelectedValue), txtQueContenga.Text, Session(SESSIONPRONTO_UserName), ConexBDLmaster(),
             chkTitular.Checked, chkIntermediario.Checked, chkRemComercial.Checked, chkClienteAuxiliar.Checked, chkCorredor.Checked, chkDestinatario.Checked)
 
 

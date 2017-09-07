@@ -49,7 +49,7 @@
                         { name: 'Destino', index: 'Destino', width: 80, sortable: false, editable: false, search: false, hidden: true },
                         { name: 'PuntoVenta', index: 'PuntoVenta', align: 'center', width: 40, editable: false, search: true, hidden: false, searchoptions: { sopt: ['cn','eq']  } },
                         { name: 'NumeroRemito', index: 'NumeroRemito', align: 'right', width: 80, editable: false, hidden: false },
-                   
+
                        {
                            name: 'FechaRemito', index: 'FechaRemito', width: 100, align: 'center',
                            sorttype: 'date', hidden: false, editable: false, formatoptions: { newformat: 'dd/mm/yy' },
@@ -152,5 +152,12 @@
         pageLayout.hide('east');
         pageLayout.hide('south');
     });
+
+
+    $(function () {
+        deshabilitarPanelesDerecho();
+
+    })
+
 
 </script>

@@ -432,6 +432,11 @@ $(function () {
         gridComplete: function () {
             calculaTotalImputaciones();
         },
+        loadComplete: function (data) {
+            AgregarRenglonesEnBlanco({ "IdDetalleOrdenCompra": "0", "IdArticulo": "0", "Cantidad": "0", "Descripcion": "" } , "#ListaArticulos");
+        },
+
+
         pager: $('#ListaPager1'),
         rowNum: 100,
         rowList: [10, 20, 50, 100],
@@ -452,7 +457,7 @@ $(function () {
         pgtext: "",
         pginput: false,
         rowList: "",
-        caption: '<b>DETALLE DE ARTICULOS</b>',
+        //caption: '<b>DETALLE DE ARTICULOS</b>',
         cellEdit: true,
         cellsubmit: 'clientArray'
     });
@@ -529,6 +534,7 @@ $(function () {
         loadComplete: function () {
             grid = $(this);
             $("#ListaDrag td", grid[0]).css({ background: 'rgb(234, 234, 234)' });
+
         },
 
 
