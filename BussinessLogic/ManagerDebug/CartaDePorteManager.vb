@@ -4370,14 +4370,14 @@ usuario As String, ConexBDLmaster As String,
 
 
 
-                strSQL = "SELECT CDP.IdCartaDePorte, CDP.NumeroCartaDePorte, CDP.IdUsuarioIngreso, CDP.FechaIngreso, CDP.Anulada, CDP.FechaAnulacion, 
-                                       dbo.fCalidadSerializada( CDP.IdCartaDePorte)  +  CDP.Observaciones   as Observaciones, 
-                            CDP.Cantidad, CDP.Cupo, CDP.NetoProc, CDP.BrutoPto, CDP.TaraPto, CDP.NetoPto, CDP.Acoplado, CDP.Humedad, CDP.Merma,HumedadDesnormalizada, CDP.NetoFinal, CDP.CTG   ,Patente   ,CDP.Contrato , 
-CDP.FechaDeCarga, CDP.FechaVencimiento,  CDP.SubnumeroVagon , CDP.FechaArribo  , CDP.CEE     ,CDP.FechaDescarga      ,CDP.Hora      ,CDP.NRecibo      ,CDP.CalidadDe      ,CDP.TaraFinal      ,CDP.BrutoFinal , TitularDesc, TitularCUIT, 	
-IntermediarioDesc,              IntermediarioCUIT, 		RComercialDesc,             RComercialCUIT, 		CorredorDesc,              CorredorCUIT, DestinatarioDesc,DestinatarioCUIT             ,Producto, 			TransportistaCUIT,             
-TransportistaDesc, 			ChoferCUIT, 			ChoferDesc,            ProcedenciaDesc, 		ProcedenciaCodigoPostal, 		ProcedenciaCodigoONCAA,           ProcedenciaProvinciaDesc,       DestinoDesc   ,  
-EntregadorDesc,Cosecha, CalidadDesc,  DestinoCodigoONCAA, KmARecorrer	,Tarifa ,EstablecimientoDesc    ,CDP.PathImagen      ,CDP.PathImagen2     ,ClienteAuxiliarDesc,CorredorDesc2  CorredorCUIT2,ClientePagadorFleteDesc, 
-ProcedenciaProvinciaPartido, ProcedenciaPartidoNormalizadaCodigo, DestinoProvinciaDesc, ProcedenciaPartidoNormalizada, EntregadorCUIT, CodigoAFIP, MermaVolatil,ClaveEncriptada          FROM (" & strSQL & ") AS CDP"
+                strSQL = "SELECT CDP.IdCartaDePorte, CDP.NumeroCartaDePorte, CDP.IdUsuarioIngreso, CDP.FechaIngreso, CDP.Anulada, CDP.FechaAnulacion, " & _
+          "                              dbo.fCalidadSerializada( CDP.IdCartaDePorte)  +  CDP.Observaciones   as Observaciones, " & _
+        "         CDP.Cantidad, CDP.Cupo, CDP.NetoProc, CDP.BrutoPto, CDP.TaraPto, CDP.NetoPto, CDP.Acoplado, CDP.Humedad, CDP.Merma, HumedadDesnormalizada, CDP.NetoFinal, CDP.CTG, Patente, CDP.Contrato, " & _
+      "           CDP.FechaDeCarga, CDP.FechaVencimiento, CDP.SubnumeroVagon, CDP.FechaArribo, CDP.CEE, CDP.FechaDescarga, CDP.Hora, CDP.NRecibo, CDP.CalidadDe, CDP.TaraFinal, CDP.BrutoFinal, TitularDesc, TitularCUIT, " & _
+    "             IntermediarioDesc, IntermediarioCUIT, RComercialDesc, RComercialCUIT, CorredorDesc, CorredorCUIT, DestinatarioDesc, DestinatarioCUIT, Producto, TransportistaCUIT, " & _
+  "               TransportistaDesc, ChoferCUIT, ChoferDesc, ProcedenciaDesc, ProcedenciaCodigoPostal, ProcedenciaCodigoONCAA, ProcedenciaProvinciaDesc, DestinoDesc, " & _
+" EntregadorDesc,Cosecha, CalidadDesc,  DestinoCodigoONCAA, KmARecorrer	,Tarifa ,EstablecimientoDesc    ,CDP.PathImagen      ,CDP.PathImagen2     ,ClienteAuxiliarDesc,CorredorDesc2  CorredorCUIT2,ClientePagadorFleteDesc, " & _
+" ProcedenciaProvinciaPartido, ProcedenciaPartidoNormalizadaCodigo, DestinoProvinciaDesc, ProcedenciaPartidoNormalizada, EntregadorCUIT, CodigoAFIP, MermaVolatil,ClaveEncriptada          FROM (" & strSQL & ") AS CDP"
 
 
 

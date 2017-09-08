@@ -307,18 +307,6 @@ function TodaLaGrillaEnEditMode(grilla) {
     }
 }
 
-function sacarDeEditMode2(grilla) {
-    var r, c;
-  
-
-    for (r = 0; r < grilla.rows.length; c++) {
-        for (c = 0; c < l; c++) {
-            grilla.jqGrid('saveCell', r, c);
-        }
-    }
-
-}
-
 function sacarDeEditMode() {
 
     // grabando o deshaciendo???
@@ -346,6 +334,22 @@ function sacarDeEditMode() {
 
 }
 
+function sacarDeEditMode2(grilla) {
+    var r, c;
+
+
+    for (r = 0; r < grilla.rows.length; c++) {
+        for (c = 0; c < l; c++) {
+            grilla.jqGrid('saveCell', r, c);
+        }
+    }
+
+}
+
+function sacarDeEditMode3(lastRowIndex, lastColIndex) {
+
+    jQuery('#Lista').jqGrid('restoreCell', lastRowIndex, lastColIndex, true);
+}
 
 
 function RefrescaAnchoGrillaDetalle() {
@@ -368,9 +372,6 @@ function ReajustarAlto(g) {
     //if (rows >= 4) g.jqGrid('setGridHeight', rows * 40, true);
 
 }
-
-
-
 
 
 function QuitarRenglonDragDrop(idazar, getdata) {
