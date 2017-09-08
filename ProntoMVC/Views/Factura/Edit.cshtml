@@ -364,6 +364,7 @@
                             <a class="btn  btn-large" style="color: Black" href="@Url.Action("ImprimirConInteropPDF", new { @id = Model.IdFactura })">
                                 <i class="icon-print"></i>&nbsp;Imprimir
                             </a>
+                            @Html.ActionLink("Nueva Factura", "Edit/-1", null, new { @class = "btn btn-large btn-primary"})
                             }
                             @*<input type="button" id="probar" value="Probar" class="btn  btn-large btn-primary " usesubmitbehavior="false" />*@
                             <script>
@@ -392,17 +393,17 @@
                                 });
 
                                 function CargarUsuariosConPermisoDeAnulacion() {
-                                    var combo = $("#mySelect")
-                                    combo.find("option:gt(0)").remove();
-                                    combo.find("option:first").text("Cargando...");
-                                    $.getJSON(ROOT + 'Articulo/GetStoreProc?sp=Empleados_TX_ParaAnularPorFormulario&p1=23', {
-                                    }, function (json) {
-                                        combo.find("option:first").text("");
-                                        for (var i = 0; i < json.length; i++) {
-                                            $("<option/>").attr("value", json[i].value).text(json[i].title).appendTo(combo);
-                                        }
-                                    });
-                                }
+                                var combo = $("#mySelect")
+                                combo.find("option:gt(0)").remove();
+                                combo.find("option:first").text("Cargando...");
+                                $.getJSON(ROOT + 'Articulo/GetStoreProc?sp=Empleados_TX_ParaAnularPorFormulario&p1=23', {
+                                }, function (json) {
+                                    combo.find("option:first").text("");
+                                    for (var i = 0; i < json.length; i++) {
+                                        $("<option/>").attr("value", json[i].value).text(json[i].title).appendTo(combo);
+                                    }
+                                });
+                            }
                             })
                             </script>
                             @Html.ActionLink("Volver al listado", "Index", null, new { @class = "btn btn-link" })
