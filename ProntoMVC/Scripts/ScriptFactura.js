@@ -1,6 +1,11 @@
-﻿$(function () {
+﻿    var target;
+
+
+
+$(function () {
     $("#loading").hide();
 
+    
 
 
     'use strict';
@@ -37,8 +42,11 @@
 
     window.parent.document.body.onclick = saveEditedCell; // attach to parent window if any
     document.body.onclick = saveEditedCell; // attach to current document.
+
     function saveEditedCell(evt) {
-        var target = $(evt.target);
+        //return;
+
+        target  = $(evt.target);
 
         if ($grid) {
             var isCellClicked = $grid.find(target).length; // check if click is inside jqgrid
@@ -62,7 +70,10 @@
             lastSelectediRow2 = lastSelectediRow;
             lastSelectediCol2 = lastSelectediCol;
         }
+
     };
+
+
 
     function EliminarSeleccionados(grid) {
         var selectedIds = grid.jqGrid('getGridParam', 'selarrrow');
@@ -337,16 +348,35 @@
         },
         beforeEditCell: function (rowid, cellname, value, iRow, iCol) {
         },
-        afterEditCell: function (rowid, cellName, cellValue, iRow, iCol) {
-            //if (cellName == 'FechaVigencia') {
-            //    jQuery("#" + iRow + "_FechaVigencia", "#ListaPolizas").datepicker({ dateFormat: "dd/mm/yy" });
-            //}
-        },
+
+
+afterEditCell: function (rowid, cellName, cellValue, iRow, iCol) {
+    var cellDOM = this.rows[iRow].cells[iCol], oldKeydown,
+        $cellInput = $('input, select, textarea', cellDOM),
+        events = $cellInput.data('events'),
+        $this = $(this);
+    if (events && events.keydown && events.keydown.length) {
+        oldKeydown = events.keydown[0].handler;
+        $cellInput.unbind('keydown', oldKeydown);
+        $cellInput.bind('keydown', function (e) {
+            $this.jqGrid('setGridParam', {cellEdit: true});
+            oldKeydown.call(this, e);
+            $this.jqGrid('setGridParam', {cellEdit: false});
+        }).bind('focusout', function (e) {
+            $this.jqGrid('setGridParam', {cellEdit: true});
+            $this.jqGrid('restoreCell', iRow, iCol, true);
+            $this.jqGrid('setGridParam', {cellEdit: false});
+            $(cellDOM).removeClass("ui-state-highlight");
+        });
+    }
+},
+
+
         afterSaveCell: function (rowid) {
-            calculaTotalImputaciones();
+            //calculaTotalImputaciones();
         },
         gridComplete: function () {
-            calculaTotalImputaciones();
+            //calculaTotalImputaciones();
         },
 
         loadComplete: function () { 
@@ -1383,6 +1413,8 @@ function ActualizarPuntosDeVenta() {
 }
 
 calculaTotalImputaciones = function () {
+    return;
+
     var imp = 0, imp2 = 0, grav = "", letra = "", porciva = 0, ivaitem = 0;
 
     letra = $("#TipoABC").val();
