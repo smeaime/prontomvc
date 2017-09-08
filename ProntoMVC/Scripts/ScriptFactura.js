@@ -34,33 +34,37 @@
 
     $.extend($.jgrid.inlineEdit, { keys: true });
 
+    //Esto queda desahibilitado porque cuando hago click en un control text no le pasa el focus (tengo que hacer click 2 veces)
     window.parent.document.body.onclick = saveEditedCell; // attach to parent window if any
     document.body.onclick = saveEditedCell; // attach to current document.
     function saveEditedCell(evt) {
         var target = $(evt.target);
 
-        if ($grid) {
-            var isCellClicked = $grid.find(target).length; // check if click is inside jqgrid
-            if (gridCellWasClicked && !isCellClicked) // check if a valid click
-            {
-                gridCellWasClicked = false;
-                $grid.jqGrid("saveCell", lastSelectediRow2, lastSelectediCol2);
-            }
-        }
+        //if ($grid) {
+        //    var isCellClicked = $grid.find(target).length; // check if click is inside jqgrid
+        //    if (gridCellWasClicked && !isCellClicked) // check if a valid click
+        //    {
+        //        gridCellWasClicked = false;
+        //        $grid.jqGrid("saveCell", lastSelectediRow2, lastSelectediCol2);
+        //        //target.focus();
+        //    }
+        //}
 
-        $grid = "";
-        gridCellWasClicked = false;
+        //$grid = "";
+        //gridCellWasClicked = false;
 
-        if (jQuery("#Lista").find(target).length) {
-            $grid = $('#Lista');
-            grillaenfoco = true;
-        }
+        //if (jQuery("#Lista").find(target).length) {
+        //    $grid = $('#Lista');
+        //    grillaenfoco = true;
+        //}
 
-        if (grillaenfoco) {
-            gridCellWasClicked = true; // flat to check if there is a cell been edited.
-            lastSelectediRow2 = lastSelectediRow;
-            lastSelectediCol2 = lastSelectediCol;
-        }
+        //if (grillaenfoco) {
+        //    gridCellWasClicked = true; // flat to check if there is a cell been edited.
+        //    lastSelectediRow2 = lastSelectediRow;
+        //    lastSelectediCol2 = lastSelectediCol;
+        //}
+        //$('#CAE').focus();
+        target.focus();
     };
 
     function EliminarSeleccionados(grid) {
@@ -131,7 +135,6 @@
 
         return [Importe];
     };
-
 
     function RefrescarRestoDelRenglon(rowid, name, val, iRow, iCol) {
         var dataIds = $('#Lista').jqGrid('getDataIDs'); // me traigo los datos
@@ -277,6 +280,35 @@
                     {
                         name: 'Codigo', index: 'Codigo', width: 120, align: 'center', editable: true, editrules: { required: false }, edittype: 'text', label: 'TB',
                         editoptions: {
+                            dataEvents: [
+                                {
+                                    type: 'focusout',
+                                    fn: function (e) {
+                                        $('#Lista').jqGrid("saveCell", lastSelectediRow, lastSelectediCol);
+
+
+                                        var newCodeValue = $(e.target).val();
+                                        // get the information from any source about the
+                                        // description of based on the new code value
+                                        // and construct full new HTML contain of the "description"
+                                        // cell. It should include "<input>", "<select>" or
+                                        // some another input elements. Let us you save the result
+                                        // in the variable descriptionEditHtml then you can use
+
+                                        // populate descriptionEditHtml in the "description" edit cell
+                                        if ($(e.target).is('.FormElement')) {
+                                            // form editing
+                                            var form = $(e.target).closest('form.FormGrid');
+                                            $("#description.FormElement", form[0]).html(descriptionEditHtml);
+                                        } else {
+                                            // inline editing
+                                            var row = $(e.target).closest('tr.jqgrow');
+                                            var rowId = row.attr('id');
+                                            $("#" + rowId + "_description", row[0]).html(descriptionEditHtml);
+                                        }
+                                    }
+                                }
+                            ],
                             dataInit: function (elem) {
                                 var NoResultsLabel = "No se encontraron resultados";
                                 $(elem).autocomplete({
@@ -462,6 +494,8 @@
             //if (cellName == 'FechaVigencia') {
             //    jQuery("#" + iRow + "_FechaVigencia", "#ListaPolizas").datepicker({ dateFormat: "dd/mm/yy" });
             //}
+            lastSelectediRow = iRow;
+            lastSelectediCol = iCol;
         },
         afterSaveCell: function (rowid, cellname, value, iRow, iCol) {
             RefrescarRestoDelRenglon(rowid, cellname, value, iRow, iCol);
@@ -1632,6 +1666,7 @@ function unformatNumber(cellvalue, options, rowObject) {
 function formatNumber(cellvalue, options, rowObject) {
     return cellvalue.replace(".", ",");
 }
+
 
 // Para usar en la edicion de una fila afterSubmit:processAddEdit,
 function processAddEdit(response, postdata) {
