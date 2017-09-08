@@ -283,8 +283,16 @@
       <FullPath>Listado general de Cartas de Porte (simulando original)  .rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
+      <Name>Listado general de Cartas de Porte (simulando original)  para Corredores.rdl</Name>
+      <FullPath>Listado general de Cartas de Porte (simulando original)  para Corredores.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
       <Name>Listado general de Cartas de Porte (simulando original) Amaggi.rdl</Name>
       <FullPath>Listado general de Cartas de Porte (simulando original) Amaggi.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Listado general de Cartas de Porte (simulando original) con foto  - Cresud.rdl</Name>
+      <FullPath>Listado general de Cartas de Porte (simulando original) con foto  - Cresud.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
       <Name>Listado general de Cartas de Porte (simulando original) con foto  - Dow.rdl</Name>
@@ -299,6 +307,10 @@
       <FullPath>Listado general de Cartas de Porte (simulando original) con foto  - Grobo.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
+      <Name>Listado general de Cartas de Porte (simulando original) con foto  - Multigrain.rdl</Name>
+      <FullPath>Listado general de Cartas de Porte (simulando original) con foto  - Multigrain.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
       <Name>Listado general de Cartas de Porte (simulando original) con foto  - SpeedAgro.rdl</Name>
       <FullPath>Listado general de Cartas de Porte (simulando original) con foto  - SpeedAgro.rdl</FullPath>
     </ProjectItem>
@@ -309,6 +321,10 @@
     <ProjectItem>
       <Name>Listado general de Cartas de Porte (simulando original) con foto Buscador sin Webservice.rdl</Name>
       <FullPath>Listado general de Cartas de Porte (simulando original) con foto Buscador sin Webservice.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Listado general de Cartas de Porte (simulando original) con foto con numero recibo.rdl</Name>
+      <FullPath>Listado general de Cartas de Porte (simulando original) con foto con numero recibo.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
       <Name>Listado general de Cartas de Porte (simulando original) con foto Webservice.rdl</Name>
@@ -572,6 +588,20 @@
         <OutputPath>bin\Debug</OutputPath>
         <TargetServerVersion>SSRS2008R2</TargetServerVersion>
         <TargetServerURL>http://sqlmvc/ReportServer</TargetServerURL>
+        <TargetFolder>Pronto informes</TargetFolder>
+        <TargetDataSourceFolder>Data Sources</TargetDataSourceFolder>
+        <OverwriteDataSources>true</OverwriteDataSources>
+        <TargetDatasetFolder>Datasets</TargetDatasetFolder>
+        <OverwriteDatasets>true</OverwriteDatasets>
+        <TargetReportPartFolder>Report Parts</TargetReportPartFolder>
+      </Options>
+    </Configuration>
+    <Configuration>
+      <Name>DebugServer3</Name>
+      <Options>
+        <OutputPath>bin\DebugServer3</OutputPath>
+        <TargetServerVersion>SSRS2008R2</TargetServerVersion>
+        <TargetServerURL>http://serversql3/ReportServer</TargetServerURL>
         <TargetFolder>Pronto informes</TargetFolder>
         <TargetDataSourceFolder>Data Sources</TargetDataSourceFolder>
         <OverwriteDataSources>true</OverwriteDataSources>

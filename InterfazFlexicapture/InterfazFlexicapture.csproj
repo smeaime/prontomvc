@@ -47,6 +47,9 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'DebugServer3|AnyCPU'">
+    <OutputPath>bin\DebugServer3\</OutputPath>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="BitMiracle.LibTiff.NET">
       <HintPath>..\prontoweb\Bin\BitMiracle.LibTiff.NET.dll</HintPath>

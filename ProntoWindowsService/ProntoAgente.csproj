@@ -48,9 +48,12 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'DebugServer3|AnyCPU'">
+    <OutputPath>bin\DebugServer3\</OutputPath>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="BusinessObject">
-      <HintPath>..\..\bussinessobject\BusinessObject\bin\Debug\BusinessObject.dll</HintPath>
+      <HintPath>..\packagesotros\BusinessObject.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework">
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net40\EntityFramework.dll</HintPath>
