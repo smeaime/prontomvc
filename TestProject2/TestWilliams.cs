@@ -880,8 +880,9 @@ namespace ProntoMVC.Tests
 
             var dr = CDPMailFiltrosManager2.TraerMetadata(SC, -1).NewRow();
 
-
-            dr["ModoImpresion"] = "Excel";
+            
+            dr["ModoImpresion"] = "Grobo";
+            //dr["ModoImpresion"] = "Excel";
             //dr["ModoImpresion"] = "HImag2";
             //dr["ModoImpresion"] = "ExcHtm";
             //dr["ModoImpresion"] = "Imagen";
