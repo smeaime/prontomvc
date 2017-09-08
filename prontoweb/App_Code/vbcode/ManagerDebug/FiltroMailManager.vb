@@ -349,7 +349,7 @@ Namespace Pronto.ERP.Bll
 
 
 
-            If bDescargaHtml Or True Then
+            If bDescargaHtml Then
                 Return CDPMailFiltrosManager2.EnviarMailFiltroPorRegistro_DLL(SC, fechadesde, fechahasta, puntoventa, titulo, estado, dr, sError, bVistaPrevia, SmtpServer, SmtpUser, SmtpPass, SmtpPort, CCOaddress, sError2)
 
             End If
