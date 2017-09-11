@@ -14390,7 +14390,8 @@ Namespace Pronto.ERP.Bll
                     Dim cp2 = CartaDePorteManager.GetItem(SC, .IdCartaDePorte)
 
                     sb &= Int(Val(cp2.CalidadMermaVolatilMerma)).ToString.PadLeft(10) 'KgsZaran	STRING(10)	Kilos zarandeo (sin decimales))    726)    735
-                    sb &= Int(Val(.NetoProc - cp2.CalidadMermaVolatilMerma)).ToString.PadLeft(10) 'KgsZaran	STRING(10)	Kilos zarandeo (sin decimales))    726)    735
+                    'sb &= Int(Val(.NetoProc - cp2.CalidadMermaVolatilMerma)).ToString.PadLeft(10) 'KgsZaran	STRING(10)	Kilos zarandeo (sin decimales))    726)    735
+                    sb &= Int(Val(.NetoProc)).ToString.PadLeft(10) 'KgsZaran	STRING(10)	Kilos zarandeo (sin decimales))    726)    735
 
 
 
