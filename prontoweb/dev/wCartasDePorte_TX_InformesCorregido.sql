@@ -178,7 +178,7 @@ CDP.Exporta
             isnull(CLIFAC.cuit,'') AS ClienteFacturadoCUIT,
 
             
-            Calidades.Descripcion AS CalidadDesc,
+            isnull(Calidades.Descripcion,'') AS CalidadDesc,
 			ExcluirDeSubcontratistas
 
 
