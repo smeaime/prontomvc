@@ -12,6 +12,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Archivos Compartidos", "Arc
 		prontoweb\Documentos\estadisticas descarga wCartasDePorte_TX_EstadisticasDeDescarga.sql = prontoweb\Documentos\estadisticas descarga wCartasDePorte_TX_EstadisticasDeDescarga.sql
 		..\ProntoWeb\Documentos\Factura_Williams.dot = ..\ProntoWeb\Documentos\Factura_Williams.dot
 		ProntoMVC\Documentos\sql\fSQL_GetDataTableFiltradoYPaginado  wCartasPorte_WraperDeLaTVF.sql = ProntoMVC\Documentos\sql\fSQL_GetDataTableFiltradoYPaginado  wCartasPorte_WraperDeLaTVF.sql
+		horas.sql = horas.sql
 		..\ProntoWeb\Documentos\dev\instalacion.docx = ..\ProntoWeb\Documentos\dev\instalacion.docx
 		..\ProntoWeb\Documentos\dev\Nuevas_Tablas WEB.sql = ..\ProntoWeb\Documentos\dev\Nuevas_Tablas WEB.sql
 		..\ProntoWeb\Documentos\dev\Nuevos_SP WEB desarrollo.sql = ..\ProntoWeb\Documentos\dev\Nuevos_SP WEB desarrollo.sql
