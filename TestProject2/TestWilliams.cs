@@ -860,6 +860,43 @@ namespace ProntoMVC.Tests
 
 
 
+
+        [TestMethod]
+        public void SincroAMAGGI_45323()
+        {
+
+
+
+
+            string sErrores = "", sTitulo = "";
+            LinqCartasPorteDataContext db = null;
+
+            // el _CONST_MAXROWS sale del app.config
+
+            int registrosf = 0;
+
+            int idcli = CartaDePorteManager.BuscarClientePorCUIT("30-71161551-9", SC, "");
+
+
+            var output2 = SincronismosWilliamsManager.GenerarSincro("AMAGGI (DESCARGAS)", ref sErrores, SC, "dominio", ref sTitulo
+                          , CartaDePorteManager.enumCDPestado.DescargasMasFacturadas,
+                       "", -1, -1,
+                  idcli, -1,
+                    -1, -1, -1, -1,
+                   CartaDePorteManager.FiltroANDOR.FiltroOR, "Entregas",
+                  new DateTime(2017, 1, 10), new DateTime(2017, 1, 15),
+                  -1, "Ambas", false, "", "", -1, ref registrosf, 4000);
+
+            
+
+
+            System.Diagnostics.Process.Start(output2);
+        }
+
+
+
+
+
         [TestMethod]
         public void FormatoNuevo_42771_2()
         {
@@ -880,7 +917,17 @@ namespace ProntoMVC.Tests
 
             var dr = CDPMailFiltrosManager2.TraerMetadata(SC, -1).NewRow();
 
+
+
+            //falta migrar a servidor:
+            //grobo
+            //cresud
+            //multigrain
+            //recibo
+            //corredores
+
             
+
             dr["ModoImpresion"] = "Grobo";
             //dr["ModoImpresion"] = "Excel";
             //dr["ModoImpresion"] = "HImag2";
