@@ -264,9 +264,9 @@ Global
 		{4E7AC3B5-C7E4-4A81-8539-ECE39D8794AC}.DebugWilly|Any CPU.ActiveCfg = DebugWilly
 		{4E7AC3B5-C7E4-4A81-8539-ECE39D8794AC}.DebugWilly|Any CPU.Build.0 = DebugWilly
 		{4E7AC3B5-C7E4-4A81-8539-ECE39D8794AC}.DebugWilly|Any CPU.Deploy.0 = DebugWilly
-		{4E7AC3B5-C7E4-4A81-8539-ECE39D8794AC}.DebugWilly|Mixed Platforms.ActiveCfg = DebugWilly
-		{4E7AC3B5-C7E4-4A81-8539-ECE39D8794AC}.DebugWilly|Mixed Platforms.Build.0 = DebugWilly
-		{4E7AC3B5-C7E4-4A81-8539-ECE39D8794AC}.DebugWilly|Mixed Platforms.Deploy.0 = DebugWilly
+		{4E7AC3B5-C7E4-4A81-8539-ECE39D8794AC}.DebugWilly|Mixed Platforms.ActiveCfg = DebugServer3
+		{4E7AC3B5-C7E4-4A81-8539-ECE39D8794AC}.DebugWilly|Mixed Platforms.Build.0 = DebugServer3
+		{4E7AC3B5-C7E4-4A81-8539-ECE39D8794AC}.DebugWilly|Mixed Platforms.Deploy.0 = DebugServer3
 		{4E7AC3B5-C7E4-4A81-8539-ECE39D8794AC}.DebugWilly|x86.ActiveCfg = DebugWilly
 		{4E7AC3B5-C7E4-4A81-8539-ECE39D8794AC}.DebugWilly|x86.Build.0 = DebugWilly
 		{4E7AC3B5-C7E4-4A81-8539-ECE39D8794AC}.DebugWilly|x86.Deploy.0 = DebugWilly

@@ -7500,7 +7500,7 @@ set @FechaHasta='20170228'
                       <Value>=Fields!mes.Value</Value>
                     </SortExpression>
                   </SortExpressions>
-                  <Label />
+                  <Label>=MonthName(Fields!mes.Value)</Label>
                 </ChartMember>
               </ChartMembers>
             </ChartCategoryHierarchy>
@@ -7555,7 +7555,9 @@ set @FechaHasta='20170228'
                       <ChartDataLabel>
                         <Style />
                       </ChartDataLabel>
-                      <Style />
+                      <Style>
+                        <Color>#eb0d1f6d</Color>
+                      </Style>
                       <ChartMarker>
                         <Style />
                       </ChartMarker>
@@ -7572,6 +7574,12 @@ set @FechaHasta='20170228'
                       <Style />
                     </ChartDataLabel>
                   </ChartEmptyPoints>
+                  <CustomProperties>
+                    <CustomProperty>
+                      <Name>PointWidth</Name>
+                      <Value>0.4</Value>
+                    </CustomProperty>
+                  </CustomProperties>
                   <ValueAxisName>Primary</ValueAxisName>
                   <CategoryAxisName>Primary</CategoryAxisName>
                   <ChartSmartLabel>
@@ -7588,7 +7596,9 @@ set @FechaHasta='20170228'
                       <ChartDataLabel>
                         <Style />
                       </ChartDataLabel>
-                      <Style />
+                      <Style>
+                        <Color>#596bba</Color>
+                      </Style>
                       <ChartMarker>
                         <Style />
                       </ChartMarker>
@@ -7605,6 +7615,12 @@ set @FechaHasta='20170228'
                       <Style />
                     </ChartDataLabel>
                   </ChartEmptyPoints>
+                  <CustomProperties>
+                    <CustomProperty>
+                      <Name>PointWidth</Name>
+                      <Value>0.4</Value>
+                    </CustomProperty>
+                  </CustomProperties>
                   <ValueAxisName>Primary</ValueAxisName>
                   <CategoryAxisName>Primary</CategoryAxisName>
                   <ChartSmartLabel>
@@ -7625,6 +7641,7 @@ set @FechaHasta='20170228'
                         <Border>
                           <Width>2pt</Width>
                         </Border>
+                        <Color>#eb0d1f6d</Color>
                       </Style>
                       <ChartMarker>
                         <Size>4pt</Size>
@@ -7671,6 +7688,7 @@ set @FechaHasta='20170228'
                         <Border>
                           <Width>2pt</Width>
                         </Border>
+                        <Color>#596bba</Color>
                       </Style>
                       <ChartMarker>
                         <Size>375pt</Size>
@@ -18137,7 +18155,7 @@ set @FechaHasta='20170228'
       <Nullable>true</Nullable>
       <DefaultValue>
         <Values>
-          <Value>=DateAdd( "m",-7,Now())</Value>
+          <Value>=DateAdd( "m",-9,Now())</Value>
         </Values>
       </DefaultValue>
       <Prompt>Fecha Desde</Prompt>
@@ -18147,7 +18165,7 @@ set @FechaHasta='20170228'
       <Nullable>true</Nullable>
       <DefaultValue>
         <Values>
-          <Value>=DateAdd( "m",-6,Now())</Value>
+          <Value>=DateAdd( "m",-5,Now())</Value>
         </Values>
       </DefaultValue>
       <Prompt>Fecha Hasta</Prompt>
@@ -18157,7 +18175,7 @@ set @FechaHasta='20170228'
       <Nullable>true</Nullable>
       <DefaultValue>
         <Values>
-          <Value>=DateAdd( "m",-10,Now())</Value>
+          <Value>=DateAdd( "m",-21,Now())</Value>
         </Values>
       </DefaultValue>
       <Prompt>Fecha Desde Anterior</Prompt>
@@ -18167,7 +18185,7 @@ set @FechaHasta='20170228'
       <Nullable>true</Nullable>
       <DefaultValue>
         <Values>
-          <Value>=DateAdd( "m",-9,Now())</Value>
+          <Value>=DateAdd( "m",-17,Now())</Value>
         </Values>
       </DefaultValue>
       <Prompt>Fecha Hasta Anterior</Prompt>
