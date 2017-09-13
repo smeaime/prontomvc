@@ -1,0 +1,353 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2008/01/reportdefinition"><Body><ReportItems><Tablix Name="table1"><TablixBody><TablixColumns><TablixColumn><Width>1.10417in</Width></TablixColumn><TablixColumn><Width>1.11458in</Width></TablixColumn><TablixColumn><Width>2.63542in</Width></TablixColumn><TablixColumn><Width>0.77083in</Width></TablixColumn><TablixColumn><Width>1.20833in</Width></TablixColumn><TablixColumn><Width>3.75in</Width></TablixColumn><TablixColumn><Width>1in</Width></TablixColumn><TablixColumn><Width>1in</Width></TablixColumn><TablixColumn><Width>0.98425in</Width></TablixColumn><TablixColumn><Width>2.19259in</Width></TablixColumn><TablixColumn><Width>2.18217in</Width></TablixColumn><TablixColumn><Width>2.36967in</Width></TablixColumn></TablixColumns><TablixRows><TablixRow><Height>0.22in</Height><TablixCells><TablixCell><CellContents><Textbox Name="textbox2"><CanGrow>true</CanGrow><KeepTogether>true</KeepTogether><Paragraphs><Paragraph><TextRuns><TextRun><Value>Jerarquia</Value><Style><FontFamily>Tahoma</FontFamily><FontWeight>Bold</FontWeight><Color>White</Color></Style></TextRun></TextRuns><Style><TextAlign>Center</TextAlign></Style></Paragraph></Paragraphs><rd:DefaultName xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">textbox2</rd:DefaultName><Style><Border><Color>LightGrey</Color><Style>Solid</Style></Border><BackgroundColor>SteelBlue</BackgroundColor><PaddingLeft>2pt</PaddingLeft><PaddingRight>2pt</PaddingRight><PaddingTop>2pt</PaddingTop><PaddingBottom>2pt</PaddingBottom></Style></Textbox></CellContents></TablixCell><TablixCell><CellContents><Textbox Name="Textbox18"><CanGrow>true</CanGrow><KeepTogether>true</KeepTogether><Paragraphs><Paragraph><TextRuns><TextRun><Value>Codigo</Value><Style><FontFamily>Tahoma</FontFamily><FontWeight>Bold</FontWeight><Color>White</Color></Style></TextRun></TextRuns><Style><TextAlign>Center</TextAlign></Style></Paragraph></Paragraphs><rd:DefaultName xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">Textbox18</rd:DefaultName><Style><Border><Color>LightGrey</Color><Style>Solid</Style></Border><BackgroundColor>SteelBlue</BackgroundColor><PaddingLeft>2pt</PaddingLeft><PaddingRight>2pt</PaddingRight><PaddingTop>2pt</PaddingTop><PaddingBottom>2pt</PaddingBottom></Style></Textbox></CellContents></TablixCell><TablixCell><CellContents><Textbox Name="Textbox21"><CanGrow>true</CanGrow><KeepTogether>true</KeepTogether><Paragraphs><Paragraph><TextRuns><TextRun><Value>Cuenta </Value><Style><FontFamily>Tahoma</FontFamily><FontWeight>Bold</FontWeight><Color>White</Color></Style></TextRun></TextRuns><Style><TextAlign>Center</TextAlign></Style></Paragraph></Paragraphs><rd:DefaultName xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">Textbox21</rd:DefaultName><Style><Border><Color>LightGrey</Color><Style>Solid</Style></Border><BackgroundColor>SteelBlue</BackgroundColor><PaddingLeft>2pt</PaddingLeft><PaddingRight>2pt</PaddingRight><PaddingTop>2pt</PaddingTop><PaddingBottom>2pt</PaddingBottom></Style></Textbox></CellContents></TablixCell><TablixCell><CellContents><Textbox Name="textbox4"><CanGrow>true</CanGrow><KeepTogether>true</KeepTogether><Paragraphs><Paragraph><TextRuns><TextRun><Value>Fecha</Value><Style><FontFamily>Tahoma</FontFamily><FontWeight>Bold</FontWeight><Color>White</Color></Style></TextRun></TextRuns><Style><TextAlign>Center</TextAlign></Style></Paragraph></Paragraphs><rd:DefaultName xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">textbox4</rd:DefaultName><Style><Border><Color>LightGrey</Color><Style>Solid</Style></Border><BackgroundColor>SteelBlue</BackgroundColor><PaddingLeft>2pt</PaddingLeft><PaddingRight>2pt</PaddingRight><PaddingTop>2pt</PaddingTop><PaddingBottom>2pt</PaddingBottom></Style></Textbox></CellContents></TablixCell><TablixCell><CellContents><Textbox Name="textbox5"><CanGrow>true</CanGrow><KeepTogether>true</KeepTogether><Paragraphs><Paragraph><TextRuns><TextRun><Value>Comprobante</Value><Style><FontFamily>Tahoma</FontFamily><FontWeight>Bold</FontWeight><Color>White</Color></Style></TextRun></TextRuns><Style><TextAlign>Center</TextAlign></Style></Paragraph></Paragraphs><rd:DefaultName xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">textbox5</rd:DefaultName><Style><Border><Color>LightGrey</Color><Style>Solid</Style></Border><BackgroundColor>SteelBlue</BackgroundColor><PaddingLeft>2pt</PaddingLeft><PaddingRight>2pt</PaddingRight><PaddingTop>2pt</PaddingTop><PaddingBottom>2pt</PaddingBottom></Style></Textbox></CellContents></TablixCell><TablixCell><CellContents><Textbox Name="textbox6"><CanGrow>true</CanGrow><KeepTogether>true</KeepTogether><Paragraphs><Paragraph><TextRuns><TextRun><Value>Detalle</Value><Style><FontFamily>Tahoma</FontFamily><FontWeight>Bold</FontWeight><Color>White</Color></Style></TextRun></TextRuns><Style><TextAlign>Center</TextAlign></Style></Paragraph></Paragraphs><rd:DefaultName xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">textbox6</rd:DefaultName><Style><Border><Color>LightGrey</Color><Style>Solid</Style></Border><BackgroundColor>SteelBlue</BackgroundColor><PaddingLeft>2pt</PaddingLeft><PaddingRight>2pt</PaddingRight><PaddingTop>2pt</PaddingTop><PaddingBottom>2pt</PaddingBottom></Style></Textbox></CellContents></TablixCell><TablixCell><CellContents><Textbox Name="textbox8"><CanGrow>true</CanGrow><KeepTogether>true</KeepTogether><Paragraphs><Paragraph><TextRuns><TextRun><Value>Debe</Value><Style><FontFamily>Tahoma</FontFamily><FontWeight>Bold</FontWeight><Color>White</Color></Style></TextRun></TextRuns><Style><TextAlign>Center</TextAlign></Style></Paragraph></Paragraphs><rd:DefaultName xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">textbox8</rd:DefaultName><Style><Border><Color>LightGrey</Color><Style>Solid</Style></Border><BackgroundColor>SteelBlue</BackgroundColor><PaddingLeft>2pt</PaddingLeft><PaddingRight>2pt</PaddingRight><PaddingTop>2pt</PaddingTop><PaddingBottom>2pt</PaddingBottom></Style></Textbox></CellContents></TablixCell><TablixCell><CellContents><Textbox Name="textbox9"><CanGrow>true</CanGrow><KeepTogether>true</KeepTogether><Paragraphs><Paragraph><TextRuns><TextRun><Value>Haber</Value><Style><FontFamily>Tahoma</FontFamily><FontWeight>Bold</FontWeight><Color>White</Color></Style></TextRun></TextRuns><Style><TextAlign>Center</TextAlign></Style></Paragraph></Paragraphs><rd:DefaultName xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">textbox9</rd:DefaultName><Style><Border><Color>LightGrey</Color><Style>Solid</Style></Border><BackgroundColor>SteelBlue</BackgroundColor><PaddingLeft>2pt</PaddingLeft><PaddingRight>2pt</PaddingRight><PaddingTop>2pt</PaddingTop><PaddingBottom>2pt</PaddingBottom></Style></Textbox></CellContents></TablixCell><TablixCell><CellContents><Textbox Name="Textbox7"><CanGrow>true</CanGrow><KeepTogether>true</KeepTogether><Paragraphs><Paragraph><TextRuns><TextRun><Value>Saldo</Value><Style><FontFamily>Tahoma</FontFamily><FontWeight>Bold</FontWeight><Color>White</Color></Style></TextRun></TextRuns><Style><TextAlign>Center</TextAlign></Style></Paragraph></Paragraphs><rd:DefaultName xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">Textbox7</rd:DefaultName><Style><Border><Color>LightGrey</Color><Style>Solid</Style></Border><BackgroundColor>SteelBlue</BackgroundColor><PaddingLeft>2pt</PaddingLeft><PaddingRight>2pt</PaddingRight><PaddingTop>2pt</PaddingTop><PaddingBottom>2pt</PaddingBottom></Style></Textbox></CellContents></TablixCell><TablixCell><CellContents><Textbox Name="Textbox15"><CanGrow>true</CanGrow><KeepTogether>true</KeepTogether><Paragraphs><Paragraph><TextRuns><TextRun><Value>Observaciones</Value><Style><FontFamily>Tahoma</FontFamily><FontWeight>Bold</FontWeight><Color>White</Color></Style></TextRun></TextRuns><Style><TextAlign>Center</TextAlign></Style></Paragraph></Paragraphs><rd:DefaultName xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">Textbox15</rd:DefaultName><Style><Border><Color>LightGrey</Color><Style>Solid</Style></Border><BackgroundColor>SteelBlue</BackgroundColor><PaddingLeft>2pt</PaddingLeft><PaddingRight>2pt</PaddingRight><PaddingTop>2pt</PaddingTop><PaddingBottom>2pt</PaddingBottom></Style></Textbox></CellContents></TablixCell><TablixCell><CellContents><Textbox Name="Textbox19"><CanGrow>true</CanGrow><KeepTogether>true</KeepTogether><Paragraphs><Paragraph><TextRuns><TextRun><Value>Cliente</Value><Style><FontFamily>Tahoma</FontFamily><FontWeight>Bold</FontWeight><Color>White</Color></Style></TextRun></TextRuns><Style><TextAlign>Center</TextAlign></Style></Paragraph></Paragraphs><rd:DefaultName xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">Textbox19</rd:DefaultName><Style><Border><Color>LightGrey</Color><Style>Solid</Style></Border><BackgroundColor>SteelBlue</BackgroundColor><PaddingLeft>2pt</PaddingLeft><PaddingRight>2pt</PaddingRight><PaddingTop>2pt</PaddingTop><PaddingBottom>2pt</PaddingBottom></Style></Textbox></CellContents></TablixCell><TablixCell><CellContents><Textbox Name="Textbox25"><CanGrow>true</CanGrow><KeepTogether>true</KeepTogether><Paragraphs><Paragraph><TextRuns><TextRun><Value>Proveedor</Value><Style><FontFamily>Tahoma</FontFamily><FontWeight>Bold</FontWeight><Color>White</Color></Style></TextRun></TextRuns><Style><TextAlign>Center</TextAlign></Style></Paragraph></Paragraphs><rd:DefaultName xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">Textbox25</rd:DefaultName><Style><Border><Color>LightGrey</Color><Style>Solid</Style></Border><BackgroundColor>SteelBlue</BackgroundColor><PaddingLeft>2pt</PaddingLeft><PaddingRight>2pt</PaddingRight><PaddingTop>2pt</PaddingTop><PaddingBottom>2pt</PaddingBottom></Style></Textbox></CellContents></TablixCell></TablixCells></TablixRow><TablixRow><Height>0.21in</Height><TablixCells><TablixCell><CellContents><Textbox Name="Jerarquia"><CanGrow>true</CanGrow><KeepTogether>true</KeepTogether><Paragraphs><Paragraph><TextRuns><TextRun><Value>=Fields!Jerarquia.Value</Value><Style><FontFamily>Tahoma</FontFamily><FontSize>8pt</FontSize><FontWeight>Bold</FontWeight><Color>White</Color></Style></TextRun></TextRuns><Style><TextAlign>Center</TextAlign></Style></Paragraph></Paragraphs><rd:DefaultName xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">Jerarquia</rd:DefaultName><Style><Border><Color>LightGrey</Color><Style>Solid</Style></Border><BackgroundColor>#6e9eca</BackgroundColor><PaddingLeft>2pt</PaddingLeft><PaddingRight>2pt</PaddingRight><PaddingTop>2pt</PaddingTop><PaddingBottom>2pt</PaddingBottom></Style></Textbox></CellContents></TablixCell><TablixCell><CellContents><Textbox Name="CuentaCodigo"><CanGrow>true</CanGrow><KeepTogether>true</KeepTogether><Paragraphs><Paragraph><TextRuns><TextRun><Value>=Max(Fields!CuentaCodigo.Value)</Value><Style><FontFamily>Tahoma</FontFamily><FontSize>8pt</FontSize><FontWeight>Bold</FontWeight><Color>White</Color></Style></TextRun></TextRuns><Style><TextAlign>Center</TextAlign></Style></Paragraph></Paragraphs><rd:DefaultName xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">CuentaCodigo</rd:DefaultName><Style><Border><Color>LightGrey</Color><Style>Solid</Style></Border><BackgroundColor>#6e9eca</BackgroundColor><PaddingLeft>2pt</PaddingLeft><PaddingRight>2pt</PaddingRight><PaddingTop>2pt</PaddingTop><PaddingBottom>2pt</PaddingBottom></Style></Textbox></CellContents></TablixCell><TablixCell><CellContents><Textbox Name="CuentaDescripcion"><CanGrow>true</CanGrow><KeepTogether>true</KeepTogether><Paragraphs><Paragraph><TextRuns><TextRun><Value>=Max(Fields!CuentaDescripcion.Value)</Value><Style><FontFamily>Tahoma</FontFamily><FontSize>8pt</FontSize><FontWeight>Bold</FontWeight><Color>White</Color></Style></TextRun></TextRuns><Style><TextAlign>Left</TextAlign></Style></Paragraph></Paragraphs><rd:DefaultName xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">CuentaDescripcion</rd:DefaultName><Style><Border><Color>LightGrey</Color><Style>Solid</Style></Border><BackgroundColor>#6e9eca</BackgroundColor><PaddingLeft>2pt</PaddingLeft><PaddingRight>2pt</PaddingRight><PaddingTop>2pt</PaddingTop><PaddingBottom>2pt</PaddingBottom></Style></Textbox></CellContents></TablixCell><TablixCell><CellContents><Textbox Name="textbox11"><CanGrow>true</CanGrow><KeepTogether>true</KeepTogether><Paragraphs><Paragraph><TextRuns><TextRun><Value /><Style><FontFamily>Tahoma</FontFamily><FontSize>8pt</FontSize><FontWeight>Bold</FontWeight><Color>White</Color></Style></TextRun></TextRuns><Style /></Paragraph></Paragraphs><rd:DefaultName xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">textbox11</rd:DefaultName><Style><Border><Color>LightGrey</Color><Style>Solid</Style></Border><BackgroundColor>#6e9eca</BackgroundColor><PaddingLeft>2pt</PaddingLeft><PaddingRight>2pt</PaddingRight><PaddingTop>2pt</PaddingTop><PaddingBottom>2pt</PaddingBottom></Style></Textbox></CellContents></TablixCell><TablixCell><CellContents><Textbox Name="textbox12"><CanGrow>true</CanGrow><KeepTogether>true</KeepTogether><Paragraphs><Paragraph><TextRuns><TextRun><Value /><Style><FontFamily>Tahoma</FontFamily><FontSize>8pt</FontSize><FontWeight>Bold</FontWeight><Color>White</Color></Style></TextRun></TextRuns><Style /></Paragraph></Paragraphs><rd:DefaultName xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">textbox12</rd:DefaultName><Style><Border><Color>LightGrey</Color><Style>Solid</Style></Border><BackgroundColor>#6e9eca</BackgroundColor><PaddingLeft>2pt</PaddingLeft><PaddingRight>2pt</PaddingRight><PaddingTop>2pt</PaddingTop><PaddingBottom>2pt</PaddingBottom></Style></Textbox></CellContents></TablixCell><TablixCell><CellContents><Textbox Name="textbox13"><CanGrow>true</CanGrow><KeepTogether>true</KeepTogether><Paragraphs><Paragraph><TextRuns><TextRun><Value /><Style><FontFamily>Tahoma</FontFamily><FontSize>8pt</FontSize><FontWeight>Bold</FontWeight><Color>White</Color></Style></TextRun></TextRuns><Style /></Paragraph></Paragraphs><rd:DefaultName xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">textbox13</rd:DefaultName><Style><Border><Color>LightGrey</Color><Style>Solid</Style></Border><BackgroundColor>#6e9eca</BackgroundColor><PaddingLeft>2pt</PaddingLeft><PaddingRight>2pt</PaddingRight><PaddingTop>2pt</PaddingTop><PaddingBottom>2pt</PaddingBottom></Style></Textbox></CellContents></TablixCell><TablixCell><CellContents><Textbox Name="Debe"><CanGrow>true</CanGrow><KeepTogether>true</KeepTogether><Paragraphs><Paragraph><TextRuns><TextRun><Value>=Sum(Fields!Debe.Value)</Value><Style><FontFamily>Tahoma</FontFamily><FontSize>8pt</FontSize><FontWeight>Bold</FontWeight><Format>#,0.00;(#,0.00)</Format><Color>White</Color></Style></TextRun></TextRuns><Style /></Paragraph></Paragraphs><rd:DefaultName xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">Debe</rd:DefaultName><Style><Border><Color>LightGrey</Color><Style>Solid</Style></Border><BackgroundColor>#6e9eca</BackgroundColor><PaddingLeft>2pt</PaddingLeft><PaddingRight>2pt</PaddingRight><PaddingTop>2pt</PaddingTop><PaddingBottom>2pt</PaddingBottom></Style></Textbox></CellContents></TablixCell><TablixCell><CellContents><Textbox Name="Haber"><CanGrow>true</CanGrow><KeepTogether>true</KeepTogether><Paragraphs><Paragraph><TextRuns><TextRun><Value>=Sum(Fields!Haber.Value)</Value><Style><FontFamily>Tahoma</FontFamily><FontSize>8pt</FontSize><FontWeight>Bold</FontWeight><Format>#,0.00;(#,0.00)</Format><Color>White</Color></Style></TextRun></TextRuns><Style /></Paragraph></Paragraphs><rd:DefaultName xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">Haber</rd:DefaultName><Style><Border><Color>LightGrey</Color><Style>Solid</Style></Border><BackgroundColor>#6e9eca</BackgroundColor><PaddingLeft>2pt</PaddingLeft><PaddingRight>2pt</PaddingRight><PaddingTop>2pt</PaddingTop><PaddingBottom>2pt</PaddingBottom></Style></Textbox></CellContents></TablixCell><TablixCell><CellContents><Textbox Name="Textbox10"><CanGrow>true</CanGrow><KeepTogether>true</KeepTogether><Paragraphs><Paragraph><TextRuns><TextRun><Value>=RunningValue(Fields!Saldo.Value,Sum,"table1_Jerarquia")</Value><Style><FontFamily>Tahoma</FontFamily><FontSize>8pt</FontSize><FontWeight>Bold</FontWeight><Color>White</Color></Style></TextRun></TextRuns><Style /></Paragraph></Paragraphs><rd:DefaultName xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">Textbox10</rd:DefaultName><Style><Border><Color>LightGrey</Color><Style>Solid</Style></Border><BackgroundColor>#6e9eca</BackgroundColor><PaddingLeft>2pt</PaddingLeft><PaddingRight>2pt</PaddingRight><PaddingTop>2pt</PaddingTop><PaddingBottom>2pt</PaddingBottom></Style></Textbox></CellContents></TablixCell><TablixCell><CellContents><Textbox Name="Textbox16"><CanGrow>true</CanGrow><KeepTogether>true</KeepTogether><Paragraphs><Paragraph><TextRuns><TextRun><Value /><Style><FontFamily>Tahoma</FontFamily><FontSize>8pt</FontSize><FontWeight>Bold</FontWeight><Color>White</Color></Style></TextRun></TextRuns><Style /></Paragraph></Paragraphs><rd:DefaultName xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">Textbox16</rd:DefaultName><Style><Border><Color>LightGrey</Color><Style>Solid</Style></Border><BackgroundColor>#6e9eca</BackgroundColor><PaddingLeft>2pt</PaddingLeft><PaddingRight>2pt</PaddingRight><PaddingTop>2pt</PaddingTop><PaddingBottom>2pt</PaddingBottom></Style></Textbox></CellContents></TablixCell><TablixCell><CellContents><Textbox Name="Textbox22"><CanGrow>true</CanGrow><KeepTogether>true</KeepTogether><Paragraphs><Paragraph><TextRuns><TextRun><Value /><Style><FontFamily>Tahoma</FontFamily><FontSize>8pt</FontSize><FontWeight>Bold</FontWeight><Color>White</Color></Style></TextRun></TextRuns><Style /></Paragraph></Paragraphs><rd:DefaultName xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">Textbox22</rd:DefaultName><Style><Border><Color>LightGrey</Color><Style>Solid</Style></Border><BackgroundColor>#6e9eca</BackgroundColor><PaddingLeft>2pt</PaddingLeft><PaddingRight>2pt</PaddingRight><PaddingTop>2pt</PaddingTop><PaddingBottom>2pt</PaddingBottom></Style></Textbox></CellContents></TablixCell><TablixCell><CellContents><Textbox Name="Textbox26"><CanGrow>true</CanGrow><KeepTogether>true</KeepTogether><Paragraphs><Paragraph><TextRuns><TextRun><Value /><Style><FontFamily>Tahoma</FontFamily><FontSize>8pt</FontSize><FontWeight>Bold</FontWeight><Color>White</Color></Style></TextRun></TextRuns><Style /></Paragraph></Paragraphs><rd:DefaultName xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">Textbox26</rd:DefaultName><Style><Border><Color>LightGrey</Color><Style>Solid</Style></Border><BackgroundColor>#6e9eca</BackgroundColor><PaddingLeft>2pt</PaddingLeft><PaddingRight>2pt</PaddingRight><PaddingTop>2pt</PaddingTop><PaddingBottom>2pt</PaddingBottom></Style></Textbox></CellContents></TablixCell></TablixCells></TablixRow><TablixRow><Height>0.21in</Height><TablixCells><TablixCell><CellContents><Textbox Name="textbox3"><CanGrow>true</CanGrow><KeepTogether>true</KeepTogether><Paragraphs><Paragraph><TextRuns><TextRun><Value /><Style><FontFamily>Tahoma</FontFamily><FontSize>8pt</FontSize></Style></TextRun></TextRuns><Style /></Paragraph></Paragraphs><rd:DefaultName xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">textbox3</rd:DefaultName><Style><Border><Color>LightGrey</Color><Style>Solid</Style></Border><PaddingLeft>2pt</PaddingLeft><PaddingRight>2pt</PaddingRight><PaddingTop>2pt</PaddingTop><PaddingBottom>2pt</PaddingBottom></Style></Textbox></CellContents></TablixCell><TablixCell><CellContents><Textbox Name="Textbox20"><CanGrow>true</CanGrow><KeepTogether>true</KeepTogether><Paragraphs><Paragraph><TextRuns><TextRun><Value /><Style><FontFamily>Tahoma</FontFamily><FontSize>8pt</FontSize></Style></TextRun></TextRuns><Style /></Paragraph></Paragraphs><rd:DefaultName xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">Textbox20</rd:DefaultName><Style><Border><Color>LightGrey</Color><Style>Solid</Style></Border><PaddingLeft>2pt</PaddingLeft><PaddingRight>2pt</PaddingRight><PaddingTop>2pt</PaddingTop><PaddingBottom>2pt</PaddingBottom></Style></Textbox></CellContents></TablixCell><TablixCell><CellContents><Textbox Name="Textbox23"><CanGrow>true</CanGrow><KeepTogether>true</KeepTogether><Paragraphs><Paragraph><TextRuns><TextRun><Value /><Style><FontFamily>Tahoma</FontFamily><FontSize>8pt</FontSize></Style></TextRun></TextRuns><Style /></Paragraph></Paragraphs><rd:DefaultName xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">Textbox23</rd:DefaultName><Style><Border><Color>LightGrey</Color><Style>Solid</Style></Border><PaddingLeft>2pt</PaddingLeft><PaddingRight>2pt</PaddingRight><PaddingTop>2pt</PaddingTop><PaddingBottom>2pt</PaddingBottom></Style></Textbox></CellContents></TablixCell><TablixCell><CellContents><Textbox Name="Fecha"><CanGrow>true</CanGrow><KeepTogether>true</KeepTogether><Paragraphs><Paragraph><TextRuns><TextRun><Value>=Fields!Fecha.Value</Value><Style><FontFamily>Tahoma</FontFamily><FontSize>8pt</FontSize><Format>d</Format></Style></TextRun></TextRuns><Style><TextAlign>Center</TextAlign></Style></Paragraph></Paragraphs><rd:DefaultName xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">Fecha</rd:DefaultName><Style><Border><Color>LightGrey</Color><Style>Solid</Style></Border><PaddingLeft>2pt</PaddingLeft><PaddingRight>2pt</PaddingRight><PaddingTop>2pt</PaddingTop><PaddingBottom>2pt</PaddingBottom></Style></Textbox></CellContents></TablixCell><TablixCell><CellContents><Textbox Name="Comprobante"><CanGrow>true</CanGrow><KeepTogether>true</KeepTogether><Paragraphs><Paragraph><TextRuns><TextRun><Value>=Fields!Comprobante.Value</Value><Style><FontFamily>Tahoma</FontFamily><FontSize>8pt</FontSize></Style></TextRun></TextRuns><Style><TextAlign>Left</TextAlign></Style></Paragraph></Paragraphs><rd:DefaultName xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">Comprobante</rd:DefaultName><ActionInfo><Actions><Action><Drillthrough><ReportName>=Switch(
+Fields!IdTipoComprobante.Value=1,"Factura Venta",
+Fields!IdTipoComprobante.Value=2,"Recibo",
+Fields!IdTipoComprobante.Value=3,"Nota Debito",
+Fields!IdTipoComprobante.Value=4,"Nota Credito",
+Fields!IdTipoComprobante.Value=10,"Comprobante Proveedores",
+Fields!IdTipoComprobante.Value=11,"Comprobante Proveedores",
+Fields!IdTipoComprobante.Value=13,"Comprobante Proveedores",
+Fields!IdTipoComprobante.Value=14,"Deposito Bancario",
+Fields!IdTipoComprobante.Value=17,"Orden Pago",
+Fields!IdTipoComprobante.Value=18,"Comprobante Proveedores",
+Fields!IdTipoComprobante.Value=19,"Comprobante Proveedores",
+Fields!IdTipoComprobante.Value=22,"Gasto Bancario",
+Fields!IdTipoComprobante.Value=28,"Gasto Bancario",
+Fields!IdTipoComprobante.Value=29,"Gasto Bancario",
+Fields!IdTipoComprobante.Value=31,"Comprobante Proveedores",
+Fields!IdTipoComprobante.Value=36,"Asiento",
+Fields!IdTipoComprobante.Value=37,"Asiento",
+Fields!IdTipoComprobante.Value=38,"Asiento",
+Fields!IdTipoComprobante.Value=40,"Comprobante Proveedores",
+Fields!IdTipoComprobante.Value=42,"Comprobante Proveedores",
+Fields!IdTipoComprobante.Value=52,"Comprobante Proveedores",
+Fields!IdTipoComprobante.Value=53,"Comprobante Proveedores"
+)</ReportName><Parameters><Parameter Name="Id"><Value>=Fields!IdComprobante.Value</Value></Parameter></Parameters></Drillthrough></Action></Actions></ActionInfo><Style><Border><Color>LightGrey</Color><Style>Solid</Style></Border><PaddingLeft>2pt</PaddingLeft><PaddingRight>2pt</PaddingRight><PaddingTop>2pt</PaddingTop><PaddingBottom>2pt</PaddingBottom></Style></Textbox></CellContents></TablixCell><TablixCell><CellContents><Textbox Name="Detalle"><CanGrow>true</CanGrow><KeepTogether>true</KeepTogether><Paragraphs><Paragraph><TextRuns><TextRun><Value>=Fields!Detalle.Value</Value><Style><FontFamily>Tahoma</FontFamily><FontSize>8pt</FontSize></Style></TextRun></TextRuns><Style><TextAlign>Left</TextAlign></Style></Paragraph></Paragraphs><rd:DefaultName xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">Detalle</rd:DefaultName><Style><Border><Color>LightGrey</Color><Style>Solid</Style></Border><PaddingLeft>2pt</PaddingLeft><PaddingRight>2pt</PaddingRight><PaddingTop>2pt</PaddingTop><PaddingBottom>2pt</PaddingBottom></Style></Textbox></CellContents></TablixCell><TablixCell><CellContents><Textbox Name="Debe1"><CanGrow>true</CanGrow><KeepTogether>true</KeepTogether><Paragraphs><Paragraph><TextRuns><TextRun><Value>=Fields!Debe.Value</Value><Style><FontFamily>Tahoma</FontFamily><FontSize>8pt</FontSize><Format>#,0.00;(#,0.00)</Format></Style></TextRun></TextRuns><Style><TextAlign>Right</TextAlign></Style></Paragraph></Paragraphs><rd:DefaultName xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">Debe1</rd:DefaultName><Style><Border><Color>LightGrey</Color><Style>Solid</Style></Border><PaddingLeft>2pt</PaddingLeft><PaddingRight>2pt</PaddingRight><PaddingTop>2pt</PaddingTop><PaddingBottom>2pt</PaddingBottom></Style></Textbox></CellContents></TablixCell><TablixCell><CellContents><Textbox Name="Haber1"><CanGrow>true</CanGrow><KeepTogether>true</KeepTogether><Paragraphs><Paragraph><TextRuns><TextRun><Value>=Fields!Haber.Value</Value><Style><FontFamily>Tahoma</FontFamily><FontSize>8pt</FontSize><Format>#,0.00;(#,0.00)</Format></Style></TextRun></TextRuns><Style><TextAlign>Right</TextAlign></Style></Paragraph></Paragraphs><rd:DefaultName xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">Haber1</rd:DefaultName><Style><Border><Color>LightGrey</Color><Style>Solid</Style></Border><PaddingLeft>2pt</PaddingLeft><PaddingRight>2pt</PaddingRight><PaddingTop>2pt</PaddingTop><PaddingBottom>2pt</PaddingBottom></Style></Textbox></CellContents></TablixCell><TablixCell><CellContents><Textbox Name="Textbox14"><CanGrow>true</CanGrow><KeepTogether>true</KeepTogether><Paragraphs><Paragraph><TextRuns><TextRun><Value>=RunningValue(Fields!Saldo.Value,Sum,"table1_Jerarquia")</Value><Style><FontFamily>Tahoma</FontFamily><FontSize>8pt</FontSize><Format>#,0.00;(#,0.00)</Format></Style></TextRun></TextRuns><Style><TextAlign>Right</TextAlign></Style></Paragraph></Paragraphs><rd:DefaultName xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">Textbox14</rd:DefaultName><Style><Border><Color>LightGrey</Color><Style>Solid</Style></Border><PaddingLeft>2pt</PaddingLeft><PaddingRight>2pt</PaddingRight><PaddingTop>2pt</PaddingTop><PaddingBottom>2pt</PaddingBottom></Style></Textbox></CellContents></TablixCell><TablixCell><CellContents><Textbox Name="Observaciones"><CanGrow>true</CanGrow><KeepTogether>true</KeepTogether><Paragraphs><Paragraph><TextRuns><TextRun><Value>=Fields!Observaciones.Value</Value><Style><FontFamily>Tahoma</FontFamily><FontSize>8pt</FontSize></Style></TextRun></TextRuns><Style><TextAlign>Left</TextAlign></Style></Paragraph></Paragraphs><rd:DefaultName xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">Observaciones</rd:DefaultName><Style><Border><Color>LightGrey</Color><Style>Solid</Style></Border><PaddingLeft>2pt</PaddingLeft><PaddingRight>2pt</PaddingRight><PaddingTop>2pt</PaddingTop><PaddingBottom>2pt</PaddingBottom></Style></Textbox></CellContents></TablixCell><TablixCell><CellContents><Textbox Name="Cliente"><CanGrow>true</CanGrow><KeepTogether>true</KeepTogether><Paragraphs><Paragraph><TextRuns><TextRun><Value>=Fields!Cliente.Value</Value><Style><FontFamily>Tahoma</FontFamily><FontSize>8pt</FontSize></Style></TextRun></TextRuns><Style><TextAlign>Left</TextAlign></Style></Paragraph></Paragraphs><rd:DefaultName xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">Cliente</rd:DefaultName><Style><Border><Color>LightGrey</Color><Style>Solid</Style></Border><PaddingLeft>2pt</PaddingLeft><PaddingRight>2pt</PaddingRight><PaddingTop>2pt</PaddingTop><PaddingBottom>2pt</PaddingBottom></Style></Textbox></CellContents></TablixCell><TablixCell><CellContents><Textbox Name="Proveedor"><CanGrow>true</CanGrow><KeepTogether>true</KeepTogether><Paragraphs><Paragraph><TextRuns><TextRun><Value>=Fields!Proveedor.Value</Value><Style><FontFamily>Tahoma</FontFamily><FontSize>8pt</FontSize></Style></TextRun></TextRuns><Style><TextAlign>Left</TextAlign></Style></Paragraph></Paragraphs><rd:DefaultName xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">Proveedor</rd:DefaultName><Style><Border><Color>LightGrey</Color><Style>Solid</Style></Border><PaddingLeft>2pt</PaddingLeft><PaddingRight>2pt</PaddingRight><PaddingTop>2pt</PaddingTop><PaddingBottom>2pt</PaddingBottom></Style></Textbox></CellContents></TablixCell></TablixCells></TablixRow></TablixRows></TablixBody><TablixColumnHierarchy><TablixMembers><TablixMember /><TablixMember /><TablixMember /><TablixMember /><TablixMember /><TablixMember /><TablixMember /><TablixMember /><TablixMember /><TablixMember /><TablixMember /><TablixMember /></TablixMembers></TablixColumnHierarchy><TablixRowHierarchy><TablixMembers><TablixMember><KeepWithGroup>After</KeepWithGroup><RepeatOnNewPage>true</RepeatOnNewPage><KeepTogether>true</KeepTogether></TablixMember><TablixMember><Group Name="table1_Jerarquia"><GroupExpressions><GroupExpression>=Fields!Jerarquia.Value</GroupExpression></GroupExpressions></Group><SortExpressions><SortExpression><Value>=Fields!Jerarquia.Value</Value></SortExpression></SortExpressions><TablixMembers><TablixMember><KeepWithGroup>After</KeepWithGroup><KeepTogether>true</KeepTogether></TablixMember><TablixMember><Group Name="table1_Details_Group"><DataElementName>Detail</DataElementName></Group><TablixMembers><TablixMember /></TablixMembers><Visibility><Hidden>true</Hidden><ToggleItem>Jerarquia</ToggleItem></Visibility><DataElementName>Detail_Collection</DataElementName><DataElementOutput>Output</DataElementOutput><KeepTogether>true</KeepTogether></TablixMember></TablixMembers></TablixMember></TablixMembers></TablixRowHierarchy><DataSetName>DataSet1</DataSetName><Top>0.375in</Top><Left>0.0926cm</Left><Height>0.64in</Height><Width>20.31201in</Width><Style /></Tablix><Textbox Name="textbox1"><CanGrow>true</CanGrow><KeepTogether>true</KeepTogether><Paragraphs><Paragraph><TextRuns><TextRun><Value>Mayor</Value><Style><FontFamily>Tahoma</FontFamily><FontSize>20pt</FontSize><FontWeight>Bold</FontWeight><Color>SteelBlue</Color></Style></TextRun></TextRuns><Style /></Paragraph></Paragraphs><rd:DefaultName xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">textbox1</rd:DefaultName><Top>0.0381cm</Top><Left>0.0926cm</Left><Height>0.36in</Height><Width>8in</Width><ZIndex>1</ZIndex><Style><PaddingLeft>2pt</PaddingLeft><PaddingRight>2pt</PaddingRight><PaddingTop>2pt</PaddingTop><PaddingBottom>2pt</PaddingBottom></Style></Textbox></ReportItems><Height>2in</Height><Style /></Body><Width>20.34847in</Width><Page><PageHeight>29.7cm</PageHeight><PageWidth>21cm</PageWidth><LeftMargin>2cm</LeftMargin><RightMargin>2cm</RightMargin><TopMargin>2cm</TopMargin><BottomMargin>2cm</BottomMargin><ColumnSpacing>0.13cm</ColumnSpacing><Style /></Page><AutoRefresh>0</AutoRefresh><DataSources><DataSource Name="DataSource1"><ConnectionProperties><DataProvider>SQL</DataProvider><ConnectString>=Parameters!CadenaConexion.Value</ConnectString><IntegratedSecurity>true</IntegratedSecurity></ConnectionProperties><rd:SecurityType xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">Integrated</rd:SecurityType><rd:DataSourceID xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">6b61c3c2-276b-4f59-be8e-490608ed6ad2</rd:DataSourceID></DataSource></DataSources><DataSets><DataSet Name="DataSet1"><Query><DataSourceName>DataSource1</DataSourceName><QueryParameters><QueryParameter Name="@FechaHasta"><Value>=Parameters!FechaHasta.Value</Value></QueryParameter><QueryParameter Name="@IdCuenta"><Value>=Parameters!IdCuenta.Value</Value></QueryParameter><QueryParameter Name="@FechaDesde"><Value>=Parameters!FechaDesde.Value</Value></QueryParameter></QueryParameters><CommandText>SET NOCOUNT ON
+
+CREATE TABLE #Auxiliar0	
+			(
+			 IdCuenta INTEGER,
+			 IdCuentaMadre INTEGER,
+			 Codigo INTEGER,
+			 IdObra INTEGER
+			)
+CREATE NONCLUSTERED INDEX IX__Auxiliar0 ON #Auxiliar0 (IdCuenta) ON [PRIMARY]
+INSERT INTO #Auxiliar0 
+ SELECT Cuentas.IdCuenta, CuentasGastos.IdCuentaMadre, Cuentas.Codigo, Cuentas.IdObra
+ FROM Cuentas 
+ LEFT OUTER JOIN CuentasGastos ON Cuentas.IdCuentaGasto=CuentasGastos.IdCuentaGasto
+ WHERE (@IdCuenta=-1 or Cuentas.IdCuenta=@IdCuenta or CuentasGastos.IdCuentaMadre=@IdCuenta) and Cuentas.IdCuentaGasto is not null
+
+CREATE TABLE #Auxiliar1
+			(
+			 IdCuenta INTEGER,
+			 Jerarquia VARCHAR(20),
+			 IdPadre INTEGER
+			)
+CREATE NONCLUSTERED INDEX IX__Auxiliar1 ON #Auxiliar1 (Jerarquia) ON [PRIMARY]
+INSERT INTO #Auxiliar1
+ SELECT C.IdCuenta, 
+  IsNull((Select Top 1 dc.JerarquiaAnterior From DetalleCuentas dc Where dc.IdCuenta=C.IdCuenta and dc.FechaCambio&gt;@FechaHasta Order By dc.FechaCambio),C.Jerarquia),
+  Null
+ FROM Cuentas C 
+ WHERE (@IdCuenta=-1 or C.IdCuenta=@IdCuenta) and Len(IsNull(C.Descripcion,''))&gt;0
+
+UPDATE #Auxiliar1
+SET IdPadre=(Select Top 1 a.IdCuenta From #Auxiliar1 a Where Substring(a.Jerarquia,1,9)=Substring(#Auxiliar1.Jerarquia,1,9) and a.Jerarquia&lt;#Auxiliar1.Jerarquia Order By a.Jerarquia)
+WHERE IdPadre is null
+
+UPDATE #Auxiliar1
+SET IdPadre=(Select Top 1 a.IdCuenta From #Auxiliar1 a Where Substring(a.Jerarquia,1,6)=Substring(#Auxiliar1.Jerarquia,1,6) and a.Jerarquia&lt;#Auxiliar1.Jerarquia Order By a.Jerarquia)
+WHERE IdPadre is null
+
+UPDATE #Auxiliar1
+SET IdPadre=(Select Top 1 a.IdCuenta From #Auxiliar1 a Where Substring(a.Jerarquia,1,3)=Substring(#Auxiliar1.Jerarquia,1,3) and a.Jerarquia&lt;#Auxiliar1.Jerarquia Order By a.Jerarquia)
+WHERE IdPadre is null
+
+UPDATE #Auxiliar1
+SET IdPadre=(Select Top 1 a.IdCuenta From #Auxiliar1 a Where Substring(a.Jerarquia,1,1)=Substring(#Auxiliar1.Jerarquia,1,1) and a.Jerarquia&lt;#Auxiliar1.Jerarquia Order By a.Jerarquia)
+WHERE IdPadre is null
+
+-- SALDOS INICIALES
+
+CREATE TABLE #Auxiliar2 
+			(
+			 IdCuenta INTEGER,
+			 Debe NUMERIC(18, 2),
+			 Haber NUMERIC(18, 2)
+			)
+INSERT INTO #Auxiliar2 
+ SELECT IsNull(#Auxiliar0.IdCuentaMadre,s.IdCuenta), IsNull(s.Debe,0), IsNull(s.Haber,0)
+ FROM Subdiarios s
+ LEFT OUTER JOIN #Auxiliar0 ON #Auxiliar0.IdCuenta=s.IdCuenta
+ WHERE (@IdCuenta=-1 or s.IdCuenta=@IdCuenta or #Auxiliar0.IdCuenta is not null) and s.FechaComprobante&lt;@FechaDesde
+
+ UNION ALL
+
+ SELECT IsNull(#Auxiliar0.IdCuentaMadre,da.IdCuenta), IsNull(da.Debe,0), IsNull(da.Haber,0)
+ FROM DetalleAsientos da
+ LEFT OUTER JOIN Asientos ON da.IdAsiento = Asientos.IdAsiento
+ LEFT OUTER JOIN #Auxiliar0 ON #Auxiliar0.IdCuenta=da.IdCuenta
+ WHERE (@IdCuenta=-1 or da.IdCuenta=@IdCuenta or #Auxiliar0.IdCuenta is not null) and Asientos.FechaAsiento&lt;@FechaDesde 
+
+CREATE TABLE #Auxiliar3 
+			(
+			 IdCuenta INTEGER,
+			 Debe NUMERIC(18, 2),
+			 Haber NUMERIC(18, 2)
+			)
+CREATE NONCLUSTERED INDEX IX__Auxiliar3 ON #Auxiliar3 (IdCuenta) ON [PRIMARY]
+INSERT INTO #Auxiliar3 
+ SELECT #Auxiliar2.IdCuenta, Sum(IsNull(#Auxiliar2.Debe,0)), Sum(IsNull(#Auxiliar2.Haber,0))
+ FROM #Auxiliar2
+ GROUP BY #Auxiliar2.IdCuenta
+
+-- MOVIMIENTOS
+
+DECLARE @IdTipoComprobanteFacturaVenta int, @IdTipoComprobanteDevoluciones int, @IdTipoComprobanteNotaDebito int,
+	@IdTipoComprobanteNotaCredito int, @IdTipoComprobanteRecibo int, @IdTipoComprobanteOrdenPago int, @IdTipoComprobanteDeposito int
+
+SET @IdTipoComprobanteFacturaVenta=(Select Top 1 IdTipoComprobanteFacturaVenta From Parametros Where IdParametro=1)
+SET @IdTipoComprobanteDevoluciones=(Select Top 1 IdTipoComprobanteDevoluciones From Parametros Where IdParametro=1)
+SET @IdTipoComprobanteNotaDebito=(Select Top 1 IdTipoComprobanteNotaDebito From Parametros Where IdParametro=1)
+SET @IdTipoComprobanteNotaCredito=(Select Top 1 IdTipoComprobanteNotaCredito From Parametros Where IdParametro=1)
+SET @IdTipoComprobanteRecibo=(Select Top 1 IdTipoComprobanteRecibo From Parametros Where IdParametro=1)
+SET @IdTipoComprobanteOrdenPago=(Select Top 1 IdTipoComprobanteOrdenPago From Parametros Where IdParametro=1)
+SET @IdTipoComprobanteDeposito=(Select Top 1 IdTipoComprobanteDeposito From Parametros Where IdParametro=1)
+
+CREATE TABLE #Auxiliar4
+			(
+			 IdCuenta INTEGER,
+			 IdTipoComprobante INTEGER,
+			 IdComprobante INTEGER,
+			 Fecha DATETIME,
+			 Comprobante VARCHAR(30),
+			 Detalle VARCHAR(200),
+			 IdCliente INTEGER,
+			 IdProveedor INTEGER,
+			 Observaciones VARCHAR(5000),
+			 SaldoDeudor NUMERIC(18,2),
+			 SaldoAcreedor NUMERIC(18,2)
+			)
+CREATE NONCLUSTERED INDEX IX__Auxiliar4 ON #Auxiliar4 (IdCuenta,Fecha,IdTipoComprobante,IdComprobante) ON [PRIMARY]
+INSERT INTO #Auxiliar4 
+ SELECT 
+  IsNull(#Auxiliar0.IdCuentaMadre,da.IdCuenta),
+  38,
+  da.IdAsiento,
+  Asientos.FechaAsiento,
+  'AS '+Substring('00000000',1,8-Len(Convert(varchar,Asientos.NumeroAsiento)))+Convert(varchar,Asientos.NumeroAsiento),
+  SubString(IsNull(Asientos.Concepto COLLATE Modern_Spanish_CI_AS,'')+' '+ 
+	Case When #Auxiliar0.IdCuenta is not null
+		Then '[ Cuenta : '+Convert(varchar,#Auxiliar0.Codigo)+' - Obra : '+Obras.NumeroObra+' ] '+IsNull(da.Detalle,' ')
+		Else IsNull(da.Detalle,' ')
+	End,1,200),
+  Null,
+  Null,
+  Null,
+  da.Debe,
+  da.Haber
+ FROM DetalleAsientos da
+ LEFT OUTER JOIN Asientos ON da.IdAsiento=Asientos.IdAsiento
+ LEFT OUTER JOIN #Auxiliar0 ON #Auxiliar0.IdCuenta=da.IdCuenta
+ LEFT OUTER JOIN Obras ON Obras.IdObra=#Auxiliar0.IdObra
+ WHERE (@IdCuenta=-1 or da.IdCuenta=@IdCuenta or #Auxiliar0.IdCuenta is not null) and Asientos.FechaAsiento&gt;=@FechaDesde and Asientos.FechaAsiento&lt;=@FechaHasta 
+ 
+INSERT INTO #Auxiliar4 
+ SELECT 
+  IsNull(#Auxiliar0.IdCuentaMadre,s.IdCuenta),
+  s.IdTipoComprobante,
+  s.IdComprobante,
+  s.FechaComprobante,
+  IsNull(TiposComprobante.DescripcionAb+' ','')+
+  Case When s.IdTipoComprobante=@IdTipoComprobanteFacturaVenta and Facturas.IdFactura is not null
+	 Then Facturas.TipoABC+'-'+
+			Substring('0000',1,4-Len(Convert(varchar,Facturas.PuntoVenta)))+Convert(varchar,Facturas.PuntoVenta)+'-'+
+			Substring('00000000',1,8-Len(Convert(varchar,Facturas.NumeroFactura)))+Convert(varchar,Facturas.NumeroFactura)
+	When s.IdTipoComprobante=@IdTipoComprobanteDevoluciones and Devoluciones.IdDevolucion is not null
+	 Then Devoluciones.TipoABC+'-'+
+			Substring('0000',1,4-Len(Convert(varchar,Devoluciones.PuntoVenta)))+Convert(varchar,Devoluciones.PuntoVenta)+'-'+
+			Substring('00000000',1,8-Len(Convert(varchar,Devoluciones.NumeroDevolucion)))+Convert(varchar,Devoluciones.NumeroDevolucion)
+	When s.IdTipoComprobante=@IdTipoComprobanteNotaDebito and NotasDebito.IdNotaDebito is not null
+	 Then NotasDebito.TipoABC+'-'+
+			Substring('0000',1,4-Len(Convert(varchar,NotasDebito.PuntoVenta)))+Convert(varchar,NotasDebito.PuntoVenta)+'-'+
+			Substring('00000000',1,8-Len(Convert(varchar,NotasDebito.NumeroNotaDebito)))+Convert(varchar,NotasDebito.NumeroNotaDebito)
+	When s.IdTipoComprobante=@IdTipoComprobanteNotaCredito and NotasCredito.IdNotaCredito is not null
+	 Then NotasCredito.TipoABC+'-'+
+			Substring('0000',1,4-Len(Convert(varchar,NotasCredito.PuntoVenta)))+Convert(varchar,NotasCredito.PuntoVenta)+'-'+
+			Substring('00000000',1,8-Len(Convert(varchar,NotasCredito.NumeroNotaCredito)))+Convert(varchar,NotasCredito.NumeroNotaCredito)
+	When (s.IdTipoComprobante=@IdTipoComprobanteRecibo or s.IdTipoComprobante=16) and Recibos.IdRecibo is not null
+	 Then Substring('0000',1,4-Len(Convert(varchar,Recibos.PuntoVenta)))+Convert(varchar,Recibos.PuntoVenta)+'-'+
+			Substring('0000000000',1,10-Len(Convert(varchar,Recibos.NumeroRecibo)))+Convert(varchar,Recibos.NumeroRecibo)
+	When s.IdTipoComprobante=@IdTipoComprobanteOrdenPago 
+	 Then Substring('0000000000',1,10-Len(Convert(varchar,OrdenesPago.NumeroOrdenPago)))+Convert(varchar,OrdenesPago.NumeroOrdenPago)
+	When s.IdTipoComprobante=@IdTipoComprobanteDeposito 
+	 Then Substring('0000000000',1,10-Len(Convert(varchar,DepositosBancarios.NumeroDeposito)))+Convert(varchar,DepositosBancarios.NumeroDeposito)
+	When IsNull(TiposComprobante.Agrupacion1,'')='PROVEEDORES' 
+	 Then cp.Letra+'-'+
+			Substring('0000',1,4-Len(Convert(varchar,cp.NumeroComprobante1)))+Convert(varchar,cp.NumeroComprobante1)+'-'+
+			Substring('00000000',1,8-Len(Convert(varchar,cp.NumeroComprobante2)))+Convert(varchar,cp.NumeroComprobante2)
+	When IsNull(TiposComprobante.Agrupacion1,'')='GASTOSBANCOS' 
+	 Then Substring('00000000',1,8-Len(Convert(varchar,Valores.NumeroComprobante)))+Convert(varchar,Valores.NumeroComprobante)
+	Else Null
+  End,
+  Case When s.IdTipoComprobante=@IdTipoComprobanteOrdenPago and OrdenesPago.IdCuenta is not null
+	 Then Substring(IsNull(s.Detalle,'')+IsNull(' '+(Select Top 1 c.Descripcion From Cuentas c Where c.IdCuenta=OrdenesPago.IdCuenta),''),1,200)
+	 Else Case When IsNull(TiposComprobante.Agrupacion1,'')='GASTOSBANCOS'
+			Then Substring(IsNull(s.Detalle,'')+IsNull(' '+Valores.Detalle COLLATE Modern_Spanish_CI_AS,''),1,200)
+			Else Case When #Auxiliar0.IdCuenta is not null Then SubString(IsNull(s.Detalle,'')+' [ Cuenta : '+Convert(varchar,#Auxiliar0.Codigo)+' - Obra : '+Obras.NumeroObra+' ]',1,200) Else IsNull(s.Detalle,'') End
+		End
+  End,
+  Case When s.IdTipoComprobante=@IdTipoComprobanteFacturaVenta Then Facturas.IdCliente
+	When s.IdTipoComprobante=@IdTipoComprobanteDevoluciones Then Devoluciones.IdCliente
+	When s.IdTipoComprobante=@IdTipoComprobanteNotaDebito Then NotasDebito.IdCliente
+	When s.IdTipoComprobante=@IdTipoComprobanteNotaCredito Then NotasCredito.IdCliente
+	When s.IdTipoComprobante=@IdTipoComprobanteRecibo Then Recibos.IdCliente
+	When s.IdTipoComprobante=@IdTipoComprobanteOrdenPago Then Null
+	When s.IdTipoComprobante=@IdTipoComprobanteDeposito Then Null
+	Else Null
+  End,
+  Case When s.IdTipoComprobante=@IdTipoComprobanteFacturaVenta Then Null
+	When s.IdTipoComprobante=@IdTipoComprobanteDevoluciones Then Null
+	When s.IdTipoComprobante=@IdTipoComprobanteNotaDebito Then Null
+	When s.IdTipoComprobante=@IdTipoComprobanteNotaCredito Then Null
+	When s.IdTipoComprobante=@IdTipoComprobanteRecibo Then Null
+	When s.IdTipoComprobante=@IdTipoComprobanteOrdenPago Then OrdenesPago.IdProveedor
+	When s.IdTipoComprobante=@IdTipoComprobanteDeposito Then Null
+	Else Case When IsNull(TiposComprobante.Agrupacion1,'')='PROVEEDORES' Then Case When cp.IdProveedor is not null Then cp.IdProveedor Else cp.IdProveedorEventual End Else Null End
+  End,
+  Case 	When s.IdTipoComprobante=@IdTipoComprobanteFacturaVenta Then Convert(varchar(5000),Facturas.Observaciones COLLATE SQL_Latin1_General_CP1_CI_AS)
+	When s.IdTipoComprobante=@IdTipoComprobanteDevoluciones Then Convert(varchar(5000),Devoluciones.Observaciones COLLATE SQL_Latin1_General_CP1_CI_AS)
+	When s.IdTipoComprobante=@IdTipoComprobanteNotaDebito Then Convert(varchar(5000),NotasDebito.Observaciones COLLATE SQL_Latin1_General_CP1_CI_AS)
+	When s.IdTipoComprobante=@IdTipoComprobanteNotaCredito Then Convert(varchar(5000),NotasCredito.Observaciones COLLATE SQL_Latin1_General_CP1_CI_AS)
+	When s.IdTipoComprobante=@IdTipoComprobanteRecibo Then Convert(varchar(5000),Recibos.Observaciones COLLATE SQL_Latin1_General_CP1_CI_AS)
+	When s.IdTipoComprobante=@IdTipoComprobanteOrdenPago Then Convert(varchar(5000),OrdenesPago.Observaciones COLLATE SQL_Latin1_General_CP1_CI_AS)
+	When s.IdTipoComprobante=@IdTipoComprobanteDeposito Then Convert(varchar(5000),DepositosBancarios.Observaciones COLLATE SQL_Latin1_General_CP1_CI_AS)
+	Else Case When IsNull(TiposComprobante.Agrupacion1,'')='GASTOSBANCOS' Then IsNull(Bancos.Nombre COLLATE SQL_Latin1_General_CP1_CI_AS,'') Else Convert(varchar(5000),cp.Observaciones COLLATE SQL_Latin1_General_CP1_CI_AS) End
+  End,
+  s.Debe,
+  s.Haber
+ FROM Subdiarios s
+ LEFT OUTER JOIN TiposComprobante ON TiposComprobante.IdTipoComprobante=s.IdTipoComprobante
+ LEFT OUTER JOIN Facturas ON Facturas.IdFactura=s.IdComprobante and s.IdTipoComprobante=@IdTipoComprobanteFacturaVenta
+ LEFT OUTER JOIN Devoluciones ON Devoluciones.IdDevolucion=s.IdComprobante and s.IdTipoComprobante=@IdTipoComprobanteDevoluciones
+ LEFT OUTER JOIN NotasDebito ON NotasDebito.IdNotaDebito=s.IdComprobante and s.IdTipoComprobante=@IdTipoComprobanteNotaDebito
+ LEFT OUTER JOIN NotasCredito ON NotasCredito.IdNotaCredito=s.IdComprobante and s.IdTipoComprobante=@IdTipoComprobanteNotaCredito
+ LEFT OUTER JOIN Recibos ON Recibos.IdRecibo=s.IdComprobante and s.IdTipoComprobante=@IdTipoComprobanteRecibo
+ LEFT OUTER JOIN OrdenesPago ON OrdenesPago.IdOrdenPago=s.IdComprobante and s.IdTipoComprobante=@IdTipoComprobanteOrdenPago
+ LEFT OUTER JOIN DepositosBancarios ON DepositosBancarios.IdDepositoBancario=s.IdComprobante and s.IdTipoComprobante=@IdTipoComprobanteDeposito
+ LEFT OUTER JOIN ComprobantesProveedores cp ON cp.IdComprobanteProveedor=s.IdComprobante and IsNull(TiposComprobante.Agrupacion1,'')='PROVEEDORES'
+ LEFT OUTER JOIN Valores ON Valores.IdValor=s.IdComprobante and IsNull(TiposComprobante.Agrupacion1,'')='GASTOSBANCOS'
+ LEFT OUTER JOIN Bancos ON Bancos.IdBanco=Valores.IdBanco
+ LEFT OUTER JOIN #Auxiliar0 ON #Auxiliar0.IdCuenta=s.IdCuenta
+ LEFT OUTER JOIN Obras ON Obras.IdObra=#Auxiliar0.IdObra
+ WHERE (@IdCuenta=-1 or s.IdCuenta=@IdCuenta or #Auxiliar0.IdCuenta is not null) and s.FechaComprobante&gt;=@FechaDesde and s.FechaComprobante&lt;=@FechaHasta 
+
+-- TOTALES DEL PERIODO
+
+CREATE TABLE #Auxiliar5 
+			(
+			 IdCuenta INTEGER,
+			 Debe NUMERIC(18, 2),
+			 Haber NUMERIC(18, 2)
+			)
+CREATE NONCLUSTERED INDEX IX__Auxiliar5 ON #Auxiliar5 (IdCuenta) ON [PRIMARY]
+INSERT INTO #Auxiliar5 
+ SELECT #Auxiliar4.IdCuenta, Sum(IsNull(#Auxiliar4.SaldoDeudor,0)), Sum(IsNull(#Auxiliar4.SaldoAcreedor,0))
+ FROM #Auxiliar4
+ GROUP BY #Auxiliar4.IdCuenta
+
+-- TOTALES DEL FINALES
+
+DELETE #Auxiliar3
+WHERE IsNull(Debe,0)-IsNull(Haber,0)=0 and Not Exists(Select Top 1 a.IdCuenta From #Auxiliar5 a Where a.IdCuenta=#Auxiliar3.IdCuenta and (IsNull(a.Debe,0)&lt;&gt;0 or IsNull(a.Haber,0)&lt;&gt;0))
+
+TRUNCATE TABLE #Auxiliar2
+INSERT INTO #Auxiliar2 
+ SELECT #Auxiliar3.IdCuenta, #Auxiliar3.Debe, #Auxiliar3.Haber
+ FROM #Auxiliar3
+ UNION ALL
+ SELECT #Auxiliar5.IdCuenta, #Auxiliar5.Debe, #Auxiliar5.Haber
+ FROM #Auxiliar5
+
+CREATE TABLE #Auxiliar6 
+			(
+			 IdCuenta INTEGER,
+			 Debe NUMERIC(18, 2),
+			 Haber NUMERIC(18, 2)
+			)
+CREATE NONCLUSTERED INDEX IX__Auxiliar6 ON #Auxiliar3 (IdCuenta) ON [PRIMARY]
+INSERT INTO #Auxiliar6 
+ SELECT #Auxiliar2.IdCuenta, Sum(IsNull(#Auxiliar2.Debe,0)), Sum(IsNull(#Auxiliar2.Haber,0))
+ FROM #Auxiliar2
+ GROUP BY #Auxiliar2.IdCuenta
+ 
+SET NOCOUNT OFF
+
+-- ARMADO DE RESULTADO
+-- A_Renglon INTEGER IDENTITY (1, 1),
+
+ SELECT 
+  #Auxiliar3.IdCuenta as [IdCuenta],
+  0 as [Orden],
+  C1.Jerarquia as [Jerarquia],
+  C1.Codigo as [CuentaCodigo],
+  C1.Descripcion as [CuentaDescripcion],
+  C2.Jerarquia as [JerarquiaPadre],
+  Null as [IdTipoComprobante],
+  Null as [IdComprobante],
+  @FechaDesde as [Fecha],
+  Null as [Comprobante],
+  'Saldo inicial' as [Detalle],
+  Case When IsNull(#Auxiliar3.Debe,0)-IsNull(#Auxiliar3.Haber,0)&gt;=0 Then IsNull(#Auxiliar3.Debe,0)-IsNull(#Auxiliar3.Haber,0) Else 0 End [Debe],
+  Case When IsNull(#Auxiliar3.Debe,0)-IsNull(#Auxiliar3.Haber,0)&lt;0 Then IsNull(#Auxiliar3.Debe,0)-IsNull(#Auxiliar3.Haber,0) Else 0 End [Haber],
+  IsNull(#Auxiliar3.Debe,0)-IsNull(#Auxiliar3.Haber,0) as [Saldo],
+  Null as [Observaciones],
+  Null as [Cliente],
+  Null as [Proveedor]
+ FROM #Auxiliar3
+ LEFT OUTER JOIN #Auxiliar1 ON #Auxiliar1.IdCuenta=#Auxiliar3.IdCuenta
+ LEFT OUTER JOIN Cuentas C1 ON C1.IdCuenta=#Auxiliar3.IdCuenta
+ LEFT OUTER JOIN Cuentas C2 ON C2.IdCuenta=#Auxiliar1.IdPadre
+
+ UNION ALL
+ 
+ SELECT 
+  #Auxiliar4.IdCuenta as [IdCuenta],
+  1 as [Orden],
+  C1.Jerarquia as [Jerarquia],
+  C1.Codigo as [CuentaCodigo],
+  C1.Descripcion as [CuentaDescripcion],
+  C2.Jerarquia as [JerarquiaPadre],
+  #Auxiliar4.IdTipoComprobante as [IdTipoComprobante],
+  #Auxiliar4.IdComprobante as [IdComprobante],
+  #Auxiliar4.Fecha as [Fecha],
+  #Auxiliar4.Comprobante as [Comprobante],
+  #Auxiliar4.Detalle as [Detalle],
+  #Auxiliar4.SaldoDeudor as [Debe],
+  #Auxiliar4.SaldoAcreedor as [Haber],
+  IsNull(#Auxiliar4.SaldoDeudor,0)-IsNull(#Auxiliar4.SaldoAcreedor,0) as [Saldo],
+  #Auxiliar4.Observaciones as [Observaciones],
+  Clientes.RazonSocial as [Cliente],
+  Proveedores.RazonSocial as [Proveedor]
+ FROM #Auxiliar4
+ LEFT OUTER JOIN #Auxiliar1 ON #Auxiliar1.IdCuenta=#Auxiliar4.IdCuenta
+ LEFT OUTER JOIN Cuentas C1 ON C1.IdCuenta=#Auxiliar4.IdCuenta
+ LEFT OUTER JOIN Cuentas C2 ON C2.IdCuenta=#Auxiliar1.IdPadre
+ LEFT OUTER JOIN Clientes ON Clientes.IdCliente=#Auxiliar4.IdCliente
+ LEFT OUTER JOIN Proveedores ON Proveedores.IdProveedor=#Auxiliar4.IdProveedor
+
+ORDER BY [Jerarquia], [Orden], [Fecha], [Comprobante]
+
+DROP TABLE #Auxiliar0
+DROP TABLE #Auxiliar1
+DROP TABLE #Auxiliar2
+DROP TABLE #Auxiliar3
+DROP TABLE #Auxiliar4
+DROP TABLE #Auxiliar5
+DROP TABLE #Auxiliar6</CommandText></Query><Fields><Field Name="IdCuenta"><DataField>IdCuenta</DataField><rd:TypeName xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">System.Int32</rd:TypeName></Field><Field Name="Orden"><DataField>Orden</DataField><rd:TypeName xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">System.Int32</rd:TypeName></Field><Field Name="Jerarquia"><DataField>Jerarquia</DataField><rd:TypeName xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">System.String</rd:TypeName></Field><Field Name="CuentaCodigo"><DataField>CuentaCodigo</DataField><rd:TypeName xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">System.Int32</rd:TypeName></Field><Field Name="CuentaDescripcion"><DataField>CuentaDescripcion</DataField><rd:TypeName xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">System.String</rd:TypeName></Field><Field Name="JerarquiaPadre"><DataField>JerarquiaPadre</DataField><rd:TypeName xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">System.String</rd:TypeName></Field><Field Name="IdTipoComprobante"><DataField>IdTipoComprobante</DataField><rd:TypeName xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">System.Int32</rd:TypeName></Field><Field Name="IdComprobante"><DataField>IdComprobante</DataField><rd:TypeName xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">System.Int32</rd:TypeName></Field><Field Name="Fecha"><DataField>Fecha</DataField><rd:TypeName xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">System.DateTime</rd:TypeName></Field><Field Name="Comprobante"><DataField>Comprobante</DataField><rd:TypeName xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">System.String</rd:TypeName></Field><Field Name="Detalle"><DataField>Detalle</DataField><rd:TypeName xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">System.String</rd:TypeName></Field><Field Name="Debe"><DataField>Debe</DataField><rd:TypeName xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">System.Decimal</rd:TypeName></Field><Field Name="Haber"><DataField>Haber</DataField><rd:TypeName xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">System.Decimal</rd:TypeName></Field><Field Name="Saldo"><DataField>Saldo</DataField><rd:TypeName xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">System.Decimal</rd:TypeName></Field><Field Name="Observaciones"><DataField>Observaciones</DataField><rd:TypeName xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">System.String</rd:TypeName></Field><Field Name="Cliente"><DataField>Cliente</DataField><rd:TypeName xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">System.String</rd:TypeName></Field><Field Name="Proveedor"><DataField>Proveedor</DataField><rd:TypeName xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">System.String</rd:TypeName></Field></Fields></DataSet><DataSet Name="DataSet2"><Query><DataSourceName>DataSource1</DataSourceName><CommandText>SELECT -1 as [IdCuenta], '_Todas' as [Titulo]
+UNION all
+SELECT IdCuenta as [IdCuenta], Descripcion+IsNull(' - ['+Convert(varchar,Codigo)+']','') as [Titulo]
+FROM Cuentas
+WHERE IdTipoCuenta=2 and Len(LTrim(IsNull(Descripcion,'')))&gt;0
+GROUP By IdCuenta, Codigo, Descripcion
+ORDER by [Titulo]</CommandText></Query><Fields><Field Name="IdCuenta"><DataField>IdCuenta</DataField><rd:TypeName xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">System.Int32</rd:TypeName></Field><Field Name="Titulo"><DataField>Titulo</DataField><rd:TypeName xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">System.String</rd:TypeName></Field></Fields></DataSet></DataSets><ReportParameters><ReportParameter Name="CadenaConexion"><DataType>String</DataType><Prompt>CadenaConexion</Prompt><Hidden>true</Hidden></ReportParameter><ReportParameter Name="FechaDesde"><DataType>DateTime</DataType><DefaultValue><Values><Value>=dateserial(year(now),month(now),1)</Value></Values></DefaultValue><Prompt>Desde</Prompt></ReportParameter><ReportParameter Name="FechaHasta"><DataType>DateTime</DataType><Prompt>Hasta</Prompt></ReportParameter><ReportParameter Name="IdCuenta"><DataType>Integer</DataType><DefaultValue><Values><Value>-1</Value></Values></DefaultValue><Prompt>Cuenta</Prompt><ValidValues><DataSetReference><DataSetName>DataSet2</DataSetName><ValueField>IdCuenta</ValueField><LabelField>Titulo</LabelField></DataSetReference></ValidValues></ReportParameter></ReportParameters><rd:ReportUnitType xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">Cm</rd:ReportUnitType><rd:ReportID xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">d547d9cf-b496-467b-bfff-d3a20a83e801</rd:ReportID></Report>

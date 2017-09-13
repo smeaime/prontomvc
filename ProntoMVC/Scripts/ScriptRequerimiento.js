@@ -1912,6 +1912,8 @@ $(function () {
     });
 });
 
+
+
 function EditarItem(rowid) {
     var gr = rowid; // jQuery("#Lista").jqGrid('getGridParam',  'selrow');
     var row = jQuery("#Lista").jqGrid('getRowData', rowid);

@@ -4112,14 +4112,19 @@ usuario As String, ConexBDLmaster As String,
         'gridView.PageSize = 100
         'gridView.AllowPaging = True
 
-        For n = maxrows To dt.Rows.Count - 1
-            Try
-                dt.Rows.RemoveAt(n)
-            Catch ex As Exception
-                ErrHandler2.WriteError("error html row " & n.ToString)
-                'Exit For
-            End Try
-        Next
+
+        If dt.Rows.Count > maxrows Then
+
+            For n = dt.Rows.Count - 1 To maxrows
+                Try
+                    dt.Rows.RemoveAt(n)
+                Catch ex As Exception
+                    ErrHandler2.WriteError("error html row " & n.ToString)
+                    'Exit For
+                End Try
+            Next
+
+        End If
 
         gridView.DataSource = dt
         gridView.DataBind()
@@ -4597,7 +4602,7 @@ usuario As String, ConexBDLmaster As String,
 
 
 
-    Public Shared informesHtml As String() = New String() {"Html", "HtmlIm", "EHOlav", "HOlav", "HImag2", "GrobHc", "ExcHc", "Amaggi", "Speed"}
+    Public Shared informesHtml As String() = New String() {"Html", "HtmlIm", "EHOlav", "HOlav", "HImag2", "GrobHc", "ExcHc", "Amaggi", "Speed", "Imagen", "Excel"}
 
     Enum eInformesGeneralFormatos
         Html
@@ -4691,8 +4696,27 @@ usuario As String, ConexBDLmaster As String,
                 'Si agregas un informe nuevo, agregalo tambien en el array informesHtml!!!!!!!!
                 'Si agregas un informe nuevo, agregalo tambien en el array informesHtml!!!!!!!!
 
+
+            ElseIf ModoImpresion = "GrbRec" Then
+                rdl = "Listado general de Cartas de Porte (simulando original) con foto  - Grobo y Recibo"
+
+            ElseIf ModoImpresion = "Grobo" Then
+                rdl = "Listado general de Cartas de Porte (simulando original) con foto  - Grobo"
+
+            ElseIf ModoImpresion = "Cresud" Or NombreCliente(SC, idVendedor) = "CRESUD SACIF Y A" Or NombreCliente(SC, idRemComercial) = "CRESUD SACIF Y A" Then
+                rdl = "Listado general de Cartas de Porte (simulando original) con foto  - Cresud"
+
+            ElseIf ModoImpresion = "Grain" Or NombreCliente(SC, IdClienteAuxiliar) = "MULTIGRAIN ARGENTINA S.A." Or NombreCliente(SC, idVendedor) = "MULTIGRAIN ARGENTINA S.A." Or NombreCliente(SC, idRemComercial) = "MULTIGRAIN ARGENTINA S.A." Or NombreCliente(SC, idDestinatario) = "MULTIGRAIN ARGENTINA S.A." Or NombreCliente(SC, idIntermediario) = "MULTIGRAIN ARGENTINA S.A." Then
+                rdl = "Listado general de Cartas de Porte (simulando original) con foto  - Multigrain"
+
+            ElseIf ModoImpresion = "Corred" Or (idCorredor > 0 AndAlso NombreVendedor(SC, idCorredor) <> "BLD S.A" AndAlso Not iisNull(.Item("ModoImpresion"), "") = "Imagen" AndAlso Not iisNull(.Item("ModoImpresion"), "") = "HtmlIm") Then
+                rdl = "Listado general de Cartas de Porte (simulando original)  para Corredores"
+
+            ElseIf ModoImpresion = "ExcRec" Then
+                rdl = "Listado general de Cartas de Porte (simulando original) con foto con numero recibo"
+
+
             ElseIf ModoImpresion = "ExcHtm" Then
-                'este es de servidor, así que saco el path
                 rdl = "Listado general de Cartas de Porte (simulando original) con foto 2"
 
             ElseIf ModoImpresion = "EHOlav" Then
