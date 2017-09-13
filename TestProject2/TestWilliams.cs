@@ -1160,8 +1160,8 @@ Error in: https://prontoweb.williamsentregas.com.ar/ProntoWeb/CDPFacturacion.asp
             //Agregar el campos de AMBAS ( Excel + HTML ), asi no hay que agregar repetidamente
             //otro grupo de mail para elegir el otro forma, y que en el mismo correo llegue de las dos manera, pegado en el cuerpo del mail + archivo Excel. - PENDIENTE
 
-            var fechadesde = new DateTime(2014, 1, 1);
-            var fechahasta = new DateTime(2014, 1, 2);
+            var fechadesde = new DateTime(2017, 9, 11);
+            var fechahasta = new DateTime(2017, 9, 13);
             int pventa = 0;
 
 
@@ -1207,7 +1207,7 @@ Error in: https://prontoweb.williamsentregas.com.ar/ProntoWeb/CDPFacturacion.asp
             dr["EnumSyngentaDivision"] = "";
             dr["EsPosicion"] = false;
             dr["IdArticulo"] = -1;
-            CartaDePorteManager.enumCDPestado estado = CartaDePorteManager.enumCDPestado.DescargasMasFacturadas;
+            CartaDePorteManager.enumCDPestado estado = CartaDePorteManager.enumCDPestado.Todas;
 
 
             string output = "";
