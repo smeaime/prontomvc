@@ -408,8 +408,6 @@ namespace ProntoMVC.Controllers
             return File(contents, System.Net.Mime.MediaTypeNames.Application.Octet, "NotaCredito.pdf");
         }
 
-
-
         public virtual ActionResult DetNotaCredito(string sidx, string sord, int? page, int? rows, int? IdNotaCredito)
         {
             int IdNotaCredito1 = IdNotaCredito ?? 0;
@@ -434,10 +432,12 @@ namespace ProntoMVC.Controllers
                             CuentaBancaria = d != null ? d.Cuenta : "",
                             Caja = c != null ? c.Descripcion : "",
                             a.Gravado,
-                            a.Importe
+                            a.Importe,
+                            a.PorcentajeIva,
+                            a.ImporteIva
                         }).OrderBy(x => x.IdDetalleNotaCredito)
 //.Skip((currentPage - 1) * pageSize).Take(pageSize)
-.ToList();
+                        .ToList();
 
             var jsonData = new jqGridJson()
             {
@@ -459,6 +459,8 @@ namespace ProntoMVC.Controllers
                             a.CuentaBancaria.NullSafeToString(),
                             a.Caja.NullSafeToString(),
                             a.Gravado.NullSafeToString(),
+                            a.PorcentajeIva.NullSafeToString(),
+                            a.ImporteIva.NullSafeToString(),
                             a.Importe.NullSafeToString()
                             }
                         }).ToArray()
@@ -599,6 +601,9 @@ namespace ProntoMVC.Controllers
             Int32 mIdCliente = 1;
             Int32 mIdPuntoVenta = 0;
 
+            decimal mTotalImputaciones = 0;
+            decimal mTotalComprobante = 0;
+
             string mObservaciones = "";
             string mTipoABC = "";
             string mCAI = "";
@@ -623,6 +628,7 @@ namespace ProntoMVC.Controllers
             mTipoABC = o.TipoABC ?? "";
             mCtaCte = o.CtaCte ?? "";
             mAnulada = o.Anulada ?? "";
+            mTotalComprobante = o.ImporteTotal ?? 0;
 
             var parametros = db.Parametros.Where(p => p.IdParametro == 1).FirstOrDefault();
             mFechaUltimoCierre = parametros.FechaUltimoCierre ?? DateTime.Today;
@@ -691,8 +697,14 @@ namespace ProntoMVC.Controllers
             var Cliente = db.Clientes.Where(p => p.IdCliente == mIdCliente).FirstOrDefault();
             if (Cliente != null)
             {
-                if (Cliente.Estados_Proveedores != null) { if ((Cliente.Estados_Proveedores.Activo ?? "") != "SI") { sErrorMsg += "\n" + "Cliente inhabilitado"; } }
+                if (Cliente.Estados_Proveedores != null) { if ((Cliente.Estados_Proveedores.Activo ?? "") == "NO") { sErrorMsg += "\n" + "Cliente inhabilitado"; } }
             }
+
+            foreach (ProntoMVC.Data.Models.DetalleNotasCreditoImputacione x in o.DetalleNotasCreditoImputaciones)
+            {
+                mTotalImputaciones += x.Importe ?? 0;
+            }
+            if (mTotalImputaciones != mTotalComprobante) { sErrorMsg += "\n" + "El total de las imputaciones debe ser igual al importe total"; }
 
             sErrorMsg = sErrorMsg.Replace("\n", "<br/>");
             if (sErrorMsg != "") return false;
