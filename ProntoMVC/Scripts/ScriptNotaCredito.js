@@ -281,6 +281,8 @@
                         },
                     },
                     { name: 'Gravado', index: 'Gravado', width: 40, align: 'left', editable: true, editrules: { required: false }, editoptions: { value: "SI:NO" }, edittype: 'checkbox', label: 'TB' },
+                    { name: 'PorcentajeIva', index: 'PorcentajeIva', width: 70, align: 'right', editable: true, hidden: false, formatter: 'dynamicText', edittype: 'custom', editoptions: { custom_element: radioelem, custom_value: radiovalue }, label: 'TB' },
+                    { name: 'ImporteIva', index: 'ImporteIva', width: 80, align: 'right', editable: true, hidden: false, editoptions: { disabled: 'disabled', defaultValue: 0 }, label: 'TB' },
                     {
                         name: 'Importe', index: 'Importe', width: 80, align: 'right', editable: true, editrules: { required: false, number: true }, edittype: 'text', label: 'TB',
                         editoptions: {
@@ -581,6 +583,10 @@
 
     $("#IdMoneda").change(function () {
         TraerCotizacion()
+    })
+
+    $("#ClienteCodigo").change(function () {
+        TraerDatosClientePorCodigo()
     })
 
     ////////////////////////////////////////////////////////// SERIALIZACION //////////////////////////////////////////////////////////
@@ -1233,5 +1239,69 @@ function ActivarControles(Activar) {
         jQuery("input[name='CtaCte']").each(function (i) {
             jQuery(this).prop("disabled", true);
         })
+    }
+}
+
+$.extend($.fn.fmatter, {
+    dynamicText: function (cellvalue, options, rowObject) {
+        if (cellvalue) { return cellvalue } else { return '' }
+    }
+});
+$.extend($.fn.fmatter.dynamicText, {
+    unformat: function (cellValue, options, elem) {
+        var text = $(elem).text();
+        return text === '&nbsp;' ? '' : text;
+    }
+});
+
+function radioelem(value, options) {
+    var radiohtml = '';
+    var a = [];
+    a = TraerPorcentajesIva();
+    for (var i = 0; i < a.length; i++) {
+        radiohtml = radiohtml + '<input type="radio" name="PorcentajeIva" value="' + a[i] + '"';
+        if (value == a[i]) { radiohtml = radiohtml + ' checked="checked"' }
+        radiohtml = radiohtml + '/>' + a[i] + '<br>';
+    }
+    return "<span>" + radiohtml + "</span>";
+}
+
+function radiovalue(elem, operation, value) {
+    if (operation === 'get') {
+        return elem.find("input[name=PorcentajeIva]:checked").val();
+    } else if (operation === 'set') {
+        if ($(elem).is(':checked') === false) {
+            $(elem).filter('[value=' + value + ']').attr('checked', true);
+        }
+    }
+}
+
+function TraerDatosClientePorCodigo() {
+    var ClienteCodigo = $("#ClienteCodigo").val();
+    if (ClienteCodigo.length > 0) {
+        $.ajax({
+            type: "GET",
+            async: false,
+            url: ROOT + 'Cliente/GetCodigosClienteAutocomplete/',
+            data: { term: ClienteCodigo },
+            contentType: "application/json",
+            dataType: "json",
+            success: function (result) {
+                if (result.length > 0) {
+                    $("#IdCliente").val(result[0]["id"]);
+                    $("#Cliente").val(result[0]["value"]);
+                    $("#IdCodigoIva").val(result[0]["IdCodigoIva"]);
+                    $("#IdCondicionVenta").val(result[0]["IdCondicionVenta"]);
+                    $("#ClienteCodigo").val(result[0]["codigo"]);
+                    event.preventDefault();
+                    $("#ListaDrag").trigger("reloadGrid");
+                    ActualizarDatos();
+                } else {
+                    $("#ClienteCodigo").val("");
+                }
+            }
+        });
+    } else {
+        $("#ClienteCodigo").val("");
     }
 }
