@@ -4112,14 +4112,19 @@ usuario As String, ConexBDLmaster As String,
         'gridView.PageSize = 100
         'gridView.AllowPaging = True
 
-        For n = maxrows To dt.Rows.Count - 1
-            Try
-                dt.Rows.RemoveAt(n)
-            Catch ex As Exception
-                ErrHandler2.WriteError("error html row " & n.ToString)
-                'Exit For
-            End Try
-        Next
+
+        If dt.Rows.Count > maxrows Then
+
+            For n = dt.Rows.Count - 1 To maxrows
+                Try
+                    dt.Rows.RemoveAt(n)
+                Catch ex As Exception
+                    ErrHandler2.WriteError("error html row " & n.ToString)
+                    'Exit For
+                End Try
+            Next
+
+        End If
 
         gridView.DataSource = dt
         gridView.DataBind()
@@ -4690,6 +4695,10 @@ usuario As String, ConexBDLmaster As String,
                 'Si agregas un informe nuevo, agregalo tambien en el array informesHtml!!!!!!!!
                 'Si agregas un informe nuevo, agregalo tambien en el array informesHtml!!!!!!!!
                 'Si agregas un informe nuevo, agregalo tambien en el array informesHtml!!!!!!!!
+
+
+            ElseIf ModoImpresion = "GrbRec" Then
+                rdl = "Listado general de Cartas de Porte (simulando original) con foto  - Grobo y Recibo"
 
             ElseIf ModoImpresion = "Grobo" Then
                 rdl = "Listado general de Cartas de Porte (simulando original) con foto  - Grobo"
