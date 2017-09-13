@@ -4602,7 +4602,7 @@ usuario As String, ConexBDLmaster As String,
 
 
 
-    Public Shared informesHtml As String() = New String() {"Html", "HtmlIm", "EHOlav", "HOlav", "HImag2", "GrobHc", "ExcHc", "Amaggi", "Speed", "Imagen", "Excel"}
+    Public Shared informesHtml As String() = New String() {"Html", "HtmlIm", "EHOlav", "HOlav", "HImag2", "GrobHc", "ExcHc", "Amaggi", "Speed", "Imagen", "Excel", "GrbRec"}
 
     Enum eInformesGeneralFormatos
         Html
