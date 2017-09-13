@@ -861,6 +861,64 @@ namespace ProntoMVC.Tests
 
 
 
+
+
+
+
+        [TestMethod]
+        public void SincroTomasHnos_43179()
+        {
+
+            string sErrores = "", sTitulo = "";
+            LinqCartasPorteDataContext db = null;
+
+            // el _CONST_MAXROWS sale del app.config
+
+            int registrosf = 0;
+
+
+
+            var output = SincronismosWilliamsManager.GenerarSincro("TOMAS HNOS", ref sErrores, SC, "dominio", ref sTitulo
+                                , CartaDePorteManager.enumCDPestado.DescargasMasFacturadas,
+                     "", -1, -1,
+                -1, -1,
+                -1, -1, -1, -1,
+                 CartaDePorteManager.FiltroANDOR.FiltroOR, "Ambas",
+                new DateTime(2016, 1, 1), new DateTime(2016, 1, 10),
+                -1, "Ambas", false, "", "", -1, ref registrosf, 40);
+
+
+
+            //File.Copy(output, @"C:\Users\Administrador\Desktop\"   Path.GetFileName(output), true);
+            System.Diagnostics.Process.Start(output);
+        }
+
+
+
+
+
+        [TestMethod]
+        public void consultas_conversaciones_chats_bld_43063()
+        {
+
+            /*
+                        verMisChats
+
+                    AgregarChat(idusuario, idreclamo, comentario)
+
+                    quienes escuchan el chat? quiero decir, a quien les llega el mail / notificacion
+
+                    SubirArchivo
+
+                    ColaDeMails o SignalR
+                    */
+        }
+
+
+
+
+
+
         [TestMethod]
         public void SincroAMAGGI_45323()
         {
@@ -887,7 +945,7 @@ namespace ProntoMVC.Tests
                   new DateTime(2017, 1, 10), new DateTime(2017, 1, 15),
                   -1, "Ambas", false, "", "", -1, ref registrosf, 4000);
 
-            
+
 
 
             System.Diagnostics.Process.Start(output2);
@@ -897,8 +955,116 @@ namespace ProntoMVC.Tests
 
 
 
+
+
+
         [TestMethod]
-        public void FormatoNuevo_42771_2()
+        public void FormatoNuevo_45281()
+        {
+
+
+            //-Les acabo de pasar correo con la solicitud del cliente nuevo SPEEDAGRO para que en el exel de descargas que pasa el sistema, salga el cuit a su lado titular, intermediario, rem comercial, corredor, transporte, chofer, etc, etc
+            //    -Martín,Lo que deben hacer es cuando arman el mail de Speedagro, elegir el formato "Excel GroboCuits" que es el formato que se está usando con Grobocopatel.
+            //    -Andres, ahi me hace la devolucion SpeedAgro, y estarian faltando los cuit del destinatario y corredor. Resto estaria ok.Podes avanzar con esto ? Abrazo Martin
+
+            //aaaaaa
+            //Agregar el campos de AMBAS ( Excel + HTML ), asi no hay que agregar repetidamente
+            //otro grupo de mail para elegir el otro forma, y que en el mismo correo llegue de las dos manera, pegado en el cuerpo del mail + archivo Excel. - PENDIENTE
+
+            var fechadesde = new DateTime(2014, 1, 1);
+            var fechahasta = new DateTime(2014, 1, 2);
+            int pventa = 0;
+
+
+            var dr = CDPMailFiltrosManager2.TraerMetadata(SC, -1).NewRow();
+
+
+
+            //falta migrar a servidor:
+            //grobo y recibo        GrbRec
+            //grobo                 Grobo
+            //cresud                Cresud
+            //multigrain            Grain
+            //recibo                ExcRec
+            //corredores            Corred
+
+
+            dr["ModoImpresion"] = "GrbRec";
+            //dr["ModoImpresion"] = "Grobo";
+            //dr["ModoImpresion"] = "Grobo";
+            //dr["ModoImpresion"] = "Excel";
+            //dr["ModoImpresion"] = "HImag2";
+            //dr["ModoImpresion"] = "ExcHtm";
+            //dr["ModoImpresion"] = "Imagen";
+
+
+            dr["Emails"] = "mscalella911@gmail.com";
+
+
+            dr["Vendedor"] = -1;
+            dr["CuentaOrden1"] = -1;
+            dr["CuentaOrden2"] = -1;
+            dr["IdClienteAuxiliar"] = -1; ;
+            dr["Corredor"] = -1;
+            dr["Entregador"] = -1;
+            dr["Destino"] = -1;
+            dr["Procedencia"] = -1;
+            dr["FechaDesde"] = fechadesde;
+            dr["FechaHasta"] = fechahasta;
+            dr["AplicarANDuORalFiltro"] = 0; // CartaDePorteManager.FiltroANDOR.FiltroOR;
+            dr["Modo"] = "Ambos";
+            //dr["Orden"] = "";
+            //dr["Contrato"] = "";
+            dr["EnumSyngentaDivision"] = "";
+            dr["EsPosicion"] = false;
+            dr["IdArticulo"] = -1;
+            CartaDePorteManager.enumCDPestado estado = CartaDePorteManager.enumCDPestado.DescargasMasFacturadas;
+
+
+            string output = "";
+            string sError = "", sError2 = "";
+            string inlinePNG = DirApp + @"\imagenes\Unnamed.png";
+            string inlinePNG2 = DirApp + @"\imagenes\twitterwilliams.jpg";
+
+
+
+
+
+            try
+            {
+
+                output = CDPMailFiltrosManager2.EnviarMailFiltroPorRegistro_DLL(SC, fechadesde, fechahasta,
+                                                       pventa, "", estado,
+                                                    ref dr, ref sError, false,
+                                                   ConfigurationManager.AppSettings["SmtpServer"],
+                                                     ConfigurationManager.AppSettings["SmtpUser"],
+                                                     ConfigurationManager.AppSettings["SmtpPass"],
+                                                     Convert.ToInt16(ConfigurationManager.AppSettings["SmtpPort"]),
+                                                       "", ref sError2, inlinePNG, inlinePNG2);
+
+
+            }
+            catch (Exception)
+            {
+
+                //throw;
+            }
+
+
+
+            System.Web.UI.WebControls.GridView grid = new System.Web.UI.WebControls.GridView();
+            string html = CartaDePorteManager.ExcelToHtml(output, grid);
+
+
+            System.Diagnostics.Process.Start(output);
+
+        }
+
+
+
+
+        [TestMethod]
+        public void FormatoNuevo_42771_2_formatos_pendientessssssssssssssss()
         {
 
 
@@ -926,7 +1092,7 @@ namespace ProntoMVC.Tests
             //recibo
             //corredores
 
-            
+
 
             dr["ModoImpresion"] = "Grobo";
             //dr["ModoImpresion"] = "Excel";
@@ -1022,8 +1188,8 @@ namespace ProntoMVC.Tests
             var dr = CDPMailFiltrosManager2.TraerMetadata(SC, -1).NewRow();
 
             dr["ModoImpresion"] = "Speed"; // este es el excel angosto con adjunto html angosto ("Listado general de Cartas de Porte (simulando original) con foto 2 .rdl"). Lo que quieren es el excel ANCHO manteniendo el MISMO html. 
-           //dr["ModoImpresion"] = "ExcHc";
-            //dr["ModoImpresion"] = "HtmlIm";
+                                           //dr["ModoImpresion"] = "ExcHc";
+                                           //dr["ModoImpresion"] = "HtmlIm";
 
             dr["Emails"] = "mscalella911@gmail.com";
 
@@ -1458,8 +1624,8 @@ namespace ProntoMVC.Tests
             var hasta = new DateTime(2017, 5, 31);
             var desdeAnt = new DateTime(2015, 11, 1); //nov
             var hastaAnt = new DateTime(2016, 5, 31); //mayo
-            //desde = desdeAnt;
-            //hasta = hastaAnt;
+                                                      //desde = desdeAnt;
+                                                      //hasta = hastaAnt;
 
             var MinimoNeto = 0;
             var topclie = 99999;
