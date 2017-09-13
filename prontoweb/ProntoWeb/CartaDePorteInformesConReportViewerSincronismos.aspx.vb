@@ -2078,7 +2078,7 @@ Partial Class CartaDePorteInformesConReportViewerSincronismos
                         Dim dt = EntidadManager.ExecDinamico(HFSC.Value, strSQLsincronismo() & " WHERE " & s)
                         dt = DataTableWHERE(dt, sWHERE)
                         FiltrarCopias(dt)
-                        output = Sincronismo_TomasHnos(dt)
+                        output = Sincronismo_TomasHnos(dt, "", HFSC.Value)
                         registrosFiltrados = dt.Rows.Count
 
                     Case "SANTA CATALINA"
