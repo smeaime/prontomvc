@@ -117,8 +117,6 @@ namespace ProntoMVC.Controllers
             ViewBag.IdIBCondicion = new SelectList(db.IBCondiciones, "IdIBCondicion", "Descripcion", o.IdIBCondicion);
             ViewBag.IdIBCondicion2 = new SelectList(db.IBCondiciones, "IdIBCondicion", "Descripcion", o.IdIBCondicion2);
             ViewBag.IdIBCondicion3 = new SelectList(db.IBCondiciones, "IdIBCondicion", "Descripcion", o.IdIBCondicion3);
-            //Parametros parametros = db.Parametros.Find(1);
-            //ViewBag.PercepcionIIBB = parametros.PercepcionIIBB;
         }
 
         void inic(ref Factura o)
@@ -139,6 +137,7 @@ namespace ProntoMVC.Controllers
             var mvarCotizacion = funcMoneda_Cotizacion(DateTime.Today, 2); // db.Cotizaciones.OrderByDescending(x => x.IdCotizacion).FirstOrDefault().Cotizacion; //  mo  Cotizacion(Date, glbIdMonedaDolar);
             o.CotizacionMoneda = 1;
             o.CotizacionDolar = (decimal)(mvarCotizacion ?? 0);
+            o.BienesOServicios = "B";
         }
 
         private bool Validar(ProntoMVC.Data.Models.Factura o, ref string sErrorMsg, ref string sWarningMsg)
@@ -193,6 +192,7 @@ namespace ProntoMVC.Controllers
             if ((o.IdPuntoVenta ?? 0) <= 0) { sErrorMsg += "\n" + "Falta el punto de venta"; }
             if ((o.PuntoVenta ?? 0) <= 0) { sErrorMsg += "\n" + "Falta el numero de sucursal"; }
             if ((o.IdCondicionVenta ?? 0) <= 0) { sErrorMsg += "\n" + "Falta la condicion de venta"; }
+            if ((o.BienesOServicios ?? "") == "") { sErrorMsg += "\n" + "Falta la marca de bien o servicio"; }
 
             if (BuscarClaveINI("Exigir obra en facturacion", -1) == "SI") { if ((o.IdObra ?? 0) <= 0) { sErrorMsg += "\n" + "Falta la obra"; } }
 
@@ -244,25 +244,20 @@ namespace ProntoMVC.Controllers
             var Cliente = db.Clientes.Where(p => p.IdCliente == mIdCliente).FirstOrDefault();
             if (Cliente != null)
             {
-                if (Cliente.Estados_Proveedores != null) { if ((Cliente.Estados_Proveedores.Activo ?? "") != "SI") { sErrorMsg += "\n" + "Cliente inhabilitado"; } }
+                if (Cliente.Estados_Proveedores != null) { if ((Cliente.Estados_Proveedores.Activo ?? "") == "NO") { sErrorMsg += "\n" + "Cliente inhabilitado"; } }
             }
 
             if (o.DetalleFacturas.Count <= 0) sErrorMsg += "\n" + "La factura no tiene items";
 
-
-
-            var reqsToDelete = o.DetalleFacturas.Where(x => (x.IdArticulo ?? 0) <= 0).ToList();
+            var reqsToDelete = o.DetalleFacturas.Where(x => (x.IdArticulo ?? 0) <= 0).Where(x => (x.Cantidad ?? 0) == 0).ToList();
             foreach (var deleteReq in reqsToDelete)
             {
                 o.DetalleFacturas.Remove(deleteReq);
             }
 
-
-
-
             foreach (ProntoMVC.Data.Models.DetalleFactura x in o.DetalleFacturas)
             {
-                if ((x.IdArticulo ?? 0) == 0)
+                if ((x.IdArticulo ?? 0) == 0 && (x.Cantidad ?? 0) != 0)
                 {
                     sErrorMsg += "\n" + "Hay items que no tienen articulo";
                 }
@@ -1494,7 +1489,9 @@ namespace ProntoMVC.Controllers
                             OrdenCompraNumero = d.OrdenesCompra.NumeroOrdenCompra,
                             OrdenCompraItem = d.NumeroItem,
                             RemitoNumero = f.Remito.NumeroRemito,
-                            RemitoItem = f.NumeroItem
+                            RemitoItem = f.NumeroItem,
+                            a.PorcentajeIva,
+                            a.ImporteIva
                         }).OrderBy(x => x.IdDetalleFactura)
 //.Skip((currentPage - 1) * pageSize).Take(pageSize)
 .ToList();
@@ -1526,6 +1523,8 @@ namespace ProntoMVC.Controllers
                             a.Costo.NullSafeToString(),
                             a.PrecioUnitario.NullSafeToString(),
                             a.Bonificacion.NullSafeToString(),
+                            a.PorcentajeIva.ToString(),
+                            a.ImporteIva.ToString(),
                             a.Importe.NullSafeToString(),
                             a.TiposDeDescripcion.NullSafeToString(),
                             a.Observaciones.NullSafeToString(),
