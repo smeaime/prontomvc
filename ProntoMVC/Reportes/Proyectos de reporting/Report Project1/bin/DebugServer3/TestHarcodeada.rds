@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<RptDataSource xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Name="TestHarcodeada">
+  <ConnectionProperties>
+    <Extension>SQL</Extension>
+    <ConnectString>Data Source=SERVERSQL3\TESTING;Initial Catalog=Pronto;Connect Timeout=8;User=sa;Password=.SistemaPronto.</ConnectString>
+  </ConnectionProperties>
+  <DataSourceID>d0b8da27-245d-43da-b723-f551c9304f0d</DataSourceID>
+</RptDataSource>
