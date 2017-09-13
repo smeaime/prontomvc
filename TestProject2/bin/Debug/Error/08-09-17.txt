@@ -1,0 +1,418 @@
+
+Log Entry : 
+09/08/2017 11:58:55
+Error in: . Error Message:System.Exception
+ModoImpresion no encontrado: Grobo
+   en CartaDePorteManager.QueInforme_PorServidor(String SC, DataRow dr) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 4732
+   en CartaDePorteManager.generarNotasDeEntregaConReportViewer_ConServidorDeInformes(String SC, DateTime fechadesde, DateTime fechahasta, DataRow dr, enumCDPestado estado, Int64& lineasGeneradas, String& titulo, String logo, Int32 puntoventa, Int32& tiemposql, Int32& tiempoinforme, Boolean bDescargaHtml, GridView grid, Int64 maximumRows) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 4416
+BusinessLogic
+__________________________
+
+Log Entry : 
+09/08/2017 11:59:02
+Error in: . Error Message:System.Data.OleDb.OleDbException (0x80004005): Argumento no válido.
+   en System.Data.OleDb.OleDbConnectionInternal..ctor(OleDbConnectionString constr, OleDbConnection connection)
+   en System.Data.OleDb.OleDbConnectionFactory.CreateConnection(DbConnectionOptions options, DbConnectionPoolKey poolKey, Object poolGroupProviderInfo, DbConnectionPool pool, DbConnection owningObject)
+   en System.Data.ProviderBase.DbConnectionFactory.CreateConnection(DbConnectionOptions options, DbConnectionPoolKey poolKey, Object poolGroupProviderInfo, DbConnectionPool pool, DbConnection owningConnection, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionFactory.CreateNonPooledConnection(DbConnection owningConnection, DbConnectionPoolGroup poolGroup, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionInternal.OpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory)
+   en System.Data.OleDb.OleDbConnection.Open()
+   en CartaDePorteManager.ExcelToHtml(String ArchivoExcelDestino, GridView grid, Int64 constwidth) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 3942
+__________________________
+
+Log Entry : 
+09/08/2017 11:59:02
+Error in: . Error Message:excel: 
+__________________________
+
+Log Entry : 
+09/08/2017 12:25:24
+Error in: . Error Message:System.ArgumentException: Parameter 'webservice' does not exist on this report
+   en Microsoft.Reporting.WebForms.ServerReport.GetIndexForParameter(String parameterName)
+   en Microsoft.Reporting.WebForms.ServerReport.SetParameters(IEnumerable`1 parameters)
+   en CartaDePorteManager.RebindReportViewer_ServidorExcel(ReportViewer& oReportViewer, String rdlFile, IEnumerable`1 parametros, String& ArchivoExcelDestino, Boolean bDescargaHtml) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 5174
+__________________________
+
+Log Entry : 
+09/08/2017 12:25:42
+Error in: . Error Message:Error al hacer el LocalReport.Render()  No se puede crear una conexión al origen de datos 'DataSource1'. (rsErrorOpeningConnection)
+__________________________
+
+Log Entry : 
+09/08/2017 12:25:42
+Error in: . Error Message:Error al hacer el LocalReport.Render()  Error relacionado con la red o específico de la instancia mientras se establecía una conexión con el servidor SQL Server. No se encontró el servidor o éste no estaba accesible. Compruebe que el nombre de la instancia es correcto y que SQL Server está configurado para admitir conexiones remotas. (provider: Interfaces de red SQL, error: 26 - Error al buscar el servidor o instancia especificado)
+__________________________
+
+Log Entry : 
+09/08/2017 12:25:42
+Error in: . Error Message:Microsoft.Reporting.WebForms.ReportServerException
+Error al procesar el informe. (rsProcessingAborted)
+   en Microsoft.Reporting.WebForms.ServerReportSoapProxy.OnSoapException(SoapException e)
+   en Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.ProxyMethodInvocation.Execute[TReturn](RSExecutionConnection connection, ProxyMethod`1 initialMethod, ProxyMethod`1 retryMethod)
+   en Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.Render(String Format, String DeviceInfo, PageCountMode PaginationMode, String& Extension, String& MimeType, String& Encoding, Warning[]& Warnings, String[]& StreamIds)
+   en Microsoft.Reporting.WebForms.ServerReport.Render(String format, String deviceInfo, PageCountMode pageCountMode, String& mimeType, String& encoding, String& fileNameExtension, String[]& streams, Warning[]& warnings)
+   en Microsoft.Reporting.WebForms.Report.Render(String format, String deviceInfo, String& mimeType, String& encoding, String& fileNameExtension, String[]& streams, Warning[]& warnings)
+   en CartaDePorteManager.RebindReportViewer_ServidorExcel(ReportViewer& oReportViewer, String rdlFile, IEnumerable`1 parametros, String& ArchivoExcelDestino, Boolean bDescargaHtml) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 5271
+   en CartaDePorteManager.generarNotasDeEntregaConReportViewer_ConServidorDeInformes(String SC, DateTime fechadesde, DateTime fechahasta, DataRow dr, enumCDPestado estado, Int64& lineasGeneradas, String& titulo, String logo, Int32 puntoventa, Int32& tiemposql, Int32& tiempoinforme, Boolean bDescargaHtml, GridView grid, Int64 maximumRows) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 4555
+Microsoft.ReportViewer.WebForms
+__________________________
+
+Log Entry : 
+09/08/2017 12:25:42
+Error in: . Error Message:System.IO.FileNotFoundException
+No se pudo encontrar el archivo 'C:\Users\Mariano\AppData\Local\Temp\Listado general 08sep.2017_122522_MKH.xls'.
+   en System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   en System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   en System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share)
+   en System.Net.Mail.AttachmentBase.SetContentFromFile(String fileName, String mediaType)
+   en System.Net.Mail.AttachmentBase..ctor(String fileName)
+   en System.Net.Mail.Attachment..ctor(String fileName)
+   en Pronto.ERP.Bll.EntidadManager.MandaEmail_Nuevo(String Para, String Asunto, String Cuerpo, String De, String SmtpServer, String SmtpUser, String SmtpPass, String sFileNameAdjunto, Int64 SmtpPort, Int32 EnableSSL, String CCO, String img, String friendlyname, String replyTo, Boolean isHtml, String inlinePNG, String inlinePNG2) en C:\bdl\pronto\BussinessLogic\EntidadManager.vb:línea 143
+mscorlib
+__________________________
+
+Log Entry : 
+09/08/2017 12:25:42
+Error in: . Error Message:buenosaires@williamsentregas.com.ar
+__________________________
+
+Log Entry : 
+09/08/2017 12:25:42
+Error in: . Error Message:mscalella911@gmail.com
+__________________________
+
+Log Entry : 
+09/08/2017 12:25:42
+Error in: . Error Message:Error en EnviarMailFiltroPorId() System.IO.FileNotFoundException: No se pudo encontrar el archivo 'C:\Users\Mariano\AppData\Local\Temp\Listado general 08sep.2017_122522_MKH.xls'.
+Nombre de archivo: 'C:\Users\Mariano\AppData\Local\Temp\Listado general 08sep.2017_122522_MKH.xls'
+   en System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   en System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   en System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share)
+   en System.Net.Mail.AttachmentBase.SetContentFromFile(String fileName, String mediaType)
+   en System.Net.Mail.AttachmentBase..ctor(String fileName)
+   en System.Net.Mail.Attachment..ctor(String fileName)
+   en Pronto.ERP.Bll.EntidadManager.MandaEmail_Nuevo(String Para, String Asunto, String Cuerpo, String De, String SmtpServer, String SmtpUser, String SmtpPass, String sFileNameAdjunto, Int64 SmtpPort, Int32 EnableSSL, String CCO, String img, String friendlyname, String replyTo, Boolean isHtml, String inlinePNG, String inlinePNG2) en C:\bdl\pronto\BussinessLogic\EntidadManager.vb:línea 439
+   en CDPMailFiltrosManager2.EnviarMailFiltroPorRegistro_DLL(String SC, DateTime fechadesde, DateTime fechahasta, Int32 puntoventa, String titulo, enumCDPestado estado, DataRow& dr, String& sError, Boolean bVistaPrevia, String SmtpServer, String SmtpUser, String SmtpPass, Int32 SmtpPort, String CCOaddress, String& sError2, String inlinePNG, String inlinePNG2) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 21652
+__________________________
+
+Log Entry : 
+09/08/2017 12:25:43
+Error in: . Error Message:System.Data.OleDb.OleDbException (0x80004005): Error de IErrorInfo.GetDescription con E_FAIL(0x80004005).
+   en System.Data.OleDb.OleDbConnectionInternal..ctor(OleDbConnectionString constr, OleDbConnection connection)
+   en System.Data.OleDb.OleDbConnectionFactory.CreateConnection(DbConnectionOptions options, DbConnectionPoolKey poolKey, Object poolGroupProviderInfo, DbConnectionPool pool, DbConnection owningObject)
+   en System.Data.ProviderBase.DbConnectionFactory.CreateConnection(DbConnectionOptions options, DbConnectionPoolKey poolKey, Object poolGroupProviderInfo, DbConnectionPool pool, DbConnection owningConnection, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionFactory.CreateNonPooledConnection(DbConnection owningConnection, DbConnectionPoolGroup poolGroup, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionInternal.OpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory)
+   en System.Data.OleDb.OleDbConnection.Open()
+   en CartaDePorteManager.ExcelToHtml(String ArchivoExcelDestino, GridView grid, Int64 constwidth) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 3942
+__________________________
+
+Log Entry : 
+09/08/2017 12:25:43
+Error in: . Error Message:excel: C:\Users\Mariano\AppData\Local\Temp\Listado general 08sep.2017_122522_MKH.xls
+__________________________
+
+Log Entry : 
+09/08/2017 12:28:18
+Error in: . Error Message:System.ArgumentException: Parameter 'webservice' does not exist on this report
+   en Microsoft.Reporting.WebForms.ServerReport.GetIndexForParameter(String parameterName)
+   en Microsoft.Reporting.WebForms.ServerReport.SetParameters(IEnumerable`1 parameters)
+   en CartaDePorteManager.RebindReportViewer_ServidorExcel(ReportViewer& oReportViewer, String rdlFile, IEnumerable`1 parametros, String& ArchivoExcelDestino, Boolean bDescargaHtml) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 5174
+__________________________
+
+Log Entry : 
+09/08/2017 12:28:34
+Error in: . Error Message:Error al hacer el LocalReport.Render()  No se puede crear una conexión al origen de datos 'DataSource1'. (rsErrorOpeningConnection)
+__________________________
+
+Log Entry : 
+09/08/2017 12:28:34
+Error in: . Error Message:Error al hacer el LocalReport.Render()  Error relacionado con la red o específico de la instancia mientras se establecía una conexión con el servidor SQL Server. No se encontró el servidor o éste no estaba accesible. Compruebe que el nombre de la instancia es correcto y que SQL Server está configurado para admitir conexiones remotas. (provider: Interfaces de red SQL, error: 26 - Error al buscar el servidor o instancia especificado)
+__________________________
+
+Log Entry : 
+09/08/2017 12:28:34
+Error in: . Error Message:Microsoft.Reporting.WebForms.ReportServerException
+Error al procesar el informe. (rsProcessingAborted)
+   en Microsoft.Reporting.WebForms.ServerReportSoapProxy.OnSoapException(SoapException e)
+   en Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.ProxyMethodInvocation.Execute[TReturn](RSExecutionConnection connection, ProxyMethod`1 initialMethod, ProxyMethod`1 retryMethod)
+   en Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.Render(String Format, String DeviceInfo, PageCountMode PaginationMode, String& Extension, String& MimeType, String& Encoding, Warning[]& Warnings, String[]& StreamIds)
+   en Microsoft.Reporting.WebForms.ServerReport.Render(String format, String deviceInfo, PageCountMode pageCountMode, String& mimeType, String& encoding, String& fileNameExtension, String[]& streams, Warning[]& warnings)
+   en Microsoft.Reporting.WebForms.Report.Render(String format, String deviceInfo, String& mimeType, String& encoding, String& fileNameExtension, String[]& streams, Warning[]& warnings)
+   en CartaDePorteManager.RebindReportViewer_ServidorExcel(ReportViewer& oReportViewer, String rdlFile, IEnumerable`1 parametros, String& ArchivoExcelDestino, Boolean bDescargaHtml) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 5271
+   en CartaDePorteManager.generarNotasDeEntregaConReportViewer_ConServidorDeInformes(String SC, DateTime fechadesde, DateTime fechahasta, DataRow dr, enumCDPestado estado, Int64& lineasGeneradas, String& titulo, String logo, Int32 puntoventa, Int32& tiemposql, Int32& tiempoinforme, Boolean bDescargaHtml, GridView grid, Int64 maximumRows) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 4555
+Microsoft.ReportViewer.WebForms
+__________________________
+
+Log Entry : 
+09/08/2017 12:28:35
+Error in: . Error Message:System.IO.FileNotFoundException
+No se pudo encontrar el archivo 'C:\Users\Mariano\AppData\Local\Temp\Listado general 08sep.2017_122751_HHY.xls'.
+   en System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   en System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   en System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share)
+   en System.Net.Mail.AttachmentBase.SetContentFromFile(String fileName, String mediaType)
+   en System.Net.Mail.AttachmentBase..ctor(String fileName)
+   en System.Net.Mail.Attachment..ctor(String fileName)
+   en Pronto.ERP.Bll.EntidadManager.MandaEmail_Nuevo(String Para, String Asunto, String Cuerpo, String De, String SmtpServer, String SmtpUser, String SmtpPass, String sFileNameAdjunto, Int64 SmtpPort, Int32 EnableSSL, String CCO, String img, String friendlyname, String replyTo, Boolean isHtml, String inlinePNG, String inlinePNG2) en C:\bdl\pronto\BussinessLogic\EntidadManager.vb:línea 143
+mscorlib
+__________________________
+
+Log Entry : 
+09/08/2017 12:28:35
+Error in: . Error Message:buenosaires@williamsentregas.com.ar
+__________________________
+
+Log Entry : 
+09/08/2017 12:28:35
+Error in: . Error Message:mscalella911@gmail.com
+__________________________
+
+Log Entry : 
+09/08/2017 12:28:35
+Error in: . Error Message:Error en EnviarMailFiltroPorId() System.IO.FileNotFoundException: No se pudo encontrar el archivo 'C:\Users\Mariano\AppData\Local\Temp\Listado general 08sep.2017_122751_HHY.xls'.
+Nombre de archivo: 'C:\Users\Mariano\AppData\Local\Temp\Listado general 08sep.2017_122751_HHY.xls'
+   en System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   en System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   en System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share)
+   en System.Net.Mail.AttachmentBase.SetContentFromFile(String fileName, String mediaType)
+   en System.Net.Mail.AttachmentBase..ctor(String fileName)
+   en System.Net.Mail.Attachment..ctor(String fileName)
+   en Pronto.ERP.Bll.EntidadManager.MandaEmail_Nuevo(String Para, String Asunto, String Cuerpo, String De, String SmtpServer, String SmtpUser, String SmtpPass, String sFileNameAdjunto, Int64 SmtpPort, Int32 EnableSSL, String CCO, String img, String friendlyname, String replyTo, Boolean isHtml, String inlinePNG, String inlinePNG2) en C:\bdl\pronto\BussinessLogic\EntidadManager.vb:línea 439
+   en CDPMailFiltrosManager2.EnviarMailFiltroPorRegistro_DLL(String SC, DateTime fechadesde, DateTime fechahasta, Int32 puntoventa, String titulo, enumCDPestado estado, DataRow& dr, String& sError, Boolean bVistaPrevia, String SmtpServer, String SmtpUser, String SmtpPass, Int32 SmtpPort, String CCOaddress, String& sError2, String inlinePNG, String inlinePNG2) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 21652
+__________________________
+
+Log Entry : 
+09/08/2017 12:28:35
+Error in: . Error Message:System.Data.OleDb.OleDbException (0x80004005): Error de IErrorInfo.GetDescription con E_FAIL(0x80004005).
+   en System.Data.OleDb.OleDbConnectionInternal..ctor(OleDbConnectionString constr, OleDbConnection connection)
+   en System.Data.OleDb.OleDbConnectionFactory.CreateConnection(DbConnectionOptions options, DbConnectionPoolKey poolKey, Object poolGroupProviderInfo, DbConnectionPool pool, DbConnection owningObject)
+   en System.Data.ProviderBase.DbConnectionFactory.CreateConnection(DbConnectionOptions options, DbConnectionPoolKey poolKey, Object poolGroupProviderInfo, DbConnectionPool pool, DbConnection owningConnection, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionFactory.CreateNonPooledConnection(DbConnection owningConnection, DbConnectionPoolGroup poolGroup, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionInternal.OpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory)
+   en System.Data.OleDb.OleDbConnection.Open()
+   en CartaDePorteManager.ExcelToHtml(String ArchivoExcelDestino, GridView grid, Int64 constwidth) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 3942
+__________________________
+
+Log Entry : 
+09/08/2017 12:28:35
+Error in: . Error Message:excel: C:\Users\Mariano\AppData\Local\Temp\Listado general 08sep.2017_122751_HHY.xls
+__________________________
+
+Log Entry : 
+09/08/2017 12:42:48
+Error in: . Error Message:Error al hacer el LocalReport.Render()  No se puede crear una conexión al origen de datos 'DataSource1'. (rsErrorOpeningConnection)
+__________________________
+
+Log Entry : 
+09/08/2017 12:42:48
+Error in: . Error Message:Error al hacer el LocalReport.Render()  Error relacionado con la red o específico de la instancia mientras se establecía una conexión con el servidor SQL Server. No se encontró el servidor o éste no estaba accesible. Compruebe que el nombre de la instancia es correcto y que SQL Server está configurado para admitir conexiones remotas. (provider: Interfaces de red SQL, error: 26 - Error al buscar el servidor o instancia especificado)
+__________________________
+
+Log Entry : 
+09/08/2017 12:42:48
+Error in: . Error Message:Microsoft.Reporting.WebForms.ReportServerException
+Error al procesar el informe. (rsProcessingAborted)
+   en Microsoft.Reporting.WebForms.ServerReportSoapProxy.OnSoapException(SoapException e)
+   en Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.ProxyMethodInvocation.Execute[TReturn](RSExecutionConnection connection, ProxyMethod`1 initialMethod, ProxyMethod`1 retryMethod)
+   en Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.Render(String Format, String DeviceInfo, PageCountMode PaginationMode, String& Extension, String& MimeType, String& Encoding, Warning[]& Warnings, String[]& StreamIds)
+   en Microsoft.Reporting.WebForms.ServerReport.Render(String format, String deviceInfo, PageCountMode pageCountMode, String& mimeType, String& encoding, String& fileNameExtension, String[]& streams, Warning[]& warnings)
+   en Microsoft.Reporting.WebForms.Report.Render(String format, String deviceInfo, String& mimeType, String& encoding, String& fileNameExtension, String[]& streams, Warning[]& warnings)
+   en CartaDePorteManager.RebindReportViewer_ServidorExcel(ReportViewer& oReportViewer, String rdlFile, IEnumerable`1 parametros, String& ArchivoExcelDestino, Boolean bDescargaHtml) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 5271
+   en CartaDePorteManager.generarNotasDeEntregaConReportViewer_ConServidorDeInformes(String SC, DateTime fechadesde, DateTime fechahasta, DataRow dr, enumCDPestado estado, Int64& lineasGeneradas, String& titulo, String logo, Int32 puntoventa, Int32& tiemposql, Int32& tiempoinforme, Boolean bDescargaHtml, GridView grid, Int64 maximumRows) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 4555
+Microsoft.ReportViewer.WebForms
+__________________________
+
+Log Entry : 
+09/08/2017 12:42:48
+Error in: . Error Message:System.IO.FileNotFoundException
+No se pudo encontrar el archivo 'C:\Users\Mariano\AppData\Local\Temp\Listado general 08sep.2017_124222_XFN.xls'.
+   en System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   en System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   en System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share)
+   en System.Net.Mail.AttachmentBase.SetContentFromFile(String fileName, String mediaType)
+   en System.Net.Mail.AttachmentBase..ctor(String fileName)
+   en System.Net.Mail.Attachment..ctor(String fileName)
+   en Pronto.ERP.Bll.EntidadManager.MandaEmail_Nuevo(String Para, String Asunto, String Cuerpo, String De, String SmtpServer, String SmtpUser, String SmtpPass, String sFileNameAdjunto, Int64 SmtpPort, Int32 EnableSSL, String CCO, String img, String friendlyname, String replyTo, Boolean isHtml, String inlinePNG, String inlinePNG2) en C:\bdl\pronto\BussinessLogic\EntidadManager.vb:línea 143
+mscorlib
+__________________________
+
+Log Entry : 
+09/08/2017 12:42:48
+Error in: . Error Message:buenosaires@williamsentregas.com.ar
+__________________________
+
+Log Entry : 
+09/08/2017 12:42:48
+Error in: . Error Message:mscalella911@gmail.com
+__________________________
+
+Log Entry : 
+09/08/2017 12:42:48
+Error in: . Error Message:Error en EnviarMailFiltroPorId() System.IO.FileNotFoundException: No se pudo encontrar el archivo 'C:\Users\Mariano\AppData\Local\Temp\Listado general 08sep.2017_124222_XFN.xls'.
+Nombre de archivo: 'C:\Users\Mariano\AppData\Local\Temp\Listado general 08sep.2017_124222_XFN.xls'
+   en System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   en System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   en System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share)
+   en System.Net.Mail.AttachmentBase.SetContentFromFile(String fileName, String mediaType)
+   en System.Net.Mail.AttachmentBase..ctor(String fileName)
+   en System.Net.Mail.Attachment..ctor(String fileName)
+   en Pronto.ERP.Bll.EntidadManager.MandaEmail_Nuevo(String Para, String Asunto, String Cuerpo, String De, String SmtpServer, String SmtpUser, String SmtpPass, String sFileNameAdjunto, Int64 SmtpPort, Int32 EnableSSL, String CCO, String img, String friendlyname, String replyTo, Boolean isHtml, String inlinePNG, String inlinePNG2) en C:\bdl\pronto\BussinessLogic\EntidadManager.vb:línea 439
+   en CDPMailFiltrosManager2.EnviarMailFiltroPorRegistro_DLL(String SC, DateTime fechadesde, DateTime fechahasta, Int32 puntoventa, String titulo, enumCDPestado estado, DataRow& dr, String& sError, Boolean bVistaPrevia, String SmtpServer, String SmtpUser, String SmtpPass, Int32 SmtpPort, String CCOaddress, String& sError2, String inlinePNG, String inlinePNG2) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 21652
+__________________________
+
+Log Entry : 
+09/08/2017 12:42:48
+Error in: . Error Message:System.Data.OleDb.OleDbException (0x80004005): Error de IErrorInfo.GetDescription con E_FAIL(0x80004005).
+   en System.Data.OleDb.OleDbConnectionInternal..ctor(OleDbConnectionString constr, OleDbConnection connection)
+   en System.Data.OleDb.OleDbConnectionFactory.CreateConnection(DbConnectionOptions options, DbConnectionPoolKey poolKey, Object poolGroupProviderInfo, DbConnectionPool pool, DbConnection owningObject)
+   en System.Data.ProviderBase.DbConnectionFactory.CreateConnection(DbConnectionOptions options, DbConnectionPoolKey poolKey, Object poolGroupProviderInfo, DbConnectionPool pool, DbConnection owningConnection, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionFactory.CreateNonPooledConnection(DbConnection owningConnection, DbConnectionPoolGroup poolGroup, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionInternal.OpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory)
+   en System.Data.OleDb.OleDbConnection.Open()
+   en CartaDePorteManager.ExcelToHtml(String ArchivoExcelDestino, GridView grid, Int64 constwidth) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 3942
+__________________________
+
+Log Entry : 
+09/08/2017 12:42:48
+Error in: . Error Message:excel: C:\Users\Mariano\AppData\Local\Temp\Listado general 08sep.2017_124222_XFN.xls
+__________________________
+
+Log Entry : 
+09/08/2017 12:46:41
+Error in: . Error Message:Error al hacer el LocalReport.Render()  No se puede crear una conexión al origen de datos 'DataSource1'. (rsErrorOpeningConnection)
+__________________________
+
+Log Entry : 
+09/08/2017 12:46:59
+Error in: . Error Message:Error al hacer el LocalReport.Render()  Error relacionado con la red o específico de la instancia mientras se establecía una conexión con el servidor SQL Server. No se encontró el servidor o éste no estaba accesible. Compruebe que el nombre de la instancia es correcto y que SQL Server está configurado para admitir conexiones remotas. (provider: Interfaces de red SQL, error: 26 - Error al buscar el servidor o instancia especificado)
+__________________________
+
+Log Entry : 
+09/08/2017 12:46:59
+Error in: . Error Message:Microsoft.Reporting.WebForms.ReportServerException
+Error al procesar el informe. (rsProcessingAborted)
+   en Microsoft.Reporting.WebForms.ServerReportSoapProxy.OnSoapException(SoapException e)
+   en Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.ProxyMethodInvocation.Execute[TReturn](RSExecutionConnection connection, ProxyMethod`1 initialMethod, ProxyMethod`1 retryMethod)
+   en Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.Render(String Format, String DeviceInfo, PageCountMode PaginationMode, String& Extension, String& MimeType, String& Encoding, Warning[]& Warnings, String[]& StreamIds)
+   en Microsoft.Reporting.WebForms.ServerReport.Render(String format, String deviceInfo, PageCountMode pageCountMode, String& mimeType, String& encoding, String& fileNameExtension, String[]& streams, Warning[]& warnings)
+   en Microsoft.Reporting.WebForms.Report.Render(String format, String deviceInfo, String& mimeType, String& encoding, String& fileNameExtension, String[]& streams, Warning[]& warnings)
+   en CartaDePorteManager.RebindReportViewer_ServidorExcel(ReportViewer& oReportViewer, String rdlFile, IEnumerable`1 parametros, String& ArchivoExcelDestino, Boolean bDescargaHtml) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 5271
+   en CartaDePorteManager.generarNotasDeEntregaConReportViewer_ConServidorDeInformes(String SC, DateTime fechadesde, DateTime fechahasta, DataRow dr, enumCDPestado estado, Int64& lineasGeneradas, String& titulo, String logo, Int32 puntoventa, Int32& tiemposql, Int32& tiempoinforme, Boolean bDescargaHtml, GridView grid, Int64 maximumRows) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 4555
+Microsoft.ReportViewer.WebForms
+__________________________
+
+Log Entry : 
+09/08/2017 12:47:00
+Error in: . Error Message:System.IO.FileNotFoundException
+No se pudo encontrar el archivo 'C:\Users\Mariano\AppData\Local\Temp\Listado general 08sep.2017_124329_QRH.xls'.
+   en System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   en System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   en System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share)
+   en System.Net.Mail.AttachmentBase.SetContentFromFile(String fileName, String mediaType)
+   en System.Net.Mail.AttachmentBase..ctor(String fileName)
+   en System.Net.Mail.Attachment..ctor(String fileName)
+   en Pronto.ERP.Bll.EntidadManager.MandaEmail_Nuevo(String Para, String Asunto, String Cuerpo, String De, String SmtpServer, String SmtpUser, String SmtpPass, String sFileNameAdjunto, Int64 SmtpPort, Int32 EnableSSL, String CCO, String img, String friendlyname, String replyTo, Boolean isHtml, String inlinePNG, String inlinePNG2) en C:\bdl\pronto\BussinessLogic\EntidadManager.vb:línea 143
+mscorlib
+__________________________
+
+Log Entry : 
+09/08/2017 12:47:00
+Error in: . Error Message:buenosaires@williamsentregas.com.ar
+__________________________
+
+Log Entry : 
+09/08/2017 12:47:00
+Error in: . Error Message:mscalella911@gmail.com
+__________________________
+
+Log Entry : 
+09/08/2017 12:47:00
+Error in: . Error Message:Error en EnviarMailFiltroPorId() System.IO.FileNotFoundException: No se pudo encontrar el archivo 'C:\Users\Mariano\AppData\Local\Temp\Listado general 08sep.2017_124329_QRH.xls'.
+Nombre de archivo: 'C:\Users\Mariano\AppData\Local\Temp\Listado general 08sep.2017_124329_QRH.xls'
+   en System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   en System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   en System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share)
+   en System.Net.Mail.AttachmentBase.SetContentFromFile(String fileName, String mediaType)
+   en System.Net.Mail.AttachmentBase..ctor(String fileName)
+   en System.Net.Mail.Attachment..ctor(String fileName)
+   en Pronto.ERP.Bll.EntidadManager.MandaEmail_Nuevo(String Para, String Asunto, String Cuerpo, String De, String SmtpServer, String SmtpUser, String SmtpPass, String sFileNameAdjunto, Int64 SmtpPort, Int32 EnableSSL, String CCO, String img, String friendlyname, String replyTo, Boolean isHtml, String inlinePNG, String inlinePNG2) en C:\bdl\pronto\BussinessLogic\EntidadManager.vb:línea 439
+   en CDPMailFiltrosManager2.EnviarMailFiltroPorRegistro_DLL(String SC, DateTime fechadesde, DateTime fechahasta, Int32 puntoventa, String titulo, enumCDPestado estado, DataRow& dr, String& sError, Boolean bVistaPrevia, String SmtpServer, String SmtpUser, String SmtpPass, Int32 SmtpPort, String CCOaddress, String& sError2, String inlinePNG, String inlinePNG2) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 21652
+__________________________
+
+Log Entry : 
+09/08/2017 12:47:00
+Error in: . Error Message:System.Data.OleDb.OleDbException (0x80004005): Error de IErrorInfo.GetDescription con E_FAIL(0x80004005).
+   en System.Data.OleDb.OleDbConnectionInternal..ctor(OleDbConnectionString constr, OleDbConnection connection)
+   en System.Data.OleDb.OleDbConnectionFactory.CreateConnection(DbConnectionOptions options, DbConnectionPoolKey poolKey, Object poolGroupProviderInfo, DbConnectionPool pool, DbConnection owningObject)
+   en System.Data.ProviderBase.DbConnectionFactory.CreateConnection(DbConnectionOptions options, DbConnectionPoolKey poolKey, Object poolGroupProviderInfo, DbConnectionPool pool, DbConnection owningConnection, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionFactory.CreateNonPooledConnection(DbConnection owningConnection, DbConnectionPoolGroup poolGroup, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionInternal.OpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory)
+   en System.Data.OleDb.OleDbConnection.Open()
+   en CartaDePorteManager.ExcelToHtml(String ArchivoExcelDestino, GridView grid, Int64 constwidth) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 3942
+__________________________
+
+Log Entry : 
+09/08/2017 12:47:00
+Error in: . Error Message:excel: C:\Users\Mariano\AppData\Local\Temp\Listado general 08sep.2017_124329_QRH.xls
+__________________________
+
+Log Entry : 
+09/08/2017 12:49:24
+Error in: . Error Message:Por generar el archivo C:\Users\Mariano\AppData\Local\Temp\Listado general 08sep.2017_124903_PFR.xls
+__________________________
+
+Log Entry : 
+09/08/2017 12:49:24
+Error in: . Error Message:Archivo generado C:\Users\Mariano\AppData\Local\Temp\Listado general 08sep.2017_124903_PFR.xls
+__________________________
+
+Log Entry : 
+09/08/2017 12:49:34
+Error in: . Error Message:Nombre  'Listado general de Cartas de Po$'
+__________________________
+
+Log Entry : 
+09/08/2017 12:49:34
+Error in: . Error Message:Tablas  1
+__________________________
+
+Log Entry : 
+09/08/2017 12:49:34
+Error in: . Error Message:Convertido C:\Users\Mariano\AppData\Local\Temp\Listado general 08sep.2017_124903_PFR.xls Lineas: 413
+__________________________
+
+Log Entry : 
+09/08/2017 12:49:34
+Error in: . Error Message:error html row 404
+__________________________
+
+Log Entry : 
+09/08/2017 12:49:34
+Error in: . Error Message:error html row 405
+__________________________
+
+Log Entry : 
+09/08/2017 12:49:34
+Error in: . Error Message:error html row 406
+__________________________
+
+Log Entry : 
+09/08/2017 12:49:34
+Error in: . Error Message:error html row 407
+__________________________

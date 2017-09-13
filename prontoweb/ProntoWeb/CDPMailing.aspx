@@ -982,6 +982,7 @@ llama explicitamente al show y update (acordate que este panel es condicional)
                                                     <asp:ListItem Value="Imagen"    Text="Excel con imágenes " />
                                                     <asp:ListItem Value="ExcRec"    Text="Excel con n°recibo" />
                                                     <asp:ListItem Value="Grobo"     Text="Excel GroboCuits" />
+                                                    <asp:ListItem Value="GrbRec"     Text="Excel Grobo + n°recibo" />
                                                     <asp:ListItem Value="Speed"     Text="Excel SpeedAgro" />
                                                     <asp:ListItem Value="Amaggi"    Text="Excel Amaggi" />
                                                     <asp:ListItem Value="ExcHtm"    Text="Excel + Html ancho"       Enabled="true" />

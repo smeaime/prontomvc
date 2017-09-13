@@ -11,7 +11,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>TestProject2</RootNamespace>
     <AssemblyName>TestProject2</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
@@ -56,6 +56,9 @@
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
     <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'DebugServer3|AnyCPU'">
+    <OutputPath>bin\DebugServer3\</OutputPath>
   </PropertyGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' Or '$(VisualStudioVersion)' == '11.0'">
@@ -135,9 +138,6 @@
     </Reference>
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\packages\Newtonsoft.Json.4.5.9\lib\net40\Newtonsoft.Json.dll</HintPath>
-    </Reference>
-    <Reference Include="ProntoMVC">
-      <HintPath>..\..\ProntoMVC.dll</HintPath>
     </Reference>
     <Reference Include="Repositorio">
       <HintPath>..\Repositorio\bin\Debug\Repositorio.dll</HintPath>
@@ -252,6 +252,10 @@
     <ProjectReference Include="..\InterfazFlexicapture\InterfazFlexicapture.csproj">
       <Project>{cca1e32e-7c60-4312-b521-11a6e4ccfca2}</Project>
       <Name>InterfazFlexicapture</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ProntoMVC\ProntoMVC.csproj">
+      <Project>{17487390-6297-4d1c-8b73-57b636f0c114}</Project>
+      <Name>ProntoMVC</Name>
     </ProjectReference>
     <ProjectReference Include="..\ProntoWindowsService\ProntoAgente.csproj">
       <Project>{7d5126a2-b2ca-441c-8d73-2ad8f3ef7fdb}</Project>
