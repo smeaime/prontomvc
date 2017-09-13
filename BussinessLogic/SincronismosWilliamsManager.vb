@@ -1561,7 +1561,7 @@ Namespace Pronto.ERP.Bll
                             Dim dt = EntidadManager.ExecDinamico(SC, strSQLsincronismo() & " WHERE " & s)
                             dt = DataTableWHERE(dt, sWHERE)
                             FiltrarCopias(dt)
-                            output = Sincronismo_TomasHnos(dt)
+                            output = Sincronismo_TomasHnos(dt, "", SC)
                             registrosFiltrados = dt.Rows.Count
 
                         Case "SANTA CATALINA"
@@ -24373,7 +24373,7 @@ Namespace Pronto.ERP.Bll
 
 
 
-        Public Shared Function Sincronismo_TomasHnos(ByVal pDataTable As DataTable, Optional ByVal titulo As String = "") As String
+        Public Shared Function Sincronismo_TomasHnos(ByVal pDataTable As DataTable, ByVal titulo As String, SC As String) As String
 
 
             'Los de LosGrobo y TomasHnos, creo que usan el esquema de AlgoritmoSoftHouse. Algún otro lo hace?
@@ -24521,11 +24521,28 @@ Namespace Pronto.ERP.Bll
 
                 sb &= "&" & Int(iisNull(dr("Mer.Kg."), 0)).ToString.PadLeft(10)                         '23 -Kilos Merma Humedad	Alfa	10	Kilos de Merma registrados por Secada. Valor entero. Cero por defecto.
                 sb &= "&" & cero.ToString.PadLeft(5)                         '24 -Porcentaje Merma Zarandeo	Numérico	5	Hasta 7 posiciones para parte entera y 4 para decimales. Cero por defecto.
-                sb &= "&" & cero.ToString.PadLeft(5)                         '25 -Porcentaje Merma Volátil	Numérico	5	Hasta 7 posiciones para parte entera y 4 para decimales. Cero por defecto.
+
+
+
+
+
+
+
+                Dim cp2 = CartaDePorteManager.GetItem(SC, dr("IdCartaDePorte"))
+
+                sb &= "&" & DecimalToString(Val(cp2.CalidadMermaVolatil)).ToString.PadLeft(5)  '25 -Porcentaje Merma Volátil	Numérico	5	Hasta 7 posiciones para parte entera y 4 para decimales. Cero por defecto.
+
+
+
+
+
+
+
+
 
 
                 sb &= "&" & Int(iisNull(dr("Otras"), 0)).ToString.PadLeft(10)            '26 -Kilos Merma Zarandeo	Numérico	10	Kilos de Merma registrados por Zaranda. Valor entero. Cero por defecto.
-                sb &= "&" & cero.ToString.PadLeft(10)                        '27 -Kilos Merma Volátil	Numérico	10	Kilos de Merma registrados por Manipuleo. Valor entero. Cero por defecto.
+                sb &= "&" & Int(Val(cp2.CalidadMermaVolatilMerma)).ToString.PadLeft(10)  ' volatil
                 sb &= "&" & cero.ToString.PadLeft(10)                         '28 -Kilos Servicio	Numérico	10	Valor entero. Se completa con Cero por defecto.
                 sb &= "&" & Int(iisNull(dr("Kg.Netos"), 0)).ToString.PadLeft(10)                      '29 -Kilos Netos	Numérico	10	Bruto – Tara – Mermas. Valor entero. Se completa con Cero por defecto.
                 sb &= "&" & JustificadoDerecha(dr("Contrato").ToString, 14)           '30 -Número de Contrato de Compra	Numérico	14	Se completa con Cero por defecto.
