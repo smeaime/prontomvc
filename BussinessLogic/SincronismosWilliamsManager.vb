@@ -24533,15 +24533,8 @@ Namespace Pronto.ERP.Bll
                 sb &= "&" & DecimalToString(Val(cp2.CalidadMermaVolatil)).ToString.PadLeft(5)  '25 -Porcentaje Merma Volátil	Numérico	5	Hasta 7 posiciones para parte entera y 4 para decimales. Cero por defecto.
 
 
-
-
-
-
-
-
-
-
-                sb &= "&" & Int(iisNull(dr("Otras"), 0)).ToString.PadLeft(10)            '26 -Kilos Merma Zarandeo	Numérico	10	Kilos de Merma registrados por Zaranda. Valor entero. Cero por defecto.
+                'sb &= "&" & Int(Val(cp2.CalidadZarandeoMerma)).ToString.PadLeft(10) '26 -Kilos Merma Zarandeo	Numérico	10	Kilos de Merma registrados por Zaranda. Valor entero. Cero por defecto.
+                sb &= "&" & Int(iisNull(dr("Otras"), 0)).ToString.PadLeft(10)
                 sb &= "&" & Int(Val(cp2.CalidadMermaVolatilMerma)).ToString.PadLeft(10)  ' volatil
                 sb &= "&" & cero.ToString.PadLeft(10)                         '28 -Kilos Servicio	Numérico	10	Valor entero. Se completa con Cero por defecto.
                 sb &= "&" & Int(iisNull(dr("Kg.Netos"), 0)).ToString.PadLeft(10)                      '29 -Kilos Netos	Numérico	10	Bruto – Tara – Mermas. Valor entero. Se completa con Cero por defecto.
