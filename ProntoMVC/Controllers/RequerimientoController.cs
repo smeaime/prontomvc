@@ -1103,7 +1103,8 @@ namespace ProntoMVC.Controllers
             //}
 
 
-            var data = from a in Req.Where(campo).OrderBy(sidx + " " + sord)
+            var data = from a in Req
+                       //.Where(campo).OrderBy(sidx + " " + sord)
                            //.Skip((currentPage - 1) * pageSize).Take(pageSize)
                         .ToList()
                        select a; //supongo que tengo que hacer la paginacion antes de hacer un select, para que me llene las colecciones anidadas
