@@ -1027,14 +1027,14 @@ namespace ProntoMVC.Controllers
             }
 
             var Req = pagedQuery
-                //.Include(x => x.Obra)
-                //.Include(x => x.SolicitoRequerimiento)
-                //.Include(x => x.AproboRequerimiento)
-                //.Include(x => x.Sectores)
-                //.Include(r => r.DetalleRequerimientos.Select(dr => dr.DetallePedidos.Select(dt => dt.Pedido)))
-                //  .Include("DetalleRequerimientos.DetallePedidos.Pedido") // funciona tambien
-                //   .Include("DetalleRequerimientos.DetallePresupuestos.Presupuesto") // funciona tambien
-                // .Include(x => x.Aprobo)
+                          //.Include(x => x.Obra)
+                          //.Include(x => x.SolicitoRequerimiento)
+                          //.Include(x => x.AproboRequerimiento)
+                          //.Include(x => x.Sectores)
+                          //.Include(r => r.DetalleRequerimientos.Select(dr => dr.DetallePedidos.Select(dt => dt.Pedido)))
+                          //  .Include("DetalleRequerimientos.DetallePedidos.Pedido") // funciona tambien
+                          //   .Include("DetalleRequerimientos.DetallePresupuestos.Presupuesto") // funciona tambien
+                          // .Include(x => x.Aprobo)
                           .AsQueryable();
 
             try
@@ -1120,9 +1120,9 @@ namespace ProntoMVC.Controllers
                             cell = new string[] { 
                                 //"<a href="+ Url.Action("Edit",new {id = a.IdRequerimiento} ) + " target="' >Editar</>" ,
                                 "<a href="+ Url.Action("Edit",new {id = a.IdRequerimiento} ) + "  >Editar</>" ,
-							    "<a href="+ Url.Action("Imprimir",new {id = a.IdRequerimiento} )  +">Imprimir</>" ,
-                                a.IdRequerimiento.ToString(), 
-                                a.NumeroRequerimiento.ToString(), 
+                                "<a href="+ Url.Action("Imprimir",new {id = a.IdRequerimiento} )  +">Imprimir</>" ,
+                                a.IdRequerimiento.ToString(),
+                                a.NumeroRequerimiento.ToString(),
                                 a.FechaRequerimiento.GetValueOrDefault().ToString("dd/MM/yyyy"),
                                 a.Cumplido,
                                 a.Recepcionado,
@@ -1180,7 +1180,7 @@ namespace ProntoMVC.Controllers
                                 a.FechaAnulacion.NullSafeToString(),
                                 a.MotivoAnulacion,
                                 a.FechasLiberacion,
-                             
+
                                 a.Observaciones,
                                 a.LugarEntrega,
                                 a.IdObra.ToString(),
@@ -1207,7 +1207,41 @@ namespace ProntoMVC.Controllers
             //DateTime FechaFinal = DateTime.Today.AddDays(0); 
 
             var SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString(), oStaticMembershipService));
-            var dt = Pronto.ERP.Bll.EntidadManager.GetStoreProcedure(SC, "Requerimientos_TX_PendientesDeAsignacion");
+
+
+            DataTable dt;
+            try
+            {
+                dt = Pronto.ERP.Bll.EntidadManager.GetStoreProcedure(SC, "Requerimientos_TX_PendientesDeAsignacion");
+
+            }
+            catch (Exception)
+            {
+
+                throw new Exception("Error en Requerimientos_TX_PendientesDeAsignacion. Verificar que esté bien configurada la base de mantenimiento.");
+
+
+
+
+                Response.StatusCode = (int)System.Net.HttpStatusCode.BadRequest;
+                Response.TrySkipIisCustomErrors = true;
+
+                JsonResponse res = new JsonResponse();
+                res.Status = Status.Error;
+
+
+
+                //List<string> errors = new List<string>();
+                //errors.Add(errs);
+                string[] words = { "Error en Requerimientos_TX_PendientesDeAsignacion. Verificar que esté bien configurada la base de mantenimiento." };
+                res.Errors = words.ToList(); // GetModelStateErrorsAsString(this.ModelState);
+                res.Message = "El comprobante es inválido";
+
+                return Json(res);
+            }
+
+
+
             IEnumerable<DataRow> Entidad = dt.AsEnumerable();
 
             int totalRecords = Entidad.Count();
@@ -1266,7 +1300,7 @@ namespace ProntoMVC.Controllers
                         select new jqGridRowJson
                         {
                             id = a[0].ToString(),
-                            cell = new string[] { 
+                            cell = new string[] {
                                    a[0].ToString(),
                                    "<a href="+ Url.Action("Edit",new {id =  a[1] } ) + "  >Editar</>" ,
                                    a[2].ToString(),
@@ -1310,34 +1344,34 @@ namespace ProntoMVC.Controllers
             }
 
             var Req = db.Requerimientos
-                // .Include(x => x.DetallePedidos.Select(y => y.Unidad))
-                // .Include(x => x.DetallePedidos.Select(y => y.Moneda))
-                //.Include(x => x.DetallePedidos. .moneda)
-                //   .Include("DetallePedidos.Unidad") // funciona tambien
-                //    .Include(x => x.Moneda)
+                    // .Include(x => x.DetallePedidos.Select(y => y.Unidad))
+                    // .Include(x => x.DetallePedidos.Select(y => y.Moneda))
+                    //.Include(x => x.DetallePedidos. .moneda)
+                    //   .Include("DetallePedidos.Unidad") // funciona tambien
+                    //    .Include(x => x.Moneda)
                     .Include(x => x.Obra)
 
                     .Include(x => x.SolicitoRequerimiento)
                     .Include(x => x.AproboRequerimiento)
                     .Include(x => x.Sectores)
-                //  .Include("DetallePedidos.IdDetalleRequerimiento") // funciona tambien
-                //   .Include("DetalleRequerimientos.DetallePedidos.Pedido") // funciona tambien
-                //.Include(x => x.DetalleRequerimientos)
+                        //  .Include("DetallePedidos.IdDetalleRequerimiento") // funciona tambien
+                        //   .Include("DetalleRequerimientos.DetallePedidos.Pedido") // funciona tambien
+                        //.Include(x => x.DetalleRequerimientos)
 
                         //.Include(x => x.DetalleRequerimientos
-                //            .Select(y => y.DetallePedidos
-                //                )
-                //        )
-                //.Include(x => x.DetalleRequerimientos
-                //            .Select(y => y.DetallePresupuestos
-                //                )
-                //        )
+                        //            .Select(y => y.DetallePedidos
+                        //                )
+                        //        )
+                        //.Include(x => x.DetalleRequerimientos
+                        //            .Select(y => y.DetallePresupuestos
+                        //                )
+                        //        )
 
                         .Include(r => r.DetalleRequerimientos.Select(dr => dr.DetallePedidos.Select(dt => dt.Pedido)))
 
-           //  .Include("DetalleRequerimientos.DetallePedidos.Pedido") // funciona tambien
-                //   .Include("DetalleRequerimientos.DetallePresupuestos.Presupuesto") // funciona tambien
-                // .Include(x => x.Aprobo)
+                          //  .Include("DetalleRequerimientos.DetallePedidos.Pedido") // funciona tambien
+                          //   .Include("DetalleRequerimientos.DetallePresupuestos.Presupuesto") // funciona tambien
+                          // .Include(x => x.Aprobo)
                           .AsQueryable();
 
 
@@ -1491,9 +1525,9 @@ namespace ProntoMVC.Controllers
                             cell = new string[] { 
                                 //"<a href="+ Url.Action("Edit",new {id = a.IdRequerimiento} ) + " target='' >Editar</>" ,
                                 "<a href="+ Url.Action("Edit",new {id = a.IdRequerimiento} ) + "  >Editar</>" ,
-							    "<a href="+ Url.Action("Imprimir",new {id = a.IdRequerimiento} )  +">Imprimir</>" ,
-                                a.IdRequerimiento.ToString(), 
-                                a.NumeroRequerimiento.ToString(), 
+                                "<a href="+ Url.Action("Imprimir",new {id = a.IdRequerimiento} )  +">Imprimir</>" ,
+                                a.IdRequerimiento.ToString(),
+                                a.NumeroRequerimiento.ToString(),
                                 a.FechaRequerimiento.GetValueOrDefault().ToString("dd/MM/yyyy"),
                                 a.Cumplido,
                                 a.Recepcionado,
@@ -1527,7 +1561,7 @@ namespace ProntoMVC.Controllers
 
                                 "",
 
-                                 
+
 
                                 string.Join(",",  a.DetalleRequerimientos
                                     .SelectMany(x =>
@@ -1537,7 +1571,7 @@ namespace ProntoMVC.Controllers
                                                     (y.Pedido == null) ?
                                                     null :
                                                     "<a href="+ Url.Action("Edit", "Pedido",new {id = y.Pedido.IdPedido} ) + "  >" + y.Pedido.NumeroPedido.NullSafeToString() + "</>"
-                                                    
+
                                             )
                                     ).Distinct()
                                 ),
@@ -1563,7 +1597,7 @@ namespace ProntoMVC.Controllers
                                 a.FechaAnulacion.NullSafeToString(),
                                 a.MotivoAnulacion,
                                 a.FechasLiberacion,
-                             
+
                                 a.Observaciones,
                                 a.LugarEntrega,
                                 a.IdObra.ToString(),
@@ -1741,8 +1775,8 @@ namespace ProntoMVC.Controllers
                             a.ConfirmadoPorWeb
 
                         })//.Where(campo)
-                //.OrderBy(sidx + " " + sord)
-                //.Skip((currentPage - 1) * pageSize).Take(pageSize)
+                          //.OrderBy(sidx + " " + sord)
+                          //.Skip((currentPage - 1) * pageSize).Take(pageSize)
 .ToList();
 
             var jsonData = new jqGridJson()
@@ -1754,18 +1788,18 @@ namespace ProntoMVC.Controllers
                         select new jqGridRowJson
                         {
                             id = a.IdRequerimiento.ToString(),
-                            cell = new string[] { 
+                            cell = new string[] {
                                 "<a href="+ Url.Action("Edit",new {id = a.IdRequerimiento} ) + " target='' >Editar</>" ,
-							    "<a href="+ Url.Action("Imprimir",new {id = a.IdRequerimiento} )  +">Imprimir</>" ,
-                                a.IdRequerimiento.ToString(), 
-                                a.NumeroRequerimiento.ToString(), 
+                                "<a href="+ Url.Action("Imprimir",new {id = a.IdRequerimiento} )  +">Imprimir</>" ,
+                                a.IdRequerimiento.ToString(),
+                                a.NumeroRequerimiento.ToString(),
                                 a.FechaRequerimiento.GetValueOrDefault().ToString("dd/MM/yyyy"),
                                 a.Cumplido,
                                 a.Recepcionado,
                                 a.Entregado,
                                 a.Impresa,
                                 a.Detalle,
-                                a.NumeroObra, 
+                                a.NumeroObra,
                                 a.Presupuestos,
                                 a.Comparativas,
                                 a.Pedidos,
@@ -1943,7 +1977,7 @@ namespace ProntoMVC.Controllers
                             a.ConfirmadoPorWeb
 
                         }).Where(campo).OrderBy(sidx + " " + sord)
-                //.Skip((currentPage - 1) * pageSize).Take(pageSize)
+//.Skip((currentPage - 1) * pageSize).Take(pageSize)
 .ToList();
 
             var jsonData = new jqGridJson()
@@ -1955,18 +1989,18 @@ namespace ProntoMVC.Controllers
                         select new jqGridRowJson
                         {
                             id = a.IdRequerimiento.ToString(),
-                            cell = new string[] { 
+                            cell = new string[] {
                                 "<a href="+ Url.Action("Edit",new {id = a.IdRequerimiento} ) + " target='' >Editar</>" ,
-							    "<a href="+ Url.Action("Imprimir",new {id = a.IdRequerimiento} )  +">Imprimir</>" ,
-                                a.IdRequerimiento.ToString(), 
-                                a.NumeroRequerimiento.ToString(), 
+                                "<a href="+ Url.Action("Imprimir",new {id = a.IdRequerimiento} )  +">Imprimir</>" ,
+                                a.IdRequerimiento.ToString(),
+                                a.NumeroRequerimiento.ToString(),
                                 a.FechaRequerimiento.GetValueOrDefault().ToString("dd/MM/yyyy"),
                                 a.Cumplido,
                                 a.Recepcionado,
                                 a.Entregado,
                                 a.Impresa,
                                 a.Detalle,
-                                a.NumeroObra, 
+                                a.NumeroObra,
                                 a.Presupuestos,
                                 a.Comparativas,
                                 a.Pedidos,
@@ -2068,13 +2102,13 @@ namespace ProntoMVC.Controllers
                         select new jqGridRowJson
                         {
                             id = a.IdDetalleRequerimiento.ToString(),
-                            cell = new string[] { 
-                                string.Empty, 
-                                a.IdDetalleRequerimiento.ToString(), 
-                                a.IdArticulo.ToString(), 
+                            cell = new string[] {
+                                string.Empty,
+                                a.IdDetalleRequerimiento.ToString(),
+                                a.IdArticulo.ToString(),
                                 a.IdUnidad.ToString(),
                                 //Eliminado.ToString(),
-                                a.NumeroItem.ToString(), 
+                                a.NumeroItem.ToString(),
                                 a.Cantidad.ToString(),
                                 a.Abreviatura,
                                 a.Codigo,
@@ -2262,7 +2296,7 @@ namespace ProntoMVC.Controllers
                             a.Requerimientos.NumeroRequerimiento
 
                         })
-                //.Skip((currentPage - 1) * pageSize).Take(pageSize)
+//.Skip((currentPage - 1) * pageSize).Take(pageSize)
 .ToList();
 
             var jsonData = new jqGridJson()
@@ -2274,21 +2308,21 @@ namespace ProntoMVC.Controllers
                         select new jqGridRowJson
                         {
                             id = a.IdDetalleRequerimiento.ToString(),
-                            cell = new string[] { 
-                                string.Empty, 
-                                a.IdDetalleRequerimiento.ToString(), 
-                                a.IdArticulo.ToString(), 
+                            cell = new string[] {
+                                string.Empty,
+                                a.IdDetalleRequerimiento.ToString(),
+                                a.IdArticulo.ToString(),
                                 a.IdUnidad.ToString(),
                                 //Eliminado.ToString(),
                                 a.NumeroItem.ToString(), 
                                 
                                 
                                 //a.Cantidad.ToString(), // - loquefigureenpedidos 
-                                (a.Cantidad -  
-                                 db.DetallePedidos.Where(x=>x.IdDetalleRequerimiento==a.IdDetalleRequerimiento 
+                                (a.Cantidad -
+                                 db.DetallePedidos.Where(x=>x.IdDetalleRequerimiento==a.IdDetalleRequerimiento
                                                                 && ((x.Cumplido ?? "NO" )!="AN"))
-                                                        .Sum(z=>z.Cantidad) 
-                                 ).NullSafeToString(), 
+                                                        .Sum(z=>z.Cantidad)
+                                 ).NullSafeToString(),
                                 a.Abreviatura,
                                 a.Codigo,
                                 "",
@@ -2300,13 +2334,13 @@ namespace ProntoMVC.Controllers
                                 a.OrigenDescripcion.ToString(),
                                 a.IdRequerimiento.NullSafeToString(),
                                 a.NumeroRequerimiento.NullSafeToString(),
-                                "<a href="+ Url.Action("Edit",new {id = a.IdRequerimiento} ) + " target='' >Editar</>" 
+                                "<a href="+ Url.Action("Edit",new {id = a.IdRequerimiento} ) + " target='' >Editar</>"
 
-                                
-                       
-                        
-                        
-                        
+
+
+
+
+
                         }
                         }).ToArray()
 
@@ -2441,7 +2475,7 @@ namespace ProntoMVC.Controllers
                             a.Requerimientos.NumeroRequerimiento
 
                         })
-                //.Skip((currentPage - 1) * pageSize).Take(pageSize)
+//.Skip((currentPage - 1) * pageSize).Take(pageSize)
 .ToList();
 
             var jsonData = new jqGridJson()
@@ -2453,21 +2487,21 @@ namespace ProntoMVC.Controllers
                         select new jqGridRowJson
                         {
                             id = a.IdDetalleRequerimiento.ToString(),
-                            cell = new string[] { 
-                                string.Empty, 
-                                a.IdDetalleRequerimiento.ToString(), 
-                                a.IdArticulo.ToString(), 
+                            cell = new string[] {
+                                string.Empty,
+                                a.IdDetalleRequerimiento.ToString(),
+                                a.IdArticulo.ToString(),
                                 a.IdUnidad.ToString(),
                                 //Eliminado.ToString(),
                                 a.NumeroItem.ToString(), 
                                 
                                 
                                 //a.Cantidad.ToString(), // - loquefigureenpedidos 
-                                (a.Cantidad -  
-                                 db.DetallePedidos.Where(x=>x.IdDetalleRequerimiento==a.IdDetalleRequerimiento 
+                                (a.Cantidad -
+                                 db.DetallePedidos.Where(x=>x.IdDetalleRequerimiento==a.IdDetalleRequerimiento
                                                                 && ((x.Cumplido ?? "NO" )!="AN"))
-                                                        .Sum(z=>z.Cantidad) 
-                                 ).NullSafeToString(), 
+                                                        .Sum(z=>z.Cantidad)
+                                 ).NullSafeToString(),
                                 a.Abreviatura,
                                 a.Codigo,
                                 "",
@@ -2479,13 +2513,13 @@ namespace ProntoMVC.Controllers
                                 a.OrigenDescripcion.ToString(),
                                                             a.IdRequerimiento.NullSafeToString(),
                                                            a.NumeroRequerimiento.NullSafeToString(),
-                                                           "<a href="+ Url.Action("Edit",new {id = a.IdRequerimiento} ) + " target='' >Editar</>" 
+                                                           "<a href="+ Url.Action("Edit",new {id = a.IdRequerimiento} ) + " target='' >Editar</>"
 
-                        
-                       
-                        
-                        
-                        
+
+
+
+
+
                         }
                         }).ToArray()
 

@@ -1758,6 +1758,8 @@ loadComplete:  function () {
     $('a#a_panel_este_tab2').text('Requerimientos');
     $('a#a_panel_este_tab3').text('Presupuestos');
 
+/*
+
     ConectarGrillas1();
 
     $('#a_panel_este_tab1').click(function () {
@@ -1772,7 +1774,7 @@ loadComplete:  function () {
         ConectarGrillas3();
     });
 
-
+*/
 
 
 
