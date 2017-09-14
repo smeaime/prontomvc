@@ -126,7 +126,6 @@ namespace ProntoMVC.Controllers
             ViewBag.IdIBCondicion3 = new SelectList(db.IBCondiciones, "IdIBCondicion", "Descripcion", o.IdIBCondicion3);
             ViewBag.IdObra = new SelectList(db.Obras.Where(x => (x.Activa ?? "SI") == "SI").OrderBy(x => x.Descripcion), "IdObra", "Descripcion", o.IdObra);
             ViewBag.IdPuntoVenta = new SelectList(db.PuntosVentas.Where(x => x.IdTipoComprobante == 3), "IdPuntoVenta", "PuntoVenta", o.IdPuntoVenta);
-
         }
 
         public virtual ActionResult TT // (string sidx, string sord, int? page, int? rows, bool _search, string searchField, string searchOper, string searchString, string FechaInicial, string FechaFinal)
@@ -153,31 +152,15 @@ namespace ProntoMVC.Controllers
                 FechaHasta = DateTime.MaxValue;
             }
 
-            //        }
-
-            IQueryable<Data.Models.NotasDebito> q = (from a in db.NotasDebitoes where a.FechaNotaDebito >= FechaDesde && a.FechaNotaDebito <= FechaHasta select a).AsQueryable();
-
-
-            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
             int totalRecords = 0;
 
+            IQueryable<Data.Models.NotasDebito> q = (from a in db.NotasDebitoes where a.FechaNotaDebito >= FechaDesde && a.FechaNotaDebito <= FechaHasta select a).AsQueryable();
             List<Data.Models.NotasDebito> pagedQuery =
             Filters.FiltroGenerico_UsandoIQueryable<Data.Models.NotasDebito>(sidx, sord, page, rows, _search, filters, db, ref totalRecords, q);
-
-            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-       
 
             string campo = String.Empty;
             int pageSize = rows;
             int currentPage = page;
-
-
-
-
 
             var data = (from a in pagedQuery
                         from b in db.DescripcionIvas.Where(v => v.IdCodigoIva == a.IdCodigoIva).DefaultIfEmpty()
@@ -232,9 +215,8 @@ namespace ProntoMVC.Controllers
 
             var data1 = (from a in data select a);
                         //.OrderByDescending(x => x.FechaNotaDebito)
-                        
-//.Skip((currentPage - 1) * pageSize).Take(pageSize)
-//.ToList();
+                        //.Skip((currentPage - 1) * pageSize).Take(pageSize)
+                        //.ToList();
 
             var jsonData = new jqGridJson()
             {
@@ -284,25 +266,38 @@ namespace ProntoMVC.Controllers
             return Json(jsonData, JsonRequestBehavior.AllowGet);
         }
 
-
-        public virtual ActionResult TT_DynamicGridData(string sidx, string sord, int page, int rows, bool _search, string filters)
+        public virtual ActionResult TT_DynamicGridData(string sidx, string sord, int page, int rows, bool _search, string filters, string FechaInicial, string FechaFinal)
         {
+            DateTime FechaDesde, FechaHasta;
+            try
+            {
+                if (FechaInicial == "") FechaDesde = DateTime.MinValue;
+                else FechaDesde = DateTime.ParseExact(FechaInicial, "dd/MM/yyyy", null);
+            }
+            catch (Exception)
+            {
+                FechaDesde = DateTime.MinValue;
+            }
 
-
-            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            try
+            {
+                if (FechaFinal == "") FechaHasta = DateTime.MaxValue;
+                else FechaHasta = DateTime.ParseExact(FechaFinal, "dd/MM/yyyy", null);
+            }
+            catch (Exception)
+            {
+                FechaHasta = DateTime.MaxValue;
+            }
 
             int totalRecords = 0;
 
-            var pagedQuery = Filters.FiltroGenerico<Data.Models.NotasDebito>
-                                ("Localidade,Provincia,Vendedore,Empleado,Cuentas,Transportista", sidx, sord, page, rows, _search, filters, db, ref totalRecords);
+            IQueryable<Data.Models.NotasDebito> q = (from a in db.NotasDebitoes where a.FechaNotaDebito >= FechaDesde && a.FechaNotaDebito <= FechaHasta select a).AsQueryable();
 
-            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            List<Data.Models.NotasDebito> pagedQuery =
+            Filters.FiltroGenerico_UsandoIQueryable<Data.Models.NotasDebito>(sidx, sord, page, rows, _search, filters, db, ref totalRecords, q);
+
+            //var pagedQuery = Filters.FiltroGenerico<Data.Models.NotasDebito>
+            //                    ("Localidade,Provincia,Vendedore,Empleado,Cuentas,Transportista", sidx, sord, page, rows, _search, filters, db, ref totalRecords);
 
             string campo = String.Empty;
             int pageSize = rows ;
@@ -348,16 +343,13 @@ namespace ProntoMVC.Controllers
                             a.FechaVencimientoORechazoCAE,
                             a.Observaciones
                         }).AsQueryable();
-
-            
             
             int totalPages = (int)Math.Ceiling((float)totalRecords / (float)pageSize);
 
             var data1 = (from a in data select a)
-                //        .OrderByDescending(x => x.FechaNotaDebito)
-                        
-//.Skip((currentPage - 1) * pageSize).Take(pageSize)
-.ToList();
+                        //.OrderByDescending(x => x.FechaNotaDebito)
+                        //.Skip((currentPage - 1) * pageSize).Take(pageSize)
+                        .ToList();
 
             var jsonData = new jqGridJson()
             {
@@ -406,7 +398,6 @@ namespace ProntoMVC.Controllers
             };
             return Json(jsonData, JsonRequestBehavior.AllowGet);
         }
-
 
         public virtual FileResult ImprimirConInteropPDF(int id)
         {
@@ -483,7 +474,10 @@ namespace ProntoMVC.Controllers
                             CuentaBancaria = d != null ? d.Cuenta : "",
                             Caja = c != null ? c.Descripcion : "",
                             a.Gravado,
-                            a.Importe
+                            a.Importe,
+                            a.PorcentajeIva,
+                            a.ImporteIva,
+                            a.IvaNoDiscriminado
                         }).OrderBy(x => x.IdDetalleNotaDebito)
 //.Skip((currentPage - 1) * pageSize).Take(pageSize)
 .ToList();
@@ -508,6 +502,9 @@ namespace ProntoMVC.Controllers
                             a.CuentaBancaria.NullSafeToString(),
                             a.Caja.NullSafeToString(),
                             a.Gravado.NullSafeToString(),
+                            a.PorcentajeIva.NullSafeToString(),
+                            a.ImporteIva.NullSafeToString(),
+                            a.IvaNoDiscriminado.NullSafeToString(),
                             a.Importe.NullSafeToString()
                             }
                         }).ToArray()
@@ -679,7 +676,7 @@ namespace ProntoMVC.Controllers
             var Cliente = db.Clientes.Where(p => p.IdCliente == mIdCliente).FirstOrDefault();
             if (Cliente != null)
             {
-                if (Cliente.Estados_Proveedores != null) { if ((Cliente.Estados_Proveedores.Activo ?? "") != "SI") { sErrorMsg += "\n" + "Cliente inhabilitado"; } }
+                if (Cliente.Estados_Proveedores != null) { if ((Cliente.Estados_Proveedores.Activo ?? "") == "NO") { sErrorMsg += "\n" + "Cliente inhabilitado"; } }
             }
 
             foreach (ProntoMVC.Data.Models.DetalleNotasDebito x in o.DetalleNotasDebitoes)

@@ -112,8 +112,12 @@
                     </div>
 
                     <div class="row-fluid">
-                        <div class="span6 lightblue">
-                            <label for="ArticuloAsociado">Cliente</label>
+                        <div class="span1 lightblue">
+                            <label for="lblClienteCodigo">Codigo cliente</label>
+                            <input type="text" name="ClienteCodigo" id="ClienteCodigo" style="font-size: 15px; text-align: left;" class="span12" />
+                        </div>
+                        <div class="span5 lightblue">
+                            <label for="lblClienteNombre">Cliente</label>
                             <input type="text" name="Cliente" id="Cliente" style="font-size: 15px; text-align: left;" class="span12" />
                             <script type="text/jscript">
                                 $("#Cliente").autocomplete({
@@ -124,7 +128,9 @@
                                         $("#IdCliente").val(ui.item.id);
                                         $("#Cliente").val(ui.item.value);
                                         $("#IdCodigoIva").val(ui.item.IdCodigoIva);
+                                        $("#ClienteCodigo").val(ui.item.codigo);
                                         event.preventDefault();
+                                        $("#ListaDrag").trigger("reloadGrid");
                                         ActualizarDatos();
                                     }
                                 });
@@ -305,22 +311,17 @@
                     <hr style="margin: 0; border-top-color: #D8D4D4; border-bottom: 0px solid #ffffff;  " />
                     <div class="row-fluid " style="padding: 11px 0px 0px 0px">
                         <div class="span4 lightblue"></div>
-
                         <div class="span8 lightblue">
-                            @Html.ActionLink("Volver al listado", "Index", null, new { @class = "btn btn-link  pull-right" })
-
-
+                            <input type="button" id="grabar2" value="Aceptar" class="btn  btn-large btn-primary " usesubmitbehavior="false" />
                             @if (Model.IdNotaDebito > 0)
                             {
-                                <a class="btn  btn-large  pull-right" style="color: Black" href="@Url.Action("ImprimirConInteropPDF", new { @id = Model.IdNotaDebito })">
+                                <input type="button" id="anular" value="Anular" class="btn  btn-large btn-primary" />
+                                <a class="btn  btn-large" style="color: Black" href="@Url.Action("ImprimirConInteropPDF", new { @id = Model.IdNotaDebito })">
                                     <i class="icon-print"></i>&nbsp;Imprimir
                                 </a>
-                                <input type="button" id="anular" value="Anular" class="btn  btn-large btn-primary  pull-right" />
-                                
+                                @Html.ActionLink("Nueva Nota debito", "Edit/-1", null, new { @class = "btn btn-large btn-primary" })
                             }
-                           <input type="button" id="grabar2" value="Aceptar" class="btn  btn-large btn-primary  pull-right" usesubmitbehavior="false" />
-
-
+                            @Html.ActionLink("Volver al listado", "Index", null, new { @class = "btn btn-link  pull-right" })
                             <script>
                                 $(function () {
                                     $("#anular").click(function () {
@@ -370,14 +371,11 @@
     <script type="text/javascript">
         $(window).resize(function () {
             RefrescaAnchoGrillaDetalle();
-            $("#conscroll").height($(window).height() - 120);
-                                });
-
+            $("#conscroll").height($(window).height() - 120); });
 
         $(function () {
             //mostrarPanelesDerecho();
             deshabilitarPanelesDerecho();
-
         })
     </script>
 }

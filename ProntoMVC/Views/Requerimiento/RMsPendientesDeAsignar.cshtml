@@ -165,7 +165,7 @@
                                         $('#Lista').trigger('reloadGrid');
                                     }
                                 )
-                            }   
+                            }
                             , function () { $("#loading").hide(); }
                          );
 
@@ -591,6 +591,43 @@
 
                 });
             },
+
+         
+    
+    
+    //loadError : function(xhr,st,err) {
+    //            jQuery("#rsperror").html("Type: "+st+"; Response: "+ xhr.status + " "+xhr.statusText);
+    //        },
+    
+              loadError: function (xhr, textStatus, exceptionThrown) {
+                var errorData = $.parseJSON(xhr.responseText);
+                var errorMessages = [];
+                //this ugly loop is because List<> is serialized to an object instead of an array
+                for (var key in errorData) {
+                    errorMessages.push(errorData[key]);
+                }
+
+
+
+                $('#result').html(errorMessages.join("<br />"));
+                alert(errorMessages.join("\n").replace(/<br\/>/g, '\n'));
+
+
+
+                $('html, body').css('cursor', 'auto');
+                $('#grabar2').attr("disabled", false).val("Aceptar");
+                //alert(errorMessages.join("<br />"));
+
+                $("#textoMensajeAlerta").html(errorMessages.join("<br />"));
+                //$('#result').html(errorMessages.join("<br />"));
+                //$("#textoMensajeAlerta").html(xhr.responseText);
+                //$("#textoMensajeAlerta").html(errorData.Errors.join("<br />"));
+                $("#mensajeAlerta").show();
+                pageLayout.show('east');
+
+            },
+
+
 
 
             //pager: $('#ListaPager'),

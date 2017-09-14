@@ -1212,15 +1212,16 @@ namespace ProntoMVC.Controllers
             DataTable dt;
             try
             {
-                dt = Pronto.ERP.Bll.EntidadManager.GetStoreProcedure(SC, "Requerimientos_TX_PendientesDeAsignacion");
+                //dt = Pronto.ERP.Bll.EntidadManager.GetStoreProcedure(SC, "Requerimientos_TX_PendientesDeAsignacion");
+                dt = Pronto.ERP.Bll.EntidadManager.ExecDinamico(SC, "exec Requerimientos_TX_PendientesDeAsignacion", 100);
+
 
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
-                throw new Exception("Error en Requerimientos_TX_PendientesDeAsignacion. Verificar que esté bien configurada la base de mantenimiento.");
-
-
+                //throw new Exception("Error en Requerimientos_TX_PendientesDeAsignacion. Verificar que esté bien configurada la base de mantenimiento.");
+                // tambien puede ser un timeout
 
 
                 Response.StatusCode = (int)System.Net.HttpStatusCode.BadRequest;
@@ -1235,7 +1236,7 @@ namespace ProntoMVC.Controllers
                 //errors.Add(errs);
                 string[] words = { "Error en Requerimientos_TX_PendientesDeAsignacion. Verificar que esté bien configurada la base de mantenimiento." };
                 res.Errors = words.ToList(); // GetModelStateErrorsAsString(this.ModelState);
-                res.Message = "El comprobante es inválido";
+                res.Message = ex.ToString();
 
                 return Json(res);
             }
