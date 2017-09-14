@@ -1416,6 +1416,7 @@ $(function () {
     $('a#a_panel_este_tab2').text('Requerimientos');
     $('a#a_panel_este_tab3').hide();
 
+/*
     ConectarGrillas1();
 
     $('#a_panel_este_tab1').click(function () {
@@ -1425,6 +1426,7 @@ $(function () {
     $('#a_panel_este_tab2').click(function () {
         ConectarGrillas2();
     });
+*/
 
     RefrescaAnchoGrillaDetalle();
 
