@@ -23,7 +23,7 @@ function agregarBotonDeCopiaEnLasGrillasAuxiliares()
     for (var i = 0; i < ids.length; i++) 
     {
         var cl = ids[i];
-        var be = "<input style='height:22px;width:;' type='button' value=' << ' onclick=\"copiarArticulo('" + cl + "');\"  />";
+        var be = "<input style='height:25px;width:;' type='button' value=' <<< ' onclick=\"copiarArticulo('" + cl + "');\"  />";
         jQuery("#ListaDrag").jqGrid('setRowData', ids[i], { Edit: be });
 
         //https://stackoverflow.com/questions/13961180/invoking-a-doubleclick-event
@@ -36,7 +36,7 @@ function agregarBotonDeCopiaEnLasGrillasAuxiliares()
     for (var i = 0; i < ids.length; i++) 
     {
         var cl = ids[i];
-        var be = "<input style='height:22px;width:;' type='button' value=' << ' onclick=\"copiarRM('" + cl + "');\"  />";
+        var be = "<input style='height:25px;width:;' type='button' value=' <<< ' onclick=\"copiarRM('" + cl + "');\"  />";
         jQuery("#ListaDrag2").jqGrid('setRowData', ids[i], { act: be });
 
         //https://stackoverflow.com/questions/13961180/invoking-a-doubleclick-event
@@ -49,7 +49,7 @@ function agregarBotonDeCopiaEnLasGrillasAuxiliares()
     for (var i = 0; i < ids.length; i++) 
     {
         var cl = ids[i];
-        var be = "<input style='height:22px;width:;' type='button' value=' << ' onclick=\"CopiarPresupuesto('" + cl + "');\"  />";
+        var be = "<input style='height:25px;width:;' type='button' value=' <<< ' onclick=\"CopiarPresupuesto('" + cl + "');\"  />";
         jQuery("#ListaDrag3").jqGrid('setRowData', ids[i], { act: be });
 
         //https://stackoverflow.com/questions/13961180/invoking-a-doubleclick-event
@@ -227,8 +227,6 @@ function agregarBotonDeCopiaEnLasGrillasAuxiliares()
             }
 
             //sacarDeEditMode();
-
-
 
             GrabarGrillaLocal()
 
