@@ -24533,15 +24533,8 @@ Namespace Pronto.ERP.Bll
                 sb &= "&" & DecimalToString(Val(cp2.CalidadMermaVolatil)).ToString.PadLeft(5)  '25 -Porcentaje Merma Volátil	Numérico	5	Hasta 7 posiciones para parte entera y 4 para decimales. Cero por defecto.
 
 
-
-
-
-
-
-
-
-
-                sb &= "&" & Int(iisNull(dr("Otras"), 0)).ToString.PadLeft(10)            '26 -Kilos Merma Zarandeo	Numérico	10	Kilos de Merma registrados por Zaranda. Valor entero. Cero por defecto.
+                'sb &= "&" & Int(Val(cp2.CalidadZarandeoMerma)).ToString.PadLeft(10) '26 -Kilos Merma Zarandeo	Numérico	10	Kilos de Merma registrados por Zaranda. Valor entero. Cero por defecto.
+                sb &= "&" & Int(iisNull(dr("Otras"), 0)).ToString.PadLeft(10)
                 sb &= "&" & Int(Val(cp2.CalidadMermaVolatilMerma)).ToString.PadLeft(10)  ' volatil
                 sb &= "&" & cero.ToString.PadLeft(10)                         '28 -Kilos Servicio	Numérico	10	Valor entero. Se completa con Cero por defecto.
                 sb &= "&" & Int(iisNull(dr("Kg.Netos"), 0)).ToString.PadLeft(10)                      '29 -Kilos Netos	Numérico	10	Bruto – Tara – Mermas. Valor entero. Se completa con Cero por defecto.
@@ -24550,7 +24543,7 @@ Namespace Pronto.ERP.Bll
 
                 sb &= "&" & cero.ToString.PadLeft(14)                          '31 -Número de Contrato de Venta	Numérico	14	Se completa con Cero por defecto.
 
-                sb &= "& " & Left(dr("LocalidadProcedenciaCodigoONCAA").ToString, 5).PadLeft(5)                         '32 -Código Localidad ONCCA	Numérico	5	Se obtiene en base a la procedencia indicada en la Descarga.
+                sb &= "&" & Left(dr("LocalidadProcedenciaCodigoONCAA").ToString, 5).PadLeft(5)                         '32 -Código Localidad ONCCA	Numérico	5	Se obtiene en base a la procedencia indicada en la Descarga.
                 'sb &= "&" & iisNull(dr("CodigoEstablecimientoProcedencia"), "").ToString.PadLeft(5)
 
 
@@ -24559,7 +24552,7 @@ Namespace Pronto.ERP.Bll
                 sb &= "&" & Right(dr("Cosecha").ToString, 5).Replace("/", "").PadLeft(4)                         '35 –Cosecha	Numérico	4	Se completa con Formato NNNN Por ej 0607 para 2006/2007. (3)
                 sb &= "&" & dr("CorredorCUIT").ToString.Replace("-", "").PadLeft(11)                        '36 - Codigo Corredor	Numérico	11	Se completa con el código  de SoftCereal ó CUIT del Corredor o 0 Si no existe el Dato.
                 sb &= "&" & dr("DestinatarioCUIT").ToString.Replace("-", "").PadLeft(11)                        '37 -Codigo Comprador/Vendedor 	Numérico	11	Se completa con el Código de SoftCereal ó CUIT de Comprador del Contrato de Venta al que se aplicará la Carta de Porte o 0 Si no existe el Dato. (4)
-                sb &= "&" & dr("LocalidadDestinoCodigoONCAA").ToString.PadLeft(5)                         '38 -Localidad ONCCA Destino	Numérico	5	Se completa con la Localidad ONCCA asociada al Puerto (Destino)
+                sb &= "&" & JustificadoIzquierda(dr("LocalidadDestinoCodigoONCAA").ToString.PadLeft(5), 5)                        '38 -Localidad ONCCA Destino	Numérico	5	Se completa con la Localidad ONCCA asociada al Puerto (Destino)
                 sb &= "&" & dr("LocalidadProcedenciaCodigoONCAA").ToString.PadLeft(5)                         '39 –Localidad ONCCA Procedencia 	Numérico	5	Se completa con la Localidad ONCCA asociada al Campo (Procedencia)
                 sb &= "&" & dr("SufijoCartaDePorte").ToString.PadLeft(4)                         '40 – Sufijo Carta de Porte	Numérico	4	Sufijo de la carta de Porte.
                 sb &= "&" & dr("DestinatarioCUIT").ToString.Replace("-", "").PadLeft(11)                          '41 – Destinatario CP	Numérico	11	Se completa con el Código de SoftCereal ó CUIT del destinatario de la Carta de Porte o 0 Si no existe el Dato.
