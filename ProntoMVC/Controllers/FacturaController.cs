@@ -117,8 +117,6 @@ namespace ProntoMVC.Controllers
             ViewBag.IdIBCondicion = new SelectList(db.IBCondiciones, "IdIBCondicion", "Descripcion", o.IdIBCondicion);
             ViewBag.IdIBCondicion2 = new SelectList(db.IBCondiciones, "IdIBCondicion", "Descripcion", o.IdIBCondicion2);
             ViewBag.IdIBCondicion3 = new SelectList(db.IBCondiciones, "IdIBCondicion", "Descripcion", o.IdIBCondicion3);
-            //Parametros parametros = db.Parametros.Find(1);
-            //ViewBag.PercepcionIIBB = parametros.PercepcionIIBB;
         }
 
         void inic(ref Factura o)
@@ -139,6 +137,7 @@ namespace ProntoMVC.Controllers
             var mvarCotizacion = funcMoneda_Cotizacion(DateTime.Today, 2); // db.Cotizaciones.OrderByDescending(x => x.IdCotizacion).FirstOrDefault().Cotizacion; //  mo  Cotizacion(Date, glbIdMonedaDolar);
             o.CotizacionMoneda = 1;
             o.CotizacionDolar = (decimal)(mvarCotizacion ?? 0);
+            o.BienesOServicios = "B";
         }
 
         private bool Validar(ProntoMVC.Data.Models.Factura o, ref string sErrorMsg, ref string sWarningMsg)
@@ -193,6 +192,7 @@ namespace ProntoMVC.Controllers
             if ((o.IdPuntoVenta ?? 0) <= 0) { sErrorMsg += "\n" + "Falta el punto de venta"; }
             if ((o.PuntoVenta ?? 0) <= 0) { sErrorMsg += "\n" + "Falta el numero de sucursal"; }
             if ((o.IdCondicionVenta ?? 0) <= 0) { sErrorMsg += "\n" + "Falta la condicion de venta"; }
+            if ((o.BienesOServicios ?? "") == "") { sErrorMsg += "\n" + "Falta la marca de bien o servicio"; }
 
             if (BuscarClaveINI("Exigir obra en facturacion", -1) == "SI") { if ((o.IdObra ?? 0) <= 0) { sErrorMsg += "\n" + "Falta la obra"; } }
 
@@ -244,25 +244,20 @@ namespace ProntoMVC.Controllers
             var Cliente = db.Clientes.Where(p => p.IdCliente == mIdCliente).FirstOrDefault();
             if (Cliente != null)
             {
-                if (Cliente.Estados_Proveedores != null) { if ((Cliente.Estados_Proveedores.Activo ?? "") != "SI") { sErrorMsg += "\n" + "Cliente inhabilitado"; } }
+                if (Cliente.Estados_Proveedores != null) { if ((Cliente.Estados_Proveedores.Activo ?? "") == "NO") { sErrorMsg += "\n" + "Cliente inhabilitado"; } }
             }
 
             if (o.DetalleFacturas.Count <= 0) sErrorMsg += "\n" + "La factura no tiene items";
 
-
-
-            var reqsToDelete = o.DetalleFacturas.Where(x => (x.IdArticulo ?? 0) <= 0).ToList();
+            var reqsToDelete = o.DetalleFacturas.Where(x => (x.IdArticulo ?? 0) <= 0).Where(x => (x.Cantidad ?? 0) == 0).ToList();
             foreach (var deleteReq in reqsToDelete)
             {
                 o.DetalleFacturas.Remove(deleteReq);
             }
 
-
-
-
             foreach (ProntoMVC.Data.Models.DetalleFactura x in o.DetalleFacturas)
             {
-                if ((x.IdArticulo ?? 0) == 0)
+                if ((x.IdArticulo ?? 0) == 0 && (x.Cantidad ?? 0) != 0)
                 {
                     sErrorMsg += "\n" + "Hay items que no tienen articulo";
                 }
@@ -1000,9 +995,6 @@ namespace ProntoMVC.Controllers
             return File(contents, System.Net.Mime.MediaTypeNames.Application.Octet, "factura.pdf");
         }
 
-
-
-
         public virtual FileResult TT_DynamicGridData_ExcelExportacion(string sidx, string sord, int page, int rows, bool _search, string filters, string FechaInicial, string FechaFinal)
         {
             //asdad
@@ -1014,26 +1006,17 @@ namespace ProntoMVC.Controllers
 
             // http://stackoverflow.com/questions/9339792/jqgrid-ef-mvc-how-to-export-in-excel-which-method-you-suggest?noredirect=1&lq=1
 
-
-
             //string sidx = "NumeroPedido";
             //string sord = "desc";
             //int page = 1;
             //rows = 99999999;
             //bool _search = false;
             //string filters = "";
-
-
             //DemoProntoEntities db = new DemoProntoEntities(sc);
-
-
-
             //llamo directo a FiltroGenerico o a Pedidos_DynamicGridData??? -y, filtroGenerico no va a incluir las columnas recalculadas!!!!
             // Cuanto tarda ExportToExcelEntityCollection en crear el excel de un FiltroGenerico de toda la tabla de Pedidos?
 
-
             IQueryable<Data.Models.Factura> q = (from a in db.Facturas select a).AsQueryable();
-
 
             //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1047,21 +1030,17 @@ namespace ProntoMVC.Controllers
 
             result = (JsonResult)TT_DynamicGridData(sidx, sord, page, rows, _search, filters, "", "");
 
-
             string output = "c:\\adasdasd.xls";
 
             List<string[]> lista = new List<string[]>();
 
             jqGridJson listado = (jqGridJson)result.Data;
 
-
             for (int n = 0; n < listado.rows.Count(); n++)
             {
                 string[] renglon = listado.rows[n].cell;
                 lista.Add(renglon);
             }
-
-
 
             var excelData = new jqGridWeb.DataForExcel(
                     // column Header
@@ -1073,34 +1052,21 @@ namespace ProntoMVC.Controllers
                     //    new[] {"a", "2", "c2"}
                     //},
                     lista,
-
                     "Test Grid");
-
 
             Stream stream = new FileStream(output, FileMode.Create);
             excelData.CreateXlsxAndFillData(stream);
             stream.Close();
 
-
             //PreFormatear();
             //abrir con eeplus y poner autowidth?
 
-
-
             byte[] contents = System.IO.File.ReadAllBytes(output);
             return File(contents, System.Net.Mime.MediaTypeNames.Application.Octet, "output.xls");
-
         }
-
-
-
-
-
-
 
         public virtual ActionResult TT_DynamicGridData(string sidx, string sord, int page, int rows, bool _search, string filters, string FechaInicial, string FechaFinal)
         {
-
             //            if (FechaInicial != string.Empty)
             //          {
 
@@ -1112,10 +1078,8 @@ namespace ProntoMVC.Controllers
             }
             catch (Exception)
             {
-
                 FechaDesde = DateTime.MinValue;
             }
-
 
             try
             {
@@ -1124,30 +1088,15 @@ namespace ProntoMVC.Controllers
             }
             catch (Exception)
             {
-
                 FechaHasta = DateTime.MaxValue;
             }
 
-            //        }
-
             IQueryable<Data.Models.Factura> q = (from a in db.Facturas where a.FechaFactura >= FechaDesde && a.FechaFactura <= FechaHasta select a).AsQueryable();
-
-
-            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
             int totalRecords = 0;
 
             List<Data.Models.Factura> pagedQuery =
             Filters.FiltroGenerico_UsandoIQueryable<Data.Models.Factura>(sidx, sord, page, rows, _search, filters, db, ref totalRecords, q);
-
-            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
 
             string campo = String.Empty;
             int pageSize = rows;
@@ -1494,7 +1443,9 @@ namespace ProntoMVC.Controllers
                             OrdenCompraNumero = d.OrdenesCompra.NumeroOrdenCompra,
                             OrdenCompraItem = d.NumeroItem,
                             RemitoNumero = f.Remito.NumeroRemito,
-                            RemitoItem = f.NumeroItem
+                            RemitoItem = f.NumeroItem,
+                            a.PorcentajeIva,
+                            a.ImporteIva
                         }).OrderBy(x => x.IdDetalleFactura)
 //.Skip((currentPage - 1) * pageSize).Take(pageSize)
 .ToList();
@@ -1526,6 +1477,8 @@ namespace ProntoMVC.Controllers
                             a.Costo.NullSafeToString(),
                             a.PrecioUnitario.NullSafeToString(),
                             a.Bonificacion.NullSafeToString(),
+                            a.PorcentajeIva.ToString(),
+                            a.ImporteIva.ToString(),
                             a.Importe.NullSafeToString(),
                             a.TiposDeDescripcion.NullSafeToString(),
                             a.Observaciones.NullSafeToString(),

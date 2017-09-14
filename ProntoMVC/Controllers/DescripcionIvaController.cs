@@ -36,5 +36,19 @@ namespace ProntoMVC.Controllers
             return PartialView("Select", Tabla);
         }
 
+        public virtual JsonResult GetPorcentajes()
+        {
+            var q = (from item in db.Parametros2
+                     where (item.Campo.ToLower()).Contains("PorcentajeIva".ToLower())
+                     orderby item.Valor
+                     select new
+                     {
+                         id = item.IdParametro,
+                         value = (item.Valor ?? ""),
+                         descripcion = (item.Campo ?? "")
+                     }).ToList();
+            return Json(q, JsonRequestBehavior.AllowGet);
+        }
+
     }
 }
