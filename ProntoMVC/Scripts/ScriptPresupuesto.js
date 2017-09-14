@@ -23,13 +23,40 @@ function agregarBotonDeCopiaEnLasGrillasAuxiliares()
     for (var i = 0; i < ids.length; i++) 
     {
         var cl = ids[i];
-        var be = "<input style='height:22px;width:20px;' type='button' value=' << ' onclick=\"copiarArticulo('" + cl + "');\"  />";
+        var be = "<input style='height:22px;width:;' type='button' value=' << ' onclick=\"copiarArticulo('" + cl + "');\"  />";
         jQuery("#ListaDrag").jqGrid('setRowData', ids[i], { Edit: be });
 
         //https://stackoverflow.com/questions/13961180/invoking-a-doubleclick-event
         //copiarArticulo(id);
 
     }   
+
+
+    var ids = jQuery("#ListaDrag2").jqGrid('getDataIDs');
+    for (var i = 0; i < ids.length; i++) 
+    {
+        var cl = ids[i];
+        var be = "<input style='height:22px;width:;' type='button' value=' << ' onclick=\"copiarRM('" + cl + "');\"  />";
+        jQuery("#ListaDrag2").jqGrid('setRowData', ids[i], { act: be });
+
+        //https://stackoverflow.com/questions/13961180/invoking-a-doubleclick-event
+        //copiarArticulo(id);
+
+    }   
+
+
+    var ids = jQuery("#ListaDrag3").jqGrid('getDataIDs');
+    for (var i = 0; i < ids.length; i++) 
+    {
+        var cl = ids[i];
+        var be = "<input style='height:22px;width:;' type='button' value=' << ' onclick=\"CopiarPresupuesto('" + cl + "');\"  />";
+        jQuery("#ListaDrag3").jqGrid('setRowData', ids[i], { act: be });
+
+        //https://stackoverflow.com/questions/13961180/invoking-a-doubleclick-event
+        //copiarArticulo(id);
+
+    }   
+
 
 }
 
@@ -500,7 +527,8 @@ function agregarBotonDeCopiaEnLasGrillasAuxiliares()
 
                         //                rows = $("#Lista").getGridParam("reccount");
                         //                if (rows > 5) $("#Lista").jqGrid('setGridHeight', rows * 40, true);
-                        AgregarRenglonesEnBlanco({ "IdDetallePresupuesto": "0", "IdArticulo": "0", "Cantidad": "0", "Descripcion": "" });
+                        
+AgregarRenglonesEnBlanco({ "IdDetallePresupuesto": "0", "IdArticulo": "0", "Cantidad": "0", "Descripcion": "" });
 
 
 
@@ -1028,6 +1056,9 @@ $(function () {
                         jQuery("#Lista").jqGrid('setRowData', ids[i], { act: be + se + ce });
                         calculateTotal();
                     }
+},
+
+loadComplete:  function () {
 
                         AgregarRenglonesEnBlanco({ "IdDetallePresupuesto": "0", "IdArticulo": "0", "Cantidad": "0", "Descripcion": "" });
 
@@ -1364,6 +1395,7 @@ $(function () {
         },
         loadComplete: function () {
             grid = $("ListaDrag");
+            agregarBotonDeCopiaEnLasGrillasAuxiliares();
         },
 
 
@@ -1451,7 +1483,7 @@ $(function () {
                    'Pedidos', 'Recepciones', 'Salidas', 'Libero', 'Solicito', 'Sector', 'Usuario_anulo', 'Fecha_anulacion', 'Motivo_anulacion', 'Fechas_liberacion',
                    'Observaciones', 'Lugar de entrega', 'IdObra', 'IdSector'],
         colModel: [
-                    { name: 'act', index: 'act', align: 'center', width: 80, sortable: false, editable: false, search: false, hidden: true }, //, formatter: 'showlink', formatoptions: { baseLinkUrl: '@Url.Action("Edit")'} },
+                    { name: 'act', index: 'act', align: 'center', width: 80, sortable: false, editable: false, search: false, hidden: false }, //, formatter: 'showlink', formatoptions: { baseLinkUrl: '@Url.Action("Edit")'} },
                     { name: 'IdRequerimiento', index: 'IdRequerimiento', align: 'left', width: 100, editable: false, hidden: true },
                     { name: 'NumeroRequerimiento', index: 'NumeroRequerimiento', align: 'right', width: 50, editable: false, search: true, searchoptions: { sopt: ['cn', 'eq'] } },
                     { name: 'FechaRequerimiento', index: 'FechaRequerimiento', width: 75, align: 'center', sorttype: 'date', editable: false, formatoptions: { newformat: 'dd/mm/yy' }, datefmt: 'dd/mm/yy', search: false },
@@ -1483,6 +1515,10 @@ $(function () {
         ondblClickRow: function (id) {
             copiarRM(id);
         },
+        loadComplete: function () {
+            agregarBotonDeCopiaEnLasGrillasAuxiliares();
+        },
+
 
 
         pager: $('#ListaDragPager2'),
@@ -1556,7 +1592,7 @@ $(function () {
                    'Plazo_entrega', 'Condicion_compra', 'Garantia', 'Lugar_entrega', 'Comprador', 'Aprobo', 'Referencia', 'Detalle', 'Contacto', 'Observaciones', 'IdProveedor'
         ],
         colModel: [
-                    { name: 'act', index: 'act', align: 'center', width: 80, sortable: false, editable: false, search: false, hidden: true }, //, formatter: 'showlink', formatoptions: { baseLinkUrl: '@Url.Action("Edit")'} },
+                    { name: 'act', index: 'act', align: 'center', width: 80, sortable: false, editable: false, search: false, hidden: false }, //, formatter: 'showlink', formatoptions: { baseLinkUrl: '@Url.Action("Edit")'} },
                     { name: 'IdPresupuesto', index: 'IdPresupuesto', align: 'left', width: 100, editable: false, hidden: true },
                     { name: 'Numero', index: 'Numero', align: 'right', width: 50, editable: false, search: true, searchoptions: { sopt: ['cn', 'eq'] } },
                     { name: 'Orden', index: 'SubNumero', align: 'right', width: 50, editable: false, search: true, searchoptions: { sopt: ['cn', 'eq'] } },
@@ -1593,6 +1629,9 @@ $(function () {
             CopiarPresupuesto(id)
         },
 
+        loadComplete: function () {
+            agregarBotonDeCopiaEnLasGrillasAuxiliares();
+        },
 
 
 
