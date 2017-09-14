@@ -61,7 +61,7 @@ using Newtonsoft.Json.Serialization;
 using System.Text.RegularExpressions;
 
 using System.Net;
-using Microsoft.AspNet.SignalR.Client;
+//using Microsoft.AspNet.SignalR.Client;
 
 namespace Fenton.Example
 {
@@ -3569,7 +3569,7 @@ namespace ExtensionMethods
 
 
 
-
+/*
 
 namespace ConsoleApplication116_SignalRClient
 {
@@ -3629,7 +3629,7 @@ namespace ConsoleApplication116_SignalRClient
         }
     }
 }
-
+*/
 
 
 
