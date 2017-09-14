@@ -2,7 +2,7 @@
 
 //$(document).ready(function () {
 //    $('*[data-autocomplete-url]')
-//                        .each(function () {
+//                        .each(functenion () {
 //                            $(this).autocomplete({
 //                                source: $(this).data("autocomplete-url")
 //                            });
@@ -191,7 +191,7 @@ function RefrescaAnchoJqgrids() {
     // este es el codigo que actualiza (muy tarde) el ancho del arbolito
     /////////////////////////////////////////////////////////////////////////////////////////////////
     // if (grid = $('.ui-jqgrid-btable:visible')) {
-    if (grid = $('.ui-jqgrid-btable')) { // le quité el visible para que tambien trabaje sobre el tab que todavía no saltó a la pantalla
+    if (grid = $('.ui-jqgrid-btable')) { // le quitï¿½ el visible para que tambien trabaje sobre el tab que todavï¿½a no saltï¿½ a la pantalla
         grid.each(function (index) {
             var gridId = $(this).attr('id');
             var gridParentWidth = $('#gbox_' + gridId).parent().width();
@@ -383,14 +383,14 @@ function QuitarRenglonDragDrop(idazar, getdata) {
 
 
     ///////////////
-    // paso 1: borrar el renglon vacío de yapa que agrega el D&D (pero no el dblClick) -pero cómo sabés que estás en modo D&D?
+    // paso 1: borrar el renglon vacï¿½o de yapa que agrega el D&D (pero no el dblClick) -pero cï¿½mo sabï¿½s que estï¿½s en modo D&D?
     ///////////////
     var segundorenglon = $($("#Lista")[0].rows[1]).attr("id")
     // var segundorenglon = $($("#Lista")[0].rows[pos+2]).attr("id") // el segundo renglon
     //alert(segundorenglon);
     if (segundorenglon != undefined) {
         if (segundorenglon.indexOf("dnd") != -1) {
-            // tiró el renglon en modo dragdrop, no hizo dobleclic
+            // tirï¿½ el renglon en modo dragdrop, no hizo dobleclic
             $("#Lista").jqGrid('delRowData', segundorenglon);
         }
     }
@@ -402,7 +402,7 @@ function QuitarRenglonDragDrop(idazar, getdata) {
     // paso 2: agregar en el ultimo lugar antes de los renglones vacios
     ///////////////
 
-    //acá hay un problemilla... si el tipo está usando el DnD, se crea un renglon libre arriba de todo...
+    //acï¿½ hay un problemilla... si el tipo estï¿½ usando el DnD, se crea un renglon libre arriba de todo...
 
     var pos = TraerPosicionLibre();
     if (pos == null) {
@@ -424,7 +424,7 @@ function QuitarRenglonDragDrop(idazar, getdata) {
 
 
 function TraerPosicionLibre() {
-    //acá hay un problemilla... si el tipo está usando el DnD, se crea un renglon libre arriba de todo... Y usando solo click, no.
+    //acï¿½ hay un problemilla... si el tipo estï¿½ usando el DnD, se crea un renglon libre arriba de todo... Y usando solo click, no.
 
     var grid = jQuery("#Lista")
     var rows = $("#Lista").getGridParam("reccount");
@@ -508,11 +508,11 @@ function AgregarRenglonesEnBlanco(renglonVacio, nombregrilla) {
     else emptyRows = 1;
 
 
-    //pasa q tengo q ver cuántos de los renglones existentes ya están vacíos!!!
-    //pasa q tengo q ver cuántos de los renglones existentes ya están vacíos!!!
-    //pasa q tengo q ver cuántos de los renglones existentes ya están vacíos!!!
-    //pasa q tengo q ver cuántos de los renglones existentes ya están vacíos!!!
-    //pasa q tengo q ver cuántos de los renglones existentes ya están vacíos!!!
+    //pasa q tengo q ver cuï¿½ntos de los renglones existentes ya estï¿½n vacï¿½os!!!
+    //pasa q tengo q ver cuï¿½ntos de los renglones existentes ya estï¿½n vacï¿½os!!!
+    //pasa q tengo q ver cuï¿½ntos de los renglones existentes ya estï¿½n vacï¿½os!!!
+    //pasa q tengo q ver cuï¿½ntos de los renglones existentes ya estï¿½n vacï¿½os!!!
+    //pasa q tengo q ver cuï¿½ntos de los renglones existentes ya estï¿½n vacï¿½os!!!
 
     var rowsLlenas = 0;
 
@@ -575,7 +575,7 @@ function AgregarRenglonesEnBlanco(renglonVacio, nombregrilla) {
 
 
 
-            gridceil = Math.ceil(Math.random() * 1000000); // ojo con esto, si usas el mismo id, la edicion de un renglon se va a pasar a otro al instante!, y no vas a entender q está pasando 
+            gridceil = Math.ceil(Math.random() * 1000000); // ojo con esto, si usas el mismo id, la edicion de un renglon se va a pasar a otro al instante!, y no vas a entender q estï¿½ pasando 
 
 
             grid.jqGrid("addRowData", "empty_" + gridceil, renglonVacio);
@@ -764,13 +764,13 @@ $(function () {
     window.onerror = function (message, file, line, column, errorObj) {
 
 
-        //qué hacer con los casos de “Script Error.”???? http://danlimerick.wordpress.com/2014/01/18/how-to-catch-javascript-errors-with-window-onerror-even-on-chrome-and-firefox/
+        //quï¿½ hacer con los casos de ï¿½Script Error.ï¿½???? http://danlimerick.wordpress.com/2014/01/18/how-to-catch-javascript-errors-with-window-onerror-even-on-chrome-and-firefox/
         //usar crossorigin
         // -pero no es tan simple http://stackoverflow.com/questions/14124940/how-to-see-what-is-returned-when-a-remote-script-is-blocked?lq=1
-        //Cryptic “Script Error.” reported in Javascript in Chrome and Firefox
+        //Cryptic ï¿½Script Error.ï¿½ reported in Javascript in Chrome and Firefox
 
-        //Firefox and Chrome will for security reasons not report exceptions from scripts that are of a different origin. All you get is a cryptic “Script Error.” and nothing else. Totally useless. 
-        //Solving the Cryptic “Script Error.”
+        //Firefox and Chrome will for security reasons not report exceptions from scripts that are of a different origin. All you get is a cryptic ï¿½Script Error.ï¿½ and nothing else. Totally useless. 
+        //Solving the Cryptic ï¿½Script Error.ï¿½
 
         //The latest versions of Chrome (see point 3 in the linked post) and Firefox have now provided a way to allow reporting of exceptions from CDNs.
 
@@ -865,19 +865,19 @@ $(function () {
 
 
     //    http://stackoverflow.com/questions/1184624/convert-form-data-to-js-object-with-jquery
-    // esta funcion es grosa, la unica que encontré que arrancase
+    // esta funcion es grosa, la unica que encontrï¿½ que arrancase
 
     $.fn.serializeObject = function () {
 
-        // si no anda, verificá que el form está declarado con:
+        // si no anda, verificï¿½ que el form estï¿½ declarado con:
         //  @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "formid" }))
         // y no con un tag <form>
 
-        //no funciona con lo oculto (por ejemplo, lo que no está en el tab seleccionado!)
+        //no funciona con lo oculto (por ejemplo, lo que no estï¿½ en el tab seleccionado!)
         // Be warned, serializeArray() will not include disabled elements. I often disable input elements that are 
         // sync'd to other elements on the page, but I still want them included in my serialized object. You're 
         //better off using something like $.map( $("#container :input"), function(n, i) { /* n.name and $(n).val() */ } ); 
-        // if you need to include disabled elements. – Samuel Meacham Jul 18 '10 at 23:54
+        // if you need to include disabled elements. ï¿½ Samuel Meacham Jul 18 '10 at 23:54
 
 
         var self = this,
@@ -1270,7 +1270,7 @@ function validatePwd() {
 
 
 
-                    // si usás una funcion de callback, pasale los parametros. Quiero decir: que el dialog no tenga que saber cómo implementarla!
+                    // si usï¿½s una funcion de callback, pasale los parametros. Quiero decir: que el dialog no tenga que saber cï¿½mo implementarla!
                     // http://stackoverflow.com/questions/939032/jquery-pass-more-parameters-into-callback
 
                     GrabarFirma();
@@ -1332,12 +1332,12 @@ function validatePwd2(fCallbackEnExito, fCallbackRechazada) {
                     var combo = $("#Aux0").val();
                     var post = $("#Aux10").val();
 
-                    // alert("exito, se ejecutará el callback");
+                    // alert("exito, se ejecutarï¿½ el callback");
 
-                    if (typeof fCallbackEnExito == "function") fCallbackEnExito(); else alert('No se pasó el callback!');
-                    return true; // tiene sentido devolver algo en una funcion asíncrona?
-                    // ademas, todo lo que hiciese esa funcion debiera ser revalidado: por ejemplo, si llama al método Anular, le debe pasar como parametros la contraseña 
-                    // -pero entonces por qué no hacés la validacion de la contraseña solo en la llamada del método? 
+                    if (typeof fCallbackEnExito == "function") fCallbackEnExito(); else alert('No se pasï¿½ el callback!');
+                    return true; // tiene sentido devolver algo en una funcion asï¿½ncrona?
+                    // ademas, todo lo que hiciese esa funcion debiera ser revalidado: por ejemplo, si llama al mï¿½todo Anular, le debe pasar como parametros la contraseï¿½a 
+                    // -pero entonces por quï¿½ no hacï¿½s la validacion de la contraseï¿½a solo en la llamada del mï¿½todo? 
 
                 }
                 else {
@@ -1572,7 +1572,7 @@ $("#grabarNormal").click(function () {
 
     var items = [];
 
-    // cabecera.DetalleFacturas = [];  // el array no existe en el objeto cabecera, lo anexo a lo bestia (ojo que, en verdad, sí hay uno, porque lo creé con HiddenFor)
+    // cabecera.DetalleFacturas = [];  // el array no existe en el objeto cabecera, lo anexo a lo bestia (ojo que, en verdad, sï¿½ hay uno, porque lo creï¿½ con HiddenFor)
     cabecera[name] = [];  // http://stackoverflow.com/questions/6302874/declare-variable-while-the-variable-name-is-a-string
 
     var dataIds = $('#Lista').jqGrid('getDataIDs');
@@ -1689,7 +1689,7 @@ function PedirFirma(o) {
     $("#Aux10").val(idComparativa);
 
     if (false) {
-        //  mientras no sepa cómo traerme los posibles firmantes sin pasar el Orden como parametro, usar el listado completo
+        //  mientras no sepa cï¿½mo traerme los posibles firmantes sin pasar el Orden como parametro, usar el listado completo
         $.post(ROOT + 'Comparativa/Autorizaciones_TX_PorFormulario_Comparativa?idComparativa=' + idComparativa,
             function (data) {
                 var select = $('#mySelect').empty();
@@ -1719,7 +1719,7 @@ function PedirFirma2(IdFormulario, IdComprobante, IdAutorizacion, IdAutoriza) {
     // $("#Aux10").val(idComparativa);
 
     if (true) {
-        //  mientras no sepa cómo traerme los posibles firmantes sin pasar el Orden como parametro, usar el listado completo
+        //  mientras no sepa cï¿½mo traerme los posibles firmantes sin pasar el Orden como parametro, usar el listado completo
         $.post(ROOT + 'Autorizacion/Autorizaciones_TX_PorFormulario_Comparativa?IdComprobante=' + IdComprobante + "&IdFormulario=" + IdFormulario,
             function (data) {
                 var select = $('#mySelect').empty();
