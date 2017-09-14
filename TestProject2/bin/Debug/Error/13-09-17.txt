@@ -1,0 +1,30 @@
+
+Log Entry : 
+09/13/2017 16:03:01
+Error in: . Error Message:Por generar el archivo C:\Users\Mariano\AppData\Local\Temp\Listado general 13sep.2017_160243_QFJ.xls
+__________________________
+
+Log Entry : 
+09/13/2017 16:03:01
+Error in: . Error Message:Archivo generado C:\Users\Mariano\AppData\Local\Temp\Listado general 13sep.2017_160243_QFJ.xls
+__________________________
+
+Log Entry : 
+09/13/2017 16:03:01
+Error in: . Error Message:Prefijo de asunto vacio.  -  - 0
+__________________________
+
+Log Entry : 
+09/13/2017 16:03:14
+Error in: . Error Message:Nombre  'Listado general de Cartas de Po$'
+__________________________
+
+Log Entry : 
+09/13/2017 16:03:14
+Error in: . Error Message:Tablas  1
+__________________________
+
+Log Entry : 
+09/13/2017 16:03:14
+Error in: . Error Message:Convertido C:\Users\Mariano\AppData\Local\Temp\Listado general 13sep.2017_160243_QFJ.xls Lineas: 446
+__________________________
