@@ -37,34 +37,7 @@
     document.body.onclick = saveEditedCell; // attach to current document.
     function saveEditedCell(evt) {
         var target = $(evt.target);
-
-        if ($grid) {
-            var isCellClicked = $grid.find(target).length; // check if click is inside jqgrid
-            if (gridCellWasClicked && !isCellClicked) // check if a valid click
-            {
-                gridCellWasClicked = false;
-                $grid.jqGrid("saveCell", lastSelectediRow2, lastSelectediCol2);
-            }
-        }
-
-        $grid = "";
-        gridCellWasClicked = false;
-
-        if (jQuery("#Lista").find(target).length) {
-            $grid = $('#Lista');
-            grillaenfoco = true;
-        }
-        
-        if (jQuery("#ListaConceptos").find(target).length) {
-            $grid = $('#ListaConceptos');
-            grillaenfoco = true;
-        }
-
-        if (grillaenfoco) {
-            gridCellWasClicked = true; // flat to check if there is a cell been edited.
-            lastSelectediRow2 = lastSelectediRow;
-            lastSelectediCol2 = lastSelectediCol;
-        }
+        target.focus();
     };
 
     function EliminarSeleccionados(grid) {
@@ -140,30 +113,31 @@
                         editoptions: {
                             maxlength: 20, defaultValue: '0.00',
                             dataEvents: [
-                            {
-                                type: 'keypress',
-                                fn: function (e) {
-                                    var key = e.charCode || e.keyCode;
-                                    if (key == 13) { setTimeout("jQuery('#Lista').editCell(" + selIRow + " + 1, " + selICol + ", true);", 100); }
-                                    if ((key < 48 || key > 57) && key !== 46 && key !== 44 && key !== 8 && key !== 37 && key !== 39) { return false; }
-                                }
-                            },
-                            {
-                                type: 'change', fn: function (e) {
-                                    var $this = $(e.target), $td;
-                                    if ($this.hasClass("FormElement")) {
-                                        // form editing
-                                    } else {
-                                        $td = $this.closest("td");
-                                        if ($td.hasClass("edit-cell")) {
-                                            // cell editing
+                                { type: 'focusout', fn: function (e) { $('#Lista').jqGrid("saveCell", lastSelectediRow, lastSelectediCol); } },
+                                {
+                                    type: 'keypress',
+                                    fn: function (e) {
+                                        var key = e.charCode || e.keyCode;
+                                        if (key == 13) { setTimeout("jQuery('#Lista').editCell(" + selIRow + " + 1, " + selICol + ", true);", 100); }
+                                        if ((key < 48 || key > 57) && key !== 46 && key !== 44 && key !== 8 && key !== 37 && key !== 39) { return false; }
+                                    }
+                                },
+                                {
+                                    type: 'change', fn: function (e) {
+                                        var $this = $(e.target), $td;
+                                        if ($this.hasClass("FormElement")) {
+                                            // form editing
                                         } else {
-                                            // inline editing
+                                            $td = $this.closest("td");
+                                            if ($td.hasClass("edit-cell")) {
+                                                // cell editing
+                                            } else {
+                                                // inline editing
+                                            }
                                         }
                                     }
-                                }
-                            }]
-                        }
+                                }]
+                            }
                     }
         ],
         gridComplete: function () {
@@ -227,7 +201,7 @@
         editurl: ROOT + 'NotaCredito/EditGridData/',
         datatype: 'json',
         mtype: 'POST',
-        colNames: ['Acciones', 'IdDetalleNotaCredito', 'IdConcepto', 'IdCuentaBancaria', 'IdCaja', 'IdDiferenciaCambio', 'Concepto', 'Cuenta bancaria', 'Caja', 'Iva?', 'Importe'],
+        colNames: ['Acciones', 'IdDetalleNotaCredito', 'IdConcepto', 'IdCuentaBancaria', 'IdCaja', 'IdDiferenciaCambio', 'Concepto', 'Cuenta bancaria', 'Caja', 'Iva?', '% Iva', 'Imp.Iva', 'IvaNoDiscriminado', 'Importe'],
         colModel: [
                     { name: 'act', index: 'act', align: 'left', width: 60, hidden: true, sortable: false, editable: false },
                     { name: 'IdDetalleNotaCredito', index: 'IdDetalleNotaCredito', editable: true, hidden: true, editoptions: { disabled: 'disabled', defaultValue: 0 }, editrules: { edithidden: true, required: true } },
@@ -242,12 +216,15 @@
                             dataInit: function (elem) {
                                 $(elem).width(110);
                             },
-                            dataEvents: [{
-                                type: 'change', fn: function (e) {
+                            dataEvents: [
+                                { type: 'focusout', fn: function (e) { $('#ListaConceptos').jqGrid("saveCell", lastSelectediRow, lastSelectediCol); } },
+                                {
+                                    type: 'change', fn: function (e) {
                                     var rowid = $('#ListaConceptos').getGridParam('selrow');
                                     $('#ListaConceptos').jqGrid('setCell', rowid, 'IdConcepto', this.value);
+                                    }
                                 }
-                            }]
+                            ]
                         },
                     },
                     {
@@ -257,12 +234,15 @@
                             dataInit: function (elem) {
                                 $(elem).width(90);
                             },
-                            dataEvents: [{
-                                type: 'change', fn: function (e) {
+                            dataEvents: [
+                                { type: 'focusout', fn: function (e) { $('#ListaConceptos').jqGrid("saveCell", lastSelectediRow, lastSelectediCol); } },
+                                {
+                                    type: 'change', fn: function (e) {
                                     var rowid = $('#ListaConceptos').getGridParam('selrow');
                                     $('#ListaConceptos').jqGrid('setCell', rowid, 'IdCuentaBancaria', this.value);
+                                    }
                                 }
-                            }]
+                            ]
                         },
                     },
                     {
@@ -272,30 +252,36 @@
                             dataInit: function (elem) {
                                 $(elem).width(90);
                             },
-                            dataEvents: [{
-                                type: 'change', fn: function (e) {
-                                    var rowid = $('#ListaConceptos').getGridParam('selrow');
-                                    $('#ListaConceptos').jqGrid('setCell', rowid, 'IdCaja', this.value);
+                            dataEvents: [
+                                { type: 'focusout', fn: function (e) { $('#ListaConceptos').jqGrid("saveCell", lastSelectediRow, lastSelectediCol); } },
+                                {
+                                    type: 'change', fn: function (e) {
+                                        var rowid = $('#ListaConceptos').getGridParam('selrow');
+                                        $('#ListaConceptos').jqGrid('setCell', rowid, 'IdCaja', this.value);
+                                    }
                                 }
-                            }]
+                            ]
                         },
                     },
-                    { name: 'Gravado', index: 'Gravado', width: 40, align: 'left', editable: true, editrules: { required: false }, editoptions: { value: "SI:NO" }, edittype: 'checkbox', label: 'TB' },
+                    { name: 'Gravado', index: 'Gravado', width: 40, align: 'left', editable: true, hidden: true, editrules: { required: false }, editoptions: { value: "SI:NO" }, edittype: 'checkbox', label: 'TB' },
                     { name: 'PorcentajeIva', index: 'PorcentajeIva', width: 70, align: 'right', editable: true, hidden: false, formatter: 'dynamicText', edittype: 'custom', editoptions: { custom_element: radioelem, custom_value: radiovalue }, label: 'TB' },
                     { name: 'ImporteIva', index: 'ImporteIva', width: 80, align: 'right', editable: true, hidden: false, editoptions: { disabled: 'disabled', defaultValue: 0 }, label: 'TB' },
+                    { name: 'IvaNoDiscriminado', index: 'IvaNoDiscriminado', width: 80, align: 'right', editable: true, hidden: true, editoptions: { disabled: 'disabled', defaultValue: 0 }, label: 'TB' },
                     {
                         name: 'Importe', index: 'Importe', width: 80, align: 'right', editable: true, editrules: { required: false, number: true }, edittype: 'text', label: 'TB',
                         editoptions: {
                             maxlength: 20, defaultValue: '0.00',
                             dataEvents: [
-                            {
-                                type: 'keypress',
-                                fn: function (e) {
-                                    var key = e.charCode || e.keyCode;
-                                    if (key == 13) { setTimeout("jQuery('#ListaConceptos').editCell(" + selIRow + " + 1, " + selICol + ", true);", 100); }
-                                    if ((key < 48 || key > 57) && key !== 46 && key !== 44 && key !== 8 && key !== 37 && key !== 39) { return false; }
+                                { type: 'focusout', fn: function (e) { $('#ListaConceptos').jqGrid("saveCell", lastSelectediRow, lastSelectediCol); } },
+                                {
+                                    type: 'keypress',
+                                    fn: function (e) {
+                                        var key = e.charCode || e.keyCode;
+                                        if (key == 13) { setTimeout("jQuery('#ListaConceptos').editCell(" + selIRow + " + 1, " + selICol + ", true);", 100); }
+                                        if ((key < 48 || key > 57) && key !== 46 && key !== 44 && key !== 8 && key !== 37 && key !== 39) { return false; }
+                                    }
                                 }
-                            }]
+                            ]
                         }
                     }
         ],
@@ -434,13 +420,11 @@
     jQuery("#ListaDrag").jqGrid('navGrid', '#ListaDragPager',
      { csv: true, refresh: true, add: false, edit: false, del: false }, {}, {}, {},
      {
-
          //sopt: ["cn"]
          //sopt: ['eq', 'ne', 'lt', 'le', 'gt', 'ge', 'bw', 'bn', 'ew', 'en', 'cn', 'nc', 'nu', 'nn', 'in', 'ni'],
          width: 700, closeOnEscape: true, closeAfterSearch: true, multipleSearch: true, overlay: false
      }
     );
-
 
     jQuery("#ListaDrag").filterToolbar({
         stringResult: true, searchOnEnter: true,
@@ -454,12 +438,6 @@
                 buttonicon: 'ui-icon-pin-s',
                 onClickButton: function () { myGrid[0].toggleToolbar(); }
             });
-
-
-
-
-
-
 
     ////////////////////////////////////////////////////////// DRAG DROP //////////////////////////////////////////////////////////
     //DEFINICION DE PANEL ESTE PARA LISTAS DRAG DROP
@@ -794,27 +772,51 @@ function ActualizarDatos() {
 }
 
 calculaTotalConceptos = function () {
-    var imp = 0, imp2 = 0, grav = "", letra = "", porciva = 0, ivaitem = 0;
+    var imp = 0, imp2 = 0, grav = "", letra = "", porciva = 0, ivaitem = 0, mIdCodigoIva = 0;
 
     letra = $("#TipoABC").val();
-    porciva = parseFloat($("#PorcentajeIva1").val().replace(",", ".") || 0) || 0;
+    mIdCodigoIva = $("#IdCodigoIva").val();
+
+    porciva = 0; //parseFloat($("#PorcentajeIva1").val().replace(",", ".") || 0) || 0;
     mIVANoDiscriminado = 0;
     mImporteIva1 = 0;
 
     var dataIds = $('#ListaConceptos').jqGrid('getDataIDs');
     for (var i = 0; i < dataIds.length; i++) {
         var data = $('#ListaConceptos').jqGrid('getRowData', dataIds[i]);
+
         imp = parseFloat(data['Importe'].replace(",", ".") || 0) || 0;
-        grav = data['Gravado'];
-        if (grav == "SI") {
-            if (letra == "B") {
-                ivaitem = imp - (imp / (1 + (porciva / 100)));
-                mIVANoDiscriminado = mIVANoDiscriminado + ivaitem;
-            } else {
-                mImporteIva1 = mImporteIva1 + (imp * (porciva / 100));
-            }
-        }
         imp2 = imp2 + imp;
+        porciva = parseFloat(data['PorcentajeIva'].replace(",", ".") || 0) || 0;
+        if (mIdCodigoIva == 3 || mIdCodigoIva == 8 || mIdCodigoIva == 9) { porciva = 0 }
+        if (porciva != 0) {
+            data['Gravado'] = "SI";
+        } else {
+            data['Gravado'] = "NO";
+        }
+
+        if (letra == "B") {
+            ivaitem = imp - (imp / (1 + (porciva / 100)));
+            mIVANoDiscriminado = mIVANoDiscriminado + ivaitem;
+            data['IvaNoDiscriminado'] = ivaitem.toFixed(2);
+        } else {
+            ivaitem = imp * porciva / 100;
+            mImporteIva1 = mImporteIva1 + ivaitem;
+            data['IvaNoDiscriminado'] = 0;
+        }
+        data['ImporteIva'] = ivaitem.toFixed(4);
+        data['IvaNoDiscriminado'] = ivaitem.toFixed(2);
+
+        $('#ListaConceptos').jqGrid('setRowData', dataIds[i], data);
+        //grav = data['Gravado'];
+        //if (grav == "SI") {
+        //    if (letra == "B") {
+        //        ivaitem = imp - (imp / (1 + (porciva / 100)));
+        //        mIVANoDiscriminado = mIVANoDiscriminado + ivaitem;
+        //    } else {
+        //        mImporteIva1 = mImporteIva1 + (imp * (porciva / 100));
+        //    }
+        //}
     }
     imp2 = Math.round((imp2) * 10000) / 10000;
     mTotalConceptos = imp2;
@@ -1095,6 +1097,7 @@ function MostrarDatosCliente(Id) {
                 $("#IdIBCondicion2").val(result[0].IdIBCondicionPorDefecto2);
                 $("#IdIBCondicion3").val(result[0].IdIBCondicionPorDefecto3);
                 $("#IdCodigoIva").val(result[0].IdCodigoIva);
+                $("#ClienteCodigo").val(result[0].Codigo);
             }
         }
     });
@@ -1229,13 +1232,16 @@ function ActivarControles(Activar) {
         $td = $($("#ListaConceptos")[0].p.pager + '_left ' + 'td[title="Eliminar"]');
         $td.hide();
 
+        $("#Lista").block({ message: "", theme: true, });
         $("#ListaConceptos").block({ message: "", theme: true, });
+
         $("#Cliente").prop("disabled", true);
         $("#FechaNotaCredito").prop("disabled", true);
         $("#IdMoneda").prop("disabled", true);
         $("#CotizacionMoneda").prop("disabled", true);
         $("#CotizacionDolar").prop("disabled", true);
         $("#AplicarEnCtaCte").prop("disabled", true);
+        $("#ClienteCodigo").prop("disabled", true);
         jQuery("input[name='CtaCte']").each(function (i) {
             jQuery(this).prop("disabled", true);
         })
@@ -1274,6 +1280,26 @@ function radiovalue(elem, operation, value) {
             $(elem).filter('[value=' + value + ']').attr('checked', true);
         }
     }
+}
+
+function TraerPorcentajesIva() {
+    var a = [];
+    $.ajax({
+        type: "GET",
+        contentType: "application/json; charset=utf-8",
+        url: ROOT + 'DescripcionIva/GetPorcentajes/',
+        //data: { IdComparativa: IdComparativa },
+        dataType: "Json",
+        async: false,
+        success: function (data) {
+            for (var i = 0; i < data.length; i++) {
+                if (data[i].value) {
+                    a.push(data[i].value);
+                }
+            }
+        }
+    })
+    return (a);
 }
 
 function TraerDatosClientePorCodigo() {
