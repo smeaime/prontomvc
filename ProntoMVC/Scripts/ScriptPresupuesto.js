@@ -1,4 +1,4 @@
-﻿
+
 /////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -16,6 +16,22 @@
 
 
 
+
+function agregarBotonDeCopiaEnLasGrillasAuxiliares()
+{
+    var ids = jQuery("#ListaDrag").jqGrid('getDataIDs');
+    for (var i = 0; i < ids.length; i++) 
+    {
+        var cl = ids[i];
+        var be = "<input style='height:22px;width:20px;' type='button' value=' << ' onclick=\"copiarArticulo('" + cl + "');\"  />";
+        jQuery("#ListaDrag").jqGrid('setRowData', ids[i], { Edit: be });
+
+        //https://stackoverflow.com/questions/13961180/invoking-a-doubleclick-event
+        //copiarArticulo(id);
+
+    }   
+
+}
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -79,7 +95,7 @@
             $("#TotalIva").val(ii1.toFixed(4));
             $("#Total").val(tg.toFixed(4));
 
-            grid.jqGrid('footerData', 'set', {
+            $('#Lista').jqGrid('footerData', 'set', {
                 NumeroObra: 'TOTALES', Cantidad: totalCantidad.toFixed(2),
                 ImporteBonificacion: ib1.toFixed(4),
                 ImporteIva: ii1.toFixed(4),
@@ -265,7 +281,8 @@
                         }
                         RefrescarOrigenDescripcion();
 
-                        AgregarRenglonesEnBlanco({ "IdDetalleRequerimiento": "0", "IdArticulo": "0", "Cantidad": "0", "Descripcion": "" });
+                        AgregarRenglonesEnBlanco({ "IdDetallePresupuesto": "0", "IdArticulo": "0", "Cantidad": "0", "Descripcion": "" });
+
 
                         //                    rows = $("#Lista").getGridParam("reccount");
                         //                    if (rows >= 5) $("#Lista").jqGrid('setGridHeight', rows * 40, true);
@@ -1005,12 +1022,15 @@ $(function () {
                     var ids = jQuery("#Lista").jqGrid('getDataIDs');
                     for (var i = 0; i < ids.length; i++) {
                         var cl = ids[i];
-                        be = "<input style='height:22px;width:20px;' type='button' value='E' onclick=\"jQuery('#Lista').editRow('" + cl + "',true,pickdates);\"  />";
-                        se = "<input style='height:22px;width:20px;' type='button' value='S' onclick=\"jQuery('#Lista').saveRow('" + cl + "');\"  />";
-                        ce = "<input style='height:22px;width:20px;' type='button' value='C' onclick=\"jQuery('#Lista').restoreRow('" + cl + "');\" />";
+                        var be = "<input style='height:22px;width:20px;' type='button' value='E' onclick=\"jQuery('#Lista').editRow('" + cl + "',true,pickdates);\"  />";
+                        var se = "<input style='height:22px;width:20px;' type='button' value='S' onclick=\"jQuery('#Lista').saveRow('" + cl + "');\"  />";
+                        var ce = "<input style='height:22px;width:20px;' type='button' value='C' onclick=\"jQuery('#Lista').restoreRow('" + cl + "');\" />";
                         jQuery("#Lista").jqGrid('setRowData', ids[i], { act: be + se + ce });
                         calculateTotal();
                     }
+
+                        AgregarRenglonesEnBlanco({ "IdDetallePresupuesto": "0", "IdArticulo": "0", "Cantidad": "0", "Descripcion": "" });
+
                 },
                 afterSaveCell: function (rowid, name, val, iRow, iCol) {
                     //No anda calculateTotal();
