@@ -559,7 +559,8 @@ namespace ProntoMVC.Controllers
                             Contacto = a.Contacto,
                             Observaciones = a.Observaciones,
                             a.IdProveedor
-                        })//.Where(campo) // .OrderBy(sidx + " " + sord)
+                        })
+                        //.Where(campo) // .OrderBy(sidx + " " + sord)
 //.Skip((currentPage - 1) * pageSize).Take(pageSize)
 .ToList();
 
