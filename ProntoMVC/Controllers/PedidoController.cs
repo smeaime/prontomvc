@@ -1779,7 +1779,8 @@ namespace ProntoMVC.Controllers
 //                        }
 
 
-                        ).Where(campo).OrderBy(sidx + " " + sord)
+                        )
+                // .Where(campo).OrderBy(sidx + " " + sord)
                 //.Skip((currentPage - 1) * pageSize).Take(pageSize)
 .ToList();
 
