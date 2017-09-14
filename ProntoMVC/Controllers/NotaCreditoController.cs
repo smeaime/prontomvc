@@ -229,24 +229,38 @@ namespace ProntoMVC.Controllers
         }
 
 
-        public virtual ActionResult TT_DynamicGridData(string sidx, string sord, int page, int rows, bool _search, string filters)
+        public virtual ActionResult TT_DynamicGridData(string sidx, string sord, int page, int rows, bool _search, string filters, string FechaInicial, string FechaFinal)
         {
+            DateTime FechaDesde, FechaHasta;
+            try
+            {
+                if (FechaInicial == "") FechaDesde = DateTime.MinValue;
+                else FechaDesde = DateTime.ParseExact(FechaInicial, "dd/MM/yyyy", null);
+            }
+            catch (Exception)
+            {
+                FechaDesde = DateTime.MinValue;
+            }
 
-
-            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            try
+            {
+                if (FechaFinal == "") FechaHasta = DateTime.MaxValue;
+                else FechaHasta = DateTime.ParseExact(FechaFinal, "dd/MM/yyyy", null);
+            }
+            catch (Exception)
+            {
+                FechaHasta = DateTime.MaxValue;
+            }
 
             int totalRecords = 0;
 
-            var pagedQuery = Filters.FiltroGenerico<Data.Models.NotasCredito>
-                                ("Localidade,Provincia,Vendedore,Empleado,Cuentas,Transportista", sidx, sord, page, rows, _search, filters, db, ref totalRecords);
+            IQueryable<Data.Models.NotasCredito> q = (from a in db.NotasCreditoes where a.FechaNotaCredito >= FechaDesde && a.FechaNotaCredito <= FechaHasta select a).AsQueryable();
 
-            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            List<Data.Models.NotasCredito> pagedQuery =
+            Filters.FiltroGenerico_UsandoIQueryable<Data.Models.NotasCredito>(sidx, sord, page, rows, _search, filters, db, ref totalRecords, q);
+
+            //var pagedQuery = Filters.FiltroGenerico<Data.Models.NotasCredito>
+            //                    ("Localidade,Provincia,Vendedore,Empleado,Cuentas,Transportista", sidx, sord, page, rows, _search, filters, db, ref totalRecords);
 
             string campo = String.Empty;
             int pageSize = rows;
@@ -291,18 +305,13 @@ namespace ProntoMVC.Controllers
                             a.FechaVencimientoORechazoCAE,
                             a.Observaciones
                         }).AsQueryable();
-
-            
-
             
             int totalPages = (int)Math.Ceiling((float)totalRecords / (float)pageSize);
 
             var data1 = (from a in data select a)
                         // .OrderByDescending(x => x.FechaNotaCredito)
-                        
-//.Skip((currentPage - 1) * pageSize).Take(pageSize)
-.ToList();
-
+                        //.Skip((currentPage - 1) * pageSize).Take(pageSize)
+                        .ToList();
 
             var jsonData = new jqGridJson()
             {
@@ -349,7 +358,6 @@ namespace ProntoMVC.Controllers
                         }).ToArray()
             };
             return Json(jsonData, JsonRequestBehavior.AllowGet);
-            
         }
 
         public virtual FileResult ImprimirConInteropPDF(int id)
@@ -434,7 +442,8 @@ namespace ProntoMVC.Controllers
                             a.Gravado,
                             a.Importe,
                             a.PorcentajeIva,
-                            a.ImporteIva
+                            a.ImporteIva,
+                            a.IvaNoDiscriminado
                         }).OrderBy(x => x.IdDetalleNotaCredito)
 //.Skip((currentPage - 1) * pageSize).Take(pageSize)
                         .ToList();
@@ -461,6 +470,7 @@ namespace ProntoMVC.Controllers
                             a.Gravado.NullSafeToString(),
                             a.PorcentajeIva.NullSafeToString(),
                             a.ImporteIva.NullSafeToString(),
+                            a.IvaNoDiscriminado.NullSafeToString(),
                             a.Importe.NullSafeToString()
                             }
                         }).ToArray()

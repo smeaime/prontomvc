@@ -995,9 +995,6 @@ namespace ProntoMVC.Controllers
             return File(contents, System.Net.Mime.MediaTypeNames.Application.Octet, "factura.pdf");
         }
 
-
-
-
         public virtual FileResult TT_DynamicGridData_ExcelExportacion(string sidx, string sord, int page, int rows, bool _search, string filters, string FechaInicial, string FechaFinal)
         {
             //asdad
@@ -1009,26 +1006,17 @@ namespace ProntoMVC.Controllers
 
             // http://stackoverflow.com/questions/9339792/jqgrid-ef-mvc-how-to-export-in-excel-which-method-you-suggest?noredirect=1&lq=1
 
-
-
             //string sidx = "NumeroPedido";
             //string sord = "desc";
             //int page = 1;
             //rows = 99999999;
             //bool _search = false;
             //string filters = "";
-
-
             //DemoProntoEntities db = new DemoProntoEntities(sc);
-
-
-
             //llamo directo a FiltroGenerico o a Pedidos_DynamicGridData??? -y, filtroGenerico no va a incluir las columnas recalculadas!!!!
             // Cuanto tarda ExportToExcelEntityCollection en crear el excel de un FiltroGenerico de toda la tabla de Pedidos?
 
-
             IQueryable<Data.Models.Factura> q = (from a in db.Facturas select a).AsQueryable();
-
 
             //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1042,21 +1030,17 @@ namespace ProntoMVC.Controllers
 
             result = (JsonResult)TT_DynamicGridData(sidx, sord, page, rows, _search, filters, "", "");
 
-
             string output = "c:\\adasdasd.xls";
 
             List<string[]> lista = new List<string[]>();
 
             jqGridJson listado = (jqGridJson)result.Data;
 
-
             for (int n = 0; n < listado.rows.Count(); n++)
             {
                 string[] renglon = listado.rows[n].cell;
                 lista.Add(renglon);
             }
-
-
 
             var excelData = new jqGridWeb.DataForExcel(
                     // column Header
@@ -1068,34 +1052,21 @@ namespace ProntoMVC.Controllers
                     //    new[] {"a", "2", "c2"}
                     //},
                     lista,
-
                     "Test Grid");
-
 
             Stream stream = new FileStream(output, FileMode.Create);
             excelData.CreateXlsxAndFillData(stream);
             stream.Close();
 
-
             //PreFormatear();
             //abrir con eeplus y poner autowidth?
 
-
-
             byte[] contents = System.IO.File.ReadAllBytes(output);
             return File(contents, System.Net.Mime.MediaTypeNames.Application.Octet, "output.xls");
-
         }
-
-
-
-
-
-
 
         public virtual ActionResult TT_DynamicGridData(string sidx, string sord, int page, int rows, bool _search, string filters, string FechaInicial, string FechaFinal)
         {
-
             //            if (FechaInicial != string.Empty)
             //          {
 
@@ -1107,10 +1078,8 @@ namespace ProntoMVC.Controllers
             }
             catch (Exception)
             {
-
                 FechaDesde = DateTime.MinValue;
             }
-
 
             try
             {
@@ -1119,30 +1088,15 @@ namespace ProntoMVC.Controllers
             }
             catch (Exception)
             {
-
                 FechaHasta = DateTime.MaxValue;
             }
 
-            //        }
-
             IQueryable<Data.Models.Factura> q = (from a in db.Facturas where a.FechaFactura >= FechaDesde && a.FechaFactura <= FechaHasta select a).AsQueryable();
-
-
-            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
             int totalRecords = 0;
 
             List<Data.Models.Factura> pagedQuery =
             Filters.FiltroGenerico_UsandoIQueryable<Data.Models.Factura>(sidx, sord, page, rows, _search, filters, db, ref totalRecords, q);
-
-            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
 
             string campo = String.Empty;
             int pageSize = rows;
