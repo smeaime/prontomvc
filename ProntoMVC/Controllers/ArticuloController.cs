@@ -360,7 +360,7 @@ namespace ProntoMVC.Controllers
             //}
 
             //var data1 = (from a in data select a).OrderBy(x => x.Descripcion)
-//.Skip((currentPage - 1) * pageSize).Take(pageSize)
+            //.Skip((currentPage - 1) * pageSize).Take(pageSize)
             //.ToList();
             var data1 = from a in data.OrderBy(sidx + " " + sord)
 //.Skip((currentPage - 1) * pageSize).Take(pageSize)
@@ -377,31 +377,31 @@ namespace ProntoMVC.Controllers
                     select new jqGridRowJson
                     {
                         id = a.IdArticulo.ToString(),
-                        cell = new string[] { 
+                        cell = new string[] {
                             "<a href="+ Url.Action("Edit",new {id = a.IdArticulo} )  +"  >Editar</>",
                             "",
                             a.IdArticulo.ToString(),
-                            a.Codigo.NullSafeToString(), 
-                            a.NumeroInventario.NullSafeToString(), 
+                            a.Codigo.NullSafeToString(),
+                            a.NumeroInventario.NullSafeToString(),
                             a.Descripcion.NullSafeToString(),
                             a.Rubro.NullSafeToString(),
                             a.Subrubro.NullSafeToString(),
-                            a.AlicuotaIVA.NullSafeToString(),  
-                            a.CostoPPP.NullSafeToString(),  
-                            a.CostoPPPDolar.NullSafeToString(),  
-                            a.CostoReposicion.NullSafeToString(),  
-                            a.CostoReposicionDolar.NullSafeToString(),  
-                            a.StockMinimo.NullSafeToString(),  
-                            a.StockReposicion.NullSafeToString(),  
-                            a.StockActual.NullSafeToString(),  
-                            a.Unidad.NullSafeToString(),  
-                            a.Ubicacion.NullSafeToString(),  
-                            a.Marca.NullSafeToString(),  
-                            a.Modelo.NullSafeToString(),  
-                            a.ParaMantenimiento.NullSafeToString() ,  
-                            a.CuentaCompra.NullSafeToString() ,  
-                            a.FechaAlta.NullSafeToString(),  
-                            a.UsuarioAlta.NullSafeToString(),  
+                            a.AlicuotaIVA.NullSafeToString(),
+                            a.CostoPPP.NullSafeToString(),
+                            a.CostoPPPDolar.NullSafeToString(),
+                            a.CostoReposicion.NullSafeToString(),
+                            a.CostoReposicionDolar.NullSafeToString(),
+                            a.StockMinimo.NullSafeToString(),
+                            a.StockReposicion.NullSafeToString(),
+                            a.StockActual.NullSafeToString(),
+                            a.Unidad.NullSafeToString(),
+                            a.Ubicacion.NullSafeToString(),
+                            a.Marca.NullSafeToString(),
+                            a.Modelo.NullSafeToString(),
+                            a.ParaMantenimiento.NullSafeToString() ,
+                            a.CuentaCompra.NullSafeToString() ,
+                            a.FechaAlta.NullSafeToString(),
+                            a.UsuarioAlta.NullSafeToString(),
                             a.FechaUltimaModificacion.NullSafeToString()
                     }
                     }).ToArray()
@@ -480,8 +480,8 @@ namespace ProntoMVC.Controllers
             //}
 
             //var data1 = (from a in data select a).OrderBy(x => x.Descripcion)
-//.Skip((currentPage - 1) * pageSize).Take(pageSize)
-//.ToList();
+            //.Skip((currentPage - 1) * pageSize).Take(pageSize)
+            //.ToList();
             var data1 = from a in data.OrderBy(sidx + " " + sord)
 //.Skip((currentPage - 1) * pageSize).Take(pageSize)
 .ToList()
@@ -497,31 +497,31 @@ namespace ProntoMVC.Controllers
                     select new jqGridRowJson
                     {
                         id = a.IdArticulo.ToString(),
-                        cell = new string[] { 
+                        cell = new string[] {
                             "<a href="+ Url.Action("Edit",new {id = a.IdArticulo} )  +"  >Editar</>",
                             "",
                             a.IdArticulo.ToString(),
-                            a.Codigo.NullSafeToString(), 
-                            a.NumeroInventario.NullSafeToString(), 
+                            a.Codigo.NullSafeToString(),
+                            a.NumeroInventario.NullSafeToString(),
                             a.Descripcion.NullSafeToString(),
                             a.Rubro.NullSafeToString(),
                             a.Subrubro.NullSafeToString(),
-                            a.AlicuotaIVA.NullSafeToString(),  
-                            a.CostoPPP.NullSafeToString(),  
-                            a.CostoPPPDolar.NullSafeToString(),  
-                            a.CostoReposicion.NullSafeToString(),  
-                            a.CostoReposicionDolar.NullSafeToString(),  
-                            a.StockMinimo.NullSafeToString(),  
-                            a.StockReposicion.NullSafeToString(),  
-                            a.StockActual.NullSafeToString(),  
-                            a.Unidad.NullSafeToString(),  
-                            a.Ubicacion.NullSafeToString(),  
-                            a.Marca.NullSafeToString(),  
-                            a.Modelo.NullSafeToString(),  
-                            a.ParaMantenimiento.NullSafeToString() ,  
-                            a.CuentaCompra.NullSafeToString() ,  
-                            a.FechaAlta.NullSafeToString(),  
-                            a.UsuarioAlta.NullSafeToString(),  
+                            a.AlicuotaIVA.NullSafeToString(),
+                            a.CostoPPP.NullSafeToString(),
+                            a.CostoPPPDolar.NullSafeToString(),
+                            a.CostoReposicion.NullSafeToString(),
+                            a.CostoReposicionDolar.NullSafeToString(),
+                            a.StockMinimo.NullSafeToString(),
+                            a.StockReposicion.NullSafeToString(),
+                            a.StockActual.NullSafeToString(),
+                            a.Unidad.NullSafeToString(),
+                            a.Ubicacion.NullSafeToString(),
+                            a.Marca.NullSafeToString(),
+                            a.Modelo.NullSafeToString(),
+                            a.ParaMantenimiento.NullSafeToString() ,
+                            a.CuentaCompra.NullSafeToString() ,
+                            a.FechaAlta.NullSafeToString(),
+                            a.UsuarioAlta.NullSafeToString(),
                             a.FechaUltimaModificacion.NullSafeToString()
                     }
                     }).ToArray()
@@ -573,7 +573,7 @@ namespace ProntoMVC.Controllers
                         .Include(x => x.Ubicacione.Deposito)
                         .Include(x => x.Rubro)
                         .Include(x => x.Subrubro)
-                         
+
 //.Skip((currentPage - 1) * pageSize).Take(pageSize)
 .ToArray();
 
@@ -591,15 +591,15 @@ namespace ProntoMVC.Controllers
                             //"<a href="+ Url.Action("Edit",new {id = a.IdArticulo} )  +" target='_blank' >Editar</>",
                             "<a href="+ Url.Action("Edit",new {id = a.IdArticulo} )  +"  >Editar</>",
                             "",
-                            a.Codigo.NullSafeToString(), 
-                            a.Descripcion.NullSafeToString(), 
-                            
+                            a.Codigo.NullSafeToString(),
+                            a.Descripcion.NullSafeToString(),
+
                             (a.Rubro ?? new Rubro()).Descripcion.NullSafeToString()   ,
                             (a.Subrubro ?? new Subrubro()).Descripcion.NullSafeToString()   ,
- 
-                            a.NumeroInventario  
-                            
- 
+
+                            a.NumeroInventario
+
+
                                         }
 
 
@@ -798,7 +798,7 @@ namespace ProntoMVC.Controllers
                         select new jqGridRowJson
                         {
                             id = a.IdDetalleArticuloDocumentos.ToString(),
-                            cell = new string[] { 
+                            cell = new string[] {
                                 string.Empty, // guarda con este espacio vacio
                                 a.IdDetalleArticuloDocumentos.ToString(),
                                 a.PathDocumento.NullSafeToString()
@@ -854,7 +854,7 @@ namespace ProntoMVC.Controllers
                         select new jqGridRowJson
                         {
                             id = a.IdDetalleArticuloUnidades.ToString(),
-                            cell = new string[] { 
+                            cell = new string[] {
                                 string.Empty, // guarda con este espacio vacio
                                 a.IdDetalleArticuloUnidades.ToString(),
                                 a.IdUnidad.NullSafeToString(),
@@ -935,7 +935,7 @@ namespace ProntoMVC.Controllers
             int totalPages = (int)Math.Ceiling((float)totalRecords / (float)pageSize);
 
             var data = (from a in Fac
-                        //join c in db.IngresoBrutos on a.IdIBCondicion equals c.IdIBCondicion
+                            //join c in db.IngresoBrutos on a.IdIBCondicion equals c.IdIBCondicion
                         select a).Where(campo).OrderBy(sidx + " " + sord)
 //.Skip((currentPage - 1) * pageSize).Take(pageSize)
 .ToList();
@@ -949,9 +949,9 @@ namespace ProntoMVC.Controllers
                         select new jqGridRowJson
                         {
                             id = a.IdDetalleRemito.NullSafeToString(),
-                            cell = new string[] { 
-                                
-                                "<a href="+ Url.Action("Edit",new {id = a.IdDetalleRemito} )  +" target='_blank' >Editar</>" 
+                            cell = new string[] {
+
+                                "<a href="+ Url.Action("Edit",new {id = a.IdDetalleRemito} )  +" target='_blank' >Editar</>"
                                 ,
                                 a.IdDetalleRemito.NullSafeToString(),
                                 a.IdArticulo.NullSafeToString(),
@@ -964,10 +964,10 @@ namespace ProntoMVC.Controllers
                                 (a.Unidade ?? new Unidad()).Descripcion.NullSafeToString(),
                                 a.Remito.IdCliente.NullSafeToString(),
                                 a.Remito.Cliente.RazonSocial.NullSafeToString()
-                                
- 
-                                
-                            
+
+
+
+
                             }
                         }).ToArray()
             };
@@ -1021,7 +1021,7 @@ namespace ProntoMVC.Controllers
             int totalPages = (int)Math.Ceiling((float)totalRecords / (float)pageSize);
 
             var data = (from a in Fac
-                        //join c in db.IngresoBrutos on a.IdIBCondicion equals c.IdIBCondicion
+                            //join c in db.IngresoBrutos on a.IdIBCondicion equals c.IdIBCondicion
                         select a).Where(campo).OrderBy(sidx + " " + sord)
 //.Skip((currentPage - 1) * pageSize).Take(pageSize)
 .ToList();
@@ -1035,9 +1035,9 @@ namespace ProntoMVC.Controllers
                         select new jqGridRowJson
                         {
                             id = a.IdDetalleOrdenCompra.ToString(),
-                            cell = new string[] { 
-                                
-                                "<a href="+ Url.Action("Edit",new {id = a.IdDetalleOrdenCompra} )  +" target='_blank' >Editar</>" 
+                            cell = new string[] {
+
+                                "<a href="+ Url.Action("Edit",new {id = a.IdDetalleOrdenCompra} )  +" target='_blank' >Editar</>"
                                 ,
                                    a.IdDetalleOrdenCompra.NullSafeToString(),
                                 a.IdArticulo.NullSafeToString(),
@@ -1047,9 +1047,9 @@ namespace ProntoMVC.Controllers
                                 a.Cantidad.NullSafeToString(),
                                                                 a.IdUnidad.NullSafeToString(),
                                  (a.Unidade ?? new Unidad()).Descripcion.NullSafeToString(),
-                                
+
                                 a.OrdenesCompra.Cliente.RazonSocial.NullSafeToString(),
-                           
+
                                a.OrdenesCompra.IdCliente.NullSafeToString()
                             }
                         }).ToArray()
@@ -1065,6 +1065,54 @@ namespace ProntoMVC.Controllers
                 articulos.Add(a.IdArticulo, a.Descripcion);
             return PartialView("Select", articulos);
         }
+
+
+
+
+
+
+
+
+        public virtual JsonResult GetCodigosArticulosAutocomplete_Equipos(string term)
+        {
+
+
+
+            string nSC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString(), oStaticMembershipService));
+            DataTable dt = EntidadManager.GetStoreProcedure(nSC, "Articulos_TX_ParaMantenimiento_ParaCombo", "Compras");
+            IEnumerable<DataRow> rows = dt.AsEnumerable();
+            var sq = (from r in rows orderby r[1] select new { IdArticulo = r[0].NullSafeToString(),
+                                                                Titulo = r[1].NullSafeToString(),
+                                                                NumeroInventario = r[2].NullSafeToString()
+            }).ToList();
+
+                        
+
+            var q = (from item in sq
+                     where item.Titulo.StartsWith(term)
+                     orderby item.Titulo
+                     select new
+                     {
+                         id = item.IdArticulo,
+                         value = item.Titulo, // esto es lo que se ve
+                         codigo = item.Titulo
+                     }).Take(MAXLISTA).ToList();
+
+
+
+            if (q.Count == 0 && term != "No se encontraron resultados")
+            {
+                q.Add(new { id = "0", value = "No se encontraron resultados", codigo = "" });
+            }
+
+            var a = Json(q, JsonRequestBehavior.AllowGet);
+
+
+            return a;
+        }
+
+
+
 
         public virtual JsonResult GetArticulosAutocomplete(string term)
         {
@@ -1332,10 +1380,10 @@ namespace ProntoMVC.Controllers
                     select new jqGridRowJson
                     {
                         id = a.IdArticulo.ToString(),
-                        cell = new string[] { 
+                        cell = new string[] {
                             "<a href='" + string.Format("./Articulo/Edit/{0}", a.IdArticulo.ToString()) + "'>Edit</a>",
                             "<a href='" + string.Format("./Articulo/Delete/{0}", a.IdArticulo.ToString()) + "'>Delete</a>",
-                            a.Codigo, 
+                            a.Codigo,
                             a.Descripcion } //a.PostedOn.Value.ToShortDateString()
                     }).ToArray()
             };
@@ -1396,8 +1444,8 @@ namespace ProntoMVC.Controllers
                         select new jqGridRowJson
                         {
                             id = a.IdArticulo.ToString(),
-                            cell = new string[] { 
-                                a.IdArticulo.ToString(), 
+                            cell = new string[] {
+                                a.IdArticulo.ToString(),
                                 a.Codigo,
                                 a.Descripcion,
                                 a.IdUnidad.ToString(),
@@ -1431,11 +1479,11 @@ namespace ProntoMVC.Controllers
 
 
             var q = (from a in pagedQuery
-                    select new
-                    {
-                        aa= a.Codigo.ToString() +  ", " + "adsasdasd"                       
-                    }).ToList();
-            
+                     select new
+                     {
+                         aa = a.Codigo.ToString() + ", " + "adsasdasd"
+                     }).ToList();
+
 
 
             string myCSV = string.Join("\n", q.Select(i => i.aa.ToString()).ToArray());
@@ -1485,7 +1533,7 @@ namespace ProntoMVC.Controllers
             //                    ("", sidx, sord, page, rows, _search, filters, db, ref totalRecords);
 
             var pagedQuery = Filters.FiltroGenerico_UsandoIQueryable<Data.Models.Articulo>
-                                ( sidx, sord, page, rows, _search, filters, db, ref totalRecords,data);
+                                (sidx, sord, page, rows, _search, filters, db, ref totalRecords, data);
 
             //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1510,12 +1558,12 @@ namespace ProntoMVC.Controllers
                             //"<a href="+ Url.Action("Edit",new {id = a.IdArticulo} )  +" target='_blank' >Editar</>",
                             "<a href="+ Url.Action("Edit",new {id = a.IdArticulo} )  +"  >Editar</>",
                              a.IdArticulo.NullSafeToString(),
-                            
-                            a.Codigo.NullSafeToString(), 
+
+                            a.Codigo.NullSafeToString(),
                             a.NumeroInventario.NullSafeToString() ,
-                            
-                            a.Descripcion.NullSafeToString(), 
-                            
+
+                            a.Descripcion.NullSafeToString(),
+
                             (a.Rubro ?? new Rubro()).Descripcion.NullSafeToString()   ,
                             (a.Subrubro ?? new Subrubro()).Descripcion.NullSafeToString()   ,
                             a.AlicuotaIVA.NullSafeToString(),
@@ -1525,51 +1573,51 @@ namespace ProntoMVC.Controllers
                             a.CostoReposicionDolar.NullSafeToString(),
                             a.StockMinimo.NullSafeToString(),
                             a.StockReposicion.NullSafeToString(),
-                           
+
                            ((db.Stocks.Where(x => x.IdArticulo == a.IdArticulo).Sum(y => y.CantidadUnidades)) ?? 0).NullSafeToString() ,
-                            
-                           
+
+
                             (a.Unidad ?? new Unidad()).Abreviatura.NullSafeToString()   ,
 
-                             (a.Ubicacione != null ?  
+                             (a.Ubicacione != null ?
                              (
-                          (a.Ubicacione.Deposito != null ? " " + a.Ubicacione.Deposito.Abreviatura : "") 
-                          + (a.Ubicacione.Descripcion != null ? " " + a.Ubicacione.Descripcion : "") 
-                          + (a.Ubicacione.Estanteria != null ? " Est.:" + a.Ubicacione.Estanteria : "") 
-                          + (a.Ubicacione.Modulo != null ? " Mod.:" + a.Ubicacione.Modulo : "") 
+                          (a.Ubicacione.Deposito != null ? " " + a.Ubicacione.Deposito.Abreviatura : "")
+                          + (a.Ubicacione.Descripcion != null ? " " + a.Ubicacione.Descripcion : "")
+                          + (a.Ubicacione.Estanteria != null ? " Est.:" + a.Ubicacione.Estanteria : "")
+                          + (a.Ubicacione.Modulo != null ? " Mod.:" + a.Ubicacione.Modulo : "")
                           + (a.Ubicacione.Gabeta != null ? " Gab.:" + a.Ubicacione.Gabeta : "")
                           )
                           : "")
                           ,
-                            
-                          
-                          
+
+
+
                           a.Marca != null ? a.Marca.Descripcion : "",
 
                             (a.Modelo ?? new Modelo()).Descripcion.NullSafeToString()   ,
-                            
-                            
+
+
                             a.ParaMantenimiento.NullSafeToString() ,
-                            
-                            
+
+
                                (a.Cuenta ?? new Cuenta()).Descripcion.NullSafeToString()   ,
-                               
-                            
-                            
+
+
+
                             a.FechaAlta.NullSafeToString() ,
                             a.UsuarioAlta.NullSafeToString() ,
                             a.FechaUltimaModificacion.NullSafeToString() ,
 
                             a.NumeroInventario.NullSafeToString()  ,
-                            
+
                             a.IdArticulo.NullSafeToString(),
                             a.IdUnidad.NullSafeToString(),
 
                             (a.Unidad ?? new Unidad()).Abreviatura.NullSafeToString()   ,
 
 
-                            
-                            
+
+
 
 
                             }
