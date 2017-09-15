@@ -145,9 +145,14 @@ namespace ProntoMVC.Controllers
 
         }
 
+
+
+
+
         void CargarViewBag(Requerimiento o)
         {
 
+            
             //ViewBag.IdObra = new SelectList(db.Obras.Where(x => x.Activa != "NO").OrderBy(x => x.NumeroObra)
             //                            .Select(y => new { y.IdObra, NumeroObra = y.NumeroObra + " - " + (y.Descripcion ?? "") }), "IdObra", "NumeroObra", o.IdObra);
 
@@ -212,6 +217,9 @@ namespace ProntoMVC.Controllers
                 ViewBag.OrigenDescripcionDefault = 1;
             }
 
+
+
+            //ViewBag.IdEquipoDestino = GetCodigosArticulosAutocomplete_Equipos;
 
 
             if (o.IdRequerimiento > 0)

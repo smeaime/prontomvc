@@ -280,8 +280,8 @@
                                 @{
 
 // con jquery se llama despues a  "Requerimiento/Autorizaciones" para tildar y a Aprobado() para el primer check
-                                    <input type="checkbox" id="chk0" readonly="readonly" disabled="disabled" class="GridCheckBox"
-                                           title="" />
+                                <input type="checkbox" id="chk0" readonly="readonly" disabled="disabled" class="GridCheckBox"
+                                       title="" />
 
                                     int ca = ViewBag.CantidadAutorizaciones;
 
@@ -296,7 +296,7 @@
                             @Html.LabelFor(model => model.Aprobo, ". ")
                             @if (Model.Aprobo != null && ViewBag.MostrarAnularLiberacion)
                             {
-                                <input type="button" id="AnularFirmas" value="@(ViewBag.CantidadAutorizaciones > 1 ? "Anular firmas" : "Anular liberación" )  " class="btn btn-link" />
+                            <input type="button" id="AnularFirmas" value="@(ViewBag.CantidadAutorizaciones > 1 ? "Anular firmas" : "Anular liberación" )  " class="btn btn-link" />
                             }
                             <script>
 
@@ -503,25 +503,56 @@
                     </div>
                     <!--/row-->
                     <div class="row-fluid">
-
-                        <div class="span3 lightblue">
+                        <div class="span6 lightblue">
+                            @Html.Hidden("IdEquipoDestino", Model.IdEquipoDestino)
                             @Html.LabelFor(model => model.IdEquipoDestino, "Equipo destino (opc.)")
-                            @Html.TextBoxFor(model => model.IdEquipoDestino, new { @class = "span12" })
-                        </div>
-                        <div class="span9 lightblue">
-                            @Html.LabelFor(model => model.IdEquipoDestino, ".")
-                            @Html.DropDownList("Aprobo", null, "", new { @class = "span12" })
-                            @Html.ValidationMessageFor(model => model.IdEquipoDestino)
-                        </div>
 
+                            @* @Html.TextBoxFor(m => m.EquipoDestino.Descripcion, new { id = "EquipoDestino", @class = "span12" })   *@
+                            @Html.TextBox("EquipoDestino", "", new { @class = "span12" })
+
+
+                            @Html.ValidationMessageFor(model => model.IdEquipoDestino)
+                            <script type="text/jscript">
+
+                                $("#DescripcionObra").autocomplete({
+                                    source: '@Url.Action("GetObrasAutocomplete2", "Articulo")',
+                                    minLength: 0,
+                                    messages: { noResults: "", results: function () { } },
+                                    select: equipoSeleccionado,
+                                    autoFocus: true
+
+                                });
+
+
+                                function equipoSeleccionado(event, ui) {
+
+                                    ActualizarObra(ui.item);
+                                    ///////////////////////
+                                    event.preventDefault();
+                                }
+
+
+
+
+
+                                function ActualizarEquipo(item) {
+                                    $("#IdEquipoDestino").val(item.id);
+                                    //                        $("#CodigoProveedor").val(item.codigo || "");
+                                    $("#DescripcionObra").val(item.value || "");
+                                    //                        $("#IdCodigoIva").val(item.idCodigoIva);
+                                }
+                            </script>
+
+
+                        </div>
+                        <!--/row-->
                     </div>
-                    <!--/row-->
                     <div id="RManulada" class="row-fluid" style="display: none; font-weight: bold; background-color: red">
                     </div>
                     <br />
                     <div class="row-fluid">
                         <div id="divGrilla" class="span12 lightblue" style="padding-left: 0px; padding-right: 2px;
-                        min-height: 150px">
+        min-height: 150px">
                             <style>
                                 .ui-jqdialog td {
                                     border: 0px !important;
@@ -604,6 +635,7 @@
                                     height: 36px; /* jugar entre .AltoRenglones y el style de font de la grilla */
                                 }
                             </style>
+
                             <table id="Lista" class="scroll separacion AltoRenglones" cellpadding="0" cellspacing="0">
                                 @*/* jugar entre .AltoRenglones y el style de font de la grilla */*@
                             </table>
@@ -706,7 +738,7 @@
                     </div>
                     <br />
                     <div class="row-fluid" id="Totales">
-                        <div class="span6 lightblue">
+                        <div class="span12 lightblue">
                             @Html.LabelFor(model => model.Observaciones)
                             @Html.TextAreaFor(model => model.Observaciones, new { @class = "span12", @style = "height: 100px" })
                             @Html.ValidationMessageFor(model => model.Observaciones)
@@ -718,7 +750,7 @@
                             {
 
                                 <input type="file" name="file" />
-                                <input type="submit" class="btn" value="Subir" />
+                                    <input type="submit" class="btn" value="Subir" />
                             }
 
                         </div>
