@@ -291,8 +291,8 @@
       <FullPath>Listado general de Cartas de Porte (simulando original) Amaggi.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
-      <Name>Listado general de Cartas de Porte (simulando original) con foto  - Cresud.rdl</Name>
-      <FullPath>Listado general de Cartas de Porte (simulando original) con foto  - Cresud.rdl</FullPath>
+      <Name>Listado general de Cartas de Porte (simulando original) con foto  - Cresud backup.rdl</Name>
+      <FullPath>Listado general de Cartas de Porte (simulando original) con foto  - Cresud backup.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
       <Name>Listado general de Cartas de Porte (simulando original) con foto  - Dow.rdl</Name>
@@ -301,6 +301,10 @@
     <ProjectItem>
       <Name>Listado general de Cartas de Porte (simulando original) con foto  - Grobo 2.rdl</Name>
       <FullPath>Listado general de Cartas de Porte (simulando original) con foto  - Grobo 2.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Listado general de Cartas de Porte (simulando original) con foto  - Grobo y Recibo.rdl</Name>
+      <FullPath>Listado general de Cartas de Porte (simulando original) con foto  - Grobo y Recibo.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
       <Name>Listado general de Cartas de Porte (simulando original) con foto  - Grobo.rdl</Name>
@@ -539,8 +543,8 @@
       <FullPath>Williams - Sincro LaBiznaga2.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
-      <Name>Listado general de Cartas de Porte (simulando original) con foto  - Grobo y Recibo.rdl</Name>
-      <FullPath>Listado general de Cartas de Porte (simulando original) con foto  - Grobo y Recibo.rdl</FullPath>
+      <Name>Listado general de Cartas de Porte (simulando original) con foto  - Cresud.rdl</Name>
+      <FullPath>Listado general de Cartas de Porte (simulando original) con foto  - Cresud.rdl</FullPath>
     </ProjectItem>
   </Reports>
   <Configurations>
