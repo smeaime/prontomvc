@@ -72,9 +72,11 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
 
         <br />
-        <asp:UpdatePanel ID="UpdatePanelResumen" runat="server">
+        <asp:UpdatePanel ID="UpdatePanelResumen" runat="server" >
             <ContentTemplate>
-
+                         <table width="400px" >
+                             <tr>
+                                 <td colspan="2">
                 <asp:UpdateProgress ID="UpdateProgress2" runat="server">
                     <ProgressTemplate>
                         <img src="Imagenes/25-1.gif" alt="" style="height: 30px" />
@@ -103,9 +105,9 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                                                         TabIndex="-1" LogoutText="Salir" Font-Underline="False" CssClass="margender" />
                                                 </LoggedInTemplate>
                                             </asp:LoginView>
-
-
-                <table width="%">
+                                     </td>
+                             </tr>
+       
                     <tr>
                         <td>
                             <asp:Label ID="lblRazonSocial" runat="server" Font-Size="Large" Font-Bold="true" />
@@ -197,7 +199,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                             Style="margin-right: 0px; margin-top: 0px; margin-bottom: 0px; margin-left: 5px;"
                             BorderWidth="5px" Width="127px"></asp:LinkButton>
                         <asp:Panel ID="Panel4" runat="server">
-                            <table width="">
+                            <table width="400px">
                                 <tr>
                                     <td >Origen
                                     </td>
@@ -393,7 +395,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td style="width: 101px">
+                                    <td style="">
                                         <asp:LinkButton ID="LinkButton5" runat="server" Font-Bold="false" Font-Underline="True"
                                             ForeColor="White" CausesValidation="true" Font-Size="Small" Height="30px" Visible="False"
                                             ToolTip="Descarga el ReportBuilder3">Editar informe</asp:LinkButton>
@@ -432,11 +434,11 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                 <br />
                 <asp:Label ID="lblErrores" runat="server"></asp:Label>
 
-                <iframe id="iframeAAAA" runat="server" src="" visible="false" width="800px" height="600px"></iframe>
+                <iframe id="iframeAAAA" runat="server" src="" visible="false" width="" height=""></iframe>
 
-                <div style="background-color: #FFFFFF; width: 800px">
+                <div style="width: ">
                     <rsweb:ReportViewer ID="ReportViewer2" runat="server" Font-Names="Verdana" Font-Size="8pt"
-                        Width="100%" Visible="true" ZoomMode="PageWidth" Height="1200px" SizeToReportContent="True">
+                        Width="100%" Visible="true" ZoomMode="PageWidth" Height="" SizeToReportContent="True">
                         <%--        <LocalReport ReportPath="ProntoWeb\Informes\prueba2.rdl">
 
         </LocalReport>
@@ -451,24 +453,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                 </div>
             </ContentTemplate>
         </asp:UpdatePanel>
-        <asp:UpdatePanel ID="UpdatePanel1" runat="server">
-            <ContentTemplate>
-                <div style="background-color: #FFFFFF; width: 300px">
-                    <rsweb:ReportViewer ID="ReportViewer1" runat="server" Font-Names="Verdana" Font-Size="8pt"
-                        Visible="true" ZoomMode="Percent" ZoomPercent="25" SizeToReportContent="false">
-                        <%--        <LocalReport ReportPath="ProntoWeb\Informes\prueba2.rdl">
-
-        </LocalReport>
-        
-                        --%>
-                    </rsweb:ReportViewer>
-                    <span>
-                        <%--<div>--%>
-                        <%--botones de alta y excel--%>
-                        <%--</div>--%>
-                    </span>
-            </ContentTemplate>
-        </asp:UpdatePanel>
+       
         <%--   /////////////////////////////////////////////////////////////////////        
  /////////////////////////////////////////////////////////////////////    --%>
         <%--  campos hidden --%>
