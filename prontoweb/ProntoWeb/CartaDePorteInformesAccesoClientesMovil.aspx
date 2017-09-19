@@ -20,11 +20,12 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title>BDL Consultores</title>
-    <link id="Link1" href="Css/Styles.css" rel="stylesheet" type="text/css" runat="server" />
-    <%--    <link rel="shortcut icon" type="image/ico" href="Imagenes/favicon.ico" />
- <link rel="shortcut icon" type="image/ico" href="favicon4.png" />--%>
+
+  <%--  <link id="Link1" href="Css/Styles.css" rel="stylesheet" type="text/css" runat="server" />--%>
+
     <link rel="shortcut icon" type="image/ico" href="favicon.png" />
-    <%--google analytics--%>
+
+
     <script>
         (function (i, s, o, g, r, a, m) {
             i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
@@ -39,7 +40,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
     </script>
 </head>
-<body class="bodyMasterPage">
+<body class="bodyMasterPage" style="width: ">
 
 
     <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
@@ -83,7 +84,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                 </asp:UpdateProgress>
 
                 <asp:Button ID="btnRefrescar" Text="VER INFORME" runat="server" Visible="True" CssClass="but"
-                    Width="150" Height="40" />
+                    Width="" Height="40" />
          
                 <asp:Button ID="btnImagenes" Text="JPG" runat="server" Visible="True" CssClass="but"
                     Width="" Height="40" />
@@ -104,9 +105,9 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                                             </asp:LoginView>
 
 
-                <table width="">
+                <table width="%">
                     <tr>
-                        <td style="width: 101px; height: 40px;" class="EncabezadoCell" colspan="2">
+                        <td>
                             <asp:Label ID="lblRazonSocial" runat="server" Font-Size="Large" Font-Bold="true" />
                             <asp:Button ID="Button1" Text="importar" runat="server" Visible="false" Height="27" />
                         </td>
@@ -114,7 +115,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
 
                     <tr>
-                        <td class="EncabezadoCell" style="width: 15%; height: 18px;">N° Carta porte
+                       <td>N° Carta porte
                         </td>
                         <td colspan="2" style="width: 50%; height: 18px;">
                             <asp:TextBox ID="txtQueContenga" runat="server" AutoPostBack="True" CssClass="CssTextBox"
@@ -122,7 +123,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                         </td>
                     </tr>
                     <tr>
-                        <td class="EncabezadoCell" style="width: 100px; height: 18px;">Estado
+                        <td>Estado
                         </td>
                         <td>
                             <asp:DropDownList ID="cmbEstado" runat="server" Style="text-align: right; margin-left: 0px;"
@@ -142,9 +143,9 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
                     </tr>
                     <tr>
-                        <td class="EncabezadoCell" style="width: 15%; height: 18px;">Descarga
+                       <td>Descarga
                         </td>
-                        <td class="EncabezadoCell">
+                        <td>
                             <asp:DropDownList ID="cmbPeriodo" runat="server" AutoPostBack="true" Height="22px"
                                 Visible="true">
                                 <asp:ListItem Text="Hoy" />
@@ -196,7 +197,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                             Style="margin-right: 0px; margin-top: 0px; margin-bottom: 0px; margin-left: 5px;"
                             BorderWidth="5px" Width="127px"></asp:LinkButton>
                         <asp:Panel ID="Panel4" runat="server">
-                            <table width="100%">
+                            <table width="">
                                 <tr>
                                     <td >Origen
                                     </td>
@@ -211,9 +212,9 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                                     </td>
                                     </tr>
                                 <tr>
-                                    <td class="EncabezadoCell" style="width: 15%; height: 18px;">Destino
+                                    <td>Destino
                                     </td>
-                                    <td class="EncabezadoCell" style="width: 30%; height: 18px;">
+                                   <td>
                                         <asp:TextBox ID="txtDestino" runat="server" Text='<%# Bind("DestinoDesc") %>' AutoPostBack="false"
                                             autocomplete="off" CssClass="CssTextBox"></asp:TextBox>
                                         <cc1:AutoCompleteExtender CompletionInterval="100" ID="AutoCompleteExtender26" runat="server"
@@ -224,9 +225,9 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                                         </cc1:AutoCompleteExtender>
                                 </tr>
                                 <tr>
-                                    <td class="EncabezadoCell" style="width: 15%; height: 18px;">Producto
+                                    <td>Producto
                                     </td>
-                                    <td class="EncabezadoCell" style="width: 30%; height: 18px;">
+                                   <td>
                                         <asp:TextBox ID="txt_AC_Articulo" runat="server" TabIndex="13" Style="margin-left: 0px;"
                                             autocomplete="off" CssClass="CssTextBox" AutoPostBack="false"></asp:TextBox>
                                         <cc1:AutoCompleteExtender CompletionInterval="100" ID="AutoCompleteExtender2" runat="server"
@@ -237,9 +238,9 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                                     </td>
                                     </tr>
                                 <tr>
-                                    <td class="EncabezadoCell" style="width: 90px; height: 18px;">Corredor (excluyente)
+                                    <td>Corredor (excluyente)
                                     </td>
-                                    <td class="EncabezadoCell" style="height: 18px">
+                                    <td>
                                         <asp:CheckBox ID="chkCorredor" runat="server" Checked="false" />
                                         <asp:TextBox ID="txtCorredor" runat="server" CssClass="CssTextBox" autocomplete="off"
                                             Visible="false" Text='<%# Bind("CorredorDesc") %>' AutoPostBack="false"></asp:TextBox>
@@ -260,7 +261,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                     </td>--%>
                                 </tr>
                                 <tr>
-                                    <td class="EncabezadoCell">Modo
+                                   <td>Modo
                                     </td>
                                     <td>
                                         <asp:DropDownList ID="DropDownList2" runat="server" AutoPostBack="false" CssClass="CssTextBox"
@@ -272,9 +273,9 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                                     </td>
                                     </tr>
                                 <tr>
-                                    <td class="EncabezadoCell" style="width: 15%; height: 18px;">Destinatario (excluyente)
+                                    <td>Destinatario (excluyente)
                                     </td>
-                                    <td class="EncabezadoCell" style="width: 30%; height: 18px;">
+                                   <td>
                                         <asp:CheckBox ID="chkDestinatario" runat="server" Checked="false" />
                                         <asp:TextBox ID="txtEntregador" runat="server" Text='<%# Bind("EntregadorDesc") %>'
                                             Visible="false" AutoPostBack="false" autocomplete="off" CssClass="CssTextBox"></asp:TextBox>
@@ -307,13 +308,13 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                     </td>--%>
                                 </tr>
                                 <tr>
-                                    <td class="EncabezadoCell" style="width: 160px; height: 18px;">Punto venta
+                                   <td>Punto venta
                                     </td>
                                     <td>
                                         <asp:DropDownList ID="cmbPuntoVenta" runat="server" CssClass="CssTextBox" Width="180px" />
                                     </td> </tr>
                                 <tr>
-                                    <td class="EncabezadoCell">Cliente Obs. (excl.)
+                                   <td>Cliente Obs. (excl.)
                                     </td>
                                     <td>
                                         <asp:TextBox ID="txtClienteAuxiliar" runat="server" autocomplete="off" AutoPostBack="false"
@@ -322,9 +323,9 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td class="EncabezadoCell" style="width: 15%; height: 18px;">Excepciones
+                                    <td>Excepciones
                                     </td>
-                                    <td class="EncabezadoCell" style="width: 30%; height: 18px;">
+                                    <td>
                                         <asp:DropDownList ID="optDivisionSyngenta" runat="server" ToolTip="Elija la División de Syngenta"
                                             Width="" Height="21px" Style="visibility: visible; overflow: auto;" CssClass="CssCombo"
                                             TabIndex="6">
@@ -349,9 +350,9 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td class="EncabezadoCell" style="width: 15%; height: 18px;">Titular
+                                    <td>Titular
                                     </td>
-                                    <td class="EncabezadoCell" style="width: 30%; height: 18px;">
+                                    <td>
                                         <asp:CheckBox ID="chkTitular" runat="server" Checked="true" />
                                         <asp:TextBox ID="txtVendedor" runat="server" CssClass="CssTextBox" Text='<%# Bind("VendedorDesc") %>'
                                             Visible="false" autocomplete="off" AutoPostBack="false"></asp:TextBox>
