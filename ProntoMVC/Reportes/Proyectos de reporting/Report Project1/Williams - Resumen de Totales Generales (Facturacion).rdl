@@ -1406,6 +1406,12 @@ set @FechaHasta='20170228'
                     <ChartMember>
                       <Label>Facturado Anterior</Label>
                     </ChartMember>
+                    <ChartMember>
+                      <Label />
+                    </ChartMember>
+                    <ChartMember>
+                      <Label>Facturado Anterior</Label>
+                    </ChartMember>
                   </ChartMembers>
                   <Label>=Fields!Modo.Value</Label>
                 </ChartMember>
@@ -1426,6 +1432,7 @@ set @FechaHasta='20170228'
                         <Border>
                           <Width>2pt</Width>
                         </Border>
+                        <Color>#eb0d1f6d</Color>
                       </Style>
                       <ChartMarker>
                         <Style />
@@ -1433,7 +1440,6 @@ set @FechaHasta='20170228'
                       <DataElementOutput>Output</DataElementOutput>
                     </ChartDataPoint>
                   </ChartDataPoints>
-                  <Type>Line</Type>
                   <Style />
                   <ChartEmptyPoints>
                     <Style />
@@ -1467,6 +1473,47 @@ set @FechaHasta='20170228'
                         <Border>
                           <Width>2pt</Width>
                         </Border>
+                        <Color>#596bba</Color>
+                      </Style>
+                      <ChartMarker>
+                        <Style />
+                      </ChartMarker>
+                      <DataElementOutput>Output</DataElementOutput>
+                    </ChartDataPoint>
+                  </ChartDataPoints>
+                  <Style />
+                  <ChartEmptyPoints>
+                    <Style />
+                    <ChartMarker>
+                      <Style />
+                    </ChartMarker>
+                    <ChartDataLabel>
+                      <Style />
+                    </ChartDataLabel>
+                  </ChartEmptyPoints>
+                  <ChartItemInLegend>
+                    <LegendText>Anterior</LegendText>
+                  </ChartItemInLegend>
+                  <ValueAxisName>Primary</ValueAxisName>
+                  <CategoryAxisName>Primary</CategoryAxisName>
+                  <ChartSmartLabel>
+                    <CalloutLineColor>Black</CalloutLineColor>
+                    <MinMovingDistance>0pt</MinMovingDistance>
+                  </ChartSmartLabel>
+                </ChartSeries>
+                <ChartSeries Name="Series">
+                  <ChartDataPoints>
+                    <ChartDataPoint>
+                      <ChartDataPointValues>
+                        <Y>[Sum(Facturado)]</Y>
+                      </ChartDataPointValues>
+                      <ChartDataLabel>
+                        <Style />
+                      </ChartDataLabel>
+                      <Style>
+                        <Border>
+                          <Width>2pt</Width>
+                        </Border>
                       </Style>
                       <ChartMarker>
                         <Style />
@@ -1485,9 +1532,44 @@ set @FechaHasta='20170228'
                       <Style />
                     </ChartDataLabel>
                   </ChartEmptyPoints>
-                  <ChartItemInLegend>
-                    <LegendText>Anterior</LegendText>
-                  </ChartItemInLegend>
+                  <ValueAxisName>Primary</ValueAxisName>
+                  <CategoryAxisName>Primary</CategoryAxisName>
+                  <ChartSmartLabel>
+                    <CalloutLineColor>Black</CalloutLineColor>
+                    <MinMovingDistance>0pt</MinMovingDistance>
+                  </ChartSmartLabel>
+                </ChartSeries>
+                <ChartSeries Name="Series1">
+                  <ChartDataPoints>
+                    <ChartDataPoint>
+                      <ChartDataPointValues>
+                        <Y>=Sum(Fields!FacturadoAnterior.Value)</Y>
+                      </ChartDataPointValues>
+                      <ChartDataLabel>
+                        <Style />
+                      </ChartDataLabel>
+                      <Style>
+                        <Border>
+                          <Width>1.5pt</Width>
+                        </Border>
+                      </Style>
+                      <ChartMarker>
+                        <Style />
+                      </ChartMarker>
+                      <DataElementOutput>Output</DataElementOutput>
+                    </ChartDataPoint>
+                  </ChartDataPoints>
+                  <Type>Line</Type>
+                  <Style />
+                  <ChartEmptyPoints>
+                    <Style />
+                    <ChartMarker>
+                      <Style />
+                    </ChartMarker>
+                    <ChartDataLabel>
+                      <Style />
+                    </ChartDataLabel>
+                  </ChartEmptyPoints>
                   <ValueAxisName>Primary</ValueAxisName>
                   <CategoryAxisName>Primary</CategoryAxisName>
                   <ChartSmartLabel>
@@ -1784,7 +1866,7 @@ set @FechaHasta='20170228'
             <Top>106.34657mm</Top>
             <Left>5.32464mm</Left>
             <Height>76.19375mm</Height>
-            <Width>204.0689mm</Width>
+            <Width>158.63325mm</Width>
             <ZIndex>5</ZIndex>
             <Style>
               <Border>
@@ -7182,6 +7264,7 @@ set @FechaHasta='20170228'
                         <Border>
                           <Width>2pt</Width>
                         </Border>
+                        <Color>#eb0d1f6d</Color>
                       </Style>
                       <ChartMarker>
                         <Style />
@@ -7189,7 +7272,6 @@ set @FechaHasta='20170228'
                       <DataElementOutput>Output</DataElementOutput>
                     </ChartDataPoint>
                   </ChartDataPoints>
-                  <Type>Line</Type>
                   <Style />
                   <ChartEmptyPoints>
                     <Style />
@@ -7223,6 +7305,7 @@ set @FechaHasta='20170228'
                         <Border>
                           <Width>2pt</Width>
                         </Border>
+                        <Color>#596bba</Color>
                       </Style>
                       <ChartMarker>
                         <Style />
@@ -7230,7 +7313,6 @@ set @FechaHasta='20170228'
                       <DataElementOutput>Output</DataElementOutput>
                     </ChartDataPoint>
                   </ChartDataPoints>
-                  <Type>Line</Type>
                   <Style />
                   <ChartEmptyPoints>
                     <Style />
@@ -7540,7 +7622,7 @@ set @FechaHasta='20170228'
             <Top>749.58353mm</Top>
             <Left>3.8611mm</Left>
             <Height>75.13542mm</Height>
-            <Width>203.53957mm</Width>
+            <Width>160.09679mm</Width>
             <ZIndex>15</ZIndex>
             <Style>
               <Border>
@@ -7611,7 +7693,6 @@ set @FechaHasta='20170228'
                       <DataElementOutput>Output</DataElementOutput>
                     </ChartDataPoint>
                   </ChartDataPoints>
-                  <Type>Line</Type>
                   <Style />
                   <ChartEmptyPoints>
                     <Style />
@@ -7917,7 +7998,7 @@ set @FechaHasta='20170228'
             <Top>845.2022mm</Top>
             <Left>3.86104mm</Left>
             <Height>75.13542mm</Height>
-            <Width>203.01034mm</Width>
+            <Width>160.09685mm</Width>
             <ZIndex>16</ZIndex>
             <Style>
               <Border>
@@ -7998,6 +8079,7 @@ set @FechaHasta='20170228'
                         <Border>
                           <Width>2pt</Width>
                         </Border>
+                        <Color>#eb0d1f6d</Color>
                       </Style>
                       <ChartMarker>
                         <Style />
@@ -8005,7 +8087,6 @@ set @FechaHasta='20170228'
                       <DataElementOutput>Output</DataElementOutput>
                     </ChartDataPoint>
                   </ChartDataPoints>
-                  <Type>Line</Type>
                   <Style />
                   <ChartEmptyPoints>
                     <Style />
@@ -8039,6 +8120,7 @@ set @FechaHasta='20170228'
                         <Border>
                           <Width>2pt</Width>
                         </Border>
+                        <Color>#596bba</Color>
                       </Style>
                       <ChartMarker>
                         <Style />
@@ -8046,7 +8128,6 @@ set @FechaHasta='20170228'
                       <DataElementOutput>Output</DataElementOutput>
                     </ChartDataPoint>
                   </ChartDataPoints>
-                  <Type>Line</Type>
                   <Style />
                   <ChartEmptyPoints>
                     <Style />
@@ -8356,7 +8437,7 @@ set @FechaHasta='20170228'
             <Top>265.56924mm</Top>
             <Left>8.11248mm</Left>
             <Height>75.13542mm</Height>
-            <Width>199.28821mm</Width>
+            <Width>155.84541mm</Width>
             <ZIndex>17</ZIndex>
             <Style>
               <Border>
@@ -8437,6 +8518,7 @@ set @FechaHasta='20170228'
                         <Border>
                           <Width>2pt</Width>
                         </Border>
+                        <Color>#eb0d1f6d</Color>
                       </Style>
                       <ChartMarker>
                         <Style />
@@ -8444,7 +8526,6 @@ set @FechaHasta='20170228'
                       <DataElementOutput>Output</DataElementOutput>
                     </ChartDataPoint>
                   </ChartDataPoints>
-                  <Type>Line</Type>
                   <Style />
                   <ChartEmptyPoints>
                     <Style />
@@ -8478,6 +8559,7 @@ set @FechaHasta='20170228'
                         <Border>
                           <Width>2pt</Width>
                         </Border>
+                        <Color>#596bba</Color>
                       </Style>
                       <ChartMarker>
                         <Style />
@@ -8485,7 +8567,6 @@ set @FechaHasta='20170228'
                       <DataElementOutput>Output</DataElementOutput>
                     </ChartDataPoint>
                   </ChartDataPoints>
-                  <Type>Line</Type>
                   <Style />
                   <ChartEmptyPoints>
                     <Style />
@@ -8796,7 +8877,7 @@ set @FechaHasta='20170228'
             <Top>407.27241mm</Top>
             <Left>8.11248mm</Left>
             <Height>75.13542mm</Height>
-            <Width>199.28819mm</Width>
+            <Width>155.84541mm</Width>
             <ZIndex>18</ZIndex>
             <Style>
               <Border>
@@ -8853,6 +8934,7 @@ set @FechaHasta='20170228'
                         <Border>
                           <Width>2pt</Width>
                         </Border>
+                        <Color>#eb0d1f6d</Color>
                       </Style>
                       <ChartMarker>
                         <Style />
@@ -8860,7 +8942,6 @@ set @FechaHasta='20170228'
                       <DataElementOutput>Output</DataElementOutput>
                     </ChartDataPoint>
                   </ChartDataPoints>
-                  <Type>Line</Type>
                   <Style />
                   <ChartEmptyPoints>
                     <Style />
@@ -8894,6 +8975,7 @@ set @FechaHasta='20170228'
                         <Border>
                           <Width>2pt</Width>
                         </Border>
+                        <Color>#596bba</Color>
                       </Style>
                       <ChartMarker>
                         <Style />
@@ -8901,7 +8983,6 @@ set @FechaHasta='20170228'
                       <DataElementOutput>Output</DataElementOutput>
                     </ChartDataPoint>
                   </ChartDataPoints>
-                  <Type>Line</Type>
                   <Style />
                   <ChartEmptyPoints>
                     <Style />
@@ -9211,7 +9292,7 @@ set @FechaHasta='20170228'
             <Top>559.84245mm</Top>
             <Left>6.69138mm</Left>
             <Height>75.13542mm</Height>
-            <Width>203.53957mm</Width>
+            <Width>157.26651mm</Width>
             <ZIndex>19</ZIndex>
             <Style>
               <Border>
@@ -9223,7 +9304,7 @@ set @FechaHasta='20170228'
             </Style>
           </Chart>
         </ReportItems>
-        <Height>967.01419mm</Height>
+        <Height>920.33762mm</Height>
         <Style>
           <Border>
             <Style>None</Style>
