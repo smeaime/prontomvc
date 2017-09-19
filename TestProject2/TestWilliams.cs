@@ -864,6 +864,57 @@ namespace ProntoMVC.Tests
 
 
 
+        [TestMethod]
+        public void _42871()
+        {
+
+        }
+
+
+
+
+
+        [TestMethod]
+        public void SincroACA_45332()
+        {
+
+            string sErrores = "", sTitulo = "";
+            LinqCartasPorteDataContext db = null;
+
+            // el _CONST_MAXROWS sale del app.config
+
+            int registrosf = 0;
+
+            int idcli =CartaDePorteManager.BuscarVendedorPorCUIT("30-50012088-2", SC, "");
+
+
+            var output = SincronismosWilliamsManager.GenerarSincro("A.C.A.", ref sErrores, SC, "dominio", ref sTitulo
+                                , CartaDePorteManager.enumCDPestado.DescargasMasFacturadas,
+                     "", -1,idcli,
+                -1, -1,
+                -1, -1, -1, -1,
+                 CartaDePorteManager.FiltroANDOR.FiltroOR, "Ambas",
+                new DateTime(2017, 1, 13), new DateTime(2017, 1, 16),
+                -1, "Ambas", false, "", "", -1, ref registrosf, 40);
+
+
+//            FB = FUERA DE BASE
+//FE = FUERA DE STANDAR
+
+//Buenas tares, nosotros necesitamos lo siguiente
+
+//Que el FB Y el FE venga informado como FE, sin discriminar grano
+
+
+
+
+            //File.Copy(output, @"C:\Users\Administrador\Desktop\"   Path.GetFileName(output), true);
+            System.Diagnostics.Process.Start(output);
+        }
+
+
+
+
 
 
         [TestMethod]
