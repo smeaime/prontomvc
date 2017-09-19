@@ -1,0 +1,45 @@
+
+Log Entry : 
+09/19/2017 10:26:32
+Error in: . Error Message:Generando sincro para A.C.A.
+__________________________
+
+Log Entry : 
+09/19/2017 10:28:39
+Error in: . Error Message:Generando sincro para A.C.A.
+__________________________
+
+Log Entry : 
+09/19/2017 10:30:09
+Error in: . Error Message:Generando sincro para A.C.A.
+__________________________
+
+Log Entry : 
+09/19/2017 10:38:07
+Error in: . Error Message:Generando sincro para A.C.A.
+__________________________
+
+Log Entry : 
+09/19/2017 10:41:37
+Error in: . Error Message:Generando sincro para A.C.A.
+__________________________
+
+Log Entry : 
+09/19/2017 10:44:17
+Error in: . Error Message:Generando sincro para A.C.A.
+__________________________
+
+Log Entry : 
+09/19/2017 11:03:24
+Error in: . Error Message:Generando sincro para A.C.A.
+__________________________
+
+Log Entry : 
+09/19/2017 11:06:13
+Error in: . Error Message:Generando sincro para A.C.A.
+__________________________
+
+Log Entry : 
+09/19/2017 11:07:47
+Error in: . Error Message:Generando sincro para A.C.A.
+__________________________
