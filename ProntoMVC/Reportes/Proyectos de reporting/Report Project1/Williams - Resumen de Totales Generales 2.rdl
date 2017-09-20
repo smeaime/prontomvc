@@ -7534,7 +7534,13 @@ set @FechaHasta='20170228'
                 <Position>TopLeft</Position>
               </ChartTitle>
             </ChartTitles>
-            <Palette>Pacific</Palette>
+            <Palette>Custom</Palette>
+            <ChartCustomPaletteColors>
+              <ChartCustomPaletteColor>#596bba</ChartCustomPaletteColor>
+              <ChartCustomPaletteColor>#eb0d1f6d</ChartCustomPaletteColor>
+              <ChartCustomPaletteColor>#eb123d68</ChartCustomPaletteColor>
+              <ChartCustomPaletteColor>#725ab7</ChartCustomPaletteColor>
+            </ChartCustomPaletteColors>
             <ChartBorderSkin>
               <Style>
                 <BackgroundColor>Gray</BackgroundColor>
