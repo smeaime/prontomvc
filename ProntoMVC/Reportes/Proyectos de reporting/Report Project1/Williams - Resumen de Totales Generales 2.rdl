@@ -763,7 +763,7 @@ set @FechaHasta='20170228'
                   <FontSize>8pt</FontSize>
                 </Style>
                 <ChartLegendTitle>
-                  <Caption />
+                  <Caption>Sucursal</Caption>
                   <Style>
                     <FontSize>8pt</FontSize>
                     <FontWeight>Bold</FontWeight>
@@ -5525,7 +5525,7 @@ set @FechaHasta='20170228'
                 <Position>RightCenter</Position>
                 <DockOutsideChartArea>true</DockOutsideChartArea>
                 <ChartLegendTitle>
-                  <Caption />
+                  <Caption>Sucursal</Caption>
                   <Style>
                     <FontSize>8pt</FontSize>
                     <FontWeight>Bold</FontWeight>
