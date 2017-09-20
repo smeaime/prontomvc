@@ -6721,10 +6721,10 @@ set @FechaHasta='20170228'
                   <Label>Periodo Anterior</Label>
                 </ChartMember>
                 <ChartMember>
-                  <Label />
+                  <Label>Neto Final</Label>
                 </ChartMember>
                 <ChartMember>
-                  <Label />
+                  <Label>Periodo Anterior</Label>
                 </ChartMember>
               </ChartMembers>
             </ChartSeriesHierarchy>
@@ -6816,7 +6816,7 @@ set @FechaHasta='20170228'
                   <ChartDataPoints>
                     <ChartDataPoint>
                       <ChartDataPointValues>
-                        <Y>[Sum(NetoFinal)]</Y>
+                        <Y>=Sum(Fields!NetoFinal.Value)</Y>
                       </ChartDataPointValues>
                       <ChartDataLabel>
                         <Style />
@@ -6855,7 +6855,7 @@ set @FechaHasta='20170228'
                   <ChartDataPoints>
                     <ChartDataPoint>
                       <ChartDataPointValues>
-                        <Y>[Sum(PeriodoAnterior)]</Y>
+                        <Y>=Sum(Fields!PeriodoAnterior.Value)</Y>
                       </ChartDataPointValues>
                       <ChartDataLabel>
                         <Style />
@@ -8142,10 +8142,10 @@ set @FechaHasta='20170228'
                       <Label>Periodo Anterior</Label>
                     </ChartMember>
                     <ChartMember>
-                      <Label />
+                      <Label>Neto Final</Label>
                     </ChartMember>
                     <ChartMember>
-                      <Label />
+                      <Label>Periodo Anterior</Label>
                     </ChartMember>
                   </ChartMembers>
                   <Label>=Fields!Modo.Value</Label>
@@ -8240,7 +8240,7 @@ set @FechaHasta='20170228'
                   <ChartDataPoints>
                     <ChartDataPoint>
                       <ChartDataPointValues>
-                        <Y>[Sum(NetoFinal)]</Y>
+                        <Y>=Sum(Fields!NetoFinal.Value)</Y>
                       </ChartDataPointValues>
                       <ChartDataLabel>
                         <Style />
@@ -8279,7 +8279,7 @@ set @FechaHasta='20170228'
                   <ChartDataPoints>
                     <ChartDataPoint>
                       <ChartDataPointValues>
-                        <Y>[Sum(PeriodoAnterior)]</Y>
+                        <Y>=Sum(Fields!PeriodoAnterior.Value)</Y>
                       </ChartDataPointValues>
                       <ChartDataLabel>
                         <Style />
@@ -8644,10 +8644,10 @@ set @FechaHasta='20170228'
                   <Label>Periodo Anterior</Label>
                 </ChartMember>
                 <ChartMember>
-                  <Label />
+                  <Label>Neto Final</Label>
                 </ChartMember>
                 <ChartMember>
-                  <Label />
+                  <Label>Periodo Anterior</Label>
                 </ChartMember>
               </ChartMembers>
             </ChartSeriesHierarchy>
@@ -8739,7 +8739,7 @@ set @FechaHasta='20170228'
                   <ChartDataPoints>
                     <ChartDataPoint>
                       <ChartDataPointValues>
-                        <Y>[Sum(NetoFinal)]</Y>
+                        <Y>=Sum(Fields!NetoFinal.Value)</Y>
                       </ChartDataPointValues>
                       <ChartDataLabel>
                         <Style />
@@ -8778,7 +8778,7 @@ set @FechaHasta='20170228'
                   <ChartDataPoints>
                     <ChartDataPoint>
                       <ChartDataPointValues>
-                        <Y>[Sum(PeriodoAnterior)]</Y>
+                        <Y>=Sum(Fields!PeriodoAnterior.Value)</Y>
                       </ChartDataPointValues>
                       <ChartDataLabel>
                         <Style />
