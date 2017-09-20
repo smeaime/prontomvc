@@ -18,6 +18,12 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
+    
+    
+    <%--https://developer.mozilla.org/en-US/docs/Mozilla/Mobile/Viewport_meta_tag--%>
+    <meta name="viewport" content="width=400px, initial-scale=1">
+
+
 <head runat="server">
     <title>BDL Consultores</title>
 
@@ -72,9 +78,13 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
 
         <br />
+
+            <a href="SituacionCalidadMovil.aspx"> situacion</a>
+
+
         <asp:UpdatePanel ID="UpdatePanelResumen" runat="server">
             <ContentTemplate>
-                <table width="400px">
+                <table width="">
                     <tr>
                         <td colspan="2">
                             <asp:UpdateProgress ID="UpdateProgress2" runat="server">
@@ -119,7 +129,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                     <tr>
                         <td>N° Carta porte
                         </td>
-                        <td colspan="2" style="width: 50%; height: 18px;">
+                        <td colspan="2">
                             <asp:TextBox ID="txtQueContenga" runat="server" AutoPostBack="True" CssClass="CssTextBox"
                                 Width="110px"></asp:TextBox>
                         </td>
@@ -195,11 +205,11 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                 <asp:UpdatePanel ID="UpdatePanel6" runat="server">
                     <ContentTemplate>
                         <asp:LinkButton ID="btnMasPanel" runat="server" Font-Bold="False" Font-Underline="True"
-                            ForeColor="" CausesValidation="False" Font-Size="X-Small" Height="20px" BorderStyle="None"
+                            ForeColor="" CausesValidation="False" Font-Size="14" Height="20px" BorderStyle="None"
                             Style="margin-right: 0px; margin-top: 0px; margin-bottom: 0px; margin-left: 5px;"
-                            BorderWidth="5px" Width="127px"></asp:LinkButton>
-                        <asp:Panel ID="Panel4" runat="server" Width="400px">
-                            <table width="400px">
+                            BorderWidth="5px" Width=""></asp:LinkButton>
+                        <asp:Panel ID="Panel4" runat="server" Width="">
+                            <table width="">
                                 <tr>
                                     <td>Origen
                                     </td>
@@ -240,7 +250,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td>Corredor (excl.)
+                                    <td>Corredor excl.
                                     </td>
                                     <td>
                                         <asp:CheckBox ID="chkCorredor" runat="server" Checked="false" />
@@ -275,7 +285,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td>Destinatario (excl.)
+                                    <td>Destinatario excl.
                                     </td>
                                     <td>
                                         <asp:CheckBox ID="chkDestinatario" runat="server" Checked="false" />
@@ -415,7 +425,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                         <ajaxToolkit:CollapsiblePanelExtender ID="CollapsiblePanelExtender1" runat="server"
                             TargetControlID="Panel4" ExpandControlID="btnMasPanel" CollapseControlID="btnMasPanel"
                             CollapsedText="más filtros..." ExpandedText="ocultar" TextLabelID="btnMasPanel"
-                            Collapsed="false">
+                            Collapsed="true">
                         </ajaxToolkit:CollapsiblePanelExtender>
                     </ContentTemplate>
                 </asp:UpdatePanel>
@@ -436,11 +446,12 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                 <br />
                 <asp:Label ID="lblErrores" runat="server"></asp:Label>
 
-                <iframe id="iframeAAAA" runat="server" src="" visible="false" width="400px" height=""></iframe>
+                <iframe id="iframeAAAA" runat="server" src="" visible="false" width="" height=""></iframe>
 
                 <div style="width: 400px; overflow-x: scroll">
                     <rsweb:ReportViewer ID="ReportViewer2" runat="server" Font-Names="Verdana" Font-Size="8pt"
-                        Width="400px" Visible="true" ZoomMode="PageWidth" Height="" SizeToReportContent="True">
+                    Width="100%" Visible="true" ZoomMode="Percent" ZoomPercent="200" Height="" SizeToReportContent="True">
+
                         <%--        <LocalReport ReportPath="ProntoWeb\Informes\prueba2.rdl">
 
         </LocalReport>
