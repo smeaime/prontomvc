@@ -172,7 +172,7 @@ Partial Class CartaDePorteInformesAccesoClientes
         Roles.DeleteCookie()
         Session.Clear()
         'FormsAuthentication.RedirectToLoginPage();
-        End Subresu
+    End Sub
 
 
 

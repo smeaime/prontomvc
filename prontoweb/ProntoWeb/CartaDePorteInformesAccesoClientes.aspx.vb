@@ -61,6 +61,8 @@ Partial Class CartaDePorteInformesAccesoClientes
             Response.Redirect("CartaDePorteInformesAccesoClientesBLDcorredor.aspx")
         ElseIf Membership.GetUser.UserName = "DIAZDOW" Then
             Response.Redirect("CartaDePorteInformesAccesoClientesEspecial.aspx")
+        ElseIf Request.Browser("IsMobileDevice") = "true" Then
+            Response.Redirect("CartaDePorteInformesAccesoClientesMovil.aspx")
         End If
 
 
