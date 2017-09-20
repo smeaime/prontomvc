@@ -21,7 +21,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 <head runat="server">
     <title>BDL Consultores</title>
 
-  <%--  <link id="Link1" href="Css/Styles.css" rel="stylesheet" type="text/css" runat="server" />--%>
+    <%--  <link id="Link1" href="Css/Styles.css" rel="stylesheet" type="text/css" runat="server" />--%>
 
     <link rel="shortcut icon" type="image/ico" href="favicon.png" />
 
@@ -40,7 +40,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
     </script>
 </head>
-<body class="bodyMasterPage" style="width: ">
+<body class="bodyMasterPage" style="width: 400px">
 
 
     <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
@@ -72,44 +72,44 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
 
         <br />
-        <asp:UpdatePanel ID="UpdatePanelResumen" runat="server" >
+        <asp:UpdatePanel ID="UpdatePanelResumen" runat="server">
             <ContentTemplate>
-                         <table width="400px" >
-                             <tr>
-                                 <td colspan="2">
-                <asp:UpdateProgress ID="UpdateProgress2" runat="server">
-                    <ProgressTemplate>
-                        <img src="Imagenes/25-1.gif" alt="" style="height: 30px" />
-                        <asp:Label ID="Label342" runat="server" Text="Actualizando datos..." ForeColor="White" Font-Size="Medium"
-                            Visible="true"></asp:Label>
-                    </ProgressTemplate>
-                </asp:UpdateProgress>
+                <table width="400px">
+                    <tr>
+                        <td colspan="2">
+                            <asp:UpdateProgress ID="UpdateProgress2" runat="server">
+                                <ProgressTemplate>
+                                    <img src="Imagenes/25-1.gif" alt="" style="height: 30px" />
+                                    <asp:Label ID="Label342" runat="server" Text="Actualizando datos..." ForeColor="White" Font-Size="Medium"
+                                        Visible="true"></asp:Label>
+                                </ProgressTemplate>
+                            </asp:UpdateProgress>
 
-                <asp:Button ID="btnRefrescar" Text="VER INFORME" runat="server" Visible="True" CssClass="but"
-                    Width="" Height="40" />
-         
-                <asp:Button ID="btnImagenes" Text="JPG" runat="server" Visible="True" CssClass="but"
-                    Width="" Height="40" />
-                <asp:Button ID="btnImagenesPDF" Text="PDF" runat="server" Visible="True" CssClass="but"
-                    Width="" Height="40" />
-                <asp:Button ID="btnImagenesTiffReducido" Text="TIFF" runat="server" Visible="True" CssClass="but"
-                    Width="" Height="40" />
+                            <asp:Button ID="btnRefrescar" Text="VER INFORME" runat="server" Visible="True" CssClass="but"
+                                Width="" Height="40" />
+
+                            <asp:Button ID="btnImagenes" Text="JPG" runat="server" Visible="True" CssClass="but"
+                                Width="" Height="40" />
+                            <asp:Button ID="btnImagenesPDF" Text="PDF" runat="server" Visible="True" CssClass="but"
+                                Width="" Height="40" />
+                            <asp:Button ID="btnImagenesTiffReducido" Text="TIFF" runat="server" Visible="True" CssClass="but"
+                                Width="" Height="40" />
 
 
-                <asp:LoginView ID="LoginView" runat="server" >
-                                                <LoggedInTemplate >
-                                                    <asp:LoginName ID="LoginName1" runat="server" Font-Bold="false" CssClass="margender"   />
-                                                    |
+                            <asp:LoginView ID="LoginView" runat="server">
+                                <LoggedInTemplate>
+                                    <asp:LoginName ID="LoginName1" runat="server" Font-Bold="false" CssClass="margender" />
+                                    |
                                                     <asp:LoginStatus ID="LoginStatus1" runat="server" Font-Bold="false" ForeColor="white"
                                                         LogoutAction="RedirectToLoginPage" LogoutPageUrl="~/Login.aspx" OnLoggedOut="LoginStatus1_LoggedOut"
                                                         TabIndex="-1" LogoutText="Salir" Font-Underline="False" CssClass="margender" />
-                                                </LoggedInTemplate>
-                                            </asp:LoginView>
-                                     </td>
-                             </tr>
-       
+                                </LoggedInTemplate>
+                            </asp:LoginView>
+                        </td>
+                    </tr>
+
                     <tr>
-                        <td>
+                        <td colspan="2">
                             <asp:Label ID="lblRazonSocial" runat="server" Font-Size="Large" Font-Bold="true" />
                             <asp:Button ID="Button1" Text="importar" runat="server" Visible="false" Height="27" />
                         </td>
@@ -117,7 +117,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
 
                     <tr>
-                       <td>N° Carta porte
+                        <td>N° Carta porte
                         </td>
                         <td colspan="2" style="width: 50%; height: 18px;">
                             <asp:TextBox ID="txtQueContenga" runat="server" AutoPostBack="True" CssClass="CssTextBox"
@@ -145,7 +145,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
                     </tr>
                     <tr>
-                       <td>Descarga
+                        <td>Descarga
                         </td>
                         <td>
                             <asp:DropDownList ID="cmbPeriodo" runat="server" AutoPostBack="true" Height="22px"
@@ -198,12 +198,12 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                             ForeColor="" CausesValidation="False" Font-Size="X-Small" Height="20px" BorderStyle="None"
                             Style="margin-right: 0px; margin-top: 0px; margin-bottom: 0px; margin-left: 5px;"
                             BorderWidth="5px" Width="127px"></asp:LinkButton>
-                        <asp:Panel ID="Panel4" runat="server">
+                        <asp:Panel ID="Panel4" runat="server" Width="400px">
                             <table width="400px">
                                 <tr>
-                                    <td >Origen
+                                    <td>Origen
                                     </td>
-                                    <td >
+                                    <td>
                                         <asp:TextBox ID="txtProcedencia" runat="server" CssClass="CssTextBox" Text='<%# Bind("ProcedenciaDesc") %>'
                                             AutoPostBack="false"></asp:TextBox>
                                         <cc1:AutoCompleteExtender CompletionInterval="100" ID="AutoCompleteExtender27" runat="server"
@@ -212,11 +212,11 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                                             ServicePath="WebServiceLocalidades.asmx" TargetControlID="txtProcedencia" UseContextKey="True">
                                         </cc1:AutoCompleteExtender>
                                     </td>
-                                    </tr>
+                                </tr>
                                 <tr>
                                     <td>Destino
                                     </td>
-                                   <td>
+                                    <td>
                                         <asp:TextBox ID="txtDestino" runat="server" Text='<%# Bind("DestinoDesc") %>' AutoPostBack="false"
                                             autocomplete="off" CssClass="CssTextBox"></asp:TextBox>
                                         <cc1:AutoCompleteExtender CompletionInterval="100" ID="AutoCompleteExtender26" runat="server"
@@ -229,7 +229,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                                 <tr>
                                     <td>Producto
                                     </td>
-                                   <td>
+                                    <td>
                                         <asp:TextBox ID="txt_AC_Articulo" runat="server" TabIndex="13" Style="margin-left: 0px;"
                                             autocomplete="off" CssClass="CssTextBox" AutoPostBack="false"></asp:TextBox>
                                         <cc1:AutoCompleteExtender CompletionInterval="100" ID="AutoCompleteExtender2" runat="server"
@@ -238,9 +238,9 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                                             ServicePath="WebServiceArticulos.asmx" TargetControlID="txt_AC_Articulo" UseContextKey="True">
                                         </cc1:AutoCompleteExtender>
                                     </td>
-                                    </tr>
+                                </tr>
                                 <tr>
-                                    <td>Corredor (excluyente)
+                                    <td>Corredor (excl.)
                                     </td>
                                     <td>
                                         <asp:CheckBox ID="chkCorredor" runat="server" Checked="false" />
@@ -263,7 +263,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                     </td>--%>
                                 </tr>
                                 <tr>
-                                   <td>Modo
+                                    <td>Modo
                                     </td>
                                     <td>
                                         <asp:DropDownList ID="DropDownList2" runat="server" AutoPostBack="false" CssClass="CssTextBox"
@@ -273,11 +273,11 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                                             <asp:ListItem>Ambos</asp:ListItem>
                                         </asp:DropDownList>
                                     </td>
-                                    </tr>
+                                </tr>
                                 <tr>
-                                    <td>Destinatario (excluyente)
+                                    <td>Destinatario (excl.)
                                     </td>
-                                   <td>
+                                    <td>
                                         <asp:CheckBox ID="chkDestinatario" runat="server" Checked="false" />
                                         <asp:TextBox ID="txtEntregador" runat="server" Text='<%# Bind("EntregadorDesc") %>'
                                             Visible="false" AutoPostBack="false" autocomplete="off" CssClass="CssTextBox"></asp:TextBox>
@@ -310,13 +310,14 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                     </td>--%>
                                 </tr>
                                 <tr>
-                                   <td>Punto venta
+                                    <td>Punto venta
                                     </td>
                                     <td>
                                         <asp:DropDownList ID="cmbPuntoVenta" runat="server" CssClass="CssTextBox" Width="180px" />
-                                    </td> </tr>
+                                    </td>
+                                </tr>
                                 <tr>
-                                   <td>Cliente Obs. (excl.)
+                                    <td>Cliente Obs. (excl.)
                                     </td>
                                     <td>
                                         <asp:TextBox ID="txtClienteAuxiliar" runat="server" autocomplete="off" AutoPostBack="false"
@@ -364,7 +365,8 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                                             FirstRowSelected="True" CompletionListCssClass="AutoCompleteScroll" DelimiterCharacters=""
                                             Enabled="True">
                                         </cc1:AutoCompleteExtender>
-                                    </td> </tr>
+                                    </td>
+                                </tr>
                                 <tr>
                                     <td class="EncabezadoCell" style="width: 90px">Intermediario
                                     </td>
@@ -434,11 +436,11 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                 <br />
                 <asp:Label ID="lblErrores" runat="server"></asp:Label>
 
-                <iframe id="iframeAAAA" runat="server" src="" visible="false" width="" height=""></iframe>
+                <iframe id="iframeAAAA" runat="server" src="" visible="false" width="400px" height=""></iframe>
 
-                <div style="width: ">
+                <div style="width: 400px; overflow-x: scroll">
                     <rsweb:ReportViewer ID="ReportViewer2" runat="server" Font-Names="Verdana" Font-Size="8pt"
-                        Width="100%" Visible="true" ZoomMode="PageWidth" Height="" SizeToReportContent="True">
+                        Width="400px" Visible="true" ZoomMode="PageWidth" Height="" SizeToReportContent="True">
                         <%--        <LocalReport ReportPath="ProntoWeb\Informes\prueba2.rdl">
 
         </LocalReport>
@@ -453,7 +455,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                 </div>
             </ContentTemplate>
         </asp:UpdatePanel>
-       
+
         <%--   /////////////////////////////////////////////////////////////////////        
  /////////////////////////////////////////////////////////////////////    --%>
         <%--  campos hidden --%>
