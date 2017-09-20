@@ -12,6 +12,11 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
     Namespace="Microsoft.Reporting.WebForms"
     TagPrefix="rsweb" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
+
+        <%--https://developer.mozilla.org/en-US/docs/Mozilla/Mobile/Viewport_meta_tag--%>
+    <meta name="viewport" content="width=400px, initial-scale=1">
+
+
     <%--/////////////////////////////////////////////////////////////--%>
     <%--//////////       jquery    /////////////////////////////////--%>
     <%--/////////////////////////////////////////////////////////////--%>
@@ -82,7 +87,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
         <a href="javascript:void(0)" id="m1">Get Selected id's</a> <a href="javascript:void(0)"
             id="m1s">Select(Unselect) row 13</a>--%>
 
-        <asp:UpdatePanel ID="UpdatePanelResumen" runat="server" Visible="false">
+        <asp:UpdatePanel ID="UpdatePanelResumen" runat="server" Visible="true">
             <ContentTemplate>
 
                 <table style="color: black;">

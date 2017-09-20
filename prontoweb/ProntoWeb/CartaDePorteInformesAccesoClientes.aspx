@@ -11,6 +11,8 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
     TagPrefix="rsweb" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
     <br />
+
+
     <asp:UpdatePanel ID="UpdatePanelResumen" runat="server">
         <ContentTemplate>
             <table width="100%">
