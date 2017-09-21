@@ -154,11 +154,43 @@ namespace ProntoMVC.TestsMVC
 
 
         [TestMethod]
-        public void usuariosdecompras_24848()
+        public void pend_24848()
         {
             // como puedo crear una RM para que aparezca en el "RMs Pendientes de Asignar"?
 
+            var c = new RequerimientoController();
+            GetMockedControllerGenerico(c);
+
+
+
+            Requerimiento rm = new Requerimiento();
+            var rmdet = new ProntoMVC.Data.Models.DetalleRequerimiento();
+            rmdet.IdArticulo = 12;
+            rmdet.Cantidad = 230;
+            rm.DetalleRequerimientos.Add(rmdet);
+            rm.DetalleRequerimientos.Add(new MVCent.DetalleRequerimiento { IdArticulo = 11, Cantidad = 3255 });
+            JsonResult result = c.BatchUpdate(rm);
+
+
+
+
+
+            JsonResult result2 = (JsonResult)c.RequerimientosPendientesAsignar_DynamicGridData("NumeroRequerimiento", "desc", 0, 50, false, "", "", "", "");
+            jqGridJson listado = (jqGridJson)result2.Data;
+
+            //habria problemas con los TipoDesignacion del detalle no? -si
+            
+
+
+
+
+
+            Assert.IsTrue(listado.total > 0);
+
         }
+
+
+
 
 
         [TestMethod]
