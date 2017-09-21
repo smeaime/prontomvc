@@ -82,7 +82,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
             <a href="SituacionCalidadMovil.aspx"> situacion</a>
 
         modo escritorio
-
+        llamar a williams
         <asp:UpdatePanel ID="UpdatePanelResumen" runat="server">
             <ContentTemplate>
                 <table width="">
