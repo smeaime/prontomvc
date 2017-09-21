@@ -5737,7 +5737,7 @@ order by kilos desc
             List<xxzc> locs = (from l in db.Localidades
                                join p in db.Provincias on l.IdProvincia equals p.IdProvincia
                                // join p in db.Partidos on l.IdPartido equals p.IdPartido
-                               select new xxzc { prov = p.Nombre, loc = l.Nombre, id = l.IdLocalidad, lat = l.lat, lng = l.lng }).ToList();
+                               select new xxzc { prov = p.Nombre, loc = l.Nombre, id = l.IdLocalidad, lat = l.Lat, lng = l.Lng }).ToList();
 
 
 

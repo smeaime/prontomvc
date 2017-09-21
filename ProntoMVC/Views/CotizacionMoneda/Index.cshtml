@@ -53,34 +53,55 @@
     });
 
     function GrabarFila(gridId) {
-        var dataFromTheRow = $grid.jqGrid('getRowData', gridId), i;
+        var i, a, err = "", Moneda = "";
 
-        //var dataIds = $('#Lista').jqGrid('getDataIDs');
-        //for (i = 0; i < dataIds.length; i++) {
-        //    try {
-        //        //Save row only to the grid
-        //        //$('#Lista').jqGrid('saveRow', dataIds[i], false, 'clientArray');
-        //        $('#Lista').jqGrid('restoreRow', dataIds[i]);
-        //    }
-        //    catch (ex) {
-        //        //If you are using editRules it might end up with exception
-        //        $('#Lista').jqGrid('restoreRow', dataIds[i]);
-        //    }
-        //}
+        $('#Lista').jqGrid('setSelection', gridId);
+        var iRow = $('#' + $.jgrid.jqID(gridId))[0].rowIndex;
+        //$('#Lista').jqGrid("saveCell", iRow, 4);
+        var dataFromTheRow = $('#Lista').jqGrid('getRowData', gridId)
+        var colModel = $('#Lista').jqGrid('getGridParam', 'colModel');
+
+        for (i = 0; i < colModel.length; i++) {
+            if (colModel[i].editable) {
+                a = dataFromTheRow[colModel[i].name];
+                if (typeof a != "undefined") {
+                    if (a.substring(0, 1) == "<") {
+                        err = err + "Hay campos en modo edicion, confirmelos con enter antes de grabar.\n"
+                    }
+                }
+            }
+        }
 
         var datos = $("#formid").serializeObject();
-        var err;
 
         datos.IdCotizacion = gridId;
         datos.Fecha = dataFromTheRow.Fecha;
         datos.IdMoneda = dataFromTheRow.IdMoneda;
-        //datos.Cotizacion = dataFromTheRow.Cotizacion;
+        Moneda = dataFromTheRow.Moneda;
         datos.CotizacionLibre = dataFromTheRow.CotizacionLibre;
 
-        err = ""
         if (datos.Fecha == "" || datos.Fecha == undefined) err = err + "Falta definir la fecha.\n"
         if (datos.IdMoneda == "" || datos.IdMoneda == undefined) err = err + "Falta definir la moneda.\n"
+        if (Moneda == "" || Moneda == undefined) err = err + "Falta definir la moneda.\n"
         if (datos.CotizacionLibre == "" || datos.CotizacionLibre == undefined) err = err + "No ingreso la cotizacion\n"
+
+        if (datos.IdCotizacion <= 0) {
+            $.ajax({
+                type: "GET",
+                async: false,
+                contentType: "application/json; charset=utf-8",
+                url: ROOT + 'Moneda/Moneda_Cotizacion2',
+                data: { fecha: datos.Fecha, IdMoneda: datos.IdMoneda },
+                dataType: "json",
+                success: function (result) {
+                    if (result>0) {
+                        err = err + "Ya existe cotizacion.\n"
+                    }
+                },
+                error: function (xhr, textStatus, exceptionThrown) {
+                }
+            });
+        }
 
         if (err != "") {
             alert('No se pudo grabar el registro.\n' + err);
@@ -94,7 +115,7 @@
                 data: JSON.stringify(datos),
                 success: function (result) {
                     if (result) {
-                        $grid.jqGrid('setRowData', gridId, { act: "" });
+                        $('#Lista').jqGrid('setRowData', gridId, { act: "" });
                         var rowid = $('#Lista').getGridParam('selrow');
                         var valor = result.IdCotizacion;
                         if (valor == "") { valor = "0"; }
@@ -125,10 +146,10 @@
     };
 
     function EliminarFila(gridId) {
-        var dataFromTheRow = $grid.jqGrid('getRowData', gridId);
+        var dataFromTheRow = $('#Lista').jqGrid('getRowData', gridId);
         var idprincipal = dataFromTheRow['IdCotizacion'];
         if (idprincipal <= 0) {
-            $grid.jqGrid('delRowData', gridId);
+            $('#Lista').jqGrid('delRowData', gridId);
         } else {
             $.ajax({
                 type: 'POST',
@@ -138,7 +159,7 @@
                 data: JSON.stringify({ id: idprincipal }),
                 success: function (result) {
                     if (result) {
-                        $grid.jqGrid('delRowData', gridId);
+                        $('#Lista').jqGrid('delRowData', gridId);
                     } else {
                         alert('No se pudo eliminar el registro.');
                     }
@@ -147,34 +168,34 @@
         };
     };
 
-    window.parent.document.body.onclick = saveEditedCell; // attach to parent window if any
-    document.body.onclick = saveEditedCell; // attach to current document.
+    //window.parent.document.body.onclick = saveEditedCell; // attach to parent window if any
+    //document.body.onclick = saveEditedCell; // attach to current document.
 
-    function saveEditedCell(evt) {
-        var target = $(evt.target);
+    //function saveEditedCell(evt) {
+    //    var target = $(evt.target);
 
-        if ($grid) {
-            var isCellClicked = $grid.find(target).length; // check if click is inside jqgrid
-            if (gridCellWasClicked && !isCellClicked) // check if a valid click
-            {
-                gridCellWasClicked = false;
-                $grid.jqGrid("saveCell", lastSelectediRow2, lastSelectediCol2);
-            }
-        }
+    //    if ($grid) {
+    //        var isCellClicked = $grid.find(target).length; // check if click is inside jqgrid
+    //        if (gridCellWasClicked && !isCellClicked) // check if a valid click
+    //        {
+    //            gridCellWasClicked = false;
+    //            $grid.jqGrid("saveCell", lastSelectediRow2, lastSelectediCol2);
+    //        }
+    //    }
 
-        //$grid = "";
-        gridCellWasClicked = false;
+    //    //$grid = "";
+    //    gridCellWasClicked = false;
 
-        if (jQuery("#Lista").find(target).length) {
-            $grid = $('#Lista');
-            grillaenfoco = true;
-        }
-        if (grillaenfoco) {
-            gridCellWasClicked = true;
-            lastSelectediRow2 = lastSelectediRow;
-            lastSelectediCol2 = lastSelectediCol;
-        }
-    };
+    //    if (jQuery("#Lista").find(target).length) {
+    //        $grid = $('#Lista');
+    //        grillaenfoco = true;
+    //    }
+    //    if (grillaenfoco) {
+    //        gridCellWasClicked = true;
+    //        lastSelectediRow2 = lastSelectediRow;
+    //        lastSelectediCol2 = lastSelectediCol;
+    //    }
+    //};
 
     function MarcarSeleccionadosParaEliminar(grid) {
         var selectedIds = grid.jqGrid('getGridParam', 'selarrrow');
@@ -272,7 +293,7 @@
                                         showOn: 'button',
                                         buttonText: '...'
                                     });
-                                }
+                                },
                             },
                             formatoptions: { newformat: "dd/mm/yy" }, datefmt: 'dd/mm/yy'
                         },
@@ -369,18 +390,12 @@
                                         });
     });
 
-
-
     $(window).resize(function () {
         RefrescaAnchoJqgrids();
     });
 
-
-
     $(function () {
         deshabilitarPanelesDerecho();
-
     })
-
 
 </script>

@@ -75,7 +75,9 @@ namespace ProntoMVC.Controllers
                 if (o.Descripcion.Length > mMaxLength) { sErrorMsg += "\n" + "La descripcion no puede tener mas de " + mMaxLength + " digitos"; }
             }
 
-            if (o.Abreviatura.NullSafeToString() == "") { sErrorMsg += "\n" + "Falta la abreviatura"; }
+            if (o.Abreviatura.NullSafeToString() == "") { 
+                //sErrorMsg += "\n" + "Falta la abreviatura"; 
+            }
             else
             {
                 mMaxLength = GetMaxLength<Tipos>(x => x.Abreviatura) ?? 0;

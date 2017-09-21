@@ -2,12 +2,11 @@
 @{
     ViewBag.Title = "Controles de calidad";
 }
-@*<h2>Index</h2>*@ @* <div class="container-fluid">*@
 
 <br />
 
 <div class="row-fluid">
-    <div class="span9 lightblue">
+    <div class="span10 lightblue">
         <table id="Lista" class="scroll" cellpadding="0" cellspacing="0"></table>
         <div id="ListaPager" class="scroll" style="text-align: center; height: 30px"></div>
     </div>
@@ -23,7 +22,6 @@
 
 <script type="text/javascript">
 
-    var $grid = "";
     var lastSelectedId;
     var lastSelectediCol;
     var lastSelectediRow;
@@ -52,9 +50,25 @@
     });
 
     function GrabarFila(gridId) {
-        var dataFromTheRow = $grid.jqGrid('getRowData', gridId);
+        var i, a, err = "";
+
+        $('#Lista').jqGrid('setSelection', gridId);
+        var iRow = $('#' + $.jgrid.jqID(gridId))[0].rowIndex;
+        var dataFromTheRow = $('#Lista').jqGrid('getRowData', gridId)
+        var colModel = $('#Lista').jqGrid('getGridParam', 'colModel');
+
+        for (i = 0; i < colModel.length; i++) {
+            if (colModel[i].editable) {
+                a = dataFromTheRow[colModel[i].name];
+                if (typeof a != "undefined") {
+                    if (a.substring(0, 1) == "<") {
+                        err = err + "Hay campos en modo edicion, confirmelos con enter antes de grabar.\n"
+                    }
+                }
+            }
+        }
+
         var datos = $("#formid").serializeObject();
-        var err;
 
         datos.IdControlCalidad = gridId;
         datos.Descripcion = dataFromTheRow.Descripcion;
@@ -62,7 +76,6 @@
         datos.Inspeccion = dataFromTheRow.Inspeccion;
         datos.Detalle = dataFromTheRow.Detalle;
 
-        err = ""
         if (datos.Descripcion == "" || datos.Descripcion == undefined) err = err + "No ingreso la descripcion\n"
         if (datos.Abreviatura == "" || datos.Abreviatura == undefined) err = err + "No ingreso la abreviatura\n"
         if (datos.Inspeccion == "" || datos.Inspeccion == undefined) err = err + "No ingreso la inspeccion\n"
@@ -79,7 +92,7 @@
                 data: JSON.stringify(datos),
                 success: function (result) {
                     if (result) {
-                        $grid.jqGrid('setRowData', gridId, { act: "" });
+                        $('#Lista').jqGrid('setRowData', gridId, { act: "" });
                         var rowid = $('#Lista').getGridParam('selrow');
                         var valor = result.IdControlCalidad;
                         if (valor == "") { valor = "0"; }
@@ -110,10 +123,10 @@
     };
 
     function EliminarFila(gridId) {
-        var dataFromTheRow = $grid.jqGrid('getRowData', gridId);
+        var dataFromTheRow = $('#Lista').jqGrid('getRowData', gridId);
         var idprincipal = dataFromTheRow['IdControlCalidad'];
         if (idprincipal <= 0) {
-            $grid.jqGrid('delRowData', gridId);
+            $('#Lista').jqGrid('delRowData', gridId);
         } else {
             $.ajax({
                 type: 'POST',
@@ -123,42 +136,13 @@
                 data: JSON.stringify({ id: idprincipal }),
                 success: function (result) {
                     if (result) {
-                        $grid.jqGrid('delRowData', gridId);
+                        $('#Lista').jqGrid('delRowData', gridId);
                     } else {
                         alert('No se pudo eliminar el registro.');
                     }
                 },
             });
         };
-    };
-
-    window.parent.document.body.onclick = saveEditedCell; // attach to parent window if any
-    document.body.onclick = saveEditedCell; // attach to current document.
-
-    function saveEditedCell(evt) {
-        var target = $(evt.target);
-
-        if ($grid) {
-            var isCellClicked = $grid.find(target).length; // check if click is inside jqgrid
-            if (gridCellWasClicked && !isCellClicked) // check if a valid click
-            {
-                gridCellWasClicked = false;
-                $grid.jqGrid("saveCell", lastSelectediRow2, lastSelectediCol2);
-            }
-        }
-
-        //$grid = "";
-        gridCellWasClicked = false;
-
-        if (jQuery("#Lista").find(target).length) {
-            $grid = $('#Lista');
-            grillaenfoco = true;
-        }
-        if (grillaenfoco) {
-            gridCellWasClicked = true;
-            lastSelectediRow2 = lastSelectediRow;
-            lastSelectediCol2 = lastSelectediCol;
-        }
     };
 
     function MarcarSeleccionadosParaEliminar(grid) {
@@ -194,18 +178,18 @@
         'use strict';
 
         $('#Lista').jqGrid({
-            url: ROOT + 'ControlCalidad/TT/',
+            url: ROOT + 'ControlCalidad/ControlesCalidad_DynamicGridData/',
             postData: {},
             datatype: 'json',
             mtype: 'POST',
             colNames: [' ', 'IdControlCalidad', 'Descripcion', 'Abreviatura', 'Se inspecciona?', 'Detalle'],
             colModel: [
-                        { name: 'act', index: 'act', align: 'center', width: 30, editable: false, hidden: false },
-                        { name: 'IdControlCalidad', index: 'IdCotizacion', align: 'left', width: 100, editable: false, hidden: true },
-                        { name: 'Descripcion', index: 'Descripcion', width: 300, align: 'left', editable: true, editrules: { required: false }, edittype: 'text', label: 'TB' },
-                        { name: 'Abreviatura', index: 'Abreviatura', width: 80, align: 'left', editable: true, editrules: { required: false }, edittype: 'text', label: 'TB' },
-                        { name: 'Inspeccion', index: 'Inspeccion', width: 120, align: 'left', editable: true, editrules: { required: false }, editoptions: { value: "SI:NO" }, edittype: 'checkbox', label: 'TB' },
-                        { name: 'Detalle', index: 'Detalle', width: 500, align: 'left', editable: true, editrules: { required: false }, edittype: 'textarea', label: 'TB' }
+                        { name: 'act', index: 'act', align: 'center', width: 30, search: false, editable: false, hidden: false },
+                        { name: 'IdControlCalidad', index: 'IdCotizacion', align: 'left', width: 100, search: false, editable: false, hidden: true },
+                        { name: 'Descripcion', index: 'Descripcion', width: 300, align: 'left', search: true, editable: true, editrules: { required: false }, edittype: 'text', label: 'TB' },
+                        { name: 'Abreviatura', index: 'Abreviatura', width: 80, align: 'left', search: true, editable: true, editrules: { required: false }, edittype: 'text', label: 'TB' },
+                        { name: 'Inspeccion', index: 'Inspeccion', width: 120, align: 'left', search: true, editable: true, editrules: { required: false }, editoptions: { value: "SI:NO" }, edittype: 'checkbox', label: 'TB' },
+                        { name: 'Detalle', index: 'Detalle', width: 500, align: 'left', search: true, editable: true, editrules: { required: false }, edittype: 'textarea', label: 'TB' }
             ],
             //gridComplete: function () {
             //    var ids = jQuery("#Lista").jqGrid('getDataIDs');
@@ -275,6 +259,11 @@
                                                 MarcarSeleccionadosParaEliminar(jQuery("#Lista"));
                                             },
                                         });
+        jQuery("#Lista").filterToolbar({
+            stringResult: true, searchOnEnter: true,
+            defaultSearch: 'cn',
+            enableClear: false
+        });
     });
 
 </script>
