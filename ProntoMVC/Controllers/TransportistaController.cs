@@ -75,6 +75,8 @@ namespace ProntoMVC.Controllers
                 Transportista = db.Transportistas.Find(id);
             }
             ViewBag.IdProvincia = new SelectList(db.Provincias, "IdProvincia", "Nombre", Transportista.IdProvincia);
+            ViewBag.IdCodigoIVA = new SelectList(db.DescripcionIvas, "IdCodigoIVA", "Descripcion", Transportista.IdCodigoIva);
+            ViewBag.IdProveedor = new SelectList(db.Proveedores, "IdProveedor", "RazonSocial", Transportista.IdProveedor);
             return View(Transportista);
         }
 

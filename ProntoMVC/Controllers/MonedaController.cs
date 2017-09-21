@@ -270,7 +270,18 @@ namespace ProntoMVC.Controllers
             return Json(cotizacion, JsonRequestBehavior.AllowGet);
         }
 
+        public virtual JsonResult Moneda_Cotizacion2(string fecha, int IdMoneda)
+        {
+            DateTime fecha1;
+            if (db == null) return null;
+            fecha1 = Convert.ToDateTime(fecha);
 
+            decimal? cotizacion;
+
+            cotizacion = funcMoneda_Cotizacion2(fecha1, IdMoneda);
+
+            return Json(cotizacion, JsonRequestBehavior.AllowGet);
+        }
 
         public virtual JsonResult CotizacionesPorFecha(string fecha)
         {

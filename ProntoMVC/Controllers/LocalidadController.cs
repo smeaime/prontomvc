@@ -157,23 +157,6 @@ namespace ProntoMVC.Controllers
             int currentPage = page ?? 1;
 
             var Entidad = db.Localidades.AsQueryable();
-            //if (_search)
-            //{
-            //    switch (searchField.ToLower())
-            //    {
-            //        case "a":
-            //            campo = String.Format("{0} = {1}", searchField, searchString);
-            //            break;
-            //        default:
-            //            campo = String.Format("{0}.Contains(\"{1}\")", searchField, searchString);
-            //            break;
-            //    }
-            //}
-            //else
-            //{
-            //    campo = "true";
-            //}
-
             var Entidad1 = (from a in Entidad
                             select new { IdLocalidad = a.IdLocalidad }).Where(campo).ToList();
 
@@ -219,6 +202,62 @@ namespace ProntoMVC.Controllers
                             }
                         }).ToArray()
             };
+            return Json(jsonData, JsonRequestBehavior.AllowGet);
+        }
+
+        public virtual JsonResult Localidades_DynamicGridData(string sidx, string sord, int page, int rows, bool _search, string filters)
+        {
+            int totalRecords = 0;
+            int pageSize = rows;
+
+            var pagedQuery = Filters.FiltroGenerico<Data.Models.Localidad>
+                                ("", sidx, sord, page, rows, _search, filters, db, ref totalRecords);
+
+            var Entidad = pagedQuery.AsQueryable();
+
+            var Entidad1 = (from a in Entidad
+                            select new { IdLocalidad = a.IdLocalidad }).ToList();
+
+            int totalPages = (int)Math.Ceiling((float)totalRecords / (float)pageSize);
+
+            var data = (from a in Entidad
+                        from b in db.Provincias.Where(o => o.IdProvincia == a.IdProvincia).DefaultIfEmpty()
+                        select new
+                        {
+                            a.IdLocalidad,
+                            a.IdProvincia,
+                            a.Nombre,
+                            a.Codigo,
+                            a.CodigoPostal,
+                            Provincia = a.Provincia.Nombre,   //b != null ? b.Nombre : "",
+                            a.CodigoESRI,
+                            a.Partido
+                        }).OrderBy(sidx + " " + sord).ToList();
+
+            var jsonData = new jqGridJson()
+            {
+                total = totalPages,
+                page = page,
+                records = totalRecords,
+                rows = (from a in data
+                        select new jqGridRowJson
+                        {
+                            id = a.IdLocalidad.ToString(),
+                            cell = new string[] { 
+                                "",
+                                //"<a href="+ Url.Action("Imprimir",new {id = a.IdGanancia} )  +">Imprimir</>",
+                                a.IdLocalidad.ToString(),
+                                a.IdProvincia.ToString(),
+                                a.Nombre.NullSafeToString(),
+                                a.Codigo.ToString(),
+                                a.CodigoPostal.NullSafeToString(),
+                                a.Provincia.NullSafeToString(),
+                                a.CodigoESRI.NullSafeToString(),
+                                a.Partido.NullSafeToString(),
+                            }
+                        }).ToArray()
+            };
+
             return Json(jsonData, JsonRequestBehavior.AllowGet);
         }
 
