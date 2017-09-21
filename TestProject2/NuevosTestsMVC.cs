@@ -165,10 +165,17 @@ namespace ProntoMVC.TestsMVC
 
             Requerimiento rm = new Requerimiento();
             var rmdet = new ProntoMVC.Data.Models.DetalleRequerimiento();
-            rmdet.IdArticulo = 12;
-            rmdet.Cantidad = 230;
+            rm.Aprobo = 700;
+            rm.IdObra = 1;
+            rmdet.IdArticulo = 5128;
+            rmdet.Cantidad = 12;
+            rmdet.IdUnidad = 33;
+            rmdet.NumeroItem = 1;
+            rmdet.OrigenDescripcion = 1;
+            rmdet.IdControlCalidad = 1;
+            rmdet.FechaEntrega = DateTime.Today;
             rm.DetalleRequerimientos.Add(rmdet);
-            rm.DetalleRequerimientos.Add(new MVCent.DetalleRequerimiento { IdArticulo = 11, Cantidad = 3255 });
+            //rm.DetalleRequerimientos.Add(new MVCent.DetalleRequerimiento { IdArticulo = 11, Cantidad = 3255 });
             JsonResult result = c.BatchUpdate(rm);
 
 
@@ -179,13 +186,13 @@ namespace ProntoMVC.TestsMVC
             jqGridJson listado = (jqGridJson)result2.Data;
 
             //habria problemas con los TipoDesignacion del detalle no? -si
-            
 
 
 
 
 
-            Assert.IsTrue(listado.total > 0);
+
+            Assert.IsTrue(listado.records > 0);
 
         }
 
