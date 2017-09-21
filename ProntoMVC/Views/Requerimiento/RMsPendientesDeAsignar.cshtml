@@ -1,130 +1,130 @@
 ﻿@model IEnumerable<ProntoMVC.Data.Models.Requerimiento>
-@{
-    ViewBag.Title = "Requerimientos (pendientes)";
-}
+    @{
+        ViewBag.Title = "Requerimientos (pendientes)";
+    }
 
 
-@*<div class="container-fluid">*@
-@if (false)
-{
-    <style>
-        /* jqGrid builds some additional divs over the main grid table. The outer div has the class ui-jqgrid. So if you need to remove right and left border existing over the whole grid you can use the following CSS: */
+    @*<div class="container-fluid">*@
+    @if (false)
+    {
+        <style>
+                /* jqGrid builds some additional divs over the main grid table. The outer div has the class ui-jqgrid. So if you need to remove right and left border existing over the whole grid you can use the following CSS: */
 
 
 
-        .ui-widget-content {
-            border: 0px solid #aaaaaa;
-        }
-
-        .ui-jqgrid {
-            border-right-width: 0px;
-            border-left-width: 0px;
-        }
-            /* If you need to remove all grid's borders you can use
-
-        .ui-jqgrid { border-width: 0px; }
-        If you want additionally remove vertical border between the cells in the grid you can use */
-
-            .ui-jqgrid tr.ui-row-ltr td {
-                border-right-color: #E4E4E4;
-            }
-
-
-            .ui-jqgrid tr.footrow-ltr td {
-                border-right-color: #E4E4E4 !important;
-            }
-
-            /*To remove horizontal border between the rows you can use */
-
-            .ui-jqgrid tr.ui-row-ltr td {
-                border-bottom-color: #E4E4E4;
-            }
-        /*To remove vertical borders between the column headers you can use */
-
-        th.ui-th-column {
-            border-right-color: #E4E4E4 !important;
-        }
-        /* or alternatively (without the usage of !important) */
-
-        .ui-jqgrid-labels .ui-th-column {
-            border-right-color: #E4E4E4;
-        }
-    </style>
-}
-
-
-<div style=" padding-left: 15px;  padding-right: 15px ;">
-    <div>
-        <div class="row-fluid">
-            <div class="span12 lightblue">
-
-                @if (false)
-                {
-                    <div class="btn-group span2">
-                        <a class="btn  " style="color: Black" href="#"><i class="icon-print"></i>&nbsp;más</a>
-                        <button class="btn dropdown-toggle " data-toggle="dropdown">
-                            <span class="caret "></span>
-                        </button>
-                        <ul class="dropdown-menu ">
-                            <li><a class="" href="#"><i class="icon-print"></i>&nbsp;Excel</a></li>
-                        </ul>
-                    </div>
+                .ui-widget-content {
+                    border: 0px solid #aaaaaa;
                 }
-                <div class="span1">
-                    <div>
-                        <input id="FechaInicial" name="FechaInicial" type="hidden" value=@Request.QueryString["fechainicial"]>
-                    </div>
-                    <div>
-                        <input id="FechaFinal" name="FechaFinal" type="hidden" value=@Request.QueryString["fechafinal"]>
-                    </div>
-                    <div>
-                        <input id="IdObra" name="IdObra" type="hidden" value=@Request.QueryString["idobra"]>
+
+                .ui-jqgrid {
+                    border-right-width: 0px;
+                    border-left-width: 0px;
+                }
+                    /* If you need to remove all grid's borders you can use
+
+            .ui-jqgrid { border-width: 0px; }
+            If you want additionally remove vertical border between the cells in the grid you can use */
+
+                    .ui-jqgrid tr.ui-row-ltr td {
+                        border-right-color: #E4E4E4;
+                    }
+
+
+                    .ui-jqgrid tr.footrow-ltr td {
+                        border-right-color: #E4E4E4 !important;
+                    }
+
+                    /*To remove horizontal border between the rows you can use */
+
+                    .ui-jqgrid tr.ui-row-ltr td {
+                        border-bottom-color: #E4E4E4;
+                    }
+                /*To remove vertical borders between the column headers you can use */
+
+                th.ui-th-column {
+                    border-right-color: #E4E4E4 !important;
+                }
+                /* or alternatively (without the usage of !important) */
+
+                .ui-jqgrid-labels .ui-th-column {
+                    border-right-color: #E4E4E4;
+                }
+        </style>
+    }
+
+
+    <div style=" padding-left: 15px;  padding-right: 15px ;">
+        <div>
+            <div class="row-fluid">
+                <div class="span12 lightblue">
+
+                    @if (false)
+                    {
+                        <div class="btn-group span2">
+                            <a class="btn  " style="color: Black" href="#"><i class="icon-print"></i>&nbsp;más</a>
+                            <button class="btn dropdown-toggle " data-toggle="dropdown">
+                                <span class="caret "></span>
+                            </button>
+                            <ul class="dropdown-menu ">
+                                <li><a class="" href="#"><i class="icon-print"></i>&nbsp;Excel</a></li>
+                            </ul>
+                        </div>
+                    }
+                    <div class="span1">
+                        <div>
+                            <input id="FechaInicial" name="FechaInicial" type="hidden" value=@Request.QueryString["fechainicial"]>
+                        </div>
+                        <div>
+                            <input id="FechaFinal" name="FechaFinal" type="hidden" value=@Request.QueryString["fechafinal"]>
+                        </div>
+                        <div>
+                            <input id="IdObra" name="IdObra" type="hidden" value=@Request.QueryString["idobra"]>
+                        </div>
                     </div>
                 </div>
+                <br />
+                <br />
             </div>
-            <br />
-            <br />
-        </div>
-        <table id="Lista" class="scroll" cellpadding="0" cellspacing="0" style="font-size: 16px;
+            <table id="Lista" class="scroll" cellpadding="0" cellspacing="0" style="font-size: 16px;
         "></table>
-        <div id="ListaPager" class="scroll" style="text-align: center;">
+            <div id="ListaPager" class="scroll" style="text-align: center;">
+            </div>
+
+            @*<div style="margin-top: 4px">
+                    <input type="button" class="btn btn-small" id="addData" value="Vale salida (stock)" />
+                    <input type="button" class="btn btn-small" id="edtData" value="Para compras" />
+                    <input type="button" class="btn btn-small" id="delData" value="dar por cumplido" />
+                </div>*@
         </div>
-
-        @*<div style="margin-top: 4px">
-                <input type="button" class="btn btn-small" id="addData" value="Vale salida (stock)" />
-                <input type="button" class="btn btn-small" id="edtData" value="Para compras" />
-                <input type="button" class="btn btn-small" id="delData" value="dar por cumplido" />
-            </div>*@
     </div>
-</div>
 
 
 
-<div class="contextMenu" id="myMenu1" style="display:none">
-    <ul style="width: 400px">
-        <li id="add">
-            @*<span class="ui-icon ui-icon-plus" style="float:left"></span>*@
-            <span id="Vale" style="font-size:11px; font-family:Verdana">Generar Vale salida (stock)</span>
-        </li>
-        <li id="edit">
-            @*<span class="ui-icon ui-icon-pencil" style="float:left"></span>*@
-            <span id="ParaCompras" style="font-size:11px; font-family:Verdana">Liberar para Compras</span>
-        </li>
-        <li id="del">
-            @*<span class="ui-icon ui-icon-trash" style="float:left"></span>*@
-            <span id="DarPorCumplido" style="font-size:11px; font-family:Verdana">Dar por cumplido</span>
-        </li>
-    </ul>
-</div>
+    <div class="contextMenu" id="myMenu1" style="display:none">
+        <ul style="width: 400px">
+            <li id="add">
+                @*<span class="ui-icon ui-icon-plus" style="float:left"></span>*@
+                <span id="Vale" style="font-size:11px; font-family:Verdana">Generar Vale salida (stock)</span>
+            </li>
+            <li id="edit">
+                @*<span class="ui-icon ui-icon-pencil" style="float:left"></span>*@
+                <span id="ParaCompras" style="font-size:11px; font-family:Verdana">Liberar para Compras</span>
+            </li>
+            <li id="del">
+                @*<span class="ui-icon ui-icon-trash" style="float:left"></span>*@
+                <span id="DarPorCumplido" style="font-size:11px; font-family:Verdana">Dar por cumplido</span>
+            </li>
+        </ul>
+    </div>
 
 
 
-<script type="text/javascript">
-
+    <script type="text/javascript">
 
 
 
 
+    var rowIdContextMenu;
 
 
     $(document).ready(function () {
@@ -135,9 +135,16 @@
             var lista = $grid.jqGrid("getGridParam", "selarrrow");
             if ((lista == null) || (lista.length == 0)) {
                 // http://stackoverflow.com/questions/11762757/how-to-retrieve-the-cell-information-for-mouseover-event-in-jqgrid
-                alert("No hay rms elegidas");
-                return;
-                lista = $grid.jqGrid('getGridParam', 'selrow')
+
+                //como no hay renglones tildados, tomo el renglon sobre el que está el cursor
+                lista = [ rowIdContextMenu ] ;
+                // lista = $grid.jqGrid('getGridParam', 'selrow')
+
+                if ((lista == null) || (lista.length == 0)) {
+                    alert("No hay rms elegidas " + rowIdContextMenu);
+                    return;
+                }
+
             }
 
 
@@ -208,6 +215,7 @@
                 //if (typeof callback == "function") callback();
                 $("#loading").hide();
                 alert("Vale creado")
+                $('#Lista').trigger('reloadGrid');
             }).fail(function () {
                 $("#loading").hide();
                 alert("No se pudo crear el vale")
@@ -226,9 +234,14 @@
             var $grid = $("#Lista");
             var lista = $grid.jqGrid("getGridParam", "selarrrow");
             if ((lista == null) || (lista.length == 0)) {
-                alert("No hay rms elegidas");
-                return;
-                lista = $grid.jqGrid('getGridParam', 'selrow')
+                 //como no hay renglones tildados, tomo el renglon sobre el que está el cursor
+                lista = [ rowIdContextMenu ] ;
+                // lista = $grid.jqGrid('getGridParam', 'selrow')
+
+                if ((lista == null) || (lista.length == 0)) {
+                    alert("No hay rms elegidas " + rowIdContextMenu);
+                    return;
+                }
             }
 
 
@@ -257,9 +270,14 @@
             var $grid = $("#Lista");
             var lista = $grid.jqGrid("getGridParam", "selarrrow");
             if ((lista == null) || (lista.length == 0)) {
-                alert("No hay rms elegidas");
-                return;
-                lista = $grid.jqGrid('getGridParam', 'selrow')
+                //como no hay renglones tildados, tomo el renglon sobre el que está el cursor
+                lista = [ rowIdContextMenu ] ;
+                // lista = $grid.jqGrid('getGridParam', 'selrow')
+
+                if ((lista == null) || (lista.length == 0)) {
+                    alert("No hay rms elegidas " + rowIdContextMenu);
+                    return;
+                }
             }
 
 
@@ -397,15 +415,20 @@
 
             datatype: 'json',
             mtype: 'POST',
-            colNames: ['', '', 'IdRequerimiento', 'Numero', 'Fecha', 'Cump.', 'Recep.', 'Entreg.', 'Impresa', 'Detalle', 'Obra', 'Presupuestos', 'Comparativas',
+            colNames: [ 'IdDetalleRequerimiento','', 'IdRequerimiento', 'Numero', 'IdObra', 'Cump.', 'Recep.', 'Entreg.', 'Impresa', 'Detalle', 'Obra', 'Presupuestos', 'Comparativas',
                        'Pedidos', 'Recepciones', 'Salidas', 'Libero', 'Solicito', 'Sector', 'Usuario anulo', 'Fecha anulacion', 'Motivo anulacion', 'Fechas liberacion',
                        'Observaciones', 'Lugar de entrega', '', '', 'Web'],
             colModel: [
+                        { name: 'IdDetalleRequerimiento', index: 'IdDetalleRequerimiento', align: 'center', width: 80, sortable: false, editable: false, search: false, frozen: true, hidden: true }, //, formatter: 'showlink', formatoptions: { baseLinkUrl: '@Url.Action("Edit")'} },
                         { name: 'act', index: 'act', align: 'center', width: 50, sortable: false, editable: false, search: false, frozen: true }, //, formatter: 'showlink', formatoptions: { baseLinkUrl: '@Url.Action("Edit")'} },
-                        { name: 'act', index: 'act', align: 'center', width: 80, sortable: false, editable: false, search: false, frozen: true }, //, formatter: 'showlink', formatoptions: { baseLinkUrl: '@Url.Action("Edit")'} },
                         { name: 'IdRequerimiento', index: 'IdRequerimiento', align: 'left', width: 0, editable: false, hidden: true, frozen: true },
-                        { name: 'NumeroRequerimiento', index: 'NumeroRequerimiento', align: 'right', width: 80, editable: false, frozen: true, search: true, searchoptions: { sopt: ['cn', 'eq'] } },
+                        { name: 'NumeroRequerimiento', index: 'NumeroRequerimiento', align: 'right', width: 100, editable: false, frozen: true, search: true, searchoptions: { sopt: ['cn', 'eq'] } },
 
+
+
+                        { name: 'IdObra', index: 'IdObra', align: 'left', width: 0, editable: false, hidden: true, frozen: true },
+
+    /*
                            {
                                name: 'FechaRequerimiento', index: 'FechaRequerimiento', width: 100, align: 'center',
                                sorttype: 'date', hidden: false, editable: false, formatoptions: { newformat: 'dd/mm/yy' },
@@ -432,7 +455,7 @@
 
                            },
 
-
+    */
                         { name: 'Cumplido', index: 'Cumplido', align: 'center', width: 60, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
                         { name: 'Recepcionado', index: 'Recepcionado', align: 'center', width: 60, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
                         { name: 'Entregado', index: 'Entregado', align: 'center', width: 60, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
@@ -563,7 +586,7 @@
                         }
                     },
                     onContextMenu: function (event/*, menu*/) {
-                        var rowId = $(event.target).closest("tr.jqgrow").attr("id");
+                        rowIdContextMenu = $(event.target).closest("tr.jqgrow").attr("id");
                         //grid.setSelection(rowId);
                         // disable menu for rows with even rowids
                         //$('#del').attr("disabled", Number(rowId) % 2 === 0);
@@ -592,13 +615,13 @@
                 });
             },
 
-         
-    
-    
+
+
+
     //loadError : function(xhr,st,err) {
     //            jQuery("#rsperror").html("Type: "+st+"; Response: "+ xhr.status + " "+xhr.statusText);
     //        },
-    
+
               loadError: function (xhr, textStatus, exceptionThrown) {
                 var errorData = $.parseJSON(xhr.responseText);
                 var errorMessages = [];
@@ -711,72 +734,72 @@
     });
 
 
-</script>
-@*
-    @{
-        var grid = new WebGrid(source: Model,
-            defaultSort: "NumeroRequerimiento",
-            rowsPerPage: 10,
-            canPage: true,
-            canSort: true,
-            fieldNamePrefix: "ItemRM_",
-            selectionFieldName: "selectedRow");
-    }
+    </script>
+    @*
+        @{
+            var grid = new WebGrid(source: Model,
+                defaultSort: "NumeroRequerimiento",
+                rowsPerPage: 10,
+                canPage: true,
+                canSort: true,
+                fieldNamePrefix: "ItemRM_",
+                selectionFieldName: "selectedRow");
+        }
 
-    <div id="grid">
-        @grid.GetHtml(
-            tableStyle: "webgrid",
-            headerStyle: "webgrid-header",
-            footerStyle: "webgrid-footer",
-            alternatingRowStyle: "webgrid-alternating-row",
-            selectedRowStyle: "webgrid-selected-row",
-            rowStyle: "webgrid-row-style",
-            mode: WebGridPagerModes.All,
-            firstText: "<< Primera",
-            previousText: "< Anterior",
-            nextText: "Siguiente >",
-            lastText: "Última >>",
-                    columns: new[] {
-                                            grid.Column(columnName: "NumeroRequerimiento", header: "Nro.", style: "text-align-left"),
-                                            grid.Column(columnName: "FechaRequerimiento", header: "Fecha", style: "text-align-left", format: p => p.FechaRequerimiento.ToShortDateString()),
-                                            //grid.Column(columnName: "",  format: p=>p.Obra.NumeroObra, header: "Obra", style: "text-align-left"),
-                                            //grid.Column(columnName: "Empleados.Nombre", header: "Solicito", style: "text-align-left"),
-                                            //grid.Column(columnName: "Empleados1.Nombre", header: "Aprobo", style: "text-align-left"),
-                                            //grid.Column(columnName: "Sectores.Descripcion", header: "Sector", style: "text-align-left"),
-                                            grid.Column(columnName: "Detalle", header: "Detalle", style: "text-align-left"),
-                                            grid.Column("", header: "Acciones",
-                                                format: @<text>@Html.ActionLink("Editar", "Edit", new { id = item.IdRequerimiento })|
-                                                               @Html.ActionLink("Eliminar", "Delete", new { id = item.IdRequerimiento })</text>
-                                            )
-                                            }
-                                )
-    </div>
+        <div id="grid">
+            @grid.GetHtml(
+                tableStyle: "webgrid",
+                headerStyle: "webgrid-header",
+                footerStyle: "webgrid-footer",
+                alternatingRowStyle: "webgrid-alternating-row",
+                selectedRowStyle: "webgrid-selected-row",
+                rowStyle: "webgrid-row-style",
+                mode: WebGridPagerModes.All,
+                firstText: "<< Primera",
+                previousText: "< Anterior",
+                nextText: "Siguiente >",
+                lastText: "Última >>",
+                        columns: new[] {
+                                                grid.Column(columnName: "NumeroRequerimiento", header: "Nro.", style: "text-align-left"),
+                                                grid.Column(columnName: "FechaRequerimiento", header: "Fecha", style: "text-align-left", format: p => p.FechaRequerimiento.ToShortDateString()),
+                                                //grid.Column(columnName: "",  format: p=>p.Obra.NumeroObra, header: "Obra", style: "text-align-left"),
+                                                //grid.Column(columnName: "Empleados.Nombre", header: "Solicito", style: "text-align-left"),
+                                                //grid.Column(columnName: "Empleados1.Nombre", header: "Aprobo", style: "text-align-left"),
+                                                //grid.Column(columnName: "Sectores.Descripcion", header: "Sector", style: "text-align-left"),
+                                                grid.Column(columnName: "Detalle", header: "Detalle", style: "text-align-left"),
+                                                grid.Column("", header: "Acciones",
+                                                    format: @<text>@Html.ActionLink("Editar", "Edit", new { id = item.IdRequerimiento })|
+                                                                   @Html.ActionLink("Eliminar", "Delete", new { id = item.IdRequerimiento })</text>
+                                                )
+                                                }
+                                    )
+        </div>
 
-    <table>
-        <tr>
-            <th>IdRequerimiento</th>
-            <th>Numero RM</th>
-            <th>Fecha</th>
-            <th>Obra</th>
-            <th>Sector</th>
-            <th></th>
-        </tr>
+        <table>
+            <tr>
+                <th>IdRequerimiento</th>
+                <th>Numero RM</th>
+                <th>Fecha</th>
+                <th>Obra</th>
+                <th>Sector</th>
+                <th></th>
+            </tr>
 
-    @{int i = 1;}
-    @foreach (var item in Model)
-    {
-        <tr class="@(i++ % 2 == 0 ? "highlighted" : "")" >
-            <td>@Html.DisplayFor(modelItem => item.IdRequerimiento)</td>
-            <td>@Html.DisplayFor(modelItem => item.NumeroRequerimiento)</td>
-            <td>@Html.DisplayFor(modelItem => item.FechaRequerimiento)</td>
-            <td>@Html.DisplayFor(modelItem => item.Obra.NumeroObra)</td>
-            <td>@Html.DisplayFor(modelItem => item.Sectores.Descripcion)</td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.IdRequerimiento }) |
-                @Html.ActionLink("Details", "Details", new { id = item.IdRequerimiento }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.IdRequerimiento })
-            </td>
-        </tr>
-    }
-    </table>
-*@
+        @{int i = 1;}
+        @foreach (var item in Model)
+        {
+            <tr class="@(i++ % 2 == 0 ? "highlighted" : "")" >
+                <td>@Html.DisplayFor(modelItem => item.IdRequerimiento)</td>
+                <td>@Html.DisplayFor(modelItem => item.NumeroRequerimiento)</td>
+                <td>@Html.DisplayFor(modelItem => item.FechaRequerimiento)</td>
+                <td>@Html.DisplayFor(modelItem => item.Obra.NumeroObra)</td>
+                <td>@Html.DisplayFor(modelItem => item.Sectores.Descripcion)</td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.IdRequerimiento }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.IdRequerimiento }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.IdRequerimiento })
+                </td>
+            </tr>
+        }
+        </table>
+    *@
