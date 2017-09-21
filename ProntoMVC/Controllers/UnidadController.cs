@@ -63,7 +63,7 @@ namespace ProntoMVC.Controllers
 
             if (o.Abreviatura.NullSafeToString() == "")
             {
-                sErrorMsg += "\n" + "Falta la abreviatura";
+                //sErrorMsg += "\n" + "Falta la abreviatura";
             }
             else
             {

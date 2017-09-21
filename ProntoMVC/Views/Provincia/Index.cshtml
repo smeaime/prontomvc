@@ -24,7 +24,8 @@
         $('.ui-jqgrid .ui-jqgrid-htable th div').css('white-space', 'normal');
 
         $('#Lista').jqGrid({
-            url: '@Url.Action("TT", "Provincia")',
+            //url: '@Url.Action("TT", "Provincia")',
+            url: '@Url.Action("Provincias_DynamicGridData", "Provincia")',
             datatype: 'json',
             mtype: 'POST',
             colNames: ['Acciones', 'IdProvincia', 'IdPais', 'IdCuentaRetencionIBrutos', 'IdCuentaPercepcionIBrutos', 'IdCuentaPercepcionIIBBConvenio', 'IdCuentaRetencionIBrutosCobranzas',
@@ -43,15 +44,15 @@
                         { name: 'IdCuentaPercepcionIIBBComprasJurisdiccionLocal', index: 'IdCuentaPercepcionIIBBComprasJurisdiccionLocal', align: 'left', width: 100, editable: false, hidden: true },
                         { name: 'Nombre', index: 'Nombre', align: 'left', width: 200, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
                         { name: 'Codigo', index: 'Codigo', align: 'left', width: 50, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
-                        { name: 'Pais', index: 'Pais', align: 'left', width: 150, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'Pais', index: 'Pais.Descripcion', align: 'left', width: 150, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
                         { name: 'ProximoNumeroCertificadoRetencionIIBB', index: 'ProximoNumeroCertificadoRetencionIIBB', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
                         { name: 'ProximoNumeroCertificadoPercepcionIIBB', index: 'ProximoNumeroCertificadoPercepcionIIBB', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
-                        { name: 'CuentaRetencionIIBB', index: 'CuentaRetencionIIBB', align: 'left', width: 200, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
-                        { name: 'CuentaPercepcionIIBB', index: 'CuentaPercepcionIIBB', align: 'left', width: 200, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
-                        { name: 'CuentaPercepcionIIBBConvenio', index: 'CuentaPercepcionIIBBConvenio', align: 'left', width: 200, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
-                        { name: 'CuentaRetencionIIBBCobranzas', index: 'CuentaRetencionIIBBCobranzas', align: 'left', width: 200, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
-                        { name: 'CuentaPercepcionIIBBConvenioCompras', index: 'CuentaPercepcionIIBBConvenioCompras', align: 'left', width: 200, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
-                        { name: 'CuentaPercepcionIIBBCompras', index: 'CuentaPercepcionIIBBCompras', align: 'left', width: 200, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'CuentaRetencionIIBB', index: 'CuentaRetencionIIBB', align: 'left', width: 200, editable: false, search: false, searchoptions: { sopt: ['cn'] } },
+                        { name: 'CuentaPercepcionIIBB', index: 'CuentaPercepcionIIBB', align: 'left', width: 200, editable: false, search: false, searchoptions: { sopt: ['cn'] } },
+                        { name: 'CuentaPercepcionIIBBConvenio', index: 'CuentaPercepcionIIBBConvenio', align: 'left', width: 200, editable: false, search: false, searchoptions: { sopt: ['cn'] } },
+                        { name: 'CuentaRetencionIIBBCobranzas', index: 'CuentaRetencionIIBBCobranzas', align: 'left', width: 200, editable: false, search: false, searchoptions: { sopt: ['cn'] } },
+                        { name: 'CuentaPercepcionIIBBConvenioCompras', index: 'CuentaPercepcionIIBBConvenioCompras', align: 'left', width: 200, editable: false, search: false, searchoptions: { sopt: ['cn'] } },
+                        { name: 'CuentaPercepcionIIBBCompras', index: 'CuentaPercepcionIIBBCompras', align: 'left', width: 200, editable: false, search: false, searchoptions: { sopt: ['cn'] } },
                         { name: 'EsAgenteRetencionIIBB', index: 'EsAgenteRetencionIIBB', align: 'center', width: 80, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
                         { name: 'CodigoESRI_1', index: 'CodigoESRI_1', align: 'center', width: 50, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
                         { name: 'InformacionAuxiliar', index: 'InformacionAuxiliar', align: 'center', width: 80, editable: false, search: true, searchoptions: { sopt: ['cn'] } }
@@ -66,7 +67,7 @@
             },
             pager: $('#ListaPager'),
             rowNum: 20,
-            rowList: [10, 20, 50, 100],
+            rowList: [20, 50, 100],
             sortname: 'Nombre',
             sortorder: 'asc',
             viewrecords: true,
@@ -79,9 +80,15 @@
             footerrow: false, //true,
             userDataOnFooter: true,
             multiboxonly: true,
+            multipleSearch: true,
             caption: '<b>PROVINCIAS</b>'
     });
         jQuery("#Lista").jqGrid('navGrid', '#ListaPager', { refresh: true, add: false, edit: false, del: false }, {}, {}, {}, { sopt: ["cn"], width: 700, closeOnEscape: true, closeAfterSearch: true });
         jQuery("#Lista").jqGrid('gridResize', { minWidth: 350, maxWidth: 1500, minHeight: 80, maxHeight: 500 });
+        jQuery("#Lista").filterToolbar({
+            stringResult: true, searchOnEnter: true,
+            defaultSearch: 'cn',
+            enableClear: false
+        });
     });
 </script>

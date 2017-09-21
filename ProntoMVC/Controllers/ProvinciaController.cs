@@ -272,8 +272,8 @@ namespace ProntoMVC.Controllers
                             a.Codigo2,
                             a.InformacionAuxiliar
                         }).Where(campo).OrderBy(sidx + " " + sord)
-//.Skip((currentPage - 1) * pageSize).Take(pageSize)
-.ToList();
+                        //.Skip((currentPage - 1) * pageSize).Take(pageSize)
+                        .ToList();
 
             var jsonData = new jqGridJson()
             {
@@ -313,6 +313,99 @@ namespace ProntoMVC.Controllers
                             }
                         }).ToArray()
             };
+            return Json(jsonData, JsonRequestBehavior.AllowGet);
+        }
+
+        public virtual JsonResult Provincias_DynamicGridData(string sidx, string sord, int page, int rows, bool _search, string filters)
+        {
+            int totalRecords = 0;
+            int pageSize = rows;
+
+            var pagedQuery = Filters.FiltroGenerico<Data.Models.Provincia>
+                                ("", sidx, sord, page, rows, _search, filters, db, ref totalRecords);
+
+            // esto filtro se debería aplicar antes que el filtrogenerico (queda mal paginado si no)
+            var Entidad = pagedQuery.AsQueryable();
+
+            var Entidad1 = (from a in Entidad
+                            select new { IdProvincia = a.IdProvincia }).ToList();
+
+            int totalPages = (int)Math.Ceiling((float)totalRecords / (float)pageSize);
+
+            var data = (from a in Entidad
+                        from b in db.Paises.Where(o => o.IdPais == a.IdPais).DefaultIfEmpty()
+                        from c in db.Cuentas.Where(o => o.IdCuenta == a.IdCuentaRetencionIBrutos).DefaultIfEmpty()
+                        from d in db.Cuentas.Where(o => o.IdCuenta == a.IdCuentaPercepcionIBrutos).DefaultIfEmpty()
+                        from e in db.Cuentas.Where(o => o.IdCuenta == a.IdCuentaPercepcionIIBBConvenio).DefaultIfEmpty()
+                        from f in db.Cuentas.Where(o => o.IdCuenta == a.IdCuentaRetencionIBrutosCobranzas).DefaultIfEmpty()
+                        from g in db.Cuentas.Where(o => o.IdCuenta == a.IdCuentaPercepcionIIBBCompras).DefaultIfEmpty()
+                        from h in db.Cuentas.Where(o => o.IdCuenta == a.IdCuentaPercepcionIIBBComprasJurisdiccionLocal).DefaultIfEmpty()
+                        select new
+                        {
+                            a.IdProvincia,
+                            a.IdPais,
+                            a.IdCuentaRetencionIBrutos,
+                            a.IdCuentaPercepcionIBrutos,
+                            a.IdCuentaPercepcionIIBBConvenio,
+                            a.IdCuentaRetencionIBrutosCobranzas,
+                            a.IdCuentaPercepcionIIBBCompras,
+                            a.IdCuentaPercepcionIIBBComprasJurisdiccionLocal,
+                            a.Nombre,
+                            a.Codigo,
+                            Pais = a.Pais.Descripcion, // b != null ? b.Descripcion : "",
+                            a.ProximoNumeroCertificadoRetencionIIBB,
+                            a.ProximoNumeroCertificadoPercepcionIIBB,
+                            CuentaRetencionIIBB = c != null ? c.Descripcion : "",
+                            CuentaPercepcionIIBB = d != null ? d.Descripcion : "",
+                            CuentaPercepcionIIBBConvenio = e != null ? e.Descripcion : "",
+                            CuentaRetencionIIBBCobranzas = f != null ? f.Descripcion : "",
+                            CuentaPercepcionIIBBConvenioCompras = g != null ? g.Descripcion : "",
+                            CuentaPercepcionIIBBCompras = h != null ? h.Descripcion : "",
+                            a.EsAgenteRetencionIIBB,
+                            a.CodigoESRI_1,
+                            a.Codigo2,
+                            a.InformacionAuxiliar
+                        }).OrderBy(sidx + " " + sord).ToList();
+
+            var jsonData = new jqGridJson()
+            {
+                total = totalPages,
+                page = page,
+                records = totalRecords,
+                rows = (from a in data
+                        select new jqGridRowJson
+                        {
+                            id = a.IdProvincia.ToString(),
+                            cell = new string[] { 
+                                "<a href="+ Url.Action("Edit",new {id = a.IdProvincia} ) + ">Editar</>",
+                                //"<a href="+ Url.Action("Imprimir",new {id = a.IdGanancia} )  +">Imprimir</>",
+                                a.IdProvincia.ToString(),
+                                a.IdPais.ToString(),
+                                a.IdCuentaRetencionIBrutos.ToString(),
+                                a.IdCuentaPercepcionIBrutos.ToString(),
+                                a.IdCuentaPercepcionIIBBConvenio.ToString(),
+                                a.IdCuentaRetencionIBrutosCobranzas.ToString(),
+                                a.IdCuentaPercepcionIIBBCompras.ToString(),
+                                a.IdCuentaPercepcionIIBBComprasJurisdiccionLocal.ToString(),
+                                a.Nombre.NullSafeToString(),
+                                a.Codigo.NullSafeToString(),
+                                a.Pais.NullSafeToString(),
+                                a.ProximoNumeroCertificadoRetencionIIBB.ToString(),
+                                a.ProximoNumeroCertificadoPercepcionIIBB.ToString(),
+                                a.CuentaRetencionIIBB.NullSafeToString(),
+                                a.CuentaPercepcionIIBB.NullSafeToString(),
+                                a.CuentaPercepcionIIBBConvenio.NullSafeToString(),
+                                a.CuentaRetencionIIBBCobranzas.NullSafeToString(),
+                                a.CuentaPercepcionIIBBConvenioCompras.NullSafeToString(),
+                                a.CuentaPercepcionIIBBCompras.NullSafeToString(),
+                                a.EsAgenteRetencionIIBB.NullSafeToString(),
+                                a.CodigoESRI_1.NullSafeToString(),
+                                a.Codigo2.ToString(),
+                                a.InformacionAuxiliar.NullSafeToString()
+                            }
+                        }).ToArray()
+            };
+
             return Json(jsonData, JsonRequestBehavior.AllowGet);
         }
 

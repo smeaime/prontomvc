@@ -376,7 +376,7 @@ namespace ProntoMVC.Controllers
             int totalRecords = 0;
 
             var pagedQuery = Filters.FiltroGenerico<Data.Models.Cliente>
-                                ("Localidade,Provincia,Vendedore,Empleado,Cuentas,Transportista", sidx, sord, page, rows, _search, filters, db, ref totalRecords);
+                                ("", sidx, sord, page, rows, _search, filters, db, ref totalRecords);
 
             // esto filtro se debería aplicar antes que el filtrogenerico (queda mal paginado si no)
             var Entidad = pagedQuery.Where(o => (o.Confirmado ?? "") != "NO").AsQueryable();
@@ -387,7 +387,6 @@ namespace ProntoMVC.Controllers
             int totalPages = (int)Math.Ceiling((float)totalRecords / (float)pageSize);
 
             var data = (from a in Entidad
-                        from b in db.Localidades.Where(o => o.IdLocalidad == a.IdLocalidadEntrega).DefaultIfEmpty()
                         from c in db.Provincias.Where(o => o.IdProvincia == a.IdProvinciaEntrega).DefaultIfEmpty()
                         from d in db.Vendedores.Where(o => o.IdVendedor == a.Vendedor1).DefaultIfEmpty()
                         from e in db.Vendedores.Where(o => o.IdVendedor == a.Cobrador).DefaultIfEmpty()
@@ -418,7 +417,7 @@ namespace ProntoMVC.Controllers
                             DescripcionIva = a.DescripcionIva.Descripcion,
                             a.Contacto,
                             a.DireccionEntrega,
-                            LocalidadEntrega = b != null ? b.Nombre : "",
+                            LocalidadEntrega = a.LocalidadEntrega.Nombre, // b != null ? b.Nombre : "",
                             ProvinciaEntrega = c != null ? c.Nombre : "",
                             Vendedor = d != null ? d.Nombre : "",
                             Cobrador = e != null ? e.Nombre : "",
