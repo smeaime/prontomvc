@@ -669,7 +669,7 @@ namespace ProntoMVC.Controllers
 
                         case "System.Nullable`1[[System.DateTime, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]":
                         case "System.DateTime": // Edm.Single, in SQL: float
-                            param = new ObjectParameter("p" + iParam, DateTime.Parse(rule.data));
+                            param = new ObjectParameter("p" + iParam, DateTime.ParseExact(rule.data, "dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture));
                             break;
 
                         default:
