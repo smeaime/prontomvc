@@ -577,13 +577,14 @@ namespace ProntoMVC.Controllers
 
 
                     PropertyInfo padrepropertyInfo = null;
-                    padrepropertyInfo = typeof(T).GetProperty(rule.field.Split('.')[0]);
+                    string coleccion = rule.field.Split('.')[0];
+                    padrepropertyInfo = typeof(T).GetProperty(coleccion);
 
 
 
                     //propertyInfo = Type.GetType("ProntoMVC.Data.Models." + rule.field.Split('.')[0] + ", ProntoMVC.Data").GetProperty(rule.field.Split('.')[1]); ; 
-
-                    propertyInfo = padrepropertyInfo.PropertyType.GetProperty(rule.field.Split('.')[1]); ; //target type
+                    string propiedad = rule.field.Split('.')[1];
+                    propertyInfo = padrepropertyInfo.PropertyType.GetProperty(propiedad); ; //target type
 
                 }
                 else if (rule.field.Split('.').Length == 1)
