@@ -13,7 +13,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
     TagPrefix="rsweb" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
 
-        <%--https://developer.mozilla.org/en-US/docs/Mozilla/Mobile/Viewport_meta_tag--%>
+    <%--https://developer.mozilla.org/en-US/docs/Mozilla/Mobile/Viewport_meta_tag--%>
     <meta name="viewport" content="width=400px, initial-scale=1">
 
 
@@ -112,6 +112,8 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                             </asp:DropDownList>
 
                         </td>
+                        </tr>
+                    <tr>
                         <td class="EncabezadoCell" style="width: 160px; height: 18px;">Período descarga</td>
                         <td class="EncabezadoCell" style="width: 400px; height: 18px;">
                             <asp:DropDownList ID="cmbPeriodo" runat="server" AutoPostBack="true" Height="22px" Style="color: black;"
