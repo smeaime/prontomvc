@@ -213,7 +213,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
         <%--<input type="text" class="span4" id="text1" name="agent" value=""  "/>--%>
 
         <br />
-        <table id="Lista" class="scroll" cellpadding="0" cellspacing="0" style="font-size: 12px;" width="700px">
+        <table id="Lista" class="scroll" cellpadding="0" cellspacing="0" style="font-size: 12px;" width="400px">
         </table>
         <div id="ListaPager" class="scroll" style="text-align: center; height: 30px">
         </div>
@@ -2139,10 +2139,11 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                 sortname: 'IdCartaDePorte',  //'FechaDescarga', //'NumeroCartaDePorte',
                 sortorder: 'desc',
                 viewrecords: true,
-                multiselect: false,
+                multiselect: true,
                 shrinkToFit: false,
-                width: 'auto',
-                height: 460, // $(window).height() - 250, // '100%'
+                
+                width: 350,//'auto',
+                height: 300, // $(window).height() - 250, // '100%'
                 altRows: false,
                 footerrow: false,
                 userDataOnFooter: true,
