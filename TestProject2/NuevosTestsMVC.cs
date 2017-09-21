@@ -40,7 +40,7 @@ using System.IO;
 //test de java lopez
 // https://github.com/ajlopez/TddAppAspNetMvc/blob/master/Src/MyLibrary.Web.Tests/Controllers/HomeControllerTests.cs
 
-namespace ProntoMVC.Tests
+namespace ProntoMVC.TestsMVC
 {
 
 
@@ -152,6 +152,17 @@ namespace ProntoMVC.Tests
 
 
 
+
+
+        [TestMethod]
+        public void usuariosdecompras_46429()
+        {
+
+            // CargarEmpleadosParaAprobar() en pronto.js;
+            // CargarEmpleadosParaAprobar_Compras
+            //    Empleado / EmpleadosParaComboSectorCompras
+            // hay que volver a llenar el combo del popup
+        }
 
 
 
