@@ -496,28 +496,28 @@ Namespace Pronto.ERP.Bll
 
 
 
-        Shared Function GenerarSincro(sSincronismo As String, ByRef sErroresRef As String, _
-                                      SC As String, _
-                                                          sUrlDominio As String, _
-                    ByRef sTituloFiltroUsado As String, _
-                    ByVal estado As CartaDePorteManager.enumCDPestado, _
-                    ByVal QueContenga As String, _
-                    ByVal idVendedor As Integer, _
-                    ByVal idCorredor As Integer, _
-                    ByVal idDestinatario As Integer, _
-                    ByVal idIntermediario As Integer, _
-                    ByVal idRComercial As Integer, _
-                    ByVal idArticulo As Integer, _
-                    ByVal idProcedencia As Integer, _
-                    ByVal idDestino As Integer, _
-                    ByVal AplicarANDuORalFiltro As FiltroANDOR, _
-                    ByVal ModoExportacion As String, _
-                    sDesde As Date, sHasta As Date, _
-                    ByVal puntoventa As Integer, _
-                    Optional ByVal optDivisionSyngenta As String = "Ambas", _
-                    Optional ByVal bTraerDuplicados As Boolean = False, _
-                    Optional ByVal Contrato As String = "", _
-                    Optional ByVal QueContenga2 As String = "", Optional ByVal idClienteAuxiliar As Integer = -1, Optional ByRef registrosFiltrados As Integer = 0, Optional ByVal maximumRows As Long = 3000 _
+        Shared Function GenerarSincro(sSincronismo As String, ByRef sErroresRef As String,
+                                      SC As String,
+                                                          sUrlDominio As String,
+                    ByRef sTituloFiltroUsado As String,
+                    ByVal estado As CartaDePorteManager.enumCDPestado,
+                    ByVal QueContenga As String,
+                    ByVal idVendedor As Integer,
+                    ByVal idCorredor As Integer,
+                    ByVal idDestinatario As Integer,
+                    ByVal idIntermediario As Integer,
+                    ByVal idRComercial As Integer,
+                    ByVal idArticulo As Integer,
+                    ByVal idProcedencia As Integer,
+                    ByVal idDestino As Integer,
+                    ByVal AplicarANDuORalFiltro As FiltroANDOR,
+                    ByVal ModoExportacion As String,
+                    sDesde As Date, sHasta As Date,
+                    ByVal puntoventa As Integer,
+                    Optional ByVal optDivisionSyngenta As String = "Ambas",
+                    Optional ByVal bTraerDuplicados As Boolean = False,
+                    Optional ByVal Contrato As String = "",
+                    Optional ByVal QueContenga2 As String = "", Optional ByVal idClienteAuxiliar As Integer = -1, Optional ByRef registrosFiltrados As Integer = 0, Optional ByVal maximumRows As Long = 3000
             ) As String
 
 
@@ -542,14 +542,14 @@ Namespace Pronto.ERP.Bll
 
 
 
-            Dim titulo As String = FormatearTitulo(SC, _
-                                                 "", CartaDePorteManager.enumCDPestado.DescargasMasFacturadas, "", _
-                                                 idVendedor, idCorredor, _
-                                                idDestinatario, idIntermediario, _
-                                                idRComercial, idArticulo, idProcedencia, idDestino, _
-                                                AplicarANDuORalFiltro, ModoExportacion, _
-                                                 Convert.ToDateTime(sDesde), _
-                                                 Convert.ToDateTime(sHasta), _
+            Dim titulo As String = FormatearTitulo(SC,
+                                                 "", CartaDePorteManager.enumCDPestado.DescargasMasFacturadas, "",
+                                                 idVendedor, idCorredor,
+                                                idDestinatario, idIntermediario,
+                                                idRComercial, idArticulo, idProcedencia, idDestino,
+                                                AplicarANDuORalFiltro, ModoExportacion,
+                                                 Convert.ToDateTime(sDesde),
+                                                 Convert.ToDateTime(sHasta),
                                                  puntoventa, optDivisionSyngenta, , , , idClienteAuxiliar)
 
             titulo = "" ' " " + sDesde + " " + sHasta + " " + sDesde + " " + sHasta + "      " + titulo
@@ -560,14 +560,14 @@ Namespace Pronto.ERP.Bll
 
             Using ds As New WillyInformesDataSet
 
-                If sSincronismo.ToUpper <> "YPF" And _
-                    sSincronismo.ToUpper <> "NIDERA" And _
-                    sSincronismo.ToUpper <> "TOMAS HNOS" And _
-                    sSincronismo.ToUpper <> "MONSANTO" And _
-                    sSincronismo.ToUpper <> "LA BIZNAGA" And _
-                    sSincronismo.ToUpper <> "AJNARI" And _
-                    sSincronismo.ToUpper <> "PELAYO" And _
-                    sSincronismo.ToUpper <> "GESAGRO" And _
+                If sSincronismo.ToUpper <> "YPF" And
+                    sSincronismo.ToUpper <> "NIDERA" And
+                    sSincronismo.ToUpper <> "TOMAS HNOS" And
+                    sSincronismo.ToUpper <> "MONSANTO" And
+                    sSincronismo.ToUpper <> "LA BIZNAGA" And
+                    sSincronismo.ToUpper <> "AJNARI" And
+                    sSincronismo.ToUpper <> "PELAYO" And
+                    sSincronismo.ToUpper <> "GESAGRO" And
                     InStr(sSincronismo.ToUpper, "BLD") = 0 Then
 
                     '// Customize the connection string.
@@ -596,10 +596,10 @@ Namespace Pronto.ERP.Bll
 
 
 
-                            adapter.Fill(ds.wCartasDePorte_TX_InformesCorregido, -1, _
-                                         Convert.ToDateTime(sDesde), _
-                                         Convert.ToDateTime(sHasta), _
-                                        idVendedor, idCorredor, idDestinatario, idIntermediario, _
+                            adapter.Fill(ds.wCartasDePorte_TX_InformesCorregido, -1,
+                                         Convert.ToDateTime(sDesde),
+                                         Convert.ToDateTime(sHasta),
+                                        idVendedor, idCorredor, idDestinatario, idIntermediario,
                                         idRComercial, idArticulo, idProcedencia, idDestino, CartaDePorteManager._CONST_MAXROWS, CartaDePorteManager.enumCDPestado.DescargasMasFacturadas)
 
 
@@ -647,14 +647,14 @@ Namespace Pronto.ERP.Bll
                 Try
 
 
-                    sWHERE = CartaDePorteManager.generarWHEREparaDatasetParametrizadoConFechaEnNumerales2(SC, _
-                                                sTitulo, _
-                                                CartaDePorteManager.enumCDPestado.DescargasMasFacturadas, "", idVendedor, idCorredor, _
-                                                idDestinatario, idIntermediario, _
-                                                idRComercial, idArticulo, idProcedencia, idDestino, _
-                                                AplicarANDuORalFiltro, ModoExportacion, _
-                                                Convert.ToDateTime(sDesde), _
-                                                Convert.ToDateTime(sHasta), _
+                    sWHERE = CartaDePorteManager.generarWHEREparaDatasetParametrizadoConFechaEnNumerales2(SC,
+                                                sTitulo,
+                                                CartaDePorteManager.enumCDPestado.DescargasMasFacturadas, "", idVendedor, idCorredor,
+                                                idDestinatario, idIntermediario,
+                                                idRComercial, idArticulo, idProcedencia, idDestino,
+                                                AplicarANDuORalFiltro, ModoExportacion,
+                                                Convert.ToDateTime(sDesde),
+                                                Convert.ToDateTime(sHasta),
                                                 puntoventa, optDivisionSyngenta, , Contrato, , idClienteAuxiliar)
                     sWHERE = sWHERE.Replace("CDP.", "")
 
@@ -702,14 +702,14 @@ Namespace Pronto.ERP.Bll
                             Try
 
 
-                                sWHERE = CartaDePorteManager.generarWHEREparaDatasetParametrizadoConFechaEnNumerales2(SC, _
-                                                            sTitulo, _
-                                                            CartaDePorteManager.enumCDPestado.DescargasMasFacturadas, "A.C.A", idVendedor, idCorredor, _
-                                                            idDestinatario, idIntermediario, _
-                                                            idRComercial, idArticulo, idProcedencia, idDestino, _
-                                                           AplicarANDuORalFiltro, ModoExportacion, _
-                                                            Convert.ToDateTime(sDesde), _
-                                                            Convert.ToDateTime(sHasta), _
+                                sWHERE = CartaDePorteManager.generarWHEREparaDatasetParametrizadoConFechaEnNumerales2(SC,
+                                                            sTitulo,
+                                                            CartaDePorteManager.enumCDPestado.DescargasMasFacturadas, "A.C.A", idVendedor, idCorredor,
+                                                            idDestinatario, idIntermediario,
+                                                            idRComercial, idArticulo, idProcedencia, idDestino,
+                                                           AplicarANDuORalFiltro, ModoExportacion,
+                                                            Convert.ToDateTime(sDesde),
+                                                            Convert.ToDateTime(sHasta),
                                                           Val(puntoventa), optDivisionSyngenta, , Contrato, , idClienteAuxiliar)
                                 sWHERE = sWHERE.Replace("CDP.", "")
 
@@ -739,7 +739,7 @@ Namespace Pronto.ERP.Bll
 
 
                         Case "LOS GROBO"
-                            Dim s = "(ISNULL(FechaDescarga, '1/1/1753') BETWEEN '" & FechaANSI(sDesde) & _
+                            Dim s = "(ISNULL(FechaDescarga, '1/1/1753') BETWEEN '" & FechaANSI(sDesde) &
                                          "'     AND   '" & FechaANSI(sHasta) & "' )"
                             Dim dt = EntidadManager.ExecDinamico(SC, strSQLsincronismo() & " WHERE " & s)
                             'txtTitular.Text = "LOS GROBO  AGROPECUARIA S.A."
@@ -780,7 +780,7 @@ Namespace Pronto.ERP.Bll
 
 
                         Case "LEIVA"
-                            Dim s = "(ISNULL(FechaDescarga, '1/1/1753') BETWEEN '" & FechaANSI(sDesde) & _
+                            Dim s = "(ISNULL(FechaDescarga, '1/1/1753') BETWEEN '" & FechaANSI(sDesde) &
                                          "'     AND   '" & FechaANSI(sHasta) & "' )"
                             Dim dt = EntidadManager.ExecDinamico(SC, strSQLsincronismo() & " WHERE " & s)
                             'txtTitular.Text = "LOS GROBO  AGROPECUARIA S.A."
@@ -821,7 +821,7 @@ Namespace Pronto.ERP.Bll
 
 
                         Case "GUALEGUAY"
-                            Dim s = "(ISNULL(FechaDescarga, '1/1/1753') BETWEEN '" & FechaANSI(sDesde) & _
+                            Dim s = "(ISNULL(FechaDescarga, '1/1/1753') BETWEEN '" & FechaANSI(sDesde) &
                                          "'     AND   '" & FechaANSI(sHasta) & "' )"
                             Dim dt = EntidadManager.ExecDinamico(SC, strSQLsincronismo() & " WHERE " & s)
                             'txtTitular.Text = "LOS GROBO  AGROPECUARIA S.A."
@@ -860,7 +860,7 @@ Namespace Pronto.ERP.Bll
 
 
                         Case "PETROAGRO", "ARECO"
-                            Dim s = "(ISNULL(FechaDescarga, '1/1/1753') BETWEEN '" & FechaANSI(sDesde) & _
+                            Dim s = "(ISNULL(FechaDescarga, '1/1/1753') BETWEEN '" & FechaANSI(sDesde) &
                                          "'     AND   '" & FechaANSI(sHasta) & "' )"
                             Dim dt = EntidadManager.ExecDinamico(SC, strSQLsincronismo() & " WHERE " & s)
                             'txtTitular.Text = "LOS GROBO  AGROPECUARIA S.A."
@@ -899,7 +899,7 @@ Namespace Pronto.ERP.Bll
 
 
                         Case "AGROSUR"
-                            Dim s = "(ISNULL(FechaDescarga, '1/1/1753') BETWEEN '" & FechaANSI(iisValidSqlDate(sDesde, #1/1/1753#)) & _
+                            Dim s = "(ISNULL(FechaDescarga, '1/1/1753') BETWEEN '" & FechaANSI(iisValidSqlDate(sDesde, #1/1/1753#)) &
                                          "'     AND   '" & FechaANSI(iisValidSqlDate(sHasta, #1/1/2100#)) & "' )"
                             Dim dt = EntidadManager.ExecDinamico(SC, strSQLsincronismo() & " WHERE " & s)
                             'txtTitular.Text = "LOS GROBO  AGROPECUARIA S.A."
@@ -945,14 +945,14 @@ Namespace Pronto.ERP.Bll
 
                             Dim sErrores As String
 
-                            Dim q As Generic.List(Of CartasConCalada) = CartasLINQlocalSimplificadoTipadoConCalada3(SC, _
-                               "", "", "", 1, 3000, _
-                               estado, "", idVendedor, idCorredor, _
-                               idDestinatario, idIntermediario, _
-                               idRComercial, idArticulo, idProcedencia, idDestino, _
-                                                                 AplicarANDuORalFiltro, ModoExportacion, _
-                               Convert.ToDateTime(iisValidSqlDate(sDesde, #1/1/1753#)), _
-                               Convert.ToDateTime(iisValidSqlDate(sHasta, #1/1/2100#)), _
+                            Dim q As Generic.List(Of CartasConCalada) = CartasLINQlocalSimplificadoTipadoConCalada3(SC,
+                               "", "", "", 1, 3000,
+                               estado, "", idVendedor, idCorredor,
+                               idDestinatario, idIntermediario,
+                               idRComercial, idArticulo, idProcedencia, idDestino,
+                                                                 AplicarANDuORalFiltro, ModoExportacion,
+                               Convert.ToDateTime(iisValidSqlDate(sDesde, #1/1/1753#)),
+                               Convert.ToDateTime(iisValidSqlDate(sHasta, #1/1/2100#)),
                                puntoventa, sTitulo, optDivisionSyngenta, , Contrato).ToList
 
                             registrosFiltrados = q.Count
@@ -989,14 +989,14 @@ Namespace Pronto.ERP.Bll
 
 
 
-                            Dim iq = CartasLINQlocalSimplificadoTipadoConCalada3(SC, _
-                               "", "", "", 1, maximumRows, _
-                               estado, "", idVendedor, idCorredor, _
-                               idDestinatario, idIntermediario, _
-                               idRComercial, idArticulo, idProcedencia, idDestino, _
-                                                                 AplicarANDuORalFiltro, ModoExportacion, _
-                               Convert.ToDateTime(iisValidSqlDate(sDesde, #1/1/1753#)), _
-                               Convert.ToDateTime(iisValidSqlDate(sHasta, #1/1/2100#)), _
+                            Dim iq = CartasLINQlocalSimplificadoTipadoConCalada3(SC,
+                               "", "", "", 1, maximumRows,
+                               estado, "", idVendedor, idCorredor,
+                               idDestinatario, idIntermediario,
+                               idRComercial, idArticulo, idProcedencia, idDestino,
+                                                                 AplicarANDuORalFiltro, ModoExportacion,
+                               Convert.ToDateTime(iisValidSqlDate(sDesde, #1/1/1753#)),
+                               Convert.ToDateTime(iisValidSqlDate(sHasta, #1/1/2100#)),
                                puntoventa, sTitulo, optDivisionSyngenta, , Contrato, , idClienteAuxiliar) 'filtrar "La Tijereta"
 
                             Dim q As Generic.List(Of CartasConCalada) = iq.ToList
@@ -1026,7 +1026,7 @@ Namespace Pronto.ERP.Bll
 
                         Case "BTG PACTUAL [BIT]"
 
-                     
+
                             Dim sErrores As String
 
                             output = Sincronismo_BTGDescargas(ds.wCartasDePorte_TX_InformesCorregido, , sWHERE, sErrores)
@@ -1101,10 +1101,10 @@ Namespace Pronto.ERP.Bll
                             'output = Sincronismo_DOW(ds.wCartasDePorte_TX_InformesCorregido, , sWHERE)
 
                             sTitulo = ""
-                            Dim sql As String = CartaDePorteManager.GetDataTableFiltradoYPaginado_CadenaSQL_TambienEjecutaCount(SC, _
-                                            "", "", "", 1, 0, _
-                                            CartaDePorteManager.enumCDPestado.Todas, "", idVendedor, idCorredor, _
-                                            idDestinatario, idIntermediario, _
+                            Dim sql As String = CartaDePorteManager.GetDataTableFiltradoYPaginado_CadenaSQL_TambienEjecutaCount(SC,
+                                            "", "", "", 1, 0,
+                                            CartaDePorteManager.enumCDPestado.Todas, "", idVendedor, idCorredor,
+                                            idDestinatario, idIntermediario,
                                             idRComercial, idArticulo, idProcedencia, idDestino, "1", ModoExportacion, Convert.ToDateTime(sDesde), Convert.ToDateTime(sHasta), Val(puntoventa), registrosFiltrados, sTitulo, , , , , idClienteAuxiliar)
 
 
@@ -1130,8 +1130,8 @@ Namespace Pronto.ERP.Bll
                                 yourParams(1) = New ReportParameter("ServidorWebRoot", sUrlDominio)
                                 yourParams(2) = New ReportParameter("SentenciaSQL", sql)
 
-                                output = RebindReportViewer_ServidorExcel(rep, _
-                                       "Sincronismo DOW2.rdl", _
+                                output = RebindReportViewer_ServidorExcel(rep,
+                                       "Sincronismo DOW2.rdl",
                                          yourParams, ArchivoExcelDestino, False) 'sTitulo)
 
                                 rep = Nothing
@@ -1157,14 +1157,14 @@ Namespace Pronto.ERP.Bll
 
                             sTitulo = ""
 
-                            Dim sql = CartaDePorteManager.GetDataTableFiltradoYPaginado_CadenaSQL_TambienEjecutaCount(SC, _
-                                            "", "", "", 1, maximumRows, _
-                                            CartaDePorteManager.enumCDPestado.DescargasMasFacturadas, "", idVendedor, idCorredor, _
-                                            idDestinatario, idIntermediario, _
-                                            idRComercial, idArticulo, idProcedencia, idDestino, _
-                                                                                "1", ModoExportacion, _
-                                            Convert.ToDateTime(sDesde), _
-                                            Convert.ToDateTime(sHasta), _
+                            Dim sql = CartaDePorteManager.GetDataTableFiltradoYPaginado_CadenaSQL_TambienEjecutaCount(SC,
+                                            "", "", "", 1, maximumRows,
+                                            CartaDePorteManager.enumCDPestado.DescargasMasFacturadas, "", idVendedor, idCorredor,
+                                            idDestinatario, idIntermediario,
+                                            idRComercial, idArticulo, idProcedencia, idDestino,
+                                                                                "1", ModoExportacion,
+                                            Convert.ToDateTime(sDesde),
+                                            Convert.ToDateTime(sHasta),
                                              Val(puntoventa), registrosFiltrados, sTitulo, , , , , idClienteAuxiliar)
 
 
@@ -1193,14 +1193,14 @@ Namespace Pronto.ERP.Bll
 
                         Case "LA BIZNAGA"
 
-                            Dim sql = CartaDePorteManager.GetDataTableFiltradoYPaginado_CadenaSQL_TambienEjecutaCount(SC, _
-                                            "", "", "", 1, maximumRows, _
-                                            CartaDePorteManager.enumCDPestado.DescargasMasFacturadas, "", idVendedor, idCorredor, _
-                                            idDestinatario, idIntermediario, _
-                                            idRComercial, idArticulo, idProcedencia, idDestino, _
-                                                                                "1", ModoExportacion, _
-                                            Convert.ToDateTime(sDesde), _
-                                            Convert.ToDateTime(sHasta), _
+                            Dim sql = CartaDePorteManager.GetDataTableFiltradoYPaginado_CadenaSQL_TambienEjecutaCount(SC,
+                                            "", "", "", 1, maximumRows,
+                                            CartaDePorteManager.enumCDPestado.DescargasMasFacturadas, "", idVendedor, idCorredor,
+                                            idDestinatario, idIntermediario,
+                                            idRComercial, idArticulo, idProcedencia, idDestino,
+                                                                                "1", ModoExportacion,
+                                            Convert.ToDateTime(sDesde),
+                                            Convert.ToDateTime(sHasta),
                                              Val(puntoventa), registrosFiltrados, sTitulo, , , , , idClienteAuxiliar)
 
                             registrosFiltrados = 1 'no sé por qué no está andando bien
@@ -1277,14 +1277,14 @@ Namespace Pronto.ERP.Bll
 
 
                                 sTitulo = ""
-                                Dim sql = CartaDePorteManager.GetDataTableFiltradoYPaginado_CadenaSQL(SC, _
-                                                "", "", "", 1, 0, _
-                                                CartaDePorteManager.enumCDPestado.DescargasMasFacturadas, "", idVendedor, idCorredor, _
-                                                idDestinatario, idIntermediario, _
-                                                idRComercial, idArticulo, idProcedencia, idDestino, _
-                                                                                    "1", ModoExportacion, _
-                                                Convert.ToDateTime(sDesde), _
-                                                Convert.ToDateTime(sHasta), _
+                                Dim sql = CartaDePorteManager.GetDataTableFiltradoYPaginado_CadenaSQL(SC,
+                                                "", "", "", 1, 0,
+                                                CartaDePorteManager.enumCDPestado.DescargasMasFacturadas, "", idVendedor, idCorredor,
+                                                idDestinatario, idIntermediario,
+                                                idRComercial, idArticulo, idProcedencia, idDestino,
+                                                                                    "1", ModoExportacion,
+                                                Convert.ToDateTime(sDesde),
+                                                Convert.ToDateTime(sHasta),
                                               Val(puntoventa), sTitulo, , , , , idClienteAuxiliar)
 
 
@@ -1301,8 +1301,8 @@ Namespace Pronto.ERP.Bll
                                 Try
 
                                     Using rep As New ReportViewer
-                                        output = RebindReportViewer_ServidorExcel(rep, _
-                                                   "Sincronismo BLD.rdl", _
+                                        output = RebindReportViewer_ServidorExcel(rep,
+                                                   "Sincronismo BLD.rdl",
                                                          sql, SC, , ArchivoExcelDestino) 'sTitulo)
                                     End Using
 
@@ -1345,14 +1345,14 @@ Namespace Pronto.ERP.Bll
                                 estado = CartaDePorteManager.enumCDPestado.Posicion
 
 
-                                sql = CartaDePorteManager.GetDataTableFiltradoYPaginado_CadenaSQL(SC, _
-                                                "", "", "", 1, 0, _
-                                                estado, "", idVendedor, idCorredor, _
-                                                idDestinatario, idIntermediario, _
-                                                idRComercial, idArticulo, idProcedencia, idDestino, _
-                                                                                      AplicarANDuORalFiltro, ModoExportacion, _
-                                                Convert.ToDateTime(sDesde), _
-                                                Convert.ToDateTime(sHasta), _
+                                sql = CartaDePorteManager.GetDataTableFiltradoYPaginado_CadenaSQL(SC,
+                                                "", "", "", 1, 0,
+                                                estado, "", idVendedor, idCorredor,
+                                                idDestinatario, idIntermediario,
+                                                idRComercial, idArticulo, idProcedencia, idDestino,
+                                                                                      AplicarANDuORalFiltro, ModoExportacion,
+                                                Convert.ToDateTime(sDesde),
+                                                Convert.ToDateTime(sHasta),
                                                 puntoventa, sTitulo, optDivisionSyngenta, , , , idClienteAuxiliar)
                                 'FiltrarCopias(dt)
                             Catch ex As Exception
@@ -1369,8 +1369,8 @@ Namespace Pronto.ERP.Bll
 
 
                             Using rep As New ReportViewer
-                                output = RebindReportViewer_ServidorExcel(rep, _
-                                            "Posiciones BLD demorados.rdl", sql, _
+                                output = RebindReportViewer_ServidorExcel(rep,
+                                            "Posiciones BLD demorados.rdl", sql,
                                                      SC, False, ArchivoExcelDestino) 'sTitulo)
                             End Using
 
@@ -1391,14 +1391,14 @@ Namespace Pronto.ERP.Bll
 
 
                                 sTitulo = ""
-                                Dim sql = CartaDePorteManager.GetDataTableFiltradoYPaginado_CadenaSQL(SC, _
-                                                "", "", "", 1, 0, _
-                                                CartaDePorteManager.enumCDPestado.DescargasMasFacturadas, "", idVendedor, idCorredor, _
-                                                idDestinatario, idIntermediario, _
-                                                idRComercial, idArticulo, idProcedencia, idDestino, _
-                                                                                    "1", ModoExportacion, _
-                                                Convert.ToDateTime(sDesde), _
-                                                Convert.ToDateTime(sHasta), _
+                                Dim sql = CartaDePorteManager.GetDataTableFiltradoYPaginado_CadenaSQL(SC,
+                                                "", "", "", 1, 0,
+                                                CartaDePorteManager.enumCDPestado.DescargasMasFacturadas, "", idVendedor, idCorredor,
+                                                idDestinatario, idIntermediario,
+                                                idRComercial, idArticulo, idProcedencia, idDestino,
+                                                                                    "1", ModoExportacion,
+                                                Convert.ToDateTime(sDesde),
+                                                Convert.ToDateTime(sHasta),
                                                 Val(puntoventa), sTitulo, , , , , idClienteAuxiliar)
 
 
@@ -1415,8 +1415,8 @@ Namespace Pronto.ERP.Bll
                                 Try
                                     Using rep As New ReportViewer
 
-                                        output = RebindReportViewer_ServidorExcel(rep, _
-                                             "Sincronismo BLD.rdl", _
+                                        output = RebindReportViewer_ServidorExcel(rep,
+                                             "Sincronismo BLD.rdl",
                                               sql, SC, False, ArchivoExcelDestino) 'sTitulo)
                                         'output = ProntoFuncionesUIWeb.RebindReportViewerExcel(SC, _
                                         '            "ProntoWeb\Informes\Sincronismo BLD.rdl", _
@@ -1502,7 +1502,7 @@ Namespace Pronto.ERP.Bll
                                   sDesde, sHasta, 0,
                                  Nothing, False, Nothing, Nothing, Nothing,
                                   Nothing, Nothing, Nothing, Nothing)
-                                    Select c).Take(3000).ToList
+                                            Select c).Take(3000).ToList
 
                             output = Sincronismo_AJNari(dbcartas, , "")
                             registrosFiltrados = dbcartas.Count
@@ -1517,7 +1517,7 @@ Namespace Pronto.ERP.Bll
                                   sDesde, sHasta, 0,
                                  Nothing, False, Nothing, Nothing, Nothing,
                                   Nothing, Nothing, Nothing, Nothing)
-                                    Select c).Take(3000).ToList
+                                            Select c).Take(3000).ToList
 
                             output = Sincronismo_Pelayo(dbcartas, , "")
                             registrosFiltrados = dbcartas.Count
@@ -1532,7 +1532,7 @@ Namespace Pronto.ERP.Bll
                                   sDesde, sHasta, 0,
                                  Nothing, False, Nothing, Nothing, Nothing,
                                   Nothing, Nothing, Nothing, Nothing)
-                                    Select c).Take(3000).ToList
+                                            Select c).Take(3000).ToList
 
                             output = Sincronismo_Gesagro(dbcartas, SC)
                             registrosFiltrados = dbcartas.Count
@@ -1548,14 +1548,14 @@ Namespace Pronto.ERP.Bll
                                   sDesde, sHasta, 0,
                                  Nothing, False, Nothing, Nothing, Nothing,
                                   Nothing, Nothing, Nothing, Nothing)
-                                    Select c).Take(3000).ToList
+                                            Select c).Take(3000).ToList
 
                             output = Sincronismo_Estanar(dbcartas, SC)
                             registrosFiltrados = dbcartas.Count
 
 
                         Case "TOMAS HNOS"
-                            Dim s = "(ISNULL(FechaDescarga, '1/1/1753') BETWEEN '" & FechaANSI(sDesde) & _
+                            Dim s = "(ISNULL(FechaDescarga, '1/1/1753') BETWEEN '" & FechaANSI(sDesde) &
                                            "'     AND   '" & FechaANSI(sHasta) & "' )"
 
                             Dim dt = EntidadManager.ExecDinamico(SC, strSQLsincronismo() & " WHERE " & s)
@@ -1565,7 +1565,7 @@ Namespace Pronto.ERP.Bll
                             registrosFiltrados = dt.Rows.Count
 
                         Case "SANTA CATALINA"
-                            Dim s = "(ISNULL(FechaDescarga, '1/1/1753') BETWEEN '" & FechaANSI(sDesde) & _
+                            Dim s = "(ISNULL(FechaDescarga, '1/1/1753') BETWEEN '" & FechaANSI(sDesde) &
                                            "'     AND   '" & FechaANSI(sHasta) & "' )"
 
                             Dim dt = EntidadManager.ExecDinamico(SC, strSQLsincronismo() & " WHERE " & s)
@@ -1618,7 +1618,7 @@ Namespace Pronto.ERP.Bll
                             End Select
 
                         Case "LARTIRIGOYEN"
-                            Dim s = "(ISNULL(FechaDescarga, '1/1/1753') BETWEEN '" & FechaANSI(sDesde) & _
+                            Dim s = "(ISNULL(FechaDescarga, '1/1/1753') BETWEEN '" & FechaANSI(sDesde) &
                                      "'     AND   '" & FechaANSI(sHasta) & "' )"
                             Dim dt = EntidadManager.ExecDinamico(SC, strSQLsincronismo() & " WHERE " & s)
                             'txtTitular.Text = "LOS GROBO  AGROPECUARIA S.A."
@@ -1650,7 +1650,7 @@ Namespace Pronto.ERP.Bll
 
 
                         Case "EL ENLACE"
-                            Dim s = "(ISNULL(FechaDescarga, '1/1/1753') BETWEEN '" & FechaANSI(sDesde) & _
+                            Dim s = "(ISNULL(FechaDescarga, '1/1/1753') BETWEEN '" & FechaANSI(sDesde) &
                                            "'     AND   '" & FechaANSI(sHasta) & "' )"
 
                             Dim dt = EntidadManager.ExecDinamico(SC, strSQLsincronismo() & " WHERE " & s)
@@ -1660,7 +1660,7 @@ Namespace Pronto.ERP.Bll
                             registrosFiltrados = dt.Rows.Count
 
                         Case "MIGUEL CINQUE"
-                            Dim s = "(ISNULL(FechaDescarga, '1/1/1753') BETWEEN '" & FechaANSI(sDesde) & _
+                            Dim s = "(ISNULL(FechaDescarga, '1/1/1753') BETWEEN '" & FechaANSI(sDesde) &
                                            "'     AND   '" & FechaANSI(sHasta) & "' )"
 
                             Dim dt = EntidadManager.ExecDinamico(SC, strSQLsincronismo() & " WHERE " & s)
@@ -1721,7 +1721,7 @@ Namespace Pronto.ERP.Bll
                         Case "BERAZA"
 
 
-                            Dim s = "(ISNULL(FechaDescarga, '1/1/1753') BETWEEN '" & FechaANSI(sDesde) & _
+                            Dim s = "(ISNULL(FechaDescarga, '1/1/1753') BETWEEN '" & FechaANSI(sDesde) &
                                      "'     AND   '" & FechaANSI(sHasta) & "' )"
                             Dim dt = EntidadManager.ExecDinamico(SC, strSQLsincronismo() & " WHERE " & s)
                             'txtTitular.Text = "LOS GROBO  AGROPECUARIA S.A."
@@ -1778,7 +1778,7 @@ Namespace Pronto.ERP.Bll
 
 
 
-                            Dim s = "(ISNULL(FechaDescarga, '1/1/1753') BETWEEN '" & FechaANSI(sDesde) & _
+                            Dim s = "(ISNULL(FechaDescarga, '1/1/1753') BETWEEN '" & FechaANSI(sDesde) &
                                             "'     AND   '" & FechaANSI(sHasta) & "' )"
 
                             Dim dt = EntidadManager.ExecDinamico(SC, strSQLsincronismo() & " WHERE " & s)
@@ -1797,7 +1797,7 @@ Namespace Pronto.ERP.Bll
                         Case "RIVARA"
 
 
-                            Dim s = "(ISNULL(FechaDescarga, '1/1/1753') BETWEEN '" & FechaANSI(sDesde) & _
+                            Dim s = "(ISNULL(FechaDescarga, '1/1/1753') BETWEEN '" & FechaANSI(sDesde) &
                                 "'     AND   '" & FechaANSI(sHasta) & "' )"
                             Dim dt = EntidadManager.ExecDinamico(SC, strSQLsincronismo() & " WHERE " & s)
 
@@ -1818,7 +1818,7 @@ Namespace Pronto.ERP.Bll
                         Case "ALEA"
 
 
-                            Dim s = "(ISNULL(FechaDescarga, '1/1/1753') BETWEEN '" & FechaANSI(sDesde) & _
+                            Dim s = "(ISNULL(FechaDescarga, '1/1/1753') BETWEEN '" & FechaANSI(sDesde) &
                                 "'     AND   '" & FechaANSI(sHasta) & "' )"
                             Dim dt = EntidadManager.ExecDinamico(SC, strSQLsincronismo() & " WHERE " & s)
 
@@ -1839,7 +1839,7 @@ Namespace Pronto.ERP.Bll
                         Case "AIBAL"
 
 
-                            Dim s = "(ISNULL(FechaDescarga, '1/1/1753') BETWEEN '" & FechaANSI(sDesde) & _
+                            Dim s = "(ISNULL(FechaDescarga, '1/1/1753') BETWEEN '" & FechaANSI(sDesde) &
                                 "'     AND   '" & FechaANSI(sHasta) & "' )"
                             Dim dt = EntidadManager.ExecDinamico(SC, strSQLsincronismo() & " WHERE " & s)
 
@@ -1860,7 +1860,7 @@ Namespace Pronto.ERP.Bll
                         Case "LA BRAGADENSE"
 
 
-                            Dim s = "(ISNULL(FechaDescarga, '1/1/1753') BETWEEN '" & FechaANSI(sDesde) & _
+                            Dim s = "(ISNULL(FechaDescarga, '1/1/1753') BETWEEN '" & FechaANSI(sDesde) &
                                 "'     AND   '" & FechaANSI(sHasta) & "' )"
                             Dim dt = EntidadManager.ExecDinamico(SC, strSQLsincronismo() & " WHERE " & s)
 
@@ -1995,9 +1995,9 @@ Namespace Pronto.ERP.Bll
 
 
                 Try
-                    oWB = oWBs.Open(fileExcelName, Reflection.Missing.Value, Reflection.Missing.Value, _
-                        Reflection.Missing.Value, Reflection.Missing.Value, Reflection.Missing.Value, Reflection.Missing.Value, Reflection.Missing.Value, _
-                        Reflection.Missing.Value, Reflection.Missing.Value, Reflection.Missing.Value, Reflection.Missing.Value, Reflection.Missing.Value, _
+                    oWB = oWBs.Open(fileExcelName, Reflection.Missing.Value, Reflection.Missing.Value,
+                        Reflection.Missing.Value, Reflection.Missing.Value, Reflection.Missing.Value, Reflection.Missing.Value, Reflection.Missing.Value,
+                        Reflection.Missing.Value, Reflection.Missing.Value, Reflection.Missing.Value, Reflection.Missing.Value, Reflection.Missing.Value,
                         Reflection.Missing.Value, Reflection.Missing.Value)
                 Catch ex As Exception
 
@@ -2031,7 +2031,7 @@ Namespace Pronto.ERP.Bll
 
                     '  creo las columnas
                     For j As Integer = 1 To MAXCOLS
-                        dt.Columns.Add("column" & j, _
+                        dt.Columns.Add("column" & j,
                                        System.Type.GetType("System.String"))
                     Next j
 
@@ -2168,9 +2168,9 @@ Namespace Pronto.ERP.Bll
 
 
                 Try
-                    oWB = oWBs.Open(fileExcelName, Reflection.Missing.Value, Reflection.Missing.Value, _
-                        Reflection.Missing.Value, Reflection.Missing.Value, Reflection.Missing.Value, Reflection.Missing.Value, Reflection.Missing.Value, _
-                        Reflection.Missing.Value, Reflection.Missing.Value, Reflection.Missing.Value, Reflection.Missing.Value, Reflection.Missing.Value, _
+                    oWB = oWBs.Open(fileExcelName, Reflection.Missing.Value, Reflection.Missing.Value,
+                        Reflection.Missing.Value, Reflection.Missing.Value, Reflection.Missing.Value, Reflection.Missing.Value, Reflection.Missing.Value,
+                        Reflection.Missing.Value, Reflection.Missing.Value, Reflection.Missing.Value, Reflection.Missing.Value, Reflection.Missing.Value,
                         Reflection.Missing.Value, Reflection.Missing.Value)
                 Catch ex As Exception
 
@@ -2201,7 +2201,7 @@ Namespace Pronto.ERP.Bll
 
                     '  creo las columnas
                     For j As Integer = 1 To MAXCOLS
-                        dt.Columns.Add("column" & j, _
+                        dt.Columns.Add("column" & j,
                                        System.Type.GetType("System.String"))
                     Next j
 
@@ -2339,9 +2339,9 @@ Namespace Pronto.ERP.Bll
 
 
                 Try
-                    oWB = oWBs.Open(fileExcelName, Reflection.Missing.Value, Reflection.Missing.Value, _
-                        Reflection.Missing.Value, Reflection.Missing.Value, Reflection.Missing.Value, Reflection.Missing.Value, Reflection.Missing.Value, _
-                        Reflection.Missing.Value, Reflection.Missing.Value, Reflection.Missing.Value, Reflection.Missing.Value, Reflection.Missing.Value, _
+                    oWB = oWBs.Open(fileExcelName, Reflection.Missing.Value, Reflection.Missing.Value,
+                        Reflection.Missing.Value, Reflection.Missing.Value, Reflection.Missing.Value, Reflection.Missing.Value, Reflection.Missing.Value,
+                        Reflection.Missing.Value, Reflection.Missing.Value, Reflection.Missing.Value, Reflection.Missing.Value, Reflection.Missing.Value,
                         Reflection.Missing.Value, Reflection.Missing.Value)
                 Catch ex As Exception
 
@@ -2373,7 +2373,7 @@ Namespace Pronto.ERP.Bll
 
                     '  creo las columnas
                     For j As Integer = 1 To MAXCOLS
-                        dt.Columns.Add("column" & j, _
+                        dt.Columns.Add("column" & j,
                                        System.Type.GetType("System.String"))
                     Next j
 
@@ -2502,9 +2502,9 @@ Namespace Pronto.ERP.Bll
                 oWBs = oXL.Workbooks
 
                 Try
-                    oWB = oWBs.Open(fileName, Reflection.Missing.Value, Reflection.Missing.Value, _
-        Reflection.Missing.Value, Reflection.Missing.Value, Reflection.Missing.Value, Reflection.Missing.Value, Reflection.Missing.Value, _
-        Reflection.Missing.Value, Reflection.Missing.Value, Reflection.Missing.Value, Reflection.Missing.Value, Reflection.Missing.Value, _
+                    oWB = oWBs.Open(fileName, Reflection.Missing.Value, Reflection.Missing.Value,
+        Reflection.Missing.Value, Reflection.Missing.Value, Reflection.Missing.Value, Reflection.Missing.Value, Reflection.Missing.Value,
+        Reflection.Missing.Value, Reflection.Missing.Value, Reflection.Missing.Value, Reflection.Missing.Value, Reflection.Missing.Value,
         Reflection.Missing.Value, Reflection.Missing.Value)
                 Catch ex As Exception
 
@@ -2565,9 +2565,9 @@ Namespace Pronto.ERP.Bll
                 oWBs = oXL.Workbooks
 
                 Try
-                    oWB = oWBs.Open(fileName, Reflection.Missing.Value, Reflection.Missing.Value, _
-        Reflection.Missing.Value, Reflection.Missing.Value, Reflection.Missing.Value, Reflection.Missing.Value, Reflection.Missing.Value, _
-        Reflection.Missing.Value, Reflection.Missing.Value, Reflection.Missing.Value, Reflection.Missing.Value, Reflection.Missing.Value, _
+                    oWB = oWBs.Open(fileName, Reflection.Missing.Value, Reflection.Missing.Value,
+        Reflection.Missing.Value, Reflection.Missing.Value, Reflection.Missing.Value, Reflection.Missing.Value, Reflection.Missing.Value,
+        Reflection.Missing.Value, Reflection.Missing.Value, Reflection.Missing.Value, Reflection.Missing.Value, Reflection.Missing.Value,
         Reflection.Missing.Value, Reflection.Missing.Value)
                 Catch ex As Exception
 
@@ -5249,7 +5249,7 @@ Namespace Pronto.ERP.Bll
 
                 'sb &= "&" & JustificadoDerecha(IIf(iisNull(dr(""), "") = "CO", "Si", "No").ToString, 2)
                 sb &= "&" & IIf(iisNull(dr("CalidadDe"), 0) = 25, "Si", "No") '51
-                
+
                 'Dim subvagon = iisNull(dr("SubNumeroVagon"), "0")
                 'If subvagon = "0" Then subvagon = ""
                 'sb &= "&" & JustificadoDerecha(subvagon.ToString, 30) '52
@@ -6229,7 +6229,7 @@ Namespace Pronto.ERP.Bll
 
         End Function
 
-        Public Shared Function Sincronismo_YPF_ConLINQ(q As Generic.List(Of CartasConCalada), _
+        Public Shared Function Sincronismo_YPF_ConLINQ(q As Generic.List(Of CartasConCalada),
                                     ByRef sErrores As String, ByVal titulo As String, SC As String) As String
 
 
@@ -6426,7 +6426,7 @@ Namespace Pronto.ERP.Bll
         End Function
 
 
-        Public Shared Function Sincronismo_SyngentaFacturacion_ConLINQ(q As Generic.List(Of CartasConCalada), _
+        Public Shared Function Sincronismo_SyngentaFacturacion_ConLINQ(q As Generic.List(Of CartasConCalada),
                                     ByRef sErrores As String, ByVal titulo As String, SC As String) As String
 
 
@@ -7299,8 +7299,8 @@ Namespace Pronto.ERP.Bll
             FileClose(nF)
 
 
-            sErrores = "<br/>Cartas sin prefijo: <br/>" & sErroresPrefijo & _
-                        "<br/>Procedencias sin código LosGrobo:<br/> " & sErroresProcedencia & _
+            sErrores = "<br/>Cartas sin prefijo: <br/>" & sErroresPrefijo &
+                        "<br/>Procedencias sin código LosGrobo:<br/> " & sErroresProcedencia &
                         "<br/>Destinos sin código LosGrobo: <br/>" & sErroresDestinos
             '" <br/>Cartas sin código de Especie ONCAA:<br/> " & sErroresEspecie & _
 
@@ -7564,8 +7564,8 @@ Namespace Pronto.ERP.Bll
             FileClose(nF)
 
 
-            sErrores = "<br/>Cartas sin prefijo: <br/>" & sErroresPrefijo & _
-                        "<br/>Procedencias sin código LosGrobo:<br/> " & sErroresProcedencia & _
+            sErrores = "<br/>Cartas sin prefijo: <br/>" & sErroresPrefijo &
+                        "<br/>Procedencias sin código LosGrobo:<br/> " & sErroresProcedencia &
                         "<br/>Destinos sin código LosGrobo: <br/>" & sErroresDestinos
             '" <br/>Cartas sin código de Especie ONCAA:<br/> " & sErroresEspecie & _
 
@@ -7978,9 +7978,9 @@ Namespace Pronto.ERP.Bll
             FileClose(nF)
 
 
-            sErrores = "<br/>Cartas sin prefijo: <br/>" & sErroresPrefijo & _
-                        "<br/>Cartas sin Humedad:<br/> " & sErroresHumedad & _
-                        "<br/>Procedencias sin código LosGrobo:<br/> " & sErroresProcedencia & _
+            sErrores = "<br/>Cartas sin prefijo: <br/>" & sErroresPrefijo &
+                        "<br/>Cartas sin Humedad:<br/> " & sErroresHumedad &
+                        "<br/>Procedencias sin código LosGrobo:<br/> " & sErroresProcedencia &
                         "<br/>Destinos sin código LosGrobo: <br/>" & sErroresDestinos
 
             '" <br/>Cartas sin código de Especie ONCAA:<br/> " & sErroresEspecie & _
@@ -14423,7 +14423,7 @@ Namespace Pronto.ERP.Bll
 
 
 
-        Public Shared Function Sincronismo_AmaggiDescargas_Nuevo(q As Generic.List(Of CartasConCalada), _
+        Public Shared Function Sincronismo_AmaggiDescargas_Nuevo(q As Generic.List(Of CartasConCalada),
             Optional ByVal titulo As String = "", Optional ByVal sWHERE As String = "", Optional ByRef sErrores As String = "") As String
 
 
@@ -15137,7 +15137,7 @@ Namespace Pronto.ERP.Bll
 
 
 
-        Public Shared Function Sincronismo_Gesagro(q As List(Of ProntoMVC.Data.Models.fSQL_GetDataTableFiltradoYPaginado_Result3), _
+        Public Shared Function Sincronismo_Gesagro(q As List(Of ProntoMVC.Data.Models.fSQL_GetDataTableFiltradoYPaginado_Result3),
             Optional ByVal titulo As String = "", Optional ByVal sWHERE As String = "", Optional ByRef sErrores As String = "") As String
 
 
@@ -15893,11 +15893,11 @@ Namespace Pronto.ERP.Bll
 
 
             'http://stackoverflow.com/questions/13230835/detecting-duplicate-records-selecting-only-first-and-counting-with-linq-c
-            Dim sss4 = ( _
-                                    From i As WillyInformesDataSet.wCartasDePorte_TX_InformesCorregidoRow In aa _
-                                    Group By i.NumeroCartaDePorte, i.SubnumeroVagon _
-                                       Into Group _
-                                    Select f = Group.First _
+            Dim sss4 = (
+                                    From i As WillyInformesDataSet.wCartasDePorte_TX_InformesCorregidoRow In aa
+                                    Group By i.NumeroCartaDePorte, i.SubnumeroVagon
+                                       Into Group
+                                    Select f = Group.First
                    ).ToArray
 
 
@@ -19137,8 +19137,8 @@ Namespace Pronto.ERP.Bll
                         ' http://bdlconsultores.ddns.net/Consultas/Admin/VerConsultas1.php?recordid=15164
                         '                    Si ACA con su acopio dentro de la CP está como Titular, Intermediario o Rte Comercial: debe ir el CUIT de ACA en PLANTA ORIGEN
 
-                        If .TitularCUIT.ToString.Replace("-", "") = "30500120882" Or _
-                           .IntermediarioCUIT.ToString.Replace("-", "") = "30500120882" Or _
+                        If .TitularCUIT.ToString.Replace("-", "") = "30500120882" Or
+                           .IntermediarioCUIT.ToString.Replace("-", "") = "30500120882" Or
                            .RComercialCUIT.ToString.Replace("-", "") = "30500120882" Then
 
                             sb &= JustificadoIzquierda("30500120882", 14) + JustificadoIzquierda("A.C.A. LTDA", 30)
@@ -19361,29 +19361,38 @@ Namespace Pronto.ERP.Bll
                     sb &= Left(.Observaciones.ToString, 100).PadRight(100) 'Observac	STRING(100)	Observaciones)    862)    961
 
 
-                    'ConCalidad	STRING(4)	Condición Calidad Grado(G1,G2 o G3), Camara(CC) o Fuera de standart (FE)
-                    Dim sCalidad As String
-                    If InStr(.Calidad.ToString.ToLower, "grado 1") > 0 Then
-                        sCalidad = "G1"
-                    ElseIf InStr(.Calidad.ToString.ToLower, "grado 2") > 0 Then
-                        sCalidad = "G2"
-                    ElseIf InStr(.Calidad.ToString.ToLower, "grado 3") > 0 Then
-                        sCalidad = "G3"
-                    ElseIf InStr(.Calidad.ToString.ToLower, "camara") > 0 Then
-                        sCalidad = "CC"
-                    Else
-                        sCalidad = "FE"
-                    End If
+
                     'Campo 61 ConCalidad: Poner siempre la condición “CC” Condición Cámara.
-                    sCalidad = "CC"
+                    Dim sCalidad = "CC"
                     If Not .IsCalidadDescNull Then
                         If InStr(.CalidadDesc.ToString.ToLower, "conforme") > 0 Then
                             sCalidad = "G2"
                             'consulta 24964 : Te resumo: Siempre que aparezca la calidad CONFORME . Que en el txt salga GRADO 2. Con la sigla "G2" . 
+                        ElseIf InStr(.CalidadDesc.ToString.ToLower, "grado 1") > 0 And False Then
+                            sCalidad = "G1"
+                        ElseIf InStr(.CalidadDesc.ToString.ToLower, "grado 2") > 0 And False Then
+                            sCalidad = "G2"
+                        ElseIf InStr(.CalidadDesc.ToString.ToLower, "grado 3") > 0 And False Then
+                            sCalidad = "G3"
+                        ElseIf InStr(.CalidadDesc.ToString.ToLower, "camara") > 0 And False Then
+                            sCalidad = "CC"
+                        ElseIf InStr(.CalidadDesc.ToString.ToLower, "fuera de base") > 0 Then
+                            sCalidad = "FE"
+                        ElseIf InStr(.CalidadDesc.ToString.ToLower, "fuera de standard") > 0 Then
+                            sCalidad = "FE"
+                        Else
+                            sCalidad = "CC"
                         End If
                     End If
 
+
+
                     sb &= sCalidad.PadRight(4) 'ConCalidad	STRING(4)	Condición Calidad Grado(G1,G2 o G3), Camara(CC) o Fuera de standart (FE)
+
+
+
+
+
 
 
 
@@ -20047,9 +20056,9 @@ Namespace Pronto.ERP.Bll
 
 
                 Try
-                    oWB = oWBs.Open(fileExcelName, Reflection.Missing.Value, Reflection.Missing.Value, _
-                        Reflection.Missing.Value, Reflection.Missing.Value, Reflection.Missing.Value, Reflection.Missing.Value, Reflection.Missing.Value, _
-                        Reflection.Missing.Value, Reflection.Missing.Value, Reflection.Missing.Value, Reflection.Missing.Value, Reflection.Missing.Value, _
+                    oWB = oWBs.Open(fileExcelName, Reflection.Missing.Value, Reflection.Missing.Value,
+                        Reflection.Missing.Value, Reflection.Missing.Value, Reflection.Missing.Value, Reflection.Missing.Value, Reflection.Missing.Value,
+                        Reflection.Missing.Value, Reflection.Missing.Value, Reflection.Missing.Value, Reflection.Missing.Value, Reflection.Missing.Value,
                         Reflection.Missing.Value, Reflection.Missing.Value)
                 Catch ex As Exception
 
@@ -20085,7 +20094,7 @@ Namespace Pronto.ERP.Bll
 
                     '  creo las columnas
                     For j As Integer = 1 To MAXCOLS
-                        dt.Columns.Add("column" & j, _
+                        dt.Columns.Add("column" & j,
                                        System.Type.GetType("System.String"))
                     Next j
 
@@ -20522,7 +20531,7 @@ Namespace Pronto.ERP.Bll
                         Try
 
 
-                            sb = RenglonBLDCalidad(cdp, 1, .NobleExtranos, carta.CalidadGranosExtranosRebaja, carta.CalidadGranosExtranosRebaja, nF, "01", "Extraños", carta.CalidadGranosExtranosMerma, _
+                            sb = RenglonBLDCalidad(cdp, 1, .NobleExtranos, carta.CalidadGranosExtranosRebaja, carta.CalidadGranosExtranosRebaja, nF, "01", "Extraños", carta.CalidadGranosExtranosMerma,
                                                     _TipoMerma(s.Extranos, carta.Secada))
 
                             sb = RenglonBLDCalidad(cdp, 2, .NobleQuebrados, .CalidadMermaChamicoBonifica_o_Rebaja, carta.CalidadQuebradosRebaja, nF, "01", "Quebrados", carta.CalidadQuebradosMerma, _TipoMerma(s.Quebrados, carta.Secada))
@@ -21141,10 +21150,10 @@ Namespace Pronto.ERP.Bll
         End Function
 
 
-        Public Shared Function RenglonBLDCalidad(ByVal cdp As WillyInformesDataSet.wCartasDePorte_TX_InformesCorregidoRow, _
-                                                 ByVal CodigoEnsayo As Integer, ByVal Resultado As Double, ByVal bonif_O_rebaja As String, _
-                                                 ByVal Rebaja As Double, ByVal nf As Integer, ByVal numresultado As String, _
-                                                 ByVal descripcion As String, _
+        Public Shared Function RenglonBLDCalidad(ByVal cdp As WillyInformesDataSet.wCartasDePorte_TX_InformesCorregidoRow,
+                                                 ByVal CodigoEnsayo As Integer, ByVal Resultado As Double, ByVal bonif_O_rebaja As String,
+                                                 ByVal Rebaja As Double, ByVal nf As Integer, ByVal numresultado As String,
+                                                 ByVal descripcion As String,
                                                  ByVal Merma As Double, Arbitrado As Boolean) As String
             Dim sb = ""
 
@@ -23730,9 +23739,9 @@ Namespace Pronto.ERP.Bll
 
 
 
-        Private Shared Function RenglonAlabernCalidad(ByVal cdp As WillyInformesDataSet.wCartasDePorte_TX_InformesCorregidoRow, _
-                                                      ByVal nombre As String, ByVal CodigoEnsayo As Integer, ByVal Resultado As Double, _
-                                                      ByVal bonif_O_rebaja As String, ByVal Rebaja As Double, _
+        Private Shared Function RenglonAlabernCalidad(ByVal cdp As WillyInformesDataSet.wCartasDePorte_TX_InformesCorregidoRow,
+                                                      ByVal nombre As String, ByVal CodigoEnsayo As Integer, ByVal Resultado As Double,
+                                                      ByVal bonif_O_rebaja As String, ByVal Rebaja As Double,
                                                       ByVal nf As Integer, ByVal numresultado As Double) As String
             Dim sb = ""
 
@@ -25078,7 +25087,7 @@ Namespace Pronto.ERP.Bll
 
         End Function
 
-        Public Shared Function Sincronismo_Monsanto(q As Generic.List(Of CartasConCalada), _
+        Public Shared Function Sincronismo_Monsanto(q As Generic.List(Of CartasConCalada),
     Optional ByVal titulo As String = "", Optional ByVal SC As String = "", Optional ByRef sErrores As String = "") As String
 
 
@@ -27838,10 +27847,10 @@ Namespace Pronto.ERP.Bll
 
                     cal = "S"   'S=Mercadería conforme
 
-                    If .NobleAmohosados > 0 Or .NobleAmohosados > 0 Or .NobleExtranos > 0 Or .NobleCarbon > 0 Or .NobleAmohosados > 0 Or .NobleAmohosados > 0 Or _
-                         .NobleACamara > 0 Or .NobleAcidezGrasa > 0 Or .NobleAmohosados > 0 Or .NobleCarbon > 0 Or .NoblePicados > 0 Or _
-                         .NobleExtranos > 0 Or .NobleQuebrados > 0 Or .NobleAmohosados > 0 Or .NobleCarbon > 0 Or .NobleCarbon > 0 Or _
-                         .NobleVerdes > 0 Or .NobleAcidezGrasa > 0 Or .NobleAmohosados > 0 Or .NobleCarbon > 0 Or .NobleCarbon > 0 Or _
+                    If .NobleAmohosados > 0 Or .NobleAmohosados > 0 Or .NobleExtranos > 0 Or .NobleCarbon > 0 Or .NobleAmohosados > 0 Or .NobleAmohosados > 0 Or
+                         .NobleACamara > 0 Or .NobleAcidezGrasa > 0 Or .NobleAmohosados > 0 Or .NobleCarbon > 0 Or .NoblePicados > 0 Or
+                         .NobleExtranos > 0 Or .NobleQuebrados > 0 Or .NobleAmohosados > 0 Or .NobleCarbon > 0 Or .NobleCarbon > 0 Or
+                         .NobleVerdes > 0 Or .NobleAcidezGrasa > 0 Or .NobleAmohosados > 0 Or .NobleCarbon > 0 Or .NobleCarbon > 0 Or
                          .CalidadDescuentoFinal > 0 Or .NobleObjetables > 0 Or .CalidadPuntaSombreada > 0 Or .CalidadTierra > 0 Or .NobleDaniados > 0 Then
 
                         cal = "N" 'N=Mercadería condicional
@@ -28376,82 +28385,82 @@ Namespace Pronto.ERP.Bll
             'Dim dt = EntidadManager.ExecDinamico(HFSC.Value, "Select * from CartasDePorte CDP where Entregador=" & IdEntregador)
 
 
-            Dim strSQL = String.Format("SELECT  " & vbCrLf & _
-                    " 0 as [K_Orden], " & vbCrLf & _
-        "       CLIVEN.Razonsocial as   Titular  , " & vbCrLf & _
-        "       CLICOR.Nombre as    [Corredor ], " & vbCrLf & _
-        "       CLIENT.Razonsocial  as  [Destinatario], " & vbCrLf & _
-        "         Articulos.Descripcion as  Producto, " & vbCrLf & _
-        "         LOCDES.Descripcion   as  Destino , " & vbCrLf & _
-        "       FechaDescarga   as  Arribo , " & vbCrLf & _
-        "      NumeroCartaDePorte   as  [C.Porte]  , " & vbCrLf & _
-        "       Contrato  as  Contrato , " & vbCrLf & _
-        "       NetoPto   as  [Kg.Proc.] , " & vbCrLf & _
-        "       BrutoPto   as  [Kg.Bruto Proc.], " & vbCrLf & _
-        "       ''   as  [Kg.Dif.] , " & vbCrLf & _
-        "         Humedad as  [H.%]	 , " & vbCrLf & _
-        "       TaraPto   as  [Kg.Tara Proc.] , " & vbCrLf & _
-        "       BrutoFinal   as  [Kg.Bruto Desc.] , " & vbCrLf & _
-        "       TaraFinal   as  [Kg.Tara Desc.] , " & vbCrLf & _
-        "       NetoFinal   as  [Kg.Neto Desc.] , " & vbCrLf & _
-        "         Merma as [Mer.Kg.] , " & vbCrLf & _
-        "         Merma as Otras , " & vbCrLf & _
-        "        NetoProc  as  [Kg.Netos] , " & vbCrLf & _
-        "        LOCORI.Nombre as    [Procedcia.]  " & vbCrLf & _
-                      " FROM CartasDePorte CDP " & vbCrLf & _
-                       " LEFT OUTER JOIN Clientes CLIVEN ON CDP.Vendedor = CLIVEN.IdCliente " & vbCrLf & _
-                       " LEFT OUTER JOIN Clientes CLICO1 ON CDP.CuentaOrden1 = CLICO1.IdCliente " & vbCrLf & _
-                       " LEFT OUTER JOIN Clientes CLICO2 ON CDP.CuentaOrden2 = CLICO2.IdCliente " & vbCrLf & _
-                       " LEFT OUTER JOIN Vendedores CLICOR ON CDP.Corredor = CLICOR.IdVendedor " & vbCrLf & _
-                       " LEFT OUTER JOIN Clientes CLIENT ON CDP.Entregador = CLIENT.IdCliente " & vbCrLf & _
-                       " LEFT OUTER JOIN Articulos ON CDP.IdArticulo = Articulos.IdArticulo " & vbCrLf & _
-                       " LEFT OUTER JOIN Transportistas TRANS ON CDP.IdTransportista = TRANS.IdTransportista " & vbCrLf & _
-                       " LEFT OUTER JOIN Choferes CHOF ON CDP.IdChofer = CHOF.IdChofer " & vbCrLf & _
-                       " LEFT OUTER JOIN Localidades LOCORI ON CDP.Procedencia = LOCORI.IdLocalidad " & vbCrLf & _
-                       " LEFT OUTER JOIN WilliamsDestinos LOCDES ON CDP.Destino = LOCDES.IdWilliamsDestino " & vbCrLf & _
-                    "" & vbCrLf & _
-                    "" & vbCrLf & _
-                    " UNION ALL " & vbCrLf & _
-                    "" & vbCrLf & _
-                    "" & vbCrLf & _
-                    "SELECT  " & vbCrLf & _
-                    " 1 as [K_Orden], " & vbCrLf & _
-        "       CLIVEN.Razonsocial as   Titular  , " & vbCrLf & _
-        "       CLICOR.Nombre as    [Corredor ], " & vbCrLf & _
-        "       CLIENT.Razonsocial  as  [Destinatario], " & vbCrLf & _
-        "         Articulos.Descripcion as  Producto, " & vbCrLf & _
-        "         LOCDES.Descripcion   as  Destino , " & vbCrLf & _
-        "       null   as  Arribo , " & vbCrLf & _
-        "      null   as  [C.Porte]  , " & vbCrLf & _
-        "       null  as  Contrato , " & vbCrLf & _
-        "       SUM(NetoPto)   as  [Kg.Proc.] , " & vbCrLf & _
-        "       SUM(BrutoPto)   as  [Kg.Bruto Proc.], " & vbCrLf & _
-        "       'TOTAL'   as  [Kg.Dif.] , " & vbCrLf & _
-        "         SUM(Humedad) as  [H.%]	 , " & vbCrLf & _
-        "       SUM(TaraPto)   as  [Kg.Tara Proc.] , " & vbCrLf & _
-        "       SUM(BrutoFinal)   as  [Kg.Bruto Desc.] , " & vbCrLf & _
-        "       SUM(TaraFinal)   as  [Kg.Tara Desc.] , " & vbCrLf & _
-        "       SUM(NetoFinal)   as  [Kg.Neto Desc.] , " & vbCrLf & _
-        "         SUM(Merma) as [Mer.Kg.] , " & vbCrLf & _
-        "         SUM(Merma) as Otras , " & vbCrLf & _
-        "        SUM(NetoProc)  as  [Kg.Netos] , " & vbCrLf & _
-        "        ''   as    [Procedcia.]  " & vbCrLf & _
-                      " FROM CartasDePorte CDP " & vbCrLf & _
-                       " LEFT OUTER JOIN Clientes CLIVEN ON CDP.Vendedor = CLIVEN.IdCliente " & vbCrLf & _
-                       " LEFT OUTER JOIN Clientes CLICO1 ON CDP.CuentaOrden1 = CLICO1.IdCliente " & vbCrLf & _
-                       " LEFT OUTER JOIN Clientes CLICO2 ON CDP.CuentaOrden2 = CLICO2.IdCliente " & vbCrLf & _
-                       " LEFT OUTER JOIN Vendedores CLICOR ON CDP.Corredor = CLICOR.IdVendedor " & vbCrLf & _
-                       " LEFT OUTER JOIN Clientes CLIENT ON CDP.Entregador = CLIENT.IdCliente " & vbCrLf & _
-                       " LEFT OUTER JOIN Articulos ON CDP.IdArticulo = Articulos.IdArticulo " & vbCrLf & _
-                       " LEFT OUTER JOIN Transportistas TRANS ON CDP.IdTransportista = TRANS.IdTransportista " & vbCrLf & _
-                       " LEFT OUTER JOIN Choferes CHOF ON CDP.IdChofer = CHOF.IdChofer " & vbCrLf & _
-                       " LEFT OUTER JOIN Localidades LOCORI ON CDP.Procedencia = LOCORI.IdLocalidad " & vbCrLf & _
-                       " LEFT OUTER JOIN WilliamsDestinos LOCDES ON CDP.Destino = LOCDES.IdWilliamsDestino " & vbCrLf & _
-                "GROUP BY CLIVEN.Razonsocial,CLICOR.Nombre,CLIENT.Razonsocial,Articulos.Descripcion, LOCDES.Descripcion" & vbCrLf & _
-                "" & vbCrLf & _
-                "" & vbCrLf & _
-                "" & vbCrLf & _
-        "ORDER BY  Destinos, CLIVEN.Razonsocial,CLICOR.Nombre,K_Orden" & vbCrLf & _
+            Dim strSQL = String.Format("SELECT  " & vbCrLf &
+                    " 0 as [K_Orden], " & vbCrLf &
+        "       CLIVEN.Razonsocial as   Titular  , " & vbCrLf &
+        "       CLICOR.Nombre as    [Corredor ], " & vbCrLf &
+        "       CLIENT.Razonsocial  as  [Destinatario], " & vbCrLf &
+        "         Articulos.Descripcion as  Producto, " & vbCrLf &
+        "         LOCDES.Descripcion   as  Destino , " & vbCrLf &
+        "       FechaDescarga   as  Arribo , " & vbCrLf &
+        "      NumeroCartaDePorte   as  [C.Porte]  , " & vbCrLf &
+        "       Contrato  as  Contrato , " & vbCrLf &
+        "       NetoPto   as  [Kg.Proc.] , " & vbCrLf &
+        "       BrutoPto   as  [Kg.Bruto Proc.], " & vbCrLf &
+        "       ''   as  [Kg.Dif.] , " & vbCrLf &
+        "         Humedad as  [H.%]	 , " & vbCrLf &
+        "       TaraPto   as  [Kg.Tara Proc.] , " & vbCrLf &
+        "       BrutoFinal   as  [Kg.Bruto Desc.] , " & vbCrLf &
+        "       TaraFinal   as  [Kg.Tara Desc.] , " & vbCrLf &
+        "       NetoFinal   as  [Kg.Neto Desc.] , " & vbCrLf &
+        "         Merma as [Mer.Kg.] , " & vbCrLf &
+        "         Merma as Otras , " & vbCrLf &
+        "        NetoProc  as  [Kg.Netos] , " & vbCrLf &
+        "        LOCORI.Nombre as    [Procedcia.]  " & vbCrLf &
+                      " FROM CartasDePorte CDP " & vbCrLf &
+                       " LEFT OUTER JOIN Clientes CLIVEN ON CDP.Vendedor = CLIVEN.IdCliente " & vbCrLf &
+                       " LEFT OUTER JOIN Clientes CLICO1 ON CDP.CuentaOrden1 = CLICO1.IdCliente " & vbCrLf &
+                       " LEFT OUTER JOIN Clientes CLICO2 ON CDP.CuentaOrden2 = CLICO2.IdCliente " & vbCrLf &
+                       " LEFT OUTER JOIN Vendedores CLICOR ON CDP.Corredor = CLICOR.IdVendedor " & vbCrLf &
+                       " LEFT OUTER JOIN Clientes CLIENT ON CDP.Entregador = CLIENT.IdCliente " & vbCrLf &
+                       " LEFT OUTER JOIN Articulos ON CDP.IdArticulo = Articulos.IdArticulo " & vbCrLf &
+                       " LEFT OUTER JOIN Transportistas TRANS ON CDP.IdTransportista = TRANS.IdTransportista " & vbCrLf &
+                       " LEFT OUTER JOIN Choferes CHOF ON CDP.IdChofer = CHOF.IdChofer " & vbCrLf &
+                       " LEFT OUTER JOIN Localidades LOCORI ON CDP.Procedencia = LOCORI.IdLocalidad " & vbCrLf &
+                       " LEFT OUTER JOIN WilliamsDestinos LOCDES ON CDP.Destino = LOCDES.IdWilliamsDestino " & vbCrLf &
+                    "" & vbCrLf &
+                    "" & vbCrLf &
+                    " UNION ALL " & vbCrLf &
+                    "" & vbCrLf &
+                    "" & vbCrLf &
+                    "SELECT  " & vbCrLf &
+                    " 1 as [K_Orden], " & vbCrLf &
+        "       CLIVEN.Razonsocial as   Titular  , " & vbCrLf &
+        "       CLICOR.Nombre as    [Corredor ], " & vbCrLf &
+        "       CLIENT.Razonsocial  as  [Destinatario], " & vbCrLf &
+        "         Articulos.Descripcion as  Producto, " & vbCrLf &
+        "         LOCDES.Descripcion   as  Destino , " & vbCrLf &
+        "       null   as  Arribo , " & vbCrLf &
+        "      null   as  [C.Porte]  , " & vbCrLf &
+        "       null  as  Contrato , " & vbCrLf &
+        "       SUM(NetoPto)   as  [Kg.Proc.] , " & vbCrLf &
+        "       SUM(BrutoPto)   as  [Kg.Bruto Proc.], " & vbCrLf &
+        "       'TOTAL'   as  [Kg.Dif.] , " & vbCrLf &
+        "         SUM(Humedad) as  [H.%]	 , " & vbCrLf &
+        "       SUM(TaraPto)   as  [Kg.Tara Proc.] , " & vbCrLf &
+        "       SUM(BrutoFinal)   as  [Kg.Bruto Desc.] , " & vbCrLf &
+        "       SUM(TaraFinal)   as  [Kg.Tara Desc.] , " & vbCrLf &
+        "       SUM(NetoFinal)   as  [Kg.Neto Desc.] , " & vbCrLf &
+        "         SUM(Merma) as [Mer.Kg.] , " & vbCrLf &
+        "         SUM(Merma) as Otras , " & vbCrLf &
+        "        SUM(NetoProc)  as  [Kg.Netos] , " & vbCrLf &
+        "        ''   as    [Procedcia.]  " & vbCrLf &
+                      " FROM CartasDePorte CDP " & vbCrLf &
+                       " LEFT OUTER JOIN Clientes CLIVEN ON CDP.Vendedor = CLIVEN.IdCliente " & vbCrLf &
+                       " LEFT OUTER JOIN Clientes CLICO1 ON CDP.CuentaOrden1 = CLICO1.IdCliente " & vbCrLf &
+                       " LEFT OUTER JOIN Clientes CLICO2 ON CDP.CuentaOrden2 = CLICO2.IdCliente " & vbCrLf &
+                       " LEFT OUTER JOIN Vendedores CLICOR ON CDP.Corredor = CLICOR.IdVendedor " & vbCrLf &
+                       " LEFT OUTER JOIN Clientes CLIENT ON CDP.Entregador = CLIENT.IdCliente " & vbCrLf &
+                       " LEFT OUTER JOIN Articulos ON CDP.IdArticulo = Articulos.IdArticulo " & vbCrLf &
+                       " LEFT OUTER JOIN Transportistas TRANS ON CDP.IdTransportista = TRANS.IdTransportista " & vbCrLf &
+                       " LEFT OUTER JOIN Choferes CHOF ON CDP.IdChofer = CHOF.IdChofer " & vbCrLf &
+                       " LEFT OUTER JOIN Localidades LOCORI ON CDP.Procedencia = LOCORI.IdLocalidad " & vbCrLf &
+                       " LEFT OUTER JOIN WilliamsDestinos LOCDES ON CDP.Destino = LOCDES.IdWilliamsDestino " & vbCrLf &
+                "GROUP BY CLIVEN.Razonsocial,CLICOR.Nombre,CLIENT.Razonsocial,Articulos.Descripcion, LOCDES.Descripcion" & vbCrLf &
+                "" & vbCrLf &
+                "" & vbCrLf &
+                "" & vbCrLf &
+        "ORDER BY  Destinos, CLIVEN.Razonsocial,CLICOR.Nombre,K_Orden" & vbCrLf &
             "")
 
             Debug.Print(strSQL)
@@ -28531,89 +28540,89 @@ Namespace Pronto.ERP.Bll
 
 
 
-            Dim strSQL = String.Format(" SELECT  CLISC1.Razonsocial as SubcontrDesc, tarifasubcontratista1,tarifasubcontratista1*netofinal /1000 as comision, " & _
-            " CDP.Vendedor, CDP.CuentaOrden1,CDP.CuentaOrden2, CDP.Corredor, CDP.Idarticulo, CDP.Entregador, CDP.FechaDescarga, CDP.FechaDeCarga, CDP.NetoFinal/1000 as NetoFinal,CDP.Anulada,CDP.Exporta," & _
-             " 0 as [K_Orden], " & vbCrLf & _
-        "       CLIVEN.Razonsocial as   Titular  , " & vbCrLf & _
-        "       CLICOR.Nombre as    [Corredor ], " & vbCrLf & _
-        "       CLIENT.Razonsocial  as  [Destinatario], " & vbCrLf & _
-        "         Articulos.Descripcion as  Producto, " & vbCrLf & _
-        "         LOCDES.Descripcion   as  Destino , " & vbCrLf & _
-        "       FechaDescarga   as  Arribo , FechaArribo, " & vbCrLf & _
-        "      NumeroCartaDePorte   as  [C.Porte]  , " & vbCrLf & _
-        "       Contrato  as  Contrato , " & vbCrLf & _
-        "       NetoPto   as  [Kg.Proc.] , " & vbCrLf & _
-        "       BrutoPto   as  [Kg.Bruto Proc.], " & vbCrLf & _
-        "       ''   as  [Kg.Dif.] , " & vbCrLf & _
-        "         Humedad as  [H.%]	 , " & vbCrLf & _
-        "       TaraPto   as  [Kg.Tara Proc.] , " & vbCrLf & _
-        "       BrutoFinal   as  [Kg.Bruto Desc.] , " & vbCrLf & _
-        "       TaraFinal   as  [Kg.Tara Desc.] , " & vbCrLf & _
-        "       NetoFinal/1   as  [Kg.Neto Desc.] , " & vbCrLf & _
-        "         Merma as [Mer.Kg.] , " & vbCrLf & _
-        "         Merma as Otras , " & vbCrLf & _
-        "        NetoProc  as  [Kg.Netos] , " & vbCrLf & _
-        "        LOCORI.Nombre as    [Procedcia.], PuntoVenta, " & vbCrLf & _
-        "       ExcluirDeSubcontratistas  " & vbCrLf & _
-                      " FROM CartasDePorte CDP " & vbCrLf & _
-                       " LEFT OUTER JOIN Clientes CLIVEN ON CDP.Vendedor = CLIVEN.IdCliente " & vbCrLf & _
-                       " LEFT OUTER JOIN Clientes CLICO1 ON CDP.CuentaOrden1 = CLICO1.IdCliente " & vbCrLf & _
-                       " LEFT OUTER JOIN Clientes CLICO2 ON CDP.CuentaOrden2 = CLICO2.IdCliente " & vbCrLf & _
-                       " LEFT OUTER JOIN Vendedores CLICOR ON CDP.Corredor = CLICOR.IdVendedor " & vbCrLf & _
-        " LEFT OUTER JOIN Clientes CLIENT ON CDP.Entregador = CLIENT.IdCliente " & vbCrLf & _
-                      " LEFT OUTER JOIN Clientes CLISC1 ON CDP.Subcontr1 = CLISC1.IdCliente" & _
-        " LEFT OUTER JOIN Clientes CLISC2 ON CDP.Subcontr2 = CLISC2.IdCliente " & _
-        " LEFT OUTER JOIN Articulos ON CDP.IdArticulo = Articulos.IdArticulo " & vbCrLf & _
-                       " LEFT OUTER JOIN Transportistas TRANS ON CDP.IdTransportista = TRANS.IdTransportista " & vbCrLf & _
-                       " LEFT OUTER JOIN Choferes CHOF ON CDP.IdChofer = CHOF.IdChofer " & vbCrLf & _
-                       " LEFT OUTER JOIN Localidades LOCORI ON CDP.Procedencia = LOCORI.IdLocalidad " & vbCrLf & _
-                       " LEFT OUTER JOIN WilliamsDestinos LOCDES ON CDP.Destino = LOCDES.IdWilliamsDestino " & vbCrLf & _
-                    "" & vbCrLf & _
-                    "" & vbCrLf & _
-                    " UNION ALL " & vbCrLf & _
-                    "" & vbCrLf & _
-        "SELECT  CLISC2.Razonsocial as SubcontrDesc, tarifasubcontratista2,tarifasubcontratista2*netofinal/1000 as comision,  " & _
-            " CDP.Vendedor, CDP.CuentaOrden1,CDP.CuentaOrden2, CDP.Corredor, CDP.Idarticulo, CDP.Entregador, CDP.FechaDescarga, CDP.FechaDeCarga, CDP.NetoFinal/1000 as NetoFinal,CDP.Anulada,CDP.Exporta," & _
-                   " 0 as [K_Orden], " & vbCrLf & _
-        "       CLIVEN.Razonsocial as   Titular  , " & vbCrLf & _
-        "       CLICOR.Nombre as    [Corredor ], " & vbCrLf & _
-        "       CLIENT.Razonsocial  as  [Destinatario], " & vbCrLf & _
-        "         Articulos.Descripcion as  Producto, " & vbCrLf & _
-        "         LOCDES.Descripcion   as  Destino , " & vbCrLf & _
-        "       FechaDescarga   as  Arribo ,  FechaArribo, " & vbCrLf & _
-        "      NumeroCartaDePorte   as  [C.Porte]  , " & vbCrLf & _
-        "       Contrato  as  Contrato , " & vbCrLf & _
-        "       NetoPto   as  [Kg.Proc.] , " & vbCrLf & _
-        "       BrutoPto   as  [Kg.Bruto Proc.], " & vbCrLf & _
-        "       ''   as  [Kg.Dif.] , " & vbCrLf & _
-        "         Humedad as  [H.%]	 , " & vbCrLf & _
-        "       TaraPto   as  [Kg.Tara Proc.] , " & vbCrLf & _
-        "       BrutoFinal   as  [Kg.Bruto Desc.] , " & vbCrLf & _
-        "       TaraFinal   as  [Kg.Tara Desc.] , " & vbCrLf & _
-        "       NetoFinal   as  [Kg.Neto Desc.] , " & vbCrLf & _
-        "         Merma as [Mer.Kg.] , " & vbCrLf & _
-        "         Merma as Otras , " & vbCrLf & _
-        "        NetoProc  as  [Kg.Netos] , " & vbCrLf & _
-        "        LOCORI.Nombre as    [Procedcia.], PuntoVenta, " & vbCrLf & _
-        "       ExcluirDeSubcontratistas  " & vbCrLf & _
-                      " FROM CartasDePorte CDP " & vbCrLf & _
-                      " LEFT OUTER JOIN Clientes CLIVEN ON CDP.Vendedor = CLIVEN.IdCliente " & vbCrLf & _
-                       " LEFT OUTER JOIN Clientes CLICO1 ON CDP.CuentaOrden1 = CLICO1.IdCliente " & vbCrLf & _
-                       " LEFT OUTER JOIN Clientes CLICO2 ON CDP.CuentaOrden2 = CLICO2.IdCliente " & vbCrLf & _
-                       " LEFT OUTER JOIN Vendedores CLICOR ON CDP.Corredor = CLICOR.IdVendedor " & vbCrLf & _
-        " LEFT OUTER JOIN Clientes CLIENT ON CDP.Entregador = CLIENT.IdCliente " & vbCrLf & _
-                      " LEFT OUTER JOIN Clientes CLISC1 ON CDP.Subcontr1 = CLISC1.IdCliente" & _
-        " LEFT OUTER JOIN Clientes CLISC2 ON CDP.Subcontr2 = CLISC2.IdCliente " & _
-                       " LEFT OUTER JOIN Articulos ON CDP.IdArticulo = Articulos.IdArticulo " & vbCrLf & _
-                       " LEFT OUTER JOIN Transportistas TRANS ON CDP.IdTransportista = TRANS.IdTransportista " & vbCrLf & _
-                       " LEFT OUTER JOIN Choferes CHOF ON CDP.IdChofer = CHOF.IdChofer " & vbCrLf & _
-                       " LEFT OUTER JOIN Localidades LOCORI ON CDP.Procedencia = LOCORI.IdLocalidad " & vbCrLf & _
-                       " LEFT OUTER JOIN WilliamsDestinos LOCDES ON CDP.Destino = LOCDES.IdWilliamsDestino " & vbCrLf & _
-                    "" & vbCrLf & _
-                    "" & vbCrLf & _
-                "" & vbCrLf & _
-                "" & vbCrLf & _
-                "" & vbCrLf & _
+            Dim strSQL = String.Format(" SELECT  CLISC1.Razonsocial as SubcontrDesc, tarifasubcontratista1,tarifasubcontratista1*netofinal /1000 as comision, " &
+            " CDP.Vendedor, CDP.CuentaOrden1,CDP.CuentaOrden2, CDP.Corredor, CDP.Idarticulo, CDP.Entregador, CDP.FechaDescarga, CDP.FechaDeCarga, CDP.NetoFinal/1000 as NetoFinal,CDP.Anulada,CDP.Exporta," &
+             " 0 as [K_Orden], " & vbCrLf &
+        "       CLIVEN.Razonsocial as   Titular  , " & vbCrLf &
+        "       CLICOR.Nombre as    [Corredor ], " & vbCrLf &
+        "       CLIENT.Razonsocial  as  [Destinatario], " & vbCrLf &
+        "         Articulos.Descripcion as  Producto, " & vbCrLf &
+        "         LOCDES.Descripcion   as  Destino , " & vbCrLf &
+        "       FechaDescarga   as  Arribo , FechaArribo, " & vbCrLf &
+        "      NumeroCartaDePorte   as  [C.Porte]  , " & vbCrLf &
+        "       Contrato  as  Contrato , " & vbCrLf &
+        "       NetoPto   as  [Kg.Proc.] , " & vbCrLf &
+        "       BrutoPto   as  [Kg.Bruto Proc.], " & vbCrLf &
+        "       ''   as  [Kg.Dif.] , " & vbCrLf &
+        "         Humedad as  [H.%]	 , " & vbCrLf &
+        "       TaraPto   as  [Kg.Tara Proc.] , " & vbCrLf &
+        "       BrutoFinal   as  [Kg.Bruto Desc.] , " & vbCrLf &
+        "       TaraFinal   as  [Kg.Tara Desc.] , " & vbCrLf &
+        "       NetoFinal/1   as  [Kg.Neto Desc.] , " & vbCrLf &
+        "         Merma as [Mer.Kg.] , " & vbCrLf &
+        "         Merma as Otras , " & vbCrLf &
+        "        NetoProc  as  [Kg.Netos] , " & vbCrLf &
+        "        LOCORI.Nombre as    [Procedcia.], PuntoVenta, " & vbCrLf &
+        "       ExcluirDeSubcontratistas  " & vbCrLf &
+                      " FROM CartasDePorte CDP " & vbCrLf &
+                       " LEFT OUTER JOIN Clientes CLIVEN ON CDP.Vendedor = CLIVEN.IdCliente " & vbCrLf &
+                       " LEFT OUTER JOIN Clientes CLICO1 ON CDP.CuentaOrden1 = CLICO1.IdCliente " & vbCrLf &
+                       " LEFT OUTER JOIN Clientes CLICO2 ON CDP.CuentaOrden2 = CLICO2.IdCliente " & vbCrLf &
+                       " LEFT OUTER JOIN Vendedores CLICOR ON CDP.Corredor = CLICOR.IdVendedor " & vbCrLf &
+        " LEFT OUTER JOIN Clientes CLIENT ON CDP.Entregador = CLIENT.IdCliente " & vbCrLf &
+                      " LEFT OUTER JOIN Clientes CLISC1 ON CDP.Subcontr1 = CLISC1.IdCliente" &
+        " LEFT OUTER JOIN Clientes CLISC2 ON CDP.Subcontr2 = CLISC2.IdCliente " &
+        " LEFT OUTER JOIN Articulos ON CDP.IdArticulo = Articulos.IdArticulo " & vbCrLf &
+                       " LEFT OUTER JOIN Transportistas TRANS ON CDP.IdTransportista = TRANS.IdTransportista " & vbCrLf &
+                       " LEFT OUTER JOIN Choferes CHOF ON CDP.IdChofer = CHOF.IdChofer " & vbCrLf &
+                       " LEFT OUTER JOIN Localidades LOCORI ON CDP.Procedencia = LOCORI.IdLocalidad " & vbCrLf &
+                       " LEFT OUTER JOIN WilliamsDestinos LOCDES ON CDP.Destino = LOCDES.IdWilliamsDestino " & vbCrLf &
+                    "" & vbCrLf &
+                    "" & vbCrLf &
+                    " UNION ALL " & vbCrLf &
+                    "" & vbCrLf &
+        "SELECT  CLISC2.Razonsocial as SubcontrDesc, tarifasubcontratista2,tarifasubcontratista2*netofinal/1000 as comision,  " &
+            " CDP.Vendedor, CDP.CuentaOrden1,CDP.CuentaOrden2, CDP.Corredor, CDP.Idarticulo, CDP.Entregador, CDP.FechaDescarga, CDP.FechaDeCarga, CDP.NetoFinal/1000 as NetoFinal,CDP.Anulada,CDP.Exporta," &
+                   " 0 as [K_Orden], " & vbCrLf &
+        "       CLIVEN.Razonsocial as   Titular  , " & vbCrLf &
+        "       CLICOR.Nombre as    [Corredor ], " & vbCrLf &
+        "       CLIENT.Razonsocial  as  [Destinatario], " & vbCrLf &
+        "         Articulos.Descripcion as  Producto, " & vbCrLf &
+        "         LOCDES.Descripcion   as  Destino , " & vbCrLf &
+        "       FechaDescarga   as  Arribo ,  FechaArribo, " & vbCrLf &
+        "      NumeroCartaDePorte   as  [C.Porte]  , " & vbCrLf &
+        "       Contrato  as  Contrato , " & vbCrLf &
+        "       NetoPto   as  [Kg.Proc.] , " & vbCrLf &
+        "       BrutoPto   as  [Kg.Bruto Proc.], " & vbCrLf &
+        "       ''   as  [Kg.Dif.] , " & vbCrLf &
+        "         Humedad as  [H.%]	 , " & vbCrLf &
+        "       TaraPto   as  [Kg.Tara Proc.] , " & vbCrLf &
+        "       BrutoFinal   as  [Kg.Bruto Desc.] , " & vbCrLf &
+        "       TaraFinal   as  [Kg.Tara Desc.] , " & vbCrLf &
+        "       NetoFinal   as  [Kg.Neto Desc.] , " & vbCrLf &
+        "         Merma as [Mer.Kg.] , " & vbCrLf &
+        "         Merma as Otras , " & vbCrLf &
+        "        NetoProc  as  [Kg.Netos] , " & vbCrLf &
+        "        LOCORI.Nombre as    [Procedcia.], PuntoVenta, " & vbCrLf &
+        "       ExcluirDeSubcontratistas  " & vbCrLf &
+                      " FROM CartasDePorte CDP " & vbCrLf &
+                      " LEFT OUTER JOIN Clientes CLIVEN ON CDP.Vendedor = CLIVEN.IdCliente " & vbCrLf &
+                       " LEFT OUTER JOIN Clientes CLICO1 ON CDP.CuentaOrden1 = CLICO1.IdCliente " & vbCrLf &
+                       " LEFT OUTER JOIN Clientes CLICO2 ON CDP.CuentaOrden2 = CLICO2.IdCliente " & vbCrLf &
+                       " LEFT OUTER JOIN Vendedores CLICOR ON CDP.Corredor = CLICOR.IdVendedor " & vbCrLf &
+        " LEFT OUTER JOIN Clientes CLIENT ON CDP.Entregador = CLIENT.IdCliente " & vbCrLf &
+                      " LEFT OUTER JOIN Clientes CLISC1 ON CDP.Subcontr1 = CLISC1.IdCliente" &
+        " LEFT OUTER JOIN Clientes CLISC2 ON CDP.Subcontr2 = CLISC2.IdCliente " &
+                       " LEFT OUTER JOIN Articulos ON CDP.IdArticulo = Articulos.IdArticulo " & vbCrLf &
+                       " LEFT OUTER JOIN Transportistas TRANS ON CDP.IdTransportista = TRANS.IdTransportista " & vbCrLf &
+                       " LEFT OUTER JOIN Choferes CHOF ON CDP.IdChofer = CHOF.IdChofer " & vbCrLf &
+                       " LEFT OUTER JOIN Localidades LOCORI ON CDP.Procedencia = LOCORI.IdLocalidad " & vbCrLf &
+                       " LEFT OUTER JOIN WilliamsDestinos LOCDES ON CDP.Destino = LOCDES.IdWilliamsDestino " & vbCrLf &
+                    "" & vbCrLf &
+                    "" & vbCrLf &
+                "" & vbCrLf &
+                "" & vbCrLf &
+                "" & vbCrLf &
             "")
 
 
