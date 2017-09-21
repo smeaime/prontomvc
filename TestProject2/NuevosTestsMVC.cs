@@ -175,7 +175,7 @@ namespace ProntoMVC.TestsMVC
             rmdet.IdControlCalidad = 1;
             rmdet.FechaEntrega = DateTime.Today;
             rm.DetalleRequerimientos.Add(rmdet);
-            //rm.DetalleRequerimientos.Add(new MVCent.DetalleRequerimiento { IdArticulo = 11, Cantidad = 3255 });
+            rm.DetalleRequerimientos.Add(new MVCent.DetalleRequerimiento { IdArticulo = 11, Cantidad = 3255 });
             JsonResult result = c.BatchUpdate(rm);
 
 
