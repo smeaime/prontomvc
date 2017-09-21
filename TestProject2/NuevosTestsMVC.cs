@@ -153,6 +153,13 @@ namespace ProntoMVC.TestsMVC
 
 
 
+        [TestMethod]
+        public void usuariosdecompras_24848()
+        {
+            // como puedo crear una RM para que aparezca en el "RMs Pendientes de Asignar"?
+
+        }
+
 
         [TestMethod]
         public void usuariosdecompras_46429()
