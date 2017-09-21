@@ -1048,7 +1048,7 @@ namespace ProntoMVC.Controllers
             string nSC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString(), oStaticMembershipService));
             DataTable dt = EntidadManager.GetStoreProcedure(nSC, "Empleados_TX_PorSector", "Compras");
             IEnumerable<DataRow> rows = dt.AsEnumerable();
-            var sq = (from r in rows select new { IdEmpleado = r[0], Nombre = r[1] }).ToList();
+            var sq = (from r in rows orderby r[1]  select new { IdEmpleado = r[0], Nombre = r[1] }).ToList();
             // ViewBag.Aprobo = new SelectList(db.Empleados.Where(x => (x.Activo ?? "SI") == "SI"  ).OrderBy(x => x.Nombre), "IdEmpleado", "Nombre", o.Aprobo);
 
             ViewBag.Aprobo = new SelectList(sq, "IdEmpleado", "Nombre", o.Aprobo);
@@ -1779,7 +1779,8 @@ namespace ProntoMVC.Controllers
 //                        }
 
 
-                        ).Where(campo).OrderBy(sidx + " " + sord)
+                        )
+                // .Where(campo).OrderBy(sidx + " " + sord)
                 //.Skip((currentPage - 1) * pageSize).Take(pageSize)
 .ToList();
 
