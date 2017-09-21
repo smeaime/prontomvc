@@ -17,7 +17,6 @@
 
 <script type="text/javascript">
 
-    var $grid = "";
     var lastSelectedId;
     var lastSelectediCol;
     var lastSelectediRow;
@@ -46,9 +45,25 @@
     });
 
     function GrabarFila(gridId) {
-        var dataFromTheRow = $grid.jqGrid('getRowData', gridId);
+        var i, a, err = "";
+
+        $('#Lista').jqGrid('setSelection', gridId);
+        var iRow = $('#' + $.jgrid.jqID(gridId))[0].rowIndex;
+        var dataFromTheRow = $('#Lista').jqGrid('getRowData', gridId)
+        var colModel = $('#Lista').jqGrid('getGridParam', 'colModel');
+
+        for (i = 0; i < colModel.length; i++) {
+            if (colModel[i].editable) {
+                a = dataFromTheRow[colModel[i].name];
+                if (typeof a != "undefined") {
+                    if (a.substring(0, 1) == "<") {
+                        err = err + "Hay campos en modo edicion, confirmelos con enter antes de grabar.\n"
+                    }
+                }
+            }
+        }
+
         var datos = $("#formid").serializeObject();
-        var err;
 
         datos.IdRubro = gridId;
         datos.IdTipoOperacion = dataFromTheRow.IdTipoOperacion;
@@ -83,7 +98,6 @@
         datos.CuentaAdicionalCompras9 = dataFromTheRow.CuentaAdicionalCompras9;
         datos.CuentaAdicionalCompras10 = dataFromTheRow.CuentaAdicionalCompras10;
 
-        err = ""
         if (datos.Descripcion == "" || datos.Descripcion == undefined) err = err + "Falta definir el nombre.\n"
 
         if (err != "") {
@@ -98,7 +112,7 @@
                 data: JSON.stringify(datos),
                 success: function (result) {
                     if (result) {
-                        $grid.jqGrid('setRowData', gridId, { act: "" });
+                        $('#Lista').jqGrid('setRowData', gridId, { act: "" });
                         var rowid = $('#Lista').getGridParam('selrow');
                         var valor = result.IdRubro;
                         if (valor == "") { valor = "0"; }
@@ -130,10 +144,10 @@
     };
 
     function EliminarFila(gridId) {
-        var dataFromTheRow = $grid.jqGrid('getRowData', gridId);
+        var dataFromTheRow = $('#Lista').jqGrid('getRowData', gridId);
         var idprincipal = dataFromTheRow['IdRubro'];
         if (idprincipal <= 0) {
-            $grid.jqGrid('delRowData', gridId);
+            $('#Lista').jqGrid('delRowData', gridId);
         } else {
             $.ajax({
                 type: 'POST',
@@ -143,7 +157,7 @@
                 data: JSON.stringify({ id: idprincipal }),
                 success: function (result) {
                     if (result) {
-                        $grid.jqGrid('delRowData', gridId);
+                        $('#Lista').jqGrid('delRowData', gridId);
                     } else {
                         alert('No se pudo eliminar el registro.');
                     }
@@ -168,35 +182,6 @@
                 }
             });
         };
-    };
-
-    window.parent.document.body.onclick = saveEditedCell; // attach to parent window if any
-    document.body.onclick = saveEditedCell; // attach to current document.
-
-    function saveEditedCell(evt) {
-        var target = $(evt.target);
-
-        if ($grid) {
-            var isCellClicked = $grid.find(target).length; // check if click is inside jqgrid
-            if (gridCellWasClicked && !isCellClicked) // check if a valid click
-            {
-                gridCellWasClicked = false;
-                $grid.jqGrid("saveCell", lastSelectediRow2, lastSelectediCol2);
-            }
-        }
-
-        //$grid = "";
-        gridCellWasClicked = false;
-
-        if (jQuery("#Lista").find(target).length) {
-            $grid = $('#Lista');
-            grillaenfoco = true;
-        }
-        if (grillaenfoco) {
-            gridCellWasClicked = true;
-            lastSelectediRow2 = lastSelectediRow;
-            lastSelectediCol2 = lastSelectediCol;
-        }
     };
 
     function MarcarSeleccionadosParaEliminar(grid) {
@@ -232,7 +217,7 @@
         'use strict';
 
         $('#Lista').jqGrid({
-            url: ROOT + 'Rubro/TT/',
+            url: ROOT + 'Rubro/Rubros_DynamicGridData/',
             postData: {},
             datatype: 'json',
             mtype: 'POST',
@@ -241,25 +226,25 @@
                        'Cuenta ventas', 'Cuenta compras', 'Cuenta activo', 'Cuenta adicional compras 1', 'Cuenta adicional compras 2', 'Cuenta adicional compras 3', 'Cuenta adicional compras 4',
                        'Cuenta adicional compras 5', 'Cuenta adicional compras 6', 'Cuenta adicional compras 7', 'Cuenta adicional compras 8', 'Cuenta adicional compras 9', 'Cuenta adicional compras 10'],
             colModel: [
-                        { name: 'act', index: 'act', align: 'center', width: 60, editable: false, hidden: false },
-                        { name: 'IdRubro', index: 'IdRubro', align: 'left', width: 100, editable: false, hidden: true },
-                        { name: 'IdTipoOperacion', index: 'IdTipoOperacion', align: 'left', width: 100, editable: false, hidden: true },
-                        { name: 'IdCuenta', index: 'IdCuenta', align: 'left', width: 100, editable: false, hidden: true },
-                        { name: 'IdCuentaCompras', index: 'IdCuentaCompras', align: 'left', width: 100, editable: false, hidden: true },
-                        { name: 'IdCuentaComprasActivo', index: 'IdCuentaComprasActivo', align: 'left', width: 100, editable: false, hidden: true },
-                        { name: 'IdCuentaCompras1', index: 'IdCuentaCompras1', align: 'left', width: 100, editable: false, hidden: true },
-                        { name: 'IdCuentaCompras2', index: 'IdCuentaCompras2', align: 'left', width: 100, editable: false, hidden: true },
-                        { name: 'IdCuentaCompras3', index: 'IdCuentaCompras3', align: 'left', width: 100, editable: false, hidden: true },
-                        { name: 'IdCuentaCompras4', index: 'IdCuentaCompras4', align: 'left', width: 100, editable: false, hidden: true },
-                        { name: 'IdCuentaCompras5', index: 'IdCuentaCompras5', align: 'left', width: 100, editable: false, hidden: true },
-                        { name: 'IdCuentaCompras6', index: 'IdCuentaCompras6', align: 'left', width: 100, editable: false, hidden: true },
-                        { name: 'IdCuentaCompras7', index: 'IdCuentaCompras7', align: 'left', width: 100, editable: false, hidden: true },
-                        { name: 'IdCuentaCompras8', index: 'IdCuentaCompras8', align: 'left', width: 100, editable: false, hidden: true },
-                        { name: 'IdCuentaCompras9', index: 'IdCuentaCompras9', align: 'left', width: 100, editable: false, hidden: true },
-                        { name: 'IdCuentaCompras10', index: 'IdCuentaCompras10', align: 'left', width: 100, editable: false, hidden: true },
-                        { name: 'Descripcion', index: 'Descripcion', width: 200, align: 'left', editable: true, editrules: { required: false }, edittype: 'text', label: 'TB' },
+                        { name: 'act', index: 'act', align: 'center', width: 60, search: false, editable: false, hidden: false },
+                        { name: 'IdRubro', index: 'IdRubro', align: 'left', width: 100, search: false, editable: false, hidden: true },
+                        { name: 'IdTipoOperacion', index: 'IdTipoOperacion', align: 'left', width: 100, search: false, editable: false, hidden: true },
+                        { name: 'IdCuenta', index: 'IdCuenta', align: 'left', width: 100, search: false, editable: false, hidden: true },
+                        { name: 'IdCuentaCompras', index: 'IdCuentaCompras', align: 'left', width: 100, search: false, editable: false, hidden: true },
+                        { name: 'IdCuentaComprasActivo', index: 'IdCuentaComprasActivo', align: 'left', width: 100, search: false, editable: false, hidden: true },
+                        { name: 'IdCuentaCompras1', index: 'IdCuentaCompras1', align: 'left', width: 100, search: false, editable: false, hidden: true },
+                        { name: 'IdCuentaCompras2', index: 'IdCuentaCompras2', align: 'left', width: 100, search: false, editable: false, hidden: true },
+                        { name: 'IdCuentaCompras3', index: 'IdCuentaCompras3', align: 'left', width: 100, search: false, editable: false, hidden: true },
+                        { name: 'IdCuentaCompras4', index: 'IdCuentaCompras4', align: 'left', width: 100, search: false, editable: false, hidden: true },
+                        { name: 'IdCuentaCompras5', index: 'IdCuentaCompras5', align: 'left', width: 100, search: false, editable: false, hidden: true },
+                        { name: 'IdCuentaCompras6', index: 'IdCuentaCompras6', align: 'left', width: 100, search: false, editable: false, hidden: true },
+                        { name: 'IdCuentaCompras7', index: 'IdCuentaCompras7', align: 'left', width: 100, search: false, editable: false, hidden: true },
+                        { name: 'IdCuentaCompras8', index: 'IdCuentaCompras8', align: 'left', width: 100, search: false, editable: false, hidden: true },
+                        { name: 'IdCuentaCompras9', index: 'IdCuentaCompras9', align: 'left', width: 100, search: false, editable: false, hidden: true },
+                        { name: 'IdCuentaCompras10', index: 'IdCuentaCompras10', align: 'left', width: 100, search: false, editable: false, hidden: true },
+                        { name: 'Descripcion', index: 'Descripcion', width: 200, align: 'left', search: true, editable: true, editrules: { required: false }, edittype: 'text', label: 'TB' },
                         {
-                            name: 'Codigo', index: 'Codigo', width: 80, align: 'center', editable: true, editrules: { required: false, number: true }, edittype: 'text', label: 'TB',
+                            name: 'Codigo', index: 'Codigo', width: 80, align: 'center', search: true, editable: true, editrules: { required: false, number: true }, edittype: 'text', label: 'TB',
                             editoptions: {
                                 maxlength: 20, defaultValue: '0.00',
                                 dataEvents: [
@@ -273,9 +258,9 @@
                                 }]
                             }
                         },
-                        { name: 'Abreviatura', index: 'Abreviatura', width: 200, align: 'left', editable: true, editrules: { required: false }, edittype: 'text', label: 'TB' },
+                        { name: 'Abreviatura', index: 'Abreviatura', width: 200, align: 'left', search: true, editable: true, editrules: { required: false }, edittype: 'text', label: 'TB' },
                         {
-                            name: 'TipoOperacion', index: 'TipoOperacion', align: 'left', width: 200, editable: true, hidden: false, edittype: 'select', editrules: { required: false },
+                            name: 'TipoOperacion', index: 'TipoOperacion', align: 'left', width: 200, search: true, editable: true, hidden: false, edittype: 'select', editrules: { required: false },
                             editoptions: {
                                 dataUrl: ROOT + 'TiposOperacione/GetTiposOperaciones',
                                 dataInit: function (elem) {
@@ -304,7 +289,7 @@
                             },
                         },
                         {
-                            name: 'CuentaVentas', index: 'CuentaVentas', align: 'left', width: 200, editable: true, hidden: false, edittype: 'select', editrules: { required: false },
+                            name: 'CuentaVentas', index: 'CuentaVentas', align: 'left', width: 200, search: true, editable: true, hidden: false, edittype: 'select', editrules: { required: false },
                             editoptions: {
                                 dataUrl: ROOT + 'Cuenta/GetCuentasConMadres',
                                 dataInit: function (elem) {
@@ -333,7 +318,7 @@
                             },
                         },
                         {
-                            name: 'CuentaCompras', index: 'CuentaCompras', align: 'left', width: 200, editable: true, hidden: false, edittype: 'select', editrules: { required: false },
+                            name: 'CuentaCompras', index: 'CuentaCompras', align: 'left', width: 200, search: true, editable: true, hidden: false, edittype: 'select', editrules: { required: false },
                             editoptions: {
                                 dataUrl: ROOT + 'Cuenta/GetCuentasConMadres',
                                 dataInit: function (elem) {
@@ -362,7 +347,7 @@
                             },
                         },
                         {
-                            name: 'CuentaActivo', index: 'CuentaActivo', align: 'left', width: 200, editable: true, hidden: false, edittype: 'select', editrules: { required: false },
+                            name: 'CuentaActivo', index: 'CuentaActivo', align: 'left', width: 200, search: false, editable: true, hidden: false, edittype: 'select', editrules: { required: false },
                             editoptions: {
                                 dataUrl: ROOT + 'Cuenta/GetCuentasConMadres',
                                 dataInit: function (elem) {
@@ -391,7 +376,7 @@
                             },
                         },
                         {
-                            name: 'CuentaAdicionalCompras1', index: 'CuentaAdicionalCompras1', align: 'left', width: 200, editable: true, hidden: false, edittype: 'select', editrules: { required: false },
+                            name: 'CuentaAdicionalCompras1', index: 'CuentaAdicionalCompras1', align: 'left', width: 200, search: false, editable: true, hidden: false, edittype: 'select', editrules: { required: false },
                             editoptions: {
                                 dataUrl: ROOT + 'Cuenta/GetCuentasConMadres',
                                 dataInit: function (elem) {
@@ -420,7 +405,7 @@
                             },
                         },
                         {
-                            name: 'CuentaAdicionalCompras2', index: 'CuentaAdicionalCompras2', align: 'left', width: 200, editable: true, hidden: false, edittype: 'select', editrules: { required: false },
+                            name: 'CuentaAdicionalCompras2', index: 'CuentaAdicionalCompras2', align: 'left', width: 200, search: false, editable: true, hidden: false, edittype: 'select', editrules: { required: false },
                             editoptions: {
                                 dataUrl: ROOT + 'Cuenta/GetCuentasConMadres',
                                 dataInit: function (elem) {
@@ -449,7 +434,7 @@
                             },
                         },
                         {
-                            name: 'CuentaAdicionalCompras3', index: 'CuentaAdicionalCompras3', align: 'left', width: 200, editable: true, hidden: false, edittype: 'select', editrules: { required: false },
+                            name: 'CuentaAdicionalCompras3', index: 'CuentaAdicionalCompras3', align: 'left', width: 200, search: false, editable: true, hidden: false, edittype: 'select', editrules: { required: false },
                             editoptions: {
                                 dataUrl: ROOT + 'Cuenta/GetCuentasConMadres',
                                 dataInit: function (elem) {
@@ -478,7 +463,7 @@
                             },
                         },
                         {
-                            name: 'CuentaAdicionalCompras4', index: 'CuentaAdicionalCompras4', align: 'left', width: 200, editable: true, hidden: false, edittype: 'select', editrules: { required: false },
+                            name: 'CuentaAdicionalCompras4', index: 'CuentaAdicionalCompras4', align: 'left', width: 200, search: false, editable: true, hidden: false, edittype: 'select', editrules: { required: false },
                             editoptions: {
                                 dataUrl: ROOT + 'Cuenta/GetCuentasConMadres',
                                 dataInit: function (elem) {
@@ -507,7 +492,7 @@
                             },
                         },
                         {
-                            name: 'CuentaAdicionalCompras5', index: 'CuentaAdicionalCompras5', align: 'left', width: 200, editable: true, hidden: false, edittype: 'select', editrules: { required: false },
+                            name: 'CuentaAdicionalCompras5', index: 'CuentaAdicionalCompras5', align: 'left', width: 200, search: false, editable: true, hidden: false, edittype: 'select', editrules: { required: false },
                             editoptions: {
                                 dataUrl: ROOT + 'Cuenta/GetCuentasConMadres',
                                 dataInit: function (elem) {
@@ -536,7 +521,7 @@
                             },
                         },
                         {
-                            name: 'CuentaAdicionalCompras6', index: 'CuentaAdicionalCompras6', align: 'left', width: 200, editable: true, hidden: false, edittype: 'select', editrules: { required: false },
+                            name: 'CuentaAdicionalCompras6', index: 'CuentaAdicionalCompras6', align: 'left', width: 200, search: false, editable: true, hidden: false, edittype: 'select', editrules: { required: false },
                             editoptions: {
                                 dataUrl: ROOT + 'Cuenta/GetCuentasConMadres',
                                 dataInit: function (elem) {
@@ -565,7 +550,7 @@
                             },
                         },
                         {
-                            name: 'CuentaAdicionalCompras7', index: 'CuentaAdicionalCompras7', align: 'left', width: 200, editable: true, hidden: false, edittype: 'select', editrules: { required: false },
+                            name: 'CuentaAdicionalCompras7', index: 'CuentaAdicionalCompras7', align: 'left', width: 200, search: false, editable: true, hidden: false, edittype: 'select', editrules: { required: false },
                             editoptions: {
                                 dataUrl: ROOT + 'Cuenta/GetCuentasConMadres',
                                 dataInit: function (elem) {
@@ -594,7 +579,7 @@
                             },
                         },
                         {
-                            name: 'CuentaAdicionalCompras8', index: 'CuentaAdicionalCompras8', align: 'left', width: 200, editable: true, hidden: false, edittype: 'select', editrules: { required: false },
+                            name: 'CuentaAdicionalCompras8', index: 'CuentaAdicionalCompras8', align: 'left', width: 200, search: false, editable: true, hidden: false, edittype: 'select', editrules: { required: false },
                             editoptions: {
                                 dataUrl: ROOT + 'Cuenta/GetCuentasConMadres',
                                 dataInit: function (elem) {
@@ -623,7 +608,7 @@
                             },
                         },
                         {
-                            name: 'CuentaAdicionalCompras9', index: 'CuentaAdicionalCompras9', align: 'left', width: 200, editable: true, hidden: false, edittype: 'select', editrules: { required: false },
+                            name: 'CuentaAdicionalCompras9', index: 'CuentaAdicionalCompras9', align: 'left', width: 200, search: false, editable: true, hidden: false, edittype: 'select', editrules: { required: false },
                             editoptions: {
                                 dataUrl: ROOT + 'Cuenta/GetCuentasConMadres',
                                 dataInit: function (elem) {
@@ -652,7 +637,7 @@
                             },
                         },
                         {
-                            name: 'CuentaAdicionalCompras10', index: 'CuentaAdicionalCompras10', align: 'left', width: 200, editable: true, hidden: false, edittype: 'select', editrules: { required: false },
+                            name: 'CuentaAdicionalCompras10', index: 'CuentaAdicionalCompras10', align: 'left', width: 200, search: false, editable: true, hidden: false, edittype: 'select', editrules: { required: false },
                             editoptions: {
                                 dataUrl: ROOT + 'Cuenta/GetCuentasConMadres',
                                 dataInit: function (elem) {
@@ -741,6 +726,11 @@
                                                 MarcarSeleccionadosParaEliminar(jQuery("#Lista"));
                                             },
                                         });
+        jQuery("#Lista").filterToolbar({
+            stringResult: true, searchOnEnter: true,
+            defaultSearch: 'cn',
+            enableClear: false
+        });
     });
 
 </script>

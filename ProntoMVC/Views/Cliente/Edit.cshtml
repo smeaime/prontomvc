@@ -31,6 +31,27 @@
                         </script>
 
                     </div>
+
+                    <style>
+                        .nav-tabs{
+                              background-color:#AEB6BF;
+                            }
+                            .tab-content{
+                                background-color:#AEB6BF;
+                                color:#fff;
+                                padding:5px
+                            }
+                            .nav-tabs > li > a{
+                                border: medium none;
+                            }
+                            .nav-tabs > li > a:hover{
+                                background-color: #303136 !important;
+                                border: medium none;
+                                border-radius: 0;
+                                color:#fff;
+                            }
+                    </style>
+
                     @*<style>
                         body {
                             margin: 5px;
@@ -533,13 +554,13 @@
                 <div id="pie" style="position: absolute; bottom: -26px; background: rgb(236, 236, 236); width: 100%; height: 68px; padding-left: 0; margin-right: 15px;">
                     <hr style="margin: 0; border-top-color: #D8D4D4; border-bottom: 0px solid #ffffff;  " />
                     <div class="row-fluid " style="padding: 11px 0px 0px 0px">
-                        <div class="span6 pull-left">
-                        </div>
-                        <div class="span6 pull-right">
+                        @*<div class="span6 pull-left">
+                        </div>*@
+                        <div class="span12 pull-right">
                             <input type="button" id="grabar2" value="Aceptar" class="btn  btn-large btn-primary" />
                             @if (Model.IdCliente > 0)
                             { @Html.ActionLink("Eliminar", "DeleteConfirmed", new { id = Model.IdCliente }, new { @class = "btn  btn-large  btn-default" }) }
-                            @Html.ActionLink("Volver al listado", "Index", null, new { @class = "btn  btn-large  btn-link" })
+                            @Html.ActionLink("Volver al listado", "Index", null, new { @class = "btn btn-link  pull-right" })
                         </div>
                     </div>
                 </div>
@@ -551,13 +572,11 @@
 
         $(window).resize(function () {
             RefrescaAnchoGrillaDetalle();
-
             $("#conscroll").height($(window).height() - 120);
-                                            });
+        });
 
         $(function () {
             deshabilitarPanelesDerecho();
-
         })
 
     </script>
