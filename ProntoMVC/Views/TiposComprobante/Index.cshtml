@@ -9,7 +9,6 @@
 </div>
 
 <script type="text/javascript">
-    var $grid = "";
     var lastSelectedId;
     var lastSelectediCol;
     var lastSelectediRow;
@@ -38,9 +37,25 @@
     });
 
     function GrabarFila(gridId) {
-        var dataFromTheRow = $grid.jqGrid('getRowData', gridId);
+        var i, a, err = "";
+
+        $('#Lista').jqGrid('setSelection', gridId);
+        var iRow = $('#' + $.jgrid.jqID(gridId))[0].rowIndex;
+        var dataFromTheRow = $('#Lista').jqGrid('getRowData', gridId)
+        var colModel = $('#Lista').jqGrid('getGridParam', 'colModel');
+
+        for (i = 0; i < colModel.length; i++) {
+            if (colModel[i].editable) {
+                a = dataFromTheRow[colModel[i].name];
+                if (typeof a != "undefined") {
+                    if (a.substring(0, 1) == "<") {
+                        err = err + "Hay campos en modo edicion, confirmelos con enter antes de grabar.\n"
+                    }
+                }
+            }
+        }
+
         var datos = $("#formid").serializeObject();
-        var err;
 
         datos.IdTipoComprobante = gridId;
         datos.Descripcion = dataFromTheRow.Descripcion;
@@ -68,7 +83,6 @@
         datos.CodigoAFIP3_Letra_C = dataFromTheRow.CodigoAFIP3_Letra_C;
         datos.CodigoAFIP3_Letra_E = dataFromTheRow.CodigoAFIP3_Letra_E;
 
-        err = ""
         if (datos.Descripcion == "" || datos.Descripcion == undefined) err = err + "Falta definir el nombre.\n"
 
         if (err != "") {
@@ -83,7 +97,7 @@
                 data: JSON.stringify(datos),
                 success: function (result) {
                     if (result) {
-                        $grid.jqGrid('setRowData', gridId, { act: "" });
+                        $('#Lista').jqGrid('setRowData', gridId, { act: "" });
                         var rowid = $('#Lista').getGridParam('selrow');
                         var valor = result.IdTipoComprobante;
                         if (valor == "") { valor = "0"; }
@@ -114,10 +128,10 @@
     };
 
     function EliminarFila(gridId) {
-        var dataFromTheRow = $grid.jqGrid('getRowData', gridId);
+        var dataFromTheRow = $('#Lista').jqGrid('getRowData', gridId);
         var idprincipal = dataFromTheRow['IdTipoComprobante'];
         if (idprincipal <= 0) {
-            $grid.jqGrid('delRowData', gridId);
+            $('#Lista').jqGrid('delRowData', gridId);
         } else {
             $.ajax({
                 type: 'POST',
@@ -127,42 +141,13 @@
                 data: JSON.stringify({ id: idprincipal }),
                 success: function (result) {
                     if (result) {
-                        $grid.jqGrid('delRowData', gridId);
+                        $('#Lista').jqGrid('delRowData', gridId);
                     } else {
                         alert('No se pudo eliminar el registro.');
                     }
                 },
             });
         };
-    };
-
-    window.parent.document.body.onclick = saveEditedCell; // attach to parent window if any
-    document.body.onclick = saveEditedCell; // attach to current document.
-
-    function saveEditedCell(evt) {
-        var target = $(evt.target);
-
-        if ($grid) {
-            var isCellClicked = $grid.find(target).length; // check if click is inside jqgrid
-            if (gridCellWasClicked && !isCellClicked) // check if a valid click
-            {
-                gridCellWasClicked = false;
-                $grid.jqGrid("saveCell", lastSelectediRow2, lastSelectediCol2);
-            }
-        }
-
-        //$grid = "";
-        gridCellWasClicked = false;
-
-        if (jQuery("#Lista").find(target).length) {
-            $grid = $('#Lista');
-            grillaenfoco = true;
-        }
-        if (grillaenfoco) {
-            gridCellWasClicked = true;
-            lastSelectediRow2 = lastSelectediRow;
-            lastSelectediCol2 = lastSelectediCol;
-        }
     };
 
     function MarcarSeleccionadosParaEliminar(grid) {
@@ -196,7 +181,7 @@
 
     $(document).ready(function () {
         $('#Lista').jqGrid({
-            url: ROOT + 'TiposComprobante/TT/',
+            url: ROOT + 'TiposComprobante/TiposComprobante_DynamicGridData/',
             postData: {},
             datatype: 'json',
             mtype: 'POST',
@@ -204,21 +189,21 @@
                        'Exigir CAI', 'Codigo Dgi', 'Numerador', 'Codigo AFIP A', 'Codigo AFIP B', 'Codigo AFIP C', 'Codigo AFIP E', 'Codigo 2 AFIP A', 'Codigo 2 AFIP B', 'Codigo 2 AFIP C',
                        'Codigo 2 AFIP E', 'Codigo 3 AFIP A', 'Codigo 3 AFIP B', 'Codigo 3 AFIP C', 'Codigo 3 AFIP E'],
             colModel: [
-                        { name: 'act', index: 'act', align: 'center', width: 70, editable: false, hidden: false },
-                        { name: 'IdTipoComprobante', index: 'IdTipoComprobante', align: 'left', width: 100, editable: false, hidden: true },
-                        { name: 'Descripcion', index: 'Descripcion', width: 200, align: 'left', editable: true, editrules: { required: false }, edittype: 'text', label: 'TB' },
-                        { name: 'DescripcionAb', index: 'DescripcionAb', width: 50, align: 'center', editable: true, editrules: { required: false }, edittype: 'text', label: 'TB' },
-                        { name: 'Coeficiente', index: 'Coeficiente', width: 50, align: 'center', editable: false, editrules: { required: false }, edittype: 'text', label: 'TB' },
-                        { name: 'EsValor', index: 'EsValor', width: 70, align: 'center', editable: true, editrules: { required: false }, editoptions: { value: "SI:NO" }, edittype: 'checkbox', label: 'TB' },
-                        { name: 'Agrupacion1', index: 'Agrupacion1', width: 130, align: 'left', editable: true, editrules: { required: false }, edittype: 'text', label: 'TB' },
-                        { name: 'VaAlLibro', index: 'VaAlLibro', width: 80, align: 'center', editable: true, editrules: { required: false }, editoptions: { value: "SI:NO" }, edittype: 'checkbox', label: 'TB' },
-                        { name: 'VaAlCiti', index: 'VaAlCiti', width: 80, align: 'center', editable: true, editrules: { required: false }, editoptions: { value: "SI:NO" }, edittype: 'checkbox', label: 'TB' },
-                        { name: 'VaAConciliacionBancaria', index: 'VaAConciliacionBancaria', width: 80, align: 'center', editable: true, editrules: { required: false }, editoptions: { value: "SI:NO" }, edittype: 'checkbox', label: 'TB' },
-                        { name: 'VaAlRegistroComprasAFIP', index: 'VaAlRegistroComprasAFIP', width: 80, align: 'center', editable: true, editrules: { required: false }, editoptions: { value: "SI:NO" }, edittype: 'checkbox', label: 'TB' },
-                        { name: 'ExigirCAI', index: 'ExigirCAI', width: 80, align: 'center', editable: true, editrules: { required: false }, editoptions: { value: "SI:NO" }, edittype: 'checkbox', label: 'TB' },
-                        { name: 'CodigoDgi', index: 'CodigoDgi', width: 60, align: 'center', editable: true, editrules: { required: false }, edittype: 'text', label: 'TB' },
+                        { name: 'act', index: 'act', align: 'center', width: 70, search: false, editable: false, hidden: false },
+                        { name: 'IdTipoComprobante', index: 'IdTipoComprobante', align: 'left', width: 100, search: false, editable: false, hidden: true },
+                        { name: 'Descripcion', index: 'Descripcion', width: 200, align: 'left', search: true, editable: false, editrules: { required: false }, edittype: 'text', label: 'TB' },
+                        { name: 'DescripcionAb', index: 'DescripcionAb', width: 50, align: 'center', search: true, editable: false, editrules: { required: false }, edittype: 'text', label: 'TB' },
+                        { name: 'Coeficiente', index: 'Coeficiente', width: 50, align: 'center', search: false, editable: false, editrules: { required: false }, edittype: 'text', label: 'TB' },
+                        { name: 'EsValor', index: 'EsValor', width: 70, align: 'center', search: true, editable: true, editrules: { required: false }, editoptions: { value: "SI:NO" }, edittype: 'checkbox', label: 'TB' },
+                        { name: 'Agrupacion1', index: 'Agrupacion1', width: 130, align: 'left', search: true, editable: true, editrules: { required: false }, edittype: 'text', label: 'TB' },
+                        { name: 'VaAlLibro', index: 'VaAlLibro', width: 80, align: 'center', search: true, editable: true, editrules: { required: false }, editoptions: { value: "SI:NO" }, edittype: 'checkbox', label: 'TB' },
+                        { name: 'VaAlCiti', index: 'VaAlCiti', width: 80, align: 'center', search: true, editable: true, editrules: { required: false }, editoptions: { value: "SI:NO" }, edittype: 'checkbox', label: 'TB' },
+                        { name: 'VaAConciliacionBancaria', index: 'VaAConciliacionBancaria', width: 80, search: true, align: 'center', editable: true, editrules: { required: false }, editoptions: { value: "SI:NO" }, edittype: 'checkbox', label: 'TB' },
+                        { name: 'VaAlRegistroComprasAFIP', index: 'VaAlRegistroComprasAFIP', width: 80, search: true, align: 'center', editable: true, editrules: { required: false }, editoptions: { value: "SI:NO" }, edittype: 'checkbox', label: 'TB' },
+                        { name: 'ExigirCAI', index: 'ExigirCAI', width: 80, align: 'center', search: true, editable: true, editrules: { required: false }, editoptions: { value: "SI:NO" }, edittype: 'checkbox', label: 'TB' },
+                        { name: 'CodigoDgi', index: 'CodigoDgi', width: 60, align: 'center', search: true, editable: true, editrules: { required: false }, edittype: 'text', label: 'TB' },
                         {
-                            name: 'NumeradorAuxiliar', index: 'NumeradorAuxiliar', width: 80, align: 'right', editable: true, editrules: { required: false, number: true }, edittype: 'text', label: 'TB',
+                            name: 'NumeradorAuxiliar', index: 'NumeradorAuxiliar', width: 80, align: 'right', search: true, editable: true, editrules: { required: false, number: true }, edittype: 'text', label: 'TB',
                             editoptions: {
                                 maxlength: 20, defaultValue: '',
                                 dataEvents: [
@@ -232,18 +217,18 @@
                                 }]
                             }
                         },
-                        { name: 'CodigoAFIP_Letra_A', index: 'CodigoAFIP_Letra_A', width: 70, align: 'center', editable: true, editrules: { required: false }, edittype: 'text', label: 'TB' },
-                        { name: 'CodigoAFIP_Letra_B', index: 'CodigoAFIP_Letra_B', width: 70, align: 'center', editable: true, editrules: { required: false }, edittype: 'text', label: 'TB' },
-                        { name: 'CodigoAFIP_Letra_C', index: 'CodigoAFIP_Letra_C', width: 70, align: 'center', editable: true, editrules: { required: false }, edittype: 'text', label: 'TB' },
-                        { name: 'CodigoAFIP_Letra_E', index: 'CodigoAFIP_Letra_E', width: 70, align: 'center', editable: true, editrules: { required: false }, edittype: 'text', label: 'TB' },
-                        { name: 'CodigoAFIP2_Letra_A', index: 'CodigoAFIP2_Letra_A', width: 70, align: 'center', editable: true, editrules: { required: false }, edittype: 'text', label: 'TB' },
-                        { name: 'CodigoAFIP2_Letra_B', index: 'CodigoAFIP2_Letra_B', width: 70, align: 'center', editable: true, editrules: { required: false }, edittype: 'text', label: 'TB' },
-                        { name: 'CodigoAFIP2_Letra_C', index: 'CodigoAFIP2_Letra_C', width: 70, align: 'center', editable: true, editrules: { required: false }, edittype: 'text', label: 'TB' },
-                        { name: 'CodigoAFIP2_Letra_E', index: 'CodigoAFIP2_Letra_E', width: 70, align: 'center', editable: true, editrules: { required: false }, edittype: 'text', label: 'TB' },
-                        { name: 'CodigoAFIP3_Letra_A', index: 'CodigoAFIP3_Letra_A', width: 70, align: 'center', editable: true, editrules: { required: false }, edittype: 'text', label: 'TB' },
-                        { name: 'CodigoAFIP3_Letra_B', index: 'CodigoAFIP3_Letra_B', width: 70, align: 'center', editable: true, editrules: { required: false }, edittype: 'text', label: 'TB' },
-                        { name: 'CodigoAFIP3_Letra_C', index: 'CodigoAFIP3_Letra_C', width: 70, align: 'center', editable: true, editrules: { required: false }, edittype: 'text', label: 'TB' },
-                        { name: 'CodigoAFIP3_Letra_E', index: 'CodigoAFIP3_Letra_E', width: 70, align: 'center', editable: true, editrules: { required: false }, edittype: 'text', label: 'TB' }
+                        { name: 'CodigoAFIP_Letra_A', index: 'CodigoAFIP_Letra_A', width: 70, align: 'center', search: true, editable: true, editrules: { required: false }, edittype: 'text', label: 'TB' },
+                        { name: 'CodigoAFIP_Letra_B', index: 'CodigoAFIP_Letra_B', width: 70, align: 'center', search: true, editable: true, editrules: { required: false }, edittype: 'text', label: 'TB' },
+                        { name: 'CodigoAFIP_Letra_C', index: 'CodigoAFIP_Letra_C', width: 70, align: 'center', search: true, editable: true, editrules: { required: false }, edittype: 'text', label: 'TB' },
+                        { name: 'CodigoAFIP_Letra_E', index: 'CodigoAFIP_Letra_E', width: 70, align: 'center', search: true, editable: true, editrules: { required: false }, edittype: 'text', label: 'TB' },
+                        { name: 'CodigoAFIP2_Letra_A', index: 'CodigoAFIP2_Letra_A', width: 70, align: 'center', search: true, editable: true, editrules: { required: false }, edittype: 'text', label: 'TB' },
+                        { name: 'CodigoAFIP2_Letra_B', index: 'CodigoAFIP2_Letra_B', width: 70, align: 'center', search: true, editable: true, editrules: { required: false }, edittype: 'text', label: 'TB' },
+                        { name: 'CodigoAFIP2_Letra_C', index: 'CodigoAFIP2_Letra_C', width: 70, align: 'center', search: true, editable: true, editrules: { required: false }, edittype: 'text', label: 'TB' },
+                        { name: 'CodigoAFIP2_Letra_E', index: 'CodigoAFIP2_Letra_E', width: 70, align: 'center', search: true, editable: true, editrules: { required: false }, edittype: 'text', label: 'TB' },
+                        { name: 'CodigoAFIP3_Letra_A', index: 'CodigoAFIP3_Letra_A', width: 70, align: 'center', search: true, editable: true, editrules: { required: false }, edittype: 'text', label: 'TB' },
+                        { name: 'CodigoAFIP3_Letra_B', index: 'CodigoAFIP3_Letra_B', width: 70, align: 'center', search: true, editable: true, editrules: { required: false }, edittype: 'text', label: 'TB' },
+                        { name: 'CodigoAFIP3_Letra_C', index: 'CodigoAFIP3_Letra_C', width: 70, align: 'center', search: true, editable: true, editrules: { required: false }, edittype: 'text', label: 'TB' },
+                        { name: 'CodigoAFIP3_Letra_E', index: 'CodigoAFIP3_Letra_E', width: 70, align: 'center', search: true, editable: true, editrules: { required: false }, edittype: 'text', label: 'TB' }
             ],
             //gridComplete: function () {
             //    var ids = jQuery("#Lista").jqGrid('getDataIDs');
@@ -304,5 +289,10 @@
         //                                        MarcarSeleccionadosParaEliminar(jQuery("#Lista"));
         //                                    },
         //                                });
+        jQuery("#Lista").filterToolbar({
+            stringResult: true, searchOnEnter: true,
+            defaultSearch: 'cn',
+            enableClear: false
+        });
     });
 </script>

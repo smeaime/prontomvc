@@ -41,13 +41,13 @@
                         { name: 'impr', index: 'act', align: 'center', width: 80, sortable: false, editable: false, search: false,  hidden: true }, //, formatter: 'showlink', formatoptions: { baseLinkUrl: '@Url.Action("Edit")'} },
                         { name: 'IdPuntoVenta', index: 'IdPuntoVenta', align: 'left', width: 100, editable: false, hidden: true },
                         { name: 'Letra', index: 'Letra', align: 'left', width: 50, editable: false, hidden: false },
-                        { name: 'NumeroPuntoVenta', index: 'NumeroPuntoVenta', align: 'right', width: 50, editable: false, search: true, searchoptions: { sopt: ['cn','eq'] } },
-                        { name: 'Comprobante', index: 'Comprobante', width: 75, align: 'left', sorttype: 'date', editable: false, formatoptions: { newformat: 'dd/mm/yy' }, datefmt: 'dd/mm/yy', search: false },
-                        { name: 'Proximo Numero', index: 'Proximo Numero', align: 'center', width: 50, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-                        { name: 'Descripcion', index: 'Descripcion', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-                        { name: 'Fact.Electronica', index: 'Fact.Electronica', align: 'center', width: 50, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-                        { name: 'Fact.Elect. (modo test)', index: 'Fact.Elect. (modo test)', align: 'center', width: 50, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-                        { name: 'Ing.manual CAE', index: 'Ing.manual CAE', align: 'center', width: 50, editable: false, search: true, searchoptions: { sopt: ['cn']} },
+                        { name: 'NumeroPuntoVenta', index: 'NumeroPuntoVenta', align: 'right', width: 75, editable: false, search: true, searchoptions: { sopt: ['cn','eq'] } },
+                        { name: 'Comprobante', index: 'Comprobante', width: 150, align: 'left', sorttype: 'date', editable: false, formatoptions: { newformat: 'dd/mm/yy' }, datefmt: 'dd/mm/yy', search: false },
+                        { name: 'Proximo Numero', index: 'Proximo Numero', align: 'center', width: 75, editable: false, search: true, searchoptions: { sopt: ['cn']} },
+                        { name: 'Descripcion', index: 'Descripcion', align: 'left', width: 200, editable: false, search: true, searchoptions: { sopt: ['cn']} },
+                        { name: 'Fact.Electronica', index: 'Fact.Electronica', align: 'center', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn']} },
+                        { name: 'Fact.Elect. (modo test)', index: 'Fact.Elect. (modo test)', align: 'center', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'Ing.manual CAE', index: 'Ing.manual CAE', align: 'center', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
                         { name: 'Activo', index: 'Activo', align: 'left', width: 50, editable: false, search: true, searchoptions: { sopt: ['cn']} },
                     ],
             onSelectRow: function (id) {
@@ -57,6 +57,8 @@
                     }
                     lastSelectedId = id;
                 }
+            },
+            gridComplete: function () {
             },
             pager: $('#ListaPager'),
             rowNum: 15,
