@@ -864,6 +864,57 @@ namespace ProntoMVC.Tests
 
 
 
+        [TestMethod]
+        public void _42871()
+        {
+
+        }
+
+
+
+
+
+        [TestMethod]
+        public void SincroACA_45332()
+        {
+
+            string sErrores = "", sTitulo = "";
+            LinqCartasPorteDataContext db = null;
+
+            // el _CONST_MAXROWS sale del app.config
+
+            int registrosf = 0;
+
+            int idcli =CartaDePorteManager.BuscarVendedorPorCUIT("30-50012088-2", SC, "");
+
+
+            var output = SincronismosWilliamsManager.GenerarSincro("A.C.A.", ref sErrores, SC, "dominio", ref sTitulo
+                                , CartaDePorteManager.enumCDPestado.DescargasMasFacturadas,
+                     "", -1,idcli,
+                -1, -1,
+                -1, -1, -1, -1,
+                 CartaDePorteManager.FiltroANDOR.FiltroOR, "Ambas",
+                new DateTime(2017, 1, 13), new DateTime(2017, 1, 16),
+                -1, "Ambas", false, "", "", -1, ref registrosf, 40);
+
+
+//            FB = FUERA DE BASE
+//FE = FUERA DE STANDAR
+
+//Buenas tares, nosotros necesitamos lo siguiente
+
+//Que el FB Y el FE venga informado como FE, sin discriminar grano
+
+
+
+
+            //File.Copy(output, @"C:\Users\Administrador\Desktop\"   Path.GetFileName(output), true);
+            System.Diagnostics.Process.Start(output);
+        }
+
+
+
+
 
 
         [TestMethod]
@@ -1142,6 +1193,112 @@ Error in: https://prontoweb.williamsentregas.com.ar/ProntoWeb/CDPFacturacion.asp
 
 
 
+
+
+
+
+
+        [TestMethod]
+        public void FormatoNuevo_Grobo_Recibo_45281_2_cresud()
+        {
+
+
+            //-Les acabo de pasar correo con la solicitud del cliente nuevo SPEEDAGRO para que en el exel de descargas que pasa el sistema, salga el cuit a su lado titular, intermediario, rem comercial, corredor, transporte, chofer, etc, etc
+            //    -Martín,Lo que deben hacer es cuando arman el mail de Speedagro, elegir el formato "Excel GroboCuits" que es el formato que se está usando con Grobocopatel.
+            //    -Andres, ahi me hace la devolucion SpeedAgro, y estarian faltando los cuit del destinatario y corredor. Resto estaria ok.Podes avanzar con esto ? Abrazo Martin
+
+            //aaaaaa
+            //Agregar el campos de AMBAS ( Excel + HTML ), asi no hay que agregar repetidamente
+            //otro grupo de mail para elegir el otro forma, y que en el mismo correo llegue de las dos manera, pegado en el cuerpo del mail + archivo Excel. - PENDIENTE
+
+            var fechadesde = new DateTime(2017, 9, 11);
+            var fechahasta = new DateTime(2017, 9, 13);
+            int pventa = 0;
+
+
+            var dr = CDPMailFiltrosManager2.TraerMetadata(SC, -1).NewRow();
+
+
+
+            //falta migrar a servidor:
+            //grobo y recibo        GrbRec
+            //grobo                 Grobo
+            //cresud                Cresud
+            //multigrain            Grain
+            //recibo                ExcRec
+            //corredores            Corred
+
+
+            dr["ModoImpresion"] = "Cresud";
+            //dr["ModoImpresion"] = "Grobo";
+            //dr["ModoImpresion"] = "Grobo";
+            //dr["ModoImpresion"] = "Excel";
+            //dr["ModoImpresion"] = "HImag2";
+            //dr["ModoImpresion"] = "ExcHtm";
+            //dr["ModoImpresion"] = "Imagen";
+
+
+            dr["Emails"] = "mscalella911@gmail.com";
+
+
+            dr["Vendedor"] = -1;
+            dr["CuentaOrden1"] = -1;
+            dr["CuentaOrden2"] = -1;
+            dr["IdClienteAuxiliar"] = -1; ;
+            dr["Corredor"] = -1;
+            dr["Entregador"] = -1;
+            dr["Destino"] = -1;
+            dr["Procedencia"] = -1;
+            dr["FechaDesde"] = fechadesde;
+            dr["FechaHasta"] = fechahasta;
+            dr["AplicarANDuORalFiltro"] = 0; // CartaDePorteManager.FiltroANDOR.FiltroOR;
+            dr["Modo"] = "Ambos";
+            //dr["Orden"] = "";
+            //dr["Contrato"] = "";
+            dr["EnumSyngentaDivision"] = "";
+            dr["EsPosicion"] = false;
+            dr["IdArticulo"] = -1;
+            CartaDePorteManager.enumCDPestado estado = CartaDePorteManager.enumCDPestado.Todas;
+
+
+            string output = "";
+            string sError = "", sError2 = "";
+            string inlinePNG = DirApp + @"\imagenes\Unnamed.png";
+            string inlinePNG2 = DirApp + @"\imagenes\twitterwilliams.jpg";
+
+
+
+
+
+            try
+            {
+
+                output = CDPMailFiltrosManager2.EnviarMailFiltroPorRegistro_DLL(SC, fechadesde, fechahasta,
+                                                       pventa, "", estado,
+                                                    ref dr, ref sError, false,
+                                                   ConfigurationManager.AppSettings["SmtpServer"],
+                                                     ConfigurationManager.AppSettings["SmtpUser"],
+                                                     ConfigurationManager.AppSettings["SmtpPass"],
+                                                     Convert.ToInt16(ConfigurationManager.AppSettings["SmtpPort"]),
+                                                       "", ref sError2, inlinePNG, inlinePNG2);
+
+
+            }
+            catch (Exception)
+            {
+
+                //throw;
+            }
+
+
+
+            System.Web.UI.WebControls.GridView grid = new System.Web.UI.WebControls.GridView();
+            string html = CartaDePorteManager.ExcelToHtml(output, grid);
+
+
+            System.Diagnostics.Process.Start(output);
+
+        }
 
 
 

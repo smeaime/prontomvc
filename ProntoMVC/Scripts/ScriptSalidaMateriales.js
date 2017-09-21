@@ -325,7 +325,8 @@ $(function () {
                         formatoptions: { newformat: "dd/mm/yy" }, datefmt: 'dd/mm/yy'
                     },
                     {
-                        name: 'EquipoDestino', index: 'EquipoDestino', align: 'left', width: 250, editable: true, hidden: false, edittype: 'select', editrules: { required: false },
+                        name: 'EquipoDestino', index: 'EquipoDestino', align: 'left', width: 250, editable: true, hidden: false, 
+            edittype: 'select', editrules: { required: false },
                         editoptions: {
                             //dataUrl: ROOT + 'Ubicacion/GetUbicaciones',
                             dataInit: function (elem) {
