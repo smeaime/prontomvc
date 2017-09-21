@@ -593,7 +593,7 @@ namespace ProntoMVC.Controllers
             //                    , sidx, sord, page, rows, _search, filters, ref totalRecords);
 
             var pagedQuery = Filters.FiltroGenerico_UsandoStoreOLista<OrdenesCompra2>
-                                (sidx, sord, page, rows, _search, filters, db, ref totalRecords, zzzzzz);
+                                (sidx, sord, page, rows, _search, filters, db, ref totalRecords,zzzzzz);
 
 
             ///////////////////////////////////////////////////////////////////////////////////////////////

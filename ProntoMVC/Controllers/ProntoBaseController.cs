@@ -2212,9 +2212,22 @@ namespace ProntoMVC.Controllers
             if (mvarCotizacion == null) cotizacion = -1; else cotizacion = (mvarCotizacion.CotizacionLibre ?? mvarCotizacion.Cotizacion) ?? -1;
 
             return cotizacion;
-
         }
 
+        public virtual decimal? funcMoneda_Cotizacion2(DateTime? fecha, int IdMoneda)
+        {
+            if (db == null) return null;
+            if (fecha == null) fecha = DateTime.Now;
+
+            decimal cotizacion;
+
+            DateTime desde = fecha.Value.Date;
+
+            var mvarCotizacion = db.Cotizaciones.Where(x => x.Fecha == desde && x.IdMoneda == IdMoneda).FirstOrDefault();
+            if (mvarCotizacion == null) cotizacion = -1; else cotizacion = (mvarCotizacion.CotizacionLibre ?? mvarCotizacion.Cotizacion) ?? -1;
+
+            return cotizacion;
+        }
 
 
         /// /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

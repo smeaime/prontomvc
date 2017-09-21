@@ -186,6 +186,17 @@ namespace ProntoMVC.Controllers
             }
         }
 
+        public class Ubicaciones2
+        {
+            public int IdUbicacion { get; set; }
+            public int? IdDeposito { get; set; }
+            public string Descripcion { get; set; }
+            public string Estanteria { get; set; }
+            public string Modulo { get; set; }
+            public string Gabeta { get; set; }
+            public string DepositoActual { get; set; }
+        }
+
         public virtual ActionResult TT(string sidx, string sord, int? page, int? rows, bool _search, string searchField, string searchOper, string searchString)
         {
             string campo = "true";
@@ -193,22 +204,6 @@ namespace ProntoMVC.Controllers
             int currentPage = page ?? 1;
 
             var Entidad = db.Ubicaciones.AsQueryable();
-            //if (_search)
-            //{
-            //    switch (searchField.ToLower())
-            //    {
-            //        case "a":
-            //            campo = String.Format("{0} = {1}", searchField, searchString);
-            //            break;
-            //        default:
-            //            campo = String.Format("{0}.Contains(\"{1}\")", searchField, searchString);
-            //            break;
-            //    }
-            //}
-            //else
-            //{
-            //    campo = "true";
-            //}
 
             var Entidad1 = (from a in Entidad
                             select new { IdUbicacion = a.IdUbicacion }).Where(campo).ToList();
@@ -228,8 +223,8 @@ namespace ProntoMVC.Controllers
                             a.Gabeta,
                             DepositoActual = b != null ? b.Descripcion : ""
                         }).Where(campo).OrderBy(sidx + " " + sord)
-//.Skip((currentPage - 1) * pageSize).Take(pageSize)
-.ToList();
+                        //.Skip((currentPage - 1) * pageSize).Take(pageSize)
+                        .ToList();
 
             var jsonData = new jqGridJson()
             {
@@ -237,6 +232,60 @@ namespace ProntoMVC.Controllers
                 page = currentPage,
                 records = totalRecords,
                 rows = (from a in data
+                        select new jqGridRowJson
+                        {
+                            id = a.IdUbicacion.ToString(),
+                            cell = new string[] { 
+                                "",
+                                //"<a href="+ Url.Action("Imprimir",new {id = a.IdGanancia} )  +">Imprimir</>",
+                                a.IdUbicacion.ToString(),
+                                a.IdDeposito.ToString(),
+                                a.Descripcion.NullSafeToString(),
+                                a.Estanteria.NullSafeToString(),
+                                a.Modulo.NullSafeToString(),
+                                a.Gabeta.NullSafeToString(),
+                                a.DepositoActual.NullSafeToString()
+                            }
+                        }).ToArray()
+            };
+            return Json(jsonData, JsonRequestBehavior.AllowGet);
+        }
+
+        public virtual JsonResult Ubicaciones_DynamicGridData(string sidx, string sord, int page, int rows, bool _search, string filters)
+        {
+            int totalRecords = 0;
+            int pageSize = rows;
+
+            var data = (from a in db.Ubicaciones
+                        from b in db.Depositos.Where(o => o.IdDeposito == a.IdDeposito).DefaultIfEmpty()
+                        select new Ubicaciones2
+                        {
+                            IdUbicacion = a.IdUbicacion,
+                            IdDeposito = a.IdDeposito,
+                            Descripcion = a.Descripcion,
+                            Estanteria = a.Estanteria,
+                            Modulo = a.Modulo,
+                            Gabeta = a.Gabeta,
+                            DepositoActual = b != null ? b.Descripcion : ""
+                        }).OrderBy(sidx + " " + sord).AsQueryable();
+
+            //IQueryable<Rubros2> data2 = data.AsQueryable();
+            //List<Rubros2> data3 = data2.ToList();
+
+            var pagedQuery = Filters.FiltroGenerico_UsandoStoreOLista<Ubicaciones2>
+                                (sidx, sord, page, rows, _search, filters, db, ref totalRecords, data.ToList());
+
+            //var pagedQuery = Filters.FiltroGenerico<Data.Models.Rubro>
+            //                    ("", sidx, sord, page, rows, _search, filters, db, ref totalRecords);
+
+            int totalPages = (int)Math.Ceiling((float)totalRecords / (float)pageSize);
+
+            var jsonData = new jqGridJson()
+            {
+                total = totalPages,
+                page = page,
+                records = totalRecords,
+                rows = (from a in pagedQuery
                         select new jqGridRowJson
                         {
                             id = a.IdUbicacion.ToString(),

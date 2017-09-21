@@ -1660,6 +1660,9 @@ function TraerCotizacion() {
                 mIdMonedaDolar = datos.campo2;
                 datos1 = datos.campo3;
                 mCotizacionDolar = parseFloat(datos1.replace(",", ".") || 0) || 0;
+                if (mCotizacionDolar == 0) {
+                    alert('Cuidado, no hay cotizacion dolar.');
+                }
             } else { alert('No se pudo completar la operacion.'); }
         },
         error: function (xhr, textStatus, exceptionThrown) {
