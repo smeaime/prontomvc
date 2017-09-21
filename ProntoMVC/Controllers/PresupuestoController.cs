@@ -20,6 +20,10 @@ using jqGrid.Models;
 using Lib.Web.Mvc.JQuery.JqGrid;
 using System.Web.Security;
 
+using Pronto.ERP.Bll;
+
+
+
 namespace ProntoMVC.Controllers
 {
     //   [Authorize(Roles = "Administrador,SuperAdmin,Compras,Externo,AdminExterno")]
@@ -231,6 +235,9 @@ namespace ProntoMVC.Controllers
             return Json(new { Success = 0, ex = new Exception("Error al registrar").Message.ToString(), ModelState = ModelState });
         }
 
+
+
+
         public virtual ActionResult Edit(int id)
         {
             if (!PuedeLeer(enumNodos.Presupuestos)) throw new Exception("No tenés permisos");
@@ -249,28 +256,93 @@ namespace ProntoMVC.Controllers
                 presupuesto.FechaIngreso = DateTime.Today;
                 presupuesto.IdMoneda = 1;
                 presupuesto.CotizacionMoneda = 1;
+
+
+
                 ViewBag.IdCondicionCompra = new SelectList(db.Condiciones_Compras, "IdCondicionCompra", "Descripcion");
                 ViewBag.IdMoneda = new SelectList(db.Monedas, "IdMoneda", "Nombre", presupuesto.IdMoneda);
                 ViewBag.IdPlazoEntrega = new SelectList(db.PlazosEntregas, "IdPlazoEntrega", "Descripcion");
                 ViewBag.IdComprador = new SelectList(db.Empleados, "IdEmpleado", "Nombre");
                 ViewBag.Aprobo = new SelectList(db.Empleados, "IdEmpleado", "Nombre");
                 ViewBag.Proveedor = "";
+
+                CargarViewBag(presupuesto);
+
                 return View(presupuesto);
             }
             else
             {
 
                 Presupuesto presupuesto = db.Presupuestos.Find(id);
+
+
                 ViewBag.IdCondicionCompra = new SelectList(db.Condiciones_Compras, "IdCondicionCompra", "Descripcion", presupuesto.IdCondicionCompra);
                 ViewBag.IdMoneda = new SelectList(db.Monedas, "IdMoneda", "Nombre", presupuesto.IdMoneda);
                 ViewBag.IdPlazoEntrega = new SelectList(db.PlazosEntregas, "IdPlazoEntrega", "Descripcion", presupuesto.IdPlazoEntrega);
                 ViewBag.IdComprador = new SelectList(db.Empleados, "IdEmpleado", "Nombre", presupuesto.IdComprador);
                 ViewBag.Aprobo = new SelectList(db.Empleados, "IdEmpleado", "Nombre", presupuesto.Aprobo);
                 ViewBag.Proveedor = (presupuesto.IdProveedor > 0) ? db.Proveedores.Find(presupuesto.IdProveedor).RazonSocial : "";
+
+                CargarViewBag(presupuesto);
+
+
                 Session.Add("Presupuesto", presupuesto);
                 return View(presupuesto);
             }
         }
+
+
+
+
+        void CargarViewBag(Presupuesto o)
+        {
+
+
+            string nSC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString(), oStaticMembershipService));
+            DataTable dt = EntidadManager.GetStoreProcedure(nSC, "Empleados_TX_PorSector", "Compras");
+            IEnumerable<DataRow> rows = dt.AsEnumerable();
+            var sq = (from r in rows orderby r[1] select new { IdEmpleado = r[0], Nombre = r[1] }).ToList();
+            // ViewBag.Aprobo = new SelectList(db.Empleados.Where(x => (x.Activo ?? "SI") == "SI"  ).OrderBy(x => x.Nombre), "IdEmpleado", "Nombre", o.Aprobo);
+
+            ViewBag.Aprobo = new SelectList(sq, "IdEmpleado", "Nombre", o.Aprobo);
+            ViewBag.IdComprador = new SelectList(sq, "IdEmpleado", "Nombre", o.IdComprador);
+
+
+
+            /*
+
+            ViewBag.IdCondicionCompra = new SelectList(db.Condiciones_Compras.OrderBy(x => x.Descripcion), "IdCondicionCompra", "Descripcion", o.IdCondicionCompra);
+            ViewBag.IdMoneda = new SelectList(db.Monedas.OrderBy(x => x.Nombre), "IdMoneda", "Nombre", o.IdMoneda);
+            ViewBag.IdPlazoEntrega = new SelectList(db.PlazosEntregas.OrderBy(x => x.Descripcion), "IdPlazoEntrega", "Descripcion", o.PlazoEntrega);
+
+            ///////////////////////////////////////////////////////////////////////////////////////////////
+            ///////////////////////////////////////////////////////////////////////////////////////////////
+            ///////////////////////////////////////////////////////////////////////////////////////////////
+            string nSC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString(), oStaticMembershipService));
+            DataTable dt = EntidadManager.GetStoreProcedure(nSC, "Empleados_TX_PorSector", "Compras");
+            IEnumerable<DataRow> rows = dt.AsEnumerable();
+            var sq = (from r in rows select new { IdEmpleado = r[0], Nombre = r[1] }).ToList();
+            // ViewBag.Aprobo = new SelectList(db.Empleados.Where(x => (x.Activo ?? "SI") == "SI"  ).OrderBy(x => x.Nombre), "IdEmpleado", "Nombre", o.Aprobo);
+
+            ViewBag.Aprobo = new SelectList(sq, "IdEmpleado", "Nombre", o.Aprobo);
+            ViewBag.IdComprador = new SelectList(sq, "IdEmpleado", "Nombre", o.IdComprador);
+
+            ViewBag.Proveedor = (db.Proveedores.Find(o.IdProveedor) ?? new Proveedor()).RazonSocial;
+
+            ViewBag.IdCodigoIVA = new SelectList(db.DescripcionIvas, "IdCodigoIVA", "Descripcion", (o.Proveedor ?? new Proveedor()).IdCodigoIva);
+            try
+            {
+                ViewBag.CantidadAutorizaciones = db.Autorizaciones_TX_CantidadAutorizaciones((int)Pronto.ERP.Bll.EntidadManager.EnumFormularios.NotaPedido, o.TotalPedido * o.CotizacionMoneda, -1).Count();
+            }
+            catch (Exception e)
+            {
+
+                ErrHandler.WriteError(e);
+            }
+            
+    */
+        }
+
 
 
         private bool Validar(ProntoMVC.Data.Models.Presupuesto o, ref string sErrorMsg)
@@ -487,7 +559,8 @@ namespace ProntoMVC.Controllers
                             Contacto = a.Contacto,
                             Observaciones = a.Observaciones,
                             a.IdProveedor
-                        })//.Where(campo) // .OrderBy(sidx + " " + sord)
+                        })
+                        //.Where(campo) // .OrderBy(sidx + " " + sord)
 //.Skip((currentPage - 1) * pageSize).Take(pageSize)
 .ToList();
 
