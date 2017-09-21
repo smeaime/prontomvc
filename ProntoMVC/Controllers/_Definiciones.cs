@@ -756,7 +756,7 @@ namespace ProntoMVC.Controllers
                 return filteredQuery;
 
             }
-            catch (Exception)
+            catch (Exception x)
             {
                 // algun problema en los nombres de columna en el modelo de la jqgrid???               
                 throw;

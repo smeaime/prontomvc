@@ -193,6 +193,8 @@ namespace ProntoMVC.Controllers
             if ((o.PuntoVenta ?? 0) <= 0) { sErrorMsg += "\n" + "Falta el numero de sucursal"; }
             if ((o.IdCondicionVenta ?? 0) <= 0) { sErrorMsg += "\n" + "Falta la condicion de venta"; }
             if ((o.BienesOServicios ?? "") == "") { sErrorMsg += "\n" + "Falta la marca de bien o servicio"; }
+            if ((o.BienesOServicios ?? "") == "S" && (o.FechaInicioServicio == null || o.FechaFinServicio == null)) { sErrorMsg += "\n" + "Debe indicar las fechas de inicio y fin de servicio"; }
+            if ((o.BienesOServicios ?? "") == "S" && (o.FechaFinServicio ?? DateTime.MinValue) < (o.FechaInicioServicio ?? DateTime.MinValue)) { sErrorMsg += "\n" + "La fecha de fin de servicio no puede ser menor a la de inicio"; }
 
             if (BuscarClaveINI("Exigir obra en facturacion", -1) == "SI") { if ((o.IdObra ?? 0) <= 0) { sErrorMsg += "\n" + "Falta la obra"; } }
 
@@ -223,6 +225,7 @@ namespace ProntoMVC.Controllers
                 if (mCAEManual != "SI" && (mTipoABC == "A" || mTipoABC == "M") && mWS.Length == 0 && mCAI.Length == 0) { sErrorMsg += "\n" + "No existe numero de CAI"; }
                 if (mCAEManual != "SI" && mWS.Length == 0 && mCAI.Length > 0 && mFechaFactura > mFechaCAI) { sErrorMsg += "\n" + "El CAI vencio el " + mFechaCAI.ToString() + "."; }
                 if (mCAEManual == "SI" && (o.CAE ?? "").Length != 14) { sErrorMsg += "\n" + "Numero de CAE incorrecto (debe tener 14 digitos)"; }
+                if (mCAEManual == "SI" && o.FechaVencimientoORechazoCAE == null) { sErrorMsg += "\n" + "Debe ingresar la fecha de vencimiento CAE"; }
                 if (mCAI.Length > 0)
                 {
                     o.NumeroCAI = Convert.ToDecimal(mCAI);

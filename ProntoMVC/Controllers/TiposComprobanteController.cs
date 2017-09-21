@@ -152,22 +152,6 @@ namespace ProntoMVC.Controllers
             int currentPage = page ?? 1;
 
             var Entidad = db.TiposComprobantes.AsQueryable();
-            //if (_search)
-            //{
-            //    switch (searchField.ToLower())
-            //    {
-            //        case "a":
-            //            campo = String.Format("{0} = {1}", searchField, searchString);
-            //            break;
-            //        default:
-            //            campo = String.Format("{0}.Contains(\"{1}\")", searchField, searchString);
-            //            break;
-            //    }
-            //}
-            //else
-            //{
-            //    campo = "true";
-            //}
 
             var Entidad1 = (from a in Entidad
                             select new { IdTipoComprobante = a.IdTipoComprobante }).Where(campo).ToList();
@@ -246,6 +230,95 @@ namespace ProntoMVC.Controllers
                             }
                         }).ToArray()
             };
+            return Json(jsonData, JsonRequestBehavior.AllowGet);
+        }
+
+        public virtual JsonResult TiposComprobante_DynamicGridData(string sidx, string sord, int page, int rows, bool _search, string filters)
+        {
+            int totalRecords = 0;
+            int pageSize = rows;
+
+            var pagedQuery = Filters.FiltroGenerico<Data.Models.TiposComprobante>
+                                ("", sidx, sord, page, rows, _search, filters, db, ref totalRecords);
+
+            // esto filtro se debería aplicar antes que el filtrogenerico (queda mal paginado si no)
+            var Entidad = pagedQuery.AsQueryable();
+
+            var Entidad1 = (from a in Entidad
+                            select new { IdTipoComprobante = a.IdTipoComprobante }).ToList();
+
+            int totalPages = (int)Math.Ceiling((float)totalRecords / (float)pageSize);
+
+            var data = (from a in Entidad
+                        select new
+                        {
+                            a.IdTipoComprobante,
+                            a.Descripcion,
+                            a.DescripcionAb,
+                            a.Coeficiente,
+                            a.EsValor,
+                            a.Agrupacion1,
+                            a.VaAlLibro,
+                            a.VaAlCiti,
+                            a.VaAConciliacionBancaria,
+                            a.VaAlRegistroComprasAFIP,
+                            a.ExigirCAI,
+                            a.CodigoDgi,
+                            a.NumeradorAuxiliar,
+                            a.CodigoAFIP_Letra_A,
+                            a.CodigoAFIP_Letra_B,
+                            a.CodigoAFIP_Letra_C,
+                            a.CodigoAFIP_Letra_E,
+                            a.CodigoAFIP2_Letra_A,
+                            a.CodigoAFIP2_Letra_B,
+                            a.CodigoAFIP2_Letra_C,
+                            a.CodigoAFIP2_Letra_E,
+                            a.CodigoAFIP3_Letra_A,
+                            a.CodigoAFIP3_Letra_B,
+                            a.CodigoAFIP3_Letra_C,
+                            a.CodigoAFIP3_Letra_E
+                        }).OrderBy(sidx + " " + sord).ToList();
+
+            var jsonData = new jqGridJson()
+            {
+                total = totalPages,
+                page = page,
+                records = totalRecords,
+                rows = (from a in data
+                        select new jqGridRowJson
+                        {
+                            id = a.IdTipoComprobante.ToString(),
+                            cell = new string[] { 
+                                "",
+                                a.IdTipoComprobante.ToString(),
+                                a.Descripcion.NullSafeToString(),
+                                a.DescripcionAb.NullSafeToString(),
+                                a.Coeficiente.NullSafeToString(),
+                                a.EsValor.NullSafeToString(),
+                                a.Agrupacion1.NullSafeToString(),
+                                a.VaAlLibro.NullSafeToString(),
+                                a.VaAlCiti.NullSafeToString(),
+                                a.VaAConciliacionBancaria.NullSafeToString(),
+                                a.VaAlRegistroComprasAFIP.NullSafeToString(),
+                                a.ExigirCAI.NullSafeToString(),
+                                a.CodigoDgi.NullSafeToString(),
+                                a.NumeradorAuxiliar.NullSafeToString(),
+                                a.CodigoAFIP_Letra_A.NullSafeToString(),
+                                a.CodigoAFIP_Letra_B.NullSafeToString(),
+                                a.CodigoAFIP_Letra_C.NullSafeToString(),
+                                a.CodigoAFIP_Letra_E.NullSafeToString(),
+                                a.CodigoAFIP2_Letra_A.NullSafeToString(),
+                                a.CodigoAFIP2_Letra_B.NullSafeToString(),
+                                a.CodigoAFIP2_Letra_C.NullSafeToString(),
+                                a.CodigoAFIP2_Letra_E.NullSafeToString(),
+                                a.CodigoAFIP3_Letra_A.NullSafeToString(),
+                                a.CodigoAFIP3_Letra_B.NullSafeToString(),
+                                a.CodigoAFIP3_Letra_C.NullSafeToString(),
+                                a.CodigoAFIP3_Letra_E.NullSafeToString()
+                            }
+                        }).ToArray()
+            };
+
             return Json(jsonData, JsonRequestBehavior.AllowGet);
         }
 
