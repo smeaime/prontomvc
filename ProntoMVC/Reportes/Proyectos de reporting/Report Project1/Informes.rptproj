@@ -259,6 +259,10 @@
       <FullPath>Liquidación de Subcontratistas 2.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
+      <Name>Liquidación de Subcontratistas 3.rdl</Name>
+      <FullPath>Liquidación de Subcontratistas 3.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
       <Name>Listado de comprobantes de venta ingresados.rdl</Name>
       <FullPath>Listado de comprobantes de venta ingresados.rdl</FullPath>
     </ProjectItem>
@@ -537,10 +541,6 @@
     <ProjectItem>
       <Name>Williams - Sincro LaBiznaga2.rdl</Name>
       <FullPath>Williams - Sincro LaBiznaga2.rdl</FullPath>
-    </ProjectItem>
-    <ProjectItem>
-      <Name>Liquidación de Subcontratistas 3.rdl</Name>
-      <FullPath>Liquidación de Subcontratistas 3.rdl</FullPath>
     </ProjectItem>
   </Reports>
   <Configurations>

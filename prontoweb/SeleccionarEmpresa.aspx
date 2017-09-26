@@ -24,6 +24,11 @@
 </head>
 <body class="cssLogin" style="height: 100%; overflow: hidden; " >
 
+
+        <%--https://developer.mozilla.org/en-US/docs/Mozilla/Mobile/Viewport_meta_tag--%>
+    <meta name="viewport" content="width=400px, initial-scale=1">
+
+
   <%--  <script src="../JavaScript/jquery-1.4.2.min.js" type="text/javascript"></script>
     <script src="/JavaScript/jquery-1.4.2.min.js" type="text/javascript"></script>--%>
     <form id="form1" runat="server" defaultbutton="ButContinuar">
@@ -31,10 +36,20 @@
         <br />
         <br />
         <asp:Image ID="LogoImage" runat="server" BorderColor="Black" BorderWidth="1px" BorderStyle="None"
-            Height="79px" ImageUrl="~/Imagenes/loguito/0bak.gif" Style="margin-top: 5px"
-            Width="235px" />
+            Height="" ImageUrl="~/Imagenes/loguito/0bak.gif" Style="margin-top: 5px"
+            Width="" />
     </div>
     <div>
+           <asp:LoginView ID="LoginView" runat="server">
+                                <LoggedInTemplate>
+                                    <asp:LoginName ID="LoginName1" runat="server" Font-Bold="false" CssClass="margender" />
+                                    |
+                                                    <asp:LoginStatus ID="LoginStatus1" runat="server" Font-Bold="false" ForeColor="white"
+                                                        LogoutAction="RedirectToLoginPage" LogoutPageUrl="~/Login.aspx" OnLoggedOut="LoginStatus1_LoggedOut"
+                                                        TabIndex="-1" LogoutText="Salir" Font-Underline="False" CssClass="margender" />
+                                </LoggedInTemplate>
+                            </asp:LoginView>
+
         <br />
     </div>
     <%--    
