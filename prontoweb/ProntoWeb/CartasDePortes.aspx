@@ -27,6 +27,11 @@ Para usar el controlcito de rango de fechas, en jQuery
 http://weblogs.asp.net/alaaalnajjar/archive/2010/05/04/how-to-use-jquery-date-range-picker-plugin-in-asp-net.aspx
 http://weblogs.asp.net/alaaalnajjar/attachment/7469405.ashx
     --%>
+
+    <%--https://developer.mozilla.org/en-US/docs/Mozilla/Mobile/Viewport_meta_tag--%>
+    <meta name="viewport" content="width=400px, initial-scale=1">
+
+
     <div style="width: 100%; table-layout: fixed">
         <asp:UpdatePanel ID="UpdatePanel2" runat="server">
             <ContentTemplate>

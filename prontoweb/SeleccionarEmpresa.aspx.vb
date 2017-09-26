@@ -460,6 +460,16 @@ Partial Class SeleccionarEmpresa
 
 
 
+    Protected Sub LoginStatus1_LoggedOut(ByVal sender As Object, ByVal e As System.EventArgs)
+        Session("IdUser") = Nothing
+        FormsAuthentication.SignOut()
+        Roles.DeleteCookie()
+        Session.Clear()
+        'FormsAuthentication.RedirectToLoginPage();
+    End Sub
+
+
+
 
 End Class
 
