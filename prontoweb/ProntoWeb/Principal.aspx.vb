@@ -14,7 +14,7 @@ Partial Class ProntoWeb_Principal
 
 
         HFSC.Value = GetConnectionString(Server, Session)
-        Rebind()
+        'Rebind()
 
 
 
