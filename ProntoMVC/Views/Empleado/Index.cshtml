@@ -24,16 +24,16 @@
         $('.ui-jqgrid .ui-jqgrid-htable th div').css('white-space', 'normal');
 
         $('#Lista').jqGrid({
-            url: '@Url.Action("Listado_jqGrid", "Empleado")',
+            url: '@Url.Action("Empleados_DynamicGridData", "Empleado")',
             datatype: 'json',
             mtype: 'POST',
             shrinkToFit: true,
             colNames: ['Acciones', 'IdEmpleado', 'Nombre', 'Legajo', 'Usuario red', 'Sector', 'Cargo', 'Email', 'Iniciales', 'Es adm?', 'Cuenta ff asignada', 'C.Costo asignado', 'Activo?'],
             colModel: [
-                        { name: 'act', index: 'act', align: 'center', width: 0, sortable: false, editable: false, search: false },
-                        { name: 'IdEmpleado', index: 'IdEmpleado', align: 'left', width: 0, editable: false, hidden: true },
+                        { name: 'act', index: 'act', align: 'center', width: 0, search: false, sortable: false, editable: false, search: false },
+                        { name: 'IdEmpleado', index: 'IdEmpleado', align: 'left', width: 0, search: false, editable: false, hidden: true },
                         { name: 'Nombre', index: 'Nombre', align: 'left', width: 0, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
-                        { name: 'Legajo', index: 'Legajo', align: 'left', width: 0, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'Legajo', index: 'Legajo', align: 'left', width: 0, editable: false, search: false, searchoptions: { sopt: ['cn'] } },
                         { name: 'UsuarioNT', index: 'UsuarioNT', align: 'left', width: 0, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
                         { name: 'Sector', index: 'Sector', align: 'left', width: 0, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
                         { name: 'Cargo', index: 'Cargo', align: 'left', width: 0, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
@@ -67,5 +67,10 @@
         });
         jQuery("#Lista").jqGrid('navGrid', '#ListaPager', { refresh: true, add: false, edit: false, del: false }, {}, {}, {}, { sopt: ["cn"], width: 700, closeOnEscape: true, closeAfterSearch: true });
         jQuery("#Lista").jqGrid('gridResize', { minWidth: 350, maxWidth: 1500, minHeight: 80, maxHeight: 500 });
+        jQuery("#Lista").filterToolbar({
+            stringResult: true, searchOnEnter: true,
+            defaultSearch: 'cn',
+            enableClear: false
+        });
     });
 </script>

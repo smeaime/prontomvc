@@ -153,43 +153,57 @@ namespace ProntoMVC.Controllers
             return Json(new { Success = 1, IdBancoChequera = Id, ex = "" });
         }
 
-        public virtual ActionResult BancoChequeras_DynamicGridData(string sidx, string sord, int page, int rows, bool _search, string filters)
+        public class BancoChequeras2
+        {
+            public int IdBancoChequera { get; set; }
+            public int? IdBanco { get; set; }
+            public int? IdCuentaBancaria { get; set; }
+            public string Banco { get; set; }
+            public string CuentaBancaria { get; set; }
+            public int? NumeroChequera { get; set; }
+            public string Activa { get; set; }
+            public string ChequeraPagoDiferido { get; set; }
+            public DateTime? Fecha { get; set; }
+            public int? DesdeCheque { get; set; }
+            public int? HastaCheque { get; set; }
+            public int? ProximoNumeroCheque { get; set; }
+        }
+
+        public virtual JsonResult BancoChequeras_DynamicGridData(string sidx, string sord, int page, int rows, bool _search, string filters)
         {
             int totalRecords = 0;
+            int pageSize = rows;
 
-            var pagedQuery = Filters.FiltroGenerico<Data.Models.BancoChequera>
-                                ("", sidx, sord, page, rows, _search, filters, db, ref totalRecords);
-
-            // esto filtro se debería aplicar antes que el filtrogenerico (queda mal paginado si no)
-            //var Entidad = pagedQuery.Where(o => (o.Confirmado ?? "") != "NO").AsQueryable();
-
-            int totalPages = (int)Math.Ceiling((float)totalRecords / (float)rows);
-
-            var data = (from a in pagedQuery
+            var data = (from a in db.BancoChequeras
                         from b in db.Bancos.Where(o => o.IdBanco == a.IdBanco).DefaultIfEmpty()
                         from c in db.CuentasBancarias.Where(o => o.IdCuentaBancaria == a.IdCuentaBancaria).DefaultIfEmpty()
-                        select new
+                        select new BancoChequeras2
                         {
-                            a.IdBancoChequera,
-                            a.IdBanco,
-                            a.IdCuentaBancaria,
+                            IdBancoChequera = a.IdBancoChequera,
+                            IdBanco = a.IdBanco,
+                            IdCuentaBancaria = a.IdCuentaBancaria,
                             Banco = b != null ? b.Nombre : "",
                             CuentaBancaria = c != null && b != null ? b.Nombre + " [" + c.Cuenta + "]" : "",
-                            a.NumeroChequera,
-                            a.Activa,
-                            a.ChequeraPagoDiferido,
-                            a.Fecha,
-                            a.DesdeCheque,
-                            a.HastaCheque,
-                            a.ProximoNumeroCheque
-                        }).OrderBy(sidx + " " + sord).ToList();
+                            NumeroChequera = a.NumeroChequera,
+                            Activa = a.Activa,
+                            ChequeraPagoDiferido = a.ChequeraPagoDiferido,
+                            Fecha = a.Fecha,
+                            DesdeCheque = a.DesdeCheque,
+                            HastaCheque = a.HastaCheque,
+                            ProximoNumeroCheque = a.ProximoNumeroCheque
+                        }).OrderBy(sidx + " " + sord).AsQueryable();
+
+            var pagedQuery = Filters.FiltroGenerico_UsandoIQueryable<BancoChequeras2>
+                                     (sidx, sord, page, rows, _search, filters, db, ref totalRecords, data);
+
+            int totalPages = (int)Math.Ceiling((float)totalRecords / (float)pageSize);
 
             var jsonData = new jqGridJson()
             {
                 total = totalPages,
                 page = page,
                 records = totalRecords,
-                rows = (from a in data
+                rows = (from a in pagedQuery
                         select new jqGridRowJson
                         {
                             id = a.IdBancoChequera.ToString(),
@@ -210,10 +224,8 @@ namespace ProntoMVC.Controllers
                             }
                         }).ToArray()
             };
-
             return Json(jsonData, JsonRequestBehavior.AllowGet);
         }
-        
 
     }
 }

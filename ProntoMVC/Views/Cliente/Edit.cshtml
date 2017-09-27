@@ -29,7 +29,6 @@
                                 $("#Subcodigo").val(valor);
                             })
                         </script>
-
                     </div>
 
                     <style>
@@ -280,7 +279,7 @@
 
                         <div class="tab-pane" id="retenciones">
                             <div class="well well-sm" style="height: 90px; width: 900px;">
-                                <h5>Ganancias</h5>
+                                <h5 style="font-size: 18px; color: #000306; text-align: center; font-style: italic">Ganancias</h5>
                                 <div class="row-fluid">
                                     <div class="span5 lightblue">
                                         @Html.LabelFor(model => model.IGCondicion, "Categoria")
@@ -291,7 +290,7 @@
                             </div>
 
                             <div class="well well-sm" style="height: 90px; width: 900px;">
-                                <h5>Percepcion IVA</h5>
+                                <h5 style="font-size: 18px; color: #000306; text-align: center; font-style: italic">Percepcion IVA</h5>
                                 <div class="row-fluid">
                                     <div class="span3 lightblue">
                                         @Html.LabelFor(model => model.EsAgenteRetencionIVA, "El cliente es agente de retencion IVA ")
@@ -311,14 +310,14 @@
                             </div>
 
                             <div class="well well-sm" style="height: 300px; width: 900px;">
-                                <h5>Ingresos brutos</h5>
+                                <h5 style="font-size: 18px; color: #000306; text-align: center; font-style: italic">Ingresos brutos</h5>
                                 <div class="row-fluid">
                                     <div class="span10 lightblue">
                                         @*@Html.LabelFor(model => model.IBCondicion, "Condicion")*@
-                                        @Html.RadioButtonFor(model => model.IBCondicion, "1") Exento
-                                        @Html.RadioButtonFor(model => model.IBCondicion, "2") Inscripto convenio multilateral
-                                        @Html.RadioButtonFor(model => model.IBCondicion, "3") Inscripto Jurisdicion Local
-                                        @Html.RadioButtonFor(model => model.IBCondicion, "4") No alcanzado
+                                        @Html.RadioButtonFor(model => model.IBCondicion, "1") <label>Exento</label>
+                                        @Html.RadioButtonFor(model => model.IBCondicion, "2") <label>Inscripto convenio multilateral</label>
+                                        @Html.RadioButtonFor(model => model.IBCondicion, "3") <label>Inscripto Jurisdicion Local</label>
+                                        @Html.RadioButtonFor(model => model.IBCondicion, "4") <label>No alcanzado</label>
                                     </div>
                                 </div>
                                 <div class="row-fluid">
@@ -348,7 +347,7 @@
 
                                 <div class="row-fluid">
                                     <div class="span2 lightblue">
-                                        Buenos Aires :
+                                        <label>Buenos Aires :</label>
                                     </div>
                                     <div class="span2 lightblue">
                                         @Html.LabelFor(model => model.PorcentajeIBDirecto, "%IB directo 1")
@@ -390,7 +389,7 @@
 
                                 <div class="row-fluid">
                                     <div class="span2 lightblue">
-                                        Capital :
+                                        <label>Capital :</label>
                                     </div>
                                     <div class="span2 lightblue">
                                         @Html.LabelFor(model => model.PorcentajeIBDirectoCapital, "%IB directo 2")
@@ -451,7 +450,7 @@
 
                         <div class="tab-pane" id="datoscontables">
                             <div class="well well-sm" style="height: 140px; width: 900px;">
-                                <h5>Datos contables</h5>
+                                <h5 style="font-size: 18px; color: #000306; text-align: center; font-style: italic">Datos contables</h5>
                                 <div class="row-fluid">
                                     <div class="span4 lightblue">
                                         @Html.LabelFor(model => model.IdCuenta, "Cuenta contable para operaciones en peso")
@@ -469,7 +468,7 @@
                             </div>
 
                             <div class="well well-sm" style="height: 140px; width: 900px; ">
-                                <h5>Informacion para servicios de cobranza bancarias</h5>
+                                <h5 style="font-size: 18px; color: #000306; text-align: center; font-style: italic">Informacion para servicios de cobranza bancarias</h5>
                                 <div class="row-fluid">
                                     <div class="span3 lightblue">
                                         @Html.LabelFor(model => model.IdBancoDebito, "Banco para debito bancario")

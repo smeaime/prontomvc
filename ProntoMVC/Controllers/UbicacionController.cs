@@ -186,17 +186,6 @@ namespace ProntoMVC.Controllers
             }
         }
 
-        public class Ubicaciones2
-        {
-            public int IdUbicacion { get; set; }
-            public int? IdDeposito { get; set; }
-            public string Descripcion { get; set; }
-            public string Estanteria { get; set; }
-            public string Modulo { get; set; }
-            public string Gabeta { get; set; }
-            public string DepositoActual { get; set; }
-        }
-
         public virtual ActionResult TT(string sidx, string sord, int? page, int? rows, bool _search, string searchField, string searchOper, string searchString)
         {
             string campo = "true";
@@ -251,6 +240,17 @@ namespace ProntoMVC.Controllers
             return Json(jsonData, JsonRequestBehavior.AllowGet);
         }
 
+        public class Ubicaciones2
+        {
+            public int IdUbicacion { get; set; }
+            public int? IdDeposito { get; set; }
+            public string Descripcion { get; set; }
+            public string Estanteria { get; set; }
+            public string Modulo { get; set; }
+            public string Gabeta { get; set; }
+            public string DepositoActual { get; set; }
+        }
+
         public virtual JsonResult Ubicaciones_DynamicGridData(string sidx, string sord, int page, int rows, bool _search, string filters)
         {
             int totalRecords = 0;
@@ -269,14 +269,8 @@ namespace ProntoMVC.Controllers
                             DepositoActual = b != null ? b.Descripcion : ""
                         }).OrderBy(sidx + " " + sord).AsQueryable();
 
-            //IQueryable<Rubros2> data2 = data.AsQueryable();
-            //List<Rubros2> data3 = data2.ToList();
-
-            var pagedQuery = Filters.FiltroGenerico_UsandoStoreOLista<Ubicaciones2>
-                                (sidx, sord, page, rows, _search, filters, db, ref totalRecords, data.ToList());
-
-            //var pagedQuery = Filters.FiltroGenerico<Data.Models.Rubro>
-            //                    ("", sidx, sord, page, rows, _search, filters, db, ref totalRecords);
+            var pagedQuery = Filters.FiltroGenerico_UsandoIQueryable<Ubicaciones2>
+                                     (sidx, sord, page, rows, _search, filters, db, ref totalRecords, data);
 
             int totalPages = (int)Math.Ceiling((float)totalRecords / (float)pageSize);
 
