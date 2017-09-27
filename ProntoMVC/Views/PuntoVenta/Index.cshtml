@@ -31,19 +31,19 @@
         $('.ui-jqgrid .ui-jqgrid-htable th div').css('white-space', 'normal');
 
         $('#Lista').jqGrid({
-            url: '@Url.Action("Listado_jqGrid", "PuntoVenta")',
-            postData: { 'FechaInicial': function () { return $("#FechaInicial").val(); }, 'FechaFinal': function () { return $("#FechaFinal").val(); }, 'IdObra': function () { return $("#IdObra").val(); } },
+            url: '@Url.Action("PuntosVenta_DynamicGridData", "PuntoVenta")',
+            //postData: { 'FechaInicial': function () { return $("#FechaInicial").val(); }, 'FechaFinal': function () { return $("#FechaFinal").val(); }, 'IdObra': function () { return $("#IdObra").val(); } },
             datatype: 'json',
             mtype: 'POST',
             colNames: ['Acciones', 'impr', 'IdPuntoVenta', 'Letra', 'Punto de venta', 'Comprobante', 'Proximo Numero', 'Descripcion', 'Fact.Electronica', 'Fact.Elect.modo test', 'Ing.manual CAE', 'Activo' ],
             colModel: [
                         { name: 'act', index: 'act', align: 'center', width: 80, sortable: false, editable: false, search: false }, //, formatter: 'showlink', formatoptions: { baseLinkUrl: '@Url.Action("Edit")'} },
                         { name: 'impr', index: 'act', align: 'center', width: 80, sortable: false, editable: false, search: false,  hidden: true }, //, formatter: 'showlink', formatoptions: { baseLinkUrl: '@Url.Action("Edit")'} },
-                        { name: 'IdPuntoVenta', index: 'IdPuntoVenta', align: 'left', width: 100, editable: false, hidden: true },
-                        { name: 'Letra', index: 'Letra', align: 'left', width: 50, editable: false, hidden: false },
-                        { name: 'NumeroPuntoVenta', index: 'NumeroPuntoVenta', align: 'right', width: 75, editable: false, search: true, searchoptions: { sopt: ['cn','eq'] } },
-                        { name: 'Comprobante', index: 'Comprobante', width: 150, align: 'left', sorttype: 'date', editable: false, formatoptions: { newformat: 'dd/mm/yy' }, datefmt: 'dd/mm/yy', search: false },
-                        { name: 'Proximo Numero', index: 'Proximo Numero', align: 'center', width: 75, editable: false, search: true, searchoptions: { sopt: ['cn']} },
+                        { name: 'IdPuntoVenta', index: 'IdPuntoVenta', align: 'left', width: 100, search: false, editable: false, hidden: true },
+                        { name: 'Letra', index: 'Letra', align: 'left', width: 50, search: true, editable: false, hidden: false },
+                        { name: 'NumeroPuntoVenta', index: 'NumeroPuntoVenta', align: 'right', width: 75, editable: false, search: false, searchoptions: { sopt: ['cn', 'eq'] } },
+                        { name: 'Comprobante', index: 'Comprobante', width: 150, align: 'left', search: false, editable: false, hidden: false },
+                        { name: 'Proximo Numero', index: 'Proximo Numero', align: 'center', width: 75, editable: false, search: false, searchoptions: { sopt: ['cn'] } },
                         { name: 'Descripcion', index: 'Descripcion', align: 'left', width: 200, editable: false, search: true, searchoptions: { sopt: ['cn']} },
                         { name: 'Fact.Electronica', index: 'Fact.Electronica', align: 'center', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn']} },
                         { name: 'Fact.Elect. (modo test)', index: 'Fact.Elect. (modo test)', align: 'center', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
@@ -83,6 +83,11 @@
         //jQuery("#Lista").jqGrid('navGrid', '#ListaPager', { edit: false, add: false, del: false, refresh: true, search: true });
         jQuery("#Lista").jqGrid('navGrid', '#ListaPager', { refresh: true, add: false, edit: false, del: false }, {}, {}, {}, { sopt: ["cn"], width: 700, closeOnEscape: true, closeAfterSearch: true });
         jQuery("#Lista").jqGrid('gridResize', { minWidth: 350, maxWidth: 1500, minHeight: 80, maxHeight: 500 });
+        jQuery("#Lista").filterToolbar({
+            stringResult: true, searchOnEnter: true,
+            defaultSearch: 'cn',
+            enableClear: false
+        });
     });
 
 </script>

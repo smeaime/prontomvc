@@ -7,15 +7,10 @@
     @Html.ValidationSummary(true)
     <script src="@Url.Content("~/Scripts/ScriptObra.js")" type="text/javascript"></script>
 
-
-
-
     <div id="principal" class="container-fluid" style="padding-left: 0px; padding-right: 0px;">
         <form class="form-horizontal" style=" margin-bottom: 0px;">
             <div id="cuerpomaspie" class="" style="padding-bottom:2px; position: relative; height: 100%  " @*Height of the footer *@>
                 <div id="conscroll" style="height: 600px; margin-bottom: 40px; overflow-y: scroll; top: 50px; padding-left: 25px; padding-right: 25px; overflow-x: hidden;">
-
-
                     <div class="row-fluid">
                         <div>@Html.Hidden("IdObra", Model.IdObra)</div>
                         <div>@Html.Hidden("IdLocalidad", Model.IdLocalidad)</div>
@@ -29,10 +24,28 @@
                         </div>
 
                         <style>
-                            .nav-tabs > li > a {
-                                border: 1px solid rgba(0, 0, 0, 0.03);
+                            .nav-tabs {
+                                background-color: #AEB6BF;
                             }
+
+                            .tab-content {
+                                background-color: #AEB6BF;
+                                color: #fff;
+                                padding: 5px;
+                            }
+
+                            .nav-tabs > li > a {
+                                border: medium none;
+                            }
+
+                                .nav-tabs > li > a:hover {
+                                    background-color: #303136 !important;
+                                    border: medium none;
+                                    border-radius: 0;
+                                    color: #fff;
+                                }
                         </style>
+
                         <ul id="tabs" class="nav nav-tabs" data-tabs="tabs">
                             <li class="active"><a href="#red" data-toggle="tab">Datos generales</a></li>
                             <li><a href="#ubicacion" data-toggle="tab">Ubicacion</a></li>

@@ -144,37 +144,45 @@ namespace ProntoMVC.Controllers
             return Json(new { Success = 1, IdCaja = Id, ex = "" });
         }
 
-        public virtual ActionResult Cajas_DynamicGridData(string sidx, string sord, int page, int rows, bool _search, string filters)
+        public class Cajas2
+        {
+            public int IdCaja { get; set; }
+            public int? IdCuenta { get; set; }
+            public int? IdMoneda { get; set; }
+            public string Descripcion { get; set; }
+            public string Cuenta { get; set; }
+            public string Moneda { get; set; }
+        }
+
+        public virtual JsonResult Cajas_DynamicGridData(string sidx, string sord, int page, int rows, bool _search, string filters)
         {
             int totalRecords = 0;
+            int pageSize = rows;
 
-            var pagedQuery = Filters.FiltroGenerico<Data.Models.Caja>
-                                ("Cuentas", sidx, sord, page, rows, _search, filters, db, ref totalRecords);
-
-            // esto filtro se debería aplicar antes que el filtrogenerico (queda mal paginado si no)
-            //var Entidad = pagedQuery.Where(o => (o.Confirmado ?? "") != "NO").AsQueryable();
-
-            int totalPages = (int)Math.Ceiling((float)totalRecords / (float)rows);
-
-            var data = (from a in pagedQuery
+            var data = (from a in db.Cajas
                         from b in db.Monedas.Where(o => o.IdMoneda == a.IdMoneda).DefaultIfEmpty()
                         from c in db.Cuentas.Where(o => o.IdCuenta == a.IdCuenta).DefaultIfEmpty()
-                        select new
+                        select new Cajas2
                         {
-                            a.IdCaja,
-                            a.IdCuenta,
-                            a.IdMoneda,
-                            a.Descripcion,
+                            IdCaja = a.IdCaja,
+                            IdCuenta = a.IdCuenta,
+                            IdMoneda = a.IdMoneda,
+                            Descripcion = a.Descripcion,
                             Cuenta = c != null ? c.Descripcion : "",
                             Moneda = b != null ? b.Nombre : ""
-                        }).OrderBy(sidx + " " + sord).ToList();
+                        }).OrderBy(sidx + " " + sord).AsQueryable();
+
+            var pagedQuery = Filters.FiltroGenerico_UsandoIQueryable<Cajas2>
+                                     (sidx, sord, page, rows, _search, filters, db, ref totalRecords, data);
+
+            int totalPages = (int)Math.Ceiling((float)totalRecords / (float)pageSize);
 
             var jsonData = new jqGridJson()
             {
                 total = totalPages,
                 page = page,
                 records = totalRecords,
-                rows = (from a in data
+                rows = (from a in pagedQuery
                         select new jqGridRowJson
                         {
                             id = a.IdCaja.ToString(),
@@ -189,7 +197,6 @@ namespace ProntoMVC.Controllers
                             }
                         }).ToArray()
             };
-
             return Json(jsonData, JsonRequestBehavior.AllowGet);
         }
 

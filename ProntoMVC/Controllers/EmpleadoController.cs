@@ -550,8 +550,8 @@ namespace ProntoMVC.Controllers
                             Sector = b != null ? b.Descripcion : null,
                             a.IdSectorNuevo
                         }).OrderBy(x => x.FechaCambio)
-//.Skip((currentPage - 1) * pageSize).Take(pageSize)
-.ToList();
+                        //.Skip((currentPage - 1) * pageSize).Take(pageSize)
+                        .ToList();
 
             var jsonData = new jqGridJson()
             {
@@ -608,8 +608,8 @@ namespace ProntoMVC.Controllers
                             FechaCambio = a.FechaCambio,
                             a.HorasJornada
                         }).OrderBy(x => x.FechaCambio)
-//.Skip((currentPage - 1) * pageSize).Take(pageSize)
-.ToList();
+                        //.Skip((currentPage - 1) * pageSize).Take(pageSize)
+                        .ToList();
 
             var jsonData = new jqGridJson()
             {
@@ -668,8 +668,8 @@ namespace ProntoMVC.Controllers
                             CuentaBancaria = b != null ? b.Cuenta : null,
                             a.IdCuentaBancaria
                         }).OrderBy(x => x.Banco)
-//.Skip((currentPage - 1) * pageSize).Take(pageSize)
-.ToList();
+                        //.Skip((currentPage - 1) * pageSize).Take(pageSize)
+                        .ToList();
 
             var jsonData = new jqGridJson()
             {
@@ -728,8 +728,8 @@ namespace ProntoMVC.Controllers
                             Ubicacion = b != null ? b.Descripcion : null,
                             a.IdUbicacion
                         }).OrderBy(x => x.Ubicacion)
-//.Skip((currentPage - 1) * pageSize).Take(pageSize)
-.ToList();
+                        //.Skip((currentPage - 1) * pageSize).Take(pageSize)
+                        .ToList();
 
             var jsonData = new jqGridJson()
             {
@@ -802,8 +802,8 @@ namespace ProntoMVC.Controllers
                             a.Activo
                         }
                         ).Where(campo).OrderBy(sidx + " " + sord)
-.Skip((currentPage - 1) * pageSize).Take(pageSize)
-.ToList();
+                        .Skip((currentPage - 1) * pageSize).Take(pageSize)
+                        .ToList();
 
             var jsonData = new jqGridJson()
             {
@@ -811,6 +811,80 @@ namespace ProntoMVC.Controllers
                 page = currentPage,
                 records = totalRecords,
                 rows = (from a in data
+                        select new jqGridRowJson
+                        {
+                            id = a.IdEmpleado.ToString(),
+                            cell = new string[] { 
+                                "<a href="+ Url.Action("Edit",new {id = a.IdEmpleado}) +">Editar</>  -  <a href="+ Url.Action("Delete",new {id = a.IdEmpleado}) +">Eliminar</>",
+                                a.IdEmpleado.ToString(),
+                                a.Nombre,
+                                a.Legajo.ToString(),
+                                a.UsuarioNT,
+                                a.Sector,
+                                a.Cargo,
+                                a.Email,
+                                a.Iniciales,
+                                a.Administrador,
+                                a.CuentaFFAsignada,
+                                a.ObraAsignada,
+                                a.Activo
+                            }
+                        }).ToArray()
+            };
+            return Json(jsonData, JsonRequestBehavior.AllowGet);
+        }
+
+        public class Empleados2
+        {
+            public int IdEmpleado { get; set; }
+            public string Nombre { get; set; }
+            public int? Legajo { get; set; }
+            public string UsuarioNT { get; set; }
+            public string Sector { get; set; }
+            public string Cargo { get; set; }
+            public string Email { get; set; }
+            public string Iniciales { get; set; }
+            public string Administrador { get; set; }
+            public string CuentaFFAsignada { get; set; }
+            public string ObraAsignada { get; set; }
+            public string Activo { get; set; }
+        }
+
+        public virtual JsonResult Empleados_DynamicGridData(string sidx, string sord, int page, int rows, bool _search, string filters)
+        {
+            int totalRecords = 0;
+            int pageSize = rows;
+
+            var data = (from a in db.Empleados
+                        join b in db.Cuentas on a.IdCuentaFondoFijo equals b.IdCuenta into ab from b in ab.DefaultIfEmpty()
+                        join c in db.Obras on a.IdObraAsignada equals c.IdObra into ac from c in ac.DefaultIfEmpty()
+                        select new Empleados2
+                        {
+                            IdEmpleado = a.IdEmpleado,
+                            Nombre = a.Nombre,
+                            Legajo = a.Legajo,
+                            UsuarioNT = a.UsuarioNT,
+                            Sector = a.Sectore.Descripcion,
+                            Cargo = a.Cargo.Descripcion,
+                            Email = a.Email,
+                            Iniciales = a.Iniciales,
+                            Administrador = a.Administrador,
+                            CuentaFFAsignada = b != null ? b.Descripcion : null,
+                            ObraAsignada = c != null ? c.NumeroObra : null,
+                            Activo = a.Activo
+                        }).OrderBy(sidx + " " + sord).AsQueryable();
+
+            var pagedQuery = Filters.FiltroGenerico_UsandoIQueryable<Empleados2>
+                                     (sidx, sord, page, rows, _search, filters, db, ref totalRecords, data);
+
+            int totalPages = (int)Math.Ceiling((float)totalRecords / (float)pageSize);
+
+            var jsonData = new jqGridJson()
+            {
+                total = totalPages,
+                page = page,
+                records = totalRecords,
+                rows = (from a in pagedQuery
                         select new jqGridRowJson
                         {
                             id = a.IdEmpleado.ToString(),

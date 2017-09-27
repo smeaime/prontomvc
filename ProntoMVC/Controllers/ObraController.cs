@@ -424,9 +424,8 @@ namespace ProntoMVC.Controllers
 
             var data1 = (from a in data select a)
                         .OrderBy(x => x.Descripcion)
-                        
-//.Skip((currentPage - 1) * pageSize).Take(pageSize)
-.ToList();
+                        //.Skip((currentPage - 1) * pageSize).Take(pageSize)
+                        .ToList();
 
             var jsonData = new jqGridJson()
             {
@@ -484,6 +483,172 @@ namespace ProntoMVC.Controllers
             return Json(jsonData, JsonRequestBehavior.AllowGet);
         }
 
+        public class Obras2
+        {
+            public int IdObra { get; set; }
+            public string Descripcion { get; set; }
+            public string NumeroObra { get; set; }
+            public string TipoObraDescripcion { get; set; }
+            public string Activa { get; set; }
+            public DateTime? FechaInicio { get; set; }
+            public DateTime? FechaFinalizacion { get; set; }
+            public DateTime? FechaEntrega { get; set; }
+            public string Jerarquia { get; set; }
+            public string JefeRegional { get; set; }
+            public string Jefe { get; set; }
+            public string Subjefe { get; set; }
+            public string CuentaContableFF { get; set; }
+            public string GrupoObra { get; set; }
+            public string ArticuloAsociado { get; set; }
+            public decimal? ValorObra { get; set; }
+            public string Moneda { get; set; }
+            public string Direccion { get; set; }
+            public string Localidad { get; set; }
+            public string CodigoPostal { get; set; }
+            public string Provincia { get; set; }
+            public string Pais { get; set; }
+            public string Telefono { get; set; }
+            public string Responsable { get; set; }
+            public string LugarPago { get; set; }
+            public int? ProximoNumeroAutorizacionCompra { get; set; }
+            public int? OrdenamientoSecundario { get; set; }
+            public string ActivarPresupuestoObra { get; set; }
+            public int? DiasLiquidacionCertificados { get; set; }
+            public string Observaciones { get; set; }
+            public string ArchivoAdjunto1 { get; set; }
+            public string ArchivoAdjunto2 { get; set; }
+            public string ArchivoAdjunto3 { get; set; }
+            public string ArchivoAdjunto4 { get; set; }
+            public string ArchivoAdjunto5 { get; set; }
+            public string ArchivoAdjunto6 { get; set; }
+            public string ArchivoAdjunto7 { get; set; }
+            public string ArchivoAdjunto8 { get; set; }
+            public string ArchivoAdjunto9 { get; set; }
+            public string ArchivoAdjunto10 { get; set; }
+        }
+
+        public virtual JsonResult Obras_DynamicGridData(string sidx, string sord, int page, int rows, bool _search, string filters, string activas)
+        {
+            int totalRecords = 0;
+            int pageSize = rows;
+
+            var data = (from a in db.Obras.Where(p => (p.Activa ?? "NO") == activas).AsQueryable()
+                        from b in db.Clientes.Where(o => o.IdCliente == a.IdCliente).DefaultIfEmpty()
+                        from c in db.UnidadesOperativas.Where(o => o.IdUnidadOperativa == a.IdUnidadOperativa).DefaultIfEmpty()
+                        from d in db.Monedas.Where(o => o.IdMoneda == a.IdMonedaValorObra).DefaultIfEmpty()
+                        from e in db.Articulos.Where(o => o.IdArticulo == a.IdArticuloAsociado).DefaultIfEmpty()
+                        from f in db.GruposObras.Where(o => o.IdGrupoObra == a.IdGrupoObra).DefaultIfEmpty()
+                        from g in db.Cuentas.Where(o => o.IdCuenta == a.IdCuentaContableFF).DefaultIfEmpty()
+                        from h in db.Localidades.Where(o => o.IdLocalidad == a.IdLocalidad).DefaultIfEmpty()
+                        from i in db.Provincias.Where(o => o.IdProvincia == a.IdProvincia).DefaultIfEmpty()
+                        from j in db.Paises.Where(o => o.IdPais == a.IdPais).DefaultIfEmpty()
+                        from k in db.Empleados.Where(o => o.IdEmpleado == a.IdJefeRegional).DefaultIfEmpty()
+                        from l in db.Empleados.Where(o => o.IdEmpleado == a.IdJefe).DefaultIfEmpty()
+                        from m in db.Empleados.Where(o => o.IdEmpleado == a.IdSubjefe).DefaultIfEmpty()
+                        select new Obras2
+                        {
+                            IdObra = a.IdObra,
+                            Descripcion = a.Descripcion,
+                            NumeroObra = a.NumeroObra,
+                            TipoObraDescripcion = (a.TipoObra ?? 1) == 1 ? "Taller" : ((a.TipoObra ?? 1) == 2 ? "Montaje" : ((a.TipoObra ?? 1) == 3 ? "Servicio" : "")),
+                            Activa = a.Activa,
+                            FechaInicio = a.FechaInicio,
+                            FechaFinalizacion = a.FechaFinalizacion,
+                            FechaEntrega = a.FechaEntrega,
+                            Jerarquia = a.Jerarquia,
+                            JefeRegional = k != null ? k.Nombre : "",
+                            Jefe = l != null ? l.Nombre : "",
+                            Subjefe = m != null ? m.Nombre : "",
+                            CuentaContableFF = g != null ? g.Descripcion : "",
+                            GrupoObra = f != null ? f.Descripcion : "",
+                            ArticuloAsociado = e != null ? e.Descripcion : "",
+                            ValorObra = a.ValorObra,
+                            Moneda = d != null ? d.Abreviatura : "",
+                            Direccion = a.Direccion,
+                            Localidad = h != null ? h.Nombre : "",
+                            CodigoPostal = a.CodigoPostal,
+                            Provincia = i != null ? i.Nombre : "",
+                            Pais = j != null ? j.Descripcion : "",
+                            Telefono = a.Telefono,
+                            Responsable = a.Responsable,
+                            LugarPago = a.LugarPago,
+                            ProximoNumeroAutorizacionCompra = a.ProximoNumeroAutorizacionCompra,
+                            OrdenamientoSecundario = a.OrdenamientoSecundario,
+                            ActivarPresupuestoObra = a.ActivarPresupuestoObra,
+                            DiasLiquidacionCertificados = a.DiasLiquidacionCertificados,
+                            Observaciones = a.Observaciones,
+                            ArchivoAdjunto1 = a.ArchivoAdjunto1,
+                            ArchivoAdjunto2 = a.ArchivoAdjunto2,
+                            ArchivoAdjunto3 = a.ArchivoAdjunto3,
+                            ArchivoAdjunto4 = a.ArchivoAdjunto4,
+                            ArchivoAdjunto5 = a.ArchivoAdjunto5,
+                            ArchivoAdjunto6 = a.ArchivoAdjunto6,
+                            ArchivoAdjunto7 = a.ArchivoAdjunto7,
+                            ArchivoAdjunto8 = a.ArchivoAdjunto8,
+                            ArchivoAdjunto9 = a.ArchivoAdjunto9,
+                            ArchivoAdjunto10 = a.ArchivoAdjunto10
+                        }).OrderBy(sidx + " " + sord).AsQueryable();
+
+            var pagedQuery = Filters.FiltroGenerico_UsandoIQueryable<Obras2>
+                                     (sidx, sord, page, rows, _search, filters, db, ref totalRecords, data);
+
+            int totalPages = (int)Math.Ceiling((float)totalRecords / (float)pageSize);
+
+            var jsonData = new jqGridJson()
+            {
+                total = totalPages,
+                page = page,
+                records = totalRecords,
+                rows = (from a in pagedQuery
+                        select new jqGridRowJson
+                        {
+                            id = a.IdObra.ToString(),
+                            cell = new string[] { 
+                                "<a href="+ Url.Action("Edit",new {id = a.IdObra} ) +" >Editar</>",
+                                a.IdObra.NullSafeToString(),
+                                a.Descripcion.NullSafeToString(),
+                                a.NumeroObra.NullSafeToString(),
+                                a.TipoObraDescripcion.NullSafeToString(),
+                                a.Activa.NullSafeToString(),
+                                a.FechaInicio == null ? "" : a.FechaInicio.GetValueOrDefault().ToString("dd/MM/yyyy"),
+                                a.FechaFinalizacion == null ? "" : a.FechaFinalizacion.GetValueOrDefault().ToString("dd/MM/yyyy"),
+                                a.FechaEntrega == null ? "" : a.FechaEntrega.GetValueOrDefault().ToString("dd/MM/yyyy"),
+                                a.Jerarquia.NullSafeToString(),
+                                a.JefeRegional.NullSafeToString(),
+                                a.Jefe.NullSafeToString(),
+                                a.Subjefe.NullSafeToString(),
+                                a.CuentaContableFF.NullSafeToString(),
+                                a.GrupoObra.NullSafeToString(),
+                                a.ArticuloAsociado.NullSafeToString(),
+                                a.ValorObra.NullSafeToString(),
+                                a.Moneda.NullSafeToString(),
+                                a.Direccion.NullSafeToString(),
+                                a.Localidad.NullSafeToString(),
+                                a.CodigoPostal.NullSafeToString(),
+                                a.Provincia.NullSafeToString(),
+                                a.Pais.NullSafeToString(),
+                                a.Telefono.NullSafeToString(),
+                                a.Responsable.NullSafeToString(),
+                                a.LugarPago.NullSafeToString(),
+                                a.ProximoNumeroAutorizacionCompra.NullSafeToString(),
+                                a.OrdenamientoSecundario.NullSafeToString(),
+                                a.DiasLiquidacionCertificados.NullSafeToString(),
+                                a.Observaciones.NullSafeToString(),
+                                a.ArchivoAdjunto1.NullSafeToString(),
+                                a.ArchivoAdjunto2.NullSafeToString(),
+                                a.ArchivoAdjunto3.NullSafeToString(),
+                                a.ArchivoAdjunto4.NullSafeToString(),
+                                a.ArchivoAdjunto5.NullSafeToString(),
+                                a.ArchivoAdjunto6.NullSafeToString(),
+                                a.ArchivoAdjunto7.NullSafeToString(),
+                                a.ArchivoAdjunto8.NullSafeToString(),
+                                a.ArchivoAdjunto9.NullSafeToString(),
+                                a.ArchivoAdjunto10.NullSafeToString()
+                            }
+                        }).ToArray()
+            };
+            return Json(jsonData, JsonRequestBehavior.AllowGet);
+        }
         public virtual ActionResult DetObrasPolizas(string sidx, string sord, int? page, int? rows, int? IdObra)
         {
             int IdObra1 = IdObra ?? 0;
