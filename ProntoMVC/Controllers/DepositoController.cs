@@ -239,14 +239,8 @@ namespace ProntoMVC.Controllers
                             Obra = b != null ? b.Descripcion : ""
                         }).OrderBy(sidx + " " + sord).AsQueryable();
 
-            //IQueryable<Rubros2> data2 = data.AsQueryable();
-            //List<Rubros2> data3 = data2.ToList();
-
-            var pagedQuery = Filters.FiltroGenerico_UsandoStoreOLista<Depositos2>
-                                (sidx, sord, page, rows, _search, filters, db, ref totalRecords, data.ToList());
-
-            //var pagedQuery = Filters.FiltroGenerico<Data.Models.Rubro>
-            //                    ("", sidx, sord, page, rows, _search, filters, db, ref totalRecords);
+            var pagedQuery = Filters.FiltroGenerico_UsandoIQueryable<Depositos2>
+                                     (sidx, sord, page, rows, _search, filters, db, ref totalRecords, data);
 
             int totalPages = (int)Math.Ceiling((float)totalRecords / (float)pageSize);
 

@@ -20,15 +20,15 @@
         $('.ui-jqgrid .ui-jqgrid-htable th div').css('white-space', 'normal');
 
         $('#Lista').jqGrid({
-            url: '@Url.Action("Listado_jqGrid", "Transportista")',
+            url: '@Url.Action("Transportistas_DynamicGridData", "Transportista")',
             datatype: 'json',
             mtype: 'POST',
             shrinkToFit: true,
             colNames: ['Acciones', 'IdTransportista', 'Razon social', 'Codigo', 'Direccion', 'Localidad', 'Cod.Pos.', 'Provincia', 'Telefono', 'Email', 'Cuit'],
             colModel: [
-                        { name: 'act', index: 'act', align: 'center', width: 0, sortable: false, editable: false, search: false },
-                        { name: 'IdTransportista', index: 'IdTransportista', align: 'left', width: 0, editable: false, hidden: true },
-                        { name: 'RazonSocial', index: 'RazonSocial', align: 'left', width: 0, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'act', index: 'act', align: 'center', width: 0, search: false, sortable: false, editable: false },
+                        { name: 'IdTransportista', index: 'IdTransportista', align: 'left', width: 0, search: false, editable: false, hidden: true },
+                        { name: 'RazonSocial', index: 'RazonSocial', align: 'left', width: 0, search: true, editable: false, searchoptions: { sopt: ['cn'] } },
                         { name: 'Codigo', index: 'Codigo', align: 'center', width: 0, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
                         { name: 'Direccion', index: 'Direccion', align: 'center', width: 0, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
                         { name: 'Localidad', index: 'Localidad', align: 'center', width: 0, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
@@ -61,7 +61,11 @@
         });
         jQuery("#Lista").jqGrid('navGrid', '#ListaPager', { refresh: true, add: false, edit: false, del: false }, {}, {}, {}, { sopt: ["cn"], width: 700, closeOnEscape: true, closeAfterSearch: true });
         jQuery("#Lista").jqGrid('gridResize', { minWidth: 350, maxWidth: 1500, minHeight: 80, maxHeight: 500 });
-
+        jQuery("#Lista").filterToolbar({
+            stringResult: true, searchOnEnter: true,
+            defaultSearch: 'cn',
+            enableClear: false
+        });
     });
 
 </script>

@@ -223,8 +223,8 @@ namespace ProntoMVC.Controllers
                             a.CodigoAFIP,
                             a.GeneraImpuestos
                         }).Where(campo).OrderBy(sidx + " " + sord)
-//.Skip((currentPage - 1) * pageSize).Take(pageSize)
-.ToList();
+                        //.Skip((currentPage - 1) * pageSize).Take(pageSize)
+                        .ToList();
 
             var jsonData = new jqGridJson()
             {
@@ -249,8 +249,52 @@ namespace ProntoMVC.Controllers
             return Json(jsonData, JsonRequestBehavior.AllowGet);
         }
 
+        public virtual JsonResult Monedas_DynamicGridData(string sidx, string sord, int page, int rows, bool _search, string filters)
+        {
+            int totalRecords = 0;
+            int pageSize = rows;
 
-    
+            var pagedQuery = Filters.FiltroGenerico<Data.Models.Moneda>
+                                ("", sidx, sord, page, rows, _search, filters, db, ref totalRecords);
+
+            // esto filtro se debería aplicar antes que el filtrogenerico (queda mal paginado si no)
+            var Entidad = pagedQuery.AsQueryable();
+
+            int totalPages = (int)Math.Ceiling((float)totalRecords / (float)pageSize);
+
+            var data = (from a in Entidad
+                        select new
+                        {
+                            a.IdMoneda,
+                            a.Nombre,
+                            a.Abreviatura,
+                            a.CodigoAFIP,
+                            a.GeneraImpuestos
+                        }).OrderBy(sidx + " " + sord).ToList();
+
+            var jsonData = new jqGridJson()
+            {
+                total = totalPages,
+                page = page,
+                records = totalRecords,
+                rows = (from a in data
+                        select new jqGridRowJson
+                        {
+                            id = a.IdMoneda.ToString(),
+                            cell = new string[] { 
+                                "",
+                                //"<a href="+ Url.Action("Edit",new {id = a.IdMoneda}) +">Editar</>  -  <a href="+ Url.Action("Delete",new {id = a.IdMoneda}) +">Eliminar</>",
+                                a.IdMoneda.ToString(),
+                                a.Nombre.NullSafeToString(),
+                                a.Abreviatura.ToString(),
+                                a.CodigoAFIP.NullSafeToString(),
+                                a.GeneraImpuestos.NullSafeToString(),
+                            }
+                        }).ToArray()
+            };
+
+            return Json(jsonData, JsonRequestBehavior.AllowGet);
+        }
 
         public virtual JsonResult Moneda_Cotizacion(DateTime? fecha, int IdMoneda)
         {

@@ -152,46 +152,62 @@ namespace ProntoMVC.Controllers
             return Json(new { Success = 1, IdBanco = Id, ex = "" });
         }
 
-        public virtual ActionResult Bancos_DynamicGridData(string sidx, string sord, int page, int rows, bool _search, string filters)
+        public class Bancos2
+        {
+            public int IdBanco { get; set; }
+            public int? IdCuenta { get; set; }
+            public int? IdCuentaParaChequesDiferidos { get; set; }
+            public int? IdCodigoIva { get; set; }
+            public int? CodigoUniversal { get; set; }
+            public string Nombre { get; set; }
+            public string Cuenta { get; set; }
+            public string CuentaParaChequesDiferidos { get; set; }
+            public string Cuit { get; set; }
+            public string DescripcionIva { get; set; }
+            public int? CodigoResumen { get; set; }
+            public int? Codigo { get; set; }
+            public int? Entidad { get; set; }
+            public int? Subentidad { get; set; }
+        }
+
+        public virtual JsonResult Bancos_DynamicGridData(string sidx, string sord, int page, int rows, bool _search, string filters)
         {
             int totalRecords = 0;
+            int pageSize = rows;
 
-            var pagedQuery = Filters.FiltroGenerico<Data.Models.Banco>
-                                ("Cuentas", sidx, sord, page, rows, _search, filters, db, ref totalRecords);
-
-            // esto filtro se debería aplicar antes que el filtrogenerico (queda mal paginado si no)
-            //var Entidad = pagedQuery.Where(o => (o.Confirmado ?? "") != "NO").AsQueryable();
-
-            int totalPages = (int)Math.Ceiling((float)totalRecords / (float)rows);
-
-            var data = (from a in pagedQuery
+            var data = (from a in db.Bancos
                         from b in db.Cuentas.Where(o => o.IdCuenta == a.IdCuenta).DefaultIfEmpty()
                         from c in db.Cuentas.Where(o => o.IdCuenta == a.IdCuentaParaChequesDiferidos).DefaultIfEmpty()
                         from d in db.DescripcionIvas.Where(o => o.IdCodigoIva == a.IdCodigoIva).DefaultIfEmpty()
-                        select new
+                        select new Bancos2
                         {
-                            a.IdBanco,
-                            a.IdCuenta,
-                            a.IdCuentaParaChequesDiferidos,
-                            a.IdCodigoIva,
-                            a.CodigoUniversal,
-                            a.Nombre,
+                            IdBanco = a.IdBanco,
+                            IdCuenta = a.IdCuenta,
+                            IdCuentaParaChequesDiferidos = a.IdCuentaParaChequesDiferidos,
+                            IdCodigoIva = a.IdCodigoIva,
+                            CodigoUniversal = a.CodigoUniversal,
+                            Nombre = a.Nombre,
                             Cuenta = b != null ? b.Descripcion : "",
                             CuentaParaChequesDiferidos = c != null ? c.Descripcion : "",
-                            a.Cuit,
+                            Cuit = a.Cuit,
                             DescripcionIva = d != null ? d.Descripcion : "",
-                            a.CodigoResumen,
-                            a.Codigo,
-                            a.Entidad,
-                            a.Subentidad
-                        }).OrderBy(sidx + " " + sord).ToList();
+                            CodigoResumen = a.CodigoResumen,
+                            Codigo = a.Codigo,
+                            Entidad = a.Entidad,
+                            Subentidad = a.Subentidad
+                        }).OrderBy(sidx + " " + sord).AsQueryable();
+
+            var pagedQuery = Filters.FiltroGenerico_UsandoIQueryable<Bancos2>
+                                     (sidx, sord, page, rows, _search, filters, db, ref totalRecords, data);
+
+            int totalPages = (int)Math.Ceiling((float)totalRecords / (float)pageSize);
 
             var jsonData = new jqGridJson()
             {
                 total = totalPages,
                 page = page,
                 records = totalRecords,
-                rows = (from a in data
+                rows = (from a in pagedQuery
                         select new jqGridRowJson
                         {
                             id = a.IdBanco.ToString(),
@@ -214,10 +230,9 @@ namespace ProntoMVC.Controllers
                             }
                         }).ToArray()
             };
-
             return Json(jsonData, JsonRequestBehavior.AllowGet);
         }
-        
+
         public virtual ActionResult GetBancosPropios(int? TipoEntidad)
         {
             int TipoEntidad1 = TipoEntidad ?? 0;
@@ -232,6 +247,11 @@ namespace ProntoMVC.Controllers
             {
                 foreach (CuentasBancaria u in db.CuentasBancarias.Where(x => x.Activa == "SI").OrderBy(x => x.Banco.Nombre).ToList())
                     Datacombo.Add(u.IdCuentaBancaria, u.Banco.Nombre);
+            }
+            if (TipoEntidad == 11)
+            {
+                foreach (Banco u in db.Bancos.Where(x => (x.IdCuenta ?? 0) != 0).OrderBy(x => x.Nombre).ToList())
+                    Datacombo.Add(u.IdBanco, u.Nombre);
             }
             if (TipoEntidad == 2)
             {

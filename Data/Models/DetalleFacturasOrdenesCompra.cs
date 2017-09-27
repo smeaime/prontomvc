@@ -22,5 +22,6 @@ namespace ProntoMVC.Data.Models
     
         public virtual Factura Factura { get; set; }
         public virtual DetalleFactura DetalleFactura { get; set; }
+        public virtual DetalleOrdenesCompra DetalleOrdenesCompra { get; set; }
     }
 }
