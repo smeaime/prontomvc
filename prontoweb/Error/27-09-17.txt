@@ -1,0 +1,599 @@
+
+Log Entry : 
+09/27/2017 09:46:34
+Error in: http://localhost:50769/SeleccionarEmpresa.aspx. Error Message:sesion: supervisor True
+__________________________
+
+Log Entry : 
+09/27/2017 09:46:34
+Error in: http://localhost:50769/SeleccionarEmpresa.aspx. Error Message:Pasa nomas. membership: supervisor
+__________________________
+
+Log Entry : 
+09/27/2017 09:46:39
+Error in: http://localhost:50769/SeleccionarEmpresa.aspx. Error Message:System.Threading.ThreadAbortException
+Subproceso anulado.
+   en System.Threading.Thread.AbortInternal()
+   en System.Threading.Thread.Abort(Object stateInfo)
+   en System.Web.HttpResponse.AbortCurrentThread()
+   en System.Web.HttpResponse.End()
+   en System.Web.HttpResponse.Redirect(String url, Boolean endResponse, Boolean permanent)
+   en System.Web.HttpResponse.Redirect(String url)
+   en SeleccionarEmpresa.ButContinuar_Command(Object sender, CommandEventArgs e) en C:\bdl\pronto\prontoweb\SeleccionarEmpresa.aspx.vb:línea 404
+mscorlib
+__________________________
+
+Log Entry : 
+09/27/2017 09:46:39
+Error in: http://localhost:50769/ProntoWeb/CartasDePortes.aspx?tipo=Todas. Error Message:supervisor
+__________________________
+
+Log Entry : 
+09/27/2017 09:47:03
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesAccesoClientesMovil.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartaDePorteManager.TraerCUITClientesSegunUsuario(String usuario, String SC, String scbdlmaster) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 15514
+BusinessLogic
+__________________________
+
+Log Entry : 
+09/27/2017 09:54:16
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesAccesoClientesMovil.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartaDePorteManager.TraerCUITClientesSegunUsuario(String usuario, String SC, String scbdlmaster) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 15514
+BusinessLogic
+__________________________
+
+Log Entry : 
+09/27/2017 09:54:37
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesAccesoClientesMovil.aspx. Error Message:Microsoft.Reporting.WebForms.ReportServerException: No se encuentra el elemento '/Pronto informes/Listado general de Cartas de Porte (simulando original) con foto 2'. (rsItemNotFound)
+   en Microsoft.Reporting.WebForms.ServerReportSoapProxy.OnSoapException(SoapException e)
+   en Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.ProxyMethodInvocation.Execute[TReturn](RSExecutionConnection connection, ProxyMethod`1 initialMethod, ProxyMethod`1 retryMethod)
+   en Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.LoadReport(String Report, String HistoryID)
+   en Microsoft.Reporting.WebForms.ServerReport.EnsureExecutionSession()
+   en Microsoft.Reporting.WebForms.ServerReport.SetParameters(IEnumerable`1 parameters)
+   en CartaDePorteManager.RebindReportViewer_Servidor_SalidaNormal(ReportViewer& oReportViewer, String rdlFile, IEnumerable`1 parametros) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 5070
+__________________________
+
+Log Entry : 
+09/27/2017 10:03:15
+Error in: http://localhost:50769/ProntoWeb/Principal.aspx. Error Message:supervisor esta logueado, pero lo redirijo al login porque faltan los datos de session. No deberia mejor mandarlo a SeleccionarEmpresa? Ademas, no hago el LogOut y le queda el cookie!!!
+__________________________
+
+Log Entry : 
+09/27/2017 10:03:15
+Error in: http://localhost:50769/ProntoWeb/Principal.aspx. Error Message:sesion: supervisor True
+__________________________
+
+Log Entry : 
+09/27/2017 10:03:15
+Error in: http://localhost:50769/ProntoWeb/Principal.aspx. Error Message:Pasa nomas. membership: supervisor
+__________________________
+
+Log Entry : 
+09/27/2017 10:03:15
+Error in: http://localhost:50769/ProntoWeb/Principal.aspx. Error Message:System.Threading.ThreadAbortException
+Subproceso anulado.
+   en System.Threading.Thread.AbortInternal()
+   en System.Threading.Thread.Abort(Object stateInfo)
+   en System.Web.HttpResponse.AbortCurrentThread()
+   en System.Web.HttpResponse.End()
+   en System.Web.HttpServerUtility.Transfer(String path, Boolean preserveForm)
+   en System.Web.HttpServerUtility.Transfer(String path)
+   en ProntoFuncionesUIWeb.RefrescaSession(HttpServerUtility Server) en C:\bdl\pronto\prontoweb\App_Code\vbcode\ManagerDebug\FuncionesUIWeb.vb:línea 4323
+mscorlib
+__________________________
+
+Log Entry : 
+09/27/2017 10:03:15
+Error in: http://localhost:50769/ProntoWeb/Principal.aspx. Error Message:Verificar que el usuario tenga una empresa asignada
+__________________________
+
+Log Entry : 
+09/27/2017 10:03:26
+Error in: http://localhost:50769/SeleccionarEmpresa.aspx. Error Message:System.Threading.ThreadAbortException
+Subproceso anulado.
+   en System.Threading.Thread.AbortInternal()
+   en System.Threading.Thread.Abort(Object stateInfo)
+   en System.Web.HttpResponse.AbortCurrentThread()
+   en System.Web.HttpResponse.End()
+   en System.Web.HttpResponse.Redirect(String url, Boolean endResponse, Boolean permanent)
+   en System.Web.HttpResponse.Redirect(String url)
+   en SeleccionarEmpresa.ButContinuar_Command(Object sender, CommandEventArgs e) en C:\bdl\pronto\prontoweb\SeleccionarEmpresa.aspx.vb:línea 404
+mscorlib
+__________________________
+
+Log Entry : 
+09/27/2017 10:03:26
+Error in: http://localhost:50769/ProntoWeb/CartasDePortes.aspx?tipo=Todas. Error Message:supervisor
+__________________________
+
+Log Entry : 
+09/27/2017 10:03:36
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesAccesoClientesMovil.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartaDePorteManager.TraerCUITClientesSegunUsuario(String usuario, String SC, String scbdlmaster) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 15514
+BusinessLogic
+__________________________
+
+Log Entry : 
+09/27/2017 10:05:28
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesAccesoClientesMovil.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartaDePorteManager.TraerCUITClientesSegunUsuario(String usuario, String SC, String scbdlmaster) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 15514
+BusinessLogic
+__________________________
+
+Log Entry : 
+09/27/2017 10:05:30
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesAccesoClientesMovil.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartaDePorteManager.TraerCUITClientesSegunUsuario(String usuario, String SC, String scbdlmaster) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 15514
+BusinessLogic
+__________________________
+
+Log Entry : 
+09/27/2017 10:05:44
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesAccesoClientesMovil.aspx. Error Message:System.Net.WebException: Error de la solicitud con el código de estado HTTP 401: Unauthorized.
+   en Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.GetSecureMethods()
+   en Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.IsSecureMethod(String methodname)
+   en Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.SetConnectionSSLForMethod(String methodname)
+   en Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.ProxyMethodInvocation.Execute[TReturn](RSExecutionConnection connection, ProxyMethod`1 initialMethod, ProxyMethod`1 retryMethod)
+   en Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.LoadReport(String Report, String HistoryID)
+   en Microsoft.Reporting.WebForms.ServerReport.EnsureExecutionSession()
+   en Microsoft.Reporting.WebForms.ServerReport.SetParameters(IEnumerable`1 parameters)
+   en CartaDePorteManager.RebindReportViewer_Servidor_SalidaNormal(ReportViewer& oReportViewer, String rdlFile, IEnumerable`1 parametros) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 5070
+__________________________
+
+Log Entry : 
+09/27/2017 10:17:52
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesAccesoClientesMovil.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartaDePorteManager.TraerCUITClientesSegunUsuario(String usuario, String SC, String scbdlmaster) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 15514
+BusinessLogic
+__________________________
+
+Log Entry : 
+09/27/2017 10:20:35
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesAccesoClientesMovil.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartaDePorteManager.TraerCUITClientesSegunUsuario(String usuario, String SC, String scbdlmaster) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 15514
+BusinessLogic
+__________________________
+
+Log Entry : 
+09/27/2017 10:25:32
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesAccesoClientesMovil.aspx. Error Message:System.Net.WebException: Error de la solicitud con el código de estado HTTP 401: Unauthorized.
+   en Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.GetSecureMethods()
+   en Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.IsSecureMethod(String methodname)
+   en Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.SetConnectionSSLForMethod(String methodname)
+   en Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.ProxyMethodInvocation.Execute[TReturn](RSExecutionConnection connection, ProxyMethod`1 initialMethod, ProxyMethod`1 retryMethod)
+   en Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.LoadReport(String Report, String HistoryID)
+   en Microsoft.Reporting.WebForms.ServerReport.EnsureExecutionSession()
+   en Microsoft.Reporting.WebForms.ServerReport.SetParameters(IEnumerable`1 parameters)
+   en CartaDePorteManager.RebindReportViewer_Servidor_SalidaNormal(ReportViewer& oReportViewer, String rdlFile, IEnumerable`1 parametros) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 5070
+__________________________
+
+Log Entry : 
+09/27/2017 10:25:38
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesAccesoClientesMovil.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartaDePorteManager.TraerCUITClientesSegunUsuario(String usuario, String SC, String scbdlmaster) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 15514
+BusinessLogic
+__________________________
+
+Log Entry : 
+09/27/2017 10:27:25
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesAccesoClientesMovil.aspx. Error Message:System.Net.WebException: Error de la solicitud con el código de estado HTTP 401: Unauthorized.
+   en Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.GetSecureMethods()
+   en Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.IsSecureMethod(String methodname)
+   en Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.SetConnectionSSLForMethod(String methodname)
+   en Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.ProxyMethodInvocation.Execute[TReturn](RSExecutionConnection connection, ProxyMethod`1 initialMethod, ProxyMethod`1 retryMethod)
+   en Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.LoadReport(String Report, String HistoryID)
+   en Microsoft.Reporting.WebForms.ServerReport.EnsureExecutionSession()
+   en Microsoft.Reporting.WebForms.ServerReport.SetParameters(IEnumerable`1 parameters)
+   en CartaDePorteManager.RebindReportViewer_Servidor_SalidaNormal(ReportViewer& oReportViewer, String rdlFile, IEnumerable`1 parametros) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 5070
+__________________________
+
+Log Entry : 
+09/27/2017 10:29:25
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesAccesoClientesMovil.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartaDePorteManager.TraerCUITClientesSegunUsuario(String usuario, String SC, String scbdlmaster) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 15514
+BusinessLogic
+__________________________
+
+Log Entry : 
+09/27/2017 10:30:34
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesAccesoClientesMovil.aspx. Error Message:System.Net.WebException: Error de la solicitud con el código de estado HTTP 401: Unauthorized.
+   en Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.GetSecureMethods()
+   en Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.IsSecureMethod(String methodname)
+   en Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.SetConnectionSSLForMethod(String methodname)
+   en Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.ProxyMethodInvocation.Execute[TReturn](RSExecutionConnection connection, ProxyMethod`1 initialMethod, ProxyMethod`1 retryMethod)
+   en Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.LoadReport(String Report, String HistoryID)
+   en Microsoft.Reporting.WebForms.ServerReport.EnsureExecutionSession()
+   en Microsoft.Reporting.WebForms.ServerReport.SetParameters(IEnumerable`1 parameters)
+   en CartaDePorteManager.RebindReportViewer_Servidor_SalidaNormal(ReportViewer& oReportViewer, String rdlFile, IEnumerable`1 parametros) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 5070
+__________________________
+
+Log Entry : 
+09/27/2017 10:34:57
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesAccesoClientesMovil.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartaDePorteManager.TraerCUITClientesSegunUsuario(String usuario, String SC, String scbdlmaster) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 15514
+BusinessLogic
+__________________________
+
+Log Entry : 
+09/27/2017 10:35:06
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesAccesoClientesMovil.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartaDePorteManager.TraerCUITClientesSegunUsuario(String usuario, String SC, String scbdlmaster) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 15514
+BusinessLogic
+__________________________
+
+Log Entry : 
+09/27/2017 10:35:13
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesAccesoClientesMovil.aspx. Error Message:System.Net.WebException: Error de la solicitud con el código de estado HTTP 401: Unauthorized.
+   en Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.GetSecureMethods()
+   en Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.IsSecureMethod(String methodname)
+   en Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.SetConnectionSSLForMethod(String methodname)
+   en Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.ProxyMethodInvocation.Execute[TReturn](RSExecutionConnection connection, ProxyMethod`1 initialMethod, ProxyMethod`1 retryMethod)
+   en Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.LoadReport(String Report, String HistoryID)
+   en Microsoft.Reporting.WebForms.ServerReport.EnsureExecutionSession()
+   en Microsoft.Reporting.WebForms.ServerReport.SetParameters(IEnumerable`1 parameters)
+   en CartaDePorteManager.RebindReportViewer_Servidor_SalidaNormal(ReportViewer& oReportViewer, String rdlFile, IEnumerable`1 parametros) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 5070
+__________________________
+
+Log Entry : 
+09/27/2017 10:38:50
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesAccesoClientesMovil.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartaDePorteManager.TraerCUITClientesSegunUsuario(String usuario, String SC, String scbdlmaster) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 15514
+BusinessLogic
+__________________________
+
+Log Entry : 
+09/27/2017 10:47:30
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesAccesoClientesMovil.aspx. Error Message:System.Net.WebException: Error de la solicitud con el código de estado HTTP 401: Unauthorized.
+   en Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.GetSecureMethods()
+   en Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.IsSecureMethod(String methodname)
+   en Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.SetConnectionSSLForMethod(String methodname)
+   en Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.ProxyMethodInvocation.Execute[TReturn](RSExecutionConnection connection, ProxyMethod`1 initialMethod, ProxyMethod`1 retryMethod)
+   en Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.LoadReport(String Report, String HistoryID)
+   en Microsoft.Reporting.WebForms.ServerReport.EnsureExecutionSession()
+   en Microsoft.Reporting.WebForms.ServerReport.SetParameters(IEnumerable`1 parameters)
+   en CartaDePorteManager.RebindReportViewer_Servidor_SalidaNormal(ReportViewer& oReportViewer, String rdlFile, IEnumerable`1 parametros) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 5070
+__________________________
+
+Log Entry : 
+09/27/2017 10:47:41
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesAccesoClientesMovil.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartaDePorteManager.TraerCUITClientesSegunUsuario(String usuario, String SC, String scbdlmaster) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 15514
+BusinessLogic
+__________________________
+
+Log Entry : 
+09/27/2017 10:47:47
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesAccesoClientesMovil.aspx. Error Message:System.Net.WebException: Error de la solicitud con el código de estado HTTP 401: Unauthorized.
+   en Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.GetSecureMethods()
+   en Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.IsSecureMethod(String methodname)
+   en Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.SetConnectionSSLForMethod(String methodname)
+   en Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.ProxyMethodInvocation.Execute[TReturn](RSExecutionConnection connection, ProxyMethod`1 initialMethod, ProxyMethod`1 retryMethod)
+   en Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.LoadReport(String Report, String HistoryID)
+   en Microsoft.Reporting.WebForms.ServerReport.EnsureExecutionSession()
+   en Microsoft.Reporting.WebForms.ServerReport.SetParameters(IEnumerable`1 parameters)
+   en CartaDePorteManager.RebindReportViewer_Servidor_SalidaNormal(ReportViewer& oReportViewer, String rdlFile, IEnumerable`1 parametros) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 5070
+__________________________
+
+Log Entry : 
+09/27/2017 10:47:54
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesAccesoClientesMovil.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartaDePorteManager.TraerCUITClientesSegunUsuario(String usuario, String SC, String scbdlmaster) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 15514
+BusinessLogic
+__________________________
+
+Log Entry : 
+09/27/2017 10:47:56
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesAccesoClientesMovil.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartaDePorteManager.TraerCUITClientesSegunUsuario(String usuario, String SC, String scbdlmaster) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 15514
+BusinessLogic
+__________________________
+
+Log Entry : 
+09/27/2017 10:48:02
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesAccesoClientesMovil.aspx. Error Message:System.Net.WebException: Error de la solicitud con el código de estado HTTP 401: Unauthorized.
+   en Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.GetSecureMethods()
+   en Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.IsSecureMethod(String methodname)
+   en Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.SetConnectionSSLForMethod(String methodname)
+   en Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.ProxyMethodInvocation.Execute[TReturn](RSExecutionConnection connection, ProxyMethod`1 initialMethod, ProxyMethod`1 retryMethod)
+   en Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.LoadReport(String Report, String HistoryID)
+   en Microsoft.Reporting.WebForms.ServerReport.EnsureExecutionSession()
+   en Microsoft.Reporting.WebForms.ServerReport.SetParameters(IEnumerable`1 parameters)
+   en CartaDePorteManager.RebindReportViewer_Servidor_SalidaNormal(ReportViewer& oReportViewer, String rdlFile, IEnumerable`1 parametros) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 5070
+__________________________
+
+Log Entry : 
+09/27/2017 10:52:51
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesAccesoClientesMovil.aspx. Error Message:supervisor esta logueado, pero lo redirijo al login porque faltan los datos de session. No deberia mejor mandarlo a SeleccionarEmpresa? Ademas, no hago el LogOut y le queda el cookie!!!
+__________________________
+
+Log Entry : 
+09/27/2017 10:52:51
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesAccesoClientesMovil.aspx. Error Message:sesion: supervisor True
+__________________________
+
+Log Entry : 
+09/27/2017 10:52:51
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesAccesoClientesMovil.aspx. Error Message:Pasa nomas. membership: supervisor
+__________________________
+
+Log Entry : 
+09/27/2017 10:52:51
+Error in: http://localhost:50769/ProntoWeb/Principal.aspx. Error Message:supervisor esta logueado, pero lo redirijo al login porque faltan los datos de session. No deberia mejor mandarlo a SeleccionarEmpresa? Ademas, no hago el LogOut y le queda el cookie!!!
+__________________________
+
+Log Entry : 
+09/27/2017 10:52:51
+Error in: http://localhost:50769/ProntoWeb/Principal.aspx. Error Message:sesion: supervisor True
+__________________________
+
+Log Entry : 
+09/27/2017 10:52:51
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesAccesoClientesMovil.aspx. Error Message:System.Threading.ThreadAbortException
+Subproceso anulado.
+   en System.Threading.Thread.AbortInternal()
+   en System.Threading.Thread.Abort(Object stateInfo)
+   en System.Web.HttpResponse.AbortCurrentThread()
+   en System.Web.HttpResponse.End()
+   en System.Web.HttpServerUtility.Transfer(String path, Boolean preserveForm)
+   en System.Web.HttpServerUtility.Transfer(String path)
+   en ProntoFuncionesUIWeb.RefrescaSession(HttpServerUtility Server) en C:\bdl\pronto\prontoweb\App_Code\vbcode\ManagerDebug\FuncionesUIWeb.vb:línea 4323
+mscorlib
+__________________________
+
+Log Entry : 
+09/27/2017 10:52:51
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesAccesoClientesMovil.aspx. Error Message:Verificar que el usuario tenga una empresa asignada
+__________________________
+
+Log Entry : 
+09/27/2017 10:52:57
+Error in: http://localhost:50769/ProntoWeb/Principal.aspx. Error Message:System.Threading.ThreadAbortException
+Subproceso anulado.
+   en System.Threading.Thread.AbortInternal()
+   en System.Threading.Thread.Abort(Object stateInfo)
+   en System.Web.HttpResponse.AbortCurrentThread()
+   en System.Web.HttpResponse.End()
+   en System.Web.HttpServerUtility.Transfer(String path, Boolean preserveForm)
+   en System.Web.HttpServerUtility.Transfer(String path)
+   en ProntoFuncionesUIWeb.RefrescaSession(HttpServerUtility Server) en C:\bdl\pronto\prontoweb\App_Code\vbcode\ManagerDebug\FuncionesUIWeb.vb:línea 4323
+mscorlib
+__________________________
+
+Log Entry : 
+09/27/2017 10:52:57
+Error in: http://localhost:50769/ProntoWeb/Principal.aspx. Error Message:Verificar que el usuario tenga una empresa asignada
+__________________________
+
+Log Entry : 
+09/27/2017 10:53:04
+Error in: http://localhost:50769/SeleccionarEmpresa.aspx. Error Message:System.Threading.ThreadAbortException
+Subproceso anulado.
+   en System.Threading.Thread.AbortInternal()
+   en System.Threading.Thread.Abort(Object stateInfo)
+   en System.Web.HttpResponse.AbortCurrentThread()
+   en System.Web.HttpResponse.End()
+   en System.Web.HttpResponse.Redirect(String url, Boolean endResponse, Boolean permanent)
+   en System.Web.HttpResponse.Redirect(String url)
+   en SeleccionarEmpresa.ButContinuar_Command(Object sender, CommandEventArgs e) en C:\bdl\pronto\prontoweb\SeleccionarEmpresa.aspx.vb:línea 404
+mscorlib
+__________________________
+
+Log Entry : 
+09/27/2017 10:53:04
+Error in: http://localhost:50769/ProntoWeb/CartasDePortes.aspx?tipo=Todas. Error Message:supervisor
+__________________________
+
+Log Entry : 
+09/27/2017 10:53:08
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesAccesoClientesMovil.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartaDePorteManager.TraerCUITClientesSegunUsuario(String usuario, String SC, String scbdlmaster) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 15514
+BusinessLogic
+__________________________
+
+Log Entry : 
+09/27/2017 10:53:28
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesAccesoClientesMovil.aspx. Error Message:System.Net.WebException: Error de la solicitud con el código de estado HTTP 401: Unauthorized.
+   en Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.GetSecureMethods()
+   en Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.IsSecureMethod(String methodname)
+   en Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.SetConnectionSSLForMethod(String methodname)
+   en Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.ProxyMethodInvocation.Execute[TReturn](RSExecutionConnection connection, ProxyMethod`1 initialMethod, ProxyMethod`1 retryMethod)
+   en Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.LoadReport(String Report, String HistoryID)
+   en Microsoft.Reporting.WebForms.ServerReport.EnsureExecutionSession()
+   en Microsoft.Reporting.WebForms.ServerReport.SetParameters(IEnumerable`1 parameters)
+   en CartaDePorteManager.RebindReportViewer_Servidor_SalidaNormal(ReportViewer& oReportViewer, String rdlFile, IEnumerable`1 parametros) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 5070
+__________________________
+
+Log Entry : 
+09/27/2017 10:54:24
+Error in: http://localhost:50769/ProntoWeb/Principal.aspx. Error Message:supervisor esta logueado, pero lo redirijo al login porque faltan los datos de session. No deberia mejor mandarlo a SeleccionarEmpresa? Ademas, no hago el LogOut y le queda el cookie!!!
+__________________________
+
+Log Entry : 
+09/27/2017 10:54:24
+Error in: http://localhost:50769/ProntoWeb/Principal.aspx. Error Message:sesion: supervisor True
+__________________________
+
+Log Entry : 
+09/27/2017 10:54:24
+Error in: http://localhost:50769/ProntoWeb/Principal.aspx. Error Message:Pasa nomas. membership: supervisor
+__________________________
+
+Log Entry : 
+09/27/2017 10:54:24
+Error in: http://localhost:50769/ProntoWeb/Principal.aspx. Error Message:System.Threading.ThreadAbortException
+Subproceso anulado.
+   en System.Threading.Thread.AbortInternal()
+   en System.Threading.Thread.Abort(Object stateInfo)
+   en System.Web.HttpResponse.AbortCurrentThread()
+   en System.Web.HttpResponse.End()
+   en System.Web.HttpServerUtility.Transfer(String path, Boolean preserveForm)
+   en System.Web.HttpServerUtility.Transfer(String path)
+   en ProntoFuncionesUIWeb.RefrescaSession(HttpServerUtility Server) en C:\bdl\pronto\prontoweb\App_Code\vbcode\ManagerDebug\FuncionesUIWeb.vb:línea 4323
+mscorlib
+__________________________
+
+Log Entry : 
+09/27/2017 10:54:24
+Error in: http://localhost:50769/ProntoWeb/Principal.aspx. Error Message:Verificar que el usuario tenga una empresa asignada
+__________________________
+
+Log Entry : 
+09/27/2017 10:54:27
+Error in: http://localhost:50769/SeleccionarEmpresa.aspx. Error Message:System.Threading.ThreadAbortException
+Subproceso anulado.
+   en System.Threading.Thread.AbortInternal()
+   en System.Threading.Thread.Abort(Object stateInfo)
+   en System.Web.HttpResponse.AbortCurrentThread()
+   en System.Web.HttpResponse.End()
+   en System.Web.HttpResponse.Redirect(String url, Boolean endResponse, Boolean permanent)
+   en System.Web.HttpResponse.Redirect(String url)
+   en SeleccionarEmpresa.ButContinuar_Command(Object sender, CommandEventArgs e) en C:\bdl\pronto\prontoweb\SeleccionarEmpresa.aspx.vb:línea 404
+mscorlib
+__________________________
+
+Log Entry : 
+09/27/2017 10:54:27
+Error in: http://localhost:50769/ProntoWeb/CartasDePortes.aspx?tipo=Todas. Error Message:supervisor
+__________________________
+
+Log Entry : 
+09/27/2017 10:54:31
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesAccesoClientesMovil.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartaDePorteManager.TraerCUITClientesSegunUsuario(String usuario, String SC, String scbdlmaster) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 15514
+BusinessLogic
+__________________________
+
+Log Entry : 
+09/27/2017 10:54:33
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesAccesoClientesMovil.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartaDePorteManager.TraerCUITClientesSegunUsuario(String usuario, String SC, String scbdlmaster) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 15514
+BusinessLogic
+__________________________
+
+Log Entry : 
+09/27/2017 10:54:41
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesAccesoClientesMovil.aspx. Error Message:System.Net.WebException: Error de la solicitud con el código de estado HTTP 401: Unauthorized.
+   en Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.GetSecureMethods()
+   en Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.IsSecureMethod(String methodname)
+   en Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.SetConnectionSSLForMethod(String methodname)
+   en Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.ProxyMethodInvocation.Execute[TReturn](RSExecutionConnection connection, ProxyMethod`1 initialMethod, ProxyMethod`1 retryMethod)
+   en Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.LoadReport(String Report, String HistoryID)
+   en Microsoft.Reporting.WebForms.ServerReport.EnsureExecutionSession()
+   en Microsoft.Reporting.WebForms.ServerReport.SetParameters(IEnumerable`1 parameters)
+   en CartaDePorteManager.RebindReportViewer_Servidor_SalidaNormal(ReportViewer& oReportViewer, String rdlFile, IEnumerable`1 parametros) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 5070
+__________________________
+
+Log Entry : 
+09/27/2017 10:59:26
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesAccesoClientesMovil.aspx. Error Message:supervisor esta logueado, pero lo redirijo al login porque faltan los datos de session. No deberia mejor mandarlo a SeleccionarEmpresa? Ademas, no hago el LogOut y le queda el cookie!!!
+__________________________
+
+Log Entry : 
+09/27/2017 10:59:26
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesAccesoClientesMovil.aspx. Error Message:sesion: supervisor True
+__________________________
+
+Log Entry : 
+09/27/2017 10:59:26
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesAccesoClientesMovil.aspx. Error Message:Pasa nomas. membership: supervisor
+__________________________
+
+Log Entry : 
+09/27/2017 10:59:26
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesAccesoClientesMovil.aspx. Error Message:System.Threading.ThreadAbortException
+Subproceso anulado.
+   en System.Threading.Thread.AbortInternal()
+   en System.Threading.Thread.Abort(Object stateInfo)
+   en System.Web.HttpResponse.AbortCurrentThread()
+   en System.Web.HttpResponse.End()
+   en System.Web.HttpServerUtility.Transfer(String path, Boolean preserveForm)
+   en System.Web.HttpServerUtility.Transfer(String path)
+   en ProntoFuncionesUIWeb.RefrescaSession(HttpServerUtility Server) en C:\bdl\pronto\prontoweb\App_Code\vbcode\ManagerDebug\FuncionesUIWeb.vb:línea 4323
+mscorlib
+__________________________
+
+Log Entry : 
+09/27/2017 10:59:26
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesAccesoClientesMovil.aspx. Error Message:Verificar que el usuario tenga una empresa asignada
+__________________________
+
+Log Entry : 
+09/27/2017 10:59:34
+Error in: http://localhost:50769/SeleccionarEmpresa.aspx. Error Message:System.Threading.ThreadAbortException
+Subproceso anulado.
+   en System.Threading.Thread.AbortInternal()
+   en System.Threading.Thread.Abort(Object stateInfo)
+   en System.Web.HttpResponse.AbortCurrentThread()
+   en System.Web.HttpResponse.End()
+   en System.Web.HttpResponse.Redirect(String url, Boolean endResponse, Boolean permanent)
+   en System.Web.HttpResponse.Redirect(String url)
+   en SeleccionarEmpresa.ButContinuar_Command(Object sender, CommandEventArgs e) en C:\bdl\pronto\prontoweb\SeleccionarEmpresa.aspx.vb:línea 404
+mscorlib
+__________________________
+
+Log Entry : 
+09/27/2017 10:59:34
+Error in: http://localhost:50769/ProntoWeb/CartasDePortes.aspx?tipo=Todas. Error Message:supervisor
+__________________________
+
+Log Entry : 
+09/27/2017 10:59:48
+Error in: http://localhost:50769/SeleccionarEmpresa.aspx. Error Message:sesion: supervisor True
+__________________________
+
+Log Entry : 
+09/27/2017 10:59:48
+Error in: http://localhost:50769/SeleccionarEmpresa.aspx. Error Message:Pasa nomas. membership: supervisor
+__________________________
+
+Log Entry : 
+09/27/2017 10:59:49
+Error in: http://localhost:50769/ProntoWeb/CartasDePortes.aspx?tipo=Todas. Error Message:supervisor
+__________________________
+
+Log Entry : 
+09/27/2017 10:59:55
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesAccesoClientesMovil.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartaDePorteManager.TraerCUITClientesSegunUsuario(String usuario, String SC, String scbdlmaster) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 15514
+BusinessLogic
+__________________________
+
+Log Entry : 
+09/27/2017 10:59:57
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesAccesoClientesMovil.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartaDePorteManager.TraerCUITClientesSegunUsuario(String usuario, String SC, String scbdlmaster) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 15514
+BusinessLogic
+__________________________
+
+Log Entry : 
+09/27/2017 11:00:07
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesAccesoClientesMovil.aspx. Error Message:System.Net.WebException: Error de la solicitud con el código de estado HTTP 401: Unauthorized.
+   en Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.GetSecureMethods()
+   en Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.IsSecureMethod(String methodname)
+   en Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.SetConnectionSSLForMethod(String methodname)
+   en Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.ProxyMethodInvocation.Execute[TReturn](RSExecutionConnection connection, ProxyMethod`1 initialMethod, ProxyMethod`1 retryMethod)
+   en Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.LoadReport(String Report, String HistoryID)
+   en Microsoft.Reporting.WebForms.ServerReport.EnsureExecutionSession()
+   en Microsoft.Reporting.WebForms.ServerReport.SetParameters(IEnumerable`1 parameters)
+   en CartaDePorteManager.RebindReportViewer_Servidor_SalidaNormal(ReportViewer& oReportViewer, String rdlFile, IEnumerable`1 parametros) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 5070
+__________________________
