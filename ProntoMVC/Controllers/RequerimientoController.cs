@@ -152,13 +152,24 @@ namespace ProntoMVC.Controllers
         void CargarViewBag(Requerimiento o)
         {
 
-            
+
             //ViewBag.IdObra = new SelectList(db.Obras.Where(x => x.Activa != "NO").OrderBy(x => x.NumeroObra)
             //                            .Select(y => new { y.IdObra, NumeroObra = y.NumeroObra + " - " + (y.Descripcion ?? "") }), "IdObra", "NumeroObra", o.IdObra);
 
 
+            ///////////////////////////////////////////////////////////////////////////////////////////////
+            ///////////////////////////////////////////////////////////////////////////////////////////////
+            string nSC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString(), oStaticMembershipService));
+            DataTable dt = EntidadManager.GetStoreProcedure(nSC, "Empleados_TX_PorSector", "Compras");
+            IEnumerable<DataRow> rows = dt.AsEnumerable();
+            var sq = (from r in rows orderby r[1] select new { IdEmpleado = r[0], Nombre = r[1] }).ToList();
+            // ViewBag.Aprobo = new SelectList(db.Empleados.Where(x => (x.Activo ?? "SI") == "SI"  ).OrderBy(x => x.Nombre), "IdEmpleado", "Nombre", o.Aprobo);
 
-            ViewBag.Aprobo = new SelectList(db.Empleados.Where(x => (x.Activo ?? "SI") == "SI").OrderBy(x => x.Nombre), "IdEmpleado", "Nombre", o.Aprobo);
+            ViewBag.Aprobo = new SelectList(sq, "IdEmpleado", "Nombre", o.Aprobo);
+            //ViewBag.Aprobo = new SelectList(db.Empleados.Where(x => (x.Activo ?? "SI") == "SI").OrderBy(x => x.Nombre), "IdEmpleado", "Nombre", o.Aprobo);
+
+
+
             ViewBag.IdSolicito = new SelectList(db.Empleados.Where(x => (x.Activo ?? "SI") == "SI").OrderBy(x => x.Nombre), "IdEmpleado", "Nombre", o.IdSolicito);
             ViewBag.IdSector = new SelectList(db.Sectores.OrderBy(x => x.Descripcion), "IdSector", "Descripcion", o.IdSector);
             ViewBag.CantidadAutorizaciones = db.Autorizaciones_TX_CantidadAutorizaciones((int)Pronto.ERP.Bll.EntidadManager.EnumFormularios.RequerimientoMateriales, 0, -1).Count();
@@ -1222,7 +1233,7 @@ namespace ProntoMVC.Controllers
             try
             {
                 //dt = Pronto.ERP.Bll.EntidadManager.GetStoreProcedure(SC, "Requerimientos_TX_PendientesDeAsignacion");
-                dt = Pronto.ERP.Bll.EntidadManager.ExecDinamico(SC, "exec Requerimientos_TX_PendientesDeAsignacion", 100);
+                dt = Pronto.ERP.Bll.EntidadManager.ExecDinamico(SC, "exec Requerimientos_TX_PendientesDeAsignacion", 180);
 
 
             }
