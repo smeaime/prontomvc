@@ -284,6 +284,19 @@ function CargarEmpleadosParaAprobar(fcallback) {
                 }, "json");
 }
 
+function CargarEmpleadosParaAprobar_Compras(fcallback) {
+    $.post(ROOT + 'Empleado/EmpleadosParaComboSectorCompras/',
+                function (data) {
+                    var select = $('#mySelect').empty();
+                    for (var i = 0; i < data.length; i++) {
+                        select.append('<option value="' + data[i].IdEmpleado + '">' + data[i].Nombre + '</option>');
+                    }
+
+                    if (typeof fcallback == "function") fcallback(); //
+
+
+                }, "json");
+}
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////

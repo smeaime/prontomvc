@@ -40,7 +40,7 @@ using System.IO;
 //test de java lopez
 // https://github.com/ajlopez/TddAppAspNetMvc/blob/master/Src/MyLibrary.Web.Tests/Controllers/HomeControllerTests.cs
 
-namespace ProntoMVC.Tests
+namespace ProntoMVC.TestsMVC
 {
 
 
@@ -152,6 +152,63 @@ namespace ProntoMVC.Tests
 
 
 
+
+        [TestMethod]
+        public void pend_24848()
+        {
+            // como puedo crear una RM para que aparezca en el "RMs Pendientes de Asignar"?
+
+            var c = new RequerimientoController();
+            GetMockedControllerGenerico(c);
+
+
+
+            Requerimiento rm = new Requerimiento();
+            var rmdet = new ProntoMVC.Data.Models.DetalleRequerimiento();
+            rm.Aprobo = 700;
+            rm.IdObra = 1;
+            rmdet.IdArticulo = 5128;
+            rmdet.Cantidad = 12;
+            rmdet.IdUnidad = 33;
+            rmdet.NumeroItem = 1;
+            rmdet.OrigenDescripcion = 1;
+            rmdet.IdControlCalidad = 1;
+            rmdet.FechaEntrega = DateTime.Today;
+            rm.DetalleRequerimientos.Add(rmdet);
+            rm.DetalleRequerimientos.Add(new MVCent.DetalleRequerimiento { IdArticulo = 11, Cantidad = 3255 });
+            JsonResult result = c.BatchUpdate(rm);
+
+
+
+
+
+            JsonResult result2 = (JsonResult)c.RequerimientosPendientesAsignar_DynamicGridData("NumeroRequerimiento", "desc", 0, 50, false, "", "", "", "");
+            jqGridJson listado = (jqGridJson)result2.Data;
+
+            //habria problemas con los TipoDesignacion del detalle no? -si
+
+
+
+
+
+
+            Assert.IsTrue(listado.records > 0);
+
+        }
+
+
+
+
+
+        [TestMethod]
+        public void usuariosdecompras_46429()
+        {
+
+            // CargarEmpleadosParaAprobar() en pronto.js;
+            // CargarEmpleadosParaAprobar_Compras
+            //    Empleado / EmpleadosParaComboSectorCompras
+            // hay que volver a llenar el combo del popup
+        }
 
 
 
