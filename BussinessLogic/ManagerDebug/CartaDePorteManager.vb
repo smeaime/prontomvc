@@ -5081,7 +5081,7 @@ usuario As String, ConexBDLmaster As String,
                     'unauthorized
                     '-es por la cuenta windows que usa repservices o por la cuenta sql que usa el datasource del informe?
                     '-ojo tambien conque no se puede usar el alias bdlconsultores.sytes.net
-
+                    '-será por la cuenta built-in que usa el reporting para correr?
 
                     ErrHandler2.WriteError(ex.ToString)
                     Dim inner As Exception = ex.InnerException

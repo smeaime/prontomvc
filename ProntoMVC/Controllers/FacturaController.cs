@@ -30,10 +30,36 @@ using mercadopago;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
+using System.Data.Entity.Core.Metadata.Edm;
+
 namespace ProntoMVC.Controllers
 {
+
+
+    public static class ModelDefinedFunctions
+    {
+        [System.Data.Metadata.Edm.EdmFunction("TestDBModel.Store", "SampleFunction")]
+        public static int SampleFunction(int param)
+        {
+            System.Data.Objects.DataClasses.
+            throw new NotSupportedException("Direct calls are not supported.");
+        }
+
+        [System.Data.Entity.Core.Metadata.Edm.EdmFunction()]
+        public static int SampleFunction(int param)
+        {
+            System.Data.Objects.DataClasses.
+            throw new NotSupportedException("Direct calls are not supported.");
+        }
+    }
+
+
+
     public partial class FacturaController : ProntoBaseController
     {
+
+      
+
         public virtual ViewResult Index()
         {
             if (!PuedeLeer(enumNodos.Facturas)) throw new Exception("No tenés permisos");
@@ -2140,5 +2166,7 @@ namespace ProntoMVC.Controllers
             // https://github.com/mercadopago/sdk-dotnet
         }
     }
+
+
 
 }
