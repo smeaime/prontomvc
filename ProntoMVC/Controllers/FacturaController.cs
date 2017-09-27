@@ -1094,6 +1094,229 @@ namespace ProntoMVC.Controllers
             return File(contents, System.Net.Mime.MediaTypeNames.Application.Octet, "output.xls");
         }
 
+        public class Facturas2
+        {
+            public int IdFactura { get; set; }
+            public string TipoABC { get; set; }
+            public int? PuntoVenta { get; set; }
+            public int? NumeroFactura { get; set; }
+            public DateTime? FechaFactura { get; set; }
+            public string Sucursal { get; set; }
+            public string Anulada { get; set; }
+            public string ClienteSubCod { get; set; }
+            public int? ClienteCodigo { get; set; }
+            public string ClienteNombre { get; set; }
+            public string DescripcionIva { get; set; }
+            public string ClienteCuit { get; set; }
+            public string CondicionVenta { get; set; }
+            public DateTime? FechaVencimiento { get; set; }
+            public string ListaDePrecio { get; set; }
+            public string OCompras { get; set; }
+            public string Remitos { get; set; }
+            public decimal? TotalGravado { get; set; }
+            public decimal? ImporteBonificacion { get; set; }
+            public decimal? ImporteIva1 { get; set; }
+            public decimal? AjusteIva { get; set; }
+            public decimal? TotalIIBB { get; set; }
+            public decimal? TotalPercepcionIVA { get; set; }
+            public decimal? TotalOtrasPercepciones { get; set; }
+            public decimal? ImporteTotal { get; set; }
+            public string Moneda { get; set; }
+            public string Obra { get; set; }
+            public string Vendedor { get; set; }
+            public string ProvinciaDestino { get; set; }
+            public int? CantidadItems { get; set; }
+            public int? CantidadAbonos { get; set; }
+            public string GrupoFacturacionAutomatica { get; set; }
+            public DateTime? FechaContabilizacion { get; set; }
+            public DateTime? FechaAnulacion { get; set; }
+            public string UsuarioAnulo { get; set; }
+            public DateTime? FechaIngreso { get; set; }
+            public string UsuarioIngreso { get; set; }
+            public string CAE { get; set; }
+            public string RechazoCAE { get; set; }
+            public DateTime? FechaVencimientoORechazoCAE { get; set; }
+            public string Observaciones { get; set; }
+        }
+
+
+        public static class ModelDefinedFunctions
+        {
+            [System.Data.Entity.Core.Objects.DataClasses.EdmFunction("DemoProntoModel.Store", "Facturas_OrdenesCompra")]
+            public static string SampleFunction(int IdFactura)
+            {
+                throw new NotSupportedException("Direct calls are not supported.");
+            }
+        }
+
+        public virtual JsonResult Facturas_DynamicGridData(string sidx, string sord, int page, int rows, bool _search, string filters, string FechaInicial, string FechaFinal)
+        {
+            DateTime FechaDesde, FechaHasta;
+            try
+            {
+                if (FechaInicial == "") FechaDesde = DateTime.MinValue;
+                else FechaDesde = DateTime.ParseExact(FechaInicial, "dd/MM/yyyy", null);
+            }
+            catch (Exception)
+            {
+                FechaDesde = DateTime.MinValue;
+            }
+
+            try
+            {
+                if (FechaFinal == "") FechaHasta = DateTime.MaxValue;
+                else FechaHasta = DateTime.ParseExact(FechaFinal, "dd/MM/yyyy", null);
+            }
+            catch (Exception)
+            {
+                FechaHasta = DateTime.MaxValue;
+            }
+
+            int totalRecords = 0;
+            int pageSize = rows;
+
+            //LinqToSQL_ProntoDataContext l2sqlPronto = new LinqToSQL_ProntoDataContext(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SCsql()));
+            //var qq = (from rm in l2sqlPronto.Requerimientos
+            //          select l2sqlPronto.Requerimientos_Pedidos(rm.IdRequerimiento)
+            //          ).Take(100).ToList();
+
+            
+            
+            
+            var data = (from a in db.Facturas
+                        //from b in db.Depositos.Where(o => o.IdDeposito == a.IdDeposito).DefaultIfEmpty()
+                        select new Facturas2
+                        {
+                            IdFactura = a.IdFactura,
+                            TipoABC = a.TipoABC,
+                            PuntoVenta = a.PuntoVenta,
+                            NumeroFactura = a.NumeroFactura,
+                            FechaFactura = a.FechaFactura,
+                            Sucursal = a.Deposito != null ? a.Deposito.Descripcion : "",
+                            Anulada = a.Anulada,
+                            ClienteSubCod = a.Cliente != null ? (a.Cliente.Codigo != null ? (a.Cliente.Codigo.Length > 2 ? a.Cliente.Codigo.Substring(0, 2) : "") : "") : "",
+                            ClienteCodigo = a.Cliente != null ? a.Cliente.CodigoCliente : 0,
+                            ClienteNombre = a.Cliente != null ? a.Cliente.RazonSocial : "",
+                            DescripcionIva = a.DescripcionIva != null ? a.DescripcionIva.Descripcion : "",
+                            ClienteCuit = a.Cliente.Cuit,
+                            CondicionVenta = a.Condiciones_Compra != null ? a.Condiciones_Compra.Descripcion : "",
+                            FechaVencimiento = a.FechaVencimiento,
+                            ListaDePrecio = a.ListasPrecio != null ? "Lista " + a.ListasPrecio.NumeroLista.ToString() + " " + a.ListasPrecio.Descripcion : "",
+
+                            //OCompras = (a.DetalleFacturasOrdenesCompras.Select(x => new {NumeroOC = x.DetalleOrdenesCompra.OrdenesCompra.NumeroOrdenCompra.NullSafeToString()}))
+                            //            .Select(e => e.NumeroOC.ToString()).Aggregate((c, n) => $"{c},{n}")
+                            //OCompras = a.DetalleFacturasOrdenesCompras.Aggregate("", (tot, nxt) => tot + "," +nxt.IdDetalleFactura.ToString()),
+                            OCompras = ModelDefinedFunctions.SampleFunction(a.IdFactura).ToString(),
+
+                            Remitos = "",
+                            TotalGravado = (a.ImporteTotal ?? 0) - (a.ImporteIva1 ?? 0) - (a.AjusteIva ?? 0) - (a.PercepcionIVA ?? 0) - (a.RetencionIBrutos1 ?? 0) - (a.RetencionIBrutos2 ?? 0) - (a.RetencionIBrutos3 ?? 0) - (a.OtrasPercepciones1 ?? 0) - (a.OtrasPercepciones2 ?? 0) - (a.OtrasPercepciones3 ?? 0) + (a.ImporteBonificacion ?? 0),
+                            ImporteBonificacion = a.ImporteBonificacion,
+                            ImporteIva1 = a.ImporteIva1,
+                            AjusteIva = a.AjusteIva,
+                            TotalIIBB = (a.RetencionIBrutos1 ?? 0) + (a.RetencionIBrutos2 ?? 0) + (a.RetencionIBrutos3 ?? 0),
+                            TotalPercepcionIVA = a.PercepcionIVA,
+                            TotalOtrasPercepciones = (a.OtrasPercepciones1 ?? 0) + (a.OtrasPercepciones2 ?? 0) + (a.OtrasPercepciones3 ?? 0),
+                            ImporteTotal = a.ImporteTotal,
+                            Moneda = a.Moneda == null ? "" : a.Moneda.Abreviatura,
+                            Obra = a.Obra != null ? a.Obra.NumeroObra : "",
+                            Vendedor = a.Vendedore != null ? a.Vendedore.Nombre : "",
+                            ProvinciaDestino = a.Provincia != null ? a.Provincia.Nombre : "",
+                            CantidadItems = 0,
+                            CantidadAbonos = 0,
+                            GrupoFacturacionAutomatica = "",
+                            FechaContabilizacion = (a.ContabilizarAFechaVencimiento ?? "NO") == "NO" ? a.FechaFactura : a.FechaVencimiento,
+                            FechaAnulacion = a.FechaAnulacion,
+                            UsuarioAnulo = a.Empleado1 != null ? a.Empleado1.Nombre : "",
+                            FechaIngreso = a.FechaIngreso,
+                            UsuarioIngreso = a.Empleado != null ? a.Empleado.Nombre : "",
+                            CAE = a.CAE,
+                            RechazoCAE = a.RechazoCAE,
+                            FechaVencimientoORechazoCAE = a.FechaVencimientoORechazoCAE,
+                            Observaciones = a.Observaciones,
+                        }).Where(a => a.FechaFactura >= FechaDesde && a.FechaFactura <= FechaHasta).OrderBy(sidx + " " + sord).AsQueryable();
+
+            var pagedQuery = Filters.FiltroGenerico_UsandoIQueryable<Facturas2>
+                                     (sidx, sord, page, rows, _search, filters, db, ref totalRecords, data);
+
+            int totalPages = (int)Math.Ceiling((float)totalRecords / (float)pageSize);
+
+            var jsonData = new jqGridJson()
+            {
+                total = totalPages,
+                page = page,
+                records = totalRecords,
+                rows = (from a in pagedQuery
+                        select new jqGridRowJson
+                        {
+                            id = a.IdFactura.ToString(),
+                            cell = new string[] {
+                                "<a href="+ Url.Action("Edit",new {id = a.IdFactura} ) + ">Editar</>",
+                                "<a href="+ Url.Action("ImprimirConInteropPDF",new {id = a.IdFactura} ) + ">Emitir</a> ",
+                                a.IdFactura.ToString(),
+                                a.TipoABC.NullSafeToString(),
+                                a.PuntoVenta.NullSafeToString(),
+                                a.NumeroFactura.NullSafeToString(),
+                                a.FechaFactura == null ? "" : a.FechaFactura.GetValueOrDefault().ToString("dd/MM/yyyy"),
+                                a.Sucursal.NullSafeToString(),
+                                a.Anulada.NullSafeToString(),
+                                a.ClienteSubCod.NullSafeToString(),
+                                a.ClienteCodigo.NullSafeToString(),
+                                a.ClienteNombre.NullSafeToString(),
+                                a.DescripcionIva.NullSafeToString(),
+                                a.ClienteCuit.NullSafeToString(),
+                                a.CondicionVenta.NullSafeToString(),
+                                a.FechaVencimiento == null ? "" : a.FechaVencimiento.GetValueOrDefault().ToString("dd/MM/yyyy"),
+                                a.ListaDePrecio.NullSafeToString(),
+                                a.OCompras.NullSafeToString(),
+                                //string.Join(",",  a.DetalleFacturasOrdenesCompras
+                                //    .SelectMany(x =>
+                                //        (x.DetalleOrdenesCompra == null) ?
+                                //        null :
+                                //        x.DetalleOrdenesCompra.OrdenesCompra.NumeroOrdenCompra.NullSafeToString()
+                                //    ).Distinct()
+                                //),
+                                a.Remitos.NullSafeToString(),
+                                //string.Join(",", a.DetalleRequerimientos
+                                //    .SelectMany(x =>
+                                //        (x.DetallePresupuestos == null) ?
+                                //        null :
+                                //        x.DetallePresupuestos.Select(y =>
+                                //                    (y.Presupuesto == null) ?
+                                //                    null :
+                                //                    y.Presupuesto.Numero.NullSafeToString()
+                                //            )
+                                //    ).Distinct()
+                                //),
+                                a.TotalGravado.NullSafeToString(),
+                                a.ImporteBonificacion.NullSafeToString(),
+                                a.ImporteIva1.NullSafeToString(),
+                                a.AjusteIva.NullSafeToString(),
+                                a.TotalIIBB.NullSafeToString(),
+                                a.TotalPercepcionIVA.NullSafeToString(),
+                                a.TotalOtrasPercepciones.NullSafeToString(),
+                                a.ImporteTotal.NullSafeToString(),
+                                a.Moneda.NullSafeToString(),
+                                a.Obra.NullSafeToString(),
+                                a.Vendedor.NullSafeToString(),
+                                a.ProvinciaDestino.NullSafeToString(),
+                                db.DetalleFacturas.Where(x=>x.IdFactura==a.IdFactura).Select(x=>x.IdDetalleFactura).Distinct().Count().ToString(),
+                                a.CantidadAbonos.NullSafeToString(),
+                                a.GrupoFacturacionAutomatica.NullSafeToString(),
+                                a.FechaContabilizacion == null ? "" : a.FechaContabilizacion.GetValueOrDefault().ToString("dd/MM/yyyy"),
+                                a.FechaAnulacion == null ? "" : a.FechaAnulacion.GetValueOrDefault().ToString("dd/MM/yyyy"),
+                                a.UsuarioAnulo.NullSafeToString(),
+                                a.FechaIngreso == null ? "" : a.FechaIngreso.GetValueOrDefault().ToString("dd/MM/yyyy"),
+                                a.UsuarioIngreso.NullSafeToString(),
+                                a.CAE.NullSafeToString(),
+                                a.RechazoCAE.NullSafeToString(),
+                                a.FechaVencimientoORechazoCAE.NullSafeToString(),
+                                a.Observaciones.NullSafeToString()
+                            }
+                        }).ToArray()
+            };
+            return Json(jsonData, JsonRequestBehavior.AllowGet);
+        }
+
         public virtual ActionResult TT_DynamicGridData(string sidx, string sord, int page, int rows, bool _search, string filters, string FechaInicial, string FechaFinal)
         {
             //            if (FechaInicial != string.Empty)
@@ -1198,10 +1421,9 @@ namespace ProntoMVC.Controllers
             int totalPages = (int)Math.Ceiling((float)totalRecords / (float)pageSize);
 
             var data1 = (from a in data select a)
-//   .OrderByDescending(x => x.FechaFactura).ThenByDescending(y => y.NumeroFactura)
-
-//.Skip((currentPage - 1) * pageSize).Take(pageSize)
-.ToList();
+                        //   .OrderByDescending(x => x.FechaFactura).ThenByDescending(y => y.NumeroFactura)
+                        //.Skip((currentPage - 1) * pageSize).Take(pageSize)
+                        .ToList();
 
             var jsonData = new jqGridJson()
             {
@@ -1274,7 +1496,6 @@ namespace ProntoMVC.Controllers
             };
             return Json(jsonData, JsonRequestBehavior.AllowGet);
         }
-
 
         public virtual ActionResult TT(string sidx, string sord, int? page, int? rows, bool _search, string searchField, string searchOper, string searchString, string FechaInicial, string FechaFinal)
         {

@@ -24,30 +24,30 @@
         $('.ui-jqgrid .ui-jqgrid-htable th div').css('white-space', 'normal');
 
         $('#Lista').jqGrid({
-            url: '@Url.Action("TT", "Vendedor")',
+            url: '@Url.Action("Vendedores_DynamicGridData", "Vendedor")',
             datatype: 'json',
             mtype: 'POST',
             colNames: ['Acciones', 'IdVendedor', 'IdLocalidad', 'IdProvincia', 'IdEmpleado', 'IdsVendedoresAsignados', 'Nombre', 'Codigo', 'Direccion', 'Localidad', 'Provincia',
                        'Codigo Postal', 'Usuario PRONTO', 'Telefono', 'Fax', 'Email', 'Cuit', '% Comision', 'Aplica a todas las zonas?', 'Emite comision?'],
             colModel: [
-                        { name: 'act', index: 'act', align: 'center', width: 80, sortable: false, editable: false, search: false },
-                        { name: 'IdVendedor', index: 'IdVendedor', align: 'left', width: 100, editable: false, hidden: true },
-                        { name: 'IdLocalidad', index: 'IdLocalidad', align: 'left', width: 100, editable: false, hidden: true },
-                        { name: 'IdProvincia', index: 'IdProvincia', align: 'left', width: 100, editable: false, hidden: true },
-                        { name: 'IdEmpleado', index: 'IdEmpleado', align: 'left', width: 100, editable: false, hidden: true },
-                        { name: 'IdsVendedoresAsignados', index: 'IdsVendedoresAsignados', align: 'left', width: 100, editable: false, hidden: true },
+                        { name: 'act', index: 'act', align: 'center', width: 80, search: false, sortable: false, editable: false },
+                        { name: 'IdVendedor', index: 'IdVendedor', align: 'left', width: 100, search: false, editable: false, hidden: true },
+                        { name: 'IdLocalidad', index: 'IdLocalidad', align: 'left', width: 100, search: false, editable: false, hidden: true },
+                        { name: 'IdProvincia', index: 'IdProvincia', align: 'left', width: 100, search: false, editable: false, hidden: true },
+                        { name: 'IdEmpleado', index: 'IdEmpleado', align: 'left', width: 100, search: false, editable: false, hidden: true },
+                        { name: 'IdsVendedoresAsignados', index: 'IdsVendedoresAsignados', align: 'left', width: 100, search: false, editable: false, hidden: true },
                         { name: 'Nombre', index: 'Nombre', align: 'left', width: 300, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
                         { name: 'CodigoVendedor', index: 'CodigoVendedor', align: 'left', width: 50, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
                         { name: 'Direccion', index: 'Direccion', align: 'left', width: 300, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
                         { name: 'Localidad', index: 'Localidad', align: 'left', width: 300, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
                         { name: 'Provincia', index: 'Provincia', align: 'left', width: 200, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
-                        { name: 'CodigoPostal', index: 'CodigoPostal', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'CodigoPostal', index: 'CodigoPostal', align: 'left', width: 100, editable: false, search: false, searchoptions: { sopt: ['cn'] } },
                         { name: 'Empleado', index: 'Empleado', align: 'left', width: 200, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
                         { name: 'Telefono', index: 'Telefono', align: 'left', width: 200, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
                         { name: 'Fax', index: 'Fax', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
                         { name: 'Email', index: 'Email', align: 'left', width: 200, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
                         { name: 'Cuit', index: 'Cuit', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
-                        { name: 'Comision', index: 'Comision', align: 'right', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'Comision', index: 'Comision', align: 'right', width: 100, editable: false, search: false, searchoptions: { sopt: ['cn'] } },
                         { name: 'TodasLasZonas', index: 'TodasLasZonas', align: 'left', width: 150, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
                         { name: 'EmiteComision', index: 'EmiteComision', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn'] } }
                     ],
@@ -78,5 +78,10 @@
     });
         jQuery("#Lista").jqGrid('navGrid', '#ListaPager', { refresh: true, add: false, edit: false, del: false }, {}, {}, {}, { sopt: ["cn"], width: 700, closeOnEscape: true, closeAfterSearch: true });
         jQuery("#Lista").jqGrid('gridResize', { minWidth: 350, maxWidth: 1500, minHeight: 80, maxHeight: 500 });
+        jQuery("#Lista").filterToolbar({
+            stringResult: true, searchOnEnter: true,
+            defaultSearch: 'cn',
+            enableClear: false
+        });
     });
 </script>

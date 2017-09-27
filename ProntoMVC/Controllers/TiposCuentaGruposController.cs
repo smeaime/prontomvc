@@ -108,22 +108,6 @@ namespace ProntoMVC.Controllers
             int currentPage = page ?? 1;
 
             var Entidad = db.TiposCuentaGrupos.AsQueryable();
-            //if (_search)
-            //{
-            //    switch (searchField.ToLower())
-            //    {
-            //        case "a":
-            //            campo = String.Format("{0} = {1}", searchField, searchString);
-            //            break;
-            //        default:
-            //            campo = String.Format("{0}.Contains(\"{1}\")", searchField, searchString);
-            //            break;
-            //    }
-            //}
-            //else
-            //{
-            //    campo = "true";
-            //}
 
             var Entidad1 = (from a in Entidad
                             select new { IdTipoCuentaGrupo = a.IdTipoCuentaGrupo }).Where(campo).ToList();
@@ -140,8 +124,8 @@ namespace ProntoMVC.Controllers
                             IdTipoGrupo = (a.EsCajaBanco ?? "") == "CA" ? 1 : ((a.EsCajaBanco ?? "") == "BA" ? 2 : ((a.EsCajaBanco ?? "") == "TC" ? 3 : 4)),
                             TipoGrupo = (a.EsCajaBanco ?? "") == "CA" ? "Cajas" : ((a.EsCajaBanco ?? "") == "BA" ? "Bancos" : ((a.EsCajaBanco ?? "") == "TC" ? "Tarjetas" : "Otros"))
                         }).Where(campo).OrderBy(sidx + " " + sord)
-//.Skip((currentPage - 1) * pageSize).Take(pageSize)
-.ToList();
+                        //.Skip((currentPage - 1) * pageSize).Take(pageSize)
+                        .ToList();
 
             var jsonData = new jqGridJson()
             {
@@ -149,6 +133,56 @@ namespace ProntoMVC.Controllers
                 page = currentPage,
                 records = totalRecords,
                 rows = (from a in data
+                        select new jqGridRowJson
+                        {
+                            id = a.IdTipoCuentaGrupo.ToString(),
+                            cell = new string[] { "",
+                                a.IdTipoCuentaGrupo.ToString(),
+                                a.EsCajaBanco.NullSafeToString(),
+                                a.IdTipoGrupo.ToString(),
+                                a.Descripcion.NullSafeToString(),
+                                a.TipoGrupo.NullSafeToString()
+                            }
+                        }).ToArray()
+            };
+            return Json(jsonData, JsonRequestBehavior.AllowGet);
+        }
+
+        public class TiposCuentaGrupos2
+        {
+            public int IdTipoCuentaGrupo { get; set; }
+            public string Descripcion { get; set; }
+            public string EsCajaBanco { get; set; }
+            public int? IdTipoGrupo { get; set; }
+            public string TipoGrupo { get; set; }
+        }
+
+        public virtual JsonResult TiposCuentaGrupos_DynamicGridData(string sidx, string sord, int page, int rows, bool _search, string filters)
+        {
+            int totalRecords = 0;
+            int pageSize = rows;
+
+            var data = (from a in db.TiposCuentaGrupos
+                        select new TiposCuentaGrupos2
+                        {
+                            IdTipoCuentaGrupo = a.IdTipoCuentaGrupo,
+                            Descripcion = a.Descripcion,
+                            EsCajaBanco = a.EsCajaBanco,
+                            IdTipoGrupo = (a.EsCajaBanco ?? "") == "CA" ? 1 : ((a.EsCajaBanco ?? "") == "BA" ? 2 : ((a.EsCajaBanco ?? "") == "TC" ? 3 : 4)),
+                            TipoGrupo = (a.EsCajaBanco ?? "") == "CA" ? "Cajas" : ((a.EsCajaBanco ?? "") == "BA" ? "Bancos" : ((a.EsCajaBanco ?? "") == "TC" ? "Tarjetas" : "Otros"))
+                        }).OrderBy(sidx + " " + sord).AsQueryable();
+
+            var pagedQuery = Filters.FiltroGenerico_UsandoIQueryable<TiposCuentaGrupos2>
+                                     (sidx, sord, page, rows, _search, filters, db, ref totalRecords, data);
+
+            int totalPages = (int)Math.Ceiling((float)totalRecords / (float)pageSize);
+
+            var jsonData = new jqGridJson()
+            {
+                total = totalPages,
+                page = page,
+                records = totalRecords,
+                rows = (from a in pagedQuery
                         select new jqGridRowJson
                         {
                             id = a.IdTipoCuentaGrupo.ToString(),

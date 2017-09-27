@@ -5,21 +5,12 @@
 @*<h2>Index</h2>*@ @* <div class="container-fluid">*@
 
 <br />
-<div style="padding-left: 15px; padding-right: 15px;">
-    @*agregar esto 1*@
 
-    <div class="row-fluid">
-        <div class="span10 lightblue">
-
-
-            <table id="Lista" class="scroll" cellpadding="0" cellspacing="0"
-                   style="font-size: 16px;
-        "></table> @*agregar esto 2 font family*@
-
-
+<div class="row-fluid">
+    <div class="span10 lightblue">
+        <table id="Lista" class="scroll" cellpadding="0" cellspacing="0"></table>
         <div id="ListaPager" class="scroll" style="text-align: center; height: 30px"></div>
     </div>
-</div>
 </div>
 
 <style>
@@ -27,22 +18,10 @@
         text-decoration: underline;
         cursor: pointer;
     }
-
-
-    .ui-widget {
-        /* font-size: 1.1em; */
-        /*font-size: 10pt;
-      line-height: 14px;*/
-        font-family: 'Helvetica Narrow', 'Arial Narrow',Tahoma,Arial,Helvetica,sans-serif;
-    }
 </style>
-
-
-
 
 <script type="text/javascript">
 
-    var $grid = "";
     var lastSelectedId;
     var lastSelectediCol;
     var lastSelectediRow;
@@ -71,9 +50,25 @@
     });
 
     function GrabarFila(gridId) {
-        var dataFromTheRow = $grid.jqGrid('getRowData', gridId);
+        var i, a, err = "";
+
+        $('#Lista').jqGrid('setSelection', gridId);
+        var iRow = $('#' + $.jgrid.jqID(gridId))[0].rowIndex;
+        var dataFromTheRow = $('#Lista').jqGrid('getRowData', gridId)
+        var colModel = $('#Lista').jqGrid('getGridParam', 'colModel');
+
+        for (i = 0; i < colModel.length; i++) {
+            if (colModel[i].editable) {
+                a = dataFromTheRow[colModel[i].name];
+                if (typeof a != "undefined") {
+                    if (a.substring(0, 1) == "<") {
+                        err = err + "Hay campos en modo edicion, confirmelos con enter antes de grabar.\n"
+                    }
+                }
+            }
+        }
+
         var datos = $("#formid").serializeObject();
-        var err;
 
         datos.IdUnidad = gridId;
         datos.Descripcion = dataFromTheRow.Descripcion;
@@ -82,7 +77,6 @@
         datos.UnidadesPorPack = dataFromTheRow.UnidadesPorPack;
         datos.TaraEnKg = dataFromTheRow.TaraEnKg;
 
-        err = ""
         if (datos.Descripcion == "" || datos.Descripcion == undefined) err = err + "Falta definir la descripcion.\n"
         if (datos.Abreviatura == "" || datos.Abreviatura == undefined) err = err + "Falta definir la abreviatura.\n"
 
@@ -98,7 +92,7 @@
                 data: JSON.stringify(datos),
                 success: function (result) {
                     if (result) {
-                        $grid.jqGrid('setRowData', gridId, { act: "" });
+                        $('#Lista').jqGrid('setRowData', gridId, { act: "" });
                         var rowid = $('#Lista').getGridParam('selrow');
                         var valor = result.IdUnidad;
                         if (valor == "") { valor = "0"; }
@@ -129,10 +123,10 @@
     };
 
     function EliminarFila(gridId) {
-        var dataFromTheRow = $grid.jqGrid('getRowData', gridId);
+        var dataFromTheRow = $('#Lista').jqGrid('getRowData', gridId);
         var idprincipal = dataFromTheRow['IdUnidad'];
         if (idprincipal <= 0) {
-            $grid.jqGrid('delRowData', gridId);
+            $('#Lista').jqGrid('delRowData', gridId);
         } else {
             $.ajax({
                 type: 'POST',
@@ -142,42 +136,13 @@
                 data: JSON.stringify({ id: idprincipal }),
                 success: function (result) {
                     if (result) {
-                        $grid.jqGrid('delRowData', gridId);
+                        $('#Lista').jqGrid('delRowData', gridId);
                     } else {
                         alert('No se pudo eliminar el registro.');
                     }
                 },
             });
         };
-    };
-
-    window.parent.document.body.onclick = saveEditedCell; // attach to parent window if any
-    document.body.onclick = saveEditedCell; // attach to current document.
-
-    function saveEditedCell(evt) {
-        var target = $(evt.target);
-
-        if ($grid) {
-            var isCellClicked = $grid.find(target).length; // check if click is inside jqgrid
-            if (gridCellWasClicked && !isCellClicked) // check if a valid click
-            {
-                gridCellWasClicked = false;
-                $grid.jqGrid("saveCell", lastSelectediRow2, lastSelectediCol2);
-            }
-        }
-
-        //$grid = "";
-        gridCellWasClicked = false;
-
-        if (jQuery("#Lista").find(target).length) {
-            $grid = $('#Lista');
-            grillaenfoco = true;
-        }
-        if (grillaenfoco) {
-            gridCellWasClicked = true;
-            lastSelectediRow2 = lastSelectediRow;
-            lastSelectediCol2 = lastSelectediCol;
-        }
     };
 
     function MarcarSeleccionadosParaEliminar(grid) {
@@ -213,19 +178,19 @@
         'use strict';
 
         $('#Lista').jqGrid({
-            url: ROOT + 'Unidad/TT/',
+            url: ROOT + 'Unidad/Unidades_DynamicGridData/',
             postData: {},
             datatype: 'json',
             mtype: 'POST',
             colNames: ['Acciones', 'IdUnidad', 'Descripcion', 'Abreviatura', 'CodigoAFIP', 'Unidades P/Pack', 'Tara en Kg'],
             colModel: [
-                        { name: 'act', index: 'act', align: 'center', width: 30, editable: false, hidden: false },
-                        { name: 'IdUnidad', index: 'IdUnidad', align: 'left', width: 100, editable: false, hidden: true },
-                        { name: 'Descripcion', index: 'Descripcion', width: 200, align: 'left', editable: true, editrules: { required: false }, edittype: 'text', label: 'TB' },
-                        { name: 'Abreviatura', index: 'Abreviatura', width: 50, align: 'left', editable: true, editrules: { required: false }, edittype: 'text', label: 'TB' },
-                        { name: 'CodigoAFIP', index: 'CodigoAFIP', width: 50, align: 'left', editable: true, editrules: { required: false }, edittype: 'text', label: 'TB' },
+                        { name: 'act', index: 'act', align: 'center', width: 70, search: false, editable: false, hidden: false },
+                        { name: 'IdUnidad', index: 'IdUnidad', align: 'left', width: 100, search: false, editable: false, hidden: true },
+                        { name: 'Descripcion', index: 'Descripcion', width: 200, align: 'left', search: true, editable: true, editrules: { required: false }, edittype: 'text', label: 'TB' },
+                        { name: 'Abreviatura', index: 'Abreviatura', width: 50, align: 'left', search: true, editable: true, editrules: { required: false }, edittype: 'text', label: 'TB' },
+                        { name: 'CodigoAFIP', index: 'CodigoAFIP', width: 50, align: 'left', search: true, editable: true, editrules: { required: false }, edittype: 'text', label: 'TB' },
                         {
-                            name: 'UnidadesPorPack', index: 'UnidadesPorPack', width: 80, align: 'right', editable: true, editrules: { required: false, number: true }, edittype: 'text', label: 'TB',
+                            name: 'UnidadesPorPack', index: 'UnidadesPorPack', width: 80, align: 'right', search: true, editable: true, editrules: { required: false, number: true }, edittype: 'text', label: 'TB',
                             editoptions: {
                                 maxlength: 20, defaultValue: '0.00',
                                 dataEvents: [
@@ -240,7 +205,7 @@
                             }
                         },
                         {
-                            name: 'TaraEnKg', index: 'TaraEnKg', width: 80, align: 'right', editable: true, editrules: { required: false, number: true }, edittype: 'text', label: 'TB',
+                            name: 'TaraEnKg', index: 'TaraEnKg', width: 80, align: 'right', search: true, editable: true, editrules: { required: false, number: true }, edittype: 'text', label: 'TB',
                             editoptions: {
                                 maxlength: 20, defaultValue: '0.00',
                                 dataEvents: [
@@ -281,8 +246,6 @@
             //        return false;
             //    }
             //},
-
-
             pager: $('#ListaPager'),
             rowNum: 20,
             rowList: [10, 20, 50, 100],
@@ -290,35 +253,17 @@
             sortorder: 'asc',
             viewrecords: true,
             multiselect: true,
-            toppager: true,
-
-
-
+            shrinkToFit: false,
+            width: 'auto',
+            height: '100%',
+            altRows: false,
+            footerrow: false,
+            userDataOnFooter: true,
             caption: '<b>UNIDADES</b>',
             cellEdit: true,
             cellsubmit: 'clientArray',
-            editurl: ROOT + 'Empleado/EditGridData/',
-
-
-
-            ///////////////////////////////
-            //width: 'auto', // 'auto',
-            autowidth: true,
-            shrinkToFit: false,
-            //////////////////////////////
-
-            height: $(window).height() - ALTOLISTADO, // '100%'
-            altRows: false,
-            footerrow: false, //true,
-            userDataOnFooter: true
-            // ,caption: '<b>PEDIDOS</b>'
-            , multiboxonly: true
-
-
-
-
-
-
+            editurl: ROOT + 'Empleado/EditGridData/'
+            //multiboxonly: true
         });
         jQuery("#Lista").jqGrid('navGrid', '#ListaPager', { search: false, refresh: false, add: false, edit: false, del: false }, {}, {}, {}, {});
         jQuery("#Lista").jqGrid('navButtonAdd', '#ListaPager',
@@ -335,15 +280,10 @@
                                                 MarcarSeleccionadosParaEliminar(jQuery("#Lista"));
                                             },
                                         });
+        jQuery("#Lista").filterToolbar({
+            stringResult: true, searchOnEnter: true,
+            defaultSearch: 'cn',
+            enableClear: false
+        });
     });
-
-
-
-
-    @*agregar esto 3 *@
-    $(window).resize(function () {
-        RefrescaAnchoJqgrids();
-    });
-
-
 </script>
