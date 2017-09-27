@@ -145,41 +145,53 @@ namespace ProntoMVC.Controllers
             return Json(new { Success = 1, IdCuentaGasto = Id, ex = "" });
         }
 
-        public virtual ActionResult CuentasGastos_DynamicGridData(string sidx, string sord, int page, int rows, bool _search, string filters)
+        public class CuentasGasto2
+        {
+            public int IdCuentaGasto { get; set; }
+            public int? IdRubroContable { get; set; }
+            public int? IdCuentaMadre { get; set; }
+            public string Codigo { get; set; }
+            public string Descripcion { get; set; }
+            public string RubroContable { get; set; }
+            public string CuentaMadre { get; set; }
+            public string CodigoDestino { get; set; }
+            public string Activa { get; set; }
+            public string Titulo { get; set; }
+        }
+
+        public virtual JsonResult CuentasGastos_DynamicGridData(string sidx, string sord, int page, int rows, bool _search, string filters)
         {
             int totalRecords = 0;
+            int pageSize = rows;
 
-            var pagedQuery = Filters.FiltroGenerico<Data.Models.CuentasGasto>
-                                ("RubrosContables,Cuentas", sidx, sord, page, rows, _search, filters, db, ref totalRecords);
-
-            // esto filtro se debería aplicar antes que el filtrogenerico (queda mal paginado si no)
-            //var Entidad = pagedQuery.Where(o => (o.Confirmado ?? "") != "NO").AsQueryable();
-
-            int totalPages = (int)Math.Ceiling((float)totalRecords / (float)rows);
-
-            var data = (from a in pagedQuery
+            var data = (from a in db.CuentasGastos
                         from b in db.RubrosContables.Where(o => o.IdRubroContable == a.IdRubroContable).DefaultIfEmpty()
                         from c in db.Cuentas.Where(o => o.IdCuenta == a.IdCuentaMadre).DefaultIfEmpty()
-                        select new
+                        select new CuentasGasto2
                         {
-                            a.IdCuentaGasto,
-                            a.IdRubroContable,
-                            a.IdCuentaMadre,
-                            a.Codigo,
-                            a.Descripcion,
+                            IdCuentaGasto = a.IdCuentaGasto,
+                            IdRubroContable = a.IdRubroContable,
+                            IdCuentaMadre = a.IdCuentaMadre,
+                            Codigo = a.Codigo,
+                            Descripcion = a.Descripcion,
                             RubroContable = b != null ? b.Descripcion : "",
                             CuentaMadre = c != null ? c.Descripcion : "",
-                            a.CodigoDestino,
-                            a.Activa,
-                            a.Titulo
-                        }).OrderBy(sidx + " " + sord).ToList();
+                            CodigoDestino = a.CodigoDestino,
+                            Activa = a.Activa,
+                            Titulo = a.Titulo
+                        }).OrderBy(sidx + " " + sord).AsQueryable();
+
+            var pagedQuery = Filters.FiltroGenerico_UsandoIQueryable<CuentasGasto2>
+                                     (sidx, sord, page, rows, _search, filters, db, ref totalRecords, data);
+
+            int totalPages = (int)Math.Ceiling((float)totalRecords / (float)pageSize);
 
             var jsonData = new jqGridJson()
             {
                 total = totalPages,
                 page = page,
                 records = totalRecords,
-                rows = (from a in data
+                rows = (from a in pagedQuery
                         select new jqGridRowJson
                         {
                             id = a.IdCuentaGasto.ToString(),
@@ -198,7 +210,6 @@ namespace ProntoMVC.Controllers
                             }
                         }).ToArray()
             };
-
             return Json(jsonData, JsonRequestBehavior.AllowGet);
         }
 

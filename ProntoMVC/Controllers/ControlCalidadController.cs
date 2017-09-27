@@ -209,9 +209,6 @@ namespace ProntoMVC.Controllers
             // esto filtro se debería aplicar antes que el filtrogenerico (queda mal paginado si no)
             var Entidad = pagedQuery.AsQueryable();
 
-            var Entidad1 = (from a in Entidad
-                            select new { IdControlCalidad = a.IdControlCalidad }).ToList();
-
             int totalPages = (int)Math.Ceiling((float)totalRecords / (float)pageSize);
 
             var data = (from a in Entidad

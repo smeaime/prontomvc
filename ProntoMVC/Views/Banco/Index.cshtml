@@ -10,7 +10,7 @@
 </div>
 
 <script type="text/javascript">
-    var $grid = "";
+
     var lastSelectedId;
     var lastSelectediCol;
     var lastSelectediRow;
@@ -33,15 +33,25 @@
     var saveIcon = '<span class="ui-state-default" style="border:0"><span class="ui-icon ui-icon-info" style="float: left; margin-right: .3em;"></span></span>'
 
     function GrabarFila(gridId) {
-        var $grid = $("#Lista");
+        var i, a, err = "";
 
-        //jQuery('#Lista').jqGrid('saveCell', lastRowIndex, lastColIndex);
-        $grid.jqGrid("saveCell", lastSelectediRow2, lastSelectediCol2);
-        //GrabarGrillaLocal()
+        $('#Lista').jqGrid('setSelection', gridId);
+        var iRow = $('#' + $.jgrid.jqID(gridId))[0].rowIndex;
+        var dataFromTheRow = $('#Lista').jqGrid('getRowData', gridId)
+        var colModel = $('#Lista').jqGrid('getGridParam', 'colModel');
 
-        var dataFromTheRow = $grid.jqGrid('getRowData', gridId);
+        for (i = 0; i < colModel.length; i++) {
+            if (colModel[i].editable) {
+                a = dataFromTheRow[colModel[i].name];
+                if (typeof a != "undefined") {
+                    if (a.substring(0, 1) == "<") {
+                        err = err + "Hay campos en modo edicion, confirmelos con enter antes de grabar.\n"
+                    }
+                }
+            }
+        }
+
         var datos = $("#formid").serializeObject();
-        var err;
 
         datos.IdBanco = gridId;
         datos.IdCuenta = dataFromTheRow.IdCuenta;
@@ -55,7 +65,6 @@
         datos.Entidad = dataFromTheRow.Entidad;
         datos.Subentidad = dataFromTheRow.Subentidad;
 
-        err = ""
         if (datos.Nombre == "" || datos.Nombre == undefined) err = err + "Falta definir el nombre del Banco.\n"
 
         if (err != "") {
@@ -70,7 +79,7 @@
                 data: JSON.stringify(datos),
                 success: function (result) {
                     if (result) {
-                        $grid.jqGrid('setRowData', gridId, { act: "" });
+                        $('#Lista').jqGrid('setRowData', gridId, { act: "" });
                         var rowid = $('#Lista').getGridParam('selrow');
                         var valor = result.IdBanco;
                         if (valor == "") { valor = "0"; }
@@ -101,10 +110,10 @@
     };
 
     function EliminarFila(gridId) {
-        var dataFromTheRow = $grid.jqGrid('getRowData', gridId);
+        var dataFromTheRow = $('#Lista').jqGrid('getRowData', gridId);
         var idprincipal = dataFromTheRow['IdBanco'];
         if (idprincipal <= 0) {
-            $grid.jqGrid('delRowData', gridId);
+            $('#Lista').jqGrid('delRowData', gridId);
         } else {
             $.ajax({
                 type: 'POST',
@@ -114,7 +123,7 @@
                 data: JSON.stringify({ id: idprincipal }),
                 success: function (result) {
                     if (result) {
-                        $grid.jqGrid('delRowData', gridId);
+                        $('#Lista').jqGrid('delRowData', gridId);
                     } else {
                         alert('No se pudo eliminar el registro.');
                     }
@@ -130,35 +139,6 @@
         $.extend($.jgrid.inlineEdit, {
             keys: true
         });
-
-        window.parent.document.body.onclick = saveEditedCell; // attach to parent window if any
-        document.body.onclick = saveEditedCell; // attach to current document.
-
-        function saveEditedCell(evt) {
-            var target = $(evt.target);
-
-            if ($grid) {
-                var isCellClicked = $grid.find(target).length; // check if click is inside jqgrid
-                if (gridCellWasClicked && !isCellClicked) // check if a valid click
-                {
-                    gridCellWasClicked = false;
-                    $grid.jqGrid("saveCell", lastSelectediRow2, lastSelectediCol2);
-                }
-            }
-
-            //$grid = "";
-            gridCellWasClicked = false;
-
-            if (jQuery("#Lista").find(target).length) {
-                $grid = $('#Lista');
-                grillaenfoco = true;
-            }
-            if (grillaenfoco) {
-                gridCellWasClicked = true;
-                lastSelectediRow2 = lastSelectediRow;
-                lastSelectediCol2 = lastSelectediCol;
-            }
-        };
 
         function MarcarSeleccionadosParaEliminar(grid) {
             var selectedIds = grid.jqGrid('getGridParam', 'selarrrow');
@@ -203,14 +183,14 @@
                        'Condicion Iva', 'Codigo para importacion de resumenes', 'Codigo para gestion de cobros', 'Entidad asig.', 'Sub entidad asig.'],
             colModel: [
                         { name: 'act', index: 'act', align: 'center', width: 80, sortable: false, editable: false, search: false },
-                        { name: 'IdBanco', index: 'IdBanco', align: 'left', width: 100, editable: false, hidden: true },
-                        { name: 'IdCuenta', index: 'IdCuenta', align: 'left', width: 100, editable: false, hidden: true },
-                        { name: 'IdCuentaParaChequesDiferidos', index: 'IdCuentaParaChequesDiferidos', align: 'left', width: 100, editable: false, hidden: true },
-                        { name: 'IdCodigoIva', index: 'IdCodigoIva', align: 'left', width: 100, editable: false, hidden: true },
-                        { name: 'CodigoUniversal', index: 'CodigoUniversal', align: 'center', width: 80, editable: true, edittype: 'text', search: true, searchoptions: { clearSearch: true, searchOperators: true, sopt: ['eq', 'cn'] } },
-                        { name: 'Nombre', index: 'Nombre', align: 'left', width: 300, editable: true, edittype: 'text', search: true, searchoptions: { clearSearch: true, searchOperators: true, sopt: ['eq', 'cn'] } },
+                        { name: 'IdBanco', index: 'IdBanco', align: 'left', width: 100, search: false, editable: false, hidden: true },
+                        { name: 'IdCuenta', index: 'IdCuenta', align: 'left', width: 100, search: false, editable: false, hidden: true },
+                        { name: 'IdCuentaParaChequesDiferidos', index: 'IdCuentaParaChequesDiferidos', align: 'left', width: 100, search: false, editable: false, hidden: true },
+                        { name: 'IdCodigoIva', index: 'IdCodigoIva', align: 'left', width: 100, search: false, editable: false, hidden: true },
+                        { name: 'CodigoUniversal', index: 'CodigoUniversal', align: 'center', width: 80, editable: true, edittype: 'text', search: true, searchoptions: { clearSearch: true, searchOperators: true, sopt: ['eq'] } },
+                        { name: 'Nombre', index: 'Nombre', align: 'left', width: 300, search: true, editable: true, editrules: { required: false }, edittype: 'text', label: 'TB' },
                         {
-                            name: 'Cuenta', index: 'Cuenta', align: 'left', width: 300, editable: true, hidden: false, edittype: 'select', editrules: { required: false },
+                            name: 'Cuenta', index: 'Cuenta', align: 'left', width: 300, search: true, editable: true, hidden: false, edittype: 'select', editrules: { required: false },
                             editoptions: {
                                 dataUrl: ROOT + 'Cuenta/GetCuentasSinCuentasGastosObras?Texto=1',
                                 dataInit: function (elem) {
@@ -239,7 +219,7 @@
                             },
                         },
                         {
-                            name: 'CuentaParaChequesDiferidos', index: 'CuentaParaChequesDiferidos', align: 'left', width: 300, editable: true, hidden: false, edittype: 'select', editrules: { required: false },
+                            name: 'CuentaParaChequesDiferidos', index: 'CuentaParaChequesDiferidos', align: 'left', width: 300, search: true, editable: true, hidden: false, edittype: 'select', editrules: { required: false },
                             editoptions: {
                                 dataUrl: ROOT + 'Cuenta/GetCuentasSinCuentasGastosObras?Texto=1',
                                 dataInit: function (elem) {
@@ -267,9 +247,9 @@
                                 }]
                             },
                         },
-                        { name: 'Cuit', index: 'Cuit', align: 'left', width: 120, editable: true, edittype: 'text', search: true, searchoptions: { clearSearch: true, searchOperators: true, sopt: ['eq', 'cn'] } },
+                        { name: 'Cuit', index: 'Cuit', align: 'left', width: 120, search: true, editable: true, editrules: { required: false }, edittype: 'text', label: 'TB' },
                         {
-                            name: 'DescripcionIva', index: 'DescripcionIva', align: 'left', width: 200, editable: true, hidden: false, edittype: 'select', editrules: { required: false },
+                            name: 'DescripcionIva', index: 'DescripcionIva', align: 'left', width: 200, search: true, editable: true, hidden: false, edittype: 'select', editrules: { required: false },
                             editoptions: {
                                 dataUrl: ROOT + 'DescripcionIva/GetDescripcionesIva',
                                 dataInit: function (elem) {
@@ -297,10 +277,10 @@
                                 }]
                             },
                         },
-                        { name: 'CodigoResumen', index: 'CodigoResumen', align: 'center', width: 120, editable: true, edittype: 'text', search: true, searchoptions: { clearSearch: true, searchOperators: true, sopt: ['eq', 'cn'] } },
-                        { name: 'Codigo', index: 'Codigo', align: 'center', width: 120, editable: true, edittype: 'text', search: true, searchoptions: { clearSearch: true, searchOperators: true, sopt: ['eq', 'cn'] } },
-                        { name: 'Entidad', index: 'Entidad', align: 'center', width: 120, editable: true, edittype: 'text', search: true, searchoptions: { clearSearch: true, searchOperators: true, sopt: ['eq', 'cn'] } },
-                        { name: 'Subentidad', index: 'Subentidad', align: 'center', width: 120, editable: true, edittype: 'text', search: true, searchoptions: { clearSearch: true, searchOperators: true, sopt: ['eq', 'cn'] } }
+                        { name: 'CodigoResumen', index: 'CodigoResumen', align: 'center', width: 120, editable: true, edittype: 'text', search: false, searchoptions: { clearSearch: true, searchOperators: true, sopt: ['eq', 'cn'] } },
+                        { name: 'Codigo', index: 'Codigo', align: 'center', width: 120, editable: true, edittype: 'text', search: false, searchoptions: { clearSearch: true, searchOperators: true, sopt: ['eq', 'cn'] } },
+                        { name: 'Entidad', index: 'Entidad', align: 'center', width: 120, editable: true, edittype: 'text', search: false, searchoptions: { clearSearch: true, searchOperators: true, sopt: ['eq', 'cn'] } },
+                        { name: 'Subentidad', index: 'Subentidad', align: 'center', width: 120, editable: true, edittype: 'text', search: false, searchoptions: { clearSearch: true, searchOperators: true, sopt: ['eq', 'cn'] } }
             ],
             onSelectRow: function (id) {
                 if (id && id !== lastSelectedId) {

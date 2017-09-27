@@ -3,7 +3,7 @@
     ViewBag.Title = "Obras";
 }
 
-<div><input id="Activas" name="FechaInicial" type="hidden"></div>
+<div><input id="Activas" name="Activas" type="hidden"></div>
 
 <br />
 
@@ -30,6 +30,8 @@
         var inEdit;
         grid = $("#Lista");
 
+        if ($("#Activas").val() == "") { $("#Activas").val("SI"); }
+
         $("input[name=gr]:radio").change(function () {
             if ($("#r1").attr("checked")) {
                 $("#Activas").val("SI");
@@ -44,7 +46,7 @@
         $('.ui-jqgrid .ui-jqgrid-htable th div').css('white-space', 'normal');
 
         $('#Lista').jqGrid({
-            url: '@Url.Action("TT", "Obra")',
+            url: '@Url.Action("Obras_DynamicGridData", "Obra")',
             postData: { 'Activas': function () { return $("#Activas").val(); } },
             datatype: 'json',
             mtype: 'POST',
@@ -53,46 +55,46 @@
                         'Lugar de pago', 'Prox. nro. aut. compra', 'Orden sec.', 'Dias liq. certif.', 'Observaciones', 'Archivo adjunto 1', 'Archivo adjunto 2', 'Archivo adjunto 3', 'Archivo adjunto 4', 
                         'Archivo adjunto 5', 'Archivo adjunto 6', 'Archivo adjunto 7', 'Archivo adjunto 8', 'Archivo adjunto 9', 'Archivo adjunto 10'],
             colModel: [
-                        { name: 'ver', index: 'ver', hidden: false, width: 50 },
-                        { name: 'IdObra', index: 'IdOrdenPago', align: 'center', width: 80, sortable: false, editable: false, search: false, hidden: true },
-                        { name: 'Descripcion', index: 'Descripcion', align: 'left', width: 300, editable: false, search: true, searchoptions: { sopt: ['cn','eq']  } },
-                        { name: 'NumeroObra', index: 'NumeroObra', align: 'left', width: 80, editable: false, hidden: false },
-                        { name: 'TipoObraDescripcion', index: 'TipoObraDescripcion', align: 'left', width: 80, editable: false, hidden: false },
-                        { name: 'Activa', index: 'Activa', align: 'center', width: 50, editable: false, hidden: false },
-                        { name: 'FechaInicio', index: 'FechaInicio', width: 80, align: 'center', sorttype: 'date', hidden: false, editable: false, formatoptions: { newformat: 'dd/mm/yy' }, datefmt: 'dd/mm/yy', search: false },
-                        { name: 'FechaFinalizacion', index: 'FechaFinalizacion', width: 80, align: 'center', sorttype: 'date', hidden: false, editable: false, formatoptions: { newformat: 'dd/mm/yy' }, datefmt: 'dd/mm/yy', search: false },
-                        { name: 'FechaEntrega', index: 'FechaEntrega', width: 80, align: 'center', sorttype: 'date', hidden: false, editable: false, formatoptions: { newformat: 'dd/mm/yy' }, datefmt: 'dd/mm/yy', search: false },
-                        { name: 'Jerarquia', index: 'Jerarquia', align: 'center', width: 120, editable: false, hidden: false },
-                        { name: 'JefeRegional', index: 'JefeRegional', align: 'left', width: 120, editable: false, hidden: false },
-                        { name: 'Jefe', index: 'Jefe', align: 'left', width: 120, editable: false, hidden: false },
-                        { name: 'Subjefe', index: 'Subjefe', align: 'left', width: 120, editable: false, hidden: false },
-                        { name: 'CuentaContableFF', index: 'CuentaContableFF', align: 'left', width: 200, editable: false, hidden: false },
-                        { name: 'GrupoObra', index: 'GrupoObra', align: 'left', width: 200, editable: false, hidden: false },
-                        { name: 'ArticuloAsociado', index: 'ArticuloAsociado', align: 'left', width: 300, editable: false, hidden: false },
-                        { name: 'ValorObra', index: 'ValorObra', align: 'right', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
-                        { name: 'Moneda', index: 'Moneda', align: 'left', width: 40, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
-                        { name: 'Direccion', index: 'Direccion', align: 'left', width: 200, editable: false, hidden: false },
-                        { name: 'Localidad', index: 'Localidad', align: 'left', width: 200, editable: false, hidden: false },
-                        { name: 'CodigoPostal', index: 'CodigoPostal', align: 'left', width: 80, editable: false, hidden: false },
-                        { name: 'Provincia', index: 'Provincia', align: 'left', width: 200, editable: false, hidden: false },
-                        { name: 'Pais', index: 'Pais', align: 'left', width: 120, editable: false, hidden: false },
-                        { name: 'Telefono', index: 'Telefono', align: 'left', width: 120, editable: false, hidden: false },
-                        { name: 'Responsable', index: 'Responsable', align: 'left', width: 120, editable: false, hidden: false },
-                        { name: 'LugarPago', index: 'LugarPago', align: 'left', width: 120, editable: false, hidden: false },
-                        { name: 'ProximoNumeroAutorizacionCompra', index: 'ProximoNumeroAutorizacionCompra', align: 'right', width: 80, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
-                        { name: 'OrdenamientoSecundario', index: 'OrdenamientoSecundario', align: 'right', width: 80, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'ver', index: 'ver', hidden: false, width: 50, search: false },
+                        { name: 'IdObra', index: 'IdOrdenPago', align: 'center', width: 80, search: false, sortable: false, editable: false, search: false, hidden: true },
+                        { name: 'Descripcion', index: 'Descripcion', align: 'left', width: 300, editable: false, search: true, searchoptions: { sopt: ['cn', 'eq'] } },
+                        { name: 'NumeroObra', index: 'NumeroObra', align: 'left', width: 120, search: true, editable: false, hidden: false },
+                        { name: 'TipoObraDescripcion', index: 'TipoObraDescripcion', align: 'left', width: 80, search: true, editable: false, hidden: false },
+                        { name: 'Activa', index: 'Activa', align: 'center', width: 50, search: true, editable: false, hidden: false },
+                        { name: 'FechaInicio', index: 'FechaInicio', width: 100, align: 'center', search: true, sorttype: 'date', hidden: false, editable: false, formatoptions: { newformat: 'dd/mm/yy' }, datefmt: 'dd/mm/yy', search: false },
+                        { name: 'FechaFinalizacion', index: 'FechaFinalizacion', width: 100, align: 'center', search: true, sorttype: 'date', hidden: false, editable: false, formatoptions: { newformat: 'dd/mm/yy' }, datefmt: 'dd/mm/yy', search: false },
+                        { name: 'FechaEntrega', index: 'FechaEntrega', width: 100, align: 'center', search: true, sorttype: 'date', hidden: false, editable: false, formatoptions: { newformat: 'dd/mm/yy' }, datefmt: 'dd/mm/yy', search: false },
+                        { name: 'Jerarquia', index: 'Jerarquia', align: 'center', width: 120, search: true, editable: false, hidden: false },
+                        { name: 'JefeRegional', index: 'JefeRegional', align: 'left', width: 120, search: true, editable: false, hidden: false },
+                        { name: 'Jefe', index: 'Jefe', align: 'left', width: 120, search: true, editable: false, hidden: false },
+                        { name: 'Subjefe', index: 'Subjefe', align: 'left', width: 120, search: true, editable: false, hidden: false },
+                        { name: 'CuentaContableFF', index: 'CuentaContableFF', align: 'left', width: 200, search: true, editable: false, hidden: false },
+                        { name: 'GrupoObra', index: 'GrupoObra', align: 'left', width: 200, search: true, editable: false, hidden: false },
+                        { name: 'ArticuloAsociado', index: 'ArticuloAsociado', align: 'left', width: 300, search: true, editable: false, hidden: false },
+                        { name: 'ValorObra', index: 'ValorObra', align: 'right', width: 100, editable: false, search: false, searchoptions: { sopt: ['cn'] } },
+                        { name: 'Moneda', index: 'Moneda', align: 'left', width: 40, search: true, editable: false, searchoptions: { sopt: ['cn'] } },
+                        { name: 'Direccion', index: 'Direccion', align: 'left', width: 200, search: true, editable: false, hidden: false },
+                        { name: 'Localidad', index: 'Localidad', align: 'left', width: 200, search: true, editable: false, hidden: false },
+                        { name: 'CodigoPostal', index: 'CodigoPostal', align: 'left', width: 80, search: true, editable: false, hidden: false },
+                        { name: 'Provincia', index: 'Provincia', align: 'left', width: 200, search: true, editable: false, hidden: false },
+                        { name: 'Pais', index: 'Pais', align: 'left', width: 120, search: true, editable: false, hidden: false },
+                        { name: 'Telefono', index: 'Telefono', align: 'left', width: 120, search: true, editable: false, hidden: false },
+                        { name: 'Responsable', index: 'Responsable', align: 'left', width: 120, search: true, editable: false, hidden: false },
+                        { name: 'LugarPago', index: 'LugarPago', align: 'left', width: 120, search: true, editable: false, hidden: false },
+                        { name: 'ProximoNumeroAutorizacionCompra', index: 'ProximoNumeroAutorizacionCompra', align: 'right', width: 80, editable: false, search: false, searchoptions: { sopt: ['cn'] } },
+                        { name: 'OrdenamientoSecundario', index: 'OrdenamientoSecundario', align: 'right', width: 80, editable: false, search: false, searchoptions: { sopt: ['cn'] } },
                         { name: 'DiasLiquidacionCertificados', index: 'DiasLiquidacionCertificados', align: 'right', width: 80, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
-                        { name: 'Observaciones', index: 'Observaciones', align: 'left', width: 200, editable: false, hidden: false },
-                        { name: 'ArchivoAdjunto1', index: 'ArchivoAdjunto1', align: 'left', width: 150, editable: false, hidden: false },
-                        { name: 'ArchivoAdjunto2', index: 'ArchivoAdjunto2', align: 'left', width: 150, editable: false, hidden: false },
-                        { name: 'ArchivoAdjunto3', index: 'ArchivoAdjunto3', align: 'left', width: 150, editable: false, hidden: false },
-                        { name: 'ArchivoAdjunto4', index: 'ArchivoAdjunto4', align: 'left', width: 150, editable: false, hidden: false },
-                        { name: 'ArchivoAdjunto5', index: 'ArchivoAdjunto5', align: 'left', width: 150, editable: false, hidden: false },
-                        { name: 'ArchivoAdjunto6', index: 'ArchivoAdjunto6', align: 'left', width: 150, editable: false, hidden: false },
-                        { name: 'ArchivoAdjunto7', index: 'ArchivoAdjunto7', align: 'left', width: 150, editable: false, hidden: false },
-                        { name: 'ArchivoAdjunto8', index: 'ArchivoAdjunto8', align: 'left', width: 150, editable: false, hidden: false },
-                        { name: 'ArchivoAdjunto9', index: 'ArchivoAdjunto9', align: 'left', width: 150, editable: false, hidden: false },
-                        { name: 'ArchivoAdjunto10', index: 'ArchivoAdjunto10', align: 'left', width: 150, editable: false, hidden: false }
+                        { name: 'Observaciones', index: 'Observaciones', align: 'left', width: 200, search: true, editable: false, hidden: false },
+                        { name: 'ArchivoAdjunto1', index: 'ArchivoAdjunto1', align: 'left', width: 150, search: true, editable: false, hidden: false },
+                        { name: 'ArchivoAdjunto2', index: 'ArchivoAdjunto2', align: 'left', width: 150, search: true, editable: false, hidden: false },
+                        { name: 'ArchivoAdjunto3', index: 'ArchivoAdjunto3', align: 'left', width: 150, search: true, editable: false, hidden: false },
+                        { name: 'ArchivoAdjunto4', index: 'ArchivoAdjunto4', align: 'left', width: 150, search: true, editable: false, hidden: false },
+                        { name: 'ArchivoAdjunto5', index: 'ArchivoAdjunto5', align: 'left', width: 150, search: true, editable: false, hidden: false },
+                        { name: 'ArchivoAdjunto6', index: 'ArchivoAdjunto6', align: 'left', width: 150, search: true, editable: false, hidden: false },
+                        { name: 'ArchivoAdjunto7', index: 'ArchivoAdjunto7', align: 'left', width: 150, search: true, editable: false, hidden: false },
+                        { name: 'ArchivoAdjunto8', index: 'ArchivoAdjunto8', align: 'left', width: 150, search: true, editable: false, hidden: false },
+                        { name: 'ArchivoAdjunto9', index: 'ArchivoAdjunto9', align: 'left', width: 150, search: true, editable: false, hidden: false },
+                        { name: 'ArchivoAdjunto10', index: 'ArchivoAdjunto10', align: 'left', width: 150, search: true, editable: false, hidden: false }
             ],
             onSelectRow: function (id) {
                 if (id && id !== lastSelectedId) {
@@ -103,7 +105,7 @@
                 }
             },
             pager: $('#ListaPager'),
-            rowNum: 15,
+            rowNum: 20,
             rowList: [10, 20, 50, 20000],
             sortname: 'Descripcion',
             sortorder: 'asc',
@@ -120,6 +122,11 @@
         jQuery("#Lista").jqGrid('navGrid', '#ListaPager', { refresh: true, add: false, edit: false, del: false }, {}, {}, {}, { sopt: ["cn"], width: 700, closeOnEscape: true, closeAfterSearch: true });
         //jQuery("#Lista").jqGrid('gridResize', { minWidth: 350, maxWidth: 1500, minHeight: 80, maxHeight: 500 });
         //jQuery("#Lista").jqGrid('setFrozenColumns');
+        jQuery("#Lista").filterToolbar({
+            stringResult: true, searchOnEnter: true,
+            defaultSearch: 'cn',
+            enableClear: false
+        });
 
         $(window).resize(function () {
             RefrescaAnchoJqgrids();
