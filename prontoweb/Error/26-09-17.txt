@@ -1100,3 +1100,99 @@ Log Entry :
 09/26/2017 11:50:22
 Error in: http://localhost:50769/ProntoWeb/CartasDePortes.aspx?tipo=Todas. Error Message:supervisor
 __________________________
+
+Log Entry : 
+09/26/2017 12:14:34
+Error in: http://localhost:50769/ProntoWeb/CartasDePortes.aspx?tipo=Todas. Error Message:supervisor
+__________________________
+
+Log Entry : 
+09/26/2017 12:15:13
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesAccesoClientesMovil.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartaDePorteManager.TraerCUITClientesSegunUsuario(String usuario, String SC, String scbdlmaster) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 15514
+BusinessLogic
+__________________________
+
+Log Entry : 
+09/26/2017 12:15:18
+Error in: http://localhost:50769/SeleccionarEmpresa.aspx. Error Message:sesion: supervisor True
+__________________________
+
+Log Entry : 
+09/26/2017 12:15:18
+Error in: http://localhost:50769/SeleccionarEmpresa.aspx. Error Message:Pasa nomas. membership: supervisor
+__________________________
+
+Log Entry : 
+09/26/2017 12:15:23
+Error in: http://localhost:50769/SeleccionarEmpresa.aspx. Error Message:System.Threading.ThreadAbortException
+Subproceso anulado.
+   en System.Threading.Thread.AbortInternal()
+   en System.Threading.Thread.Abort(Object stateInfo)
+   en System.Web.HttpResponse.AbortCurrentThread()
+   en System.Web.HttpResponse.End()
+   en System.Web.HttpResponse.Redirect(String url, Boolean endResponse, Boolean permanent)
+   en System.Web.HttpResponse.Redirect(String url)
+   en SeleccionarEmpresa.ButContinuar_Command(Object sender, CommandEventArgs e) en C:\bdl\pronto\prontoweb\SeleccionarEmpresa.aspx.vb:línea 404
+mscorlib
+__________________________
+
+Log Entry : 
+09/26/2017 12:15:23
+Error in: http://localhost:50769/ProntoWeb/CartasDePortes.aspx?tipo=Todas. Error Message:supervisor
+__________________________
+
+Log Entry : 
+09/26/2017 12:15:34
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesAccesoClientesMovil.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartaDePorteManager.TraerCUITClientesSegunUsuario(String usuario, String SC, String scbdlmaster) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 15514
+BusinessLogic
+__________________________
+
+Log Entry : 
+09/26/2017 12:15:37
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesAccesoClientesMovil.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartaDePorteManager.TraerCUITClientesSegunUsuario(String usuario, String SC, String scbdlmaster) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 15514
+BusinessLogic
+__________________________
+
+Log Entry : 
+09/26/2017 12:16:12
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesAccesoClientesMovil.aspx. Error Message:Microsoft.Reporting.WebForms.ReportServerException: No se encuentra el elemento '/Pronto informes/Listado general de Cartas de Porte (simulando original) con foto 2'. (rsItemNotFound)
+   en Microsoft.Reporting.WebForms.ServerReportSoapProxy.OnSoapException(SoapException e)
+   en Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.ProxyMethodInvocation.Execute[TReturn](RSExecutionConnection connection, ProxyMethod`1 initialMethod, ProxyMethod`1 retryMethod)
+   en Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.LoadReport(String Report, String HistoryID)
+   en Microsoft.Reporting.WebForms.ServerReport.EnsureExecutionSession()
+   en Microsoft.Reporting.WebForms.ServerReport.SetParameters(IEnumerable`1 parameters)
+   en CartaDePorteManager.RebindReportViewer_Servidor_SalidaNormal(ReportViewer& oReportViewer, String rdlFile, IEnumerable`1 parametros) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 5070
+__________________________
+
+Log Entry : 
+09/26/2017 18:15:03
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesAccesoClientesMovil.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartaDePorteManager.TraerCUITClientesSegunUsuario(String usuario, String SC, String scbdlmaster) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 15514
+BusinessLogic
+__________________________
+
+Log Entry : 
+09/26/2017 18:15:06
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesAccesoClientesMovil.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartaDePorteManager.TraerCUITClientesSegunUsuario(String usuario, String SC, String scbdlmaster) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 15514
+BusinessLogic
+__________________________
+
+Log Entry : 
+09/26/2017 18:15:19
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesAccesoClientesMovil.aspx. Error Message:Microsoft.Reporting.WebForms.ReportServerException: No se encuentra el elemento '/Pronto informes/Listado general de Cartas de Porte (simulando original) con foto 2'. (rsItemNotFound)
+   en Microsoft.Reporting.WebForms.ServerReportSoapProxy.OnSoapException(SoapException e)
+   en Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.ProxyMethodInvocation.Execute[TReturn](RSExecutionConnection connection, ProxyMethod`1 initialMethod, ProxyMethod`1 retryMethod)
+   en Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.LoadReport(String Report, String HistoryID)
+   en Microsoft.Reporting.WebForms.ServerReport.EnsureExecutionSession()
+   en Microsoft.Reporting.WebForms.ServerReport.SetParameters(IEnumerable`1 parameters)
+   en CartaDePorteManager.RebindReportViewer_Servidor_SalidaNormal(ReportViewer& oReportViewer, String rdlFile, IEnumerable`1 parametros) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 5070
+__________________________
