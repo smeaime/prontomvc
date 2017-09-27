@@ -325,26 +325,23 @@ namespace ProntoMVC.Controllers
                 try
                 {
                     filteredQuery = q.Where(s, parm);  // este where es de dynamic, no de EF
-
                 }
                 catch (Exception)
                 {
-                    s = s.Replace(".ToString()", ".Value.ToString()");       //   http://stackoverflow.com/questions/9273991/dynamic-linq-to-entities-where-with-nullable-datetime-column
-                    filteredQuery = q.Where(s, parm);
-
+                    if (parm[0].ToString().Length == 0)
+                    {
+                        filteredQuery = q;
+                    }
+                    else {
+                        s = s.Replace(".ToString()", ".Value.ToString()");       //   http://stackoverflow.com/questions/9273991/dynamic-linq-to-entities-where-with-nullable-datetime-column
+                        filteredQuery = q.Where(s, parm); 
+                    }
                 }
-
-
-
-
             }
             else
             {
-
                 filteredQuery = q;
             }
-
-
 
             try
             {
@@ -352,7 +349,6 @@ namespace ProntoMVC.Controllers
             }
             catch (Exception)
             {
-
                 // ¿estas tratando de usar un LIKE sobre una columna que es numerica?
                 // ¿pusiste bien el nombre del campo en el modelo de la jqgrid?? (ejemplo: pusiste "Subrubro" en lugar de "Subrubro.Descripcion"?)
                 throw;
@@ -561,41 +557,31 @@ namespace ProntoMVC.Controllers
 
         public void CrearFiltro<T>(StringBuilder sb, List<ObjectParameter> objParams, bool EsParaLinqDynamic = false)
         {
-
-
             foreach (Rule rule in rules)
             {
-
                 PropertyInfo propertyInfo = null;
 
                 if (rule.field.Split('.').Length == 2) // si usamos más niveles, hay que modificar esto
                 {
-
                     // Si pasan Empleado1.Nombre, Empleado1 no es un type, sino el nombre del objeto, que en este
                     //      caso especial no tiene el mismo nombre que su tipo ... Cómo hacés ahí?
                     // Tengo que obtener de qué tipo es esa variable
-
 
                     PropertyInfo padrepropertyInfo = null;
                     string coleccion = rule.field.Split('.')[0];
                     padrepropertyInfo = typeof(T).GetProperty(coleccion);
 
-
-
                     //propertyInfo = Type.GetType("ProntoMVC.Data.Models." + rule.field.Split('.')[0] + ", ProntoMVC.Data").GetProperty(rule.field.Split('.')[1]); ; 
+                    propertyInfo = padrepropertyInfo.PropertyType.GetProperty(rule.field.Split('.')[1]); ; //target type
                     string propiedad = rule.field.Split('.')[1];
                     propertyInfo = padrepropertyInfo.PropertyType.GetProperty(propiedad); ; //target type
-
                 }
                 else if (rule.field.Split('.').Length == 1)
                 {
-
                     propertyInfo = typeof(T).GetProperty(rule.field);
-
                 }
                 else
                 {
-
                     throw new Exception("si usamos más niveles, hay que modificar esto");
                 }
 
@@ -610,7 +596,6 @@ namespace ProntoMVC.Controllers
                     continue; // skip wrong entries
                 }
 
-
                 if (sb.Length != 0)
                     sb.Append(groupOp);
 
@@ -621,91 +606,102 @@ namespace ProntoMVC.Controllers
                 else
                     sb.AppendFormat(FormatMapping[(int)rule.op], rule.field, iParam);
 
-
-
-
                 ObjectParameter param;
-
-
-
-
 
                 // si usás "contains" tenés que usar sí o sí el tipo string
                 if (rule.op == Operations.cn) param = new ObjectParameter("p" + iParam, rule.data);
 
                 else
                 {
+                    string propname = propertyInfo.PropertyType.FullName;
 
-
-                    switch (propertyInfo.PropertyType.FullName)
-                    {
-                        case "System.Nullable`1[[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]":
-                        case "System.Int32":  // int
-                            param = new ObjectParameter("p" + iParam, Int32.Parse(rule.data));
-                            break;
-                        case "System.Int64":  // bigint
-                            param = new ObjectParameter("p" + iParam, Int64.Parse(rule.data));
-                            break;
-                        case "System.Int16":  // smallint
-                            param = new ObjectParameter("p" + iParam, Int16.Parse(rule.data));
-                            break;
-                        case "System.SByte":  // tinyint
-                            param = new ObjectParameter("p" + iParam, SByte.Parse(rule.data));
-                            break;
-                        case "System.Single": // Edm.Single, in SQL: float
-                            param = new ObjectParameter("p" + iParam, Single.Parse(rule.data));
-                            break;
-                        case "System.Double": // float(53), double precision
-                            param = new ObjectParameter("p" + iParam, Double.Parse(rule.data));
-                            break;
-                        case "System.Boolean": // Edm.Boolean, in SQL: bit
+                    try {
+                        if (propname.Contains("System.Int32")) { param = new ObjectParameter("p" + iParam, Int32.Parse(rule.data)); }
+                        else if (propname.Contains("System.Int64")) { param = new ObjectParameter("p" + iParam, Int64.Parse(rule.data)); }
+                        else if (propname.Contains("System.Int16")) { param = new ObjectParameter("p" + iParam, Int16.Parse(rule.data)); }
+                        else if (propname.Contains("System.SByte")) { param = new ObjectParameter("p" + iParam, SByte.Parse(rule.data)); }
+                        else if (propname.Contains("System.Single")) { param = new ObjectParameter("p" + iParam, Single.Parse(rule.data)); }
+                        else if (propname.Contains("System.Double")) { param = new ObjectParameter("p" + iParam, Double.Parse(rule.data)); }
+                        else if (propname.Contains("System.Decimal")) { param = new ObjectParameter("p" + iParam, Decimal.Parse(rule.data)); }
+                        else if (propname.Contains("System.Boolean"))
+                        {
                             param = new ObjectParameter("p" + iParam,
                                 String.Compare(rule.data, "1", StringComparison.Ordinal) == 0 ||
                                 String.Compare(rule.data, "yes", StringComparison.OrdinalIgnoreCase) == 0 ||
                                 String.Compare(rule.data, "true", StringComparison.OrdinalIgnoreCase) == 0 ?
                                 true :
                                 false);
-                            break;
-
-                        case "System.Nullable`1[[System.DateTime, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]":
-                        case "System.DateTime": // Edm.Single, in SQL: float
-                            param = new ObjectParameter("p" + iParam, DateTime.ParseExact(rule.data, "dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture));
-                            break;
-
-                        default:
-                            // el default es string
-
-                            // TODO: Extend to other data types
-                            // binary, date, datetimeoffset,
-                            // decimal, numeric,
-                            // money, smallmoney
-                            // and so on
-
-
+                        }
+                        else if (propname.Contains("System.DateTime")) { param = new ObjectParameter("p" + iParam, DateTime.Parse(rule.data)); }
+                        else
+                        {
                             if (propertyInfo.PropertyType.FullName.Contains("Nullable"))
                             {
-                                // si es nullable, no uses string!!!
-                                throw new Exception("Incluir el tipo " + propertyInfo.PropertyType.FullName + " en el selectcase");
+                                //// si es nullable, no uses string!!!
+                                //throw new Exception("Incluir el tipo " + propertyInfo.PropertyType.FullName + " en el selectcase");
                             }
-
                             param = new ObjectParameter("p" + iParam, rule.data);
-
-
-                            break;
+                        }
                     }
+                    catch { param = new ObjectParameter("p" + iParam, ""); }
 
+                    //switch (propertyInfo.PropertyType.FullName)
+                    //{
+                    //    case "System.Nullable`1[[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]":
+                    //    case "System.Int32":  // int
+                    //        param = new ObjectParameter("p" + iParam, Int32.Parse(rule.data));
+                    //        break;
+                    //    case "System.Int64":  // bigint
+                    //        param = new ObjectParameter("p" + iParam, Int64.Parse(rule.data));
+                    //        break;
+                    //    case "System.Int16":  // smallint
+                    //        param = new ObjectParameter("p" + iParam, Int16.Parse(rule.data));
+                    //        break;
+                    //    case "System.SByte":  // tinyint
+                    //        param = new ObjectParameter("p" + iParam, SByte.Parse(rule.data));
+                    //        break;
+                    //    case "System.Single": // Edm.Single, in SQL: float
+                    //        param = new ObjectParameter("p" + iParam, Single.Parse(rule.data));
+                    //        break;
+                    //    case "System.Double": // float(53), double precision
+                    //        param = new ObjectParameter("p" + iParam, Double.Parse(rule.data));
+                    //        break;
+                    //    case "System.Boolean": // Edm.Boolean, in SQL: bit
+                    //        param = new ObjectParameter("p" + iParam,
+                    //            String.Compare(rule.data, "1", StringComparison.Ordinal) == 0 ||
+                    //            String.Compare(rule.data, "yes", StringComparison.OrdinalIgnoreCase) == 0 ||
+                    //            String.Compare(rule.data, "true", StringComparison.OrdinalIgnoreCase) == 0 ?
+                    //            true :
+                    //            false);
+                    //        break;
+
+                    //    case "System.Nullable`1[[System.DateTime, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]":
+                    //    case "System.DateTime": // Edm.Single, in SQL: float
+                    //        param = new ObjectParameter("p" + iParam, DateTime.Parse(rule.data));
+                    //        break;
+
+                    //    default:
+                    //        // el default es string
+
+                    //        // TODO: Extend to other data types
+                    //        // binary, date, datetimeoffset,
+                    //        // decimal, numeric,
+                    //        // money, smallmoney
+                    //        // and so on
+                    //        if (propertyInfo.PropertyType.FullName.Contains("Nullable"))
+                    //        {
+                    //            // si es nullable, no uses string!!!
+                    //            throw new Exception("Incluir el tipo " + propertyInfo.PropertyType.FullName + " en el selectcase");
+                    //        }
+                    //        param = new ObjectParameter("p" + iParam, rule.data);
+                    //        break;
+                    //}
                 }
-
-
 
                 objParams.Add(param);
             }
-
-
             // return sb.ToString();
-
         }
-
 
         /// <summary>
         /// /////////////////////////////////////////////////////////////////////////////////////////////////////////////////

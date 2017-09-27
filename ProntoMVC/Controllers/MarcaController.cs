@@ -155,22 +155,6 @@ namespace ProntoMVC.Controllers
             int currentPage = page ?? 1;
 
             var Entidad = db.Marcas.AsQueryable();
-            //if (_search)
-            //{
-            //    switch (searchField.ToLower())
-            //    {
-            //        case "a":
-            //            campo = String.Format("{0} = {1}", searchField, searchString);
-            //            break;
-            //        default:
-            //            campo = String.Format("{0}.Contains(\"{1}\")", searchField, searchString);
-            //            break;
-            //    }
-            //}
-            //else
-            //{
-            //    campo = "true";
-            //}
 
             var Entidad1 = (from a in Entidad
                             select new { IdMarca = a.IdMarca }).Where(campo).ToList();
@@ -185,8 +169,8 @@ namespace ProntoMVC.Controllers
                             a.Descripcion,
                             a.Codigo
                         }).Where(campo).OrderBy(sidx + " " + sord)
-//.Skip((currentPage - 1) * pageSize).Take(pageSize)
-.ToList();
+                        //.Skip((currentPage - 1) * pageSize).Take(pageSize)
+                        .ToList();
 
             var jsonData = new jqGridJson()
             {
@@ -206,6 +190,49 @@ namespace ProntoMVC.Controllers
                             }
                         }).ToArray()
             };
+            return Json(jsonData, JsonRequestBehavior.AllowGet);
+        }
+
+        public virtual JsonResult Marcas_DynamicGridData(string sidx, string sord, int page, int rows, bool _search, string filters)
+        {
+            int totalRecords = 0;
+            int pageSize = rows;
+
+            var pagedQuery = Filters.FiltroGenerico<Data.Models.Marca>
+                                ("", sidx, sord, page, rows, _search, filters, db, ref totalRecords);
+
+            // esto filtro se debería aplicar antes que el filtrogenerico (queda mal paginado si no)
+            var Entidad = pagedQuery.AsQueryable();
+
+            int totalPages = (int)Math.Ceiling((float)totalRecords / (float)pageSize);
+
+            var data = (from a in Entidad
+                        select new
+                        {
+                            a.IdMarca,
+                            a.Descripcion,
+                            a.Codigo
+                        }).OrderBy(sidx + " " + sord).ToList();
+
+            var jsonData = new jqGridJson()
+            {
+                total = totalPages,
+                page = page,
+                records = totalRecords,
+                rows = (from a in data
+                        select new jqGridRowJson
+                        {
+                            id = a.IdMarca.ToString(),
+                            cell = new string[] { 
+                                "",
+                                //"<a href="+ Url.Action("Imprimir",new {id = a.IdGanancia} )  +">Imprimir</>",
+                                a.IdMarca.ToString(),
+                                a.Descripcion.NullSafeToString(),
+                                a.Codigo.ToString()
+                            }
+                        }).ToArray()
+            };
+
             return Json(jsonData, JsonRequestBehavior.AllowGet);
         }
 

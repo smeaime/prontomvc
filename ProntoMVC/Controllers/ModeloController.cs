@@ -182,8 +182,8 @@ namespace ProntoMVC.Controllers
                             a.IdModelo,
                             a.Descripcion
                         }).Where(campo).OrderBy(sidx + " " + sord)
-//.Skip((currentPage - 1) * pageSize).Take(pageSize)
-.ToList();
+                        //.Skip((currentPage - 1) * pageSize).Take(pageSize)
+                        .ToList();
 
             var jsonData = new jqGridJson()
             {
@@ -202,6 +202,47 @@ namespace ProntoMVC.Controllers
                             }
                         }).ToArray()
             };
+            return Json(jsonData, JsonRequestBehavior.AllowGet);
+        }
+
+        public virtual JsonResult Modelos_DynamicGridData(string sidx, string sord, int page, int rows, bool _search, string filters)
+        {
+            int totalRecords = 0;
+            int pageSize = rows;
+
+            var pagedQuery = Filters.FiltroGenerico<Data.Models.Modelo>
+                                ("", sidx, sord, page, rows, _search, filters, db, ref totalRecords);
+
+            // esto filtro se debería aplicar antes que el filtrogenerico (queda mal paginado si no)
+            var Entidad = pagedQuery.AsQueryable();
+
+            int totalPages = (int)Math.Ceiling((float)totalRecords / (float)pageSize);
+
+            var data = (from a in Entidad
+                        select new
+                        {
+                            a.IdModelo,
+                            a.Descripcion
+                        }).OrderBy(sidx + " " + sord).ToList();
+
+            var jsonData = new jqGridJson()
+            {
+                total = totalPages,
+                page = page,
+                records = totalRecords,
+                rows = (from a in data
+                        select new jqGridRowJson
+                        {
+                            id = a.IdModelo.ToString(),
+                            cell = new string[] { 
+                                "",
+                                //"<a href="+ Url.Action("Imprimir",new {id = a.IdGanancia} )  +">Imprimir</>",
+                                a.IdModelo.ToString(),
+                                a.Descripcion.NullSafeToString()
+                            }
+                        }).ToArray()
+            };
+
             return Json(jsonData, JsonRequestBehavior.AllowGet);
         }
 

@@ -10,7 +10,7 @@
 </div>
 
 <script type="text/javascript">
-    var $grid = "";
+
     var lastSelectedId;
     var lastSelectediCol;
     var lastSelectediRow;
@@ -33,15 +33,25 @@
     var saveIcon = '<span class="ui-state-default" style="border:0"><span class="ui-icon ui-icon-info" style="float: left; margin-right: .3em;"></span></span>'
 
     function GrabarFila(gridId) {
-        var $grid = $("#Lista");
+        var i, a, err = "";
 
-        //jQuery('#Lista').jqGrid('saveCell', lastRowIndex, lastColIndex);
-        $grid.jqGrid("saveCell", lastSelectediRow2, lastSelectediCol2);
-        //GrabarGrillaLocal()
+        $('#Lista').jqGrid('setSelection', gridId);
+        var iRow = $('#' + $.jgrid.jqID(gridId))[0].rowIndex;
+        var dataFromTheRow = $('#Lista').jqGrid('getRowData', gridId)
+        var colModel = $('#Lista').jqGrid('getGridParam', 'colModel');
 
-        var dataFromTheRow = $grid.jqGrid('getRowData', gridId);
+        for (i = 0; i < colModel.length; i++) {
+            if (colModel[i].editable) {
+                a = dataFromTheRow[colModel[i].name];
+                if (typeof a != "undefined") {
+                    if (a.substring(0, 1) == "<") {
+                        err = err + "Hay campos en modo edicion, confirmelos con enter antes de grabar.\n"
+                    }
+                }
+            }
+        }
+
         var datos = $("#formid").serializeObject();
-        var err;
 
         datos.IdCuentaBancaria = gridId;
         datos.IdBanco = dataFromTheRow.IdBanco;
@@ -57,7 +67,6 @@
         datos.CaracteresBeneficiario = dataFromTheRow.CaracteresBeneficiario;
         datos.DiseñoCheque = dataFromTheRow.DiseñoCheque;
 
-        err = ""
         if (datos.Detalle == "" || datos.Detalle == undefined) err = err + "Falta definir el detalle.\n"
         if (datos.Cuenta == "" || datos.Cuenta == undefined) err = err + "Falta definir la cuenta.\n"
 
@@ -73,7 +82,7 @@
                 data: JSON.stringify(datos),
                 success: function (result) {
                     if (result) {
-                        $grid.jqGrid('setRowData', gridId, { act: "" });
+                        $('#Lista').jqGrid('setRowData', gridId, { act: "" });
                         var rowid = $('#Lista').getGridParam('selrow');
                         var valor = result.IdCuentaBancaria;
                         if (valor == "") { valor = "0"; }
@@ -104,10 +113,10 @@
     };
 
     function EliminarFila(gridId) {
-        var dataFromTheRow = $grid.jqGrid('getRowData', gridId);
+        var dataFromTheRow = $('#Lista').jqGrid('getRowData', gridId);
         var idprincipal = dataFromTheRow['IdCuentaBancaria'];
         if (idprincipal <= 0) {
-            $grid.jqGrid('delRowData', gridId);
+            $('#Lista').jqGrid('delRowData', gridId);
         } else {
             $.ajax({
                 type: 'POST',
@@ -117,7 +126,7 @@
                 data: JSON.stringify({ id: idprincipal }),
                 success: function (result) {
                     if (result) {
-                        $grid.jqGrid('delRowData', gridId);
+                        $('#Lista').jqGrid('delRowData', gridId);
                     } else {
                         alert('No se pudo eliminar el registro.');
                     }
@@ -133,35 +142,6 @@
         $.extend($.jgrid.inlineEdit, {
             keys: true
         });
-
-        window.parent.document.body.onclick = saveEditedCell; // attach to parent window if any
-        document.body.onclick = saveEditedCell; // attach to current document.
-
-        function saveEditedCell(evt) {
-            var target = $(evt.target);
-
-            if ($grid) {
-                var isCellClicked = $grid.find(target).length; // check if click is inside jqgrid
-                if (gridCellWasClicked && !isCellClicked) // check if a valid click
-                {
-                    gridCellWasClicked = false;
-                    $grid.jqGrid("saveCell", lastSelectediRow2, lastSelectediCol2);
-                }
-            }
-
-            //$grid = "";
-            gridCellWasClicked = false;
-
-            if (jQuery("#Lista").find(target).length) {
-                $grid = $('#Lista');
-                grillaenfoco = true;
-            }
-            if (grillaenfoco) {
-                gridCellWasClicked = true;
-                lastSelectediRow2 = lastSelectediRow;
-                lastSelectediCol2 = lastSelectediCol;
-            }
-        };
 
         function MarcarSeleccionadosParaEliminar(grid) {
             var selectedIds = grid.jqGrid('getGridParam', 'selarrrow');
@@ -205,15 +185,15 @@
             colNames: ['Acciones', 'IdCuentaBancaria', 'IdBanco', 'IdMoneda', 'IdProvincia', 'Detalle', 'Cuenta', 'Banco', 'Moneda', 'Provincia', 'CBU', 'Informacion auxiliar',
                        'Activa', 'Plantilla chequera', 'Cheques por plancha', 'Cant. caracteres para beneficiario (0 = sin limite)', 'Diseño del cheque'],
             colModel: [
-                        { name: 'act', index: 'act', align: 'center', width: 80, sortable: false, editable: false, search: false },
-                        { name: 'IdCuentaBancaria', index: 'IdCuentaBancaria', align: 'left', width: 100, editable: false, hidden: true },
-                        { name: 'IdBanco', index: 'IdBanco', align: 'left', width: 100, editable: false, hidden: true },
-                        { name: 'IdMoneda', index: 'IdMoneda', align: 'left', width: 100, editable: false, hidden: true },
-                        { name: 'IdProvincia', index: 'IdProvincia', align: 'left', width: 100, editable: false, hidden: true },
-                        { name: 'Detalle', index: 'Detalle', align: 'left', width: 200, editable: true, edittype: 'text', search: true, searchoptions: { clearSearch: true, searchOperators: true, sopt: ['eq', 'cn'] } },
-                        { name: 'Cuenta', index: 'Cuenta', align: 'left', width: 200, editable: true, edittype: 'text', search: true, searchoptions: { clearSearch: true, searchOperators: true, sopt: ['eq', 'cn'] } },
+                        { name: 'act', index: 'act', align: 'center', width: 80, search: false, sortable: false, editable: false },
+                        { name: 'IdCuentaBancaria', index: 'IdCuentaBancaria', align: 'left', width: 100, search: false, editable: false, hidden: true },
+                        { name: 'IdBanco', index: 'IdBanco', align: 'left', width: 100, search: false, editable: false, hidden: true },
+                        { name: 'IdMoneda', index: 'IdMoneda', align: 'left', width: 100, search: false, editable: false, hidden: true },
+                        { name: 'IdProvincia', index: 'IdProvincia', align: 'left', width: 100, search: false, editable: false, hidden: true },
+                        { name: 'Detalle', index: 'Detalle', align: 'left', width: 200, search: true, editable: true, editrules: { required: false }, edittype: 'text', label: 'TB' },
+                        { name: 'Cuenta', index: 'Cuenta', align: 'left', width: 200, search: true, editable: true, editrules: { required: false }, edittype: 'text', label: 'TB' },
                         {
-                            name: 'Banco', index: 'Banco', align: 'left', width: 300, editable: true, hidden: false, edittype: 'select', editrules: { required: false },
+                            name: 'Banco', index: 'Banco', align: 'left', width: 300, search: true, editable: true, hidden: false, edittype: 'select', editrules: { required: false },
                             editoptions: {
                                 dataUrl: ROOT + 'Banco/GetBancosPropios?TipoEntidad=10',
                                 dataInit: function (elem) {
@@ -242,7 +222,7 @@
                             },
                         },
                         {
-                            name: 'Moneda', index: 'Moneda', align: 'left', width: 100, editable: true, hidden: false, edittype: 'select', editrules: { required: false },
+                            name: 'Moneda', index: 'Moneda', align: 'left', width: 100, search: true, editable: true, hidden: false, edittype: 'select', editrules: { required: false },
                             editoptions: {
                                 dataUrl: ROOT + 'Moneda/GetMonedas',
                                 dataInit: function (elem) {
@@ -271,7 +251,7 @@
                             },
                         },
                         {
-                            name: 'Provincia', index: 'Provincia', align: 'left', width: 200, editable: true, hidden: false, edittype: 'select', editrules: { required: false },
+                            name: 'Provincia', index: 'Provincia', align: 'left', width: 200, search: true, editable: true, hidden: false, edittype: 'select', editrules: { required: false },
                             editoptions: {
                                 dataUrl: ROOT + 'Provincia/GetProvincias',
                                 dataInit: function (elem) {
@@ -301,10 +281,10 @@
                         },
                         { name: 'CBU', index: 'CBU', align: 'center', width: 200, editable: true, edittype: 'text', search: true, searchoptions: { clearSearch: true, searchOperators: true, sopt: ['eq', 'cn'] } },
                         { name: 'InformacionAuxiliar', index: 'InformacionAuxiliar', align: 'left', width: 120, editable: true, edittype: 'text', search: true, searchoptions: { clearSearch: true, searchOperators: true, sopt: ['eq', 'cn'] } },
-                        { name: 'Activa', index: 'Activa', width: 50, align: 'left', editable: true, editrules: { required: false }, editoptions: { value: "SI:NO" }, edittype: 'checkbox' },
-                        { name: 'PlantillaChequera', index: 'PlantillaChequera', align: 'left', width: 300, editable: true, edittype: 'text', search: true, searchoptions: { clearSearch: true, searchOperators: true, sopt: ['eq', 'cn'] } },
+                        { name: 'Activa', index: 'Activa', width: 50, align: 'left', search: true, editable: true, editrules: { required: false }, editoptions: { value: "SI:NO" }, edittype: 'checkbox' },
+                        { name: 'PlantillaChequera', index: 'PlantillaChequera', align: 'left', width: 300, search: true, editable: true, editrules: { required: false }, edittype: 'text', label: 'TB' },
                         {
-                            name: 'ChequesPorPlancha', index: 'ChequesPorPlancha', width: 200, align: 'center', editable: true, editrules: { required: false, number: true }, edittype: 'text', label: 'TB',
+                            name: 'ChequesPorPlancha', index: 'ChequesPorPlancha', width: 200, align: 'center', search: false, editable: true, editrules: { required: false, number: true }, edittype: 'text', label: 'TB',
                             editoptions: {
                                 maxlength: 20, defaultValue: '0',
                                 dataEvents: [
@@ -319,7 +299,7 @@
                             }
                         },
                         {
-                            name: 'CaracteresBeneficiario', index: 'CaracteresBeneficiario', width: 120, align: 'center', editable: true, editrules: { required: false, number: true }, edittype: 'text', label: 'TB',
+                            name: 'CaracteresBeneficiario', index: 'CaracteresBeneficiario', width: 120, align: 'center', search: false, editable: true, editrules: { required: false, number: true }, edittype: 'text', label: 'TB',
                             editoptions: {
                                 maxlength: 20, defaultValue: '0',
                                 dataEvents: [
@@ -333,7 +313,7 @@
                                 }]
                             }
                         },
-                        { name: 'DiseñoCheque', index: 'DiseñoCheque', width: 800, align: 'left', editable: true, editrules: { required: false }, edittype: 'textarea', label: 'TB' }
+                        { name: 'DiseñoCheque', index: 'DiseñoCheque', width: 800, align: 'left', search: true, editable: true, editrules: { required: false }, edittype: 'textarea', label: 'TB' }
             ],
             onSelectRow: function (id) {
                 if (id && id !== lastSelectedId) {
@@ -384,8 +364,6 @@
             cellsubmit: 'clientArray',
             editurl: ROOT + 'Empleado/EditGridData/'
         });
-
-
         //  //jQuery("#Lista").jqGrid('navGrid', '#ListaPager', { refresh: true, add: false, edit: false, del: false }, {}, {}, {}, { sopt: ["cn"], width: 700, closeOnEscape: true, closeAfterSearch: true });
         //  jQuery("#Lista").jqGrid('gridResize', { minWidth: 350, maxWidth: 1500, minHeight: 80, maxHeight: 500 });
         //  jQuery("#Lista").jqGrid('navGrid', '#ListaPager',
