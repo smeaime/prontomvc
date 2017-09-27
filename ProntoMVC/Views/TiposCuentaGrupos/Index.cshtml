@@ -7,7 +7,7 @@
 <br />
 
 <div class="row-fluid">
-    <div class="span4 lightblue">
+    <div class="span6 lightblue">
         <table id="Lista" class="scroll" cellpadding="0" cellspacing="0"></table>
         <div id="ListaPager" class="scroll" style="text-align: center; height: 30px"></div>
     </div>
@@ -22,7 +22,6 @@
 
 <script type="text/javascript">
 
-    var $grid = "";
     var lastSelectedId;
     var lastSelectediCol;
     var lastSelectediRow;
@@ -51,9 +50,25 @@
     });
 
     function GrabarFila(gridId) {
-        var dataFromTheRow = $grid.jqGrid('getRowData', gridId);
+        var i, a, err = "";
+
+        $('#Lista').jqGrid('setSelection', gridId);
+        var iRow = $('#' + $.jgrid.jqID(gridId))[0].rowIndex;
+        var dataFromTheRow = $('#Lista').jqGrid('getRowData', gridId)
+        var colModel = $('#Lista').jqGrid('getGridParam', 'colModel');
+
+        for (i = 0; i < colModel.length; i++) {
+            if (colModel[i].editable) {
+                a = dataFromTheRow[colModel[i].name];
+                if (typeof a != "undefined") {
+                    if (a.substring(0, 1) == "<") {
+                        err = err + "Hay campos en modo edicion, confirmelos con enter antes de grabar.\n"
+                    }
+                }
+            }
+        }
+
         var datos = $("#formid").serializeObject();
-        var err;
 
         datos.IdTipoCuentaGrupo = gridId;
         datos.Descripcion = dataFromTheRow.Descripcion;
@@ -64,7 +79,6 @@
         if (dataFromTheRow.IdTipoGrupo == 3) { datos.EsCajaBanco = "TC"; }
         if (dataFromTheRow.IdTipoGrupo == 4) { datos.EsCajaBanco = ""; }
 
-        err = ""
         if (datos.Descripcion == "" || datos.Descripcion == undefined) err = err + "Falta definir la descripcion.\n"
 
         if (err != "") {
@@ -79,7 +93,7 @@
                 data: JSON.stringify(datos),
                 success: function (result) {
                     if (result) {
-                        $grid.jqGrid('setRowData', gridId, { act: "" });
+                        $('#Lista').jqGrid('setRowData', gridId, { act: "" });
                         var rowid = $('#Lista').getGridParam('selrow');
                         var valor = result.IdTipoCuentaGrupo;
                         if (valor == "") { valor = "0"; }
@@ -110,10 +124,10 @@
     };
 
     function EliminarFila(gridId) {
-        var dataFromTheRow = $grid.jqGrid('getRowData', gridId);
+        var dataFromTheRow = $('#Lista').jqGrid('getRowData', gridId);
         var idprincipal = dataFromTheRow['IdTipoCuentaGrupo'];
         if (idprincipal <= 0) {
-            $grid.jqGrid('delRowData', gridId);
+            $('#Lista').jqGrid('delRowData', gridId);
         } else {
             $.ajax({
                 type: 'POST',
@@ -123,42 +137,13 @@
                 data: JSON.stringify({ id: idprincipal }),
                 success: function (result) {
                     if (result) {
-                        $grid.jqGrid('delRowData', gridId);
+                        $('#Lista').jqGrid('delRowData', gridId);
                     } else {
                         alert('No se pudo eliminar el registro.');
                     }
                 },
             });
         };
-    };
-
-    window.parent.document.body.onclick = saveEditedCell; // attach to parent window if any
-    document.body.onclick = saveEditedCell; // attach to current document.
-
-    function saveEditedCell(evt) {
-        var target = $(evt.target);
-
-        if ($grid) {
-            var isCellClicked = $grid.find(target).length; // check if click is inside jqgrid
-            if (gridCellWasClicked && !isCellClicked) // check if a valid click
-            {
-                gridCellWasClicked = false;
-                $grid.jqGrid("saveCell", lastSelectediRow2, lastSelectediCol2);
-            }
-        }
-
-        //$grid = "";
-        gridCellWasClicked = false;
-
-        if (jQuery("#Lista").find(target).length) {
-            $grid = $('#Lista');
-            grillaenfoco = true;
-        }
-        if (grillaenfoco) {
-            gridCellWasClicked = true;
-            lastSelectediRow2 = lastSelectediRow;
-            lastSelectediCol2 = lastSelectediCol;
-        }
     };
 
     function MarcarSeleccionadosParaEliminar(grid) {
@@ -194,19 +179,19 @@
         'use strict';
 
         $('#Lista').jqGrid({
-            url: ROOT + 'TiposCuentaGrupos/TT/',
+            url: ROOT + 'TiposCuentaGrupos/TiposCuentaGrupos_DynamicGridData/',
             postData: {},
             datatype: 'json',
             mtype: 'POST',
             colNames: ['Acciones', 'IdTipoCuentaGrupo', 'EsCajaBanco', 'IdTipoGrupo', 'Descripcion', 'Tipo de grupo'],
             colModel: [
-                        { name: 'act', index: 'act', align: 'center', width: 30, editable: false, hidden: false },
-                        { name: 'IdTipoCuentaGrupo', index: 'IdTipoCuentaGrupo', align: 'left', width: 100, editable: false, hidden: true },
-                        { name: 'EsCajaBanco', index: 'EsCajaBanco', align: 'left', width: 100, editable: false, hidden: true },
-                        { name: 'IdTipoGrupo', index: 'IdTipoGrupo', align: 'left', width: 100, editable: false, hidden: true },
-                        { name: 'Descripcion', index: 'Descripcion', width: 200, align: 'left', editable: true, editrules: { required: false }, edittype: 'text', label: 'TB' },
+                        { name: 'act', index: 'act', align: 'center', width: 100, search: false, editable: false, hidden: false },
+                        { name: 'IdTipoCuentaGrupo', index: 'IdTipoCuentaGrupo', align: 'left', width: 100, search: false, editable: false, hidden: true },
+                        { name: 'EsCajaBanco', index: 'EsCajaBanco', align: 'left', width: 100, search: false, editable: false, hidden: true },
+                        { name: 'IdTipoGrupo', index: 'IdTipoGrupo', align: 'left', width: 100, search: false, editable: false, hidden: true },
+                        { name: 'Descripcion', index: 'Descripcion', width: 300, align: 'left', search: true, editable: true, editrules: { required: false }, edittype: 'text', label: 'TB' },
                         {
-                            name: 'TipoGrupo', index: 'TipoGrupo', align: 'left', width: 150, editable: true, hidden: false, edittype: 'select', editrules: { required: false },
+                            name: 'TipoGrupo', index: 'TipoGrupo', align: 'left', width: 200, search: true, editable: true, hidden: false, edittype: 'select', editrules: { required: false },
                             editoptions: {
                                 dataUrl: ROOT + 'TiposCuentaGrupos/GetTiposGrupos',
                                 dataEvents: [{
@@ -292,6 +277,11 @@
                                                 MarcarSeleccionadosParaEliminar(jQuery("#Lista"));
                                             },
                                         });
+        jQuery("#Lista").filterToolbar({
+            stringResult: true, searchOnEnter: true,
+            defaultSearch: 'cn',
+            enableClear: false
+        });
     });
 
 </script>

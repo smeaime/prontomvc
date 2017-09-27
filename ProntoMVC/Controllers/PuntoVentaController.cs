@@ -191,62 +191,10 @@ namespace ProntoMVC.Controllers
             int totalRecords = Req1.Count();
             int totalPages = (int)Math.Ceiling((float)totalRecords / (float)pageSize);
 
-            //switch (sidx.ToLower())
-            //{
-            //    case "numeroCliente":
-            //        if (sord.Equals("desc"))
-            //            Fac = Fac.OrderByDescending(a => a.NumeroCliente);
-            //        else
-            //            Fac = Fac.OrderBy(a => a.NumeroCliente);
-            //        break;
-            //    case "fechaCliente":
-            //        if (sord.Equals("desc"))
-            //            Fac = Fac.OrderByDescending(a => a.FechaCliente);
-            //        else
-            //            Fac = Fac.OrderBy(a => a.FechaCliente);
-            //        break;
-            //    case "numeroobra":
-            //        if (sord.Equals("desc"))
-            //            Fac = Fac.OrderByDescending(a => a.Obra.NumeroObra);
-            //        else
-            //            Fac = Fac.OrderBy(a => a.Obra.NumeroObra);
-            //        break;
-            //    case "libero":
-            //        if (sord.Equals("desc"))
-            //            Fac = Fac.OrderByDescending(a => a.Empleados.Nombre);
-            //        else
-            //            Fac = Fac.OrderBy(a => a.Empleados.Nombre);
-            //        break;
-            //    case "aprobo":
-            //        if (sord.Equals("desc"))
-            //            Fac = Fac.OrderByDescending(a => a.Empleados1.Nombre);
-            //        else
-            //            Fac = Fac.OrderBy(a => a.Empleados1.Nombre);
-            //        break;
-            //    case "sector":
-            //        if (sord.Equals("desc"))
-            //            Fac = Fac.OrderByDescending(a => a.Sectores.Descripcion);
-            //        else
-            //            Fac = Fac.OrderBy(a => a.Sectores.Descripcion);
-            //        break;
-            //    case "detalle":
-            //        if (sord.Equals("desc"))
-            //            Fac = Fac.OrderByDescending(a => a.Detalle);
-            //        else
-            //            Fac = Fac.OrderBy(a => a.Detalle);
-            //        break;
-            //    default:
-            //        if (sord.Equals("desc"))
-            //            Fac = Fac.OrderByDescending(a => a.NumeroCliente);
-            //        else
-            //            Fac = Fac.OrderBy(a => a.NumeroCliente);
-            //        break;
-            //}
-
             var data = (from a in Fac
                         select a).Where(campo).OrderBy(sidx + " " + sord)
-//.Skip((currentPage - 1) * pageSize).Take(pageSize)
-.ToList();
+                        //.Skip((currentPage - 1) * pageSize).Take(pageSize)
+                        .ToList();
 
             var jsonData = new jqGridJson()
             {
@@ -270,6 +218,66 @@ namespace ProntoMVC.Controllers
                                 (a.WebServiceModoTest ?? string.Empty).ToString(),
                                 (a.CAEManual ?? string.Empty).ToString(),
                                 (a.Activo ?? string.Empty).ToString()
+                            }
+                        }).ToArray()
+            };
+
+            return Json(jsonData, JsonRequestBehavior.AllowGet);
+        }
+
+        public virtual JsonResult PuntosVenta_DynamicGridData(string sidx, string sord, int page, int rows, bool _search, string filters)
+        {
+            int totalRecords = 0;
+            int pageSize = rows;
+
+            var pagedQuery = Filters.FiltroGenerico<Data.Models.PuntosVenta>
+                                ("", sidx, sord, page, rows, _search, filters, db, ref totalRecords);
+
+            // esto filtro se debería aplicar antes que el filtrogenerico (queda mal paginado si no)
+            var Entidad = pagedQuery.AsQueryable();
+
+            var Entidad1 = (from a in Entidad
+                            select new { IdPuntoVenta = a.IdPuntoVenta }).ToList();
+
+            int totalPages = (int)Math.Ceiling((float)totalRecords / (float)pageSize);
+
+            var data = (from a in Entidad
+                        select new
+                        {
+                            a.IdPuntoVenta,
+                            a.Letra,
+                            a.PuntoVenta,
+                            TipoComprobante = a.TiposComprobante.Descripcion,
+                            a.ProximoNumero,
+                            a.Descripcion,
+                            a.WebService,
+                            a.WebServiceModoTest,
+                            a.CAEManual,
+                            a.Activo
+                        }).OrderBy(sidx + " " + sord).ToList();
+
+            var jsonData = new jqGridJson()
+            {
+                total = totalPages,
+                page = page,
+                records = totalRecords,
+                rows = (from a in data
+                        select new jqGridRowJson
+                        {
+                            id = a.IdPuntoVenta.ToString(),
+                            cell = new string[] { 
+                                "<a href="+ Url.Action("Edit",new {id = a.IdPuntoVenta})+">Editar</>",
+                                "<a href="+ Url.Action("Imprimir",new {id = a.IdPuntoVenta} )  +">Imprimir</>",
+                                a.IdPuntoVenta.ToString(),
+                                a.Letra.NullSafeToString(),
+                                a.PuntoVenta.ToString(),
+                                a.TipoComprobante.NullSafeToString(),
+                                a.ProximoNumero.NullSafeToString(),
+                                a.Descripcion.NullSafeToString(),
+                                a.WebService.NullSafeToString(),
+                                a.WebServiceModoTest.NullSafeToString(),
+                                a.CAEManual.NullSafeToString(),
+                                a.Activo.NullSafeToString()
                             }
                         }).ToArray()
             };

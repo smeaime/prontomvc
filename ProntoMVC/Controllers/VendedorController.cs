@@ -191,22 +191,6 @@ namespace ProntoMVC.Controllers
             int currentPage = page ?? 1;
 
             var Entidad = db.Vendedores.AsQueryable();
-            //if (_search)
-            //{
-            //    switch (searchField.ToLower())
-            //    {
-            //        case "a":
-            //            campo = String.Format("{0} = {1}", searchField, searchString);
-            //            break;
-            //        default:
-            //            campo = String.Format("{0}.Contains(\"{1}\")", searchField, searchString);
-            //            break;
-            //    }
-            //}
-            //else
-            //{
-            //    campo = "true";
-            //}
 
             var Entidad1 = (from a in Entidad
                             select new { IdVendedor = a.IdVendedor }).Where(campo).ToList();
@@ -240,8 +224,8 @@ namespace ProntoMVC.Controllers
                             a.TodasLasZonas,
                             a.EmiteComision
                         }).Where(campo).OrderBy(sidx + " " + sord)
-//.Skip((currentPage - 1) * pageSize).Take(pageSize)
-.ToList();
+                        //.Skip((currentPage - 1) * pageSize).Take(pageSize)
+                        .ToList();
 
             var jsonData = new jqGridJson()
             {
@@ -249,6 +233,103 @@ namespace ProntoMVC.Controllers
                 page = currentPage,
                 records = totalRecords,
                 rows = (from a in data
+                        select new jqGridRowJson
+                        {
+                            id = a.IdVendedor.ToString(),
+                            cell = new string[] { 
+                                "<a href="+ Url.Action("Edit",new {id = a.IdVendedor} ) + ">Editar</>",
+                                //"<a href="+ Url.Action("Imprimir",new {id = a.IdGanancia} )  +">Imprimir</>",
+                                a.IdVendedor.ToString(),
+                                a.IdLocalidad.ToString(),
+                                a.IdProvincia.ToString(),
+                                a.IdEmpleado.ToString(),
+                                a.IdsVendedoresAsignados.NullSafeToString(),
+                                a.Nombre.NullSafeToString(),
+                                a.CodigoVendedor.ToString(),
+                                a.Direccion.NullSafeToString(),
+                                a.Localidad.NullSafeToString(),
+                                a.Provincia.NullSafeToString(),
+                                a.CodigoPostal.NullSafeToString(),
+                                a.Empleado.NullSafeToString(),
+                                a.Telefono.NullSafeToString(),
+                                a.Fax.NullSafeToString(),
+                                a.Email.NullSafeToString(),
+                                a.Cuit.NullSafeToString(),
+                                a.Comision.ToString(),
+                                a.TodasLasZonas.NullSafeToString(),
+                                a.EmiteComision.NullSafeToString()
+                            }
+                        }).ToArray()
+            };
+            return Json(jsonData, JsonRequestBehavior.AllowGet);
+        }
+
+        public class Vendedores2
+        {
+            public int IdVendedor { get; set; }
+            public int? IdLocalidad { get; set; }
+            public int? IdProvincia { get; set; }
+            public int? IdEmpleado { get; set; }
+            public string IdsVendedoresAsignados { get; set; }
+            public string Nombre { get; set; }
+            public int? CodigoVendedor { get; set; }
+            public string Direccion { get; set; }
+            public string Localidad { get; set; }
+            public string Provincia { get; set; }
+            public int? CodigoPostal { get; set; }
+            public string Empleado { get; set; }
+            public string Telefono { get; set; }
+            public string Fax { get; set; }
+            public string Email { get; set; }
+            public string Cuit { get; set; }
+            public decimal? Comision { get; set; }
+            public string TodasLasZonas { get; set; }
+            public string EmiteComision { get; set; }
+        }
+
+        public virtual JsonResult Vendedores_DynamicGridData(string sidx, string sord, int page, int rows, bool _search, string filters)
+        {
+            int totalRecords = 0;
+            int pageSize = rows;
+
+            var data = (from a in db.Vendedores
+                        from b in db.Localidades.Where(o => o.IdLocalidad == a.IdLocalidad).DefaultIfEmpty()
+                        from c in db.Provincias.Where(o => o.IdProvincia == a.IdProvincia).DefaultIfEmpty()
+                        from d in db.Empleados.Where(o => o.IdEmpleado == a.IdEmpleado).DefaultIfEmpty()
+                        select new Vendedores2
+                        {
+                            IdVendedor = a.IdVendedor,
+                            IdLocalidad = a.IdLocalidad,
+                            IdProvincia = a.IdProvincia,
+                            IdEmpleado = a.IdEmpleado,
+                            IdsVendedoresAsignados = a.IdsVendedoresAsignados,
+                            Nombre = a.Nombre,
+                            CodigoVendedor = a.CodigoVendedor,
+                            Direccion = a.Direccion,
+                            Localidad = b != null ? b.Nombre : "",
+                            Provincia = c != null ? c.Nombre : "",
+                            CodigoPostal = a.CodigoPostal,
+                            Empleado = d != null ? d.Nombre : "",
+                            Telefono = a.Telefono,
+                            Fax = a.Fax,
+                            Email = a.Email,
+                            Cuit = a.Cuit,
+                            Comision = a.Comision,
+                            TodasLasZonas = a.TodasLasZonas,
+                            EmiteComision = a.EmiteComision
+                        }).OrderBy(sidx + " " + sord).AsQueryable();
+
+            var pagedQuery = Filters.FiltroGenerico_UsandoIQueryable<Vendedores2>
+                                     (sidx, sord, page, rows, _search, filters, db, ref totalRecords, data);
+
+            int totalPages = (int)Math.Ceiling((float)totalRecords / (float)pageSize);
+
+            var jsonData = new jqGridJson()
+            {
+                total = totalPages,
+                page = page,
+                records = totalRecords,
+                rows = (from a in pagedQuery
                         select new jqGridRowJson
                         {
                             id = a.IdVendedor.ToString(),

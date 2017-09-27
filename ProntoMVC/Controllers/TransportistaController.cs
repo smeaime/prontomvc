@@ -151,6 +151,20 @@ namespace ProntoMVC.Controllers
             return RedirectToAction("Index");
         }
 
+        public class Transportistas2
+        {
+            public int IdTransportista { get; set; }
+            public string RazonSocial { get; set; }
+            public int? Codigo { get; set; }
+            public string Direccion { get; set; }
+            public string Localidad { get; set; }
+            public string CodigoPostal { get; set; }
+            public string Telefono { get; set; }
+            public string Email { get; set; }
+            public string Cuit { get; set; }
+            public string Provincia { get; set; }
+        }
+
         public virtual ActionResult Listado_jqGrid(string sidx, string sord, int? page, int? rows, bool _search, string searchField, string searchOper, string searchString)
         {
             string campo = String.Empty;
@@ -199,8 +213,8 @@ namespace ProntoMVC.Controllers
                                     provincia = b != null ? b.Nombre : null 
                         }
                         ).Where(campo).OrderBy(sidx + " " + sord)
-//.Skip((currentPage - 1) * pageSize).Take(pageSize)
-.ToList();
+                        //.Skip((currentPage - 1) * pageSize).Take(pageSize)
+                        .ToList();
 
             var jsonData = new jqGridJson()
             {
@@ -220,6 +234,59 @@ namespace ProntoMVC.Controllers
                                 a.Localidad,
                                 a.CodigoPostal,
                                 a.provincia,
+                                a.Telefono,
+                                a.Email,
+                                a.Cuit
+                            }
+                        }).ToArray()
+            };
+            return Json(jsonData, JsonRequestBehavior.AllowGet);
+        }
+
+        public virtual JsonResult Transportistas_DynamicGridData(string sidx, string sord, int page, int rows, bool _search, string filters)
+        {
+            int totalRecords = 0;
+            int pageSize = rows;
+
+            var data = (from a in db.Transportistas
+                        join b in db.Provincias on a.IdProvincia equals b.IdProvincia into ab from b in ab.DefaultIfEmpty()
+                        select new Transportistas2
+                        {
+                            IdTransportista = a.IdTransportista, 
+                            RazonSocial = a.RazonSocial, 
+                            Codigo = a.Codigo, 
+                            Direccion = a.Direccion, 
+                            Localidad = a.Localidade.Nombre, 
+                            CodigoPostal = a.CodigoPostal, 
+                            Telefono = a.Telefono, 
+                            Email = a.Email, 
+                            Cuit = a.Cuit, 
+                            Provincia = b != null ? b.Nombre : null 
+                        }).OrderBy(sidx + " " + sord).AsQueryable();
+
+            var pagedQuery = Filters.FiltroGenerico_UsandoIQueryable<Transportistas2>
+                                     (sidx, sord, page, rows, _search, filters, db, ref totalRecords, data);
+
+            int totalPages = (int)Math.Ceiling((float)totalRecords / (float)pageSize);
+
+            var jsonData = new jqGridJson()
+            {
+                total = totalPages,
+                page = page,
+                records = totalRecords,
+                rows = (from a in pagedQuery
+                        select new jqGridRowJson
+                        {
+                            id = a.IdTransportista.ToString(),
+                            cell = new string[] { 
+                                "<a href="+ Url.Action("Edit",new {id = a.IdTransportista}) +">Editar</>  -  <a href="+ Url.Action("Delete",new {id = a.IdTransportista}) +">Eliminar</>",
+                                a.IdTransportista.ToString(),
+                                a.RazonSocial,
+                                a.Codigo.ToString(),
+                                a.Direccion,
+                                a.Localidad,
+                                a.CodigoPostal,
+                                a.Provincia,
                                 a.Telefono,
                                 a.Email,
                                 a.Cuit

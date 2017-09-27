@@ -282,8 +282,8 @@ namespace ProntoMVC.Controllers
                             CuentaAdicionalCompras9 = n != null ? n.Codigo + " " + n.Descripcion : "",
                             CuentaAdicionalCompras10 = o != null ? o.Codigo + " " + o.Descripcion : ""
                         }).Where(campo).OrderBy(sidx + " " + sord)
-//.Skip((currentPage - 1) * pageSize).Take(pageSize)
-.ToList();
+                        //.Skip((currentPage - 1) * pageSize).Take(pageSize)
+                        .ToList();
 
             var jsonData = new jqGridJson()
             {
@@ -393,12 +393,13 @@ namespace ProntoMVC.Controllers
 
             //IQueryable<Rubros2> data2 = data.AsQueryable();
             //List<Rubros2> data3 = data2.ToList();
-            
-            var pagedQuery = Filters.FiltroGenerico_UsandoStoreOLista<Rubros2>
-                                (sidx, sord, page, rows, _search, filters, db, ref totalRecords, data.ToList());
-            
+
             //var pagedQuery = Filters.FiltroGenerico<Data.Models.Rubro>
             //                    ("", sidx, sord, page, rows, _search, filters, db, ref totalRecords);
+            //var pagedQuery = Filters.FiltroGenerico_UsandoStoreOLista<Rubros2>
+            //                    (sidx, sord, page, rows, _search, filters, db, ref totalRecords, data.ToList());
+            var pagedQuery = Filters.FiltroGenerico_UsandoIQueryable<Rubros2>
+                                     (sidx, sord, page, rows, _search, filters, db, ref totalRecords, data);
 
             int totalPages = (int)Math.Ceiling((float)totalRecords / (float)pageSize);
 

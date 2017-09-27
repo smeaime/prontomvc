@@ -7866,6 +7866,18 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.VistaCartasPorteMovimientos' no t
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_DetalleFacturasOrdenesCompra_DetalleOrdenesCompra">
+          <End Role="DetalleOrdenesCompra" Type="Self.DetalleOrdenesCompra" Multiplicity="0..1" />
+          <End Role="DetalleFacturasOrdenesCompra" Type="Self.DetalleFacturasOrdenesCompra" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DetalleOrdenesCompra">
+              <PropertyRef Name="IdDetalleOrdenCompra" />
+            </Principal>
+            <Dependent Role="DetalleFacturasOrdenesCompra">
+              <PropertyRef Name="IdDetalleOrdenCompra" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_DetalleFacturasOrdenesCompra_Facturas">
           <End Role="Facturas" Type="Self.Facturas" Multiplicity="0..1" />
           <End Role="DetalleFacturasOrdenesCompra" Type="Self.DetalleFacturasOrdenesCompra" Multiplicity="*" />
@@ -11075,6 +11087,10 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.VistaCartasPorteMovimientos' no t
             <End Role="DetalleFacturas" EntitySet="DetalleFacturas" />
             <End Role="DetalleFacturasOrdenesCompra" EntitySet="DetalleFacturasOrdenesCompra" />
           </AssociationSet>
+          <AssociationSet Name="FK_DetalleFacturasOrdenesCompra_DetalleOrdenesCompra" Association="Self.FK_DetalleFacturasOrdenesCompra_DetalleOrdenesCompra">
+            <End Role="DetalleOrdenesCompra" EntitySet="DetalleOrdenesCompra" />
+            <End Role="DetalleFacturasOrdenesCompra" EntitySet="DetalleFacturasOrdenesCompra" />
+          </AssociationSet>
           <AssociationSet Name="FK_DetalleFacturasOrdenesCompra_Facturas" Association="Self.FK_DetalleFacturasOrdenesCompra_Facturas">
             <End Role="Facturas" EntitySet="Facturas" />
             <End Role="DetalleFacturasOrdenesCompra" EntitySet="DetalleFacturasOrdenesCompra" />
@@ -13460,6 +13476,10 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.VistaCartasPorteMovimientos' no t
           <AssociationSet Name="FK_Rubros_Cuentas_IdCuentaCompras" Association="DemoProntoModel.FK_Rubros_Cuentas_IdCuentaCompras">
             <End Role="Cuenta" EntitySet="Cuentas" />
             <End Role="Rubro" EntitySet="Rubros" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DetalleFacturasOrdenesCompra_DetalleOrdenesCompra" Association="DemoProntoModel.FK_DetalleFacturasOrdenesCompra_DetalleOrdenesCompra">
+            <End Role="DetalleOrdenesCompra" EntitySet="DetalleOrdenesCompras" />
+            <End Role="DetalleFacturasOrdenesCompra" EntitySet="DetalleFacturasOrdenesCompras" />
           </AssociationSet>
           </EntityContainer>
         <EntityType Name="Articulo">
@@ -16942,6 +16962,7 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.VistaCartasPorteMovimientos' no t
           <Property Type="Int32" Name="IdUsuarioCambioEstado" />
           <Property Type="DateTime" Name="FechaCambioEstado" Precision="3" />
           <NavigationProperty Name="DetalleRemitos" Relationship="DemoProntoModel.FK_DetalleRemitos_DetalleOrdenesCompra" FromRole="DetalleOrdenesCompra" ToRole="DetalleRemito" />
+          <NavigationProperty Name="DetalleFacturasOrdenesCompras" Relationship="DemoProntoModel.FK_DetalleFacturasOrdenesCompra_DetalleOrdenesCompra" FromRole="DetalleOrdenesCompra" ToRole="DetalleFacturasOrdenesCompra" />
         </EntityType>
         <EntityType Name="DetalleRemito">
           <Key>
@@ -17511,6 +17532,7 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.VistaCartasPorteMovimientos' no t
           <Property Type="Byte" Name="EnviarEmail" />
           <NavigationProperty Name="Factura" Relationship="DemoProntoModel.FK_DetalleFacturasOrdenesCompra_Facturas" FromRole="DetalleFacturasOrdenesCompra" ToRole="Factura" />
           <NavigationProperty Name="DetalleFactura" Relationship="DemoProntoModel.FK_DetalleFacturasOrdenesCompra_DetalleFacturas" FromRole="DetalleFacturasOrdenesCompra" ToRole="DetalleFactura" />
+          <NavigationProperty Name="DetalleOrdenesCompra" Relationship="DemoProntoModel.FK_DetalleFacturasOrdenesCompra_DetalleOrdenesCompra" FromRole="DetalleFacturasOrdenesCompra" ToRole="DetalleOrdenesCompra" />
         </EntityType>
         <EntityType Name="DetalleFacturasProvincia">
           <Key>
@@ -26230,6 +26252,18 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.VistaCartasPorteMovimientos' no t
             </Principal>
             <Dependent Role="Rubro">
               <PropertyRef Name="IdCuentaCompras" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DetalleFacturasOrdenesCompra_DetalleOrdenesCompra">
+          <End Type="DemoProntoModel.DetalleOrdenesCompra" Role="DetalleOrdenesCompra" Multiplicity="0..1" />
+          <End Type="DemoProntoModel.DetalleFacturasOrdenesCompra" Role="DetalleFacturasOrdenesCompra" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DetalleOrdenesCompra">
+              <PropertyRef Name="IdDetalleOrdenCompra" />
+            </Principal>
+            <Dependent Role="DetalleFacturasOrdenesCompra">
+              <PropertyRef Name="IdDetalleOrdenCompra" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
