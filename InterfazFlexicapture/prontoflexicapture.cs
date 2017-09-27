@@ -4658,8 +4658,8 @@ Formato localidad-provincia	destination	x
 
 
             //var usuario = Membership.GetUser();
-            System.Data.DataTable dt = EntidadManager.ExecDinamico(SC, "Empleados_TX_UsuarioNT '" + nombreusuario + "'");
-            int idUsuario = Convert.ToInt32(dt.Rows[0][0]);
+            //System.Data.DataTable dt = EntidadManager.ExecDinamico(SC, "Empleados_TX_UsuarioNT '" + nombreusuario + "'");
+            //int idUsuario = Convert.ToInt32(dt.Rows[0][0]);
             // int puntovent = EmpleadoManager.GetItem(SC, idUsuario).PuntoVentaAsociado;
 
 
@@ -4901,8 +4901,8 @@ Formato localidad-provincia	destination	x
 
 
             //var usuario = Membership.GetUser();
-            System.Data.DataTable dt = EntidadManager.ExecDinamico(SC, "Empleados_TX_UsuarioNT '" + nombreusuario + "'");
-            int idUsuario = Convert.ToInt32(dt.Rows[0][0]);
+            //System.Data.DataTable dt = EntidadManager.ExecDinamico(SC, "Empleados_TX_UsuarioNT '" + nombreusuario + "'");
+            //int idUsuario = Convert.ToInt32(dt.Rows[0][0]);
             // int puntovent = EmpleadoManager.GetItem(SC, idUsuario).PuntoVentaAsociado;
 
 

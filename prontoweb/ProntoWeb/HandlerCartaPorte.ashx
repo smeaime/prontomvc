@@ -121,19 +121,19 @@ public class JQGridHandler : IHttpHandler
         var data = new[] { "11", "22", "33", "44" };
 
         var jsonData = new jqGridJson()
-                {
-                    total = 1,
-                    page = 1,
-                    records = 100,
-                    rows = (from a in data
-                            select new jqGridRowJson
-                            {
-                                id = a.ToString(),
-                                cell = new string[] { 
+        {
+            total = 1,
+            page = 1,
+            records = 100,
+            rows = (from a in data
+                    select new jqGridRowJson
+                    {
+                        id = a.ToString(),
+                        cell = new string[] {
                                         "sadfasf"
                                     }
-                            }).ToArray()
-                };
+                    }).ToArray()
+        };
 
 
 
@@ -183,8 +183,8 @@ public class JQGridHandler : IHttpHandler
         if (System.Diagnostics.Debugger.IsAttached)
             SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(ConfigurationManager.AppSettings["scLocal"]);
         else
-            SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(ConfigurationManager.AppSettings["scWilliamsRelease"]);  
-            //SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(ConfigurationManager.AppSettings["scWilliamsRelease"]);
+            SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(ConfigurationManager.AppSettings["scWilliamsRelease"]);
+        //SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(ConfigurationManager.AppSettings["scWilliamsRelease"]);
 
         HttpRequest request = context.Request;
         HttpResponse response = context.Response;
@@ -204,15 +204,19 @@ public class JQGridHandler : IHttpHandler
 
         string puntovent = request["puntovent"];
         string destino = request["destino"];
-
+        string usuario = Membership.GetUser().UserName;
 
         if (sortColumnName == null) return;
 
         //string output = ControlesDiarios_DynamicGridData(sortColumnName, sortOrderBy, Convert.ToInt32(pageIndex), Convert.ToInt32(numberOfRows), isSearch == "true", filters, FechaInicial, FechaFinal, Convert.ToInt32(puntovent), SQLdinamico.BuscaIdWilliamsDestinoPreciso(destino, SC));
 
-        
+
         var a = new ServicioCartaPorte.servi();
-        string output = a.CartasPorte_DynamicGridData(sortColumnName, sortOrderBy, Convert.ToInt32(pageIndex), Convert.ToInt32(numberOfRows), isSearch == "true", filters, FechaInicial, FechaFinal, Convert.ToInt32(puntovent), SQLdinamico.BuscaIdWilliamsDestinoPreciso(destino, SC),SC,Membership.GetUser().UserName);
+        string output = a.CartasPorte_DynamicGridData(
+                                    sortColumnName, sortOrderBy, Convert.ToInt32(pageIndex),
+                                    Convert.ToInt32(numberOfRows), isSearch == "true", filters, FechaInicial, FechaFinal, Convert.ToInt32(puntovent),
+                                    SQLdinamico.BuscaIdWilliamsDestinoPreciso(destino, SC),
+                                    SC, usuario);
 
 
         response.ContentType = "application/json";
@@ -321,8 +325,8 @@ public class JQGridHandler : IHttpHandler
                         (sidx, sord, page, rows, _search, filters, db, ref totalRecords,
                                 db.CartasDePorteControlDescargas
                                         .Where(x =>
-                                            //(x.IdPuntoVenta == puntovent || puntovent == 0)
-                                            //&&
+                                                //(x.IdPuntoVenta == puntovent || puntovent == 0)
+                                                //&&
                                                 (x.Fecha >= FechaDesde && x.Fecha <= FechaHasta)
                                                  &&
                                                 (x.WilliamsDestino.PuntoVenta == puntovent || puntovent <= 0)
@@ -356,14 +360,14 @@ public class JQGridHandler : IHttpHandler
         //if (searchField == "Numero") searchField = "NumeroPedido"; 
 
         var Entidad = pagedQuery
-            //.Include(x => x.Moneda)
-            //.Include(x => x.Proveedor)
-            //.Include(x => x.DetallePedidos
-            //            .Select(y => y.DetalleRequerimiento
-            //                )
-            //        )
-            //.Include("DetallePedidos.DetalleRequerimiento.Requerimientos.Obra") // funciona tambien
-            //.Include(x => x.Comprador)
+                      //.Include(x => x.Moneda)
+                      //.Include(x => x.Proveedor)
+                      //.Include(x => x.DetallePedidos
+                      //            .Select(y => y.DetalleRequerimiento
+                      //                )
+                      //        )
+                      //.Include("DetallePedidos.DetalleRequerimiento.Requerimientos.Obra") // funciona tambien
+                      //.Include(x => x.Comprador)
                       .AsQueryable();
 
 
@@ -385,17 +389,17 @@ public class JQGridHandler : IHttpHandler
                     select new jqGridRowJson
                     {
                         id = a.IdCartasDePorteControlDescarga.ToString(),
-                        cell = new string[] { 
+                        cell = new string[] {
                                 "", //"<a href="+ Url.Action("Edit",new {id = a.IdPedido} ) + "  >Editar</>" ,
                                 
-                                a.IdCartasDePorteControlDescarga.ToString(), 
-                                
+                                a.IdCartasDePorteControlDescarga.ToString(),
+
                                  a.Fecha.ToShortDateString(),
-                                 
+
                                 a.WilliamsDestino==null ? "" : a.WilliamsDestino.Descripcion,
-     
+
                                  a.IdDestino.ToString(),
-                                 
+
                                  a.TotalDescargaDia.ToString(),
 
                                  a.IdPuntoVenta.ToString()
