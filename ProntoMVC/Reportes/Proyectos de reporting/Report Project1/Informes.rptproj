@@ -259,10 +259,6 @@
       <FullPath>Liquidación de Subcontratistas 2.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
-      <Name>Liquidación de Subcontratistas 3.rdl</Name>
-      <FullPath>Liquidación de Subcontratistas 3.rdl</FullPath>
-    </ProjectItem>
-    <ProjectItem>
       <Name>Listado de comprobantes de venta ingresados.rdl</Name>
       <FullPath>Listado de comprobantes de venta ingresados.rdl</FullPath>
     </ProjectItem>
@@ -293,6 +289,10 @@
     <ProjectItem>
       <Name>Listado general de Cartas de Porte (simulando original) con foto  - Cresud backup.rdl</Name>
       <FullPath>Listado general de Cartas de Porte (simulando original) con foto  - Cresud backup.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Listado general de Cartas de Porte (simulando original) con foto  - Cresud.rdl</Name>
+      <FullPath>Listado general de Cartas de Porte (simulando original) con foto  - Cresud.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
       <Name>Listado general de Cartas de Porte (simulando original) con foto  - Dow.rdl</Name>
@@ -519,10 +519,6 @@
       <FullPath>Williams - Nidera con Webservice sin parametros.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
-      <Name>Williams - Nidera con Webservice.rdl</Name>
-      <FullPath>Williams - Nidera con Webservice.rdl</FullPath>
-    </ProjectItem>
-    <ProjectItem>
       <Name>Williams - Resumen de Totales Generales (Facturacion).rdl</Name>
       <FullPath>Williams - Resumen de Totales Generales (Facturacion).rdl</FullPath>
     </ProjectItem>
@@ -543,8 +539,8 @@
       <FullPath>Williams - Sincro LaBiznaga2.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
-      <Name>Listado general de Cartas de Porte (simulando original) con foto  - Cresud.rdl</Name>
-      <FullPath>Listado general de Cartas de Porte (simulando original) con foto  - Cresud.rdl</FullPath>
+      <Name>Liquidación de Subcontratistas 3.rdl</Name>
+      <FullPath>Liquidación de Subcontratistas 3.rdl</FullPath>
     </ProjectItem>
   </Reports>
   <Configurations>

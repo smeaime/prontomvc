@@ -868,6 +868,11 @@ namespace ProntoMVC.Tests
         public void _42871()
         {
 
+            // como ver la masterpage en la vista para celulares?
+            // el envio de mails (+ push de chrome)
+            // la grilla de situacion de calidad
+            // marcar la situacion de varias cartas
+            // como filtrar la grilla de situacion segun el usuario?
         }
 
 

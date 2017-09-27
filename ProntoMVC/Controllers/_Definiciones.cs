@@ -568,11 +568,18 @@ namespace ProntoMVC.Controllers
                     // Tengo que obtener de qué tipo es esa variable
 
                     PropertyInfo padrepropertyInfo = null;
-                    padrepropertyInfo = typeof(T).GetProperty(rule.field.Split('.')[0]);
+                    string coleccion = rule.field.Split('.')[0];
+                    padrepropertyInfo = typeof(T).GetProperty(coleccion);
 
                     //propertyInfo = Type.GetType("ProntoMVC.Data.Models." + rule.field.Split('.')[0] + ", ProntoMVC.Data").GetProperty(rule.field.Split('.')[1]); ; 
+<<<<<<< HEAD
 
                     propertyInfo = padrepropertyInfo.PropertyType.GetProperty(rule.field.Split('.')[1]); ; //target type
+=======
+                    string propiedad = rule.field.Split('.')[1];
+                    propertyInfo = padrepropertyInfo.PropertyType.GetProperty(propiedad); ; //target type
+
+>>>>>>> 2331503abdb28585a00e99e323988f09820ff492
                 }
                 else if (rule.field.Split('.').Length == 1)
                 {
@@ -629,10 +636,30 @@ namespace ProntoMVC.Controllers
                                 String.Compare(rule.data, "true", StringComparison.OrdinalIgnoreCase) == 0 ?
                                 true :
                                 false);
+<<<<<<< HEAD
                         }
                         else if (propname.Contains("System.DateTime")) { param = new ObjectParameter("p" + iParam, DateTime.Parse(rule.data)); }
                         else
                         {
+=======
+                            break;
+
+                        case "System.Nullable`1[[System.DateTime, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]":
+                        case "System.DateTime": // Edm.Single, in SQL: float
+                            param = new ObjectParameter("p" + iParam, DateTime.ParseExact(rule.data, "dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture));
+                            break;
+
+                        default:
+                            // el default es string
+
+                            // TODO: Extend to other data types
+                            // binary, date, datetimeoffset,
+                            // decimal, numeric,
+                            // money, smallmoney
+                            // and so on
+
+
+>>>>>>> 2331503abdb28585a00e99e323988f09820ff492
                             if (propertyInfo.PropertyType.FullName.Contains("Nullable"))
                             {
                                 //// si es nullable, no uses string!!!
