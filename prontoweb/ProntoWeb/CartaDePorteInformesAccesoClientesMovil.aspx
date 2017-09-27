@@ -82,7 +82,14 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
             <a href="SituacionCalidadMovil.aspx"> situacion</a>
 
         modo escritorio
-        llamar a williams
+        
+        <a href="tel:5278-8800">oficina bsas 5278-8800 </a>
+ <%--       OFICINAS: Buenos Aires Moreno 584 P. 12 Of A / (011) 5278-8800 - 4322-4805 / buenosaires@williamsentregas.com.ar 
+     // San Lorenzo (Sta. Fe) - Sgo. del Estero 1177 / (03476) 430-234 - 426-855 / sanlorenzo@williamsentregas.com.ar
+Arroyo Seco (Sta. Fe) - René Favaloro 726 / (03402) 421-426 - 429-676 / arroyoseco@williamsentregas.com.ar 
+     // Bahía Blanca Ruta 252 km 0.5 - Playa el Triangulo / (0291) 400-7928 - 481-6778 / bahiablanca@williamsentregas.com.ar--%>
+
+
         <asp:UpdatePanel ID="UpdatePanelResumen" runat="server">
             <ContentTemplate>
                 <table width="">
