@@ -11,11 +11,6 @@
 const bCARGAR_MENU = true;
 const bCARGAR_ARBOL = true;
 
-const bPersisteEstadoDelNodo = false;  //ojo, esto es la persistencia del estado abierto/cerrado de los nodos! NO es lo del contenido!
-const bCargaParcialDeNodos = true;
-// http: //stackoverflow.com/questions/9192276/send-expanded-treegrid-nodes-in-cookie/9202378#9202378
-// usando localstorage para guardar el arbol entero de un saque (no deberia hacer las llamadas parciales a Treegrid, porque me duplica los nodos)
-// -no me anda... pinta que Oleg en su persistencia, ya tiene todos los nodos cargados, o sea que no vuelve a llamar al servidor cuando se aprieta un nodo
 
 
 
@@ -32,7 +27,9 @@ $(function () {
 })
 
 
-
+// http: //stackoverflow.com/questions/9192276/send-expanded-treegrid-nodes-in-cookie/9202378#9202378
+var bPersisteArbol = true; // no me anda... pinta que Oleg en su persistencia, ya tiene todos los nodos cargados, o sea 
+//  que no vuelve a llamar al servidor cuando se aprieta un nodo
 
 var eslaprimeravez = true;
 
@@ -45,7 +42,7 @@ var $grid = $('#addtree')
 
 var idsOfExpandedRows = []
 
-if (bPersisteEstadoDelNodo) {
+if (bPersisteArbol) {
 
     var
         saveObjectInLocalStorage = function (storageItemName, object) {
@@ -97,7 +94,7 @@ if (bPersisteEstadoDelNodo) {
 if (bCARGAR_ARBOL) // no cargar ningun arbol. -si, porque lo que pone lento todo es la carga de la jqgrid con semejante localstorage
 {
 
-    if (bCargaParcialDeNodos) {
+    if (true) {
 
         // arbol normal, q carga los nodos a medida q se los usa
 
@@ -238,11 +235,8 @@ if (bCARGAR_ARBOL) // no cargar ningun arbol. -si, porque lo que pone lento todo
 
     }
 
-
-
     else {
-
-        // pruebas para árbol usando cookie [este fue el segundo metodo: el primero fue el de llamadas parciales, el segundo el de cookies, el tercero el de localstorage]
+        // pruebas para árbol usando cookie
         // con cookies no va. probar usando localstorage http://www.w3schools.com/html/html5_webstorage.asp
 
         //if ($.cookie("arbol") == null) {
@@ -391,7 +385,7 @@ gview.children("div.ui-jqgrid-hdiv").hide();
 ////////////////
 
 
-if (bPersisteEstadoDelNodo) {
+if (bPersisteArbol) {
 
 
 

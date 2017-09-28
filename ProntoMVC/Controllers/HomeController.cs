@@ -547,8 +547,8 @@ namespace ProntoMVC.Controllers
                 // q = TablaTree("01").Where(x => x.ParentId == "01").ToList(); ; // podrias devolver un queryable
                 //q = q.Where(x => x.ParentId == "01").ToList();
 
-                //q = TablaTree("01").Where(x => x.ParentId =="01").ToList();
-                q = TablaTree("01").ToList();
+                q = TablaTree("01").Where(x => x.ParentId =="01").ToList(); // lo estoy filtrando de nuevo porque el TablaTree con el parametro no me lo esta devolviendo filtrado
+                //q = TablaTree("01").ToList();
 
                 //como hacer si es esxterno, o si tiene permisos a todos los nodos raiz?
             }
