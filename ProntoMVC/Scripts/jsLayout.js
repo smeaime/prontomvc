@@ -11,8 +11,11 @@
 const bCARGAR_MENU = true;
 const bCARGAR_ARBOL = true;
 
-
-
+const bEstadoNodos = true; // esto es el carga del estado abierto/cerrado de cada nodo (no su contenido)
+const bCargaParcial = true;  // esto es la carga (parcial/total) del CONTENIDO del arbolito  -parece que la carga TOTAL tarda por el render de una grilla grande, NO porque tarde en traer los datos.
+// http: //stackoverflow.com/questions/9192276/send-expanded-treegrid-nodes-in-cookie/9202378#9202378
+ // no me anda... pinta que Oleg en su persistencia, ya tiene todos los nodos cargados, o sea 
+//  que no vuelve a llamar al servidor cuando se aprieta un nodo
 
 
 function RefrescarArbol() {
@@ -27,9 +30,6 @@ $(function () {
 })
 
 
-// http: //stackoverflow.com/questions/9192276/send-expanded-treegrid-nodes-in-cookie/9202378#9202378
-var bPersisteArbol = true; // no me anda... pinta que Oleg en su persistencia, ya tiene todos los nodos cargados, o sea 
-//  que no vuelve a llamar al servidor cuando se aprieta un nodo
 
 var eslaprimeravez = true;
 
@@ -42,7 +42,7 @@ var $grid = $('#addtree')
 
 var idsOfExpandedRows = []
 
-if (bPersisteArbol) {
+if (bEstadoNodos) {
 
     var
         saveObjectInLocalStorage = function (storageItemName, object) {
@@ -94,7 +94,7 @@ if (bPersisteArbol) {
 if (bCARGAR_ARBOL) // no cargar ningun arbol. -si, porque lo que pone lento todo es la carga de la jqgrid con semejante localstorage
 {
 
-    if (true) {
+    if (bCargaParcial) {
 
         // arbol normal, q carga los nodos a medida q se los usa
 
@@ -147,7 +147,7 @@ if (bCARGAR_ARBOL) // no cargar ningun arbol. -si, porque lo que pone lento todo
 
             beforeProcessing: function (data) {
                 //guardarTopPositionDelArbol();
-                if (bPersisteArbol) {
+                if (bEstadoNodos) {
                     var rows = data.rows, i, l = rows.length, row, index;
                     for (i = 0; i < l; i++) {
                         row = rows[i].cell;
@@ -385,7 +385,7 @@ gview.children("div.ui-jqgrid-hdiv").hide();
 ////////////////
 
 
-if (bPersisteArbol) {
+if (bEstadoNodos) {
 
 
 
