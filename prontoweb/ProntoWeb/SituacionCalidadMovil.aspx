@@ -41,7 +41,6 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
         Situación de CPs
     </div>--%>
 
-    <br />
 
     <style>
         /* Start by setting display:none to make this hidden.
@@ -92,10 +91,10 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
                 <table style="color: black;">
                     <tr>
-                        <td class="EncabezadoCell" style="width: 160px; height: 18px;">Estado</td>
-                        <td class="" style="width: 400px; height: 18px;">
+                        <td class="" style="width: ; height: 18px;"></td>
+                        <td class="" style="width: ; height: 18px;">
                             <asp:DropDownList ID="cmbEstado" runat="server" Style="text-align: right; margin-left: 0px;"
-                                CssClass="CssCombo" ToolTip="Estado de la carta de porte" Font-Size="Small" Height="22px" Width="350px" Enabled="false">
+                                CssClass="CssCombo" ToolTip="Estado de la carta de porte" Font-Size="Small" Height="22px" Width="" Enabled="false">
                                 <%--dejo el combito deshablitado porque las funciones no tienen todavia el parametro de "estado", estan harcodeadas en "11" --%>
 
                                 <asp:ListItem Text="DESCARGAS de hoy + POSICIONES filtradas" Value="DescargasDeHoyMasTodasLasPosicionesEnRangoFecha"
@@ -114,8 +113,8 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                         </td>
                         </tr>
                     <tr>
-                        <td class="EncabezadoCell" style="width: 160px; height: 18px;">Período descarga</td>
-                        <td class="EncabezadoCell" style="width: 400px; height: 18px;">
+                        <td class="" style="width: ; height: 18px;"></td>
+                        <td class="" style="width: ; height: 18px;">
                             <asp:DropDownList ID="cmbPeriodo" runat="server" AutoPostBack="true" Height="22px" Style="color: black;"
                                 Visible="true">
                                 <asp:ListItem Text="Hoy" Selected="True" />
@@ -158,18 +157,18 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
                     </tr>
                     <tr>
-                        <td class="EncabezadoCell" style="width: 160px; height: 18px;">Punto venta
+                        <td class="" style="width: ; height: 18px;">
                         </td>
-                        <td class="EncabezadoCell">
+                        <td class="">
                             <asp:DropDownList ID="cmbPuntoVenta" runat="server" CssClass="CssTextBox" Width="128px" Style="color: black;" />
                         </td>
 
                     </tr>
 
                     <tr>
-                        <td class="EncabezadoCell" style="width: 100px; height: 18px;">Destino
+                        <td class="" style="width: ; height: 18px;">
                         </td>
-                        <td class="EncabezadoCell" style="width: 250px; height: 18px;">
+                        <td class="" style="width: ; height: 18px;">
                             <asp:TextBox ID="txtDestino" runat="server" Text='<%# Bind("DestinoDesc") %>' AutoPostBack="false" Style="color: black;"
                                 autocomplete="off" CssClass="CssTextBox" Width="200px"></asp:TextBox>
                             <cc1:AutoCompleteExtender CompletionInterval="100" ID="AutoCompleteExtender26" runat="server"
@@ -193,7 +192,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
         <input type="button" id="btnExportarGrillaAjax2" value="Excel" class="btn btn-primary" />
 
-        <input type="button" id="btnExportarGrillaAjax" value="Excel BLD demorados" class="btn btn-primary" />
+        <input type="button" id="btnExportarGrillaAjax" value="BLD demor" class="btn btn-primary" />
 
 
         <input type="button" id="btnPanelInformeAjax" value="Resumen" class="btn btn-primary" />
@@ -202,7 +201,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
 
 
-        <input type="button" id="btnLog" value="Log" class="btn btn-primary" />
+        <%--<input type="button" id="btnLog" value="Log" class="btn btn-primary" />--%>
         <input type="button" id="btnMostrarMenu" value="->" class="btn btn-primary" />
 
         <br />
@@ -280,6 +279,8 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
         $(function () {
             //$('#MenuPrincipal').fadeOut(); 
+
+    $('#MasterPrimerRenglon').hide();
             $('#MenuPrincipal').hide();
 
             $("#searchmodfbox_Lista").parent().css('z-index', 50);
