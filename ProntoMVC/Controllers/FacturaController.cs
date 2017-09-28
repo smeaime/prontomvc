@@ -36,24 +36,6 @@ namespace ProntoMVC.Controllers
 {
 
 
-    public static class ModelDefinedFunctions
-    {
-        [System.Data.Metadata.Edm.EdmFunction("TestDBModel.Store", "SampleFunction")]
-        public static int SampleFunction(int param)
-        {
-            System.Data.Objects.DataClasses.
-            throw new NotSupportedException("Direct calls are not supported.");
-        }
-
-        [System.Data.Entity.Core.Metadata.Edm.EdmFunction()]
-        public static int SampleFunction(int param)
-        {
-            System.Data.Objects.DataClasses.
-            throw new NotSupportedException("Direct calls are not supported.");
-        }
-    }
-
-
 
     public partial class FacturaController : ProntoBaseController
     {
