@@ -125,7 +125,7 @@ Namespace Pronto.ERP.Bll
 
             empresa = BDLMasterEmpresasManager.EmpresaPropietariaDeLaBase(conexion)
 
-            If empresa = "Williams" Then
+            If empresa = "Williams" Or True Then
                 Return "SiteMapWilliams"
             ElseIf empresa = "Esuco" Then
                 Return "SiteMapEsuco"
@@ -138,7 +138,7 @@ Namespace Pronto.ERP.Bll
             Dim Empresa As String = EmpresaDefaultDel_webconfig()
 
 
-            If Empresa = "Williams" Then
+            If Empresa = "Williams" Or True Then
                 Return "~/Imagenes/williams.gif"
             ElseIf Empresa = "Esuco" Then
                 Return "~/Imagenes/esuco.gif"
@@ -198,8 +198,11 @@ Namespace Pronto.ERP.Bll
             'habrá sido que tenían las sesiones abiertas? -y qué con eso?
             'PORQUE PUSO CONTINUAR EN EL SELECCIONAREMPRESA SIN HABER ELEGIDO EN EL LISTBOX Y LO DEJÓ PASAR!!!!!
 
+            Return "~/Imagenes/williams.gif"
+
 
             Dim logo = ParametroManager.TraerValorParametro2(Usuario.StringConnection, ParametroManager.eParam2.LogoArchivo)
+
             If logo <> "" Then
                 Return "~/Imagenes/" & logo
             ElseIf empresa = "Williams" Then
