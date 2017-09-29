@@ -13,9 +13,6 @@ namespace ProntoMVC.Data.Models
     // para hacer override del constructor del dbcontext y poder pasarle una conexion dinamica
     // lo hago en un archivo aparte para que no se pise al autogenerar
 
-
-
-
     public partial class DemoProntoEntities : DbContext
     {
         public DemoProntoEntities(string connectionString)
@@ -47,8 +44,6 @@ namespace ProntoMVC.Data.Models
     {
         public static string FormatearConexParaEntityFramework(string s)
         {
-
-
             var parser = new System.Data.SqlClient.SqlConnectionStringBuilder(s);
             string servidorSQL = parser.DataSource; // "MARIANO-PC\\SQLEXPRESS";
             string basePronto = parser.InitialCatalog;  // "Autotrol";
@@ -68,11 +63,8 @@ namespace ProntoMVC.Data.Models
             return SC;
         }
 
-
-
         public static string FormatearConexParaEntityFrameworkBDLMASTER_2(string s)
         {
-
             var parser = new System.Data.SqlClient.SqlConnectionStringBuilder(s);
             string servidorSQL = parser.DataSource; // "MARIANO-PC\\SQLEXPRESS";
             string basePronto = parser.InitialCatalog;  // "Autotrol";
@@ -92,12 +84,24 @@ namespace ProntoMVC.Data.Models
             return SC;
         }
 
-
     }
-
 }
 
 
+public static class ModelDefinedFunctions
+{
+    [System.Data.Entity.Core.Objects.DataClasses.EdmFunction("DemoProntoModel.Store", "Facturas_OrdenesCompra")]
+    public static string FacturasOrdenesCompra(int IdFactura)
+    {
+        throw new NotSupportedException("Direct calls are not supported.");
+    }
+
+    [System.Data.Entity.Core.Objects.DataClasses.EdmFunction("DemoProntoModel.Store", "Facturas_Remitos")]
+    public static string FacturasRemitos(int IdFactura)
+    {
+        throw new NotSupportedException("Direct calls are not supported.");
+    }
+}
 
 
 namespace ProntoMVC.Data.Models.Mantenimiento
@@ -113,5 +117,3 @@ namespace ProntoMVC.Data.Models.Mantenimiento
 
 
 }
-
-

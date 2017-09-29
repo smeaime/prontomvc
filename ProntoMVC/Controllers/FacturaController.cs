@@ -1000,25 +1000,6 @@ namespace ProntoMVC.Controllers
 
         public virtual FileResult TT_DynamicGridData_ExcelExportacion(string sidx, string sord, int page, int rows, bool _search, string filters, string FechaInicial, string FechaFinal)
         {
-            //asdad
-
-            // la idea seria llamar a la funcion filtrador pero sin paginar, o diciendolo de
-            // otro modo, pasandole como maxrows un numero grandisimo
-            // http://stackoverflow.com/questions/8227898/export-jqgrid-filtered-data-as-excel-or-csv
-            // I would recommend you to implement export of data on the server and just post the current searching filter to the back-end. Full information about the searching parameter defines postData parameter of jqGrid. Another boolean parameter of jqGrid search define whether the searching filter should be applied of not. You should better ignore _search property of postData parameter and use search parameter of jqGrid.
-
-            // http://stackoverflow.com/questions/9339792/jqgrid-ef-mvc-how-to-export-in-excel-which-method-you-suggest?noredirect=1&lq=1
-
-            //string sidx = "NumeroPedido";
-            //string sord = "desc";
-            //int page = 1;
-            //rows = 99999999;
-            //bool _search = false;
-            //string filters = "";
-            //DemoProntoEntities db = new DemoProntoEntities(sc);
-            //llamo directo a FiltroGenerico o a Pedidos_DynamicGridData??? -y, filtroGenerico no va a incluir las columnas recalculadas!!!!
-            // Cuanto tarda ExportToExcelEntityCollection en crear el excel de un FiltroGenerico de toda la tabla de Pedidos?
-
             IQueryable<Data.Models.Factura> q = (from a in db.Facturas select a).AsQueryable();
 
             //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1114,15 +1095,6 @@ namespace ProntoMVC.Controllers
         }
 
 
-        public static class ModelDefinedFunctions
-        {
-            [System.Data.Entity.Core.Objects.DataClasses.EdmFunction("DemoProntoModel.Store", "Facturas_OrdenesCompra")]
-            public static string SampleFunction(int IdFactura)
-            {
-                throw new NotSupportedException("Direct calls are not supported.");
-            }
-        }
-
         public virtual JsonResult Facturas_DynamicGridData(string sidx, string sord, int page, int rows, bool _search, string filters, string FechaInicial, string FechaFinal)
         {
             DateTime FechaDesde, FechaHasta;
@@ -1149,14 +1121,6 @@ namespace ProntoMVC.Controllers
             int totalRecords = 0;
             int pageSize = rows;
 
-            //LinqToSQL_ProntoDataContext l2sqlPronto = new LinqToSQL_ProntoDataContext(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SCsql()));
-            //var qq = (from rm in l2sqlPronto.Requerimientos
-            //          select l2sqlPronto.Requerimientos_Pedidos(rm.IdRequerimiento)
-            //          ).Take(100).ToList();
-
-            
-            
-            
             var data = (from a in db.Facturas
                         //from b in db.Depositos.Where(o => o.IdDeposito == a.IdDeposito).DefaultIfEmpty()
                         select new Facturas2
@@ -1176,13 +1140,8 @@ namespace ProntoMVC.Controllers
                             CondicionVenta = a.Condiciones_Compra != null ? a.Condiciones_Compra.Descripcion : "",
                             FechaVencimiento = a.FechaVencimiento,
                             ListaDePrecio = a.ListasPrecio != null ? "Lista " + a.ListasPrecio.NumeroLista.ToString() + " " + a.ListasPrecio.Descripcion : "",
-
-                            //OCompras = (a.DetalleFacturasOrdenesCompras.Select(x => new {NumeroOC = x.DetalleOrdenesCompra.OrdenesCompra.NumeroOrdenCompra.NullSafeToString()}))
-                            //            .Select(e => e.NumeroOC.ToString()).Aggregate((c, n) => $"{c},{n}")
-                            //OCompras = a.DetalleFacturasOrdenesCompras.Aggregate("", (tot, nxt) => tot + "," +nxt.IdDetalleFactura.ToString()),
-                            OCompras = ModelDefinedFunctions.SampleFunction(a.IdFactura).ToString(),
-
-                            Remitos = "",
+                            OCompras = ModelDefinedFunctions.FacturasOrdenesCompra(a.IdFactura).ToString(),
+                            Remitos = ModelDefinedFunctions.FacturasRemitos(a.IdFactura).ToString(),
                             TotalGravado = (a.ImporteTotal ?? 0) - (a.ImporteIva1 ?? 0) - (a.AjusteIva ?? 0) - (a.PercepcionIVA ?? 0) - (a.RetencionIBrutos1 ?? 0) - (a.RetencionIBrutos2 ?? 0) - (a.RetencionIBrutos3 ?? 0) - (a.OtrasPercepciones1 ?? 0) - (a.OtrasPercepciones2 ?? 0) - (a.OtrasPercepciones3 ?? 0) + (a.ImporteBonificacion ?? 0),
                             ImporteBonificacion = a.ImporteBonificacion,
                             ImporteIva1 = a.ImporteIva1,
@@ -1242,25 +1201,7 @@ namespace ProntoMVC.Controllers
                                 a.FechaVencimiento == null ? "" : a.FechaVencimiento.GetValueOrDefault().ToString("dd/MM/yyyy"),
                                 a.ListaDePrecio.NullSafeToString(),
                                 a.OCompras.NullSafeToString(),
-                                //string.Join(",",  a.DetalleFacturasOrdenesCompras
-                                //    .SelectMany(x =>
-                                //        (x.DetalleOrdenesCompra == null) ?
-                                //        null :
-                                //        x.DetalleOrdenesCompra.OrdenesCompra.NumeroOrdenCompra.NullSafeToString()
-                                //    ).Distinct()
-                                //),
                                 a.Remitos.NullSafeToString(),
-                                //string.Join(",", a.DetalleRequerimientos
-                                //    .SelectMany(x =>
-                                //        (x.DetallePresupuestos == null) ?
-                                //        null :
-                                //        x.DetallePresupuestos.Select(y =>
-                                //                    (y.Presupuesto == null) ?
-                                //                    null :
-                                //                    y.Presupuesto.Numero.NullSafeToString()
-                                //            )
-                                //    ).Distinct()
-                                //),
                                 a.TotalGravado.NullSafeToString(),
                                 a.ImporteBonificacion.NullSafeToString(),
                                 a.ImporteIva1.NullSafeToString(),
