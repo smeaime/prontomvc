@@ -539,14 +539,18 @@ namespace ProntoMVC.Controllers
             //    // so we are at root level.
             if (collection["idsOfExpandedRows"].NullSafeToString() == "" && collection["nodeid"].NullSafeToString() == "")
             {
-                // q = TablaTree("01").Where(x => x.ParentId == "01").ToList(); ; // podrias devolver un queryable
-                //q = q.Where(x => x.ParentId == "01").ToList();
-                q = TablaTree("01").ToList();
-                //como hacer si es esxterno, o si tiene permisos a todos los nodos raiz?
 
                 //no hay cacheados nodos expandidos ni el nodo apretado. Debe ser la primera pantalla de la sesión. entonces, debo 
                 // mostrar todos los nodos raíces de los que tenga permiso...
+                // -ok, pero solo los raices...
 
+                // q = TablaTree("01").Where(x => x.ParentId == "01").ToList(); ; // podrias devolver un queryable
+                //q = q.Where(x => x.ParentId == "01").ToList();
+
+                q = TablaTree("01").Where(x => x.ParentId =="01").ToList(); // lo estoy filtrando de nuevo porque el TablaTree con el parametro no me lo esta devolviendo filtrado
+                //q = TablaTree("01").ToList();
+
+                //como hacer si es esxterno, o si tiene permisos a todos los nodos raiz?
             }
             else if (collection.AllKeys.Contains("idsOfExpandedRows"))
             {

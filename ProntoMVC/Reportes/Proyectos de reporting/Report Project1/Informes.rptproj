@@ -259,6 +259,10 @@
       <FullPath>Liquidación de Subcontratistas 2.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
+      <Name>Liquidación de Subcontratistas 3.rdl</Name>
+      <FullPath>Liquidación de Subcontratistas 3.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
       <Name>Listado de comprobantes de venta ingresados.rdl</Name>
       <FullPath>Listado de comprobantes de venta ingresados.rdl</FullPath>
     </ProjectItem>
@@ -538,10 +542,6 @@
       <Name>Williams - Sincro LaBiznaga2.rdl</Name>
       <FullPath>Williams - Sincro LaBiznaga2.rdl</FullPath>
     </ProjectItem>
-    <ProjectItem>
-      <Name>Liquidación de Subcontratistas 3.rdl</Name>
-      <FullPath>Liquidación de Subcontratistas 3.rdl</FullPath>
-    </ProjectItem>
   </Reports>
   <Configurations>
     <Configuration>
@@ -565,9 +565,12 @@
       <Options>
         <OutputPath>bin\DebugLocal</OutputPath>
         <TargetServerVersion>SSRS2008R2</TargetServerVersion>
-        <TargetFolder>Report Project1</TargetFolder>
+        <TargetServerURL>http://desktop-clvul7u/ReportServer</TargetServerURL>
+        <TargetFolder>Pronto informes</TargetFolder>
         <TargetDataSourceFolder>Data Sources</TargetDataSourceFolder>
+        <OverwriteDataSources>true</OverwriteDataSources>
         <TargetDatasetFolder>Datasets</TargetDatasetFolder>
+        <OverwriteDatasets>true</OverwriteDatasets>
         <TargetReportPartFolder>Report Parts</TargetReportPartFolder>
       </Options>
     </Configuration>

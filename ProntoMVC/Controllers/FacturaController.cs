@@ -30,10 +30,18 @@ using mercadopago;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
+using System.Data.Entity.Core.Metadata.Edm;
+
 namespace ProntoMVC.Controllers
 {
+
+
+
     public partial class FacturaController : ProntoBaseController
     {
+
+      
+
         public virtual ViewResult Index()
         {
             if (!PuedeLeer(enumNodos.Facturas)) throw new Exception("No tenés permisos");
@@ -2302,5 +2310,7 @@ namespace ProntoMVC.Controllers
             // https://github.com/mercadopago/sdk-dotnet
         }
     }
+
+
 
 }

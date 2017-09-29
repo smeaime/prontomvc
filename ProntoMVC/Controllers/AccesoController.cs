@@ -79,7 +79,7 @@ namespace ProntoMVC.Controllers
                 Articulos = Articulos.OrderBy(a => a.IdEmpleadoAcceso);
             }
 
-
+            
 
 
             var data = Articulos
