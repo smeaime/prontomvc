@@ -4280,7 +4280,7 @@ Public Module ProntoFuncionesUIWeb
 
 
 
-    Function asdfsdg() As String
+    Function RefrescaSession(ByVal Server As System.Web.HttpServerUtility) As String
 
         '//////////////////////////////////////////////////////////////////
         'Quilombos con la session
@@ -4315,7 +4315,15 @@ Public Module ProntoFuncionesUIWeb
 
 
         Try
-            usuario.StringConnection = Encriptar(BDLMasterEmpresasManager.GetConnectionStringEmpresa(usuario.UserId, usuario.IdEmpresa, sConex, "XXXXXX"))
+            Dim s = Encriptar(BDLMasterEmpresasManager.GetConnectionStringEmpresa(usuario.UserId, usuario.IdEmpresa, sConex, "XXXXXX"))
+            If s = "" Then
+                'en la bdlMaster no hay conexion para este usuario+empresa
+                '-pero el usuario ya está logueado... a donde lo redirigimos?
+
+                Server.Transfer("~/SeleccionarEmpresa.aspx")
+
+            End If
+            usuario.StringConnection = s
 
         Catch ex As Exception
 
@@ -4358,7 +4366,7 @@ Public Module ProntoFuncionesUIWeb
 
 
 
-                    Return asdfsdg()
+                    Return RefrescaSession(Server)
                     '//////////////////////////////////////////////////////////////////
                     '//////////////////////////////////////////////////////////////////
                     '//////////////////////////////////////////////////////////////////
@@ -4373,7 +4381,7 @@ Public Module ProntoFuncionesUIWeb
 
 
 
-                Return asdfsdg()
+                Return RefrescaSession(Server)
 
                 '//////////////////////////////////////////////////////////////////
                 '//////////////////////////////////////////////////////////////////
