@@ -152,7 +152,7 @@ namespace ProntoMVC.Controllers
             var Cliente = db.Clientes.Where(p => p.IdCliente == mIdCliente).FirstOrDefault();
             if (Cliente != null)
             {
-                if (Cliente.Estados_Proveedores != null) { if ((Cliente.Estados_Proveedores.Activo ?? "") != "SI") { sErrorMsg += "\n" + "Cliente inhabilitado"; } }
+                if (Cliente.Estados_Proveedores != null) { if ((Cliente.Estados_Proveedores.Activo ?? "") == "NO") { sErrorMsg += "\n" + "Cliente inhabilitado"; } }
             }
             else
             {

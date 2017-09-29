@@ -243,8 +243,8 @@ namespace ProntoMVC.Controllers
                             a.AcumulaMensualmente,
                             a.BaseCalculo
                         }).Where(campo).OrderBy(sidx + " " + sord)
-//.Skip((currentPage - 1) * pageSize).Take(pageSize)
-.ToList();
+                        .Skip((currentPage - 1) * pageSize).Take(pageSize)
+                        .ToList();
 
             var jsonData = new jqGridJson()
             {
