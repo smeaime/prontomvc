@@ -35,7 +35,7 @@
                     <div class="row-fluid">
                         <div class="span4 lightblue">
                             @Html.LabelFor(model => model.IdProvincia, "Provincia")
-                            @Html.DropDownList("IdProvincia", null, "", new { @class = "combobox input-large4", @style = "height: 15px; line-height: 14px; " })
+                            @Html.DropDownList("IdProvincia", null, "", new { @class = "span12", @style = "height: 15px; line-height: 14px; " })
                             @Html.ValidationMessageFor(model => model.IdProvincia)
                         </div>
                         <div class="span4 lightblue">
@@ -194,13 +194,11 @@
                 <div id="pie" style="position: absolute; bottom: -26px; background: rgb(236, 236, 236); width: 100%; height: 68px; padding-left: 0; margin-right: 15px;">
                     <hr style="margin: 0; border-top-color: #D8D4D4; border-bottom: 0px solid #ffffff;  " />
                     <div class="row-fluid " style="padding: 11px 0px 0px 0px">
-                        <div class="span4 pull-left">
-                        </div>
-                        <div class="span8 pull-right">
-                            <input type="button" id="grabar2" value="Aceptar" class="btn btn-primary" />
+                        <div class="span12 pull-right">
+                            <input type="button" id="grabar2" value="Aceptar" class="btn  btn-large btn-primary" />
                             @if (Model.IdIBCondicion > 0)
-                            { @Html.ActionLink("Eliminar", "DeleteConfirmed", new { id = Model.IdIBCondicion }, new { @class = "btn  btn-default" }) }
-                            @*@Html.ActionLink("Volver al listado", "Index", null, new { @class = "btn btn-link" })*@
+                            { @Html.ActionLink("Eliminar", "DeleteConfirmed", new { id = Model.IdIBCondicion }, new { @class = "btn  btn-large  btn-default" }) }
+                            @Html.ActionLink("Volver al listado", "Index", null, new { @class = "btn btn-link  pull-right" })
                         </div>
                     </div>
                 </div>
@@ -211,7 +209,6 @@
     <script type="text/javascript">
         $(window).resize(function () {
             RefrescaAnchoGrillaDetalle();
-
             $("#conscroll").height($(window).height() - 120);
         });
 
@@ -221,27 +218,6 @@
             $('.combobox').combobox({ bsVersion: '2' }); //.combobox()  // Bootstrap
             //$('.comboboxspan4').width('300px');
             //$('.dropdown-toggle').css({'float' : 'left'});
-
-            $("#Eliminar").click(function() {
-                // $('#dialog-confirm').data('Combo', 'Aprobo');
-                $('#dialog-confirm').dialog('open');
-            });
-
-            $( "#dialog-confirm" ).dialog({
-                title: "Confirmar",
-                content: "Quiere borrar el item?",
-                type: "confirm",
-                buttons: [{ value: "Sí" }, { value: "No"}],
-                success: function (result) {
-                    if (result == "Sí") {
-                        // alert("One cup of coffee coming right up!");
-                        $.ajax({
-                            url: @Url.Action("Borrar", "DeleteConfirmedDirecto") ,
-                            success: function (data) {                            }
-                        });
-                    }
-                }
-            });
 
             ////////////////////////////////////////////////////////// SERIALIZACION //////////////////////////////////////////////////////////
             function SerializaForm() {

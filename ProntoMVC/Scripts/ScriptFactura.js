@@ -380,7 +380,6 @@
                         name: 'Unidad', index: 'Unidad', align: 'left', width: 45, editable: true, hidden: false, edittype: 'select', editrules: { required: false }, label: 'TB',
                         editoptions: {
                             dataUrl: ROOT + 'Unidad/GetUnidades2',
-                            //dataEvents: [{ type: 'focusout', fn: function (e) { $('#Lista').jqGrid("saveCell", lastSelectediRow, lastSelectediCol); } }],
                             dataInit: function (elem) { $(elem).width(40); },
                             dataEvents: [
                                 { type: 'focusout', fn: function (e) { $('#Lista').jqGrid("saveCell", lastSelectediRow, lastSelectediCol); } },
@@ -443,7 +442,18 @@
                                 }]
                             }
                     },
-                    { name: 'PorcentajeIva', index: 'PorcentajeIva', width: 70, align: 'right', editable: true, hidden: false, formatter: 'dynamicText', edittype: 'custom', editoptions: { custom_element: radioelem, custom_value: radiovalue}, label: 'TB' },
+                    {
+                        name: 'PorcentajeIva', index: 'PorcentajeIva', width: 70, align: 'right', editable: true, hidden: false, label: 'TB', formatter: 'dynamicText', edittype: 'custom',
+                        editoptions: {
+                            dataEvents: [{
+                                type: 'focusout', fn: function (e) {
+                                    $('#Lista').jqGrid("saveCell", lastSelectediRow, lastSelectediCol);
+                                }
+                            }
+                            ],
+                            custom_element: radioelem, custom_value: radiovalue,
+                            }
+                    },
                     { name: 'ImporteIva', index: 'ImporteIva', width: 80, align: 'right', editable: true, hidden: false, editoptions: { disabled: 'disabled', defaultValue: 0 }, label: 'TB' },
                     { name: 'Importe', index: 'Importe', width: 100, align: 'right', editable: true, hidden: false, editoptions: { disabled: 'disabled', defaultValue: 0 }, label: 'TB' },
                     {
@@ -463,7 +473,12 @@
                     },
                     {
                         name: 'Observaciones', index: 'Observaciones', width: 300, align: 'left', editable: true, editrules: { required: false }, edittype: 'textarea', label: 'TB',
-                        editoptions: {dataEvents: [{ type: 'focusout', fn: function (e) { $('#Lista').jqGrid("saveCell", lastSelectediRow, lastSelectediCol); } },]},
+                        editoptions: {
+                            dataEvents: [{
+                                type: 'focusout', fn: function (e) { $('#Lista').jqGrid("saveCell", lastSelectediRow, lastSelectediCol); }
+                            },
+                            ]
+                        },
                     },
                     { name: 'OrdenCompra', index: 'OrdenCompra', width: 100, align: 'center', editable: true, hidden: false, editoptions: { disabled: 'disabled' } },
                     { name: 'Remito', index: 'Remito', width: 100, align: 'center', editable: true, hidden: false, editoptions: { disabled: 'disabled' } }
@@ -1255,6 +1270,8 @@
 
     function SerializaForm() {
         saveEditedCell("");
+
+        calculaTotalImputaciones();
 
         var cm, colModel, dataIds, data1, data2, valor, iddeta, i, j, nuevo, BienesOServicios="";
 
