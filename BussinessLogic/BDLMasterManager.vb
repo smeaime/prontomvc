@@ -112,7 +112,7 @@ Namespace Pronto.ERP.Bll
             If empresaList Is Nothing Then
                 'MandarMailDeError()
                 'ErrHandler2.WriteError("No se encontró 
-                Err.Raise("No se encontró empresa para el usuario " & UserId)
+                Throw New Exception("No se encontró empresa para el usuario " & UserId)
                 Return Nothing
             End If
 

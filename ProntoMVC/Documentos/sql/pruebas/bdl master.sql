@@ -36,6 +36,9 @@ go
 
 aspnet_UsersInRoles_AddUsersToRoles '/','Mariano','SuperAdmin',''
 aspnet_UsersInRoles_AddUsersToRoles '/','supervisor','SuperAdmin',''
+aspnet_UsersInRoles_AddUsersToRoles '/','supervisor','WilliamsAdmin',''
+
+
 
 aspnet_UsersInRoles_AddUsersToRoles
 
