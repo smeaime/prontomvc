@@ -1875,6 +1875,7 @@ namespace ProntoMVC.Controllers
             string mArchivoXMLRecibido2 = "";
             string glbArchivoCertificadoPassWord = "";
             string mCuitCliente = "";
+            string mTicketAcceso = "";
 
             Int32 mIdPuntoVenta = 0;
             Int32 mPuntoVenta = 0;
@@ -2017,7 +2018,38 @@ namespace ProntoMVC.Controllers
                     FE.ArchivoCertificadoPassword = glbArchivoCertificadoPassWord;
                 }
 
-                if (mResul) mResul = FE.f1ObtenerTicketAcceso();
+                if (mResul) {
+                    var Parametros2_ = db.Parametros2.Where(p => p.Campo == "UltimoTicketAccesoWSFE1").FirstOrDefault();
+                    if (Parametros2_ != null) { mTicketAcceso = Parametros2_.Valor ?? ""; }
+                    if (mTicketAcceso.Length == 0)
+                    {
+                        mResul = FE.f1ObtenerTicketAcceso();
+                    }
+                    else
+                    {
+                        mResul = FE.f1RestaurarTicketAcceso(mTicketAcceso);
+                        if (!mResul || !FE.f1TicketEsValido)
+                        {
+                            mResul = FE.f1ObtenerTicketAcceso();
+                        }
+                    }
+                    mTicketAcceso = FE.f1GuardarTicketAcceso();
+
+                    if (Parametros2_ != null)
+                    {
+                        Parametros2_.Valor = mTicketAcceso;
+                        db.Entry(Parametros2_).State = System.Data.Entity.EntityState.Modified;
+                    }
+                    else
+                    {
+                        Parametros2_ = new Parametros2();
+                        Parametros2_.Campo = "UltimoTicketAccesoWSFE1";
+                        Parametros2_.Valor = mTicketAcceso;
+                        db.Parametros2.Add(Parametros2_);
+                    }
+                    db.SaveChanges();
+                } 
+
                 if (!mResul)
                 {
                     ErrHandler.WriteError("f1ObtenerTicketAcceso : " + FE.UltimoMensajeError + " - " + FE.F1RespuestaDetalleObservacionMsg);
