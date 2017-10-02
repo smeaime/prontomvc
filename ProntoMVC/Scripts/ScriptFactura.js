@@ -2021,7 +2021,7 @@ function ActivarFechasServicio() {
 function cleanString(st) {
     var ltr = ['[àáâãä]', '[èéêë]', '[ìíîï]', '[òóôõö]', '[ùúûü]', 'ñ', 'ç', '[ýÿ]', '\\s|\\W|_'];
     var rpl = ['a', 'e', 'i', 'o', 'u', 'n', 'c', 'y', ' '];
-    var str = String(st.toLowerCase());
+    var str = String(st);
 
     for (var i = 0, c = ltr.length; i < c; i++) {
         var rgx = new RegExp(ltr[i], 'g');
