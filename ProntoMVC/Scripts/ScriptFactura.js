@@ -1258,7 +1258,7 @@
 
     $("#Observaciones").change(function () {
         var Observaciones = $("#Observaciones").val();
-        Observaciones = cleanString(Observaciones);
+        //Observaciones = cleanString(Observaciones);
         $("#Observaciones").val(Observaciones)
     })
 
