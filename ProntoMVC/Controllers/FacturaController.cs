@@ -276,6 +276,7 @@ namespace ProntoMVC.Controllers
                 mImporteDetalle = mImporteDetalle * (1 - (x.Bonificacion ?? 0) / 100);
                 mSubtotal += mImporteDetalle;
 
+                o.PorcentajeIva1 = x.PorcentajeIva;
                 //x.Articulo.AuxiliarNumerico1 = 0;
             }
             if (mSubtotal <= 0) sErrorMsg += "\n" + "El subtotal de la factura debe ser mayor a cero";
@@ -1915,6 +1916,7 @@ namespace ProntoMVC.Controllers
             mIdMonedaPesos = parametros.IdMoneda ?? 0;
             mIdMonedaDolar = parametros.IdMonedaDolar ?? 0;
             mIdMonedaEuro = parametros.IdMonedaEuro ?? 0;
+            glbPathPlantillas = parametros.PathPlantillas ?? "";
 
             glbArchivoCertificadoPassWord = BuscarClaveINI("ArchivoCertificadoPassWord", -1);
 
@@ -1965,6 +1967,7 @@ namespace ProntoMVC.Controllers
 
             mCuitCliente = db.Clientes.Find(o.IdCliente).Cuit.Replace("-", "");
 
+            //Esto hay que bajarlo a nivel de items evaluando el % de iva de cada item (sumarizando por %)
             mTipoIvaAFIP = 0;
             if ((double)(o.PorcentajeIva1 ?? 0) == 21) { mTipoIvaAFIP = 5; }
             if ((double)(o.PorcentajeIva1 ?? 0) == 10.5) { mTipoIvaAFIP = 4; }
@@ -1983,7 +1986,8 @@ namespace ProntoMVC.Controllers
             var PuntoVenta = db.PuntosVentas.Where(c => c.IdPuntoVenta == mIdPuntoVenta).SingleOrDefault();
             if (PuntoVenta != null) { mWebService = PuntoVenta.WebService ?? ""; }
 
-            glbPathPlantillas = AppDomain.CurrentDomain.BaseDirectory + "Documentos";
+            //glbPathPlantillas = AppDomain.CurrentDomain.BaseDirectory + "Documentos";
+            //glbPathPlantillas = @"\\SERVERSQL2\DocumentosPronto\Plantillas";
 
             if (mWebService == "WSFE1" && (mTipoABC == "A" || mTipoABC == "B"))
             {

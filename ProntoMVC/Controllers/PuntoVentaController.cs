@@ -297,7 +297,7 @@ namespace ProntoMVC.Controllers
         public virtual JsonResult GetPuntosVenta2(int IdTipoComprobante = 0, string Letra = "")
         {
             var filtereditems = (from a in db.PuntosVentas
-                                 where ((IdTipoComprobante <= 0 || a.IdTipoComprobante == IdTipoComprobante) && (Letra == "" || a.Letra == Letra))
+                                 where ((IdTipoComprobante <= 0 || a.IdTipoComprobante == IdTipoComprobante) && (Letra == "" || a.Letra == Letra) && (a.Activo ?? "") == "SI")
                                  select new
                                  {
                                      IdPuntoVenta = a.IdPuntoVenta,
