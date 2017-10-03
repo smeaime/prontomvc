@@ -1,6 +1,4 @@
-﻿
-
-<%@ Page Language="VB" AutoEventWireup="false" EnableEventValidation="false"
+﻿<%@ Page Language="VB" AutoEventWireup="false" EnableEventValidation="false"
     CodeFile="SituacionCalidadMovil.aspx.vb" Inherits="SituacionCalidadMovil"
     Title="Informes" %>
 
@@ -17,13 +15,51 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
 
 
-   
 
 
 
 
-    <%--https://developer.mozilla.org/en-US/docs/Mozilla/Mobile/Viewport_meta_tag--%>
-    <meta name="viewport" content="width=350px, initial-scale=1">
+
+<%--https://developer.mozilla.org/en-US/docs/Mozilla/Mobile/Viewport_meta_tag--%>
+<meta name="viewport" content="width=350px, initial-scale=1">
+
+<head runat="server">
+
+
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+
+
+
+
+    <title>BDL Consultores</title>
+
+    <%--  <link id="Link1" href="Css/Styles.css" rel="stylesheet" type="text/css" runat="server" />--%>
+
+    <link rel="shortcut icon" type="image/ico" href="favicon.png" />
+
+
+    <%--    <script>
+        (function (i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date(); a = s.createElement(o),
+            m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+        //ga('create', 'UA-31129433-2', 'auto');
+        ga('create', 'UA-31129433-2', { 'siteSpeedSampleRate': 100 });
+        ga('send', 'pageview');
+
+    </script>--%>
+</head>
+
+
+
+
+<body class="" style="width: 350px; max-width: 350px">
+
 
 
     <%--/////////////////////////////////////////////////////////////--%>
@@ -52,64 +88,13 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
 
 
-  
-
-<head runat="server">
-
-            
-    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
 
 
 
 
-    <title>BDL Consultores</title>
-
-    <%--  <link id="Link1" href="Css/Styles.css" rel="stylesheet" type="text/css" runat="server" />--%>
-
-    <link rel="shortcut icon" type="image/ico" href="favicon.png" />
-
-
-<%--    <script>
-        (function (i, s, o, g, r, a, m) {
-            i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
-                (i[r].q = i[r].q || []).push(arguments)
-            }, i[r].l = 1 * new Date(); a = s.createElement(o),
-            m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
-        })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
-
-        //ga('create', 'UA-31129433-2', 'auto');
-        ga('create', 'UA-31129433-2', { 'siteSpeedSampleRate': 100 });
-        ga('send', 'pageview');
-
-    </script>--%>
-
-    
-
-</head>
-
-
-
-
-<body class="" style="width: 350px; max-width:350px">
-
-        <%--/////////////////////////////////////////////////////////////--%>
-    <%--///////////     bootstrap    /////////////////////////////--%>
-    <%--/////////////////////////////////////////////////////////////--%>
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <%--/////////////////////////////////////////////////////////////--%>
-    <%--/////////////////////////////////////////////////////////////--%>
-    <%--////////////    jqgrid     //////////////////////////////////--%>
-    <script src="//cdn.jsdelivr.net/jqgrid/4.5.4/i18n/grid.locale-es.js"></script>
-    <link href="//cdn.jsdelivr.net/jqgrid/4.5.2/css/ui.jqgrid.css" rel="stylesheet">
-    <script src="//cdn.jsdelivr.net/jqgrid/4.5.2/jquery.jqGrid.js"></script>
-    <%--/////////////////////////////////////////////////////////////--%>
-
-      <form id="form1" runat="server" defaultfocus="txtSuperbuscador" autocomplete="off"
+    <form id="form1" runat="server" defaultfocus="txtSuperbuscador" autocomplete="off"
         class="">
-          <ajaxToolkit:ToolkitScriptManager ID="ScriptManager1" runat="server" LoadScriptsBeforeUI="False"
+        <ajaxToolkit:ToolkitScriptManager ID="ScriptManager1" runat="server" LoadScriptsBeforeUI="False"
             EnablePageMethods="true" AsyncPostBackTimeout="360000" ScriptMode="Release">
             <CompositeScript>
                 <Scripts>
@@ -144,187 +129,49 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
         </ajaxToolkit:ToolkitScriptManager>
 
 
-    <style>
-        /* Start by setting display:none to make this hidden.
+        <style>
+            /* Start by setting display:none to make this hidden.
    Then we position it in relation to the viewport window
    with position:fixed. Width, height, top and left speak
    speak for themselves. Background we set to 80% white with
    our animation centered, and no-repeating */
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 1000;
-            top: 0;
-            left: 0;
-            height: 100%;
-            width: 100%;
-            background: rgba( 255, 255, 255, .8 ) url('~/Content/images/fhhrx.gif') 50% 50% no-repeat;
-        }
-
-        /* When the body has the loading class, we turn
-   the scrollbar off with overflow:hidden */
-        body.loading {
-            overflow: hidden;
-        }
-
-            /* Anytime the body has the loading class, our
-   modal element will be visible */
-            body.loading .modal {
-                display: block;
+            .modal {
+                display: none;
+                position: fixed;
+                z-index: 1000;
+                top: 0;
+                left: 0;
+                height: 100%;
+                width: 100%;
+                background: rgba( 255, 255, 255, .8 ) url('~/Content/images/fhhrx.gif') 50% 50% no-repeat;
             }
-    </style>
 
-    <div class="modal" id="loading">
-        Cargando...
-    </div>
+            /* When the body has the loading class, we turn
+   the scrollbar off with overflow:hidden */
+            body.loading {
+                overflow: hidden;
+            }
 
+                /* Anytime the body has the loading class, our
+   modal element will be visible */
+                body.loading .modal {
+                    display: block;
+                }
+        </style>
 
-    <div style="margin-left: 20px">
-        <%--   <table id="list9">
-        </table>
-        <div id="pager9">
-        </div>
-        <br />
-        <a href="javascript:void(0)" id="m1">Get Selected id's</a> <a href="javascript:void(0)"
-            id="m1s">Select(Unselect) row 13</a>--%>
-
-        <asp:UpdatePanel ID="UpdatePanelResumen" runat="server" Visible="true">
-            <ContentTemplate>
-
-                <table style="color: black;">
-                    <tr>
-                        <td class="" style="width: ; height: 18px;"></td>
-                        <td class="" style="width: ; height: 18px;">
-                            <asp:DropDownList ID="cmbEstado" runat="server" Style="text-align: right; margin-left: 0px;"
-                                CssClass="CssCombo" ToolTip="Estado de la carta de porte" Font-Size="Small" Height="22px" Width="" Enabled="false">
-                                <%--dejo el combito deshablitado porque las funciones no tienen todavia el parametro de "estado", estan harcodeadas en "11" --%>
-
-                                <asp:ListItem Text="DESCARGAS de hoy + POSICIONES filtradas" Value="DescargasDeHoyMasTodasLasPosicionesEnRangoFecha"
-                                    Selected="True" />
-
-                                <asp:ListItem Text="Todas (menos las rechazadas)" Value="TodasMenosLasRechazadas" />
-                                <asp:ListItem Text="Incompletas" Value="Incompletas" />
-                                <asp:ListItem Text="Posición" Value="Posición" />
-                                <asp:ListItem Text="Descargas" Value="Descargas" />
-                                <asp:ListItem Text="Facturadas" Value="Facturadas" />
-                                <asp:ListItem Text="No facturadas" Value="NoFacturadas" />
-                                <asp:ListItem Text="Rechazadas" Value="Rechazadas" />
-                                <asp:ListItem Text="sin liberar en Nota de crédito" Value="EnNotaCredito" />
-                            </asp:DropDownList>
-
-                        </td>
-                        </tr>
-                    <tr>
-                        <td class="" style="width: ; height: 18px;"></td>
-                        <td class="" style="width: ; height: 18px;">
-                            <asp:DropDownList ID="cmbPeriodo" runat="server" AutoPostBack="true" Height="22px"  Width="100px" Style="color: black;"
-                                Visible="true">
-                                <asp:ListItem Text="Hoy" Selected="True" />
-                                <asp:ListItem Text="Ayer" />
-                                <%--<asp:ListItem Text="Esta semana" />
-                        <asp:ListItem Text="Semana pasada" />--%>
-                                <asp:ListItem Text="Este mes" />
-                                <asp:ListItem Text="Mes anterior" />
-                                <asp:ListItem Text="Cualquier fecha" />
-                                <%--    <asp:ListItem Text="Filtrar por Mes/Año" />--%>
-                                <asp:ListItem Text="Personalizar" />
-                            </asp:DropDownList>
-                            <asp:TextBox ID="txtFechaDesde" runat="server" Width="100px" MaxLength="1" autocomplete="off" Style="color: black;"
-                                TabIndex="2" AutoPostBack="false"></asp:TextBox>
-                            <cc1:CalendarExtender ID="CalendarExtender3" runat="server" Format="dd/MM/yyyy" TargetControlID="txtFechaDesde"
-                                Enabled="True">
-                            </cc1:CalendarExtender>
-                      <%--      <cc1:MaskedEditExtender ID="MaskedEditExtender3" runat="server" ErrorTooltipEnabled="True"
-                                Mask="99/99/9999" MaskType="Date" TargetControlID="txtFechaDesde" CultureAMPMPlaceholder=""
-                                CultureCurrencySymbolPlaceholder="" CultureDateFormat="" CultureDatePlaceholder=""
-                                CultureDecimalPlaceholder="" CultureThousandsPlaceholder="" CultureTimePlaceholder=""
-                                Enabled="True">
-                            </cc1:MaskedEditExtender>--%>
-                            <%-- <cc1:TextBoxWatermarkExtender ID="TBWE2" runat="server" TargetControlID="txtFechaDesde"
-                                WatermarkText="desde" WatermarkCssClass="watermarked" />--%>
-                            <asp:TextBox ID="txtFechaHasta" runat="server" Width="100px" MaxLength="1" TabIndex="2" Style="color: black;"
-                                AutoPostBack="false"></asp:TextBox>
-                            <cc1:CalendarExtender ID="CalendarExtender4" runat="server" Format="dd/MM/yyyy" TargetControlID="txtFechaHasta"
-                                Enabled="True">
-                            </cc1:CalendarExtender>
-                          <%--  <cc1:MaskedEditExtender ID="MaskedEditExtender4" runat="server" ErrorTooltipEnabled="True"
-                                Mask="99/99/9999" MaskType="Date" TargetControlID="txtFechaHasta" CultureAMPMPlaceholder=""
-                                CultureCurrencySymbolPlaceholder="" CultureDateFormat="" CultureDatePlaceholder=""
-                                CultureDecimalPlaceholder="" CultureThousandsPlaceholder="" CultureTimePlaceholder=""
-                                Enabled="True">
-                            </cc1:MaskedEditExtender>--%>
-                            <%-- <cc1:TextBoxWatermarkExtender ID="TBWE3" runat="server" TargetControlID="txtFechaHasta"
-                                WatermarkText="hasta" WatermarkCssClass="watermarked"  />--%>
-                        </td>
-
-                    </tr>
-                    <tr>
-                        <td class="" style="width: ; height: 18px;">
-                        </td>
-                        <td class="">
-                            <asp:DropDownList ID="cmbPuntoVenta" runat="server" CssClass="CssTextBox" Width="128px" Style="color: black;" />
-                        </td>
-
-                    </tr>
-
-                    <tr>
-                        <td class="" style="width: ; height: 18px;">
-                        </td>
-                        <td class="" style="width: ; height: 18px;">
-                            <asp:TextBox ID="txtDestino" runat="server" Text='<%# Bind("DestinoDesc") %>' AutoPostBack="false" Style="color: black;"
-                                autocomplete="off" CssClass="CssTextBox" Width="200px"></asp:TextBox>
-                            <cc1:AutoCompleteExtender CompletionInterval="100" ID="AutoCompleteExtender26" runat="server"
-                                OnClientItemSelected="RefrescaGrilla()"
-                                CompletionSetCount="12" TargetControlID="txtDestino" MinimumPrefixLength="1"
-                                ServiceMethod="GetCompletionList" ServicePath="WebServiceWilliamsDestinos.asmx"
-                                UseContextKey="True" FirstRowSelected="True" CompletionListCssClass="AutoCompleteScroll"
-                                DelimiterCharacters="" Enabled="True">
-                            </cc1:AutoCompleteExtender>
-                    </tr>
-
-                </table>
-
-            </ContentTemplate>
-        </asp:UpdatePanel>
-
-
-        <br />
-        <asp:Button ID="btnExportarGrilla" Text="EXCEL" runat="server" Visible="false" CssClass="btn btn-primary"
-            Width="150" Height="40" />
-
-        <input type="button" id="btnExportarGrillaAjax2" value="Excel" class="btn btn-primary" />
-
-        <input type="button" id="btnExportarGrillaAjax" value="BLD demor" class="btn btn-primary" />
-
-
-        <input type="button" id="btnPanelInformeAjax" value="Resumen" class="btn btn-primary" />
-
-        <asp:Button ID="btnPanelInforme" Text="RESUMEN" runat="server" Visible="false" CssClass="btn btn-primary" />
-
-
-
-        <%--<input type="button" id="btnLog" value="Log" class="btn btn-primary" />--%>
-        <input type="button" id="btnMostrarMenu" value="->" class="btn btn-primary" />
-
-        <br />
-        <div id="Salida2"></div>
-        <asp:Literal ID="salida" runat="server"></asp:Literal>
-
-
-        <%--<input type="text" class="span4" id="text1" name="agent" value=""  "/>--%>
-
-        <br />
-        <table id="Lista" class="scroll" cellpadding="0" cellspacing="0" style="font-size: 12px;" width="400px">
-        </table>
-        <div id="ListaPager" class="scroll" style="text-align: center; height: 30px">
+        <div class="modal" id="loading">
+            Cargando...
         </div>
 
 
 
-        <asp:LoginView ID="LoginView" runat="server">
+        <a href="CartaDePorteInformesAccesoClientesMovil.aspx">Informe </a>|
+                            <b>Situación</b> |
+                            <asp:Label ID="lblRazonSocial" runat="server" Font-Size="10" Font-Bold="false" />        |
+                            <asp:LoginView ID="LoginView" runat="server">
                                 <LoggedInTemplate>
-                                    <asp:LoginName ID="LoginName1" runat="server" Font-Bold="false" CssClass="margender" />
-                                    |
+                                    <%--<asp:LoginName ID="LoginName1" runat="server" Font-Bold="false" CssClass="margender" />
+                                    |--%>
                                                     <asp:LoginStatus ID="LoginStatus1" runat="server" Font-Bold="false" ForeColor=""
                                                         LogoutAction="RedirectToLoginPage" LogoutPageUrl="~/Login.aspx" OnLoggedOut="LoginStatus1_LoggedOut"
                                                         TabIndex="-1" LogoutText="Salir" Font-Underline="False" CssClass="margender" />
@@ -334,9 +181,153 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
         <br />
 
 
+        <div style="margin-left: 20px">
+            <%--   <table id="list9">
+        </table>
+        <div id="pager9">
+        </div>
+        <br />
+        <a href="javascript:void(0)" id="m1">Get Selected id's</a> <a href="javascript:void(0)"
+            id="m1s">Select(Unselect) row 13</a>--%>
+
+            <asp:UpdatePanel ID="UpdatePanelResumen" runat="server" Visible="true">
+                <ContentTemplate>
+
+                    <table style="color: black;">
+                        <tr>
+                            <td class="" style="width: ; height: 18px;"></td>
+                            <td class="" style="width: ; height: 18px;">
+                                <asp:DropDownList ID="cmbEstado" runat="server" Style="text-align: right; margin-left: 0px;"
+                                    CssClass="CssCombo" ToolTip="Estado de la carta de porte" Font-Size="Small" Height="22px" Width="" Enabled="false">
+                                    <%--dejo el combito deshablitado porque las funciones no tienen todavia el parametro de "estado", estan harcodeadas en "11" --%>
+
+                                    <asp:ListItem Text="DESCARGAS de hoy + POSICIONES filtradas" Value="DescargasDeHoyMasTodasLasPosicionesEnRangoFecha"
+                                        Selected="True" />
+
+                                    <asp:ListItem Text="Todas (menos las rechazadas)" Value="TodasMenosLasRechazadas" />
+                                    <asp:ListItem Text="Incompletas" Value="Incompletas" />
+                                    <asp:ListItem Text="Posición" Value="Posición" />
+                                    <asp:ListItem Text="Descargas" Value="Descargas" />
+                                    <asp:ListItem Text="Facturadas" Value="Facturadas" />
+                                    <asp:ListItem Text="No facturadas" Value="NoFacturadas" />
+                                    <asp:ListItem Text="Rechazadas" Value="Rechazadas" />
+                                    <asp:ListItem Text="sin liberar en Nota de crédito" Value="EnNotaCredito" />
+                                </asp:DropDownList>
+
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="" style="width: ; height: 18px;"></td>
+                            <td class="" style="width: ; height: 18px;">
+                                <asp:DropDownList ID="cmbPeriodo" runat="server" AutoPostBack="true" Height="22px" Width="100px" Style="color: black;"
+                                    Visible="true">
+                                    <asp:ListItem Text="Hoy" Selected="True" />
+                                    <asp:ListItem Text="Ayer" />
+                                    <%--<asp:ListItem Text="Esta semana" />
+                        <asp:ListItem Text="Semana pasada" />--%>
+                                    <asp:ListItem Text="Este mes" />
+                                    <asp:ListItem Text="Mes anterior" />
+                                    <asp:ListItem Text="Cualquier fecha" />
+                                    <%--    <asp:ListItem Text="Filtrar por Mes/Año" />--%>
+                                    <asp:ListItem Text="Personalizar" />
+                                </asp:DropDownList>
+                                <asp:TextBox ID="txtFechaDesde" runat="server" Width="100px" MaxLength="1" autocomplete="off" Style="color: black;"
+                                    TabIndex="2" AutoPostBack="false"></asp:TextBox>
+                                <cc1:CalendarExtender ID="CalendarExtender3" runat="server" Format="dd/MM/yyyy" TargetControlID="txtFechaDesde"
+                                    Enabled="True">
+                                </cc1:CalendarExtender>
+                                <cc1:MaskedEditExtender ID="MaskedEditExtender3" runat="server" ErrorTooltipEnabled="True"
+                                    Mask="99/99/9999" MaskType="Date" TargetControlID="txtFechaDesde" CultureAMPMPlaceholder=""
+                                    CultureCurrencySymbolPlaceholder="" CultureDateFormat="" CultureDatePlaceholder=""
+                                    CultureDecimalPlaceholder="" CultureThousandsPlaceholder="" CultureTimePlaceholder=""
+                                    Enabled="True">
+                                </cc1:MaskedEditExtender>
+                                <cc1:TextBoxWatermarkExtender ID="TBWE2" runat="server" TargetControlID="txtFechaDesde"
+                                    WatermarkText="desde" WatermarkCssClass="watermarked" />
+                                <asp:TextBox ID="txtFechaHasta" runat="server" Width="100px" MaxLength="1" TabIndex="2" Style="color: black;"
+                                    AutoPostBack="false"></asp:TextBox>
+                                <cc1:CalendarExtender ID="CalendarExtender4" runat="server" Format="dd/MM/yyyy" TargetControlID="txtFechaHasta"
+                                    Enabled="True">
+                                </cc1:CalendarExtender>
+                                <cc1:MaskedEditExtender ID="MaskedEditExtender4" runat="server" ErrorTooltipEnabled="True"
+                                    Mask="99/99/9999" MaskType="Date" TargetControlID="txtFechaHasta" CultureAMPMPlaceholder=""
+                                    CultureCurrencySymbolPlaceholder="" CultureDateFormat="" CultureDatePlaceholder=""
+                                    CultureDecimalPlaceholder="" CultureThousandsPlaceholder="" CultureTimePlaceholder=""
+                                    Enabled="True">
+                                </cc1:MaskedEditExtender>
+                                <cc1:TextBoxWatermarkExtender ID="TBWE3" runat="server" TargetControlID="txtFechaHasta"
+                                    WatermarkText="hasta" WatermarkCssClass="watermarked" />
+                            </td>
+
+                        </tr>
+                        <tr>
+                            <td class="" style="width: ; height: 18px;"></td>
+                            <td class="">
+                                <asp:DropDownList ID="cmbPuntoVenta" runat="server" CssClass="CssTextBox" Width="128px" Style="color: black;" />
+                            </td>
+
+                        </tr>
+
+                        <tr>
+                            <td class="" style="width: ; height: 18px;"></td>
+                            <td class="" style="width: ; height: 18px;">
+                                <asp:TextBox ID="txtDestino" runat="server" Text='<%# Bind("DestinoDesc") %>' AutoPostBack="false" Style="color: black;"
+                                    autocomplete="off" CssClass="CssTextBox" Width="200px"></asp:TextBox>
+                                <cc1:AutoCompleteExtender CompletionInterval="100" ID="AutoCompleteExtender26" runat="server"
+                                    OnClientItemSelected="RefrescaGrilla()"
+                                    CompletionSetCount="12" TargetControlID="txtDestino" MinimumPrefixLength="1"
+                                    ServiceMethod="GetCompletionList" ServicePath="WebServiceWilliamsDestinos.asmx"
+                                    UseContextKey="True" FirstRowSelected="True" CompletionListCssClass="AutoCompleteScroll"
+                                    DelimiterCharacters="" Enabled="True">
+                                </cc1:AutoCompleteExtender>
+                        </tr>
+
+                    </table>
+
+                </ContentTemplate>
+            </asp:UpdatePanel>
 
 
-        <%--<script>
+            <br />
+            <asp:Button ID="btnExportarGrilla" Text="EXCEL" runat="server" Visible="false" CssClass="btn btn-primary"
+                Width="150" Height="40" />
+
+            <input type="button" id="btnExportarGrillaAjax2" value="Excel" class="btn btn-primary" />
+
+            <input type="button" id="btnExportarGrillaAjax" value="BLD demor" class="btn btn-primary" />
+
+
+            <input type="button" id="btnPanelInformeAjax" value="Resumen" class="btn btn-primary" />
+
+            <asp:Button ID="btnPanelInforme" Text="RESUMEN" runat="server" Visible="false" CssClass="btn btn-primary" />
+
+
+
+            <%--<input type="button" id="btnLog" value="Log" class="btn btn-primary" />--%>
+            <input type="button" id="btnMostrarMenu" value="->" class="btn btn-primary" />
+
+            <br />
+            <div id="Salida2"></div>
+            <asp:Literal ID="salida" runat="server"></asp:Literal>
+
+
+            <%--<input type="text" class="span4" id="text1" name="agent" value=""  "/>--%>
+
+            <br />
+            <table id="Lista" class="scroll" cellpadding="0" cellspacing="0" style="font-size: 12px;" width="400px">
+            </table>
+            <div id="ListaPager" class="scroll" style="text-align: center; height: 30px">
+            </div>
+
+
+
+
+            <br />
+
+
+
+
+            <%--<script>
 
 
             jQuery("#list9").jqGrid({
@@ -379,11 +370,11 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                 jQuery("#list9").jqGrid('setSelection', "13");
             });
         </script>--%>
-    </div>
+        </div>
 
 
 
-    <script type="text/javascript">
+        <script type="text/javascript">
 
         "use strict";
 
@@ -1296,10 +1287,10 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                 url: 'HandlerCartaPorte.ashx',
                 //postData: {},
                 postData: {
-                    'FechaInicial': function () { return $("#ctl00_ContentPlaceHolder1_txtFechaDesde").val(); },
-                    'FechaFinal': function () { return $("#ctl00_ContentPlaceHolder1_txtFechaHasta").val(); },
-                    'puntovent': function () { return $("#ctl00_ContentPlaceHolder1_cmbPuntoVenta").val(); },
-                    'destino': function () { return $("#ctl00_ContentPlaceHolder1_txtDestino").val(); }
+                    'FechaInicial': function () { return $("#txtFechaDesde").val(); },
+                    'FechaFinal': function () { return $("#txtFechaHasta").val(); },
+                    'puntovent': function () { return $("#cmbPuntoVenta").val(); },
+                    'destino': function () { return $("txtDestino").val(); }
                 },
                 datatype: 'json',
                 mtype: 'POST',
@@ -2342,32 +2333,32 @@ closeOnEscape: true, closeAfterSearch: true, multipleSearch: true, overlay: fals
 
 
 
-    </script>
+        </script>
 
 
 
 
-    <style type="text/css">
-        .myAltRowClassDemorado {
-            background-color: red;
-            background-image: none;
-        }
+        <style type="text/css">
+            .myAltRowClassDemorado {
+                background-color: red;
+                background-image: none;
+            }
 
-        .myAltRowClassAutorizado {
-            background-color: lightgreen;
-            background-image: none;
-        }
+            .myAltRowClassAutorizado {
+                background-color: lightgreen;
+                background-image: none;
+            }
 
-        .myAltRowClassRechazado {
-            background-color: violet;
-            background-image: none;
-        }
-    </style>
-    <%--   /////////////////////////////////////////////////////////////////////        
+            .myAltRowClassRechazado {
+                background-color: violet;
+                background-image: none;
+            }
+        </style>
+        <%--   /////////////////////////////////////////////////////////////////////        
  /////////////////////////////////////////////////////////////////////    --%>
-    <%--  campos hidden --%>
-    <asp:HiddenField ID="HFSC" runat="server" />
-    <asp:HiddenField ID="HFIdObra" runat="server" />
-    <asp:HiddenField ID="HFTipoFiltro" runat="server" />
-          </form>
+        <%--  campos hidden --%>
+        <asp:HiddenField ID="HFSC" runat="server" />
+        <asp:HiddenField ID="HFIdObra" runat="server" />
+        <asp:HiddenField ID="HFTipoFiltro" runat="server" />
+    </form>
 </body>
