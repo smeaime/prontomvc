@@ -181,7 +181,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
         <br />
 
 
-        <div style="margin-left: 20px">
+        <div style="margin-left: ">
             <%--   <table id="list9">
         </table>
         <div id="pager9">
@@ -280,6 +280,8 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                                     UseContextKey="True" FirstRowSelected="True" CompletionListCssClass="AutoCompleteScroll"
                                     DelimiterCharacters="" Enabled="True">
                                 </cc1:AutoCompleteExtender>
+                                    <cc1:TextBoxWatermarkExtender ID="TextBoxWatermarkExtender1" runat="server" TargetControlID="txtDestino"
+                                WatermarkText="destino" WatermarkCssClass="watermarked" />
                         </tr>
 
                     </table>
@@ -288,7 +290,6 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
             </asp:UpdatePanel>
 
 
-            <br />
             <asp:Button ID="btnExportarGrilla" Text="EXCEL" runat="server" Visible="false" CssClass="btn btn-primary"
                 Width="150" Height="40" />
 
@@ -306,23 +307,17 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
             <%--<input type="button" id="btnLog" value="Log" class="btn btn-primary" />--%>
             <input type="button" id="btnMostrarMenu" value="->" class="btn btn-primary" />
 
-            <br />
             <div id="Salida2"></div>
             <asp:Literal ID="salida" runat="server"></asp:Literal>
 
 
             <%--<input type="text" class="span4" id="text1" name="agent" value=""  "/>--%>
 
-            <br />
-            <table id="Lista" class="scroll" cellpadding="0" cellspacing="0" style="font-size: 12px;" width="400px">
+            <table id="Lista" class="scroll" cellpadding="0" cellspacing="0" style="font-size: 30px;" width="400px">
             </table>
-            <div id="ListaPager" class="scroll" style="text-align: center; height: 30px">
+            <div id="ListaPager" class="scroll" style="text-align: center; height: 50px;font-size: 10px;">
             </div>
 
-
-
-
-            <br />
 
 
 
@@ -2245,7 +2240,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                 shrinkToFit: false,
                 
                 width: 350,//'auto',
-                height: 300, // $(window).height() - 250, // '100%'
+                height: $(window).height() - 310, // '100%'
                 altRows: false,
                 footerrow: false,
                 userDataOnFooter: true,
@@ -2254,7 +2249,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                 cellsubmit: 'clientArray',
                 dataUrl: "WebServiceClientes.asmx/EmpleadoEditGridData",
 
-                toppager: true,
+                //toppager: true,
 
                 gridview: true
         , multiboxonly: true
