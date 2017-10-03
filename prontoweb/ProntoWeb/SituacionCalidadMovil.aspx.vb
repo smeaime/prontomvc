@@ -86,6 +86,31 @@ Partial Class SituacionCalidadMovil
             cmbEstado.Enabled = False
 
 
+
+            'agregar al where que aparezca la razon social de este cliente
+            Dim rs As String
+            Try
+                rs = UserDatosExtendidosManager.TraerRazonSocialDelUsuario(Session(SESSIONPRONTO_UserId), ConexBDLmaster, HFSC.Value)
+            Catch ex As Exception
+                ErrHandler2.WriteError(ex)
+                rs = Session(SESSIONPRONTO_UserName) 'como no encuentro el usuario en la tabla de datos adicionales de la bdlmaster, uso el nombre del usuario como razon social que esperaba encontrar en esa dichosa tabla
+            End Try
+
+
+            If rs <> "" Then
+                Dim idcli = BuscaIdClientePreciso(rs, HFSC.Value)
+                If idcli = -1 Then
+
+                    MsgBoxAjax(Me, "No existe el cliente: " & rs)
+                    Exit Sub
+                End If
+            End If
+
+
+
+            lblRazonSocial.Text = rs
+
+
             BloqueosDeEdicion()
         End If
 
