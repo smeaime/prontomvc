@@ -1,8 +1,11 @@
-﻿<%@ Page Language="VB"
-    AutoEventWireup="false"
-    MasterPageFile="~/MasterPage.master"
+﻿
+
+<%@ Page Language="VB" AutoEventWireup="false" EnableEventValidation="false"
     CodeFile="SituacionCalidadMovil.aspx.vb" Inherits="SituacionCalidadMovil"
-    Title="Informes" ValidateRequest="false" EnableEventValidation="false" %>
+    Title="Informes" %>
+
+
+
 
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %>
 <%@ Register Assembly="System.Web.Extensions, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35"
@@ -11,10 +14,16 @@
 Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
     Namespace="Microsoft.Reporting.WebForms"
     TagPrefix="rsweb" %>
-<asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
+
+
+
+   
+
+
+
 
     <%--https://developer.mozilla.org/en-US/docs/Mozilla/Mobile/Viewport_meta_tag--%>
-    <meta name="viewport" content="width=400px, initial-scale=1">
+    <meta name="viewport" content="width=350px, initial-scale=1">
 
 
     <%--/////////////////////////////////////////////////////////////--%>
@@ -40,6 +49,94 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
     <%--  <div class="titulos" style="color: white">
         Situación de CPs
     </div>--%>
+
+
+
+  
+
+<head runat="server">
+    <title>BDL Consultores</title>
+
+    <%--  <link id="Link1" href="Css/Styles.css" rel="stylesheet" type="text/css" runat="server" />--%>
+
+    <link rel="shortcut icon" type="image/ico" href="favicon.png" />
+
+
+    <script>
+        (function (i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date(); a = s.createElement(o),
+            m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+        //ga('create', 'UA-31129433-2', 'auto');
+        ga('create', 'UA-31129433-2', { 'siteSpeedSampleRate': 100 });
+        ga('send', 'pageview');
+
+    </script>
+
+    
+</head>
+
+
+
+
+<body class="" style="width: 350px; max-width:350px">
+
+    
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+
+        <%--/////////////////////////////////////////////////////////////--%>
+    <%--///////////     bootstrap    /////////////////////////////--%>
+    <%--/////////////////////////////////////////////////////////////--%>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <%--/////////////////////////////////////////////////////////////--%>
+    <%--/////////////////////////////////////////////////////////////--%>
+    <%--////////////    jqgrid     //////////////////////////////////--%>
+    <script src="//cdn.jsdelivr.net/jqgrid/4.5.4/i18n/grid.locale-es.js"></script>
+    <link href="//cdn.jsdelivr.net/jqgrid/4.5.2/css/ui.jqgrid.css" rel="stylesheet">
+    <script src="//cdn.jsdelivr.net/jqgrid/4.5.2/jquery.jqGrid.js"></script>
+    <%--/////////////////////////////////////////////////////////////--%>
+
+      <form id="form1" runat="server" defaultfocus="txtSuperbuscador" autocomplete="off"
+        class="">
+          <ajaxToolkit:ToolkitScriptManager ID="ScriptManager1" runat="server" LoadScriptsBeforeUI="False"
+            EnablePageMethods="true" AsyncPostBackTimeout="360000" ScriptMode="Release">
+            <CompositeScript>
+                <Scripts>
+                    <%--<asp:ScriptReference Path="~/JavaScript/jquery-1.4.2.min.js" />--%>
+                    <asp:ScriptReference Path="~/JavaScript/bdl.js" />
+                    <asp:ScriptReference Path="~/JavaScript/jsamDragAndDrop.js" />
+                    <asp:ScriptReference Path="~/JavaScript/jsamCore.js" />
+                    <asp:ScriptReference Path="~/JavaScript/jsamSearchComboBox.js" />
+                    <asp:ScriptReference Path="~/JavaScript/firmas.js" />
+                    <asp:ScriptReference Path="~/JavaScript/dragAndDrop.js" />
+                </Scripts>
+            </CompositeScript>
+            <Services>
+                <%--
+           QUE PASO??????????!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+           QUE PASO??????????!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+           QUE PASO??????????!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+           comenté los ServiceReference a los webservice, y va más rapido, y siguen andando...
+
+                --%>
+                <%-- <asp:ServiceReference Path="~/ProntoWeb/WebServiceArticulos.asmx" />
+            <asp:ServiceReference Path="~/ProntoWeb/WebServiceProveedores.asmx" />
+            <asp:ServiceReference Path="~/ProntoWeb/WebServiceClientes.asmx" />
+            <asp:ServiceReference Path="~/ProntoWeb/WebServiceLocalidades.asmx" />
+            <asp:ServiceReference Path="~/ProntoWeb/WebServiceChoferes.asmx" />
+            <asp:ServiceReference Path="~/ProntoWeb/WebServiceTransportistas.asmx" />
+            <asp:ServiceReference Path="~/ProntoWeb/WebServiceVendedores.asmx" />
+            <asp:ServiceReference Path="~/ProntoWeb/WebServiceWilliamsDestinos.asmx" />
+            <asp:ServiceReference Path="~/ProntoWeb/WebServiceCalidades.asmx" />
+            <asp:ServiceReference Path="~/ProntoWeb/WebServiceSuperbuscador.asmx" />--%>
+            </Services>
+        </ajaxToolkit:ToolkitScriptManager>
 
 
     <style>
@@ -132,12 +229,12 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                             <cc1:CalendarExtender ID="CalendarExtender3" runat="server" Format="dd/MM/yyyy" TargetControlID="txtFechaDesde"
                                 Enabled="True">
                             </cc1:CalendarExtender>
-                            <cc1:MaskedEditExtender ID="MaskedEditExtender3" runat="server" ErrorTooltipEnabled="True"
+                      <%--      <cc1:MaskedEditExtender ID="MaskedEditExtender3" runat="server" ErrorTooltipEnabled="True"
                                 Mask="99/99/9999" MaskType="Date" TargetControlID="txtFechaDesde" CultureAMPMPlaceholder=""
                                 CultureCurrencySymbolPlaceholder="" CultureDateFormat="" CultureDatePlaceholder=""
                                 CultureDecimalPlaceholder="" CultureThousandsPlaceholder="" CultureTimePlaceholder=""
                                 Enabled="True">
-                            </cc1:MaskedEditExtender>
+                            </cc1:MaskedEditExtender>--%>
                             <%-- <cc1:TextBoxWatermarkExtender ID="TBWE2" runat="server" TargetControlID="txtFechaDesde"
                                 WatermarkText="desde" WatermarkCssClass="watermarked" />--%>
                             <asp:TextBox ID="txtFechaHasta" runat="server" Width="100px" MaxLength="1" TabIndex="2" Style="color: black;"
@@ -145,12 +242,12 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                             <cc1:CalendarExtender ID="CalendarExtender4" runat="server" Format="dd/MM/yyyy" TargetControlID="txtFechaHasta"
                                 Enabled="True">
                             </cc1:CalendarExtender>
-                            <cc1:MaskedEditExtender ID="MaskedEditExtender4" runat="server" ErrorTooltipEnabled="True"
+                          <%--  <cc1:MaskedEditExtender ID="MaskedEditExtender4" runat="server" ErrorTooltipEnabled="True"
                                 Mask="99/99/9999" MaskType="Date" TargetControlID="txtFechaHasta" CultureAMPMPlaceholder=""
                                 CultureCurrencySymbolPlaceholder="" CultureDateFormat="" CultureDatePlaceholder=""
                                 CultureDecimalPlaceholder="" CultureThousandsPlaceholder="" CultureTimePlaceholder=""
                                 Enabled="True">
-                            </cc1:MaskedEditExtender>
+                            </cc1:MaskedEditExtender>--%>
                             <%-- <cc1:TextBoxWatermarkExtender ID="TBWE3" runat="server" TargetControlID="txtFechaHasta"
                                 WatermarkText="hasta" WatermarkCssClass="watermarked"  />--%>
                         </td>
@@ -219,7 +316,15 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
 
 
-
+        <asp:LoginView ID="LoginView" runat="server">
+                                <LoggedInTemplate>
+                                    <asp:LoginName ID="LoginName1" runat="server" Font-Bold="false" CssClass="margender" />
+                                    |
+                                                    <asp:LoginStatus ID="LoginStatus1" runat="server" Font-Bold="false" ForeColor=""
+                                                        LogoutAction="RedirectToLoginPage" LogoutPageUrl="~/Login.aspx" OnLoggedOut="LoginStatus1_LoggedOut"
+                                                        TabIndex="-1" LogoutText="Salir" Font-Underline="False" CssClass="margender" />
+                                </LoggedInTemplate>
+                            </asp:LoginView>
 
         <br />
 
@@ -2135,7 +2240,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                 //},
 
                 pager: $('#ListaPager'),
-                rowNum: 1000,
+                rowNum: 20,
                 rowList: [10, 20, 50, 100, 500, 1000],
                 sortname: 'IdCartaDePorte',  //'FechaDescarga', //'NumeroCartaDePorte',
                 sortorder: 'desc',
@@ -2259,4 +2364,5 @@ closeOnEscape: true, closeAfterSearch: true, multipleSearch: true, overlay: fals
     <asp:HiddenField ID="HFSC" runat="server" />
     <asp:HiddenField ID="HFIdObra" runat="server" />
     <asp:HiddenField ID="HFTipoFiltro" runat="server" />
-</asp:Content>
+          </form>
+</body>
