@@ -55,6 +55,15 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
   
 
 <head runat="server">
+
+            
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+
+
+
+
     <title>BDL Consultores</title>
 
     <%--  <link id="Link1" href="Css/Styles.css" rel="stylesheet" type="text/css" runat="server" />--%>
@@ -62,7 +71,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
     <link rel="shortcut icon" type="image/ico" href="favicon.png" />
 
 
-    <script>
+<%--    <script>
         (function (i, s, o, g, r, a, m) {
             i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
                 (i[r].q = i[r].q || []).push(arguments)
@@ -74,20 +83,16 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
         ga('create', 'UA-31129433-2', { 'siteSpeedSampleRate': 100 });
         ga('send', 'pageview');
 
-    </script>
+    </script>--%>
 
     
+
 </head>
 
 
 
 
 <body class="" style="width: 350px; max-width:350px">
-
-    
-    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
 
         <%--/////////////////////////////////////////////////////////////--%>
     <%--///////////     bootstrap    /////////////////////////////--%>
@@ -212,7 +217,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                     <tr>
                         <td class="" style="width: ; height: 18px;"></td>
                         <td class="" style="width: ; height: 18px;">
-                            <asp:DropDownList ID="cmbPeriodo" runat="server" AutoPostBack="true" Height="22px" Style="color: black;"
+                            <asp:DropDownList ID="cmbPeriodo" runat="server" AutoPostBack="true" Height="22px"  Width="100px" Style="color: black;"
                                 Visible="true">
                                 <asp:ListItem Text="Hoy" Selected="True" />
                                 <asp:ListItem Text="Ayer" />
