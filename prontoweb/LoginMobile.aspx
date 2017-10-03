@@ -93,12 +93,12 @@ document.cookie = 'killme' + escape('nothing')
                                 </div>
 
 
-                               <div style="text-align: center; font-size: 18px; 
+                               <div style="text-align: center; font-size: 24px; 
                                                     font-family: Tahoma;  ">
                                     <%--<div style="font-size: x-large; width: 400px; margin-left: 50px; font-family: Tahoma;">--%>
                                 Junto a nuestros clientes</b>
                                 </div>
-                                <div style="text-align: center; font-size: 18px;  font-family: Tahoma;">
+                                <div style="text-align: center; font-size: 24px;  font-family: Tahoma;">
                                     <br />
                                     Williams Entregas S.A. nació en 1989 de la mano de nuestros clientes con un objetivo
                                 bien definido: estar junto a ellos brindándole el mejor servicio.
@@ -126,17 +126,17 @@ document.cookie = 'killme' + escape('nothing')
                                         <asp:Label ID="UserNameLabel" runat="server" AssociatedControlID="UserName" Font-Size=""
                                             Font-Bold="true">Usuario</asp:Label>
                                     </div>
-                                    <asp:TextBox ID="UserName" Width="300" runat="server" Font-Size="30" Style="padding: 5px;"></asp:TextBox>
+                                    <asp:TextBox ID="UserName" Width="400" runat="server" Font-Size="40" Style="padding: 5px;"></asp:TextBox>
                                     <br />
                                     <br />
                                     <div style="text-align: left;">
                                         <asp:Label ID="PasswordLabel" runat="server" AssociatedControlID="Password" >Contraseña</asp:Label><br />
                                     </div>
-                                    <asp:TextBox ID="Password" runat="server" TextMode="Password" Font-Size="30"
-                                        Style="padding: 5px;" Width="300"></asp:TextBox><br />
+                                    <asp:TextBox ID="Password" runat="server" TextMode="Password" Font-Size="40"
+                                        Style="padding: 5px;" Width="400"></asp:TextBox><br />
                                     <br />
                                     <asp:Button ID="LoginButton" runat="server" CommandName="Login" Text=" Entrar " Height="80"
-                                        Font-Size="20" Font-Bold="true" Width="300" CssClass="but" ValidationGroup="LoginUserValidationGroup"
+                                        Font-Size="30" Font-Bold="true" Width="400" CssClass="but" ValidationGroup="LoginUserValidationGroup"
                                         Font-Names="'Lucida Grande', Tahoma" Style="margin-left: 0px; background-color: #4F6AA3; color: White; border: 1px solid #2F5BB7;" />
                                     <loginbuttonstyle cssclass="but" />
                                     <br />

@@ -130,11 +130,16 @@ Partial Class SituacionCalidad
         cmbPuntoVenta.Items.Insert(0, New ListItem("Todos los puntos de venta", -1))
         cmbPuntoVenta.SelectedIndex = 0
 
-        If EmpleadoManager.GetItem(HFSC.Value, Session(SESSIONPRONTO_glbIdUsuario)).PuntoVentaAsociado > 0 Then
-            Dim pventa = EmpleadoManager.GetItem(HFSC.Value, Session(SESSIONPRONTO_glbIdUsuario)).PuntoVentaAsociado 'sector del confeccionó
-            BuscaTextoEnCombo(cmbPuntoVenta, pventa)
-            If iisNull(pventa, 0) <> 0 Then cmbPuntoVenta.Enabled = False 'si tiene un punto de venta, que no lo pueda elegir
-        End If
+        Try
+            If EmpleadoManager.GetItem(HFSC.Value, Session(SESSIONPRONTO_glbIdUsuario)).PuntoVentaAsociado > 0 Then
+                Dim pventa = EmpleadoManager.GetItem(HFSC.Value, Session(SESSIONPRONTO_glbIdUsuario)).PuntoVentaAsociado 'sector del confeccionó
+                BuscaTextoEnCombo(cmbPuntoVenta, pventa)
+                If iisNull(pventa, 0) <> 0 Then cmbPuntoVenta.Enabled = False 'si tiene un punto de venta, que no lo pueda elegir
+            End If
+
+        Catch ex As Exception
+            ErrHandler2.WriteError(ex)
+        End Try
 
     End Sub
 
