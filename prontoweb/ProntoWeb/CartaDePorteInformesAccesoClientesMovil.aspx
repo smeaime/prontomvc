@@ -20,9 +20,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 <html xmlns="http://www.w3.org/1999/xhtml">
     
     
-    <%--https://developer.mozilla.org/en-US/docs/Mozilla/Mobile/Viewport_meta_tag--%>
-    <meta name="viewport" content="width=400px, initial-scale=1">
-
+  
 
 <head runat="server">
     <title>BDL Consultores</title>
@@ -46,7 +44,14 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
     </script>
 </head>
-<body class="bodyMasterPage" style="width: 400px">
+
+
+
+      <%--https://developer.mozilla.org/en-US/docs/Mozilla/Mobile/Viewport_meta_tag--%>
+    <meta name="viewport" content="width=350px, max-width:350px, initial-scale=1">
+
+
+<body class="" style="width: 350px; max-width:350px">
 
 
     <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
@@ -55,7 +60,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
     <%-- El asuntito de la imagen del background http://www.daniweb.com/forums/thread57245.html# --%>
     <form id="form1" runat="server" defaultfocus="txtSuperbuscador" autocomplete="off"
-        class="bodyMasterPage">
+        class="">
         <ajaxToolkit:ToolkitScriptManager ID="ScriptManager1" runat="server" LoadScriptsBeforeUI="False"
             EnablePageMethods="true" AsyncPostBackTimeout="360000" ScriptMode="Release">
             <CompositeScript>
@@ -79,20 +84,19 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
         <br />
 
-            <a href="SituacionCalidadMovil.aspx"> situacion</a>
-
-        modo escritorio
         
-        <a href="tel:5278-8800">oficina bsas 5278-8800 </a>
- <%--       OFICINAS: Buenos Aires Moreno 584 P. 12 Of A / (011) 5278-8800 - 4322-4805 / buenosaires@williamsentregas.com.ar 
-     // San Lorenzo (Sta. Fe) - Sgo. del Estero 1177 / (03476) 430-234 - 426-855 / sanlorenzo@williamsentregas.com.ar
-Arroyo Seco (Sta. Fe) - René Favaloro 726 / (03402) 421-426 - 429-676 / arroyoseco@williamsentregas.com.ar 
-     // Bahía Blanca Ruta 252 km 0.5 - Playa el Triangulo / (0291) 400-7928 - 481-6778 / bahiablanca@williamsentregas.com.ar--%>
 
 
         <asp:UpdatePanel ID="UpdatePanelResumen" runat="server">
             <ContentTemplate>
-                <table width="">
+                <table width=""    style="font-size:20px !important">
+                    <tr>
+                        <td colspan="2">
+                            <asp:Label ID="lblRazonSocial" runat="server" Font-Size="Large" Font-Bold="true" />
+                            <asp:Button ID="Button1" Text="importar" runat="server" Visible="false" Height="27" />
+                        </td>
+                    </tr>
+
                     <tr>
                         <td colspan="2">
                             <asp:UpdateProgress ID="UpdateProgress2" runat="server">
@@ -103,7 +107,7 @@ Arroyo Seco (Sta. Fe) - René Favaloro 726 / (03402) 421-426 - 429-676 / arroyos
                                 </ProgressTemplate>
                             </asp:UpdateProgress>
 
-                            <asp:Button ID="btnRefrescar" Text="VER INFORME" runat="server" Visible="True" CssClass="but"
+                            <asp:Button ID="btnRefrescar" Text="INFORME" runat="server" Visible="True" CssClass="but"
                                 Width="" Height="40" />
 
                             <asp:Button ID="btnImagenes" Text="JPG" runat="server" Visible="True" CssClass="but"
@@ -113,33 +117,19 @@ Arroyo Seco (Sta. Fe) - René Favaloro 726 / (03402) 421-426 - 429-676 / arroyos
                             <asp:Button ID="btnImagenesTiffReducido" Text="TIFF" runat="server" Visible="True" CssClass="but"
                                 Width="" Height="40" />
 
+                                <a href="SituacionCalidadMovil.aspx"> Situación</a>
 
-                            <asp:LoginView ID="LoginView" runat="server">
-                                <LoggedInTemplate>
-                                    <asp:LoginName ID="LoginName1" runat="server" Font-Bold="false" CssClass="margender" />
-                                    |
-                                                    <asp:LoginStatus ID="LoginStatus1" runat="server" Font-Bold="false" ForeColor="white"
-                                                        LogoutAction="RedirectToLoginPage" LogoutPageUrl="~/Login.aspx" OnLoggedOut="LoginStatus1_LoggedOut"
-                                                        TabIndex="-1" LogoutText="Salir" Font-Underline="False" CssClass="margender" />
-                                </LoggedInTemplate>
-                            </asp:LoginView>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td colspan="2">
-                            <asp:Label ID="lblRazonSocial" runat="server" Font-Size="Large" Font-Bold="true" />
-                            <asp:Button ID="Button1" Text="importar" runat="server" Visible="false" Height="27" />
+                     
                         </td>
                     </tr>
 
 
                     <tr>
-                        <td>N° Carta porte
+                        <td>N° C.Porte
                         </td>
-                        <td colspan="2">
-                            <asp:TextBox ID="txtQueContenga" runat="server" AutoPostBack="True" CssClass="CssTextBox"
-                                Width="110px"></asp:TextBox>
+                        <td colspan="2"> 
+                            <asp:TextBox ID="txtQueContenga" runat="server" AutoPostBack="True"  
+                                Font-Size="20" Width="180px"></asp:TextBox>
                         </td>
                     </tr>
                     <tr>
@@ -147,7 +137,7 @@ Arroyo Seco (Sta. Fe) - René Favaloro 726 / (03402) 421-426 - 429-676 / arroyos
                         </td>
                         <td>
                             <asp:DropDownList ID="cmbEstado" runat="server" Style="text-align: right; margin-left: 0px;"
-                                Enabled="true" CssClass="CssCombo" ToolTip="Estado de la carta de porte" Font-Size="Small"
+                                Enabled="true" CssClass="CssCombo" ToolTip="Estado de la carta de porte" Font-Size="20"
                                 Height="22px">
                                 <asp:ListItem Text="Todas (menos las rechazadas)" Value="TodasMenosLasRechazadas"
                                     Enabled="false" />
@@ -166,7 +156,7 @@ Arroyo Seco (Sta. Fe) - René Favaloro 726 / (03402) 421-426 - 429-676 / arroyos
                         <td>Descarga
                         </td>
                         <td>
-                            <asp:DropDownList ID="cmbPeriodo" runat="server" AutoPostBack="true" Height="22px"
+                            <asp:DropDownList ID="cmbPeriodo" runat="server" AutoPostBack="true" Height="22px" Font-Size="20"
                                 Visible="true">
                                 <asp:ListItem Text="Hoy" />
                                 <asp:ListItem Text="Ayer" />
@@ -414,6 +404,38 @@ Arroyo Seco (Sta. Fe) - René Favaloro 726 / (03402) 421-426 - 429-676 / arroyos
                                             </cc1:AutoCompleteExtender>
                                     </td>
                                 </tr>
+
+                                
+                                <tr>
+                                    <td style="">
+                                       <asp:LoginView ID="LoginView" runat="server">
+                                <LoggedInTemplate>
+                                    <asp:LoginName ID="LoginName1" runat="server" Font-Bold="false" CssClass="margender" />
+                                    |
+                                                    <asp:LoginStatus ID="LoginStatus1" runat="server" Font-Bold="false" ForeColor="white"
+                                                        LogoutAction="RedirectToLoginPage" LogoutPageUrl="~/Login.aspx" OnLoggedOut="LoginStatus1_LoggedOut"
+                                                        TabIndex="-1" LogoutText="Salir" Font-Underline="False" CssClass="margender" />
+                                </LoggedInTemplate>
+                            </asp:LoginView>
+
+
+                                                modo escritorio
+                             
+ <%--       OFICINAS: Buenos Aires Moreno 584 P. 12 Of A / (011) 5278-8800 - 4322-4805 / buenosaires@williamsentregas.com.ar 
+     // San Lorenzo (Sta. Fe) - Sgo. del Estero 1177 / (03476) 430-234 - 426-855 / sanlorenzo@williamsentregas.com.ar
+Arroyo Seco (Sta. Fe) - René Favaloro 726 / (03402) 421-426 - 429-676 / arroyoseco@williamsentregas.com.ar 
+     // Bahía Blanca Ruta 252 km 0.5 - Playa el Triangulo / (0291) 400-7928 - 481-6778 / bahiablanca@williamsentregas.com.ar--%>
+
+        
+        <a href="tel:5278-8800">oficina bsas 5278-8800 </a>
+        <a href="tel:(03476) 430-234">oficina sanlorenzo  (03476) 430-234 </a>
+        <a href="tel: (03402) 421-426">oficina arroyoseco (03402) 421-426 </a>
+        <a href="tel:0291-400-7928">oficina bahiablanca (0291) 400-7928 </a>
+
+           
+
+                                        </td></tr>
+
                                 <tr>
                                     <td style="">
                                         <asp:LinkButton ID="LinkButton5" runat="server" Font-Bold="false" Font-Underline="True"
@@ -432,7 +454,7 @@ Arroyo Seco (Sta. Fe) - René Favaloro 726 / (03402) 421-426 - 429-676 / arroyos
                         </asp:Panel>
                         <ajaxToolkit:CollapsiblePanelExtender ID="CollapsiblePanelExtender1" runat="server"
                             TargetControlID="Panel4" ExpandControlID="btnMasPanel" CollapseControlID="btnMasPanel"
-                            CollapsedText="más filtros..." ExpandedText="ocultar" TextLabelID="btnMasPanel"
+                            CollapsedText="más opciones..." ExpandedText="ocultar" TextLabelID="btnMasPanel"
                             Collapsed="true">
                         </ajaxToolkit:CollapsiblePanelExtender>
                     </ContentTemplate>
