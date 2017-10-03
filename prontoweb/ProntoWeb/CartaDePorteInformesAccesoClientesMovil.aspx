@@ -81,22 +81,34 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
 
 
-
-        <br />
-
         
 
 
         <asp:UpdatePanel ID="UpdatePanelResumen" runat="server">
             <ContentTemplate>
-                <table width=""    style="font-size:20px !important">
+                <table width=""    style="font-size:12px !important">
                     <tr>
                         <td colspan="2">
-                            <asp:Label ID="lblRazonSocial" runat="server" Font-Size="Large" Font-Bold="true" />
-                            <asp:Button ID="Button1" Text="importar" runat="server" Visible="false" Height="27" />
+                            <asp:Label ID="lblRazonSocial" runat="server" Font-Size="10" Font-Bold="false" />
+                          |
+                                <a href="SituacionCalidadMovil.aspx"> Situación</a> |
+                            
+                            <asp:LoginView ID="LoginView" runat="server"  >
+                                <LoggedInTemplate>
+                                    <asp:LoginName ID="LoginName1" runat="server" Font-Bold="false" CssClass="margender" />
+                                    |
+                                                    <asp:LoginStatus ID="LoginStatus1" runat="server" Font-Bold="false" ForeColor="" 
+                                                        LogoutAction="RedirectToLoginPage" LogoutPageUrl="~/Login.aspx" OnLoggedOut="LoginStatus1_LoggedOut"
+                                                        TabIndex="-1" LogoutText="Salir" Font-Underline="False" CssClass="margender" />
+                                </LoggedInTemplate>
+                            </asp:LoginView>
                         </td>
                     </tr>
-
+                    
+                    <tr>
+                        </tr><tr>
+                        </tr><tr>
+                        </tr>
                     <tr>
                         <td colspan="2">
                             <asp:UpdateProgress ID="UpdateProgress2" runat="server">
@@ -107,7 +119,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                                 </ProgressTemplate>
                             </asp:UpdateProgress>
 
-                            <asp:Button ID="btnRefrescar" Text="INFORME" runat="server" Visible="True" CssClass="but"
+                            <asp:Button ID="btnRefrescar" Text="VER INFORME" runat="server" Visible="True" CssClass="but" Font-Size="18"
                                 Width="" Height="40" />
 
                             <asp:Button ID="btnImagenes" Text="JPG" runat="server" Visible="True" CssClass="but"
@@ -117,28 +129,30 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                             <asp:Button ID="btnImagenesTiffReducido" Text="TIFF" runat="server" Visible="True" CssClass="but"
                                 Width="" Height="40" />
 
-                                <a href="SituacionCalidadMovil.aspx"> Situación</a>
+
 
                      
                         </td>
                     </tr>
-
+                    <tr>
+                        </tr><tr>
+                        </tr>
 
                     <tr>
-                        <td>N° C.Porte
-                        </td>
-                        <td colspan="2"> 
+                        <td colspan="2">
+            
                             <asp:TextBox ID="txtQueContenga" runat="server" AutoPostBack="True"  
                                 Font-Size="20" Width="180px"></asp:TextBox>
+
+                            <cc1:TextBoxWatermarkExtender ID="TextBoxWatermarkExtender1" runat="server" TargetControlID="txtQueContenga"
+                                WatermarkText="escribir n°CP" WatermarkCssClass="watermarked" />
                         </td>
                     </tr>
                     <tr>
-                        <td>Estado
-                        </td>
-                        <td>
+                                    <td colspan="2">
                             <asp:DropDownList ID="cmbEstado" runat="server" Style="text-align: right; margin-left: 0px;"
                                 Enabled="true" CssClass="CssCombo" ToolTip="Estado de la carta de porte" Font-Size="20"
-                                Height="22px">
+                                Height="">
                                 <asp:ListItem Text="Todas (menos las rechazadas)" Value="TodasMenosLasRechazadas"
                                     Enabled="false" />
                                 <asp:ListItem Text="Incompletas" Value="Incompletas" Enabled="false" />
@@ -153,10 +167,8 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
                     </tr>
                     <tr>
-                        <td>Descarga
-                        </td>
-                        <td>
-                            <asp:DropDownList ID="cmbPeriodo" runat="server" AutoPostBack="true" Height="22px" Font-Size="20"
+                        <td colspan="2">
+                            <asp:DropDownList ID="cmbPeriodo" runat="server" AutoPostBack="true" Height="" Font-Size="20"
                                 Visible="true">
                                 <asp:ListItem Text="Hoy" />
                                 <asp:ListItem Text="Ayer" />
@@ -168,9 +180,9 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                                 <%--    <asp:ListItem Text="Filtrar por Mes/Año" />--%>
                                 <asp:ListItem Text="Personalizar" />
                             </asp:DropDownList><br />
-                            <asp:TextBox ID="txtFechaDesde" runat="server" Width="80px" MaxLength="1" autocomplete="off"
+                            <asp:TextBox ID="txtFechaDesde" runat="server" Width="150px" MaxLength="1" autocomplete="off"  Font-Size="20"
                                 TabIndex="2" AutoPostBack="false"></asp:TextBox>
-                            <cc1:CalendarExtender ID="CalendarExtender3" runat="server" Format="dd/MM/yyyy" TargetControlID="txtFechaDesde"
+                            <cc1:CalendarExtender ID="CalendarExtender3" runat="server" Format="dd/MM/yyyy" TargetControlID="txtFechaDesde" 
                                 Enabled="True">
                             </cc1:CalendarExtender>
                             <cc1:MaskedEditExtender ID="MaskedEditExtender3" runat="server" ErrorTooltipEnabled="True"
@@ -181,9 +193,9 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                             </cc1:MaskedEditExtender>
                             <cc1:TextBoxWatermarkExtender ID="TBWE2" runat="server" TargetControlID="txtFechaDesde"
                                 WatermarkText="desde" WatermarkCssClass="watermarked" />
-                            <asp:TextBox ID="txtFechaHasta" runat="server" Width="80px" MaxLength="1" TabIndex="2"
+                            <asp:TextBox ID="txtFechaHasta" runat="server" Width="150px" MaxLength="1" TabIndex="2"  Font-Size="20"
                                 AutoPostBack="false"></asp:TextBox>
-                            <cc1:CalendarExtender ID="CalendarExtender4" runat="server" Format="dd/MM/yyyy" TargetControlID="txtFechaHasta"
+                            <cc1:CalendarExtender ID="CalendarExtender4" runat="server" Format="dd/MM/yyyy" TargetControlID="txtFechaHasta" 
                                 Enabled="True">
                             </cc1:CalendarExtender>
                             <cc1:MaskedEditExtender ID="MaskedEditExtender4" runat="server" ErrorTooltipEnabled="True"
@@ -248,7 +260,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td>Corredor excl.
+                                    <td style="width: 150px">Corredor excl.
                                     </td>
                                     <td>
                                         <asp:CheckBox ID="chkCorredor" runat="server" Checked="false" />
@@ -349,8 +361,6 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                                         </asp:DropDownList>
                                     </td>
                                 </tr>
-                                <tr style="height: 20px;">
-                                </tr>
                                 <tr>
                                     <td colspan="2">
                                         <asp:DropDownList ID="cmbCriterioWHERE" runat="server" ToolTip="" Height="21px" Style="visibility: visible; overflow: auto;"
@@ -407,19 +417,11 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
                                 
                                 <tr>
-                                    <td style="">
-                                       <asp:LoginView ID="LoginView" runat="server">
-                                <LoggedInTemplate>
-                                    <asp:LoginName ID="LoginName1" runat="server" Font-Bold="false" CssClass="margender" />
-                                    |
-                                                    <asp:LoginStatus ID="LoginStatus1" runat="server" Font-Bold="false" ForeColor="white"
-                                                        LogoutAction="RedirectToLoginPage" LogoutPageUrl="~/Login.aspx" OnLoggedOut="LoginStatus1_LoggedOut"
-                                                        TabIndex="-1" LogoutText="Salir" Font-Underline="False" CssClass="margender" />
-                                </LoggedInTemplate>
-                            </asp:LoginView>
+                                    <td style="" colspan="2">
+                                       
 
 
-                                                modo escritorio
+                                                modo escritorio<br />
                              
  <%--       OFICINAS: Buenos Aires Moreno 584 P. 12 Of A / (011) 5278-8800 - 4322-4805 / buenosaires@williamsentregas.com.ar 
      // San Lorenzo (Sta. Fe) - Sgo. del Estero 1177 / (03476) 430-234 - 426-855 / sanlorenzo@williamsentregas.com.ar
@@ -427,10 +429,10 @@ Arroyo Seco (Sta. Fe) - René Favaloro 726 / (03402) 421-426 - 429-676 / arroyos
      // Bahía Blanca Ruta 252 km 0.5 - Playa el Triangulo / (0291) 400-7928 - 481-6778 / bahiablanca@williamsentregas.com.ar--%>
 
         
-        <a href="tel:5278-8800">oficina bsas 5278-8800 </a>
-        <a href="tel:(03476) 430-234">oficina sanlorenzo  (03476) 430-234 </a>
-        <a href="tel: (03402) 421-426">oficina arroyoseco (03402) 421-426 </a>
-        <a href="tel:0291-400-7928">oficina bahiablanca (0291) 400-7928 </a>
+        <a href="tel:5278-8800">oficina bsas 5278-8800 </a><br />
+        <a href="tel:(03476) 430-234">oficina sanlorenzo  (03476) 430-234 </a><br />
+        <a href="tel: (03402) 421-426">oficina arroyoseco (03402) 421-426 </a><br />
+        <a href="tel:0291-400-7928">oficina bahiablanca (0291) 400-7928 </a><br />
 
            
 
@@ -478,7 +480,7 @@ Arroyo Seco (Sta. Fe) - René Favaloro 726 / (03402) 421-426 - 429-676 / arroyos
 
                 <iframe id="iframeAAAA" runat="server" src="" visible="false" width="" height=""></iframe>
 
-                <div style="width: 400px; overflow-x: scroll">
+                <div style="width: 350px; overflow-x: scroll">
                     <rsweb:ReportViewer ID="ReportViewer2" runat="server" Font-Names="Verdana" Font-Size="8pt"
                     Width="100%" Visible="true" ZoomMode="Percent" ZoomPercent="200" Height="" SizeToReportContent="True">
 
