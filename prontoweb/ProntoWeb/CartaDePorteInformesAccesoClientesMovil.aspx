@@ -51,7 +51,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 <meta name="viewport" content="width=350px, max-width:350px, initial-scale=1">
 
 
-<body class="" style="width: 350px; max-width: 350px">
+<body class="" style="width: 350px; max-width: 350px;background-color: #F0F0FF">
 
 
     <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">

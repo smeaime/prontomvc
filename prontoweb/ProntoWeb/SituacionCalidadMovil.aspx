@@ -58,7 +58,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
 
 
-<body class="" style="width: 350px; max-width: 350px">
+<body class="" style="width: 350px; max-width: 350px;background-color: #F0F0FF">
 
 
 
@@ -313,7 +313,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
             <%--<input type="text" class="span4" id="text1" name="agent" value=""  "/>--%>
 
-            <table id="Lista" class="scroll" cellpadding="0" cellspacing="0" style="font-size: 30px;" width="400px">
+            <table id="Lista" class="scroll" cellpadding="0" cellspacing="0" style="font-size: 25px;" width="400px">
             </table>
             <div id="ListaPager" class="scroll" style="text-align: center; height: 50px;font-size: 10px;">
             </div>
