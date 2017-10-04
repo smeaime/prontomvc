@@ -64,7 +64,7 @@ document.cookie = 'killme' + escape('nothing')
     </script>
 </head>
 <%--<body class="cssLogin" style="background-image: url('<%= imgPath %>'); height: 95%" onload="cc()" >--%>
-    <meta name="viewport" content="width=360px, max-width:360px, initial-scale=1">
+    <meta name="viewport" content="width=360px, max-width:360px ">
 
 
 <body class="" style="height: ; overflow: ;background-color: #F0F0FF" onload="cc()">
