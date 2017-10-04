@@ -90,7 +90,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                     <tr>
                         <td colspan="2">
 
-
+  <asp:Image ID="LogoImage" runat="server"  ImageUrl="~/Imagenes/williams.gif"  CssClass ="MasterLogo"  Height="30px"/>
                             <b>Informe </b> |
                             <a href="SituacionCalidadMovil.aspx">Situación</a> |
                             <asp:Label ID="lblRazonSocial" runat="server" Font-Size="10" Font-Bold="false" /> |
@@ -485,6 +485,7 @@ Arroyo Seco (Sta. Fe) - René Favaloro 726 / (03402) 421-426 - 429-676 / arroyos
 
                 <iframe id="iframeAAAA" runat="server" src="" visible="false" width="" height=""></iframe>
 
+              
                 <div style="width: 350px; overflow-x: scroll">
                     <rsweb:ReportViewer ID="ReportViewer2" runat="server" Font-Names="Verdana" Font-Size="8pt"
                         Width="100%" Visible="true" ZoomMode="Percent" ZoomPercent="200" Height="" SizeToReportContent="True">
@@ -501,6 +502,8 @@ Arroyo Seco (Sta. Fe) - René Favaloro 726 / (03402) 421-426 - 429-676 / arroyos
                         <%--</div>--%>
                     </span>
                 </div>
+
+                   <asp:Image ID="Image3" runat="server" ImageUrl="~/Imagenes/williamslogin.gif" CssClass="LoginLogo LoginLogo2" />
             </ContentTemplate>
         </asp:UpdatePanel>
 
