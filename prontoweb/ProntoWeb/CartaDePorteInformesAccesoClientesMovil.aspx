@@ -51,7 +51,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 <meta name="viewport" content="width=350px, max-width:350px, initial-scale=1">
 
 
-<body class="" style="width: 350px; max-width: 350px;background-color: #F0F0FF">
+<body class="" style="width: 350px; max-width: 350px; background-color: #F0F0FF">
 
 
     <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
@@ -90,17 +90,18 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                     <tr>
                         <td colspan="2">
 
-  <asp:Image ID="LogoImage" runat="server"  ImageUrl="~/Imagenes/williams.gif"  CssClass ="MasterLogo"  Height="30px"/>
-                            <b>Informe </b> |
+                            <%--<asp:Image ID="LogoImage" runat="server" ImageUrl="~/Imagenes/williams.gif" CssClass="MasterLogo" Height="30px" />--%>
+                            <b>Informe </b>|
                             <a href="SituacionCalidadMovil.aspx">Situación</a> |
-                            <asp:Label ID="lblRazonSocial" runat="server" Font-Size="10" Font-Bold="false" /> |
+                            <asp:Label ID="lblRazonSocial" runat="server" Font-Size="10" Font-Bold="false" />
+                            |
                             <asp:LoginView ID="LoginView" runat="server">
                                 <LoggedInTemplate>
-                                   <%-- <asp:LoginName ID="LoginName1" runat="server" Font-Bold="false" CssClass="margender" />
+                                    <%-- <asp:LoginName ID="LoginName1" runat="server" Font-Bold="false" CssClass="margender" />
                                     |--%>
-                                                    <asp:LoginStatus ID="LoginStatus1" runat="server" Font-Bold="false" ForeColor=""
-                                                        LogoutAction="RedirectToLoginPage" LogoutPageUrl="~/Login.aspx" OnLoggedOut="LoginStatus1_LoggedOut"
-                                                        TabIndex="-1" LogoutText="Salir" Font-Underline="False" CssClass="margender" />
+                                    <asp:LoginStatus ID="LoginStatus1" runat="server" Font-Bold="false" ForeColor=""
+                                        LogoutAction="RedirectToLoginPage" LogoutPageUrl="~/Login.aspx" OnLoggedOut="LoginStatus1_LoggedOut"
+                                        TabIndex="-1" LogoutText="Salir" Font-Underline="False" CssClass="margender" />
                                 </LoggedInTemplate>
                             </asp:LoginView>
                         </td>
@@ -225,9 +226,8 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                         <asp:Panel ID="Panel4" runat="server" Width="">
                             <table width="">
                                 <tr>
-                                    <td>Origen
-                                    </td>
-                                    <td>
+
+                                    <td colspan="2">
                                         <asp:TextBox ID="txtProcedencia" runat="server" CssClass="CssTextBox" Text='<%# Bind("ProcedenciaDesc") %>'
                                             AutoPostBack="false"></asp:TextBox>
                                         <cc1:AutoCompleteExtender CompletionInterval="100" ID="AutoCompleteExtender27" runat="server"
@@ -235,12 +235,12 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                                             Enabled="True" FirstRowSelected="True" MinimumPrefixLength="1" ServiceMethod="GetCompletionList"
                                             ServicePath="WebServiceLocalidades.asmx" TargetControlID="txtProcedencia" UseContextKey="True">
                                         </cc1:AutoCompleteExtender>
+                                        <cc1:TextBoxWatermarkExtender ID="TextBoxWatermarkExtender2" runat="server" TargetControlID="txtProcedencia"
+                                            WatermarkText="Origen" WatermarkCssClass="watermarked" />
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td>Destino
-                                    </td>
-                                    <td>
+                                    <td colspan="2">
                                         <asp:TextBox ID="txtDestino" runat="server" Text='<%# Bind("DestinoDesc") %>' AutoPostBack="false"
                                             autocomplete="off" CssClass="CssTextBox"></asp:TextBox>
                                         <cc1:AutoCompleteExtender CompletionInterval="100" ID="AutoCompleteExtender26" runat="server"
@@ -248,25 +248,39 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                                             ServiceMethod="GetCompletionList" ServicePath="WebServiceWilliamsDestinos.asmx"
                                             UseContextKey="True" FirstRowSelected="True" CompletionListCssClass="AutoCompleteScroll"
                                             DelimiterCharacters="" Enabled="True">
-                                        </cc1:AutoCompleteExtender>
+                                        </cc1:AutoCompleteExtender>     <cc1:TextBoxWatermarkExtender ID="TextBoxWatermarkExtender3" runat="server" TargetControlID="txtDestino"
+                                            WatermarkText="Destino" WatermarkCssClass="watermarked" />
                                 </tr>
                                 <tr>
-                                    <td>Producto
-                                    </td>
-                                    <td>
+                                    <td colspan="2">
                                         <asp:TextBox ID="txt_AC_Articulo" runat="server" TabIndex="13" Style="margin-left: 0px;"
                                             autocomplete="off" CssClass="CssTextBox" AutoPostBack="false"></asp:TextBox>
                                         <cc1:AutoCompleteExtender CompletionInterval="100" ID="AutoCompleteExtender2" runat="server"
                                             CompletionListCssClass="AutoCompleteScroll" CompletionSetCount="12" DelimiterCharacters=""
                                             Enabled="True" FirstRowSelected="True" MinimumPrefixLength="1" ServiceMethod="GetCompletionList"
                                             ServicePath="WebServiceArticulos.asmx" TargetControlID="txt_AC_Articulo" UseContextKey="True">
-                                        </cc1:AutoCompleteExtender>
+                                        </cc1:AutoCompleteExtender>     <cc1:TextBoxWatermarkExtender ID="TextBoxWatermarkExtender4" runat="server" TargetControlID="txt_AC_Articulo"
+                                            WatermarkText="Producto" WatermarkCssClass="watermarked" />
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td style="width: 150px">Corredor excl.
+                                    <td colspan="2">
+                                        <asp:DropDownList ID="DropDownList2" runat="server" AutoPostBack="false" CssClass="CssTextBox"
+                                            Width="110px">
+                                            <asp:ListItem Selected="True">Entregas</asp:ListItem>
+                                            <asp:ListItem>Export</asp:ListItem>
+                                            <asp:ListItem>Ambos</asp:ListItem>
+                                        </asp:DropDownList>
                                     </td>
-                                    <td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">
+                                
+                                        <asp:DropDownList ID="cmbPuntoVenta" runat="server" CssClass="CssTextBox" Width="180px" />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">Corredor excl.
                                         <asp:CheckBox ID="chkCorredor" runat="server" Checked="false" />
                                         <asp:TextBox ID="txtCorredor" runat="server" CssClass="CssTextBox" autocomplete="off"
                                             Visible="false" Text='<%# Bind("CorredorDesc") %>' AutoPostBack="false"></asp:TextBox>
@@ -286,22 +300,10 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                         </asp:RadioButtonList>
                     </td>--%>
                                 </tr>
+                                
                                 <tr>
-                                    <td>Modo
-                                    </td>
-                                    <td>
-                                        <asp:DropDownList ID="DropDownList2" runat="server" AutoPostBack="false" CssClass="CssTextBox"
-                                            Width="110px">
-                                            <asp:ListItem Selected="True">Entregas</asp:ListItem>
-                                            <asp:ListItem>Export</asp:ListItem>
-                                            <asp:ListItem>Ambos</asp:ListItem>
-                                        </asp:DropDownList>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Destinatario excl.
-                                    </td>
-                                    <td>
+                                    <td colspan="2">Destinatario excl.
+                                  
                                         <asp:CheckBox ID="chkDestinatario" runat="server" Checked="false" />
                                         <asp:TextBox ID="txtEntregador" runat="server" Text='<%# Bind("EntregadorDesc") %>'
                                             Visible="false" AutoPostBack="false" autocomplete="off" CssClass="CssTextBox"></asp:TextBox>
@@ -333,26 +335,18 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                         </asp:RadioButtonList>
                     </td>--%>
                                 </tr>
+                                
                                 <tr>
-                                    <td>Punto venta
-                                    </td>
-                                    <td>
-                                        <asp:DropDownList ID="cmbPuntoVenta" runat="server" CssClass="CssTextBox" Width="180px" />
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Cliente Obs. (excl.)
-                                    </td>
-                                    <td>
+                                    <td colspan="2">Cliente Obs. (excl.)
+
                                         <asp:TextBox ID="txtClienteAuxiliar" runat="server" autocomplete="off" AutoPostBack="false"
                                             Visible="false" CssClass="CssTextBox" TabIndex="8" />
                                         <asp:CheckBox ID="chkClienteAuxiliar" runat="server" Checked="false" />
                                     </td>
                                 </tr>
-                                <tr>
-                                    <td>Excepciones
-                                    </td>
-                                    <td>
+                                <tr style="visibility:hidden">
+                                    <td colspan="2">Excepciones
+                                  
                                         <asp:DropDownList ID="optDivisionSyngenta" runat="server" ToolTip="Elija la División de Syngenta"
                                             Width="" Height="21px" Style="visibility: visible; overflow: auto;" CssClass="CssCombo"
                                             TabIndex="6">
@@ -375,53 +369,28 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td>Titular
+                                    <td colspan="2">
+                                        <asp:CheckBox ID="chkTitular" runat="server" Checked="true" Text="Titular" />
+
+                                        
+                                        <asp:CheckBox ID="chkIntermediario" runat="server" Checked="true" Text="Intermediario"  />
+                                        <asp:CheckBox ID="chkRemComercial" runat="server" Checked="true" Text="RComercial"  />
+
+
+
+
+                                         <asp:TextBox ID="txtVendedor" runat="server" CssClass="CssTextBox" Visible="false" ></asp:TextBox>
+                                        <asp:TextBox ID="txtIntermediario" runat="server" autocomplete="off" Visible="false" ></asp:TextBox>
+                                        <asp:TextBox ID="txtRcomercial" runat="server" autocomplete="off" AutoPostBack="false" Visible="false"></asp:TextBox>
                                     </td>
-                                    <td>
-                                        <asp:CheckBox ID="chkTitular" runat="server" Checked="true" />
-                                        <asp:TextBox ID="txtVendedor" runat="server" CssClass="CssTextBox" Text='<%# Bind("VendedorDesc") %>'
-                                            Visible="false" autocomplete="off" AutoPostBack="false"></asp:TextBox>
-                                        <cc1:AutoCompleteExtender CompletionInterval="100" ID="AutoCompleteExtender21" runat="server"
-                                            CompletionSetCount="12" TargetControlID="txtVendedor" MinimumPrefixLength="1"
-                                            ServiceMethod="GetCompletionList" ServicePath="WebServiceClientes.asmx" UseContextKey="True"
-                                            FirstRowSelected="True" CompletionListCssClass="AutoCompleteScroll" DelimiterCharacters=""
-                                            Enabled="True">
-                                        </cc1:AutoCompleteExtender>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="EncabezadoCell" style="width: 90px">Intermediario
-                                    </td>
-                                    <td class="EncabezadoCell">
-                                        <asp:CheckBox ID="chkIntermediario" runat="server" Checked="true" />
-                                        <asp:TextBox ID="txtIntermediario" runat="server" autocomplete="off" Text='<%# Bind("IntermediarioDesc") %>'
-                                            Visible="false" CssClass="CssTextBox" AutoPostBack="false" TabIndex="7"></asp:TextBox>
-                                        <cc1:AutoCompleteExtender ID="AutoCompleteExtender3" runat="server" CompletionSetCount="12"
-                                            MinimumPrefixLength="1" ServiceMethod="GetCompletionList" ServicePath="WebServiceClientes.asmx"
-                                            TargetControlID="txtIntermediario" UseContextKey="True" FirstRowSelected="True"
-                                            CompletionListCssClass="AutoCompleteScroll" CompletionInterval="100" DelimiterCharacters=""
-                                            Enabled="True">
-                                        </cc1:AutoCompleteExtender>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="EncabezadoCell" style="width: 90px">R. Comercial
-                                    </td>
-                                    <td class="EncabezadoCell" style="width: 220px">
-                                        <asp:CheckBox ID="chkRemComercial" runat="server" Checked="true" />
-                                        <asp:TextBox ID="txtRcomercial" runat="server" autocomplete="off" AutoPostBack="false"
-                                            Visible="false" Text='<%# Bind("RComercialDesc") %>' CssClass="CssTextBox" TabIndex="8"></asp:TextBox><cc1:AutoCompleteExtender
-                                                ID="AutoCompleteExtender4" runat="server" CompletionSetCount="12" MinimumPrefixLength="1"
-                                                ServiceMethod="GetCompletionList" ServicePath="WebServiceClientes.asmx" TargetControlID="txtRcomercial"
-                                                UseContextKey="True" FirstRowSelected="True" CompletionListCssClass="AutoCompleteScroll"
-                                                DelimiterCharacters="" Enabled="True" CompletionInterval="100">
-                                            </cc1:AutoCompleteExtender>
-                                    </td>
+
                                 </tr>
 
 
                                 <tr>
-                                    <td style="" colspan="2">modo escritorio<br />
+                                    <td style="font-size: 18px !important" colspan="2" >
+                                        <br /><br />
+                                        Llamar a<br />
 
                                         <%--       OFICINAS: Buenos Aires Moreno 584 P. 12 Of A / (011) 5278-8800 - 4322-4805 / buenosaires@williamsentregas.com.ar 
      // San Lorenzo (Sta. Fe) - Sgo. del Estero 1177 / (03476) 430-234 - 426-855 / sanlorenzo@williamsentregas.com.ar
@@ -485,7 +454,7 @@ Arroyo Seco (Sta. Fe) - René Favaloro 726 / (03402) 421-426 - 429-676 / arroyos
 
                 <iframe id="iframeAAAA" runat="server" src="" visible="false" width="" height=""></iframe>
 
-              
+
                 <div style="width: 350px; overflow-x: scroll">
                     <rsweb:ReportViewer ID="ReportViewer2" runat="server" Font-Names="Verdana" Font-Size="8pt"
                         Width="100%" Visible="true" ZoomMode="Percent" ZoomPercent="200" Height="" SizeToReportContent="True">
@@ -503,7 +472,7 @@ Arroyo Seco (Sta. Fe) - René Favaloro 726 / (03402) 421-426 - 429-676 / arroyos
                     </span>
                 </div>
 
-                   <asp:Image ID="Image3" runat="server" ImageUrl="~/Imagenes/williamslogin.gif" CssClass="LoginLogo LoginLogo2" />
+                <asp:Image ID="Image3" runat="server" ImageUrl="~/Imagenes/williamslogin.gif" CssClass="LoginLogo LoginLogo2" />
             </ContentTemplate>
         </asp:UpdatePanel>
 

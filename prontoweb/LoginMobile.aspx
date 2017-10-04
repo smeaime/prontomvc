@@ -64,7 +64,7 @@ document.cookie = 'killme' + escape('nothing')
     </script>
 </head>
 <%--<body class="cssLogin" style="background-image: url('<%= imgPath %>'); height: 95%" onload="cc()" >--%>
-    <meta name="viewport" content="width=350px, max-width:350px, initial-scale=1">
+    <meta name="viewport" content="width=360px, max-width:360px, initial-scale=1">
 
 
 <body class="" style="height: ; overflow: ;background-color: #F0F0FF" onload="cc()">
@@ -78,7 +78,7 @@ document.cookie = 'killme' + escape('nothing')
             <table style="border-style: none; font-family: arial,sans-serif;">
                 <tr>
                     
-                    <td align="centre" width="350px" style="margin-left: 0px">
+                    <td align="centre" width="330px" style="margin-left: 0px">
              
                         <asp:Panel ID="PanelWilliams" runat="server">
                             <div>
@@ -99,10 +99,8 @@ document.cookie = 'killme' + escape('nothing')
                                <div style="text-align: center; font-size: 14px; 
                                                     font-family: Tahoma;  ">
                                     <%--<div style="font-size: x-large; width: 400px; margin-left: 50px; font-family: Tahoma;">--%>
-                               <b> Junto a nuestros clientes</b>
-                                </div>
-                                <div style="text-align: center; font-size: 14px;  font-family: Tahoma;">
-                                    Williams Entregas S.A. nació en 1989 de la mano de
+                               <b> Junto a nuestros clientes</b><br />
+                                  Williams Entregas S.A. nació en 1989 de la mano de
                                     nuestros clientes con un objetivo
                                 bien definido: estar junto a ellos brindándole el mejor servicio.
                                 </div>
@@ -121,36 +119,36 @@ document.cookie = 'killme' + escape('nothing')
                             <br />
                             <%--         http://stackoverflow.com/questions/4891655/why-doesnt-the-password-recovery-link-show-up-in-my-login-control--%>
                             <asp:Login ID="Login1" runat="server" DestinationPageUrl="~/SeleccionarEmpresa.aspx"
-                                ForeColor="Black" TitleText="" Font-Size="20" LoginButtonText="Entrar" RememberMeText="Recordar contraseña"
+                                ForeColor="Black" TitleText="" Font-Size="18" LoginButtonText="Entrar" RememberMeText="Recordar contraseña"
                                 UserNameLabelText="Usuario" PasswordLabelText="Contraseña " Font-Bold="False"
                                 PasswordRecoveryUrl="OlvidoPassword.aspx" PasswordRecoveryText="Forgot Your Password?" BackColor="">
                                 <LayoutTemplate>
                                     <div style="text-align: left;">
                                         <asp:Label ID="UserNameLabel" runat="server" AssociatedControlID="UserName" Font-Size=""
-                                            Font-Bold="true">Usuario</asp:Label>
+                                            Font-Bold="false">Usuario</asp:Label>
                                     </div>
-                                    <asp:TextBox ID="UserName" Width="320" runat="server" Font-Size="30" Style="padding: 5px;"></asp:TextBox>
+                                    <asp:TextBox ID="UserName" Width="320" runat="server" Font-Size="20" Style="padding: 5px;"></asp:TextBox>
                                     <br />
                                     <br />
                                     <div style="text-align: left;">
                                         <asp:Label ID="PasswordLabel" runat="server" AssociatedControlID="Password" >Contraseña</asp:Label><br />
                                     </div>
-                                    <asp:TextBox ID="Password" runat="server" TextMode="Password" Font-Size="40"
-                                        Style="padding: 5px;" Width="350"></asp:TextBox><br />
+                                    <asp:TextBox ID="Password" runat="server" TextMode="Password" Font-Size="20"
+                                        Style="padding: 5px;" Width="320"></asp:TextBox><br />
                                     <br />
                                     <asp:Button ID="LoginButton" runat="server" CommandName="Login" Text=" Entrar " Height="80"
-                                        Font-Size="30" Font-Bold="true" Width="350" CssClass="but" ValidationGroup="LoginUserValidationGroup"
+                                        Font-Size="20" Font-Bold="true" Width="340" CssClass="but" ValidationGroup="LoginUserValidationGroup"
                                         Font-Names="'Lucida Grande', Tahoma" Style="margin-left: 0px; background-color: #4F6AA3; color: White; border: 1px solid #2F5BB7;" />
                                     <loginbuttonstyle cssclass="but" />
                                     <br />
                                     <br />
                                     <asp:CheckBox ID="RememberMe" runat="server" TextAlign="Left" 
-                                        Style="margin-left: 0px; vertical-align: middle" Font-Size="20" />
+                                        Style="margin-left: 0px; vertical-align: middle" Font-Size="15" />
                                     <asp:Label ID="RememberMeLabel" runat="server" AssociatedControlID="RememberMe" CssClass="inline"
-                                        Font-Size="22" Style="text-align: right; vertical-align: middle">No cerrar sesión</asp:Label>
+                                        Font-Size="15" Style="text-align: right; vertical-align: middle">No cerrar sesión</asp:Label>
                                     <br />
                                     <br />
-                                    <asp:LinkButton runat="server" Style="margin-top: 10px;" PostBackUrl="OlvidoPassword.aspx">¿Olvidaste tu contraseña?</asp:LinkButton>
+                                    <asp:LinkButton runat="server" Style="margin-top: 10px; font-size: 18px" PostBackUrl="OlvidoPassword.aspx">¿Olvidaste tu contraseña?</asp:LinkButton>
                                     <div style="text-align: left;">
                                         <br />
                                         <asp:Label ID="FailureText" runat="server" EnableViewState="false" Width="230" Font-Bold="true"
