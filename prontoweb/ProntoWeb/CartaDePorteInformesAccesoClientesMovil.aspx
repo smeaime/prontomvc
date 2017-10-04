@@ -48,7 +48,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
 
 <%--https://developer.mozilla.org/en-US/docs/Mozilla/Mobile/Viewport_meta_tag--%>
-<meta name="viewport" content="width=350px, max-width:350px">
+<meta name="viewport" content="width=350">
 
 
 <body class="" style="width: 350px; max-width: 350px; background-color: #F0F0FF">
@@ -89,14 +89,14 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
 
 
-                <table width="" style="font-size: 14px !important">
+                <table width="" style="font-size: 18px !important">
                     <tr>
-                        <td colspan="2">
+                        <td colspan="2" style="font-size: 18px !important">
 
                             <%--<asp:Image ID="LogoImage" runat="server" ImageUrl="~/Imagenes/williams.gif" CssClass="MasterLogo" Height="30px" />--%>
                             <b>Informe </b>|
                             <a href="SituacionCalidadMovil.aspx">Situación</a> |
-                            <asp:Label ID="lblRazonSocial" runat="server" Font-Size="10" Font-Bold="false" />
+                            <asp:Label ID="lblRazonSocial" runat="server"  Font-Bold="false" />
                             |
                             <asp:LoginView ID="LoginView" runat="server">
                                 <LoggedInTemplate>
@@ -127,17 +127,17 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
 
 
-                            <asp:Button ID="btnImagenes" Text="JPG" runat="server" Visible="True" CssClass="but" Font-Size="14"
+                            <asp:Button ID="btnImagenes" Text="JPG" runat="server" Visible="True" CssClass="but" Font-Size="13"
                                 Width="" Height="40" />
-                            <asp:Button ID="btnImagenesPDF" Text="PDF" runat="server" Visible="True" CssClass="but" Font-Size="14"
+                            <asp:Button ID="btnImagenesPDF" Text="PDF" runat="server" Visible="True" CssClass="but" Font-Size="13"
                                 Width="" Height="40" />
-                            <asp:Button ID="btnImagenesTiffReducido" Text="TIF" runat="server" Visible="True" CssClass="but" Font-Size="14"
+                            <asp:Button ID="btnImagenesTiffReducido" Text="TIF" runat="server" Visible="True" CssClass="but" Font-Size="13"
                                 Width="" Height="40" />
 
                             
                             <asp:UpdateProgress ID="UpdateProgress2" runat="server">
                                 <ProgressTemplate>
-                                    <div class="modal">
+                                    <div >
                                         <div class="center">
                                             <img src="Imagenes/25-1.gif" alt="" style="height: 30px" />
                                             <asp:Label ID="Label342" runat="server" Text="Actualizando datos..." ForeColor="" Font-Size="Medium"
@@ -156,7 +156,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                         <td colspan="2">
 
                             <asp:TextBox ID="txtQueContenga" runat="server" AutoPostBack="True"
-                                Font-Size="20" Width="180px"></asp:TextBox>
+                                Font-Size="20" Width="320"></asp:TextBox>
 
                             <cc1:TextBoxWatermarkExtender ID="TextBoxWatermarkExtender1" runat="server" TargetControlID="txtQueContenga"
                                 WatermarkText="buscar n°CP" WatermarkCssClass="watermarked" />
@@ -224,7 +224,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                 </table>
                 <asp:UpdatePanel ID="UpdatePanel6" runat="server">
                     <ContentTemplate>
-                        <asp:LinkButton ID="btnMasPanel" runat="server" Font-Bold="False" Font-Underline="True" Visible="false"
+                        <asp:LinkButton ID="btnMasPanel" runat="server" Font-Bold="False" Font-Underline="True" Visible="true"
                             ForeColor="" CausesValidation="False" Font-Size="18" Height="20px" BorderStyle="None"
                             Style="margin-right: 0px; margin-top: 0px; margin-bottom: 0px; margin-left: 5px;"
                             BorderWidth="5px" Width=""></asp:LinkButton>
@@ -272,7 +272,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                                 </tr>
                                 <tr>
                                     <td colspan="2">
-                                        <asp:DropDownList ID="DropDownList2" runat="server" AutoPostBack="false" CssClass="" 
+                                        <asp:DropDownList ID="DropDownList2" runat="server" AutoPostBack="false" CssClass=""  Height="30"
                                             Width="110px">
                                             <asp:ListItem Selected="True">Entregas</asp:ListItem>
                                             <asp:ListItem>Export</asp:ListItem>
@@ -280,15 +280,15 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                                         </asp:DropDownList>
                                 
 
-                                        <asp:DropDownList ID="cmbPuntoVenta" runat="server" CssClass="" Width="180px" />
+                                        <asp:DropDownList ID="cmbPuntoVenta" runat="server" CssClass="" Width="180px"  Height="30"/>
                                     </td>
                                 </tr>
                                 <tr>
                                     
                                     <td colspan="2">
                                         Excluyentes <br />
-                                        Corrdor 
-                                        <asp:CheckBox ID="chkCorredor" runat="server" Checked="false" />
+                                         
+                                        <asp:CheckBox ID="chkCorredor" runat="server" Checked="false"   Text="Corrdor" Font-Size="" />
                                         <asp:TextBox ID="txtCorredor" runat="server" CssClass="" autocomplete="off"
                                             Visible="false" Text='<%# Bind("CorredorDesc") %>' AutoPostBack="false"></asp:TextBox>
                                         <cc1:AutoCompleteExtender CompletionInterval="100" ID="AutoCompleteExtender24" runat="server"
@@ -298,9 +298,9 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                                         </cc1:AutoCompleteExtender>
 
 
-                                        Destinatrio
+                                        
                                   
-                                        <asp:CheckBox ID="chkDestinatario" runat="server" Checked="false" />
+                                        <asp:CheckBox ID="chkDestinatario" runat="server" Checked="false"  Text="Destinatrio" Font-Size="" />
                                         <asp:TextBox ID="txtEntregador" runat="server" Text='<%# Bind("EntregadorDesc") %>'
                                             Visible="false" AutoPostBack="false" autocomplete="off" CssClass=""></asp:TextBox>
                                         <cc1:AutoCompleteExtender CompletionInterval="100" ID="AutoCompleteExtender25" runat="server"
@@ -311,11 +311,11 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                                         </cc1:AutoCompleteExtender>
 
 
-                                        Cli.Obs.
+                                       
 
                                         <asp:TextBox ID="txtClienteAuxiliar" runat="server" autocomplete="off" AutoPostBack="false"
                                             Visible="false" CssClass="" TabIndex="8" />
-                                        <asp:CheckBox ID="chkClienteAuxiliar" runat="server" Checked="false" />
+                                        <asp:CheckBox ID="chkClienteAuxiliar" runat="server" Checked="false" Text="Cli.Obs."  />
                                 </tr>
                                 <tr style="visibility: hidden; display: none">
                                     <td colspan="2">Excepciones
@@ -334,7 +334,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                                 </tr>
                                 <tr>
                                     <td colspan="2">
-                                        <asp:DropDownList ID="cmbCriterioWHERE" runat="server" ToolTip="" Height="21px" Style="visibility: visible; overflow: auto;"
+                                        <asp:DropDownList ID="cmbCriterioWHERE" runat="server" ToolTip="" Height="30px" Style="visibility: visible; overflow: auto;"
                                             CssClass="CssCombo" TabIndex="6">
                                             <asp:ListItem Text="y TODOS estos" Value="todos" />
                                             <asp:ListItem Text="y ALGUNO de estos" Value="alguno" Selected="True" />

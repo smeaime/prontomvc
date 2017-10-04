@@ -873,6 +873,12 @@ namespace ProntoMVC.Tests
             // la grilla de situacion de calidad
             // marcar la situacion de varias cartas
             // como filtrar la grilla de situacion segun el usuario?
+
+
+           ClientesQueParticipanEnCartas( ListadoDeCartasModificadas(  UltimaFechaDeEnvioNotificaciones))
+
+
+
         }
 
 
