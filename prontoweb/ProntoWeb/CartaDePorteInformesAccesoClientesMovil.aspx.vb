@@ -150,13 +150,13 @@ Partial Class CartaDePorteInformesAccesoClientes
         'AjaxControlToolkit.ToolkitScriptManager.GetCurrent(Me.Page).RegisterPostBackControl(btnTexto)
 
         AutoCompleteExtender2.ContextKey = HFSC.Value
-        AutoCompleteExtender21.ContextKey = HFSC.Value
+        'AutoCompleteExtender21.ContextKey = HFSC.Value
         AutoCompleteExtender24.ContextKey = HFSC.Value
         AutoCompleteExtender25.ContextKey = HFSC.Value
         AutoCompleteExtender26.ContextKey = HFSC.Value
         AutoCompleteExtender27.ContextKey = HFSC.Value
-        AutoCompleteExtender3.ContextKey = HFSC.Value
-        AutoCompleteExtender4.ContextKey = HFSC.Value
+        'AutoCompleteExtender3.ContextKey = HFSC.Value
+        'AutoCompleteExtender4.ContextKey = HFSC.Value
 
 
     End Sub
