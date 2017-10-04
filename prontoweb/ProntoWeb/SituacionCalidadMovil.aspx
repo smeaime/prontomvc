@@ -313,7 +313,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
             <%--<input type="text" class="span4" id="text1" name="agent" value=""  "/>--%>
 
-            <table id="Lista" class="scroll" cellpadding="0" cellspacing="0" style="font-size: 25px;" width="400px">
+            <table id="Lista" class="scroll" cellpadding="0" cellspacing="0" style="font-size: 16px;" width="400px">
             </table>
             <div id="ListaPager" class="scroll" style="text-align: center; height: 50px;font-size: 10px;">
             </div>
