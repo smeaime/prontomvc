@@ -21,7 +21,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
 
 <%--https://developer.mozilla.org/en-US/docs/Mozilla/Mobile/Viewport_meta_tag--%>
-<meta name="viewport" content="width=350px, initial-scale=1">
+<meta name="viewport" content="width=350">
 
 <head runat="server">
 
@@ -58,7 +58,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
 
 
-<body class="" style="width: 350px; max-width: 350px;background-color: #F0F0FF">
+<body class="" style="width: 350px; max-width: 350px; background-color: #F0F0FF">
 
 
 
@@ -143,7 +143,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                 left: 0;
                 height: 100%;
                 width: 100%;
-                background: rgba( 255, 255, 255, .8 ) url('~/Content/images/fhhrx.gif') 50% 50% no-repeat;
+                /*background: rgba( 255, 255, 255, .8 ) url('~/Content/images/fhhrx.gif') 50% 50% no-repeat;*/
             }
 
             /* When the body has the loading class, we turn
@@ -167,14 +167,15 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
         <a href="CartaDePorteInformesAccesoClientesMovil.aspx">Informe </a>|
                             <b>Situación</b> |
-                            <asp:Label ID="lblRazonSocial" runat="server" Font-Size="10" Font-Bold="false" />        |
+                            <asp:Label ID="lblRazonSocial" runat="server" Font-Size="10" Font-Bold="false" />
+        |
                             <asp:LoginView ID="LoginView" runat="server">
                                 <LoggedInTemplate>
                                     <%--<asp:LoginName ID="LoginName1" runat="server" Font-Bold="false" CssClass="margender" />
                                     |--%>
-                                                    <asp:LoginStatus ID="LoginStatus1" runat="server" Font-Bold="false" ForeColor=""
-                                                        LogoutAction="RedirectToLoginPage" LogoutPageUrl="~/Login.aspx" OnLoggedOut="LoginStatus1_LoggedOut"
-                                                        TabIndex="-1" LogoutText="Salir" Font-Underline="False" CssClass="margender" />
+                                    <asp:LoginStatus ID="LoginStatus1" runat="server" Font-Bold="false" ForeColor=""
+                                        LogoutAction="RedirectToLoginPage" LogoutPageUrl="~/Login.aspx" OnLoggedOut="LoginStatus1_LoggedOut"
+                                        TabIndex="-1" LogoutText="Salir" Font-Underline="False" CssClass="margender" />
                                 </LoggedInTemplate>
                             </asp:LoginView>
 
@@ -193,15 +194,15 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
             <asp:UpdatePanel ID="UpdatePanelResumen" runat="server" Visible="true">
                 <ContentTemplate>
 
-                    <table style="color: black;">
+                    <table style="color: black; width: 350px">
                         <tr>
                             <td class="" style="width: ; height: 18px;"></td>
                             <td class="" style="width: ; height: 18px;">
                                 <asp:DropDownList ID="cmbEstado" runat="server" Style="text-align: right; margin-left: 0px;"
-                                    CssClass="CssCombo" ToolTip="Estado de la carta de porte" Font-Size="Small" Height="22px" Width="" Enabled="false">
+                                    CssClass="CssCombo" ToolTip="Estado de la carta de porte" Font-Size="18" Height="" Width="340" Enabled="false">
                                     <%--dejo el combito deshablitado porque las funciones no tienen todavia el parametro de "estado", estan harcodeadas en "11" --%>
 
-                                    <asp:ListItem Text="DESCARGAS de hoy + POSICIONES filtradas" Value="DescargasDeHoyMasTodasLasPosicionesEnRangoFecha"
+                                    <asp:ListItem Text="DESC de hoy + POSIC filt" Value="DescargasDeHoyMasTodasLasPosicionesEnRangoFecha"
                                         Selected="True" />
 
                                     <asp:ListItem Text="Todas (menos las rechazadas)" Value="TodasMenosLasRechazadas" />
@@ -219,7 +220,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                         <tr>
                             <td class="" style="width: ; height: 18px;"></td>
                             <td class="" style="width: ; height: 18px;">
-                                <asp:DropDownList ID="cmbPeriodo" runat="server" AutoPostBack="true" Height="22px" Width="100px" Style="color: black;"
+                                <asp:DropDownList ID="cmbPeriodo" runat="server" AutoPostBack="true" Height="" Width="100px"  Font-Size="20" Style="color: black;"
                                     Visible="true">
                                     <asp:ListItem Text="Hoy" Selected="True" />
                                     <asp:ListItem Text="Ayer" />
@@ -260,17 +261,13 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                             </td>
 
                         </tr>
-                        <tr>
-                            <td class="" style="width: ; height: 18px;"></td>
-                            <td class="">
-                                <asp:DropDownList ID="cmbPuntoVenta" runat="server" CssClass="CssTextBox" Width="128px" Style="color: black;" />
-                            </td>
-
-                        </tr>
 
                         <tr>
                             <td class="" style="width: ; height: 18px;"></td>
                             <td class="" style="width: ; height: 18px;">
+                                <asp:DropDownList ID="cmbPuntoVenta" runat="server" CssClass="" Width="128px"  Font-Size="20"  Style="color: black;" />
+
+
                                 <asp:TextBox ID="txtDestino" runat="server" Text='<%# Bind("DestinoDesc") %>' AutoPostBack="false" Style="color: black;"
                                     autocomplete="off" CssClass="CssTextBox" Width="200px"></asp:TextBox>
                                 <cc1:AutoCompleteExtender CompletionInterval="100" ID="AutoCompleteExtender26" runat="server"
@@ -280,8 +277,8 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                                     UseContextKey="True" FirstRowSelected="True" CompletionListCssClass="AutoCompleteScroll"
                                     DelimiterCharacters="" Enabled="True">
                                 </cc1:AutoCompleteExtender>
-                                    <cc1:TextBoxWatermarkExtender ID="TextBoxWatermarkExtender1" runat="server" TargetControlID="txtDestino"
-                                WatermarkText="destino" WatermarkCssClass="watermarked" />
+                                <cc1:TextBoxWatermarkExtender ID="TextBoxWatermarkExtender1" runat="server" TargetControlID="txtDestino"
+                                    WatermarkText="destino" WatermarkCssClass="watermarked" />
                         </tr>
 
                     </table>
@@ -289,36 +286,37 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                 </ContentTemplate>
             </asp:UpdatePanel>
 
+            <div style="visibility:hidden; display: none">
 
-            <asp:Button ID="btnExportarGrilla" Text="EXCEL" runat="server" Visible="false" CssClass="btn btn-primary"
-                Width="150" Height="40" />
+                <asp:Button ID="btnExportarGrilla" Text="EXCEL" runat="server" Visible="false" CssClass="btn btn-primary"
+                    Width="150" Height="40" />
 
-            <input type="button" id="btnExportarGrillaAjax2" value="Excel" class="btn btn-primary" />
+                <input type="button" id="btnExportarGrillaAjax2" value="Excel" class="btn btn-primary" />
 
-            <input type="button" id="btnExportarGrillaAjax" value="BLD demor" class="btn btn-primary" />
-
-
-            <input type="button" id="btnPanelInformeAjax" value="Resumen" class="btn btn-primary" />
-
-            <asp:Button ID="btnPanelInforme" Text="RESUMEN" runat="server" Visible="false" CssClass="btn btn-primary" />
+                <input type="button" id="btnExportarGrillaAjax" value="BLD demor" class="btn btn-primary" />
 
 
+                <input type="button" id="btnPanelInformeAjax" value="Resumen" class="btn btn-primary" />
 
-            <%--<input type="button" id="btnLog" value="Log" class="btn btn-primary" />--%>
-            <input type="button" id="btnMostrarMenu" value="->" class="btn btn-primary" />
+                <asp:Button ID="btnPanelInforme" Text="RESUMEN" runat="server" Visible="false" CssClass="btn btn-primary" />
 
-            <div id="Salida2"></div>
-            <asp:Literal ID="salida" runat="server"></asp:Literal>
 
+
+                <%--<input type="button" id="btnLog" value="Log" class="btn btn-primary" />--%>
+                <input type="button" id="btnMostrarMenu" value="->" class="btn btn-primary" />
+
+                <div id="Salida2"></div>
+                <asp:Literal ID="salida" runat="server"></asp:Literal>
+            </div>
 
             <%--<input type="text" class="span4" id="text1" name="agent" value=""  "/>--%>
 
             <table id="Lista" class="scroll" cellpadding="0" cellspacing="0" style="font-size: 16px;" width="400px">
             </table>
-            <div id="ListaPager" class="scroll" style="text-align: center; height: 50px;font-size: 10px;">
+            <div id="ListaPager" class="scroll" style="text-align: center; height: 50px; font-size: 10px;">
             </div>
 
-
+            <button id="vale" >cambiar situacion</button>
 
 
 
@@ -877,6 +875,76 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
 
 
+
+
+
+
+
+        $("#Vale").click(function () {
+
+            var $grid = $("#Lista");
+            var lista = $grid.jqGrid("getGridParam", "selarrrow");
+            if ((lista == null) || (lista.length == 0)) {
+                // http://stackoverflow.com/questions/11762757/how-to-retrieve-the-cell-information-for-mouseover-event-in-jqgrid
+
+                //como no hay renglones tildados, tomo el renglon sobre el que está el cursor
+                lista = [ rowIdContextMenu ] ;
+                // lista = $grid.jqGrid('getGridParam', 'selrow')
+
+                if ((lista == null) || (lista.length == 0)) {
+                    alert("No hay rms elegidas " + rowIdContextMenu);
+                    return;
+                }
+
+            }
+
+
+                generarvale(lista, "administrador", "",
+                                    function () {
+                                        $("#loading").hide();
+                                        $('#Lista').trigger('reloadGrid');
+                                    })
+
+
+
+
+
+        })
+
+
+
+
+        function generarvale(ids, user, pass, callback) {
+            //juntar los ids y mandarlos?
+
+
+            $("#loading").show();
+
+
+            $.ajax({
+                type: 'POST',
+                contentType: 'application/json; charset=utf-8',
+                url: '@Url.Action("GenerarValesAlmacen", "Requerimiento")',
+                data: JSON.stringify({
+                    idDetalleRequerimientos: ids,
+                    user: user,
+                    pass: pass
+                })
+            }).done(function () {
+                //if (typeof callback == "function") callback();
+                $("#loading").hide();
+                alert("Vale creado")
+                $('#Lista').trigger('reloadGrid');
+            }).fail(function () {
+                $("#loading").hide();
+                alert("No se pudo crear el vale")
+            });
+        }
+
+
+
+
+
         function GrabarFila(gridId) {
 
             $grid = $('#Lista');
@@ -1312,7 +1380,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 { name: ' IdCartasDePorte', index: ' IdCartasDePorte', align: 'left', width: 100, editable: false, hidden: true },
 
 {
-    name: 'NumeroCartaEnTextoParaBusqueda', index: 'NumeroCartaEnTextoParaBusqueda', width: 90, align: 'left', sorttype: "text", sortable: false
+    name: 'NumeroCartaEnTextoParaBusqueda', index: 'NumeroCartaEnTextoParaBusqueda', width: 90, align: 'left', sorttype: "text", sortable: false, frozen:true
 , editable: false, editrules: { required: false, number: true }, edittype: 'text',
 
     searchoptions: { sopt: ['bw', 'cn', 'eq'] },
@@ -2240,7 +2308,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                 shrinkToFit: false,
                 
                 width: 350,//'auto',
-                height: $(window).height() - 310, // '100%'
+                height: $(window).height() - 250, // '100%'
                 altRows: false,
                 footerrow: false,
                 userDataOnFooter: true,
@@ -2302,6 +2370,8 @@ closeOnEscape: true, closeAfterSearch: true, multipleSearch: true, overlay: fals
                 enableClear: false
             }); // si queres sacar el enableClear, definilo en las searchoptions de la columna específica http://www.trirand.com/blog/?page_id=393/help/clearing-the-clear-icon-in-a-filtertoolbar/
 
+
+jQuery("#Lista").jqGrid('setFrozenColumns');
 
             //$('#Lista').jqGrid('setGridWidth', '1000');
             //$('#Lista').jqGrid('setGridWidth', $(window).width() - 40);
