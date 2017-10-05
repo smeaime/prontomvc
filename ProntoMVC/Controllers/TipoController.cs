@@ -265,6 +265,53 @@ namespace ProntoMVC.Controllers
             return Json(jsonData, JsonRequestBehavior.AllowGet);
         }
 
+        public virtual JsonResult TiposGenericosArticulos_DynamicGridData(string sidx, string sord, int page, int rows, bool _search, string filters, int Grupo = 1)
+        {
+            int totalRecords = 0;
+            int pageSize = rows;
+
+            var pagedQuery = Filters.FiltroGenerico<Data.Models.Tipos>
+                                ("", sidx, sord, page, rows, _search, filters, db, ref totalRecords);
+
+            // esto filtro se debería aplicar antes que el filtrogenerico (queda mal paginado si no)
+            var Entidad = pagedQuery.Where(s => s.Grupo == Grupo).AsQueryable();
+
+            int totalPages = (int)Math.Ceiling((float)totalRecords / (float)pageSize);
+
+            var data = (from a in Entidad
+                        select new
+                        {
+                            a.IdTipo,
+                            a.Descripcion,
+                            a.Abreviatura,
+                            a.Codigo,
+                            a.Grupo
+                        }).OrderBy(sidx + " " + sord).ToList();
+
+            var jsonData = new jqGridJson()
+            {
+                total = totalPages,
+                page = page,
+                records = totalRecords,
+                rows = (from a in data
+                        select new jqGridRowJson
+                        {
+                            id = a.IdTipo.ToString(),
+                            cell = new string[] { 
+                                "",
+                                //"<a href="+ Url.Action("Imprimir",new {id = a.IdGanancia} )  +">Imprimir</>",
+                                a.IdTipo.ToString(),
+                                a.Descripcion.NullSafeToString(),
+                                a.Abreviatura.NullSafeToString(),
+                                a.Codigo.ToString(),
+                                a.Grupo.NullSafeToString(),
+                            }
+                        }).ToArray()
+            };
+
+            return Json(jsonData, JsonRequestBehavior.AllowGet);
+        }
+
         public virtual ActionResult GetTipos()
         {
             Dictionary<int, string> tabla = new Dictionary<int, string>();
