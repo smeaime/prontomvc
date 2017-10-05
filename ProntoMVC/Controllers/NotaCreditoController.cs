@@ -710,6 +710,12 @@ namespace ProntoMVC.Controllers
                 if (Cliente.Estados_Proveedores != null) { if ((Cliente.Estados_Proveedores.Activo ?? "") == "NO") { sErrorMsg += "\n" + "Cliente inhabilitado"; } }
             }
 
+            o.PorcentajeIva1 = 0;
+            foreach (ProntoMVC.Data.Models.DetalleNotasCredito x in o.DetalleNotasCreditoes)
+            {
+                if ((o.PorcentajeIva1 ?? 0) != 0) { o.PorcentajeIva1 = x.PorcentajeIva; }
+            }
+
             foreach (ProntoMVC.Data.Models.DetalleNotasCreditoImputacione x in o.DetalleNotasCreditoImputaciones)
             {
                 mTotalImputaciones += x.Importe ?? 0;
@@ -1468,7 +1474,8 @@ namespace ProntoMVC.Controllers
             string mArchivoXMLEnviado2 = "";
             string mArchivoXMLRecibido2 = "";
             string glbArchivoCertificadoPassWord = "";
-
+            string mTicketAcceso = "";
+            
             Int32 mIdPuntoVenta = 0;
             Int32 mPuntoVenta = 0;
             Int32 mIdMoneda = 0;
@@ -1503,6 +1510,7 @@ namespace ProntoMVC.Controllers
             mIdMonedaPesos = parametros.IdMoneda ?? 0;
             mIdMonedaDolar = parametros.IdMonedaDolar ?? 0;
             mIdMonedaEuro = parametros.IdMonedaEuro ?? 0;
+            glbPathPlantillas = parametros.PathPlantillas ?? "";
 
             glbArchivoCertificadoPassWord = BuscarClaveINI("ArchivoCertificadoPassWord", -1);
 
@@ -1557,8 +1565,6 @@ namespace ProntoMVC.Controllers
             var PuntoVenta = db.PuntosVentas.Where(c => c.IdPuntoVenta == mIdPuntoVenta).SingleOrDefault();
             if (PuntoVenta != null) { mWebService = PuntoVenta.WebService ?? ""; }
 
-            glbPathPlantillas = AppDomain.CurrentDomain.BaseDirectory + "Documentos";
-
             FE = new WSAFIPFE.Factura();
             //WSAFIPFE.Factura FEx = new WSAFIPFE.Factura();
 
@@ -1584,7 +1590,39 @@ namespace ProntoMVC.Controllers
                     FE.ArchivoCertificadoPassword = glbArchivoCertificadoPassWord;
                 }
 
-                if (mResul) mResul = FE.f1ObtenerTicketAcceso();
+                if (mResul)
+                {
+                    var Parametros2_ = db.Parametros2.Where(p => p.Campo == "UltimoTicketAccesoWSFE1").FirstOrDefault();
+                    if (Parametros2_ != null) { mTicketAcceso = Parametros2_.Valor ?? ""; }
+                    if (mTicketAcceso.Length == 0)
+                    {
+                        mResul = FE.f1ObtenerTicketAcceso();
+                    }
+                    else
+                    {
+                        mResul = FE.f1RestaurarTicketAcceso(mTicketAcceso);
+                        if (!mResul || !FE.f1TicketEsValido)
+                        {
+                            mResul = FE.f1ObtenerTicketAcceso();
+                        }
+                    }
+                    mTicketAcceso = FE.f1GuardarTicketAcceso();
+
+                    if (Parametros2_ != null)
+                    {
+                        Parametros2_.Valor = mTicketAcceso;
+                        db.Entry(Parametros2_).State = System.Data.Entity.EntityState.Modified;
+                    }
+                    else
+                    {
+                        Parametros2_ = new Parametros2();
+                        Parametros2_.Campo = "UltimoTicketAccesoWSFE1";
+                        Parametros2_.Valor = mTicketAcceso;
+                        db.Parametros2.Add(Parametros2_);
+                    }
+                    db.SaveChanges();
+                } 
+                
                 if (glbDebugFacturaElectronica) { Console.Write("f1ObtenerTicketAcceso : " + FE.UltimoMensajeError + " - " + FE.F1RespuestaDetalleObservacionMsg); }
 
                 if (mResul)

@@ -144,8 +144,8 @@ namespace ProntoMVC.Controllers
                             IdBienesOServicios = (a.BienesOServicios ?? "") == "B" ? 1 : ((a.BienesOServicios ?? "") == "S" ? 2 : 0),
                             BienesOServicios = (a.BienesOServicios ?? "") == "B" ? "Bienes" : ((a.BienesOServicios ?? "") == "S" ? "Servicios" : "")
                         }).Where(campo).OrderBy(sidx + " " + sord)
-//.Skip((currentPage - 1) * pageSize).Take(pageSize)
-.ToList();
+                        .Skip((currentPage - 1) * pageSize).Take(pageSize)
+                        .ToList();
 
             var jsonData = new jqGridJson()
             {
