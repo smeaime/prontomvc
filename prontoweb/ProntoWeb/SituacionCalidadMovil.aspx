@@ -71,8 +71,8 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
     <%--/////////////////////////////////////////////////////////////--%>
     <%--///////////     bootstrap    /////////////////////////////--%>
     <%--/////////////////////////////////////////////////////////////--%>
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<%--    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>--%>
     <%--/////////////////////////////////////////////////////////////--%>
     <%--/////////////////////////////////////////////////////////////--%>
     <%--////////////    jqgrid     //////////////////////////////////--%>
@@ -199,7 +199,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                             <td class="" style="width: ; height: 18px;"></td>
                             <td class="" style="width: ; height: 18px;">
                                 <asp:DropDownList ID="cmbEstado" runat="server" Style="text-align: right; margin-left: 0px;"
-                                    CssClass="CssCombo" ToolTip="Estado de la carta de porte" Font-Size="18" Height="" Width="340" Enabled="false">
+                                    CssClass="CssCombo" ToolTip="Estado de la carta de porte" Font-Size="14" Height="" Width="150" Enabled="false">
                                     <%--dejo el combito deshablitado porque las funciones no tienen todavia el parametro de "estado", estan harcodeadas en "11" --%>
 
                                     <asp:ListItem Text="DESC de hoy + POSIC filt" Value="DescargasDeHoyMasTodasLasPosicionesEnRangoFecha"
@@ -215,12 +215,14 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                                     <asp:ListItem Text="sin liberar en Nota de crédito" Value="EnNotaCredito" />
                                 </asp:DropDownList>
 
+                                  <asp:DropDownList ID="cmbPuntoVenta" runat="server" CssClass="" Width="150px" Font-Size="14" Style="color: black;" />
+
                             </td>
                         </tr>
                         <tr>
                             <td class="" style="width: ; height: 18px;"></td>
                             <td class="" style="width: ; height: 18px;">
-                                <asp:DropDownList ID="cmbPeriodo" runat="server" AutoPostBack="true" Height="" Width="120px" Font-Size="20" Style="color: black;"
+                                <asp:DropDownList ID="cmbPeriodo" runat="server" AutoPostBack="true" Height="" Width="120px" Font-Size="14" Style="color: black;"
                                     Visible="true">
                                     <asp:ListItem Text="Hoy" Selected="True" />
                                     <asp:ListItem Text="Ayer" />
@@ -232,7 +234,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                                     <%--    <asp:ListItem Text="Filtrar por Mes/Año" />--%>
                                     <asp:ListItem Text="Personalizar" />
                                 </asp:DropDownList>
-                                <asp:TextBox ID="txtFechaDesde" runat="server" Width="100px" MaxLength="1" autocomplete="off" Style="color: black;" Font-Size="20"
+                                <asp:TextBox ID="txtFechaDesde" runat="server" Width="100px" MaxLength="1" autocomplete="off" Style="color: black;" Font-Size="14"
                                     TabIndex="2" AutoPostBack="false"></asp:TextBox>
                                 <cc1:CalendarExtender ID="CalendarExtender3" runat="server" Format="dd/MM/yyyy" TargetControlID="txtFechaDesde"
                                     Enabled="True">
@@ -245,7 +247,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                                 </cc1:MaskedEditExtender>
                                 <cc1:TextBoxWatermarkExtender ID="TBWE2" runat="server" TargetControlID="txtFechaDesde"
                                     WatermarkText="desde" WatermarkCssClass="watermarked" />
-                                <asp:TextBox ID="txtFechaHasta" runat="server" Width="100px" MaxLength="1" TabIndex="2" Style="color: black;" Font-Size="20"
+                                <asp:TextBox ID="txtFechaHasta" runat="server" Width="100px" MaxLength="1" TabIndex="2" Style="color: black;" Font-Size="14"
                                     AutoPostBack="false"></asp:TextBox>
                                 <cc1:CalendarExtender ID="CalendarExtender4" runat="server" Format="dd/MM/yyyy" TargetControlID="txtFechaHasta"
                                     Enabled="True">
@@ -262,13 +264,12 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
                         </tr>
 
-                        <tr>
+                        <tr style="visibility:hidden;display:none">
                             <td class="" style="width: ; height: 18px;"></td>
                             <td class="" style="width: ; height: 18px;">
-                                <asp:DropDownList ID="cmbPuntoVenta" runat="server" CssClass="" Width="128px" Font-Size="20" Style="color: black;" />
+                              
 
-
-                                <asp:TextBox ID="txtDestino" runat="server" Text='<%# Bind("DestinoDesc") %>' AutoPostBack="false" Style="color: black;"
+                                <asp:TextBox ID="txtDestino" runat="server" Text='<%# Bind("DestinoDesc") %>' AutoPostBack="false" Style="color: black;" Visible="false"
                                     autocomplete="off" CssClass="CssTextBox" Width="200px"></asp:TextBox>
                                 <cc1:AutoCompleteExtender CompletionInterval="100" ID="AutoCompleteExtender26" runat="server"
                                     OnClientItemSelected="RefrescaGrilla()"
@@ -2320,8 +2321,8 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                 multiselect: true,
                 shrinkToFit: false,
                 
-                width: 350,//'auto',
-                height: $(window).height() - 250, // '100%'
+                width: 340,//'auto',
+                height: $(window).height() - 150, // '100%'
                 altRows: false,
                 footerrow: false,
                 userDataOnFooter: true,
@@ -2330,6 +2331,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                 cellsubmit: 'clientArray',
                 dataUrl: "WebServiceClientes.asmx/EmpleadoEditGridData",
 
+                recordtext: "View {0} - {1} of <span style=' font-size: 20px;'>{2}</span>",
                 //toppager: true,
 
                 gridview: true
