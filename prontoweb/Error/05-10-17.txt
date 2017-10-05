@@ -1,0 +1,128 @@
+
+Log Entry : 
+10/05/2017 10:03:08
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesAccesoClientesMovil.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartaDePorteInformesAccesoClientes.BindTypeDropDown() en C:\bdl\pronto\prontoweb\ProntoWeb\CartaDePorteInformesAccesoClientesMovil.aspx.vb:línea 225
+App_Web_cartadeporteinformesaccesoclientesmovil.aspx.4199bbd4._k45c6-4
+__________________________
+
+Log Entry : 
+10/05/2017 10:03:21
+Error in: http://localhost:50769/ProntoWeb/SituacionCalidadMovil.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en SituacionCalidadMovil.BindTypeDropDown() en C:\bdl\pronto\prontoweb\ProntoWeb\SituacionCalidadMovil.aspx.vb:línea 159
+App_Web_situacioncalidadmovil.aspx.4199bbd4.l2nxo6b4
+__________________________
+
+Log Entry : 
+10/05/2017 10:09:09
+Error in: http://localhost:50769/ProntoWeb/SituacionCalidadMovil.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en SituacionCalidadMovil.BindTypeDropDown() en C:\bdl\pronto\prontoweb\ProntoWeb\SituacionCalidadMovil.aspx.vb:línea 159
+App_Web_situacioncalidadmovil.aspx.4199bbd4.yue_0xzv
+__________________________
+
+Log Entry : 
+10/05/2017 10:09:25
+Error in: http://localhost:50769/ProntoWeb/SituacionCalidadMovil.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en SituacionCalidadMovil.BindTypeDropDown() en C:\bdl\pronto\prontoweb\ProntoWeb\SituacionCalidadMovil.aspx.vb:línea 159
+App_Web_situacioncalidadmovil.aspx.4199bbd4.og3vdvms
+__________________________
+
+Log Entry : 
+10/05/2017 10:09:57
+Error in: http://localhost:50769/ProntoWeb/SituacionCalidadMovil.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en SituacionCalidadMovil.BindTypeDropDown() en C:\bdl\pronto\prontoweb\ProntoWeb\SituacionCalidadMovil.aspx.vb:línea 159
+App_Web_situacioncalidadmovil.aspx.4199bbd4.qjghah2b
+__________________________
+
+Log Entry : 
+10/05/2017 10:11:10
+Error in: http://localhost:50769/ProntoWeb/SituacionCalidadMovil.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en SituacionCalidadMovil.BindTypeDropDown() en C:\bdl\pronto\prontoweb\ProntoWeb\SituacionCalidadMovil.aspx.vb:línea 159
+App_Web_situacioncalidadmovil.aspx.4199bbd4.oihke5lr
+__________________________
+
+Log Entry : 
+10/05/2017 10:11:21
+Error in: http://localhost:50769/ProntoWeb/SituacionCalidadMovil.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en SituacionCalidadMovil.BindTypeDropDown() en C:\bdl\pronto\prontoweb\ProntoWeb\SituacionCalidadMovil.aspx.vb:línea 159
+App_Web_situacioncalidadmovil.aspx.4199bbd4.us2pdewz
+__________________________
+
+Log Entry : 
+10/05/2017 10:12:11
+Error in: http://localhost:50769/ProntoWeb/SituacionCalidadMovil.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en SituacionCalidadMovil.BindTypeDropDown() en C:\bdl\pronto\prontoweb\ProntoWeb\SituacionCalidadMovil.aspx.vb:línea 159
+App_Web_situacioncalidadmovil.aspx.4199bbd4.vt32muxd
+__________________________
+
+Log Entry : 
+10/05/2017 10:12:20
+Error in: http://localhost:50769/ProntoWeb/SituacionCalidadMovil.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en SituacionCalidadMovil.BindTypeDropDown() en C:\bdl\pronto\prontoweb\ProntoWeb\SituacionCalidadMovil.aspx.vb:línea 159
+App_Web_situacioncalidadmovil.aspx.4199bbd4.nuzwcahk
+__________________________
+
+Log Entry : 
+10/05/2017 10:13:24
+Error in: http://localhost:50769/ProntoWeb/SituacionCalidadMovil.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en SituacionCalidadMovil.BindTypeDropDown() en C:\bdl\pronto\prontoweb\ProntoWeb\SituacionCalidadMovil.aspx.vb:línea 159
+App_Web_situacioncalidadmovil.aspx.4199bbd4.rugyqfcq
+__________________________
+
+Log Entry : 
+10/05/2017 10:13:39
+Error in: http://localhost:50769/ProntoWeb/SituacionCalidadMovil.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en SituacionCalidadMovil.BindTypeDropDown() en C:\bdl\pronto\prontoweb\ProntoWeb\SituacionCalidadMovil.aspx.vb:línea 159
+App_Web_situacioncalidadmovil.aspx.4199bbd4.7w1dcqcp
+__________________________
+
+Log Entry : 
+10/05/2017 10:13:56
+Error in: http://localhost:50769/ProntoWeb/SituacionCalidadMovil.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en SituacionCalidadMovil.BindTypeDropDown() en C:\bdl\pronto\prontoweb\ProntoWeb\SituacionCalidadMovil.aspx.vb:línea 159
+App_Web_situacioncalidadmovil.aspx.4199bbd4.ipi00e9d
+__________________________
+
+Log Entry : 
+10/05/2017 10:15:08
+Error in: http://localhost:50769/ProntoWeb/SituacionCalidadMovil.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en SituacionCalidadMovil.BindTypeDropDown() en C:\bdl\pronto\prontoweb\ProntoWeb\SituacionCalidadMovil.aspx.vb:línea 159
+App_Web_situacioncalidadmovil.aspx.4199bbd4.6ew1kuwh
+__________________________
+
+Log Entry : 
+10/05/2017 10:43:40
+Error in: http://localhost:50769/ProntoWeb/SituacionCalidadMovil.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en SituacionCalidadMovil.BindTypeDropDown() en C:\bdl\pronto\prontoweb\ProntoWeb\SituacionCalidadMovil.aspx.vb:línea 159
+App_Web_situacioncalidadmovil.aspx.4199bbd4.r6vwgsae
+__________________________
+
+Log Entry : 
+10/05/2017 10:43:56
+Error in: http://localhost:50769/ProntoWeb/SituacionCalidadMovil.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en SituacionCalidadMovil.BindTypeDropDown() en C:\bdl\pronto\prontoweb\ProntoWeb\SituacionCalidadMovil.aspx.vb:línea 159
+App_Web_situacioncalidadmovil.aspx.4199bbd4.l2bsaicl
+__________________________
+
+Log Entry : 
+10/05/2017 10:51:53
+Error in: http://localhost:50769/ProntoWeb/SituacionCalidadMovil.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en SituacionCalidadMovil.BindTypeDropDown() en C:\bdl\pronto\prontoweb\ProntoWeb\SituacionCalidadMovil.aspx.vb:línea 159
+App_Web_situacioncalidadmovil.aspx.4199bbd4.owejzi-0
+__________________________

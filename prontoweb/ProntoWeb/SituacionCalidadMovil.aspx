@@ -220,7 +220,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                         <tr>
                             <td class="" style="width: ; height: 18px;"></td>
                             <td class="" style="width: ; height: 18px;">
-                                <asp:DropDownList ID="cmbPeriodo" runat="server" AutoPostBack="true" Height="" Width="100px"  Font-Size="20" Style="color: black;"
+                                <asp:DropDownList ID="cmbPeriodo" runat="server" AutoPostBack="true" Height="" Width="120px" Font-Size="20" Style="color: black;"
                                     Visible="true">
                                     <asp:ListItem Text="Hoy" Selected="True" />
                                     <asp:ListItem Text="Ayer" />
@@ -232,7 +232,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                                     <%--    <asp:ListItem Text="Filtrar por Mes/Año" />--%>
                                     <asp:ListItem Text="Personalizar" />
                                 </asp:DropDownList>
-                                <asp:TextBox ID="txtFechaDesde" runat="server" Width="100px" MaxLength="1" autocomplete="off" Style="color: black;"
+                                <asp:TextBox ID="txtFechaDesde" runat="server" Width="100px" MaxLength="1" autocomplete="off" Style="color: black;" Font-Size="20"
                                     TabIndex="2" AutoPostBack="false"></asp:TextBox>
                                 <cc1:CalendarExtender ID="CalendarExtender3" runat="server" Format="dd/MM/yyyy" TargetControlID="txtFechaDesde"
                                     Enabled="True">
@@ -245,7 +245,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                                 </cc1:MaskedEditExtender>
                                 <cc1:TextBoxWatermarkExtender ID="TBWE2" runat="server" TargetControlID="txtFechaDesde"
                                     WatermarkText="desde" WatermarkCssClass="watermarked" />
-                                <asp:TextBox ID="txtFechaHasta" runat="server" Width="100px" MaxLength="1" TabIndex="2" Style="color: black;"
+                                <asp:TextBox ID="txtFechaHasta" runat="server" Width="100px" MaxLength="1" TabIndex="2" Style="color: black;" Font-Size="20"
                                     AutoPostBack="false"></asp:TextBox>
                                 <cc1:CalendarExtender ID="CalendarExtender4" runat="server" Format="dd/MM/yyyy" TargetControlID="txtFechaHasta"
                                     Enabled="True">
@@ -265,7 +265,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                         <tr>
                             <td class="" style="width: ; height: 18px;"></td>
                             <td class="" style="width: ; height: 18px;">
-                                <asp:DropDownList ID="cmbPuntoVenta" runat="server" CssClass="" Width="128px"  Font-Size="20"  Style="color: black;" />
+                                <asp:DropDownList ID="cmbPuntoVenta" runat="server" CssClass="" Width="128px" Font-Size="20" Style="color: black;" />
 
 
                                 <asp:TextBox ID="txtDestino" runat="server" Text='<%# Bind("DestinoDesc") %>' AutoPostBack="false" Style="color: black;"
@@ -286,7 +286,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                 </ContentTemplate>
             </asp:UpdatePanel>
 
-            <div style="visibility:hidden; display: none">
+            <div style="visibility: hidden; display: none">
 
                 <asp:Button ID="btnExportarGrilla" Text="EXCEL" runat="server" Visible="false" CssClass="btn btn-primary"
                     Width="150" Height="40" />
@@ -310,14 +310,23 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
             </div>
 
             <%--<input type="text" class="span4" id="text1" name="agent" value=""  "/>--%>
+       <style>
+                .ui-paging-info{
+                    font-size: 10px !important;
+                }
 
-            <table id="Lista" class="scroll" cellpadding="0" cellspacing="0" style="font-size: 16px;" width="400px">
+                .ui-jqgrid {font-size:0.6em}
+
+            </style>
+            <table id="Lista" class="scroll" cellpadding="0" cellspacing="0" style="font-size: ;" width="400px">
             </table>
-            <div id="ListaPager" class="scroll" style="text-align: center; height: 50px; font-size: 10px;">
+            <div id="ListaPager" class="scroll" style="text-align: center; height: 50px; font-size:">
             </div>
+     
 
-            <button id="vale" >cambiar situacion</button>
-
+            <button id="vale">cambiar situacion</button>
+            <button id="jpg">jpg</button>
+            <button id="tif">tif</button>
 
 
             <%--<script>
@@ -369,10 +378,14 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
         <script type="text/javascript">
 
+
+          
+
         "use strict";
 
         $(function () {
             //$('#MenuPrincipal').fadeOut(); 
+
 
     $('#MasterPrimerRenglon').hide();
             $('#MenuPrincipal').hide();
