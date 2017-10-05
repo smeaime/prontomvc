@@ -149,7 +149,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
             /* When the body has the loading class, we turn
    the scrollbar off with overflow:hidden */
             body.loading {
-                overflow: hidden;
+                /* overflow: hidden; */
             }
 
                 /* Anytime the body has the loading class, our
@@ -163,23 +163,23 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
             Cargando...
         </div>
 
-
-
-        <a href="CartaDePorteInformesAccesoClientesMovil.aspx">Informe </a>|
+        <%--   <div style="visibility:hidden;display:none">--%>
+        <div>
+            <a href="CartaDePorteInformesAccesoClientesMovil.aspx">Informe </a>|
                             <b>Situación</b> |
-                            <asp:Label ID="lblRazonSocial" runat="server" Font-Size="10" Font-Bold="false" />
-        |
-                            <asp:LoginView ID="LoginView" runat="server">
-                                <LoggedInTemplate>
-                                    <%--<asp:LoginName ID="LoginName1" runat="server" Font-Bold="false" CssClass="margender" />
-                                    |--%>
+                            <asp:Label ID="lblRazonSocial" runat="server" Font-Size="10" Font-Bold="false" Visible="false" />
+            <asp:LoginView ID="LoginView" runat="server">
+                <LoggedInTemplate>
+                    <asp:LoginName ID="LoginName1" runat="server" Font-Bold="false" CssClass="margender" />
+                    |
                                     <asp:LoginStatus ID="LoginStatus1" runat="server" Font-Bold="false" ForeColor=""
                                         LogoutAction="RedirectToLoginPage" LogoutPageUrl="~/Login.aspx" OnLoggedOut="LoginStatus1_LoggedOut"
                                         TabIndex="-1" LogoutText="Salir" Font-Underline="False" CssClass="margender" />
-                                </LoggedInTemplate>
-                            </asp:LoginView>
+                </LoggedInTemplate>
+            </asp:LoginView>
 
-        <br />
+        </div>
+
 
 
         <div style="margin-left: ">
@@ -310,19 +310,20 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
             </div>
 
             <%--<input type="text" class="span4" id="text1" name="agent" value=""  "/>--%>
-       <style>
-                .ui-paging-info{
+            <style>
+                .ui-paging-info {
                     font-size: 10px !important;
                 }
 
-                .ui-jqgrid {font-size:0.6em}
-
+                .ui-jqgrid {
+                    font-size: 0.6em
+                }
             </style>
             <table id="Lista" class="scroll" cellpadding="0" cellspacing="0" style="font-size: ;" width="400px">
             </table>
-            <div id="ListaPager" class="scroll" style="text-align: center; height: 50px; font-size:">
+            <div id="ListaPager" class="scroll" style="text-align: center; height: 50px; font-size: ">
             </div>
-     
+
 
             <button id="vale">cambiar situacion</button>
             <button id="jpg">jpg</button>
@@ -1386,14 +1387,13 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
                 colModel: [
 {
-    name: 'act', index: 'act', align: 'center', width: 60, editable: false, hidden: false, sortable: false,
-    search: false,
+    name: 'act', index: 'act', align: 'center', width: 60, editable: false, hidden: true, sortable: false, frozen:true,   search: false
 },
 
-{ name: ' IdCartasDePorte', index: ' IdCartasDePorte', align: 'left', width: 100, editable: false, hidden: true },
+{ name: ' IdCartasDePorte', index: ' IdCartasDePorte', align: 'left', width: 100, editable: false, hidden: true, frozen:true },
 
 {
-    name: 'NumeroCartaEnTextoParaBusqueda', index: 'NumeroCartaEnTextoParaBusqueda', width: 90, align: 'left', sorttype: "text", sortable: false, frozen:true
+    name: 'NumeroCartaEnTextoParaBusqueda', index: 'NumeroCartaEnTextoParaBusqueda', width: 100, align: 'left', sorttype: "text", sortable: false, frozen:true
 , editable: false, editrules: { required: false, number: true }, edittype: 'text',
 
     searchoptions: { sopt: ['bw', 'cn', 'eq'] },
@@ -2326,7 +2326,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                 footerrow: false,
                 userDataOnFooter: true,
                 //caption: '<b>Control de Descargas</b>',
-                cellEdit: true,
+                cellEdit: false, // si usas frozencolumns, estas obligado a sacar el cellEdit!!!
                 cellsubmit: 'clientArray',
                 dataUrl: "WebServiceClientes.asmx/EmpleadoEditGridData",
 
@@ -2337,6 +2337,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
         , multipleSearch: true
 
             });
+
 
 
             jQuery('#Lista').jqGrid('gridResize');
@@ -2384,7 +2385,8 @@ closeOnEscape: true, closeAfterSearch: true, multipleSearch: true, overlay: fals
             }); // si queres sacar el enableClear, definilo en las searchoptions de la columna específica http://www.trirand.com/blog/?page_id=393/help/clearing-the-clear-icon-in-a-filtertoolbar/
 
 
-jQuery("#Lista").jqGrid('setFrozenColumns');
+            jQuery("#Lista").jqGrid('setFrozenColumns'); // si usas frozencolumns, estas obligado a sacar el cellEdit!!!
+
 
             //$('#Lista').jqGrid('setGridWidth', '1000');
             //$('#Lista').jqGrid('setGridWidth', $(window).width() - 40);
