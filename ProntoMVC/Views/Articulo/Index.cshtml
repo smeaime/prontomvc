@@ -36,10 +36,7 @@
                         </button>
                     </div>
                     <a href="@Url.Content("~")Articulo/Articulos_DynamicGridData_GenerarExcel?sidx=Descripcion&sord=asc&page=1&rows=222&_search=false&filters=">Excel2</a>
-
                 }
-
-
             </div>
         </div>
         <br />
@@ -50,17 +47,25 @@
         </div>
         <table id="Lista" class="scroll" cellpadding="0" cellspacing="0"></table>
         <div id="ListaPager" class="scroll" style="text-align: center;">
-            <input type="button" class="btn btn-small" id="addData" value="Aplicar alicuota IVA" />
+            @*<input type="button" class="btn btn-small" id="addData" value="Aplicar alicuota IVA" />
             <input type="button" class="btn btn-small" id="addData" value="Recalcular costo promedio ponderado" />
             <input type="button" class="btn btn-small" id="addData" value="Emision de etiquetas" />
-            <input type="button" class="btn btn-small" id="addData" value="Emision de etiquetas (Zebra)" />
-
+            <input type="button" class="btn btn-small" id="addData" value="Emision de etiquetas (Zebra)" />*@
+        </div>
+        <div class="contextMenu" id="myMenu1" style="display:none">
+            <ul style="width: 200px">
+                <li id="AlicuotaIva">
+                    <span style="font-size:11px; font-family:Verdana">Aplicar alicuota IVA</span>
+                </li>
+                <li id="RecalculoCosto">
+                    <span style="font-size:11px; font-family:Verdana">Recalcular costo promedio ponderado</span>
+                </li>
+            </ul>
         </div>
     </div>
 </div>
 <script type="text/javascript">
     $().ready(function () {
-
         $('#BuscadorListado').focus();
 
         $("#Lista").jqGrid({
@@ -109,42 +114,68 @@
             ondblClickRow: function (idrow) {
                 window.location.href = ROOT + 'Articulo/Edit/' + idrow;
             },
+            loadComplete: function () {
+                $("tr.jqgrow", this).contextMenu('myMenu1', {
+                    bindings: {
+                        'AlicuotaIva': function (trigger) {
+                            // trigger is the DOM element ("tr.jqgrow") which are triggered
+                            //   grid.editGridRow(trigger.id, editSettings);
+                        },
+                        'RecalculoCosto': function (trigger) {
+                            if ($('#del').hasClass('ui-state-disabled') === false) {
+                                // disabled item can do be choosed
+                                //      grid.delGridRow(trigger.id, delSettings);
+                            }
+                        }
+                    },
+                    onContextMenu: function (event/*, menu*/) {
+                        var rowId = $(event.target).closest("tr.jqgrow").attr("id");
+                        //grid.setSelection(rowId);
+                        // disable menu for rows with even rowids
+                        //$('#del').attr("disabled", Number(rowId) % 2 === 0);
+                        //if (Number(rowId) % 2 === 0) {
+                        //    $('#del').attr("disabled", "disabled").addClass('ui-state-disabled');
+                        //} else {
+                        //    $('#del').removeAttr("disabled").removeClass('ui-state-disabled');
+                        //}
+                        return true;
+                    },
 
-
-
-
+                    //http://stackoverflow.com/questions/8451982/custom-values-to-context-menu-items-in-jqgrid
+                    menuStyle: {
+                        backgroundColor: '#fcfdfd',
+                        border: '1px solid #a6c9e2',
+                        maxWidth: '600px', // to be sure
+                        width: '100%' // to have good width of the menu
+                    },
+                    itemHoverStyle: {
+                        border: '1px solid #79b7e7',
+                        color: '#1d5987',
+                        backgroundColor: '#d0e5f5'
+                    }
+                });
+            },
             pager: $('#ListaPager'),
             rowNum: 50,
-            rowList: [10, 20, 50],
+            rowList: [10, 50, 1000],
             sortname: 'Descripcion', // 'FechaFactura,NumeroFactura',
             sortorder: "asc",
             viewrecords: true,
-            emptyrecords: 'No hay registros para mostrar', //,
-
-
-            ///////////////////////////////
-            width: 'auto', // 'auto',
+            emptyrecords: 'No hay registros para mostrar', 
+            width: 'auto', 
             autowidth: true,
             shrinkToFit: false,
-            //////////////////////////////
-
             height: $(window).height() - ALTOLISTADO, // '100%'
             altRows: false,
             footerrow: false, //true,
-            userDataOnFooter: true
-            // ,caption: '<b>FACTURAS</b>'
-
-            , gridview: true
-            , multiboxonly: true
-            , multipleSearch: true
-
-
-
-        })
-        ;
-
+            userDataOnFooter: true,
+            caption: '<b>ARTICULOS</b>',
+            gridview: true,
+            multiboxonly: true,
+            multipleSearch: true,
+            multiselect: true
+        });
         jQuery("#Lista").jqGrid('bindKeys');
-
         jQuery("#Lista").jqGrid('navGrid', '#ListaPager',
          { csv: true, refresh: true, add: false, edit: false, del: false }, {}, {}, {},
          {
@@ -153,24 +184,11 @@
              width: 700, closeOnEscape: true, closeAfterSearch: true, multipleSearch: true, overlay: false
          }
         );
-
-
         jQuery("#Lista").filterToolbar({
             stringResult: true, searchOnEnter: true,
             defaultSearch: 'cn',
             enableClear: false
         }); // si queres sacar el enableClear, definilo en las searchoptions de la columna específica http://www.trirand.com/blog/?page_id=393/help/clearing-the-clear-icon-in-a-filtertoolbar/
-
-
-
-
-
-
-
-
-
-
-
         $("#BuscadorListado").keyup(function () {
             filtrar()
         });
@@ -219,9 +237,6 @@
         pageLayout.hide('south');
     });
 
-
-
-
     function exportExcel($id) {
         var keys = [], ii = 0, rows = "";
         var ids = $id.getDataIDs();  // Get All IDs
@@ -244,9 +259,6 @@
         OpenWindow.document.write(form);
         OpenWindow.document.close();
     }
-
-
-
 
     function gridcsvexport(id) {
         $('#' + id).jqGrid('navButtonAdd', '#' + id + '_pager', {
