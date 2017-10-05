@@ -875,11 +875,51 @@ namespace ProntoMVC.Tests
             // como filtrar la grilla de situacion segun el usuario?
 
 
-           ClientesQueParticipanEnCartas( ListadoDeCartasModificadas(  UltimaFechaDeEnvioNotificaciones))
+            //EncolarNotificaciones(   ClientesQueParticipanEnCartas( ListadoDeCartasModificadas(  UltimaFechaDeEnvioNotificaciones)))
 
 
 
         }
+
+
+
+
+        [TestMethod]
+        public void TraerListadoSegunUsuario_42871()
+        {
+
+            string filtro = "{\"groupOp\":\"OR\",\"rules\":[{\"field\":\"Producto\",\"op\":\"eq\",\"data\":\"Trigo Pan\"},{\"field\":\"Producto\",\"op\":\"eq\",\"data\":\"MAIZ\"}]}";
+
+            var scEF = ProntoMVC.Data.Models.Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC));
+            DemoProntoEntities db = new DemoProntoEntities(scEF);
+
+            var s = new ServicioCartaPorte.servi();
+            var sqlquery4 = s.CartasPorte_DynamicGridData("IdCartaDePorte", "desc", 1, 999999, true, filtro,
+                                                 "01/12/2016",
+                                                 "30/01/2017",
+                                                 0, -1, SC, "Mariano", scbdlmasterappconfig);
+
+
+        }
+
+
+
+        [TestMethod]
+        public void GrabarVariasSituacionesCalidad_42871()
+        {
+            // url: "WebServiceCartas.asmx/CartaPorteBatchUpdate",
+
+            //string ms = CartaDePorteManager.GrabarSituacion_DLL(2638292, 2, "RECHAZADO EN PLAYA EXTERNA", SC);
+            string ms = CartaDePorteManager.GrabarSituaciones_DLL(new List<long> { 2638292, 2638293, 2638294 }, 2, "RECHAZADO EN PLAYA EXTERNA", SC);
+        }
+
+
+
+
+
+
+
+
 
 
 
@@ -896,12 +936,12 @@ namespace ProntoMVC.Tests
 
             int registrosf = 0;
 
-            int idcli =CartaDePorteManager.BuscarVendedorPorCUIT("30-50012088-2", SC, "");
+            int idcli = CartaDePorteManager.BuscarVendedorPorCUIT("30-50012088-2", SC, "");
 
 
             var output = SincronismosWilliamsManager.GenerarSincro("A.C.A.", ref sErrores, SC, "dominio", ref sTitulo
                                 , CartaDePorteManager.enumCDPestado.DescargasMasFacturadas,
-                     "", -1,idcli,
+                     "", -1, idcli,
                 -1, -1,
                 -1, -1, -1, -1,
                  CartaDePorteManager.FiltroANDOR.FiltroOR, "Ambas",
@@ -909,12 +949,12 @@ namespace ProntoMVC.Tests
                 -1, "Ambas", false, "", "", -1, ref registrosf, 40);
 
 
-//            FB = FUERA DE BASE
-//FE = FUERA DE STANDAR
+            //            FB = FUERA DE BASE
+            //FE = FUERA DE STANDAR
 
-//Buenas tares, nosotros necesitamos lo siguiente
+            //Buenas tares, nosotros necesitamos lo siguiente
 
-//Que el FB Y el FE venga informado como FE, sin discriminar grano
+            //Que el FB Y el FE venga informado como FE, sin discriminar grano
 
 
 
@@ -5629,7 +5669,7 @@ System.Drawing
             var sqlquery4 = s.CartasPorte_DynamicGridData("IdCartaDePorte", "desc", 1, 999999, true, filtro,
                                                  "01/12/2016",
                                                  "30/01/2017",
-                                                 0, -1, SC, "Mariano");
+                                                 0, -1, SC, "Mariano", "");
 
 
         }
@@ -7527,7 +7567,7 @@ Adjunto un ejemplo que tiene cartas de porte de 8 entregadores que no son Willia
             var output = s.CartasPorte_DynamicGridData("IdCartaDePorte", "desc", 1, 50, true, filtro,
                                                         "01/01/2016",
                                                         "01/01/2016",
-                                                        0, -1, SC, "Mariano");
+                                                        0, -1, SC, "Mariano", "");
 
 
 
@@ -7546,7 +7586,7 @@ Adjunto un ejemplo que tiene cartas de porte de 8 entregadores que no son Willia
             var output2 = s.CartasPorte_DynamicGridData("IdCartaDePorte", "desc", 1, 50, true, filtro,
                                                 "01/01/2015",
                                                 "01/01/2016",
-                                                0, -1, SC, "Mariano");
+                                                0, -1, SC, "Mariano", "");
 
 
         }
@@ -7562,7 +7602,7 @@ Adjunto un ejemplo que tiene cartas de porte de 8 entregadores que no son Willia
             var output3 = s.CartasPorte_DynamicGridData("IdCartaDePorte", "desc", 1, 50, true, filtro,
                                                  "01/01/2010",
                                                  "01/01/2016",
-                                                 0, -1, SC, "Mariano");
+                                                 0, -1, SC, "Mariano", "");
         }
 
 
