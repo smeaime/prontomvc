@@ -74,7 +74,7 @@ CDP.Exporta
 ,isnull(cdp.nobleQuebrados  ,0)  as  nobleQuebrados   ,isnull(cdp.nobleDaniados  ,0)  as  nobleDaniados   ,isnull(cdp.nobleChamico  ,0) as   nobleChamico   ,isnull(cdp.nobleChamico2  ,0)  as nobleChamico2    ,isnull(cdp.nobleRevolcado,0) as  nobleRevolcado
 ,isnull(cdp.nobleObjetables ,0)   as  nobleObjetables   ,isnull(cdp.nobleAmohosados ,0)  as nobleAmohosados     ,isnull(cdp.nobleHectolitrico,0)   as   nobleHectolitrico   ,isnull(cdp.nobleCarbon ,0)   as  nobleCarbon   
 ,isnull(cdp.noblePanzaBlanca ,0)   as noblePanzaBlanca    ,isnull(cdp.noblePicados  ,0) as noblePicados    ,isnull(cdp.nobleMGrasa  ,0)   as nobleMGrasa   ,isnull(cdp.nobleAcidezGrasa  ,0)   as   nobleAcidezGrasa
-,isnull(cdp.nobleVerdes,0)   as nobleVerdes     ,isnull(cdp.nobleGrado ,0)   as nobleGrado    ,isnull(cdp.nobleConforme ,0)  as nobleConforme     ,isnull(cdp.nobleACamara ,0) asnobleACamara       ,CDP.Cosecha 
+,isnull(cdp.nobleVerdes,0)   as nobleVerdes     ,isnull(cdp.nobleGrado ,0)   as nobleGrado    ,isnull(cdp.nobleConforme ,0)  as nobleConforme     ,isnull(cdp.nobleACamara ,0) as nobleACamara       ,CDP.Cosecha 
 ,isnull(CDP.HumedadDesnormalizada,0)  as  HumedadDesnormalizada     ,CDP.Factor      ,CDP.IdFacturaImputada      ,CDP.PuntoVenta   
 ,CDP.SubnumeroVagon      ,CDP.TarifaFacturada      ,CDP.TarifaSubcontratista1     
 ,CDP.TarifaSubcontratista2      ,CDP.FechaArribo      ,CDP.[Version]      ,CDP.MotivoAnulacion 
