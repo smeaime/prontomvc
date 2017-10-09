@@ -31,7 +31,7 @@ namespace ProntoMVC.Data.Models
     }
 
 
-    //public partial class  ProntoMantenimientoEntities : DbContext
+    //public partial class  ProntoMantenimientoEntities : DbContextD:\ProntoMVC3\Data\Models\Class1.cs
     //{
     //    public ProntoMantenimientoEntities(string connectionString)
     //        : base(connectionString)
@@ -98,6 +98,24 @@ public static class ModelDefinedFunctions
 
     [System.Data.Entity.Core.Objects.DataClasses.EdmFunction("DemoProntoModel.Store", "Facturas_Remitos")]
     public static string FacturasRemitos(int IdFactura)
+    {
+        throw new NotSupportedException("Direct calls are not supported.");
+    }
+
+    [System.Data.Entity.Core.Objects.DataClasses.EdmFunction("DemoProntoModel.Store", "Pedidos_Requerimientos")]
+    public static string Pedidos_Requerimientos(int IdPedido)
+    {
+        throw new NotSupportedException("Direct calls are not supported.");
+    }
+
+    [System.Data.Entity.Core.Objects.DataClasses.EdmFunction("DemoProntoModel.Store", "Pedidos_Obras")]
+    public static string Pedidos_Obras(int IdPedido)
+    {
+        throw new NotSupportedException("Direct calls are not supported.");
+    }
+
+    [System.Data.Entity.Core.Objects.DataClasses.EdmFunction("DemoProntoModel.Store", "Pedidos_EquiposDestino")]
+    public static string Pedidos_EquiposDestino(int IdPedido)
     {
         throw new NotSupportedException("Direct calls are not supported.");
     }
