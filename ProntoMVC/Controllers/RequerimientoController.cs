@@ -1009,7 +1009,40 @@ namespace ProntoMVC.Controllers
 
         }
 
-
+        public class Requerimientos2
+        {
+            public int IdRequerimiento { get; set; }
+            public int? NumeroRequerimiento { get; set; }
+            public DateTime? FechaRequerimiento { get; set; }
+            public string NumeradorEliminacionesFirmas { get; set; }
+            public string Cumplido { get; set; }
+            public string Recepcionado { get; set; }
+            public string Entregado { get; set; }
+            public string Impresa { get; set; }
+            public string Detalle { get; set; }
+            public string Obra { get; set; }
+            public string Presupuestos { get; set; }
+            public string Comparativas { get; set; }
+            public string Pedidos { get; set; }
+            public string Recepciones { get; set; }
+            public string Salidas { get; set; }
+            public int? CantidadItems { get; set; }
+            public string LiberadoPor { get; set; }
+            public DateTime? FechaAprobacion { get; set; }
+            public string SolicitadaPor { get; set; }
+            public string Sector { get; set; }
+            public string EquipoDestino { get; set; }
+            public string UsuarioAnulacion { get; set; }
+            public DateTime? FechaAnulacion { get; set; }
+            public string MotivoAnulacion { get; set; }
+            public string TipoCompra { get; set; }
+            public string Comprador { get; set; }
+            public string FechasLiberacionCompra { get; set; }
+            public string DetalleImputacion { get; set; }
+            public string Observaciones { get; set; }
+            public string CircuitoFirmasCompleto { get; set; }
+            public string Firmas { get; set; }
+        }
 
         public virtual ActionResult Requerimientos_DynamicGridData
                 (string sidx, string sord, int page, int rows, bool _search, string filters, string FechaInicial, string FechaFinal, string IdObra, bool bAConfirmar = false, bool bALiberar = false)
@@ -1022,53 +1055,148 @@ namespace ProntoMVC.Controllers
                     .Take(10) ).ToList();
             */
 
-            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-            string campo = "true";
-            int pageSize = rows;
-            int currentPage = page;
-            int totalPages = 0;
-            int totalRecords = 0;
-
-            var pagedQuery = Filters.FiltroGenerico<Data.Models.Requerimiento>
-                                ("DetalleRequerimientos.DetallePedidos", sidx, sord, page, rows, _search, filters, db, ref totalRecords, "DetalleRequerimientos.DetallePresupuestos");
-            //DetalleRequerimientos.DetallePedidos, DetalleRequerimientos.DetallePresupuestos
-            //"Obra,DetalleRequerimientos.DetallePedidos.Pedido,DetalleRequerimientos.DetallePresupuestos.Presupuesto"
-            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-            if (false)
-            {
-                LinqToSQL_ProntoDataContext l2sqlPronto = new LinqToSQL_ProntoDataContext(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SCsql()));
-                var qq = (from rm in l2sqlPronto.Requerimientos
-                          select l2sqlPronto.Requerimientos_Pedidos(rm.IdRequerimiento)
-                          ).Take(100).ToList();
-            }
-
-            var Req = pagedQuery
-                          //.Include(x => x.Obra)
-                          //.Include(x => x.SolicitoRequerimiento)
-                          //.Include(x => x.AproboRequerimiento)
-                          //.Include(x => x.Sectores)
-                          //.Include(r => r.DetalleRequerimientos.Select(dr => dr.DetallePedidos.Select(dt => dt.Pedido)))
-                          //  .Include("DetalleRequerimientos.DetallePedidos.Pedido") // funciona tambien
-                          //   .Include("DetalleRequerimientos.DetallePresupuestos.Presupuesto") // funciona tambien
-                          // .Include(x => x.Aprobo)
-                          .AsQueryable();
-
+            DateTime FechaDesde, FechaHasta;
             try
             {
-
-                var Req1 = from a in Req.Where(campo) select a.IdRequerimiento;
-                //totalRecords = Req1.Count();
-                totalPages = (int)Math.Ceiling((float)totalRecords / (float)pageSize);
+                if (FechaInicial == "") FechaDesde = DateTime.MinValue;
+                else FechaDesde = DateTime.ParseExact(FechaInicial, "dd/MM/yyyy", null);
             }
             catch (Exception)
             {
-
-                //                throw;
+                FechaDesde = DateTime.MinValue;
             }
 
+            try
+            {
+                if (FechaFinal == "") FechaHasta = DateTime.MaxValue;
+                else FechaHasta = DateTime.ParseExact(FechaFinal, "dd/MM/yyyy", null);
+            }
+            catch (Exception)
+            {
+                FechaHasta = DateTime.MaxValue;
+            }
+
+            int totalRecords = 0;
+            int pageSize = rows;
+
+            var data = (from a in db.Requerimientos
+                        from b in db.Empleados.Where(o => o.IdEmpleado == a.Aprobo).DefaultIfEmpty()
+                        from c in db.Empleados.Where(o => o.IdEmpleado == a.IdSolicito).DefaultIfEmpty()
+                        from d in db.TiposCompras.Where(o => o.IdTipoCompra == a.IdTipoCompra).DefaultIfEmpty()
+                        select new Requerimientos2
+                        {
+                            IdRequerimiento = a.IdRequerimiento,
+                            NumeroRequerimiento = a.NumeroRequerimiento,
+                            FechaRequerimiento = a.FechaRequerimiento,
+                            NumeradorEliminacionesFirmas = a.NumeradorEliminacionesFirmas.ToString(),
+                            Cumplido = a.Cumplido,
+                            Recepcionado = a.Recepcionado,
+                            Entregado = a.Entregado,
+                            Impresa = a.Impresa,
+                            Detalle = a.Detalle,
+                            Obra = a.Obra.NumeroObra+" "+a.Obra.Descripcion,
+                            Presupuestos = "", //ModelDefinedFunctions.Pedidos_Requerimientos(a.IdPedido).ToString(),
+                            Comparativas = "",
+                            Pedidos = "",
+                            Recepciones = "",
+                            Salidas = "",
+                            CantidadItems = a.DetalleRequerimientos.Count(),
+                            LiberadoPor = b != null ? b.Nombre : "",
+                            FechaAprobacion = a.FechaAprobacion,
+                            SolicitadaPor = c != null ? c.Nombre : "",
+                            Sector = a.Sectores.Descripcion,
+                            EquipoDestino = "",
+                            UsuarioAnulacion = a.UsuarioAnulacion,
+                            FechaAnulacion = a.FechaAnulacion,
+                            MotivoAnulacion = a.MotivoAnulacion ?? "",
+                            TipoCompra = d != null ? d.Descripcion : "",
+                            Comprador = "",
+                            FechasLiberacionCompra = "",
+                            DetalleImputacion = a.DetalleImputacion,
+                            Observaciones = a.Observaciones,
+                            CircuitoFirmasCompleto = a.CircuitoFirmasCompleto,
+                            Firmas = "",
+                        }).Where(a => a.FechaRequerimiento >= FechaDesde && a.FechaRequerimiento <= FechaHasta).OrderBy(sidx + " " + sord).AsQueryable();
+
+            var pagedQuery = Filters.FiltroGenerico_UsandoIQueryable<Requerimientos2>
+                                     (sidx, sord, page, rows, _search, filters, db, ref totalRecords, data);
+
+            int totalPages = (int)Math.Ceiling((float)totalRecords / (float)pageSize);
+
+            var jsonData = new jqGridJson()
+            {
+                total = totalPages,
+                page = page,
+                records = totalRecords,
+                rows = (from a in pagedQuery
+                        select new jqGridRowJson
+                        {
+                            id = a.IdRequerimiento.ToString(),
+                            cell = new string[] { 
+                                "<a href="+ Url.Action("Imprimir",new {id = a.IdRequerimiento} )  +">Imprimir</>" ,
+                                "<a href="+ Url.Action("Edit",new {id = a.IdRequerimiento} ) + "  >Editar</>" ,
+                                a.IdRequerimiento.ToString(), 
+                                a.NumeroRequerimiento.NullSafeToString(), 
+                                a.FechaRequerimiento==null ? "" :  a.FechaRequerimiento.GetValueOrDefault().ToString("dd/MM/yyyy"),
+                                a.NumeradorEliminacionesFirmas.NullSafeToString(), 
+                                a.Cumplido.NullSafeToString(), 
+                                a.Recepcionado.NullSafeToString(), 
+                                a.Entregado.NullSafeToString(), 
+                                a.Impresa.NullSafeToString(), 
+                                a.Detalle.NullSafeToString(), 
+                                a.Obra.NullSafeToString(), 
+                                a.Presupuestos.NullSafeToString(), 
+                                a.Comparativas.NullSafeToString(), 
+                                a.Pedidos.NullSafeToString(), 
+                                a.Recepciones.NullSafeToString(), 
+                                a.Salidas.NullSafeToString(), 
+                                a.CantidadItems.NullSafeToString(), 
+                                a.LiberadoPor.NullSafeToString(), 
+                                a.FechaAprobacion.NullSafeToString(), 
+                                a.SolicitadaPor.NullSafeToString(), 
+                                a.Sector.NullSafeToString(), 
+                                a.EquipoDestino.NullSafeToString(), 
+                                a.UsuarioAnulacion.NullSafeToString(), 
+                                a.FechaAnulacion.NullSafeToString(), 
+                                a.MotivoAnulacion.NullSafeToString(), 
+                                a.TipoCompra.NullSafeToString(), 
+                                a.Comprador.NullSafeToString(), 
+                                a.FechasLiberacionCompra.NullSafeToString(), 
+                                a.DetalleImputacion.NullSafeToString(), 
+                                a.Observaciones.NullSafeToString(), 
+                                a.CircuitoFirmasCompleto.NullSafeToString(), 
+                                a.Firmas.NullSafeToString()
+                            }
+                        }).ToArray()
+            };
+
+            //string campo = "true";
+            //int pageSize = rows;
+            //int currentPage = page;
+            //int totalPages = 0;
+            //int totalRecords = 0;
+
+            //var pagedQuery = Filters.FiltroGenerico<Data.Models.Requerimiento>
+            //                    ("DetalleRequerimientos.DetallePedidos", sidx, sord, page, rows, _search, filters, db, ref totalRecords, "DetalleRequerimientos.DetallePresupuestos");
+
+            //if (false)
+            //{
+            //    LinqToSQL_ProntoDataContext l2sqlPronto = new LinqToSQL_ProntoDataContext(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SCsql()));
+            //    var qq = (from rm in l2sqlPronto.Requerimientos
+            //              select l2sqlPronto.Requerimientos_Pedidos(rm.IdRequerimiento)
+            //              ).Take(100).ToList();
+            //}
+
+            //var Req = pagedQuery
+            //              //.Include(x => x.Obra)
+            //              //.Include(x => x.SolicitoRequerimiento)
+            //              //.Include(x => x.AproboRequerimiento)
+            //              //.Include(x => x.Sectores)
+            //              //.Include(r => r.DetalleRequerimientos.Select(dr => dr.DetallePedidos.Select(dt => dt.Pedido)))
+            //              //  .Include("DetalleRequerimientos.DetallePedidos.Pedido") // funciona tambien
+            //              //   .Include("DetalleRequerimientos.DetallePresupuestos.Presupuesto") // funciona tambien
+            //              // .Include(x => x.Aprobo)
+            //              .AsQueryable();
             //switch (sidx.ToLower())
             //{
             //    case "numerorequerimiento":
@@ -1120,102 +1248,83 @@ namespace ProntoMVC.Controllers
             //            Req = Req.OrderBy(a => a.NumeroRequerimiento);
             //        break;
             //}
+            //var jsonData = new jqGridJson()
+            //{
+            //    total = totalPages,
+            //    page = currentPage,
+            //    records = totalRecords,
+            //    rows = (from a in data
+            //            select new jqGridRowJson
+            //            {
+            //                id = a.IdRequerimiento.ToString(),
+            //                cell = new string[] { 
+            //                    //"<a href="+ Url.Action("Edit",new {id = a.IdRequerimiento} ) + " target="' >Editar</>" ,
+            //                    "<a href="+ Url.Action("Edit",new {id = a.IdRequerimiento} ) + "  >Editar</>" ,
+            //                    "<a href="+ Url.Action("Imprimir",new {id = a.IdRequerimiento} )  +">Imprimir</>" ,
+            //                    a.IdRequerimiento.ToString(),
+            //                    a.NumeroRequerimiento.ToString(),
+            //                    a.FechaRequerimiento.GetValueOrDefault().ToString("dd/MM/yyyy"),
+            //                    a.Cumplido,
+            //                    a.Recepcionado,
+            //                    a.Entregado,
+            //                    a.Impresa,
+            //                    a.Detalle,
+            //                    //a.Obra.Descripcion, 
+            //                  (a.Obra==null) ?  "" :  a.Obra.NumeroObra,
 
+            //                    //  string.Join(" ",  a.DetalleRequerimientos.Select(x=> (x.DetallePresupuestos.Select(y=> y.IdPresupuesto))  )),
+            //                    // string.Join(" ",  a.DetalleRequerimientos.Select(x=>(x.DetallePresupuestos   ==null) ? "" : x.DetallePresupuestos.Select(z=>z.Presupuesto.Numero.ToString()).NullSafeToString() ).Distinct()),
+            //                    // Req ya viene con todos los datos para las colecciones hijas. lo paginé y ahí hice el select (arriba)
 
-            var data = from a in Req
-                       //.Where(campo).OrderBy(sidx + " " + sord)
-                           //.Skip((currentPage - 1) * pageSize).Take(pageSize)
-                        .ToList()
-                       select a; //supongo que tengo que hacer la paginacion antes de hacer un select, para que me llene las colecciones anidadas
+            //                    string.Join(",",  a.DetalleRequerimientos
+            //                        .SelectMany(x =>
+            //                            (x.DetallePresupuestos == null) ?
+            //                            null :
+            //                            x.DetallePresupuestos.Select(y =>
+            //                                        (y.Presupuesto == null) ?
+            //                                        null :
+            //                                        y.Presupuesto.Numero.NullSafeToString()
+            //                                )
+            //                        ).Distinct()
+            //                    ),
 
-            var jsonData = new jqGridJson()
-            {
-                total = totalPages,
-                page = currentPage,
-                records = totalRecords,
-                rows = (from a in data
-                        select new jqGridRowJson
-                        {
-                            id = a.IdRequerimiento.ToString(),
-                            cell = new string[] { 
-                                //"<a href="+ Url.Action("Edit",new {id = a.IdRequerimiento} ) + " target="' >Editar</>" ,
-                                "<a href="+ Url.Action("Edit",new {id = a.IdRequerimiento} ) + "  >Editar</>" ,
-                                "<a href="+ Url.Action("Imprimir",new {id = a.IdRequerimiento} )  +">Imprimir</>" ,
-                                a.IdRequerimiento.ToString(),
-                                a.NumeroRequerimiento.ToString(),
-                                a.FechaRequerimiento.GetValueOrDefault().ToString("dd/MM/yyyy"),
-                                a.Cumplido,
-                                a.Recepcionado,
-                                a.Entregado,
-                                a.Impresa,
-                                a.Detalle,
-                                //a.Obra.Descripcion, 
-                              (a.Obra==null) ?  "" :  a.Obra.NumeroObra,
+            //                    "",
 
-                                //  string.Join(" ",  a.DetalleRequerimientos.Select(x=> (x.DetallePresupuestos.Select(y=> y.IdPresupuesto))  )),
-                                // string.Join(" ",  a.DetalleRequerimientos.Select(x=>(x.DetallePresupuestos   ==null) ? "" : x.DetallePresupuestos.Select(z=>z.Presupuesto.Numero.ToString()).NullSafeToString() ).Distinct()),
-                                // Req ya viene con todos los datos para las colecciones hijas. lo paginé y ahí hice el select (arriba)
-
-                                string.Join(",",  a.DetalleRequerimientos
-                                    .SelectMany(x =>
-                                        (x.DetallePresupuestos == null) ?
-                                        null :
-                                        x.DetallePresupuestos.Select(y =>
-                                                    (y.Presupuesto == null) ?
-                                                    null :
-                                                    y.Presupuesto.Numero.NullSafeToString()
-                                            )
-                                    ).Distinct()
-                                ),
-
-                                "",
-
-                                string.Join(",",  a.DetalleRequerimientos
-                                    .SelectMany(x =>
-                                        (x.DetallePedidos == null) ?
-                                        null :
-                                        x.DetallePedidos.Select(y =>
-                                                    (y.Pedido == null) ?
-                                                    null :
-                                                    "<a href="+ Url.Action("Edit", "Pedido",new {id = y.Pedido.IdPedido} ) + "  >" + y.Pedido.NumeroPedido.NullSafeToString() + "</>"
-                                            )
-                                    ).Distinct()
-                                ),
-
-
-                                "", //recepciones
-                                "", // salidas
-
-                                //a.Comparativas,
-                                //string.Join(" ",  a.DetalleRequerimientos.Select(x=> x.DetallePedidos.Count ))  ,
-
-                                ////string.Join(" ",  a.DetalleRequerimientos.Select(x=>(x.DetallePedidos   ==null) ? "" : x.DetallePedidos.Select(z=>z.Pedido.NumeroPedido.ToString()).NullSafeToString() ).Distinct()),
-                                //a.Recepciones,
-                                
-                                (a.SolicitoRequerimiento==null) ?  "" :   a.SolicitoRequerimiento.Nombre,
-                                (a.AproboRequerimiento==null) ?  "" :  a.AproboRequerimiento.Nombre,
-                                (a.Sectores==null) ?  "" : a.Sectores.Descripcion,
-
-                                a.UsuarioAnulacion,
-                                a.FechaAnulacion.NullSafeToString(),
-                                a.MotivoAnulacion,
-                                a.FechasLiberacion,
-
-                                a.Observaciones,
-                                a.LugarEntrega,
-                                a.IdObra.ToString(),
-                                a.IdSector.ToString(),
-                                a.ConfirmadoPorWeb.NullSafeToString()
-                            }
-                        }).ToArray()
-            };
+            //                    string.Join(",",  a.DetalleRequerimientos
+            //                        .SelectMany(x =>
+            //                            (x.DetallePedidos == null) ?
+            //                            null :
+            //                            x.DetallePedidos.Select(y =>
+            //                                        (y.Pedido == null) ?
+            //                                        null :
+            //                                        "<a href="+ Url.Action("Edit", "Pedido",new {id = y.Pedido.IdPedido} ) + "  >" + y.Pedido.NumeroPedido.NullSafeToString() + "</>"
+            //                                )
+            //                        ).Distinct()
+            //                    ),
+            //                    "", //recepciones
+            //                    "", // salidas
+            //                    //a.Comparativas,
+            //                    //string.Join(" ",  a.DetalleRequerimientos.Select(x=> x.DetallePedidos.Count ))  ,
+            //                    ////string.Join(" ",  a.DetalleRequerimientos.Select(x=>(x.DetallePedidos   ==null) ? "" : x.DetallePedidos.Select(z=>z.Pedido.NumeroPedido.ToString()).NullSafeToString() ).Distinct()),
+            //                    //a.Recepciones,
+            //                    (a.SolicitoRequerimiento==null) ?  "" :   a.SolicitoRequerimiento.Nombre,
+            //                    (a.AproboRequerimiento==null) ?  "" :  a.AproboRequerimiento.Nombre,
+            //                    (a.Sectores==null) ?  "" : a.Sectores.Descripcion,
+            //                    a.UsuarioAnulacion,
+            //                    a.FechaAnulacion.NullSafeToString(),
+            //                    a.MotivoAnulacion,
+            //                    a.FechasLiberacion,
+            //                    a.Observaciones,
+            //                    a.LugarEntrega,
+            //                    a.IdObra.ToString(),
+            //                    a.IdSector.ToString(),
+            //                    a.ConfirmadoPorWeb.NullSafeToString()
+            //                }
+            //            }).ToArray()
+            //};
 
             return Json(jsonData, JsonRequestBehavior.AllowGet);
         }
-
-
-
-
 
         public virtual ActionResult RequerimientosPendientesAsignar_DynamicGridData
               (string sidx, string sord, int page, int rows, bool _search, string filters, string FechaInicial, string FechaFinal, string IdObra, bool bAConfirmar = false, bool bALiberar = false)
@@ -1228,29 +1337,22 @@ namespace ProntoMVC.Controllers
 
             var SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString(), oStaticMembershipService));
 
-
             DataTable dt;
             try
             {
                 //dt = Pronto.ERP.Bll.EntidadManager.GetStoreProcedure(SC, "Requerimientos_TX_PendientesDeAsignacion");
                 dt = Pronto.ERP.Bll.EntidadManager.ExecDinamico(SC, "exec Requerimientos_TX_PendientesDeAsignacion", 180);
-
-
             }
             catch (Exception ex)
             {
-
                 //throw new Exception("Error en Requerimientos_TX_PendientesDeAsignacion. Verificar que esté bien configurada la base de mantenimiento.");
                 // tambien puede ser un timeout
-
 
                 Response.StatusCode = (int)System.Net.HttpStatusCode.BadRequest;
                 Response.TrySkipIisCustomErrors = true;
 
                 JsonResponse res = new JsonResponse();
                 res.Status = Status.Error;
-
-
 
                 //List<string> errors = new List<string>();
                 //errors.Add(errs);
@@ -1260,8 +1362,6 @@ namespace ProntoMVC.Controllers
 
                 return Json(res);
             }
-
-
 
             IEnumerable<DataRow> Entidad = dt.AsEnumerable();
 
@@ -1308,10 +1408,6 @@ namespace ProntoMVC.Controllers
                             EquipoDestino = a[30]
                         }).ToList();
 
-
-
-
-
             var jsonData = new jqGridJson()
             {
                 total = totalPages,
@@ -1340,10 +1436,6 @@ namespace ProntoMVC.Controllers
             };
             return Json(jsonData, JsonRequestBehavior.AllowGet);
         }
-
-
-
-
 
         public virtual ActionResult Requerimientos(string sidx, string sord, int? page, int? rows, bool _search, string searchField, string searchOper, string searchString,
                                                    string FechaInicial, string FechaFinal, string IdObra, bool bAConfirmar = false, bool bALiberar = false)
@@ -2655,12 +2747,7 @@ namespace ProntoMVC.Controllers
 
 
             return Json(q, JsonRequestBehavior.AllowGet);
-
-
         }
-
-
-
 
         public virtual JsonResult Autorizaciones(int IdRequerimiento)
         {
@@ -2668,86 +2755,42 @@ namespace ProntoMVC.Controllers
             return Json(Autorizaciones, JsonRequestBehavior.AllowGet);
         }
 
-
         protected override void Dispose(bool disposing)
         {
             if (db != null) db.Dispose();
             base.Dispose(disposing);
-
-
-
         }
-
-
-
-
-
-
-
-
-
-
-
 
         public virtual FileResult Imprimir(int id) //(int id)
         {
-            // string sBasePronto = (string)rc.HttpContext.Session["BasePronto"];
-            // db = new DemoProntoEntities(Funciones.Generales.sCadenaConex(sBasePronto));
-
             string SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString(), oStaticMembershipService));
 
-            //  string SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(ConfigurationManager.ConnectionStrings["DemoProntoConexionDirecta"].ConnectionString);
-            string output = AppDomain.CurrentDomain.BaseDirectory + "Documentos\\" + "archivo.docx"; //System.IO.Path.GetDirectoryName(); // + '\Documentos\' + 'archivo.docx';
-            //string plantilla = AppDomain.CurrentDomain.BaseDirectory + "Documentos\\" + "Requerimiento1_ESUCO_PUNTONET.docx";
+            string output = AppDomain.CurrentDomain.BaseDirectory + "Documentos\\" + "archivo.doc"; //System.IO.Path.GetDirectoryName(); // + '\Documentos\' + 'archivo.docx';
 
-            string plantilla = "";
-            if (true)
-            {
-                plantilla = AppDomain.CurrentDomain.BaseDirectory + "Documentos\\" + "Requerimiento1_Autotrol_PUNTONET.docx";
-            }
-            else
-            {
-                plantilla = AppDomain.CurrentDomain.BaseDirectory + "Documentos\\" + "Requerimiento1_ESUCO_PUNTONET.docx";
-            }
-
+            //plantilla = AppDomain.CurrentDomain.BaseDirectory + "Documentos\\" + "Requerimiento1_Autotrol_PUNTONET.docx";
+            string plantilla = AppDomain.CurrentDomain.BaseDirectory + "Documentos\\" + "Requerimiento_" + this.HttpContext.Session["BasePronto"].ToString() + ".dotm";
 
             System.IO.FileInfo MyFile2 = new System.IO.FileInfo(plantilla);//busca si ya existe el archivo a generar y en ese caso lo borra
 
             if (!MyFile2.Exists)
             {
-                //usar la de sql
                 plantilla = Pronto.ERP.Bll.OpenXML_Pronto.CargarPlantillaDeSQL(OpenXML_Pronto.enumPlantilla.FacturaA, SC);
-
             }
-
 
             //tengo que copiar la plantilla en el destino, porque openxml usa el archivo que le vaya a pasar
             System.IO.FileInfo MyFile1 = new System.IO.FileInfo(output);//busca si ya existe el archivo a generar y en ese caso lo borra
             if (MyFile1.Exists) MyFile1.Delete();
 
+            //System.IO.File.Copy(plantilla, output); // 'http://stackoverflow.com/questions/1233228/saving-an-openxml-document-word-generated-from-a-template 
+            //Pronto.ERP.BO.Requerimiento req = RequerimientoManager.GetItem(SC, id, true);
+            //OpenXML_Pronto.RequerimientoXML_DOCX(output, req, SC);
 
-
-            System.IO.File.Copy(plantilla, output); // 'http://stackoverflow.com/questions/1233228/saving-an-openxml-document-word-generated-from-a-template 
-            //Pronto.ERP.BO.Factura fac = FacturaManager.GetItem(SC, id, true);
-            //OpenXML_Pronto.FacturaXML_DOCX(output, fac, SC);
-
-            Pronto.ERP.BO.Requerimiento req = RequerimientoManager.GetItem(SC, id, true);
-            OpenXML_Pronto.RequerimientoXML_DOCX(output, req, SC);
-
-
-            //byte[] contents = ;
-            //return File(contents, "application/octet-stream");
+            object nulo = null;
+            EntidadManager.ImprimirWordDOT_VersionDLL(plantilla, ref nulo, SC, nulo, ref nulo, id, nulo, nulo, nulo, output, nulo, nulo);
 
             byte[] contents = System.IO.File.ReadAllBytes(output);
-            return File(contents, System.Net.Mime.MediaTypeNames.Application.Octet, "requerimiento.docx");
+            return File(contents, System.Net.Mime.MediaTypeNames.Application.Octet, "requerimiento.doc");
         }
-
-
-
-
-
-
-
 
         void TraerFirmas(ref Requerimiento myRM)
         {
