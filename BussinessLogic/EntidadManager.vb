@@ -2177,36 +2177,18 @@ Salida:
         End Function
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        Public Shared Function ImprimirWordDOT_VersionDLL(ByVal mPlantilla As String, ByRef Yo As Object, ByVal SC As String, _
-                                                   ByVal SessionDummy As Object, _
-                                                   ByRef ResponseDummy As Object, _
-                                                   ByVal Id As Long, Optional ByVal Arg3 As Object = Nothing, _
-                                                   Optional ByVal Arg4 As Object = Nothing, Optional ByVal Arg5 As Object = Nothing, _
-                                                   Optional ByVal outputFileName As String = "", Optional ByVal Arg6 As Object = Nothing, _
-                                                   Optional ByVal Arg7 As Object = Nothing) As String
-
+        Public Shared Function ImprimirWordDOT_VersionDLL(ByVal mPlantilla As String, _
+                                                          ByRef Yo As Object, _
+                                                          ByVal SC As String, _
+                                                          ByVal SessionDummy As Object, _
+                                                          ByRef ResponseDummy As Object, _
+                                                          ByVal Id As Long, _
+                                                          Optional ByVal Arg3 As Object = Nothing, _
+                                                          Optional ByVal Arg4 As Object = Nothing, _
+                                                          Optional ByVal Arg5 As Object = Nothing, _
+                                                          Optional ByVal outputFileName As String = "", _
+                                                          Optional ByVal Arg6 As Object = Nothing, _
+                                                          Optional ByVal Arg7 As Object = Nothing) As String
 
             If Id < 1 Then Return Nothing
 
@@ -2218,10 +2200,7 @@ Salida:
             '2) Trust Center de Excel 07
             '3) ComPronto mal referenciada en la plantilla XLT
             '4) Hotfix     http://kbalertz.com/968494/Description-Excel-hotfix-March.aspx
-
-
             'http://www.developerdotstar.com/community/automate_excel_dotnet
-
 
             'If cmbCuenta.SelectedValue = -1 Or Not IsNumeric(txtRendicion.Text) Then
             '    'ProntoFuncionesUIWeb.MsgBoxAjax(Me, "Elija una Cuenta")
@@ -2232,15 +2211,9 @@ Salida:
             'Dim mImprime As String = "N"
             'Dim mObra As Long = iisNull(session(SESSIONPRONTO_glbIdObraAsignadaUsuario), -1)
 
-            '///////////////////////////////////////////
-            '///////////////////////////////////////////
             'es importante en estos dos archivos poner bien el directorio. 
             Dim plant As String
-            If InStr(mPlantilla, "\") > 0 Then
-                plant = mPlantilla
-            Else
-                plant = mPlantilla '"C:\ProntoWeb\Proyectos\Pronto\Documentos\ComprasTerceros.xlt"
-            End If
+            plant = mPlantilla
             'Dim xlt As String = Server.MapPath("../..WebComprasTerceros.xlt")
 
             'Dim xlt As String = "\\192.168.66.2\inetpub\wwwroot\WebComprasTerceros.xlt" 'Server.MapPath("../..WebComprasTerceros) 'http://support.microsoft.com/kb/311731/es   C:\Inetpub\Wwwroot
@@ -2272,24 +2245,13 @@ Salida:
                 'Return ""
             End Try
 
-            '///////////////////////////////////////////
-            '///////////////////////////////////////////
-
-
-
-
-
-
             Dim oW As Word.Application
             Dim oDoc As Microsoft.Office.Interop.Word.Document
             'Dim oBooks As Excel.Workbooks 'haciendolo así, no queda abierto el proceso en el servidor http://support.microsoft.com/?kbid=317109
 
-
             Try
                 oW = CreateObject("Word.Application")
                 oW.Visible = False
-
-
                 'estaría bueno que si acá tarda mucho, salga
                 'puede colgarse en este Add o en el Run. Creo que se cuelga en el Add si no tiene
                 '  permisos (-permisos de qué???), y en el Run si está mal referenciada la dll
@@ -2302,9 +2264,6 @@ Salida:
                                           "Verificar el directorio de plantillas. Tiene permisos para usar el directorio?")
                     Throw
                 End Try
-
-
-
 
                 If IsNothing(oDoc) Then
                     'why the methord "Microsoft.Office.Interop.Word.ApplicationClass.Documents.Add" Returns null in .net web page
@@ -2333,29 +2292,15 @@ Salida:
                     Return ""
                 End If
 
-
-
-
-
-
                 With oDoc
                     oW.DisplayAlerts = False ' Word.WdAlertLevel.wdAlertsNone
 
-                    '///////////////////////////////////////////////////////////////////////////////////////////
-                    '///////////////////////////////////////////////////////////////////////////////////////////
-                    '///////////////////////////////////////////////////////////////////////////////////////////
                     'ejecuto la macro. ZONA DE RIESGO (porque VBA puede tirar un error y no volver)
-                    '///////////////////////////////////////////////////////////////////////////////////////////
-                    '///////////////////////////////////////////////////////////////////////////////////////////
-                    '///////////////////////////////////////////////////////////////////////////////////////////
-
 
                     Dim sStringVBA = "Emision """ & DebugCadenaImprimible(ClaseMigrar.ReEncriptaParaPronto(SC)) & """," & Id & "," & iisNull(Arg3, "Nothing") & "," & iisNull(Arg4, "Nothing") & "," & iisNull(Arg5, "Nothing") & "," & iisNull(Arg6, "Nothing") & "," & iisNull(Arg7, "Nothing")
 
-                    Debug.Print(sStringVBA)
-                    ErrHandler2.WriteError(sStringVBA)
-
-
+                    'Debug.Print(sStringVBA)
+                    'ErrHandler2.WriteError(sStringVBA)
 
                     'Acá es el cuelgue clásico: no solamente basta con ver que esten bien las referencias! A veces,
                     'aunque figuren bien, el Inter25 explota. Así que no tenés otra manera de probarlo que ejecutando la
@@ -2366,15 +2311,12 @@ Salida:
                     'Cómo hacer para que si se cuelga la llamada a .Run, salga a los 10 segundos?
                     'Corro el riesgo de que se tilde el sitio:
                     'The RPC server is unavailable. (Excepción de HRESULT: 0x800706BA)   (Remote Procedure Call)
-
                     'http://forums.asp.net/p/1134671/1808767.aspx
                     'http://forums.asp.net/p/1134671/1808767.aspx
                     '                Hi(there!)
                     '                That looks VBA-ish: Have you manually invoked the VBA editor on the server at least once (under the same account ASP.Net will use later)? That could solve the hanging, but Office performance on the web server will be just horrible (for Office was not designed to work in a multi user environment).
                     'So we refrained from using Office InterOp at all. Instead we used OleDocumentProperties to pass server side information to some auto-starting Excel macros and let them do all the work, e.g. pulling data into work sheets using the connection settings provided via OleDocumentProperties by Asp.Net.
                     'Just have a look at Microsoft's DsoFile.dll (comes with source code and .Net InterOp wrappers): The Dsofile.dll files lets you edit Office document properties when you do not have Office installed [sic].
-
-
 
                     Try
                         If Arg7 IsNot Nothing Then
@@ -2401,23 +2343,10 @@ Salida:
                         'Throw
                     End Try
 
-
-                    '                *Plantillas
                     'Se queda colgado?
                     'Verificar que tengan puesto un On Error Resume Next (no puedo catchear el error, y queda andando el Winword o Excel)
                     '-Mejor dicho, que no tengan un MsgBox al disparar un error
                     'Permisos para ejecutar macros
-
-
-                    '///////////////////////////////////////////////////////////////////////////////////////////
-                    '///////////////////////////////////////////////////////////////////////////////////////////
-                    '///////////////////////////////////////////////////////////////////////////////////////////
-                    ' fin de macro
-                    '///////////////////////////////////////////////////////////////////////////////////////////
-                    '///////////////////////////////////////////////////////////////////////////////////////////
-                    '///////////////////////////////////////////////////////////////////////////////////////////
-
-
 
                     'and added it to the saveas command. The extn (.doc) decides on what format
                     'the document is saved as.
@@ -2439,10 +2368,6 @@ Salida:
                     oW.DisplayAlerts = True '  Word.WdAlertLevel.wdAlertsAll ' True
                 End With
 
-
-
-
-
                 'ProntoFuncionesUIWeb.Current_Alert("Ahora se va a transmitir")
 
             Catch ex As Exception
@@ -2459,8 +2384,6 @@ Salida:
                 'Throw
                 output = ""
             Finally
-                'System.Runtime.InteropServices.Marshal.ReleaseComObject(oBook)
-                'oBook = Nothing
                 'System.Runtime.InteropServices.Marshal.ReleaseComObject(oBooks)
                 'oBooks = Nothing
                 'oEx.Quit()
@@ -2493,18 +2416,9 @@ Salida:
                 Catch ex As Exception
                     ErrHandler2.WriteError(ex)
                 End Try
-
-
-
             End Try
 
-
-
-
-
             Return output 'porque no estoy pudiendo ejecutar el response desde acá
-
-
 
         End Function
 

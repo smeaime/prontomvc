@@ -60,7 +60,6 @@ namespace ProntoMVC.Controllers
                 baselistado.Add(new SelectListItem { Text = r["Descripcion"] as string, Value = "" });
             }
 
-
             ViewBag.Bases = baselistado; // baselistado; // new SelectList(dt.Rows, "IdBD", "Descripcion"); // StringConnection
 
             //DDLEmpresas.DataSource = EmpresaManager.GetEmpresasPorUsuario(SC, session(SESSIONPRONTO_UserId))
@@ -133,8 +132,6 @@ namespace ProntoMVC.Controllers
                     return Json(errors);
                 }
 
-
-
                 if (ModelState.IsValid || true)
                 {
                     if (Articulo.IdArticulo > 0)
@@ -192,6 +189,24 @@ namespace ProntoMVC.Controllers
                 return Json(res);
             }
             return Json(new { Success = 0, ex = new Exception("Error al registrar").Message.ToString(), ModelState = ModelState });
+        }
+
+        [HttpPost]
+        public virtual JsonResult ActualizarPorcentajeIva(int IdArticulo, decimal PorcentajeIvaNuevo)
+        {
+            Articulo Articulo = db.Articulos.Find(IdArticulo);
+            Articulo.AlicuotaIVA = PorcentajeIvaNuevo;
+            db.Entry(Articulo).State = System.Data.Entity.EntityState.Modified;
+            db.SaveChanges();
+            return Json(new { Success = 1, IdArticulo = IdArticulo, ex = "" });
+        }
+
+        [HttpPost]
+        public virtual JsonResult RecalcularCostoPPP(int IdArticulo)
+        {
+            string nSC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString(), oStaticMembershipService));
+            EntidadManager.Tarea(nSC, "Articulos_RecalcularCostoPPP_PorIdArticulo", IdArticulo,"");
+            return Json(new { Success = 1, IdArticulo = IdArticulo, ex = "" });
         }
 
         void UpdateColecciones(ref ProntoMVC.Data.Models.Articulo o)
@@ -287,13 +302,9 @@ namespace ProntoMVC.Controllers
             return errors;
         }
 
-
-
         [HttpPost]
         public virtual JsonResult ArticulosGridData(string sidx, string sord, int page, int rows, bool _search, string filters)
         {
-
-
             //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -363,8 +374,8 @@ namespace ProntoMVC.Controllers
             //.Skip((currentPage - 1) * pageSize).Take(pageSize)
             //.ToList();
             var data1 = from a in data.OrderBy(sidx + " " + sord)
-//.Skip((currentPage - 1) * pageSize).Take(pageSize)
-.ToList()
+                        //.Skip((currentPage - 1) * pageSize).Take(pageSize)
+                        .ToList()
                         select a;
 
             var jsonData = new jqGridJson()
@@ -419,10 +430,6 @@ namespace ProntoMVC.Controllers
             int currentPage = page ?? 1;
             string sortByColumnName = sidx ?? "Descripcion";
             string sortDirection = sord ?? "desc";
-
-
-
-
 
             var data = (from a in db.Articulos
                         from b in db.Marcas.Where(o => o.IdMarca == a.IdMarca).DefaultIfEmpty()
@@ -483,8 +490,8 @@ namespace ProntoMVC.Controllers
             //.Skip((currentPage - 1) * pageSize).Take(pageSize)
             //.ToList();
             var data1 = from a in data.OrderBy(sidx + " " + sord)
-//.Skip((currentPage - 1) * pageSize).Take(pageSize)
-.ToList()
+                        //.Skip((currentPage - 1) * pageSize).Take(pageSize)
+                        .ToList()
                         select a;
 
             var jsonData = new jqGridJson()
@@ -573,9 +580,8 @@ namespace ProntoMVC.Controllers
                         .Include(x => x.Ubicacione.Deposito)
                         .Include(x => x.Rubro)
                         .Include(x => x.Subrubro)
-
-//.Skip((currentPage - 1) * pageSize).Take(pageSize)
-.ToArray();
+                        //.Skip((currentPage - 1) * pageSize).Take(pageSize)
+                        .ToArray();
 
             var jsonData = new jqGridJson()
             {
@@ -598,15 +604,9 @@ namespace ProntoMVC.Controllers
                             (a.Subrubro ?? new Subrubro()).Descripcion.NullSafeToString()   ,
 
                             a.NumeroInventario
-
-
                                         }
-
-
-
                     }).ToArray()
             };
-
             return Json(jsonData, JsonRequestBehavior.AllowGet);
         }
 
@@ -674,8 +674,6 @@ namespace ProntoMVC.Controllers
             ViewBag.IdRubro = new SelectList(db.Rubros, "IdRubro", "Descripcion", o.IdRubro);
             ViewBag.IdSubrubro = new SelectList(db.Subrubros, "IdSubrubro", "Descripcion", o.IdSubrubro);
             ViewBag.IdUnidad = new SelectList(db.Unidades, "IdUnidad", "Descripcion");
-
-
 
             var q = (from i in db.DefinicionArticulos where (i.IdRubro == o.IdRubro && i.IdSubrubro == o.IdSubrubro) orderby i.Orden select i).ToList();
             ViewBag.Mascara = q;
@@ -786,8 +784,8 @@ namespace ProntoMVC.Controllers
                             a.IdDetalleArticuloDocumentos,
                             a.PathDocumento
                         }).OrderBy(p => p.IdDetalleArticuloDocumentos)
-//.Skip((currentPage - 1) * pageSize).Take(pageSize)
-.ToList();
+                        //.Skip((currentPage - 1) * pageSize).Take(pageSize)
+                        .ToList();
 
             var jsonData = new jqGridJson()
             {
@@ -821,7 +819,6 @@ namespace ProntoMVC.Controllers
                     break;
                 default: break;
             }
-
         }
 
         public virtual ActionResult DetUnidades(string sidx, string sord, int? page, int? rows, int? Id)
@@ -842,8 +839,8 @@ namespace ProntoMVC.Controllers
                             a.Unidade,
                             a.Equivalencia
                         }).OrderBy(p => p.IdDetalleArticuloUnidades)
-//.Skip((currentPage - 1) * pageSize).Take(pageSize)
-.ToList();
+                        //.Skip((currentPage - 1) * pageSize).Take(pageSize)
+                        .ToList();
 
             var jsonData = new jqGridJson()
             {
@@ -937,8 +934,8 @@ namespace ProntoMVC.Controllers
             var data = (from a in Fac
                             //join c in db.IngresoBrutos on a.IdIBCondicion equals c.IdIBCondicion
                         select a).Where(campo).OrderBy(sidx + " " + sord)
-//.Skip((currentPage - 1) * pageSize).Take(pageSize)
-.ToList();
+                        //.Skip((currentPage - 1) * pageSize).Take(pageSize)
+                        .ToList();
 
             var jsonData = new jqGridJson()
             {
@@ -955,8 +952,7 @@ namespace ProntoMVC.Controllers
                                 ,
                                 a.IdDetalleRemito.NullSafeToString(),
                                 a.IdArticulo.NullSafeToString(),
-                                                                 (a.Articulo ?? new Articulo()).Codigo.NullSafeToString(),
-
+                                (a.Articulo ?? new Articulo()).Codigo.NullSafeToString(),
                                 (a.Articulo ?? new Articulo()).Descripcion.NullSafeToString(),
                                 a.Precio.NullSafeToString(),
                                 a.Cantidad.NullSafeToString(),
@@ -964,10 +960,6 @@ namespace ProntoMVC.Controllers
                                 (a.Unidade ?? new Unidad()).Descripcion.NullSafeToString(),
                                 a.Remito.IdCliente.NullSafeToString(),
                                 a.Remito.Cliente.RazonSocial.NullSafeToString()
-
-
-
-
                             }
                         }).ToArray()
             };
@@ -1023,8 +1015,8 @@ namespace ProntoMVC.Controllers
             var data = (from a in Fac
                             //join c in db.IngresoBrutos on a.IdIBCondicion equals c.IdIBCondicion
                         select a).Where(campo).OrderBy(sidx + " " + sord)
-//.Skip((currentPage - 1) * pageSize).Take(pageSize)
-.ToList();
+                        //.Skip((currentPage - 1) * pageSize).Take(pageSize)
+                        .ToList();
 
             var jsonData = new jqGridJson()
             {
@@ -1066,18 +1058,8 @@ namespace ProntoMVC.Controllers
             return PartialView("Select", articulos);
         }
 
-
-
-
-
-
-
-
         public virtual JsonResult GetCodigosArticulosAutocomplete_Equipos(string term)
         {
-
-
-
             string nSC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString(), oStaticMembershipService));
             DataTable dt = EntidadManager.GetStoreProcedure(nSC, "Articulos_TX_ParaMantenimiento_ParaCombo", "Compras");
             IEnumerable<DataRow> rows = dt.AsEnumerable();
@@ -1085,8 +1067,6 @@ namespace ProntoMVC.Controllers
                                                                 Titulo = r[1].NullSafeToString(),
                                                                 NumeroInventario = r[2].NullSafeToString()
             }).ToList();
-
-                        
 
             var q = (from item in sq
                      where item.Titulo.StartsWith(term)
@@ -1098,8 +1078,6 @@ namespace ProntoMVC.Controllers
                          codigo = item.Titulo
                      }).Take(MAXLISTA).ToList();
 
-
-
             if (q.Count == 0 && term != "No se encontraron resultados")
             {
                 q.Add(new { id = "0", value = "No se encontraron resultados", codigo = "" });
@@ -1107,12 +1085,8 @@ namespace ProntoMVC.Controllers
 
             var a = Json(q, JsonRequestBehavior.AllowGet);
 
-
             return a;
         }
-
-
-
 
         public virtual JsonResult GetArticulosAutocomplete(string term)
         {
@@ -1156,15 +1130,12 @@ namespace ProntoMVC.Controllers
                          CostoReposicion = (item.CostoReposicion ?? 0).ToString()
                      }).Take(MAXLISTA).ToList();
 
-
-
             if (q.Count == 0 && term != "No se encontraron resultados")
             {
                 q.Add(new { id = 0, value = "No se encontraron resultados", codigo = "", title = "", iva = (decimal?)0, IdUnidad = (int?)0, Unidad = "", CostoReposicion = "0" });
             }
 
             var a = Json(q, JsonRequestBehavior.AllowGet);
-
 
             return a;
         }
@@ -1249,10 +1220,6 @@ namespace ProntoMVC.Controllers
 
         public virtual JsonResult GetObrasAutocomplete2(string term)
         {
-
-
-
-
             var q = (from item in db.Obras
                      where (item.NumeroObra.ToLower() + " - " + item.Descripcion.ToLower()).Contains(term.ToLower())
                            && item.Activa != "NO"
@@ -1363,12 +1330,15 @@ namespace ProntoMVC.Controllers
         {
             int pageSize = rows ?? 20;
             int currentPage = page ?? 1;
+
             List<Articulo> Articulos = ProntoMVC.Models.ArticuloDAL.SelectArticulos("filtro", this.Session["BasePronto"].ToString());
+            
             int totalRecords = Articulos.Count();
             int totalPages = (int)Math.Ceiling((float)totalRecords / (float)pageSize);
+
             var data = Articulos
-//.Skip((currentPage - 1) * pageSize).Take(pageSize)
-.ToArray();
+                        //.Skip((currentPage - 1) * pageSize).Take(pageSize)
+                        .ToArray();
 
             var jsonData = new jqGridJson()
             {
@@ -1417,8 +1387,6 @@ namespace ProntoMVC.Controllers
 
             var Articulos1 = (from a in Articulos select a).Where(campo).Select(a => a.IdArticulo);
 
-
-
             int totalRecords = Articulos1.Count();
             int totalPages = (int)Math.Ceiling((float)totalRecords / (float)pageSize);
 
@@ -1432,8 +1400,8 @@ namespace ProntoMVC.Controllers
                             Unidad = a.Unidad.Abreviatura,
                             Iva = a.AlicuotaIVA
                         }).Where(campo).OrderBy(sidx + " " + sord)
-//.Skip((currentPage - 1) * pageSize).Take(pageSize)
-.ToList();
+                        //.Skip((currentPage - 1) * pageSize).Take(pageSize)
+                        .ToList();
 
             var jsonData = new jqGridJson()
             {
@@ -1461,11 +1429,8 @@ namespace ProntoMVC.Controllers
 
         public virtual FileResult Articulos_DynamicGridData_GenerarExcel(string sidx, string sord, int page, int rows, bool _search, string filters)
         {
-
-
             //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
             //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -1477,19 +1442,13 @@ namespace ProntoMVC.Controllers
             //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-
             var q = (from a in pagedQuery
                      select new
                      {
                          aa = a.Codigo.ToString() + ", " + "adsasdasd"
                      }).ToList();
 
-
-
             string myCSV = string.Join("\n", q.Select(i => i.aa.ToString()).ToArray());
-
-
-
 
             var contentType = "text/csv";
             //var content = "<content>Your content</content>";
@@ -1498,34 +1457,19 @@ namespace ProntoMVC.Controllers
             result.FileDownloadName = "Articulo.csv";
             return result;
 
-
-
-
             /*
-
             string output = "Articulo.csv";
             //tengo que copiar la plantilla en el destino, porque openxml usa el archivo que le vaya a pasar
             System.IO.FileInfo MyFile1 = new System.IO.FileInfo(output);//busca si ya existe el archivo a generar y en ese caso lo borra
             if (MyFile1.Exists) MyFile1.Delete();
-
-
-
             byte[] contents = System.IO.File.ReadAllBytes(output);
             return File(contents, System.Net.Mime.MediaTypeNames.Application.Octet, output);
             */
-
         }
-
-
 
         public virtual JsonResult Articulos_DynamicGridData(string sidx, string sord, int page, int rows, bool _search, string filters, int IdRubro = 0)
         {
-
-            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
             int totalRecords = 0;
-
 
             var data = (from a in db.Articulos where (IdRubro == 0 || (IdRubro != 0 && a.IdRubro == IdRubro)) select a).AsQueryable();
 
@@ -1535,15 +1479,7 @@ namespace ProntoMVC.Controllers
             var pagedQuery = Filters.FiltroGenerico_UsandoIQueryable<Data.Models.Articulo>
                                 (sidx, sord, page, rows, _search, filters, db, ref totalRecords, data);
 
-            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
             var q = pagedQuery.ToList();
-
 
             var jsonData = new ProntoMVC.Controllers.jqGridJson()
             {
@@ -1556,16 +1492,13 @@ namespace ProntoMVC.Controllers
                             id = a.IdArticulo.ToString(),
                             cell = new string[] { 
                             //"<a href="+ Url.Action("Edit",new {id = a.IdArticulo} )  +" target='_blank' >Editar</>",
-                            "<a href="+ Url.Action("Edit",new {id = a.IdArticulo} )  +"  >Editar</>",
-                             a.IdArticulo.NullSafeToString(),
-
+                            "<a href="+ Url.Action("Edit",new {id = a.IdArticulo} ) + "  >Editar</>",
+                            a.IdArticulo.NullSafeToString(),
                             a.Codigo.NullSafeToString(),
-                            a.NumeroInventario.NullSafeToString() ,
-
+                            a.NumeroInventario.NullSafeToString(),
                             a.Descripcion.NullSafeToString(),
-
-                            (a.Rubro ?? new Rubro()).Descripcion.NullSafeToString()   ,
-                            (a.Subrubro ?? new Subrubro()).Descripcion.NullSafeToString()   ,
+                            (a.Rubro ?? new Rubro()).Descripcion.NullSafeToString(),
+                            (a.Subrubro ?? new Subrubro()).Descripcion.NullSafeToString(),
                             a.AlicuotaIVA.NullSafeToString(),
                             a.CostoPPP.NullSafeToString(),
                             a.CostoPPPDolar.NullSafeToString(),
@@ -1573,64 +1506,35 @@ namespace ProntoMVC.Controllers
                             a.CostoReposicionDolar.NullSafeToString(),
                             a.StockMinimo.NullSafeToString(),
                             a.StockReposicion.NullSafeToString(),
-
-                           ((db.Stocks.Where(x => x.IdArticulo == a.IdArticulo).Sum(y => y.CantidadUnidades)) ?? 0).NullSafeToString() ,
-
-
-                            (a.Unidad ?? new Unidad()).Abreviatura.NullSafeToString()   ,
-
-                             (a.Ubicacione != null ?
-                             (
-                          (a.Ubicacione.Deposito != null ? " " + a.Ubicacione.Deposito.Abreviatura : "")
-                          + (a.Ubicacione.Descripcion != null ? " " + a.Ubicacione.Descripcion : "")
-                          + (a.Ubicacione.Estanteria != null ? " Est.:" + a.Ubicacione.Estanteria : "")
-                          + (a.Ubicacione.Modulo != null ? " Mod.:" + a.Ubicacione.Modulo : "")
-                          + (a.Ubicacione.Gabeta != null ? " Gab.:" + a.Ubicacione.Gabeta : "")
-                          )
-                          : "")
-                          ,
-
-
-
-                          a.Marca != null ? a.Marca.Descripcion : "",
-
-                            (a.Modelo ?? new Modelo()).Descripcion.NullSafeToString()   ,
-
-
-                            a.ParaMantenimiento.NullSafeToString() ,
-
-
-                               (a.Cuenta ?? new Cuenta()).Descripcion.NullSafeToString()   ,
-
-
-
-                            a.FechaAlta.NullSafeToString() ,
-                            a.UsuarioAlta.NullSafeToString() ,
-                            a.FechaUltimaModificacion.NullSafeToString() ,
-
-                            a.NumeroInventario.NullSafeToString()  ,
-
+                            ((db.Stocks.Where(x => x.IdArticulo == a.IdArticulo).Sum(y => y.CantidadUnidades)) ?? 0).NullSafeToString(),
+                            (a.Unidad ?? new Unidad()).Abreviatura.NullSafeToString(),
+                            (a.Ubicacione != null ?
+                                (
+                                  (a.Ubicacione.Deposito != null ? " " + a.Ubicacione.Deposito.Abreviatura : "")
+                                  + (a.Ubicacione.Descripcion != null ? " " + a.Ubicacione.Descripcion : "")
+                                  + (a.Ubicacione.Estanteria != null ? " Est.:" + a.Ubicacione.Estanteria : "")
+                                  + (a.Ubicacione.Modulo != null ? " Mod.:" + a.Ubicacione.Modulo : "")
+                                  + (a.Ubicacione.Gabeta != null ? " Gab.:" + a.Ubicacione.Gabeta : "")
+                                  ): ""),
+                            a.Marca != null ? a.Marca.Descripcion : "",
+                            (a.Modelo ?? new Modelo()).Descripcion.NullSafeToString(),
+                            a.ParaMantenimiento.NullSafeToString(),
+                            (a.Cuenta ?? new Cuenta()).Descripcion.NullSafeToString(),
+                            a.FechaAlta.NullSafeToString(),
+                            a.UsuarioAlta.NullSafeToString(),
+                            a.FechaUltimaModificacion.NullSafeToString(),
+                            a.NumeroInventario.NullSafeToString(),
                             a.IdArticulo.NullSafeToString(),
                             a.IdUnidad.NullSafeToString(),
-
-                            (a.Unidad ?? new Unidad()).Abreviatura.NullSafeToString()   ,
-
-
-
-
-
-
+                            (a.Unidad ?? new Unidad()).Abreviatura.NullSafeToString(),
                             }
                         }
                         ).ToArray()
             };
 
-
             return Json(jsonData, JsonRequestBehavior.AllowGet);
 
         }
-
-
 
         public virtual JsonResult GetStoreProc(string sp, string p1, string p2, string p3, string p4, string p5, string p6, string p7)
         {
@@ -1671,8 +1575,6 @@ namespace ProntoMVC.Controllers
         {
             Parametros parametros = db.Parametros.Find(1);
             var q = parametros.IdControlCalidadStandar ?? -1;
-
-
 
             return Json(q, JsonRequestBehavior.AllowGet);
         }

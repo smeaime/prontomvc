@@ -1688,108 +1688,131 @@ namespace ProntoMVC.Controllers
             return RedirectToAction("Index");
         }
 
-
-
-        public virtual ActionResult Pedidos_DynamicGridData(string sidx, string sord, int page, int rows, bool _search, string filters)
+        public class Pedidos2
         {
+            public int IdPedido { get; set; }
+            public int? PuntoVenta { get; set; }
+            public int? NumeroPedido { get; set; }
+            public int? SubNumero { get; set; }
+            public DateTime? FechaPedido { get; set; }
+            public DateTime? FechaSalida { get; set; }
+            public string Cumplido { get; set; }
+            public string Requerimientos { get; set; }
+            public string Obras { get; set; }
+            public string ProveedoresCodigo { get; set; }
+            public string ProveedoresNombre { get; set; }
+            public decimal? TotalGravado { get; set; }
+            public decimal? ImporteBonificacion { get; set; }
+            public decimal? ImporteIva1 { get; set; }
+            public decimal? OtrosConceptos { get; set; }
+            public decimal? ImpuestosInternos { get; set; }
+            public decimal? ImporteTotal { get; set; }
+            public string Moneda { get; set; }
+            public string Comprador { get; set; }
+            public string LiberadoPor { get; set; }
+            public int? CantidadItems { get; set; }
+            public int? NumeroComparativa { get; set; }
+            public string TiposCompra { get; set; }
+            public string Observaciones { get; set; }
+            public string CondicionCompra { get; set; }
+            public string DetalleCondicionCompra { get; set; }
+            public string PedidoExterior { get; set; }
+            public string NumeroLicitacion { get; set; }
+            public string Impresa { get; set; }
+            public string UsuarioAnulo { get; set; }
+            public DateTime? FechaAnulacion { get; set; }
+            public string MotivoAnulacion { get; set; }
+            public string EquipoDestino { get; set; }
+            public string CircuitoFirmasCompleto { get; set; }
+            public string DescripcionIva { get; set; }
+            public DateTime? FechaEnvioProveedor { get; set; }
+            public string Detalle { get; set; }
+        }
 
-            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        public virtual ActionResult Pedidos_DynamicGridData(string sidx, string sord, int page, int rows, bool _search, string filters, string FechaInicial, string FechaFinal)
+        {
+            DateTime FechaDesde, FechaHasta;
+            try
+            {
+                if (FechaInicial == "") FechaDesde = DateTime.MinValue;
+                else FechaDesde = DateTime.ParseExact(FechaInicial, "dd/MM/yyyy", null);
+            }
+            catch (Exception)
+            {
+                FechaDesde = DateTime.MinValue;
+            }
+
+            try
+            {
+                if (FechaFinal == "") FechaHasta = DateTime.MaxValue;
+                else FechaHasta = DateTime.ParseExact(FechaFinal, "dd/MM/yyyy", null);
+            }
+            catch (Exception)
+            {
+                FechaHasta = DateTime.MaxValue;
+            }
 
             int totalRecords = 0;
-
-            var pagedQuery = Filters.FiltroGenerico<Data.Models.Pedido>
-                                ("DetallePedidos.DetalleRequerimiento.Requerimientos.Obra", sidx, sord, page, rows, _search, filters, db, ref totalRecords);
-            //"Moneda,Proveedor,DetallePedidos,Comprador,DetallePedidos.DetalleRequerimiento.Requerimientos.Obra"
-
-            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-
-            string campo = "true";
             int pageSize = rows;
-            int currentPage = page;
 
+            var data = (from a in db.Pedidos
+                        from b in db.Empleados.Where(o => o.IdEmpleado == a.IdComprador).DefaultIfEmpty()
+                        from c in db.Empleados.Where(o => o.IdEmpleado == a.Aprobo).DefaultIfEmpty()
+                        from d in db.TiposCompras.Where(o => o.IdTipoCompra == a.IdTipoCompraRM).DefaultIfEmpty()
+                        from e in db.Condiciones_Compras.Where(o => o.IdCondicionCompra == a.IdCondicionCompra).DefaultIfEmpty()
+                        from f in db.DescripcionIvas.Where(o => o.IdCodigoIva == a.Proveedor.IdCodigoIva).DefaultIfEmpty()
+                        select new Pedidos2
+                        {
+                            IdPedido = a.IdPedido,
+                            PuntoVenta = a.PuntoVenta,
+                            NumeroPedido = a.NumeroPedido,
+                            SubNumero = a.SubNumero,
+                            FechaPedido = a.FechaPedido,
+                            FechaSalida = a.FechaSalida,
+                            Cumplido = a.Cumplido,
+                            Requerimientos = ModelDefinedFunctions.Pedidos_Requerimientos(a.IdPedido).ToString(),
+                            Obras = ModelDefinedFunctions.Pedidos_Obras(a.IdPedido).ToString(),
+                            ProveedoresCodigo = a.Proveedor.CodigoEmpresa != null ? a.Proveedor.CodigoEmpresa : "",
+                            ProveedoresNombre = a.Proveedor.RazonSocial != null ? a.Proveedor.RazonSocial : "",
+                            TotalGravado = (a.TotalPedido ?? 0) - (a.TotalIva1 ?? 0) + (a.Bonificacion ?? 0) - (a.ImpuestosInternos ?? 0) - (a.OtrosConceptos1 ?? 0) - (a.OtrosConceptos2 ?? 0) - (a.OtrosConceptos3 ?? 0) - (a.OtrosConceptos4 ?? 0) - (a.OtrosConceptos5 ?? 0),
+                            ImporteBonificacion = a.Bonificacion ?? 0,
+                            ImporteIva1 = a.TotalIva1 ?? 0,
+                            OtrosConceptos = (a.OtrosConceptos1 ?? 0) + (a.OtrosConceptos2 ?? 0) + (a.OtrosConceptos3 ?? 0) + (a.OtrosConceptos4 ?? 0) + (a.OtrosConceptos5 ?? 0),
+                            ImpuestosInternos = (a.ImpuestosInternos ?? 0),
+                            ImporteTotal = a.TotalPedido,
+                            Moneda = a.Moneda == null ? "" : a.Moneda.Abreviatura,
+                            Comprador = b != null ? b.Nombre : "",
+                            LiberadoPor = c != null ? c.Nombre : "",
+                            CantidadItems = a.DetallePedidos.Count(),
+                            NumeroComparativa = a.NumeroComparativa ?? 0,
+                            TiposCompra = d != null ? d.Descripcion : "",
+                            Observaciones = a.Observaciones ?? "",
+                            CondicionCompra = e != null ? e.Descripcion : "",
+                            DetalleCondicionCompra = a.DetalleCondicionCompra ?? "",
+                            PedidoExterior = a.PedidoExterior ?? "",
+                            NumeroLicitacion = a.NumeroLicitacion ?? "",
+                            Impresa = a.Impresa ?? "",
+                            UsuarioAnulo = a.UsuarioAnulacion ?? "",
+                            FechaAnulacion = a.FechaAnulacion,
+                            MotivoAnulacion = a.MotivoAnulacion ?? "",
+                            EquipoDestino = ModelDefinedFunctions.Pedidos_EquiposDestino(a.IdPedido).ToString(),
+                            CircuitoFirmasCompleto = a.CircuitoFirmasCompleto ?? "",
+                            DescripcionIva = f != null ? f.Descripcion : "",
+                            FechaEnvioProveedor = a.FechaEnvioProveedor,
+                            Detalle = a.Detalle ?? "",
+                        }).Where(a => a.FechaPedido >= FechaDesde && a.FechaPedido <= FechaHasta).OrderBy(sidx + " " + sord).AsQueryable();
 
-            //if (sidx == "Numero") sidx = "NumeroPedido"; // como estoy haciendo "select a" (el renglon entero) en la linq antes de llamar jqGridJson, no pude ponerle el nombre explicito
-            //if (searchField == "Numero") searchField = "NumeroPedido"; 
-
-            var Entidad = pagedQuery
-                //.Include(x => x.Moneda)
-                //.Include(x => x.Proveedor)
-                //.Include(x => x.DetallePedidos
-                //            .Select(y => y.DetalleRequerimiento
-                //                )
-                //        )
-                //.Include("DetallePedidos.DetalleRequerimiento.Requerimientos.Obra") // funciona tambien
-                //.Include(x => x.Comprador)
-                          .AsQueryable();
-
-
-            var Entidad1 = (from a in Entidad.Where(campo) select new { IdPedido = a.IdPedido });
+            var pagedQuery = Filters.FiltroGenerico_UsandoIQueryable<Pedidos2>
+                                     (sidx, sord, page, rows, _search, filters, db, ref totalRecords, data);
 
             int totalPages = (int)Math.Ceiling((float)totalRecords / (float)pageSize);
-
-            var data = (from a in Entidad
-
-
-                        //   .Include(x => x.Proveedor)
-                        //  .Include("DetallePedidos.IdDetalleRequerimiento") // funciona tambien
-                        //.Include(x => x.DetallePedidos.Select(y => y. y.IdDetalleRequerimiento))
-                        // .Include(x => x.Aprobo)
-                        select
-
-                        a
-                //                        new
-                //                        {
-                //                            IdPedido = a.IdPedido,
-
-//                            Numero = a.NumeroPedido,
-                //                            fecha
-                //                            fechasalida
-                //                            cumpli
-                //                            rms
-                //                            obras
-                //                            proveedor
-                //                            neto gravado
-                //                            bonif
-                //                            total iva
-
-
-//// IsNull(Pedidos.TotalPedido,0)-IsNull(Pedidos.TotalIva1,0)+IsNull(Pedidos.Bonificacion,0)-  
-                //// IsNull(Pedidos.ImpuestosInternos,0)-IsNull(Pedidos.OtrosConceptos1,0)-IsNull(Pedidos.OtrosConceptos2,0)-  
-                //// IsNull(Pedidos.OtrosConceptos3,0)-IsNull(Pedidos.OtrosConceptos4,0)-IsNull(Pedidos.OtrosConceptos5,0)as [Neto gravado],  
-                //// Case When Bonificacion=0 Then Null Else Bonificacion End as [Bonificacion],  
-
-//// Case When TotalIva1=0 Then Null Else TotalIva1 End as [Total Iva],  
-
-//// IsNull(Pedidos.ImpuestosInternos,0)+IsNull(Pedidos.OtrosConceptos1,0)+IsNull(Pedidos.OtrosConceptos2,0)+  
-                //// IsNull(Pedidos.OtrosConceptos3,0)+IsNull(Pedidos.OtrosConceptos4,0)+IsNull(Pedidos.OtrosConceptos5,0)as [Otros Conceptos],  
-                //// TotalPedido as [Total pedido],  
-
-
-
-
-
-//                        }
-
-
-                        )
-                // .Where(campo).OrderBy(sidx + " " + sord)
-                //.Skip((currentPage - 1) * pageSize).Take(pageSize)
-.ToList();
 
             var jsonData = new jqGridJson()
             {
                 total = totalPages,
-                page = currentPage,
+                page = page,
                 records = totalRecords,
-                rows = (from a in data
+                rows = (from a in pagedQuery
                         select new jqGridRowJson
                         {
                             id = a.IdPedido.ToString(),
@@ -1799,56 +1822,45 @@ namespace ProntoMVC.Controllers
                                 a.IdPedido.ToString(), 
                                 a.NumeroPedido.NullSafeToString(), 
                                 a.SubNumero.NullSafeToString(), 
-                                 a.FechaPedido==null ? "" :  a.FechaPedido.GetValueOrDefault().ToString("dd/MM/yyyy"),
-                                 a.FechaSalida==null ? "" :  a.FechaSalida.GetValueOrDefault().ToString("dd/MM/yyyy"),
+                                a.FechaPedido==null ? "" :  a.FechaPedido.GetValueOrDefault().ToString("dd/MM/yyyy"),
+                                a.FechaSalida==null ? "" :  a.FechaSalida.GetValueOrDefault().ToString("dd/MM/yyyy"),
                                 a.Cumplido.NullSafeToString(), 
-
-
-                                string.Join(" ",  a.DetallePedidos.Select(x=>(x.DetalleRequerimiento==null) ? "" : 
-                                                     x.DetalleRequerimiento.Requerimientos == null ? "" :   
-                                                         x.DetalleRequerimiento.Requerimientos.NumeroRequerimiento.NullSafeToString() ).Distinct()),
-                                string.Join(" ",  a.DetallePedidos.Select(x=>(x.DetalleRequerimiento==null) ? "" : 
-                                                        x.DetalleRequerimiento.Requerimientos == null ? ""  :
-                                                            x.DetalleRequerimiento.Requerimientos.Obra == null ? ""  :
-                                                             x.DetalleRequerimiento.Requerimientos.Obra.NumeroObra.NullSafeToString()).Distinct()),
-                              
-                                                             
-                                a.Proveedor==null ? "" :  a.Proveedor.RazonSocial.NullSafeToString(), 
-                                (a.TotalPedido- a.TotalIva1+a.Bonificacion- (a.ImpuestosInternos ?? 0)- (a.OtrosConceptos1 ?? 0) - (a.OtrosConceptos2 ?? 0)-    (a.OtrosConceptos3 ?? 0) -( a.OtrosConceptos4 ?? 0) - (a.OtrosConceptos5 ?? 0)).ToString(),  
-                                a.Bonificacion.NullSafeToString(), 
-                                a.TotalIva1.NullSafeToString(), 
-                                a.Moneda==null ? "" :   a.Moneda.Abreviatura.NullSafeToString(),  
-                                a.Comprador==null ? "" :    a.Comprador.Nombre.NullSafeToString(),  
-                                a.Empleado==null ? "" :  a.Empleado.Nombre.NullSafeToString(),  
-                                a.DetallePedidos.Count().NullSafeToString(),  
-                                a.IdPedido.NullSafeToString(), 
-                                a.NumeroComparativa.NullSafeToString(),  
-                                a.IdTipoCompraRM.NullSafeToString(), 
-                                a.Observaciones.NullSafeToString(),   
-                                a.DetalleCondicionCompra.NullSafeToString(),   
-                                a.PedidoExterior.NullSafeToString(),  
-                                a.IdPedidoAbierto.NullSafeToString(), 
-                                a.NumeroLicitacion .NullSafeToString(), 
-                                a.Impresa.NullSafeToString(), 
-                                a.UsuarioAnulacion.NullSafeToString(), 
-                                a.FechaAnulacion.NullSafeToString(),  
-                                a.MotivoAnulacion.NullSafeToString(),  
+                                a.Requerimientos.NullSafeToString(), 
+                                a.Obras.NullSafeToString(), 
+                                a.ProveedoresCodigo.NullSafeToString(), 
+                                a.ProveedoresNombre.NullSafeToString(), 
+                                a.TotalGravado.NullSafeToString(), 
+                                a.ImporteBonificacion.NullSafeToString(), 
+                                a.ImporteIva1.NullSafeToString(), 
+                                a.OtrosConceptos.NullSafeToString(), 
                                 a.ImpuestosInternos.NullSafeToString(), 
-                                "", // #Auxiliar1.Equipos , 
+                                a.ImporteTotal.NullSafeToString(), 
+                                a.Moneda.NullSafeToString(), 
+                                a.Comprador.NullSafeToString(), 
+                                a.LiberadoPor.NullSafeToString(), 
+                                a.CantidadItems.NullSafeToString(), 
+                                a.NumeroComparativa.NullSafeToString(), 
+                                a.TiposCompra.NullSafeToString(), 
+                                a.Observaciones.NullSafeToString(), 
+                                a.CondicionCompra.NullSafeToString(), 
+                                a.DetalleCondicionCompra.NullSafeToString(), 
+                                a.PedidoExterior.NullSafeToString(), 
+                                a.NumeroLicitacion.NullSafeToString(), 
+                                a.Impresa.NullSafeToString(), 
+                                a.UsuarioAnulo.NullSafeToString(), 
+                                a.FechaAnulacion.NullSafeToString(), 
+                                a.MotivoAnulacion.NullSafeToString(), 
+                                a.EquipoDestino.NullSafeToString(), 
                                 a.CircuitoFirmasCompleto.NullSafeToString(), 
-                                a.Proveedor==null ? "" : a.Proveedor.IdCodigoIva.NullSafeToString() ,
-                                a.IdComprador.NullSafeToString(),
-                                a.IdProveedor.NullSafeToString(),
-                                a.ConfirmadoPorWeb_1.NullSafeToString()
-                               
+                                a.DescripcionIva.NullSafeToString(), 
+                                a.FechaEnvioProveedor.NullSafeToString(), 
+                                a.Detalle.NullSafeToString()
                             }
                         }).ToArray()
             };
 
             return Json(jsonData, JsonRequestBehavior.AllowGet);
         }
-
-
 
 
         public virtual ActionResult Pedidos(string sidx, string sord, int? page, int? rows, bool _search, string searchField, string searchOper, string searchString, string FechaInicial, string FechaFinal)
