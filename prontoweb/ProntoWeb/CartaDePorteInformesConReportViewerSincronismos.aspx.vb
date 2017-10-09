@@ -1974,6 +1974,9 @@ Partial Class CartaDePorteInformesConReportViewerSincronismos
                         registrosFiltrados = ds.wCartasDePorte_TX_InformesCorregido.Count
 
 
+
+                        sForzarNombreDescarga = "DESCAR947.dat"
+
                     Case "DIAZ RIGANTI"
                         output = Sincronismo_DiazRiganti(HFSC.Value, ds.wCartasDePorte_TX_InformesCorregido, , sWHERE)
                         registrosFiltrados = ds.wCartasDePorte_TX_InformesCorregido.Count
