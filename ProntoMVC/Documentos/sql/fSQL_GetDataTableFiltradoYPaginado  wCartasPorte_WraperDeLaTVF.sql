@@ -905,9 +905,9 @@ wCartasPorte_WraperDeLaTVF
 					NULL,---1, --@idDestino,
 					0, --@AplicarANDuORalFiltro,
 					'Ambos', --'Buques',
-					'2016-30-03 00:00:00',
+					'2016-03-30 00:00:00',
 					
-					'2016-30-03 00:00:00',
+					'2016-03-30 00:00:00',
 					NULL, 
 					NULL,
 					NULL, 
