@@ -57,14 +57,28 @@
                 <li id="AlicuotaIva">
                     <span style="font-size:11px; font-family:Verdana">Aplicar alicuota IVA</span>
                 </li>
-                <li id="RecalculoCosto">
+                <li id="RecalcularCostoPPP">
                     <span style="font-size:11px; font-family:Verdana">Recalcular costo promedio ponderado</span>
                 </li>
             </ul>
         </div>
+
+        <div id="form" title="Porcentaje iva" style="display:none">
+            <form id="usuario">
+                <fieldset>
+                    <label for="nombre">% Iva</label>
+                    <input type="text" id="PorcentajeIvaNuevo" autocomplete="off" class="validate" required>
+                    <br>
+                    <a href="#!" id="AceptarIva" class=" modal-action modal-close waves-effect waves-green btn-flat">Aceptar</a>
+                    <a href="#!" id="CancelarIva" class=" modal-action modal-close waves-effect waves-green btn-flat">Cancelar</a>
+                </fieldset>
+            </form>
+        </div>
+
     </div>
 </div>
 <script type="text/javascript">
+    $(document).ajaxStop($.unblockUI);
     $().ready(function () {
         $('#BuscadorListado').focus();
 
@@ -79,15 +93,13 @@
             },
             //            cellEdit: true,
             //            cellurl: '@Url.Action("UpdateArticuloProperty")',
-            colNames: ['', ''
-                //, 'IdArticulo'
-                , 'Codigo', 'Nro. inventario', 'Descripcion', 'Rubro', 'Subrubro', '% IVA', 'Costo PPP', 'Costo PPP u$s', 'Costo Rep', 'Costo rep u$s', 'Stock minimo',
+            colNames: ['', 'IdArticulo', 'Codigo', 'Nro. inventario', 'Descripcion', 'Rubro', 'Subrubro', '% IVA', 'Costo PPP', 'Costo PPP u$s', 'Costo Rep', 'Costo rep u$s', 'Stock minimo',
                        'Stock reposicion', 'Stock actual', 'En', 'Ubicacion', 'Marca', 'Modelo', 'Para mant.?', 'Cuenta para compra', 'Fecha alta', 'Usuario alta', 'Fecha ult. modif.'
             ],
             colModel: [
                         { name: 'Edit', index: 'Edit', width: 50, align: 'left', sortable: false, search: false },
-                        { name: 'Delete', index: 'Delete', width: 1, align: 'left', sortable: false, search: false, hidden: true },
-                        //{ name: 'IdArticulo', index: 'IdArticulo', width: 80, sortable: false, editable: false, search: false, hidden: true },
+                        //{ name: 'Delete', index: 'Delete', width: 1, align: 'left', sortable: false, search: false, hidden: true },
+                        { name: 'IdArticulo', index: 'IdArticulo', width: 80, sortable: false, editable: false, search: false, hidden: true },
                         { name: 'Codigo', index: 'Codigo', width: 130, align: 'left', search: true, stype: 'text' },
                         { name: 'NumeroInventario', index: 'NumeroInventario', width: 130, align: 'left', search: true, stype: 'text' },
                         { name: 'Descripcion', index: 'Descripcion', width: 480, align: 'left', stype: 'text', editable: false, edittype: 'text', editoptions: { maxlength: 250 }, editrules: { required: true }, search: true, searchoptions: { sopt: ['cn'] } },
@@ -118,14 +130,29 @@
                 $("tr.jqgrow", this).contextMenu('myMenu1', {
                     bindings: {
                         'AlicuotaIva': function (trigger) {
+                            AlicuotaIva()
                             // trigger is the DOM element ("tr.jqgrow") which are triggered
                             //   grid.editGridRow(trigger.id, editSettings);
                         },
-                        'RecalculoCosto': function (trigger) {
-                            if ($('#del').hasClass('ui-state-disabled') === false) {
+                        'RecalcularCostoPPP': function (trigger) {
+                            $.blockUI({ message: "Un momento por favor...",
+                                css: {
+                                    border: 'none',
+                                    padding: '15px',
+                                    backgroundColor: '#000',
+                                    '-webkit-border-radius': '10px',
+                                    '-moz-border-radius': '10px',
+                                    opacity: .5,
+                                    color: '#fff'
+                                }
+                            });
+                            RecalcularCostoPPP();
+                            $('#Lista').trigger('reloadGrid');
+
+                            //if ($('#del').hasClass('ui-state-disabled') === false) {
                                 // disabled item can do be choosed
                                 //      grid.delGridRow(trigger.id, delSettings);
-                            }
+                            //}
                         }
                     },
                     onContextMenu: function (event/*, menu*/) {
@@ -140,7 +167,6 @@
                         //}
                         return true;
                     },
-
                     //http://stackoverflow.com/questions/8451982/custom-values-to-context-menu-items-in-jqgrid
                     menuStyle: {
                         backgroundColor: '#fcfdfd',
@@ -271,5 +297,80 @@
             }
         });
     }
+
+    $( "#form" ).dialog({
+        autoOpen: false,
+        modal: true,
+        resizable: false,
+        show: {
+            effect: "blind"
+        },
+        hide: {
+            effect: "explode"
+        }
+    });
+
+    $("#AceptarIva").click(function () {
+        var PorcentajeIvaNuevo = $("#PorcentajeIvaNuevo").val(), IdArticulo = 0;
+
+        if (PorcentajeIvaNuevo === "") {
+            alert("Debe indicar el % de iva");
+        } else {
+            var $grid = $("#Lista"), selIds = $grid.jqGrid("getGridParam", "selarrrow"), i, n,
+                cellValues = [];
+            for (i = 0, n = selIds.length; i < n; i++) {
+                //cellValues.push($grid.jqGrid("getCell", selIds[i], "IdArticulo"));
+                IdArticulo = $grid.jqGrid("getCell", selIds[i], "IdArticulo");
+                $.ajax({
+                    type: 'POST',
+                    contentType: 'application/json; charset=utf-8',
+                    url: ROOT + 'Articulo/ActualizarPorcentajeIva',
+                    dataType: 'json',
+                    data: JSON.stringify({ IdArticulo: IdArticulo, PorcentajeIvaNuevo: PorcentajeIvaNuevo }),
+                    async: false,
+                    success: function (result) {
+                        if (result) {
+                        } else {
+                            alert('No se pudo actualizar.');
+                        }
+                    },
+                });
+            }
+            //alert(cellValues.join(","));
+            $("#form").dialog('close');
+            $('#Lista').trigger('reloadGrid');
+            alert('Proceso completado con exito.');
+        }
+    });
+        
+    $("#CancelarIva").click(function () {
+            $("#form").dialog('close');
+    });
+
+    function AlicuotaIva(id) {
+        $("#form").dialog("open");
+    };
+
+    function RecalcularCostoPPP() {
+        var $grid = $("#Lista"), selIds = $grid.jqGrid("getGridParam", "selarrrow"), i, n,
+            cellValues = [];
+        for (i = 0, n = selIds.length; i < n; i++) {
+            IdArticulo = $grid.jqGrid("getCell", selIds[i], "IdArticulo");
+            $.ajax({
+                type: 'POST',
+                async: true,
+                contentType: 'application/json; charset=utf-8',
+                url: ROOT + 'Articulo/RecalcularCostoPPP',
+                dataType: 'json',
+                data: JSON.stringify({ IdArticulo: IdArticulo }),
+                success: function (result) {
+                    if (result) {
+                    } else {
+                        alert('No se pudo actualizar.');
+                    }
+                },
+            });
+        }
+    };
 
 </script>
