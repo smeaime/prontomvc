@@ -17314,7 +17314,7 @@ usuario As String, ConexBDLmaster As String,
 
 
 
-    Public Shared Function GrabarSituaciones_DLL(listado As List(Of Long), idsituacion As Integer, sObservacionesSituacion As String, SC As String) As String
+    Public Shared Function GrabarSituaciones_DLL(listado As Long(), idsituacion As Integer, sObservacionesSituacion As String, SC As String) As String
 
         Dim msunion As String = ""
 

@@ -111,12 +111,15 @@ Partial Class SituacionCalidadMovil
             lblRazonSocial.Text = rs
 
 
+
             BloqueosDeEdicion()
+
         End If
 
 
         'AjaxControlToolkit.ToolkitScriptManager.GetCurrent(Me.Page).RegisterPostBackControl(informe)
         AjaxControlToolkit.ToolkitScriptManager.GetCurrent(Me.Page).RegisterPostBackControl(btnExportarGrilla)
+        'AjaxControlToolkit.ToolkitScriptManager.RegisterStartupScript(Me, Me.GetType(), "StartUpScript1", "$('#Lista').trigger('reloadGrid');", True)
 
         'AutoCompleteExtender2.ContextKey = HFSC.Value
         AutoCompleteExtender26.ContextKey = HFSC.Value
