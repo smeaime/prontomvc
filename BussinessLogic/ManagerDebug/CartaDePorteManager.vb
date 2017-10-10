@@ -22767,6 +22767,28 @@ Public Class UserDatosExtendidosManager
     End Function
 
 
+    Public Shared Function TraerRazonSocialDelUsuarioNombre(ByVal UserName As String, ConexBDLmaster As String, SC As String) As String
+
+
+
+        Try
+
+            Using db As New BDLMasterEntities(Auxiliares.FormatearConexParaEntityFrameworkBDLMASTER_2(Encriptar(ConexBDLmaster)))
+
+                Dim uext = (From p In db.UserDatosExtendidos
+                            Join u In db.aspnet_Users On u.UserId Equals p.UserId
+                            Where u.UserName = UserName
+                            Select p).SingleOrDefault
+
+                Return NombreCliente(SC, uext.RazonSocial)
+            End Using
+        Catch ex As Exception
+            ErrHandler2.WriteError(ex)
+            Return ""
+        End Try
+
+    End Function
+
 
     Public Shared Function TraerClientesRelacionadoslDelUsuario(ByVal UserName As String, ConexBDLmaster As String) As String
 

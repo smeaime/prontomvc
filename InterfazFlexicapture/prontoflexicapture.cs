@@ -63,6 +63,35 @@ using System.Text.RegularExpressions;
 using System.Net;
 //using Microsoft.AspNet.SignalR.Client;
 
+
+
+
+
+
+namespace ExtensionMethods
+{
+    public static class MyExtensions
+    {
+        public static string NullStringSafe3(this IField ifield)
+        {
+            try
+            {
+                if (ifield == null) return "";
+                return ifield.Value.AsString;
+            }
+            catch (Exception)
+            {
+
+                return "";
+            }
+
+        }
+    }
+}
+
+
+
+
 namespace Fenton.Example
 {
     public static class IQueryableExtensions
@@ -1993,7 +2022,15 @@ namespace ProntoFlexicapture
 
 
 
-        static ProntoMVC.Data.FuncionesGenericasCSharp.Resultados ProcesaCarta(IDocument document, string SC, string archivoOriginal, string DirApp)
+
+
+
+
+
+
+
+
+    static ProntoMVC.Data.FuncionesGenericasCSharp.Resultados ProcesaCarta(IDocument document, string SC, string archivoOriginal, string DirApp)
         {
 
             Pronto.ERP.BO.CartaDePorte cdp;
@@ -3544,31 +3581,6 @@ Additionally you can manage the priority of work processes and control whether t
 }
 
 
-
-namespace ExtensionMethods
-{
-    public static class MyExtensions
-    {
-        public static string NullStringSafe3(this IField ifield)
-        {
-            try
-            {
-                if (ifield == null) return "";
-                return ifield.Value.AsString;
-            }
-            catch (Exception)
-            {
-
-                return "";
-            }
-
-        }
-    }
-}
-
-
-
-
 /*
 
 namespace ConsoleApplication116_SignalRClient
@@ -4718,6 +4730,7 @@ Formato localidad-provincia	destination	x
             // -tambien tenes el tema de los clientes con filtros configurables.... en DataTablePorClienteSQL()
             if (SCbdlmaster != "")
             {
+
                 string rs = UserDatosExtendidosManager.TraerRazonSocialDelUsuario(nombreusuario, SCbdlmaster, SC);
                 if (rs == "")
                 {
