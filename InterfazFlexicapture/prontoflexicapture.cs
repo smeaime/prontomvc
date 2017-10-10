@@ -4681,7 +4681,7 @@ Formato localidad-provincia	destination	x
             try
             {
 
-                FechaDesde = DateTime.ParseExact(FechaInicial, "dd/MM/yyyy", null);
+                FechaDesde = DateTime.ParseExact(FechaInicial, "d/M/yyyy", null);
             }
             catch (Exception e)
             {
@@ -4690,7 +4690,7 @@ Formato localidad-provincia	destination	x
 
             try
             {
-                FechaHasta = DateTime.ParseExact(FechaFinal, "dd/MM/yyyy", null);
+                FechaHasta = DateTime.ParseExact(FechaFinal, "d/M/yyyy", null);
 
             }
             catch (Exception e)
