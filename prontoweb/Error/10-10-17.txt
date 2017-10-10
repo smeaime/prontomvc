@@ -803,3 +803,56 @@ Error relacionado con la red o específico de la instancia mientras se establec�
    en ASP.global_asax.Application_Start(Object sender, EventArgs e) en C:\bdl\pronto\prontoweb\global.asax:línea 307
 .Net SqlClient Data Provider
 __________________________
+
+Log Entry : 
+10/10/2017 13:04:20
+Error in: http://localhost:50769/ProntoWeb/SituacionCalidadMovil.aspx. Error Message:RODRIGORIOS esta logueado, pero lo redirijo al login porque faltan los datos de session. No deberia mejor mandarlo a SeleccionarEmpresa? Ademas, no hago el LogOut y le queda el cookie!!!
+__________________________
+
+Log Entry : 
+10/10/2017 13:04:22
+Error in: http://localhost:50769/ProntoWeb/SituacionCalidadMovil.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en SituacionCalidadMovil.BindTypeDropDown() en C:\bdl\pronto\prontoweb\ProntoWeb\SituacionCalidadMovil.aspx.vb:línea 159
+App_Web_situacioncalidadmovil.aspx.4199bbd4.vpu-h4jv
+__________________________
+
+Log Entry : 
+10/10/2017 13:04:27
+Error in: http://localhost:50769/ProntoWeb/HandlerCartaPorte.ashx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en UserDatosExtendidosManager.TraerRazonSocialDelUsuario(String UserId, String ConexBDLmaster, String SC) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 22762
+BusinessLogic
+__________________________
+
+Log Entry : 
+10/10/2017 13:04:40
+Error in: http://localhost:50769/ProntoWeb/SituacionCalidadMovil.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en SituacionCalidadMovil.BindTypeDropDown() en C:\bdl\pronto\prontoweb\ProntoWeb\SituacionCalidadMovil.aspx.vb:línea 159
+App_Web_situacioncalidadmovil.aspx.4199bbd4.vpu-h4jv
+__________________________
+
+Log Entry : 
+10/10/2017 13:04:40
+Error in: http://localhost:50769/ProntoWeb/HandlerCartaPorte.ashx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en UserDatosExtendidosManager.TraerRazonSocialDelUsuario(String UserId, String ConexBDLmaster, String SC) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 22762
+BusinessLogic
+__________________________
+
+Log Entry : 
+10/10/2017 13:05:45
+Error in: http://localhost:50769/ProntoWeb/SituacionCalidadMovil.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en SituacionCalidadMovil.BindTypeDropDown() en C:\bdl\pronto\prontoweb\ProntoWeb\SituacionCalidadMovil.aspx.vb:línea 159
+App_Web_situacioncalidadmovil.aspx.4199bbd4.vpu-h4jv
+__________________________
+
+Log Entry : 
+10/10/2017 13:07:17
+Error in: http://localhost:50769/ProntoWeb/HandlerCartaPorte.ashx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en UserDatosExtendidosManager.TraerRazonSocialDelUsuario(String UserId, String ConexBDLmaster, String SC) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 22762
+BusinessLogic
+__________________________
