@@ -196,7 +196,7 @@ Public Class WebServiceCartas
 
 
 
-    <WebMethod(Description:="Devuelve un listado de descargas con formato Cerealnet", EnableSession:=False)> _
+    <WebMethod(Description:="", EnableSession:=False)> _
     Public Function GrabarSituacion(idcarta As Long, idsituacion As Integer, sObservacionesSituacion As String) As String
 
 
@@ -223,6 +223,31 @@ Public Class WebServiceCartas
 
 
 
+
+    <WebMethod(Description:="", EnableSession:=False)>
+    Public Function GrabarSituaciones(idscartas As Long(), idsituacion As Integer, sObservacionesSituacion As String) As String
+
+
+        Try
+
+            Dim scs As String
+
+            If System.Diagnostics.Debugger.IsAttached() Or ConfigurationManager.AppSettings("UrlDominio").Contains("localhost") Then
+                scs = scLocal
+            Else
+                'scs = scWilliamsRelease
+                scs = scWilliamsDebug
+            End If
+
+            Return CartaDePorteManager.GrabarSituaciones_DLL(idscartas, idsituacion, sObservacionesSituacion, Encriptar(scs))
+        Catch ex As Exception
+
+            ErrHandler2.WriteError(ex)
+        End Try
+
+
+
+    End Function
 
 
 
