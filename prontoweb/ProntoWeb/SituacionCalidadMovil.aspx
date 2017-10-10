@@ -57,7 +57,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 <%--https://developer.mozilla.org/en-US/docs/Mozilla/Mobile/Viewport_meta_tag--%>
 <meta name="viewport" content="width=350, initial-scale=1.0, maximum-scale=1.0">
 
-<body style="width: 350px; max-width: 350px; background-color: "   class="">
+<body style="width: 350px; max-width: 350px; background-color: " class="">
 
 
 
@@ -91,7 +91,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
 
 
-    <form id="form1" runat="server" defaultfocus="txtSuperbuscador" autocomplete="off"  >
+    <form id="form1" runat="server" defaultfocus="txtSuperbuscador" autocomplete="off">
 
         <ajaxToolkit:ToolkitScriptManager ID="ScriptManager1" runat="server" LoadScriptsBeforeUI="False"
             EnablePageMethods="true" AsyncPostBackTimeout="360000" ScriptMode="Release">
@@ -160,6 +160,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
         <div class="modal" id="loading">
             Cargando...
+       
         </div>
 
         <%--   <div style="visibility:hidden;display:none">--%>
@@ -177,11 +178,11 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
             <asp:UpdatePanel ID="UpdatePanelResumen" runat="server" Visible="true">
                 <ContentTemplate>
 
-                    <table style="color: black; width: 350px">
+                    <table style="color: black; width: 350px; vertical-align: bottom !important;">
                         <tr>
                             <td class="" style="width: ; height: 18px;"></td>
-                            <td class="" style="width: ; height: 18px;">
-                                                <asp:Image ID="LogoImage" runat="server" ImageUrl="~/Imagenes/williams.gif" CssClass="MasterLogo" Height="30px" />
+                            <td class="" style="width: ; height: ; vertical-align: bottom !important;">
+                                <asp:Image ID="LogoImage" runat="server" ImageUrl="~/Imagenes/williamsmini.gif" CssClass="MasterLogo" Height="50px"  />
 
                                 <asp:DropDownList ID="cmbEstado" runat="server" Style="text-align: right; margin-left: 0px;"
                                     CssClass="CssCombo" ToolTip="Estado de la carta de porte" Font-Size="14" Height="40" Width="150" Enabled="false">
@@ -297,8 +298,6 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
             <%--<input type="text" class="span4" id="text1" name="agent" value=""  "/>--%>
             <style>
-
-                
                 .ui-pg-table {
                     font-size: 12px !important;
                 }
@@ -311,40 +310,50 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                     font-size: 15px
                 }
 
-.ui-jqgrid .ui-jqgrid-htable th {
-    height: 2em !important;
-}
-.ui-jqgrid tr.jqgrow td{
-    height: 2em !important;
-}
+                    .ui-jqgrid .ui-jqgrid-htable th {
+                        height: 2em !important;
+                    }
+
+                    .ui-jqgrid tr.jqgrow td {
+                        height: 2em !important;
+                    }
 
 
-
+                ui-jqgrid > .ui-jqgrid-view > .ui-jqgrid-hdiv {
+                    overflow: hidden;
+                }
             </style>
+
+
+            
             <table id="Lista" class="scroll" cellpadding="0" cellspacing="0" style="font-size: 23px;" width="400px">
             </table>
-            <div id="ListaPager" class="scroll" style="text-align: center; height: 40px; ">
+            
+            <div id="ListaPager" class="scroll" style="text-align: center; height: 40px;">
             </div>
-            
-            
 
-            <input type="button"  id="vale" style="height: 40px" value="cambiar situacion" />
-            <input type="button"  id="jpg" value="jpg" />
-            <input type="button"  id="tif" value="tif" />
-                  
+
+
+            <input type="button" id="vale" style="height: 40px" value="cambiar situacion" />
+            <input type="button" id="jpg" value="jpg" />
+            <input type="button" id="tif" value="tif" />
+
 
 
             <div>
                 <a href="CartaDePorteInformesAccesoClientesMovil.aspx">Informe </a>| version original |
-                            <b>Situación</b> |
-                            <asp:Label ID="lblRazonSocial" runat="server" Font-Size="10" Font-Bold="false" Visible="false" />
+                           
+                <b>Situación</b> |
+                           
+                <asp:Label ID="lblRazonSocial" runat="server" Font-Size="10" Font-Bold="false" Visible="false" />
                 <asp:LoginView ID="LoginView" runat="server">
                     <LoggedInTemplate>
                         <asp:LoginName ID="LoginName1" runat="server" Font-Bold="false" CssClass="margender" />
                         |
-                                    <asp:LoginStatus ID="LoginStatus1" runat="server" Font-Bold="false" ForeColor=""
-                                        LogoutAction="RedirectToLoginPage" LogoutPageUrl="~/Login.aspx" OnLoggedOut="LoginStatus1_LoggedOut"
-                                        TabIndex="-1" LogoutText="Salir" Font-Underline="False" CssClass="margender" />
+                                   
+                        <asp:LoginStatus ID="LoginStatus1" runat="server" Font-Bold="false" ForeColor=""
+                            LogoutAction="RedirectToLoginPage" LogoutPageUrl="~/Login.aspx" OnLoggedOut="LoginStatus1_LoggedOut"
+                            TabIndex="-1" LogoutText="Salir" Font-Underline="False" CssClass="margender" />
                     </LoggedInTemplate>
                 </asp:LoginView>
 
@@ -421,7 +430,7 @@ Arroyo Seco (Sta. Fe) - René Favaloro 726 / (03402) 421-426 - 429-676 / arroyos
 
 
 
-        
+
 
 
 
@@ -1442,9 +1451,9 @@ Arroyo Seco (Sta. Fe) - René Favaloro 726 / (03402) 421-426 - 429-676 / arroyos
         desde.setDate(hoy.getDate() - 1000);
 
 
-        $("#txtFechaDesde").val(desde.getDate() + '/' + (desde.getMonth() + 1) + '/' + desde.getFullYear()) 
-        $("#txtFechaHasta").val(hoy.getDate() + '/' + (hoy.getMonth() + 1) + '/' + hoy.getFullYear()) 
-    
+        $("#txtFechaDesde").val(desde.getDate() + '/' + (desde.getMonth() + 1) + '/' + desde.getFullYear())
+        $("#txtFechaHasta").val(hoy.getDate() + '/' + (hoy.getMonth() + 1) + '/' + hoy.getFullYear())
+
 
         //alert (hoy + ' ' +  desde)
 
@@ -2366,7 +2375,7 @@ Arroyo Seco (Sta. Fe) - René Favaloro 726 / (03402) 421-426 - 429-676 / arroyos
                 RefrescarFondoRenglon(this);
 
 
-                 },
+            },
 
 
 

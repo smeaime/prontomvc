@@ -892,37 +892,37 @@ namespace ProntoMVC.Tests
 
 
 
-//            Estamos desarrollando el sincro de Terra Verde con la gente de BIT.
-//Te paso errores que nos pidieron modificar, el sincro que le pasamos como ejemplo fue el de BTG(Engelhart).
+            //            Estamos desarrollando el sincro de Terra Verde con la gente de BIT.
+            //Te paso errores que nos pidieron modificar, el sincro que le pasamos como ejemplo fue el de BTG(Engelhart).
 
-//Te lo reenvie por correo tambien:
+            //Te lo reenvie por correo tambien:
 
 
 
-//Hola Tomas, necesito que hagamos la siguiente corrección en la generación del archivo TXT, dado a que no nos están ingresando correctamente los movimientos.
-//El problema se nos da en los siguientes puntos:
+            //Hola Tomas, necesito que hagamos la siguiente corrección en la generación del archivo TXT, dado a que no nos están ingresando correctamente los movimientos.
+            //El problema se nos da en los siguientes puntos:
 
-//            CAMPO CALIDAD: Posición en el txt 940 - 943
-//o Si es de Camara = CC
-//o Si es condición calidad grado = G1 – G2 o G3
-//o Si es Fuera de Standart = FE
+            //            CAMPO CALIDAD: Posición en el txt 940 - 943
+            //o Si es de Camara = CC
+            //o Si es condición calidad grado = G1 – G2 o G3
+            //o Si es Fuera de Standart = FE
 
-            
-//CAMPO VENDEDOR: Posición en el txt 263 - 276
-//El CUIT del vendedor, depende de la posición en la cual este el CUIT de TERRA VERDE.
-//SI TERRA VERDE esta en remitente Comercial:
-//§ Debe enviar el Titular, si hay intermediario, debe enviar el intermediario.
-//SI TERRA VERDE esta como Intermediario:
-//§ Se debe enviar como vendedor el titular.
-//CAMPO COMPRADOR: Posición en el txt 131 - 144
-//o SI TERRA VERDE esta en remitente Comercial:
-//§ Se debe enviar como comprador el destinatario.
-//o SI TERRA VERDE Intermediario:
-//§ Se debe enviar como comprador el Remitente Comercial.
 
-//O sea que para el siguiente caso:
-//            Vendedor = “CUIT DE ELLIFF”
-//Comprador = “CUIT CARGILL”
+            //CAMPO VENDEDOR: Posición en el txt 263 - 276
+            //El CUIT del vendedor, depende de la posición en la cual este el CUIT de TERRA VERDE.
+            //SI TERRA VERDE esta en remitente Comercial:
+            //§ Debe enviar el Titular, si hay intermediario, debe enviar el intermediario.
+            //SI TERRA VERDE esta como Intermediario:
+            //§ Se debe enviar como vendedor el titular.
+            //CAMPO COMPRADOR: Posición en el txt 131 - 144
+            //o SI TERRA VERDE esta en remitente Comercial:
+            //§ Se debe enviar como comprador el destinatario.
+            //o SI TERRA VERDE Intermediario:
+            //§ Se debe enviar como comprador el Remitente Comercial.
+
+            //O sea que para el siguiente caso:
+            //            Vendedor = “CUIT DE ELLIFF”
+            //Comprador = “CUIT CARGILL”
 
 
 
@@ -942,17 +942,38 @@ namespace ProntoMVC.Tests
 
 
         [TestMethod]
-        public void _42871()
+        public void envioNotificaciones_42871()
         {
 
-            // como ver la masterpage en la vista para celulares?
             // el envio de mails (+ push de chrome)
-            // la grilla de situacion de calidad
-            // marcar la situacion de varias cartas
-            // como filtrar la grilla de situacion segun el usuario?
+
+            // EncolarNotificaciones(ClientesQueParticipanEnCartas(ListadoDeCartasModificadas(UltimaFechaDeEnvioNotificaciones)))
 
 
-            //EncolarNotificaciones(   ClientesQueParticipanEnCartas( ListadoDeCartasModificadas(  UltimaFechaDeEnvioNotificaciones)))
+            var scEF = ProntoMVC.Data.Models.Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC));
+            DemoProntoEntities db = new DemoProntoEntities(scEF);
+            DateTime UltimaFechaDeEnvioNotificaciones = new DateTime(10, 10, 10);
+
+            var q = db.CartasDePortes.Where(x => x.FechaModificacion > UltimaFechaDeEnvioNotificaciones)
+                        .Select(x => new { x.Vendedor, x.Entregador, x.CuentaOrden1, x.CuentaOrden2 });
+
+
+            var listado = db.Clientes.Select(x => x.CorreosElectronicos_1).Take(100);
+            string rejunte = string.Join(";", listado.ToArray());
+
+
+            Pronto.ERP.Bll.EntidadManager.MandaEmail_Nuevo(ConfigurationManager.AppSettings["ErrorMail"],
+                               "asuntoasuntoasunto 2",
+                            "cuerpocuerpocuerpocuerpocuerpocuerpocuerpocuerpocuerpocuerpocuerpocuerpo cuerpocuerpocuerpocuerpo",
+                            ConfigurationManager.AppSettings["SmtpUser"],
+                            ConfigurationManager.AppSettings["SmtpServer"],
+                            ConfigurationManager.AppSettings["SmtpUser"],
+                            ConfigurationManager.AppSettings["SmtpPass"],
+                              "",
+                           Convert.ToInt16(ConfigurationManager.AppSettings["SmtpPort"]),1
+                           , rejunte
+
+                           );
 
 
 
