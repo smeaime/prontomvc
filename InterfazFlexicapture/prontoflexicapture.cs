@@ -2000,82 +2000,82 @@ namespace ProntoFlexicapture
 
             IField BarraCP = Sample.AdvancedTechniques.findField(document, "BarraCP");
 
-            string BarraCEE = Sample.AdvancedTechniques.findField(document, "BarraCEE").NullStringSafe2();
-            string NCarta = Sample.AdvancedTechniques.findField(document, "NumeroCarta").NullStringSafe2();
-            string CEE = Sample.AdvancedTechniques.findField(document, "CEE").NullStringSafe2();
+            string BarraCEE = Sample.AdvancedTechniques.findField(document, "BarraCEE").NullStringSafe3();
+            string NCarta = Sample.AdvancedTechniques.findField(document, "NumeroCarta").NullStringSafe3();
+            string CEE = Sample.AdvancedTechniques.findField(document, "CEE").NullStringSafe3();
 
 
-            string TitularCUIT = Sample.AdvancedTechniques.findField(document, "TitularCUIT").NullStringSafe2();
-            string Titular = Sample.AdvancedTechniques.findField(document, "Titular").NullStringSafe2();
-            string RemitenteCUIT = Sample.AdvancedTechniques.findField(document, "RemitenteCUIT").NullStringSafe2();
-            string Remitente = Sample.AdvancedTechniques.findField(document, "Remitente").NullStringSafe2();
-            string IntermediarioCUIT = Sample.AdvancedTechniques.findField(document, "IntermediarioCUIT").NullStringSafe2();
-            string Intermediario = Sample.AdvancedTechniques.findField(document, "Intermediario").NullStringSafe2();
-            string DestinatarioCUIT = Sample.AdvancedTechniques.findField(document, "DestinatarioCUIT").NullStringSafe2();
-            string Destinatario = Sample.AdvancedTechniques.findField(document, "Destinatario").NullStringSafe2();
-            string CorredorCUIT = Sample.AdvancedTechniques.findField(document, "CorredorCUIT").NullStringSafe2();
-            string Corredor = Sample.AdvancedTechniques.findField(document, "Corredor").NullStringSafe2();
+            string TitularCUIT = Sample.AdvancedTechniques.findField(document, "TitularCUIT").NullStringSafe3();
+            string Titular = Sample.AdvancedTechniques.findField(document, "Titular").NullStringSafe3();
+            string RemitenteCUIT = Sample.AdvancedTechniques.findField(document, "RemitenteCUIT").NullStringSafe3();
+            string Remitente = Sample.AdvancedTechniques.findField(document, "Remitente").NullStringSafe3();
+            string IntermediarioCUIT = Sample.AdvancedTechniques.findField(document, "IntermediarioCUIT").NullStringSafe3();
+            string Intermediario = Sample.AdvancedTechniques.findField(document, "Intermediario").NullStringSafe3();
+            string DestinatarioCUIT = Sample.AdvancedTechniques.findField(document, "DestinatarioCUIT").NullStringSafe3();
+            string Destinatario = Sample.AdvancedTechniques.findField(document, "Destinatario").NullStringSafe3();
+            string CorredorCUIT = Sample.AdvancedTechniques.findField(document, "CorredorCUIT").NullStringSafe3();
+            string Corredor = Sample.AdvancedTechniques.findField(document, "Corredor").NullStringSafe3();
 
-            string CTG = Sample.AdvancedTechniques.findField(document, "CTG").NullStringSafe2();
-            string FechaCarga = Sample.AdvancedTechniques.findField(document, "FechaCarga").NullStringSafe2();
-            string FechaVencimiento = Sample.AdvancedTechniques.findField(document, "FechaVencimiento").NullStringSafe2();
-            string Destino = Sample.AdvancedTechniques.findField(document, "Destino").NullStringSafe2();
-            string DestinoCUIT = Sample.AdvancedTechniques.findField(document, "DestinoCUIT").NullStringSafe2();
-            string Chofer = Sample.AdvancedTechniques.findField(document, "Chofer").NullStringSafe2();
-            string ChoferCUIT = Sample.AdvancedTechniques.findField(document, "ChoferCUIT").NullStringSafe2();
-            string Transportista = Sample.AdvancedTechniques.findField(document, "Transportista").NullStringSafe2();
-            string TransportistaCUIT = Sample.AdvancedTechniques.findField(document, "TransportistaCUIT").NullStringSafe2();
-            string ContratoNro = Sample.AdvancedTechniques.findField(document, "ContratoNro").NullStringSafe2();
+            string CTG = Sample.AdvancedTechniques.findField(document, "CTG").NullStringSafe3();
+            string FechaCarga = Sample.AdvancedTechniques.findField(document, "FechaCarga").NullStringSafe3();
+            string FechaVencimiento = Sample.AdvancedTechniques.findField(document, "FechaVencimiento").NullStringSafe3();
+            string Destino = Sample.AdvancedTechniques.findField(document, "Destino").NullStringSafe3();
+            string DestinoCUIT = Sample.AdvancedTechniques.findField(document, "DestinoCUIT").NullStringSafe3();
+            string Chofer = Sample.AdvancedTechniques.findField(document, "Chofer").NullStringSafe3();
+            string ChoferCUIT = Sample.AdvancedTechniques.findField(document, "ChoferCUIT").NullStringSafe3();
+            string Transportista = Sample.AdvancedTechniques.findField(document, "Transportista").NullStringSafe3();
+            string TransportistaCUIT = Sample.AdvancedTechniques.findField(document, "TransportistaCUIT").NullStringSafe3();
+            string ContratoNro = Sample.AdvancedTechniques.findField(document, "ContratoNro").NullStringSafe3();
 
-            string LaCargaSeráPesadaEnDestino = Sample.AdvancedTechniques.findField(document, "LaCargaSeráPesadaEnDestino").NullStringSafe2();
-            string DeclaraciónDeCalidad = Sample.AdvancedTechniques.findField(document, "DeclaraciónDeCalidad").NullStringSafe2();
-            string Conforme = Sample.AdvancedTechniques.findField(document, "Conforme").NullStringSafe2();
-            string Condicional = Sample.AdvancedTechniques.findField(document, "Condicional").NullStringSafe2();
+            string LaCargaSeráPesadaEnDestino = Sample.AdvancedTechniques.findField(document, "LaCargaSeráPesadaEnDestino").NullStringSafe3();
+            string DeclaraciónDeCalidad = Sample.AdvancedTechniques.findField(document, "DeclaraciónDeCalidad").NullStringSafe3();
+            string Conforme = Sample.AdvancedTechniques.findField(document, "Conforme").NullStringSafe3();
+            string Condicional = Sample.AdvancedTechniques.findField(document, "Condicional").NullStringSafe3();
 
-            string PesoBruto = Sample.AdvancedTechniques.findField(document, "PesoBruto").NullStringSafe2();
-            string PesoTara = Sample.AdvancedTechniques.findField(document, "PesoTara").NullStringSafe2();
-            string PesoNeto = Sample.AdvancedTechniques.findField(document, "PesoNeto").NullStringSafe2();
+            string PesoBruto = Sample.AdvancedTechniques.findField(document, "PesoBruto").NullStringSafe3();
+            string PesoTara = Sample.AdvancedTechniques.findField(document, "PesoTara").NullStringSafe3();
+            string PesoNeto = Sample.AdvancedTechniques.findField(document, "PesoNeto").NullStringSafe3();
 
-            string PesoBrutoDescarga = Sample.AdvancedTechniques.findField(document, "PesoBrutoDescarga").NullStringSafe2();
-            string PesoTaraDescarga = Sample.AdvancedTechniques.findField(document, "PesoTaraDescarga").NullStringSafe2();
-            string PesoNetoDescarga = Sample.AdvancedTechniques.findField(document, "PesoNetoDescarga").NullStringSafe2();
+            string PesoBrutoDescarga = Sample.AdvancedTechniques.findField(document, "PesoBrutoDescarga").NullStringSafe3();
+            string PesoTaraDescarga = Sample.AdvancedTechniques.findField(document, "PesoTaraDescarga").NullStringSafe3();
+            string PesoNetoDescarga = Sample.AdvancedTechniques.findField(document, "PesoNetoDescarga").NullStringSafe3();
 
-            string PesoNetoFinal = Sample.AdvancedTechniques.findField(document, "PesoNetoFinal").NullStringSafe2();
-
-
-            string Observaciones = Sample.AdvancedTechniques.findField(document, "Observaciones").NullStringSafe2();
-            string Esablecimiento = Sample.AdvancedTechniques.findField(document, "Esablecimiento").NullStringSafe2();
-            string Direccion1 = Sample.AdvancedTechniques.findField(document, "Direccion1").NullStringSafe2();
-            string Localidad1 = Sample.AdvancedTechniques.findField(document, "Localidad1").NullStringSafe2();
-            string Direccion2 = Sample.AdvancedTechniques.findField(document, "Direccion2").NullStringSafe2();
-            string Localidad2 = Sample.AdvancedTechniques.findField(document, "Localidad2").NullStringSafe2();
-            string Provincia2 = Sample.AdvancedTechniques.findField(document, "Provincia2").NullStringSafe2();
-            string Camión = Sample.AdvancedTechniques.findField(document, "Camión").NullStringSafe2();
-            string Acoplado = Sample.AdvancedTechniques.findField(document, "Acoplado").NullStringSafe2();
-            string KmARecorrer = Sample.AdvancedTechniques.findField(document, "KmARecorrer").NullStringSafe2();
-            string Tarifa = Sample.AdvancedTechniques.findField(document, "Tarifa").NullStringSafe2();
-            string TarifaRef = Sample.AdvancedTechniques.findField(document, "TarifaRef").NullStringSafe2();
-
-            string Cosecha = Sample.AdvancedTechniques.findField(document, "Cosecha").NullStringSafe2();
+            string PesoNetoFinal = Sample.AdvancedTechniques.findField(document, "PesoNetoFinal").NullStringSafe3();
 
 
-            string GranoEspecie = Sample.AdvancedTechniques.findField(document, "GranoEspecie").NullStringSafe2();
+            string Observaciones = Sample.AdvancedTechniques.findField(document, "Observaciones").NullStringSafe3();
+            string Esablecimiento = Sample.AdvancedTechniques.findField(document, "Esablecimiento").NullStringSafe3();
+            string Direccion1 = Sample.AdvancedTechniques.findField(document, "Direccion1").NullStringSafe3();
+            string Localidad1 = Sample.AdvancedTechniques.findField(document, "Localidad1").NullStringSafe3();
+            string Direccion2 = Sample.AdvancedTechniques.findField(document, "Direccion2").NullStringSafe3();
+            string Localidad2 = Sample.AdvancedTechniques.findField(document, "Localidad2").NullStringSafe3();
+            string Provincia2 = Sample.AdvancedTechniques.findField(document, "Provincia2").NullStringSafe3();
+            string Camión = Sample.AdvancedTechniques.findField(document, "Camión").NullStringSafe3();
+            string Acoplado = Sample.AdvancedTechniques.findField(document, "Acoplado").NullStringSafe3();
+            string KmARecorrer = Sample.AdvancedTechniques.findField(document, "KmARecorrer").NullStringSafe3();
+            string Tarifa = Sample.AdvancedTechniques.findField(document, "Tarifa").NullStringSafe3();
+            string TarifaRef = Sample.AdvancedTechniques.findField(document, "TarifaRef").NullStringSafe3();
 
-            string KgsEstimados = Sample.AdvancedTechniques.findField(document, "KgsEstimados").NullStringSafe2();
+            string Cosecha = Sample.AdvancedTechniques.findField(document, "Cosecha").NullStringSafe3();
 
-            string PlantillaUsada = Sample.AdvancedTechniques.findField(document, "PlantillaUsada").NullStringSafe2();
+
+            string GranoEspecie = Sample.AdvancedTechniques.findField(document, "GranoEspecie").NullStringSafe3();
+
+            string KgsEstimados = Sample.AdvancedTechniques.findField(document, "KgsEstimados").NullStringSafe3();
+
+            string PlantillaUsada = Sample.AdvancedTechniques.findField(document, "PlantillaUsada").NullStringSafe3();
             //string plantillaUsada = document.Pages[0].SectionDefinition.FlexibleDescription.Name;
 
-            string FechaDescarga = Sample.AdvancedTechniques.findField(document, "FechaDescarga").NullStringSafe2();
+            string FechaDescarga = Sample.AdvancedTechniques.findField(document, "FechaDescarga").NullStringSafe3();
 
 
 
-            string HumedadPorc = Sample.AdvancedTechniques.findField(document, "HumedadPorc").NullStringSafe2();
-            string HumedadKilos = Sample.AdvancedTechniques.findField(document, "HumedadKilos").NullStringSafe2();
-            string ZarandeoKilosMerma = Sample.AdvancedTechniques.findField(document, "ZarandeoKilosMerma").NullStringSafe2();
-            string ZarandeoPorc = Sample.AdvancedTechniques.findField(document, "ZarandeoPorc").NullStringSafe2();
-            string Recibo = Sample.AdvancedTechniques.findField(document, "Recibo").NullStringSafe2();
-            string HoraDescarga = Sample.AdvancedTechniques.findField(document, "HoraDescarga").NullStringSafe2();
+            string HumedadPorc = Sample.AdvancedTechniques.findField(document, "HumedadPorc").NullStringSafe3();
+            string HumedadKilos = Sample.AdvancedTechniques.findField(document, "HumedadKilos").NullStringSafe3();
+            string ZarandeoKilosMerma = Sample.AdvancedTechniques.findField(document, "ZarandeoKilosMerma").NullStringSafe3();
+            string ZarandeoPorc = Sample.AdvancedTechniques.findField(document, "ZarandeoPorc").NullStringSafe3();
+            string Recibo = Sample.AdvancedTechniques.findField(document, "Recibo").NullStringSafe3();
+            string HoraDescarga = Sample.AdvancedTechniques.findField(document, "HoraDescarga").NullStringSafe3();
 
 
 
@@ -3549,7 +3549,7 @@ namespace ExtensionMethods
 {
     public static class MyExtensions
     {
-        public static string NullStringSafe2(this IField ifield)
+        public static string NullStringSafe3(this IField ifield)
         {
             try
             {

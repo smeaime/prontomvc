@@ -1074,7 +1074,7 @@ Namespace Pronto.ERP.Bll
 
                             Dim sErrores As String
 
-                            output = Sincronismo_AmaggiDescargas(ds.wCartasDePorte_TX_InformesCorregido, "", sWHERE, sErrores, SC)
+                            output = Sincronismo_AmaggiDescargas2(ds.wCartasDePorte_TX_InformesCorregido, "", sWHERE, sErrores, SC)
 
 
                             sErroresRef = sErrores
@@ -1580,7 +1580,7 @@ Namespace Pronto.ERP.Bll
                             Dim dt = EntidadManager.ExecDinamico(SC, strSQLsincronismo() & " WHERE " & s)
                             dt = DataTableWHERE(dt, sWHERE)
                             FiltrarCopias(dt)
-                            output = Sincronismo_TomasHnos(dt, "", SC)
+                            output = Sincronismo_TomasHnos2(dt, "", SC)
                             registrosFiltrados = dt.Rows.Count
 
                         Case "SANTA CATALINA"
@@ -13710,7 +13710,7 @@ Namespace Pronto.ERP.Bll
 
 
 
-        Public Shared Function Sincronismo_AmaggiDescargas(ByVal pDataTable As WillyInformesDataSet.wCartasDePorte_TX_InformesCorregidoDataTable, titulo As String,
+        Public Shared Function Sincronismo_AmaggiDescargas2(ByVal pDataTable As WillyInformesDataSet.wCartasDePorte_TX_InformesCorregidoDataTable, titulo As String,
                                                            ByVal sWHERE As String, ByRef sErrores As String, SC As String) As String
 
 
@@ -25196,7 +25196,7 @@ Namespace Pronto.ERP.Bll
 
 
 
-        Public Shared Function Sincronismo_TomasHnos(ByVal pDataTable As DataTable, ByVal titulo As String, SC As String) As String
+        Public Shared Function Sincronismo_TomasHnos2(ByVal pDataTable As DataTable, ByVal titulo As String, SC As String) As String
 
 
             'Los de LosGrobo y TomasHnos, creo que usan el esquema de AlgoritmoSoftHouse. Algún otro lo hace?
