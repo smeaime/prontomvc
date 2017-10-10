@@ -4731,12 +4731,13 @@ Formato localidad-provincia	destination	x
             if (SCbdlmaster != "")
             {
 
-                string rs = UserDatosExtendidosManager.TraerRazonSocialDelUsuario(nombreusuario, SCbdlmaster, SC);
-                if (rs == "")
+                string rs = UserDatosExtendidosManager.TraerRazonSocialDelUsuarioNombre(nombreusuario, SCbdlmaster, SC);
+                if (rs != "")
                 {
                     int idcliente = SQLdinamico.BuscaIdClientePreciso(rs, SC);
                     int idCorredor = SQLdinamico.BuscaIdVendedorPreciso(EntidadManager.NombreCliente(SC, idcliente), SC);
-                    q = q.Where(x => x.Vendedor == idcliente || x.Entregador == idcliente);
+                    q = q.Where(x => x.Vendedor == idcliente || x.Entregador == idcliente || x.Corredor==idCorredor || 
+                                    x.CuentaOrden1 == idcliente || x.CuentaOrden2==idcliente || x.IdClienteAuxiliar==idcliente );
                 }
             }
 
