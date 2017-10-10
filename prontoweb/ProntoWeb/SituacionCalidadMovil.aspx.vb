@@ -124,6 +124,10 @@ Partial Class SituacionCalidadMovil
         'AutoCompleteExtender2.ContextKey = HFSC.Value
         AutoCompleteExtender26.ContextKey = HFSC.Value
 
+
+        txtFechaDesde.Enabled = True
+        txtFechaHasta.Enabled = True
+
     End Sub
 
     Protected Sub Page_LoadComplete(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.LoadComplete
