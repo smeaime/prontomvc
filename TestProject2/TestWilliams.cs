@@ -987,7 +987,7 @@ namespace ProntoMVC.Tests
             // url: "WebServiceCartas.asmx/CartaPorteBatchUpdate",
 
             //string ms = CartaDePorteManager.GrabarSituacion_DLL(2638292, 2, "RECHAZADO EN PLAYA EXTERNA", SC);
-            string ms = CartaDePorteManager.GrabarSituaciones_DLL(new List<long> { 2638292, 2638293, 2638294 }, 2, "RECHAZADO EN PLAYA EXTERNA", SC);
+            string ms = CartaDePorteManager.GrabarSituaciones_DLL(new long[] { 2638292, 2638293, 2638294 }, 2, "RECHAZADO EN PLAYA EXTERNA", SC);
         }
 
 
