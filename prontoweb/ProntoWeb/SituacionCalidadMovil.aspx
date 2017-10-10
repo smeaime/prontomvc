@@ -219,7 +219,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                                     <%--    <asp:ListItem Text="Filtrar por Mes/Año" />--%>
                                     <asp:ListItem Text="Personalizar" />
                                 </asp:DropDownList>
-                                <asp:TextBox ID="txtFechaDesde" runat="server" Width="100px" MaxLength="1" autocomplete="off" Style="color: black;" Font-Size="14"
+                                <asp:TextBox ID="txtFechaDesde" runat="server" Width="100px" MaxLength="1" autocomplete="off" Style="color: black;" Font-Size="14" Enabled="true"
                                     TabIndex="2" AutoPostBack="false"></asp:TextBox>
                                 <cc1:CalendarExtender ID="CalendarExtender3" runat="server" Format="dd/MM/yyyy" TargetControlID="txtFechaDesde"
                                     Enabled="True">
@@ -232,7 +232,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                                 </cc1:MaskedEditExtender>
                                 <cc1:TextBoxWatermarkExtender ID="TBWE2" runat="server" TargetControlID="txtFechaDesde"
                                     WatermarkText="desde" WatermarkCssClass="watermarked" />
-                                <asp:TextBox ID="txtFechaHasta" runat="server" Width="100px" MaxLength="1" TabIndex="2" Style="color: black;" Font-Size="14"
+                                <asp:TextBox ID="txtFechaHasta" runat="server" Width="100px" MaxLength="1" TabIndex="2" Style="color: black;" Font-Size="14" Enabled="true"
                                     AutoPostBack="false"></asp:TextBox>
                                 <cc1:CalendarExtender ID="CalendarExtender4" runat="server" Format="dd/MM/yyyy" TargetControlID="txtFechaHasta"
                                     Enabled="True">
@@ -297,19 +297,26 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
             <%--<input type="text" class="span4" id="text1" name="agent" value=""  "/>--%>
             <style>
-                .ui-paging-info {
-                    font-size: 10px !important;
+                
+                .ui-pg-table {
+                    font-size: 12px !important;
                 }
-
+                /*
+                .ui-paging-info {
+                    font-size: 12px !important;
+                }
+                    */
                 .ui-jqgrid {
                     font-size: 15px
                 }
+
             </style>
             <table id="Lista" class="scroll" cellpadding="0" cellspacing="0" style="font-size: 23px;" width="400px">
             </table>
-            <div id="ListaPager" class="scroll" style="text-align: center; height: 50px; font-size: ">
+            <div id="ListaPager" class="scroll" style="text-align: center; height: 40px; ">
             </div>
-
+            
+            
 
             <input type="button"  id="vale" style="height: 40px" value="cambiar situacion" />
             <input type="button"  id="jpg" value="jpg" />
@@ -586,6 +593,7 @@ Arroyo Seco (Sta. Fe) - René Favaloro 726 / (03402) 421-426 - 429-676 / arroyos
             },
             complete: function () {
                 $("#loading").hide();
+
             }
 
 
@@ -2342,11 +2350,13 @@ Arroyo Seco (Sta. Fe) - René Favaloro 726 / (03402) 421-426 - 429-676 / arroyos
             loadComplete: function () {
                 // http://stackoverflow.com/questions/6575192/jqgrid-change-background-color-of-row-based-on-row-cell-value-by-column-name
 
+                $("#ListaPager_center").width(150);
+
+
                 RefrescarFondoRenglon(this);
 
 
-
-            },
+                 },
 
 
 
