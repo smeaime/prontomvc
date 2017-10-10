@@ -346,7 +346,6 @@ Global
 		{17487390-6297-4D1C-8B73-57B636F0C114}.DebugWilly|Any CPU.ActiveCfg = DebugWilly|Any CPU
 		{17487390-6297-4D1C-8B73-57B636F0C114}.DebugWilly|Any CPU.Build.0 = DebugWilly|Any CPU
 		{17487390-6297-4D1C-8B73-57B636F0C114}.DebugWilly|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{17487390-6297-4D1C-8B73-57B636F0C114}.DebugWilly|Mixed Platforms.Build.0 = Debug|Any CPU
 		{17487390-6297-4D1C-8B73-57B636F0C114}.DebugWilly|x86.ActiveCfg = DebugWilly|Any CPU
 		{17487390-6297-4D1C-8B73-57B636F0C114}.DebugWilly|x86.Build.0 = DebugWilly|Any CPU
 		{17487390-6297-4D1C-8B73-57B636F0C114}.Development|Any CPU.ActiveCfg = DebugWilly|Any CPU
