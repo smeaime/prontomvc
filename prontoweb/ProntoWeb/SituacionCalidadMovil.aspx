@@ -184,7 +184,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                                                 <asp:Image ID="LogoImage" runat="server" ImageUrl="~/Imagenes/williams.gif" CssClass="MasterLogo" Height="30px" />
 
                                 <asp:DropDownList ID="cmbEstado" runat="server" Style="text-align: right; margin-left: 0px;"
-                                    CssClass="CssCombo" ToolTip="Estado de la carta de porte" Font-Size="14" Height="" Width="150" Enabled="false">
+                                    CssClass="CssCombo" ToolTip="Estado de la carta de porte" Font-Size="14" Height="40" Width="150" Enabled="false">
                                     <%--dejo el combito deshablitado porque las funciones no tienen todavia el parametro de "estado", estan harcodeadas en "11" --%>
 
                                     <asp:ListItem Text="DESC de hoy + POSIC filt" Value="DescargasDeHoyMasTodasLasPosicionesEnRangoFecha"
@@ -207,7 +207,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                         <tr>
                             <td class="" style="width: ; height: 18px;"></td>
                             <td class="" style="width: ; height: 18px;">
-                                <asp:DropDownList ID="cmbPeriodo" runat="server" AutoPostBack="true" Height="" Width="120px" Font-Size="14" Style="color: black;"
+                                <asp:DropDownList ID="cmbPeriodo" runat="server" AutoPostBack="true" Height="40" Width="120px" Font-Size="14" Style="color: black;"
                                     Visible="true">
                                     <asp:ListItem Text="Hoy" Selected="True" />
                                     <asp:ListItem Text="Ayer" />
@@ -297,6 +297,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
             <%--<input type="text" class="span4" id="text1" name="agent" value=""  "/>--%>
             <style>
+
                 
                 .ui-pg-table {
                     font-size: 12px !important;
@@ -309,6 +310,15 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                 .ui-jqgrid {
                     font-size: 15px
                 }
+
+.ui-jqgrid .ui-jqgrid-htable th {
+    height: 2em !important;
+}
+.ui-jqgrid tr.jqgrow td{
+    height: 2em !important;
+}
+
+
 
             </style>
             <table id="Lista" class="scroll" cellpadding="0" cellspacing="0" style="font-size: 23px;" width="400px">
@@ -1429,7 +1439,7 @@ Arroyo Seco (Sta. Fe) - René Favaloro 726 / (03402) 421-426 - 429-676 / arroyos
         var hoy = new Date();
         var desde = new Date();
 
-        desde.setDate(hoy.getDate() - 2);
+        desde.setDate(hoy.getDate() - 1000);
 
 
         $("#txtFechaDesde").val(desde.getDate() + '/' + (desde.getMonth() + 1) + '/' + desde.getFullYear()) 
