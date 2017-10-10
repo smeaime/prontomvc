@@ -1555,7 +1555,7 @@ Partial Class CartaDePorteInformesConReportViewerSincronismos
                             '-no se puede filtrar el datatable?
                             'BorrarCartasRepetidas(ds.wCartasDePorte_TX_InformesCorregido) 'ahora BorrarCartasRepetidas esta dentro del sincro
                             ' http://bdlconsultores.ddns.net/Consultas/Admin/VerConsultas1.php?recordid=14373
-                            output = Sincronismo_AmaggiDescargas(ds.wCartasDePorte_TX_InformesCorregido, "", sWHERE, sErrores, HFSC.Value)
+                            output = Sincronismo_AmaggiDescargas2(ds.wCartasDePorte_TX_InformesCorregido, "", sWHERE, sErrores, HFSC.Value)
 
                         End If
 
@@ -2081,7 +2081,8 @@ Partial Class CartaDePorteInformesConReportViewerSincronismos
                         Dim dt = EntidadManager.ExecDinamico(HFSC.Value, strSQLsincronismo() & " WHERE " & s)
                         dt = DataTableWHERE(dt, sWHERE)
                         FiltrarCopias(dt)
-                        output = Sincronismo_TomasHnos(dt, "", HFSC.Value)
+                        output = Sincronismo_TomasHnos2(dt, "", HFSC.Value)
+
                         registrosFiltrados = dt.Rows.Count
 
                     Case "SANTA CATALINA"

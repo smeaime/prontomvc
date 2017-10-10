@@ -1285,6 +1285,7 @@
     <EntitySetMapping Name="Pedidos">
       <EntityTypeMapping TypeName="DemoProntoModel.Pedido">
         <MappingFragment StoreEntitySet="Pedidos">
+          <ScalarProperty Name="IdControlCalidad" ColumnName="IdControlCalidad" />
           <ScalarProperty Name="IdUsuarioBloqueo" ColumnName="IdUsuarioBloqueo" />
           <ScalarProperty Name="BloqueadoFirma" ColumnName="BloqueadoFirma" />
           <ScalarProperty Name="Detalle" ColumnName="Detalle" />
@@ -1439,6 +1440,7 @@
     <EntitySetMapping Name="IBCondiciones">
       <EntityTypeMapping TypeName="DemoProntoModel.IBCondicion">
         <MappingFragment StoreEntitySet="IBCondiciones">
+          <ScalarProperty Name="AlicuotaParaRiesgoFiscal" ColumnName="AlicuotaParaRiesgoFiscal" />
           <ScalarProperty Name="CodigoRegimen" ColumnName="CodigoRegimen" />
           <ScalarProperty Name="CodigoArticuloInciso" ColumnName="CodigoArticuloInciso" />
           <ScalarProperty Name="CodigoActividad" ColumnName="CodigoActividad" />
@@ -1471,8 +1473,8 @@
     <EntitySetMapping Name="Localidades">
       <EntityTypeMapping TypeName="DemoProntoModel.Localidad">
         <MappingFragment StoreEntitySet="Localidades">
-          <ScalarProperty Name="lng" ColumnName="lng" />
-          <ScalarProperty Name="lat" ColumnName="lat" />
+          <ScalarProperty Name="Lng" ColumnName="Lng" />
+          <ScalarProperty Name="Lat" ColumnName="Lat" />
           <ScalarProperty Name="CodigoCGG" ColumnName="CodigoCGG" />
           <ScalarProperty Name="CodigoAfip" ColumnName="CodigoAfip" />
           <ScalarProperty Name="CodigoONCAA" ColumnName="CodigoONCAA" />
@@ -1804,6 +1806,7 @@
     <EntitySetMapping Name="DetalleProveedoresIBs">
       <EntityTypeMapping TypeName="DemoProntoModel.DetalleProveedoresIB">
         <MappingFragment StoreEntitySet="DetalleProveedoresIB">
+          <ScalarProperty Name="AlicuotaParaRiesgoFiscal" ColumnName="AlicuotaParaRiesgoFiscal" />
           <ScalarProperty Name="FechaVencimiento" ColumnName="FechaVencimiento" />
           <ScalarProperty Name="AlicuotaAAplicar" ColumnName="AlicuotaAAplicar" />
           <ScalarProperty Name="IdIBCondicion" ColumnName="IdIBCondicion" />
@@ -1834,6 +1837,7 @@
     <EntitySetMapping Name="Proveedores">
       <EntityTypeMapping TypeName="DemoProntoModel.Proveedor">
         <MappingFragment StoreEntitySet="Proveedores">
+          <ScalarProperty Name="RiesgoFiscal" ColumnName="RiesgoFiscal" />
           <ScalarProperty Name="IdIBCondicionAnterior" ColumnName="IdIBCondicionAnterior" />
           <ScalarProperty Name="RegimenSimplificadoIIBB" ColumnName="RegimenSimplificadoIIBB" />
           <ScalarProperty Name="IdObraDefault" ColumnName="IdObraDefault" />
@@ -2017,6 +2021,7 @@
     <EntitySetMapping Name="BancoChequeras">
       <EntityTypeMapping TypeName="DemoProntoModel.BancoChequera">
         <MappingFragment StoreEntitySet="BancoChequeras">
+          <ScalarProperty Name="ChequeraSinUso" ColumnName="ChequeraSinUso" />
           <ScalarProperty Name="ChequeraPagoDiferido" ColumnName="ChequeraPagoDiferido" />
           <ScalarProperty Name="Activa" ColumnName="Activa" />
           <ScalarProperty Name="ProximoNumeroCheque" ColumnName="ProximoNumeroCheque" />
@@ -4335,6 +4340,9 @@
     <EntitySetMapping Name="Empleados">
       <EntityTypeMapping TypeName="DemoProntoModel.Empleado">
         <MappingFragment StoreEntitySet="Empleados">
+          <ScalarProperty Name="IdSuplenteFirma" ColumnName="IdSuplenteFirma" />
+          <ScalarProperty Name="FechaVencimientoSuplenciaFirma" ColumnName="FechaVencimientoSuplenciaFirma" />
+          <ScalarProperty Name="AdministradorSistema" ColumnName="AdministradorSistema" />
           <ScalarProperty Name="PuntosVentaAsociados" ColumnName="PuntosVentaAsociados" />
           <ScalarProperty Name="PermitirAccesoATodasLasObras" ColumnName="PermitirAccesoATodasLasObras" />
           <ScalarProperty Name="LimitarUbicacionesAsignadas" ColumnName="LimitarUbicacionesAsignadas" />
