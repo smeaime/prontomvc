@@ -58,7 +58,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
 
 
-<body style="width: 350px; max-width: 350px; background-color: #F0F0FF"   class="bodyMasterPage">
+<body style="width: 350px; max-width: 350px; background-color: "   class="">
 
 
 
@@ -201,7 +201,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                                     <asp:ListItem Text="sin liberar en Nota de crédito" Value="EnNotaCredito" />
                                 </asp:DropDownList>
 
-                                <asp:DropDownList ID="cmbPuntoVenta" runat="server" CssClass="" Width="150px" Font-Size="14" Style="color: black;" />
+                                <asp:DropDownList ID="cmbPuntoVenta" runat="server" CssClass="" Width="70px" Font-Size="14" Style="color: black;" />
 
                             </td>
                         </tr>
@@ -2348,7 +2348,7 @@ Arroyo Seco (Sta. Fe) - René Favaloro 726 / (03402) 421-426 - 429-676 / arroyos
                 shrinkToFit: false,
                 
                 width: 340,//'auto',
-                height: $(window).height() - 150, // '100%'
+                height: $(window).height() - 250, // '100%'
                 altRows: false,
                 footerrow: false,
                 userDataOnFooter: true,

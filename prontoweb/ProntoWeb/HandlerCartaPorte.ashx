@@ -186,6 +186,8 @@ public class JQGridHandler : IHttpHandler
             SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(ConfigurationManager.AppSettings["scWilliamsRelease"]);
         //SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(ConfigurationManager.AppSettings["scWilliamsRelease"]);
 
+        string scbdlmaster = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(ConfigurationManager.ConnectionStrings["LocalSqlServer"].ConnectionString);
+
         HttpRequest request = context.Request;
         HttpResponse response = context.Response;
 
@@ -216,7 +218,7 @@ public class JQGridHandler : IHttpHandler
                                     sortColumnName, sortOrderBy, Convert.ToInt32(pageIndex),
                                     Convert.ToInt32(numberOfRows), isSearch == "true", filters, FechaInicial, FechaFinal, Convert.ToInt32(puntovent),
                                     SQLdinamico.BuscaIdWilliamsDestinoPreciso(destino, SC),
-                                    SC, usuario,"");
+                                    SC, usuario, scbdlmaster );
 
 
         response.ContentType = "application/json";
