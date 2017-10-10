@@ -201,6 +201,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                             <asp:ListItem Enabled="true">Syngenta Facturación</asp:ListItem>
                             <asp:ListItem Enabled="true">Tomas Hnos</asp:ListItem> <%-- [Algoritmo]--%>
                             <asp:ListItem Enabled="True">Tecnocampo</asp:ListItem>
+                            <asp:ListItem Enabled="True">Terra Verde</asp:ListItem>
                             <asp:ListItem Enabled="true">YPF</asp:ListItem>
                             <asp:ListItem Enabled="false">YPF 2</asp:ListItem>
                             <asp:ListItem Enabled="false">YPF 3</asp:ListItem>
