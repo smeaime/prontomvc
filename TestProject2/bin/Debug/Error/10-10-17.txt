@@ -3,3 +3,11 @@ Log Entry :
 10/10/2017 09:37:31
 Error in: . Error Message:Generando sincro para Terra Verde
 __________________________
+
+Log Entry : 
+10/10/2017 09:54:46
+Error in: . Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en UserDatosExtendidosManager.TraerRazonSocialDelUsuario(String UserId, String ConexBDLmaster, String SC) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 22762
+BusinessLogic
+__________________________

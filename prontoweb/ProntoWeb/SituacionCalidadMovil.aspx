@@ -58,7 +58,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
 
 
-<body class="" style="width: 350px; max-width: 350px; background-color: #F0F0FF">
+<body style="width: 350px; max-width: 350px; background-color: #F0F0FF"   class="bodyMasterPage">
 
 
 
@@ -71,7 +71,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
     <%--/////////////////////////////////////////////////////////////--%>
     <%--///////////     bootstrap    /////////////////////////////--%>
     <%--/////////////////////////////////////////////////////////////--%>
-<%--    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <%--    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>--%>
     <%--/////////////////////////////////////////////////////////////--%>
     <%--/////////////////////////////////////////////////////////////--%>
@@ -92,8 +92,8 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
 
 
-    <form id="form1" runat="server" defaultfocus="txtSuperbuscador" autocomplete="off"
-        class="">
+    <form id="form1" runat="server" defaultfocus="txtSuperbuscador" autocomplete="off"  >
+
         <ajaxToolkit:ToolkitScriptManager ID="ScriptManager1" runat="server" LoadScriptsBeforeUI="False"
             EnablePageMethods="true" AsyncPostBackTimeout="360000" ScriptMode="Release">
             <CompositeScript>
@@ -164,22 +164,6 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
         </div>
 
         <%--   <div style="visibility:hidden;display:none">--%>
-        <div>
-            <a href="CartaDePorteInformesAccesoClientesMovil.aspx">Informe </a>|
-                            <b>Situación</b> |
-                            <asp:Label ID="lblRazonSocial" runat="server" Font-Size="10" Font-Bold="false" Visible="false" />
-            <asp:LoginView ID="LoginView" runat="server">
-                <LoggedInTemplate>
-                    <asp:LoginName ID="LoginName1" runat="server" Font-Bold="false" CssClass="margender" />
-                    |
-                                    <asp:LoginStatus ID="LoginStatus1" runat="server" Font-Bold="false" ForeColor=""
-                                        LogoutAction="RedirectToLoginPage" LogoutPageUrl="~/Login.aspx" OnLoggedOut="LoginStatus1_LoggedOut"
-                                        TabIndex="-1" LogoutText="Salir" Font-Underline="False" CssClass="margender" />
-                </LoggedInTemplate>
-            </asp:LoginView>
-
-        </div>
-
 
 
         <div style="margin-left: ">
@@ -198,6 +182,8 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                         <tr>
                             <td class="" style="width: ; height: 18px;"></td>
                             <td class="" style="width: ; height: 18px;">
+                                                <asp:Image ID="LogoImage" runat="server" ImageUrl="~/Imagenes/williams.gif" CssClass="MasterLogo" Height="30px" />
+
                                 <asp:DropDownList ID="cmbEstado" runat="server" Style="text-align: right; margin-left: 0px;"
                                     CssClass="CssCombo" ToolTip="Estado de la carta de porte" Font-Size="14" Height="" Width="150" Enabled="false">
                                     <%--dejo el combito deshablitado porque las funciones no tienen todavia el parametro de "estado", estan harcodeadas en "11" --%>
@@ -215,7 +201,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                                     <asp:ListItem Text="sin liberar en Nota de crédito" Value="EnNotaCredito" />
                                 </asp:DropDownList>
 
-                                  <asp:DropDownList ID="cmbPuntoVenta" runat="server" CssClass="" Width="150px" Font-Size="14" Style="color: black;" />
+                                <asp:DropDownList ID="cmbPuntoVenta" runat="server" CssClass="" Width="150px" Font-Size="14" Style="color: black;" />
 
                             </td>
                         </tr>
@@ -264,10 +250,10 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
                         </tr>
 
-                        <tr style="visibility:hidden;display:none">
+                        <tr style="visibility: hidden; display: none">
                             <td class="" style="width: ; height: 18px;"></td>
                             <td class="" style="width: ; height: 18px;">
-                              
+
 
                                 <asp:TextBox ID="txtDestino" runat="server" Text='<%# Bind("DestinoDesc") %>' AutoPostBack="false" Style="color: black;" Visible="false"
                                     autocomplete="off" CssClass="CssTextBox" Width="200px"></asp:TextBox>
@@ -329,6 +315,46 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
             <button id="vale">cambiar situacion</button>
             <button id="jpg">jpg</button>
             <button id="tif">tif</button>
+
+
+            <div>
+                <a href="CartaDePorteInformesAccesoClientesMovil.aspx">Informe </a>| version original |
+                            <b>Situación</b> |
+                            <asp:Label ID="lblRazonSocial" runat="server" Font-Size="10" Font-Bold="false" Visible="false" />
+                <asp:LoginView ID="LoginView" runat="server">
+                    <LoggedInTemplate>
+                        <asp:LoginName ID="LoginName1" runat="server" Font-Bold="false" CssClass="margender" />
+                        |
+                                    <asp:LoginStatus ID="LoginStatus1" runat="server" Font-Bold="false" ForeColor=""
+                                        LogoutAction="RedirectToLoginPage" LogoutPageUrl="~/Login.aspx" OnLoggedOut="LoginStatus1_LoggedOut"
+                                        TabIndex="-1" LogoutText="Salir" Font-Underline="False" CssClass="margender" />
+                    </LoggedInTemplate>
+                </asp:LoginView>
+
+            </div>
+
+
+            <div>
+
+                <br />
+                Llamanos<br />
+
+                <%--       OFICINAS: Buenos Aires Moreno 584 P. 12 Of A / (011) 5278-8800 - 4322-4805 / buenosaires@williamsentregas.com.ar 
+     // San Lorenzo (Sta. Fe) - Sgo. del Estero 1177 / (03476) 430-234 - 426-855 / sanlorenzo@williamsentregas.com.ar
+Arroyo Seco (Sta. Fe) - René Favaloro 726 / (03402) 421-426 - 429-676 / arroyoseco@williamsentregas.com.ar 
+     // Bahía Blanca Ruta 252 km 0.5 - Playa el Triangulo / (0291) 400-7928 - 481-6778 / bahiablanca@williamsentregas.com.ar--%>
+
+
+                <a href="tel:5278-8800">BsAs</a>
+
+                <a href="tel:(03476) 430-234">S.Lorenzo</a>
+
+                <a href="tel: (03402) 421-426">Arroyo</a>
+
+                <a href="tel:0291-400-7928">B.Blanca </a>
+
+
+            </div>
 
 
             <%--<script>
