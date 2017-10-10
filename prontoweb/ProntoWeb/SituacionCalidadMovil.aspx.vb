@@ -78,11 +78,12 @@ Partial Class SituacionCalidadMovil
             Me.Title = "Situacion"
 
             BindTypeDropDown()
-            refrescaPeriodo()
 
+
+            'refrescaPeriodo()
             cmbPeriodo.Text = "Personalizar"
-            txtFechaDesde.Text = DateAdd(DateInterval.Day, -2, Today)
-            txtFechaHasta.Text = Today
+            'txtFechaDesde.Text = DateAdd(DateInterval.Day, -2, Today)
+            'txtFechaHasta.Text = Today
             cmbEstado.Enabled = False
 
 
