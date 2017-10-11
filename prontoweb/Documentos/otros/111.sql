@@ -1,4 +1,9 @@
 
+
+select email from clientes
+
+
+
 wResetearPass 'Mariano','pirulo!'
 
 select * from pedidos
