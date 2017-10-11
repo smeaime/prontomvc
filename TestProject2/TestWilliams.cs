@@ -954,9 +954,14 @@ namespace ProntoMVC.Tests
             DemoProntoEntities db = new DemoProntoEntities(scEF);
             DateTime UltimaFechaDeEnvioNotificaciones = new DateTime(10, 10, 10);
 
-            var q = db.CartasDePortes.Where(x => x.FechaModificacion > UltimaFechaDeEnvioNotificaciones)
-                        .Select(x => new { x.Vendedor, x.Entregador, x.CuentaOrden1, x.CuentaOrden2 });
-
+            var q = (
+                    from x in db.CartasDePortes
+                    from c1 in db.Clientes.Where(c => c.IdCliente == x.Vendedor)
+                    from c2 in db.Clientes.Where(c => c.IdCliente == x.Entregador)
+                    where x.FechaModificacion > UltimaFechaDeEnvioNotificaciones
+                    select c1.CorreosElectronicos_1 ,  c2.CorreosElectronicos_1 
+                    ).distinct() ;
+            
 
             var listado = db.Clientes.Select(x => x.CorreosElectronicos_1).Take(100);
             string rejunte = string.Join(";", listado.ToArray());
@@ -997,6 +1002,9 @@ namespace ProntoMVC.Tests
                                                  "30/01/2017",
                                                  0, -1, SC, "Mariano", scbdlmasterappconfig);
 
+            // q diferencia hay con listadoclientes?
+            // si el usuario tiene una razon social asignada, hay que filtrar. -Pero hay que filtrar antes! como en ListadoSegunCliente()
+            // -tambien tenes el tema de los clientes con filtros configurables.... en DataTablePorClienteSQL()
 
         }
 
