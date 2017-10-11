@@ -1532,6 +1532,9 @@ Partial Class CartaDePorteInformesConReportViewerSincronismos
                         registrosFiltrados = ds.wCartasDePorte_TX_InformesCorregido.Count
 
 
+
+
+
                     Case "AMAGGI (DESCARGAS) [BIT]"
 
 
@@ -2498,9 +2501,30 @@ Partial Class CartaDePorteInformesConReportViewerSincronismos
 
 
                     Case Else
-                        ErrHandler2.WriteError("No se está eligiendo bien el sincro" & cmbSincronismo.Text)
-                        MsgBoxAjax(Me, "Elija un sincronismo")
-                        Return
+
+
+                        output = SincronismosWilliamsManager.GenerarSincro(cmbSincronismo.Text, sErrores,
+                           HFSC.Value, ConfigurationManager.AppSettings("UrlDominio"),
+                           "", estadofiltro, "", idVendedor, idCorredor,
+                          idDestinatario, idIntermediario,
+                          idRComercial, idArticulo, idProcedencia, idDestino,
+                          IIf(cmbCriterioWHERE.SelectedValue = "todos",
+                              CartaDePorteManager.FiltroANDOR.FiltroAND,
+                            CartaDePorteManager.FiltroANDOR.FiltroOR),
+                          DropDownList2.Text,
+                   Convert.ToDateTime(iisValidSqlDate(txtFechaDesde.Text, #1/1/1753#)),
+                   Convert.ToDateTime(iisValidSqlDate(txtFechaHasta.Text, #1/1/2100#)),
+                             cmbPuntoVenta.SelectedValue, optDivisionSyngenta.SelectedValue, , , , idClienteAuxiliar, registrosFiltrados)
+
+                        lblErrores.Text = sErrores
+                        sErrores = ""
+
+
+
+
+                        'ErrHandler2.WriteError("No se está eligiendo bien el sincro" & cmbSincronismo.Text)
+                        'MsgBoxAjax(Me, "Elija un sincronismo")
+                        'Return
                 End Select
 
 
