@@ -14,7 +14,7 @@
             i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
                 (i[r].q = i[r].q || []).push(arguments)
             }, i[r].l = 1 * new Date(); a = s.createElement(o),
-            m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+                m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
         })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
 
         //ga('create', 'UA-31129433-2', 'auto');
@@ -602,5 +602,22 @@ ERA ESO EL PROBLEMA DEL PANELCITO VACIO?????????????????!!!!!!!!!!!!!!!1
             </table>
         </div>
     </form>
+
+
+
+
+    <script src="https://www.gstatic.com/firebasejs/4.5.0/firebase.js"></script>
+    <script>
+                                                            // Initialize Firebase
+                                                            var config = {
+                                                                apiKey: "AIzaSyD_KzMypOaPPCUl42hvR3BEkB9ZHCU9Nuc",
+                                                                authDomain: "pronto-f87bf.firebaseapp.com",
+                                                                databaseURL: "https://pronto-f87bf.firebaseio.com",
+                                                                projectId: "pronto-f87bf",
+                                                                storageBucket: "",
+                                                                messagingSenderId: "741177410808"
+                                                            };
+                                                            firebase.initializeApp(config);
+    </script>
 </body>
 </html>
