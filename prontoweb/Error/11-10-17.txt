@@ -825,3 +825,13 @@ Error relacionado con la red o específico de la instancia mientras se establec�
    en ASP.global_asax.Application_Error(Object sender, EventArgs e) en C:\bdl\pronto\prontoweb\global.asax:línea 433
 .Net SqlClient Data Provider
 __________________________
+
+Log Entry : 
+10/11/2017 16:49:06
+Error in: http://localhost:50769/ProntoWeb/SituacionCalidadMovil.aspx. Error Message:Mariano esta logueado, pero lo redirijo al login porque faltan los datos de session. No deberia mejor mandarlo a SeleccionarEmpresa? Ademas, no hago el LogOut y le queda el cookie!!!
+__________________________
+
+Log Entry : 
+10/11/2017 17:51:09
+Error in: http://localhost:50769/ProntoWeb/SituacionCalidadMovil.aspx. Error Message:Mariano esta logueado, pero lo redirijo al login porque faltan los datos de session. No deberia mejor mandarlo a SeleccionarEmpresa? Ademas, no hago el LogOut y le queda el cookie!!!
+__________________________
