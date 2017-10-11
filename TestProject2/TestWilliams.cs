@@ -938,6 +938,18 @@ namespace ProntoMVC.Tests
 
 
 
+        /*
+        https://developers.google.com/web/ilt/pwa/introduction-to-push-notifications
+        We can test push messaging in our app using cURL. We can send an empty message, called a "tickle", 
+            to the push service, then the push service sends a message to the browser.If the notification displays, then we 
+            have done everything correctly and our app is ready to push messages from the server.
+
+The cURL command that sends a request to FCM to issue a push message looks like this:
+
+curl "ENDPOINT_URL" --request POST --header "TTL: 60" --header "Content-Length: 0" \
+--header "Authorization: key=SERVER_KEY"
+
+*/
 
 
 
