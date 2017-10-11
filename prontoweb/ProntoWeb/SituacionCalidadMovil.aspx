@@ -322,6 +322,11 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                 ui-jqgrid > .ui-jqgrid-view > .ui-jqgrid-hdiv {
                     overflow: hidden;
                 }
+
+
+                .ui-jqgrid .ui-jqgrid-pager .ui-pg-div span.ui-icon {
+    margin: 10px;  /* botones del pager*/
+}
             </style>
 
 
@@ -329,7 +334,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
             <table id="Lista" class="scroll" cellpadding="0" cellspacing="0" style="font-size: 23px;" width="400px">
             </table>
             
-            <div id="ListaPager" class="scroll" style="text-align: center; height: 40px;">
+            <div id="ListaPager" class="scroll" style="text-align: center; height: 50px;">
             </div>
 
 
@@ -2431,7 +2436,7 @@ Arroyo Seco (Sta. Fe) - René Favaloro 726 / (03402) 421-426 - 429-676 / arroyos
             cellsubmit: 'clientArray',
             dataUrl: "WebServiceClientes.asmx/EmpleadoEditGridData",
 
-            recordtext: "View {0} - {1} of <span style=' font-size: 20px;'>{2}</span>",
+            recordtext: "{2} cartas</span>",
             //toppager: true,
 
             gridview: true
