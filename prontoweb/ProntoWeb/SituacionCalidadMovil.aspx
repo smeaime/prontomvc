@@ -57,7 +57,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 <%--https://developer.mozilla.org/en-US/docs/Mozilla/Mobile/Viewport_meta_tag--%>
 <meta name="viewport" content="width=350, initial-scale=1.0, maximum-scale=1.0">
 
-<body style="width: 350px; max-width: 350px; background-color: #9ec3e8 " class="">
+<body style="width: 350px; max-width: 350px; background-color: #9ec3e8" class="">
 
 
 
@@ -182,7 +182,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                         <tr>
                             <td class="" style="width: ; height: 18px;"></td>
                             <td class="" style="width: ; height: ; vertical-align: bottom !important;">
-                                <asp:Image ID="LogoImage" runat="server" ImageUrl="~/Imagenes/williamsmini.gif" CssClass="" Height="50px"  ImageAlign="AbsBottom"  />
+                                <asp:Image ID="LogoImage" runat="server" ImageUrl="~/Imagenes/williamsmini.gif" CssClass="" Height="50px" ImageAlign="AbsBottom" />
 
                                 <asp:DropDownList ID="cmbEstado" runat="server" Style="text-align: right; margin-left: 0px;"
                                     CssClass="CssCombo" ToolTip="Estado de la carta de porte" Font-Size="14" Height="40" Width="150" Enabled="false">
@@ -201,7 +201,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                                     <asp:ListItem Text="sin liberar en Nota de crédito" Value="EnNotaCredito" />
                                 </asp:DropDownList>
 
-                                <asp:DropDownList ID="cmbPuntoVenta" runat="server" CssClass="" Width="70px" Font-Size="14" Style="color: black;" Height="40"  />
+                                <asp:DropDownList ID="cmbPuntoVenta" runat="server" CssClass="" Width="70px" Font-Size="14" Style="color: black;" Height="40" />
 
                             </td>
                         </tr>
@@ -220,7 +220,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                                     <%--    <asp:ListItem Text="Filtrar por Mes/Año" />--%>
                                     <asp:ListItem Text="Personalizar" />
                                 </asp:DropDownList>
-                                <asp:TextBox ID="txtFechaDesde" runat="server" Width="100px" MaxLength="1" autocomplete="off" Style="color: black;" Font-Size="14" Enabled="true" Height="40" 
+                                <asp:TextBox ID="txtFechaDesde" runat="server" Width="100px" MaxLength="1" autocomplete="off" Style="color: black;" Font-Size="14" Enabled="true" Height="40"
                                     TabIndex="2" AutoPostBack="false"></asp:TextBox>
                                 <cc1:CalendarExtender ID="CalendarExtender3" runat="server" Format="dd/MM/yyyy" TargetControlID="txtFechaDesde"
                                     Enabled="True">
@@ -233,7 +233,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                                 </cc1:MaskedEditExtender>
                                 <cc1:TextBoxWatermarkExtender ID="TBWE2" runat="server" TargetControlID="txtFechaDesde"
                                     WatermarkText="desde" WatermarkCssClass="watermarked" />
-                                <asp:TextBox ID="txtFechaHasta" runat="server" Width="100px" MaxLength="1" TabIndex="2" Style="color: black;" Font-Size="14" Enabled="true" Height="40" 
+                                <asp:TextBox ID="txtFechaHasta" runat="server" Width="100px" MaxLength="1" TabIndex="2" Style="color: black;" Font-Size="14" Enabled="true" Height="40"
                                     AutoPostBack="false"></asp:TextBox>
                                 <cc1:CalendarExtender ID="CalendarExtender4" runat="server" Format="dd/MM/yyyy" TargetControlID="txtFechaHasta"
                                     Enabled="True">
@@ -296,6 +296,12 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                 <asp:Literal ID="salida" runat="server"></asp:Literal>
             </div>
 
+
+                                    <h1 id="bigOne"></h1>
+
+
+
+
             <%--<input type="text" class="span4" id="text1" name="agent" value=""  "/>--%>
             <style>
                 .ui-pg-table {
@@ -325,15 +331,16 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
 
                 .ui-jqgrid .ui-jqgrid-pager .ui-pg-div span.ui-icon {
-    margin: 10px;  /* botones del pager*/
-}
+                    margin: 10px; /* botones del pager*/
+                }
             </style>
 
 
-            
+
+
             <table id="Lista" class="scroll" cellpadding="0" cellspacing="0" style="font-size: 23px;" width="400px">
             </table>
-            
+
             <div id="ListaPager" class="scroll" style="text-align: center; height: 50px;">
             </div>
 
@@ -342,6 +349,11 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
             <input type="button" id="vale" style="height: 40px" value="cambiar situacion" />
             <input type="button" id="jpg" value="jpg" />
             <input type="button" id="tif" value="tif" />
+
+
+
+
+
 
 
 
@@ -2437,6 +2449,7 @@ Arroyo Seco (Sta. Fe) - René Favaloro 726 / (03402) 421-426 - 429-676 / arroyos
             dataUrl: "WebServiceClientes.asmx/EmpleadoEditGridData",
 
             recordtext: "{2} cartas</span>",
+            pgtext: "Pag. {0} de {1}",
             //toppager: true,
 
             gridview: true
@@ -2520,4 +2533,33 @@ Arroyo Seco (Sta. Fe) - René Favaloro 726 / (03402) 421-426 - 429-676 / arroyos
 
 
 
+    
+
+
+
         </script>
+
+
+
+  <script src="https://www.gstatic.com/firebasejs/4.5.0/firebase.js"></script>
+    <script>
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyD_KzMypOaPPCUl42hvR3BEkB9ZHCU9Nuc",
+            authDomain: "pronto-f87bf.firebaseapp.com",
+            databaseURL: "https://pronto-f87bf.firebaseio.com",
+            projectId: "pronto-f87bf",
+            storageBucket: "",
+            messagingSenderId: "741177410808"
+        };
+        firebase.initializeApp(config);
+
+
+
+        var bigOne = document.getElementById('bigOne');
+        var dbRef = firebase.database().ref().child('text');
+        dbRef.on('value',snap => bigOne.innerText=snap.val())
+
+    </script>
+
+
