@@ -57,7 +57,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 <%--https://developer.mozilla.org/en-US/docs/Mozilla/Mobile/Viewport_meta_tag--%>
 <meta name="viewport" content="width=350, initial-scale=1.0, maximum-scale=1.0">
 
-<body style="width: 350px; max-width: 350px; background-color: " class="">
+<body style="width: 350px; max-width: 350px; background-color: #9ec3e8 " class="">
 
 
 
@@ -182,7 +182,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                         <tr>
                             <td class="" style="width: ; height: 18px;"></td>
                             <td class="" style="width: ; height: ; vertical-align: bottom !important;">
-                                <asp:Image ID="LogoImage" runat="server" ImageUrl="~/Imagenes/williamsmini.gif" CssClass="MasterLogo" Height="50px"  />
+                                <asp:Image ID="LogoImage" runat="server" ImageUrl="~/Imagenes/williamsmini.gif" CssClass="" Height="50px"  ImageAlign="AbsBottom"  />
 
                                 <asp:DropDownList ID="cmbEstado" runat="server" Style="text-align: right; margin-left: 0px;"
                                     CssClass="CssCombo" ToolTip="Estado de la carta de porte" Font-Size="14" Height="40" Width="150" Enabled="false">
@@ -201,7 +201,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                                     <asp:ListItem Text="sin liberar en Nota de crédito" Value="EnNotaCredito" />
                                 </asp:DropDownList>
 
-                                <asp:DropDownList ID="cmbPuntoVenta" runat="server" CssClass="" Width="70px" Font-Size="14" Style="color: black;" />
+                                <asp:DropDownList ID="cmbPuntoVenta" runat="server" CssClass="" Width="70px" Font-Size="14" Style="color: black;" Height="40"  />
 
                             </td>
                         </tr>
@@ -220,7 +220,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                                     <%--    <asp:ListItem Text="Filtrar por Mes/Año" />--%>
                                     <asp:ListItem Text="Personalizar" />
                                 </asp:DropDownList>
-                                <asp:TextBox ID="txtFechaDesde" runat="server" Width="100px" MaxLength="1" autocomplete="off" Style="color: black;" Font-Size="14" Enabled="true"
+                                <asp:TextBox ID="txtFechaDesde" runat="server" Width="100px" MaxLength="1" autocomplete="off" Style="color: black;" Font-Size="14" Enabled="true" Height="40" 
                                     TabIndex="2" AutoPostBack="false"></asp:TextBox>
                                 <cc1:CalendarExtender ID="CalendarExtender3" runat="server" Format="dd/MM/yyyy" TargetControlID="txtFechaDesde"
                                     Enabled="True">
@@ -233,7 +233,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                                 </cc1:MaskedEditExtender>
                                 <cc1:TextBoxWatermarkExtender ID="TBWE2" runat="server" TargetControlID="txtFechaDesde"
                                     WatermarkText="desde" WatermarkCssClass="watermarked" />
-                                <asp:TextBox ID="txtFechaHasta" runat="server" Width="100px" MaxLength="1" TabIndex="2" Style="color: black;" Font-Size="14" Enabled="true"
+                                <asp:TextBox ID="txtFechaHasta" runat="server" Width="100px" MaxLength="1" TabIndex="2" Style="color: black;" Font-Size="14" Enabled="true" Height="40" 
                                     AutoPostBack="false"></asp:TextBox>
                                 <cc1:CalendarExtender ID="CalendarExtender4" runat="server" Format="dd/MM/yyyy" TargetControlID="txtFechaHasta"
                                     Enabled="True">
@@ -2422,7 +2422,7 @@ Arroyo Seco (Sta. Fe) - René Favaloro 726 / (03402) 421-426 - 429-676 / arroyos
             shrinkToFit: false,
 
             width: 340,//'auto',
-            height: $(window).height() - 250, // '100%'
+            height: $(window).height() - 300, // '100%'
             altRows: false,
             footerrow: false,
             userDataOnFooter: true,
