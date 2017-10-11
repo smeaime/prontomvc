@@ -371,3 +371,64 @@ Log Entry :
 10/11/2017 10:31:28
 Error in: http://localhost:50769/ProntoWeb/SituacionCalidadMovil.aspx. Error Message:Mariano esta logueado, pero lo redirijo al login porque faltan los datos de session. No deberia mejor mandarlo a SeleccionarEmpresa? Ademas, no hago el LogOut y le queda el cookie!!!
 __________________________
+
+Log Entry : 
+10/11/2017 10:34:53
+Error in: http://localhost:50769/ProntoWeb/SituacionCalidadMovil.aspx. Error Message:System.Web.HttpException
+Etiqueta de servidor incorrecta.
+   en System.Web.UI.TemplateParser.ProcessError(String message)
+   en System.Web.UI.TemplateParser.DetectSpecialServerTagError(String text, Int32 textPos)
+   en System.Web.UI.TemplateParser.ParseStringInternal(String text, Encoding fileEncoding)
+   en System.Web.UI.TemplateParser.ParseString(String text, VirtualPath virtualPath, Encoding fileEncoding)
+System.Web
+__________________________
+
+Log Entry : 
+10/11/2017 10:39:26
+Error in: http://localhost:50769/ProntoWeb/CartasDePortes.aspx?tipo=Todas. Error Message:Mariano
+__________________________
+
+Log Entry : 
+10/11/2017 10:39:33
+Error in: http://localhost:50769/ProntoWeb/CartasDePortes.aspx?tipo=Todas. Error Message:Mariano
+__________________________
+
+Log Entry : 
+10/11/2017 10:39:44
+Error in: http://localhost:50769/ProntoWeb/SituacionCalidadMovil.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en SituacionCalidadMovil.BindTypeDropDown() en C:\bdl\pronto\prontoweb\ProntoWeb\SituacionCalidadMovil.aspx.vb:línea 167
+App_Web_situacioncalidadmovil.aspx.4199bbd4.gaoyzesp
+__________________________
+
+Log Entry : 
+10/11/2017 10:39:56
+Error in: http://localhost:50769/ProntoWeb/SituacionCalidadMovil.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en SituacionCalidadMovil.BindTypeDropDown() en C:\bdl\pronto\prontoweb\ProntoWeb\SituacionCalidadMovil.aspx.vb:línea 167
+App_Web_situacioncalidadmovil.aspx.4199bbd4.aciennk0
+__________________________
+
+Log Entry : 
+10/11/2017 10:40:02
+Error in: http://localhost:50769/ProntoWeb/SituacionCalidadMovil.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en SituacionCalidadMovil.BindTypeDropDown() en C:\bdl\pronto\prontoweb\ProntoWeb\SituacionCalidadMovil.aspx.vb:línea 167
+App_Web_situacioncalidadmovil.aspx.4199bbd4.aciennk0
+__________________________
+
+Log Entry : 
+10/11/2017 10:43:28
+Error in: http://localhost:50769/ProntoWeb/SituacionCalidadMovil.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en SituacionCalidadMovil.BindTypeDropDown() en C:\bdl\pronto\prontoweb\ProntoWeb\SituacionCalidadMovil.aspx.vb:línea 167
+App_Web_situacioncalidadmovil.aspx.4199bbd4.aciennk0
+__________________________
+
+Log Entry : 
+10/11/2017 10:48:05
+Error in: http://localhost:50769/ProntoWeb/SituacionCalidadMovil.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en SituacionCalidadMovil.BindTypeDropDown() en C:\bdl\pronto\prontoweb\ProntoWeb\SituacionCalidadMovil.aspx.vb:línea 167
+App_Web_situacioncalidadmovil.aspx.4199bbd4.dznwl1y8
+__________________________

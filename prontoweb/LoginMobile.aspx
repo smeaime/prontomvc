@@ -67,7 +67,7 @@ document.cookie = 'killme' + escape('nothing')
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
 
-<body style="height: ; overflow: ; background-color: #647ea9" class="">
+<body style="height: ; overflow: ; background-color: #9ec3e8" class="">
 
     <%--esto del onload para lo de revisar si esta habilitado javascript--%>
     <center>
