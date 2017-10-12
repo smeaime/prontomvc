@@ -159,6 +159,9 @@ namespace ProntoMVC.Data.Models
         public string AcumularParaSUSS { get; set; }
         public string BloqueadoFirma { get; set; }
         public Nullable<int> IdUsuarioBloqueo { get; set; }
+        public string ControlAFIP_Resultado { get; set; }
+        public Nullable<System.DateTime> ControlAFIP_Fecha { get; set; }
+        public string ControlAFIP_Mensaje { get; set; }
     
         public virtual ICollection<DetalleComprobantesProveedore> DetalleComprobantesProveedores { get; set; }
         public virtual Proveedor Proveedor { get; set; }
