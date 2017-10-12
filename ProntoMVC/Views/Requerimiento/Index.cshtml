@@ -44,6 +44,8 @@
 
     <script src="~/Scripts/jquery.table2excel.js"></script>
 
+<div id="previewCredencial"></div>
+
     <div style=" padding-left: 15px;  padding-right: 15px ;">
         <div>
             <div class="row-fluid">
@@ -131,26 +133,17 @@
 
             <div class="contextMenu" id="myMenu1" style="display:none">
                 <ul style="width: 200px">
-                    <li id="add">
-                        @*<span class="ui-icon ui-icon-plus" style="float:left"></span>*@
+                    <li id="GenerarRM_Word">
                         <span style="font-size:11px; font-family:Verdana">Generar en Word</span>
                     </li>
-                    <li id="edit">
-                        @*<span class="ui-icon ui-icon-pencil" style="float:left"></span>*@
+                    <li id="MarcarRM_Impresa">
                         <span style="font-size:11px; font-family:Verdana">Marcar RM como impresa</span>
                     </li>
-                    <li id="del">
-                        @*<span class="ui-icon ui-icon-trash" style="float:left"></span>*@
-                        <span style="font-size:11px; font-family:Verdana">Desmarcar rm como impresa</span>
+                    <li id="DesmarcarRM_Impresa">
+                        <span style="font-size:11px; font-family:Verdana">Desmarcar RM como impresa</span>
                     </li>
-
-                    <li id="del">
-                        @*<span class="ui-icon ui-icon-trash" style="float:left"></span>*@
+                    <li id="EnviarRM_Correo">
                         <span style="font-size:11px; font-family:Verdana">Enviar RM a proveedores por correo</span>
-                    </li>
-                    <li id="del">
-                        @*<span class="ui-icon ui-icon-trash" style="float:left"></span>*@
-                        <span style="font-size:11px; font-family:Verdana">Enviar RM a proveedores por fax</span>
                     </li>
                 </ul>
             </div>
@@ -185,32 +178,29 @@
         function ExportDataToExcel() {
             var grid = "#Lista";
 
-            var mya=new Array();
-            mya=$(grid).getDataIDs();  // Get All IDs
+            var mya = new Array();
+            mya = $(grid).getDataIDs();  // Get All IDs
 
-            var data=$(grid).getRowData(mya[0]);     // Get First row to get the labels
-            var colNames=new Array();
+            var data = $(grid).getRowData(mya[0]);     // Get First row to get the labels
+            var colNames = new Array();
 
-            var ii=0;
-            for (var i in data){colNames[ii++]=i;}    // capture col names
+            var ii = 0;
+            for (var i in data) { colNames[ii++] = i; }    // capture col names
 
-            var html="";
+            var html = "";
 
-            var columnNames = $(grid).jqGrid('getGridParam','colNames');
+            var columnNames = $(grid).jqGrid('getGridParam', 'colNames');
 
-            for(i=0;i<columnNames.length-1;i++)
-            {
-                html = html + columnNames[i+1]+"\t";
+            for (i = 0; i < columnNames.length - 1; i++) {
+                html = html + columnNames[i + 1] + "\t";
             }
 
-            html=html+"\n";
+            html = html + "\n";
 
-            for(i=0;i<mya.length;i++)
-            {
-                data=$(grid).getRowData(mya[i]); // get each row
-                for(j=0;j<colNames.length;j++)
-                {
-                    html=html+data[colNames[j]]+"\t"; // output each column as tab delimited
+            for (i = 0; i < mya.length; i++) {
+                data = $(grid).getRowData(mya[i]); // get each row
+                for (j = 0; j < colNames.length; j++) {
+                    html = html + data[colNames[j]] + "\t"; // output each column as tab delimited
                 }
 
                 html = html + "</tr>"; // output each row with end of line
@@ -237,22 +227,14 @@
         //Para que haga wrap en las celdas
         //$('.ui-jqgrid .ui-jqgrid-htable th div').css('white-space', 'normal');
 
-
-
-
-
         $('#Lista').jqGrid({
             url: '@Url.Action("Requerimientos_DynamicGridData", "Requerimiento")',
             postData: {
                 'FechaInicial': function () { return $("#FechaInicial").val(); },
                 'FechaFinal': function () { return $("#FechaFinal").val(); },
                 'IdObra': function () { return $("#IdObra").val(); },
-                'bAConfirmar': function () {
-                    return $('#bAConfirmar').is(":checked");
-                },
-                'bALiberar': function () {
-                    return $('#bALiberar').is(":checked");
-                }
+                'bAConfirmar': function () { return $('#bAConfirmar').is(":checked"); },
+                'bALiberar': function () { return $('#bALiberar').is(":checked"); }
             },
             datatype: 'local', //'json',
             mtype: 'POST',
@@ -328,33 +310,49 @@
             loadComplete: function () {
                 $("tr.jqgrow", this).contextMenu('myMenu1', {
                     bindings: {
-                        'edit': function (trigger) {
-                            // trigger is the DOM element ("tr.jqgrow") which are triggered
-                            //   grid.editGridRow(trigger.id, editSettings);
+                        'GenerarRM_Word': function (trigger) {
+                            GenerarRM_Word()
                         },
-                        'add': function (/*trigger*/) {
-                            //  grid.editGridRow("new", addSettings);
+                        'MarcarRM_Impresa': function (trigger) {
+                            $.blockUI({
+                                message: "Un momento por favor...",
+                                css: {
+                                    border: 'none',
+                                    padding: '15px',
+                                    backgroundColor: '#000',
+                                    '-webkit-border-radius': '10px',
+                                    '-moz-border-radius': '10px',
+                                    opacity: .5,
+                                    color: '#fff'
+                                }
+                            });
+                            MarcarRM_Impresa();
+                            $('#Lista').trigger('reloadGrid');
                         },
-                        'del': function (trigger) {
-                            if ($('#del').hasClass('ui-state-disabled') === false) {
-                                // disabled item can do be choosed
-                                //      grid.delGridRow(trigger.id, delSettings);
-                            }
+                        'DesmarcarRM_Impresa': function (trigger) {
+                            $.blockUI({
+                                message: "Un momento por favor...",
+                                css: {
+                                    border: 'none',
+                                    padding: '15px',
+                                    backgroundColor: '#000',
+                                    '-webkit-border-radius': '10px',
+                                    '-moz-border-radius': '10px',
+                                    opacity: .5,
+                                    color: '#fff'
+                                }
+                            });
+                            DesmarcarRM_Impresa();
+                            $('#Lista').trigger('reloadGrid');
+                        },
+                        'EnviarRM_Correo': function (trigger) {
+                            EnviarRM_Correo()
                         }
                     },
                     onContextMenu: function (event/*, menu*/) {
                         var rowId = $(event.target).closest("tr.jqgrow").attr("id");
-                        //grid.setSelection(rowId);
-                        // disable menu for rows with even rowids
-                        //$('#del').attr("disabled", Number(rowId) % 2 === 0);
-                        //if (Number(rowId) % 2 === 0) {
-                        //    $('#del').attr("disabled", "disabled").addClass('ui-state-disabled');
-                        //} else {
-                        //    $('#del').removeAttr("disabled").removeClass('ui-state-disabled');
-                        //}
                         return true;
                     },
-                    //http://stackoverflow.com/questions/8451982/custom-values-to-context-menu-items-in-jqgrid
                     menuStyle: {
                         backgroundColor: '#fcfdfd',
                         border: '1px solid #a6c9e2',
@@ -435,7 +433,7 @@
         }
 
         var myfilter = { groupOp: "AND", rules: [] };
-        if ($("#FechaInicial").val() != "")  myfilter.rules.push({ field: "FechaRequerimiento", op: "ge", data: $("#FechaInicial").val() });
+        if ($("#FechaInicial").val() != "") myfilter.rules.push({ field: "FechaRequerimiento", op: "ge", data: $("#FechaInicial").val() });
         if ($("#FechaFinal").val() != "") myfilter.rules.push({ field: "FechaRequerimiento", op: "le", data: $("#FechaFinal").val() });
 
         jqGridFilter(JSON.stringify(myfilter), $('#Lista'));
@@ -447,5 +445,39 @@
         pageLayout.hide('east');
         pageLayout.hide('south');
     });
+
+        function GenerarRM_Word() {
+        //window.open('Imprimir/42501');
+        //return;
+        var $grid = $("#Lista"), selIds = $grid.jqGrid("getGridParam", "selarrrow"), i, n,
+            cellValues = [];
+        for (i = 0, n = selIds.length; i < n; i++) {
+            var IdRequerimiento = $grid.jqGrid("getCell", selIds[i], "IdRequerimiento");
+
+            var url = '@Html.Raw(@Url.Action("Imprimir", "Requerimiento", new { id = "__param__" }))';
+            url=url.replace('__param__', encodeURIComponent(IdRequerimiento));
+            //window.location.href = url.replace('__param__', encodeURIComponent(IdRequerimiento));
+            //window.open(url, '_blank');
+            window.open(url); 
+           
+            //$.post(url, function (result) {
+            //    $('#previewCredencial').html(
+            //        $('<iframe/>', {
+            //            'class': 'pdfpreview', // some CSS class to set the width and height of the preview iframe
+            //            'src': result.url
+            //        })
+            //    );
+            //});
+
+
+            @*function EditProducts(productId, orderId, employeeId, mode) {
+                mode = "edit";
+                debugger;
+                var url = '@Html.Raw(Url.Action("Index", "Home", new { productId = "__productId__", orderId = "__orderId__", employeeId = "__employeeId__", Mode = "__mode__"}))';
+                var params = url.replace('__productId__', productId).replace('__orderId__', orderId).replace('__employeeId__', employeeId).replace('__mode__', mode);
+                window.location.href = params;
+            }*@
+        }
+    };
 
     </script>
