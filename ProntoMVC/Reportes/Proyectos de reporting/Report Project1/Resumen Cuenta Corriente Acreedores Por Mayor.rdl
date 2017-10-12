@@ -1294,6 +1294,10 @@
           <QueryParameter Name="@Consolidar">
             <Value>=Parameters!Consolidar.Value</Value>
           </QueryParameter>
+          <QueryParameter Name="@Web">
+            <Value>=Parameters!Web.Value</Value>
+            <rd:UserDefined>true</rd:UserDefined>
+          </QueryParameter>
         </QueryParameters>
         <CommandType>StoredProcedure</CommandType>
         <CommandText>CtasCtesA_TXPorMayor</CommandText>
@@ -1494,6 +1498,16 @@
       <Nullable>true</Nullable>
       <AllowBlank>true</AllowBlank>
       <Prompt>UrlDominio</Prompt>
+      <Hidden>true</Hidden>
+    </ReportParameter>
+    <ReportParameter Name="Web">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>SI</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>Web</Prompt>
       <Hidden>true</Hidden>
     </ReportParameter>
   </ReportParameters>
