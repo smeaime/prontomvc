@@ -1247,6 +1247,9 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.CartasPorteMovimientos' no tiene 
           <Property Name="AcumularParaSUSS" Type="varchar" MaxLength="2" />
           <Property Name="BloqueadoFirma" Type="varchar" MaxLength="2" />
           <Property Name="IdUsuarioBloqueo" Type="int" />
+          <Property Name="ControlAFIP_Resultado" Type="varchar" MaxLength="20" />
+          <Property Name="ControlAFIP_Fecha" Type="datetime" />
+          <Property Name="ControlAFIP_Mensaje" Type="ntext" />
         </EntityType>
         <EntityType Name="Conceptos">
           <Key>
@@ -18749,6 +18752,9 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.VistaCartasPorteMovimientos' no t
           <Property Name="AcumularParaSUSS" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
           <Property Name="BloqueadoFirma" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
           <Property Name="IdUsuarioBloqueo" Type="Int32" />
+          <Property Name="ControlAFIP_Resultado" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="ControlAFIP_Fecha" Type="DateTime" Precision="3" />
+          <Property Name="ControlAFIP_Mensaje" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="DetalleComprobantesProveedore">
           <Key>
@@ -29690,6 +29696,9 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.VistaCartasPorteMovimientos' no t
           <EntitySetMapping Name="ComprobantesProveedor">
             <EntityTypeMapping TypeName="DemoProntoModel.ComprobanteProveedor">
               <MappingFragment StoreEntitySet="ComprobantesProveedores">
+                <ScalarProperty Name="ControlAFIP_Mensaje" ColumnName="ControlAFIP_Mensaje" />
+                <ScalarProperty Name="ControlAFIP_Fecha" ColumnName="ControlAFIP_Fecha" />
+                <ScalarProperty Name="ControlAFIP_Resultado" ColumnName="ControlAFIP_Resultado" />
                 <ScalarProperty Name="IdUsuarioBloqueo" ColumnName="IdUsuarioBloqueo" />
                 <ScalarProperty Name="BloqueadoFirma" ColumnName="BloqueadoFirma" />
                 <ScalarProperty Name="AcumularParaSUSS" ColumnName="AcumularParaSUSS" />
