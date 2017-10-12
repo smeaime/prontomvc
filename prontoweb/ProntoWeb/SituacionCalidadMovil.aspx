@@ -58,7 +58,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
 
 
-<body class="" style="width: 350px; max-width: 350px; background-color: #F0F0FF">
+<body style="width: 350px; max-width: 350px; background-color: #F0F0FF"   class="bodyMasterPage">
 
 
 
@@ -71,8 +71,8 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
     <%--/////////////////////////////////////////////////////////////--%>
     <%--///////////     bootstrap    /////////////////////////////--%>
     <%--/////////////////////////////////////////////////////////////--%>
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <%--    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>--%>
     <%--/////////////////////////////////////////////////////////////--%>
     <%--/////////////////////////////////////////////////////////////--%>
     <%--////////////    jqgrid     //////////////////////////////////--%>
@@ -92,8 +92,8 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
 
 
-    <form id="form1" runat="server" defaultfocus="txtSuperbuscador" autocomplete="off"
-        class="">
+    <form id="form1" runat="server" defaultfocus="txtSuperbuscador" autocomplete="off"  >
+
         <ajaxToolkit:ToolkitScriptManager ID="ScriptManager1" runat="server" LoadScriptsBeforeUI="False"
             EnablePageMethods="true" AsyncPostBackTimeout="360000" ScriptMode="Release">
             <CompositeScript>
@@ -149,7 +149,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
             /* When the body has the loading class, we turn
    the scrollbar off with overflow:hidden */
             body.loading {
-                overflow: hidden;
+                /* overflow: hidden; */
             }
 
                 /* Anytime the body has the loading class, our
@@ -163,23 +163,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
             Cargando...
         </div>
 
-
-
-        <a href="CartaDePorteInformesAccesoClientesMovil.aspx">Informe </a>|
-                            <b>Situación</b> |
-                            <asp:Label ID="lblRazonSocial" runat="server" Font-Size="10" Font-Bold="false" />
-        |
-                            <asp:LoginView ID="LoginView" runat="server">
-                                <LoggedInTemplate>
-                                    <%--<asp:LoginName ID="LoginName1" runat="server" Font-Bold="false" CssClass="margender" />
-                                    |--%>
-                                    <asp:LoginStatus ID="LoginStatus1" runat="server" Font-Bold="false" ForeColor=""
-                                        LogoutAction="RedirectToLoginPage" LogoutPageUrl="~/Login.aspx" OnLoggedOut="LoginStatus1_LoggedOut"
-                                        TabIndex="-1" LogoutText="Salir" Font-Underline="False" CssClass="margender" />
-                                </LoggedInTemplate>
-                            </asp:LoginView>
-
-        <br />
+        <%--   <div style="visibility:hidden;display:none">--%>
 
 
         <div style="margin-left: ">
@@ -198,8 +182,10 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                         <tr>
                             <td class="" style="width: ; height: 18px;"></td>
                             <td class="" style="width: ; height: 18px;">
+                                                <asp:Image ID="LogoImage" runat="server" ImageUrl="~/Imagenes/williams.gif" CssClass="MasterLogo" Height="30px" />
+
                                 <asp:DropDownList ID="cmbEstado" runat="server" Style="text-align: right; margin-left: 0px;"
-                                    CssClass="CssCombo" ToolTip="Estado de la carta de porte" Font-Size="18" Height="" Width="340" Enabled="false">
+                                    CssClass="CssCombo" ToolTip="Estado de la carta de porte" Font-Size="14" Height="" Width="150" Enabled="false">
                                     <%--dejo el combito deshablitado porque las funciones no tienen todavia el parametro de "estado", estan harcodeadas en "11" --%>
 
                                     <asp:ListItem Text="DESC de hoy + POSIC filt" Value="DescargasDeHoyMasTodasLasPosicionesEnRangoFecha"
@@ -215,12 +201,14 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                                     <asp:ListItem Text="sin liberar en Nota de crédito" Value="EnNotaCredito" />
                                 </asp:DropDownList>
 
+                                <asp:DropDownList ID="cmbPuntoVenta" runat="server" CssClass="" Width="150px" Font-Size="14" Style="color: black;" />
+
                             </td>
                         </tr>
                         <tr>
                             <td class="" style="width: ; height: 18px;"></td>
                             <td class="" style="width: ; height: 18px;">
-                                <asp:DropDownList ID="cmbPeriodo" runat="server" AutoPostBack="true" Height="" Width="120px" Font-Size="20" Style="color: black;"
+                                <asp:DropDownList ID="cmbPeriodo" runat="server" AutoPostBack="true" Height="" Width="120px" Font-Size="14" Style="color: black;"
                                     Visible="true">
                                     <asp:ListItem Text="Hoy" Selected="True" />
                                     <asp:ListItem Text="Ayer" />
@@ -232,7 +220,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                                     <%--    <asp:ListItem Text="Filtrar por Mes/Año" />--%>
                                     <asp:ListItem Text="Personalizar" />
                                 </asp:DropDownList>
-                                <asp:TextBox ID="txtFechaDesde" runat="server" Width="100px" MaxLength="1" autocomplete="off" Style="color: black;" Font-Size="20"
+                                <asp:TextBox ID="txtFechaDesde" runat="server" Width="100px" MaxLength="1" autocomplete="off" Style="color: black;" Font-Size="14"
                                     TabIndex="2" AutoPostBack="false"></asp:TextBox>
                                 <cc1:CalendarExtender ID="CalendarExtender3" runat="server" Format="dd/MM/yyyy" TargetControlID="txtFechaDesde"
                                     Enabled="True">
@@ -245,7 +233,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                                 </cc1:MaskedEditExtender>
                                 <cc1:TextBoxWatermarkExtender ID="TBWE2" runat="server" TargetControlID="txtFechaDesde"
                                     WatermarkText="desde" WatermarkCssClass="watermarked" />
-                                <asp:TextBox ID="txtFechaHasta" runat="server" Width="100px" MaxLength="1" TabIndex="2" Style="color: black;" Font-Size="20"
+                                <asp:TextBox ID="txtFechaHasta" runat="server" Width="100px" MaxLength="1" TabIndex="2" Style="color: black;" Font-Size="14"
                                     AutoPostBack="false"></asp:TextBox>
                                 <cc1:CalendarExtender ID="CalendarExtender4" runat="server" Format="dd/MM/yyyy" TargetControlID="txtFechaHasta"
                                     Enabled="True">
@@ -262,13 +250,12 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
                         </tr>
 
-                        <tr>
+                        <tr style="visibility: hidden; display: none">
                             <td class="" style="width: ; height: 18px;"></td>
                             <td class="" style="width: ; height: 18px;">
-                                <asp:DropDownList ID="cmbPuntoVenta" runat="server" CssClass="" Width="128px" Font-Size="20" Style="color: black;" />
 
 
-                                <asp:TextBox ID="txtDestino" runat="server" Text='<%# Bind("DestinoDesc") %>' AutoPostBack="false" Style="color: black;"
+                                <asp:TextBox ID="txtDestino" runat="server" Text='<%# Bind("DestinoDesc") %>' AutoPostBack="false" Style="color: black;" Visible="false"
                                     autocomplete="off" CssClass="CssTextBox" Width="200px"></asp:TextBox>
                                 <cc1:AutoCompleteExtender CompletionInterval="100" ID="AutoCompleteExtender26" runat="server"
                                     OnClientItemSelected="RefrescaGrilla()"
@@ -310,23 +297,64 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
             </div>
 
             <%--<input type="text" class="span4" id="text1" name="agent" value=""  "/>--%>
-       <style>
-                .ui-paging-info{
+            <style>
+                .ui-paging-info {
                     font-size: 10px !important;
                 }
 
-                .ui-jqgrid {font-size:0.6em}
-
+                .ui-jqgrid {
+                    font-size: 0.6em
+                }
             </style>
             <table id="Lista" class="scroll" cellpadding="0" cellspacing="0" style="font-size: ;" width="400px">
             </table>
-            <div id="ListaPager" class="scroll" style="text-align: center; height: 50px; font-size:">
+            <div id="ListaPager" class="scroll" style="text-align: center; height: 50px; font-size: ">
             </div>
-     
+
 
             <button id="vale">cambiar situacion</button>
             <button id="jpg">jpg</button>
             <button id="tif">tif</button>
+
+
+            <div>
+                <a href="CartaDePorteInformesAccesoClientesMovil.aspx">Informe </a>| version original |
+                            <b>Situación</b> |
+                            <asp:Label ID="lblRazonSocial" runat="server" Font-Size="10" Font-Bold="false" Visible="false" />
+                <asp:LoginView ID="LoginView" runat="server">
+                    <LoggedInTemplate>
+                        <asp:LoginName ID="LoginName1" runat="server" Font-Bold="false" CssClass="margender" />
+                        |
+                                    <asp:LoginStatus ID="LoginStatus1" runat="server" Font-Bold="false" ForeColor=""
+                                        LogoutAction="RedirectToLoginPage" LogoutPageUrl="~/Login.aspx" OnLoggedOut="LoginStatus1_LoggedOut"
+                                        TabIndex="-1" LogoutText="Salir" Font-Underline="False" CssClass="margender" />
+                    </LoggedInTemplate>
+                </asp:LoginView>
+
+            </div>
+
+
+            <div>
+
+                <br />
+                Llamanos<br />
+
+                <%--       OFICINAS: Buenos Aires Moreno 584 P. 12 Of A / (011) 5278-8800 - 4322-4805 / buenosaires@williamsentregas.com.ar 
+     // San Lorenzo (Sta. Fe) - Sgo. del Estero 1177 / (03476) 430-234 - 426-855 / sanlorenzo@williamsentregas.com.ar
+Arroyo Seco (Sta. Fe) - René Favaloro 726 / (03402) 421-426 - 429-676 / arroyoseco@williamsentregas.com.ar 
+     // Bahía Blanca Ruta 252 km 0.5 - Playa el Triangulo / (0291) 400-7928 - 481-6778 / bahiablanca@williamsentregas.com.ar--%>
+
+
+                <a href="tel:5278-8800">BsAs</a>
+
+                <a href="tel:(03476) 430-234">S.Lorenzo</a>
+
+                <a href="tel: (03402) 421-426">Arroyo</a>
+
+                <a href="tel:0291-400-7928">B.Blanca </a>
+
+
+            </div>
 
 
             <%--<script>
@@ -1386,14 +1414,13 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
                 colModel: [
 {
-    name: 'act', index: 'act', align: 'center', width: 60, editable: false, hidden: false, sortable: false,
-    search: false,
+    name: 'act', index: 'act', align: 'center', width: 60, editable: false, hidden: true, sortable: false, frozen:true,   search: false
 },
 
-{ name: ' IdCartasDePorte', index: ' IdCartasDePorte', align: 'left', width: 100, editable: false, hidden: true },
+{ name: ' IdCartasDePorte', index: ' IdCartasDePorte', align: 'left', width: 100, editable: false, hidden: true, frozen:true },
 
 {
-    name: 'NumeroCartaEnTextoParaBusqueda', index: 'NumeroCartaEnTextoParaBusqueda', width: 90, align: 'left', sorttype: "text", sortable: false, frozen:true
+    name: 'NumeroCartaEnTextoParaBusqueda', index: 'NumeroCartaEnTextoParaBusqueda', width: 100, align: 'left', sorttype: "text", sortable: false, frozen:true
 , editable: false, editrules: { required: false, number: true }, edittype: 'text',
 
     searchoptions: { sopt: ['bw', 'cn', 'eq'] },
@@ -2320,16 +2347,17 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                 multiselect: true,
                 shrinkToFit: false,
                 
-                width: 350,//'auto',
-                height: $(window).height() - 250, // '100%'
+                width: 340,//'auto',
+                height: $(window).height() - 150, // '100%'
                 altRows: false,
                 footerrow: false,
                 userDataOnFooter: true,
                 //caption: '<b>Control de Descargas</b>',
-                cellEdit: true,
+                cellEdit: false, // si usas frozencolumns, estas obligado a sacar el cellEdit!!!
                 cellsubmit: 'clientArray',
                 dataUrl: "WebServiceClientes.asmx/EmpleadoEditGridData",
 
+                recordtext: "View {0} - {1} of <span style=' font-size: 20px;'>{2}</span>",
                 //toppager: true,
 
                 gridview: true
@@ -2337,6 +2365,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
         , multipleSearch: true
 
             });
+
 
 
             jQuery('#Lista').jqGrid('gridResize');
@@ -2384,7 +2413,8 @@ closeOnEscape: true, closeAfterSearch: true, multipleSearch: true, overlay: fals
             }); // si queres sacar el enableClear, definilo en las searchoptions de la columna específica http://www.trirand.com/blog/?page_id=393/help/clearing-the-clear-icon-in-a-filtertoolbar/
 
 
-jQuery("#Lista").jqGrid('setFrozenColumns');
+            jQuery("#Lista").jqGrid('setFrozenColumns'); // si usas frozencolumns, estas obligado a sacar el cellEdit!!!
+
 
             //$('#Lista').jqGrid('setGridWidth', '1000');
             //$('#Lista').jqGrid('setGridWidth', $(window).width() - 40);

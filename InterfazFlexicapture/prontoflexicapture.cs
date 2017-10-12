@@ -4644,7 +4644,7 @@ Formato localidad-provincia	destination	x
 
 
 
-        public virtual string CartasPorte_DynamicGridData(string sidx, string sord, int page, int rows, bool _search, string filters, string FechaInicial, string FechaFinal, int puntovent, int iddestino, string SC, string nombreusuario)
+        public virtual string CartasPorte_DynamicGridData(string sidx, string sord, int page, int rows, bool _search, string filters, string FechaInicial, string FechaFinal, int puntovent, int iddestino, string SC, string nombreusuario, string SCbdlmaster)
         {
 
             // An ASHX is a generic HttpHandler. An ASMX file is a web service. ASHX is a good lean way to provide a response to AJAX calls, but if you want to provide a response which changes based on conditions (such as variable inputs) it can become a bit of a handful - lots of if else etc. ASMX can house mulitple methods which can take parameters.
@@ -4702,18 +4702,42 @@ Formato localidad-provincia	destination	x
             //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-            int totalRecords = 0;
 
 
-            var pagedQuery = Filtrador.Filters.FiltroGenerico_UsandoIQueryable<ProntoMVC.Data.Models.fSQL_GetDataTableFiltradoYPaginado_Result3>
-                            (sidx, sord, page, rows, _search, filters, db, ref totalRecords,
-                                         db.fSQL_GetDataTableFiltradoYPaginado(
+
+            var q = db.fSQL_GetDataTableFiltradoYPaginado(
                                                             0, 9999999, estado, "", -1, -1,
                                                             -1, -1, -1, -1, -1,
                                                             iddestino, 0, "Ambas", FechaDesde,
                                                             FechaHasta, puntovent, null, false, "", "",
-                                                            -1, null, 0, "", "Todos")
-                             );
+                                                            -1, null, 0, "", "Todos");
+
+
+
+            // si el usuario tiene una razon social asignada, hay que filtrar. -Pero hay que filtrar antes! como en ListadoSegunCliente()
+            // -tambien tenes el tema de los clientes con filtros configurables.... en DataTablePorClienteSQL()
+            if (SCbdlmaster != "")
+            {
+                string rs = UserDatosExtendidosManager.TraerRazonSocialDelUsuario(nombreusuario, SCbdlmaster, SC);
+                if (rs == "")
+                {
+                    int idcliente = SQLdinamico.BuscaIdClientePreciso(rs, SC);
+                    int idCorredor = SQLdinamico.BuscaIdVendedorPreciso(EntidadManager.NombreCliente(SC, idcliente), SC);
+                    q = q.Where(x => x.Vendedor == idcliente || x.Entregador == idcliente);
+                }
+            }
+
+
+
+
+            int totalRecords = 0;
+            var pagedQuery = Filtrador.Filters.FiltroGenerico_UsandoIQueryable<ProntoMVC.Data.Models.fSQL_GetDataTableFiltradoYPaginado_Result3>
+                            (sidx, sord, page, rows, _search, filters, db, ref totalRecords, q);
+
+
+
+
+
 
             //db.CartasDePortes
             //                              .Where(x =>
@@ -5485,7 +5509,7 @@ Formato localidad-provincia	destination	x
             //System.Web.Mvc.JsonResult result;
 
             //result = (System.Web.Mvc.JsonResult)CartasPorte_DynamicGridData(sidx, sord, page, rows, _search, filters, "", "", puntovent, iddestino, SC, nombreusuario);
-            string result2 = CartasPorte_DynamicGridData(sidx, sord, 1, 200000, _search, filters, FechaInicial, FechaFinal, puntovent, iddestino, SC, nombreusuario);
+            string result2 = CartasPorte_DynamicGridData(sidx, sord, 1, 200000, _search, filters, FechaInicial, FechaFinal, puntovent, iddestino, SC, nombreusuario, "");
 
             System.Web.Script.Serialization.JavaScriptSerializer jsonSerializer = new System.Web.Script.Serialization.JavaScriptSerializer();
             //result = jsonSerializer.Deserialize<jqGridJson>(result2);

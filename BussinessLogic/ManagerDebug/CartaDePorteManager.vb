@@ -17314,6 +17314,28 @@ usuario As String, ConexBDLmaster As String,
 
 
 
+    Public Shared Function GrabarSituaciones_DLL(listado As List(Of Long), idsituacion As Integer, sObservacionesSituacion As String, SC As String) As String
+
+        Dim msunion As String = ""
+
+        For Each idcarta In listado
+
+
+            Dim cp = CartaDePorteManager.GetItem(SC, idcarta)
+
+            cp.Situacion = idsituacion
+            cp.ObservacionesSituacion = sObservacionesSituacion
+            cp.FechaAutorizacion = Now
+
+            Dim ms As String = ""
+            CartaDePorteManager.Save(SC, cp, 1, "", , ms)
+
+            msunion += ms
+        Next
+
+        Return msunion
+
+    End Function
 
 
 
