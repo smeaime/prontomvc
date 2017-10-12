@@ -938,23 +938,43 @@ namespace ProntoMVC.Tests
 
 
 
-        /*
-        https://developers.google.com/web/ilt/pwa/introduction-to-push-notifications
-        We can test push messaging in our app using cURL. We can send an empty message, called a "tickle", 
-            to the push service, then the push service sends a message to the browser.If the notification displays, then we 
-            have done everything correctly and our app is ready to push messages from the server.
+        [TestMethod]
+        public void envioNotificacionesconPush_42871()
+        {
+            // pasos 
+            // 1- el usuario cliente se conecta al FCM, se suscribe y obtiene un registration_id 
+            // 2- el usuario cliente se conecta al IIS y le manda el registration_id que obtuvo, para que el IIS los hermane
 
-The cURL command that sends a request to FCM to issue a push message looks like this:
 
-curl "ENDPOINT_URL" --request POST --header "TTL: 60" --header "Content-Length: 0" \
---header "Authorization: key=SERVER_KEY"
 
-*/
+            /*
+            https://developers.google.com/web/ilt/pwa/introduction-to-push-notifications
+            We can test push messaging in our app using cURL. We can send an empty message, called a "tickle", 
+                to the push service, then the push service sends a message to the browser.If the notification displays, then we 
+                have done everything correctly and our app is ready to push messages from the server.
+
+    The cURL command that sends a request to FCM to issue a push message looks like this:
+
+    curl "ENDPOINT_URL" --request POST --header "TTL: 60" --header "Content-Length: 0" \
+    --header "Authorization: key=SERVER_KEY"
+
+
+
+                https://gauntface.github.io/simple-push-demo/
+                constants.js y manifest.json
+    */
+
+
+
+
+
+        }
+
 
 
 
         [TestMethod]
-        public void envioNotificaciones_42871()
+        public void envioNotificacionesconMail_42871()
         {
 
             // el envio de mails (+ push de chrome)
