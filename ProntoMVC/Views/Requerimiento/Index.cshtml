@@ -44,6 +44,8 @@
 
     <script src="~/Scripts/jquery.table2excel.js"></script>
 
+<div id="previewCredencial"></div>
+
     <div style=" padding-left: 15px;  padding-right: 15px ;">
         <div>
             <div class="row-fluid">
@@ -444,14 +446,29 @@
         pageLayout.hide('south');
     });
 
-    function GenerarRM_Word() {
+        function GenerarRM_Word() {
+        //window.open('Imprimir/42501');
+        //return;
         var $grid = $("#Lista"), selIds = $grid.jqGrid("getGridParam", "selarrrow"), i, n,
             cellValues = [];
         for (i = 0, n = selIds.length; i < n; i++) {
             var IdRequerimiento = $grid.jqGrid("getCell", selIds[i], "IdRequerimiento");
 
             var url = '@Html.Raw(@Url.Action("Imprimir", "Requerimiento", new { id = "__param__" }))';
-            window.location.href = url.replace('__param__', encodeURIComponent(IdRequerimiento));
+            url=url.replace('__param__', encodeURIComponent(IdRequerimiento));
+            //window.location.href = url.replace('__param__', encodeURIComponent(IdRequerimiento));
+            //window.open(url, '_blank');
+            window.open(url); 
+           
+            //$.post(url, function (result) {
+            //    $('#previewCredencial').html(
+            //        $('<iframe/>', {
+            //            'class': 'pdfpreview', // some CSS class to set the width and height of the preview iframe
+            //            'src': result.url
+            //        })
+            //    );
+            //});
+
 
             @*function EditProducts(productId, orderId, employeeId, mode) {
                 mode = "edit";
