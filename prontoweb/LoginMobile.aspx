@@ -64,10 +64,11 @@ document.cookie = 'killme' + escape('nothing')
     </script>
 </head>
 <%--<body class="cssLogin" style="background-image: url('<%= imgPath %>'); height: 95%" onload="cc()" >--%>
-    <meta name="viewport" content="width=360px, max-width:360px ">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
 
-<body class="" style="height: ; overflow: ;background-color: #F0F0FF" onload="cc()">
+<body style="height: ; overflow: ; background-color: #647ea9" class="">
+
     <%--esto del onload para lo de revisar si esta habilitado javascript--%>
     <center>
         <form id="form1" runat="server">
@@ -77,9 +78,9 @@ document.cookie = 'killme' + escape('nothing')
 
             <table style="border-style: none; font-family: arial,sans-serif;">
                 <tr>
-                    
+
                     <td align="centre" width="330px" style="margin-left: 0px">
-             
+
                         <asp:Panel ID="PanelWilliams" runat="server">
                             <div>
 
@@ -96,27 +97,26 @@ document.cookie = 'killme' + escape('nothing')
                                 </div>
 
 
-                               <div style="text-align: center; font-size: 14px; 
-                                                    font-family: Tahoma;  ">
+                                <div style="text-align: center; font-size: 14px; font-family: Tahoma;">
                                     <%--<div style="font-size: x-large; width: 400px; margin-left: 50px; font-family: Tahoma;">--%>
-                               <b> Junto a nuestros clientes</b><br />
-                                  Williams Entregas S.A. nació en 1989 de la mano de
+                                    <b>Junto a nuestros clientes</b><br />
+                                    Williams Entregas S.A. nació en 1989 de la mano de
                                     nuestros clientes con un objetivo
                                 bien definido: estar junto a ellos brindándole el mejor servicio.
                                 </div>
                                 <br />
-                              
-                                
+
+
                             </div>
                         </asp:Panel>
-                      
+
                     </td>
-                    
+
                 </tr>
                 <tr>
                     <td align="center">
                         <div align="center" class="" style="border: ; background-color: ; color: ; vertical-align: middle;">
-                            <br />
+
                             <%--         http://stackoverflow.com/questions/4891655/why-doesnt-the-password-recovery-link-show-up-in-my-login-control--%>
                             <asp:Login ID="Login1" runat="server" DestinationPageUrl="~/SeleccionarEmpresa.aspx"
                                 ForeColor="Black" TitleText="" Font-Size="18" LoginButtonText="Entrar" RememberMeText="Recordar contraseña"
@@ -129,9 +129,8 @@ document.cookie = 'killme' + escape('nothing')
                                     </div>
                                     <asp:TextBox ID="UserName" Width="320" runat="server" Font-Size="20" Style="padding: 5px;"></asp:TextBox>
                                     <br />
-                                    <br />
                                     <div style="text-align: left;">
-                                        <asp:Label ID="PasswordLabel" runat="server" AssociatedControlID="Password" >Contraseña</asp:Label><br />
+                                        <asp:Label ID="PasswordLabel" runat="server" AssociatedControlID="Password">Contraseña</asp:Label><br />
                                     </div>
                                     <asp:TextBox ID="Password" runat="server" TextMode="Password" Font-Size="20"
                                         Style="padding: 5px;" Width="320"></asp:TextBox><br />
@@ -142,7 +141,7 @@ document.cookie = 'killme' + escape('nothing')
                                     <loginbuttonstyle cssclass="but" />
                                     <br />
                                     <br />
-                                    <asp:CheckBox ID="RememberMe" runat="server" TextAlign="Left" 
+                                    <asp:CheckBox ID="RememberMe" runat="server" TextAlign="Left"
                                         Style="margin-left: 0px; vertical-align: middle" Font-Size="15" />
                                     <asp:Label ID="RememberMeLabel" runat="server" AssociatedControlID="RememberMe" CssClass="inline"
                                         Font-Size="15" Style="text-align: right; vertical-align: middle">No cerrar sesión</asp:Label>
@@ -166,7 +165,7 @@ document.cookie = 'killme' + escape('nothing')
                             </asp:UpdatePanel>
                         </div>
                     </td>
-                    
+
                 </tr>
             </table>
             <div>
@@ -244,23 +243,17 @@ document.cookie = 'killme' + escape('nothing')
 
                 </script>
             </div>
-            <table align="center" style="font-size: x-small; text-align: center">
+
+
+
+
+     <table align="center" style="font-size: x-small; text-align: center">
                 <tr>
                     <td>
-                        <%--                                    <td style="vertical-align: top; text-align: left;" >
-                    &nbsp;
-                </td>
-                <td style="vertical-align: top; text-align: left;" class="style4" rowspan="100%"
-                    height="2000" width="300px"></td>--%>
-                        <br />
-                        <br />
-                        <br />
+
                         <br />
                         <asp:Label ID="lblAvisoTipoDeSitio" runat="server" Font-Size="X-Large" CssClass="Alerta"
                             Width="150px"></asp:Label>
-                        <br />
-                        <br />
-                        <br />
                     </td>
                 </tr>
                 <tr>
@@ -272,11 +265,13 @@ document.cookie = 'killme' + escape('nothing')
                     <asp:Label ID="lblVersion" runat="server"></asp:Label>
                 </td>
                 <td valign="bottom" style="position: absolute; bottom: 0 !important; height: 15px;"></td>
-                <%--            <br />
-            <br />
-            <br />--%>
-            </tr>
+                </tr>
             </table>
+
+
+
+
+
             <%--http://www.4guysfromrolla.com/webtech/082400-1.shtml--%>
             <input type="hidden" name="cookieexists" value="false">
             <div style="visibility: hidden; display: none">
