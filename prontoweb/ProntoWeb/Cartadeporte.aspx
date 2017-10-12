@@ -1115,6 +1115,7 @@
                                 <td style="height: 1px; width: 35%;">
                                     <asp:DropDownList ID="cmbCosecha" runat="server" CssClass="CssCombo" TabIndex="14">
                                         <asp:ListItem Value="" Selected="True"></asp:ListItem>
+                                        <asp:ListItem Value="2017/18">2017/18</asp:ListItem>
                                         <asp:ListItem Value="2016/17">2016/17</asp:ListItem>
                                         <asp:ListItem>2015/16</asp:ListItem>
                                         <asp:ListItem>2014/15</asp:ListItem>

@@ -1242,6 +1242,9 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.CartasPorteMovimientos' no tiene 
     <Property Name="AcumularParaSUSS" Type="varchar" MaxLength="2" />
     <Property Name="BloqueadoFirma" Type="varchar" MaxLength="2" />
     <Property Name="IdUsuarioBloqueo" Type="int" />
+    <Property Name="ControlAFIP_Resultado" Type="varchar" MaxLength="20" />
+    <Property Name="ControlAFIP_Fecha" Type="datetime" />
+    <Property Name="ControlAFIP_Mensaje" Type="ntext" />
   </EntityType>
   <EntityType Name="Conceptos">
     <Key>
