@@ -7021,6 +7021,9 @@
     <Property Name="AcumularParaSUSS" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
     <Property Name="BloqueadoFirma" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
     <Property Name="IdUsuarioBloqueo" Type="Int32" />
+    <Property Name="ControlAFIP_Resultado" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="ControlAFIP_Fecha" Type="DateTime" Precision="3" />
+    <Property Name="ControlAFIP_Mensaje" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityType Name="DetalleComprobantesProveedore">
     <Key>
