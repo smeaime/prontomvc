@@ -3436,6 +3436,9 @@
     <EntitySetMapping Name="ComprobantesProveedor">
       <EntityTypeMapping TypeName="DemoProntoModel.ComprobanteProveedor">
         <MappingFragment StoreEntitySet="ComprobantesProveedores">
+          <ScalarProperty Name="ControlAFIP_Mensaje" ColumnName="ControlAFIP_Mensaje" />
+          <ScalarProperty Name="ControlAFIP_Fecha" ColumnName="ControlAFIP_Fecha" />
+          <ScalarProperty Name="ControlAFIP_Resultado" ColumnName="ControlAFIP_Resultado" />
           <ScalarProperty Name="IdUsuarioBloqueo" ColumnName="IdUsuarioBloqueo" />
           <ScalarProperty Name="BloqueadoFirma" ColumnName="BloqueadoFirma" />
           <ScalarProperty Name="AcumularParaSUSS" ColumnName="AcumularParaSUSS" />
