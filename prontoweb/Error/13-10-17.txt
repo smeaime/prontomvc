@@ -70,3 +70,660 @@ Referencia a objeto no establecida como instancia de un objeto.
    en SituacionCalidadMovil.BindTypeDropDown() en C:\bdl\pronto\prontoweb\ProntoWeb\SituacionCalidadMovil.aspx.vb:línea 167
 App_Web_situacioncalidadmovil.aspx.4199bbd4.wt7lgsng
 __________________________
+
+Log Entry : 
+10/13/2017 09:33:40
+Error in: http://localhost:50769/ProntoWeb/SituacionCalidadMovil.aspx. Error Message:System.Data.SqlClient.SqlException
+Error relacionado con la red o específico de la instancia mientras se establecía una conexión con el servidor SQL Server. No se encontró el servidor o éste no estaba accesible. Compruebe que el nombre de la instancia es correcto y que SQL Server está configurado para admitir conexiones remotas. (provider: SQL Network Interfaces, error: 26 - Error al buscar el servidor o instancia especificado)
+   en System.Data.SqlClient.SqlInternalConnectionTds..ctor(DbConnectionPoolIdentity identity, SqlConnectionString connectionOptions, SqlCredential credential, Object providerInfo, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance, SqlConnectionString userConnectionOptions, SessionData reconnectSessionData, DbConnectionPool pool, String accessToken, Boolean applyTransientFaultHandling)
+   en System.Data.SqlClient.SqlConnectionFactory.CreateConnection(DbConnectionOptions options, DbConnectionPoolKey poolKey, Object poolGroupProviderInfo, DbConnectionPool pool, DbConnection owningConnection, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionFactory.CreatePooledConnection(DbConnectionPool pool, DbConnection owningObject, DbConnectionOptions options, DbConnectionPoolKey poolKey, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionPool.CreateObject(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   en System.Data.ProviderBase.DbConnectionPool.UserCreateRequest(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   en System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.Open()
+   en System.Web.DataAccess.SqlConnectionHolder.Open(HttpContext context, Boolean revertImpersonate)
+   en System.Web.DataAccess.SqlConnectionHelper.GetConnection(String connectionString, Boolean revertImpersonation)
+   en System.Web.Security.SqlRoleProvider.GetRolesForUser(String username)
+   en System.Web.Security.RolePrincipal.IsInRole(String role)
+   en System.Web.Configuration.AuthorizationRule.IsTheUserInAnyRole(StringCollection roles, IPrincipal principal)
+   en System.Web.Configuration.AuthorizationRule.IsUserAllowed(IPrincipal user, String verb)
+   en System.Web.Configuration.AuthorizationRuleCollection.IsUserAllowed(IPrincipal user, String verb)
+   en System.Web.Security.UrlAuthorizationModule.OnEnter(Object source, EventArgs eventArgs)
+   en System.Web.HttpApplication.SyncEventExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   en System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+.Net SqlClient Data Provider
+__________________________
+
+Log Entry : 
+10/13/2017 09:34:02
+Error in: http://localhost:50769/ProntoWeb/SituacionCalidadMovil.aspx. Error Message: -  Error en ExecDinamico. - System.Data.SqlClient.SqlException (0x80131904): Error relacionado con la red o específico de la instancia mientras se establecía una conexión con el servidor SQL Server. No se encontró el servidor o éste no estaba accesible. Compruebe que el nombre de la instancia es correcto y que SQL Server está configurado para admitir conexiones remotas. (provider: Named Pipes Provider, error: 40 - No se pudo abrir una conexión con SQL Server) ---> System.ComponentModel.Win32Exception (0x80004005): No se ha encontrado la ruta de acceso de la red
+   en System.Data.SqlClient.SqlInternalConnectionTds..ctor(DbConnectionPoolIdentity identity, SqlConnectionString connectionOptions, SqlCredential credential, Object providerInfo, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance, SqlConnectionString userConnectionOptions, SessionData reconnectSessionData, DbConnectionPool pool, String accessToken, Boolean applyTransientFaultHandling)
+   en System.Data.SqlClient.SqlConnectionFactory.CreateConnection(DbConnectionOptions options, DbConnectionPoolKey poolKey, Object poolGroupProviderInfo, DbConnectionPool pool, DbConnection owningConnection, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionFactory.CreatePooledConnection(DbConnectionPool pool, DbConnection owningObject, DbConnectionOptions options, DbConnectionPoolKey poolKey, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionPool.CreateObject(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   en System.Data.ProviderBase.DbConnectionPool.UserCreateRequest(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   en System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.Open()
+   en Pronto.ERP.Dal.GeneralDB.ExecDinamico(String SC, String comandoSQLdinamico, Int32 timeoutSegundos)
+ClientConnectionId:00000000-0000-0000-0000-000000000000
+Error Number:53,State:0,Class:20 - EXEC sp_who2 8 0
+__________________________
+
+Log Entry : 
+10/13/2017 09:34:02
+Error in: http://localhost:50769/ProntoWeb/SituacionCalidadMovil.aspx. Error Message:Error relacionado con la red o específico de la instancia mientras se establecía una conexión con el servidor SQL Server. No se encontró el servidor o éste no estaba accesible. Compruebe que el nombre de la instancia es correcto y que SQL Server está configurado para admitir conexiones remotas. (provider: Named Pipes Provider, error: 40 - No se pudo abrir una conexión con SQL Server)
+__________________________
+
+Log Entry : 
+10/13/2017 09:34:02
+Error in: http://localhost:50769/ProntoWeb/SituacionCalidadMovil.aspx. Error Message:System.Data.SqlClient.SqlException
+Error relacionado con la red o específico de la instancia mientras se establecía una conexión con el servidor SQL Server. No se encontró el servidor o éste no estaba accesible. Compruebe que el nombre de la instancia es correcto y que SQL Server está configurado para admitir conexiones remotas. (provider: Named Pipes Provider, error: 40 - No se pudo abrir una conexión con SQL Server)
+   en System.Data.SqlClient.SqlInternalConnectionTds..ctor(DbConnectionPoolIdentity identity, SqlConnectionString connectionOptions, SqlCredential credential, Object providerInfo, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance, SqlConnectionString userConnectionOptions, SessionData reconnectSessionData, DbConnectionPool pool, String accessToken, Boolean applyTransientFaultHandling)
+   en System.Data.SqlClient.SqlConnectionFactory.CreateConnection(DbConnectionOptions options, DbConnectionPoolKey poolKey, Object poolGroupProviderInfo, DbConnectionPool pool, DbConnection owningConnection, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionFactory.CreatePooledConnection(DbConnectionPool pool, DbConnection owningObject, DbConnectionOptions options, DbConnectionPoolKey poolKey, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionPool.CreateObject(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   en System.Data.ProviderBase.DbConnectionPool.UserCreateRequest(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   en System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.Open()
+   en Pronto.ERP.Dal.GeneralDB.ExecDinamico(String SC, String comandoSQLdinamico, Int32 timeoutSegundos)
+   en Pronto.ERP.Bll.EntidadManager.ExecDinamico(String SC, String sComandoDinamico, Int32 timeoutSegundos) en C:\bdl\pronto\BussinessLogic\EntidadManager.vb:línea 868
+   en CartaDePorteManager.Log_sp_who2(String sc) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 8803
+   en ASP.global_asax.Application_Error(Object sender, EventArgs e) en C:\bdl\pronto\prontoweb\global.asax:línea 433
+.Net SqlClient Data Provider
+__________________________
+
+Log Entry : 
+10/13/2017 09:34:26
+Error in: http://localhost:50769/ProntoWeb/SituacionCalidadMovil.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en SituacionCalidadMovil.BindTypeDropDown() en C:\bdl\pronto\prontoweb\ProntoWeb\SituacionCalidadMovil.aspx.vb:línea 167
+App_Web_situacioncalidadmovil.aspx.4199bbd4.wt7lgsng
+__________________________
+
+Log Entry : 
+10/13/2017 09:34:27
+Error in: http://localhost:50769/ProntoWeb/HandlerCartaPorte.ashx. Error Message: -  Error en ExecDinamico. - System.Data.SqlClient.SqlException (0x80131904): Cannot open database "Williams2" requested by the login. The login failed.
+Login failed for user 'sa'.
+   en System.Data.SqlClient.SqlInternalConnectionTds..ctor(DbConnectionPoolIdentity identity, SqlConnectionString connectionOptions, SqlCredential credential, Object providerInfo, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance, SqlConnectionString userConnectionOptions, SessionData reconnectSessionData, DbConnectionPool pool, String accessToken, Boolean applyTransientFaultHandling)
+   en System.Data.SqlClient.SqlConnectionFactory.CreateConnection(DbConnectionOptions options, DbConnectionPoolKey poolKey, Object poolGroupProviderInfo, DbConnectionPool pool, DbConnection owningConnection, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionFactory.CreatePooledConnection(DbConnectionPool pool, DbConnection owningObject, DbConnectionOptions options, DbConnectionPoolKey poolKey, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionPool.CreateObject(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   en System.Data.ProviderBase.DbConnectionPool.UserCreateRequest(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   en System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.Open()
+   en Pronto.ERP.Dal.GeneralDB.ExecDinamico(String SC, String comandoSQLdinamico, Int32 timeoutSegundos)
+ClientConnectionId:834c0026-fae7-4b5d-9a75-67fa972835f9
+Error Number:4060,State:1,Class:11 - SELECT TOP 1 IdWilliamsDestino FROM WilliamsDestinos WHERE Descripcion='undefined' 8 0
+__________________________
+
+Log Entry : 
+10/13/2017 09:34:27
+Error in: http://localhost:50769/ProntoWeb/HandlerCartaPorte.ashx. Error Message:Cannot open database "Williams2" requested by the login. The login failed.
+Login failed for user 'sa'.
+__________________________
+
+Log Entry : 
+10/13/2017 09:34:27
+Error in: http://localhost:50769/ProntoWeb/HandlerCartaPorte.ashx. Error Message:System.Data.SqlClient.SqlException
+Cannot open database "Williams2" requested by the login. The login failed.
+Login failed for user 'sa'.
+   en System.Data.SqlClient.SqlInternalConnectionTds..ctor(DbConnectionPoolIdentity identity, SqlConnectionString connectionOptions, SqlCredential credential, Object providerInfo, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance, SqlConnectionString userConnectionOptions, SessionData reconnectSessionData, DbConnectionPool pool, String accessToken, Boolean applyTransientFaultHandling)
+   en System.Data.SqlClient.SqlConnectionFactory.CreateConnection(DbConnectionOptions options, DbConnectionPoolKey poolKey, Object poolGroupProviderInfo, DbConnectionPool pool, DbConnection owningConnection, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionFactory.CreatePooledConnection(DbConnectionPool pool, DbConnection owningObject, DbConnectionOptions options, DbConnectionPoolKey poolKey, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionPool.CreateObject(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   en System.Data.ProviderBase.DbConnectionPool.UserCreateRequest(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   en System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.Open()
+   en Pronto.ERP.Dal.GeneralDB.ExecDinamico(String SC, String comandoSQLdinamico, Int32 timeoutSegundos)
+   en Pronto.ERP.Bll.EntidadManager.ExecDinamico(String SC, String sComandoDinamico, Int32 timeoutSegundos) en C:\bdl\pronto\BussinessLogic\EntidadManager.vb:línea 868
+   en SQLdinamico.BuscaIdWilliamsDestinoPreciso(String Destino, String SC) en C:\bdl\pronto\BussinessLogic\SQLdinamico.vb:línea 554
+   en JQGridHandler.ProcessRequest(HttpContext context) en c:\bdl\pronto\prontoweb\ProntoWeb\HandlerCartaPorte.ashx:línea 217
+   en System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   en System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+.Net SqlClient Data Provider
+__________________________
+
+Log Entry : 
+10/13/2017 09:34:27
+Error in: http://localhost:50769/ProntoWeb/HandlerCartaPorte.ashx. Error Message: -  Error en ExecDinamico. - System.Data.SqlClient.SqlException (0x80131904): Cannot open database "Williams2" requested by the login. The login failed.
+Login failed for user 'sa'.
+   en System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.Open()
+   en Pronto.ERP.Dal.GeneralDB.ExecDinamico(String SC, String comandoSQLdinamico, Int32 timeoutSegundos)
+ClientConnectionId:834c0026-fae7-4b5d-9a75-67fa972835f9
+Error Number:4060,State:1,Class:11 - EXEC sp_who2 8 0
+__________________________
+
+Log Entry : 
+10/13/2017 09:34:27
+Error in: http://localhost:50769/ProntoWeb/HandlerCartaPorte.ashx. Error Message:Cannot open database "Williams2" requested by the login. The login failed.
+Login failed for user 'sa'.
+__________________________
+
+Log Entry : 
+10/13/2017 09:34:27
+Error in: http://localhost:50769/ProntoWeb/HandlerCartaPorte.ashx. Error Message:System.Data.SqlClient.SqlException
+Cannot open database "Williams2" requested by the login. The login failed.
+Login failed for user 'sa'.
+   en System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.Open()
+   en Pronto.ERP.Dal.GeneralDB.ExecDinamico(String SC, String comandoSQLdinamico, Int32 timeoutSegundos)
+   en Pronto.ERP.Bll.EntidadManager.ExecDinamico(String SC, String sComandoDinamico, Int32 timeoutSegundos) en C:\bdl\pronto\BussinessLogic\EntidadManager.vb:línea 868
+   en CartaDePorteManager.Log_sp_who2(String sc) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 8803
+   en ASP.global_asax.Application_Error(Object sender, EventArgs e) en C:\bdl\pronto\prontoweb\global.asax:línea 433
+.Net SqlClient Data Provider
+__________________________
+
+Log Entry : 
+10/13/2017 09:34:46
+Error in: http://localhost:50769/ProntoWeb/HandlerCartaPorte.ashx. Error Message:System.Net.Mail.SmtpException
+Error al enviar correo.
+   en System.Net.Mail.SmtpClient.Send(MailMessage message)
+   en ProntoFuncionesGenerales.MandaEmailSimple(String Para, String Asunto, String Cuerpo, String De, String SmtpServer, String SmtpUser, String SmtpPass, String sStringGenerarAdjunto, Int64 SmtpPort, Int32 EnableSSL, String CCO, String img)
+   en ASP.global_asax.Application_Error(Object sender, EventArgs e) en C:\bdl\pronto\prontoweb\global.asax:línea 472
+System
+__________________________
+
+Log Entry : 
+10/13/2017 09:37:30
+Error in: http://localhost:50769/ProntoWeb/SituacionCalidadMovil.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en SituacionCalidadMovil.BindTypeDropDown() en C:\bdl\pronto\prontoweb\ProntoWeb\SituacionCalidadMovil.aspx.vb:línea 167
+App_Web_situacioncalidadmovil.aspx.4199bbd4.wt7lgsng
+__________________________
+
+Log Entry : 
+10/13/2017 09:37:30
+Error in: http://localhost:50769/ProntoWeb/HandlerCartaPorte.ashx. Error Message: -  Error en ExecDinamico. - System.Data.SqlClient.SqlException (0x80131904): Cannot open database "Williams2" requested by the login. The login failed.
+Login failed for user 'sa'.
+   en System.Data.SqlClient.SqlInternalConnectionTds..ctor(DbConnectionPoolIdentity identity, SqlConnectionString connectionOptions, SqlCredential credential, Object providerInfo, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance, SqlConnectionString userConnectionOptions, SessionData reconnectSessionData, DbConnectionPool pool, String accessToken, Boolean applyTransientFaultHandling)
+   en System.Data.SqlClient.SqlConnectionFactory.CreateConnection(DbConnectionOptions options, DbConnectionPoolKey poolKey, Object poolGroupProviderInfo, DbConnectionPool pool, DbConnection owningConnection, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionFactory.CreatePooledConnection(DbConnectionPool pool, DbConnection owningObject, DbConnectionOptions options, DbConnectionPoolKey poolKey, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionPool.CreateObject(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   en System.Data.ProviderBase.DbConnectionPool.UserCreateRequest(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   en System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.Open()
+   en Pronto.ERP.Dal.GeneralDB.ExecDinamico(String SC, String comandoSQLdinamico, Int32 timeoutSegundos)
+ClientConnectionId:60a89bf5-f868-4409-8189-c354b640c57a
+Error Number:4060,State:1,Class:11 - SELECT TOP 1 IdWilliamsDestino FROM WilliamsDestinos WHERE Descripcion='undefined' 8 0
+__________________________
+
+Log Entry : 
+10/13/2017 09:37:30
+Error in: http://localhost:50769/ProntoWeb/HandlerCartaPorte.ashx. Error Message:Cannot open database "Williams2" requested by the login. The login failed.
+Login failed for user 'sa'.
+__________________________
+
+Log Entry : 
+10/13/2017 09:37:30
+Error in: http://localhost:50769/ProntoWeb/HandlerCartaPorte.ashx. Error Message:System.Data.SqlClient.SqlException
+Cannot open database "Williams2" requested by the login. The login failed.
+Login failed for user 'sa'.
+   en System.Data.SqlClient.SqlInternalConnectionTds..ctor(DbConnectionPoolIdentity identity, SqlConnectionString connectionOptions, SqlCredential credential, Object providerInfo, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance, SqlConnectionString userConnectionOptions, SessionData reconnectSessionData, DbConnectionPool pool, String accessToken, Boolean applyTransientFaultHandling)
+   en System.Data.SqlClient.SqlConnectionFactory.CreateConnection(DbConnectionOptions options, DbConnectionPoolKey poolKey, Object poolGroupProviderInfo, DbConnectionPool pool, DbConnection owningConnection, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionFactory.CreatePooledConnection(DbConnectionPool pool, DbConnection owningObject, DbConnectionOptions options, DbConnectionPoolKey poolKey, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionPool.CreateObject(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   en System.Data.ProviderBase.DbConnectionPool.UserCreateRequest(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   en System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.Open()
+   en Pronto.ERP.Dal.GeneralDB.ExecDinamico(String SC, String comandoSQLdinamico, Int32 timeoutSegundos)
+   en Pronto.ERP.Bll.EntidadManager.ExecDinamico(String SC, String sComandoDinamico, Int32 timeoutSegundos) en C:\bdl\pronto\BussinessLogic\EntidadManager.vb:línea 868
+   en SQLdinamico.BuscaIdWilliamsDestinoPreciso(String Destino, String SC) en C:\bdl\pronto\BussinessLogic\SQLdinamico.vb:línea 554
+   en JQGridHandler.ProcessRequest(HttpContext context) en c:\bdl\pronto\prontoweb\ProntoWeb\HandlerCartaPorte.ashx:línea 217
+   en System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   en System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+.Net SqlClient Data Provider
+__________________________
+
+Log Entry : 
+10/13/2017 09:37:30
+Error in: http://localhost:50769/ProntoWeb/HandlerCartaPorte.ashx. Error Message: -  Error en ExecDinamico. - System.Data.SqlClient.SqlException (0x80131904): Cannot open database "Williams2" requested by the login. The login failed.
+Login failed for user 'sa'.
+   en System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.Open()
+   en Pronto.ERP.Dal.GeneralDB.ExecDinamico(String SC, String comandoSQLdinamico, Int32 timeoutSegundos)
+ClientConnectionId:60a89bf5-f868-4409-8189-c354b640c57a
+Error Number:4060,State:1,Class:11 - EXEC sp_who2 8 0
+__________________________
+
+Log Entry : 
+10/13/2017 09:37:30
+Error in: http://localhost:50769/ProntoWeb/HandlerCartaPorte.ashx. Error Message:Cannot open database "Williams2" requested by the login. The login failed.
+Login failed for user 'sa'.
+__________________________
+
+Log Entry : 
+10/13/2017 09:37:30
+Error in: http://localhost:50769/ProntoWeb/HandlerCartaPorte.ashx. Error Message:System.Data.SqlClient.SqlException
+Cannot open database "Williams2" requested by the login. The login failed.
+Login failed for user 'sa'.
+   en System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.Open()
+   en Pronto.ERP.Dal.GeneralDB.ExecDinamico(String SC, String comandoSQLdinamico, Int32 timeoutSegundos)
+   en Pronto.ERP.Bll.EntidadManager.ExecDinamico(String SC, String sComandoDinamico, Int32 timeoutSegundos) en C:\bdl\pronto\BussinessLogic\EntidadManager.vb:línea 868
+   en CartaDePorteManager.Log_sp_who2(String sc) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 8803
+   en ASP.global_asax.Application_Error(Object sender, EventArgs e) en C:\bdl\pronto\prontoweb\global.asax:línea 433
+.Net SqlClient Data Provider
+__________________________
+
+Log Entry : 
+10/13/2017 09:38:04
+Error in: http://localhost:50769/ProntoWeb/SituacionCalidadMovil.aspx. Error Message:RODRIGORIOS esta logueado, pero lo redirijo al login porque faltan los datos de session. No deberia mejor mandarlo a SeleccionarEmpresa? Ademas, no hago el LogOut y le queda el cookie!!!
+__________________________
+
+Log Entry : 
+10/13/2017 09:38:05
+Error in: http://localhost:50769/ProntoWeb/SituacionCalidadMovil.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en SituacionCalidadMovil.BindTypeDropDown() en C:\bdl\pronto\prontoweb\ProntoWeb\SituacionCalidadMovil.aspx.vb:línea 167
+App_Web_situacioncalidadmovil.aspx.4199bbd4.wt7lgsng
+__________________________
+
+Log Entry : 
+10/13/2017 09:38:23
+Error in: http://localhost:50769/ProntoWeb/SituacionCalidadMovil.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en SituacionCalidadMovil.BindTypeDropDown() en C:\bdl\pronto\prontoweb\ProntoWeb\SituacionCalidadMovil.aspx.vb:línea 167
+App_Web_situacioncalidadmovil.aspx.4199bbd4.wt7lgsng
+__________________________
+
+Log Entry : 
+10/13/2017 09:40:03
+Error in: http://localhost:50769/ProntoWeb/SituacionCalidadMovil.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en SituacionCalidadMovil.BindTypeDropDown() en C:\bdl\pronto\prontoweb\ProntoWeb\SituacionCalidadMovil.aspx.vb:línea 167
+App_Web_situacioncalidadmovil.aspx.4199bbd4.6sb9or-8
+__________________________
+
+Log Entry : 
+10/13/2017 09:40:51
+Error in: http://localhost:50769/ProntoWeb/SituacionCalidadMovil.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en SituacionCalidadMovil.BindTypeDropDown() en C:\bdl\pronto\prontoweb\ProntoWeb\SituacionCalidadMovil.aspx.vb:línea 167
+App_Web_situacioncalidadmovil.aspx.4199bbd4.0omxrt3t
+__________________________
+
+Log Entry : 
+10/13/2017 09:41:04
+Error in: http://localhost:50769/ProntoWeb/SituacionCalidadMovil.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en SituacionCalidadMovil.BindTypeDropDown() en C:\bdl\pronto\prontoweb\ProntoWeb\SituacionCalidadMovil.aspx.vb:línea 167
+App_Web_situacioncalidadmovil.aspx.4199bbd4.wlpxohtd
+__________________________
+
+Log Entry : 
+10/13/2017 09:41:28
+Error in: http://localhost:50769/ProntoWeb/SituacionCalidadMovil.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en SituacionCalidadMovil.BindTypeDropDown() en C:\bdl\pronto\prontoweb\ProntoWeb\SituacionCalidadMovil.aspx.vb:línea 167
+App_Web_situacioncalidadmovil.aspx.4199bbd4._89lbe3c
+__________________________
+
+Log Entry : 
+10/13/2017 09:41:37
+Error in: http://localhost:50769/ProntoWeb/SituacionCalidadMovil.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en SituacionCalidadMovil.BindTypeDropDown() en C:\bdl\pronto\prontoweb\ProntoWeb\SituacionCalidadMovil.aspx.vb:línea 167
+App_Web_situacioncalidadmovil.aspx.4199bbd4.15vjj-6c
+__________________________
+
+Log Entry : 
+10/13/2017 09:41:46
+Error in: http://localhost:50769/ProntoWeb/SituacionCalidadMovil.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en SituacionCalidadMovil.BindTypeDropDown() en C:\bdl\pronto\prontoweb\ProntoWeb\SituacionCalidadMovil.aspx.vb:línea 167
+App_Web_situacioncalidadmovil.aspx.4199bbd4.wn5iyxsi
+__________________________
+
+Log Entry : 
+10/13/2017 09:41:54
+Error in: http://localhost:50769/ProntoWeb/SituacionCalidadMovil.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en SituacionCalidadMovil.BindTypeDropDown() en C:\bdl\pronto\prontoweb\ProntoWeb\SituacionCalidadMovil.aspx.vb:línea 167
+App_Web_situacioncalidadmovil.aspx.4199bbd4.xbpbbadk
+__________________________
+
+Log Entry : 
+10/13/2017 09:42:14
+Error in: http://localhost:50769/ProntoWeb/SituacionCalidadMovil.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en SituacionCalidadMovil.BindTypeDropDown() en C:\bdl\pronto\prontoweb\ProntoWeb\SituacionCalidadMovil.aspx.vb:línea 167
+App_Web_situacioncalidadmovil.aspx.4199bbd4.ehkg-o6o
+__________________________
+
+Log Entry : 
+10/13/2017 09:43:28
+Error in: http://localhost:50769/ProntoWeb/SituacionCalidadMovil.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en SituacionCalidadMovil.BindTypeDropDown() en C:\bdl\pronto\prontoweb\ProntoWeb\SituacionCalidadMovil.aspx.vb:línea 167
+App_Web_situacioncalidadmovil.aspx.4199bbd4.1skhtpup
+__________________________
+
+Log Entry : 
+10/13/2017 09:43:49
+Error in: http://localhost:50769/ProntoWeb/SituacionCalidadMovil.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en SituacionCalidadMovil.BindTypeDropDown() en C:\bdl\pronto\prontoweb\ProntoWeb\SituacionCalidadMovil.aspx.vb:línea 167
+App_Web_situacioncalidadmovil.aspx.4199bbd4.8wwzgzu9
+__________________________
+
+Log Entry : 
+10/13/2017 09:44:55
+Error in: http://localhost:50769/ProntoWeb/SituacionCalidadMovil.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en SituacionCalidadMovil.BindTypeDropDown() en C:\bdl\pronto\prontoweb\ProntoWeb\SituacionCalidadMovil.aspx.vb:línea 167
+App_Web_situacioncalidadmovil.aspx.4199bbd4.oweqmhcs
+__________________________
+
+Log Entry : 
+10/13/2017 09:45:27
+Error in: http://localhost:50769/ProntoWeb/SituacionCalidadMovil.aspx. Error Message:System.Web.HttpCompileException
+C:\bdl\pronto\prontoweb\ProntoWeb\SituacionCalidadMovil.aspx.vb(84): error BC30451: 'cmbPeriodo' is not declared. It may be inaccessible due to its protection level.
+   en System.Web.Compilation.AssemblyBuilder.Compile()
+   en System.Web.Compilation.BuildProvidersCompiler.PerformBuild()
+   en System.Web.Compilation.BuildManager.CompileWebFile(VirtualPath virtualPath)
+   en System.Web.Compilation.BuildManager.GetVPathBuildResultInternal(VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean throwIfNotFound, Boolean ensureIsUpToDate)
+   en System.Web.Compilation.BuildManager.GetVPathBuildResultWithNoAssert(HttpContext context, VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean throwIfNotFound, Boolean ensureIsUpToDate)
+   en System.Web.Compilation.BuildManager.GetVirtualPathObjectFactory(VirtualPath virtualPath, HttpContext context, Boolean allowCrossApp, Boolean throwIfNotFound)
+   en System.Web.Compilation.BuildManager.CreateInstanceFromVirtualPath(VirtualPath virtualPath, Type requiredBaseType, HttpContext context, Boolean allowCrossApp)
+   en System.Web.UI.PageHandlerFactory.GetHandlerHelper(HttpContext context, String requestType, VirtualPath virtualPath, String physicalPath)
+   en System.Web.UI.PageHandlerFactory.GetHandler(HttpContext context, String requestType, String virtualPath, String path)
+   en System.Web.HttpApplication.MaterializeHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   en System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+System.Web
+__________________________
+
+Log Entry : 
+10/13/2017 09:45:47
+Error in: http://localhost:50769/ProntoWeb/SituacionCalidadMovil.aspx. Error Message:System.Web.HttpCompileException
+C:\bdl\pronto\prontoweb\ProntoWeb\SituacionCalidadMovil.aspx.vb(84): error BC30451: 'cmbPeriodo' is not declared. It may be inaccessible due to its protection level.
+   en System.Web.Compilation.AssemblyBuilder.Compile()
+   en System.Web.Compilation.BuildProvidersCompiler.PerformBuild()
+   en System.Web.Compilation.BuildManager.CompileWebFile(VirtualPath virtualPath)
+   en System.Web.Compilation.BuildManager.GetVPathBuildResultInternal(VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean throwIfNotFound, Boolean ensureIsUpToDate)
+   en System.Web.Compilation.BuildManager.GetVPathBuildResultWithNoAssert(HttpContext context, VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean throwIfNotFound, Boolean ensureIsUpToDate)
+   en System.Web.Compilation.BuildManager.GetVirtualPathObjectFactory(VirtualPath virtualPath, HttpContext context, Boolean allowCrossApp, Boolean throwIfNotFound)
+   en System.Web.Compilation.BuildManager.CreateInstanceFromVirtualPath(VirtualPath virtualPath, Type requiredBaseType, HttpContext context, Boolean allowCrossApp)
+   en System.Web.UI.PageHandlerFactory.GetHandlerHelper(HttpContext context, String requestType, VirtualPath virtualPath, String physicalPath)
+   en System.Web.UI.PageHandlerFactory.GetHandler(HttpContext context, String requestType, String virtualPath, String path)
+   en System.Web.HttpApplication.MaterializeHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   en System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+System.Web
+__________________________
+
+Log Entry : 
+10/13/2017 09:46:01
+Error in: http://localhost:50769/ProntoWeb/SituacionCalidadMovil.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en SituacionCalidadMovil.BindTypeDropDown() en C:\bdl\pronto\prontoweb\ProntoWeb\SituacionCalidadMovil.aspx.vb:línea 167
+App_Web_situacioncalidadmovil.aspx.4199bbd4.hqjivlun
+__________________________
+
+Log Entry : 
+10/13/2017 09:46:16
+Error in: http://localhost:50769/ProntoWeb/SituacionCalidadMovil.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en SituacionCalidadMovil.BindTypeDropDown() en C:\bdl\pronto\prontoweb\ProntoWeb\SituacionCalidadMovil.aspx.vb:línea 167
+App_Web_situacioncalidadmovil.aspx.4199bbd4.mfjos5zm
+__________________________
+
+Log Entry : 
+10/13/2017 09:46:34
+Error in: http://localhost:50769/ProntoWeb/SituacionCalidadMovil.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en SituacionCalidadMovil.BindTypeDropDown() en C:\bdl\pronto\prontoweb\ProntoWeb\SituacionCalidadMovil.aspx.vb:línea 167
+App_Web_situacioncalidadmovil.aspx.4199bbd4.22071dm3
+__________________________
+
+Log Entry : 
+10/13/2017 09:46:44
+Error in: http://localhost:50769/ProntoWeb/SituacionCalidadMovil.aspx. Error Message:RODRIGORIOS esta logueado, pero lo redirijo al login porque faltan los datos de session. No deberia mejor mandarlo a SeleccionarEmpresa? Ademas, no hago el LogOut y le queda el cookie!!!
+__________________________
+
+Log Entry : 
+10/13/2017 09:46:44
+Error in: http://localhost:50769/ProntoWeb/SituacionCalidadMovil.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en SituacionCalidadMovil.BindTypeDropDown() en C:\bdl\pronto\prontoweb\ProntoWeb\SituacionCalidadMovil.aspx.vb:línea 167
+App_Web_situacioncalidadmovil.aspx.4199bbd4.dq42jndx
+__________________________
+
+Log Entry : 
+10/13/2017 09:46:57
+Error in: http://localhost:50769/ProntoWeb/SituacionCalidadMovil.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en SituacionCalidadMovil.BindTypeDropDown() en C:\bdl\pronto\prontoweb\ProntoWeb\SituacionCalidadMovil.aspx.vb:línea 167
+App_Web_situacioncalidadmovil.aspx.4199bbd4.f7btuqrn
+__________________________
+
+Log Entry : 
+10/13/2017 09:47:29
+Error in: http://localhost:50769/ProntoWeb/SituacionCalidadMovil.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en SituacionCalidadMovil.BindTypeDropDown() en C:\bdl\pronto\prontoweb\ProntoWeb\SituacionCalidadMovil.aspx.vb:línea 167
+App_Web_situacioncalidadmovil.aspx.4199bbd4.loz1js9y
+__________________________
+
+Log Entry : 
+10/13/2017 09:49:38
+Error in: http://localhost:50769/ProntoWeb/SituacionCalidadMovil.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en SituacionCalidadMovil.BindTypeDropDown() en C:\bdl\pronto\prontoweb\ProntoWeb\SituacionCalidadMovil.aspx.vb:línea 167
+App_Web_situacioncalidadmovil.aspx.4199bbd4.m-u5osgl
+__________________________
+
+Log Entry : 
+10/13/2017 09:50:02
+Error in: http://localhost:50769/ProntoWeb/SituacionCalidadMovil.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en SituacionCalidadMovil.BindTypeDropDown() en C:\bdl\pronto\prontoweb\ProntoWeb\SituacionCalidadMovil.aspx.vb:línea 167
+App_Web_situacioncalidadmovil.aspx.4199bbd4.drvv6gjy
+__________________________
+
+Log Entry : 
+10/13/2017 09:50:19
+Error in: http://localhost:50769/ProntoWeb/SituacionCalidadMovil.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en SituacionCalidadMovil.BindTypeDropDown() en C:\bdl\pronto\prontoweb\ProntoWeb\SituacionCalidadMovil.aspx.vb:línea 167
+App_Web_situacioncalidadmovil.aspx.4199bbd4.o1roqunl
+__________________________
+
+Log Entry : 
+10/13/2017 09:51:04
+Error in: http://localhost:50769/ProntoWeb/SituacionCalidadMovil.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en SituacionCalidadMovil.BindTypeDropDown() en C:\bdl\pronto\prontoweb\ProntoWeb\SituacionCalidadMovil.aspx.vb:línea 167
+App_Web_situacioncalidadmovil.aspx.4199bbd4.zrnzwzt4
+__________________________
+
+Log Entry : 
+10/13/2017 09:51:29
+Error in: http://localhost:50769/ProntoWeb/SituacionCalidadMovil.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en SituacionCalidadMovil.BindTypeDropDown() en C:\bdl\pronto\prontoweb\ProntoWeb\SituacionCalidadMovil.aspx.vb:línea 167
+App_Web_situacioncalidadmovil.aspx.4199bbd4.jtp0v-ae
+__________________________
+
+Log Entry : 
+10/13/2017 09:51:45
+Error in: http://localhost:50769/ProntoWeb/SituacionCalidadMovil.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en SituacionCalidadMovil.BindTypeDropDown() en C:\bdl\pronto\prontoweb\ProntoWeb\SituacionCalidadMovil.aspx.vb:línea 167
+App_Web_situacioncalidadmovil.aspx.4199bbd4.cdodp5wm
+__________________________
+
+Log Entry : 
+10/13/2017 09:52:19
+Error in: http://localhost:50769/ProntoWeb/SituacionCalidadMovil.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en SituacionCalidadMovil.BindTypeDropDown() en C:\bdl\pronto\prontoweb\ProntoWeb\SituacionCalidadMovil.aspx.vb:línea 167
+App_Web_situacioncalidadmovil.aspx.4199bbd4.yctmttna
+__________________________
+
+Log Entry : 
+10/13/2017 09:52:34
+Error in: http://localhost:50769/ProntoWeb/SituacionCalidadMovil.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en SituacionCalidadMovil.BindTypeDropDown() en C:\bdl\pronto\prontoweb\ProntoWeb\SituacionCalidadMovil.aspx.vb:línea 167
+App_Web_situacioncalidadmovil.aspx.4199bbd4.xqciv_iz
+__________________________
+
+Log Entry : 
+10/13/2017 09:53:00
+Error in: http://localhost:50769/ProntoWeb/SituacionCalidadMovil.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en SituacionCalidadMovil.BindTypeDropDown() en C:\bdl\pronto\prontoweb\ProntoWeb\SituacionCalidadMovil.aspx.vb:línea 167
+App_Web_situacioncalidadmovil.aspx.4199bbd4.lk1xjeem
+__________________________
+
+Log Entry : 
+10/13/2017 09:53:09
+Error in: http://localhost:50769/ProntoWeb/SituacionCalidadMovil.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en SituacionCalidadMovil.BindTypeDropDown() en C:\bdl\pronto\prontoweb\ProntoWeb\SituacionCalidadMovil.aspx.vb:línea 167
+App_Web_situacioncalidadmovil.aspx.4199bbd4.lk1xjeem
+__________________________
+
+Log Entry : 
+10/13/2017 09:53:52
+Error in: http://localhost:50769/ProntoWeb/SituacionCalidadMovil.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en SituacionCalidadMovil.BindTypeDropDown() en C:\bdl\pronto\prontoweb\ProntoWeb\SituacionCalidadMovil.aspx.vb:línea 167
+App_Web_situacioncalidadmovil.aspx.4199bbd4.kvhwxosm
+__________________________
+
+Log Entry : 
+10/13/2017 09:54:24
+Error in: http://localhost:50769/ProntoWeb/SituacionCalidadMovil.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en SituacionCalidadMovil.BindTypeDropDown() en C:\bdl\pronto\prontoweb\ProntoWeb\SituacionCalidadMovil.aspx.vb:línea 167
+App_Web_situacioncalidadmovil.aspx.4199bbd4.kvhwxosm
+__________________________
+
+Log Entry : 
+10/13/2017 09:54:44
+Error in: http://localhost:50769/ProntoWeb/SituacionCalidadMovil.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en SituacionCalidadMovil.BindTypeDropDown() en C:\bdl\pronto\prontoweb\ProntoWeb\SituacionCalidadMovil.aspx.vb:línea 167
+App_Web_situacioncalidadmovil.aspx.4199bbd4.kvhwxosm
+__________________________
+
+Log Entry : 
+10/13/2017 09:55:47
+Error in: http://localhost:50769/ProntoWeb/SituacionCalidadMovil.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en SituacionCalidadMovil.BindTypeDropDown() en C:\bdl\pronto\prontoweb\ProntoWeb\SituacionCalidadMovil.aspx.vb:línea 167
+App_Web_situacioncalidadmovil.aspx.4199bbd4.kvhwxosm
+__________________________
+
+Log Entry : 
+10/13/2017 09:56:51
+Error in: http://localhost:50769/ProntoWeb/SituacionCalidadMovil.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en SituacionCalidadMovil.BindTypeDropDown() en C:\bdl\pronto\prontoweb\ProntoWeb\SituacionCalidadMovil.aspx.vb:línea 167
+App_Web_situacioncalidadmovil.aspx.4199bbd4.kvhwxosm
+__________________________
+
+Log Entry : 
+10/13/2017 09:58:41
+Error in: http://localhost:50769/ProntoWeb/SituacionCalidadMovil.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en SituacionCalidadMovil.BindTypeDropDown() en C:\bdl\pronto\prontoweb\ProntoWeb\SituacionCalidadMovil.aspx.vb:línea 167
+App_Web_situacioncalidadmovil.aspx.4199bbd4.ispfhac6
+__________________________
+
+Log Entry : 
+10/13/2017 10:00:37
+Error in: http://localhost:50769/ProntoWeb/SituacionCalidadMovil.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en SituacionCalidadMovil.BindTypeDropDown() en C:\bdl\pronto\prontoweb\ProntoWeb\SituacionCalidadMovil.aspx.vb:línea 167
+App_Web_situacioncalidadmovil.aspx.4199bbd4.m0u1tgxx
+__________________________
+
+Log Entry : 
+10/13/2017 10:01:05
+Error in: http://localhost:50769/ProntoWeb/SituacionCalidadMovil.aspx. Error Message:RODRIGORIOS esta logueado, pero lo redirijo al login porque faltan los datos de session. No deberia mejor mandarlo a SeleccionarEmpresa? Ademas, no hago el LogOut y le queda el cookie!!!
+__________________________
+
+Log Entry : 
+10/13/2017 10:01:06
+Error in: http://localhost:50769/ProntoWeb/SituacionCalidadMovil.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en SituacionCalidadMovil.BindTypeDropDown() en C:\bdl\pronto\prontoweb\ProntoWeb\SituacionCalidadMovil.aspx.vb:línea 167
+App_Web_situacioncalidadmovil.aspx.4199bbd4.zfl-_8k0
+__________________________
+
+Log Entry : 
+10/13/2017 10:05:46
+Error in: http://localhost:50769/ProntoWeb/SituacionCalidadMovil.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en SituacionCalidadMovil.BindTypeDropDown() en C:\bdl\pronto\prontoweb\ProntoWeb\SituacionCalidadMovil.aspx.vb:línea 167
+App_Web_situacioncalidadmovil.aspx.4199bbd4.w--rsnyr
+__________________________
