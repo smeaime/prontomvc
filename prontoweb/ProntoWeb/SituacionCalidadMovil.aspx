@@ -58,7 +58,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
 
 
-<meta id="Viewport" name="viewport" content="width=330, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+<meta id="Viewport" name="viewport" content="width=320">
 
 
 <%--
@@ -86,7 +86,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
     <%--/////////////////////////////////////////////////////////////--%>
     <%--////////////    jqgrid     //////////////////////////////////--%>
     <script src="//cdn.jsdelivr.net/jqgrid/4.5.4/i18n/grid.locale-es.js"></script>
- <%--     <link href="//cdn.jsdelivr.net/jqgrid/4.5.2/css/ui.jqgrid.css" rel="stylesheet">
+    <%--     <link href="//cdn.jsdelivr.net/jqgrid/4.5.2/css/ui.jqgrid.css" rel="stylesheet">
   <script src="//cdn.jsdelivr.net/jqgrid/4.5.2/jquery.jqGrid.js"></script>--%>
     <%--/////////////////////////////////////////////////////////////--%>
     <%--/////////////////////////////////////////////////////////////--%>
@@ -101,16 +101,16 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
 
 
-       <script src="http://cdn.jsdelivr.net/jqgrid/4.5.4/i18n/grid.locale-es.js"></script>
-                <link href="http://cdn.jsdelivr.net/jqgrid/4.5.4/css/ui.jqgrid.css" rel="stylesheet" type="text/css" />
-        <script src="http://cdn.jsdelivr.net/jqgrid/4.5.4/plugins/ui.multiselect.js"></script> 
-         <script src="http://cdn.jsdelivr.net/jqgrid/4.5.4/plugins/jquery.contextmenu.js"></script>
-        <script src="http://cdn.jsdelivr.net/jqgrid/4.5.4/plugins/jquery.searchFilter.js"></script>
-        <script src="http://cdn.jsdelivr.net/jqgrid/4.5.4/plugins/jquery.tablednd.js"></script>
-            <link href="http://cdn.jsdelivr.net/jqgrid/4.5.4/plugins/searchFilter.css" rel="stylesheet" type="text/css" />
-            <link href="http://cdn.jsdelivr.net/jqgrid/4.5.4/plugins/ui.multiselect.css" rel="stylesheet" type="text/css" />
+    <script src="http://cdn.jsdelivr.net/jqgrid/4.5.4/i18n/grid.locale-es.js"></script>
+    <link href="http://cdn.jsdelivr.net/jqgrid/4.5.4/css/ui.jqgrid.css" rel="stylesheet" type="text/css" />
+    <script src="http://cdn.jsdelivr.net/jqgrid/4.5.4/plugins/ui.multiselect.js"></script>
+    <script src="http://cdn.jsdelivr.net/jqgrid/4.5.4/plugins/jquery.contextmenu.js"></script>
+    <script src="http://cdn.jsdelivr.net/jqgrid/4.5.4/plugins/jquery.searchFilter.js"></script>
+    <script src="http://cdn.jsdelivr.net/jqgrid/4.5.4/plugins/jquery.tablednd.js"></script>
+    <link href="http://cdn.jsdelivr.net/jqgrid/4.5.4/plugins/searchFilter.css" rel="stylesheet" type="text/css" />
+    <link href="http://cdn.jsdelivr.net/jqgrid/4.5.4/plugins/ui.multiselect.css" rel="stylesheet" type="text/css" />
 
-            <script src="http://cdn.jsdelivr.net/jqgrid/4.5.4/jquery.jqGrid.min.js"></script>
+    <script src="http://cdn.jsdelivr.net/jqgrid/4.5.4/jquery.jqGrid.min.js"></script>
 
 
 
@@ -209,12 +209,12 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                 <ContentTemplate>
 
                     <table style="color: black; width: 320px; vertical-align: bottom !important;">
-                        <tr >
+                        <tr>
                             <td class="" style="width: ; height: ;"></td>
-                            <td class="" style="width: ; height: ; vertical-align: bottom !important; ">
+                            <td class="" style="width: ; height: ; vertical-align: bottom !important;">
                                 <asp:Image ID="LogoImage" runat="server" ImageUrl="~/Imagenes/williamsmini.gif" CssClass="" Height="60px" ImageAlign="AbsBottom" />
 
-                              <%--  Cartas de Porte - Movil--%>
+                                <%--  Cartas de Porte - Movil--%>
 
 
                                 <asp:DropDownList ID="cmbPeriodo" runat="server" AutoPostBack="true" Height="40" Width="100px" Font-Size="14" Style="color: black;"
@@ -258,8 +258,8 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                             </td>
                         </tr>
 
-                            
-                        
+
+
                         <tr style="visibility: hidden; display: none">
                             <td class="" style="width: ; height: 18px;"></td>
                             <td class="" style="width: ; height: 18px;">
@@ -283,7 +283,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                 </ContentTemplate>
             </asp:UpdatePanel>
 
-           <div style="visibility: hidden; display: none">
+            <div style="visibility: hidden; display: none">
 
                 <asp:Button ID="btnExportarGrilla" Text="EXCEL" runat="server" Visible="false" CssClass="btn btn-primary"
                     Width="150" Height="40" />
@@ -496,19 +496,16 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
   margin: 0em; 
   padding:0;*/
                     /*overflow: auto;*/
-        /*            overflow-x: auto !important;*/
+                    /*            overflow-x: auto !important;*/
                     /*overflow-y:auto  !important;*/
                     /*text-align:left;*/
                 }
-
-
-
             </style>
 
 
             <div style="height: 8px"></div>
 
-            <table id="Lista" class="scroll" cellpadding="0" cellspacing="0" style="font-size: 16px;" width="320px" >
+            <table id="Lista" class="scroll" cellpadding="0" cellspacing="0" style="font-size: 16px;" width="320px">
             </table>
 
             <div id="ListaPager" class="scroll" style="text-align: center; height: ;">
@@ -522,10 +519,10 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
                     <input type="button" id="btnsituacion" value="Cambiar situacion" class="btn  btn-large btn-primary " usesubmitbehavior="false" />
 
-                     <%-- <a class="btn" style="color: Black" href="#"><i class="icon-print"></i>&nbsp;más</a>--%>
-     
-                    <input type="button" id="recarg" value="recarg"  class="btn icon-cog span2" />
-                    <input type="button" id="ant" value="<<"  class="btn"/>
+                    <%-- <a class="btn" style="color: Black" href="#"><i class="icon-print"></i>&nbsp;más</a>--%>
+
+                    <input type="button" id="recarg" value="recarg" class="btn icon-cog span2" />
+                    <input type="button" id="ant" value="<<" class="btn" />
                     <input type="button" id="prox" value=">>" class="btn" />
 
                 </div>
@@ -592,32 +589,44 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                     <br />
                     <asp:Label ID="lblRazonSocial" runat="server" Font-Size="10" Font-Bold="false" Visible="false" />
 
-                    <a href="CartaDePorteInformesAccesoClientesMovil.aspx">Version escritorio  </a><br />
+                    <a href="CartaDePorteInformesAccesoClientesMovil.aspx">Version escritorio  </a>
+                    <br />
 
                 </div>
 
 
-                <div>
-                    Llamanos                <%--       OFICINAS: Buenos Aires Moreno 584 P. 12 Of A / (011) 5278-8800 - 4322-4805 / buenosaires@williamsentregas.com.ar 
+
+
+
+                Llamanos 
+      
+                <div class="row-fluid" style="">
+
+                 
+
+                        <%--   <input type="button" id="btnsituacion" value="Cambiar situacion" class="btn  btn-large btn-primary " usesubmitbehavior="false" />--%>
+
+                        <%-- <a class="btn" style="color: Black" href="#"><i class="icon-print"></i>&nbsp;más</a>--%>
+
+
+
+                        <%--       OFICINAS: Buenos Aires Moreno 584 P. 12 Of A / (011) 5278-8800 - 4322-4805 / buenosaires@williamsentregas.com.ar 
      // San Lorenzo (Sta. Fe) - Sgo. del Estero 1177 / (03476) 430-234 - 426-855 / sanlorenzo@williamsentregas.com.ar
 Arroyo Seco (Sta. Fe) - René Favaloro 726 / (03402) 421-426 - 429-676 / arroyoseco@williamsentregas.com.ar 
      // Bahía Blanca Ruta 252 km 0.5 - Playa el Triangulo / (0291) 400-7928 - 481-6778 / bahiablanca@williamsentregas.com.ar--%>
 
-                                        <br />
-
-                    <a href="tel:5278-8800">BsAs</a>
-
-                    <br />
-                    <a href="tel:(03476) 430-234">S.Lorenzo</a>
-                    <br />
-
-                    <a href="tel: (03402) 421-426">Arroyo</a>
-
-                    <br />
-                    <a href="tel:0291-400-7928">B.Blanca </a>
-                    <br />
 
 
+                        <a href="tel:5278-8800" class="btn span2" type="button">BsAs</a>
+
+                        <a href="tel:(03476) 430-234" class="btn  span2" type="button">S.Lorenzo</a>
+
+                        <a href="tel: (03402) 421-426" class="btn  span2" type="button">Arroyo</a>
+
+                        <a href="tel:0291-400-7928" class="btn  span2" type="button">B.Blanca </a>
+
+
+                    
                 </div>
 
 
@@ -2684,17 +2693,17 @@ Arroyo Seco (Sta. Fe) - René Favaloro 726 / (03402) 421-426 - 429-676 / arroyos
                 // http://stackoverflow.com/questions/6575192/jqgrid-change-background-color-of-row-based-on-row-cell-value-by-column-name
 
 
-              
+
 
                 $("#ListaPager_left").remove();
                 $("#first_ListaPager").remove();
                 $("#prev_ListaPager").remove();
                 $("#next_ListaPager").remove();
                 $("#last_ListaPager").remove();
-                
+
                 $("#ListaPager_center").width(150);
 
-                
+
 
 
                 RefrescarFondoRenglon(this);
@@ -2746,8 +2755,8 @@ Arroyo Seco (Sta. Fe) - René Favaloro 726 / (03402) 421-426 - 429-676 / arroyos
             multiselect: true,
             shrinkToFit: false,
 
-            width: $(window).width() - 25, // 310, //'auto',
-            height: $(window).height() - 230, // '100%'
+            width: $(window).width() - 4, // 310, //'auto',
+            height: $(window).height() - 220, // '100%'
             altRows: false,
             footerrow: false,
             userDataOnFooter: true,
