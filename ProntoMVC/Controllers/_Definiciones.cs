@@ -328,7 +328,11 @@ namespace ProntoMVC.Controllers
                 }
                 catch (Exception)
                 {
-                    if (parm[0].ToString().Length == 0)
+                    if (parm.Length == 0)
+                    {
+                        filteredQuery = q;
+                    }
+                    else if (parm[0].ToString().Length == 0)
                     {
                         filteredQuery = q;
                     }
