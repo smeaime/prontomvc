@@ -209,10 +209,13 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                 <ContentTemplate>
 
                     <table style="color: black; width: 320px; vertical-align: bottom !important;">
-                        <tr>
-                            <td class="" style="width: ; height: 18px;"></td>
-                            <td class="" style="width: ; height: ; vertical-align: bottom !important;">
+                        <tr >
+                            <td class="" style="width: ; height: ;"></td>
+                            <td class="" style="width: ; height: ; vertical-align: bottom !important; ">
                                 <asp:Image ID="LogoImage" runat="server" ImageUrl="~/Imagenes/williamsmini.gif" CssClass="" Height="60px" ImageAlign="AbsBottom" />
+
+                              <%--  Cartas de Porte - Movil--%>
+
 
                                 <asp:DropDownList ID="cmbPeriodo" runat="server" AutoPostBack="true" Height="40" Width="100px" Font-Size="14" Style="color: black;"
                                     Visible="false">
@@ -255,7 +258,8 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                             </td>
                         </tr>
 
-
+                            
+                        
                         <tr style="visibility: hidden; display: none">
                             <td class="" style="width: ; height: 18px;"></td>
                             <td class="" style="width: ; height: 18px;">
@@ -279,7 +283,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                 </ContentTemplate>
             </asp:UpdatePanel>
 
-            <div style="visibility: hidden; display: none">
+           <div style="visibility: hidden; display: none">
 
                 <asp:Button ID="btnExportarGrilla" Text="EXCEL" runat="server" Visible="false" CssClass="btn btn-primary"
                     Width="150" Height="40" />
@@ -502,9 +506,9 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
             </style>
 
 
+            <div style="height: 8px"></div>
 
-
-            <table id="Lista" class="scroll" cellpadding="0" cellspacing="0" style="font-size: 16px;" width="320px">
+            <table id="Lista" class="scroll" cellpadding="0" cellspacing="0" style="font-size: 16px;" width="320px" >
             </table>
 
             <div id="ListaPager" class="scroll" style="text-align: center; height: ;">
@@ -514,15 +518,15 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
             <div class="row-fluid" style="margin-bottom: 15px; margin-top: 5px;">
 
-                <div class="span8">
+                <div class="span12">
 
                     <input type="button" id="btnsituacion" value="Cambiar situacion" class="btn  btn-large btn-primary " usesubmitbehavior="false" />
 
-
-                    <input type="button" id="jpg" value="jpg" />
-                    <input type="button" id="recarg" value="recarg" />
-                    <input type="button" id="ant" value="<<" />
-                    <input type="button" id="prox" value=">>" />
+                     <%-- <a class="btn" style="color: Black" href="#"><i class="icon-print"></i>&nbsp;más</a>--%>
+     
+                    <input type="button" id="recarg" value="recarg"  class="btn icon-cog span2" />
+                    <input type="button" id="ant" value="<<"  class="btn"/>
+                    <input type="button" id="prox" value=">>" class="btn" />
 
                 </div>
 
@@ -566,17 +570,11 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
 
 
-            <div id="dialog" title="Basic dialog">
+            <div id="dialog" title="">
 
 
 
                 <div>
-                    <br />
-
-                    <asp:Label ID="lblRazonSocial" runat="server" Font-Size="10" Font-Bold="false" Visible="false" />
-
-                    <a href="CartaDePorteInformesAccesoClientesMovil.aspx">Version escritorio  </a><br />
-
                     <asp:LoginView ID="LoginView" runat="server">
                         <LoggedInTemplate>
                             <asp:LoginName ID="LoginName1" runat="server" Font-Bold="false" CssClass="margender" />
@@ -587,6 +585,15 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                             TabIndex="-1" LogoutText="Salir" Font-Underline="False" CssClass="margender" />
                         </LoggedInTemplate>
                     </asp:LoginView>
+                    <br />
+
+                    <br />
+                    <br />
+                    <br />
+                    <asp:Label ID="lblRazonSocial" runat="server" Font-Size="10" Font-Bold="false" Visible="false" />
+
+                    <a href="CartaDePorteInformesAccesoClientesMovil.aspx">Version escritorio  </a><br />
+
                 </div>
 
 
@@ -596,14 +603,19 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 Arroyo Seco (Sta. Fe) - René Favaloro 726 / (03402) 421-426 - 429-676 / arroyoseco@williamsentregas.com.ar 
      // Bahía Blanca Ruta 252 km 0.5 - Playa el Triangulo / (0291) 400-7928 - 481-6778 / bahiablanca@williamsentregas.com.ar--%>
 
+                                        <br />
 
                     <a href="tel:5278-8800">BsAs</a>
 
+                    <br />
                     <a href="tel:(03476) 430-234">S.Lorenzo</a>
+                    <br />
 
                     <a href="tel: (03402) 421-426">Arroyo</a>
 
+                    <br />
                     <a href="tel:0291-400-7928">B.Blanca </a>
+                    <br />
 
 
                 </div>
@@ -2671,7 +2683,18 @@ Arroyo Seco (Sta. Fe) - René Favaloro 726 / (03402) 421-426 - 429-676 / arroyos
             loadComplete: function () {
                 // http://stackoverflow.com/questions/6575192/jqgrid-change-background-color-of-row-based-on-row-cell-value-by-column-name
 
-                //$("#ListaPager_center").width(150);
+
+              
+
+                $("#ListaPager_left").remove();
+                $("#first_ListaPager").remove();
+                $("#prev_ListaPager").remove();
+                $("#next_ListaPager").remove();
+                $("#last_ListaPager").remove();
+                
+                $("#ListaPager_center").width(150);
+
+                
 
 
                 RefrescarFondoRenglon(this);
