@@ -210,11 +210,13 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
                     <table style="color: black; width: 320px; vertical-align: bottom !important;">
                         <tr>
-                            <td class="" style="width: ; height: ;"></td>
+                            <td class="" style="width: ; height: ;">
+                                 <asp:Image ID="LogoImage" runat="server" ImageUrl="~/Imagenes/williamsmini.gif" CssClass="" Height="60px" ImageAlign="AbsBottom" />
+                            </td>
                             <td class="" style="width: ; height: ; vertical-align: bottom !important;">
-                                <asp:Image ID="LogoImage" runat="server" ImageUrl="~/Imagenes/williamsmini.gif" CssClass="" Height="60px" ImageAlign="AbsBottom" />
+                               
 
-                                <%--  Cartas de Porte - Movil--%>
+                                <b style="font-size: 14px">Cartas de Porte versión Móvil</b><br />
 
 
                                 <asp:DropDownList ID="cmbPeriodo" runat="server" AutoPostBack="true" Height="40" Width="100px" Font-Size="14" Style="color: black;"
@@ -242,6 +244,8 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                                 </cc1:MaskedEditExtender>
                                 <cc1:TextBoxWatermarkExtender ID="TBWE2" runat="server" TargetControlID="txtFechaDesde"
                                     WatermarkText="desde" WatermarkCssClass="watermarked" />
+
+                                al
                                 <asp:TextBox ID="txtFechaHasta" runat="server" Width="100px" MaxLength="1" TabIndex="2" Style="color: black;" Font-Size="14" Enabled="true" Height="40"
                                     AutoPostBack="false"></asp:TextBox>
                                 <cc1:CalendarExtender ID="CalendarExtender4" runat="server" Format="dd/MM/yyyy" TargetControlID="txtFechaHasta"
