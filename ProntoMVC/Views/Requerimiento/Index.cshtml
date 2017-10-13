@@ -390,6 +390,10 @@
         });
         jQuery("#Lista").jqGrid('bindKeys');
 
+
+        //jQuery("#Lista").jqGrid('setFrozenColumns'); // si usas frozencolumns, estas obligado a sacar el cellEdit!!! -y tambien el autofiltro??
+
+
         jQuery("#Lista").jqGrid('navGrid', '#ListaPager',
          { csv: true, refresh: true, add: false, edit: false, del: false }, {}, {}, {},
          {
