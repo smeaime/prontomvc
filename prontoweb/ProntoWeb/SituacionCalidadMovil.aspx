@@ -8,10 +8,10 @@
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %>
 <%@ Register Assembly="System.Web.Extensions, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35"
     Namespace="System.Web.UI" TagPrefix="asp" %>
-<%@ Register Assembly="Microsoft.ReportViewer.WebForms, Version=10.0.0.0, 
+<%--<%@ Register Assembly="Microsoft.ReportViewer.WebForms, Version=10.0.0.0, 
 Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
     Namespace="Microsoft.Reporting.WebForms"
-    TagPrefix="rsweb" %>
+    TagPrefix="rsweb" %>--%>
 
 
 
@@ -63,22 +63,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
 <%--
 
-<meta id="Viewport" name="viewport" content=" initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
-
-<script type="text/javascript">
-$(function(){
-if( /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent) ) {
-  var ww = ( $(window).width() < window.screen.width ) ? $(window).width() : window.screen.width; //get proper width
-  var mw = 480; // min width of site
-  var ratio =  ww / mw; //calculate ratio
-  if( ww < mw){ //smaller than minimum size
-   $('#Viewport').attr('content', 'initial-scale=' + ratio + ', maximum-scale=' + ratio + ', minimum-scale=' + ratio + ', user-scalable=yes, width=' + ww);
-  }else{ //regular size
-   $('#Viewport').attr('content', 'initial-scale=1.0, maximum-scale=2, minimum-scale=1.0, user-scalable=yes, width=' + ww);
-  }
-}
-});
-</script>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
 --%>
 
 
@@ -101,8 +86,8 @@ if( /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent) ) {
     <%--/////////////////////////////////////////////////////////////--%>
     <%--////////////    jqgrid     //////////////////////////////////--%>
     <script src="//cdn.jsdelivr.net/jqgrid/4.5.4/i18n/grid.locale-es.js"></script>
-    <link href="//cdn.jsdelivr.net/jqgrid/4.5.2/css/ui.jqgrid.css" rel="stylesheet">
-    <script src="//cdn.jsdelivr.net/jqgrid/4.5.2/jquery.jqGrid.js"></script>
+ <%--     <link href="//cdn.jsdelivr.net/jqgrid/4.5.2/css/ui.jqgrid.css" rel="stylesheet">
+  <script src="//cdn.jsdelivr.net/jqgrid/4.5.2/jquery.jqGrid.js"></script>--%>
     <%--/////////////////////////////////////////////////////////////--%>
     <%--/////////////////////////////////////////////////////////////--%>
 
@@ -111,6 +96,21 @@ if( /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent) ) {
     </div>--%>
 
 
+
+
+
+
+
+       <script src="http://cdn.jsdelivr.net/jqgrid/4.5.4/i18n/grid.locale-es.js"></script>
+                <link href="http://cdn.jsdelivr.net/jqgrid/4.5.4/css/ui.jqgrid.css" rel="stylesheet" type="text/css" />
+        <script src="http://cdn.jsdelivr.net/jqgrid/4.5.4/plugins/ui.multiselect.js"></script> 
+         <script src="http://cdn.jsdelivr.net/jqgrid/4.5.4/plugins/jquery.contextmenu.js"></script>
+        <script src="http://cdn.jsdelivr.net/jqgrid/4.5.4/plugins/jquery.searchFilter.js"></script>
+        <script src="http://cdn.jsdelivr.net/jqgrid/4.5.4/plugins/jquery.tablednd.js"></script>
+            <link href="http://cdn.jsdelivr.net/jqgrid/4.5.4/plugins/searchFilter.css" rel="stylesheet" type="text/css" />
+            <link href="http://cdn.jsdelivr.net/jqgrid/4.5.4/plugins/ui.multiselect.css" rel="stylesheet" type="text/css" />
+
+            <script src="http://cdn.jsdelivr.net/jqgrid/4.5.4/jquery.jqGrid.min.js"></script>
 
 
 
@@ -214,7 +214,7 @@ if( /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent) ) {
                             <td class="" style="width: ; height: ; vertical-align: bottom !important;">
                                 <asp:Image ID="LogoImage" runat="server" ImageUrl="~/Imagenes/williamsmini.gif" CssClass="" Height="60px" ImageAlign="AbsBottom" />
 
-                                     <asp:DropDownList ID="cmbPeriodo" runat="server" AutoPostBack="true" Height="40" Width="100px" Font-Size="14" Style="color: black;"
+                                <asp:DropDownList ID="cmbPeriodo" runat="server" AutoPostBack="true" Height="40" Width="100px" Font-Size="14" Style="color: black;"
                                     Visible="false">
                                     <asp:ListItem Text="Hoy" Selected="True" />
                                     <asp:ListItem Text="Ayer" />
@@ -254,7 +254,7 @@ if( /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent) ) {
                                     WatermarkText="hasta" WatermarkCssClass="watermarked" />
                             </td>
                         </tr>
-                 
+
 
                         <tr style="visibility: hidden; display: none">
                             <td class="" style="width: ; height: 18px;"></td>
@@ -476,26 +476,28 @@ if( /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent) ) {
 
 
                 .ui-jqgrid .ui-pg-table .ui-pg-input, .ui-jqgrid .ui-pg-table .ui-pg-selbox {
-    height: auto;
-    width: auto;
-    line-height: inherit;
-    padding: 1px;
-    font-weight: normal;
-    font-size: 11px;
-    margin: 1px;
-}
+                    height: auto;
+                    width: auto;
+                    line-height: inherit;
+                    padding: 1px;
+                    font-weight: normal;
+                    font-size: 11px;
+                    margin: 1px;
+                }
 
 
 
                 .ui-jqgrid .ui-jqgrid-bdiv {
-  /*position: relative; 
+                    /*position: relative; 
   margin: 0em; 
-  padding:0;*/ 
-  /*overflow: auto;*/ 
-  overflow-x: auto !important;  
-  /*overflow-y:auto  !important;*/ 
-  /*text-align:left;*/
-}
+  padding:0;*/
+                    /*overflow: auto;*/
+        /*            overflow-x: auto !important;*/
+                    /*overflow-y:auto  !important;*/
+                    /*text-align:left;*/
+                }
+
+
 
             </style>
 
@@ -505,18 +507,61 @@ if( /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent) ) {
             <table id="Lista" class="scroll" cellpadding="0" cellspacing="0" style="font-size: 16px;" width="320px">
             </table>
 
-            <div id="ListaPager" class="scroll" style="text-align: center; height: 50px;">
+            <div id="ListaPager" class="scroll" style="text-align: center; height: ;">
             </div>
 
 
 
-            <input type="button" id="btnsituacion" style="height: 40px" value="cambiar situacion" />
-            <input type="button" id="jpg" value="jpg" />
-            <input type="button" id="tif" value="tif" />
-            <input type="button" id="recarg" value="recarg" />
+            <div class="row-fluid" style="margin-bottom: 15px; margin-top: 5px;">
+
+                <div class="span8">
+
+                    <input type="button" id="btnsituacion" value="Cambiar situacion" class="btn  btn-large btn-primary " usesubmitbehavior="false" />
+
+
+                    <input type="button" id="jpg" value="jpg" />
+                    <input type="button" id="recarg" value="recarg" />
+                    <input type="button" id="ant" value="<<" />
+                    <input type="button" id="prox" value=">>" />
+
+                </div>
+
+            </div>
 
 
 
+            <script>
+
+                jQuery("#prox").click(function () {
+
+                    grid = $("#Lista");
+                    var totalPages = $("#sp_1_ListaPager").text();
+                    var currentPage = grid.getGridParam('page');
+
+                    //pageup
+                    if (totalPages != currentPage) {
+                        grid.jqGrid('setGridParam', { "page": currentPage + 1 }).trigger("reloadGrid");
+                    }
+
+                });
+
+
+                jQuery("#ant").click(function () {
+
+                    grid = $("#Lista");
+                    var totalPages = $("#sp_1_ListaPager").text();
+                    var currentPage = grid.getGridParam('page');
+
+                    //pagedown
+                    if (currentPage > 1) {
+                        grid.jqGrid('setGridParam', { "page": currentPage - 1 }).trigger("reloadGrid");
+                    }
+
+
+                });
+
+
+            </script>
 
 
 
@@ -526,19 +571,22 @@ if( /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent) ) {
 
 
                 <div>
-                    <a href="CartaDePorteInformesAccesoClientesMovil.aspx">Version escritorio |
-               
-                        <asp:Label ID="lblRazonSocial" runat="server" Font-Size="10" Font-Bold="false" Visible="false" />
-                        <asp:LoginView ID="LoginView" runat="server">
-                            <LoggedInTemplate>
-                                <asp:LoginName ID="LoginName1" runat="server" Font-Bold="false" CssClass="margender" />
-                                |
+                    <br />
+
+                    <asp:Label ID="lblRazonSocial" runat="server" Font-Size="10" Font-Bold="false" Visible="false" />
+
+                    <a href="CartaDePorteInformesAccesoClientesMovil.aspx">Version escritorio  </a><br />
+
+                    <asp:LoginView ID="LoginView" runat="server">
+                        <LoggedInTemplate>
+                            <asp:LoginName ID="LoginName1" runat="server" Font-Bold="false" CssClass="margender" />
+                            |
                                    
                         <asp:LoginStatus ID="LoginStatus1" runat="server" Font-Bold="false" ForeColor=""
                             LogoutAction="RedirectToLoginPage" LogoutPageUrl="~/Login.aspx" OnLoggedOut="LoginStatus1_LoggedOut"
                             TabIndex="-1" LogoutText="Salir" Font-Underline="False" CssClass="margender" />
-                            </LoggedInTemplate>
-                        </asp:LoginView>
+                        </LoggedInTemplate>
+                    </asp:LoginView>
                 </div>
 
 
@@ -584,73 +632,73 @@ Arroyo Seco (Sta. Fe) - René Favaloro 726 / (03402) 421-426 - 429-676 / arroyos
             </div>
 
 
-            
+
             <div id="TipoSituacion" title="Basic dialog">
 
-                                <input type="button" id="Autorizado" value="Autorizado" />
-                 <input type="button" id="Demorado" value="Demorado" />
-                
-value: "0:Autorizado; 1:Demorado; 2:Posicion; 3:Descargado; 4:A Descargar; 5:Rechazado;6:Desviado;7:CP p/cambiar;8:Sin Cupo;9:Calado"
+                <input type="button" id="Autorizado" value="Autorizado" />
+                <input type="button" id="Demorado" value="Demorado" />
 
-                </div>
+                value: "0:Autorizado; 1:Demorado; 2:Posicion; 3:Descargado; 4:A Descargar; 5:Rechazado;6:Desviado;7:CP p/cambiar;8:Sin Cupo;9:Calado"
+
+            </div>
 
 
             <script>
-            
-
-
-
-
-    $("#btnsituacion").click(function () {
-
-        //alert('aaa')
-
-        var $grid = $("#Lista");
-        var lista = $grid.jqGrid("getGridParam", "selarrrow");
-        if ((lista == null) || (lista.length == 0)) {
-            // http://stackoverflow.com/questions/11762757/how-to-retrieve-the-cell-information-for-mouseover-event-in-jqgrid
-
-            //como no hay renglones tildados, tomo el renglon sobre el que está el cursor
-            if (!(rowIdContextMenu===undefined)) lista = [rowIdContextMenu];
-            // lista = $grid.jqGrid('getGridParam', 'selrow')
-
-            if ((lista == null) || (lista.length == 0)) {
-                alert("No hay cartas elegidas " + rowIdContextMenu);
-                return;
-            }
-
-        }
 
 
 
 
 
-        $("#TipoSituacion").dialog({
-            dialogClass: "no-close",
-            buttons: [
-              {
-                  text: "OK",
-                  click: function () {
-                      $(this).dialog("close");
+                $("#btnsituacion").click(function () {
 
-                      cambiarSituaciones(lista, "administrador", "",
-          function () {
-              $("#loading").hide();
-              $('#Lista').trigger('reloadGrid');
-          })
+                    //alert('aaa')
 
-                  }
-              }
-            ]
-        });
+                    var $grid = $("#Lista");
+                    var lista = $grid.jqGrid("getGridParam", "selarrrow");
+                    if ((lista == null) || (lista.length == 0)) {
+                        // http://stackoverflow.com/questions/11762757/how-to-retrieve-the-cell-information-for-mouseover-event-in-jqgrid
 
+                        //como no hay renglones tildados, tomo el renglon sobre el que está el cursor
+                        if (!(rowIdContextMenu === undefined)) lista = [rowIdContextMenu];
+                        // lista = $grid.jqGrid('getGridParam', 'selrow')
 
-      
+                        if ((lista == null) || (lista.length == 0)) {
+                            alert("No hay cartas elegidas " + rowIdContextMenu);
+                            return;
+                        }
+
+                    }
 
 
 
 
-    })
+
+                    $("#TipoSituacion").dialog({
+                        dialogClass: "no-close",
+                        buttons: [
+                          {
+                              text: "OK",
+                              click: function () {
+                                  $(this).dialog("close");
+
+                                  cambiarSituaciones(lista, "administrador", "",
+                      function () {
+                          $("#loading").hide();
+                          $('#Lista').trigger('reloadGrid');
+                      })
+
+                              }
+                          }
+                        ]
+                    });
+
+
+
+
+
+
+
+                })
 
 
 
@@ -1766,7 +1814,7 @@ value: "0:Autorizado; 1:Demorado; 2:Posicion; 3:Descargado; 4:A Descargar; 5:Rec
                     }
                 },
 
-                { name: 'Turno', index: ' Turno', align: 'left', width: 20, editable: false, hidden: false, edittype: 'text', searchoptions: { sopt: ['bw', 'cn', 'eq'] }, },
+                { name: 'Turno', index: ' Turno', align: 'left', width: 40, editable: false, hidden: false, edittype: 'text', searchoptions: { sopt: ['bw', 'cn', 'eq'] }, },
 
                 {
                     name: 'Situacion', index: 'Situacion', align: 'left', width: 120, hidden: false, editable: true, edittype: 'select', sortable: false,
@@ -2623,7 +2671,7 @@ value: "0:Autorizado; 1:Demorado; 2:Posicion; 3:Descargado; 4:A Descargar; 5:Rec
             loadComplete: function () {
                 // http://stackoverflow.com/questions/6575192/jqgrid-change-background-color-of-row-based-on-row-cell-value-by-column-name
 
-                $("#ListaPager_center").width(150);
+                //$("#ListaPager_center").width(150);
 
 
                 RefrescarFondoRenglon(this);
@@ -2668,7 +2716,7 @@ value: "0:Autorizado; 1:Demorado; 2:Posicion; 3:Descargado; 4:A Descargar; 5:Rec
 
             pager: $('#ListaPager'),
             rowNum: 10,
-            rowList: [10, 20, 50, 100, 500, 1000],
+            //rowList: [10, 20, 50, 100, 500, 1000],
             sortname: 'IdCartaDePorte',  //'FechaDescarga', //'NumeroCartaDePorte',
             sortorder: 'desc',
             viewrecords: true,
@@ -2676,7 +2724,7 @@ value: "0:Autorizado; 1:Demorado; 2:Posicion; 3:Descargado; 4:A Descargar; 5:Rec
             shrinkToFit: false,
 
             width: $(window).width() - 25, // 310, //'auto',
-            height: $(window).height() - 270, // '100%'
+            height: $(window).height() - 230, // '100%'
             altRows: false,
             footerrow: false,
             userDataOnFooter: true,
@@ -2713,8 +2761,8 @@ value: "0:Autorizado; 1:Demorado; 2:Posicion; 3:Descargado; 4:A Descargar; 5:Rec
             // http://stackoverflow.com/questions/11228764/jqgrid-setting-zindex-for-alertmod
         );
 
-        //jQuery("#Lista").jqGrid('navGrid', '#ListaPager',
-        //    { search: false, refresh: false, add: false, edit: false, del: false }, {}, {}, {}, {});
+        jQuery("#Lista").jqGrid('navGrid', '#ListaPager',
+            { search: false, refresh: false, add: false, edit: false, del: false }, {}, {}, {}, {});
 
 
 
@@ -2735,12 +2783,12 @@ value: "0:Autorizado; 1:Demorado; 2:Posicion; 3:Descargado; 4:A Descargar; 5:Rec
 
 
 
-        //jQuery("#Lista").filterToolbar({
-        //    stringResult: true, searchOnEnter: true,
-        //    defaultSearch: 'cn',
-        //    enableClear: false
-        //});
-        
+        jQuery("#Lista").filterToolbar({
+            stringResult: true, searchOnEnter: true,
+            defaultSearch: 'cn',
+            enableClear: false
+        });
+
         // si queres sacar el enableClear, definilo en las searchoptions de la columna específica http://www.trirand.com/blog/?page_id=393/help/clearing-the-clear-icon-in-a-filtertoolbar/
 
 
