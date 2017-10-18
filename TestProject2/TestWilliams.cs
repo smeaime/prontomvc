@@ -963,11 +963,11 @@ Error in: https://prontoweb.williamsentregas.com.ar/ProntoWeb/CDPFacturacion.asp
             var scEF = Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC));
             DemoProntoEntities db = new DemoProntoEntities(scEF);
 
+            List<int> lista_int = new List<int>();
 
 
 
-
-            for (int n = 1372900; n < 1372999; n++)
+            for (int n = 1372900; n < 1372930; n++)
             {
                 var cp = (from i in db.CartasDePortes where i.IdCartaDePorte == n select i).Single();
                 cp.TarifaFacturada = Convert.ToDecimal(2.77);
@@ -978,13 +978,14 @@ Error in: https://prontoweb.williamsentregas.com.ar/ProntoWeb/CDPFacturacion.asp
                 // CartaDePorteManager.Save(SC, c, 2, "", false, ref ms);
 
                 lote.Add(c);
+                lista_int.Add(n);
             }
 
 
             IEnumerable<LogicaFacturacion.grup> imputaciones = null;
 
 
-
+            
 
             //var f = db.Facturas.Find(idFactura);
 
@@ -992,8 +993,11 @@ Error in: https://prontoweb.williamsentregas.com.ar/ProntoWeb/CDPFacturacion.asp
             //Assert.AreEqual(0, f.RetencionIBrutos1);
 
             object primerId = 0, ultimoId = 0;
-            object pag = 1, sesionId = 0;
-
+            object pag = 1;
+            
+            // uso dos tickets: uno el de la grilla. el otro, de qué?
+            object sesionId = 0; 
+            string sesionIdposta= (new Random()).Next().ToString();
 
 
             var gv = new System.Web.UI.WebControls.GridView();
@@ -1001,11 +1005,23 @@ Error in: https://prontoweb.williamsentregas.com.ar/ProntoWeb/CDPFacturacion.asp
             string errLog = "";
             object filas = "", slinks = "";
 
-            var desde = new DateTime(2017, 1, 1);
-            var hasta = new DateTime(2017, 1, 31);
+            
+            
+            //no importa las fechas, lo importante son las tildes de la grilla
+            var desde = DateTime.MinValue;
+            var hasta = DateTime.MaxValue; // new DateTime(2017, 1, 31);
 
 
             System.Web.SessionState.HttpSessionState Session = null; // new System.Web.SessionState.HttpSessionState();
+
+
+
+
+            //marcar las cartas en wGrillaPersistencia
+            //lote.Select(x => x.IdCartaDePorte)
+            LogicaFacturacion.GridCheckboxPersistenciaBulk(SC, sesionIdposta, lista_int);
+
+
 
             //DataTable tablaEditadaDeFacturasParaGenerar = dtDatasourcePaso2() // es casi un wrapper. esto lo puedo reemplazar con la llamada mas directa a GetDatatableAsignacionAutomatica
 
@@ -1021,7 +1037,7 @@ Error in: https://prontoweb.williamsentregas.com.ar/ProntoWeb/CDPFacturacion.asp
                                                      "", "",
                                                      0, 0, "", ref errLog,
                                                      "", "",
-                                                     ref filas, ref slinks, sesionId.ToString());
+                                                     ref filas, ref slinks, sesionIdposta);
 
 
 
@@ -1091,9 +1107,9 @@ Error in: https://prontoweb.williamsentregas.com.ar/ProntoWeb/CDPFacturacion.asp
             var s = new ServicioCartaPorte.servi();
             var sqlquery4 = s.ControlesDiarios_DynamicGridData_ExcelExportacion_UsandoInternalQuery(SC, "Fecha", "desc", 1, 999999, true, filtro, "", "", 0, 0, "");
 
+            // la internalQuery no me está trayendo la descripcion del destino (para la exportacion de movimientos estabas usando una view...)
 
-
-            CartaDePorteManager.RebindReportViewer_ServidorExcel(ref ReporteLocal, "Carta Porte - Buques.rdl", sqlquery4, SC, false, ref output);
+            CartaDePorteManager.RebindReportViewer_ServidorExcel(ref ReporteLocal, "Carta Porte - ControlesDiarios.rdl", sqlquery4, SC, false, ref output);
 
 
             System.Diagnostics.Process.Start(output);
