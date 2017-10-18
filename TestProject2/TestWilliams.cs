@@ -1141,6 +1141,9 @@ Error in: https://prontoweb.williamsentregas.com.ar/ProntoWeb/CDPFacturacion.asp
         public void listado_con_tipo_de_movimiento_42551()
         {
 
+            //'acá (pagina CartaDePorteInformesConReportViewerSincronismos) la pagina tiene 3 updatepanels separados.
+            //'en cambio, en la pagina de clientes (CartaDePorteInformesAccesoClientes), donde el informe servidor funciona, el updatepanel de filtros esta metido en otro que contiene al informe.
+
 
 
             string usuario = "DIAZDOW";
