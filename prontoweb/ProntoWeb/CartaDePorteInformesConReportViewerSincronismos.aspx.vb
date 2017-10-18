@@ -3312,7 +3312,7 @@ Partial Class CartaDePorteInformesConReportViewerSincronismos
                 Case "Listado general de Cartas de Porte - Con tipo de movimiento"
 
                     ProntoFuncionesUIWeb.RebindReportViewer(ReportViewer2,
-                                    "ProntoWeb\Informes\Listado general de Cartas de Porte (simulando original) .rdl",
+                                    "ProntoWeb\Informes\Listado general de Cartas de Porte (simulando original) - Con tipo de movimiento.rdl",
                                             dt, Nothing, , , sTitulo)
 
 

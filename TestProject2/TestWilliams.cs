@@ -1101,10 +1101,7 @@ Error in: https://prontoweb.williamsentregas.com.ar/ProntoWeb/CDPFacturacion.asp
 
 
 
-
-
-
-
+        
 
         [TestMethod]
         public void InformeControlDiario_42972_AKA_estadisticas_de_descargas()
@@ -1138,12 +1135,12 @@ Error in: https://prontoweb.williamsentregas.com.ar/ProntoWeb/CDPFacturacion.asp
 
 
         [TestMethod]
-        public void listado_con_tipo_de_movimiento_42551()
+        public void listado_con_tipo_de_movimiento_42551_reportviewerylosupdatepanels()
         {
 
             //'acá (pagina CartaDePorteInformesConReportViewerSincronismos) la pagina tiene 3 updatepanels separados.
             //'en cambio, en la pagina de clientes (CartaDePorteInformesAccesoClientes), donde el informe servidor funciona, el updatepanel de filtros esta metido en otro que contiene al informe.
-
+            //-por ahora no lo pude resolver porq no tengo tiempo
 
 
             string usuario = "DIAZDOW";
@@ -1189,7 +1186,7 @@ Error in: https://prontoweb.williamsentregas.com.ar/ProntoWeb/CDPFacturacion.asp
             yourParams[8] = new ReportParameter("sServidorSQL", ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC));
             yourParams[9] = new ReportParameter("titulo", "ghkj");
             string sss = CartaDePorteManager.RebindReportViewer_ServidorExcel(ref ReporteLocal,
-                        @"Listado general de Cartas de Porte (simulando original) con foto 2", yourParams, ref output, false);
+                        @"Listado general de Cartas de Porte (simulando original) - Con tipo de movimiento.rdl", yourParams, ref output, false);
 
 
 
@@ -1224,7 +1221,7 @@ Error in: https://prontoweb.williamsentregas.com.ar/ProntoWeb/CDPFacturacion.asp
 
             int registrosf = 0;
 
-            int idcli = CartaDePorteManager.BuscarVendedorPorCUIT("30-71544287-2", SC, "");
+            int idcli = CartaDePorteManager.BuscarVendedorPorCUIT("30 -71544287-2", SC, "");
 
 
             var output = SincronismosWilliamsManager.GenerarSincro("Terra Verde", ref sErrores, SC, "dominio", ref sTitulo
