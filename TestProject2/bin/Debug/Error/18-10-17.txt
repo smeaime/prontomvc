@@ -9,3 +9,38 @@ Error in: . Error Message:Microsoft.Reporting.WebForms.ReportServerException: No
    en Microsoft.Reporting.WebForms.ServerReport.SetParameters(IEnumerable`1 parameters)
    en CartaDePorteManager.RebindReportViewer_ServidorExcel(ReportViewer& oReportViewer, String rdlFile, IEnumerable`1 parametros, String& ArchivoExcelDestino, Boolean bDescargaHtml) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 5193
 __________________________
+
+Log Entry : 
+10/18/2017 17:32:19
+Error in: . Error Message:Por generar el archivo C:\Users\Administrador\Downloads\Informe18oct.2017_173201.xls
+__________________________
+
+Log Entry : 
+10/18/2017 17:32:19
+Error in: . Error Message:System.IO.DirectoryNotFoundException: No se puede encontrar una parte de la ruta de acceso 'C:\Users\Administrador\Downloads\Informe18oct.2017_173201.xls'.
+   en System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   en System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   en System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy)
+   en System.IO.FileStream..ctor(String path, FileMode mode)
+   en CartaDePorteManager.RebindReportViewer_ServidorExcel(ReportViewer& oReportViewer, String rdlFile, String strSQL, String SC, Boolean bDescargaExcel, String& ArchivoExcelDestino, String titulo, Boolean bDescargaHtml) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 5589
+__________________________
+
+Log Entry : 
+10/18/2017 17:41:52
+Error in: . Error Message:Por generar el archivo C:\Users\Administrador\Downloads\Informe18oct.2017_174121.xls
+__________________________
+
+Log Entry : 
+10/18/2017 17:42:48
+Error in: . Error Message:Por generar el archivo C:\Users\Administrador\Downloads\Informe18oct2017_174121.xls
+__________________________
+
+Log Entry : 
+10/18/2017 17:44:07
+Error in: . Error Message:Por generar el archivo C:\Users\Mariano\Downloads\Informe18oct.2017_174345.xls
+__________________________
+
+Log Entry : 
+10/18/2017 17:44:12
+Error in: . Error Message:Archivo generado C:\Users\Mariano\Downloads\Informe18oct.2017_174345.xls
+__________________________
