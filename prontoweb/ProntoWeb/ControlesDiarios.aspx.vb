@@ -105,6 +105,51 @@ Partial Class ControlesDiarios
 
 
 
+
+    <WebMethod()>
+    <System.Web.Script.Services.ScriptMethod(ResponseFormat:=System.Web.Script.Services.ResponseFormat.Json)>
+    Public Shared Function ExportarGrillaNormal(filters As String, fechadesde As String, fechahasta As String, destino As String) As String
+
+        Dim SC As String
+        If Not Diagnostics.Debugger.IsAttached Then
+            'SC = Encriptar("Data Source=10.2.64.30;Initial catalog=Williams;User ID=pronto; Password=MeDuV8NSlxRlnYxhMFL3;Connect Timeout=200")
+            SC = Encriptar(scWilliamsRelease())
+            'dddddd()
+        Else
+            SC = Encriptar("Data Source=serversql3;Initial catalog=Williams;User ID=sa; Password=.SistemaPronto.;Connect Timeout=200")
+        End If
+
+
+        Dim idDestino = BuscaIdWilliamsDestinoPreciso(destino, SC)
+
+        Dim output As String = "\DataBackupear\Listado " + DateTime.Now.ToString("ddMMMyyyy_HHmmss") + ".xls"
+        Dim fisico As String = ConfigurationManager.AppSettings("DirApp") + output
+        Dim url As String = ConfigurationManager.AppSettings("UrlDominio").ToString + output
+
+
+
+
+        Dim ReporteLocal As ReportViewer = New Microsoft.Reporting.WebForms.ReportViewer()
+
+
+        Dim s = New ServicioCartaPorte.servi()
+
+        Dim sqlquery4 = s.ControlesDiarios_DynamicGridData_ExcelExportacion_UsandoInternalQuery(SC, "Fecha", "desc", 1, 999999, True, filtro, "", "", 0, 0, "")
+
+
+
+        CartaDePorteManager.RebindReportViewer_ServidorExcel(ReporteLocal, "Carta Porte - ControlesDiarios.rdl", sqlquery4, SC, False, fisico)
+
+
+        Return url
+    End Function
+
+
+
+
+
+
+
     Private Sub BindTypeDropDown()
 
 
