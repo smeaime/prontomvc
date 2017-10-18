@@ -327,7 +327,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                 $.ajax({
                     type: "POST",
                     //method: "POST",
-                    url: "CDPStockMovimientos.aspx/ExportarGrillaNormal",
+                    url: "ControlesDiarios.aspx/ExportarGrillaNormal",
                     dataType: "json",
                     contentType: "application/json; charset=utf-8",
 
