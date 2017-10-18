@@ -4069,7 +4069,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value />
+                                  <Value>=Fields!IdTipoMovimiento.Value</Value>
                                   <Style>
                                     <FontSize>8pt</FontSize>
                                     <Color>#4d4d4d</Color>
