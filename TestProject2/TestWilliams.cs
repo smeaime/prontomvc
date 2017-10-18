@@ -1076,7 +1076,7 @@ Error in: https://prontoweb.williamsentregas.com.ar/ProntoWeb/CDPFacturacion.asp
 
 
             string filtro = ""; // "{\"groupOp\":\"OR\",\"rules\":[{\"field\":\"DestinoDesc\",\"op\":\"eq\",\"data\":\"MOL. CAÑUELAS - ZARATE\"},{\"field\":\"DestinoDesc\",\"op\":\"eq\",\"data\":\"TERMINAL 6\"}]}";
-            string output = @"C:\Users\Administrador\Downloads\Informe" + DateTime.Now.ToString("ddMMMyyyy_HHmmss") + ".xls";
+            string output = @"C:\Users\Mariano\Downloads\Informe" + DateTime.Now.ToString("ddMMMyyyy_HHmmss") + ".xls";
 
             var scEF = ProntoMVC.Data.Models.Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC));
             DemoProntoEntities db = new DemoProntoEntities(scEF);
