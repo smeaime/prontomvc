@@ -1,0 +1,380 @@
+
+Log Entry : 
+10/18/2017 11:14:02
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx. Error Message:RODRIGORIOS esta logueado, pero lo redirijo al login porque faltan los datos de session. No deberia mejor mandarlo a SeleccionarEmpresa? Ademas, no hago el LogOut y le queda el cookie!!!
+__________________________
+
+Log Entry : 
+10/18/2017 11:14:03
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartaDePorteInformesConReportViewerSincronismos.BindTypeDropDown() en C:\bdl\pronto\prontoweb\ProntoWeb\CartaDePorteInformesConReportViewerSincronismos.aspx.vb:línea 2946
+App_Web_cartadeporteinformesconreportviewersincronismos.aspx.4199bbd4.he7wa1iu
+__________________________
+
+Log Entry : 
+10/18/2017 11:15:54
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesAccesoClientes.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartaDePorteInformesAccesoClientes.BindTypeDropDown() en C:\bdl\pronto\prontoweb\ProntoWeb\CartaDePorteInformesAccesoClientes.aspx.vb:línea 268
+App_Web_cartadeporteinformesaccesoclientes.aspx.4199bbd4.n1_jmunt
+__________________________
+
+Log Entry : 
+10/18/2017 11:16:08
+Error in: http://localhost:50769/ProntoWeb/CartasDePortes.aspx?tipo=Todas. Error Message:Mariano
+__________________________
+
+Log Entry : 
+10/18/2017 11:16:23
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Generando informe para Listado general de Cartas de Porte - Con tipo de movimiento
+__________________________
+
+Log Entry : 
+10/18/2017 11:17:04
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Generando informe para Listado general de Cartas de Porte - Con tipo de movimiento
+__________________________
+
+Log Entry : 
+10/18/2017 11:17:21
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Generando informe para Listado general de Cartas de Porte - Con tipo de movimiento
+__________________________
+
+Log Entry : 
+10/18/2017 11:17:54
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx. Error Message:Mariano esta logueado, pero lo redirijo al login porque faltan los datos de session. No deberia mejor mandarlo a SeleccionarEmpresa? Ademas, no hago el LogOut y le queda el cookie!!!
+__________________________
+
+Log Entry : 
+10/18/2017 11:18:00
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Generando informe para Listado general de Cartas de Porte - Con tipo de movimiento
+__________________________
+
+Log Entry : 
+10/18/2017 11:18:07
+Error in: http://localhost:50769/Reserved.ReportViewerWebControl.axd?OpType=SessionKeepAlive&ControlID=ec0dd05a01564a918283fbbd7abaf147&Mode=true. Error Message:Microsoft.Reporting.WebForms.AspNetSessionExpiredException
+ASP.NET session has expired or could not be found
+   en Microsoft.Reporting.WebForms.ViewerDataOperation..ctor()
+   en Microsoft.Reporting.WebForms.HttpHandler.GetHandler(String operationType)
+   en Microsoft.Reporting.WebForms.HttpHandler.ProcessRequest(HttpContext context)
+   en System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   en System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+Microsoft.ReportViewer.WebForms
+__________________________
+
+Log Entry : 
+10/18/2017 11:18:10
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Generando informe para Listado general de Cartas de Porte - Con tipo de movimiento
+__________________________
+
+Log Entry : 
+10/18/2017 11:18:16
+Error in: http://localhost:50769/Reserved.ReportViewerWebControl.axd?OpType=SessionKeepAlive&ControlID=ec0dd05a01564a918283fbbd7abaf147&Mode=true. Error Message:Microsoft.Reporting.WebForms.AspNetSessionExpiredException
+ASP.NET session has expired or could not be found
+   en Microsoft.Reporting.WebForms.ViewerDataOperation..ctor()
+   en Microsoft.Reporting.WebForms.HttpHandler.GetHandler(String operationType)
+   en Microsoft.Reporting.WebForms.HttpHandler.ProcessRequest(HttpContext context)
+   en System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   en System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+Microsoft.ReportViewer.WebForms
+__________________________
+
+Log Entry : 
+10/18/2017 11:18:22
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Generando informe para Listado general de Cartas de Porte - Con tipo de movimiento
+__________________________
+
+Log Entry : 
+10/18/2017 11:18:27
+Error in: http://localhost:50769/Reserved.ReportViewerWebControl.axd?OpType=SessionKeepAlive&ControlID=ec0dd05a01564a918283fbbd7abaf147&Mode=true. Error Message:Microsoft.Reporting.WebForms.AspNetSessionExpiredException
+ASP.NET session has expired or could not be found
+   en Microsoft.Reporting.WebForms.ViewerDataOperation..ctor()
+   en Microsoft.Reporting.WebForms.HttpHandler.GetHandler(String operationType)
+   en Microsoft.Reporting.WebForms.HttpHandler.ProcessRequest(HttpContext context)
+   en System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   en System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+Microsoft.ReportViewer.WebForms
+__________________________
+
+Log Entry : 
+10/18/2017 11:18:35
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Generando informe para Listado general de Cartas de Porte - Con tipo de movimiento
+__________________________
+
+Log Entry : 
+10/18/2017 11:18:40
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Generando informe para Listado general de Cartas de Porte - Con tipo de movimiento
+__________________________
+
+Log Entry : 
+10/18/2017 11:18:43
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Generando informe para Listado general de Cartas de Porte - Con tipo de movimiento
+__________________________
+
+Log Entry : 
+10/18/2017 11:19:20
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Generando informe para Listado general de Cartas de Porte - Con tipo de movimiento
+__________________________
+
+Log Entry : 
+10/18/2017 11:31:34
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx. Error Message:Mariano esta logueado, pero lo redirijo al login porque faltan los datos de session. No deberia mejor mandarlo a SeleccionarEmpresa? Ademas, no hago el LogOut y le queda el cookie!!!
+__________________________
+
+Log Entry : 
+10/18/2017 11:34:49
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Generando informe para Listado general de Cartas de Porte - Con tipo de movimiento
+__________________________
+
+Log Entry : 
+10/18/2017 11:35:07
+Error in: http://localhost:50769/ProntoWeb/Principal.aspx. Error Message:Mariano esta logueado, pero lo redirijo al login porque faltan los datos de session. No deberia mejor mandarlo a SeleccionarEmpresa? Ademas, no hago el LogOut y le queda el cookie!!!
+__________________________
+
+Log Entry : 
+10/18/2017 11:35:08
+Error in: http://localhost:50769/ProntoWeb/CartasDePortes.aspx?tipo=Todas. Error Message:Mariano
+__________________________
+
+Log Entry : 
+10/18/2017 11:35:19
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx. Error Message:Generando informe para Listado general de Cartas de Porte - Con tipo de movimiento
+__________________________
+
+Log Entry : 
+10/18/2017 11:35:25
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx. Error Message:Generando informe para Listado general de Cartas de Porte - Con tipo de movimiento
+__________________________
+
+Log Entry : 
+10/18/2017 11:35:32
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx. Error Message:Generando informe para Listado general de Cartas de Porte - Con tipo de movimiento
+__________________________
+
+Log Entry : 
+10/18/2017 11:35:55
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx. Error Message:Generando informe para Listado general de Cartas de Porte - Con tipo de movimiento
+__________________________
+
+Log Entry : 
+10/18/2017 11:41:27
+Error in: http://localhost:50769/ProntoWeb/Principal.aspx. Error Message:Mariano esta logueado, pero lo redirijo al login porque faltan los datos de session. No deberia mejor mandarlo a SeleccionarEmpresa? Ademas, no hago el LogOut y le queda el cookie!!!
+__________________________
+
+Log Entry : 
+10/18/2017 11:41:28
+Error in: http://localhost:50769/ProntoWeb/CartasDePortes.aspx?tipo=Todas. Error Message:Mariano
+__________________________
+
+Log Entry : 
+10/18/2017 11:41:34
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx. Error Message:Generando informe para Listado general de Cartas de Porte - Con tipo de movimiento
+__________________________
+
+Log Entry : 
+10/18/2017 11:41:39
+Error in: http://localhost:50769/Reserved.ReportViewerWebControl.axd?OpType=SessionKeepAlive&ControlID=39150f1a28b946408dd39c698c052bb7&Mode=true. Error Message:Microsoft.Reporting.WebForms.AspNetSessionExpiredException
+ASP.NET session has expired or could not be found
+   en Microsoft.Reporting.WebForms.ViewerDataOperation..ctor()
+   en Microsoft.Reporting.WebForms.HttpHandler.GetHandler(String operationType)
+   en Microsoft.Reporting.WebForms.HttpHandler.ProcessRequest(HttpContext context)
+   en System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   en System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+Microsoft.ReportViewer.WebForms
+__________________________
+
+Log Entry : 
+10/18/2017 11:41:41
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx. Error Message:Generando informe para Listado general de Cartas de Porte - Con tipo de movimiento
+__________________________
+
+Log Entry : 
+10/18/2017 11:41:43
+Error in: http://localhost:50769/Reserved.ReportViewerWebControl.axd?OpType=SessionKeepAlive&ControlID=39150f1a28b946408dd39c698c052bb7&Mode=true. Error Message:Microsoft.Reporting.WebForms.AspNetSessionExpiredException
+ASP.NET session has expired or could not be found
+   en Microsoft.Reporting.WebForms.ViewerDataOperation..ctor()
+   en Microsoft.Reporting.WebForms.HttpHandler.GetHandler(String operationType)
+   en Microsoft.Reporting.WebForms.HttpHandler.ProcessRequest(HttpContext context)
+   en System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   en System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+Microsoft.ReportViewer.WebForms
+__________________________
+
+Log Entry : 
+10/18/2017 11:41:46
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx. Error Message:Generando informe para Listado general de Cartas de Porte - Con tipo de movimiento
+__________________________
+
+Log Entry : 
+10/18/2017 11:41:48
+Error in: http://localhost:50769/Reserved.ReportViewerWebControl.axd?OpType=SessionKeepAlive&ControlID=39150f1a28b946408dd39c698c052bb7&Mode=true. Error Message:Microsoft.Reporting.WebForms.AspNetSessionExpiredException
+ASP.NET session has expired or could not be found
+   en Microsoft.Reporting.WebForms.ViewerDataOperation..ctor()
+   en Microsoft.Reporting.WebForms.HttpHandler.GetHandler(String operationType)
+   en Microsoft.Reporting.WebForms.HttpHandler.ProcessRequest(HttpContext context)
+   en System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   en System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+Microsoft.ReportViewer.WebForms
+__________________________
+
+Log Entry : 
+10/18/2017 11:41:50
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx. Error Message:Generando informe para Listado general de Cartas de Porte - Con tipo de movimiento
+__________________________
+
+Log Entry : 
+10/18/2017 11:41:52
+Error in: http://localhost:50769/Reserved.ReportViewerWebControl.axd?OpType=SessionKeepAlive&ControlID=39150f1a28b946408dd39c698c052bb7&Mode=true. Error Message:Microsoft.Reporting.WebForms.AspNetSessionExpiredException
+ASP.NET session has expired or could not be found
+   en Microsoft.Reporting.WebForms.ViewerDataOperation..ctor()
+   en Microsoft.Reporting.WebForms.HttpHandler.GetHandler(String operationType)
+   en Microsoft.Reporting.WebForms.HttpHandler.ProcessRequest(HttpContext context)
+   en System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   en System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+Microsoft.ReportViewer.WebForms
+__________________________
+
+Log Entry : 
+10/18/2017 11:42:14
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Generando informe para Listado general de cartas de porte (solo originales)
+__________________________
+
+Log Entry : 
+10/18/2017 11:42:15
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:  Informe: Todas (menos las rechazadas),  del 17/10/2017 al 17/10/2017           (Exporta: Entregas, Punto de venta: Todos, Criterio: ALGUNOS)
+__________________________
+
+Log Entry : 
+10/18/2017 11:42:25
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Generando informe para Listado general de Cartas de Porte - Con tipo de movimiento
+__________________________
+
+Log Entry : 
+10/18/2017 11:42:28
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Generando informe para Listado general de Cartas de Porte - Con tipo de movimiento
+__________________________
+
+Log Entry : 
+10/18/2017 11:42:29
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Generando informe para Listado general de Cartas de Porte - Con tipo de movimiento
+__________________________
+
+Log Entry : 
+10/18/2017 11:44:57
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Generando informe para Listado general de Cartas de Porte - Con tipo de movimiento
+__________________________
+
+Log Entry : 
+10/18/2017 11:45:08
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Generando informe para Listado general de Cartas de Porte - Con tipo de movimiento
+__________________________
+
+Log Entry : 
+10/18/2017 11:46:34
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx. Error Message:Mariano esta logueado, pero lo redirijo al login porque faltan los datos de session. No deberia mejor mandarlo a SeleccionarEmpresa? Ademas, no hago el LogOut y le queda el cookie!!!
+__________________________
+
+Log Entry : 
+10/18/2017 11:53:18
+Error in: http://localhost:50769/Reserved.ReportViewerWebControl.axd?OpType=SessionKeepAlive&ControlID=9845d7be110040bd83ca490488744189. Error Message:Microsoft.Reporting.WebForms.AspNetSessionExpiredException
+ASP.NET session has expired or could not be found
+   en Microsoft.Reporting.WebForms.ViewerDataOperation..ctor()
+   en Microsoft.Reporting.WebForms.HttpHandler.GetHandler(String operationType)
+   en Microsoft.Reporting.WebForms.HttpHandler.ProcessRequest(HttpContext context)
+   en System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   en System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+Microsoft.ReportViewer.WebForms
+__________________________
+
+Log Entry : 
+10/18/2017 12:47:25
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Generando informe para Listado general de Cartas de Porte - Con tipo de movimiento
+__________________________
+
+Log Entry : 
+10/18/2017 12:48:36
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Generando informe para Listado general de Cartas de Porte - Con tipo de movimiento
+__________________________
+
+Log Entry : 
+10/18/2017 12:49:40
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:System.Web.HttpParseException
+No se puede crear un objeto de tipo 'System.Web.UI.UpdatePanelUpdateMode' a partir de su representación de cadena '' para la propiedad 'UpdateMode'.
+   en System.Web.UI.TemplateParser.ProcessException(Exception ex)
+   en System.Web.UI.TemplateParser.ParseStringInternal(String text, Encoding fileEncoding)
+   en System.Web.UI.TemplateParser.ParseString(String text, VirtualPath virtualPath, Encoding fileEncoding)
+System.Web
+__________________________
+
+Log Entry : 
+10/18/2017 12:49:52
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Generando informe para Listado general de Cartas de Porte - Con tipo de movimiento
+__________________________
+
+Log Entry : 
+10/18/2017 12:49:57
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Hubo un error al generar el informe. Listado general de Cartas de Porte - Con tipo de movimiento System.InvalidOperationException: El método Update sólo se puede llamar en el control UpdatePanel con el id. 'UpdatePanel2' cuando UpdateMode está establecido en Conditional.
+   en System.Web.UI.UpdatePanel.Update()
+   en CartaDePorteInformesConReportViewerSincronismos.AsignaInformeAlReportViewer(Boolean bDescargaExcel) en C:\bdl\pronto\prontoweb\ProntoWeb\CartaDePorteInformesConReportViewerSincronismos.aspx.vb:línea 3343
+__________________________
+
+Log Entry : 
+10/18/2017 12:49:57
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Hubo un error al generar el informe. Listado general de Cartas de Porte - Con tipo de movimiento System.InvalidOperationException: El método Update sólo se puede llamar en el control UpdatePanel con el id. 'UpdatePanel2' cuando UpdateMode está establecido en Conditional.
+   en System.Web.UI.UpdatePanel.Update()
+   en CartaDePorteInformesConReportViewerSincronismos.AsignaInformeAlReportViewer(Boolean bDescargaExcel) en C:\bdl\pronto\prontoweb\ProntoWeb\CartaDePorteInformesConReportViewerSincronismos.aspx.vb:línea 3343
+__________________________
+
+Log Entry : 
+10/18/2017 12:50:20
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Generando informe para Listado general de Cartas de Porte - Con tipo de movimiento
+__________________________
+
+Log Entry : 
+10/18/2017 12:50:51
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Generando informe para Listado general de Cartas de Porte - Con tipo de movimiento
+__________________________
+
+Log Entry : 
+10/18/2017 12:54:07
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Generando informe para Listado general de Cartas de Porte - Con tipo de movimiento
+__________________________
+
+Log Entry : 
+10/18/2017 12:54:22
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Generando informe para Listado general de Cartas de Porte - Con tipo de movimiento
+__________________________
+
+Log Entry : 
+10/18/2017 13:47:11
+Error in: http://localhost:50769/Reserved.ReportViewerWebControl.axd?OpType=SessionKeepAlive&ControlID=9845d7be110040bd83ca490488744189. Error Message:Microsoft.Reporting.WebForms.AspNetSessionExpiredException
+ASP.NET session has expired or could not be found
+   en Microsoft.Reporting.WebForms.ViewerDataOperation..ctor()
+   en Microsoft.Reporting.WebForms.HttpHandler.GetHandler(String operationType)
+   en Microsoft.Reporting.WebForms.HttpHandler.ProcessRequest(HttpContext context)
+   en System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   en System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+Microsoft.ReportViewer.WebForms
+__________________________
+
+Log Entry : 
+10/18/2017 13:47:11
+Error in: http://localhost:50769/Reserved.ReportViewerWebControl.axd?OpType=SessionKeepAlive&ControlID=9845d7be110040bd83ca490488744189. Error Message:error del AspNetSessionExpiredException
+__________________________
+
+Log Entry : 
+10/18/2017 13:47:47
+Error in: http://localhost:50769/Reserved.ReportViewerWebControl.axd?OpType=SessionKeepAlive&ControlID=b472a96241f44b5786d95cf794f44fac. Error Message:Microsoft.Reporting.WebForms.AspNetSessionExpiredException
+ASP.NET session has expired or could not be found
+   en Microsoft.Reporting.WebForms.ViewerDataOperation..ctor()
+   en Microsoft.Reporting.WebForms.HttpHandler.GetHandler(String operationType)
+   en Microsoft.Reporting.WebForms.HttpHandler.ProcessRequest(HttpContext context)
+   en System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   en System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+Microsoft.ReportViewer.WebForms
+__________________________
+
+Log Entry : 
+10/18/2017 13:47:47
+Error in: http://localhost:50769/Reserved.ReportViewerWebControl.axd?OpType=SessionKeepAlive&ControlID=b472a96241f44b5786d95cf794f44fac. Error Message:error del AspNetSessionExpiredException
+__________________________
