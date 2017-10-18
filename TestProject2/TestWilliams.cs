@@ -1089,7 +1089,7 @@ Error in: https://prontoweb.williamsentregas.com.ar/ProntoWeb/CDPFacturacion.asp
 
 
             var s = new ServicioCartaPorte.servi();
-            var sqlquery4 = s.CDPMovimientos_DynamicGridData_ExcelExportacion_UsandoInternalQuery(SC, "IdCDPMovimiento", "desc", 1, 999999, true, filtro);
+            var sqlquery4 = s.ControlesDiarios_DynamicGridData_ExcelExportacion_UsandoInternalQuery(SC, "Fecha", "desc", 1, 999999, true, filtro, "", "", 0, 0, "");
 
 
 
@@ -1101,7 +1101,7 @@ Error in: https://prontoweb.williamsentregas.com.ar/ProntoWeb/CDPFacturacion.asp
 
 
 
-        
+
 
         [TestMethod]
         public void InformeControlDiario_42972_AKA_estadisticas_de_descargas()
@@ -1332,7 +1332,7 @@ Error in: https://prontoweb.williamsentregas.com.ar/ProntoWeb/CDPFacturacion.asp
             var scEF = ProntoMVC.Data.Models.Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC));
             BDLMasterEntities dbmaster = new BDLMasterEntities(Auxiliares.FormatearConexParaEntityFrameworkBDLMASTER_2(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(scbdlmasterappconfig)));
             DemoProntoEntities db = new DemoProntoEntities(scEF);
-            DateTime UltimaFechaDeEnvioNotificaciones = new DateTime(2016, 8,31);
+            DateTime UltimaFechaDeEnvioNotificaciones = new DateTime(2016, 8, 31);
 
             var q = (
                     from x in db.CartasDePortes
@@ -1341,7 +1341,7 @@ Error in: https://prontoweb.williamsentregas.com.ar/ProntoWeb/CDPFacturacion.asp
                     where (x.FechaModificacion > UltimaFechaDeEnvioNotificaciones)
                     select new string[] { c1.Email, c2.Email }
                     )
-                    .SelectMany(x=> x)
+                    .SelectMany(x => x)
                     .Distinct();
 
 
@@ -1351,7 +1351,7 @@ Error in: https://prontoweb.williamsentregas.com.ar/ProntoWeb/CDPFacturacion.asp
             var usuariosclientes = from p in dbmaster.UserDatosExtendidos
                                    join u in dbmaster.aspnet_Users on p.UserId equals u.UserId
                                    join m in dbmaster.aspnet_Membership on p.UserId equals m.UserId
-                                   select new { p.RazonSocial, m.Email } ;
+                                   select new { p.RazonSocial, m.Email };
 
 
 

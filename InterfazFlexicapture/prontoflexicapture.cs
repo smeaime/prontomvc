@@ -5233,6 +5233,9 @@ Formato localidad-provincia	destination	x
             return jsonData;
         }
 
+
+
+
         public virtual string CDPMovimientos_DynamicGridData_ExcelExportacion_UsandoInternalQuery(string SC, string sidx, string sord, int page, int rows, bool _search, string filters)
         {
             //asdad
@@ -5329,6 +5332,280 @@ Formato localidad-provincia	destination	x
             return sqlquery4;
 
         }
+
+
+
+
+
+
+        public virtual string ControlesDiarios_DynamicGridData(string sidx, string sord, int page, int rows, bool _search, string filters, string FechaInicial, string FechaFinal, int puntovent, int iddestino, string SC, string nombreusuario)
+        {
+
+            System.Data.DataTable dt = EntidadManager.ExecDinamico(SC, "Empleados_TX_UsuarioNT '" + nombreusuario + "'");
+            int idUsuario = Convert.ToInt32(dt.Rows[0][0]);
+            // int puntovent = EmpleadoManager.GetItem(SC, idUsuario).PuntoVentaAsociado;
+
+
+            DateTime FechaDesde = new DateTime(1980, 1, 1);
+            DateTime FechaHasta = new DateTime(2050, 1, 1);
+
+            try
+            {
+
+                FechaDesde = DateTime.ParseExact(FechaInicial, "dd/MM/yyyy", null);
+            }
+            catch (Exception)
+            {
+
+            }
+
+            try
+            {
+                FechaHasta = DateTime.ParseExact(FechaFinal, "dd/MM/yyyy", null);
+
+            }
+            catch (Exception)
+            {
+
+            }
+
+
+
+
+
+            ProntoMVC.Data.Models.DemoProntoEntities db =
+                               new DemoProntoEntities(
+                                   Auxiliares.FormatearConexParaEntityFramework(
+                                   ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC)));
+
+
+
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+            int totalRecords = 0;
+
+
+            var pagedQuery = Filtrador.Filters.FiltroGenerico_UsandoIQueryable<CartasDePorteControlDescarga>
+                            (sidx, sord, page, rows, _search, filters, db, ref totalRecords,
+                                    db.CartasDePorteControlDescargas
+                                            .Where(x =>
+                                                    //(x.IdPuntoVenta == puntovent || puntovent == 0)
+                                                    //&&
+                                                    (x.Fecha >= FechaDesde && x.Fecha <= FechaHasta)
+                                                     &&
+                                                    (x.WilliamsDestino.PuntoVenta == puntovent || puntovent <= 0)
+                                                     &&
+                                                    (x.WilliamsDestino.IdWilliamsDestino == iddestino || iddestino <= 0)
+                                                 )
+                                            );
+
+
+
+            // var pagedQuery = Filtrador.Filters.FiltroGenerico<CartasDePorteControlDescarga>
+            //                    ("", sidx, sord, page, rows, _search, filters, db, ref totalRecords);
+
+
+
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+            string campo = "true";
+            int pageSize = rows;
+            int currentPage = page;
+
+
+            //if (sidx == "Numero") sidx = "NumeroPedido"; // como estoy haciendo "select a" (el renglon entero) en la linq antes de llamar jqGridJson, no pude ponerle el nombre explicito
+            //if (searchField == "Numero") searchField = "NumeroPedido"; 
+
+            var Entidad = pagedQuery
+                          //.Include(x => x.Moneda)
+                          //.Include(x => x.Proveedor)
+                          //.Include(x => x.DetallePedidos
+                          //            .Select(y => y.DetalleRequerimiento
+                          //                )
+                          //        )
+                          //.Include("DetallePedidos.DetalleRequerimiento.Requerimientos.Obra") // funciona tambien
+                          //.Include(x => x.Comprador)
+                          .AsQueryable();
+
+
+            //var Entidad1 = (from a in Entidad.Where(campo) select new { Id = a.IdCartasDePorteControlDescarga });
+
+            int totalPages = (int)Math.Ceiling((float)totalRecords / (float)pageSize);
+
+            var data = (from a in Entidad
+                        select a
+                        )//.Where(campo).OrderBy(sidx + " " + sord)
+                        .ToList();
+
+            var jsonData = new jqGridJson()
+            {
+                total = totalPages,
+                page = currentPage,
+                records = totalRecords,
+                rows = (from a in data
+                        select new jqGridRowJson
+                        {
+                            id = a.IdCartasDePorteControlDescarga.ToString(),
+                            cell = new string[] {
+                                "", //"<a href="+ Url.Action("Edit",new {id = a.IdPedido} ) + "  >Editar</>" ,
+                                
+                                a.IdCartasDePorteControlDescarga.ToString(),
+
+                                 a.Fecha.ToShortDateString(),
+
+                                a.WilliamsDestino==null ? "" : a.WilliamsDestino.Descripcion,
+
+                                 a.IdDestino.ToString(),
+
+                                 a.TotalDescargaDia.ToString(),
+
+                                 a.IdPuntoVenta.ToString()
+                                 
+                                 
+                                 // a.FechaSalida==null ? "" :  a.FechaSalida.GetValueOrDefault().ToString("dd/MM/yyyy"),
+                                //a.Cumplido.NullSafeToString(), 
+
+
+                                //string.Join(" ",  a.DetallePedidos.Select(x=>(x.DetalleRequerimiento==null) ? "" : 
+                                //                     x.DetalleRequerimiento.Requerimientos == null ? "" :   
+                                //                         x.DetalleRequerimiento.Requerimientos.NumeroRequerimiento.NullSafeToString() ).Distinct()),
+                                //string.Join(" ",  a.DetallePedidos.Select(x=>(x.DetalleRequerimiento==null) ? "" : 
+                                //                        x.DetalleRequerimiento.Requerimientos == null ? ""  :
+                                //                            x.DetalleRequerimiento.Requerimientos.Obra == null ? ""  :
+                                //                             x.DetalleRequerimiento.Requerimientos.Obra.NumeroObra.NullSafeToString()).Distinct()),
+                              
+                                                             
+                                //a.Proveedor==null ? "" :  a.Proveedor.RazonSocial.NullSafeToString(), 
+                                //(a.TotalPedido- a.TotalIva1+a.Bonificacion- (a.ImpuestosInternos ?? 0)- (a.OtrosConceptos1 ?? 0) - (a.OtrosConceptos2 ?? 0)-    (a.OtrosConceptos3 ?? 0) -( a.OtrosConceptos4 ?? 0) - (a.OtrosConceptos5 ?? 0)).ToString(),  
+                                //a.Bonificacion.NullSafeToString(), 
+                                //a.TotalIva1.NullSafeToString(), 
+                                //a.Moneda==null ? "" :   a.Moneda.Abreviatura.NullSafeToString(),  
+                                //a.Comprador==null ? "" :    a.Comprador.Nombre.NullSafeToString(),  
+                                //a.Empleado==null ? "" :  a.Empleado.Nombre.NullSafeToString(),  
+                                //a.DetallePedidos.Count().NullSafeToString(),  
+                                //a.IdPedido.NullSafeToString(), 
+                                //a.NumeroComparativa.NullSafeToString(),  
+                                //a.IdTipoCompraRM.NullSafeToString(), 
+                                //a.Observaciones.NullSafeToString(),   
+                                //a.DetalleCondicionCompra.NullSafeToString(),   
+                                //a.PedidoExterior.NullSafeToString(),  
+                                //a.IdPedidoAbierto.NullSafeToString(), 
+                                //a.NumeroLicitacion .NullSafeToString(), 
+                                //a.Impresa.NullSafeToString(), 
+                                //a.UsuarioAnulacion.NullSafeToString(), 
+                                //a.FechaAnulacion.NullSafeToString(),  
+                                //a.MotivoAnulacion.NullSafeToString(),  
+                                //a.ImpuestosInternos.NullSafeToString(), 
+                                //"", // #Auxiliar1.Equipos , 
+                                //a.CircuitoFirmasCompleto.NullSafeToString(), 
+                                //a.Proveedor==null ? "" : a.Proveedor.IdCodigoIva.NullSafeToString() ,
+                                //a.IdComprador.NullSafeToString(),
+                                //a.IdProveedor.NullSafeToString(),
+                                //a.ConfirmadoPorWeb_1.NullSafeToString()
+                               
+                            }
+                        }).ToArray()
+            };
+
+            //return Json(jsonData, JsonRequestBehavior.AllowGet);
+            System.Web.Script.Serialization.JavaScriptSerializer jsonSerializer = new System.Web.Script.Serialization.JavaScriptSerializer();
+            return jsonSerializer.Serialize(jsonData);
+
+
+        }
+
+
+
+        public virtual string ControlesDiarios_DynamicGridData_ExcelExportacion_UsandoInternalQuery(string SC, string sidx, string sord, int page, int rows, bool _search, 
+                                                    string filters, string FechaInicial, string FechaFinal, int puntovent, int iddestino, string nombreusuario)
+        {
+
+            System.Data.DataTable dt = EntidadManager.ExecDinamico(SC, "Empleados_TX_UsuarioNT '" + nombreusuario + "'");
+            int idUsuario = Convert.ToInt32(dt.Rows[0][0]);
+            // int puntovent = EmpleadoManager.GetItem(SC, idUsuario).PuntoVentaAsociado;
+
+
+            DateTime FechaDesde = new DateTime(1980, 1, 1);
+            DateTime FechaHasta = new DateTime(2050, 1, 1);
+
+            try
+            {
+
+                FechaDesde = DateTime.ParseExact(FechaInicial, "dd/MM/yyyy", null);
+            }
+            catch (Exception)
+            {
+
+            }
+
+            try
+            {
+                FechaHasta = DateTime.ParseExact(FechaFinal, "dd/MM/yyyy", null);
+
+            }
+            catch (Exception)
+            {
+
+            }
+
+
+
+
+
+            ProntoMVC.Data.Models.DemoProntoEntities db =
+                               new DemoProntoEntities(
+                                   Auxiliares.FormatearConexParaEntityFramework(
+                                   ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC)));
+
+
+
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+            int totalrecords = 0;
+
+
+
+
+
+            string sqlquery4 = Filtrador.Filters.FiltroGenerico_UsandoIQueryable_DevolverInternalQuery<CartasDePorteControlDescarga>
+                                 (
+                                                         sidx, sord, 1, 999999, true, filters, db, ref totalrecords,
+                                                         db.CartasDePorteControlDescargas
+                                            .Where(x =>
+                                                    //(x.IdPuntoVenta == puntovent || puntovent == 0)
+                                                    //&&
+                                                    (x.Fecha >= FechaDesde && x.Fecha <= FechaHasta)
+                                                     &&
+                                                    (x.WilliamsDestino.PuntoVenta == puntovent || puntovent <= 0)
+                                                     &&
+                                                    (x.WilliamsDestino.IdWilliamsDestino == iddestino || iddestino <= 0)
+                                                 )
+                                 );
+
+
+
+
+            return sqlquery4;
+
+
+
+
+
+        }
+
+
+
+
+
 
 
 
