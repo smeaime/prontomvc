@@ -3302,6 +3302,20 @@ Partial Class CartaDePorteInformesConReportViewerSincronismos
                                 "ProntoWeb\Informes\Listado general de Cartas de Porte (simulando original) recibidor oficial.rdl", _
                                         dt, Nothing, , , sTitulo)
 
+
+
+
+                Case "Listado general de Cartas de Porte - Con tipo de movimiento"
+
+                    usando servidor?
+                    ProntoFuncionesUIWeb.RebindReportViewer(ReportViewer2,
+                                "ProntoWeb\Informes\Listado general de Cartas de Porte (simulando original) recibidor oficial.rdl",
+                                        dt, Nothing, , , sTitulo)
+
+
+
+
+
                 Case "Listado general formato Cresud"
 
                     ProntoFuncionesUIWeb.RebindReportViewer(ReportViewer2, _
