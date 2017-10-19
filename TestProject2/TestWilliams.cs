@@ -1025,12 +1025,15 @@ Error in: https://prontoweb.williamsentregas.com.ar/ProntoWeb/CDPFacturacion.asp
 
             //DataTable tablaEditadaDeFacturasParaGenerar = dtDatasourcePaso2() // es casi un wrapper. esto lo puedo reemplazar con la llamada mas directa a GetDatatableAsignacionAutomatica
 
-            DataTable tablaEditadaDeFacturasParaGenerar = LogicaFacturacion.GetDatatableAsignacionAutomatica(
+            
+                string sLista = string.Join(",", lista_int);
+
+            DataTable tablaEditadaDeFacturasParaGenerar = Pronto.ERP.Bll.LogicaFacturacion.GetDatatableAsignacionAutomatica(
                                                      SC, ref pag, ref sesionId,
                                                    8, PuntoVenta,
                                                     desde,
                                                     hasta,
-                                                     "", "", optFacturarA, ""
+                                                     sLista, "", optFacturarA, ""
                                                      , SC, "", "",
                                                     "", "", "", "",
                                                     "", "", txtBuscar, "",
