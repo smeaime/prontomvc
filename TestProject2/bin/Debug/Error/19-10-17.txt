@@ -1,0 +1,90 @@
+
+Log Entry : 
+10/19/2017 10:51:27
+Error in: . Error Message:entrando en GetDatatableAsignacionAutomatica . tanda 0
+__________________________
+
+Log Entry : 
+10/19/2017 10:51:28
+Error in: . Error Message:Cartas sin automatico encontrado (pero este es el modo no automatico!!!)19
+__________________________
+
+Log Entry : 
+10/19/2017 10:51:28
+Error in: . Error Message:entro a Preprocesos 27
+__________________________
+
+Log Entry : 
+10/19/2017 10:51:30
+Error in: . Error Message:despues de AgregarEmbarques32
+__________________________
+
+Log Entry : 
+10/19/2017 10:51:30
+Error in: . Error Message:despues de ExcluirDeGastosAdministrativos32
+__________________________
+
+Log Entry : 
+10/19/2017 10:51:30
+Error in: . Error Message:despues de ReasignarAquellosQueSeLeFacturanForzosamenteAlCorredor32
+__________________________
+
+Log Entry : 
+10/19/2017 10:51:30
+Error in: . Error Message:despues de CasosSyngenta_y_Acopios32
+__________________________
+
+Log Entry : 
+10/19/2017 10:51:30
+Error in: . Error Message:entro en PostProcesos 32
+__________________________
+
+Log Entry : 
+10/19/2017 10:51:30
+Error in: . Error Message:despues de EmparcharClienteSeparadoParaCasosQueSuperenUnMontoDeterminado 32
+__________________________
+
+Log Entry : 
+10/19/2017 10:51:39
+Error in: . Error Message:despues de EmparcharClienteSeparadoParaFacturasQueSuperanCantidadDeRenglones 32
+__________________________
+
+Log Entry : 
+10/19/2017 10:51:39
+Error in: . Error Message:despues de SepararAcopiosLDCyACA 32
+__________________________
+
+Log Entry : 
+10/19/2017 10:51:39
+Error in: . Error Message:despues de PostProcesoFacturacion_ReglaExportadores 32
+__________________________
+
+Log Entry : 
+10/19/2017 10:53:17
+Error in: . Error Message:punto 2 en GetDatatableAsignacionAutomatica . tanda 3096
+__________________________
+
+Log Entry : 
+10/19/2017 10:53:17
+Error in: . Error Message:punto 3 en GetDatatableAsignacionAutomatica . tanda 3096
+__________________________
+
+Log Entry : 
+10/19/2017 10:53:17
+Error in: . Error Message:punto 4 en GetDatatableAsignacionAutomatica . tanda 3096
+__________________________
+
+Log Entry : 
+10/19/2017 10:53:17
+Error in: . Error Message:Separo las facturas que se generan en el lote.19/10/2017 10:53:17
+__________________________
+
+Log Entry : 
+10/19/2017 10:53:17
+Error in: . Error Message:ActualizarCampoClienteSeparador 8 filas
+__________________________
+
+Log Entry : 
+10/19/2017 10:53:18
+Error in: . Error Message:Empiezo a facturar en serio.19/10/2017 10:53:18
+__________________________

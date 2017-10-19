@@ -1110,6 +1110,30 @@ Namespace Pronto.ERP.Bll
 
 
 
+            verificar que no haya bloqueados por cobranzas
+            If True Then
+                'http://bdlconsultores.ddns.net/Consultas/Admin/VerConsultas1.php?recordid=14168
+                'Precisan agregar una marca en el formulario de clientes para poder bloquear la carga de estos 
+                'en las cartas de porte debido a un conflicto de cobranzas.
+                'Este tilde deberán verlo solo algunos usuarios (activaremos a los de cobranzas).
+                'Luego, cuando quieran usarlo en una carta de porte el sistema tiene que dar un mensaje de advertencia diciendo 
+                'que el usuario no se puede utilizar y que tiene que ponerse en contacto con el sector de cobranzas.
+                'La carta de porte no se puede grabar si tiene un cliente en esta condición.
+
+
+                Dim sClientesCobranzas As String
+                If UsaClientesQueEstanBloqueadosPorCobranzas(SC, myCartaDePorte, sClientesCobranzas) Then
+                    MS &= "Cliente bloqueado. Ponerse en contacto con el sector de cobranzas (" & sClientesCobranzas & ") "
+                    MS &= vbCrLf   'return false
+                End If
+            End If
+
+
+
+
+
+
+
 
             '* Nueva función en Facturación Automática: "Facturarle al Corredor". Agregar un tilde en los clientes con ese nombre. En el Automático, las Cartas de Porte que corresponda facturarle a estos clientes se le facturarán al Corredor de cada Carta de Porte
             ReasignarAquellosQueSeLeFacturanForzosamenteAlCorredor(lista, SC)
@@ -2194,7 +2218,8 @@ Namespace Pronto.ERP.Bll
                         ByVal txtDestinatario As String, ByVal txtIntermediario As String, ByVal txtRcomercial As String,
                         ByVal txt_AC_Articulo As String, ByVal txtProcedencia As String, ByVal txtDestino As String, ByVal txtBuscar As String,
                         ByVal cmbCriterioWHERE As String, ByVal cmbmodo As String, ByVal optDivisionSyngenta As String,
-                          ByVal startRowIndex As Long, ByVal maximumRows As Long, ByVal txtPopClienteAuxiliar As String, ByRef sErrores As String, txtFacturarA As String, agruparArticulosPor As String, ByRef filas As Object, ByRef slinks As Object, sesionIdposta As String) As DataTable
+                          ByVal startRowIndex As Long, ByVal maximumRows As Long, ByVal txtPopClienteAuxiliar As String, ByRef sErrores As String,
+                              txtFacturarA As String, agruparArticulosPor As String, ByRef filas As Object, ByRef slinks As Object, sesionIdposta As String) As DataTable
 
             'Si una Carta de Porte no tiene ningún cliente que tenga marcado en que si aparece en 
             'esa posición se le debe facturar, entonces se le facturará al 
@@ -4135,53 +4160,69 @@ Namespace Pronto.ERP.Bll
                 Exit Sub
             End If
 
-            '//////////////////////////////////////////////////////////////////
-            '//////////////////////////////////////////////////////////////////
-            '//////////////////////////////////////////////////////////////////
-            'TODO: como agrupar en facturas los items agregados manualmente
-            'Por cada renglon de dtViewstateRenglonesManuales
-            '    filtrar la tabla de cartas, ordenando de manera ascendiente el IdclienteSeparado (primero los vacios)
-            '    tomar el primero IdClienteSeparado que aparezca, y asignarselo al renglon
-            Dim dtItemsManuales = dtViewstateRenglonesManuales.Copy
-            For Each r In dtItemsManuales.Rows
 
 
-                Dim strwhere = "FacturarselaA=" & _c(r("FacturarselaA"))
-                Dim dtLotecito = ProntoFuncionesGenerales.DataTableWHERE(dtf, strwhere)
 
-                'Dim q = From i In dtLotecito _
-                '        Order By i.("IdClienteSeparado") Ascending
-                '        Select top 1 
+            Dim tablaEditadaDeFacturasParaGenerar As DataTable
 
-                ActualizarCampoClienteSeparador(dtLotecito, SeEstaSeparandoPorCorredor, SC)
-                Try
+            If dtViewstateRenglonesManuales IsNot Nothing Then
 
-                    Dim dtlotecitoordenado = DataTableORDER(dtLotecito, "ClienteSeparado DESC").Item(0)
+                '//////////////////////////////////////////////////////////////////
+                '//////////////////////////////////////////////////////////////////
+                '//////////////////////////////////////////////////////////////////
+                'TODO: como agrupar en facturas los items agregados manualmente
+                'Por cada renglon de dtViewstateRenglonesManuales
+                '    filtrar la tabla de cartas, ordenando de manera ascendiente el IdclienteSeparado (primero los vacios)
+                '    tomar el primero IdClienteSeparado que aparezca, y asignarselo al renglon
+                Dim dtItemsManuales = dtViewstateRenglonesManuales.Copy
+                For Each r In dtItemsManuales.Rows
 
-                    r("IdFacturarselaA") = dtlotecitoordenado("IdFacturarselaA")
-                    r("ClienteSeparado") = dtlotecitoordenado("ClienteSeparado")
-                    r("IdTitular") = dtlotecitoordenado("IdTitular") 'a proposito le meto Idtitular=Clienteseparado, para que no me vuelva a separar al llamar de nuevo a acutalizarcampoclienteseparador
-                    r("IdCorredor") = dtlotecitoordenado("IdCorredor") 'a proposito le meto IdCorredor=Clienteseparado, para que no me vuelva a separar al llamar de nuevo a acutalizarcampoclienteseparador
-                Catch ex As Exception
-                    ErrHandler2.WriteError("Hay un renglon agregado que se le facturaría a un cliente que no está en la generacion. " & ex.ToString)
-                    'MsgBoxAjax(Me, "Hay un renglon agregado que se le facturaría a un cliente que no está en la generacion")
-                    'Return
-                End Try
 
-            Next
-            '//////////////////////////////////////////////////////////////////
-            '//////////////////////////////////////////////////////////////////
-            '//////////////////////////////////////////////////////////////////
+                    Dim strwhere = "FacturarselaA=" & _c(r("FacturarselaA"))
+                    Dim dtLotecito = ProntoFuncionesGenerales.DataTableWHERE(dtf, strwhere)
 
-            'la datatable "tablaEditadaDeFacturasParaGenerar" se está quedando sin el dato de ClienteSeparado que viene en la datatable "dtf"!!!!!!!!
-            '-naboooooo es ActualizarCampoClienteSeparador el que te lo refresca!!!!
+                    'Dim q = From i In dtLotecito _
+                    '        Order By i.("IdClienteSeparado") Ascending
+                    '        Select top 1 
 
-            Dim tablaEditadaDeFacturasParaGenerar As DataTable = DataTableUNION(dtf, dtItemsManuales)
-            'Dim tablaEditadaDeFacturasParaGenerar As DataTable = dtf.Copy()  'esta es la grilla, incluye las manuales
+                    ActualizarCampoClienteSeparador(dtLotecito, SeEstaSeparandoPorCorredor, SC)
+                    Try
 
-            ' Dim tablaEditadaDeFacturasParaGenerar alguna manera de hacerlo tipado y en una lista???
+                        Dim dtlotecitoordenado = DataTableORDER(dtLotecito, "ClienteSeparado DESC").Item(0)
+
+                        r("IdFacturarselaA") = dtlotecitoordenado("IdFacturarselaA")
+                        r("ClienteSeparado") = dtlotecitoordenado("ClienteSeparado")
+                        r("IdTitular") = dtlotecitoordenado("IdTitular") 'a proposito le meto Idtitular=Clienteseparado, para que no me vuelva a separar al llamar de nuevo a acutalizarcampoclienteseparador
+                        r("IdCorredor") = dtlotecitoordenado("IdCorredor") 'a proposito le meto IdCorredor=Clienteseparado, para que no me vuelva a separar al llamar de nuevo a acutalizarcampoclienteseparador
+                    Catch ex As Exception
+                        ErrHandler2.WriteError("Hay un renglon agregado que se le facturaría a un cliente que no está en la generacion. " & ex.ToString)
+                        'MsgBoxAjax(Me, "Hay un renglon agregado que se le facturaría a un cliente que no está en la generacion")
+                        'Return
+                    End Try
+
+                Next
+                '//////////////////////////////////////////////////////////////////
+                '//////////////////////////////////////////////////////////////////
+                '//////////////////////////////////////////////////////////////////
+
+                'la datatable "tablaEditadaDeFacturasParaGenerar" se está quedando sin el dato de ClienteSeparado que viene en la datatable "dtf"!!!!!!!!
+                '-naboooooo es ActualizarCampoClienteSeparador el que te lo refresca!!!!
+
+                tablaEditadaDeFacturasParaGenerar = DataTableUNION(dtf, dtItemsManuales)
+                'Dim tablaEditadaDeFacturasParaGenerar As DataTable = dtf.Copy()  'esta es la grilla, incluye las manuales
+
+                ' Dim tablaEditadaDeFacturasParaGenerar alguna manera de hacerlo tipado y en una lista???
+
+
+            Else
+                tablaEditadaDeFacturasParaGenerar = dtf
+
+            End If
+
+
 
             ActualizarCampoClienteSeparador(tablaEditadaDeFacturasParaGenerar, SeEstaSeparandoPorCorredor, SC) 'TODO: ineficiente
+
 
             Dim dt = GenerarDatatableDelPreviewDeFacturacion(tablaEditadaDeFacturasParaGenerar, SC)
 
@@ -5384,6 +5425,990 @@ Namespace Pronto.ERP.Bll
 
 
 
+        Shared Function CreaFacturaPuntoNET(ByVal oListaCDP As System.Collections.Generic.List(Of Pronto.ERP.BO.CartaDePorte),
+                                         ByVal IdClienteAFacturarle As Long, ByVal sucursalWilliams As Long,
+                                         ByVal dtRenglonesManuales As DataTable, ByVal SC As String,
+                                         ByVal Session As System.Web.SessionState.HttpSessionState, ByVal optFacturarA As Integer,
+                                         ByVal agruparArticulosPor As String, ByVal txtBuscar As String,
+                                         ByVal txtTarifaGastoAdministrativo As String,
+                                         ByVal SeSeparaPorCorredor As Boolean, ByVal txtCorredor As String,
+                                         ByVal chkPagaCorredor As Boolean,
+                                         ByVal listEmbarques As System.Collections.Generic.List(Of DataRow),
+                                        ByRef ImputacionDevuelta As IEnumerable(Of grup),
+                                        IdClienteObservaciones As Integer
+) As Integer
+
+
+
+            ''Revisar tambien en
+            '' Pronto el Utilidades->"Generacion de Facturas a partir de Ordenes de Compra automaticas",
+            '' (se llama con frmConsulta2 Id = 74) -Eso es un informe!! No genera nada
+            ''y cómo hace para imprimirlas. Tambien Utilidades->"Prefacturacion"
+            '' se llama con GeneracionDeFacturasDesdeOrdenesCompraAutomaticas() -Ese llama a frmExcel1.GenerarFacturasAutomaticas
+
+            ''EDU!!!! 
+            ''si te paras en el principal (visualizando facturas), marcas las facturas que quieras, 
+            ''boton derecho imprimir (o mandar a pantalla), emite masivamente las facturas.
+            ''en el frmprincipal esta la funcion EmitirFacturas
+
+
+            'Dim oAp
+            'Dim oFac 'As ComPronto.Factura 
+            ''Dim oRs As ADODB.Recordset
+            'Dim oRsAux As ADODB.Recordset
+            'Dim oRsErrores As ADODB.Recordset
+            'Dim mArchivo As String, mTipo As String, mLetra As String, mCliente As String, mCorredor As String, mCuit As String
+            'Dim mCuitCorredor As String, mCAI As String, mComprobante As String
+            'Dim fl As Integer, mContador As Integer, mIdMonedaPesos As Integer ', mvarPuntoVenta As Integer
+            'Dim mIdTipoComprobante As Integer, mIdCodigoIva As Integer
+            'Dim mIdArticuloParaImportacionFacturas As Long, mNumero As Long, mIdCliente As Long
+            'Dim mIdConceptoParaImportacionNDNC As Long, mNumeroCliente As Long, mIdCuenta As Long
+            'Dim mSubtotal As Double, mIVA As Double, mTotal As Double
+            'Dim mTasa As Single, mCotizacionDolar As Single
+            'Dim mFecha As Date, mFechaCAI As Date
+            'Dim mOk As Boolean, mConProblemas As Boolean
+            'Dim mAux1
+            Dim idFacturaCreada As Integer
+
+
+
+            ''estaba hablando con claudio recien, Williams factura con un solo punto 
+            ''de venta (con un solo talonario), precisaríamos que todo se facture como talonario 1 y que el 
+            ''punto de venta de las CdP facturadas se refleje en el campo Centro de Costo de la 
+            ''factura (daríamos de alta los 4 centros de costo)
+
+
+
+            'Dim usuario As Integer = 1
+            'If Session IsNot Nothing Then usuario = Session(SESSIONPRONTO_glbIdUsuario)
+
+
+            'Dim tTemp As Date = Now
+
+            'Try
+
+            '    If (oListaCDP Is Nothing Or oListaCDP.Count < 1) And
+            '        (dtRenglonesManuales Is Nothing Or dtRenglonesManuales.Rows.Count < 1) And
+            '        (listEmbarques Is Nothing Or listEmbarques.Count < 1) Then
+            '        ErrHandler2.WriteError("oListaCDP vacía")
+            '        Return -1
+            '    End If
+
+
+            '    mLetra = LetraSegunTipoIVA(ClienteManager.GetItem(SC, IdClienteAFacturarle).IdCodigoIva)
+
+
+
+            '    '//////////////////////////////////////////////////////////////////////////////////////////////////
+            '    '//////////////////////////////////////////////////////////////////////////////////////////////////
+            '    '//////////////////////////////////////////////////////////////////////////////////////////////////
+            '    '//////////////////////////////////////////////////////////////////////////////////////////////////
+            '    '/////////////////////////LIOS CON LOS PUNTOS DE VENTA    /////////////////////////////////////////
+            '    '//////////////////////////////////////////////////////////////////////////////////////////////////
+            '    '//////////////////////////////////////////////////////////////////////////////////////////////////
+            '    Dim numeropuntoVenta = PuntoVentaWilliams.NumeroPuntoVentaSegunSucursalWilliams(sucursalWilliams, SC)
+            '    Dim IdPuntoVenta As Integer = EntidadManager.TablaSelectId(SC,
+            '                                "PuntosVenta",
+            '                                "PuntoVenta=" & numeropuntoVenta & " AND Letra='" &
+            '                                mLetra & "' AND IdTipoComprobante=" & EntidadManager.IdTipoComprobante.Factura)
+            '    Dim IdObra As Integer = PuntoVentaWilliams.ObraSegunSucursalWilliams(sucursalWilliams, SC)
+            '    '//////////////////////////////////////////////////////////////////////////////////////////////////
+            '    '//////////////////////////////////////////////////////////////////////////////////////////////////
+            '    '//////////////////////////////////////////////////////////////////////////////////////////////////
+            '    '//////////////////////////////////////////////////////////////////////////////////////////////////
+            '    '//////////////////////////////////////////////////////////////////////////////////////////////////
+            '    '//////////////////////////////////////////////////////////////////////////////////////////////////
+            '    '//////////////////////////////////////////////////////////////////////////////////////////////////
+            '    '//////////////////////////////////////////////////////////////////////////////////////////////////
+            '    '//////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+            '    'oAp = ClaseMigrar.CrearAppCompronto(SC)
+
+
+
+            '    If IdClienteAFacturarle <= 0 Then Return -1
+
+
+
+
+            '    Dim params = ParametroManager.TraerRenglonUnicoDeTablaParametroOriginalClase(SC)
+            '    'ParametroManager.TraerRenglonUnicoDeTablaParametroOriginal()
+
+
+            '    mIdMonedaPesos = params.p(ParametroManager.ePmOrg.IdMoneda)  'IIf(IsNull(oRs.Fields("IdMoneda").Value), 1, oRs.Fields("IdMoneda").Value)
+            '    mIdCuenta = params.p(ParametroManager.ePmOrg.IdCuentaDeudoresVarios)  'IIf(IsNull(oRs.Fields("IdCuentaDeudoresVarios").Value), 0, oRs.Fields("IdCuentaDeudoresVarios").Value)
+
+
+            '    If mIdCuenta = 0 Then
+            '        ErrHandler2.WriteError("No definio en parametros la cuenta contable deudores varios")
+            '        Return -1
+            '    End If
+
+
+
+
+            '    mAux1 = ParametroManager.TraerValorParametro2(SC, "IdArticuloParaImportacionFacturas")
+            '    mIdArticuloParaImportacionFacturas = IIf(IsNull(mAux1), 0, mAux1)
+            '    mAux1 = ParametroManager.TraerValorParametro2(SC, "IdConceptoParaImportacionNDNC")
+            '    mIdConceptoParaImportacionNDNC = IIf(IsNull(mAux1), 0, mAux1)
+
+            '    If mIdArticuloParaImportacionFacturas = 0 Then
+            '        ErrHandler2.WriteError("No definio en parametros el articulo generico para importar las facturas")
+            '        Return -1
+            '    End If
+
+
+
+            '    oRsAux = oAp.Facturas.TraerFiltrado("_PorNumeroComprobante", ArrayVB6(mLetra, IdPuntoVenta, mNumero.ToString))
+            '    If oRsAux.RecordCount > 0 Then
+            '        AgregarMensajeProcesoPresto(oRsErrores, "La factura " & mComprobante & " ya existe, no se generará")
+            '        mConProblemas = True
+            '    End If
+            '    oRsAux.Close()
+
+
+            '    mTasa = iisNull(ParametroManager.ParametroOriginal(SC, "Iva1"), 0)
+            '    mCAI = CAIsegunPuntoVenta(mLetra, numeropuntoVenta, SC)
+
+
+
+
+
+
+            '    If Not mConProblemas Then
+            '        oFac = oAp.Facturas.Item(-1)
+            '        With oFac
+
+            '            'Try
+            '            '    .Guardar() 'para ver si genera un type mismatch
+            '            'Catch ex As Exception
+            '            '    ErrHandler2.WriteError("Primer Guardar trucho. " & ex.ToString)
+            '            'End Try
+
+
+            '            With .Registro
+            '                '.Fields("TipoABC").Value = mLetra 'ahora se encarga CalculaFactura
+            '                '.Fields("PuntoVenta").Value = mvarPuntoVenta 'definir esto
+
+
+            '                '.Fields("NumeroFactura").Value = mNumero
+
+            '                .Fields("IdCliente").Value = IdClienteAFacturarle 'oCDP.Vendedor ' mIdCliente
+            '                .Fields("FechaFactura").Value = Today ' mFecha
+            '                .Fields("ConvenioMultilateral").Value = "NO"
+            '                .Fields("CotizacionDolar").Value = Cotizacion(SC, Today, mIdMonedaPesos)  ' mCotizacionDolar 'Esta linea tira error "division por 0" si lo dejo en 0
+            '                .Fields("RetencionIBrutos3").Value = 0
+            '                .Fields("PorcentajeIBrutos3").Value = 0
+            '                .Fields("PorcentajeIva1").Value = mTasa
+            '                .Fields("PorcentajeIva2").Value = 0
+            '                .Fields("IVANoDiscriminado").Value = 0
+
+
+
+            '                'depende de la condicion de venta del cliente
+            '                'hay una tablita de condiciones
+            '                'se llama "Conciciones Compra"
+            '                'que tiene la cantidad de dias CantidadDias
+            '                Dim idcondicion As Integer = 4
+            '                Try
+
+            '                    Dim dtcondiciones As DataTable = EntidadManager.ExecDinamico(SC, "SELECT IdCondicionVenta FROM Clientes WHERE idCliente= " & IdClienteAFacturarle)
+
+            '                    'había un idcondicion que no existia como id en la tabla (estaban usando la id=15) -claro, explotaba la linea de CantidadDias!
+
+            '                    idcondicion = iisNull(dtcondiciones.Rows(0).Item("IdCondicionVenta"), 1)
+            '                    .Fields("IdCondicionVenta").Value = idcondicion
+            '                Catch ex As Exception
+            '                    ErrHandler2.WriteError("Problema con la IdCondicionVenta?    " & IdClienteAFacturarle & " " & ex.ToString)
+            '                    'Throw no rompas la facturacion
+            '                End Try
+
+            '                Dim dias As Integer = 0
+            '                Try
+
+
+            '                    dias = iisNull(EntidadManager.ExecDinamico(SC, "SELECT CantidadDias1 FROM  [Condiciones Compra]  WHERE idCondicionCompra=" & idcondicion).Rows(0).Item(0), 0)
+            '                Catch ex As Exception
+            '                    ErrHandler2.WriteError("Problema con  CantidadDias1?    " & idcondicion & " " & ex.ToString)
+            '                    'Throw no rompas la facturacion
+            '                End Try
+
+
+
+
+
+            '                .Fields("FechaVencimiento").Value = DateAdd(DateInterval.Day, dias, Today) ' mFecha 
+
+
+
+            '                .Fields("IdMoneda").Value = mIdMonedaPesos
+            '                .Fields("CotizacionMoneda").Value = 1
+            '                .Fields("CotizacionDolar").Value = Cotizacion(SC)
+            '                .Fields("PorcentajeBonificacion").Value = 0
+            '                '.Fields("OtrasPercepciones1").Value = 1 ' 0     'Esta linea tira error
+            '                .Fields("OtrasPercepciones1Desc").Value = ""
+            '                '.Fields("OtrasPercepciones2").Value = 1 ' 0    'Esta linea tira error
+            '                .Fields("OtrasPercepciones2Desc").Value = ""
+
+
+            '                '//////////////////////////////////////////////////////////////////////////
+            '                '//////////////////////////////////////////////////////////////////////////
+            '                '//////////////////////////////////////////////////////////////////////////
+            '                'estaba hablando con claudio recien, Williams factura con un solo punto 
+            '                'de venta (con un solo talonario), precisaríamos que todo se facture como talonario 1 y que el 
+            '                'punto de venta de las CdP facturadas se refleje en el campo Centro de Costo de la 
+            '                'factura (daríamos de alta los 4 centros de costo)
+            '                Try
+            '                    '                            Mariano(Scalella)
+            '                    '                            las a y las b salen con el mismo talonario??
+            '                    '                            Andrés(dice)
+            '                    'no hacen facturas b
+            '                    'si tienen que hacer las haran por pronto
+
+            '                    .Fields("IdPuntoVenta").Value = IdPuntoVenta 'debiera ser 1...
+
+
+            '                    '6:                          BUENOS(AIRES)
+            '                    '7:                          COMERCIAL()
+            '                    '8:                          SAN(LORENZO)
+            '                    '9:                          ARROYO(SECO)
+            '                    '10:                         BAHIA(BLANCA)
+
+
+            '                    .Fields("IdObra").Value = IdObra
+
+            '                Catch ex As Exception
+            '                    ErrHandler2.WriteError("Problema al poner el punto de venta/centro de costo")
+            '                End Try
+            '                '//////////////////////////////////////////////////////////////////////////
+            '                '//////////////////////////////////////////////////////////////////////////
+            '                '//////////////////////////////////////////////////////////////////////////
+            '                '//////////////////////////////////////////////////////////////////////////
+
+
+
+
+            '                '.Fields("IdCorredorObservaciones").Value = IdCorredorObservaciones
+            '                Dim idcliobs = TodasLasCartasTienenElMismoClienteObsConCircuitoEspecial(SC, oListaCDP)
+            '                If idcliobs > 0 Then
+            '                    .Fields("IdClienteObservaciones").Value = idcliobs
+            '                    'tengo acceso a este campo con compronto?
+            '                End If
+
+
+
+            '                .Fields("NumeroCAI").Value = Val(mCAI)
+            '                .Fields("FechaVencimientoCAI").Value = mFechaCAI
+
+
+
+            '                .Fields("IdUsuarioIngreso").Value = usuario
+
+            '                .Fields("FechaIngreso").Value = Today
+            '                .Fields("IdCodigoIva").Value = mIdCodigoIva   'este no lo estas asignando (ahora)... Igual, la factura graba
+            '                '.Fields("PercepcionIVA").Value = 1 ' 0   'Esta linea tira error
+            '                .Fields("PorcentajePercepcionIVA").Value = 0
+
+
+
+            '                'http://consultas.bdlconsultores.com.ar/AdminTest/template/desarrollo/Consulta.php?IdReclamo=29472&SinMenu=1
+            '                'Al generar la factura, completar el campo IdTipoNegocioVentas completar de la siguiente manera:
+            '                'Elevacion: 1                         'Entrega: 3                         'Buque: 9
+            '                Dim tiponegocio As Integer = 3
+
+            '                Try
+
+            '                    If listEmbarques.Count > 0 Then
+            '                        tiponegocio = 9 '                         'Elevacion: 1   'Entrega: 3  'Buque: 9
+            '                    ElseIf oListaCDP(0).Exporta Then
+            '                        tiponegocio = 1
+            '                    Else
+            '                        tiponegocio = 3
+            '                    End If
+            '                    .Fields("IdTipoNegocioVentas").Value = tiponegocio    'Elevacion: 1   'Entrega: 3  'Buque: 9
+            '                Catch ex As Exception
+            '                    ErrHandler2.WriteError("Falla la marca de IdTipoNegocioVentas. " + ex.ToString())
+            '                End Try
+
+
+
+
+            '            End With
+
+
+
+            '            Debug.Print("        ComPronto paso 1 listo " & DateDiff(DateInterval.Second, tTemp, Now))
+            '            tTemp = Now
+
+
+            '            '//////////////////////////////////////////////////////////////////////////
+            '            '//////////////////////////////////////////////////////////////////////////
+            '            '//////////////////////////////////////////////////////////////////////////
+            '            '//////////////////////////////////////////////////////////////////////////
+            '            '//////////////////////////////////////////////////////////////////////////
+            '            '//////////////////////////////////////////////////////////////////////////
+            '            '//////////////////////////////////////////////////////////////////////////
+            '            '//////////////////////////////////////////////////////////////////////////
+            '            '//////////////////////////////////////////////////////////////////////////
+            '            '//////////////////////////////////////////////////////////////////////////
+
+            '            FormatearFacturaSegunSeSepareONoSeparador_Leyenda_Corredor_Separador(oListaCDP, oFac, IdClienteAFacturarle, SeSeparaPorCorredor, SC, txtCorredor, chkPagaCorredor)
+
+
+
+
+
+            '            Debug.Print("        ComPronto paso 2 listo " & DateDiff(DateInterval.Second, tTemp, Now))
+            '            tTemp = Now
+
+
+
+
+            '            '//////////////////////////////////////
+            '            '//////////////////////////////////////
+            '            '//////////////////////////////////////
+            '            '//////////////////////////////////////
+
+
+
+            '            'Mostrar el período de facturación (Con la leyenda \\\" Período de Facturación: Fecha1raCdp - FechaUltimaCdp )
+            '            Dim fecha = From i As Pronto.ERP.BO.CartaDePorte In oListaCDP
+            '                        Select i.FechaDescarga Order By FechaDescarga
+
+
+            '            'como poner lo de la leyenda de Syngenta?
+            '            'http://bdlconsultores.sytes.net/Consultas/Admin/verConsultas1.php?recordid=13009
+            '            oFac.Registro.Fields("Observaciones").Value += LeyendaSyngenta(oListaCDP, IdClienteAFacturarle, SC)
+
+
+            '            If listEmbarques.Count > 0 Then
+            '                'http://bdlconsultores.dyndns.org/Consultas/Admin/verConsultas1.php?recordid=8946
+            '                oFac.Registro.Fields("Observaciones").Value += vbCrLf & "Periodo " + CDate(listEmbarques(0).Item("FechaDescarga")).ToString("MMMM")
+            '            Else
+            '                oFac.Registro.Fields("Observaciones").Value += vbCrLf & "Periodo entre " + fecha(0) + " y " + fecha(fecha.Count - 1)
+            '            End If
+
+
+
+
+            '            '////////////////////////////////////////////////////////////////////////////
+            '            '////////////////////////////////////////////////////////////////////////////
+
+            '            'me guardo a quién se eligió facturar y cómo se agrupó
+
+            '            Dim agrupIndex As Integer
+            '            Select Case agruparArticulosPor
+            '                Case "Destino"
+            '                    agrupIndex = 1
+            '                Case "Destino+Destinatario"
+            '                    agrupIndex = 2
+            '                Case "Destino+Titular"
+            '                    agrupIndex = 3
+            '                Case "Destino+RComercial/Interm+Destinat(CANJE)"
+            '                    agrupIndex = 4
+            '                Case Else
+            '                    agrupIndex = 99
+            '            End Select
+
+            '            oFac.Registro.Fields("NumeroExpedienteCertificacionObra").Value = CInt(optFacturarA & "00" & agrupIndex)
+
+            '            '////////////////////////////////////////////////////////////////////////////
+            '            '////////////////////////////////////////////////////////////////////////////
+            '            '////////////////////////////////////////////////////////////////////////////
+            '            '////////////////////////////////////////////////////////////////////////////
+            '            '////////////////////////////////////////////////////////////////////////////
+            '            'agrupo las cdps que tengan el mismo articulo destino y cliente -no agrupes mas por titular, solo por destinatario
+            '            'TODO: Facturación: tomar kg neto (sin mermas) y no el final
+            '            '////////////////////////////////////////////////////////////////////////////
+            '            '////////////////////////////////////////////////////////////////////////////
+            '            '////////////////////////////////////////////////////////////////////////////
+            '            '////////////////////////////////////////////////////////////////////////////
+
+
+            '            'ver esta funcion. dependiendo de q.count....
+            '            ImputacionDevuelta = AgruparItemsDeLaFactura(oListaCDP, optFacturarA, agruparArticulosPor, SC, txtBuscar)
+
+            '            'como hago para que el imputador revise esto?
+
+
+            '            Dim renglons As Integer = 0
+            '            For Each o In ImputacionDevuelta
+            '                renglons += 1 'como es un Enumerable, tengo que iterar, no tengo un metodo Count()
+            '            Next
+
+            '            'el asunto es que si una se pasa, debería parar toda la facturacion, y no saltarse solo esa factura
+
+            '            If renglons > MAXRENGLONES Then
+            '                'ErrHandler2.WriteError("No definio en parametros la cuenta contable deudores varios")
+
+            '                'si tiro una excepcion acá, la captura el try de esta funcion
+            '                Dim s2 = "La factura para " & IdClienteAFacturarle.ToString() & " tiene " & renglons.ToString() & " renglones y el máximo es " & MAXRENGLONES.ToString()
+            '                ErrHandler2.WriteError(s2)
+            '                'Throw New Exception(s2)
+            '                Return -12
+            '            End If
+
+
+
+
+
+
+
+
+            '            '////////////////////////////////////////////////////////////////////////////
+            '            '////////////////////////////////////////////////////////////////////////////
+            '            '////////////////////////////////////////////////////////////////////////////
+            '            '////////////////////////////////////////////////////////////////////////////
+            '            '////////////////////////////////////////////////////////////////////////////
+            '            'creo los items
+            '            '////////////////////////////////////////////////////////////////////////////
+            '            '////////////////////////////////////////////////////////////////////////////
+            '            '////////////////////////////////////////////////////////////////////////////
+
+
+            '            For Each o In ImputacionDevuelta
+
+            '                With .DetFacturas.Item(-1)
+            '                    With .Registro
+
+            '                        .Fields("IdArticulo").Value = o.IdArticulo 'mIdArticuloParaImportacionFacturas
+            '                        .Fields("Cantidad").Value = o.NetoFinal '/ 1000 '1
+
+
+            '                        .Fields("PrecioUnitario").Value = o.total / o.NetoFinal 'o.Tarifa 'tarifa(IdClienteAFacturarle, o.IdArticulo)
+
+            '                        If (.Fields("PrecioUnitario").Value = 0) Then Throw New Exception("El item de la factura tiene tarifa 0.    " & .Fields("IdArticulo").Value & " " & .Fields("Cantidad").Value)
+
+
+            '                        .Fields("PrecioUnitarioTotal").Value = .Fields("PrecioUnitario").Value 'mTotal - mIVA
+
+
+            '                        .Fields("Costo").Value = 0
+            '                        .Fields("Bonificacion").Value = 0
+            '                        .Fields("OrigenDescripcion").Value = 1
+
+
+
+
+
+            '                        '//////////////////////////////////////////////////////////////////////////
+            '                        '//////////////////////////////////////////////////////////////////////////
+            '                        '//////////////////////////////////////////////////////////////////////////
+            '                        '//////////////////////////////////////////////////////////////////////////
+            '                        'Consulta 6206
+            '                        'Cuando se factura a Titular, que quede: 
+            '                        'Cereal(-Destinatario - destino)
+            '                        'Y cuando se factura al corredor, que en la misma linea (renglon), salga impreso : 
+            '                        'Cereal - Destinatario - Destino - Cliente.
+
+
+            '                        'saco la procedencia, porque quieren agrupar solo por articulo, destino, vendedor
+            '                        'Dim proc = EntidadManager.TablaSelect(sc, "Nombre", "Localidades", "IdLocalidad", o.Procedencia)
+
+            '                        'Dim destino = EntidadManager.TablaSelect(sc, "Descripcion", "WilliamsDestinos", "IdWilliamsDestino", o.Destino)
+
+            '                        '.Fields("Observaciones").Value = "   " & proc & "    " & destino '& " " & destinatario '& "   " & " CDP:" & o.NumeroCartaDePorte
+
+
+
+            '                        .Fields("Observaciones").Value = o.ObservacionItem
+
+            '                        'por qué no pongo el armado de Observaciones cuando genero por LINQ el "q"?
+            '                        'If optFacturarA.SelectedValue = 3 Then
+            '                        '    'si facturé al corredor de la cdp, que aparezca el nombre del titular
+            '                        '    Dim titular = EntidadManager.NombreCliente(sc, o.Titular)
+            '                        '    Dim destinatario = EntidadManager.NombreCliente(sc, o.Entregador)
+            '                        '    .Fields("Observaciones").Value = "   " & destino & " " & titular & " " & destinatario & " "
+            '                        'ElseIf optFacturarA.SelectedValue = 4 And cmbModo.Text = "Exporta" Then
+            '                        '    .Fields("Observaciones").Value = "   " & destino
+            '                        'ElseIf optFacturarA.SelectedValue = 4 Then
+            '                        '    'a terceros
+            '                        '    Dim titular = EntidadManager.NombreCliente(sc, o.Titular)
+            '                        '    .Fields("Observaciones").Value = "   " & titular & " " & destino
+            '                        'Else
+            '                        '    'guarda, si es el caso 2 (destinatario) no va a venir el titular -por? Ademas, no tiene sentido agrupar por destinatario si se le factura al destinatario!!!
+            '                        '    Dim destinatario = EntidadManager.NombreCliente(sc, o.Entregador)
+            '                        '    .Fields("Observaciones").Value = "   " & destinatario & " " & destino '& " " & destinatario '& "   " & " CDP:" & o.NumeroCartaDePorte
+            '                        'End If
+
+            '                        '//////////////////////////////////////////////////////////////////////////
+            '                        '//////////////////////////////////////////////////////////////////////////
+            '                        '//////////////////////////////////////////////////////////////////////////
+            '                        '//////////////////////////////////////////////////////////////////////////
+
+
+
+
+            '                        'del calculo del total del item y de la factura, se encarga CalculaFacturaSimplificado
+            '                        'mTotal += .Fields("Cantidad").Value * .Fields("PrecioUnitario").Value
+            '                        'buscarel iva del articulo en su tabla
+            '                        'mIVA+=
+
+            '                    End With
+            '                    .Modificado = True
+
+            '                End With
+            '            Next
+            '            Debug.Print("        ComPronto paso 3 listo " & DateDiff(DateInterval.Second, tTemp, Now))
+            '            tTemp = Now
+
+
+
+            '            '//////////////////////////////////////////
+            '            '//////////////////////////////////////////
+            '            '//////////////////////////////////////////
+
+            '            '//////////////////////////////////////////
+            '            '/////////////////////////////////////
+            '            '//////////////////////////////////////////
+
+
+
+
+
+            '            For Each dr In listEmbarques
+
+
+            '                With .DetFacturas.Item(-1)
+            '                    With .Registro
+            '                        'If iisNull(dr.item("IdArticulo")) = "" Then Continue For
+            '                        'Debug.Print(dr.item("IdArticulo"))
+
+
+            '                        .Fields("IdArticulo").Value = BuscaIdArticuloPreciso(dr.Item("Producto"), SC) 'mIdArticuloParaImportacionFacturas
+            '                        .Fields("Cantidad").Value = dr.Item("KgNetos") / 1000 'le pasé la división por mil a la tarifa porque acá hacen un truco, y en el Pronto solo tengo 2 decimales
+
+            '                        If (dr.Item("TarifaFacturada") = 0) Then Throw New Exception("El item de la factura tiene tarifa 0.    " & .Fields("IdArticulo").Value & " " & .Fields("Cantidad").Value)
+
+            '                        .Fields("PrecioUnitario").Value = dr.Item("TarifaFacturada")
+            '                        .Fields("PrecioUnitarioTotal").Value = .Fields("PrecioUnitario").Value
+            '                        .Fields("Costo").Value = 0
+            '                        .Fields("Bonificacion").Value = 0
+            '                        .Fields("OrigenDescripcion").Value = 1
+
+
+            '                        '////////////////////////////////////////////////////////////////
+            '                        '////////////////////////////////////////////////////////////////
+            '                        '////////////////////////////////////////////////////////////////
+            '                        'http://bdlconsultores.dyndns.org/Consultas/Admin/verConsultas1.php?recordid=8946
+            '                        'En el primero imprimir la leyenda \"ATENCION BUQUE\"
+            '                        'En el segundo: Nombre del Buque - Cereal - Puerto
+
+            '                        Dim obsEmbarque As String = "BUQUE " & dr.Item("Corredor") & SEPAR & "  " & dr.Item("DestinoDesc")
+
+
+            '                        .Fields("Observaciones").Value = obsEmbarque
+            '                        '////////////////////////////////////////////////////////////////
+            '                        '////////////////////////////////////////////////////////////////
+            '                        '////////////////////////////////////////////////////////////////
+            '                        '////////////////////////////////////////////////////////////////
+
+
+            '                    End With
+            '                    .Modificado = True
+
+            '                End With
+            '            Next
+
+
+
+
+            '            '////////////////////////////////////////////////////////////////////////////
+            '            '////////////////////////////////////////////////////////////////////////////
+            '            '////////////////////////////////////////////////////////////////////////////
+            '            '////////////////////////////////////////////////////////////////////////////
+            '            '////////////////////////////////////////////////////////////////////////////
+            '            '////////////////////////////////////////////////////////////////////////////
+
+
+
+
+            '            If Not dtRenglonesManuales Is Nothing Then
+
+            '                Dim K_idartcambio As Integer = GetIdArticuloParaCambioDeCartaPorte(SC)
+
+            '                For Each dr As DataRow In dtRenglonesManuales.Rows
+
+            '                    With .DetFacturas.Item(-1)
+            '                        With .Registro
+            '                            'If iisNull(dr.item("IdArticulo")) = "" Then Continue For
+            '                            'Debug.Print(dr.item("IdArticulo"))
+            '                            .Fields("IdArticulo").Value = BuscaIdArticuloPreciso(dr.Item("Producto"), SC) 'mIdArticuloParaImportacionFacturas
+
+            '                            'le pasé la división por mil a la tarifa porque acá hacen un truco, y en el Pronto solo tengo 2 decimales
+
+
+            '                            Dim tarif As Double
+            '                            If .Fields("IdArticulo").Value = K_idartcambio Or InStr(dr.Item("Producto"), "ANALISIS") > 0 Or
+            '                             InStr(dr.Item("Producto"), "RETIRO DE DOCUMENTACION") > 0 Or
+            '                            InStr(dr.Item("Producto"), "FLETE") > 0 Then
+
+
+            '                                'si es un "cambio de carta porte", no dividir por mil. 
+            '                                'Es decir, la "Tarifa" en los renglones normales es por "Tonelada", y en estos es por "Unidad".
+            '                                'http://bdlconsultores.dyndns.org/Consultas/Admin/verConsultas1.php?recordid=11379
+            '                                'http://bdlconsultores.dyndns.org/Consultas/Admin/VerConsultas1.php?recordid=11577
+
+            '                                .Fields("Cantidad").Value = dr.Item("KgNetos")
+            '                                tarif = dr.Item("TarifaFacturada")
+
+            '                            Else
+
+            '                                'si es un articulo común (un grano) hay que divdir la cantidad
+
+
+            '                                .Fields("Cantidad").Value = dr.Item("KgNetos") / 1000
+            '                                tarif = dr.Item("TarifaFacturada") '/ 1000
+            '                            End If
+
+
+            '                            If (tarif = 0) Then Throw New Exception("El item de la factura tiene tarifa 0.    " & .Fields("IdArticulo").Value & " " & .Fields("Cantidad").Value)
+
+
+            '                            .Fields("PrecioUnitario").Value = tarif
+            '                            .Fields("PrecioUnitarioTotal").Value = .Fields("PrecioUnitario").Value
+
+
+
+
+
+            '                            .Fields("Costo").Value = 0
+            '                            .Fields("Bonificacion").Value = 0
+            '                            .Fields("OrigenDescripcion").Value = 1
+            '                            .Fields("Observaciones").Value = ""
+            '                        End With
+            '                        .Modificado = True
+
+            '                    End With
+            '                Next
+            '            End If
+
+
+
+            '            '////////////////////////////////////////////////////////////////////////////
+            '            '////////////////////////////////////////////////////////////////////////////
+            '            'agregar renglon de "Gastos administrativos"
+            '            '////////////////////////////////////////////////////////////////////////////
+            '            '////////////////////////////////////////////////////////////////////////////
+            '            Dim IdArticuloGastoAdministrativo = BuscaIdArticuloPreciso("CAMBIO DE CARTA DE PORTE", SC)
+
+            '            'http://bdlconsultores.dyndns.org/Consultas/Admin/verConsultas1.php?recordid=8526
+
+            '            If IdArticuloGastoAdministrativo > 0 Then
+
+            '                Dim cantidadGastosAdministrativos = 0
+
+            '                If Not EsClienteExcluidoDeGastosAdmin(SC, IdClienteAFacturarle) Then
+
+            '                    For Each cdp In oListaCDP
+            '                        If cdp.AgregaItemDeGastosAdministrativos Then cantidadGastosAdministrativos += 1
+            '                    Next
+            '                End If
+
+
+            '                If cantidadGastosAdministrativos > 0 Then
+
+
+            '                    'http://bdlconsultores.dyndns.org/Consultas/Admin/verConsultas1.php?recordid=8526
+            '                    Dim PrecioArticuloGastoAdministrativo As Double = ListaPreciosManager.Tarifa(SC, IdClienteAFacturarle, IdArticuloGastoAdministrativo)
+            '                    If PrecioArticuloGastoAdministrativo = 0 Then
+            '                        PrecioArticuloGastoAdministrativo = StringToDecimal(txtTarifaGastoAdministrativo)
+            '                        'PrecioArticuloGastoAdministrativo = ListaPreciosManager.Tarifa(sc, IdClienteAFacturarle, IdArticuloGastoAdministrativo)
+            '                    End If
+            '                    If PrecioArticuloGastoAdministrativo = 0 Then
+            '                        'tanto la lista de precios como el default estan en 0
+            '                        EntidadManager.ErrHandler2WriteErrorLogPronto("No se pudo asignar la tarifa de gasto administrativo para " & IdClienteAFacturarle, SC, "")
+            '                    End If
+
+
+            '                    'Solicitan que la tarifa del artículo Cambio de Carta de Porte la tome siempre de la Lista de Precios de 
+            '                    'cada cliente y que la pida en los casos en que la Carta de Porte tiene el tilde y el 
+            '                    'cliente al que se le facturará no tiene elegida una tarifa.
+            '                    '-ah, o sea que no habrá mas default, no?
+
+
+            '                    With .DetFacturas.Item(-1)
+            '                        With .Registro
+            '                            'If iisNull(dr.item("IdArticulo")) = "" Then Continue For
+            '                            'Debug.Print(dr.item("IdArticulo"))
+            '                            .Fields("IdArticulo").Value = IdArticuloGastoAdministrativo
+            '                            .Fields("Cantidad").Value = cantidadGastosAdministrativos 'le pasé la división por mil a la tarifa porque acá hacen un truco, y en el Pronto solo tengo 2 decimales
+            '                            .Fields("PrecioUnitario").Value = PrecioArticuloGastoAdministrativo
+            '                            .Fields("PrecioUnitarioTotal").Value = PrecioArticuloGastoAdministrativo
+
+
+            '                            .Fields("Costo").Value = 0
+            '                            .Fields("Bonificacion").Value = 0
+            '                            .Fields("OrigenDescripcion").Value = 1
+            '                            .Fields("Observaciones").Value = "GASTOS ADMINISTRATIVOS" '"POR GASTOS ADMINISTRATIVOS"
+            '                        End With
+            '                        .Modificado = True
+
+            '                    End With
+            '                End If
+
+            '            End If
+
+
+
+            '            '//////////////////////////////////////////
+            '            '//////////////////////////////////////////
+            '            '//////////////////////////////////////////
+
+
+
+            '            'CalculaFactura(oFac)
+            '            Try
+            '                CalculaFacturaSimplificado(oFac, SC, Session, numeropuntoVenta, IdPuntoVenta) 'recien ahi se asigna la letra de la factura...
+            '            Catch ex As Exception
+            '                ErrHandler2.WriteError("Error en CalculaFacturaSimplificado. " & ex.ToString)
+            '                MandarMailDeError(ex)
+            '                Return -1
+            '            End Try
+
+
+
+
+            '            With .Registro
+
+            '                .Fields("ImporteIva2").Value = 0
+            '                .Fields("ImporteBonificacion").Value = 0
+
+            '                If False Then
+            '                    .Fields("RetencionIBrutos1").Value = 0
+            '                    .Fields("PorcentajeIBrutos1").Value = 0
+            '                    .Fields("RetencionIBrutos2").Value = 0
+            '                    .Fields("PorcentajeIBrutos2").Value = 0
+            '                End If
+
+            '            End With
+
+
+
+
+
+            '            '///////////////////////////////////////////////////////////////////////////////////////
+            '            '///////////////////////////////////////////////////////////////////////////////////////
+            '            '///////////////////////////////////////////////////////////////////////////////////////
+            '            ' Defino el punto de venta
+            '            ' Talonario=Punto de venta + Letra + Tipo de Comprobante (factura, NC, ND)
+
+
+            '            'Traigo el IdPuntoVenta
+            '            '///////////////////////////////////////////////////////////////////////////////////////
+            '            '///////////////////////////////////////////////////////////////////////////////////////
+
+            '            'de qué obra es el usuario?
+
+            '            Dim mvarNumeracionUnica = False
+            '            'If parametros.Fields("NumeracionUnica").Value = "SI" Then mvarNumeracionUnica = True 
+
+            '            'If mvarNumeracionUnica And oFac.Registro.Fields("TipoABC").Value <> "E" Then
+            '            '    oRs = ConvertToRecordset(EntidadManager.GetStoreProcedure(sc, "PuntosVenta_TX_PuntosVentaPorIdTipoComprobanteLetra", ArrayVB6(puntoVenta, oFac.Registro.Fields("TipoABC").Value)))
+
+            '            'Else
+            '            '    'oRs = ConvertToRecordset(EntidadManager.GetStoreProcedure(sc, "PuntosVenta_TX_PuntosVentaPorIdTipoComprobanteLetra", ArrayVB6(puntoVenta, oFac.Registro.Fields("TipoABC").Value)))
+            '            'End If
+
+
+            '            ''If oRs.RecordCount = 1 Then 
+            '            ''verificar que es de tipocomprobante=Factura
+            '            'oRs.MoveFirst()
+
+            '            'mvarPuntoVenta = oRs.Fields(0).Value
+
+
+            '            IdPuntoVenta = EntidadManager.TablaSelectId(SC, "PuntosVenta", "PuntoVenta=" & numeropuntoVenta & " AND Letra='" & oFac.Registro.Fields("TipoABC").Value & "' AND IdTipoComprobante=" & EntidadManager.IdTipoComprobante.Factura)
+
+            '            oFac.Registro.Fields("IdPuntoVenta").Value = IdPuntoVenta
+
+
+            '            If IdPuntoVenta = 0 Then
+            '                ErrHandler2.WriteError("No hay talonario de facturas para el punto de venta " & numeropuntoVenta & " Letra " & oFac.Registro.Fields("TipoABC").Value)
+            '                Return -1
+            '            End If
+
+            '            '///////////////////////////////////////////////////////////////////////////////////////
+            '            '///////////////////////////////////////////////////////////////////////////////////////
+            '            '///////////////////////////////////////////////////////////////////////////////////////
+            '            'Aplico el IdPuntoVenta
+
+
+
+            '            Dim oPto 'As ComPronto.PuntoVenta 
+            '            oPto = oAp.PuntosVenta.Item(IdPuntoVenta)
+            '            With oPto.Registro
+            '                Dim n = .Fields("ProximoNumero").Value
+            '                oFac.Registro.Fields("NumeroFactura").Value = n
+            '                oFac.Registro.Fields("PuntoVenta").Value = numeropuntoVenta
+
+            '                .Fields("ProximoNumero").Value = n + 1
+            '            End With
+            '            oPto.Guardar()
+            '            oPto = Nothing
+
+            '            For i = -100 To (-100 - (oFac.DetFacturas.Count - 1)) Step -1
+            '                With oFac.DetFacturas.Item(i).Registro
+            '                    'estos datos recien los tengo cuando termina
+            '                    .Fields("NumeroFactura").Value = mNumero
+            '                    .Fields("TipoABC").Value = mLetra
+            '                    .Fields("PuntoVenta").Value = IdPuntoVenta
+            '                End With
+            '            Next
+
+            '            'End If
+            '            '///////////////////////////////////////////////////////////////////////////////////////
+            '            '///////////////////////////////////////////////////////////////////////////////////////
+            '            '///////////////////////////////////////////////////////////////////////////////////////
+            '            '///////////////////////////////////////////////////////////////////////////////////////
+
+            '            Debug.Print("        ComPronto paso 4 listo " & DateDiff(DateInterval.Second, tTemp, Now))
+            '            tTemp = Now
+
+
+            '            Dim idfac = TraerUltimaIdFacturaCreada(SC)
+
+
+            '            Try
+
+            '                Select Case .Guardar()
+            '                    Case ICompMTSManager.MisEstados.Correcto
+            '                    Case ICompMTSManager.MisEstados.ModificadoPorOtro
+            '                        'MsgBox("El Regsitro ha sido modificado")
+            '                        ErrHandler2.WriteError("El Regsitro ha sido modificado")
+            '                        Return -1
+            '                    Case ICompMTSManager.MisEstados.NoExiste
+            '                        'MsgBox("El registro ha sido eliminado")
+            '                        ErrHandler2.WriteError("El registro ha sido eliminado")
+            '                        Return -1
+            '                    Case ICompMTSManager.MisEstados.ErrorDeDatos
+            '                        'MsgBox("Error de ingreso de datos")
+            '                        ErrHandler2.WriteError("Error de ingreso de datos")
+            '                        Return -1
+            '                End Select
+
+            '            Catch ex As Exception
+            '                'ver si aumento el idfactura
+            '                Dim idfac2 = TraerUltimaIdFacturaCreada(SC)
+
+
+            '                Dim s As String = idfac.ToString & " " & idfac2.ToString & "Explosión al llamar a Compronto.Factura.Guardar(). Ojo porque si se generó pero no se manda a imprimir les rompe la numeración!!! " &
+            '                    " La factura quizas queda por la mitad y no genera el subdiario (eso es un problema del ComPronto).  Si es Type Mismatch se puede dar tanto " &
+            '                    " cuando se rompe la compatibilidad del COM, como cuando se rompe la compatibilidad del " &
+            '                    " recordset/storeproc/tabla (y esto es lo mas probable, ya que está pasando en el guardar() )" &
+            '                    " [verificar que desde Pronto se puede dar de alta esta misma factura con el " &
+            '                    " mismo cliente. Si sigue el error, verificar que están corridos los storeprocs de " &
+            '                    " Pronto actualizados]     Si es 'Application uses a value of the wrong type' puede ser el tipo o " &
+            '                    " un overflow del tipo, una cadena muy larga. Queda algún tipo de rastro en el log sql de Pronto? -no vas a" &
+            '                    " encontrar mucha informacion ahí. Hay que correr el Profiler mientras facturás y ver cual es la ultima llamada antes de Log_InsertarRegistro. " &
+            '                    " Puede ser la actualizacion de la entidad Cliente, " &
+            '                    " así que por Pronto hay que intentar facturarle al mismo cliente Y TAMBIEN ver si se puede editar y grabar el formulario de cliente. " &
+            '                    "-Por qué fue que tuvimos un problema así en Capen? Qué era lo que tenía el Clientes_M, mal el largo de un campo? " &
+            '                                    ex.ToString
+            '                ErrHandler2.WriteError(s)
+            '                MandarMailDeError(s)
+
+            '                Return -1  'si la factura se creó, no puedo devolver lo mismo que en los otros casos
+
+            '            End Try
+
+            '        End With
+            '        idFacturaCreada = oFac.Registro.Fields(0).Value
+
+
+            '        '///////////////////////////////////////////////////////////////////////
+            '        '///////////////////////////////////////////////////////////////////////
+            '        '///////////////////////////////////////////////////////////////////////
+            '        'esto es codigo que se ejecuta en el boton aceptar (cmd_Click index 0) del frmFacturas 
+            '        '///////////////////////////////////////////////////////////////////////
+            '        '///////////////////////////////////////////////////////////////////////
+            '        '///////////////////////////////////////////////////////////////////////
+
+            '        'aumentar numerador IIBB 
+
+            '        Dim db As ProntoMVC.Data.Models.DemoProntoEntities = New ProntoMVC.Data.Models.DemoProntoEntities(ProntoMVC.Data.Models.Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC)))
+
+
+            '        If oFac.Registro.Fields("RetencionIBrutos1").Value > 0 Then
+
+            '            Dim cli = db.Clientes.Find(IdClienteAFacturarle)
+            '            Dim ibcond = db.IBCondiciones.Find(cli.IdIBCondicionPorDefecto)
+            '            Dim mIdProvinciaIIBB = ibcond.IdProvincia
+            '            Dim oPrv As Models.Provincia = db.Provincias.Find(mIdProvinciaIIBB)
+
+            '            Dim mNum = oPrv.ProximoNumeroCertificadoPercepcionIIBB
+            '            oPrv.ProximoNumeroCertificadoPercepcionIIBB = mNum + 1
+
+            '            db.SaveChanges()
+            '        End If
+
+
+            '        'If dcfields(4).Enabled And Check1(0).Value = 1 Then
+            '        '    Dim oPrv As ComPronto.Provincia
+            '        '    oRs = Aplicacion.IBCondiciones.TraerFiltrado("_PorId", origen.Registro.Fields("IdIBCondicion").Value)
+            '        '    If oRs.RecordCount > 0 Then
+            '        '        If Not IsNull(oRs.Fields("IdProvincia").Value) Then
+            '        '            oPrv = db.Provincias.Find(  oRs.Fields("IdProvincia").Value))
+            '        '            With oPrv.Registro
+            '        '                mNum = IIf(IsNull(.Fields("ProximoNumeroCertificadoPercepcionIIBB").Value), 1, .Fields("ProximoNumeroCertificadoPercepcionIIBB").Value)
+            '        '                origen.Registro.Fields("NumeroCertificadoPercepcionIIBB").Value = mNum
+            '        '                .Fields("ProximoNumeroCertificadoPercepcionIIBB").Value = mNum + 1
+            '        '            End With
+
+            '        '            db.SaveChanges()
+            '        '        End If
+            '        '    End If
+            '        'End If
+
+
+            '        '///////////////////////////////////////////////////////////////////////
+            '        '///////////////////////////////////////////////////////////////////////
+            '        '///////////////////////////////////////////////////////////////////////
+            '        '///////////////////////////////////////////////////////////////////////
+            '        '///////////////////////////////////////////////////////////////////////
+
+            '        oFac = Nothing
+
+
+
+
+
+
+            '        Try
+            '            EntidadManager.LogPronto(SC, idFacturaCreada, "Factura por ProntoWeb", usuario)
+            '        Catch ex As Exception
+            '            ErrHandler2.WriteError(ex)
+            '        End Try
+
+
+            '    Else
+            '        'este comentario lo puse ya en un if anterior
+            '        'AgregarMensajeProcesoPresto(oRsErrores, "La factura " & mComprobante & " ya existe, no se generará")
+            '    End If
+
+            'Catch ex As Exception
+
+            '    ErrHandler2.WriteError("Error en la llamada a CreaFacturaCOMpronto. " & ex.ToString)
+            '    MandarMailDeError(ex)
+            'End Try
+
+            'Debug.Print("        ComPronto paso 5 listo " & DateDiff(DateInterval.Second, tTemp, Now))
+            'tTemp = Now
+
+
+            Return idFacturaCreada
+
+        End Function
+
+
+
+
+
+
+
+
 
 
         Shared Function CreaFacturaCOMpronto(ByVal oListaCDP As System.Collections.Generic.List(Of Pronto.ERP.BO.CartaDePorte),
@@ -5799,10 +6824,12 @@ Namespace Pronto.ERP.Bll
                             renglons += 1 'como es un Enumerable, tengo que iterar, no tengo un metodo Count()
                         Next
 
+
+
                         'el asunto es que si una se pasa, debería parar toda la facturacion, y no saltarse solo esa factura
 
                         If renglons > MAXRENGLONES Then
-                            'ErrHandler2.WriteError("No definio en parametros la cuenta contable deudores varios")
+                            'tomar en cuenta embarques y manuales
 
                             'si tiro una excepcion acá, la captura el try de esta funcion
                             Dim s2 = "La factura para " & IdClienteAFacturarle.ToString() & " tiene " & renglons.ToString() & " renglones y el máximo es " & MAXRENGLONES.ToString()
