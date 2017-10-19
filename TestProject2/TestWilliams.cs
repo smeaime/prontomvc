@@ -985,7 +985,7 @@ Error in: https://prontoweb.williamsentregas.com.ar/ProntoWeb/CDPFacturacion.asp
             IEnumerable<LogicaFacturacion.grup> imputaciones = null;
 
 
-            
+
 
             //var f = db.Facturas.Find(idFactura);
 
@@ -994,10 +994,10 @@ Error in: https://prontoweb.williamsentregas.com.ar/ProntoWeb/CDPFacturacion.asp
 
             object primerId = 0, ultimoId = 0;
             object pag = 1;
-            
+
             // uso dos tickets: uno el de la grilla. el otro, de qué?
-            object sesionId = 0; 
-            string sesionIdposta= (new Random()).Next().ToString();
+            object sesionId = 0;
+            string sesionIdposta = (new Random()).Next().ToString();
 
 
             var gv = new System.Web.UI.WebControls.GridView();
@@ -1005,11 +1005,11 @@ Error in: https://prontoweb.williamsentregas.com.ar/ProntoWeb/CDPFacturacion.asp
             string errLog = "";
             object filas = "", slinks = "";
 
-            
-            
+
+
             //no importa las fechas, lo importante son las tildes de la grilla
-            var desde = DateTime.MinValue;
-            var hasta = DateTime.MaxValue; // new DateTime(2017, 1, 31);
+            var desde = new DateTime(1900, 1, 31);
+            var hasta = new DateTime(2100, 1, 31);
 
 
             System.Web.SessionState.HttpSessionState Session = null; // new System.Web.SessionState.HttpSessionState();
@@ -1025,8 +1025,10 @@ Error in: https://prontoweb.williamsentregas.com.ar/ProntoWeb/CDPFacturacion.asp
 
             //DataTable tablaEditadaDeFacturasParaGenerar = dtDatasourcePaso2() // es casi un wrapper. esto lo puedo reemplazar con la llamada mas directa a GetDatatableAsignacionAutomatica
 
-            
-                string sLista = string.Join(",", lista_int);
+
+            string sLista = string.Join(",", lista_int);
+
+
 
             DataTable tablaEditadaDeFacturasParaGenerar = Pronto.ERP.Bll.LogicaFacturacion.GetDatatableAsignacionAutomatica(
                                                      SC, ref pag, ref sesionId,
@@ -1039,8 +1041,34 @@ Error in: https://prontoweb.williamsentregas.com.ar/ProntoWeb/CDPFacturacion.asp
                                                     "", "", txtBuscar, "",
                                                      "", "",
                                                      0, 0, "", ref errLog,
-                                                     "", "",
+                                                     "", agruparArticulosPor,
                                                      ref filas, ref slinks, sesionIdposta);
+
+
+            // codigo de CambiarLasTarifasQueEstenEnCero()
+
+            foreach (DataRow r in tablaEditadaDeFacturasParaGenerar.Rows)
+            {
+                if ((int) (r["TarifaFacturada"]) == 0)
+                {
+                    try
+                    {
+
+                        long Cli= iisNull(entidadmana BuscaIdClientePreciso(iisNull(r["FacturarselaA"], ""), SC), -1);
+
+                        Pronto.ERP.BO.CartaDePorte ocdp = CartaDePorteManager.GetItem(SC, (int) r["idCartaDePorte"]);
+
+                        ListaPreciosManager.SavePrecioPorCliente(SC, Cli, ocdp.IdArticulo, 1.55);
+                    }
+                    catch (Exception ex)
+                    {
+                        ErrHandler2.WriteError(ex);
+
+                    }
+                }
+            }
+
+
 
 
 
