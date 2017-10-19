@@ -23,6 +23,9 @@ Imports LogicaInformesWilliams
 Imports Pronto.ERP.Bll.EntidadManager
 
 
+Imports System.Web.Services
+
+
 Partial Class ControlesDiarios
     Inherits System.Web.UI.Page
 
@@ -134,7 +137,7 @@ Partial Class ControlesDiarios
 
         Dim s = New ServicioCartaPorte.servi()
 
-        Dim sqlquery4 = s.ControlesDiarios_DynamicGridData_ExcelExportacion_UsandoInternalQuery(SC, "Fecha", "desc", 1, 999999, True, filtro, "", "", 0, 0, "")
+        Dim sqlquery4 = s.ControlesDiarios_DynamicGridData_ExcelExportacion_UsandoInternalQuery(SC, "Fecha", "desc", 1, 999999, True, filters, "", "", 0, 0, "")
 
 
 
