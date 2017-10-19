@@ -867,6 +867,96 @@ namespace ProntoMVC.Tests
 
 
 
+
+
+
+
+
+
+        [TestMethod]
+        public void SincroTerraVerde_46499()
+        {
+
+            string sErrores = "", sTitulo = "";
+            LinqCartasPorteDataContext db = null;
+
+            // el _CONST_MAXROWS sale del app.config
+
+            int registrosf = 0;
+
+            int idcli = CartaDePorteManager.BuscarVendedorPorCUIT("30 -71544287-2", SC, "");
+
+
+            var output = SincronismosWilliamsManager.GenerarSincro("Terra Verde", ref sErrores, SC, "dominio", ref sTitulo
+                                , CartaDePorteManager.enumCDPestado.DescargasMasFacturadas,
+                     "", -1, idcli,
+                -1, -1,
+                -1, -1, -1, -1,
+                 CartaDePorteManager.FiltroANDOR.FiltroOR, "Ambas",
+                new DateTime(2017, 1, 13), new DateTime(2017, 1, 16),
+                -1, "Ambas", false, "", "", -1, ref registrosf, 40);
+
+
+
+
+
+            //            Estamos desarrollando el sincro de Terra Verde con la gente de BIT.
+            //Te paso errores que nos pidieron modificar, el sincro que le pasamos como ejemplo fue el de BTG(Engelhart).
+
+            //Te lo reenvie por correo tambien:
+
+
+
+            //Hola Tomas, necesito que hagamos la siguiente corrección en la generación del archivo TXT, dado a que no nos están ingresando correctamente los movimientos.
+            //El problema se nos da en los siguientes puntos:
+
+            //            CAMPO CALIDAD: Posición en el txt 940 - 943
+            //o Si es de Camara = CC
+            //o Si es condición calidad grado = G1 – G2 o G3
+            //o Si es Fuera de Standart = FE
+
+
+            //CAMPO VENDEDOR: Posición en el txt 263 - 276
+            //El CUIT del vendedor, depende de la posición en la cual este el CUIT de TERRA VERDE.
+            //SI TERRA VERDE esta en remitente Comercial:
+            //§ Debe enviar el Titular, si hay intermediario, debe enviar el intermediario.
+            //SI TERRA VERDE esta como Intermediario:
+            //§ Se debe enviar como vendedor el titular.
+            //CAMPO COMPRADOR: Posición en el txt 131 - 144
+            //o SI TERRA VERDE esta en remitente Comercial:
+            //§ Se debe enviar como comprador el destinatario.
+            //o SI TERRA VERDE Intermediario:
+            //§ Se debe enviar como comprador el Remitente Comercial.
+
+            //O sea que para el siguiente caso:
+            //            Vendedor = “CUIT DE ELLIFF”
+            //Comprador = “CUIT CARGILL”
+
+
+
+
+
+
+
+
+            //File.Copy(output, @"C:\Users\Administrador\Desktop\"   Path.GetFileName(output), true);
+            System.Diagnostics.Process.Start(output);
+        }
+
+
+
+
+
+        [TestMethod]
+        public void no_facturar_las_q_tienen_clientes_bloqueados_por_cobranzas_43121()
+        {
+        }
+
+
+
+
+
+
         [TestMethod]
         public void FACTURACION_FUTUROS_Y_OPCIONES_maximo_de_renglones_28265()
         {
@@ -1049,14 +1139,13 @@ Error in: https://prontoweb.williamsentregas.com.ar/ProntoWeb/CDPFacturacion.asp
 
             foreach (DataRow r in tablaEditadaDeFacturasParaGenerar.Rows)
             {
-                if ((int) (r["TarifaFacturada"]) == 0)
+                if ((int)(r["TarifaFacturada"]) == 0)
                 {
                     try
                     {
+                        long Cli = SQLdinamico.BuscaIdClientePreciso(r["FacturarselaA"].NullSafeToString(), SC);
 
-                        long Cli= iisNull(entidadmana BuscaIdClientePreciso(iisNull(r["FacturarselaA"], ""), SC), -1);
-
-                        Pronto.ERP.BO.CartaDePorte ocdp = CartaDePorteManager.GetItem(SC, (int) r["idCartaDePorte"]);
+                        Pronto.ERP.BO.CartaDePorte ocdp = CartaDePorteManager.GetItem(SC, (int)r["idCartaDePorte"]);
 
                         ListaPreciosManager.SavePrecioPorCliente(SC, Cli, ocdp.IdArticulo, 1.55);
                     }
@@ -1252,80 +1341,6 @@ Error in: https://prontoweb.williamsentregas.com.ar/ProntoWeb/CDPFacturacion.asp
 
 
 
-
-
-
-
-
-        [TestMethod]
-        public void SincroTerraVerde_46499()
-        {
-
-            string sErrores = "", sTitulo = "";
-            LinqCartasPorteDataContext db = null;
-
-            // el _CONST_MAXROWS sale del app.config
-
-            int registrosf = 0;
-
-            int idcli = CartaDePorteManager.BuscarVendedorPorCUIT("30 -71544287-2", SC, "");
-
-
-            var output = SincronismosWilliamsManager.GenerarSincro("Terra Verde", ref sErrores, SC, "dominio", ref sTitulo
-                                , CartaDePorteManager.enumCDPestado.DescargasMasFacturadas,
-                     "", -1, idcli,
-                -1, -1,
-                -1, -1, -1, -1,
-                 CartaDePorteManager.FiltroANDOR.FiltroOR, "Ambas",
-                new DateTime(2017, 1, 13), new DateTime(2017, 1, 16),
-                -1, "Ambas", false, "", "", -1, ref registrosf, 40);
-
-
-
-
-
-            //            Estamos desarrollando el sincro de Terra Verde con la gente de BIT.
-            //Te paso errores que nos pidieron modificar, el sincro que le pasamos como ejemplo fue el de BTG(Engelhart).
-
-            //Te lo reenvie por correo tambien:
-
-
-
-            //Hola Tomas, necesito que hagamos la siguiente corrección en la generación del archivo TXT, dado a que no nos están ingresando correctamente los movimientos.
-            //El problema se nos da en los siguientes puntos:
-
-            //            CAMPO CALIDAD: Posición en el txt 940 - 943
-            //o Si es de Camara = CC
-            //o Si es condición calidad grado = G1 – G2 o G3
-            //o Si es Fuera de Standart = FE
-
-
-            //CAMPO VENDEDOR: Posición en el txt 263 - 276
-            //El CUIT del vendedor, depende de la posición en la cual este el CUIT de TERRA VERDE.
-            //SI TERRA VERDE esta en remitente Comercial:
-            //§ Debe enviar el Titular, si hay intermediario, debe enviar el intermediario.
-            //SI TERRA VERDE esta como Intermediario:
-            //§ Se debe enviar como vendedor el titular.
-            //CAMPO COMPRADOR: Posición en el txt 131 - 144
-            //o SI TERRA VERDE esta en remitente Comercial:
-            //§ Se debe enviar como comprador el destinatario.
-            //o SI TERRA VERDE Intermediario:
-            //§ Se debe enviar como comprador el Remitente Comercial.
-
-            //O sea que para el siguiente caso:
-            //            Vendedor = “CUIT DE ELLIFF”
-            //Comprador = “CUIT CARGILL”
-
-
-
-
-
-
-
-
-            //File.Copy(output, @"C:\Users\Administrador\Desktop\"   Path.GetFileName(output), true);
-            System.Diagnostics.Process.Start(output);
-        }
 
 
 
