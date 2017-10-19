@@ -1570,6 +1570,7 @@ Partial Class CDPFacturacion
 
 
 
+        'validar lo de bloq por cobranzas
 
         '//////////////////////////////////////
         '//////////////////////////////////////

@@ -211,7 +211,7 @@ public class JQGridHandler : IHttpHandler
 
         // An ASHX is a generic HttpHandler. An ASMX file is a web service. ASHX is a good lean way to provide a response to AJAX calls, but if you want to provide a response which changes based on conditions (such as variable inputs) it can become a bit of a handful - lots of if else etc. ASMX can house mulitple methods which can take parameters.
 
-        
+
         //If System.Diagnostics.Debugger.IsAttached() Or ConfigurationManager.AppSettings("UrlDominio").Contains("localhost") Then
         //     scs = scLocal
         // Else
@@ -219,11 +219,13 @@ public class JQGridHandler : IHttpHandler
         // End If
 
 
-        var usuario = Membership.GetUser();
+        var usuario = Membership.GetUser().UserName;
 
 
         var a = new ServicioCartaPorte.servi();
-        string output = a.ControlesDiarios_DynamicGridData(sortColumnName, sortOrderBy, Convert.ToInt32(pageIndex), Convert.ToInt32(numberOfRows), isSearch == "true", filters, FechaInicial, FechaFinal, Convert.ToInt32(puntovent), SQLdinamico.BuscaIdWilliamsDestinoPreciso(destino, SC), SC, usuario);
+        string output = a.ControlesDiarios_DynamicGridData(sortColumnName, sortOrderBy, Convert.ToInt32(pageIndex), Convert.ToInt32(numberOfRows),
+                                                            isSearch == "true", filters, FechaInicial, FechaFinal,
+                                                                Convert.ToInt32(puntovent), SQLdinamico.BuscaIdWilliamsDestinoPreciso(destino, SC), SC, usuario);
 
 
         //var a = new ServicioCartaPorte.servi();
@@ -236,8 +238,6 @@ public class JQGridHandler : IHttpHandler
 
 
     }
-
-
 
 
 
@@ -257,6 +257,7 @@ public class JQGridHandler : IHttpHandler
         public int records { get; set; }
         public jqGridRowJson[] rows { get; set; }
     }
+
     public class jqGridRowJson
     {
         public string id { get; set; }
@@ -266,4 +267,6 @@ public class JQGridHandler : IHttpHandler
 
     // de la misma manera que estas llamando con jquery para buscar los acopios por cliente
 
-        
+
+}
+  

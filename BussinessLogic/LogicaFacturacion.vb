@@ -78,12 +78,12 @@ Imports BitMiracle
 
 
 
-Namespace Pronto.ERP.Bll
+'Namespace Pronto.ERP.Bll
 
 
 
 
-    Public Class LogicaFacturacion
+Public Class LogicaFacturacion
         Public Const IDEMBARQUES = -2
 
         Public Shared ReadOnly Property MAXRENGLONES As Integer
@@ -1110,23 +1110,23 @@ Namespace Pronto.ERP.Bll
 
 
 
-            verificar que no haya bloqueados por cobranzas
-            If True Then
-                'http://bdlconsultores.ddns.net/Consultas/Admin/VerConsultas1.php?recordid=14168
-                'Precisan agregar una marca en el formulario de clientes para poder bloquear la carga de estos 
-                'en las cartas de porte debido a un conflicto de cobranzas.
-                'Este tilde deberán verlo solo algunos usuarios (activaremos a los de cobranzas).
-                'Luego, cuando quieran usarlo en una carta de porte el sistema tiene que dar un mensaje de advertencia diciendo 
-                'que el usuario no se puede utilizar y que tiene que ponerse en contacto con el sector de cobranzas.
-                'La carta de porte no se puede grabar si tiene un cliente en esta condición.
+            'verificar que no haya bloqueados por cobranzas
+            'If True Then
+            '    'http://bdlconsultores.ddns.net/Consultas/Admin/VerConsultas1.php?recordid=14168
+            '    'Precisan agregar una marca en el formulario de clientes para poder bloquear la carga de estos 
+            '    'en las cartas de porte debido a un conflicto de cobranzas.
+            '    'Este tilde deberán verlo solo algunos usuarios (activaremos a los de cobranzas).
+            '    'Luego, cuando quieran usarlo en una carta de porte el sistema tiene que dar un mensaje de advertencia diciendo 
+            '    'que el usuario no se puede utilizar y que tiene que ponerse en contacto con el sector de cobranzas.
+            '    'La carta de porte no se puede grabar si tiene un cliente en esta condición.
 
 
-                Dim sClientesCobranzas As String
-                If UsaClientesQueEstanBloqueadosPorCobranzas(SC, myCartaDePorte, sClientesCobranzas) Then
-                    MS &= "Cliente bloqueado. Ponerse en contacto con el sector de cobranzas (" & sClientesCobranzas & ") "
-                    MS &= vbCrLf   'return false
-                End If
-            End If
+            '    Dim sClientesCobranzas As String
+            '    If UsaClientesQueEstanBloqueadosPorCobranzas(SC, myCartaDePorte, sClientesCobranzas) Then
+            '        MS &= "Cliente bloqueado. Ponerse en contacto con el sector de cobranzas (" & sClientesCobranzas & ") "
+            '        MS &= vbCrLf   'return false
+            '    End If
+            'End If
 
 
 
@@ -9930,4 +9930,4 @@ Namespace Pronto.ERP.Bll
 
 
 
-End Namespace
+'End Namespace

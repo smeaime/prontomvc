@@ -622,6 +622,10 @@
           <DataField>CorredorCUIT2</DataField>
           <rd:UserDefined>true</rd:UserDefined>
         </Field>
+        <Field Name="MotivoRechazo">
+          <DataField>MotivoRechazo</DataField>
+          <rd:UserDefined>true</rd:UserDefined>
+        </Field>
       </Fields>
       <Query>
         <DataSourceName>DataSource1</DataSourceName>
@@ -775,6 +779,9 @@
             </TablixColumn>
             <TablixColumn>
               <Width>1.56758in</Width>
+            </TablixColumn>
+            <TablixColumn>
+              <Width>0.98425in</Width>
             </TablixColumn>
             <TablixColumn>
               <Width>0.98425in</Width>
@@ -2418,7 +2425,7 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="Textbox38">
+                    <Textbox Name="Textbox48">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
@@ -2426,6 +2433,41 @@
                           <TextRuns>
                             <TextRun>
                               <Value>Movimiento</Value>
+                              <Style>
+                                <FontSize>8pt</FontSize>
+                                <FontWeight>Bold</FontWeight>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style>
+                            <TextAlign>Center</TextAlign>
+                          </Style>
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>Textbox38</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Color>#c6daf8</Color>
+                          <Style>Solid</Style>
+                        </Border>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="Textbox38">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>Movi. motivo rechazo</Value>
                               <Style>
                                 <FontSize>8pt</FontSize>
                                 <FontWeight>Bold</FontWeight>
@@ -4059,7 +4101,7 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="Textbox40">
+                    <Textbox Name="Textbox44">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
@@ -4067,10 +4109,52 @@
                           <TextRuns>
                             <TextRun>
                               <Value>=Switch(Fields!IdTipoMovimiento.Value= 0,"",
-        Fields!IdTipoMovimiento.Value= 1,"Regresa Origen",
-        Fields!IdTipoMovimiento.Value= 2,"Acondiciona",
-        Fields!IdTipoMovimiento.Value= 3,"Cambia CP",
-        Fields!IdTipoMovimiento.Value= 4,"Cambio de Destino/Destinatario"
+        Fields!IdTipoMovimiento.Value= 1," Egresos contratos de Venta",
+        Fields!IdTipoMovimiento.Value= 2," Egreso Directo a Destino Productor",
+        Fields!IdTipoMovimiento.Value= 3,"Directo Destino contrato de Compra",
+        Fields!IdTipoMovimiento.Value= 4," Ingreso Entregado Productor"
+, Fields!IdTipoMovimiento.Value= 5,"Ingreso Contrato de Compra" 
+, Fields!IdTipoMovimiento.Value= 6,"Reingreso de Mercadería" 
+, Fields!IdTipoMovimiento.Value= 7,"Transferencia desde otra Planta" 
+)</Value>
+                              <Style>
+                                <FontSize>8pt</FontSize>
+                                <Color>#4d4d4d</Color>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style />
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>Textbox40</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Color>#e5e5e5</Color>
+                          <Style>Solid</Style>
+                        </Border>
+                        <BackgroundColor>White</BackgroundColor>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="Textbox40">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>=Switch(Fields!MotivoRechazo.Value= 0,"",
+        Fields!MotivoRechazo.Value= 1,"Regresa Origen",
+        Fields!MotivoRechazo.Value= 2,"Acondiciona",
+        Fields!MotivoRechazo.Value= 3,"Cambia CP",
+        Fields!MotivoRechazo.Value= 4,"Cambio de Destino/Destinatario"
 )</Value>
                               <Style>
                                 <FontSize>8pt</FontSize>
@@ -5716,6 +5800,39 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
+                    <Textbox Name="Textbox46">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value />
+                              <Style>
+                                <FontSize>8pt</FontSize>
+                                <FontWeight>Bold</FontWeight>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style />
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>Textbox46</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Color>#e5e5e5</Color>
+                          <Style>Solid</Style>
+                        </Border>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
                     <Textbox Name="Textbox42">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
@@ -5801,6 +5918,11 @@
             <TablixMember />
             <TablixMember />
             <TablixMember />
+            <TablixMember>
+              <Visibility>
+                <Hidden>true</Hidden>
+              </Visibility>
+            </TablixMember>
           </TablixMembers>
         </TablixColumnHierarchy>
         <TablixRowHierarchy>
@@ -5837,7 +5959,7 @@
         <Top>43.05329mm</Top>
         <Left>3.12769mm</Left>
         <Height>17.47088mm</Height>
-        <Width>1108.22383mm</Width>
+        <Width>1133.22385mm</Width>
         <Style>
           <Border>
             <Style>None</Style>
@@ -5984,7 +6106,7 @@
       <Prompt>sServidor</Prompt>
     </ReportParameter>
   </ReportParameters>
-  <Width>1115.83215mm</Width>
+  <Width>1136.35157mm</Width>
   <Page>
     <PageFooter>
       <Height>10.90083mm</Height>
