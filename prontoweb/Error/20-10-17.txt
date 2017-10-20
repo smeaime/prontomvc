@@ -81,3 +81,42 @@ Log Entry :
 10/20/2017 09:57:44
 Error in: http://localhost:50769/ProntoWeb/ControlesDiarios.aspx/ExportarGrillaNormal. Error Message:Archivo generado C:\bdl\pronto\prontoweb\DataBackupear\Listado 20Oct.2017_095735.xls
 __________________________
+
+Log Entry : 
+10/20/2017 11:20:23
+Error in: http://localhost:50769/ProntoWeb/Principal.aspx. Error Message:Mariano esta logueado, pero lo redirijo al login porque faltan los datos de session. No deberia mejor mandarlo a SeleccionarEmpresa? Ademas, no hago el LogOut y le queda el cookie!!!
+__________________________
+
+Log Entry : 
+10/20/2017 11:20:24
+Error in: http://localhost:50769/ProntoWeb/CartasDePortes.aspx?tipo=Todas. Error Message:Mariano
+__________________________
+
+Log Entry : 
+10/20/2017 11:21:01
+Error in: http://localhost:50769/ProntoWeb/SincronismosAutomaticos.aspx. Error Message:System.Exception
+TERRA VERDE No existe ese sincro
+   en Pronto.ERP.Bll.SincronismosWilliamsManager.ElegirCombosSegunParametro(String sSincronismo, TextBox txtTitular, TextBox txtCorredor, TextBox txtIntermediario, TextBox txtDestinatario, TextBox txtRcomercial, TextBox txtPopClienteAuxiliar, DropDownList cmbEstado, DropDownList cmbCriterioWHERE, DropDownList DropDownList2, String SC) en C:\bdl\pronto\BussinessLogic\SincronismosWilliamsManager.vb:línea 421
+   en SincronismosAutomaticos.Enviar(String sincro, String sEmail, String& sErr, Boolean bvistaPrevia) en C:\bdl\pronto\prontoweb\ProntoWeb\SincronismosAutomaticos.aspx.vb:línea 547
+BusinessLogic
+__________________________
+
+Log Entry : 
+10/20/2017 11:23:26
+Error in: http://localhost:50769/ProntoWeb/CartasDePortes.aspx?tipo=Todas. Error Message:Mariano
+__________________________
+
+Log Entry : 
+10/20/2017 11:32:47
+Error in: http://localhost:50769/ProntoWeb/Principal.aspx. Error Message:Mariano esta logueado, pero lo redirijo al login porque faltan los datos de session. No deberia mejor mandarlo a SeleccionarEmpresa? Ademas, no hago el LogOut y le queda el cookie!!!
+__________________________
+
+Log Entry : 
+10/20/2017 11:32:47
+Error in: http://localhost:50769/ProntoWeb/CartasDePortes.aspx?tipo=Todas. Error Message:Mariano
+__________________________
+
+Log Entry : 
+10/20/2017 11:34:01
+Error in: http://localhost:50769/ProntoWeb/SincronismosAutomaticos.aspx. Error Message:Generando sincro para Terra Verde
+__________________________

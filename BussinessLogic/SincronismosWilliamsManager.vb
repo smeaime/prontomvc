@@ -417,6 +417,15 @@ Namespace Pronto.ERP.Bll
                     txtPopClienteAuxiliar.Text = "LA BIZNAGA SA AGROPECUARIA"
 
 
+
+                Case "TERRA VERDE"
+                    'LARTIRIGOYEN: TITULAR / INTERMEDIARIO / RTTE COMERCIAL / CLIENTE OBSERVACIONES 
+                    txtTitular.Text = "TERRA VERDE AGRO INSUMOS S.A."
+                    txtIntermediario.Text = "TERRA VERDE AGRO INSUMOS S.A."
+                    txtRcomercial.Text = "TERRA VERDE AGRO INSUMOS S.A."
+                    txtPopClienteAuxiliar.Text = "TERRA VERDE AGRO INSUMOS S.A."
+
+
                 Case Else
                     Throw New Exception(sSincronismo.ToUpper + " No existe ese sincro")
 
