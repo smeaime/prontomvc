@@ -1020,6 +1020,17 @@ Error in: https://prontoweb.williamsentregas.com.ar/ProntoWeb/CDPFacturacion.asp
 
 
 
+
+
+            long idClienteAfacturarle = 13648; // futuros y opciones
+            int optFacturarA = 3; //para fyo, stella usa "por corredor" (o sea, opcion 3.   1. titular/ 2 destinatario /   3.corredor  / 4 a tercero / 5 automatico)   
+            string agruparArticulosPor = "Destino";
+            string txtCorredor = "";
+            int idClienteObservaciones = -1;
+            bool SeEstaSeparandoPorCorredor = true;
+            int PuntoVenta = 1;
+
+
             string txtBuscar = "";
             string txtTarifaGastoAdministrativo = "";
 
@@ -1027,15 +1038,8 @@ Error in: https://prontoweb.williamsentregas.com.ar/ProntoWeb/CDPFacturacion.asp
             //   numeroOrdenCompra As String, ByRef PrimeraIdFacturaGenerada As Object, 
 
 
-            int optFacturarA = 4;
-            string agruparArticulosPor = "Destino";
 
 
-            string txtCorredor = "";
-            long idClienteAfacturarle = 13648; // futuros y opciones
-            int idClienteObservaciones = -1;
-            bool SeEstaSeparandoPorCorredor = true;
-            int PuntoVenta = 1;
 
             DataTable dtRenglonesAgregados = new DataTable();
             //dtRenglonesAgregados.Rows.Add(dtRenglonesAgregados.NewRow());
@@ -1083,7 +1087,6 @@ Error in: https://prontoweb.williamsentregas.com.ar/ProntoWeb/CDPFacturacion.asp
             //Assert.AreEqual(0, f.RetencionIBrutos1);
 
             object primerId = 0, ultimoId = 0;
-            object pag = 1;
 
             // uso dos tickets: uno el de la grilla. el otro, de qué?
             object sesionId = 0;
@@ -1119,10 +1122,12 @@ Error in: https://prontoweb.williamsentregas.com.ar/ProntoWeb/CDPFacturacion.asp
             string sLista = string.Join(",", lista_int);
 
 
+            object pag = 1;
+            int cuantosrenglones = 9999999;
 
             DataTable tablaEditadaDeFacturasParaGenerar = LogicaFacturacion.GetDatatableAsignacionAutomatica(
                                                      SC, ref pag, ref sesionId,
-                                                   8, PuntoVenta,
+                                                   cuantosrenglones, PuntoVenta,
                                                     desde,
                                                     hasta,
                                                      sLista, "", optFacturarA, ""
@@ -1139,7 +1144,7 @@ Error in: https://prontoweb.williamsentregas.com.ar/ProntoWeb/CDPFacturacion.asp
 
             foreach (DataRow r in tablaEditadaDeFacturasParaGenerar.Rows)
             {
-                if ((decimal) (r["TarifaFacturada"]) == 0)
+                if ((decimal)(r["TarifaFacturada"]) == 0)
                 {
                     try
                     {
