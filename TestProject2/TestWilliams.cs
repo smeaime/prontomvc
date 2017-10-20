@@ -1120,7 +1120,7 @@ Error in: https://prontoweb.williamsentregas.com.ar/ProntoWeb/CDPFacturacion.asp
 
 
 
-            DataTable tablaEditadaDeFacturasParaGenerar = Pronto.ERP.Bll.LogicaFacturacion.GetDatatableAsignacionAutomatica(
+            DataTable tablaEditadaDeFacturasParaGenerar = LogicaFacturacion.GetDatatableAsignacionAutomatica(
                                                      SC, ref pag, ref sesionId,
                                                    8, PuntoVenta,
                                                     desde,
