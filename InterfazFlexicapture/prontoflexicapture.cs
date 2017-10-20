@@ -2030,7 +2030,7 @@ namespace ProntoFlexicapture
 
 
 
-    static ProntoMVC.Data.FuncionesGenericasCSharp.Resultados ProcesaCarta(IDocument document, string SC, string archivoOriginal, string DirApp)
+        static ProntoMVC.Data.FuncionesGenericasCSharp.Resultados ProcesaCarta(IDocument document, string SC, string archivoOriginal, string DirApp)
         {
 
             Pronto.ERP.BO.CartaDePorte cdp;
@@ -4736,8 +4736,8 @@ Formato localidad-provincia	destination	x
                 {
                     int idcliente = SQLdinamico.BuscaIdClientePreciso(rs, SC);
                     int idCorredor = SQLdinamico.BuscaIdVendedorPreciso(EntidadManager.NombreCliente(SC, idcliente), SC);
-                    q = q.Where(x => x.Vendedor == idcliente || x.Entregador == idcliente || x.Corredor==idCorredor || 
-                                    x.CuentaOrden1 == idcliente || x.CuentaOrden2==idcliente || x.IdClienteAuxiliar==idcliente );
+                    q = q.Where(x => x.Vendedor == idcliente || x.Entregador == idcliente || x.Corredor == idCorredor ||
+                                    x.CuentaOrden1 == idcliente || x.CuentaOrden2 == idcliente || x.IdClienteAuxiliar == idcliente);
                 }
             }
 
@@ -5524,7 +5524,7 @@ Formato localidad-provincia	destination	x
 
 
 
-        public virtual string ControlesDiarios_DynamicGridData_ExcelExportacion_UsandoInternalQuery(string SC, string sidx, string sord, int page, int rows, bool _search, 
+        public virtual string ControlesDiarios_DynamicGridData_ExcelExportacion_UsandoInternalQuery(string SC, string sidx, string sord, int page, int rows, bool _search,
                                                     string filters, string FechaInicial, string FechaFinal, int puntovent, int iddestino, string nombreusuario)
         {
 
@@ -5572,39 +5572,33 @@ Formato localidad-provincia	destination	x
 
             int totalrecords = 0;
 
+            IQueryable<ControlDescarga2> data = from x in db.CartasDePorteControlDescargas
+                                                where //(x.IdPuntoVenta == puntovent || puntovent == 0)
+                                                      //&&
+                                                        (x.Fecha >= FechaDesde && x.Fecha <= FechaHasta)
+                                                            &&
+                                                        (x.WilliamsDestino.PuntoVenta == puntovent || puntovent <= 0)
+                                                            &&
+                                                        (x.WilliamsDestino.IdWilliamsDestino == iddestino || iddestino <= 0)
+                                                select new ControlDescarga2 { Fecha = x.Fecha, Descripcion = x.WilliamsDestino.Descripcion, TotalDescargaDia = x.TotalDescargaDia };
 
 
-
-
-            string sqlquery4 = Filtrador.Filters.FiltroGenerico_UsandoIQueryable_DevolverInternalQuery<CartasDePorteControlDescarga>
+            string sqlquery4 = Filtrador.Filters.FiltroGenerico_UsandoIQueryable_DevolverInternalQuery<ControlDescarga2>
                                  (
-                                                         sidx, sord, 1, 999999, true, filters, db, ref totalrecords,
-                                                         db.CartasDePorteControlDescargas
-                                            .Where(x =>
-                                                    //(x.IdPuntoVenta == puntovent || puntovent == 0)
-                                                    //&&
-                                                    (x.Fecha >= FechaDesde && x.Fecha <= FechaHasta)
-                                                     &&
-                                                    (x.WilliamsDestino.PuntoVenta == puntovent || puntovent <= 0)
-                                                     &&
-                                                    (x.WilliamsDestino.IdWilliamsDestino == iddestino || iddestino <= 0)
-                                                 )
+                                                        sidx, sord, 1, 999999, true, filters, db, ref totalrecords, data
+
                                  );
 
-
-
-
             return sqlquery4;
-
-
-
-
-
         }
 
 
-
-
+        public class ControlDescarga2
+        {
+            public DateTime? Fecha { get; set; }
+            public string Descripcion { get; set; }
+            public int? TotalDescargaDia { get; set; }
+        }
 
 
 
@@ -5931,74 +5925,74 @@ Formato localidad-provincia	destination	x
 
             /*
             select
-*
-from
-(
-select
- FLOOR( sum(netoproc) /1000) as kilos, LOCORI.Nombre as localidad, isnull(PROVORI.Nombre,'BUENOS AIRES' ) as provincia
-from 
- dbo.fSQL_GetDataTableFiltradoYPaginado  
-				(  
+    *
+    from
+    (
+    select
+    FLOOR( sum(netoproc) /1000) as kilos, LOCORI.Nombre as localidad, isnull(PROVORI.Nombre,'BUENOS AIRES' ) as provincia
+    from 
+    dbo.fSQL_GetDataTableFiltradoYPaginado  
+                (  
 
- NULL, 
-					10, 
-					0,
-					NULL, 
-					-1,
-					 
--1,-1,
--1,
--1,
--1,
+    NULL, 
+                    10, 
+                    0,
+                    NULL, 
+                    -1,
 
-					-1, 
-					NULL, 
-					0,
-					@Modo,
-					@FechaDesde,
+    -1,-1,
+    -1,
+    -1,
+    -1,
 
-					@FechaHasta,
-					NULL, 
-					NULL,
-					 'FALSE',
-					NULL, 
-					NULL, 
+                    -1, 
+                    NULL, 
+                    0,
+                    @Modo,
+                    @FechaDesde,
 
-					NULL, 
-					NULL, 
-					NULL,
-					NULL, 
-					NULL
+                    @FechaHasta,
+                    NULL, 
+                    NULL,
+                     'FALSE',
+                    NULL, 
+                    NULL, 
 
-					)
-    
- as CDP
+                    NULL, 
+                    NULL, 
+                    NULL,
+                    NULL, 
+                    NULL
 
+                    )
 
+    as CDP
 
 
-RIGHT OUTER JOIN Localidades LOCORI ON CDP.Procedencia = LOCORI.IdLocalidad          
-LEFT OUTER JOIN Provincias PROVORI ON LOCORI.IdProvincia = PROVORI.IdProvincia           
-where   1=1
-	--procedencia is not null
-	--and netoproc > 0
-	
-	--and (producto like @producto or isnull(@producto,'')=''  )
-	--and (titulardesc like @cliente or
-	--    rcomercialdesc like @cliente  or
-	--    intermediariodesc like @cliente  or
-	--    destinatariodesc like @cliente 
-	--	or  isnull(@cliente,'')='' )
-	--and (destinodesc like @puerto or  isnull(@puerto,'')='')
 
 
-group by LOCORI.Nombre,PROVORI.Nombre
+    RIGHT OUTER JOIN Localidades LOCORI ON CDP.Procedencia = LOCORI.IdLocalidad          
+    LEFT OUTER JOIN Provincias PROVORI ON LOCORI.IdProvincia = PROVORI.IdProvincia           
+    where   1=1
+    --procedencia is not null
+    --and netoproc > 0
 
-) as C
---where kilos >= isnull(@TonsDesde,0)
---and kilos <= isnull(@TonsHasta,999999999)
+    --and (producto like @producto or isnull(@producto,'')=''  )
+    --and (titulardesc like @cliente or
+    --    rcomercialdesc like @cliente  or
+    --    intermediariodesc like @cliente  or
+    --    destinatariodesc like @cliente 
+    --	or  isnull(@cliente,'')='' )
+    --and (destinodesc like @puerto or  isnull(@puerto,'')='')
 
-order by kilos desc
+
+    group by LOCORI.Nombre,PROVORI.Nombre
+
+    ) as C
+    --where kilos >= isnull(@TonsDesde,0)
+    --and kilos <= isnull(@TonsHasta,999999999)
+
+    order by kilos desc
 
 
             */
@@ -6131,7 +6125,7 @@ order by kilos desc
             FirefoxProfile profile = new FirefoxProfile();
 
             profile.SetPreference("browser.download.folderList", 2);  // # 2 = custom location
-            //profile.SetPreference("browser.download.manager.showWhenStarting", false);
+                                                                      //profile.SetPreference("browser.download.manager.showWhenStarting", false);
             profile.SetPreference("browser.download.dir", directorioDescarga);  //os.getcwd()
             profile.SetPreference("browser.helperApps.neverAsk.saveToDisk", "application/ms-excel;application/xls;text/csv;application/vnd.ms-excel");
             profile.SetPreference("browser.helperApps.alwaysAsk.force", false);
@@ -6268,12 +6262,12 @@ order by kilos desc
 
                     sleep(15)
 
-		
+
                     bashCommand = "ren Urenport.xls \"Urenport_%time:~0,2%%time:~3,2%-%DATE:/=%.xls\" "
                     os.system(bashCommand)
-		
+
                     sleep(2)
-		 
+
                     bashCommand = "robocopy E:\SistemaPronto\Robot\  E:\Sites\ProntoTesting\Temp\Pegatinas *.xls /MOV /LOG+:LogRobot.txt "
                     os.system(bashCommand)
 
@@ -6281,12 +6275,12 @@ order by kilos desc
                     #browser.quit()
                     bashCommand = "Taskkill /IM Firefox.exe /F >nul 2>&1"
                     os.system(bashCommand)
-		
+
                     bashCommand = "ren Urenport.xls \"Urenport_%time:~0,2%%time:~3,2%-%DATE:/=%.xls\" "
                     os.system(bashCommand)
-		
+
                     sleep(2)
-		
+
                     bashCommand = "robocopy E:\SistemaPronto\Robot\  E:\Sites\ProntoTesting\Temp\Pegatinas *.xls /MOV /LOG+:LogRobot.txt"
                     os.system(bashCommand)
 
@@ -6315,7 +6309,7 @@ order by kilos desc
             FirefoxProfile profile = new FirefoxProfile();
 
             profile.SetPreference("browser.download.folderList", 2);  // # 2 = custom location
-            //profile.SetPreference("browser.download.manager.showWhenStarting", false);
+                                                                      //profile.SetPreference("browser.download.manager.showWhenStarting", false);
             profile.SetPreference("browser.download.dir", directorioDescarga);  //os.getcwd()
             profile.SetPreference("browser.helperApps.neverAsk.saveToDisk", "application/ms-excel;application/xls;text/csv;application/vnd.ms-excel");
             profile.SetPreference("browser.helperApps.alwaysAsk.force", false);
@@ -6445,12 +6439,12 @@ order by kilos desc
 
                     sleep(15)
 
-		
+
                     bashCommand = "ren Urenport.xls \"Urenport_%time:~0,2%%time:~3,2%-%DATE:/=%.xls\" "
                     os.system(bashCommand)
-		
+
                     sleep(2)
-		 
+
                     bashCommand = "robocopy E:\SistemaPronto\Robot\  E:\Sites\ProntoTesting\Temp\Pegatinas *.xls /MOV /LOG+:LogRobot.txt "
                     os.system(bashCommand)
 
@@ -6458,12 +6452,12 @@ order by kilos desc
                     #browser.quit()
                     bashCommand = "Taskkill /IM Firefox.exe /F >nul 2>&1"
                     os.system(bashCommand)
-		
+
                     bashCommand = "ren Urenport.xls \"Urenport_%time:~0,2%%time:~3,2%-%DATE:/=%.xls\" "
                     os.system(bashCommand)
-		
+
                     sleep(2)
-		
+
                     bashCommand = "robocopy E:\SistemaPronto\Robot\  E:\Sites\ProntoTesting\Temp\Pegatinas *.xls /MOV /LOG+:LogRobot.txt"
                     os.system(bashCommand)
 
@@ -6498,7 +6492,7 @@ order by kilos desc
             profile.SetPreference("browser.download.dir", @"C:\Users\Administrador\Downloads" );  //os.getcwd()
             profile.SetPreference("browser.helperApps.neverAsk.saveToDisk", "application/ms-excel;application/xls;text/csv;application/vnd.ms-excel");
             profile.SetPreference("browser.helperApps.alwaysAsk.force", false);
-    
+
             IWebDriver browser = new FirefoxDriver(profile);
             */
 
@@ -6627,12 +6621,12 @@ order by kilos desc
 
                     sleep(15)
 
-		
+
                     bashCommand = "ren Urenport.xls \"Urenport_%time:~0,2%%time:~3,2%-%DATE:/=%.xls\" "
                     os.system(bashCommand)
-		
+
                     sleep(2)
-		 
+
                     bashCommand = "robocopy E:\SistemaPronto\Robot\  E:\Sites\ProntoTesting\Temp\Pegatinas *.xls /MOV /LOG+:LogRobot.txt "
                     os.system(bashCommand)
 
@@ -6640,12 +6634,12 @@ order by kilos desc
                     #browser.quit()
                     bashCommand = "Taskkill /IM Firefox.exe /F >nul 2>&1"
                     os.system(bashCommand)
-		
+
                     bashCommand = "ren Urenport.xls \"Urenport_%time:~0,2%%time:~3,2%-%DATE:/=%.xls\" "
                     os.system(bashCommand)
-		
+
                     sleep(2)
-		
+
                     bashCommand = "robocopy E:\SistemaPronto\Robot\  E:\Sites\ProntoTesting\Temp\Pegatinas *.xls /MOV /LOG+:LogRobot.txt"
                     os.system(bashCommand)
 
@@ -6772,35 +6766,35 @@ order by kilos desc
                 /*
     __________________________
 
-Log Entry:
+    Log Entry:
     07 / 27 / 2017 18:05:29
-Error in: . Error Message:hilo #8: OpenQA.Selenium.WebDriverException: The HTTP request to the remote WebDriver server for URL http://localhost:63353/session/bce41a1121d80cf54cc11199098451be/element/0.38402688537807506-1/click timed out after 60 seconds. ---> System.Net.WebException: The operation has timed out
-at System.Net.HttpWebRequest.GetResponse()
-at OpenQA.Selenium.Remote.HttpCommandExecutor.CreateResponse(WebRequest request)
--- - End of inner exception stack trace-- -
-at OpenQA.Selenium.Remote.HttpCommandExecutor.CreateResponse(WebRequest request)
-at OpenQA.Selenium.Remote.HttpCommandExecutor.Execute(Command commandToExecute)
-at OpenQA.Selenium.Remote.DriverServiceCommandExecutor.Execute(Command commandToExecute)
-at OpenQA.Selenium.Remote.RemoteWebDriver.Execute(String driverCommandToExecute, Dictionary`2 parameters)
-at OpenQA.Selenium.Remote.RemoteWebElement.Click()
-at ServicioCartaPorte.servi.CerealnetSelenium_ConChromeHeadless(String directorioDescarga, String dirDriver) in C:\bdl\pronto\InterfazFlexicapture\prontoflexicapture.cs:line 6441
-at ProntoWindowsService.Service1.DoWorkSoloPegatinas() in C:\bdl\pronto\ProntoWindowsService\Service1.cs:line 819
-__________________________
+    Error in: . Error Message:hilo #8: OpenQA.Selenium.WebDriverException: The HTTP request to the remote WebDriver server for URL http://localhost:63353/session/bce41a1121d80cf54cc11199098451be/element/0.38402688537807506-1/click timed out after 60 seconds. ---> System.Net.WebException: The operation has timed out
+    at System.Net.HttpWebRequest.GetResponse()
+    at OpenQA.Selenium.Remote.HttpCommandExecutor.CreateResponse(WebRequest request)
+    -- - End of inner exception stack trace-- -
+    at OpenQA.Selenium.Remote.HttpCommandExecutor.CreateResponse(WebRequest request)
+    at OpenQA.Selenium.Remote.HttpCommandExecutor.Execute(Command commandToExecute)
+    at OpenQA.Selenium.Remote.DriverServiceCommandExecutor.Execute(Command commandToExecute)
+    at OpenQA.Selenium.Remote.RemoteWebDriver.Execute(String driverCommandToExecute, Dictionary`2 parameters)
+    at OpenQA.Selenium.Remote.RemoteWebElement.Click()
+    at ServicioCartaPorte.servi.CerealnetSelenium_ConChromeHeadless(String directorioDescarga, String dirDriver) in C:\bdl\pronto\InterfazFlexicapture\prontoflexicapture.cs:line 6441
+    at ProntoWindowsService.Service1.DoWorkSoloPegatinas() in C:\bdl\pronto\ProntoWindowsService\Service1.cs:line 819
+    __________________________
 
-Log Entry:
-07 / 27 / 2017 18:05:29
-Error in: . Error Message:OpenQA.Selenium.WebDriverException
-The HTTP request to the remote WebDriver server for URL http://localhost:63353/session/bce41a1121d80cf54cc11199098451be/element/0.38402688537807506-1/click timed out after 60 seconds.
-at OpenQA.Selenium.Remote.HttpCommandExecutor.CreateResponse(WebRequest request)
-at OpenQA.Selenium.Remote.HttpCommandExecutor.Execute(Command commandToExecute)
-at OpenQA.Selenium.Remote.DriverServiceCommandExecutor.Execute(Command commandToExecute)
-at OpenQA.Selenium.Remote.RemoteWebDriver.Execute(String driverCommandToExecute, Dictionary`2 parameters)
-at OpenQA.Selenium.Remote.RemoteWebElement.Click()
-at ServicioCartaPorte.servi.CerealnetSelenium_ConChromeHeadless(String directorioDescarga, String dirDriver) in C:\bdl\pronto\InterfazFlexicapture\prontoflexicapture.cs:line 6441
-at ProntoWindowsService.Service1.DoWorkSoloPegatinas() in C:\bdl\pronto\ProntoWindowsService\Service1.cs:line 819
-WebDriver
-__________________________
-*/
+    Log Entry:
+    07 / 27 / 2017 18:05:29
+    Error in: . Error Message:OpenQA.Selenium.WebDriverException
+    The HTTP request to the remote WebDriver server for URL http://localhost:63353/session/bce41a1121d80cf54cc11199098451be/element/0.38402688537807506-1/click timed out after 60 seconds.
+    at OpenQA.Selenium.Remote.HttpCommandExecutor.CreateResponse(WebRequest request)
+    at OpenQA.Selenium.Remote.HttpCommandExecutor.Execute(Command commandToExecute)
+    at OpenQA.Selenium.Remote.DriverServiceCommandExecutor.Execute(Command commandToExecute)
+    at OpenQA.Selenium.Remote.RemoteWebDriver.Execute(String driverCommandToExecute, Dictionary`2 parameters)
+    at OpenQA.Selenium.Remote.RemoteWebElement.Click()
+    at ServicioCartaPorte.servi.CerealnetSelenium_ConChromeHeadless(String directorioDescarga, String dirDriver) in C:\bdl\pronto\InterfazFlexicapture\prontoflexicapture.cs:line 6441
+    at ProntoWindowsService.Service1.DoWorkSoloPegatinas() in C:\bdl\pronto\ProntoWindowsService\Service1.cs:line 819
+    WebDriver
+    __________________________
+    */
 
             }
 
@@ -6834,7 +6828,7 @@ __________________________
 
         swiniak
         691
-  	 	
+
         Is there a particular version of Chrome you know works within Session 0? If I can simply downgrade, then this would be an option. – jwa Oct 20 '14 at 13:54
         1	 	
         With versions of Chrome before 38 all works as windows-service fine. Since version 38 - my windows service with selenium does not work. Downgrading Chrome solved problem for me – razon Oct 30 '14 at 9:50
@@ -6854,33 +6848,33 @@ __________________________
              * 
              * 
              Comment 39 by samu...@chromium.org, Nov 5 2014
-⚐
-Cc: samu...@chromium.org
-I'm able to reproduce this issue in M38, and I've also confirmed that M37 is not affected by this. The issue only comes up when launching Chrome from a scheduled task in Windows, and the task must be running as SYSTEM.
+    ⚐
+    Cc: samu...@chromium.org
+    I'm able to reproduce this issue in M38, and I've also confirmed that M37 is not affected by this. The issue only comes up when launching Chrome from a scheduled task in Windows, and the task must be running as SYSTEM.
 
-OS: Windows 7 Enterprise Service Pack 1
-Last Known Good Chrome Version: 37.0.2062.124
-First Known Bad Chrome Version: 38.0.2125.111 (current stable channel)
+    OS: Windows 7 Enterprise Service Pack 1
+    Last Known Good Chrome Version: 37.0.2062.124
+    First Known Bad Chrome Version: 38.0.2125.111 (current stable channel)
 
-The steps to reproduce are below. This should be enough to bisect on.
+    The steps to reproduce are below. This should be enough to bisect on.
 
-1. Start "Task Scheduler" and click "Create Task..."
-2. Give it a name, and set the user account to SYSTEM
-3. Click the Actions tab, click "New..."
-4. For Program/script, give it the path to chrome.exe
-5. For "Add arguments" type "--enable-logging --log-level=0 --user-data-dir=c:\sams_user_data_dir"
-6. Click the Triggers tab, click "New..." and set the time to something soon
-7. Click OK and OK, and wait for the task to run
-8. Open up c:\sams_user_data_dir\chrome_debug.log
+    1. Start "Task Scheduler" and click "Create Task..."
+    2. Give it a name, and set the user account to SYSTEM
+    3. Click the Actions tab, click "New..."
+    4. For Program/script, give it the path to chrome.exe
+    5. For "Add arguments" type "--enable-logging --log-level=0 --user-data-dir=c:\sams_user_data_dir"
+    6. Click the Triggers tab, click "New..." and set the time to something soon
+    7. Click OK and OK, and wait for the task to run
+    8. Open up c:\sams_user_data_dir\chrome_debug.log
 
-In M38, but not in M37, the debug log contains the error message below. Full logs from my system for M37 and M38 are attached.
+    In M38, but not in M37, the debug log contains the error message below. Full logs from my system for M37 and M38 are attached.
 
-[4620:5648:1105/142727:ERROR:child_process_launcher.cc(344)] Failed to launch child process
+    [4620:5648:1105/142727:ERROR:child_process_launcher.cc(344)] Failed to launch child process
 
- 	m37_chrome_debug.log 
-2.7 KB View Download
- 	m38_chrome_debug.log 
-2.8 KB View Download  
+    m37_chrome_debug.log 
+    2.7 KB View Download
+    m38_chrome_debug.log 
+    2.8 KB View Download  
              * 
              */
 

@@ -47,7 +47,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
 
         <asp:Button ID="informe" Text="VER INFORME" runat="server" Visible="True" CssClass="btn btn-primary"
-            Width="150" Height="40" />
+            Width="" Height="" />
                             <input type="button" id="btnExportarGrillaAjax2" value="Excel" class="btn btn-primary" />
 
         <br />
