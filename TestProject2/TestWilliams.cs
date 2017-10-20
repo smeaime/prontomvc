@@ -1023,12 +1023,16 @@ Error in: https://prontoweb.williamsentregas.com.ar/ProntoWeb/CDPFacturacion.asp
 
 
             long idClienteAfacturarle = 13648; // futuros y opciones
-            int optFacturarA = 3; //para fyo, stella usa "por corredor" (o sea, opcion 3.   1. titular/ 2 destinatario /   3.corredor  / 4 a tercero / 5 automatico)   
+            int optFacturarA = 4; //para fyo, stella usa "por corredor" (o sea, opcion 3.   1. titular/ 2 destinatario /   3.corredor  / 4 a tercero / 5 automatico)   
+            bool SeEstaSeparandoPorCorredor = false;
             string agruparArticulosPor = "Destino";
+
+
             string txtCorredor = "";
             int idClienteObservaciones = -1;
-            bool SeEstaSeparandoPorCorredor = true;
             int PuntoVenta = 1;
+
+
 
 
             string txtBuscar = "";
