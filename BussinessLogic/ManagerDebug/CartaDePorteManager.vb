@@ -17700,6 +17700,8 @@ usuario As String, ConexBDLmaster As String,
             '& r.Item(5)  & r.Item(0) & " " & r.Item(1)& " " & r.Item(4)  " " & r.Item(7)& " " & r.Item(3)
         Next
 
+        s += "<br/> [1 titular / 2 destinatario / 3 corredor / 4 a tercero / 5 automatico] <br/>"
+
         Return s
 
     End Function
