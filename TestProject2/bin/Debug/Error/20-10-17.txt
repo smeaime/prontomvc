@@ -1,0 +1,105 @@
+
+Log Entry : 
+10/20/2017 10:39:21
+Error in: . Error Message:entrando en GetDatatableAsignacionAutomatica . tanda 0
+__________________________
+
+Log Entry : 
+10/20/2017 10:39:22
+Error in: . Error Message:Cartas sin automatico encontrado (pero este es el modo no automatico!!!)19
+__________________________
+
+Log Entry : 
+10/20/2017 10:39:22
+Error in: . Error Message:entro a Preprocesos 27
+__________________________
+
+Log Entry : 
+10/20/2017 10:39:24
+Error in: . Error Message:despues de AgregarEmbarques32
+__________________________
+
+Log Entry : 
+10/20/2017 10:39:24
+Error in: . Error Message:despues de ExcluirDeGastosAdministrativos32
+__________________________
+
+Log Entry : 
+10/20/2017 10:39:24
+Error in: . Error Message:despues de ReasignarAquellosQueSeLeFacturanForzosamenteAlCorredor32
+__________________________
+
+Log Entry : 
+10/20/2017 10:39:24
+Error in: . Error Message:despues de CasosSyngenta_y_Acopios32
+__________________________
+
+Log Entry : 
+10/20/2017 10:39:24
+Error in: . Error Message:entro en PostProcesos 32
+__________________________
+
+Log Entry : 
+10/20/2017 10:39:25
+Error in: . Error Message:despues de EmparcharClienteSeparadoParaCasosQueSuperenUnMontoDeterminado 32
+__________________________
+
+Log Entry : 
+10/20/2017 10:39:25
+Error in: . Error Message:despues de EmparcharClienteSeparadoParaFacturasQueSuperanCantidadDeRenglones 32
+__________________________
+
+Log Entry : 
+10/20/2017 10:39:25
+Error in: . Error Message:despues de SepararAcopiosLDCyACA 32
+__________________________
+
+Log Entry : 
+10/20/2017 10:39:25
+Error in: . Error Message:despues de PostProcesoFacturacion_ReglaExportadores 32
+__________________________
+
+Log Entry : 
+10/20/2017 10:39:26
+Error in: . Error Message:punto 2 en GetDatatableAsignacionAutomatica . tanda 6123
+__________________________
+
+Log Entry : 
+10/20/2017 10:39:27
+Error in: . Error Message:punto 3 en GetDatatableAsignacionAutomatica . tanda 6123
+__________________________
+
+Log Entry : 
+10/20/2017 10:39:27
+Error in: . Error Message:punto 4 en GetDatatableAsignacionAutomatica . tanda 6123
+__________________________
+
+Log Entry : 
+10/20/2017 10:43:08
+Error in: . Error Message:Por generar el archivo C:\Users\Mariano\Downloads\Informe20oct.2017_104253.xls
+__________________________
+
+Log Entry : 
+10/20/2017 10:43:08
+Error in: . Error Message:Archivo generado C:\Users\Mariano\Downloads\Informe20oct.2017_104253.xls
+__________________________
+
+Log Entry : 
+10/20/2017 11:16:56
+Error in: . Error Message:Por generar el archivo C:\Users\Mariano\Downloads\Informe20oct.2017_111638.xls
+__________________________
+
+Log Entry : 
+10/20/2017 11:16:56
+Error in: . Error Message:Archivo generado C:\Users\Mariano\Downloads\Informe20oct.2017_111638.xls
+__________________________
+
+Log Entry : 
+10/20/2017 11:19:59
+Error in: . Error Message:Por generar el archivo C:\Users\Mariano\Downloads\Informe20oct.2017_111834.xls
+__________________________
+
+Log Entry : 
+10/20/2017 11:19:59
+Error in: . Error Message:Archivo generado C:\Users\Mariano\Downloads\Informe20oct.2017_111834.xls
+__________________________

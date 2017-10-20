@@ -5572,26 +5572,27 @@ Formato localidad-provincia	destination	x
 
             int totalrecords = 0;
 
-            IQueryable<ControlDescarga2> data = from x in db.CartasDePorteControlDescargas
-                                                where //(x.IdPuntoVenta == puntovent || puntovent == 0)
-                                                      //&&
-                                                        (x.Fecha >= FechaDesde && x.Fecha <= FechaHasta)
-                                                            &&
-                                                        (x.WilliamsDestino.PuntoVenta == puntovent || puntovent <= 0)
-                                                            &&
-                                                        (x.WilliamsDestino.IdWilliamsDestino == iddestino || iddestino <= 0)
-                                                select new ControlDescarga2 { Fecha = x.Fecha, Descripcion = x.WilliamsDestino.Descripcion, TotalDescargaDia = x.TotalDescargaDia };
-
 
             string sqlquery4 = Filtrador.Filters.FiltroGenerico_UsandoIQueryable_DevolverInternalQuery<ControlDescarga2>
                                  (
-                                                        sidx, sord, 1, 999999, true, filters, db, ref totalrecords, data
-
+                                                         sidx, sord, 1, 999999, true, filters, db, ref totalrecords,
+                                                         db.CartasDePorteControlDescargas
+                                            .Where(x =>
+                                                    //(x.IdPuntoVenta == puntovent || puntovent == 0)
+                                                    //&&
+                                                    (x.Fecha >= FechaDesde && x.Fecha <= FechaHasta)
+                                                     &&
+                                                    (x.WilliamsDestino.PuntoVenta == puntovent || puntovent <= 0)
+                                                     &&
+                                                    (x.WilliamsDestino.IdWilliamsDestino == iddestino || iddestino <= 0)
+                                                 ).Select(x => new ControlDescarga2 { Fecha = x.Fecha, Descripcion = x.WilliamsDestino.Descripcion, TotalDescargaDia = x.TotalDescargaDia })
                                  );
+
+
+
 
             return sqlquery4;
         }
-
 
         public class ControlDescarga2
         {

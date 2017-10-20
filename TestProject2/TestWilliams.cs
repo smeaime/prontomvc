@@ -1139,7 +1139,7 @@ Error in: https://prontoweb.williamsentregas.com.ar/ProntoWeb/CDPFacturacion.asp
 
             foreach (DataRow r in tablaEditadaDeFacturasParaGenerar.Rows)
             {
-                if ((int)(r["TarifaFacturada"]) == 0)
+                if ((decimal) (r["TarifaFacturada"]) == 0)
                 {
                     try
                     {

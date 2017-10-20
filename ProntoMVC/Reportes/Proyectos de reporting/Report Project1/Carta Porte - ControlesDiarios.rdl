@@ -15,8 +15,8 @@
         <CommandText>=Parameters!Consulta.Value</CommandText>
       </Query>
       <Fields>
-        <Field Name="Fecha">
-          <DataField>Fecha</DataField>
+        <Field Name="C2">
+          <DataField>C2</DataField>
           <rd:UserDefined>true</rd:UserDefined>
         </Field>
         <Field Name="Descripcion">
@@ -173,7 +173,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Fields!Fecha.Value</Value>
+                                  <Value>=Fields!C2.Value</Value>
                                   <Style>
                                     <FontSize>8pt</FontSize>
                                     <Format>dd/MM/yy</Format>
