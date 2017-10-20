@@ -4224,12 +4224,12 @@ Public Class LogicaFacturacion
             ActualizarCampoClienteSeparador(tablaEditadaDeFacturasParaGenerar, SeEstaSeparandoPorCorredor, SC) 'TODO: ineficiente
 
 
-            Dim dt = GenerarDatatableDelPreviewDeFacturacion(tablaEditadaDeFacturasParaGenerar, SC)
+        Dim dt = GenerarDatatableDelPreviewDeFacturacion(tablaEditadaDeFacturasParaGenerar, SC) 'aca ya separo los lotes por cliente a facturar -por qué me los separa si estoy usando "a terceros"?
 
 
-            'Dim dtwhere = ProntoFuncionesGenerales.DataTableDISTINCT(dt, New String() {"Factura", "Cliente", "IdClienteSeparado"})
+        'Dim dtwhere = ProntoFuncionesGenerales.DataTableDISTINCT(dt, New String() {"Factura", "Cliente", "IdClienteSeparado"})
 
-            Dim dtwhere = (From i In dt.AsEnumerable
+        Dim dtwhere = (From i In dt.AsEnumerable
                            Select Factura = CInt(Val(i("Factura").ToString)),
                                  Cliente = i("Cliente").ToString,
                                  IdCliente = Convert.ToInt32(iisNull(BuscaIdClientePreciso(i("Cliente").ToString, SC), -1)),
