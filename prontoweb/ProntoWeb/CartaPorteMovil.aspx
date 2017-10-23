@@ -533,7 +533,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                     <input type="button" id="edtData" value="edit" class="btn icon-cog span2" />
                     
                     
-                             <a class="btn span2" href="CartaDePorteInformesAccesoClientesMovil.aspx">Verant</a>
+                             <a class="btn span2" href="CartaDePorteInformesAccesoClientes.aspx">Verant</a>
 
                 </div>
 
@@ -579,8 +579,8 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
             <div id="dialog" title="">
 
-
-
+                                 <asp:Image ID="Image1" runat="server" ImageUrl="~/Imagenes/williamsmini.gif" CssClass="" Height="60px" ImageAlign="AbsBottom" />
+                
                 <div>
                     <asp:LoginView ID="LoginView" runat="server">
                         <LoggedInTemplate>
@@ -739,8 +739,32 @@ Arroyo Seco (Sta. Fe) - René Favaloro 726 / (03402) 421-426 - 429-676 / arroyos
 
 
                 jQuery("#LogoImage").click(function () {
-                    $("#dialog").dialog();
+                    //$("#dialog").dialog();
+
+                    $("#dialog").dialog({
+                    dialogClass: "no-close",
+                    buttons: [
+                      {
+                          text: "OK",
+                          click: function () {
+                              $(this).dialog("close");
+
+                              cambiarSituaciones(lista, "administrador", "",
+                  function () {
+                      $("#loading").hide();
+                      $('#Lista').trigger('reloadGrid');
+                  })
+
+                          }
+                      }
+                    ]
                 });
+
+
+                });
+
+
+
 
                 $("#TipoSituacion").hide();
 
@@ -2853,7 +2877,7 @@ Arroyo Seco (Sta. Fe) - René Favaloro 726 / (03402) 421-426 - 429-676 / arroyos
                     beforeShowForm: function (form) {
                         //GrabarGrillaLocal();
 
-                        //PopupCentrar();
+                        PopupCentrar();
 
                         //$('#NumeroItem').attr('readonly', 'readonly');
 
@@ -2893,6 +2917,47 @@ Arroyo Seco (Sta. Fe) - René Favaloro 726 / (03402) 421-426 - 429-676 / arroyos
 
 
     });
+
+
+
+
+    function PopupCentrar() {
+        var grid = $("#Lista");
+        var dlgDiv = $("#editmod" + grid[0].id);
+
+        //$("#editmod" + grid[0].id).find('.ui-datepicker-trigger').attr("class", "btn btn-primary");
+        //            $("#editmod" + grid[0].id + " [type=button]").attr("class", "btn btn-primary");
+        //            $(":button").attr("class", "btn btn-primary");
+        //$("#editmod" + grid[0].id).find('#FechaEntrega').width(160);
+
+        $("#editmod" + grid[0].id).find('.ui-datepicker-trigger').attr("class", "btn btn-primary");
+        $("#sData").attr("class", "btn btn-primary");
+        $("#sData").css("color", "white");
+        $("#sData").css("margin-right", "20px");
+        $("#cData").attr("class", "btn");
+
+        //            $("#editmod" + grid[0].id).find(":hr").remove();
+
+        $("#editmod" + grid[0].id).find('.ui-icon-disk').remove();
+        $("#editmod" + grid[0].id).find('.ui-icon-close').remove();
+
+        //                    $("#sData").addClass("btn");
+        //                    $("#cData").addClass("btn");
+
+
+        //var parentDiv = dlgDiv.parent(); // div#gbox_list
+        //var dlgWidth = dlgDiv.width();
+        //var parentWidth = parentDiv.width();
+        //var dlgHeight = dlgDiv.height();
+        //var parentHeight = parentDiv.height();
+
+        //var left = (screen.width / 2) - (dlgWidth / 2) + "px";
+        //var top = (screen.height / 2) - (dlgHeight / 2) + "px";
+
+        //dlgDiv[0].style.top = top; // 500; // Math.round((parentHeight - dlgHeight) / 2) + "px";
+        //dlgDiv[0].style.left = left; //Math.round((parentWidth - dlgWidth) / 2) + "px";
+    }
+
 
 
 

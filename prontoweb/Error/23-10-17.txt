@@ -578,3 +578,658 @@ Referencia a objeto no establecida como instancia de un objeto.
    en SituacionCalidadMovil.BindTypeDropDown() en C:\bdl\pronto\prontoweb\ProntoWeb\CartaPorteMovil.aspx.vb:línea 167
 App_Web_cartaportemovil.aspx.4199bbd4.585z55k5
 __________________________
+
+Log Entry : 
+10/23/2017 18:58:06
+Error in: http://localhost:50769/ProntoWeb/CartaPorteMovil.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en SituacionCalidadMovil.BindTypeDropDown() en C:\bdl\pronto\prontoweb\ProntoWeb\CartaPorteMovil.aspx.vb:línea 167
+App_Web_cartaportemovil.aspx.4199bbd4.trdh0hne
+__________________________
+
+Log Entry : 
+10/23/2017 18:58:47
+Error in: http://localhost:50769/ProntoWeb/CartaPorteMovil.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en SituacionCalidadMovil.BindTypeDropDown() en C:\bdl\pronto\prontoweb\ProntoWeb\CartaPorteMovil.aspx.vb:línea 167
+App_Web_cartaportemovil.aspx.4199bbd4.m76ikp5l
+__________________________
+
+Log Entry : 
+10/23/2017 18:59:31
+Error in: http://localhost:50769/ProntoWeb/CartaPorteMovil.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en SituacionCalidadMovil.BindTypeDropDown() en C:\bdl\pronto\prontoweb\ProntoWeb\CartaPorteMovil.aspx.vb:línea 167
+App_Web_cartaportemovil.aspx.4199bbd4.j8q12djg
+__________________________
+
+Log Entry : 
+10/23/2017 19:00:03
+Error in: http://localhost:50769/ProntoWeb/CartaPorteMovil.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en SituacionCalidadMovil.BindTypeDropDown() en C:\bdl\pronto\prontoweb\ProntoWeb\CartaPorteMovil.aspx.vb:línea 167
+App_Web_cartaportemovil.aspx.4199bbd4.j8q12djg
+__________________________
+
+Log Entry : 
+10/23/2017 19:03:49
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesAccesoClientesMovil.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartaDePorteInformesAccesoClientes.BindTypeDropDown() en C:\bdl\pronto\prontoweb\ProntoWeb\CartaDePorteInformesAccesoClientesMovil.aspx.vb:línea 229
+App_Web_cartadeporteinformesaccesoclientesmovil.aspx.4199bbd4.8iunmhgm
+__________________________
+
+Log Entry : 
+10/23/2017 19:04:03
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesAccesoClientesMovil.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartaDePorteInformesAccesoClientes.BindTypeDropDown() en C:\bdl\pronto\prontoweb\ProntoWeb\CartaDePorteInformesAccesoClientesMovil.aspx.vb:línea 229
+App_Web_cartadeporteinformesaccesoclientesmovil.aspx.4199bbd4.8iunmhgm
+__________________________
+
+Log Entry : 
+10/23/2017 19:04:21
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesAccesoClientesMovil.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartaDePorteInformesAccesoClientes.BindTypeDropDown() en C:\bdl\pronto\prontoweb\ProntoWeb\CartaDePorteInformesAccesoClientesMovil.aspx.vb:línea 229
+App_Web_cartadeporteinformesaccesoclientesmovil.aspx.4199bbd4.8iunmhgm
+__________________________
+
+Log Entry : 
+10/23/2017 19:04:27
+Error in: http://localhost:50769/ProntoWeb/CartaPorteMovil.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en SituacionCalidadMovil.BindTypeDropDown() en C:\bdl\pronto\prontoweb\ProntoWeb\CartaPorteMovil.aspx.vb:línea 167
+App_Web_cartaportemovil.aspx.4199bbd4.w0xcabuf
+__________________________
+
+Log Entry : 
+10/23/2017 19:04:31
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesAccesoClientes.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartaDePorteInformesAccesoClientes.BindTypeDropDown() en C:\bdl\pronto\prontoweb\ProntoWeb\CartaDePorteInformesAccesoClientes.aspx.vb:línea 269
+App_Web_cartadeporteinformesaccesoclientes.aspx.4199bbd4.cp4wl8ms
+__________________________
+
+Log Entry : 
+10/23/2017 19:04:57
+Error in: http://localhost:50769/ProntoWeb/CartaPorteMovil.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en SituacionCalidadMovil.BindTypeDropDown() en C:\bdl\pronto\prontoweb\ProntoWeb\CartaPorteMovil.aspx.vb:línea 167
+App_Web_cartaportemovil.aspx.4199bbd4.w0xcabuf
+__________________________
+
+Log Entry : 
+10/23/2017 19:05:02
+Error in: http://localhost:50769/ProntoWeb/CartaPorteMovil.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en SituacionCalidadMovil.BindTypeDropDown() en C:\bdl\pronto\prontoweb\ProntoWeb\CartaPorteMovil.aspx.vb:línea 167
+App_Web_cartaportemovil.aspx.4199bbd4.w0xcabuf
+__________________________
+
+Log Entry : 
+10/23/2017 19:05:14
+Error in: http://localhost:50769/ProntoWeb/CartaPorteMovil.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en SituacionCalidadMovil.BindTypeDropDown() en C:\bdl\pronto\prontoweb\ProntoWeb\CartaPorteMovil.aspx.vb:línea 167
+App_Web_cartaportemovil.aspx.4199bbd4.w0xcabuf
+__________________________
+
+Log Entry : 
+10/23/2017 19:05:44
+Error in: http://localhost:50769/ProntoWeb/CartaPorteMovil.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en SituacionCalidadMovil.BindTypeDropDown() en C:\bdl\pronto\prontoweb\ProntoWeb\CartaPorteMovil.aspx.vb:línea 167
+App_Web_cartaportemovil.aspx.4199bbd4.w0xcabuf
+__________________________
+
+Log Entry : 
+10/23/2017 19:05:45
+Error in: http://localhost:50769/ProntoWeb/HandlerCartaPorte.ashx. Error Message: -  Error en ExecDinamico. - System.Data.SqlClient.SqlException (0x80131904): Cannot open database "Williams2" requested by the login. The login failed.
+Login failed for user 'sa'.
+   en System.Data.SqlClient.SqlInternalConnectionTds..ctor(DbConnectionPoolIdentity identity, SqlConnectionString connectionOptions, SqlCredential credential, Object providerInfo, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance, SqlConnectionString userConnectionOptions, SessionData reconnectSessionData, DbConnectionPool pool, String accessToken, Boolean applyTransientFaultHandling)
+   en System.Data.SqlClient.SqlConnectionFactory.CreateConnection(DbConnectionOptions options, DbConnectionPoolKey poolKey, Object poolGroupProviderInfo, DbConnectionPool pool, DbConnection owningConnection, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionFactory.CreatePooledConnection(DbConnectionPool pool, DbConnection owningObject, DbConnectionOptions options, DbConnectionPoolKey poolKey, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionPool.CreateObject(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   en System.Data.ProviderBase.DbConnectionPool.UserCreateRequest(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   en System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.Open()
+   en Pronto.ERP.Dal.GeneralDB.ExecDinamico(String SC, String comandoSQLdinamico, Int32 timeoutSegundos)
+ClientConnectionId:3886c2ef-a659-46d7-b37a-10e7964e2550
+Error Number:4060,State:1,Class:11 - SELECT TOP 1 IdWilliamsDestino FROM WilliamsDestinos WHERE Descripcion='undefined' 8 0
+__________________________
+
+Log Entry : 
+10/23/2017 19:05:45
+Error in: http://localhost:50769/ProntoWeb/HandlerCartaPorte.ashx. Error Message:Cannot open database "Williams2" requested by the login. The login failed.
+Login failed for user 'sa'.
+__________________________
+
+Log Entry : 
+10/23/2017 19:05:45
+Error in: http://localhost:50769/ProntoWeb/HandlerCartaPorte.ashx. Error Message:System.Data.SqlClient.SqlException
+Cannot open database "Williams2" requested by the login. The login failed.
+Login failed for user 'sa'.
+   en System.Data.SqlClient.SqlInternalConnectionTds..ctor(DbConnectionPoolIdentity identity, SqlConnectionString connectionOptions, SqlCredential credential, Object providerInfo, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance, SqlConnectionString userConnectionOptions, SessionData reconnectSessionData, DbConnectionPool pool, String accessToken, Boolean applyTransientFaultHandling)
+   en System.Data.SqlClient.SqlConnectionFactory.CreateConnection(DbConnectionOptions options, DbConnectionPoolKey poolKey, Object poolGroupProviderInfo, DbConnectionPool pool, DbConnection owningConnection, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionFactory.CreatePooledConnection(DbConnectionPool pool, DbConnection owningObject, DbConnectionOptions options, DbConnectionPoolKey poolKey, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionPool.CreateObject(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   en System.Data.ProviderBase.DbConnectionPool.UserCreateRequest(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   en System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.Open()
+   en Pronto.ERP.Dal.GeneralDB.ExecDinamico(String SC, String comandoSQLdinamico, Int32 timeoutSegundos)
+   en Pronto.ERP.Bll.EntidadManager.ExecDinamico(String SC, String sComandoDinamico, Int32 timeoutSegundos) en C:\bdl\pronto\BussinessLogic\EntidadManager.vb:línea 868
+   en SQLdinamico.BuscaIdWilliamsDestinoPreciso(String Destino, String SC) en C:\bdl\pronto\BussinessLogic\SQLdinamico.vb:línea 554
+   en JQGridHandler.ProcessRequest(HttpContext context) en c:\bdl\pronto\prontoweb\ProntoWeb\HandlerCartaPorte.ashx:línea 221
+   en System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   en System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+.Net SqlClient Data Provider
+__________________________
+
+Log Entry : 
+10/23/2017 19:05:45
+Error in: http://localhost:50769/ProntoWeb/HandlerCartaPorte.ashx. Error Message: -  Error en ExecDinamico. - System.Data.SqlClient.SqlException (0x80131904): Cannot open database "Williams2" requested by the login. The login failed.
+Login failed for user 'sa'.
+   en System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.Open()
+   en Pronto.ERP.Dal.GeneralDB.ExecDinamico(String SC, String comandoSQLdinamico, Int32 timeoutSegundos)
+ClientConnectionId:3886c2ef-a659-46d7-b37a-10e7964e2550
+Error Number:4060,State:1,Class:11 - EXEC sp_who2 8 0
+__________________________
+
+Log Entry : 
+10/23/2017 19:05:45
+Error in: http://localhost:50769/ProntoWeb/HandlerCartaPorte.ashx. Error Message:Cannot open database "Williams2" requested by the login. The login failed.
+Login failed for user 'sa'.
+__________________________
+
+Log Entry : 
+10/23/2017 19:05:45
+Error in: http://localhost:50769/ProntoWeb/HandlerCartaPorte.ashx. Error Message:System.Data.SqlClient.SqlException
+Cannot open database "Williams2" requested by the login. The login failed.
+Login failed for user 'sa'.
+   en System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.Open()
+   en Pronto.ERP.Dal.GeneralDB.ExecDinamico(String SC, String comandoSQLdinamico, Int32 timeoutSegundos)
+   en Pronto.ERP.Bll.EntidadManager.ExecDinamico(String SC, String sComandoDinamico, Int32 timeoutSegundos) en C:\bdl\pronto\BussinessLogic\EntidadManager.vb:línea 868
+   en CartaDePorteManager.Log_sp_who2(String sc) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 8802
+   en ASP.global_asax.Application_Error(Object sender, EventArgs e) en C:\bdl\pronto\prontoweb\global.asax:línea 433
+.Net SqlClient Data Provider
+__________________________
+
+Log Entry : 
+10/23/2017 19:05:47
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesAccesoClientes.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartaDePorteInformesAccesoClientes.BindTypeDropDown() en C:\bdl\pronto\prontoweb\ProntoWeb\CartaDePorteInformesAccesoClientes.aspx.vb:línea 269
+App_Web_cartadeporteinformesaccesoclientes.aspx.4199bbd4.0-eljfu3
+__________________________
+
+Log Entry : 
+10/23/2017 19:05:54
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesAccesoClientes.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartaDePorteInformesAccesoClientes.BindTypeDropDown() en C:\bdl\pronto\prontoweb\ProntoWeb\CartaDePorteInformesAccesoClientes.aspx.vb:línea 269
+App_Web_cartadeporteinformesaccesoclientes.aspx.4199bbd4.0-eljfu3
+__________________________
+
+Log Entry : 
+10/23/2017 19:06:03
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesAccesoClientes.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartaDePorteInformesAccesoClientes.BindTypeDropDown() en C:\bdl\pronto\prontoweb\ProntoWeb\CartaDePorteInformesAccesoClientes.aspx.vb:línea 269
+App_Web_cartadeporteinformesaccesoclientes.aspx.4199bbd4.0-eljfu3
+__________________________
+
+Log Entry : 
+10/23/2017 19:07:08
+Error in: http://localhost:50769/ProntoWeb/CartaPorteMovil.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en SituacionCalidadMovil.BindTypeDropDown() en C:\bdl\pronto\prontoweb\ProntoWeb\CartaPorteMovil.aspx.vb:línea 167
+App_Web_cartaportemovil.aspx.4199bbd4.w0xcabuf
+__________________________
+
+Log Entry : 
+10/23/2017 19:07:08
+Error in: http://localhost:50769/ProntoWeb/HandlerCartaPorte.ashx. Error Message: -  Error en ExecDinamico. - System.Data.SqlClient.SqlException (0x80131904): Cannot open database "Williams2" requested by the login. The login failed.
+Login failed for user 'sa'.
+   en System.Data.SqlClient.SqlInternalConnectionTds..ctor(DbConnectionPoolIdentity identity, SqlConnectionString connectionOptions, SqlCredential credential, Object providerInfo, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance, SqlConnectionString userConnectionOptions, SessionData reconnectSessionData, DbConnectionPool pool, String accessToken, Boolean applyTransientFaultHandling)
+   en System.Data.SqlClient.SqlConnectionFactory.CreateConnection(DbConnectionOptions options, DbConnectionPoolKey poolKey, Object poolGroupProviderInfo, DbConnectionPool pool, DbConnection owningConnection, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionFactory.CreatePooledConnection(DbConnectionPool pool, DbConnection owningObject, DbConnectionOptions options, DbConnectionPoolKey poolKey, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionPool.CreateObject(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   en System.Data.ProviderBase.DbConnectionPool.UserCreateRequest(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   en System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.Open()
+   en Pronto.ERP.Dal.GeneralDB.ExecDinamico(String SC, String comandoSQLdinamico, Int32 timeoutSegundos)
+ClientConnectionId:7355f83a-1c1b-4a75-ae18-6893c59b716a
+Error Number:4060,State:1,Class:11 - SELECT TOP 1 IdWilliamsDestino FROM WilliamsDestinos WHERE Descripcion='undefined' 8 0
+__________________________
+
+Log Entry : 
+10/23/2017 19:07:08
+Error in: http://localhost:50769/ProntoWeb/HandlerCartaPorte.ashx. Error Message:Cannot open database "Williams2" requested by the login. The login failed.
+Login failed for user 'sa'.
+__________________________
+
+Log Entry : 
+10/23/2017 19:07:08
+Error in: http://localhost:50769/ProntoWeb/HandlerCartaPorte.ashx. Error Message:System.Data.SqlClient.SqlException
+Cannot open database "Williams2" requested by the login. The login failed.
+Login failed for user 'sa'.
+   en System.Data.SqlClient.SqlInternalConnectionTds..ctor(DbConnectionPoolIdentity identity, SqlConnectionString connectionOptions, SqlCredential credential, Object providerInfo, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance, SqlConnectionString userConnectionOptions, SessionData reconnectSessionData, DbConnectionPool pool, String accessToken, Boolean applyTransientFaultHandling)
+   en System.Data.SqlClient.SqlConnectionFactory.CreateConnection(DbConnectionOptions options, DbConnectionPoolKey poolKey, Object poolGroupProviderInfo, DbConnectionPool pool, DbConnection owningConnection, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionFactory.CreatePooledConnection(DbConnectionPool pool, DbConnection owningObject, DbConnectionOptions options, DbConnectionPoolKey poolKey, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionPool.CreateObject(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   en System.Data.ProviderBase.DbConnectionPool.UserCreateRequest(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   en System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.Open()
+   en Pronto.ERP.Dal.GeneralDB.ExecDinamico(String SC, String comandoSQLdinamico, Int32 timeoutSegundos)
+   en Pronto.ERP.Bll.EntidadManager.ExecDinamico(String SC, String sComandoDinamico, Int32 timeoutSegundos) en C:\bdl\pronto\BussinessLogic\EntidadManager.vb:línea 868
+   en SQLdinamico.BuscaIdWilliamsDestinoPreciso(String Destino, String SC) en C:\bdl\pronto\BussinessLogic\SQLdinamico.vb:línea 554
+   en JQGridHandler.ProcessRequest(HttpContext context) en c:\bdl\pronto\prontoweb\ProntoWeb\HandlerCartaPorte.ashx:línea 221
+   en System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   en System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+.Net SqlClient Data Provider
+__________________________
+
+Log Entry : 
+10/23/2017 19:07:08
+Error in: http://localhost:50769/ProntoWeb/HandlerCartaPorte.ashx. Error Message: -  Error en ExecDinamico. - System.Data.SqlClient.SqlException (0x80131904): Cannot open database "Williams2" requested by the login. The login failed.
+Login failed for user 'sa'.
+   en System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.Open()
+   en Pronto.ERP.Dal.GeneralDB.ExecDinamico(String SC, String comandoSQLdinamico, Int32 timeoutSegundos)
+ClientConnectionId:7355f83a-1c1b-4a75-ae18-6893c59b716a
+Error Number:4060,State:1,Class:11 - EXEC sp_who2 8 0
+__________________________
+
+Log Entry : 
+10/23/2017 19:07:08
+Error in: http://localhost:50769/ProntoWeb/HandlerCartaPorte.ashx. Error Message:Cannot open database "Williams2" requested by the login. The login failed.
+Login failed for user 'sa'.
+__________________________
+
+Log Entry : 
+10/23/2017 19:07:08
+Error in: http://localhost:50769/ProntoWeb/HandlerCartaPorte.ashx. Error Message:System.Data.SqlClient.SqlException
+Cannot open database "Williams2" requested by the login. The login failed.
+Login failed for user 'sa'.
+   en System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.Open()
+   en Pronto.ERP.Dal.GeneralDB.ExecDinamico(String SC, String comandoSQLdinamico, Int32 timeoutSegundos)
+   en Pronto.ERP.Bll.EntidadManager.ExecDinamico(String SC, String sComandoDinamico, Int32 timeoutSegundos) en C:\bdl\pronto\BussinessLogic\EntidadManager.vb:línea 868
+   en CartaDePorteManager.Log_sp_who2(String sc) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 8802
+   en ASP.global_asax.Application_Error(Object sender, EventArgs e) en C:\bdl\pronto\prontoweb\global.asax:línea 433
+.Net SqlClient Data Provider
+__________________________
+
+Log Entry : 
+10/23/2017 19:09:09
+Error in: http://localhost:50769/ProntoWeb/CartaPorteMovil.aspx. Error Message:RODRIGORIOS esta logueado, pero lo redirijo al login porque faltan los datos de session. No deberia mejor mandarlo a SeleccionarEmpresa? Ademas, no hago el LogOut y le queda el cookie!!!
+__________________________
+
+Log Entry : 
+10/23/2017 19:09:10
+Error in: http://localhost:50769/ProntoWeb/CartaPorteMovil.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en SituacionCalidadMovil.BindTypeDropDown() en C:\bdl\pronto\prontoweb\ProntoWeb\CartaPorteMovil.aspx.vb:línea 167
+App_Web_cartaportemovil.aspx.4199bbd4.q_y6wkri
+__________________________
+
+Log Entry : 
+10/23/2017 19:09:10
+Error in: http://localhost:50769/ProntoWeb/HandlerCartaPorte.ashx. Error Message: -  Error en ExecDinamico. - System.Data.SqlClient.SqlException (0x80131904): Cannot open database "Williams2" requested by the login. The login failed.
+Login failed for user 'sa'.
+   en System.Data.SqlClient.SqlInternalConnectionTds..ctor(DbConnectionPoolIdentity identity, SqlConnectionString connectionOptions, SqlCredential credential, Object providerInfo, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance, SqlConnectionString userConnectionOptions, SessionData reconnectSessionData, DbConnectionPool pool, String accessToken, Boolean applyTransientFaultHandling)
+   en System.Data.SqlClient.SqlConnectionFactory.CreateConnection(DbConnectionOptions options, DbConnectionPoolKey poolKey, Object poolGroupProviderInfo, DbConnectionPool pool, DbConnection owningConnection, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionFactory.CreatePooledConnection(DbConnectionPool pool, DbConnection owningObject, DbConnectionOptions options, DbConnectionPoolKey poolKey, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionPool.CreateObject(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   en System.Data.ProviderBase.DbConnectionPool.UserCreateRequest(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   en System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.Open()
+   en Pronto.ERP.Dal.GeneralDB.ExecDinamico(String SC, String comandoSQLdinamico, Int32 timeoutSegundos)
+ClientConnectionId:d2cb4bb9-7a0f-4997-8abd-6925cc13fac1
+Error Number:4060,State:1,Class:11 - SELECT TOP 1 IdWilliamsDestino FROM WilliamsDestinos WHERE Descripcion='undefined' 8 0
+__________________________
+
+Log Entry : 
+10/23/2017 19:09:10
+Error in: http://localhost:50769/ProntoWeb/HandlerCartaPorte.ashx. Error Message:Cannot open database "Williams2" requested by the login. The login failed.
+Login failed for user 'sa'.
+__________________________
+
+Log Entry : 
+10/23/2017 19:09:10
+Error in: http://localhost:50769/ProntoWeb/HandlerCartaPorte.ashx. Error Message:System.Data.SqlClient.SqlException
+Cannot open database "Williams2" requested by the login. The login failed.
+Login failed for user 'sa'.
+   en System.Data.SqlClient.SqlInternalConnectionTds..ctor(DbConnectionPoolIdentity identity, SqlConnectionString connectionOptions, SqlCredential credential, Object providerInfo, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance, SqlConnectionString userConnectionOptions, SessionData reconnectSessionData, DbConnectionPool pool, String accessToken, Boolean applyTransientFaultHandling)
+   en System.Data.SqlClient.SqlConnectionFactory.CreateConnection(DbConnectionOptions options, DbConnectionPoolKey poolKey, Object poolGroupProviderInfo, DbConnectionPool pool, DbConnection owningConnection, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionFactory.CreatePooledConnection(DbConnectionPool pool, DbConnection owningObject, DbConnectionOptions options, DbConnectionPoolKey poolKey, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionPool.CreateObject(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   en System.Data.ProviderBase.DbConnectionPool.UserCreateRequest(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   en System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.Open()
+   en Pronto.ERP.Dal.GeneralDB.ExecDinamico(String SC, String comandoSQLdinamico, Int32 timeoutSegundos)
+   en Pronto.ERP.Bll.EntidadManager.ExecDinamico(String SC, String sComandoDinamico, Int32 timeoutSegundos) en C:\bdl\pronto\BussinessLogic\EntidadManager.vb:línea 868
+   en SQLdinamico.BuscaIdWilliamsDestinoPreciso(String Destino, String SC) en C:\bdl\pronto\BussinessLogic\SQLdinamico.vb:línea 554
+   en JQGridHandler.ProcessRequest(HttpContext context) en c:\bdl\pronto\prontoweb\ProntoWeb\HandlerCartaPorte.ashx:línea 221
+   en System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   en System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+.Net SqlClient Data Provider
+__________________________
+
+Log Entry : 
+10/23/2017 19:09:10
+Error in: http://localhost:50769/ProntoWeb/HandlerCartaPorte.ashx. Error Message: -  Error en ExecDinamico. - System.Data.SqlClient.SqlException (0x80131904): Cannot open database "Williams2" requested by the login. The login failed.
+Login failed for user 'sa'.
+   en System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.Open()
+   en Pronto.ERP.Dal.GeneralDB.ExecDinamico(String SC, String comandoSQLdinamico, Int32 timeoutSegundos)
+ClientConnectionId:d2cb4bb9-7a0f-4997-8abd-6925cc13fac1
+Error Number:4060,State:1,Class:11 - EXEC sp_who2 8 0
+__________________________
+
+Log Entry : 
+10/23/2017 19:09:10
+Error in: http://localhost:50769/ProntoWeb/HandlerCartaPorte.ashx. Error Message:Cannot open database "Williams2" requested by the login. The login failed.
+Login failed for user 'sa'.
+__________________________
+
+Log Entry : 
+10/23/2017 19:09:10
+Error in: http://localhost:50769/ProntoWeb/HandlerCartaPorte.ashx. Error Message:System.Data.SqlClient.SqlException
+Cannot open database "Williams2" requested by the login. The login failed.
+Login failed for user 'sa'.
+   en System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.Open()
+   en Pronto.ERP.Dal.GeneralDB.ExecDinamico(String SC, String comandoSQLdinamico, Int32 timeoutSegundos)
+   en Pronto.ERP.Bll.EntidadManager.ExecDinamico(String SC, String sComandoDinamico, Int32 timeoutSegundos) en C:\bdl\pronto\BussinessLogic\EntidadManager.vb:línea 868
+   en CartaDePorteManager.Log_sp_who2(String sc) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 8802
+   en ASP.global_asax.Application_Error(Object sender, EventArgs e) en C:\bdl\pronto\prontoweb\global.asax:línea 433
+.Net SqlClient Data Provider
+__________________________
+
+Log Entry : 
+10/23/2017 19:10:25
+Error in: http://localhost:50769/ProntoWeb/CartaPorteMovil.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en SituacionCalidadMovil.BindTypeDropDown() en C:\bdl\pronto\prontoweb\ProntoWeb\CartaPorteMovil.aspx.vb:línea 167
+App_Web_cartaportemovil.aspx.4199bbd4.1e8rp0sj
+__________________________
+
+Log Entry : 
+10/23/2017 19:10:26
+Error in: http://localhost:50769/ProntoWeb/HandlerCartaPorte.ashx. Error Message: -  Error en ExecDinamico. - System.Data.SqlClient.SqlException (0x80131904): Cannot open database "Williams2" requested by the login. The login failed.
+Login failed for user 'sa'.
+   en System.Data.SqlClient.SqlInternalConnectionTds..ctor(DbConnectionPoolIdentity identity, SqlConnectionString connectionOptions, SqlCredential credential, Object providerInfo, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance, SqlConnectionString userConnectionOptions, SessionData reconnectSessionData, DbConnectionPool pool, String accessToken, Boolean applyTransientFaultHandling)
+   en System.Data.SqlClient.SqlConnectionFactory.CreateConnection(DbConnectionOptions options, DbConnectionPoolKey poolKey, Object poolGroupProviderInfo, DbConnectionPool pool, DbConnection owningConnection, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionFactory.CreatePooledConnection(DbConnectionPool pool, DbConnection owningObject, DbConnectionOptions options, DbConnectionPoolKey poolKey, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionPool.CreateObject(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   en System.Data.ProviderBase.DbConnectionPool.UserCreateRequest(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   en System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.Open()
+   en Pronto.ERP.Dal.GeneralDB.ExecDinamico(String SC, String comandoSQLdinamico, Int32 timeoutSegundos)
+ClientConnectionId:a10e75a2-cd2b-4b24-9de8-a0d22bb7a6bb
+Error Number:4060,State:1,Class:11 - SELECT TOP 1 IdWilliamsDestino FROM WilliamsDestinos WHERE Descripcion='undefined' 8 0
+__________________________
+
+Log Entry : 
+10/23/2017 19:10:26
+Error in: http://localhost:50769/ProntoWeb/HandlerCartaPorte.ashx. Error Message:Cannot open database "Williams2" requested by the login. The login failed.
+Login failed for user 'sa'.
+__________________________
+
+Log Entry : 
+10/23/2017 19:10:26
+Error in: http://localhost:50769/ProntoWeb/HandlerCartaPorte.ashx. Error Message:System.Data.SqlClient.SqlException
+Cannot open database "Williams2" requested by the login. The login failed.
+Login failed for user 'sa'.
+   en System.Data.SqlClient.SqlInternalConnectionTds..ctor(DbConnectionPoolIdentity identity, SqlConnectionString connectionOptions, SqlCredential credential, Object providerInfo, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance, SqlConnectionString userConnectionOptions, SessionData reconnectSessionData, DbConnectionPool pool, String accessToken, Boolean applyTransientFaultHandling)
+   en System.Data.SqlClient.SqlConnectionFactory.CreateConnection(DbConnectionOptions options, DbConnectionPoolKey poolKey, Object poolGroupProviderInfo, DbConnectionPool pool, DbConnection owningConnection, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionFactory.CreatePooledConnection(DbConnectionPool pool, DbConnection owningObject, DbConnectionOptions options, DbConnectionPoolKey poolKey, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionPool.CreateObject(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   en System.Data.ProviderBase.DbConnectionPool.UserCreateRequest(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   en System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.Open()
+   en Pronto.ERP.Dal.GeneralDB.ExecDinamico(String SC, String comandoSQLdinamico, Int32 timeoutSegundos)
+   en Pronto.ERP.Bll.EntidadManager.ExecDinamico(String SC, String sComandoDinamico, Int32 timeoutSegundos) en C:\bdl\pronto\BussinessLogic\EntidadManager.vb:línea 868
+   en SQLdinamico.BuscaIdWilliamsDestinoPreciso(String Destino, String SC) en C:\bdl\pronto\BussinessLogic\SQLdinamico.vb:línea 554
+   en JQGridHandler.ProcessRequest(HttpContext context) en c:\bdl\pronto\prontoweb\ProntoWeb\HandlerCartaPorte.ashx:línea 221
+   en System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   en System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+.Net SqlClient Data Provider
+__________________________
+
+Log Entry : 
+10/23/2017 19:10:26
+Error in: http://localhost:50769/ProntoWeb/HandlerCartaPorte.ashx. Error Message: -  Error en ExecDinamico. - System.Data.SqlClient.SqlException (0x80131904): Cannot open database "Williams2" requested by the login. The login failed.
+Login failed for user 'sa'.
+   en System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.Open()
+   en Pronto.ERP.Dal.GeneralDB.ExecDinamico(String SC, String comandoSQLdinamico, Int32 timeoutSegundos)
+ClientConnectionId:a10e75a2-cd2b-4b24-9de8-a0d22bb7a6bb
+Error Number:4060,State:1,Class:11 - EXEC sp_who2 8 0
+__________________________
+
+Log Entry : 
+10/23/2017 19:10:26
+Error in: http://localhost:50769/ProntoWeb/HandlerCartaPorte.ashx. Error Message:Cannot open database "Williams2" requested by the login. The login failed.
+Login failed for user 'sa'.
+__________________________
+
+Log Entry : 
+10/23/2017 19:10:26
+Error in: http://localhost:50769/ProntoWeb/HandlerCartaPorte.ashx. Error Message:System.Data.SqlClient.SqlException
+Cannot open database "Williams2" requested by the login. The login failed.
+Login failed for user 'sa'.
+   en System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.Open()
+   en Pronto.ERP.Dal.GeneralDB.ExecDinamico(String SC, String comandoSQLdinamico, Int32 timeoutSegundos)
+   en Pronto.ERP.Bll.EntidadManager.ExecDinamico(String SC, String sComandoDinamico, Int32 timeoutSegundos) en C:\bdl\pronto\BussinessLogic\EntidadManager.vb:línea 868
+   en CartaDePorteManager.Log_sp_who2(String sc) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 8802
+   en ASP.global_asax.Application_Error(Object sender, EventArgs e) en C:\bdl\pronto\prontoweb\global.asax:línea 433
+.Net SqlClient Data Provider
+__________________________
+
+Log Entry : 
+10/23/2017 19:10:58
+Error in: http://localhost:50769/ProntoWeb/CartaPorteMovil.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en SituacionCalidadMovil.BindTypeDropDown() en C:\bdl\pronto\prontoweb\ProntoWeb\CartaPorteMovil.aspx.vb:línea 167
+App_Web_cartaportemovil.aspx.4199bbd4.1e8rp0sj
+__________________________
+
+Log Entry : 
+10/23/2017 19:10:58
+Error in: http://localhost:50769/ProntoWeb/HandlerCartaPorte.ashx. Error Message: -  Error en ExecDinamico. - System.Data.SqlClient.SqlException (0x80131904): Cannot open database "Williams2" requested by the login. The login failed.
+Login failed for user 'sa'.
+   en System.Data.SqlClient.SqlInternalConnectionTds..ctor(DbConnectionPoolIdentity identity, SqlConnectionString connectionOptions, SqlCredential credential, Object providerInfo, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance, SqlConnectionString userConnectionOptions, SessionData reconnectSessionData, DbConnectionPool pool, String accessToken, Boolean applyTransientFaultHandling)
+   en System.Data.SqlClient.SqlConnectionFactory.CreateConnection(DbConnectionOptions options, DbConnectionPoolKey poolKey, Object poolGroupProviderInfo, DbConnectionPool pool, DbConnection owningConnection, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionFactory.CreatePooledConnection(DbConnectionPool pool, DbConnection owningObject, DbConnectionOptions options, DbConnectionPoolKey poolKey, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionPool.CreateObject(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   en System.Data.ProviderBase.DbConnectionPool.UserCreateRequest(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   en System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.Open()
+   en Pronto.ERP.Dal.GeneralDB.ExecDinamico(String SC, String comandoSQLdinamico, Int32 timeoutSegundos)
+ClientConnectionId:648a1855-4906-44bf-9b7d-23c6ceb149ec
+Error Number:4060,State:1,Class:11 - SELECT TOP 1 IdWilliamsDestino FROM WilliamsDestinos WHERE Descripcion='undefined' 8 0
+__________________________
+
+Log Entry : 
+10/23/2017 19:10:58
+Error in: http://localhost:50769/ProntoWeb/HandlerCartaPorte.ashx. Error Message:Cannot open database "Williams2" requested by the login. The login failed.
+Login failed for user 'sa'.
+__________________________
+
+Log Entry : 
+10/23/2017 19:10:58
+Error in: http://localhost:50769/ProntoWeb/HandlerCartaPorte.ashx. Error Message:System.Data.SqlClient.SqlException
+Cannot open database "Williams2" requested by the login. The login failed.
+Login failed for user 'sa'.
+   en System.Data.SqlClient.SqlInternalConnectionTds..ctor(DbConnectionPoolIdentity identity, SqlConnectionString connectionOptions, SqlCredential credential, Object providerInfo, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance, SqlConnectionString userConnectionOptions, SessionData reconnectSessionData, DbConnectionPool pool, String accessToken, Boolean applyTransientFaultHandling)
+   en System.Data.SqlClient.SqlConnectionFactory.CreateConnection(DbConnectionOptions options, DbConnectionPoolKey poolKey, Object poolGroupProviderInfo, DbConnectionPool pool, DbConnection owningConnection, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionFactory.CreatePooledConnection(DbConnectionPool pool, DbConnection owningObject, DbConnectionOptions options, DbConnectionPoolKey poolKey, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionPool.CreateObject(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   en System.Data.ProviderBase.DbConnectionPool.UserCreateRequest(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   en System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.Open()
+   en Pronto.ERP.Dal.GeneralDB.ExecDinamico(String SC, String comandoSQLdinamico, Int32 timeoutSegundos)
+   en Pronto.ERP.Bll.EntidadManager.ExecDinamico(String SC, String sComandoDinamico, Int32 timeoutSegundos) en C:\bdl\pronto\BussinessLogic\EntidadManager.vb:línea 868
+   en SQLdinamico.BuscaIdWilliamsDestinoPreciso(String Destino, String SC) en C:\bdl\pronto\BussinessLogic\SQLdinamico.vb:línea 554
+   en JQGridHandler.ProcessRequest(HttpContext context) en c:\bdl\pronto\prontoweb\ProntoWeb\HandlerCartaPorte.ashx:línea 221
+   en System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   en System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+.Net SqlClient Data Provider
+__________________________
+
+Log Entry : 
+10/23/2017 19:10:58
+Error in: http://localhost:50769/ProntoWeb/HandlerCartaPorte.ashx. Error Message: -  Error en ExecDinamico. - System.Data.SqlClient.SqlException (0x80131904): Cannot open database "Williams2" requested by the login. The login failed.
+Login failed for user 'sa'.
+   en System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.Open()
+   en Pronto.ERP.Dal.GeneralDB.ExecDinamico(String SC, String comandoSQLdinamico, Int32 timeoutSegundos)
+ClientConnectionId:648a1855-4906-44bf-9b7d-23c6ceb149ec
+Error Number:4060,State:1,Class:11 - EXEC sp_who2 8 0
+__________________________
+
+Log Entry : 
+10/23/2017 19:10:58
+Error in: http://localhost:50769/ProntoWeb/HandlerCartaPorte.ashx. Error Message:Cannot open database "Williams2" requested by the login. The login failed.
+Login failed for user 'sa'.
+__________________________
+
+Log Entry : 
+10/23/2017 19:10:58
+Error in: http://localhost:50769/ProntoWeb/HandlerCartaPorte.ashx. Error Message:System.Data.SqlClient.SqlException
+Cannot open database "Williams2" requested by the login. The login failed.
+Login failed for user 'sa'.
+   en System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.Open()
+   en Pronto.ERP.Dal.GeneralDB.ExecDinamico(String SC, String comandoSQLdinamico, Int32 timeoutSegundos)
+   en Pronto.ERP.Bll.EntidadManager.ExecDinamico(String SC, String sComandoDinamico, Int32 timeoutSegundos) en C:\bdl\pronto\BussinessLogic\EntidadManager.vb:línea 868
+   en CartaDePorteManager.Log_sp_who2(String sc) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 8802
+   en ASP.global_asax.Application_Error(Object sender, EventArgs e) en C:\bdl\pronto\prontoweb\global.asax:línea 433
+.Net SqlClient Data Provider
+__________________________
