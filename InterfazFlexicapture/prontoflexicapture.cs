@@ -4654,6 +4654,320 @@ Formato localidad-provincia	destination	x
 
 
 
+        public virtual string CartasPorte_DynamicGridData_NuevoOrden(string sidx, string sord, int page, int rows, bool _search, string filters, string FechaInicial, string FechaFinal, int puntovent, int iddestino, string SC, string nombreusuario, string SCbdlmaster)
+        {
+
+            // An ASHX is a generic HttpHandler. An ASMX file is a web service. ASHX is a good lean way to provide a response to AJAX calls, but if you want to provide a response which changes based on conditions (such as variable inputs) it can become a bit of a handful - lots of if else etc. ASMX can house mulitple methods which can take parameters.
+
+            //string SC;
+            //if (System.Diagnostics.Debugger.IsAttached)
+            //    SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(ConfigurationManager.AppSettings["scLocal"]);
+            //else
+            //    SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(ConfigurationManager.AppSettings["scWilliamsRelease"]);
+
+
+
+            //var usuario = Membership.GetUser();
+            //System.Data.DataTable dt = EntidadManager.ExecDinamico(SC, "Empleados_TX_UsuarioNT '" + nombreusuario + "'");
+            //int idUsuario = Convert.ToInt32(dt.Rows[0][0]);
+            // int puntovent = EmpleadoManager.GetItem(SC, idUsuario).PuntoVentaAsociado;
+
+
+            DateTime FechaDesde = new DateTime(1980, 1, 1);
+            DateTime FechaHasta = new DateTime(2050, 1, 1);
+
+            try
+            {
+
+                FechaDesde = DateTime.ParseExact(FechaInicial, "d/M/yyyy", null);
+            }
+            catch (Exception e)
+            {
+                //throw;
+            }
+
+            try
+            {
+                FechaHasta = DateTime.ParseExact(FechaFinal, "d/M/yyyy", null);
+
+            }
+            catch (Exception e)
+            {
+                //throw;
+
+            }
+
+
+
+
+
+            ProntoMVC.Data.Models.DemoProntoEntities db =
+                               new ProntoMVC.Data.Models.DemoProntoEntities(
+                                   Auxiliares.FormatearConexParaEntityFramework(
+                                   ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC)));
+
+
+            db.Database.CommandTimeout = 240;
+
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+            var q = db.fSQL_GetDataTableFiltradoYPaginado(
+                                                            0, 9999999, estado, "", -1, -1,
+                                                            -1, -1, -1, -1, -1,
+                                                            iddestino, 0, "Ambas", FechaDesde,
+                                                            FechaHasta, puntovent, null, false, "", "",
+                                                            -1, null, 0, "", "Todos");
+
+
+
+            // si el usuario tiene una razon social asignada, hay que filtrar. -Pero hay que filtrar antes! como en ListadoSegunCliente()
+            // -tambien tenes el tema de los clientes con filtros configurables.... en DataTablePorClienteSQL()
+            if (SCbdlmaster != "")
+            {
+
+                string rs = UserDatosExtendidosManager.TraerRazonSocialDelUsuarioNombre(nombreusuario, SCbdlmaster, SC);
+                if (rs != "")
+                {
+                    int idcliente = SQLdinamico.BuscaIdClientePreciso(rs, SC);
+                    int idCorredor = SQLdinamico.BuscaIdVendedorPreciso(EntidadManager.NombreCliente(SC, idcliente), SC);
+                    q = q.Where(x => x.Vendedor == idcliente || x.Entregador == idcliente || x.Corredor == idCorredor ||
+                                    x.CuentaOrden1 == idcliente || x.CuentaOrden2 == idcliente || x.IdClienteAuxiliar == idcliente);
+                }
+            }
+
+
+
+
+            int totalRecords = 0;
+            var pagedQuery = Filtrador.Filters.FiltroGenerico_UsandoIQueryable<ProntoMVC.Data.Models.fSQL_GetDataTableFiltradoYPaginado_Result3>
+                            (sidx, sord, page, rows, _search, filters, db, ref totalRecords, q);
+
+
+
+
+
+
+            //db.CartasDePortes
+            //                              .Where(x =>
+            //                                      (x.FechaDescarga >= FechaDesde && x.FechaDescarga <= FechaHasta)
+            //                                       &&
+            //                                      (x.PuntoVenta == puntovent || puntovent <= 0)
+            //                                       &&
+            //                                      (x.Destino == iddestino || iddestino <= 0)
+            //                                   )
+
+
+
+
+
+
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+            string campo = "true";
+            int pageSize = rows;
+            int currentPage = page;
+
+
+            //if (sidx == "Numero") sidx = "NumeroPedido"; // como estoy haciendo "select a" (el renglon entero) en la linq antes de llamar jqGridJson, no pude ponerle el nombre explicito
+            //if (searchField == "Numero") searchField = "NumeroPedido"; 
+
+            var Entidad = pagedQuery
+                          //.Include(x => x.Moneda)
+                          //.Include(x => x.Proveedor)
+                          //.Include(x => x.DetallePedidos
+                          //            .Select(y => y.DetalleRequerimiento
+                          //                )
+                          //        )
+                          //.Include("DetallePedidos.DetalleRequerimiento.Requerimientos.Obra") // funciona tambien
+                          //.Include(x => x.Comprador)
+                          .AsQueryable();
+
+
+            //var Entidad1 = (from a in Entidad.Where(campo) select new { Id = a.IdCartasDePorteControlDescarga });
+
+            int totalPages = (int)Math.Ceiling((float)totalRecords / (float)pageSize);
+
+            var data = (from a in Entidad
+                        select a
+                        )//.Where(campo).OrderBy(sidx + " " + sord)
+                        .ToList();
+
+            var jsonData = new jqGridJson()
+            {
+                total = totalPages,
+                page = currentPage,
+                records = totalRecords,
+                rows = (from a in data
+                        select new jqGridRowJson
+                        {
+                            id = a.IdCartaDePorte.ToString(),
+                            cell = new string[] {
+                                "", //"<a href="+ Url.Action("Edit",new {id = a.IdPedido} ) + "  >Editar</>" ,
+                                
+
+                                // CP	TURNO	SITUACION	MERC	TITULAR_CP	INTERMEDIARIO	RTE CIAL	CORREDOR	DESTINATARIO	DESTINO	ENTREGADOR	PROC	KILOS	OBSERVACION
+
+                                a.IdCartaDePorte.ToString(),
+
+                                "<a href=\"CartaDePorte.aspx?Id=" +  a.IdCartaDePorte + "\"  target=\"_blank\" >" +  a.NumeroCartaEnTextoParaBusqueda.NullSafeToString() + "</>" ,
+                                "<a href=\"CartaDePorte.aspx?Id=" +  a.IdCartaDePorte + "\"  target=\"_blank\" >" +  "ver" + "</>" ,
+
+                                a.SubnumeroVagon.NullSafeToString(),
+
+                                a.FechaArribo==null ? "" :  a.FechaArribo.GetValueOrDefault().ToShortDateString(),
+                                a.Hora.NullSafeToString(),
+                                a.Producto.ToString(),
+                                a.Contrato.NullSafeToString(),
+
+
+                                Convert.ToInt32(a.BrutoPto).ToString(),
+                                Convert.ToInt32(a.TaraPto).ToString(),
+                                Convert.ToInt32(a.NetoPto).ToString(),
+                                Convert.ToInt32(a.BrutoFinal).ToString(),
+                                Convert.ToInt32(a.TaraFinal).ToString(),
+                                Convert.ToInt32(a.NetoFinal).ToString(),
+
+
+                                 a.Humedad.NullSafeToString(),
+                                 a.Merma.NullSafeToString(),
+                                 "", // dif
+                                 Convert.ToInt32(a.NetoFinal).ToString(),
+
+
+                                 a.TitularDesc,
+                                 a.IntermediarioDesc,
+                                 a.RComercialDesc,
+
+
+                                 a.ClienteAuxiliarDesc,
+
+
+                                a.CorredorDesc,
+                                a.CorredorDesc2,
+                                a.DestinatarioDesc,
+                                a.EntregadorDesc,
+                                a.Patente,
+                                a.Acoplado,
+                                a.TransportistaCUIT,
+                                a.TransportistaDesc,
+                                a.DestinoDesc,
+                                a.ProcedenciaDesc,
+                                a.Cosecha,
+
+
+                                a.FechaDescarga==null ? "" :  a.FechaDescarga.GetValueOrDefault().ToShortDateString(),
+
+                                a.Calidad,
+                                a.Observaciones,
+                                a.ChoferCUIT,
+                                a.ChoferDesc,
+                                "", // nro oncaa
+                                a.CEE,
+                                a.FechaEmision.NullSafeToString(),
+                                a.FechaVencimiento.NullSafeToString(),
+                                a.KmARecorrer.NullSafeToString(),
+                                a.Tarifa.NullSafeToString(),
+                                a.CTG.NullSafeToString(),
+                                a.EstablecimientoDesc
+
+
+                                //(a.Situacion ?? 0).NullSafeToString(),
+
+
+                                // a.DestinatarioDesc,
+
+                                //a.DestinoDesc.ToString(),
+                                //a.Destino ==null ? "" : a.Destino.ToString(),
+
+                                // a.EntregadorDesc.NullSafeToString(),
+
+                                // a.ProcedenciaDesc.ToString(),
+
+
+                                //Convert.ToInt32( a.NetoPto).ToString(),
+
+                                //a.ObservacionesSituacion,
+
+                                // a.PuntoVenta.ToString(),
+
+                                // a.FechaActualizacionAutomatica==null ? "" :  a.FechaActualizacionAutomatica.GetValueOrDefault().NullSafeToString(),
+                                //a.Patente,
+                                //   Convert.ToInt32(a.NetoFinal).ToString(),
+
+
+                                 // a.FechaSalida==null ? "" :  a.FechaSalida.GetValueOrDefault().ToString("dd/MM/yyyy"),
+                                //a.Cumplido.NullSafeToString(), 
+
+
+                                //string.Join(" ",  a.DetallePedidos.Select(x=>(x.DetalleRequerimiento==null) ? "" : 
+                                //                     x.DetalleRequerimiento.Requerimientos == null ? "" :   
+                                //                         x.DetalleRequerimiento.Requerimientos.NumeroRequerimiento.NullSafeToString() ).Distinct()),
+                                //string.Join(" ",  a.DetallePedidos.Select(x=>(x.DetalleRequerimiento==null) ? "" : 
+                                //                        x.DetalleRequerimiento.Requerimientos == null ? ""  :
+                                //                            x.DetalleRequerimiento.Requerimientos.Obra == null ? ""  :
+                                //                             x.DetalleRequerimiento.Requerimientos.Obra.NumeroObra.NullSafeToString()).Distinct()),
+                              
+                                                             
+                                //a.Proveedor==null ? "" :  a.Proveedor.RazonSocial.NullSafeToString(), 
+                                //(a.TotalPedido- a.TotalIva1+a.Bonificacion- (a.ImpuestosInternos ?? 0)- (a.OtrosConceptos1 ?? 0) - (a.OtrosConceptos2 ?? 0)-    (a.OtrosConceptos3 ?? 0) -( a.OtrosConceptos4 ?? 0) - (a.OtrosConceptos5 ?? 0)).ToString(),  
+                                //a.Bonificacion.NullSafeToString(), 
+                                //a.TotalIva1.NullSafeToString(), 
+                                //a.Moneda==null ? "" :   a.Moneda.Abreviatura.NullSafeToString(),  
+                                //a.Comprador==null ? "" :    a.Comprador.Nombre.NullSafeToString(),  
+                                //a.Empleado==null ? "" :  a.Empleado.Nombre.NullSafeToString(),  
+                                //a.DetallePedidos.Count().NullSafeToString(),  
+                                //a.IdPedido.NullSafeToString(), 
+                                //a.NumeroComparativa.NullSafeToString(),  
+                                //a.IdTipoCompraRM.NullSafeToString(), 
+                                //a.Observaciones.NullSafeToString(),   
+                                //a.DetalleCondicionCompra.NullSafeToString(),   
+                                //a.PedidoExterior.NullSafeToString(),  
+                                //a.IdPedidoAbierto.NullSafeToString(), 
+                                //a.NumeroLicitacion .NullSafeToString(), 
+                                //a.Impresa.NullSafeToString(), 
+                                //a.UsuarioAnulacion.NullSafeToString(), 
+                                //a.FechaAnulacion.NullSafeToString(),  
+                                //a.MotivoAnulacion.NullSafeToString(),  
+                                //a.ImpuestosInternos.NullSafeToString(), 
+                                //"", // #Auxiliar1.Equipos , 
+                                //a.CircuitoFirmasCompleto.NullSafeToString(), 
+                                //a.Proveedor==null ? "" : a.Proveedor.IdCodigoIva.NullSafeToString() ,
+                                //a.IdComprador.NullSafeToString(),
+                                //a.IdProveedor.NullSafeToString(),
+                                //a.ConfirmadoPorWeb_1.NullSafeToString()
+                               
+                            }
+                        }).ToArray()
+            };
+
+            //return Json(jsonData, JsonRequestBehavior.AllowGet);
+            System.Web.Script.Serialization.JavaScriptSerializer jsonSerializer = new System.Web.Script.Serialization.JavaScriptSerializer();
+            return jsonSerializer.Serialize(jsonData);
+
+
+        }
+
+
+
+
+
+
+
+
+
+
+
 
 
         public virtual string CartasPorte_DynamicGridData(string sidx, string sord, int page, int rows, bool _search, string filters, string FechaInicial, string FechaFinal, int puntovent, int iddestino, string SC, string nombreusuario, string SCbdlmaster)
