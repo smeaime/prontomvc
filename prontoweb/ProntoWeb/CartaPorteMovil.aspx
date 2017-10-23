@@ -528,11 +528,12 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                    <%-- <a class="btn" style="color: Black" href="#"><i class="icon-print"></i>&nbsp;más</a>--%>
 
                     <input type="button" id="recarg" value="recarg" class="btn icon-cog span2" />
-                    <input type="button" id="ant" value="<<" class="btn" />
-                    <input type="button" id="prox" value=">>" class="btn" />
-
-
-                             <a class="btn" href="CartaDePorteInformesAccesoClientesMovil.aspx">Version escritorio  </a>
+                    <input type="button" id="ant" value="<<<<" class="btn" />
+                    <input type="button" id="prox" value=">>>>" class="btn" />
+                    <input type="button" id="edtData" value="edit" class="btn icon-cog span2" />
+                    
+                    
+                             <a class="btn span2" href="CartaDePorteInformesAccesoClientesMovil.aspx">Verant</a>
 
                 </div>
 
@@ -1858,7 +1859,7 @@ Arroyo Seco (Sta. Fe) - René Favaloro 726 / (03402) 421-426 - 429-676 / arroyos
                             }]
                     }
                 },
-                { name: 'ver', index: 'NetoPto', align: 'left', width: 60, hidden: false, editable: false, edittype: 'text', sortable: false },
+                { name: 'ver', index: 'NetoPto', align: 'left', width: 40, hidden: false, editable: false, edittype: 'text', sortable: false },
                 { name: 'SubnumeroVagon', index: 'NetoPto', align: 'left', width: 60, hidden: false, editable: false, edittype: 'text', sortable: false },
                {
                    name: 'FechaArribo', index: 'FechaArribo', width: 100, sortable: true, align: 'right', editable: false, sortable: false,
@@ -2697,6 +2698,13 @@ Arroyo Seco (Sta. Fe) - René Favaloro 726 / (03402) 421-426 - 429-676 / arroyos
             },
 
 
+            ondblClickRow: function (id) {
+                //sacarDeEditMode();
+                dobleclic = true;
+                EditarItem(id);
+            },
+
+
 
 
             onCellSelect: function (rowid, iCol, cellcontent, e) {
@@ -2814,6 +2822,75 @@ Arroyo Seco (Sta. Fe) - René Favaloro 726 / (03402) 421-426 - 429-676 / arroyos
 
         //$('#Lista').jqGrid('setGridWidth', '1000');
         //$('#Lista').jqGrid('setGridWidth', $(window).width() - 40);
+
+
+
+
+
+        $("#edtData").click(function () {
+            sacarDeEditMode();
+            var gr = jQuery("#Lista").jqGrid('getGridParam', 'selrow');
+            EditarItem(gr)
+        });
+
+
+
+        function EditarItem(rowid) {
+            
+            var gr = rowid; // jQuery("#Lista").jqGrid('getGridParam',  'selrow');
+            var row = jQuery("#Lista").jqGrid('getRowData', rowid);
+
+            if (row.Cumplido == "SI") {
+                alert("El item ya está cumplido")
+                return;
+            }
+
+            if (gr != null) jQuery("#Lista").jqGrid('editGridRow', gr,
+                {
+                    editCaption: "", bSubmit: "Aceptar", bCancel: "Cancelar", width: 800
+                    , reloadAfterSubmit: false, closeOnEscape: true,
+                    closeAfterEdit: true, recreateForm: true, Top: 0,
+                    beforeShowForm: function (form) {
+                        //GrabarGrillaLocal();
+
+                        //PopupCentrar();
+
+                        //$('#NumeroItem').attr('readonly', 'readonly');
+
+                        //$('#tr_IdDetalleRequerimiento', form).hide();
+                        //$('#tr_IdArticulo', form).hide();
+                        //$('#tr_IdUnidad', form).hide();
+                    },
+                    beforeInitData: function () {
+                        inEdit = true;
+                    }
+                    ,
+                    onClose: function (data) {
+
+                        //RefrescarOrigenDescripcion();
+                        //AgregarRenglonesEnBlanco({ "IdDetalleRequerimiento": "0", "IdArticulo": "0", "Cantidad": "0", "Descripcion": "" });
+
+                        //var data = $('#Lista').jqGrid('getRowData', dataIds[iRow - 1]);
+                        //data['Unidad'] = $("#Unidad").text(); ;
+                        //$('#Lista').jqGrid('setRowData', dataIds[iRow - 1], data); // vuelvo a grabar el renglon
+
+                        //PonerRenglonesInline();
+                        // jQuery('#Lista').editRow(gr, true);
+                    }
+                    ,
+                    beforeSubmit: function (postdata, formid) {
+                        //alert(postdata.Unidad + " " + $("#Unidad").children("option").filter(":selected").text());
+                        //postdata.Unidad es un numero?????
+                        //postdata.Unidad = $("#Unidad").children("option").filter(":selected").text()
+                        //postdata.ControlCalidad = $("#ControlCalidad").children("option").filter(":selected").text()
+
+                        return [true, 'no se puede'];
+                    }
+                });
+            else alert("Debe seleccionar un item!");
+        }
+
+
 
     });
 
