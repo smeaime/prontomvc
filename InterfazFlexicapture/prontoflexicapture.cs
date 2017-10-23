@@ -4822,62 +4822,63 @@ Formato localidad-provincia	destination	x
 
                                 "<a href=\"CartaDePorte.aspx?Id=" +  a.IdCartaDePorte + "\"  target=\"_blank\" >" +  a.NumeroCartaEnTextoParaBusqueda.NullSafeToString() + "</>" ,
                                 "<a href=\"CartaDePorte.aspx?Id=" +  a.IdCartaDePorte + "\"  target=\"_blank\" >" +  "ver" + "</>" ,
-
                                 a.SubnumeroVagon.NullSafeToString(),
-
                                 a.FechaArribo==null ? "" :  a.FechaArribo.GetValueOrDefault().ToShortDateString(),
                                 a.Hora.NullSafeToString(),
+
                                 a.Producto.ToString(),
                                 a.Contrato.NullSafeToString(),
-
-
                                 Convert.ToInt32(a.BrutoPto).ToString(),
                                 Convert.ToInt32(a.TaraPto).ToString(),
                                 Convert.ToInt32(a.NetoPto).ToString(),
+
+
                                 Convert.ToInt32(a.BrutoFinal).ToString(),
                                 Convert.ToInt32(a.TaraFinal).ToString(),
                                 Convert.ToInt32(a.NetoFinal).ToString(),
-
-
-                                 a.Humedad.NullSafeToString(),
-                                 a.Merma.NullSafeToString(),
                                  "", // dif
+                                a.Humedad.NullSafeToString(),
+
+
+                                 a.Merma.NullSafeToString(),
                                  Convert.ToInt32(a.NetoFinal).ToString(),
-
-
+                                 "",//otras
                                  a.TitularDesc,
                                  a.IntermediarioDesc,
-                                 a.RComercialDesc,
 
 
+                                a.RComercialDesc,
                                  a.ClienteAuxiliarDesc,
-
-
                                 a.CorredorDesc,
                                 a.CorredorDesc2,
                                 a.DestinatarioDesc,
+
+
                                 a.EntregadorDesc,
                                 a.Patente,
                                 a.Acoplado,
                                 a.TransportistaCUIT,
                                 a.TransportistaDesc,
+
                                 a.DestinoDesc,
                                 a.ProcedenciaDesc,
                                 a.Cosecha,
-
-
                                 a.FechaDescarga==null ? "" :  a.FechaDescarga.GetValueOrDefault().ToShortDateString(),
-
                                 a.Calidad,
+
                                 a.Observaciones,
                                 a.ChoferCUIT,
                                 a.ChoferDesc,
                                 "", // nro oncaa
+                                "", //pta oncaa
+
+
                                 a.CEE,
                                 a.FechaEmision.NullSafeToString(),
                                 a.FechaVencimiento.NullSafeToString(),
                                 a.KmARecorrer.NullSafeToString(),
                                 a.Tarifa.NullSafeToString(),
+
                                 a.CTG.NullSafeToString(),
                                 a.EstablecimientoDesc
 

@@ -521,7 +521,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
                 <div class="span12">
 
-                    <input type="button" id="btnsituacion" value="Cambiar situacion" class="btn  btn-large btn-primary " usesubmitbehavior="false" />
+                    <%--<input type="button" id="btnsituacion" value="Cambiar situacion" class="btn  btn-large btn-primary " usesubmitbehavior="false" />--%>
 
                     <%-- <a class="btn" style="color: Black" href="#"><i class="icon-print"></i>&nbsp;más</a>--%>
 

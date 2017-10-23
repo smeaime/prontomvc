@@ -521,9 +521,10 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
                 <div class="span12">
 
-                    <input type="button" id="btnsituacion" value="Cambiar situacion" class="btn  btn-large btn-primary " usesubmitbehavior="false" />
+<%--                    <input type="button" id="btnsituacion" value="Cambiar situacion" class="btn  btn-large btn-primary " usesubmitbehavior="false" />--%>
+                    <input type="button" id="btnsituacion" value="version anterior" class="btn  btn-large" usesubmitbehavior="false" />
 
-                    <%-- <a class="btn" style="color: Black" href="#"><i class="icon-print"></i>&nbsp;más</a>--%>
+                   <%-- <a class="btn" style="color: Black" href="#"><i class="icon-print"></i>&nbsp;más</a>--%>
 
                     <input type="button" id="recarg" value="recarg" class="btn icon-cog span2" />
                     <input type="button" id="ant" value="<<" class="btn" />
@@ -1828,6 +1829,11 @@ Arroyo Seco (Sta. Fe) - René Favaloro 726 / (03402) 421-426 - 429-676 / arroyos
 
                 { name: ' IdCartasDePorte', index: ' IdCartasDePorte', align: 'left', width: 100, editable: false, hidden: true, frozen: true },
 
+
+
+
+
+
                 {
                     name: 'NumeroCartaEnTextoParaBusqueda', index: 'NumeroCartaEnTextoParaBusqueda', width: 100, align: 'left', sorttype: "text", sortable: false, frozen: true
                     , editable: false, editrules: { required: false, number: true }, edittype: 'text',
@@ -1848,44 +1854,32 @@ Arroyo Seco (Sta. Fe) - René Favaloro 726 / (03402) 421-426 - 429-676 / arroyos
                             }]
                     }
                 },
+                { name: 'ver', index: 'NetoPto', align: 'left', width: 60, hidden: false, editable: false, edittype: 'text', sortable: false },
+                { name: 'SubnumeroVagon', index: 'NetoPto', align: 'left', width: 60, hidden: false, editable: false, edittype: 'text', sortable: false },
+                { name: 'FechaArribo', index: 'NetoPto', align: 'left', width: 60, hidden: false, editable: false, edittype: 'text', sortable: false },
+                { name: 'Hora', index: 'NetoPto', align: 'left', width: 60, hidden: false, editable: false, edittype: 'text', sortable: false },
 
 
 
 
-                { name: 'NetoPto', index: 'NetoPto', align: 'left', width: 60, hidden: false, editable: false, edittype: 'text', sortable: false },
-                { name: 'NetoPto', index: 'NetoPto', align: 'left', width: 60, hidden: false, editable: false, edittype: 'text', sortable: false },
-                { name: 'NetoPto', index: 'NetoPto', align: 'left', width: 60, hidden: false, editable: false, edittype: 'text', sortable: false },
-                { name: 'NetoPto', index: 'NetoPto', align: 'left', width: 60, hidden: false, editable: false, edittype: 'text', sortable: false },
-                { name: 'NetoPto', index: 'NetoPto', align: 'left', width: 60, hidden: false, editable: false, edittype: 'text', sortable: false },
-
-                { name: 'NetoPto', index: 'NetoPto', align: 'left', width: 60, hidden: false, editable: false, edittype: 'text', sortable: false },
-                { name: 'NetoPto', index: 'NetoPto', align: 'left', width: 60, hidden: false, editable: false, edittype: 'text', sortable: false },
-                { name: 'NetoPto', index: 'NetoPto', align: 'left', width: 60, hidden: false, editable: false, edittype: 'text', sortable: false },
-                { name: 'NetoPto', index: 'NetoPto', align: 'left', width: 60, hidden: false, editable: false, edittype: 'text', sortable: false },
-                { name: 'NetoPto', index: 'NetoPto', align: 'left', width: 60, hidden: false, editable: false, edittype: 'text', sortable: false },
-
-
-
-                { name: 'NetoPto', index: 'NetoPto', align: 'left', width: 60, hidden: false, editable: false, edittype: 'text', sortable: false },
-                { name: 'NetoPto', index: 'NetoPto', align: 'left', width: 60, hidden: false, editable: false, edittype: 'text', sortable: false },
-                { name: 'NetoPto', index: 'NetoPto', align: 'left', width: 60, hidden: false, editable: false, edittype: 'text', sortable: false },
-                { name: 'NetoPto', index: 'NetoPto', align: 'left', width: 60, hidden: false, editable: false, edittype: 'text', sortable: false },
-                { name: 'NetoPto', index: 'NetoPto', align: 'left', width: 60, hidden: false, editable: false, edittype: 'text', sortable: false },
-
-                { name: 'NetoPto', index: 'NetoPto', align: 'left', width: 60, hidden: false, editable: false, edittype: 'text', sortable: false },
-                { name: 'NetoPto', index: 'NetoPto', align: 'left', width: 60, hidden: false, editable: false, edittype: 'text', sortable: false },
+           // 'Producto','Contrato','Bruto Proc','Tara Proc','Neto Proc',
+                { name: 'Producto', index: 'NetoPto', align: 'left', width: 60, hidden: false, editable: false, edittype: 'text', sortable: false },
+                { name: 'Contrato', index: 'NetoPto', align: 'left', width: 60, hidden: false, editable: false, edittype: 'text', sortable: false },
                 { name: 'NetoPto', index: 'NetoPto', align: 'left', width: 60, hidden: false, editable: false, edittype: 'text', sortable: false },
                 { name: 'NetoPto', index: 'NetoPto', align: 'left', width: 60, hidden: false, editable: false, edittype: 'text', sortable: false },
                 { name: 'NetoPto', index: 'NetoPto', align: 'left', width: 60, hidden: false, editable: false, edittype: 'text', sortable: false },
 
 
 
-                { name: 'NetoPto', index: 'NetoPto', align: 'left', width: 60, hidden: false, editable: false, edittype: 'text', sortable: false },
-                { name: 'NetoPto', index: 'NetoPto', align: 'left', width: 60, hidden: false, editable: false, edittype: 'text', sortable: false },
-                { name: 'NetoPto', index: 'NetoPto', align: 'left', width: 60, hidden: false, editable: false, edittype: 'text', sortable: false },
+         //    'Bruto Desc',' Tara Desc','Neto Desc','Dif','Humed',
+                { name: 'BrutoFinal', index: 'NetoPto', align: 'left', width: 60, hidden: false, editable: false, edittype: 'text', sortable: false },
+                { name: 'TaraFinal', index: 'NetoPto', align: 'left', width: 60, hidden: false, editable: false, edittype: 'text', sortable: false },
+                { name: 'NetoFinal', index: 'NetoPto', align: 'left', width: 60, hidden: false, editable: false, edittype: 'text', sortable: false },
                 { name: 'NetoPto', index: 'NetoPto', align: 'left', width: 60, hidden: false, editable: false, edittype: 'text', sortable: false },
                 { name: 'NetoPto', index: 'NetoPto', align: 'left', width: 60, hidden: false, editable: false, edittype: 'text', sortable: false },
 
+
+          //   'Merma','Otras','Kg. Netos','Titular','Intermediario',
                 { name: 'NetoPto', index: 'NetoPto', align: 'left', width: 60, hidden: false, editable: false, edittype: 'text', sortable: false },
                 { name: 'NetoPto', index: 'NetoPto', align: 'left', width: 60, hidden: false, editable: false, edittype: 'text', sortable: false },
                 { name: 'NetoPto', index: 'NetoPto', align: 'left', width: 60, hidden: false, editable: false, edittype: 'text', sortable: false },
@@ -1894,12 +1888,15 @@ Arroyo Seco (Sta. Fe) - René Favaloro 726 / (03402) 421-426 - 429-676 / arroyos
 
 
 
+            // 'Rem. Comercial','Cliente Observ','Corredor','Corredor Obs','Destinatario',
                 { name: 'NetoPto', index: 'NetoPto', align: 'left', width: 60, hidden: false, editable: false, edittype: 'text', sortable: false },
                 { name: 'NetoPto', index: 'NetoPto', align: 'left', width: 60, hidden: false, editable: false, edittype: 'text', sortable: false },
                 { name: 'NetoPto', index: 'NetoPto', align: 'left', width: 60, hidden: false, editable: false, edittype: 'text', sortable: false },
                 { name: 'NetoPto', index: 'NetoPto', align: 'left', width: 60, hidden: false, editable: false, edittype: 'text', sortable: false },
                 { name: 'NetoPto', index: 'NetoPto', align: 'left', width: 60, hidden: false, editable: false, edittype: 'text', sortable: false },
 
+        
+       // 'Entregador', ,'Pat chasis','Pat acoplado','CUIT Transp','Transportista',
                 { name: 'NetoPto', index: 'NetoPto', align: 'left', width: 60, hidden: false, editable: false, edittype: 'text', sortable: false },
                 { name: 'NetoPto', index: 'NetoPto', align: 'left', width: 60, hidden: false, editable: false, edittype: 'text', sortable: false },
                 { name: 'NetoPto', index: 'NetoPto', align: 'left', width: 60, hidden: false, editable: false, edittype: 'text', sortable: false },
@@ -1907,14 +1904,119 @@ Arroyo Seco (Sta. Fe) - René Favaloro 726 / (03402) 421-426 - 429-676 / arroyos
                 { name: 'NetoPto', index: 'NetoPto', align: 'left', width: 60, hidden: false, editable: false, edittype: 'text', sortable: false },
 
 
+              //       'Destino','Procedencia','Cosecha','Fecha descarga','Calidad'
+                { name: 'NetoPto', index: 'NetoPto', align: 'left', width: 60, hidden: false, editable: false, edittype: 'text', sortable: false },
+                { name: 'NetoPto', index: 'NetoPto', align: 'left', width: 60, hidden: false, editable: false, edittype: 'text', sortable: false },
+                { name: 'Cosecha', index: 'Cosecha', align: 'left', width: 60, hidden: false, editable: false, edittype: 'text', sortable: false },
+                {
+                    name: 'FechaDescarga', index: 'FechaDescarga', width: 100, sortable: true, align: 'right', editable: false, sortable: false,
+                    editoptions: {
+                        size: 10,
+                        maxlengh: 10,
+                        dataInit: function (element) {
+                            $(element).datepicker({
+                                dateFormat: 'dd/mm/yy',
+                                constrainInput: false,
+                                showOn: 'button',
+                                buttonText: '...'
+                            });
+                        }
+                    },
+                    formatoptions: { newformat: "dd/mm/yy" }, datefmt: 'dd/mm/yy'
+                    //, formatter: 'date'
+                    , sorttype: 'date'
 
-                { name: 'NetoPto', index: 'NetoPto', align: 'left', width: 60, hidden: false, editable: false, edittype: 'text', sortable: false },
-                { name: 'NetoPto', index: 'NetoPto', align: 'left', width: 60, hidden: false, editable: false, edittype: 'text', sortable: false },
-                { name: 'NetoPto', index: 'NetoPto', align: 'left', width: 60, hidden: false, editable: false, edittype: 'text', sortable: false },
+
+                    , searchoptions: {
+                        sopt: ['eq', 'ne', 'lt', 'le', 'gt', 'ge'],
+                        dataInit: function (elem) {
+                            $(elem).datepicker({
+                                dateFormat: 'dd/mm/yy',
+                                showButtonPanel: true
+                            })
+                        }
+                    }
+                },
+                { name: 'Calidad', index: 'Calidad', align: 'left', width: 60, hidden: false, editable: false, edittype: 'text', sortable: false },
+
+        
+             //    ,'Observaciones','Chofer CUIT','Chofer','Nro ONCAA','Pta ONCAA',
+                { name: 'Observaciones', index: 'NetoPto', align: 'left', width: 60, hidden: false, editable: false, edittype: 'text', sortable: false },
+                { name: 'ChoferCUIT', index: 'NetoPto', align: 'left', width: 60, hidden: false, editable: false, edittype: 'text', sortable: false },
+                { name: 'ChoferDesc', index: 'NetoPto', align: 'left', width: 60, hidden: false, editable: false, edittype: 'text', sortable: false },
                 { name: 'NetoPto', index: 'NetoPto', align: 'left', width: 60, hidden: false, editable: false, edittype: 'text', sortable: false },
                 { name: 'NetoPto', index: 'NetoPto', align: 'left', width: 60, hidden: false, editable: false, edittype: 'text', sortable: false },
 
-                { name: 'NetoPto', index: 'NetoPto', align: 'left', width: 60, hidden: false, editable: false, edittype: 'text', sortable: false },
+
+            //     'Nro CEE','Emisión','Vencimiento','Km. a recorrer','Tarifa',
+                { name: 'CEE', index: 'NetoPto', align: 'left', width: 60, hidden: false, editable: false, edittype: 'text', sortable: false },
+                {
+                    name: 'FechaEmision', index: 'FechaEmision', width: 100, sortable: true, align: 'right', editable: false, sortable: false,
+                    editoptions: {
+                        size: 10,
+                        maxlengh: 10,
+                        dataInit: function (element) {
+                            $(element).datepicker({
+                                dateFormat: 'dd/mm/yy',
+                                constrainInput: false,
+                                showOn: 'button',
+                                buttonText: '...'
+                            });
+                        }
+                    },
+                    formatoptions: { newformat: "dd/mm/yy" }, datefmt: 'dd/mm/yy'
+                    //, formatter: 'date'
+                    , sorttype: 'date'
+
+
+                    , searchoptions: {
+                        sopt: ['eq', 'ne', 'lt', 'le', 'gt', 'ge'],
+                        dataInit: function (elem) {
+                            $(elem).datepicker({
+                                dateFormat: 'dd/mm/yy',
+                                showButtonPanel: true
+                            })
+                        }
+                    }
+                },
+                {
+                    name: 'FechaVencimiento', index: 'FechaVencimiento', width: 100, sortable: true, align: 'right', editable: false, sortable: false,
+                    editoptions: {
+                        size: 10,
+                        maxlengh: 10,
+                        dataInit: function (element) {
+                            $(element).datepicker({
+                                dateFormat: 'dd/mm/yy',
+                                constrainInput: false,
+                                showOn: 'button',
+                                buttonText: '...'
+                            });
+                        }
+                    },
+                    formatoptions: { newformat: "dd/mm/yy" }, datefmt: 'dd/mm/yy'
+                    //, formatter: 'date'
+                    , sorttype: 'date'
+
+
+                    , searchoptions: {
+                        sopt: ['eq', 'ne', 'lt', 'le', 'gt', 'ge'],
+                        dataInit: function (elem) {
+                            $(elem).datepicker({
+                                dateFormat: 'dd/mm/yy',
+                                showButtonPanel: true
+                            })
+                        }
+                    }
+                },
+                { name: 'KmARecorrer', index: 'KmARecorrer', align: 'left', width: 60, hidden: false, editable: false, edittype: 'text', sortable: false },
+                { name: 'Tarifa', index: 'Tarifa', align: 'left', width: 60, hidden: false, editable: false, edittype: 'text', sortable: false },
+
+
+         //      'CTG','Establecimiento' ],
+                { name: 'CTG', index: 'CTG', align: 'left', width: 60, hidden: false, editable: false, edittype: 'text', sortable: false },
+                { name: 'EstablecimientoDesc', index: 'EstablecimientoDesc', align: 'left', width: 60, hidden: false, editable: false, edittype: 'text', sortable: false },
+
+
             ],
 
             gridComplete: function () {
@@ -1949,7 +2051,7 @@ Arroyo Seco (Sta. Fe) - René Favaloro 726 / (03402) 421-426 - 429-676 / arroyos
 
 
 
-                RefrescarFondoRenglon(this);
+                // RefrescarFondoRenglon(this);
 
 
             },
