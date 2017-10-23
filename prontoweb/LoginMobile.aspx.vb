@@ -657,7 +657,7 @@ Partial Class Login
 
                 Try
                     Dim rol = Roles.GetRolesForUser(Session(SESSIONPRONTO_UserName))
-                    If rol(0) = "Cliente" Or rol(0) = "WilliamsClientes" Then Login1.DestinationPageUrl = "~/ProntoWeb/CartaDePorteInformesAccesoClientes.aspx"
+                    If rol(0) = "Cliente" Or rol(0) = "WilliamsClientes" Then Login1.DestinationPageUrl = "~/ProntoWeb/CartaPorteMovil.aspx"
                 Catch ex As Exception
                     ErrHandler2.WriteError(ex)
                 End Try
