@@ -4820,7 +4820,7 @@ Formato localidad-provincia	destination	x
 
                                 a.IdCartaDePorte.ToString(),
 
-                                "<a href=\"CartaDePorte.aspx?Id=" +  a.IdCartaDePorte + "\"  target=\"_blank\" >" +  a.NumeroCartaEnTextoParaBusqueda.NullSafeToString() + "</>" ,
+                                a.NumeroCartaEnTextoParaBusqueda.NullSafeToString(),  //                                "<a href=\"CartaDePorte.aspx?Id=" +  a.IdCartaDePorte + "\"  target=\"_blank\" >" +  a.NumeroCartaEnTextoParaBusqueda.NullSafeToString() + "</>" ,
                                 "<a href=\"CartaDePorte.aspx?Id=" +  a.IdCartaDePorte + "\"  target=\"_blank\" >" +  "ver" + "</>" ,
                                 a.SubnumeroVagon.NullSafeToString(),
                                 a.FechaArribo==null ? "" :  a.FechaArribo.GetValueOrDefault().ToShortDateString(),
