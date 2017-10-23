@@ -950,6 +950,31 @@ namespace ProntoMVC.Tests
         [TestMethod]
         public void no_facturar_las_q_tienen_clientes_bloqueados_por_cobranzas_43121()
         {
+
+
+
+            //'verificar que no haya bloqueados por cobranzas
+            //'If True Then
+            //'    'http://bdlconsultores.ddns.net/Consultas/Admin/VerConsultas1.php?recordid=14168
+            //'    'Precisan agregar una marca en el formulario de clientes para poder bloquear la carga de estos
+            //'    'en las cartas de porte debido a un conflicto de cobranzas.
+            //'    'Este tilde deberán verlo solo algunos usuarios(activaremos a los de cobranzas).
+            //'    'Luego, cuando quieran usarlo en una carta de porte el sistema tiene que dar un mensaje de advertencia diciendo
+            //'    'que el usuario no se puede utilizar y que tiene que ponerse en contacto con el sector de cobranzas.
+            //'    'La carta de porte no se puede grabar si tiene un cliente en esta condición.
+
+
+            //'    Dim sClientesCobranzas As String
+            //'    If UsaClientesQueEstanBloqueadosPorCobranzas(SC, myCartaDePorte, sClientesCobranzas) Then
+            //'        MS &= "Cliente bloqueado. Ponerse en contacto con el sector de cobranzas (" & sClientesCobranzas & ") "
+            //'        MS &= vbCrLf   'return false
+            //'    End If
+            //'End If
+
+
+
+            // Validar2doPaso()
+
         }
 
 
@@ -1065,7 +1090,7 @@ Error in: https://prontoweb.williamsentregas.com.ar/ProntoWeb/CDPFacturacion.asp
 
 
 
-            for (int n = 1372900; n < 1372930; n++)
+            for (int n = 1372900; n < 1372999; n++)
             {
                 var cp = (from i in db.CartasDePortes where i.IdCartaDePorte == n select i).Single();
                 cp.TarifaFacturada = Convert.ToDecimal(2.77);
