@@ -38,3 +38,524 @@ Referencia a objeto no establecida como instancia de un objeto.
    en SituacionCalidadMovil.BindTypeDropDown() en C:\bdl\pronto\prontoweb\ProntoWeb\CartaPorteMovil.aspx.vb:línea 167
 App_Web_cartaportemovil.aspx.4199bbd4.ao1mpt_k
 __________________________
+
+Log Entry : 
+10/24/2017 00:30:59
+Error in: http://localhost:50769/ProntoWeb/CartaPorteMovil.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en SituacionCalidadMovil.BindTypeDropDown() en C:\bdl\pronto\prontoweb\ProntoWeb\CartaPorteMovil.aspx.vb:línea 167
+App_Web_cartaportemovil.aspx.4199bbd4.rp1xlrle
+__________________________
+
+Log Entry : 
+10/24/2017 00:33:11
+Error in: http://localhost:50769/ProntoWeb/CartaPorteMovil.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en SituacionCalidadMovil.BindTypeDropDown() en C:\bdl\pronto\prontoweb\ProntoWeb\CartaPorteMovil.aspx.vb:línea 167
+App_Web_cartaportemovil.aspx.4199bbd4.rp1xlrle
+__________________________
+
+Log Entry : 
+10/24/2017 08:57:04
+Error in: . Error Message:System.Data.SqlClient.SqlException
+Error relacionado con la red o específico de la instancia mientras se establecía una conexión con el servidor SQL Server. No se encontró el servidor o éste no estaba accesible. Compruebe que el nombre de la instancia es correcto y que SQL Server está configurado para admitir conexiones remotas. (provider: SQL Network Interfaces, error: 26 - Error al buscar el servidor o instancia especificado)
+   en System.Data.SqlClient.SqlInternalConnectionTds..ctor(DbConnectionPoolIdentity identity, SqlConnectionString connectionOptions, SqlCredential credential, Object providerInfo, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance, SqlConnectionString userConnectionOptions, SessionData reconnectSessionData, DbConnectionPool pool, String accessToken, Boolean applyTransientFaultHandling)
+   en System.Data.SqlClient.SqlConnectionFactory.CreateConnection(DbConnectionOptions options, DbConnectionPoolKey poolKey, Object poolGroupProviderInfo, DbConnectionPool pool, DbConnection owningConnection, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionFactory.CreatePooledConnection(DbConnectionPool pool, DbConnection owningObject, DbConnectionOptions options, DbConnectionPoolKey poolKey, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionPool.CreateObject(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   en System.Data.ProviderBase.DbConnectionPool.UserCreateRequest(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   en System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.Open()
+   en Pronto.ERP.Dal.EmpresaDB.GetList(String SC)
+   en Pronto.ERP.Bll.EmpresaManager.GetList(String SC) en C:\bdl\pronto\BussinessLogic\EmpresaManager.vb:línea 13
+   en ASP.global_asax.Application_Start(Object sender, EventArgs e) en C:\bdl\pronto\prontoweb\global.asax:línea 307
+.Net SqlClient Data Provider
+__________________________
+
+Log Entry : 
+10/24/2017 08:57:32
+Error in: http://localhost:50769/ProntoWeb/CartasDePortes.aspx?tipo=Todas. Error Message:RODRIGORIOS
+__________________________
+
+Log Entry : 
+10/24/2017 08:57:32
+Error in: http://localhost:50769/ProntoWeb/CartasDePortes.aspx?tipo=Todas. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartasDePortes.BindTypeDropDown() en C:\bdl\pronto\prontoweb\ProntoWeb\CartasDePortes.aspx.vb:línea 98
+App_Web_cartasdeportes.aspx.4199bbd4.at32vnoq
+__________________________
+
+Log Entry : 
+10/24/2017 08:57:33
+Error in: http://localhost:50769/ProntoWeb/CartasDePortes.aspx?tipo=Todas. Error Message:System.Threading.ThreadAbortException
+Subproceso anulado.
+   en System.Threading.Thread.AbortInternal()
+   en System.Threading.Thread.Abort(Object stateInfo)
+   en System.Web.HttpResponse.AbortCurrentThread()
+   en System.Web.HttpResponse.End()
+   en System.Web.HttpResponse.Redirect(String url, Boolean endResponse, Boolean permanent)
+   en System.Web.HttpResponse.Redirect(String url)
+   en CartasDePortes.Permisos() en C:\bdl\pronto\prontoweb\ProntoWeb\CartasDePortes.aspx.vb:línea 142
+mscorlib
+__________________________
+
+Log Entry : 
+10/24/2017 08:57:33
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesAccesoClientes.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartaDePorteInformesAccesoClientes.BindTypeDropDown() en C:\bdl\pronto\prontoweb\ProntoWeb\CartaDePorteInformesAccesoClientes.aspx.vb:línea 269
+App_Web_cartadeporteinformesaccesoclientes.aspx.4199bbd4.0-eljfu3
+__________________________
+
+Log Entry : 
+10/24/2017 08:57:46
+Error in: http://localhost:50769/ProntoWeb/CartaPorteMovil.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en SituacionCalidadMovil.BindTypeDropDown() en C:\bdl\pronto\prontoweb\ProntoWeb\CartaPorteMovil.aspx.vb:línea 167
+App_Web_cartaportemovil.aspx.4199bbd4.rp1xlrle
+__________________________
+
+Log Entry : 
+10/24/2017 08:59:49
+Error in: http://localhost:50769/ProntoWeb/CartaPorteMovil.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en SituacionCalidadMovil.BindTypeDropDown() en C:\bdl\pronto\prontoweb\ProntoWeb\CartaPorteMovil.aspx.vb:línea 167
+App_Web_cartaportemovil.aspx.4199bbd4.fb-fylnv
+__________________________
+
+Log Entry : 
+10/24/2017 08:59:58
+Error in: http://localhost:50769/ProntoWeb/CartaPorteMovil.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en SituacionCalidadMovil.BindTypeDropDown() en C:\bdl\pronto\prontoweb\ProntoWeb\CartaPorteMovil.aspx.vb:línea 167
+App_Web_cartaportemovil.aspx.4199bbd4.dqiq92qn
+__________________________
+
+Log Entry : 
+10/24/2017 09:01:07
+Error in: http://localhost:50769/ProntoWeb/CartaPorteMovil.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en SituacionCalidadMovil.BindTypeDropDown() en C:\bdl\pronto\prontoweb\ProntoWeb\CartaPorteMovil.aspx.vb:línea 167
+App_Web_cartaportemovil.aspx.4199bbd4.ma4xc1qv
+__________________________
+
+Log Entry : 
+10/24/2017 09:01:47
+Error in: http://localhost:50769/ProntoWeb/CartaPorteMovil.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en SituacionCalidadMovil.BindTypeDropDown() en C:\bdl\pronto\prontoweb\ProntoWeb\CartaPorteMovil.aspx.vb:línea 167
+App_Web_cartaportemovil.aspx.4199bbd4.fi_potgw
+__________________________
+
+Log Entry : 
+10/24/2017 09:01:59
+Error in: http://localhost:50769/ProntoWeb/CartaPorteMovil.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en SituacionCalidadMovil.BindTypeDropDown() en C:\bdl\pronto\prontoweb\ProntoWeb\CartaPorteMovil.aspx.vb:línea 167
+App_Web_cartaportemovil.aspx.4199bbd4.rpijt_vj
+__________________________
+
+Log Entry : 
+10/24/2017 09:02:23
+Error in: http://localhost:50769/ProntoWeb/CartaPorteMovil.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en SituacionCalidadMovil.BindTypeDropDown() en C:\bdl\pronto\prontoweb\ProntoWeb\CartaPorteMovil.aspx.vb:línea 167
+App_Web_cartaportemovil.aspx.4199bbd4.b9fbo6tk
+__________________________
+
+Log Entry : 
+10/24/2017 09:02:38
+Error in: http://localhost:50769/ProntoWeb/CartaPorteMovil.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en SituacionCalidadMovil.BindTypeDropDown() en C:\bdl\pronto\prontoweb\ProntoWeb\CartaPorteMovil.aspx.vb:línea 167
+App_Web_cartaportemovil.aspx.4199bbd4.dhsvtc7c
+__________________________
+
+Log Entry : 
+10/24/2017 09:02:47
+Error in: http://localhost:50769/ProntoWeb/CartaPorteMovil.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en SituacionCalidadMovil.BindTypeDropDown() en C:\bdl\pronto\prontoweb\ProntoWeb\CartaPorteMovil.aspx.vb:línea 167
+App_Web_cartaportemovil.aspx.4199bbd4.3wpvzwxu
+__________________________
+
+Log Entry : 
+10/24/2017 09:03:03
+Error in: http://localhost:50769/ProntoWeb/CartaPorteMovil.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en SituacionCalidadMovil.BindTypeDropDown() en C:\bdl\pronto\prontoweb\ProntoWeb\CartaPorteMovil.aspx.vb:línea 167
+App_Web_cartaportemovil.aspx.4199bbd4.1hfk9vmi
+__________________________
+
+Log Entry : 
+10/24/2017 09:03:23
+Error in: http://localhost:50769/ProntoWeb/CartaPorteMovil.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en SituacionCalidadMovil.BindTypeDropDown() en C:\bdl\pronto\prontoweb\ProntoWeb\CartaPorteMovil.aspx.vb:línea 167
+App_Web_cartaportemovil.aspx.4199bbd4.q-t0luin
+__________________________
+
+Log Entry : 
+10/24/2017 09:03:30
+Error in: http://localhost:50769/ProntoWeb/CartaPorteMovil.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en SituacionCalidadMovil.BindTypeDropDown() en C:\bdl\pronto\prontoweb\ProntoWeb\CartaPorteMovil.aspx.vb:línea 167
+App_Web_cartaportemovil.aspx.4199bbd4.01zb2iik
+__________________________
+
+Log Entry : 
+10/24/2017 09:04:16
+Error in: http://localhost:50769/ProntoWeb/CartaPorteMovil.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en SituacionCalidadMovil.BindTypeDropDown() en C:\bdl\pronto\prontoweb\ProntoWeb\CartaPorteMovil.aspx.vb:línea 167
+App_Web_cartaportemovil.aspx.4199bbd4.m2u4x4wn
+__________________________
+
+Log Entry : 
+10/24/2017 09:05:02
+Error in: http://localhost:50769/ProntoWeb/CartaPorteMovil.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en SituacionCalidadMovil.BindTypeDropDown() en C:\bdl\pronto\prontoweb\ProntoWeb\CartaPorteMovil.aspx.vb:línea 167
+App_Web_cartaportemovil.aspx.4199bbd4.m2u4x4wn
+__________________________
+
+Log Entry : 
+10/24/2017 09:05:50
+Error in: http://localhost:50769/ProntoWeb/CartaPorteMovil.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en SituacionCalidadMovil.BindTypeDropDown() en C:\bdl\pronto\prontoweb\ProntoWeb\CartaPorteMovil.aspx.vb:línea 167
+App_Web_cartaportemovil.aspx.4199bbd4.jqxctoy0
+__________________________
+
+Log Entry : 
+10/24/2017 09:06:25
+Error in: http://localhost:50769/ProntoWeb/CartaPorteMovil.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en SituacionCalidadMovil.BindTypeDropDown() en C:\bdl\pronto\prontoweb\ProntoWeb\CartaPorteMovil.aspx.vb:línea 167
+App_Web_cartaportemovil.aspx.4199bbd4.lbsqoe-7
+__________________________
+
+Log Entry : 
+10/24/2017 09:08:14
+Error in: http://localhost:50769/ProntoWeb/CartaPorteMovil.aspx. Error Message:RODRIGORIOS esta logueado, pero lo redirijo al login porque faltan los datos de session. No deberia mejor mandarlo a SeleccionarEmpresa? Ademas, no hago el LogOut y le queda el cookie!!!
+__________________________
+
+Log Entry : 
+10/24/2017 09:08:15
+Error in: http://localhost:50769/ProntoWeb/CartaPorteMovil.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en SituacionCalidadMovil.BindTypeDropDown() en C:\bdl\pronto\prontoweb\ProntoWeb\CartaPorteMovil.aspx.vb:línea 167
+App_Web_cartaportemovil.aspx.4199bbd4.gmenee69
+__________________________
+
+Log Entry : 
+10/24/2017 09:09:29
+Error in: http://localhost:50769/ProntoWeb/CartaPorteMovil.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en SituacionCalidadMovil.BindTypeDropDown() en C:\bdl\pronto\prontoweb\ProntoWeb\CartaPorteMovil.aspx.vb:línea 167
+App_Web_cartaportemovil.aspx.4199bbd4.q0ltleu_
+__________________________
+
+Log Entry : 
+10/24/2017 09:10:29
+Error in: http://localhost:50769/ProntoWeb/CartaPorteMovil.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en SituacionCalidadMovil.BindTypeDropDown() en C:\bdl\pronto\prontoweb\ProntoWeb\CartaPorteMovil.aspx.vb:línea 167
+App_Web_cartaportemovil.aspx.4199bbd4.rrb4fzrn
+__________________________
+
+Log Entry : 
+10/24/2017 09:10:37
+Error in: http://localhost:50769/ProntoWeb/CartaPorteMovil.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en SituacionCalidadMovil.BindTypeDropDown() en C:\bdl\pronto\prontoweb\ProntoWeb\CartaPorteMovil.aspx.vb:línea 167
+App_Web_cartaportemovil.aspx.4199bbd4.2ewhkxh9
+__________________________
+
+Log Entry : 
+10/24/2017 09:11:10
+Error in: http://localhost:50769/ProntoWeb/CartaPorteMovil.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en SituacionCalidadMovil.BindTypeDropDown() en C:\bdl\pronto\prontoweb\ProntoWeb\CartaPorteMovil.aspx.vb:línea 167
+App_Web_cartaportemovil.aspx.4199bbd4.fqby8rhn
+__________________________
+
+Log Entry : 
+10/24/2017 09:12:54
+Error in: http://localhost:50769/ProntoWeb/CartaPorteMovil.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en SituacionCalidadMovil.BindTypeDropDown() en C:\bdl\pronto\prontoweb\ProntoWeb\CartaPorteMovil.aspx.vb:línea 167
+App_Web_cartaportemovil.aspx.4199bbd4.rwy13abo
+__________________________
+
+Log Entry : 
+10/24/2017 09:13:32
+Error in: http://localhost:50769/ProntoWeb/CartaPorteMovil.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en SituacionCalidadMovil.BindTypeDropDown() en C:\bdl\pronto\prontoweb\ProntoWeb\CartaPorteMovil.aspx.vb:línea 167
+App_Web_cartaportemovil.aspx.4199bbd4.1gne8mgy
+__________________________
+
+Log Entry : 
+10/24/2017 09:16:05
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesAccesoClientes.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartaDePorteInformesAccesoClientes.BindTypeDropDown() en C:\bdl\pronto\prontoweb\ProntoWeb\CartaDePorteInformesAccesoClientes.aspx.vb:línea 269
+App_Web_cartadeporteinformesaccesoclientes.aspx.4199bbd4.0-eljfu3
+__________________________
+
+Log Entry : 
+10/24/2017 09:16:15
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesAccesoClientes.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartaDePorteInformesAccesoClientes.BindTypeDropDown() en C:\bdl\pronto\prontoweb\ProntoWeb\CartaDePorteInformesAccesoClientes.aspx.vb:línea 269
+App_Web_cartadeporteinformesaccesoclientes.aspx.4199bbd4.0-eljfu3
+__________________________
+
+Log Entry : 
+10/24/2017 09:17:05
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesAccesoClientes.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartaDePorteInformesAccesoClientes.BindTypeDropDown() en C:\bdl\pronto\prontoweb\ProntoWeb\CartaDePorteInformesAccesoClientes.aspx.vb:línea 269
+App_Web_cartadeporteinformesaccesoclientes.aspx.4199bbd4.0-eljfu3
+__________________________
+
+Log Entry : 
+10/24/2017 09:17:18
+Error in: http://localhost:50769/ProntoWeb/CartaPorteMovil.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en SituacionCalidadMovil.BindTypeDropDown() en C:\bdl\pronto\prontoweb\ProntoWeb\CartaPorteMovil.aspx.vb:línea 167
+App_Web_cartaportemovil.aspx.4199bbd4.ian6fleo
+__________________________
+
+Log Entry : 
+10/24/2017 09:17:34
+Error in: http://localhost:50769/ProntoWeb/CartaPorteMovil.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en SituacionCalidadMovil.BindTypeDropDown() en C:\bdl\pronto\prontoweb\ProntoWeb\CartaPorteMovil.aspx.vb:línea 167
+App_Web_cartaportemovil.aspx.4199bbd4.rtvrk_aa
+__________________________
+
+Log Entry : 
+10/24/2017 09:17:44
+Error in: http://localhost:50769/ProntoWeb/CartaPorteMovil.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en SituacionCalidadMovil.BindTypeDropDown() en C:\bdl\pronto\prontoweb\ProntoWeb\CartaPorteMovil.aspx.vb:línea 167
+App_Web_cartaportemovil.aspx.4199bbd4.f4mtpgzo
+__________________________
+
+Log Entry : 
+10/24/2017 09:23:29
+Error in: http://localhost:50769/ProntoWeb/CartaPorteMovil.aspx. Error Message:RODRIGORIOS esta logueado, pero lo redirijo al login porque faltan los datos de session. No deberia mejor mandarlo a SeleccionarEmpresa? Ademas, no hago el LogOut y le queda el cookie!!!
+__________________________
+
+Log Entry : 
+10/24/2017 09:23:30
+Error in: http://localhost:50769/ProntoWeb/CartaPorteMovil.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en SituacionCalidadMovil.BindTypeDropDown() en C:\bdl\pronto\prontoweb\ProntoWeb\CartaPorteMovil.aspx.vb:línea 167
+App_Web_cartaportemovil.aspx.4199bbd4.sdc_eygg
+__________________________
+
+Log Entry : 
+10/24/2017 09:25:25
+Error in: http://localhost:50769/ProntoWeb/CartaPorteMovil.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en SituacionCalidadMovil.BindTypeDropDown() en C:\bdl\pronto\prontoweb\ProntoWeb\CartaPorteMovil.aspx.vb:línea 167
+App_Web_cartaportemovil.aspx.4199bbd4.cy0w3pas
+__________________________
+
+Log Entry : 
+10/24/2017 09:26:13
+Error in: http://localhost:50769/ProntoWeb/CartaPorteMovil.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en SituacionCalidadMovil.BindTypeDropDown() en C:\bdl\pronto\prontoweb\ProntoWeb\CartaPorteMovil.aspx.vb:línea 167
+App_Web_cartaportemovil.aspx.4199bbd4.kppvnem7
+__________________________
+
+Log Entry : 
+10/24/2017 09:26:45
+Error in: http://localhost:50769/ProntoWeb/CartaPorteMovil.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en SituacionCalidadMovil.BindTypeDropDown() en C:\bdl\pronto\prontoweb\ProntoWeb\CartaPorteMovil.aspx.vb:línea 167
+App_Web_cartaportemovil.aspx.4199bbd4.v0qhqgth
+__________________________
+
+Log Entry : 
+10/24/2017 09:27:00
+Error in: http://localhost:50769/ProntoWeb/CartaPorteMovil.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en SituacionCalidadMovil.BindTypeDropDown() en C:\bdl\pronto\prontoweb\ProntoWeb\CartaPorteMovil.aspx.vb:línea 167
+App_Web_cartaportemovil.aspx.4199bbd4.km5-utig
+__________________________
+
+Log Entry : 
+10/24/2017 09:27:29
+Error in: http://localhost:50769/ProntoWeb/CartaPorteMovil.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en SituacionCalidadMovil.BindTypeDropDown() en C:\bdl\pronto\prontoweb\ProntoWeb\CartaPorteMovil.aspx.vb:línea 167
+App_Web_cartaportemovil.aspx.4199bbd4._lgetiky
+__________________________
+
+Log Entry : 
+10/24/2017 09:28:49
+Error in: http://localhost:50769/ProntoWeb/CartaPorteMovil.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en SituacionCalidadMovil.BindTypeDropDown() en C:\bdl\pronto\prontoweb\ProntoWeb\CartaPorteMovil.aspx.vb:línea 167
+App_Web_cartaportemovil.aspx.4199bbd4._lgetiky
+__________________________
+
+Log Entry : 
+10/24/2017 09:31:50
+Error in: http://localhost:50769/ProntoWeb/CartaPorteMovil.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en SituacionCalidadMovil.BindTypeDropDown() en C:\bdl\pronto\prontoweb\ProntoWeb\CartaPorteMovil.aspx.vb:línea 167
+App_Web_cartaportemovil.aspx.4199bbd4._lgetiky
+__________________________
+
+Log Entry : 
+10/24/2017 09:32:50
+Error in: http://localhost:50769/ProntoWeb/CartaPorteMovil.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en SituacionCalidadMovil.BindTypeDropDown() en C:\bdl\pronto\prontoweb\ProntoWeb\CartaPorteMovil.aspx.vb:línea 167
+App_Web_cartaportemovil.aspx.4199bbd4._lgetiky
+__________________________
+
+Log Entry : 
+10/24/2017 09:33:56
+Error in: http://localhost:50769/ProntoWeb/CartaPorteMovil.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en SituacionCalidadMovil.BindTypeDropDown() en C:\bdl\pronto\prontoweb\ProntoWeb\CartaPorteMovil.aspx.vb:línea 167
+App_Web_cartaportemovil.aspx.4199bbd4._lgetiky
+__________________________
+
+Log Entry : 
+10/24/2017 09:45:20
+Error in: http://localhost:50769/ProntoWeb/CartaPorteMovil.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en SituacionCalidadMovil.BindTypeDropDown() en C:\bdl\pronto\prontoweb\ProntoWeb\CartaPorteMovil.aspx.vb:línea 167
+App_Web_cartaportemovil.aspx.4199bbd4.uj_0q5t-
+__________________________
+
+Log Entry : 
+10/24/2017 09:48:06
+Error in: http://localhost:50769/ProntoWeb/CartaPorteMovil.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en SituacionCalidadMovil.BindTypeDropDown() en C:\bdl\pronto\prontoweb\ProntoWeb\CartaPorteMovil.aspx.vb:línea 167
+App_Web_cartaportemovil.aspx.4199bbd4.xy7ej45p
+__________________________
+
+Log Entry : 
+10/24/2017 09:48:40
+Error in: http://localhost:50769/ProntoWeb/CartaPorteMovil.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en SituacionCalidadMovil.BindTypeDropDown() en C:\bdl\pronto\prontoweb\ProntoWeb\CartaPorteMovil.aspx.vb:línea 167
+App_Web_cartaportemovil.aspx.4199bbd4.lvgk1uho
+__________________________
+
+Log Entry : 
+10/24/2017 09:49:11
+Error in: http://localhost:50769/ProntoWeb/CartaPorteMovil.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en SituacionCalidadMovil.BindTypeDropDown() en C:\bdl\pronto\prontoweb\ProntoWeb\CartaPorteMovil.aspx.vb:línea 167
+App_Web_cartaportemovil.aspx.4199bbd4.szqautcn
+__________________________
+
+Log Entry : 
+10/24/2017 09:50:18
+Error in: http://localhost:50769/ProntoWeb/CartaPorteMovil.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en SituacionCalidadMovil.BindTypeDropDown() en C:\bdl\pronto\prontoweb\ProntoWeb\CartaPorteMovil.aspx.vb:línea 167
+App_Web_cartaportemovil.aspx.4199bbd4.f8es6o1q
+__________________________
+
+Log Entry : 
+10/24/2017 09:50:50
+Error in: http://localhost:50769/ProntoWeb/CartaPorteMovil.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en SituacionCalidadMovil.BindTypeDropDown() en C:\bdl\pronto\prontoweb\ProntoWeb\CartaPorteMovil.aspx.vb:línea 167
+App_Web_cartaportemovil.aspx.4199bbd4.ln_svicb
+__________________________
+
+Log Entry : 
+10/24/2017 09:53:00
+Error in: http://localhost:50769/ProntoWeb/CartaPorteMovil.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en SituacionCalidadMovil.BindTypeDropDown() en C:\bdl\pronto\prontoweb\ProntoWeb\CartaPorteMovil.aspx.vb:línea 167
+App_Web_cartaportemovil.aspx.4199bbd4.9fr_bick
+__________________________
+
+Log Entry : 
+10/24/2017 09:53:29
+Error in: http://localhost:50769/ProntoWeb/CartaPorteMovil.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en SituacionCalidadMovil.BindTypeDropDown() en C:\bdl\pronto\prontoweb\ProntoWeb\CartaPorteMovil.aspx.vb:línea 167
+App_Web_cartaportemovil.aspx.4199bbd4.9fr_bick
+__________________________
+
+Log Entry : 
+10/24/2017 09:54:13
+Error in: http://localhost:50769/ProntoWeb/CartaPorteMovil.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en SituacionCalidadMovil.BindTypeDropDown() en C:\bdl\pronto\prontoweb\ProntoWeb\CartaPorteMovil.aspx.vb:línea 167
+App_Web_cartaportemovil.aspx.4199bbd4.wdk6ocve
+__________________________
+
+Log Entry : 
+10/24/2017 09:54:18
+Error in: http://localhost:50769/ProntoWeb/CartaPorteMovil.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en SituacionCalidadMovil.BindTypeDropDown() en C:\bdl\pronto\prontoweb\ProntoWeb\CartaPorteMovil.aspx.vb:línea 167
+App_Web_cartaportemovil.aspx.4199bbd4.wdk6ocve
+__________________________
+
+Log Entry : 
+10/24/2017 09:54:39
+Error in: http://localhost:50769/ProntoWeb/CartaPorteMovil.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en SituacionCalidadMovil.BindTypeDropDown() en C:\bdl\pronto\prontoweb\ProntoWeb\CartaPorteMovil.aspx.vb:línea 167
+App_Web_cartaportemovil.aspx.4199bbd4.negobzot
+__________________________
+
+Log Entry : 
+10/24/2017 09:55:47
+Error in: http://localhost:50769/ProntoWeb/CartaPorteMovil.aspx. Error Message:RODRIGORIOS esta logueado, pero lo redirijo al login porque faltan los datos de session. No deberia mejor mandarlo a SeleccionarEmpresa? Ademas, no hago el LogOut y le queda el cookie!!!
+__________________________
+
+Log Entry : 
+10/24/2017 09:55:47
+Error in: http://localhost:50769/ProntoWeb/CartaPorteMovil.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en SituacionCalidadMovil.BindTypeDropDown() en C:\bdl\pronto\prontoweb\ProntoWeb\CartaPorteMovil.aspx.vb:línea 167
+App_Web_cartaportemovil.aspx.4199bbd4.sopijjqn
+__________________________
+
+Log Entry : 
+10/24/2017 09:57:42
+Error in: http://localhost:50769/ProntoWeb/CartaPorteMovil.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en SituacionCalidadMovil.BindTypeDropDown() en C:\bdl\pronto\prontoweb\ProntoWeb\CartaPorteMovil.aspx.vb:línea 167
+App_Web_cartaportemovil.aspx.4199bbd4.6shweefn
+__________________________
+
+Log Entry : 
+10/24/2017 09:59:25
+Error in: http://localhost:50769/ProntoWeb/CartaPorteMovil.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en SituacionCalidadMovil.BindTypeDropDown() en C:\bdl\pronto\prontoweb\ProntoWeb\CartaPorteMovil.aspx.vb:línea 167
+App_Web_cartaportemovil.aspx.4199bbd4.pdctmovc
+__________________________
+
+Log Entry : 
+10/24/2017 10:00:14
+Error in: http://localhost:50769/ProntoWeb/CartaPorteMovil.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en SituacionCalidadMovil.BindTypeDropDown() en C:\bdl\pronto\prontoweb\ProntoWeb\CartaPorteMovil.aspx.vb:línea 167
+App_Web_cartaportemovil.aspx.4199bbd4.vakj_hma
+__________________________
