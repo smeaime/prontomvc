@@ -24,7 +24,7 @@ Imports Pronto.ERP.Bll.EntidadManager
 
 Imports System.Web.Services
 
-Partial Class SituacionCalidadMovil
+Partial Class CartaPorteMovil
     Inherits System.Web.UI.Page
 
     Dim bRecargarInforme As Boolean

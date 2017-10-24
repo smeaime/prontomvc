@@ -204,7 +204,9 @@ public class JQGridHandler : IHttpHandler
         string FechaInicial = request["FechaInicial"];
         string FechaFinal = request["FechaFinal"];
 
-        string puntovent = request["puntovent"];
+        string puntovent = request["puntovent"] == "null" ? "0" : request["puntovent"] ?? "0";
+        puntovent = (puntovent == "undefined") ? "0" : puntovent;
+
         string destino = request["destino"];
         string usuario = Membership.GetUser().UserName;
 
