@@ -266,6 +266,10 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                                 </cc1:MaskedEditExtender>
                                 <cc1:TextBoxWatermarkExtender ID="TBWE3" runat="server" TargetControlID="txtFechaHasta"
                                     WatermarkText="hasta" WatermarkCssClass="watermarked" />
+
+
+                                <asp:DropDownList ID="cmbPuntoVenta" runat="server" CssClass="" Width="30px" Font-Size="14" Style="color: black;" Height="40" />
+
                             </td>
                         </tr>
 
@@ -589,7 +593,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
             <div id="dialog" title="" style="">
 
-                <input type="button" id="" value="------" class="" style="height: 50px; margin-left: 5px" />
+                <%--<input type="button" id="" value="------" class="" style="height: 50px; margin-left: 5px" />--%>
 
                 <br />
 
@@ -612,21 +616,14 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                     </asp:LoginView>
                     <br />
 
-                    <br />
-                    <br />
-                    <br />
                     <asp:Label ID="lblRazonSocial" runat="server" Font-Size="10" Font-Bold="false" Visible="false" />
 
-                    <a href="CartaDePorteInformesAccesoClientesMovil.aspx">Version escritorio  </a>
+                    <a href="CartaDePorteInformesAccesoClientesMovil.aspx"><i class="fa                 fa-desktop fa-2x"></i>Version escritorio  </a>
                     <br />
 
                 </div>
 
-
-                <br />
-
-
-                Llamanos
+                <hr />
                 <br />
 
                 <div class="row-fluid" style="">
@@ -647,15 +644,24 @@ Arroyo Seco (Sta. Fe) - René Favaloro 726 / (03402) 421-426 - 429-676 / arroyos
 
 
 
+                    <br />
+
+                    <a href="tel:5278-8800" class="button span2" type=""><i class="fa fa-phone fa-2x"></i>BsAs</a>
+                    <br />
+
+                    <a href="tel:(03476) 430-234" class="btn  span2" type="button"><i class="fa fa-phone fa-2x"></i>SLorenzo</a>
+                    <br />
+
+                    <a href="tel: (03402) 421-426" class="btn  span2" type=""><i class="fa fa-phone fa-2x"></i>Arroyo</a>
+                    <br />
+
+                    <a href="tel:0291-400-7928" class="btn  span2" type="button">
+                        <i class="fa                 fa-phone fa-2x"></i>BBlanca
+                    </a>
 
 
-                    <a href="tel:5278-8800" class="button span2" type="">BsAs</a>
 
-                    <a href="tel:(03476) 430-234" class="btn  span2" type="button">SLorenzo</a>
 
-                    <a href="tel: (03402) 421-426" class="btn  span2" type="">Arroyo</a>
-
-                    <a href="tel:0291-400-7928" class="btn  span2" type="button">BBlanca</a>
 
 
 
@@ -676,14 +682,10 @@ Arroyo Seco (Sta. Fe) - René Favaloro 726 / (03402) 421-426 - 429-676 / arroyos
                 </style>--%>
 
 
-                <br />
-
-                Filtros
-                <br />
 
                 <asp:DropDownList ID="cmbEstado" runat="server" Style="text-align: right; margin-left: 0px;"
-                    CssClass="CssCombo" ToolTip="Estado de la carta de porte" Font-Size="14" Height="40" Width="150" Enabled="false">
-                    <%--dejo el combito deshablitado porque las funciones no tienen todavia el parametro de "estado", estan harcodeadas en "11" --%>
+                    CssClass="CssCombo" ToolTip="Estado de la carta de porte" Font-Size="14" Height="40" Width="150" Enabled="false" Visible="false">
+
 
                     <asp:ListItem Text="DESC de hoy + POSIC filt" Value="DescargasDeHoyMasTodasLasPosicionesEnRangoFecha"
                         Selected="True" />
@@ -698,7 +700,6 @@ Arroyo Seco (Sta. Fe) - René Favaloro 726 / (03402) 421-426 - 429-676 / arroyos
                     <asp:ListItem Text="sin liberar en Nota de crédito" Value="EnNotaCredito" />
                 </asp:DropDownList>
 
-                <asp:DropDownList ID="cmbPuntoVenta" runat="server" CssClass="" Width="70px" Font-Size="14" Style="color: black;" Height="40" />
 
 
             </div>
@@ -2827,7 +2828,7 @@ Arroyo Seco (Sta. Fe) - René Favaloro 726 / (03402) 421-426 - 429-676 / arroyos
             shrinkToFit: false,
 
             width: $(window).width() - 4, // 310, //'auto',
-            height: $(window).height() - 215, // '100%'
+            height: $(window).height() - 260, // '100%'
             altRows: false,
             footerrow: false,
             userDataOnFooter: true,
