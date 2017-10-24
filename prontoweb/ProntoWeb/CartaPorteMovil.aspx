@@ -1,5 +1,5 @@
 ﻿<%@ Page Language="VB" AutoEventWireup="false" EnableEventValidation="false"
-    CodeFile="CartaPorteMovil.aspx.vb" Inherits="SituacionCalidadMovil"
+    CodeFile="CartaPorteMovil.aspx.vb" Inherits="CartaPorteMovil"
     Title="Informes" %>
 
 
@@ -215,7 +215,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                         <tr>
                             <td class="" style="width: ; height: ;">
 
-                                <button type="button" id="LogoImage" value="" class="" style="height: 50px; width: 70px; margin-left: 5px">
+                                <button type="button" id="LogoImage" value="" class="" style="height: 50px; width: 70px; margin-left: 4px">
                                     <i class="fa fa-bars fa-2x"></i>
                                 </button>
 
@@ -567,13 +567,17 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                     </button>
                     <button type="button" id="ant" value="<<<<<" class="" style="height: 40px; width: 80px"><i class="fa fa-backward fa-2x"></i></button>
 
-                    <button type="button" id="prox" value=">>>>>" class="" style="height: 40px; width: 80px" />
+                    <button type="button" id="prox" value=">>>>>" class="" style="height: 40px; width: 80px" >
                     <i class="fa fa-forward fa-2x"></i></button>
                     <%--<button type="button" id="edtData" value="edit" class="span2" style="height: 40px;" />--%>
 
+                 <%--   <button type="button" id="" value="class="" style="height: 40px; width: 60px"  onclick="location.href='SituacionCalidadMovil.aspx'"  >
+                          <i class="fa"></i> Situación
+                        </button>--%>
+                    
 
-                    <%--<a class="btn span2" href="CartaDePorteInformesAccesoClientes.aspx" style="font-size: 10px">V.Escritorio</a>--%>
-                    <a class="btn span2" href="SituacionCalidadMovil.aspx" style="font-size: 9px">Situacion</a>
+                    <a class="" href="SituacionCalidadMovil.aspx" style="font-size: 14px; width: 50px; text-wrap: normal;    vertical-align: top;"> Situación</a>
+             
                 </div>
 
             </div>
@@ -690,7 +694,7 @@ Arroyo Seco (Sta. Fe) - René Favaloro 726 / (03402) 421-426 - 429-676 / arroyos
                     
                     <br /><br />
                     <button id="btnSalir" runat="server"  type=""  onserverclick="LoginStatus1_LoggedOut">
-                        <i class="fa                 fa-power-off fa-2x"></i>SALIR
+                        <i class="fa                 fa-power-off fa-2x"></i> SALIR
                     </button>
 
                     <br />
