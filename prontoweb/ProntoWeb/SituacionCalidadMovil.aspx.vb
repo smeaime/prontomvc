@@ -176,6 +176,15 @@ Partial Class SituacionCalidadMovil
         Catch ex As Exception
             ErrHandler2.WriteError(ex)
         End Try
+
+
+        If Not (Roles.IsUserInRole(Membership.GetUser().UserName, "WilliamsComercial") Or Roles.IsUserInRole(Membership.GetUser().UserName, "WilliamsAdmin") Or Roles.IsUserInRole(Membership.GetUser().UserName, "WilliamsFacturacion")) Then
+            btnsituacion.Visible = False
+        End If
+
+
+
+
     End Sub
 
 
