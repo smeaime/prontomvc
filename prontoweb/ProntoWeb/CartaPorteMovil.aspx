@@ -211,7 +211,9 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                     <table style="color: black; width: 320px; vertical-align: bottom !important;">
                         <tr>
                             <td class="" style="width: ; height: ;">
-                                 <asp:Image ID="LogoImage" runat="server" ImageUrl="~/Imagenes/williamsmini.gif" CssClass="" Height="60px" ImageAlign="AbsBottom" />
+                                <%-- <asp:Image ID="LogoImage" runat="server" ImageUrl="~/Imagenes/williamsmini.gif" CssClass="" Height="60px" ImageAlign="AbsBottom" />--%>
+                                    <input type="button" id="LogoImage" value="---" class="" style="height: 40px" />                               
+
                             </td>
                             <td class="" style="width: ; height: ; vertical-align: bottom !important;">
                                
@@ -509,7 +511,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
             <div style="height: 8px"></div>
 
-            <table id="Lista" class="scroll" cellpadding="0" cellspacing="0" style="font-size: 16px;" width="320px">
+            <table id="Lista" class="scroll" cellpadding="0" cellspacing="0" style="font-size: 15px;" width="320px">
             </table>
 
             <div id="ListaPager" class="scroll" style="text-align: center; height: ;">
@@ -527,13 +529,13 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
                    <%-- <a class="btn" style="color: Black" href="#"><i class="icon-print"></i>&nbsp;más</a>--%>
 
-                    <input type="button" id="recarg" value="recarg" class="btn icon-cog span2" />
-                    <input type="button" id="ant" value="<<<<" class="btn" />
-                    <input type="button" id="prox" value=">>>>" class="btn" />
-                    <input type="button" id="edtData" value="edit" class="btn icon-cog span2" />
+                    <input type="button" id="recarg" value="recarg" class="span2" />
+                    <input type="button" id="ant" value="<<<<" class="" />
+                    <input type="button" id="prox" value=">>>>" class="" />
+                    <input type="button" id="edtData" value="edit" class="span2" />
                     
                     
-                             <a class="btn span2" href="CartaDePorteInformesAccesoClientes.aspx">Verant</a>
+                             <a class="btn span2" href="CartaDePorteInformesAccesoClientes.aspx" style="font-size: 12px">Vers.anterior</a>
 
                 </div>
 
@@ -577,7 +579,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
 
 
-            <div id="dialog" title="">
+            <div id="dialog" title="" style="">
 
                                  <asp:Image ID="Image1" runat="server" ImageUrl="~/Imagenes/williamsmini.gif" CssClass="" Height="60px" ImageAlign="AbsBottom" />
                 
@@ -608,7 +610,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
 
 
-                Llamanos 
+                Llamanos <br />
       
                 <div class="row-fluid" style="">
 
@@ -627,11 +629,11 @@ Arroyo Seco (Sta. Fe) - René Favaloro 726 / (03402) 421-426 - 429-676 / arroyos
 
 
 
-                        <a href="tel:5278-8800" class="btn span2" type="button">BsAs</a>
+                        <a href="tel:5278-8800" class="btn span2" type="button">Bs.As.</a>
 
                         <a href="tel:(03476) 430-234" class="btn  span2" type="button">S.Lorenzo</a>
 
-                        <a href="tel: (03402) 421-426" class="btn  span2" type="button">Arroyo</a>
+                        <a href="tel: (03402) 421-426" class="btn  span2" type="">Arroyo Seco</a>
 
                         <a href="tel:0291-400-7928" class="btn  span2" type="button">B.Blanca </a>
 
@@ -742,6 +744,8 @@ Arroyo Seco (Sta. Fe) - René Favaloro 726 / (03402) 421-426 - 429-676 / arroyos
                     //$("#dialog").dialog();
 
                     $("#dialog").dialog({
+                        width: $(window).width(), // 310, //'auto',
+                        height: $(window).height(), // '100%'
                     dialogClass: "no-close",
                     buttons: [
                       {
@@ -1867,7 +1871,7 @@ Arroyo Seco (Sta. Fe) - René Favaloro 726 / (03402) 421-426 - 429-676 / arroyos
                     name: 'NumeroCartaEnTextoParaBusqueda', index: 'NumeroCartaEnTextoParaBusqueda', width: 100, align: 'left', sorttype: "text", sortable: false, frozen: true
                     , editable: false, editrules: { required: false, number: true }, edittype: 'text',
 
-                    searchoptions: { sopt: ['bw', 'cn', 'eq'] },
+                    searchoptions: { sopt: ['bw', 'cn', 'eq'], clearSearch: false },
 
 
                     editoptions: {
@@ -1883,8 +1887,8 @@ Arroyo Seco (Sta. Fe) - René Favaloro 726 / (03402) 421-426 - 429-676 / arroyos
                             }]
                     }
                 },
-                { name: 'ver', index: 'NetoPto', align: 'left', width: 40, hidden: false, editable: false, edittype: 'text', sortable: false },
-                { name: 'SubnumeroVagon', index: 'NetoPto', align: 'left', width: 60, hidden: false, editable: false, edittype: 'text', sortable: false },
+                { name: 'ver', index: 'NetoPto', align: 'left', width: 40, hidden: false, editable: false, edittype: 'text', sortable: false, searchoptions: { clearSearch: false } },
+                { name: 'SubnumeroVagon', index: 'NetoPto', align: 'left', width: 60, hidden: false, editable: false, edittype: 'text', sortable: false, searchoptions: { clearSearch: false } },
                {
                    name: 'FechaArribo', index: 'FechaArribo', width: 100, sortable: true, align: 'right', editable: false, sortable: false,
                    editoptions: {
@@ -1912,9 +1916,12 @@ Arroyo Seco (Sta. Fe) - René Favaloro 726 / (03402) 421-426 - 429-676 / arroyos
                                 showButtonPanel: true
                             })
                         }
+                        ,clearSearch: false
                     }
+
+                   
                },
-                { name: 'Hora', index: 'NetoPto', align: 'left', width: 60, hidden: false, editable: false, edittype: 'text', sortable: false },
+                { name: 'Hora', index: 'NetoPto', align: 'left', width: 60, hidden: false, editable: false, edittype: 'text', sortable: false, searchoptions: { clearSearch: false } },
 
 
 
@@ -1997,10 +2004,10 @@ Arroyo Seco (Sta. Fe) - René Favaloro 726 / (03402) 421-426 - 429-676 / arroyos
                     }
 
                 },
-                { name: 'Contrato', index: 'NetoPto', align: 'left', width: 60, hidden: false, editable: false, edittype: 'text', sortable: false },
-                { name: 'NetoPto', index: 'NetoPto', align: 'left', width: 60, hidden: false, editable: false, edittype: 'text', sortable: false },
-                { name: 'NetoPto', index: 'NetoPto', align: 'left', width: 60, hidden: false, editable: false, edittype: 'text', sortable: false },
-                { name: 'NetoPto', index: 'NetoPto', align: 'left', width: 60, hidden: false, editable: false, edittype: 'text', sortable: false },
+                { name: 'Contrato', index: 'NetoPto', align: 'left', width: 60, hidden: false, editable: false, edittype: 'text', sortable: false, searchoptions: { clearSearch: false } },
+                { name: 'NetoPto', index: 'NetoPto', align: 'left', width: 60, hidden: false, editable: false, edittype: 'text', sortable: false, searchoptions: { clearSearch: false } },
+                { name: 'NetoPto', index: 'NetoPto', align: 'left', width: 60, hidden: false, editable: false, edittype: 'text', sortable: false, searchoptions: { clearSearch: false } },
+                { name: 'NetoPto', index: 'NetoPto', align: 'left', width: 60, hidden: false, editable: false, edittype: 'text', sortable: false, searchoptions: { clearSearch: false } },
 
 
 
