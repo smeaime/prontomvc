@@ -82,6 +82,9 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
     <%--/////////////////////////////////////////////////////////////--%>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+
     <%--/////////////////////////////////////////////////////////////--%>
     <%--/////////////////////////////////////////////////////////////--%>
     <%--////////////    jqgrid     //////////////////////////////////--%>
@@ -212,11 +215,12 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                         <tr>
                             <td class="" style="width: ; height: ;">
                                 <%-- <asp:Image ID="LogoImage" runat="server" ImageUrl="~/Imagenes/williamsmini.gif" CssClass="" Height="60px" ImageAlign="AbsBottom" />--%>
-                                    <input type="button" id="LogoImage" value="---" class="" style="height: 40px" />                               
-
+                                <button type="button" id="LogoImage" value="" class="" style="height: 50px; margin-left: 5px">
+                                    <i class="fa fa-bars fa-2x"></i>
+                                </button>
                             </td>
                             <td class="" style="width: ; height: ; vertical-align: bottom !important;">
-                               
+
 
                                 <b style="font-size: 14px">Cartas de Porte versión Móvil</b><br />
 
@@ -248,6 +252,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                                     WatermarkText="desde" WatermarkCssClass="watermarked" />
 
                                 al
+                               
                                 <asp:TextBox ID="txtFechaHasta" runat="server" Width="100px" MaxLength="1" TabIndex="2" Style="color: black;" Font-Size="13" Enabled="true" Height="40"
                                     AutoPostBack="false"></asp:TextBox>
                                 <cc1:CalendarExtender ID="CalendarExtender4" runat="server" Format="dd/MM/yyyy" TargetControlID="txtFechaHasta"
@@ -318,12 +323,15 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
                 <button class="js-push-button" disabled>
                     Enable Push Messages  
+               
                 </button>
             </div>
 
 
 
-            <script>
+
+
+            <%--<script>
                 // https://stackoverflow.com/questions/2271156/chrome-desktop-notification-example
                 //@ganaa: These notifications won't work after the tab is closed. For that, you need
                 //            either a Chrome extension, or to use Service Worker.– Dan Dascalescu Mar 24 '16 at 21:54
@@ -364,9 +372,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
 
 
-
-
-
+                
 
 
                 var isPushEnabled = false;
@@ -446,7 +452,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                     );
                 });
 
-            </script>
+            </script>--%>
 
 
 
@@ -461,7 +467,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                 }
                     */
                 .ui-jqgrid {
-                    font-size: 13px
+                    font-size: 11px
                 }
 
                     .ui-jqgrid .ui-jqgrid-htable th {
@@ -523,19 +529,21 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
                 <div class="span12">
 
-<%--                    <input type="button" id="btnsituacion" value="Cambiar situacion" class="btn  btn-large btn-primary " usesubmitbehavior="false" />--%>
-                   <%-- <input type="button" id="btnsituacion" value="version anterior" class="btn  btn-large" usesubmitbehavior="false" />--%>
-           
+                    <%--                    <input type="button" id="btnsituacion" value="Cambiar situacion" class="btn  btn-large btn-primary " usesubmitbehavior="false" />--%>
+                    <%-- <input type="button" id="btnsituacion" value="version anterior" class="btn  btn-large" usesubmitbehavior="false" />--%>
 
-                   <%-- <a class="btn" style="color: Black" href="#"><i class="icon-print"></i>&nbsp;más</a>--%>
 
-                    <input type="button" id="recarg" value="recarg" class="span2" />
-                    <input type="button" id="ant" value="<<<<" class="" />
-                    <input type="button" id="prox" value=">>>>" class="" />
-                    <input type="button" id="edtData" value="edit" class="span2" />
-                    
-                    
-                             <a class="btn span2" href="CartaDePorteInformesAccesoClientes.aspx" style="font-size: 12px">Vers.anterior</a>
+                    <%-- <a class="btn" style="color: Black" href="#"><i class="icon-print"></i>&nbsp;más</a>--%>
+
+                    <button type="button" id="recarg" value="Recarg" class="" style="height: 40px; margin-left: 2px">
+                        <i class="fa fa-refresh fa-2x"></i>
+                    </button>
+                    <input type="button" id="ant" value="<<<<<" class="" style="height: 40px;" />
+                    <input type="button" id="prox" value=">>>>>" class="" style="height: 40px;" />
+                    <input type="button" id="edtData" value="edit" class="span2" style="height: 40px;" />
+
+
+                    <a class="btn span2" href="CartaDePorteInformesAccesoClientes.aspx" style="font-size: 10px">V.Escritorio</a>
 
                 </div>
 
@@ -581,17 +589,25 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
             <div id="dialog" title="" style="">
 
-                                 <asp:Image ID="Image1" runat="server" ImageUrl="~/Imagenes/williamsmini.gif" CssClass="" Height="60px" ImageAlign="AbsBottom" />
-                
+                <input type="button" id="" value="------" class="" style="height: 50px; margin-left: 5px" />
+
+                <br />
+
+                <asp:Image ID="Image1" runat="server" ImageUrl="~/Imagenes/williamsmini.gif" CssClass="" Height="60px" ImageAlign="AbsBottom" />
+
+                <br />
+
                 <div>
                     <asp:LoginView ID="LoginView" runat="server">
                         <LoggedInTemplate>
                             <asp:LoginName ID="LoginName1" runat="server" Font-Bold="false" CssClass="margender" />
                             |
                                    
-                        <asp:LoginStatus ID="LoginStatus1" runat="server" Font-Bold="false" ForeColor=""
-                            LogoutAction="RedirectToLoginPage" LogoutPageUrl="~/Login.aspx" OnLoggedOut="LoginStatus1_LoggedOut"
-                            TabIndex="-1" LogoutText="Salir" Font-Underline="False" CssClass="margender" />
+                       
+
+                            <asp:LoginStatus ID="LoginStatus1" runat="server" Font-Bold="false" ForeColor=""
+                                LogoutAction="RedirectToLoginPage" LogoutPageUrl="~/Login.aspx" OnLoggedOut="LoginStatus1_LoggedOut"
+                                TabIndex="-1" LogoutText="Salir" Font-Underline="False" CssClass="margender" />
                         </LoggedInTemplate>
                     </asp:LoginView>
                     <br />
@@ -607,40 +623,63 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                 </div>
 
 
+                <br />
 
 
+                Llamanos
+                <br />
 
-                Llamanos <br />
-      
                 <div class="row-fluid" style="">
 
-                 
-
-                        <%--   <input type="button" id="btnsituacion" value="Cambiar situacion" class="btn  btn-large btn-primary " usesubmitbehavior="false" />--%>
-
-                        <%-- <a class="btn" style="color: Black" href="#"><i class="icon-print"></i>&nbsp;más</a>--%>
 
 
+                    <%--   <input type="button" id="btnsituacion" value="Cambiar situacion" class="btn  btn-large btn-primary " usesubmitbehavior="false" />--%>
 
-                        <%--       OFICINAS: Buenos Aires Moreno 584 P. 12 Of A / (011) 5278-8800 - 4322-4805 / buenosaires@williamsentregas.com.ar 
+                    <%-- <a class="btn" style="color: Black" href="#"><i class="icon-print"></i>&nbsp;más</a>--%>
+
+
+
+                    <%--       OFICINAS: Buenos Aires Moreno 584 P. 12 Of A / (011) 5278-8800 - 4322-4805 / buenosaires@williamsentregas.com.ar 
      // San Lorenzo (Sta. Fe) - Sgo. del Estero 1177 / (03476) 430-234 - 426-855 / sanlorenzo@williamsentregas.com.ar
 Arroyo Seco (Sta. Fe) - René Favaloro 726 / (03402) 421-426 - 429-676 / arroyoseco@williamsentregas.com.ar 
      // Bahía Blanca Ruta 252 km 0.5 - Playa el Triangulo / (0291) 400-7928 - 481-6778 / bahiablanca@williamsentregas.com.ar--%>
 
 
 
-                        <a href="tel:5278-8800" class="btn span2" type="button">Bs.As.</a>
-
-                        <a href="tel:(03476) 430-234" class="btn  span2" type="button">S.Lorenzo</a>
-
-                        <a href="tel: (03402) 421-426" class="btn  span2" type="">Arroyo Seco</a>
-
-                        <a href="tel:0291-400-7928" class="btn  span2" type="button">B.Blanca </a>
 
 
-                    
+
+                    <a href="tel:5278-8800" class="button span2" type="">BsAs</a>
+
+                    <a href="tel:(03476) 430-234" class="btn  span2" type="button">SLorenzo</a>
+
+                    <a href="tel: (03402) 421-426" class="btn  span2" type="">Arroyo</a>
+
+                    <a href="tel:0291-400-7928" class="btn  span2" type="button">BBlanca</a>
+
+
+
                 </div>
 
+                <%--                <style>
+                    .button {
+                        display: block;
+                        width: 115px;
+                        height: 25px;
+                        background: #4E9CAF;
+                        padding: 10px;
+                        text-align: center;
+                        border-radius: 5px;
+                        color: white;
+                        font-weight: bold;
+                    }
+                </style>--%>
+
+
+                <br />
+
+                Filtros
+                <br />
 
                 <asp:DropDownList ID="cmbEstado" runat="server" Style="text-align: right; margin-left: 0px;"
                     CssClass="CssCombo" ToolTip="Estado de la carta de porte" Font-Size="14" Height="40" Width="150" Enabled="false">
@@ -673,6 +712,7 @@ Arroyo Seco (Sta. Fe) - René Favaloro 726 / (03402) 421-426 - 429-676 / arroyos
 
                 value: "0:Autorizado; 1:Demorado; 2:Posicion; 3:Descargado; 4:A Descargar; 5:Rechazado;6:Desviado;7:CP p/cambiar;8:Sin Cupo;9:Calado"
 
+           
             </div>
 
 
@@ -736,6 +776,10 @@ Arroyo Seco (Sta. Fe) - René Favaloro 726 / (03402) 421-426 - 429-676 / arroyos
 
 
 
+                $(function () {
+                    $("#ui-dialog-title-dialog").hide();
+                    $(".ui-dialog-titlebar").removeClass('ui-widget-header');
+                });
 
                 $("#dialog").hide();
 
@@ -746,26 +790,28 @@ Arroyo Seco (Sta. Fe) - René Favaloro 726 / (03402) 421-426 - 429-676 / arroyos
                     $("#dialog").dialog({
                         width: $(window).width(), // 310, //'auto',
                         height: $(window).height(), // '100%'
-                    dialogClass: "no-close",
-                    buttons: [
-                      {
-                          text: "OK",
-                          click: function () {
-                              $(this).dialog("close");
+                        dialogClass: "no-close",
+                        buttons: [
+                          {
+                              text: "OK",
+                              click: function () {
+                                  $(this).dialog("close");
 
-                              cambiarSituaciones(lista, "administrador", "",
-                  function () {
-                      $("#loading").hide();
-                      $('#Lista').trigger('reloadGrid');
-                  })
+                                  cambiarSituaciones(lista, "administrador", "",
+                      function () {
+                          $("#loading").hide();
+                          $('#Lista').trigger('reloadGrid');
+                      })
 
+                              }
                           }
-                      }
-                    ]
-                });
+                        ]
+                    });
 
 
                 });
+
+
 
 
 
@@ -852,6 +898,7 @@ Arroyo Seco (Sta. Fe) - René Favaloro 726 / (03402) 421-426 - 429-676 / arroyos
         <asp:HiddenField ID="HFSC" runat="server" />
         <asp:HiddenField ID="HFIdObra" runat="server" />
         <asp:HiddenField ID="HFTipoFiltro" runat="server" />
+
     </form>
 </body>
 
@@ -1821,7 +1868,7 @@ Arroyo Seco (Sta. Fe) - René Favaloro 726 / (03402) 421-426 - 429-676 / arroyos
 
         $('#Lista').jqGrid({
             //url: ROOT + 'CotizacionWilliamsDestino/Cotizaciones/',
-            url: 'HandlerCartaPorte.ashx',
+            url: 'HandlerCartaPorte2.ashx',
             //postData: {},
             postData: {
                 'FechaInicial': function () { return $("#txtFechaDesde").val(); },
@@ -1840,20 +1887,20 @@ Arroyo Seco (Sta. Fe) - René Favaloro 726 / (03402) 421-426 - 429-676 / arroyos
 
 
             //49 columnas
-            colNames: ['', 'Id', 
-                'Nro CP', 'Imágenes','Vagón','Arribo','Hora',
-            'Producto','Contrato','Bruto Proc','Tara Proc','Neto Proc',
-            'Bruto Desc',' Tara Desc','Neto Desc','Dif','Humed',
-            'Merma','Otras','Kg. Netos','Titular','Intermediario',
-            'Rem. Comercial','Cliente Observ','Corredor','Corredor Obs','Destinatario',
-            'Entregador','Pat chasis','Pat acoplado','CUIT Transp','Transportista',
-            'Destino','Procedencia','Cosecha','Fecha descarga','Calidad'
-                ,'Observaciones','Chofer CUIT','Chofer','Nro ONCAA','Pta ONCAA',
-                'Nro CEE','Emisión','Vencimiento','Km. a recorrer','Tarifa',
-              'CTG','Establecimiento' ],
- 	 	 	 	 	 	 	 	 	 	 	 	 	 	 	 	 	 	 	 	 	 	 	 	 	 	 	 	 	 	 	 	 
- 
- 
+            colNames: ['', 'Id',
+                'Nro CP', 'Imágenes', 'Vagón', 'Arribo', 'Hora',
+            'Producto', 'Contrato', 'Bruto Proc', 'Tara Proc', 'Neto Proc',
+            'Bruto Desc', ' Tara Desc', 'Neto Desc', 'Dif', 'Humed',
+            'Merma', 'Otras', 'Kg. Netos', 'Titular', 'Intermediario',
+            'Rem. Comercial', 'Cliente Observ', 'Corredor', 'Corredor Obs', 'Destinatario',
+            'Entregador', 'Pat chasis', 'Pat acoplado', 'CUIT Transp', 'Transportista',
+            'Destino', 'Procedencia', 'Cosecha', 'Fecha descarga', 'Calidad'
+                , 'Observaciones', 'Chofer CUIT', 'Chofer', 'Nro ONCAA', 'Pta ONCAA',
+                'Nro CEE', 'Emisión', 'Vencimiento', 'Km. a recorrer', 'Tarifa',
+              'CTG', 'Establecimiento'],
+
+
+
 
             colModel: [
                 {
@@ -1868,7 +1915,7 @@ Arroyo Seco (Sta. Fe) - René Favaloro 726 / (03402) 421-426 - 429-676 / arroyos
 
 
                 {
-                    name: 'NumeroCartaEnTextoParaBusqueda', index: 'NumeroCartaEnTextoParaBusqueda', width: 100, align: 'left', sorttype: "text", sortable: false, frozen: true
+                    name: 'NumeroCartaEnTextoParaBusqueda', index: 'NumeroCartaEnTextoParaBusqueda', width: 90, align: 'left', sorttype: "text", sortable: false, frozen: true
                     , editable: false, editrules: { required: false, number: true }, edittype: 'text',
 
                     searchoptions: { sopt: ['bw', 'cn', 'eq'], clearSearch: false },
@@ -1916,10 +1963,10 @@ Arroyo Seco (Sta. Fe) - René Favaloro 726 / (03402) 421-426 - 429-676 / arroyos
                                 showButtonPanel: true
                             })
                         }
-                        ,clearSearch: false
+                        , clearSearch: false
                     }
 
-                   
+
                },
                 { name: 'Hora', index: 'NetoPto', align: 'left', width: 60, hidden: false, editable: false, edittype: 'text', sortable: false, searchoptions: { clearSearch: false } },
 
@@ -2491,7 +2538,7 @@ Arroyo Seco (Sta. Fe) - René Favaloro 726 / (03402) 421-426 - 429-676 / arroyos
 
                },
 
-        
+
        // 'Entregador', ,'Pat chasis','Pat acoplado','CUIT Transp','Transportista',
                 { name: 'NetoPto', index: 'NetoPto', align: 'left', width: 60, hidden: false, editable: false, edittype: 'text', sortable: false },
                 { name: 'NetoPto', index: 'NetoPto', align: 'left', width: 60, hidden: false, editable: false, edittype: 'text', sortable: false },
@@ -2611,7 +2658,7 @@ Arroyo Seco (Sta. Fe) - René Favaloro 726 / (03402) 421-426 - 429-676 / arroyos
                 },
                 { name: 'Calidad', index: 'Calidad', align: 'left', width: 60, hidden: false, editable: false, edittype: 'text', sortable: false },
 
-        
+
              //    ,'Observaciones','Chofer CUIT','Chofer','Nro ONCAA','Pta ONCAA',
                 { name: 'Observaciones', index: 'NetoPto', align: 'left', width: 60, hidden: false, editable: false, edittype: 'text', sortable: false },
                 { name: 'ChoferCUIT', index: 'NetoPto', align: 'left', width: 60, hidden: false, editable: false, edittype: 'text', sortable: false },
@@ -2867,7 +2914,7 @@ Arroyo Seco (Sta. Fe) - René Favaloro 726 / (03402) 421-426 - 429-676 / arroyos
 
 
         function EditarItem(rowid) {
-            
+
             var gr = rowid; // jQuery("#Lista").jqGrid('getGridParam',  'selrow');
             var row = jQuery("#Lista").jqGrid('getRowData', rowid);
 
