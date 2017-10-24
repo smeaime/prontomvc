@@ -75,7 +75,7 @@ Partial Class SituacionCalidadMovil
             '////////////////////////////////////////////
 
 
-            Me.Title = "Situacion"
+            Me.Title = "Cartas de Porte"
 
             BindTypeDropDown()
 

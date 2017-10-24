@@ -214,16 +214,30 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                     <table style="color: black; width: 320px; vertical-align: bottom !important;">
                         <tr>
                             <td class="" style="width: ; height: ;">
-                                <%-- <asp:Image ID="LogoImage" runat="server" ImageUrl="~/Imagenes/williamsmini.gif" CssClass="" Height="60px" ImageAlign="AbsBottom" />--%>
-                                <button type="button" id="LogoImage" value="" class="" style="height: 50px; margin-left: 5px">
+                                
+                                <button type="button" id="LogoImage" value="" class="" style="height: ; margin-left: 5px">
                                     <i class="fa fa-bars fa-2x"></i>
                                 </button>
+                                
                             </td>
-                            <td class="" style="width: ; height: ; vertical-align: bottom !important;">
+
+                            <td style="font-size: 16px; text-align:center">
+
+                                     <b style="font-size: 16px; text-align:center">Cartas de Porte </b><br />
+                                <b style="font-size: 16px; text-align:center">Móvil</b>
+                                
+                            </td>
+                            <td>
+                            <asp:Image ID="Image2" runat="server" ImageUrl="~/Imagenes/williamsmini.gif" CssClass="" Height="60px" ImageAlign="AbsBottom" />
+                                </td>
+                        </tr>
+                        
+                        <tr>
+
+                            <td colspan="3" class="" style="width: ; height: ; vertical-align: bottom !important;">
 
 
-                                <b style="font-size: 14px">Cartas de Porte versión Móvil</b><br />
-
+                           
 
                                 <asp:DropDownList ID="cmbPeriodo" runat="server" AutoPostBack="true" Height="40" Width="100px" Font-Size="14" Style="color: black;"
                                     Visible="false">
@@ -251,7 +265,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                                 <cc1:TextBoxWatermarkExtender ID="TBWE2" runat="server" TargetControlID="txtFechaDesde"
                                     WatermarkText="desde" WatermarkCssClass="watermarked" />
 
-                                al
+                               
                                
                                 <asp:TextBox ID="txtFechaHasta" runat="server" Width="100px" MaxLength="1" TabIndex="2" Style="color: black;" Font-Size="13" Enabled="true" Height="40"
                                     AutoPostBack="false"></asp:TextBox>
@@ -268,12 +282,10 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                                     WatermarkText="hasta" WatermarkCssClass="watermarked" />
 
 
-                                <asp:DropDownList ID="cmbPuntoVenta" runat="server" CssClass="" Width="30px" Font-Size="14" Style="color: black;" Height="40" />
+                                <asp:DropDownList ID="cmbPuntoVenta" runat="server" CssClass="" Width="60px" Font-Size="14" Style="color: black;" Height="40" Visible="false" />
 
                             </td>
                         </tr>
-
-
 
                         <tr style="visibility: hidden; display: none">
                             <td class="" style="width: ; height: 18px;"></td>
@@ -542,13 +554,14 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                     <button type="button" id="recarg" value="Recarg" class="" style="height: 40px; margin-left: 2px">
                         <i class="fa fa-refresh fa-2x"></i>
                     </button>
-                    <input type="button" id="ant" value="<<<<<" class="" style="height: 40px;" />
-                    <input type="button" id="prox" value=">>>>>" class="" style="height: 40px;" />
-                    <input type="button" id="edtData" value="edit" class="span2" style="height: 40px;" />
+                    <button type="button" id="ant" value="<<<<<" class="" style="height: 40px;"><i class="fa fa-backward fa-2x"></i></button>
+
+                    <button type="button" id="prox" value=">>>>>" class="" style="height: 40px;" /><i class="fa fa-forward fa-2x"></i></button>
+                    <%--<button type="button" id="edtData" value="edit" class="span2" style="height: 40px;" />--%>
 
 
-                    <a class="btn span2" href="CartaDePorteInformesAccesoClientes.aspx" style="font-size: 10px">V.Escritorio</a>
-
+                    <%--<a class="btn span2" href="CartaDePorteInformesAccesoClientes.aspx" style="font-size: 10px">V.Escritorio</a>--%>
+                      <a class="btn span2" href="CartaDePorteInformesAccesoClientes.aspx" style="font-size: 10px">Situacion</a>
                 </div>
 
             </div>
@@ -618,13 +631,12 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
                     <asp:Label ID="lblRazonSocial" runat="server" Font-Size="10" Font-Bold="false" Visible="false" />
 
-                    <a href="CartaDePorteInformesAccesoClientesMovil.aspx"><i class="fa                 fa-desktop fa-2x"></i>Version escritorio  </a>
                     <br />
+                    <a href="CartaDePorteInformesAccesoClientesMovil.aspx"><i class="fa                 fa-desktop fa-2x"></i>Version escritorio  </a>
 
                 </div>
 
                 <hr />
-                <br />
 
                 <div class="row-fluid" style="">
 
@@ -645,24 +657,31 @@ Arroyo Seco (Sta. Fe) - René Favaloro 726 / (03402) 421-426 - 429-676 / arroyos
 
 
                     <br />
-
-                    <a href="tel:5278-8800" class="button span2" type=""><i class="fa fa-phone fa-2x"></i>BsAs</a>
+                    <a href="tel:5278-8800" class=" span2" type=""><i class="fa fa-phone fa-2x"></i>BsAs</a>
                     <br />
 
-                    <a href="tel:(03476) 430-234" class="btn  span2" type="button"><i class="fa fa-phone fa-2x"></i>SLorenzo</a>
+                    <a href="tel:(03476) 430-234" class="  span2" type="button"><i class="fa fa-phone fa-2x"></i>SLorenzo</a>
                     <br />
 
-                    <a href="tel: (03402) 421-426" class="btn  span2" type=""><i class="fa fa-phone fa-2x"></i>Arroyo</a>
+                    <a href="tel: (03402) 421-426" class="  span2" type=""><i class="fa fa-phone fa-2x"></i>Arroyo</a>
                     <br />
 
-                    <a href="tel:0291-400-7928" class="btn  span2" type="button">
+                    <a href="tel:0291-400-7928" class="  span2" type="button">
                         <i class="fa                 fa-phone fa-2x"></i>BBlanca
                     </a>
 
 
 
 
+                    <a href="tel:0291-400-7928" class="  span2" type="button">
+                        <i class="fa                 fa-power-off fa-2x"></i>Salir
+                    </a>
 
+
+
+                    <a href="tel:0291-400-7928" class="  span2" type="button">
+                        <i class="fa                 fa-mail-reply fa-2x"></i>Volver
+                    </a>
 
 
                 </div>
