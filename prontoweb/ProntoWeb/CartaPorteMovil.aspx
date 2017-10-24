@@ -576,7 +576,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                         </button>--%>
                     
 
-                    <a class="" href="SituacionCalidadMovil.aspx" style="font-size: 14px; width: 50px; text-wrap: normal;    vertical-align: top;"> Situación</a>
+                    <a class="" href="SituacionCalidadMovil.aspx" style="font-size: 14px; width: 50px; text-wrap: normal;   "> Situación</a>
              
                 </div>
 
