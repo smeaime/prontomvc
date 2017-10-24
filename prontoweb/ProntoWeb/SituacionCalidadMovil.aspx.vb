@@ -24,6 +24,10 @@ Imports Pronto.ERP.Bll.EntidadManager
 
 Imports System.Web.Services
 
+
+
+
+
 Partial Class SituacionCalidadMovil
     Inherits System.Web.UI.Page
 
@@ -75,7 +79,7 @@ Partial Class SituacionCalidadMovil
             '////////////////////////////////////////////
 
 
-            Me.Title = "Situacion"
+            Me.Title = "Cartas de Porte"
 
             BindTypeDropDown()
 
@@ -345,7 +349,7 @@ Partial Class SituacionCalidadMovil
         FormsAuthentication.SignOut()
         Roles.DeleteCookie()
         Session.Clear()
-        'FormsAuthentication.RedirectToLoginPage();
+        FormsAuthentication.RedirectToLoginPage()
     End Sub
 
 
