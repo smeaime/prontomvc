@@ -345,7 +345,7 @@ Partial Class SituacionCalidadMovil
         FormsAuthentication.SignOut()
         Roles.DeleteCookie()
         Session.Clear()
-        'FormsAuthentication.RedirectToLoginPage();
+        FormsAuthentication.RedirectToLoginPage()
     End Sub
 
 
