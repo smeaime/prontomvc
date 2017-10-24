@@ -204,11 +204,13 @@ public class JQGridHandler : IHttpHandler
         string FechaInicial = request["FechaInicial"];
         string FechaFinal = request["FechaFinal"];
 
-        string puntovent = request["puntovent"];
+        string puntovent = request["puntovent"] == "null" ? "0" : request["puntovent"] ?? "0";
         string destino = request["destino"];
         string usuario = Membership.GetUser().UserName;
 
         if (sortColumnName == null) return;
+
+
 
 
         var a = new ServicioCartaPorte.servi();
@@ -220,7 +222,7 @@ public class JQGridHandler : IHttpHandler
 
         string output = a.CartasPorte_DynamicGridData_NuevoOrden(
                                         sortColumnName, sortOrderBy, Convert.ToInt32(pageIndex),
-                                        Convert.ToInt32(numberOfRows), isSearch == "true", filters, FechaInicial, FechaFinal, Convert.ToInt32(puntovent),
+                                        Convert.ToInt32(numberOfRows), isSearch == "true", filters, FechaInicial, FechaFinal,  Convert.ToInt32(puntovent),
                                         SQLdinamico.BuscaIdWilliamsDestinoPreciso(destino, SC),
                                         SC, usuario, scbdlmaster );
 
