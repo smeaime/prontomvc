@@ -643,10 +643,15 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
                     <asp:Label ID="lblRazonSocial" runat="server" Font-Size="10" Font-Bold="false" Visible="false" />
 
+
+
                 </div>
 
-                    <a href="CartaDePorteInformesAccesoClientesMovil.aspx"><i class="fa                 fa-desktop fa-2x"></i>VERSION ESCRITORIO  </a>
+                    
+                    <a href="CartaDePorteInformesAccesoClientesMovil.aspx"><i class="fa                 fa-desktop fa-2x"></i> VERSION ESCRITORIO  </a><br /><br />
 
+                    
+                
 
                 <div class="row-fluid" style="">
 
@@ -682,16 +687,16 @@ Arroyo Seco (Sta. Fe) - René Favaloro 726 / (03402) 421-426 - 429-676 / arroyos
                     </a>
 
 
-                    <br />
-                    <br />
+                    
+                    <br /><br />
                     <button id="btnSalir" runat="server"  type=""  onserverclick="LoginStatus1_LoggedOut">
                         <i class="fa                 fa-power-off fa-2x"></i>SALIR
                     </button>
 
-
-
+                    <br />
+                    <br />
                     
-                    <hr />
+                    
                     <button id="btnVolver" type="button" >
                         <i class="fa                 fa-mail-reply fa-2x"></i> VOLVER
                     </button>
@@ -813,6 +818,7 @@ Arroyo Seco (Sta. Fe) - René Favaloro 726 / (03402) 421-426 - 429-676 / arroyos
                 })
 
 
+                    
 
                 $(function () {
                     $("#ui-dialog-title-dialog").hide();
@@ -861,6 +867,11 @@ Arroyo Seco (Sta. Fe) - René Favaloro 726 / (03402) 421-426 - 429-676 / arroyos
                 });
 
             </script>
+
+            <style>
+            .ui-dialog-titlebar {display: none }
+            </style>
+
 
             <%--<script>
 
