@@ -215,7 +215,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                         <tr>
                             <td class="" style="width: ; height: ;">
                                 
-                                <button type="button" id="LogoImage" value="" class="" style="height: ; margin-left: 5px">
+                                <button type="button" id="LogoImage" value="" class="" style="height: ; width: 70px;  margin-left: 5px">
                                     <i class="fa fa-bars fa-2x"></i>
                                 </button>
                                 
@@ -223,8 +223,8 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
                             <td style="font-size: 16px; text-align:center">
 
-                                     <b style="font-size: 16px; text-align:center">Cartas de Porte </b><br />
-                                <b style="font-size: 16px; text-align:center">Móvil</b>
+                                     <b style="font-size: 18px; text-align:center">Cartas de Porte </b><br />
+                                <b style="font-size: 18px; text-align:center">Móvil</b>
                                 
                             </td>
                             <td>
@@ -239,7 +239,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
                            
 
-                                <asp:DropDownList ID="cmbPeriodo" runat="server" AutoPostBack="true" Height="40" Width="100px" Font-Size="14" Style="color: black;"
+                                <asp:DropDownList ID="cmbPeriodo" runat="server" AutoPostBack="true" Height="40" Width="100px" Font-Size="14" Style="color: black; margin-left: 3px"
                                     Visible="false">
                                     <asp:ListItem Text="Hoy" Selected="True" />
                                     <asp:ListItem Text="Ayer" />
@@ -251,7 +251,10 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                                     <%--    <asp:ListItem Text="Filtrar por Mes/Año" />--%>
                                     <asp:ListItem Text="Personalizar" />
                                 </asp:DropDownList>
-                                <asp:TextBox ID="txtFechaDesde" runat="server" Width="100px" MaxLength="1" autocomplete="off" Style="color: black;" Font-Size="13" Enabled="true" Height="40"
+
+
+
+                                <asp:TextBox ID="txtFechaDesde" runat="server" Width="100px" MaxLength="1" autocomplete="off"  Font-Size="13" Enabled="true" Height="40" Style="color: black; margin-left: 3px"
                                     TabIndex="2" AutoPostBack="false"></asp:TextBox>
                                 <cc1:CalendarExtender ID="CalendarExtender3" runat="server" Format="dd/MM/yyyy" TargetControlID="txtFechaDesde"
                                     Enabled="True">
@@ -265,7 +268,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                                 <cc1:TextBoxWatermarkExtender ID="TBWE2" runat="server" TargetControlID="txtFechaDesde"
                                     WatermarkText="desde" WatermarkCssClass="watermarked" />
 
-                               
+                               al
                                
                                 <asp:TextBox ID="txtFechaHasta" runat="server" Width="100px" MaxLength="1" TabIndex="2" Style="color: black;" Font-Size="13" Enabled="true" Height="40"
                                     AutoPostBack="false"></asp:TextBox>
@@ -281,7 +284,14 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                                 <cc1:TextBoxWatermarkExtender ID="TBWE3" runat="server" TargetControlID="txtFechaHasta"
                                     WatermarkText="hasta" WatermarkCssClass="watermarked" />
 
-
+                                en
+                                <asp:DropDownList ID="DropDownList1" runat="server" CssClass="" Width="60px" Font-Size="13" Style="color: black;" Height="40" Visible="true" >
+                                        <asp:ListItem> ---</asp:ListItem>
+                                        <asp:ListItem> BUE</asp:ListItem>
+                                        <asp:ListItem> SLO</asp:ListItem>
+                                        <asp:ListItem> ARR</asp:ListItem>
+                                        <asp:ListItem> BAH</asp:ListItem>
+                                </asp:DropDownList>
                                 <asp:DropDownList ID="cmbPuntoVenta" runat="server" CssClass="" Width="60px" Font-Size="14" Style="color: black;" Height="40" Visible="false" />
 
                             </td>
@@ -551,17 +561,17 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
                     <%-- <a class="btn" style="color: Black" href="#"><i class="icon-print"></i>&nbsp;más</a>--%>
 
-                    <button type="button" id="recarg" value="Recarg" class="" style="height: 40px; margin-left: 2px">
+                    <button type="button" id="recarg" value="Recarg" class="" style="height: 40px; margin-left: 2px; width: 80px">
                         <i class="fa fa-refresh fa-2x"></i>
                     </button>
-                    <button type="button" id="ant" value="<<<<<" class="" style="height: 40px;"><i class="fa fa-backward fa-2x"></i></button>
+                    <button type="button" id="ant" value="<<<<<" class="" style="height: 40px; width: 80px"><i class="fa fa-backward fa-2x"></i></button>
 
-                    <button type="button" id="prox" value=">>>>>" class="" style="height: 40px;" /><i class="fa fa-forward fa-2x"></i></button>
+                    <button type="button" id="prox" value=">>>>>" class="" style="height: 40px; width: 80px" /><i class="fa fa-forward fa-2x"></i></button>
                     <%--<button type="button" id="edtData" value="edit" class="span2" style="height: 40px;" />--%>
 
 
                     <%--<a class="btn span2" href="CartaDePorteInformesAccesoClientes.aspx" style="font-size: 10px">V.Escritorio</a>--%>
-                      <a class="btn span2" href="CartaDePorteInformesAccesoClientes.aspx" style="font-size: 10px">Situacion</a>
+                      <a class="btn span2" href="SituacionCalidadMovil.aspx" style="font-size: 9px">Situacion</a>
                 </div>
 
             </div>
@@ -608,13 +618,13 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
                 <%--<input type="button" id="" value="------" class="" style="height: 50px; margin-left: 5px" />--%>
 
-                <br />
+                
+                
+                <asp:Image ID="Image1" runat="server" ImageUrl="~/Imagenes/williamslogin.gif" CssClass="" Height="60px" ImageAlign="AbsBottom" />
 
-                <asp:Image ID="Image1" runat="server" ImageUrl="~/Imagenes/williamsmini.gif" CssClass="" Height="60px" ImageAlign="AbsBottom" />
+            
 
-                <br />
-
-                <div>
+                <div style="visibility:hidden; display: none">
                     <asp:LoginView ID="LoginView" runat="server">
                         <LoggedInTemplate>
                             <asp:LoginName ID="LoginName1" runat="server" Font-Bold="false" CssClass="margender" />
@@ -632,7 +642,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                     <asp:Label ID="lblRazonSocial" runat="server" Font-Size="10" Font-Bold="false" Visible="false" />
 
                     <br />
-                    <a href="CartaDePorteInformesAccesoClientesMovil.aspx"><i class="fa                 fa-desktop fa-2x"></i>Version escritorio  </a>
+                    <a href="CartaDePorteInformesAccesoClientesMovil.aspx"><i class="fa                 fa-desktop fa-2x"></i> VERSION ESCRITORIO  </a>
 
                 </div>
 
@@ -653,34 +663,34 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 Arroyo Seco (Sta. Fe) - René Favaloro 726 / (03402) 421-426 - 429-676 / arroyoseco@williamsentregas.com.ar 
      // Bahía Blanca Ruta 252 km 0.5 - Playa el Triangulo / (0291) 400-7928 - 481-6778 / bahiablanca@williamsentregas.com.ar--%>
 
+                    
+                    
+                    <a href="tel:5278-8800" class=" span2" type=""><i class="fa fa-phone fa-2x"></i> BUENOS AIRES</a>
+                    <br />  <br />
 
+                    <a href="tel:(03476) 430-234" class="  span2" type="button"><i class="fa fa-phone fa-2x"></i> SAN LORENZO</a>
+                    <br />  <br />
 
-
-                    <br />
-                    <a href="tel:5278-8800" class=" span2" type=""><i class="fa fa-phone fa-2x"></i>BsAs</a>
-                    <br />
-
-                    <a href="tel:(03476) 430-234" class="  span2" type="button"><i class="fa fa-phone fa-2x"></i>SLorenzo</a>
-                    <br />
-
-                    <a href="tel: (03402) 421-426" class="  span2" type=""><i class="fa fa-phone fa-2x"></i>Arroyo</a>
-                    <br />
+                    <a href="tel: (03402) 421-426" class="  span2" type=""><i class="fa fa-phone fa-2x"></i> ARROYO SECO</a>
+                    <br />  <br />
 
                     <a href="tel:0291-400-7928" class="  span2" type="button">
-                        <i class="fa                 fa-phone fa-2x"></i>BBlanca
+                        <i class="fa                 fa-phone fa-2x"></i> BAHIA BUQUE
+                    </a>
+
+
+                    <br />
+                    <br />
+                    <a href="tel:0291-400-7928" class="  span2" type="button">
+                        <i class="fa                 fa-power-off fa-2x"></i> SALIR
                     </a>
 
 
 
-
+                    <br />
+                    <hr />
                     <a href="tel:0291-400-7928" class="  span2" type="button">
-                        <i class="fa                 fa-power-off fa-2x"></i>Salir
-                    </a>
-
-
-
-                    <a href="tel:0291-400-7928" class="  span2" type="button">
-                        <i class="fa                 fa-mail-reply fa-2x"></i>Volver
+                        <i class="fa                 fa-mail-reply fa-2x"></i> Volver
                     </a>
 
 
@@ -812,19 +822,19 @@ Arroyo Seco (Sta. Fe) - René Favaloro 726 / (03402) 421-426 - 429-676 / arroyos
                         height: $(window).height(), // '100%'
                         dialogClass: "no-close",
                         buttons: [
-                          {
-                              text: "OK",
-                              click: function () {
-                                  $(this).dialog("close");
+                      //    {
+                      //        text: "OK",
+                      //        click: function () {
+                      //            $(this).dialog("close");
 
-                                  cambiarSituaciones(lista, "administrador", "",
-                      function () {
-                          $("#loading").hide();
-                          $('#Lista').trigger('reloadGrid');
-                      })
+                      //            cambiarSituaciones(lista, "administrador", "",
+                      //function () {
+                      //    $("#loading").hide();
+                      //    $('#Lista').trigger('reloadGrid');
+                      //})
 
-                              }
-                          }
+                      //        }
+                      //    }
                         ]
                     });
 
