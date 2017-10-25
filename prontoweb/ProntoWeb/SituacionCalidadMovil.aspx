@@ -562,21 +562,28 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
                     <%-- <a class="btn" style="color: Black" href="#"><i class="icon-print"></i>&nbsp;más</a>--%>
 
-                    <button type="button" id="recarg" value="Recarg" class="" style="height: 40px; margin-left: 2px; width: 80px">
+                    <button type="button" id="recarg" value="Recarg" class="" style="height: 40px; margin-left: 2px; width: 70px">
                         <i class="fa fa-refresh fa-2x"></i>
                     </button>
-                    <button type="button" id="ant" value="<<<<<" class="" style="height: 40px; width: 80px"><i class="fa fa-backward fa-2x"></i></button>
+                    <button type="button" id="ant" value="<<<<<" class="" style="height: 40px; width: 70px"><i class="fa fa-backward fa-2x"></i></button>
 
-                    <button type="button" id="prox" value=">>>>>" class="" style="height: 40px; width: 80px">
+                    <button type="button" id="prox" value=">>>>>" class="" style="height: 40px; width: 70px">
                         <i class="fa fa-forward fa-2x"></i>
                     </button>
                     <%--<button type="button" id="edtData" value="edit" class="span2" style="height: 40px;" />--%>
 
 
-                    
+
                     <button type="button" runat="server" id="btnsituacion" style="height: 40px; width: ; vertical-align: top; font-size: 11px">
                         Situación
                     </button>
+
+
+                    <button type="button" id="" style="height: 40px; width: 70px; vertical-align: top;" onclick="location.href='CartaPorteMovil.aspx'">
+                        <i class="fa"></i>General
+                    </button>
+
+
 
 
                     <%--<a class="btn span2" href="CartaDePorteInformesAccesoClientes.aspx" style="font-size: 10px">V.Escritorio</a>--%>
@@ -691,7 +698,7 @@ Arroyo Seco (Sta. Fe) - René Favaloro 726 / (03402) 421-426 - 429-676 / arroyos
                     <br />
 
                     <a href="tel:0291-400-7928" class="  span2" type="button">
-                        <i class="fa                 fa-phone fa-2x"></i>BAHIA BUQUE
+                        <i class="fa                 fa-phone fa-2x"></i>BAHIA BLANCA
                     </a>
 
 
@@ -754,12 +761,12 @@ Arroyo Seco (Sta. Fe) - René Favaloro 726 / (03402) 421-426 - 429-676 / arroyos
 
             <div id="TipoSituacion" title="Basic dialog">
 
-               <%-- <input type="button" id="Autorizado" value="Autorizado" />
+                <%-- <input type="button" id="Autorizado" value="Autorizado" />
                 <input type="button" id="Demorado" value="Demorado" />--%>
 
 
                 <asp:DropDownList ID="SituacionNueva" runat="server" Style="text-align: right; margin-left: 0px;"
-                     Font-Size="14" Height="40" Width="150" Enabled="true" Visible="true">
+                    Font-Size="14" Height="40" Width="150" Enabled="true" Visible="true">
 
                     <asp:ListItem Text="Autorizado" Value="0" />
                     <asp:ListItem Text="Demorado" Value="1" />
@@ -775,7 +782,7 @@ Arroyo Seco (Sta. Fe) - René Favaloro 726 / (03402) 421-426 - 429-676 / arroyos
                 </asp:DropDownList>
 
 
-           
+
             </div>
 
 
@@ -1966,12 +1973,18 @@ Arroyo Seco (Sta. Fe) - René Favaloro 726 / (03402) 421-426 - 429-676 / arroyos
                         // CP	TURNO	SITUACION	MERC	TITULAR_CP	INTERMEDIARIO	RTE CIAL	CORREDOR	DESTINATARIO	DESTINO	ENTREGADOR	PROC	KILOS	OBSERVACION
 
 
-                        colNames: ['', 'Id', 'Nro CP', 'Turno', 'Situacion',
+                        colNames: ['', 'Id', 'Nro CP', 'Situacion',  'Obs Situacion',
                             'Producto', 'Titular', 'Intermediario', 'R Comercial', 'Corredor',
-                            'Destinatario', 'Destino', 'IdDestino', 'Entregador', 'Procedencia',
-                            'Kilos Procedencia', 'Obs Situacion', 'Arribo', 'Descarga', 'Punto Venta',
-                            'Fecha actualizacion', 'Patente', 'Kilos Descargados'
+                            'Destinatario', 'Destino', 'IdDestino', 'Patente',
+                            'Kilos Procedencia', 'Arribo', 'Descarga', 'Punto Venta',
+                            
                         ],
+
+
+
+                        //               Num de cp - Situacion - obs situcaion - producto - titular - interm - remitente - corredor - destintario - destino - patente - kg proc. - arribo - descarga * El cliente puede modificar la situación? - No no la puede cambiar.
+
+
 
                         colModel: [
                             {
@@ -1984,7 +1997,9 @@ Arroyo Seco (Sta. Fe) - René Favaloro 726 / (03402) 421-426 - 429-676 / arroyos
                                 name: 'NumeroCartaEnTextoParaBusqueda', index: 'NumeroCartaEnTextoParaBusqueda', width: 100, align: 'left', sorttype: "text", sortable: false, frozen: true
                                 , editable: false, editrules: { required: false, number: true }, edittype: 'text',
 
-                                searchoptions: { sopt: ['bw', 'cn', 'eq'] },
+                                searchoptions: { sopt: ['bw', 'cn', 'eq'], clearSearch: false },
+
+
 
 
                                 editoptions: {
@@ -2001,8 +2016,7 @@ Arroyo Seco (Sta. Fe) - René Favaloro 726 / (03402) 421-426 - 429-676 / arroyos
                                 }
                             },
 
-                            { name: 'Turno', index: ' Turno', align: 'left', width: 40, editable: false, hidden: false, edittype: 'text', searchoptions: { sopt: ['bw', 'cn', 'eq'] }, },
-
+           
                             {
                                 name: 'Situacion', index: 'Situacion', align: 'left', width: 120, hidden: false, editable: true, edittype: 'select', sortable: false,
                                 editoptions: {
@@ -2015,10 +2029,16 @@ Arroyo Seco (Sta. Fe) - René Favaloro 726 / (03402) 421-426 - 429-676 / arroyos
                                 searchoptions: {
                                     sopt: ['eq'],
                                     value: ":Todos; 0:Autorizado; 1:Demorado; 2:Posicion; 3:Descargado; 4:A Descargar; 5:Rechazado;6:Desviado;7:CP p/cambiar;8:Sin Cupo;9:Calado"
+                                    , clearSearch: false
                                 }
 
 
                             },
+
+                            { name: 'ObservacionesSituacion', index: 'ObservacionesSituacion', align: 'left', width: 100, editable: true, hidden: false, sortable: false },
+
+                          
+
 
 
                             {
@@ -2095,6 +2115,7 @@ Arroyo Seco (Sta. Fe) - René Favaloro 726 / (03402) 421-426 - 429-676 / arroyos
 
 
                                     }
+                                    , clearSearch: false
                                 }
 
                             },
@@ -2568,170 +2589,15 @@ Arroyo Seco (Sta. Fe) - René Favaloro 726 / (03402) 421-426 - 429-676 / arroyos
                             },
                             { name: 'Destino', index: 'Destino', align: 'left', width: 100, hidden: true, editable: false, edittype: 'text', sortable: false },
 
-
-                            {
-                                name: 'EntregadorDesc', index: 'EntregadorDesc', align: 'left', width: 50, hidden: false, editable: false, edittype: 'text', sortable: false
+                            { name: 'Patente', index: 'Patente', align: 'left', width: 100, hidden: false, editable: false, edittype: 'text', sortable: false },
 
 
-                                , searchoptions: {
-                                    //    sopt:['eq'], 
-                                    dataInit: function (elem) {
-                                        var NoResultsLabel = "No se encontraron resultados";
-
-
-                                        $(elem).autocomplete({
-
-                                            select: function (event, ui) {
-                                                $(elem).trigger('change');
-                                            },
-
-
-                                            source: function (request, response) {
-                                                $.ajax({
-                                                    type: "POST",
-                                                    url: "WebServiceClientes.asmx/GetClientes",
-                                                    dataType: "json",
-                                                    contentType: "application/json; charset=utf-8",
-
-                                                    data: JSON.stringify({
-                                                        term: request.term
-                                                        //, idpuntoventa: function () { return $("#ctl00_ContentPlaceHolder1_txtFechaHasta").val(); }
-                                                    }),
-
-
-                                                    success: function (data2) {
-                                                        var data = JSON.parse(data2.d) // por qué tengo que usar parse?
-
-                                                        //if (data.length == 1 || data.length > 1) { // qué pasa si encuentra más de uno?????
-                                                        //    var ui = data[0];
-
-                                                        //    if (ui.id == "") {
-                                                        //        alert("No existe el artículo"); // se está bancando que no sea identica la descripcion
-                                                        //        $("#Descripcion").val("");
-                                                        //        return;
-                                                        //    }
-                                                        //    $("#IdWilliamsDestino").val(ui.id);
-
-                                                        //    UltimoIdArticulo = ui.id;
-                                                        //}
-                                                        //else {
-                                                        //    alert("No existe el artículo"); // se está bancando que no sea identica la descripcion
-                                                        //}
-
-                                                        response($.map(data, function (item) {
-                                                            return {
-                                                                label: item.value,
-                                                                value: item.value //item.id
-                                                                , id: item.id
-                                                            }
-                                                        }));
-
-                                                    }
-
-
-
-                                                })
-
-
-                                            }
-
-
-                                        });
-
-
-
-
-
-
-                                    }
-                                }
-
-                            },
-
-                            {
-                                name: 'ProcedenciaDesc', index: 'ProcedenciaDesc', align: 'left', width: 100, hidden: false, editable: false, edittype: 'text', sortable: false
-
-
-                                , searchoptions: {
-                                    //    sopt:['eq'], 
-                                    dataInit: function (elem) {
-                                        var NoResultsLabel = "No se encontraron resultados";
-
-
-                                        $(elem).autocomplete({
-
-                                            select: function (event, ui) {
-                                                $(elem).val(ui.item.value);
-                                                $(elem).trigger('change');
-                                            },
-
-                                            source: function (request, response) {
-                                                $.ajax({
-                                                    type: "POST",
-                                                    url: "WebServiceClientes.asmx/GetLocalidades",
-                                                    dataType: "json",
-                                                    contentType: "application/json; charset=utf-8",
-
-                                                    data: JSON.stringify({
-                                                        term: request.term
-                                                        //, idpuntoventa: function () { return $("#ctl00_ContentPlaceHolder1_txtFechaHasta").val(); }
-                                                    }),
-
-
-                                                    success: function (data2) {
-                                                        var data = JSON.parse(data2.d) // por qué tengo que usar parse?
-
-                                                        //if (data.length == 1 || data.length > 1) { // qué pasa si encuentra más de uno?????
-                                                        //    var ui = data[0];
-
-                                                        //    if (ui.id == "") {
-                                                        //        alert("No existe el artículo"); // se está bancando que no sea identica la descripcion
-                                                        //        $("#Descripcion").val("");
-                                                        //        return;
-                                                        //    }
-                                                        //    $("#IdWilliamsDestino").val(ui.id);
-
-                                                        //    UltimoIdArticulo = ui.id;
-                                                        //}
-                                                        //else {
-                                                        //    alert("No existe el artículo"); // se está bancando que no sea identica la descripcion
-                                                        //}
-
-
-
-
-                                                        response($.map(data, function (item) {
-                                                            return {
-                                                                label: item.value,
-                                                                value: item.value //item.id
-                                                                , id: item.id
-                                                            }
-                                                        }));
-
-                                                    }
-
-
-
-                                                })
-
-
-                                            }
-
-
-                                        });
-
-
-
-
-
-
-                                    }
-                                }
-                            },
 
                             { name: 'NetoPto', index: 'NetoPto', align: 'left', width: 60, hidden: false, editable: false, edittype: 'text', sortable: false },
 
-                            { name: 'ObservacionesSituacion', index: 'ObservacionesSituacion', align: 'left', width: 100, editable: true, hidden: false, sortable: false },
+
+                            //{ name: 'NetoProc', index: 'NetoProc', align: 'left', width: 60, hidden: false, editable: false, edittype: 'text', sortable: false }
+
 
                             {
                                 name: 'FechaArribo', index: 'FechaArribo', width: 100, sortable: true, align: 'right', editable: false, sortable: false,
@@ -2802,40 +2668,8 @@ Arroyo Seco (Sta. Fe) - René Favaloro 726 / (03402) 421-426 - 429-676 / arroyos
 
 
 
-                            {
-                                name: 'FechaActualizacionAutomatica', index: 'FechaActualizacionAutomatica', width: 150, sortable: true, align: 'right', editable: false, sortable: false,
-                                editoptions: {
-                                    size: 10,
-                                    maxlengh: 10,
-                                    dataInit: function (element) {
-                                        $(element).datepicker({
-                                            dateFormat: 'dd/mm/yy',
-                                            constrainInput: false,
-                                            showOn: 'button',
-                                            buttonText: '...'
-                                        });
-                                    }
-                                },
-                                formatoptions: { newformat: "dd/mm/yy" }, datefmt: 'dd/mm/yy'
-                                //, formatter: 'date'
-                                , sorttype: 'date'
 
 
-                                , searchoptions: {
-                                    sopt: ['eq', 'ne', 'lt', 'le', 'gt', 'ge'],
-                                    dataInit: function (elem) {
-                                        $(elem).datepicker({
-                                            dateFormat: 'dd/mm/yy',
-                                            showButtonPanel: true
-                                        })
-                                    }
-                                }
-                            },
-
-
-                            { name: 'Patente', index: 'Patente', align: 'left', width: 100, hidden: false, editable: false, edittype: 'text', sortable: false },
-
-                            { name: 'NetoProc', index: 'NetoProc', align: 'left', width: 60, hidden: false, editable: false, edittype: 'text', sortable: false }
 
 
                         ],
