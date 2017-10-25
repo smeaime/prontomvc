@@ -275,6 +275,7 @@
     <Compile Include="Areas\MvcMembership\Models\UserAdministration\RoleViewModel.cs" />
     <Compile Include="Areas\MvcMembership\MvcMembershipAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\ClienteAPIController.cs" />
     <Compile Include="Controllers\ResumenConciliacionController.cs" />
     <Compile Include="Controllers\PlazoFijoController.cs" />
     <Compile Include="Controllers\DepositoBancarioController.cs" />
