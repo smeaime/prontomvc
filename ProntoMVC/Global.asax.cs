@@ -14,6 +14,8 @@ using StackExchange.Profiling;
 using StackExchange.Profiling.EntityFramework6;
 
 
+using System.Web.Http;
+
 namespace ProntoMVC
 {
     // Nota: para obtener instrucciones sobre cómo habilitar el modo clásico de IIS6 o IIS7, 
@@ -91,6 +93,10 @@ namespace ProntoMVC
             AreaRegistration.RegisterAllAreas();
 
 
+            // https://stackoverflow.com/questions/26067296/how-to-add-web-api-to-an-existing-asp-net-mvc-5-web-application-project
+            System.Web.Http.GlobalConfiguration.Configure(WebApplication1.WebApiConfig.Register);
+
+
             RegisterGlobalFilters(GlobalFilters.Filters);
             RegisterRoutes(RouteTable.Routes);
 
@@ -155,7 +161,7 @@ namespace ProntoMVC
                 Exception lastErrorWrapper = Server.GetLastError();
 
 
-                if (lastErrorWrapper==null)
+                if (lastErrorWrapper == null)
                 {
                     // http://stackoverflow.com/questions/343014/asp-net-custom-error-page-server-getlasterror-is-null
 
@@ -252,19 +258,19 @@ namespace ProntoMVC
 
 
 
-    
+
                 /////////////////////////////////////////////////////////////
                 /////////////////////////////////////////////////////////////
-                
-//                1- en el caso de error en el Loggin (por un error de compilacion o algo por el estilo) si nos podes enviar en el mail las bases de datos de la BDLMaesteer (Solo las bases no los string de conexiones)
 
-//2-En el caso de otro tipo de error en que base de datos fue y si es posible el usuario (similar a los errores de Williams)
+                //                1- en el caso de error en el Loggin (por un error de compilacion o algo por el estilo) si nos podes enviar en el mail las bases de datos de la BDLMaesteer (Solo las bases no los string de conexiones)
 
-//es es mas que nada para poder saber cuando nos llegan los mails saber en donde estan pasando
+                //2-En el caso de otro tipo de error en que base de datos fue y si es posible el usuario (similar a los errores de Williams)
+
+                //es es mas que nada para poder saber cuando nos llegan los mails saber en donde estan pasando
                 string nombrebase = "";
                 try
                 {
-                    if (System.Web.HttpContext.Current.Session!=null) nombrebase = System.Web.HttpContext.Current.Session["BasePronto"].ToString();
+                    if (System.Web.HttpContext.Current.Session != null) nombrebase = System.Web.HttpContext.Current.Session["BasePronto"].ToString();
                     //nombrebase = this.HttpContext.Session["BasePronto"].ToString();
                 }
                 catch (Exception)
@@ -350,7 +356,7 @@ namespace ProntoMVC
                                       null, //(YSODmarkup + log) ?? "",
                                    Convert.ToInt16(ConfigurationManager.AppSettings["SmtpPort"]));
 
-                    
+
 
 
 
@@ -416,7 +422,7 @@ namespace ProntoMVC
                     // por qué la llamada al ErrorController necesita del Membership (y por lo tanto, de la conexion SQL)?
                     //http://stackoverflow.com/questions/1171035/asp-net-mvc-custom-error-handling-application-error-global-asax
                     //ssss
-                    
+
                     // http://stackoverflow.com/questions/15894254/how-to-solve-redirect-loop
 
                     routeData.Values["action"] = "SinConexion";
