@@ -18,7 +18,7 @@ namespace ProntoMVC.Controllers
         //    return new string[] { "value1", "value2" };
         //}
 
-        // GET api/<controller>/5
+        //GET api/<controller>/5
         public string Get(int id)
         {
             return "value";
@@ -103,13 +103,13 @@ namespace ProntoMVC.Controllers
         //}
 
 
-        //[HttpGet]
-        //[Route("ClienteAPIController/SomeUrlSegment/{someParameter}")]
-        //public int SomeUrlSegment(string someParameter)
-        //{
-        //    //do stuff
-        //    return 3;
-        //}
+        [HttpGet]
+        [Route("~/api/lala/{someParameter}")]
+        public int SomeUrlSegment(string someParameter)
+        {
+            //do stuff
+            return 3;
+        }
 
     }
 }
