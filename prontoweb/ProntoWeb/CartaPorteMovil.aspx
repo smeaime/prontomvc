@@ -211,7 +211,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
             <asp:UpdatePanel ID="UpdatePanelResumen" runat="server" Visible="true">
                 <ContentTemplate>
 
-                    <table style="color: black; width: 320px; vertical-align: bottom !important;">
+                    <table style="color: darkblue; width: 320px; vertical-align: bottom !important;">
                         <tr>
                             <td class="" style="width: ; height: ;">
 
@@ -223,7 +223,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
                             <td style="font-size: 16px; text-align: center">
 
-                                <b style="font-size: 18px; text-align: center">Cartas de Porte </b>
+                                <b style="font-size: 18px; text-align: center; color: darkblue">Cartas de Porte </b>
                                 <br />
                                 <b style="font-size: 18px; text-align: center">Móvil</b>
 
@@ -562,22 +562,23 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
                     <%-- <a class="btn" style="color: Black" href="#"><i class="icon-print"></i>&nbsp;más</a>--%>
 
-                    <button type="button" id="recarg" value="Recarg" class="" style="height: 40px; margin-left: 2px; width: 80px">
+                    <button type="button" id="recarg" value="Recarg" class="" style="height: 40px; margin-left: 2px; width: 70px">
                         <i class="fa fa-refresh fa-2x"></i>
                     </button>
-                    <button type="button" id="ant" value="<<<<<" class="" style="height: 40px; width: 80px"><i class="fa fa-backward fa-2x"></i></button>
+                    <button type="button" id="ant" value="<<<<<" class="" style="height: 40px; width: 70px"><i class="fa fa-backward fa-2x"></i></button>
 
-                    <button type="button" id="prox" value=">>>>>" class="" style="height: 40px; width: 80px" >
-                    <i class="fa fa-forward fa-2x"></i></button>
+                    <button type="button" id="prox" value=">>>>>" class="" style="height: 40px; width: 70px">
+                        <i class="fa fa-forward fa-2x"></i>
+                    </button>
                     <%--<button type="button" id="edtData" value="edit" class="span2" style="height: 40px;" />--%>
 
-                 <%--   <button type="button" id="" value="class="" style="height: 40px; width: 60px"  onclick="location.href='SituacionCalidadMovil.aspx'"  >
-                          <i class="fa"></i> Situación
-                        </button>--%>
-                    
+                    <button type="button" id="" value="" style="height: 40px; width: ; vertical-align: top; background-color: wheat; font-weight: bold" onclick="location.href='SituacionCalidadMovil.aspx'">
+                        <i class="fa"></i>Situación
+                    </button>
 
-                    <a class="" href="SituacionCalidadMovil.aspx" style="font-size: 14px; width: 50px; text-wrap: normal;   "> Situación</a>
-             
+
+                    <%--                    <a class="" href="SituacionCalidadMovil.aspx" style="font-size: 14px; width: 50px; text-wrap: normal;   "> Situación</a>
+                    --%>
                 </div>
 
             </div>
@@ -620,7 +621,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
 
 
-            <div id="dialog" title="" style="">
+            <div id="dialog" title="" style="color: blue">
 
                 <%--<input type="button" id="" value="------" class="" style="height: 50px; margin-left: 5px" />--%>
 
@@ -628,7 +629,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
                 <asp:Image ID="Image1" runat="server" ImageUrl="~/Imagenes/williamslogin.gif" CssClass="" Height="" Width="250px" ImageAlign="AbsBottom" />
 
-
+                <%--                <hr style="color: blue" />--%>
 
                 <div style="visibility: hidden; display: none">
                     <asp:LoginView ID="LoginView" runat="server">
@@ -651,11 +652,13 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
                 </div>
 
-                    
-                    <a href="CartaDePorteInformesAccesoClientesMovil.aspx"><i class="fa                 fa-desktop fa-2x"></i> VERSION ESCRITORIO  </a><br /><br />
 
-                    
-                
+                <a href="CartaDePorteInformesAccesoClientesMovil.aspx"  style="color: darkblue"><i class="fa                 fa-desktop fa-2x"></i>VERSION ESCRITORIO  </a>
+                <br />
+                <br />
+
+
+
 
                 <div class="row-fluid" style="">
 
@@ -674,53 +677,59 @@ Arroyo Seco (Sta. Fe) - René Favaloro 726 / (03402) 421-426 - 429-676 / arroyos
 
 
 
-                    <a href="tel:5278-8800" class=" span2" type=""><i class="fa fa-phone fa-2x"></i> BUENOS AIRES</a>
+                    <a href="tel:5278-8800" class=" span2" type="" style="color: darkblue"><i class="fa fa-phone fa-2x" style="color: darkblue"></i>BUENOS AIRES</a>
                     <br />
                     <br />
 
-                    <a href="tel:(03476) 430-234" class="  span2" type="button"><i class="fa fa-phone fa-2x"></i> SAN LORENZO</a>
+                    <a href="tel:(03476) 430-234" class="  span2" type="button" style="color: darkblue"><i class="fa fa-phone fa-2x"></i>SAN LORENZO</a>
                     <br />
                     <br />
 
-                    <a href="tel: (03402) 421-426" class="  span2" type=""><i class="fa fa-phone fa-2x"></i> ARROYO SECO</a>
+                    <a href="tel: (03402) 421-426" class="  span2" type="" style="color: darkblue"><i class="fa fa-phone fa-2x"></i>ARROYO SECO</a>
                     <br />
                     <br />
 
-                    <a href="tel:0291-400-7928" class="  span2" type="button">
-                        <i class="fa                 fa-phone fa-2x"></i> BAHIA BUQUE
+                    <a href="tel:0291-400-7928" class="  span2" type="button" style="color: darkblue">
+                        <i class="fa                 fa-phone fa-2x"></i>BAHIA BLANCA
                     </a>
 
 
-                    
-                    <br /><br />
-                    <button id="btnSalir" runat="server"  type=""  onserverclick="LoginStatus1_LoggedOut">
-                        <i class="fa                 fa-power-off fa-2x"></i> SALIR
+
+                    <br />
+                    <br />
+                    <button id="btnSalir" runat="server" type="" class="lala"  style="color: darkblue" onserverclick="LoginStatus1_LoggedOut">
+                        <i class="fa                 fa-power-off fa-2x"></i>SALIR
                     </button>
 
                     <br />
                     <br />
-                    
-                    
-                    <button id="btnVolver" type="button" >
+
+
+                        <button id="Button1" runat="server" type="" class="lala"  style="color: darkblue" onserverclick="LoginStatus1_LoggedOut">
+                        <i class="fa                 fa-mail-reply fa-2x"></i>VOLVER
+                    </button>
+
+                 <%--   <a href="" id="btnVolver" class="" type="" style="color: darkblue"><i class="fa fa-mail-reply fa-2x" style="color: darkblue"></i>VOLVER</a>--%>
+
+
+                    <%--                    <button id="btnVolver" type="button" >
                         <i class="fa                 fa-mail-reply fa-2x"></i> VOLVER
-                    </button>
-
-
+                    </button>--%>
                 </div>
 
-                <%--                <style>
-                    .button {
-                        display: block;
-                        width: 115px;
-                        height: 25px;
-                        background: #4E9CAF;
-                        padding: 10px;
-                        text-align: center;
-                        border-radius: 5px;
-                        color: white;
-                        font-weight: bold;
+                <style>
+                    .lala {
+                        text-decoration: none;
+                        background: none !important;
+                        color: inherit;
+                        border: none;
+                        padding: 0 !important;
+                        font: inherit;
+                        /*border is optional*/
+                        /*border-bottom: 1px solid #444;*/
+                        cursor: pointer;
                     }
-                </style>--%>
+                </style>
 
 
 
@@ -822,7 +831,7 @@ Arroyo Seco (Sta. Fe) - René Favaloro 726 / (03402) 421-426 - 429-676 / arroyos
                 })
 
 
-                    
+
 
                 $(function () {
                     $("#ui-dialog-title-dialog").hide();
@@ -873,7 +882,9 @@ Arroyo Seco (Sta. Fe) - René Favaloro 726 / (03402) 421-426 - 429-676 / arroyos
             </script>
 
             <style>
-            .ui-dialog-titlebar {display: none }
+                .ui-dialog-titlebar {
+                    display: none
+                }
             </style>
 
 
@@ -3096,22 +3107,22 @@ Arroyo Seco (Sta. Fe) - René Favaloro 726 / (03402) 421-426 - 429-676 / arroyos
 
 <script src="https://www.gstatic.com/firebasejs/4.5.0/firebase.js"></script>
 <script>
-    // Initialize Firebase
-    var config = {
-        apiKey: "AIzaSyD_KzMypOaPPCUl42hvR3BEkB9ZHCU9Nuc",
-        authDomain: "pronto-f87bf.firebaseapp.com",
-        databaseURL: "https://pronto-f87bf.firebaseio.com",
-        projectId: "pronto-f87bf",
-        storageBucket: "",
-        messagingSenderId: "741177410808"
-    };
-    firebase.initializeApp(config);
+                // Initialize Firebase
+                var config = {
+                    apiKey: "AIzaSyD_KzMypOaPPCUl42hvR3BEkB9ZHCU9Nuc",
+                    authDomain: "pronto-f87bf.firebaseapp.com",
+                    databaseURL: "https://pronto-f87bf.firebaseio.com",
+                    projectId: "pronto-f87bf",
+                    storageBucket: "",
+                    messagingSenderId: "741177410808"
+                };
+                firebase.initializeApp(config);
 
 
 
-    var bigOne = document.getElementById('bigOne');
-    var dbRef = firebase.database().ref().child('text');
-    dbRef.on('value', snap => bigOne.innerText = snap.val())
+                var bigOne = document.getElementById('bigOne');
+                var dbRef = firebase.database().ref().child('text');
+                dbRef.on('value', snap => bigOne.innerText = snap.val())
 
 </script>
 

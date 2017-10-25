@@ -214,11 +214,19 @@ public class JQGridHandler : IHttpHandler
 
 
         var a = new ServicioCartaPorte.servi();
-        string output = a.CartasPorte_DynamicGridData(
-                                    sortColumnName, sortOrderBy, Convert.ToInt32(pageIndex),
-                                    Convert.ToInt32(numberOfRows), isSearch == "true", filters, FechaInicial, FechaFinal, Convert.ToInt32(puntovent),
-                                    SQLdinamico.BuscaIdWilliamsDestinoPreciso(destino, SC),
-                                    SC, usuario, scbdlmaster);
+        //string output = a.CartasPorte_DynamicGridData(
+        //                            sortColumnName, sortOrderBy, Convert.ToInt32(pageIndex),
+        //                            Convert.ToInt32(numberOfRows), isSearch == "true", filters, FechaInicial, FechaFinal, Convert.ToInt32(puntovent),
+        //                            SQLdinamico.BuscaIdWilliamsDestinoPreciso(destino, SC),
+        //                            SC, usuario, scbdlmaster);
+
+        string output = a.CartasPorte_DynamicGridData_Orden3(
+                        sortColumnName, sortOrderBy, Convert.ToInt32(pageIndex),
+                        Convert.ToInt32(numberOfRows), isSearch == "true", filters, FechaInicial, FechaFinal, Convert.ToInt32(puntovent),
+                        SQLdinamico.BuscaIdWilliamsDestinoPreciso(destino, SC),
+                        SC, usuario, scbdlmaster);
+
+
 
 
         response.ContentType = "application/json";
