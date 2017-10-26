@@ -5,6 +5,14 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 
+using ProntoMVC.Data.Models;
+
+
+//using Newtonsoft.Json;
+
+//using System.Web.Mvc;
+
+
 namespace ProntoMVC.Controllers
 {
     public class ClienteAPIController : ApiController
@@ -19,14 +27,71 @@ namespace ProntoMVC.Controllers
         //}
 
         //GET api/<controller>/5
-        public string Get(int id)
+        //public string Get(int id)
+        //{
+        //    return "value";
+        //},
+
+        
+            
+        public List<aaaa> GetAllClientes()
         {
-            return "value";
+            /*
+            string SC;s
+
+            if (System.Diagnostics.Debugger.IsAttached)
+                SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(ConfigurationManager.AppSettings["scLocal"]);
+            else
+                SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(ConfigurationManager.AppSettings["scWilliamsRelease"]);
+
+            string scbdlmaster = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(ConfigurationManager.ConnectionStrings["LocalSqlServer"].ConnectionString);
+
+            var a = new ServicioCartaPorte.servi();
+
+            string output = a.CartasPorte_DynamicGridData_Orden3(
+                            sortColumnName, sortOrderBy, Convert.ToInt32(pageIndex),
+                            Convert.ToInt32(numberOfRows), isSearch == "true", filters, FechaInicial, FechaFinal, Convert.ToInt32(puntovent),
+                            SQLdinamico.BuscaIdWilliamsDestinoPreciso(destino, SC),
+                            SC, usuario, scbdlmaster);
+
+            response.ContentType = "application/json";
+            response.Write(output);
+    */
+
+            string SC = "Data Source = sqlmvc; Initial catalog = Pronto_Vialagro; User ID = sa; Password =.SistemaPronto.; Connect Timeout = 500";
+            var scEF = ProntoMVC.Data.Models.Auxiliares.FormatearConexParaEntityFramework(SC);
+            var db = new ProntoMVC.Data.Models.DemoProntoEntities(scEF);
+
+            //var q = db.Clientes.Select(x => new string [] { x.RazonSocial, x.Cuit }).ToList();
+            //var q = db.Clientes.Select(x => x.RazonSocial);
+            var q = db.Clientes.Select(x => new aaaa { Razonsocial= x.RazonSocial, Cuit=x.Cuit, Descripcion= x.Condiciones_Compra.Descripcion }).ToList();
+
+
+            return q;
+            //return Json(q);
+           
+        }
+
+
+      public  class aaaa
+        {
+            public string Razonsocial { get; set; }
+
+            public string Cuit { get; set; }
+
+            public string Descripcion { get; set; }
+
         }
 
 
 
-        public IEnumerable<string> GetAllClientes()
+
+
+        // devolver el modelo?
+
+        [HttpGet]
+        [Route("~/api/Cliente/TraerClientePorCuit/{sCUIT}")]
+        public string[] TraerClientePorCuit(string sCUIT)
         {
             /*
             string SC;
@@ -55,10 +120,48 @@ namespace ProntoMVC.Controllers
             var db = new ProntoMVC.Data.Models.DemoProntoEntities(scEF);
 
             //var q = db.Clientes.Select(x => new { x.RazonSocial, x.Cuit }).ToArray();
-            var q = db.Clientes.Select(x => x.RazonSocial);
+            string[] q = db.Clientes.Where(x=>x.Cuit==sCUIT).Select(x => new string[] { x.Cuit,  x.RazonSocial  }).SingleOrDefault();
 
             return q;
         }
+
+
+
+
+        public string[] GetCliente(int id)
+        {
+            /*
+            string SC;
+
+            if (System.Diagnostics.Debugger.IsAttached)
+                SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(ConfigurationManager.AppSettings["scLocal"]);
+            else
+                SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(ConfigurationManager.AppSettings["scWilliamsRelease"]);
+
+            string scbdlmaster = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(ConfigurationManager.ConnectionStrings["LocalSqlServer"].ConnectionString);
+
+            var a = new ServicioCartaPorte.servi();
+
+            string output = a.CartasPorte_DynamicGridData_Orden3(
+                            sortColumnName, sortOrderBy, Convert.ToInt32(pageIndex),
+                            Convert.ToInt32(numberOfRows), isSearch == "true", filters, FechaInicial, FechaFinal, Convert.ToInt32(puntovent),
+                            SQLdinamico.BuscaIdWilliamsDestinoPreciso(destino, SC),
+                            SC, usuario, scbdlmaster);
+
+            response.ContentType = "application/json";
+            response.Write(output);
+    */
+
+            string SC = "Data Source = sqlmvc; Initial catalog = Pronto_Vialagro; User ID = sa; Password =.SistemaPronto.; Connect Timeout = 500";
+            var scEF = ProntoMVC.Data.Models.Auxiliares.FormatearConexParaEntityFramework(SC);
+            var db = new ProntoMVC.Data.Models.DemoProntoEntities(scEF);
+
+            var q = db.Clientes.Take(1).Select(x => new string [] { x.RazonSocial, x.Cuit }).SingleOrDefault();
+
+            return q;
+        }
+
+
 
 
         //public IEnumerable<Product> GetAllProducts()
