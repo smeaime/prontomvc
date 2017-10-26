@@ -161,6 +161,7 @@ namespace ProntoMVC.TestsMVC
             //GetMockedControllerGenerico(c);
 
             var j= c.GetAllClientes();
+            var sss= c.TraerClientePorCuit("30711633053");
         }
 
 
