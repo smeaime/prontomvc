@@ -34,7 +34,7 @@ namespace ProntoMVC.Controllers
 
         
             
-        public List<aaaa> GetAllClientes()
+        public List<ClienteModelo> GetAllClientes()
         {
             /*
             string SC;s
@@ -64,7 +64,7 @@ namespace ProntoMVC.Controllers
 
             //var q = db.Clientes.Select(x => new string [] { x.RazonSocial, x.Cuit }).ToList();
             //var q = db.Clientes.Select(x => x.RazonSocial);
-            var q = db.Clientes.Select(x => new aaaa { Razonsocial= x.RazonSocial, Cuit=x.Cuit, Descripcion= x.Condiciones_Compra.Descripcion }).ToList();
+            var q = db.Clientes.Select(x => new ClienteModelo { Razonsocial= x.RazonSocial, Cuit=x.Cuit, Descripcion= x.Condiciones_Compra.Descripcion }).ToList();
 
 
             return q;
@@ -73,7 +73,7 @@ namespace ProntoMVC.Controllers
         }
 
 
-      public  class aaaa
+        public class ClienteModelo
         {
             public string Razonsocial { get; set; }
 
@@ -90,8 +90,8 @@ namespace ProntoMVC.Controllers
         // devolver el modelo?
 
         [HttpGet]
-        [Route("~/api/Cliente/TraerClientePorCuit/{sCUIT}")]
-        public string[] TraerClientePorCuit(string sCUIT)
+        [Route("~/api/ClienteAPI/TraerClientePorCuit/{sCUIT}")]
+        public ClienteModelo TraerClientePorCuit(string sCUIT)
         {
             /*
             string SC;
@@ -120,7 +120,8 @@ namespace ProntoMVC.Controllers
             var db = new ProntoMVC.Data.Models.DemoProntoEntities(scEF);
 
             //var q = db.Clientes.Select(x => new { x.RazonSocial, x.Cuit }).ToArray();
-            string[] q = db.Clientes.Where(x=>x.Cuit==sCUIT).Select(x => new string[] { x.Cuit,  x.RazonSocial  }).SingleOrDefault();
+            var q = db.Clientes.Where(x => x.Cuit.Replace("-", "") == sCUIT.Replace("-","") ).Select(x => new ClienteModelo { Razonsocial = x.RazonSocial, Cuit = x.Cuit, Descripcion = x.Condiciones_Compra.Descripcion }).FirstOrDefault();
+            //string[] q = db.Clientes.Where(x=>x.Cuit==sCUIT).Select(x => new string[] { x.Cuit,  x.RazonSocial  }).SingleOrDefault();
 
             return q;
         }
