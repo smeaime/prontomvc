@@ -5136,25 +5136,37 @@ Formato localidad-provincia	destination	x
 
                                 a.IdCartaDePorte.ToString(),
 
-                                "<a href=\"CartaDePorte.aspx?Id=" +  a.IdCartaDePorte + "\"  target=\"_blank\" >" +  a.NumeroCartaEnTextoParaBusqueda.NullSafeToString() + "</>" ,
+                                a.NumeroCartaEnTextoParaBusqueda.NullSafeToString(),
 
 
+
+                                (a.Situacion ?? 0).NullSafeToString(),
 
 
                      //   Num de cp - Situacion - obs situcaion - producto - titular - interm - remitente - corredor - destintario - destino - patente - kg proc. - arribo - descarga * El cliente puede modificar la situación? - No no la puede cambiar.
 
-                        
-                                (a.Situacion ?? 0).NullSafeToString(),
+                                "<span> " +
+                                "<b>Situacion</b> " + (a.Situacion ?? 0).NullSafeToString() + 
+                                "<br/><b>Obs</b> " + a.ObservacionesSituacion +
+                                "<br/>" + a.Producto.ToString() +
+                                "<br/>" + a.TitularDesc +
+                                "<br/>" + a.IntermediarioDesc +
+                                "<br/>" + a.RComercialDesc +
+                                "<a href=\"CartaDePorte.aspx?Id=" +  a.IdCartaDePorte + "\"  target=\"_blank\" > Imagenes </>" + 
+                                "<span/>",
+
+
 
                                 a.ObservacionesSituacion,
 
                                 a.Producto.ToString(),
-                                  a.TitularDesc,
-                                 a.IntermediarioDesc,
-                                 a.RComercialDesc,
+                                a.TitularDesc,
+                                a.IntermediarioDesc,
+                                a.RComercialDesc,
+
 
                                 a.CorredorDesc,
-                                 a.DestinatarioDesc,
+                                a.DestinatarioDesc,
 
                                 a.DestinoDesc.ToString(),
                                 a.Destino ==null ? "" : a.Destino.ToString(),

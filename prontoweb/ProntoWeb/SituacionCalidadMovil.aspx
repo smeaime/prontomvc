@@ -235,7 +235,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
                         <tr>
 
-                            <td colspan="3" class="" style="width: ; height: ; vertical-align: bottom !important;">
+                            <td colspan="3" class="" style="width: ; height: ; vertical-align: bottom !important; margin-top: 3px;">
 
 
 
@@ -544,7 +544,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
             <div style="height: 8px"></div>
 
-            <table id="Lista" class="scroll" cellpadding="0" cellspacing="0" style="font-size: 18px;" width="320px">
+            <table id="Lista" class="scroll" cellpadding="0" cellspacing="0" style="font-size: 22px;" width="">
             </table>
 
             <div id="ListaPager" class="scroll" style="text-align: center; height: ;">
@@ -1973,7 +1973,9 @@ Arroyo Seco (Sta. Fe) - René Favaloro 726 / (03402) 421-426 - 429-676 / arroyos
                         // CP	TURNO	SITUACION	MERC	TITULAR_CP	INTERMEDIARIO	RTE CIAL	CORREDOR	DESTINATARIO	DESTINO	ENTREGADOR	PROC	KILOS	OBSERVACION
 
 
-                        colNames: ['', 'Id', 'Nro CP', 'Situacion'
+                        colNames: ['', 'Id', 'Nro CP', 'Situacion' ,'dat'
+
+
 
                             //, 'Obs Situacion',
                             //'Producto', 'Titular', 'Intermediario', 'R Comercial', 'Corredor',
@@ -1996,7 +1998,7 @@ Arroyo Seco (Sta. Fe) - René Favaloro 726 / (03402) 421-426 - 429-676 / arroyos
                             { name: ' IdCartasDePorte', index: ' IdCartasDePorte', align: 'left', width: 100, editable: false, hidden: true, frozen: true },
 
                             {
-                                name: 'NumeroCartaEnTextoParaBusqueda', index: 'NumeroCartaEnTextoParaBusqueda', width: 110, align: 'left', sorttype: "text", sortable: false, frozen: true
+                                name: 'NumeroCartaEnTextoParaBusqueda', index: 'NumeroCartaEnTextoParaBusqueda', width: 130, align: 'left', sorttype: "text", sortable: false, frozen: true
                                 , editable: false, editrules: { required: false, number: true }, edittype: 'text',
 
                                 searchoptions: { sopt: ['bw', 'cn', 'eq'], clearSearch: false },
@@ -2020,7 +2022,7 @@ Arroyo Seco (Sta. Fe) - René Favaloro 726 / (03402) 421-426 - 429-676 / arroyos
 
            
                             {
-                                name: 'Situacion', index: 'Situacion', align: 'left', width: 120, hidden: false, editable: true, edittype: 'select', sortable: false,
+                                name: 'Situacion', index: 'Situacion', align: 'left', width: 130, hidden: false, editable: true, edittype: 'select', sortable: false,
                                 editoptions: {
                                     //defaultValue: OrigenDescripcionDefault,
                                     //value: "0:Autorizado; 6:Desviado" 
@@ -2037,6 +2039,9 @@ Arroyo Seco (Sta. Fe) - René Favaloro 726 / (03402) 421-426 - 429-676 / arroyos
 
                             },
 
+
+
+                            { name: 'infohtml', index: 'infohtml', align: 'left', width: 100, editable: true, hidden: true, sortable: false },
 
 
 
@@ -2252,7 +2257,21 @@ Arroyo Seco (Sta. Fe) - René Favaloro 726 / (03402) 421-426 - 429-676 / arroyos
 
                             var html = '<ul data-dtr-index="0" class="dtr-details"><li data-dtr-index="4" data-dt-row="0" data-dt-column="4"><span class="dtr-title"><a href="">Titular</a></span> <span class="dtr-data"><span>Martignone Adolfo Y Cia  S C A </span></span></li><li data-dtr-index="5" data-dt-row="0" data-dt-column="5"><span class="dtr-title">Intermed.</span> <span class="dtr-data"><span></span></span></li><li data-dtr-index="6" data-dt-row="0" data-dt-column="6"><span class="dtr-title">Remitente Comercial</span> <span class="dtr-data"><span>Granos Olavarria S A </span></span></li><li data-dtr-index="7" data-dt-row="0" data-dt-column="7"><span class="dtr-title"><a href="">Corredor</a></span> <span class="dtr-data"><span>Futuros Y Opciones Com S A </span></span></li><li data-dtr-index="8" data-dt-row="0" data-dt-column="8"><span class="dtr-title">Esp.</span> <span class="dtr-data"><span>Soja Sustentable Usa</span></span></li><li data-dtr-index="9" data-dt-row="0" data-dt-column="9"><span class="dtr-title"><a href="">Destino</a><img title="Orden:Asc" src="/WebResource.axd?d=olQ67zyJIM4n9M_oCjYGRrTv0D-PJFdyCfA8P30v3DAazZ2pPF9qhxbM3BGjwDU_sj9fOg-6w-QRXWlBrrBXHMoHlpC6GPd2JFlMFkPtMfvCFUjqHNl-emkH6wLPSw2q0&amp;t=636426523640000000" alt="Orden:Asc" align="absbottom"></span> <span class="dtr-data">FCA VICENTIN</span></li><li data-dtr-index="10" data-dt-row="0" data-dt-column="10"><span class="dtr-title">Destinat.</span> <span class="dtr-data"><span>Vicentin S A I C</span></span></li><li data-dtr-index="11" data-dt-row="0" data-dt-column="11"><span class="dtr-title">Analisis</span> <span class="dtr-data"><span>DÑ:12.00% HD:13.20%  </span></span></li><li data-dtr-index="12" data-dt-row="0" data-dt-column="12"><span class="dtr-title">Patente</span> <span class="dtr-data">ERT783</span></li><li data-dtr-index="13" data-dt-row="0" data-dt-column="13"><span class="dtr-title">Obs Pto</span> <span class="dtr-data">&nbsp;</span></li><li data-dtr-index="14" data-dt-row="0" data-dt-column="14"><span class="dtr-title">Procedencia</span> <span class="dtr-data"><span>Villa Lila</span></span></li><li data-dtr-index="15" data-dt-row="0" data-dt-column="15"><span class="dtr-title">Entreg</span> <span class="dtr-data"><span>Wil</span></span></li><li data-dtr-index="16" data-dt-row="0" data-dt-column="16"><span class="dtr-title">Entreg CP</span> <span class="dtr-data"><span></span></span></li></ul>'
 
-                            $("#" + subgrid_id).append(html);
+                            
+
+                          
+
+                            var dataFromTheRow = $("#Lista").jqGrid('getRowData', row_id);
+
+
+
+                            $("#" + subgrid_id).append(dataFromTheRow.infohtml);
+                            //$("#" + subgrid_id).append(html);
+
+                        },
+
+                        onSelectRow: function (rowId) {
+                            $("#Lista").jqGrid('toggleSubGridRow', rowId);
                         },
 
                         //onSelectRow: function (id) { 
