@@ -1996,7 +1996,7 @@ Arroyo Seco (Sta. Fe) - René Favaloro 726 / (03402) 421-426 - 429-676 / arroyos
                             { name: ' IdCartasDePorte', index: ' IdCartasDePorte', align: 'left', width: 100, editable: false, hidden: true, frozen: true },
 
                             {
-                                name: 'NumeroCartaEnTextoParaBusqueda', index: 'NumeroCartaEnTextoParaBusqueda', width: 100, align: 'left', sorttype: "text", sortable: false, frozen: true
+                                name: 'NumeroCartaEnTextoParaBusqueda', index: 'NumeroCartaEnTextoParaBusqueda', width: 110, align: 'left', sorttype: "text", sortable: false, frozen: true
                                 , editable: false, editrules: { required: false, number: true }, edittype: 'text',
 
                                 searchoptions: { sopt: ['bw', 'cn', 'eq'], clearSearch: false },
@@ -2270,13 +2270,13 @@ Arroyo Seco (Sta. Fe) - René Favaloro 726 / (03402) 421-426 - 429-676 / arroyos
 
 
 
-                        onCellSelect: function (rowid, iCol, cellcontent, e) {
-                            var $this = $(this);
-                            var iRow = $('#' + $.jgrid.jqID(rowid))[0].rowIndex;
-                            lastSelectedId = rowid;
-                            lastSelectediCol = iCol;
-                            lastSelectediRow = iRow;
-                        },
+                        //onCellSelect: function (rowid, iCol, cellcontent, e) {
+                        //    var $this = $(this);
+                        //    var iRow = $('#' + $.jgrid.jqID(rowid))[0].rowIndex;
+                        //    lastSelectedId = rowid;
+                        //    lastSelectediCol = iCol;
+                        //    lastSelectediRow = iRow;
+                        //},
                         afterEditCell: function (id, name, val, iRow, iCol) {
                             //if (name == 'Fecha') {
                             //    jQuery("#" + iRow + "_Fecha", "#Lista").datepicker({ dateFormat: "dd/mm/yy" });
@@ -2314,7 +2314,8 @@ Arroyo Seco (Sta. Fe) - René Favaloro 726 / (03402) 421-426 - 429-676 / arroyos
                         shrinkToFit: false,
 
                         width: $(window).width() - 4, // 310, //'auto',
-                        height: '100%', //$(window).height() - 260, // '100%'
+                        height: 'auto', // '100%', //$(window).height() - 260, // '100%'
+
                         altRows: false,
                         footerrow: false,
                         userDataOnFooter: true,
