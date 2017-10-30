@@ -1,0 +1,392 @@
+
+Log Entry : 
+10/30/2017 16:51:33
+Error in: http://localhost:50769/ProntoWeb/CartaPorteMovil.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartaPorteMovil.BindTypeDropDown() en C:\bdl\pronto\prontoweb\ProntoWeb\CartaPorteMovil.aspx.vb:línea 167
+App_Web_cartaportemovil.aspx.4199bbd4.1bmqtjyj
+__________________________
+
+Log Entry : 
+10/30/2017 16:57:25
+Error in: http://localhost:50769/ProntoWeb/SituacionCalidadMovil.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en SituacionCalidadMovil.BindTypeDropDown() en C:\bdl\pronto\prontoweb\ProntoWeb\SituacionCalidadMovil.aspx.vb:línea 171
+App_Web_situacioncalidadmovil.aspx.4199bbd4.08yy5guv
+__________________________
+
+Log Entry : 
+10/30/2017 16:58:19
+Error in: http://localhost:50769/ProntoWeb/SituacionCalidadMovil.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en SituacionCalidadMovil.BindTypeDropDown() en C:\bdl\pronto\prontoweb\ProntoWeb\SituacionCalidadMovil.aspx.vb:línea 171
+App_Web_situacioncalidadmovil.aspx.4199bbd4.k4a9mmcg
+__________________________
+
+Log Entry : 
+10/30/2017 17:02:41
+Error in: http://localhost:50769/ProntoWeb/SituacionCalidadMovil.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en SituacionCalidadMovil.BindTypeDropDown() en C:\bdl\pronto\prontoweb\ProntoWeb\SituacionCalidadMovil.aspx.vb:línea 171
+App_Web_situacioncalidadmovil.aspx.4199bbd4.vpedh2rx
+__________________________
+
+Log Entry : 
+10/30/2017 17:03:15
+Error in: http://localhost:50769/ProntoWeb/SituacionCalidadMovil.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en SituacionCalidadMovil.BindTypeDropDown() en C:\bdl\pronto\prontoweb\ProntoWeb\SituacionCalidadMovil.aspx.vb:línea 171
+App_Web_situacioncalidadmovil.aspx.4199bbd4.aqkkgqnq
+__________________________
+
+Log Entry : 
+10/30/2017 17:04:05
+Error in: http://localhost:50769/ProntoWeb/SituacionCalidadMovil.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en SituacionCalidadMovil.BindTypeDropDown() en C:\bdl\pronto\prontoweb\ProntoWeb\SituacionCalidadMovil.aspx.vb:línea 171
+App_Web_situacioncalidadmovil.aspx.4199bbd4.fhe_2d_f
+__________________________
+
+Log Entry : 
+10/30/2017 17:04:17
+Error in: http://localhost:50769/ProntoWeb/SituacionCalidadMovil.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en SituacionCalidadMovil.BindTypeDropDown() en C:\bdl\pronto\prontoweb\ProntoWeb\SituacionCalidadMovil.aspx.vb:línea 171
+App_Web_situacioncalidadmovil.aspx.4199bbd4.kup7l9gd
+__________________________
+
+Log Entry : 
+10/30/2017 17:04:33
+Error in: http://localhost:50769/ProntoWeb/SituacionCalidadMovil.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en SituacionCalidadMovil.BindTypeDropDown() en C:\bdl\pronto\prontoweb\ProntoWeb\SituacionCalidadMovil.aspx.vb:línea 171
+App_Web_situacioncalidadmovil.aspx.4199bbd4.mkd4za2m
+__________________________
+
+Log Entry : 
+10/30/2017 17:05:39
+Error in: http://localhost:50769/ProntoWeb/SituacionCalidadMovil.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en SituacionCalidadMovil.BindTypeDropDown() en C:\bdl\pronto\prontoweb\ProntoWeb\SituacionCalidadMovil.aspx.vb:línea 171
+App_Web_situacioncalidadmovil.aspx.4199bbd4.kz1kl5_0
+__________________________
+
+Log Entry : 
+10/30/2017 17:05:46
+Error in: http://localhost:50769/ProntoWeb/CartaDePorte.aspx?Id=2952566. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartadeporteABM.BindTypeDropDown() en C:\bdl\pronto\prontoweb\ProntoWeb\Cartadeporte.aspx.vb:línea 910
+App_Web_cartadeporte.aspx.4199bbd4._yeaeetp
+__________________________
+
+Log Entry : 
+10/30/2017 17:05:51
+Error in: http://localhost:50769/ProntoWeb/CartaDePorte.aspx?Id=2952566. Error Message:La carta numero 562377233 id=2952566 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+10/30/2017 17:07:21
+Error in: http://localhost:50769/ProntoWeb/CartaDePorte.aspx?Id=2646641. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartadeporteABM.BindTypeDropDown() en C:\bdl\pronto\prontoweb\ProntoWeb\Cartadeporte.aspx.vb:línea 910
+App_Web_cartadeporte.aspx.4199bbd4._yeaeetp
+__________________________
+
+Log Entry : 
+10/30/2017 17:07:24
+Error in: http://localhost:50769/ProntoWeb/CartaDePorte.aspx?Id=2646641. Error Message:La carta numero 557071270 id=2646641 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+10/30/2017 17:09:45
+Error in: http://localhost:50769/ProntoWeb/CartaPorteMovil.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartaPorteMovil.BindTypeDropDown() en C:\bdl\pronto\prontoweb\ProntoWeb\CartaPorteMovil.aspx.vb:línea 167
+App_Web_cartaportemovil.aspx.4199bbd4.cw7fjsdw
+__________________________
+
+Log Entry : 
+10/30/2017 17:16:50
+Error in: http://localhost:50769/ProntoWeb/SituacionCalidadMovil.aspx. Error Message:RODRIGORIOS esta logueado, pero lo redirijo al login porque faltan los datos de session. No deberia mejor mandarlo a SeleccionarEmpresa? Ademas, no hago el LogOut y le queda el cookie!!!
+__________________________
+
+Log Entry : 
+10/30/2017 17:16:51
+Error in: http://localhost:50769/ProntoWeb/SituacionCalidadMovil.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en SituacionCalidadMovil.BindTypeDropDown() en C:\bdl\pronto\prontoweb\ProntoWeb\SituacionCalidadMovil.aspx.vb:línea 171
+App_Web_situacioncalidadmovil.aspx.4199bbd4.lct4t7b6
+__________________________
+
+Log Entry : 
+10/30/2017 17:17:26
+Error in: http://localhost:50769/ProntoWeb/SituacionCalidadMovil.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en SituacionCalidadMovil.BindTypeDropDown() en C:\bdl\pronto\prontoweb\ProntoWeb\SituacionCalidadMovil.aspx.vb:línea 171
+App_Web_situacioncalidadmovil.aspx.4199bbd4.zp2qrwxe
+__________________________
+
+Log Entry : 
+10/30/2017 17:18:58
+Error in: http://localhost:50769/ProntoWeb/SituacionCalidadMovil.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en SituacionCalidadMovil.BindTypeDropDown() en C:\bdl\pronto\prontoweb\ProntoWeb\SituacionCalidadMovil.aspx.vb:línea 171
+App_Web_situacioncalidadmovil.aspx.4199bbd4.f9oj3svo
+__________________________
+
+Log Entry : 
+10/30/2017 17:21:34
+Error in: http://localhost:50769/ProntoWeb/SituacionCalidadMovil.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en SituacionCalidadMovil.BindTypeDropDown() en C:\bdl\pronto\prontoweb\ProntoWeb\SituacionCalidadMovil.aspx.vb:línea 171
+App_Web_situacioncalidadmovil.aspx.4199bbd4.4vr8u5qs
+__________________________
+
+Log Entry : 
+10/30/2017 17:21:47
+Error in: http://localhost:50769/ProntoWeb/SituacionCalidadMovil.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en SituacionCalidadMovil.BindTypeDropDown() en C:\bdl\pronto\prontoweb\ProntoWeb\SituacionCalidadMovil.aspx.vb:línea 171
+App_Web_situacioncalidadmovil.aspx.4199bbd4.4vr8u5qs
+__________________________
+
+Log Entry : 
+10/30/2017 17:22:22
+Error in: http://localhost:50769/ProntoWeb/SituacionCalidadMovil.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en SituacionCalidadMovil.BindTypeDropDown() en C:\bdl\pronto\prontoweb\ProntoWeb\SituacionCalidadMovil.aspx.vb:línea 171
+App_Web_situacioncalidadmovil.aspx.4199bbd4.fwnmk2ns
+__________________________
+
+Log Entry : 
+10/30/2017 17:22:59
+Error in: http://localhost:50769/ProntoWeb/SituacionCalidadMovil.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en SituacionCalidadMovil.BindTypeDropDown() en C:\bdl\pronto\prontoweb\ProntoWeb\SituacionCalidadMovil.aspx.vb:línea 171
+App_Web_situacioncalidadmovil.aspx.4199bbd4.6phaqbe1
+__________________________
+
+Log Entry : 
+10/30/2017 17:24:36
+Error in: http://localhost:50769/ProntoWeb/SituacionCalidadMovil.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en SituacionCalidadMovil.BindTypeDropDown() en C:\bdl\pronto\prontoweb\ProntoWeb\SituacionCalidadMovil.aspx.vb:línea 171
+App_Web_situacioncalidadmovil.aspx.4199bbd4.26aurogv
+__________________________
+
+Log Entry : 
+10/30/2017 17:24:51
+Error in: http://localhost:50769/ProntoWeb/CartaDePorte.aspx?Id=2965027. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartadeporteABM.BindTypeDropDown() en C:\bdl\pronto\prontoweb\ProntoWeb\Cartadeporte.aspx.vb:línea 910
+App_Web_cartadeporte.aspx.4199bbd4._yeaeetp
+__________________________
+
+Log Entry : 
+10/30/2017 17:24:54
+Error in: http://localhost:50769/ProntoWeb/CartaDePorte.aspx?Id=2965027. Error Message:La carta numero 562594082 id=2965027 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+10/30/2017 17:25:56
+Error in: http://localhost:50769/ProntoWeb/SituacionCalidadMovil.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en SituacionCalidadMovil.BindTypeDropDown() en C:\bdl\pronto\prontoweb\ProntoWeb\SituacionCalidadMovil.aspx.vb:línea 171
+App_Web_situacioncalidadmovil.aspx.4199bbd4.ofefsvom
+__________________________
+
+Log Entry : 
+10/30/2017 17:30:09
+Error in: http://localhost:50769/ProntoWeb/SituacionCalidadMovil.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en SituacionCalidadMovil.BindTypeDropDown() en C:\bdl\pronto\prontoweb\ProntoWeb\SituacionCalidadMovil.aspx.vb:línea 171
+App_Web_situacioncalidadmovil.aspx.4199bbd4.klpu4976
+__________________________
+
+Log Entry : 
+10/30/2017 17:30:59
+Error in: http://localhost:50769/ProntoWeb/SituacionCalidadMovil.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en SituacionCalidadMovil.BindTypeDropDown() en C:\bdl\pronto\prontoweb\ProntoWeb\SituacionCalidadMovil.aspx.vb:línea 171
+App_Web_situacioncalidadmovil.aspx.4199bbd4.wav7cv4d
+__________________________
+
+Log Entry : 
+10/30/2017 17:32:17
+Error in: http://localhost:50769/ProntoWeb/SituacionCalidadMovil.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en SituacionCalidadMovil.BindTypeDropDown() en C:\bdl\pronto\prontoweb\ProntoWeb\SituacionCalidadMovil.aspx.vb:línea 171
+App_Web_situacioncalidadmovil.aspx.4199bbd4.wav7cv4d
+__________________________
+
+Log Entry : 
+10/30/2017 17:32:21
+Error in: http://localhost:50769/ProntoWeb/SituacionCalidadMovil.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en SituacionCalidadMovil.BindTypeDropDown() en C:\bdl\pronto\prontoweb\ProntoWeb\SituacionCalidadMovil.aspx.vb:línea 171
+App_Web_situacioncalidadmovil.aspx.4199bbd4.wav7cv4d
+__________________________
+
+Log Entry : 
+10/30/2017 17:36:34
+Error in: http://localhost:50769/ProntoWeb/SituacionCalidadMovil.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en SituacionCalidadMovil.BindTypeDropDown() en C:\bdl\pronto\prontoweb\ProntoWeb\SituacionCalidadMovil.aspx.vb:línea 171
+App_Web_situacioncalidadmovil.aspx.4199bbd4.elaybuwg
+__________________________
+
+Log Entry : 
+10/30/2017 17:37:13
+Error in: http://localhost:50769/ProntoWeb/SituacionCalidadMovil.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en SituacionCalidadMovil.BindTypeDropDown() en C:\bdl\pronto\prontoweb\ProntoWeb\SituacionCalidadMovil.aspx.vb:línea 171
+App_Web_situacioncalidadmovil.aspx.4199bbd4.ifwux0iw
+__________________________
+
+Log Entry : 
+10/30/2017 17:38:00
+Error in: http://localhost:50769/ProntoWeb/SituacionCalidadMovil.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en SituacionCalidadMovil.BindTypeDropDown() en C:\bdl\pronto\prontoweb\ProntoWeb\SituacionCalidadMovil.aspx.vb:línea 171
+App_Web_situacioncalidadmovil.aspx.4199bbd4.83r6ucui
+__________________________
+
+Log Entry : 
+10/30/2017 17:38:21
+Error in: http://localhost:50769/ProntoWeb/SituacionCalidadMovil.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en SituacionCalidadMovil.BindTypeDropDown() en C:\bdl\pronto\prontoweb\ProntoWeb\SituacionCalidadMovil.aspx.vb:línea 171
+App_Web_situacioncalidadmovil.aspx.4199bbd4.83r6ucui
+__________________________
+
+Log Entry : 
+10/30/2017 17:39:25
+Error in: http://localhost:50769/ProntoWeb/SituacionCalidadMovil.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en SituacionCalidadMovil.BindTypeDropDown() en C:\bdl\pronto\prontoweb\ProntoWeb\SituacionCalidadMovil.aspx.vb:línea 171
+App_Web_situacioncalidadmovil.aspx.4199bbd4.m9a4nvf8
+__________________________
+
+Log Entry : 
+10/30/2017 17:39:48
+Error in: http://localhost:50769/ProntoWeb/SituacionCalidadMovil.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en SituacionCalidadMovil.BindTypeDropDown() en C:\bdl\pronto\prontoweb\ProntoWeb\SituacionCalidadMovil.aspx.vb:línea 171
+App_Web_situacioncalidadmovil.aspx.4199bbd4.m9a4nvf8
+__________________________
+
+Log Entry : 
+10/30/2017 17:45:16
+Error in: http://localhost:50769/ProntoWeb/SituacionCalidadMovil.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en SituacionCalidadMovil.BindTypeDropDown() en C:\bdl\pronto\prontoweb\ProntoWeb\SituacionCalidadMovil.aspx.vb:línea 171
+App_Web_situacioncalidadmovil.aspx.4199bbd4.mlrgus7-
+__________________________
+
+Log Entry : 
+10/30/2017 17:45:21
+Error in: http://localhost:50769/WebResource.axd?d=olQ67zyJIM4n9M_oCjYGRrTv0D-PJFdyCfA8P30v3DAazZ2pPF9qhxbM3BGjwDU_sj9fOg-6w-QRXWlBrrBXHMoHlpC6GPd2JFlMFkPtMfvCFUjqHNl-emkH6wLPSw2q0&t=636426523640000000. Error Message:System.Web.HttpException
+Ésta es una solicitud de recursos Web no válida.
+   en System.Web.Handlers.AssemblyResourceLoader.System.Web.IHttpHandler.ProcessRequest(HttpContext context)
+   en System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   en System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+System.Web
+__________________________
+
+Log Entry : 
+10/30/2017 17:45:33
+Error in: http://localhost:50769/WebResource.axd?d=olQ67zyJIM4n9M_oCjYGRrTv0D-PJFdyCfA8P30v3DAazZ2pPF9qhxbM3BGjwDU_sj9fOg-6w-QRXWlBrrBXHMoHlpC6GPd2JFlMFkPtMfvCFUjqHNl-emkH6wLPSw2q0&t=636426523640000000. Error Message:System.Web.HttpException
+Ésta es una solicitud de recursos Web no válida.
+   en System.Web.Handlers.AssemblyResourceLoader.System.Web.IHttpHandler.ProcessRequest(HttpContext context)
+   en System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   en System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+System.Web
+__________________________
+
+Log Entry : 
+10/30/2017 17:45:35
+Error in: http://localhost:50769/WebResource.axd?d=olQ67zyJIM4n9M_oCjYGRrTv0D-PJFdyCfA8P30v3DAazZ2pPF9qhxbM3BGjwDU_sj9fOg-6w-QRXWlBrrBXHMoHlpC6GPd2JFlMFkPtMfvCFUjqHNl-emkH6wLPSw2q0&t=636426523640000000. Error Message:System.Web.HttpException
+Ésta es una solicitud de recursos Web no válida.
+   en System.Web.Handlers.AssemblyResourceLoader.System.Web.IHttpHandler.ProcessRequest(HttpContext context)
+   en System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   en System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+System.Web
+__________________________
+
+Log Entry : 
+10/30/2017 17:46:17
+Error in: http://localhost:50769/WebResource.axd?d=olQ67zyJIM4n9M_oCjYGRrTv0D-PJFdyCfA8P30v3DAazZ2pPF9qhxbM3BGjwDU_sj9fOg-6w-QRXWlBrrBXHMoHlpC6GPd2JFlMFkPtMfvCFUjqHNl-emkH6wLPSw2q0&t=636426523640000000. Error Message:System.Web.HttpException
+Ésta es una solicitud de recursos Web no válida.
+   en System.Web.Handlers.AssemblyResourceLoader.System.Web.IHttpHandler.ProcessRequest(HttpContext context)
+   en System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   en System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+System.Web
+__________________________
+
+Log Entry : 
+10/30/2017 17:46:17
+Error in: http://localhost:50769/WebResource.axd?d=olQ67zyJIM4n9M_oCjYGRrTv0D-PJFdyCfA8P30v3DAazZ2pPF9qhxbM3BGjwDU_sj9fOg-6w-QRXWlBrrBXHMoHlpC6GPd2JFlMFkPtMfvCFUjqHNl-emkH6wLPSw2q0&t=636426523640000000. Error Message:System.Web.HttpException
+Ésta es una solicitud de recursos Web no válida.
+   en System.Web.Handlers.AssemblyResourceLoader.System.Web.IHttpHandler.ProcessRequest(HttpContext context)
+   en System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   en System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+System.Web
+__________________________
+
+Log Entry : 
+10/30/2017 17:46:19
+Error in: http://localhost:50769/WebResource.axd?d=olQ67zyJIM4n9M_oCjYGRrTv0D-PJFdyCfA8P30v3DAazZ2pPF9qhxbM3BGjwDU_sj9fOg-6w-QRXWlBrrBXHMoHlpC6GPd2JFlMFkPtMfvCFUjqHNl-emkH6wLPSw2q0&t=636426523640000000. Error Message:System.Web.HttpException
+Ésta es una solicitud de recursos Web no válida.
+   en System.Web.Handlers.AssemblyResourceLoader.System.Web.IHttpHandler.ProcessRequest(HttpContext context)
+   en System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   en System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+System.Web
+__________________________
+
+Log Entry : 
+10/30/2017 17:46:20
+Error in: http://localhost:50769/WebResource.axd?d=olQ67zyJIM4n9M_oCjYGRrTv0D-PJFdyCfA8P30v3DAazZ2pPF9qhxbM3BGjwDU_sj9fOg-6w-QRXWlBrrBXHMoHlpC6GPd2JFlMFkPtMfvCFUjqHNl-emkH6wLPSw2q0&t=636426523640000000. Error Message:System.Web.HttpException
+Ésta es una solicitud de recursos Web no válida.
+   en System.Web.Handlers.AssemblyResourceLoader.System.Web.IHttpHandler.ProcessRequest(HttpContext context)
+   en System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   en System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+System.Web
+__________________________
+
+Log Entry : 
+10/30/2017 17:46:30
+Error in: http://localhost:50769/WebResource.axd?d=olQ67zyJIM4n9M_oCjYGRrTv0D-PJFdyCfA8P30v3DAazZ2pPF9qhxbM3BGjwDU_sj9fOg-6w-QRXWlBrrBXHMoHlpC6GPd2JFlMFkPtMfvCFUjqHNl-emkH6wLPSw2q0&t=636426523640000000. Error Message:System.Web.HttpException
+Ésta es una solicitud de recursos Web no válida.
+   en System.Web.Handlers.AssemblyResourceLoader.System.Web.IHttpHandler.ProcessRequest(HttpContext context)
+   en System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   en System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+System.Web
+__________________________
+
+Log Entry : 
+10/30/2017 17:46:33
+Error in: http://localhost:50769/WebResource.axd?d=olQ67zyJIM4n9M_oCjYGRrTv0D-PJFdyCfA8P30v3DAazZ2pPF9qhxbM3BGjwDU_sj9fOg-6w-QRXWlBrrBXHMoHlpC6GPd2JFlMFkPtMfvCFUjqHNl-emkH6wLPSw2q0&t=636426523640000000. Error Message:System.Web.HttpException
+Ésta es una solicitud de recursos Web no válida.
+   en System.Web.Handlers.AssemblyResourceLoader.System.Web.IHttpHandler.ProcessRequest(HttpContext context)
+   en System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   en System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+System.Web
+__________________________
+
+Log Entry : 
+10/30/2017 17:46:54
+Error in: http://localhost:50769/ProntoWeb/SituacionCalidadMovil.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en SituacionCalidadMovil.BindTypeDropDown() en C:\bdl\pronto\prontoweb\ProntoWeb\SituacionCalidadMovil.aspx.vb:línea 171
+App_Web_situacioncalidadmovil.aspx.4199bbd4.mlrgus7-
+__________________________
+
+Log Entry : 
+10/30/2017 17:47:53
+Error in: http://localhost:50769/WebResource.axd?d=olQ67zyJIM4n9M_oCjYGRrTv0D-PJFdyCfA8P30v3DAazZ2pPF9qhxbM3BGjwDU_sj9fOg-6w-QRXWlBrrBXHMoHlpC6GPd2JFlMFkPtMfvCFUjqHNl-emkH6wLPSw2q0&t=636426523640000000. Error Message:System.Web.HttpException
+Ésta es una solicitud de recursos Web no válida.
+   en System.Web.Handlers.AssemblyResourceLoader.System.Web.IHttpHandler.ProcessRequest(HttpContext context)
+   en System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   en System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+System.Web
+__________________________
