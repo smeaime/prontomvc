@@ -229,13 +229,13 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
                             </td>
                             <td>
-                                <asp:Image ID="Image2" runat="server" ImageUrl="~/Imagenes/williamsmini.gif" CssClass="" Height="60px" ImageAlign="AbsBottom" />
+                                <asp:Image ID="Image2" runat="server" ImageUrl="~/Imagenes/williamsmini.gif" CssClass="" Height="55px" ImageAlign="AbsBottom"  />
                             </td>
                         </tr>
 
-                        <tr>
+                        <tr style=" margin-top: 7px;">
 
-                            <td colspan="3" class="" style="width: ; height: ; vertical-align: bottom !important; margin-top: 3px;">
+                            <td colspan="3" class="" style="width: ; height: ; vertical-align: bottom !important;">
 
 
 
@@ -1973,7 +1973,7 @@ Arroyo Seco (Sta. Fe) - René Favaloro 726 / (03402) 421-426 - 429-676 / arroyos
                         // CP	TURNO	SITUACION	MERC	TITULAR_CP	INTERMEDIARIO	RTE CIAL	CORREDOR	DESTINATARIO	DESTINO	ENTREGADOR	PROC	KILOS	OBSERVACION
 
 
-                        colNames: ['', 'Id', 'Nro CP', 'Situacion' ,'dat'
+                        colNames: ['', 'Id', 'Nro CP', 'Situación' ,'dat'
 
 
 
@@ -2026,13 +2026,13 @@ Arroyo Seco (Sta. Fe) - René Favaloro 726 / (03402) 421-426 - 429-676 / arroyos
                                 editoptions: {
                                     //defaultValue: OrigenDescripcionDefault,
                                     //value: "0:Autorizado; 6:Desviado" 
-                                    value: "0:Autorizado; 1:Demorado; 2:Posicion; 3:Descargado; 4:A Descargar; 5:Rechazado;6:Desviado;7:CP p/cambiar;8:Sin Cupo;9:Calado"
+                                    value: "0:Autorizado; 1:Demorado; 2:Posición; 3:Descargado; 4:A Descargar; 5:Rechazado;6:Desviado;7:CP p/cambiar;8:Sin Cupo;9:Calado"
                                 },
                                 // http://stackoverflow.com/questions/5328072/can-jqgrid-support-dropdowns-in-the-toolbar-filter-fields
                                 formatter: 'select', stype: 'select',
                                 searchoptions: {
                                     sopt: ['eq'],
-                                    value: ":Todos; 0:Autorizado; 1:Demorado; 2:Posicion; 3:Descargado; 4:A Descargar; 5:Rechazado;6:Desviado;7:CP p/cambiar;8:Sin Cupo;9:Calado"
+                                    value: ":Todos; 0:Autorizado; 1:Demorado; 2:Posición; 3:Descargado; 4:A Descargar; 5:Rechazado;6:Desviado;7:CP p/cambiar;8:Sin Cupo;9:Calado"
                                     , clearSearch: false
                                 }
 
