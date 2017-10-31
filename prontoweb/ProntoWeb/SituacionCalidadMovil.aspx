@@ -1995,7 +1995,7 @@ Arroyo Seco (Sta. Fe) - René Favaloro 726 / (03402) 421-426 - 429-676 / arroyos
                                 name: 'act', index: 'act', align: 'center', width: 60, editable: false, hidden: true, sortable: false, frozen: true, search: false
                             },
 
-                            { name: ' IdCartasDePorte', index: ' IdCartasDePorte', align: 'left', width: 100, editable: false, hidden: true, frozen: true },
+                            { name: ' IdCartaDePorte', index: ' IdCartaDePorte', align: 'left', width: 100, editable: false, hidden: true, frozen: true },
 
                             {
                                 name: 'NumeroCartaEnTextoParaBusqueda', index: 'NumeroCartaEnTextoParaBusqueda', width: 140, align: 'left', sorttype: "text", sortable: false, frozen: true
@@ -2745,23 +2745,67 @@ Arroyo Seco (Sta. Fe) - René Favaloro 726 / (03402) 421-426 - 429-676 / arroyos
                             //$("#" + subgrid_id).append(dataFromTheRow.Producto);
 
 
+
+                            // value: "0:Autorizado; 1:Demorado; 2:Posición; 3:Descargado; 4:A Descargar; 5:Rechazado;6:Desviado;7:CP p/cambiar;8:Sin Cupo;9:Calado"
+
+                            //alert(a.Situacion);
+
+                            var situacionDesc = "";
+                            switch (parseInt(a.Situacion))
+                            {
+                                case 0:
+                                    situacionDesc = "Autorizado";
+                                    break;
+                                case 1:
+                                    situacionDesc = "Demorado";
+                                    break;
+                                case 2:
+                                    situacionDesc = "Posición";
+                                    break;
+                                case 3:
+                                    situacionDesc = "Descargado";
+                                    break;
+                                case 4:
+                                    situacionDesc = "A Descargar";
+                                    break;
+                                case 5:
+                                    situacionDesc = "Rechazado";
+                                    break;
+                                case 6:
+                                    situacionDesc = "Desviado";
+                                    break;
+                                case 7:
+                                    situacionDesc = "CP p/cambiar";
+                                    break;
+                                case 8:
+                                    situacionDesc = "Sin Cupo";
+                                    break;
+                                case 9:
+                                    situacionDesc = "Calado";
+                                    break;
+                                default:
+                                    situacionDesc = "adsfasf";
+
+                            }
+                                
+                            
                             
 
                             var html = "<span style='font-size: 14px'> " +
-                                "<b>Situacion</b> " + a.Situacion +
-                                "<br/><b>Obs</b> " + a.ObservacionesSituacion +
-                                "<br/>" + a.Producto +
-                                "<br/>" + a.TitularDesc +
-                                "<br/>" + a.IntermediarioDesc +
-                                "<br/>" + a.RComercialDesc +
-                                "<br/>" + a.CorredorDesc +
-                                "<br/>" + a.DestinatarioDesc +
-                                "<br/>" + a.DestinoDesc +
-                                "<br/>" + a.Patente +
-                                "<br/>" + a.NetoPto +
-                                "<br/>" + a.FechaArribo +
-                                "<br/>" + a.FechaDescarga +
-                                "<a href=\"CartaDePorte.aspx?Id=" + a.IdCartaDePorte + "\"  target=\"_blank\" > Imagenes </>" +
+                                "<br/><b>Situación</b>      " + situacionDesc +
+                                "<br/><b>Observaciones</b>            " + a.ObservacionesSituacion +
+                                "<br/><b>Producto</b>       " + a.Producto +
+                                "<br/><b>Titular</b>            " + a.TitularDesc +
+                                "<br/><b>Intermediario</b>            " + a.IntermediarioDesc +
+                                "<br/><b>R.Comercial</b>            " + a.RComercialDesc +
+                                "<br/><b>Corredor</b>            " + a.CorredorDesc +
+                                "<br/><b>Destinatario</b>            " + a.DestinatarioDesc +
+                                "<br/><b>Destino</b>  " + a.DestinoDesc +
+                                "<br/><b>Patente</b>  " + a.Patente +
+                                "<br/><b>Neto</b>  " + a.NetoPto +
+                                "<br/><b>Arribo</b>  " + a.FechaArribo +
+                                "<br/><b>Descarga</b>  " + a.FechaDescarga +
+                                "<br/><br/><a href=\"CartaDePorte.aspx?Id=" + a.IdCartaDePorte + "\"  target=\"_blank\" > ver carta </>" +
                                 "<span/>";
 
                             $("#" + subgrid_id).append(html);
@@ -3034,7 +3078,7 @@ Arroyo Seco (Sta. Fe) - René Favaloro 726 / (03402) 421-426 - 429-676 / arroyos
 
 
                 $(window).resize(function () {
-                    //$('#Lista').jqGrid('setGridWidth', $(window).width() - 40);
+                    $('#Lista').jqGrid('setGridWidth', $(window).width() - 4);
                     //RefrescaAnchoJqgrids();
                 });
 
