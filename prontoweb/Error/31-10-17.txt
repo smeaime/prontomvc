@@ -31,3 +31,8 @@ Log Entry :
 10/31/2017 10:12:17
 Error in: http://localhost:50769/ProntoWeb/SituacionCalidadMovil.aspx. Error Message:Mariano esta logueado, pero lo redirijo al login porque faltan los datos de session. No deberia mejor mandarlo a SeleccionarEmpresa? Ademas, no hago el LogOut y le queda el cookie!!!
 __________________________
+
+Log Entry : 
+10/31/2017 10:41:18
+Error in: http://localhost:50769/ProntoWeb/SituacionCalidadMovil.aspx. Error Message:Mariano esta logueado, pero lo redirijo al login porque faltan los datos de session. No deberia mejor mandarlo a SeleccionarEmpresa? Ademas, no hago el LogOut y le queda el cookie!!!
+__________________________
