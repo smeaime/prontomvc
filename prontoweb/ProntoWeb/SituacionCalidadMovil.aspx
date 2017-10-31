@@ -1973,14 +1973,14 @@ Arroyo Seco (Sta. Fe) - René Favaloro 726 / (03402) 421-426 - 429-676 / arroyos
                         // CP	TURNO	SITUACION	MERC	TITULAR_CP	INTERMEDIARIO	RTE CIAL	CORREDOR	DESTINATARIO	DESTINO	ENTREGADOR	PROC	KILOS	OBSERVACION
 
 
-                        colNames: ['', 'Id', 'Nro CP', 'Situación' ,'dat'
+                        colNames: ['', 'Id', 'Nro CP', 'Situación' ,'infohtml'
 
 
 
-                            //, 'Obs Situacion',
-                            //'Producto', 'Titular', 'Intermediario', 'R Comercial', 'Corredor',
-                            //'Destinatario', 'Destino', 'IdDestino', 'Patente',
-                            //'Kilos Procedencia', 'Arribo', 'Descarga', 'Punto Venta'
+                            , 'Obs Situacion',
+                            'Producto', 'Titular', 'Intermediario', 'R Comercial', 'Corredor',
+                            'Destinatario', 'Destino', 'IdDestino', 'Patente',
+                            'Kilos Procedencia', 'Arribo', 'Descarga', 'Punto Venta'
                             
                         ],
 
@@ -1998,7 +1998,7 @@ Arroyo Seco (Sta. Fe) - René Favaloro 726 / (03402) 421-426 - 429-676 / arroyos
                             { name: ' IdCartasDePorte', index: ' IdCartasDePorte', align: 'left', width: 100, editable: false, hidden: true, frozen: true },
 
                             {
-                                name: 'NumeroCartaEnTextoParaBusqueda', index: 'NumeroCartaEnTextoParaBusqueda', width: 130, align: 'left', sorttype: "text", sortable: false, frozen: true
+                                name: 'NumeroCartaEnTextoParaBusqueda', index: 'NumeroCartaEnTextoParaBusqueda', width: 140, align: 'left', sorttype: "text", sortable: false, frozen: true
                                 , editable: false, editrules: { required: false, number: true }, edittype: 'text',
 
                                 searchoptions: { sopt: ['bw', 'cn', 'eq'], clearSearch: false },
@@ -2020,7 +2020,9 @@ Arroyo Seco (Sta. Fe) - René Favaloro 726 / (03402) 421-426 - 429-676 / arroyos
                                 }
                             },
 
-           
+
+
+
                             {
                                 name: 'Situacion', index: 'Situacion', align: 'left', width: 130, hidden: false, editable: true, edittype: 'select', sortable: false,
                                 editoptions: {
@@ -2045,168 +2047,642 @@ Arroyo Seco (Sta. Fe) - René Favaloro 726 / (03402) 421-426 - 429-676 / arroyos
 
 
 
-                            //{ name: 'ObservacionesSituacion', index: 'ObservacionesSituacion', align: 'left', width: 100, editable: true, hidden: false, sortable: false },
+                            { name: 'ObservacionesSituacion', index: 'ObservacionesSituacion', align: 'left', width: 100, editable: true, hidden: false, sortable: false },
 
                           
 
 
 
-                            //{
-                            //    name: 'Producto', index: 'Producto', align: 'left', width: 60, hidden: false, editable: false, edittype: 'text', sortable: false
+                            {
+                                name: 'Producto', index: 'Producto', align: 'left', width: 60, hidden: false, editable: false, edittype: 'text', sortable: false
 
-                            //    , searchoptions: {
-                            //        //    sopt:['eq'], 
-                            //        dataInit: function (elem) {
-                            //            var NoResultsLabel = "No se encontraron resultados";
-
-
-                            //            $(elem).autocomplete({
-
-                            //                select: function (event, ui) {
-                            //                    $(elem).trigger('change');
-                            //                },
+                                , searchoptions: {
+                                    //    sopt:['eq'], 
+                                    dataInit: function (elem) {
+                                        var NoResultsLabel = "No se encontraron resultados";
 
 
-                            //                source: function (request, response) {
-                            //                    $.ajax({
-                            //                        type: "POST",
-                            //                        url: "WebServiceClientes.asmx/GetProductos",
-                            //                        dataType: "json",
-                            //                        contentType: "application/json; charset=utf-8",
+                                        $(elem).autocomplete({
 
-                            //                        data: JSON.stringify({
-                            //                            term: request.term
-                            //                            //, idpuntoventa: function () { return $("#ctl00_ContentPlaceHolder1_txtFechaHasta").val(); }
-                            //                        }),
+                                            select: function (event, ui) {
+                                                $(elem).trigger('change');
+                                            },
 
 
-                            //                        success: function (data2) {
-                            //                            var data = JSON.parse(data2.d) // por qué tengo que usar parse?
+                                            source: function (request, response) {
+                                                $.ajax({
+                                                    type: "POST",
+                                                    url: "WebServiceClientes.asmx/GetProductos",
+                                                    dataType: "json",
+                                                    contentType: "application/json; charset=utf-8",
 
-                            //                            //if (data.length == 1 || data.length > 1) { // qué pasa si encuentra más de uno?????
-                            //                            //    var ui = data[0];
-
-                            //                            //    if (ui.id == "") {
-                            //                            //        alert("No existe el artículo"); // se está bancando que no sea identica la descripcion
-                            //                            //        $("#Descripcion").val("");
-                            //                            //        return;
-                            //                            //    }
-                            //                            //    $("#IdWilliamsDestino").val(ui.id);
-
-                            //                            //    UltimoIdArticulo = ui.id;
-                            //                            //}
-                            //                            //else {
-                            //                            //    alert("No existe el artículo"); // se está bancando que no sea identica la descripcion
-                            //                            //}
-
-                            //                            response($.map(data, function (item) {
-                            //                                return {
-                            //                                    label: item.value,
-                            //                                    value: item.value //item.id
-                            //                                    , id: item.id
-                            //                                }
-                            //                            }));
-
-                            //                        }
+                                                    data: JSON.stringify({
+                                                        term: request.term
+                                                        //, idpuntoventa: function () { return $("#ctl00_ContentPlaceHolder1_txtFechaHasta").val(); }
+                                                    }),
 
 
+                                                    success: function (data2) {
+                                                        var data = JSON.parse(data2.d) // por qué tengo que usar parse?
 
-                            //                    })
+                                                        //if (data.length == 1 || data.length > 1) { // qué pasa si encuentra más de uno?????
+                                                        //    var ui = data[0];
 
+                                                        //    if (ui.id == "") {
+                                                        //        alert("No existe el artículo"); // se está bancando que no sea identica la descripcion
+                                                        //        $("#Descripcion").val("");
+                                                        //        return;
+                                                        //    }
+                                                        //    $("#IdWilliamsDestino").val(ui.id);
 
-                            //                }
+                                                        //    UltimoIdArticulo = ui.id;
+                                                        //}
+                                                        //else {
+                                                        //    alert("No existe el artículo"); // se está bancando que no sea identica la descripcion
+                                                        //}
 
+                                                        response($.map(data, function (item) {
+                                                            return {
+                                                                label: item.value,
+                                                                value: item.value //item.id
+                                                                , id: item.id
+                                                            }
+                                                        }));
 
-                            //            });
+                                                    }
 
 
 
+                                                })
 
 
-
-                            //        }
-                            //        , clearSearch: false
-                            //    }
-
-                            //},
-                            //{
-                            //    name: 'TitularDesc', index: 'TitularDesc', align: 'left', width: 100, hidden: false, editable: false, edittype: 'text', sortable: false
+                                            }
 
 
-                            //    , searchoptions: {
-                            //        //    sopt:['eq'], 
-                            //        dataInit: function (elem) {
-                            //            var NoResultsLabel = "No se encontraron resultados";
-
-
-                            //            $(elem).autocomplete({
-
-                            //                select: function (event, ui) {
-                            //                    $(elem).trigger('change');
-                            //                },
-
-
-                            //                source: function (request, response) {
-                            //                    $.ajax({
-                            //                        type: "POST",
-                            //                        url: "WebServiceClientes.asmx/GetClientes",
-                            //                        dataType: "json",
-                            //                        contentType: "application/json; charset=utf-8",
-
-                            //                        data: JSON.stringify({
-                            //                            term: request.term
-                            //                            //, idpuntoventa: function () { return $("#ctl00_ContentPlaceHolder1_txtFechaHasta").val(); }
-                            //                        }),
-
-
-                            //                        success: function (data2) {
-                            //                            var data = JSON.parse(data2.d) // por qué tengo que usar parse?
-
-                            //                            //if (data.length == 1 || data.length > 1) { // qué pasa si encuentra más de uno?????
-                            //                            //    var ui = data[0];
-
-                            //                            //    if (ui.id == "") {
-                            //                            //        alert("No existe el artículo"); // se está bancando que no sea identica la descripcion
-                            //                            //        $("#Descripcion").val("");
-                            //                            //        return;
-                            //                            //    }
-                            //                            //    $("#IdWilliamsDestino").val(ui.id);
-
-                            //                            //    UltimoIdArticulo = ui.id;
-                            //                            //}
-                            //                            //else {
-                            //                            //    alert("No existe el artículo"); // se está bancando que no sea identica la descripcion
-                            //                            //}
-
-                            //                            response($.map(data, function (item) {
-                            //                                return {
-                            //                                    label: item.value,
-                            //                                    value: item.value //item.id
-                            //                                    , id: item.id
-                            //                                }
-                            //                            }));
-
-                            //                        }
-
-
-
-                            //                    })
-
-
-                            //                }
-
-
-                            //            });
+                                        });
 
 
 
 
 
 
-                            //        }
-                            //    }
+                                    }
+                                    , clearSearch: false
+                                }
 
-                            //},
+                            },
+
+
+
+                            {
+                                name: 'TitularDesc', index: 'TitularDesc', align: 'left', width: 100, hidden: false, editable: false, edittype: 'text', sortable: false
+
+
+                                , searchoptions: {
+                                    //    sopt:['eq'], 
+                                    dataInit: function (elem) {
+                                        var NoResultsLabel = "No se encontraron resultados";
+
+
+                                        $(elem).autocomplete({
+
+                                            select: function (event, ui) {
+                                                $(elem).trigger('change');
+                                            },
+
+
+                                            source: function (request, response) {
+                                                $.ajax({
+                                                    type: "POST",
+                                                    url: "WebServiceClientes.asmx/GetClientes",
+                                                    dataType: "json",
+                                                    contentType: "application/json; charset=utf-8",
+
+                                                    data: JSON.stringify({
+                                                        term: request.term
+                                                        //, idpuntoventa: function () { return $("#ctl00_ContentPlaceHolder1_txtFechaHasta").val(); }
+                                                    }),
+
+
+                                                    success: function (data2) {
+                                                        var data = JSON.parse(data2.d) // por qué tengo que usar parse?
+
+                                                        //if (data.length == 1 || data.length > 1) { // qué pasa si encuentra más de uno?????
+                                                        //    var ui = data[0];
+
+                                                        //    if (ui.id == "") {
+                                                        //        alert("No existe el artículo"); // se está bancando que no sea identica la descripcion
+                                                        //        $("#Descripcion").val("");
+                                                        //        return;
+                                                        //    }
+                                                        //    $("#IdWilliamsDestino").val(ui.id);
+
+                                                        //    UltimoIdArticulo = ui.id;
+                                                        //}
+                                                        //else {
+                                                        //    alert("No existe el artículo"); // se está bancando que no sea identica la descripcion
+                                                        //}
+
+                                                        response($.map(data, function (item) {
+                                                            return {
+                                                                label: item.value,
+                                                                value: item.value //item.id
+                                                                , id: item.id
+                                                            }
+                                                        }));
+
+                                                    }
+
+
+
+                                                })
+
+
+                                            }
+
+
+                                        });
+
+
+
+
+
+
+                                    }
+                                }
+
+                            },
+                            {
+                                name: 'IntermediarioDesc', index: 'IntermediarioDesc', align: 'left', width: 60, hidden: false, editable: false, edittype: 'text', sortable: false
+
+                                , searchoptions: {
+                                    //    sopt:['eq'], 
+                                    dataInit: function (elem) {
+                                        var NoResultsLabel = "No se encontraron resultados";
+
+
+                                        $(elem).autocomplete({
+
+                                            select: function (event, ui) {
+                                                $(elem).trigger('change');
+                                            },
+
+
+                                            source: function (request, response) {
+                                                $.ajax({
+                                                    type: "POST",
+                                                    url: "WebServiceClientes.asmx/GetClientes",
+                                                    dataType: "json",
+                                                    contentType: "application/json; charset=utf-8",
+
+                                                    data: JSON.stringify({
+                                                        term: request.term
+                                                        //, idpuntoventa: function () { return $("#ctl00_ContentPlaceHolder1_txtFechaHasta").val(); }
+                                                    }),
+
+
+                                                    success: function (data2) {
+                                                        var data = JSON.parse(data2.d) // por qué tengo que usar parse?
+
+                                                        //if (data.length == 1 || data.length > 1) { // qué pasa si encuentra más de uno?????
+                                                        //    var ui = data[0];
+
+                                                        //    if (ui.id == "") {
+                                                        //        alert("No existe el artículo"); // se está bancando que no sea identica la descripcion
+                                                        //        $("#Descripcion").val("");
+                                                        //        return;
+                                                        //    }
+                                                        //    $("#IdWilliamsDestino").val(ui.id);
+
+                                                        //    UltimoIdArticulo = ui.id;
+                                                        //}
+                                                        //else {
+                                                        //    alert("No existe el artículo"); // se está bancando que no sea identica la descripcion
+                                                        //}
+
+                                                        response($.map(data, function (item) {
+                                                            return {
+                                                                label: item.value,
+                                                                value: item.value //item.id
+                                                                , id: item.id
+                                                            }
+                                                        }));
+
+                                                    }
+
+
+
+                                                })
+
+
+                                            }
+
+
+                                        });
+
+
+
+
+
+
+                                    }
+                                }
+                            },
+                            {
+                                name: 'RComercialDesc', index: 'RComercialDesc', align: 'left', width: 100, hidden: false, editable: false, edittype: 'text', sortable: false
+
+
+                                , searchoptions: {
+                                    //    sopt:['eq'], 
+                                    dataInit: function (elem) {
+                                        var NoResultsLabel = "No se encontraron resultados";
+
+
+                                        $(elem).autocomplete({
+
+                                            select: function (event, ui) {
+                                                $(elem).trigger('change');
+                                            },
+
+
+                                            source: function (request, response) {
+                                                $.ajax({
+                                                    type: "POST",
+                                                    url: "WebServiceClientes.asmx/GetClientes",
+                                                    dataType: "json",
+                                                    contentType: "application/json; charset=utf-8",
+
+                                                    data: JSON.stringify({
+                                                        term: request.term
+                                                        //, idpuntoventa: function () { return $("#ctl00_ContentPlaceHolder1_txtFechaHasta").val(); }
+                                                    }),
+
+
+                                                    success: function (data2) {
+                                                        var data = JSON.parse(data2.d) // por qué tengo que usar parse?
+
+                                                        //if (data.length == 1 || data.length > 1) { // qué pasa si encuentra más de uno?????
+                                                        //    var ui = data[0];
+
+                                                        //    if (ui.id == "") {
+                                                        //        alert("No existe el artículo"); // se está bancando que no sea identica la descripcion
+                                                        //        $("#Descripcion").val("");
+                                                        //        return;
+                                                        //    }
+                                                        //    $("#IdWilliamsDestino").val(ui.id);
+
+                                                        //    UltimoIdArticulo = ui.id;
+                                                        //}
+                                                        //else {
+                                                        //    alert("No existe el artículo"); // se está bancando que no sea identica la descripcion
+                                                        //}
+
+                                                        response($.map(data, function (item) {
+                                                            return {
+                                                                label: item.value,
+                                                                value: item.value //item.id
+                                                                , id: item.id
+                                                            }
+                                                        }));
+
+                                                    }
+
+
+
+                                                })
+
+
+                                            }
+
+
+                                        });
+
+
+
+
+
+
+                                    }
+                                }
+
+                            },
+
+
+                            {
+                                name: 'CorredorDesc', index: 'CorredorDesc', align: 'left', width: 100, hidden: false, editable: false, edittype: 'text', sortable: false
+
+                                , searchoptions: {
+                                    //    sopt:['eq'], 
+                                    dataInit: function (elem) {
+                                        var NoResultsLabel = "No se encontraron resultados";
+
+
+                                        $(elem).autocomplete({
+
+                                            select: function (event, ui) {
+                                                $(elem).trigger('change');
+                                            },
+
+
+                                            source: function (request, response) {
+                                                $.ajax({
+                                                    type: "POST",
+                                                    url: "WebServiceClientes.asmx/GetCorredores",
+                                                    dataType: "json",
+                                                    contentType: "application/json; charset=utf-8",
+
+                                                    data: JSON.stringify({
+                                                        term: request.term
+                                                        //, idpuntoventa: function () { return $("#ctl00_ContentPlaceHolder1_txtFechaHasta").val(); }
+                                                    }),
+
+
+                                                    success: function (data2) {
+                                                        var data = JSON.parse(data2.d) // por qué tengo que usar parse?
+
+                                                        //if (data.length == 1 || data.length > 1) { // qué pasa si encuentra más de uno?????
+                                                        //    var ui = data[0];
+
+                                                        //    if (ui.id == "") {
+                                                        //        alert("No existe el artículo"); // se está bancando que no sea identica la descripcion
+                                                        //        $("#Descripcion").val("");
+                                                        //        return;
+                                                        //    }
+                                                        //    $("#IdWilliamsDestino").val(ui.id);
+
+                                                        //    UltimoIdArticulo = ui.id;
+                                                        //}
+                                                        //else {
+                                                        //    alert("No existe el artículo"); // se está bancando que no sea identica la descripcion
+                                                        //}
+
+                                                        response($.map(data, function (item) {
+                                                            return {
+                                                                label: item.value,
+                                                                value: item.value //item.id
+                                                                , id: item.id
+                                                            }
+                                                        }));
+
+                                                    }
+
+
+
+                                                })
+
+
+                                            }
+
+
+                                        });
+
+
+
+
+
+
+                                    }
+                                }
+                            },
+
+
+                            {
+                                name: 'DestinatarioDesc', index: 'DestinatarioDesc', align: 'left', width: 100, hidden: false, editable: false, edittype: 'text', sortable: false
+
+
+                                , searchoptions: {
+                                    //    sopt:['eq'], 
+                                    dataInit: function (elem) {
+                                        var NoResultsLabel = "No se encontraron resultados";
+
+
+                                        $(elem).autocomplete({
+
+                                            select: function (event, ui) {
+                                                $(elem).trigger('change');
+                                            },
+
+
+                                            source: function (request, response) {
+                                                $.ajax({
+                                                    type: "POST",
+                                                    url: "WebServiceClientes.asmx/GetClientes",
+                                                    dataType: "json",
+                                                    contentType: "application/json; charset=utf-8",
+
+                                                    data: JSON.stringify({
+                                                        term: request.term
+                                                        //, idpuntoventa: function () { return $("#ctl00_ContentPlaceHolder1_txtFechaHasta").val(); }
+                                                    }),
+
+
+                                                    success: function (data2) {
+                                                        var data = JSON.parse(data2.d) // por qué tengo que usar parse?
+
+                                                        //if (data.length == 1 || data.length > 1) { // qué pasa si encuentra más de uno?????
+                                                        //    var ui = data[0];
+
+                                                        //    if (ui.id == "") {
+                                                        //        alert("No existe el artículo"); // se está bancando que no sea identica la descripcion
+                                                        //        $("#Descripcion").val("");
+                                                        //        return;
+                                                        //    }
+                                                        //    $("#IdWilliamsDestino").val(ui.id);
+
+                                                        //    UltimoIdArticulo = ui.id;
+                                                        //}
+                                                        //else {
+                                                        //    alert("No existe el artículo"); // se está bancando que no sea identica la descripcion
+                                                        //}
+
+                                                        response($.map(data, function (item) {
+                                                            return {
+                                                                label: item.value,
+                                                                value: item.value //item.id
+                                                                , id: item.id
+                                                            }
+                                                        }));
+
+                                                    }
+
+
+
+                                                })
+
+
+                                            }
+
+
+                                        });
+
+
+
+
+
+
+                                    }
+                                }
+
+                            },
+
+                            {
+                                name: 'DestinoDesc', index: 'DestinoDesc',
+                                formoptions: { rowpos: 5, colpos: 2, label: "Descripción" }, align: 'left', width: 100, hidden: false, editable: true, edittype: 'text', sortable: false,
+                                searchoptions: {
+                                    //    sopt:['eq'], 
+                                    dataInit: function (elem) {
+                                        var NoResultsLabel = "No se encontraron resultados";
+
+
+                                        $(elem).autocomplete({
+
+                                            select: function (event, ui) {
+                                                $(elem).trigger('change');
+                                            },
+
+
+                                            source: function (request, response) {
+                                                $.ajax({
+                                                    type: "POST",
+                                                    url: "WebServiceClientes.asmx/WilliamsDestinoGetWilliamsDestinos",
+                                                    dataType: "json",
+                                                    contentType: "application/json; charset=utf-8",
+
+                                                    data: JSON.stringify({
+                                                        term: request.term
+                                                        //, idpuntoventa: function () { return $("#ctl00_ContentPlaceHolder1_txtFechaHasta").val(); }
+                                                    }),
+
+
+                                                    //success: function (data2) {
+                                                    //    var data = JSON.parse(data2.d) // por qué tengo que usar parse?
+
+                                                    //    if (data.length == 1 || data.length > 1) { // qué pasa si encuentra más de uno?????
+                                                    //        var ui = data[0];
+
+                                                    //        if (ui.id == "") {
+                                                    //            alert("No existe el artículo"); // se está bancando que no sea identica la descripcion
+                                                    //            $("#Descripcion").val("");
+                                                    //            return;
+                                                    //        }
+                                                    //        $("#IdWilliamsDestino").val(ui.id);
+
+                                                    //        UltimoIdArticulo = ui.id;
+                                                    //    }
+                                                    //    else {
+                                                    //        alert("No existe el artículo"); // se está bancando que no sea identica la descripcion
+                                                    //    }
+
+                                                    //    response($.map(data, function (item) {
+                                                    //        return {
+                                                    //            label: item.value,
+                                                    //            value: item.value //item.id
+                                                    //            , id: item.id
+                                                    //        }
+                                                    //    }));
+
+                                                    //}
+
+
+
+                                                })
+
+
+                                            }
+
+
+                                        });
+
+
+
+
+
+
+                                    }
+                                }
+
+                            },
+                            { name: 'Destino', index: 'Destino', align: 'left', width: 100, hidden: true, editable: false, edittype: 'text', sortable: false },
+
+                            { name: 'Patente', index: 'Patente', align: 'left', width: 100, hidden: false, editable: false, edittype: 'text', sortable: false },
+
+
+
+                            { name: 'NetoPto', index: 'NetoPto', align: 'left', width: 60, hidden: false, editable: false, edittype: 'text', sortable: false },
+
+
+                            //{ name: 'NetoProc', index: 'NetoProc', align: 'left', width: 60, hidden: false, editable: false, edittype: 'text', sortable: false }
+
+
+                            {
+                                name: 'FechaArribo', index: 'FechaArribo', width: 100, sortable: true, align: 'right', editable: false, sortable: false,
+                                editoptions: {
+                                    size: 10,
+                                    maxlengh: 10,
+                                    dataInit: function (element) {
+                                        $(element).datepicker({
+                                            dateFormat: 'dd/mm/yy',
+                                            constrainInput: false,
+                                            showOn: 'button',
+                                            buttonText: '...'
+                                        });
+                                    }
+                                },
+                                formatoptions: { newformat: "dd/mm/yy" }, datefmt: 'dd/mm/yy'
+                                //, formatter: 'date'
+                                , sorttype: 'date'
+
+
+                                , searchoptions: {
+                                    sopt: ['eq', 'ne', 'lt', 'le', 'gt', 'ge'],
+                                    dataInit: function (elem) {
+                                        $(elem).datepicker({
+                                            dateFormat: 'dd/mm/yy',
+                                            showButtonPanel: true
+                                        })
+                                    }
+                                }
+                            },
+
+
+
+                            {
+                                name: 'FechaDescarga', index: 'FechaDescarga', width: 100, sortable: true, align: 'right', editable: false, sortable: false,
+                                editoptions: {
+                                    size: 10,
+                                    maxlengh: 10,
+                                    dataInit: function (element) {
+                                        $(element).datepicker({
+                                            dateFormat: 'dd/mm/yy',
+                                            constrainInput: false,
+                                            showOn: 'button',
+                                            buttonText: '...'
+                                        });
+                                    }
+                                },
+                                formatoptions: { newformat: "dd/mm/yy" }, datefmt: 'dd/mm/yy'
+                                //, formatter: 'date'
+                                , sorttype: 'date'
+
+
+                                , searchoptions: {
+                                    sopt: ['eq', 'ne', 'lt', 'le', 'gt', 'ge'],
+                                    dataInit: function (elem) {
+                                        $(elem).datepicker({
+                                            dateFormat: 'dd/mm/yy',
+                                            showButtonPanel: true
+                                        })
+                                    }
+                                }
+                            },
+
+
+
+
+                            { name: 'PuntoVenta', index: 'PuntoVenta', align: 'left', width: 50, hidden: false, editable: false, edittype: 'text', sortable: false },
+
+
+
 
 
 
@@ -2255,18 +2731,41 @@ Arroyo Seco (Sta. Fe) - René Favaloro 726 / (03402) 421-426 - 429-676 / arroyos
                             //var html = "<span>Some HTML text which corresponds the row with id=" +
                             //    row_id + "</span><br/>";
 
-                            var html = '<ul data-dtr-index="0" class="dtr-details"><li data-dtr-index="4" data-dt-row="0" data-dt-column="4"><span class="dtr-title"><a href="">Titular</a></span> <span class="dtr-data"><span>Martignone Adolfo Y Cia  S C A </span></span></li><li data-dtr-index="5" data-dt-row="0" data-dt-column="5"><span class="dtr-title">Intermed.</span> <span class="dtr-data"><span></span></span></li><li data-dtr-index="6" data-dt-row="0" data-dt-column="6"><span class="dtr-title">Remitente Comercial</span> <span class="dtr-data"><span>Granos Olavarria S A </span></span></li><li data-dtr-index="7" data-dt-row="0" data-dt-column="7"><span class="dtr-title"><a href="">Corredor</a></span> <span class="dtr-data"><span>Futuros Y Opciones Com S A </span></span></li><li data-dtr-index="8" data-dt-row="0" data-dt-column="8"><span class="dtr-title">Esp.</span> <span class="dtr-data"><span>Soja Sustentable Usa</span></span></li><li data-dtr-index="9" data-dt-row="0" data-dt-column="9"><span class="dtr-title"><a href="">Destino</a><img title="Orden:Asc" src="/WebResource.axd?d=olQ67zyJIM4n9M_oCjYGRrTv0D-PJFdyCfA8P30v3DAazZ2pPF9qhxbM3BGjwDU_sj9fOg-6w-QRXWlBrrBXHMoHlpC6GPd2JFlMFkPtMfvCFUjqHNl-emkH6wLPSw2q0&amp;t=636426523640000000" alt="Orden:Asc" align="absbottom"></span> <span class="dtr-data">FCA VICENTIN</span></li><li data-dtr-index="10" data-dt-row="0" data-dt-column="10"><span class="dtr-title">Destinat.</span> <span class="dtr-data"><span>Vicentin S A I C</span></span></li><li data-dtr-index="11" data-dt-row="0" data-dt-column="11"><span class="dtr-title">Analisis</span> <span class="dtr-data"><span>DÑ:12.00% HD:13.20%  </span></span></li><li data-dtr-index="12" data-dt-row="0" data-dt-column="12"><span class="dtr-title">Patente</span> <span class="dtr-data">ERT783</span></li><li data-dtr-index="13" data-dt-row="0" data-dt-column="13"><span class="dtr-title">Obs Pto</span> <span class="dtr-data">&nbsp;</span></li><li data-dtr-index="14" data-dt-row="0" data-dt-column="14"><span class="dtr-title">Procedencia</span> <span class="dtr-data"><span>Villa Lila</span></span></li><li data-dtr-index="15" data-dt-row="0" data-dt-column="15"><span class="dtr-title">Entreg</span> <span class="dtr-data"><span>Wil</span></span></li><li data-dtr-index="16" data-dt-row="0" data-dt-column="16"><span class="dtr-title">Entreg CP</span> <span class="dtr-data"><span></span></span></li></ul>'
+                            //var html = '<ul data-dtr-index="0" class="dtr-details"><li data-dtr-index="4" data-dt-row="0" data-dt-column="4"><span class="dtr-title"><a href="">Titular</a></span> <span class="dtr-data"><span>Martignone Adolfo Y Cia  S C A </span></span></li><li data-dtr-index="5" data-dt-row="0" data-dt-column="5"><span class="dtr-title">Intermed.</span> <span class="dtr-data"><span></span></span></li><li data-dtr-index="6" data-dt-row="0" data-dt-column="6"><span class="dtr-title">Remitente Comercial</span> <span class="dtr-data"><span>Granos Olavarria S A </span></span></li><li data-dtr-index="7" data-dt-row="0" data-dt-column="7"><span class="dtr-title"><a href="">Corredor</a></span> <span class="dtr-data"><span>Futuros Y Opciones Com S A </span></span></li><li data-dtr-index="8" data-dt-row="0" data-dt-column="8"><span class="dtr-title">Esp.</span> <span class="dtr-data"><span>Soja Sustentable Usa</span></span></li><li data-dtr-index="9" data-dt-row="0" data-dt-column="9"><span class="dtr-title"><a href="">Destino</a><img title="Orden:Asc" src="/WebResource.axd?d=olQ67zyJIM4n9M_oCjYGRrTv0D-PJFdyCfA8P30v3DAazZ2pPF9qhxbM3BGjwDU_sj9fOg-6w-QRXWlBrrBXHMoHlpC6GPd2JFlMFkPtMfvCFUjqHNl-emkH6wLPSw2q0&amp;t=636426523640000000" alt="Orden:Asc" align="absbottom"></span> <span class="dtr-data">FCA VICENTIN</span></li><li data-dtr-index="10" data-dt-row="0" data-dt-column="10"><span class="dtr-title">Destinat.</span> <span class="dtr-data"><span>Vicentin S A I C</span></span></li><li data-dtr-index="11" data-dt-row="0" data-dt-column="11"><span class="dtr-title">Analisis</span> <span class="dtr-data"><span>DÑ:12.00% HD:13.20%  </span></span></li><li data-dtr-index="12" data-dt-row="0" data-dt-column="12"><span class="dtr-title">Patente</span> <span class="dtr-data">ERT783</span></li><li data-dtr-index="13" data-dt-row="0" data-dt-column="13"><span class="dtr-title">Obs Pto</span> <span class="dtr-data">&nbsp;</span></li><li data-dtr-index="14" data-dt-row="0" data-dt-column="14"><span class="dtr-title">Procedencia</span> <span class="dtr-data"><span>Villa Lila</span></span></li><li data-dtr-index="15" data-dt-row="0" data-dt-column="15"><span class="dtr-title">Entreg</span> <span class="dtr-data"><span>Wil</span></span></li><li data-dtr-index="16" data-dt-row="0" data-dt-column="16"><span class="dtr-title">Entreg CP</span> <span class="dtr-data"><span></span></span></li></ul>'
 
                             
 
                           
 
-                            var dataFromTheRow = $("#Lista").jqGrid('getRowData', row_id);
+                            var a = $("#Lista").jqGrid('getRowData', row_id);
 
 
 
-                            $("#" + subgrid_id).append(dataFromTheRow.infohtml);
-                            //$("#" + subgrid_id).append(html);
+                            //$("#" + subgrid_id).append(dataFromTheRow.infohtml);
+                            //$("#" + subgrid_id).append(dataFromTheRow.Producto);
+
+
+                            
+
+                            var html = "<span style='font-size: 14px'> " +
+                                "<b>Situacion</b> " + a.Situacion +
+                                "<br/><b>Obs</b> " + a.ObservacionesSituacion +
+                                "<br/>" + a.Producto +
+                                "<br/>" + a.TitularDesc +
+                                "<br/>" + a.IntermediarioDesc +
+                                "<br/>" + a.RComercialDesc +
+                                "<br/>" + a.CorredorDesc +
+                                "<br/>" + a.DestinatarioDesc +
+                                "<br/>" + a.DestinoDesc +
+                                "<br/>" + a.Patente +
+                                "<br/>" + a.NetoPto +
+                                "<br/>" + a.FechaArribo +
+                                "<br/>" + a.FechaDescarga +
+                                "<a href=\"CartaDePorte.aspx?Id=" + a.IdCartaDePorte + "\"  target=\"_blank\" > Imagenes </>" +
+                                "<span/>";
+
+                            $("#" + subgrid_id).append(html);
+
 
                         },
 
@@ -2343,17 +2842,24 @@ Arroyo Seco (Sta. Fe) - René Favaloro 726 / (03402) 421-426 - 429-676 / arroyos
                         cellsubmit: 'clientArray',
                         dataUrl: "WebServiceClientes.asmx/EmpleadoEditGridData",
 
+
+
+
                         recordtext: "{2} cartas</span>",
                         pgtext: "Pag. {0} de {1}",
-                        //toppager: true,
+                        toppager: true,
+                        subGrid: true,
+                        multiselectWidth: 40,
+                        subGridWidth: 40,
 
+                        
                         gridview: true
                         , multiboxonly: true
                         , multipleSearch: true
 
 
 
-                        ,subGrid: true
+
                     });
 
 
