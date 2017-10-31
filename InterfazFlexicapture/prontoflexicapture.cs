@@ -5136,7 +5136,7 @@ Formato localidad-provincia	destination	x
 
                                 a.IdCartaDePorte.ToString(),
 
-                                a.NumeroCartaEnTextoParaBusqueda.NullSafeToString(),
+                                a.NumeroCartaEnTextoParaBusqueda.NullSafeToString().Substring(0,9),
 
 
 
