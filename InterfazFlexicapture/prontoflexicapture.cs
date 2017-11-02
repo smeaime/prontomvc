@@ -63,6 +63,35 @@ using System.Text.RegularExpressions;
 using System.Net;
 //using Microsoft.AspNet.SignalR.Client;
 
+
+
+
+
+
+namespace ExtensionMethods
+{
+    public static class MyExtensions
+    {
+        public static string NullStringSafe3(this IField ifield)
+        {
+            try
+            {
+                if (ifield == null) return "";
+                return ifield.Value.AsString;
+            }
+            catch (Exception)
+            {
+
+                return "";
+            }
+
+        }
+    }
+}
+
+
+
+
 namespace Fenton.Example
 {
     public static class IQueryableExtensions
@@ -1993,6 +2022,14 @@ namespace ProntoFlexicapture
 
 
 
+
+
+
+
+
+
+
+
         static ProntoMVC.Data.FuncionesGenericasCSharp.Resultados ProcesaCarta(IDocument document, string SC, string archivoOriginal, string DirApp)
         {
 
@@ -2000,82 +2037,82 @@ namespace ProntoFlexicapture
 
             IField BarraCP = Sample.AdvancedTechniques.findField(document, "BarraCP");
 
-            string BarraCEE = Sample.AdvancedTechniques.findField(document, "BarraCEE").NullStringSafe2();
-            string NCarta = Sample.AdvancedTechniques.findField(document, "NumeroCarta").NullStringSafe2();
-            string CEE = Sample.AdvancedTechniques.findField(document, "CEE").NullStringSafe2();
+            string BarraCEE = Sample.AdvancedTechniques.findField(document, "BarraCEE").NullStringSafe3();
+            string NCarta = Sample.AdvancedTechniques.findField(document, "NumeroCarta").NullStringSafe3();
+            string CEE = Sample.AdvancedTechniques.findField(document, "CEE").NullStringSafe3();
 
 
-            string TitularCUIT = Sample.AdvancedTechniques.findField(document, "TitularCUIT").NullStringSafe2();
-            string Titular = Sample.AdvancedTechniques.findField(document, "Titular").NullStringSafe2();
-            string RemitenteCUIT = Sample.AdvancedTechniques.findField(document, "RemitenteCUIT").NullStringSafe2();
-            string Remitente = Sample.AdvancedTechniques.findField(document, "Remitente").NullStringSafe2();
-            string IntermediarioCUIT = Sample.AdvancedTechniques.findField(document, "IntermediarioCUIT").NullStringSafe2();
-            string Intermediario = Sample.AdvancedTechniques.findField(document, "Intermediario").NullStringSafe2();
-            string DestinatarioCUIT = Sample.AdvancedTechniques.findField(document, "DestinatarioCUIT").NullStringSafe2();
-            string Destinatario = Sample.AdvancedTechniques.findField(document, "Destinatario").NullStringSafe2();
-            string CorredorCUIT = Sample.AdvancedTechniques.findField(document, "CorredorCUIT").NullStringSafe2();
-            string Corredor = Sample.AdvancedTechniques.findField(document, "Corredor").NullStringSafe2();
+            string TitularCUIT = Sample.AdvancedTechniques.findField(document, "TitularCUIT").NullStringSafe3();
+            string Titular = Sample.AdvancedTechniques.findField(document, "Titular").NullStringSafe3();
+            string RemitenteCUIT = Sample.AdvancedTechniques.findField(document, "RemitenteCUIT").NullStringSafe3();
+            string Remitente = Sample.AdvancedTechniques.findField(document, "Remitente").NullStringSafe3();
+            string IntermediarioCUIT = Sample.AdvancedTechniques.findField(document, "IntermediarioCUIT").NullStringSafe3();
+            string Intermediario = Sample.AdvancedTechniques.findField(document, "Intermediario").NullStringSafe3();
+            string DestinatarioCUIT = Sample.AdvancedTechniques.findField(document, "DestinatarioCUIT").NullStringSafe3();
+            string Destinatario = Sample.AdvancedTechniques.findField(document, "Destinatario").NullStringSafe3();
+            string CorredorCUIT = Sample.AdvancedTechniques.findField(document, "CorredorCUIT").NullStringSafe3();
+            string Corredor = Sample.AdvancedTechniques.findField(document, "Corredor").NullStringSafe3();
 
-            string CTG = Sample.AdvancedTechniques.findField(document, "CTG").NullStringSafe2();
-            string FechaCarga = Sample.AdvancedTechniques.findField(document, "FechaCarga").NullStringSafe2();
-            string FechaVencimiento = Sample.AdvancedTechniques.findField(document, "FechaVencimiento").NullStringSafe2();
-            string Destino = Sample.AdvancedTechniques.findField(document, "Destino").NullStringSafe2();
-            string DestinoCUIT = Sample.AdvancedTechniques.findField(document, "DestinoCUIT").NullStringSafe2();
-            string Chofer = Sample.AdvancedTechniques.findField(document, "Chofer").NullStringSafe2();
-            string ChoferCUIT = Sample.AdvancedTechniques.findField(document, "ChoferCUIT").NullStringSafe2();
-            string Transportista = Sample.AdvancedTechniques.findField(document, "Transportista").NullStringSafe2();
-            string TransportistaCUIT = Sample.AdvancedTechniques.findField(document, "TransportistaCUIT").NullStringSafe2();
-            string ContratoNro = Sample.AdvancedTechniques.findField(document, "ContratoNro").NullStringSafe2();
+            string CTG = Sample.AdvancedTechniques.findField(document, "CTG").NullStringSafe3();
+            string FechaCarga = Sample.AdvancedTechniques.findField(document, "FechaCarga").NullStringSafe3();
+            string FechaVencimiento = Sample.AdvancedTechniques.findField(document, "FechaVencimiento").NullStringSafe3();
+            string Destino = Sample.AdvancedTechniques.findField(document, "Destino").NullStringSafe3();
+            string DestinoCUIT = Sample.AdvancedTechniques.findField(document, "DestinoCUIT").NullStringSafe3();
+            string Chofer = Sample.AdvancedTechniques.findField(document, "Chofer").NullStringSafe3();
+            string ChoferCUIT = Sample.AdvancedTechniques.findField(document, "ChoferCUIT").NullStringSafe3();
+            string Transportista = Sample.AdvancedTechniques.findField(document, "Transportista").NullStringSafe3();
+            string TransportistaCUIT = Sample.AdvancedTechniques.findField(document, "TransportistaCUIT").NullStringSafe3();
+            string ContratoNro = Sample.AdvancedTechniques.findField(document, "ContratoNro").NullStringSafe3();
 
-            string LaCargaSeráPesadaEnDestino = Sample.AdvancedTechniques.findField(document, "LaCargaSeráPesadaEnDestino").NullStringSafe2();
-            string DeclaraciónDeCalidad = Sample.AdvancedTechniques.findField(document, "DeclaraciónDeCalidad").NullStringSafe2();
-            string Conforme = Sample.AdvancedTechniques.findField(document, "Conforme").NullStringSafe2();
-            string Condicional = Sample.AdvancedTechniques.findField(document, "Condicional").NullStringSafe2();
+            string LaCargaSeráPesadaEnDestino = Sample.AdvancedTechniques.findField(document, "LaCargaSeráPesadaEnDestino").NullStringSafe3();
+            string DeclaraciónDeCalidad = Sample.AdvancedTechniques.findField(document, "DeclaraciónDeCalidad").NullStringSafe3();
+            string Conforme = Sample.AdvancedTechniques.findField(document, "Conforme").NullStringSafe3();
+            string Condicional = Sample.AdvancedTechniques.findField(document, "Condicional").NullStringSafe3();
 
-            string PesoBruto = Sample.AdvancedTechniques.findField(document, "PesoBruto").NullStringSafe2();
-            string PesoTara = Sample.AdvancedTechniques.findField(document, "PesoTara").NullStringSafe2();
-            string PesoNeto = Sample.AdvancedTechniques.findField(document, "PesoNeto").NullStringSafe2();
+            string PesoBruto = Sample.AdvancedTechniques.findField(document, "PesoBruto").NullStringSafe3();
+            string PesoTara = Sample.AdvancedTechniques.findField(document, "PesoTara").NullStringSafe3();
+            string PesoNeto = Sample.AdvancedTechniques.findField(document, "PesoNeto").NullStringSafe3();
 
-            string PesoBrutoDescarga = Sample.AdvancedTechniques.findField(document, "PesoBrutoDescarga").NullStringSafe2();
-            string PesoTaraDescarga = Sample.AdvancedTechniques.findField(document, "PesoTaraDescarga").NullStringSafe2();
-            string PesoNetoDescarga = Sample.AdvancedTechniques.findField(document, "PesoNetoDescarga").NullStringSafe2();
+            string PesoBrutoDescarga = Sample.AdvancedTechniques.findField(document, "PesoBrutoDescarga").NullStringSafe3();
+            string PesoTaraDescarga = Sample.AdvancedTechniques.findField(document, "PesoTaraDescarga").NullStringSafe3();
+            string PesoNetoDescarga = Sample.AdvancedTechniques.findField(document, "PesoNetoDescarga").NullStringSafe3();
 
-            string PesoNetoFinal = Sample.AdvancedTechniques.findField(document, "PesoNetoFinal").NullStringSafe2();
-
-
-            string Observaciones = Sample.AdvancedTechniques.findField(document, "Observaciones").NullStringSafe2();
-            string Esablecimiento = Sample.AdvancedTechniques.findField(document, "Esablecimiento").NullStringSafe2();
-            string Direccion1 = Sample.AdvancedTechniques.findField(document, "Direccion1").NullStringSafe2();
-            string Localidad1 = Sample.AdvancedTechniques.findField(document, "Localidad1").NullStringSafe2();
-            string Direccion2 = Sample.AdvancedTechniques.findField(document, "Direccion2").NullStringSafe2();
-            string Localidad2 = Sample.AdvancedTechniques.findField(document, "Localidad2").NullStringSafe2();
-            string Provincia2 = Sample.AdvancedTechniques.findField(document, "Provincia2").NullStringSafe2();
-            string Camión = Sample.AdvancedTechniques.findField(document, "Camión").NullStringSafe2();
-            string Acoplado = Sample.AdvancedTechniques.findField(document, "Acoplado").NullStringSafe2();
-            string KmARecorrer = Sample.AdvancedTechniques.findField(document, "KmARecorrer").NullStringSafe2();
-            string Tarifa = Sample.AdvancedTechniques.findField(document, "Tarifa").NullStringSafe2();
-            string TarifaRef = Sample.AdvancedTechniques.findField(document, "TarifaRef").NullStringSafe2();
-
-            string Cosecha = Sample.AdvancedTechniques.findField(document, "Cosecha").NullStringSafe2();
+            string PesoNetoFinal = Sample.AdvancedTechniques.findField(document, "PesoNetoFinal").NullStringSafe3();
 
 
-            string GranoEspecie = Sample.AdvancedTechniques.findField(document, "GranoEspecie").NullStringSafe2();
+            string Observaciones = Sample.AdvancedTechniques.findField(document, "Observaciones").NullStringSafe3();
+            string Esablecimiento = Sample.AdvancedTechniques.findField(document, "Esablecimiento").NullStringSafe3();
+            string Direccion1 = Sample.AdvancedTechniques.findField(document, "Direccion1").NullStringSafe3();
+            string Localidad1 = Sample.AdvancedTechniques.findField(document, "Localidad1").NullStringSafe3();
+            string Direccion2 = Sample.AdvancedTechniques.findField(document, "Direccion2").NullStringSafe3();
+            string Localidad2 = Sample.AdvancedTechniques.findField(document, "Localidad2").NullStringSafe3();
+            string Provincia2 = Sample.AdvancedTechniques.findField(document, "Provincia2").NullStringSafe3();
+            string Camión = Sample.AdvancedTechniques.findField(document, "Camión").NullStringSafe3();
+            string Acoplado = Sample.AdvancedTechniques.findField(document, "Acoplado").NullStringSafe3();
+            string KmARecorrer = Sample.AdvancedTechniques.findField(document, "KmARecorrer").NullStringSafe3();
+            string Tarifa = Sample.AdvancedTechniques.findField(document, "Tarifa").NullStringSafe3();
+            string TarifaRef = Sample.AdvancedTechniques.findField(document, "TarifaRef").NullStringSafe3();
 
-            string KgsEstimados = Sample.AdvancedTechniques.findField(document, "KgsEstimados").NullStringSafe2();
+            string Cosecha = Sample.AdvancedTechniques.findField(document, "Cosecha").NullStringSafe3();
 
-            string PlantillaUsada = Sample.AdvancedTechniques.findField(document, "PlantillaUsada").NullStringSafe2();
+
+            string GranoEspecie = Sample.AdvancedTechniques.findField(document, "GranoEspecie").NullStringSafe3();
+
+            string KgsEstimados = Sample.AdvancedTechniques.findField(document, "KgsEstimados").NullStringSafe3();
+
+            string PlantillaUsada = Sample.AdvancedTechniques.findField(document, "PlantillaUsada").NullStringSafe3();
             //string plantillaUsada = document.Pages[0].SectionDefinition.FlexibleDescription.Name;
 
-            string FechaDescarga = Sample.AdvancedTechniques.findField(document, "FechaDescarga").NullStringSafe2();
+            string FechaDescarga = Sample.AdvancedTechniques.findField(document, "FechaDescarga").NullStringSafe3();
 
 
 
-            string HumedadPorc = Sample.AdvancedTechniques.findField(document, "HumedadPorc").NullStringSafe2();
-            string HumedadKilos = Sample.AdvancedTechniques.findField(document, "HumedadKilos").NullStringSafe2();
-            string ZarandeoKilosMerma = Sample.AdvancedTechniques.findField(document, "ZarandeoKilosMerma").NullStringSafe2();
-            string ZarandeoPorc = Sample.AdvancedTechniques.findField(document, "ZarandeoPorc").NullStringSafe2();
-            string Recibo = Sample.AdvancedTechniques.findField(document, "Recibo").NullStringSafe2();
-            string HoraDescarga = Sample.AdvancedTechniques.findField(document, "HoraDescarga").NullStringSafe2();
+            string HumedadPorc = Sample.AdvancedTechniques.findField(document, "HumedadPorc").NullStringSafe3();
+            string HumedadKilos = Sample.AdvancedTechniques.findField(document, "HumedadKilos").NullStringSafe3();
+            string ZarandeoKilosMerma = Sample.AdvancedTechniques.findField(document, "ZarandeoKilosMerma").NullStringSafe3();
+            string ZarandeoPorc = Sample.AdvancedTechniques.findField(document, "ZarandeoPorc").NullStringSafe3();
+            string Recibo = Sample.AdvancedTechniques.findField(document, "Recibo").NullStringSafe3();
+            string HoraDescarga = Sample.AdvancedTechniques.findField(document, "HoraDescarga").NullStringSafe3();
 
 
 
@@ -3544,31 +3581,6 @@ Additionally you can manage the priority of work processes and control whether t
 }
 
 
-
-namespace ExtensionMethods
-{
-    public static class MyExtensions
-    {
-        public static string NullStringSafe2(this IField ifield)
-        {
-            try
-            {
-                if (ifield == null) return "";
-                return ifield.Value.AsString;
-            }
-            catch (Exception)
-            {
-
-                return "";
-            }
-
-        }
-    }
-}
-
-
-
-
 /*
 
 namespace ConsoleApplication116_SignalRClient
@@ -4642,9 +4654,7 @@ Formato localidad-provincia	destination	x
 
 
 
-
-
-        public virtual string CartasPorte_DynamicGridData(string sidx, string sord, int page, int rows, bool _search, string filters, string FechaInicial, string FechaFinal, int puntovent, int iddestino, string SC, string nombreusuario, string SCbdlmaster)
+        public virtual string CartasPorte_DynamicGridData_NuevoOrden(string sidx, string sord, int page, int rows, bool _search, string filters, string FechaInicial, string FechaFinal, int puntovent, int iddestino, string SC, string nombreusuario, string SCbdlmaster)
         {
 
             // An ASHX is a generic HttpHandler. An ASMX file is a web service. ASHX is a good lean way to provide a response to AJAX calls, but if you want to provide a response which changes based on conditions (such as variable inputs) it can become a bit of a handful - lots of if else etc. ASMX can house mulitple methods which can take parameters.
@@ -4669,7 +4679,7 @@ Formato localidad-provincia	destination	x
             try
             {
 
-                FechaDesde = DateTime.ParseExact(FechaInicial, "dd/MM/yyyy", null);
+                FechaDesde = DateTime.ParseExact(FechaInicial, "d/M/yyyy", null);
             }
             catch (Exception e)
             {
@@ -4678,7 +4688,7 @@ Formato localidad-provincia	destination	x
 
             try
             {
-                FechaHasta = DateTime.ParseExact(FechaFinal, "dd/MM/yyyy", null);
+                FechaHasta = DateTime.ParseExact(FechaFinal, "d/M/yyyy", null);
 
             }
             catch (Exception e)
@@ -4718,12 +4728,330 @@ Formato localidad-provincia	destination	x
             // -tambien tenes el tema de los clientes con filtros configurables.... en DataTablePorClienteSQL()
             if (SCbdlmaster != "")
             {
-                string rs = UserDatosExtendidosManager.TraerRazonSocialDelUsuario(nombreusuario, SCbdlmaster, SC);
-                if (rs == "")
+
+                string rs = UserDatosExtendidosManager.TraerRazonSocialDelUsuarioNombre(nombreusuario, SCbdlmaster, SC);
+                if (rs != "")
                 {
                     int idcliente = SQLdinamico.BuscaIdClientePreciso(rs, SC);
                     int idCorredor = SQLdinamico.BuscaIdVendedorPreciso(EntidadManager.NombreCliente(SC, idcliente), SC);
-                    q = q.Where(x => x.Vendedor == idcliente || x.Entregador == idcliente);
+                    q = q.Where(x => x.Vendedor == idcliente || x.Entregador == idcliente || x.Corredor == idCorredor ||
+                                    x.CuentaOrden1 == idcliente || x.CuentaOrden2 == idcliente || x.IdClienteAuxiliar == idcliente);
+                }
+            }
+
+
+
+
+            int totalRecords = 0;
+            var pagedQuery = Filtrador.Filters.FiltroGenerico_UsandoIQueryable<ProntoMVC.Data.Models.fSQL_GetDataTableFiltradoYPaginado_Result3>
+                            (sidx, sord, page, rows, _search, filters, db, ref totalRecords, q);
+
+
+
+
+
+
+            //db.CartasDePortes
+            //                              .Where(x =>
+            //                                      (x.FechaDescarga >= FechaDesde && x.FechaDescarga <= FechaHasta)
+            //                                       &&
+            //                                      (x.PuntoVenta == puntovent || puntovent <= 0)
+            //                                       &&
+            //                                      (x.Destino == iddestino || iddestino <= 0)
+            //                                   )
+
+
+
+
+
+
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+            string campo = "true";
+            int pageSize = rows;
+            int currentPage = page;
+
+
+            //if (sidx == "Numero") sidx = "NumeroPedido"; // como estoy haciendo "select a" (el renglon entero) en la linq antes de llamar jqGridJson, no pude ponerle el nombre explicito
+            //if (searchField == "Numero") searchField = "NumeroPedido"; 
+
+            var Entidad = pagedQuery
+                          //.Include(x => x.Moneda)
+                          //.Include(x => x.Proveedor)
+                          //.Include(x => x.DetallePedidos
+                          //            .Select(y => y.DetalleRequerimiento
+                          //                )
+                          //        )
+                          //.Include("DetallePedidos.DetalleRequerimiento.Requerimientos.Obra") // funciona tambien
+                          //.Include(x => x.Comprador)
+                          .AsQueryable();
+
+
+            //var Entidad1 = (from a in Entidad.Where(campo) select new { Id = a.IdCartasDePorteControlDescarga });
+
+            int totalPages = (int)Math.Ceiling((float)totalRecords / (float)pageSize);
+
+            var data = (from a in Entidad
+                        select a
+                        )//.Where(campo).OrderBy(sidx + " " + sord)
+                        .ToList();
+
+            var jsonData = new jqGridJson()
+            {
+                total = totalPages,
+                page = currentPage,
+                records = totalRecords,
+                rows = (from a in data
+                        select new jqGridRowJson
+                        {
+                            id = a.IdCartaDePorte.ToString(),
+                            cell = new string[] {
+                                "", //"<a href="+ Url.Action("Edit",new {id = a.IdPedido} ) + "  >Editar</>" ,
+                                
+
+                                // CP	TURNO	SITUACION	MERC	TITULAR_CP	INTERMEDIARIO	RTE CIAL	CORREDOR	DESTINATARIO	DESTINO	ENTREGADOR	PROC	KILOS	OBSERVACION
+
+                                a.IdCartaDePorte.ToString(),
+
+                                a.NumeroCartaEnTextoParaBusqueda.NullSafeToString(),  //                                "<a href=\"CartaDePorte.aspx?Id=" +  a.IdCartaDePorte + "\"  target=\"_blank\" >" +  a.NumeroCartaEnTextoParaBusqueda.NullSafeToString() + "</>" ,
+                                "<a href=\"CartasDePorteImagenEncriptada.aspx?Id=" +  a.ClaveEncriptada + "\"  target=\"_blank\" >" +  "ver" + "</>" ,
+                                a.SubnumeroVagon.NullSafeToString(),
+                                a.FechaArribo==null ? "" :  a.FechaArribo.GetValueOrDefault().ToShortDateString(),
+                                a.Hora.NullSafeToString(),
+
+                                a.Producto.ToString(),
+                                a.Contrato.NullSafeToString(),
+                                Convert.ToInt32(a.BrutoPto).ToString(),
+                                Convert.ToInt32(a.TaraPto).ToString(),
+                                Convert.ToInt32(a.NetoPto).ToString(),
+
+
+                                Convert.ToInt32(a.BrutoFinal).ToString(),
+                                Convert.ToInt32(a.TaraFinal).ToString(),
+                                Convert.ToInt32(a.NetoFinal).ToString(),
+                                 "", // dif
+                                a.Humedad.NullSafeToString(),
+
+
+                                 a.Merma.NullSafeToString(),
+                                 Convert.ToInt32(a.NetoFinal).ToString(),
+                                 "",//otras
+                                 a.TitularDesc,
+                                 a.IntermediarioDesc,
+
+
+                                a.RComercialDesc,
+                                 a.ClienteAuxiliarDesc,
+                                a.CorredorDesc,
+                                a.CorredorDesc2,
+                                a.DestinatarioDesc,
+
+
+                                a.EntregadorDesc,
+                                a.Patente,
+                                a.Acoplado,
+                                a.TransportistaCUIT,
+                                a.TransportistaDesc,
+
+                                a.DestinoDesc,
+                                a.ProcedenciaDesc,
+                                a.Cosecha,
+                                a.FechaDescarga==null ? "" :  a.FechaDescarga.GetValueOrDefault().ToShortDateString(),
+                                a.Calidad,
+
+                                a.Observaciones,
+                                a.ChoferCUIT,
+                                a.ChoferDesc,
+                                "", // nro oncaa
+                                "", //pta oncaa
+
+
+                                a.CEE,
+                                a.FechaEmision.NullSafeToString(),
+                                a.FechaVencimiento.NullSafeToString(),
+                                a.KmARecorrer.NullSafeToString(),
+                                a.Tarifa.NullSafeToString(),
+
+                                a.CTG.NullSafeToString(),
+                                a.EstablecimientoDesc
+
+
+                                //(a.Situacion ?? 0).NullSafeToString(),
+
+
+                                // a.DestinatarioDesc,
+
+                                //a.DestinoDesc.ToString(),
+                                //a.Destino ==null ? "" : a.Destino.ToString(),
+
+                                // a.EntregadorDesc.NullSafeToString(),
+
+                                // a.ProcedenciaDesc.ToString(),
+
+
+                                //Convert.ToInt32( a.NetoPto).ToString(),
+
+                                //a.ObservacionesSituacion,
+
+                                // a.PuntoVenta.ToString(),
+
+                                // a.FechaActualizacionAutomatica==null ? "" :  a.FechaActualizacionAutomatica.GetValueOrDefault().NullSafeToString(),
+                                //a.Patente,
+                                //   Convert.ToInt32(a.NetoFinal).ToString(),
+
+
+                                 // a.FechaSalida==null ? "" :  a.FechaSalida.GetValueOrDefault().ToString("dd/MM/yyyy"),
+                                //a.Cumplido.NullSafeToString(), 
+
+
+                                //string.Join(" ",  a.DetallePedidos.Select(x=>(x.DetalleRequerimiento==null) ? "" : 
+                                //                     x.DetalleRequerimiento.Requerimientos == null ? "" :   
+                                //                         x.DetalleRequerimiento.Requerimientos.NumeroRequerimiento.NullSafeToString() ).Distinct()),
+                                //string.Join(" ",  a.DetallePedidos.Select(x=>(x.DetalleRequerimiento==null) ? "" : 
+                                //                        x.DetalleRequerimiento.Requerimientos == null ? ""  :
+                                //                            x.DetalleRequerimiento.Requerimientos.Obra == null ? ""  :
+                                //                             x.DetalleRequerimiento.Requerimientos.Obra.NumeroObra.NullSafeToString()).Distinct()),
+                              
+                                                             
+                                //a.Proveedor==null ? "" :  a.Proveedor.RazonSocial.NullSafeToString(), 
+                                //(a.TotalPedido- a.TotalIva1+a.Bonificacion- (a.ImpuestosInternos ?? 0)- (a.OtrosConceptos1 ?? 0) - (a.OtrosConceptos2 ?? 0)-    (a.OtrosConceptos3 ?? 0) -( a.OtrosConceptos4 ?? 0) - (a.OtrosConceptos5 ?? 0)).ToString(),  
+                                //a.Bonificacion.NullSafeToString(), 
+                                //a.TotalIva1.NullSafeToString(), 
+                                //a.Moneda==null ? "" :   a.Moneda.Abreviatura.NullSafeToString(),  
+                                //a.Comprador==null ? "" :    a.Comprador.Nombre.NullSafeToString(),  
+                                //a.Empleado==null ? "" :  a.Empleado.Nombre.NullSafeToString(),  
+                                //a.DetallePedidos.Count().NullSafeToString(),  
+                                //a.IdPedido.NullSafeToString(), 
+                                //a.NumeroComparativa.NullSafeToString(),  
+                                //a.IdTipoCompraRM.NullSafeToString(), 
+                                //a.Observaciones.NullSafeToString(),   
+                                //a.DetalleCondicionCompra.NullSafeToString(),   
+                                //a.PedidoExterior.NullSafeToString(),  
+                                //a.IdPedidoAbierto.NullSafeToString(), 
+                                //a.NumeroLicitacion .NullSafeToString(), 
+                                //a.Impresa.NullSafeToString(), 
+                                //a.UsuarioAnulacion.NullSafeToString(), 
+                                //a.FechaAnulacion.NullSafeToString(),  
+                                //a.MotivoAnulacion.NullSafeToString(),  
+                                //a.ImpuestosInternos.NullSafeToString(), 
+                                //"", // #Auxiliar1.Equipos , 
+                                //a.CircuitoFirmasCompleto.NullSafeToString(), 
+                                //a.Proveedor==null ? "" : a.Proveedor.IdCodigoIva.NullSafeToString() ,
+                                //a.IdComprador.NullSafeToString(),
+                                //a.IdProveedor.NullSafeToString(),
+                                //a.ConfirmadoPorWeb_1.NullSafeToString()
+                               
+                            }
+                        }).ToArray()
+            };
+
+            //return Json(jsonData, JsonRequestBehavior.AllowGet);
+            System.Web.Script.Serialization.JavaScriptSerializer jsonSerializer = new System.Web.Script.Serialization.JavaScriptSerializer();
+            return jsonSerializer.Serialize(jsonData);
+
+
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+        public virtual string CartasPorte_DynamicGridData_Orden3(string sidx, string sord, int page, int rows, bool _search, string filters, string FechaInicial, string FechaFinal, int puntovent, int iddestino, string SC, string nombreusuario, string SCbdlmaster)
+        {
+
+            // An ASHX is a generic HttpHandler. An ASMX file is a web service. ASHX is a good lean way to provide a response to AJAX calls, but if you want to provide a response which changes based on conditions (such as variable inputs) it can become a bit of a handful - lots of if else etc. ASMX can house mulitple methods which can take parameters.
+
+            //string SC;
+            //if (System.Diagnostics.Debugger.IsAttached)
+            //    SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(ConfigurationManager.AppSettings["scLocal"]);
+            //else
+            //    SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(ConfigurationManager.AppSettings["scWilliamsRelease"]);
+
+
+
+            //var usuario = Membership.GetUser();
+            //System.Data.DataTable dt = EntidadManager.ExecDinamico(SC, "Empleados_TX_UsuarioNT '" + nombreusuario + "'");
+            //int idUsuario = Convert.ToInt32(dt.Rows[0][0]);
+            // int puntovent = EmpleadoManager.GetItem(SC, idUsuario).PuntoVentaAsociado;
+
+
+            DateTime FechaDesde = new DateTime(1980, 1, 1);
+            DateTime FechaHasta = new DateTime(2050, 1, 1);
+
+            try
+            {
+
+                FechaDesde = DateTime.ParseExact(FechaInicial, "d/M/yyyy", null);
+            }
+            catch (Exception e)
+            {
+                //throw;
+            }
+
+            try
+            {
+                FechaHasta = DateTime.ParseExact(FechaFinal, "d/M/yyyy", null);
+
+            }
+            catch (Exception e)
+            {
+                //throw;
+
+            }
+
+
+
+
+
+            ProntoMVC.Data.Models.DemoProntoEntities db =
+                               new ProntoMVC.Data.Models.DemoProntoEntities(
+                                   Auxiliares.FormatearConexParaEntityFramework(
+                                   ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC)));
+
+
+            db.Database.CommandTimeout = 240;
+
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+            var q = db.fSQL_GetDataTableFiltradoYPaginado(
+                                                            0, 9999999, estado, "", -1, -1,
+                                                            -1, -1, -1, -1, -1,
+                                                            iddestino, 0, "Ambas", FechaDesde,
+                                                            FechaHasta, puntovent, null, false, "", "",
+                                                            -1, null, 0, "", "Todos");
+
+
+
+            // si el usuario tiene una razon social asignada, hay que filtrar. -Pero hay que filtrar antes! como en ListadoSegunCliente()
+            // -tambien tenes el tema de los clientes con filtros configurables.... en DataTablePorClienteSQL()
+            if (SCbdlmaster != "")
+            {
+
+                string rs = UserDatosExtendidosManager.TraerRazonSocialDelUsuarioNombre(nombreusuario, SCbdlmaster, SC);
+                if (rs != "")
+                {
+                    int idcliente = SQLdinamico.BuscaIdClientePreciso(rs, SC);
+                    int idCorredor = SQLdinamico.BuscaIdVendedorPreciso(EntidadManager.NombreCliente(SC, idcliente), SC);
+                    q = q.Where(x => x.Vendedor == idcliente || x.Entregador == idcliente || x.Corredor == idCorredor ||
+                                    x.CuentaOrden1 == idcliente || x.CuentaOrden2 == idcliente || x.IdClienteAuxiliar == idcliente);
                 }
             }
 
@@ -4809,6 +5137,274 @@ Formato localidad-provincia	destination	x
                                 a.IdCartaDePorte.ToString(),
 
                                 "<a href=\"CartaDePorte.aspx?Id=" +  a.IdCartaDePorte + "\"  target=\"_blank\" >" +  a.NumeroCartaEnTextoParaBusqueda.NullSafeToString() + "</>" ,
+
+
+
+
+                     //   Num de cp - Situacion - obs situcaion - producto - titular - interm - remitente - corredor - destintario - destino - patente - kg proc. - arribo - descarga * El cliente puede modificar la situación? - No no la puede cambiar.
+
+                        
+                                (a.Situacion ?? 0).NullSafeToString(),
+
+                                a.ObservacionesSituacion,
+
+                                a.Producto.ToString(),
+                                  a.TitularDesc,
+                                 a.IntermediarioDesc,
+                                 a.RComercialDesc,
+
+                                a.CorredorDesc,
+                                 a.DestinatarioDesc,
+
+                                a.DestinoDesc.ToString(),
+                                a.Destino ==null ? "" : a.Destino.ToString(),
+
+
+                                a.Patente,
+
+                                Convert.ToInt32( a.NetoPto).ToString(),
+
+
+                                
+                                a.FechaArribo==null ? "" :  a.FechaArribo.GetValueOrDefault().ToShortDateString(),
+
+
+                                a.FechaDescarga==null ? "" :  a.FechaDescarga.GetValueOrDefault().ToShortDateString(),
+
+
+
+                                 //a.PuntoVenta.ToString(),
+
+                                 //a.FechaActualizacionAutomatica==null ? "" :  a.FechaActualizacionAutomatica.GetValueOrDefault().NullSafeToString(),
+
+
+                                 //  Convert.ToInt32(a.NetoFinal).ToString(),
+
+
+                                 // a.FechaSalida==null ? "" :  a.FechaSalida.GetValueOrDefault().ToString("dd/MM/yyyy"),
+                                //a.Cumplido.NullSafeToString(), 
+
+
+                                //string.Join(" ",  a.DetallePedidos.Select(x=>(x.DetalleRequerimiento==null) ? "" : 
+                                //                     x.DetalleRequerimiento.Requerimientos == null ? "" :   
+                                //                         x.DetalleRequerimiento.Requerimientos.NumeroRequerimiento.NullSafeToString() ).Distinct()),
+                                //string.Join(" ",  a.DetallePedidos.Select(x=>(x.DetalleRequerimiento==null) ? "" : 
+                                //                        x.DetalleRequerimiento.Requerimientos == null ? ""  :
+                                //                            x.DetalleRequerimiento.Requerimientos.Obra == null ? ""  :
+                                //                             x.DetalleRequerimiento.Requerimientos.Obra.NumeroObra.NullSafeToString()).Distinct()),
+                              
+                                                             
+                                //a.Proveedor==null ? "" :  a.Proveedor.RazonSocial.NullSafeToString(), 
+                                //(a.TotalPedido- a.TotalIva1+a.Bonificacion- (a.ImpuestosInternos ?? 0)- (a.OtrosConceptos1 ?? 0) - (a.OtrosConceptos2 ?? 0)-    (a.OtrosConceptos3 ?? 0) -( a.OtrosConceptos4 ?? 0) - (a.OtrosConceptos5 ?? 0)).ToString(),  
+                                //a.Bonificacion.NullSafeToString(), 
+                                //a.TotalIva1.NullSafeToString(), 
+                                //a.Moneda==null ? "" :   a.Moneda.Abreviatura.NullSafeToString(),  
+                                //a.Comprador==null ? "" :    a.Comprador.Nombre.NullSafeToString(),  
+                                //a.Empleado==null ? "" :  a.Empleado.Nombre.NullSafeToString(),  
+                                //a.DetallePedidos.Count().NullSafeToString(),  
+                                //a.IdPedido.NullSafeToString(), 
+                                //a.NumeroComparativa.NullSafeToString(),  
+                                //a.IdTipoCompraRM.NullSafeToString(), 
+                                //a.Observaciones.NullSafeToString(),   
+                                //a.DetalleCondicionCompra.NullSafeToString(),   
+                                //a.PedidoExterior.NullSafeToString(),  
+                                //a.IdPedidoAbierto.NullSafeToString(), 
+                                //a.NumeroLicitacion .NullSafeToString(), 
+                                //a.Impresa.NullSafeToString(), 
+                                //a.UsuarioAnulacion.NullSafeToString(), 
+                                //a.FechaAnulacion.NullSafeToString(),  
+                                //a.MotivoAnulacion.NullSafeToString(),  
+                                //a.ImpuestosInternos.NullSafeToString(), 
+                                //"", // #Auxiliar1.Equipos , 
+                                //a.CircuitoFirmasCompleto.NullSafeToString(), 
+                                //a.Proveedor==null ? "" : a.Proveedor.IdCodigoIva.NullSafeToString() ,
+                                //a.IdComprador.NullSafeToString(),
+                                //a.IdProveedor.NullSafeToString(),
+                                //a.ConfirmadoPorWeb_1.NullSafeToString()
+                               
+                            }
+                        }).ToArray()
+            };
+
+            //return Json(jsonData, JsonRequestBehavior.AllowGet);
+            System.Web.Script.Serialization.JavaScriptSerializer jsonSerializer = new System.Web.Script.Serialization.JavaScriptSerializer();
+            return jsonSerializer.Serialize(jsonData);
+
+
+        }
+
+
+        public virtual string CartasPorte_DynamicGridData(string sidx, string sord, int page, int rows, bool _search, string filters, string FechaInicial, string FechaFinal, int puntovent, int iddestino, string SC, string nombreusuario, string SCbdlmaster)
+        {
+
+            // An ASHX is a generic HttpHandler. An ASMX file is a web service. ASHX is a good lean way to provide a response to AJAX calls, but if you want to provide a response which changes based on conditions (such as variable inputs) it can become a bit of a handful - lots of if else etc. ASMX can house mulitple methods which can take parameters.
+
+            //string SC;
+            //if (System.Diagnostics.Debugger.IsAttached)
+            //    SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(ConfigurationManager.AppSettings["scLocal"]);
+            //else
+            //    SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(ConfigurationManager.AppSettings["scWilliamsRelease"]);
+
+
+
+            //var usuario = Membership.GetUser();
+            //System.Data.DataTable dt = EntidadManager.ExecDinamico(SC, "Empleados_TX_UsuarioNT '" + nombreusuario + "'");
+            //int idUsuario = Convert.ToInt32(dt.Rows[0][0]);
+            // int puntovent = EmpleadoManager.GetItem(SC, idUsuario).PuntoVentaAsociado;
+
+
+            DateTime FechaDesde = new DateTime(1980, 1, 1);
+            DateTime FechaHasta = new DateTime(2050, 1, 1);
+
+            try
+            {
+
+                FechaDesde = DateTime.ParseExact(FechaInicial, "d/M/yyyy", null);
+            }
+            catch (Exception e)
+            {
+                //throw;
+            }
+
+            try
+            {
+                FechaHasta = DateTime.ParseExact(FechaFinal, "d/M/yyyy", null);
+
+            }
+            catch (Exception e)
+            {
+                //throw;
+
+            }
+
+
+
+
+
+            ProntoMVC.Data.Models.DemoProntoEntities db =
+                               new ProntoMVC.Data.Models.DemoProntoEntities(
+                                   Auxiliares.FormatearConexParaEntityFramework(
+                                   ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC)));
+
+
+            db.Database.CommandTimeout = 240;
+
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+            var q = db.fSQL_GetDataTableFiltradoYPaginado(
+                                                            0, 9999999, estado, "", -1, -1,
+                                                            -1, -1, -1, -1, -1,
+                                                            iddestino, 0, "Ambas", FechaDesde,
+                                                            FechaHasta, puntovent, null, false, "", "",
+                                                            -1, null, 0, "", "Todos");
+
+
+
+            // si el usuario tiene una razon social asignada, hay que filtrar. -Pero hay que filtrar antes! como en ListadoSegunCliente()
+            // -tambien tenes el tema de los clientes con filtros configurables.... en DataTablePorClienteSQL()
+            if (SCbdlmaster != "")
+            {
+
+                string rs = UserDatosExtendidosManager.TraerRazonSocialDelUsuarioNombre(nombreusuario, SCbdlmaster, SC);
+                if (rs != "")
+                {
+                    int idcliente = SQLdinamico.BuscaIdClientePreciso(rs, SC);
+                    int idCorredor = SQLdinamico.BuscaIdVendedorPreciso(EntidadManager.NombreCliente(SC, idcliente), SC);
+                    q = q.Where(x => x.Vendedor == idcliente || x.Entregador == idcliente || x.Corredor == idCorredor ||
+                                    x.CuentaOrden1 == idcliente || x.CuentaOrden2 == idcliente || x.IdClienteAuxiliar == idcliente);
+                }
+            }
+
+
+
+
+            int totalRecords = 0;
+            var pagedQuery = Filtrador.Filters.FiltroGenerico_UsandoIQueryable<ProntoMVC.Data.Models.fSQL_GetDataTableFiltradoYPaginado_Result3>
+                            (sidx, sord, page, rows, _search, filters, db, ref totalRecords, q);
+
+
+
+
+
+
+            //db.CartasDePortes
+            //                              .Where(x =>
+            //                                      (x.FechaDescarga >= FechaDesde && x.FechaDescarga <= FechaHasta)
+            //                                       &&
+            //                                      (x.PuntoVenta == puntovent || puntovent <= 0)
+            //                                       &&
+            //                                      (x.Destino == iddestino || iddestino <= 0)
+            //                                   )
+
+
+
+
+
+
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+            string campo = "true";
+            int pageSize = rows;
+            int currentPage = page;
+
+
+            //if (sidx == "Numero") sidx = "NumeroPedido"; // como estoy haciendo "select a" (el renglon entero) en la linq antes de llamar jqGridJson, no pude ponerle el nombre explicito
+            //if (searchField == "Numero") searchField = "NumeroPedido"; 
+
+            var Entidad = pagedQuery
+                          //.Include(x => x.Moneda)
+                          //.Include(x => x.Proveedor)
+                          //.Include(x => x.DetallePedidos
+                          //            .Select(y => y.DetalleRequerimiento
+                          //                )
+                          //        )
+                          //.Include("DetallePedidos.DetalleRequerimiento.Requerimientos.Obra") // funciona tambien
+                          //.Include(x => x.Comprador)
+                          .AsQueryable();
+
+
+            //var Entidad1 = (from a in Entidad.Where(campo) select new { Id = a.IdCartasDePorteControlDescarga });
+
+            int totalPages = (int)Math.Ceiling((float)totalRecords / (float)pageSize);
+
+            var data = (from a in Entidad
+                        select a
+                        )//.Where(campo).OrderBy(sidx + " " + sord)
+                        .ToList();
+
+            var jsonData = new jqGridJson()
+            {
+                total = totalPages,
+                page = currentPage,
+                records = totalRecords,
+                rows = (from a in data
+                        select new jqGridRowJson
+                        {
+                            id = a.IdCartaDePorte.ToString(),
+                            cell = new string[] {
+                                "", //"<a href="+ Url.Action("Edit",new {id = a.IdPedido} ) + "  >Editar</>" ,
+                                
+
+                                // CP	TURNO	SITUACION	MERC	TITULAR_CP	INTERMEDIARIO	RTE CIAL	CORREDOR	DESTINATARIO	DESTINO	ENTREGADOR	PROC	KILOS	OBSERVACION
+
+                                a.IdCartaDePorte.ToString(),
+
+                                "<a href=\"CartaDePorte.aspx?Id=" +  a.IdCartaDePorte + "\"  target=\"_blank\" >" +  a.NumeroCartaEnTextoParaBusqueda.NullSafeToString() + "</>" ,
+
+
+
+
 
                                 a.Turno, //turno
 
@@ -5219,6 +5815,9 @@ Formato localidad-provincia	destination	x
             return jsonData;
         }
 
+
+
+
         public virtual string CDPMovimientos_DynamicGridData_ExcelExportacion_UsandoInternalQuery(string SC, string sidx, string sord, int page, int rows, bool _search, string filters)
         {
             //asdad
@@ -5315,6 +5914,275 @@ Formato localidad-provincia	destination	x
             return sqlquery4;
 
         }
+
+
+
+
+
+
+        public virtual string ControlesDiarios_DynamicGridData(string sidx, string sord, int page, int rows, bool _search, string filters, string FechaInicial, string FechaFinal, int puntovent, int iddestino, string SC, string nombreusuario)
+        {
+
+            System.Data.DataTable dt = EntidadManager.ExecDinamico(SC, "Empleados_TX_UsuarioNT '" + nombreusuario + "'");
+            int idUsuario = Convert.ToInt32(dt.Rows[0][0]);
+            // int puntovent = EmpleadoManager.GetItem(SC, idUsuario).PuntoVentaAsociado;
+
+
+            DateTime FechaDesde = new DateTime(1980, 1, 1);
+            DateTime FechaHasta = new DateTime(2050, 1, 1);
+
+            try
+            {
+
+                FechaDesde = DateTime.ParseExact(FechaInicial, "dd/MM/yyyy", null);
+            }
+            catch (Exception)
+            {
+
+            }
+
+            try
+            {
+                FechaHasta = DateTime.ParseExact(FechaFinal, "dd/MM/yyyy", null);
+
+            }
+            catch (Exception)
+            {
+
+            }
+
+
+
+
+
+            ProntoMVC.Data.Models.DemoProntoEntities db =
+                               new DemoProntoEntities(
+                                   Auxiliares.FormatearConexParaEntityFramework(
+                                   ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC)));
+
+
+
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+            int totalRecords = 0;
+
+
+            var pagedQuery = Filtrador.Filters.FiltroGenerico_UsandoIQueryable<CartasDePorteControlDescarga>
+                            (sidx, sord, page, rows, _search, filters, db, ref totalRecords,
+                                    db.CartasDePorteControlDescargas
+                                            .Where(x =>
+                                                    //(x.IdPuntoVenta == puntovent || puntovent == 0)
+                                                    //&&
+                                                    (x.Fecha >= FechaDesde && x.Fecha <= FechaHasta)
+                                                     &&
+                                                    (x.WilliamsDestino.PuntoVenta == puntovent || puntovent <= 0)
+                                                     &&
+                                                    (x.WilliamsDestino.IdWilliamsDestino == iddestino || iddestino <= 0)
+                                                 )
+                                            );
+
+
+
+            // var pagedQuery = Filtrador.Filters.FiltroGenerico<CartasDePorteControlDescarga>
+            //                    ("", sidx, sord, page, rows, _search, filters, db, ref totalRecords);
+
+
+
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+            string campo = "true";
+            int pageSize = rows;
+            int currentPage = page;
+
+
+            //if (sidx == "Numero") sidx = "NumeroPedido"; // como estoy haciendo "select a" (el renglon entero) en la linq antes de llamar jqGridJson, no pude ponerle el nombre explicito
+            //if (searchField == "Numero") searchField = "NumeroPedido"; 
+
+            var Entidad = pagedQuery
+                          //.Include(x => x.Moneda)
+                          //.Include(x => x.Proveedor)
+                          //.Include(x => x.DetallePedidos
+                          //            .Select(y => y.DetalleRequerimiento
+                          //                )
+                          //        )
+                          //.Include("DetallePedidos.DetalleRequerimiento.Requerimientos.Obra") // funciona tambien
+                          //.Include(x => x.Comprador)
+                          .AsQueryable();
+
+
+            //var Entidad1 = (from a in Entidad.Where(campo) select new { Id = a.IdCartasDePorteControlDescarga });
+
+            int totalPages = (int)Math.Ceiling((float)totalRecords / (float)pageSize);
+
+            var data = (from a in Entidad
+                        select a
+                        )//.Where(campo).OrderBy(sidx + " " + sord)
+                        .ToList();
+
+            var jsonData = new jqGridJson()
+            {
+                total = totalPages,
+                page = currentPage,
+                records = totalRecords,
+                rows = (from a in data
+                        select new jqGridRowJson
+                        {
+                            id = a.IdCartasDePorteControlDescarga.ToString(),
+                            cell = new string[] {
+                                "", //"<a href="+ Url.Action("Edit",new {id = a.IdPedido} ) + "  >Editar</>" ,
+                                
+                                a.IdCartasDePorteControlDescarga.ToString(),
+
+                                 a.Fecha.ToShortDateString(),
+
+                                a.WilliamsDestino==null ? "" : a.WilliamsDestino.Descripcion,
+
+                                 a.IdDestino.ToString(),
+
+                                 a.TotalDescargaDia.ToString(),
+
+                                 a.IdPuntoVenta.ToString()
+                                 
+                                 
+                                 // a.FechaSalida==null ? "" :  a.FechaSalida.GetValueOrDefault().ToString("dd/MM/yyyy"),
+                                //a.Cumplido.NullSafeToString(), 
+
+
+                                //string.Join(" ",  a.DetallePedidos.Select(x=>(x.DetalleRequerimiento==null) ? "" : 
+                                //                     x.DetalleRequerimiento.Requerimientos == null ? "" :   
+                                //                         x.DetalleRequerimiento.Requerimientos.NumeroRequerimiento.NullSafeToString() ).Distinct()),
+                                //string.Join(" ",  a.DetallePedidos.Select(x=>(x.DetalleRequerimiento==null) ? "" : 
+                                //                        x.DetalleRequerimiento.Requerimientos == null ? ""  :
+                                //                            x.DetalleRequerimiento.Requerimientos.Obra == null ? ""  :
+                                //                             x.DetalleRequerimiento.Requerimientos.Obra.NumeroObra.NullSafeToString()).Distinct()),
+                              
+                                                             
+                                //a.Proveedor==null ? "" :  a.Proveedor.RazonSocial.NullSafeToString(), 
+                                //(a.TotalPedido- a.TotalIva1+a.Bonificacion- (a.ImpuestosInternos ?? 0)- (a.OtrosConceptos1 ?? 0) - (a.OtrosConceptos2 ?? 0)-    (a.OtrosConceptos3 ?? 0) -( a.OtrosConceptos4 ?? 0) - (a.OtrosConceptos5 ?? 0)).ToString(),  
+                                //a.Bonificacion.NullSafeToString(), 
+                                //a.TotalIva1.NullSafeToString(), 
+                                //a.Moneda==null ? "" :   a.Moneda.Abreviatura.NullSafeToString(),  
+                                //a.Comprador==null ? "" :    a.Comprador.Nombre.NullSafeToString(),  
+                                //a.Empleado==null ? "" :  a.Empleado.Nombre.NullSafeToString(),  
+                                //a.DetallePedidos.Count().NullSafeToString(),  
+                                //a.IdPedido.NullSafeToString(), 
+                                //a.NumeroComparativa.NullSafeToString(),  
+                                //a.IdTipoCompraRM.NullSafeToString(), 
+                                //a.Observaciones.NullSafeToString(),   
+                                //a.DetalleCondicionCompra.NullSafeToString(),   
+                                //a.PedidoExterior.NullSafeToString(),  
+                                //a.IdPedidoAbierto.NullSafeToString(), 
+                                //a.NumeroLicitacion .NullSafeToString(), 
+                                //a.Impresa.NullSafeToString(), 
+                                //a.UsuarioAnulacion.NullSafeToString(), 
+                                //a.FechaAnulacion.NullSafeToString(),  
+                                //a.MotivoAnulacion.NullSafeToString(),  
+                                //a.ImpuestosInternos.NullSafeToString(), 
+                                //"", // #Auxiliar1.Equipos , 
+                                //a.CircuitoFirmasCompleto.NullSafeToString(), 
+                                //a.Proveedor==null ? "" : a.Proveedor.IdCodigoIva.NullSafeToString() ,
+                                //a.IdComprador.NullSafeToString(),
+                                //a.IdProveedor.NullSafeToString(),
+                                //a.ConfirmadoPorWeb_1.NullSafeToString()
+                               
+                            }
+                        }).ToArray()
+            };
+
+            //return Json(jsonData, JsonRequestBehavior.AllowGet);
+            System.Web.Script.Serialization.JavaScriptSerializer jsonSerializer = new System.Web.Script.Serialization.JavaScriptSerializer();
+            return jsonSerializer.Serialize(jsonData);
+
+
+        }
+
+
+
+        public virtual string ControlesDiarios_DynamicGridData_ExcelExportacion_UsandoInternalQuery(string SC, string sidx, string sord, int page, int rows, bool _search,
+                                                    string filters, string FechaInicial, string FechaFinal, int puntovent, int iddestino, string nombreusuario)
+        {
+
+            System.Data.DataTable dt = EntidadManager.ExecDinamico(SC, "Empleados_TX_UsuarioNT '" + nombreusuario + "'");
+            int idUsuario = Convert.ToInt32(dt.Rows[0][0]);
+            // int puntovent = EmpleadoManager.GetItem(SC, idUsuario).PuntoVentaAsociado;
+
+
+            DateTime FechaDesde = new DateTime(1980, 1, 1);
+            DateTime FechaHasta = new DateTime(2050, 1, 1);
+
+            try
+            {
+
+                FechaDesde = DateTime.ParseExact(FechaInicial, "dd/MM/yyyy", null);
+            }
+            catch (Exception)
+            {
+
+            }
+
+            try
+            {
+                FechaHasta = DateTime.ParseExact(FechaFinal, "dd/MM/yyyy", null);
+
+            }
+            catch (Exception)
+            {
+
+            }
+
+
+
+
+
+            ProntoMVC.Data.Models.DemoProntoEntities db =
+                               new DemoProntoEntities(
+                                   Auxiliares.FormatearConexParaEntityFramework(
+                                   ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC)));
+
+
+
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+            int totalrecords = 0;
+
+
+            string sqlquery4 = Filtrador.Filters.FiltroGenerico_UsandoIQueryable_DevolverInternalQuery<ControlDescarga2>
+                                 (
+                                                         sidx, sord, 1, 999999, true, filters, db, ref totalrecords,
+                                                         db.CartasDePorteControlDescargas
+                                            .Where(x =>
+                                                    //(x.IdPuntoVenta == puntovent || puntovent == 0)
+                                                    //&&
+                                                    (x.Fecha >= FechaDesde && x.Fecha <= FechaHasta)
+                                                     &&
+                                                    (x.WilliamsDestino.PuntoVenta == puntovent || puntovent <= 0)
+                                                     &&
+                                                    (x.WilliamsDestino.IdWilliamsDestino == iddestino || iddestino <= 0)
+                                                 ).Select(x => new ControlDescarga2 { Fecha = x.Fecha, Descripcion = x.WilliamsDestino.Descripcion, TotalDescargaDia = x.TotalDescargaDia })
+                                 );
+
+
+
+
+            return sqlquery4;
+        }
+
+        public class ControlDescarga2
+        {
+            public DateTime? Fecha { get; set; }
+            public string Descripcion { get; set; }
+            public int? TotalDescargaDia { get; set; }
+        }
+
 
 
 
@@ -5640,74 +6508,74 @@ Formato localidad-provincia	destination	x
 
             /*
             select
-*
-from
-(
-select
- FLOOR( sum(netoproc) /1000) as kilos, LOCORI.Nombre as localidad, isnull(PROVORI.Nombre,'BUENOS AIRES' ) as provincia
-from 
- dbo.fSQL_GetDataTableFiltradoYPaginado  
-				(  
+    *
+    from
+    (
+    select
+    FLOOR( sum(netoproc) /1000) as kilos, LOCORI.Nombre as localidad, isnull(PROVORI.Nombre,'BUENOS AIRES' ) as provincia
+    from 
+    dbo.fSQL_GetDataTableFiltradoYPaginado  
+                (  
 
- NULL, 
-					10, 
-					0,
-					NULL, 
-					-1,
-					 
--1,-1,
--1,
--1,
--1,
+    NULL, 
+                    10, 
+                    0,
+                    NULL, 
+                    -1,
 
-					-1, 
-					NULL, 
-					0,
-					@Modo,
-					@FechaDesde,
+    -1,-1,
+    -1,
+    -1,
+    -1,
 
-					@FechaHasta,
-					NULL, 
-					NULL,
-					 'FALSE',
-					NULL, 
-					NULL, 
+                    -1, 
+                    NULL, 
+                    0,
+                    @Modo,
+                    @FechaDesde,
 
-					NULL, 
-					NULL, 
-					NULL,
-					NULL, 
-					NULL
+                    @FechaHasta,
+                    NULL, 
+                    NULL,
+                     'FALSE',
+                    NULL, 
+                    NULL, 
 
-					)
-    
- as CDP
+                    NULL, 
+                    NULL, 
+                    NULL,
+                    NULL, 
+                    NULL
 
+                    )
 
+    as CDP
 
 
-RIGHT OUTER JOIN Localidades LOCORI ON CDP.Procedencia = LOCORI.IdLocalidad          
-LEFT OUTER JOIN Provincias PROVORI ON LOCORI.IdProvincia = PROVORI.IdProvincia           
-where   1=1
-	--procedencia is not null
-	--and netoproc > 0
-	
-	--and (producto like @producto or isnull(@producto,'')=''  )
-	--and (titulardesc like @cliente or
-	--    rcomercialdesc like @cliente  or
-	--    intermediariodesc like @cliente  or
-	--    destinatariodesc like @cliente 
-	--	or  isnull(@cliente,'')='' )
-	--and (destinodesc like @puerto or  isnull(@puerto,'')='')
 
 
-group by LOCORI.Nombre,PROVORI.Nombre
+    RIGHT OUTER JOIN Localidades LOCORI ON CDP.Procedencia = LOCORI.IdLocalidad          
+    LEFT OUTER JOIN Provincias PROVORI ON LOCORI.IdProvincia = PROVORI.IdProvincia           
+    where   1=1
+    --procedencia is not null
+    --and netoproc > 0
 
-) as C
---where kilos >= isnull(@TonsDesde,0)
---and kilos <= isnull(@TonsHasta,999999999)
+    --and (producto like @producto or isnull(@producto,'')=''  )
+    --and (titulardesc like @cliente or
+    --    rcomercialdesc like @cliente  or
+    --    intermediariodesc like @cliente  or
+    --    destinatariodesc like @cliente 
+    --	or  isnull(@cliente,'')='' )
+    --and (destinodesc like @puerto or  isnull(@puerto,'')='')
 
-order by kilos desc
+
+    group by LOCORI.Nombre,PROVORI.Nombre
+
+    ) as C
+    --where kilos >= isnull(@TonsDesde,0)
+    --and kilos <= isnull(@TonsHasta,999999999)
+
+    order by kilos desc
 
 
             */
@@ -5840,7 +6708,7 @@ order by kilos desc
             FirefoxProfile profile = new FirefoxProfile();
 
             profile.SetPreference("browser.download.folderList", 2);  // # 2 = custom location
-            //profile.SetPreference("browser.download.manager.showWhenStarting", false);
+                                                                      //profile.SetPreference("browser.download.manager.showWhenStarting", false);
             profile.SetPreference("browser.download.dir", directorioDescarga);  //os.getcwd()
             profile.SetPreference("browser.helperApps.neverAsk.saveToDisk", "application/ms-excel;application/xls;text/csv;application/vnd.ms-excel");
             profile.SetPreference("browser.helperApps.alwaysAsk.force", false);
@@ -5977,12 +6845,12 @@ order by kilos desc
 
                     sleep(15)
 
-		
+
                     bashCommand = "ren Urenport.xls \"Urenport_%time:~0,2%%time:~3,2%-%DATE:/=%.xls\" "
                     os.system(bashCommand)
-		
+
                     sleep(2)
-		 
+
                     bashCommand = "robocopy E:\SistemaPronto\Robot\  E:\Sites\ProntoTesting\Temp\Pegatinas *.xls /MOV /LOG+:LogRobot.txt "
                     os.system(bashCommand)
 
@@ -5990,12 +6858,12 @@ order by kilos desc
                     #browser.quit()
                     bashCommand = "Taskkill /IM Firefox.exe /F >nul 2>&1"
                     os.system(bashCommand)
-		
+
                     bashCommand = "ren Urenport.xls \"Urenport_%time:~0,2%%time:~3,2%-%DATE:/=%.xls\" "
                     os.system(bashCommand)
-		
+
                     sleep(2)
-		
+
                     bashCommand = "robocopy E:\SistemaPronto\Robot\  E:\Sites\ProntoTesting\Temp\Pegatinas *.xls /MOV /LOG+:LogRobot.txt"
                     os.system(bashCommand)
 
@@ -6024,7 +6892,7 @@ order by kilos desc
             FirefoxProfile profile = new FirefoxProfile();
 
             profile.SetPreference("browser.download.folderList", 2);  // # 2 = custom location
-            //profile.SetPreference("browser.download.manager.showWhenStarting", false);
+                                                                      //profile.SetPreference("browser.download.manager.showWhenStarting", false);
             profile.SetPreference("browser.download.dir", directorioDescarga);  //os.getcwd()
             profile.SetPreference("browser.helperApps.neverAsk.saveToDisk", "application/ms-excel;application/xls;text/csv;application/vnd.ms-excel");
             profile.SetPreference("browser.helperApps.alwaysAsk.force", false);
@@ -6154,12 +7022,12 @@ order by kilos desc
 
                     sleep(15)
 
-		
+
                     bashCommand = "ren Urenport.xls \"Urenport_%time:~0,2%%time:~3,2%-%DATE:/=%.xls\" "
                     os.system(bashCommand)
-		
+
                     sleep(2)
-		 
+
                     bashCommand = "robocopy E:\SistemaPronto\Robot\  E:\Sites\ProntoTesting\Temp\Pegatinas *.xls /MOV /LOG+:LogRobot.txt "
                     os.system(bashCommand)
 
@@ -6167,12 +7035,12 @@ order by kilos desc
                     #browser.quit()
                     bashCommand = "Taskkill /IM Firefox.exe /F >nul 2>&1"
                     os.system(bashCommand)
-		
+
                     bashCommand = "ren Urenport.xls \"Urenport_%time:~0,2%%time:~3,2%-%DATE:/=%.xls\" "
                     os.system(bashCommand)
-		
+
                     sleep(2)
-		
+
                     bashCommand = "robocopy E:\SistemaPronto\Robot\  E:\Sites\ProntoTesting\Temp\Pegatinas *.xls /MOV /LOG+:LogRobot.txt"
                     os.system(bashCommand)
 
@@ -6207,7 +7075,7 @@ order by kilos desc
             profile.SetPreference("browser.download.dir", @"C:\Users\Administrador\Downloads" );  //os.getcwd()
             profile.SetPreference("browser.helperApps.neverAsk.saveToDisk", "application/ms-excel;application/xls;text/csv;application/vnd.ms-excel");
             profile.SetPreference("browser.helperApps.alwaysAsk.force", false);
-    
+
             IWebDriver browser = new FirefoxDriver(profile);
             */
 
@@ -6336,12 +7204,12 @@ order by kilos desc
 
                     sleep(15)
 
-		
+
                     bashCommand = "ren Urenport.xls \"Urenport_%time:~0,2%%time:~3,2%-%DATE:/=%.xls\" "
                     os.system(bashCommand)
-		
+
                     sleep(2)
-		 
+
                     bashCommand = "robocopy E:\SistemaPronto\Robot\  E:\Sites\ProntoTesting\Temp\Pegatinas *.xls /MOV /LOG+:LogRobot.txt "
                     os.system(bashCommand)
 
@@ -6349,12 +7217,12 @@ order by kilos desc
                     #browser.quit()
                     bashCommand = "Taskkill /IM Firefox.exe /F >nul 2>&1"
                     os.system(bashCommand)
-		
+
                     bashCommand = "ren Urenport.xls \"Urenport_%time:~0,2%%time:~3,2%-%DATE:/=%.xls\" "
                     os.system(bashCommand)
-		
+
                     sleep(2)
-		
+
                     bashCommand = "robocopy E:\SistemaPronto\Robot\  E:\Sites\ProntoTesting\Temp\Pegatinas *.xls /MOV /LOG+:LogRobot.txt"
                     os.system(bashCommand)
 
@@ -6481,35 +7349,35 @@ order by kilos desc
                 /*
     __________________________
 
-Log Entry:
+    Log Entry:
     07 / 27 / 2017 18:05:29
-Error in: . Error Message:hilo #8: OpenQA.Selenium.WebDriverException: The HTTP request to the remote WebDriver server for URL http://localhost:63353/session/bce41a1121d80cf54cc11199098451be/element/0.38402688537807506-1/click timed out after 60 seconds. ---> System.Net.WebException: The operation has timed out
-at System.Net.HttpWebRequest.GetResponse()
-at OpenQA.Selenium.Remote.HttpCommandExecutor.CreateResponse(WebRequest request)
--- - End of inner exception stack trace-- -
-at OpenQA.Selenium.Remote.HttpCommandExecutor.CreateResponse(WebRequest request)
-at OpenQA.Selenium.Remote.HttpCommandExecutor.Execute(Command commandToExecute)
-at OpenQA.Selenium.Remote.DriverServiceCommandExecutor.Execute(Command commandToExecute)
-at OpenQA.Selenium.Remote.RemoteWebDriver.Execute(String driverCommandToExecute, Dictionary`2 parameters)
-at OpenQA.Selenium.Remote.RemoteWebElement.Click()
-at ServicioCartaPorte.servi.CerealnetSelenium_ConChromeHeadless(String directorioDescarga, String dirDriver) in C:\bdl\pronto\InterfazFlexicapture\prontoflexicapture.cs:line 6441
-at ProntoWindowsService.Service1.DoWorkSoloPegatinas() in C:\bdl\pronto\ProntoWindowsService\Service1.cs:line 819
-__________________________
+    Error in: . Error Message:hilo #8: OpenQA.Selenium.WebDriverException: The HTTP request to the remote WebDriver server for URL http://localhost:63353/session/bce41a1121d80cf54cc11199098451be/element/0.38402688537807506-1/click timed out after 60 seconds. ---> System.Net.WebException: The operation has timed out
+    at System.Net.HttpWebRequest.GetResponse()
+    at OpenQA.Selenium.Remote.HttpCommandExecutor.CreateResponse(WebRequest request)
+    -- - End of inner exception stack trace-- -
+    at OpenQA.Selenium.Remote.HttpCommandExecutor.CreateResponse(WebRequest request)
+    at OpenQA.Selenium.Remote.HttpCommandExecutor.Execute(Command commandToExecute)
+    at OpenQA.Selenium.Remote.DriverServiceCommandExecutor.Execute(Command commandToExecute)
+    at OpenQA.Selenium.Remote.RemoteWebDriver.Execute(String driverCommandToExecute, Dictionary`2 parameters)
+    at OpenQA.Selenium.Remote.RemoteWebElement.Click()
+    at ServicioCartaPorte.servi.CerealnetSelenium_ConChromeHeadless(String directorioDescarga, String dirDriver) in C:\bdl\pronto\InterfazFlexicapture\prontoflexicapture.cs:line 6441
+    at ProntoWindowsService.Service1.DoWorkSoloPegatinas() in C:\bdl\pronto\ProntoWindowsService\Service1.cs:line 819
+    __________________________
 
-Log Entry:
-07 / 27 / 2017 18:05:29
-Error in: . Error Message:OpenQA.Selenium.WebDriverException
-The HTTP request to the remote WebDriver server for URL http://localhost:63353/session/bce41a1121d80cf54cc11199098451be/element/0.38402688537807506-1/click timed out after 60 seconds.
-at OpenQA.Selenium.Remote.HttpCommandExecutor.CreateResponse(WebRequest request)
-at OpenQA.Selenium.Remote.HttpCommandExecutor.Execute(Command commandToExecute)
-at OpenQA.Selenium.Remote.DriverServiceCommandExecutor.Execute(Command commandToExecute)
-at OpenQA.Selenium.Remote.RemoteWebDriver.Execute(String driverCommandToExecute, Dictionary`2 parameters)
-at OpenQA.Selenium.Remote.RemoteWebElement.Click()
-at ServicioCartaPorte.servi.CerealnetSelenium_ConChromeHeadless(String directorioDescarga, String dirDriver) in C:\bdl\pronto\InterfazFlexicapture\prontoflexicapture.cs:line 6441
-at ProntoWindowsService.Service1.DoWorkSoloPegatinas() in C:\bdl\pronto\ProntoWindowsService\Service1.cs:line 819
-WebDriver
-__________________________
-*/
+    Log Entry:
+    07 / 27 / 2017 18:05:29
+    Error in: . Error Message:OpenQA.Selenium.WebDriverException
+    The HTTP request to the remote WebDriver server for URL http://localhost:63353/session/bce41a1121d80cf54cc11199098451be/element/0.38402688537807506-1/click timed out after 60 seconds.
+    at OpenQA.Selenium.Remote.HttpCommandExecutor.CreateResponse(WebRequest request)
+    at OpenQA.Selenium.Remote.HttpCommandExecutor.Execute(Command commandToExecute)
+    at OpenQA.Selenium.Remote.DriverServiceCommandExecutor.Execute(Command commandToExecute)
+    at OpenQA.Selenium.Remote.RemoteWebDriver.Execute(String driverCommandToExecute, Dictionary`2 parameters)
+    at OpenQA.Selenium.Remote.RemoteWebElement.Click()
+    at ServicioCartaPorte.servi.CerealnetSelenium_ConChromeHeadless(String directorioDescarga, String dirDriver) in C:\bdl\pronto\InterfazFlexicapture\prontoflexicapture.cs:line 6441
+    at ProntoWindowsService.Service1.DoWorkSoloPegatinas() in C:\bdl\pronto\ProntoWindowsService\Service1.cs:line 819
+    WebDriver
+    __________________________
+    */
 
             }
 
@@ -6543,7 +7411,7 @@ __________________________
 
         swiniak
         691
-  	 	
+
         Is there a particular version of Chrome you know works within Session 0? If I can simply downgrade, then this would be an option. – jwa Oct 20 '14 at 13:54
         1	 	
         With versions of Chrome before 38 all works as windows-service fine. Since version 38 - my windows service with selenium does not work. Downgrading Chrome solved problem for me – razon Oct 30 '14 at 9:50
@@ -6563,33 +7431,33 @@ __________________________
              * 
              * 
              Comment 39 by samu...@chromium.org, Nov 5 2014
-⚐
-Cc: samu...@chromium.org
-I'm able to reproduce this issue in M38, and I've also confirmed that M37 is not affected by this. The issue only comes up when launching Chrome from a scheduled task in Windows, and the task must be running as SYSTEM.
+    ⚐
+    Cc: samu...@chromium.org
+    I'm able to reproduce this issue in M38, and I've also confirmed that M37 is not affected by this. The issue only comes up when launching Chrome from a scheduled task in Windows, and the task must be running as SYSTEM.
 
-OS: Windows 7 Enterprise Service Pack 1
-Last Known Good Chrome Version: 37.0.2062.124
-First Known Bad Chrome Version: 38.0.2125.111 (current stable channel)
+    OS: Windows 7 Enterprise Service Pack 1
+    Last Known Good Chrome Version: 37.0.2062.124
+    First Known Bad Chrome Version: 38.0.2125.111 (current stable channel)
 
-The steps to reproduce are below. This should be enough to bisect on.
+    The steps to reproduce are below. This should be enough to bisect on.
 
-1. Start "Task Scheduler" and click "Create Task..."
-2. Give it a name, and set the user account to SYSTEM
-3. Click the Actions tab, click "New..."
-4. For Program/script, give it the path to chrome.exe
-5. For "Add arguments" type "--enable-logging --log-level=0 --user-data-dir=c:\sams_user_data_dir"
-6. Click the Triggers tab, click "New..." and set the time to something soon
-7. Click OK and OK, and wait for the task to run
-8. Open up c:\sams_user_data_dir\chrome_debug.log
+    1. Start "Task Scheduler" and click "Create Task..."
+    2. Give it a name, and set the user account to SYSTEM
+    3. Click the Actions tab, click "New..."
+    4. For Program/script, give it the path to chrome.exe
+    5. For "Add arguments" type "--enable-logging --log-level=0 --user-data-dir=c:\sams_user_data_dir"
+    6. Click the Triggers tab, click "New..." and set the time to something soon
+    7. Click OK and OK, and wait for the task to run
+    8. Open up c:\sams_user_data_dir\chrome_debug.log
 
-In M38, but not in M37, the debug log contains the error message below. Full logs from my system for M37 and M38 are attached.
+    In M38, but not in M37, the debug log contains the error message below. Full logs from my system for M37 and M38 are attached.
 
-[4620:5648:1105/142727:ERROR:child_process_launcher.cc(344)] Failed to launch child process
+    [4620:5648:1105/142727:ERROR:child_process_launcher.cc(344)] Failed to launch child process
 
- 	m37_chrome_debug.log 
-2.7 KB View Download
- 	m38_chrome_debug.log 
-2.8 KB View Download  
+    m37_chrome_debug.log 
+    2.7 KB View Download
+    m38_chrome_debug.log 
+    2.8 KB View Download  
              * 
              */
 

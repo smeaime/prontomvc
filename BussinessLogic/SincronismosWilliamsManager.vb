@@ -417,6 +417,15 @@ Namespace Pronto.ERP.Bll
                     txtPopClienteAuxiliar.Text = "LA BIZNAGA SA AGROPECUARIA"
 
 
+
+                Case "TERRA VERDE"
+                    'LARTIRIGOYEN: TITULAR / INTERMEDIARIO / RTTE COMERCIAL / CLIENTE OBSERVACIONES 
+                    txtTitular.Text = "TERRA VERDE AGRO INSUMOS S.A."
+                    txtIntermediario.Text = "TERRA VERDE AGRO INSUMOS S.A."
+                    txtRcomercial.Text = "TERRA VERDE AGRO INSUMOS S.A."
+                    txtPopClienteAuxiliar.Text = "TERRA VERDE AGRO INSUMOS S.A."
+
+
                 Case Else
                     Throw New Exception(sSincronismo.ToUpper + " No existe ese sincro")
 
@@ -1074,7 +1083,7 @@ Namespace Pronto.ERP.Bll
 
                             Dim sErrores As String
 
-                            output = Sincronismo_AmaggiDescargas(ds.wCartasDePorte_TX_InformesCorregido, "", sWHERE, sErrores, SC)
+                            output = Sincronismo_AmaggiDescargas2(ds.wCartasDePorte_TX_InformesCorregido, "", sWHERE, sErrores, SC)
 
 
                             sErroresRef = sErrores
@@ -1580,7 +1589,7 @@ Namespace Pronto.ERP.Bll
                             Dim dt = EntidadManager.ExecDinamico(SC, strSQLsincronismo() & " WHERE " & s)
                             dt = DataTableWHERE(dt, sWHERE)
                             FiltrarCopias(dt)
-                            output = Sincronismo_TomasHnos(dt, "", SC)
+                            output = Sincronismo_TomasHnos2(dt, "", SC)
                             registrosFiltrados = dt.Rows.Count
 
                         Case "SANTA CATALINA"
@@ -13710,7 +13719,7 @@ Namespace Pronto.ERP.Bll
 
 
 
-        Public Shared Function Sincronismo_AmaggiDescargas(ByVal pDataTable As WillyInformesDataSet.wCartasDePorte_TX_InformesCorregidoDataTable, titulo As String,
+        Public Shared Function Sincronismo_AmaggiDescargas2(ByVal pDataTable As WillyInformesDataSet.wCartasDePorte_TX_InformesCorregidoDataTable, titulo As String,
                                                            ByVal sWHERE As String, ByRef sErrores As String, SC As String) As String
 
 
@@ -18525,14 +18534,14 @@ Namespace Pronto.ERP.Bll
 
 
 
-                    sb &= Left(.CorredorCUIT.ToString.Replace("-", ""), 14).PadRight(14) 'CUITCorrEndo	STRING(14)	CUIT  Corredor Endozo)    351)    364
-                    sb &= Left(.CorredorDesc.ToString, 30).PadRight(30) 'NomCorrEndo	STRING(30)	Nombre Corredor Endozo)    365)    394
+                    sb &= Left(cadenavacia.ToString.Replace("-", ""), 14).PadRight(14) 'CUITCorrEndo	STRING(14)	CUIT  Corredor Endozo)    351)    364
+                    sb &= Left(cadenavacia.ToString, 30).PadRight(30) 'NomCorrEndo	STRING(30)	Nombre Corredor Endozo)    365)    394
 
 
 
 
-                    sb &= Left(VendedorCUIT.ToString.Replace("-", ""), 14).PadRight(14) 'CUITCompEndo	STRING(14)	CUIT Comprador Endozo)    395)    408
-                    sb &= Left(VendedorDesc.ToString, 30).PadRight(30) 'NomCompEndo	STRING(30)	Nombre Comprador Endozo)    409)    438
+                    sb &= Left(cadenavacia.ToString.Replace("-", ""), 14).PadRight(14) 'CUITCompEndo	STRING(14)	CUIT Comprador Endozo)    395)    408
+                    sb &= Left(cadenavacia.ToString, 30).PadRight(30) 'NomCompEndo	STRING(30)	Nombre Comprador Endozo)    409)    438
 
 
                     sb &= Left(.CorredorCUIT.ToString.Replace("-", ""), 14).PadRight(14) 'CUITCorrVend	STRING(14)	CUIT Corredor Vendedor.)    439)    452
@@ -25196,7 +25205,7 @@ Namespace Pronto.ERP.Bll
 
 
 
-        Public Shared Function Sincronismo_TomasHnos(ByVal pDataTable As DataTable, ByVal titulo As String, SC As String) As String
+        Public Shared Function Sincronismo_TomasHnos2(ByVal pDataTable As DataTable, ByVal titulo As String, SC As String) As String
 
 
             'Los de LosGrobo y TomasHnos, creo que usan el esquema de AlgoritmoSoftHouse. Algún otro lo hace?

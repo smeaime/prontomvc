@@ -66,6 +66,12 @@ Partial Class SituacionCalidad
         'If Session(SESSIONPRONTO_UserName) <> "Mariano" Then Button1.Visible = False
 
 
+        If Request.Browser("IsMobileDevice") = "true" Then
+            Response.Redirect("SituacionCalidadMovil.aspx")
+        End If
+
+
+
         If Not IsPostBack Then 'es decir, si es la primera vez que se carga
             '////////////////////////////////////////////
             '////////////////////////////////////////////

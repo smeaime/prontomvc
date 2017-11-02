@@ -17,37 +17,39 @@ declare @i int
 
 
 select 
-	YEAR(D.Fecha) as Ano,
-	DATENAME(month, D.Fecha) as Mes,
+	YEAR(C.FechaDescarga) as Ano,
+	DATENAME(month, C.FechaDescarga) as Mes,
     IdCartasDePorteControlDescarga,
-    D.IdDestino ,
+    C.Destino as IdDestino,
 	DEST.Descripcion as Destino,
-	D.Fecha  as FechaDescarga,
+	C.FechaDescarga  as FechaDescarga,
     Sum(NetoFinal) as NetoFinal,
     TotalDescargaDia,
     TotalDescargaDia - Sum(NetoFinal) as dif,
     Count(NetoFinal) as cuantas,
-	D.idpuntoventa
+	C.puntoVenta as idpuntoventa
     --g.Select(x => x.NumeroCartaDePorte).ToList()
 
-	from CartasDePorteControlDescarga D
-	left join CartasDePorte C on  
-								C.Destino = D.IdDestino 
-								AND C.SubnumeroDeFacturacion <= 0 
-								AND D.idPuntoVenta=C.puntoVenta
-							    AND C.FechaDescarga = D.Fecha -- aca habria que tomar solo el dia de las dos fechas, sin tomar en cuenta la hora
-	left  join WilliamsDestinos DEST on D.IdDestino=DEST.IdWilliamsDestino
+	from CartasDePorte C 
+
+	left join CartasDePorteControlDescarga D on  
+									C.Destino = D.IdDestino 
+								AND C.puntoVenta = D.idPuntoVenta
+								AND C.FechaDescarga = D.Fecha -- aca habria que tomar solo el dia de las dos fechas, sin tomar en cuenta la hora
+
+	left  join WilliamsDestinos DEST on C.Destino=DEST.IdWilliamsDestino
 
 	where	1=1
 			AND (DEST.PuntoVenta=@IdPuntoVenta or @IdPuntoVenta<=0)
 			AND (D.Fecha between @FechaDesde and @FechaHasta )
-			AND (D.IdDestino=@IdDestino or @IdDestino=-1) 
+			AND (C.Destino=@IdDestino or @IdDestino=-1) 
 			AND ((C.FechaDescarga between @FechaDesde and @FechaHasta) or C.IdCartaDePorte is null)
 			AND C.Exporta='NO' -- reclamo 41491
+			AND C.SubnumeroDeFacturacion <= 0 
 
-	group by YEAR(D.Fecha),DATENAME(month, D.Fecha),d.IdCartasDePorteControlDescarga,D.IdDestino , 
-							DEST.Descripcion, D.Fecha  , d.TotalDescargaDia ,D.idpuntoventa
-    order by D.Fecha desc, DEST.Descripcion asc
+	group by YEAR(C.FechaDescarga),DATENAME(month, C.FechaDescarga),d.IdCartasDePorteControlDescarga,C.Destino , 
+							DEST.Descripcion, C.FechaDescarga  , d.TotalDescargaDia ,C.puntoVenta
+    order by C.FechaDescarga desc, DEST.Descripcion asc
 
 
 end
@@ -59,11 +61,11 @@ go
 GRANT EXECUTE ON wCartasDePorteControlDescargas_TX_InformeControlDiario to [NT AUTHORITY\ANONYMOUS LOGON]
 go
  
-exec wCartasDePorteControlDescargas_TX_InformeControlDiario '20140810','20160810',-1,0
+--exec wCartasDePorteControlDescargas_TX_InformeControlDiario '20140810','20160810',-1,0
 
 exec wCartasDePorteControlDescargas_TX_InformeControlDiario '20160701','20161030',-1,0
 
-exec wCartasDePorteControlDescargas_TX_InformeControlDiario '20160701','20161030',-1,-1
+--exec wCartasDePorteControlDescargas_TX_InformeControlDiario '20160701','20161030',-1,-1
 
 /*
 CREATE NONCLUSTERED INDEX [<Name of Missing Index, sysname,>]

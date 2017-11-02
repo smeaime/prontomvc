@@ -67,7 +67,7 @@ document.cookie = 'killme' + escape('nothing')
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
 
-<body style="height: ; overflow: ; background-color: #647ea9" class="">
+<body style="height: ; overflow: ; background-color: #9ec3e8" class="">
 
     <%--esto del onload para lo de revisar si esta habilitado javascript--%>
     <center>
@@ -79,7 +79,7 @@ document.cookie = 'killme' + escape('nothing')
             <table style="border-style: none; font-family: arial,sans-serif;">
                 <tr>
 
-                    <td align="centre" width="330px" style="margin-left: 0px">
+                    <td align="centre" width="300px" style="margin-left: 0px">
 
                         <asp:Panel ID="PanelWilliams" runat="server">
                             <div>
@@ -87,7 +87,7 @@ document.cookie = 'killme' + escape('nothing')
 
                                 <style>
                                     .LoginLogo2 {
-                                        width: 350px;
+                                        width: 300px;
                                         margin-left: 1px;
                                     }
                                 </style>
@@ -127,16 +127,16 @@ document.cookie = 'killme' + escape('nothing')
                                         <asp:Label ID="UserNameLabel" runat="server" AssociatedControlID="UserName" Font-Size=""
                                             Font-Bold="false">Usuario</asp:Label>
                                     </div>
-                                    <asp:TextBox ID="UserName" Width="320" runat="server" Font-Size="20" Style="padding: 5px;"></asp:TextBox>
+                                    <asp:TextBox ID="UserName" Width="285" runat="server" Font-Size="20" Style="padding: 5px;"></asp:TextBox>
                                     <br />
                                     <div style="text-align: left;">
                                         <asp:Label ID="PasswordLabel" runat="server" AssociatedControlID="Password">Contraseña</asp:Label><br />
                                     </div>
                                     <asp:TextBox ID="Password" runat="server" TextMode="Password" Font-Size="20"
-                                        Style="padding: 5px;" Width="320"></asp:TextBox><br />
+                                        Style="padding: 5px;" Width="285"></asp:TextBox><br />
                                     <br />
                                     <asp:Button ID="LoginButton" runat="server" CommandName="Login" Text=" Entrar " Height="80"
-                                        Font-Size="20" Font-Bold="true" Width="340" CssClass="but" ValidationGroup="LoginUserValidationGroup"
+                                        Font-Size="20" Font-Bold="true" Width="300" CssClass="but" ValidationGroup="LoginUserValidationGroup"
                                         Font-Names="'Lucida Grande', Tahoma" Style="margin-left: 0px; background-color: #4F6AA3; color: White; border: 1px solid #2F5BB7;" />
                                     <loginbuttonstyle cssclass="but" />
                                     <br />

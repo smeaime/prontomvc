@@ -1,0 +1,2150 @@
+
+Log Entry : 
+10/20/2017 10:39:21
+Error in: . Error Message:entrando en GetDatatableAsignacionAutomatica . tanda 0
+__________________________
+
+Log Entry : 
+10/20/2017 10:39:22
+Error in: . Error Message:Cartas sin automatico encontrado (pero este es el modo no automatico!!!)19
+__________________________
+
+Log Entry : 
+10/20/2017 10:39:22
+Error in: . Error Message:entro a Preprocesos 27
+__________________________
+
+Log Entry : 
+10/20/2017 10:39:24
+Error in: . Error Message:despues de AgregarEmbarques32
+__________________________
+
+Log Entry : 
+10/20/2017 10:39:24
+Error in: . Error Message:despues de ExcluirDeGastosAdministrativos32
+__________________________
+
+Log Entry : 
+10/20/2017 10:39:24
+Error in: . Error Message:despues de ReasignarAquellosQueSeLeFacturanForzosamenteAlCorredor32
+__________________________
+
+Log Entry : 
+10/20/2017 10:39:24
+Error in: . Error Message:despues de CasosSyngenta_y_Acopios32
+__________________________
+
+Log Entry : 
+10/20/2017 10:39:24
+Error in: . Error Message:entro en PostProcesos 32
+__________________________
+
+Log Entry : 
+10/20/2017 10:39:25
+Error in: . Error Message:despues de EmparcharClienteSeparadoParaCasosQueSuperenUnMontoDeterminado 32
+__________________________
+
+Log Entry : 
+10/20/2017 10:39:25
+Error in: . Error Message:despues de EmparcharClienteSeparadoParaFacturasQueSuperanCantidadDeRenglones 32
+__________________________
+
+Log Entry : 
+10/20/2017 10:39:25
+Error in: . Error Message:despues de SepararAcopiosLDCyACA 32
+__________________________
+
+Log Entry : 
+10/20/2017 10:39:25
+Error in: . Error Message:despues de PostProcesoFacturacion_ReglaExportadores 32
+__________________________
+
+Log Entry : 
+10/20/2017 10:39:26
+Error in: . Error Message:punto 2 en GetDatatableAsignacionAutomatica . tanda 6123
+__________________________
+
+Log Entry : 
+10/20/2017 10:39:27
+Error in: . Error Message:punto 3 en GetDatatableAsignacionAutomatica . tanda 6123
+__________________________
+
+Log Entry : 
+10/20/2017 10:39:27
+Error in: . Error Message:punto 4 en GetDatatableAsignacionAutomatica . tanda 6123
+__________________________
+
+Log Entry : 
+10/20/2017 10:43:08
+Error in: . Error Message:Por generar el archivo C:\Users\Mariano\Downloads\Informe20oct.2017_104253.xls
+__________________________
+
+Log Entry : 
+10/20/2017 10:43:08
+Error in: . Error Message:Archivo generado C:\Users\Mariano\Downloads\Informe20oct.2017_104253.xls
+__________________________
+
+Log Entry : 
+10/20/2017 11:16:56
+Error in: . Error Message:Por generar el archivo C:\Users\Mariano\Downloads\Informe20oct.2017_111638.xls
+__________________________
+
+Log Entry : 
+10/20/2017 11:16:56
+Error in: . Error Message:Archivo generado C:\Users\Mariano\Downloads\Informe20oct.2017_111638.xls
+__________________________
+
+Log Entry : 
+10/20/2017 11:19:59
+Error in: . Error Message:Por generar el archivo C:\Users\Mariano\Downloads\Informe20oct.2017_111834.xls
+__________________________
+
+Log Entry : 
+10/20/2017 11:19:59
+Error in: . Error Message:Archivo generado C:\Users\Mariano\Downloads\Informe20oct.2017_111834.xls
+__________________________
+
+Log Entry : 
+10/20/2017 11:36:27
+Error in: . Error Message:entrando en GetDatatableAsignacionAutomatica . tanda 0
+__________________________
+
+Log Entry : 
+10/20/2017 11:36:27
+Error in: . Error Message:Cartas sin automatico encontrado (pero este es el modo no automatico!!!)19
+__________________________
+
+Log Entry : 
+10/20/2017 11:36:27
+Error in: . Error Message:entro a Preprocesos 27
+__________________________
+
+Log Entry : 
+10/20/2017 11:36:30
+Error in: . Error Message:despues de AgregarEmbarques32
+__________________________
+
+Log Entry : 
+10/20/2017 11:36:30
+Error in: . Error Message:despues de ExcluirDeGastosAdministrativos32
+__________________________
+
+Log Entry : 
+10/20/2017 11:36:30
+Error in: . Error Message:despues de ReasignarAquellosQueSeLeFacturanForzosamenteAlCorredor32
+__________________________
+
+Log Entry : 
+10/20/2017 11:36:30
+Error in: . Error Message:despues de CasosSyngenta_y_Acopios32
+__________________________
+
+Log Entry : 
+10/20/2017 11:36:30
+Error in: . Error Message:entro en PostProcesos 32
+__________________________
+
+Log Entry : 
+10/20/2017 11:36:30
+Error in: . Error Message:despues de EmparcharClienteSeparadoParaCasosQueSuperenUnMontoDeterminado 32
+__________________________
+
+Log Entry : 
+10/20/2017 11:36:30
+Error in: . Error Message:despues de EmparcharClienteSeparadoParaFacturasQueSuperanCantidadDeRenglones 32
+__________________________
+
+Log Entry : 
+10/20/2017 11:36:30
+Error in: . Error Message:despues de SepararAcopiosLDCyACA 32
+__________________________
+
+Log Entry : 
+10/20/2017 11:36:30
+Error in: . Error Message:despues de PostProcesoFacturacion_ReglaExportadores 32
+__________________________
+
+Log Entry : 
+10/20/2017 11:36:32
+Error in: . Error Message:punto 2 en GetDatatableAsignacionAutomatica . tanda 5540
+__________________________
+
+Log Entry : 
+10/20/2017 11:36:32
+Error in: . Error Message:punto 3 en GetDatatableAsignacionAutomatica . tanda 5540
+__________________________
+
+Log Entry : 
+10/20/2017 11:36:32
+Error in: . Error Message:punto 4 en GetDatatableAsignacionAutomatica . tanda 5540
+__________________________
+
+Log Entry : 
+10/20/2017 11:36:33
+Error in: . Error Message:System.Exception
+La tarifa de la lista está vencida
+   en Pronto.ERP.Bll.ListaPreciosManager.VerificarVencimientoLista(Int64 idListaPrecio, String SC) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 520
+   en Pronto.ERP.Bll.ListaPreciosManager.SavePrecioPorCliente(String SC, Int64 IdCliente, Int64 IdArticulo, Double Precio, Int64 IdDestino) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 549
+   en ProntoMVC.Tests.TestsWilliams.FACTURACION_FUTUROS_Y_OPCIONES_maximo_de_renglones_28265() en C:\bdl\pronto\TestProject2\TestWilliams.cs:línea 1150
+BusinessLogic
+__________________________
+
+Log Entry : 
+10/20/2017 11:36:34
+Error in: . Error Message:System.Exception
+La tarifa de la lista está vencida
+   en Pronto.ERP.Bll.ListaPreciosManager.VerificarVencimientoLista(Int64 idListaPrecio, String SC) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 520
+   en Pronto.ERP.Bll.ListaPreciosManager.SavePrecioPorCliente(String SC, Int64 IdCliente, Int64 IdArticulo, Double Precio, Int64 IdDestino) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 549
+   en ProntoMVC.Tests.TestsWilliams.FACTURACION_FUTUROS_Y_OPCIONES_maximo_de_renglones_28265() en C:\bdl\pronto\TestProject2\TestWilliams.cs:línea 1150
+BusinessLogic
+__________________________
+
+Log Entry : 
+10/20/2017 11:36:43
+Error in: . Error Message:System.Exception
+La tarifa de la lista está vencida
+   en Pronto.ERP.Bll.ListaPreciosManager.VerificarVencimientoLista(Int64 idListaPrecio, String SC) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 520
+   en Pronto.ERP.Bll.ListaPreciosManager.SavePrecioPorCliente(String SC, Int64 IdCliente, Int64 IdArticulo, Double Precio, Int64 IdDestino) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 549
+   en ProntoMVC.Tests.TestsWilliams.FACTURACION_FUTUROS_Y_OPCIONES_maximo_de_renglones_28265() en C:\bdl\pronto\TestProject2\TestWilliams.cs:línea 1150
+BusinessLogic
+__________________________
+
+Log Entry : 
+10/20/2017 11:36:43
+Error in: . Error Message:Separo las facturas que se generan en el lote.20/10/2017 11:36:43
+__________________________
+
+Log Entry : 
+10/20/2017 11:36:43
+Error in: . Error Message:ActualizarCampoClienteSeparador 8 filas
+__________________________
+
+Log Entry : 
+10/20/2017 11:36:44
+Error in: . Error Message:Empiezo a facturar en serio.20/10/2017 11:36:44
+__________________________
+
+Log Entry : 
+10/20/2017 11:36:49
+Error in: . Error Message:Error en la llamada a CreaFacturaCOMpronto. System.Exception: El item de la factura tiene tarifa 0.    53 61.140
+   en LogicaFacturacion.CreaFacturaCOMpronto(List`1 oListaCDP, Int64 IdClienteAFacturarle, Int64 sucursalWilliams, DataTable dtRenglonesManuales, String SC, HttpSessionState Session, Int32 optFacturarA, String agruparArticulosPor, String txtBuscar, String txtTarifaGastoAdministrativo, Boolean SeSeparaPorCorredor, String txtCorredor, Boolean chkPagaCorredor, List`1 listEmbarques, IEnumerable`1& ImputacionDevuelta, Int32 IdClienteObservaciones) en C:\bdl\pronto\BussinessLogic\LogicaFacturacion.vb:línea 6870
+__________________________
+
+Log Entry : 
+10/20/2017 11:36:49
+Error in: . Error Message:No se pudo crear la factura para <a href="Cliente.aspx?Id=648" target="_blank">BELGRANO CEREALES SRL</a>;  verificar IVA y CUIT, o que la carta no estuviese imputada anteriormente; Verificar que no  se haya disparado el error 'listacdp vacia' o no haya otro cliente con el mismo nombre <br/>
+
+__________________________
+
+Log Entry : 
+10/20/2017 11:58:46
+Error in: . Error Message:entrando en GetDatatableAsignacionAutomatica . tanda 0
+__________________________
+
+Log Entry : 
+10/20/2017 11:58:46
+Error in: . Error Message:Cartas sin automatico encontrado (pero este es el modo no automatico!!!)19
+__________________________
+
+Log Entry : 
+10/20/2017 11:59:08
+Error in: . Error Message:entro a Preprocesos 27
+__________________________
+
+Log Entry : 
+10/20/2017 11:59:25
+Error in: . Error Message:despues de AgregarEmbarques32
+__________________________
+
+Log Entry : 
+10/20/2017 11:59:40
+Error in: . Error Message:despues de ExcluirDeGastosAdministrativos32
+__________________________
+
+Log Entry : 
+10/20/2017 11:59:45
+Error in: . Error Message:despues de ReasignarAquellosQueSeLeFacturanForzosamenteAlCorredor32
+__________________________
+
+Log Entry : 
+10/20/2017 11:59:52
+Error in: . Error Message:despues de CasosSyngenta_y_Acopios32
+__________________________
+
+Log Entry : 
+10/20/2017 12:00:38
+Error in: . Error Message:entro en PostProcesos 32
+__________________________
+
+Log Entry : 
+10/20/2017 12:00:43
+Error in: . Error Message:despues de EmparcharClienteSeparadoParaCasosQueSuperenUnMontoDeterminado 32
+__________________________
+
+Log Entry : 
+10/20/2017 12:00:46
+Error in: . Error Message:despues de EmparcharClienteSeparadoParaFacturasQueSuperanCantidadDeRenglones 32
+__________________________
+
+Log Entry : 
+10/20/2017 12:00:48
+Error in: . Error Message:despues de SepararAcopiosLDCyACA 32
+__________________________
+
+Log Entry : 
+10/20/2017 12:00:51
+Error in: . Error Message:despues de PostProcesoFacturacion_ReglaExportadores 32
+__________________________
+
+Log Entry : 
+10/20/2017 12:01:38
+Error in: . Error Message:punto 2 en GetDatatableAsignacionAutomatica . tanda 2691
+__________________________
+
+Log Entry : 
+10/20/2017 12:01:38
+Error in: . Error Message:punto 3 en GetDatatableAsignacionAutomatica . tanda 2691
+__________________________
+
+Log Entry : 
+10/20/2017 12:01:38
+Error in: . Error Message:punto 4 en GetDatatableAsignacionAutomatica . tanda 2691
+__________________________
+
+Log Entry : 
+10/20/2017 12:01:40
+Error in: . Error Message:System.Exception
+La tarifa de la lista está vencida
+   en Pronto.ERP.Bll.ListaPreciosManager.VerificarVencimientoLista(Int64 idListaPrecio, String SC) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 520
+   en Pronto.ERP.Bll.ListaPreciosManager.SavePrecioPorCliente(String SC, Int64 IdCliente, Int64 IdArticulo, Double Precio, Int64 IdDestino) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 549
+   en ProntoMVC.Tests.TestsWilliams.FACTURACION_FUTUROS_Y_OPCIONES_maximo_de_renglones_28265() en C:\bdl\pronto\TestProject2\TestWilliams.cs:línea 1150
+BusinessLogic
+__________________________
+
+Log Entry : 
+10/20/2017 12:01:41
+Error in: . Error Message:System.Exception
+La tarifa de la lista está vencida
+   en Pronto.ERP.Bll.ListaPreciosManager.VerificarVencimientoLista(Int64 idListaPrecio, String SC) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 520
+   en Pronto.ERP.Bll.ListaPreciosManager.SavePrecioPorCliente(String SC, Int64 IdCliente, Int64 IdArticulo, Double Precio, Int64 IdDestino) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 549
+   en ProntoMVC.Tests.TestsWilliams.FACTURACION_FUTUROS_Y_OPCIONES_maximo_de_renglones_28265() en C:\bdl\pronto\TestProject2\TestWilliams.cs:línea 1150
+BusinessLogic
+__________________________
+
+Log Entry : 
+10/20/2017 12:01:48
+Error in: . Error Message:System.Exception
+La tarifa de la lista está vencida
+   en Pronto.ERP.Bll.ListaPreciosManager.VerificarVencimientoLista(Int64 idListaPrecio, String SC) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 520
+   en Pronto.ERP.Bll.ListaPreciosManager.SavePrecioPorCliente(String SC, Int64 IdCliente, Int64 IdArticulo, Double Precio, Int64 IdDestino) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 549
+   en ProntoMVC.Tests.TestsWilliams.FACTURACION_FUTUROS_Y_OPCIONES_maximo_de_renglones_28265() en C:\bdl\pronto\TestProject2\TestWilliams.cs:línea 1150
+BusinessLogic
+__________________________
+
+Log Entry : 
+10/20/2017 12:01:48
+Error in: . Error Message:Separo las facturas que se generan en el lote.20/10/2017 12:01:48
+__________________________
+
+Log Entry : 
+10/20/2017 12:01:48
+Error in: . Error Message:ActualizarCampoClienteSeparador 8 filas
+__________________________
+
+Log Entry : 
+10/20/2017 12:01:49
+Error in: . Error Message:Empiezo a facturar en serio.20/10/2017 12:01:49
+__________________________
+
+Log Entry : 
+10/20/2017 12:03:31
+Error in: . Error Message:entrando en GetDatatableAsignacionAutomatica . tanda 0
+__________________________
+
+Log Entry : 
+10/20/2017 12:03:32
+Error in: . Error Message:Cartas sin automatico encontrado (pero este es el modo no automatico!!!)19
+__________________________
+
+Log Entry : 
+10/20/2017 12:04:16
+Error in: . Error Message:entro a Preprocesos 27
+__________________________
+
+Log Entry : 
+10/20/2017 12:04:18
+Error in: . Error Message:despues de AgregarEmbarques32
+__________________________
+
+Log Entry : 
+10/20/2017 12:04:18
+Error in: . Error Message:despues de ExcluirDeGastosAdministrativos32
+__________________________
+
+Log Entry : 
+10/20/2017 12:04:18
+Error in: . Error Message:despues de ReasignarAquellosQueSeLeFacturanForzosamenteAlCorredor32
+__________________________
+
+Log Entry : 
+10/20/2017 12:04:18
+Error in: . Error Message:despues de CasosSyngenta_y_Acopios32
+__________________________
+
+Log Entry : 
+10/20/2017 12:04:18
+Error in: . Error Message:entro en PostProcesos 32
+__________________________
+
+Log Entry : 
+10/20/2017 12:04:18
+Error in: . Error Message:despues de EmparcharClienteSeparadoParaCasosQueSuperenUnMontoDeterminado 32
+__________________________
+
+Log Entry : 
+10/20/2017 12:04:18
+Error in: . Error Message:despues de EmparcharClienteSeparadoParaFacturasQueSuperanCantidadDeRenglones 32
+__________________________
+
+Log Entry : 
+10/20/2017 12:04:18
+Error in: . Error Message:despues de SepararAcopiosLDCyACA 32
+__________________________
+
+Log Entry : 
+10/20/2017 12:04:18
+Error in: . Error Message:despues de PostProcesoFacturacion_ReglaExportadores 32
+__________________________
+
+Log Entry : 
+10/20/2017 12:04:38
+Error in: . Error Message:punto 2 en GetDatatableAsignacionAutomatica . tanda 5870
+__________________________
+
+Log Entry : 
+10/20/2017 12:04:38
+Error in: . Error Message:punto 3 en GetDatatableAsignacionAutomatica . tanda 5870
+__________________________
+
+Log Entry : 
+10/20/2017 12:04:38
+Error in: . Error Message:punto 4 en GetDatatableAsignacionAutomatica . tanda 5870
+__________________________
+
+Log Entry : 
+10/20/2017 12:04:40
+Error in: . Error Message:System.Exception
+La tarifa de la lista está vencida
+   en Pronto.ERP.Bll.ListaPreciosManager.VerificarVencimientoLista(Int64 idListaPrecio, String SC) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 520
+   en Pronto.ERP.Bll.ListaPreciosManager.SavePrecioPorCliente(String SC, Int64 IdCliente, Int64 IdArticulo, Double Precio, Int64 IdDestino) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 549
+   en ProntoMVC.Tests.TestsWilliams.FACTURACION_FUTUROS_Y_OPCIONES_maximo_de_renglones_28265() en C:\bdl\pronto\TestProject2\TestWilliams.cs:línea 1150
+BusinessLogic
+__________________________
+
+Log Entry : 
+10/20/2017 12:04:41
+Error in: . Error Message:System.Exception
+La tarifa de la lista está vencida
+   en Pronto.ERP.Bll.ListaPreciosManager.VerificarVencimientoLista(Int64 idListaPrecio, String SC) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 520
+   en Pronto.ERP.Bll.ListaPreciosManager.SavePrecioPorCliente(String SC, Int64 IdCliente, Int64 IdArticulo, Double Precio, Int64 IdDestino) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 549
+   en ProntoMVC.Tests.TestsWilliams.FACTURACION_FUTUROS_Y_OPCIONES_maximo_de_renglones_28265() en C:\bdl\pronto\TestProject2\TestWilliams.cs:línea 1150
+BusinessLogic
+__________________________
+
+Log Entry : 
+10/20/2017 12:04:47
+Error in: . Error Message:System.Exception
+La tarifa de la lista está vencida
+   en Pronto.ERP.Bll.ListaPreciosManager.VerificarVencimientoLista(Int64 idListaPrecio, String SC) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 520
+   en Pronto.ERP.Bll.ListaPreciosManager.SavePrecioPorCliente(String SC, Int64 IdCliente, Int64 IdArticulo, Double Precio, Int64 IdDestino) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 549
+   en ProntoMVC.Tests.TestsWilliams.FACTURACION_FUTUROS_Y_OPCIONES_maximo_de_renglones_28265() en C:\bdl\pronto\TestProject2\TestWilliams.cs:línea 1150
+BusinessLogic
+__________________________
+
+Log Entry : 
+10/20/2017 12:04:47
+Error in: . Error Message:Separo las facturas que se generan en el lote.20/10/2017 12:04:47
+__________________________
+
+Log Entry : 
+10/20/2017 12:05:41
+Error in: . Error Message:ActualizarCampoClienteSeparador 8 filas
+__________________________
+
+Log Entry : 
+10/20/2017 12:05:57
+Error in: . Error Message:Empiezo a facturar en serio.20/10/2017 12:05:57
+__________________________
+
+Log Entry : 
+10/20/2017 12:11:08
+Error in: . Error Message:entrando en GetDatatableAsignacionAutomatica . tanda 0
+__________________________
+
+Log Entry : 
+10/20/2017 12:11:09
+Error in: . Error Message:Cartas sin automatico encontrado (pero este es el modo no automatico!!!)19
+__________________________
+
+Log Entry : 
+10/20/2017 12:11:57
+Error in: . Error Message:entro a Preprocesos 27
+__________________________
+
+Log Entry : 
+10/20/2017 12:11:59
+Error in: . Error Message:despues de AgregarEmbarques32
+__________________________
+
+Log Entry : 
+10/20/2017 12:11:59
+Error in: . Error Message:despues de ExcluirDeGastosAdministrativos32
+__________________________
+
+Log Entry : 
+10/20/2017 12:11:59
+Error in: . Error Message:despues de ReasignarAquellosQueSeLeFacturanForzosamenteAlCorredor32
+__________________________
+
+Log Entry : 
+10/20/2017 12:11:59
+Error in: . Error Message:despues de CasosSyngenta_y_Acopios32
+__________________________
+
+Log Entry : 
+10/20/2017 12:11:59
+Error in: . Error Message:entro en PostProcesos 32
+__________________________
+
+Log Entry : 
+10/20/2017 12:11:59
+Error in: . Error Message:despues de EmparcharClienteSeparadoParaCasosQueSuperenUnMontoDeterminado 32
+__________________________
+
+Log Entry : 
+10/20/2017 12:11:59
+Error in: . Error Message:despues de EmparcharClienteSeparadoParaFacturasQueSuperanCantidadDeRenglones 32
+__________________________
+
+Log Entry : 
+10/20/2017 12:11:59
+Error in: . Error Message:despues de SepararAcopiosLDCyACA 32
+__________________________
+
+Log Entry : 
+10/20/2017 12:11:59
+Error in: . Error Message:despues de PostProcesoFacturacion_ReglaExportadores 32
+__________________________
+
+Log Entry : 
+10/20/2017 12:12:04
+Error in: . Error Message:punto 2 en GetDatatableAsignacionAutomatica . tanda 2543
+__________________________
+
+Log Entry : 
+10/20/2017 12:12:17
+Error in: . Error Message:punto 3 en GetDatatableAsignacionAutomatica . tanda 2543
+__________________________
+
+Log Entry : 
+10/20/2017 12:12:17
+Error in: . Error Message:punto 4 en GetDatatableAsignacionAutomatica . tanda 2543
+__________________________
+
+Log Entry : 
+10/20/2017 12:13:27
+Error in: . Error Message:entrando en GetDatatableAsignacionAutomatica . tanda 0
+__________________________
+
+Log Entry : 
+10/20/2017 12:13:27
+Error in: . Error Message:Cartas sin automatico encontrado (pero este es el modo no automatico!!!)19
+__________________________
+
+Log Entry : 
+10/20/2017 12:13:27
+Error in: . Error Message:entro a Preprocesos 27
+__________________________
+
+Log Entry : 
+10/20/2017 12:13:30
+Error in: . Error Message:despues de AgregarEmbarques32
+__________________________
+
+Log Entry : 
+10/20/2017 12:13:30
+Error in: . Error Message:despues de ExcluirDeGastosAdministrativos32
+__________________________
+
+Log Entry : 
+10/20/2017 12:13:30
+Error in: . Error Message:despues de ReasignarAquellosQueSeLeFacturanForzosamenteAlCorredor32
+__________________________
+
+Log Entry : 
+10/20/2017 12:13:30
+Error in: . Error Message:despues de CasosSyngenta_y_Acopios32
+__________________________
+
+Log Entry : 
+10/20/2017 12:13:30
+Error in: . Error Message:entro en PostProcesos 32
+__________________________
+
+Log Entry : 
+10/20/2017 12:13:30
+Error in: . Error Message:despues de EmparcharClienteSeparadoParaCasosQueSuperenUnMontoDeterminado 32
+__________________________
+
+Log Entry : 
+10/20/2017 12:13:30
+Error in: . Error Message:despues de EmparcharClienteSeparadoParaFacturasQueSuperanCantidadDeRenglones 32
+__________________________
+
+Log Entry : 
+10/20/2017 12:13:30
+Error in: . Error Message:despues de SepararAcopiosLDCyACA 32
+__________________________
+
+Log Entry : 
+10/20/2017 12:13:30
+Error in: . Error Message:despues de PostProcesoFacturacion_ReglaExportadores 32
+__________________________
+
+Log Entry : 
+10/20/2017 12:13:32
+Error in: . Error Message:punto 2 en GetDatatableAsignacionAutomatica . tanda 9179
+__________________________
+
+Log Entry : 
+10/20/2017 12:38:40
+Error in: . Error Message:entrando en GetDatatableAsignacionAutomatica . tanda 0
+__________________________
+
+Log Entry : 
+10/20/2017 12:38:40
+Error in: . Error Message:Cartas sin automatico encontrado (pero este es el modo no automatico!!!)19
+__________________________
+
+Log Entry : 
+10/20/2017 12:38:40
+Error in: . Error Message:entro a Preprocesos 27
+__________________________
+
+Log Entry : 
+10/20/2017 12:38:42
+Error in: . Error Message:despues de AgregarEmbarques32
+__________________________
+
+Log Entry : 
+10/20/2017 12:38:42
+Error in: . Error Message:despues de ExcluirDeGastosAdministrativos32
+__________________________
+
+Log Entry : 
+10/20/2017 12:38:42
+Error in: . Error Message:despues de ReasignarAquellosQueSeLeFacturanForzosamenteAlCorredor32
+__________________________
+
+Log Entry : 
+10/20/2017 12:38:42
+Error in: . Error Message:despues de CasosSyngenta_y_Acopios32
+__________________________
+
+Log Entry : 
+10/20/2017 12:38:42
+Error in: . Error Message:entro en PostProcesos 32
+__________________________
+
+Log Entry : 
+10/20/2017 12:38:42
+Error in: . Error Message:despues de EmparcharClienteSeparadoParaCasosQueSuperenUnMontoDeterminado 32
+__________________________
+
+Log Entry : 
+10/20/2017 12:38:43
+Error in: . Error Message:despues de EmparcharClienteSeparadoParaFacturasQueSuperanCantidadDeRenglones 32
+__________________________
+
+Log Entry : 
+10/20/2017 12:38:43
+Error in: . Error Message:despues de SepararAcopiosLDCyACA 32
+__________________________
+
+Log Entry : 
+10/20/2017 12:38:43
+Error in: . Error Message:despues de PostProcesoFacturacion_ReglaExportadores 32
+__________________________
+
+Log Entry : 
+10/20/2017 12:38:44
+Error in: . Error Message:punto 2 en GetDatatableAsignacionAutomatica . tanda 8102
+__________________________
+
+Log Entry : 
+10/20/2017 12:39:00
+Error in: . Error Message:punto 3 en GetDatatableAsignacionAutomatica . tanda 8102
+__________________________
+
+Log Entry : 
+10/20/2017 12:39:00
+Error in: . Error Message:punto 4 en GetDatatableAsignacionAutomatica . tanda 8102
+__________________________
+
+Log Entry : 
+10/20/2017 12:39:15
+Error in: . Error Message:System.Exception
+La tarifa de la lista está vencida
+   en Pronto.ERP.Bll.ListaPreciosManager.VerificarVencimientoLista(Int64 idListaPrecio, String SC) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 520
+   en Pronto.ERP.Bll.ListaPreciosManager.SavePrecioPorCliente(String SC, Int64 IdCliente, Int64 IdArticulo, Double Precio, Int64 IdDestino) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 549
+   en ProntoMVC.Tests.TestsWilliams.FACTURACION_FUTUROS_Y_OPCIONES_maximo_de_renglones_28265() en C:\bdl\pronto\TestProject2\TestWilliams.cs:línea 1151
+BusinessLogic
+__________________________
+
+Log Entry : 
+10/20/2017 12:39:16
+Error in: . Error Message:System.Exception
+La tarifa de la lista está vencida
+   en Pronto.ERP.Bll.ListaPreciosManager.VerificarVencimientoLista(Int64 idListaPrecio, String SC) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 520
+   en Pronto.ERP.Bll.ListaPreciosManager.SavePrecioPorCliente(String SC, Int64 IdCliente, Int64 IdArticulo, Double Precio, Int64 IdDestino) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 549
+   en ProntoMVC.Tests.TestsWilliams.FACTURACION_FUTUROS_Y_OPCIONES_maximo_de_renglones_28265() en C:\bdl\pronto\TestProject2\TestWilliams.cs:línea 1151
+BusinessLogic
+__________________________
+
+Log Entry : 
+10/20/2017 12:39:23
+Error in: . Error Message:System.Exception
+La tarifa de la lista está vencida
+   en Pronto.ERP.Bll.ListaPreciosManager.VerificarVencimientoLista(Int64 idListaPrecio, String SC) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 520
+   en Pronto.ERP.Bll.ListaPreciosManager.SavePrecioPorCliente(String SC, Int64 IdCliente, Int64 IdArticulo, Double Precio, Int64 IdDestino) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 549
+   en ProntoMVC.Tests.TestsWilliams.FACTURACION_FUTUROS_Y_OPCIONES_maximo_de_renglones_28265() en C:\bdl\pronto\TestProject2\TestWilliams.cs:línea 1151
+BusinessLogic
+__________________________
+
+Log Entry : 
+10/20/2017 12:39:24
+Error in: . Error Message:System.Exception
+La tarifa de la lista está vencida
+   en Pronto.ERP.Bll.ListaPreciosManager.VerificarVencimientoLista(Int64 idListaPrecio, String SC) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 520
+   en Pronto.ERP.Bll.ListaPreciosManager.SavePrecioPorCliente(String SC, Int64 IdCliente, Int64 IdArticulo, Double Precio, Int64 IdDestino) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 549
+   en ProntoMVC.Tests.TestsWilliams.FACTURACION_FUTUROS_Y_OPCIONES_maximo_de_renglones_28265() en C:\bdl\pronto\TestProject2\TestWilliams.cs:línea 1151
+BusinessLogic
+__________________________
+
+Log Entry : 
+10/20/2017 12:39:36
+Error in: . Error Message:System.Exception
+La tarifa de la lista está vencida
+   en Pronto.ERP.Bll.ListaPreciosManager.VerificarVencimientoLista(Int64 idListaPrecio, String SC) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 520
+   en Pronto.ERP.Bll.ListaPreciosManager.SavePrecioPorCliente(String SC, Int64 IdCliente, Int64 IdArticulo, Double Precio, Int64 IdDestino) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 549
+   en ProntoMVC.Tests.TestsWilliams.FACTURACION_FUTUROS_Y_OPCIONES_maximo_de_renglones_28265() en C:\bdl\pronto\TestProject2\TestWilliams.cs:línea 1151
+BusinessLogic
+__________________________
+
+Log Entry : 
+10/20/2017 12:39:37
+Error in: . Error Message:System.Exception
+La tarifa de la lista está vencida
+   en Pronto.ERP.Bll.ListaPreciosManager.VerificarVencimientoLista(Int64 idListaPrecio, String SC) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 520
+   en Pronto.ERP.Bll.ListaPreciosManager.SavePrecioPorCliente(String SC, Int64 IdCliente, Int64 IdArticulo, Double Precio, Int64 IdDestino) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 549
+   en ProntoMVC.Tests.TestsWilliams.FACTURACION_FUTUROS_Y_OPCIONES_maximo_de_renglones_28265() en C:\bdl\pronto\TestProject2\TestWilliams.cs:línea 1151
+BusinessLogic
+__________________________
+
+Log Entry : 
+10/20/2017 12:39:39
+Error in: . Error Message:System.Exception
+La tarifa de la lista está vencida
+   en Pronto.ERP.Bll.ListaPreciosManager.VerificarVencimientoLista(Int64 idListaPrecio, String SC) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 520
+   en Pronto.ERP.Bll.ListaPreciosManager.SavePrecioPorCliente(String SC, Int64 IdCliente, Int64 IdArticulo, Double Precio, Int64 IdDestino) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 549
+   en ProntoMVC.Tests.TestsWilliams.FACTURACION_FUTUROS_Y_OPCIONES_maximo_de_renglones_28265() en C:\bdl\pronto\TestProject2\TestWilliams.cs:línea 1151
+BusinessLogic
+__________________________
+
+Log Entry : 
+10/20/2017 12:39:40
+Error in: . Error Message:System.Exception
+La tarifa de la lista está vencida
+   en Pronto.ERP.Bll.ListaPreciosManager.VerificarVencimientoLista(Int64 idListaPrecio, String SC) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 520
+   en Pronto.ERP.Bll.ListaPreciosManager.SavePrecioPorCliente(String SC, Int64 IdCliente, Int64 IdArticulo, Double Precio, Int64 IdDestino) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 549
+   en ProntoMVC.Tests.TestsWilliams.FACTURACION_FUTUROS_Y_OPCIONES_maximo_de_renglones_28265() en C:\bdl\pronto\TestProject2\TestWilliams.cs:línea 1151
+BusinessLogic
+__________________________
+
+Log Entry : 
+10/20/2017 12:39:41
+Error in: . Error Message:System.Exception
+La tarifa de la lista está vencida
+   en Pronto.ERP.Bll.ListaPreciosManager.VerificarVencimientoLista(Int64 idListaPrecio, String SC) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 520
+   en Pronto.ERP.Bll.ListaPreciosManager.SavePrecioPorCliente(String SC, Int64 IdCliente, Int64 IdArticulo, Double Precio, Int64 IdDestino) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 549
+   en ProntoMVC.Tests.TestsWilliams.FACTURACION_FUTUROS_Y_OPCIONES_maximo_de_renglones_28265() en C:\bdl\pronto\TestProject2\TestWilliams.cs:línea 1151
+BusinessLogic
+__________________________
+
+Log Entry : 
+10/20/2017 12:39:42
+Error in: . Error Message:System.Exception
+La tarifa de la lista está vencida
+   en Pronto.ERP.Bll.ListaPreciosManager.VerificarVencimientoLista(Int64 idListaPrecio, String SC) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 520
+   en Pronto.ERP.Bll.ListaPreciosManager.SavePrecioPorCliente(String SC, Int64 IdCliente, Int64 IdArticulo, Double Precio, Int64 IdDestino) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 549
+   en ProntoMVC.Tests.TestsWilliams.FACTURACION_FUTUROS_Y_OPCIONES_maximo_de_renglones_28265() en C:\bdl\pronto\TestProject2\TestWilliams.cs:línea 1151
+BusinessLogic
+__________________________
+
+Log Entry : 
+10/20/2017 12:39:43
+Error in: . Error Message:System.Exception
+La tarifa de la lista está vencida
+   en Pronto.ERP.Bll.ListaPreciosManager.VerificarVencimientoLista(Int64 idListaPrecio, String SC) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 520
+   en Pronto.ERP.Bll.ListaPreciosManager.SavePrecioPorCliente(String SC, Int64 IdCliente, Int64 IdArticulo, Double Precio, Int64 IdDestino) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 549
+   en ProntoMVC.Tests.TestsWilliams.FACTURACION_FUTUROS_Y_OPCIONES_maximo_de_renglones_28265() en C:\bdl\pronto\TestProject2\TestWilliams.cs:línea 1151
+BusinessLogic
+__________________________
+
+Log Entry : 
+10/20/2017 12:39:44
+Error in: . Error Message:System.Exception
+La tarifa de la lista está vencida
+   en Pronto.ERP.Bll.ListaPreciosManager.VerificarVencimientoLista(Int64 idListaPrecio, String SC) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 520
+   en Pronto.ERP.Bll.ListaPreciosManager.SavePrecioPorCliente(String SC, Int64 IdCliente, Int64 IdArticulo, Double Precio, Int64 IdDestino) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 549
+   en ProntoMVC.Tests.TestsWilliams.FACTURACION_FUTUROS_Y_OPCIONES_maximo_de_renglones_28265() en C:\bdl\pronto\TestProject2\TestWilliams.cs:línea 1151
+BusinessLogic
+__________________________
+
+Log Entry : 
+10/20/2017 12:39:45
+Error in: . Error Message:System.Exception
+La tarifa de la lista está vencida
+   en Pronto.ERP.Bll.ListaPreciosManager.VerificarVencimientoLista(Int64 idListaPrecio, String SC) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 520
+   en Pronto.ERP.Bll.ListaPreciosManager.SavePrecioPorCliente(String SC, Int64 IdCliente, Int64 IdArticulo, Double Precio, Int64 IdDestino) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 549
+   en ProntoMVC.Tests.TestsWilliams.FACTURACION_FUTUROS_Y_OPCIONES_maximo_de_renglones_28265() en C:\bdl\pronto\TestProject2\TestWilliams.cs:línea 1151
+BusinessLogic
+__________________________
+
+Log Entry : 
+10/20/2017 12:39:48
+Error in: . Error Message:Separo las facturas que se generan en el lote.20/10/2017 12:39:48
+__________________________
+
+Log Entry : 
+10/20/2017 12:49:28
+Error in: . Error Message:ActualizarCampoClienteSeparador 32 filas
+__________________________
+
+Log Entry : 
+10/20/2017 12:49:30
+Error in: . Error Message:Sin Corredor
+__________________________
+
+Log Entry : 
+10/20/2017 12:49:30
+Error in: . Error Message: EsteCorredorSeleFacturaAlClientePorSeparadoId(). System.IndexOutOfRangeException: No hay ninguna fila en la posición 0.
+   en System.Data.RBTree`1.GetNodeByIndex(Int32 userIndex)
+   en System.Data.DataRowCollection.get_Item(Int32 index)
+   en Pronto.ERP.Bll.EntidadManager.GetItem(String SC, String Tabla, Int32 Id) en C:\bdl\pronto\BussinessLogic\EntidadManager.vb:línea 968
+   en CartaDePorteManager.EsteCorredorSeleFacturaAlClientePorSeparadoId(Int64 idCliente, Int64 idCorredor, String SC) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 12687Quizas es un buque (sin corredor). 
+__________________________
+
+Log Entry : 
+10/20/2017 12:49:30
+Error in: . Error Message:Sin Corredor
+__________________________
+
+Log Entry : 
+10/20/2017 12:49:30
+Error in: . Error Message: EsteCorredorSeleFacturaAlClientePorSeparadoId(). System.IndexOutOfRangeException: No hay ninguna fila en la posición 0.
+   en System.Data.RBTree`1.GetNodeByIndex(Int32 userIndex)
+   en System.Data.DataRowCollection.get_Item(Int32 index)
+   en Pronto.ERP.Bll.EntidadManager.GetItem(String SC, String Tabla, Int32 Id) en C:\bdl\pronto\BussinessLogic\EntidadManager.vb:línea 968
+   en CartaDePorteManager.EsteCorredorSeleFacturaAlClientePorSeparadoId(Int64 idCliente, Int64 idCorredor, String SC) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 12687Quizas es un buque (sin corredor). 
+__________________________
+
+Log Entry : 
+10/20/2017 12:49:31
+Error in: . Error Message:Sin Corredor
+__________________________
+
+Log Entry : 
+10/20/2017 12:49:31
+Error in: . Error Message: EsteCorredorSeleFacturaAlClientePorSeparadoId(). System.IndexOutOfRangeException: No hay ninguna fila en la posición 0.
+   en System.Data.RBTree`1.GetNodeByIndex(Int32 userIndex)
+   en System.Data.DataRowCollection.get_Item(Int32 index)
+   en Pronto.ERP.Bll.EntidadManager.GetItem(String SC, String Tabla, Int32 Id) en C:\bdl\pronto\BussinessLogic\EntidadManager.vb:línea 968
+   en CartaDePorteManager.EsteCorredorSeleFacturaAlClientePorSeparadoId(Int64 idCliente, Int64 idCorredor, String SC) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 12687Quizas es un buque (sin corredor). 
+__________________________
+
+Log Entry : 
+10/20/2017 12:49:31
+Error in: . Error Message:Sin Corredor
+__________________________
+
+Log Entry : 
+10/20/2017 12:49:31
+Error in: . Error Message: EsteCorredorSeleFacturaAlClientePorSeparadoId(). System.IndexOutOfRangeException: No hay ninguna fila en la posición 0.
+   en System.Data.RBTree`1.GetNodeByIndex(Int32 userIndex)
+   en System.Data.DataRowCollection.get_Item(Int32 index)
+   en Pronto.ERP.Bll.EntidadManager.GetItem(String SC, String Tabla, Int32 Id) en C:\bdl\pronto\BussinessLogic\EntidadManager.vb:línea 968
+   en CartaDePorteManager.EsteCorredorSeleFacturaAlClientePorSeparadoId(Int64 idCliente, Int64 idCorredor, String SC) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 12687Quizas es un buque (sin corredor). 
+__________________________
+
+Log Entry : 
+10/20/2017 12:49:31
+Error in: . Error Message:Sin Corredor
+__________________________
+
+Log Entry : 
+10/20/2017 12:49:31
+Error in: . Error Message: EsteCorredorSeleFacturaAlClientePorSeparadoId(). System.IndexOutOfRangeException: No hay ninguna fila en la posición 0.
+   en System.Data.RBTree`1.GetNodeByIndex(Int32 userIndex)
+   en System.Data.DataRowCollection.get_Item(Int32 index)
+   en Pronto.ERP.Bll.EntidadManager.GetItem(String SC, String Tabla, Int32 Id) en C:\bdl\pronto\BussinessLogic\EntidadManager.vb:línea 968
+   en CartaDePorteManager.EsteCorredorSeleFacturaAlClientePorSeparadoId(Int64 idCliente, Int64 idCorredor, String SC) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 12687Quizas es un buque (sin corredor). 
+__________________________
+
+Log Entry : 
+10/20/2017 12:49:31
+Error in: . Error Message:Empiezo a facturar en serio.20/10/2017 12:49:31
+__________________________
+
+Log Entry : 
+10/20/2017 12:49:45
+Error in: . Error Message:Error en la llamada a CreaFacturaCOMpronto. System.Exception: El item de la factura tiene tarifa 0.    53 61.140
+   en LogicaFacturacion.CreaFacturaCOMpronto(List`1 oListaCDP, Int64 IdClienteAFacturarle, Int64 sucursalWilliams, DataTable dtRenglonesManuales, String SC, HttpSessionState Session, Int32 optFacturarA, String agruparArticulosPor, String txtBuscar, String txtTarifaGastoAdministrativo, Boolean SeSeparaPorCorredor, String txtCorredor, Boolean chkPagaCorredor, List`1 listEmbarques, IEnumerable`1& ImputacionDevuelta, Int32 IdClienteObservaciones) en C:\bdl\pronto\BussinessLogic\LogicaFacturacion.vb:línea 6870
+__________________________
+
+Log Entry : 
+10/20/2017 12:49:45
+Error in: . Error Message:No se pudo crear la factura para <a href="Cliente.aspx?Id=648" target="_blank">BELGRANO CEREALES SRL</a>;  verificar IVA y CUIT, o que la carta no estuviese imputada anteriormente; Verificar que no  se haya disparado el error 'listacdp vacia' o no haya otro cliente con el mismo nombre <br/>
+
+__________________________
+
+Log Entry : 
+10/20/2017 12:49:53
+Error in: . Error Message:Error en la llamada a CreaFacturaCOMpronto. System.Exception: El item de la factura tiene tarifa 0.    21 145.860
+   en LogicaFacturacion.CreaFacturaCOMpronto(List`1 oListaCDP, Int64 IdClienteAFacturarle, Int64 sucursalWilliams, DataTable dtRenglonesManuales, String SC, HttpSessionState Session, Int32 optFacturarA, String agruparArticulosPor, String txtBuscar, String txtTarifaGastoAdministrativo, Boolean SeSeparaPorCorredor, String txtCorredor, Boolean chkPagaCorredor, List`1 listEmbarques, IEnumerable`1& ImputacionDevuelta, Int32 IdClienteObservaciones) en C:\bdl\pronto\BussinessLogic\LogicaFacturacion.vb:línea 6870
+__________________________
+
+Log Entry : 
+10/20/2017 12:49:53
+Error in: . Error Message:No se pudo crear la factura para <a href="Cliente.aspx?Id=648" target="_blank">BELGRANO CEREALES SRL</a>;  verificar IVA y CUIT, o que la carta no estuviese imputada anteriormente; Verificar que no  se haya disparado el error 'listacdp vacia' o no haya otro cliente con el mismo nombre <br/>
+No se pudo crear la factura para <a href="Cliente.aspx?Id=17125" target="_blank">COOPERATIVA AGRARIA DE TRES ARROYOS LIMITADA</a>;  verificar IVA y CUIT, o que la carta no estuviese imputada anteriormente; Verificar que no  se haya disparado el error 'listacdp vacia' o no haya otro cliente con el mismo nombre <br/>
+
+__________________________
+
+Log Entry : 
+10/20/2017 12:50:05
+Error in: . Error Message:Error en la llamada a CreaFacturaCOMpronto. System.Exception: El item de la factura tiene tarifa 0.    21 30.520
+   en LogicaFacturacion.CreaFacturaCOMpronto(List`1 oListaCDP, Int64 IdClienteAFacturarle, Int64 sucursalWilliams, DataTable dtRenglonesManuales, String SC, HttpSessionState Session, Int32 optFacturarA, String agruparArticulosPor, String txtBuscar, String txtTarifaGastoAdministrativo, Boolean SeSeparaPorCorredor, String txtCorredor, Boolean chkPagaCorredor, List`1 listEmbarques, IEnumerable`1& ImputacionDevuelta, Int32 IdClienteObservaciones) en C:\bdl\pronto\BussinessLogic\LogicaFacturacion.vb:línea 6870
+__________________________
+
+Log Entry : 
+10/20/2017 12:50:05
+Error in: . Error Message:No se pudo crear la factura para <a href="Cliente.aspx?Id=648" target="_blank">BELGRANO CEREALES SRL</a>;  verificar IVA y CUIT, o que la carta no estuviese imputada anteriormente; Verificar que no  se haya disparado el error 'listacdp vacia' o no haya otro cliente con el mismo nombre <br/>
+No se pudo crear la factura para <a href="Cliente.aspx?Id=17125" target="_blank">COOPERATIVA AGRARIA DE TRES ARROYOS LIMITADA</a>;  verificar IVA y CUIT, o que la carta no estuviese imputada anteriormente; Verificar que no  se haya disparado el error 'listacdp vacia' o no haya otro cliente con el mismo nombre <br/>
+No se pudo crear la factura para <a href="Cliente.aspx?Id=9051" target="_blank">GOMEZ RODRIGO OSCAR</a>;  verificar IVA y CUIT, o que la carta no estuviese imputada anteriormente; Verificar que no  se haya disparado el error 'listacdp vacia' o no haya otro cliente con el mismo nombre <br/>
+
+__________________________
+
+Log Entry : 
+10/20/2017 13:23:02
+Error in: . Error Message:entrando en GetDatatableAsignacionAutomatica . tanda 0
+__________________________
+
+Log Entry : 
+10/20/2017 13:23:03
+Error in: . Error Message:Cartas sin automatico encontrado (pero este es el modo no automatico!!!)19
+__________________________
+
+Log Entry : 
+10/20/2017 13:23:03
+Error in: . Error Message:entro a Preprocesos 27
+__________________________
+
+Log Entry : 
+10/20/2017 13:23:06
+Error in: . Error Message:despues de AgregarEmbarques32
+__________________________
+
+Log Entry : 
+10/20/2017 13:23:06
+Error in: . Error Message:despues de ExcluirDeGastosAdministrativos32
+__________________________
+
+Log Entry : 
+10/20/2017 13:23:06
+Error in: . Error Message:despues de ReasignarAquellosQueSeLeFacturanForzosamenteAlCorredor32
+__________________________
+
+Log Entry : 
+10/20/2017 13:23:06
+Error in: . Error Message:despues de CasosSyngenta_y_Acopios32
+__________________________
+
+Log Entry : 
+10/20/2017 13:23:06
+Error in: . Error Message:entro en PostProcesos 32
+__________________________
+
+Log Entry : 
+10/20/2017 13:23:06
+Error in: . Error Message:despues de EmparcharClienteSeparadoParaCasosQueSuperenUnMontoDeterminado 32
+__________________________
+
+Log Entry : 
+10/20/2017 13:23:06
+Error in: . Error Message:despues de EmparcharClienteSeparadoParaFacturasQueSuperanCantidadDeRenglones 32
+__________________________
+
+Log Entry : 
+10/20/2017 13:23:06
+Error in: . Error Message:despues de SepararAcopiosLDCyACA 32
+__________________________
+
+Log Entry : 
+10/20/2017 13:23:06
+Error in: . Error Message:despues de PostProcesoFacturacion_ReglaExportadores 32
+__________________________
+
+Log Entry : 
+10/20/2017 13:23:08
+Error in: . Error Message:punto 2 en GetDatatableAsignacionAutomatica . tanda 2253
+__________________________
+
+Log Entry : 
+10/20/2017 13:23:08
+Error in: . Error Message:punto 3 en GetDatatableAsignacionAutomatica . tanda 2253
+__________________________
+
+Log Entry : 
+10/20/2017 13:23:08
+Error in: . Error Message:punto 4 en GetDatatableAsignacionAutomatica . tanda 2253
+__________________________
+
+Log Entry : 
+10/20/2017 13:23:09
+Error in: . Error Message:System.Exception
+La tarifa de la lista está vencida
+   en Pronto.ERP.Bll.ListaPreciosManager.VerificarVencimientoLista(Int64 idListaPrecio, String SC) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 520
+   en Pronto.ERP.Bll.ListaPreciosManager.SavePrecioPorCliente(String SC, Int64 IdCliente, Int64 IdArticulo, Double Precio, Int64 IdDestino) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 549
+   en ProntoMVC.Tests.TestsWilliams.FACTURACION_FUTUROS_Y_OPCIONES_maximo_de_renglones_28265() en C:\bdl\pronto\TestProject2\TestWilliams.cs:línea 1155
+BusinessLogic
+__________________________
+
+Log Entry : 
+10/20/2017 13:23:10
+Error in: . Error Message:System.Exception
+La tarifa de la lista está vencida
+   en Pronto.ERP.Bll.ListaPreciosManager.VerificarVencimientoLista(Int64 idListaPrecio, String SC) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 520
+   en Pronto.ERP.Bll.ListaPreciosManager.SavePrecioPorCliente(String SC, Int64 IdCliente, Int64 IdArticulo, Double Precio, Int64 IdDestino) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 549
+   en ProntoMVC.Tests.TestsWilliams.FACTURACION_FUTUROS_Y_OPCIONES_maximo_de_renglones_28265() en C:\bdl\pronto\TestProject2\TestWilliams.cs:línea 1155
+BusinessLogic
+__________________________
+
+Log Entry : 
+10/20/2017 13:23:17
+Error in: . Error Message:System.Exception
+La tarifa de la lista está vencida
+   en Pronto.ERP.Bll.ListaPreciosManager.VerificarVencimientoLista(Int64 idListaPrecio, String SC) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 520
+   en Pronto.ERP.Bll.ListaPreciosManager.SavePrecioPorCliente(String SC, Int64 IdCliente, Int64 IdArticulo, Double Precio, Int64 IdDestino) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 549
+   en ProntoMVC.Tests.TestsWilliams.FACTURACION_FUTUROS_Y_OPCIONES_maximo_de_renglones_28265() en C:\bdl\pronto\TestProject2\TestWilliams.cs:línea 1155
+BusinessLogic
+__________________________
+
+Log Entry : 
+10/20/2017 13:23:18
+Error in: . Error Message:System.Exception
+La tarifa de la lista está vencida
+   en Pronto.ERP.Bll.ListaPreciosManager.VerificarVencimientoLista(Int64 idListaPrecio, String SC) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 520
+   en Pronto.ERP.Bll.ListaPreciosManager.SavePrecioPorCliente(String SC, Int64 IdCliente, Int64 IdArticulo, Double Precio, Int64 IdDestino) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 549
+   en ProntoMVC.Tests.TestsWilliams.FACTURACION_FUTUROS_Y_OPCIONES_maximo_de_renglones_28265() en C:\bdl\pronto\TestProject2\TestWilliams.cs:línea 1155
+BusinessLogic
+__________________________
+
+Log Entry : 
+10/20/2017 13:23:29
+Error in: . Error Message:System.Exception
+La tarifa de la lista está vencida
+   en Pronto.ERP.Bll.ListaPreciosManager.VerificarVencimientoLista(Int64 idListaPrecio, String SC) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 520
+   en Pronto.ERP.Bll.ListaPreciosManager.SavePrecioPorCliente(String SC, Int64 IdCliente, Int64 IdArticulo, Double Precio, Int64 IdDestino) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 549
+   en ProntoMVC.Tests.TestsWilliams.FACTURACION_FUTUROS_Y_OPCIONES_maximo_de_renglones_28265() en C:\bdl\pronto\TestProject2\TestWilliams.cs:línea 1155
+BusinessLogic
+__________________________
+
+Log Entry : 
+10/20/2017 13:23:30
+Error in: . Error Message:System.Exception
+La tarifa de la lista está vencida
+   en Pronto.ERP.Bll.ListaPreciosManager.VerificarVencimientoLista(Int64 idListaPrecio, String SC) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 520
+   en Pronto.ERP.Bll.ListaPreciosManager.SavePrecioPorCliente(String SC, Int64 IdCliente, Int64 IdArticulo, Double Precio, Int64 IdDestino) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 549
+   en ProntoMVC.Tests.TestsWilliams.FACTURACION_FUTUROS_Y_OPCIONES_maximo_de_renglones_28265() en C:\bdl\pronto\TestProject2\TestWilliams.cs:línea 1155
+BusinessLogic
+__________________________
+
+Log Entry : 
+10/20/2017 13:23:31
+Error in: . Error Message:System.Exception
+La tarifa de la lista está vencida
+   en Pronto.ERP.Bll.ListaPreciosManager.VerificarVencimientoLista(Int64 idListaPrecio, String SC) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 520
+   en Pronto.ERP.Bll.ListaPreciosManager.SavePrecioPorCliente(String SC, Int64 IdCliente, Int64 IdArticulo, Double Precio, Int64 IdDestino) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 549
+   en ProntoMVC.Tests.TestsWilliams.FACTURACION_FUTUROS_Y_OPCIONES_maximo_de_renglones_28265() en C:\bdl\pronto\TestProject2\TestWilliams.cs:línea 1155
+BusinessLogic
+__________________________
+
+Log Entry : 
+10/20/2017 13:23:32
+Error in: . Error Message:System.Exception
+La tarifa de la lista está vencida
+   en Pronto.ERP.Bll.ListaPreciosManager.VerificarVencimientoLista(Int64 idListaPrecio, String SC) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 520
+   en Pronto.ERP.Bll.ListaPreciosManager.SavePrecioPorCliente(String SC, Int64 IdCliente, Int64 IdArticulo, Double Precio, Int64 IdDestino) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 549
+   en ProntoMVC.Tests.TestsWilliams.FACTURACION_FUTUROS_Y_OPCIONES_maximo_de_renglones_28265() en C:\bdl\pronto\TestProject2\TestWilliams.cs:línea 1155
+BusinessLogic
+__________________________
+
+Log Entry : 
+10/20/2017 13:23:33
+Error in: . Error Message:System.Exception
+La tarifa de la lista está vencida
+   en Pronto.ERP.Bll.ListaPreciosManager.VerificarVencimientoLista(Int64 idListaPrecio, String SC) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 520
+   en Pronto.ERP.Bll.ListaPreciosManager.SavePrecioPorCliente(String SC, Int64 IdCliente, Int64 IdArticulo, Double Precio, Int64 IdDestino) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 549
+   en ProntoMVC.Tests.TestsWilliams.FACTURACION_FUTUROS_Y_OPCIONES_maximo_de_renglones_28265() en C:\bdl\pronto\TestProject2\TestWilliams.cs:línea 1155
+BusinessLogic
+__________________________
+
+Log Entry : 
+10/20/2017 13:23:34
+Error in: . Error Message:System.Exception
+La tarifa de la lista está vencida
+   en Pronto.ERP.Bll.ListaPreciosManager.VerificarVencimientoLista(Int64 idListaPrecio, String SC) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 520
+   en Pronto.ERP.Bll.ListaPreciosManager.SavePrecioPorCliente(String SC, Int64 IdCliente, Int64 IdArticulo, Double Precio, Int64 IdDestino) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 549
+   en ProntoMVC.Tests.TestsWilliams.FACTURACION_FUTUROS_Y_OPCIONES_maximo_de_renglones_28265() en C:\bdl\pronto\TestProject2\TestWilliams.cs:línea 1155
+BusinessLogic
+__________________________
+
+Log Entry : 
+10/20/2017 13:23:35
+Error in: . Error Message:System.Exception
+La tarifa de la lista está vencida
+   en Pronto.ERP.Bll.ListaPreciosManager.VerificarVencimientoLista(Int64 idListaPrecio, String SC) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 520
+   en Pronto.ERP.Bll.ListaPreciosManager.SavePrecioPorCliente(String SC, Int64 IdCliente, Int64 IdArticulo, Double Precio, Int64 IdDestino) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 549
+   en ProntoMVC.Tests.TestsWilliams.FACTURACION_FUTUROS_Y_OPCIONES_maximo_de_renglones_28265() en C:\bdl\pronto\TestProject2\TestWilliams.cs:línea 1155
+BusinessLogic
+__________________________
+
+Log Entry : 
+10/20/2017 13:23:36
+Error in: . Error Message:System.Exception
+La tarifa de la lista está vencida
+   en Pronto.ERP.Bll.ListaPreciosManager.VerificarVencimientoLista(Int64 idListaPrecio, String SC) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 520
+   en Pronto.ERP.Bll.ListaPreciosManager.SavePrecioPorCliente(String SC, Int64 IdCliente, Int64 IdArticulo, Double Precio, Int64 IdDestino) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 549
+   en ProntoMVC.Tests.TestsWilliams.FACTURACION_FUTUROS_Y_OPCIONES_maximo_de_renglones_28265() en C:\bdl\pronto\TestProject2\TestWilliams.cs:línea 1155
+BusinessLogic
+__________________________
+
+Log Entry : 
+10/20/2017 13:23:38
+Error in: . Error Message:System.Exception
+La tarifa de la lista está vencida
+   en Pronto.ERP.Bll.ListaPreciosManager.VerificarVencimientoLista(Int64 idListaPrecio, String SC) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 520
+   en Pronto.ERP.Bll.ListaPreciosManager.SavePrecioPorCliente(String SC, Int64 IdCliente, Int64 IdArticulo, Double Precio, Int64 IdDestino) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 549
+   en ProntoMVC.Tests.TestsWilliams.FACTURACION_FUTUROS_Y_OPCIONES_maximo_de_renglones_28265() en C:\bdl\pronto\TestProject2\TestWilliams.cs:línea 1155
+BusinessLogic
+__________________________
+
+Log Entry : 
+10/20/2017 13:23:39
+Error in: . Error Message:Separo las facturas que se generan en el lote.20/10/2017 13:23:39
+__________________________
+
+Log Entry : 
+10/20/2017 13:24:02
+Error in: . Error Message:ActualizarCampoClienteSeparador 32 filas
+__________________________
+
+Log Entry : 
+10/20/2017 13:24:04
+Error in: . Error Message:Sin Corredor
+__________________________
+
+Log Entry : 
+10/20/2017 13:24:04
+Error in: . Error Message: EsteCorredorSeleFacturaAlClientePorSeparadoId(). System.IndexOutOfRangeException: No hay ninguna fila en la posición 0.
+   en System.Data.RBTree`1.GetNodeByIndex(Int32 userIndex)
+   en System.Data.DataRowCollection.get_Item(Int32 index)
+   en Pronto.ERP.Bll.EntidadManager.GetItem(String SC, String Tabla, Int32 Id) en C:\bdl\pronto\BussinessLogic\EntidadManager.vb:línea 968
+   en CartaDePorteManager.EsteCorredorSeleFacturaAlClientePorSeparadoId(Int64 idCliente, Int64 idCorredor, String SC) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 12687Quizas es un buque (sin corredor). 
+__________________________
+
+Log Entry : 
+10/20/2017 13:24:04
+Error in: . Error Message:Sin Corredor
+__________________________
+
+Log Entry : 
+10/20/2017 13:24:04
+Error in: . Error Message: EsteCorredorSeleFacturaAlClientePorSeparadoId(). System.IndexOutOfRangeException: No hay ninguna fila en la posición 0.
+   en System.Data.RBTree`1.GetNodeByIndex(Int32 userIndex)
+   en System.Data.DataRowCollection.get_Item(Int32 index)
+   en Pronto.ERP.Bll.EntidadManager.GetItem(String SC, String Tabla, Int32 Id) en C:\bdl\pronto\BussinessLogic\EntidadManager.vb:línea 968
+   en CartaDePorteManager.EsteCorredorSeleFacturaAlClientePorSeparadoId(Int64 idCliente, Int64 idCorredor, String SC) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 12687Quizas es un buque (sin corredor). 
+__________________________
+
+Log Entry : 
+10/20/2017 13:24:04
+Error in: . Error Message:Sin Corredor
+__________________________
+
+Log Entry : 
+10/20/2017 13:24:04
+Error in: . Error Message: EsteCorredorSeleFacturaAlClientePorSeparadoId(). System.IndexOutOfRangeException: No hay ninguna fila en la posición 0.
+   en System.Data.RBTree`1.GetNodeByIndex(Int32 userIndex)
+   en System.Data.DataRowCollection.get_Item(Int32 index)
+   en Pronto.ERP.Bll.EntidadManager.GetItem(String SC, String Tabla, Int32 Id) en C:\bdl\pronto\BussinessLogic\EntidadManager.vb:línea 968
+   en CartaDePorteManager.EsteCorredorSeleFacturaAlClientePorSeparadoId(Int64 idCliente, Int64 idCorredor, String SC) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 12687Quizas es un buque (sin corredor). 
+__________________________
+
+Log Entry : 
+10/20/2017 13:24:04
+Error in: . Error Message:Sin Corredor
+__________________________
+
+Log Entry : 
+10/20/2017 13:24:04
+Error in: . Error Message: EsteCorredorSeleFacturaAlClientePorSeparadoId(). System.IndexOutOfRangeException: No hay ninguna fila en la posición 0.
+   en System.Data.RBTree`1.GetNodeByIndex(Int32 userIndex)
+   en System.Data.DataRowCollection.get_Item(Int32 index)
+   en Pronto.ERP.Bll.EntidadManager.GetItem(String SC, String Tabla, Int32 Id) en C:\bdl\pronto\BussinessLogic\EntidadManager.vb:línea 968
+   en CartaDePorteManager.EsteCorredorSeleFacturaAlClientePorSeparadoId(Int64 idCliente, Int64 idCorredor, String SC) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 12687Quizas es un buque (sin corredor). 
+__________________________
+
+Log Entry : 
+10/20/2017 13:24:05
+Error in: . Error Message:Sin Corredor
+__________________________
+
+Log Entry : 
+10/20/2017 13:24:05
+Error in: . Error Message: EsteCorredorSeleFacturaAlClientePorSeparadoId(). System.IndexOutOfRangeException: No hay ninguna fila en la posición 0.
+   en System.Data.RBTree`1.GetNodeByIndex(Int32 userIndex)
+   en System.Data.DataRowCollection.get_Item(Int32 index)
+   en Pronto.ERP.Bll.EntidadManager.GetItem(String SC, String Tabla, Int32 Id) en C:\bdl\pronto\BussinessLogic\EntidadManager.vb:línea 968
+   en CartaDePorteManager.EsteCorredorSeleFacturaAlClientePorSeparadoId(Int64 idCliente, Int64 idCorredor, String SC) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 12687Quizas es un buque (sin corredor). 
+__________________________
+
+Log Entry : 
+10/20/2017 13:24:05
+Error in: . Error Message:Empiezo a facturar en serio.20/10/2017 13:24:05
+__________________________
+
+Log Entry : 
+10/20/2017 13:25:22
+Error in: . Error Message:Error en la llamada a CreaFacturaCOMpronto. System.Exception: El item de la factura tiene tarifa 0.    53 61.140
+   en LogicaFacturacion.CreaFacturaCOMpronto(List`1 oListaCDP, Int64 IdClienteAFacturarle, Int64 sucursalWilliams, DataTable dtRenglonesManuales, String SC, HttpSessionState Session, Int32 optFacturarA, String agruparArticulosPor, String txtBuscar, String txtTarifaGastoAdministrativo, Boolean SeSeparaPorCorredor, String txtCorredor, Boolean chkPagaCorredor, List`1 listEmbarques, IEnumerable`1& ImputacionDevuelta, Int32 IdClienteObservaciones) en C:\bdl\pronto\BussinessLogic\LogicaFacturacion.vb:línea 6870
+__________________________
+
+Log Entry : 
+10/20/2017 13:25:22
+Error in: . Error Message:No se pudo crear la factura para <a href="Cliente.aspx?Id=648" target="_blank">BELGRANO CEREALES SRL</a>;  verificar IVA y CUIT, o que la carta no estuviese imputada anteriormente; Verificar que no  se haya disparado el error 'listacdp vacia' o no haya otro cliente con el mismo nombre <br/>
+
+__________________________
+
+Log Entry : 
+10/20/2017 13:25:55
+Error in: . Error Message:Error en la llamada a CreaFacturaCOMpronto. System.Exception: El item de la factura tiene tarifa 0.    21 145.860
+   en LogicaFacturacion.CreaFacturaCOMpronto(List`1 oListaCDP, Int64 IdClienteAFacturarle, Int64 sucursalWilliams, DataTable dtRenglonesManuales, String SC, HttpSessionState Session, Int32 optFacturarA, String agruparArticulosPor, String txtBuscar, String txtTarifaGastoAdministrativo, Boolean SeSeparaPorCorredor, String txtCorredor, Boolean chkPagaCorredor, List`1 listEmbarques, IEnumerable`1& ImputacionDevuelta, Int32 IdClienteObservaciones) en C:\bdl\pronto\BussinessLogic\LogicaFacturacion.vb:línea 6870
+__________________________
+
+Log Entry : 
+10/20/2017 13:25:55
+Error in: . Error Message:No se pudo crear la factura para <a href="Cliente.aspx?Id=648" target="_blank">BELGRANO CEREALES SRL</a>;  verificar IVA y CUIT, o que la carta no estuviese imputada anteriormente; Verificar que no  se haya disparado el error 'listacdp vacia' o no haya otro cliente con el mismo nombre <br/>
+No se pudo crear la factura para <a href="Cliente.aspx?Id=17125" target="_blank">COOPERATIVA AGRARIA DE TRES ARROYOS LIMITADA</a>;  verificar IVA y CUIT, o que la carta no estuviese imputada anteriormente; Verificar que no  se haya disparado el error 'listacdp vacia' o no haya otro cliente con el mismo nombre <br/>
+
+__________________________
+
+Log Entry : 
+10/20/2017 13:26:02
+Error in: . Error Message:Error en la llamada a CreaFacturaCOMpronto. System.Exception: El item de la factura tiene tarifa 0.    21 30.520
+   en LogicaFacturacion.CreaFacturaCOMpronto(List`1 oListaCDP, Int64 IdClienteAFacturarle, Int64 sucursalWilliams, DataTable dtRenglonesManuales, String SC, HttpSessionState Session, Int32 optFacturarA, String agruparArticulosPor, String txtBuscar, String txtTarifaGastoAdministrativo, Boolean SeSeparaPorCorredor, String txtCorredor, Boolean chkPagaCorredor, List`1 listEmbarques, IEnumerable`1& ImputacionDevuelta, Int32 IdClienteObservaciones) en C:\bdl\pronto\BussinessLogic\LogicaFacturacion.vb:línea 6870
+__________________________
+
+Log Entry : 
+10/20/2017 13:26:02
+Error in: . Error Message:No se pudo crear la factura para <a href="Cliente.aspx?Id=648" target="_blank">BELGRANO CEREALES SRL</a>;  verificar IVA y CUIT, o que la carta no estuviese imputada anteriormente; Verificar que no  se haya disparado el error 'listacdp vacia' o no haya otro cliente con el mismo nombre <br/>
+No se pudo crear la factura para <a href="Cliente.aspx?Id=17125" target="_blank">COOPERATIVA AGRARIA DE TRES ARROYOS LIMITADA</a>;  verificar IVA y CUIT, o que la carta no estuviese imputada anteriormente; Verificar que no  se haya disparado el error 'listacdp vacia' o no haya otro cliente con el mismo nombre <br/>
+No se pudo crear la factura para <a href="Cliente.aspx?Id=9051" target="_blank">GOMEZ RODRIGO OSCAR</a>;  verificar IVA y CUIT, o que la carta no estuviese imputada anteriormente; Verificar que no  se haya disparado el error 'listacdp vacia' o no haya otro cliente con el mismo nombre <br/>
+
+__________________________
+
+Log Entry : 
+10/20/2017 13:26:07
+Error in: . Error Message:Error en la llamada a CreaFacturaCOMpronto. System.Exception: El item de la factura tiene tarifa 0.    21 30.340
+   en LogicaFacturacion.CreaFacturaCOMpronto(List`1 oListaCDP, Int64 IdClienteAFacturarle, Int64 sucursalWilliams, DataTable dtRenglonesManuales, String SC, HttpSessionState Session, Int32 optFacturarA, String agruparArticulosPor, String txtBuscar, String txtTarifaGastoAdministrativo, Boolean SeSeparaPorCorredor, String txtCorredor, Boolean chkPagaCorredor, List`1 listEmbarques, IEnumerable`1& ImputacionDevuelta, Int32 IdClienteObservaciones) en C:\bdl\pronto\BussinessLogic\LogicaFacturacion.vb:línea 6870
+__________________________
+
+Log Entry : 
+10/20/2017 13:26:07
+Error in: . Error Message:No se pudo crear la factura para <a href="Cliente.aspx?Id=648" target="_blank">BELGRANO CEREALES SRL</a>;  verificar IVA y CUIT, o que la carta no estuviese imputada anteriormente; Verificar que no  se haya disparado el error 'listacdp vacia' o no haya otro cliente con el mismo nombre <br/>
+No se pudo crear la factura para <a href="Cliente.aspx?Id=17125" target="_blank">COOPERATIVA AGRARIA DE TRES ARROYOS LIMITADA</a>;  verificar IVA y CUIT, o que la carta no estuviese imputada anteriormente; Verificar que no  se haya disparado el error 'listacdp vacia' o no haya otro cliente con el mismo nombre <br/>
+No se pudo crear la factura para <a href="Cliente.aspx?Id=9051" target="_blank">GOMEZ RODRIGO OSCAR</a>;  verificar IVA y CUIT, o que la carta no estuviese imputada anteriormente; Verificar que no  se haya disparado el error 'listacdp vacia' o no haya otro cliente con el mismo nombre <br/>
+No se pudo crear la factura para <a href="Cliente.aspx?Id=2303" target="_blank">GROBOCOPATEL HNOS S.A.</a>;  verificar IVA y CUIT, o que la carta no estuviese imputada anteriormente; Verificar que no  se haya disparado el error 'listacdp vacia' o no haya otro cliente con el mismo nombre <br/>
+
+__________________________
+
+Log Entry : 
+10/20/2017 13:26:15
+Error in: . Error Message:Error en la llamada a CreaFacturaCOMpronto. System.Exception: El item de la factura tiene tarifa 0.    21 239.360
+   en LogicaFacturacion.CreaFacturaCOMpronto(List`1 oListaCDP, Int64 IdClienteAFacturarle, Int64 sucursalWilliams, DataTable dtRenglonesManuales, String SC, HttpSessionState Session, Int32 optFacturarA, String agruparArticulosPor, String txtBuscar, String txtTarifaGastoAdministrativo, Boolean SeSeparaPorCorredor, String txtCorredor, Boolean chkPagaCorredor, List`1 listEmbarques, IEnumerable`1& ImputacionDevuelta, Int32 IdClienteObservaciones) en C:\bdl\pronto\BussinessLogic\LogicaFacturacion.vb:línea 6870
+__________________________
+
+Log Entry : 
+10/20/2017 13:26:15
+Error in: . Error Message:No se pudo crear la factura para <a href="Cliente.aspx?Id=648" target="_blank">BELGRANO CEREALES SRL</a>;  verificar IVA y CUIT, o que la carta no estuviese imputada anteriormente; Verificar que no  se haya disparado el error 'listacdp vacia' o no haya otro cliente con el mismo nombre <br/>
+No se pudo crear la factura para <a href="Cliente.aspx?Id=17125" target="_blank">COOPERATIVA AGRARIA DE TRES ARROYOS LIMITADA</a>;  verificar IVA y CUIT, o que la carta no estuviese imputada anteriormente; Verificar que no  se haya disparado el error 'listacdp vacia' o no haya otro cliente con el mismo nombre <br/>
+No se pudo crear la factura para <a href="Cliente.aspx?Id=9051" target="_blank">GOMEZ RODRIGO OSCAR</a>;  verificar IVA y CUIT, o que la carta no estuviese imputada anteriormente; Verificar que no  se haya disparado el error 'listacdp vacia' o no haya otro cliente con el mismo nombre <br/>
+No se pudo crear la factura para <a href="Cliente.aspx?Id=2303" target="_blank">GROBOCOPATEL HNOS S.A.</a>;  verificar IVA y CUIT, o que la carta no estuviese imputada anteriormente; Verificar que no  se haya disparado el error 'listacdp vacia' o no haya otro cliente con el mismo nombre <br/>
+No se pudo crear la factura para <a href="Cliente.aspx?Id=14474" target="_blank">LA ALIANZA COOP. AGRIC. GANAD. LTD</a>;  verificar IVA y CUIT, o que la carta no estuviese imputada anteriormente; Verificar que no  se haya disparado el error 'listacdp vacia' o no haya otro cliente con el mismo nombre <br/>
+
+__________________________
+
+Log Entry : 
+10/20/2017 13:26:20
+Error in: . Error Message:Error en la llamada a CreaFacturaCOMpronto. System.Exception: El item de la factura tiene tarifa 0.    53 180.810
+   en LogicaFacturacion.CreaFacturaCOMpronto(List`1 oListaCDP, Int64 IdClienteAFacturarle, Int64 sucursalWilliams, DataTable dtRenglonesManuales, String SC, HttpSessionState Session, Int32 optFacturarA, String agruparArticulosPor, String txtBuscar, String txtTarifaGastoAdministrativo, Boolean SeSeparaPorCorredor, String txtCorredor, Boolean chkPagaCorredor, List`1 listEmbarques, IEnumerable`1& ImputacionDevuelta, Int32 IdClienteObservaciones) en C:\bdl\pronto\BussinessLogic\LogicaFacturacion.vb:línea 6870
+__________________________
+
+Log Entry : 
+10/20/2017 13:26:20
+Error in: . Error Message:No se pudo crear la factura para <a href="Cliente.aspx?Id=648" target="_blank">BELGRANO CEREALES SRL</a>;  verificar IVA y CUIT, o que la carta no estuviese imputada anteriormente; Verificar que no  se haya disparado el error 'listacdp vacia' o no haya otro cliente con el mismo nombre <br/>
+No se pudo crear la factura para <a href="Cliente.aspx?Id=17125" target="_blank">COOPERATIVA AGRARIA DE TRES ARROYOS LIMITADA</a>;  verificar IVA y CUIT, o que la carta no estuviese imputada anteriormente; Verificar que no  se haya disparado el error 'listacdp vacia' o no haya otro cliente con el mismo nombre <br/>
+No se pudo crear la factura para <a href="Cliente.aspx?Id=9051" target="_blank">GOMEZ RODRIGO OSCAR</a>;  verificar IVA y CUIT, o que la carta no estuviese imputada anteriormente; Verificar que no  se haya disparado el error 'listacdp vacia' o no haya otro cliente con el mismo nombre <br/>
+No se pudo crear la factura para <a href="Cliente.aspx?Id=2303" target="_blank">GROBOCOPATEL HNOS S.A.</a>;  verificar IVA y CUIT, o que la carta no estuviese imputada anteriormente; Verificar que no  se haya disparado el error 'listacdp vacia' o no haya otro cliente con el mismo nombre <br/>
+No se pudo crear la factura para <a href="Cliente.aspx?Id=14474" target="_blank">LA ALIANZA COOP. AGRIC. GANAD. LTD</a>;  verificar IVA y CUIT, o que la carta no estuviese imputada anteriormente; Verificar que no  se haya disparado el error 'listacdp vacia' o no haya otro cliente con el mismo nombre <br/>
+No se pudo crear la factura para <a href="Cliente.aspx?Id=2588" target="_blank">LA BRAGADENSE S.A</a>;  verificar IVA y CUIT, o que la carta no estuviese imputada anteriormente; Verificar que no  se haya disparado el error 'listacdp vacia' o no haya otro cliente con el mismo nombre <br/>
+
+__________________________
+
+Log Entry : 
+10/20/2017 13:26:26
+Error in: . Error Message:Error en la llamada a CreaFacturaCOMpronto. System.Exception: El item de la factura tiene tarifa 0.    4 89.980
+   en LogicaFacturacion.CreaFacturaCOMpronto(List`1 oListaCDP, Int64 IdClienteAFacturarle, Int64 sucursalWilliams, DataTable dtRenglonesManuales, String SC, HttpSessionState Session, Int32 optFacturarA, String agruparArticulosPor, String txtBuscar, String txtTarifaGastoAdministrativo, Boolean SeSeparaPorCorredor, String txtCorredor, Boolean chkPagaCorredor, List`1 listEmbarques, IEnumerable`1& ImputacionDevuelta, Int32 IdClienteObservaciones) en C:\bdl\pronto\BussinessLogic\LogicaFacturacion.vb:línea 6870
+__________________________
+
+Log Entry : 
+10/20/2017 13:26:26
+Error in: . Error Message:No se pudo crear la factura para <a href="Cliente.aspx?Id=648" target="_blank">BELGRANO CEREALES SRL</a>;  verificar IVA y CUIT, o que la carta no estuviese imputada anteriormente; Verificar que no  se haya disparado el error 'listacdp vacia' o no haya otro cliente con el mismo nombre <br/>
+No se pudo crear la factura para <a href="Cliente.aspx?Id=17125" target="_blank">COOPERATIVA AGRARIA DE TRES ARROYOS LIMITADA</a>;  verificar IVA y CUIT, o que la carta no estuviese imputada anteriormente; Verificar que no  se haya disparado el error 'listacdp vacia' o no haya otro cliente con el mismo nombre <br/>
+No se pudo crear la factura para <a href="Cliente.aspx?Id=9051" target="_blank">GOMEZ RODRIGO OSCAR</a>;  verificar IVA y CUIT, o que la carta no estuviese imputada anteriormente; Verificar que no  se haya disparado el error 'listacdp vacia' o no haya otro cliente con el mismo nombre <br/>
+No se pudo crear la factura para <a href="Cliente.aspx?Id=2303" target="_blank">GROBOCOPATEL HNOS S.A.</a>;  verificar IVA y CUIT, o que la carta no estuviese imputada anteriormente; Verificar que no  se haya disparado el error 'listacdp vacia' o no haya otro cliente con el mismo nombre <br/>
+No se pudo crear la factura para <a href="Cliente.aspx?Id=14474" target="_blank">LA ALIANZA COOP. AGRIC. GANAD. LTD</a>;  verificar IVA y CUIT, o que la carta no estuviese imputada anteriormente; Verificar que no  se haya disparado el error 'listacdp vacia' o no haya otro cliente con el mismo nombre <br/>
+No se pudo crear la factura para <a href="Cliente.aspx?Id=2588" target="_blank">LA BRAGADENSE S.A</a>;  verificar IVA y CUIT, o que la carta no estuviese imputada anteriormente; Verificar que no  se haya disparado el error 'listacdp vacia' o no haya otro cliente con el mismo nombre <br/>
+No se pudo crear la factura para <a href="Cliente.aspx?Id=3428" target="_blank">OSARDA S.A.</a>;  verificar IVA y CUIT, o que la carta no estuviese imputada anteriormente; Verificar que no  se haya disparado el error 'listacdp vacia' o no haya otro cliente con el mismo nombre <br/>
+
+__________________________
+
+Log Entry : 
+10/20/2017 13:32:22
+Error in: . Error Message:Error en la llamada a CreaFacturaCOMpronto. System.Exception: El item de la factura tiene tarifa 0.    21 24.000
+   en LogicaFacturacion.CreaFacturaCOMpronto(List`1 oListaCDP, Int64 IdClienteAFacturarle, Int64 sucursalWilliams, DataTable dtRenglonesManuales, String SC, HttpSessionState Session, Int32 optFacturarA, String agruparArticulosPor, String txtBuscar, String txtTarifaGastoAdministrativo, Boolean SeSeparaPorCorredor, String txtCorredor, Boolean chkPagaCorredor, List`1 listEmbarques, IEnumerable`1& ImputacionDevuelta, Int32 IdClienteObservaciones) en C:\bdl\pronto\BussinessLogic\LogicaFacturacion.vb:línea 6870
+__________________________
+
+Log Entry : 
+10/20/2017 13:32:23
+Error in: . Error Message:No se pudo crear la factura para <a href="Cliente.aspx?Id=648" target="_blank">BELGRANO CEREALES SRL</a>;  verificar IVA y CUIT, o que la carta no estuviese imputada anteriormente; Verificar que no  se haya disparado el error 'listacdp vacia' o no haya otro cliente con el mismo nombre <br/>
+No se pudo crear la factura para <a href="Cliente.aspx?Id=17125" target="_blank">COOPERATIVA AGRARIA DE TRES ARROYOS LIMITADA</a>;  verificar IVA y CUIT, o que la carta no estuviese imputada anteriormente; Verificar que no  se haya disparado el error 'listacdp vacia' o no haya otro cliente con el mismo nombre <br/>
+No se pudo crear la factura para <a href="Cliente.aspx?Id=9051" target="_blank">GOMEZ RODRIGO OSCAR</a>;  verificar IVA y CUIT, o que la carta no estuviese imputada anteriormente; Verificar que no  se haya disparado el error 'listacdp vacia' o no haya otro cliente con el mismo nombre <br/>
+No se pudo crear la factura para <a href="Cliente.aspx?Id=2303" target="_blank">GROBOCOPATEL HNOS S.A.</a>;  verificar IVA y CUIT, o que la carta no estuviese imputada anteriormente; Verificar que no  se haya disparado el error 'listacdp vacia' o no haya otro cliente con el mismo nombre <br/>
+No se pudo crear la factura para <a href="Cliente.aspx?Id=14474" target="_blank">LA ALIANZA COOP. AGRIC. GANAD. LTD</a>;  verificar IVA y CUIT, o que la carta no estuviese imputada anteriormente; Verificar que no  se haya disparado el error 'listacdp vacia' o no haya otro cliente con el mismo nombre <br/>
+No se pudo crear la factura para <a href="Cliente.aspx?Id=2588" target="_blank">LA BRAGADENSE S.A</a>;  verificar IVA y CUIT, o que la carta no estuviese imputada anteriormente; Verificar que no  se haya disparado el error 'listacdp vacia' o no haya otro cliente con el mismo nombre <br/>
+No se pudo crear la factura para <a href="Cliente.aspx?Id=3428" target="_blank">OSARDA S.A.</a>;  verificar IVA y CUIT, o que la carta no estuviese imputada anteriormente; Verificar que no  se haya disparado el error 'listacdp vacia' o no haya otro cliente con el mismo nombre <br/>
+No se pudo crear la factura para <a href="Cliente.aspx?Id=9147" target="_blank">SAIB CARLOS MIGUEL</a>;  verificar IVA y CUIT, o que la carta no estuviese imputada anteriormente; Verificar que no  se haya disparado el error 'listacdp vacia' o no haya otro cliente con el mismo nombre <br/>
+
+__________________________
+
+Log Entry : 
+10/20/2017 13:33:17
+Error in: . Error Message:entrando en GetDatatableAsignacionAutomatica . tanda 0
+__________________________
+
+Log Entry : 
+10/20/2017 13:33:17
+Error in: . Error Message:Cartas sin automatico encontrado (pero este es el modo no automatico!!!)19
+__________________________
+
+Log Entry : 
+10/20/2017 13:33:17
+Error in: . Error Message:entro a Preprocesos 27
+__________________________
+
+Log Entry : 
+10/20/2017 13:33:19
+Error in: . Error Message:despues de AgregarEmbarques32
+__________________________
+
+Log Entry : 
+10/20/2017 13:33:19
+Error in: . Error Message:despues de ExcluirDeGastosAdministrativos32
+__________________________
+
+Log Entry : 
+10/20/2017 13:33:19
+Error in: . Error Message:despues de ReasignarAquellosQueSeLeFacturanForzosamenteAlCorredor32
+__________________________
+
+Log Entry : 
+10/20/2017 13:33:19
+Error in: . Error Message:despues de CasosSyngenta_y_Acopios32
+__________________________
+
+Log Entry : 
+10/20/2017 13:33:19
+Error in: . Error Message:entro en PostProcesos 32
+__________________________
+
+Log Entry : 
+10/20/2017 13:33:20
+Error in: . Error Message:despues de EmparcharClienteSeparadoParaCasosQueSuperenUnMontoDeterminado 32
+__________________________
+
+Log Entry : 
+10/20/2017 13:33:20
+Error in: . Error Message:despues de EmparcharClienteSeparadoParaFacturasQueSuperanCantidadDeRenglones 32
+__________________________
+
+Log Entry : 
+10/20/2017 13:33:20
+Error in: . Error Message:despues de SepararAcopiosLDCyACA 32
+__________________________
+
+Log Entry : 
+10/20/2017 13:33:20
+Error in: . Error Message:despues de PostProcesoFacturacion_ReglaExportadores 32
+__________________________
+
+Log Entry : 
+10/20/2017 13:33:21
+Error in: . Error Message:punto 2 en GetDatatableAsignacionAutomatica . tanda 1002
+__________________________
+
+Log Entry : 
+10/20/2017 13:33:22
+Error in: . Error Message:punto 3 en GetDatatableAsignacionAutomatica . tanda 1002
+__________________________
+
+Log Entry : 
+10/20/2017 13:33:22
+Error in: . Error Message:punto 4 en GetDatatableAsignacionAutomatica . tanda 1002
+__________________________
+
+Log Entry : 
+10/20/2017 13:33:23
+Error in: . Error Message:System.Exception
+La tarifa de la lista está vencida
+   en Pronto.ERP.Bll.ListaPreciosManager.VerificarVencimientoLista(Int64 idListaPrecio, String SC) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 520
+   en Pronto.ERP.Bll.ListaPreciosManager.SavePrecioPorCliente(String SC, Int64 IdCliente, Int64 IdArticulo, Double Precio, Int64 IdDestino) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 549
+   en ProntoMVC.Tests.TestsWilliams.FACTURACION_FUTUROS_Y_OPCIONES_maximo_de_renglones_28265() en C:\bdl\pronto\TestProject2\TestWilliams.cs:línea 1155
+BusinessLogic
+__________________________
+
+Log Entry : 
+10/20/2017 13:33:24
+Error in: . Error Message:System.Exception
+La tarifa de la lista está vencida
+   en Pronto.ERP.Bll.ListaPreciosManager.VerificarVencimientoLista(Int64 idListaPrecio, String SC) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 520
+   en Pronto.ERP.Bll.ListaPreciosManager.SavePrecioPorCliente(String SC, Int64 IdCliente, Int64 IdArticulo, Double Precio, Int64 IdDestino) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 549
+   en ProntoMVC.Tests.TestsWilliams.FACTURACION_FUTUROS_Y_OPCIONES_maximo_de_renglones_28265() en C:\bdl\pronto\TestProject2\TestWilliams.cs:línea 1155
+BusinessLogic
+__________________________
+
+Log Entry : 
+10/20/2017 13:33:31
+Error in: . Error Message:System.Exception
+La tarifa de la lista está vencida
+   en Pronto.ERP.Bll.ListaPreciosManager.VerificarVencimientoLista(Int64 idListaPrecio, String SC) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 520
+   en Pronto.ERP.Bll.ListaPreciosManager.SavePrecioPorCliente(String SC, Int64 IdCliente, Int64 IdArticulo, Double Precio, Int64 IdDestino) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 549
+   en ProntoMVC.Tests.TestsWilliams.FACTURACION_FUTUROS_Y_OPCIONES_maximo_de_renglones_28265() en C:\bdl\pronto\TestProject2\TestWilliams.cs:línea 1155
+BusinessLogic
+__________________________
+
+Log Entry : 
+10/20/2017 13:33:32
+Error in: . Error Message:System.Exception
+La tarifa de la lista está vencida
+   en Pronto.ERP.Bll.ListaPreciosManager.VerificarVencimientoLista(Int64 idListaPrecio, String SC) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 520
+   en Pronto.ERP.Bll.ListaPreciosManager.SavePrecioPorCliente(String SC, Int64 IdCliente, Int64 IdArticulo, Double Precio, Int64 IdDestino) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 549
+   en ProntoMVC.Tests.TestsWilliams.FACTURACION_FUTUROS_Y_OPCIONES_maximo_de_renglones_28265() en C:\bdl\pronto\TestProject2\TestWilliams.cs:línea 1155
+BusinessLogic
+__________________________
+
+Log Entry : 
+10/20/2017 13:33:43
+Error in: . Error Message:System.Exception
+La tarifa de la lista está vencida
+   en Pronto.ERP.Bll.ListaPreciosManager.VerificarVencimientoLista(Int64 idListaPrecio, String SC) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 520
+   en Pronto.ERP.Bll.ListaPreciosManager.SavePrecioPorCliente(String SC, Int64 IdCliente, Int64 IdArticulo, Double Precio, Int64 IdDestino) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 549
+   en ProntoMVC.Tests.TestsWilliams.FACTURACION_FUTUROS_Y_OPCIONES_maximo_de_renglones_28265() en C:\bdl\pronto\TestProject2\TestWilliams.cs:línea 1155
+BusinessLogic
+__________________________
+
+Log Entry : 
+10/20/2017 13:33:44
+Error in: . Error Message:System.Exception
+La tarifa de la lista está vencida
+   en Pronto.ERP.Bll.ListaPreciosManager.VerificarVencimientoLista(Int64 idListaPrecio, String SC) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 520
+   en Pronto.ERP.Bll.ListaPreciosManager.SavePrecioPorCliente(String SC, Int64 IdCliente, Int64 IdArticulo, Double Precio, Int64 IdDestino) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 549
+   en ProntoMVC.Tests.TestsWilliams.FACTURACION_FUTUROS_Y_OPCIONES_maximo_de_renglones_28265() en C:\bdl\pronto\TestProject2\TestWilliams.cs:línea 1155
+BusinessLogic
+__________________________
+
+Log Entry : 
+10/20/2017 13:33:45
+Error in: . Error Message:System.Exception
+La tarifa de la lista está vencida
+   en Pronto.ERP.Bll.ListaPreciosManager.VerificarVencimientoLista(Int64 idListaPrecio, String SC) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 520
+   en Pronto.ERP.Bll.ListaPreciosManager.SavePrecioPorCliente(String SC, Int64 IdCliente, Int64 IdArticulo, Double Precio, Int64 IdDestino) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 549
+   en ProntoMVC.Tests.TestsWilliams.FACTURACION_FUTUROS_Y_OPCIONES_maximo_de_renglones_28265() en C:\bdl\pronto\TestProject2\TestWilliams.cs:línea 1155
+BusinessLogic
+__________________________
+
+Log Entry : 
+10/20/2017 13:33:46
+Error in: . Error Message:System.Exception
+La tarifa de la lista está vencida
+   en Pronto.ERP.Bll.ListaPreciosManager.VerificarVencimientoLista(Int64 idListaPrecio, String SC) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 520
+   en Pronto.ERP.Bll.ListaPreciosManager.SavePrecioPorCliente(String SC, Int64 IdCliente, Int64 IdArticulo, Double Precio, Int64 IdDestino) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 549
+   en ProntoMVC.Tests.TestsWilliams.FACTURACION_FUTUROS_Y_OPCIONES_maximo_de_renglones_28265() en C:\bdl\pronto\TestProject2\TestWilliams.cs:línea 1155
+BusinessLogic
+__________________________
+
+Log Entry : 
+10/20/2017 13:33:47
+Error in: . Error Message:System.Exception
+La tarifa de la lista está vencida
+   en Pronto.ERP.Bll.ListaPreciosManager.VerificarVencimientoLista(Int64 idListaPrecio, String SC) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 520
+   en Pronto.ERP.Bll.ListaPreciosManager.SavePrecioPorCliente(String SC, Int64 IdCliente, Int64 IdArticulo, Double Precio, Int64 IdDestino) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 549
+   en ProntoMVC.Tests.TestsWilliams.FACTURACION_FUTUROS_Y_OPCIONES_maximo_de_renglones_28265() en C:\bdl\pronto\TestProject2\TestWilliams.cs:línea 1155
+BusinessLogic
+__________________________
+
+Log Entry : 
+10/20/2017 13:33:48
+Error in: . Error Message:System.Exception
+La tarifa de la lista está vencida
+   en Pronto.ERP.Bll.ListaPreciosManager.VerificarVencimientoLista(Int64 idListaPrecio, String SC) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 520
+   en Pronto.ERP.Bll.ListaPreciosManager.SavePrecioPorCliente(String SC, Int64 IdCliente, Int64 IdArticulo, Double Precio, Int64 IdDestino) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 549
+   en ProntoMVC.Tests.TestsWilliams.FACTURACION_FUTUROS_Y_OPCIONES_maximo_de_renglones_28265() en C:\bdl\pronto\TestProject2\TestWilliams.cs:línea 1155
+BusinessLogic
+__________________________
+
+Log Entry : 
+10/20/2017 13:33:49
+Error in: . Error Message:System.Exception
+La tarifa de la lista está vencida
+   en Pronto.ERP.Bll.ListaPreciosManager.VerificarVencimientoLista(Int64 idListaPrecio, String SC) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 520
+   en Pronto.ERP.Bll.ListaPreciosManager.SavePrecioPorCliente(String SC, Int64 IdCliente, Int64 IdArticulo, Double Precio, Int64 IdDestino) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 549
+   en ProntoMVC.Tests.TestsWilliams.FACTURACION_FUTUROS_Y_OPCIONES_maximo_de_renglones_28265() en C:\bdl\pronto\TestProject2\TestWilliams.cs:línea 1155
+BusinessLogic
+__________________________
+
+Log Entry : 
+10/20/2017 13:33:50
+Error in: . Error Message:System.Exception
+La tarifa de la lista está vencida
+   en Pronto.ERP.Bll.ListaPreciosManager.VerificarVencimientoLista(Int64 idListaPrecio, String SC) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 520
+   en Pronto.ERP.Bll.ListaPreciosManager.SavePrecioPorCliente(String SC, Int64 IdCliente, Int64 IdArticulo, Double Precio, Int64 IdDestino) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 549
+   en ProntoMVC.Tests.TestsWilliams.FACTURACION_FUTUROS_Y_OPCIONES_maximo_de_renglones_28265() en C:\bdl\pronto\TestProject2\TestWilliams.cs:línea 1155
+BusinessLogic
+__________________________
+
+Log Entry : 
+10/20/2017 13:33:52
+Error in: . Error Message:System.Exception
+La tarifa de la lista está vencida
+   en Pronto.ERP.Bll.ListaPreciosManager.VerificarVencimientoLista(Int64 idListaPrecio, String SC) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 520
+   en Pronto.ERP.Bll.ListaPreciosManager.SavePrecioPorCliente(String SC, Int64 IdCliente, Int64 IdArticulo, Double Precio, Int64 IdDestino) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 549
+   en ProntoMVC.Tests.TestsWilliams.FACTURACION_FUTUROS_Y_OPCIONES_maximo_de_renglones_28265() en C:\bdl\pronto\TestProject2\TestWilliams.cs:línea 1155
+BusinessLogic
+__________________________
+
+Log Entry : 
+10/20/2017 13:33:53
+Error in: . Error Message:Separo las facturas que se generan en el lote.20/10/2017 13:33:53
+__________________________
+
+Log Entry : 
+10/20/2017 13:33:53
+Error in: . Error Message:ActualizarCampoClienteSeparador 32 filas
+__________________________
+
+Log Entry : 
+10/20/2017 13:33:55
+Error in: . Error Message:Sin Corredor
+__________________________
+
+Log Entry : 
+10/20/2017 13:33:55
+Error in: . Error Message: EsteCorredorSeleFacturaAlClientePorSeparadoId(). System.IndexOutOfRangeException: No hay ninguna fila en la posición 0.
+   en System.Data.RBTree`1.GetNodeByIndex(Int32 userIndex)
+   en System.Data.DataRowCollection.get_Item(Int32 index)
+   en Pronto.ERP.Bll.EntidadManager.GetItem(String SC, String Tabla, Int32 Id) en C:\bdl\pronto\BussinessLogic\EntidadManager.vb:línea 968
+   en CartaDePorteManager.EsteCorredorSeleFacturaAlClientePorSeparadoId(Int64 idCliente, Int64 idCorredor, String SC) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 12687Quizas es un buque (sin corredor). 
+__________________________
+
+Log Entry : 
+10/20/2017 13:33:55
+Error in: . Error Message:Sin Corredor
+__________________________
+
+Log Entry : 
+10/20/2017 13:33:55
+Error in: . Error Message: EsteCorredorSeleFacturaAlClientePorSeparadoId(). System.IndexOutOfRangeException: No hay ninguna fila en la posición 0.
+   en System.Data.RBTree`1.GetNodeByIndex(Int32 userIndex)
+   en System.Data.DataRowCollection.get_Item(Int32 index)
+   en Pronto.ERP.Bll.EntidadManager.GetItem(String SC, String Tabla, Int32 Id) en C:\bdl\pronto\BussinessLogic\EntidadManager.vb:línea 968
+   en CartaDePorteManager.EsteCorredorSeleFacturaAlClientePorSeparadoId(Int64 idCliente, Int64 idCorredor, String SC) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 12687Quizas es un buque (sin corredor). 
+__________________________
+
+Log Entry : 
+10/20/2017 13:33:55
+Error in: . Error Message:Sin Corredor
+__________________________
+
+Log Entry : 
+10/20/2017 13:33:55
+Error in: . Error Message: EsteCorredorSeleFacturaAlClientePorSeparadoId(). System.IndexOutOfRangeException: No hay ninguna fila en la posición 0.
+   en System.Data.RBTree`1.GetNodeByIndex(Int32 userIndex)
+   en System.Data.DataRowCollection.get_Item(Int32 index)
+   en Pronto.ERP.Bll.EntidadManager.GetItem(String SC, String Tabla, Int32 Id) en C:\bdl\pronto\BussinessLogic\EntidadManager.vb:línea 968
+   en CartaDePorteManager.EsteCorredorSeleFacturaAlClientePorSeparadoId(Int64 idCliente, Int64 idCorredor, String SC) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 12687Quizas es un buque (sin corredor). 
+__________________________
+
+Log Entry : 
+10/20/2017 13:33:55
+Error in: . Error Message:Sin Corredor
+__________________________
+
+Log Entry : 
+10/20/2017 13:33:55
+Error in: . Error Message: EsteCorredorSeleFacturaAlClientePorSeparadoId(). System.IndexOutOfRangeException: No hay ninguna fila en la posición 0.
+   en System.Data.RBTree`1.GetNodeByIndex(Int32 userIndex)
+   en System.Data.DataRowCollection.get_Item(Int32 index)
+   en Pronto.ERP.Bll.EntidadManager.GetItem(String SC, String Tabla, Int32 Id) en C:\bdl\pronto\BussinessLogic\EntidadManager.vb:línea 968
+   en CartaDePorteManager.EsteCorredorSeleFacturaAlClientePorSeparadoId(Int64 idCliente, Int64 idCorredor, String SC) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 12687Quizas es un buque (sin corredor). 
+__________________________
+
+Log Entry : 
+10/20/2017 13:33:55
+Error in: . Error Message:Sin Corredor
+__________________________
+
+Log Entry : 
+10/20/2017 13:33:55
+Error in: . Error Message: EsteCorredorSeleFacturaAlClientePorSeparadoId(). System.IndexOutOfRangeException: No hay ninguna fila en la posición 0.
+   en System.Data.RBTree`1.GetNodeByIndex(Int32 userIndex)
+   en System.Data.DataRowCollection.get_Item(Int32 index)
+   en Pronto.ERP.Bll.EntidadManager.GetItem(String SC, String Tabla, Int32 Id) en C:\bdl\pronto\BussinessLogic\EntidadManager.vb:línea 968
+   en CartaDePorteManager.EsteCorredorSeleFacturaAlClientePorSeparadoId(Int64 idCliente, Int64 idCorredor, String SC) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 12687Quizas es un buque (sin corredor). 
+__________________________
+
+Log Entry : 
+10/20/2017 13:41:46
+Error in: . Error Message:entrando en GetDatatableAsignacionAutomatica . tanda 0
+__________________________
+
+Log Entry : 
+10/20/2017 13:41:47
+Error in: . Error Message:Cartas sin automatico encontrado (pero este es el modo no automatico!!!)19
+__________________________
+
+Log Entry : 
+10/20/2017 13:41:47
+Error in: . Error Message:entro a Preprocesos 27
+__________________________
+
+Log Entry : 
+10/20/2017 13:41:50
+Error in: . Error Message:despues de AgregarEmbarques32
+__________________________
+
+Log Entry : 
+10/20/2017 13:41:50
+Error in: . Error Message:despues de ExcluirDeGastosAdministrativos32
+__________________________
+
+Log Entry : 
+10/20/2017 13:41:50
+Error in: . Error Message:despues de ReasignarAquellosQueSeLeFacturanForzosamenteAlCorredor32
+__________________________
+
+Log Entry : 
+10/20/2017 13:41:50
+Error in: . Error Message:despues de CasosSyngenta_y_Acopios32
+__________________________
+
+Log Entry : 
+10/20/2017 13:41:50
+Error in: . Error Message:entro en PostProcesos 32
+__________________________
+
+Log Entry : 
+10/20/2017 13:41:50
+Error in: . Error Message:despues de EmparcharClienteSeparadoParaCasosQueSuperenUnMontoDeterminado 32
+__________________________
+
+Log Entry : 
+10/20/2017 13:41:50
+Error in: . Error Message:despues de EmparcharClienteSeparadoParaFacturasQueSuperanCantidadDeRenglones 32
+__________________________
+
+Log Entry : 
+10/20/2017 13:41:50
+Error in: . Error Message:despues de SepararAcopiosLDCyACA 32
+__________________________
+
+Log Entry : 
+10/20/2017 13:41:50
+Error in: . Error Message:despues de PostProcesoFacturacion_ReglaExportadores 32
+__________________________
+
+Log Entry : 
+10/20/2017 13:41:52
+Error in: . Error Message:punto 2 en GetDatatableAsignacionAutomatica . tanda 9142
+__________________________
+
+Log Entry : 
+10/20/2017 13:41:52
+Error in: . Error Message:punto 3 en GetDatatableAsignacionAutomatica . tanda 9142
+__________________________
+
+Log Entry : 
+10/20/2017 13:41:52
+Error in: . Error Message:punto 4 en GetDatatableAsignacionAutomatica . tanda 9142
+__________________________
+
+Log Entry : 
+10/20/2017 13:41:54
+Error in: . Error Message:System.Exception
+La tarifa de la lista está vencida
+   en Pronto.ERP.Bll.ListaPreciosManager.VerificarVencimientoLista(Int64 idListaPrecio, String SC) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 520
+   en Pronto.ERP.Bll.ListaPreciosManager.SavePrecioPorCliente(String SC, Int64 IdCliente, Int64 IdArticulo, Double Precio, Int64 IdDestino) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 549
+   en ProntoMVC.Tests.TestsWilliams.FACTURACION_FUTUROS_Y_OPCIONES_maximo_de_renglones_28265() en C:\bdl\pronto\TestProject2\TestWilliams.cs:línea 1159
+BusinessLogic
+__________________________
+
+Log Entry : 
+10/20/2017 13:41:57
+Error in: . Error Message:System.Exception
+La tarifa de la lista está vencida
+   en Pronto.ERP.Bll.ListaPreciosManager.VerificarVencimientoLista(Int64 idListaPrecio, String SC) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 520
+   en Pronto.ERP.Bll.ListaPreciosManager.SavePrecioPorCliente(String SC, Int64 IdCliente, Int64 IdArticulo, Double Precio, Int64 IdDestino) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 549
+   en ProntoMVC.Tests.TestsWilliams.FACTURACION_FUTUROS_Y_OPCIONES_maximo_de_renglones_28265() en C:\bdl\pronto\TestProject2\TestWilliams.cs:línea 1159
+BusinessLogic
+__________________________
+
+Log Entry : 
+10/20/2017 13:42:16
+Error in: . Error Message:System.Exception
+La tarifa de la lista está vencida
+   en Pronto.ERP.Bll.ListaPreciosManager.VerificarVencimientoLista(Int64 idListaPrecio, String SC) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 520
+   en Pronto.ERP.Bll.ListaPreciosManager.SavePrecioPorCliente(String SC, Int64 IdCliente, Int64 IdArticulo, Double Precio, Int64 IdDestino) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 549
+   en ProntoMVC.Tests.TestsWilliams.FACTURACION_FUTUROS_Y_OPCIONES_maximo_de_renglones_28265() en C:\bdl\pronto\TestProject2\TestWilliams.cs:línea 1159
+BusinessLogic
+__________________________
+
+Log Entry : 
+10/20/2017 13:42:17
+Error in: . Error Message:System.Exception
+La tarifa de la lista está vencida
+   en Pronto.ERP.Bll.ListaPreciosManager.VerificarVencimientoLista(Int64 idListaPrecio, String SC) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 520
+   en Pronto.ERP.Bll.ListaPreciosManager.SavePrecioPorCliente(String SC, Int64 IdCliente, Int64 IdArticulo, Double Precio, Int64 IdDestino) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 549
+   en ProntoMVC.Tests.TestsWilliams.FACTURACION_FUTUROS_Y_OPCIONES_maximo_de_renglones_28265() en C:\bdl\pronto\TestProject2\TestWilliams.cs:línea 1159
+BusinessLogic
+__________________________
+
+Log Entry : 
+10/20/2017 13:42:30
+Error in: . Error Message:System.Exception
+La tarifa de la lista está vencida
+   en Pronto.ERP.Bll.ListaPreciosManager.VerificarVencimientoLista(Int64 idListaPrecio, String SC) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 520
+   en Pronto.ERP.Bll.ListaPreciosManager.SavePrecioPorCliente(String SC, Int64 IdCliente, Int64 IdArticulo, Double Precio, Int64 IdDestino) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 549
+   en ProntoMVC.Tests.TestsWilliams.FACTURACION_FUTUROS_Y_OPCIONES_maximo_de_renglones_28265() en C:\bdl\pronto\TestProject2\TestWilliams.cs:línea 1159
+BusinessLogic
+__________________________
+
+Log Entry : 
+10/20/2017 13:42:32
+Error in: . Error Message:System.Exception
+La tarifa de la lista está vencida
+   en Pronto.ERP.Bll.ListaPreciosManager.VerificarVencimientoLista(Int64 idListaPrecio, String SC) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 520
+   en Pronto.ERP.Bll.ListaPreciosManager.SavePrecioPorCliente(String SC, Int64 IdCliente, Int64 IdArticulo, Double Precio, Int64 IdDestino) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 549
+   en ProntoMVC.Tests.TestsWilliams.FACTURACION_FUTUROS_Y_OPCIONES_maximo_de_renglones_28265() en C:\bdl\pronto\TestProject2\TestWilliams.cs:línea 1159
+BusinessLogic
+__________________________
+
+Log Entry : 
+10/20/2017 13:42:33
+Error in: . Error Message:System.Exception
+La tarifa de la lista está vencida
+   en Pronto.ERP.Bll.ListaPreciosManager.VerificarVencimientoLista(Int64 idListaPrecio, String SC) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 520
+   en Pronto.ERP.Bll.ListaPreciosManager.SavePrecioPorCliente(String SC, Int64 IdCliente, Int64 IdArticulo, Double Precio, Int64 IdDestino) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 549
+   en ProntoMVC.Tests.TestsWilliams.FACTURACION_FUTUROS_Y_OPCIONES_maximo_de_renglones_28265() en C:\bdl\pronto\TestProject2\TestWilliams.cs:línea 1159
+BusinessLogic
+__________________________
+
+Log Entry : 
+10/20/2017 13:42:35
+Error in: . Error Message:System.Exception
+La tarifa de la lista está vencida
+   en Pronto.ERP.Bll.ListaPreciosManager.VerificarVencimientoLista(Int64 idListaPrecio, String SC) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 520
+   en Pronto.ERP.Bll.ListaPreciosManager.SavePrecioPorCliente(String SC, Int64 IdCliente, Int64 IdArticulo, Double Precio, Int64 IdDestino) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 549
+   en ProntoMVC.Tests.TestsWilliams.FACTURACION_FUTUROS_Y_OPCIONES_maximo_de_renglones_28265() en C:\bdl\pronto\TestProject2\TestWilliams.cs:línea 1159
+BusinessLogic
+__________________________
+
+Log Entry : 
+10/20/2017 13:42:35
+Error in: . Error Message:System.Exception
+La tarifa de la lista está vencida
+   en Pronto.ERP.Bll.ListaPreciosManager.VerificarVencimientoLista(Int64 idListaPrecio, String SC) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 520
+   en Pronto.ERP.Bll.ListaPreciosManager.SavePrecioPorCliente(String SC, Int64 IdCliente, Int64 IdArticulo, Double Precio, Int64 IdDestino) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 549
+   en ProntoMVC.Tests.TestsWilliams.FACTURACION_FUTUROS_Y_OPCIONES_maximo_de_renglones_28265() en C:\bdl\pronto\TestProject2\TestWilliams.cs:línea 1159
+BusinessLogic
+__________________________
+
+Log Entry : 
+10/20/2017 13:42:37
+Error in: . Error Message:System.Exception
+La tarifa de la lista está vencida
+   en Pronto.ERP.Bll.ListaPreciosManager.VerificarVencimientoLista(Int64 idListaPrecio, String SC) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 520
+   en Pronto.ERP.Bll.ListaPreciosManager.SavePrecioPorCliente(String SC, Int64 IdCliente, Int64 IdArticulo, Double Precio, Int64 IdDestino) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 549
+   en ProntoMVC.Tests.TestsWilliams.FACTURACION_FUTUROS_Y_OPCIONES_maximo_de_renglones_28265() en C:\bdl\pronto\TestProject2\TestWilliams.cs:línea 1159
+BusinessLogic
+__________________________
+
+Log Entry : 
+10/20/2017 13:42:39
+Error in: . Error Message:System.Exception
+La tarifa de la lista está vencida
+   en Pronto.ERP.Bll.ListaPreciosManager.VerificarVencimientoLista(Int64 idListaPrecio, String SC) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 520
+   en Pronto.ERP.Bll.ListaPreciosManager.SavePrecioPorCliente(String SC, Int64 IdCliente, Int64 IdArticulo, Double Precio, Int64 IdDestino) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 549
+   en ProntoMVC.Tests.TestsWilliams.FACTURACION_FUTUROS_Y_OPCIONES_maximo_de_renglones_28265() en C:\bdl\pronto\TestProject2\TestWilliams.cs:línea 1159
+BusinessLogic
+__________________________
+
+Log Entry : 
+10/20/2017 13:42:40
+Error in: . Error Message:System.Exception
+La tarifa de la lista está vencida
+   en Pronto.ERP.Bll.ListaPreciosManager.VerificarVencimientoLista(Int64 idListaPrecio, String SC) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 520
+   en Pronto.ERP.Bll.ListaPreciosManager.SavePrecioPorCliente(String SC, Int64 IdCliente, Int64 IdArticulo, Double Precio, Int64 IdDestino) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 549
+   en ProntoMVC.Tests.TestsWilliams.FACTURACION_FUTUROS_Y_OPCIONES_maximo_de_renglones_28265() en C:\bdl\pronto\TestProject2\TestWilliams.cs:línea 1159
+BusinessLogic
+__________________________
+
+Log Entry : 
+10/20/2017 13:42:40
+Error in: . Error Message:System.Exception
+La tarifa de la lista está vencida
+   en Pronto.ERP.Bll.ListaPreciosManager.VerificarVencimientoLista(Int64 idListaPrecio, String SC) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 520
+   en Pronto.ERP.Bll.ListaPreciosManager.SavePrecioPorCliente(String SC, Int64 IdCliente, Int64 IdArticulo, Double Precio, Int64 IdDestino) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 549
+   en ProntoMVC.Tests.TestsWilliams.FACTURACION_FUTUROS_Y_OPCIONES_maximo_de_renglones_28265() en C:\bdl\pronto\TestProject2\TestWilliams.cs:línea 1159
+BusinessLogic
+__________________________
+
+Log Entry : 
+10/20/2017 13:42:44
+Error in: . Error Message:Separo las facturas que se generan en el lote.20/10/2017 13:42:44
+__________________________
+
+Log Entry : 
+10/20/2017 13:42:44
+Error in: . Error Message:ActualizarCampoClienteSeparador 32 filas
+__________________________
+
+Log Entry : 
+10/20/2017 13:42:53
+Error in: . Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartaDePorteManager.IdClienteEquivalenteDelIdVendedor(Int64 IdVendedor, String SC) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 12596
+BusinessLogic
+__________________________
+
+Log Entry : 
+10/20/2017 13:42:53
+Error in: . Error Message:System.IndexOutOfRangeException: No hay ninguna fila en la posición 0.
+   en System.Data.RBTree`1.GetNodeByIndex(Int32 userIndex)
+   en System.Data.DataRowCollection.get_Item(Int32 index)
+   en CartaDePorteManager.EsteClienteSeleFacturaAlCorredorPorSeparadoId(Int64 idCliente, Int64 idCorredor, String SC) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 12630
+__________________________
+
+Log Entry : 
+10/20/2017 13:42:53
+Error in: . Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartaDePorteManager.IdClienteEquivalenteDelIdVendedor(Int64 IdVendedor, String SC) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 12596
+BusinessLogic
+__________________________
+
+Log Entry : 
+10/20/2017 13:42:53
+Error in: . Error Message:System.IndexOutOfRangeException: No hay ninguna fila en la posición 0.
+   en System.Data.RBTree`1.GetNodeByIndex(Int32 userIndex)
+   en System.Data.DataRowCollection.get_Item(Int32 index)
+   en CartaDePorteManager.EsteClienteSeleFacturaAlCorredorPorSeparadoId(Int64 idCliente, Int64 idCorredor, String SC) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 12630
+__________________________
+
+Log Entry : 
+10/20/2017 13:42:53
+Error in: . Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartaDePorteManager.IdClienteEquivalenteDelIdVendedor(Int64 IdVendedor, String SC) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 12596
+BusinessLogic
+__________________________
+
+Log Entry : 
+10/20/2017 13:42:54
+Error in: . Error Message:System.IndexOutOfRangeException: No hay ninguna fila en la posición 0.
+   en System.Data.RBTree`1.GetNodeByIndex(Int32 userIndex)
+   en System.Data.DataRowCollection.get_Item(Int32 index)
+   en CartaDePorteManager.EsteClienteSeleFacturaAlCorredorPorSeparadoId(Int64 idCliente, Int64 idCorredor, String SC) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 12630
+__________________________
+
+Log Entry : 
+10/20/2017 13:42:54
+Error in: . Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartaDePorteManager.IdClienteEquivalenteDelIdVendedor(Int64 IdVendedor, String SC) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 12596
+BusinessLogic
+__________________________
+
+Log Entry : 
+10/20/2017 13:42:54
+Error in: . Error Message:System.IndexOutOfRangeException: No hay ninguna fila en la posición 0.
+   en System.Data.RBTree`1.GetNodeByIndex(Int32 userIndex)
+   en System.Data.DataRowCollection.get_Item(Int32 index)
+   en CartaDePorteManager.EsteClienteSeleFacturaAlCorredorPorSeparadoId(Int64 idCliente, Int64 idCorredor, String SC) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 12630
+__________________________
+
+Log Entry : 
+10/20/2017 13:42:54
+Error in: . Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartaDePorteManager.IdClienteEquivalenteDelIdVendedor(Int64 IdVendedor, String SC) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 12596
+BusinessLogic
+__________________________
+
+Log Entry : 
+10/20/2017 13:42:54
+Error in: . Error Message:System.IndexOutOfRangeException: No hay ninguna fila en la posición 0.
+   en System.Data.RBTree`1.GetNodeByIndex(Int32 userIndex)
+   en System.Data.DataRowCollection.get_Item(Int32 index)
+   en CartaDePorteManager.EsteClienteSeleFacturaAlCorredorPorSeparadoId(Int64 idCliente, Int64 idCorredor, String SC) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 12630
+__________________________
+
+Log Entry : 
+10/20/2017 13:48:35
+Error in: . Error Message:entrando en GetDatatableAsignacionAutomatica . tanda 0
+__________________________
+
+Log Entry : 
+10/20/2017 13:48:35
+Error in: . Error Message:Cartas sin automatico encontrado (pero este es el modo no automatico!!!)19
+__________________________
+
+Log Entry : 
+10/20/2017 13:48:35
+Error in: . Error Message:entro a Preprocesos 27
+__________________________
+
+Log Entry : 
+10/20/2017 13:48:37
+Error in: . Error Message:despues de AgregarEmbarques32
+__________________________
+
+Log Entry : 
+10/20/2017 13:48:37
+Error in: . Error Message:despues de ExcluirDeGastosAdministrativos32
+__________________________
+
+Log Entry : 
+10/20/2017 13:48:37
+Error in: . Error Message:despues de ReasignarAquellosQueSeLeFacturanForzosamenteAlCorredor32
+__________________________
+
+Log Entry : 
+10/20/2017 13:48:37
+Error in: . Error Message:despues de CasosSyngenta_y_Acopios32
+__________________________
+
+Log Entry : 
+10/20/2017 13:48:37
+Error in: . Error Message:entro en PostProcesos 32
+__________________________
+
+Log Entry : 
+10/20/2017 13:48:38
+Error in: . Error Message:despues de EmparcharClienteSeparadoParaCasosQueSuperenUnMontoDeterminado 32
+__________________________
+
+Log Entry : 
+10/20/2017 13:48:38
+Error in: . Error Message:despues de EmparcharClienteSeparadoParaFacturasQueSuperanCantidadDeRenglones 32
+__________________________
+
+Log Entry : 
+10/20/2017 13:48:38
+Error in: . Error Message:despues de SepararAcopiosLDCyACA 32
+__________________________
+
+Log Entry : 
+10/20/2017 13:48:38
+Error in: . Error Message:despues de PostProcesoFacturacion_ReglaExportadores 32
+__________________________
+
+Log Entry : 
+10/20/2017 13:48:39
+Error in: . Error Message:punto 2 en GetDatatableAsignacionAutomatica . tanda 5319
+__________________________
+
+Log Entry : 
+10/20/2017 13:48:40
+Error in: . Error Message:punto 3 en GetDatatableAsignacionAutomatica . tanda 5319
+__________________________
+
+Log Entry : 
+10/20/2017 13:48:40
+Error in: . Error Message:punto 4 en GetDatatableAsignacionAutomatica . tanda 5319
+__________________________
+
+Log Entry : 
+10/20/2017 13:48:41
+Error in: . Error Message:System.Exception
+La tarifa de la lista está vencida
+   en Pronto.ERP.Bll.ListaPreciosManager.VerificarVencimientoLista(Int64 idListaPrecio, String SC) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 520
+   en Pronto.ERP.Bll.ListaPreciosManager.SavePrecioPorCliente(String SC, Int64 IdCliente, Int64 IdArticulo, Double Precio, Int64 IdDestino) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 549
+   en ProntoMVC.Tests.TestsWilliams.FACTURACION_FUTUROS_Y_OPCIONES_maximo_de_renglones_28265() en C:\bdl\pronto\TestProject2\TestWilliams.cs:línea 1159
+BusinessLogic
+__________________________
+
+Log Entry : 
+10/20/2017 13:48:42
+Error in: . Error Message:System.Exception
+La tarifa de la lista está vencida
+   en Pronto.ERP.Bll.ListaPreciosManager.VerificarVencimientoLista(Int64 idListaPrecio, String SC) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 520
+   en Pronto.ERP.Bll.ListaPreciosManager.SavePrecioPorCliente(String SC, Int64 IdCliente, Int64 IdArticulo, Double Precio, Int64 IdDestino) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 549
+   en ProntoMVC.Tests.TestsWilliams.FACTURACION_FUTUROS_Y_OPCIONES_maximo_de_renglones_28265() en C:\bdl\pronto\TestProject2\TestWilliams.cs:línea 1159
+BusinessLogic
+__________________________
+
+Log Entry : 
+10/20/2017 13:48:49
+Error in: . Error Message:System.Exception
+La tarifa de la lista está vencida
+   en Pronto.ERP.Bll.ListaPreciosManager.VerificarVencimientoLista(Int64 idListaPrecio, String SC) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 520
+   en Pronto.ERP.Bll.ListaPreciosManager.SavePrecioPorCliente(String SC, Int64 IdCliente, Int64 IdArticulo, Double Precio, Int64 IdDestino) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 549
+   en ProntoMVC.Tests.TestsWilliams.FACTURACION_FUTUROS_Y_OPCIONES_maximo_de_renglones_28265() en C:\bdl\pronto\TestProject2\TestWilliams.cs:línea 1159
+BusinessLogic
+__________________________
+
+Log Entry : 
+10/20/2017 13:48:51
+Error in: . Error Message:System.Exception
+La tarifa de la lista está vencida
+   en Pronto.ERP.Bll.ListaPreciosManager.VerificarVencimientoLista(Int64 idListaPrecio, String SC) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 520
+   en Pronto.ERP.Bll.ListaPreciosManager.SavePrecioPorCliente(String SC, Int64 IdCliente, Int64 IdArticulo, Double Precio, Int64 IdDestino) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 549
+   en ProntoMVC.Tests.TestsWilliams.FACTURACION_FUTUROS_Y_OPCIONES_maximo_de_renglones_28265() en C:\bdl\pronto\TestProject2\TestWilliams.cs:línea 1159
+BusinessLogic
+__________________________
+
+Log Entry : 
+10/20/2017 13:49:02
+Error in: . Error Message:System.Exception
+La tarifa de la lista está vencida
+   en Pronto.ERP.Bll.ListaPreciosManager.VerificarVencimientoLista(Int64 idListaPrecio, String SC) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 520
+   en Pronto.ERP.Bll.ListaPreciosManager.SavePrecioPorCliente(String SC, Int64 IdCliente, Int64 IdArticulo, Double Precio, Int64 IdDestino) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 549
+   en ProntoMVC.Tests.TestsWilliams.FACTURACION_FUTUROS_Y_OPCIONES_maximo_de_renglones_28265() en C:\bdl\pronto\TestProject2\TestWilliams.cs:línea 1159
+BusinessLogic
+__________________________
+
+Log Entry : 
+10/20/2017 13:49:03
+Error in: . Error Message:System.Exception
+La tarifa de la lista está vencida
+   en Pronto.ERP.Bll.ListaPreciosManager.VerificarVencimientoLista(Int64 idListaPrecio, String SC) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 520
+   en Pronto.ERP.Bll.ListaPreciosManager.SavePrecioPorCliente(String SC, Int64 IdCliente, Int64 IdArticulo, Double Precio, Int64 IdDestino) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 549
+   en ProntoMVC.Tests.TestsWilliams.FACTURACION_FUTUROS_Y_OPCIONES_maximo_de_renglones_28265() en C:\bdl\pronto\TestProject2\TestWilliams.cs:línea 1159
+BusinessLogic
+__________________________
+
+Log Entry : 
+10/20/2017 13:49:04
+Error in: . Error Message:System.Exception
+La tarifa de la lista está vencida
+   en Pronto.ERP.Bll.ListaPreciosManager.VerificarVencimientoLista(Int64 idListaPrecio, String SC) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 520
+   en Pronto.ERP.Bll.ListaPreciosManager.SavePrecioPorCliente(String SC, Int64 IdCliente, Int64 IdArticulo, Double Precio, Int64 IdDestino) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 549
+   en ProntoMVC.Tests.TestsWilliams.FACTURACION_FUTUROS_Y_OPCIONES_maximo_de_renglones_28265() en C:\bdl\pronto\TestProject2\TestWilliams.cs:línea 1159
+BusinessLogic
+__________________________
+
+Log Entry : 
+10/20/2017 13:49:05
+Error in: . Error Message:System.Exception
+La tarifa de la lista está vencida
+   en Pronto.ERP.Bll.ListaPreciosManager.VerificarVencimientoLista(Int64 idListaPrecio, String SC) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 520
+   en Pronto.ERP.Bll.ListaPreciosManager.SavePrecioPorCliente(String SC, Int64 IdCliente, Int64 IdArticulo, Double Precio, Int64 IdDestino) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 549
+   en ProntoMVC.Tests.TestsWilliams.FACTURACION_FUTUROS_Y_OPCIONES_maximo_de_renglones_28265() en C:\bdl\pronto\TestProject2\TestWilliams.cs:línea 1159
+BusinessLogic
+__________________________
+
+Log Entry : 
+10/20/2017 13:49:06
+Error in: . Error Message:System.Exception
+La tarifa de la lista está vencida
+   en Pronto.ERP.Bll.ListaPreciosManager.VerificarVencimientoLista(Int64 idListaPrecio, String SC) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 520
+   en Pronto.ERP.Bll.ListaPreciosManager.SavePrecioPorCliente(String SC, Int64 IdCliente, Int64 IdArticulo, Double Precio, Int64 IdDestino) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 549
+   en ProntoMVC.Tests.TestsWilliams.FACTURACION_FUTUROS_Y_OPCIONES_maximo_de_renglones_28265() en C:\bdl\pronto\TestProject2\TestWilliams.cs:línea 1159
+BusinessLogic
+__________________________
+
+Log Entry : 
+10/20/2017 13:49:07
+Error in: . Error Message:System.Exception
+La tarifa de la lista está vencida
+   en Pronto.ERP.Bll.ListaPreciosManager.VerificarVencimientoLista(Int64 idListaPrecio, String SC) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 520
+   en Pronto.ERP.Bll.ListaPreciosManager.SavePrecioPorCliente(String SC, Int64 IdCliente, Int64 IdArticulo, Double Precio, Int64 IdDestino) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 549
+   en ProntoMVC.Tests.TestsWilliams.FACTURACION_FUTUROS_Y_OPCIONES_maximo_de_renglones_28265() en C:\bdl\pronto\TestProject2\TestWilliams.cs:línea 1159
+BusinessLogic
+__________________________
+
+Log Entry : 
+10/20/2017 13:49:08
+Error in: . Error Message:System.Exception
+La tarifa de la lista está vencida
+   en Pronto.ERP.Bll.ListaPreciosManager.VerificarVencimientoLista(Int64 idListaPrecio, String SC) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 520
+   en Pronto.ERP.Bll.ListaPreciosManager.SavePrecioPorCliente(String SC, Int64 IdCliente, Int64 IdArticulo, Double Precio, Int64 IdDestino) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 549
+   en ProntoMVC.Tests.TestsWilliams.FACTURACION_FUTUROS_Y_OPCIONES_maximo_de_renglones_28265() en C:\bdl\pronto\TestProject2\TestWilliams.cs:línea 1159
+BusinessLogic
+__________________________
+
+Log Entry : 
+10/20/2017 13:49:09
+Error in: . Error Message:System.Exception
+La tarifa de la lista está vencida
+   en Pronto.ERP.Bll.ListaPreciosManager.VerificarVencimientoLista(Int64 idListaPrecio, String SC) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 520
+   en Pronto.ERP.Bll.ListaPreciosManager.SavePrecioPorCliente(String SC, Int64 IdCliente, Int64 IdArticulo, Double Precio, Int64 IdDestino) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 549
+   en ProntoMVC.Tests.TestsWilliams.FACTURACION_FUTUROS_Y_OPCIONES_maximo_de_renglones_28265() en C:\bdl\pronto\TestProject2\TestWilliams.cs:línea 1159
+BusinessLogic
+__________________________
+
+Log Entry : 
+10/20/2017 13:49:11
+Error in: . Error Message:System.Exception
+La tarifa de la lista está vencida
+   en Pronto.ERP.Bll.ListaPreciosManager.VerificarVencimientoLista(Int64 idListaPrecio, String SC) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 520
+   en Pronto.ERP.Bll.ListaPreciosManager.SavePrecioPorCliente(String SC, Int64 IdCliente, Int64 IdArticulo, Double Precio, Int64 IdDestino) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 549
+   en ProntoMVC.Tests.TestsWilliams.FACTURACION_FUTUROS_Y_OPCIONES_maximo_de_renglones_28265() en C:\bdl\pronto\TestProject2\TestWilliams.cs:línea 1159
+BusinessLogic
+__________________________
+
+Log Entry : 
+10/20/2017 13:49:12
+Error in: . Error Message:Separo las facturas que se generan en el lote.20/10/2017 13:49:12
+__________________________

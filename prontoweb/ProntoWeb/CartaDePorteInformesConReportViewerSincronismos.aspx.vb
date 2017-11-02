@@ -1532,6 +1532,9 @@ Partial Class CartaDePorteInformesConReportViewerSincronismos
                         registrosFiltrados = ds.wCartasDePorte_TX_InformesCorregido.Count
 
 
+
+
+
                     Case "AMAGGI (DESCARGAS) [BIT]"
 
 
@@ -1555,7 +1558,7 @@ Partial Class CartaDePorteInformesConReportViewerSincronismos
                             '-no se puede filtrar el datatable?
                             'BorrarCartasRepetidas(ds.wCartasDePorte_TX_InformesCorregido) 'ahora BorrarCartasRepetidas esta dentro del sincro
                             ' http://bdlconsultores.ddns.net/Consultas/Admin/VerConsultas1.php?recordid=14373
-                            output = Sincronismo_AmaggiDescargas(ds.wCartasDePorte_TX_InformesCorregido, "", sWHERE, sErrores, HFSC.Value)
+                            output = Sincronismo_AmaggiDescargas2(ds.wCartasDePorte_TX_InformesCorregido, "", sWHERE, sErrores, HFSC.Value)
 
                         End If
 
@@ -2081,7 +2084,8 @@ Partial Class CartaDePorteInformesConReportViewerSincronismos
                         Dim dt = EntidadManager.ExecDinamico(HFSC.Value, strSQLsincronismo() & " WHERE " & s)
                         dt = DataTableWHERE(dt, sWHERE)
                         FiltrarCopias(dt)
-                        output = Sincronismo_TomasHnos(dt, "", HFSC.Value)
+                        output = Sincronismo_TomasHnos2(dt, "", HFSC.Value)
+
                         registrosFiltrados = dt.Rows.Count
 
                     Case "SANTA CATALINA"
@@ -2497,9 +2501,30 @@ Partial Class CartaDePorteInformesConReportViewerSincronismos
 
 
                     Case Else
-                        ErrHandler2.WriteError("No se está eligiendo bien el sincro" & cmbSincronismo.Text)
-                        MsgBoxAjax(Me, "Elija un sincronismo")
-                        Return
+
+
+                        output = SincronismosWilliamsManager.GenerarSincro(cmbSincronismo.Text, sErrores,
+                           HFSC.Value, ConfigurationManager.AppSettings("UrlDominio"),
+                           "", estadofiltro, "", idVendedor, idCorredor,
+                          idDestinatario, idIntermediario,
+                          idRComercial, idArticulo, idProcedencia, idDestino,
+                          IIf(cmbCriterioWHERE.SelectedValue = "todos",
+                              CartaDePorteManager.FiltroANDOR.FiltroAND,
+                            CartaDePorteManager.FiltroANDOR.FiltroOR),
+                          DropDownList2.Text,
+                   Convert.ToDateTime(iisValidSqlDate(txtFechaDesde.Text, #1/1/1753#)),
+                   Convert.ToDateTime(iisValidSqlDate(txtFechaHasta.Text, #1/1/2100#)),
+                             cmbPuntoVenta.SelectedValue, optDivisionSyngenta.SelectedValue, , , , idClienteAuxiliar, registrosFiltrados)
+
+                        lblErrores.Text = sErrores
+                        sErrores = ""
+
+
+
+
+                        'ErrHandler2.WriteError("No se está eligiendo bien el sincro" & cmbSincronismo.Text)
+                        'MsgBoxAjax(Me, "Elija un sincronismo")
+                        'Return
                 End Select
 
 
@@ -3017,25 +3042,26 @@ Partial Class CartaDePorteInformesConReportViewerSincronismos
         Dim dt As DataTable
 
         Try
-            If cmbInforme.Text <> "Resumen de facturación" And _
-                cmbInforme.Text <> "Totales generales por mes" And _
-                cmbInforme.Text <> "Totales generales por mes por modo" And _
-                cmbInforme.Text <> "Totales generales por mes por sucursal" And _
-                cmbInforme.Text <> "Cartas Duplicadas" And _
-                cmbInforme.Text <> "Ranking de Cereales" And _
-                cmbInforme.Text <> "Ranking de Clientes" And _
-                cmbInforme.Text <> "Diferencias por Destino por Mes" And _
-                 cmbInforme.Text <> "Cartas Duplicadas pendientes de asignar" And _
+            If cmbInforme.Text <> "Resumen de facturación" And
+                cmbInforme.Text <> "Totales generales por mes" And
+                cmbInforme.Text <> "Totales generales por mes por modo" And
+                cmbInforme.Text <> "Totales generales por mes por sucursal" And
+                cmbInforme.Text <> "Cartas Duplicadas" And
+                cmbInforme.Text <> "Ranking de Cereales" And
+                cmbInforme.Text <> "Ranking de Clientes" And
+                cmbInforme.Text <> "Diferencias por Destino por Mes" And
+                cmbInforme.Text <> "Cartas Duplicadas pendientes de asignar" And
+                cmbInforme.Text <> "Listado general de Cartas de Porte - Con tipo de movimiento 2" And
                 cmbInforme.Text <> "Liquidación de Subcontratistas" Then
-                dt = CartaDePorteManager.GetDataTableFiltradoYPaginado(HFSC.Value, _
-                                "", "", "", 1, 0, _
-                                estadofiltro, "", idVendedor, idCorredor, _
-                                idDestinatario, idIntermediario, _
-                                idRComercial, idArticulo, idProcedencia, idDestino, _
-                                                                  IIf(cmbCriterioWHERE.SelectedValue = "todos", CartaDePorteManager.FiltroANDOR.FiltroAND, CartaDePorteManager.FiltroANDOR.FiltroOR), DropDownList2.Text, _
-                                Convert.ToDateTime(iisValidSqlDate(txtFechaDesde.Text, #1/1/1753#)), _
-                                Convert.ToDateTime(iisValidSqlDate(txtFechaHasta.Text, #1/1/2100#)), _
-                                cmbPuntoVenta.SelectedValue, sTitulo, optDivisionSyngenta.SelectedValue, , _
+                dt = CartaDePorteManager.GetDataTableFiltradoYPaginado(HFSC.Value,
+                                "", "", "", 1, 0,
+                                estadofiltro, "", idVendedor, idCorredor,
+                                idDestinatario, idIntermediario,
+                                idRComercial, idArticulo, idProcedencia, idDestino,
+                                                                  IIf(cmbCriterioWHERE.SelectedValue = "todos", CartaDePorteManager.FiltroANDOR.FiltroAND, CartaDePorteManager.FiltroANDOR.FiltroOR), DropDownList2.Text,
+                                Convert.ToDateTime(iisValidSqlDate(txtFechaDesde.Text, #1/1/1753#)),
+                                Convert.ToDateTime(iisValidSqlDate(txtFechaHasta.Text, #1/1/2100#)),
+                                cmbPuntoVenta.SelectedValue, sTitulo, optDivisionSyngenta.SelectedValue, ,
                                 txtContrato.Text, , idClienteAuxiliar, -1, Val(txtVagon.Text), txtPatente.Text, , optCamionVagon.SelectedValue)
 
 
@@ -3276,6 +3302,65 @@ Partial Class CartaDePorteInformesConReportViewerSincronismos
                     ProntoFuncionesUIWeb.RebindReportViewer(ReportViewer2, _
                                 "ProntoWeb\Informes\Listado general de Cartas de Porte (simulando original) recibidor oficial.rdl", _
                                         dt, Nothing, , , sTitulo)
+
+
+
+
+
+
+
+                Case "Listado general de Cartas de Porte - Con tipo de movimiento"
+
+                    ProntoFuncionesUIWeb.RebindReportViewer(ReportViewer2,
+                                    "ProntoWeb\Informes\Listado general de Cartas de Porte (simulando original) - Con tipo de movimiento.rdl",
+                                            dt, Nothing, , , sTitulo)
+
+
+
+                Case "Listado general de Cartas de Porte - Con tipo de movimiento 2"
+
+                    'acá la pagina tiene 3 updatepanels separados.
+                    'en cambio, en la pagina de clientes, donde el informe servidor funciona, el updatepanel de filtros esta metido en otro que contiene al informe.
+
+                    Dim Sql = CartaDePorteManager.DataTablePorClienteSQL(HFSC.Value, "", "", "", 0, 9999999,
+                                estadofiltro, "", idVendedor, idCorredor,
+                               idDestinatario, idIntermediario,
+                               idRComercial, idArticulo, idProcedencia, idDestino _
+                                , 0, "Ambas" _
+                                , Convert.ToDateTime(iisValidSqlDate(txtFechaDesde.Text, #1/1/1753#)),
+                            Convert.ToDateTime(iisValidSqlDate(txtFechaHasta.Text, #1/1/2100#)),
+                                0, "", Membership.GetUser.UserName, ConexBDLmaster, True, True, True, False, False, False)
+
+
+
+
+                    Dim yourParams(9) As ReportParameter
+                    yourParams(0) = New ReportParameter("webservice", "")
+                    yourParams(1) = New ReportParameter("sServidor", "")
+                    yourParams(2) = New ReportParameter("idArticulo", "-1")
+                    yourParams(3) = New ReportParameter("idDestino", "-1")
+                    yourParams(4) = New ReportParameter("desde", Convert.ToDateTime(iisValidSqlDate(txtFechaDesde.Text, #1/1/1753#)).ToString())
+                    yourParams(5) = New ReportParameter("hasta", Convert.ToDateTime(iisValidSqlDate(txtFechaHasta.Text, #1/1/2100#)).ToString())
+                    yourParams(6) = New ReportParameter("quecontenga", "ghkgk")
+                    yourParams(7) = New ReportParameter("Consulta", Sql)
+                    yourParams(8) = New ReportParameter("sServidorSQL", ProntoFuncionesGeneralesCOMPRONTO.Encriptar(HFSC.Value))
+                    yourParams(9) = New ReportParameter("titulo", "ghkj")
+
+                    ProntoFuncionesUIWeb.RebindReportViewer_Servidor_SalidaNormal(ReportViewer2,
+                                     "Listado general de Cartas de Porte (simulando original) con foto 2", yourParams)
+
+                    'UpdatePanel2.Update()
+
+
+                    'ProntoFuncionesUIWeb.RebindReportViewer_Servidor_SalidaNormal(ReportViewer1,
+                    '                 "Listado general de Cartas de Porte (simulando original) con foto 2", yourParams)
+
+
+                    ' CartaDePorteManager.RebindReportViewer_Servidor_SalidaNormal()
+                    'ProntoFuncionesUIWeb.RebindReportViewer_Servidor_SalidaNormal()
+
+
+
 
                 Case "Listado general formato Cresud"
 

@@ -865,6 +865,14 @@ namespace ProntoMVC.Tests
 
 
 
+
+
+
+
+
+
+
+
         [TestMethod]
         public void SincroTerraVerde_46499()
         {
@@ -876,7 +884,7 @@ namespace ProntoMVC.Tests
 
             int registrosf = 0;
 
-            int idcli = CartaDePorteManager.BuscarVendedorPorCUIT("30-71544287-2", SC, "");
+            int idcli = CartaDePorteManager.BuscarVendedorPorCUIT("30 -71544287-2", SC, "");
 
 
             var output = SincronismosWilliamsManager.GenerarSincro("Terra Verde", ref sErrores, SC, "dominio", ref sTitulo
@@ -892,37 +900,37 @@ namespace ProntoMVC.Tests
 
 
 
-//            Estamos desarrollando el sincro de Terra Verde con la gente de BIT.
-//Te paso errores que nos pidieron modificar, el sincro que le pasamos como ejemplo fue el de BTG(Engelhart).
+            //            Estamos desarrollando el sincro de Terra Verde con la gente de BIT.
+            //Te paso errores que nos pidieron modificar, el sincro que le pasamos como ejemplo fue el de BTG(Engelhart).
 
-//Te lo reenvie por correo tambien:
+            //Te lo reenvie por correo tambien:
 
 
 
-//Hola Tomas, necesito que hagamos la siguiente corrección en la generación del archivo TXT, dado a que no nos están ingresando correctamente los movimientos.
-//El problema se nos da en los siguientes puntos:
+            //Hola Tomas, necesito que hagamos la siguiente corrección en la generación del archivo TXT, dado a que no nos están ingresando correctamente los movimientos.
+            //El problema se nos da en los siguientes puntos:
 
-//            CAMPO CALIDAD: Posición en el txt 940 - 943
-//o Si es de Camara = CC
-//o Si es condición calidad grado = G1 – G2 o G3
-//o Si es Fuera de Standart = FE
+            //            CAMPO CALIDAD: Posición en el txt 940 - 943
+            //o Si es de Camara = CC
+            //o Si es condición calidad grado = G1 – G2 o G3
+            //o Si es Fuera de Standart = FE
 
-            
-//CAMPO VENDEDOR: Posición en el txt 263 - 276
-//El CUIT del vendedor, depende de la posición en la cual este el CUIT de TERRA VERDE.
-//SI TERRA VERDE esta en remitente Comercial:
-//§ Debe enviar el Titular, si hay intermediario, debe enviar el intermediario.
-//SI TERRA VERDE esta como Intermediario:
-//§ Se debe enviar como vendedor el titular.
-//CAMPO COMPRADOR: Posición en el txt 131 - 144
-//o SI TERRA VERDE esta en remitente Comercial:
-//§ Se debe enviar como comprador el destinatario.
-//o SI TERRA VERDE Intermediario:
-//§ Se debe enviar como comprador el Remitente Comercial.
 
-//O sea que para el siguiente caso:
-//            Vendedor = “CUIT DE ELLIFF”
-//Comprador = “CUIT CARGILL”
+            //CAMPO VENDEDOR: Posición en el txt 263 - 276
+            //El CUIT del vendedor, depende de la posición en la cual este el CUIT de TERRA VERDE.
+            //SI TERRA VERDE esta en remitente Comercial:
+            //§ Debe enviar el Titular, si hay intermediario, debe enviar el intermediario.
+            //SI TERRA VERDE esta como Intermediario:
+            //§ Se debe enviar como vendedor el titular.
+            //CAMPO COMPRADOR: Posición en el txt 131 - 144
+            //o SI TERRA VERDE esta en remitente Comercial:
+            //§ Se debe enviar como comprador el destinatario.
+            //o SI TERRA VERDE Intermediario:
+            //§ Se debe enviar como comprador el Remitente Comercial.
+
+            //O sea que para el siguiente caso:
+            //            Vendedor = “CUIT DE ELLIFF”
+            //Comprador = “CUIT CARGILL”
 
 
 
@@ -939,105 +947,34 @@ namespace ProntoMVC.Tests
 
 
 
-
-
         [TestMethod]
-        public void _42871()
+        public void no_facturar_las_q_tienen_clientes_bloqueados_por_cobranzas_43121()
         {
 
-            // como ver la masterpage en la vista para celulares?
-            // el envio de mails (+ push de chrome)
-            // la grilla de situacion de calidad
-            // marcar la situacion de varias cartas
-            // como filtrar la grilla de situacion segun el usuario?
 
 
-            //EncolarNotificaciones(   ClientesQueParticipanEnCartas( ListadoDeCartasModificadas(  UltimaFechaDeEnvioNotificaciones)))
+            //'verificar que no haya bloqueados por cobranzas
+            //'If True Then
+            //'    'http://bdlconsultores.ddns.net/Consultas/Admin/VerConsultas1.php?recordid=14168
+            //'    'Precisan agregar una marca en el formulario de clientes para poder bloquear la carga de estos
+            //'    'en las cartas de porte debido a un conflicto de cobranzas.
+            //'    'Este tilde deberán verlo solo algunos usuarios(activaremos a los de cobranzas).
+            //'    'Luego, cuando quieran usarlo en una carta de porte el sistema tiene que dar un mensaje de advertencia diciendo
+            //'    'que el usuario no se puede utilizar y que tiene que ponerse en contacto con el sector de cobranzas.
+            //'    'La carta de porte no se puede grabar si tiene un cliente en esta condición.
 
 
-
-        }
-
-
-
-
-        [TestMethod]
-        public void TraerListadoSegunUsuario_42871()
-        {
-
-            string filtro = "{\"groupOp\":\"OR\",\"rules\":[{\"field\":\"Producto\",\"op\":\"eq\",\"data\":\"Trigo Pan\"},{\"field\":\"Producto\",\"op\":\"eq\",\"data\":\"MAIZ\"}]}";
-
-            var scEF = ProntoMVC.Data.Models.Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC));
-            DemoProntoEntities db = new DemoProntoEntities(scEF);
-
-            var s = new ServicioCartaPorte.servi();
-            var sqlquery4 = s.CartasPorte_DynamicGridData("IdCartaDePorte", "desc", 1, 999999, true, filtro,
-                                                 "01/12/2016",
-                                                 "30/01/2017",
-                                                 0, -1, SC, "Mariano", scbdlmasterappconfig);
-
-
-        }
+            //'    Dim sClientesCobranzas As String
+            //'    If UsaClientesQueEstanBloqueadosPorCobranzas(SC, myCartaDePorte, sClientesCobranzas) Then
+            //'        MS &= "Cliente bloqueado. Ponerse en contacto con el sector de cobranzas (" & sClientesCobranzas & ") "
+            //'        MS &= vbCrLf   'return false
+            //'    End If
+            //'End If
 
 
 
-        [TestMethod]
-        public void GrabarVariasSituacionesCalidad_42871()
-        {
-            // url: "WebServiceCartas.asmx/CartaPorteBatchUpdate",
+            // Validar2doPaso()
 
-            //string ms = CartaDePorteManager.GrabarSituacion_DLL(2638292, 2, "RECHAZADO EN PLAYA EXTERNA", SC);
-            string ms = CartaDePorteManager.GrabarSituaciones_DLL(new List<long> { 2638292, 2638293, 2638294 }, 2, "RECHAZADO EN PLAYA EXTERNA", SC);
-        }
-
-
-
-
-
-
-
-
-
-
-
-
-
-        [TestMethod]
-        public void SincroACA_45332()
-        {
-
-            string sErrores = "", sTitulo = "";
-            LinqCartasPorteDataContext db = null;
-
-            // el _CONST_MAXROWS sale del app.config
-
-            int registrosf = 0;
-
-            int idcli = CartaDePorteManager.BuscarVendedorPorCUIT("30-50012088-2", SC, "");
-
-
-            var output = SincronismosWilliamsManager.GenerarSincro("A.C.A.", ref sErrores, SC, "dominio", ref sTitulo
-                                , CartaDePorteManager.enumCDPestado.DescargasMasFacturadas,
-                     "", -1, idcli,
-                -1, -1,
-                -1, -1, -1, -1,
-                 CartaDePorteManager.FiltroANDOR.FiltroOR, "Ambas",
-                new DateTime(2017, 1, 13), new DateTime(2017, 1, 16),
-                -1, "Ambas", false, "", "", -1, ref registrosf, 40);
-
-
-            //            FB = FUERA DE BASE
-            //FE = FUERA DE STANDAR
-
-            //Buenas tares, nosotros necesitamos lo siguiente
-
-            //Que el FB Y el FE venga informado como FE, sin discriminar grano
-
-
-
-
-            //File.Copy(output, @"C:\Users\Administrador\Desktop\"   Path.GetFileName(output), true);
-            System.Diagnostics.Process.Start(output);
         }
 
 
@@ -1108,6 +1045,21 @@ Error in: https://prontoweb.williamsentregas.com.ar/ProntoWeb/CDPFacturacion.asp
 
 
 
+
+
+            long idClienteAfacturarle = 13648; // futuros y opciones
+            int optFacturarA = 4; //para fyo, stella usa "por corredor" (o sea, opcion 3.   1. titular/ 2 destinatario /   3.corredor  / 4 a tercero / 5 automatico)   
+            bool SeEstaSeparandoPorCorredor = false;
+            string agruparArticulosPor = "Destino";
+
+
+            string txtCorredor = "";
+            int idClienteObservaciones = -1;
+            int PuntoVenta = 1;
+
+
+
+
             string txtBuscar = "";
             string txtTarifaGastoAdministrativo = "";
 
@@ -1115,15 +1067,8 @@ Error in: https://prontoweb.williamsentregas.com.ar/ProntoWeb/CDPFacturacion.asp
             //   numeroOrdenCompra As String, ByRef PrimeraIdFacturaGenerada As Object, 
 
 
-            int optFacturarA = 4;
-            string agruparArticulosPor = "Destino";
 
 
-            string txtCorredor = "";
-            long idClienteAfacturarle = 13648; // futuros y opciones
-            int idClienteObservaciones = -1;
-            bool SeEstaSeparandoPorCorredor = true;
-            int PuntoVenta = 1;
 
             DataTable dtRenglonesAgregados = new DataTable();
             //dtRenglonesAgregados.Rows.Add(dtRenglonesAgregados.NewRow());
@@ -1141,7 +1086,7 @@ Error in: https://prontoweb.williamsentregas.com.ar/ProntoWeb/CDPFacturacion.asp
             var scEF = Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC));
             DemoProntoEntities db = new DemoProntoEntities(scEF);
 
-
+            List<int> lista_int = new List<int>();
 
 
 
@@ -1156,6 +1101,7 @@ Error in: https://prontoweb.williamsentregas.com.ar/ProntoWeb/CDPFacturacion.asp
                 // CartaDePorteManager.Save(SC, c, 2, "", false, ref ms);
 
                 lote.Add(c);
+                lista_int.Add(n);
             }
 
 
@@ -1170,8 +1116,10 @@ Error in: https://prontoweb.williamsentregas.com.ar/ProntoWeb/CDPFacturacion.asp
             //Assert.AreEqual(0, f.RetencionIBrutos1);
 
             object primerId = 0, ultimoId = 0;
-            object pag = 1, sesionId = 0;
 
+            // uso dos tickets: uno el de la grilla. el otro, de qué?
+            object sesionId = 0;
+            string sesionIdposta = (new Random()).Next().ToString();
 
 
             var gv = new System.Web.UI.WebControls.GridView();
@@ -1179,27 +1127,71 @@ Error in: https://prontoweb.williamsentregas.com.ar/ProntoWeb/CDPFacturacion.asp
             string errLog = "";
             object filas = "", slinks = "";
 
-            var desde = new DateTime(2017, 1, 1);
-            var hasta = new DateTime(2017, 1, 31);
+
+
+            //no importa las fechas, lo importante son las tildes de la grilla
+            var desde = new DateTime(1900, 1, 31);
+            var hasta = new DateTime(2100, 1, 31);
 
 
             System.Web.SessionState.HttpSessionState Session = null; // new System.Web.SessionState.HttpSessionState();
 
+
+
+
+            //marcar las cartas en wGrillaPersistencia
+            //lote.Select(x => x.IdCartaDePorte)
+            LogicaFacturacion.GridCheckboxPersistenciaBulk(SC, sesionIdposta, lista_int);
+
+
+
             //DataTable tablaEditadaDeFacturasParaGenerar = dtDatasourcePaso2() // es casi un wrapper. esto lo puedo reemplazar con la llamada mas directa a GetDatatableAsignacionAutomatica
+
+
+            string sLista = string.Join(",", lista_int);
+
+
+            object pag = 1;
+            int cuantosrenglones = 9999999;
 
             DataTable tablaEditadaDeFacturasParaGenerar = LogicaFacturacion.GetDatatableAsignacionAutomatica(
                                                      SC, ref pag, ref sesionId,
-                                                   8, PuntoVenta,
+                                                   cuantosrenglones, PuntoVenta,
                                                     desde,
                                                     hasta,
-                                                     "", "", optFacturarA, ""
+                                                     sLista, "", optFacturarA, ""
                                                      , SC, "", "",
                                                     "", "", "", "",
                                                     "", "", txtBuscar, "",
                                                      "", "",
                                                      0, 0, "", ref errLog,
-                                                     "", "",
-                                                     ref filas, ref slinks, sesionId.ToString());
+                                                     "", agruparArticulosPor,
+                                                     ref filas, ref slinks, sesionIdposta);
+
+
+            // codigo de CambiarLasTarifasQueEstenEnCero()
+
+            foreach (DataRow r in tablaEditadaDeFacturasParaGenerar.Rows)
+            {
+                if ((decimal)(r["TarifaFacturada"]) == 0)
+                {
+                    try
+                    {
+                        long Cli = SQLdinamico.BuscaIdClientePreciso(r["FacturarselaA"].NullSafeToString(), SC);
+
+                        Pronto.ERP.BO.CartaDePorte ocdp = CartaDePorteManager.GetItem(SC, (int)r["idCartaDePorte"]);
+
+                        ListaPreciosManager.SavePrecioPorCliente(SC, Cli, ocdp.IdArticulo, 1.55);
+                    }
+                    catch (Exception ex)
+                    {
+                        ErrHandler2.WriteError(ex);
+
+                    }
+                }
+            }
+
+
 
 
 
@@ -1226,6 +1218,351 @@ Error in: https://prontoweb.williamsentregas.com.ar/ProntoWeb/CDPFacturacion.asp
 
 
         }
+
+
+
+
+
+
+
+
+        [TestMethod]
+        public void InformeControlDiario_42972_AKA_estadisticas_de_descargas_GrillaExportacion()
+        {
+
+            //            Filtros:
+
+            //* Fecha Buque
+            //* Cliente Facturado
+            //* Producto
+            //* Punto de Venta
+
+            //Columnas:
+            //Las mismas que tiene el listado actual y agregar:
+
+
+            //* Factura
+            //* Fecha Factura
+
+
+            string filtro = ""; // "{\"groupOp\":\"OR\",\"rules\":[{\"field\":\"DestinoDesc\",\"op\":\"eq\",\"data\":\"MOL. CAÑUELAS - ZARATE\"},{\"field\":\"DestinoDesc\",\"op\":\"eq\",\"data\":\"TERMINAL 6\"}]}";
+            string output = @"C:\Users\Mariano\Downloads\Informe" + DateTime.Now.ToString("ddMMMyyyy_HHmmss") + ".xls";
+
+            var scEF = ProntoMVC.Data.Models.Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC));
+            DemoProntoEntities db = new DemoProntoEntities(scEF);
+
+            ReportViewer ReporteLocal = new Microsoft.Reporting.WebForms.ReportViewer();
+
+
+            var m = db.CartasPorteMovimientos.First().IdCDPMovimiento;
+
+
+
+            var s = new ServicioCartaPorte.servi();
+            var sqlquery4 = s.ControlesDiarios_DynamicGridData_ExcelExportacion_UsandoInternalQuery(SC, "Fecha", "desc", 1, 999999, true, filtro, "", "", 0, 0, "");
+
+            // la internalQuery no me está trayendo la descripcion del destino (para la exportacion de movimientos estabas usando una view...)
+
+            CartaDePorteManager.RebindReportViewer_ServidorExcel(ref ReporteLocal, "Carta Porte - ControlesDiarios.rdl", sqlquery4, SC, false, ref output);
+
+
+            System.Diagnostics.Process.Start(output);
+        }
+
+
+
+
+
+        [TestMethod]
+        public void InformeControlDiario_42972_AKA_estadisticas_de_descargas()
+        {
+
+
+            //wCartasDePorteControlDescargas_TX_InformeControlDiario
+
+
+            string ArchivoExcelDestino = @"C:\Users\Administrador\Desktop\lala.xls";
+            Microsoft.Reporting.WebForms.ReportViewer rep = new Microsoft.Reporting.WebForms.ReportViewer();
+
+            ReportParameter[] yourParams = new ReportParameter[6];
+            yourParams[0] = new ReportParameter("CadenaConexion", ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC));
+            yourParams[1] = new ReportParameter("sServidorWeb", ConfigurationManager.AppSettings["UrlDominio"]);
+            yourParams[2] = new ReportParameter("FechaDesde", new DateTime(2016, 7, 1).ToString());
+            yourParams[3] = new ReportParameter("FechaHasta", new DateTime(2016, 10, 30).ToString());
+            yourParams[4] = new ReportParameter("IdDestino", "-1");
+            yourParams[5] = new ReportParameter("IdPuntoVenta", "0");
+            //yourParams[7] = new ReportParameter("Consulta", strSQL);
+
+
+            var output2 = CartaDePorteManager.RebindReportViewer_ServidorExcel(ref rep,
+                                "Williams - Controles Diarios.rdl", yourParams, ref ArchivoExcelDestino, false);
+
+            System.Diagnostics.Process.Start(output2);
+        }
+
+
+
+
+
+        [TestMethod]
+        public void listado_con_tipo_de_movimiento_42551_reportviewerylosupdatepanels()
+        {
+
+            //'acá (pagina CartaDePorteInformesConReportViewerSincronismos) la pagina tiene 3 updatepanels separados.
+            //'en cambio, en la pagina de clientes (CartaDePorteInformesAccesoClientes), donde el informe servidor funciona, el updatepanel de filtros esta metido en otro que contiene al informe.
+            //-por ahora no lo pude resolver porq no tengo tiempo
+
+
+            string usuario = "DIAZDOW";
+            var rs = ""; // se usa como "QueContenga"
+            var desde = new DateTime(2017, 1, 1);
+            var hasta = new DateTime(2017, 1, 31);
+            var estadofiltro = CartaDePorteManager.enumCDPestado.TodasMenosLasRechazadas;
+
+
+            var idVendedor = -1;
+            var idCorredor = SQLdinamico.BuscaIdVendedorPreciso(rs, SC);
+            var idDestinatario = -1;
+            var idIntermediario = -1;
+            var idRComercial = -1;
+            var idArticulo = -1;
+            var idProcedencia = -1;
+            var idDestino = -1;
+
+
+
+            string sql = CartaDePorteManager.DataTablePorClienteSQL(SC, "", "", "", 0, 9999999,
+                                estadofiltro, rs, idVendedor, idCorredor,
+                               idDestinatario, idIntermediario,
+                               idRComercial, idArticulo, idProcedencia, idDestino
+                                , 0, "Ambas"
+                                , desde, hasta,
+                                0, "", usuario, scbdlmasterappconfig, true, true, true, false, false, false);
+
+
+
+
+            ReportViewer ReporteLocal = new Microsoft.Reporting.WebForms.ReportViewer();
+            string output = @"C:\Users\Mariano\Desktop\Informe" + DateTime.Now.ToString("ddMMMyyyy_HHmmss") + ".xls";
+            ReportParameter[] yourParams = new ReportParameter[10];
+            yourParams[0] = new ReportParameter("webservice", "");
+            yourParams[1] = new ReportParameter("sServidor", "");
+            yourParams[2] = new ReportParameter("idArticulo", "-1");
+            yourParams[3] = new ReportParameter("idDestino", "-1");
+            yourParams[4] = new ReportParameter("desde", desde.ToString());
+            yourParams[5] = new ReportParameter("hasta", hasta.ToString());
+            yourParams[6] = new ReportParameter("quecontenga", "ghkgk");
+            yourParams[7] = new ReportParameter("Consulta", sql);
+            yourParams[8] = new ReportParameter("sServidorSQL", ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC));
+            yourParams[9] = new ReportParameter("titulo", "ghkj");
+            string sss = CartaDePorteManager.RebindReportViewer_ServidorExcel(ref ReporteLocal,
+                        @"Listado general de Cartas de Porte (simulando original) - Con tipo de movimiento.rdl", yourParams, ref output, false);
+
+
+
+            System.Diagnostics.Process.Start(output);
+
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        [TestMethod]
+        public void envioNotificacionesconPush_42871()
+        {
+            // pasos 
+            // 1- el usuario cliente se conecta al FCM, se suscribe y obtiene un registration_id 
+            // 2- el usuario cliente se conecta al IIS y le manda el registration_id que obtuvo, para que el IIS los hermane
+
+
+
+            /*
+            https://developers.google.com/web/ilt/pwa/introduction-to-push-notifications
+            We can test push messaging in our app using cURL. We can send an empty message, called a "tickle", 
+                to the push service, then the push service sends a message to the browser.If the notification displays, then we 
+                have done everything correctly and our app is ready to push messages from the server.
+
+    The cURL command that sends a request to FCM to issue a push message looks like this:
+
+    curl "ENDPOINT_URL" --request POST --header "TTL: 60" --header "Content-Length: 0" \
+    --header "Authorization: key=SERVER_KEY"
+
+
+
+                https://gauntface.github.io/simple-push-demo/
+                constants.js y manifest.json
+    */
+
+
+
+            // https://stackoverflow.com/questions/39362446/how-to-implement-fcm-in-asp-net-c
+            //https://stackoverflow.com/questions/38184432/fcm-firebase-cloud-messaging-push-notification-with-asp-net
+
+
+        }
+
+
+
+
+        [TestMethod]
+        public void envioNotificacionesconMail_42871()
+        {
+
+            // el envio de mails (+ push de chrome)
+
+            // EncolarNotificaciones(ClientesQueParticipanEnCartas(ListadoDeCartasModificadas(UltimaFechaDeEnvioNotificaciones)))
+
+
+            var scEF = ProntoMVC.Data.Models.Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC));
+            BDLMasterEntities dbmaster = new BDLMasterEntities(Auxiliares.FormatearConexParaEntityFrameworkBDLMASTER_2(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(scbdlmasterappconfig)));
+            DemoProntoEntities db = new DemoProntoEntities(scEF);
+            DateTime UltimaFechaDeEnvioNotificaciones = new DateTime(2016, 8, 31);
+
+            var q = (
+                    from x in db.CartasDePortes
+                    from c1 in db.Clientes.Where(c => c.IdCliente == x.Vendedor)
+                    from c2 in db.Clientes.Where(c => c.IdCliente == x.Entregador)
+                    where (x.FechaModificacion > UltimaFechaDeEnvioNotificaciones)
+                    select new string[] { c1.Email, c2.Email }
+                    )
+                    .SelectMany(x => x)
+                    .Distinct();
+
+
+
+
+            // solo estos clientes me interesan...  -cuantos usuarios externos hay en la bdlmaster? creo q mas de mil. ademas, recordá que los usuarios especiales tipo BLD los tendrías que filtrar de otro modo...
+            var usuariosclientes = from p in dbmaster.UserDatosExtendidos
+                                   join u in dbmaster.aspnet_Users on p.UserId equals u.UserId
+                                   join m in dbmaster.aspnet_Membership on p.UserId equals m.UserId
+                                   select new { p.RazonSocial, m.Email };
+
+
+
+
+
+            string rejunte2 = string.Join(";", q.Take(100).ToArray());
+
+
+            var listado = db.Clientes.Select(x => x.CorreosElectronicos_1).Take(100);
+            string rejunte = string.Join(";", listado.ToArray());
+
+            if (false)
+            {
+                Pronto.ERP.Bll.EntidadManager.MandaEmail_Nuevo(ConfigurationManager.AppSettings["ErrorMail"],
+                                   "asuntoasuntoasunto 2",
+                                "cuerpocuerpocuerpocuerpocuerpocuerpocuerpocuerpocuerpocuerpocuerpocuerpo cuerpocuerpocuerpocuerpo",
+                                ConfigurationManager.AppSettings["SmtpUser"],
+                                ConfigurationManager.AppSettings["SmtpServer"],
+                                ConfigurationManager.AppSettings["SmtpUser"],
+                                ConfigurationManager.AppSettings["SmtpPass"],
+                                  "",
+                               Convert.ToInt16(ConfigurationManager.AppSettings["SmtpPort"]), 1
+                               , rejunte
+
+                               );
+            }
+
+
+        }
+
+
+
+
+        [TestMethod]
+        public void TraerListadoSegunUsuario_42871()
+        {
+
+            string filtro = "{\"groupOp\":\"OR\",\"rules\":[{\"field\":\"Producto\",\"op\":\"eq\",\"data\":\"Trigo Pan\"},{\"field\":\"Producto\",\"op\":\"eq\",\"data\":\"MAIZ\"}]}";
+
+            var scEF = ProntoMVC.Data.Models.Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC));
+            DemoProntoEntities db = new DemoProntoEntities(scEF);
+
+            var s = new ServicioCartaPorte.servi();
+            var sqlquery4 = s.CartasPorte_DynamicGridData("IdCartaDePorte", "desc", 1, 999999, true, filtro,
+                                                 "01/12/2016",
+                                                 "30/01/2017",
+                                                 0, -1, SC, "Mariano", scbdlmasterappconfig);
+
+            // q diferencia hay con listadoclientes?
+            // si el usuario tiene una razon social asignada, hay que filtrar. -Pero hay que filtrar antes! como en ListadoSegunCliente()
+            // -tambien tenes el tema de los clientes con filtros configurables.... en DataTablePorClienteSQL()
+
+        }
+
+
+
+        [TestMethod]
+        public void GrabarVariasSituacionesCalidad_42871()
+        {
+            // url: "WebServiceCartas.asmx/CartaPorteBatchUpdate",
+
+            //string ms = CartaDePorteManager.GrabarSituacion_DLL(2638292, 2, "RECHAZADO EN PLAYA EXTERNA", SC);
+            string ms = CartaDePorteManager.GrabarSituaciones_DLL(new long[] { 2638292, 2638293, 2638294 }, 2, "RECHAZADO EN PLAYA EXTERNA", SC);
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+        [TestMethod]
+        public void SincroACA_45332()
+        {
+
+            string sErrores = "", sTitulo = "";
+            LinqCartasPorteDataContext db = null;
+
+            // el _CONST_MAXROWS sale del app.config
+
+            int registrosf = 0;
+
+            int idcli = CartaDePorteManager.BuscarVendedorPorCUIT("30-50012088-2", SC, "");
+
+
+            var output = SincronismosWilliamsManager.GenerarSincro("A.C.A.", ref sErrores, SC, "dominio", ref sTitulo
+                                , CartaDePorteManager.enumCDPestado.DescargasMasFacturadas,
+                     "", -1, idcli,
+                -1, -1,
+                -1, -1, -1, -1,
+                 CartaDePorteManager.FiltroANDOR.FiltroOR, "Ambas",
+                new DateTime(2017, 1, 13), new DateTime(2017, 1, 16),
+                -1, "Ambas", false, "", "", -1, ref registrosf, 40);
+
+
+            //            FB = FUERA DE BASE
+            //FE = FUERA DE STANDAR
+
+            //Buenas tares, nosotros necesitamos lo siguiente
+
+            //Que el FB Y el FE venga informado como FE, sin discriminar grano
+
+
+
+
+            //File.Copy(output, @"C:\Users\Administrador\Desktop\"   Path.GetFileName(output), true);
+            System.Diagnostics.Process.Start(output);
+        }
+
 
 
 
