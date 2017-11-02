@@ -160,8 +160,14 @@ namespace ProntoMVC.TestsMVC
             var c = new ClienteAPIController();
             //GetMockedControllerGenerico(c);
 
-            var j= c.GetAllClientes();
+            
             var sss= c.TraerClientePorCuit("30711633053");
+
+            //cuantos datos pasamos? 
+            //c.AgregarCliente("30711633053");
+            //c.ModificarCliente("30711633053",) 
+            //c.EliminarCliente("30711633053");
+
         }
 
 
