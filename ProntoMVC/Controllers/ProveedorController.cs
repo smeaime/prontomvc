@@ -344,138 +344,94 @@ namespace ProntoMVC.Controllers
             return Json(new { Success = 0, ex = new Exception("Error al registrar").Message.ToString(), ModelState = ModelState });
         }
 
+        public class Proveedores2
+        {
+            public int IdProveedor { get; set; }
+            public string RazonSocial { get; set; }
+            public string CodigoEmpresa { get; set; }
+            public string Direccion { get; set; }
+            public string Localidad { get; set; }
+            public string CodigoPostal { get; set; }
+            public string Provincia { get; set; }
+            public string Pais { get; set; }
+            public string Telefono1 { get; set; }
+            public string Telefono2 { get; set; }
+            public string Fax { get; set; }
+            public string Email { get; set; }
+            public string Cuit { get; set; }
+            public string DescripcionIva { get; set; }
+            public string Contacto { get; set; }
+            public DateTime? FechaAlta { get; set; }
+            public DateTime? FechaUltimaCompra { get; set; }
+            public string Estado { get; set; }
+            public string Actividad { get; set; }
+            public string CondicionCompra { get; set; }
+            public string PaginaWeb { get; set; }
+            public string Habitual { get; set; }
+            public string NombreComercial { get; set; }
+            public string DatosAdicionales1 { get; set; }
+            public string DatosAdicionales2 { get; set; }
+            public string Observaciones { get; set; }
+            public string ArchivoAdjunto1 { get; set; }
+            public string ArchivoAdjunto2 { get; set; }
+            public string ArchivoAdjunto3 { get; set; }
+            public string ArchivoAdjunto4 { get; set; }
+        }
 
-
-
-     
-
-        public virtual ActionResult Proveedores_DynamicGridData
-               (string sidx, string sord, int page, int rows, bool _search, string filters)
+        public virtual ActionResult Proveedores_DynamicGridData (string sidx, string sord, int page, int rows, bool _search, string filters)
         {
             string campo = String.Empty;
             int pageSize = rows; // ?? 20;
             int currentPage = page; // ?? 1;
-
-            int totalPages = 0;
-
-
-            //var Req = db.Cuentas.AsQueryable();
-            //  Req = Req.Where(r => r.Cumplido == null || (r.Cumplido != "AN" && r.Cumplido != "SI")).AsQueryable();
-
-
-            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
             int totalRecords = 0;
 
-            var pagedQuery = Filters.FiltroGenerico<Data.Models.Proveedor>
-                                ("",
-                                sidx, sord, page, rows, _search, filters, db, ref totalRecords
-                                 );
-            //DetalleRequerimientos.DetallePedidos, DetalleRequerimientos.DetallePresupuestos
-            //"Obra,DetalleRequerimientos.DetallePedidos.Pedido,DetalleRequerimientos.DetallePresupuestos.Presupuesto"
-            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-
-            //if (_search)
-            //{
-            //    switch (searchField.ToLower())
-            //    {
-            //        case "numeroProveedor":
-            //            campo = String.Format("{0} = {1}", searchField, searchString);
-            //            break;
-            //        case "fechaProveedor":
-            //            //No anda
-            //            campo = String.Format("{0}.Contains(\"{1}\")", searchField, searchString);
-            //            break;
-            //        default:
-            //            campo = String.Format("{0}.Contains(\"{1}\")", searchField, searchString);
-            //            break;
-            //    }
-            //}
-            //else
-            //{
-            //    campo = "true";
-            //}
-
-            var data = (from a in pagedQuery // db.Proveedores.Where(p => (p.Eventual ?? "") != "SI" && (p.Confirmado ?? "") != "NO").AsQueryable()
-                        //from b in db.Estados_Proveedores.Where(o => o.IdEstado == a.IdEstado).DefaultIfEmpty()
-                        //from c in db.Actividades_Proveedores.Where(o => o.IdActividad == a.IdActividad).DefaultIfEmpty()
-                        //from d in db.Condiciones_Compras.Where(o => o.IdCondicionCompra == a.IdCondicionCompra).DefaultIfEmpty()
-                        //from e in db.TiposRetencionGanancias.Where(o => o.IdTipoRetencionGanancia == a.IdTipoRetencionGanancia).DefaultIfEmpty()
-                        //from f in db.Cuentas.Where(o => o.IdCuenta == a.IdCuenta).DefaultIfEmpty()
-                        //from g in db.Cuentas.Where(o => o.IdCuenta == a.IdCuentaProvision).DefaultIfEmpty()
-                        //from h in db.IBCondiciones.Where(o => o.IdIBCondicion == a.IdIBCondicionPorDefecto).DefaultIfEmpty()
-                        //from i in db.Empleados.Where(o => o.IdEmpleado == a.IdUsuarioIngreso).DefaultIfEmpty()
-                        //from j in db.Empleados.Where(o => o.IdEmpleado == a.IdUsuarioModifico).DefaultIfEmpty()
-                        select new
+            var data = (from a in db.Proveedores
+                        select new Proveedores2
                         {
-                            a.IdProveedor,
-                            a.RazonSocial,
-                            a.CodigoEmpresa,
-                            a.Direccion,
+                            IdProveedor = a.IdProveedor,
+                            RazonSocial = a.RazonSocial,
+                            CodigoEmpresa = a.CodigoEmpresa,
+                            Direccion = a.Direccion,
                             Localidad = a.Localidad.Nombre,
-                            a.CodigoPostal,
+                            CodigoPostal = a.CodigoPostal,
                             Provincia = a.Provincia.Nombre,
                             Pais = a.Pais.Descripcion,
-                            a.Telefono1,
-                            a.Telefono2,
-                            a.Fax,
-                            a.Email,
-                            a.Cuit,
+                            Telefono1 = a.Telefono1,
+                            Telefono2 = a.Telefono2,
+                            Fax = a.Fax,
+                            Email = a.Email,
+                            Cuit = a.Cuit,
                             DescripcionIva = a.DescripcionIva.Descripcion,
-                            a.Contacto,
-                            a.FechaAlta,
-                            a.FechaUltimaCompra,
+                            Contacto = a.Contacto,
+                            FechaAlta = a.FechaAlta,
+                            FechaUltimaCompra = a.FechaUltimaCompra,
                             Estado = a.Estados_Proveedores != null ? a.Estados_Proveedores.Descripcion : "",
                             Actividad = "", // a.actividades_proveedores  != null ? c.Descripcion : "",
-                            CondicionCompra ="" , // a.condicion != null ? d.Descripcion : "",
-                            a.PaginaWeb,
-                            a.Habitual,
+                            CondicionCompra = "", // a.condicion != null ? d.Descripcion : "",
+                            PaginaWeb = a.PaginaWeb,
+                            Habitual = a.Habitual,
                             NombreComercial = a.NombreFantasia,
                             DatosAdicionales1 = a.Nombre1,
                             DatosAdicionales2 = a.Nombre2,
-                            a.Observaciones,
-                            //InscriptoGanancias = (a.IGCondicion ?? 1) == 1 ? "NO" : "SI",
-                            //CategoriaGanancias = ""  (a.IGCondicion ?? 1) == 1 ? "" : (a.TiposRetencionGanancias != null ? e.Descripcion : ""),
-                            //CuentaContable = f != null ? f.Descripcion : "",
-                            //CategoriaIIBB = (a.IBCondicion ?? 1) == 1 ? "Exento" : ((a.IBCondicion ?? 1) == 2 ? "Conv.Mult." : ((a.IBCondicion ?? 1) == 3 ? "Juris.Local" : ((a.IBCondicion ?? 1) == 4 ? "No alcanzado" : ""))),
-                            //a.FechaLimiteExentoIIBB,
-                            //a.IBNumeroInscripcion,
-                            //CondicionIIBB = h != null ? h.Descripcion : "",
-                            //a.FechaUltimaPresentacionDocumentacion,
-                            //a.CodigoSituacionRetencionIVA,
-                            //Ingreso = i != null ? i.Nombre : "",
-                            //a.FechaIngreso,
-                            //Modifico = j != null ? j.Nombre : "",
-                            //a.FechaModifico,
-                            //a.SujetoEmbargado,
-                            //a.SaldoEmbargo,
-                            //a.Calificacion,
-                            //CuentaContableProvision = g != null ? g.Descripcion : "",
-                            a.ArchivoAdjunto1,
-                            a.ArchivoAdjunto2,
-                            a.ArchivoAdjunto3,
-                            a.ArchivoAdjunto4
-                        }).ToList();
+                            Observaciones = a.Observaciones,
+                            ArchivoAdjunto1 = a.ArchivoAdjunto1,
+                            ArchivoAdjunto2 = a.ArchivoAdjunto2,
+                            ArchivoAdjunto3 = a.ArchivoAdjunto3,
+                            ArchivoAdjunto4 = a.ArchivoAdjunto4
+                        }).OrderBy(sidx + " " + sord).AsQueryable();
 
-           // int totalRecords = data.Count();
-           // int totalPages = (int)Math.Ceiling((float)totalRecords / (float)pageSize);
+            var pagedQuery = Filters.FiltroGenerico_UsandoIQueryable<Proveedores2>
+                                     (sidx, sord, page, rows, _search, filters, db, ref totalRecords, data);
 
-            //var data1 = (from a in data select a)
-            //            .OrderBy(x => x.RazonSocial)
+            int totalPages = (int)Math.Ceiling((float)totalRecords / (float)pageSize);
 
-//.Skip((currentPage - 1) * pageSize).Take(pageSize)
-//.ToList();
 
             var jsonData = new jqGridJson()
             {
                 total = totalPages,
                 page = currentPage,
                 records = totalRecords,
-                rows = (from a in data
+                rows = (from a in pagedQuery
                         select new jqGridRowJson
                         {
                             id = a.IdProveedor.ToString(),
@@ -507,24 +463,6 @@ namespace ProntoMVC.Controllers
                                 a.DatosAdicionales1.NullSafeToString(),
                                 a.DatosAdicionales2.NullSafeToString(),
                                 a.Observaciones.NullSafeToString(),
-                                //a.InscriptoGanancias.NullSafeToString(),
-                                //a.CategoriaGanancias.NullSafeToString(),
-                                //a.CuentaContable.NullSafeToString(),
-                                //a.CategoriaIIBB.NullSafeToString(),
-                                //a.FechaLimiteExentoIIBB.NullSafeToString(),
-                                //a.IBNumeroInscripcion.NullSafeToString(),
-                                //a.CondicionIIBB.NullSafeToString(),
-                                //a.FechaUltimaPresentacionDocumentacion == null ? "" : a.FechaUltimaPresentacionDocumentacion.GetValueOrDefault().ToString("dd/MM/yyyy"),
-                                //a.CodigoSituacionRetencionIVA.NullSafeToString(),
-                                //a.Ingreso.NullSafeToString(),
-                                //a.FechaIngreso == null ? "" : a.FechaIngreso.GetValueOrDefault().ToString("dd/MM/yyyy"),
-                                //a.Modifico.NullSafeToString(),
-                                //a.FechaModifico == null ? "" : a.FechaModifico.GetValueOrDefault().ToString("dd/MM/yyyy"),
-                                //a.SujetoEmbargado.NullSafeToString(),
-                                //a.SaldoEmbargo.NullSafeToString(),
-                                //a.Calificacion.NullSafeToString(),
-                                //a.CuentaContableProvision.NullSafeToString(),
-                                //a.ArchivoAdjunto1.NullSafeToString(),
                                 a.ArchivoAdjunto2.NullSafeToString(),
                                 a.ArchivoAdjunto3.NullSafeToString(),
                                 a.ArchivoAdjunto4.NullSafeToString()
@@ -534,7 +472,47 @@ namespace ProntoMVC.Controllers
             return Json(jsonData, JsonRequestBehavior.AllowGet);
         }
 
+        public virtual ActionResult Proveedores_DynamicGridData_Resumido(string sidx, string sord, int page, int rows, bool _search, string filters)
+        {
+            string campo = String.Empty;
+            int pageSize = rows; // ?? 20;
+            int currentPage = page; // ?? 1;
+            int totalPages = 0;
+            int totalRecords = 0;
 
+            var pagedQuery = Filters.FiltroGenerico<Data.Models.Proveedor>
+                                ("",
+                                sidx, sord, page, rows, _search, filters, db, ref totalRecords
+                                 );
+            var data = (from a in pagedQuery 
+                        select new
+                        {
+                            a.IdProveedor,
+                            a.RazonSocial,
+                            a.Email,
+                            a.Cuit
+                        }).ToList();
+
+            var jsonData = new jqGridJson()
+            {
+                total = totalPages,
+                page = currentPage,
+                records = totalRecords,
+                rows = (from a in data
+                        select new jqGridRowJson
+                        {
+                            id = a.IdProveedor.ToString(),
+                            cell = new string[] { 
+                                "",
+                                a.IdProveedor.NullSafeToString(),
+                                a.RazonSocial.NullSafeToString(),
+                                a.Email.NullSafeToString(),
+                                a.Cuit.NullSafeToString()
+                            }
+                        }).ToArray()
+            };
+            return Json(jsonData, JsonRequestBehavior.AllowGet);
+        }
 
         public virtual ActionResult Proveedores(string sidx, string sord, int? page, int? rows, bool _search, string searchField, string searchOper, string searchString)
         {
@@ -629,9 +607,8 @@ namespace ProntoMVC.Controllers
 
             var data1 = (from a in data select a)
                         .OrderBy(x => x.RazonSocial)
-                        
-.Skip((currentPage - 1) * pageSize).Take(pageSize)
-.ToList();
+                        .Skip((currentPage - 1) * pageSize).Take(pageSize)
+                        .ToList();
 
             var jsonData = new jqGridJson()
             {
