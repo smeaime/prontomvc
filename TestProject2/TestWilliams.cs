@@ -915,7 +915,17 @@ namespace ProntoMVC.Tests
         public void liquidacionsubcon_46735_13216()
         {
 
-            var cliente = SQLdinamico.BuscaIdClientePreciso("ALVAREZ, JORGE", SC);
+            /*
+
+            Te tenemos que pedir que cuando se carguen camiones de SYNGENTA y se coloque en la solapa de entregador a otro, para lo que es la liquidacion del subcomisionista tome esa cp como elevacion.
+            
+            Solo tiene que afectar a eso. No tiene que afectar al envio de descarga al cliente y vista de la cp en nuetro sistema.
+            
+            En titular / intermediario / remitnte / cliente observ.
+                
+            */
+
+            var cliente = SQLdinamico.BuscaIdClientePreciso("SYNGENTA AGRO S.A.", SC);
 
 
 
