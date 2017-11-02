@@ -3,9 +3,11 @@
         ViewBag.Title = "Requerimientos";
     }
     @*<div class="container-fluid">*@
+
     <br />
-    @if (false)
-    {
+
+@if (false)
+{
     <style>
         /* jqGrid builds some additional divs over the main grid table. The outer div has the class ui-jqgrid. So if you need to remove right and left border existing over the whole grid you can use the following CSS: */
         .ui-widget-content {
@@ -40,118 +42,150 @@
             border-right-color: #E4E4E4;
         }
     </style>
+}
+<script src="~/Scripts/jquery.table2excel.js"></script>
+<script type="text/javascript">
+    function VerProveedores() {
+        $("#dialog").dialog({
+            show: "blind",
+            hide: "blind",
+            width: 1000,
+            height: 700,
+            modal: true,
+            buttons: {
+                "Enviar": function() {
+                    $(this).dialog("close");
+                },
+                "Cancelar": function () {
+                    $(this).dialog("close");
+                }
+            }
+        });
     }
-
-    <script src="~/Scripts/jquery.table2excel.js"></script>
-
-<div id="previewCredencial"></div>
-
-    <div style=" padding-left: 15px;  padding-right: 15px ;">
-        <div>
-            <div class="row-fluid">
-                <div class="span12 lightblue">
-                    <button onclick="window.location.href='@Url.Action("Edit", new { id = -1 })'" class="btn btn-primary span2 ">Nuevo requerimiento</button>
-                    @*<div class="span1"></div>
-                        <button onclick=Exportar() class="btn btn-primary span2">Exportar a Excel</button>*@
-                    <div class="span4">
-                        <div class="input-prepend input-append">
-                            @* <div class="btn-group ">
-                                    <button class="btn dropdown-toggle" data-toggle="dropdown">
-                                        En todo <span class="caret"></span>
-                                    </button>
-                                    <div class="dropdown-menu">
-                                        Requerimientos
-                                    </div>
-                                    <ul class="dropdown-menu">
-                                        Número
-                                    </ul>
-                                </div>*@
-                            @if (Roles.IsUserInRole(ViewBag.NombreUsuario, "SuperAdmin") && false)
-                            {
-                                <input id="BuscadorListado" type="text" class="" placeholder="Filtrar" style="" />
-                                <select id="campos " class="span4">
-                                    <option>Número</option>
-                                    @* <option>Fecha</option>*@
-                                </select>
-                                <button onclick=" jQuery('#Lista').searchGrid({}) " class="btn append ">
-                                    ...
+</script>
+<div style=" padding-left: 15px;  padding-right: 15px ;">
+    <div>
+        <div class="row-fluid">
+            <div class="span12 lightblue">
+                <button onclick="window.location.href='@Url.Action("Edit", new { id = -1 })'" class="btn btn-primary span2 ">Nuevo requerimiento</button>
+                @*<div class="span1"></div>
+                    <button onclick=Exportar() class="btn btn-primary span2">Exportar a Excel</button>*@
+                <div class="span4">
+                    <div class="input-prepend input-append">
+                        @* <div class="btn-group ">
+                                <button class="btn dropdown-toggle" data-toggle="dropdown">
+                                    En todo <span class="caret"></span>
                                 </button>
-                            }
-                        </div>
-                    </div>
-                    <div class="span2 pull-right" style="text-align: center; display: none">
-                        a confirmar
-                        @Html.CheckBox("bAConfirmar")
-                        a liberar
-                        @Html.CheckBox("bALiberar")
-                    </div>
-                    @*  <input id="BuscarEnLugarDeFiltrar" type="text" class="" placeholder="Buscar" style="" />*@
-                    @* <div class="btn-group  pull-right ">
-                            <button onclick="  " class="btn">
-                                <
+                                <div class="dropdown-menu">
+                                    Requerimientos
+                                </div>
+                                <ul class="dropdown-menu">
+                                    Número
+                                </ul>
+                            </div>*@
+                        @if (Roles.IsUserInRole(ViewBag.NombreUsuario, "SuperAdmin") && false)
+                        {
+                            <input id="BuscadorListado" type="text" class="" placeholder="Filtrar" style="" />
+                            <select id="campos " class="span4">
+                                <option>Número</option>
+                                @* <option>Fecha</option>*@
+                            </select>
+                            <button onclick=" jQuery('#Lista').searchGrid({}) " class="btn append ">
+                                ...
                             </button>
-                            <button onclick="  " class="btn ">
-                                >
-                            </button>
-                        </div>*@
-                    @if (false)
-                    {
-                        <div class="btn-group span2">
-                            <a class="btn  " style="color: Black" href="#"><i class="icon-print"></i>&nbsp;más</a>
-                            <button class="btn dropdown-toggle " data-toggle="dropdown">
-                                <span class="caret "></span>
-                            </button>
-                            <ul class="dropdown-menu ">
-                                <li><a class="" href="#"><i class="icon-print"></i>&nbsp;Excel</a></li>
-                            </ul>
-                        </div>
-                    }
-                    <div class="span1">
-                        <div>
-                            <input id="FechaInicial" name="FechaInicial" type="hidden" value=@Request.QueryString["fechainicial"]>
-                        </div>
-                        <div>
-                            <input id="FechaFinal" name="FechaFinal" type="hidden" value=@Request.QueryString["fechafinal"]>
-                        </div>
-                        <div>
-                            <input id="IdObra" name="IdObra" type="hidden" value=@Request.QueryString["idobra"]>
-                        </div>
+                        }
                     </div>
                 </div>
-                <br />
-                <br />
+                <div class="span2 pull-right" style="text-align: center; display: none">
+                    a confirmar
+                    @Html.CheckBox("bAConfirmar")
+                    a liberar
+                    @Html.CheckBox("bALiberar")
+                </div>
+                @*  <input id="BuscarEnLugarDeFiltrar" type="text" class="" placeholder="Buscar" style="" />*@
+                @* <div class="btn-group  pull-right ">
+                        <button onclick="  " class="btn">
+                            <
+                        </button>
+                        <button onclick="  " class="btn ">
+                            >
+                        </button>
+                    </div>*@
+                @if (false)
+                {
+                    <div class="btn-group span2">
+                        <a class="btn  " style="color: Black" href="#"><i class="icon-print"></i>&nbsp;más</a>
+                        <button class="btn dropdown-toggle " data-toggle="dropdown">
+                            <span class="caret "></span>
+                        </button>
+                        <ul class="dropdown-menu ">
+                            <li><a class="" href="#"><i class="icon-print"></i>&nbsp;Excel</a></li>
+                        </ul>
+                    </div>
+                }
+                <div class="span1">
+                    <div>
+                        <input id="FechaInicial" name="FechaInicial" type="hidden" value=@Request.QueryString["fechainicial"]>
+                    </div>
+                    <div>
+                        <input id="FechaFinal" name="FechaFinal" type="hidden" value=@Request.QueryString["fechafinal"]>
+                    </div>
+                    <div>
+                        <input id="IdObra" name="IdObra" type="hidden" value=@Request.QueryString["idobra"]>
+                    </div>
+                </div>
             </div>
             <br />
-            <table id="Lista" class="scroll" cellpadding="0" cellspacing="0" style="font-size: 16px;"></table>
-            <div id="ListaPager" class="scroll" style="text-align: center;">
-            </div>
-            @*<input type="button" class="btn btn-small" id="addData" value="Generar en Word" />
-                <input type="button" class="btn btn-small" id="edtData" value="marcar RM como impresa" />
-                <input type="button" class="btn btn-small" id="delData" value="desmarcar rm como impresa" />
-                <input type="button" class="btn btn-small" id="delData" value="Enviar RM a proveedores por correo" />
-                <input type="button" class="btn btn-small" id="delData" value="Enviar RM a proveedores por fax" />*@
-
-            <div class="contextMenu" id="myMenu1" style="display:none">
-                <ul style="width: 200px">
-                    <li id="GenerarRM_Word">
-                        <span style="font-size:11px; font-family:Verdana">Generar en Word</span>
-                    </li>
-                    <li id="MarcarRM_Impresa">
-                        <span style="font-size:11px; font-family:Verdana">Marcar RM como impresa</span>
-                    </li>
-                    <li id="DesmarcarRM_Impresa">
-                        <span style="font-size:11px; font-family:Verdana">Desmarcar RM como impresa</span>
-                    </li>
-                    <li id="EnviarRM_Correo">
-                        <span style="font-size:11px; font-family:Verdana">Enviar RM a proveedores por correo</span>
-                    </li>
-                </ul>
-            </div>
-
+            <br />
         </div>
-    </div>
+        <br />
+        <table id="Lista" class="scroll" cellpadding="0" cellspacing="0" style="font-size: 16px;"></table>
+        <div id="ListaPager" class="scroll" style="text-align: center;">
+        </div>
+        @*<input type="button" class="btn btn-small" id="addData" value="Generar en Word" />
+            <input type="button" class="btn btn-small" id="edtData" value="marcar RM como impresa" />
+            <input type="button" class="btn btn-small" id="delData" value="desmarcar rm como impresa" />
+            <input type="button" class="btn btn-small" id="delData" value="Enviar RM a proveedores por correo" />
+            <input type="button" class="btn btn-small" id="delData" value="Enviar RM a proveedores por fax" />*@
 
-    <script type="text/javascript">
+        <div class="contextMenu" id="myMenu1" style="display:none">
+            <ul style="width: 200px">
+                <li id="GenerarRM_Word">
+                    <span style="font-size:11px; font-family:Verdana">Generar en Word</span>
+                </li>
+                <li id="GenerarRM_Pdf">
+                    <span style="font-size:11px; font-family:Verdana">Generar en Pdf</span>
+                </li>
+                <li id="MarcarRM_Impresa">
+                    <span style="font-size:11px; font-family:Verdana">Marcar RM como impresa</span>
+                </li>
+                <li id="DesmarcarRM_Impresa">
+                    <span style="font-size:11px; font-family:Verdana">Desmarcar RM como impresa</span>
+                </li>
+                <li id="EnviarRM_Correo">
+                    <span style="font-size:11px; font-family:Verdana">Enviar RM a proveedores por correo</span>
+                </li>
+            </ul>
+        </div>
+
+        <div id="dialog" style="display: none;" title="Marcar los proveedores para envio de emails">
+            <table id="ListaProveedores" class="scroll" cellpadding="0" cellspacing="0" style="font-size: 16px;"></table>
+            <div id="ListaPager2" class="scroll" style="text-align: center;"></div>
+            @*<div style="width: 460px; height: 190px;" id="int_dialog">
+                <div style="text-align: justify; font-size: 13px; width: 450px;">
+                </div>
+            </div>*@
+        </div>
+
+    </div>
+</div>
+
+<script type="text/javascript">
+    //$(document).ajaxStop(function () {
+    //    $.unblockUI;
+    //    $('#Lista').trigger('reloadGrid');
+    //});
+    $(document).ajaxStop($.unblockUI);
     $(document).ready(function () {
         $("#BuscadorListado").keyup(function () {
             filtrar()
@@ -159,6 +193,32 @@
         $("#BuscadorListado").change(function () {
             filtrar()
         });
+
+        var activeAjaxConnections = 0;
+        var ajaxQueue = $({});
+
+        $.ajaxQueue = function (ajaxOpts) {
+            // hold the original complete function
+            var oldComplete = ajaxOpts.complete;
+            activeAjaxConnections ++;
+            // queue our ajax request
+            ajaxQueue.queue(function (next) {
+                // create a complete callback to fire the next event in the queue
+                ajaxOpts.complete = function () {
+                    // fire the original complete if it was there
+                    activeAjaxConnections--;
+                    if (activeAjaxConnections <= 0) {
+                        //$.unblockUI;
+                        $('#Lista').trigger('reloadGrid');
+                    }
+                    if (oldComplete) oldComplete.apply(this, arguments);
+
+                    next(); // run the next query in the queue
+                };
+                // run the query
+                $.ajax(ajaxOpts);
+            });
+        };
 
         function filtrar() {
             var grid = jQuery("#Lista");
@@ -313,6 +373,9 @@
                         'GenerarRM_Word': function (trigger) {
                             GenerarRM_Word()
                         },
+                        'GenerarRM_Pdf': function (trigger) {
+                            GenerarRM_Pdf()
+                        },
                         'MarcarRM_Impresa': function (trigger) {
                             $.blockUI({
                                 message: "Un momento por favor...",
@@ -327,7 +390,7 @@
                                 }
                             });
                             MarcarRM_Impresa();
-                            $('#Lista').trigger('reloadGrid');
+                            //$('#Lista').trigger('reloadGrid');
                         },
                         'DesmarcarRM_Impresa': function (trigger) {
                             $.blockUI({
@@ -343,7 +406,7 @@
                                 }
                             });
                             DesmarcarRM_Impresa();
-                            $('#Lista').trigger('reloadGrid');
+                            //$('#Lista').trigger('reloadGrid');
                         },
                         'EnviarRM_Correo': function (trigger) {
                             EnviarRM_Correo()
@@ -415,6 +478,47 @@
         }); // si queres sacar el enableClear, definilo en las searchoptions de la columna específica http://www.trirand.com/blog/?page_id=393/help/clearing-the-clear-icon-in-a-filtertoolbar/
 
 
+        $('#ListaProveedores').jqGrid({
+            url: '@Url.Action("Proveedores_DynamicGridData_Resumido", "Proveedor")',
+            datatype: 'json',
+            mtype: 'POST',
+            colNames: ['Acciones', 'IdProveedor', 'Razon social', 'Email', 'Cuit'],
+            colModel: [
+                        { name: 'act', index: 'act', align: 'center', width: 80, sortable: false, editable: false, search: false, hidden: true },
+                        { name: 'IdProveedor', index: 'IdProveedor', align: 'left', width: 50, editable: false, hidden: true },
+                        { name: 'Razonsocial', index: 'Razonsocial', align: 'left', width: 400, editable: false, search: true, searchoptions: { sopt: ['cn']} },
+                        { name: 'Email', index: 'Email', align: 'left', width: 300, editable: false, search: true, searchoptions: { sopt: ['cn']} },
+                        { name: 'Cuit', index: 'Cuit', align: 'left', width: 120, editable: false, search: true, searchoptions: { sopt: ['cn'] } }
+            ],
+            onSelectRow: function (id) {
+                if (id && id !== lastSelectedId) {
+                    if (typeof lastSelectedId !== "undefined") {
+                        grid.jqGrid('restoreRow', lastSelectedId);
+                    }
+                    lastSelectedId = id;
+                }
+            },
+            pager: $('#ListaPager2'),
+            rowNum: 15,
+            rowList: [15, 20, 50, 100],
+            sortname: 'RazonSocial',
+            sortorder: 'asc',
+            viewrecords: true,
+            emptyrecords: 'No hay registros para mostrar',
+            width: 'auto', // 'auto',
+            autowidth: true,
+            shrinkToFit: true,
+            height: '100%',
+            altRows: false,
+            footerrow: false, //true,
+            userDataOnFooter: true,
+            multiboxonly: true,
+            multiselect: true,
+            caption: '<b>PROVEEDORES</b>'
+        });
+        jQuery("#ListaProveedores").jqGrid('navGrid', '#ListaPager2', { refresh: true, add: false, edit: false, del: false }, {}, {}, {}, { sopt: ["cn"], width: 700, closeOnEscape: true, closeAfterSearch: true });
+        //jQuery("#ListaProveedores").jqGrid('gridResize', { minWidth: 800, maxWidth: 800, minHeight: 80, maxHeight: 100 });
+
         $(window).resize(function () {
             RefrescaAnchoJqgrids();
         });
@@ -446,7 +550,7 @@
         pageLayout.hide('south');
     });
 
-        function GenerarRM_Word() {
+    function GenerarRM_Word() {
         //window.open('Imprimir/42501');
         //return;
         var $grid = $("#Lista"), selIds = $grid.jqGrid("getGridParam", "selarrrow"), i, n,
@@ -469,7 +573,6 @@
             //    );
             //});
 
-
             @*function EditProducts(productId, orderId, employeeId, mode) {
                 mode = "edit";
                 debugger;
@@ -480,4 +583,87 @@
         }
     };
 
-    </script>
+    function GenerarRM_Pdf() {
+        var $grid = $("#Lista"), selIds = $grid.jqGrid("getGridParam", "selarrrow"), i, n,
+            cellValues = [];
+        for (i = 0, n = selIds.length; i < n; i++) {
+            var IdRequerimiento = $grid.jqGrid("getCell", selIds[i], "IdRequerimiento");
+
+            var url = '@Html.Raw(@Url.Action("ImprimirPDF", "Requerimiento", new { id = "__param__" }))';
+            url=url.replace('__param__', encodeURIComponent(IdRequerimiento));
+            window.open(url); 
+        }
+    };
+
+    function EnviarRM_Correo() {
+        VerProveedores();
+        //EnviarRM_Correo2()
+    };
+
+    function EnviarRM_Correo2() {
+        $("#example").modal("show");
+        //VerProveedores();
+        var $grid = $("#Lista"), selIds = $grid.jqGrid("getGridParam", "selarrrow"), i, n, cellValues = [], IdRequerimiento, IdProveedor;
+        for (i = 0, n = selIds.length; i < n; i++) {
+            IdRequerimiento = $grid.jqGrid("getCell", selIds[i], "IdRequerimiento");
+            IdProveedor = 5471;
+            $.ajax({
+                type: 'POST',
+                async: true,
+                contentType: 'application/json; charset=utf-8',
+                url: ROOT + 'Requerimiento/EnviarEmail',
+                dataType: 'json',
+                data: JSON.stringify({ IdRequerimiento: IdRequerimiento, IdProveedor: IdProveedor }),
+                success: function (result) {
+                    if (result) {
+                    } else {
+                        alert('No se pudo actualizar.');
+                    }
+                },
+            });
+        }
+    };
+
+    function MarcarRM_Impresa() {
+        var $grid = $("#Lista"), selIds = $grid.jqGrid("getGridParam", "selarrrow"), i, n, IdRequerimiento, cellValues = [];
+        for (i = 0, n = selIds.length; i < n; i++) {
+            IdRequerimiento = $grid.jqGrid("getCell", selIds[i], "IdRequerimiento");
+            $.ajaxQueue({
+                type: 'POST',
+                async: true,
+                contentType: 'application/json; charset=utf-8',
+                url: ROOT + 'Requerimiento/MarcarRM_Impresa',
+                dataType: 'json',
+                data: JSON.stringify({ IdRequerimiento: IdRequerimiento, Marca: "SI" }),
+                success: function (result) {
+                    if (result) {
+                    } else {
+                        alert('No se pudo actualizar.');
+                    }
+                },
+            });
+        }
+    };
+
+    function DesmarcarRM_Impresa() {
+        var $grid = $("#Lista"), selIds = $grid.jqGrid("getGridParam", "selarrrow"), i, n, IdRequerimiento, cellValues = [];
+        for (i = 0, n = selIds.length; i < n; i++) {
+            IdRequerimiento = $grid.jqGrid("getCell", selIds[i], "IdRequerimiento");
+            $.ajaxQueue({
+                type: 'POST',
+                async: true,
+                contentType: 'application/json; charset=utf-8',
+                url: ROOT + 'Requerimiento/MarcarRM_Impresa',
+                dataType: 'json',
+                data: JSON.stringify({ IdRequerimiento: IdRequerimiento, Marca: "NO" }),
+                success: function (result) {
+                    if (result) {
+                    } else {
+                        alert('No se pudo actualizar.');
+                    }
+                },
+            });
+        }
+    };
+
+</script>

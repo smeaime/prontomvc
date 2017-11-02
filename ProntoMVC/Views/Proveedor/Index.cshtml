@@ -30,8 +30,7 @@
             mtype: 'POST',
             colNames: ['Acciones', 'IdProveedor', 'Razon social', 'Codigo', 'Direccion', 'Localidad', 'Cod. postal', 'Provincia', 'Pais', 'Telefono', 'Telefono adic.', 'Fax', 'Email', 'Cuit',
                        'Condicion iva', 'Contacto', 'Fecha alta', 'Fecha ult. compra', 'Estado', 'Actividad', 'Condicion compra', 'Pagina web', 'Habitual', 'Nombre comercial', 'Dato adicional 1', 
-                       'Dato adicional 2', 'Observaciones', 'Inscr. gan.', 'Categoria ganancias', 'Cuenta contable', 'Categoria  IIBB', 'Fecha lim. exen. IIBB', 'Nro. inscr. IIBB', 'Condicion IIBB',
-                       'Fecha ult. pres. documen.', 'Cod. sit. ret. iva', 'Ingreso', 'Fecha ingreso', 'Modifico', 'Fecha modifico', 'Embargado', 'Saldo embargo', 'Calificacion', 'Cuenta contable provision',
+                       'Dato adicional 2', 'Observaciones',
                        'Archivo adjunto 1', 'Archivo adjunto 2', 'Archivo adjunto 3', 'Archivo adjunto 4'],
             colModel: [
                         { name: 'act', index: 'act', align: 'center', width: 80, sortable: false, editable: false, search: false },
@@ -61,23 +60,23 @@
                         { name: 'DatosAdicionales1', index: 'DatosAdicionales1', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn']} },
                         { name: 'DatosAdicionales2', index: 'DatosAdicionales2', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
                         { name: 'Observaciones', index: 'Observaciones', align: 'left', width: 200, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-                        { name: 'InscriptoGanancias', index: 'InscriptoGanancias', align: 'left', width: 40, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-                        { name: 'CategoriaGanancias', index: 'CategoriaGanancias', align: 'left', width: 200, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-                        { name: 'CuentaContable', index: 'CuentaContable', align: 'left', width: 200, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-                        { name: 'CategoriaIIBB', index: 'CategoriaIIBB', align: 'left', width: 80, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-                        { name: 'FechaLimiteExentoIIBB', index: 'FechaLimiteExentoIIBB', align: 'center', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
-                        { name: 'IBNumeroInscripcion', index: 'IBNumeroInscripcion', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-                        { name: 'CondicionIIBB', index: 'CondicionIIBB', align: 'left', width: 200, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-                        { name: 'FechaUltimaPresentacionDocumentacion', index: 'FechaUltimaPresentacionDocumentacion', align: 'center', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
-                        { name: 'CodigoSituacionRetencionIVA', index: 'CodigoSituacionRetencionIVA', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
-                        { name: 'Ingreso', index: 'Ingreso', align: 'left', width: 120, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-                        { name: 'FechaIngreso', index: 'FechaIngreso', align: 'center', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
-                        { name: 'Modifico', index: 'Modifico', align: 'left', width: 120, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-                        { name: 'FechaModifico', index: 'FechaModifico', align: 'center', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
-                        { name: 'SujetoEmbargado', index: 'SujetoEmbargado', align: 'left', width: 80, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-                        { name: 'SaldoEmbargo', index: 'SaldoEmbargo', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-                        { name: 'Calificacion', index: 'Calificacion', align: 'left', width: 80, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-                        { name: 'CuentaContableProvision', index: 'CuentaContableProvision', align: 'left', width: 200, editable: false, search: true, searchoptions: { sopt: ['cn']} },
+                        //{ name: 'InscriptoGanancias', index: 'InscriptoGanancias', align: 'left', width: 40, editable: false, search: true, searchoptions: { sopt: ['cn']} },
+                        //{ name: 'CategoriaGanancias', index: 'CategoriaGanancias', align: 'left', width: 200, editable: false, search: true, searchoptions: { sopt: ['cn']} },
+                        //{ name: 'CuentaContable', index: 'CuentaContable', align: 'left', width: 200, editable: false, search: true, searchoptions: { sopt: ['cn']} },
+                        //{ name: 'CategoriaIIBB', index: 'CategoriaIIBB', align: 'left', width: 80, editable: false, search: true, searchoptions: { sopt: ['cn']} },
+                        //{ name: 'FechaLimiteExentoIIBB', index: 'FechaLimiteExentoIIBB', align: 'center', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                        //{ name: 'IBNumeroInscripcion', index: 'IBNumeroInscripcion', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn']} },
+                        //{ name: 'CondicionIIBB', index: 'CondicionIIBB', align: 'left', width: 200, editable: false, search: true, searchoptions: { sopt: ['cn']} },
+                        //{ name: 'FechaUltimaPresentacionDocumentacion', index: 'FechaUltimaPresentacionDocumentacion', align: 'center', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                        //{ name: 'CodigoSituacionRetencionIVA', index: 'CodigoSituacionRetencionIVA', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                        //{ name: 'Ingreso', index: 'Ingreso', align: 'left', width: 120, editable: false, search: true, searchoptions: { sopt: ['cn']} },
+                        //{ name: 'FechaIngreso', index: 'FechaIngreso', align: 'center', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                        //{ name: 'Modifico', index: 'Modifico', align: 'left', width: 120, editable: false, search: true, searchoptions: { sopt: ['cn']} },
+                        //{ name: 'FechaModifico', index: 'FechaModifico', align: 'center', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                        //{ name: 'SujetoEmbargado', index: 'SujetoEmbargado', align: 'left', width: 80, editable: false, search: true, searchoptions: { sopt: ['cn']} },
+                        //{ name: 'SaldoEmbargo', index: 'SaldoEmbargo', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn']} },
+                        //{ name: 'Calificacion', index: 'Calificacion', align: 'left', width: 80, editable: false, search: true, searchoptions: { sopt: ['cn']} },
+                        //{ name: 'CuentaContableProvision', index: 'CuentaContableProvision', align: 'left', width: 200, editable: false, search: true, searchoptions: { sopt: ['cn']} },
                         { name: 'ArchivoAdjunto1', index: 'ArchivoAdjunto1', align: 'left', width: 200, editable: false, search: true, searchoptions: { sopt: ['cn']} },
                         { name: 'ArchivoAdjunto2', index: 'ArchivoAdjunto2', align: 'left', width: 200, editable: false, search: true, searchoptions: { sopt: ['cn']} },
                         { name: 'ArchivoAdjunto3', index: 'ArchivoAdjunto3', align: 'left', width: 200, editable: false, search: true, searchoptions: { sopt: ['cn']} },
@@ -106,19 +105,21 @@
             footerrow: false, //true,
             userDataOnFooter: true,
             multiboxonly: true,
+            multipleSearch: true,
             caption: '<b>PROVEEDORES</b>'
     });
+        jQuery("#Lista").jqGrid('bindKeys');
         jQuery("#Lista").jqGrid('navGrid', '#ListaPager', { refresh: true, add: false, edit: false, del: false }, {}, {}, {}, { sopt: ["cn"], width: 700, closeOnEscape: true, closeAfterSearch: true });
         jQuery("#Lista").jqGrid('gridResize', { minWidth: 350, maxWidth: 1500, minHeight: 80, maxHeight: 500 });
+        jQuery("#Lista").filterToolbar({
+            stringResult: true, searchOnEnter: true,
+            defaultSearch: 'cn',
+            enableClear: false
+        }); // si queres sacar el enableClear, definilo en las searchoptions de la columna específica http://www.trirand.com/blog/?page_id=393/help/clearing-the-clear-icon-in-a-filtertoolbar/
     });
-
-
-
 
     $(function () {
         deshabilitarPanelesDerecho();
-
     })
-
 
 </script>

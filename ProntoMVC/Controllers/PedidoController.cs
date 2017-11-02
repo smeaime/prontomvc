@@ -45,14 +45,12 @@ using DocumentFormat.OpenXml.Wordprocessing;//using DocumentFormat.OpenXml.Sprea
 using System.Diagnostics;
 using ClosedXML.Excel;
 using System.IO;
-
-
+using System.Configuration;
 
 namespace ProntoMVC.Controllers
 {
 
     // [Authorize(Roles = "Administrador,SuperAdmin,Compras")] //ojo que el web.config tambien te puede bochar hacia el login
-
 
     public partial class PedidoController : ProntoBaseController
     {
@@ -136,6 +134,40 @@ namespace ProntoMVC.Controllers
 
             byte[] contents = System.IO.File.ReadAllBytes(output);
             return File(contents, System.Net.Mime.MediaTypeNames.Application.Octet, "pedido.docx");
+        }
+
+        public virtual FileResult ImprimirPDF(int id, String output2 = "") //(int id)
+        {
+            string SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString(), oStaticMembershipService));
+
+            string output = "";
+            if (output2.Length > 0)
+            {
+                output = output2;
+            }
+            else
+            {
+                output = AppDomain.CurrentDomain.BaseDirectory + "Documentos\\" + "archivo.pdf"; //System.IO.Path.GetDirectoryName(); // + '\Documentos\' + 'archivo.docx';
+            }
+
+            string plantilla = AppDomain.CurrentDomain.BaseDirectory + "Documentos\\" + "Pedido_" + this.HttpContext.Session["BasePronto"].ToString() + ".dotm";
+
+            System.IO.FileInfo MyFile2 = new System.IO.FileInfo(plantilla);//busca si ya existe el archivo a generar y en ese caso lo borra
+
+            if (!MyFile2.Exists)
+            {
+                plantilla = Pronto.ERP.Bll.OpenXML_Pronto.CargarPlantillaDeSQL(OpenXML_Pronto.enumPlantilla.FacturaA, SC);
+            }
+
+            //tengo que copiar la plantilla en el destino, porque openxml usa el archivo que le vaya a pasar
+            System.IO.FileInfo MyFile1 = new System.IO.FileInfo(output);//busca si ya existe el archivo a generar y en ese caso lo borra
+            if (MyFile1.Exists) MyFile1.Delete();
+
+            object nulo = null;
+            EntidadManager.ImprimirWordDOT_VersionDLL_PDF(plantilla, ref nulo, SC, nulo, ref nulo, id, nulo, nulo, nulo, output, nulo, nulo);
+
+            byte[] contents = System.IO.File.ReadAllBytes(output);
+            return File(contents, System.Net.Mime.MediaTypeNames.Application.Octet, "pedido.pdf");
         }
 
         void MarcaDeAgua(ref string cadena)
@@ -1409,172 +1441,9 @@ namespace ProntoMVC.Controllers
                 sErrorMsg += "\n" + "Numero/Subnumero de pedido ya existente";
             }
 
-
-
-
-
-            //         if Len(mvarErr) {
-            //            if mIdAprobo = 0 {
-            //               mvarErr = mvarErr & vbCrLf & "Cuando libere el pedido estos errores deberan estar corregidos"
-            //               MsgBox "Errores encontrados :" & vbCrLf & mvarErr, vbExclamation
-            //            Else
-            //               MsgBox "Errores encontrados :" & vbCrLf & mvarErr, vbExclamation
-            //               GoTo Salida
-            //            }
-            //         }
-
-
-            //if Not mNumeracionPorPuntoVenta {
-            //            if mvarId = -1 And mNumeracionAutomatica <> "SI" And txtNumeroPedido.Text = mNumeroPedidoOriginal {
-            //               Set oPar = oAp.Parametros.Item(1)
-            //               if Check2.Value = 0 {
-            //                  mNum = oPar.Registrox.ProximoNumeroPedido").Value
-            //               Else
-            //                  mNum = oPar.Registrox.ProximoNumeroPedidoExterior").Value
-            //               }
-            //               origen.Registrox.NumeroPedido").Value = mNum
-            //               mNumeroPedidoOriginal = mNum
-            //               Set oPar = Nothing
-            //            }
-
-            //            Set oRs = oAp.Pedidos.TraerFiltrado("_PorNumero", Array(Val(txtNumeroPedido.Text), Val(txtSubnumero.Text), -1, Check2.Value))
-            //            if oRs.RecordCount > 0 {
-            //               if mvarId < 0 Or (mvarId > 0 And oRs.Fields(0).Value <> mvarId) {
-            //                  oRs.Close
-            //                  Set oRs = Nothing
-            //                  mvarNumero = MsgBox("Numero/Subnumero de pedido ya existente" & vbCrLf & "Desea actualizar el numero ?", vbYesNo, "Numero de pedido")
-            //                  if mvarNumero = vbYes {
-            //                     Set oPar = oAp.Parametros.Item(1)
-            //                     if Check2.Value = 0 {
-            //                        mNum = oPar.Registrox.ProximoNumeroPedido").Value
-            //                     Else
-            //                        mNum = oPar.Registrox.ProximoNumeroPedidoExterior").Value
-            //                     }
-            //                     origen.Registrox.NumeroPedido").Value = mNum
-            //                     Set oPar = Nothing
-            //                  }
-            //                  GoTo Salida
-            //               }
-            //            }
-            //            oRs.Close
-            //            Set oRs = Nothing
-            //         Else
-            //            Set oRs = oAp.Pedidos.TraerFiltrado("_PorNumero", Array(Val(txtNumeroPedido.Text), Val(txtSubnumero.Text), dcfields(10).BoundText))
-            //            if oRs.RecordCount > 0 {
-            //               if mvarId < 0 Or (mvarId > 0 And oRs.Fields(0).Value <> mvarId) {
-            //                  oRs.Close
-            //                  Set oRs = Nothing
-            //                  MsgBox "Numero/Subnumero de pedido ya existente", vbExclamation
-            //                  GoTo Salida
-            //               }
-            //            }
-            //            oRs.Close
-            //         }
-
-            //         mAuxS6 = BuscarClaveINI("Exigir adjunto en pedidos con subcontrato")
-
-            //            if mAuxS6 = "SI" And Iif(IsNull(x.NumeroSubcontrato").Value), 0, x.NumeroSubcontrato").Value) > 0 {
-            //               mConAdjuntos = False
-            //               For i = 1 To 10
-            //                  if Len(Iif(IsNull(x.ArchivoAdjunto" & i).Value), "", x.ArchivoAdjunto" & i).Value)) > 0 {
-            //                     mConAdjuntos = True
-            //                     Exit For
-            //                  }
-            //               Next
-            //               if Not mConAdjuntos {
-            //                  MsgBox "Para un pedido - subcontrato es necesario ingresar como adjunto las condiciones generales", vbExclamation
-            //                  GoTo Salida
-            //               }
-            //            }
-
-            //            if Not IsNull(x.IdPedidoAbierto").Value) {
-            //               mTotalPedidoAbierto = 0
-            //               mvarTotalPedidos = 0
-            //               mFechaLimite = 0
-            //               Set oRs1 = Aplicacion.PedidosAbiertos.TraerFiltrado("_Control", x.IdPedidoAbierto").Value)
-            //               if oRs1.RecordCount > 0 {
-            //                  mTotalPedidoAbierto = Iif(IsNull(oRs1x.ImporteLimite").Value), 0, oRs1x.ImporteLimite").Value)
-            //                  mvarTotalPedidos = Iif(IsNull(oRs1x.SumaPedidos").Value), 0, oRs1x.SumaPedidos").Value)
-            //                  mFechaLimite = Iif(IsNull(oRs1x.FechaLimite").Value), 0, oRs1x.FechaLimite").Value)
-            //               }
-            //               oRs1.Close
-            //               if mvarId > 0 {
-            //                  Set oRs1 = Aplicacion.Pedidos.TraerFiltrado("_PorId", mvarId)
-            //                  if oRs1.RecordCount > 0 {
-            //                     mvarTotalPedidos = mvarTotalPedidos - Iif(IsNull(oRs1x.TotalPedido").Value), 0, oRs1x.TotalPedido").Value)
-            //                  }
-            //                  oRs1.Close
-            //               }
-            //               mvarTotalPedidos = mvarTotalPedidos + mvarTotalPedido
-            //               if mTotalPedidoAbierto > 0 And mTotalPedidoAbierto < mvarTotalPedidos {
-            //                  MsgBox "Se supero el importe limite del pedido abierto : " & mTotalPedidoAbierto, vbCritical
-            //                  GoTo Salida
-            //               }
-            //               if mFechaLimite > 0 And mFechaLimite < DTFields(0).Value {
-            //                  MsgBox "Se supero la fecha limite del pedido abierto : " & mFechaLimite, vbCritical
-            //                  GoTo Salida
-            //               }
-            //            }
-            //            if mNumeracionPorPuntoVenta {
-            //               x.PuntoVenta").Value = Val(dcfields(10).Text)
-            //            Else
-            //               if mvarId = -1 And mNumeracionAutomatica <> "SI" And txtNumeroPedido.Text = mNumeroPedidoOriginal {
-            //                  Set oPar = oAp.Parametros.Item(1)
-            //                  if Check2.Value = 0 {
-            //                     mNum = oPar.Registrox.ProximoNumeroPedido").Value
-            //                     x.NumeroPedido").Value = mNum
-            //                     oPar.Registrox.ProximoNumeroPedido").Value = mNum + 1
-            //                  Else
-            //                     mNum = oPar.Registrox.ProximoNumeroPedidoExterior").Value
-            //                     x.NumeroPedido").Value = mNum
-            //                     oPar.Registrox.ProximoNumeroPedidoExterior").Value = mNum + 1
-            //                  }
-            //                  oPar.Guardar
-            //                  Set oPar = Nothing
-            //               }
-            //            }
-            //            x.Bonificacion").Value = mvarBonificacion
-            //            if IsNumeric(txtPorcentajeBonificacion.Text) { x.PorcentajeBonificacion").Value = Val(txtPorcentajeBonificacion.Text)
-            //            x.TotalIva1").Value = mvarIVA1
-            //            'x.TotalIva2").Value = mvarIVA2
-            //            x.TotalPedido").Value = mvarTotalPedido
-            //            x.PorcentajeIva1").Value = mvarP_IVA1
-            //            x.PorcentajeIva2").Value = mvarP_IVA2
-            //            x.TipoCompra").Value = Combo1(0).ListIndex + 1
-            //            x.CotizacionMoneda").Value = txtCotizacionMoneda.Text
-            //            x.CotizacionDolar").Value = txtCotizacionDolar.Text
-            //            if Check2.Value = 1 {
-            //               x.PedidoExterior").Value = "SI"
-            //            Else
-            //               x.PedidoExterior").Value = "NO"
-            //            }
-            //            if Not IsNull(x.NumeroSubcontrato").Value) {
-            //               x.Subcontrato").Value = "SI"
-            //            Else
-            //               x.Subcontrato").Value = "NO"
-            //            }
-            //            if Check4.Value = 1 {
-            //               x.Transmitir_a_SAT").Value = "SI"
-            //            Else
-            //               x.Transmitir_a_SAT").Value = "NO"
-            //            }
-            //            x.EnviarEmail").Value = 1
-            //            if mvarId <= 0 { x.NumeracionAutomatica").Value = mNumeracionAutomatica
-            //            x.Observaciones").Value = rchObservaciones.Text
-            //            x.IdTipoCompraRM").Value = origen.IdTipoCompraRM
-
-
-
-
-
-
-
-
-
             sErrorMsg = sErrorMsg.Replace("\n", "<br/>"); //     ,"&#13;&#10;"); // "<br/>");
             if (sErrorMsg != "") return false;
             return true;
-
         }
 
 
@@ -1691,6 +1560,7 @@ namespace ProntoMVC.Controllers
         public class Pedidos2
         {
             public int IdPedido { get; set; }
+            public int? IdProveedor { get; set; }
             public int? PuntoVenta { get; set; }
             public int? NumeroPedido { get; set; }
             public int? SubNumero { get; set; }
@@ -1764,6 +1634,7 @@ namespace ProntoMVC.Controllers
                         select new Pedidos2
                         {
                             IdPedido = a.IdPedido,
+                            IdProveedor = a.IdProveedor,
                             PuntoVenta = a.PuntoVenta,
                             NumeroPedido = a.NumeroPedido,
                             SubNumero = a.SubNumero,
@@ -1820,6 +1691,7 @@ namespace ProntoMVC.Controllers
                                 //"<a href="+ Url.Action("Edit",new {id = a.IdPedido} ) + " target='' >Editar</>" ,
                                 "<a href="+ Url.Action("Edit",new {id = a.IdPedido} ) + "  >Editar</>" ,
                                 a.IdPedido.ToString(), 
+                                a.IdProveedor.ToString(), 
                                 a.NumeroPedido.NullSafeToString(), 
                                 a.SubNumero.NullSafeToString(), 
                                 a.FechaPedido==null ? "" :  a.FechaPedido.GetValueOrDefault().ToString("dd/MM/yyyy"),
@@ -1935,36 +1807,9 @@ namespace ProntoMVC.Controllers
                         //.Include(x => x.DetallePedidos.Select(y => y. y.IdDetalleRequerimiento))
                         // .Include(x => x.Aprobo)
                         select a
-                //                        new
-                //                        {
-                //                            IdPedido = a.IdPedido,
-
-//                            Numero = a.NumeroPedido,
-                //                            fecha
-                //                            fechasalida
-                //                            cumpli
-                //                            rms
-                //                            obras
-                //                            proveedor
-                //                            neto gravado
-                //                            bonif
-                //                            total iva
-
-
-//// IsNull(Pedidos.TotalPedido,0)-IsNull(Pedidos.TotalIva1,0)+IsNull(Pedidos.Bonificacion,0)-  
-                //// IsNull(Pedidos.ImpuestosInternos,0)-IsNull(Pedidos.OtrosConceptos1,0)-IsNull(Pedidos.OtrosConceptos2,0)-  
-                //// IsNull(Pedidos.OtrosConceptos3,0)-IsNull(Pedidos.OtrosConceptos4,0)-IsNull(Pedidos.OtrosConceptos5,0)as [Neto gravado],  
-                //// Case When Bonificacion=0 Then Null Else Bonificacion End as [Bonificacion],  
-
-//// Case When TotalIva1=0 Then Null Else TotalIva1 End as [Total Iva],  
-
-//// IsNull(Pedidos.ImpuestosInternos,0)+IsNull(Pedidos.OtrosConceptos1,0)+IsNull(Pedidos.OtrosConceptos2,0)+  
-                //// IsNull(Pedidos.OtrosConceptos3,0)+IsNull(Pedidos.OtrosConceptos4,0)+IsNull(Pedidos.OtrosConceptos5,0)as [Otros Conceptos],  
-                //// TotalPedido as [Total pedido],  
-                //                        }
                         ).Where(campo).OrderBy(sidx + " " + sord)
-.Skip((currentPage - 1) * pageSize).Take(pageSize)
-.ToList();
+                        .Skip((currentPage - 1) * pageSize).Take(pageSize)
+                        .ToList();
 
             var jsonData = new jqGridJson()
             {
@@ -2120,8 +1965,8 @@ namespace ProntoMVC.Controllers
                             Contacto = a.Contacto,
                             Observaciones = a.Observaciones
                         }).Where(campo).OrderBy(sidx + " " + sord)
-                //.Skip((currentPage - 1) * pageSize).Take(pageSize)
-.ToList();
+                        //.Skip((currentPage - 1) * pageSize).Take(pageSize)
+                        .ToList();
 
             var jsonData = new jqGridJson()
             {
@@ -2210,8 +2055,8 @@ namespace ProntoMVC.Controllers
                             ControlCalidadDesc = (a.ControlesCalidad == null) ? "" : a.ControlesCalidad.Descripcion
 
                         }).OrderBy(p => p.NumeroItem)
-                //.Skip((currentPage - 1) * pageSize).Take(pageSize)
-.ToList();
+                        //.Skip((currentPage - 1) * pageSize).Take(pageSize)
+                        .ToList();
 
             var jsonData = new jqGridJson()
             {
@@ -2262,11 +2107,6 @@ namespace ProntoMVC.Controllers
             };
             return Json(jsonData, JsonRequestBehavior.AllowGet);
         }
-
-
-
-
-
 
         private class DetallePedido2
         {
@@ -2325,7 +2165,6 @@ namespace ProntoMVC.Controllers
 
         }
 
-
         public virtual ActionResult PedidosPendientes_DynamicGridData(string sidx, string sord, int page, int rows, bool _search, string filters)
         {
             var DetEntidad = db.DetallePedidos.Where(p => (p.Cumplido ?? "") != "SI" && (p.Cumplido ?? "") != "AN" && p.Pedido.Aprobo != null).AsQueryable();
@@ -2375,11 +2214,6 @@ namespace ProntoMVC.Controllers
 
             var pagedQuery = Filters.FiltroGenerico_UsandoIQueryable<DetallePedido2>
                                      (sidx, sord, page, rows, _search, filters, db, ref totalRecords, data);
-
-
-
-
-
 
             var jsonData = new jqGridJson()
             {
@@ -2488,7 +2322,6 @@ namespace ProntoMVC.Controllers
                     break;
                 default: break;
             }
-
         }
 
         // [HttpPost]
@@ -2522,7 +2355,6 @@ namespace ProntoMVC.Controllers
             usuarioNuevo.ConfirmPassword = usuarioNuevo.Password;
             usuarioNuevo.Email = Proveedor.Email ?? (usuarioNuevo.UserName + "mscalella911@gmail.com");
             usuarioNuevo.Grupo = Proveedor.Cuit;
-
 
             try
             {
@@ -2577,11 +2409,7 @@ namespace ProntoMVC.Controllers
                 ErrHandler.WriteError(e); //throw;
             }
 
-
-
             // tendria que usar createuser y ahi tendria que mandar en el mail la contraseña...
-
-
 
             var usuarioNuevo2 = new RegisterModel();
             if ((Pedido.Contacto ?? "") != "")
@@ -2633,9 +2461,6 @@ namespace ProntoMVC.Controllers
                 ErrHandler.WriteError(e); //throw;
             }
 
-
-
-
             TempData["Alerta"] = "Alta automática de usuarios: " + usuarioNuevo.UserName + " " + usuarioNuevo2.UserName;
             return View("Index");
         }
@@ -2658,6 +2483,75 @@ namespace ProntoMVC.Controllers
             if (db != null) db.Dispose();
             base.Dispose(disposing);
         }
+
+        public virtual JsonResult MarcarPE_Impresa(int IdPedido, string Marca)
+        {
+            string nSC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString(), oStaticMembershipService));
+            EntidadManager.Tarea(nSC, "Pedidos_RegistrarImpresion", IdPedido, Marca, "", DateTime.Today, 0, "");
+            return Json(new { Success = 1, IdPedido = IdPedido, ex = "" });
+        }
+
+        public string EnviarEmail(int IdPedido, int IdProveedor)
+        {
+            string NumeroPedido = "";
+            string output = "";
+            string destinatario = "";
+            string asunto = "PE";
+            string cuerpo = "";
+            string De = "";
+            string resul = "";
+
+            var Empresa = db.Empresas.Where(p => p.IdEmpresa == 1).FirstOrDefault();
+            if (Empresa != null) { De = Empresa.Email.ToString(); }
+
+            var Pedidos = db.Pedidos.Where(p => p.IdPedido == IdPedido).FirstOrDefault();
+            if (Pedidos != null)
+            {
+                NumeroPedido = Pedidos.NumeroPedido.ToString();
+                output = AppDomain.CurrentDomain.BaseDirectory + "Documentos\\" + "Pedido_" + NumeroPedido + ".pdf"; ;
+            }
+            ImprimirPDF(IdPedido, output).ToString();
+
+            var Proveedor = db.Proveedores.Where(p => p.IdProveedor == IdProveedor).FirstOrDefault();
+            if (Proveedor != null) { destinatario = Proveedor.Email ?? ""; }
+
+            if (destinatario.Length > 0 && output.Length > 0 && De.Length > 0)
+            {
+                if (EntidadManager.MandaEmail_Nuevo(destinatario,
+                                                    asunto,
+                                                    cuerpo,
+                                                    De,
+                                                    ConfigurationManager.AppSettings["SmtpServer"],
+                                                    ConfigurationManager.AppSettings["SmtpUser"],
+                                                    ConfigurationManager.AppSettings["SmtpPass"],
+                                                    output,
+                                                    Convert.ToInt16(ConfigurationManager.AppSettings["SmtpPort"]))
+                    )
+                {
+                    resul = "Ok";
+                }
+                else
+                {
+                    resul = "Error";
+                }
+            }
+            else
+            {
+                resul = "Error";
+            }
+
+            FileInfo MyFile1 = new FileInfo(output);
+            if (MyFile1.Exists)
+            {
+                System.GC.Collect();
+                System.GC.WaitForPendingFinalizers();
+                System.IO.File.Delete(output);
+                //MyFile1.Delete();
+            }
+
+            return resul;
+        }
+    
     }
 }
 

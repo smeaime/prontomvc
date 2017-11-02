@@ -13,7 +13,6 @@
         {
             border: 0px solid #aaaaaa;
         }
-        
         .ui-jqgrid
         {
             border-right-width: 0px;
@@ -27,21 +26,16 @@ If you want additionally remove vertical border between the cells in the grid yo
         {
             border-right-color: #E4E4E4;
         }
-        
-        
         .ui-jqgrid tr.footrow-ltr td
         {
             border-right-color: #E4E4E4 !important;
         }
-        
         /*To remove horizontal border between the rows you can use */
-        
         .ui-jqgrid tr.ui-row-ltr td
         {
             border-bottom-color: #E4E4E4;
         }
         /*To remove vertical borders between the column headers you can use */
-        
         th.ui-th-column
         {
             border-right-color: #E4E4E4 !important;
@@ -63,21 +57,9 @@ If you want additionally remove vertical border between the cells in the grid yo
             </button>
             <div class="span4">
                 <div class="input-prepend input-append">
-                    @* <div class="btn-group ">
-                            <button class="btn dropdown-toggle" data-toggle="dropdown">
-                                En todo <span class="caret"></span>
-                            </button>
-                            <div class="dropdown-menu">
-                                Requerimientos
-                            </div>
-                            <ul class="dropdown-menu">
-                                Número
-                            </ul>
-                        </div>*@
                     @if (Roles.IsUserInRole(ViewBag.NombreUsuario, "SuperAdmin") && false)
                     {
                         <input id="BuscadorListado" type="text" class="" placeholder="Filtrar" style="" />
-
                         <select id="campos " class="span4">
                             <option>Número</option>
                             @*<option>Fecha</option>*@
@@ -117,40 +99,32 @@ If you want additionally remove vertical border between the cells in the grid yo
         
     </div>
     <br />
-    <table id="Lista" class="scroll" cellpadding="0" cellspacing="0" style="font-size: 16px;
-        ">
+    <table id="Lista" class="scroll" cellpadding="0" cellspacing="0" style="font-size: 16px;">
     </table>
     <div id="ListaPager" class="scroll" style="text-align: center; background: ; height: 30px">
     </div>
 
-    @*<input type="button" class="btn btn-small" id="addData" value="Generar email" />
-    <input type="button" class="btn btn-small" id="addData" value="Generar en Word" />
-    <input type="button" class="btn btn-small" id="addData" value="Generar borrador en Word" />
-    <input type="button" class="btn btn-small" id="edtData" value="marcar PED como impresa" />
-    <input type="button" class="btn btn-small" id="delData" value="desmarcar PED como impresa" />
-    <input type="button" class="btn btn-small" id="delData" value="Registrar fecha de salida del pedido" />*@
-
     <div class="contextMenu" id="myMenu1" style="display:none">
         <ul style="width: 200px">
-            <li id="del">
+            <li id="EnviarPE_Correo">
                 <span style="font-size:11px; font-family:Verdana">Generar email</span>
             </li>
-            <li id="add">
+            <li id="GenerarPE">
                 @*<span class="ui-icon ui-icon-plus" style="float:left"></span>*@
-                <span style="font-size:11px; font-family:Verdana">Generar en Word</span>
+                <span style="font-size:11px; font-family:Verdana">Generar pedido</span>
             </li>
-            <li id="del">
-                <span style="font-size:11px; font-family:Verdana">Generar borrador en Word</span>
+            <li id="GenerarPE_Borrador">
+                <span style="font-size:11px; font-family:Verdana">Generar pedido borrador</span>
             </li>
-            <li id="edit">
+            <li id="MarcarPE_Impresa">
                 @*<span class="ui-icon ui-icon-pencil" style="float:left"></span>*@
                 <span style="font-size:11px; font-family:Verdana">Marcar PED como impreso</span>
             </li>
-            <li id="del">
+            <li id="DesmarcarPE_Impresa">
                 @*<span class="ui-icon ui-icon-trash" style="float:left"></span>*@
                 <span style="font-size:11px; font-family:Verdana">Desmarcar PED como impreso</span>
             </li>
-            <li id="del">
+            <li id="RegistrarFechaSalidaPE">
                 @*<span class="ui-icon ui-icon-trash" style="float:left"></span>*@
                 <span style="font-size:11px; font-family:Verdana">Registrar fecha de salida del pedido</span>
             </li>
@@ -159,10 +133,35 @@ If you want additionally remove vertical border between the cells in the grid yo
 </div>
 @*<p>@Html.ActionLink("Nuevo Pedido", "Edit", new { id = -1 }, null)</p> *@
 <script type="text/javascript">
+    $(document).ajaxStop($.unblockUI);
     $(document).ready(function () {
-        var lastSelectedId;
-        var inEdit;
-        grid = $("#Lista");
+        var lastSelectedId, inEdit, activeAjaxConnections = 0, ajaxQueue = $({});
+
+        //grid = $("#Lista");
+        var grid = "#Lista";
+
+        $.ajaxQueue = function (ajaxOpts) {
+            // hold the original complete function
+            var oldComplete = ajaxOpts.complete;
+            activeAjaxConnections++;
+            // queue our ajax request
+            ajaxQueue.queue(function (next) {
+                // create a complete callback to fire the next event in the queue
+                ajaxOpts.complete = function () {
+                    // fire the original complete if it was there
+                    activeAjaxConnections--;
+                    if (activeAjaxConnections <= 0) {
+                        //$.unblockUI;
+                        $('#Lista').trigger('reloadGrid');
+                    }
+                    if (oldComplete) oldComplete.apply(this, arguments);
+
+                    next(); // run the next query in the queue
+                };
+                // run the query
+                $.ajax(ajaxOpts);
+            });
+        };
 
         //Para que haga wrap en las celdas
         $('.ui-jqgrid .ui-jqgrid-htable th div').css('white-space', 'normal');
@@ -172,13 +171,14 @@ If you want additionally remove vertical border between the cells in the grid yo
             postData: { 'FechaInicial': function () { return $("#FechaInicial").val(); }, 'FechaFinal': function () { return $("#FechaFinal").val(); } },
             datatype: 'json',
             mtype: 'POST',
-            colNames: ['Acciones', 'IdPedido', 'Numero', 'Sub', 'Fecha', 'Salida', 'Cumplido', 'RMs', 'Obras', 'Cod. prov.', 'Proveedor', 'Subtotal', 'Bonif.', 'IVA', 'Otros', 'Imp. Int.', 'Total pedido',
-                       'Mon.', 'Comprador', 'Aprobo', 'Items', 'Comparativa', 'Tipo compra', 'Observaciones', 'Cond. compra', 'Detalle cond. compra', 'Exterior', 'Nro. licitacion', 'Impresa', 'Anuló',
-                       'Fecha anulacion', 'Motivo anulacion', 'Equipos destino', 'Circ. firma completo', 'Condicion iva', 'Fecha envio', 'Detalles generales'
+            colNames: ['Acciones', 'IdPedido', 'IdProveedor', 'Numero', 'Sub', 'Fecha', 'Salida', 'Cumplido', 'RMs', 'Obras', 'Cod. prov.', 'Proveedor', 'Subtotal', 'Bonif.', 'IVA', 'Otros',
+                       'Imp. Int.', 'Total pedido', 'Mon.', 'Comprador', 'Aprobo', 'Items', 'Comparativa', 'Tipo compra', 'Observaciones', 'Cond. compra', 'Detalle cond. compra', 'Exterior',
+                       'Nro. licitacion', 'Impresa', 'Anuló', 'Fecha anulacion', 'Motivo anulacion', 'Equipos destino', 'Circ. firma completo', 'Condicion iva', 'Fecha envio', 'Detalles generales'
             ],
             colModel: [
                         { name: 'act', index: 'act', align: 'center', width: 80, sortable: false, frozen: true, editable: false, search: false }, //, formatter: 'showlink', formatoptions: { baseLinkUrl: '@Url.Action("Edit")'} },
                         {name: 'IdPedido', index: 'IdPedido', align: 'left', width: 100, editable: false, hidden: true },
+                        { name: 'IdProveedor', index: 'IdProveedor', align: 'left', width: 100, editable: false, hidden: true },
                         { name: 'NumeroPedido', index: 'NumeroPedido', align: 'right', width: 70, frozen: true, editable: false, search: true, searchoptions: { sopt: ['eq'] } },
                         { name: 'SubNumero', index: 'SubNumero', align: 'right', width: 30, frozen: true, editable: false, search: true, searchoptions: { sopt: ['eq'] } },
                         {
@@ -252,34 +252,50 @@ If you want additionally remove vertical border between the cells in the grid yo
             loadComplete: function () {
                 $("tr.jqgrow", this).contextMenu('myMenu1', {
                     bindings: {
-                        'edit': function (trigger) {
-                            // trigger is the DOM element ("tr.jqgrow") which are triggered
-                            //   grid.editGridRow(trigger.id, editSettings);
+                        'GenerarPE': function (trigger) {
+                            GenerarPE()
                         },
-                        'add': function (/*trigger*/) {
-                            //  grid.editGridRow("new", addSettings);
+                        'GenerarPE_Borrador': function (trigger) {
+                            GenerarPE_Borrador()
                         },
-                        'del': function (trigger) {
-                            if ($('#del').hasClass('ui-state-disabled') === false) {
-                                // disabled item can do be choosed
-                                //      grid.delGridRow(trigger.id, delSettings);
-                            }
+                        'MarcarPE_Impresa': function (trigger) {
+                            $.blockUI({
+                                message: "Un momento por favor...",
+                                css: {
+                                    border: 'none',
+                                    padding: '15px',
+                                    backgroundColor: '#000',
+                                    '-webkit-border-radius': '10px',
+                                    '-moz-border-radius': '10px',
+                                    opacity: .5,
+                                    color: '#fff'
+                                }
+                            });
+                            MarcarPE_Impresa();
+                        },
+                        'DesmarcarPE_Impresa': function (trigger) {
+                            $.blockUI({
+                                message: "Un momento por favor...",
+                                css: {
+                                    border: 'none',
+                                    padding: '15px',
+                                    backgroundColor: '#000',
+                                    '-webkit-border-radius': '10px',
+                                    '-moz-border-radius': '10px',
+                                    opacity: .5,
+                                    color: '#fff'
+                                }
+                            });
+                            DesmarcarPE_Impresa();
+                        },
+                        'EnviarPE_Correo': function (trigger) {
+                            EnviarPE_Correo()
                         }
                     },
                     onContextMenu: function (event/*, menu*/) {
                         var rowId = $(event.target).closest("tr.jqgrow").attr("id");
-                        //grid.setSelection(rowId);
-                        // disable menu for rows with even rowids
-                        //$('#del').attr("disabled", Number(rowId) % 2 === 0);
-                        //if (Number(rowId) % 2 === 0) {
-                        //    $('#del').attr("disabled", "disabled").addClass('ui-state-disabled');
-                        //} else {
-                        //    $('#del').removeAttr("disabled").removeClass('ui-state-disabled');
-                        //}
                         return true;
                     },
-
-                    //http://stackoverflow.com/questions/8451982/custom-values-to-context-menu-items-in-jqgrid
                     menuStyle: {
                         backgroundColor: '#fcfdfd',
                         border: '1px solid #a6c9e2',
@@ -293,7 +309,6 @@ If you want additionally remove vertical border between the cells in the grid yo
                     }
                 });
             },
-
             pager: $('#ListaPager'),
             rowNum: 15,
             rowList: [10, 20, 50],
@@ -314,9 +329,7 @@ If you want additionally remove vertical border between the cells in the grid yo
             multipleSearch: true,
             multiselect: true,
         });
-
         jQuery("#Lista").jqGrid('bindKeys');
-
         jQuery("#Lista").jqGrid('navGrid', '#ListaPager',
          { csv: true, refresh: true, add: false, edit: false, del: false }, {}, {}, {},
          {
@@ -325,13 +338,11 @@ If you want additionally remove vertical border between the cells in the grid yo
              width: 700, closeOnEscape: true, closeAfterSearch: true, multipleSearch: true, overlay: false
          }
         );
-
         jQuery("#Lista").filterToolbar({
             stringResult: true, searchOnEnter: true,
             defaultSearch: 'cn',
             enableClear: false
         }); // si queres sacar el enableClear, definilo en las searchoptions de la columna específica http://www.trirand.com/blog/?page_id=393/help/clearing-the-clear-icon-in-a-filtertoolbar/
-
 
         $(window).resize(function () {
             RefrescaAnchoJqgrids();
@@ -344,5 +355,81 @@ If you want additionally remove vertical border between the cells in the grid yo
         pageLayout.hide('east');
         pageLayout.hide('south');
     });
+
+    function GenerarPE() {
+        var $grid = $("#Lista"), selIds = $grid.jqGrid("getGridParam", "selarrrow"), i, n,
+            cellValues = [];
+        for (i = 0, n = selIds.length; i < n; i++) {
+            var IdPedido = $grid.jqGrid("getCell", selIds[i], "IdPedido");
+
+            var url = '@Html.Raw(@Url.Action("ImprimirPDF", "Pedido", new { id = "__param__" }))';
+            url = url.replace('__param__', encodeURIComponent(IdPedido));
+            window.open(url);
+        }
+    };
+
+    function EnviarPE_Correo() {
+        var $grid = $("#Lista"), selIds = $grid.jqGrid("getGridParam", "selarrrow"), i, n, cellValues = [], IdRequerimiento, IdProveedor;
+        for (i = 0, n = selIds.length; i < n; i++) {
+            IdPedido = $grid.jqGrid("getCell", selIds[i], "IdPedido");
+            IdProveedor = $grid.jqGrid("getCell", selIds[i], "IdProveedor");
+            $.ajax({
+                type: 'POST',
+                async: true,
+                contentType: 'application/json; charset=utf-8',
+                url: ROOT + 'Pedido/EnviarEmail',
+                dataType: 'json',
+                data: JSON.stringify({ IdPedido: IdPedido, IdProveedor: IdProveedor }),
+                success: function (result) {
+                    if (result) {
+                    } else {
+                        alert('No se pudo actualizar.');
+                    }
+                },
+            });
+        }
+    };
+
+    function MarcarPE_Impresa() {
+        var $grid = $("#Lista"), selIds = $grid.jqGrid("getGridParam", "selarrrow"), i, n, IdPedido, cellValues = [];
+        for (i = 0, n = selIds.length; i < n; i++) {
+            IdPedido = $grid.jqGrid("getCell", selIds[i], "IdPedido");
+            $.ajaxQueue({
+                type: 'POST',
+                async: true,
+                contentType: 'application/json; charset=utf-8',
+                url: ROOT + 'Pedido/MarcarPE_Impresa',
+                dataType: 'json',
+                data: JSON.stringify({ IdPedido: IdPedido, Marca: "SI" }),
+                success: function (result) {
+                    if (result) {
+                    } else {
+                        alert('No se pudo actualizar.');
+                    }
+                },
+            });
+        }
+    };
+
+    function DesmarcarPE_Impresa() {
+        var $grid = $("#Lista"), selIds = $grid.jqGrid("getGridParam", "selarrrow"), i, n, IdPedido, cellValues = [];
+        for (i = 0, n = selIds.length; i < n; i++) {
+            IdPedido = $grid.jqGrid("getCell", selIds[i], "IdPedido");
+            $.ajaxQueue({
+                type: 'POST',
+                async: true,
+                contentType: 'application/json; charset=utf-8',
+                url: ROOT + 'Pedido/MarcarPE_Impresa',
+                dataType: 'json',
+                data: JSON.stringify({ IdPedido: IdPedido, Marca: "NO" }),
+                success: function (result) {
+                    if (result) {
+                    } else {
+                        alert('No se pudo actualizar.');
+                    }
+                },
+            });
+        }
+    };
 
 </script>
