@@ -4375,13 +4375,13 @@ usuario As String, ConexBDLmaster As String,
 
 
 
-                strSQL = "SELECT CDP.IdCartaDePorte, CDP.NumeroCartaDePorte, CDP.IdUsuarioIngreso, CDP.FechaIngreso, CDP.Anulada, CDP.FechaAnulacion, " & _
-          "                              dbo.fCalidadSerializada( CDP.IdCartaDePorte)  +  CDP.Observaciones   as Observaciones, " & _
-        "         CDP.Cantidad, CDP.Cupo, CDP.NetoProc, CDP.BrutoPto, CDP.TaraPto, CDP.NetoPto, CDP.Acoplado, CDP.Humedad, CDP.Merma, HumedadDesnormalizada, CDP.NetoFinal, CDP.CTG, Patente, CDP.Contrato, " & _
-      "           CDP.FechaDeCarga, CDP.FechaVencimiento, CDP.SubnumeroVagon, CDP.FechaArribo, CDP.CEE, CDP.FechaDescarga, CDP.Hora, CDP.NRecibo, CDP.CalidadDe, CDP.TaraFinal, CDP.BrutoFinal, TitularDesc, TitularCUIT, " & _
-    "             IntermediarioDesc, IntermediarioCUIT, RComercialDesc, RComercialCUIT, CorredorDesc, CorredorCUIT, DestinatarioDesc, DestinatarioCUIT, Producto, TransportistaCUIT, " & _
-  "               TransportistaDesc, ChoferCUIT, ChoferDesc, ProcedenciaDesc, ProcedenciaCodigoPostal, ProcedenciaCodigoONCAA, ProcedenciaProvinciaDesc, DestinoDesc, " & _
-" EntregadorDesc,Cosecha, CalidadDesc,  DestinoCodigoONCAA, KmARecorrer	,Tarifa ,EstablecimientoDesc    ,CDP.PathImagen      ,CDP.PathImagen2     ,ClienteAuxiliarDesc,CorredorDesc2  CorredorCUIT2,ClientePagadorFleteDesc, " & _
+                strSQL = "SELECT CDP.IdCartaDePorte, CDP.NumeroCartaDePorte, CDP.IdUsuarioIngreso, CDP.FechaIngreso, CDP.Anulada, CDP.FechaAnulacion, " &
+          "                              dbo.fCalidadSerializada( CDP.IdCartaDePorte)  +  CDP.Observaciones   as Observaciones, " &
+        "         CDP.Cantidad, CDP.Cupo, CDP.NetoProc, CDP.BrutoPto, CDP.TaraPto, CDP.NetoPto, CDP.Acoplado, CDP.Humedad, CDP.Merma, HumedadDesnormalizada, CDP.NetoFinal, CDP.CTG, Patente, CDP.Contrato, " &
+      "           CDP.FechaDeCarga, CDP.FechaVencimiento, CDP.SubnumeroVagon, CDP.FechaArribo, CDP.CEE, CDP.FechaDescarga, CDP.Hora, CDP.NRecibo, CDP.CalidadDe, CDP.TaraFinal, CDP.BrutoFinal, TitularDesc, TitularCUIT, " &
+    "             IntermediarioDesc, IntermediarioCUIT, RComercialDesc, RComercialCUIT, CorredorDesc, CorredorCUIT, DestinatarioDesc, DestinatarioCUIT, Producto, TransportistaCUIT, " &
+  "               TransportistaDesc, ChoferCUIT, ChoferDesc, ProcedenciaDesc, ProcedenciaCodigoPostal, ProcedenciaCodigoONCAA, ProcedenciaProvinciaDesc, DestinoDesc, " &
+" EntregadorDesc,Cosecha, CalidadDesc,  DestinoCodigoONCAA, KmARecorrer	,Tarifa ,EstablecimientoDesc    ,CDP.PathImagen      ,CDP.PathImagen2     ,ClienteAuxiliarDesc,CorredorDesc2, CorredorCUIT2,ClientePagadorFleteDesc, " &
 " ProcedenciaProvinciaPartido, ProcedenciaPartidoNormalizadaCodigo, DestinoProvinciaDesc, ProcedenciaPartidoNormalizada, EntregadorCUIT, CodigoAFIP, MermaVolatil,ClaveEncriptada          FROM (" & strSQL & ") AS CDP"
 
 
@@ -5007,7 +5007,6 @@ usuario As String, ConexBDLmaster As String,
 
 
 
-
     Public Shared Function RebindReportViewer_Servidor_SalidaNormal(ByRef oReportViewer As Microsoft.Reporting.WebForms.ReportViewer,
                                                                 ByVal rdlFile As String, parametros As IEnumerable(Of ReportParameter)) As String
 
@@ -5033,7 +5032,7 @@ usuario As String, ConexBDLmaster As String,
         With oReportViewer
             .Reset()
             .ProcessingMode = Microsoft.Reporting.WebForms.ProcessingMode.Remote
-            .Visible = False
+            .Visible = True
 
 
 
@@ -17314,7 +17313,7 @@ usuario As String, ConexBDLmaster As String,
 
 
 
-    Public Shared Function GrabarSituaciones_DLL(listado As List(Of Long), idsituacion As Integer, sObservacionesSituacion As String, SC As String) As String
+    Public Shared Function GrabarSituaciones_DLL(listado As Long(), idsituacion As Integer, sObservacionesSituacion As String, SC As String) As String
 
         Dim msunion As String = ""
 
@@ -17700,6 +17699,8 @@ usuario As String, ConexBDLmaster As String,
                 & "<br/>"
             '& r.Item(5)  & r.Item(0) & " " & r.Item(1)& " " & r.Item(4)  " " & r.Item(7)& " " & r.Item(3)
         Next
+
+        s += "<br/> [1 titular / 2 destinatario / 3 corredor / 4 a tercero / 5 automatico] <br/>"
 
         Return s
 
@@ -22766,6 +22767,28 @@ Public Class UserDatosExtendidosManager
         End Try
     End Function
 
+
+    Public Shared Function TraerRazonSocialDelUsuarioNombre(ByVal UserName As String, ConexBDLmaster As String, SC As String) As String
+
+
+
+        Try
+
+            Using db As New BDLMasterEntities(Auxiliares.FormatearConexParaEntityFrameworkBDLMASTER_2(Encriptar(ConexBDLmaster)))
+
+                Dim uext = (From p In db.UserDatosExtendidos
+                            Join u In db.aspnet_Users On u.UserId Equals p.UserId
+                            Where u.UserName = UserName
+                            Select p).SingleOrDefault
+
+                Return NombreCliente(SC, uext.RazonSocial)
+            End Using
+        Catch ex As Exception
+            ErrHandler2.WriteError(ex)
+            Return ""
+        End Try
+
+    End Function
 
 
     Public Shared Function TraerClientesRelacionadoslDelUsuario(ByVal UserName As String, ConexBDLmaster As String) As String

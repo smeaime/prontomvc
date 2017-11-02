@@ -132,6 +132,7 @@ Partial Class SincronismosAutomaticos
             txtMailRivara.Text = ParametroManager.TraerValorParametro2(HFSC.Value, "CasillaCartasPorteRivara" & pv).ToString
             txtMailSantaCatalina.Text = ParametroManager.TraerValorParametro2(HFSC.Value, "CasillaCartasPorteSantaCatalina" & pv).ToString
             txtMailSyngenta.Text = ParametroManager.TraerValorParametro2(HFSC.Value, "CasillaCartasPorteSyngenta" & pv).ToString
+            txtMailTerraverde.Text = ParametroManager.TraerValorParametro2(HFSC.Value, "CasillaCartasPorteTerraverde" & pv).ToString
             txtMailTomas.Text = ParametroManager.TraerValorParametro2(HFSC.Value, "CasillaCartasPorteTomas" & pv).ToString
             txtMailTecnocampo.Text = ParametroManager.TraerValorParametro2(HFSC.Value, "CasillaCartasPorteTecnocampo" & pv).ToString
             txtMailZENI.Text = ParametroManager.TraerValorParametro2(HFSC.Value, "CasillaCartasPorteZENI" & pv).ToString
@@ -387,6 +388,8 @@ Partial Class SincronismosAutomaticos
         ParametroManager.GuardarValorParametro2(HFSC.Value, "CasillaCartasPorteRivara" & pv, txtMailRivara.Text)
         ParametroManager.GuardarValorParametro2(HFSC.Value, "CasillaCartasPorteSantaCatalina" & pv, txtMailSantaCatalina.Text)
         ParametroManager.GuardarValorParametro2(HFSC.Value, "CasillaCartasPorteSyngenta" & pv, txtMailSyngenta.Text)
+        ParametroManager.GuardarValorParametro2(HFSC.Value, "CasillaCartasPorteTerraverde" & pv, txtMailTerraverde.Text)
+
         ParametroManager.GuardarValorParametro2(HFSC.Value, "CasillaCartasPorteTomas" & pv, txtMailTomas.Text)
         ParametroManager.GuardarValorParametro2(HFSC.Value, "CasillaCartasPorteTecnocampo" & pv, txtMailTecnocampo.Text)
         ParametroManager.GuardarValorParametro2(HFSC.Value, "CasillaCartasPorteZENI" & pv, txtMailZENI.Text)
@@ -482,7 +485,7 @@ Partial Class SincronismosAutomaticos
 
 
 
-
+        If (CheckBoxTerraverde.Checked) Then sTodosErr += Enviar("Terra Verde", txtMailTerraverde.Text, sErr, bVistaPrevia)
         If (CheckBoxTomas.Checked) Then sTodosErr += Enviar("Tomas Hnos", txtMailTomas.Text, sErr, bVistaPrevia)
         If (CheckBoxTecnocampo.Checked) Then sTodosErr += Enviar("Tecnocampo", txtMailTecnocampo.Text, sErr, bVistaPrevia)
         If (CheckBoxZENI.Checked) Then sTodosErr += Enviar("Zeni", txtMailZENI.Text, sErr, bVistaPrevia)

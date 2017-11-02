@@ -1325,7 +1325,7 @@ namespace ProntoMVC.TestsMVC
 
             GetMockedControllerGenerico(c);  //  new ComprobanteProveedorController();
 
-            var result = c.Pedidos_DynamicGridData("NumeroPedido", "desc", 0, 50, false, "");
+            var result = c.Pedidos_DynamicGridData("NumeroPedido", "desc", 0, 50, false, "", "", "");
 
         }
 

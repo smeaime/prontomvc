@@ -82,6 +82,9 @@
     <Reference Include="ClosedXML, Version=0.88.0.0, Culture=neutral, PublicKeyToken=fd1eb21b62ae805b, processorArchitecture=MSIL">
       <HintPath>..\packages\ClosedXML.0.88.0\lib\net452\ClosedXML.dll</HintPath>
     </Reference>
+    <Reference Include="DataAccess">
+      <HintPath>..\packagesotros\DataAccess.dll</HintPath>
+    </Reference>
     <Reference Include="DocumentFormat.OpenXml, Version=2.7.2.0, Culture=neutral, PublicKeyToken=8fb06cb64d019a17, processorArchitecture=MSIL">
       <HintPath>..\packages\DocumentFormat.OpenXml.2.7.2\lib\net40\DocumentFormat.OpenXml.dll</HintPath>
     </Reference>
