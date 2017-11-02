@@ -58,6 +58,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                             <asp:ListItem>Listado general de cartas de porte + copias</asp:ListItem>
                             <asp:ListItem>Listado general de cartas de porte sin copias ni originales copiados</asp:ListItem>
                             <asp:ListItem>Listado general de Cartas de Porte - Con Recibidor Oficial</asp:ListItem>
+                            <asp:ListItem>Listado general de Cartas de Porte - Con tipo de movimiento</asp:ListItem>
                             <asp:ListItem>Listado general formato Cresud</asp:ListItem>
                             <asp:ListItem>Notas de entrega (a matriz de puntos)</asp:ListItem>
                             <asp:ListItem>NotasEntregaCONVERTIR</asp:ListItem>

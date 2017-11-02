@@ -1,0 +1,1232 @@
+
+Log Entry : 
+10/18/2017 11:14:02
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx. Error Message:RODRIGORIOS esta logueado, pero lo redirijo al login porque faltan los datos de session. No deberia mejor mandarlo a SeleccionarEmpresa? Ademas, no hago el LogOut y le queda el cookie!!!
+__________________________
+
+Log Entry : 
+10/18/2017 11:14:03
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartaDePorteInformesConReportViewerSincronismos.BindTypeDropDown() en C:\bdl\pronto\prontoweb\ProntoWeb\CartaDePorteInformesConReportViewerSincronismos.aspx.vb:línea 2946
+App_Web_cartadeporteinformesconreportviewersincronismos.aspx.4199bbd4.he7wa1iu
+__________________________
+
+Log Entry : 
+10/18/2017 11:15:54
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesAccesoClientes.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartaDePorteInformesAccesoClientes.BindTypeDropDown() en C:\bdl\pronto\prontoweb\ProntoWeb\CartaDePorteInformesAccesoClientes.aspx.vb:línea 268
+App_Web_cartadeporteinformesaccesoclientes.aspx.4199bbd4.n1_jmunt
+__________________________
+
+Log Entry : 
+10/18/2017 11:16:08
+Error in: http://localhost:50769/ProntoWeb/CartasDePortes.aspx?tipo=Todas. Error Message:Mariano
+__________________________
+
+Log Entry : 
+10/18/2017 11:16:23
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Generando informe para Listado general de Cartas de Porte - Con tipo de movimiento
+__________________________
+
+Log Entry : 
+10/18/2017 11:17:04
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Generando informe para Listado general de Cartas de Porte - Con tipo de movimiento
+__________________________
+
+Log Entry : 
+10/18/2017 11:17:21
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Generando informe para Listado general de Cartas de Porte - Con tipo de movimiento
+__________________________
+
+Log Entry : 
+10/18/2017 11:17:54
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx. Error Message:Mariano esta logueado, pero lo redirijo al login porque faltan los datos de session. No deberia mejor mandarlo a SeleccionarEmpresa? Ademas, no hago el LogOut y le queda el cookie!!!
+__________________________
+
+Log Entry : 
+10/18/2017 11:18:00
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Generando informe para Listado general de Cartas de Porte - Con tipo de movimiento
+__________________________
+
+Log Entry : 
+10/18/2017 11:18:07
+Error in: http://localhost:50769/Reserved.ReportViewerWebControl.axd?OpType=SessionKeepAlive&ControlID=ec0dd05a01564a918283fbbd7abaf147&Mode=true. Error Message:Microsoft.Reporting.WebForms.AspNetSessionExpiredException
+ASP.NET session has expired or could not be found
+   en Microsoft.Reporting.WebForms.ViewerDataOperation..ctor()
+   en Microsoft.Reporting.WebForms.HttpHandler.GetHandler(String operationType)
+   en Microsoft.Reporting.WebForms.HttpHandler.ProcessRequest(HttpContext context)
+   en System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   en System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+Microsoft.ReportViewer.WebForms
+__________________________
+
+Log Entry : 
+10/18/2017 11:18:10
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Generando informe para Listado general de Cartas de Porte - Con tipo de movimiento
+__________________________
+
+Log Entry : 
+10/18/2017 11:18:16
+Error in: http://localhost:50769/Reserved.ReportViewerWebControl.axd?OpType=SessionKeepAlive&ControlID=ec0dd05a01564a918283fbbd7abaf147&Mode=true. Error Message:Microsoft.Reporting.WebForms.AspNetSessionExpiredException
+ASP.NET session has expired or could not be found
+   en Microsoft.Reporting.WebForms.ViewerDataOperation..ctor()
+   en Microsoft.Reporting.WebForms.HttpHandler.GetHandler(String operationType)
+   en Microsoft.Reporting.WebForms.HttpHandler.ProcessRequest(HttpContext context)
+   en System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   en System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+Microsoft.ReportViewer.WebForms
+__________________________
+
+Log Entry : 
+10/18/2017 11:18:22
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Generando informe para Listado general de Cartas de Porte - Con tipo de movimiento
+__________________________
+
+Log Entry : 
+10/18/2017 11:18:27
+Error in: http://localhost:50769/Reserved.ReportViewerWebControl.axd?OpType=SessionKeepAlive&ControlID=ec0dd05a01564a918283fbbd7abaf147&Mode=true. Error Message:Microsoft.Reporting.WebForms.AspNetSessionExpiredException
+ASP.NET session has expired or could not be found
+   en Microsoft.Reporting.WebForms.ViewerDataOperation..ctor()
+   en Microsoft.Reporting.WebForms.HttpHandler.GetHandler(String operationType)
+   en Microsoft.Reporting.WebForms.HttpHandler.ProcessRequest(HttpContext context)
+   en System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   en System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+Microsoft.ReportViewer.WebForms
+__________________________
+
+Log Entry : 
+10/18/2017 11:18:35
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Generando informe para Listado general de Cartas de Porte - Con tipo de movimiento
+__________________________
+
+Log Entry : 
+10/18/2017 11:18:40
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Generando informe para Listado general de Cartas de Porte - Con tipo de movimiento
+__________________________
+
+Log Entry : 
+10/18/2017 11:18:43
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Generando informe para Listado general de Cartas de Porte - Con tipo de movimiento
+__________________________
+
+Log Entry : 
+10/18/2017 11:19:20
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Generando informe para Listado general de Cartas de Porte - Con tipo de movimiento
+__________________________
+
+Log Entry : 
+10/18/2017 11:31:34
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx. Error Message:Mariano esta logueado, pero lo redirijo al login porque faltan los datos de session. No deberia mejor mandarlo a SeleccionarEmpresa? Ademas, no hago el LogOut y le queda el cookie!!!
+__________________________
+
+Log Entry : 
+10/18/2017 11:34:49
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Generando informe para Listado general de Cartas de Porte - Con tipo de movimiento
+__________________________
+
+Log Entry : 
+10/18/2017 11:35:07
+Error in: http://localhost:50769/ProntoWeb/Principal.aspx. Error Message:Mariano esta logueado, pero lo redirijo al login porque faltan los datos de session. No deberia mejor mandarlo a SeleccionarEmpresa? Ademas, no hago el LogOut y le queda el cookie!!!
+__________________________
+
+Log Entry : 
+10/18/2017 11:35:08
+Error in: http://localhost:50769/ProntoWeb/CartasDePortes.aspx?tipo=Todas. Error Message:Mariano
+__________________________
+
+Log Entry : 
+10/18/2017 11:35:19
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx. Error Message:Generando informe para Listado general de Cartas de Porte - Con tipo de movimiento
+__________________________
+
+Log Entry : 
+10/18/2017 11:35:25
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx. Error Message:Generando informe para Listado general de Cartas de Porte - Con tipo de movimiento
+__________________________
+
+Log Entry : 
+10/18/2017 11:35:32
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx. Error Message:Generando informe para Listado general de Cartas de Porte - Con tipo de movimiento
+__________________________
+
+Log Entry : 
+10/18/2017 11:35:55
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx. Error Message:Generando informe para Listado general de Cartas de Porte - Con tipo de movimiento
+__________________________
+
+Log Entry : 
+10/18/2017 11:41:27
+Error in: http://localhost:50769/ProntoWeb/Principal.aspx. Error Message:Mariano esta logueado, pero lo redirijo al login porque faltan los datos de session. No deberia mejor mandarlo a SeleccionarEmpresa? Ademas, no hago el LogOut y le queda el cookie!!!
+__________________________
+
+Log Entry : 
+10/18/2017 11:41:28
+Error in: http://localhost:50769/ProntoWeb/CartasDePortes.aspx?tipo=Todas. Error Message:Mariano
+__________________________
+
+Log Entry : 
+10/18/2017 11:41:34
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx. Error Message:Generando informe para Listado general de Cartas de Porte - Con tipo de movimiento
+__________________________
+
+Log Entry : 
+10/18/2017 11:41:39
+Error in: http://localhost:50769/Reserved.ReportViewerWebControl.axd?OpType=SessionKeepAlive&ControlID=39150f1a28b946408dd39c698c052bb7&Mode=true. Error Message:Microsoft.Reporting.WebForms.AspNetSessionExpiredException
+ASP.NET session has expired or could not be found
+   en Microsoft.Reporting.WebForms.ViewerDataOperation..ctor()
+   en Microsoft.Reporting.WebForms.HttpHandler.GetHandler(String operationType)
+   en Microsoft.Reporting.WebForms.HttpHandler.ProcessRequest(HttpContext context)
+   en System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   en System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+Microsoft.ReportViewer.WebForms
+__________________________
+
+Log Entry : 
+10/18/2017 11:41:41
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx. Error Message:Generando informe para Listado general de Cartas de Porte - Con tipo de movimiento
+__________________________
+
+Log Entry : 
+10/18/2017 11:41:43
+Error in: http://localhost:50769/Reserved.ReportViewerWebControl.axd?OpType=SessionKeepAlive&ControlID=39150f1a28b946408dd39c698c052bb7&Mode=true. Error Message:Microsoft.Reporting.WebForms.AspNetSessionExpiredException
+ASP.NET session has expired or could not be found
+   en Microsoft.Reporting.WebForms.ViewerDataOperation..ctor()
+   en Microsoft.Reporting.WebForms.HttpHandler.GetHandler(String operationType)
+   en Microsoft.Reporting.WebForms.HttpHandler.ProcessRequest(HttpContext context)
+   en System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   en System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+Microsoft.ReportViewer.WebForms
+__________________________
+
+Log Entry : 
+10/18/2017 11:41:46
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx. Error Message:Generando informe para Listado general de Cartas de Porte - Con tipo de movimiento
+__________________________
+
+Log Entry : 
+10/18/2017 11:41:48
+Error in: http://localhost:50769/Reserved.ReportViewerWebControl.axd?OpType=SessionKeepAlive&ControlID=39150f1a28b946408dd39c698c052bb7&Mode=true. Error Message:Microsoft.Reporting.WebForms.AspNetSessionExpiredException
+ASP.NET session has expired or could not be found
+   en Microsoft.Reporting.WebForms.ViewerDataOperation..ctor()
+   en Microsoft.Reporting.WebForms.HttpHandler.GetHandler(String operationType)
+   en Microsoft.Reporting.WebForms.HttpHandler.ProcessRequest(HttpContext context)
+   en System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   en System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+Microsoft.ReportViewer.WebForms
+__________________________
+
+Log Entry : 
+10/18/2017 11:41:50
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx. Error Message:Generando informe para Listado general de Cartas de Porte - Con tipo de movimiento
+__________________________
+
+Log Entry : 
+10/18/2017 11:41:52
+Error in: http://localhost:50769/Reserved.ReportViewerWebControl.axd?OpType=SessionKeepAlive&ControlID=39150f1a28b946408dd39c698c052bb7&Mode=true. Error Message:Microsoft.Reporting.WebForms.AspNetSessionExpiredException
+ASP.NET session has expired or could not be found
+   en Microsoft.Reporting.WebForms.ViewerDataOperation..ctor()
+   en Microsoft.Reporting.WebForms.HttpHandler.GetHandler(String operationType)
+   en Microsoft.Reporting.WebForms.HttpHandler.ProcessRequest(HttpContext context)
+   en System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   en System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+Microsoft.ReportViewer.WebForms
+__________________________
+
+Log Entry : 
+10/18/2017 11:42:14
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Generando informe para Listado general de cartas de porte (solo originales)
+__________________________
+
+Log Entry : 
+10/18/2017 11:42:15
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:  Informe: Todas (menos las rechazadas),  del 17/10/2017 al 17/10/2017           (Exporta: Entregas, Punto de venta: Todos, Criterio: ALGUNOS)
+__________________________
+
+Log Entry : 
+10/18/2017 11:42:25
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Generando informe para Listado general de Cartas de Porte - Con tipo de movimiento
+__________________________
+
+Log Entry : 
+10/18/2017 11:42:28
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Generando informe para Listado general de Cartas de Porte - Con tipo de movimiento
+__________________________
+
+Log Entry : 
+10/18/2017 11:42:29
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Generando informe para Listado general de Cartas de Porte - Con tipo de movimiento
+__________________________
+
+Log Entry : 
+10/18/2017 11:44:57
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Generando informe para Listado general de Cartas de Porte - Con tipo de movimiento
+__________________________
+
+Log Entry : 
+10/18/2017 11:45:08
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Generando informe para Listado general de Cartas de Porte - Con tipo de movimiento
+__________________________
+
+Log Entry : 
+10/18/2017 11:46:34
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx. Error Message:Mariano esta logueado, pero lo redirijo al login porque faltan los datos de session. No deberia mejor mandarlo a SeleccionarEmpresa? Ademas, no hago el LogOut y le queda el cookie!!!
+__________________________
+
+Log Entry : 
+10/18/2017 11:53:18
+Error in: http://localhost:50769/Reserved.ReportViewerWebControl.axd?OpType=SessionKeepAlive&ControlID=9845d7be110040bd83ca490488744189. Error Message:Microsoft.Reporting.WebForms.AspNetSessionExpiredException
+ASP.NET session has expired or could not be found
+   en Microsoft.Reporting.WebForms.ViewerDataOperation..ctor()
+   en Microsoft.Reporting.WebForms.HttpHandler.GetHandler(String operationType)
+   en Microsoft.Reporting.WebForms.HttpHandler.ProcessRequest(HttpContext context)
+   en System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   en System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+Microsoft.ReportViewer.WebForms
+__________________________
+
+Log Entry : 
+10/18/2017 12:47:25
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Generando informe para Listado general de Cartas de Porte - Con tipo de movimiento
+__________________________
+
+Log Entry : 
+10/18/2017 12:48:36
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Generando informe para Listado general de Cartas de Porte - Con tipo de movimiento
+__________________________
+
+Log Entry : 
+10/18/2017 12:49:40
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:System.Web.HttpParseException
+No se puede crear un objeto de tipo 'System.Web.UI.UpdatePanelUpdateMode' a partir de su representación de cadena '' para la propiedad 'UpdateMode'.
+   en System.Web.UI.TemplateParser.ProcessException(Exception ex)
+   en System.Web.UI.TemplateParser.ParseStringInternal(String text, Encoding fileEncoding)
+   en System.Web.UI.TemplateParser.ParseString(String text, VirtualPath virtualPath, Encoding fileEncoding)
+System.Web
+__________________________
+
+Log Entry : 
+10/18/2017 12:49:52
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Generando informe para Listado general de Cartas de Porte - Con tipo de movimiento
+__________________________
+
+Log Entry : 
+10/18/2017 12:49:57
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Hubo un error al generar el informe. Listado general de Cartas de Porte - Con tipo de movimiento System.InvalidOperationException: El método Update sólo se puede llamar en el control UpdatePanel con el id. 'UpdatePanel2' cuando UpdateMode está establecido en Conditional.
+   en System.Web.UI.UpdatePanel.Update()
+   en CartaDePorteInformesConReportViewerSincronismos.AsignaInformeAlReportViewer(Boolean bDescargaExcel) en C:\bdl\pronto\prontoweb\ProntoWeb\CartaDePorteInformesConReportViewerSincronismos.aspx.vb:línea 3343
+__________________________
+
+Log Entry : 
+10/18/2017 12:49:57
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Hubo un error al generar el informe. Listado general de Cartas de Porte - Con tipo de movimiento System.InvalidOperationException: El método Update sólo se puede llamar en el control UpdatePanel con el id. 'UpdatePanel2' cuando UpdateMode está establecido en Conditional.
+   en System.Web.UI.UpdatePanel.Update()
+   en CartaDePorteInformesConReportViewerSincronismos.AsignaInformeAlReportViewer(Boolean bDescargaExcel) en C:\bdl\pronto\prontoweb\ProntoWeb\CartaDePorteInformesConReportViewerSincronismos.aspx.vb:línea 3343
+__________________________
+
+Log Entry : 
+10/18/2017 12:50:20
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Generando informe para Listado general de Cartas de Porte - Con tipo de movimiento
+__________________________
+
+Log Entry : 
+10/18/2017 12:50:51
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Generando informe para Listado general de Cartas de Porte - Con tipo de movimiento
+__________________________
+
+Log Entry : 
+10/18/2017 12:54:07
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Generando informe para Listado general de Cartas de Porte - Con tipo de movimiento
+__________________________
+
+Log Entry : 
+10/18/2017 12:54:22
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Generando informe para Listado general de Cartas de Porte - Con tipo de movimiento
+__________________________
+
+Log Entry : 
+10/18/2017 13:47:11
+Error in: http://localhost:50769/Reserved.ReportViewerWebControl.axd?OpType=SessionKeepAlive&ControlID=9845d7be110040bd83ca490488744189. Error Message:Microsoft.Reporting.WebForms.AspNetSessionExpiredException
+ASP.NET session has expired or could not be found
+   en Microsoft.Reporting.WebForms.ViewerDataOperation..ctor()
+   en Microsoft.Reporting.WebForms.HttpHandler.GetHandler(String operationType)
+   en Microsoft.Reporting.WebForms.HttpHandler.ProcessRequest(HttpContext context)
+   en System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   en System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+Microsoft.ReportViewer.WebForms
+__________________________
+
+Log Entry : 
+10/18/2017 13:47:11
+Error in: http://localhost:50769/Reserved.ReportViewerWebControl.axd?OpType=SessionKeepAlive&ControlID=9845d7be110040bd83ca490488744189. Error Message:error del AspNetSessionExpiredException
+__________________________
+
+Log Entry : 
+10/18/2017 13:47:47
+Error in: http://localhost:50769/Reserved.ReportViewerWebControl.axd?OpType=SessionKeepAlive&ControlID=b472a96241f44b5786d95cf794f44fac. Error Message:Microsoft.Reporting.WebForms.AspNetSessionExpiredException
+ASP.NET session has expired or could not be found
+   en Microsoft.Reporting.WebForms.ViewerDataOperation..ctor()
+   en Microsoft.Reporting.WebForms.HttpHandler.GetHandler(String operationType)
+   en Microsoft.Reporting.WebForms.HttpHandler.ProcessRequest(HttpContext context)
+   en System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   en System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+Microsoft.ReportViewer.WebForms
+__________________________
+
+Log Entry : 
+10/18/2017 13:47:47
+Error in: http://localhost:50769/Reserved.ReportViewerWebControl.axd?OpType=SessionKeepAlive&ControlID=b472a96241f44b5786d95cf794f44fac. Error Message:error del AspNetSessionExpiredException
+__________________________
+
+Log Entry : 
+10/18/2017 13:55:55
+Error in: http://localhost:50769/Reserved.ReportViewerWebControl.axd?OpType=SessionKeepAlive&ControlID=9845d7be110040bd83ca490488744189. Error Message:Microsoft.Reporting.WebForms.AspNetSessionExpiredException
+ASP.NET session has expired or could not be found
+   en Microsoft.Reporting.WebForms.ViewerDataOperation..ctor()
+   en Microsoft.Reporting.WebForms.HttpHandler.GetHandler(String operationType)
+   en Microsoft.Reporting.WebForms.HttpHandler.ProcessRequest(HttpContext context)
+   en System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   en System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+Microsoft.ReportViewer.WebForms
+__________________________
+
+Log Entry : 
+10/18/2017 13:55:55
+Error in: http://localhost:50769/ProntoWeb/Principal.aspx. Error Message:Mariano esta logueado, pero lo redirijo al login porque faltan los datos de session. No deberia mejor mandarlo a SeleccionarEmpresa? Ademas, no hago el LogOut y le queda el cookie!!!
+__________________________
+
+Log Entry : 
+10/18/2017 13:55:56
+Error in: http://localhost:50769/ProntoWeb/CartasDePortes.aspx?tipo=Todas. Error Message:Mariano
+__________________________
+
+Log Entry : 
+10/18/2017 13:56:33
+Error in: http://localhost:50769/Reserved.ReportViewerWebControl.axd?OpType=SessionKeepAlive&ControlID=b472a96241f44b5786d95cf794f44fac. Error Message:Microsoft.Reporting.WebForms.AspNetSessionExpiredException
+ASP.NET session has expired or could not be found
+   en Microsoft.Reporting.WebForms.ViewerDataOperation..ctor()
+   en Microsoft.Reporting.WebForms.HttpHandler.GetHandler(String operationType)
+   en Microsoft.Reporting.WebForms.HttpHandler.ProcessRequest(HttpContext context)
+   en System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   en System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+Microsoft.ReportViewer.WebForms
+__________________________
+
+Log Entry : 
+10/18/2017 13:59:06
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Generando informe para Listado general de Cartas de Porte - Con tipo de movimiento
+__________________________
+
+Log Entry : 
+10/18/2017 13:59:07
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:  Informe: Todas (menos las rechazadas),  del 17/10/2017 al 17/10/2017           (Exporta: Entregas, Punto de venta: Todos, Criterio: ALGUNOS)
+__________________________
+
+Log Entry : 
+10/18/2017 13:59:08
+Error in: http://localhost:50769/Reserved.ReportViewerWebControl.axd?OpType=SessionKeepAlive&ControlID=b472a96241f44b5786d95cf794f44fac. Error Message:Microsoft.Reporting.WebForms.AspNetSessionExpiredException
+ASP.NET session has expired or could not be found
+   en Microsoft.Reporting.WebForms.ViewerDataOperation..ctor()
+   en Microsoft.Reporting.WebForms.HttpHandler.GetHandler(String operationType)
+   en Microsoft.Reporting.WebForms.HttpHandler.ProcessRequest(HttpContext context)
+   en System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   en System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+Microsoft.ReportViewer.WebForms
+__________________________
+
+Log Entry : 
+10/18/2017 13:59:12
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Generando informe para Listado general de Cartas de Porte - Con tipo de movimiento
+__________________________
+
+Log Entry : 
+10/18/2017 13:59:13
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:  Informe: Todas (menos las rechazadas),  del 17/10/2017 al 17/10/2017           (Exporta: Entregas, Punto de venta: Todos, Criterio: ALGUNOS)
+__________________________
+
+Log Entry : 
+10/18/2017 13:59:14
+Error in: http://localhost:50769/Reserved.ReportViewerWebControl.axd?OpType=SessionKeepAlive&ControlID=b472a96241f44b5786d95cf794f44fac. Error Message:Microsoft.Reporting.WebForms.AspNetSessionExpiredException
+ASP.NET session has expired or could not be found
+   en Microsoft.Reporting.WebForms.ViewerDataOperation..ctor()
+   en Microsoft.Reporting.WebForms.HttpHandler.GetHandler(String operationType)
+   en Microsoft.Reporting.WebForms.HttpHandler.ProcessRequest(HttpContext context)
+   en System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   en System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+Microsoft.ReportViewer.WebForms
+__________________________
+
+Log Entry : 
+10/18/2017 13:59:16
+Error in: http://localhost:50769/Reserved.ReportViewerWebControl.axd?OpType=SessionKeepAlive&ControlID=b472a96241f44b5786d95cf794f44fac. Error Message:Microsoft.Reporting.WebForms.AspNetSessionExpiredException
+ASP.NET session has expired or could not be found
+   en Microsoft.Reporting.WebForms.ViewerDataOperation..ctor()
+   en Microsoft.Reporting.WebForms.HttpHandler.GetHandler(String operationType)
+   en Microsoft.Reporting.WebForms.HttpHandler.ProcessRequest(HttpContext context)
+   en System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   en System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+Microsoft.ReportViewer.WebForms
+__________________________
+
+Log Entry : 
+10/18/2017 14:02:10
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Mariano esta logueado, pero lo redirijo al login porque faltan los datos de session. No deberia mejor mandarlo a SeleccionarEmpresa? Ademas, no hago el LogOut y le queda el cookie!!!
+__________________________
+
+Log Entry : 
+10/18/2017 14:02:13
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Generando informe para Listado general de Cartas de Porte - Con tipo de movimiento
+__________________________
+
+Log Entry : 
+10/18/2017 14:02:14
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:  Informe: Todas (menos las rechazadas),  del 17/10/2017 al 17/10/2017           (Exporta: Entregas, Punto de venta: Todos, Criterio: ALGUNOS)
+__________________________
+
+Log Entry : 
+10/18/2017 14:02:14
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Microsoft.Reporting.WebForms.LocalProcessingException: An error occurred during local report processing. ---> System.ApplicationException: The report definition for report 'C:\bdl\pronto\prontoweb\ProntoWeb\Informes\Listado general de Cartas de Porte (simulando original) - Con tipo de movimiento.rdl' has not been specified ---> System.IO.FileNotFoundException: No se pudo encontrar el archivo 'C:\bdl\pronto\prontoweb\ProntoWeb\Informes\Listado general de Cartas de Porte (simulando original) - Con tipo de movimiento.rdl'.
+   en System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   en System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   en System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share)
+   en Microsoft.ReportingServices.StandalonePreviewStore.GetReportDefinition(ReportID reportId)
+   en Microsoft.Reporting.PreviewStore.GetCompiledReport(CatalogItemContextBase context, Boolean rebuild, Byte[]& reportDefinition, ControlSnapshot& snapshot)
+   --- Fin del seguimiento de la pila de la excepción interna ---
+   en Microsoft.Reporting.PreviewStore.GetCompiledReport(CatalogItemContextBase context, Boolean rebuild, Byte[]& reportDefinition, ControlSnapshot& snapshot)
+   en Microsoft.Reporting.LocalService.GetCompiledReport(CatalogItemContextBase itemContext, Boolean rebuild, ControlSnapshot& snapshot)
+   en Microsoft.Reporting.WebForms.LocalReport.EnsureExecutionSession()
+   --- Fin del seguimiento de la pila de la excepción interna ---
+   en Microsoft.Reporting.WebForms.LocalReport.EnsureExecutionSession()
+   en Microsoft.Reporting.WebForms.LocalReport.GetParameters()
+   en ProntoFuncionesUIWeb.RebindReportViewer(ReportViewer& oReportViewer, String rdlFile, DataTable dt, DataTable dt2, Boolean bDescargaExcel, String& ArchivoExcelDestino, String titulo, Boolean bDescargaHtml) en C:\bdl\pronto\prontoweb\App_Code\vbcode\ManagerDebug\FuncionesUIWeb.vb:línea 757
+__________________________
+
+Log Entry : 
+10/18/2017 14:02:14
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Error al buscar los parametros.  The report definition for report 'C:\bdl\pronto\prontoweb\ProntoWeb\Informes\Listado general de Cartas de Porte (simulando original) - Con tipo de movimiento.rdl' has not been specified
+__________________________
+
+Log Entry : 
+10/18/2017 14:02:14
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Error al buscar los parametros.  No se pudo encontrar el archivo 'C:\bdl\pronto\prontoweb\ProntoWeb\Informes\Listado general de Cartas de Porte (simulando original) - Con tipo de movimiento.rdl'.
+__________________________
+
+Log Entry : 
+10/18/2017 14:02:15
+Error in: http://localhost:50769/Reserved.ReportViewerWebControl.axd?OpType=SessionKeepAlive&ControlID=b472a96241f44b5786d95cf794f44fac. Error Message:Microsoft.Reporting.WebForms.AspNetSessionExpiredException
+ASP.NET session has expired or could not be found
+   en Microsoft.Reporting.WebForms.ViewerDataOperation..ctor()
+   en Microsoft.Reporting.WebForms.HttpHandler.GetHandler(String operationType)
+   en Microsoft.Reporting.WebForms.HttpHandler.ProcessRequest(HttpContext context)
+   en System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   en System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+Microsoft.ReportViewer.WebForms
+__________________________
+
+Log Entry : 
+10/18/2017 14:02:15
+Error in: http://localhost:50769/Reserved.ReportViewerWebControl.axd?OpType=SessionKeepAlive&ControlID=b472a96241f44b5786d95cf794f44fac. Error Message:error del AspNetSessionExpiredException
+__________________________
+
+Log Entry : 
+10/18/2017 14:04:22
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Generando informe para Listado general de Cartas de Porte - Con tipo de movimiento
+__________________________
+
+Log Entry : 
+10/18/2017 14:04:23
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:  Informe: Todas (menos las rechazadas),  del 17/10/2017 al 17/10/2017           (Exporta: Entregas, Punto de venta: Todos, Criterio: ALGUNOS)
+__________________________
+
+Log Entry : 
+10/18/2017 14:04:23
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Microsoft.Reporting.WebForms.LocalProcessingException: An error occurred during local report processing. ---> System.ApplicationException: The report definition for report 'C:\bdl\pronto\prontoweb\ProntoWeb\Informes\Listado general de Cartas de Porte (simulando original) - Con tipo de movimiento.rdl' has not been specified ---> System.IO.FileNotFoundException: No se pudo encontrar el archivo 'C:\bdl\pronto\prontoweb\ProntoWeb\Informes\Listado general de Cartas de Porte (simulando original) - Con tipo de movimiento.rdl'.
+   en System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   en System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   en System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share)
+   en Microsoft.ReportingServices.StandalonePreviewStore.GetReportDefinition(ReportID reportId)
+   en Microsoft.Reporting.PreviewStore.GetCompiledReport(CatalogItemContextBase context, Boolean rebuild, Byte[]& reportDefinition, ControlSnapshot& snapshot)
+   --- Fin del seguimiento de la pila de la excepción interna ---
+   en Microsoft.Reporting.PreviewStore.GetCompiledReport(CatalogItemContextBase context, Boolean rebuild, Byte[]& reportDefinition, ControlSnapshot& snapshot)
+   en Microsoft.Reporting.LocalService.GetCompiledReport(CatalogItemContextBase itemContext, Boolean rebuild, ControlSnapshot& snapshot)
+   en Microsoft.Reporting.WebForms.LocalReport.EnsureExecutionSession()
+   --- Fin del seguimiento de la pila de la excepción interna ---
+   en Microsoft.Reporting.WebForms.LocalReport.EnsureExecutionSession()
+   en Microsoft.Reporting.WebForms.LocalReport.GetParameters()
+   en ProntoFuncionesUIWeb.RebindReportViewer(ReportViewer& oReportViewer, String rdlFile, DataTable dt, DataTable dt2, Boolean bDescargaExcel, String& ArchivoExcelDestino, String titulo, Boolean bDescargaHtml) en C:\bdl\pronto\prontoweb\App_Code\vbcode\ManagerDebug\FuncionesUIWeb.vb:línea 757
+__________________________
+
+Log Entry : 
+10/18/2017 14:04:23
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Error al buscar los parametros.  The report definition for report 'C:\bdl\pronto\prontoweb\ProntoWeb\Informes\Listado general de Cartas de Porte (simulando original) - Con tipo de movimiento.rdl' has not been specified
+__________________________
+
+Log Entry : 
+10/18/2017 14:04:23
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Error al buscar los parametros.  No se pudo encontrar el archivo 'C:\bdl\pronto\prontoweb\ProntoWeb\Informes\Listado general de Cartas de Porte (simulando original) - Con tipo de movimiento.rdl'.
+__________________________
+
+Log Entry : 
+10/18/2017 14:04:24
+Error in: http://localhost:50769/Reserved.ReportViewerWebControl.axd?OpType=SessionKeepAlive&ControlID=b472a96241f44b5786d95cf794f44fac. Error Message:Microsoft.Reporting.WebForms.AspNetSessionExpiredException
+ASP.NET session has expired or could not be found
+   en Microsoft.Reporting.WebForms.ViewerDataOperation..ctor()
+   en Microsoft.Reporting.WebForms.HttpHandler.GetHandler(String operationType)
+   en Microsoft.Reporting.WebForms.HttpHandler.ProcessRequest(HttpContext context)
+   en System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   en System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+Microsoft.ReportViewer.WebForms
+__________________________
+
+Log Entry : 
+10/18/2017 14:04:24
+Error in: http://localhost:50769/Reserved.ReportViewerWebControl.axd?OpType=SessionKeepAlive&ControlID=b472a96241f44b5786d95cf794f44fac. Error Message:error del AspNetSessionExpiredException
+__________________________
+
+Log Entry : 
+10/18/2017 14:06:16
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Generando informe para Listado general de Cartas de Porte - Con tipo de movimiento
+__________________________
+
+Log Entry : 
+10/18/2017 14:06:17
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:  Informe: Todas (menos las rechazadas),  del 17/10/2017 al 17/10/2017           (Exporta: Entregas, Punto de venta: Todos, Criterio: ALGUNOS)
+__________________________
+
+Log Entry : 
+10/18/2017 14:06:18
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Microsoft.Reporting.WebForms.LocalProcessingException: An error occurred during local report processing. ---> Microsoft.Reporting.DefinitionInvalidException: The definition of the report 'ProntoWeb\Informes\Listado general de Cartas de Porte (simulando original) - Con tipo de movimiento.rdl' is invalid. ---> Microsoft.ReportingServices.ReportProcessing.ReportProcessingException: The report definition is not valid.  Details: The report definition has an invalid target namespace 'http://schemas.microsoft.com/sqlserver/reporting/2010/01/reportdefinition' which cannot be upgraded.
+   en Microsoft.ReportingServices.ReportPublishing.ReportPublishing.Phase1(ICatalogItemContext reportContext, Byte[] definition, IChunkFactory createChunkCallback, CheckSharedDataSource checkDataSourceCallback, ResolveTemporaryDataSource resolveTemporaryDataSourceCallback, DataSourceInfoCollection originalDataSources, IDataProtection dataProtection, String& description, String& language, DataSourceInfoCollection& dataSources, Boolean& hasExternalImages, Boolean& hasHyperlinks)
+   en Microsoft.ReportingServices.ReportPublishing.ReportPublishing.CreateIntermediateFormat(ICatalogItemContext reportContext, Byte[] definition, IChunkFactory createChunkCallback, CheckSharedDataSource checkDataSourceCallback, ResolveTemporaryDataSource resolveTemporaryDataSourceCallback, DataSourceInfoCollection originalDataSources, PublishingErrorContext errorContext, AppDomain compilationTempAppDomain, Boolean generateExpressionHostWithRefusedPermissions, IDataProtection dataProtection, String& description, String& language, ParameterInfoCollection& parameters, DataSourceInfoCollection& dataSources, UserLocationFlags& userReferenceLocation, ArrayList& dataSetsName, Boolean& hasExternalImages, Boolean& hasHyperlinks)
+   en Microsoft.ReportingServices.ReportProcessing.ReportProcessing.CompileOdpReport(ICatalogItemContext reportContext, Byte[] reportDefinition, IChunkFactory createChunkCallback, CheckSharedDataSource checkDataSourceCallback, ResolveTemporaryDataSource resolveTemporaryDataSourceCallback, DataSourceInfoCollection originalDataSources, PublishingErrorContext errorContext, AppDomain compilationTempAppDomain, Boolean generateExpressionHostWithRefusedPermissions, IDataProtection dataProtection, String& reportDescription, String& reportLanguage, ParameterInfoCollection& parameters, DataSourceInfoCollection& dataSources, UserLocationFlags& userReferenceLocation, ArrayList& dataSetsName, Boolean& hasExternalImages, Boolean& hasHyperlinks)
+   en Microsoft.ReportingServices.ReportProcessing.ReportProcessing.CreateIntermediateFormat(ICatalogItemContext reportContext, Byte[] reportDefinition, IChunkFactory createChunkFactory, CheckSharedDataSource checkDataSourceCallback, ResolveTemporaryDataSource resolveTemporaryDataSourceCallback, DataSourceInfoCollection originalDataSources, AppDomain compilationTempAppDomain, Boolean generateExpressionHostWithRefusedPermissions, ReportProcessingFlags processingFlags, IDataProtection dataProtection)
+   en Microsoft.Reporting.ReportCompiler.CompileReport(ICatalogItemContext context, Byte[] reportDefinition, Boolean generateExpressionHostWithRefusedPermissions, ControlSnapshot& snapshot)
+   --- Fin del seguimiento de la pila de la excepción interna ---
+   en Microsoft.Reporting.ReportCompiler.CompileReport(ICatalogItemContext context, Byte[] reportDefinition, Boolean generateExpressionHostWithRefusedPermissions, ControlSnapshot& snapshot)
+   en Microsoft.Reporting.PreviewStore.StoredReport.EnsureCompiled(CatalogItemContextBase itemContext)
+   en Microsoft.Reporting.PreviewStore.GetCompiledReport(CatalogItemContextBase context, Boolean rebuild, Byte[]& reportDefinition, ControlSnapshot& snapshot)
+   en Microsoft.Reporting.LocalService.GetCompiledReport(CatalogItemContextBase itemContext, Boolean rebuild, ControlSnapshot& snapshot)
+   en Microsoft.Reporting.WebForms.LocalReport.EnsureExecutionSession()
+   --- Fin del seguimiento de la pila de la excepción interna ---
+   en Microsoft.Reporting.WebForms.LocalReport.EnsureExecutionSession()
+   en Microsoft.Reporting.WebForms.LocalReport.GetParameters()
+   en ProntoFuncionesUIWeb.RebindReportViewer(ReportViewer& oReportViewer, String rdlFile, DataTable dt, DataTable dt2, Boolean bDescargaExcel, String& ArchivoExcelDestino, String titulo, Boolean bDescargaHtml) en C:\bdl\pronto\prontoweb\App_Code\vbcode\ManagerDebug\FuncionesUIWeb.vb:línea 757
+__________________________
+
+Log Entry : 
+10/18/2017 14:06:18
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Error al buscar los parametros.  The definition of the report 'ProntoWeb\Informes\Listado general de Cartas de Porte (simulando original) - Con tipo de movimiento.rdl' is invalid.
+__________________________
+
+Log Entry : 
+10/18/2017 14:06:18
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Error al buscar los parametros.  The report definition is not valid.  Details: The report definition has an invalid target namespace 'http://schemas.microsoft.com/sqlserver/reporting/2010/01/reportdefinition' which cannot be upgraded.
+__________________________
+
+Log Entry : 
+10/18/2017 14:06:18
+Error in: http://localhost:50769/Reserved.ReportViewerWebControl.axd?OpType=SessionKeepAlive&ControlID=b472a96241f44b5786d95cf794f44fac. Error Message:Microsoft.Reporting.WebForms.AspNetSessionExpiredException
+ASP.NET session has expired or could not be found
+   en Microsoft.Reporting.WebForms.ViewerDataOperation..ctor()
+   en Microsoft.Reporting.WebForms.HttpHandler.GetHandler(String operationType)
+   en Microsoft.Reporting.WebForms.HttpHandler.ProcessRequest(HttpContext context)
+   en System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   en System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+Microsoft.ReportViewer.WebForms
+__________________________
+
+Log Entry : 
+10/18/2017 14:06:18
+Error in: http://localhost:50769/Reserved.ReportViewerWebControl.axd?OpType=SessionKeepAlive&ControlID=b472a96241f44b5786d95cf794f44fac. Error Message:error del AspNetSessionExpiredException
+__________________________
+
+Log Entry : 
+10/18/2017 14:12:50
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Generando informe para Listado general de Cartas de Porte - Con tipo de movimiento
+__________________________
+
+Log Entry : 
+10/18/2017 14:12:51
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:  Informe: Todas (menos las rechazadas),  del 17/10/2017 al 17/10/2017           (Exporta: Entregas, Punto de venta: Todos, Criterio: ALGUNOS)
+__________________________
+
+Log Entry : 
+10/18/2017 14:12:53
+Error in: http://localhost:50769/Reserved.ReportViewerWebControl.axd?OpType=SessionKeepAlive&ControlID=b472a96241f44b5786d95cf794f44fac. Error Message:Microsoft.Reporting.WebForms.AspNetSessionExpiredException
+ASP.NET session has expired or could not be found
+   en Microsoft.Reporting.WebForms.ViewerDataOperation..ctor()
+   en Microsoft.Reporting.WebForms.HttpHandler.GetHandler(String operationType)
+   en Microsoft.Reporting.WebForms.HttpHandler.ProcessRequest(HttpContext context)
+   en System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   en System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+Microsoft.ReportViewer.WebForms
+__________________________
+
+Log Entry : 
+10/18/2017 14:12:53
+Error in: http://localhost:50769/Reserved.ReportViewerWebControl.axd?OpType=SessionKeepAlive&ControlID=b472a96241f44b5786d95cf794f44fac. Error Message:error del AspNetSessionExpiredException
+__________________________
+
+Log Entry : 
+10/18/2017 14:12:55
+Error in: http://localhost:50769/Reserved.ReportViewerWebControl.axd?OpType=SessionKeepAlive&ControlID=b472a96241f44b5786d95cf794f44fac. Error Message:Microsoft.Reporting.WebForms.AspNetSessionExpiredException
+ASP.NET session has expired or could not be found
+   en Microsoft.Reporting.WebForms.ViewerDataOperation..ctor()
+   en Microsoft.Reporting.WebForms.HttpHandler.GetHandler(String operationType)
+   en Microsoft.Reporting.WebForms.HttpHandler.ProcessRequest(HttpContext context)
+   en System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   en System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+Microsoft.ReportViewer.WebForms
+__________________________
+
+Log Entry : 
+10/18/2017 14:12:55
+Error in: http://localhost:50769/Reserved.ReportViewerWebControl.axd?OpType=SessionKeepAlive&ControlID=b472a96241f44b5786d95cf794f44fac. Error Message:error del AspNetSessionExpiredException
+__________________________
+
+Log Entry : 
+10/18/2017 14:20:55
+Error in: http://localhost:50769/ProntoWeb/CartaDePorte.aspx?Id=-1. Error Message:PV 0 0
+__________________________
+
+Log Entry : 
+10/18/2017 14:20:57
+Error in: http://localhost:50769/ProntoWeb/WebServiceClientes.asmx/AcopiosPorCliente. Error Message:System.Data.SqlClient.SqlException (0x80131904): Cannot open database "Williams2" requested by the login. The login failed.
+Login failed for user 'sa'.
+   en System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.Open()
+   en System.Data.Linq.SqlClient.SqlConnectionManager.UseConnection(IConnectionUser user)
+   en System.Data.Linq.SqlClient.SqlProvider.get_IsSqlCe()
+   en System.Data.Linq.SqlClient.SqlProvider.InitializeProviderMode()
+   en System.Data.Linq.SqlClient.SqlProvider.System.Data.Linq.Provider.IProvider.Execute(Expression query)
+   en System.Data.Linq.DataQuery`1.System.Collections.Generic.IEnumerable<T>.GetEnumerator()
+   en System.Collections.Generic.List`1..ctor(IEnumerable`1 collection)
+   en System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
+   en CartaDePorteManager.excepcionesAcopios(String SC, Int32 idcliente) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 391
+   en WebServiceClientes.AcopiosPorCliente(String NombreCliente, String SC) en C:\bdl\pronto\prontoweb\App_Code\vbcode\WebServiceClientes.vb:línea 155
+ClientConnectionId:bd92227e-d112-4499-82a1-7ca510d6af15
+Error Number:4060,State:1,Class:11
+__________________________
+
+Log Entry : 
+10/18/2017 14:20:57
+Error in: http://localhost:50769/ProntoWeb/WebServiceClientes.asmx/AcopiosPorCliente. Error Message:System.Data.SqlClient.SqlException (0x80131904): Cannot open database "Williams2" requested by the login. The login failed.
+Login failed for user 'sa'.
+   en System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.Open()
+   en System.Data.Linq.SqlClient.SqlConnectionManager.UseConnection(IConnectionUser user)
+   en System.Data.Linq.SqlClient.SqlProvider.get_IsSqlCe()
+   en System.Data.Linq.SqlClient.SqlProvider.InitializeProviderMode()
+   en System.Data.Linq.SqlClient.SqlProvider.System.Data.Linq.Provider.IProvider.Execute(Expression query)
+   en System.Data.Linq.DataQuery`1.System.Collections.Generic.IEnumerable<T>.GetEnumerator()
+   en System.Collections.Generic.List`1..ctor(IEnumerable`1 collection)
+   en System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
+   en CartaDePorteManager.excepcionesAcopios(String SC, Int32 idcliente) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 391
+   en WebServiceClientes.AcopiosPorCliente(String NombreCliente, String SC) en C:\bdl\pronto\prontoweb\App_Code\vbcode\WebServiceClientes.vb:línea 155
+ClientConnectionId:bd92227e-d112-4499-82a1-7ca510d6af15
+Error Number:4060,State:1,Class:11
+__________________________
+
+Log Entry : 
+10/18/2017 14:20:57
+Error in: http://localhost:50769/ProntoWeb/WebServiceClientes.asmx/AcopiosPorCliente. Error Message:System.Data.SqlClient.SqlException (0x80131904): Cannot open database "Williams2" requested by the login. The login failed.
+Login failed for user 'sa'.
+   en System.Data.SqlClient.SqlInternalConnectionTds..ctor(DbConnectionPoolIdentity identity, SqlConnectionString connectionOptions, SqlCredential credential, Object providerInfo, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance, SqlConnectionString userConnectionOptions, SessionData reconnectSessionData, DbConnectionPool pool, String accessToken, Boolean applyTransientFaultHandling)
+   en System.Data.SqlClient.SqlConnectionFactory.CreateConnection(DbConnectionOptions options, DbConnectionPoolKey poolKey, Object poolGroupProviderInfo, DbConnectionPool pool, DbConnection owningConnection, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionFactory.CreatePooledConnection(DbConnectionPool pool, DbConnection owningObject, DbConnectionOptions options, DbConnectionPoolKey poolKey, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionPool.CreateObject(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   en System.Data.ProviderBase.DbConnectionPool.UserCreateRequest(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   en System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.Open()
+   en System.Data.Linq.SqlClient.SqlConnectionManager.UseConnection(IConnectionUser user)
+   en System.Data.Linq.SqlClient.SqlProvider.get_IsSqlCe()
+   en System.Data.Linq.SqlClient.SqlProvider.InitializeProviderMode()
+   en System.Data.Linq.SqlClient.SqlProvider.System.Data.Linq.Provider.IProvider.Execute(Expression query)
+   en System.Data.Linq.DataQuery`1.System.Collections.Generic.IEnumerable<T>.GetEnumerator()
+   en System.Collections.Generic.List`1..ctor(IEnumerable`1 collection)
+   en System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
+   en CartaDePorteManager.excepcionesAcopios(String SC, Int32 idcliente) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 391
+   en WebServiceClientes.AcopiosPorCliente(String NombreCliente, String SC) en C:\bdl\pronto\prontoweb\App_Code\vbcode\WebServiceClientes.vb:línea 155
+ClientConnectionId:bd92227e-d112-4499-82a1-7ca510d6af15
+Error Number:4060,State:1,Class:11
+__________________________
+
+Log Entry : 
+10/18/2017 14:23:21
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Generando informe para Listado general de Cartas de Porte - Con tipo de movimiento
+__________________________
+
+Log Entry : 
+10/18/2017 14:23:23
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:  Informe: Todas (menos las rechazadas),  del 17/10/2017 al 17/10/2017           (Exporta: Entregas, Punto de venta: Todos, Criterio: ALGUNOS)
+__________________________
+
+Log Entry : 
+10/18/2017 14:23:23
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Microsoft.Reporting.WebForms.LocalProcessingException: An error occurred during local report processing. ---> Microsoft.Reporting.DefinitionInvalidException: The definition of the report 'ProntoWeb\Informes\Listado general de Cartas de Porte (simulando original) - Con tipo de movimiento.rdl' is invalid. ---> Microsoft.ReportingServices.ReportProcessing.ReportProcessingException: An unexpected error occurred while compiling expressions. Native compiler return value: ‘[BC40000] 'RequestMinimum' is obsolete: 'Assembly level declarative security is obsolete and is no longer enforced by the CLR by default. See http://go.microsoft.com/fwlink/?LinkID=155570 for more information.'.’.
+   en Microsoft.ReportingServices.RdlExpressions.ExprHostCompiler.ParseErrors(CompilerResults results, List`1 codeClassInstDecls)
+   en Microsoft.ReportingServices.RdlExpressions.ExprHostCompiler.InternalCompile(Report report, AppDomain compilationTempAppDomain, Boolean refusePermissions)
+   en Microsoft.ReportingServices.RdlExpressions.ExprHostCompiler.<>c__DisplayClass1.<Compile>b__0()
+   en Microsoft.ReportingServices.Diagnostics.RevertImpersonationContext.<>c__DisplayClass1.<Run>b__0(Object state)
+   en System.Security.SecurityContext.Run(SecurityContext securityContext, ContextCallback callback, Object state)
+   en Microsoft.ReportingServices.Diagnostics.RevertImpersonationContext.Run(ContextBody callback)
+   en Microsoft.ReportingServices.RdlExpressions.ExprHostCompiler.Compile(Report report, AppDomain compilationTempAppDomain, Boolean refusePermissions)
+   en Microsoft.ReportingServices.ReportPublishing.ReportPublishing.Phase3(ICatalogItemContext reportContext, ParameterInfoCollection& parameters, AppDomain compilationTempAppDomain, Boolean generateExpressionHostWithRefusedPermissions, Dictionary`2& groupingExprCountAtScope)
+   en Microsoft.ReportingServices.ReportPublishing.ReportPublishing.CreateIntermediateFormat(ICatalogItemContext reportContext, Byte[] definition, IChunkFactory createChunkCallback, CheckSharedDataSource checkDataSourceCallback, ResolveTemporaryDataSource resolveTemporaryDataSourceCallback, DataSourceInfoCollection originalDataSources, PublishingErrorContext errorContext, AppDomain compilationTempAppDomain, Boolean generateExpressionHostWithRefusedPermissions, IDataProtection dataProtection, String& description, String& language, ParameterInfoCollection& parameters, DataSourceInfoCollection& dataSources, UserLocationFlags& userReferenceLocation, ArrayList& dataSetsName, Boolean& hasExternalImages, Boolean& hasHyperlinks)
+   en Microsoft.ReportingServices.ReportProcessing.ReportProcessing.CompileOdpReport(ICatalogItemContext reportContext, Byte[] reportDefinition, IChunkFactory createChunkCallback, CheckSharedDataSource checkDataSourceCallback, ResolveTemporaryDataSource resolveTemporaryDataSourceCallback, DataSourceInfoCollection originalDataSources, PublishingErrorContext errorContext, AppDomain compilationTempAppDomain, Boolean generateExpressionHostWithRefusedPermissions, IDataProtection dataProtection, String& reportDescription, String& reportLanguage, ParameterInfoCollection& parameters, DataSourceInfoCollection& dataSources, UserLocationFlags& userReferenceLocation, ArrayList& dataSetsName, Boolean& hasExternalImages, Boolean& hasHyperlinks)
+   en Microsoft.ReportingServices.ReportProcessing.ReportProcessing.CreateIntermediateFormat(ICatalogItemContext reportContext, Byte[] reportDefinition, IChunkFactory createChunkFactory, CheckSharedDataSource checkDataSourceCallback, ResolveTemporaryDataSource resolveTemporaryDataSourceCallback, DataSourceInfoCollection originalDataSources, AppDomain compilationTempAppDomain, Boolean generateExpressionHostWithRefusedPermissions, ReportProcessingFlags processingFlags, IDataProtection dataProtection)
+   en Microsoft.Reporting.ReportCompiler.CompileReport(ICatalogItemContext context, Byte[] reportDefinition, Boolean generateExpressionHostWithRefusedPermissions, ControlSnapshot& snapshot)
+   --- Fin del seguimiento de la pila de la excepción interna ---
+   en Microsoft.Reporting.ReportCompiler.CompileReport(ICatalogItemContext context, Byte[] reportDefinition, Boolean generateExpressionHostWithRefusedPermissions, ControlSnapshot& snapshot)
+   en Microsoft.Reporting.PreviewStore.StoredReport.EnsureCompiled(CatalogItemContextBase itemContext)
+   en Microsoft.Reporting.PreviewStore.GetCompiledReport(CatalogItemContextBase context, Boolean rebuild, Byte[]& reportDefinition, ControlSnapshot& snapshot)
+   en Microsoft.Reporting.LocalService.GetCompiledReport(CatalogItemContextBase itemContext, Boolean rebuild, ControlSnapshot& snapshot)
+   en Microsoft.Reporting.WebForms.LocalReport.EnsureExecutionSession()
+   --- Fin del seguimiento de la pila de la excepción interna ---
+   en Microsoft.Reporting.WebForms.LocalReport.EnsureExecutionSession()
+   en Microsoft.Reporting.WebForms.LocalReport.GetParameters()
+   en ProntoFuncionesUIWeb.RebindReportViewer(ReportViewer& oReportViewer, String rdlFile, DataTable dt, DataTable dt2, Boolean bDescargaExcel, String& ArchivoExcelDestino, String titulo, Boolean bDescargaHtml) en C:\bdl\pronto\prontoweb\App_Code\vbcode\ManagerDebug\FuncionesUIWeb.vb:línea 757
+__________________________
+
+Log Entry : 
+10/18/2017 14:23:23
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Error al buscar los parametros.  The definition of the report 'ProntoWeb\Informes\Listado general de Cartas de Porte (simulando original) - Con tipo de movimiento.rdl' is invalid.
+__________________________
+
+Log Entry : 
+10/18/2017 14:23:23
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Error al buscar los parametros.  An unexpected error occurred while compiling expressions. Native compiler return value: ‘[BC40000] 'RequestMinimum' is obsolete: 'Assembly level declarative security is obsolete and is no longer enforced by the CLR by default. See http://go.microsoft.com/fwlink/?LinkID=155570 for more information.'.’.
+__________________________
+
+Log Entry : 
+10/18/2017 14:23:24
+Error in: http://localhost:50769/Reserved.ReportViewerWebControl.axd?OpType=SessionKeepAlive&ControlID=b472a96241f44b5786d95cf794f44fac. Error Message:Microsoft.Reporting.WebForms.AspNetSessionExpiredException
+ASP.NET session has expired or could not be found
+   en Microsoft.Reporting.WebForms.ViewerDataOperation..ctor()
+   en Microsoft.Reporting.WebForms.HttpHandler.GetHandler(String operationType)
+   en Microsoft.Reporting.WebForms.HttpHandler.ProcessRequest(HttpContext context)
+   en System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   en System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+Microsoft.ReportViewer.WebForms
+__________________________
+
+Log Entry : 
+10/18/2017 14:23:24
+Error in: http://localhost:50769/Reserved.ReportViewerWebControl.axd?OpType=SessionKeepAlive&ControlID=b472a96241f44b5786d95cf794f44fac. Error Message:error del AspNetSessionExpiredException
+__________________________
+
+Log Entry : 
+10/18/2017 14:25:13
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Generando informe para Listado general de Cartas de Porte - Con tipo de movimiento
+__________________________
+
+Log Entry : 
+10/18/2017 14:25:15
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:  Informe: Todas (menos las rechazadas),  del 17/10/2017 al 17/10/2017           (Exporta: Entregas, Punto de venta: Todos, Criterio: ALGUNOS)
+__________________________
+
+Log Entry : 
+10/18/2017 14:25:15
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Microsoft.Reporting.WebForms.LocalProcessingException: An error occurred during local report processing. ---> Microsoft.Reporting.DefinitionInvalidException: The definition of the report 'ProntoWeb\Informes\Listado general de Cartas de Porte (simulando original) - Con tipo de movimiento.rdl' is invalid. ---> Microsoft.ReportingServices.ReportProcessing.ReportProcessingException: An unexpected error occurred while compiling expressions. Native compiler return value: ‘[BC40000] 'RequestMinimum' is obsolete: 'Assembly level declarative security is obsolete and is no longer enforced by the CLR by default. See http://go.microsoft.com/fwlink/?LinkID=155570 for more information.'.’.
+   en Microsoft.ReportingServices.RdlExpressions.ExprHostCompiler.ParseErrors(CompilerResults results, List`1 codeClassInstDecls)
+   en Microsoft.ReportingServices.RdlExpressions.ExprHostCompiler.InternalCompile(Report report, AppDomain compilationTempAppDomain, Boolean refusePermissions)
+   en Microsoft.ReportingServices.RdlExpressions.ExprHostCompiler.<>c__DisplayClass1.<Compile>b__0()
+   en Microsoft.ReportingServices.Diagnostics.RevertImpersonationContext.<>c__DisplayClass1.<Run>b__0(Object state)
+   en System.Security.SecurityContext.Run(SecurityContext securityContext, ContextCallback callback, Object state)
+   en Microsoft.ReportingServices.Diagnostics.RevertImpersonationContext.Run(ContextBody callback)
+   en Microsoft.ReportingServices.RdlExpressions.ExprHostCompiler.Compile(Report report, AppDomain compilationTempAppDomain, Boolean refusePermissions)
+   en Microsoft.ReportingServices.ReportPublishing.ReportPublishing.Phase3(ICatalogItemContext reportContext, ParameterInfoCollection& parameters, AppDomain compilationTempAppDomain, Boolean generateExpressionHostWithRefusedPermissions, Dictionary`2& groupingExprCountAtScope)
+   en Microsoft.ReportingServices.ReportPublishing.ReportPublishing.CreateIntermediateFormat(ICatalogItemContext reportContext, Byte[] definition, IChunkFactory createChunkCallback, CheckSharedDataSource checkDataSourceCallback, ResolveTemporaryDataSource resolveTemporaryDataSourceCallback, DataSourceInfoCollection originalDataSources, PublishingErrorContext errorContext, AppDomain compilationTempAppDomain, Boolean generateExpressionHostWithRefusedPermissions, IDataProtection dataProtection, String& description, String& language, ParameterInfoCollection& parameters, DataSourceInfoCollection& dataSources, UserLocationFlags& userReferenceLocation, ArrayList& dataSetsName, Boolean& hasExternalImages, Boolean& hasHyperlinks)
+   en Microsoft.ReportingServices.ReportProcessing.ReportProcessing.CompileOdpReport(ICatalogItemContext reportContext, Byte[] reportDefinition, IChunkFactory createChunkCallback, CheckSharedDataSource checkDataSourceCallback, ResolveTemporaryDataSource resolveTemporaryDataSourceCallback, DataSourceInfoCollection originalDataSources, PublishingErrorContext errorContext, AppDomain compilationTempAppDomain, Boolean generateExpressionHostWithRefusedPermissions, IDataProtection dataProtection, String& reportDescription, String& reportLanguage, ParameterInfoCollection& parameters, DataSourceInfoCollection& dataSources, UserLocationFlags& userReferenceLocation, ArrayList& dataSetsName, Boolean& hasExternalImages, Boolean& hasHyperlinks)
+   en Microsoft.ReportingServices.ReportProcessing.ReportProcessing.CreateIntermediateFormat(ICatalogItemContext reportContext, Byte[] reportDefinition, IChunkFactory createChunkFactory, CheckSharedDataSource checkDataSourceCallback, ResolveTemporaryDataSource resolveTemporaryDataSourceCallback, DataSourceInfoCollection originalDataSources, AppDomain compilationTempAppDomain, Boolean generateExpressionHostWithRefusedPermissions, ReportProcessingFlags processingFlags, IDataProtection dataProtection)
+   en Microsoft.Reporting.ReportCompiler.CompileReport(ICatalogItemContext context, Byte[] reportDefinition, Boolean generateExpressionHostWithRefusedPermissions, ControlSnapshot& snapshot)
+   --- Fin del seguimiento de la pila de la excepción interna ---
+   en Microsoft.Reporting.ReportCompiler.CompileReport(ICatalogItemContext context, Byte[] reportDefinition, Boolean generateExpressionHostWithRefusedPermissions, ControlSnapshot& snapshot)
+   en Microsoft.Reporting.PreviewStore.StoredReport.EnsureCompiled(CatalogItemContextBase itemContext)
+   en Microsoft.Reporting.PreviewStore.GetCompiledReport(CatalogItemContextBase context, Boolean rebuild, Byte[]& reportDefinition, ControlSnapshot& snapshot)
+   en Microsoft.Reporting.LocalService.GetCompiledReport(CatalogItemContextBase itemContext, Boolean rebuild, ControlSnapshot& snapshot)
+   en Microsoft.Reporting.WebForms.LocalReport.EnsureExecutionSession()
+   --- Fin del seguimiento de la pila de la excepción interna ---
+   en Microsoft.Reporting.WebForms.LocalReport.EnsureExecutionSession()
+   en Microsoft.Reporting.WebForms.LocalReport.GetParameters()
+   en ProntoFuncionesUIWeb.RebindReportViewer(ReportViewer& oReportViewer, String rdlFile, DataTable dt, DataTable dt2, Boolean bDescargaExcel, String& ArchivoExcelDestino, String titulo, Boolean bDescargaHtml) en C:\bdl\pronto\prontoweb\App_Code\vbcode\ManagerDebug\FuncionesUIWeb.vb:línea 757
+__________________________
+
+Log Entry : 
+10/18/2017 14:25:15
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Error al buscar los parametros.  The definition of the report 'ProntoWeb\Informes\Listado general de Cartas de Porte (simulando original) - Con tipo de movimiento.rdl' is invalid.
+__________________________
+
+Log Entry : 
+10/18/2017 14:25:15
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Error al buscar los parametros.  An unexpected error occurred while compiling expressions. Native compiler return value: ‘[BC40000] 'RequestMinimum' is obsolete: 'Assembly level declarative security is obsolete and is no longer enforced by the CLR by default. See http://go.microsoft.com/fwlink/?LinkID=155570 for more information.'.’.
+__________________________
+
+Log Entry : 
+10/18/2017 14:25:15
+Error in: http://localhost:50769/Reserved.ReportViewerWebControl.axd?OpType=SessionKeepAlive&ControlID=b472a96241f44b5786d95cf794f44fac. Error Message:Microsoft.Reporting.WebForms.AspNetSessionExpiredException
+ASP.NET session has expired or could not be found
+   en Microsoft.Reporting.WebForms.ViewerDataOperation..ctor()
+   en Microsoft.Reporting.WebForms.HttpHandler.GetHandler(String operationType)
+   en Microsoft.Reporting.WebForms.HttpHandler.ProcessRequest(HttpContext context)
+   en System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   en System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+Microsoft.ReportViewer.WebForms
+__________________________
+
+Log Entry : 
+10/18/2017 14:25:15
+Error in: http://localhost:50769/Reserved.ReportViewerWebControl.axd?OpType=SessionKeepAlive&ControlID=b472a96241f44b5786d95cf794f44fac. Error Message:error del AspNetSessionExpiredException
+__________________________
+
+Log Entry : 
+10/18/2017 14:25:20
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Generando informe para Listado general de Cartas de Porte - Con tipo de movimiento
+__________________________
+
+Log Entry : 
+10/18/2017 14:25:21
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:  Informe: Todas (menos las rechazadas),  del 17/10/2017 al 17/10/2017           (Exporta: Entregas, Punto de venta: Todos, Criterio: ALGUNOS)
+__________________________
+
+Log Entry : 
+10/18/2017 14:25:21
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Microsoft.Reporting.WebForms.LocalProcessingException: An error occurred during local report processing. ---> Microsoft.Reporting.DefinitionInvalidException: The definition of the report 'ProntoWeb\Informes\Listado general de Cartas de Porte (simulando original) - Con tipo de movimiento.rdl' is invalid. ---> Microsoft.ReportingServices.ReportProcessing.ReportProcessingException: An unexpected error occurred while compiling expressions. Native compiler return value: ‘[BC40000] 'RequestMinimum' is obsolete: 'Assembly level declarative security is obsolete and is no longer enforced by the CLR by default. See http://go.microsoft.com/fwlink/?LinkID=155570 for more information.'.’.
+   en Microsoft.ReportingServices.RdlExpressions.ExprHostCompiler.ParseErrors(CompilerResults results, List`1 codeClassInstDecls)
+   en Microsoft.ReportingServices.RdlExpressions.ExprHostCompiler.InternalCompile(Report report, AppDomain compilationTempAppDomain, Boolean refusePermissions)
+   en Microsoft.ReportingServices.RdlExpressions.ExprHostCompiler.<>c__DisplayClass1.<Compile>b__0()
+   en Microsoft.ReportingServices.Diagnostics.RevertImpersonationContext.<>c__DisplayClass1.<Run>b__0(Object state)
+   en System.Security.SecurityContext.Run(SecurityContext securityContext, ContextCallback callback, Object state)
+   en Microsoft.ReportingServices.Diagnostics.RevertImpersonationContext.Run(ContextBody callback)
+   en Microsoft.ReportingServices.RdlExpressions.ExprHostCompiler.Compile(Report report, AppDomain compilationTempAppDomain, Boolean refusePermissions)
+   en Microsoft.ReportingServices.ReportPublishing.ReportPublishing.Phase3(ICatalogItemContext reportContext, ParameterInfoCollection& parameters, AppDomain compilationTempAppDomain, Boolean generateExpressionHostWithRefusedPermissions, Dictionary`2& groupingExprCountAtScope)
+   en Microsoft.ReportingServices.ReportPublishing.ReportPublishing.CreateIntermediateFormat(ICatalogItemContext reportContext, Byte[] definition, IChunkFactory createChunkCallback, CheckSharedDataSource checkDataSourceCallback, ResolveTemporaryDataSource resolveTemporaryDataSourceCallback, DataSourceInfoCollection originalDataSources, PublishingErrorContext errorContext, AppDomain compilationTempAppDomain, Boolean generateExpressionHostWithRefusedPermissions, IDataProtection dataProtection, String& description, String& language, ParameterInfoCollection& parameters, DataSourceInfoCollection& dataSources, UserLocationFlags& userReferenceLocation, ArrayList& dataSetsName, Boolean& hasExternalImages, Boolean& hasHyperlinks)
+   en Microsoft.ReportingServices.ReportProcessing.ReportProcessing.CompileOdpReport(ICatalogItemContext reportContext, Byte[] reportDefinition, IChunkFactory createChunkCallback, CheckSharedDataSource checkDataSourceCallback, ResolveTemporaryDataSource resolveTemporaryDataSourceCallback, DataSourceInfoCollection originalDataSources, PublishingErrorContext errorContext, AppDomain compilationTempAppDomain, Boolean generateExpressionHostWithRefusedPermissions, IDataProtection dataProtection, String& reportDescription, String& reportLanguage, ParameterInfoCollection& parameters, DataSourceInfoCollection& dataSources, UserLocationFlags& userReferenceLocation, ArrayList& dataSetsName, Boolean& hasExternalImages, Boolean& hasHyperlinks)
+   en Microsoft.ReportingServices.ReportProcessing.ReportProcessing.CreateIntermediateFormat(ICatalogItemContext reportContext, Byte[] reportDefinition, IChunkFactory createChunkFactory, CheckSharedDataSource checkDataSourceCallback, ResolveTemporaryDataSource resolveTemporaryDataSourceCallback, DataSourceInfoCollection originalDataSources, AppDomain compilationTempAppDomain, Boolean generateExpressionHostWithRefusedPermissions, ReportProcessingFlags processingFlags, IDataProtection dataProtection)
+   en Microsoft.Reporting.ReportCompiler.CompileReport(ICatalogItemContext context, Byte[] reportDefinition, Boolean generateExpressionHostWithRefusedPermissions, ControlSnapshot& snapshot)
+   --- Fin del seguimiento de la pila de la excepción interna ---
+   en Microsoft.Reporting.ReportCompiler.CompileReport(ICatalogItemContext context, Byte[] reportDefinition, Boolean generateExpressionHostWithRefusedPermissions, ControlSnapshot& snapshot)
+   en Microsoft.Reporting.PreviewStore.StoredReport.EnsureCompiled(CatalogItemContextBase itemContext)
+   en Microsoft.Reporting.PreviewStore.GetCompiledReport(CatalogItemContextBase context, Boolean rebuild, Byte[]& reportDefinition, ControlSnapshot& snapshot)
+   en Microsoft.Reporting.LocalService.GetCompiledReport(CatalogItemContextBase itemContext, Boolean rebuild, ControlSnapshot& snapshot)
+   en Microsoft.Reporting.WebForms.LocalReport.EnsureExecutionSession()
+   --- Fin del seguimiento de la pila de la excepción interna ---
+   en Microsoft.Reporting.WebForms.LocalReport.EnsureExecutionSession()
+   en Microsoft.Reporting.WebForms.LocalReport.GetParameters()
+   en ProntoFuncionesUIWeb.RebindReportViewer(ReportViewer& oReportViewer, String rdlFile, DataTable dt, DataTable dt2, Boolean bDescargaExcel, String& ArchivoExcelDestino, String titulo, Boolean bDescargaHtml) en C:\bdl\pronto\prontoweb\App_Code\vbcode\ManagerDebug\FuncionesUIWeb.vb:línea 757
+__________________________
+
+Log Entry : 
+10/18/2017 14:25:21
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Error al buscar los parametros.  The definition of the report 'ProntoWeb\Informes\Listado general de Cartas de Porte (simulando original) - Con tipo de movimiento.rdl' is invalid.
+__________________________
+
+Log Entry : 
+10/18/2017 14:25:21
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Error al buscar los parametros.  An unexpected error occurred while compiling expressions. Native compiler return value: ‘[BC40000] 'RequestMinimum' is obsolete: 'Assembly level declarative security is obsolete and is no longer enforced by the CLR by default. See http://go.microsoft.com/fwlink/?LinkID=155570 for more information.'.’.
+__________________________
+
+Log Entry : 
+10/18/2017 14:25:21
+Error in: http://localhost:50769/Reserved.ReportViewerWebControl.axd?OpType=SessionKeepAlive&ControlID=b472a96241f44b5786d95cf794f44fac. Error Message:Microsoft.Reporting.WebForms.AspNetSessionExpiredException
+ASP.NET session has expired or could not be found
+   en Microsoft.Reporting.WebForms.ViewerDataOperation..ctor()
+   en Microsoft.Reporting.WebForms.HttpHandler.GetHandler(String operationType)
+   en Microsoft.Reporting.WebForms.HttpHandler.ProcessRequest(HttpContext context)
+   en System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   en System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+Microsoft.ReportViewer.WebForms
+__________________________
+
+Log Entry : 
+10/18/2017 14:25:21
+Error in: http://localhost:50769/Reserved.ReportViewerWebControl.axd?OpType=SessionKeepAlive&ControlID=b472a96241f44b5786d95cf794f44fac. Error Message:error del AspNetSessionExpiredException
+__________________________
+
+Log Entry : 
+10/18/2017 14:25:53
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Generando informe para Listado general de Cartas de Porte - Con tipo de movimiento
+__________________________
+
+Log Entry : 
+10/18/2017 14:25:54
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:  Informe: Todas (menos las rechazadas),  del 17/10/2017 al 17/10/2017           (Exporta: Entregas, Punto de venta: Todos, Criterio: ALGUNOS)
+__________________________
+
+Log Entry : 
+10/18/2017 14:25:55
+Error in: http://localhost:50769/Reserved.ReportViewerWebControl.axd?OpType=SessionKeepAlive&ControlID=b472a96241f44b5786d95cf794f44fac. Error Message:Microsoft.Reporting.WebForms.AspNetSessionExpiredException
+ASP.NET session has expired or could not be found
+   en Microsoft.Reporting.WebForms.ViewerDataOperation..ctor()
+   en Microsoft.Reporting.WebForms.HttpHandler.GetHandler(String operationType)
+   en Microsoft.Reporting.WebForms.HttpHandler.ProcessRequest(HttpContext context)
+   en System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   en System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+Microsoft.ReportViewer.WebForms
+__________________________
+
+Log Entry : 
+10/18/2017 14:25:55
+Error in: http://localhost:50769/Reserved.ReportViewerWebControl.axd?OpType=SessionKeepAlive&ControlID=b472a96241f44b5786d95cf794f44fac. Error Message:error del AspNetSessionExpiredException
+__________________________
+
+Log Entry : 
+10/18/2017 14:25:57
+Error in: http://localhost:50769/Reserved.ReportViewerWebControl.axd?OpType=SessionKeepAlive&ControlID=b472a96241f44b5786d95cf794f44fac. Error Message:Microsoft.Reporting.WebForms.AspNetSessionExpiredException
+ASP.NET session has expired or could not be found
+   en Microsoft.Reporting.WebForms.ViewerDataOperation..ctor()
+   en Microsoft.Reporting.WebForms.HttpHandler.GetHandler(String operationType)
+   en Microsoft.Reporting.WebForms.HttpHandler.ProcessRequest(HttpContext context)
+   en System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   en System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+Microsoft.ReportViewer.WebForms
+__________________________
+
+Log Entry : 
+10/18/2017 14:25:57
+Error in: http://localhost:50769/Reserved.ReportViewerWebControl.axd?OpType=SessionKeepAlive&ControlID=b472a96241f44b5786d95cf794f44fac. Error Message:error del AspNetSessionExpiredException
+__________________________
+
+Log Entry : 
+10/18/2017 14:26:04
+Error in: http://localhost:50769/Reserved.ReportViewerWebControl.axd?OpType=SessionKeepAlive&ControlID=b472a96241f44b5786d95cf794f44fac. Error Message:Microsoft.Reporting.WebForms.AspNetSessionExpiredException
+ASP.NET session has expired or could not be found
+   en Microsoft.Reporting.WebForms.ViewerDataOperation..ctor()
+   en Microsoft.Reporting.WebForms.HttpHandler.GetHandler(String operationType)
+   en Microsoft.Reporting.WebForms.HttpHandler.ProcessRequest(HttpContext context)
+   en System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   en System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+Microsoft.ReportViewer.WebForms
+__________________________
+
+Log Entry : 
+10/18/2017 14:26:04
+Error in: http://localhost:50769/Reserved.ReportViewerWebControl.axd?OpType=SessionKeepAlive&ControlID=b472a96241f44b5786d95cf794f44fac. Error Message:error del AspNetSessionExpiredException
+__________________________
+
+Log Entry : 
+10/18/2017 14:26:06
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Generando informe para Listado general de Cartas de Porte - Con tipo de movimiento
+__________________________
+
+Log Entry : 
+10/18/2017 14:26:09
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:  Informe: Todas (menos las rechazadas),  del 01/09/2017 al 30/09/2017           (Exporta: Entregas, Punto de venta: Todos, Criterio: ALGUNOS)
+__________________________
+
+Log Entry : 
+10/18/2017 14:26:09
+Error in: http://localhost:50769/Reserved.ReportViewerWebControl.axd?OpType=SessionKeepAlive&ControlID=b472a96241f44b5786d95cf794f44fac. Error Message:Microsoft.Reporting.WebForms.AspNetSessionExpiredException
+ASP.NET session has expired or could not be found
+   en Microsoft.Reporting.WebForms.ViewerDataOperation..ctor()
+   en Microsoft.Reporting.WebForms.HttpHandler.GetHandler(String operationType)
+   en Microsoft.Reporting.WebForms.HttpHandler.ProcessRequest(HttpContext context)
+   en System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   en System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+Microsoft.ReportViewer.WebForms
+__________________________
+
+Log Entry : 
+10/18/2017 14:26:09
+Error in: http://localhost:50769/Reserved.ReportViewerWebControl.axd?OpType=SessionKeepAlive&ControlID=b472a96241f44b5786d95cf794f44fac. Error Message:error del AspNetSessionExpiredException
+__________________________
+
+Log Entry : 
+10/18/2017 14:26:11
+Error in: http://localhost:50769/Reserved.ReportViewerWebControl.axd?OpType=SessionKeepAlive&ControlID=b472a96241f44b5786d95cf794f44fac. Error Message:Microsoft.Reporting.WebForms.AspNetSessionExpiredException
+ASP.NET session has expired or could not be found
+   en Microsoft.Reporting.WebForms.ViewerDataOperation..ctor()
+   en Microsoft.Reporting.WebForms.HttpHandler.GetHandler(String operationType)
+   en Microsoft.Reporting.WebForms.HttpHandler.ProcessRequest(HttpContext context)
+   en System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   en System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+Microsoft.ReportViewer.WebForms
+__________________________
+
+Log Entry : 
+10/18/2017 14:26:11
+Error in: http://localhost:50769/Reserved.ReportViewerWebControl.axd?OpType=SessionKeepAlive&ControlID=b472a96241f44b5786d95cf794f44fac. Error Message:error del AspNetSessionExpiredException
+__________________________
+
+Log Entry : 
+10/18/2017 14:26:25
+Error in: http://localhost:50769/Reserved.ReportViewerWebControl.axd?OpType=SessionKeepAlive&ControlID=b472a96241f44b5786d95cf794f44fac. Error Message:Microsoft.Reporting.WebForms.AspNetSessionExpiredException
+ASP.NET session has expired or could not be found
+   en Microsoft.Reporting.WebForms.ViewerDataOperation..ctor()
+   en Microsoft.Reporting.WebForms.HttpHandler.GetHandler(String operationType)
+   en Microsoft.Reporting.WebForms.HttpHandler.ProcessRequest(HttpContext context)
+   en System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   en System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+Microsoft.ReportViewer.WebForms
+__________________________
+
+Log Entry : 
+10/18/2017 14:26:25
+Error in: http://localhost:50769/Reserved.ReportViewerWebControl.axd?OpType=SessionKeepAlive&ControlID=b472a96241f44b5786d95cf794f44fac. Error Message:error del AspNetSessionExpiredException
+__________________________
+
+Log Entry : 
+10/18/2017 14:26:30
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:Generando informe para Listado general de Cartas de Porte - Con tipo de movimiento
+__________________________
+
+Log Entry : 
+10/18/2017 14:26:40
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesConReportViewerSincronismos.aspx?tipo=Confirmados. Error Message:  Informe: Todas (menos las rechazadas),  del 27/06/2017 al 30/09/2017           (Exporta: Entregas, Punto de venta: Todos, Criterio: ALGUNOS)
+__________________________
+
+Log Entry : 
+10/18/2017 14:26:41
+Error in: http://localhost:50769/Reserved.ReportViewerWebControl.axd?OpType=SessionKeepAlive&ControlID=b472a96241f44b5786d95cf794f44fac. Error Message:Microsoft.Reporting.WebForms.AspNetSessionExpiredException
+ASP.NET session has expired or could not be found
+   en Microsoft.Reporting.WebForms.ViewerDataOperation..ctor()
+   en Microsoft.Reporting.WebForms.HttpHandler.GetHandler(String operationType)
+   en Microsoft.Reporting.WebForms.HttpHandler.ProcessRequest(HttpContext context)
+   en System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   en System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+Microsoft.ReportViewer.WebForms
+__________________________
+
+Log Entry : 
+10/18/2017 14:26:41
+Error in: http://localhost:50769/Reserved.ReportViewerWebControl.axd?OpType=SessionKeepAlive&ControlID=b472a96241f44b5786d95cf794f44fac. Error Message:error del AspNetSessionExpiredException
+__________________________
+
+Log Entry : 
+10/18/2017 14:26:43
+Error in: http://localhost:50769/Reserved.ReportViewerWebControl.axd?OpType=SessionKeepAlive&ControlID=b472a96241f44b5786d95cf794f44fac. Error Message:Microsoft.Reporting.WebForms.AspNetSessionExpiredException
+ASP.NET session has expired or could not be found
+   en Microsoft.Reporting.WebForms.ViewerDataOperation..ctor()
+   en Microsoft.Reporting.WebForms.HttpHandler.GetHandler(String operationType)
+   en Microsoft.Reporting.WebForms.HttpHandler.ProcessRequest(HttpContext context)
+   en System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   en System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+Microsoft.ReportViewer.WebForms
+__________________________
+
+Log Entry : 
+10/18/2017 14:26:43
+Error in: http://localhost:50769/Reserved.ReportViewerWebControl.axd?OpType=SessionKeepAlive&ControlID=b472a96241f44b5786d95cf794f44fac. Error Message:error del AspNetSessionExpiredException
+__________________________
+
+Log Entry : 
+10/18/2017 15:17:45
+Error in: http://localhost:50769/ProntoWeb/ControlesDiarios.aspx. Error Message:Mariano esta logueado, pero lo redirijo al login porque faltan los datos de session. No deberia mejor mandarlo a SeleccionarEmpresa? Ademas, no hago el LogOut y le queda el cookie!!!
+__________________________
+
+Log Entry : 
+10/18/2017 15:17:52
+Error in: http://localhost:50769/ProntoWeb/Handler.ashx. Error Message: -  Error en ExecDinamico. - System.Data.SqlClient.SqlException (0x80131904): Cannot open database "Williams2" requested by the login. The login failed.
+Login failed for user 'sa'.
+   en System.Data.SqlClient.SqlInternalConnectionTds..ctor(DbConnectionPoolIdentity identity, SqlConnectionString connectionOptions, SqlCredential credential, Object providerInfo, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance, SqlConnectionString userConnectionOptions, SessionData reconnectSessionData, DbConnectionPool pool, String accessToken, Boolean applyTransientFaultHandling)
+   en System.Data.SqlClient.SqlConnectionFactory.CreateConnection(DbConnectionOptions options, DbConnectionPoolKey poolKey, Object poolGroupProviderInfo, DbConnectionPool pool, DbConnection owningConnection, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionFactory.CreatePooledConnection(DbConnectionPool pool, DbConnection owningObject, DbConnectionOptions options, DbConnectionPoolKey poolKey, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionPool.CreateObject(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   en System.Data.ProviderBase.DbConnectionPool.UserCreateRequest(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   en System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.Open()
+   en Pronto.ERP.Dal.GeneralDB.ExecDinamico(String SC, String comandoSQLdinamico, Int32 timeoutSegundos)
+ClientConnectionId:05bcbf42-baa2-47e7-b5ba-9f8d8db95645
+Error Number:4060,State:1,Class:11 - Empleados_TX_UsuarioNT 'Mariano' 8 0
+__________________________
+
+Log Entry : 
+10/18/2017 15:17:52
+Error in: http://localhost:50769/ProntoWeb/Handler.ashx. Error Message:Cannot open database "Williams2" requested by the login. The login failed.
+Login failed for user 'sa'.
+__________________________
+
+Log Entry : 
+10/18/2017 15:17:52
+Error in: http://localhost:50769/ProntoWeb/Handler.ashx. Error Message:System.Data.SqlClient.SqlException
+Cannot open database "Williams2" requested by the login. The login failed.
+Login failed for user 'sa'.
+   en System.Data.SqlClient.SqlInternalConnectionTds..ctor(DbConnectionPoolIdentity identity, SqlConnectionString connectionOptions, SqlCredential credential, Object providerInfo, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance, SqlConnectionString userConnectionOptions, SessionData reconnectSessionData, DbConnectionPool pool, String accessToken, Boolean applyTransientFaultHandling)
+   en System.Data.SqlClient.SqlConnectionFactory.CreateConnection(DbConnectionOptions options, DbConnectionPoolKey poolKey, Object poolGroupProviderInfo, DbConnectionPool pool, DbConnection owningConnection, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionFactory.CreatePooledConnection(DbConnectionPool pool, DbConnection owningObject, DbConnectionOptions options, DbConnectionPoolKey poolKey, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionPool.CreateObject(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   en System.Data.ProviderBase.DbConnectionPool.UserCreateRequest(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   en System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.Open()
+   en Pronto.ERP.Dal.GeneralDB.ExecDinamico(String SC, String comandoSQLdinamico, Int32 timeoutSegundos)
+   en Pronto.ERP.Bll.EntidadManager.ExecDinamico(String SC, String sComandoDinamico, Int32 timeoutSegundos) en C:\bdl\pronto\BussinessLogic\EntidadManager.vb:línea 868
+   en JQGridHandler.ControlesDiarios_DynamicGridData(String sidx, String sord, Int32 page, Int32 rows, Boolean _search, String filters, String FechaInicial, String FechaFinal, Int32 puntovent, Int32 iddestino) en c:\bdl\pronto\prontoweb\ProntoWeb\Handler.ashx:línea 275
+   en JQGridHandler.ProcessRequest(HttpContext context) en c:\bdl\pronto\prontoweb\ProntoWeb\Handler.ashx:línea 211
+   en System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   en System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+.Net SqlClient Data Provider
+__________________________
+
+Log Entry : 
+10/18/2017 15:17:52
+Error in: http://localhost:50769/ProntoWeb/Handler.ashx. Error Message: -  Error en ExecDinamico. - System.Data.SqlClient.SqlException (0x80131904): Cannot open database "Williams2" requested by the login. The login failed.
+Login failed for user 'sa'.
+   en System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.Open()
+   en Pronto.ERP.Dal.GeneralDB.ExecDinamico(String SC, String comandoSQLdinamico, Int32 timeoutSegundos)
+ClientConnectionId:05bcbf42-baa2-47e7-b5ba-9f8d8db95645
+Error Number:4060,State:1,Class:11 - EXEC sp_who2 8 0
+__________________________
+
+Log Entry : 
+10/18/2017 15:17:52
+Error in: http://localhost:50769/ProntoWeb/Handler.ashx. Error Message:Cannot open database "Williams2" requested by the login. The login failed.
+Login failed for user 'sa'.
+__________________________
+
+Log Entry : 
+10/18/2017 15:17:52
+Error in: http://localhost:50769/ProntoWeb/Handler.ashx. Error Message:System.Data.SqlClient.SqlException
+Cannot open database "Williams2" requested by the login. The login failed.
+Login failed for user 'sa'.
+   en System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.Open()
+   en Pronto.ERP.Dal.GeneralDB.ExecDinamico(String SC, String comandoSQLdinamico, Int32 timeoutSegundos)
+   en Pronto.ERP.Bll.EntidadManager.ExecDinamico(String SC, String sComandoDinamico, Int32 timeoutSegundos) en C:\bdl\pronto\BussinessLogic\EntidadManager.vb:línea 868
+   en CartaDePorteManager.Log_sp_who2(String sc) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 8802
+   en ASP.global_asax.Application_Error(Object sender, EventArgs e) en C:\bdl\pronto\prontoweb\global.asax:línea 433
+.Net SqlClient Data Provider
+__________________________

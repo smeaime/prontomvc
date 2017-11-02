@@ -24,6 +24,10 @@ Imports Pronto.ERP.Bll.EntidadManager
 
 Imports System.Web.Services
 
+
+
+
+
 Partial Class SituacionCalidadMovil
     Inherits System.Web.UI.Page
 
@@ -75,14 +79,15 @@ Partial Class SituacionCalidadMovil
             '////////////////////////////////////////////
 
 
-            Me.Title = "Situacion"
+            Me.Title = "Cartas de Porte"
 
             BindTypeDropDown()
-            refrescaPeriodo()
 
+
+            'refrescaPeriodo()
             cmbPeriodo.Text = "Personalizar"
-            txtFechaDesde.Text = DateAdd(DateInterval.Day, -2, Today)
-            txtFechaHasta.Text = Today
+            'txtFechaDesde.Text = DateAdd(DateInterval.Day, -2, Today)
+            'txtFechaHasta.Text = Today
             cmbEstado.Enabled = False
 
 
@@ -111,15 +116,22 @@ Partial Class SituacionCalidadMovil
             lblRazonSocial.Text = rs
 
 
+
             BloqueosDeEdicion()
+
         End If
 
 
         'AjaxControlToolkit.ToolkitScriptManager.GetCurrent(Me.Page).RegisterPostBackControl(informe)
         AjaxControlToolkit.ToolkitScriptManager.GetCurrent(Me.Page).RegisterPostBackControl(btnExportarGrilla)
+        'AjaxControlToolkit.ToolkitScriptManager.RegisterStartupScript(Me, Me.GetType(), "StartUpScript1", "$('#Lista').trigger('reloadGrid');", True)
 
         'AutoCompleteExtender2.ContextKey = HFSC.Value
         AutoCompleteExtender26.ContextKey = HFSC.Value
+
+
+        txtFechaDesde.Enabled = True
+        txtFechaHasta.Enabled = True
 
     End Sub
 
@@ -164,6 +176,15 @@ Partial Class SituacionCalidadMovil
         Catch ex As Exception
             ErrHandler2.WriteError(ex)
         End Try
+
+
+        If Not (Roles.IsUserInRole(Membership.GetUser().UserName, "WilliamsComercial") Or Roles.IsUserInRole(Membership.GetUser().UserName, "WilliamsAdmin") Or Roles.IsUserInRole(Membership.GetUser().UserName, "WilliamsFacturacion")) Then
+            btnsituacion.Visible = False
+        End If
+
+
+
+
     End Sub
 
 
@@ -337,7 +358,7 @@ Partial Class SituacionCalidadMovil
         FormsAuthentication.SignOut()
         Roles.DeleteCookie()
         Session.Clear()
-        'FormsAuthentication.RedirectToLoginPage();
+        FormsAuthentication.RedirectToLoginPage()
     End Sub
 
 

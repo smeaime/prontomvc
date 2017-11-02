@@ -444,9 +444,9 @@ Public Module ProntoFuncionesUIWeb
     End Sub
 
 
-    Public Function RebindReportViewer_Servidor(ByRef oReportViewer As Microsoft.Reporting.WebForms.ReportViewer, ByVal rdlFile As String, ByVal dt As DataTable, _
-                                       Optional ByVal dt2 As DataTable = Nothing, Optional ByVal bDescargaExcel As Boolean = False, _
-                                       Optional ByRef ArchivoExcelDestino As String = "", Optional ByVal titulo As String = "", _
+    Public Function RebindReportViewer_Servidor(ByRef oReportViewer As Microsoft.Reporting.WebForms.ReportViewer, ByVal rdlFile As String, ByVal dt As DataTable,
+                                       Optional ByVal dt2 As DataTable = Nothing, Optional ByVal bDescargaExcel As Boolean = False,
+                                       Optional ByRef ArchivoExcelDestino As String = "", Optional ByVal titulo As String = "",
                                        Optional ByVal bDescargaHtml As Boolean = False) As String
         'http://forums.asp.net/t/1183208.aspx
 
@@ -605,9 +605,9 @@ Public Module ProntoFuncionesUIWeb
 
 
                 Try
-                    bytes = .ServerReport.Render( _
-                          "HTML4.0", Nothing, mimeType, encoding, _
-                            extension, _
+                    bytes = .ServerReport.Render(
+                          "HTML4.0", Nothing, mimeType, encoding,
+                            extension,
                            streamids, warnings)
 
                 Catch e As System.Exception
@@ -632,9 +632,9 @@ Public Module ProntoFuncionesUIWeb
                 .Visible = False
 
                 Try
-                    bytes = .ServerReport.Render( _
-                          "Excel", Nothing, mimeType, encoding, _
-                            extension, _
+                    bytes = .ServerReport.Render(
+                          "Excel", Nothing, mimeType, encoding,
+                            extension,
                            streamids, warnings)
 
                 Catch e As System.Exception
@@ -1288,6 +1288,133 @@ Public Module ProntoFuncionesUIWeb
         'este me salvo! http://social.msdn.microsoft.com/Forums/en-US/winformsdatacontrols/thread/bd60c434-f61a-4252-a7f9-1606fdca6b41
 
         'http://social.msdn.microsoft.com/Forums/en-US/vsreportcontrols/thread/505ffb1c-324e-4623-9cce-d84662d92b1a
+    End Function
+
+
+
+
+    Public Function RebindReportViewer_Servidor_SalidaNormal(ByRef oReportViewer As Microsoft.Reporting.WebForms.ReportViewer,
+                                                                ByVal rdlFile As String, parametros As IEnumerable(Of ReportParameter)) As String
+
+
+        'errores
+        '   rsCredentialsNotSpecified     porque el datasource TestHarcodeada tiene las credenciales no configuradas para windows integrated
+        '   rsProcessingAborted           porque la cuenta que corre el repservice no tiene permisos: 
+        '                                         GRANT  Execute on [dbo].your_object to [public]
+        '                                         REVOKE Execute on [dbo].your_object to [public]
+        '                                         grant execute on wCar...  to [NT AUTHORITY\NETWORK SERVICE]
+        '                                         grant execute on wCar...  to [NT AUTHORITY\ANONYMOUS LOGON]
+        '                                         grant execute on wCart... to public
+
+        If parametros IsNot Nothing Then
+            For Each i In parametros
+                If i Is Nothing Then
+                    Throw New Exception("Te falta por lo menos un parametro. Recordá que el array que pasás se dimensiona con un elemento de más")
+                End If
+            Next
+        End If
+
+
+        With oReportViewer
+            .Reset()
+            .ProcessingMode = Microsoft.Reporting.WebForms.ProcessingMode.Remote
+            .Visible = True
+
+
+
+            'ReportViewerRemoto.ServerReport.ReportServerUrl = new Uri("http://localhost/ReportServer");
+            .ServerReport.ReportServerUrl = New Uri(ConfigurationManager.AppSettings("ReportServer"))
+            .ProcessingMode = ProcessingMode.Remote
+            ' IReportServerCredentials irsc = new CustomReportCredentials("administrador", ".xza2190lkm.", "");
+            Dim irsc As IReportServerCredentials = New CustomReportCredentials(ConfigurationManager.AppSettings("ReportUser"), ConfigurationManager.AppSettings("ReportPass"), ConfigurationManager.AppSettings("ReportDomain"))
+            .ServerReport.ReportServerCredentials = irsc
+            .ShowCredentialPrompts = False
+            .ShowParameterPrompts = False
+
+
+
+            'rdlFile = "/Pronto informes/" + "Resumen Cuenta Corriente Acreedores"
+            'Dim reportName = "Listado general de Cartas de Porte (simulando original) con foto Buscador sin Webservice"
+            If rdlFile = "" Then
+
+            End If
+            rdlFile = rdlFile.Replace(".rdl", "")
+            rdlFile = "/Pronto informes/" & rdlFile
+
+
+
+            With .ServerReport
+                .ReportPath = rdlFile
+
+
+
+
+
+
+                Try
+                    If parametros IsNot Nothing Then oReportViewer.ServerReport.SetParameters(parametros)
+                    'sera porque el informe tiene el datasource TestHarcodeada con credenciales NO en "integrated security"?
+
+
+
+
+
+
+                Catch ex As Exception
+                    'sera porque el informe tiene el datasource TestHarcodeada con credenciales NO en "integrated security"?
+
+                    'unauthorized
+                    '-es por la cuenta windows que usa repservices o por la cuenta sql que usa el datasource del informe?
+                    '-ojo tambien conque no se puede usar el alias bdlconsultores.sytes.net
+                    '-será por la cuenta built-in que usa el reporting para correr?
+                    '-habilitar errores remotos del reporting services. agregar usuario/permisos en la base sql para el usuario windows que ejecuta el informa
+
+
+
+                    ErrHandler2.WriteError(ex.ToString)
+                    Dim inner As Exception = ex.InnerException
+                    While Not (inner Is Nothing)
+                        If System.Diagnostics.Debugger.IsAttached() Then
+                            MsgBox(inner.Message)
+                            Stop
+                        End If
+                        ErrHandler2.WriteError("Error al buscar los parametros.  " & inner.Message)
+                        inner = inner.InnerException
+                    End While
+                End Try
+
+                '/////////////////////
+                '/////////////////////
+                '/////////////////////
+                '/////////////////////
+
+            End With
+
+
+            .DocumentMapCollapsed = True
+
+
+            .ServerReport.Refresh()
+
+            '/////////////////////
+            '/////////////////////
+
+
+            .Visible = True
+
+
+
+
+
+
+        End With
+
+        '////////////////////////////////////////////
+
+        'este me salvo! http://social.msdn.microsoft.com/Forums/en-US/winformsdatacontrols/thread/bd60c434-f61a-4252-a7f9-1606fdca6b41
+
+        'http://social.msdn.microsoft.com/Forums/en-US/vsreportcontrols/thread/505ffb1c-324e-4623-9cce-d84662d92b1a
+
     End Function
 
 
