@@ -1,0 +1,122 @@
+
+Log Entry : 
+10/20/2017 09:48:48
+Error in: http://localhost:50769/ProntoWeb/CartasDePortes.aspx?tipo=Todas. Error Message:Mariano
+__________________________
+
+Log Entry : 
+10/20/2017 09:50:37
+Error in: http://localhost:50769/ProntoWeb/ControlesDiarios.aspx/ExportarGrillaNormal. Error Message:Por generar el archivo C:\bdl\pronto\prontoweb\DataBackupear\Listado 20Oct.2017_095009.xls
+__________________________
+
+Log Entry : 
+10/20/2017 09:50:37
+Error in: http://localhost:50769/ProntoWeb/ControlesDiarios.aspx/ExportarGrillaNormal. Error Message:Archivo generado C:\bdl\pronto\prontoweb\DataBackupear\Listado 20Oct.2017_095009.xls
+__________________________
+
+Log Entry : 
+10/20/2017 09:51:45
+Error in: http://localhost:50769/ProntoWeb/ControlesDiarios.aspx/ExportarGrillaNormal. Error Message: -  Error en ExecDinamico. - System.Data.SqlClient.SqlException (0x80131904): Cannot open database "Williams2" requested by the login. The login failed.
+Login failed for user 'sa'.
+   en System.Data.SqlClient.SqlInternalConnectionTds..ctor(DbConnectionPoolIdentity identity, SqlConnectionString connectionOptions, SqlCredential credential, Object providerInfo, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance, SqlConnectionString userConnectionOptions, SessionData reconnectSessionData, DbConnectionPool pool, String accessToken, Boolean applyTransientFaultHandling)
+   en System.Data.SqlClient.SqlConnectionFactory.CreateConnection(DbConnectionOptions options, DbConnectionPoolKey poolKey, Object poolGroupProviderInfo, DbConnectionPool pool, DbConnection owningConnection, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionFactory.CreatePooledConnection(DbConnectionPool pool, DbConnection owningObject, DbConnectionOptions options, DbConnectionPoolKey poolKey, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionPool.CreateObject(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   en System.Data.ProviderBase.DbConnectionPool.UserCreateRequest(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   en System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.Open()
+   en Pronto.ERP.Dal.GeneralDB.ExecDinamico(String SC, String comandoSQLdinamico, Int32 timeoutSegundos)
+ClientConnectionId:e8f5989a-192a-48ad-bfc4-1c16ab8c8f15
+Error Number:4060,State:1,Class:11 - Empleados_TX_UsuarioNT '' 8 0
+__________________________
+
+Log Entry : 
+10/20/2017 09:51:45
+Error in: http://localhost:50769/ProntoWeb/ControlesDiarios.aspx/ExportarGrillaNormal. Error Message:Cannot open database "Williams2" requested by the login. The login failed.
+Login failed for user 'sa'.
+__________________________
+
+Log Entry : 
+10/20/2017 09:54:05
+Error in: http://localhost:50769/ProntoWeb/ControlesDiarios.aspx. Error Message:Mariano esta logueado, pero lo redirijo al login porque faltan los datos de session. No deberia mejor mandarlo a SeleccionarEmpresa? Ademas, no hago el LogOut y le queda el cookie!!!
+__________________________
+
+Log Entry : 
+10/20/2017 09:54:48
+Error in: http://localhost:50769/ProntoWeb/ControlesDiarios.aspx/ExportarGrillaNormal. Error Message:Por generar el archivo C:\bdl\pronto\prontoweb\DataBackupear\Listado 20Oct.2017_095437.xls
+__________________________
+
+Log Entry : 
+10/20/2017 09:54:48
+Error in: http://localhost:50769/ProntoWeb/ControlesDiarios.aspx/ExportarGrillaNormal. Error Message:Archivo generado C:\bdl\pronto\prontoweb\DataBackupear\Listado 20Oct.2017_095437.xls
+__________________________
+
+Log Entry : 
+10/20/2017 09:56:19
+Error in: http://localhost:50769/ProntoWeb/ControlesDiarios.aspx. Error Message:Mariano esta logueado, pero lo redirijo al login porque faltan los datos de session. No deberia mejor mandarlo a SeleccionarEmpresa? Ademas, no hago el LogOut y le queda el cookie!!!
+__________________________
+
+Log Entry : 
+10/20/2017 09:56:44
+Error in: http://localhost:50769/ProntoWeb/ControlesDiarios.aspx/ExportarGrillaNormal. Error Message:Por generar el archivo C:\bdl\pronto\prontoweb\DataBackupear\Listado 20Oct.2017_095634.xls
+__________________________
+
+Log Entry : 
+10/20/2017 09:56:44
+Error in: http://localhost:50769/ProntoWeb/ControlesDiarios.aspx/ExportarGrillaNormal. Error Message:Archivo generado C:\bdl\pronto\prontoweb\DataBackupear\Listado 20Oct.2017_095634.xls
+__________________________
+
+Log Entry : 
+10/20/2017 09:57:44
+Error in: http://localhost:50769/ProntoWeb/ControlesDiarios.aspx/ExportarGrillaNormal. Error Message:Por generar el archivo C:\bdl\pronto\prontoweb\DataBackupear\Listado 20Oct.2017_095735.xls
+__________________________
+
+Log Entry : 
+10/20/2017 09:57:44
+Error in: http://localhost:50769/ProntoWeb/ControlesDiarios.aspx/ExportarGrillaNormal. Error Message:Archivo generado C:\bdl\pronto\prontoweb\DataBackupear\Listado 20Oct.2017_095735.xls
+__________________________
+
+Log Entry : 
+10/20/2017 11:20:23
+Error in: http://localhost:50769/ProntoWeb/Principal.aspx. Error Message:Mariano esta logueado, pero lo redirijo al login porque faltan los datos de session. No deberia mejor mandarlo a SeleccionarEmpresa? Ademas, no hago el LogOut y le queda el cookie!!!
+__________________________
+
+Log Entry : 
+10/20/2017 11:20:24
+Error in: http://localhost:50769/ProntoWeb/CartasDePortes.aspx?tipo=Todas. Error Message:Mariano
+__________________________
+
+Log Entry : 
+10/20/2017 11:21:01
+Error in: http://localhost:50769/ProntoWeb/SincronismosAutomaticos.aspx. Error Message:System.Exception
+TERRA VERDE No existe ese sincro
+   en Pronto.ERP.Bll.SincronismosWilliamsManager.ElegirCombosSegunParametro(String sSincronismo, TextBox txtTitular, TextBox txtCorredor, TextBox txtIntermediario, TextBox txtDestinatario, TextBox txtRcomercial, TextBox txtPopClienteAuxiliar, DropDownList cmbEstado, DropDownList cmbCriterioWHERE, DropDownList DropDownList2, String SC) en C:\bdl\pronto\BussinessLogic\SincronismosWilliamsManager.vb:línea 421
+   en SincronismosAutomaticos.Enviar(String sincro, String sEmail, String& sErr, Boolean bvistaPrevia) en C:\bdl\pronto\prontoweb\ProntoWeb\SincronismosAutomaticos.aspx.vb:línea 547
+BusinessLogic
+__________________________
+
+Log Entry : 
+10/20/2017 11:23:26
+Error in: http://localhost:50769/ProntoWeb/CartasDePortes.aspx?tipo=Todas. Error Message:Mariano
+__________________________
+
+Log Entry : 
+10/20/2017 11:32:47
+Error in: http://localhost:50769/ProntoWeb/Principal.aspx. Error Message:Mariano esta logueado, pero lo redirijo al login porque faltan los datos de session. No deberia mejor mandarlo a SeleccionarEmpresa? Ademas, no hago el LogOut y le queda el cookie!!!
+__________________________
+
+Log Entry : 
+10/20/2017 11:32:47
+Error in: http://localhost:50769/ProntoWeb/CartasDePortes.aspx?tipo=Todas. Error Message:Mariano
+__________________________
+
+Log Entry : 
+10/20/2017 11:34:01
+Error in: http://localhost:50769/ProntoWeb/SincronismosAutomaticos.aspx. Error Message:Generando sincro para Terra Verde
+__________________________

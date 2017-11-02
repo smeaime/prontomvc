@@ -898,6 +898,17 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                     autocomplete="off"></asp:TextBox>
             </div>
         </div>
+                <div class="row">
+            <div class="col-md-2">
+                <asp:CheckBox ID="CheckBoxTerraVerde" runat="server" Checked="true" />
+                Terra Verde
+            </div>
+            <div class="col-md-10">
+                <asp:TextBox CssClass="col-md-8" ID="txtMailTerraverde" runat="server" Text='' AutoPostBack="false"
+                    autocomplete="off"></asp:TextBox>
+            </div>
+        </div>
+
         <div class="row">
             <div class="col-md-2">
                 <asp:CheckBox ID="CheckBoxTomas" runat="server" Checked="true" />

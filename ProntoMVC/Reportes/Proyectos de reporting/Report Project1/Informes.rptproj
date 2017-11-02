@@ -542,6 +542,10 @@
       <Name>Williams - Sincro LaBiznaga2.rdl</Name>
       <FullPath>Williams - Sincro LaBiznaga2.rdl</FullPath>
     </ProjectItem>
+    <ProjectItem>
+      <Name>Carta Porte - ControlesDiarios.rdl</Name>
+      <FullPath>Carta Porte - ControlesDiarios.rdl</FullPath>
+    </ProjectItem>
   </Reports>
   <Configurations>
     <Configuration>
@@ -594,7 +598,7 @@
       <Options>
         <OutputPath>bin\Debug</OutputPath>
         <TargetServerVersion>SSRS2008R2</TargetServerVersion>
-        <TargetServerURL>http://sqlmvc/ReportServer</TargetServerURL>
+        <TargetServerURL>http://serversql3/ReportServer</TargetServerURL>
         <TargetFolder>Pronto informes</TargetFolder>
         <TargetDataSourceFolder>Data Sources</TargetDataSourceFolder>
         <OverwriteDataSources>true</OverwriteDataSources>
