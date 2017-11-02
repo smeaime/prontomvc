@@ -694,6 +694,7 @@
           <Property Name="SituacionLog" Type="varchar" MaxLength="300" />
           <Property Name="Turno" Type="varchar" MaxLength="10" />
           <Property Name="FechaEnvioASyngenta" Type="datetime" />
+          <Property Name="IdReclamo" Type="int" />
         </EntityType>
         <EntityType Name="CartasDePorteControlDescarga">
           <Key>
@@ -715,8 +716,8 @@
           <Property Name="Campo" Type="varchar" MaxLength="40" />
           <Property Name="Valor" Type="numeric" Precision="18" Scale="2" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'Pronto.dbo.CartasDePorteHistorico' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Pronto.dbo.CartasDePorteHistorico' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="CartasDePorteHistorico">
           <Key>
             <PropertyRef Name="IdCartaDePorte" />
@@ -873,8 +874,8 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.CartasDePorteHistorico' no tiene 
           <Property Name="Descripcion" Type="varchar" MaxLength="60" Nullable="false" />
           <Property Name="IdCliente" Type="int" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'Pronto.dbo.CartasPorteMovimientos' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Pronto.dbo.CartasPorteMovimientos' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="CartasPorteMovimientos">
           <Key>
             <PropertyRef Name="IdCDPMovimiento" />
@@ -1250,6 +1251,7 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.CartasPorteMovimientos' no tiene 
           <Property Name="ControlAFIP_Resultado" Type="varchar" MaxLength="20" />
           <Property Name="ControlAFIP_Fecha" Type="datetime" />
           <Property Name="ControlAFIP_Mensaje" Type="ntext" />
+          <Property Name="ControlAFIP_TipoComprobante" Type="varchar" MaxLength="2" />
         </EntityType>
         <EntityType Name="Conceptos">
           <Key>
@@ -2286,7 +2288,7 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.CartasPorteMovimientos' no tiene 
           <Property Name="Importe" Type="numeric" Precision="19" Scale="2" />
           <Property Name="Gravado" Type="varchar" MaxLength="2" />
           <Property Name="IdDiferenciaCambio" Type="int" />
-          <Property Name="IvaNoDiscriminado" Type="numeric" Precision="19" Scale="2" />
+          <Property Name="IvaNoDiscriminado" Type="numeric" Precision="19" Scale="4" />
           <Property Name="IdCuentaBancaria" Type="int" />
           <Property Name="IdCaja" Type="int" />
           <Property Name="PorcentajeIva" Type="numeric" Precision="6" Scale="2" />
@@ -2332,7 +2334,7 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.CartasPorteMovimientos' no tiene 
           <Property Name="Importe" Type="numeric" Precision="19" Scale="2" />
           <Property Name="Gravado" Type="varchar" MaxLength="2" />
           <Property Name="IdDiferenciaCambio" Type="int" />
-          <Property Name="IvaNoDiscriminado" Type="numeric" Precision="19" Scale="2" />
+          <Property Name="IvaNoDiscriminado" Type="numeric" Precision="19" Scale="4" />
           <Property Name="IdCuentaBancaria" Type="int" />
           <Property Name="IdCaja" Type="int" />
           <Property Name="PorcentajeIva" Type="numeric" Precision="6" Scale="2" />
@@ -3233,8 +3235,8 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.CartasPorteMovimientos' no tiene 
           <Property Name="FechaInicio" Type="datetime" />
           <Property Name="FechaFinalizacion" Type="datetime" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Pronto.dbo.EjerciciosPeriodos' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="EjerciciosPeriodos">
           <Key>
             <PropertyRef Name="IdEjercicioPeriodo" />
@@ -3817,6 +3819,9 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
           <Property Name="CircuitoFirmasCompleto" Type="varchar" MaxLength="2" />
           <Property Name="ArchivoAdjunto1" Type="varchar" MaxLength="200" />
           <Property Name="IdUnidadFuncional" Type="int" />
+          <Property Name="IdUsuarioDeslibero" Type="int" />
+          <Property Name="FechaDesliberacion" Type="datetime" />
+          <Property Name="NumeradorDesliberaciones" Type="int" />
         </EntityType>
         <EntityType Name="Localidades">
           <Key>
@@ -5047,7 +5052,7 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
           <Property Name="Telefono1" Type="varchar" MaxLength="50" />
           <Property Name="Telefono2" Type="varchar" MaxLength="50" />
           <Property Name="Fax" Type="varchar" MaxLength="50" />
-          <Property Name="Email" Type="varchar" MaxLength="50" />
+          <Property Name="Email" Type="varchar" MaxLength="100" />
           <Property Name="Cuit" Type="varchar" MaxLength="13" />
           <Property Name="IdCodigoIva" Type="int" />
           <Property Name="FechaAlta" Type="datetime" />
@@ -5423,6 +5428,25 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
           <Property Name="LoteServicioCobro" Type="varchar" MaxLength="15" />
           <Property Name="IdFacturaDirecta" Type="int" />
         </EntityType>
+        <EntityType Name="ReclamoComentarios">
+          <Key>
+            <PropertyRef Name="IdReclamoComentario" />
+          </Key>
+          <Property Name="IdReclamoComentario" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdReclamo" Type="int" />
+          <Property Name="IdEmpleado" Type="int" />
+          <Property Name="Comentario" Type="varchar" MaxLength="1000" />
+          <Property Name="Fecha" Type="datetime" />
+          <Property Name="ArchivoAdjunto" Type="varchar" MaxLength="150" />
+        </EntityType>
+        <EntityType Name="Reclamos">
+          <Key>
+            <PropertyRef Name="IdReclamo" />
+          </Key>
+          <Property Name="IdReclamo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="60" Nullable="false" />
+          <Property Name="Estado" Type="int" />
+        </EntityType>
         <EntityType Name="Regiones">
           <Key>
             <PropertyRef Name="IdRegion" />
@@ -5592,6 +5616,7 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
           <Property Name="IdTipoRubroFinancieroGrupo" Type="int" />
           <Property Name="TomarMesDeVentaEnResumen" Type="varchar" MaxLength="2" />
           <Property Name="TipoNegocioVentaGrupo" Type="varchar" MaxLength="20" />
+          <Property Name="PresupuestadoPorAdministracion" Type="varchar" MaxLength="2" />
         </EntityType>
         <EntityType Name="RubrosValores">
           <Key>
@@ -5961,8 +5986,8 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
           <Property Name="IdProveedor" Type="int" />
           <Property Name="Codigo" Type="int" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'Pronto.dbo.Tree' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Pronto.dbo.Tree' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="Tree">
           <Key>
             <PropertyRef Name="IdItem" />
@@ -6174,8 +6199,8 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.Tree' no tiene definida ninguna c
           <Property Name="EmiteComision" Type="varchar" MaxLength="2" />
           <Property Name="IdsVendedoresAsignados" Type="varchar" MaxLength="1000" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'Pronto.dbo.wGrillaPersistencia' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Pronto.dbo.wGrillaPersistencia' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="wGrillaPersistencia">
           <Key>
             <PropertyRef Name="IdRenglon" />
@@ -6287,8 +6312,8 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.wGrillaPersistencia' no tiene def
           <Property Name="IdDestino" Type="int" />
           <Property Name="AgregaItemDeGastosAdministrativos" Type="varchar" MaxLength="2" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'Pronto.dbo.VistaCartasPorteMovimientos' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Pronto.dbo.VistaCartasPorteMovimientos' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="VistaCartasPorteMovimientos">
           <Key>
             <PropertyRef Name="IdCDPMovimiento" />
@@ -6474,6 +6499,18 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.VistaCartasPorteMovimientos' no t
             </Principal>
             <Dependent Role="CartasDePorte">
               <PropertyRef Name="IdDetalleFactura" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__CartasDeP__IdRec__09B62712">
+          <End Role="Reclamos" Type="Self.Reclamos" Multiplicity="0..1" />
+          <End Role="CartasDePorte" Type="Self.CartasDePorte" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Reclamos">
+              <PropertyRef Name="IdReclamo" />
+            </Principal>
+            <Dependent Role="CartasDePorte">
+              <PropertyRef Name="IdReclamo" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -6882,6 +6919,30 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.VistaCartasPorteMovimientos' no t
             </Principal>
             <Dependent Role="Partidos">
               <PropertyRef Name="IdProvincia" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ReclamoCo__IdEmp__06D9BA67">
+          <End Role="Empleados" Type="Self.Empleados" Multiplicity="0..1" />
+          <End Role="ReclamoComentarios" Type="Self.ReclamoComentarios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Empleados">
+              <PropertyRef Name="IdEmpleado" />
+            </Principal>
+            <Dependent Role="ReclamoComentarios">
+              <PropertyRef Name="IdEmpleado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ReclamoCo__IdRec__05E5962E">
+          <End Role="Reclamos" Type="Self.Reclamos" Multiplicity="0..1" />
+          <End Role="ReclamoComentarios" Type="Self.ReclamoComentarios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Reclamos">
+              <PropertyRef Name="IdReclamo" />
+            </Principal>
+            <Dependent Role="ReclamoComentarios">
+              <PropertyRef Name="IdReclamo" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -10322,6 +10383,8 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.VistaCartasPorteMovimientos' no t
           <EntitySet Name="PuntosVenta" EntityType="Self.PuntosVenta" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Recepciones" EntityType="Self.Recepciones" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Recibos" EntityType="Self.Recibos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ReclamoComentarios" EntityType="Self.ReclamoComentarios" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Reclamos" EntityType="Self.Reclamos" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Regiones" EntityType="Self.Regiones" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Remitos" EntityType="Self.Remitos" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Requerimientos" EntityType="Self.Requerimientos" Schema="dbo" store:Type="Tables" />
@@ -10635,6 +10698,10 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.VistaCartasPorteMovimientos' no t
             <End Role="DetalleFacturas" EntitySet="DetalleFacturas" />
             <End Role="CartasDePorte" EntitySet="CartasDePorte" />
           </AssociationSet>
+          <AssociationSet Name="FK__CartasDeP__IdRec__09B62712" Association="Self.FK__CartasDeP__IdRec__09B62712">
+            <End Role="Reclamos" EntitySet="Reclamos" />
+            <End Role="CartasDePorte" EntitySet="CartasDePorte" />
+          </AssociationSet>
           <AssociationSet Name="FK__CartasDeP__Vende__6D4EF28E" Association="Self.FK__CartasDeP__Vende__6D4EF28E">
             <End Role="Clientes" EntitySet="Clientes" />
             <End Role="CartasDePorte" EntitySet="CartasDePorte" />
@@ -10770,6 +10837,14 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.VistaCartasPorteMovimientos' no t
           <AssociationSet Name="FK__Partidos__IdProv__7AD30ADE" Association="Self.FK__Partidos__IdProv__7AD30ADE">
             <End Role="Provincias" EntitySet="Provincias" />
             <End Role="Partidos" EntitySet="Partidos" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ReclamoCo__IdEmp__06D9BA67" Association="Self.FK__ReclamoCo__IdEmp__06D9BA67">
+            <End Role="Empleados" EntitySet="Empleados" />
+            <End Role="ReclamoComentarios" EntitySet="ReclamoComentarios" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ReclamoCo__IdRec__05E5962E" Association="Self.FK__ReclamoCo__IdRec__05E5962E">
+            <End Role="Reclamos" EntitySet="Reclamos" />
+            <End Role="ReclamoComentarios" EntitySet="ReclamoComentarios" />
           </AssociationSet>
           <AssociationSet Name="FK__UsuariosR__IdFer__4303B307" Association="Self.FK__UsuariosR__IdFer__4303B307">
             <End Role="FertilizantesPuntosDespacho" EntitySet="FertilizantesPuntosDespacho" />
@@ -13492,6 +13567,20 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.VistaCartasPorteMovimientos' no t
           <AssociationSet Name="FK_DetalleFacturasOrdenesCompra_DetalleOrdenesCompra" Association="DemoProntoModel.FK_DetalleFacturasOrdenesCompra_DetalleOrdenesCompra">
             <End Role="DetalleOrdenesCompra" EntitySet="DetalleOrdenesCompras" />
             <End Role="DetalleFacturasOrdenesCompra" EntitySet="DetalleFacturasOrdenesCompras" />
+          </AssociationSet>
+          <EntitySet Name="ReclamoComentarios" EntityType="DemoProntoModel.ReclamoComentario" />
+          <EntitySet Name="Reclamos" EntityType="DemoProntoModel.Reclamo" />
+          <AssociationSet Name="FK__CartasDeP__IdRec__09B62712" Association="DemoProntoModel.FK__CartasDeP__IdRec__09B62712">
+            <End Role="Reclamo" EntitySet="Reclamos" />
+            <End Role="CartasDePorte" EntitySet="CartasDePortes" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ReclamoCo__IdEmp__06D9BA67" Association="DemoProntoModel.FK__ReclamoCo__IdEmp__06D9BA67">
+            <End Role="Empleado" EntitySet="Empleados" />
+            <End Role="ReclamoComentario" EntitySet="ReclamoComentarios" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ReclamoCo__IdRec__05E5962E" Association="DemoProntoModel.FK__ReclamoCo__IdRec__05E5962E">
+            <End Role="Reclamo" EntitySet="Reclamos" />
+            <End Role="ReclamoComentario" EntitySet="ReclamoComentarios" />
           </AssociationSet>
           </EntityContainer>
         <EntityType Name="Articulo">
@@ -16259,7 +16348,7 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.VistaCartasPorteMovimientos' no t
           <Property Type="String" Name="Telefono1" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Type="String" Name="Telefono2" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Type="String" Name="Fax" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Type="String" Name="Email" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Email" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Type="String" Name="Cuit" MaxLength="13" FixedLength="false" Unicode="false" />
           <Property Type="Int32" Name="IdCodigoIva" />
           <Property Type="DateTime" Name="FechaAlta" Precision="3" />
@@ -18072,6 +18161,7 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.VistaCartasPorteMovimientos' no t
           <NavigationProperty Name="Obra" Relationship="DemoProntoModel.FK_RubrosContables_IdObra" FromRole="RubrosContable" ToRole="Obra" />
           <NavigationProperty Name="TiposRubrosFinancierosGrupos" Relationship="DemoProntoModel.FK_RubrosContables_IdTipoRubroFinancieroGrupo" FromRole="RubrosContable" ToRole="TiposRubrosFinancierosGrupos" />
           <NavigationProperty Name="Cuentas1" Relationship="DemoProntoModel.FK_Cuentas_IdRubroFinanciero" FromRole="RubrosContable" ToRole="Cuenta" />
+          <Property Name="PresupuestadoPorAdministracion" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="RubrosValore">
           <Key>
@@ -18755,6 +18845,7 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.VistaCartasPorteMovimientos' no t
           <Property Name="ControlAFIP_Resultado" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="ControlAFIP_Fecha" Type="DateTime" Precision="3" />
           <Property Name="ControlAFIP_Mensaje" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ControlAFIP_TipoComprobante" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="DetalleComprobantesProveedore">
           <Key>
@@ -19002,7 +19093,7 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.VistaCartasPorteMovimientos' no t
           <Property Type="Decimal" Name="Importe" Precision="19" Scale="2" />
           <Property Type="String" Name="Gravado" MaxLength="2" FixedLength="false" Unicode="false" />
           <Property Type="Int32" Name="IdDiferenciaCambio" />
-          <Property Type="Decimal" Name="IvaNoDiscriminado" Precision="19" Scale="2" />
+          <Property Type="Decimal" Name="IvaNoDiscriminado" Precision="19" Scale="4" />
           <Property Type="Int32" Name="IdCuentaBancaria" />
           <Property Type="Int32" Name="IdCaja" />
           <NavigationProperty Name="Concepto" Relationship="DemoProntoModel.FK_DetalleNotasCredito_Conceptos" FromRole="DetalleNotasCredito" ToRole="Concepto" />
@@ -19053,7 +19144,7 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.VistaCartasPorteMovimientos' no t
           <Property Type="Decimal" Name="Importe" Precision="19" Scale="2" />
           <Property Type="String" Name="Gravado" MaxLength="2" FixedLength="false" Unicode="false" />
           <Property Type="Int32" Name="IdDiferenciaCambio" />
-          <Property Type="Decimal" Name="IvaNoDiscriminado" Precision="19" Scale="2" />
+          <Property Type="Decimal" Name="IvaNoDiscriminado" Precision="19" Scale="4" />
           <Property Type="Int32" Name="IdCuentaBancaria" />
           <Property Type="Int32" Name="IdCaja" />
           <NavigationProperty Name="Concepto" Relationship="DemoProntoModel.FK_DetalleNotasDebito_Conceptos" FromRole="DetalleNotasDebito" ToRole="Concepto" />
@@ -20043,6 +20134,7 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.VistaCartasPorteMovimientos' no t
           <Property Name="AdministradorSistema" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
           <Property Name="FechaVencimientoSuplenciaFirma" Type="DateTime" Precision="3" />
           <Property Name="IdSuplenteFirma" Type="Int32" />
+          <NavigationProperty Name="ReclamoComentarios" Relationship="DemoProntoModel.FK__ReclamoCo__IdEmp__06D9BA67" FromRole="Empleado" ToRole="ReclamoComentario" />
         </EntityType>
         <Association Name="FK_Empleados_Cargos">
           <End Type="DemoProntoModel.Cargo" Role="Cargo" Multiplicity="0..1" />
@@ -23173,6 +23265,9 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.VistaCartasPorteMovimientos' no t
           <Property Name="CircuitoFirmasCompleto" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
           <Property Name="ArchivoAdjunto1" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="IdUnidadFuncional" Type="Int32" />
+          <Property Name="IdUsuarioDeslibero" Type="Int32" />
+          <Property Name="FechaDesliberacion" Type="DateTime" Precision="3" />
+          <Property Name="NumeradorDesliberaciones" Type="Int32" />
         </EntityType>
         <EntityType Name="CentrosCosto">
           <Key>
@@ -25828,6 +25923,8 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.VistaCartasPorteMovimientos' no t
           <NavigationProperty Name="Vendedore" Relationship="DemoProntoModel.FK__CartasDeP__IdCor__7D7A6D5F" FromRole="CartasDePorte" ToRole="Vendedor" />
           <NavigationProperty Name="DetalleFactura" Relationship="DemoProntoModel.FK__CartasDeP__IdDet__55D69059" FromRole="CartasDePorte" ToRole="DetalleFactura" />
           <NavigationProperty Name="Cliente1" Relationship="DemoProntoModel.FK__CartasDeP__Vende__6D4EF28E" FromRole="CartasDePorte" ToRole="Cliente" />
+          <Property Name="IdReclamo" Type="Int32" />
+          <NavigationProperty Name="Reclamo" Relationship="DemoProntoModel.FK__CartasDeP__IdRec__09B62712" FromRole="CartasDePorte" ToRole="Reclamo" />
         </EntityType>
         <Association Name="FK__CartasDeP__Acopi__5498535D">
           <End Type="DemoProntoModel.CartasPorteAcopio" Role="CartasPorteAcopio" Multiplicity="0..1" />
@@ -26279,6 +26376,65 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.VistaCartasPorteMovimientos' no t
             </Principal>
             <Dependent Role="DetalleFacturasOrdenesCompra">
               <PropertyRef Name="IdDetalleOrdenCompra" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="ReclamoComentario">
+          <Key>
+            <PropertyRef Name="IdReclamoComentario" />
+          </Key>
+          <Property Name="IdReclamoComentario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdReclamo" Type="Int32" />
+          <Property Name="IdEmpleado" Type="Int32" />
+          <Property Name="Comentario" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="Fecha" Type="DateTime" Precision="3" />
+          <Property Name="ArchivoAdjunto" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Empleado" Relationship="DemoProntoModel.FK__ReclamoCo__IdEmp__06D9BA67" FromRole="ReclamoComentario" ToRole="Empleado" />
+          <NavigationProperty Name="Reclamo" Relationship="DemoProntoModel.FK__ReclamoCo__IdRec__05E5962E" FromRole="ReclamoComentario" ToRole="Reclamo" />
+        </EntityType>
+        <EntityType Name="Reclamo">
+          <Key>
+            <PropertyRef Name="IdReclamo" />
+          </Key>
+          <Property Name="IdReclamo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="60" FixedLength="false" Unicode="false" />
+          <Property Name="Estado" Type="Int32" />
+          <NavigationProperty Name="CartasDePortes" Relationship="DemoProntoModel.FK__CartasDeP__IdRec__09B62712" FromRole="Reclamo" ToRole="CartasDePorte" />
+          <NavigationProperty Name="ReclamoComentarios" Relationship="DemoProntoModel.FK__ReclamoCo__IdRec__05E5962E" FromRole="Reclamo" ToRole="ReclamoComentario" />
+        </EntityType>
+        <Association Name="FK__CartasDeP__IdRec__09B62712">
+          <End Type="DemoProntoModel.Reclamo" Role="Reclamo" Multiplicity="0..1" />
+          <End Type="DemoProntoModel.CartasDePorte" Role="CartasDePorte" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Reclamo">
+              <PropertyRef Name="IdReclamo" />
+            </Principal>
+            <Dependent Role="CartasDePorte">
+              <PropertyRef Name="IdReclamo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ReclamoCo__IdEmp__06D9BA67">
+          <End Type="DemoProntoModel.Empleado" Role="Empleado" Multiplicity="0..1" />
+          <End Type="DemoProntoModel.ReclamoComentario" Role="ReclamoComentario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Empleado">
+              <PropertyRef Name="IdEmpleado" />
+            </Principal>
+            <Dependent Role="ReclamoComentario">
+              <PropertyRef Name="IdEmpleado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ReclamoCo__IdRec__05E5962E">
+          <End Type="DemoProntoModel.Reclamo" Role="Reclamo" Multiplicity="0..1" />
+          <End Type="DemoProntoModel.ReclamoComentario" Role="ReclamoComentario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Reclamo">
+              <PropertyRef Name="IdReclamo" />
+            </Principal>
+            <Dependent Role="ReclamoComentario">
+              <PropertyRef Name="IdReclamo" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -29252,6 +29408,7 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.VistaCartasPorteMovimientos' no t
           <EntitySetMapping Name="RubrosContables">
             <EntityTypeMapping TypeName="DemoProntoModel.RubrosContable">
               <MappingFragment StoreEntitySet="RubrosContables">
+                <ScalarProperty Name="PresupuestadoPorAdministracion" ColumnName="PresupuestadoPorAdministracion" />
                 <ScalarProperty Name="TipoNegocioVentaGrupo" ColumnName="TipoNegocioVentaGrupo" />
                 <ScalarProperty Name="TomarMesDeVentaEnResumen" ColumnName="TomarMesDeVentaEnResumen" />
                 <ScalarProperty Name="IdTipoRubroFinancieroGrupo" ColumnName="IdTipoRubroFinancieroGrupo" />
@@ -29696,6 +29853,7 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.VistaCartasPorteMovimientos' no t
           <EntitySetMapping Name="ComprobantesProveedor">
             <EntityTypeMapping TypeName="DemoProntoModel.ComprobanteProveedor">
               <MappingFragment StoreEntitySet="ComprobantesProveedores">
+                <ScalarProperty Name="ControlAFIP_TipoComprobante" ColumnName="ControlAFIP_TipoComprobante" />
                 <ScalarProperty Name="ControlAFIP_Mensaje" ColumnName="ControlAFIP_Mensaje" />
                 <ScalarProperty Name="ControlAFIP_Fecha" ColumnName="ControlAFIP_Fecha" />
                 <ScalarProperty Name="ControlAFIP_Resultado" ColumnName="ControlAFIP_Resultado" />
@@ -32200,6 +32358,9 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.VistaCartasPorteMovimientos' no t
           <EntitySetMapping Name="LMateriales">
             <EntityTypeMapping TypeName="DemoProntoModel.LMateriale">
               <MappingFragment StoreEntitySet="LMateriales">
+                <ScalarProperty Name="NumeradorDesliberaciones" ColumnName="NumeradorDesliberaciones" />
+                <ScalarProperty Name="FechaDesliberacion" ColumnName="FechaDesliberacion" />
+                <ScalarProperty Name="IdUsuarioDeslibero" ColumnName="IdUsuarioDeslibero" />
                 <ScalarProperty Name="IdUnidadFuncional" ColumnName="IdUnidadFuncional" />
                 <ScalarProperty Name="ArchivoAdjunto1" ColumnName="ArchivoAdjunto1" />
                 <ScalarProperty Name="CircuitoFirmasCompleto" ColumnName="CircuitoFirmasCompleto" />
@@ -32955,6 +33116,7 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.VistaCartasPorteMovimientos' no t
           <EntitySetMapping Name="CartasDePortes">
             <EntityTypeMapping TypeName="DemoProntoModel.CartasDePorte">
               <MappingFragment StoreEntitySet="CartasDePorte">
+                <ScalarProperty Name="IdReclamo" ColumnName="IdReclamo" />
                 <ScalarProperty Name="FechaEnvioASyngenta" ColumnName="FechaEnvioASyngenta" />
                 <ScalarProperty Name="Turno" ColumnName="Turno" />
                 <ScalarProperty Name="SituacionLog" ColumnName="SituacionLog" />
@@ -33461,6 +33623,27 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.VistaCartasPorteMovimientos' no t
                 <ScalarProperty Name="IdUsuarioIngreso" ColumnName="IdUsuarioIngreso" />
                 <ScalarProperty Name="NumeroCDPMovimiento" ColumnName="NumeroCDPMovimiento" />
                 <ScalarProperty Name="IdCDPMovimiento" ColumnName="IdCDPMovimiento" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ReclamoComentarios">
+            <EntityTypeMapping TypeName="DemoProntoModel.ReclamoComentario">
+              <MappingFragment StoreEntitySet="ReclamoComentarios">
+                <ScalarProperty Name="ArchivoAdjunto" ColumnName="ArchivoAdjunto" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="Comentario" ColumnName="Comentario" />
+                <ScalarProperty Name="IdEmpleado" ColumnName="IdEmpleado" />
+                <ScalarProperty Name="IdReclamo" ColumnName="IdReclamo" />
+                <ScalarProperty Name="IdReclamoComentario" ColumnName="IdReclamoComentario" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Reclamos">
+            <EntityTypeMapping TypeName="DemoProntoModel.Reclamo">
+              <MappingFragment StoreEntitySet="Reclamos">
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="IdReclamo" ColumnName="IdReclamo" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
