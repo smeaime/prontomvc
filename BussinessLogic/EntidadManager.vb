@@ -2422,16 +2422,18 @@ Salida:
 
         End Function
 
-
-
-        Public Shared Function ImprimirWordDOT_VersionDLL_PDF(ByVal mPlantilla As String, ByRef Yo As Object, ByVal SC As String, _
-                                                   ByVal SessionDummy As Object, _
-                                                   ByRef ResponseDummy As Object, _
-                                                   ByVal Id As Long, Optional ByVal Arg3 As Object = Nothing, _
-                                                   Optional ByVal Arg4 As Object = Nothing, Optional ByVal Arg5 As Object = Nothing, _
-                                                   Optional ByVal outputFileName As String = "", Optional ByVal Arg6 As Object = Nothing, _
-                                                   Optional ByVal Arg7 As Object = Nothing) As String
-
+        Public Shared Function ImprimirWordDOT_VersionDLL_PDF(ByVal mPlantilla As String, _
+                                                              ByRef Yo As Object, _
+                                                              ByVal SC As String, _
+                                                              ByVal SessionDummy As Object, _
+                                                              ByRef ResponseDummy As Object, _
+                                                              ByVal Id As Long, _
+                                                              Optional ByVal Arg3 As Object = Nothing, _
+                                                              Optional ByVal Arg4 As Object = Nothing, _
+                                                              Optional ByVal Arg5 As Object = Nothing, _
+                                                              Optional ByVal outputFileName As String = "", _
+                                                              Optional ByVal Arg6 As Object = Nothing, _
+                                                              Optional ByVal Arg7 As Object = Nothing) As String
 
             If Id < 1 Then Return Nothing
 
@@ -2497,18 +2499,9 @@ Salida:
                 'Return ""
             End Try
 
-            '///////////////////////////////////////////
-            '///////////////////////////////////////////
-
-
-
-
-
-
             Dim oW As Word.Application
             Dim oDoc As Microsoft.Office.Interop.Word.Document
             'Dim oBooks As Excel.Workbooks 'haciendolo así, no queda abierto el proceso en el servidor http://support.microsoft.com/?kbid=317109
-
 
             Try
                 Try
@@ -2527,8 +2520,6 @@ Salida:
 
                 End Try
 
-
-
                 'estaría bueno que si acá tarda mucho, salga
                 'puede colgarse en este Add o en el Run. Creo que se cuelga en el Add si no tiene
                 '  permisos (-permisos de qué???), y en el Run si está mal referenciada la dll
@@ -2542,30 +2533,26 @@ Salida:
                     Throw
                 End Try
 
-
-
-
                 If IsNothing(oDoc) Then
                     'why the methord "Microsoft.Office.Interop.Word.ApplicationClass.Documents.Add" Returns null in .net web page
                     'http://social.msdn.microsoft.com/Forums/en/vbgeneral/thread/5deb3d3a-552c-4dfd-8d94-236b8a441daf
                     'http://forums.asp.net/t/1232621.aspx
                     ErrHandler2.WriteError("!!!! ALERTA !!!! ALERTA !!!!!!!!!!! oDoc está en NOTHING!!! Muy probable que " & _
-                                          "esté mal el impersonate (no dejarlo en true vacío, ponerle el " & _
-                                          "usuario y el pass)  " & _
-" no impersones desde el web.config, hacelo en el IIS con el ApplicationPool correspondiente, y cambiale la cuenta de  " & _
-"            NetworkService por la de Administrador para sacarte los problemas del Interop de Office  " & _
-"1 metete en el administrador del iis " & _
-"2 en los grupos de aplicaciones " & _
-"3 elegi el grupo que este usando el sitio " & _
-"4 y en configuracion avanzada " & _
-"5:                  elegi 'Identidad' " & _
-"6:                  cuenta personalizada " & _
-"7 y asignale algun usuario con permisos de administrador " & _
- IsNothing(oW) & "  Plantilla: " & plant)
+                                            "esté mal el impersonate (no dejarlo en true vacío, ponerle el " & _
+                                            "usuario y el pass)  " & _
+                                            " no impersones desde el web.config, hacelo en el IIS con el ApplicationPool correspondiente, y cambiale la cuenta de  " & _
+                                            "            NetworkService por la de Administrador para sacarte los problemas del Interop de Office  " & _
+                                            "1 metete en el administrador del iis " & _
+                                            "2 en los grupos de aplicaciones " & _
+                                            "3 elegi el grupo que este usando el sitio " & _
+                                            "4 y en configuracion avanzada " & _
+                                            "5:                  elegi 'Identidad' " & _
+                                            "6:                  cuenta personalizada " & _
+                                            "7 y asignale algun usuario con permisos de administrador " & _
+                                             IsNothing(oW) & "  Plantilla: " & plant)
 
                     'Parece ser que puede ser por el impersonate… ERA ESO!!!! No me dejaba poner el 
                     'impersonate=true vacío, le tuve que poner el usuario!!!!!!!!!!!
-
                     'Huyo. Pero antes cierro todo
                     Try
                         NAR(oDoc)
@@ -2582,29 +2569,17 @@ Salida:
                     Return ""
                 End If
 
-
-
-
-
-
                 With oDoc
                     oW.DisplayAlerts = False ' Word.WdAlertLevel.wdAlertsNone
 
                     '///////////////////////////////////////////////////////////////////////////////////////////
-                    '///////////////////////////////////////////////////////////////////////////////////////////
-                    '///////////////////////////////////////////////////////////////////////////////////////////
                     'ejecuto la macro. ZONA DE RIESGO (porque VBA puede tirar un error y no volver)
                     '///////////////////////////////////////////////////////////////////////////////////////////
-                    '///////////////////////////////////////////////////////////////////////////////////////////
-                    '///////////////////////////////////////////////////////////////////////////////////////////
-
 
                     Dim sStringVBA = "Emision """ & DebugCadenaImprimible(ClaseMigrar.ReEncriptaParaPronto(SC)) & """," & Id & "," & iisNull(Arg3, "Nothing") & "," & iisNull(Arg4, "Nothing") & "," & iisNull(Arg5, "Nothing") & "," & iisNull(Arg6, "Nothing") & "," & iisNull(Arg7, "Nothing")
 
                     Debug.Print(sStringVBA)
                     ErrHandler2.WriteError(sStringVBA)
-
-
 
                     'Acá es el cuelgue clásico: no solamente basta con ver que esten bien las referencias! A veces,
                     'aunque figuren bien, el Inter25 explota. Así que no tenés otra manera de probarlo que ejecutando la
@@ -2622,8 +2597,6 @@ Salida:
                     '                That looks VBA-ish: Have you manually invoked the VBA editor on the server at least once (under the same account ASP.Net will use later)? That could solve the hanging, but Office performance on the web server will be just horrible (for Office was not designed to work in a multi user environment).
                     'So we refrained from using Office InterOp at all. Instead we used OleDocumentProperties to pass server side information to some auto-starting Excel macros and let them do all the work, e.g. pulling data into work sheets using the connection settings provided via OleDocumentProperties by Asp.Net.
                     'Just have a look at Microsoft's DsoFile.dll (comes with source code and .Net InterOp wrappers): The Dsofile.dll files lets you edit Office document properties when you do not have Office installed [sic].
-
-
 
                     Try
                         If Arg7 IsNot Nothing Then
@@ -2650,30 +2623,16 @@ Salida:
                         'Throw
                     End Try
 
-
-                    '                *Plantillas
                     'Se queda colgado?
                     'Verificar que tengan puesto un On Error Resume Next (no puedo catchear el error, y queda andando el Winword o Excel)
                     '-Mejor dicho, que no tengan un MsgBox al disparar un error
                     'Permisos para ejecutar macros
-
-
-                    '///////////////////////////////////////////////////////////////////////////////////////////
-                    '///////////////////////////////////////////////////////////////////////////////////////////
-                    '///////////////////////////////////////////////////////////////////////////////////////////
-                    ' fin de macro
-                    '///////////////////////////////////////////////////////////////////////////////////////////
-                    '///////////////////////////////////////////////////////////////////////////////////////////
-                    '///////////////////////////////////////////////////////////////////////////////////////////
-
-
 
                     'and added it to the saveas command. The extn (.doc) decides on what format
                     'the document is saved as.
                     Const wrdFormatDocument As Object = 17 'Word.WdSaveFormat.wdFormatPDF  '(save in default format)
                     'verificar que la extension es pdf
                     If Right(output, 3) <> "pdf" Then Throw New Exception("La extension debe ser pdf")
-
 
                     ErrHandler2.WriteError("Pudo ejecutar el Emision(), ahora tratará de grabar")
 
@@ -2691,10 +2650,6 @@ Salida:
                     'oEx.SaveWorkspace(output) 'no usar esto, usar el del workbook
                     oW.DisplayAlerts = True '  Word.WdAlertLevel.wdAlertsAll ' True
                 End With
-
-
-
-
 
                 'ProntoFuncionesUIWeb.Current_Alert("Ahora se va a transmitir")
 
@@ -2746,19 +2701,9 @@ Salida:
                 Catch ex As Exception
                     ErrHandler2.WriteError(ex)
                 End Try
-
-
-
             End Try
 
-
-
-
-
             Return output 'porque no estoy pudiendo ejecutar el response desde acá
-
-
-
         End Function
     End Class
 
