@@ -169,6 +169,8 @@
 
       <siteMapNode url="ProntoWeb/ReporteResumenEstad.aspx" title="Resumen Estad."  description="Informes" roles="Administrador,WilliamsAdmin" />
 
+      <siteMapNode url="ProntoWeb/ReclamosPorUsuarioMovil.aspx" title="Reclamos"  description="Reclamos Movil" roles="Cliente,Administrador,Comercial,WilliamsFacturacion,WilliamsClientes,AdministradorLimitado" />
+
     </siteMapNode>
 
 
