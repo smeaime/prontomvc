@@ -386,6 +386,14 @@ Public Class ConsultasLinq
                                                 Nothing, Nothing, Nothing, Nothing)
                   Select xz
 
+
+
+
+        'como mierda hago para filtrar los Exporta=SI con cliente Syngenta, cuando ya apliqué el filtro antes?
+        '-y si agregás a mano los que tienen syngenta
+        '-otra opcion es no filtrar por ModoExportacion arriba, hacerlo despues.
+
+
         'aaa.ToList()
 
 
