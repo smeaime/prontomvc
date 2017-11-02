@@ -838,6 +838,12 @@
     <Compile Include="Models\Recibo.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Reclamo.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ReclamoComentario.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Regione.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>

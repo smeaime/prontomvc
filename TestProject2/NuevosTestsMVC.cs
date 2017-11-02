@@ -154,6 +154,28 @@ namespace ProntoMVC.TestsMVC
 
 
         [TestMethod]
+        public void webapi()
+        {
+
+            var c = new ClienteAPIController();
+            //GetMockedControllerGenerico(c);
+
+            
+            var sss= c.TraerClientePorCuit("30711633053");
+
+            //cuantos datos pasamos? 
+            //c.AgregarCliente("30711633053");
+            //c.ModificarCliente("30711633053",) 
+            //c.EliminarCliente("30711633053");
+
+        }
+
+
+
+
+
+
+        [TestMethod]
         public void pend_24848()
         {
             // como puedo crear una RM para que aparezca en el "RMs Pendientes de Asignar"?

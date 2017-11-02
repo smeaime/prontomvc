@@ -67,7 +67,7 @@ document.cookie = 'killme' + escape('nothing')
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
 
-<body style="height: ; overflow: ; background-color: #9ec3e8" class="">
+<body style="height: ; overflow: ; background-color: #9ec3e8; margin: 0 0 0 0;" class="">
 
     <%--esto del onload para lo de revisar si esta habilitado javascript--%>
     <center>
@@ -124,13 +124,13 @@ document.cookie = 'killme' + escape('nothing')
                                 PasswordRecoveryUrl="OlvidoPassword.aspx" PasswordRecoveryText="Forgot Your Password?" BackColor="">
                                 <LayoutTemplate>
                                     <div style="text-align: left;">
-                                        <asp:Label ID="UserNameLabel" runat="server" AssociatedControlID="UserName" Font-Size=""
+                                        <asp:Label ID="UserNameLabel" runat="server" AssociatedControlID="UserName" Font-Size="16"
                                             Font-Bold="false">Usuario</asp:Label>
                                     </div>
                                     <asp:TextBox ID="UserName" Width="285" runat="server" Font-Size="20" Style="padding: 5px;"></asp:TextBox>
                                     <br />
-                                    <div style="text-align: left;">
-                                        <asp:Label ID="PasswordLabel" runat="server" AssociatedControlID="Password">Contraseña</asp:Label><br />
+                                    <div style="text-align: left; margin-top: 10px;">
+                                        <asp:Label ID="PasswordLabel" runat="server" AssociatedControlID="Password" Font-Size="16">Contraseña</asp:Label><br />
                                     </div>
                                     <asp:TextBox ID="Password" runat="server" TextMode="Password" Font-Size="20"
                                         Style="padding: 5px;" Width="285"></asp:TextBox><br />
