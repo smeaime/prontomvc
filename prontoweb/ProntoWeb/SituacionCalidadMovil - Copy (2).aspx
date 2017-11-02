@@ -1,5 +1,5 @@
 ﻿<%@ Page Language="VB" AutoEventWireup="false" EnableEventValidation="false"
-    CodeFile="SituacionCalidadMovil - Copy.aspx.vb" Inherits="SituacionCalidadMovil"
+    CodeFile="SituacionCalidadMovil - Copy (2).aspx.vb" Inherits="SituacionCalidadMovil"
     Title="Informes" %>
 
 
@@ -58,7 +58,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
 
 
-<meta id="Viewport" name="viewport" content="width=320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 
 <%--
@@ -67,7 +67,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 --%>
 
 
-<body style="width: 320px; max-width: 320px; background-color: #9ec3e8" class="">
+<body style="; max-width: ; background-color: #9ec3e8" class="">
 
 
 
@@ -229,11 +229,11 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
                             </td>
                             <td>
-                                <asp:Image ID="Image2" runat="server" ImageUrl="~/Imagenes/williamsmini.gif" CssClass="" Height="60px" ImageAlign="AbsBottom" />
+                                <asp:Image ID="Image2" runat="server" ImageUrl="~/Imagenes/williamsmini.gif" CssClass="" Height="55px" ImageAlign="AbsBottom"  />
                             </td>
                         </tr>
 
-                        <tr>
+                        <tr style=" margin-top: 7px;">
 
                             <td colspan="3" class="" style="width: ; height: ; vertical-align: bottom !important;">
 
@@ -544,7 +544,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
             <div style="height: 8px"></div>
 
-            <table id="Lista" class="scroll" cellpadding="0" cellspacing="0" style="font-size: 15px;" width="320px">
+            <table id="Lista" class="scroll" cellpadding="0" cellspacing="0" style="font-size: 22px;" width="">
             </table>
 
             <div id="ListaPager" class="scroll" style="text-align: center; height: ;">
@@ -1973,10 +1973,14 @@ Arroyo Seco (Sta. Fe) - René Favaloro 726 / (03402) 421-426 - 429-676 / arroyos
                         // CP	TURNO	SITUACION	MERC	TITULAR_CP	INTERMEDIARIO	RTE CIAL	CORREDOR	DESTINATARIO	DESTINO	ENTREGADOR	PROC	KILOS	OBSERVACION
 
 
-                        colNames: ['', 'Id', 'Nro CP', 'Situacion',  'Obs Situacion',
+                        colNames: ['', 'Id', 'Nro CP', 'Situación' ,'infohtml'
+
+
+
+                            , 'Obs Situacion',
                             'Producto', 'Titular', 'Intermediario', 'R Comercial', 'Corredor',
                             'Destinatario', 'Destino', 'IdDestino', 'Patente',
-                            'Kilos Procedencia', 'Arribo', 'Descarga', 'Punto Venta',
+                            'Kilos Procedencia', 'Arribo', 'Descarga', 'Punto Venta'
                             
                         ],
 
@@ -1991,10 +1995,10 @@ Arroyo Seco (Sta. Fe) - René Favaloro 726 / (03402) 421-426 - 429-676 / arroyos
                                 name: 'act', index: 'act', align: 'center', width: 60, editable: false, hidden: true, sortable: false, frozen: true, search: false
                             },
 
-                            { name: ' IdCartasDePorte', index: ' IdCartasDePorte', align: 'left', width: 100, editable: false, hidden: true, frozen: true },
+                            { name: ' IdCartaDePorte', index: ' IdCartaDePorte', align: 'left', width: 100, editable: false, hidden: true, frozen: true },
 
                             {
-                                name: 'NumeroCartaEnTextoParaBusqueda', index: 'NumeroCartaEnTextoParaBusqueda', width: 100, align: 'left', sorttype: "text", sortable: false, frozen: true
+                                name: 'NumeroCartaEnTextoParaBusqueda', index: 'NumeroCartaEnTextoParaBusqueda', width: 140, align: 'left', sorttype: "text", sortable: false, frozen: true
                                 , editable: false, editrules: { required: false, number: true }, edittype: 'text',
 
                                 searchoptions: { sopt: ['bw', 'cn', 'eq'], clearSearch: false },
@@ -2016,24 +2020,32 @@ Arroyo Seco (Sta. Fe) - René Favaloro 726 / (03402) 421-426 - 429-676 / arroyos
                                 }
                             },
 
-           
+
+
+
                             {
-                                name: 'Situacion', index: 'Situacion', align: 'left', width: 120, hidden: false, editable: true, edittype: 'select', sortable: false,
+                                name: 'Situacion', index: 'Situacion', align: 'left', width: 130, hidden: false, editable: true, edittype: 'select', sortable: false,
                                 editoptions: {
                                     //defaultValue: OrigenDescripcionDefault,
                                     //value: "0:Autorizado; 6:Desviado" 
-                                    value: "0:Autorizado; 1:Demorado; 2:Posicion; 3:Descargado; 4:A Descargar; 5:Rechazado;6:Desviado;7:CP p/cambiar;8:Sin Cupo;9:Calado"
+                                    value: "0:Autorizado; 1:Demorado; 2:Posición; 3:Descargado; 4:A Descargar; 5:Rechazado;6:Desviado;7:CP p/cambiar;8:Sin Cupo;9:Calado"
                                 },
                                 // http://stackoverflow.com/questions/5328072/can-jqgrid-support-dropdowns-in-the-toolbar-filter-fields
                                 formatter: 'select', stype: 'select',
                                 searchoptions: {
                                     sopt: ['eq'],
-                                    value: ":Todos; 0:Autorizado; 1:Demorado; 2:Posicion; 3:Descargado; 4:A Descargar; 5:Rechazado;6:Desviado;7:CP p/cambiar;8:Sin Cupo;9:Calado"
+                                    value: ":Todos; 0:Autorizado; 1:Demorado; 2:Posición; 3:Descargado; 4:A Descargar; 5:Rechazado;6:Desviado;7:CP p/cambiar;8:Sin Cupo;9:Calado"
                                     , clearSearch: false
                                 }
 
 
                             },
+
+
+
+                            { name: 'infohtml', index: 'infohtml', align: 'left', width: 100, editable: true, hidden: true, sortable: false },
+
+
 
                             { name: 'ObservacionesSituacion', index: 'ObservacionesSituacion', align: 'left', width: 100, editable: true, hidden: false, sortable: false },
 
@@ -2119,6 +2131,9 @@ Arroyo Seco (Sta. Fe) - René Favaloro 726 / (03402) 421-426 - 429-676 / arroyos
                                 }
 
                             },
+
+
+
                             {
                                 name: 'TitularDesc', index: 'TitularDesc', align: 'left', width: 100, hidden: false, editable: false, edittype: 'text', sortable: false
 
@@ -2671,7 +2686,6 @@ Arroyo Seco (Sta. Fe) - René Favaloro 726 / (03402) 421-426 - 429-676 / arroyos
 
 
 
-
                         ],
 
                         gridComplete: function () {
@@ -2713,14 +2727,118 @@ Arroyo Seco (Sta. Fe) - René Favaloro 726 / (03402) 421-426 - 429-676 / arroyos
 
 
 
+                        subGridRowExpanded: function (subgrid_id, row_id) {
+                            //var html = "<span>Some HTML text which corresponds the row with id=" +
+                            //    row_id + "</span><br/>";
 
-                        onCellSelect: function (rowid, iCol, cellcontent, e) {
-                            var $this = $(this);
-                            var iRow = $('#' + $.jgrid.jqID(rowid))[0].rowIndex;
-                            lastSelectedId = rowid;
-                            lastSelectediCol = iCol;
-                            lastSelectediRow = iRow;
+                            //var html = '<ul data-dtr-index="0" class="dtr-details"><li data-dtr-index="4" data-dt-row="0" data-dt-column="4"><span class="dtr-title"><a href="">Titular</a></span> <span class="dtr-data"><span>Martignone Adolfo Y Cia  S C A </span></span></li><li data-dtr-index="5" data-dt-row="0" data-dt-column="5"><span class="dtr-title">Intermed.</span> <span class="dtr-data"><span></span></span></li><li data-dtr-index="6" data-dt-row="0" data-dt-column="6"><span class="dtr-title">Remitente Comercial</span> <span class="dtr-data"><span>Granos Olavarria S A </span></span></li><li data-dtr-index="7" data-dt-row="0" data-dt-column="7"><span class="dtr-title"><a href="">Corredor</a></span> <span class="dtr-data"><span>Futuros Y Opciones Com S A </span></span></li><li data-dtr-index="8" data-dt-row="0" data-dt-column="8"><span class="dtr-title">Esp.</span> <span class="dtr-data"><span>Soja Sustentable Usa</span></span></li><li data-dtr-index="9" data-dt-row="0" data-dt-column="9"><span class="dtr-title"><a href="">Destino</a><img title="Orden:Asc" src="/WebResource.axd?d=olQ67zyJIM4n9M_oCjYGRrTv0D-PJFdyCfA8P30v3DAazZ2pPF9qhxbM3BGjwDU_sj9fOg-6w-QRXWlBrrBXHMoHlpC6GPd2JFlMFkPtMfvCFUjqHNl-emkH6wLPSw2q0&amp;t=636426523640000000" alt="Orden:Asc" align="absbottom"></span> <span class="dtr-data">FCA VICENTIN</span></li><li data-dtr-index="10" data-dt-row="0" data-dt-column="10"><span class="dtr-title">Destinat.</span> <span class="dtr-data"><span>Vicentin S A I C</span></span></li><li data-dtr-index="11" data-dt-row="0" data-dt-column="11"><span class="dtr-title">Analisis</span> <span class="dtr-data"><span>DÑ:12.00% HD:13.20%  </span></span></li><li data-dtr-index="12" data-dt-row="0" data-dt-column="12"><span class="dtr-title">Patente</span> <span class="dtr-data">ERT783</span></li><li data-dtr-index="13" data-dt-row="0" data-dt-column="13"><span class="dtr-title">Obs Pto</span> <span class="dtr-data">&nbsp;</span></li><li data-dtr-index="14" data-dt-row="0" data-dt-column="14"><span class="dtr-title">Procedencia</span> <span class="dtr-data"><span>Villa Lila</span></span></li><li data-dtr-index="15" data-dt-row="0" data-dt-column="15"><span class="dtr-title">Entreg</span> <span class="dtr-data"><span>Wil</span></span></li><li data-dtr-index="16" data-dt-row="0" data-dt-column="16"><span class="dtr-title">Entreg CP</span> <span class="dtr-data"><span></span></span></li></ul>'
+
+                            
+
+                          
+
+                            var a = $("#Lista").jqGrid('getRowData', row_id);
+
+
+
+                            //$("#" + subgrid_id).append(dataFromTheRow.infohtml);
+                            //$("#" + subgrid_id).append(dataFromTheRow.Producto);
+
+
+
+                            // value: "0:Autorizado; 1:Demorado; 2:Posición; 3:Descargado; 4:A Descargar; 5:Rechazado;6:Desviado;7:CP p/cambiar;8:Sin Cupo;9:Calado"
+
+                            //alert(a.Situacion);
+
+                            var situacionDesc = "";
+                            switch (parseInt(a.Situacion))
+                            {
+                                case 0:
+                                    situacionDesc = "Autorizado";
+                                    break;
+                                case 1:
+                                    situacionDesc = "Demorado";
+                                    break;
+                                case 2:
+                                    situacionDesc = "Posición";
+                                    break;
+                                case 3:
+                                    situacionDesc = "Descargado";
+                                    break;
+                                case 4:
+                                    situacionDesc = "A Descargar";
+                                    break;
+                                case 5:
+                                    situacionDesc = "Rechazado";
+                                    break;
+                                case 6:
+                                    situacionDesc = "Desviado";
+                                    break;
+                                case 7:
+                                    situacionDesc = "CP p/cambiar";
+                                    break;
+                                case 8:
+                                    situacionDesc = "Sin Cupo";
+                                    break;
+                                case 9:
+                                    situacionDesc = "Calado";
+                                    break;
+                                default:
+                                    situacionDesc = "adsfasf";
+
+                            }
+                                
+                            
+                            
+
+                            var html = "<span style='font-size: 14px'> " +
+                                "<br/><b>Situación</b>      " + situacionDesc +
+                                "<br/><b>Observaciones</b>            " + a.ObservacionesSituacion +
+                                "<br/><b>Producto</b>       " + a.Producto +
+                                "<br/><b>Titular</b>            " + a.TitularDesc +
+                                "<br/><b>Intermediario</b>            " + a.IntermediarioDesc +
+                                "<br/><b>R.Comercial</b>            " + a.RComercialDesc +
+                                "<br/><b>Corredor</b>            " + a.CorredorDesc +
+                                "<br/><b>Destinatario</b>            " + a.DestinatarioDesc +
+                                "<br/><b>Destino</b>  " + a.DestinoDesc +
+                                "<br/><b>Patente</b>  " + a.Patente +
+                                "<br/><b>Neto</b>  " + a.NetoPto +
+                                "<br/><b>Arribo</b>  " + a.FechaArribo +
+                                "<br/><b>Descarga</b>  " + a.FechaDescarga +
+                                "<br/><br/><a href=\"CartaDePorte.aspx?Id=" + a.IdCartaDePorte + "\"  target=\"_blank\" > ver carta </>" +
+                                "<span/>";
+
+                            $("#" + subgrid_id).append(html);
+
+
                         },
+
+                        onSelectRow: function (rowId) {
+                            $("#Lista").jqGrid('toggleSubGridRow', rowId);
+                        },
+
+                        //onSelectRow: function (id) { 
+                        //    //dobleclic = true;
+                        //    EditarItem(id);
+                        //},
+
+                        //ondblClickRow: function (id) {
+                        //    //sacarDeEditMode();
+                        //    dobleclic = true;
+                        //    EditarItem(id);
+                        //},
+
+
+
+
+
+                        //onCellSelect: function (rowid, iCol, cellcontent, e) {
+                        //    var $this = $(this);
+                        //    var iRow = $('#' + $.jgrid.jqID(rowid))[0].rowIndex;
+                        //    lastSelectedId = rowid;
+                        //    lastSelectediCol = iCol;
+                        //    lastSelectediRow = iRow;
+                        //},
                         afterEditCell: function (id, name, val, iRow, iCol) {
                             //if (name == 'Fecha') {
                             //    jQuery("#" + iRow + "_Fecha", "#Lista").datepicker({ dateFormat: "dd/mm/yy" });
@@ -2749,7 +2867,7 @@ Arroyo Seco (Sta. Fe) - René Favaloro 726 / (03402) 421-426 - 429-676 / arroyos
 
 
                         pager: $('#ListaPager'),
-                        rowNum: 10,
+                        rowNum: 100,
                         //rowList: [10, 20, 50, 100, 500, 1000],
                         sortname: 'IdCartaDePorte',  //'FechaDescarga', //'NumeroCartaDePorte',
                         sortorder: 'desc',
@@ -2758,7 +2876,8 @@ Arroyo Seco (Sta. Fe) - René Favaloro 726 / (03402) 421-426 - 429-676 / arroyos
                         shrinkToFit: false,
 
                         width: $(window).width() - 4, // 310, //'auto',
-                        height: $(window).height() - 260, // '100%'
+                        height: 'auto', // '100%', //$(window).height() - 260, // '100%'
+
                         altRows: false,
                         footerrow: false,
                         userDataOnFooter: true,
@@ -2767,13 +2886,23 @@ Arroyo Seco (Sta. Fe) - René Favaloro 726 / (03402) 421-426 - 429-676 / arroyos
                         cellsubmit: 'clientArray',
                         dataUrl: "WebServiceClientes.asmx/EmpleadoEditGridData",
 
+
+
+
                         recordtext: "{2} cartas</span>",
                         pgtext: "Pag. {0} de {1}",
-                        //toppager: true,
+                        toppager: true,
+                        subGrid: true,
+                        multiselectWidth: 40,
+                        subGridWidth: 40,
 
+                        
                         gridview: true
                         , multiboxonly: true
                         , multipleSearch: true
+
+
+
 
                     });
 
@@ -2788,15 +2917,16 @@ Arroyo Seco (Sta. Fe) - René Favaloro 726 / (03402) 421-426 - 429-676 / arroyos
                         {
                             //sopt: ["cn"]
                             //sopt: ['eq', 'ne', 'lt', 'le', 'gt', 'ge', 'bw', 'bn', 'ew', 'en', 'cn', 'nc', 'nu', 'nn', 'in', 'ni'],
-                            zIndex: 50, //width: 700, 
+                            zIndex: 50,
+                            width: 300, // $(window).width() - 4, 
                             closeOnEscape: true, closeAfterSearch: true, multipleSearch: true, overlay: false
 
                         }
                         // http://stackoverflow.com/questions/11228764/jqgrid-setting-zindex-for-alertmod
                     );
 
-                    jQuery("#Lista").jqGrid('navGrid', '#ListaPager',
-                        { search: false, refresh: false, add: false, edit: false, del: false }, {}, {}, {}, {});
+                    //jQuery("#Lista").jqGrid('navGrid', '#ListaPager',
+                    //    { search: false, refresh: false, add: false, edit: false, del: false }, {}, {}, {}, {});
 
 
 
@@ -2826,7 +2956,7 @@ Arroyo Seco (Sta. Fe) - René Favaloro 726 / (03402) 421-426 - 429-676 / arroyos
                     // si queres sacar el enableClear, definilo en las searchoptions de la columna específica http://www.trirand.com/blog/?page_id=393/help/clearing-the-clear-icon-in-a-filtertoolbar/
 
 
-                    jQuery("#Lista").jqGrid('setFrozenColumns'); // si usas frozencolumns, estas obligado a sacar el cellEdit!!!
+                    //jQuery("#Lista").jqGrid('setFrozenColumns'); // si usas frozencolumns, estas obligado a sacar el cellEdit!!!
 
 
                     //$('#Lista').jqGrid('setGridWidth', '1000');
@@ -2856,7 +2986,8 @@ Arroyo Seco (Sta. Fe) - René Favaloro 726 / (03402) 421-426 - 429-676 / arroyos
 
                         if (gr != null) jQuery("#Lista").jqGrid('editGridRow', gr,
                             {
-                                editCaption: "", bSubmit: "Aceptar", bCancel: "Cancelar", width: 800
+                                editCaption: "", bSubmit: "Aceptar", bCancel: "Cancelar",
+                                width: 300
                                 , reloadAfterSubmit: false, closeOnEscape: true,
                                 closeAfterEdit: true, recreateForm: true, Top: 0,
                                 beforeShowForm: function (form) {
@@ -2930,24 +3061,24 @@ Arroyo Seco (Sta. Fe) - René Favaloro 726 / (03402) 421-426 - 429-676 / arroyos
                     //                    $("#cData").addClass("btn");
 
 
-                    //var parentDiv = dlgDiv.parent(); // div#gbox_list
-                    //var dlgWidth = dlgDiv.width();
-                    //var parentWidth = parentDiv.width();
-                    //var dlgHeight = dlgDiv.height();
-                    //var parentHeight = parentDiv.height();
+                    var parentDiv = dlgDiv.parent(); // div#gbox_list
+                    var dlgWidth = dlgDiv.width();
+                    var parentWidth = parentDiv.width();
+                    var dlgHeight = dlgDiv.height();
+                    var parentHeight = parentDiv.height();
 
-                    //var left = (screen.width / 2) - (dlgWidth / 2) + "px";
-                    //var top = (screen.height / 2) - (dlgHeight / 2) + "px";
+                    var left = 10; // (screen.width / 2) - (dlgWidth / 2) + "px";
+                    var top = (screen.height / 2) - (dlgHeight / 2) + "px";
 
-                    //dlgDiv[0].style.top = top; // 500; // Math.round((parentHeight - dlgHeight) / 2) + "px";
-                    //dlgDiv[0].style.left = left; //Math.round((parentWidth - dlgWidth) / 2) + "px";
+                    dlgDiv[0].style.top = top; // 500; // Math.round((parentHeight - dlgHeight) / 2) + "px";
+                    dlgDiv[0].style.left = left; //Math.round((parentWidth - dlgWidth) / 2) + "px";
                 }
 
 
 
 
                 $(window).resize(function () {
-                    //$('#Lista').jqGrid('setGridWidth', $(window).width() - 40);
+                    $('#Lista').jqGrid('setGridWidth', $(window).width() - 4);
                     //RefrescaAnchoJqgrids();
                 });
 
