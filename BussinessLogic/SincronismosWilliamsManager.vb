@@ -18737,9 +18737,9 @@ Namespace Pronto.ERP.Bll
                     Dim sCalidad As String
 
                     Try
-                        If InStr(.CalidadDesc.ToString.ToLower, "conforme") > 0 Then
-                            sCalidad = "CO"
-                        ElseIf InStr(.CalidadDesc.ToString.ToLower, "grado 1") > 0 Then
+                        'If InStr(.CalidadDesc.ToString.ToLower, "conforme") > 0 Then
+                        '    sCalidad = "CO"
+                        If InStr(.CalidadDesc.ToString.ToLower, "grado 1") > 0 Then
                             sCalidad = "G1"
                         ElseIf InStr(.CalidadDesc.ToString.ToLower, "grado 2") > 0 Then
                             sCalidad = "G2"
