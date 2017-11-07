@@ -1,0 +1,1381 @@
+
+Log Entry : 
+11/06/2017 17:04:18
+Error in: . Error Message:entrando en GetDatatableAsignacionAutomatica . tanda 0
+__________________________
+
+Log Entry : 
+11/06/2017 17:04:19
+Error in: . Error Message:Cartas sin automatico encontrado (pero este es el modo no automatico!!!)5
+__________________________
+
+Log Entry : 
+11/06/2017 17:04:19
+Error in: . Error Message:entro a Preprocesos 5
+__________________________
+
+Log Entry : 
+11/06/2017 17:04:23
+Error in: . Error Message:despues de AgregarEmbarques10
+__________________________
+
+Log Entry : 
+11/06/2017 17:04:23
+Error in: . Error Message:despues de ExcluirDeGastosAdministrativos10
+__________________________
+
+Log Entry : 
+11/06/2017 17:04:23
+Error in: . Error Message:despues de ReasignarAquellosQueSeLeFacturanForzosamenteAlCorredor10
+__________________________
+
+Log Entry : 
+11/06/2017 17:04:23
+Error in: . Error Message:despues de CasosSyngenta_y_Acopios10
+__________________________
+
+Log Entry : 
+11/06/2017 17:04:23
+Error in: . Error Message:entro en PostProcesos 10
+__________________________
+
+Log Entry : 
+11/06/2017 17:04:24
+Error in: . Error Message:despues de EmparcharClienteSeparadoParaCasosQueSuperenUnMontoDeterminado 10
+__________________________
+
+Log Entry : 
+11/06/2017 17:04:24
+Error in: . Error Message:despues de EmparcharClienteSeparadoParaFacturasQueSuperanCantidadDeRenglones 10
+__________________________
+
+Log Entry : 
+11/06/2017 17:04:24
+Error in: . Error Message:despues de SepararAcopiosLDCyACA 10
+__________________________
+
+Log Entry : 
+11/06/2017 17:04:24
+Error in: . Error Message:despues de PostProcesoFacturacion_ReglaExportadores 10
+__________________________
+
+Log Entry : 
+11/06/2017 17:04:24
+Error in: . Error Message:punto 2 en GetDatatableAsignacionAutomatica . tanda 84
+__________________________
+
+Log Entry : 
+11/06/2017 17:04:24
+Error in: . Error Message:punto 3 en GetDatatableAsignacionAutomatica . tanda 84
+__________________________
+
+Log Entry : 
+11/06/2017 17:04:24
+Error in: . Error Message:punto 4 en GetDatatableAsignacionAutomatica . tanda 84
+__________________________
+
+Log Entry : 
+11/06/2017 17:04:27
+Error in: . Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartaDePorteManager.GetItem(String SC, Int32 id, Boolean getCartaDePorteDetalles) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 9829
+BusinessLogic
+__________________________
+
+Log Entry : 
+11/06/2017 17:04:27
+Error in: . Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en ProntoMVC.Tests.TestsWilliams.percepcion_en_clientes_con_46551() en C:\bdl\pronto\TestProject2\TestWilliams.cs:línea 1070
+TestProject2
+__________________________
+
+Log Entry : 
+11/06/2017 17:04:28
+Error in: . Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartaDePorteManager.GetItem(String SC, Int32 id, Boolean getCartaDePorteDetalles) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 9829
+BusinessLogic
+__________________________
+
+Log Entry : 
+11/06/2017 17:04:28
+Error in: . Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en ProntoMVC.Tests.TestsWilliams.percepcion_en_clientes_con_46551() en C:\bdl\pronto\TestProject2\TestWilliams.cs:línea 1070
+TestProject2
+__________________________
+
+Log Entry : 
+11/06/2017 17:04:28
+Error in: . Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartaDePorteManager.GetItem(String SC, Int32 id, Boolean getCartaDePorteDetalles) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 9829
+BusinessLogic
+__________________________
+
+Log Entry : 
+11/06/2017 17:04:28
+Error in: . Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en ProntoMVC.Tests.TestsWilliams.percepcion_en_clientes_con_46551() en C:\bdl\pronto\TestProject2\TestWilliams.cs:línea 1070
+TestProject2
+__________________________
+
+Log Entry : 
+11/06/2017 17:04:28
+Error in: . Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartaDePorteManager.GetItem(String SC, Int32 id, Boolean getCartaDePorteDetalles) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 9829
+BusinessLogic
+__________________________
+
+Log Entry : 
+11/06/2017 17:04:28
+Error in: . Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en ProntoMVC.Tests.TestsWilliams.percepcion_en_clientes_con_46551() en C:\bdl\pronto\TestProject2\TestWilliams.cs:línea 1070
+TestProject2
+__________________________
+
+Log Entry : 
+11/06/2017 17:04:29
+Error in: . Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartaDePorteManager.GetItem(String SC, Int32 id, Boolean getCartaDePorteDetalles) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 9829
+BusinessLogic
+__________________________
+
+Log Entry : 
+11/06/2017 17:04:29
+Error in: . Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en ProntoMVC.Tests.TestsWilliams.percepcion_en_clientes_con_46551() en C:\bdl\pronto\TestProject2\TestWilliams.cs:línea 1070
+TestProject2
+__________________________
+
+Log Entry : 
+11/06/2017 17:04:30
+Error in: . Error Message:System.Exception
+La tarifa de la lista está vencida
+   en Pronto.ERP.Bll.ListaPreciosManager.VerificarVencimientoLista(Int64 idListaPrecio, String SC) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 520
+   en Pronto.ERP.Bll.ListaPreciosManager.SavePrecioPorCliente(String SC, Int64 IdCliente, Int64 IdArticulo, Double Precio, Int64 IdDestino) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 549
+   en ProntoMVC.Tests.TestsWilliams.percepcion_en_clientes_con_46551() en C:\bdl\pronto\TestProject2\TestWilliams.cs:línea 1070
+BusinessLogic
+__________________________
+
+Log Entry : 
+11/06/2017 17:04:33
+Error in: . Error Message:Separo las facturas que se generan en el lote.6/11/2017 17:04:33
+__________________________
+
+Log Entry : 
+11/06/2017 17:04:33
+Error in: . Error Message:ActualizarCampoClienteSeparador 10 filas
+__________________________
+
+Log Entry : 
+11/06/2017 17:04:34
+Error in: . Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartaDePorteManager.IdClienteEquivalenteDelIdVendedor(Int64 IdVendedor, String SC) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 12596
+BusinessLogic
+__________________________
+
+Log Entry : 
+11/06/2017 17:04:34
+Error in: . Error Message:System.IndexOutOfRangeException: No hay ninguna fila en la posición 0.
+   en System.Data.RBTree`1.GetNodeByIndex(Int32 userIndex)
+   en System.Data.DataRowCollection.get_Item(Int32 index)
+   en CartaDePorteManager.EsteClienteSeleFacturaAlCorredorPorSeparadoId(Int64 idCliente, Int64 idCorredor, String SC) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 12630
+__________________________
+
+Log Entry : 
+11/06/2017 17:04:34
+Error in: . Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartaDePorteManager.IdClienteEquivalenteDelIdVendedor(Int64 IdVendedor, String SC) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 12596
+BusinessLogic
+__________________________
+
+Log Entry : 
+11/06/2017 17:04:34
+Error in: . Error Message:System.IndexOutOfRangeException: No hay ninguna fila en la posición 0.
+   en System.Data.RBTree`1.GetNodeByIndex(Int32 userIndex)
+   en System.Data.DataRowCollection.get_Item(Int32 index)
+   en CartaDePorteManager.EsteClienteSeleFacturaAlCorredorPorSeparadoId(Int64 idCliente, Int64 idCorredor, String SC) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 12630
+__________________________
+
+Log Entry : 
+11/06/2017 17:04:34
+Error in: . Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartaDePorteManager.IdClienteEquivalenteDelIdVendedor(Int64 IdVendedor, String SC) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 12596
+BusinessLogic
+__________________________
+
+Log Entry : 
+11/06/2017 17:04:34
+Error in: . Error Message:System.IndexOutOfRangeException: No hay ninguna fila en la posición 0.
+   en System.Data.RBTree`1.GetNodeByIndex(Int32 userIndex)
+   en System.Data.DataRowCollection.get_Item(Int32 index)
+   en CartaDePorteManager.EsteClienteSeleFacturaAlCorredorPorSeparadoId(Int64 idCliente, Int64 idCorredor, String SC) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 12630
+__________________________
+
+Log Entry : 
+11/06/2017 17:04:34
+Error in: . Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartaDePorteManager.IdClienteEquivalenteDelIdVendedor(Int64 IdVendedor, String SC) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 12596
+BusinessLogic
+__________________________
+
+Log Entry : 
+11/06/2017 17:04:34
+Error in: . Error Message:System.IndexOutOfRangeException: No hay ninguna fila en la posición 0.
+   en System.Data.RBTree`1.GetNodeByIndex(Int32 userIndex)
+   en System.Data.DataRowCollection.get_Item(Int32 index)
+   en CartaDePorteManager.EsteClienteSeleFacturaAlCorredorPorSeparadoId(Int64 idCliente, Int64 idCorredor, String SC) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 12630
+__________________________
+
+Log Entry : 
+11/06/2017 17:04:34
+Error in: . Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartaDePorteManager.IdClienteEquivalenteDelIdVendedor(Int64 IdVendedor, String SC) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 12596
+BusinessLogic
+__________________________
+
+Log Entry : 
+11/06/2017 17:04:34
+Error in: . Error Message:System.IndexOutOfRangeException: No hay ninguna fila en la posición 0.
+   en System.Data.RBTree`1.GetNodeByIndex(Int32 userIndex)
+   en System.Data.DataRowCollection.get_Item(Int32 index)
+   en CartaDePorteManager.EsteClienteSeleFacturaAlCorredorPorSeparadoId(Int64 idCliente, Int64 idCorredor, String SC) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 12630
+__________________________
+
+Log Entry : 
+11/06/2017 17:04:36
+Error in: . Error Message:Empiezo a facturar en serio.6/11/2017 17:04:36
+__________________________
+
+Log Entry : 
+11/06/2017 17:04:43
+Error in: . Error Message:Error en la llamada a CreaFacturaCOMpronto. System.Exception: El item de la factura tiene tarifa 0.    21 59.280
+   en LogicaFacturacion.CreaFacturaCOMpronto(List`1 oListaCDP, Int64 IdClienteAFacturarle, Int64 sucursalWilliams, DataTable dtRenglonesManuales, String SC, HttpSessionState Session, Int32 optFacturarA, String agruparArticulosPor, String txtBuscar, String txtTarifaGastoAdministrativo, Boolean SeSeparaPorCorredor, String txtCorredor, Boolean chkPagaCorredor, List`1 listEmbarques, IEnumerable`1& ImputacionDevuelta, Int32 IdClienteObservaciones) en C:\bdl\pronto\BussinessLogic\LogicaFacturacion.vb:línea 6879
+__________________________
+
+Log Entry : 
+11/06/2017 17:04:46
+Error in: . Error Message:No se pudo crear la factura para <a href="Cliente.aspx?Id=17125" target="_blank">COOPERATIVA AGRARIA DE TRES ARROYOS LIMITADA</a>;  verificar IVA y CUIT, o que la carta no estuviese imputada anteriormente; Verificar que no  se haya disparado el error 'listacdp vacia' o no haya otro cliente con el mismo nombre <br/>
+
+__________________________
+
+Log Entry : 
+11/06/2017 17:04:49
+Error in: . Error Message:Error en la llamada a CreaFacturaCOMpronto. System.Exception: El item de la factura tiene tarifa 0.    5 229.490
+   en LogicaFacturacion.CreaFacturaCOMpronto(List`1 oListaCDP, Int64 IdClienteAFacturarle, Int64 sucursalWilliams, DataTable dtRenglonesManuales, String SC, HttpSessionState Session, Int32 optFacturarA, String agruparArticulosPor, String txtBuscar, String txtTarifaGastoAdministrativo, Boolean SeSeparaPorCorredor, String txtCorredor, Boolean chkPagaCorredor, List`1 listEmbarques, IEnumerable`1& ImputacionDevuelta, Int32 IdClienteObservaciones) en C:\bdl\pronto\BussinessLogic\LogicaFacturacion.vb:línea 6978
+__________________________
+
+Log Entry : 
+11/06/2017 17:04:59
+Error in: . Error Message:No se pudo crear la factura para <a href="Cliente.aspx?Id=17125" target="_blank">COOPERATIVA AGRARIA DE TRES ARROYOS LIMITADA</a>;  verificar IVA y CUIT, o que la carta no estuviese imputada anteriormente; Verificar que no  se haya disparado el error 'listacdp vacia' o no haya otro cliente con el mismo nombre <br/>
+No se pudo crear la factura para <a href="Cliente.aspx?Id=6207" target="_blank">EXPORT GRAINS SA</a>;  verificar IVA y CUIT, o que la carta no estuviese imputada anteriormente; Verificar que no  se haya disparado el error 'listacdp vacia' o no haya otro cliente con el mismo nombre <br/>
+
+__________________________
+
+Log Entry : 
+11/06/2017 17:05:39
+Error in: . Error Message:Error en la llamada a CreaFacturaCOMpronto. System.Exception: El item de la factura tiene tarifa 0.    21 30.520
+   en LogicaFacturacion.CreaFacturaCOMpronto(List`1 oListaCDP, Int64 IdClienteAFacturarle, Int64 sucursalWilliams, DataTable dtRenglonesManuales, String SC, HttpSessionState Session, Int32 optFacturarA, String agruparArticulosPor, String txtBuscar, String txtTarifaGastoAdministrativo, Boolean SeSeparaPorCorredor, String txtCorredor, Boolean chkPagaCorredor, List`1 listEmbarques, IEnumerable`1& ImputacionDevuelta, Int32 IdClienteObservaciones) en C:\bdl\pronto\BussinessLogic\LogicaFacturacion.vb:línea 6879
+__________________________
+
+Log Entry : 
+11/06/2017 17:08:07
+Error in: . Error Message:entrando en GetDatatableAsignacionAutomatica . tanda 0
+__________________________
+
+Log Entry : 
+11/06/2017 17:08:07
+Error in: . Error Message:Cartas sin automatico encontrado (pero este es el modo no automatico!!!)5
+__________________________
+
+Log Entry : 
+11/06/2017 17:08:08
+Error in: . Error Message:entro a Preprocesos 5
+__________________________
+
+Log Entry : 
+11/06/2017 17:08:11
+Error in: . Error Message:despues de AgregarEmbarques10
+__________________________
+
+Log Entry : 
+11/06/2017 17:08:11
+Error in: . Error Message:despues de ExcluirDeGastosAdministrativos10
+__________________________
+
+Log Entry : 
+11/06/2017 17:08:11
+Error in: . Error Message:despues de ReasignarAquellosQueSeLeFacturanForzosamenteAlCorredor10
+__________________________
+
+Log Entry : 
+11/06/2017 17:08:11
+Error in: . Error Message:despues de CasosSyngenta_y_Acopios10
+__________________________
+
+Log Entry : 
+11/06/2017 17:08:11
+Error in: . Error Message:entro en PostProcesos 10
+__________________________
+
+Log Entry : 
+11/06/2017 17:08:11
+Error in: . Error Message:despues de EmparcharClienteSeparadoParaCasosQueSuperenUnMontoDeterminado 10
+__________________________
+
+Log Entry : 
+11/06/2017 17:08:12
+Error in: . Error Message:despues de EmparcharClienteSeparadoParaFacturasQueSuperanCantidadDeRenglones 10
+__________________________
+
+Log Entry : 
+11/06/2017 17:08:12
+Error in: . Error Message:despues de SepararAcopiosLDCyACA 10
+__________________________
+
+Log Entry : 
+11/06/2017 17:08:12
+Error in: . Error Message:despues de PostProcesoFacturacion_ReglaExportadores 10
+__________________________
+
+Log Entry : 
+11/06/2017 17:08:12
+Error in: . Error Message:punto 2 en GetDatatableAsignacionAutomatica . tanda 3962
+__________________________
+
+Log Entry : 
+11/06/2017 17:08:12
+Error in: . Error Message:punto 3 en GetDatatableAsignacionAutomatica . tanda 3962
+__________________________
+
+Log Entry : 
+11/06/2017 17:08:12
+Error in: . Error Message:punto 4 en GetDatatableAsignacionAutomatica . tanda 3962
+__________________________
+
+Log Entry : 
+11/06/2017 17:08:15
+Error in: . Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartaDePorteManager.GetItem(String SC, Int32 id, Boolean getCartaDePorteDetalles) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 9829
+BusinessLogic
+__________________________
+
+Log Entry : 
+11/06/2017 17:08:15
+Error in: . Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en ProntoMVC.Tests.TestsWilliams.percepcion_en_clientes_con_46551() en C:\bdl\pronto\TestProject2\TestWilliams.cs:línea 1070
+TestProject2
+__________________________
+
+Log Entry : 
+11/06/2017 17:08:15
+Error in: . Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartaDePorteManager.GetItem(String SC, Int32 id, Boolean getCartaDePorteDetalles) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 9829
+BusinessLogic
+__________________________
+
+Log Entry : 
+11/06/2017 17:08:15
+Error in: . Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en ProntoMVC.Tests.TestsWilliams.percepcion_en_clientes_con_46551() en C:\bdl\pronto\TestProject2\TestWilliams.cs:línea 1070
+TestProject2
+__________________________
+
+Log Entry : 
+11/06/2017 17:08:16
+Error in: . Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartaDePorteManager.GetItem(String SC, Int32 id, Boolean getCartaDePorteDetalles) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 9829
+BusinessLogic
+__________________________
+
+Log Entry : 
+11/06/2017 17:08:16
+Error in: . Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en ProntoMVC.Tests.TestsWilliams.percepcion_en_clientes_con_46551() en C:\bdl\pronto\TestProject2\TestWilliams.cs:línea 1070
+TestProject2
+__________________________
+
+Log Entry : 
+11/06/2017 17:08:16
+Error in: . Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartaDePorteManager.GetItem(String SC, Int32 id, Boolean getCartaDePorteDetalles) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 9829
+BusinessLogic
+__________________________
+
+Log Entry : 
+11/06/2017 17:08:16
+Error in: . Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en ProntoMVC.Tests.TestsWilliams.percepcion_en_clientes_con_46551() en C:\bdl\pronto\TestProject2\TestWilliams.cs:línea 1070
+TestProject2
+__________________________
+
+Log Entry : 
+11/06/2017 17:08:16
+Error in: . Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartaDePorteManager.GetItem(String SC, Int32 id, Boolean getCartaDePorteDetalles) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 9829
+BusinessLogic
+__________________________
+
+Log Entry : 
+11/06/2017 17:08:16
+Error in: . Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en ProntoMVC.Tests.TestsWilliams.percepcion_en_clientes_con_46551() en C:\bdl\pronto\TestProject2\TestWilliams.cs:línea 1070
+TestProject2
+__________________________
+
+Log Entry : 
+11/06/2017 17:08:18
+Error in: . Error Message:System.Exception
+La tarifa de la lista está vencida
+   en Pronto.ERP.Bll.ListaPreciosManager.VerificarVencimientoLista(Int64 idListaPrecio, String SC) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 520
+   en Pronto.ERP.Bll.ListaPreciosManager.SavePrecioPorCliente(String SC, Int64 IdCliente, Int64 IdArticulo, Double Precio, Int64 IdDestino) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 549
+   en ProntoMVC.Tests.TestsWilliams.percepcion_en_clientes_con_46551() en C:\bdl\pronto\TestProject2\TestWilliams.cs:línea 1070
+BusinessLogic
+__________________________
+
+Log Entry : 
+11/06/2017 17:08:20
+Error in: . Error Message:Separo las facturas que se generan en el lote.6/11/2017 17:08:20
+__________________________
+
+Log Entry : 
+11/06/2017 17:08:20
+Error in: . Error Message:ActualizarCampoClienteSeparador 10 filas
+__________________________
+
+Log Entry : 
+11/06/2017 17:08:21
+Error in: . Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartaDePorteManager.IdClienteEquivalenteDelIdVendedor(Int64 IdVendedor, String SC) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 12596
+BusinessLogic
+__________________________
+
+Log Entry : 
+11/06/2017 17:08:21
+Error in: . Error Message:System.IndexOutOfRangeException: No hay ninguna fila en la posición 0.
+   en System.Data.RBTree`1.GetNodeByIndex(Int32 userIndex)
+   en System.Data.DataRowCollection.get_Item(Int32 index)
+   en CartaDePorteManager.EsteClienteSeleFacturaAlCorredorPorSeparadoId(Int64 idCliente, Int64 idCorredor, String SC) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 12630
+__________________________
+
+Log Entry : 
+11/06/2017 17:08:21
+Error in: . Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartaDePorteManager.IdClienteEquivalenteDelIdVendedor(Int64 IdVendedor, String SC) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 12596
+BusinessLogic
+__________________________
+
+Log Entry : 
+11/06/2017 17:08:21
+Error in: . Error Message:System.IndexOutOfRangeException: No hay ninguna fila en la posición 0.
+   en System.Data.RBTree`1.GetNodeByIndex(Int32 userIndex)
+   en System.Data.DataRowCollection.get_Item(Int32 index)
+   en CartaDePorteManager.EsteClienteSeleFacturaAlCorredorPorSeparadoId(Int64 idCliente, Int64 idCorredor, String SC) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 12630
+__________________________
+
+Log Entry : 
+11/06/2017 17:08:21
+Error in: . Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartaDePorteManager.IdClienteEquivalenteDelIdVendedor(Int64 IdVendedor, String SC) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 12596
+BusinessLogic
+__________________________
+
+Log Entry : 
+11/06/2017 17:08:21
+Error in: . Error Message:System.IndexOutOfRangeException: No hay ninguna fila en la posición 0.
+   en System.Data.RBTree`1.GetNodeByIndex(Int32 userIndex)
+   en System.Data.DataRowCollection.get_Item(Int32 index)
+   en CartaDePorteManager.EsteClienteSeleFacturaAlCorredorPorSeparadoId(Int64 idCliente, Int64 idCorredor, String SC) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 12630
+__________________________
+
+Log Entry : 
+11/06/2017 17:08:21
+Error in: . Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartaDePorteManager.IdClienteEquivalenteDelIdVendedor(Int64 IdVendedor, String SC) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 12596
+BusinessLogic
+__________________________
+
+Log Entry : 
+11/06/2017 17:08:21
+Error in: . Error Message:System.IndexOutOfRangeException: No hay ninguna fila en la posición 0.
+   en System.Data.RBTree`1.GetNodeByIndex(Int32 userIndex)
+   en System.Data.DataRowCollection.get_Item(Int32 index)
+   en CartaDePorteManager.EsteClienteSeleFacturaAlCorredorPorSeparadoId(Int64 idCliente, Int64 idCorredor, String SC) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 12630
+__________________________
+
+Log Entry : 
+11/06/2017 17:08:21
+Error in: . Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartaDePorteManager.IdClienteEquivalenteDelIdVendedor(Int64 IdVendedor, String SC) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 12596
+BusinessLogic
+__________________________
+
+Log Entry : 
+11/06/2017 17:08:21
+Error in: . Error Message:System.IndexOutOfRangeException: No hay ninguna fila en la posición 0.
+   en System.Data.RBTree`1.GetNodeByIndex(Int32 userIndex)
+   en System.Data.DataRowCollection.get_Item(Int32 index)
+   en CartaDePorteManager.EsteClienteSeleFacturaAlCorredorPorSeparadoId(Int64 idCliente, Int64 idCorredor, String SC) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 12630
+__________________________
+
+Log Entry : 
+11/06/2017 17:08:22
+Error in: . Error Message:Empiezo a facturar en serio.6/11/2017 17:08:22
+__________________________
+
+Log Entry : 
+11/06/2017 17:08:33
+Error in: . Error Message:Error en la llamada a CreaFacturaCOMpronto. System.Exception: El item de la factura tiene tarifa 0.    21 59.280
+   en LogicaFacturacion.CreaFacturaCOMpronto(List`1 oListaCDP, Int64 IdClienteAFacturarle, Int64 sucursalWilliams, DataTable dtRenglonesManuales, String SC, HttpSessionState Session, Int32 optFacturarA, String agruparArticulosPor, String txtBuscar, String txtTarifaGastoAdministrativo, Boolean SeSeparaPorCorredor, String txtCorredor, Boolean chkPagaCorredor, List`1 listEmbarques, IEnumerable`1& ImputacionDevuelta, Int32 IdClienteObservaciones) en C:\bdl\pronto\BussinessLogic\LogicaFacturacion.vb:línea 6879
+__________________________
+
+Log Entry : 
+11/06/2017 17:14:42
+Error in: . Error Message:entrando en GetDatatableAsignacionAutomatica . tanda 0
+__________________________
+
+Log Entry : 
+11/06/2017 17:14:42
+Error in: . Error Message:Cartas sin automatico encontrado (pero este es el modo no automatico!!!)5
+__________________________
+
+Log Entry : 
+11/06/2017 17:14:42
+Error in: . Error Message:entro a Preprocesos 5
+__________________________
+
+Log Entry : 
+11/06/2017 17:14:46
+Error in: . Error Message:despues de AgregarEmbarques10
+__________________________
+
+Log Entry : 
+11/06/2017 17:14:46
+Error in: . Error Message:despues de ExcluirDeGastosAdministrativos10
+__________________________
+
+Log Entry : 
+11/06/2017 17:14:46
+Error in: . Error Message:despues de ReasignarAquellosQueSeLeFacturanForzosamenteAlCorredor10
+__________________________
+
+Log Entry : 
+11/06/2017 17:14:46
+Error in: . Error Message:despues de CasosSyngenta_y_Acopios10
+__________________________
+
+Log Entry : 
+11/06/2017 17:14:46
+Error in: . Error Message:entro en PostProcesos 10
+__________________________
+
+Log Entry : 
+11/06/2017 17:14:46
+Error in: . Error Message:despues de EmparcharClienteSeparadoParaCasosQueSuperenUnMontoDeterminado 10
+__________________________
+
+Log Entry : 
+11/06/2017 17:14:46
+Error in: . Error Message:despues de EmparcharClienteSeparadoParaFacturasQueSuperanCantidadDeRenglones 10
+__________________________
+
+Log Entry : 
+11/06/2017 17:14:46
+Error in: . Error Message:despues de SepararAcopiosLDCyACA 10
+__________________________
+
+Log Entry : 
+11/06/2017 17:14:46
+Error in: . Error Message:despues de PostProcesoFacturacion_ReglaExportadores 10
+__________________________
+
+Log Entry : 
+11/06/2017 17:14:47
+Error in: . Error Message:punto 2 en GetDatatableAsignacionAutomatica . tanda 6672
+__________________________
+
+Log Entry : 
+11/06/2017 17:14:47
+Error in: . Error Message:punto 3 en GetDatatableAsignacionAutomatica . tanda 6672
+__________________________
+
+Log Entry : 
+11/06/2017 17:14:47
+Error in: . Error Message:punto 4 en GetDatatableAsignacionAutomatica . tanda 6672
+__________________________
+
+Log Entry : 
+11/06/2017 17:14:50
+Error in: . Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartaDePorteManager.GetItem(String SC, Int32 id, Boolean getCartaDePorteDetalles) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 9829
+BusinessLogic
+__________________________
+
+Log Entry : 
+11/06/2017 17:14:50
+Error in: . Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en ProntoMVC.Tests.TestsWilliams.percepcion_en_clientes_con_46551() en C:\bdl\pronto\TestProject2\TestWilliams.cs:línea 1070
+TestProject2
+__________________________
+
+Log Entry : 
+11/06/2017 17:14:50
+Error in: . Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartaDePorteManager.GetItem(String SC, Int32 id, Boolean getCartaDePorteDetalles) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 9829
+BusinessLogic
+__________________________
+
+Log Entry : 
+11/06/2017 17:14:50
+Error in: . Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en ProntoMVC.Tests.TestsWilliams.percepcion_en_clientes_con_46551() en C:\bdl\pronto\TestProject2\TestWilliams.cs:línea 1070
+TestProject2
+__________________________
+
+Log Entry : 
+11/06/2017 17:14:50
+Error in: . Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartaDePorteManager.GetItem(String SC, Int32 id, Boolean getCartaDePorteDetalles) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 9829
+BusinessLogic
+__________________________
+
+Log Entry : 
+11/06/2017 17:14:50
+Error in: . Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en ProntoMVC.Tests.TestsWilliams.percepcion_en_clientes_con_46551() en C:\bdl\pronto\TestProject2\TestWilliams.cs:línea 1070
+TestProject2
+__________________________
+
+Log Entry : 
+11/06/2017 17:14:51
+Error in: . Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartaDePorteManager.GetItem(String SC, Int32 id, Boolean getCartaDePorteDetalles) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 9829
+BusinessLogic
+__________________________
+
+Log Entry : 
+11/06/2017 17:14:51
+Error in: . Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en ProntoMVC.Tests.TestsWilliams.percepcion_en_clientes_con_46551() en C:\bdl\pronto\TestProject2\TestWilliams.cs:línea 1070
+TestProject2
+__________________________
+
+Log Entry : 
+11/06/2017 17:14:51
+Error in: . Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartaDePorteManager.GetItem(String SC, Int32 id, Boolean getCartaDePorteDetalles) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 9829
+BusinessLogic
+__________________________
+
+Log Entry : 
+11/06/2017 17:14:51
+Error in: . Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en ProntoMVC.Tests.TestsWilliams.percepcion_en_clientes_con_46551() en C:\bdl\pronto\TestProject2\TestWilliams.cs:línea 1070
+TestProject2
+__________________________
+
+Log Entry : 
+11/06/2017 17:14:52
+Error in: . Error Message:System.Exception
+La tarifa de la lista está vencida
+   en Pronto.ERP.Bll.ListaPreciosManager.VerificarVencimientoLista(Int64 idListaPrecio, String SC) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 520
+   en Pronto.ERP.Bll.ListaPreciosManager.SavePrecioPorCliente(String SC, Int64 IdCliente, Int64 IdArticulo, Double Precio, Int64 IdDestino) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 549
+   en ProntoMVC.Tests.TestsWilliams.percepcion_en_clientes_con_46551() en C:\bdl\pronto\TestProject2\TestWilliams.cs:línea 1070
+BusinessLogic
+__________________________
+
+Log Entry : 
+11/06/2017 17:14:55
+Error in: . Error Message:Separo las facturas que se generan en el lote.6/11/2017 17:14:55
+__________________________
+
+Log Entry : 
+11/06/2017 17:14:55
+Error in: . Error Message:ActualizarCampoClienteSeparador 10 filas
+__________________________
+
+Log Entry : 
+11/06/2017 17:14:55
+Error in: . Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartaDePorteManager.IdClienteEquivalenteDelIdVendedor(Int64 IdVendedor, String SC) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 12596
+BusinessLogic
+__________________________
+
+Log Entry : 
+11/06/2017 17:14:55
+Error in: . Error Message:System.IndexOutOfRangeException: No hay ninguna fila en la posición 0.
+   en System.Data.RBTree`1.GetNodeByIndex(Int32 userIndex)
+   en System.Data.DataRowCollection.get_Item(Int32 index)
+   en CartaDePorteManager.EsteClienteSeleFacturaAlCorredorPorSeparadoId(Int64 idCliente, Int64 idCorredor, String SC) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 12630
+__________________________
+
+Log Entry : 
+11/06/2017 17:14:55
+Error in: . Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartaDePorteManager.IdClienteEquivalenteDelIdVendedor(Int64 IdVendedor, String SC) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 12596
+BusinessLogic
+__________________________
+
+Log Entry : 
+11/06/2017 17:14:55
+Error in: . Error Message:System.IndexOutOfRangeException: No hay ninguna fila en la posición 0.
+   en System.Data.RBTree`1.GetNodeByIndex(Int32 userIndex)
+   en System.Data.DataRowCollection.get_Item(Int32 index)
+   en CartaDePorteManager.EsteClienteSeleFacturaAlCorredorPorSeparadoId(Int64 idCliente, Int64 idCorredor, String SC) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 12630
+__________________________
+
+Log Entry : 
+11/06/2017 17:14:55
+Error in: . Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartaDePorteManager.IdClienteEquivalenteDelIdVendedor(Int64 IdVendedor, String SC) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 12596
+BusinessLogic
+__________________________
+
+Log Entry : 
+11/06/2017 17:14:56
+Error in: . Error Message:System.IndexOutOfRangeException: No hay ninguna fila en la posición 0.
+   en System.Data.RBTree`1.GetNodeByIndex(Int32 userIndex)
+   en System.Data.DataRowCollection.get_Item(Int32 index)
+   en CartaDePorteManager.EsteClienteSeleFacturaAlCorredorPorSeparadoId(Int64 idCliente, Int64 idCorredor, String SC) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 12630
+__________________________
+
+Log Entry : 
+11/06/2017 17:14:56
+Error in: . Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartaDePorteManager.IdClienteEquivalenteDelIdVendedor(Int64 IdVendedor, String SC) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 12596
+BusinessLogic
+__________________________
+
+Log Entry : 
+11/06/2017 17:14:56
+Error in: . Error Message:System.IndexOutOfRangeException: No hay ninguna fila en la posición 0.
+   en System.Data.RBTree`1.GetNodeByIndex(Int32 userIndex)
+   en System.Data.DataRowCollection.get_Item(Int32 index)
+   en CartaDePorteManager.EsteClienteSeleFacturaAlCorredorPorSeparadoId(Int64 idCliente, Int64 idCorredor, String SC) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 12630
+__________________________
+
+Log Entry : 
+11/06/2017 17:14:56
+Error in: . Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartaDePorteManager.IdClienteEquivalenteDelIdVendedor(Int64 IdVendedor, String SC) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 12596
+BusinessLogic
+__________________________
+
+Log Entry : 
+11/06/2017 17:14:56
+Error in: . Error Message:System.IndexOutOfRangeException: No hay ninguna fila en la posición 0.
+   en System.Data.RBTree`1.GetNodeByIndex(Int32 userIndex)
+   en System.Data.DataRowCollection.get_Item(Int32 index)
+   en CartaDePorteManager.EsteClienteSeleFacturaAlCorredorPorSeparadoId(Int64 idCliente, Int64 idCorredor, String SC) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 12630
+__________________________
+
+Log Entry : 
+11/06/2017 17:14:57
+Error in: . Error Message:Empiezo a facturar en serio.6/11/2017 17:14:57
+__________________________
+
+Log Entry : 
+11/06/2017 17:15:42
+Error in: . Error Message:Incorrect syntax near '='.
+__________________________
+
+Log Entry : 
+11/06/2017 17:15:42
+Error in: . Error Message:System.Data.SqlClient.SqlException (0x80131904): Incorrect syntax near '='.
+   en Microsoft.VisualBasic.CompilerServices.Symbols.Container.InvokeMethod(Method TargetProcedure, Object[] Arguments, Boolean[] CopyBack, BindingFlags Flags)
+   en Microsoft.VisualBasic.CompilerServices.NewLateBinding.CallMethod(Container BaseReference, String MethodName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack, BindingFlags InvocationFlags, Boolean ReportErrors, ResolutionFailure& Failure)
+   en Microsoft.VisualBasic.CompilerServices.NewLateBinding.ObjectLateCall(Object Instance, Type Type, String MemberName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack, Boolean IgnoreReturn)
+   en Microsoft.VisualBasic.CompilerServices.NewLateBinding.LateCall(Object Instance, Type Type, String MemberName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack, Boolean IgnoreReturn)
+   en Pronto.ERP.Dal.GeneralDB.ExecDinamico(String SC, String comandoSQLdinamico, Int32 timeoutSegundos)
+   en Pronto.ERP.Bll.EntidadManager.ExecDinamico(String SC, String sComandoDinamico, Int32 timeoutSegundos) en C:\bdl\pronto\BussinessLogic\EntidadManager.vb:línea 868
+   en LogicaFacturacion.PercepcionIngresosBrutos(Object& oFac, String sc, HttpSessionState& session, ClienteNuevo cli, Double mvarNetoGravado, Boolean Parametros_EsAgenteDePercepcionIIBB, Boolean Pventa_AgentePercepcionIIBB) en C:\bdl\pronto\BussinessLogic\LogicaFacturacion.vb:línea 8220
+ClientConnectionId:34d5d707-b2a9-408c-bf2b-a522b5218cac
+Error Number:102,State:1,Class:15
+__________________________
+
+Log Entry : 
+11/06/2017 17:17:05
+Error in: . Error Message:entrando en GetDatatableAsignacionAutomatica . tanda 0
+__________________________
+
+Log Entry : 
+11/06/2017 17:17:05
+Error in: . Error Message:Cartas sin automatico encontrado (pero este es el modo no automatico!!!)5
+__________________________
+
+Log Entry : 
+11/06/2017 17:17:05
+Error in: . Error Message:entro a Preprocesos 5
+__________________________
+
+Log Entry : 
+11/06/2017 17:17:09
+Error in: . Error Message:despues de AgregarEmbarques10
+__________________________
+
+Log Entry : 
+11/06/2017 17:17:09
+Error in: . Error Message:despues de ExcluirDeGastosAdministrativos10
+__________________________
+
+Log Entry : 
+11/06/2017 17:17:09
+Error in: . Error Message:despues de ReasignarAquellosQueSeLeFacturanForzosamenteAlCorredor10
+__________________________
+
+Log Entry : 
+11/06/2017 17:17:09
+Error in: . Error Message:despues de CasosSyngenta_y_Acopios10
+__________________________
+
+Log Entry : 
+11/06/2017 17:17:09
+Error in: . Error Message:entro en PostProcesos 10
+__________________________
+
+Log Entry : 
+11/06/2017 17:17:09
+Error in: . Error Message:despues de EmparcharClienteSeparadoParaCasosQueSuperenUnMontoDeterminado 10
+__________________________
+
+Log Entry : 
+11/06/2017 17:17:09
+Error in: . Error Message:despues de EmparcharClienteSeparadoParaFacturasQueSuperanCantidadDeRenglones 10
+__________________________
+
+Log Entry : 
+11/06/2017 17:17:09
+Error in: . Error Message:despues de SepararAcopiosLDCyACA 10
+__________________________
+
+Log Entry : 
+11/06/2017 17:17:09
+Error in: . Error Message:despues de PostProcesoFacturacion_ReglaExportadores 10
+__________________________
+
+Log Entry : 
+11/06/2017 17:17:10
+Error in: . Error Message:punto 2 en GetDatatableAsignacionAutomatica . tanda 6535
+__________________________
+
+Log Entry : 
+11/06/2017 17:17:10
+Error in: . Error Message:punto 3 en GetDatatableAsignacionAutomatica . tanda 6535
+__________________________
+
+Log Entry : 
+11/06/2017 17:17:10
+Error in: . Error Message:punto 4 en GetDatatableAsignacionAutomatica . tanda 6535
+__________________________
+
+Log Entry : 
+11/06/2017 17:17:12
+Error in: . Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartaDePorteManager.GetItem(String SC, Int32 id, Boolean getCartaDePorteDetalles) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 9829
+BusinessLogic
+__________________________
+
+Log Entry : 
+11/06/2017 17:17:13
+Error in: . Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en ProntoMVC.Tests.TestsWilliams.percepcion_en_clientes_con_46551() en C:\bdl\pronto\TestProject2\TestWilliams.cs:línea 1070
+TestProject2
+__________________________
+
+Log Entry : 
+11/06/2017 17:17:13
+Error in: . Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartaDePorteManager.GetItem(String SC, Int32 id, Boolean getCartaDePorteDetalles) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 9829
+BusinessLogic
+__________________________
+
+Log Entry : 
+11/06/2017 17:17:13
+Error in: . Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en ProntoMVC.Tests.TestsWilliams.percepcion_en_clientes_con_46551() en C:\bdl\pronto\TestProject2\TestWilliams.cs:línea 1070
+TestProject2
+__________________________
+
+Log Entry : 
+11/06/2017 17:17:13
+Error in: . Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartaDePorteManager.GetItem(String SC, Int32 id, Boolean getCartaDePorteDetalles) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 9829
+BusinessLogic
+__________________________
+
+Log Entry : 
+11/06/2017 17:17:13
+Error in: . Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en ProntoMVC.Tests.TestsWilliams.percepcion_en_clientes_con_46551() en C:\bdl\pronto\TestProject2\TestWilliams.cs:línea 1070
+TestProject2
+__________________________
+
+Log Entry : 
+11/06/2017 17:17:13
+Error in: . Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartaDePorteManager.GetItem(String SC, Int32 id, Boolean getCartaDePorteDetalles) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 9829
+BusinessLogic
+__________________________
+
+Log Entry : 
+11/06/2017 17:17:13
+Error in: . Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en ProntoMVC.Tests.TestsWilliams.percepcion_en_clientes_con_46551() en C:\bdl\pronto\TestProject2\TestWilliams.cs:línea 1070
+TestProject2
+__________________________
+
+Log Entry : 
+11/06/2017 17:17:14
+Error in: . Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartaDePorteManager.GetItem(String SC, Int32 id, Boolean getCartaDePorteDetalles) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 9829
+BusinessLogic
+__________________________
+
+Log Entry : 
+11/06/2017 17:17:14
+Error in: . Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en ProntoMVC.Tests.TestsWilliams.percepcion_en_clientes_con_46551() en C:\bdl\pronto\TestProject2\TestWilliams.cs:línea 1070
+TestProject2
+__________________________
+
+Log Entry : 
+11/06/2017 17:17:15
+Error in: . Error Message:System.Exception
+La tarifa de la lista está vencida
+   en Pronto.ERP.Bll.ListaPreciosManager.VerificarVencimientoLista(Int64 idListaPrecio, String SC) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 520
+   en Pronto.ERP.Bll.ListaPreciosManager.SavePrecioPorCliente(String SC, Int64 IdCliente, Int64 IdArticulo, Double Precio, Int64 IdDestino) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 549
+   en ProntoMVC.Tests.TestsWilliams.percepcion_en_clientes_con_46551() en C:\bdl\pronto\TestProject2\TestWilliams.cs:línea 1070
+BusinessLogic
+__________________________
+
+Log Entry : 
+11/06/2017 17:17:17
+Error in: . Error Message:Separo las facturas que se generan en el lote.6/11/2017 17:17:17
+__________________________
+
+Log Entry : 
+11/06/2017 17:17:17
+Error in: . Error Message:ActualizarCampoClienteSeparador 10 filas
+__________________________
+
+Log Entry : 
+11/06/2017 17:17:18
+Error in: . Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartaDePorteManager.IdClienteEquivalenteDelIdVendedor(Int64 IdVendedor, String SC) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 12596
+BusinessLogic
+__________________________
+
+Log Entry : 
+11/06/2017 17:17:18
+Error in: . Error Message:System.IndexOutOfRangeException: No hay ninguna fila en la posición 0.
+   en System.Data.RBTree`1.GetNodeByIndex(Int32 userIndex)
+   en System.Data.DataRowCollection.get_Item(Int32 index)
+   en CartaDePorteManager.EsteClienteSeleFacturaAlCorredorPorSeparadoId(Int64 idCliente, Int64 idCorredor, String SC) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 12630
+__________________________
+
+Log Entry : 
+11/06/2017 17:17:18
+Error in: . Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartaDePorteManager.IdClienteEquivalenteDelIdVendedor(Int64 IdVendedor, String SC) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 12596
+BusinessLogic
+__________________________
+
+Log Entry : 
+11/06/2017 17:17:18
+Error in: . Error Message:System.IndexOutOfRangeException: No hay ninguna fila en la posición 0.
+   en System.Data.RBTree`1.GetNodeByIndex(Int32 userIndex)
+   en System.Data.DataRowCollection.get_Item(Int32 index)
+   en CartaDePorteManager.EsteClienteSeleFacturaAlCorredorPorSeparadoId(Int64 idCliente, Int64 idCorredor, String SC) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 12630
+__________________________
+
+Log Entry : 
+11/06/2017 17:17:18
+Error in: . Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartaDePorteManager.IdClienteEquivalenteDelIdVendedor(Int64 IdVendedor, String SC) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 12596
+BusinessLogic
+__________________________
+
+Log Entry : 
+11/06/2017 17:17:18
+Error in: . Error Message:System.IndexOutOfRangeException: No hay ninguna fila en la posición 0.
+   en System.Data.RBTree`1.GetNodeByIndex(Int32 userIndex)
+   en System.Data.DataRowCollection.get_Item(Int32 index)
+   en CartaDePorteManager.EsteClienteSeleFacturaAlCorredorPorSeparadoId(Int64 idCliente, Int64 idCorredor, String SC) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 12630
+__________________________
+
+Log Entry : 
+11/06/2017 17:17:18
+Error in: . Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartaDePorteManager.IdClienteEquivalenteDelIdVendedor(Int64 IdVendedor, String SC) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 12596
+BusinessLogic
+__________________________
+
+Log Entry : 
+11/06/2017 17:17:18
+Error in: . Error Message:System.IndexOutOfRangeException: No hay ninguna fila en la posición 0.
+   en System.Data.RBTree`1.GetNodeByIndex(Int32 userIndex)
+   en System.Data.DataRowCollection.get_Item(Int32 index)
+   en CartaDePorteManager.EsteClienteSeleFacturaAlCorredorPorSeparadoId(Int64 idCliente, Int64 idCorredor, String SC) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 12630
+__________________________
+
+Log Entry : 
+11/06/2017 17:17:18
+Error in: . Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartaDePorteManager.IdClienteEquivalenteDelIdVendedor(Int64 IdVendedor, String SC) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 12596
+BusinessLogic
+__________________________
+
+Log Entry : 
+11/06/2017 17:17:18
+Error in: . Error Message:System.IndexOutOfRangeException: No hay ninguna fila en la posición 0.
+   en System.Data.RBTree`1.GetNodeByIndex(Int32 userIndex)
+   en System.Data.DataRowCollection.get_Item(Int32 index)
+   en CartaDePorteManager.EsteClienteSeleFacturaAlCorredorPorSeparadoId(Int64 idCliente, Int64 idCorredor, String SC) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 12630
+__________________________
+
+Log Entry : 
+11/06/2017 17:17:19
+Error in: . Error Message:Empiezo a facturar en serio.6/11/2017 17:17:19
+__________________________
+
+Log Entry : 
+11/06/2017 17:17:57
+Error in: . Error Message:Error en la llamada a CreaFacturaCOMpronto. System.Exception: El item de la factura tiene tarifa 0.    21 59.280
+   en LogicaFacturacion.CreaFacturaCOMpronto(List`1 oListaCDP, Int64 IdClienteAFacturarle, Int64 sucursalWilliams, DataTable dtRenglonesManuales, String SC, HttpSessionState Session, Int32 optFacturarA, String agruparArticulosPor, String txtBuscar, String txtTarifaGastoAdministrativo, Boolean SeSeparaPorCorredor, String txtCorredor, Boolean chkPagaCorredor, List`1 listEmbarques, IEnumerable`1& ImputacionDevuelta, Int32 IdClienteObservaciones) en C:\bdl\pronto\BussinessLogic\LogicaFacturacion.vb:línea 6879
+__________________________
+
+Log Entry : 
+11/06/2017 17:17:57
+Error in: . Error Message:No se pudo crear la factura para <a href="Cliente.aspx?Id=17125" target="_blank">COOPERATIVA AGRARIA DE TRES ARROYOS LIMITADA</a>;  verificar IVA y CUIT, o que la carta no estuviese imputada anteriormente; Verificar que no  se haya disparado el error 'listacdp vacia' o no haya otro cliente con el mismo nombre <br/>
+
+__________________________
+
+Log Entry : 
+11/06/2017 17:18:04
+Error in: . Error Message:Error en la llamada a CreaFacturaCOMpronto. System.Exception: El item de la factura tiene tarifa 0.    5 3420.030
+   en LogicaFacturacion.CreaFacturaCOMpronto(List`1 oListaCDP, Int64 IdClienteAFacturarle, Int64 sucursalWilliams, DataTable dtRenglonesManuales, String SC, HttpSessionState Session, Int32 optFacturarA, String agruparArticulosPor, String txtBuscar, String txtTarifaGastoAdministrativo, Boolean SeSeparaPorCorredor, String txtCorredor, Boolean chkPagaCorredor, List`1 listEmbarques, IEnumerable`1& ImputacionDevuelta, Int32 IdClienteObservaciones) en C:\bdl\pronto\BussinessLogic\LogicaFacturacion.vb:línea 6978
+__________________________
+
+Log Entry : 
+11/06/2017 17:18:04
+Error in: . Error Message:No se pudo crear la factura para <a href="Cliente.aspx?Id=17125" target="_blank">COOPERATIVA AGRARIA DE TRES ARROYOS LIMITADA</a>;  verificar IVA y CUIT, o que la carta no estuviese imputada anteriormente; Verificar que no  se haya disparado el error 'listacdp vacia' o no haya otro cliente con el mismo nombre <br/>
+No se pudo crear la factura para <a href="Cliente.aspx?Id=6207" target="_blank">EXPORT GRAINS SA</a>;  verificar IVA y CUIT, o que la carta no estuviese imputada anteriormente; Verificar que no  se haya disparado el error 'listacdp vacia' o no haya otro cliente con el mismo nombre <br/>
+
+__________________________
+
+Log Entry : 
+11/06/2017 17:29:31
+Error in: . Error Message:entrando en GetDatatableAsignacionAutomatica . tanda 0
+__________________________
+
+Log Entry : 
+11/06/2017 17:29:35
+Error in: . Error Message:Cartas sin automatico encontrado (pero este es el modo no automatico!!!)5
+__________________________
+
+Log Entry : 
+11/06/2017 17:29:35
+Error in: . Error Message:entro a Preprocesos 5
+__________________________
+
+Log Entry : 
+11/06/2017 17:29:39
+Error in: . Error Message:despues de AgregarEmbarques10
+__________________________
+
+Log Entry : 
+11/06/2017 17:29:39
+Error in: . Error Message:despues de ExcluirDeGastosAdministrativos10
+__________________________
+
+Log Entry : 
+11/06/2017 17:29:39
+Error in: . Error Message:despues de ReasignarAquellosQueSeLeFacturanForzosamenteAlCorredor10
+__________________________
+
+Log Entry : 
+11/06/2017 17:29:39
+Error in: . Error Message:despues de CasosSyngenta_y_Acopios10
+__________________________
+
+Log Entry : 
+11/06/2017 17:29:39
+Error in: . Error Message:entro en PostProcesos 10
+__________________________
+
+Log Entry : 
+11/06/2017 17:29:39
+Error in: . Error Message:despues de EmparcharClienteSeparadoParaCasosQueSuperenUnMontoDeterminado 10
+__________________________
+
+Log Entry : 
+11/06/2017 17:29:39
+Error in: . Error Message:despues de EmparcharClienteSeparadoParaFacturasQueSuperanCantidadDeRenglones 10
+__________________________
+
+Log Entry : 
+11/06/2017 17:29:39
+Error in: . Error Message:despues de SepararAcopiosLDCyACA 10
+__________________________
+
+Log Entry : 
+11/06/2017 17:29:39
+Error in: . Error Message:despues de PostProcesoFacturacion_ReglaExportadores 10
+__________________________
+
+Log Entry : 
+11/06/2017 17:29:40
+Error in: . Error Message:punto 2 en GetDatatableAsignacionAutomatica . tanda 8635
+__________________________
+
+Log Entry : 
+11/06/2017 17:29:40
+Error in: . Error Message:punto 3 en GetDatatableAsignacionAutomatica . tanda 8635
+__________________________
+
+Log Entry : 
+11/06/2017 17:29:40
+Error in: . Error Message:punto 4 en GetDatatableAsignacionAutomatica . tanda 8635
+__________________________
+
+Log Entry : 
+11/06/2017 17:29:43
+Error in: . Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartaDePorteManager.GetItem(String SC, Int32 id, Boolean getCartaDePorteDetalles) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 9829
+BusinessLogic
+__________________________
+
+Log Entry : 
+11/06/2017 17:29:43
+Error in: . Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en ProntoMVC.Tests.TestsWilliams.percepcion_en_clientes_con_46551() en C:\bdl\pronto\TestProject2\TestWilliams.cs:línea 1070
+TestProject2
+__________________________
+
+Log Entry : 
+11/06/2017 17:29:43
+Error in: . Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartaDePorteManager.GetItem(String SC, Int32 id, Boolean getCartaDePorteDetalles) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 9829
+BusinessLogic
+__________________________
+
+Log Entry : 
+11/06/2017 17:29:43
+Error in: . Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en ProntoMVC.Tests.TestsWilliams.percepcion_en_clientes_con_46551() en C:\bdl\pronto\TestProject2\TestWilliams.cs:línea 1070
+TestProject2
+__________________________
+
+Log Entry : 
+11/06/2017 17:29:43
+Error in: . Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartaDePorteManager.GetItem(String SC, Int32 id, Boolean getCartaDePorteDetalles) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 9829
+BusinessLogic
+__________________________
+
+Log Entry : 
+11/06/2017 17:29:43
+Error in: . Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en ProntoMVC.Tests.TestsWilliams.percepcion_en_clientes_con_46551() en C:\bdl\pronto\TestProject2\TestWilliams.cs:línea 1070
+TestProject2
+__________________________
+
+Log Entry : 
+11/06/2017 17:29:44
+Error in: . Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartaDePorteManager.GetItem(String SC, Int32 id, Boolean getCartaDePorteDetalles) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 9829
+BusinessLogic
+__________________________
+
+Log Entry : 
+11/06/2017 17:29:44
+Error in: . Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en ProntoMVC.Tests.TestsWilliams.percepcion_en_clientes_con_46551() en C:\bdl\pronto\TestProject2\TestWilliams.cs:línea 1070
+TestProject2
+__________________________
+
+Log Entry : 
+11/06/2017 17:29:44
+Error in: . Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartaDePorteManager.GetItem(String SC, Int32 id, Boolean getCartaDePorteDetalles) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 9829
+BusinessLogic
+__________________________
+
+Log Entry : 
+11/06/2017 17:29:44
+Error in: . Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en ProntoMVC.Tests.TestsWilliams.percepcion_en_clientes_con_46551() en C:\bdl\pronto\TestProject2\TestWilliams.cs:línea 1070
+TestProject2
+__________________________
+
+Log Entry : 
+11/06/2017 17:29:45
+Error in: . Error Message:System.Exception
+La tarifa de la lista está vencida
+   en Pronto.ERP.Bll.ListaPreciosManager.VerificarVencimientoLista(Int64 idListaPrecio, String SC) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 520
+   en Pronto.ERP.Bll.ListaPreciosManager.SavePrecioPorCliente(String SC, Int64 IdCliente, Int64 IdArticulo, Double Precio, Int64 IdDestino) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 549
+   en ProntoMVC.Tests.TestsWilliams.percepcion_en_clientes_con_46551() en C:\bdl\pronto\TestProject2\TestWilliams.cs:línea 1070
+BusinessLogic
+__________________________
+
+Log Entry : 
+11/06/2017 17:29:48
+Error in: . Error Message:Separo las facturas que se generan en el lote.6/11/2017 17:29:48
+__________________________
+
+Log Entry : 
+11/06/2017 17:29:48
+Error in: . Error Message:ActualizarCampoClienteSeparador 10 filas
+__________________________
+
+Log Entry : 
+11/06/2017 17:29:48
+Error in: . Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartaDePorteManager.IdClienteEquivalenteDelIdVendedor(Int64 IdVendedor, String SC) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 12596
+BusinessLogic
+__________________________
+
+Log Entry : 
+11/06/2017 17:29:48
+Error in: . Error Message:System.IndexOutOfRangeException: No hay ninguna fila en la posición 0.
+   en System.Data.RBTree`1.GetNodeByIndex(Int32 userIndex)
+   en System.Data.DataRowCollection.get_Item(Int32 index)
+   en CartaDePorteManager.EsteClienteSeleFacturaAlCorredorPorSeparadoId(Int64 idCliente, Int64 idCorredor, String SC) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 12630
+__________________________
+
+Log Entry : 
+11/06/2017 17:29:48
+Error in: . Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartaDePorteManager.IdClienteEquivalenteDelIdVendedor(Int64 IdVendedor, String SC) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 12596
+BusinessLogic
+__________________________
+
+Log Entry : 
+11/06/2017 17:29:48
+Error in: . Error Message:System.IndexOutOfRangeException: No hay ninguna fila en la posición 0.
+   en System.Data.RBTree`1.GetNodeByIndex(Int32 userIndex)
+   en System.Data.DataRowCollection.get_Item(Int32 index)
+   en CartaDePorteManager.EsteClienteSeleFacturaAlCorredorPorSeparadoId(Int64 idCliente, Int64 idCorredor, String SC) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 12630
+__________________________
+
+Log Entry : 
+11/06/2017 17:29:49
+Error in: . Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartaDePorteManager.IdClienteEquivalenteDelIdVendedor(Int64 IdVendedor, String SC) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 12596
+BusinessLogic
+__________________________
+
+Log Entry : 
+11/06/2017 17:29:49
+Error in: . Error Message:System.IndexOutOfRangeException: No hay ninguna fila en la posición 0.
+   en System.Data.RBTree`1.GetNodeByIndex(Int32 userIndex)
+   en System.Data.DataRowCollection.get_Item(Int32 index)
+   en CartaDePorteManager.EsteClienteSeleFacturaAlCorredorPorSeparadoId(Int64 idCliente, Int64 idCorredor, String SC) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 12630
+__________________________
+
+Log Entry : 
+11/06/2017 17:29:49
+Error in: . Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartaDePorteManager.IdClienteEquivalenteDelIdVendedor(Int64 IdVendedor, String SC) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 12596
+BusinessLogic
+__________________________
+
+Log Entry : 
+11/06/2017 17:29:49
+Error in: . Error Message:System.IndexOutOfRangeException: No hay ninguna fila en la posición 0.
+   en System.Data.RBTree`1.GetNodeByIndex(Int32 userIndex)
+   en System.Data.DataRowCollection.get_Item(Int32 index)
+   en CartaDePorteManager.EsteClienteSeleFacturaAlCorredorPorSeparadoId(Int64 idCliente, Int64 idCorredor, String SC) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 12630
+__________________________
+
+Log Entry : 
+11/06/2017 17:29:49
+Error in: . Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartaDePorteManager.IdClienteEquivalenteDelIdVendedor(Int64 IdVendedor, String SC) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 12596
+BusinessLogic
+__________________________
+
+Log Entry : 
+11/06/2017 17:29:49
+Error in: . Error Message:System.IndexOutOfRangeException: No hay ninguna fila en la posición 0.
+   en System.Data.RBTree`1.GetNodeByIndex(Int32 userIndex)
+   en System.Data.DataRowCollection.get_Item(Int32 index)
+   en CartaDePorteManager.EsteClienteSeleFacturaAlCorredorPorSeparadoId(Int64 idCliente, Int64 idCorredor, String SC) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 12630
+__________________________
+
+Log Entry : 
+11/06/2017 17:29:50
+Error in: . Error Message:Empiezo a facturar en serio.6/11/2017 17:29:50
+__________________________
