@@ -7983,7 +7983,13 @@ Public Class LogicaFacturacion
 
     Private Shared Function PercepcionIngresosBrutos(ByRef oFac As Object, ByVal sc As String, ByRef session As System.Web.SessionState.HttpSessionState, cli As ClienteNuevo, mvarNetoGravado As Double, Parametros_EsAgenteDePercepcionIIBB As Boolean, Pventa_AgentePercepcionIIBB As Boolean) As Double
 
-        'origen.Registro.Fields("NumeroCertificadoPercepcionIIBB").Value = Null
+        '//////////////////////////////////////////////////////////////////////
+        '/////////////////////////////////////////////////////////////////////
+        'Codigo del CalculaFactura que esta en la gui del pronto (frmFactura)
+        '//////////////////////////////////////////////////////////////////////
+        '//////////////////////////////////////////////////////////////////////
+
+
 
         Dim mNumeroCertificadoPercepcionIIBB
         Dim mvarIBrutos, mvarIBrutos2, mvarIBrutos3 As Decimal
@@ -8032,7 +8038,8 @@ Public Class LogicaFacturacion
 
         '        If dcfields(4).Enabled And Check1(0).Value = 1 And IsNumeric(dcfields(4).BoundText) Then
         '            oRs = Aplicacion.IBCondiciones.TraerFiltrado("_PorId", dcfields(4).BoundText)
-        If clicatiibb = 2 Or clicatiibb = 3 Then 'Exit Function
+
+        If clicatiibb = 2 Or clicatiibb = 3 Or clicatiibb = 5 Then
 
             'importantisimo
             'importantisimo
@@ -8083,7 +8090,7 @@ Public Class LogicaFacturacion
         '////////////////////////////////////////////////////////////////////////////
         '////////////////////////////////////////////////////////////////////////////
         '////////////////////////////////////////////////////////////////////////////
-        If clicatiibb = 2 Or clicatiibb = 3 Then 'Exit Function
+        If clicatiibb = 2 Or clicatiibb = 3 Or clicatiibb = 5 Then
             Dim oRs = TraerFiltradoVB6(sc, enumSPs.IBCondiciones_TX_PorId, cli.IdIBCondicionPorDefecto2)
             If oRs.RecordCount > 0 Then
                 oFac.Registro.Fields("IdIBCondicion2").Value = cli.IdIBCondicionPorDefecto2  'o "IdIBCondicion2" o "IdIBCondicion3"
@@ -8130,7 +8137,7 @@ Public Class LogicaFacturacion
         '////////////////////////////////////////////////////////////////////////////
         '////////////////////////////////////////////////////////////////////////////
         '////////////////////////////////////////////////////////////////////////////
-        If clicatiibb = 2 Or clicatiibb = 3 Then 'Exit Function
+        If clicatiibb = 2 Or clicatiibb = 3 Or clicatiibb = 5 Then
 
             Dim oRs = TraerFiltradoVB6(sc, enumSPs.IBCondiciones_TX_PorId, cli.IdIBCondicionPorDefecto3)
             If oRs.RecordCount > 0 Then

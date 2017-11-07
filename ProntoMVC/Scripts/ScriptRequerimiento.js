@@ -1392,17 +1392,22 @@ $(function () {
         calculateTotal();
     }
 
-    $("#Aprobo").change(function () {
-        var IdAprobo = $("#Aprobo > option:selected").attr("value");
-        var Aprobo = $("#Aprobo > option:selected").html();
-        $("#Aux1").val(IdAprobo);
-        $("#Aux2").val(Aprobo);
-        $("#Aux3").val("");
-        $("#Aux10").val("");
-        $('#dialog-password').data('Combo', 'Aprobo');
-        $('#dialog-password').dialog('open');
-        $('#mySelect').focus(); // esto es clave, para que no me cierre el cuadro de dialogo al recibir un posible enter apretado en el change
-    });
+
+
+
+    //$("#Aprobo").change(function () {
+    //    var IdAprobo = $("#Aprobo > option:selected").attr("value");
+    //    var Aprobo = $("#Aprobo > option:selected").html();
+    //    $("#Aux1").val(IdAprobo);
+    //    $("#Aux2").val(Aprobo);
+    //    $("#Aux3").val("");
+    //    $("#Aux10").val("");
+    //    $('#dialog-password').data('Combo', 'Aprobo');
+    //    $('#dialog-password').dialog('open');
+    //    $('#mySelect').focus(); // esto es clave, para que no me cierre el cuadro de dialogo al recibir un posible enter apretado en el change
+    //});
+
+
 
     $("#anular").click(function () {
         $("#Aux1").val("");

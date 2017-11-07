@@ -408,13 +408,17 @@ namespace ProntoMVC.Controllers
 
         public string BuscarPass(int id, string pass)
         {
-            if (oStaticMembershipService.UsuarioTieneElRol(oStaticMembershipService.GetUser().UserName, "SuperAdmin")) return id.ToString();
+            // if (oStaticMembershipService.UsuarioTieneElRol(oStaticMembershipService.GetUser().UserName, "SuperAdmin")) return id.ToString();
 
-            var p = db.Empleados.Where(c => c.IdEmpleado == id).Where(c => c.Password == pass).FirstOrDefault();
-            if (p != null)
-                return p.IdEmpleado.ToString();
+            //var p = db.Empleados.Where(c => c.IdEmpleado == id).Where(c => c.Password == pass).FirstOrDefault();
+            //if (p != null)
+            //    return p.IdEmpleado.ToString();
+
             //verificar si la pass es la de web
             var empleado = db.Empleados.Where(c => c.IdEmpleado == id).FirstOrDefault();
+            if (empleado.Password==pass) return empleado.IdEmpleado.ToString();
+
+            //si no la encuentro en la tabla empleados, veo si está usando la pass de la web
             try
             {
                 if (Membership.ValidateUser(empleado.UsuarioNT, pass))
