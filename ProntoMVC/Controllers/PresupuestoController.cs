@@ -61,9 +61,6 @@ namespace ProntoMVC.Controllers
             return View();
         }
 
-
-
-
         [HttpPost]
         public virtual JsonResult BatchUpdate([Bind(Exclude = "IdDetallePresupuesto")]  Presupuesto presupuesto) // el Exclude es para las altas, donde el Id viene en 0
         {
@@ -291,13 +288,8 @@ namespace ProntoMVC.Controllers
             }
         }
 
-
-
-
         void CargarViewBag(Presupuesto o)
         {
-
-
             string nSC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString(), oStaticMembershipService));
             DataTable dt = EntidadManager.GetStoreProcedure(nSC, "Empleados_TX_PorSector", "Compras");
             IEnumerable<DataRow> rows = dt.AsEnumerable();
@@ -306,8 +298,6 @@ namespace ProntoMVC.Controllers
 
             ViewBag.Aprobo = new SelectList(sq, "IdEmpleado", "Nombre", o.Aprobo);
             ViewBag.IdComprador = new SelectList(sq, "IdEmpleado", "Nombre", o.IdComprador);
-
-
 
             /*
 
@@ -339,7 +329,6 @@ namespace ProntoMVC.Controllers
 
                 ErrHandler.WriteError(e);
             }
-            
     */
         }
 
