@@ -156,6 +156,13 @@ function RefrescarRestoDelRenglon(rowid, name, val, iRow, iCol) {
                         data['Unidad'] = ui.Unidad;
                         //   data['Descripcion'] = "ASDASD";
                         data['IdDetalleRequerimiento'] = data['IdDetalleRequerimiento'] || 0;
+                        if (data['FechaEntrega'].length == 0) {
+                            var d = new Date();
+                            var month = d.getMonth() + 1;
+                            var day = d.getDate();
+                            var currentDate = (day < 10 ? '0' : '') + day + '/' + (month < 10 ? '0' : '') + month + '/' + d.getFullYear();
+                            data['FechaEntrega'] = currentDate;
+                        }
 
                         $('#Lista').jqGrid('setRowData', dataIds[iRow - 1], data); // vuelvo a grabar el renglon
 
@@ -181,7 +188,6 @@ function RefrescarRestoDelRenglon(rowid, name, val, iRow, iCol) {
     else if (colName == "Descripcion") {   // esto siempre y cuando el cambio haya sido del nombre de articulo
         //        data['IdArticulo'] = UltimoIdArticulo
        //        $('#Lista').jqGrid('setRowData', dataIds[iRow - 1], data); // vuelvo a grabar el renglon
-
         $.post(ROOT + 'Articulo/GetArticulosAutocomplete2',  // ?term=' + val
                 { term: val }, // JSON.stringify(val)},
                 function (data) {
@@ -214,6 +220,13 @@ function RefrescarRestoDelRenglon(rowid, name, val, iRow, iCol) {
                         data['IdUnidad'] = ui.IdUnidad;
                         data['Unidad'] = ui.Unidad;
                         data['IdDetalleRequerimiento'] = data['IdDetalleRequerimiento'] || 0;
+                        if (data['FechaEntrega'].length == 0) {
+                            var d = new Date();
+                            var month = d.getMonth() + 1;
+                            var day = d.getDate();
+                            var currentDate = (day < 10 ? '0' : '') + day + '/' + (month < 10 ? '0' : '') + month + '/' + d.getFullYear();
+                            data['FechaEntrega'] = currentDate;
+                        }
 
                         $('#Lista').jqGrid('setRowData', dataIds[iRow - 1], data); // vuelvo a grabar el renglon
 
@@ -267,13 +280,10 @@ function RefrescarRenglon(x) {
 }
 
 function RefrescarOrigenDescripcion() {
-
     // return;
-
     var dataIds = $('#Lista').jqGrid('getDataIDs'); // me traigo los datos
 
     for (var i = 0; i < dataIds.length; i++) {
-
         var data = $('#Lista').jqGrid('getRowData', dataIds[i]);
 
         if (!data['IdDetalleRequerimiento']) {
@@ -361,7 +371,6 @@ function PopupCentrar() {
 }
 
 function SerializaForm() {
-
     var colModel = jQuery("#Lista").jqGrid('getGridParam', 'colModel');
     var cabecera = {
         "IdRequerimiento": "", "NumeroRequerimiento": "", "FechaRequerimiento": "", "LugarEntrega": "", "Observaciones": "", "IdObra": "", "IdSector": "", "IdSolicito": "",
@@ -517,14 +526,10 @@ $(function () {
     }
 
     function Validar() {
-        //quiz�s no est� esperando que vuelva la llamada.....
-        /////////////////////////////////////////////////////////////////////////////////////////////////
         // valido el nuevo comprobante
-
         var cabecera = SerializaForm();
 
         $.ajax({
-
             type: "POST", //deber�a ser "GET", pero me queda muy larga la url http://stackoverflow.com/questions/6269683/ajax-post-request-will-not-send-json-data
             contentType: 'application/json; charset=utf-8',
             url: ROOT + 'Pedido/ValidarJson',
@@ -589,9 +594,6 @@ $(function () {
 
     }
 
-
-
- 
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //////////////////////////DEFINICION DE GRILLAS   ///////////////////////////////////////////////////////////////////////////////
@@ -793,15 +795,12 @@ $(function () {
                         {
                             name: 'FechaEntrega', formoptions: { rowpos: 3, colpos: 2 }, index: 'FechaEntrega',
                             label: 'TB', width: 250, align: 'center', sorttype: 'date', editable: true,
-
                             //formatter: FormatterFecha,
                             //formatter: function (cellvalue, options, rowObject) {
                             //    return cellvalue === null ? "N/A" : $.fn.fmatter.call(this, "date", cellvalue, options, rowObject);
                             //}, formatoptions: { newformat: 'dd/mm/yy' },
                             //formatter:'date', 
                             formatoptions: { newformat: 'dd/mm/yy', defaultvalue: null }, datefmt: 'dd/mm/yy',
-
-
                             editoptions: { size: 10, maxlengh: 10, dataInit: initDateEdit }, editrules: { required: false }
                         },
                         { formoptions: { rowpos: 11, colpos: 1, label: 'Obs' }, name: 'Observaciones', index: 'Observaciones', classes: "textInDiv", label: 'TB', align: 'left', editable: true, edittype: 'text', width: 300, editoptions: { rows: '4', cols: '40' } },
@@ -846,13 +845,6 @@ $(function () {
                          }
                      },
 
-
-
-
-
-
-
-
                     { name: 'IdRequerimiento', index: 'IdRequerimiento', label: 'TB', hidden: true }, 
                     { formoptions: { rowpos: 2, colpos: 2 }, name: 'IdControlCalidad', index: 'IdControlCalidad', label: 'TB', hidden: true }, 
                     {
@@ -867,9 +859,6 @@ $(function () {
                         }]
                         }
                     },
-
-
-
 
                      { name: 'IdEquipoDestino', index: 'IdEquipoDestino', label: 'TB', hidden: true },
                      {
@@ -1828,9 +1817,6 @@ $(function () {
         } catch (e) { }
     }
 
-
-
-
     $("#addData").click(function () {
         dobleclic = true;
 
@@ -1920,8 +1906,6 @@ $(function () {
         else alert("Debe seleccionar un item!");
     });
 });
-
-
 
 function EditarItem(rowid) {
     var gr = rowid; // jQuery("#Lista").jqGrid('getGridParam',  'selrow');

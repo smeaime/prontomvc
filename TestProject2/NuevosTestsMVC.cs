@@ -153,6 +153,25 @@ namespace ProntoMVC.TestsMVC
 
 
 
+
+
+
+        [TestMethod]
+        public void envio_rms_por_mail()
+        {
+            // como puedo crear una RM para que aparezca en el "RMs Pendientes de Asignar"?
+
+            var c = new RequerimientoController();
+            GetMockedControllerGenerico(c);
+
+
+            c.EnviarEmail(10, 10, "SI");
+        }
+
+
+
+
+
         [TestMethod]
         public void webapi()
         {

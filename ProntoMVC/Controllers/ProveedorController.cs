@@ -477,35 +477,37 @@ namespace ProntoMVC.Controllers
             string campo = String.Empty;
             int pageSize = rows; // ?? 20;
             int currentPage = page; // ?? 1;
-            int totalPages = 0;
             int totalRecords = 0;
 
-            var pagedQuery = Filters.FiltroGenerico<Data.Models.Proveedor>
-                                ("",
-                                sidx, sord, page, rows, _search, filters, db, ref totalRecords
-                                 );
-            var data = (from a in pagedQuery 
-                        select new
+            var data = (from a in db.Proveedores
+                        select new Proveedores2
                         {
-                            a.IdProveedor,
-                            a.RazonSocial,
-                            a.Email,
-                            a.Cuit
-                        }).ToList();
+                            IdProveedor = a.IdProveedor,
+                            RazonSocial = a.RazonSocial,
+                            CodigoEmpresa = a.CodigoEmpresa,
+                            Email = a.Email,
+                            Cuit = a.Cuit
+                        }).OrderBy(sidx + " " + sord).AsQueryable();
+
+            var pagedQuery = Filters.FiltroGenerico_UsandoIQueryable<Proveedores2>
+                                     (sidx, sord, page, rows, _search, filters, db, ref totalRecords, data);
+
+            int totalPages = (int)Math.Ceiling((float)totalRecords / (float)pageSize);
 
             var jsonData = new jqGridJson()
             {
                 total = totalPages,
                 page = currentPage,
                 records = totalRecords,
-                rows = (from a in data
+                rows = (from a in pagedQuery
                         select new jqGridRowJson
                         {
                             id = a.IdProveedor.ToString(),
                             cell = new string[] { 
-                                "",
+                                "<a href="+ Url.Action("Edit",new {id = a.IdProveedor} ) +" >Editar</>",
                                 a.IdProveedor.NullSafeToString(),
                                 a.RazonSocial.NullSafeToString(),
+                                a.CodigoEmpresa.NullSafeToString(),
                                 a.Email.NullSafeToString(),
                                 a.Cuit.NullSafeToString()
                             }
