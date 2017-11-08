@@ -1326,21 +1326,21 @@ function inicializar()
 
     RefrescaAnchoGrillaDetalle();
 
-    $.ajax({
-        type: "GET",
-        contentType: "application/json; charset=utf-8",
-        url: ROOT + 'Requerimiento/Autorizaciones/',
-        data: { IdRequerimiento: $("#IdRequerimiento").val() },
-        dataType: "Json",
-        success: function (data) {
-            for (var i = 0; i < data.length; i++) {
-                var j = i + 1;
-                $("#chk" + j).attr('checked', true);
-                $("#chk" + j).attr('title', data[i].Nombre);
-            }
-        }
-    });
-    Aprobado();
+    //$.ajax({
+    //    type: "GET",
+    //    contentType: "application/json; charset=utf-8",
+    //    url: ROOT + 'Requerimiento/Autorizaciones/',
+    //    data: { IdRequerimiento: $("#IdRequerimiento").val() },
+    //    dataType: "Json",
+    //    success: function (data) {
+    //        for (var i = 0; i < data.length; i++) {
+    //            var j = i + 1;
+    //            $("#chk" + j).attr('checked', true);
+    //            $("#chk" + j).attr('title', data[i].Nombre);
+    //        }
+    //    }
+    //});
+    //Aprobado();
 
     function Aprobado() {
         if ($('#Aprobo').val() != "") {
