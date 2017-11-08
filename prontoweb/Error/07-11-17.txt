@@ -204,3 +204,37 @@ Error relacionado con la red o específico de la instancia mientras se establec�
    en ASP.global_asax.Application_Error(Object sender, EventArgs e) en C:\bdl\pronto\prontoweb\global.asax:línea 433
 .Net SqlClient Data Provider
 __________________________
+
+Log Entry : 
+11/07/2017 13:41:38
+Error in: http://localhost:50769/ProntoWeb/Principal.aspx. Error Message:supervisor esta logueado, pero lo redirijo al login porque faltan los datos de session. No deberia mejor mandarlo a SeleccionarEmpresa? Ademas, no hago el LogOut y le queda el cookie!!!
+__________________________
+
+Log Entry : 
+11/07/2017 13:41:38
+Error in: http://localhost:50769/ProntoWeb/Principal.aspx. Error Message:sesion: supervisor True
+__________________________
+
+Log Entry : 
+11/07/2017 13:41:38
+Error in: http://localhost:50769/ProntoWeb/Principal.aspx. Error Message:Pasa nomas. membership: supervisor
+__________________________
+
+Log Entry : 
+11/07/2017 13:41:38
+Error in: http://localhost:50769/ProntoWeb/Principal.aspx. Error Message:System.Threading.ThreadAbortException
+Subproceso anulado.
+   en System.Threading.Thread.AbortInternal()
+   en System.Threading.Thread.Abort(Object stateInfo)
+   en System.Web.HttpResponse.AbortCurrentThread()
+   en System.Web.HttpResponse.End()
+   en System.Web.HttpServerUtility.Transfer(String path, Boolean preserveForm)
+   en System.Web.HttpServerUtility.Transfer(String path)
+   en ProntoFuncionesUIWeb.RefrescaSession(HttpServerUtility Server) en C:\bdl\pronto\prontoweb\App_Code\vbcode\ManagerDebug\FuncionesUIWeb.vb:línea 4450
+mscorlib
+__________________________
+
+Log Entry : 
+11/07/2017 13:41:38
+Error in: http://localhost:50769/ProntoWeb/Principal.aspx. Error Message:Verificar que el usuario tenga una empresa asignada
+__________________________
