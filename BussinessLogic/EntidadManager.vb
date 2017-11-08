@@ -122,312 +122,314 @@ Namespace Pronto.ERP.Bll
                 'If SmtpPass = "" Then SmtpPass = ConfigurationSettings.AppSettings("SmtpPass") '"50TriplesdJQ"
 
 
+                Using message As New MailMessage() 'De, Para, Asunto, Cuerpo)
 
-                Dim message As New MailMessage() 'De, Para, Asunto, Cuerpo)
+                    message.From = New MailAddress(De)
 
-                message.From = New MailAddress(De)
+                    Dim lista As String() = Para.Split(",")
 
-                Dim lista As String() = Para.Split(",")
-
-                For Each a As String In lista
-                    If IsValidEmail(a) Then message.To.Add(New MailAddress(a))
-                Next
-
-
-                message.Subject = Asunto
-                message.Body = Cuerpo
+                    For Each a As String In lista
+                        If IsValidEmail(a) Then message.To.Add(New MailAddress(a))
+                    Next
 
 
-
-
-                If sFileNameAdjunto <> "" Then message.Attachments.Add(New Attachment(sFileNameAdjunto))
-                'Seteo que el server notifique solamente en el error de entrega
-                message.DeliveryNotificationOptions = DeliveryNotificationOptions.OnFailure
-                message.Priority = MailPriority.High
-
-                If friendlyname <> "" Then message.From = New MailAddress(De, friendlyname)
-
-                message.IsBodyHtml = isHtml
-
-
-
-                If CCO <> "" Then
-                    'http://www.seesharpdot.net/?p=209
-                    'http://forums.asp.net/t/1394642.aspx
-
-                    message.Headers.Add("Disposition-Notification-To", CCO)
-                    message.Bcc.Add(New MailAddress(CCO, CCO)) 'copia oculta
-                    message.ReplyTo = New MailAddress(CCO)
-                    'message.ReplyTo.a.ReplyToList.Add(New MailAddress(mailReplyToAddress)) 'este esta recien en .NET 4
-
-                    '/////////////////////////////////////////////////////////////////////////////////
-                    '/////////////////////////////////////////////////////////////////////////////////
-
-                    'aviso de retorno http://msdn.microsoft.com/en-us/vbasic/bb630227.aspx
-                    'Add a custom header named Disposition-Notification-To and specify the
-                    'read recept address
-                    'message.Headers.Add("Disposition-Notification-To", "returnreceipt@return.com")
-
-                    'message.Headers.Add("Disposition-Notification-To", CCO) 'en williams, le mando el aviso al CCO
-                Else
-                    message.Headers.Add("Disposition-Notification-To", De)
-
-                End If
-
-
-
-                If replyTo <> "" Then message.ReplyTo = New MailAddress(replyTo)
-
-                'message.DeliveryNotificationOptions = DeliveryNotificationOptions.OnSuccess '7 ' DeliveryNotificationOptions.OnFailure | _
-                '                                        DeliveryNotificationOptions.OnSuccess | _
-                'DeliveryNotificationOptions.Delay() 'arriba pusiste onfailure!!!
-
-
-                If img <> "" Then
-                    'Encajo una "imagen" para hacer el truco del mail de respuesta al leerse
-                    'Dim imgLink As New LinkedResource(img)
-                    Dim htmlView As AlternateView = AlternateView.CreateAlternateViewFromString(img, Nothing, "text/html")
-                    'htmlView.LinkedResources.Add(img)
-                    message.AlternateViews.Add(htmlView)
-                End If
+                    message.Subject = Asunto
+                    message.Body = Cuerpo
 
 
 
 
-                '/////////////////////////////////////////////////////////////////////////////////
-                '/////////////////////////////////////////////////////////////////////////////////
-                '/////////////////////////////////////////////////////////////////////////////////
-                '/////////////////////////////////////////////////////////////////////////////////
-                '/////////////////////////////////////////////////////////////////////////////////
-                '/////////////////////////////////////////////////////////////////////////////////
-                '/////////////////////////////////////////////////////////////////////////////////
-                '/////////////////////////////////////////////////////////////////////////////////
-                Try
+                    If sFileNameAdjunto <> "" Then message.Attachments.Add(New Attachment(sFileNameAdjunto))
+                    'Seteo que el server notifique solamente en el error de entrega
+                    message.DeliveryNotificationOptions = DeliveryNotificationOptions.OnFailure
+                    message.Priority = MailPriority.High
+
+                    If friendlyname <> "" Then message.From = New MailAddress(De, friendlyname)
+
+                    message.IsBodyHtml = isHtml
 
 
 
-                    'http://stackoverflow.com/questions/16442196/email-html-document-embedding-images-using-c-sharp
+                    If CCO <> "" Then
+                        'http://www.seesharpdot.net/?p=209
+                        'http://forums.asp.net/t/1394642.aspx
 
-                    If inlinePNG = "" Then
-                        inlinePNG = AppDomain.CurrentDomain.BaseDirectory & "\imagenes\Unnamed.png" '  Server.MapPath("~/Imagenes/williams.gif")
-                    End If
+                        message.Headers.Add("Disposition-Notification-To", CCO)
+                        message.Bcc.Add(New MailAddress(CCO, CCO)) 'copia oculta
+                        message.ReplyTo = New MailAddress(CCO)
+                        'message.ReplyTo.a.ReplyToList.Add(New MailAddress(mailReplyToAddress)) 'este esta recien en .NET 4
 
+                        '/////////////////////////////////////////////////////////////////////////////////
+                        '/////////////////////////////////////////////////////////////////////////////////
 
-                    'message.IsBodyHtml = True
-                    Dim inlineLogo As Attachment = New Attachment(inlinePNG)
-                    message.Attachments.Add(inlineLogo)
-                    Dim contentID As String = "Image"
-                    inlineLogo.ContentId = contentID
+                        'aviso de retorno http://msdn.microsoft.com/en-us/vbasic/bb630227.aspx
+                        'Add a custom header named Disposition-Notification-To and specify the
+                        'read recept address
+                        'message.Headers.Add("Disposition-Notification-To", "returnreceipt@return.com")
 
-                    'To make the image display as inline and not as attachment
+                        'message.Headers.Add("Disposition-Notification-To", CCO) 'en williams, le mando el aviso al CCO
+                    Else
+                        message.Headers.Add("Disposition-Notification-To", De)
 
-                    inlineLogo.ContentDisposition.Inline = True
-                    inlineLogo.ContentDisposition.DispositionType = System.Net.Mime.DispositionTypeNames.Inline
-
-                    '//To embed image in email
-
-                    'message.Body = "<img src=""cid:" + contentID + """>" & message.Body
-
-
-
-                    '/////////////////////////////////////////////////////////////////////////////////
-                    '/////////////////////////////////////////////////////////////////////////////////
-                    '/////////////////////////////////////////////////////////////////////////////////
-                    '/////////////////////////////////////////////////////////////////////////////////
-                    '/////////////////////////////////////////////////////////////////////////////////
-
-                    'http://stackoverflow.com/questions/16442196/email-html-document-embedding-images-using-c-sharp
-
-
-                    If inlinePNG2 = "" Then
-                        inlinePNG2 = AppDomain.CurrentDomain.BaseDirectory & "\imagenes\twitterwilliams.jpg" '  Server.MapPath("~/Imagenes/williams.gif")
                     End If
 
 
 
-                    'message.IsBodyHtml = True
-                    Dim twLogo As Attachment = New Attachment(inlinePNG2)
-                    message.Attachments.Add(twLogo)
-                    Dim contentIDtw As String = "Image2"
-                    twLogo.ContentId = contentIDtw
+                    If replyTo <> "" Then message.ReplyTo = New MailAddress(replyTo)
 
-                    'To make the image display as inline and not as attachment
-
-                    twLogo.ContentDisposition.Inline = True
-                    twLogo.ContentDisposition.DispositionType = System.Net.Mime.DispositionTypeNames.Inline
-
-                    '//To embed image in email
-
-                    'message.Body = "<img src=""cid:" + contentID + """>" & message.Body
+                    'message.DeliveryNotificationOptions = DeliveryNotificationOptions.OnSuccess '7 ' DeliveryNotificationOptions.OnFailure | _
+                    '                                        DeliveryNotificationOptions.OnSuccess | _
+                    'DeliveryNotificationOptions.Delay() 'arriba pusiste onfailure!!!
 
 
-
-
-                Catch ex As Exception
-
-                    ErrHandler2.WriteError(ex)
-                End Try
-
-                '/////////////////////////////////////////////////////////////////////////////////
-                '/////////////////////////////////////////////////////////////////////////////////
-                '/////////////////////////////////////////////////////////////////////////////////
-                '/////////////////////////////////////////////////////////////////////////////////
+                    If img <> "" Then
+                        'Encajo una "imagen" para hacer el truco del mail de respuesta al leerse
+                        'Dim imgLink As New LinkedResource(img)
+                        Dim htmlView As AlternateView = AlternateView.CreateAlternateViewFromString(img, Nothing, "text/html")
+                        'htmlView.LinkedResources.Add(img)
+                        message.AlternateViews.Add(htmlView)
+                    End If
 
 
 
-                Dim emailClient As SmtpClient = New SmtpClient(SmtpServer)
 
-                emailClient.Port = SmtpPort
+                    '/////////////////////////////////////////////////////////////////////////////////
+                    '/////////////////////////////////////////////////////////////////////////////////
+                    '/////////////////////////////////////////////////////////////////////////////////
+                    '/////////////////////////////////////////////////////////////////////////////////
+                    '/////////////////////////////////////////////////////////////////////////////////
+                    '/////////////////////////////////////////////////////////////////////////////////
+                    '/////////////////////////////////////////////////////////////////////////////////
+                    '/////////////////////////////////////////////////////////////////////////////////
+                    Try
 
-                'Si se solicitó SSL, lo activo
-                If EnableSSL = 1 Then
+
+
+                        'http://stackoverflow.com/questions/16442196/email-html-document-embedding-images-using-c-sharp
+
+                        If inlinePNG = "" Then
+                            inlinePNG = AppDomain.CurrentDomain.BaseDirectory & "\imagenes\Unnamed.png" '  Server.MapPath("~/Imagenes/williams.gif")
+                        End If
+
+
+                        'message.IsBodyHtml = True
+                        Dim inlineLogo As Attachment = New Attachment(inlinePNG)
+                        message.Attachments.Add(inlineLogo)
+                        Dim contentID As String = "Image"
+                        inlineLogo.ContentId = contentID
+
+                        'To make the image display as inline and not as attachment
+
+                        inlineLogo.ContentDisposition.Inline = True
+                        inlineLogo.ContentDisposition.DispositionType = System.Net.Mime.DispositionTypeNames.Inline
+
+                        '//To embed image in email
+
+                        'message.Body = "<img src=""cid:" + contentID + """>" & message.Body
+
+
+
+                        '/////////////////////////////////////////////////////////////////////////////////
+                        '/////////////////////////////////////////////////////////////////////////////////
+                        '/////////////////////////////////////////////////////////////////////////////////
+                        '/////////////////////////////////////////////////////////////////////////////////
+                        '/////////////////////////////////////////////////////////////////////////////////
+
+                        'http://stackoverflow.com/questions/16442196/email-html-document-embedding-images-using-c-sharp
+
+
+                        If inlinePNG2 = "" Then
+                            inlinePNG2 = AppDomain.CurrentDomain.BaseDirectory & "\imagenes\twitterwilliams.jpg" '  Server.MapPath("~/Imagenes/williams.gif")
+                        End If
+
+
+
+                        'message.IsBodyHtml = True
+                        Dim twLogo As Attachment = New Attachment(inlinePNG2)
+                        message.Attachments.Add(twLogo)
+                        Dim contentIDtw As String = "Image2"
+                        twLogo.ContentId = contentIDtw
+
+                        'To make the image display as inline and not as attachment
+
+                        twLogo.ContentDisposition.Inline = True
+                        twLogo.ContentDisposition.DispositionType = System.Net.Mime.DispositionTypeNames.Inline
+
+                        '//To embed image in email
+
+                        'message.Body = "<img src=""cid:" + contentID + """>" & message.Body
+
+
+
+
+                    Catch ex As Exception
+
+                        ErrHandler2.WriteError(ex)
+                    End Try
+
+                    '/////////////////////////////////////////////////////////////////////////////////
+                    '/////////////////////////////////////////////////////////////////////////////////
+                    '/////////////////////////////////////////////////////////////////////////////////
+                    '/////////////////////////////////////////////////////////////////////////////////
+
+
+
+                    Dim emailClient As SmtpClient = New SmtpClient(SmtpServer)
+
+                    emailClient.Port = SmtpPort
+
+                    'Si se solicitó SSL, lo activo
+                    If EnableSSL = 1 Then
+                        emailClient.EnableSsl = True
+                        'Bypass de validación de certificado (para problemas con servidores de SMTP con SSL con certificados que no validan en nuestra máquina)
+                        System.Net.ServicePointManager.ServerCertificateValidationCallback = New System.Net.Security.RemoteCertificateValidationCallback(AddressOf ValidarCertificado)
+                    End If
+                    ''Cargo las credenciales si hacen falta
+                    'If Not String.IsNullOrEmpty(SSLuser) Then
+                    '    Dim credenciales As New System.Net.NetworkCredential(SSLuser, SSLpass)
+                    '    oSMTP.Credentials = credenciales
+                    'End If
+
                     emailClient.EnableSsl = True
-                    'Bypass de validación de certificado (para problemas con servidores de SMTP con SSL con certificados que no validan en nuestra máquina)
-                    System.Net.ServicePointManager.ServerCertificateValidationCallback = New System.Net.Security.RemoteCertificateValidationCallback(AddressOf ValidarCertificado)
-                End If
-                ''Cargo las credenciales si hacen falta
-                'If Not String.IsNullOrEmpty(SSLuser) Then
-                '    Dim credenciales As New System.Net.NetworkCredential(SSLuser, SSLpass)
-                '    oSMTP.Credentials = credenciales
-                'End If
-
-                emailClient.EnableSsl = True
-                'emailClient.UseDefaultCredentials = False
-                emailClient.Credentials = New System.Net.NetworkCredential(SmtpUser, SmtpPass)
+                    'emailClient.UseDefaultCredentials = False
+                    emailClient.Credentials = New System.Net.NetworkCredential(SmtpUser, SmtpPass)
 
 
 
 
 
-                'Try
-                emailClient.Send(message)
+                    'Try
+                    emailClient.Send(message)
 
 
 
 
-                '//////////////////////////////////////////////////////////////////////////////
-                '//////////////////////////////////////////////////////////////////////////////
-                'The remote certificate is invalid according to the validation procedure“.
-                '//////////////////////////////////////////////////////////////////////////////
-                '//////////////////////////////////////////////////////////////////////////////
-                'http://varionet.wordpress.com/category/systemnetmail/
+                    '//////////////////////////////////////////////////////////////////////////////
+                    '//////////////////////////////////////////////////////////////////////////////
+                    'The remote certificate is invalid according to the validation procedure“.
+                    '//////////////////////////////////////////////////////////////////////////////
+                    '//////////////////////////////////////////////////////////////////////////////
+                    'http://varionet.wordpress.com/category/systemnetmail/
 
 
 
 
 
 
-                '//////////////////////////////////////////////////////////////////////////////
-                '//////////////////////////////////////////////////////////////////////////////
-                '//////////////////////////////////////////////////////////////////////////////
-                'Problemas con la conexion al servidor SMTP
-                '//////////////////////////////////////////////////////////////////////////////
-                '//////////////////////////////////////////////////////////////////////////////
+                    '//////////////////////////////////////////////////////////////////////////////
+                    '//////////////////////////////////////////////////////////////////////////////
+                    '//////////////////////////////////////////////////////////////////////////////
+                    'Problemas con la conexion al servidor SMTP
+                    '//////////////////////////////////////////////////////////////////////////////
+                    '//////////////////////////////////////////////////////////////////////////////
 
 
-                'If you have Windows XP SP2 (not sure how it works with SP1), Click CHANGE FIREWALL SETTINGS - click on ADVANCE - 
-                ' click on connection you are using for email -on the next page make sure that there is a check mark in front of 
-                '    POP3 and SMTP. Done! After hours of changing settings, this worked for me. Good luck to you!
+                    'If you have Windows XP SP2 (not sure how it works with SP1), Click CHANGE FIREWALL SETTINGS - click on ADVANCE - 
+                    ' click on connection you are using for email -on the next page make sure that there is a check mark in front of 
+                    '    POP3 and SMTP. Done! After hours of changing settings, this worked for me. Good luck to you!
 
-                'Also check off "TLS" under "Use secure connection." ?????
-                'http://forums.asp.net/p/1475014/3431732.aspx
-                'A connection attempt failed because the connected party did not properly respond after a period of time, 
-                'or established connection failed because connected host has failed to respond
-                'http://forum.umbraco.org/yaf_postst7439_A-connection-attempt-failed-because.aspx
-                '        Are you able to jump on the desktop of the webserver and verify that it is able to successfully 
-                'resolve and connect to the below web-service. You can just use IE to navigate to the URL.
-                'If you are unable to hit the service successfully from IE then its likely you have a misconfiguration 
-                'somewhere.I() 'd suggest first pinging the machine from dos, and veriyfing that DNS etc is setup correctly - checking IIS etc. 
-                '            cheers()
-                'http://www.TESTDOM.com/interface/webservices/TESTDOM.asmx
+                    'Also check off "TLS" under "Use secure connection." ?????
+                    'http://forums.asp.net/p/1475014/3431732.aspx
+                    'A connection attempt failed because the connected party did not properly respond after a period of time, 
+                    'or established connection failed because connected host has failed to respond
+                    'http://forum.umbraco.org/yaf_postst7439_A-connection-attempt-failed-because.aspx
+                    '        Are you able to jump on the desktop of the webserver and verify that it is able to successfully 
+                    'resolve and connect to the below web-service. You can just use IE to navigate to the URL.
+                    'If you are unable to hit the service successfully from IE then its likely you have a misconfiguration 
+                    'somewhere.I() 'd suggest first pinging the machine from dos, and veriyfing that DNS etc is setup correctly - checking IIS etc. 
+                    '            cheers()
+                    'http://www.TESTDOM.com/interface/webservices/TESTDOM.asmx
 
-                '        You can use localhost as your SMTP server only if you have a SMTP Service installed on the same computer hosting the application.
+                    '        You can use localhost as your SMTP server only if you have a SMTP Service installed on the same computer hosting the application.
 
-                'In your case, I do not believe it is trying to connection to localhost (if it is trying to connect 
-                'to localhost, the IP should be 127.0.0.1).  Your application is trying to connect to 66.167.125.100 but there's no response from that IP.
+                    'In your case, I do not believe it is trying to connection to localhost (if it is trying to connect 
+                    'to localhost, the IP should be 127.0.0.1).  Your application is trying to connect to 66.167.125.100 but there's no response from that IP.
 
-                'I tested connecting to this IP from my computer (over port 25) and it is responding.  
-                'The most likely cause is that the web server hosting the site does not allow outbound connection to be made
+                    'I tested connecting to this IP from my computer (over port 25) and it is responding.  
+                    'The most likely cause is that the web server hosting the site does not allow outbound connection to be made
 
-                'If you have Windows XP SP2 (not sure how it works with SP1), Click CHANGE FIREWALL SETTINGS - click on ADVANCE - 
-                ' click on connection you are using for email -on the next page make sure that there is a check mark in front of 
-                '    POP3 and SMTP. Done! After hours of changing settings, this worked for me. Good luck to you!
-
-
-                'http://forums.asp.net/p/1274384/2421592.aspx
-
-                '        Please make sure it is able to connect from the production server to the server specified in ASP.NET application. 
-                '    Run a ping command from command line prompt to the server's IP address or server name to see the results. 
-                '   You should be able to see the results from command prompt which will indicate whether the connection is successful or not.
-                'According to your description, the server might locate in the same machine or in the same intranet. 
-                'For production enviroment, you might need to have similar deployment. 
+                    'If you have Windows XP SP2 (not sure how it works with SP1), Click CHANGE FIREWALL SETTINGS - click on ADVANCE - 
+                    ' click on connection you are using for email -on the next page make sure that there is a check mark in front of 
+                    '    POP3 and SMTP. Done! After hours of changing settings, this worked for me. Good luck to you!
 
 
-                '//////////////////////////////////////////////////////////////////////////////
-                '//////////////////////////////////////////////////////////////////////////////
-                '//////////////////////////////////////////////////////////////////////////////
-                '//////////////////////////////////////////////////////////////////////////////
-                '//////////////////////////////////////////////////////////////////////////////
+                    'http://forums.asp.net/p/1274384/2421592.aspx
 
-                'LabelError.Text = "Mensaje enviado satisfactoriamente"
-                'Catch ex As Exception
-                '    ErrHandler2.WriteError(ex.Message)
-                '    Debug.Print(ex.Message)
-                '    'LabelError.Text = "ERROR: " & ex.Message
-                '    Return False
-                'End Try
+                    '        Please make sure it is able to connect from the production server to the server specified in ASP.NET application. 
+                    '    Run a ping command from command line prompt to the server's IP address or server name to see the results. 
+                    '   You should be able to see the results from command prompt which will indicate whether the connection is successful or not.
+                    'According to your description, the server might locate in the same machine or in the same intranet. 
+                    'For production enviroment, you might need to have similar deployment. 
 
 
+                    '//////////////////////////////////////////////////////////////////////////////
+                    '//////////////////////////////////////////////////////////////////////////////
+                    '//////////////////////////////////////////////////////////////////////////////
+                    '//////////////////////////////////////////////////////////////////////////////
+                    '//////////////////////////////////////////////////////////////////////////////
 
-                '/////////////////////////////////////////////////////////////////////////////////
-                '/////////////////////////////////////////////////////////////////////////////////
-                '/////////////////////////////////////////////////////////////////////////////////
-                '/////////////////////////////////////////////////////////////////////////////////
-                '/////////////////////////////////////////////////////////////////////////////////
-                '/////////////////////////////////////////////////////////////////////////////////
-                '/////////////////////////////////////////////////////////////////////////////////
-                '/////////////////////////////////////////////////////////////////////////////////
-
-                'metodo outlook
-                'http://www.elguille.info/colabora/puntoNET/Emanon_OutlookVB.htm
-                'http://www.forosdelweb.com/f29/programacion-con-outlook-vb-net-274661/
-
-                'Try
-                '    Dim m_OutLook As Microsoft.Office.Interop.Outlook.Application
-
-                '    Dim objMail As Microsoft.Office.Interop.Outlook.MailItem
-
-                '    m_OutLook = New Microsoft.Office.Interop.Outlook.Application
-                '    objMail = m_OutLook.CreateItem(Microsoft.Office.Interop.Outlook.OlItemType.olMailItem)
-                '    objMail.To = EmpleadoManager.GetItem(SC, myPresupuesto.IdComprador).Email
-
-                '    objMail.Subject = "Respuesta a Solicitación de Presupuesto"
-
-                '    objMail.Body = "El proveedor " & ProveedorManager.GetItem(SC, myPresupuesto.IdComprador).Nombre1 & " ha respondido a la solicitación de presupuesto " & myPresupuesto.Numero
-                '    objMail.Body = objMail.Body & "URL http://localhost:3688/Pronto/ProntoWeb/Presupuesto.aspx?Id=3&Empresa=Marcalba"
+                    'LabelError.Text = "Mensaje enviado satisfactoriamente"
+                    'Catch ex As Exception
+                    '    ErrHandler2.WriteError(ex.Message)
+                    '    Debug.Print(ex.Message)
+                    '    'LabelError.Text = "ERROR: " & ex.Message
+                    '    Return False
+                    'End Try
 
 
 
-                '    objMail.Send()
+                    '/////////////////////////////////////////////////////////////////////////////////
+                    '/////////////////////////////////////////////////////////////////////////////////
+                    '/////////////////////////////////////////////////////////////////////////////////
+                    '/////////////////////////////////////////////////////////////////////////////////
+                    '/////////////////////////////////////////////////////////////////////////////////
+                    '/////////////////////////////////////////////////////////////////////////////////
+                    '/////////////////////////////////////////////////////////////////////////////////
+                    '/////////////////////////////////////////////////////////////////////////////////
 
-                '    'MessageBox.Show("Mail Enviado", "Integración con OutLook", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+                    'metodo outlook
+                    'http://www.elguille.info/colabora/puntoNET/Emanon_OutlookVB.htm
+                    'http://www.forosdelweb.com/f29/programacion-con-outlook-vb-net-274661/
 
-                'Catch ex As Exception
+                    'Try
+                    '    Dim m_OutLook As Microsoft.Office.Interop.Outlook.Application
 
-                '    '* Si se produce algun Error Notificar al usuario
+                    '    Dim objMail As Microsoft.Office.Interop.Outlook.MailItem
 
-                '    'MessageBox.Show("Error enviando mail")
-                '    Debug.Print(ex.Message)
-                'Finally
-                '    'm_OutLook = Nothing
-                'End Try
+                    '    m_OutLook = New Microsoft.Office.Interop.Outlook.Application
+                    '    objMail = m_OutLook.CreateItem(Microsoft.Office.Interop.Outlook.OlItemType.olMailItem)
+                    '    objMail.To = EmpleadoManager.GetItem(SC, myPresupuesto.IdComprador).Email
+
+                    '    objMail.Subject = "Respuesta a Solicitación de Presupuesto"
+
+                    '    objMail.Body = "El proveedor " & ProveedorManager.GetItem(SC, myPresupuesto.IdComprador).Nombre1 & " ha respondido a la solicitación de presupuesto " & myPresupuesto.Numero
+                    '    objMail.Body = objMail.Body & "URL http://localhost:3688/Pronto/ProntoWeb/Presupuesto.aspx?Id=3&Empresa=Marcalba"
 
 
-                '/////////////////////////////////////////////////////////////////////////////////
-                '/////////////////////////////////////////////////////////////////////////////////
-                '/////////////////////////////////////////////////////////////////////////////////
-                '/////////////////////////////////////////////////////////////////////////////////
-                '/////////////////////////////////////////////////////////////////////////////////
+
+                    '    objMail.Send()
+
+                    '    'MessageBox.Show("Mail Enviado", "Integración con OutLook", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+
+                    'Catch ex As Exception
+
+                    '    '* Si se produce algun Error Notificar al usuario
+
+                    '    'MessageBox.Show("Error enviando mail")
+                    '    Debug.Print(ex.Message)
+                    'Finally
+                    '    'm_OutLook = Nothing
+                    'End Try
+
+
+                    '/////////////////////////////////////////////////////////////////////////////////
+                    '/////////////////////////////////////////////////////////////////////////////////
+                    '/////////////////////////////////////////////////////////////////////////////////
+                    '/////////////////////////////////////////////////////////////////////////////////
+                    '/////////////////////////////////////////////////////////////////////////////////
+
+
+                End Using
 
                 Return True
             Catch ex As Exception

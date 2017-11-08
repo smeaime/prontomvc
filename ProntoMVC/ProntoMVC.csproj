@@ -1132,6 +1132,7 @@
     <Content Include="Views\PresupuestoObra\Edit.cshtml" />
     <Content Include="Views\PresupuestoObra\Index.cshtml" />
     <Content Include="Views\PresupuestoObraItem\Edit.cshtml" />
+    <Content Include="Views\Requerimiento\_PartialPage1.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Controllers\Content\bootstrap.css" />
