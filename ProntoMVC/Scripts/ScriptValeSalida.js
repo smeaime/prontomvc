@@ -462,7 +462,18 @@ function SerializaForm() {
     return cabecera;
 }
 
+
+
+
+
 $(function () {
+    inicializar();
+});
+
+
+function inicializar()
+{
+
 
     var dobleclic
     var headerRow, rowHight, resizeSpanHeight;
@@ -597,20 +608,21 @@ $(function () {
         mtype: 'POST',
         colNames: ['', 'IdDetalleRequerimiento', 'IdArticulo', 'IdUnidad', '#', 'Cant.', 'Un.', 'Codigo', 'Artículo', 'Descripción', 'Entrega', 'Observaciones', 'Cump', 'Adjunto',
                    'OrigenDescripcion', '', 'IdCalidad', 'Calidad'],
-        colModel: [     { formoptions: { rowpos: 1, colpos: 1 }, name: 'act', index: 'act', align: 'centre', width: 30, hidden: true, sortable: false, editable: false, formatter: 'actions',
-                            formatoptions: {
-                                editformbutton: true,
-                                editbutton: false,
-                                delbutton: false,
-                                keys: false
-                            }
-                        },
+        colModel: [{
+            formoptions: { rowpos: 1, colpos: 1 }, name: 'act', index: 'act', align: 'centre', width: 30, hidden: true, sortable: false, editable: false, formatter: 'actions',
+            formatoptions: {
+                editformbutton: true,
+                editbutton: false,
+                delbutton: false,
+                keys: false
+            }
+        },
                         { formoptions: { rowpos: 1, colpos: 2 }, name: 'IdDetalleRequerimiento', index: 'IdDetalleRequerimiento', label: 'TB', align: 'left', width: 85, editable: true, hidden: true, editoptions: { disabled: 'disabled' }, editrules: { edithidden: true, required: false } },
                         { formoptions: { rowpos: 2, colpos: 1 }, name: 'IdArticulo', index: 'IdArticulo', label: 'TB', align: 'left', width: 85, editable: true, hidden: true, editoptions: { disabled: 'disabled' }, editrules: { edithidden: true, required: true } },
                         { formoptions: { rowpos: 2, colpos: 2 }, name: 'IdUnidad', index: 'IdUnidad', label: 'TB', align: 'left', width: 85, editable: true, hidden: true, editoptions: { disabled: 'disabled' }, editrules: { edithidden: true, required: false } },
                         //{ name: 'Eliminado', index: 'Eliminado', label:'TB', align: 'left', width: 85, editable: true, hidden: true, editoptions: { disabled: 'disabled' }, editrules: { edithidden: true} },
                         { name: 'NumeroItem', formoptions: { rowpos: 3, colpos: 1 }, index: 'NumeroItem', label: 'TB', align: 'center', width: 30, editable: true, edittype: 'text', editoptions: { disabled: true }, editrules: { readonly: 'readonly' } },
-                        { name: 'Cantidad', formoptions: { rowpos: 9, colpos: 1 }, index: 'Cantidad', label: 'TB', align: 'right', width: 60, editable: true, edittype: 'text', editoptions: { maxlength: 20 }, editrules: { required: true } }, 
+                        { name: 'Cantidad', formoptions: { rowpos: 9, colpos: 1 }, index: 'Cantidad', label: 'TB', align: 'right', width: 60, editable: true, edittype: 'text', editoptions: { maxlength: 20 }, editrules: { required: true } },
                         {
                             name: 'Unidad', formoptions: { rowpos: 9, colpos: 2 }, index: 'Unidad', align: 'left', width: 60, editable: true, edittype: 'select', editrules: { required: true },
                             editoptions: {
@@ -809,7 +821,7 @@ $(function () {
                             }
                         },
                     {
-                        name: 'OrigenDescripcion', label: 'TB', formoptions: { rowpos: 11, colpos: 2, label: "Tomar desc. de" }, index: 'OrigenDescripcion', align: 'center', width: 35, editable: true, hidden: true, edittype: 'select', 
+                        name: 'OrigenDescripcion', label: 'TB', formoptions: { rowpos: 11, colpos: 2, label: "Tomar desc. de" }, index: 'OrigenDescripcion', align: 'center', width: 35, editable: true, hidden: true, edittype: 'select',
                         editrules: {
                             required: true
                         },
@@ -818,18 +830,21 @@ $(function () {
                             value: "1:Solo el material; 2:Solo las observaciones; 3:Material mas observaciones", size: 3
                         }
                     },
-                    { name: 'IdRequerimiento', index: 'IdRequerimiento', label: 'TB', hidden: true }, 
-                    { formoptions: { rowpos: 2, colpos: 2 }, name: 'IdControlCalidad', index: 'IdControlCalidad', label: 'TB', hidden: true }, 
-                    { name: 'ControlCalidad', formoptions: { rowpos: 12, colpos: 2 }, index: 'ControlCalidad', align: 'center', label: '', width: 150, editable: true, edittype: 'select', editrules: { required: false },
-                        editoptions: { dataUrl: ROOT + 'ControlCalidad/ControlCalidades', 
-                        dataEvents: [{type: 'change', fn: function (e) {
-                               $('#IdControlCalidad').val(this.value);
-                               UltimoIdControlCalidad = this.value;
-                               RefrescarRenglon(this);
-                           }
-                        }]
-                   }
-               },
+                    { name: 'IdRequerimiento', index: 'IdRequerimiento', label: 'TB', hidden: true },
+                    { formoptions: { rowpos: 2, colpos: 2 }, name: 'IdControlCalidad', index: 'IdControlCalidad', label: 'TB', hidden: true },
+                    {
+                        name: 'ControlCalidad', formoptions: { rowpos: 12, colpos: 2 }, index: 'ControlCalidad', align: 'center', label: '', width: 150, editable: true, edittype: 'select', editrules: { required: false },
+                        editoptions: {
+                            dataUrl: ROOT + 'ControlCalidad/ControlCalidades',
+                            dataEvents: [{
+                                type: 'change', fn: function (e) {
+                                    $('#IdControlCalidad').val(this.value);
+                                    UltimoIdControlCalidad = this.value;
+                                    RefrescarRenglon(this);
+                                }
+                            }]
+                        }
+                    },
         ],
         onSelectRow: function (id, status, e) {
             if (dobleclic) {
@@ -948,7 +963,7 @@ $(function () {
         url: ROOT + 'Articulo/Articulos_DynamicGridData',
         datatype: 'json',
         mtype: 'POST',
-        postData: {'FechaInicial': function () { return $("#FechaInicial").val(); }, 'FechaFinal': function () { return $("#FechaFinal").val(); }, 'IdObra': function () { return $("#IdObra").val(); }},
+        postData: { 'FechaInicial': function () { return $("#FechaInicial").val(); }, 'FechaFinal': function () { return $("#FechaFinal").val(); }, 'IdObra': function () { return $("#IdObra").val(); } },
         colNames: ['', '', 'Codigo', 'Numero inventario', 'Descripcion', 'Rubro', 'Subrubro', '', '', '', '', '', '', '', '', 'Unidad'],
         colModel: [
                     { name: 'Edit', index: 'Edit', width: 50, align: 'left', sortable: false, search: false, hidden: true },
@@ -956,10 +971,10 @@ $(function () {
                     { name: 'Codigo', index: 'Codigo', width: 130, align: 'left', stype: 'text', search: true, searchoptions: { clearSearch: true, searchOperators: true, sopt: ['cn'] } },
                     { name: 'NumeroInventario', index: 'NumeroInventario', width: 130, align: 'left', stype: 'text', search: true, searchoptions: { clearSearch: true, searchOperators: true, sopt: ['cn'] }, hidden: true },
                     {
-                        name: 'Descripcion', index: 'Descripcion', width: 480, align: 'left', stype: 'text', editable: false, edittype: 'text', editoptions: { maxlength: 250 }, editrules: { required: true }, 
+                        name: 'Descripcion', index: 'Descripcion', width: 480, align: 'left', stype: 'text', editable: false, edittype: 'text', editoptions: { maxlength: 250 }, editrules: { required: true },
                         search: true, searchoptions: { clearSearch: true, searchOperators: true, sopt: ['cn'] }
                     },
-                    { name: 'Rubro.Descripcion', index: 'Rubro.Descripcion', width: 250, align: 'left', editable: true, edittype: 'select', editoptions: { dataUrl: '@Url.Action("Unidades")' }, editrules: { required: true }, search: true, searchoptions: { } },
+                    { name: 'Rubro.Descripcion', index: 'Rubro.Descripcion', width: 250, align: 'left', editable: true, edittype: 'select', editoptions: { dataUrl: '@Url.Action("Unidades")' }, editrules: { required: true }, search: true, searchoptions: {} },
                     { name: 'Subrubro.Descripcion', index: '', width: 200, align: 'left', search: true, stype: 'text', hidden: true },
                     { name: 'AlicuotaIVA', index: 'AlicuotaIVA', width: 50, align: 'left', search: true, stype: 'text', hidden: true },
                     { name: 'CostoPPP', index: 'CostoPPP', align: 'left', width: 100, editable: false, hidden: true },
@@ -999,7 +1014,8 @@ $(function () {
     jQuery("#ListaDrag").jqGrid('navGrid', '#ListaDragPager', { csv: true, refresh: true, add: false, edit: false, del: false }, {}, {}, {},
          { width: 700, closeOnEscape: true, closeAfterSearch: true, multipleSearch: true, overlay: false }
     );
-    jQuery("#ListaDrag").jqGrid('navButtonAdd', '#ListaDragPager', { caption: "", buttonicon: "ui-icon-calculator", title: "Choose columns",
+    jQuery("#ListaDrag").jqGrid('navButtonAdd', '#ListaDragPager', {
+        caption: "", buttonicon: "ui-icon-calculator", title: "Choose columns",
         onClickButton: function () {
             $(this).jqGrid('columnChooser',
                 { width: 550, msel_opts: { dividerLocation: 0.5 }, modal: true });
@@ -1007,7 +1023,7 @@ $(function () {
                 .prepend('<label style="float:left;position:relative;margin-left:0.6em;top:0.6em">Search:</label>');
         }
     });
-    jQuery("#ListaDrag").filterToolbar({ stringResult: true, searchOnEnter: true, defaultSearch: 'cn', enableClear: false }); 
+    jQuery("#ListaDrag").filterToolbar({ stringResult: true, searchOnEnter: true, defaultSearch: 'cn', enableClear: false });
     jQuery("#ListaDrag").jqGrid('navButtonAdd', '#ListaDragPager', { caption: "Filter", title: "Toggle Searching Toolbar", buttonicon: 'ui-icon-pin-s', onClickButton: function () { myGrid[0].toggleToolbar(); } });
 
 
@@ -1067,7 +1083,7 @@ $(function () {
     $('#grabar2').click(function () {
         try {
             jQuery('#Lista').jqGrid('saveCell', lastRowIndex, lastColIndex);
-        } catch (e) {     }
+        } catch (e) { }
 
         var cabecera = SerializaForm();
 
@@ -1789,7 +1805,9 @@ $(function () {
         }
         else alert("Debe seleccionar un item!");
     });
-});
+
+}
+
 
 function EditarItem(rowid) {
     var gr = rowid; // jQuery("#Lista").jqGrid('getGridParam',  'selrow');
