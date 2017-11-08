@@ -87,32 +87,6 @@ namespace ProntoMVC.Controllers
             //o.IdSector = ;
             //o.IdSolicito=
 
-
-            //mvarP_IVA1 = .Fields("Iva1").Value
-            //mvarP_IVA2 = .Fields("Iva2").Value
-            //mvarPorc_IBrutos_Cap = .Fields("Porc_IBrutos_Cap").Value
-            //mvarTope_IBrutos_Cap = .Fields("Tope_IBrutos_Cap").Value
-            //mvarPorc_IBrutos_BsAs = .Fields("Porc_IBrutos_BsAs").Value
-            //mvarTope_IBrutos_BsAs = .Fields("Tope_IBrutos_BsAs").Value
-            //mvarPorc_IBrutos_BsAsM = .Fields("Porc_IBrutos_BsAsM").Value
-            //mvarTope_IBrutos_BsAsM = .Fields("Tope_IBrutos_BsAsM").Value
-            //mvarDecimales = .Fields("Decimales").Value
-            //mvarAclaracionAlPie = .Fields("AclaracionAlPieDeFactura").Value
-            //mvarIdMonedaPesos = .Fields("IdMoneda").Value
-            //mvarIdMonedaDolar = .Fields("IdMonedaDolar").Value
-            //mvarPercepcionIIBB = IIf(IsNull(.Fields("PercepcionIIBB").Value), "NO", .Fields("PercepcionIIBB").Value)
-            //mvarOtrasPercepciones1 = IIf(IsNull(.Fields("OtrasPercepciones1").Value), "NO", .Fields("OtrasPercepciones1").Value)
-            //mvarOtrasPercepciones1Desc = IIf(IsNull(.Fields("OtrasPercepciones1Desc").Value), "", .Fields("OtrasPercepciones1Desc").Value)
-            //mvarOtrasPercepciones2 = IIf(IsNull(.Fields("OtrasPercepciones2").Value), "NO", .Fields("OtrasPercepciones2").Value)
-            //mvarOtrasPercepciones2Desc = IIf(IsNull(.Fields("OtrasPercepciones2Desc").Value), "", .Fields("OtrasPercepciones2Desc").Value)
-            //mvarOtrasPercepciones3 = IIf(IsNull(.Fields("OtrasPercepciones3").Value), "NO", .Fields("OtrasPercepciones3").Value)
-            //mvarOtrasPercepciones3Desc = IIf(IsNull(.Fields("OtrasPercepciones3Desc").Value), "", .Fields("OtrasPercepciones3Desc").Value)
-            //mvarConfirmarClausulaDolar = IIf(IsNull(.Fields("ConfirmarClausulaDolar").Value), "NO", .Fields("ConfirmarClausulaDolar").Value)
-            //mvarNumeracionUnica = False
-            //If .Fields("NumeracionUnica").Value = "SI" Then mvarNumeracionUnica = True
-            //gblFechaUltimoCierre = IIf(IsNull(.Fields("FechaUltimoCierre").Value), DateSerial(1980, 1, 1), .Fields("FechaUltimoCierre").Value)
-
-
             // db.Cotizaciones_TX_PorFechaMoneda(fecha,IdMoneda)
             //var mvarCotizacion = db.Cotizaciones.OrderByDescending(x => x.IdCotizacion).FirstOrDefault().Cotizacion; //  mo  Cotizacion(Date, glbIdMonedaDolar);
             //o.CotizacionMoneda = 1;
@@ -130,6 +104,7 @@ namespace ProntoMVC.Controllers
             //                            .Select(y => new { y.IdObra, NumeroObra = y.NumeroObra + " - " + (y.Descripcion ?? "") }), "IdObra", "NumeroObra", o.IdObra);
             ///////////////////////////////////////////////////////////////////////////////////////////////
             string nSC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString(), oStaticMembershipService));
+
             DataTable dt = EntidadManager.GetStoreProcedure(nSC, "Empleados_TX_PorSector", "Compras");
             IEnumerable<DataRow> rows = dt.AsEnumerable();
             var sq = (from r in rows orderby r[1] select new { IdEmpleado = r[0], Nombre = r[1] }).ToList();
@@ -207,6 +182,12 @@ namespace ProntoMVC.Controllers
                     ActivarAnulacionFirmas(true);
                 }
             }
+
+            dt = EntidadManager.GetStoreProcedure(nSC, "Articulos_TX_ParaMantenimiento_ParaCombo", 0, 0, 0, "");
+            rows = dt.AsEnumerable();
+            var sq2 = (from r in rows orderby r[1] select new { IdArticulo = r[0], Titulo = r[1] }).ToList();
+            ViewBag.IdEquipoDestino = new SelectList(sq2, "IdArticulo", "Titulo", o.IdEquipoDestino);
+
         }
 
         public void ActivarAnulacionLiberacion(bool Activar)
@@ -951,6 +932,18 @@ namespace ProntoMVC.Controllers
             return Json(jsonData, JsonRequestBehavior.AllowGet);
         }
 
+
+        public PartialViewResult PartialPage1(string idDetalleRequerimientos)
+        {
+            var idDetalleRequerimientos2 = idDetalleRequerimientos.Split(',').Select(Int32.Parse).ToList();
+            
+            var vale = CrearValeSegunItemDeRM(idDetalleRequerimientos2, "", "");
+
+            //return PartialView("_PartialPage1", new ValesSalida());
+            return PartialView("_PartialPage1", vale);
+        }
+        
+
         public virtual ActionResult RequerimientosPendientesAsignar_DynamicGridData
               (string sidx, string sord, int page, int rows, bool _search, string filters, string FechaInicial, string FechaFinal, string IdObra, bool bAConfirmar = false, bool bALiberar = false)
         {
@@ -998,39 +991,34 @@ namespace ProntoMVC.Controllers
                         {
                             IdDetalleRequerimiento = a[0],
                             NumeroRequerimiento = a[1],
-                            IdAux1 = a[2],
-                            IdAux2 = a[3],
-                            IdAux3 = a[4],
-                            IdAux4 = a[5],
+                            IdDetalleRequerimiento2 = a[2],
+                            IdRequerimiento = a[3],
+                            IdObra = a[4],
+                            TipoDesignacion = a[5],
                             Item = a[6],
-                            Cant = a[7],
+                            Cantidad = a[7],
                             Unidad = a[8],
-                            Vales = a[9],
-                            Valess = a[10],
-                            CantPed = a[11],
-                            Recibido = a[12],
-                            Recepcion = a[13],
-                            UltRecepcion = a[14],
-
-                            EnStock = a[15],
-                            StkMin = a[16],
-
-                            Articulo = a[17],
-                            FEntrega = a[18],
-                            Solicito = a[19],
-                            TipoReq = a[20],
-                            Obra = a[21],
-
-                            Cump = a[22],
-                            Recepcionado = a[23],
-                            Observacionesitem = a[24],
-                            Deposito = a[25],
-                            Observacionesfirmante = a[26],
-                            Firmanteobservo = a[27],
-                            Fechaultobservacion = a[28],
-
-                            CodEqDestino = a[29],
-                            EquipoDestino = a[30]
+                            CantidadVales = a[9],
+                            CantidadPedida = a[10],
+                            CantidadRecibida = a[11],
+                            NumeroRecepcion = a[12],
+                            UltimoNumeroRecepcion = a[13],
+                            EnStock = a[14],
+                            StockMinimo = a[15],
+                            Articulo = a[16],
+                            FechaEntrega = a[17],
+                            Solicito = a[18],
+                            TipoRequerimiento = a[19],
+                            Obra = a[20],
+                            Cumplido = a[21],
+                            Recepcionado = a[22],
+                            Observacionesitem = a[23],
+                            Deposito = a[24],
+                            ObservacionesFirmante = a[25],
+                            FirmanteObservo = a[26],
+                            FechaUltimaObservacion = a[27],
+                            CodigoEquipoDestino = a[28],
+                            EquipoDestino = a[29]
                         }).ToList();
 
             var jsonData = new jqGridJson()
@@ -1038,24 +1026,41 @@ namespace ProntoMVC.Controllers
                 total = totalPages,
                 page = currentPage,
                 records = totalRecords,
-                rows = (from a in Entidad
+                rows = (from a in data
                         select new jqGridRowJson
                         {
-                            id = a[0].ToString(),
-                            cell = new string[] {
-                                   a[0].ToString(),
-                                   "<a href="+ Url.Action("Edit",new {id =  a[1] } ) + "  >Editar</>" ,
-                                   a[2].ToString(),
-                                   a[3].ToString(),
-                                   a[4].ToString(),
-                                   a[5].ToString(),
-                                   a[6].ToString(),
-                                   a[7].ToString(),
-                                   a[8].ToString(),
-                                   a[9].ToString(),
-                                   a[10].ToString(),
-                                   a[11].ToString(),
-                                   a[12].ToString()
+                            id = a.IdDetalleRequerimiento.ToString(),
+                            cell = new string[] { 
+                                "<a href="+ Url.Action("Edit",new {id = a.IdRequerimiento} ) + "  >Editar</>" ,
+                                a.IdDetalleRequerimiento.ToString(), 
+                                a.IdRequerimiento.ToString(), 
+                                a.IdObra.ToString(), 
+                                a.TipoDesignacion.ToString(), 
+                                a.NumeroRequerimiento.ToString(), 
+                                a.Item.ToString(), 
+                                a.Cantidad.ToString(), 
+                                a.Unidad.ToString(), 
+                                a.CantidadVales.ToString(), 
+                                a.CantidadPedida.ToString(), 
+                                a.CantidadRecibida.ToString(), 
+                                a.NumeroRecepcion.ToString(), 
+                                a.UltimoNumeroRecepcion.ToString(), 
+                                a.EnStock.ToString(), 
+                                a.StockMinimo.ToString(), 
+                                a.Articulo.ToString(), 
+                                a.FechaEntrega.ToString(), 
+                                a.Solicito.ToString(), 
+                                a.TipoRequerimiento.ToString(), 
+                                a.Obra.ToString(), 
+                                a.Cumplido.ToString(), 
+                                a.Recepcionado.ToString(), 
+                                a.Observacionesitem.ToString(), 
+                                a.Deposito.ToString(), 
+                                a.ObservacionesFirmante.ToString(), 
+                                a.FirmanteObservo.ToString(), 
+                                a.FechaUltimaObservacion.ToString(), 
+                                a.CodigoEquipoDestino.ToString(), 
+                                a.EquipoDestino.ToString()
                             }
                         }).ToArray()
             };
@@ -2050,7 +2055,7 @@ namespace ProntoMVC.Controllers
             return File(contents, System.Net.Mime.MediaTypeNames.Application.Octet, "requerimiento.pdf");
         }
 
-        public string EnviarEmail(int IdRequerimiento, int IdProveedor)
+        public string EnviarEmail(String IdsRequerimiento, String IdsProveedor)
         {
             string NumeroRequerimiento = "";
             string output = "";
@@ -2059,55 +2064,76 @@ namespace ProntoMVC.Controllers
             string cuerpo = "";
             string De = "";
             string resul = "";
+            int IdRequerimiento;
+            int IdProveedor;
 
             var Empresa = db.Empresas.Where(p => p.IdEmpresa == 1).FirstOrDefault();
             if (Empresa != null) { De = Empresa.Email.ToString(); }
 
-            var Requerimiento = db.Requerimientos.Where(p => p.IdRequerimiento == IdRequerimiento).FirstOrDefault();
-            if (Requerimiento != null)
-            {
-                NumeroRequerimiento = Requerimiento.NumeroRequerimiento.ToString();
-                output = AppDomain.CurrentDomain.BaseDirectory + "Documentos\\" + "Requerimiento_" + NumeroRequerimiento + ".pdf"; ;
-            }
-            ImprimirPDF(IdRequerimiento, output).ToString();
-            
-            var Proveedor = db.Proveedores.Where(p => p.IdProveedor == IdProveedor).FirstOrDefault();
-            if (Proveedor != null) 
-            {
-                destinatario = Proveedor.Email ?? "";
-            }
+            Char delimiter = '|';
+            String[] Vector1 = IdsRequerimiento.Split(delimiter);
+            String[] Vector2 = IdsProveedor.Split(delimiter);
 
-            if (destinatario.Length > 0 && output.Length > 0 && De.Length > 0)
+            foreach (var valor1 in Vector1)
             {
-                if (EntidadManager.MandaEmail_Nuevo(destinatario,
-                                                    asunto,
-                                                    cuerpo, 
-                                                    De, 
-                                                    ConfigurationManager.AppSettings["SmtpServer"],
-                                                    ConfigurationManager.AppSettings["SmtpUser"],
-                                                    ConfigurationManager.AppSettings["SmtpPass"],
-                                                    output,
-                                                    Convert.ToInt16(ConfigurationManager.AppSettings["SmtpPort"]))
-                    )
+                if (valor1.Length > 0)
                 {
-                    resul = "Ok";
-                }
-                else
-                {
-                    resul = "Error";
-                }
-            }
-            else
-            {
-                resul = "Error";
-            }
+                    IdRequerimiento = Int32.Parse(valor1);
+                    var Requerimiento = db.Requerimientos.Where(p => p.IdRequerimiento == IdRequerimiento).FirstOrDefault();
+                    if (Requerimiento != null)
+                    {
+                        NumeroRequerimiento = Requerimiento.NumeroRequerimiento.ToString();
+                        output = AppDomain.CurrentDomain.BaseDirectory + "Documentos\\" + "Requerimiento_" + NumeroRequerimiento + ".pdf"; ;
+                    }
+                    ImprimirPDF(IdRequerimiento, output).ToString();
 
-            FileInfo MyFile1 = new FileInfo(output);
-            if (MyFile1.Exists) {
-                System.GC.Collect();
-                System.GC.WaitForPendingFinalizers();
-                System.IO.File.Delete(output);
-                //MyFile1.Delete();
+                    foreach (var valor2 in Vector2)
+                    {
+                        if (valor2.Length > 0)
+                        {
+                            IdProveedor = Int32.Parse(valor2);
+
+                            var Proveedor = db.Proveedores.Where(p => p.IdProveedor == IdProveedor).FirstOrDefault();
+                            if (Proveedor != null)
+                            {
+                                destinatario = Proveedor.Email ?? "";
+                            }
+
+                            if (destinatario.Length > 0 && output.Length > 0 && De.Length > 0)
+                            {
+                                if (EntidadManager.MandaEmail_Nuevo(destinatario,
+                                                                    asunto,
+                                                                    cuerpo,
+                                                                    De,
+                                                                    ConfigurationManager.AppSettings["SmtpServer"],
+                                                                    ConfigurationManager.AppSettings["SmtpUser"],
+                                                                    ConfigurationManager.AppSettings["SmtpPass"],
+                                                                    output,
+                                                                    Convert.ToInt16(ConfigurationManager.AppSettings["SmtpPort"]))
+                                    )
+                                {
+                                    resul = "Ok";
+                                }
+                                else
+                                {
+                                    resul = "Error";
+                                }
+                            }
+                            else
+                            {
+                                resul = "Error";
+                            }
+                        }
+                    }
+                    FileInfo MyFile1 = new FileInfo(output);
+                    if (MyFile1.Exists)
+                    {
+                        System.GC.Collect();
+                        System.GC.WaitForPendingFinalizers();
+                        System.IO.File.Delete(output);
+                        //MyFile1.Delete();
+                    }
+                }
             }
             
             return resul;
@@ -2298,7 +2324,7 @@ namespace ProntoMVC.Controllers
         {
             var vale = new ValesSalida();
 
-            vale.Aprobo = db.Empleados.Where(x => x.Nombre == user).Select(x => x.IdEmpleado).First();
+            if (user.Length > 0) { vale.Aprobo = db.Empleados.Where(x => x.Nombre == user).Select(x => x.IdEmpleado).First(); }
             vale.FechaValeSalida = DateTime.Today;
 
             var reqs = db.DetalleRequerimientos.Where(x => idDetalleRequerimientos.Contains(x.IdDetalleRequerimiento));
