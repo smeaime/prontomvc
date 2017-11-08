@@ -70,19 +70,17 @@
         $('#Vale').on('click', function () {
             $("#frmVale").dialog({
                 autoOpen: true,
-                position: { my: "center", at: "top+500", of: window },
+                position: { my: "center", at: "100", of: window },
+                height: 800,
                 width: 1000,
                 resizable: true,
-                title: 'Vale de salida',
+                title: 'Vale',
                 modal: true,
                 open: function () {
+                    $("#frmVale").html("");
+
                     var $grid = $("#ListaReq"), i, n;
                     var ListaReq = $grid.jqGrid("getGridParam", "selarrrow");
-                    var ListaReq1 = "";
-                    for (i = 0, n = ListaReq.length; i < n; i++) {
-                        ListaReq1 = ListaReq1 + ListaReq[i] + ",";
-                    }
-                    if (ListaReq1.length > 0) { ListaReq1 = ListaReq1.substring(1, ListaReq1.length - 1); }
                     if ((ListaReq == null) || (ListaReq.length == 0)) {
                         ListaReq = [rowIdContextMenu];
                         if ((ListaReq == null) || (ListaReq.length == 0)) {
@@ -90,11 +88,29 @@
                             return;
                         }
                     }
+
+
+
+                    var ListaReq1 = "";
+                    for (i = 0, n = ListaReq.length; i < n; i++) {
+                        ListaReq1 = ListaReq1 + ListaReq[i] + ",";
+                    }
+                    if (ListaReq1.length > 0) { ListaReq1 = ListaReq1.substring(1, ListaReq1.length - 1); }
+
                     //$(this).load('@Url.Action("PartialPage1", "Requerimiento")');
                     $.get('@Url.Action("PartialPage1", "Requerimiento")', { idDetalleRequerimientos: ListaReq1 }, function (partialView) {
-                        $("#frmVale").html(partialView);
+
+                        try {
+                            $("#frmVale").html(partialView); 
+                        }
+                        catch (err) {
+                            
+                        }
+
+                        
+                        inicializar();
+
                     });
-                    inicializar();
                     //$(this).load("PartialPage1", { idDetalleRequerimientos: ListaReq }, function () {
                     //    $("#frmVale").html(partialView);
                     //});
@@ -109,7 +125,7 @@
                     });*@
 
                 },
-                buttons: {
+                //buttons: {
                     //"Add User": function () {
                     //    //addUserInfo();
                     //    $(this).dialog("close");
@@ -117,7 +133,7 @@
                     //Cancel: function () {
                     //    $(this).dialog("close");
                     //}
-                }
+                //}
             });
             return false;
         });
