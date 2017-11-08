@@ -109,6 +109,8 @@
 
                         
                         inicializar();
+                        RefrescaAnchoJqgrids();
+                        deshabilitarPanelesDerecho();
 
                     });
                     //$(this).load("PartialPage1", { idDetalleRequerimientos: ListaReq }, function () {
@@ -502,9 +504,12 @@
 
         $(window).resize(function () {
             RefrescaAnchoJqgrids();
+            deshabilitarPanelesDerecho();
+            
         });
 
         $(function () {
+            RefrescaAnchoJqgrids();
             deshabilitarPanelesDerecho();
 
         })
