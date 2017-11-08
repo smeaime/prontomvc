@@ -2087,11 +2087,10 @@ namespace ProntoMVC.Controllers
             string glbPathPlantillas = "";
             //string s = dbcontext.Parametros.Find(1).PathPlantillas;
             string s = dbcontext.Parametros.Select(x => x.PathPlantillas).FirstOrDefault();
-            if (s.Length == 0)
+            if ((s ?? "").Length == 0)
             {
                 //glbPathPlantillas= App.Path & "\Plantillas"
             }
-
             else
             {
                 glbPathPlantillas = s;
