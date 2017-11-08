@@ -935,7 +935,7 @@ namespace ProntoMVC.Controllers
 
         public PartialViewResult PartialPage1(string idDetalleRequerimientos)
         {
-            if (idDetalleRequerimientos == "") return PartialView();
+            //if (idDetalleRequerimientos == "") return PartialView();
 
             var idDetalleRequerimientos2 = idDetalleRequerimientos.Split(',').Select(Int32.Parse).ToList();
             
