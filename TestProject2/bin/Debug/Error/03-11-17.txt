@@ -1,0 +1,5 @@
+
+Log Entry : 
+11/03/2017 10:56:15
+Error in: . Error Message:Invalid object name 'PlantillasXML'.
+__________________________
