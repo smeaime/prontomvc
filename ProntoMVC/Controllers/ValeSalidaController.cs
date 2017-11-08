@@ -323,8 +323,8 @@ namespace ProntoMVC.Controllers
         //                .Where(x => (PendienteRemito != "SI" || (PendienteRemito == "SI" && x.PendienteRemitir > 0)) && (PendienteFactura != "SI" || (PendienteFactura == "SI" && x.PendienteFacturar > 0)))
         //                .OrderByDescending(x => x.NumeroValeSalida)
         //                
-//.Skip((currentPage - 1) * pageSize).Take(pageSize)
-//.ToList();
+        //.Skip((currentPage - 1) * pageSize).Take(pageSize)
+        //.ToList();
 
         //    var jsonData = new jqGridJson()
         //    {
@@ -418,8 +418,8 @@ namespace ProntoMVC.Controllers
         //                    a.FacturacionCompletaMensual,
         //                    a.Observaciones
         //                }).OrderBy(x => x.NumeroItem)
-//.Skip((currentPage - 1) * pageSize).Take(pageSize)
-//.ToList();
+        //.Skip((currentPage - 1) * pageSize).Take(pageSize)
+        //.ToList();
 
         //    var jsonData = new jqGridJson()
         //    {
@@ -460,6 +460,58 @@ namespace ProntoMVC.Controllers
         //    };
         //    return Json(jsonData, JsonRequestBehavior.AllowGet);
         //}
+
+
+
+
+        public virtual JsonResult DetValesSalidaSinFormatoSegunListaDeItemsDeRequerimientos(List<int> idDetalleRequerimientos)
+        {
+
+            var vale = new ValesSalida();
+
+            if (user.Length > 0) { vale.Aprobo = db.Empleados.Where(x => x.Nombre == user).Select(x => x.IdEmpleado).First(); }
+            vale.FechaValeSalida = DateTime.Today;
+
+            var reqs = db.DetalleRequerimientos.Where(x => idDetalleRequerimientos.Contains(x.IdDetalleRequerimiento));
+
+            foreach (Data.Models.DetalleRequerimiento detrm in reqs)
+            {
+                var detvale = new DetalleValesSalida();
+                detvale.IdArticulo = detrm.IdArticulo;
+                detvale.IdDetalleRequerimiento = detrm.IdDetalleRequerimiento;
+                detvale.Cantidad = detrm.Cantidad;
+                vale.DetalleValesSalidas.Add(detvale);
+            }
+
+
+
+            var data = (from a in vale.DetalleValesSalidas
+                        //from b in db.Unidades.Where(y => y.IdUnidad == a.IdUnidad).DefaultIfEmpty()
+                        //from c in db.Obras.Where(y => y.IdObra == a.ValesSalida.IdObra).DefaultIfEmpty()
+                        select new
+                        {
+                            a.IdDetalleValeSalida,
+                            a.IdValeSalida,
+                            a.IdArticulo,
+                            a.IdUnidad,
+                            a.ValesSalida.IdObra,
+                            a.IdDetalleRequerimiento,
+                            a.ValesSalida.NumeroValeSalida,
+                            a.DetalleRequerimiento.Requerimientos.NumeroRequerimiento,
+                            a.DetalleRequerimiento.NumeroItem,
+                            ArticuloCodigo = a.Articulo.Codigo,
+                            ArticuloDescripcion = a.Articulo.Descripcion,
+                            a.Cantidad,
+                            Unidad = b != null ? b.Abreviatura : "",
+                            Obra = c != null ? c.NumeroObra : "",
+                            Entregado = db.DetalleSalidasMateriales.Where(x => x.IdDetalleValeSalida == a.IdDetalleValeSalida && (x.SalidasMateriale.Anulada ?? "") != "SI").Select(x => x.Cantidad).Sum().ToString(),
+                            Pendiente = (a.Cantidad ?? 0) - (db.DetalleSalidasMateriales.Where(x => x.IdDetalleValeSalida == a.IdDetalleValeSalida && (x.SalidasMateriale.Anulada ?? "") != "SI").Select(x => x.Cantidad).Sum() ?? 0),
+                            a.Partida
+                        }).OrderBy(p => p.IdDetalleValeSalida).ToList();
+            return Json(data, JsonRequestBehavior.AllowGet);
+        }
+
+
 
         public virtual JsonResult DetValesSalidaSinFormato(int? IdValeSalida, int? IdDetalleValeSalida)
         {
