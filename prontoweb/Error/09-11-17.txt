@@ -1,0 +1,131 @@
+
+Log Entry : 
+11/09/2017 14:25:44
+Error in: http://localhost:50769/ProntoWeb/Principal.aspx. Error Message:supervisor esta logueado, pero lo redirijo al login porque faltan los datos de session. No deberia mejor mandarlo a SeleccionarEmpresa? Ademas, no hago el LogOut y le queda el cookie!!!
+__________________________
+
+Log Entry : 
+11/09/2017 14:25:44
+Error in: http://localhost:50769/ProntoWeb/Principal.aspx. Error Message:sesion: supervisor True
+__________________________
+
+Log Entry : 
+11/09/2017 14:25:44
+Error in: http://localhost:50769/ProntoWeb/Principal.aspx. Error Message:Pasa nomas. membership: supervisor
+__________________________
+
+Log Entry : 
+11/09/2017 14:25:44
+Error in: http://localhost:50769/ProntoWeb/Principal.aspx. Error Message:System.Threading.ThreadAbortException
+Subproceso anulado.
+   en System.Threading.Thread.AbortInternal()
+   en System.Threading.Thread.Abort(Object stateInfo)
+   en System.Web.HttpResponse.AbortCurrentThread()
+   en System.Web.HttpResponse.End()
+   en System.Web.HttpServerUtility.Transfer(String path, Boolean preserveForm)
+   en System.Web.HttpServerUtility.Transfer(String path)
+   en ProntoFuncionesUIWeb.RefrescaSession(HttpServerUtility Server) en C:\bdl\pronto\prontoweb\App_Code\vbcode\ManagerDebug\FuncionesUIWeb.vb:línea 4450
+mscorlib
+__________________________
+
+Log Entry : 
+11/09/2017 14:25:44
+Error in: http://localhost:50769/ProntoWeb/Principal.aspx. Error Message:Verificar que el usuario tenga una empresa asignada
+__________________________
+
+Log Entry : 
+11/09/2017 14:26:21
+Error in: http://localhost:50769/ProntoWeb/Principal.aspx. Error Message:supervisor esta logueado, pero lo redirijo al login porque faltan los datos de session. No deberia mejor mandarlo a SeleccionarEmpresa? Ademas, no hago el LogOut y le queda el cookie!!!
+__________________________
+
+Log Entry : 
+11/09/2017 14:26:21
+Error in: http://localhost:50769/ProntoWeb/Principal.aspx. Error Message:sesion: supervisor True
+__________________________
+
+Log Entry : 
+11/09/2017 14:26:22
+Error in: http://localhost:50769/ProntoWeb/Principal.aspx. Error Message:Pasa nomas. membership: supervisor
+__________________________
+
+Log Entry : 
+11/09/2017 14:26:22
+Error in: http://localhost:50769/ProntoWeb/Principal.aspx. Error Message:System.Threading.ThreadAbortException
+Subproceso anulado.
+   en System.Threading.Thread.AbortInternal()
+   en System.Threading.Thread.Abort(Object stateInfo)
+   en System.Web.HttpResponse.AbortCurrentThread()
+   en System.Web.HttpResponse.End()
+   en System.Web.HttpServerUtility.Transfer(String path, Boolean preserveForm)
+   en System.Web.HttpServerUtility.Transfer(String path)
+   en ProntoFuncionesUIWeb.RefrescaSession(HttpServerUtility Server) en C:\bdl\pronto\prontoweb\App_Code\vbcode\ManagerDebug\FuncionesUIWeb.vb:línea 4450
+mscorlib
+__________________________
+
+Log Entry : 
+11/09/2017 14:26:22
+Error in: http://localhost:50769/ProntoWeb/Principal.aspx. Error Message:Verificar que el usuario tenga una empresa asignada
+__________________________
+
+Log Entry : 
+11/09/2017 14:26:25
+Error in: http://localhost:50769/SeleccionarEmpresa.aspx. Error Message:sesion: Mariano True
+__________________________
+
+Log Entry : 
+11/09/2017 14:26:25
+Error in: http://localhost:50769/SeleccionarEmpresa.aspx. Error Message:Pasa nomas. membership: Mariano
+__________________________
+
+Log Entry : 
+11/09/2017 14:26:29
+Error in: http://localhost:50769/SeleccionarEmpresa.aspx. Error Message:sesion: Mariano True
+__________________________
+
+Log Entry : 
+11/09/2017 14:26:29
+Error in: http://localhost:50769/SeleccionarEmpresa.aspx. Error Message:Pasa nomas. membership: Mariano
+__________________________
+
+Log Entry : 
+11/09/2017 14:27:09
+Error in: http://localhost:50769/ProntoWeb/CartasDePortes.aspx?tipo=Todas. Error Message:Mariano
+__________________________
+
+Log Entry : 
+11/09/2017 14:30:31
+Error in: http://localhost:50769/ProntoWeb/SincronismosAutomaticos.aspx. Error Message:Error en la fecha
+__________________________
+
+Log Entry : 
+11/09/2017 14:30:31
+Error in: http://localhost:50769/ProntoWeb/SincronismosAutomaticos.aspx. Error Message:8/11/2017
+__________________________
+
+Log Entry : 
+11/09/2017 14:30:31
+Error in: http://localhost:50769/ProntoWeb/SincronismosAutomaticos.aspx. Error Message:8/11/2017
+__________________________
+
+Log Entry : 
+11/09/2017 14:30:31
+Error in: http://localhost:50769/ProntoWeb/SincronismosAutomaticos.aspx. Error Message:Error en la fecha:8/11/2017;8/11/2017;System.FormatException: No se puede reconocer la cadena como valor DateTime válido.
+   en System.DateTimeParse.ParseExact(String s, String format, DateTimeFormatInfo dtfi, DateTimeStyles style)
+   en System.DateTime.ParseExact(String s, String format, IFormatProvider provider)
+   en SincronismosAutomaticos.enviarTodos(Boolean bVistaPrevia) en C:\bdl\pronto\prontoweb\ProntoWeb\SincronismosAutomaticos.aspx.vb:línea 428
+__________________________
+
+Log Entry : 
+11/09/2017 14:31:03
+Error in: http://localhost:50769/ProntoWeb/SincronismosAutomaticos.aspx. Error Message:Generando sincro para Gesagro
+__________________________
+
+Log Entry : 
+11/09/2017 17:21:40
+Error in: http://localhost:50769/ProntoWeb/CartaPorteMovil.aspx. Error Message:Mariano esta logueado, pero lo redirijo al login porque faltan los datos de session. No deberia mejor mandarlo a SeleccionarEmpresa? Ademas, no hago el LogOut y le queda el cookie!!!
+__________________________
+
+Log Entry : 
+11/09/2017 17:25:37
+Error in: http://localhost:50769/ProntoWeb/CartasDePorteImagenEncriptada.aspx?Id=7MEzO3yg0ic=. Error Message:Viendo Encriptacion del ID 2969197
+__________________________
