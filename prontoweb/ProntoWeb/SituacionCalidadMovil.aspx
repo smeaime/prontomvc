@@ -759,7 +759,7 @@ Arroyo Seco (Sta. Fe) - René Favaloro 726 / (03402) 421-426 - 429-676 / arroyos
 
 
 
-            <div id="TipoSituacion" title="Basic dialog">
+            <div id="TipoSituacion" title="Cambiar situación a">
 
                 <%-- <input type="button" id="Autorizado" value="Autorizado" />
                 <input type="button" id="Demorado" value="Demorado" />--%>
@@ -2784,7 +2784,7 @@ Arroyo Seco (Sta. Fe) - René Favaloro 726 / (03402) 421-426 - 429-676 / arroyos
                                     situacionDesc = "Calado";
                                     break;
                                 default:
-                                    situacionDesc = "adsfasf";
+                                    situacionDesc = "";
 
                             }
                                 
@@ -2814,7 +2814,7 @@ Arroyo Seco (Sta. Fe) - René Favaloro 726 / (03402) 421-426 - 429-676 / arroyos
                         },
 
                         onSelectRow: function (rowId) {
-                            $("#Lista").jqGrid('toggleSubGridRow', rowId);
+                            //$("#Lista").jqGrid('toggleSubGridRow', rowId);
                         },
 
                         //onSelectRow: function (id) { 
@@ -2839,13 +2839,13 @@ Arroyo Seco (Sta. Fe) - René Favaloro 726 / (03402) 421-426 - 429-676 / arroyos
                         //    lastSelectediCol = iCol;
                         //    lastSelectediRow = iRow;
                         //},
-                        afterEditCell: function (id, name, val, iRow, iCol) {
-                            //if (name == 'Fecha') {
-                            //    jQuery("#" + iRow + "_Fecha", "#Lista").datepicker({ dateFormat: "dd/mm/yy" });
-                            //}
-                            var se = "<input style='height:22px;width:55px;' type='button' value='Grabar' onclick=\"GrabarFila('" + id + "');\"  />";
-                            jQuery("#Lista").jqGrid('setRowData', id, { act: se });
-                        },
+                        //afterEditCell: function (id, name, val, iRow, iCol) {
+                        //    //if (name == 'Fecha') {
+                        //    //    jQuery("#" + iRow + "_Fecha", "#Lista").datepicker({ dateFormat: "dd/mm/yy" });
+                        //    //}
+                        //    var se = "<input style='height:22px;width:55px;' type='button' value='Grabar' onclick=\"GrabarFila('" + id + "');\"  />";
+                        //    jQuery("#Lista").jqGrid('setRowData', id, { act: se });
+                        //},
                         //beforeSelectRow: function (rowid, e) {
                         //var $this = $(this),
                         //    $td = $(e.target).closest('td'),

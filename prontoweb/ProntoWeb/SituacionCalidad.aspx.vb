@@ -89,6 +89,9 @@ Partial Class SituacionCalidad
             cmbPeriodo.Text = "Personalizar"
             txtFechaDesde.Text = DateAdd(DateInterval.Day, -2, Today)
             txtFechaHasta.Text = Today
+            txtFechaDesde.Enabled = True
+            txtFechaHasta.Enabled = True
+
             cmbEstado.Enabled = False
 
 
