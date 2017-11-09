@@ -101,16 +101,29 @@
                     $.get('@Url.Action("PartialPage1", "Requerimiento")', { idDetalleRequerimientos: ListaReq1 }, function (partialView) {
 
                         try {
-                            $("#frmVale").html(partialView); 
+                            $("#frmVale").html(partialView);
                         }
                         catch (err) {
-                            
+
                         }
 
-                        
+
                         inicializar();
+                   
+
+
+
+
+
+
                         RefrescaAnchoJqgrids();
                         deshabilitarPanelesDerecho();
+
+
+                        jQuery("#ListaReq").jqGrid().setGridParam({
+                            url: '@Url.Action("DetValesSalidaSinFormatoSegunListaDeItemsDeRequerimientos", "ValeSalida")',
+                            data: { idDetalleRequerimientos: ListaReq }
+                        }).trigger("reloadGrid")
 
                     });
                     //$(this).load("PartialPage1", { idDetalleRequerimientos: ListaReq }, function () {
@@ -505,7 +518,7 @@
         $(window).resize(function () {
             RefrescaAnchoJqgrids();
             deshabilitarPanelesDerecho();
-            
+
         });
 
         $(function () {
