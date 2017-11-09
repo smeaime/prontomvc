@@ -469,9 +469,6 @@ namespace ProntoMVC.Controllers
 
             var vale = new ValesSalida();
 
-            if (user.Length > 0) { vale.Aprobo = db.Empleados.Where(x => x.Nombre == user).Select(x => x.IdEmpleado).First(); }
-            vale.FechaValeSalida = DateTime.Today;
-
             var reqs = db.DetalleRequerimientos.Where(x => idDetalleRequerimientos.Contains(x.IdDetalleRequerimiento));
 
             foreach (Data.Models.DetalleRequerimiento detrm in reqs)
@@ -502,8 +499,8 @@ namespace ProntoMVC.Controllers
                             ArticuloCodigo = a.Articulo.Codigo,
                             ArticuloDescripcion = a.Articulo.Descripcion,
                             a.Cantidad,
-                            Unidad = b != null ? b.Abreviatura : "",
-                            Obra = c != null ? c.NumeroObra : "",
+                            Unidad = "",// db.Unidades.Where(y => y.IdUnidad == a.IdUnidad).DefaultIfEmpty() != null ? b.Abreviatura : "",
+                            Obra = "", //db.Obras.Where(y => y.IdObra == a.ValesSalida.IdObra).DefaultIfEmpty() != null ? c.NumeroObra : "",
                             Entregado = db.DetalleSalidasMateriales.Where(x => x.IdDetalleValeSalida == a.IdDetalleValeSalida && (x.SalidasMateriale.Anulada ?? "") != "SI").Select(x => x.Cantidad).Sum().ToString(),
                             Pendiente = (a.Cantidad ?? 0) - (db.DetalleSalidasMateriales.Where(x => x.IdDetalleValeSalida == a.IdDetalleValeSalida && (x.SalidasMateriale.Anulada ?? "") != "SI").Select(x => x.Cantidad).Sum() ?? 0),
                             a.Partida
