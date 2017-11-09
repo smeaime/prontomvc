@@ -935,6 +935,8 @@ namespace ProntoMVC.Controllers
 
         public PartialViewResult PartialPage1(string idDetalleRequerimientos)
         {
+            //if (idDetalleRequerimientos == "") return PartialView();
+
             var idDetalleRequerimientos2 = idDetalleRequerimientos.Split(',').Select(Int32.Parse).ToList();
             
             var vale = CrearValeSegunItemDeRM(idDetalleRequerimientos2, "", "");
@@ -1066,6 +1068,10 @@ namespace ProntoMVC.Controllers
             };
             return Json(jsonData, JsonRequestBehavior.AllowGet);
         }
+
+
+
+
 
         public virtual ActionResult Requerimientos(string sidx, string sord, int? page, int? rows, bool _search, string searchField, string searchOper, string searchString,
                                                    string FechaInicial, string FechaFinal, string IdObra, bool bAConfirmar = false, bool bALiberar = false)
