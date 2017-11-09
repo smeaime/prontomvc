@@ -1731,6 +1731,130 @@ Public Class LogicaFacturacion
 
 
 
+    Function ValidaCobranzas(ByRef tablaEditadaDeFacturasParaGenerar As DataTable) As Boolean
+
+
+        '//////////////////////////////////////
+        '//////////////////////////////////////
+        '//////////////////////////////////////
+        ' acá ya llegan las cartas tildadas filtradas desde la funcion Validar2doPaso
+        '-sí, pero cómo reviso las tildes de los buques???? Y ESTAS chamuyando: acá hago la primera consulta 
+        '               sobre db.wTempCartasPorteFacturacionAutomaticas, y no sobre la tablaEditadaDeFacturasParaGenerar!!!
+        '//////////////////////////////////////
+        '//////////////////////////////////////
+        '//////////////////////////////////////
+
+
+
+
+
+
+        If True Then 'optFacturarA.SelectedValue = 5 Then
+            Dim ids As Integer = ViewState("sesionId")
+            Dim db As New LinqCartasPorteDataContext(Encriptar(HFSC.Value))
+
+
+
+
+
+            'Dim pri = (From i In db.wTempCartasPorteFacturacionAutomaticas _
+            '           Where i.IdSesion = ids Select i.IdTempCartasPorteFacturacionAutomatica Take 1).SingleOrDefault
+
+
+
+            'que esté tildada...
+
+
+            'cómo verifico que esté tildada
+            'no incluir buques
+
+
+            Dim primeraSinTarifa = (From i In db.wTempCartasPorteFacturacionAutomaticas
+                                    Where i.IdSesion = ids And i.TarifaFacturada = 0 _
+                    And i.IdCartaDePorte <> LogicaFacturacion.IDEMBARQUES And i.IdCartaDePorte > 0
+                                    Order By i.NumeroCartaDePorte, i.FacturarselaA
+                                    Take 1).SingleOrDefault
+
+            If primeraSinTarifa IsNot Nothing Then
+
+                Dim lista = (From i In db.wTempCartasPorteFacturacionAutomaticas Where i.IdSesion = ids
+                             Order By i.NumeroCartaDePorte, i.FacturarselaA Select i.IdCartaDePorte).ToList
+
+
+                Dim indice = lista.IndexOf(primeraSinTarifa.IdCartaDePorte)
+
+
+                'ViewState("pagina") = CInt(indice / GridView2.PageSize)  'hacer que se redirija a la pagina que contiene la carta
+                ViewState("pagina") = 1 'en el automatico, se ordena las tarifas en 0 al principio
+
+                gv2ReBind()
+                MsgBoxAjax(Me, "Hay tarifas en 0. Se mostrará la primera aparición ")
+                btnGenerarFacturas.Enabled = True 'para volver a habilitarlo despues de que se lo deshabilité por javascript para evitar mas de un click
+                Return False
+
+            End If
+        Else
+
+            'modos no automatico
+
+            For i As Integer = 0 To tablaEditadaDeFacturasParaGenerar.Rows.Count - 1
+                If iisNull(tablaEditadaDeFacturasParaGenerar.Rows(i).Item("TarifaFacturada"), 0) = 0 Then
+                    If GridView2.PageIndex <> i / GridView2.PageSize Then
+                        GridView2.PageIndex = Int(i / GridView2.PageSize)
+                        gv2ReBind()
+                    End If
+
+                    MsgBoxAjax(Me, "Hay tarifas en 0. Se mostrará la primera aparición ")
+                    btnGenerarFacturas.Enabled = True 'para volver a habilitarlo despues de que se lo deshabilité por javascript para evitar mas de un click
+                    Return False
+
+                End If
+            Next
+        End If
+
+
+        Dim dtGastosAdministrativos As DataTable = DatasourceGastosAdministrativos()
+        For i As Integer = 0 To dtGastosAdministrativos.Rows.Count - 1
+            If iisNull(dtGastosAdministrativos.Rows(i).Item("TarifaFacturada"), 0) = 0 Then
+                If gvGastosAdmin.PageIndex <> i / gvGastosAdmin.PageSize Then
+                    gvGastosAdmin.PageIndex = Int(i / gvGastosAdmin.PageSize)
+                    gvGastosRebind()
+                End If
+
+                MsgBoxAjax(Me, "Hay tarifas en 0 en los gastos administrativos")
+                btnGenerarFacturas.Enabled = True
+                Return False
+            End If
+        Next
+
+
+
+
+
+        Try
+
+            'grabo tambien el articulo admin
+            Dim IdArticuloGastoAdministrativo = BuscaIdArticuloPreciso("CAMBIO DE CARTA DE PORTE", HFSC.Value)
+            Dim oArt As Pronto.ERP.BO.Articulo = ArticuloManager.GetItem(HFSC.Value, IdArticuloGastoAdministrativo)
+            oArt.CostoReposicion = StringToDecimal(txtTarifaGastoAdministrativo.Text)
+            If oArt.CostoReposicion = 0 Then
+                MsgBoxAjax(Me, "La tarifa de gasto administrativo está en 0. Verificar que existe el artículo 'CAMBIO DE CARTA DE PORTE'")
+                btnGenerarFacturas.Enabled = True 'para volver a habilitarlo despues de que se lo deshabilité por javascript para evitar mas de un click
+                Return False
+
+            End If
+            ArticuloManager.Save(HFSC.Value, oArt)
+        Catch ex As Exception
+            ErrHandler2.WriteError(ex)
+
+        End Try
+
+
+        Return True
+
+    End Function
+
+
     Shared Function ValidaQueHayaClienteCorredorEquivalente() As Boolean
 
         'adasd()

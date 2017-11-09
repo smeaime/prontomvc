@@ -97,6 +97,7 @@
                     }
                     if (ListaReq1.length > 0) { ListaReq1 = ListaReq1.substring(1, ListaReq1.length - 1); }
 
+
                     //$(this).load('@Url.Action("PartialPage1", "Requerimiento")');
                     $.get('@Url.Action("PartialPage1", "Requerimiento")', { idDetalleRequerimientos: ListaReq1 }, function (partialView) {
 
