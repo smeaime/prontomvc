@@ -23,6 +23,10 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
     <%--/////////////////////////////////////////////////////////////--%>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+
+
     <%--/////////////////////////////////////////////////////////////--%>
     <%--/////////////////////////////////////////////////////////////--%>
     <%--////////////    jqgrid     //////////////////////////////////--%>
@@ -181,6 +185,13 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
 
         <br />
+
+        <button type="button" id="btnMostrarMenu" value="" class="" style="height: 50px; width: 70px; margin-left: 4px">
+            <i class="fa fa-bars fa-2x"></i>
+        </button>
+
+        
+
         <asp:Button ID="btnExportarGrilla" Text="EXCEL" runat="server" Visible="false" CssClass="btn btn-primary"
             Width="150" Height="40" />
 
@@ -196,7 +207,9 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
 
         <input type="button" id="btnLog" value="Log" class="btn btn-primary" />
-        <input type="button" id="btnMostrarMenu" value="->" class="btn btn-primary" />
+
+        <input type="button" id="btnsituacion" value="Cambiar situación" class="btn btn-primary" />
+
 
         <br />
         <div id="Salida2"></div>
@@ -214,6 +227,125 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
 
 
+        <div id="TipoSituacion" title="Cambiar a">
+
+            <%-- <input type="button" id="Autorizado" value="Autorizado" />
+                <input type="button" id="Demorado" value="Demorado" />--%>
+
+
+            <asp:DropDownList ID="SituacionNueva" runat="server" Style="text-align: right; margin-left: 0px;"
+                Font-Size="14" Height="40" Width="150" Enabled="true" Visible="true">
+
+                <asp:ListItem Text="Autorizado" Value="0" />
+                <asp:ListItem Text="Demorado" Value="1" />
+                <asp:ListItem Text="Posición" Value="2" />
+                <asp:ListItem Text="Descargado" Value="3" />
+                <asp:ListItem Text="A Descargar" Value="4" />
+                <asp:ListItem Text="Rechazado" Value="5" />
+                <asp:ListItem Text="Desviado" Value="6" />
+                <asp:ListItem Text="CP p/cambiar" Value="7" />
+                <asp:ListItem Text="Sin Cupo" Value="8" />
+                <asp:ListItem Text="Calado" Value="9" />
+
+            </asp:DropDownList>
+
+
+
+        </div>
+
+
+        <script>
+
+
+
+            function cambiarSituaciones(ids, user, pass, callback) {
+                //juntar los ids y mandarlos?
+
+
+                $("#loading").show();
+
+
+                $.ajax({
+                    type: 'POST',
+                    contentType: 'application/json; charset=utf-8',
+                    url: "WebServiceCartas.asmx/GrabarSituaciones",
+
+                    data: JSON.stringify({
+                        idscartas: ids,
+                        idsituacion: $("#ctl00_ContentPlaceHolder1_SituacionNueva").val(),
+                        sObservacionesSituacion: ''
+                    }),
+                }).done(function () {
+                    //if (typeof callback == "function") callback();
+                    $("#loading").hide();
+                    //alert("Vale creado")
+                    $('#Lista').trigger('reloadGrid');
+                }).fail(function () {
+                    $("#loading").hide();
+                    alert("No se pudo cambiar la situación")
+                });
+            }
+
+
+
+            $("#TipoSituacion").hide();
+
+
+            $("#btnsituacion").click(function () {
+
+                //alert('aaa')
+
+                var $grid = $("#Lista");
+                var lista = $grid.jqGrid("getGridParam", "selarrrow");
+                if ((lista == null) || (lista.length == 0)) {
+                    // http://stackoverflow.com/questions/11762757/how-to-retrieve-the-cell-information-for-mouseover-event-in-jqgrid
+
+                    //como no hay renglones tildados, tomo el renglon sobre el que está el cursor
+                    if (!(rowIdContextMenu === undefined)) lista = [rowIdContextMenu];
+                    // lista = $grid.jqGrid('getGridParam', 'selrow')
+
+                    if ((lista == null) || (lista.length == 0)) {
+                        alert("No hay cartas elegidas " + rowIdContextMenu);
+                        return;
+                    }
+
+                }
+
+
+
+
+
+                $("#TipoSituacion").dialog({
+                    dialogClass: "no-close",
+                    buttons: [
+                        {
+                            text: "OK",
+                            click: function () {
+                                $(this).dialog("close");
+
+                                cambiarSituaciones(lista, "administrador", "",
+                                    function () {
+                                        $("#loading").hide();
+                                        $('#Lista').trigger('reloadGrid');
+                                    })
+
+                            }
+                        }
+                    ]
+                });
+
+
+
+
+
+
+
+            })
+
+
+
+
+        </script>
 
         <br />
 
@@ -1191,13 +1323,27 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
                 // CP	TURNO	SITUACION	MERC	TITULAR_CP	INTERMEDIARIO	RTE CIAL	CORREDOR	DESTINATARIO	DESTINO	ENTREGADOR	PROC	KILOS	OBSERVACION
 
+                colNames: ['[Grabar]', 'Id', 'Nro CP', 'Situación', 'infohtml'
 
-                colNames: ['', 'Id', 'Nro CP', 'Turno', 'Situacion',
-                            'Producto', 'Titular', 'Intermediario', 'R Comercial', 'Corredor',
-                            'Destinatario', 'Destino', 'IdDestino', 'Entregador', 'Procedencia',
-                            'Kilos Procedencia', 'Obs Situacion', 'Arribo', 'Descarga', 'Punto Venta',
-                            'Fecha actualizacion', 'Patente', 'Kilos Descargados'
+
+
+                       , 'Obs Situacion',
+                       'Producto', 'Titular', 'Intermediario', 'R Comercial', 'Corredor',
+                       'Destinatario', 'Destino', 'IdDestino', 'Patente',
+                       'Kilos Procedencia', 'Arribo', 'Descarga', 'Punto Venta'
+
                 ],
+
+
+
+                //colNames: ['[Grabar]', 'Id', 'Nro CP', 'Turno',
+
+                //        'Situacion',
+                //            'Producto', 'Titular', 'Intermediario', 'R Comercial', 'Corredor',
+                //            'Destinatario', 'Destino', 'IdDestino', 'Entregador', 'Procedencia',
+                //            'Kilos Procedencia', 'Obs Situacion', 'Arribo', 'Descarga', 'Punto Venta',
+                //            'Fecha actualizacion', 'Patente', 'Kilos Descargados'
+                //],
 
                 colModel: [
 {
@@ -1228,7 +1374,11 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
     }
 },
 
-{ name: 'Turno', index: ' Turno', align: 'left', width: 20, editable: false, hidden: false, edittype: 'text', searchoptions: { sopt: ['bw', 'cn', 'eq'] }, },
+// { name: 'Turno', index: ' Turno', align: 'left', width: 20, editable: false, hidden: false, edittype: 'text', searchoptions: { sopt: ['bw', 'cn', 'eq'] }, },
+
+
+
+
 
 {
     name: 'Situacion', index: 'Situacion', align: 'left', width: 120, hidden: false, editable: true, edittype: 'select', sortable: false,
@@ -1246,6 +1396,17 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
 
 },
+
+
+
+                            { name: 'infohtml', index: 'infohtml', align: 'left', width: 100, editable: true, hidden: true, sortable: false },
+
+
+
+                            { name: 'ObservacionesSituacion', index: 'ObservacionesSituacion', align: 'left', width: 100, editable: true, hidden: false, sortable: false },
+
+
+
 
 
 {
@@ -1796,273 +1957,94 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 { name: 'Destino', index: 'Destino', align: 'left', width: 100, hidden: true, editable: false, edittype: 'text', sortable: false },
 
 
-{
-    name: 'EntregadorDesc', index: 'EntregadorDesc', align: 'left', width: 50, hidden: false, editable: false, edittype: 'text', sortable: false
 
 
-, searchoptions: {
-    //    sopt:['eq'], 
-    dataInit: function (elem) {
-        var NoResultsLabel = "No se encontraron resultados";
 
 
-        $(elem).autocomplete({
 
-            select: function (event, ui) {
-                $(elem).trigger('change');
-            },
+                            { name: 'Patente', index: 'Patente', align: 'left', width: 100, hidden: false, editable: false, edittype: 'text', sortable: false },
 
 
-            source: function (request, response) {
-                $.ajax({
-                    type: "POST",
-                    url: "WebServiceClientes.asmx/GetClientes",
-                    dataType: "json",
-                    contentType: "application/json; charset=utf-8",
 
-                    data: JSON.stringify({
-                        term: request.term
-                        //, idpuntoventa: function () { return $("#ctl00_ContentPlaceHolder1_txtFechaHasta").val(); }
-                    }),
+                            { name: 'NetoPto', index: 'NetoPto', align: 'left', width: 60, hidden: false, editable: false, edittype: 'text', sortable: false },
 
 
-                    success: function (data2) {
-                        var data = JSON.parse(data2.d) // por qué tengo que usar parse?
+                            //{ name: 'NetoProc', index: 'NetoProc', align: 'left', width: 60, hidden: false, editable: false, edittype: 'text', sortable: false }
 
-                        //if (data.length == 1 || data.length > 1) { // qué pasa si encuentra más de uno?????
-                        //    var ui = data[0];
 
-                        //    if (ui.id == "") {
-                        //        alert("No existe el artículo"); // se está bancando que no sea identica la descripcion
-                        //        $("#Descripcion").val("");
-                        //        return;
-                        //    }
-                        //    $("#IdWilliamsDestino").val(ui.id);
+                            {
+                                name: 'FechaArribo', index: 'FechaArribo', width: 100, sortable: true, align: 'right', editable: false, sortable: false,
+                                editoptions: {
+                                    size: 10,
+                                    maxlengh: 10,
+                                    dataInit: function (element) {
+                                        $(element).datepicker({
+                                            dateFormat: 'dd/mm/yy',
+                                            constrainInput: false,
+                                            showOn: 'button',
+                                            buttonText: '...'
+                                        });
+                                    }
+                                },
+                                formatoptions: { newformat: "dd/mm/yy" }, datefmt: 'dd/mm/yy'
+                                //, formatter: 'date'
+                                , sorttype: 'date'
 
-                        //    UltimoIdArticulo = ui.id;
-                        //}
-                        //else {
-                        //    alert("No existe el artículo"); // se está bancando que no sea identica la descripcion
-                        //}
 
-                        response($.map(data, function (item) {
-                            return {
-                                label: item.value,
-                                value: item.value //item.id
-                                , id: item.id
-                            }
-                        }));
+                                , searchoptions: {
+                                    sopt: ['eq', 'ne', 'lt', 'le', 'gt', 'ge'],
+                                    dataInit: function (elem) {
+                                        $(elem).datepicker({
+                                            dateFormat: 'dd/mm/yy',
+                                            showButtonPanel: true
+                                        })
+                                    }
+                                }
+                            },
 
-                    }
 
 
+                            {
+                                name: 'FechaDescarga', index: 'FechaDescarga', width: 100, sortable: true, align: 'right', editable: false, sortable: false,
+                                editoptions: {
+                                    size: 10,
+                                    maxlengh: 10,
+                                    dataInit: function (element) {
+                                        $(element).datepicker({
+                                            dateFormat: 'dd/mm/yy',
+                                            constrainInput: false,
+                                            showOn: 'button',
+                                            buttonText: '...'
+                                        });
+                                    }
+                                },
+                                formatoptions: { newformat: "dd/mm/yy" }, datefmt: 'dd/mm/yy'
+                                //, formatter: 'date'
+                                , sorttype: 'date'
 
-                })
 
+                                , searchoptions: {
+                                    sopt: ['eq', 'ne', 'lt', 'le', 'gt', 'ge'],
+                                    dataInit: function (elem) {
+                                        $(elem).datepicker({
+                                            dateFormat: 'dd/mm/yy',
+                                            showButtonPanel: true
+                                        })
+                                    }
+                                }
+                            },
 
-            }
 
 
-        });
 
+                            { name: 'PuntoVenta', index: 'PuntoVenta', align: 'left', width: 50, hidden: false, editable: false, edittype: 'text', sortable: false },
 
 
 
 
 
-    }
-}
 
-},
 
-{
-    name: 'ProcedenciaDesc', index: 'ProcedenciaDesc', align: 'left', width: 100, hidden: false, editable: false, edittype: 'text', sortable: false
-
-
-, searchoptions: {
-    //    sopt:['eq'], 
-    dataInit: function (elem) {
-        var NoResultsLabel = "No se encontraron resultados";
-
-
-        $(elem).autocomplete({
-
-            select: function (event, ui) {
-                $(elem).val(ui.item.value);
-                $(elem).trigger('change');
-            },
-
-            source: function (request, response) {
-                $.ajax({
-                    type: "POST",
-                    url: "WebServiceClientes.asmx/GetLocalidades",
-                    dataType: "json",
-                    contentType: "application/json; charset=utf-8",
-
-                    data: JSON.stringify({
-                        term: request.term
-                        //, idpuntoventa: function () { return $("#ctl00_ContentPlaceHolder1_txtFechaHasta").val(); }
-                    }),
-
-
-                    success: function (data2) {
-                        var data = JSON.parse(data2.d) // por qué tengo que usar parse?
-
-                        //if (data.length == 1 || data.length > 1) { // qué pasa si encuentra más de uno?????
-                        //    var ui = data[0];
-
-                        //    if (ui.id == "") {
-                        //        alert("No existe el artículo"); // se está bancando que no sea identica la descripcion
-                        //        $("#Descripcion").val("");
-                        //        return;
-                        //    }
-                        //    $("#IdWilliamsDestino").val(ui.id);
-
-                        //    UltimoIdArticulo = ui.id;
-                        //}
-                        //else {
-                        //    alert("No existe el artículo"); // se está bancando que no sea identica la descripcion
-                        //}
-
-
-
-
-                        response($.map(data, function (item) {
-                            return {
-                                label: item.value,
-                                value: item.value //item.id
-                                , id: item.id
-                            }
-                        }));
-
-                    }
-
-
-
-                })
-
-
-            }
-
-
-        });
-
-
-
-
-
-
-    }
-}
-},
-
-{ name: 'NetoPto', index: 'NetoPto', align: 'left', width: 60, hidden: false, editable: false, edittype: 'text', sortable: false },
-
-{ name: 'ObservacionesSituacion', index: 'ObservacionesSituacion', align: 'left', width: 100, editable: true, hidden: false, sortable: false },
-
-{
-    name: 'FechaArribo', index: 'FechaArribo', width: 100, sortable: true, align: 'right', editable: false, sortable: false,
-    editoptions: {
-        size: 10,
-        maxlengh: 10,
-        dataInit: function (element) {
-            $(element).datepicker({
-                dateFormat: 'dd/mm/yy',
-                constrainInput: false,
-                showOn: 'button',
-                buttonText: '...'
-            });
-        }
-    },
-    formatoptions: { newformat: "dd/mm/yy" }, datefmt: 'dd/mm/yy'
-    //, formatter: 'date'
-, sorttype: 'date'
-
-
-, searchoptions: {
-    sopt: ['eq', 'ne', 'lt', 'le', 'gt', 'ge'],
-    dataInit: function (elem) {
-        $(elem).datepicker({
-            dateFormat: 'dd/mm/yy',
-            showButtonPanel: true
-        })
-    }
-}
-},
-
-
-
-{
-    name: 'FechaDescarga', index: 'FechaDescarga', width: 100, sortable: true, align: 'right', editable: false, sortable: false,
-    editoptions: {
-        size: 10,
-        maxlengh: 10,
-        dataInit: function (element) {
-            $(element).datepicker({
-                dateFormat: 'dd/mm/yy',
-                constrainInput: false,
-                showOn: 'button',
-                buttonText: '...'
-            });
-        }
-    },
-    formatoptions: { newformat: "dd/mm/yy" }, datefmt: 'dd/mm/yy'
-    //, formatter: 'date'
-    , sorttype: 'date'
-
-
-    , searchoptions: {
-        sopt: ['eq', 'ne', 'lt', 'le', 'gt', 'ge'],
-        dataInit: function (elem) {
-            $(elem).datepicker({
-                dateFormat: 'dd/mm/yy',
-                showButtonPanel: true
-            })
-        }
-    }
-},
-
-
-
-
-{ name: 'PuntoVenta', index: 'PuntoVenta', align: 'left', width: 50, hidden: false, editable: false, edittype: 'text', sortable: false },
-
-
-
-{
-    name: 'FechaActualizacionAutomatica', index: 'FechaActualizacionAutomatica', width: 150, sortable: true, align: 'right', editable: false, sortable: false,
-    editoptions: {
-        size: 10,
-        maxlengh: 10,
-        dataInit: function (element) {
-            $(element).datepicker({
-                dateFormat: 'dd/mm/yy',
-                constrainInput: false,
-                showOn: 'button',
-                buttonText: '...'
-            });
-        }
-    },
-    formatoptions: { newformat: "dd/mm/yy" }, datefmt: 'dd/mm/yy'
-    //, formatter: 'date'
-, sorttype: 'date'
-
-
-, searchoptions: {
-    sopt: ['eq', 'ne', 'lt', 'le', 'gt', 'ge'],
-    dataInit: function (elem) {
-        $(elem).datepicker({
-            dateFormat: 'dd/mm/yy',
-            showButtonPanel: true
-        })
-    }
-}
-},
-
-
-{ name: 'Patente', index: 'Patente', align: 'left', width: 100, hidden: false, editable: false, edittype: 'text', sortable: false },
-
-{ name: 'NetoProc', index: 'NetoProc', align: 'left', width: 60, hidden: false, editable: false, edittype: 'text', sortable: false }
 
 
                 ],
@@ -2153,7 +2135,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                             situacionDesc = "Calado";
                             break;
                         default:
-                            situacionDesc = "adsfasf";
+                            situacionDesc = "";
 
                     }
 
@@ -2183,7 +2165,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                 },
 
                 onSelectRow: function (rowId) {
-                    $("#Lista").jqGrid('toggleSubGridRow', rowId);
+                    // $("#Lista").jqGrid('toggleSubGridRow', rowId);
                 },
 
 
@@ -2222,7 +2204,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                 gridview: true
                , multiboxonly: true
                , multipleSearch: true
-    
+
 
             });
 
