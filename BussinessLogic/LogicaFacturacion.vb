@@ -1731,7 +1731,7 @@ Public Class LogicaFacturacion
 
 
 
-    Function ValidaCobranzas(ByRef tablaEditadaDeFacturasParaGenerar As DataTable) As Boolean
+    Public Shared Function ValidaCobranzas(ByRef tablaEditadaDeFacturasParaGenerar As DataTable, ByRef sError As String) As Boolean
 
 
         '//////////////////////////////////////
@@ -1745,109 +1745,56 @@ Public Class LogicaFacturacion
         '//////////////////////////////////////
 
 
+        '//'    'http://bdlconsultores.ddns.net/Consultas/Admin/VerConsultas1.php?recordid=14168
+        '    //'    'Precisan agregar una marca en el formulario de clientes para poder bloquear la carga de estos
+        '    //'    'en las cartas de porte debido a un conflicto de cobranzas.
+        '    //'    'Este tilde deberán verlo solo algunos usuarios(activaremos a los de cobranzas).
+        '    //'    'Luego, cuando quieran usarlo en una carta de porte el sistema tiene que dar un mensaje de advertencia diciendo
+        '    //'    'que el usuario no se puede utilizar y que tiene que ponerse en contacto con el sector de cobranzas.
+        '    //'    'La carta de porte no se puede grabar si tiene un cliente en esta condición.
+
+
+        '    //'    Dim sClientesCobranzas As String
+        '    //'    If UsaClientesQueEstanBloqueadosPorCobranzas(SC, myCartaDePorte, sClientesCobranzas) Then
+        '    //'        MS &= "Cliente bloqueado. Ponerse en contacto con el sector de cobranzas (" & sClientesCobranzas & ") "
+        '    //'        MS &= vbCrLf   'return false
+        '    //'    End If
+
+
+        Return True
 
 
 
 
-        If True Then 'optFacturarA.SelectedValue = 5 Then
-            Dim ids As Integer = ViewState("sesionId")
-            Dim db As New LinqCartasPorteDataContext(Encriptar(HFSC.Value))
+        Dim clientesfacturados As New List(Of Integer)
+
+
+        For i As Integer = 0 To tablaEditadaDeFacturasParaGenerar.Rows.Count - 1
+            clientesfacturados = tablaEditadaDeFacturasParaGenerar.Rows(i).Item("TarifaFacturada")
+
+
+            'verificariamos el titular o aquel al que se le factura?
 
 
 
+            'If UsaClientesQueEstanBloqueadosPorCobranzas(SC, myCartaDePorte, sClientesCobranzas) Then
 
-
-            'Dim pri = (From i In db.wTempCartasPorteFacturacionAutomaticas _
-            '           Where i.IdSesion = ids Select i.IdTempCartasPorteFacturacionAutomatica Take 1).SingleOrDefault
-
-
-
-            'que esté tildada...
-
-
-            'cómo verifico que esté tildada
-            'no incluir buques
-
-
-            Dim primeraSinTarifa = (From i In db.wTempCartasPorteFacturacionAutomaticas
-                                    Where i.IdSesion = ids And i.TarifaFacturada = 0 _
-                    And i.IdCartaDePorte <> LogicaFacturacion.IDEMBARQUES And i.IdCartaDePorte > 0
-                                    Order By i.NumeroCartaDePorte, i.FacturarselaA
-                                    Take 1).SingleOrDefault
-
-            If primeraSinTarifa IsNot Nothing Then
-
-                Dim lista = (From i In db.wTempCartasPorteFacturacionAutomaticas Where i.IdSesion = ids
-                             Order By i.NumeroCartaDePorte, i.FacturarselaA Select i.IdCartaDePorte).ToList
-
-
-                Dim indice = lista.IndexOf(primeraSinTarifa.IdCartaDePorte)
-
-
-                'ViewState("pagina") = CInt(indice / GridView2.PageSize)  'hacer que se redirija a la pagina que contiene la carta
-                ViewState("pagina") = 1 'en el automatico, se ordena las tarifas en 0 al principio
-
-                gv2ReBind()
-                MsgBoxAjax(Me, "Hay tarifas en 0. Se mostrará la primera aparición ")
-                btnGenerarFacturas.Enabled = True 'para volver a habilitarlo despues de que se lo deshabilité por javascript para evitar mas de un click
-                Return False
-
-            End If
-        Else
-
-            'modos no automatico
-
-            For i As Integer = 0 To tablaEditadaDeFacturasParaGenerar.Rows.Count - 1
-                If iisNull(tablaEditadaDeFacturasParaGenerar.Rows(i).Item("TarifaFacturada"), 0) = 0 Then
-                    If GridView2.PageIndex <> i / GridView2.PageSize Then
-                        GridView2.PageIndex = Int(i / GridView2.PageSize)
-                        gv2ReBind()
-                    End If
-
-                    MsgBoxAjax(Me, "Hay tarifas en 0. Se mostrará la primera aparición ")
-                    btnGenerarFacturas.Enabled = True 'para volver a habilitarlo despues de que se lo deshabilité por javascript para evitar mas de un click
-                    Return False
-
-                End If
-            Next
-        End If
-
-
-        Dim dtGastosAdministrativos As DataTable = DatasourceGastosAdministrativos()
-        For i As Integer = 0 To dtGastosAdministrativos.Rows.Count - 1
-            If iisNull(dtGastosAdministrativos.Rows(i).Item("TarifaFacturada"), 0) = 0 Then
-                If gvGastosAdmin.PageIndex <> i / gvGastosAdmin.PageSize Then
-                    gvGastosAdmin.PageIndex = Int(i / gvGastosAdmin.PageSize)
-                    gvGastosRebind()
-                End If
-
-                MsgBoxAjax(Me, "Hay tarifas en 0 en los gastos administrativos")
-                btnGenerarFacturas.Enabled = True
-                Return False
-            End If
         Next
 
 
 
 
 
-        Try
+        'If myCartaDePorte.Titular > 0 AndAlso (From i In db.DetalleClientesContactos
+        '                                       Where i.IdCliente = myCartaDePorte.Titular
+        '                                           And i.Acciones = "DeshabilitadoPorCobranzas" _
+        '                                           And i.Contacto = "NO"
+        '                                        ).Any Then
+        '    MS += " El Titular esta deshabilitado por cobranzas "
+        'End If
 
-            'grabo tambien el articulo admin
-            Dim IdArticuloGastoAdministrativo = BuscaIdArticuloPreciso("CAMBIO DE CARTA DE PORTE", HFSC.Value)
-            Dim oArt As Pronto.ERP.BO.Articulo = ArticuloManager.GetItem(HFSC.Value, IdArticuloGastoAdministrativo)
-            oArt.CostoReposicion = StringToDecimal(txtTarifaGastoAdministrativo.Text)
-            If oArt.CostoReposicion = 0 Then
-                MsgBoxAjax(Me, "La tarifa de gasto administrativo está en 0. Verificar que existe el artículo 'CAMBIO DE CARTA DE PORTE'")
-                btnGenerarFacturas.Enabled = True 'para volver a habilitarlo despues de que se lo deshabilité por javascript para evitar mas de un click
-                Return False
 
-            End If
-            ArticuloManager.Save(HFSC.Value, oArt)
-        Catch ex As Exception
-            ErrHandler2.WriteError(ex)
 
-        End Try
 
 
         Return True

@@ -2067,20 +2067,6 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
                 ],
 
-                gridComplete: function () {
-                    //    var ids = jQuery("#Lista").jqGrid('getDataIDs');
-                    //    for (var i = 0; i < ids.length; i++) {
-                    //        var cl = ids[i];
-                    //        var se = "<input style='height:22px;width:20px;' type='button' value='G' onclick=\"GrabarFila('" + cl + "'); \"  />";
-                    //        jQuery("#Lista").jqGrid('setRowData', ids[i], { act: se });
-                    //    }
-                    //jQuery("#Lista").jqGrid('addRowData', Id, data, "last");
-                    //AgregarItemVacio(grid)
-
-
-                },
-
-
 
                 loadComplete: function () {
                     // http://stackoverflow.com/questions/6575192/jqgrid-change-background-color-of-row-based-on-row-cell-value-by-column-name
@@ -2108,23 +2094,100 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                     var se = "<input style='height:22px;width:55px;' type='button' value='Grabar' onclick=\"GrabarFila('" + id + "');\"  />";
                     jQuery("#Lista").jqGrid('setRowData', id, { act: se });
                 },
-                //beforeSelectRow: function (rowid, e) {
-                //var $this = $(this),
-                //    $td = $(e.target).closest('td'),
-                //    $tr = $td.closest('tr'),
-                //    iRow = $tr[0].rowIndex,
-                //    iCol = $.jgrid.getCellIndex($td);
 
-                //if (typeof lastSelectediRow !== "undefined" && typeof lastSelectediCol !== "undefined" &&
-                //        (iRow !== lastSelectediRow || iCol !== lastSelectediCol)) {
-                //    $this.jqGrid('setGridParam', {cellEdit: true});
-                //    $this.jqGrid('restoreCell', lastSelectediRow, lastSelectediCol, true);
-                //    $this.jqGrid('setGridParam', {cellEdit: false});
-                //    $(this.rows[lastSelectediRow].cells[lastSelectediCol])
-                //        .removeClass("ui-state-highlight");
-                //}
-                //return true;
-                //},
+
+
+                subGridRowExpanded: function (subgrid_id, row_id) {
+                    //var html = "<span>Some HTML text which corresponds the row with id=" +
+                    //    row_id + "</span><br/>";
+
+                    //var html = '<ul data-dtr-index="0" class="dtr-details"><li data-dtr-index="4" data-dt-row="0" data-dt-column="4"><span class="dtr-title"><a href="">Titular</a></span> <span class="dtr-data"><span>Martignone Adolfo Y Cia  S C A </span></span></li><li data-dtr-index="5" data-dt-row="0" data-dt-column="5"><span class="dtr-title">Intermed.</span> <span class="dtr-data"><span></span></span></li><li data-dtr-index="6" data-dt-row="0" data-dt-column="6"><span class="dtr-title">Remitente Comercial</span> <span class="dtr-data"><span>Granos Olavarria S A </span></span></li><li data-dtr-index="7" data-dt-row="0" data-dt-column="7"><span class="dtr-title"><a href="">Corredor</a></span> <span class="dtr-data"><span>Futuros Y Opciones Com S A </span></span></li><li data-dtr-index="8" data-dt-row="0" data-dt-column="8"><span class="dtr-title">Esp.</span> <span class="dtr-data"><span>Soja Sustentable Usa</span></span></li><li data-dtr-index="9" data-dt-row="0" data-dt-column="9"><span class="dtr-title"><a href="">Destino</a><img title="Orden:Asc" src="/WebResource.axd?d=olQ67zyJIM4n9M_oCjYGRrTv0D-PJFdyCfA8P30v3DAazZ2pPF9qhxbM3BGjwDU_sj9fOg-6w-QRXWlBrrBXHMoHlpC6GPd2JFlMFkPtMfvCFUjqHNl-emkH6wLPSw2q0&amp;t=636426523640000000" alt="Orden:Asc" align="absbottom"></span> <span class="dtr-data">FCA VICENTIN</span></li><li data-dtr-index="10" data-dt-row="0" data-dt-column="10"><span class="dtr-title">Destinat.</span> <span class="dtr-data"><span>Vicentin S A I C</span></span></li><li data-dtr-index="11" data-dt-row="0" data-dt-column="11"><span class="dtr-title">Analisis</span> <span class="dtr-data"><span>DÑ:12.00% HD:13.20%  </span></span></li><li data-dtr-index="12" data-dt-row="0" data-dt-column="12"><span class="dtr-title">Patente</span> <span class="dtr-data">ERT783</span></li><li data-dtr-index="13" data-dt-row="0" data-dt-column="13"><span class="dtr-title">Obs Pto</span> <span class="dtr-data">&nbsp;</span></li><li data-dtr-index="14" data-dt-row="0" data-dt-column="14"><span class="dtr-title">Procedencia</span> <span class="dtr-data"><span>Villa Lila</span></span></li><li data-dtr-index="15" data-dt-row="0" data-dt-column="15"><span class="dtr-title">Entreg</span> <span class="dtr-data"><span>Wil</span></span></li><li data-dtr-index="16" data-dt-row="0" data-dt-column="16"><span class="dtr-title">Entreg CP</span> <span class="dtr-data"><span></span></span></li></ul>'
+
+
+
+
+
+                    var a = $("#Lista").jqGrid('getRowData', row_id);
+
+
+
+                    //$("#" + subgrid_id).append(dataFromTheRow.infohtml);
+                    //$("#" + subgrid_id).append(dataFromTheRow.Producto);
+
+
+
+                    // value: "0:Autorizado; 1:Demorado; 2:Posición; 3:Descargado; 4:A Descargar; 5:Rechazado;6:Desviado;7:CP p/cambiar;8:Sin Cupo;9:Calado"
+
+                    //alert(a.Situacion);
+
+                    var situacionDesc = "";
+                    switch (parseInt(a.Situacion)) {
+                        case 0:
+                            situacionDesc = "Autorizado";
+                            break;
+                        case 1:
+                            situacionDesc = "Demorado";
+                            break;
+                        case 2:
+                            situacionDesc = "Posición";
+                            break;
+                        case 3:
+                            situacionDesc = "Descargado";
+                            break;
+                        case 4:
+                            situacionDesc = "A Descargar";
+                            break;
+                        case 5:
+                            situacionDesc = "Rechazado";
+                            break;
+                        case 6:
+                            situacionDesc = "Desviado";
+                            break;
+                        case 7:
+                            situacionDesc = "CP p/cambiar";
+                            break;
+                        case 8:
+                            situacionDesc = "Sin Cupo";
+                            break;
+                        case 9:
+                            situacionDesc = "Calado";
+                            break;
+                        default:
+                            situacionDesc = "adsfasf";
+
+                    }
+
+
+
+
+                    var html = "<span style='font-size: 14px'> " +
+                        "<br/><b>Situación</b>      " + situacionDesc +
+                        "<br/><b>Observaciones</b>            " + a.ObservacionesSituacion +
+                        "<br/><b>Producto</b>       " + a.Producto +
+                        "<br/><b>Titular</b>            " + a.TitularDesc +
+                        "<br/><b>Intermediario</b>            " + a.IntermediarioDesc +
+                        "<br/><b>R.Comercial</b>            " + a.RComercialDesc +
+                        "<br/><b>Corredor</b>            " + a.CorredorDesc +
+                        "<br/><b>Destinatario</b>            " + a.DestinatarioDesc +
+                        "<br/><b>Destino</b>  " + a.DestinoDesc +
+                        "<br/><b>Patente</b>  " + a.Patente +
+                        "<br/><b>Neto</b>  " + a.NetoPto +
+                        "<br/><b>Arribo</b>  " + a.FechaArribo +
+                        "<br/><b>Descarga</b>  " + a.FechaDescarga +
+                        "<br/><br/><a href=\"CartaDePorte.aspx?Id=" + a.IdCartaDePorte + "\"  target=\"_blank\" > ver carta </>" +
+                        "<span/>";
+
+                    $("#" + subgrid_id).append(html);
+
+
+                },
+
+                onSelectRow: function (rowId) {
+                    $("#Lista").jqGrid('toggleSubGridRow', rowId);
+                },
+
+
+
 
                 pager: $('#ListaPager'),
                 rowNum: 1000,
@@ -2132,7 +2195,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                 sortname: 'IdCartaDePorte',  //'FechaDescarga', //'NumeroCartaDePorte',
                 sortorder: 'desc',
                 viewrecords: true,
-                multiselect: false,
+                multiselect: true,
                 shrinkToFit: false,
                 width: 'auto',
                 height: 460, // $(window).height() - 250, // '100%'
@@ -2144,13 +2207,30 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                 cellsubmit: 'clientArray',
                 dataUrl: "WebServiceClientes.asmx/EmpleadoEditGridData",
 
+
+
+
+                //recordtext: "{2} cartas</span>",
+                //pgtext: "Pag. {0} de {1}",
                 toppager: true,
+                subGrid: true,
+                multiselectWidth: 40,
+                subGridWidth: 40,
+
+
 
                 gridview: true
-        , multiboxonly: true
-        , multipleSearch: true
+               , multiboxonly: true
+               , multipleSearch: true
+    
 
             });
+
+
+
+
+
+
 
 
             jQuery('#Lista').jqGrid('gridResize');
