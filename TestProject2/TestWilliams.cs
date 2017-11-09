@@ -1144,7 +1144,7 @@ namespace ProntoMVC.Tests
 
 
 
-            ValidaCobranzas(tablaEditadaDeFacturasParaGenerar);
+            LogicaFacturacion.ValidaCobranzas(ref tablaEditadaDeFacturasParaGenerar);
 
         }
 

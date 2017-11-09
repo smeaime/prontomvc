@@ -1569,7 +1569,7 @@ Partial Class CDPFacturacion
 
 
 
-        Dim sError = "" As String
+        Dim sError = ""
         If Not ValidaCobranzas(tablaEditadaDeFacturasParaGenerar, sError) Then
             ErrHandler2.WriteError("Hay clientes no habilidados para cobranzas" + sError)
             Return False

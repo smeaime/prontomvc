@@ -11032,7 +11032,7 @@ usuario As String, ConexBDLmaster As String,
 
 
             If myCartaDePorte.Titular > 0 AndAlso (From i In db.DetalleClientesContactos
-                                                   Where i.IdCliente = myCartaDePorte.Entregador _
+                                                   Where i.IdCliente = myCartaDePorte.Titular _
                                                    And i.Acciones = "DeshabilitadoPorCobranzas" _
                                                    And i.Contacto = "NO"
                                                 ).Any Then
