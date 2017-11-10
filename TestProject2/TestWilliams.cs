@@ -865,6 +865,78 @@ namespace ProntoMVC.Tests
 
 
 
+
+        [TestMethod]
+        public void envioNotificacionesconMail_42871()
+        {
+
+            // el envio de mails (+ push de chrome)
+
+            // EncolarNotificaciones(ClientesQueParticipanEnCartas(ListadoDeCartasModificadas(UltimaFechaDeEnvioNotificaciones)))
+
+
+            var scEF = ProntoMVC.Data.Models.Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC));
+            BDLMasterEntities dbmaster = new BDLMasterEntities(Auxiliares.FormatearConexParaEntityFrameworkBDLMASTER_2(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(scbdlmasterappconfig)));
+            DemoProntoEntities db = new DemoProntoEntities(scEF);
+            DateTime UltimaFechaDeEnvioNotificaciones = new DateTime(2016, 8, 31);
+
+            var q = (
+                    from x in db.CartasDePortes
+                    from c1 in db.Clientes.Where(c => c.IdCliente == x.Vendedor)
+                    from c2 in db.Clientes.Where(c => c.IdCliente == x.Entregador)
+                    where (x.FechaModificacion > UltimaFechaDeEnvioNotificaciones) pero y si el cliente ya las vio?
+                    select new string[] { c1.Email, c2.Email }
+                    )
+                    .SelectMany(x => x)
+                    .Distinct();
+
+
+
+
+            // solo estos clientes me interesan...  -cuantos usuarios externos hay en la bdlmaster? creo q mas de mil. ademas, recordá que los usuarios especiales tipo BLD los tendrías que filtrar de otro modo...
+            var usuariosclientes = from p in dbmaster.UserDatosExtendidos
+                                   join u in dbmaster.aspnet_Users on p.UserId equals u.UserId
+                                   join m in dbmaster.aspnet_Membership on p.UserId equals m.UserId
+                                   select new { p.RazonSocial, m.Email };
+
+
+
+
+
+            string rejunte2 = string.Join(";", q.Take(100).ToArray());
+
+
+            var listado = db.Clientes.Select(x => x.CorreosElectronicos_1).Take(100);
+            string rejunte = string.Join(";", listado.ToArray());
+
+            if (false)
+            {
+                Pronto.ERP.Bll.EntidadManager.MandaEmail_Nuevo(ConfigurationManager.AppSettings["ErrorMail"],
+                                   "asuntoasuntoasunto 2",
+                                "cuerpocuerpocuerpocuerpocuerpocuerpocuerpocuerpocuerpocuerpocuerpocuerpo cuerpocuerpocuerpocuerpo",
+                                ConfigurationManager.AppSettings["SmtpUser"],
+                                ConfigurationManager.AppSettings["SmtpServer"],
+                                ConfigurationManager.AppSettings["SmtpUser"],
+                                ConfigurationManager.AppSettings["SmtpPass"],
+                                  "",
+                               Convert.ToInt16(ConfigurationManager.AppSettings["SmtpPort"]), 1
+                               , rejunte
+
+                               );
+            }
+
+
+        }
+
+
+
+
+
+
+
+
+
+
         [TestMethod]
         public void ServicioWebServiceDescargas_FYO_y_BLD_46746()
         {
@@ -2169,70 +2241,6 @@ Error in: https://prontoweb.williamsentregas.com.ar/ProntoWeb/CDPFacturacion.asp
 
         }
 
-
-
-
-        [TestMethod]
-        public void envioNotificacionesconMail_42871()
-        {
-
-            // el envio de mails (+ push de chrome)
-
-            // EncolarNotificaciones(ClientesQueParticipanEnCartas(ListadoDeCartasModificadas(UltimaFechaDeEnvioNotificaciones)))
-
-
-            var scEF = ProntoMVC.Data.Models.Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC));
-            BDLMasterEntities dbmaster = new BDLMasterEntities(Auxiliares.FormatearConexParaEntityFrameworkBDLMASTER_2(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(scbdlmasterappconfig)));
-            DemoProntoEntities db = new DemoProntoEntities(scEF);
-            DateTime UltimaFechaDeEnvioNotificaciones = new DateTime(2016, 8, 31);
-
-            var q = (
-                    from x in db.CartasDePortes
-                    from c1 in db.Clientes.Where(c => c.IdCliente == x.Vendedor)
-                    from c2 in db.Clientes.Where(c => c.IdCliente == x.Entregador)
-                    where (x.FechaModificacion > UltimaFechaDeEnvioNotificaciones)
-                    select new string[] { c1.Email, c2.Email }
-                    )
-                    .SelectMany(x => x)
-                    .Distinct();
-
-
-
-
-            // solo estos clientes me interesan...  -cuantos usuarios externos hay en la bdlmaster? creo q mas de mil. ademas, recordá que los usuarios especiales tipo BLD los tendrías que filtrar de otro modo...
-            var usuariosclientes = from p in dbmaster.UserDatosExtendidos
-                                   join u in dbmaster.aspnet_Users on p.UserId equals u.UserId
-                                   join m in dbmaster.aspnet_Membership on p.UserId equals m.UserId
-                                   select new { p.RazonSocial, m.Email };
-
-
-
-
-
-            string rejunte2 = string.Join(";", q.Take(100).ToArray());
-
-
-            var listado = db.Clientes.Select(x => x.CorreosElectronicos_1).Take(100);
-            string rejunte = string.Join(";", listado.ToArray());
-
-            if (false)
-            {
-                Pronto.ERP.Bll.EntidadManager.MandaEmail_Nuevo(ConfigurationManager.AppSettings["ErrorMail"],
-                                   "asuntoasuntoasunto 2",
-                                "cuerpocuerpocuerpocuerpocuerpocuerpocuerpocuerpocuerpocuerpocuerpocuerpo cuerpocuerpocuerpocuerpo",
-                                ConfigurationManager.AppSettings["SmtpUser"],
-                                ConfigurationManager.AppSettings["SmtpServer"],
-                                ConfigurationManager.AppSettings["SmtpUser"],
-                                ConfigurationManager.AppSettings["SmtpPass"],
-                                  "",
-                               Convert.ToInt16(ConfigurationManager.AppSettings["SmtpPort"]), 1
-                               , rejunte
-
-                               );
-            }
-
-
-        }
 
 
 
