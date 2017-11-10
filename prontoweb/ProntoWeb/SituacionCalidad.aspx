@@ -24,7 +24,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 
 
     <%--/////////////////////////////////////////////////////////////--%>
@@ -33,6 +33,9 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
     <script src="//cdn.jsdelivr.net/jqgrid/4.5.4/i18n/grid.locale-es.js"></script>
     <link href="//cdn.jsdelivr.net/jqgrid/4.5.2/css/ui.jqgrid.css" rel="stylesheet">
     <script src="//cdn.jsdelivr.net/jqgrid/4.5.2/jquery.jqGrid.js"></script>
+
+
+
     <%--/////////////////////////////////////////////////////////////--%>
     <%--/////////////////////////////////////////////////////////////--%>
 
@@ -56,7 +59,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
             left: 0;
             height: 100%;
             width: 100%;
-            background: rgba( 255, 255, 255, .8 ) url('~/Content/images/fhhrx.gif') 50% 50% no-repeat;
+            background: rgba( 255, 255, 255, .8 ) url('/imagenes/fhhrx.gif') 50% 50% no-repeat;
         }
 
         /* When the body has the loading class, we turn
@@ -190,7 +193,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
             <i class="fa fa-bars fa-2x"></i>
         </button>
 
-        
+
 
         <asp:Button ID="btnExportarGrilla" Text="EXCEL" runat="server" Visible="false" CssClass="btn btn-primary"
             Width="150" Height="40" />
@@ -225,6 +228,20 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
         </div>
 
 
+        <div class="contextMenu" id="myMenu1" style="display: none">
+            <ul style="width: 400px">
+                <li id="add">@*<span class="ui-icon ui-icon-plus" style="float: left"></span>*@
+                <span id="Vale" style="font-size: 11px; font-family: Verdana">Generar Vale salida (stock)</span>
+                </li>
+                <li id="edit">@*<span class="ui-icon ui-icon-pencil" style="float: left"></span>*@
+                <span id="ParaCompras" style="font-size: 11px; font-family: Verdana">Liberar para Compras</span>
+                </li>
+                <li id="del">@*<span class="ui-icon ui-icon-trash" style="float: left"></span>*@
+                <span id="DarPorCumplido" style="font-size: 11px; font-family: Verdana">Dar por cumplido</span>
+                </li>
+            </ul>
+        </div>
+
 
 
         <div id="TipoSituacion" title="Cambiar a">
@@ -256,6 +273,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
         <script>
 
+            var rowIdContextMenu;
 
 
             function cambiarSituaciones(ids, user, pass, callback) {
@@ -319,7 +337,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                     dialogClass: "no-close",
                     buttons: [
                         {
-                            text: "OK",
+                            text: "Aceptar",
                             click: function () {
                                 $(this).dialog("close");
 
@@ -330,7 +348,14 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                                     })
 
                             }
+                        },
+                        {
+                            text: "Cancelar",
+                            click: function () {
+                                $(this).dialog("close");
+                            }
                         }
+
                     ]
                 });
 
@@ -1268,14 +1293,42 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
         });
 
 
+
+
+        $('#ctl00_ContentPlaceHolder1_txtFechaDesde').keypress(function (e) {
+            var key = e.which;
+            if (key == 13)  // the enter key code
+            {
+                $('#Lista').trigger("reloadGrid")
+                return false;
+            }
+        });
+
         $('#ctl00_ContentPlaceHolder1_txtFechaDesde').change(function () {
             $('#Lista').trigger("reloadGrid")
         });
 
 
+
+
+
+        $('#ctl00_ContentPlaceHolder1_txtFechaHasta').keypress(function (e) {
+            var key = e.which;
+            if (key == 13)  // the enter key code
+            {
+                $('#Lista').trigger("reloadGrid")
+                return false;
+            }
+        });
+
         $('#ctl00_ContentPlaceHolder1_txtFechaHasta').change(function () {
             $('#Lista').trigger("reloadGrid")
         });
+
+
+
+
+
 
         $('#ctl00_ContentPlaceHolder1_cmbPeriodo').change(function () {
             $('#Lista').trigger("reloadGrid")
@@ -2050,11 +2103,55 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                 ],
 
 
+
                 loadComplete: function () {
                     // http://stackoverflow.com/questions/6575192/jqgrid-change-background-color-of-row-based-on-row-cell-value-by-column-name
 
                     RefrescarFondoRenglon(this);
 
+
+                    //no se por qué no me está andando en el RmsPendientesDeAsignar.cshtml
+                    /*
+                      $("tr.jqgrow", this).contextMenu('myMenu1', {
+                        bindings: {
+                            'edit': function (trigger) {
+                                // trigger is the DOM element ("tr.jqgrow") which are triggered
+                                //   grid.editGridRow(trigger.id, editSettings);
+                            },
+                            'del': function (trigger) {
+                                if ($('#del').hasClass('ui-state-disabled') === false) {
+                                    // disabled item can do be choosed
+                                    //      grid.delGridRow(trigger.id, delSettings);
+                                }
+                            }
+                        },
+                        onContextMenu: function (event) {
+                            rowIdContextMenu = $(event.target).closest("tr.jqgrow").attr("id");
+                            //grid.setSelection(rowId);
+                            // disable menu for rows with even rowids
+                            //$('#del').attr("disabled", Number(rowId) % 2 === 0);
+                            //if (Number(rowId) % 2 === 0) {
+                            //    $('#del').attr("disabled", "disabled").addClass('ui-state-disabled');
+                            //} else {
+                            //    $('#del').removeAttr("disabled").removeClass('ui-state-disabled');
+                            //}
+                            return true;
+                        },
+                        //http://stackoverflow.com/questions/8451982/custom-values-to-context-menu-items-in-jqgrid
+                        menuStyle: {
+                            backgroundColor: '#fcfdfd',
+                            border: '1px solid #a6c9e2',
+                            maxWidth: '600px', // to be sure
+                            width: '100%' // to have good width of the menu
+                        },
+                        itemHoverStyle: {
+                            border: '1px solid #79b7e7',
+                            color: '#1d5987',
+                            backgroundColor: '#d0e5f5'
+                        }
+                    });
+
+                    */
 
 
                 },
