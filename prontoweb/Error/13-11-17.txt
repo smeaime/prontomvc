@@ -728,3 +728,18 @@ Log Entry :
 11/13/2017 12:20:15
 Error in: http://localhost:50769/ProntoWeb/CartasDePortes.aspx?tipo=Todas. Error Message:Mariano
 __________________________
+
+Log Entry : 
+11/13/2017 12:27:07
+Error in: http://localhost:50769/ProntoWeb/SituacionCalidad.aspx. Error Message:Mariano esta logueado, pero lo redirijo al login porque faltan los datos de session. No deberia mejor mandarlo a SeleccionarEmpresa? Ademas, no hago el LogOut y le queda el cookie!!!
+__________________________
+
+Log Entry : 
+11/13/2017 12:27:07
+Error in: http://localhost:50769/ProntoWeb/SituacionCalidad.aspx. Error Message:Mariano esta logueado, pero lo redirijo al login porque faltan los datos de session. No deberia mejor mandarlo a SeleccionarEmpresa? Ademas, no hago el LogOut y le queda el cookie!!!
+__________________________
+
+Log Entry : 
+11/13/2017 12:28:45
+Error in: http://localhost:50769/ProntoWeb/SituacionCalidad.aspx. Error Message:Mariano esta logueado, pero lo redirijo al login porque faltan los datos de session. No deberia mejor mandarlo a SeleccionarEmpresa? Ademas, no hago el LogOut y le queda el cookie!!!
+__________________________
