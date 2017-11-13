@@ -225,9 +225,9 @@ Public Module ProntoFuncionesUIWeb
 
 
             Try
-                oWB = oWBs.Open(fileName, Missing.Value, Missing.Value, _
-    Missing.Value, Missing.Value, Missing.Value, Missing.Value, Missing.Value, _
-    Missing.Value, Missing.Value, Missing.Value, Missing.Value, Missing.Value, _
+                oWB = oWBs.Open(fileName, Missing.Value, Missing.Value,
+    Missing.Value, Missing.Value, Missing.Value, Missing.Value, Missing.Value,
+    Missing.Value, Missing.Value, Missing.Value, Missing.Value, Missing.Value,
     Missing.Value, Missing.Value)
             Catch ex As Exception
 
@@ -270,7 +270,7 @@ Public Module ProntoFuncionesUIWeb
 
             '  creo las columnas
             For j As Integer = 1 To MAXCOLS
-                dt.Columns.Add("column" & j, _
+                dt.Columns.Add("column" & j,
                                System.Type.GetType("System.String"))
             Next j
 
@@ -710,9 +710,9 @@ Public Module ProntoFuncionesUIWeb
         'http://social.msdn.microsoft.com/Forums/en-US/vsreportcontrols/thread/505ffb1c-324e-4623-9cce-d84662d92b1a
     End Function
 
-    Public Function RebindReportViewer(ByRef oReportViewer As Microsoft.Reporting.WebForms.ReportViewer, ByVal rdlFile As String, ByVal dt As DataTable, _
-                                       Optional ByVal dt2 As DataTable = Nothing, Optional ByVal bDescargaExcel As Boolean = False, _
-                                       Optional ByRef ArchivoExcelDestino As String = "", Optional ByVal titulo As String = "", _
+    Public Function RebindReportViewer(ByRef oReportViewer As Microsoft.Reporting.WebForms.ReportViewer, ByVal rdlFile As String, ByVal dt As DataTable,
+                                       Optional ByVal dt2 As DataTable = Nothing, Optional ByVal bDescargaExcel As Boolean = False,
+                                       Optional ByRef ArchivoExcelDestino As String = "", Optional ByVal titulo As String = "",
                                        Optional ByVal bDescargaHtml As Boolean = False) As String
         'http://forums.asp.net/t/1183208.aspx
 
@@ -836,9 +836,9 @@ Public Module ProntoFuncionesUIWeb
 
 
                     Try
-                        bytes = .LocalReport.Render( _
-                              "HTML4.0", Nothing, mimeType, encoding, _
-                                extension, _
+                        bytes = .LocalReport.Render(
+                              "HTML4.0", Nothing, mimeType, encoding,
+                                extension,
                                streamids, warnings)
 
                     Catch e As System.Exception
@@ -870,9 +870,9 @@ Public Module ProntoFuncionesUIWeb
                     Dim bytes As Byte()
 
                     Try
-                        bytes = .LocalReport.Render( _
-                              "Excel", Nothing, mimeType, encoding, _
-                                extension, _
+                        bytes = .LocalReport.Render(
+                              "Excel", Nothing, mimeType, encoding,
+                                extension,
                                streamids, warnings)
 
                     Catch e As System.Exception
@@ -947,9 +947,9 @@ Public Module ProntoFuncionesUIWeb
                 Dim bytes As Byte()
 
                 Try
-                    bytes = .LocalReport.Render( _
-                          "Excel", Nothing, mimeType, encoding, _
-                            extension, _
+                    bytes = .LocalReport.Render(
+                          "Excel", Nothing, mimeType, encoding,
+                            extension,
                            streamids, warnings)
 
                 Catch e As System.Exception
@@ -991,10 +991,10 @@ Public Module ProntoFuncionesUIWeb
 
 
 
-    Public Function RebindReportViewerPasandoleConsultaDinamica(ByRef oReportViewer As Microsoft.Reporting.WebForms.ReportViewer, _
-                                       ByVal rdlFile As String, ByVal dt As DataTable, _
-                                       SC As String, sQuerySQL As String, Optional ByVal bDescargaExcel As Boolean = False, _
-                                       Optional ByRef ArchivoExcelDestino As String = "", Optional ByVal titulo As String = "", _
+    Public Function RebindReportViewerPasandoleConsultaDinamica(ByRef oReportViewer As Microsoft.Reporting.WebForms.ReportViewer,
+                                       ByVal rdlFile As String, ByVal dt As DataTable,
+                                       SC As String, sQuerySQL As String, Optional ByVal bDescargaExcel As Boolean = False,
+                                       Optional ByRef ArchivoExcelDestino As String = "", Optional ByVal titulo As String = "",
                                        Optional ByVal bDescargaHtml As Boolean = False) As String
         'http://forums.asp.net/t/1183208.aspx
 
@@ -1137,9 +1137,9 @@ Public Module ProntoFuncionesUIWeb
 
 
                     Try
-                        bytes = .LocalReport.Render( _
-                              "HTML4.0", Nothing, mimeType, encoding, _
-                                extension, _
+                        bytes = .LocalReport.Render(
+                              "HTML4.0", Nothing, mimeType, encoding,
+                                extension,
                                streamids, warnings)
 
                     Catch e As System.Exception
@@ -1171,9 +1171,9 @@ Public Module ProntoFuncionesUIWeb
                     Dim bytes As Byte()
 
                     Try
-                        bytes = .LocalReport.Render( _
-                              "Excel", Nothing, mimeType, encoding, _
-                                extension, _
+                        bytes = .LocalReport.Render(
+                              "Excel", Nothing, mimeType, encoding,
+                                extension,
                                streamids, warnings)
 
                     Catch e As System.Exception
@@ -1248,9 +1248,9 @@ Public Module ProntoFuncionesUIWeb
                 Dim bytes As Byte()
 
                 Try
-                    bytes = .LocalReport.Render( _
-                          "Excel", Nothing, mimeType, encoding, _
-                            extension, _
+                    bytes = .LocalReport.Render(
+                          "Excel", Nothing, mimeType, encoding,
+                            extension,
                            streamids, warnings)
 
                 Catch e As System.Exception
@@ -1544,9 +1544,9 @@ Public Module ProntoFuncionesUIWeb
                 Dim bytes As Byte()
 
                 Try
-                    bytes = .LocalReport.Render( _
-                          "Excel", Nothing, mimeType, encoding, _
-                            extension, _
+                    bytes = .LocalReport.Render(
+                          "Excel", Nothing, mimeType, encoding,
+                            extension,
                            streamids, warnings)
 
                 Catch e As System.Exception
@@ -1635,9 +1635,9 @@ Public Module ProntoFuncionesUIWeb
                 Dim bytes As Byte()
 
                 Try
-                    bytes = ReportViewer2.LocalReport.Render( _
-                               format, Nothing, mimeType, encoding, _
-                                 extension, _
+                    bytes = ReportViewer2.LocalReport.Render(
+                               format, Nothing, mimeType, encoding,
+                                 extension,
                                 streamids, warnings)
 
 
@@ -1730,9 +1730,9 @@ Public Module ProntoFuncionesUIWeb
                 Dim bytes As Byte()
 
                 Try
-                    bytes = ReportViewer2.LocalReport.Render( _
-                               format, Nothing, mimeType, encoding, _
-                                 extension, _
+                    bytes = ReportViewer2.LocalReport.Render(
+                               format, Nothing, mimeType, encoding,
+                                 extension,
                                 streamids, warnings)
 
 
@@ -1796,7 +1796,7 @@ Public Module ProntoFuncionesUIWeb
         Select Case idtipocomprobante
 
             'usar formato "~/ProntoWeb/Clientes.aspx
-            Case idtipocomprobante.Factura
+            Case IdTipoComprobante.Factura
                 Return String.Format("Factura.aspx?Id={0}", IdComprobante)
             Case EntidadManager.IdTipoComprobante.Recibo
                 Return String.Format("Recibo.aspx?Id={0}", IdComprobante)
@@ -1855,7 +1855,7 @@ Public Module ProntoFuncionesUIWeb
         intPos += 1
 
 
-        Return FileFullPath.Substring(intPos, _
+        Return FileFullPath.Substring(intPos,
             (Len(FileFullPath) - intPos))
 
     End Function
@@ -2300,10 +2300,10 @@ Public Module ProntoFuncionesUIWeb
 
 
 
-    Public Function ExportarAExcel(ByRef mLista As GridView, _
-                              ByVal Session As System.Web.SessionState.HttpSessionState, _
-                            ByRef Titulos As String, _
-                           Optional ByRef Macro As String = "", _
+    Public Function ExportarAExcel(ByRef mLista As GridView,
+                              ByVal Session As System.Web.SessionState.HttpSessionState,
+                            ByRef Titulos As String,
+                           Optional ByRef Macro As String = "",
                            Optional ByVal Parametros As String = "") As String
 
         '/////////////////////////////////////////////////
@@ -2478,9 +2478,9 @@ Public Module ProntoFuncionesUIWeb
 
                         fl = 2
 
-                        If mTotalPagina1 <> 0 Or mTotalPagina2 <> 0 Or mTotalPagina3 <> 0 Or _
-                              mTotalPagina4 <> 0 Or mTotalPagina5 <> 0 Or mTotalPagina6 <> 0 Or _
-                              mTotalPagina7 <> 0 Or mTotalPagina8 <> 0 Or mTotalPagina9 <> 0 Or _
+                        If mTotalPagina1 <> 0 Or mTotalPagina2 <> 0 Or mTotalPagina3 <> 0 Or
+                              mTotalPagina4 <> 0 Or mTotalPagina5 <> 0 Or mTotalPagina6 <> 0 Or
+                              mTotalPagina7 <> 0 Or mTotalPagina8 <> 0 Or mTotalPagina9 <> 0 Or
                               mTotalPagina10 <> 0 Then
                             .Cells(fl, mColumnaTransporte) = "Transporte"
                             If mColumnaSumador1 <> 0 Then
@@ -2558,7 +2558,7 @@ Public Module ProntoFuncionesUIWeb
 
                                 cl = cl + 1
 
-                                If mLista.HeaderRow.Cells(i + 1).Width <> 0 Or _
+                                If mLista.HeaderRow.Cells(i + 1).Width <> 0 Or
                                       mLista.HeaderRow.Cells(i + 1).Text = "Vector_E" Then
                                     cl1 = cl1 + 1
                                     If Len(Trim(oS.Text)) <> 0 Then
@@ -2748,8 +2748,8 @@ Public Module ProntoFuncionesUIWeb
 
 
                         'If mPaginaInicial > 0 Then mPaginaInicial = mPaginaInicial - 1
-                        oEx.Run("InicializarEncabezados", Session("glbEmpresa"), _
-                                    Session("glbDireccion") & " " & Session("glbLocalidad"), Session("glbTelefono1"), _
+                        oEx.Run("InicializarEncabezados", Session("glbEmpresa"),
+                                    Session("glbDireccion") & " " & Session("glbLocalidad"), Session("glbTelefono1"),
                                     Session("glbDatosAdicionales1"), mPaginaInicial, mParametrosEncabezado)
 
                         With oEx.ActiveSheet.PageSetup
@@ -3299,8 +3299,8 @@ Public Module ProntoFuncionesUIWeb
             Try
                 oDoc = oW.Documents.Add(plant)
             Catch ex As Exception
-                ErrHandler2.WriteError(ex.ToString & "Explota en el oW.Documents.Add(plant).  Plantilla: " & plant & " No se puede abrir el " & _
-                                      "almacenamiento de macros? Verficar las referencias de la plantilla a dlls (especialmente COMPRONTO). " & _
+                ErrHandler2.WriteError(ex.ToString & "Explota en el oW.Documents.Add(plant).  Plantilla: " & plant & " No se puede abrir el " &
+                                      "almacenamiento de macros? Verficar las referencias de la plantilla a dlls (especialmente COMPRONTO). " &
                                       "Verificar el directorio de plantillas. Tiene permisos para usar el directorio?")
                 ErrHandler2.WriteError("Ojo que en 2008 en el directorio  C:\Windows\SysWOW64\config\systemprofile\ hay que crear una carpeta Desktop!!!!!!!!!!!!!!!!!!!!!  " + ex.ToString)
 
@@ -3314,8 +3314,8 @@ Public Module ProntoFuncionesUIWeb
                 'why the methord "Microsoft.Office.Interop.Word.ApplicationClass.Documents.Add" Returns null in .net web page
                 'http://social.msdn.microsoft.com/Forums/en/vbgeneral/thread/5deb3d3a-552c-4dfd-8d94-236b8a441daf
                 'http://forums.asp.net/t/1232621.aspx
-                ErrHandler2.WriteError("!!!! ALERTA !!!! ALERTA !!!!!!!!!!! oDoc está en NOTHING!!! Muy probable que " & _
-                                      "esté mal el impersonate (no dejarlo en true vacío, ponerle el " & _
+                ErrHandler2.WriteError("!!!! ALERTA !!!! ALERTA !!!!!!!!!!! oDoc está en NOTHING!!! Muy probable que " &
+                                      "esté mal el impersonate (no dejarlo en true vacío, ponerle el " &
                                       "usuario y el pass) " & IsNothing(oW) & "  Plantilla: " & plant & "")
 
                 'Parece ser que puede ser por el impersonate… ERA ESO!!!! No me dejaba poner el 
@@ -3432,9 +3432,9 @@ Public Module ProntoFuncionesUIWeb
                     'verificar q la ruta existe, sino se queda muy colgado
                     .SaveAs(output, wrdFormatDocument) 'adherir extension ".doc"
                 Catch ex As Exception
-                    ErrHandler2.WriteError("Explotó el .SaveAs()  " & IsNothing(oDoc) & " " & output & " " & wrdFormatDocument & ex.ToString & _
-                        "Tiró 'El comando falló' o 'Command fail'? " & _
-                        "Revisá http://social.msdn.microsoft.com/Forums/en/netfx64bit/thread/65a355ce-49c1-47f1-8c12-d9cf5f23c53e" & _
+                    ErrHandler2.WriteError("Explotó el .SaveAs()  " & IsNothing(oDoc) & " " & output & " " & wrdFormatDocument & ex.ToString &
+                        "Tiró 'El comando falló' o 'Command fail'? " &
+                        "Revisá http://social.msdn.microsoft.com/Forums/en/netfx64bit/thread/65a355ce-49c1-47f1-8c12-d9cf5f23c53e" &
                         "y http://support.microsoft.com/default.aspx?scid=kb;EN-US;244264")
                     Throw
                 End Try
@@ -3450,13 +3450,13 @@ Public Module ProntoFuncionesUIWeb
             'ProntoFuncionesUIWeb.Current_Alert("Ahora se va a transmitir")
 
         Catch ex As Exception
-            ErrHandler2.WriteError(ex.ToString & " Archivo Plantilla: " & plant & vbCrLf & _
-            "Figura en el log una llamada a Emision() o explotó antes? Verificar que la DLL ComPronto esté bien referenciada en la " & _
-            "plantilla. no solamente basta con ver que esten bien las referencias! A veces, aunque figuren bien " & _
-            ", el Inter25 explota. Así que no tenés otra manera de probarlo que ejecutando la llamada a Emision , o " & _
-            " que la macro no está explotando por las suyas (dentro de la ejecucion normal, algun campo sin llenar), " & _
-            " o esté bien puesta la ruta a la plantilla, o habilitadas las macros. Ejecutar la misma linea con que se " & _
-            " llamó en Word, y ver si no está explotando dentro de la ejecucion normal de la macro. Si no figura en el log " & _
+            ErrHandler2.WriteError(ex.ToString & " Archivo Plantilla: " & plant & vbCrLf &
+            "Figura en el log una llamada a Emision() o explotó antes? Verificar que la DLL ComPronto esté bien referenciada en la " &
+            "plantilla. no solamente basta con ver que esten bien las referencias! A veces, aunque figuren bien " &
+            ", el Inter25 explota. Así que no tenés otra manera de probarlo que ejecutando la llamada a Emision , o " &
+            " que la macro no está explotando por las suyas (dentro de la ejecucion normal, algun campo sin llenar), " &
+            " o esté bien puesta la ruta a la plantilla, o habilitadas las macros. Ejecutar la misma linea con que se " &
+            " llamó en Word, y ver si no está explotando dentro de la ejecucion normal de la macro. Si no figura en el log " &
             " una llamada a Emision, es que ni siquiera se lo pudo llamar")
 
             'MsgBoxAjax(Yo, ex.ToString & ". Verificar que la DLL ComPronto esté bien referenciada en la plantilla, o que la macro no está explotando por las suyas (dentro de la ejecucion normal, algun campo sin llenar), o esté bien puesta la ruta a la plantilla, o habilitadas las macros. Ejecutar la misma linea con que se llamó en Word, y ver si no está explotando dentro de la ejecucion normal de la macro")
@@ -3644,8 +3644,8 @@ Public Module ProntoFuncionesUIWeb
             Try
                 oDoc = oW.Documents.Add(plant)
             Catch ex As Exception
-                ErrHandler2.WriteError(ex.ToString & "Explota en el oW.Documents.Add(plant).  Plantilla: " & plant & " No se puede abrir el " & _
-                                      "almacenamiento de macros? Verficar las referencias de la plantilla a dlls (especialmente COMPRONTO). " & _
+                ErrHandler2.WriteError(ex.ToString & "Explota en el oW.Documents.Add(plant).  Plantilla: " & plant & " No se puede abrir el " &
+                                      "almacenamiento de macros? Verficar las referencias de la plantilla a dlls (especialmente COMPRONTO). " &
                                       "Verificar el directorio de plantillas. Tiene permisos para usar el directorio?")
                 ErrHandler2.WriteError("Ojo que en 2008 en el directorio  C:\Windows\SysWOW64\config\systemprofile\ hay que crear una carpeta Desktop!!!!!!!!!!!!!!!!!!!!!  " + ex.ToString)
 
@@ -3659,8 +3659,8 @@ Public Module ProntoFuncionesUIWeb
                 'why the methord "Microsoft.Office.Interop.Word.ApplicationClass.Documents.Add" Returns null in .net web page
                 'http://social.msdn.microsoft.com/Forums/en/vbgeneral/thread/5deb3d3a-552c-4dfd-8d94-236b8a441daf
                 'http://forums.asp.net/t/1232621.aspx
-                ErrHandler2.WriteError("!!!! ALERTA !!!! ALERTA !!!!!!!!!!! oDoc está en NOTHING!!! Muy probable que " & _
-                                      "esté mal el impersonate (no dejarlo en true vacío, ponerle el " & _
+                ErrHandler2.WriteError("!!!! ALERTA !!!! ALERTA !!!!!!!!!!! oDoc está en NOTHING!!! Muy probable que " &
+                                      "esté mal el impersonate (no dejarlo en true vacío, ponerle el " &
                                       "usuario y el pass) " & IsNothing(oW) & "  Plantilla: " & plant & "")
 
                 'Parece ser que puede ser por el impersonate… ERA ESO!!!! No me dejaba poner el 
@@ -3783,9 +3783,9 @@ Public Module ProntoFuncionesUIWeb
                     'expression.SaveAs(FileName, FileFormat, LockComments, Password, AddToRecentFiles, WritePassword, ReadOnlyRecommended, EmbedTrueTypeFonts, SaveNativePictureFormat, SaveFormsData, SaveAsAOCELetter, Encoding, InsertLineBreaks, AllowSubstitutions, LineEnding, AddBiDiMarks)
                     ' http://msdn.microsoft.com/en-us/library/bb221597(v=office.12).aspx
                 Catch ex As Exception
-                    ErrHandler2.WriteError("Explotó el .SaveAs()  " & IsNothing(oDoc) & " " & output & " " & wrdFormatDocument & ex.ToString & _
-                        "Tiró 'El comando falló' o 'Command fail'? " & _
-                        "Revisá http://social.msdn.microsoft.com/Forums/en/netfx64bit/thread/65a355ce-49c1-47f1-8c12-d9cf5f23c53e" & _
+                    ErrHandler2.WriteError("Explotó el .SaveAs()  " & IsNothing(oDoc) & " " & output & " " & wrdFormatDocument & ex.ToString &
+                        "Tiró 'El comando falló' o 'Command fail'? " &
+                        "Revisá http://social.msdn.microsoft.com/Forums/en/netfx64bit/thread/65a355ce-49c1-47f1-8c12-d9cf5f23c53e" &
                         "y http://support.microsoft.com/default.aspx?scid=kb;EN-US;244264")
                     Throw
                 End Try
@@ -3801,13 +3801,13 @@ Public Module ProntoFuncionesUIWeb
             'ProntoFuncionesUIWeb.Current_Alert("Ahora se va a transmitir")
 
         Catch ex As Exception
-            ErrHandler2.WriteError(ex.ToString & " Archivo Plantilla: " & plant & vbCrLf & _
-            "Figura en el log una llamada a Emision() o explotó antes? Verificar que la DLL ComPronto esté bien referenciada en la " & _
-            "plantilla. no solamente basta con ver que esten bien las referencias! A veces, aunque figuren bien " & _
-            ", el Inter25 explota. Así que no tenés otra manera de probarlo que ejecutando la llamada a Emision , o " & _
-            " que la macro no está explotando por las suyas (dentro de la ejecucion normal, algun campo sin llenar), " & _
-            " o esté bien puesta la ruta a la plantilla, o habilitadas las macros. Ejecutar la misma linea con que se " & _
-            " llamó en Word, y ver si no está explotando dentro de la ejecucion normal de la macro. Si no figura en el log " & _
+            ErrHandler2.WriteError(ex.ToString & " Archivo Plantilla: " & plant & vbCrLf &
+            "Figura en el log una llamada a Emision() o explotó antes? Verificar que la DLL ComPronto esté bien referenciada en la " &
+            "plantilla. no solamente basta con ver que esten bien las referencias! A veces, aunque figuren bien " &
+            ", el Inter25 explota. Así que no tenés otra manera de probarlo que ejecutando la llamada a Emision , o " &
+            " que la macro no está explotando por las suyas (dentro de la ejecucion normal, algun campo sin llenar), " &
+            " o esté bien puesta la ruta a la plantilla, o habilitadas las macros. Ejecutar la misma linea con que se " &
+            " llamó en Word, y ver si no está explotando dentro de la ejecucion normal de la macro. Si no figura en el log " &
             " una llamada a Emision, es que ni siquiera se lo pudo llamar")
 
             'MsgBoxAjax(Yo, ex.ToString & ". Verificar que la DLL ComPronto esté bien referenciada en la plantilla, o que la macro no está explotando por las suyas (dentro de la ejecucion normal, algun campo sin llenar), o esté bien puesta la ruta a la plantilla, o habilitadas las macros. Ejecutar la misma linea con que se llamó en Word, y ver si no está explotando dentro de la ejecucion normal de la macro")
@@ -4156,7 +4156,7 @@ Public Module ProntoFuncionesUIWeb
                 Debug.Listeners.Clear()
                 System.IO.File.Delete(strFilename)
                 Debug.Listeners.Add(New TextWriterTraceListener(strFilename))
-                Dim strViewStateDecoded As String = _
+                Dim strViewStateDecoded As String =
                     (New System.Text.UTF8Encoding()).GetString(Convert.FromBase64String(strViewState))
                 Dim astrDecoded As String() = strViewStateDecoded.Replace("<", "<" _
                     & vbCr).Replace(">", vbCr & ">").Replace(";", ";" _
@@ -4436,6 +4436,8 @@ Public Module ProntoFuncionesUIWeb
         'arreglar esto
         If Encriptar(sConex).Contains("SERVERSQL3") Then
             usuario.IdEmpresa = 52
+        ElseIf Encriptar(sConex).Contains("DESKTOP") Then
+            usuario.IdEmpresa = 1053
         Else
             usuario.IdEmpresa = 18
         End If
@@ -4517,7 +4519,7 @@ Public Module ProntoFuncionesUIWeb
 
 
             Else
-                    Server.Transfer("~/Login.aspx")
+                Server.Transfer("~/Login.aspx")
             End If
         End If
 
@@ -4710,8 +4712,8 @@ Public Module ProntoFuncionesUIWeb
 
     Public Sub SetFocusAjax(ByRef Yo As Object, ByVal ctrlUniqueID As String)
         Try
-            AjaxControlToolkit.ToolkitScriptManager.RegisterStartupScript(Yo, Yo.GetType(), "FocusScript", _
-                                            "document.getElementById('" + ctrlUniqueID + "').focus();", _
+            AjaxControlToolkit.ToolkitScriptManager.RegisterStartupScript(Yo, Yo.GetType(), "FocusScript",
+                                            "document.getElementById('" + ctrlUniqueID + "').focus();",
                                             True)
 
         Catch ex As Exception

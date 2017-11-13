@@ -97,21 +97,38 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                         <td class="EncabezadoCell" style="width: 160px; height: 18px;">Estado</td>
                         <td class="" style="width: 400px; height: 18px;">
                             <asp:DropDownList ID="cmbEstado" runat="server" Style="text-align: right; margin-left: 0px;"
-                                CssClass="CssCombo" ToolTip="Estado de la carta de porte" Font-Size="Small" Height="22px" Width="350px" Enabled="false">
+                                CssClass="CssCombo" ToolTip="Estado de la carta de porte" Font-Size="Small" Height="22px" Width="350px" Enabled="true">
                                 <%--dejo el combito deshablitado porque las funciones no tienen todavia el parametro de "estado", estan harcodeadas en "11" --%>
 
-                                <asp:ListItem Text="DESCARGAS de hoy + POSICIONES filtradas" Value="DescargasDeHoyMasTodasLasPosicionesEnRangoFecha"
+                                <asp:ListItem Text="DESCARGAS de hoy + POSICIONES filtradas" Value="11"
                                     Selected="True" />
 
-                                <asp:ListItem Text="Todas (menos las rechazadas)" Value="TodasMenosLasRechazadas" />
-                                <asp:ListItem Text="Incompletas" Value="Incompletas" />
-                                <asp:ListItem Text="Posición" Value="Posición" />
-                                <asp:ListItem Text="Descargas" Value="Descargas" />
-                                <asp:ListItem Text="Facturadas" Value="Facturadas" />
-                                <asp:ListItem Text="No facturadas" Value="NoFacturadas" />
-                                <asp:ListItem Text="Rechazadas" Value="Rechazadas" />
-                                <asp:ListItem Text="sin liberar en Nota de crédito" Value="EnNotaCredito" />
+                                <asp:ListItem Text="Todas (menos las rechazadas)" Value="1" />
+                                <asp:ListItem Text="Incompletas" Value="2" />
+                                <asp:ListItem Text="Posición" Value="3" />
+                                <asp:ListItem Text="Descargas" Value="4" />
+                                <asp:ListItem Text="Facturadas" Value="6" />
+                                <asp:ListItem Text="No facturadas" Value="7" />
+                                <asp:ListItem Text="Rechazadas" Value="8" />
+                                <asp:ListItem Text="sin liberar en Nota de crédito" Value="9" />
                             </asp:DropDownList>
+
+
+<%--                            Enum enumCDPestado
+0        Todas
+1        TodasMenosLasRechazadas
+2        Incompletas
+3        Posicion
+4        DescargasMasFacturadas
+5        DescargasSinFacturar
+6        Facturadas
+7        NoFacturadas
+8        Rechazadas
+9        FacturadaPeroEnNotaCredito
+0        DescargasDeHoyMasTodasLasPosiciones
+1        DescargasDeHoyMasTodasLasPosicionesEnRangoFecha
+    End Enum--%>
+
 
                         </td>
                         <td class="EncabezadoCell" style="width: 160px; height: 18px;">Período descarga</td>
@@ -1366,8 +1383,9 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                     'FechaInicial': function () { return $("#ctl00_ContentPlaceHolder1_txtFechaDesde").val(); },
                     'FechaFinal': function () { return $("#ctl00_ContentPlaceHolder1_txtFechaHasta").val(); },
                     'puntovent': function () { return $("#ctl00_ContentPlaceHolder1_cmbPuntoVenta").val(); },
-                    'destino': function () { return $("#ctl00_ContentPlaceHolder1_txtDestino").val(); }
-                },
+                    'destino': function () { return $("#ctl00_ContentPlaceHolder1_txtDestino").val(); },
+                    'estado': function () { return $("#ctl00_ContentPlaceHolder1_txtDestino").val(); }
+        },
                 datatype: 'json',
                 mtype: 'POST',
 

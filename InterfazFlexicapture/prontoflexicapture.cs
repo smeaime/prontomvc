@@ -4262,11 +4262,11 @@ Formato localidad-provincia	destination	x
 
 
 
-        public virtual string InformeSituacion_string(int iddestino, DateTime desde, DateTime hasta, string SC)
+        public virtual string InformeSituacion_string(int iddestino, DateTime desde, DateTime hasta, string SC,int estado)
         {
             string s = "";
 
-            Dictionary<int, int> q = InformeSituacion(iddestino, desde, hasta, SC);
+            Dictionary<int, int> q = InformeSituacion(iddestino, desde, hasta, SC,estado);
 
 
             foreach (var line in q)
@@ -4290,11 +4290,11 @@ Formato localidad-provincia	destination	x
 
 
 
-        public virtual string InformeSituacion_html(int iddestino, DateTime desde, DateTime hasta, string SC)
+        public virtual string InformeSituacion_html(int iddestino, DateTime desde, DateTime hasta, string SC, int estado)
         {
             string html = "";
 
-            Dictionary<int, int> q = InformeSituacion(iddestino, desde, hasta, SC);
+            Dictionary<int, int> q = InformeSituacion(iddestino, desde, hasta, SC, estado);
 
             if (q.Count() == 0) return "Sin Datos";
 
@@ -4379,9 +4379,9 @@ Formato localidad-provincia	destination	x
         }
 
 
-        public const int estado = 11; //por ahora dejo fijo que se use el estado DescargasDeHoyMasTodasLasPosicionesEnRangoFecha
+        //public const int estado = 11; //por ahora dejo fijo que se use el estado DescargasDeHoyMasTodasLasPosicionesEnRangoFecha
 
-        public virtual Dictionary<int, int> InformeSituacion(int iddestino, DateTime desde, DateTime hasta, string SC)
+        public virtual Dictionary<int, int> InformeSituacion(int iddestino, DateTime desde, DateTime hasta, string SC, int estado )
         {
 
 
@@ -4654,7 +4654,7 @@ Formato localidad-provincia	destination	x
 
 
 
-        public virtual string CartasPorte_DynamicGridData_NuevoOrden(string sidx, string sord, int page, int rows, bool _search, string filters, string FechaInicial, string FechaFinal, int puntovent, int iddestino, string SC, string nombreusuario, string SCbdlmaster)
+        public virtual string CartasPorte_DynamicGridData_NuevoOrden(string sidx, string sord, int page, int rows, bool _search, string filters, string FechaInicial, string FechaFinal, int puntovent, int iddestino, string SC, string nombreusuario, string SCbdlmaster,int estado)
         {
 
             // An ASHX is a generic HttpHandler. An ASMX file is a web service. ASHX is a good lean way to provide a response to AJAX calls, but if you want to provide a response which changes based on conditions (such as variable inputs) it can become a bit of a handful - lots of if else etc. ASMX can house mulitple methods which can take parameters.
@@ -4970,7 +4970,7 @@ Formato localidad-provincia	destination	x
 
 
 
-        public virtual string CartasPorte_DynamicGridData_Orden3(string sidx, string sord, int page, int rows, bool _search, string filters, string FechaInicial, string FechaFinal, int puntovent, int iddestino, string SC, string nombreusuario, string SCbdlmaster)
+        public virtual string CartasPorte_DynamicGridData_Orden3(string sidx, string sord, int page, int rows, bool _search, string filters, string FechaInicial, string FechaFinal, int puntovent, int iddestino, string SC, string nombreusuario, string SCbdlmaster, int estado)
         {
 
             // An ASHX is a generic HttpHandler. An ASMX file is a web service. ASHX is a good lean way to provide a response to AJAX calls, but if you want to provide a response which changes based on conditions (such as variable inputs) it can become a bit of a handful - lots of if else etc. ASMX can house mulitple methods which can take parameters.
@@ -5046,7 +5046,7 @@ Formato localidad-provincia	destination	x
             {
 
                 string rs = UserDatosExtendidosManager.TraerRazonSocialDelUsuarioNombre(nombreusuario, SCbdlmaster, SC);
-                if (rs != "")
+                if ((rs ?? "") != "")
                 {
                     int idcliente = SQLdinamico.BuscaIdClientePreciso(rs, SC);
                     int idCorredor = SQLdinamico.BuscaIdVendedorPreciso(EntidadManager.NombreCliente(SC, idcliente), SC);
@@ -5246,7 +5246,7 @@ Formato localidad-provincia	destination	x
         }
 
 
-        public virtual string CartasPorte_DynamicGridData(string sidx, string sord, int page, int rows, bool _search, string filters, string FechaInicial, string FechaFinal, int puntovent, int iddestino, string SC, string nombreusuario, string SCbdlmaster)
+        public virtual string CartasPorte_DynamicGridData(string sidx, string sord, int page, int rows, bool _search, string filters, string FechaInicial, string FechaFinal, int puntovent, int iddestino, string SC, string nombreusuario, string SCbdlmaster, int estado )
         {
 
             // An ASHX is a generic HttpHandler. An ASMX file is a web service. ASHX is a good lean way to provide a response to AJAX calls, but if you want to provide a response which changes based on conditions (such as variable inputs) it can become a bit of a handful - lots of if else etc. ASMX can house mulitple methods which can take parameters.
@@ -5515,7 +5515,7 @@ Formato localidad-provincia	destination	x
 
         }
 
-        public virtual string CartasPorte_DynamicGridData_ExcelExportacion_UsandoInternalQuery_3(string sidx, string sord, int page, int rows, bool _search, string filters, string FechaInicial, string FechaFinal, int puntovent, int iddestino, string SC, string nombreusuario)
+        public virtual string CartasPorte_DynamicGridData_ExcelExportacion_UsandoInternalQuery_3(string sidx, string sord, int page, int rows, bool _search, string filters, string FechaInicial, string FechaFinal, int puntovent, int iddestino, string SC, string nombreusuario,int estado)
         {
             //asdad
 
@@ -6388,7 +6388,7 @@ Formato localidad-provincia	destination	x
 
 
 
-        public virtual string CartasPorte_DynamicGridData_ExcelExportacion_UsandoInternalQuery(string sidx, string sord, int page, int rows, bool _search, string filters, string FechaInicial, string FechaFinal, int puntovent, int iddestino, string SC, string nombreusuario)
+        public virtual string CartasPorte_DynamicGridData_ExcelExportacion_UsandoInternalQuery(string sidx, string sord, int page, int rows, bool _search, string filters, string FechaInicial, string FechaFinal, int puntovent, int iddestino, string SC, string nombreusuario, int estado )
         {
             //asdad
 
@@ -6491,7 +6491,7 @@ Formato localidad-provincia	destination	x
         }
 
 
-        public virtual string CartasPorte_DynamicGridData_ExcelExportacion(string sidx, string sord, int page, int rows, bool _search, string filters, string FechaInicial, string FechaFinal, int puntovent, int iddestino, string SC, string nombreusuario)
+        public virtual string CartasPorte_DynamicGridData_ExcelExportacion(string sidx, string sord, int page, int rows, bool _search, string filters, string FechaInicial, string FechaFinal, int puntovent, int iddestino, string SC, string nombreusuario,int estado)
         {
             //asdad
 
@@ -6575,7 +6575,7 @@ Formato localidad-provincia	destination	x
             //System.Web.Mvc.JsonResult result;
 
             //result = (System.Web.Mvc.JsonResult)CartasPorte_DynamicGridData(sidx, sord, page, rows, _search, filters, "", "", puntovent, iddestino, SC, nombreusuario);
-            string result2 = CartasPorte_DynamicGridData(sidx, sord, 1, 200000, _search, filters, FechaInicial, FechaFinal, puntovent, iddestino, SC, nombreusuario, "");
+            string result2 = CartasPorte_DynamicGridData(sidx, sord, 1, 200000, _search, filters, FechaInicial, FechaFinal, puntovent, iddestino, SC, nombreusuario, "",estado);
 
             System.Web.Script.Serialization.JavaScriptSerializer jsonSerializer = new System.Web.Script.Serialization.JavaScriptSerializer();
             //result = jsonSerializer.Deserialize<jqGridJson>(result2);
