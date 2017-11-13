@@ -884,7 +884,7 @@ namespace ProntoMVC.Tests
                     from x in db.CartasDePortes
                     from c1 in db.Clientes.Where(c => c.IdCliente == x.Vendedor)
                     from c2 in db.Clientes.Where(c => c.IdCliente == x.Entregador)
-                    where (x.FechaModificacion > UltimaFechaDeEnvioNotificaciones) pero y si el cliente ya las vio?
+                    where (x.FechaModificacion > UltimaFechaDeEnvioNotificaciones) // pero y si el cliente ya las vio?
                     select new string[] { c1.Email, c2.Email }
                     )
                     .SelectMany(x => x)
