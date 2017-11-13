@@ -743,3 +743,13 @@ Log Entry :
 11/13/2017 12:28:45
 Error in: http://localhost:50769/ProntoWeb/SituacionCalidad.aspx. Error Message:Mariano esta logueado, pero lo redirijo al login porque faltan los datos de session. No deberia mejor mandarlo a SeleccionarEmpresa? Ademas, no hago el LogOut y le queda el cookie!!!
 __________________________
+
+Log Entry : 
+11/13/2017 12:49:19
+Error in: http://localhost:50769/ProntoWeb/HandlerCartaPorte2.ashx. Error Message:System.MissingMethodException
+Método no encontrado: 'System.String ServicioCartaPorte.servi.CartasPorte_DynamicGridData_NuevoOrden(System.String, System.String, Int32, Int32, Boolean, System.String, System.String, System.String, Int32, Int32, System.String, System.String, System.String)'.
+   en JQGridHandler.ProcessRequest(HttpContext context)
+   en System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   en System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+App_Web_handlercartaporte2.ashx.4199bbd4.toj-ygce
+__________________________
