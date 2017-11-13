@@ -1384,7 +1384,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                     'FechaFinal': function () { return $("#ctl00_ContentPlaceHolder1_txtFechaHasta").val(); },
                     'puntovent': function () { return $("#ctl00_ContentPlaceHolder1_cmbPuntoVenta").val(); },
                     'destino': function () { return $("#ctl00_ContentPlaceHolder1_txtDestino").val(); },
-                    'estado': function () { return $("#ctl00_ContentPlaceHolder1_txtDestino").val(); }
+                    'estado': function () { return $("#ctl00_ContentPlaceHolder1_cmbEstado").val(); }
         },
                 datatype: 'json',
                 mtype: 'POST',
