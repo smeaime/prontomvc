@@ -10,8 +10,15 @@ Namespace Pronto.ERP.Bll
 
 		<DataObjectMethod(DataObjectMethodType.Select, True)> _
 		Public Shared Function GetList(ByVal SC As String) As EmpresaList
-			Return EmpresaDB.GetList(SC)
-		End Function
+            Try
+
+                Return EmpresaDB.GetList(SC)
+            Catch ex As Exception
+                System.Diagnostics.Debug.WriteLine(Encriptar(SC))
+                Throw
+            End Try
+
+        End Function
 
 		<DataObjectMethod(DataObjectMethodType.Select, True)> _
 		  Public Shared Function GetEmpresasPorUsuario(ByVal SC As String, ByVal UserId As String) As EmpresaList

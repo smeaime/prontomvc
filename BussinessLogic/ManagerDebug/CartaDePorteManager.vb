@@ -15872,6 +15872,8 @@ usuario As String, ConexBDLmaster As String,
         ' ir a http://codebeautify.org/base64-to-image-converter  para probar la respuesta
         ' ir a http://codebeautify.org/base64-to-image-converter  para probar la respuesta
 
+
+
         Dim idcliente As Integer = 0
 
         Try
@@ -15881,7 +15883,9 @@ usuario As String, ConexBDLmaster As String,
             If Not Debugger.IsAttached Then
                 If Not Membership.ValidateUser(usuario, password) Then
                     ErrHandler2.WriteError("No logra autenticarse " & usuario)
-                    Return Nothing
+
+                    Throw New Exception("No logra autenticarse") '        avisar q error hubo (de contraseña)
+
                 End If
 
 
@@ -16294,7 +16298,8 @@ usuario As String, ConexBDLmaster As String,
 
         Catch ex As Exception
             ErrHandler2.WriteError(ex)
-            Return Nothing
+            Throw '        avisar q error hubo (de contraseña)
+
         End Try
 
         'usaria la descarga que usa bld en el informe?
