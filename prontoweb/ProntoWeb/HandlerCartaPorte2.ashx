@@ -226,7 +226,7 @@ public class JQGridHandler : IHttpHandler
                                         sortColumnName, sortOrderBy, Convert.ToInt32(pageIndex),
                                         Convert.ToInt32(numberOfRows), isSearch == "true", filters, FechaInicial, FechaFinal,  Convert.ToInt32(puntovent),
                                         SQLdinamico.BuscaIdWilliamsDestinoPreciso(destino, SC),
-                                        SC, usuario, scbdlmaster );
+                                        SC, usuario, scbdlmaster, 1 );
 
         response.ContentType = "application/json";
         response.Write(output);
