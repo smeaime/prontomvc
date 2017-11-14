@@ -868,6 +868,14 @@ namespace ProntoMVC.Tests
 
 
 
+        [TestMethod]
+        public void envioNotificacionesconMail_42871_2()
+        {
+            ProntoWindowsService.Service1.Initialize();
+            ProntoWindowsService.Service1.DoWorkCartasPorteNuevasParaElCliente();
+
+        }
+
 
 
 
@@ -886,7 +894,15 @@ namespace ProntoMVC.Tests
             DemoProntoEntities db = new DemoProntoEntities(scEF);
 
 
-
+            DateTime FechaNot;
+            try
+            {
+                FechaNot = DateTime.Parse(ParametroManager.TraerValorParametro2(SC, "UltimaFechaNotificacion").NullSafeToString());
+            }
+            catch (Exception)
+            {
+                FechaNot = DateTime.MinValue;
+            }
 
 
             int dummy;
@@ -898,10 +914,12 @@ namespace ProntoMVC.Tests
                      select new { FechaNotificacion = new DateTime(), p.RazonSocial, m.Email, ListadoCuits = p.TextoAuxiliar, u.LastActivityDate }).ToList();
 
             var usuariosclientes = from x in q
-                                   select new { IdCliente = Int32.TryParse(x.RazonSocial,out dummy) ? Int32.Parse(x.RazonSocial) : 0, x.FechaNotificacion, x.RazonSocial, x.Email, x.ListadoCuits, x.LastActivityDate };
+                                   select new { IdCliente = Int32.TryParse(x.RazonSocial, out dummy) ? Int32.Parse(x.RazonSocial) : 0, x.FechaNotificacion, x.RazonSocial, x.Email, x.ListadoCuits, x.LastActivityDate };
 
 
-            List<int> usus = usuariosclientes.Select(x => x.IdCliente).Where(x => x != -1).ToList();
+            List<int> usus = usuariosclientes.Select(x => x.IdCliente).Where(x => x > 0).ToList();
+
+            List<int> ususCorredores = usus.Select(x => equivalen x.IdCliente).ToList();
 
 
 
@@ -915,48 +933,78 @@ namespace ProntoMVC.Tests
 
             //DateTime UltimaFechaDeEnvioNotificaciones = new DateTime(2016, 8, 31);
 
-            var qq = (
+            List<int> clientesParaNotificar = (
                     from x in db.CartasDePortes
                         //from c1 in db.Clientes.Where(c => c.IdCliente == x.Vendedor)
                         //from c2 in db.Clientes.Where(c => c.IdCliente == x.Entregador)
-                    where ((x.FechaModificacion ?? x.FechaArribo) > FechaMinima
-                            && (usus.Contains(x.Vendedor ?? -1) || usus.Contains(x.Entregador ?? -1))
-                            ) // pero y si el cliente ya las vio?   UltimaFechaDeLoginDelCliente
-                    select new int[] { x.Vendedor ?? -1, x.Entregador ?? -1 }
+                    where ((x.FechaModificacion ?? x.FechaArribo) > FechaNot
+                            && (usus.Contains(x.Vendedor ?? -1)
+                                    || usus.Contains(x.Entregador ?? -1)
+                                    || usus.Contains(x.CuentaOrden1 ?? -1)
+                                    || usus.Contains(x.CuentaOrden2 ?? -1)
+                                    || ususCorredores.Contains(x.Corredor ?? -1)
+                                ) // pero y si el cliente ya las vio?   UltimaFechaDeLoginDelCliente
+                           )
+                    select new int[] { x.Vendedor ?? -1, x.Entregador ?? -1, x.CuentaOrden1 ?? -1, x.CuentaOrden2 ?? -1, x.Corredor ?? -1 }
                     )
                     .SelectMany(x => x)
-                    .Distinct().ToList();
-
-
-
-            // actualizar fecha de ultima notificacion de cada cliente? -Una es la fecha desde la que tengo que buscar tandas de cartas, y otra es la fecha individual de los clientes
+                    .Distinct()
+                    .Where(x => usus.Contains(x))  // porque me estoy trayendo todos los clientes de una carta que solo tiene un cliente importante, tengo que volver a filtrarlo, y es mas practico hacerlo aca
+                    .ToList();
 
 
 
 
 
+            //como hacer para incluir los de bld? como en DataTablePorCliente
+            // FiltrarQueryableSegunCliente
 
-            string rejunte2 = string.Join(";", qq.Take(100).ToArray());
 
 
-            var listado = db.Clientes.Select(x => x.CorreosElectronicos_1).Take(100);
-            string rejunte = string.Join(";", listado.ToArray());
 
-            if (false)
+
+
+            var listado = from k in clientesParaNotificar
+                          join x in usuariosclientes on k equals x.IdCliente
+                          //where  clientesParaNotificar.Contains(x.IdCliente)  fechanot
+                          select x.Email;
+                          
+
+
+
+            //string rejunte2 = string.Join(";", qq.Take(100).ToArray());
+            //var listado = db.Clientes.Select(x => x.CorreosElectronicos_1).Take(100);
+
+
+            string rejunte = string.Join(",", listado.ToArray());
+
+            ErrHandler2.WriteError("Notificaciones a " + rejunte);
+
+
+
+            if (true)
             {
                 Pronto.ERP.Bll.EntidadManager.MandaEmail_Nuevo(ConfigurationManager.AppSettings["ErrorMail"],
-                                   "asuntoasuntoasunto 2",
-                                "cuerpocuerpocuerpocuerpocuerpocuerpocuerpocuerpocuerpocuerpocuerpocuerpo cuerpocuerpocuerpocuerpo",
-                                ConfigurationManager.AppSettings["SmtpUser"],
-                                ConfigurationManager.AppSettings["SmtpServer"],
-                                ConfigurationManager.AppSettings["SmtpUser"],
-                                ConfigurationManager.AppSettings["SmtpPass"],
-                                  "",
+                               "Notificación Williams",
+                               "Tenés actuatalizaciones de camiones informados en http://prontoclientes.williamsentregas.com.ar",
+                               ConfigurationManager.AppSettings["SmtpUser"],
+                               ConfigurationManager.AppSettings["SmtpServer"],
+                               ConfigurationManager.AppSettings["SmtpUser"],
+                               ConfigurationManager.AppSettings["SmtpPass"],
+                                "",
                                Convert.ToInt16(ConfigurationManager.AppSettings["SmtpPort"]), 1
                                , rejunte
 
                                );
             }
+
+
+            // actualizar fecha de ultima notificacion de cada cliente? -Una es la fecha desde la que tengo que buscar tandas de cartas, y otra es la fecha individual de los clientes
+
+
+            ParametroManager.GuardarValorParametro2(SC, "UltimaFechaNotificacion", DateTime.Now.ToString());
+
+
 
 
         }

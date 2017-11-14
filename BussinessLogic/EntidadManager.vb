@@ -155,8 +155,22 @@ Namespace Pronto.ERP.Bll
                         'http://forums.asp.net/t/1394642.aspx
 
                         message.Headers.Add("Disposition-Notification-To", CCO)
-                        message.Bcc.Add(New MailAddress(CCO, CCO)) 'copia oculta
-                        message.ReplyTo = New MailAddress(CCO)
+
+
+
+                        Dim listacco As String() = CCO.Split(",")
+
+                        For Each a As String In listacco
+                            If IsValidEmail(a) Then message.Bcc.Add(New MailAddress(a))
+                        Next
+
+
+                        'message.Bcc.Add(New MailAddress(CCO, CCO)) 'copia oculta
+                        message.ReplyTo = New MailAddress(listacco(0))
+
+
+
+
                         'message.ReplyTo.a.ReplyToList.Add(New MailAddress(mailReplyToAddress)) 'este esta recien en .NET 4
 
                         '/////////////////////////////////////////////////////////////////////////////////
