@@ -81,6 +81,7 @@ namespace ProntoMVC.Controllers
         void CargarViewBag(ValesSalida o)
         {
             ViewBag.Aprobo = new SelectList(db.Empleados, "IdEmpleado", "Nombre",o.Aprobo);
+            ViewBag.IdObra = new SelectList(db.Obras, "IdObra", "NumeroObra", o.IdObra);
         }
 
         void inic(ref ValesSalida o)
@@ -95,6 +96,15 @@ namespace ProntoMVC.Controllers
         {
             if (!PuedeEditar(enumNodos.ValesSalida)) sErrorMsg += "\n" + "No tiene permisos de edición";
 
+            if ((o.IdObra ?? 0) <= 0) { sErrorMsg += "\n" + "Falta la obra"; }
+
+            foreach (ProntoMVC.Data.Models.DetalleValesSalida x in o.DetalleValesSalidas)
+            {
+                if ((x.IdArticulo ?? 0) == 0 && (x.Cantidad ?? 0) != 0)
+                {
+                    sErrorMsg += "\n" + "Hay items que no tienen articulo";
+                }
+            }
 
             sErrorMsg = sErrorMsg.Replace("\n", "<br/>");
             if (sErrorMsg != "") return false;
@@ -235,235 +245,6 @@ namespace ProntoMVC.Controllers
             }
         }
 
-        //public virtual ActionResult TT(string sidx, string sord, int? page, int? rows, bool _search, string searchField, string searchOper, string searchString, string FechaInicial, string FechaFinal, string PendienteRemito = "", string PendienteFactura = "")
-        //{
-        //    string campo = String.Empty;
-        //    int pageSize = rows ?? 20;
-        //    int currentPage = page ?? 1;
-        //    decimal cien = 100;
-
-        //    var data = (from a in db.ValesSalidas
-        //                from c in db.Obras.Where(v => v.IdObra == a.IdObra).DefaultIfEmpty()
-        //                from d in db.Empleados.Where(v => v.IdEmpleado == a.IdUsuarioIngreso).DefaultIfEmpty()
-        //                from e in db.Empleados.Where(v => v.IdEmpleado == a.IdUsuarioModifico).DefaultIfEmpty()
-        //                from f in db.Empleados.Where(v => v.IdEmpleado == a.IdUsuarioAnulacion).DefaultIfEmpty()
-        //                from g in db.Empleados.Where(v => v.IdEmpleado == a.Aprobo).DefaultIfEmpty()
-        //                from i in db.Condiciones_Compras.Where(v => v.IdCondicionCompra == a.IdCondicionVenta).DefaultIfEmpty()
-        //                from j in db.ListasPrecios.Where(v => v.IdListaPrecios == a.IdListaPrecios).DefaultIfEmpty()
-        //                select new
-        //                {
-        //                    a.IdValeSalida,
-        //                    a.IdCliente,
-        //                    a.IdObra,
-        //                    a.IdCondicionVenta,
-        //                    a.IdListaPrecios,
-        //                    a.IdMoneda,
-        //                    a.NumeroValeSalidaCliente,
-        //                    a.NumeroValeSalida,
-        //                    a.FechaValeSalida,
-        //                    Producido = a.Estado,
-        //                    // Case When Exists(Select Top 1 doc.IdValeSalida From DetalleValesSalida doc Where doc.IdValeSalida=ValesSalida.IdValeSalida and IsNull(doc.Cumplido,'NO')='NO') Then Null Else 'SI' End as [Cumplido],
-        //                    Cumplido = "",
-        //                    a.Anulada,
-        //                    a.SeleccionadaParaFacturacion,
-        //                    Obra = c != null ? c.NumeroObra : "",
-        //                    ClienteCodigo = a.Cliente.CodigoCliente,
-        //                    ClienteNombre = a.Cliente.RazonSocial,
-        //                    ClienteCuit = a.Cliente.Cuit,
-        //                    Aprobo = g != null ? g.Nombre : "",
-        //                    //#Auxiliar3.Remitos as [Remitos],
-        //                    Remitos = "",
-        //                    //#Auxiliar5.Facturas as [Facturas],
-        //                    Facturas = "",
-        //                    CondicionVenta = i != null ? i.Descripcion : "",
-        //                    // (Select Count(*) From DetalleValesSalida Where DetalleValesSalida.IdValeSalida=ValesSalida.IdValeSalida) as [Cant.Items],
-        //                    Items = 0,
-        //                    FacturarA = (a.AgrupacionFacturacion ?? 1) == 1 ? "Cliente" : ((a.AgrupacionFacturacion ?? 1) == 2 ? "Obra" : ((a.AgrupacionFacturacion ?? 1) == 3 ? "U.Operativa" : "")),
-        //                    a.FechaAnulacion,
-        //                    UsuarioAnulo = f != null ? f.Nombre : "",
-        //                    a.FechaIngreso,
-        //                    UsuarioIngreso = d != null ? d.Nombre : "",
-        //                    a.FechaModifico,
-        //                    UsuarioModifico = e != null ? e.Nombre : "",
-        //                    GrupoFacturacion = (a.Agrupacion2Facturacion ?? 1) == 1 ? "Grupo 1" : ((a.Agrupacion2Facturacion ?? 1) == 2 ? "Grupo 2" : ((a.Agrupacion2Facturacion ?? 1) == 3 ? "Grupo 3" : "")),
-        //                    //IsNull(#Auxiliar2.Automatica+' ','')+IsNull(#Auxiliar2.Manual,'') as [Tipo OC],
-        //                    TipoOC = "",
-        //                     //(Select Max(Det.FechaEntrega) From DetalleValesSalida Det Where Det.IdValeSalida=ValesSalida.IdValeSalida) as [Mayor fecha entrega],
-        //                     MayorFechaEntrega = "",
-        //                    ListaDePrecio = j != null ? "Lista " + j.NumeroLista.ToString() + " " + j.Descripcion : "",
-        //                    a.PorcentajeBonificacion,
-        //                    a.ImporteTotal,
-        //                    Moneda = a.Moneda.Abreviatura,
-        //                    a.Observaciones,
-        //                    PendienteRemitir = PendienteRemito == "SI"
-        //                                        ? ((db.DetalleValesSalidas.Where(x => x.IdValeSalida == a.IdValeSalida && (a.Anulada ?? "NO") != "SI")
-        //                                            .Sum(y => ((y.TipoCancelacion ?? 1) == 1 ? y.Cantidad : 100) - (db.DetalleRemitos.Where(x => x.IdDetalleValeSalida == y.IdDetalleValeSalida && (x.Remito.Anulado ?? "NO") != "SI").Sum(z => ((y.TipoCancelacion ?? 1) == 1 ? z.Cantidad : z.PorcentajeCertificacion)) ?? 0)
-        //                                            )) ?? 0)
-        //                                        : 1,
-        //                    PendienteFacturar = PendienteFactura == "SI"
-        //                                        ? (db.DetalleValesSalidas.Where(x => x.IdValeSalida == a.IdValeSalida && (a.Anulada ?? "NO") != "SI")
-        //                                            .Sum(y => ((y.TipoCancelacion ?? 1) == 1 ? y.Cantidad : 100) -
-        //                                                (db.DetalleFacturasValesSalidas.Where(x => x.IdDetalleValeSalida == y.IdDetalleValeSalida && (x.DetalleFactura.Factura.Anulada ?? "NO") != "SI").Sum(z => ((y.TipoCancelacion ?? 1) == 1 ? z.DetalleFactura.Cantidad : z.DetalleFactura.PorcentajeCertificacion)) ?? 0) +
-        //                                                (db.DetalleNotasCreditoValesSalidas.Where(x => x.IdDetalleValeSalida == y.IdDetalleValeSalida && (x.NotasCredito.Anulada ?? "NO") != "SI").Sum(z => ((y.TipoCancelacion ?? 1) == 1 ? z.Cantidad : z.PorcentajeCertificacion)) ?? 0)
-        //                                            )) ?? 0
-        //                                        : 1
-        //                }).AsQueryable();
-
-        //    if (FechaInicial != string.Empty)
-        //    {
-        //        DateTime FechaDesde = DateTime.ParseExact(FechaInicial, "dd/MM/yyyy", null);
-        //        DateTime FechaHasta = DateTime.ParseExact(FechaFinal, "dd/MM/yyyy", null);
-        //        data = (from a in data where a.FechaValeSalida >= FechaDesde && a.FechaValeSalida <= FechaHasta select a).AsQueryable();
-        //    }
-
-        //    int totalRecords = data.Count();
-        //    int totalPages = (int)Math.Ceiling((float)totalRecords / (float)pageSize);
-
-        //    var data1 = (from a in data select a)
-        //                .Where(x => (PendienteRemito != "SI" || (PendienteRemito == "SI" && x.PendienteRemitir > 0)) && (PendienteFactura != "SI" || (PendienteFactura == "SI" && x.PendienteFacturar > 0)))
-        //                .OrderByDescending(x => x.NumeroValeSalida)
-        //                
-        //.Skip((currentPage - 1) * pageSize).Take(pageSize)
-        //.ToList();
-
-        //    var jsonData = new jqGridJson()
-        //    {
-        //        total = totalPages,
-        //        page = currentPage,
-        //        records = totalRecords,
-        //        rows = (from a in data1
-        //                select new jqGridRowJson
-        //                {
-        //                    id = a.IdValeSalida.ToString(),
-        //                    cell = new string[] { 
-        //                        "<a href="+ Url.Action("Edit",new {id = a.IdValeSalida} ) + ">Editar</>",
-        //                        "<a href="+ Url.Action("Imprimir",new {id = a.IdValeSalida} ) + ">Emitir</a> ",
-        //                        a.IdValeSalida.ToString(),
-        //                        a.IdCliente.NullSafeToString(),
-        //                        a.IdObra.NullSafeToString(),
-        //                        a.IdCondicionVenta.NullSafeToString(),
-        //                        a.IdListaPrecios.NullSafeToString(),
-        //                        a.IdMoneda.NullSafeToString(),
-        //                        a.NumeroValeSalidaCliente.NullSafeToString(),
-        //                        a.NumeroValeSalida.NullSafeToString(),
-        //                        a.FechaValeSalida == null ? "" : a.FechaValeSalida.GetValueOrDefault().ToString("dd/MM/yyyy"),
-        //                        a.Producido.NullSafeToString(),
-        //                        a.Cumplido.NullSafeToString(),
-        //                        a.Anulada.NullSafeToString(),
-        //                        a.SeleccionadaParaFacturacion.NullSafeToString(),
-        //                        a.Obra.NullSafeToString(),
-        //                        a.ClienteCodigo.NullSafeToString(),
-        //                        a.ClienteNombre.NullSafeToString(),
-        //                        a.ClienteCuit.NullSafeToString(),
-        //                        a.Aprobo.NullSafeToString(),
-        //                        a.Remitos.NullSafeToString(),
-        //                        a.Facturas.NullSafeToString(),
-        //                        a.CondicionVenta.NullSafeToString(),
-        //                        db.DetalleValesSalidas.Where(x=>x.IdValeSalida==a.IdValeSalida).Select(x=>x.IdDetalleValeSalida).Distinct().Count().ToString(),
-        //                        a.FacturarA.NullSafeToString(),
-        //                        a.FechaAnulacion == null ? "" : a.FechaAnulacion.GetValueOrDefault().ToString("dd/MM/yyyy"),
-        //                        a.UsuarioAnulo.NullSafeToString(),
-        //                        a.FechaIngreso == null ? "" : a.FechaIngreso.GetValueOrDefault().ToString("dd/MM/yyyy"),
-        //                        a.UsuarioIngreso.NullSafeToString(),
-        //                        a.FechaModifico == null ? "" : a.FechaModifico.GetValueOrDefault().ToString("dd/MM/yyyy"),
-        //                        a.UsuarioModifico.NullSafeToString(),
-        //                        a.GrupoFacturacion.NullSafeToString(),
-        //                        a.TipoOC.NullSafeToString(),
-        //                        a.MayorFechaEntrega.NullSafeToString(),
-        //                        a.ListaDePrecio.NullSafeToString(),
-        //                        a.PorcentajeBonificacion.NullSafeToString(),
-        //                        a.ImporteTotal.NullSafeToString(),
-        //                        a.Moneda.NullSafeToString(),
-        //                        a.Observaciones.NullSafeToString()
-        //                    }
-        //                }).ToArray()
-        //    };
-        //    return Json(jsonData, JsonRequestBehavior.AllowGet);
-        //}
-
-        //public virtual ActionResult DetValesSalida(string sidx, string sord, int? page, int? rows, int? IdValeSalida)
-        //{
-        //    int IdValeSalida1 = IdValeSalida ?? 0;
-        //    var Det = db.DetalleValesSalidas.Where(p => p.IdValeSalida == IdValeSalida1).AsQueryable();
-        //    int pageSize = rows ?? 20;
-        //    int totalRecords = Det.Count();
-        //    int totalPages = (int)Math.Ceiling((float)totalRecords / (float)pageSize);
-        //    int currentPage = page ?? 1;
-
-        //    var data = (from a in Det
-        //                from b in db.Colores.Where(o => o.IdColor == a.IdColor).DefaultIfEmpty()
-        //                select new
-        //                {
-        //                    a.IdDetalleValeSalida,
-        //                    a.IdArticulo,
-        //                    a.IdUnidad,
-        //                    a.IdColor,
-        //                    a.OrigenDescripcion,
-        //                    a.TipoCancelacion,
-        //                    a.NumeroItem,
-        //                    Codigo = a.Articulo.Codigo,
-        //                    Articulo = a.Articulo.Descripcion + (b != null ? " " + b.Descripcion : ""),
-        //                    a.Cantidad,
-        //                    Unidad = a.Unidade.Abreviatura,
-        //                    Precio = Math.Round((double)a.Precio, 2),
-        //                    a.PorcentajeBonificacion,
-        //                    Importe = Math.Round((double)a.Cantidad * (double)a.Precio * (double)(1 - (a.PorcentajeBonificacion ?? 0) / 100), 2),
-        //                    TiposDeDescripcion = (a.OrigenDescripcion ?? 1) == 1 ? "Solo material" : ((a.OrigenDescripcion ?? 1) == 2 ? "Solo observaciones" : ((a.OrigenDescripcion ?? 1) == 3 ? "Material + observaciones" : "")),
-        //                    TiposCancelacion = (a.TipoCancelacion ?? 1) == 1 ? "Por cantidad" : ((a.TipoCancelacion ?? 1) == 2 ? "Por certificacion" : ""),
-        //                    a.FechaNecesidad,
-        //                    a.FechaEntrega,
-        //                    a.FacturacionAutomatica,
-        //                    a.FechaComienzoFacturacion,
-        //                    a.CantidadMesesAFacturar,
-        //                    a.FacturacionCompletaMensual,
-        //                    a.Observaciones
-        //                }).OrderBy(x => x.NumeroItem)
-        //.Skip((currentPage - 1) * pageSize).Take(pageSize)
-        //.ToList();
-
-        //    var jsonData = new jqGridJson()
-        //    {
-        //        total = totalPages,
-        //        page = currentPage,
-        //        records = totalRecords,
-        //        rows = (from a in data
-        //                select new jqGridRowJson
-        //                {
-        //                    id = a.IdDetalleValeSalida.ToString(),
-        //                    cell = new string[] { 
-        //                    string.Empty, 
-        //                    a.IdDetalleValeSalida.ToString(), 
-        //                    a.IdArticulo.NullSafeToString(),
-        //                    a.IdUnidad.NullSafeToString(),
-        //                    a.IdColor.NullSafeToString(),
-        //                    a.OrigenDescripcion.NullSafeToString(),
-        //                    a.TipoCancelacion.NullSafeToString(),
-        //                    a.NumeroItem.NullSafeToString(),
-        //                    a.Codigo.NullSafeToString(),
-        //                    a.Articulo.NullSafeToString(),
-        //                    a.Cantidad.NullSafeToString(),
-        //                    a.Unidad.NullSafeToString(),
-        //                    a.Precio.NullSafeToString(),
-        //                    a.PorcentajeBonificacion.NullSafeToString(),
-        //                    a.Importe.NullSafeToString(),
-        //                    a.TiposDeDescripcion.NullSafeToString(),
-        //                    a.TiposCancelacion.NullSafeToString(),
-        //                    a.FechaNecesidad == null ? "" : a.FechaNecesidad.GetValueOrDefault().ToString("dd/MM/yyyy"),
-        //                    a.FechaEntrega == null ? "" : a.FechaEntrega.GetValueOrDefault().ToString("dd/MM/yyyy"),
-        //                    a.FacturacionAutomatica.NullSafeToString(),
-        //                    a.FechaComienzoFacturacion == null ? "" : a.FechaComienzoFacturacion.GetValueOrDefault().ToString("dd/MM/yyyy"),
-        //                    a.CantidadMesesAFacturar.NullSafeToString(),
-        //                    a.FacturacionCompletaMensual.NullSafeToString(),
-        //                    a.Observaciones.NullSafeToString()
-        //                    }
-        //                }).ToArray()
-        //    };
-        //    return Json(jsonData, JsonRequestBehavior.AllowGet);
-        //}
-
-
-
-
         public virtual JsonResult DetValesSalidaSinFormatoSegunListaDeItemsDeRequerimientos(List<int> idDetalleRequerimientos)
         {
 
@@ -479,8 +260,6 @@ namespace ProntoMVC.Controllers
                 detvale.Cantidad = detrm.Cantidad;
                 vale.DetalleValesSalidas.Add(detvale);
             }
-
-
 
             var data = (from a in vale.DetalleValesSalidas
                         //from b in db.Unidades.Where(y => y.IdUnidad == a.IdUnidad).DefaultIfEmpty()
@@ -507,8 +286,6 @@ namespace ProntoMVC.Controllers
                         }).OrderBy(p => p.IdDetalleValeSalida).ToList();
             return Json(data, JsonRequestBehavior.AllowGet);
         }
-
-
 
         public virtual JsonResult DetValesSalidaSinFormato(int? IdValeSalida, int? IdDetalleValeSalida)
         {
@@ -540,6 +317,64 @@ namespace ProntoMVC.Controllers
                             a.Partida
                         }).OrderBy(p => p.IdDetalleValeSalida).ToList();
             return Json(data, JsonRequestBehavior.AllowGet);
+        }
+
+        public virtual ActionResult DetValesSalida(string sidx, string sord, int? page, int? rows, int? IdValeSalida)
+        {
+            int IdValeSalida1 = IdValeSalida ?? 0;
+            var Det = db.DetalleValesSalidas.Where(p => p.IdValeSalida == IdValeSalida1).AsQueryable();
+            int pageSize = rows ?? 20;
+            int totalRecords = Det.Count();
+            int totalPages = (int)Math.Ceiling((float)totalRecords / (float)pageSize);
+            int currentPage = page ?? 1;
+
+            var data = (from a in Det
+                        from b in db.Unidades.Where(o => o.IdUnidad == a.IdUnidad).DefaultIfEmpty()
+                        select new
+                        {
+                            a.IdDetalleValeSalida,
+                            a.IdArticulo,
+                            a.IdUnidad,
+                            Codigo = a.Articulo.Codigo,
+                            Articulo = a.Articulo.Descripcion,
+                            a.Cantidad,
+                            Unidad = (b != null ? b.Abreviatura : ""),
+                            a.Cumplido,
+                            a.Estado,
+                            NumeroRequerimiento = a.DetalleRequerimiento.Requerimientos.NumeroRequerimiento,
+                            ItemRM = a.DetalleRequerimiento.Item,
+                            TipoRequerimiento = a.DetalleRequerimiento.Requerimientos.TipoRequerimiento
+                        }).OrderBy(x => x.IdDetalleValeSalida)
+                        //.Skip((currentPage - 1) * pageSize).Take(pageSize)
+                        .ToList();
+
+            var jsonData = new jqGridJson()
+            {
+                total = totalPages,
+                page = currentPage,
+                records = totalRecords,
+                rows = (from a in data
+                        select new jqGridRowJson
+                        {
+                            id = a.IdDetalleValeSalida.ToString(),
+                            cell = new string[] {
+                            string.Empty,
+                            a.IdDetalleValeSalida.ToString(),
+                            a.IdArticulo.NullSafeToString(),
+                            a.IdUnidad.NullSafeToString(),
+                            a.Codigo.NullSafeToString(),
+                            a.Articulo.NullSafeToString(),
+                            a.Cantidad.NullSafeToString(),
+                            a.Unidad.NullSafeToString(),
+                            a.Cumplido.NullSafeToString(),
+                            a.Estado.NullSafeToString(),
+                            a.NumeroRequerimiento.NullSafeToString(),
+                            a.ItemRM.NullSafeToString(),
+                            a.TipoRequerimiento.NullSafeToString()
+                            }
+                        }).ToArray()
+            };
+            return Json(jsonData, JsonRequestBehavior.AllowGet);
         }
 
         public virtual ActionResult ValesSalidaPendientesDeSalidaMateriales(string sidx, string sord, int? page, int? rows)
@@ -575,8 +410,8 @@ namespace ProntoMVC.Controllers
                             ObservacionesRM = a[20],
                             EquipoDestino = a[21]
                         }).OrderByDescending(s => s.NumeroValeSalida)
-//.Skip((currentPage - 1) * pageSize).Take(pageSize)
-.ToList();
+                        //.Skip((currentPage - 1) * pageSize).Take(pageSize)
+                        .ToList();
 
             var jsonData = new jqGridJson()
             {
@@ -606,6 +441,113 @@ namespace ProntoMVC.Controllers
                                 a.Observaciones.NullSafeToString(), 
                                 a.ObservacionesRM.NullSafeToString(), 
                                 a.EquipoDestino.NullSafeToString()
+                            }
+                        }).ToArray()
+            };
+            return Json(jsonData, JsonRequestBehavior.AllowGet);
+        }
+
+        public class ValesSalida2
+        {
+            public int IdValeSalida { get; set; }
+            public int? NumeroValeSalida { get; set; }
+            public int? NumeroValePreimpreso { get; set; }
+            public DateTime? FechaValeSalida { get; set; }
+            public string NumeroObra { get; set; }
+            public string Aprobo { get; set; }
+            public string Cumplido { get; set; }
+            public string Salidas { get; set; }
+            public string Observaciones { get; set; }
+            public string Anulo { get; set; }
+            public DateTime? FechaAnulacion { get; set; }
+            public string MotivoAnulacion { get; set; }
+            public string DioPorCumplido { get; set; }
+            public DateTime? FechaDioPorCumplido { get; set; }
+            public string MotivoDioPorCumplido { get; set; }
+        }
+
+        public virtual JsonResult ValesSalida_DynamicGridData(string sidx, string sord, int page, int rows, bool _search, string filters, string FechaInicial, string FechaFinal)
+        {
+            DateTime FechaDesde, FechaHasta;
+            try
+            {
+                if (FechaInicial == "") FechaDesde = DateTime.MinValue;
+                else FechaDesde = DateTime.ParseExact(FechaInicial, "dd/MM/yyyy", null);
+            }
+            catch (Exception)
+            {
+                FechaDesde = DateTime.MinValue;
+            }
+
+            try
+            {
+                if (FechaFinal == "") FechaHasta = DateTime.MaxValue;
+                else FechaHasta = DateTime.ParseExact(FechaFinal, "dd/MM/yyyy", null);
+            }
+            catch (Exception)
+            {
+                FechaHasta = DateTime.MaxValue;
+            }
+
+            int totalRecords = 0;
+            int pageSize = rows;
+
+            var data = (from a in db.ValesSalidas
+                        from b in db.Obras.Where(o => o.IdObra == a.IdObra).DefaultIfEmpty()
+                        from c in db.Empleados.Where(o => o.IdEmpleado == a.Aprobo).DefaultIfEmpty()
+                        from d in db.Empleados.Where(o => o.IdEmpleado == a.IdUsuarioAnulo).DefaultIfEmpty()
+                        from e in db.Empleados.Where(o => o.IdEmpleado == a.IdUsuarioDioPorCumplido).DefaultIfEmpty()
+                        select new ValesSalida2
+                        {
+                            IdValeSalida = a.IdValeSalida,
+                            NumeroValeSalida = a.NumeroValeSalida,
+                            NumeroValePreimpreso = a.NumeroValePreimpreso,
+                            FechaValeSalida = a.FechaValeSalida,
+                            NumeroObra = b != null ? b.NumeroObra : "",
+                            Aprobo = c != null ? c.Nombre : "",
+                            Cumplido = a.Cumplido,
+                            Salidas = ModelDefinedFunctions.ValesSalida_Salidas(a.IdValeSalida).ToString(),
+                            Observaciones = a.Observaciones,
+                            Anulo = d != null ? d.Nombre : "",
+                            FechaAnulacion = a.FechaAnulacion,
+                            MotivoAnulacion = a.MotivoAnulacion,
+                            DioPorCumplido = e != null ? e.Nombre : "",
+                            FechaDioPorCumplido = a.FechaDioPorCumplido,
+                            MotivoDioPorCumplido = a.MotivoDioPorCumplido,
+                        }).Where(a => a.FechaValeSalida >= FechaDesde && a.FechaValeSalida <= FechaHasta).OrderBy(sidx + " " + sord).AsQueryable();
+
+            var pagedQuery = Filters.FiltroGenerico_UsandoIQueryable<ValesSalida2>
+                                     (sidx, sord, page, rows, _search, filters, db, ref totalRecords, data);
+
+            int totalPages = (int)Math.Ceiling((float)totalRecords / (float)pageSize);
+
+            var jsonData = new jqGridJson()
+            {
+                total = totalPages,
+                page = page,
+                records = totalRecords,
+                rows = (from a in pagedQuery
+                        select new jqGridRowJson
+                        {
+                            id = a.IdValeSalida.ToString(),
+                            cell = new string[] {
+                                "<a href="+ Url.Action("Edit",new {id = a.IdValeSalida} ) + ">Editar</>",
+                                "<a href="+ Url.Action("ImprimirConInteropPDF",new {id = a.IdValeSalida} ) + ">Emitir</a> ",
+                                a.IdValeSalida.ToString(),
+                                a.NumeroValeSalida.NullSafeToString(),
+                                a.NumeroValePreimpreso.NullSafeToString(),
+                                a.FechaValeSalida == null ? "" : a.FechaValeSalida.GetValueOrDefault().ToString("dd/MM/yyyy"),
+                                a.NumeroObra.NullSafeToString(),
+                                a.Aprobo.NullSafeToString(),
+                                a.Cumplido.NullSafeToString(),
+                                a.Salidas.NullSafeToString(),
+                                a.Observaciones.NullSafeToString(),
+                                a.Anulo.NullSafeToString(),
+                                a.FechaAnulacion == null ? "" : a.FechaAnulacion.GetValueOrDefault().ToString("dd/MM/yyyy"),
+                                a.MotivoAnulacion.NullSafeToString(),
+                                a.DioPorCumplido.NullSafeToString(),
+                                a.FechaDioPorCumplido == null ? "" : a.FechaDioPorCumplido.GetValueOrDefault().ToString("dd/MM/yyyy"),
+                                a.MotivoDioPorCumplido.NullSafeToString()
                             }
                         }).ToArray()
             };
