@@ -6,29 +6,9 @@
 {
     @Html.ValidationSummary(true)
 
-    <!--/.fluid-container-->
-    <script type="text/javascript">
-        var OrigenDescripcionDefault = @ViewBag.OrigenDescripcionDefault
-        // http://stackoverflow.com/questions/10389649/possible-to-access-mvc-viewbag-object-from-javascript-file
+    <script src="@Url.Content("~/Scripts/ScriptValeSalida.js")" type="text/javascript"></script>       @*aparentemente tengo que llamarla despues de cargar las div*@
 
-    </script>
-    @*http://stackoverflow.com/questions/32414/how-can-i-force-clients-to-refresh-javascript-files*@
-    @*http://stackoverflow.com/questions/32414/how-can-i-force-clients-to-refresh-javascript-files*@
-    @*http://stackoverflow.com/questions/32414/how-can-i-force-clients-to-refresh-javascript-files*@
-    @*http://stackoverflow.com/questions/32414/how-can-i-force-clients-to-refresh-javascript-files*@
-
-
-
-    <script src="@Url.Content("~/Scripts/ScriptValeSalida.js?1518")" type="text/javascript"></script>       @*aparentemente tengo que llamarla despues de cargar las div*@
-    @*http://stackoverflow.com/questions/32414/how-can-i-force-clients-to-refresh-javascript-files*@
-    @*http://stackoverflow.com/questions/32414/how-can-i-force-clients-to-refresh-javascript-files*@
-    @*http://stackoverflow.com/questions/32414/how-can-i-force-clients-to-refresh-javascript-files*@
-    @*http://stackoverflow.com/questions/32414/how-can-i-force-clients-to-refresh-javascript-files*@
     <div class="container-fluid" style="padding-left: 0px; padding-right: 0px;">
-        <div class="modal" id="loading">
-            <img src="@Url.Content("~/Content/images/fhhrx.gif")" style="margin-right: 5px;" />
-            Cargando...
-        </div>
         <style>
             /* probando cómo zafar del color en los border del arbol de la izquierda */
             .ui-jqgrid tr.ui-row-ltr td {
@@ -53,77 +33,26 @@
         </style>
         <style>
             .accordion-heading {
-                /*   font-size: 25px !important;  */
             }
-
-            /* http://stackoverflow.com/questions/13778703/adding-open-closed-icon-to-twitter-bootstrap-collapsibles-accordions */
             .accordion-caret .accordion-toggle:hover {
                 text-decoration: none;
             }
-
-                .accordion-caret .accordion-toggle:hover span, .accordion-caret .accordion-toggle:hover strong {
-                    text-decoration: underline;
-                }
-
+            .accordion-caret .accordion-toggle:hover span, .accordion-caret .accordion-toggle:hover strong {
+                text-decoration: underline;
+            }
             .accordion-caret .accordion-toggle:before {
                 font-size: 20px;
                 vertical-align: -3px;
             }
-
             .accordion-caret .accordion-toggle:not(.collapsed):before {
                 content: "▾";
                 margin-right: 0px;
             }
-
             .accordion-caret .accordion-toggle.collapsed:before {
                 content: "▸";
                 margin-right: 0px;
             }
         </style>
-        @if (false)
-        {
-
-
-            <style>
-                /* jqGrid builds some additional divs over the main grid table. The outer div has the class ui-jqgrid. So if you need to remove right and left border existing over the whole grid you can use the following CSS: */
-
-                .ui-jqgrid {
-                    border-right-width: 0px;
-                    border-left-width: 0px;
-                }
-                    /* If you need to remove all grid's borders you can use
-
-                .ui-jqgrid { border-width: 0px; }
-                If you want additionally remove vertical border between the cells in the grid you can use */
-
-                    .ui-jqgrid tr.ui-row-ltr td {
-                        /* border-right-color: transparent; */
-                        border-right-color: #E4E4E4;
-                    }
-
-
-
-
-                    /*To remove horizontal border between the rows you can use */
-
-                    .ui-jqgrid tr.ui-row-ltr td {
-                        /* border-right-color: transparent; */
-                        border-right-color: #E4E4E4;
-                    }
-                /*To remove vertical borders between the column headers you can use */
-
-                th.ui-th-column {
-                    /*    border-right-color: transparent !important; */
-                    border-right-color: rgb(234, 234, 234) !important;
-                }
-                /* or alternatively (without the usage of !important) */
-
-                .ui-jqgrid-labels .ui-th-column {
-                    /* border-right-color: transparent;*/
-                    border-right-color: #E4E4E4;
-                }
-            </style>
-        }
         <style>
             /*  http://stackoverflow.com/questions/13103544/how-to-restrict-jqgrid-textarea-height-in-grid-only */
             tr.jqgrow > td.textInDiv > div {
@@ -131,7 +60,6 @@
                 height: 30px;
                 overflow: auto;
             }
-
             td.form-view-data > span > div {
                 max-height: 30px;
                 height: 30px;
@@ -140,18 +68,11 @@
         </style>
         <form class="form-horizontal" style=" margin-bottom: 0px;">
             <div id="cuerpomaspie" class="" style="padding-bottom:2px; position: relative; height: 100%  " @*Height of the footer *@>
-                
-                <div id="conscroll" style="height: 600px; margin-bottom: 40px; overflow-y: scroll; top: 50px;
-                padding-left: 25px; padding-right: 25px; overflow-x: hidden;">
-
-
-                                    <div class="row-fluid" style="margin-bottom: 15px; margin-top: 5px;">
-
+                <div id="conscroll" style="height: 600px; margin-bottom: 40px; overflow-y: scroll; top: 50px; padding-left: 25px; padding-right: 25px; overflow-x: hidden;">
+                    <div class="row-fluid" style="margin-bottom: 15px; margin-top: 5px;">
                         <div class="span6">
                             <div class="" style='font-size: 34px; margin-top: 5px; height: 45px; font-weight: 400;
                             text-shadow: 0 1px 0  lightgray; font-family: "Segoe UI Web Regular", "Segoe UI", "Lucida", Tahoma, Arial,"sans-serif"'>
-
-
                                 <span class="span1" style="padding-top: 15px; width: 240px">Vale Salida </span>
                                 @Html.TextBoxFor(model => model.NumeroValeSalida, new { style = "height: 50px ;  font-weight: 400; text-shadow: 0 1px 0  lightgray; font-size: 34px; border: 0; padding: 0 ; text-align: right; background: transparent;  font-family: 'Segoe UI Web Regular', 'Segoe UI', 'Lucida', Tahoma, Arial,'sans-serif';                    -webkit-box-shadow: none; -moz-box-shadow: none; box-shadow: none;                   ", @class = "span3", @readonly = "readonly" })
                             </div>
@@ -161,100 +82,51 @@
                         </div>
                         <script>
                             $(function () {
-
                                 function resizeInput() {
                                     // $(this).attr('size', $(this).val().length + 2);
                                     $(this).css('width', $(this).val().length * 32);
                                 }
-
                                 $('#NumeroValeSalida').css('width', $('#NumeroValeSalida').val().length * 21);
-
                             })
                         </script>
                     </div>
 
-
-
-
-
-
-
-
-                    @*    <legend>Requerimiento</legend>*@
                     <div>@Html.Hidden("IdValeSalida", Model.IdValeSalida)</div>
                     <div>@Html.Hidden("Cumplido", Model.Cumplido)</div>
                     <div>@Html.Hidden("FechaAnulacion", Model.FechaAnulacion)</div>
                     <div>@Html.Hidden("IdUsuarioAnulo", Model.IdUsuarioAnulo)</div>
                     <div>@Html.Hidden("MotivoAnulacion", Model.MotivoAnulacion)</div>
                     <div>@Html.Hidden("NumeroValeSalida", Model.NumeroValeSalida)</div>
-                    @*<div class="row-fluid">
-                            <div class="span12 bgcolor">
-                                <div class="alert alert-error">
-                                    <a href="#" class="close" data-dismiss="alert">×</a>
-                                    Error Messages.
-                                </div>
-                            </div>
-                        </div>   *@
 
                     <div class="row-fluid">
                         <div class="span3 lightblue">
                             @Html.LabelFor(model => model.FechaValeSalida, "Fecha")
-                            @* @Html.TextBoxFor(model => model.FechaRequerimiento, new Dictionary<string, object> { { "class", "span12" }, { "placeholder", "dd/mm/yyyy" } })*@
-                            @Html.TextBox("FechaRequerimiento", Model.FechaValeSalida.GetValueOrDefault().ToString("dd/MM/yyyy"), new Dictionary<string, object> { { "class", "span12" }, { "placeholder", "dd/mm/yyyy" } })
-                            @*, { "type", "date" }, { "data-datepicker", "datepicker" }*@
+                            @Html.TextBoxFor(model => model.FechaValeSalida, new Dictionary<string, object> { { "class", "span12" }, { "placeholder", "dd/mm/yyyy" } })
                             @Html.ValidationMessageFor(model => model.FechaValeSalida)
-                        </div>
-                        <!--/span-->
-                        <div class="span6 lightblue">
-                            @Html.Hidden("IdObra", Model.IdObra)
-                            @Html.LabelFor(model => model.IdObra, "Obra")
-                            @*                @Html.DropDownList("IdObra", null, "", new { @class = "span12" })*@
-                            @*@Html.TextBoxFor(m => m.Obra.Descripcion, new { id = "DescripcionObra", @class = "span12" })*@
-                            @Html.ValidationMessageFor(model => model.IdObra)
-                            <script type="text/jscript">
-
-
-
-
-                                $("#DescripcionObra").autocomplete({
-                                    source: '@Url.Action("GetObrasAutocomplete2", "Articulo")',
-                                    minLength: 0,
-                                    messages: { noResults: "", results: function () { } },
-                                    select: proveedorSeleccionado,
-                                    autoFocus: true
-
+                            <script>
+                                $("#FechaValeSalida").datepicker({
+                                    changeMonth: true,
+                                    changeYear: true,
+                                    dateFormat: 'dd/mm/yy'
+                                    //numberOfMonths: 2,
                                 });
-
-
-                                function proveedorSeleccionado(event, ui) {
-
-                                    ActualizarObra(ui.item);
-                                    ///////////////////////
-                                    event.preventDefault();
-                                }
-
-                                function ActualizarObra(item) {
-                                    $("#IdObra").val(item.id);
-                                    //                        $("#CodigoProveedor").val(item.codigo || "");
-                                    $("#DescripcionObra").val(item.value || "");
-                                    //                        $("#IdCodigoIva").val(item.idCodigoIva);
-                                }
-
-
                             </script>
                         </div>
                         <!--/span-->
-                 
-                    </div>
-                    <!--/row-->
-                    <div class="row-fluid">
-                     
+                        <div class="span6 lightblue">
+                            @Html.LabelFor(model => model.IdObra, "Obra")
+                            @Html.DropDownList("IdObra", null, "", new { @class = "span12", @style = "height: 15px;   line-height: 14px;" })
+                            @Html.ValidationMessageFor(model => model.IdObra)
+                        </div>
                         <!--/span-->
                     </div>
                     <!--/row-->
                     <div class="row-fluid">
-                        <div class="span3
-        lightblue">
+                        <!--/span-->
+                    </div>
+                    <!--/row-->
+                    <div class="row-fluid">
+                        <div class="span3 lightblue">
                             @Html.LabelFor(model => model.Aprobo, "Aprobó")
                             @Html.DropDownList("Aprobo", null, "", new { @class = "span12" })
                             @Html.ValidationMessageFor(model => model.Aprobo)
@@ -264,16 +136,11 @@
                             @Html.Label("Autorizaciones")
                             <form>
                                 @{
-
-        // con jquery se llama despues a  "Requerimiento/Autorizaciones" para tildar y a Aprobado() para el primer check
-        <input type="checkbox" id="chk0" readonly="readonly" disabled="disabled" class="GridCheckBox"
-               title="" />
-
-        int ca = 0; // ViewBag.CantidadAutorizaciones;
-
-        int j = 1;
-        for (var i = 1; i <= ca; i++)
-        { <input type="checkbox" id="chk@(i)" readonly="readonly" disabled="disabled" class="GridCheckBox" title="" /> }
+                                    <input type="checkbox" id="chk0" readonly="readonly" disabled="disabled" class="GridCheckBox" title="" />
+                                    int ca = 0; // ViewBag.CantidadAutorizaciones;
+                                    int j = 1;
+                                    for (var i = 1; i <= ca; i++)
+                                    { <input type="checkbox" id="chk@(i)" readonly="readonly" disabled="disabled" class="GridCheckBox" title="" /> }
                                 }
                             </form>
                         </div>
@@ -285,21 +152,8 @@
                                 <input type="button" id="AnularFirmas" value="@(ViewBag.CantidadAutorizaciones > 1 ? "Anular firmas" : "Anular liberación" )  " class="btn btn-link" />
                             }
                             <script>
-
-                                //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-                                //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-                                //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-                                //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-                                ////////////////////////////////////   usar el mismo jqdialog  pasandole callbacks    ////////////////////////////////
-                                //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-                                //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-                                //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-                                //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-                                //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                                 $(function () {
                                     $('#AnularFirmas').click(function () {
-
-
                                         var IdAprobo = $("#Aprobo > option:selected").attr("value");
                                         var Aprobo = $("#Aprobo > option:selected").html();
                                         $("#Aux1").val(IdAprobo);
@@ -307,13 +161,9 @@
                                         $("#Aux3").val("");
                                         $("#Aux10").val("");
 
-
                                         $("#dialog-password").dialog({
                                             buttons: {
                                                 'Aceptar': function () {
-                                                    //alert('hola');
-                                                    // $(this).dialog('close');
-                                                    // http://stackoverflow.com/questions/1031674/how-do-i-write-a-jquery-function-that-accepts-a-callback-as-a-parameter
                                                     validatePwd2(anularfirma, function () { });
                                                     $(this).dialog('close');
                                                 },
@@ -335,31 +185,15 @@
                                         //deshabilitar el combo (solo puede anular la liberacion el que lo liberó)
                                         $('#mySelect').prop("disabled", true);
 
-
-
-
                                         if (IdAprobo == "") {
                                             $("#mySelect").val([]);
                                         }
                                         else {
                                             $('#mySelect').val(IdAprobo);
                                         }
-
-
-
-
-
-
-
                                     })
 
-
-
-
-
-
                                     function anularfirma() {
-
                                         $.ajax({
                                             type: 'POST',
                                             contentType: 'application/json; charset=utf-8',
@@ -374,13 +208,8 @@
                                             error: function (result) {
                                                 alert("No se pudo anular");
                                             }
-
                                         })
                                     }
-
-
-
-
 
                                     $("#Aprobo").change(function (event) {
                                         //            alert("change");
@@ -388,9 +217,6 @@
                                         //        event.stopPropagation();
                                         aprobar();
                                     });
-
-
-
 
                                     function aprobar() {
                                         var IdAprobo = $("#Aprobo > option:selected").attr("value");
@@ -409,22 +235,15 @@
                                                     validatePwd2(
 
                                                     function () {
-
                                                         var combo = $("#Aux0").val();
                                                         var idusuario = $("#Aux1").val();
                                                         var post = $("#Aux10").val();
                                                         $('#' + combo).val(idusuario);
                                                         $("#Aux3").val(idusuario);
-
-
-                                                        // ok
                                                     },
                                                      function () {
-
                                                          alert('Password incorrecta');
-
                                                          var combo = $("#Aux0").val();
-
                                                          $('#' + combo).val("");
                                                          $("#Aux3").val("");
                                                      }
@@ -436,10 +255,8 @@
                                             },
 
                                             open: function () {
-
                                                 //alert("hay que volver a llenar el mySelect"); //porque el anular lo rellena con otra lista
                                                 // pasar la eleccion del combo DESPUES de que hizo la llamada a CargarEmpleadosParaAprobar, como callback
-
                                                 var callbackfunction = function () {
                                                     var combo = $("#dialog-password").data('Combo')
                                                     var idusuario = $("#Aux1").val();
@@ -454,13 +271,11 @@
                                                         $('#mySelect').val(idusuario);
                                                     }
                                                 }
-
                                                 CargarEmpleadosParaAprobar(callbackfunction);
                                             },
                                             close: function () {
                                                 // si usás una funcion de callback, pasale los parametros. Quiero decir: que el dialog no tenga que saber cómo implementarla!
                                                 // http://stackoverflow.com/questions/939032/jquery-pass-more-parameters-into-callback
-
                                                 $('#password').val("");
                                                 var combo = $("#Aux0").val();
                                                 $('#' + combo).val("");  // acá reseteo el combo que se pasó como parámetro en la llamada   $('#dialog-password').data('Combo', 'Aprobo');
@@ -472,14 +287,9 @@
                                         $('#dialog-password').dialog('open');
                                         $('#mySelect').focus(); // esto es clave, para que no me cierre el cuadro de dialogo al recibir un posible enter apretado en el change
                                     }
-
-
-
-
                                 })
                             </script>
                         </div>
-
                         <!--/span-->
                     </div>
                     <!--/row-->
@@ -487,8 +297,6 @@
                         <!--/span-->
                     </div>
                     <!--/row-->
-                    <div id="RManulada" class="row-fluid" style="display: none; font-weight: bold; background-color: red">
-                    </div>
                     <br />
                     <div class="row-fluid">
                         <div id="divGrilla" class="span12 lightblue" style="padding-left: 0px; padding-right: 2px;
@@ -506,11 +314,9 @@
                                     padding: 0;
                                     position: relative;
                                 }
-
                                 .ui-jqdialog-titlebar {
                                     height: 15px;
                                 }
-
                                 .ui-jqdialog button {
                                 }
                                 /* http://stackoverflow.com/questions/14954587/jqgrid-for-twitter-bootstrap
@@ -520,73 +326,57 @@
                                     margin: 0px;
                                     line-height: normal;
                                 }
-
                                 select.ui-pg-selbox {
                                     width: auto;
                                     padding: 0px;
                                     margin: 0px;
                                     line-height: normal;
                                 }
-
                                 .ui-widget select {
                                     margin-bottom: 0px !important; /* para que en la edicion inline de la grilla no me haga mas alto el renglon   */
                                 }
-
-
-
-
                                 .ui-widget-content button {
                                     background: rgb(231, 231, 231);
                                     color: black !important;
                                 }
-
                                 .ui-jqgrid tr.footrow-ltr {
                                     font-size: 9px;
                                 }
-
                                 .AltoRenglones tr.jqgrow td /* .ui-jqgrid tr.jqgrow td */ {
                                     height: 32px;
                                 }
-
                                 .ui-jqgrid tr.ui-row-ltr td {
                                     /* lineas de las grillas verticales*/ /*
                                                         border-right-style: none;
                                                         border-left-style: none;
                                                         */
                                 }
-
                                 .ui-icon, .ui-widget-content .ui-icon {
                                     /* background-image:
                                     none; */
                                 }
-
                                 /* el padding... http://stackoverflow.com/questions/17732147/how-to-add-class-to-a-cell-in-jqgrid*/
                                 .ui-jqgrid tr.jqgrow td {
                                     padding-left: 8px;
                                     padding-right: 8px;
                                 }
-
                                 .ui-widget-content hr {
                                     border: 0 !important; /* el borde molesto en el form de detalle de la jqgrid antes de los botones de aceptar/cancelar */
                                 }
-
-
                                 .AltoRenglones tr.jqgrow td /* .ui-jqgrid tr.jqgrow td */ {
                                     height: 36px; /* jugar entre .AltoRenglones y el style de font de la grilla */
                                 }
                             </style>
-                            <table id="Lista" class="scroll separacion AltoRenglones" cellpadding="0" cellspacing="0"
-                                   >
-                                @*/* jugar entre .AltoRenglones y el style de font de la grilla */*@
+                            <table id="Lista" class="scroll separacion AltoRenglones" cellpadding="0" cellspacing="0" >
                             </table>
                             <div id="ListaPager" class="scroll">
                             </div>
                             <div style="margin-top: 4px">
-                                <input type="button" class="btn btn-small" id="addData" value="+ Agregar" />
+                                @*<input type="button" class="btn btn-small" id="addData" value="+ Agregar" />
                                 <input type="button" class="btn btn-small" id="edtData" value="Modificar" />
-                                <input type="button" class="btn btn-small" id="delData" value="Borrar" />
+                                <input type="button" class="btn btn-small" id="delData" value="Borrar" />*@
                                 <input type="button" class="btn btn-small pull-right" id="" value="Buscar" onclick="conmutarPanelesDerecho();  pageLayout.hide('south'); pageLayout.hide('north'); RefrescaAnchoGrillaDetalle();" />&nbsp;
-                                <input type="button" class="btn btn-small  pull-right" id="asignarNecesidad" value="Asignar fecha" />&nbsp;
+                                @*<input type="button" class="btn btn-small  pull-right" id="asignarNecesidad" value="Asignar fecha" />&nbsp;*@
                             </div>
                             @*<input type="button" class="btn btn-small  pull-right" id="duplicar" value="Duplicar" />*@
                         </div>
@@ -594,13 +384,7 @@
                             Fecha de entrega
                             <input type="text" id="InputFechaEntrega" value="" />
                             <script>
-
-
-
-
                                 $(function () {
-
-
                                     $("#dialog").dialog({
                                         autoOpen: false,
                                         modal: true,
@@ -608,37 +392,22 @@
                                             "Aceptar": function () {
                                                 // $("#nombre").val($("#el_nombre").val);
                                                 var f = $("#InputFechaEntrega").val();
-
-
                                                 var $grid = $("#Lista");
                                                 var righe = $grid.jqGrid("getGridParam", "selarrrow");
-
                                                 //                                            selRowIds.each(function (id1, id2) {
                                                 //                                                return rows.namedItem(id1).rowIndex - rows.namedItem(id2).rowIndex;
-
                                                 //                                                var data = $(nomeGrigliaFiglia).jqGrid('getRowData', Id);
                                                 //                                            })
-
-
                                                 if ((righe == null) || (righe.length == 0)) {
                                                     return false;
                                                 }
 
-
                                                 for (var i = 0; i < righe.length; i++) {
                                                     var Id = righe[i];
-
                                                     var rowData = $grid.jqGrid('getRowData', Id);
                                                     rowData.FechaEntrega = f;
                                                     $grid.jqGrid('setRowData', Id, rowData);
-
                                                 }
-
-
-
-
-
-
                                                 $(this).dialog("close");
                                             },
                                             "Cerrar": function () {
@@ -647,32 +416,20 @@
                                         }
                                     });
 
-
-
                                     $("#asignarNecesidad").click(function () {
-
                                         var $grid = $("#Lista");
                                         var righe = $grid.jqGrid("getGridParam", "selarrrow");
-
                                         if ((righe == null) || (righe.length == 0)) {
                                             righe = $grid.jqGrid('getDataIDs');
-                                            //                                    alert("No elegiste items");
-                                            //                                    return false;
                                         }
-
-                                        // $("#InputFechaEntrega").val();
                                         initDateEdit($("#InputFechaEntrega"));
 
                                         $("#dialog").dialog("option", "width", 600);
                                         $("#dialog").dialog("option", "height", 300);
                                         $("#dialog").dialog("option", "resizable", false);
                                         $("#dialog").dialog("open");
-
                                     });
-
-
                                 });
-
                             </script>
                         </div>
                     </div>
@@ -683,34 +440,12 @@
                             @Html.TextAreaFor(model => model.Observaciones, new { @class = "span12", @style = "height: 100px" })
                             @Html.ValidationMessageFor(model => model.Observaciones)
                         </div>
-
-                        <div class="span6 lightblue" style="visibility: hidden">
-
-                            @using (Html.BeginForm("SubirPlantilla", "Requerimiento", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
-                            {
-
-                                <input type="file" name="file" />
-                                <input type="submit" class="btn" value="Subir" />
-                            }
-
-                        </div>
                     </div>
-
-
-
-
                     <br />
                 </div>
                 <div id="pie" style="position: absolute; bottom: -26px; background: rgb(236, 236, 236); width: 100%; height: 68px; padding-left: 0; margin-right: 15px;">
                     <hr style="margin: 0; border-top-color: #D8D4D4; border-bottom: 0px solid #ffffff;  " />
-
-
                     <div class="row-fluid " style="padding: 11px 0px 0px 0px">
-                        @*style="background: rgba(234, 234, 234, 0.84); border: 1px solid lightgray;  height: 54px; padding-top: 2px;"*@
-                        
-
-                        <div class="span7 ">
-                        </div>
                         <div class="span5 lightblue">
                             @if (Model.Cumplido != "SI" || Model.Aprobo > 0)
                             {
@@ -724,135 +459,97 @@
                             {
                                 <a id="lImprimir" class="btn  btn-large" style="color: Black" href="@Url.Action("Imprimir", new { @id = Model.IdValeSalida })"><i class="icon-print"></i>&nbsp;Imprimir</a>
                             }
-                            @*@Html.ActionLink("Volver al listado", "Index", null, new { @class = "btn btn-link pull-right" })*@
                         </div>
-
-
+                        @Html.ActionLink("Volver al listado", "Index", null, new { @class = "btn btn-link  pull-right" })
                     </div>
-
-
                 </div>
             </div>
         </form>
     </div>
-    <script type="text/javascript">
-        //    function theimage(){
-        //     var filename = document.getElementById('file-id').value;
-        //     document.getElementById('file-path').value = filename;
-        //     var filename1 = $('#file-id').next().val();
-        //     alert(filename);
-        //    }
 
-        $(window).resize(function () {
-            RefrescaAnchoGrillaDetalle();
+<script type="text/javascript">
+    //    function theimage(){
+    //     var filename = document.getElementById('file-id').value;
+    //     document.getElementById('file-path').value = filename;
+    //     var filename1 = $('#file-id').next().val();
+    //     alert(filename);
+    //    }
 
-            $("#conscroll").height($(window).height() - 120);
-        });
+    $(window).resize(function () {
+        RefrescaAnchoGrillaDetalle();
+        $("#conscroll").height($(window).height() - 120);
+    });
 
+    function RefrescaAnchoGrillaDetalle() {
+        // $("#Lista").setGridWidth($(window).width());
+        // la zona de drop se te complica si estas arrastrando un renglon muy largo de una grilla ancha sobre una grilla angosta
+        $("#Lista").setGridWidth($("#divGrilla").width());
+        //        $("#ListaDrag").setGridWidth(jQuery("#ListaDrag").parent().width());
+        //        $("#ListaDrag2").setGridWidth(jQuery("#ListaDrag").parent().width());
+    }
 
-
-
-        function RefrescaAnchoGrillaDetalle() {
-            // $("#Lista").setGridWidth($(window).width());
-            // la zona de drop se te complica si estas arrastrando un renglon muy largo de una grilla ancha sobre una grilla angosta
-
-            $("#Lista").setGridWidth($("#divGrilla").width());
-
-            //        $("#ListaDrag").setGridWidth(jQuery("#ListaDrag").parent().width());
-            //        $("#ListaDrag2").setGridWidth(jQuery("#ListaDrag").parent().width());
-        }
-
-
-
-
-        function deshabilitar() {
-
-            // $("*").attr("disabled", "disabled");
-
-            // es esta linea que me pone el footrow border superior negro
-            $("#formid *").not("#Lista").not(".ui-jqgrid").not("#lImprimir").not("#anular").not("#AnularFirmas").attr("disabled", "disabled");
-
-
-            // para que solo bloquee el contenido y me deje scrollear, saqué el 'closest'
-
-
-            $.blockUI.defaults.css.cursor = 'default';
-            $.blockUI.defaults.overlayCSS.cursor = 'default';
-
-            //http://stackoverflow.com/questions/19810312/disabling-entire-jqgrid-jquery-grid-plugin-using-jquery-blockui-plugin
-            //                $("#Lista").closest(".ui-jqgrid").block({
-            //                    message: "", //"<h1>Being processed...</h1>",
-            //                    css: { border: "3px solid #a00" }
-            //                });
-
-
-
-
-
-            $("#Lista").block({ // para que solo bloquee el contenido y me deje scrollear, saqué el 'closest'
-                message: "", //"<h1>Being processed...</h1>",
-                css: {
-                    // border: "3px solid #a00"
-                    'cursor': 'default',
-                    'background-color': 'rgb(218, 211, 211)',
-                    'color': '#fff'
-                }
-                ,
-                theme: true,
-                themedCSS: {
-                    width: "35%",
-                    left: "30%"
-                    // ,  background-color: 'rgb(218, 211, 211)'
-                    //  ,  border: "3px solid #a00"
-                }
-
-            });
-
-            $("#ListaDrag").block({ // para que solo bloquee el contenido y me deje scrollear, saqué el 'closest'
-                message: "", //"<h1>Being processed...</h1>",
-                css: {
-                    // border: "3px solid #a00"
-                    cursor: 'default'
-                }
-                  ,
-                theme: true,
-                themedCSS: {
-                    width: "35%",
-                    left: "30%"
-                    // ,  background-color: 'rgb(218, 211, 211)'
-                    //  ,  border: "3px solid #a00"
-                }
-            });
-            $("#ListaDrag2").block({ // para que solo bloquee el contenido y me deje scrollear, saqué el 'closest'
-                message: "", //"<h1>Being processed...</h1>",
-                css: {
-                    // border: "3px solid #a00"
-                    cursor: 'default'
-
-                }
-            });
-            //panelLayout(""
-
-
-
-        }
-
-
-
-
-        $(function () {
-
-            if ($("#Aprobo").val() > 0 || $("#UsuarioAnulacion").val() > 0) {
-                //si está aprobada, bloqueo los controles y la grilla
-                deshabilitar();
+    function deshabilitar() {
+        // $("*").attr("disabled", "disabled");
+        // es esta linea que me pone el footrow border superior negro
+        $("#formid *").not("#Lista").not(".ui-jqgrid").not("#lImprimir").not("#anular").not("#AnularFirmas").attr("disabled", "disabled");
+        // para que solo bloquee el contenido y me deje scrollear, saqué el 'closest'
+        $.blockUI.defaults.css.cursor = 'default';
+        $.blockUI.defaults.overlayCSS.cursor = 'default';
+        //http://stackoverflow.com/questions/19810312/disabling-entire-jqgrid-jquery-grid-plugin-using-jquery-blockui-plugin
+        //                $("#Lista").closest(".ui-jqgrid").block({
+        //                    message: "", //"<h1>Being processed...</h1>",
+        //                    css: { border: "3px solid #a00" }
+        //                });
+        $("#Lista").block({ // para que solo bloquee el contenido y me deje scrollear, saqué el 'closest'
+            message: "", //"<h1>Being processed...</h1>",
+            css: {
+                // border: "3px solid #a00"
+                'cursor': 'default',
+                'background-color': 'rgb(218, 211, 211)',
+                'color': '#fff'
+            }
+            ,
+            theme: true,
+            themedCSS: {
+                width: "35%",
+                left: "30%"
+                // ,  background-color: 'rgb(218, 211, 211)'
+                //  ,  border: "3px solid #a00"
             }
 
-
-            pageLayout.hide('south');
-            //pageLayout.show('south');
-
-
         });
 
-    </script>
+        $("#ListaDrag").block({ // para que solo bloquee el contenido y me deje scrollear, saqué el 'closest'
+            message: "", //"<h1>Being processed...</h1>",
+            css: {
+                // border: "3px solid #a00"
+                cursor: 'default'
+            },
+            theme: true,
+            themedCSS: {
+                width: "35%",
+                left: "30%"
+                // ,  background-color: 'rgb(218, 211, 211)'
+                //  ,  border: "3px solid #a00"
+            }
+        });
+        $("#ListaDrag2").block({ // para que solo bloquee el contenido y me deje scrollear, saqué el 'closest'
+            message: "", //"<h1>Being processed...</h1>",
+            css: {
+                // border: "3px solid #a00"
+                cursor: 'default'
+            }
+        });
+        //panelLayout(""
+    }
+
+    $(function () {
+        if ($("#Aprobo").val() > 0 || $("#UsuarioAnulacion").val() > 0) {
+            //si está aprobada, bloqueo los controles y la grilla
+            deshabilitar();
+        }
+        pageLayout.hide('south');
+        //pageLayout.show('south');
+    });
+</script>
 }

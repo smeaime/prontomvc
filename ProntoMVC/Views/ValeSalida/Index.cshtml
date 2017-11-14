@@ -2,46 +2,29 @@
 @{
     ViewBag.Title = "Vale Salida";
 }
-@*<div class="container-fluid">*@
 <br />
 @if (false)
 {    <style>
         /* jqGrid builds some additional divs over the main grid table. The outer div has the class ui-jqgrid. So if you need to remove right and left border existing over the whole grid you can use the following CSS: */
-    
         .ui-widget-content {
             border: 0px solid #aaaaaa;
         }
-
         .ui-jqgrid {
             border-right-width: 0px;
             border-left-width: 0px;
         }
-            /* If you need to remove all grid's borders you can use
-
-        .ui-jqgrid { border-width: 0px; }
-        If you want additionally remove vertical border between the cells in the grid you can use */
-
-            .ui-jqgrid tr.ui-row-ltr td {
-                border-right-color: #E4E4E4;
-            }
-
-
-            .ui-jqgrid tr.footrow-ltr td {
-                border-right-color: #E4E4E4 !important;
-            }
-
-            /*To remove horizontal border between the rows you can use */
-
-            .ui-jqgrid tr.ui-row-ltr td {
-                border-bottom-color: #E4E4E4;
-            }
-        /*To remove vertical borders between the column headers you can use */
-
+        .ui-jqgrid tr.ui-row-ltr td {
+            border-right-color: #E4E4E4;
+        }
+        .ui-jqgrid tr.footrow-ltr td {
+            border-right-color: #E4E4E4 !important;
+        }
+        .ui-jqgrid tr.ui-row-ltr td {
+            border-bottom-color: #E4E4E4;
+        }
         th.ui-th-column {
             border-right-color: #E4E4E4 !important;
         }
-        /* or alternatively (without the usage of !important) */
-
         .ui-jqgrid-labels .ui-th-column {
             border-right-color: #E4E4E4;
         }
@@ -55,62 +38,6 @@
                 <button onclick="window.location.href='@Url.Action("Edit", new { id = -1 })'" class="btn btn-primary span2 ">
                     Nuevo Vale
                 </button>
-                @*   <button onclick="  " class="btn span1">
-                        Excel
-                    </button>*@
-                <div class="span4">
-                    <div class="input-prepend input-append">
-                        @* <div class="btn-group ">
-                                <button class="btn dropdown-toggle" data-toggle="dropdown">
-                                    En todo <span class="caret"></span>
-                                </button>
-                                <div class="dropdown-menu">
-                                    Requerimientos
-                                </div>
-                                <ul class="dropdown-menu">
-                                    Número
-                                </ul>
-                            </div>*@
-                        <input id="BuscadorListado" type="text" class="" placeholder="Filtrar" style="" />
-                        @if (Roles.IsUserInRole(ViewBag.NombreUsuario, "SuperAdmin"))
-                        {
-                            <select id="campos " class="span4">
-                                <option>Número</option>
-                                @* <option>Fecha</option>*@
-                            </select>
-                            <button onclick=" jQuery('#Lista').searchGrid({}) " class="btn append ">
-                                ...
-                            </button>
-                        }
-                    </div>
-                </div>
-                <div class="span2 pull-right" style="text-align: center; display: none">
-                    a confirmar
-                    @Html.CheckBox("bAConfirmar")
-                    a liberar
-                    @Html.CheckBox("bALiberar")
-                </div>
-                @*  <input id="BuscarEnLugarDeFiltrar" type="text" class="" placeholder="Buscar" style="" />*@
-                @* <div class="btn-group  pull-right ">
-                        <button onclick="  " class="btn">
-                            <
-                        </button>
-                        <button onclick="  " class="btn ">
-                            >
-                        </button>
-                    </div>*@
-                @if (false)
-                {
-                    <div class="btn-group span2">
-                        <a class="btn  " style="color: Black" href="#"><i class="icon-print"></i>&nbsp;más</a>
-                        <button class="btn dropdown-toggle " data-toggle="dropdown">
-                            <span class="caret "></span>
-                        </button>
-                        <ul class="dropdown-menu ">
-                            <li><a class="" href="#"><i class="icon-print"></i>&nbsp;Excel</a></li>
-                        </ul>
-                    </div>
-                }
                 <div class="span1">
                     <div>
                         <input id="FechaInicial" name="FechaInicial" type="hidden" value=@Request.QueryString["fechainicial"]>
@@ -130,248 +57,81 @@
         "></table>
         <div id="ListaPager" class="scroll" style="text-align: center;">
         </div>
-        <div class="contextMenu" id="myMenu1" style="display:none">
-            <ul style="width: 200px">
-                <li id="add">
-                    <span class="ui-icon ui-icon-plus" style="float:left"></span>
-                    <span style="font-size:11px; font-family:Verdana">Add Row</span>
-                </li>
-                <li id="edit">
-                    <span class="ui-icon ui-icon-pencil" style="float:left"></span>
-                    <span style="font-size:11px; font-family:Verdana">Edit Row</span>
-                </li>
-                <li id="del">
-                    <span class="ui-icon ui-icon-trash" style="float:left"></span>
-                    <span style="font-size:11px; font-family:Verdana">Delete Row</span>
-                </li>
-            </ul>
-        </div>
     </div>
 </div>
 
 <script type="text/javascript">
     $(document).ready(function () {
-        $("#BuscadorListado").keyup(function () {
-            filtrar()
-        });
-        $("#BuscadorListado").change(function () {
-            filtrar()
-        });
-
-        function filtrar() {
-            var grid = jQuery("#Lista");
-            var postdata = grid.jqGrid('getGridParam', 'postData');
-            jQuery.extend(postdata,
-               {
-                   filters: '',
-                   searchField: 'NumeroRequerimiento',
-                   searchOper: 'eq',
-                   searchString: $("#BuscadorListado").val()
-               });
-            grid.jqGrid('setGridParam', { search: true, postData: postdata });
-            grid.trigger("reloadGrid", [{ page: 1 }]);
-            //<select><option value="NumeroRequerimiento" selected="selected">N°</option><option value="Detalle">Detalle</option><option value="NumeroObra">Obra</option><option value="Sector">Sector</option><option value="Observaciones">Observaciones</option><option value="LugarEntrega">Lugar de necesidad</option></select>
-        }
-
         var lastSelectedId;
         var inEdit;
         grid = $("#Lista");
 
-        //Para que haga wrap en las celdas
-        //$('.ui-jqgrid .ui-jqgrid-htable th div').css('white-space', 'normal');
-
         $('#Lista').jqGrid({
-            url: '@Url.Action("ValesSalidaPendientesDeSalidaMateriales", "ValeSalida")',
+            url: '@Url.Action("ValesSalida_DynamicGridData", "ValeSalida")',
             postData: {
                 'FechaInicial': function () { return $("#FechaInicial").val(); },
                 'FechaFinal': function () { return $("#FechaFinal").val(); },
-                'IdObra': function () { return $("#IdObra").val(); },
-                'bAConfirmar': function () {
-                    return $('#bAConfirmar').is(":checked");
-                },
-                'bALiberar': function () {
-                    return $('#bALiberar').is(":checked");
-                }
             },
             datatype: 'json',
             mtype: 'POST',
-            colNames: ['', 'IdDetalleValeSalida', 'IdValeSalida', 'IdArticulo', 'NumeroValeSalida.', 'FechaValeSalida.', 'ArticuloCodigo.', 'Impresa', 'Detalle', 'Obra', 'Presupuestos', 'Comparativas',
-                       'Pedidos', 'Recepciones', 'Salidas', 'Libero', 'Solicito', 'Sector', 'Usuario anulo', 'Fecha anulacion', 'Motivo anulacion', 'Fechas liberacion',
-                       'Observaciones', 'Lugar de entrega', '', '', 'Web'],
+            colNames: ['', '', 'IdValeSalida', 'Numero Vale', 'Nro.Vale Pre.', 'Fecha Vale', 'Numero Obra', 'Aprobo', 'Cump.', 'Salidas Generadas', 'Observaciones', 
+                       'Anulo', 'Fecha Anulacion', 'Motivo Anulacion', 'Dio P/Cumplido', 'Fecha Dio P/Cumplido', 'Motivo Dio P/Cumplido'],
             colModel: [
-                        { name: 'act', index: 'act', align: 'center', width: 50, sortable: false, editable: false, search: false, frozen: true }, //, formatter: 'showlink', formatoptions: { baseLinkUrl: '@Url.Action("Edit")'} },
-                        { name: 'IdRequerimiento', index: 'IdRequerimiento', align: 'left', width: 0, editable: false, hidden: true, frozen: true },
-                        { name: 'NumeroRequerimiento', index: 'NumeroRequerimiento', align: 'right', width: 80, editable: false, frozen: true, search: true, searchoptions: { sopt: ['cn', 'eq'] } },
+                        { name: 'ver', index: 'ver', hidden: false, width: 50, search: false },
+                        { name: 'Emitir', index: 'Emitir', hidden: false, width: 50, search: false },
+                        { name: 'IdValeSalida', index: 'IdValeSalida', align: 'left', width: 0, editable: false, hidden: true, frozen: true },
+                        { name: 'NumeroValeSalida', index: 'NumeroValeSalida', align: 'right', width: 80, editable: false, hidden: false, searchoptions: { sopt: ['eq'], enableClear: false } },
+                        { name: 'NumeroValePreimpreso', index: 'NumeroValePreimpreso', align: 'right', width: 80, editable: false, hidden: false, searchoptions: { sopt: ['eq'], enableClear: false } },
                         {
-                               name: 'FechaRequerimiento', index: 'FechaRequerimiento', width: 100, align: 'center',
-                               sorttype: 'date', hidden: false, editable: false, formatoptions: { newformat: 'dd/mm/yy' },
-                               datefmt: 'dd/mm/yy',
-
-                               search: true,
-                               searchrules: {
-                                   date: true
-                               },
-                               searchoptions: { // http://stackoverflow.com/questions/14632735/jqgrid-searching-dates
-                                   sopt: ['ge', 'le', 'eq'],
-                                   dataInit: function (elem) {
-                                       $(elem).datepicker({
-                                           dateFormat: 'dd/mm/yy',
-                                           changeYear: true,
-                                           changeMonth: true,
-                                           showButtonPanel: true,
-                                           onSelect: function () {
-                                               $(this).keydown();
-                                           }
-                                       });
-                                   }
-                               }
-
+                            name: 'FechaValeSalida', index: 'FechaValeSalida', width: 100, align: 'center', sorttype: 'date', hidden: false, editable: false, formatoptions: { newformat: 'dd/mm/yy' }, datefmt: 'dd/mm/yy',
+                            search: true, searchrules: { date: true }, searchoptions: { sopt: ['ge', 'le', 'eq'] }
                         },
-                        { name: 'Cumplido', index: 'Cumplido', align: 'center', width: 60, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
-                        { name: 'Recepcionado', index: 'Recepcionado', align: 'center', width: 60, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
-                        { name: 'Entregado', index: 'Entregado', align: 'center', width: 60, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
-                        { name: 'Impresa', index: 'Impresa', align: 'center', width: 60, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
-                        { name: 'Detalle', index: 'Detalle', align: 'left', width: 200, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
-                        { name: 'Obra.NumeroObra', index: 'Obra.NumeroObra', align: 'left', width: 200, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
-                        { name: 'Presupuestos', index: 'Presupuestos', align: 'left', width: 0, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
-                        { name: 'Comparativas', index: 'Comparativas', align: 'left', width: 0, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
-                        { name: 'Pedidos', index: 'Pedidos', align: 'left', width: 0, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
-                        { name: 'Recepciones', index: 'Recepciones', align: 'left', width: 0, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
-                        { name: 'Salidas', index: 'Salidas', align: 'left', width: 0, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
-                        { name: 'Libero', index: 'Libero', align: 'left', width: 0, editable: false, search: true, searchoptions: { sopt: [''] } },
-                        { name: 'Solicito', index: 'Solicito', align: 'left', width: 0, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
-                        { name: 'Sector', index: 'Sector', align: 'left', width: 0, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
-                        { name: 'Usuario_anulo', index: 'Usuario_anulo', align: 'left', width: 0, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'NumeroObra', index: 'NumeroObra', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn', 'eq'] } },
+                        { name: 'Aprobo', index: 'Aprobo', align: 'left', width: 150, editable: false, search: true, searchoptions: { sopt: ['cn', 'eq'] } },
+                        { name: 'Cumplido', index: 'Cumplido', align: 'center', width: 60, editable: false, search: true, hidden: false, searchoptions: { sopt: ['cn'] } },
+                        { name: 'Salidas', index: 'Salidas', align: 'left', width: 300, editable: false, search: true, searchoptions: { sopt: ['cn', 'eq'] } },
+                        { name: 'Observaciones', index: 'Observaciones', align: 'left', width: 400, editable: false, search: true, searchoptions: { sopt: ['cn', 'eq'] } },
+                        { name: 'Anulo', index: 'Anulo', align: 'center', width: 60, editable: false, search: true, hidden: false, searchoptions: { sopt: ['cn'] } },
                         {
-                               name: 'Fecha_anulacion', index: 'Fecha_anulacion', width: 100, align: 'center',
-                               sorttype: 'date', hidden: false, editable: false, formatoptions: { newformat: 'dd/mm/yy' },
-                               datefmt: 'dd/mm/yy',
-
-                               search: true,
-                               searchrules: {
-                                   date: true
-                               },
-                               searchoptions: { // http://stackoverflow.com/questions/14632735/jqgrid-searching-dates
-                                   sopt: ['ge', 'le', 'eq'],
-                                   dataInit: function (elem) {
-                                       $(elem).datepicker({
-                                           dateFormat: 'dd/mm/yy',
-                                           changeYear: true,
-                                           changeMonth: true,
-                                           showButtonPanel: true,
-                                           onSelect: function () {
-                                               $(this).keydown();
-                                           }
-                                       });
-                                   }
-                               }
+                            name: 'FechaAnulacion', index: 'FechaAnulacion', width: 100, align: 'center', sorttype: 'date', hidden: false, editable: false, formatoptions: { newformat: 'dd/mm/yy' }, datefmt: 'dd/mm/yy',
+                            search: true, searchrules: { date: true }, searchoptions: { sopt: ['ge', 'le', 'eq'] }
                         },
-                        { name: 'Motivo_anulacion', index: 'Motivo_anulacion', align: 'left', width: 0, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'MotivoAnulacion', index: 'MotivoAnulacion', align: 'left', width: 300, editable: false, search: true, searchoptions: { sopt: ['cn', 'eq'] } },
+                        { name: 'DioPorCumplido', index: 'DioPorCumplido', align: 'left', width: 150, editable: false, search: true, searchoptions: { sopt: ['cn', 'eq'] } },
                         {
-                               name: 'Fechas_liberacion', index: 'Fechas_liberacion', width: 100, align: 'center',
-                               sorttype: 'date', hidden: false, editable: false, formatoptions: { newformat: 'dd/mm/yy' },
-                               datefmt: 'dd/mm/yy',
-
-                               search: true,
-                               searchrules: {
-                                   date: true
-                               },
-                               searchoptions: { // http://stackoverflow.com/questions/14632735/jqgrid-searching-dates
-                                   sopt: ['ge', 'le', 'eq'],
-                                   dataInit: function (elem) {
-                                       $(elem).datepicker({
-                                           dateFormat: 'dd/mm/yy',
-                                           changeYear: true,
-                                           changeMonth: true,
-                                           showButtonPanel: true,
-                                           onSelect: function () {
-                                               $(this).keydown();
-                                           }
-                                       });
-                                   }
-                               }
-
+                            name: 'FechaDioPorCumplido', index: 'FechaDioPorCumplido', width: 100, align: 'center', sorttype: 'date', hidden: false, editable: false, formatoptions: { newformat: 'dd/mm/yy' }, datefmt: 'dd/mm/yy',
+                            search: true, searchrules: { date: true }, searchoptions: { sopt: ['ge', 'le', 'eq'] }
                         },
-                        { name: 'Observaciones', index: 'Observaciones', align: 'left', width: 0, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
-                        { name: 'LugarEntrega', index: 'LugarEntrega', align: 'left', width: 0, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
-                        { name: 'Web', index: 'Web', align: 'left', width: 0, editable: false, hidden: true, search: true, searchoptions: { sopt: ['cn'] } },
-                        { name: 'Web', index: 'Web', align: 'left', width: 0, editable: false, hidden: true, search: true, searchoptions: { sopt: ['cn'] } },
-                        { name: 'Web', index: 'Web', align: 'left', width: 0, editable: false, search: true, searchoptions: { sopt: ['cn'] } }
+                        { name: 'MotivoDioPorCumplido', index: 'MotivoDioPorCumplido', align: 'left', width: 300, editable: false, search: true, searchoptions: { sopt: ['cn', 'eq'] } }
             ],
-            //            onSelectRow: function (id) {
-            //                if (id && id !== lastSelectedId) {
-            //                    if (typeof lastSelectedId !== "undefined") {
-            //                        grid.jqGrid('restoreRow', lastSelectedId);
-            //                    }
-            //                    lastSelectedId = id;
-            //                }
-            //            },
-
-            ondblClickRow: function (idrow) {
-                window.location.href = ROOT + 'Requerimiento/Edit/' + idrow;
-                // $("#edtData").click();
-                //edicion inline
-                // http://stackoverflow.com/questions/8163106/form-editing-with-inline-editing-to-same-jqgrid
-                //                if(id && id!==lastSel){
-                //                    jQuery('#Lista').restoreRow(lastSel);
-                //                    lastSel=id;
-                //                }
-                //                jQuery('#Lista').editRow(id, true);
-                //
+            onSelectRow: function (id) {
+                if (id && id !== lastSelectedId) {
+                    if (typeof lastSelectedId !== "undefined") {
+                        grid.jqGrid('restoreRow', lastSelectedId);
+                    }
+                    lastSelectedId = id;
+                }
             },
-            //loadComplete: function() {
-            //    $("tr.jqgrow", this).contextMenu('myMenu1', {
-            //        bindings: {
-            //            'edit': function(trigger) {
-            //                // trigger is the DOM element ("tr.jqgrow") which are triggered
-            //                grid.editGridRow(trigger.id, editSettings);
-            //            },
-            //            'add': function(/*trigger*/) {
-            //                grid.editGridRow("new", addSettings);
-            //            },
-            //            'del': function(trigger) {
-            //                if ($('#del').hasClass('ui-state-disabled') === false) {
-            //                    // disabled item can do be choosed
-            //                    grid.delGridRow(trigger.id, delSettings);
-            //                }
-            //            }
-            //        },
-            //        onContextMenu: function(event/*, menu*/) {
-            //            var rowId = $(event.target).closest("tr.jqgrow").attr("id");
-            //            //grid.setSelection(rowId);
-            //            // disable menu for rows with even rowids
-            //            $('#del').attr("disabled",Number(rowId)%2 === 0);
-            //            if (Number(rowId)%2 === 0) {
-            //                $('#del').attr("disabled","disabled").addClass('ui-state-disabled');
-            //            } else {
-            //                $('#del').removeAttr("disabled").removeClass('ui-state-disabled');
-            //            }
-            //            return true;
-            //        }
-            //    });
-            //},            pager: $('#ListaPager'),
-            rowNum: 15,
+            pager: $('#ListaPager'),
+            rowNum: 20,
             rowList: [10, 20, 50],
-            sortname: 'NumeroRequerimiento', // 'FechaRecibo,NumeroRecibo',
+            sortname: 'NumeroValeSalida',
             sortorder: 'desc',
             viewrecords: true,
             emptyrecords: 'No hay registros para mostrar', //,
-            ///////////////////////////////
             width: 'auto', // 'auto',
             autowidth: true,
             shrinkToFit: false,
-            //////////////////////////////
             height: $(window).height() - ALTOLISTADO, // '100%'
             altRows: false,
             footerrow: false, //true,
-            userDataOnFooter: true
-            // ,caption: '<b>FACTURAS</b>'
-            , gridview: true
-            , multiboxonly: true
-            , multipleSearch: true
+            userDataOnFooter: true,
+            caption: '<b>VALES DE SALIDA</b>',
+            gridview: true,
+            multiboxonly: true,
+            multipleSearch: true
             //imgpath: '/content/cupertino/images',
             //loadonce: true,
-            //, caption: '<b>REQUERIMIENTOS</b>'
         });
         jQuery("#Lista").jqGrid('bindKeys');
 
@@ -394,77 +154,7 @@
             RefrescaAnchoJqgrids();
         });
 
-        //$("#Requerimientos").click();
-
         pageLayout.hide('east');
         pageLayout.hide('south');
     });
 </script>
-@*
-    @{
-        var grid = new WebGrid(source: Model,
-            defaultSort: "NumeroRequerimiento",
-            rowsPerPage: 10,
-            canPage: true,
-            canSort: true,
-            fieldNamePrefix: "ItemRM_",
-            selectionFieldName: "selectedRow");
-    }
-
-    <div id="grid">
-        @grid.GetHtml(
-            tableStyle: "webgrid",
-            headerStyle: "webgrid-header",
-            footerStyle: "webgrid-footer",
-            alternatingRowStyle: "webgrid-alternating-row",
-            selectedRowStyle: "webgrid-selected-row",
-            rowStyle: "webgrid-row-style",
-            mode: WebGridPagerModes.All,
-            firstText: "<< Primera",
-            previousText: "< Anterior",
-            nextText: "Siguiente >",
-            lastText: "Última >>",
-                    columns: new[] {
-                                            grid.Column(columnName: "NumeroRequerimiento", header: "Nro.", style: "text-align-left"),
-                                            grid.Column(columnName: "FechaRequerimiento", header: "Fecha", style: "text-align-left", format: p => p.FechaRequerimiento.ToShortDateString()),
-                                            //grid.Column(columnName: "",  format: p=>p.Obra.NumeroObra, header: "Obra", style: "text-align-left"),
-                                            //grid.Column(columnName: "Empleados.Nombre", header: "Solicito", style: "text-align-left"),
-                                            //grid.Column(columnName: "Empleados1.Nombre", header: "Aprobo", style: "text-align-left"),
-                                            //grid.Column(columnName: "Sectores.Descripcion", header: "Sector", style: "text-align-left"),
-                                            grid.Column(columnName: "Detalle", header: "Detalle", style: "text-align-left"),
-                                            grid.Column("", header: "Acciones",
-                                                format: @<text>@Html.ActionLink("Editar", "Edit", new { id = item.IdRequerimiento })|
-                                                               @Html.ActionLink("Eliminar", "Delete", new { id = item.IdRequerimiento })</text>
-                                            )
-                                            }
-                                )
-    </div>
-
-    <table>
-        <tr>
-            <th>IdRequerimiento</th>
-            <th>Numero RM</th>
-            <th>Fecha</th>
-            <th>Obra</th>
-            <th>Sector</th>
-            <th></th>
-        </tr>
-
-    @{int i = 1;}
-    @foreach (var item in Model)
-    {
-        <tr class="@(i++ % 2 == 0 ? "highlighted" : "")" >
-            <td>@Html.DisplayFor(modelItem => item.IdRequerimiento)</td>
-            <td>@Html.DisplayFor(modelItem => item.NumeroRequerimiento)</td>
-            <td>@Html.DisplayFor(modelItem => item.FechaRequerimiento)</td>
-            <td>@Html.DisplayFor(modelItem => item.Obra.NumeroObra)</td>
-            <td>@Html.DisplayFor(modelItem => item.Sectores.Descripcion)</td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.IdRequerimiento }) |
-                @Html.ActionLink("Details", "Details", new { id = item.IdRequerimiento }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.IdRequerimiento })
-            </td>
-        </tr>
-    }
-    </table>
-*@
