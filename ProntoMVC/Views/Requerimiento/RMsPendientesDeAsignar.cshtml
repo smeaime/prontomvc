@@ -94,6 +94,11 @@
                     }
                     if (ListaReq1.length > 0) { ListaReq1 = ListaReq1.substring(1, ListaReq1.length - 1); }
 
+<<<<<<< HEAD
+=======
+
+                    //$(this).load('@Url.Action("PartialPage1", "Requerimiento")');
+>>>>>>> ac089a287aa9d8d474602fd1f3fb11dacf9cd039
                     $.get('@Url.Action("PartialPage1", "Requerimiento")', { idDetalleRequerimientos: ListaReq1 }, function (partialView) {
                         try {
                             $("#frmVale").html(partialView);

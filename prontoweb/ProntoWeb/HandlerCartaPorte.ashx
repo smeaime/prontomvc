@@ -207,9 +207,18 @@ public class JQGridHandler : IHttpHandler
         string puntovent = request["puntovent"] == "null" ? "0" : request["puntovent"] ?? "0";
         puntovent = (puntovent == "undefined") ? "0" : puntovent;
 
+
+
+
         string destino = request["destino"];
         string usuario = Membership.GetUser().UserName;
 
+
+        string estado = request["estado"] == "null" ? "0" : request["estado"] ?? "0";
+        estado = (estado == "undefined") ? "0" : estado;
+        estado = (estado == "") ? "0" : estado;
+
+    
         if (sortColumnName == null) return;
 
 
@@ -220,11 +229,37 @@ public class JQGridHandler : IHttpHandler
         //                            SQLdinamico.BuscaIdWilliamsDestinoPreciso(destino, SC),
         //                            SC, usuario, scbdlmaster);
 
+
+        //enumCDPestado estadofiltro;
+        //switch (cmbEstado.Text  ')
+        //        Case "TodasMenosLasRechazadas"
+        //            estadofiltro = enumCDPestado.TodasMenosLasRechazadas
+        //        Case "Incompletas"
+        //            estadofiltro = enumCDPestado.Incompletas
+        //        Case "Posición"
+        //            estadofiltro = enumCDPestado.Posicion
+        //        Case "Descargas"
+        //            estadofiltro = enumCDPestado.DescargasMasFacturadas
+        //        Case "Facturadas"
+        //            estadofiltro = enumCDPestado.Facturadas
+        //        Case "NoFacturadas"
+        //            estadofiltro = enumCDPestado.NoFacturadas
+        //        Case "Rechazadas"
+        //            estadofiltro = enumCDPestado.Rechazadas
+        //        Case "EnNotaCredito"
+        //            estadofiltro = enumCDPestado.FacturadaPeroEnNotaCredito
+        //        Case Else
+        //            Return
+        //    End Select
+
+
+
+
         string output = a.CartasPorte_DynamicGridData_Orden3(
                         sortColumnName, sortOrderBy, Convert.ToInt32(pageIndex),
                         Convert.ToInt32(numberOfRows), isSearch == "true", filters, FechaInicial, FechaFinal, Convert.ToInt32(puntovent),
                         SQLdinamico.BuscaIdWilliamsDestinoPreciso(destino, SC),
-                        SC, usuario, scbdlmaster);
+                        SC, usuario, scbdlmaster,Convert.ToInt32(estado)  );
 
 
 

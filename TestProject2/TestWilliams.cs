@@ -865,6 +865,447 @@ namespace ProntoMVC.Tests
 
 
 
+
+        [TestMethod]
+        public void envioNotificacionesconMail_42871()
+        {
+
+            // el envio de mails (+ push de chrome)
+
+            // EncolarNotificaciones(ClientesQueParticipanEnCartas(ListadoDeCartasModificadas(UltimaFechaDeEnvioNotificaciones)))
+
+
+            var scEF = ProntoMVC.Data.Models.Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC));
+            BDLMasterEntities dbmaster = new BDLMasterEntities(Auxiliares.FormatearConexParaEntityFrameworkBDLMASTER_2(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(scbdlmasterappconfig)));
+            DemoProntoEntities db = new DemoProntoEntities(scEF);
+            DateTime UltimaFechaDeEnvioNotificaciones = new DateTime(2016, 8, 31);
+
+            var q = (
+                    from x in db.CartasDePortes
+                    from c1 in db.Clientes.Where(c => c.IdCliente == x.Vendedor)
+                    from c2 in db.Clientes.Where(c => c.IdCliente == x.Entregador)
+                    where (x.FechaModificacion > UltimaFechaDeEnvioNotificaciones) // pero y si el cliente ya las vio?
+                    select new string[] { c1.Email, c2.Email }
+                    )
+                    .SelectMany(x => x)
+                    .Distinct();
+
+
+
+
+            // solo estos clientes me interesan...  -cuantos usuarios externos hay en la bdlmaster? creo q mas de mil. ademas, recordá que los usuarios especiales tipo BLD los tendrías que filtrar de otro modo...
+            var usuariosclientes = from p in dbmaster.UserDatosExtendidos
+                                   join u in dbmaster.aspnet_Users on p.UserId equals u.UserId
+                                   join m in dbmaster.aspnet_Membership on p.UserId equals m.UserId
+                                   select new { p.RazonSocial, m.Email };
+
+
+
+
+
+            string rejunte2 = string.Join(";", q.Take(100).ToArray());
+
+
+            var listado = db.Clientes.Select(x => x.CorreosElectronicos_1).Take(100);
+            string rejunte = string.Join(";", listado.ToArray());
+
+            if (false)
+            {
+                Pronto.ERP.Bll.EntidadManager.MandaEmail_Nuevo(ConfigurationManager.AppSettings["ErrorMail"],
+                                   "asuntoasuntoasunto 2",
+                                "cuerpocuerpocuerpocuerpocuerpocuerpocuerpocuerpocuerpocuerpocuerpocuerpo cuerpocuerpocuerpocuerpo",
+                                ConfigurationManager.AppSettings["SmtpUser"],
+                                ConfigurationManager.AppSettings["SmtpServer"],
+                                ConfigurationManager.AppSettings["SmtpUser"],
+                                ConfigurationManager.AppSettings["SmtpPass"],
+                                  "",
+                               Convert.ToInt16(ConfigurationManager.AppSettings["SmtpPort"]), 1
+                               , rejunte
+
+                               );
+            }
+
+
+        }
+
+
+
+
+
+
+
+
+
+
+        [TestMethod]
+        public void ServicioWebServiceDescargas_FYO_y_BLD_46746()
+        {
+
+            ////Trust all certificates
+            //System.Net.ServicePointManager.ServerCertificateValidationCallback = delegate(object sender, X509Certificate certificate, X509Chain chain, SslPolicyErrors sslPolicyErrors) { return true; };
+
+            //var cerealnet = new WS_CartasDePorteClient();
+
+            string usuario = "Mariano"; //"fyo";
+            string clave = "pirulo!"; // "76075";
+            string cuit = "30703605105";
+
+            // var respEntrega = cerealnet.obtenerDescargas(usuario, clave, cuit, "2016-10-01", "2016-10-25");
+            var respEntrega = CartaDePorteManager.BajarListadoDeCartaPorte_CerealNet_DLL_v3(usuario, clave, cuit,
+                                            new DateTime(2016, 1, 1),
+                                            new DateTime(2017, 1, 1), CartaDePorteManager.enumCDPestado.DescargasDeHoyMasTodasLasPosicionesEnRangoFecha,
+                                            SC, DirApp, scbdlmasterappconfig);
+
+
+            foreach (var desc in respEntrega.descargas)
+            {
+                Console.WriteLine(string.Format("CP {0}", desc.cartaporte));
+
+                if (desc.listaAnalisis != null && desc.listaAnalisis.Length > 0)
+                {
+                    foreach (CerealNet.WSCartasDePorte.analisis anal in desc.listaAnalisis)
+                    {
+                        Console.WriteLine(string.Format("\tRubro: {0} - %Analisis: {1} - %Merma: {2} - KgsMerma: {3}", anal.rubro.Trim(), anal.porcentajeAnalisis, anal.porcentajeMerma, anal.kilosMermas));
+                    }
+                }
+            }
+            //Console.ReadKey();
+        }
+
+
+
+
+
+
+        [TestMethod]
+        public void no_facturar_las_q_tienen_clientes_bloqueados_por_cobranzas_43121()
+        {
+
+
+
+            //'verificar que no haya bloqueados por cobranzas
+            //'If True Then
+            //'    'http://bdlconsultores.ddns.net/Consultas/Admin/VerConsultas1.php?recordid=14168
+            //'    'Precisan agregar una marca en el formulario de clientes para poder bloquear la carga de estos
+            //'    'en las cartas de porte debido a un conflicto de cobranzas.
+            //'    'Este tilde deberán verlo solo algunos usuarios(activaremos a los de cobranzas).
+            //'    'Luego, cuando quieran usarlo en una carta de porte el sistema tiene que dar un mensaje de advertencia diciendo
+            //'    'que el usuario no se puede utilizar y que tiene que ponerse en contacto con el sector de cobranzas.
+            //'    'La carta de porte no se puede grabar si tiene un cliente en esta condición.
+
+
+            //'    Dim sClientesCobranzas As String
+            //'    If UsaClientesQueEstanBloqueadosPorCobranzas(SC, myCartaDePorte, sClientesCobranzas) Then
+            //'        MS &= "Cliente bloqueado. Ponerse en contacto con el sector de cobranzas (" & sClientesCobranzas & ") "
+            //'        MS &= vbCrLf   'return false
+            //'    End If
+            //'End If
+
+
+            // edu solo tuvo q modificar el form de cliente, y con eso a andy le bastó para que la factura hecha por Pronto hiciese la percepcion, pero
+            // por web no le percibe.
+
+
+
+
+
+
+
+            long idClienteAfacturarle = 13648; // futuros y opciones
+            int optFacturarA = 4; //para fyo, stella usa "por corredor" (o sea, opcion 3.   1. titular/ 2 destinatario /   3.corredor  / 4 a tercero / 5 automatico)   
+            bool SeEstaSeparandoPorCorredor = false;
+            string agruparArticulosPor = "Destino";
+
+
+            string txtCorredor = "";
+            int idClienteObservaciones = -1;
+            int PuntoVenta = 1;
+
+
+
+
+            string txtBuscar = "";
+            string txtTarifaGastoAdministrativo = "";
+
+            bool chkPagaCorredor = false;
+            //   numeroOrdenCompra As String, ByRef PrimeraIdFacturaGenerada As Object, 
+
+
+
+
+
+            DataTable dtRenglonesAgregados = new DataTable();
+            //dtRenglonesAgregados.Rows.Add(dtRenglonesAgregados.NewRow());
+
+            var listEmbarques = new System.Collections.Generic.List<System.Data.DataRow>();
+            //listEmbarques.Add(dtRenglonesAgregados.NewRow());
+
+
+
+            var lote = new System.Collections.Generic.List<Pronto.ERP.BO.CartaDePorte>();
+            string ms = "";
+
+
+
+            var scEF = Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC));
+            DemoProntoEntities db = new DemoProntoEntities(scEF);
+
+
+
+
+
+
+            //////////////////////////////////////
+            //////////////////////////////////////
+            //////////////////////////////////////
+            //////////////////////////////////////
+            // empresa (para que sea agente de percepcion)
+            db.Parametros.First().PercepcionIIBB = "SI";
+
+            // punto de venta para que perciba ingresos brutos
+            //Dim numeropuntoVenta = PuntoVentaWilliams.NumeroPuntoVentaSegunSucursalWilliams(sucursalWilliams, SC)
+            //Dim IdPuntoVenta As Integer = EntidadManager.TablaSelectId(SC, _
+            //                                "PuntosVenta", _
+            //                                "PuntoVenta=" & numeropuntoVenta & " AND Letra='" & _
+            //                                mLetra & "' AND IdTipoComprobante=" & EntidadManager.IdTipoComprobante.Factura)
+            //Dim IdObra As Integer = PuntoVentaWilliams.ObraSegunSucursalWilliams(sucursalWilliams, SC)
+            var pv = db.PuntosVentas.Where(x => x.PuntoVenta == 10).FirstOrDefault();
+            pv.AgentePercepcionIIBB = "SI";
+
+
+            // cliente
+            var cliente = db.Clientes.Find(idClienteAfacturarle);
+            // no poner. la tabla IBCondiciones ya esta relacionada a un IdProvincia. //  cliente.IdProvincia = 3; //capital
+            cliente.IBCondicion = 5; //Edu, a parte de Convenio Multilateral, Jurisdiccion Local y No Alcanzado, hay que agregar No Inscripto.    usar 2 o 3    "Exento"  "Inscripto Convenio Multilateral "    "Inscripto Jurisdicción Local "  "No Alcanzado"
+            cliente.IdIBCondicionPorDefecto = 10;  //en williams,  6 es  "Santa Fe Convenio Multilateral 0.7%" <-- las condiciones estan relacionadas a una provincia
+
+
+            //ibcondicion
+            //en la tabla IBCondiciones, q diferencia hay entre Alicuota, AlicuotaPercepcion y AlicuotaPercepcionConvenio?
+            // -la primera es de retencion.
+            var ibcondicion = db.IBCondiciones.Find(5);
+            ibcondicion.AlicuotaPercepcion = 7;
+            ibcondicion.AlicuotaPercepcionConvenio = 8;
+            ibcondicion.ImporteTopeMinimoPercepcion = 10;
+
+
+            db.SaveChanges();
+            //////////////////////////////////////
+            //////////////////////////////////////
+            //////////////////////////////////////
+            //////////////////////////////////////
+
+
+
+
+
+
+            List<int> lista_int = new List<int>();
+
+
+
+            for (int n = 1372900; n < 1372905; n++)
+            {
+                var cp = (from i in db.CartasDePortes where i.IdCartaDePorte == n select i).Single();
+                cp.TarifaFacturada = Convert.ToDecimal(2.77);
+                cp.IdFacturaImputada = 0;
+                db.SaveChanges();
+
+                var c = CartaDePorteManager.GetItem(SC, n);
+                //CartaDePorteManager.Save(SC, c, 2, "", false, ref ms); // ahora la grabo a traves del EF
+
+                lote.Add(c);
+                lista_int.Add(n);
+            }
+
+
+            IEnumerable<LogicaFacturacion.grup> imputaciones = null;
+
+
+
+
+            //var f = db.Facturas.Find(idFactura);
+
+            //Assert.AreEqual(true, f.ImporteTotal<100);
+            //Assert.AreEqual(0, f.RetencionIBrutos1);
+
+            object primerId = 0, ultimoId = 0;
+
+            // uso dos tickets: uno el de la grilla. el otro, de qué?
+            object sesionId = 0;
+            string sesionIdposta = (new Random()).Next().ToString();
+
+
+            var gv = new System.Web.UI.WebControls.GridView();
+
+            string errLog = "";
+            object filas = "", slinks = "";
+
+
+
+            //no importa las fechas, lo importante son las tildes de la grilla
+            var desde = new DateTime(1900, 1, 31);
+            var hasta = new DateTime(2100, 1, 31);
+
+
+            System.Web.SessionState.HttpSessionState Session = null; // new System.Web.SessionState.HttpSessionState();
+
+
+
+
+            //marcar las cartas en wGrillaPersistencia
+            //lote.Select(x => x.IdCartaDePorte)
+            LogicaFacturacion.GridCheckboxPersistenciaBulk(SC, sesionIdposta, lista_int);
+
+
+
+            //DataTable tablaEditadaDeFacturasParaGenerar = dtDatasourcePaso2() // es casi un wrapper. esto lo puedo reemplazar con la llamada mas directa a GetDatatableAsignacionAutomatica
+
+
+            string sLista = string.Join(",", lista_int);
+
+
+            object pag = 1;
+            int cuantosrenglones = 9999999;
+
+
+
+            string txtFacturarATerceros = EntidadManager.NombreCliente(SC, idClienteAfacturarle);
+
+
+            DataTable tablaEditadaDeFacturasParaGenerar = LogicaFacturacion.GetDatatableAsignacionAutomatica(
+                                                     SC, ref pag, ref sesionId,
+                                                   cuantosrenglones, PuntoVenta,
+                                                    desde,
+                                                    hasta,
+                                                     sLista, "", optFacturarA, txtFacturarATerceros
+                                                     , SC, "", "",
+                                                    "", "", "", "",
+                                                    "", "", txtBuscar, "",
+                                                     "", "",
+                                                     0, 0, "", ref errLog,
+                                                     "", agruparArticulosPor,
+                                                     ref filas, ref slinks, sesionIdposta);
+
+
+
+            // codigo de CambiarLasTarifasQueEstenEnCero()
+
+            foreach (DataRow r in tablaEditadaDeFacturasParaGenerar.Rows)
+            {
+                if ((decimal)(r["TarifaFacturada"]) == 0)
+                {
+                    try
+                    {
+                        long Cli = SQLdinamico.BuscaIdClientePreciso(r["FacturarselaA"].NullSafeToString(), SC);
+
+                        Pronto.ERP.BO.CartaDePorte ocdp = CartaDePorteManager.GetItem(SC, (int)r["idCartaDePorte"]);
+
+                        ListaPreciosManager.SavePrecioPorCliente(SC, Cli, ocdp.IdArticulo, 1.55);
+                    }
+                    catch (Exception ex)
+                    {
+                        ErrHandler2.WriteError(ex);
+
+                    }
+                }
+            }
+
+
+
+
+
+
+            LogicaFacturacion.ValidaCobranzas(ref tablaEditadaDeFacturasParaGenerar);
+
+        }
+
+
+
+
+
+
+
+
+
+        [TestMethod]
+        public void SincroTerraVerde_46499()
+        {
+
+            string sErrores = "", sTitulo = "";
+            LinqCartasPorteDataContext db = null;
+
+            // el _CONST_MAXROWS sale del app.config
+
+            int registrosf = 0;
+
+            int idcli = CartaDePorteManager.BuscarVendedorPorCUIT("30 -71544287-2", SC, "");
+
+
+            var output = SincronismosWilliamsManager.GenerarSincro("Terra Verde", ref sErrores, SC, "dominio", ref sTitulo
+                                , CartaDePorteManager.enumCDPestado.DescargasMasFacturadas,
+                     "", -1, idcli,
+                -1, -1,
+                -1, -1, -1, -1,
+                 CartaDePorteManager.FiltroANDOR.FiltroOR, "Ambas",
+                new DateTime(2017, 1, 13), new DateTime(2017, 1, 16),
+                -1, "Ambas", false, "", "", -1, ref registrosf, 40);
+
+
+
+
+
+            //            Estamos desarrollando el sincro de Terra Verde con la gente de BIT.
+            //Te paso errores que nos pidieron modificar, el sincro que le pasamos como ejemplo fue el de BTG(Engelhart).
+
+            //Te lo reenvie por correo tambien:
+
+
+
+            //Hola Tomas, necesito que hagamos la siguiente corrección en la generación del archivo TXT, dado a que no nos están ingresando correctamente los movimientos.
+            //El problema se nos da en los siguientes puntos:
+
+            //            CAMPO CALIDAD: Posición en el txt 940 - 943
+            //o Si es de Camara = CC
+            //o Si es condición calidad grado = G1 – G2 o G3
+            //o Si es Fuera de Standart = FE
+
+
+            //CAMPO VENDEDOR: Posición en el txt 263 - 276
+            //El CUIT del vendedor, depende de la posición en la cual este el CUIT de TERRA VERDE.
+            //SI TERRA VERDE esta en remitente Comercial:
+            //§ Debe enviar el Titular, si hay intermediario, debe enviar el intermediario.
+            //SI TERRA VERDE esta como Intermediario:
+            //§ Se debe enviar como vendedor el titular.
+            //CAMPO COMPRADOR: Posición en el txt 131 - 144
+            //o SI TERRA VERDE esta en remitente Comercial:
+            //§ Se debe enviar como comprador el destinatario.
+            //o SI TERRA VERDE Intermediario:
+            //§ Se debe enviar como comprador el Remitente Comercial.
+
+            //O sea que para el siguiente caso:
+            //            Vendedor = “CUIT DE ELLIFF”
+            //Comprador = “CUIT CARGILL”
+
+
+
+
+
+
+
+
+            //File.Copy(output, @"C:\Users\Administrador\Desktop\"   Path.GetFileName(output), true);
+            System.Diagnostics.Process.Start(output);
+        }
+
+
+
+
+
+
+
+
+
         [TestMethod]
         public void percepcion_en_clientes_46551_2_directamente_llamando_a_creafacturacompronto() 
         {
@@ -1176,6 +1617,7 @@ namespace ProntoMVC.Tests
                                                      ref filas, ref slinks, sesionIdposta);
 
 
+
             // codigo de CambiarLasTarifasQueEstenEnCero()
 
             foreach (DataRow r in tablaEditadaDeFacturasParaGenerar.Rows)
@@ -1362,115 +1804,6 @@ namespace ProntoMVC.Tests
 
 
 
-
-
-
-
-
-
-        [TestMethod]
-        public void SincroTerraVerde_46499()
-        {
-
-            string sErrores = "", sTitulo = "";
-            LinqCartasPorteDataContext db = null;
-
-            // el _CONST_MAXROWS sale del app.config
-
-            int registrosf = 0;
-
-            int idcli = CartaDePorteManager.BuscarVendedorPorCUIT("30 -71544287-2", SC, "");
-
-
-            var output = SincronismosWilliamsManager.GenerarSincro("Terra Verde", ref sErrores, SC, "dominio", ref sTitulo
-                                , CartaDePorteManager.enumCDPestado.DescargasMasFacturadas,
-                     "", -1, idcli,
-                -1, -1,
-                -1, -1, -1, -1,
-                 CartaDePorteManager.FiltroANDOR.FiltroOR, "Ambas",
-                new DateTime(2017, 1, 13), new DateTime(2017, 1, 16),
-                -1, "Ambas", false, "", "", -1, ref registrosf, 40);
-
-
-
-
-
-            //            Estamos desarrollando el sincro de Terra Verde con la gente de BIT.
-            //Te paso errores que nos pidieron modificar, el sincro que le pasamos como ejemplo fue el de BTG(Engelhart).
-
-            //Te lo reenvie por correo tambien:
-
-
-
-            //Hola Tomas, necesito que hagamos la siguiente corrección en la generación del archivo TXT, dado a que no nos están ingresando correctamente los movimientos.
-            //El problema se nos da en los siguientes puntos:
-
-            //            CAMPO CALIDAD: Posición en el txt 940 - 943
-            //o Si es de Camara = CC
-            //o Si es condición calidad grado = G1 – G2 o G3
-            //o Si es Fuera de Standart = FE
-
-
-            //CAMPO VENDEDOR: Posición en el txt 263 - 276
-            //El CUIT del vendedor, depende de la posición en la cual este el CUIT de TERRA VERDE.
-            //SI TERRA VERDE esta en remitente Comercial:
-            //§ Debe enviar el Titular, si hay intermediario, debe enviar el intermediario.
-            //SI TERRA VERDE esta como Intermediario:
-            //§ Se debe enviar como vendedor el titular.
-            //CAMPO COMPRADOR: Posición en el txt 131 - 144
-            //o SI TERRA VERDE esta en remitente Comercial:
-            //§ Se debe enviar como comprador el destinatario.
-            //o SI TERRA VERDE Intermediario:
-            //§ Se debe enviar como comprador el Remitente Comercial.
-
-            //O sea que para el siguiente caso:
-            //            Vendedor = “CUIT DE ELLIFF”
-            //Comprador = “CUIT CARGILL”
-
-
-
-
-
-
-
-
-            //File.Copy(output, @"C:\Users\Administrador\Desktop\"   Path.GetFileName(output), true);
-            System.Diagnostics.Process.Start(output);
-        }
-
-
-
-
-
-        [TestMethod]
-        public void no_facturar_las_q_tienen_clientes_bloqueados_por_cobranzas_43121()
-        {
-
-
-
-            //'verificar que no haya bloqueados por cobranzas
-            //'If True Then
-            //'    'http://bdlconsultores.ddns.net/Consultas/Admin/VerConsultas1.php?recordid=14168
-            //'    'Precisan agregar una marca en el formulario de clientes para poder bloquear la carga de estos
-            //'    'en las cartas de porte debido a un conflicto de cobranzas.
-            //'    'Este tilde deberán verlo solo algunos usuarios(activaremos a los de cobranzas).
-            //'    'Luego, cuando quieran usarlo en una carta de porte el sistema tiene que dar un mensaje de advertencia diciendo
-            //'    'que el usuario no se puede utilizar y que tiene que ponerse en contacto con el sector de cobranzas.
-            //'    'La carta de porte no se puede grabar si tiene un cliente en esta condición.
-
-
-            //'    Dim sClientesCobranzas As String
-            //'    If UsaClientesQueEstanBloqueadosPorCobranzas(SC, myCartaDePorte, sClientesCobranzas) Then
-            //'        MS &= "Cliente bloqueado. Ponerse en contacto con el sector de cobranzas (" & sClientesCobranzas & ") "
-            //'        MS &= vbCrLf   'return false
-            //'    End If
-            //'End If
-
-
-
-            // Validar2doPaso()
-
-        }
 
 
 
@@ -1908,70 +2241,6 @@ Error in: https://prontoweb.williamsentregas.com.ar/ProntoWeb/CDPFacturacion.asp
 
         }
 
-
-
-
-        [TestMethod]
-        public void envioNotificacionesconMail_42871()
-        {
-
-            // el envio de mails (+ push de chrome)
-
-            // EncolarNotificaciones(ClientesQueParticipanEnCartas(ListadoDeCartasModificadas(UltimaFechaDeEnvioNotificaciones)))
-
-
-            var scEF = ProntoMVC.Data.Models.Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC));
-            BDLMasterEntities dbmaster = new BDLMasterEntities(Auxiliares.FormatearConexParaEntityFrameworkBDLMASTER_2(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(scbdlmasterappconfig)));
-            DemoProntoEntities db = new DemoProntoEntities(scEF);
-            DateTime UltimaFechaDeEnvioNotificaciones = new DateTime(2016, 8, 31);
-
-            var q = (
-                    from x in db.CartasDePortes
-                    from c1 in db.Clientes.Where(c => c.IdCliente == x.Vendedor)
-                    from c2 in db.Clientes.Where(c => c.IdCliente == x.Entregador)
-                    where (x.FechaModificacion > UltimaFechaDeEnvioNotificaciones)
-                    select new string[] { c1.Email, c2.Email }
-                    )
-                    .SelectMany(x => x)
-                    .Distinct();
-
-
-
-
-            // solo estos clientes me interesan...  -cuantos usuarios externos hay en la bdlmaster? creo q mas de mil. ademas, recordá que los usuarios especiales tipo BLD los tendrías que filtrar de otro modo...
-            var usuariosclientes = from p in dbmaster.UserDatosExtendidos
-                                   join u in dbmaster.aspnet_Users on p.UserId equals u.UserId
-                                   join m in dbmaster.aspnet_Membership on p.UserId equals m.UserId
-                                   select new { p.RazonSocial, m.Email };
-
-
-
-
-
-            string rejunte2 = string.Join(";", q.Take(100).ToArray());
-
-
-            var listado = db.Clientes.Select(x => x.CorreosElectronicos_1).Take(100);
-            string rejunte = string.Join(";", listado.ToArray());
-
-            if (false)
-            {
-                Pronto.ERP.Bll.EntidadManager.MandaEmail_Nuevo(ConfigurationManager.AppSettings["ErrorMail"],
-                                   "asuntoasuntoasunto 2",
-                                "cuerpocuerpocuerpocuerpocuerpocuerpocuerpocuerpocuerpocuerpocuerpocuerpo cuerpocuerpocuerpocuerpo",
-                                ConfigurationManager.AppSettings["SmtpUser"],
-                                ConfigurationManager.AppSettings["SmtpServer"],
-                                ConfigurationManager.AppSettings["SmtpUser"],
-                                ConfigurationManager.AppSettings["SmtpPass"],
-                                  "",
-                               Convert.ToInt16(ConfigurationManager.AppSettings["SmtpPort"]), 1
-                               , rejunte
-
-                               );
-            }
-
-
-        }
 
 
 

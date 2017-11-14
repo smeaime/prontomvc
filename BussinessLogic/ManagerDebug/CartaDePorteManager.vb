@@ -11032,7 +11032,7 @@ usuario As String, ConexBDLmaster As String,
 
 
             If myCartaDePorte.Titular > 0 AndAlso (From i In db.DetalleClientesContactos
-                                                   Where i.IdCliente = myCartaDePorte.Entregador _
+                                                   Where i.IdCliente = myCartaDePorte.Titular _
                                                    And i.Acciones = "DeshabilitadoPorCobranzas" _
                                                    And i.Contacto = "NO"
                                                 ).Any Then
@@ -15872,6 +15872,8 @@ usuario As String, ConexBDLmaster As String,
         ' ir a http://codebeautify.org/base64-to-image-converter  para probar la respuesta
         ' ir a http://codebeautify.org/base64-to-image-converter  para probar la respuesta
 
+
+
         Dim idcliente As Integer = 0
 
         Try
@@ -15881,7 +15883,9 @@ usuario As String, ConexBDLmaster As String,
             If Not Debugger.IsAttached Then
                 If Not Membership.ValidateUser(usuario, password) Then
                     ErrHandler2.WriteError("No logra autenticarse " & usuario)
-                    Return Nothing
+
+                    Throw New Exception("No logra autenticarse") '        avisar q error hubo (de contraseña)
+
                 End If
 
 
@@ -16294,7 +16298,8 @@ usuario As String, ConexBDLmaster As String,
 
         Catch ex As Exception
             ErrHandler2.WriteError(ex)
-            Return Nothing
+            Throw '        avisar q error hubo (de contraseña)
+
         End Try
 
         'usaria la descarga que usa bld en el informe?
@@ -17316,23 +17321,29 @@ usuario As String, ConexBDLmaster As String,
     Public Shared Function GrabarSituaciones_DLL(listado As Long(), idsituacion As Integer, sObservacionesSituacion As String, SC As String) As String
 
         Dim msunion As String = ""
+        Try
 
-        For Each idcarta In listado
+            For Each idcarta In listado
 
 
-            Dim cp = CartaDePorteManager.GetItem(SC, idcarta)
+                Dim cp = CartaDePorteManager.GetItem(SC, idcarta)
 
-            cp.Situacion = idsituacion
-            cp.ObservacionesSituacion = sObservacionesSituacion
-            cp.FechaAutorizacion = Now
+                cp.Situacion = idsituacion
+                cp.ObservacionesSituacion = sObservacionesSituacion
+                cp.FechaAutorizacion = Now
 
-            Dim ms As String = ""
-            CartaDePorteManager.Save(SC, cp, 1, "", , ms)
+                Dim ms As String = ""
+                CartaDePorteManager.Save(SC, cp, 1, "", , ms)
 
-            msunion += ms
-        Next
+                msunion += ms
+            Next
 
-        Return msunion
+            Return msunion
+
+        Catch ex As Exception
+
+            ErrHandler2.WriteError(ex)
+        End Try
 
     End Function
 

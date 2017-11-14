@@ -85,7 +85,7 @@ Partial Class Admin_EditarUsuario
             End Try
 
             If IsNothing(a) Then
-                txtRazonSocial.Text = Usuario.Nombre
+                txtRazonSocial.Text = "" 'Usuario.Nombre supongo que le asignaba el nombre si el nombre era parecido al de un cliente, pero mejor lo dejo vacio
             Else
                 txtRazonSocial.Text = a
             End If
