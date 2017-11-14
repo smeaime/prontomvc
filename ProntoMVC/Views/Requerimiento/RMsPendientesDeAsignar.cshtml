@@ -3,8 +3,7 @@
         ViewBag.Title = "Requerimientos (pendientes)";
     }
 
-        <script src="@Url.Content("~/Scripts/ScriptValeSalida.js?1518")" type="text/javascript"></script>    
-
+    <script src="@Url.Content("~/Scripts/ScriptValeSalida.js?1518")" type="text/javascript"></script>    
 
     <div style=" padding-left: 15px;  padding-right: 15px ;">
         <div>
@@ -89,36 +88,22 @@
                         }
                     }
 
-
-
                     var ListaReq1 = "";
                     for (i = 0, n = ListaReq.length; i < n; i++) {
                         ListaReq1 = ListaReq1 + ListaReq[i] + ",";
                     }
                     if (ListaReq1.length > 0) { ListaReq1 = ListaReq1.substring(1, ListaReq1.length - 1); }
 
-                    //$(this).load('@Url.Action("PartialPage1", "Requerimiento")');
                     $.get('@Url.Action("PartialPage1", "Requerimiento")', { idDetalleRequerimientos: ListaReq1 }, function (partialView) {
-
                         try {
                             $("#frmVale").html(partialView);
                         }
                         catch (err) {
-
                         }
-
-
                         inicializar();
-                   
-
-
-
-
-
 
                         RefrescaAnchoJqgrids();
                         deshabilitarPanelesDerecho();
-
 
                         jQuery("#ListaReq").jqGrid().setGridParam({
                             url: '@Url.Action("DetValesSalidaSinFormatoSegunListaDeItemsDeRequerimientos", "ValeSalida")',
@@ -126,34 +111,19 @@
                         }).trigger("reloadGrid")
 
                     });
-                    //$(this).load("PartialPage1", { idDetalleRequerimientos: ListaReq }, function () {
-                    //    $("#frmVale").html(partialView);
-                    //});
-                    @*$.ajax({
-                        url: '@Url.Action("PartialPage1", "Requerimiento")',
-                        type: 'GET',
-                        data: { idDetalleRequerimientos: ListaReq1 },
-                        success: function (partialView) {
-                            $("#frmVale").html(partialView);
-                            $('#frmVale').show();
-                        }
-                    });*@
-
                 },
-                //buttons: {
+                buttons: {
                     //"Add User": function () {
                     //    //addUserInfo();
                     //    $(this).dialog("close");
                     //},
-                    //Cancel: function () {
-                    //    $(this).dialog("close");
-                    //}
-                //}
+                    "Cancelar": function () {
+                        $(this).dialog("close");
+                    }
+                }
             });
             return false;
         });
-
-
 
         $("#Vale2").click(function () {
             var $grid = $("#ListaReq");

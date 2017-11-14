@@ -163,11 +163,7 @@ namespace ProntoMVC.TestsMVC
             GetMockedControllerGenerico(c);
 
 
-<<<<<<< HEAD
            // c.EnviarEmail(10, 10, "SI");
-=======
-            //c.EnviarEmail(10, 10, "SI");
->>>>>>> e1a898ba71131ceccb9461f47e603028801156e6
         }
 
 
