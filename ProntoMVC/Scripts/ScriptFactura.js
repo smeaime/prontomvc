@@ -514,18 +514,15 @@
             //AgregarItemVacio(jQuery("#Lista"));
             AgregarRenglonesEnBlanco({ "IdDetalleFactura": "0", "IdArticulo": "0", "PrecioUnitario": "0", "Articulo": "" },"#Lista");
         },
-
         pager: $('#ListaPager1'),
         rowNum: 100,
         rowList: [10, 20, 50, 100],
         sortname: 'IdDetalleFactura',
         sortorder: 'asc',
         viewrecords: true,
-
         width: 'auto', // 'auto',
         autowidth: true,
         shrinkToFit: false,
-
         height: '150px', // 'auto',
         rownumbers: true,
         multiselect: true,
