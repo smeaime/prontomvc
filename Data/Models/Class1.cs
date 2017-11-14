@@ -119,6 +119,12 @@ public static class ModelDefinedFunctions
     {
         throw new NotSupportedException("Direct calls are not supported.");
     }
+
+    [System.Data.Entity.Core.Objects.DataClasses.EdmFunction("DemoProntoModel.Store", "ValesSalida_Salidas")]
+    public static string ValesSalida_Salidas(int IdValeSalida)
+    {
+        throw new NotSupportedException("Direct calls are not supported.");
+    }
 }
 
 
