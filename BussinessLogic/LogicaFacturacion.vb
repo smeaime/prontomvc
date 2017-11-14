@@ -1731,6 +1731,77 @@ Public Class LogicaFacturacion
 
 
 
+    Public Shared Function ValidaCobranzas(ByRef tablaEditadaDeFacturasParaGenerar As DataTable, ByRef sError As String) As Boolean
+
+
+        '//////////////////////////////////////
+        '//////////////////////////////////////
+        '//////////////////////////////////////
+        ' acá ya llegan las cartas tildadas filtradas desde la funcion Validar2doPaso
+        '-sí, pero cómo reviso las tildes de los buques???? Y ESTAS chamuyando: acá hago la primera consulta 
+        '               sobre db.wTempCartasPorteFacturacionAutomaticas, y no sobre la tablaEditadaDeFacturasParaGenerar!!!
+        '//////////////////////////////////////
+        '//////////////////////////////////////
+        '//////////////////////////////////////
+
+
+        '//'    'http://bdlconsultores.ddns.net/Consultas/Admin/VerConsultas1.php?recordid=14168
+        '    //'    'Precisan agregar una marca en el formulario de clientes para poder bloquear la carga de estos
+        '    //'    'en las cartas de porte debido a un conflicto de cobranzas.
+        '    //'    'Este tilde deberán verlo solo algunos usuarios(activaremos a los de cobranzas).
+        '    //'    'Luego, cuando quieran usarlo en una carta de porte el sistema tiene que dar un mensaje de advertencia diciendo
+        '    //'    'que el usuario no se puede utilizar y que tiene que ponerse en contacto con el sector de cobranzas.
+        '    //'    'La carta de porte no se puede grabar si tiene un cliente en esta condición.
+
+
+        '    //'    Dim sClientesCobranzas As String
+        '    //'    If UsaClientesQueEstanBloqueadosPorCobranzas(SC, myCartaDePorte, sClientesCobranzas) Then
+        '    //'        MS &= "Cliente bloqueado. Ponerse en contacto con el sector de cobranzas (" & sClientesCobranzas & ") "
+        '    //'        MS &= vbCrLf   'return false
+        '    //'    End If
+
+
+        Return True
+
+
+
+
+        Dim clientesfacturados As New List(Of Integer)
+
+
+        For i As Integer = 0 To tablaEditadaDeFacturasParaGenerar.Rows.Count - 1
+            clientesfacturados = tablaEditadaDeFacturasParaGenerar.Rows(i).Item("TarifaFacturada")
+
+
+            'verificariamos el titular o aquel al que se le factura?
+
+
+
+            'If UsaClientesQueEstanBloqueadosPorCobranzas(SC, myCartaDePorte, sClientesCobranzas) Then
+
+        Next
+
+
+
+
+
+        'If myCartaDePorte.Titular > 0 AndAlso (From i In db.DetalleClientesContactos
+        '                                       Where i.IdCliente = myCartaDePorte.Titular
+        '                                           And i.Acciones = "DeshabilitadoPorCobranzas" _
+        '                                           And i.Contacto = "NO"
+        '                                        ).Any Then
+        '    MS += " El Titular esta deshabilitado por cobranzas "
+        'End If
+
+
+
+
+
+        Return True
+
+    End Function
+
+
     Shared Function ValidaQueHayaClienteCorredorEquivalente() As Boolean
 
         'adasd()

@@ -23,12 +23,19 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
     <%--/////////////////////////////////////////////////////////////--%>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+
+
     <%--/////////////////////////////////////////////////////////////--%>
     <%--/////////////////////////////////////////////////////////////--%>
     <%--////////////    jqgrid     //////////////////////////////////--%>
     <script src="//cdn.jsdelivr.net/jqgrid/4.5.4/i18n/grid.locale-es.js"></script>
     <link href="//cdn.jsdelivr.net/jqgrid/4.5.2/css/ui.jqgrid.css" rel="stylesheet">
     <script src="//cdn.jsdelivr.net/jqgrid/4.5.2/jquery.jqGrid.js"></script>
+
+
+
     <%--/////////////////////////////////////////////////////////////--%>
     <%--/////////////////////////////////////////////////////////////--%>
 
@@ -52,7 +59,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
             left: 0;
             height: 100%;
             width: 100%;
-            background: rgba( 255, 255, 255, .8 ) url('~/Content/images/fhhrx.gif') 50% 50% no-repeat;
+            background: rgba( 255, 255, 255, .8 ) url('/imagenes/fhhrx.gif') 50% 50% no-repeat;
         }
 
         /* When the body has the loading class, we turn
@@ -90,21 +97,38 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                         <td class="EncabezadoCell" style="width: 160px; height: 18px;">Estado</td>
                         <td class="" style="width: 400px; height: 18px;">
                             <asp:DropDownList ID="cmbEstado" runat="server" Style="text-align: right; margin-left: 0px;"
-                                CssClass="CssCombo" ToolTip="Estado de la carta de porte" Font-Size="Small" Height="22px" Width="350px" Enabled="false">
+                                CssClass="CssCombo" ToolTip="Estado de la carta de porte" Font-Size="Small" Height="22px" Width="350px" Enabled="true">
                                 <%--dejo el combito deshablitado porque las funciones no tienen todavia el parametro de "estado", estan harcodeadas en "11" --%>
 
-                                <asp:ListItem Text="DESCARGAS de hoy + POSICIONES filtradas" Value="DescargasDeHoyMasTodasLasPosicionesEnRangoFecha"
+                                <asp:ListItem Text="DESCARGAS de hoy + POSICIONES filtradas" Value="11"
                                     Selected="True" />
 
-                                <asp:ListItem Text="Todas (menos las rechazadas)" Value="TodasMenosLasRechazadas" />
-                                <asp:ListItem Text="Incompletas" Value="Incompletas" />
-                                <asp:ListItem Text="Posición" Value="Posición" />
-                                <asp:ListItem Text="Descargas" Value="Descargas" />
-                                <asp:ListItem Text="Facturadas" Value="Facturadas" />
-                                <asp:ListItem Text="No facturadas" Value="NoFacturadas" />
-                                <asp:ListItem Text="Rechazadas" Value="Rechazadas" />
-                                <asp:ListItem Text="sin liberar en Nota de crédito" Value="EnNotaCredito" />
+                                <asp:ListItem Text="Todas (menos las rechazadas)" Value="1" />
+                                <asp:ListItem Text="Incompletas" Value="2" />
+                                <asp:ListItem Text="Posición" Value="3" />
+                                <asp:ListItem Text="Descargas" Value="4" />
+                                <asp:ListItem Text="Facturadas" Value="6" />
+                                <asp:ListItem Text="No facturadas" Value="7" />
+                                <asp:ListItem Text="Rechazadas" Value="8" />
+                                <asp:ListItem Text="sin liberar en Nota de crédito" Value="9" />
                             </asp:DropDownList>
+
+
+<%--                            Enum enumCDPestado
+0        Todas
+1        TodasMenosLasRechazadas
+2        Incompletas
+3        Posicion
+4        DescargasMasFacturadas
+5        DescargasSinFacturar
+6        Facturadas
+7        NoFacturadas
+8        Rechazadas
+9        FacturadaPeroEnNotaCredito
+0        DescargasDeHoyMasTodasLasPosiciones
+1        DescargasDeHoyMasTodasLasPosicionesEnRangoFecha
+    End Enum--%>
+
 
                         </td>
                         <td class="EncabezadoCell" style="width: 160px; height: 18px;">Período descarga</td>
@@ -181,6 +205,13 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
 
         <br />
+
+        <button type="button" id="btnMostrarMenu" value="" class="" style="height: 50px; width: 70px; margin-left: 4px">
+            <i class="fa fa-bars fa-2x"></i>
+        </button>
+
+
+
         <asp:Button ID="btnExportarGrilla" Text="EXCEL" runat="server" Visible="false" CssClass="btn btn-primary"
             Width="150" Height="40" />
 
@@ -196,7 +227,9 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
 
         <input type="button" id="btnLog" value="Log" class="btn btn-primary" />
-        <input type="button" id="btnMostrarMenu" value="->" class="btn btn-primary" />
+
+        <input type="button" id="btnsituacion" value="Cambiar situación" class="btn btn-primary" />
+
 
         <br />
         <div id="Salida2"></div>
@@ -212,8 +245,149 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
         </div>
 
 
+        <div class="contextMenu" id="myMenu1" style="display: none">
+            <ul style="width: 400px">
+                <li id="add">@*<span class="ui-icon ui-icon-plus" style="float: left"></span>*@
+                <span id="Vale" style="font-size: 11px; font-family: Verdana">Generar Vale salida (stock)</span>
+                </li>
+                <li id="edit">@*<span class="ui-icon ui-icon-pencil" style="float: left"></span>*@
+                <span id="ParaCompras" style="font-size: 11px; font-family: Verdana">Liberar para Compras</span>
+                </li>
+                <li id="del">@*<span class="ui-icon ui-icon-trash" style="float: left"></span>*@
+                <span id="DarPorCumplido" style="font-size: 11px; font-family: Verdana">Dar por cumplido</span>
+                </li>
+            </ul>
+        </div>
 
 
+
+        <div id="TipoSituacion" title="Cambiar a">
+
+            <%-- <input type="button" id="Autorizado" value="Autorizado" />
+                <input type="button" id="Demorado" value="Demorado" />--%>
+
+
+            <asp:DropDownList ID="SituacionNueva" runat="server" Style="text-align: right; margin-left: 0px;"
+                Font-Size="14" Height="40" Width="150" Enabled="true" Visible="true">
+
+                <asp:ListItem Text="Autorizado" Value="0" />
+                <asp:ListItem Text="Demorado" Value="1" />
+                <asp:ListItem Text="Posición" Value="2" />
+                <asp:ListItem Text="Descargado" Value="3" />
+                <asp:ListItem Text="A Descargar" Value="4" />
+                <asp:ListItem Text="Rechazado" Value="5" />
+                <asp:ListItem Text="Desviado" Value="6" />
+                <asp:ListItem Text="CP p/cambiar" Value="7" />
+                <asp:ListItem Text="Sin Cupo" Value="8" />
+                <asp:ListItem Text="Calado" Value="9" />
+
+            </asp:DropDownList>
+
+
+
+        </div>
+
+
+        <script>
+
+            var rowIdContextMenu;
+
+
+            function cambiarSituaciones(ids, user, pass, callback) {
+                //juntar los ids y mandarlos?
+
+
+                $("#loading").show();
+
+
+                $.ajax({
+                    type: 'POST',
+                    contentType: 'application/json; charset=utf-8',
+                    url: "WebServiceCartas.asmx/GrabarSituaciones",
+
+                    data: JSON.stringify({
+                        idscartas: ids,
+                        idsituacion: $("#ctl00_ContentPlaceHolder1_SituacionNueva").val(),
+                        sObservacionesSituacion: ''
+                    }),
+                }).done(function () {
+                    //if (typeof callback == "function") callback();
+                    $("#loading").hide();
+                    //alert("Vale creado")
+                    $('#Lista').trigger('reloadGrid');
+                }).fail(function () {
+                    $("#loading").hide();
+                    alert("No se pudo cambiar la situación")
+                });
+            }
+
+
+
+            $("#TipoSituacion").hide();
+
+
+            $("#btnsituacion").click(function () {
+
+                //alert('aaa')
+
+                var $grid = $("#Lista");
+                var lista = $grid.jqGrid("getGridParam", "selarrrow");
+                if ((lista == null) || (lista.length == 0)) {
+                    // http://stackoverflow.com/questions/11762757/how-to-retrieve-the-cell-information-for-mouseover-event-in-jqgrid
+
+                    //como no hay renglones tildados, tomo el renglon sobre el que está el cursor
+                    if (!(rowIdContextMenu === undefined)) lista = [rowIdContextMenu];
+                    // lista = $grid.jqGrid('getGridParam', 'selrow')
+
+                    if ((lista == null) || (lista.length == 0)) {
+                        alert("No hay cartas elegidas " + rowIdContextMenu);
+                        return;
+                    }
+
+                }
+
+
+
+
+
+                $("#TipoSituacion").dialog({
+                    dialogClass: "no-close",
+                    buttons: [
+                        {
+                            text: "Aceptar",
+                            click: function () {
+                                $(this).dialog("close");
+
+                                cambiarSituaciones(lista, "administrador", "",
+                                    function () {
+                                        $("#loading").hide();
+                                        $('#Lista').trigger('reloadGrid');
+                                    })
+
+                            }
+                        },
+                        {
+                            text: "Cancelar",
+                            click: function () {
+                                $(this).dialog("close");
+                            }
+                        }
+
+                    ]
+                });
+
+
+
+
+
+
+
+            })
+
+
+
+
+        </script>
 
         <br />
 
@@ -1136,14 +1310,42 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
         });
 
 
+
+
+        $('#ctl00_ContentPlaceHolder1_txtFechaDesde').keypress(function (e) {
+            var key = e.which;
+            if (key == 13)  // the enter key code
+            {
+                $('#Lista').trigger("reloadGrid")
+                return false;
+            }
+        });
+
         $('#ctl00_ContentPlaceHolder1_txtFechaDesde').change(function () {
             $('#Lista').trigger("reloadGrid")
         });
 
 
+
+
+
+        $('#ctl00_ContentPlaceHolder1_txtFechaHasta').keypress(function (e) {
+            var key = e.which;
+            if (key == 13)  // the enter key code
+            {
+                $('#Lista').trigger("reloadGrid")
+                return false;
+            }
+        });
+
         $('#ctl00_ContentPlaceHolder1_txtFechaHasta').change(function () {
             $('#Lista').trigger("reloadGrid")
         });
+
+
+
+
+
 
         $('#ctl00_ContentPlaceHolder1_cmbPeriodo').change(function () {
             $('#Lista').trigger("reloadGrid")
@@ -1181,8 +1383,9 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                     'FechaInicial': function () { return $("#ctl00_ContentPlaceHolder1_txtFechaDesde").val(); },
                     'FechaFinal': function () { return $("#ctl00_ContentPlaceHolder1_txtFechaHasta").val(); },
                     'puntovent': function () { return $("#ctl00_ContentPlaceHolder1_cmbPuntoVenta").val(); },
-                    'destino': function () { return $("#ctl00_ContentPlaceHolder1_txtDestino").val(); }
-                },
+                    'destino': function () { return $("#ctl00_ContentPlaceHolder1_txtDestino").val(); },
+                    'estado': function () { return $("#ctl00_ContentPlaceHolder1_cmbEstado").val(); }
+        },
                 datatype: 'json',
                 mtype: 'POST',
 
@@ -1191,13 +1394,27 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
                 // CP	TURNO	SITUACION	MERC	TITULAR_CP	INTERMEDIARIO	RTE CIAL	CORREDOR	DESTINATARIO	DESTINO	ENTREGADOR	PROC	KILOS	OBSERVACION
 
+                colNames: ['[Grabar]', 'Id', 'Nro CP', 'Situación', 'infohtml'
 
-                colNames: ['', 'Id', 'Nro CP', 'Turno', 'Situacion',
-                            'Producto', 'Titular', 'Intermediario', 'R Comercial', 'Corredor',
-                            'Destinatario', 'Destino', 'IdDestino', 'Entregador', 'Procedencia',
-                            'Kilos Procedencia', 'Obs Situacion', 'Arribo', 'Descarga', 'Punto Venta',
-                            'Fecha actualizacion', 'Patente', 'Kilos Descargados'
+
+
+                       , 'Obs Situacion',
+                       'Producto', 'Titular', 'Intermediario', 'R Comercial', 'Corredor',
+                       'Destinatario', 'Destino', 'IdDestino', 'Patente',
+                       'Kilos Procedencia', 'Arribo', 'Descarga', 'Punto Venta'
+
                 ],
+
+
+
+                //colNames: ['[Grabar]', 'Id', 'Nro CP', 'Turno',
+
+                //        'Situacion',
+                //            'Producto', 'Titular', 'Intermediario', 'R Comercial', 'Corredor',
+                //            'Destinatario', 'Destino', 'IdDestino', 'Entregador', 'Procedencia',
+                //            'Kilos Procedencia', 'Obs Situacion', 'Arribo', 'Descarga', 'Punto Venta',
+                //            'Fecha actualizacion', 'Patente', 'Kilos Descargados'
+                //],
 
                 colModel: [
 {
@@ -1228,7 +1445,11 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
     }
 },
 
-{ name: 'Turno', index: ' Turno', align: 'left', width: 20, editable: false, hidden: false, edittype: 'text', searchoptions: { sopt: ['bw', 'cn', 'eq'] }, },
+// { name: 'Turno', index: ' Turno', align: 'left', width: 20, editable: false, hidden: false, edittype: 'text', searchoptions: { sopt: ['bw', 'cn', 'eq'] }, },
+
+
+
+
 
 {
     name: 'Situacion', index: 'Situacion', align: 'left', width: 120, hidden: false, editable: true, edittype: 'select', sortable: false,
@@ -1246,6 +1467,17 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
 
 },
+
+
+
+                            { name: 'infohtml', index: 'infohtml', align: 'left', width: 100, editable: true, hidden: true, sortable: false },
+
+
+
+                            { name: 'ObservacionesSituacion', index: 'ObservacionesSituacion', align: 'left', width: 100, editable: true, hidden: false, sortable: false },
+
+
+
 
 
 {
@@ -1796,289 +2028,97 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 { name: 'Destino', index: 'Destino', align: 'left', width: 100, hidden: true, editable: false, edittype: 'text', sortable: false },
 
 
-{
-    name: 'EntregadorDesc', index: 'EntregadorDesc', align: 'left', width: 50, hidden: false, editable: false, edittype: 'text', sortable: false
 
 
-, searchoptions: {
-    //    sopt:['eq'], 
-    dataInit: function (elem) {
-        var NoResultsLabel = "No se encontraron resultados";
 
 
-        $(elem).autocomplete({
 
-            select: function (event, ui) {
-                $(elem).trigger('change');
-            },
+                            { name: 'Patente', index: 'Patente', align: 'left', width: 100, hidden: false, editable: false, edittype: 'text', sortable: false },
 
 
-            source: function (request, response) {
-                $.ajax({
-                    type: "POST",
-                    url: "WebServiceClientes.asmx/GetClientes",
-                    dataType: "json",
-                    contentType: "application/json; charset=utf-8",
 
-                    data: JSON.stringify({
-                        term: request.term
-                        //, idpuntoventa: function () { return $("#ctl00_ContentPlaceHolder1_txtFechaHasta").val(); }
-                    }),
+                            { name: 'NetoPto', index: 'NetoPto', align: 'left', width: 60, hidden: false, editable: false, edittype: 'text', sortable: false },
 
 
-                    success: function (data2) {
-                        var data = JSON.parse(data2.d) // por qué tengo que usar parse?
+                            //{ name: 'NetoProc', index: 'NetoProc', align: 'left', width: 60, hidden: false, editable: false, edittype: 'text', sortable: false }
 
-                        //if (data.length == 1 || data.length > 1) { // qué pasa si encuentra más de uno?????
-                        //    var ui = data[0];
 
-                        //    if (ui.id == "") {
-                        //        alert("No existe el artículo"); // se está bancando que no sea identica la descripcion
-                        //        $("#Descripcion").val("");
-                        //        return;
-                        //    }
-                        //    $("#IdWilliamsDestino").val(ui.id);
+                            {
+                                name: 'FechaArribo', index: 'FechaArribo', width: 100, sortable: true, align: 'right', editable: false, sortable: false,
+                                editoptions: {
+                                    size: 10,
+                                    maxlengh: 10,
+                                    dataInit: function (element) {
+                                        $(element).datepicker({
+                                            dateFormat: 'dd/mm/yy',
+                                            constrainInput: false,
+                                            showOn: 'button',
+                                            buttonText: '...'
+                                        });
+                                    }
+                                },
+                                formatoptions: { newformat: "dd/mm/yy" }, datefmt: 'dd/mm/yy'
+                                //, formatter: 'date'
+                                , sorttype: 'date'
 
-                        //    UltimoIdArticulo = ui.id;
-                        //}
-                        //else {
-                        //    alert("No existe el artículo"); // se está bancando que no sea identica la descripcion
-                        //}
 
-                        response($.map(data, function (item) {
-                            return {
-                                label: item.value,
-                                value: item.value //item.id
-                                , id: item.id
-                            }
-                        }));
+                                , searchoptions: {
+                                    sopt: ['eq', 'ne', 'lt', 'le', 'gt', 'ge'],
+                                    dataInit: function (elem) {
+                                        $(elem).datepicker({
+                                            dateFormat: 'dd/mm/yy',
+                                            showButtonPanel: true
+                                        })
+                                    }
+                                }
+                            },
 
-                    }
 
 
+                            {
+                                name: 'FechaDescarga', index: 'FechaDescarga', width: 100, sortable: true, align: 'right', editable: false, sortable: false,
+                                editoptions: {
+                                    size: 10,
+                                    maxlengh: 10,
+                                    dataInit: function (element) {
+                                        $(element).datepicker({
+                                            dateFormat: 'dd/mm/yy',
+                                            constrainInput: false,
+                                            showOn: 'button',
+                                            buttonText: '...'
+                                        });
+                                    }
+                                },
+                                formatoptions: { newformat: "dd/mm/yy" }, datefmt: 'dd/mm/yy'
+                                //, formatter: 'date'
+                                , sorttype: 'date'
 
-                })
 
+                                , searchoptions: {
+                                    sopt: ['eq', 'ne', 'lt', 'le', 'gt', 'ge'],
+                                    dataInit: function (elem) {
+                                        $(elem).datepicker({
+                                            dateFormat: 'dd/mm/yy',
+                                            showButtonPanel: true
+                                        })
+                                    }
+                                }
+                            },
 
-            }
 
 
-        });
 
+                            { name: 'PuntoVenta', index: 'PuntoVenta', align: 'left', width: 50, hidden: false, editable: false, edittype: 'text', sortable: false },
 
 
 
 
 
-    }
-}
 
-},
 
-{
-    name: 'ProcedenciaDesc', index: 'ProcedenciaDesc', align: 'left', width: 100, hidden: false, editable: false, edittype: 'text', sortable: false
-
-
-, searchoptions: {
-    //    sopt:['eq'], 
-    dataInit: function (elem) {
-        var NoResultsLabel = "No se encontraron resultados";
-
-
-        $(elem).autocomplete({
-
-            select: function (event, ui) {
-                $(elem).val(ui.item.value);
-                $(elem).trigger('change');
-            },
-
-            source: function (request, response) {
-                $.ajax({
-                    type: "POST",
-                    url: "WebServiceClientes.asmx/GetLocalidades",
-                    dataType: "json",
-                    contentType: "application/json; charset=utf-8",
-
-                    data: JSON.stringify({
-                        term: request.term
-                        //, idpuntoventa: function () { return $("#ctl00_ContentPlaceHolder1_txtFechaHasta").val(); }
-                    }),
-
-
-                    success: function (data2) {
-                        var data = JSON.parse(data2.d) // por qué tengo que usar parse?
-
-                        //if (data.length == 1 || data.length > 1) { // qué pasa si encuentra más de uno?????
-                        //    var ui = data[0];
-
-                        //    if (ui.id == "") {
-                        //        alert("No existe el artículo"); // se está bancando que no sea identica la descripcion
-                        //        $("#Descripcion").val("");
-                        //        return;
-                        //    }
-                        //    $("#IdWilliamsDestino").val(ui.id);
-
-                        //    UltimoIdArticulo = ui.id;
-                        //}
-                        //else {
-                        //    alert("No existe el artículo"); // se está bancando que no sea identica la descripcion
-                        //}
-
-
-
-
-                        response($.map(data, function (item) {
-                            return {
-                                label: item.value,
-                                value: item.value //item.id
-                                , id: item.id
-                            }
-                        }));
-
-                    }
-
-
-
-                })
-
-
-            }
-
-
-        });
-
-
-
-
-
-
-    }
-}
-},
-
-{ name: 'NetoPto', index: 'NetoPto', align: 'left', width: 60, hidden: false, editable: false, edittype: 'text', sortable: false },
-
-{ name: 'ObservacionesSituacion', index: 'ObservacionesSituacion', align: 'left', width: 100, editable: true, hidden: false, sortable: false },
-
-{
-    name: 'FechaArribo', index: 'FechaArribo', width: 100, sortable: true, align: 'right', editable: false, sortable: false,
-    editoptions: {
-        size: 10,
-        maxlengh: 10,
-        dataInit: function (element) {
-            $(element).datepicker({
-                dateFormat: 'dd/mm/yy',
-                constrainInput: false,
-                showOn: 'button',
-                buttonText: '...'
-            });
-        }
-    },
-    formatoptions: { newformat: "dd/mm/yy" }, datefmt: 'dd/mm/yy'
-    //, formatter: 'date'
-, sorttype: 'date'
-
-
-, searchoptions: {
-    sopt: ['eq', 'ne', 'lt', 'le', 'gt', 'ge'],
-    dataInit: function (elem) {
-        $(elem).datepicker({
-            dateFormat: 'dd/mm/yy',
-            showButtonPanel: true
-        })
-    }
-}
-},
-
-
-
-{
-    name: 'FechaDescarga', index: 'FechaDescarga', width: 100, sortable: true, align: 'right', editable: false, sortable: false,
-    editoptions: {
-        size: 10,
-        maxlengh: 10,
-        dataInit: function (element) {
-            $(element).datepicker({
-                dateFormat: 'dd/mm/yy',
-                constrainInput: false,
-                showOn: 'button',
-                buttonText: '...'
-            });
-        }
-    },
-    formatoptions: { newformat: "dd/mm/yy" }, datefmt: 'dd/mm/yy'
-    //, formatter: 'date'
-    , sorttype: 'date'
-
-
-    , searchoptions: {
-        sopt: ['eq', 'ne', 'lt', 'le', 'gt', 'ge'],
-        dataInit: function (elem) {
-            $(elem).datepicker({
-                dateFormat: 'dd/mm/yy',
-                showButtonPanel: true
-            })
-        }
-    }
-},
-
-
-
-
-{ name: 'PuntoVenta', index: 'PuntoVenta', align: 'left', width: 50, hidden: false, editable: false, edittype: 'text', sortable: false },
-
-
-
-{
-    name: 'FechaActualizacionAutomatica', index: 'FechaActualizacionAutomatica', width: 150, sortable: true, align: 'right', editable: false, sortable: false,
-    editoptions: {
-        size: 10,
-        maxlengh: 10,
-        dataInit: function (element) {
-            $(element).datepicker({
-                dateFormat: 'dd/mm/yy',
-                constrainInput: false,
-                showOn: 'button',
-                buttonText: '...'
-            });
-        }
-    },
-    formatoptions: { newformat: "dd/mm/yy" }, datefmt: 'dd/mm/yy'
-    //, formatter: 'date'
-, sorttype: 'date'
-
-
-, searchoptions: {
-    sopt: ['eq', 'ne', 'lt', 'le', 'gt', 'ge'],
-    dataInit: function (elem) {
-        $(elem).datepicker({
-            dateFormat: 'dd/mm/yy',
-            showButtonPanel: true
-        })
-    }
-}
-},
-
-
-{ name: 'Patente', index: 'Patente', align: 'left', width: 100, hidden: false, editable: false, edittype: 'text', sortable: false },
-
-{ name: 'NetoProc', index: 'NetoProc', align: 'left', width: 60, hidden: false, editable: false, edittype: 'text', sortable: false }
 
 
                 ],
-
-                gridComplete: function () {
-                    //    var ids = jQuery("#Lista").jqGrid('getDataIDs');
-                    //    for (var i = 0; i < ids.length; i++) {
-                    //        var cl = ids[i];
-                    //        var se = "<input style='height:22px;width:20px;' type='button' value='G' onclick=\"GrabarFila('" + cl + "'); \"  />";
-                    //        jQuery("#Lista").jqGrid('setRowData', ids[i], { act: se });
-                    //    }
-                    //jQuery("#Lista").jqGrid('addRowData', Id, data, "last");
-                    //AgregarItemVacio(grid)
-
-
-                },
 
 
 
@@ -2087,6 +2127,49 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
                     RefrescarFondoRenglon(this);
 
+
+                    //no se por qué no me está andando en el RmsPendientesDeAsignar.cshtml
+                    /*
+                      $("tr.jqgrow", this).contextMenu('myMenu1', {
+                        bindings: {
+                            'edit': function (trigger) {
+                                // trigger is the DOM element ("tr.jqgrow") which are triggered
+                                //   grid.editGridRow(trigger.id, editSettings);
+                            },
+                            'del': function (trigger) {
+                                if ($('#del').hasClass('ui-state-disabled') === false) {
+                                    // disabled item can do be choosed
+                                    //      grid.delGridRow(trigger.id, delSettings);
+                                }
+                            }
+                        },
+                        onContextMenu: function (event) {
+                            rowIdContextMenu = $(event.target).closest("tr.jqgrow").attr("id");
+                            //grid.setSelection(rowId);
+                            // disable menu for rows with even rowids
+                            //$('#del').attr("disabled", Number(rowId) % 2 === 0);
+                            //if (Number(rowId) % 2 === 0) {
+                            //    $('#del').attr("disabled", "disabled").addClass('ui-state-disabled');
+                            //} else {
+                            //    $('#del').removeAttr("disabled").removeClass('ui-state-disabled');
+                            //}
+                            return true;
+                        },
+                        //http://stackoverflow.com/questions/8451982/custom-values-to-context-menu-items-in-jqgrid
+                        menuStyle: {
+                            backgroundColor: '#fcfdfd',
+                            border: '1px solid #a6c9e2',
+                            maxWidth: '600px', // to be sure
+                            width: '100%' // to have good width of the menu
+                        },
+                        itemHoverStyle: {
+                            border: '1px solid #79b7e7',
+                            color: '#1d5987',
+                            backgroundColor: '#d0e5f5'
+                        }
+                    });
+
+                    */
 
 
                 },
@@ -2108,23 +2191,100 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                     var se = "<input style='height:22px;width:55px;' type='button' value='Grabar' onclick=\"GrabarFila('" + id + "');\"  />";
                     jQuery("#Lista").jqGrid('setRowData', id, { act: se });
                 },
-                //beforeSelectRow: function (rowid, e) {
-                //var $this = $(this),
-                //    $td = $(e.target).closest('td'),
-                //    $tr = $td.closest('tr'),
-                //    iRow = $tr[0].rowIndex,
-                //    iCol = $.jgrid.getCellIndex($td);
 
-                //if (typeof lastSelectediRow !== "undefined" && typeof lastSelectediCol !== "undefined" &&
-                //        (iRow !== lastSelectediRow || iCol !== lastSelectediCol)) {
-                //    $this.jqGrid('setGridParam', {cellEdit: true});
-                //    $this.jqGrid('restoreCell', lastSelectediRow, lastSelectediCol, true);
-                //    $this.jqGrid('setGridParam', {cellEdit: false});
-                //    $(this.rows[lastSelectediRow].cells[lastSelectediCol])
-                //        .removeClass("ui-state-highlight");
-                //}
-                //return true;
-                //},
+
+
+                subGridRowExpanded: function (subgrid_id, row_id) {
+                    //var html = "<span>Some HTML text which corresponds the row with id=" +
+                    //    row_id + "</span><br/>";
+
+                    //var html = '<ul data-dtr-index="0" class="dtr-details"><li data-dtr-index="4" data-dt-row="0" data-dt-column="4"><span class="dtr-title"><a href="">Titular</a></span> <span class="dtr-data"><span>Martignone Adolfo Y Cia  S C A </span></span></li><li data-dtr-index="5" data-dt-row="0" data-dt-column="5"><span class="dtr-title">Intermed.</span> <span class="dtr-data"><span></span></span></li><li data-dtr-index="6" data-dt-row="0" data-dt-column="6"><span class="dtr-title">Remitente Comercial</span> <span class="dtr-data"><span>Granos Olavarria S A </span></span></li><li data-dtr-index="7" data-dt-row="0" data-dt-column="7"><span class="dtr-title"><a href="">Corredor</a></span> <span class="dtr-data"><span>Futuros Y Opciones Com S A </span></span></li><li data-dtr-index="8" data-dt-row="0" data-dt-column="8"><span class="dtr-title">Esp.</span> <span class="dtr-data"><span>Soja Sustentable Usa</span></span></li><li data-dtr-index="9" data-dt-row="0" data-dt-column="9"><span class="dtr-title"><a href="">Destino</a><img title="Orden:Asc" src="/WebResource.axd?d=olQ67zyJIM4n9M_oCjYGRrTv0D-PJFdyCfA8P30v3DAazZ2pPF9qhxbM3BGjwDU_sj9fOg-6w-QRXWlBrrBXHMoHlpC6GPd2JFlMFkPtMfvCFUjqHNl-emkH6wLPSw2q0&amp;t=636426523640000000" alt="Orden:Asc" align="absbottom"></span> <span class="dtr-data">FCA VICENTIN</span></li><li data-dtr-index="10" data-dt-row="0" data-dt-column="10"><span class="dtr-title">Destinat.</span> <span class="dtr-data"><span>Vicentin S A I C</span></span></li><li data-dtr-index="11" data-dt-row="0" data-dt-column="11"><span class="dtr-title">Analisis</span> <span class="dtr-data"><span>DÑ:12.00% HD:13.20%  </span></span></li><li data-dtr-index="12" data-dt-row="0" data-dt-column="12"><span class="dtr-title">Patente</span> <span class="dtr-data">ERT783</span></li><li data-dtr-index="13" data-dt-row="0" data-dt-column="13"><span class="dtr-title">Obs Pto</span> <span class="dtr-data">&nbsp;</span></li><li data-dtr-index="14" data-dt-row="0" data-dt-column="14"><span class="dtr-title">Procedencia</span> <span class="dtr-data"><span>Villa Lila</span></span></li><li data-dtr-index="15" data-dt-row="0" data-dt-column="15"><span class="dtr-title">Entreg</span> <span class="dtr-data"><span>Wil</span></span></li><li data-dtr-index="16" data-dt-row="0" data-dt-column="16"><span class="dtr-title">Entreg CP</span> <span class="dtr-data"><span></span></span></li></ul>'
+
+
+
+
+
+                    var a = $("#Lista").jqGrid('getRowData', row_id);
+
+
+
+                    //$("#" + subgrid_id).append(dataFromTheRow.infohtml);
+                    //$("#" + subgrid_id).append(dataFromTheRow.Producto);
+
+
+
+                    // value: "0:Autorizado; 1:Demorado; 2:Posición; 3:Descargado; 4:A Descargar; 5:Rechazado;6:Desviado;7:CP p/cambiar;8:Sin Cupo;9:Calado"
+
+                    //alert(a.Situacion);
+
+                    var situacionDesc = "";
+                    switch (parseInt(a.Situacion)) {
+                        case 0:
+                            situacionDesc = "Autorizado";
+                            break;
+                        case 1:
+                            situacionDesc = "Demorado";
+                            break;
+                        case 2:
+                            situacionDesc = "Posición";
+                            break;
+                        case 3:
+                            situacionDesc = "Descargado";
+                            break;
+                        case 4:
+                            situacionDesc = "A Descargar";
+                            break;
+                        case 5:
+                            situacionDesc = "Rechazado";
+                            break;
+                        case 6:
+                            situacionDesc = "Desviado";
+                            break;
+                        case 7:
+                            situacionDesc = "CP p/cambiar";
+                            break;
+                        case 8:
+                            situacionDesc = "Sin Cupo";
+                            break;
+                        case 9:
+                            situacionDesc = "Calado";
+                            break;
+                        default:
+                            situacionDesc = "";
+
+                    }
+
+
+
+
+                    var html = "<span style='font-size: 14px'> " +
+                        "<br/><b>Situación</b>      " + situacionDesc +
+                        "<br/><b>Observaciones</b>            " + a.ObservacionesSituacion +
+                        "<br/><b>Producto</b>       " + a.Producto +
+                        "<br/><b>Titular</b>            " + a.TitularDesc +
+                        "<br/><b>Intermediario</b>            " + a.IntermediarioDesc +
+                        "<br/><b>R.Comercial</b>            " + a.RComercialDesc +
+                        "<br/><b>Corredor</b>            " + a.CorredorDesc +
+                        "<br/><b>Destinatario</b>            " + a.DestinatarioDesc +
+                        "<br/><b>Destino</b>  " + a.DestinoDesc +
+                        "<br/><b>Patente</b>  " + a.Patente +
+                        "<br/><b>Neto</b>  " + a.NetoPto +
+                        "<br/><b>Arribo</b>  " + a.FechaArribo +
+                        "<br/><b>Descarga</b>  " + a.FechaDescarga +
+                        "<br/><br/><a href=\"CartaDePorte.aspx?Id=" + a.IdCartaDePorte + "\"  target=\"_blank\" > ver carta </>" +
+                        "<span/>";
+
+                    $("#" + subgrid_id).append(html);
+
+
+                },
+
+                onSelectRow: function (rowId) {
+                    // $("#Lista").jqGrid('toggleSubGridRow', rowId);
+                },
+
+
+
 
                 pager: $('#ListaPager'),
                 rowNum: 1000,
@@ -2132,7 +2292,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                 sortname: 'IdCartaDePorte',  //'FechaDescarga', //'NumeroCartaDePorte',
                 sortorder: 'desc',
                 viewrecords: true,
-                multiselect: false,
+                multiselect: true,
                 shrinkToFit: false,
                 width: 'auto',
                 height: 460, // $(window).height() - 250, // '100%'
@@ -2144,13 +2304,30 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                 cellsubmit: 'clientArray',
                 dataUrl: "WebServiceClientes.asmx/EmpleadoEditGridData",
 
+
+
+
+                //recordtext: "{2} cartas</span>",
+                //pgtext: "Pag. {0} de {1}",
                 toppager: true,
+                subGrid: true,
+                multiselectWidth: 40,
+                subGridWidth: 40,
+
+
 
                 gridview: true
-        , multiboxonly: true
-        , multipleSearch: true
+               , multiboxonly: true
+               , multipleSearch: true
+
 
             });
+
+
+
+
+
+
 
 
             jQuery('#Lista').jqGrid('gridResize');

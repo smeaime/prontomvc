@@ -638,7 +638,18 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                     autocomplete="off"></asp:TextBox>
             </div>
         </div>
-    
+
+        <div class="row">
+            <div class="col-md-2">
+                <asp:CheckBox ID="CheckBoxGesagro" runat="server" Checked="true" />
+                Gesagro
+            </div>
+            <div class="col-md-10">
+                <asp:TextBox CssClass="col-md-8" ID="txtMailGesagro" runat="server" Text='' AutoPostBack="false"
+                    autocomplete="off"></asp:TextBox>
+            </div>
+        </div>
+
         <div class="row">
             <div class="col-md-2">
                 <asp:CheckBox ID="CheckBoxLartirigoyen" runat="server" Checked="true" />
@@ -650,7 +661,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
             </div>
         </div>
 
-          <div class="row">
+        <div class="row">
             <div class="col-md-2">
                 <asp:CheckBox ID="CheckBoxBiznaga" runat="server" Checked="true" />
                 La Biznaga
@@ -670,7 +681,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                     autocomplete="off"></asp:TextBox>
             </div>
         </div>
-            <div class="row">
+        <div class="row">
             <div class="col-md-2">
                 <asp:CheckBox ID="CheckBoxLeiva" runat="server" Checked="true" />
                 Leiva
@@ -757,7 +768,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
             </div>
             <%--corredor--%>
         </div>
-         <div class="row">
+        <div class="row">
             <div class="col-md-2">
                 <asp:CheckBox ID="CheckBoxGualeguay" runat="server" Checked="true" />
                 Gualeguay
@@ -898,7 +909,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                     autocomplete="off"></asp:TextBox>
             </div>
         </div>
-                <div class="row">
+        <div class="row">
             <div class="col-md-2">
                 <asp:CheckBox ID="CheckBoxTerraVerde" runat="server" Checked="true" />
                 Terra Verde
