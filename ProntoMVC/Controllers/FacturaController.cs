@@ -1621,8 +1621,8 @@ namespace ProntoMVC.Controllers
                             a.PorcentajeIva,
                             a.ImporteIva
                         }).OrderBy(x => x.IdDetalleFactura)
-//.Skip((currentPage - 1) * pageSize).Take(pageSize)
-.ToList();
+                        //.Skip((currentPage - 1) * pageSize).Take(pageSize)
+                        .ToList();
 
             var jsonData = new jqGridJson()
             {
