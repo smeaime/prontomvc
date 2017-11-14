@@ -60,6 +60,12 @@ using System.Net;
 using System.Xml.Linq;
 
 
+using System.Web.Mvc;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+
+
+
+
 
 
 //test de java lopez
@@ -67,9 +73,6 @@ using System.Xml.Linq;
 
 namespace ProntoMVC.Tests
 {
-    using System.Web.Mvc;
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
-
 
 
 
@@ -866,6 +869,9 @@ namespace ProntoMVC.Tests
 
 
 
+
+
+
         [TestMethod]
         public void envioNotificacionesconMail_42871()
         {
@@ -878,32 +884,59 @@ namespace ProntoMVC.Tests
             var scEF = ProntoMVC.Data.Models.Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC));
             BDLMasterEntities dbmaster = new BDLMasterEntities(Auxiliares.FormatearConexParaEntityFrameworkBDLMASTER_2(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(scbdlmasterappconfig)));
             DemoProntoEntities db = new DemoProntoEntities(scEF);
-            DateTime UltimaFechaDeEnvioNotificaciones = new DateTime(2016, 8, 31);
-
-            var q = (
-                    from x in db.CartasDePortes
-                    from c1 in db.Clientes.Where(c => c.IdCliente == x.Vendedor)
-                    from c2 in db.Clientes.Where(c => c.IdCliente == x.Entregador)
-                    where (x.FechaModificacion > UltimaFechaDeEnvioNotificaciones) // pero y si el cliente ya las vio?
-                    select new string[] { c1.Email, c2.Email }
-                    )
-                    .SelectMany(x => x)
-                    .Distinct();
 
 
 
+
+
+            int dummy;
 
             // solo estos clientes me interesan...  -cuantos usuarios externos hay en la bdlmaster? creo q mas de mil. ademas, recordá que los usuarios especiales tipo BLD los tendrías que filtrar de otro modo...
-            var usuariosclientes = from p in dbmaster.UserDatosExtendidos
-                                   join u in dbmaster.aspnet_Users on p.UserId equals u.UserId
-                                   join m in dbmaster.aspnet_Membership on p.UserId equals m.UserId
-                                   select new { p.RazonSocial, m.Email };
+            var q = (from p in dbmaster.UserDatosExtendidos
+                     join u in dbmaster.aspnet_Users on p.UserId equals u.UserId
+                     join m in dbmaster.aspnet_Membership on p.UserId equals m.UserId
+                     select new { FechaNotificacion = new DateTime(), p.RazonSocial, m.Email, ListadoCuits = p.TextoAuxiliar, u.LastActivityDate }).ToList();
+
+            var usuariosclientes = from x in q
+                                   select new { IdCliente = Int32.TryParse(x.RazonSocial,out dummy) ? Int32.Parse(x.RazonSocial) : 0, x.FechaNotificacion, x.RazonSocial, x.Email, x.ListadoCuits, x.LastActivityDate };
+
+
+            List<int> usus = usuariosclientes.Select(x => x.IdCliente).Where(x => x != -1).ToList();
+
+
+
+            DateTime FechaMinima = usuariosclientes.Select(x => x.FechaNotificacion).Max();
+
+            // una vez que tengo la lista de clientes, como vincularla con 
 
 
 
 
 
-            string rejunte2 = string.Join(";", q.Take(100).ToArray());
+            //DateTime UltimaFechaDeEnvioNotificaciones = new DateTime(2016, 8, 31);
+
+            var qq = (
+                    from x in db.CartasDePortes
+                        //from c1 in db.Clientes.Where(c => c.IdCliente == x.Vendedor)
+                        //from c2 in db.Clientes.Where(c => c.IdCliente == x.Entregador)
+                    where ((x.FechaModificacion ?? x.FechaArribo) > FechaMinima
+                            && (usus.Contains(x.Vendedor ?? -1) || usus.Contains(x.Entregador ?? -1))
+                            ) // pero y si el cliente ya las vio?   UltimaFechaDeLoginDelCliente
+                    select new int[] { x.Vendedor ?? -1, x.Entregador ?? -1 }
+                    )
+                    .SelectMany(x => x)
+                    .Distinct().ToList();
+
+
+
+            // actualizar fecha de ultima notificacion de cada cliente? -Una es la fecha desde la que tengo que buscar tandas de cartas, y otra es la fecha individual de los clientes
+
+
+
+
+
+
+            string rejunte2 = string.Join(";", qq.Take(100).ToArray());
 
 
             var listado = db.Clientes.Select(x => x.CorreosElectronicos_1).Take(100);
@@ -930,6 +963,30 @@ namespace ProntoMVC.Tests
 
 
 
+
+
+
+        [TestMethod]
+        public void TraerListadoSegunUsuario_42871_2()
+        {
+            //Creo que tarda mucho por el parameter sniffing
+
+            string filtro = "{\"groupOp\":\"OR\",\"rules\":[{\"field\":\"Producto\",\"op\":\"eq\",\"data\":\"Trigo Pan\"},{\"field\":\"Producto\",\"op\":\"eq\",\"data\":\"MAIZ\"}]}";
+
+            var scEF = ProntoMVC.Data.Models.Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC));
+            DemoProntoEntities db = new DemoProntoEntities(scEF);
+
+            var s = new ServicioCartaPorte.servi();
+            var sqlquery4 = s.CartasPorte_DynamicGridData("IdCartaDePorte", "desc", 1, 999999, true, filtro,
+                                                 "01/12/2016",
+                                                 "30/01/2017",
+                                                 0, -1, SC, "Mariano", scbdlmasterappconfig, 11);
+
+            // q diferencia hay con listadoclientes?
+            // si el usuario tiene una razon social asignada, hay que filtrar. -Pero hay que filtrar antes! como en ListadoSegunCliente()
+            // -tambien tenes el tema de los clientes con filtros configurables.... en DataTablePorClienteSQL()
+
+        }
 
 
 
@@ -1215,8 +1272,8 @@ namespace ProntoMVC.Tests
 
 
 
-
-            LogicaFacturacion.ValidaCobranzas(ref tablaEditadaDeFacturasParaGenerar);
+            string sError = "";
+            LogicaFacturacion.ValidaCobranzas(ref tablaEditadaDeFacturasParaGenerar, ref sError);
 
         }
 
@@ -1307,7 +1364,7 @@ namespace ProntoMVC.Tests
 
 
         [TestMethod]
-        public void percepcion_en_clientes_46551_2_directamente_llamando_a_creafacturacompronto() 
+        public void percepcion_en_clientes_46551_2_directamente_llamando_a_creafacturacompronto()
         {
 
             string txtBuscar = "";
@@ -1599,7 +1656,7 @@ namespace ProntoMVC.Tests
 
 
 
-            string txtFacturarATerceros = EntidadManager.NombreCliente(SC, idClienteAfacturarle); 
+            string txtFacturarATerceros = EntidadManager.NombreCliente(SC, idClienteAfacturarle);
 
 
             DataTable tablaEditadaDeFacturasParaGenerar = LogicaFacturacion.GetDatatableAsignacionAutomatica(
@@ -1705,7 +1762,7 @@ namespace ProntoMVC.Tests
 
 
             var s = new ServicioCartaPorte.servi();
-            var d = s.Reclamos_DynamicGridData("Fecha", "desc", 1, 999999, true, filtro, "", "", 0, 0,SC , "","");
+            var d = s.Reclamos_DynamicGridData("Fecha", "desc", 1, 999999, true, filtro, "", "", 0, 0, SC, "", "");
 
         }
 
@@ -2258,7 +2315,7 @@ Error in: https://prontoweb.williamsentregas.com.ar/ProntoWeb/CDPFacturacion.asp
             var sqlquery4 = s.CartasPorte_DynamicGridData("IdCartaDePorte", "desc", 1, 999999, true, filtro,
                                                  "01/12/2016",
                                                  "30/01/2017",
-                                                 0, -1, SC, "Mariano", scbdlmasterappconfig);
+                                                 0, -1, SC, "Mariano", scbdlmasterappconfig, 11);
 
             // q diferencia hay con listadoclientes?
             // si el usuario tiene una razon social asignada, hay que filtrar. -Pero hay que filtrar antes! como en ListadoSegunCliente()
@@ -6831,7 +6888,7 @@ System.Drawing
             var sqlquery4 = s.CartasPorte_DynamicGridData("IdCartaDePorte", "desc", 1, 999999, true, filtro,
                                                  "01/12/2016",
                                                  "30/01/2017",
-                                                 0, -1, SC, "Mariano", "");
+                                                 0, -1, SC, "Mariano", "", 11);
 
 
         }
@@ -7471,7 +7528,7 @@ System.Drawing
             var sqlquery4 = s.CartasPorte_DynamicGridData_ExcelExportacion_UsandoInternalQuery("IdCartaDePorte", "desc", 1, 999999, true, filtro,
                                                  "01/12/2016",
                                                  "30/01/2017",
-                                                 0, -1, SC, "Mariano");
+                                                 0, -1, SC, "Mariano", 11);
 
             CartaDePorteManager.RebindReportViewer_ServidorExcel(ref ReporteLocal, "Carta Porte - Buques.rdl", sqlquery4, SC, false, ref output);
 
@@ -8243,7 +8300,7 @@ Adjunto un ejemplo que tiene cartas de porte de 8 entregadores que no son Willia
             var sqlquery4 = s.CartasPorte_DynamicGridData_ExcelExportacion_UsandoInternalQuery("IdCartaDePorte", "desc", 1, 999999, true, filtro,
                                                  "11/01/2016",
                                                  "11/01/2016",
-                                                 0, -1, SC, "Mariano");
+                                                 0, -1, SC, "Mariano", 11);
 
             CartaDePorteManager.RebindReportViewer_ServidorExcel(ref ReporteLocal, "Sincronismo BLD.rdl", sqlquery4, SC, false, ref output);
 
@@ -8355,7 +8412,7 @@ Adjunto un ejemplo que tiene cartas de porte de 8 entregadores que no son Willia
             var output3 = s.CartasPorte_DynamicGridData_ExcelExportacion("IdCartaDePorte", "desc", 1, 999999, true, filtro,
                                                  "11/01/2016",
                                                  "11/01/2016",
-                                                 0, -1, SC, "Mariano");
+                                                 0, -1, SC, "Mariano", 11);
 
             System.Diagnostics.Process.Start(output3);
         }
@@ -8405,7 +8462,7 @@ Adjunto un ejemplo que tiene cartas de porte de 8 entregadores que no son Willia
             string output = "c:\asdad.xls";
 
             var s = new ServicioCartaPorte.servi();
-            string html = s.InformeSituacion_html(-1, new DateTime(2016, 11, 10), new DateTime(2016, 11, 17), SC);
+            string html = s.InformeSituacion_html(-1, new DateTime(2016, 11, 10), new DateTime(2016, 11, 17), SC, 11);
 
             Console.Write(html);
 
@@ -8425,7 +8482,7 @@ Adjunto un ejemplo que tiene cartas de porte de 8 entregadores que no son Willia
 
             //SegunDestino
             var s = new ServicioCartaPorte.servi();
-            var q = s.InformeSituacion_string(1, new DateTime(2016, 11, 1), new DateTime(2016, 11, 1), SC);
+            var q = s.InformeSituacion_string(1, new DateTime(2016, 11, 1), new DateTime(2016, 11, 1), SC, 11);
 
 
 
@@ -8729,7 +8786,7 @@ Adjunto un ejemplo que tiene cartas de porte de 8 entregadores que no son Willia
             var output = s.CartasPorte_DynamicGridData("IdCartaDePorte", "desc", 1, 50, true, filtro,
                                                         "01/01/2016",
                                                         "01/01/2016",
-                                                        0, -1, SC, "Mariano", "");
+                                                        0, -1, SC, "Mariano", "", 11);
 
 
 
@@ -8748,7 +8805,7 @@ Adjunto un ejemplo que tiene cartas de porte de 8 entregadores que no son Willia
             var output2 = s.CartasPorte_DynamicGridData("IdCartaDePorte", "desc", 1, 50, true, filtro,
                                                 "01/01/2015",
                                                 "01/01/2016",
-                                                0, -1, SC, "Mariano", "");
+                                                0, -1, SC, "Mariano", "", 11);
 
 
         }
@@ -8764,7 +8821,7 @@ Adjunto un ejemplo que tiene cartas de porte de 8 entregadores que no son Willia
             var output3 = s.CartasPorte_DynamicGridData("IdCartaDePorte", "desc", 1, 50, true, filtro,
                                                  "01/01/2010",
                                                  "01/01/2016",
-                                                 0, -1, SC, "Mariano", "");
+                                                 0, -1, SC, "Mariano", "", 11);
         }
 
 
