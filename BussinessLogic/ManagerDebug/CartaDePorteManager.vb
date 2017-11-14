@@ -580,6 +580,47 @@ Public Class CartaDePorteManager
 
 
 
+    Public Shared Function FiltrarQueryableSegunCliente()
+
+        qué tan facil se puede aplicar sobre un linq dinamico? le hago un string where facilongo?
+
+        If clientes.Count > 0 And idCorredor <> 43 Then '43=BLD
+            QueContenga = ""
+            idVendedor = -1
+            idIntermediario = -1
+            idRemComercial = -1
+            idDestinatario = -1
+            idCorredor = -1     'lo de bld se debe romper porque le resetea el corredor...
+        ElseIf Usuario = "DIAZDOW" Then
+
+            'consulta 43183 
+            '"Pero tiene que ser con un filtro especial. unicamente tiene que filtrar los camiones que vengan CORREDOR DIAZ RIGANTI. 
+            ' y que figure en "titular", "intermediario", "remitente", Cliete observaciones" "destintario" DOW AGROSCIENCES ARG. SRL . "
+
+            QueContenga = ""
+            idVendedor = -1
+            idIntermediario = -1
+            idRemComercial = -1
+            idDestinatario = -1
+            idCorredor = BuscarVendedorPorCUIT("30-55151869-4", SC)
+            idClienteAuxiliar = -1
+            AplicarANDuORalFiltro = FiltroANDOR.FiltroOR
+
+
+            'lo que me descoloca es que destinatario es excluyente en nuestro filtro.... -ok, traete todo lo del corredor ese, y despues hacé a mano el filtro de DOW
+
+        ElseIf clientes.Count = 0 And QueContenga = "" Then
+            Return Nothing
+        End If
+
+
+
+
+    End Function
+
+
+
+
 
 
 
@@ -650,6 +691,10 @@ usuario As String, ConexBDLmaster As String,
             Return Nothing
         End If
 
+
+
+
+        FiltrarQueryableSegunCliente()
 
 
 
