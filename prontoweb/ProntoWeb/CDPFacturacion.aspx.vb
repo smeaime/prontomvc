@@ -1569,6 +1569,12 @@ Partial Class CDPFacturacion
 
 
 
+        Dim sError = ""
+        If Not ValidaCobranzas(tablaEditadaDeFacturasParaGenerar, sError) Then
+            ErrHandler2.WriteError("Hay clientes no habilidados para cobranzas" + sError)
+            Return False
+        End If
+
 
         'validar lo de bloq por cobranzas
 

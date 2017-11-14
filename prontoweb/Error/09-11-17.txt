@@ -1,0 +1,179 @@
+
+Log Entry : 
+11/09/2017 14:25:44
+Error in: http://localhost:50769/ProntoWeb/Principal.aspx. Error Message:supervisor esta logueado, pero lo redirijo al login porque faltan los datos de session. No deberia mejor mandarlo a SeleccionarEmpresa? Ademas, no hago el LogOut y le queda el cookie!!!
+__________________________
+
+Log Entry : 
+11/09/2017 14:25:44
+Error in: http://localhost:50769/ProntoWeb/Principal.aspx. Error Message:sesion: supervisor True
+__________________________
+
+Log Entry : 
+11/09/2017 14:25:44
+Error in: http://localhost:50769/ProntoWeb/Principal.aspx. Error Message:Pasa nomas. membership: supervisor
+__________________________
+
+Log Entry : 
+11/09/2017 14:25:44
+Error in: http://localhost:50769/ProntoWeb/Principal.aspx. Error Message:System.Threading.ThreadAbortException
+Subproceso anulado.
+   en System.Threading.Thread.AbortInternal()
+   en System.Threading.Thread.Abort(Object stateInfo)
+   en System.Web.HttpResponse.AbortCurrentThread()
+   en System.Web.HttpResponse.End()
+   en System.Web.HttpServerUtility.Transfer(String path, Boolean preserveForm)
+   en System.Web.HttpServerUtility.Transfer(String path)
+   en ProntoFuncionesUIWeb.RefrescaSession(HttpServerUtility Server) en C:\bdl\pronto\prontoweb\App_Code\vbcode\ManagerDebug\FuncionesUIWeb.vb:línea 4450
+mscorlib
+__________________________
+
+Log Entry : 
+11/09/2017 14:25:44
+Error in: http://localhost:50769/ProntoWeb/Principal.aspx. Error Message:Verificar que el usuario tenga una empresa asignada
+__________________________
+
+Log Entry : 
+11/09/2017 14:26:21
+Error in: http://localhost:50769/ProntoWeb/Principal.aspx. Error Message:supervisor esta logueado, pero lo redirijo al login porque faltan los datos de session. No deberia mejor mandarlo a SeleccionarEmpresa? Ademas, no hago el LogOut y le queda el cookie!!!
+__________________________
+
+Log Entry : 
+11/09/2017 14:26:21
+Error in: http://localhost:50769/ProntoWeb/Principal.aspx. Error Message:sesion: supervisor True
+__________________________
+
+Log Entry : 
+11/09/2017 14:26:22
+Error in: http://localhost:50769/ProntoWeb/Principal.aspx. Error Message:Pasa nomas. membership: supervisor
+__________________________
+
+Log Entry : 
+11/09/2017 14:26:22
+Error in: http://localhost:50769/ProntoWeb/Principal.aspx. Error Message:System.Threading.ThreadAbortException
+Subproceso anulado.
+   en System.Threading.Thread.AbortInternal()
+   en System.Threading.Thread.Abort(Object stateInfo)
+   en System.Web.HttpResponse.AbortCurrentThread()
+   en System.Web.HttpResponse.End()
+   en System.Web.HttpServerUtility.Transfer(String path, Boolean preserveForm)
+   en System.Web.HttpServerUtility.Transfer(String path)
+   en ProntoFuncionesUIWeb.RefrescaSession(HttpServerUtility Server) en C:\bdl\pronto\prontoweb\App_Code\vbcode\ManagerDebug\FuncionesUIWeb.vb:línea 4450
+mscorlib
+__________________________
+
+Log Entry : 
+11/09/2017 14:26:22
+Error in: http://localhost:50769/ProntoWeb/Principal.aspx. Error Message:Verificar que el usuario tenga una empresa asignada
+__________________________
+
+Log Entry : 
+11/09/2017 14:26:25
+Error in: http://localhost:50769/SeleccionarEmpresa.aspx. Error Message:sesion: Mariano True
+__________________________
+
+Log Entry : 
+11/09/2017 14:26:25
+Error in: http://localhost:50769/SeleccionarEmpresa.aspx. Error Message:Pasa nomas. membership: Mariano
+__________________________
+
+Log Entry : 
+11/09/2017 14:26:29
+Error in: http://localhost:50769/SeleccionarEmpresa.aspx. Error Message:sesion: Mariano True
+__________________________
+
+Log Entry : 
+11/09/2017 14:26:29
+Error in: http://localhost:50769/SeleccionarEmpresa.aspx. Error Message:Pasa nomas. membership: Mariano
+__________________________
+
+Log Entry : 
+11/09/2017 14:27:09
+Error in: http://localhost:50769/ProntoWeb/CartasDePortes.aspx?tipo=Todas. Error Message:Mariano
+__________________________
+
+Log Entry : 
+11/09/2017 14:30:31
+Error in: http://localhost:50769/ProntoWeb/SincronismosAutomaticos.aspx. Error Message:Error en la fecha
+__________________________
+
+Log Entry : 
+11/09/2017 14:30:31
+Error in: http://localhost:50769/ProntoWeb/SincronismosAutomaticos.aspx. Error Message:8/11/2017
+__________________________
+
+Log Entry : 
+11/09/2017 14:30:31
+Error in: http://localhost:50769/ProntoWeb/SincronismosAutomaticos.aspx. Error Message:8/11/2017
+__________________________
+
+Log Entry : 
+11/09/2017 14:30:31
+Error in: http://localhost:50769/ProntoWeb/SincronismosAutomaticos.aspx. Error Message:Error en la fecha:8/11/2017;8/11/2017;System.FormatException: No se puede reconocer la cadena como valor DateTime válido.
+   en System.DateTimeParse.ParseExact(String s, String format, DateTimeFormatInfo dtfi, DateTimeStyles style)
+   en System.DateTime.ParseExact(String s, String format, IFormatProvider provider)
+   en SincronismosAutomaticos.enviarTodos(Boolean bVistaPrevia) en C:\bdl\pronto\prontoweb\ProntoWeb\SincronismosAutomaticos.aspx.vb:línea 428
+__________________________
+
+Log Entry : 
+11/09/2017 14:31:03
+Error in: http://localhost:50769/ProntoWeb/SincronismosAutomaticos.aspx. Error Message:Generando sincro para Gesagro
+__________________________
+
+Log Entry : 
+11/09/2017 17:21:40
+Error in: http://localhost:50769/ProntoWeb/CartaPorteMovil.aspx. Error Message:Mariano esta logueado, pero lo redirijo al login porque faltan los datos de session. No deberia mejor mandarlo a SeleccionarEmpresa? Ademas, no hago el LogOut y le queda el cookie!!!
+__________________________
+
+Log Entry : 
+11/09/2017 17:25:37
+Error in: http://localhost:50769/ProntoWeb/CartasDePorteImagenEncriptada.aspx?Id=7MEzO3yg0ic=. Error Message:Viendo Encriptacion del ID 2969197
+__________________________
+
+Log Entry : 
+11/09/2017 18:31:40
+Error in: http://localhost:50769/ProntoWeb/SituacionCalidad.aspx. Error Message:Mariano esta logueado, pero lo redirijo al login porque faltan los datos de session. No deberia mejor mandarlo a SeleccionarEmpresa? Ademas, no hago el LogOut y le queda el cookie!!!
+__________________________
+
+Log Entry : 
+11/09/2017 18:51:02
+Error in: http://localhost:50769/ProntoWeb/SituacionCalidadMovil.aspx. Error Message:Mariano esta logueado, pero lo redirijo al login porque faltan los datos de session. No deberia mejor mandarlo a SeleccionarEmpresa? Ademas, no hago el LogOut y le queda el cookie!!!
+__________________________
+
+Log Entry : 
+11/09/2017 19:48:53
+Error in: http://localhost:50769/ProntoWeb/HandlerCartaPorte.ashx. Error Message:System.Data.SqlClient.SqlException
+Error relacionado con la red o específico de la instancia mientras se establecía una conexión con el servidor SQL Server. No se encontró el servidor o éste no estaba accesible. Compruebe que el nombre de la instancia es correcto y que SQL Server está configurado para admitir conexiones remotas. (provider: SQL Network Interfaces, error: 26 - Error al buscar el servidor o instancia especificado)
+   en System.Data.SqlClient.SqlInternalConnectionTds..ctor(DbConnectionPoolIdentity identity, SqlConnectionString connectionOptions, SqlCredential credential, Object providerInfo, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance, SqlConnectionString userConnectionOptions, SessionData reconnectSessionData, DbConnectionPool pool, String accessToken, Boolean applyTransientFaultHandling)
+   en System.Data.SqlClient.SqlConnectionFactory.CreateConnection(DbConnectionOptions options, DbConnectionPoolKey poolKey, Object poolGroupProviderInfo, DbConnectionPool pool, DbConnection owningConnection, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionFactory.CreatePooledConnection(DbConnectionPool pool, DbConnection owningObject, DbConnectionOptions options, DbConnectionPoolKey poolKey, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionPool.CreateObject(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   en System.Data.ProviderBase.DbConnectionPool.UserCreateRequest(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   en System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.Open()
+   en System.Web.DataAccess.SqlConnectionHolder.Open(HttpContext context, Boolean revertImpersonate)
+   en System.Web.DataAccess.SqlConnectionHelper.GetConnection(String connectionString, Boolean revertImpersonation)
+   en System.Web.Security.SqlRoleProvider.GetRolesForUser(String username)
+   en System.Web.Security.RolePrincipal.IsInRole(String role)
+   en System.Web.Configuration.AuthorizationRule.IsTheUserInAnyRole(StringCollection roles, IPrincipal principal)
+   en System.Web.Configuration.AuthorizationRule.IsUserAllowed(IPrincipal user, String verb)
+   en System.Web.Configuration.AuthorizationRuleCollection.IsUserAllowed(IPrincipal user, String verb)
+   en System.Web.Security.UrlAuthorizationModule.OnEnter(Object source, EventArgs eventArgs)
+   en System.Web.HttpApplication.SyncEventExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   en System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+.Net SqlClient Data Provider
+__________________________
+
+Log Entry : 
+11/09/2017 19:49:26
+Error in: http://localhost:50769/ProntoWeb/SituacionCalidad.aspx. Error Message:System.ComponentModel.Win32Exception
+Tiempo de espera de la operación de espera agotado
+
+
+__________________________

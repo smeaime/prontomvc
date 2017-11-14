@@ -205,6 +205,9 @@ Public Class wsCartaPorteExterno
     Public Function obtenerDescargas_v3(usuario As String, password As String, cuit As String, fechadesde As DateTime, fechahasta As DateTime) As CerealNet.WSCartasDePorte.respuestaEntrega_v3
 
 
+
+        'avisar q error hubo (de contraseña)
+
         Try
 
             Dim scs As String
@@ -219,6 +222,7 @@ Public Class wsCartaPorteExterno
         Catch ex As Exception
 
             ErrHandler2.WriteError(ex)
+            Throw
         End Try
 
 
@@ -231,6 +235,8 @@ Public Class wsCartaPorteExterno
     <WebMethod(Description:="Devuelve un listado de posiciones", EnableSession:=False)>
     Public Function obtenerPosiciones_v3(usuario As String, password As String, cuit As String, fechadesde As DateTime, fechahasta As DateTime) As CerealNet.WSCartasDePorte.respuestaEntrega_v3
 
+
+        'avisar q error hubo (de contraseña)
 
         Try
 
@@ -246,6 +252,7 @@ Public Class wsCartaPorteExterno
         Catch ex As Exception
 
             ErrHandler2.WriteError(ex)
+            Throw
         End Try
 
 
@@ -258,6 +265,8 @@ Public Class wsCartaPorteExterno
 
     <WebMethod(Description:="Devuelve un listado de descargas", EnableSession:=False)>
     Public Function obtenerDescargasDeHoyMasPosicionesEnRangoFecha_v3(usuario As String, password As String, cuit As String, fechadesde As DateTime, fechahasta As DateTime) As CerealNet.WSCartasDePorte.respuestaEntrega_v3
+
+        'avisar q error hubo (de contraseña)
 
 
         Try
@@ -274,6 +283,7 @@ Public Class wsCartaPorteExterno
         Catch ex As Exception
 
             ErrHandler2.WriteError(ex)
+            Throw
         End Try
 
 
