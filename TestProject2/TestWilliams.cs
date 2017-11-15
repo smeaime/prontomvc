@@ -868,6 +868,65 @@ namespace ProntoMVC.Tests
 
 
 
+
+
+        [TestMethod]
+        public void GrabarVariasSituacionesCalidad_42871()
+        {
+
+
+            /*
+
+            __________________________
+
+            Log Entry:
+            11 / 15 / 2017 17:35:53
+Error in: http://iismvc/Williams/ProntoWeb/WebServiceCartas.asmx/GrabarSituaciones. Error Message:Falta elegir a qué acopio corresponde el remitente comercial
+
+
+            __________________________
+
+            Log Entry:
+            11 / 15 / 2017 17:35:54
+Error in: http://iismvc/Williams/ProntoWeb/WebServiceCartas.asmx/GrabarSituaciones. Error Message:Se necesita la fecha de la descarga (porque se ingresó el peso final de la descarga)
+
+
+            __________________________
+
+            Log Entry:
+            11 / 15 / 2017 17:35:56
+Error in: http://iismvc/Williams/ProntoWeb/WebServiceCartas.asmx/GrabarSituaciones. Error Message:La patente del acoplado es inválida 
+
+
+            __________________________
+
+            Log Entry:
+            11 / 15 / 2017 17:35:56
+Error in: http://iismvc/Williams/ProntoWeb/WebServiceCartas.asmx/GrabarSituaciones. Error Message:La patente del acoplado es inválida 
+
+            */
+
+
+
+            // url: "WebServiceCartas.asmx/CartaPorteBatchUpdate",
+
+            //string ms = CartaDePorteManager.GrabarSituacion_DLL(2638292, 2, "RECHAZADO EN PLAYA EXTERNA", SC);
+            List<long> ids=new List<long>();
+            for (int n = 2633332; n < 2633400; n++) ids.Add(n);
+            string ms = CartaDePorteManager.GrabarSituaciones_DLL(ids.ToArray(), 2, "RECHAZADO EN PLAYA EXTERNA", SC);
+
+
+
+           // string ms = CartaDePorteManager.GrabarSituaciones_DLL(new long[] { 2633332, 2325493, 2636664 }, 2, "RECHAZADO EN PLAYA EXTERNA", SC);
+
+        }
+
+
+
+
+
+
+
         [TestMethod]
         public void envioNotificacionesconMail_42871_2()
         {
@@ -884,7 +943,7 @@ namespace ProntoMVC.Tests
         {
 
 
-            ProntoWindowsService.Service1.TandaNotificacionesCamiones(SC, scbdlmasterappconfig, 1);
+            ProntoWindowsService.Service1.TandaNotificacionesCamiones(SC, scbdlmasterappconfig, "1");
 
         }
 
@@ -979,7 +1038,7 @@ namespace ProntoMVC.Tests
                           join x in usuariosclientes on k equals x.IdCliente
                           //where  clientesParaNotificar.Contains(x.IdCliente)  fechanot
                           select x.Email;
-                          
+
 
 
 
@@ -2383,15 +2442,6 @@ Error in: https://prontoweb.williamsentregas.com.ar/ProntoWeb/CDPFacturacion.asp
         }
 
 
-
-        [TestMethod]
-        public void GrabarVariasSituacionesCalidad_42871()
-        {
-            // url: "WebServiceCartas.asmx/CartaPorteBatchUpdate",
-
-            //string ms = CartaDePorteManager.GrabarSituacion_DLL(2638292, 2, "RECHAZADO EN PLAYA EXTERNA", SC);
-            string ms = CartaDePorteManager.GrabarSituaciones_DLL(new long[] { 2638292, 2638293, 2638294 }, 2, "RECHAZADO EN PLAYA EXTERNA", SC);
-        }
 
 
 
