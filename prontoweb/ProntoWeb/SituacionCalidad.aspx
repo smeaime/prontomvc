@@ -1422,7 +1422,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
     search: false,
 },
 
-{ name: ' IdCartasDePorte', index: ' IdCartasDePorte', align: 'left', width: 100, editable: false, hidden: true },
+{ name: 'IdCartaDePorte', index: 'IdCartaDePorte', align: 'left', width: 100, editable: false, hidden: true },
 
 {
     name: 'NumeroCartaEnTextoParaBusqueda', index: 'NumeroCartaEnTextoParaBusqueda', width: 90, align: 'left', sorttype: "text", sortable: false

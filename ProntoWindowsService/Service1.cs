@@ -1582,16 +1582,16 @@ FCESupport\FCESupportImpl.h, 42.
 
 
 
-                
                 var scEF = ProntoMVC.Data.Models.Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC));
                 BDLMasterEntities dbmaster = new BDLMasterEntities(Auxiliares.FormatearConexParaEntityFrameworkBDLMASTER_2(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(scBdlMaster)));
                 DemoProntoEntities db = new DemoProntoEntities(scEF);
 
 
+
                 DateTime FechaNot;
                 try
                 {
-                    FechaNot = DateTime.Parse(Pronto.ERP.Bll.ParametroManager.TraerValorParametro2(SC, "UltimaFechaNotificacion").ToString());
+                    FechaNot = DateTime.Parse(Pronto.ERP.Bll.ParametroManager.TraerValorParametro2(SC, "UltimaFechaNotificacion").NullSafeToString());
                 }
                 catch (Exception)
                 {
@@ -1613,6 +1613,8 @@ FCESupport\FCESupportImpl.h, 42.
 
                 List<int> usus = usuariosclientes.Select(x => x.IdCliente).Where(x => x > 0).ToList();
 
+                List<int> ususCorredores = new List<int>(); //usus.Select(x => equivalen x.IdCliente).ToList();
+
 
 
                 DateTime FechaMinima = usuariosclientes.Select(x => x.FechaNotificacion).Max();
@@ -1630,14 +1632,26 @@ FCESupport\FCESupportImpl.h, 42.
                             //from c1 in db.Clientes.Where(c => c.IdCliente == x.Vendedor)
                             //from c2 in db.Clientes.Where(c => c.IdCliente == x.Entregador)
                     where ((x.FechaModificacion ?? x.FechaArribo) > FechaNot
-                                && (usus.Contains(x.Vendedor ?? -1) || usus.Contains(x.Entregador ?? -1))
-                                ) // pero y si el cliente ya las vio?   UltimaFechaDeLoginDelCliente
-                    select new int[] { x.Vendedor ?? -1, x.Entregador ?? -1 }
+                                && (usus.Contains(x.Vendedor ?? -1)
+                                        || usus.Contains(x.Entregador ?? -1)
+                                        || usus.Contains(x.CuentaOrden1 ?? -1)
+                                        || usus.Contains(x.CuentaOrden2 ?? -1)
+                                        || ususCorredores.Contains(x.Corredor ?? -1)
+                                    ) // pero y si el cliente ya las vio?   UltimaFechaDeLoginDelCliente
+                               )
+                        select new int[] { x.Vendedor ?? -1, x.Entregador ?? -1, x.CuentaOrden1 ?? -1, x.CuentaOrden2 ?? -1, x.Corredor ?? -1 }
                         )
                         .SelectMany(x => x)
                         .Distinct()
                         .Where(x => usus.Contains(x))  // porque me estoy trayendo todos los clientes de una carta que solo tiene un cliente importante, tengo que volver a filtrarlo, y es mas practico hacerlo aca
                         .ToList();
+
+
+
+
+
+                //como hacer para incluir los de bld? como en DataTablePorCliente
+                // FiltrarQueryableSegunCliente
 
 
 
@@ -1657,6 +1671,10 @@ FCESupport\FCESupportImpl.h, 42.
 
 
                 string rejunte = string.Join(",", listado.ToArray());
+
+                ErrHandler2.WriteError("Notificaciones a " + rejunte);
+
+
 
                 if (true)
                 {
@@ -1680,6 +1698,12 @@ FCESupport\FCESupportImpl.h, 42.
 
                 Pronto.ERP.Bll.ParametroManager.GuardarValorParametro2(SC, "UltimaFechaNotificacion", DateTime.Now.ToString());
 
+
+
+
+
+
+                
                
             }
 
