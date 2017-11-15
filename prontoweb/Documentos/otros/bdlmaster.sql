@@ -60,7 +60,13 @@ delete from Bases where IdBD=16
 [aspnet_Roles_CreateRole] '/','SuperAdmin'  --ejecutar en la bdlmaster
 go
 
+declare @now datetime
+set @now= GETDATE()
+exec aspnet_Membership_CreateUser  '/','Mariano','pirulo!','','mscalella911@gmail.com','','',1,@now,@now,0,0,null
 aspnet_UsersInRoles_AddUsersToRoles '/','Mariano','SuperAdmin',''
+bdlmaster.dbo.wResetearPass 'Mariano','pirulo!'
+
+
 aspnet_UsersInRoles_AddUsersToRoles '/','supervisor','SuperAdmin',''
 
  exec aspneaspnet_Membership_CreateUser '/'
@@ -69,4 +75,4 @@ aspnet_UsersInRoles_AddUsersToRoles '/','supervisor','SuperAdmin',''
 
 
 
-
+select * from bases 
