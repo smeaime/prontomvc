@@ -879,6 +879,17 @@ namespace ProntoMVC.Tests
 
 
 
+        [TestMethod]
+        public void envioNotificacionesconMail_42871_3()
+        {
+
+
+            ProntoWindowsService.Service1.TandaNotificacionesCamiones(SC, scbdlmasterappconfig, 1);
+
+        }
+
+
+
 
         [TestMethod]
         public void envioNotificacionesconMail_42871()
@@ -919,7 +930,7 @@ namespace ProntoMVC.Tests
 
             List<int> usus = usuariosclientes.Select(x => x.IdCliente).Where(x => x > 0).ToList();
 
-            List<int> ususCorredores = usus.Select(x => equivalen x.IdCliente).ToList();
+            List<int> ususCorredores = new List<int>(); //usus.Select(x => equivalen x.IdCliente).ToList();
 
 
 
