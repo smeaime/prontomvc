@@ -164,10 +164,7 @@ namespace ProntoMVC.TestsMVC
 
 
            // c.EnviarEmail(10, 10, "SI");
-<<<<<<< HEAD
-=======
 
->>>>>>> ac089a287aa9d8d474602fd1f3fb11dacf9cd039
         }
 
 
