@@ -20,7 +20,7 @@ using System.Configuration;
 using System.IO;
 using System.Threading;
 
-
+using Pronto.ERP.Bll;
 
 /*
 
@@ -1591,7 +1591,7 @@ FCESupport\FCESupportImpl.h, 42.
                 DateTime FechaNot;
                 try
                 {
-                    FechaNot = DateTime.Parse(Pronto.ERP.Bll.ParametroManager.TraerValorParametro2(SC, "UltimaFechaNotificacion").NullSafeToString());
+                    FechaNot = DateTime.Parse(Pronto.ERP.Bll.ParametroManager.TraerValorParametro2(SC, "UltimaFechaNotificacion").ToString());
                 }
                 catch (Exception)
                 {
@@ -1672,7 +1672,7 @@ FCESupport\FCESupportImpl.h, 42.
 
                 string rejunte = string.Join(",", listado.ToArray());
 
-                ErrHandler2.WriteError("Notificaciones a " + rejunte);
+                Pronto.ERP.Bll.ErrHandler2.WriteError("Notificaciones a " + rejunte);
 
 
 
