@@ -658,7 +658,7 @@ Partial Class CartaPorteMovil
 
         Dim s = New ServicioCartaPorte.servi()
         'Dim q = s.InformeSituacion_string(idDestino, FechaDesde, FechaHasta, HFSC.Value)
-        Dim q = s.InformeSituacion_html(idDestino, FechaDesde, FechaHasta, HFSC.Value)
+        Dim q = s.InformeSituacion_html(idDestino, FechaDesde, FechaHasta, HFSC.Value, 11)
         salida.Text = q
 
     End Sub
