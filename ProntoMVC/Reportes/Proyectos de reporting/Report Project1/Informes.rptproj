@@ -18,6 +18,10 @@
       <Name>WilliamsTest.rds</Name>
       <FullPath>WilliamsTest.rds</FullPath>
     </ProjectItem>
+    <ProjectItem>
+      <Name>TestPCMariano.rds</Name>
+      <FullPath>TestPCMariano.rds</FullPath>
+    </ProjectItem>
   </DataSources>
   <DataSets>
     <ProjectItem>
@@ -53,6 +57,10 @@
     <ProjectItem>
       <Name>Carta Porte - Buques.rdl</Name>
       <FullPath>Carta Porte - Buques.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Carta Porte - ControlesDiarios.rdl</Name>
+      <FullPath>Carta Porte - ControlesDiarios.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
       <Name>Carta Porte - Situacion.rdl</Name>
@@ -541,10 +549,6 @@
     <ProjectItem>
       <Name>Williams - Sincro LaBiznaga2.rdl</Name>
       <FullPath>Williams - Sincro LaBiznaga2.rdl</FullPath>
-    </ProjectItem>
-    <ProjectItem>
-      <Name>Carta Porte - ControlesDiarios.rdl</Name>
-      <FullPath>Carta Porte - ControlesDiarios.rdl</FullPath>
     </ProjectItem>
   </Reports>
   <Configurations>
