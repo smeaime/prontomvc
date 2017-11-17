@@ -525,7 +525,7 @@ Global
 		{4E7AC3B5-C7E4-4A81-8539-ECE39D8794AC}.Debug|Android.ActiveCfg = Debug
 		{4E7AC3B5-C7E4-4A81-8539-ECE39D8794AC}.Debug|Any CPU.ActiveCfg = Debug
 		{4E7AC3B5-C7E4-4A81-8539-ECE39D8794AC}.Debug|iOS.ActiveCfg = Debug
-		{4E7AC3B5-C7E4-4A81-8539-ECE39D8794AC}.Debug|Mixed Platforms.ActiveCfg = Debug
+		{4E7AC3B5-C7E4-4A81-8539-ECE39D8794AC}.Debug|Mixed Platforms.ActiveCfg = DebugLocal
 		{4E7AC3B5-C7E4-4A81-8539-ECE39D8794AC}.Debug|Windows-ARM.ActiveCfg = Debug
 		{4E7AC3B5-C7E4-4A81-8539-ECE39D8794AC}.Debug|Windows-x64.ActiveCfg = Debug
 		{4E7AC3B5-C7E4-4A81-8539-ECE39D8794AC}.Debug|Windows-x86.ActiveCfg = Debug

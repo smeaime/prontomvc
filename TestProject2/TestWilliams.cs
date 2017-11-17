@@ -869,6 +869,79 @@ namespace ProntoMVC.Tests
 
 
 
+                
+
+
+        [TestMethod]
+        public void resumen_46943()
+        {
+
+            // En el periodo anterior sigue habiendo bnastante diferencia
+            // Si filtra por "entrega", aparecen cartas en "exportacion" porque de esas familias hay "Originales" en ese modo
+
+
+            ReportParameter p2 = null;
+
+            int idcliente = 2871; //los grobo
+            var desde = new DateTime(2016, 11, 1);
+            var hasta = new DateTime(2017, 5, 31);
+            var desdeAnt = new DateTime(2015, 11, 1); //nov
+            var hastaAnt = new DateTime(2016, 5, 31); //mayo
+            var pv = -1;
+            var ModoExportacion = "Entregas";
+            CartaDePorteManager.enumCDPestado estado = CartaDePorteManager.enumCDPestado.DescargasMasFacturadas; //CartaDePorteManager.enumCDPestado.Todas;
+
+            ReportViewer ReporteLocal = new Microsoft.Reporting.WebForms.ReportViewer();
+
+
+
+
+
+            string output2 = @"C:\Users\Administrador\Desktop\Informe" + DateTime.Now.ToString("ddMMMyyyy_HHmmss") + ".xls";
+            ReportParameter[] yourParams2 = new ReportParameter[20];
+            yourParams2[0] = new ReportParameter("FechaDesde", desde.ToString());
+            yourParams2[1] = new ReportParameter("FechaHasta", hasta.ToString());
+            yourParams2[2] = new ReportParameter("FechaDesdeAnterior", desdeAnt.ToString());
+            yourParams2[3] = new ReportParameter("FechaHastaAnterior", hastaAnt.ToString());
+            yourParams2[4] = new ReportParameter("bMostrar1", "true");
+            yourParams2[5] = new ReportParameter("bMostrar2", "true");
+            yourParams2[6] = new ReportParameter("bMostrar3", "true");
+            yourParams2[7] = new ReportParameter("bMostrar4", "true");
+            yourParams2[8] = new ReportParameter("bMostrar5", "true");
+            yourParams2[9] = new ReportParameter("idVendedor", idcliente.ToString());
+            yourParams2[10] = new ReportParameter("idCorredor", "-1");
+            yourParams2[11] = new ReportParameter("idDestinatario", " -1");
+            yourParams2[12] = new ReportParameter("idIntermediario", idcliente.ToString());
+            yourParams2[13] = new ReportParameter("idRemComercial", idcliente.ToString());
+            yourParams2[14] = new ReportParameter("idArticulo", " -1");
+            yourParams2[15] = new ReportParameter("idProcedencia", " -1");
+            yourParams2[16] = new ReportParameter("idDestino", " -1");
+            yourParams2[17] = new ReportParameter("AplicarANDuORalFiltro",CartaDePorteManager.FiltroANDOR.FiltroOR.ToString());
+            yourParams2[18] = new ReportParameter("ModoExportacion", "true");
+            yourParams2[19] = new ReportParameter("puntoventa",  "-1" );
+
+
+            var s = CartaDePorteManager.RebindReportViewer_ServidorExcel(ref ReporteLocal,
+                      "Williams - Resumen de Totales Generales (Facturacion).rdl", yourParams2, ref output2, false);
+
+
+            
+            
+
+
+            System.Diagnostics.Process.Start(output2);
+
+        }
+
+
+
+
+
+
+
+
+
+
 
         [TestMethod]
         public void GrabarVariasSituacionesCalidad_42871()
