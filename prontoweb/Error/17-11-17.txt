@@ -130,3 +130,157 @@ Error de la solicitud con el código de estado HTTP 401: Unauthorized.
    en ProntoMVC.Reportes.ReporteResumenEstad.Informe() en C:\bdl\pronto\prontoweb\ProntoWeb\ReporteResumenEstad.aspx.vb:línea 585
 Microsoft.ReportViewer.WebForms
 __________________________
+
+Log Entry : 
+11/17/2017 10:44:38
+Error in: http://localhost:50769/ProntoWeb/ReporteResumenEstad.aspx. Error Message:Vamos bien?
+__________________________
+
+Log Entry : 
+11/17/2017 10:44:38
+Error in: http://localhost:50769/ProntoWeb/ReporteResumenEstad.aspx. Error Message:http://desktop-clvul7u/ReportServer - administrador - .xza2190lkm. - 
+__________________________
+
+Log Entry : 
+11/17/2017 10:44:44
+Error in: http://localhost:50769/ProntoWeb/ReporteResumenEstad.aspx. Error Message:System.Net.WebException
+Error de la solicitud con el código de estado HTTP 401: Unauthorized.
+   en Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.GetSecureMethods()
+   en Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.IsSecureMethod(String methodname)
+   en Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.SetConnectionSSLForMethod(String methodname)
+   en Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.ProxyMethodInvocation.Execute[TReturn](RSExecutionConnection connection, ProxyMethod`1 initialMethod, ProxyMethod`1 retryMethod)
+   en Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.LoadReport(String Report, String HistoryID)
+   en Microsoft.Reporting.WebForms.ServerReport.EnsureExecutionSession()
+   en Microsoft.Reporting.WebForms.ServerReport.SetParameters(IEnumerable`1 parameters)
+   en ProntoMVC.Reportes.ReporteResumenEstad.Informe() en C:\bdl\pronto\prontoweb\ProntoWeb\ReporteResumenEstad.aspx.vb:línea 585
+Microsoft.ReportViewer.WebForms
+__________________________
+
+Log Entry : 
+11/17/2017 10:44:44
+Error in: http://localhost:50769/ProntoWeb/ReporteResumenEstad.aspx. Error Message:System.Net.WebException
+Error de la solicitud con el código de estado HTTP 401: Unauthorized.
+   en Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.GetSecureMethods()
+   en Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.IsSecureMethod(String methodname)
+   en Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.SetConnectionSSLForMethod(String methodname)
+   en Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.ProxyMethodInvocation.Execute[TReturn](RSExecutionConnection connection, ProxyMethod`1 initialMethod, ProxyMethod`1 retryMethod)
+   en Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.LoadReport(String Report, String HistoryID)
+   en Microsoft.Reporting.WebForms.ServerReport.EnsureExecutionSession()
+   en Microsoft.Reporting.WebForms.ServerReport.SetParameters(IEnumerable`1 parameters)
+   en ProntoMVC.Reportes.ReporteResumenEstad.Informe() en C:\bdl\pronto\prontoweb\ProntoWeb\ReporteResumenEstad.aspx.vb:línea 588
+   en ProntoMVC.Reportes.ReporteResumenEstad.btnRefrescar_Click(Object sender, EventArgs e) en C:\bdl\pronto\prontoweb\ProntoWeb\ReporteResumenEstad.aspx.vb:línea 671
+   en System.Web.UI.WebControls.Button.OnClick(EventArgs e)
+   en System.Web.UI.WebControls.Button.RaisePostBackEvent(String eventArgument)
+   en System.Web.UI.WebControls.Button.System.Web.UI.IPostBackEventHandler.RaisePostBackEvent(String eventArgument)
+   en System.Web.UI.Page.RaisePostBackEvent(IPostBackEventHandler sourceControl, String eventArgument)
+   en System.Web.UI.Page.RaisePostBackEvent(NameValueCollection postData)
+   en System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+Microsoft.ReportViewer.WebForms
+__________________________
+
+Log Entry : 
+11/17/2017 10:47:43
+Error in: http://localhost:50769/ProntoWeb/ReporteResumenEstad.aspx. Error Message:Vamos bien?
+__________________________
+
+Log Entry : 
+11/17/2017 10:47:43
+Error in: http://localhost:50769/ProntoWeb/ReporteResumenEstad.aspx. Error Message:http://desktop-clvul7u/ReportServer - administrador - .xza2190lkm. - 
+__________________________
+
+Log Entry : 
+11/17/2017 10:47:49
+Error in: http://localhost:50769/ProntoWeb/ReporteResumenEstad.aspx. Error Message:System.Net.WebException
+Error de la solicitud con el código de estado HTTP 401: Unauthorized.
+   en Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.GetSecureMethods()
+   en Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.IsSecureMethod(String methodname)
+   en Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.SetConnectionSSLForMethod(String methodname)
+   en Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.ProxyMethodInvocation.Execute[TReturn](RSExecutionConnection connection, ProxyMethod`1 initialMethod, ProxyMethod`1 retryMethod)
+   en Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.LoadReport(String Report, String HistoryID)
+   en Microsoft.Reporting.WebForms.ServerReport.EnsureExecutionSession()
+   en Microsoft.Reporting.WebForms.ServerReport.SetParameters(IEnumerable`1 parameters)
+   en ProntoMVC.Reportes.ReporteResumenEstad.Informe() en C:\bdl\pronto\prontoweb\ProntoWeb\ReporteResumenEstad.aspx.vb:línea 585
+Microsoft.ReportViewer.WebForms
+__________________________
+
+Log Entry : 
+11/17/2017 10:47:49
+Error in: http://localhost:50769/ProntoWeb/ReporteResumenEstad.aspx. Error Message:System.Net.WebException
+Error de la solicitud con el código de estado HTTP 401: Unauthorized.
+   en Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.GetSecureMethods()
+   en Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.IsSecureMethod(String methodname)
+   en Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.SetConnectionSSLForMethod(String methodname)
+   en Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.ProxyMethodInvocation.Execute[TReturn](RSExecutionConnection connection, ProxyMethod`1 initialMethod, ProxyMethod`1 retryMethod)
+   en Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.LoadReport(String Report, String HistoryID)
+   en Microsoft.Reporting.WebForms.ServerReport.EnsureExecutionSession()
+   en Microsoft.Reporting.WebForms.ServerReport.SetParameters(IEnumerable`1 parameters)
+   en ProntoMVC.Reportes.ReporteResumenEstad.Informe() en C:\bdl\pronto\prontoweb\ProntoWeb\ReporteResumenEstad.aspx.vb:línea 588
+   en ProntoMVC.Reportes.ReporteResumenEstad.btnRefrescar_Click(Object sender, EventArgs e) en C:\bdl\pronto\prontoweb\ProntoWeb\ReporteResumenEstad.aspx.vb:línea 671
+   en System.Web.UI.WebControls.Button.OnClick(EventArgs e)
+   en System.Web.UI.WebControls.Button.RaisePostBackEvent(String eventArgument)
+   en System.Web.UI.WebControls.Button.System.Web.UI.IPostBackEventHandler.RaisePostBackEvent(String eventArgument)
+   en System.Web.UI.Page.RaisePostBackEvent(IPostBackEventHandler sourceControl, String eventArgument)
+   en System.Web.UI.Page.RaisePostBackEvent(NameValueCollection postData)
+   en System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+Microsoft.ReportViewer.WebForms
+__________________________
+
+Log Entry : 
+11/17/2017 11:06:31
+Error in: http://localhost:50769/ProntoWeb/Principal.aspx. Error Message:Mariano esta logueado, pero lo redirijo al login porque faltan los datos de session. No deberia mejor mandarlo a SeleccionarEmpresa? Ademas, no hago el LogOut y le queda el cookie!!!
+__________________________
+
+Log Entry : 
+11/17/2017 11:06:32
+Error in: http://localhost:50769/ProntoWeb/CartasDePortes.aspx?tipo=Todas. Error Message:Mariano
+__________________________
+
+Log Entry : 
+11/17/2017 11:07:27
+Error in: http://localhost:50769/ProntoWeb/ReporteResumenEstad.aspx. Error Message:Vamos bien?
+__________________________
+
+Log Entry : 
+11/17/2017 11:07:27
+Error in: http://localhost:50769/ProntoWeb/ReporteResumenEstad.aspx. Error Message:http://desktop-clvul7u/ReportServer - Mariano -  - 
+__________________________
+
+Log Entry : 
+11/17/2017 11:07:33
+Error in: http://localhost:50769/ProntoWeb/ReporteResumenEstad.aspx. Error Message:System.Net.WebException
+Error de la solicitud con el código de estado HTTP 401: Unauthorized.
+   en Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.GetSecureMethods()
+   en Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.IsSecureMethod(String methodname)
+   en Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.SetConnectionSSLForMethod(String methodname)
+   en Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.ProxyMethodInvocation.Execute[TReturn](RSExecutionConnection connection, ProxyMethod`1 initialMethod, ProxyMethod`1 retryMethod)
+   en Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.LoadReport(String Report, String HistoryID)
+   en Microsoft.Reporting.WebForms.ServerReport.EnsureExecutionSession()
+   en Microsoft.Reporting.WebForms.ServerReport.SetParameters(IEnumerable`1 parameters)
+   en ProntoMVC.Reportes.ReporteResumenEstad.Informe() en C:\bdl\pronto\prontoweb\ProntoWeb\ReporteResumenEstad.aspx.vb:línea 585
+Microsoft.ReportViewer.WebForms
+__________________________
+
+Log Entry : 
+11/17/2017 11:08:56
+Error in: http://localhost:50769/ProntoWeb/ReporteResumenEstad.aspx. Error Message:Vamos bien?
+__________________________
+
+Log Entry : 
+11/17/2017 11:08:56
+Error in: http://localhost:50769/ProntoWeb/ReporteResumenEstad.aspx. Error Message:http://desktop-clvul7u/ReportServer - Mariano -  - 
+__________________________
+
+Log Entry : 
+11/17/2017 11:09:02
+Error in: http://localhost:50769/ProntoWeb/ReporteResumenEstad.aspx. Error Message:System.Net.WebException
+Error de la solicitud con el código de estado HTTP 401: Unauthorized.
+   en Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.GetSecureMethods()
+   en Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.IsSecureMethod(String methodname)
+   en Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.SetConnectionSSLForMethod(String methodname)
+   en Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.ProxyMethodInvocation.Execute[TReturn](RSExecutionConnection connection, ProxyMethod`1 initialMethod, ProxyMethod`1 retryMethod)
+   en Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.LoadReport(String Report, String HistoryID)
+   en Microsoft.Reporting.WebForms.ServerReport.EnsureExecutionSession()
+   en Microsoft.Reporting.WebForms.ServerReport.SetParameters(IEnumerable`1 parameters)
+   en ProntoMVC.Reportes.ReporteResumenEstad.Informe() en C:\bdl\pronto\prontoweb\ProntoWeb\ReporteResumenEstad.aspx.vb:línea 585
+Microsoft.ReportViewer.WebForms
+__________________________
