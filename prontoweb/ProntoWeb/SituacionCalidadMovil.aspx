@@ -1998,7 +1998,7 @@ Arroyo Seco (Sta. Fe) - René Favaloro 726 / (03402) 421-426 - 429-676 / arroyos
                             { name: ' IdCartaDePorte', index: ' IdCartaDePorte', align: 'left', width: 100, editable: false, hidden: true, frozen: true },
 
                             {
-                                name: 'NumeroCartaEnTextoParaBusqueda', index: 'NumeroCartaEnTextoParaBusqueda', width: 140, align: 'left', sorttype: "text", sortable: false, frozen: true
+                                name: 'NumeroCartaEnTextoParaBusqueda', index: 'NumeroCartaEnTextoParaBusqueda', width: 140, align: 'left', sorttype: "text", sortable: true, frozen: true
                                 , editable: false, editrules: { required: false, number: true }, edittype: 'text',
 
                                 searchoptions: { sopt: ['bw', 'cn', 'eq'], clearSearch: false },
@@ -2024,7 +2024,7 @@ Arroyo Seco (Sta. Fe) - René Favaloro 726 / (03402) 421-426 - 429-676 / arroyos
 
 
                             {
-                                name: 'Situacion', index: 'Situacion', align: 'left', width: 130, hidden: false, editable: true, edittype: 'select', sortable: false,
+                                name: 'Situacion', index: 'Situacion', align: 'left', width: 130, hidden: false, editable: true, edittype: 'select', sortable: true,
                                 editoptions: {
                                     //defaultValue: OrigenDescripcionDefault,
                                     //value: "0:Autorizado; 6:Desviado" 
@@ -2047,14 +2047,14 @@ Arroyo Seco (Sta. Fe) - René Favaloro 726 / (03402) 421-426 - 429-676 / arroyos
 
 
 
-                            { name: 'ObservacionesSituacion', index: 'ObservacionesSituacion', align: 'left', width: 100, editable: true, hidden: false, sortable: false },
+                            { name: 'ObservacionesSituacion', index: 'ObservacionesSituacion', align: 'left', width: 100, editable: true, hidden: false, sortable: true },
 
                           
 
 
 
                             {
-                                name: 'Producto', index: 'Producto', align: 'left', width: 60, hidden: false, editable: false, edittype: 'text', sortable: false
+                                name: 'Producto', index: 'Producto', align: 'left', width: 60, hidden: false, editable: false, edittype: 'text', sortable: true
 
                                 , searchoptions: {
                                     //    sopt:['eq'], 
@@ -2135,7 +2135,7 @@ Arroyo Seco (Sta. Fe) - René Favaloro 726 / (03402) 421-426 - 429-676 / arroyos
 
 
                             {
-                                name: 'TitularDesc', index: 'TitularDesc', align: 'left', width: 100, hidden: false, editable: false, edittype: 'text', sortable: false
+                                name: 'TitularDesc', index: 'TitularDesc', align: 'left', width: 100, hidden: false, editable: false, edittype: 'text', sortable: true
 
 
                                 , searchoptions: {
@@ -2213,7 +2213,7 @@ Arroyo Seco (Sta. Fe) - René Favaloro 726 / (03402) 421-426 - 429-676 / arroyos
 
                             },
                             {
-                                name: 'IntermediarioDesc', index: 'IntermediarioDesc', align: 'left', width: 60, hidden: false, editable: false, edittype: 'text', sortable: false
+                                name: 'IntermediarioDesc', index: 'IntermediarioDesc', align: 'left', width: 60, hidden: false, editable: false, edittype: 'text', sortable: true
 
                                 , searchoptions: {
                                     //    sopt:['eq'], 
@@ -2289,7 +2289,7 @@ Arroyo Seco (Sta. Fe) - René Favaloro 726 / (03402) 421-426 - 429-676 / arroyos
                                 }
                             },
                             {
-                                name: 'RComercialDesc', index: 'RComercialDesc', align: 'left', width: 100, hidden: false, editable: false, edittype: 'text', sortable: false
+                                name: 'RComercialDesc', index: 'RComercialDesc', align: 'left', width: 100, hidden: false, editable: false, edittype: 'text', sortable: true
 
 
                                 , searchoptions: {
@@ -2369,7 +2369,7 @@ Arroyo Seco (Sta. Fe) - René Favaloro 726 / (03402) 421-426 - 429-676 / arroyos
 
 
                             {
-                                name: 'CorredorDesc', index: 'CorredorDesc', align: 'left', width: 100, hidden: false, editable: false, edittype: 'text', sortable: false
+                                name: 'CorredorDesc', index: 'CorredorDesc', align: 'left', width: 100, hidden: false, editable: false, edittype: 'text', sortable: true
 
                                 , searchoptions: {
                                     //    sopt:['eq'], 
@@ -2447,7 +2447,7 @@ Arroyo Seco (Sta. Fe) - René Favaloro 726 / (03402) 421-426 - 429-676 / arroyos
 
 
                             {
-                                name: 'DestinatarioDesc', index: 'DestinatarioDesc', align: 'left', width: 100, hidden: false, editable: false, edittype: 'text', sortable: false
+                                name: 'DestinatarioDesc', index: 'DestinatarioDesc', align: 'left', width: 100, hidden: false, editable: false, edittype: 'text', sortable: true
 
 
                                 , searchoptions: {
@@ -2527,7 +2527,7 @@ Arroyo Seco (Sta. Fe) - René Favaloro 726 / (03402) 421-426 - 429-676 / arroyos
 
                             {
                                 name: 'DestinoDesc', index: 'DestinoDesc',
-                                formoptions: { rowpos: 5, colpos: 2, label: "Descripción" }, align: 'left', width: 100, hidden: false, editable: true, edittype: 'text', sortable: false,
+                                formoptions: { rowpos: 5, colpos: 2, label: "Descripción" }, align: 'left', width: 100, hidden: false, editable: true, edittype: 'text', sortable: true,
                                 searchoptions: {
                                     //    sopt:['eq'], 
                                     dataInit: function (elem) {
@@ -2604,18 +2604,18 @@ Arroyo Seco (Sta. Fe) - René Favaloro 726 / (03402) 421-426 - 429-676 / arroyos
                             },
                             { name: 'Destino', index: 'Destino', align: 'left', width: 100, hidden: true, editable: false, edittype: 'text', sortable: false },
 
-                            { name: 'Patente', index: 'Patente', align: 'left', width: 100, hidden: false, editable: false, edittype: 'text', sortable: false },
+                            { name: 'Patente', index: 'Patente', align: 'left', width: 100, hidden: false, editable: false, edittype: 'text', sortable: true },
 
 
 
-                            { name: 'NetoPto', index: 'NetoPto', align: 'left', width: 60, hidden: false, editable: false, edittype: 'text', sortable: false },
+                            { name: 'NetoPto', index: 'NetoPto', align: 'left', width: 60, hidden: false, editable: false, edittype: 'text', sortable: true },
 
 
-                            //{ name: 'NetoProc', index: 'NetoProc', align: 'left', width: 60, hidden: false, editable: false, edittype: 'text', sortable: false }
+                            //{ name: 'NetoProc', index: 'NetoProc', align: 'left', width: 60, hidden: false, editable: false, edittype: 'text', sortable: true }
 
 
                             {
-                                name: 'FechaArribo', index: 'FechaArribo', width: 100, sortable: true, align: 'right', editable: false, sortable: false,
+                                name: 'FechaArribo', index: 'FechaArribo', width: 100, sortable: true, align: 'right', editable: false, sortable: true,
                                 editoptions: {
                                     size: 10,
                                     maxlengh: 10,
@@ -2647,7 +2647,7 @@ Arroyo Seco (Sta. Fe) - René Favaloro 726 / (03402) 421-426 - 429-676 / arroyos
 
 
                             {
-                                name: 'FechaDescarga', index: 'FechaDescarga', width: 100, sortable: true, align: 'right', editable: false, sortable: false,
+                                name: 'FechaDescarga', index: 'FechaDescarga', width: 100, sortable: true, align: 'right', editable: false, sortable: true,
                                 editoptions: {
                                     size: 10,
                                     maxlengh: 10,
@@ -2679,7 +2679,7 @@ Arroyo Seco (Sta. Fe) - René Favaloro 726 / (03402) 421-426 - 429-676 / arroyos
 
 
 
-                            { name: 'PuntoVenta', index: 'PuntoVenta', align: 'left', width: 50, hidden: false, editable: false, edittype: 'text', sortable: false },
+                            { name: 'PuntoVenta', index: 'PuntoVenta', align: 'left', width: 50, hidden: false, editable: false, edittype: 'text', sortable: true },
 
 
 

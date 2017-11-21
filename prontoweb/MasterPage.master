@@ -135,7 +135,7 @@
 
                                         <script>
                                             $('#btnMostrarMenu').click(function () {
-                                                $('#MenuPrincipal').show();
+                                                $('#MenuPrincipal').toggle();
                                             })
                                         </script>
 
