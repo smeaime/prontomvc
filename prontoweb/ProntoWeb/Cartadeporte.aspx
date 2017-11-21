@@ -10,6 +10,85 @@
 
 
 
+
+    <%--/////////////////////////////////////////////////////////////--%>
+    <%--///////////     jquery          /////////////////////////////--%>
+    <%--/////////////////////////////////////////////////////////////--%>
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+
+
+
+
+
+    <%--/////////////////////////////////////////////////////////////--%>
+    <%--///////////     bootstrap    /////////////////////////////--%>
+    <%--/////////////////////////////////////////////////////////////--%>
+    <%--    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>--%>
+
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+
+    <%--/////////////////////////////////////////////////////////////--%>
+    <%--/////////////////////////////////////////////////////////////--%>
+    <%--////////////    jqgrid     //////////////////////////////////--%>
+    <%--/////////////////////////////////////////////////////////////--%>
+    <script src="//cdn.jsdelivr.net/jqgrid/4.5.4/i18n/grid.locale-es.js"></script>
+
+
+
+    <script src="http://cdn.jsdelivr.net/jqgrid/4.5.4/i18n/grid.locale-es.js"></script>
+    <link href="http://cdn.jsdelivr.net/jqgrid/4.5.4/css/ui.jqgrid.css" rel="stylesheet" type="text/css" />
+    <script src="http://cdn.jsdelivr.net/jqgrid/4.5.4/plugins/ui.multiselect.js"></script>
+    <script src="http://cdn.jsdelivr.net/jqgrid/4.5.4/plugins/jquery.contextmenu.js"></script>
+    <script src="http://cdn.jsdelivr.net/jqgrid/4.5.4/plugins/jquery.searchFilter.js"></script>
+    <script src="http://cdn.jsdelivr.net/jqgrid/4.5.4/plugins/jquery.tablednd.js"></script>
+    <link href="http://cdn.jsdelivr.net/jqgrid/4.5.4/plugins/searchFilter.css" rel="stylesheet" type="text/css" />
+    <link href="http://cdn.jsdelivr.net/jqgrid/4.5.4/plugins/ui.multiselect.css" rel="stylesheet" type="text/css" />
+
+    <script src="http://cdn.jsdelivr.net/jqgrid/4.5.4/jquery.jqGrid.min.js"></script>
+
+
+
+
+
+
+
+
+    <title>BDL Consultores</title>
+
+    <%--  <link id="Link1" href="Css/Styles.css" rel="stylesheet" type="text/css" runat="server" />--%>
+
+    <link rel="shortcut icon" type="image/ico" href="favicon.png" />
+
+
+    <%--    <script>
+        (function (i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date(); a = s.createElement(o),
+            m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+        //ga('create', 'UA-31129433-2', 'auto');
+        ga('create', 'UA-31129433-2', { 'siteSpeedSampleRate': 100 });
+        ga('send', 'pageview');
+
+    </script>--%>
+</head>
+
+
+    <%--https://developer.mozilla.org/en-US/docs/Mozilla/Mobile/Viewport_meta_tag--%>
+
+
+
+
+
+
+
+
+
     <%--    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>--%>
     <%--<link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css"
         rel="stylesheet">
@@ -1220,7 +1299,7 @@
                                                 ID="AutoCompleteExtender9" runat="server" CompletionSetCount="12" MinimumPrefixLength="1"
                                                 ServiceMethod="GetCompletionList" ServicePath="WebServiceClientesCUIT.asmx" TargetControlID="txtSubcontr1"
                                                 UseContextKey="True" FirstRowSelected="True" DelimiterCharacters="" Enabled="True"
-                                                CompletionInterval="100" >
+                                                CompletionInterval="100">
                                             </cc1:AutoCompleteExtender>
                                         </td>
                                         <td class="EncabezadoCell" style="width: 15%;">Contrato
@@ -2701,9 +2780,22 @@
                     </table>
                 </ContentTemplate>
             </cc1:TabPanel>
+            <cc1:TabPanel ID="TabPanel5" runat="server" BackColor="#6600FF"  Height="550px">
+                <HeaderTemplate>
+                    <u>C</u>hat
+                </HeaderTemplate>
+
+                <ContentTemplate>
+                    <table id="Lista" class="scroll" cellpadding="0" cellspacing="0" style="font-size: 22px;" width="">
+                    </table>
+
+                    <div id="ListaPager" class="scroll" style="text-align: center; height: ;">
+                    </div>
 
 
 
+                </ContentTemplate>
+            </cc1:TabPanel>
         </cc1:TabContainer>
         <asp:UpdatePanel runat="server">
             <ContentTemplate>
@@ -3140,7 +3232,7 @@
 
     <script>
 
-        
+
 
         function ActualizarDiferencia() {
 
@@ -4423,6 +4515,338 @@
             ActualizarDiferencia();
         }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        $('#Lista').jqGrid({
+            //url: ROOT + 'CotizacionWilliamsDestino/Cotizaciones/',
+            url: 'HandlerReclamos.ashx',
+            //postData: {},
+            postData: {
+                'FechaInicial': function () { return $("#txtFechaDesde").val(); },
+                'FechaFinal': function () { return $("#txtFechaHasta").val(); },
+                'puntovent': function () { return $("#cmbPuntoVenta").val(); },
+                'destino': function () { return $("txtDestino").val(); }
+            },
+            datatype: 'json',
+            mtype: 'POST',
+
+
+
+
+            // CP	TURNO	SITUACION	MERC	TITULAR_CP	INTERMEDIARIO	RTE CIAL	CORREDOR	DESTINATARIO	DESTINO	ENTREGADOR	PROC	KILOS	OBSERVACION
+
+
+            colNames: ['', 'IdReclamoComentario', 'IdReclamo', 'Empleado', 'Comentario'
+                            , 'Fecha', 'ArchivoAdjunto'
+                , 'nrocarta'
+            ],
+
+
+
+
+
+            colModel: [
+                {
+                    name: 'act', index: 'act', align: 'center', width: 60, editable: false, hidden: true, sortable: false, search: false
+                },
+
+                { name: 'IdReclamoComentario', index: 'IdReclamoComentario', align: 'left', width: 100, editable: false, hidden: true },
+                { name: 'IdReclamo', index: 'IdReclamo', align: 'left', width: 100, editable: false, hidden: false },
+                { name: 'Empleado', index: 'Empleado', align: 'left', width: 100, hidden: false },
+                { name: 'Comentario', index: 'Comentario', align: 'left', width: 400, hidden: false },
+
+                { name: 'Fecha', index: 'Fecha', align: 'left', width: 100, editable: true, hidden: false, sortable: false },
+
+
+                { name: 'ArchivoAdjunto', index: 'ArchivoAdjunto', align: 'left', width: 100, editable: true, hidden: false, sortable: false },
+        { name: 'ArchivoAdjunto', index: 'ArchivoAdjunto', align: 'left', width: 100, editable: true, hidden: false, sortable: false },
+
+
+
+
+
+
+
+
+
+
+            ],
+
+            gridComplete: function () {
+                //    var ids = jQuery("#Lista").jqGrid('getDataIDs');
+                //    for (var i = 0; i < ids.length; i++) {
+                //        var cl = ids[i];
+                //        var se = "<input style='height:22px;width:20px;' type='button' value='G' onclick=\"GrabarFila('" + cl + "'); \"  />";
+                //        jQuery("#Lista").jqGrid('setRowData', ids[i], { act: se });
+                //    }
+                //jQuery("#Lista").jqGrid('addRowData', Id, data, "last");
+                //AgregarItemVacio(grid)
+
+
+            },
+
+
+
+            loadComplete: function () {
+                // http://stackoverflow.com/questions/6575192/jqgrid-change-background-color-of-row-based-on-row-cell-value-by-column-name
+
+
+
+
+                $("#ListaPager_left").remove();
+                $("#first_ListaPager").remove();
+                $("#prev_ListaPager").remove();
+                $("#next_ListaPager").remove();
+                $("#last_ListaPager").remove();
+
+                $("#ListaPager_center").width(150);
+
+
+
+
+                //RefrescarFondoRenglon(this);
+
+
+            },
+
+
+
+            subGridRowExpanded: function (subgrid_id, row_id) {
+                //var html = "<span>Some HTML text which corresponds the row with id=" +
+                //    row_id + "</span><br/>";
+
+                //var html = '<ul data-dtr-index="0" class="dtr-details"><li data-dtr-index="4" data-dt-row="0" data-dt-column="4"><span class="dtr-title"><a href="">Titular</a></span> <span class="dtr-data"><span>Martignone Adolfo Y Cia  S C A </span></span></li><li data-dtr-index="5" data-dt-row="0" data-dt-column="5"><span class="dtr-title">Intermed.</span> <span class="dtr-data"><span></span></span></li><li data-dtr-index="6" data-dt-row="0" data-dt-column="6"><span class="dtr-title">Remitente Comercial</span> <span class="dtr-data"><span>Granos Olavarria S A </span></span></li><li data-dtr-index="7" data-dt-row="0" data-dt-column="7"><span class="dtr-title"><a href="">Corredor</a></span> <span class="dtr-data"><span>Futuros Y Opciones Com S A </span></span></li><li data-dtr-index="8" data-dt-row="0" data-dt-column="8"><span class="dtr-title">Esp.</span> <span class="dtr-data"><span>Soja Sustentable Usa</span></span></li><li data-dtr-index="9" data-dt-row="0" data-dt-column="9"><span class="dtr-title"><a href="">Destino</a><img title="Orden:Asc" src="/WebResource.axd?d=olQ67zyJIM4n9M_oCjYGRrTv0D-PJFdyCfA8P30v3DAazZ2pPF9qhxbM3BGjwDU_sj9fOg-6w-QRXWlBrrBXHMoHlpC6GPd2JFlMFkPtMfvCFUjqHNl-emkH6wLPSw2q0&amp;t=636426523640000000" alt="Orden:Asc" align="absbottom"></span> <span class="dtr-data">FCA VICENTIN</span></li><li data-dtr-index="10" data-dt-row="0" data-dt-column="10"><span class="dtr-title">Destinat.</span> <span class="dtr-data"><span>Vicentin S A I C</span></span></li><li data-dtr-index="11" data-dt-row="0" data-dt-column="11"><span class="dtr-title">Analisis</span> <span class="dtr-data"><span>DÑ:12.00% HD:13.20%  </span></span></li><li data-dtr-index="12" data-dt-row="0" data-dt-column="12"><span class="dtr-title">Patente</span> <span class="dtr-data">ERT783</span></li><li data-dtr-index="13" data-dt-row="0" data-dt-column="13"><span class="dtr-title">Obs Pto</span> <span class="dtr-data">&nbsp;</span></li><li data-dtr-index="14" data-dt-row="0" data-dt-column="14"><span class="dtr-title">Procedencia</span> <span class="dtr-data"><span>Villa Lila</span></span></li><li data-dtr-index="15" data-dt-row="0" data-dt-column="15"><span class="dtr-title">Entreg</span> <span class="dtr-data"><span>Wil</span></span></li><li data-dtr-index="16" data-dt-row="0" data-dt-column="16"><span class="dtr-title">Entreg CP</span> <span class="dtr-data"><span></span></span></li></ul>'
+
+
+
+
+
+                var a = $("#Lista").jqGrid('getRowData', row_id);
+
+
+
+                //$("#" + subgrid_id).append(dataFromTheRow.infohtml);
+                //$("#" + subgrid_id).append(dataFromTheRow.Producto);
+
+
+
+                // value: "0:Autorizado; 1:Demorado; 2:Posición; 3:Descargado; 4:A Descargar; 5:Rechazado;6:Desviado;7:CP p/cambiar;8:Sin Cupo;9:Calado"
+
+                //alert(a.Situacion);
+
+                var situacionDesc = "";
+                switch (parseInt(a.Situacion)) {
+                    case 0:
+                        situacionDesc = "Autorizado";
+                        break;
+                    case 1:
+                        situacionDesc = "Demorado";
+                        break;
+                    case 2:
+                        situacionDesc = "Posición";
+                        break;
+                    case 3:
+                        situacionDesc = "Descargado";
+                        break;
+                    case 4:
+                        situacionDesc = "A Descargar";
+                        break;
+                    case 5:
+                        situacionDesc = "Rechazado";
+                        break;
+                    case 6:
+                        situacionDesc = "Desviado";
+                        break;
+                    case 7:
+                        situacionDesc = "CP p/cambiar";
+                        break;
+                    case 8:
+                        situacionDesc = "Sin Cupo";
+                        break;
+                    case 9:
+                        situacionDesc = "Calado";
+                        break;
+                    default:
+                        situacionDesc = "";
+
+                }
+
+
+
+
+                var html = "<span style='font-size: 14px'> " +
+                    "<br/><b>Situación</b>      " + situacionDesc +
+                    "<br/><b>Observaciones</b>            " + a.ObservacionesSituacion +
+                    "<br/><b>Producto</b>       " + a.Producto +
+                    "<br/><b>Titular</b>            " + a.TitularDesc +
+                    "<br/><b>Intermediario</b>            " + a.IntermediarioDesc +
+                    "<br/><b>R.Comercial</b>            " + a.RComercialDesc +
+                    "<br/><b>Corredor</b>            " + a.CorredorDesc +
+                    "<br/><b>Destinatario</b>            " + a.DestinatarioDesc +
+                    "<br/><b>Destino</b>  " + a.DestinoDesc +
+                    "<br/><b>Patente</b>  " + a.Patente +
+                    "<br/><b>Neto</b>  " + a.NetoPto +
+                    "<br/><b>Arribo</b>  " + a.FechaArribo +
+                    "<br/><b>Descarga</b>  " + a.FechaDescarga +
+                    "<br/><br/><a href=\"CartaDePorte.aspx?Id=" + a.IdCartaDePorte + "\"  target=\"_blank\" > ver carta </>" +
+                    "<span/>";
+
+                $("#" + subgrid_id).append(html);
+
+
+            },
+
+            onSelectRow: function (rowId) {
+                //$("#Lista").jqGrid('toggleSubGridRow', rowId);
+            },
+
+            //onSelectRow: function (id) { 
+            //    //dobleclic = true;
+            //    EditarItem(id);
+            //},
+
+            //ondblClickRow: function (id) {
+            //    //sacarDeEditMode();
+            //    dobleclic = true;
+            //    EditarItem(id);
+            //},
+
+
+
+
+
+            //onCellSelect: function (rowid, iCol, cellcontent, e) {
+            //    var $this = $(this);
+            //    var iRow = $('#' + $.jgrid.jqID(rowid))[0].rowIndex;
+            //    lastSelectedId = rowid;
+            //    lastSelectediCol = iCol;
+            //    lastSelectediRow = iRow;
+            //},
+            //afterEditCell: function (id, name, val, iRow, iCol) {
+            //    //if (name == 'Fecha') {
+            //    //    jQuery("#" + iRow + "_Fecha", "#Lista").datepicker({ dateFormat: "dd/mm/yy" });
+            //    //}
+            //    var se = "<input style='height:22px;width:55px;' type='button' value='Grabar' onclick=\"GrabarFila('" + id + "');\"  />";
+            //    jQuery("#Lista").jqGrid('setRowData', id, { act: se });
+            //},
+            //beforeSelectRow: function (rowid, e) {
+            //var $this = $(this),
+            //    $td = $(e.target).closest('td'),
+            //    $tr = $td.closest('tr'),
+            //    iRow = $tr[0].rowIndex,
+            //    iCol = $.jgrid.getCellIndex($td);
+
+            //if (typeof lastSelectediRow !== "undefined" && typeof lastSelectediCol !== "undefined" &&
+            //        (iRow !== lastSelectediRow || iCol !== lastSelectediCol)) {
+            //    $this.jqGrid('setGridParam', {cellEdit: true});
+            //    $this.jqGrid('restoreCell', lastSelectediRow, lastSelectediCol, true);
+            //    $this.jqGrid('setGridParam', {cellEdit: false});
+            //    $(this.rows[lastSelectediRow].cells[lastSelectediCol])
+            //        .removeClass("ui-state-highlight");
+            //}
+            //return true;
+            //},
+
+
+
+            pager: $('#ListaPager'),
+            rowNum: 100,
+            //rowList: [10, 20, 50, 100, 500, 1000],
+            sortname: 'IdReclamo',  //'FechaDescarga', //'NumeroCartaDePorte',
+            sortorder: 'desc',
+            viewrecords: true,
+            multiselect: true,
+            shrinkToFit: false,
+
+            width: $(window).width() - 4, // 310, //'auto',
+            height: 'auto', // '100%', //$(window).height() - 260, // '100%'
+
+            altRows: false,
+            footerrow: false,
+            userDataOnFooter: true,
+            //caption: '<b>Control de Descargas</b>',
+            cellEdit: false, // si usas frozencolumns, estas obligado a sacar el cellEdit!!!
+            cellsubmit: 'clientArray',
+            dataUrl: "WebServiceClientes.asmx/EmpleadoEditGridData",
+
+
+
+
+            recordtext: "{2} cartas</span>",
+            pgtext: "Pag. {0} de {1}",
+            toppager: true,
+            subGrid: true,
+            multiselectWidth: 40,
+            subGridWidth: 40,
+
+
+            gridview: true
+            , multiboxonly: true
+            , multipleSearch: true
+
+
+
+
+        });
+
+
+
+        jQuery('#Lista').jqGrid('gridResize');
+
+        jQuery("#Lista").jqGrid('bindKeys');
+
+        jQuery("#Lista").jqGrid('navGrid', '#ListaPager',
+            { csv: true, refresh: true, add: false, edit: false, del: false }, {}, {}, {},
+            {
+                //sopt: ["cn"]
+                //sopt: ['eq', 'ne', 'lt', 'le', 'gt', 'ge', 'bw', 'bn', 'ew', 'en', 'cn', 'nc', 'nu', 'nn', 'in', 'ni'],
+                zIndex: 50,
+                width: 300, // $(window).width() - 4, 
+                closeOnEscape: true, closeAfterSearch: true, multipleSearch: true, overlay: false
+
+            }
+            // http://stackoverflow.com/questions/11228764/jqgrid-setting-zindex-for-alertmod
+        );
+
+        //jQuery("#Lista").jqGrid('navGrid', '#ListaPager',
+        //    { search: false, refresh: false, add: false, edit: false, del: false }, {}, {}, {}, {});
+
+
+
+        //jQuery("#Lista").jqGrid('navButtonAdd', '#ListaPager',
+        //                                {
+        //                                    caption: "", buttonicon: "ui-icon-plus", title: "Agregar",
+        //                                    onClickButton: function () {
+        //                                        AgregarItemVacio(jQuery("#Lista"));
+        //                                    },
+        //                                });
+        //jQuery("#Lista").jqGrid('navButtonAdd', '#ListaPager',
+        //                                {
+        //                                    caption: "", buttonicon: "ui-icon-trash", title: "Eliminar",
+        //                                    onClickButton: function () {
+        //                                        MarcarSeleccionadosParaEliminar(jQuery("#Lista"));
+        //                                    },
+        //                                });
+
+
+
+        jQuery("#Lista").filterToolbar({
+            stringResult: true, searchOnEnter: true,
+            defaultSearch: 'cn',
+            enableClear: false
+        });
 
     </script>
 </asp:Content>
