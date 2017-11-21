@@ -3,7 +3,6 @@
   <ConnectionProperties>
     <Extension>SQL</Extension>
     <ConnectString>Data Source=DESKTOP-CLVUL7U;Initial Catalog=Williams;Connect Timeout=8</ConnectString>
-    <IntegratedSecurity>true</IntegratedSecurity>
   </ConnectionProperties>
   <DataSourceID>4e4ca2e2-66f1-4988-a001-4f6ef907f60c</DataSourceID>
 </RptDataSource>

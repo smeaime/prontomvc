@@ -40,6 +40,10 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
 
+
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+
+
     <%-- El asuntito de la imagen del background http://www.daniweb.com/forums/thread57245.html# --%>
     <form id="form1" runat="server" defaultfocus="txtSuperbuscador" autocomplete="off"
         class="bodyMasterPage">
@@ -124,10 +128,24 @@
                                 <tr>
                                     <td></td>
                                     <td width="180px" rowspan="100%">
+                                        <button type="button" id="btnMostrarMenu" value="" class="" style="height: ; width: ; margin-left: ; background-color: transparent">
+                                            <i class="fa fa-bars fa-1x"></i>
+                                        </button>
+
+
+                                        <script>
+                                            $('#btnMostrarMenu').click(function () {
+                                                $('#MenuPrincipal').show();
+                                            })
+                                        </script>
+
+
+
+
                                         <asp:Label ID="lblInfoBajoElLogo" runat="server" Font-Size="Small" CssClass="Alerta"
                                             Style="margin-left: 2px; margin-bottom: ;" Height=""></asp:Label>
 
-                                    </td>
+                                        </td>
                                     <td>
                                         <table width="100%" border="0" cellpadding="0" cellspacing="0">
                                             <tr>
@@ -227,31 +245,31 @@
                                                             }
 
                                                         </script>
-                                                        <%--CompletionListCssClass="AutoCompleteScrollParaElSuperbuscador"--%>
-                                                        <%--CompletionListItemCssClass="AutoCompleteScrollParaElSuperbuscadorlistitem" --%>
-                                                        <%--CompletionListHighlightedItemCssClass="AutoCompleteScrollParaElSuperbuscadorhoverlistitem"--%>
-                                                        <table style="border-width: 0px; padding: 0px; margin: 0px; height: 22px; visibility: hidden; display: none;">
-                                                            <tr>
-                                                                <td></td>
-                                                                <td>
-                                                                    <asp:Button ID="btnBuscar" runat="server" Visible="false" Text="Buscar" CssClass="butBuscar" />
-                                                                </td>
-                                                            </tr>
-                                                        </table>
-                                                    </asp:Panel>
+                                        <%--CompletionListCssClass="AutoCompleteScrollParaElSuperbuscador"--%>
+                                        <%--CompletionListItemCssClass="AutoCompleteScrollParaElSuperbuscadorlistitem" --%>
+                                        <%--CompletionListHighlightedItemCssClass="AutoCompleteScrollParaElSuperbuscadorhoverlistitem"--%>
+                                        <table style="border-width: 0px; padding: 0px; margin: 0px; height: 22px; visibility: hidden; display: none;">
+                                            <tr>
+                                                <td></td>
+                                                <td>
+                                                    <asp:Button ID="btnBuscar" runat="server" Visible="false" Text="Buscar" CssClass="butBuscar" />
                                                 </td>
-                                                <td align="right" width="100%" cssclass="margender">
-                                                    <asp:Label ID="lblTipoBase" runat="server" Font-Size="Small" CssClass="Alerta"></asp:Label>
-                                                    <asp:LinkButton ID="lnkEmpresa" runat="server" Font-Bold="false" CausesValidation="False"
-                                                        CssClass="margender" TabIndex="-1" BorderStyle="None" BorderWidth="0px"
-                                                        Visible="true">a</asp:LinkButton>
-                                                    <%--PostBackUrl='SeleccionarEmpresa.aspx'--%>
+                                            </tr>
+                                        </table>
+                                        </asp:Panel>
+                                    </td>
+                                    <td align="right" width="100%" cssclass="margender">
+                                        <asp:Label ID="lblTipoBase" runat="server" Font-Size="Small" CssClass="Alerta"></asp:Label>
+                                        <asp:LinkButton ID="lnkEmpresa" runat="server" Font-Bold="false" CausesValidation="False"
+                                            CssClass="margender" TabIndex="-1" BorderStyle="None" BorderWidth="0px"
+                                            Visible="true">a</asp:LinkButton>
+                                        <%--PostBackUrl='SeleccionarEmpresa.aspx'--%>
 
-                                                    <asp:DropDownList ID="DDLEmpresas" runat="server" Width="200" TabIndex="1" Font-Size="XX-Small"
-                                                        CssClass="DropDownTransparente" Visible="False">
-                                                    </asp:DropDownList>
-                                                    <asp:Label ID="lblInfo" runat="server" Text="Empresa" CssClass="margender" Visible="false"></asp:Label>
-                                                    |
+                                        <asp:DropDownList ID="DDLEmpresas" runat="server" Width="200" TabIndex="1" Font-Size="XX-Small"
+                                            CssClass="DropDownTransparente" Visible="False">
+                                        </asp:DropDownList>
+                                        <asp:Label ID="lblInfo" runat="server" Text="Empresa" CssClass="margender" Visible="false"></asp:Label>
+                                        |
                                             <asp:LoginView ID="LoginView" runat="server">
                                                 <LoggedInTemplate>
                                                     <asp:LoginName ID="LoginName1" runat="server" Font-Bold="false" CssClass="margender" />
@@ -261,10 +279,10 @@
                                                         TabIndex="-1" LogoutText="Salir" Font-Underline="False" CssClass="margender" />
                                                 </LoggedInTemplate>
                                             </asp:LoginView>
-                                                    <asp:Label ID="lblSoloParaHacerEspacio" runat="server" Text=" " Width="3"></asp:Label>
-                                                </td>
-                                            </tr>
-                                        </table>
+                                        <asp:Label ID="lblSoloParaHacerEspacio" runat="server" Text=" " Width="3"></asp:Label>
+                                    </td>
+                                </tr>
+                                </table>
                                     </td>
                                     <td class="margenDerecho"></td>
                                 </tr>
@@ -608,16 +626,16 @@ ERA ESO EL PROBLEMA DEL PANELCITO VACIO?????????????????!!!!!!!!!!!!!!!1
 
     <script src="https://www.gstatic.com/firebasejs/4.5.0/firebase.js"></script>
     <script>
-                                                            // Initialize Firebase
-                                                            var config = {
-                                                                apiKey: "AIzaSyD_KzMypOaPPCUl42hvR3BEkB9ZHCU9Nuc",
-                                                                authDomain: "pronto-f87bf.firebaseapp.com",
-                                                                databaseURL: "https://pronto-f87bf.firebaseio.com",
-                                                                projectId: "pronto-f87bf",
-                                                                storageBucket: "",
-                                                                messagingSenderId: "741177410808"
-                                                            };
-                                                            firebase.initializeApp(config);
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyD_KzMypOaPPCUl42hvR3BEkB9ZHCU9Nuc",
+            authDomain: "pronto-f87bf.firebaseapp.com",
+            databaseURL: "https://pronto-f87bf.firebaseio.com",
+            projectId: "pronto-f87bf",
+            storageBucket: "",
+            messagingSenderId: "741177410808"
+        };
+        firebase.initializeApp(config);
     </script>
 </body>
 </html>
