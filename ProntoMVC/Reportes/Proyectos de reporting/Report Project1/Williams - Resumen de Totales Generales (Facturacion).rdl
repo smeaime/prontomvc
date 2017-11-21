@@ -3,7 +3,7 @@
   <AutoRefresh>0</AutoRefresh>
   <DataSources>
     <DataSource Name="TestHarcodeada">
-      <DataSourceReference>DataSourceProduccion</DataSourceReference>
+      <DataSourceReference>TestPCMariano</DataSourceReference>
       <rd:SecurityType>Integrated</rd:SecurityType>
       <rd:DataSourceID>19dde040-c46f-477a-8048-5f0c1971f8dd</rd:DataSourceID>
     </DataSource>
