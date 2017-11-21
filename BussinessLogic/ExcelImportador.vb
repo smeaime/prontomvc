@@ -2163,7 +2163,7 @@ Public Class ExcelImportadorManager
 
                         'http://consultas.bdlconsultores.com.ar/AdminTest/template/desarrollo/Consulta.php?IdReclamo=37950&SinMenu=1
                         If If(.IdClienteEntregador, 0) <> 12454 And If(.IdClienteEntregador, 0) <> 0 Then
-                            .Exporta = "SI"
+                            '.Exporta = "SI"   'removido por antireclamo 46885
                         End If
 
 
