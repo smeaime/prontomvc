@@ -7307,9 +7307,12 @@ Public Class LogicaFacturacion
                     oPto.Guardar()
                     oPto = Nothing
 
+
+
                     For i = -100 To (-100 - (oFac.DetFacturas.Count - 1)) Step -1
                         With oFac.DetFacturas.Item(i).Registro
                             'estos datos recien los tengo cuando termina
+                            'acá hay rollo http: //consultas.bdlconsultores.com.ar/Admin/VerConsultas1.php?recordid=46968
                             .Fields("NumeroFactura").Value = mNumero
                             .Fields("TipoABC").Value = mLetra
                             .Fields("PuntoVenta").Value = IdPuntoVenta
