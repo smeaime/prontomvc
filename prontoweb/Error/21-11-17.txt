@@ -361,3 +361,53 @@ Error in: http://localhost:50769/ProntoWeb/WebServiceClientes.asmx/AcopiosPorCli
 ClientConnectionId:00000000-0000-0000-0000-000000000000
 Error Number:53,State:0,Class:20
 __________________________
+
+Log Entry : 
+11/21/2017 15:16:50
+Error in: http://localhost:50769/ProntoWeb/Cartadeporte.aspx. Error Message:Mariano esta logueado, pero lo redirijo al login porque faltan los datos de session. No deberia mejor mandarlo a SeleccionarEmpresa? Ademas, no hago el LogOut y le queda el cookie!!!
+__________________________
+
+Log Entry : 
+11/21/2017 15:20:12
+Error in: http://localhost:50769/ProntoWeb/Cartadeporte.aspx. Error Message:PV 0 0
+__________________________
+
+Log Entry : 
+11/21/2017 15:20:31
+Error in: http://localhost:50769/ProntoWeb/Cartadeporte.aspx. Error Message:PV 0 0
+__________________________
+
+Log Entry : 
+11/21/2017 15:21:24
+Error in: http://localhost:50769/ProntoWeb/Cartadeporte.aspx. Error Message:PV 0 0
+__________________________
+
+Log Entry : 
+11/21/2017 15:24:00
+Error in: http://localhost:50769/ProntoWeb/Cartadeporte.aspx. Error Message:PV 0 0
+__________________________
+
+Log Entry : 
+11/21/2017 15:24:34
+Error in: http://localhost:50769/ProntoWeb/Cartadeporte.aspx. Error Message:PV 0 0
+__________________________
+
+Log Entry : 
+11/21/2017 15:25:19
+Error in: http://localhost:50769/ProntoWeb/Cartadeporte.aspx. Error Message:PV 0 0
+__________________________
+
+Log Entry : 
+11/21/2017 15:26:57
+Error in: http://localhost:50769/ProntoWeb/Cartadeporte.aspx. Error Message:PV 0 0
+__________________________
+
+Log Entry : 
+11/21/2017 15:28:18
+Error in: http://localhost:50769/ProntoWeb/Cartadeporte.aspx. Error Message:PV 0 0
+__________________________
+
+Log Entry : 
+11/21/2017 15:28:33
+Error in: http://localhost:50769/ProntoWeb/Cartadeporte.aspx. Error Message:PV 0 0
+__________________________

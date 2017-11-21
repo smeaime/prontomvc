@@ -128,9 +128,12 @@
                                 <tr>
                                     <td></td>
                                     <td width="180px" rowspan="100%">
-                                        <button type="button" id="btnMostrarMenu" value="" class="" style="height: ; width: ; margin-left: ; background-color: transparent">
+                                        <a type="button" id="btnMostrarMenu" >
+                                           <i class="fa fa-bars fa-2x"></i> 
+                                            </a>
+                                       <%-- <button type="button" id="btnMostrarMenu" value="" class="" style="height: ; width: ; margin-left: ; background-color: transparent">
                                             <i class="fa fa-bars fa-1x"></i>
-                                        </button>
+                                        </button>--%>
 
 
                                         <script>
