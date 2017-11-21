@@ -905,7 +905,7 @@ Arroyo Seco (Sta. Fe) - René Favaloro 726 / (03402) 421-426 - 429-676 / arroyos
    		{ name: 'amount', index: 'amount', width: 80, align: "right" },
    		{ name: 'tax', index: 'tax', width: 80, align: "right" },
    		{ name: 'total', index: 'total', width: 80, align: "right" },
-   		{ name: 'note', index: 'note', width: 150, sortable: false }
+   		{ name: 'note', index: 'note', width: 150, sortable: true }
                 ],
 
 
@@ -2002,7 +2002,7 @@ Arroyo Seco (Sta. Fe) - René Favaloro 726 / (03402) 421-426 - 429-676 / arroyos
 
 
                             {
-                                name: 'NumeroCartaEnTextoParaBusqueda', index: 'NumeroCartaEnTextoParaBusqueda', width: 90, align: 'left', sorttype: "text", sortable: false, frozen: true
+                                name: 'NumeroCartaEnTextoParaBusqueda', index: 'NumeroCartaEnTextoParaBusqueda', width: 90, align: 'left', sorttype: "text", sortable: true, frozen: true
                                 , editable: false, editrules: { required: false, number: true }, edittype: 'text',
 
                                 searchoptions: { sopt: ['bw', 'cn', 'eq'], clearSearch: false },
@@ -2021,10 +2021,10 @@ Arroyo Seco (Sta. Fe) - René Favaloro 726 / (03402) 421-426 - 429-676 / arroyos
                                         }]
                                 }
                             },
-                            { name: 'ver', index: 'NetoPto', align: 'left', width: 40, hidden: false, editable: false, edittype: 'text', sortable: false, searchoptions: { clearSearch: false } },
-                            { name: 'SubnumeroVagon', index: 'NetoPto', align: 'left', width: 60, hidden: false, editable: false, edittype: 'text', sortable: false, searchoptions: { clearSearch: false } },
+                            { name: 'ver', index: 'NetoPto', align: 'left', width: 40, hidden: false, editable: false, edittype: 'text', sortable: true, searchoptions: { clearSearch: false } },
+                            { name: 'SubnumeroVagon', index: 'NetoPto', align: 'left', width: 60, hidden: false, editable: false, edittype: 'text', sortable: true, searchoptions: { clearSearch: false } },
                             {
-                                name: 'FechaArribo', index: 'FechaArribo', width: 100, sortable: true, align: 'right', editable: false, sortable: false,
+                                name: 'FechaArribo', index: 'FechaArribo', width: 100, sortable: true, align: 'right', editable: false, sortable: true,
                                 editoptions: {
                                     size: 10,
                                     maxlengh: 10,
@@ -2055,14 +2055,14 @@ Arroyo Seco (Sta. Fe) - René Favaloro 726 / (03402) 421-426 - 429-676 / arroyos
 
 
                             },
-                            { name: 'Hora', index: 'NetoPto', align: 'left', width: 60, hidden: false, editable: false, edittype: 'text', sortable: false, searchoptions: { clearSearch: false } },
+                            { name: 'Hora', index: 'NetoPto', align: 'left', width: 60, hidden: false, editable: false, edittype: 'text', sortable: true, searchoptions: { clearSearch: false } },
 
 
 
 
                             // 'Producto','Contrato','Bruto Proc','Tara Proc','Neto Proc',
                             {
-                                name: 'Producto', index: 'Producto', align: 'left', width: 60, hidden: false, editable: false, edittype: 'text', sortable: false
+                                name: 'Producto', index: 'Producto', align: 'left', width: 60, hidden: false, editable: false, edittype: 'text', sortable: true
 
                                 , searchoptions: {
                                     //    sopt:['eq'], 
@@ -2138,27 +2138,27 @@ Arroyo Seco (Sta. Fe) - René Favaloro 726 / (03402) 421-426 - 429-676 / arroyos
                                 }
 
                             },
-                            { name: 'Contrato', index: 'NetoPto', align: 'left', width: 60, hidden: false, editable: false, edittype: 'text', sortable: false, searchoptions: { clearSearch: false } },
-                            { name: 'NetoPto', index: 'NetoPto', align: 'left', width: 60, hidden: false, editable: false, edittype: 'text', sortable: false, searchoptions: { clearSearch: false } },
-                            { name: 'NetoPto', index: 'NetoPto', align: 'left', width: 60, hidden: false, editable: false, edittype: 'text', sortable: false, searchoptions: { clearSearch: false } },
-                            { name: 'NetoPto', index: 'NetoPto', align: 'left', width: 60, hidden: false, editable: false, edittype: 'text', sortable: false, searchoptions: { clearSearch: false } },
+                            { name: 'Contrato', index: 'NetoPto', align: 'left', width: 60, hidden: false, editable: false, edittype: 'text', sortable: true, searchoptions: { clearSearch: false } },
+                            { name: 'BrutoPto', index: 'BrutoPto', align: 'left', width: 60, hidden: false, editable: false, edittype: 'text', sortable: true, searchoptions: { clearSearch: false } },
+                            { name: 'TaraPto', index: 'TaraPto', align: 'left', width: 60, hidden: false, editable: false, edittype: 'text', sortable: true, searchoptions: { clearSearch: false } },
+                            { name: 'NetoPto', index: 'NetoPto', align: 'left', width: 60, hidden: false, editable: false, edittype: 'text', sortable: true, searchoptions: { clearSearch: false } },
 
 
 
                             //    'Bruto Desc',' Tara Desc','Neto Desc','Dif','Humed',
-                            { name: 'BrutoFinal', index: 'NetoPto', align: 'left', width: 60, hidden: false, editable: false, edittype: 'text', sortable: false },
-                            { name: 'TaraFinal', index: 'NetoPto', align: 'left', width: 60, hidden: false, editable: false, edittype: 'text', sortable: false },
-                            { name: 'NetoFinal', index: 'NetoPto', align: 'left', width: 60, hidden: false, editable: false, edittype: 'text', sortable: false },
-                            { name: 'NetoPto', index: 'NetoPto', align: 'left', width: 60, hidden: false, editable: false, edittype: 'text', sortable: false },
-                            { name: 'NetoPto', index: 'NetoPto', align: 'left', width: 60, hidden: false, editable: false, edittype: 'text', sortable: false },
+                            { name: 'BrutoFinal', index: 'NetoPto', align: 'left', width: 60, hidden: false, editable: false, edittype: 'text', sortable: true },
+                            { name: 'TaraFinal', index: 'NetoPto', align: 'left', width: 60, hidden: false, editable: false, edittype: 'text', sortable: true },
+                            { name: 'NetoFinal', index: 'NetoPto', align: 'left', width: 60, hidden: false, editable: false, edittype: 'text', sortable: true },
+                            { name: 'NetoPto', index: 'NetoPto', align: 'left', width: 60, hidden: false, editable: false, edittype: 'text', sortable: true },
+                            { name: 'Humedad', index: 'Humedad', align: 'left', width: 60, hidden: false, editable: false, edittype: 'text', sortable: true },
 
 
                             //   'Merma','Otras','Kg. Netos','Titular','Intermediario',
-                            { name: 'NetoPto', index: 'NetoPto', align: 'left', width: 60, hidden: false, editable: false, edittype: 'text', sortable: false },
-                            { name: 'NetoPto', index: 'NetoPto', align: 'left', width: 60, hidden: false, editable: false, edittype: 'text', sortable: false },
-                            { name: 'NetoPto', index: 'NetoPto', align: 'left', width: 60, hidden: false, editable: false, edittype: 'text', sortable: false },
+                            { name: 'Merma', index: 'NetoPto', align: 'left', width: 60, hidden: false, editable: false, edittype: 'text', sortable: true },
+                            { name: 'NetoFinal', index: 'NetoPto', align: 'left', width: 60, hidden: false, editable: false, edittype: 'text', sortable: true },
+                            { name: 'NetoPto', index: 'NetoPto', align: 'left', width: 60, hidden: false, editable: false, edittype: 'text', sortable: true },
                             {
-                                name: 'TitularDesc', index: 'TitularDesc', align: 'left', width: 100, hidden: false, editable: false, edittype: 'text', sortable: false
+                                name: 'TitularDesc', index: 'TitularDesc', align: 'left', width: 100, hidden: false, editable: false, edittype: 'text', sortable: true
 
 
                                 , searchoptions: {
@@ -2236,7 +2236,7 @@ Arroyo Seco (Sta. Fe) - René Favaloro 726 / (03402) 421-426 - 429-676 / arroyos
 
                             },
                             {
-                                name: 'IntermediarioDesc', index: 'IntermediarioDesc', align: 'left', width: 60, hidden: false, editable: false, edittype: 'text', sortable: false
+                                name: 'IntermediarioDesc', index: 'IntermediarioDesc', align: 'left', width: 60, hidden: false, editable: false, edittype: 'text', sortable: true
 
                                 , searchoptions: {
                                     //    sopt:['eq'], 
@@ -2316,7 +2316,7 @@ Arroyo Seco (Sta. Fe) - René Favaloro 726 / (03402) 421-426 - 429-676 / arroyos
 
                             // 'Rem. Comercial','Cliente Observ','Corredor','Corredor Obs','Destinatario',
                             {
-                                name: 'RComercialDesc', index: 'RComercialDesc', align: 'left', width: 100, hidden: false, editable: false, edittype: 'text', sortable: false
+                                name: 'RComercialDesc', index: 'RComercialDesc', align: 'left', width: 100, hidden: false, editable: false, edittype: 'text', sortable: true
 
 
                                 , searchoptions: {
@@ -2393,9 +2393,9 @@ Arroyo Seco (Sta. Fe) - René Favaloro 726 / (03402) 421-426 - 429-676 / arroyos
                                 }
 
                             },
-                            { name: 'NetoPto', index: 'NetoPto', align: 'left', width: 60, hidden: false, editable: false, edittype: 'text', sortable: false },
+                            { name: 'NetoPto', index: 'NetoPto', align: 'left', width: 60, hidden: false, editable: false, edittype: 'text', sortable: true },
                             {
-                                name: 'CorredorDesc', index: 'CorredorDesc', align: 'left', width: 100, hidden: false, editable: false, edittype: 'text', sortable: false
+                                name: 'CorredorDesc', index: 'CorredorDesc', align: 'left', width: 100, hidden: false, editable: false, edittype: 'text', sortable: true
 
                                 , searchoptions: {
                                     //    sopt:['eq'], 
@@ -2471,7 +2471,7 @@ Arroyo Seco (Sta. Fe) - René Favaloro 726 / (03402) 421-426 - 429-676 / arroyos
                                 }
                             },
                             {
-                                name: 'CorredorDesc2', index: 'CorredorDesc2', align: 'left', width: 100, hidden: false, editable: false, edittype: 'text', sortable: false
+                                name: 'CorredorDesc2', index: 'CorredorDesc2', align: 'left', width: 100, hidden: false, editable: false, edittype: 'text', sortable: true
 
                                 , searchoptions: {
                                     //    sopt:['eq'], 
@@ -2547,7 +2547,7 @@ Arroyo Seco (Sta. Fe) - René Favaloro 726 / (03402) 421-426 - 429-676 / arroyos
                                 }
                             },
                             {
-                                name: 'DestinatarioDesc', index: 'DestinatarioDesc', align: 'left', width: 100, hidden: false, editable: false, edittype: 'text', sortable: false
+                                name: 'DestinatarioDesc', index: 'DestinatarioDesc', align: 'left', width: 100, hidden: false, editable: false, edittype: 'text', sortable: true
 
 
                                 , searchoptions: {
@@ -2627,17 +2627,17 @@ Arroyo Seco (Sta. Fe) - René Favaloro 726 / (03402) 421-426 - 429-676 / arroyos
 
 
                             // 'Entregador', ,'Pat chasis','Pat acoplado','CUIT Transp','Transportista',
-                            { name: 'NetoPto', index: 'NetoPto', align: 'left', width: 60, hidden: false, editable: false, edittype: 'text', sortable: false },
-                            { name: 'NetoPto', index: 'NetoPto', align: 'left', width: 60, hidden: false, editable: false, edittype: 'text', sortable: false },
-                            { name: 'NetoPto', index: 'NetoPto', align: 'left', width: 60, hidden: false, editable: false, edittype: 'text', sortable: false },
-                            { name: 'NetoPto', index: 'NetoPto', align: 'left', width: 60, hidden: false, editable: false, edittype: 'text', sortable: false },
-                            { name: 'NetoPto', index: 'NetoPto', align: 'left', width: 60, hidden: false, editable: false, edittype: 'text', sortable: false },
+                            { name: 'EntregadorDesc', index: 'EntregadorDesc', align: 'left', width: 60, hidden: false, editable: false, edittype: 'text', sortable: true },
+                            { name: 'Patente', index: 'Patente', align: 'left', width: 60, hidden: false, editable: false, edittype: 'text', sortable: true },
+                            { name: 'Acoplado', index: 'Acoplado', align: 'left', width: 60, hidden: false, editable: false, edittype: 'text', sortable: true },
+                            { name: 'TransportistaCUIT', index: 'TransportistaCUIT', align: 'left', width: 60, hidden: false, editable: false, edittype: 'text', sortable: true },
+                            { name: 'TransportistaDesc', index: 'TransportistaDesc', align: 'left', width: 60, hidden: false, editable: false, edittype: 'text', sortable: true },
 
 
                             //       'Destino','Procedencia','Cosecha','Fecha descarga','Calidad'
                             {
                                 name: 'DestinoDesc', index: 'DestinoDesc',
-                                formoptions: { rowpos: 5, colpos: 2, label: "Descripción" }, align: 'left', width: 100, hidden: false, editable: true, edittype: 'text', sortable: false,
+                                formoptions: { rowpos: 5, colpos: 2, label: "Descripción" }, align: 'left', width: 100, hidden: false, editable: true, edittype: 'text', sortable: true,
                                 searchoptions: {
                                     //    sopt:['eq'], 
                                     dataInit: function (elem) {
@@ -2712,10 +2712,10 @@ Arroyo Seco (Sta. Fe) - René Favaloro 726 / (03402) 421-426 - 429-676 / arroyos
                                 }
 
                             },
-                            { name: 'NetoPto', index: 'NetoPto', align: 'left', width: 60, hidden: false, editable: false, edittype: 'text', sortable: false },
-                            { name: 'Cosecha', index: 'Cosecha', align: 'left', width: 60, hidden: false, editable: false, edittype: 'text', sortable: false },
+                            { name: 'NetoPto', index: 'NetoPto', align: 'left', width: 60, hidden: false, editable: false, edittype: 'text', sortable: true },
+                            { name: 'Cosecha', index: 'Cosecha', align: 'left', width: 60, hidden: false, editable: false, edittype: 'text', sortable: true },
                             {
-                                name: 'FechaDescarga', index: 'FechaDescarga', width: 100, sortable: true, align: 'right', editable: false, sortable: false,
+                                name: 'FechaDescarga', index: 'FechaDescarga', width: 100, sortable: true, align: 'right', editable: false, sortable: true,
                                 editoptions: {
                                     size: 10,
                                     maxlengh: 10,
@@ -2743,21 +2743,21 @@ Arroyo Seco (Sta. Fe) - René Favaloro 726 / (03402) 421-426 - 429-676 / arroyos
                                     }
                                 }
                             },
-                            { name: 'Calidad', index: 'Calidad', align: 'left', width: 60, hidden: false, editable: false, edittype: 'text', sortable: false },
+                            { name: 'Calidad', index: 'Calidad', align: 'left', width: 60, hidden: false, editable: false, edittype: 'text', sortable: true },
 
 
                             //    ,'Observaciones','Chofer CUIT','Chofer','Nro ONCAA','Pta ONCAA',
-                            { name: 'Observaciones', index: 'NetoPto', align: 'left', width: 60, hidden: false, editable: false, edittype: 'text', sortable: false },
-                            { name: 'ChoferCUIT', index: 'NetoPto', align: 'left', width: 60, hidden: false, editable: false, edittype: 'text', sortable: false },
-                            { name: 'ChoferDesc', index: 'NetoPto', align: 'left', width: 60, hidden: false, editable: false, edittype: 'text', sortable: false },
-                            { name: 'NetoPto', index: 'NetoPto', align: 'left', width: 60, hidden: false, editable: false, edittype: 'text', sortable: false },
-                            { name: 'NetoPto', index: 'NetoPto', align: 'left', width: 60, hidden: false, editable: false, edittype: 'text', sortable: false },
+                            { name: 'Observaciones', index: 'NetoPto', align: 'left', width: 60, hidden: false, editable: false, edittype: 'text', sortable: true },
+                            { name: 'ChoferCUIT', index: 'NetoPto', align: 'left', width: 60, hidden: false, editable: false, edittype: 'text', sortable: true },
+                            { name: 'ChoferDesc', index: 'NetoPto', align: 'left', width: 60, hidden: false, editable: false, edittype: 'text', sortable: true },
+                            { name: 'NetoPto', index: 'NetoPto', align: 'left', width: 60, hidden: false, editable: false, edittype: 'text', sortable: true },
+                            { name: 'NetoPto', index: 'NetoPto', align: 'left', width: 60, hidden: false, editable: false, edittype: 'text', sortable: true },
 
 
                             //     'Nro CEE','Emisión','Vencimiento','Km. a recorrer','Tarifa',
-                            { name: 'CEE', index: 'NetoPto', align: 'left', width: 60, hidden: false, editable: false, edittype: 'text', sortable: false },
+                            { name: 'CEE', index: 'NetoPto', align: 'left', width: 60, hidden: false, editable: false, edittype: 'text', sortable: true },
                             {
-                                name: 'FechaEmision', index: 'FechaEmision', width: 100, sortable: true, align: 'right', editable: false, sortable: false,
+                                name: 'FechaEmision', index: 'FechaEmision', width: 100, sortable: true, align: 'right', editable: false, sortable: true,
                                 editoptions: {
                                     size: 10,
                                     maxlengh: 10,
@@ -2786,7 +2786,7 @@ Arroyo Seco (Sta. Fe) - René Favaloro 726 / (03402) 421-426 - 429-676 / arroyos
                                 }
                             },
                             {
-                                name: 'FechaVencimiento', index: 'FechaVencimiento', width: 100, sortable: true, align: 'right', editable: false, sortable: false,
+                                name: 'FechaVencimiento', index: 'FechaVencimiento', width: 100, sortable: true, align: 'right', editable: false, sortable: true,
                                 editoptions: {
                                     size: 10,
                                     maxlengh: 10,
@@ -2814,13 +2814,13 @@ Arroyo Seco (Sta. Fe) - René Favaloro 726 / (03402) 421-426 - 429-676 / arroyos
                                     }
                                 }
                             },
-                            { name: 'KmARecorrer', index: 'KmARecorrer', align: 'left', width: 60, hidden: false, editable: false, edittype: 'text', sortable: false },
-                            { name: 'Tarifa', index: 'Tarifa', align: 'left', width: 60, hidden: false, editable: false, edittype: 'text', sortable: false },
+                            { name: 'KmARecorrer', index: 'KmARecorrer', align: 'left', width: 60, hidden: false, editable: false, edittype: 'text', sortable: true },
+                            { name: 'Tarifa', index: 'Tarifa', align: 'left', width: 60, hidden: false, editable: false, edittype: 'text', sortable: true },
 
 
                             //      'CTG','Establecimiento' ],
-                            { name: 'CTG', index: 'CTG', align: 'left', width: 60, hidden: false, editable: false, edittype: 'text', sortable: false },
-                            { name: 'EstablecimientoDesc', index: 'EstablecimientoDesc', align: 'left', width: 60, hidden: false, editable: false, edittype: 'text', sortable: false },
+                            { name: 'CTG', index: 'CTG', align: 'left', width: 60, hidden: false, editable: false, edittype: 'text', sortable: true },
+                            { name: 'EstablecimientoDesc', index: 'EstablecimientoDesc', align: 'left', width: 60, hidden: false, editable: false, edittype: 'text', sortable: true },
 
 
                         ],

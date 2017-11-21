@@ -455,9 +455,9 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
         });
 
 
-        $('#btnMostrarMenu').click(function () {
-            $('#MenuPrincipal').show();
-        })
+        //$('#btnMostrarMenu').click(function () {
+        //    $('#MenuPrincipal').show();
+        //})
 
 
 
