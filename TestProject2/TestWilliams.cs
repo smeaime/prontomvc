@@ -864,6 +864,8 @@ namespace ProntoMVC.Tests
 
 
 
+        http://localhost:50769/ProntoWeb/ReclamosPorUsuarioMovil.aspx?Id=2633399
+        http://localhost:50769/ProntoWeb/CartaDePorte.aspx?Id=2633399
 
         [TestMethod]
         public void agregar_comentario_43063()
