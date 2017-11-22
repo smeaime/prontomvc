@@ -950,6 +950,44 @@ Arroyo Seco (Sta. Fe) - René Favaloro 726 / (03402) 421-426 - 429-676 / arroyos
 
 
 
+
+                const getParams = query => {
+                    if (!query) {
+                        return { };
+                    }
+
+                    return (/^[?#]/.test(query) ? query.slice(1) : query)
+                      .split('&')
+                      .reduce((params, param) => {
+                          let [ key, value ] = param.split('=');
+                          params[key] = value ? decodeURIComponent(value.replace(/\+/g, ' ')) : '';
+                          return params;
+                      }, { });
+                };
+
+
+                var qs = (function(a) {
+                    if (a == "") return {};
+                    var b = {};
+                    for (var i = 0; i < a.length; ++i)
+                    {
+                        var p=a[i].split('=', 2);
+                        if (p.length == 1)
+                            b[p[0]] = "";
+                        else
+                            b[p[0]] = decodeURIComponent(p[1].replace(/\+/g, " "));
+                    }
+                    return b;
+                })(window.location.search.substr(1).split('&'));
+
+
+
+
+
+
+
+
+
                 jQuery("#btnVolver").click(function () {
                     $("#dialog").dialog("close");
                 })
@@ -2082,7 +2120,8 @@ Arroyo Seco (Sta. Fe) - René Favaloro 726 / (03402) 421-426 - 429-676 / arroyos
                 'FechaInicial': function () { return $("#txtFechaDesde").val(); },
                 'FechaFinal': function () { return $("#txtFechaHasta").val(); },
                 'puntovent': function () { return $("#cmbPuntoVenta").val(); },
-                'destino': function () { return $("txtDestino").val(); }
+                'destino': function () { return $("txtDestino").val(); },
+                'idcarta':  qs["Id"]
             },
             datatype: 'json',
             mtype: 'POST',
