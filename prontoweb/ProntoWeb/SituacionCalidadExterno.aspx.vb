@@ -24,7 +24,7 @@ Imports Pronto.ERP.Bll.EntidadManager
 
 Imports System.Web.Services
 
-Partial Class SituacionCalidad
+Partial Class SituacionCalidadExterno
     Inherits System.Web.UI.Page
 
     Dim bRecargarInforme As Boolean
@@ -232,23 +232,7 @@ Partial Class SituacionCalidad
         '////////////////////////////////////////////
         'If ProntoFuncionesUIWeb.EstaEsteRol("Cliente") Or
 
-
-        If Not (Roles.IsUserInRole(Membership.GetUser().UserName, "WilliamsComercial") Or Roles.IsUserInRole(Membership.GetUser().UserName, "WilliamsAdmin") Or Roles.IsUserInRole(Membership.GetUser().UserName, "WilliamsFacturacion")) Then
-            'btnsituacion.Enabled = False
-            'btnLog.Enabled = False
-            'btnPanelInformeAjax.Enabled = False
-            'btnExportarGrillaAjax.Enabled = False
-
-
-            Response.Redirect("SituacionCalidadExterno.aspx")
-            Return
-
-            AjaxControlToolkit.ToolkitScriptManager.RegisterStartupScript(Me, Me.GetType(), "StartUpScript2", "deshabilitarEdicion();", True)
-
-
-        End If
-
-
+        Return
 
 
         Dim p = BDLmasterPermisosManager.Fetch(ConexBDLmaster, Session(SESSIONPRONTO_UserId), BDLmasterPermisosManager.EntidadesPermisos.CDPs_ControlDiario)
@@ -358,9 +342,9 @@ Partial Class SituacionCalidad
     '///////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-    
-    <WebMethod()> _
-    <System.Web.Script.Services.ScriptMethod(ResponseFormat:=System.Web.Script.Services.ResponseFormat.Json)> _
+
+    <WebMethod()>
+    <System.Web.Script.Services.ScriptMethod(ResponseFormat:=System.Web.Script.Services.ResponseFormat.Json)>
     Public Shared Function ExportarGrilla(filters As String, fechadesde As String, fechahasta As String, destino As String) As String
 
         Dim SC As String
@@ -384,7 +368,7 @@ Partial Class SituacionCalidad
 
         Dim ReporteLocal As ReportViewer = New Microsoft.Reporting.WebForms.ReportViewer()
 
-       
+
         Dim s = New ServicioCartaPorte.servi()
 
         Dim sqlquery4 = s.CartasPorte_DynamicGridData_ExcelExportacion_UsandoInternalQuery("IdCartaDePorte", "desc", 1, 999999, True, filters,
@@ -398,9 +382,9 @@ Partial Class SituacionCalidad
     End Function
 
 
-    
-    <WebMethod()> _
-    <System.Web.Script.Services.ScriptMethod(ResponseFormat:=System.Web.Script.Services.ResponseFormat.Json)> _
+
+    <WebMethod()>
+    <System.Web.Script.Services.ScriptMethod(ResponseFormat:=System.Web.Script.Services.ResponseFormat.Json)>
     Public Shared Function ExportarGrillaNormal3(filters As String, fechadesde As String, fechahasta As String, destino As String) As String
 
         Dim SC As String
@@ -453,7 +437,7 @@ Partial Class SituacionCalidad
 
 
 
-        RebindReportViewer_ServidorExcel(ReporteLocal, _
+        RebindReportViewer_ServidorExcel(ReporteLocal,
                      "Listado general de Cartas de Porte (simulando original) con foto 2", yourParams, fisico, False)
 
 
@@ -462,8 +446,8 @@ Partial Class SituacionCalidad
 
 
 
-    <WebMethod()> _
-    <System.Web.Script.Services.ScriptMethod(ResponseFormat:=System.Web.Script.Services.ResponseFormat.Json)> _
+    <WebMethod()>
+    <System.Web.Script.Services.ScriptMethod(ResponseFormat:=System.Web.Script.Services.ResponseFormat.Json)>
     Public Shared Function ExportarGrillaNormal(filters As String, fechadesde As String, fechahasta As String, destino As String) As String
 
         Dim SC As String
@@ -518,7 +502,7 @@ Partial Class SituacionCalidad
 
         'RebindReportViewer_ServidorExcel(ReporteLocal, "Listado general de Cartas de Porte (simulando original) con foto 2", yourParams, fisico, False)
 
-        
+
         Return url
     End Function
 
@@ -574,8 +558,8 @@ Partial Class SituacionCalidad
 
 
 
-    <WebMethod()> _
-    <System.Web.Script.Services.ScriptMethod(ResponseFormat:=System.Web.Script.Services.ResponseFormat.Json)> _
+    <WebMethod()>
+    <System.Web.Script.Services.ScriptMethod(ResponseFormat:=System.Web.Script.Services.ResponseFormat.Json)>
     Public Shared Function PanelInforme(filters As String, fechadesde As String, fechahasta As String, destino As String) As String
 
         Dim SC As String
@@ -619,37 +603,6 @@ Partial Class SituacionCalidad
 
 
 
-    Protected Sub btnPanelInforme_Click(sender As Object, e As EventArgs) Handles btnPanelInforme.Click
-        'salida = se InformeSituacion()
-
-        '       var s = new ServicioCartaPorte.servi();
-        '    var q = s.InformeSituacion();
-
-        Dim idDestino = BuscaIdWilliamsDestinoPreciso(txtDestino.Text, HFSC.Value)
-        Dim FechaDesde = New DateTime(1980, 1, 1)
-        Dim FechaHasta = New DateTime(2050, 1, 1)
-
-        Try
-
-            FechaDesde = DateTime.ParseExact(txtFechaDesde.Text, "dd/MM/yyyy", Nothing)
-        Catch ex As Exception
-
-        End Try
-
-        Try
-            FechaHasta = DateTime.ParseExact(txtFechaHasta.Text, "dd/MM/yyyy", Nothing)
-
-        Catch ex As Exception
-
-        End Try
-
-
-        Dim s = New ServicioCartaPorte.servi()
-        'Dim q = s.InformeSituacion_string(idDestino, FechaDesde, FechaHasta, HFSC.Value)
-        Dim q = s.InformeSituacion_html(idDestino, FechaDesde, FechaHasta, HFSC.Value, 11)
-        salida.Text = q
-
-    End Sub
 End Class
 
 
