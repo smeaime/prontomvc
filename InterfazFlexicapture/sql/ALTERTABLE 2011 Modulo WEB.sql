@@ -2154,5 +2154,10 @@ GO
 
 
 
+CREATE NONCLUSTERED INDEX IDX_cartasdeporte_IdReclamo
+ON [dbo].[cartasdeporte] (IdReclamo)
+go
+
+
 
 
