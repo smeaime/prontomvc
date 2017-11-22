@@ -196,6 +196,41 @@ Public Class WebServiceCartas
 
 
 
+
+    <WebMethod(Description:="", EnableSession:=False)>
+    Public Function GrabarComentario(idCartaPorte As Long, sComentario As String) As String
+
+
+        Try
+
+            Dim scs As String
+
+            If System.Diagnostics.Debugger.IsAttached() Or ConfigurationManager.AppSettings("UrlDominio").Contains("localhost") Then
+                scs = scLocal
+            Else
+                'scs = scWilliamsRelease
+                scs = scWilliamsDebug
+            End If
+
+
+
+            Dim idusuario = Membership.GetUser.UserName
+            Dim s = New ServicioCartaPorte.servi()
+            Return s.GrabarComentario_DLL(idCartaPorte, sComentario, 22, Encriptar(scs))
+
+        Catch ex As Exception
+
+            ErrHandler2.WriteError(ex)
+            Throw
+        End Try
+
+
+
+    End Function
+
+
+
+
     <WebMethod(Description:="", EnableSession:=False)> _
     Public Function GrabarSituacion(idcarta As Long, idsituacion As Integer, sObservacionesSituacion As String) As String
 

@@ -2780,19 +2780,48 @@
                     </table>
                 </ContentTemplate>
             </cc1:TabPanel>
-            <cc1:TabPanel ID="TabPanel5" runat="server" BackColor="#6600FF"  Height="550px">
+            <cc1:TabPanel ID="TabPanel5" runat="server" BackColor="#6600FF" Height="550px">
                 <HeaderTemplate>
                     <u>C</u>hat
                 </HeaderTemplate>
 
                 <ContentTemplate>
+                    <style>
+                        /*.ui-jqgrid tr.jqgrow td { height: 30px; }*/
+
+
+
+                        /* Bump up the font-size in the grid */
+                        .ui-jqgrid,
+                        .ui-jqgrid .ui-jqgrid-view,
+                        .ui-jqgrid .ui-jqgrid-pager,
+                        .ui-jqgrid .ui-pg-input {
+                            font-size: 12px;
+                        }
+
+
+                        /*.ui-jqgrid {
+    font-family: Arial;
+}
+.ui-jqgrid  {
+    font-size: 10px;
+}
+.ui-jqgrid .ui-jqgrid-hdiv .ui-jqgrid-labels .ui-th-column {
+    color: blue;
+}
+
+.ui-jqgrid {font-size:0.4em}*/
+                    </style>
+
                     <table id="Lista" class="scroll" cellpadding="0" cellspacing="0" style="font-size: 22px;" width="">
                     </table>
 
                     <div id="ListaPager" class="scroll" style="text-align: center; height: ;">
                     </div>
 
+                    <asp:TextBox ID="TextBox5" runat="server" CssClass="CssTextBox" Width="400px" TextMode="MultiLine" Enabled="true"></asp:TextBox>
 
+                    <asp:Button ID="Button6" runat="server" Text="enviar" />
 
                 </ContentTemplate>
             </cc1:TabPanel>
@@ -4548,7 +4577,7 @@
             // CP	TURNO	SITUACION	MERC	TITULAR_CP	INTERMEDIARIO	RTE CIAL	CORREDOR	DESTINATARIO	DESTINO	ENTREGADOR	PROC	KILOS	OBSERVACION
 
 
-            colNames: ['', 'IdReclamoComentario', 'IdReclamo', 'Empleado', 'Comentario'
+            colNames: ['', 'IdReclamoComentario', 'IdReclamo', 'Empleado', 'Comentario', 'Comentario2'
                             , 'Fecha', 'ArchivoAdjunto'
                 , 'nrocarta'
             ],
@@ -4563,9 +4592,10 @@
                 },
 
                 { name: 'IdReclamoComentario', index: 'IdReclamoComentario', align: 'left', width: 100, editable: false, hidden: true },
-                { name: 'IdReclamo', index: 'IdReclamo', align: 'left', width: 100, editable: false, hidden: false },
+                { name: 'IdReclamo', index: 'IdReclamo', align: 'left', width: 100, editable: false, hidden: true },
                 { name: 'Empleado', index: 'Empleado', align: 'left', width: 100, hidden: false },
-                { name: 'Comentario', index: 'Comentario', align: 'left', width: 400, hidden: false },
+                { name: 'Comentario', index: 'Comentario', align: 'left', width: 250, hidden: false },
+                { name: 'Comentario', index: 'Comentario', align: 'left', width: 250, hidden: false },
 
                 { name: 'Fecha', index: 'Fecha', align: 'left', width: 100, editable: true, hidden: false, sortable: false },
 
@@ -4599,28 +4629,19 @@
 
 
 
+
             loadComplete: function () {
-                // http://stackoverflow.com/questions/6575192/jqgrid-change-background-color-of-row-based-on-row-cell-value-by-column-name
+                var grid = $("#Lista"),
+                    ids = grid.getDataIDs();
 
+                for (var i = 0; i < ids.length; i++) {
+                    grid.setRowData(ids[i], false, {
+                        height: 60  //20 + (i * 2)
+                    });
+                }
 
-
-
-                $("#ListaPager_left").remove();
-                $("#first_ListaPager").remove();
-                $("#prev_ListaPager").remove();
-                $("#next_ListaPager").remove();
-                $("#last_ListaPager").remove();
-
-                $("#ListaPager_center").width(150);
-
-
-
-
-                //RefrescarFondoRenglon(this);
-
-
+                // grid.setGridHeight('auto');
             },
-
 
 
             subGridRowExpanded: function (subgrid_id, row_id) {
@@ -4761,17 +4782,16 @@
 
 
 
-            pager: $('#ListaPager'),
             rowNum: 100,
             //rowList: [10, 20, 50, 100, 500, 1000],
             sortname: 'IdReclamo',  //'FechaDescarga', //'NumeroCartaDePorte',
             sortorder: 'desc',
             viewrecords: true,
-            multiselect: true,
+
             shrinkToFit: false,
 
-            width: $(window).width() - 4, // 310, //'auto',
-            height: 'auto', // '100%', //$(window).height() - 260, // '100%'
+            width: 600, //$(window).width() - 4, // 310, //'auto',
+            height: 400, //'auto', // '100%', //$(window).height() - 260, // '100%'
 
             altRows: false,
             footerrow: false,
@@ -4783,11 +4803,12 @@
 
 
 
-
+            //pager: $('#ListaPager'),
+            //toppager: true,
             recordtext: "{2} cartas</span>",
             pgtext: "Pag. {0} de {1}",
-            toppager: true,
-            subGrid: true,
+            //subGrid: true,
+            multiselect: false,
             multiselectWidth: 40,
             subGridWidth: 40,
 
@@ -4800,6 +4821,8 @@
 
 
         });
+
+
 
 
 
@@ -4842,11 +4865,11 @@
 
 
 
-        jQuery("#Lista").filterToolbar({
-            stringResult: true, searchOnEnter: true,
-            defaultSearch: 'cn',
-            enableClear: false
-        });
+        //jQuery("#Lista").filterToolbar({
+        //    stringResult: true, searchOnEnter: true,
+        //    defaultSearch: 'cn',
+        //    enableClear: false
+        //});
 
     </script>
 </asp:Content>

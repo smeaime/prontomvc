@@ -1,4 +1,13 @@
 
+select * from reclamocomentarios
+select * from empleados
+
+select * from reclamos
+select top 10 * from cartasdeporte 
+where idcartadeporte=2633399  
+order by idcartadeporte desc
+
+
 
 select top 2 * from Facturas
 order by idfactura desc

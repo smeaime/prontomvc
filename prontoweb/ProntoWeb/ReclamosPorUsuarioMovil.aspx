@@ -556,6 +556,12 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
             </div>
 
 
+            
+<%--                    <asp:TextBox ID="TextBox5" runat="server" CssClass="CssTextBox" Width="300px" TextMode="MultiLine" Enabled="true"></asp:TextBox>
+
+                    <asp:Button ID="Button6" runat="server" Text="enviar" />--%>
+
+
 
             <div class="row-fluid" style="margin-bottom: ; margin-top: 5px;">
 
@@ -584,9 +590,9 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                     </button>
 
 
-                    <button type="button" id="" style="height: 40px; width: 70px; vertical-align: top;" onclick="location.href='CartaPorteMovil.aspx'">
+<%--                    <button type="button" id="" style="height: 40px; width: 70px; vertical-align: top;" onclick="location.href='CartaPorteMovil.aspx'">
                         <i class="fa"></i>General
-                    </button>
+                    </button>--%>
 
 
 
@@ -1978,8 +1984,10 @@ Arroyo Seco (Sta. Fe) - René Favaloro 726 / (03402) 421-426 - 429-676 / arroyos
                         // CP	TURNO	SITUACION	MERC	TITULAR_CP	INTERMEDIARIO	RTE CIAL	CORREDOR	DESTINATARIO	DESTINO	ENTREGADOR	PROC	KILOS	OBSERVACION
 
 
-                        colNames: ['', 'IdReclamoComentario', 'IdReclamo', 'Empleado' ,'Comentario'
-                                        , 'Fecha','ArchivoAdjunto'
+
+
+                        colNames: ['', 'IdReclamoComentario', 'IdReclamo', 'Empleado', 'Comentario', 'Comentario2'
+                                        , 'Fecha', 'ArchivoAdjunto'
                             , 'nrocarta'
                         ],
 
@@ -1993,15 +2001,16 @@ Arroyo Seco (Sta. Fe) - René Favaloro 726 / (03402) 421-426 - 429-676 / arroyos
                             },
 
                             { name: 'IdReclamoComentario', index: 'IdReclamoComentario', align: 'left', width: 100, editable: false, hidden: true },
-                            { name: 'IdReclamo', index: 'IdReclamo', align: 'left', width: 100, editable: false, hidden: false },
+                            { name: 'IdReclamo', index: 'IdReclamo', align: 'left', width: 100, editable: false, hidden: true },
                             { name: 'Empleado', index: 'Empleado', align: 'left', width: 100, hidden: false },
-                            { name: 'Comentario', index: 'Comentario', align: 'left', width: 400, hidden: false },
+                            { name: 'Comentario', index: 'Comentario', align: 'left', width: 250, hidden: false },
+                            { name: 'Comentario', index: 'Comentario', align: 'left', width: 250, hidden: false },
 
-                            { name: 'Fecha', index: 'Fecha', align: 'left', width: 100, editable: true, hidden: false, sortable: false },
+                            { name: 'Fecha', index: 'Fecha', align: 'left', width: 100, editable: true, hidden: true, sortable: false },
 
 
-                            { name: 'ArchivoAdjunto', index: 'ArchivoAdjunto', align: 'left', width: 100, editable: true, hidden: false, sortable: false },
-                    { name: 'ArchivoAdjunto', index: 'ArchivoAdjunto', align: 'left', width: 100, editable: true, hidden: false, sortable: false },
+                            { name: 'ArchivoAdjunto', index: 'ArchivoAdjunto', align: 'left', width: 100, editable: true, hidden: true, sortable: false },
+                    { name: 'ArchivoAdjunto', index: 'ArchivoAdjunto', align: 'left', width: 100, editable: true, hidden: true, sortable: false },
 
 
 
@@ -2029,27 +2038,21 @@ Arroyo Seco (Sta. Fe) - René Favaloro 726 / (03402) 421-426 - 429-676 / arroyos
 
 
 
+
                         loadComplete: function () {
-                            // http://stackoverflow.com/questions/6575192/jqgrid-change-background-color-of-row-based-on-row-cell-value-by-column-name
+                            var grid = $("#Lista"),
+                                ids = grid.getDataIDs();
 
+                            for (var i = 0; i < ids.length; i++) {
+                                grid.setRowData(ids[i], false, {
+                                    height: 60  //20 + (i * 2)
+                                });
+                            }
 
-
-
-                            $("#ListaPager_left").remove();
-                            $("#first_ListaPager").remove();
-                            $("#prev_ListaPager").remove();
-                            $("#next_ListaPager").remove();
-                            $("#last_ListaPager").remove();
-
-                            $("#ListaPager_center").width(150);
-
-
-
-
-                            RefrescarFondoRenglon(this);
-
-
+                            // grid.setGridHeight('auto');
                         },
+
+
 
 
 
