@@ -276,6 +276,8 @@ Partial Class SituacionCalidadMovil
         '////////////////////////////////////////////
         'If ProntoFuncionesUIWeb.EstaEsteRol("Cliente") Or
 
+        'Return
+
         Dim p = BDLmasterPermisosManager.Fetch(ConexBDLmaster, Session(SESSIONPRONTO_UserId), BDLmasterPermisosManager.EntidadesPermisos.CDPs_ControlDiario)
 
 
