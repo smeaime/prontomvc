@@ -871,10 +871,10 @@ namespace ProntoMVC.Tests
 
             long idcarta = 2633399;
 
+
             var s = new ServicioCartaPorte.servi();
             s.GrabarComentario_DLL(idcarta , "este es mi comentario",  usuario, SC);
-            s.UploadComentario_DLL();
-            // comparto una url... pero cómo darle acceso a esa url al usuario externo?????
+            //s.UploadComentario_DLL();            // y si directamente comparto una url?... -pero cómo darle acceso a esa url al usuario externo?????
 
 
         }
