@@ -1062,6 +1062,7 @@ Partial Class FacturaABM
 
             'Dim t As String = (From i In db.Logs Where i.IdComprobante = IdFactura And i.Detalle.StartsWith("FactWilliamsObs") Select i.Detalle).FirstOrDefault
 
+            s += "<br/> [1 titular / 2 destinatario / 3 corredor / 4 a tercero / 5 automatico] <br/>"
 
             lblLog.Text = s & "<br/><br/>" & Join(listaCartas.ToArray, ",") & vbCrLf & o & vbCrLf & "<br/><br/> Si no hay cartas imputadas y la factura no está anulada, verificar si hay alguna nota de credito imputada<br/>" & vbCrLf & "<br/>" & "<br/>"
         Catch ex As Exception
