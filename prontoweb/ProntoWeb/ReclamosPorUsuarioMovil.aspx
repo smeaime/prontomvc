@@ -538,6 +538,51 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
             </style>
 
 
+
+
+            Estado:
+Pendiente Agencia
+Carta de Porte:
+65312817
+Arribo:
+20/11/17 00:00
+Observaciones:
+HDAD 15%
+Procedencia:
+ITALO
+Neto Proc.:
+31.500
+Chasis:
+Producto:
+SOJA
+Cliente:
+Valtfre Roberto Mario
+Agencia:
+Agencia General Villegas
+Descarga:
+Titular:
+20160353695
+Rem. Comercial:
+CCI
+Neto Desc.:
+0
+Acoplado:
+Destino:
+RENOVA
+Destinatario:
+OLEAG MORENO
+Humedad:
+0,00
+Procedencia:
+ITALO
+Intrermediario:
+Corredor:
+BLD
+Kg. Neto:
+0
+Fecha Alta:
+20/11/17 22:22
+
             <div style="height: 8px"></div>
 
             <table id="Lista" class="scroll" cellpadding="0" cellspacing="0" style="font-size: 22px;" width="">
@@ -637,7 +682,12 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
 
 
-                <asp:Image ID="Image1" runat="server" ImageUrl="~/Imagenes/williamslogin.gif" CssClass="" Height="" Width="250px" ImageAlign="AbsBottom" />
+                <button type="button" id="btnVolver2" value="" class="" style="height: 50px; width: 70px; margin-left: 4px">
+                                    <i class="fa fa-bars fa-2x"></i>
+                                </button>
+
+
+                <asp:Image ID="Image1" runat="server" ImageUrl="~/Imagenes/williamslogin.gif" CssClass="" Height="" Width="200px" ImageAlign="AbsBottom" />
 
 
 
@@ -711,7 +761,8 @@ ERA ESO EL PROBLEMA DEL PANELCITO VACIO?????????????????!!!!!!!!!!!!!!!1
                     </ajaxToolkit:Accordion>
                     <asp:SiteMapDataSource ID="SiteMapDataSource" runat="server" ShowStartingNode="false" />
 
-
+                <br />
+                
                 <a href="CartaDePorteInformesAccesoClientesMovil.aspx"><i class="fa                 fa-desktop fa-2x"></i>VERSION ESCRITORIO  </a>
                 <br />
                 <br />
@@ -900,6 +951,9 @@ Arroyo Seco (Sta. Fe) - René Favaloro 726 / (03402) 421-426 - 429-676 / arroyos
 
 
                 jQuery("#btnVolver").click(function () {
+                    $("#dialog").dialog("close");
+                })
+                jQuery("#btnVolver2").click(function () {
                     $("#dialog").dialog("close");
                 })
 
@@ -2016,7 +2070,7 @@ Arroyo Seco (Sta. Fe) - René Favaloro 726 / (03402) 421-426 - 429-676 / arroyos
 
 
 
-
+        
 
 
 
@@ -2088,10 +2142,8 @@ Arroyo Seco (Sta. Fe) - René Favaloro 726 / (03402) 421-426 - 429-676 / arroyos
                 //jQuery("#Lista").jqGrid('addRowData', Id, data, "last");
                 //AgregarItemVacio(grid)
 
-
+                $("#"+$('#Lista').jqGrid('getGridParam','selrow')).focus();
             },
-
-
 
 
             loadComplete: function () {
@@ -2103,6 +2155,9 @@ Arroyo Seco (Sta. Fe) - René Favaloro 726 / (03402) 421-426 - 429-676 / arroyos
                         height: 60  //20 + (i * 2)
                     });
                 }
+
+                $('.ui-jqgrid-hdiv').hide(); //para sacar los encabezados
+
 
                 // grid.setGridHeight('auto');
             },
