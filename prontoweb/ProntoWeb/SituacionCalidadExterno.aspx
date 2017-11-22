@@ -1,7 +1,7 @@
 ﻿<%@ Page Language="VB"
     AutoEventWireup="false"
     MasterPageFile="~/MasterPage.master"
-    CodeFile="SituacionCalidad.aspx.vb" Inherits="SituacionCalidad"
+    CodeFile="SituacionCalidadExterno.aspx.vb" Inherits="SituacionCalidadExterno"
     Title="Informes" ValidateRequest="false" EnableEventValidation="false" %>
 
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %>
@@ -215,9 +215,11 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
         <asp:Button ID="btnExportarGrilla" Text="EXCEL" runat="server" Visible="false" CssClass="btn btn-primary"
             Width="150" Height="40" />
 
-        <input type="button" id="btnExportarGrillaAjax2" value="Excel" class="btn btn-primary" />
 
-        <input type="button" id="btnExportarGrillaAjax" value="Excel BLD demorados" class="btn btn-primary" />
+        <input type="button" id="btnExportarGrillaAjax2" value="Excel" class="btn btn-primary"  />
+
+<%--
+    <input type="button" id="btnExportarGrillaAjax" value="Excel BLD demorados" class="btn btn-primary" />
 
 
         <input type="button" id="btnPanelInformeAjax" value="Resumen" class="btn btn-primary" />
@@ -230,7 +232,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
         <input type="button" id="btnsituacion" value="Cambiar situación" class="btn btn-primary" />
 
-
+--%>
         <br />
         <div id="Salida2"></div>
         <asp:Literal ID="salida" runat="server"></asp:Literal>
@@ -1441,7 +1443,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
                 colModel: [
 {
-    name: 'act', index: 'act', align: 'center', width: 60, editable: false, hidden: false, sortable: false,
+    name: 'act', index: 'act', align: 'center', width: 60, editable: false, hidden: true, sortable: false,
     search: false,
 },
 
@@ -1475,7 +1477,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
 
 {
-    name: 'Situacion', index: 'Situacion', align: 'left', width: 120, hidden: false, editable: true, edittype: 'select', sortable: false,
+    name: 'Situacion', index: 'Situacion', align: 'left', width: 120, hidden: false, editable: false, edittype: 'select', sortable: false,
     editoptions: {
         //defaultValue: OrigenDescripcionDefault,
         //value: "0:Autorizado; 6:Desviado" 
@@ -1497,7 +1499,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
 
 
-                            { name: 'ObservacionesSituacion', index: 'ObservacionesSituacion', align: 'left', width: 300, editable: true, hidden: false, sortable: true },
+                            { name: 'ObservacionesSituacion', index: 'ObservacionesSituacion', align: 'left', width: 300, editable: false, hidden: false, sortable: true },
 
 
 
@@ -1973,7 +1975,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
 {
     name: 'DestinoDesc', index: 'DestinoDesc',
-    formoptions: { rowpos: 5, colpos: 2, label: "Descripción" }, align: 'left', width: 100, hidden: false, editable: true, edittype: 'text', sortable: true,
+    formoptions: { rowpos: 5, colpos: 2, label: "Descripción" }, align: 'left', width: 100, hidden: false, editable: false, edittype: 'text', sortable: true,
     searchoptions: {
         //    sopt:['eq'], 
         dataInit: function (elem) {
