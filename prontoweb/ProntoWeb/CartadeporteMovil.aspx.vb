@@ -44,6 +44,13 @@ Partial Class CartadeporteABMMovil
 
 
 
+        If Request.Browser("IsMobileDevice") <> "true" Then
+            Response.Redirect("CartaDePorte.aspx?Id=" & If(Request.QueryString("Id"), "").ToString())
+        End If
+
+
+
+
         If Not (Request.QueryString.Get("Id") Is Nothing) Then
             Try
                 IdCartaDePorte = Convert.ToInt32(Request.QueryString.Get("Id"))

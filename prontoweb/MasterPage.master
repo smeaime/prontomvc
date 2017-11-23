@@ -23,6 +23,10 @@
 
     </script>
 </head>
+
+ <meta name="viewport" content="width=500,initial-scale=1">
+
+
 <body class="bodyMasterPage">
     <%--repito la referencia porque cuando se llega acá redirigido desde SeleccionarEmpresa, no encuentra el path.
     esto me cuesta un simpatico 404 en toda pagina con masterpage... Buscar otra solucion
@@ -564,7 +568,7 @@ ERA ESO EL PROBLEMA DEL PANELCITO VACIO?????????????????!!!!!!!!!!!!!!!1
                             <div id="divsupercontenedor" class="supercontenedor">
                                 <div id="divprop" class="prop">
                                 </div>
-                                <div id="divcontentplaceholder" class="cssContentPlaceHolder">
+                                <div id="divcontentplaceholder" class="cssContentPlaceHolder" style="overflow: hidden !important">
                                     <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
                                     </asp:ContentPlaceHolder>
                                 </div>
