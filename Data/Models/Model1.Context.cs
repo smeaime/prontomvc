@@ -258,6 +258,7 @@ namespace ProntoMVC.Data.Models
         public virtual DbSet<VistaCartasPorteMovimiento> VistaCartasPorteMovimientos { get; set; }
         public virtual DbSet<ReclamoComentario> ReclamoComentarios { get; set; }
         public virtual DbSet<Reclamo> Reclamos { get; set; }
+        public virtual DbSet<PresupuestoObrasRubro> PresupuestoObrasRubros { get; set; }
     
         public virtual int Requerimientos_ActualizarEstado(Nullable<int> idRequerimiento, Nullable<int> idDetalleRequerimiento)
         {

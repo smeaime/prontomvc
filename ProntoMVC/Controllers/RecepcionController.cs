@@ -911,6 +911,24 @@ namespace ProntoMVC.Controllers
             }
         }
 
+        public virtual FileResult ImprimirConInteropPDF(int id)
+        {
+            object nulo = null;
+            string baseP = this.HttpContext.Session["BasePronto"].ToString();
+            string SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString(), oStaticMembershipService));
+            string output = AppDomain.CurrentDomain.BaseDirectory + "Documentos\\" + "archivo.pdf";
+            string plantilla;
+            plantilla = AppDomain.CurrentDomain.BaseDirectory + "Documentos\\" + "Recepcion_" + baseP + ".dotm";
+
+            //tengo que copiar la plantilla en el destino, porque openxml usa el archivo que le vaya a pasar
+            System.IO.FileInfo MyFile1 = new System.IO.FileInfo(output);//busca si ya existe el archivo a generar y en ese caso lo borra
+            if (MyFile1.Exists) MyFile1.Delete();
+
+            EntidadManager.ImprimirWordDOT_VersionDLL_PDF(plantilla, ref nulo, SC, nulo, ref nulo, id, nulo, nulo, nulo, output, nulo);
+
+            byte[] contents = System.IO.File.ReadAllBytes(output);
+            return File(contents, System.Net.Mime.MediaTypeNames.Application.Octet, "Recepcion.pdf");
+        }
 
         private class Recepcione2
         {
@@ -1083,7 +1101,7 @@ namespace ProntoMVC.Controllers
                             id = a.IdRecepcion.ToString(),
                             cell = new string[] { 
                                 "<a href="+ Url.Action("Edit",new {id = a.IdRecepcion} ) + ">Editar</>",
-                                "<a href="+ Url.Action("Imprimir",new {id = a.IdRecepcion} ) + ">Emitir</a> ",
+                                "<a href="+ Url.Action("ImprimirConInteropPDF",new {id = a.IdRecepcion} ) + ">Emitir</a> ",
                                 a.IdRecepcion.ToString(),
                                 a.IdProveedor.NullSafeToString(),
                                 a.IdObra.NullSafeToString(),

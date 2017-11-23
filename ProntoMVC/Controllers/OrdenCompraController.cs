@@ -127,17 +127,12 @@ namespace ProntoMVC.Controllers
             mObservaciones = o.Observaciones ?? "";
             mAnulada = o.Anulada ?? "";
 
-
-
-
             var reqsToDelete = o.DetalleOrdenesCompras.Where(x => (x.IdArticulo ?? 0) <= 0).ToList();
             foreach (var deleteReq in reqsToDelete)
             {
                 o.DetalleOrdenesCompras.Remove(deleteReq);
             }
             if (o.DetalleOrdenesCompras.Count <= 0) sErrorMsg += "\n" + "El comprobante no tiene items";
-
-
 
             if ((o.NumeroOrdenCompra ?? 0) <= 0) { sErrorMsg += "\n" + "Falta el número"; }
             if ((o.NumeroOrdenCompraCliente ?? "") == "") { sErrorMsg += "\n" + "Falta el número de orden de compra del cliente"; }
@@ -335,9 +330,24 @@ namespace ProntoMVC.Controllers
             }
         }
 
+        public virtual FileResult ImprimirConInteropPDF(int id)
+        {
+            object nulo = null;
+            string baseP = this.HttpContext.Session["BasePronto"].ToString();
+            string SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString(), oStaticMembershipService));
+            string output = AppDomain.CurrentDomain.BaseDirectory + "Documentos\\" + "archivo.pdf";
+            string plantilla;
+            plantilla = AppDomain.CurrentDomain.BaseDirectory + "Documentos\\" + "OrdenCompra_" + baseP + ".dotm";
 
+            //tengo que copiar la plantilla en el destino, porque openxml usa el archivo que le vaya a pasar
+            System.IO.FileInfo MyFile1 = new System.IO.FileInfo(output);//busca si ya existe el archivo a generar y en ese caso lo borra
+            if (MyFile1.Exists) MyFile1.Delete();
 
+            EntidadManager.ImprimirWordDOT_VersionDLL_PDF(plantilla, ref nulo, SC, nulo, ref nulo, id, nulo, nulo, nulo, output, nulo);
 
+            byte[] contents = System.IO.File.ReadAllBytes(output);
+            return File(contents, System.Net.Mime.MediaTypeNames.Application.Octet, "OrdenCompra.pdf");
+        }
 
         public class OrdenesCompra2
         {
@@ -416,15 +426,11 @@ namespace ProntoMVC.Controllers
             public string ListaDePrecio { get; set; }
             public string Obra { get; set; }
             public string Moneda { get; set; }
-
-
         }
 
         public virtual ActionResult TT_DynamicGridData(string sidx, string sord, int page, int rows, bool _search, string filters
             , string FechaInicial, string FechaFinal, string PendienteRemito = "", string PendienteFactura = "")
         {
-
-
             DateTime FechaDesde, FechaHasta;
             try
             {
@@ -449,27 +455,12 @@ namespace ProntoMVC.Controllers
                 FechaHasta = DateTime.MaxValue;
             }
 
-            //        }
-
             //IQueryable<Data.Models.Factura> q = (from a in db.Facturas where a.FechaFactura >= FechaDesde && a.FechaFactura <= FechaHasta select a).AsQueryable();
-
-
-
-
-
-            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
           
             string campo = String.Empty;
             int pageSize = rows;
             int currentPage = page;
             decimal cien = 100;
-
 
             var context = ((System.Data.Entity.Infrastructure.IObjectContextAdapter)db).ObjectContext;
 
@@ -498,7 +489,6 @@ namespace ProntoMVC.Controllers
                             Obra = a.Obra != null ? a.Obra.NumeroObra : "",
                             Producido = a.Estado,
                             Cumplido = "",
-
                             ClienteCodigo = a.Cliente.CodigoCliente,
                             ClienteNombre = a.Cliente.RazonSocial,
                             ClienteCuit = a.Cliente.Cuit,
@@ -538,32 +528,10 @@ namespace ProntoMVC.Controllers
                                                 : 1
                         }).AsQueryable();
 
-
-
-
-
-
-
-
-
-            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
             // Oleg: filtros avanzados con jqgrid y LINQ    http://stackoverflow.com/questions/5500805/asp-net-mvc-2-0-implementation-of-searching-in-jqgrid/5501644#5501644
             // usando dbcontext en lugar de objectcontext   http://stackoverflow.com/questions/9027150/jqgrid-asp-net-4-mvc-how-to-make-search-implementation-on-a-dbcontext-reposit
 
-            //var sc = Generales.sCadenaConex("Autotrol");
-            //var dbcontext = new ProntoMVC.Data.Models.DemoProntoEntities(sc);
-            ///////////////////////////////////////////////////////////////////////////////////////////////
-            ///////////////////////////////////////////////////////////////////////////////////////////////
             ObjectQuery<OrdenesCompra2> set;
-            // set = context.CreateObjectSet<Data.Models.OrdenesCompra>()
-
 
             IQueryable<OrdenesCompra2> aaaa = data
                 // .Include("Obra,Condiciones_Compra,Empleado,ListasPrecio,Transportista,DetalleOrdenesCompra,OrdenesCompra")
@@ -571,7 +539,6 @@ namespace ProntoMVC.Controllers
                                  && (PendienteFactura != "SI" || (PendienteFactura == "SI" && x.PendienteFacturar > 0)))
                         .Where(a =>  a.FechaOrdenCompra >= FechaDesde && a.FechaOrdenCompra <= FechaHasta ).AsQueryable()
                         ;
-
 
             List<OrdenesCompra2> fff = data.ToList();
             List<OrdenesCompra2> zzzzzz = aaaa.ToList();
@@ -581,10 +548,6 @@ namespace ProntoMVC.Controllers
             //                   el caso del maestro de requerimientos:
             //                  db.Requerimientos.Include("DetalleRequerimientos.DetallePresupuestos,DetalleRequerimientos.DetallePedidos")  no funciona
             ///////////////////////////////////////////////////////////////////////////////////////////////
-            ///////////////////////////////////////////////////////////////////////////////////////////////
-            ///////////////////////////////////////////////////////////////////////////////////////////////
-            ///////////////////////////////////////////////////////////////////////////////////////////////
-
 
             int totalRecords = 0;
 
@@ -594,27 +557,6 @@ namespace ProntoMVC.Controllers
 
             var pagedQuery = Filters.FiltroGenerico_UsandoStoreOLista<OrdenesCompra2>
                                 (sidx, sord, page, rows, _search, filters, db, ref totalRecords,zzzzzz);
-
-
-            ///////////////////////////////////////////////////////////////////////////////////////////////
-            ///////////////////////////////////////////////////////////////////////////////////////////////
-            ///////////////////////////////////////////////////////////////////////////////////////////////
-            ///////////////////////////////////////////////////////////////////////////////////////////////
-
-            ///////////////////////////////////////////////////////////////////////////////////////////////
-            ///////////////////////////////////////////////////////////////////////////////////////////////
-            ///////////////////////////////////////////////////////////////////////////////////////////////
-            ///////////////////////////////////////////////////////////////////////////////////////////////
-
-            ///////////////////////////////////////////////////////////////////////////////////////////////
-            ///////////////////////////////////////////////////////////////////////////////////////////////
-            ///////////////////////////////////////////////////////////////////////////////////////////////
-            ///////////////////////////////////////////////////////////////////////////////////////////////
-
-
-
-
-
 
             var jsonData = new jqGridJson()
             {
@@ -627,7 +569,7 @@ namespace ProntoMVC.Controllers
                             id = a.IdOrdenCompra.ToString(),
                             cell = new string[] { 
                                 "<a href="+ Url.Action("Edit",new {id = a.IdOrdenCompra} ) + ">Editar</>",
-                                "<a href="+ Url.Action("Imprimir",new {id = a.IdOrdenCompra} ) + ">Emitir</a> ",
+                                "<a href="+ Url.Action("ImprimirConInteropPDF",new {id = a.IdOrdenCompra} ) + ">Emitir</a> ",
                                 a.IdOrdenCompra.ToString(),
                                 a.IdCliente.NullSafeToString(),
                                 a.IdObra.NullSafeToString(),
@@ -671,35 +613,15 @@ namespace ProntoMVC.Controllers
             return Json(jsonData, JsonRequestBehavior.AllowGet);
         }
 
-
-
         public virtual ActionResult TT_DynamicGridData_original(string sidx, string sord, int page, int rows, bool _search, string filters)
         {
-
-
-
-            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
             int totalRecords = 0;
 
             var pagedQuery = Filters.FiltroGenerico<Data.Models.OrdenesCompra>
                                 ("Obra,Condiciones_Compra,Empleado,ListasPrecio,Transportista,DetalleOrdenesCompra,OrdenesCompra"
                                 , sidx, sord, page, rows, _search, filters, db, ref totalRecords);
-
-
-
-            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
             string PendienteRemito = "";
             string PendienteFactura = "";
-
-
             string campo = String.Empty;
             int pageSize = rows;
             int currentPage = page;
@@ -780,9 +702,8 @@ namespace ProntoMVC.Controllers
                         .Where(x => (PendienteRemito != "SI" || (PendienteRemito == "SI" && x.PendienteRemitir > 0))
                                  && (PendienteFactura != "SI" || (PendienteFactura == "SI" && x.PendienteFacturar > 0)))
                         .OrderByDescending(x => x.NumeroOrdenCompra)
-
-//.Skip((currentPage - 1) * pageSize).Take(pageSize)
-.ToList();
+                        //.Skip((currentPage - 1) * pageSize).Take(pageSize)
+                        .ToList();
 
             var jsonData = new jqGridJson()
             {
@@ -838,10 +759,6 @@ namespace ProntoMVC.Controllers
             };
             return Json(jsonData, JsonRequestBehavior.AllowGet);
         }
-
-
-
-
 
         public virtual ActionResult TT(string sidx, string sord, int? page, int? rows, bool _search, string searchField, string searchOper,
             string searchString, string FechaInicial, string FechaFinal, string PendienteRemito = "", string PendienteFactura = "")
@@ -931,9 +848,8 @@ namespace ProntoMVC.Controllers
             var data1 = (from a in data select a)
                         .Where(x => (PendienteRemito != "SI" || (PendienteRemito == "SI" && x.PendienteRemitir > 0)) && (PendienteFactura != "SI" || (PendienteFactura == "SI" && x.PendienteFacturar > 0)))
                         .OrderByDescending(x => x.NumeroOrdenCompra)
-
-//.Skip((currentPage - 1) * pageSize).Take(pageSize)
-.ToList();
+                        //.Skip((currentPage - 1) * pageSize).Take(pageSize)
+                        .ToList();
 
             var jsonData = new jqGridJson()
             {
@@ -1027,8 +943,8 @@ namespace ProntoMVC.Controllers
                             a.FacturacionCompletaMensual,
                             a.Observaciones
                         }).OrderBy(x => x.NumeroItem)
-                //.Skip((currentPage - 1) * pageSize).Take(pageSize)
-.ToList();
+                        //.Skip((currentPage - 1) * pageSize).Take(pageSize)
+                        .ToList();
 
             var jsonData = new jqGridJson()
             {
