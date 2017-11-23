@@ -54,7 +54,7 @@ namespace ProntoMVC.Controllers
         public void FakeInitialize(string SC)
         {
             // para usar la inicializacion en testing
-             //base.Initialize(rc); // recien recupero a qué base se está conectando cuando tengo acceso a la sesión
+            //base.Initialize(rc); // recien recupero a qué base se está conectando cuando tengo acceso a la sesión
             base.unitOfWork = new UnitOfWork(SC);
             fondoFijoService = new FondoFijoService(unitOfWork);
             //base.db = unitOfWork.ComprobantesproveedorRepositorio.HACKEADOcontext;
@@ -695,7 +695,7 @@ namespace ProntoMVC.Controllers
                 }
                 catch (Exception)
                 {
-                   //    throw;
+                    //    throw;
                 }
 
                 JsonResponse res = new JsonResponse();
@@ -796,7 +796,7 @@ namespace ProntoMVC.Controllers
                                          "</a>";
                     try
                     {
-                        List<Tablas.Tree> Tree = TablasDAL.ArbolRegenerar(this.Session["BasePronto"].ToString(), oStaticMembershipService );
+                        List<Tablas.Tree> Tree = TablasDAL.ArbolRegenerar(this.Session["BasePronto"].ToString(), oStaticMembershipService);
 
                     }
                     catch (Exception ex)
@@ -856,6 +856,30 @@ namespace ProntoMVC.Controllers
             }
             catch (Exception ex)
             {
+
+                try
+                {
+                    System.Data.Entity.Validation.DbEntityValidationException exxx = (System.Data.Entity.Validation.DbEntityValidationException)ex;
+                    StringBuilder sb = new StringBuilder();
+
+                    foreach (var failure in exxx.EntityValidationErrors)
+                    {
+                        sb.AppendFormat("{0} failed validation\n", failure.Entry.Entity.GetType());
+                        foreach (var error in failure.ValidationErrors)
+                        {
+                            sb.AppendFormat("- {0} : {1}", error.PropertyName, error.ErrorMessage);
+                            sb.AppendLine();
+                        }
+                    }
+                }
+                catch (Exception)
+                {
+
+                    //throw;
+                }
+
+
+
                 Response.StatusCode = (int)System.Net.HttpStatusCode.BadRequest;
                 JsonResponse res = new JsonResponse();
                 res.Status = Status.Error;
@@ -1067,7 +1091,7 @@ namespace ProntoMVC.Controllers
                 decimal mImporte = 0;
                 decimal mImporteIva = 0;
                 decimal mAjusteIVA = 0;
-                
+
                 Int32 mIdComprobanteProveedor = 0;
                 Int32 mIdTipoComprobante = 0;
                 Int32 mIdTipoComprobanteAnterior = 0;
@@ -1080,12 +1104,12 @@ namespace ProntoMVC.Controllers
                 Int32 mIdCuentaBonificaciones = 0;
                 Int32 mIdCuenta = 0;
                 Int32 mIdCuentaReintegros = 0;
-                
+
                 string errs = "";
                 string warnings = "";
                 string mWebService = "";
                 string mSubdiarios_ResumirRegistros = "";
-                
+
                 bool mGrabarRegistrosEnCuentaCorriente = true;
 
                 Parametros parametros = db.Parametros.Where(p => p.IdParametro == 1).FirstOrDefault();
@@ -1134,9 +1158,9 @@ namespace ProntoMVC.Controllers
                         mTotalIvaNoDiscriminado = (ComprobanteProveedor.TotalIvaNoDiscriminado ?? 0) * mCotizacionMoneda;
                         mAjusteIVA = (ComprobanteProveedor.AjusteIVA ?? 0) * mCotizacionMoneda;
 
-                        mTotal = decimal.Round((ComprobanteProveedor.TotalComprobante ?? 0) * mCotizacionMoneda,2);
-                        if (mCotizacionDolar != 0){mTotalDolar = decimal.Round((ComprobanteProveedor.TotalComprobante ?? 0) * mCotizacionMoneda / mCotizacionDolar,2);}
-                        if (mCotizacionEuro != 0){mTotalEuro = decimal.Round((ComprobanteProveedor.TotalComprobante ?? 0) * mCotizacionMoneda / mCotizacionEuro,2);}
+                        mTotal = decimal.Round((ComprobanteProveedor.TotalComprobante ?? 0) * mCotizacionMoneda, 2);
+                        if (mCotizacionDolar != 0) { mTotalDolar = decimal.Round((ComprobanteProveedor.TotalComprobante ?? 0) * mCotizacionMoneda / mCotizacionDolar, 2); }
+                        if (mCotizacionEuro != 0) { mTotalEuro = decimal.Round((ComprobanteProveedor.TotalComprobante ?? 0) * mCotizacionMoneda / mCotizacionEuro, 2); }
 
                         var TiposComprobantes = db.TiposComprobantes.Where(c => c.IdTipoComprobante == mIdTipoComprobante).SingleOrDefault();
                         if (TiposComprobantes != null)
@@ -1222,60 +1246,60 @@ namespace ProntoMVC.Controllers
                         }
 
                         ////////////////////////////////////////////// IMPUTACION //////////////////////////////////////////////
-// si es modificacion y tenia imputado algo
-   //If mvarIdentificador > 0 Then
-   //   Set DatosAnt = oDet.LeerUno("ComprobantesProveedores", mvarIdentificador)
-   //   If DatosAnt.RecordCount > 0 Then
-   //      mvarCotizacionAnt = IIf(IsNull(DatosAnt.Fields("CotizacionMoneda").Value), 1, DatosAnt.Fields("CotizacionMoneda").Value)
-   //      mTotalAnterior = DatosAnt.Fields("TotalComprobante").Value * mvarCotizacionAnt
-   //      If Not IsNull(DatosAnt.Fields("IdProveedor").Value) Then
-   //         mvarIdProveedorAnterior = DatosAnt.Fields("IdProveedor").Value
-   //      End If
-   //      If Not IsNull(DatosAnt.Fields("IdTipoComprobante").Value) Then
-   //         mvarIdTipoComprobanteAnterior = DatosAnt.Fields("IdTipoComprobante").Value
-   //      End If
-   //      Set Datos = oDet.LeerUno("TiposComprobante", DatosAnt.Fields("IdTipoComprobante").Value)
-   //      If Datos.RecordCount > 0 Then
-   //         mvarCoeficienteAnt = Datos.Fields("Coeficiente").Value
-   //      End If
-   //      mvarIdOrdenPagoAnterior = IIf(IsNull(DatosAnt.Fields("IdOrdenPago").Value), 0, DatosAnt.Fields("IdOrdenPago").Value)
-   //      Datos.Close
-   //      Set Datos = Nothing
-         
-   //      If Not IsNull(DatosAnt.Fields("IdComprobanteImputado").Value) Then
-   //         mvarAuxL1 = 11
-   //         Set oRsAux = oDet.LeerUno("ComprobantesProveedores", DatosAnt.Fields("IdComprobanteImputado").Value)
-   //         If oRsAux.RecordCount > 0 Then
-   //            mvarAuxL1 = oRsAux.Fields("IdTipoComprobante").Value
-   //         End If
-   //         oRsAux.Close
-            
-   //         Set DatosCtaCteNv = oDet.TraerFiltrado("CtasCtesA", "_BuscarComprobante", Array(mvarIdentificador, DatosAnt.Fields("IdTipoComprobante").Value))
-   //         If DatosCtaCteNv.RecordCount > 0 Then
-   //            Tot = DatosCtaCteNv.Fields("ImporteTotal").Value - DatosCtaCteNv.Fields("Saldo").Value
-   //            TotDol = DatosCtaCteNv.Fields("ImporteTotalDolar").Value - DatosCtaCteNv.Fields("SaldoDolar").Value
-   //            TotEu = IIf(IsNull(DatosCtaCteNv.Fields("ImporteTotalEuro").Value), 0, DatosCtaCteNv.Fields("ImporteTotalEuro").Value) - _
-   //                     IIf(IsNull(DatosCtaCteNv.Fields("SaldoEuro").Value), 0, DatosCtaCteNv.Fields("SaldoEuro").Value)
-               
-   //            Set DatosCtaCte = oDet.TraerFiltrado("CtasCtesA", "_BuscarComprobante", Array(DatosAnt.Fields("IdComprobanteImputado").Value, mvarAuxL1))
-   //            If DatosCtaCte.RecordCount > 0 Then
-   //                  DatosCtaCte.Fields("Saldo").Value = DatosCtaCte.Fields("Saldo").Value + Tot
-   //                  DatosCtaCte.Fields("SaldoDolar").Value = DatosCtaCte.Fields("SaldoDolar").Value + TotDol
-   //                  DatosCtaCte.Fields("SaldoEuro").Value = IIf(IsNull(DatosCtaCte.Fields("SaldoEuro").Value), 0, DatosCtaCte.Fields("SaldoEuro").Value) + TotEu
-   //                  Resp = oDet.Guardar("CtasCtesA", DatosCtaCte)
-   //            End If
-   //            DatosCtaCte.Close
-   //            Set DatosCtaCte = Nothing
-               
-   //            oDet.Eliminar "CtasCtesA", DatosCtaCteNv.Fields(0).Value
-   //         End If
-   //         DatosCtaCteNv.Close
-   //         Set DatosCtaCteNv = Nothing
-   //      End If
-   //   End If
-   //   DatosAnt.Close
-   //   Set DatosAnt = Nothing
-   //End If
+                        // si es modificacion y tenia imputado algo
+                        //If mvarIdentificador > 0 Then
+                        //   Set DatosAnt = oDet.LeerUno("ComprobantesProveedores", mvarIdentificador)
+                        //   If DatosAnt.RecordCount > 0 Then
+                        //      mvarCotizacionAnt = IIf(IsNull(DatosAnt.Fields("CotizacionMoneda").Value), 1, DatosAnt.Fields("CotizacionMoneda").Value)
+                        //      mTotalAnterior = DatosAnt.Fields("TotalComprobante").Value * mvarCotizacionAnt
+                        //      If Not IsNull(DatosAnt.Fields("IdProveedor").Value) Then
+                        //         mvarIdProveedorAnterior = DatosAnt.Fields("IdProveedor").Value
+                        //      End If
+                        //      If Not IsNull(DatosAnt.Fields("IdTipoComprobante").Value) Then
+                        //         mvarIdTipoComprobanteAnterior = DatosAnt.Fields("IdTipoComprobante").Value
+                        //      End If
+                        //      Set Datos = oDet.LeerUno("TiposComprobante", DatosAnt.Fields("IdTipoComprobante").Value)
+                        //      If Datos.RecordCount > 0 Then
+                        //         mvarCoeficienteAnt = Datos.Fields("Coeficiente").Value
+                        //      End If
+                        //      mvarIdOrdenPagoAnterior = IIf(IsNull(DatosAnt.Fields("IdOrdenPago").Value), 0, DatosAnt.Fields("IdOrdenPago").Value)
+                        //      Datos.Close
+                        //      Set Datos = Nothing
+
+                        //      If Not IsNull(DatosAnt.Fields("IdComprobanteImputado").Value) Then
+                        //         mvarAuxL1 = 11
+                        //         Set oRsAux = oDet.LeerUno("ComprobantesProveedores", DatosAnt.Fields("IdComprobanteImputado").Value)
+                        //         If oRsAux.RecordCount > 0 Then
+                        //            mvarAuxL1 = oRsAux.Fields("IdTipoComprobante").Value
+                        //         End If
+                        //         oRsAux.Close
+
+                        //         Set DatosCtaCteNv = oDet.TraerFiltrado("CtasCtesA", "_BuscarComprobante", Array(mvarIdentificador, DatosAnt.Fields("IdTipoComprobante").Value))
+                        //         If DatosCtaCteNv.RecordCount > 0 Then
+                        //            Tot = DatosCtaCteNv.Fields("ImporteTotal").Value - DatosCtaCteNv.Fields("Saldo").Value
+                        //            TotDol = DatosCtaCteNv.Fields("ImporteTotalDolar").Value - DatosCtaCteNv.Fields("SaldoDolar").Value
+                        //            TotEu = IIf(IsNull(DatosCtaCteNv.Fields("ImporteTotalEuro").Value), 0, DatosCtaCteNv.Fields("ImporteTotalEuro").Value) - _
+                        //                     IIf(IsNull(DatosCtaCteNv.Fields("SaldoEuro").Value), 0, DatosCtaCteNv.Fields("SaldoEuro").Value)
+
+                        //            Set DatosCtaCte = oDet.TraerFiltrado("CtasCtesA", "_BuscarComprobante", Array(DatosAnt.Fields("IdComprobanteImputado").Value, mvarAuxL1))
+                        //            If DatosCtaCte.RecordCount > 0 Then
+                        //                  DatosCtaCte.Fields("Saldo").Value = DatosCtaCte.Fields("Saldo").Value + Tot
+                        //                  DatosCtaCte.Fields("SaldoDolar").Value = DatosCtaCte.Fields("SaldoDolar").Value + TotDol
+                        //                  DatosCtaCte.Fields("SaldoEuro").Value = IIf(IsNull(DatosCtaCte.Fields("SaldoEuro").Value), 0, DatosCtaCte.Fields("SaldoEuro").Value) + TotEu
+                        //                  Resp = oDet.Guardar("CtasCtesA", DatosCtaCte)
+                        //            End If
+                        //            DatosCtaCte.Close
+                        //            Set DatosCtaCte = Nothing
+
+                        //            oDet.Eliminar "CtasCtesA", DatosCtaCteNv.Fields(0).Value
+                        //         End If
+                        //         DatosCtaCteNv.Close
+                        //         Set DatosCtaCteNv = Nothing
+                        //      End If
+                        //   End If
+                        //   DatosAnt.Close
+                        //   Set DatosAnt = Nothing
+                        //End If
 
 
                         if (mIdProveedor > 0 && mGrabarRegistrosEnCuentaCorriente)
@@ -1292,7 +1316,8 @@ namespace ProntoMVC.Controllers
                             }
 
                             CuentasCorrientesAcreedor CtaCte = db.CuentasCorrientesAcreedores.Where(c => c.IdComprobante == mIdComprobanteProveedor && c.IdTipoComp == mIdTipoComprobante).FirstOrDefault();
-                            if (CtaCte != null) { 
+                            if (CtaCte == null)
+                            {
                                 CtaCte = new CuentasCorrientesAcreedor();
                                 mIdCtaCte = 0;
                             }
@@ -1412,7 +1437,7 @@ namespace ProntoMVC.Controllers
 
                                 db.Subdiarios.Add(s);
                             }
-                            
+
                             mIdCuenta = d.IdCuenta ?? 0;
                             mImporte = mImporte - mIvaNoDiscriminadoItem;
                             if (mIdCuenta > 0 && mImporte != 0)
@@ -1472,7 +1497,7 @@ namespace ProntoMVC.Controllers
 
                             db.Subdiarios.Add(s);
                         }
-                        
+
                         db.SaveChanges();
 
                         //////////////////////////////////////////////////////////
@@ -1502,12 +1527,47 @@ namespace ProntoMVC.Controllers
                 }
             }
 
+            catch (System.Data.Entity.Validation.DbEntityValidationException ex)
+            {
+                //http://stackoverflow.com/questions/10219864/ef-code-first-how-do-i-see-entityvalidationerrors-property-from-the-nuget-pac
+                StringBuilder sb = new StringBuilder();
+
+                foreach (var failure in ex.EntityValidationErrors)
+                {
+                    sb.AppendFormat("{0} failed validation\n", failure.Entry.Entity.GetType());
+                    foreach (var error in failure.ValidationErrors)
+                    {
+                        sb.AppendFormat("- {0} : {1}", error.PropertyName, error.ErrorMessage);
+                        sb.AppendLine();
+                    }
+                }
+
+                //throw new System.Data.Entity.Validation.DbEntityValidationException(
+                //    "Entity Validation Failed - errors follow:\n" +
+                //    sb.ToString(), ex
+                //); // Add the original exception as the innerException
+
+                Response.StatusCode = (int)System.Net.HttpStatusCode.BadRequest;
+                JsonResponse res = new JsonResponse();
+                res.Status = Status.Error;
+                res.Errors = GetModelStateErrorsAsString(this.ModelState);
+
+                res.Errors.Add(sb.ToString());
+                res.Errors.Add(ex.ToString());
+                res.Message = "El ComprobanteProveedor es inválido. " + ex.ToString();
+                //return Json(res);
+                //return Json(new { Success = 0, ex = new Exception("Error al registrar").Message.ToString(), ModelState = ModelState });
+
+                return Json(res);
+            }
+
             catch (TransactionAbortedException ex)
             {
                 Response.StatusCode = (int)System.Net.HttpStatusCode.BadRequest;
                 Response.TrySkipIisCustomErrors = true;
                 return Json("TransactionAbortedException Message: {0}", ex.Message);
             }
+
             catch (Exception ex)
             {
                 Response.StatusCode = (int)System.Net.HttpStatusCode.BadRequest;
@@ -1848,7 +1908,7 @@ namespace ProntoMVC.Controllers
 
         void inic(ref ComprobanteProveedor o)
         {
-            Parametros parametros =  db.Parametros.Find(1); //fondoFijoService.Parametros();
+            Parametros parametros = db.Parametros.Find(1); //fondoFijoService.Parametros();
             o.NumeroReferencia = parametros.ProximoComprobanteProveedorReferencia;
             //o.SubNumero = 1;
             o.FechaComprobante = DateTime.Today;
@@ -1910,7 +1970,7 @@ namespace ProntoMVC.Controllers
 
 
             // fondoFijoService.Cotizaciones_TX_PorFechaMoneda(fecha,IdMoneda)
-            var mvarCotizacion = db.Cotizaciones. OrderByDescending(x => x.IdCotizacion).FirstOrDefault().Cotizacion; //  mo  Cotizacion(Date, glbIdMonedaDolar);
+            var mvarCotizacion = db.Cotizaciones.OrderByDescending(x => x.IdCotizacion).FirstOrDefault().Cotizacion; //  mo  Cotizacion(Date, glbIdMonedaDolar);
             o.CotizacionMoneda = 1;
             //  o.CotizacionADolarFijo=
             o.CotizacionDolar = (decimal)(mvarCotizacion ?? 0);
@@ -2026,7 +2086,7 @@ namespace ProntoMVC.Controllers
             string mAuxS5 = "";
             string usuarionombre;
             string nombre = "";
-            
+
             List<int> duplicates = o.DetalleComprobantesProveedores.Where(s => (s.IdDetalleComprobanteProveedor) > 0).GroupBy(s => s.IdDetalleComprobanteProveedor)
                          .Where(g => g.Count() > 1)
                          .Select(g => g.Key)
@@ -2053,7 +2113,7 @@ namespace ProntoMVC.Controllers
             mTipoComprobante = "CC";
             if (o.IdProveedorEventual != null) { mTipoComprobante = "FF"; }
             if (o.IdCuentaOtros != null) { mTipoComprobante = "OT"; }
-            
+
             if ((o.IdTipoComprobante ?? 0) <= 0) { sErrorMsg += "\n" + "Falta el tipo de comprobante"; }
             if (mTipoComprobante == "CC" && (o.IdProveedor ?? 0) == 0) { sErrorMsg += "\n" + "Falta el proveedor"; }
             if (mTipoComprobante == "FF" && (o.IdProveedorEventual ?? 0) == 0) { sErrorMsg += "\n" + "Falta el proveedor"; }
@@ -2064,7 +2124,7 @@ namespace ProntoMVC.Controllers
             if ((o.Letra ?? "") == "") { sErrorMsg += "\n" + "Falta la Letra"; }
             if ((o.NumeroComprobante1 ?? 0) <= 0) { sErrorMsg += "\n" + "Falta el número de punto de venta"; }
             if ((o.NumeroComprobante2 ?? 0) <= 0) { sErrorMsg += "\n" + "Falta el número de comprobante"; }
-            if ((o.IdCondicionCompra ?? 0) <= 0)  { sErrorMsg += "\n" + "Falta la condición de compra"; }
+            if ((o.IdCondicionCompra ?? 0) <= 0) { sErrorMsg += "\n" + "Falta la condición de compra"; }
             if ((o.NumeroCAI ?? "") == "" && (o.NumeroCAE ?? "") == "") { sErrorMsg += "\n" + "Falta el número de CAI o CAE"; }
             if (o.FechaRecepcion == null) { sErrorMsg += "\n" + "Falta la fecha de recepción"; }
             if (o.FechaVencimientoCAI < DateTime.Today) { sErrorMsg += "\n" + "La fecha de CAI está vencida"; }
@@ -2099,6 +2159,8 @@ namespace ProntoMVC.Controllers
                 //if (x.TomarEnCalculoDeImpuestos == null) sErrorMsg += "\n " + nombre + " no TomarEnCalculoDeImpuestos";
                 //if (x.IdProvinciaDestino1 == null) sErrorMsg += "\n " + nombre + " no IdProvinciaDestino1";
                 //if (x.PorcentajeProvinciaDestino1 == null) sErrorMsg += "\n " + nombre + " no PorcentajeProvinciaDestino1";
+
+                x.CodigoArticulo = "";
 
                 x.IVAComprasPorcentaje1 = x.IVAComprasPorcentaje1 ?? 0;
                 x.ImporteIVA1 = x.ImporteIVA1 ?? 0;
@@ -2761,7 +2823,7 @@ namespace ProntoMVC.Controllers
                             TipoComprobante = b != null ? b.Descripcion : "",
                             Letra = a.Letra,
                             NumeroComprobante1 = SqlFunctions.Replicate("0", 4 - a.NumeroComprobante1.ToString().Length) + a.NumeroComprobante1.ToString(),
-                            NumeroComprobante2 = SqlFunctions.Replicate("0", 8 - a.NumeroComprobante2.ToString().Length) + a.NumeroComprobante2.ToString(), 
+                            NumeroComprobante2 = SqlFunctions.Replicate("0", 8 - a.NumeroComprobante2.ToString().Length) + a.NumeroComprobante2.ToString(),
                             PuntoVenta = a.PuntoVenta,
                             NumeroReferencia = a.NumeroReferencia,
                             Tipo = (a.IdProveedor != null ? "Cta. cte." : (a.IdCuenta != null ? "F.fijo" : (a.IdCuentaOtros != null ? "Otros" : ""))),
@@ -2873,7 +2935,7 @@ namespace ProntoMVC.Controllers
             return Json(jsonData, JsonRequestBehavior.AllowGet);
         }
 
-        public virtual ActionResult ComprobantesProveedor_DynamicGridDataViejo (string sidx, string sord, int page, int rows, bool _search, string filters, string FechaInicial, string FechaFinal)
+        public virtual ActionResult ComprobantesProveedor_DynamicGridDataViejo(string sidx, string sord, int page, int rows, bool _search, string filters, string FechaInicial, string FechaFinal)
         {
             string campo = String.Empty;
             int pageSize = rows; // ?? 20;
@@ -3641,7 +3703,7 @@ namespace ProntoMVC.Controllers
                             IdComprobanteProveedor = a.IdComprobanteProveedor,
                             Observaciones = a.Observaciones
                         }).Where(campo).OrderBy(sidx + " " + sord)
-                        //.Skip((currentPage - 1) * pageSize).Take(pageSize)
+                //.Skip((currentPage - 1) * pageSize).Take(pageSize)
                         .ToList();
 
             var jsonData = new jqGridJson()

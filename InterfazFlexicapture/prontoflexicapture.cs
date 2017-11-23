@@ -6103,6 +6103,11 @@ Formato localidad-provincia	destination	x
                                 a.Fecha==null ? "" :  a.Fecha.GetValueOrDefault().ToShortDateString(),
 
                                 a.ArchivoAdjunto.ToString(),
+
+
+
+                                "<a href=\"CartaDePorte.aspx?Id=" +  a.Reclamo.CartasDePortes.Select(x=>x.IdCartaDePorte).SingleOrDefault().NullSafeToString() + "\"  target=\"_blank\" >" +  a.Reclamo.CartasDePortes.Select(x=>x.IdCartaDePorte).NullSafeToString().ToString() + "</>" ,
+                                
                             }
                         }).ToArray()
             };
@@ -6888,6 +6893,39 @@ Formato localidad-provincia	destination	x
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         public void UrenportSelenium(string directorioDescarga)
         {
 
@@ -7249,7 +7287,6 @@ Formato localidad-provincia	destination	x
 
 
 
-
         public void CerealnetSeleniumConPhantomJS(string directorioDescarga)
         {
 
@@ -7438,10 +7475,11 @@ Formato localidad-provincia	destination	x
         {
 
 
-            // el geckodriver tiene q estar en el path. actualizar version firefox (version 48) 
+            // el geckodriver tiene q estar en el path. actualizar version firefox (version 48) [-quise decir chrome no?]
             //verificar version del geckodriver.exe, debe ser 0.16 o superior (la de marzo no me servia)
 
 
+            // para q corra en el server3 (windows2003), necesito el chrome 49 y el chromedriver 2.22
 
 
 
@@ -7575,6 +7613,68 @@ Formato localidad-provincia	destination	x
     at ProntoWindowsService.Service1.DoWorkSoloPegatinas() in C:\bdl\pronto\ProntoWindowsService\Service1.cs:line 819
     WebDriver
     __________________________
+
+
+
+
+
+
+
+
+
+
+            
+
+
+
+
+
+
+
+        Log Entry : 
+11/16/2017 02:32:34
+Error in: . Error Message:hilo #8: System.InvalidOperationException: unknown error: unrecognized Chrome version: HeadlessChrome/62.0.3202.94
+  (Driver info: chromedriver= 2.22.397933 (1cab651507b88dec79b2b2a22d1943c01833cc1b),platform=Windows NT 6.1.7601 SP1 x86_64)
+   at OpenQA.Selenium.Remote.RemoteWebDriver.UnpackAndThrowOnError(Response errorResponse)
+   at OpenQA.Selenium.Remote.RemoteWebDriver.Execute(String driverCommandToExecute, Dictionary`2 parameters)
+   at OpenQA.Selenium.Remote.RemoteWebDriver.StartSession(ICapabilities desiredCapabilities)
+   at OpenQA.Selenium.Remote.RemoteWebDriver..ctor(ICommandExecutor commandExecutor, ICapabilities desiredCapabilities)
+   at OpenQA.Selenium.Chrome.ChromeDriver..ctor(ChromeDriverService service, ChromeOptions options)
+   at ServicioCartaPorte.servi.UrenportSelenium_ConChromeHeadless(String directorioDescarga, String dirDriver)
+   at ProntoWindowsService.Service1.DoWorkSoloPegatinas()
+__________________________
+
+        __________________________
+
+Log Entry : 
+11/16/2017 10:59:12
+Error in: . Error Message:System.Net.Mail.SmtpException
+Mailbox unavailable.The server response was: 5.4.5 Daily user sending quota exceeded.f189sm844058qkj.12 - gsmtp
+ at System.Net.Mail.DataCommand.CheckResponse(SmtpStatusCode statusCode, String serverResponse)
+ at System.Net.Mail.DataCommand.Send(SmtpConnection conn)
+ at System.Net.Mail.SmtpTransport.SendMail(MailAddress sender, MailAddressCollection recipients, String deliveryNotify, Boolean allowUnicode, SmtpFailedRecipientException& exception)
+   at System.Net.Mail.SmtpClient.Send(MailMessage message)
+   at ProntoFuncionesGenerales.MandaEmailSimple(String Para, String Asunto, String Cuerpo, String De, String SmtpServer, String SmtpUser, String SmtpPass, String sStringGenerarAdjunto, Int64 SmtpPort, Int32 EnableSSL, String CCO, String img)
+   at CartaDePorteManager.MandarMailDeError(Exception e)
+System
+__________________________
+
+Log Entry : 
+11/16/2017 10:59:12
+Error in: . Error Message:hilo #8: OpenQA.Selenium.WebDriverException: Cannot start the driver service on http://localhost:62137/
+   at OpenQA.Selenium.DriverService.Start()
+   at OpenQA.Selenium.Remote.DriverServiceCommandExecutor.Execute(Command commandToExecute)
+   at OpenQA.Selenium.Remote.RemoteWebDriver.Execute(String driverCommandToExecute, Dictionary`2 parameters)
+   at OpenQA.Selenium.Remote.RemoteWebDriver.StartSession(ICapabilities desiredCapabilities)
+   at OpenQA.Selenium.Remote.RemoteWebDriver..ctor(ICommandExecutor commandExecutor, ICapabilities desiredCapabilities)
+   at OpenQA.Selenium.Chrome.ChromeDriver..ctor(ChromeDriverService service, ChromeOptions options)
+   at ServicioCartaPorte.servi.UrenportSelenium_ConChromeHeadless(String directorioDescarga, String dirDriver)
+   at ProntoWindowsService.Service1.DoWorkSoloPegatinas()
+__________________________
+
+
+
+
     */
 
             }
@@ -7661,7 +7761,7 @@ Formato localidad-provincia	destination	x
 
 
 
-            // para q corra en el server3, necesito el chrome 49 y el chromedriver 2.22
+            // para q corra en el server3 (windows2003), necesito el chrome 49 y el chromedriver 2.22
 
 
 

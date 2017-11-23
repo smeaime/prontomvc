@@ -20,7 +20,7 @@ using System.Configuration;
 using System.IO;
 using System.Threading;
 
-
+using Pronto.ERP.Bll;
 
 /*
 
@@ -71,6 +71,7 @@ namespace ProntoWindowsService
         protected Thread m_thread3;
         protected Thread m_thread4;
         protected Thread m_thread5;
+        protected Thread m_thread6;
 
         static protected ManualResetEvent m_shutdownEvent;
         static protected TimeSpan m_delay;
@@ -85,6 +86,7 @@ namespace ProntoWindowsService
         static bool bWorker3Habilitado;
         static bool bWorker4Habilitado;
         static bool bWorker5Habilitado;
+        static bool bWorker6Habilitado;
 
 
         ///static string TempFolder;
@@ -192,6 +194,19 @@ namespace ProntoWindowsService
                 m_thread5.Start();
             }
 
+
+
+
+            if (bWorker6Habilitado)
+            {
+                ////http://stackoverflow.com/questions/11985308/multiple-threads-in-windows-service
+
+                m_thread6 = new Thread(DoWorkCartasPorteNuevasParaElCliente);
+                m_thread6.Name = "MyWorker6";
+                m_thread6.IsBackground = false;
+                m_thread6.Start();
+            }
+
             ////FlexiCapture Engine must be accessed on the same thread as it was initialized
             /*
              * http://knowledgebase.abbyy.com/article/794
@@ -226,6 +241,8 @@ namespace ProntoWindowsService
 
             if (m_thread5 != null) m_thread5.Join(10000);
 
+            if (m_thread6 != null) m_thread6.Join(10000);
+
             // Temillas con la parada del servicio
             //http://stackoverflow.com/questions/22534330/windows-service-onstop-wait-for-finished-processing
             //http://stackoverflow.com/questions/1528209/how-to-properly-stop-a-multi-threaded-net-windows-service
@@ -252,6 +269,7 @@ namespace ProntoWindowsService
             bWorker3Habilitado = ConfigurationManager.AppSettings["bWorker3Habilitado"] == "SI";
             bWorker4Habilitado = ConfigurationManager.AppSettings["bWorker4Habilitado"] == "SI";
             bWorker5Habilitado = ConfigurationManager.AppSettings["bWorker5Habilitado"] == "SI";
+            bWorker6Habilitado = ConfigurationManager.AppSettings["bWorker6Habilitado_CartasPorte"] == "SI";
 
         }
 
@@ -1040,6 +1058,11 @@ FCESupport\FCESupportImpl.h, 42.
 
 
 
+
+
+
+
+
         static public void DoWorkEnvioCorreos()
         {
 
@@ -1104,6 +1127,135 @@ FCESupport\FCESupportImpl.h, 42.
 
 
                     TandaCorreos(SC1, scBdlMaster, idthread);
+
+                    // esta bien hacerlo asi? -separar la tarea de pegatinas en un hilo aparte
+
+
+
+
+                    if (resultado == null && resultado2 == null)
+                    {
+                        bSignaled = m_shutdownEvent.WaitOne(m_delay, true);
+                        if ((bSignaled == true && !Debugger.IsAttached) || bForzarShutdown) break;
+                        System.Threading.Thread.Sleep(1000 * 15);
+                        if ((bSignaled == true && !Debugger.IsAttached) || bForzarShutdown) break;
+                        System.Threading.Thread.Sleep(1000 * 15);
+                        Console.Write(".");
+                    }
+
+                }
+
+                catch (System.Runtime.InteropServices.COMException x2)
+                {
+
+
+                    CartaDePorteManager.MandarMailDeError(x2);
+
+                    ClassFlexicapture.Log(idthread + x2.ToString());
+                    //ClassFlexicapture.Log(idthread + "Problemas con la licencia? Paro y reinicio");
+                    Pronto.ERP.Bll.ErrHandler2.WriteError(idthread + x2);
+
+                    //hacer un unload y cargar de nuevo?
+
+                    //ClassFlexicapture.unloadEngine(ref engine, ref engineLoader);
+                    //processor = null;
+
+                    //ClassFlexicapture.IniciaMotor(ref engine, ref  engineLoader, ref  processor, plantilla); // explota en loadengine
+                    //cuantas veces debo probar de nuevo?
+
+                    //ClassFlexicapture.Log(idthread + "funciona?");
+
+                }
+
+                catch (Exception x)
+                {
+
+                    CartaDePorteManager.MandarMailDeError(x);
+
+                    ClassFlexicapture.Log(idthread + x.ToString());
+                    Pronto.ERP.Bll.ErrHandler2.WriteError(x);
+                }
+                finally
+                {
+
+                }
+
+
+            }
+            //ClassFlexicapture.Log(x.ToString());
+
+            //ClassFlexicapture.unloadEngine(ref engine, ref engineLoader);
+            ClassFlexicapture.Log(idthread + "Se apagó el hilo de correos");
+
+
+        }
+
+
+
+        static public void DoWorkCartasPorteNuevasParaElCliente()
+        {
+
+
+            string idthread = "hilo #" + Thread.CurrentThread.ManagedThreadId.ToString() + ": ";
+            Pronto.ERP.Bll.ErrHandler2.WriteError(idthread + "ssdssss");
+
+
+            ClassFlexicapture.Log(idthread + "Empieza");
+
+
+            string cadena = Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC1));
+
+            ClassFlexicapture.Log(idthread + "CONEXION: " + cadena);
+            Console.WriteLine(idthread + "CONEXION: " + cadena);
+
+            try
+            {
+                DemoProntoEntities db = new DemoProntoEntities(cadena);
+                var q = db.Clientes.Take(1).ToList();
+
+            }
+            catch (Exception x)
+            {
+                ClassFlexicapture.Log(idthread + x.ToString());
+                CartaDePorteManager.MandarMailDeError(x);
+                Console.WriteLine(idthread + x.ToString());
+                return;
+            }
+
+
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+            bool bSignaled = false;
+
+            List<ProntoMVC.Data.FuncionesGenericasCSharp.Resultados> resultado, resultado2;
+
+            while (true)
+            {
+                // wait for the event to be signaled
+                // or for the configured delay
+
+                // let's do some work
+                //no volver a cargar planilla!!!!
+
+
+                try
+                {
+
+
+                    if ((bSignaled == true && !Debugger.IsAttached) || bForzarShutdown) break;
+                    bSignaled = m_shutdownEvent.WaitOne(m_delay, true);
+                    if ((bSignaled == true && !Debugger.IsAttached) || bForzarShutdown) break;
+
+                    resultado = null;
+                    //resultado = Tanda(SC1, DirApp1, ref engine, ref processor, idthread);
+
+
+                    resultado2 = null;
+                    //resultado2 = Tanda(SC2, DirApp2, ref engine, ref processor, idthread);
+
+
+
+                    TandaNotificacionesCamiones(SC1, scBdlMaster, idthread);
 
                     // esta bien hacerlo asi? -separar la tarea de pegatinas en un hilo aparte
 
@@ -1414,6 +1566,154 @@ FCESupport\FCESupportImpl.h, 42.
             }
 
             return resultado;
+
+        }
+
+
+
+
+        public static void  TandaNotificacionesCamiones(string SC, string scBdlMaster, string idthread)
+        {
+
+            try
+            {
+
+                ClassFlexicapture.Log(idthread + "busco correos");
+
+
+
+                var scEF = ProntoMVC.Data.Models.Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC));
+                BDLMasterEntities dbmaster = new BDLMasterEntities(Auxiliares.FormatearConexParaEntityFrameworkBDLMASTER_2(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(scBdlMaster)));
+                DemoProntoEntities db = new DemoProntoEntities(scEF);
+
+
+
+                DateTime FechaNot;
+                try
+                {
+                    FechaNot = DateTime.Parse(Pronto.ERP.Bll.ParametroManager.TraerValorParametro2(SC, "UltimaFechaNotificacion").ToString());
+                }
+                catch (Exception)
+                {
+                    FechaNot = DateTime.MinValue;
+                }
+
+
+                int dummy;
+
+                // solo estos clientes me interesan...  -cuantos usuarios externos hay en la bdlmaster? creo q mas de mil. ademas, recordá que los usuarios especiales tipo BLD los tendrías que filtrar de otro modo...
+                var q = (from p in dbmaster.UserDatosExtendidos
+                         join u in dbmaster.aspnet_Users on p.UserId equals u.UserId
+                         join m in dbmaster.aspnet_Membership on p.UserId equals m.UserId
+                         select new { FechaNotificacion = new DateTime(), p.RazonSocial, m.Email, ListadoCuits = p.TextoAuxiliar, u.LastActivityDate }).ToList();
+
+                var usuariosclientes = from x in q
+                                       select new { IdCliente = Int32.TryParse(x.RazonSocial, out dummy) ? Int32.Parse(x.RazonSocial) : 0, x.FechaNotificacion, x.RazonSocial, x.Email, x.ListadoCuits, x.LastActivityDate };
+
+
+                List<int> usus = usuariosclientes.Select(x => x.IdCliente).Where(x => x > 0).ToList();
+
+                List<int> ususCorredores = new List<int>(); //usus.Select(x => equivalen x.IdCliente).ToList();
+
+
+
+                DateTime FechaMinima = usuariosclientes.Select(x => x.FechaNotificacion).Max();
+
+                // una vez que tengo la lista de clientes, como vincularla con 
+
+
+
+
+
+                //DateTime UltimaFechaDeEnvioNotificaciones = new DateTime(2016, 8, 31);
+
+                List<int> clientesParaNotificar = (
+                        from x in db.CartasDePortes
+                            //from c1 in db.Clientes.Where(c => c.IdCliente == x.Vendedor)
+                            //from c2 in db.Clientes.Where(c => c.IdCliente == x.Entregador)
+                    where ((x.FechaModificacion ?? x.FechaArribo) > FechaNot
+                                && (usus.Contains(x.Vendedor ?? -1)
+                                        || usus.Contains(x.Entregador ?? -1)
+                                        || usus.Contains(x.CuentaOrden1 ?? -1)
+                                        || usus.Contains(x.CuentaOrden2 ?? -1)
+                                        || ususCorredores.Contains(x.Corredor ?? -1)
+                                    ) // pero y si el cliente ya las vio?   UltimaFechaDeLoginDelCliente
+                               )
+                        select new int[] { x.Vendedor ?? -1, x.Entregador ?? -1, x.CuentaOrden1 ?? -1, x.CuentaOrden2 ?? -1, x.Corredor ?? -1 }
+                        )
+                        .SelectMany(x => x)
+                        .Distinct()
+                        .Where(x => usus.Contains(x))  // porque me estoy trayendo todos los clientes de una carta que solo tiene un cliente importante, tengo que volver a filtrarlo, y es mas practico hacerlo aca
+                        .ToList();
+
+
+
+
+
+                //como hacer para incluir los de bld? como en DataTablePorCliente
+                // FiltrarQueryableSegunCliente
+
+
+
+
+
+
+                var listado = from k in clientesParaNotificar
+                              join x in usuariosclientes on k equals x.IdCliente
+                              //where  clientesParaNotificar.Contains(x.IdCliente)  fechanot
+                              select x.Email;
+
+
+
+
+                //string rejunte2 = string.Join(";", qq.Take(100).ToArray());
+                //var listado = db.Clientes.Select(x => x.CorreosElectronicos_1).Take(100);
+
+
+                string rejunte = string.Join(",", listado.ToArray());
+
+                Pronto.ERP.Bll.ErrHandler2.WriteError("Notificaciones a " + rejunte);
+
+
+
+                if (true)
+                {
+                    Pronto.ERP.Bll.EntidadManager.MandaEmail_Nuevo(ConfigurationManager.AppSettings["ErrorMail"],
+                                   "Notificación Williams",
+                                   "Tenés actuatalizaciones de camiones informados en http://prontoclientes.williamsentregas.com.ar",
+                                   ConfigurationManager.AppSettings["SmtpUser"],
+                                   ConfigurationManager.AppSettings["SmtpServer"],
+                                   ConfigurationManager.AppSettings["SmtpUser"],
+                                   ConfigurationManager.AppSettings["SmtpPass"],
+                                    "",
+                                   Convert.ToInt16(ConfigurationManager.AppSettings["SmtpPort"]), 1
+                                   , rejunte
+
+                                   );
+                }
+
+
+                // actualizar fecha de ultima notificacion de cada cliente? -Una es la fecha desde la que tengo que buscar tandas de cartas, y otra es la fecha individual de los clientes
+
+
+                Pronto.ERP.Bll.ParametroManager.GuardarValorParametro2(SC, "UltimaFechaNotificacion", DateTime.Now.ToString());
+
+
+
+
+
+
+                
+               
+            }
+
+            catch (Exception x)
+            {
+
+                ClassFlexicapture.Log(x.ToString());
+                // throw;
+
+            }
 
         }
 

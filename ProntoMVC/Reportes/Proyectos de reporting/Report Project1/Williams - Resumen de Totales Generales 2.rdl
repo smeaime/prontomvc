@@ -3,7 +3,7 @@
   <AutoRefresh>0</AutoRefresh>
   <DataSources>
     <DataSource Name="TestHarcodeada">
-      <DataSourceReference>DataSourceProduccion</DataSourceReference>
+      <DataSourceReference>TestPCMariano</DataSourceReference>
       <rd:SecurityType>Integrated</rd:SecurityType>
       <rd:DataSourceID>19dde040-c46f-477a-8048-5f0c1971f8dd</rd:DataSourceID>
     </DataSource>
@@ -13,17 +13,44 @@
       <Query>
         <DataSourceName>TestHarcodeada</DataSourceName>
         <QueryParameters>
+          <QueryParameter Name="@idVendedor">
+            <Value>=Parameters!idVendedor.Value</Value>
+          </QueryParameter>
+          <QueryParameter Name="@idCorredor">
+            <Value>=Parameters!idCorredor.Value</Value>
+          </QueryParameter>
+          <QueryParameter Name="@idDestinatario">
+            <Value>=Parameters!idDestinatario.Value</Value>
+          </QueryParameter>
+          <QueryParameter Name="@idIntermediario">
+            <Value>=Parameters!idIntermediario.Value</Value>
+          </QueryParameter>
+          <QueryParameter Name="@idRemComercial">
+            <Value>=Parameters!idRemComercial.Value</Value>
+          </QueryParameter>
+          <QueryParameter Name="@idArticulo">
+            <Value>=Parameters!idArticulo.Value</Value>
+          </QueryParameter>
+          <QueryParameter Name="@idProcedencia">
+            <Value>=Parameters!idProcedencia.Value</Value>
+          </QueryParameter>
+          <QueryParameter Name="@idDestino">
+            <Value>=Parameters!idDestino.Value</Value>
+          </QueryParameter>
+          <QueryParameter Name="@AplicarANDuORalFiltro">
+            <Value>=Parameters!AplicarANDuORalFiltro.Value</Value>
+          </QueryParameter>
           <QueryParameter Name="@ModoExportacion">
             <Value>=Parameters!ModoExportacion.Value</Value>
           </QueryParameter>
           <QueryParameter Name="@FechaDesde">
             <Value>=Parameters!FechaDesde.Value</Value>
           </QueryParameter>
-          <QueryParameter Name="@puntoventa">
-            <Value>=Parameters!puntoventa.Value</Value>
-          </QueryParameter>
           <QueryParameter Name="@FechaHasta">
             <Value>=Parameters!FechaHasta.Value</Value>
+          </QueryParameter>
+          <QueryParameter Name="@puntoventa">
+            <Value>=Parameters!puntoventa.Value</Value>
           </QueryParameter>
           <QueryParameter Name="@FechaDesdeAnterior">
             <Value>=Parameters!FechaDesdeAnterior.Value</Value>
@@ -46,42 +73,40 @@ set @FechaHasta='20170228'
 
 
 exec [wCartasDePorte_TX_ResumenDeTotalesEstadisticas] 
-					NULL, 
-					NULL, 
-					4,
+			
+					NULL,	--@startRowIndex
+					NULL, --@maximumRows
+					4,	--@estado
+					NULL,   --@QueContenga
+					@idVendedor,
 
-NULL, 
-					NULL, 
+					@idCorredor,
+					@idDestinatario,
+					 @idIntermediario,
+					@idRemComercial,
+					@idArticulo,
 
-					NULL, 
-					NULL, 
-					NULL,
-					NULL, 
-					NULL, 
-
-					NULL,
-					NULL,
-					NULL, 
-					@ModoExportacion, 
-
+					@idProcedencia,
+					@idDestino,
+					@AplicarANDuORalFiltro,
+					@ModoExportacion, -- [ 'Export', --'Entregas', --'Ambos', --'Buques',]
 						
-@FechaDesde,
-@FechaHasta,
+					
+@FechaDesde, @FechaHasta,
 
 
 					@puntoventa,
-					NULL,
-					NULL, 
-					NULL, 
+					NULL, -- @optDivisionSyngenta
+					NULL, -- @Contrato
+					NULL, -- @QueContenga2
 
-					NULL, 
-					NULL, 
-					NULL,
-					NULL, 
-					NULL,
+					NULL, -- @idClienteAuxiliarint
+					NULL, -- @AgrupadorDeTandaPeriodos
+					NULL,-- @Vagon
+					NULL,--  @Patente
+					NULL, -- @optCamionVagon
 
-@FechaDesdeAnterior,
-@FechaHastaAnterior</CommandText>
+@FechaDesdeAnterior , @FechaHastaAnterior</CommandText>
         <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
       </Query>
       <Fields>
@@ -117,24 +142,12 @@ NULL,
           <DataField>FacElevacion</DataField>
           <rd:TypeName>System.Decimal</rd:TypeName>
         </Field>
-        <Field Name="TotalElevacion">
-          <DataField>TotalElevacion</DataField>
-          <rd:TypeName>System.Decimal</rd:TypeName>
-        </Field>
         <Field Name="FacEntrega">
           <DataField>FacEntrega</DataField>
           <rd:TypeName>System.Decimal</rd:TypeName>
         </Field>
-        <Field Name="TotalEntrega">
-          <DataField>TotalEntrega</DataField>
-          <rd:TypeName>System.Decimal</rd:TypeName>
-        </Field>
         <Field Name="FacBuques">
           <DataField>FacBuques</DataField>
-          <rd:TypeName>System.Decimal</rd:TypeName>
-        </Field>
-        <Field Name="TotalBuques">
-          <DataField>TotalBuques</DataField>
           <rd:TypeName>System.Decimal</rd:TypeName>
         </Field>
         <Field Name="FacPeriodoAnteriorEntrega">
@@ -147,6 +160,18 @@ NULL,
         </Field>
         <Field Name="FacPeriodoAnteriorBuques">
           <DataField>FacPeriodoAnteriorBuques</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="TotalElevacion">
+          <DataField>TotalElevacion</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="TotalEntrega">
+          <DataField>TotalEntrega</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="TotalBuques">
+          <DataField>TotalBuques</DataField>
           <rd:TypeName>System.Decimal</rd:TypeName>
         </Field>
         <Field Name="FacTotalElevacion">
@@ -224,23 +249,50 @@ select idlocalidad, nombre from localidades</CommandText>
       <Query>
         <DataSourceName>TestHarcodeada</DataSourceName>
         <QueryParameters>
+          <QueryParameter Name="@idVendedor">
+            <Value>=Parameters!idVendedor.Value</Value>
+          </QueryParameter>
           <QueryParameter Name="@ModoExportacion">
             <Value>=Parameters!ModoExportacion.Value</Value>
+          </QueryParameter>
+          <QueryParameter Name="@idCorredor">
+            <Value>=Parameters!idCorredor.Value</Value>
           </QueryParameter>
           <QueryParameter Name="@FechaDesde">
             <Value>=Parameters!FechaDesde.Value</Value>
           </QueryParameter>
+          <QueryParameter Name="@idDestinatario">
+            <Value>=Parameters!idDestinatario.Value</Value>
+          </QueryParameter>
           <QueryParameter Name="@FechaHasta">
             <Value>=Parameters!FechaHasta.Value</Value>
+          </QueryParameter>
+          <QueryParameter Name="@idIntermediario">
+            <Value>=Parameters!idIntermediario.Value</Value>
           </QueryParameter>
           <QueryParameter Name="@puntoventa">
             <Value>=Parameters!puntoventa.Value</Value>
           </QueryParameter>
+          <QueryParameter Name="@idRemComercial">
+            <Value>=Parameters!idRemComercial.Value</Value>
+          </QueryParameter>
           <QueryParameter Name="@FechaDesdeAnterior">
             <Value>=Parameters!FechaDesdeAnterior.Value</Value>
           </QueryParameter>
+          <QueryParameter Name="@idArticulo">
+            <Value>=Parameters!idArticulo.Value</Value>
+          </QueryParameter>
           <QueryParameter Name="@FechaHastaAnterior">
             <Value>=Parameters!FechaHastaAnterior.Value</Value>
+          </QueryParameter>
+          <QueryParameter Name="@idProcedencia">
+            <Value>=Parameters!idProcedencia.Value</Value>
+          </QueryParameter>
+          <QueryParameter Name="@idDestino">
+            <Value>=Parameters!idDestino.Value</Value>
+          </QueryParameter>
+          <QueryParameter Name="@AplicarANDuORalFiltro">
+            <Value>=Parameters!AplicarANDuORalFiltro.Value</Value>
           </QueryParameter>
         </QueryParameters>
         <CommandText>/*
@@ -257,40 +309,40 @@ set @FechaHasta='20170228'
 
 
 [wCartasDePorte_TX_DetalleDeTotalesEstadisticas] 
-					NULL, 
-					NULL, 
-					4,
-					NULL, 
-					NULL, 
+					
+					NULL,	--@startRowIndex
+					NULL, --@maximumRows
+					4,	--@estado
+					NULL,   --@QueContenga
+					@idVendedor,
 
-					NULL, 
-					NULL, 
-					NULL,
-					NULL, 
-					-1, --@idArticulo,
+					@idCorredor,
+					@idDestinatario,
+					 @idIntermediario,
+					@idRemComercial,
+					@idArticulo,
 
-					NULL, --@idProcedencia,
-					-1,---1, --@idDestino,
-					NULL, --@AplicarANDuORalFiltro,
-					@ModoExportacion, 
+					@idProcedencia,
+					@idDestino,
+					@AplicarANDuORalFiltro,
+					@ModoExportacion, -- [ 'Export', --'Entregas', --'Ambos', --'Buques',]
 						
-@FechaDesde,
-@FechaHasta,
+					
+@FechaDesde, @FechaHasta,
 
 
 					@puntoventa,
-					NULL,
-					NULL, 
-					NULL, 
+					NULL, -- @optDivisionSyngenta
+					NULL, -- @Contrato
+					NULL, -- @QueContenga2
 
-					NULL, 
-					NULL, 
-					NULL,
-					NULL, 
-					NULL,
+					NULL, -- @idClienteAuxiliarint
+					NULL, -- @AgrupadorDeTandaPeriodos
+					NULL,-- @Vagon
+					NULL,--  @Patente
+					NULL, -- @optCamionVagon
 
-@FechaDesdeAnterior,
-@FechaHastaAnterior</CommandText>
+@FechaDesdeAnterior , @FechaHastaAnterior</CommandText>
         <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
       </Query>
       <Fields>
@@ -336,23 +388,50 @@ set @FechaHasta='20170228'
       <Query>
         <DataSourceName>TestHarcodeada</DataSourceName>
         <QueryParameters>
+          <QueryParameter Name="@idVendedor">
+            <Value>=Parameters!idVendedor.Value</Value>
+          </QueryParameter>
           <QueryParameter Name="@ModoExportacion">
             <Value>=Parameters!ModoExportacion.Value</Value>
+          </QueryParameter>
+          <QueryParameter Name="@idCorredor">
+            <Value>=Parameters!idCorredor.Value</Value>
           </QueryParameter>
           <QueryParameter Name="@FechaDesde">
             <Value>=Parameters!FechaDesde.Value</Value>
           </QueryParameter>
+          <QueryParameter Name="@idDestinatario">
+            <Value>=Parameters!idDestinatario.Value</Value>
+          </QueryParameter>
           <QueryParameter Name="@FechaHasta">
             <Value>=Parameters!FechaHasta.Value</Value>
+          </QueryParameter>
+          <QueryParameter Name="@idIntermediario">
+            <Value>=Parameters!idIntermediario.Value</Value>
           </QueryParameter>
           <QueryParameter Name="@puntoventa">
             <Value>=Parameters!puntoventa.Value</Value>
           </QueryParameter>
+          <QueryParameter Name="@idRemComercial">
+            <Value>=Parameters!idRemComercial.Value</Value>
+          </QueryParameter>
           <QueryParameter Name="@FechaDesdeAnterior">
             <Value>=Parameters!FechaDesdeAnterior.Value</Value>
           </QueryParameter>
+          <QueryParameter Name="@idArticulo">
+            <Value>=Parameters!idArticulo.Value</Value>
+          </QueryParameter>
           <QueryParameter Name="@FechaHastaAnterior">
             <Value>=Parameters!FechaHastaAnterior.Value</Value>
+          </QueryParameter>
+          <QueryParameter Name="@idProcedencia">
+            <Value>=Parameters!idProcedencia.Value</Value>
+          </QueryParameter>
+          <QueryParameter Name="@idDestino">
+            <Value>=Parameters!idDestino.Value</Value>
+          </QueryParameter>
+          <QueryParameter Name="@AplicarANDuORalFiltro">
+            <Value>=Parameters!AplicarANDuORalFiltro.Value</Value>
           </QueryParameter>
         </QueryParameters>
         <CommandText>/*
@@ -369,40 +448,40 @@ set @FechaHasta='20170228'
 
 
 [wCartasDePorte_TX_DetalleDeTotalesEstadisticas] 
-					NULL, 
-					NULL, 
-					4,
-					NULL, 
-					NULL, 
+					
+					NULL,	--@startRowIndex
+					NULL, --@maximumRows
+					4,	--@estado
+					NULL,   --@QueContenga
+					@idVendedor,
 
-					NULL, 
-					NULL, 
-					NULL,
-					NULL, 
-					-1, --@idArticulo,
+					@idCorredor,
+					@idDestinatario,
+					 @idIntermediario,
+					@idRemComercial,
+					@idArticulo,
 
-					NULL, --@idProcedencia,
-					-1,---1, --@idDestino,
-					NULL, --@AplicarANDuORalFiltro,
-					@ModoExportacion, 
+					@idProcedencia,
+					@idDestino,
+					@AplicarANDuORalFiltro,
+					@ModoExportacion, -- [ 'Export', --'Entregas', --'Ambos', --'Buques',]
 						
-@FechaDesde,
-@FechaHasta,
+					
+@FechaDesde, @FechaHasta,
 
 
-										@puntoventa,
-					NULL,
-					NULL, 
-					NULL, 
+					@puntoventa,
+					NULL, -- @optDivisionSyngenta
+					NULL, -- @Contrato
+					NULL, -- @QueContenga2
 
-					NULL, 
-					NULL, 
-					NULL,
-					NULL, 
-					NULL,
+					NULL, -- @idClienteAuxiliarint
+					NULL, -- @AgrupadorDeTandaPeriodos
+					NULL,-- @Vagon
+					NULL,--  @Patente
+					NULL, -- @optCamionVagon
 
-@FechaDesdeAnterior,
-@FechaHastaAnterior</CommandText>
+@FechaDesdeAnterior , @FechaHastaAnterior</CommandText>
       </Query>
       <Fields>
         <Field Name="mes">

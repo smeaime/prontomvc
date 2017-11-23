@@ -1319,7 +1319,7 @@ $(function () {
             success: function (result) {
                 if (result) {
                     $('html, body').css('cursor', 'auto');
-                    window.location = (ROOT + "Factura/Edit/" + result.IdComprobanteProveedor);
+                    window.location = (ROOT + "ComprobanteProveedor/Edit/" + result.IdComprobanteProveedor);
                 } else {
                     alert('No se pudo grabar el registro.');
                     $('.loading').html('');

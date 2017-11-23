@@ -246,6 +246,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="TestsSQL\46943 Resumen de facturacion versus Cubo de ventas.sql" />
     <Content Include="Viejos.vb" />
   </ItemGroup>
   <ItemGroup>

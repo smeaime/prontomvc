@@ -1,4 +1,7 @@
-﻿Imports Pronto.ERP.Bll
+﻿
+
+
+Imports Pronto.ERP.Bll
 Imports Pronto.ERP.BO
 Imports System.Diagnostics 'para usar Debug.Print
 Imports System.IO
@@ -23,7 +26,6 @@ Imports LogicaInformesWilliams
 Imports Pronto.ERP.Bll.EntidadManager
 
 Imports System.Web.Services
-
 
 
 
@@ -68,6 +70,15 @@ Partial Class ReclamosPorUsuarioMovil
 
 
         'If Session(SESSIONPRONTO_UserName) <> "Mariano" Then Button1.Visible = False
+
+
+
+
+        If Not Request.Browser("IsMobileDevice") = "true" Then
+            'Response.Redirect("SituacionCalidad.aspx")
+        End If
+
+
 
 
         If Not IsPostBack Then 'es decir, si es la primera vez que se carga
@@ -413,9 +424,9 @@ Partial Class ReclamosPorUsuarioMovil
         Dim s = New ServicioCartaPorte.servi()
 
         Dim sqlquery4 = s.CartasPorte_DynamicGridData_ExcelExportacion_UsandoInternalQuery("IdCartaDePorte", "desc", 1, 999999, True, filters,
-                                             fechadesde,
-                                             fechahasta,
-                                              -1, idDestino, SC, "Mariano")
+                                         fechadesde,
+                                         fechahasta,
+                                          -1, idDestino, SC, "Mariano", 11)
 
         CartaDePorteManager.RebindReportViewer_ServidorExcel(ReporteLocal, "Sincronismo BLD.rdl", sqlquery4, SC, False, fisico)
 
@@ -452,10 +463,10 @@ Partial Class ReclamosPorUsuarioMovil
 
         Dim s = New ServicioCartaPorte.servi()
 
-        Dim sqlquery4 = s.CartasPorte_DynamicGridData_ExcelExportacion_UsandoInternalQuery("IdCartaDePorte", "desc", 1, 999999, True, filters,
-                                             fechadesde,
-                                             fechahasta,
-                                              -1, idDestino, SC, "Mariano")
+        Dim sqlquery4 As String = s.CartasPorte_DynamicGridData_ExcelExportacion_UsandoInternalQuery("IdCartaDePorte", "desc", 1, 999999, True, filters,
+                                         fechadesde,
+                                         fechahasta,
+                                          -1, idDestino, SC, "Mariano", 11)
 
 
 
@@ -479,7 +490,7 @@ Partial Class ReclamosPorUsuarioMovil
 
 
         RebindReportViewer_ServidorExcel(ReporteLocal,
-                     "Listado general de Cartas de Porte (simulando original) con foto 2", yourParams, fisico, False)
+                 "Listado general de Cartas de Porte (simulando original) con foto 2", yourParams, fisico, False)
 
 
         Return url
@@ -516,9 +527,9 @@ Partial Class ReclamosPorUsuarioMovil
         Dim s = New ServicioCartaPorte.servi()
 
         Dim sqlquery4 = s.CartasPorte_DynamicGridData_ExcelExportacion_UsandoInternalQuery("IdCartaDePorte", "desc", 1, 999999, True, filters,
-                                             fechadesde,
-                                             fechahasta,
-                                              -1, idDestino, SC, "Mariano")
+                                         fechadesde,
+                                         fechahasta,
+                                          -1, idDestino, SC, "Mariano", 11)
 
 
 
@@ -568,9 +579,9 @@ Partial Class ReclamosPorUsuarioMovil
         '                                      -1, idDestino, HFSC.Value, "Mariano")
 
         Dim sqlquery4 = s.CartasPorte_DynamicGridData_ExcelExportacion_UsandoInternalQuery("IdCartaDePorte", "desc", 1, 999999, True, Filtro,
-                                             txtFechaDesde.Text,
-                                             txtFechaHasta.Text,
-                                              -1, idDestino, HFSC.Value, "Mariano")
+                                         txtFechaDesde.Text,
+                                         txtFechaHasta.Text,
+                                          -1, idDestino, HFSC.Value, "Mariano", 11)
 
         CartaDePorteManager.RebindReportViewer_ServidorExcel(ReporteLocal, "Sincronismo BLD.rdl", sqlquery4, HFSC.Value, False, output)
 
@@ -635,7 +646,7 @@ Partial Class ReclamosPorUsuarioMovil
 
         Dim s = New ServicioCartaPorte.servi()
         'Dim q = s.InformeSituacion_string(idDestino, FechaDesde, FechaHasta, HFSC.Value)
-        Dim q As String = s.InformeSituacion_html(idDestino, dFechaDesde, dFechaHasta, SC)
+        Dim q As String = s.InformeSituacion_html(idDestino, dFechaDesde, dFechaHasta, SC, 11)
 
 
 
@@ -671,10 +682,13 @@ Partial Class ReclamosPorUsuarioMovil
 
         Dim s = New ServicioCartaPorte.servi()
         'Dim q = s.InformeSituacion_string(idDestino, FechaDesde, FechaHasta, HFSC.Value)
-        Dim q = s.InformeSituacion_html(idDestino, FechaDesde, FechaHasta, HFSC.Value)
+        Dim q = s.InformeSituacion_html(idDestino, FechaDesde, FechaHasta, HFSC.Value, 11)
         salida.Text = q
 
     End Sub
 End Class
+
+
+
 
 

@@ -60,6 +60,12 @@ using System.Net;
 using System.Xml.Linq;
 
 
+using System.Web.Mvc;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+
+
+
+
 
 
 //test de java lopez
@@ -67,9 +73,6 @@ using System.Xml.Linq;
 
 namespace ProntoMVC.Tests
 {
-    using System.Web.Mvc;
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
-
 
 
 
@@ -866,6 +869,160 @@ namespace ProntoMVC.Tests
 
 
 
+                
+
+
+        [TestMethod]
+        public void resumen_46943()
+        {
+
+            // En el periodo anterior sigue habiendo bnastante diferencia
+            // Si filtra por "entrega", aparecen cartas en "exportacion" porque de esas familias hay "Originales" en ese modo
+
+
+            ReportParameter p2 = null;
+
+            int idcliente = 2871; //los grobo
+            var desde = new DateTime(2016, 11, 1);
+            var hasta = new DateTime(2017, 5, 31);
+            var desdeAnt = new DateTime(2015, 11, 1); //nov
+            var hastaAnt = new DateTime(2016, 5, 31); //mayo
+            var pv = -1;
+            var ModoExportacion = "Entregas";
+            CartaDePorteManager.enumCDPestado estado = CartaDePorteManager.enumCDPestado.DescargasMasFacturadas; //CartaDePorteManager.enumCDPestado.Todas;
+
+            ReportViewer ReporteLocal = new Microsoft.Reporting.WebForms.ReportViewer();
+
+
+
+
+
+            string output2 = @"C:\Users\Administrador\Desktop\Informe" + DateTime.Now.ToString("ddMMMyyyy_HHmmss") + ".xls";
+            ReportParameter[] yourParams2 = new ReportParameter[20];
+            yourParams2[0] = new ReportParameter("FechaDesde", desde.ToString());
+            yourParams2[1] = new ReportParameter("FechaHasta", hasta.ToString());
+            yourParams2[2] = new ReportParameter("FechaDesdeAnterior", desdeAnt.ToString());
+            yourParams2[3] = new ReportParameter("FechaHastaAnterior", hastaAnt.ToString());
+            yourParams2[4] = new ReportParameter("bMostrar1", "true");
+            yourParams2[5] = new ReportParameter("bMostrar2", "true");
+            yourParams2[6] = new ReportParameter("bMostrar3", "true");
+            yourParams2[7] = new ReportParameter("bMostrar4", "true");
+            yourParams2[8] = new ReportParameter("bMostrar5", "true");
+            yourParams2[9] = new ReportParameter("idVendedor", idcliente.ToString());
+            yourParams2[10] = new ReportParameter("idCorredor", "-1");
+            yourParams2[11] = new ReportParameter("idDestinatario", " -1");
+            yourParams2[12] = new ReportParameter("idIntermediario", idcliente.ToString());
+            yourParams2[13] = new ReportParameter("idRemComercial", idcliente.ToString());
+            yourParams2[14] = new ReportParameter("idArticulo", " -1");
+            yourParams2[15] = new ReportParameter("idProcedencia", " -1");
+            yourParams2[16] = new ReportParameter("idDestino", " -1");
+            yourParams2[17] = new ReportParameter("AplicarANDuORalFiltro",CartaDePorteManager.FiltroANDOR.FiltroOR.ToString());
+            yourParams2[18] = new ReportParameter("ModoExportacion", "true");
+            yourParams2[19] = new ReportParameter("puntoventa",  "-1" );
+
+
+            var s = CartaDePorteManager.RebindReportViewer_ServidorExcel(ref ReporteLocal,
+                      "Williams - Resumen de Totales Generales (Facturacion).rdl", yourParams2, ref output2, false);
+
+
+            
+            
+
+
+            System.Diagnostics.Process.Start(output2);
+
+        }
+
+
+
+
+
+
+
+
+
+
+
+        [TestMethod]
+        public void GrabarVariasSituacionesCalidad_42871()
+        {
+
+
+            /*
+
+            __________________________
+
+            Log Entry:
+            11 / 15 / 2017 17:35:53
+Error in: http://iismvc/Williams/ProntoWeb/WebServiceCartas.asmx/GrabarSituaciones. Error Message:Falta elegir a qué acopio corresponde el remitente comercial
+
+
+            __________________________
+
+            Log Entry:
+            11 / 15 / 2017 17:35:54
+Error in: http://iismvc/Williams/ProntoWeb/WebServiceCartas.asmx/GrabarSituaciones. Error Message:Se necesita la fecha de la descarga (porque se ingresó el peso final de la descarga)
+
+
+            __________________________
+
+            Log Entry:
+            11 / 15 / 2017 17:35:56
+Error in: http://iismvc/Williams/ProntoWeb/WebServiceCartas.asmx/GrabarSituaciones. Error Message:La patente del acoplado es inválida 
+
+
+            __________________________
+
+            Log Entry:
+            11 / 15 / 2017 17:35:56
+Error in: http://iismvc/Williams/ProntoWeb/WebServiceCartas.asmx/GrabarSituaciones. Error Message:La patente del acoplado es inválida 
+
+            */
+
+
+
+            // url: "WebServiceCartas.asmx/CartaPorteBatchUpdate",
+
+            //string ms = CartaDePorteManager.GrabarSituacion_DLL(2638292, 2, "RECHAZADO EN PLAYA EXTERNA", SC);
+            List<long> ids=new List<long>();
+            for (int n = 2633332; n < 2633400; n++) ids.Add(n);
+            string ms = CartaDePorteManager.GrabarSituaciones_DLL(ids.ToArray(), 2, "RECHAZADO EN PLAYA EXTERNA", SC);
+
+
+
+           // string ms = CartaDePorteManager.GrabarSituaciones_DLL(new long[] { 2633332, 2325493, 2636664 }, 2, "RECHAZADO EN PLAYA EXTERNA", SC);
+
+        }
+
+
+
+
+
+
+
+        [TestMethod]
+        public void envioNotificacionesconMail_42871_2()
+        {
+            ProntoWindowsService.Service1.Initialize();
+            ProntoWindowsService.Service1.DoWorkCartasPorteNuevasParaElCliente();
+
+        }
+
+
+
+
+        [TestMethod]
+        public void envioNotificacionesconMail_42871_3()
+        {
+
+
+            ProntoWindowsService.Service1.TandaNotificacionesCamiones(SC, scbdlmasterappconfig, "1");
+
+        }
+
+
+
+
         [TestMethod]
         public void envioNotificacionesconMail_42871()
         {
@@ -878,47 +1035,106 @@ namespace ProntoMVC.Tests
             var scEF = ProntoMVC.Data.Models.Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC));
             BDLMasterEntities dbmaster = new BDLMasterEntities(Auxiliares.FormatearConexParaEntityFrameworkBDLMASTER_2(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(scbdlmasterappconfig)));
             DemoProntoEntities db = new DemoProntoEntities(scEF);
-            DateTime UltimaFechaDeEnvioNotificaciones = new DateTime(2016, 8, 31);
-
-            var q = (
-                    from x in db.CartasDePortes
-                    from c1 in db.Clientes.Where(c => c.IdCliente == x.Vendedor)
-                    from c2 in db.Clientes.Where(c => c.IdCliente == x.Entregador)
-                    where (x.FechaModificacion > UltimaFechaDeEnvioNotificaciones) // pero y si el cliente ya las vio?
-                    select new string[] { c1.Email, c2.Email }
-                    )
-                    .SelectMany(x => x)
-                    .Distinct();
 
 
+            DateTime FechaNot;
+            try
+            {
+                FechaNot = DateTime.Parse(ParametroManager.TraerValorParametro2(SC, "UltimaFechaNotificacion").NullSafeToString());
+            }
+            catch (Exception)
+            {
+                FechaNot = DateTime.MinValue;
+            }
 
+
+            int dummy;
 
             // solo estos clientes me interesan...  -cuantos usuarios externos hay en la bdlmaster? creo q mas de mil. ademas, recordá que los usuarios especiales tipo BLD los tendrías que filtrar de otro modo...
-            var usuariosclientes = from p in dbmaster.UserDatosExtendidos
-                                   join u in dbmaster.aspnet_Users on p.UserId equals u.UserId
-                                   join m in dbmaster.aspnet_Membership on p.UserId equals m.UserId
-                                   select new { p.RazonSocial, m.Email };
+            var q = (from p in dbmaster.UserDatosExtendidos
+                     join u in dbmaster.aspnet_Users on p.UserId equals u.UserId
+                     join m in dbmaster.aspnet_Membership on p.UserId equals m.UserId
+                     select new { FechaNotificacion = new DateTime(), p.RazonSocial, m.Email, ListadoCuits = p.TextoAuxiliar, u.LastActivityDate }).ToList();
+
+            var usuariosclientes = from x in q
+                                   select new { IdCliente = Int32.TryParse(x.RazonSocial, out dummy) ? Int32.Parse(x.RazonSocial) : 0, x.FechaNotificacion, x.RazonSocial, x.Email, x.ListadoCuits, x.LastActivityDate };
+
+
+            List<int> usus = usuariosclientes.Select(x => x.IdCliente).Where(x => x > 0).ToList();
+
+            List<int> ususCorredores = new List<int>(); //usus.Select(x => equivalen x.IdCliente).ToList();
+
+
+
+            DateTime FechaMinima = usuariosclientes.Select(x => x.FechaNotificacion).Max();
+
+            // una vez que tengo la lista de clientes, como vincularla con 
 
 
 
 
 
-            string rejunte2 = string.Join(";", q.Take(100).ToArray());
+            //DateTime UltimaFechaDeEnvioNotificaciones = new DateTime(2016, 8, 31);
+
+            List<int> clientesParaNotificar = (
+                    from x in db.CartasDePortes
+                        //from c1 in db.Clientes.Where(c => c.IdCliente == x.Vendedor)
+                        //from c2 in db.Clientes.Where(c => c.IdCliente == x.Entregador)
+                    where ((x.FechaModificacion ?? x.FechaArribo) > FechaNot
+                            && (usus.Contains(x.Vendedor ?? -1)
+                                    || usus.Contains(x.Entregador ?? -1)
+                                    || usus.Contains(x.CuentaOrden1 ?? -1)
+                                    || usus.Contains(x.CuentaOrden2 ?? -1)
+                                    || ususCorredores.Contains(x.Corredor ?? -1)
+                                ) // pero y si el cliente ya las vio?   UltimaFechaDeLoginDelCliente
+                           )
+                    select new int[] { x.Vendedor ?? -1, x.Entregador ?? -1, x.CuentaOrden1 ?? -1, x.CuentaOrden2 ?? -1, x.Corredor ?? -1 }
+                    )
+                    .SelectMany(x => x)
+                    .Distinct()
+                    .Where(x => usus.Contains(x))  // porque me estoy trayendo todos los clientes de una carta que solo tiene un cliente importante, tengo que volver a filtrarlo, y es mas practico hacerlo aca
+                    .ToList();
 
 
-            var listado = db.Clientes.Select(x => x.CorreosElectronicos_1).Take(100);
-            string rejunte = string.Join(";", listado.ToArray());
 
-            if (false)
+
+
+            //como hacer para incluir los de bld? como en DataTablePorCliente
+            // FiltrarQueryableSegunCliente
+
+
+
+
+
+
+            var listado = from k in clientesParaNotificar
+                          join x in usuariosclientes on k equals x.IdCliente
+                          //where  clientesParaNotificar.Contains(x.IdCliente)  fechanot
+                          select x.Email;
+
+
+
+
+            //string rejunte2 = string.Join(";", qq.Take(100).ToArray());
+            //var listado = db.Clientes.Select(x => x.CorreosElectronicos_1).Take(100);
+
+
+            string rejunte = string.Join(",", listado.ToArray());
+
+            ErrHandler2.WriteError("Notificaciones a " + rejunte);
+
+
+
+            if (true)
             {
                 Pronto.ERP.Bll.EntidadManager.MandaEmail_Nuevo(ConfigurationManager.AppSettings["ErrorMail"],
-                                   "asuntoasuntoasunto 2",
-                                "cuerpocuerpocuerpocuerpocuerpocuerpocuerpocuerpocuerpocuerpocuerpocuerpo cuerpocuerpocuerpocuerpo",
-                                ConfigurationManager.AppSettings["SmtpUser"],
-                                ConfigurationManager.AppSettings["SmtpServer"],
-                                ConfigurationManager.AppSettings["SmtpUser"],
-                                ConfigurationManager.AppSettings["SmtpPass"],
-                                  "",
+                               "Notificación Williams",
+                               "Tenés actuatalizaciones de camiones informados en http://prontoclientes.williamsentregas.com.ar",
+                               ConfigurationManager.AppSettings["SmtpUser"],
+                               ConfigurationManager.AppSettings["SmtpServer"],
+                               ConfigurationManager.AppSettings["SmtpUser"],
+                               ConfigurationManager.AppSettings["SmtpPass"],
+                                "",
                                Convert.ToInt16(ConfigurationManager.AppSettings["SmtpPort"]), 1
                                , rejunte
 
@@ -926,10 +1142,42 @@ namespace ProntoMVC.Tests
             }
 
 
+            // actualizar fecha de ultima notificacion de cada cliente? -Una es la fecha desde la que tengo que buscar tandas de cartas, y otra es la fecha individual de los clientes
+
+
+            ParametroManager.GuardarValorParametro2(SC, "UltimaFechaNotificacion", DateTime.Now.ToString());
+
+
+
+
         }
 
 
 
+
+
+
+        [TestMethod]
+        public void TraerListadoSegunUsuario_42871_2()
+        {
+            //Creo que tarda mucho por el parameter sniffing
+
+            string filtro = "{\"groupOp\":\"OR\",\"rules\":[{\"field\":\"Producto\",\"op\":\"eq\",\"data\":\"Trigo Pan\"},{\"field\":\"Producto\",\"op\":\"eq\",\"data\":\"MAIZ\"}]}";
+
+            var scEF = ProntoMVC.Data.Models.Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC));
+            DemoProntoEntities db = new DemoProntoEntities(scEF);
+
+            var s = new ServicioCartaPorte.servi();
+            var sqlquery4 = s.CartasPorte_DynamicGridData("IdCartaDePorte", "desc", 1, 999999, true, filtro,
+                                                 "01/12/2016",
+                                                 "30/01/2017",
+                                                 0, -1, SC, "Mariano", scbdlmasterappconfig, 11);
+
+            // q diferencia hay con listadoclientes?
+            // si el usuario tiene una razon social asignada, hay que filtrar. -Pero hay que filtrar antes! como en ListadoSegunCliente()
+            // -tambien tenes el tema de los clientes con filtros configurables.... en DataTablePorClienteSQL()
+
+        }
 
 
 
@@ -1215,8 +1463,8 @@ namespace ProntoMVC.Tests
 
 
 
-
-            LogicaFacturacion.ValidaCobranzas(ref tablaEditadaDeFacturasParaGenerar);
+            string sError = "";
+            LogicaFacturacion.ValidaCobranzas(ref tablaEditadaDeFacturasParaGenerar, ref sError);
 
         }
 
@@ -1307,7 +1555,7 @@ namespace ProntoMVC.Tests
 
 
         [TestMethod]
-        public void percepcion_en_clientes_46551_2_directamente_llamando_a_creafacturacompronto() 
+        public void percepcion_en_clientes_46551_2_directamente_llamando_a_creafacturacompronto()
         {
 
             string txtBuscar = "";
@@ -1599,7 +1847,7 @@ namespace ProntoMVC.Tests
 
 
 
-            string txtFacturarATerceros = EntidadManager.NombreCliente(SC, idClienteAfacturarle); 
+            string txtFacturarATerceros = EntidadManager.NombreCliente(SC, idClienteAfacturarle);
 
 
             DataTable tablaEditadaDeFacturasParaGenerar = LogicaFacturacion.GetDatatableAsignacionAutomatica(
@@ -1705,7 +1953,7 @@ namespace ProntoMVC.Tests
 
 
             var s = new ServicioCartaPorte.servi();
-            var d = s.Reclamos_DynamicGridData("Fecha", "desc", 1, 999999, true, filtro, "", "", 0, 0,SC , "","");
+            var d = s.Reclamos_DynamicGridData("Fecha", "desc", 1, 999999, true, filtro, "", "", 0, 0, SC, "", "");
 
         }
 
@@ -2258,7 +2506,7 @@ Error in: https://prontoweb.williamsentregas.com.ar/ProntoWeb/CDPFacturacion.asp
             var sqlquery4 = s.CartasPorte_DynamicGridData("IdCartaDePorte", "desc", 1, 999999, true, filtro,
                                                  "01/12/2016",
                                                  "30/01/2017",
-                                                 0, -1, SC, "Mariano", scbdlmasterappconfig);
+                                                 0, -1, SC, "Mariano", scbdlmasterappconfig, 11);
 
             // q diferencia hay con listadoclientes?
             // si el usuario tiene una razon social asignada, hay que filtrar. -Pero hay que filtrar antes! como en ListadoSegunCliente()
@@ -2267,15 +2515,6 @@ Error in: https://prontoweb.williamsentregas.com.ar/ProntoWeb/CDPFacturacion.asp
         }
 
 
-
-        [TestMethod]
-        public void GrabarVariasSituacionesCalidad_42871()
-        {
-            // url: "WebServiceCartas.asmx/CartaPorteBatchUpdate",
-
-            //string ms = CartaDePorteManager.GrabarSituacion_DLL(2638292, 2, "RECHAZADO EN PLAYA EXTERNA", SC);
-            string ms = CartaDePorteManager.GrabarSituaciones_DLL(new long[] { 2638292, 2638293, 2638294 }, 2, "RECHAZADO EN PLAYA EXTERNA", SC);
-        }
 
 
 
@@ -6831,7 +7070,7 @@ System.Drawing
             var sqlquery4 = s.CartasPorte_DynamicGridData("IdCartaDePorte", "desc", 1, 999999, true, filtro,
                                                  "01/12/2016",
                                                  "30/01/2017",
-                                                 0, -1, SC, "Mariano", "");
+                                                 0, -1, SC, "Mariano", "", 11);
 
 
         }
@@ -7471,7 +7710,7 @@ System.Drawing
             var sqlquery4 = s.CartasPorte_DynamicGridData_ExcelExportacion_UsandoInternalQuery("IdCartaDePorte", "desc", 1, 999999, true, filtro,
                                                  "01/12/2016",
                                                  "30/01/2017",
-                                                 0, -1, SC, "Mariano");
+                                                 0, -1, SC, "Mariano", 11);
 
             CartaDePorteManager.RebindReportViewer_ServidorExcel(ref ReporteLocal, "Carta Porte - Buques.rdl", sqlquery4, SC, false, ref output);
 
@@ -8243,7 +8482,7 @@ Adjunto un ejemplo que tiene cartas de porte de 8 entregadores que no son Willia
             var sqlquery4 = s.CartasPorte_DynamicGridData_ExcelExportacion_UsandoInternalQuery("IdCartaDePorte", "desc", 1, 999999, true, filtro,
                                                  "11/01/2016",
                                                  "11/01/2016",
-                                                 0, -1, SC, "Mariano");
+                                                 0, -1, SC, "Mariano", 11);
 
             CartaDePorteManager.RebindReportViewer_ServidorExcel(ref ReporteLocal, "Sincronismo BLD.rdl", sqlquery4, SC, false, ref output);
 
@@ -8355,7 +8594,7 @@ Adjunto un ejemplo que tiene cartas de porte de 8 entregadores que no son Willia
             var output3 = s.CartasPorte_DynamicGridData_ExcelExportacion("IdCartaDePorte", "desc", 1, 999999, true, filtro,
                                                  "11/01/2016",
                                                  "11/01/2016",
-                                                 0, -1, SC, "Mariano");
+                                                 0, -1, SC, "Mariano", 11);
 
             System.Diagnostics.Process.Start(output3);
         }
@@ -8405,7 +8644,7 @@ Adjunto un ejemplo que tiene cartas de porte de 8 entregadores que no son Willia
             string output = "c:\asdad.xls";
 
             var s = new ServicioCartaPorte.servi();
-            string html = s.InformeSituacion_html(-1, new DateTime(2016, 11, 10), new DateTime(2016, 11, 17), SC);
+            string html = s.InformeSituacion_html(-1, new DateTime(2016, 11, 10), new DateTime(2016, 11, 17), SC, 11);
 
             Console.Write(html);
 
@@ -8425,7 +8664,7 @@ Adjunto un ejemplo que tiene cartas de porte de 8 entregadores que no son Willia
 
             //SegunDestino
             var s = new ServicioCartaPorte.servi();
-            var q = s.InformeSituacion_string(1, new DateTime(2016, 11, 1), new DateTime(2016, 11, 1), SC);
+            var q = s.InformeSituacion_string(1, new DateTime(2016, 11, 1), new DateTime(2016, 11, 1), SC, 11);
 
 
 
@@ -8729,7 +8968,7 @@ Adjunto un ejemplo que tiene cartas de porte de 8 entregadores que no son Willia
             var output = s.CartasPorte_DynamicGridData("IdCartaDePorte", "desc", 1, 50, true, filtro,
                                                         "01/01/2016",
                                                         "01/01/2016",
-                                                        0, -1, SC, "Mariano", "");
+                                                        0, -1, SC, "Mariano", "", 11);
 
 
 
@@ -8748,7 +8987,7 @@ Adjunto un ejemplo que tiene cartas de porte de 8 entregadores que no son Willia
             var output2 = s.CartasPorte_DynamicGridData("IdCartaDePorte", "desc", 1, 50, true, filtro,
                                                 "01/01/2015",
                                                 "01/01/2016",
-                                                0, -1, SC, "Mariano", "");
+                                                0, -1, SC, "Mariano", "", 11);
 
 
         }
@@ -8764,7 +9003,7 @@ Adjunto un ejemplo que tiene cartas de porte de 8 entregadores que no son Willia
             var output3 = s.CartasPorte_DynamicGridData("IdCartaDePorte", "desc", 1, 50, true, filtro,
                                                  "01/01/2010",
                                                  "01/01/2016",
-                                                 0, -1, SC, "Mariano", "");
+                                                 0, -1, SC, "Mariano", "", 11);
         }
 
 
