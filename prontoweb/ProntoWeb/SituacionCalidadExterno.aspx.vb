@@ -71,6 +71,9 @@ Partial Class SituacionCalidadExterno
         End If
 
 
+        Dim tx As TextBox = Me.Master.FindControl("txtSuperbuscador")
+        tx.Visible = False
+
 
         If Not IsPostBack Then 'es decir, si es la primera vez que se carga
             '////////////////////////////////////////////
