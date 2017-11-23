@@ -56,7 +56,7 @@
        <ajaxToolkit:ToolkitScriptManager ID="ScriptManager1" runat="server" LoadScriptsBeforeUI="False"
                         EnablePageMethods="False" AsyncPostBackTimeout="360000" />--%>
     <div align="center">
-        <table style="width: 550px" class="t1">
+        <table style="width: " class="t1">
             <tr>
                 <td style="width: 300px; background-color: #4A3C8C; font-size: medium;" align="center">
                     <span style="color: #f0ffff; font-size: 12pt">Seleccionar empresa</span>
@@ -65,8 +65,8 @@
             <tr>
                 <td align="center" class="style2" style="font-size: medium">
                     &nbsp;&nbsp;
-                    <asp:Panel ID="PanelListEmpresas" runat="server" Height="100px">
-                        <asp:ListBox ID="DDLEmpresas" runat="server" Width="200" TabIndex="1">
+                    <asp:Panel ID="PanelListEmpresas" runat="server" Height="">
+                        <asp:ListBox ID="DDLEmpresas" runat="server" Width="300" TabIndex="1" Font-Size="20">
                         </asp:ListBox>
                         <br /> <br />
                         <asp:Button ID="ButContinuar" runat="server" Text="Continuar" CssClass="but" TabIndex="2"  Width="200"/>
