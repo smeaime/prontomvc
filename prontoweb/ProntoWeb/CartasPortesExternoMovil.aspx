@@ -1,5 +1,5 @@
 ﻿<%@ Page Language="VB" AutoEventWireup="false" EnableEventValidation="false"
-    CodeFile="CartaPorteMovil.aspx.vb" Inherits="CartaPorteMovil"
+    CodeFile="CartasPortesExternoMovil.aspx.vb" Inherits="CartasPortesExternoMovil"
     Title="Informes" %>
 
 

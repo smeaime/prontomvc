@@ -32,7 +32,7 @@ namespace Sch_WCFApplication
                 var senderId = "741177410808";  //                                  este figura como "messagingSenderId" en la consola del Firebase
                 //string deviceId = "euxqdp------ioIdL87abVL"; //                   este seria el ticket???  	-It is a token generated using a method FirebaseInstanceId.getInstance().getToken() in a Service – Nilesh Panchal Dec 2 '16 at 12:14 
 
-                //armar el service worker con este ejemplo https://github.com/firebase/quickstart-js/tree/master/messaging
+                //armar el service worker con este ejemplo https://firebase.google.com/docs/cloud-messaging/js/client?hl=es-419
 
 
 
