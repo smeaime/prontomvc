@@ -866,6 +866,25 @@ namespace ProntoMVC.Tests
 
 
         [TestMethod]
+        public void enviosPush__()
+        {
+            string deviceId = "asdfsadf";
+
+            var c = new Sch_WCFApplication.PushNotification(deviceId, "holaaaaaa", "titulo");
+
+        }
+
+
+        public void enviarNotificacionUsuario(string usuario)
+        {
+            //            var subs = BuscoLasSubscripcionesDelUsuario(usuario);
+            //            MandoMensajeAListadoDeSubscripciones(subs);
+
+        }
+
+
+
+        [TestMethod]
         public void agregar_comentario_43063()
         {
 
@@ -914,6 +933,8 @@ namespace ProntoMVC.Tests
 
 
 
+            int idcarta = 2633399;
+
 
             var rec = new Reclamo();
             rec.Estado = 22;
@@ -934,13 +955,13 @@ namespace ProntoMVC.Tests
             db.ReclamoComentarios.Add(comentario2);
 
 
-            db.CartasDePortes.Find(2633399).IdReclamo = rec.IdReclamo;
+            db.CartasDePortes.Find(idcarta).IdReclamo = rec.IdReclamo;
 
             db.SaveChanges();
 
 
             var s = new ServicioCartaPorte.servi();
-            string ret = s.Reclamos_DynamicGridData("Fecha", "desc", 1, 999999, true, filtro, "", "", 0, 0, SC, "", "");
+            string ret = s.Reclamos_DynamicGridData("Fecha", "asc", 1, 999999, true, filtro, "", "", 0, idcarta, SC, "", "");
             System.Web.Script.Serialization.JavaScriptSerializer jsonSerializer = new System.Web.Script.Serialization.JavaScriptSerializer();
             jqGridJson listado = jsonSerializer.Deserialize<jqGridJson>(ret);
             Assert.IsTrue(listado.records > 0);
