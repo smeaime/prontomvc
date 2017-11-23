@@ -206,9 +206,9 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
         <br />
 
-        <button type="button" id="btnMostrarMenu" value="" class="" style="height: 50px; width: 70px; margin-left: 4px">
+        <%--<button type="button" id="btnMostrarMenu" value="" class="" style="height: 50px; width: 70px; margin-left: 4px">
             <i class="fa fa-bars fa-2x"></i>
-        </button>
+        </button>--%>
 
 
 
@@ -455,9 +455,9 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
         });
 
 
-        $('#btnMostrarMenu').click(function () {
-            $('#MenuPrincipal').show();
-        })
+        //$('#btnMostrarMenu').click(function () {
+        //    $('#MenuPrincipal').show();
+        //})
 
 
 
@@ -1422,7 +1422,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
     search: false,
 },
 
-{ name: ' IdCartasDePorte', index: ' IdCartasDePorte', align: 'left', width: 100, editable: false, hidden: true },
+{ name: 'IdCartaDePorte', index: 'IdCartaDePorte', align: 'left', width: 100, editable: false, hidden: true },
 
 {
     name: 'NumeroCartaEnTextoParaBusqueda', index: 'NumeroCartaEnTextoParaBusqueda', width: 90, align: 'left', sorttype: "text", sortable: false
@@ -1474,14 +1474,14 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
 
 
-                            { name: 'ObservacionesSituacion', index: 'ObservacionesSituacion', align: 'left', width: 100, editable: true, hidden: false, sortable: false },
+                            { name: 'ObservacionesSituacion', index: 'ObservacionesSituacion', align: 'left', width: 300, editable: true, hidden: false, sortable: true },
 
 
 
 
 
 {
-    name: 'Producto', index: 'Producto', align: 'left', width: 60, hidden: false, editable: false, edittype: 'text', sortable: false
+    name: 'Producto', index: 'Producto', align: 'left', width: 60, hidden: false, editable: false, edittype: 'text', sortable: true
 
 , searchoptions: {
     //    sopt:['eq'], 
@@ -1558,7 +1558,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
 },
 {
-    name: 'TitularDesc', index: 'TitularDesc', align: 'left', width: 100, hidden: false, editable: false, edittype: 'text', sortable: false
+    name: 'TitularDesc', index: 'TitularDesc', align: 'left', width: 100, hidden: false, editable: false, edittype: 'text', sortable: true
 
 
 , searchoptions: {
@@ -1636,7 +1636,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
 },
 {
-    name: 'IntermediarioDesc', index: 'IntermediarioDesc', align: 'left', width: 60, hidden: false, editable: false, edittype: 'text', sortable: false
+    name: 'IntermediarioDesc', index: 'IntermediarioDesc', align: 'left', width: 60, hidden: false, editable: false, edittype: 'text', sortable: true
 
 , searchoptions: {
     //    sopt:['eq'], 
@@ -1712,7 +1712,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 }
 },
 {
-    name: 'RComercialDesc', index: 'RComercialDesc', align: 'left', width: 100, hidden: false, editable: false, edittype: 'text', sortable: false
+    name: 'RComercialDesc', index: 'RComercialDesc', align: 'left', width: 100, hidden: false, editable: false, edittype: 'text', sortable: true
 
 
 , searchoptions: {
@@ -1792,7 +1792,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
 
 {
-    name: 'CorredorDesc', index: 'CorredorDesc', align: 'left', width: 100, hidden: false, editable: false, edittype: 'text', sortable: false
+    name: 'CorredorDesc', index: 'CorredorDesc', align: 'left', width: 100, hidden: false, editable: false, edittype: 'text', sortable: true
 
 , searchoptions: {
     //    sopt:['eq'], 
@@ -1870,7 +1870,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
 
 {
-    name: 'DestinatarioDesc', index: 'DestinatarioDesc', align: 'left', width: 100, hidden: false, editable: false, edittype: 'text', sortable: false
+    name: 'DestinatarioDesc', index: 'DestinatarioDesc', align: 'left', width: 100, hidden: false, editable: false, edittype: 'text', sortable: true
 
 
 , searchoptions: {
@@ -1950,7 +1950,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
 {
     name: 'DestinoDesc', index: 'DestinoDesc',
-    formoptions: { rowpos: 5, colpos: 2, label: "Descripción" }, align: 'left', width: 100, hidden: false, editable: true, edittype: 'text', sortable: false,
+    formoptions: { rowpos: 5, colpos: 2, label: "Descripción" }, align: 'left', width: 100, hidden: false, editable: true, edittype: 'text', sortable: true,
     searchoptions: {
         //    sopt:['eq'], 
         dataInit: function (elem) {
@@ -2033,18 +2033,18 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
 
 
-                            { name: 'Patente', index: 'Patente', align: 'left', width: 100, hidden: false, editable: false, edittype: 'text', sortable: false },
+                            { name: 'Patente', index: 'Patente', align: 'left', width: 100, hidden: false, editable: false, edittype: 'text', sortable: true },
 
 
 
-                            { name: 'NetoPto', index: 'NetoPto', align: 'left', width: 60, hidden: false, editable: false, edittype: 'text', sortable: false },
+                            { name: 'NetoPto', index: 'NetoPto', align: 'left', width: 60, hidden: false, editable: false, edittype: 'text', sortable: true },
 
 
                             //{ name: 'NetoProc', index: 'NetoProc', align: 'left', width: 60, hidden: false, editable: false, edittype: 'text', sortable: false }
 
 
                             {
-                                name: 'FechaArribo', index: 'FechaArribo', width: 100, sortable: true, align: 'right', editable: false, sortable: false,
+                                name: 'FechaArribo', index: 'FechaArribo', width: 100, sortable: true, align: 'right', editable: false, sortable: true,
                                 editoptions: {
                                     size: 10,
                                     maxlengh: 10,
@@ -2076,7 +2076,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
 
                             {
-                                name: 'FechaDescarga', index: 'FechaDescarga', width: 100, sortable: true, align: 'right', editable: false, sortable: false,
+                                name: 'FechaDescarga', index: 'FechaDescarga', width: 100, sortable: true, align: 'right', editable: false, sortable: true,
                                 editoptions: {
                                     size: 10,
                                     maxlengh: 10,
@@ -2108,7 +2108,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
 
 
-                            { name: 'PuntoVenta', index: 'PuntoVenta', align: 'left', width: 50, hidden: false, editable: false, edittype: 'text', sortable: false },
+                            { name: 'PuntoVenta', index: 'PuntoVenta', align: 'left', width: 50, hidden: false, editable: false, edittype: 'text', sortable: true },
 
 
 
