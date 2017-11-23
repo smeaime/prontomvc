@@ -5939,7 +5939,7 @@ Formato localidad-provincia	destination	x
 
 
 
-        public virtual string Reclamos_DynamicGridData(string sidx, string sord, int page, int rows, bool _search, string filters, 
+        public virtual string Reclamos_DynamicGridData(string sidx, string sord, int page, int rows, bool _search, string filters,
                                                         string FechaInicial, string FechaFinal, int puntovent, int idcarta,
                                                         string SC, string nombreusuario, string SCbdlmaster)
         {
@@ -6005,7 +6005,8 @@ Formato localidad-provincia	destination	x
             IQueryable<ReclamoComentario> q = db.ReclamoComentarios;
 
 
-            var idreclamo = db.CartasDePortes.Find(idcarta).IdReclamo;
+            var cartareclamo = db.CartasDePortes.Find(idcarta);
+            int? idreclamo = cartareclamo == null ? null : cartareclamo.IdReclamo;
             if (idreclamo != null) q = q.Where(x => x.IdReclamo == idreclamo);
 
 
@@ -6643,9 +6644,9 @@ Formato localidad-provincia	destination	x
 
 
 
-        
 
-        public virtual string GrabarComentario_DLL(int idcarta,  string comentario,  string nombreusuario, string SC )
+
+        public virtual string GrabarComentario_DLL(int idcarta, string comentario, string nombreusuario, string SC)
         {
 
 
@@ -6672,17 +6673,17 @@ Formato localidad-provincia	destination	x
                 }
                 else
                 {
-                    rec= db.Reclamos.Find(carta.IdReclamo);
+                    rec = db.Reclamos.Find(carta.IdReclamo);
                 }
 
 
                 var com = new ReclamoComentario(); // db.ReclamoComentarios.FirstOrDefault().IdReclamo;
                 com.IdReclamo = rec.IdReclamo;
                 com.IdEmpleado = 1;
-                com.Comentario =   comentario;
+                com.Comentario = comentario;
                 db.ReclamoComentarios.Add(com);
 
-                
+
                 db.SaveChanges();
 
 

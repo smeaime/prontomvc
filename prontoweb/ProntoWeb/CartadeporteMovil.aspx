@@ -1,5 +1,5 @@
 <%@ Page Language="VB" MasterPageFile="~/MasterPage.master" AutoEventWireup="false"
-    CodeFile="Cartadeporte.aspx.vb" Inherits="CartadeporteABM" Title="Untitled Page"
+    CodeFile="CartadeporteMovil.aspx.vb" Inherits="CartadeporteABMMovil" Title="Untitled Page"
     EnableEventValidation="false" %>
 
 <%--lo del enableeventvalidation lo puse porque tenia un problema con este abm. no copiarlo a los demas abms--%>
@@ -7,6 +7,9 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
 
 
+
+
+    <meta name="viewport" content="width=device-width,initial-scale=4.0">
 
 
 
@@ -276,8 +279,8 @@
         //            http: //www.scottklarr.com/topic/126/how-to-create-ctrl-key-shortcuts-in-javascript/
         //            http: //www.scottklarr.com/topic/126/how-to-create-ctrl-key-shortcuts-in-javascript/
     </script>
-    <div style="width: 700px; margin-top: 3px; height: auto;">
-        <table style="padding: 0px; border: none #FFFFFF; width: 1000px; margin-right: 0px; font-size: large;"
+    <div style="width: ; margin-top: 3px; height: auto;">
+        <table style="padding: 0px; border: none #FFFFFF; width: ; margin-right: 0px; font-size: large;"
             cellpadding="1" cellspacing="1">
             <%--  <tr>
                 <td colspan="3" style="border: thin none #FFFFFF; font-weight: bold; color: #FFFFFF;
@@ -386,7 +389,7 @@
             </tr>
         </table>
         <br />
-        <cc1:TabContainer ID="TabContainer2" runat="server" Height="485px" Width="900px"
+        <cc1:TabContainer ID="TabContainer2" runat="server" Height="" Width=""
             Style="" ActiveTabIndex="0" CssClass="NewsTab" AccessKey="p">
             <%--  CssClass="SimpleTab"        CssClass="NewsTab"--%>
             <cc1:TabPanel ID="TabPanel2" runat="server" Height="550px">
@@ -2971,7 +2974,7 @@
     </div>
     <asp:UpdatePanel runat="server" ID="upLog" UpdateMode="Conditional">
         <ContentTemplate>
-            <asp:Label ID="lblLog" Width="1000px" runat="server" ForeColor="White"></asp:Label>
+            <asp:Label ID="lblLog" Width="" runat="server" ForeColor="White"></asp:Label>
         </ContentTemplate>
     </asp:UpdatePanel>
     <asp:LinkButton ID="LinkImprimir" runat="server" Font-Bold="False" ForeColor="White"
@@ -3527,6 +3530,10 @@
             reasignarAutocomplete();
 
 
+
+
+
+            $('#MenuPrincipal').hide();
 
 
 

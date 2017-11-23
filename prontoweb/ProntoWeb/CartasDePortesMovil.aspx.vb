@@ -13,7 +13,7 @@ Imports OfficeOpenXml 'EPPLUS, no confundir con el OOXML
 Imports CartaDePorteManager
 Imports Pronto.ERP.Bll.EntidadManager
 
-Partial Class CartasDePortes
+Partial Class CartasDePortesMovil
     Inherits System.Web.UI.Page
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
@@ -23,15 +23,6 @@ Partial Class CartasDePortes
         Else
             ErrHandler2.WriteError(Membership.GetUser().UserName)
         End If
-
-
-
-
-
-        If Request.Browser("IsMobileDevice") = "true" Then
-            Response.Redirect("CartasDePortesMovil.aspx")
-        End If
-
 
 
 
