@@ -194,6 +194,34 @@
       <Name>ProntoMVC.Data</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="..\packages\Chromium.ChromeDriver.2.33\content\chromedriver.exe">
+      <Link>chromedriver.exe</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="sql\ALTERTABLE 2011 Modulo WEB.sql" />
+    <Content Include="sql\cargar_grabar.sql" />
+    <Content Include="sql\CtasCtesD_TXPorTrs_AuxiliarEntityFramework.sql" />
+    <Content Include="sql\dbo.wCtasCtesA_TXPorTrs.StoredProcedure.sql" />
+    <Content Include="sql\fCtasCtesD_TXPorTrs.sql" />
+    <Content Include="sql\FK_Pronto - Adicionales por ProntoMVC.sql" />
+    <Content Include="sql\FK_Pronto mariano manual.sql" />
+    <Content Include="sql\FK_Pronto.sql" />
+    <Content Include="sql\fSQL_GetDataTableFiltradoYPaginado  wCartasPorte_WraperDeLaTVF.sql" />
+    <Content Include="sql\Levenshtein2.sql" />
+    <Content Include="sql\Para los cubos\Generacion de tablas para cubos.sql" />
+    <Content Include="sql\pruebas\autotrol mvc alter table.sql" />
+    <Content Include="sql\pruebas\autotrol mvc.sql" />
+    <Content Include="sql\pruebas\bdl master.sql" />
+    <Content Include="sql\pruebas\sincro demopronto campos de tabla.sql" />
+    <Content Include="sql\pruebas\[wActualizacionesVariasPorComprobante] SQLs Varios.sql" />
+    <Content Include="sql\restoreDB.sql" />
+    <Content Include="sql\resumen de totales estadisticas [wCartasDePorte_TX_ResumenDeTotalesEstadisticas]  [wCartasDePorte_TX_DetalleDeTotalesEstadisticas].sql" />
+    <Content Include="sql\superbuscador  generico %28inlcluyendo rms etc%29 wFuncionBusqueda wBusqueda   .sql" />
+    <Content Include="sql\Tree_TX_Generar y Tree_TX_Arbol.sql" />
+    <Content Include="sql\wCartasPorte_LiquidacionSubcontratistas.sql" />
+    <Content Include="sql\wDuplicarBase.sql" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

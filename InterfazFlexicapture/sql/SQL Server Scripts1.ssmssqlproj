@@ -1,0 +1,94 @@
+<?xml version="1.0"?>
+<SqlWorkbenchSqlProject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Name="SQL Server Scripts1">
+  <Items>
+    <LogicalFolder Name="Connections" Type="2" Sorted="true">
+      <Items>
+        <ConnectionNode Name="127.0.0.1,49253:sa">
+          <Created>2014-09-22T15:06:51.6792851-03:00</Created>
+          <Type>SQL</Type>
+          <Server>127.0.0.1,49253</Server>
+          <UserName>sa</UserName>
+          <Authentication>SQL</Authentication>
+          <InitialDB />
+          <LoginTimeout>15</LoginTimeout>
+          <ExecutionTimeout>0</ExecutionTimeout>
+          <ConnectionProtocol>NotSpecified</ConnectionProtocol>
+          <ApplicationName>Microsoft SQL Server Management Studio - Query</ApplicationName>
+        </ConnectionNode>
+        <ConnectionNode Name="192.168.66.6:sa">
+          <Created>2013-09-24T13:26:16.5096386-03:00</Created>
+          <Type>SQL</Type>
+          <Server>192.168.66.6</Server>
+          <UserName>sa</UserName>
+          <Authentication>SQL</Authentication>
+          <InitialDB>Esuco</InitialDB>
+          <LoginTimeout>15</LoginTimeout>
+          <ExecutionTimeout>0</ExecutionTimeout>
+          <ConnectionProtocol>NotSpecified</ConnectionProtocol>
+          <ApplicationName>Microsoft SQL Server Management Studio - Query</ApplicationName>
+        </ConnectionNode>
+        <ConnectionNode Name="Mariano-PC:Mariano-PC\Mariano">
+          <Created>2013-09-12T20:36:34.4972648-03:00</Created>
+          <Type>SQL</Type>
+          <Server>Mariano-PC</Server>
+          <UserName />
+          <Authentication>Windows Authentication</Authentication>
+          <InitialDB>master</InitialDB>
+          <LoginTimeout>15</LoginTimeout>
+          <ExecutionTimeout>0</ExecutionTimeout>
+          <ConnectionProtocol>NotSpecified</ConnectionProtocol>
+          <ApplicationName>Microsoft SQL Server Management Studio - Query</ApplicationName>
+        </ConnectionNode>
+        <ConnectionNode Name="Mariano-PC\MSSQLSERVER2:sa">
+          <Created>2014-09-19T00:18:07.4646265-03:00</Created>
+          <Type>SQL</Type>
+          <Server>Mariano-PC\MSSQLSERVER2</Server>
+          <UserName>sa</UserName>
+          <Authentication>SQL</Authentication>
+          <InitialDB>Autotrol</InitialDB>
+          <LoginTimeout>15</LoginTimeout>
+          <ExecutionTimeout>0</ExecutionTimeout>
+          <ConnectionProtocol>NotSpecified</ConnectionProtocol>
+          <ApplicationName>Microsoft SQL Server Management Studio - Query</ApplicationName>
+        </ConnectionNode>
+      </Items>
+    </LogicalFolder>
+    <LogicalFolder Name="Queries" Type="0" Sorted="true">
+      <Items>
+        <FileNode Name="FK_Pronto mariano manual.sql">
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
+          <AssociatedConnUserName />
+          <FullPath>FK_Pronto mariano manual.sql</FullPath>
+        </FileNode>
+        <FileNode Name="Tree_TX_Arbol Tree_TX_Generar.sql">
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
+          <AssociatedConnUserName />
+          <FullPath>Tree_TX_Arbol Tree_TX_Generar.sql</FullPath>
+        </FileNode>
+        <FileNode Name="dbo.wCtasCtesA_TXPorTrs.StoredProcedure.sql">
+          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:Mariano-PC\MSSQLSERVER2:False:sa</AssociatedConnectionMoniker>
+          <AssociatedConnSrvName>Mariano-PC\MSSQLSERVER2</AssociatedConnSrvName>
+          <AssociatedConnUserName>sa</AssociatedConnUserName>
+          <FullPath>dbo.wCtasCtesA_TXPorTrs.StoredProcedure.sql</FullPath>
+        </FileNode>
+        <FileNode Name="dbo.wFacturas_TX_PorIdConDatos.StoredProcedure.sql">
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
+          <AssociatedConnUserName />
+          <FullPath>dbo.wFacturas_TX_PorIdConDatos.StoredProcedure.sql</FullPath>
+        </FileNode>
+        <FileNode Name="superbuscador  wFuncionBusqueda wBusqueda   .sql">
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
+          <AssociatedConnUserName />
+          <FullPath>superbuscador  wFuncionBusqueda wBusqueda   .sql</FullPath>
+        </FileNode>
+      </Items>
+    </LogicalFolder>
+    <LogicalFolder Name="Miscellaneous" Type="3" Sorted="true">
+      <Items />
+    </LogicalFolder>
+  </Items>
+</SqlWorkbenchSqlProject>

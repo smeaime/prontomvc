@@ -1,0 +1,33 @@
+
+Log Entry : 
+11/15/2017 17:55:46
+Error in: . Error Message:System.Data.Entity.Infrastructure.DbUpdateException
+An error occurred while updating the entries. See the inner exception for details.
+   en System.Data.Entity.Internal.InternalContext.SaveChanges()
+   en System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   en System.Data.Entity.DbContext.SaveChanges()
+   en CartaDePorteManager.Save(String SC, CartaDePorte myCartaDePorte, Int32 IdUsuario, String NombreUsuario, Boolean bCopiarDuplicados, String& ms) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 10619
+EntityFramework
+__________________________
+
+Log Entry : 
+11/15/2017 17:55:46
+Error in: . Error Message:System.Data.Entity.Infrastructure.DbUpdateException
+An error occurred while updating the entries. See the inner exception for details.
+   en System.Data.Entity.Internal.InternalContext.SaveChanges()
+   en System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   en System.Data.Entity.DbContext.SaveChanges()
+   en CartaDePorteManager.Save(String SC, CartaDePorte myCartaDePorte, Int32 IdUsuario, String NombreUsuario, Boolean bCopiarDuplicados, String& ms) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 10619
+EntityFramework
+__________________________
+
+Log Entry : 
+11/15/2017 17:55:48
+Error in: . Error Message:System.Data.Entity.Infrastructure.DbUpdateException
+An error occurred while updating the entries. See the inner exception for details.
+   en System.Data.Entity.Internal.InternalContext.SaveChanges()
+   en System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   en System.Data.Entity.DbContext.SaveChanges()
+   en CartaDePorteManager.Save(String SC, CartaDePorte myCartaDePorte, Int32 IdUsuario, String NombreUsuario, Boolean bCopiarDuplicados, String& ms) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 10619
+EntityFramework
+__________________________

@@ -1,0 +1,155 @@
+
+Log Entry : 
+11/21/2017 13:42:14
+Error in: . Error Message:entrando en GetDatatableAsignacionAutomatica . tanda 0
+__________________________
+
+Log Entry : 
+11/21/2017 13:42:15
+Error in: . Error Message:Cartas sin automatico encontrado (pero este es el modo no automatico!!!)5
+__________________________
+
+Log Entry : 
+11/21/2017 13:42:15
+Error in: . Error Message:entro a Preprocesos 5
+__________________________
+
+Log Entry : 
+11/21/2017 13:42:16
+Error in: . Error Message:despues de AgregarEmbarques10
+__________________________
+
+Log Entry : 
+11/21/2017 13:42:16
+Error in: . Error Message:despues de ExcluirDeGastosAdministrativos10
+__________________________
+
+Log Entry : 
+11/21/2017 13:42:16
+Error in: . Error Message:despues de ReasignarAquellosQueSeLeFacturanForzosamenteAlCorredor10
+__________________________
+
+Log Entry : 
+11/21/2017 13:42:16
+Error in: . Error Message:despues de CasosSyngenta_y_Acopios10
+__________________________
+
+Log Entry : 
+11/21/2017 13:42:16
+Error in: . Error Message:entro en PostProcesos 10
+__________________________
+
+Log Entry : 
+11/21/2017 13:42:16
+Error in: . Error Message:despues de EmparcharClienteSeparadoParaCasosQueSuperenUnMontoDeterminado 10
+__________________________
+
+Log Entry : 
+11/21/2017 13:42:16
+Error in: . Error Message:despues de EmparcharClienteSeparadoParaFacturasQueSuperanCantidadDeRenglones 10
+__________________________
+
+Log Entry : 
+11/21/2017 13:42:16
+Error in: . Error Message:despues de SepararAcopiosLDCyACA 10
+__________________________
+
+Log Entry : 
+11/21/2017 13:42:16
+Error in: . Error Message:despues de PostProcesoFacturacion_ReglaExportadores 10
+__________________________
+
+Log Entry : 
+11/21/2017 13:42:17
+Error in: . Error Message:punto 2 en GetDatatableAsignacionAutomatica . tanda 3635
+__________________________
+
+Log Entry : 
+11/21/2017 13:42:17
+Error in: . Error Message:punto 3 en GetDatatableAsignacionAutomatica . tanda 3635
+__________________________
+
+Log Entry : 
+11/21/2017 13:42:17
+Error in: . Error Message:punto 4 en GetDatatableAsignacionAutomatica . tanda 3635
+__________________________
+
+Log Entry : 
+11/21/2017 13:42:20
+Error in: . Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartaDePorteManager.GetItem(String SC, Int32 id, Boolean getCartaDePorteDetalles) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 9874
+BusinessLogic
+__________________________
+
+Log Entry : 
+11/21/2017 13:42:20
+Error in: . Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en ProntoMVC.Tests.TestsWilliams.no_facturar_las_q_tienen_clientes_bloqueados_por_cobranzas_43121() en C:\bdl\pronto\TestProject2\TestWilliams.cs:línea 1452
+TestProject2
+__________________________
+
+Log Entry : 
+11/21/2017 13:42:20
+Error in: . Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartaDePorteManager.GetItem(String SC, Int32 id, Boolean getCartaDePorteDetalles) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 9874
+BusinessLogic
+__________________________
+
+Log Entry : 
+11/21/2017 13:42:20
+Error in: . Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en ProntoMVC.Tests.TestsWilliams.no_facturar_las_q_tienen_clientes_bloqueados_por_cobranzas_43121() en C:\bdl\pronto\TestProject2\TestWilliams.cs:línea 1452
+TestProject2
+__________________________
+
+Log Entry : 
+11/21/2017 13:42:20
+Error in: . Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartaDePorteManager.GetItem(String SC, Int32 id, Boolean getCartaDePorteDetalles) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 9874
+BusinessLogic
+__________________________
+
+Log Entry : 
+11/21/2017 13:42:20
+Error in: . Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en ProntoMVC.Tests.TestsWilliams.no_facturar_las_q_tienen_clientes_bloqueados_por_cobranzas_43121() en C:\bdl\pronto\TestProject2\TestWilliams.cs:línea 1452
+TestProject2
+__________________________
+
+Log Entry : 
+11/21/2017 13:42:20
+Error in: . Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartaDePorteManager.GetItem(String SC, Int32 id, Boolean getCartaDePorteDetalles) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 9874
+BusinessLogic
+__________________________
+
+Log Entry : 
+11/21/2017 13:42:20
+Error in: . Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en ProntoMVC.Tests.TestsWilliams.no_facturar_las_q_tienen_clientes_bloqueados_por_cobranzas_43121() en C:\bdl\pronto\TestProject2\TestWilliams.cs:línea 1452
+TestProject2
+__________________________
+
+Log Entry : 
+11/21/2017 13:42:20
+Error in: . Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartaDePorteManager.GetItem(String SC, Int32 id, Boolean getCartaDePorteDetalles) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 9874
+BusinessLogic
+__________________________
+
+Log Entry : 
+11/21/2017 13:42:21
+Error in: . Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en ProntoMVC.Tests.TestsWilliams.no_facturar_las_q_tienen_clientes_bloqueados_por_cobranzas_43121() en C:\bdl\pronto\TestProject2\TestWilliams.cs:línea 1452
+TestProject2
+__________________________

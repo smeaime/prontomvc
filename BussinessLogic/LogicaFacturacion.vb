@@ -6958,6 +6958,8 @@ Public Class LogicaFacturacion
                                 .Fields("OrigenDescripcion").Value = 1
 
 
+                                .Fields("PorcentajeIva").Value = mTasa  'deberia estar usando el de cada articulo, por ahora uso el iva general  http://consultas.bdlconsultores.com.ar/Admin/VerConsultas1.php?recordid=46968
+                                .Fields("ImporteIva").Value = o.total * mTasa / 100
 
 
 
@@ -7055,6 +7057,11 @@ Public Class LogicaFacturacion
                                 .Fields("OrigenDescripcion").Value = 1
 
 
+
+                                .Fields("PorcentajeIva").Value = mTasa  'deberia estar usando el de cada articulo, por ahora uso el iva general  http://consultas.bdlconsultores.com.ar/Admin/VerConsultas1.php?recordid=46968
+                                .Fields("ImporteIva").Value = Math.Round(.Fields("Cantidad").Value * (.Fields("PrecioUnitario").Value), 2) * mTasa / 100
+
+
                                 '////////////////////////////////////////////////////////////////
                                 '////////////////////////////////////////////////////////////////
                                 '////////////////////////////////////////////////////////////////
@@ -7137,6 +7144,8 @@ Public Class LogicaFacturacion
                                     .Fields("PrecioUnitarioTotal").Value = .Fields("PrecioUnitario").Value
 
 
+                                    .Fields("PorcentajeIva").Value = mTasa  'deberia estar usando el de cada articulo, por ahora uso el iva general  http://consultas.bdlconsultores.com.ar/Admin/VerConsultas1.php?recordid=46968
+                                    .Fields("ImporteIva").Value = Math.Round(.Fields("Cantidad").Value * (.Fields("PrecioUnitario").Value), 2) * mTasa / 100
 
 
 
@@ -7195,6 +7204,10 @@ Public Class LogicaFacturacion
                                     .Fields("Cantidad").Value = cantidadGastosAdministrativos 'le pasé la división por mil a la tarifa porque acá hacen un truco, y en el Pronto solo tengo 2 decimales
                                     .Fields("PrecioUnitario").Value = PrecioArticuloGastoAdministrativo
                                     .Fields("PrecioUnitarioTotal").Value = PrecioArticuloGastoAdministrativo
+
+
+                                    .Fields("PorcentajeIva").Value = mTasa  'deberia estar usando el de cada articulo, por ahora uso el iva general  http://consultas.bdlconsultores.com.ar/Admin/VerConsultas1.php?recordid=46968
+                                    .Fields("ImporteIva").Value = Math.Round(.Fields("Cantidad").Value * (.Fields("PrecioUnitario").Value), 2) * mTasa / 100
 
 
                                     .Fields("Costo").Value = 0
@@ -7307,9 +7320,12 @@ Public Class LogicaFacturacion
                     oPto.Guardar()
                     oPto = Nothing
 
+
+
                     For i = -100 To (-100 - (oFac.DetFacturas.Count - 1)) Step -1
                         With oFac.DetFacturas.Item(i).Registro
                             'estos datos recien los tengo cuando termina
+                            'acá hay rollo http: //consultas.bdlconsultores.com.ar/Admin/VerConsultas1.php?recordid=46968
                             .Fields("NumeroFactura").Value = mNumero
                             .Fields("TipoABC").Value = mLetra
                             .Fields("PuntoVenta").Value = IdPuntoVenta
