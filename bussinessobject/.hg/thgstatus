@@ -1,0 +1,42 @@
+rBusinessObject
+rBusinessObject/Backup
+rBusinessObject/Backup/Collections
+rBusinessObject/Backup/Enums
+rBusinessObject/Backup/My Project
+rBusinessObject/Collections
+rBusinessObject/Collections/_sgbak
+rBusinessObject/Enums
+rBusinessObject/Enums/CVS
+rBusinessObject/My Project
+rBusinessObject/My Project/CVS
+rBusinessObject/_UpgradeReport_Files
+rBusinessObject/_sgbak
+rBusinessObject/bin/CVS
+rBusinessObject/bin/Debug
+rBusinessObject/bin/Debug/CVS
+rBusinessObject/bin/Release
+rBusinessObject/bin/Release/CVS
+rBusinessObject/obj/Debug
+rBusinessObject/obj/Release
+rClaseMigrar
+rClaseMigrar/My Project
+rClaseMigrar/bin/Debug
+rClaseMigrar/obj/Debug
+rClaseMigrar/obj/Release
+rDataAccess
+rDataAccess/Backup
+rDataAccess/Backup/My Project
+rDataAccess/Backup1
+rDataAccess/Backup1/My Project
+rDataAccess/CVS
+rDataAccess/My Project
+rDataAccess/My Project/CVS
+rDataAccess/_UpgradeReport_Files
+rDataAccess/_sgbak
+rDataAccess/bin/CVS
+rDataAccess/bin/Debug
+rDataAccess/bin/Debug/CVS
+rDataAccess/bin/Release
+rDataAccess/bin/Release/CVS
+rDataAccess/obj/Debug
+rDataAccess/obj/Release
