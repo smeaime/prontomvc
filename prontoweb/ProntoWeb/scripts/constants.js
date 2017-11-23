@@ -2,7 +2,7 @@
 
 window.gauntface = window.gauntface || {};
 window.gauntface.CONSTANTS = {
-    GCM_API_KEY: 'AIzaSyBuC5oWSsrDcmVBa3EIG_-j5le-81mH9E4',
+    GCM_API_KEY: 'AIzaSyD_KzMypOaPPCUl42hvR3BEkB9ZHCU9Nuc',
 
   APPLICATION_KEYS: {
     publicKey: 'BDd3_hVL9fZi9Ybo2UUzA284WG5FZR30_95YeZJsiA' +
