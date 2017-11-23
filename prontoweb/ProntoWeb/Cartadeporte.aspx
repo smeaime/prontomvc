@@ -2782,7 +2782,7 @@
             </cc1:TabPanel>
             <cc1:TabPanel ID="TabPanel5" runat="server" BackColor="#6600FF" Height="550px">
                 <HeaderTemplate>
-                    <u>C</u>hat
+                    C<u>h</u>at
                 </HeaderTemplate>
 
                 <ContentTemplate>
