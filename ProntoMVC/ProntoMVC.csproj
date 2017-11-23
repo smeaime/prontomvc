@@ -841,6 +841,8 @@
     <None Include="Documentos\vb6\frmRequerimientos.frmz" />
     <Content Include="packages.config" />
     <Content Include="Scripts\jquery.table2excel.js" />
+    <Content Include="Scripts\ScriptComprobanteProveedor2.js" />
+    <Content Include="Scripts\ScriptFactura - Copia.js" />
     <Content Include="Scripts\ScriptValeSalida.js" />
     <Content Include="Scripts\ScriptResumenConciliacion.js" />
     <Content Include="Scripts\ScriptPlazoFijo.js" />
@@ -1133,6 +1135,7 @@
     <Content Include="Views\PresupuestoObra\Index.cshtml" />
     <Content Include="Views\PresupuestoObraItem\Edit.cshtml" />
     <Content Include="Views\Requerimiento\_PartialPage1.cshtml" />
+    <Content Include="Views\ComprobanteProveedor\Edit - Copia.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Controllers\Content\bootstrap.css" />

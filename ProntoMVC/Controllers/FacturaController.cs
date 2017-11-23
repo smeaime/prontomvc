@@ -34,14 +34,8 @@ using System.Data.Entity.Core.Metadata.Edm;
 
 namespace ProntoMVC.Controllers
 {
-
-
-
     public partial class FacturaController : ProntoBaseController
     {
-
-      
-
         public virtual ViewResult Index()
         {
             if (!PuedeLeer(enumNodos.Facturas)) throw new Exception("No tenés permisos");
@@ -80,21 +74,7 @@ namespace ProntoMVC.Controllers
                 {
                     /// "Falta la cotización del dólar"
                      TempData["Alerta"] = "Falta la cotización del dólar";
-                    //return RedirectToAction("Index", "Factura");
-
-
-
-                    //JsonResponse res = new JsonResponse();
-                    //res.Status = Status.Error;
-
-                    //string[] words = errs.Split('\n');
-                    //res.Errors = words.ToList();
-                    //res.Message = "Hay datos invalidos";
-
-                    //return Json(res);
-
                 }
-
 
                 o = new Factura();
                 inic(ref o);
@@ -1102,7 +1082,6 @@ namespace ProntoMVC.Controllers
             public DateTime? FechaVencimientoORechazoCAE { get; set; }
             public string Observaciones { get; set; }
         }
-
 
         public virtual JsonResult Facturas_DynamicGridData(string sidx, string sord, int page, int rows, bool _search, string filters, string FechaInicial, string FechaFinal)
         {

@@ -493,6 +493,25 @@ namespace ProntoMVC.Controllers
             }
         }
 
+        public virtual FileResult ImprimirConInteropPDF(int id)
+        {
+            object nulo = null;
+            string baseP = this.HttpContext.Session["BasePronto"].ToString();
+            string SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString(), oStaticMembershipService));
+            string output = AppDomain.CurrentDomain.BaseDirectory + "Documentos\\" + "archivo.pdf";
+            string plantilla;
+            plantilla = AppDomain.CurrentDomain.BaseDirectory + "Documentos\\" + "SalidaMateriales_" + baseP + ".dotm";
+
+            //tengo que copiar la plantilla en el destino, porque openxml usa el archivo que le vaya a pasar
+            System.IO.FileInfo MyFile1 = new System.IO.FileInfo(output);//busca si ya existe el archivo a generar y en ese caso lo borra
+            if (MyFile1.Exists) MyFile1.Delete();
+
+            EntidadManager.ImprimirWordDOT_VersionDLL_PDF(plantilla, ref nulo, SC, nulo, ref nulo, id, nulo, nulo, nulo, output, nulo);
+
+            byte[] contents = System.IO.File.ReadAllBytes(output);
+            return File(contents, System.Net.Mime.MediaTypeNames.Application.Octet, "SalidaMateriales.pdf");
+        }
+
         public virtual ActionResult TT(string sidx, string sord, int? page, int? rows, bool _search, string searchField, string searchOper, string searchString, string FechaInicial, string FechaFinal)
         {
             string campo = String.Empty;
@@ -568,9 +587,8 @@ namespace ProntoMVC.Controllers
 
             var data1 = (from a in data select a)
                         .OrderByDescending(x => x.FechaSalidaMateriales)
-                        
-.Skip((currentPage - 1) * pageSize).Take(pageSize)
-.ToList();
+                        .Skip((currentPage - 1) * pageSize).Take(pageSize)
+                        .ToList();
 
             var jsonData = new jqGridJson()
             {
@@ -583,7 +601,7 @@ namespace ProntoMVC.Controllers
                             id = a.IdSalidaMateriales.ToString(),
                             cell = new string[] { 
                                 "<a href="+ Url.Action("Edit",new {id = a.IdSalidaMateriales} ) + ">Editar</>",
-                                "<a href="+ Url.Action("Imprimir",new {id = a.IdSalidaMateriales} ) + ">Emitir</a> ",
+                                "<a href="+ Url.Action("ImprimirConInteropPDF",new {id = a.IdSalidaMateriales} ) + ">Emitir</a> ",
                                 a.IdSalidaMateriales.ToString(),
                                 a.TipoSalida.NullSafeToString(),
                                 a.IdProveedor.NullSafeToString(),
@@ -715,16 +733,8 @@ namespace ProntoMVC.Controllers
                             PresupuestoObrasEtapa = (i != null ? i.Item + " " : "") + (j != null ? j.Descripcion : "") + (i != null ? " - " + i.Descripcion : ""),
                             a.Observaciones
                         }).OrderBy(x => x.IdDetalleSalidaMateriales)
-//.Skip((currentPage - 1) * pageSize).Take(pageSize)
-.ToList();
-
-
-
-            //inicializar dbmant!!!!!
-            //inicializar dbmant!!!!!
-            //inicializar dbmant!!!!!
-
-
+                        //.Skip((currentPage - 1) * pageSize).Take(pageSize)
+                        .ToList();
 
             var data2 = (from a in data
 
@@ -768,7 +778,6 @@ namespace ProntoMVC.Controllers
                             a.IdMoneda.NullSafeToString(),
                             a.IdEquipoDestino.NullSafeToString(),
                             a.IdPresupuestoObrasNodo.NullSafeToString(),
-
                             a.NumeroRecepcionAlmacen.NullSafeToString(),
                             a.NumeroValeSalida.NullSafeToString(),
                             a.NumeroRequerimiento.NullSafeToString(),
@@ -786,8 +795,6 @@ namespace ProntoMVC.Controllers
                             a.FechaImputacion == null ? "" : a.FechaImputacion.GetValueOrDefault().ToString("dd/MM/yyyy"),
                             data2.Where(x=>x.IdEquipoDestino==a.IdEquipoDestino).Select(x=>x.EquipoDestino ?? "").FirstOrDefault().NullSafeToString(),
                             data2.Where(x=>x.IdOrdenTrabajo==a.IdOrdenTrabajo).Select(x=>x.NumeroOrdenTrabajo ).FirstOrDefault().NullSafeToString(),
-
-
                             a.PresupuestoObrasEtapa.NullSafeToString(),
                             a.Observaciones.NullSafeToString()
                             }
