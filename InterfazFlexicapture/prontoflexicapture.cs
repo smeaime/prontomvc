@@ -5939,7 +5939,9 @@ Formato localidad-provincia	destination	x
 
 
 
-        public virtual string Reclamos_DynamicGridData(string sidx, string sord, int page, int rows, bool _search, string filters, string FechaInicial, string FechaFinal, int puntovent, int iddestino, string SC, string nombreusuario, string SCbdlmaster)
+        public virtual string Reclamos_DynamicGridData(string sidx, string sord, int page, int rows, bool _search, string filters, 
+                                                        string FechaInicial, string FechaFinal, int puntovent, int idcarta,
+                                                        string SC, string nombreusuario, string SCbdlmaster)
         {
 
             // An ASHX is a generic HttpHandler. An ASMX file is a web service. ASHX is a good lean way to provide a response to AJAX calls, but if you want to provide a response which changes based on conditions (such as variable inputs) it can become a bit of a handful - lots of if else etc. ASMX can house mulitple methods which can take parameters.
@@ -6000,7 +6002,11 @@ Formato localidad-provincia	destination	x
 
 
 
-            var q = db.ReclamoComentarios;
+            IQueryable<ReclamoComentario> q = db.ReclamoComentarios;
+
+
+            var idreclamo = db.CartasDePortes.Find(idcarta).IdReclamo;
+            if (idreclamo != null) q = q.Where(x => x.IdReclamo == idreclamo);
 
 
 
@@ -7959,4 +7965,14 @@ __________________________
 
     }
 
+
+
+
+
+
+
+
 }
+
+
+
