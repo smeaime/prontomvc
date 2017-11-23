@@ -34,17 +34,15 @@
             postData: { 'FechaInicial': function () { return $("#FechaInicial").val(); }, 'FechaFinal': function () { return $("#FechaFinal").val(); } },
             datatype: 'json',
             mtype: 'POST',
-            colNames: ['', 'Emitir', 'IdRecibo', 'Punto venta', 'Numero recibo', 'Fecha recibo', 'Tipo', 'Anulado', 'Codigo cliente', 'Cliente', 'Cuenta', 'Mon.', 'Deudores', 'Valores', 'Ret. iva', 'Ret. gan',
+            colNames: ['', '', 'IdRecibo', 'Punto venta', 'Numero recibo', 'Fecha recibo', 'Tipo', 'Anulado', 'Codigo cliente', 'Cliente', 'Cuenta', 'Mon.', 'Deudores', 'Valores', 'Ret. iva', 'Ret. gan',
                        'Ret. iibb', 'Otros conceptos', 'Obra', 'Vendedor', 'Cobrador', 'Ingreso', 'Fecha ingreso', 'Modifico', 'Fecha modificacion', 'Cotizacion', 'Observaciones'],
             colModel: [
                         { name: 'ver', index: 'ver', hidden: false, width: 50, search: false },
-                        { name: 'Emitir', index: 'Emitir', hidden: true, width: 50, search: false },
+                        { name: 'Emitir', index: 'Emitir', hidden: false, width: 50, search: false },
                         { name: 'IdRecibo', index: 'IdRecibo', align: 'center', width: 80, sortable: false, editable: false, search: false, hidden: true },
                         { name: 'PuntoVenta', index: 'PuntoVenta', align: 'right', width: 50, editable: false, hidden: false },
                         { name: 'NumeroRecibo', index: 'NumeroRecibo', align: 'right', width: 80, editable: false, hidden: false },
-                       
-
-                         {
+                        {
                              name: 'FechaRecibo', index: 'FechaRecibo', width: 100, align: 'center',
                              sorttype: 'date', hidden: false, editable: false, formatoptions: { newformat: 'dd/mm/yy' },
                              datefmt: 'dd/mm/yy',
@@ -69,8 +67,6 @@
                              }
 
                          },
-
-
                         { name: 'Tipo', index: 'Tipo', align: 'left', width: 40, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
                         { name: 'Anulado', index: 'Anulado', align: 'center', width: 50, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
                         { name: 'CodigoCliente', index: 'Cliente.CodigoCliente', align: 'right', width: 80, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
@@ -149,10 +145,6 @@
                     lastSelectedId = id;
                 }
             },
-
-
-            
-
             pager: $('#ListaPager'),
             rowNum: 15,
             rowList: [10, 20, 50],
@@ -160,29 +152,16 @@
             sortorder: 'desc',
             viewrecords: true,
             emptyrecords: 'No hay registros para mostrar', //,
-
-
-            ///////////////////////////////
             width: 'auto', // 'auto',
             autowidth: true,
             shrinkToFit: false,
-            //////////////////////////////
-
             height: $(window).height() - ALTOLISTADO, // '100%'
             altRows: false,
             footerrow: false, //true,
-            userDataOnFooter: true
-            // ,caption: '<b>FACTURAS</b>'
-
-            , gridview: true
-            , multiboxonly: true
-            , multipleSearch: true
-
-
-
-            
-
-
+            userDataOnFooter: true,
+            gridview: true,
+            multiboxonly: true,
+            multipleSearch: true
         });
         jQuery("#Lista").jqGrid('bindKeys');
 
@@ -195,19 +174,11 @@
          }
         );
 
-
         jQuery("#Lista").filterToolbar({
             stringResult: true, searchOnEnter: true,
             defaultSearch: 'cn',
             enableClear: false
         }); // si queres sacar el enableClear, definilo en las searchoptions de la columna específica http://www.trirand.com/blog/?page_id=393/help/clearing-the-clear-icon-in-a-filtertoolbar/
-
-
-
-
-
-
-
 
         $(window).resize(function () {
             RefrescaAnchoJqgrids();
