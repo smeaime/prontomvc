@@ -425,7 +425,7 @@ $(function () {
                             },
                             dataEvents: [{
                                 type: 'change', fn: function (e) {
-                                    var $this = $(e.target), $td, IdCaja, IdCuentaBancaria, SelectOpcional;
+                                    var $this = $(e.target), $td, IdCaja, IdCuentaBancaria, SelectOpcional, newOptions;
                                     if ($this.hasClass("FormElement")) {
                                         // form editing
                                         IdCaja = $('#IdCaja').val();
@@ -444,6 +444,7 @@ $(function () {
 
                                             newOptions = TraerChequerasPorIdCuentaBancaria(IdCuentaBancaria);
                                             if (newOptions.length > 0) {
+                                                $("select#Chequera.FormElement").removeAttr('disabled');
                                                 var form = $(e.target).closest('form.FormGrid');
                                                 $("select#Chequera.FormElement", form[0]).html(newOptions);
 
@@ -451,22 +452,25 @@ $(function () {
                                                 if (SelectOpcional.length > 0) {
                                                     AsignarNumeroValor(SelectOpcional.val());
                                                 }
+                                            } else {
+                                                $("select#Chequera.FormElement").val('');
+                                                $("select#Chequera.FormElement").attr('disabled', 'disabled');
                                             }
                                         }
                                     } else {
                                         $td = $this.closest("td");
+                                        var rowid = $('#ListaValores').getGridParam('selrow');
                                         if ($td.hasClass("edit-cell")) {
                                             // cell editing
-                                            var rowid = $('#ListaValores').getGridParam('selrow');
                                             var idcaja = $("#ListaValores").getRowData(rowid)['IdCaja'];
                                             IdCuentaBancaria = 0;
-                                            if (idcaja == "") {
+                                            if (idcaja != "") {
                                                 IdCaja = this.value;
-                                                $('#ListaValores').jqGrid('setCell', rowid, 'IdCuentaBancaria', IdCaja);
+                                                $('#ListaValores').jqGrid('setCell', rowid, 'IdCaja', IdCaja);
                                             } else {
                                                 IdCuentaBancaria = this.value;
-                                                $('#ListaValores').jqGrid('setCell', rowid, 'IdCaja', IdCuentaBancaria);
-                                            };
+                                                $('#ListaValores').jqGrid('setCell', rowid, 'IdCuentaBancaria', IdCuentaBancaria);
+                                            }
                                         } else {
                                             // inline editing
                                         }
@@ -547,14 +551,21 @@ $(function () {
                 var TipoEntidad, TipoEntidad1;
                 TipoEntidad = $("#ListaValores").getRowData(rowid)['IdCaja'];
                 TipoEntidad1 = 1
-                if (TipoEntidad != "") { TipoEntidad1 = 2 }
+                if (TipoEntidad != "") { TipoEntidad1 = 4 }
                 $("#ListaValores").setColProp('Entidad', { editoptions: { dataUrl: ROOT + 'Banco/GetBancosPropios?TipoEntidad=' + TipoEntidad1 } });
             }
         },
-        afterSaveCell: function (rowid) {
+        afterSaveCell: function (rowid, name, val, iRow, iCol) {
             calculaTotalValores();
-        },
-        pager: $('#ListaPager3'),
+
+            var cm = jQuery("#ListaValores").jqGrid("getGridParam", "colModel");
+            if (cm[iCol].name == "Entidad") {
+                var IdCuentaBancaria, newOptions;
+                IdCuentaBancaria = $("#ListaValores").getRowData(rowid)['IdCuentaBancaria'];
+                $('#ListaValores').jqGrid('setCell', rowid, 'Chequera', " ");
+                $("#ListaValores").setColProp('Chequera', { editoptions: { dataUrl: ROOT + 'Banco/GetChequerasPorIdCuentaBancaria2?IdCuentaBancaria=' + IdCuentaBancaria } });
+            }
+        },        pager: $('#ListaPager3'),
         rowNum: 100,
         rowList: [10, 20, 50, 100],
         sortname: 'IdDetalleOrdenPagoValores',
@@ -2586,7 +2597,7 @@ function AgregarValor(grid) {
 };
 
 function AgregarCaja(grid) {
-    $("#ListaValores").setColProp('Entidad', { editoptions: { dataUrl: ROOT + 'Banco/GetBancosPropios?TipoEntidad=2' }, formoptions: { label: 'Caja' } });
+    $("#ListaValores").setColProp('Entidad', { editoptions: { dataUrl: ROOT + 'Banco/GetBancosPropios?TipoEntidad=4' }, formoptions: { label: 'Caja' } });
     grid.jqGrid('editGridRow', "new",
             {
                 addCaption: "Pago con caja", bSubmit: "Aceptar", bCancel: "Cancelar", width: 800, reloadAfterSubmit: false,
@@ -2609,7 +2620,6 @@ function AgregarCaja(grid) {
                     $('#tr_IdBancoChequera', form).hide();
                     $('#tr_IdCaja', form).hide();
                     $('#tr_IdTarjetaCredito', form).hide();
-
                     $('#tr_Tipo', form).hide();
                     $('#tr_NumeroInterno', form).hide();
                     $('#tr_NumeroValor', form).hide();

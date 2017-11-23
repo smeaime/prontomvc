@@ -424,7 +424,7 @@ namespace ProntoMVC.Controllers
 
             if (db.NotasDebitoes.Find(id).CAE.NullSafeToString() != "")
             {
-                plantilla += "_FA.dot";
+                plantilla += "_NDE.dot";
             }
             else
             {
@@ -441,8 +441,6 @@ namespace ProntoMVC.Controllers
             var mvarClausula = false;
             var mPrinter = "";
             var mCopias = 1;
-
-            string mArgs = "NO|NO|2|3|4|1/1/1800|1/1/2100";
 
             EntidadManager.ImprimirWordDOT_VersionDLL_PDF(plantilla, ref nulo, SC, nulo, ref nulo, id, mvarClausula, mPrinter, mCopias, output);
 

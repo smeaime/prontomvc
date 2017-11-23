@@ -837,58 +837,6 @@ namespace ProntoMVC.Controllers
                                     Valore Valor = db.Valores.Where(c => c.IdDetalleReciboValores == d.IdDetalleReciboValores).FirstOrDefault();
                                     if (Valor != null) { db.Entry(Valor).State = System.Data.Entity.EntityState.Deleted; }
                                 }
-
-                            
-               //If DetallesValores.Fields("IdTipoValor").Value = mvarIdTipoComprobanteDocumento Then
-               //   Set DatosCtaCte = oDet.TraerFiltrado("CtasCtesD", "_Struc")
-               //   Set DatosCtaCteNv = CopiarRs(DatosCtaCte)
-               //   DatosCtaCte.Close
-               //   Set DatosCtaCte = Nothing
-               //   With DatosCtaCteNv
-               //      Set DatosCtaCte = oDet.TraerFiltrado("CtasCtesD", "_BuscarComprobante", Array(mIdDetalleReciboValores, DetallesValores.Fields("IdTipoValor").Value))
-               //      If DatosCtaCte.RecordCount > 0 Then
-               //         .Fields(0).Value = DatosCtaCte.Fields(0).Value
-               //         mvarIdImputacion = IIf(IsNull(DatosCtaCte.Fields("IdImputacion").Value), 0, DatosCtaCte.Fields("IdImputacion").Value)
-               //         Sdo = IIf(IsNull(DatosCtaCte.Fields("ImporteTotal").Value), 0, DatosCtaCte.Fields("ImporteTotal").Value) - _
-               //               IIf(IsNull(DatosCtaCte.Fields("Saldo").Value), 0, DatosCtaCte.Fields("Saldo").Value)
-               //         SdoDol = IIf(IsNull(DatosCtaCte.Fields("ImporteTotalDolar").Value), 0, DatosCtaCte.Fields("ImporteTotalDolar").Value) - _
-               //                  IIf(IsNull(DatosCtaCte.Fields("SaldoDolar").Value), 0, DatosCtaCte.Fields("SaldoDolar").Value)
-               //      Else
-               //         .Fields(0).Value = -1
-               //         mvarIdImputacion = 0
-               //         Sdo = 0
-               //         SdoDol = 0
-               //      End If
-               //      DatosCtaCte.Close
-               //      Set DatosCtaCte = Nothing
-
-               //      Tot = Round(Abs(DetallesValores.Fields("Importe").Value) * mvarCotizacionMoneda, 2)
-               //      TotDol = Round(Abs(DetallesValores.Fields("Importe").Value) * mvarCotizacionMoneda / mvarCotizacion, 2)
-               //      .Fields("IdCliente").Value = Recibo.Fields("IdCliente").Value
-               //      .Fields("NumeroComprobante").Value = DetallesValores.Fields("NumeroInterno").Value
-               //      .Fields("Fecha").Value = Recibo.Fields("FechaRecibo").Value
-               //      .Fields("FechaVencimiento").Value = DetallesValores.Fields("FechaVencimiento").Value
-               //      .Fields("IdTipoComp").Value = DetallesValores.Fields("IdTipoValor").Value
-               //      .Fields("IdComprobante").Value = mIdDetalleReciboValores
-               //      .Fields("ImporteTotal").Value = Tot
-               //      .Fields("Saldo").Value = Round(Tot - Sdo, 2)
-               //      .Fields("Cotizacion").Value = mvarCotizacion
-               //      .Fields("ImporteTotalDolar").Value = TotDol
-               //      .Fields("SaldoDolar").Value = Round(TotDol - SdoDol, 2)
-               //      .Fields("IdMoneda").Value = Recibo.Fields("IdMoneda").Value
-               //      .Fields("CotizacionMoneda").Value = Recibo.Fields("CotizacionMoneda").Value
-               //      If mvarIdImputacion <> 0 Then .Fields("IdImputacion").Value = mvarIdImputacion
-               //   End With
-               //   Resp = oDet.Guardar("CtasCtesD", DatosCtaCteNv)
-               //   If mvarIdImputacion = 0 Then
-               //      DatosCtaCteNv.Fields("IdImputacion").Value = DatosCtaCteNv.Fields(0).Value
-               //      DatosCtaCteNv.Fields("IdImputacion").Value = DatosCtaCteNv.Fields(0).Value
-               //      Resp = oDet.Guardar("CtasCtesD", DatosCtaCteNv)
-               //   End If
-               //   DatosCtaCteNv.Close
-               //   Set DatosCtaCteNv = Nothing
-               //End If
-                            
                             }
                         }
                         else
@@ -945,98 +893,6 @@ namespace ProntoMVC.Controllers
                                 s.CotizacionMoneda = 1;
                                 s.IdDetalleComprobante = d.IdDetalleReciboCuentas;
                                 db.Subdiarios.Add(s);
-
-                            
-                            
-                            
-                            
-                            
-                            
-               //If Not IsNull(DetallesCuentas.Fields("Haber").Value) And DetallesCuentas.Fields("Haber").Value <> 0 Then
-               //   Set oRsAux = oDet.TraerFiltrado("Cuentas", "_CuentaCajaBanco", .Fields("IdCuenta").Value)
-               //   If oRsAux.RecordCount > 0 Then
-               //      mvarEsCajaBanco = ""
-               //      If Not IsNull(oRsAux.Fields("EsCajaBanco").Value) And (oRsAux.Fields("EsCajaBanco").Value = "BA" Or oRsAux.Fields("EsCajaBanco").Value = "CA") Then
-               //         mvarEsCajaBanco = oRsAux.Fields("EsCajaBanco").Value
-               //         oRsAux.Close
-               //      End If
-               //      If Len(mvarEsCajaBanco) > 0 Then
-               //         mIdValor = -1
-               //         Set oRsAux = oDet.TraerFiltrado("Valores", "_PorIdDetalleReciboCuentas", mvarIdDetalleReciboCuentas)
-               //         If oRsAux.RecordCount > 0 Then
-               //            mIdValor = oRsAux.Fields(0).Value
-               //         End If
-               //         oRsAux.Close
-                        
-               //         mvarIdBanco = 0
-               //         If mvarEsCajaBanco = "BA" And Not IsNull(.Fields("IdCuentaBancaria").Value) Then
-               //            Set oRsAux = oDet.TraerFiltrado("CuentasBancarias", "_PorId", .Fields("IdCuentaBancaria").Value)
-               //            If oRsAux.RecordCount > 0 Then
-               //               mvarIdBanco = oRsAux.Fields("IdBanco").Value
-               //            End If
-               //         End If
-                        
-               //         Set oRsValores = oDet.TraerFiltrado("Valores", "_Struc")
-               //         Set oRsValoresNv = CopiarRs(oRsValores)
-               //         oRsValores.Close
-               //         Set oRsValores = Nothing
-               //         With oRsValoresNv
-               //            If mvarEsCajaBanco = "BA" Then
-               //               .Fields("IdTipoValor").Value = 21
-               //               .Fields("IdBanco").Value = mvarIdBanco
-               //               .Fields("IdCuentaBancaria").Value = DetallesCuentas.Fields("IdCuentaBancaria").Value
-               //            Else
-               //               .Fields("IdTipoValor").Value = 33
-               //               .Fields("IdCaja").Value = DetallesCuentas.Fields("IdCaja").Value
-               //            End If
-               //            .Fields("NumeroValor").Value = 0
-               //            .Fields("NumeroInterno").Value = 0
-               //            .Fields("FechaValor").Value = Recibo.Fields("FechaRecibo").Value
-               //            If Not IsNull(DetallesCuentas.Fields("CotizacionMonedaDestino").Value) And DetallesCuentas.Fields("CotizacionMonedaDestino").Value <> 0 Then
-               //               If Not IsNull(DetallesCuentas.Fields("Debe").Value) And DetallesCuentas.Fields("Debe").Value <> 0 Then
-               //                  .Fields("Importe").Value = (DetallesCuentas.Fields("Debe").Value * _
-               //                                              Recibo.Fields("CotizacionMoneda").Value) / _
-               //                                              DetallesCuentas.Fields("CotizacionMonedaDestino").Value
-               //               End If
-               //               If Not IsNull(DetallesCuentas.Fields("Haber").Value) And DetallesCuentas.Fields("Haber").Value <> 0 Then
-               //                  .Fields("Importe").Value = (DetallesCuentas.Fields("Haber").Value * _
-               //                                              Recibo.Fields("CotizacionMoneda").Value) / _
-               //                                              DetallesCuentas.Fields("CotizacionMonedaDestino").Value * -1
-               //               End If
-               //               .Fields("CotizacionMoneda").Value = DetallesCuentas.Fields("CotizacionMonedaDestino").Value
-               //            Else
-               //               If Not IsNull(DetallesCuentas.Fields("Debe").Value) And DetallesCuentas.Fields("Debe").Value <> 0 Then
-               //                  .Fields("Importe").Value = DetallesCuentas.Fields("Debe").Value
-               //               End If
-               //               If Not IsNull(DetallesCuentas.Fields("Haber").Value) And DetallesCuentas.Fields("Haber").Value <> 0 Then
-               //                  .Fields("Importe").Value = DetallesCuentas.Fields("Haber").Value * -1
-               //               End If
-               //               .Fields("CotizacionMoneda").Value = Recibo.Fields("CotizacionMoneda").Value
-               //            End If
-               //            .Fields("NumeroComprobante").Value = Recibo.Fields("NumeroRecibo").Value
-               //            .Fields("FechaComprobante").Value = Recibo.Fields("FechaRecibo").Value
-               //            If Not IsNull(Recibo.Fields("IdCliente").Value) Then
-               //               .Fields("IdCliente").Value = Recibo.Fields("IdCliente").Value
-               //            End If
-               //            .Fields("IdTipoComprobante").Value = 2
-               //            .Fields("IdDetalleReciboCuentas").Value = mvarIdDetalleReciboCuentas
-               //            .Fields("IdMoneda").Value = DetallesCuentas.Fields("IdMoneda").Value
-               //            .Fields(0).Value = mIdValor
-               //         End With
-               //         Resp = oDet.Guardar("Valores", oRsValoresNv)
-               //         oRsValoresNv.Close
-               //         Set oRsValoresNv = Nothing
-               //      End If
-               //   Else
-               //      oRsAux.Close
-               //   End If
-               //   Set oRsAux = Nothing
-               //End If
-                            
-                            
-                            
-                            
-                            
                             }
                         }
 
@@ -1088,24 +944,24 @@ namespace ProntoMVC.Controllers
             public List<string> Errors { get; set; }
         }
 
-        public virtual FileResult Imprimir(int id) //(int id)
+        public virtual FileResult ImprimirConInteropPDF(int id)
         {
+            object nulo = null;
+            string baseP = this.HttpContext.Session["BasePronto"].ToString();
             string SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString(), oStaticMembershipService));
-
-            string output = AppDomain.CurrentDomain.BaseDirectory + "Documentos\\" + "archivo.docx"; //System.IO.Path.GetDirectoryName(); // + '\Documentos\' + 'archivo.docx';
-            string plantilla = AppDomain.CurrentDomain.BaseDirectory + "Documentos\\" + "ReciboNET_Hawk.docx";
+            string output = AppDomain.CurrentDomain.BaseDirectory + "Documentos\\" + "archivo.pdf";
+            string plantilla;
+            plantilla = AppDomain.CurrentDomain.BaseDirectory + "Documentos\\" + "Recibo_" + baseP + ".dotm";
 
             //tengo que copiar la plantilla en el destino, porque openxml usa el archivo que le vaya a pasar
             System.IO.FileInfo MyFile1 = new System.IO.FileInfo(output);//busca si ya existe el archivo a generar y en ese caso lo borra
             if (MyFile1.Exists) MyFile1.Delete();
 
-            System.IO.File.Copy(plantilla, output); // 'http://stackoverflow.com/questions/1233228/saving-an-openxml-document-word-generated-from-a-template 
-            Pronto.ERP.BO.Recibo fac = ReciboManager.GetItem(SC, id, true);
+            EntidadManager.ImprimirWordDOT_VersionDLL_PDF(plantilla, ref nulo, SC, nulo, ref nulo, id, false, "", 0, output, "", "");
 
             byte[] contents = System.IO.File.ReadAllBytes(output);
-            return File(contents, System.Net.Mime.MediaTypeNames.Application.Octet, "Recibo.docx");
+            return File(contents, System.Net.Mime.MediaTypeNames.Application.Octet, "Recibo.pdf");
         }
-
 
         public virtual ActionResult Recibos(string sidx, string sord, int? page, int? rows, bool? _search, string searchField, string searchOper, string searchString, string FechaInicial, string FechaFinal)
         {
@@ -1183,9 +1039,8 @@ namespace ProntoMVC.Controllers
 
             var data1 = (from a in data select a)
                         .OrderByDescending(x => x.FechaRecibo)
-                        
-//.Skip((currentPage - 1) * pageSize).Take(pageSize)
-.ToList();
+                        //.Skip((currentPage - 1) * pageSize).Take(pageSize)
+                        .ToList();
 
             //switch (sidx.ToLower())
             //{
@@ -1220,7 +1075,7 @@ namespace ProntoMVC.Controllers
                             id = a.IdRecibo.ToString(),
                             cell = new string[] { 
                                 a.Tipo=="CC" ? "<a href="+ Url.Action("EditCC",new {id = a.IdRecibo} ) + " target='' >Editar</>" : "<a href="+ Url.Action("EditOT",new {id = a.IdRecibo} ) + " target='' >Editar</>",
-                                "<a href="+ Url.Action("Imprimir",new {id = a.IdRecibo} ) + ">Emitir</a> ",
+                                "<a href="+ Url.Action("ImprimirConInteropPDF",new {id = a.IdRecibo} ) + ">Emitir</a> ",
                                 a.IdRecibo.ToString(),
                                 a.PuntoVenta.NullSafeToString(),
                                 a.NumeroRecibo.NullSafeToString(),
@@ -1256,22 +1111,10 @@ namespace ProntoMVC.Controllers
 
         public virtual ActionResult Recibos_DynamicGridData(string sidx, string sord, int page, int rows, bool _search, string filters)
         {
-
-
-            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
             int totalRecords = 0;
 
             var pagedQuery = Filters.FiltroGenerico<Data.Models.Recibo>
                                 ("Localidade,Provincia,Vendedore,Empleado,Cuentas,Transportista", sidx, sord, page, rows, _search, filters, db, ref totalRecords);
-
-            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
             string campo = String.Empty;
             int pageSize = rows;
@@ -1318,9 +1161,8 @@ namespace ProntoMVC.Controllers
 
             var data1 = (from a in data select a)
                         .OrderByDescending(x => x.FechaRecibo)
-                        
-//.Skip((currentPage - 1) * pageSize).Take(pageSize)
-.ToList();
+                        //.Skip((currentPage - 1) * pageSize).Take(pageSize)
+                        .ToList();
 
             //switch (sidx.ToLower())
             //{
@@ -1355,7 +1197,7 @@ namespace ProntoMVC.Controllers
                             id = a.IdRecibo.ToString(),
                             cell = new string[] { 
                                 a.Tipo=="CC" ? "<a href="+ Url.Action("EditCC",new {id = a.IdRecibo} ) + " target='' >Editar</>" : "<a href="+ Url.Action("EditOT",new {id = a.IdRecibo} ) + " target='' >Editar</>",
-                                "<a href="+ Url.Action("Imprimir",new {id = a.IdRecibo} ) + ">Emitir</a> ",
+                                "<a href="+ Url.Action("ImprimirConInteropPDF",new {id = a.IdRecibo} ) + ">Emitir</a> ",
                                 a.IdRecibo.ToString(),
                                 a.PuntoVenta.NullSafeToString(),
                                 a.NumeroRecibo.NullSafeToString(),

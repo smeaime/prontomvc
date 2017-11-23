@@ -388,7 +388,7 @@ namespace ProntoMVC.Controllers
 
             if (db.NotasCreditoes.Find(id).CAE.NullSafeToString() != "")
             {
-                plantilla += "_FA.dot";
+                plantilla += "_NCE.dot";
             }
             else
             {
@@ -406,11 +406,7 @@ namespace ProntoMVC.Controllers
             var mPrinter = "";
             var mCopias = 1;
 
-            string mArgs = "NO|NO|2|3|4|1/1/1800|1/1/2100";
-
-            EntidadManager.ImprimirWordDOT_VersionDLL_PDF
-                (plantilla, ref nulo, SC, nulo,  ref nulo, id, mvarClausula, mPrinter, mCopias,  output);
-      
+            EntidadManager.ImprimirWordDOT_VersionDLL_PDF(plantilla, ref nulo, SC, nulo,  ref nulo, id, mvarClausula, mPrinter, mCopias,  output);
 
             byte[] contents = System.IO.File.ReadAllBytes(output);
             return File(contents, System.Net.Mime.MediaTypeNames.Application.Octet, "NotaCredito.pdf");

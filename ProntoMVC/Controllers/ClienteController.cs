@@ -975,32 +975,22 @@ namespace ProntoMVC.Controllers
                          id = item.IdCliente,
                          value = item.RazonSocial,
                          codigo = item.Codigo,
-
-                         /////////////////////////////
                          idCodigoIva = item.IdCodigoIva,
-
-                         //////////////////////////////////////////
                          IdIBCondicionPorDefecto = item.IdIBCondicionPorDefecto,
                          IdIBCondicionPorDefecto2 = item.IdIBCondicionPorDefecto2,
                          IdIBCondicionPorDefecto3 = item.IdIBCondicionPorDefecto3,
                          AlicuotaPercepcion1 = (item.IBCondicionCat1).AlicuotaPercepcion,
                          AlicuotaPercepcion2 = (item.IBCondicionCat2).AlicuotaPercepcion,
                          AlicuotaPercepcion3 = (item.IBCondicionCat3).AlicuotaPercepcion,
-                         ///////////////////////////////////////
-
-
                          Email = item.Email,
                          Direccion = item.Direccion,
-
                          Localidad = item.Localidad.Nombre,
                          Provincia = item.Provincia.Nombre,
-
                          Telefono = item.Telefono,
                          Fax = item.Fax,
                          Cuit = item.Cuit,
                          IdCondicionVenta = item.IdCondicionVenta,
                          IdListaPrecios = item.IdListaPrecios,
-
                          item.EsAgenteRetencionIVA,
                          item.BaseMinimaParaPercepcionIVA,
                          item.PorcentajePercepcionIVA 
@@ -1009,55 +999,6 @@ namespace ProntoMVC.Controllers
 
             if (q.Count == 0 && term != "No se encontraron resultados")
             {
-               // q.Add(new
-               // {
-               //     id = 0,
-               //     value = "No se encontraron resultados",
-               //     codigo = "",
-               //     IdCodigoIva = ""
-
-               //     ,
-               //     IdIBCondicionPorDefecto = 0
-               //     ,
-               //     IdIBCondicionPorDefecto2 = 0
-               //     ,
-               //     IdIBCondicionPorDefecto3 = 0
-               //     ,
-               //     AlicuotaPercepcion1 = 0
-               //     ,
-               //     AlicuotaPercepcion2 = 0
-               //     ,
-               //     AlicuotaPercepcion3 = 0D
-
-               //     ,
-               //     Email = ""
-               //     ,
-               //     Direccion = ""
-
-               //     ,
-               //     Localidad = ""
-               //     ,
-               //     Provincia = ""
-
-               //     ,
-               //     Telefono = ""
-               //     ,
-               //     Fax = ""
-               //     ,
-               //     Cuit = ""
-               //     ,
-               //     IdCondicionVenta = 0
-               //     ,
-               //     IdListaPrecios = 0
-
-               //     ,
-               //     EsAgenteRetencionIVA = ""
-               //     ,
-               //     BaseMinimaParaPercepcionIVA = 0
-               //     ,
-               //     PorcentajePercepcionIVA = 0
-               // }
-               //);
             }
 
             return Json(q, JsonRequestBehavior.AllowGet);
