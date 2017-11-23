@@ -6637,9 +6637,13 @@ Formato localidad-provincia	destination	x
 
 
 
+        
 
-        public virtual string GrabarComentario_DLL(string SC, string modoExportacion, int idprocedencia, int idarticulo)
+        public virtual string GrabarComentario_DLL(int idcarta,  string comentario,  string nombreusuario, string SC )
         {
+
+
+            //estan como empleados los usuarios externos de williams?
 
             var scEF = ProntoMVC.Data.Models.Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC));
 
@@ -6666,11 +6670,11 @@ Formato localidad-provincia	destination	x
                 }
 
 
-                var comentario = new ReclamoComentario(); // db.ReclamoComentarios.FirstOrDefault().IdReclamo;
-                comentario.IdReclamo = rec.IdReclamo;
-                comentario.IdEmpleado = 1;
-                comentario.Comentario = "hola hola";
-                db.ReclamoComentarios.Add(comentario);
+                var com = new ReclamoComentario(); // db.ReclamoComentarios.FirstOrDefault().IdReclamo;
+                com.IdReclamo = rec.IdReclamo;
+                com.IdEmpleado = 1;
+                com.Comentario =   comentario;
+                db.ReclamoComentarios.Add(com);
 
                 
                 db.SaveChanges();

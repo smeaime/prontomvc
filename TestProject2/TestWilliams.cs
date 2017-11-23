@@ -864,18 +864,20 @@ namespace ProntoMVC.Tests
 
 
 
-        http://localhost:50769/ProntoWeb/ReclamosPorUsuarioMovil.aspx?Id=2633399
-        http://localhost:50769/ProntoWeb/CartaDePorte.aspx?Id=2633399
 
         [TestMethod]
         public void agregar_comentario_43063()
         {
 
-            long idcarta = 2633399;
+            // http://localhost:50769/ProntoWeb/ReclamosPorUsuarioMovil.aspx?Id=2633399
+            // http://localhost:50769/ProntoWeb/CartaDePorte.aspx?Id=2633399
+
+
+            int idcarta = 2633399;
 
 
             var s = new ServicioCartaPorte.servi();
-            s.GrabarComentario_DLL(idcarta , "este es mi comentario",  usuario, SC);
+            s.GrabarComentario_DLL(idcarta, "este es mi comentario", usuario, SC);
             //s.UploadComentario_DLL();            // y si directamente comparto una url?... -pero cómo darle acceso a esa url al usuario externo?????
 
 
@@ -938,7 +940,10 @@ namespace ProntoMVC.Tests
 
 
             var s = new ServicioCartaPorte.servi();
-            var d = s.Reclamos_DynamicGridData("Fecha", "desc", 1, 999999, true, filtro, "", "", 0, 0, SC, "", "");
+            string ret = s.Reclamos_DynamicGridData("Fecha", "desc", 1, 999999, true, filtro, "", "", 0, 0, SC, "", "");
+            System.Web.Script.Serialization.JavaScriptSerializer jsonSerializer = new System.Web.Script.Serialization.JavaScriptSerializer();
+            jqGridJson listado = jsonSerializer.Deserialize<jqGridJson>(ret);
+            Assert.IsTrue(listado.records > 0);
 
         }
 
