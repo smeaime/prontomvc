@@ -622,7 +622,7 @@ Fecha Alta:
                     </button>
 
 
-                    <%--                    <button type="button" id="" style="height: 40px; width: 70px; vertical-align: top;" onclick="location.href='CartaPorteMovil.aspx'">
+                    <%--                    <button type="button" id="" style="height: 40px; width: 70px; vertical-align: top;" onclick="location.href='CartasPortesExternoMovil.aspx'">
                         <i class="fa"></i>General
                     </button>--%>
 

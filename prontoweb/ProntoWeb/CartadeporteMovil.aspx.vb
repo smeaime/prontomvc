@@ -12,7 +12,7 @@ Imports System.Linq
 
 Imports CartaDePorteManager
 
-Partial Class CartadeporteABM
+Partial Class CartadeporteABMMovil
 
 #Const Ancho = "1000px"
 
@@ -41,11 +41,6 @@ Partial Class CartadeporteABM
         'todo: está bien que deje habilitado el viewstate para el objetito CartaPorte, pero
         'sacarlo para los controles
 
-
-
-        If Request.Browser("IsMobileDevice") = "true" Then
-            Response.Redirect("CartaDePorteMovil.aspx?Id=" & If(Request.QueryString("Id"), "").ToString())
-        End If
 
 
 
@@ -154,23 +149,23 @@ Partial Class CartadeporteABM
             '////////////////////
 
             'http://forums.asp.net/t/1362149.aspx     para que no se apriete dos veces el boton de ok
-            'btnSave.Attributes.Add("onclick", "this.disabled=True;" + ClientScript.GetPostBackEventReference(btnSave, "").ToString())
+            'btnSave.Attributes.Add("onclick", "this.disabled=true;" + ClientScript.GetPostBackEventReference(btnSave, "").ToString())
 
             '///////////////////////////////////////////////
             '///////////////////////////////////////////////
             'para que el click sobre la scrollbar del autocomplete no dispare el postback del textbox que extiende
             'http://aadreja.blogspot.com/2009/07/clicking-autocompleteextender-scrollbar.html
-            'Page.Form.Attributes.Add("onsubmit", "Return checkFocusOnExtender();")
+            'Page.Form.Attributes.Add("onsubmit", "return checkFocusOnExtender();")
             '///////////////////////////////////////////////
 
 
-            'Page.Form.Attributes.Add("onKeyUp", "Return jsRecalcular();")
+            'Page.Form.Attributes.Add("onKeyUp", "return jsRecalcular();")
 
 
             '///////////////////////////////////////////////
             '///////////////////////////
             'pongo popups invisible en tiempo de ejecucion, así los puedo ver en tiempo de diseño 
-            'busco todas las configuraciones de "PopupControlID= "
+            'busco todas las configuraciones de "PopupControlID="
             PanelInfoNum.Attributes("style") = "display:none"
             Panel1.Attributes("style") = "display:none"
             'Panel4.Attributes("style") = "display:none"
@@ -1309,25 +1304,25 @@ Partial Class CartadeporteABM
 
 
 
-            .Secada = cmbTipoMermaGranosExtranos.SelectedValue * &H1 + _
-                    cmbTipoMermaQuebrados.SelectedValue * &H2 + _
-                    cmbTipoMermaDaniados.SelectedValue * &H4 + _
-                    cmbTipoMermaChamico.SelectedValue * &H8 + _
-                    cmbTipoMermaRevolcado.SelectedValue * &H10 + _
-                    cmbTipoMermaObjetables.SelectedValue * &H20 + _
-                    cmbTipoMermaAmohosados.SelectedValue * &H40 + _
-                    cmbTipoMermaPuntaSombreada.SelectedValue * &H80 + _
-                    cmbTipoMermaHectolitrico.SelectedValue * &H100 + _
-                    cmbTipoMermaCarbon.SelectedValue * &H200 + _
-                    cmbTipoMermaPanzaBlanca.SelectedValue * &H400 + _
-                    cmbTipoMermaPicados.SelectedValue * &H800 + _
-                    cmbTipoMermaVerdes.SelectedValue * &H1000 + _
-                    cmbTipoMermaQuemados.SelectedValue * &H2000 + _
-                    cmbTipoMermaTierra.SelectedValue * &H4000 + _
-                    cmbTipoMermaZarandeo.SelectedValue * &H8000 + _
-                    cmbTipoMermaHumedad.SelectedValue * &H10000 + _
-                    cmbTipoMermaFumigacion.SelectedValue * &H20000 + _
-                    cmbTipoMermaDescuentoFinal.SelectedValue * &H40000 + _
+            .Secada = cmbTipoMermaGranosExtranos.SelectedValue * &H1 +
+                    cmbTipoMermaQuebrados.SelectedValue * &H2 +
+                    cmbTipoMermaDaniados.SelectedValue * &H4 +
+                    cmbTipoMermaChamico.SelectedValue * &H8 +
+                    cmbTipoMermaRevolcado.SelectedValue * &H10 +
+                    cmbTipoMermaObjetables.SelectedValue * &H20 +
+                    cmbTipoMermaAmohosados.SelectedValue * &H40 +
+                    cmbTipoMermaPuntaSombreada.SelectedValue * &H80 +
+                    cmbTipoMermaHectolitrico.SelectedValue * &H100 +
+                    cmbTipoMermaCarbon.SelectedValue * &H200 +
+                    cmbTipoMermaPanzaBlanca.SelectedValue * &H400 +
+                    cmbTipoMermaPicados.SelectedValue * &H800 +
+                    cmbTipoMermaVerdes.SelectedValue * &H1000 +
+                    cmbTipoMermaQuemados.SelectedValue * &H2000 +
+                    cmbTipoMermaTierra.SelectedValue * &H4000 +
+                    cmbTipoMermaZarandeo.SelectedValue * &H8000 +
+                    cmbTipoMermaHumedad.SelectedValue * &H10000 +
+                    cmbTipoMermaFumigacion.SelectedValue * &H20000 +
+                    cmbTipoMermaDescuentoFinal.SelectedValue * &H40000 +
                     cmbTipoMermaGrado.SelectedValue * &H80000
 
 
@@ -3615,8 +3610,8 @@ Partial Class CartadeporteABM
     End Sub
 
 
-    <WebMethod()> _
-    <Script.Services.ScriptMethod()> _
+    <WebMethod()>
+    <Script.Services.ScriptMethod()>
     Public Shared Function AcopiosPorCliente(NombreCliente As String, SC As String) As String()
         'Return excepciones(SC)
     End Function
@@ -3794,13 +3789,13 @@ Partial Class CartadeporteABM
                     linkImagen.Text = "ampliar"
                     linkImagen.NavigateUrl = "..\DataBackupear\" & oCarta.PathImagen
                     linkImagen.Visible = False 'True
-                    quitarimagen1.Visible = True
+                    QuitarImagen1.Visible = True
                     imgFotoCarta.Src = linkImagen.NavigateUrl ' oCarta.PathImagen
                     'http://www.aspsnippets.com/Articles/Displaying-images-that-are-stored-outside-the-Website-Root-Folder.aspx
                     'btnDesfacturar.Visible = True
                 Else
                     linkImagen.Visible = False
-                    quitarimagen1.Visible = False
+                    QuitarImagen1.Visible = False
                     ' btnadjuntarimagen.Visible = False
                 End If
                 '//////////////////////////////////////////////////
@@ -3814,12 +3809,12 @@ Partial Class CartadeporteABM
                     linkImagen_2.Text = "ampliar"
                     linkImagen_2.NavigateUrl = "..\DataBackupear\" & oCarta.PathImagen2
                     linkImagen_2.Visible = False 'True
-                    quitarimagen2.Visible = True
+                    QuitarImagen2.Visible = True
                     imgFotoCarta2.Src = linkImagen_2.NavigateUrl ' oCarta.PathImagen
                     'http://www.aspsnippets.com/Articles/Displaying-images-that-are-stored-outside-the-Website-Root-Folder.aspx
                     'btnDesfacturar.Visible = True
                 Else
-                    quitarimagen2.Visible = False
+                    QuitarImagen2.Visible = False
                     linkImagen_2.Visible = False
                     ' btnadjuntarimagen.Visible = False
                 End If
@@ -3833,7 +3828,7 @@ Partial Class CartadeporteABM
     End Sub
 
     Protected Sub quitarimagen1_Click(sender As Object, e As System.EventArgs) Handles quitarimagen1.Click
-        quitarimagen1.Visible = False
+        QuitarImagen1.Visible = False
         imgFotoCarta.Visible = False
         linkImagen.Visible = False
         Session("NombreAdjunto") = ".."
@@ -3841,7 +3836,7 @@ Partial Class CartadeporteABM
     End Sub
 
     Protected Sub quitarimagen2_Click(sender As Object, e As System.EventArgs) Handles quitarimagen2.Click
-        quitarimagen2.Visible = False
+        QuitarImagen2.Visible = False
         imgFotoCarta2.Visible = False
         linkImagen_2.Visible = False
         Session("NombreAdjunto2") = ".."

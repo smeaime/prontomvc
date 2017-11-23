@@ -135,7 +135,7 @@ document.cookie = 'killme' + escape('nothing')
                                     <asp:TextBox ID="Password" runat="server" TextMode="Password" Font-Size="20"
                                         Style="padding: 5px;" Width="285"></asp:TextBox><br />
                                     <br />
-                                    <asp:Button ID="LoginButton" runat="server" CommandName="Login" Text=" Entrar " Height="80"
+                                    <asp:Button ID="LoginButton" runat="server" CommandName="Login" Text=" Entrar " Height="60"
                                         Font-Size="20" Font-Bold="true" Width="300" CssClass="but" ValidationGroup="LoginUserValidationGroup"
                                         Font-Names="'Lucida Grande', Tahoma" Style="margin-left: 0px; background-color: #4F6AA3; color: White; border: 1px solid #2F5BB7;" />
                                     <loginbuttonstyle cssclass="but" />
