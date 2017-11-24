@@ -613,3 +613,13 @@ Log Entry :
 11/24/2017 10:15:51
 Error in: http://localhost:50769/ProntoWeb/CartaDePorteMovil.aspx?Id=2633390. Error Message:PV 2 0
 __________________________
+
+Log Entry : 
+11/24/2017 10:53:47
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteMovil.aspx?Id=2633390. Error Message:La carta numero 556657238 id=2633390 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+11/24/2017 10:53:47
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteMovil.aspx?Id=2633390. Error Message:PV 2 0
+__________________________
