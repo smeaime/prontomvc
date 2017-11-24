@@ -9,7 +9,7 @@
 
 
 
-   
+
 
 
 
@@ -2821,9 +2821,63 @@
                     <div id="ListaPager" class="scroll" style="text-align: center; height: ;">
                     </div>
 
-                    <asp:TextBox ID="TextBox5" runat="server" CssClass="CssTextBox" Width="400px" TextMode="MultiLine" Enabled="true"></asp:TextBox>
+                    <div class="row-fluid">
 
-                    <asp:Button ID="Button6" runat="server" Text="enviar" />
+                        <asp:TextBox ID="TextBox5" runat="server" CssClass=" span8" Width="" TextMode="MultiLine" Enabled="true"></asp:TextBox>
+
+
+                        <input type="button" id="Button6" value="enviar" class="btn btn-primary" />
+
+
+                        <script>
+
+                            $("#Button6").click(function () {
+                                //alert("hola")
+
+                                var d = {
+                                    idCartaPorte: qs["Id"],
+                                    sComentario: $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel5_TextBox5").val()
+                                }
+
+
+                                $.ajax({
+                                    type: "POST",
+                                    //method: "POST",
+                                    url: "WebServiceCartas.asmx/GrabarComentario",
+                                    dataType: "json",
+                                    contentType: "application/json; charset=utf-8",
+
+                                    data: JSON.stringify(d),
+
+                                    success: function (data) {
+                                        //alert(data.d);
+                                        window.open(data.d);
+                                    }
+
+
+                                    ,
+                                    beforeSend: function () {
+                                        //$('.loading').html('some predefined loading img html');
+                                        $("#loading").show();
+                                        $('#grabar2').attr("disabled", true).val("Espere...");
+
+                                    },
+                                    complete: function () {
+                                        $("#loading").hide();
+                                    }
+
+
+                                })
+
+
+                            })
+
+
+                        </script>
+
+                    </div>
+
+
 
                 </ContentTemplate>
             </cc1:TabPanel>

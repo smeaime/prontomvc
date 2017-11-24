@@ -198,7 +198,7 @@ Public Class WebServiceCartas
 
 
     <WebMethod(Description:="", EnableSession:=False)>
-    Public Function GrabarComentario(idCartaPorte As Long, sComentario As String) As String
+    Public Function GrabarComentario(idCartaPorte As Integer, sComentario As String) As String
 
 
         Try
@@ -216,7 +216,7 @@ Public Class WebServiceCartas
 
             Dim idusuario = Membership.GetUser.UserName
             Dim s = New ServicioCartaPorte.servi()
-            Return s.GrabarComentario_DLL(idCartaPorte, sComentario, 22, Encriptar(scs))
+            Return s.GrabarComentario_DLL(idCartaPorte, sComentario, "Mariano", Encriptar(scs))
 
         Catch ex As Exception
 
