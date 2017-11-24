@@ -2823,10 +2823,13 @@
 
                     <div class="row-fluid">
 
-                        <asp:TextBox ID="TextBox5" runat="server" CssClass=" span8" Width="" TextMode="MultiLine" Enabled="true"></asp:TextBox>
+                        <asp:TextBox ID="TextBox5" runat="server" CssClass=" span8" Width="" TextMode="MultiLine" Enabled="true" Text="" />
 
 
                         <input type="button" id="Button6" value="enviar" class="btn btn-primary" />
+
+                        <ajaxToolkit:AsyncFileUpload ID="AsyncFileUpload3" runat="server" OnClientUploadComplete="ClientUploadComplete"
+                            UploaderStyle="Modern" CssClass="" FailedValidation="False"  />
 
 
                         <script>
@@ -2851,7 +2854,10 @@
 
                                     success: function (data) {
                                         //alert(data.d);
-                                        window.open(data.d);
+                                        //window.open(data.d);
+                                        $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel5_TextBox5").val("")
+                                        $("#Lista").trigger("reloadGrid");
+                                        scrollToLastRow($("#Lista"))
                                     }
 
 
@@ -2871,6 +2877,40 @@
 
 
                             })
+
+
+
+
+
+                            function getGridRowHeight(targetGrid) {
+                                var height = null; // Default
+
+                                try {
+                                    height = jQuery(targetGrid).find('tbody').find('tr:first').outerHeight();
+                                }
+                                catch (e) {
+                                    //catch and just suppress error
+                                }
+
+                                return height;
+                            }
+
+                            function scrollToRow(targetGrid, id) {
+                                var rowHeight = getGridRowHeight(targetGrid) || 23; // Default height
+                                var index = jQuery(targetGrid).getInd(id);
+                                jQuery(targetGrid).closest(".ui-jqgrid-bdiv").scrollTop(rowHeight * index);
+                            }
+
+
+                            function scrollToLastRow(targetGrid) {
+                                jQuery("#Lista").closest(".ui-jqgrid-bdiv").scrollTop(10000) //como no anda bien scrollToLastRow, lo hago cabeza
+                                return;
+                                var rows = $(targetGrid)[0].rows;
+                                var lastRowDOM = rows[rows.length - 1];
+
+                                scrollToRow(targetGrid, $(lastRowDOM).attr('id'));
+                            }
+
 
 
                         </script>
@@ -4652,9 +4692,9 @@
 
                 { name: 'IdReclamoComentario', index: 'IdReclamoComentario', align: 'left', width: 100, editable: false, hidden: true },
                 { name: 'IdReclamo', index: 'IdReclamo', align: 'left', width: 100, editable: false, hidden: true },
-                { name: 'Empleado', index: 'Empleado', align: 'left', width: 100, hidden: false },
-                { name: 'Comentario', index: 'Comentario', align: 'left', width: 250, hidden: false },
-                { name: 'Comentario', index: 'Comentario', align: 'left', width: 250, hidden: false },
+                { name: 'Empleado', index: 'Empleado', align: 'left', width: 50, hidden: false },
+                { name: 'Comentario', index: 'Comentario', align: 'left', width: 200, hidden: false },
+                { name: 'Comentario', index: 'Comentario', align: 'left', width: 200, hidden: false },
 
                 { name: 'Fecha', index: 'Fecha', align: 'left', width: 100, editable: true, hidden: false, sortable: false },
 
@@ -4684,6 +4724,7 @@
                 //AgregarItemVacio(grid)
 
 
+                scrollToLastRow($("#Lista"))
             },
 
 
@@ -4698,6 +4739,8 @@
                         height: 60  //20 + (i * 2)
                     });
                 }
+
+                scrollToLastRow($("#Lista"))
 
                 // grid.setGridHeight('auto');
             },
@@ -4843,8 +4886,8 @@
 
             rowNum: 100,
             //rowList: [10, 20, 50, 100, 500, 1000],
-            sortname: 'IdReclamo',  //'FechaDescarga', //'NumeroCartaDePorte',
-            sortorder: 'desc',
+            sortname: 'Fecha',  //'FechaDescarga', //'NumeroCartaDePorte',
+            sortorder: 'asc',
             viewrecords: true,
 
             shrinkToFit: false,
