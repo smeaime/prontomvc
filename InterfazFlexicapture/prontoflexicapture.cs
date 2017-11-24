@@ -6681,6 +6681,7 @@ Formato localidad-provincia	destination	x
                 com.IdReclamo = rec.IdReclamo;
                 com.IdEmpleado = 1;
                 com.Comentario = comentario;
+                com.Fecha = DateTime.Now;
                 db.ReclamoComentarios.Add(com);
 
 
