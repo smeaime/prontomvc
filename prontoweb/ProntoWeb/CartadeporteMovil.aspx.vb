@@ -691,6 +691,9 @@ Partial Class CartadeporteABMMovil
 
 
 
+        TextBox5.Enabled = True
+
+
         'http://bdlconsultores.dyndns.org/Consultas/Admin/verConsultas1.php?recordid=9513
         'Sacarle a todos los usuarios excepto los de facturacion y a Hugo el link desde 
         'la carta de porte a la factura, el historial y el boton desfacturar.

@@ -1,0 +1,605 @@
+
+Log Entry : 
+11/24/2017 08:46:37
+Error in: http://localhost:50769/ProntoWeb/Principal.aspx. Error Message:Mariano esta logueado, pero lo redirijo al login porque faltan los datos de session. No deberia mejor mandarlo a SeleccionarEmpresa? Ademas, no hago el LogOut y le queda el cookie!!!
+__________________________
+
+Log Entry : 
+11/24/2017 08:46:41
+Error in: http://localhost:50769/ProntoWeb/CartasDePortes.aspx?tipo=Todas. Error Message:Mariano
+__________________________
+
+Log Entry : 
+11/24/2017 08:47:55
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteMovil.aspx?Id=-1. Error Message:PV 0 0
+__________________________
+
+Log Entry : 
+11/24/2017 08:48:18
+Error in: http://localhost:50769/ProntoWeb/CartaDePorte.aspx?Id=2633399. Error Message:La carta numero 556704455 id=2633399 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+11/24/2017 08:48:18
+Error in: http://localhost:50769/ProntoWeb/CartaDePorte.aspx?Id=2633399. Error Message:PV 2 0
+__________________________
+
+Log Entry : 
+11/24/2017 08:51:18
+Error in: http://localhost:50769/ProntoWeb/WebServiceClientes.asmx/AcopiosPorCliente. Error Message:System.Data.SqlClient.SqlException (0x80131904): Error relacionado con la red o específico de la instancia mientras se establecía una conexión con el servidor SQL Server. No se encontró el servidor o éste no estaba accesible. Compruebe que el nombre de la instancia es correcto y que SQL Server está configurado para admitir conexiones remotas. (provider: Named Pipes Provider, error: 40 - No se pudo abrir una conexión con SQL Server) ---> System.ComponentModel.Win32Exception (0x80004005): No se ha encontrado la ruta de acceso de la red
+   en System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.Open()
+   en System.Data.Linq.SqlClient.SqlConnectionManager.UseConnection(IConnectionUser user)
+   en System.Data.Linq.SqlClient.SqlProvider.get_IsSqlCe()
+   en System.Data.Linq.SqlClient.SqlProvider.InitializeProviderMode()
+   en System.Data.Linq.SqlClient.SqlProvider.System.Data.Linq.Provider.IProvider.Execute(Expression query)
+   en System.Data.Linq.DataQuery`1.System.Collections.Generic.IEnumerable<T>.GetEnumerator()
+   en System.Collections.Generic.List`1..ctor(IEnumerable`1 collection)
+   en System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
+   en CartaDePorteManager.excepcionesAcopios(String SC, Int32 idcliente) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 391
+   en WebServiceClientes.AcopiosPorCliente(String NombreCliente, String SC)
+ClientConnectionId:00000000-0000-0000-0000-000000000000
+Error Number:53,State:0,Class:20
+__________________________
+
+Log Entry : 
+11/24/2017 08:51:18
+Error in: http://localhost:50769/ProntoWeb/WebServiceClientes.asmx/AcopiosPorCliente. Error Message:System.Data.SqlClient.SqlException (0x80131904): Error relacionado con la red o específico de la instancia mientras se establecía una conexión con el servidor SQL Server. No se encontró el servidor o éste no estaba accesible. Compruebe que el nombre de la instancia es correcto y que SQL Server está configurado para admitir conexiones remotas. (provider: Named Pipes Provider, error: 40 - No se pudo abrir una conexión con SQL Server) ---> System.ComponentModel.Win32Exception (0x80004005): No se ha encontrado la ruta de acceso de la red
+   en System.Data.SqlClient.SqlInternalConnectionTds..ctor(DbConnectionPoolIdentity identity, SqlConnectionString connectionOptions, SqlCredential credential, Object providerInfo, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance, SqlConnectionString userConnectionOptions, SessionData reconnectSessionData, DbConnectionPool pool, String accessToken, Boolean applyTransientFaultHandling)
+   en System.Data.SqlClient.SqlConnectionFactory.CreateConnection(DbConnectionOptions options, DbConnectionPoolKey poolKey, Object poolGroupProviderInfo, DbConnectionPool pool, DbConnection owningConnection, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionFactory.CreatePooledConnection(DbConnectionPool pool, DbConnection owningObject, DbConnectionOptions options, DbConnectionPoolKey poolKey, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionPool.CreateObject(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   en System.Data.ProviderBase.DbConnectionPool.UserCreateRequest(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   en System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.Open()
+   en System.Data.Linq.SqlClient.SqlConnectionManager.UseConnection(IConnectionUser user)
+   en System.Data.Linq.SqlClient.SqlProvider.get_IsSqlCe()
+   en System.Data.Linq.SqlClient.SqlProvider.InitializeProviderMode()
+   en System.Data.Linq.SqlClient.SqlProvider.System.Data.Linq.Provider.IProvider.Execute(Expression query)
+   en System.Data.Linq.DataQuery`1.System.Collections.Generic.IEnumerable<T>.GetEnumerator()
+   en System.Collections.Generic.List`1..ctor(IEnumerable`1 collection)
+   en System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
+   en CartaDePorteManager.excepcionesAcopios(String SC, Int32 idcliente) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 391
+   en WebServiceClientes.AcopiosPorCliente(String NombreCliente, String SC)
+ClientConnectionId:00000000-0000-0000-0000-000000000000
+Error Number:53,State:0,Class:20
+__________________________
+
+Log Entry : 
+11/24/2017 08:51:18
+Error in: http://localhost:50769/ProntoWeb/WebServiceClientes.asmx/AcopiosPorCliente. Error Message:System.Data.SqlClient.SqlException (0x80131904): Error relacionado con la red o específico de la instancia mientras se establecía una conexión con el servidor SQL Server. No se encontró el servidor o éste no estaba accesible. Compruebe que el nombre de la instancia es correcto y que SQL Server está configurado para admitir conexiones remotas. (provider: Named Pipes Provider, error: 40 - No se pudo abrir una conexión con SQL Server) ---> System.ComponentModel.Win32Exception (0x80004005): No se ha encontrado la ruta de acceso de la red
+   en System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.Open()
+   en System.Data.Linq.SqlClient.SqlConnectionManager.UseConnection(IConnectionUser user)
+   en System.Data.Linq.SqlClient.SqlProvider.get_IsSqlCe()
+   en System.Data.Linq.SqlClient.SqlProvider.InitializeProviderMode()
+   en System.Data.Linq.SqlClient.SqlProvider.System.Data.Linq.Provider.IProvider.Execute(Expression query)
+   en System.Data.Linq.DataQuery`1.System.Collections.Generic.IEnumerable<T>.GetEnumerator()
+   en System.Collections.Generic.List`1..ctor(IEnumerable`1 collection)
+   en System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
+   en CartaDePorteManager.excepcionesAcopios(String SC, Int32 idcliente) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 391
+   en WebServiceClientes.AcopiosPorCliente(String NombreCliente, String SC)
+ClientConnectionId:00000000-0000-0000-0000-000000000000
+Error Number:53,State:0,Class:20
+__________________________
+
+Log Entry : 
+11/24/2017 08:51:18
+Error in: http://localhost:50769/ProntoWeb/WebServiceClientes.asmx/AcopiosPorCliente. Error Message:System.Data.SqlClient.SqlException (0x80131904): Error relacionado con la red o específico de la instancia mientras se establecía una conexión con el servidor SQL Server. No se encontró el servidor o éste no estaba accesible. Compruebe que el nombre de la instancia es correcto y que SQL Server está configurado para admitir conexiones remotas. (provider: Named Pipes Provider, error: 40 - No se pudo abrir una conexión con SQL Server) ---> System.ComponentModel.Win32Exception (0x80004005): No se ha encontrado la ruta de acceso de la red
+   en System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.Open()
+   en System.Data.Linq.SqlClient.SqlConnectionManager.UseConnection(IConnectionUser user)
+   en System.Data.Linq.SqlClient.SqlProvider.get_IsSqlCe()
+   en System.Data.Linq.SqlClient.SqlProvider.InitializeProviderMode()
+   en System.Data.Linq.SqlClient.SqlProvider.System.Data.Linq.Provider.IProvider.Execute(Expression query)
+   en System.Data.Linq.DataQuery`1.System.Collections.Generic.IEnumerable<T>.GetEnumerator()
+   en System.Collections.Generic.List`1..ctor(IEnumerable`1 collection)
+   en System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
+   en CartaDePorteManager.excepcionesAcopios(String SC, Int32 idcliente) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 391
+   en WebServiceClientes.AcopiosPorCliente(String NombreCliente, String SC)
+ClientConnectionId:00000000-0000-0000-0000-000000000000
+Error Number:53,State:0,Class:20
+__________________________
+
+Log Entry : 
+11/24/2017 08:51:18
+Error in: http://localhost:50769/ProntoWeb/WebServiceClientes.asmx/AcopiosPorCliente. Error Message: -  Error en ExecDinamico. - System.Data.SqlClient.SqlException (0x80131904): Error relacionado con la red o específico de la instancia mientras se establecía una conexión con el servidor SQL Server. No se encontró el servidor o éste no estaba accesible. Compruebe que el nombre de la instancia es correcto y que SQL Server está configurado para admitir conexiones remotas. (provider: Named Pipes Provider, error: 40 - No se pudo abrir una conexión con SQL Server) ---> System.ComponentModel.Win32Exception (0x80004005): No se ha encontrado la ruta de acceso de la red
+   en System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.Open()
+   en Pronto.ERP.Dal.GeneralDB.ExecDinamico(String SC, String comandoSQLdinamico, Int32 timeoutSegundos)
+ClientConnectionId:00000000-0000-0000-0000-000000000000
+Error Number:53,State:0,Class:20 - SELECT TOP 1 Clientes.* FROM Clientes  WHERE  (RazonSocial = 'LUENGO JUAN MANUEL')  OR (CUIT + ' ' + RazonSocial COLLATE Modern_Spanish_ci_as = 'LUENGO JUAN MANUEL')  OR (RazonSocial + ' ' + CUIT COLLATE Modern_Spanish_ci_as = 'LUENGO JUAN MANUEL')  OR (CUIT = 'LUENGO JUAN MANUEL')   200 0
+__________________________
+
+Log Entry : 
+11/24/2017 08:51:19
+Error in: http://localhost:50769/ProntoWeb/WebServiceClientes.asmx/AcopiosPorCliente. Error Message:Error relacionado con la red o específico de la instancia mientras se establecía una conexión con el servidor SQL Server. No se encontró el servidor o éste no estaba accesible. Compruebe que el nombre de la instancia es correcto y que SQL Server está configurado para admitir conexiones remotas. (provider: Named Pipes Provider, error: 40 - No se pudo abrir una conexión con SQL Server)
+__________________________
+
+Log Entry : 
+11/24/2017 08:51:19
+Error in: http://localhost:50769/ProntoWeb/WebServiceClientes.asmx/AcopiosPorCliente. Error Message: -  Error en ExecDinamico. - System.Data.SqlClient.SqlException (0x80131904): Error relacionado con la red o específico de la instancia mientras se establecía una conexión con el servidor SQL Server. No se encontró el servidor o éste no estaba accesible. Compruebe que el nombre de la instancia es correcto y que SQL Server está configurado para admitir conexiones remotas. (provider: Named Pipes Provider, error: 40 - No se pudo abrir una conexión con SQL Server) ---> System.ComponentModel.Win32Exception (0x80004005): No se ha encontrado la ruta de acceso de la red
+   en System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.Open()
+   en Pronto.ERP.Dal.GeneralDB.ExecDinamico(String SC, String comandoSQLdinamico, Int32 timeoutSegundos)
+ClientConnectionId:00000000-0000-0000-0000-000000000000
+Error Number:53,State:0,Class:20 - SELECT TOP 1 Clientes.* FROM Clientes  WHERE  (RazonSocial = 'COOP. AGR. LTDA LA UNION DE ALFONSO')  OR (CUIT + ' ' + RazonSocial COLLATE Modern_Spanish_ci_as = 'COOP. AGR. LTDA LA UNION DE ALFONSO')  OR (RazonSocial + ' ' + CUIT COLLATE Modern_Spanish_ci_as = 'COOP. AGR. LTDA LA UNION DE ALFONSO')  OR (CUIT = 'COOP. AGR. LTDA LA UNION DE ALFONSO')   200 0
+__________________________
+
+Log Entry : 
+11/24/2017 08:51:19
+Error in: http://localhost:50769/ProntoWeb/WebServiceClientes.asmx/AcopiosPorCliente. Error Message:Error relacionado con la red o específico de la instancia mientras se establecía una conexión con el servidor SQL Server. No se encontró el servidor o éste no estaba accesible. Compruebe que el nombre de la instancia es correcto y que SQL Server está configurado para admitir conexiones remotas. (provider: Named Pipes Provider, error: 40 - No se pudo abrir una conexión con SQL Server)
+__________________________
+
+Log Entry : 
+11/24/2017 08:51:19
+Error in: http://localhost:50769/ProntoWeb/WebServiceClientes.asmx/AcopiosPorCliente. Error Message:Error relacionado con la red o específico de la instancia mientras se establecía una conexión con el servidor SQL Server. No se encontró el servidor o éste no estaba accesible. Compruebe que el nombre de la instancia es correcto y que SQL Server está configurado para admitir conexiones remotas. (provider: Named Pipes Provider, error: 40 - No se pudo abrir una conexión con SQL Server)
+__________________________
+
+Log Entry : 
+11/24/2017 08:51:19
+Error in: http://localhost:50769/ProntoWeb/WebServiceClientes.asmx/AcopiosPorCliente. Error Message:System.Data.SqlClient.SqlException (0x80131904): Error relacionado con la red o específico de la instancia mientras se establecía una conexión con el servidor SQL Server. No se encontró el servidor o éste no estaba accesible. Compruebe que el nombre de la instancia es correcto y que SQL Server está configurado para admitir conexiones remotas. (provider: Named Pipes Provider, error: 40 - No se pudo abrir una conexión con SQL Server) ---> System.ComponentModel.Win32Exception (0x80004005): No se ha encontrado la ruta de acceso de la red
+   en System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.Open()
+   en Pronto.ERP.Dal.GeneralDB.ExecDinamico(String SC, String comandoSQLdinamico, Int32 timeoutSegundos)
+   en Pronto.ERP.Bll.EntidadManager.ExecDinamico(String SC, String sComandoDinamico, Int32 timeoutSegundos) en C:\bdl\pronto\BussinessLogic\EntidadManager.vb:línea 884
+   en SQLdinamico.BuscaIdClientePrecisoConCUIT(String ClienteRazonSocial, String SC) en C:\bdl\pronto\BussinessLogic\SQLdinamico.vb:línea 273
+   en WebServiceClientes.AcopiosPorCliente(String NombreCliente, String SC)
+ClientConnectionId:00000000-0000-0000-0000-000000000000
+Error Number:53,State:0,Class:20
+__________________________
+
+Log Entry : 
+11/24/2017 08:51:19
+Error in: http://localhost:50769/ProntoWeb/WebServiceClientes.asmx/AcopiosPorCliente. Error Message:System.Data.SqlClient.SqlException (0x80131904): Error relacionado con la red o específico de la instancia mientras se establecía una conexión con el servidor SQL Server. No se encontró el servidor o éste no estaba accesible. Compruebe que el nombre de la instancia es correcto y que SQL Server está configurado para admitir conexiones remotas. (provider: Named Pipes Provider, error: 40 - No se pudo abrir una conexión con SQL Server) ---> System.ComponentModel.Win32Exception (0x80004005): No se ha encontrado la ruta de acceso de la red
+   en System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.Open()
+   en Pronto.ERP.Dal.GeneralDB.ExecDinamico(String SC, String comandoSQLdinamico, Int32 timeoutSegundos)
+   en Pronto.ERP.Bll.EntidadManager.ExecDinamico(String SC, String sComandoDinamico, Int32 timeoutSegundos) en C:\bdl\pronto\BussinessLogic\EntidadManager.vb:línea 884
+   en SQLdinamico.BuscaIdClientePrecisoConCUIT(String ClienteRazonSocial, String SC) en C:\bdl\pronto\BussinessLogic\SQLdinamico.vb:línea 273
+   en WebServiceClientes.AcopiosPorCliente(String NombreCliente, String SC)
+ClientConnectionId:00000000-0000-0000-0000-000000000000
+Error Number:53,State:0,Class:20
+__________________________
+
+Log Entry : 
+11/24/2017 08:51:19
+Error in: http://localhost:50769/ProntoWeb/WebServiceClientes.asmx/AcopiosPorCliente. Error Message:System.Data.SqlClient.SqlException (0x80131904): Error relacionado con la red o específico de la instancia mientras se establecía una conexión con el servidor SQL Server. No se encontró el servidor o éste no estaba accesible. Compruebe que el nombre de la instancia es correcto y que SQL Server está configurado para admitir conexiones remotas. (provider: Named Pipes Provider, error: 40 - No se pudo abrir una conexión con SQL Server) ---> System.ComponentModel.Win32Exception (0x80004005): No se ha encontrado la ruta de acceso de la red
+   en System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.Open()
+   en Pronto.ERP.Dal.GeneralDB.ExecDinamico(String SC, String comandoSQLdinamico, Int32 timeoutSegundos)
+   en Pronto.ERP.Bll.EntidadManager.ExecDinamico(String SC, String sComandoDinamico, Int32 timeoutSegundos) en C:\bdl\pronto\BussinessLogic\EntidadManager.vb:línea 884
+   en SQLdinamico.BuscaIdClientePrecisoConCUIT(String ClienteRazonSocial, String SC) en C:\bdl\pronto\BussinessLogic\SQLdinamico.vb:línea 273
+   en WebServiceClientes.AcopiosPorCliente(String NombreCliente, String SC)
+ClientConnectionId:00000000-0000-0000-0000-000000000000
+Error Number:53,State:0,Class:20
+__________________________
+
+Log Entry : 
+11/24/2017 08:54:38
+Error in: http://localhost:50769/ProntoWeb/WebServiceClientes.asmx/AcopiosPorCliente. Error Message:System.Data.SqlClient.SqlException (0x80131904): Error relacionado con la red o específico de la instancia mientras se establecía una conexión con el servidor SQL Server. No se encontró el servidor o éste no estaba accesible. Compruebe que el nombre de la instancia es correcto y que SQL Server está configurado para admitir conexiones remotas. (provider: Named Pipes Provider, error: 40 - No se pudo abrir una conexión con SQL Server) ---> System.ComponentModel.Win32Exception (0x80004005): No se ha encontrado la ruta de acceso de la red
+   en System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.Open()
+   en System.Data.Linq.SqlClient.SqlConnectionManager.UseConnection(IConnectionUser user)
+   en System.Data.Linq.SqlClient.SqlProvider.get_IsSqlCe()
+   en System.Data.Linq.SqlClient.SqlProvider.InitializeProviderMode()
+   en System.Data.Linq.SqlClient.SqlProvider.System.Data.Linq.Provider.IProvider.Execute(Expression query)
+   en System.Data.Linq.DataQuery`1.System.Collections.Generic.IEnumerable<T>.GetEnumerator()
+   en System.Collections.Generic.List`1..ctor(IEnumerable`1 collection)
+   en System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
+   en CartaDePorteManager.excepcionesAcopios(String SC, Int32 idcliente) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 391
+   en WebServiceClientes.AcopiosPorCliente(String NombreCliente, String SC)
+ClientConnectionId:00000000-0000-0000-0000-000000000000
+Error Number:53,State:0,Class:20
+__________________________
+
+Log Entry : 
+11/24/2017 08:54:38
+Error in: http://localhost:50769/ProntoWeb/WebServiceClientes.asmx/AcopiosPorCliente. Error Message:System.Data.SqlClient.SqlException (0x80131904): Error relacionado con la red o específico de la instancia mientras se establecía una conexión con el servidor SQL Server. No se encontró el servidor o éste no estaba accesible. Compruebe que el nombre de la instancia es correcto y que SQL Server está configurado para admitir conexiones remotas. (provider: Named Pipes Provider, error: 40 - No se pudo abrir una conexión con SQL Server) ---> System.ComponentModel.Win32Exception (0x80004005): No se ha encontrado la ruta de acceso de la red
+   en System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.Open()
+   en System.Data.Linq.SqlClient.SqlConnectionManager.UseConnection(IConnectionUser user)
+   en System.Data.Linq.SqlClient.SqlProvider.get_IsSqlCe()
+   en System.Data.Linq.SqlClient.SqlProvider.InitializeProviderMode()
+   en System.Data.Linq.SqlClient.SqlProvider.System.Data.Linq.Provider.IProvider.Execute(Expression query)
+   en System.Data.Linq.DataQuery`1.System.Collections.Generic.IEnumerable<T>.GetEnumerator()
+   en System.Collections.Generic.List`1..ctor(IEnumerable`1 collection)
+   en System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
+   en CartaDePorteManager.excepcionesAcopios(String SC, Int32 idcliente) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 391
+   en WebServiceClientes.AcopiosPorCliente(String NombreCliente, String SC)
+ClientConnectionId:00000000-0000-0000-0000-000000000000
+Error Number:53,State:0,Class:20
+__________________________
+
+Log Entry : 
+11/24/2017 08:54:38
+Error in: http://localhost:50769/ProntoWeb/WebServiceClientes.asmx/AcopiosPorCliente. Error Message:System.Data.SqlClient.SqlException (0x80131904): Error relacionado con la red o específico de la instancia mientras se establecía una conexión con el servidor SQL Server. No se encontró el servidor o éste no estaba accesible. Compruebe que el nombre de la instancia es correcto y que SQL Server está configurado para admitir conexiones remotas. (provider: Named Pipes Provider, error: 40 - No se pudo abrir una conexión con SQL Server) ---> System.ComponentModel.Win32Exception (0x80004005): No se ha encontrado la ruta de acceso de la red
+   en System.Data.SqlClient.SqlInternalConnectionTds..ctor(DbConnectionPoolIdentity identity, SqlConnectionString connectionOptions, SqlCredential credential, Object providerInfo, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance, SqlConnectionString userConnectionOptions, SessionData reconnectSessionData, DbConnectionPool pool, String accessToken, Boolean applyTransientFaultHandling)
+   en System.Data.SqlClient.SqlConnectionFactory.CreateConnection(DbConnectionOptions options, DbConnectionPoolKey poolKey, Object poolGroupProviderInfo, DbConnectionPool pool, DbConnection owningConnection, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionFactory.CreatePooledConnection(DbConnectionPool pool, DbConnection owningObject, DbConnectionOptions options, DbConnectionPoolKey poolKey, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionPool.CreateObject(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   en System.Data.ProviderBase.DbConnectionPool.UserCreateRequest(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   en System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.Open()
+   en System.Data.Linq.SqlClient.SqlConnectionManager.UseConnection(IConnectionUser user)
+   en System.Data.Linq.SqlClient.SqlProvider.get_IsSqlCe()
+   en System.Data.Linq.SqlClient.SqlProvider.InitializeProviderMode()
+   en System.Data.Linq.SqlClient.SqlProvider.System.Data.Linq.Provider.IProvider.Execute(Expression query)
+   en System.Data.Linq.DataQuery`1.System.Collections.Generic.IEnumerable<T>.GetEnumerator()
+   en System.Collections.Generic.List`1..ctor(IEnumerable`1 collection)
+   en System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
+   en CartaDePorteManager.excepcionesAcopios(String SC, Int32 idcliente) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 391
+   en WebServiceClientes.AcopiosPorCliente(String NombreCliente, String SC)
+ClientConnectionId:00000000-0000-0000-0000-000000000000
+Error Number:53,State:0,Class:20
+__________________________
+
+Log Entry : 
+11/24/2017 09:00:18
+Error in: http://localhost:50769/ProntoWeb/Principal.aspx. Error Message:Mariano esta logueado, pero lo redirijo al login porque faltan los datos de session. No deberia mejor mandarlo a SeleccionarEmpresa? Ademas, no hago el LogOut y le queda el cookie!!!
+__________________________
+
+Log Entry : 
+11/24/2017 09:00:19
+Error in: http://localhost:50769/ProntoWeb/CartasDePortes.aspx?tipo=Todas. Error Message:Mariano
+__________________________
+
+Log Entry : 
+11/24/2017 09:00:23
+Error in: http://localhost:50769/ProntoWeb/WebServiceClientes.asmx. Error Message:System.InvalidOperationException
+No se puede administrar la solicitud.
+   en System.Web.Services.Protocols.ServerProtocolFactory.Create(Type type, HttpContext context, HttpRequest request, HttpResponse response, Boolean& abortProcessing)
+   en System.Web.Services.Protocols.WebServiceHandlerFactory.CoreGetHandler(Type type, HttpContext context, HttpRequest request, HttpResponse response)
+System.Web.Services
+__________________________
+
+Log Entry : 
+11/24/2017 09:01:04
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteMovil.aspx?Id=-1. Error Message:PV 0 0
+__________________________
+
+Log Entry : 
+11/24/2017 09:01:17
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteMovil.aspx?Id=-1. Error Message:PV 0 0
+__________________________
+
+Log Entry : 
+11/24/2017 09:01:20
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteMovil.aspx?Id=-1. Error Message:PV 0 0
+__________________________
+
+Log Entry : 
+11/24/2017 09:01:34
+Error in: http://localhost:50769/ProntoWeb/WebServiceClientes.asmx. Error Message:System.InvalidOperationException
+No se puede administrar la solicitud.
+   en System.Web.Services.Protocols.ServerProtocolFactory.Create(Type type, HttpContext context, HttpRequest request, HttpResponse response, Boolean& abortProcessing)
+   en System.Web.Services.Protocols.WebServiceHandlerFactory.CoreGetHandler(Type type, HttpContext context, HttpRequest request, HttpResponse response)
+System.Web.Services
+__________________________
+
+Log Entry : 
+11/24/2017 09:02:38
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteMovil.aspx?Id=-1. Error Message:PV 0 0
+__________________________
+
+Log Entry : 
+11/24/2017 09:04:33
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteMovil.aspx?Id=-1. Error Message:Mariano esta logueado, pero lo redirijo al login porque faltan los datos de session. No deberia mejor mandarlo a SeleccionarEmpresa? Ademas, no hago el LogOut y le queda el cookie!!!
+__________________________
+
+Log Entry : 
+11/24/2017 09:18:36
+Error in: http://localhost:50769/ProntoWeb/CartaDePorte.aspx?Id=. Error Message:Mariano esta logueado, pero lo redirijo al login porque faltan los datos de session. No deberia mejor mandarlo a SeleccionarEmpresa? Ademas, no hago el LogOut y le queda el cookie!!!
+__________________________
+
+Log Entry : 
+11/24/2017 09:18:38
+Error in: http://localhost:50769/ProntoWeb/CartasDePortes.aspx. Error Message:Mariano
+__________________________
+
+Log Entry : 
+11/24/2017 09:19:40
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteMovil.aspx?Id=-1. Error Message:PV 0 0
+__________________________
+
+Log Entry : 
+11/24/2017 09:24:02
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteMovil.aspx?Id=-1. Error Message:PV 0 0
+__________________________
+
+Log Entry : 
+11/24/2017 09:38:55
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteMovil.aspx?Id=-1. Error Message:PV 0 0
+__________________________
+
+Log Entry : 
+11/24/2017 09:39:35
+Error in: http://localhost:50769/ProntoWeb/CartaDePorte.aspx?Id=2633399. Error Message:La carta numero 556704455 id=2633399 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+11/24/2017 09:39:35
+Error in: http://localhost:50769/ProntoWeb/CartaDePorte.aspx?Id=2633399. Error Message:PV 2 0
+__________________________
+
+Log Entry : 
+11/24/2017 09:54:08
+Error in: http://localhost:50769/ProntoWeb/CartaDePorte.aspx?Id=. Error Message:Mariano esta logueado, pero lo redirijo al login porque faltan los datos de session. No deberia mejor mandarlo a SeleccionarEmpresa? Ademas, no hago el LogOut y le queda el cookie!!!
+__________________________
+
+Log Entry : 
+11/24/2017 09:54:11
+Error in: http://localhost:50769/ProntoWeb/CartasDePortes.aspx. Error Message:Mariano
+__________________________
+
+Log Entry : 
+11/24/2017 09:54:15
+Error in: http://localhost:50769/ProntoWeb/CartaDePorte.aspx?Id=2633399. Error Message:La carta numero 556704455 id=2633399 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+11/24/2017 09:54:15
+Error in: http://localhost:50769/ProntoWeb/CartaDePorte.aspx?Id=2633399. Error Message:PV 2 0
+__________________________
+
+Log Entry : 
+11/24/2017 09:54:26
+Error in: http://localhost:50769/ProntoWeb/CartaDePorte.aspx?Id=2633399. Error Message:La carta numero 556704455 id=2633399 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+11/24/2017 09:54:26
+Error in: http://localhost:50769/ProntoWeb/CartaDePorte.aspx?Id=2633399. Error Message:PV 2 0
+__________________________
+
+Log Entry : 
+11/24/2017 09:54:44
+Error in: http://localhost:50769/ProntoWeb/CartaDePorte.aspx?Id=2633399. Error Message:La carta numero 556704455 id=2633399 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+11/24/2017 09:54:44
+Error in: http://localhost:50769/ProntoWeb/CartaDePorte.aspx?Id=2633399. Error Message:PV 2 0
+__________________________
+
+Log Entry : 
+11/24/2017 09:54:58
+Error in: http://localhost:50769/ProntoWeb/CartaDePorte.aspx?Id=2633399. Error Message:La carta numero 556704455 id=2633399 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+11/24/2017 09:54:58
+Error in: http://localhost:50769/ProntoWeb/CartaDePorte.aspx?Id=2633399. Error Message:PV 2 0
+__________________________
+
+Log Entry : 
+11/24/2017 09:55:13
+Error in: http://localhost:50769/ProntoWeb/CartaDePorte.aspx?Id=2633399. Error Message:La carta numero 556704455 id=2633399 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+11/24/2017 09:55:13
+Error in: http://localhost:50769/ProntoWeb/CartaDePorte.aspx?Id=2633399. Error Message:PV 2 0
+__________________________
+
+Log Entry : 
+11/24/2017 09:55:56
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteMovil.aspx?Id=-1. Error Message:PV 0 0
+__________________________
+
+Log Entry : 
+11/24/2017 09:56:23
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteMovil.aspx?Id=-1. Error Message:PV 0 0
+__________________________
+
+Log Entry : 
+11/24/2017 09:56:37
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteMovil.aspx?Id=-1. Error Message:System.Web.HttpParseException
+No se puede crear un objeto de tipo 'AjaxControlToolkit.AsyncFileUpload+UploaderStyleEnum' a partir de su representación de cadena '' para la propiedad 'UploaderStyle'.
+   en System.Web.UI.TemplateParser.ProcessException(Exception ex)
+   en System.Web.UI.TemplateParser.ParseStringInternal(String text, Encoding fileEncoding)
+   en System.Web.UI.TemplateParser.ParseString(String text, VirtualPath virtualPath, Encoding fileEncoding)
+System.Web
+__________________________
+
+Log Entry : 
+11/24/2017 09:56:57
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteMovil.aspx?Id=-1. Error Message:PV 0 0
+__________________________
+
+Log Entry : 
+11/24/2017 09:57:47
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteMovil.aspx?Id=-1. Error Message:PV 0 0
+__________________________
+
+Log Entry : 
+11/24/2017 09:58:03
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteMovil.aspx?Id=2633399. Error Message:La carta numero 556704455 id=2633399 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+11/24/2017 09:58:03
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteMovil.aspx?Id=2633399. Error Message:PV 2 0
+__________________________
+
+Log Entry : 
+11/24/2017 10:05:20
+Error in: http://localhost:50769/ProntoWeb/CartaDePorte.aspx?Id=2633399. Error Message:La carta numero 556704455 id=2633399 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+11/24/2017 10:05:20
+Error in: http://localhost:50769/ProntoWeb/CartaDePorte.aspx?Id=2633399. Error Message:PV 2 0
+__________________________
+
+Log Entry : 
+11/24/2017 10:05:51
+Error in: http://localhost:50769/ProntoWeb/CartaDePorte.aspx?Id=2633399. Error Message:La carta numero 556704455 id=2633399 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+11/24/2017 10:05:51
+Error in: http://localhost:50769/ProntoWeb/CartaDePorte.aspx?Id=2633399. Error Message:PV 2 0
+__________________________
+
+Log Entry : 
+11/24/2017 10:05:56
+Error in: http://localhost:50769/ProntoWeb/CartaDePorte.aspx?Id=2633399. Error Message:La carta numero 556704455 id=2633399 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+11/24/2017 10:05:56
+Error in: http://localhost:50769/ProntoWeb/CartaDePorte.aspx?Id=2633399. Error Message:PV 2 0
+__________________________
+
+Log Entry : 
+11/24/2017 10:06:59
+Error in: http://localhost:50769/ProntoWeb/CartaDePorte.aspx?Id=2633399. Error Message:La carta numero 556704455 id=2633399 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+11/24/2017 10:06:59
+Error in: http://localhost:50769/ProntoWeb/CartaDePorte.aspx?Id=2633399. Error Message:PV 2 0
+__________________________
+
+Log Entry : 
+11/24/2017 10:07:44
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteMovil.aspx?Id=2633399. Error Message:La carta numero 556704455 id=2633399 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+11/24/2017 10:07:44
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteMovil.aspx?Id=2633399. Error Message:PV 2 0
+__________________________
+
+Log Entry : 
+11/24/2017 10:08:00
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteMovil.aspx?Id=2633399. Error Message:La carta numero 556704455 id=2633399 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+11/24/2017 10:08:00
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteMovil.aspx?Id=2633399. Error Message:PV 2 0
+__________________________
+
+Log Entry : 
+11/24/2017 10:08:42
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteMovil.aspx?Id=2633399. Error Message:La carta numero 556704455 id=2633399 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+11/24/2017 10:08:42
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteMovil.aspx?Id=2633399. Error Message:PV 2 0
+__________________________
+
+Log Entry : 
+11/24/2017 10:09:02
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteMovil.aspx?Id=2633399. Error Message:La carta numero 556704455 id=2633399 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+11/24/2017 10:09:02
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteMovil.aspx?Id=2633399. Error Message:PV 2 0
+__________________________
+
+Log Entry : 
+11/24/2017 10:10:46
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteMovil.aspx?Id=2633399. Error Message:La carta numero 556704455 id=2633399 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+11/24/2017 10:10:46
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteMovil.aspx?Id=2633399. Error Message:PV 2 0
+__________________________
+
+Log Entry : 
+11/24/2017 10:12:01
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteMovil.aspx?Id=2633399. Error Message:La carta numero 556704455 id=2633399 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+11/24/2017 10:12:01
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteMovil.aspx?Id=2633399. Error Message:PV 2 0
+__________________________
+
+Log Entry : 
+11/24/2017 10:12:09
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteMovil.aspx?Id=2633399. Error Message:La carta numero 556704455 id=2633399 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+11/24/2017 10:12:09
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteMovil.aspx?Id=2633399. Error Message:PV 2 0
+__________________________
