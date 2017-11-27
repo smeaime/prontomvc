@@ -6700,6 +6700,66 @@ Formato localidad-provincia	destination	x
 
 
 
+        public virtual string GrabarComentarioArchivo_DLL(int idcarta, string comentario, string nombreusuario, string SC)
+        {
+
+
+            //estan como empleados los usuarios externos de williams?
+
+            var scEF = ProntoMVC.Data.Models.Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC));
+
+            using (DemoProntoEntities db = new DemoProntoEntities(scEF))
+            {
+
+                db.Database.CommandTimeout = 200;
+
+                Reclamo rec;
+                CartasDePorte carta = db.CartasDePortes.Find(2633399);
+
+                if (carta.IdReclamo == null)
+                {
+                    rec = new Reclamo();
+                    rec.Estado = 22;
+                    rec.Descripcion = "nuevo reclamo";
+                    db.Reclamos.Add(rec);
+                    db.SaveChanges();
+                    carta.IdReclamo = rec.IdReclamo;
+                }
+                else
+                {
+                    rec = db.Reclamos.Find(carta.IdReclamo);
+                }
+
+
+                var com = new ReclamoComentario(); // db.ReclamoComentarios.FirstOrDefault().IdReclamo;
+                com.IdReclamo = rec.IdReclamo;
+                com.IdEmpleado = 1;
+                com.Comentario = comentario;
+                com.Fecha = DateTime.Now;
+                db.ReclamoComentarios.Add(com);
+
+
+                db.SaveChanges();
+
+
+
+
+            }
+
+
+            return "";
+
+        }
+
+
+
+
+
+
+
+
+
+
         public virtual string MapaGeoJSON_DLL(string SC, string modoExportacion, DateTime fechadesde, DateTime fechahasta,
                                                     int idprocedencia, int idarticulo, int idclientefacturado, int tonsdesde, int tonshasta)
         {

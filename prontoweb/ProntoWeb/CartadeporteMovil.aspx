@@ -2828,11 +2828,18 @@
 
                         <input type="button" id="Button6" value="enviar" class="btn btn-primary" />
 
-                        <ajaxToolkit:AsyncFileUpload ID="AsyncFileUpload3" runat="server" OnClientUploadComplete="ClientUploadComplete"
+                        <ajaxToolkit:AsyncFileUpload ID="AsyncFileUpload3" runat="server" OnClientUploadComplete="ClientUploadComplete3"
                             UploaderStyle="Modern" CssClass="" FailedValidation="False"  />
 
+                       <script>
 
-                        <script>
+
+                            function ClientUploadComplete3(sender, args) {
+                                $('#Lista').trigger('reloadGrid'); scrollToLastRow($('#Lista'));
+                            }
+
+
+
 
                             $("#Button6").click(function () {
                                 //alert("hola")
@@ -4893,7 +4900,7 @@
             shrinkToFit: false,
 
             width: 600, //$(window).width() - 4, // 310, //'auto',
-            height: 400, //'auto', // '100%', //$(window).height() - 260, // '100%'
+            height: 350, //'auto', // '100%', //$(window).height() - 260, // '100%'
 
             altRows: false,
             footerrow: false,

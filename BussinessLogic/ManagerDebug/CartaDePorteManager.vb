@@ -13078,6 +13078,7 @@ usuario As String, ConexBDLmaster As String,
 
 
 
+
     Shared Function GrabarImagen(forzarID As Long, SC As String, numeroCarta As Long, vagon As Long, archivoImagenSinPathUbicadaEnDATABACKUPEAR As String, ByRef sError As String, DirApp As String, Optional bForzarCasillaCP As Boolean = False, Optional bForzarCasillaTK As Boolean = False) As String
 
         'quien se encarga de borrar la imagen que no se pudo adjuntar?

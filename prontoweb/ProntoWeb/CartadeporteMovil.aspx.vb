@@ -3737,6 +3737,65 @@ Partial Class CartadeporteABMMovil
     End Sub
 
 
+
+
+
+    Protected Sub AsyncFileUpload3_UploadedComplete(ByVal sender As Object, ByVal e As AjaxControlToolkit.AsyncFileUploadEventArgs) Handles AsyncFileUpload3.UploadedComplete
+
+
+        Dim DIRFTP = DirApp() & "\DataBackupear\"
+        Dim nombre = NameOnlyFromFullPath(AsyncFileUpload3.PostedFile.FileName)
+        Randomize()
+        Dim nombrenuevo = Int(Rnd(100000) * 100000).ToString.Replace(".", "") + Now.ToString("ddMMMyyyy_HHmmss") + "_" + nombre
+
+
+        'nombrenuevo = CreaDirectorioParaImagenCartaPorte(nombrenuevo, DirApp)
+
+        Dim numeroCarta = Val(nombre)
+        Dim vagon = 0
+
+        If (AsyncFileUpload3.HasFile) Then
+            Try
+
+
+                'Dim nombresolo As String = Mid(nombre, nombre.LastIndexOf("\"))
+
+                '    Session("NombreArchivoSubido") = DIRFTP + nombrenuevo
+
+                Dim MyFile1 As New FileInfo(DIRFTP + nombrenuevo)
+                Try
+                    If MyFile1.Exists Then
+                        MyFile1.Delete()
+                    End If
+                Catch ex As Exception
+                End Try
+
+
+                AsyncFileUpload3.SaveAs(DIRFTP + nombrenuevo)
+
+            Catch ex As Exception
+                ErrHandler2.WriteError(ex.ToString)
+                Throw
+            End Try
+        Else
+            'FileUpLoad2.click 'estaría bueno que se pudiese hacer esto, es decir, llamar al click
+        End If
+
+
+
+        Dim s = New ServicioCartaPorte.servi()
+        s.GrabarComentario_DLL(IdCartaDePorte, "<a href=""" + "\DataBackupear\" + nombrenuevo + """   > Bajar archivo </a>", Membership.GetUser.UserName, SC)
+
+        AjaxControlToolkit.ToolkitScriptManager.RegisterStartupScript(Me, Me.GetType(), "dfsdf", " $('#Lista').trigger('reloadGrid'); scrollToLastRow($('#Lista'));", True)
+
+
+    End Sub
+
+
+
+
+
+
     Protected Sub AsyncFileUpload1_UploadedComplete(ByVal sender As Object, ByVal e As AjaxControlToolkit.AsyncFileUploadEventArgs) Handles AsyncFileUpload1.UploadedComplete
         'System.Threading.Thread.Sleep(5000)
         Dim nombre As String
