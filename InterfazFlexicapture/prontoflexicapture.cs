@@ -6661,7 +6661,7 @@ Formato localidad-provincia	destination	x
                 db.Database.CommandTimeout = 200;
 
                 Reclamo rec;
-                CartasDePorte carta = db.CartasDePortes.Find(2633399);
+                CartasDePorte carta = db.CartasDePortes.Find(idcarta);
 
                 if (carta.IdReclamo == null)
                 {

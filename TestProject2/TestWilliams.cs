@@ -919,6 +919,24 @@ namespace ProntoMVC.Tests
 
 
 
+
+
+
+
+        [TestMethod]
+        public void TienePermisosParaCarta()
+        {
+            asdasdfasdfasdf
+
+        If Not(Roles.IsUserInRole(Membership.GetUser().UserName, "WilliamsComercial") Or Roles.IsUserInRole(Membership.GetUser().UserName, "WilliamsAdmin") Or Roles.IsUserInRole(Membership.GetUser().UserName, "WilliamsFacturacion")) Then
+            btnsituacion.Visible = False
+
+
+
+        }
+
+
+
         [TestMethod]
         public void bajarArchivo_43063()
         {
@@ -931,6 +949,26 @@ namespace ProntoMVC.Tests
             GrabarComentarioArchivo_DLL
         }
 
+
+
+
+        [TestMethod]
+        public void EnviarMailALosQueParticipanEnElReclamo()
+        {
+            sfasdf
+            asdasdfasdfasdf
+
+                        Pronto.ERP.Bll.EntidadManager.MandaEmail_Nuevo(ConfigurationManager.AppSettings["ErrorMail"],
+                               "asuntoasuntoasunto 2",
+                            "cuerpocuerpocuerpocuerpocuerpocuerpocuerpocuerpocuerpocuerpocuerpocuerpo cuerpocuerpocuerpocuerpo",
+                            ConfigurationManager.AppSettings["SmtpUser"],
+                            ConfigurationManager.AppSettings["SmtpServer"],
+                            ConfigurationManager.AppSettings["SmtpUser"],
+                            ConfigurationManager.AppSettings["SmtpPass"],
+                              "",
+                           Convert.ToInt16(ConfigurationManager.AppSettings["SmtpPort"]));
+
+        }
 
 
         [TestMethod]

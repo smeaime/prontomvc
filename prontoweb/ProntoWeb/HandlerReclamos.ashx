@@ -207,6 +207,10 @@ public class JQGridHandler : IHttpHandler
         string puntovent = request["puntovent"] == "null" ? "0" : request["puntovent"] ?? "0";
         puntovent =  (puntovent == "undefined") ? "0" : puntovent;
 
+
+        string idcarta = request["idcarta"] == "null" ? "0" : request["idcarta"] ?? "0";
+        idcarta =  (idcarta == "undefined") ? "0" : idcarta;
+
         string destino = request["destino"];
         string usuario = Membership.GetUser().UserName;
 
@@ -225,7 +229,8 @@ public class JQGridHandler : IHttpHandler
         string output = a.Reclamos_DynamicGridData(
                                         sortColumnName, sortOrderBy, Convert.ToInt32(pageIndex),
                                         Convert.ToInt32(numberOfRows), isSearch == "true", filters, FechaInicial, FechaFinal,  Convert.ToInt32(puntovent),
-                                        SQLdinamico.BuscaIdWilliamsDestinoPreciso(destino, SC),
+                                        //SQLdinamico.BuscaIdWilliamsDestinoPreciso(destino, SC),
+                                        Convert.ToInt32(idcarta),
                                         SC, usuario, scbdlmaster );
 
         response.ContentType = "application/json";
