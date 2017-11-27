@@ -6107,7 +6107,7 @@ Formato localidad-provincia	destination	x
                                 a.Empleado.Nombre.NullSafeToString(),
 
                                 (a.IdEmpleado==1) ? "" : a.Comentario,
-                                (a.IdEmpleado!=1) ? "" : a.Comentario ,
+                                a.Comentario,  // (a.IdEmpleado!=1) ? "" : a.Comentario ,
                                 a.Fecha==null ? "" :  a.Fecha.GetValueOrDefault().ToShortDateString(),
 
                                 a.ArchivoAdjunto.NullSafeToString(),

@@ -181,3 +181,660 @@ Log Entry :
 11/27/2017 08:09:30
 Error in: http://localhost:50769/ProntoWeb/CartaDePorteMovil.aspx?Id=3154882. Error Message:PV 2 0
 __________________________
+
+Log Entry : 
+11/27/2017 08:15:59
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteMovil.aspx?Id=3154882. Error Message:La carta numero 564793833 id=3154882 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+11/27/2017 08:15:59
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteMovil.aspx?Id=3154882. Error Message:PV 2 0
+__________________________
+
+Log Entry : 
+11/27/2017 08:19:14
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteMovil.aspx?Id=3154882. Error Message:La carta numero 564793833 id=3154882 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+11/27/2017 08:19:14
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteMovil.aspx?Id=3154882. Error Message:PV 2 0
+__________________________
+
+Log Entry : 
+11/27/2017 08:23:20
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteMovil.aspx?Id=3154882. Error Message:La carta numero 564793833 id=3154882 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+11/27/2017 08:23:20
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteMovil.aspx?Id=3154882. Error Message:PV 2 0
+__________________________
+
+Log Entry : 
+11/27/2017 08:25:18
+Error in: http://localhost:50769/ProntoWeb/CartaDePorte.aspx?Id=. Error Message:Mariano esta logueado, pero lo redirijo al login porque faltan los datos de session. No deberia mejor mandarlo a SeleccionarEmpresa? Ademas, no hago el LogOut y le queda el cookie!!!
+__________________________
+
+Log Entry : 
+11/27/2017 08:25:25
+Error in: http://localhost:50769/ProntoWeb/CartasDePortes.aspx. Error Message:Mariano
+__________________________
+
+Log Entry : 
+11/27/2017 08:25:26
+Error in: http://localhost:50769/ProntoWeb/CartasDePortes.aspx. Error Message:Mariano
+__________________________
+
+Log Entry : 
+11/27/2017 08:25:32
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteMovil.aspx?Id=3154882. Error Message:La carta numero 564793833 id=3154882 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+11/27/2017 08:25:32
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteMovil.aspx?Id=3154882. Error Message:PV 2 0
+__________________________
+
+Log Entry : 
+11/27/2017 08:25:36
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteMovil.aspx?Id=3154882. Error Message:La carta numero 564793833 id=3154882 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+11/27/2017 08:25:36
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteMovil.aspx?Id=3154882. Error Message:PV 2 0
+__________________________
+
+Log Entry : 
+11/27/2017 08:26:09
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteMovil.aspx?Id=3154882. Error Message:Mariano esta logueado, pero lo redirijo al login porque faltan los datos de session. No deberia mejor mandarlo a SeleccionarEmpresa? Ademas, no hago el LogOut y le queda el cookie!!!
+__________________________
+
+Log Entry : 
+11/27/2017 08:34:12
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteMovil.aspx?Id=3154882. Error Message:La carta numero 564793833 id=3154882 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+11/27/2017 08:34:12
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteMovil.aspx?Id=3154882. Error Message:PV 2 0
+__________________________
+
+Log Entry : 
+11/27/2017 08:40:57
+Error in: http://localhost:50769/ProntoWeb/CartaDePorte.aspx?Id=. Error Message:Mariano esta logueado, pero lo redirijo al login porque faltan los datos de session. No deberia mejor mandarlo a SeleccionarEmpresa? Ademas, no hago el LogOut y le queda el cookie!!!
+__________________________
+
+Log Entry : 
+11/27/2017 08:41:03
+Error in: http://localhost:50769/ProntoWeb/CartasDePortes.aspx. Error Message:Mariano
+__________________________
+
+Log Entry : 
+11/27/2017 08:41:07
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteMovil.aspx?Id=3154882. Error Message:La carta numero 564793833 id=3154882 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+11/27/2017 08:41:07
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteMovil.aspx?Id=3154882. Error Message:PV 2 0
+__________________________
+
+Log Entry : 
+11/27/2017 08:43:23
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteMovil.aspx?Id=3154882. Error Message:La carta numero 564793833 id=3154882 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+11/27/2017 08:43:23
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteMovil.aspx?Id=3154882. Error Message:PV 2 0
+__________________________
+
+Log Entry : 
+11/27/2017 08:44:13
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteMovil.aspx?Id=3154882. Error Message:La carta numero 564793833 id=3154882 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+11/27/2017 08:44:13
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteMovil.aspx?Id=3154882. Error Message:PV 2 0
+__________________________
+
+Log Entry : 
+11/27/2017 08:44:18
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteMovil.aspx?Id=3154882. Error Message:La carta numero 564793833 id=3154882 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+11/27/2017 08:44:18
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteMovil.aspx?Id=3154882. Error Message:PV 2 0
+__________________________
+
+Log Entry : 
+11/27/2017 08:44:25
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteMovil.aspx?Id=3154882. Error Message:La carta numero 564793833 id=3154882 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+11/27/2017 08:44:25
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteMovil.aspx?Id=3154882. Error Message:PV 2 0
+__________________________
+
+Log Entry : 
+11/27/2017 08:58:47
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteMovil.aspx?Id=3154882. Error Message:La carta numero 564793833 id=3154882 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+11/27/2017 08:58:47
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteMovil.aspx?Id=3154882. Error Message:PV 2 0
+__________________________
+
+Log Entry : 
+11/27/2017 08:59:02
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteMovil.aspx?Id=3154882. Error Message:La carta numero 564793833 id=3154882 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+11/27/2017 08:59:02
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteMovil.aspx?Id=3154882. Error Message:PV 2 0
+__________________________
+
+Log Entry : 
+11/27/2017 09:00:19
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteMovil.aspx?Id=3154882. Error Message:La carta numero 564793833 id=3154882 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+11/27/2017 09:00:19
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteMovil.aspx?Id=3154882. Error Message:PV 2 0
+__________________________
+
+Log Entry : 
+11/27/2017 09:01:00
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteMovil.aspx?Id=3154882. Error Message:La carta numero 564793833 id=3154882 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+11/27/2017 09:01:00
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteMovil.aspx?Id=3154882. Error Message:PV 2 0
+__________________________
+
+Log Entry : 
+11/27/2017 09:02:21
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteMovil.aspx?Id=3154882. Error Message:La carta numero 564793833 id=3154882 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+11/27/2017 09:02:21
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteMovil.aspx?Id=3154882. Error Message:PV 2 0
+__________________________
+
+Log Entry : 
+11/27/2017 09:02:54
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteMovil.aspx?Id=3154882. Error Message:La carta numero 564793833 id=3154882 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+11/27/2017 09:02:54
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteMovil.aspx?Id=3154882. Error Message:PV 2 0
+__________________________
+
+Log Entry : 
+11/27/2017 09:03:29
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteMovil.aspx?Id=3154882. Error Message:La carta numero 564793833 id=3154882 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+11/27/2017 09:03:29
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteMovil.aspx?Id=3154882. Error Message:PV 2 0
+__________________________
+
+Log Entry : 
+11/27/2017 09:03:47
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteMovil.aspx?Id=3154882. Error Message:La carta numero 564793833 id=3154882 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+11/27/2017 09:03:47
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteMovil.aspx?Id=3154882. Error Message:PV 2 0
+__________________________
+
+Log Entry : 
+11/27/2017 09:08:44
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteMovil.aspx?Id=3154882. Error Message:La carta numero 564793833 id=3154882 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+11/27/2017 09:08:44
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteMovil.aspx?Id=3154882. Error Message:PV 2 0
+__________________________
+
+Log Entry : 
+11/27/2017 09:17:55
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteMovil.aspx?Id=3154882. Error Message:La carta numero 564793833 id=3154882 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+11/27/2017 09:17:55
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteMovil.aspx?Id=3154882. Error Message:PV 2 0
+__________________________
+
+Log Entry : 
+11/27/2017 09:18:47
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteMovil.aspx?Id=3154882. Error Message:La carta numero 564793833 id=3154882 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+11/27/2017 09:18:47
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteMovil.aspx?Id=3154882. Error Message:PV 2 0
+__________________________
+
+Log Entry : 
+11/27/2017 09:19:06
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteMovil.aspx?Id=3154882. Error Message:La carta numero 564793833 id=3154882 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+11/27/2017 09:19:06
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteMovil.aspx?Id=3154882. Error Message:PV 2 0
+__________________________
+
+Log Entry : 
+11/27/2017 09:19:23
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteMovil.aspx?Id=3154882. Error Message:La carta numero 564793833 id=3154882 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+11/27/2017 09:19:23
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteMovil.aspx?Id=3154882. Error Message:PV 2 0
+__________________________
+
+Log Entry : 
+11/27/2017 09:19:39
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteMovil.aspx?Id=3154882. Error Message:La carta numero 564793833 id=3154882 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+11/27/2017 09:19:39
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteMovil.aspx?Id=3154882. Error Message:PV 2 0
+__________________________
+
+Log Entry : 
+11/27/2017 09:20:36
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteMovil.aspx?Id=3154882. Error Message:La carta numero 564793833 id=3154882 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+11/27/2017 09:20:36
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteMovil.aspx?Id=3154882. Error Message:PV 2 0
+__________________________
+
+Log Entry : 
+11/27/2017 09:20:53
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteMovil.aspx?Id=3154882. Error Message:La carta numero 564793833 id=3154882 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+11/27/2017 09:20:53
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteMovil.aspx?Id=3154882. Error Message:PV 2 0
+__________________________
+
+Log Entry : 
+11/27/2017 09:21:32
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteMovil.aspx?Id=3154882. Error Message:La carta numero 564793833 id=3154882 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+11/27/2017 09:21:32
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteMovil.aspx?Id=3154882. Error Message:PV 2 0
+__________________________
+
+Log Entry : 
+11/27/2017 09:21:46
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteMovil.aspx?Id=3154882. Error Message:La carta numero 564793833 id=3154882 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+11/27/2017 09:21:46
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteMovil.aspx?Id=3154882. Error Message:PV 2 0
+__________________________
+
+Log Entry : 
+11/27/2017 09:21:54
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteMovil.aspx?Id=3154882. Error Message:La carta numero 564793833 id=3154882 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+11/27/2017 09:21:54
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteMovil.aspx?Id=3154882. Error Message:PV 2 0
+__________________________
+
+Log Entry : 
+11/27/2017 09:23:28
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteMovil.aspx?Id=3154882. Error Message:Mariano esta logueado, pero lo redirijo al login porque faltan los datos de session. No deberia mejor mandarlo a SeleccionarEmpresa? Ademas, no hago el LogOut y le queda el cookie!!!
+__________________________
+
+Log Entry : 
+11/27/2017 09:23:37
+Error in: http://localhost:50769/SeleccionarEmpresa.aspx. Error Message:sesion: Mariano True
+__________________________
+
+Log Entry : 
+11/27/2017 09:23:37
+Error in: http://localhost:50769/SeleccionarEmpresa.aspx. Error Message:Pasa nomas. membership: Mariano
+__________________________
+
+Log Entry : 
+11/27/2017 09:24:23
+Error in: http://localhost:50769/SeleccionarEmpresa.aspx. Error Message:System.Threading.ThreadAbortException
+Subproceso anulado.
+   en System.Threading.Thread.AbortInternal()
+   en System.Threading.Thread.Abort(Object stateInfo)
+   en System.Web.HttpResponse.AbortCurrentThread()
+   en System.Web.HttpResponse.End()
+   en System.Web.HttpResponse.Redirect(String url, Boolean endResponse, Boolean permanent)
+   en System.Web.HttpResponse.Redirect(String url)
+   en SeleccionarEmpresa.ButContinuar_Command(Object sender, CommandEventArgs e) en C:\bdl\pronto\prontoweb\SeleccionarEmpresa.aspx.vb:línea 404
+mscorlib
+__________________________
+
+Log Entry : 
+11/27/2017 09:24:23
+Error in: http://localhost:50769/ProntoWeb/CartasDePortes.aspx?tipo=Todas. Error Message:Mariano
+__________________________
+
+Log Entry : 
+11/27/2017 09:24:24
+Error in: http://localhost:50769/ProntoWeb/CartasDePortesMovil.aspx. Error Message:Mariano
+__________________________
+
+Log Entry : 
+11/27/2017 09:24:28
+Error in: http://localhost:50769/ProntoWeb/CartaDePorte.aspx?Id=3154882. Error Message:La carta numero 564793833 id=3154882 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+11/27/2017 09:24:28
+Error in: http://localhost:50769/ProntoWeb/CartaDePorte.aspx?Id=3154882. Error Message:PV 2 0
+__________________________
+
+Log Entry : 
+11/27/2017 09:24:36
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteMovil.aspx?Id=3154882. Error Message:La carta numero 564793833 id=3154882 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+11/27/2017 09:24:36
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteMovil.aspx?Id=3154882. Error Message:PV 2 0
+__________________________
+
+Log Entry : 
+11/27/2017 09:26:27
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteMovil.aspx?Id=3154882. Error Message:La carta numero 564793833 id=3154882 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+11/27/2017 09:26:27
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteMovil.aspx?Id=3154882. Error Message:PV 2 0
+__________________________
+
+Log Entry : 
+11/27/2017 09:27:07
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteMovil.aspx?Id=3154882. Error Message:La carta numero 564793833 id=3154882 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+11/27/2017 09:27:07
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteMovil.aspx?Id=3154882. Error Message:PV 2 0
+__________________________
+
+Log Entry : 
+11/27/2017 09:27:33
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteMovil.aspx?Id=3154882. Error Message:La carta numero 564793833 id=3154882 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+11/27/2017 09:27:33
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteMovil.aspx?Id=3154882. Error Message:PV 2 0
+__________________________
+
+Log Entry : 
+11/27/2017 09:27:45
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteMovil.aspx?Id=3154882. Error Message:La carta numero 564793833 id=3154882 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+11/27/2017 09:27:45
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteMovil.aspx?Id=3154882. Error Message:PV 2 0
+__________________________
+
+Log Entry : 
+11/27/2017 09:27:57
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteMovil.aspx?Id=3154882. Error Message:La carta numero 564793833 id=3154882 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+11/27/2017 09:27:57
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteMovil.aspx?Id=3154882. Error Message:PV 2 0
+__________________________
+
+Log Entry : 
+11/27/2017 09:28:05
+Error in: http://localhost:50769/SeleccionarEmpresa.aspx. Error Message:sesion: Mariano True
+__________________________
+
+Log Entry : 
+11/27/2017 09:28:05
+Error in: http://localhost:50769/SeleccionarEmpresa.aspx. Error Message:Pasa nomas. membership: Mariano
+__________________________
+
+Log Entry : 
+11/27/2017 09:28:09
+Error in: http://localhost:50769/SeleccionarEmpresa.aspx. Error Message:System.Threading.ThreadAbortException
+Subproceso anulado.
+   en System.Threading.Thread.AbortInternal()
+   en System.Threading.Thread.Abort(Object stateInfo)
+   en System.Web.HttpResponse.AbortCurrentThread()
+   en System.Web.HttpResponse.End()
+   en System.Web.HttpResponse.Redirect(String url, Boolean endResponse, Boolean permanent)
+   en System.Web.HttpResponse.Redirect(String url)
+   en SeleccionarEmpresa.ButContinuar_Command(Object sender, CommandEventArgs e) en C:\bdl\pronto\prontoweb\SeleccionarEmpresa.aspx.vb:línea 404
+mscorlib
+__________________________
+
+Log Entry : 
+11/27/2017 09:28:09
+Error in: http://localhost:50769/ProntoWeb/CartasDePortes.aspx?tipo=Todas. Error Message:Mariano
+__________________________
+
+Log Entry : 
+11/27/2017 09:28:09
+Error in: http://localhost:50769/ProntoWeb/CartasDePortesMovil.aspx. Error Message:Mariano
+__________________________
+
+Log Entry : 
+11/27/2017 09:28:15
+Error in: http://localhost:50769/ProntoWeb/CartaDePorte.aspx?Id=3154882. Error Message:La carta numero 564793833 id=3154882 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+11/27/2017 09:28:15
+Error in: http://localhost:50769/ProntoWeb/CartaDePorte.aspx?Id=3154882. Error Message:PV 2 0
+__________________________
+
+Log Entry : 
+11/27/2017 09:29:55
+Error in: http://localhost:50769/ProntoWeb/CartasDePortesMovil.aspx. Error Message:Mariano
+__________________________
+
+Log Entry : 
+11/27/2017 09:29:57
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteMovil.aspx?Id=3154882. Error Message:La carta numero 564793833 id=3154882 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+11/27/2017 09:29:57
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteMovil.aspx?Id=3154882. Error Message:PV 2 0
+__________________________
+
+Log Entry : 
+11/27/2017 09:30:34
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteMovil.aspx?Id=3154882. Error Message:La carta numero 564793833 id=3154882 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+11/27/2017 09:30:34
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteMovil.aspx?Id=3154882. Error Message:PV 2 0
+__________________________
+
+Log Entry : 
+11/27/2017 09:32:20
+Error in: http://localhost:50769/ProntoWeb/Principal.aspx. Error Message:Mariano esta logueado, pero lo redirijo al login porque faltan los datos de session. No deberia mejor mandarlo a SeleccionarEmpresa? Ademas, no hago el LogOut y le queda el cookie!!!
+__________________________
+
+Log Entry : 
+11/27/2017 09:32:20
+Error in: http://localhost:50769/ProntoWeb/CartasDePortes.aspx?tipo=Todas. Error Message:Mariano
+__________________________
+
+Log Entry : 
+11/27/2017 09:33:39
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteMovil.aspx?Id=3154882. Error Message:La carta numero 564793833 id=3154882 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+11/27/2017 09:33:39
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteMovil.aspx?Id=3154882. Error Message:PV 2 0
+__________________________
+
+Log Entry : 
+11/27/2017 09:34:42
+Error in: http://localhost:50769/SeleccionarEmpresa.aspx. Error Message:sesion: Mariano True
+__________________________
+
+Log Entry : 
+11/27/2017 09:34:42
+Error in: http://localhost:50769/SeleccionarEmpresa.aspx. Error Message:Pasa nomas. membership: Mariano
+__________________________
+
+Log Entry : 
+11/27/2017 09:34:44
+Error in: http://localhost:50769/SeleccionarEmpresa.aspx. Error Message:System.Threading.ThreadAbortException
+Subproceso anulado.
+   en System.Threading.Thread.AbortInternal()
+   en System.Threading.Thread.Abort(Object stateInfo)
+   en System.Web.HttpResponse.AbortCurrentThread()
+   en System.Web.HttpResponse.End()
+   en System.Web.HttpResponse.Redirect(String url, Boolean endResponse, Boolean permanent)
+   en System.Web.HttpResponse.Redirect(String url)
+   en SeleccionarEmpresa.ButContinuar_Command(Object sender, CommandEventArgs e) en C:\bdl\pronto\prontoweb\SeleccionarEmpresa.aspx.vb:línea 404
+mscorlib
+__________________________
+
+Log Entry : 
+11/27/2017 09:34:44
+Error in: http://localhost:50769/ProntoWeb/CartasDePortes.aspx?tipo=Todas. Error Message:Mariano
+__________________________
+
+Log Entry : 
+11/27/2017 09:34:45
+Error in: http://localhost:50769/ProntoWeb/CartasDePortesMovil.aspx. Error Message:Mariano
+__________________________
+
+Log Entry : 
+11/27/2017 09:34:47
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteMovil.aspx?Id=3154882. Error Message:La carta numero 564793833 id=3154882 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+11/27/2017 09:34:47
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteMovil.aspx?Id=3154882. Error Message:PV 2 0
+__________________________
+
+Log Entry : 
+11/27/2017 09:36:34
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteMovil.aspx?Id=3154882. Error Message:La carta numero 564793833 id=3154882 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+11/27/2017 09:36:34
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteMovil.aspx?Id=3154882. Error Message:PV 2 0
+__________________________
+
+Log Entry : 
+11/27/2017 09:39:11
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteMovil.aspx?Id=3154882. Error Message:La carta numero 564793833 id=3154882 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+11/27/2017 09:39:11
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteMovil.aspx?Id=3154882. Error Message:PV 2 0
+__________________________
+
+Log Entry : 
+11/27/2017 09:39:48
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteMovil.aspx?Id=3154882. Error Message:Mariano esta logueado, pero lo redirijo al login porque faltan los datos de session. No deberia mejor mandarlo a SeleccionarEmpresa? Ademas, no hago el LogOut y le queda el cookie!!!
+__________________________
+
+Log Entry : 
+11/27/2017 09:40:22
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteMovil.aspx?Id=3154882. Error Message:La carta numero 564793833 id=3154882 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+11/27/2017 09:40:22
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteMovil.aspx?Id=3154882. Error Message:PV 2 0
+__________________________
+
+Log Entry : 
+11/27/2017 09:40:42
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteMovil.aspx?Id=3154882. Error Message:La carta numero 564793833 id=3154882 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+11/27/2017 09:40:42
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteMovil.aspx?Id=3154882. Error Message:PV 2 0
+__________________________
+
+Log Entry : 
+11/27/2017 09:41:44
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteMovil.aspx?Id=3154882. Error Message:La carta numero 564793833 id=3154882 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+11/27/2017 09:41:44
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteMovil.aspx?Id=3154882. Error Message:PV 2 0
+__________________________
+
+Log Entry : 
+11/27/2017 09:41:56
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteMovil.aspx?Id=3154882. Error Message:La carta numero 564793833 id=3154882 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+11/27/2017 09:41:56
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteMovil.aspx?Id=3154882. Error Message:PV 2 0
+__________________________
+
+Log Entry : 
+11/27/2017 09:42:04
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteMovil.aspx?Id=3154882. Error Message:La carta numero 564793833 id=3154882 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+11/27/2017 09:42:04
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteMovil.aspx?Id=3154882. Error Message:PV 2 0
+__________________________
+
+Log Entry : 
+11/27/2017 09:43:42
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteMovil.aspx?Id=3154882. Error Message:La carta numero 564793833 id=3154882 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+11/27/2017 09:43:42
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteMovil.aspx?Id=3154882. Error Message:PV 2 0
+__________________________
