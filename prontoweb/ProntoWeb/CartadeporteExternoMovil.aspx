@@ -1,5 +1,5 @@
 <%@ Page Language="VB" MasterPageFile="~/MasterPage.master" AutoEventWireup="false"
-    CodeFile="CartadeporteMovil.aspx.vb" Inherits="CartadeporteABMMovil" Title="Untitled Page"
+    CodeFile="CartadeporteExternoMovil.aspx.vb" Inherits="CartadeporteABMExternoMovil" Title="Untitled Page"
     EnableEventValidation="false" %>
 
 <%--lo del enableeventvalidation lo puse porque tenia un problema con este abm. no copiarlo a los demas abms--%>
