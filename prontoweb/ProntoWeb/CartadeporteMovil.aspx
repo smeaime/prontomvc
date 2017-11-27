@@ -182,6 +182,12 @@
     <script type="text/javascript">
 
 
+        function TabListo(sender, args) {
+            //alert("salud")
+            scrollToLastRow($("#Lista"))
+        }
+
+
 
         //            http: //www.scottklarr.com/topic/126/how-to-create-ctrl-key-shortcuts-in-javascript/
         //            http: //www.scottklarr.com/topic/126/how-to-create-ctrl-key-shortcuts-in-javascript/
@@ -290,7 +296,7 @@
                
             </tr>--%>
             <tr>
-                <td class="EncabezadoCell" style="width: 210px; font-weight: bold; font-size: 20px;">CARTA DE PORTE
+                <td class="EncabezadoCell" style="width: 70px; font-weight: bold; font-size: 20px;">C.PORTE
                 </td>
                 <td class=" " colspan="3">
                     <table cellpadding="0" cellspacing="0">
@@ -2782,7 +2788,9 @@
                     </table>
                 </ContentTemplate>
             </cc1:TabPanel>
-            <cc1:TabPanel ID="TabPanel5" runat="server" BackColor="#6600FF" Height="550px">
+
+
+            <cc1:TabPanel ID="TabPanel5" runat="server" BackColor="#6600FF" Height="550px"  OnClientPopulated="TabListo()" >
                 <HeaderTemplate>
                     C<u>h</u>at
                 </HeaderTemplate>
@@ -2792,15 +2800,20 @@
                         /*.ui-jqgrid tr.jqgrow td { height: 30px; }*/
 
 
+                        /* .ui-jqgrid {font-size:0.8em} */
+                        .ui-jqgrid tr.jqgrow td {font-size:0.6em}  /* esto sí funciona!! -sera por las unidades en "em"? */
+                        /* .ui-jqgrid{position:relative;font-size:11px;} */
+
 
                         /* Bump up the font-size in the grid */
+                        /*
                         .ui-jqgrid,
                         .ui-jqgrid .ui-jqgrid-view,
                         .ui-jqgrid .ui-jqgrid-pager,
                         .ui-jqgrid .ui-pg-input {
                             font-size: 12px;
                         }
-
+                            */
 
                         /*.ui-jqgrid {
     font-family: Arial;
@@ -2821,15 +2834,18 @@
                     <div id="ListaPager" class="scroll" style="text-align: center; height: ;">
                     </div>
 
+                    <br />
                     <div class="row-fluid">
 
-                        <asp:TextBox ID="TextBox5" runat="server" CssClass=" span8" Width="" TextMode="MultiLine" Enabled="true" Text="" />
+                        <asp:TextBox ID="TextBox5" runat="server" CssClass=" span8" Width="250px" Height="50px" TextMode="MultiLine" Enabled="true" Text="" />
 
 
-                        <input type="button" id="Button6" value="enviar" class="btn btn-primary" />
+                        <input type="button" id="Button6" value="enviar" class="btn btn-primary" style="height:40px" />
 
                         <ajaxToolkit:AsyncFileUpload ID="AsyncFileUpload3" runat="server" OnClientUploadComplete="ClientUploadComplete3"
-                            UploaderStyle="Modern" CssClass="" FailedValidation="False"  />
+                            UploaderStyle="Modern" CssClass="AFU" FailedValidation="False"  />
+
+                                                <input type="button" id="Button77" value="cerrar consulta" class="btn btn-primary" />
 
                        <script>
 
@@ -2837,6 +2853,13 @@
                             function ClientUploadComplete3(sender, args) {
                                 $('#Lista').trigger('reloadGrid'); scrollToLastRow($('#Lista'));
                             }
+
+                            
+
+                            $("#__tab_ctl00_ContentPlaceHolder1_TabContainer2_TabPanel5").click(function () {
+                                //alert('holis');
+                                        scrollToLastRow($("#Lista"))
+                            })
 
 
 
@@ -2910,7 +2933,7 @@
 
 
                             function scrollToLastRow(targetGrid) {
-                                jQuery("#Lista").closest(".ui-jqgrid-bdiv").scrollTop(10000) //como no anda bien scrollToLastRow, lo hago cabeza
+                                jQuery("#Lista").closest(".ui-jqgrid-bdiv").scrollTop(10000) //como no anda bien scrollToLastRow, lo hago cabeza -probablemete porq esta incluida en el tabpanel...
                                 return;
                                 var rows = $(targetGrid)[0].rows;
                                 var lastRowDOM = rows[rows.length - 1];
@@ -4700,7 +4723,7 @@
                 { name: 'IdReclamoComentario', index: 'IdReclamoComentario', align: 'left', width: 100, editable: false, hidden: true },
                 { name: 'IdReclamo', index: 'IdReclamo', align: 'left', width: 100, editable: false, hidden: true },
                 { name: 'Empleado', index: 'Empleado', align: 'left', width: 50, hidden: false },
-                { name: 'Comentario', index: 'Comentario', align: 'left', width: 200, hidden: false },
+                { name: 'Comentario', index: 'Comentario', align: 'left', width: 200, hidden: true },
                 { name: 'Comentario', index: 'Comentario', align: 'left', width: 200, hidden: false },
 
                 { name: 'Fecha', index: 'Fecha', align: 'left', width: 100, editable: true, hidden: false, sortable: false },
@@ -4730,9 +4753,10 @@
                 //jQuery("#Lista").jqGrid('addRowData', Id, data, "last");
                 //AgregarItemVacio(grid)
 
-
                 scrollToLastRow($("#Lista"))
+                
             },
+
 
 
 
@@ -4747,8 +4771,10 @@
                     });
                 }
 
+
                 scrollToLastRow($("#Lista"))
 
+                scrollToLastRow($("#Lista"))
                 // grid.setGridHeight('auto');
             },
 
@@ -4899,8 +4925,8 @@
 
             shrinkToFit: false,
 
-            width: 600, //$(window).width() - 4, // 310, //'auto',
-            height: 350, //'auto', // '100%', //$(window).height() - 260, // '100%'
+            width: 260, //$(window).width() - 4, // 310, //'auto',
+            height: 320, //'auto', // '100%', //$(window).height() - 260, // '100%'
 
             altRows: false,
             footerrow: false,
@@ -4945,7 +4971,7 @@
                 //sopt: ["cn"]
                 //sopt: ['eq', 'ne', 'lt', 'le', 'gt', 'ge', 'bw', 'bn', 'ew', 'en', 'cn', 'nc', 'nu', 'nn', 'in', 'ni'],
                 zIndex: 50,
-                width: 300, // $(window).width() - 4, 
+                width: 250, // $(window).width() - 4, 
                 closeOnEscape: true, closeAfterSearch: true, multipleSearch: true, overlay: false
 
             }
@@ -4979,6 +5005,11 @@
         //    defaultSearch: 'cn',
         //    enableClear: false
         //});
+
+
+        $(document).ready(function () {
+            scrollToLastRow($("#Lista"))
+        });
 
     </script>
 </asp:Content>
