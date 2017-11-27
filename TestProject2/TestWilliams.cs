@@ -866,6 +866,41 @@ namespace ProntoMVC.Tests
 
 
         [TestMethod]
+        public void SincroChiambretto_46876()
+        {
+
+            string sErrores = "", sTitulo = "";
+            LinqCartasPorteDataContext db = null;
+
+            int registrosf = 0;
+
+            int idcli = CartaDePorteManager.BuscarVendedorPorCUIT("30 -71544287-2", SC, "");
+
+
+            var output = SincronismosWilliamsManager.GenerarSincro("Chiambretto", ref sErrores, SC, "dominio", ref sTitulo
+                                , CartaDePorteManager.enumCDPestado.DescargasMasFacturadas,
+                     "", -1, idcli,
+                -1, -1,
+                -1, -1, -1, -1,
+                 CartaDePorteManager.FiltroANDOR.FiltroOR, "Ambas",
+                new DateTime(2017, 1, 13), new DateTime(2017, 1, 16),
+                -1, "Ambas", false, "", "", -1, ref registrosf, 40);
+
+
+
+
+            System.Diagnostics.Process.Start(output);
+        }
+
+
+
+
+
+
+
+
+
+        [TestMethod]
         public void enviosPush__()
         {
             string deviceId = "asdfsadf";
@@ -874,12 +909,26 @@ namespace ProntoMVC.Tests
 
         }
 
-
+        
         public void enviarNotificacionUsuario(string usuario)
         {
             //            var subs = BuscoLasSubscripcionesDelUsuario(usuario);
             //            MandoMensajeAListadoDeSubscripciones(subs);
 
+        }
+
+
+
+        [TestMethod]
+        public void bajarArchivo_43063()
+        {
+
+            int idcarta = 2633399;
+
+
+            var s = new ServicioCartaPorte.servi();
+            s.BajarArchivo_DLL( "asarararasa.pdf" , usuario, SC);
+            GrabarComentarioArchivo_DLL
         }
 
 
