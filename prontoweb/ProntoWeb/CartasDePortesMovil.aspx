@@ -206,7 +206,7 @@ http://weblogs.asp.net/alaaalnajjar/attachment/7469405.ashx
                                     HeaderStyle-HorizontalAlign="Left" ItemStyle-Wrap="true" ItemStyle-HorizontalAlign="left">
                                     <ItemTemplate>
                                         <%--http://forums.asp.net/t/1120329.aspx--%>
-                                        <asp:HyperLink ID="HyperLink1" Target='_blank' runat="server" NavigateUrl='<%# "CartaDePorte.aspx?Id=" & Eval("Id") %>'
+                                        <asp:HyperLink ID="HyperLink1" Target='' runat="server" NavigateUrl='<%# "CartaDePorte.aspx?Id=" & Eval("Id") %>'
                                             Text='<%# Eval("NumeroCartaDePorte")   %>' Font-Size="Small" Font-Bold="True"
                                             Font-Underline="false" Style="vertical-align: middle;"> </asp:HyperLink>
                                         <br />
