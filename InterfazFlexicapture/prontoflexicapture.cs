@@ -6107,7 +6107,8 @@ Formato localidad-provincia	destination	x
                                 a.Empleado.Nombre.NullSafeToString(),
 
                                 (a.IdEmpleado==1) ? "" : a.Comentario,
-                                a.Comentario,  // (a.IdEmpleado!=1) ? "" : a.Comentario ,
+                                //a.Comentario,  // (a.IdEmpleado!=1) ? "" : a.Comentario ,
+                                a.Comentario.Contains("DataBackupear") ? "<a href='" +  a.Comentario + "'    style='text-decoration: underline; color: blue !important;'  > Bajar archivo </ a > " : a.Comentario,
                                 a.Fecha==null ? "" :  a.Fecha.GetValueOrDefault().ToShortDateString(),
 
                                 a.ArchivoAdjunto.NullSafeToString(),
