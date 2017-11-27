@@ -2790,7 +2790,7 @@
             </cc1:TabPanel>
 
 
-            <cc1:TabPanel ID="TabPanel5" runat="server" BackColor="#6600FF" Height="550px"  OnClientPopulated="TabListo()" >
+            <cc1:TabPanel ID="TabPanel5" runat="server" BackColor="#6600FF" Height="550px" OnClientPopulated="TabListo()">
                 <HeaderTemplate>
                     C<u>h</u>at
                 </HeaderTemplate>
@@ -2801,7 +2801,10 @@
 
 
                         /* .ui-jqgrid {font-size:0.8em} */
-                        .ui-jqgrid tr.jqgrow td {font-size:0.6em}  /* esto sí funciona!! -sera por las unidades en "em"? */
+                        .ui-jqgrid tr.jqgrow td {
+                            font-size: 0.6em
+                        }
+                        /* esto sí funciona!! -sera por las unidades en "em"? */
                         /* .ui-jqgrid{position:relative;font-size:11px;} */
 
 
@@ -2840,25 +2843,27 @@
                         <asp:TextBox ID="TextBox5" runat="server" CssClass=" span8" Width="250px" Height="50px" TextMode="MultiLine" Enabled="true" Text="" />
 
 
-                        <input type="button" id="Button6" value="enviar" class="btn btn-primary" style="height:40px" />
+                        <input type="button" id="Button6" value="enviar" class="btn btn-primary" style="height: 50px; vertical-align: top;" />
 
-                        <ajaxToolkit:AsyncFileUpload ID="AsyncFileUpload3" runat="server" OnClientUploadComplete="ClientUploadComplete3"
-                            UploaderStyle="Modern" CssClass="AFU" FailedValidation="False"  />
+                        <span>
+                            <ajaxToolkit:AsyncFileUpload ID="AsyncFileUpload3" runat="server" OnClientUploadComplete="ClientUploadComplete3"
+                                UploaderStyle="Modern" CssClass="AFU" FailedValidation="False" />
 
-                                                <input type="button" id="Button77" value="cerrar consulta" class="btn btn-primary" />
+                            <input type="button" id="Button77" value="cerrar consulta" class="btn btn-primary" />
+                        </span>
 
-                       <script>
+                        <script>
 
 
                             function ClientUploadComplete3(sender, args) {
                                 $('#Lista').trigger('reloadGrid'); scrollToLastRow($('#Lista'));
                             }
 
-                            
+
 
                             $("#__tab_ctl00_ContentPlaceHolder1_TabContainer2_TabPanel5").click(function () {
                                 //alert('holis');
-                                        scrollToLastRow($("#Lista"))
+                                scrollToLastRow($("#Lista"))
                             })
 
 
@@ -4754,7 +4759,7 @@
                 //AgregarItemVacio(grid)
 
                 scrollToLastRow($("#Lista"))
-                
+
             },
 
 
