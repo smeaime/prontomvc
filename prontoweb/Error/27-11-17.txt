@@ -838,3 +838,73 @@ Log Entry :
 11/27/2017 09:43:42
 Error in: http://localhost:50769/ProntoWeb/CartaDePorteMovil.aspx?Id=3154882. Error Message:PV 2 0
 __________________________
+
+Log Entry : 
+11/27/2017 10:01:42
+Error in: http://localhost:50769/ProntoWeb/CartaDePorte.aspx?Id=. Error Message:Mariano esta logueado, pero lo redirijo al login porque faltan los datos de session. No deberia mejor mandarlo a SeleccionarEmpresa? Ademas, no hago el LogOut y le queda el cookie!!!
+__________________________
+
+Log Entry : 
+11/27/2017 10:01:46
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteMovil.aspx?Id=3154882. Error Message:La carta numero 564793833 id=3154882 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+11/27/2017 10:01:46
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteMovil.aspx?Id=3154882. Error Message:PV 2 0
+__________________________
+
+Log Entry : 
+11/27/2017 10:01:47
+Error in: http://localhost:50769/ProntoWeb/CartasDePortes.aspx. Error Message:Mariano
+__________________________
+
+Log Entry : 
+11/27/2017 10:02:04
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteMovil.aspx?Id=3154882. Error Message:La carta numero 564793833 id=3154882 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+11/27/2017 10:02:04
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteMovil.aspx?Id=3154882. Error Message:PV 2 0
+__________________________
+
+Log Entry : 
+11/27/2017 10:03:08
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteMovil.aspx?Id=3154882. Error Message:Mariano esta logueado, pero lo redirijo al login porque faltan los datos de session. No deberia mejor mandarlo a SeleccionarEmpresa? Ademas, no hago el LogOut y le queda el cookie!!!
+__________________________
+
+Log Entry : 
+11/27/2017 10:03:17
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteMovil.aspx?Id=3154882. Error Message:La carta numero 564793833 id=3154882 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+11/27/2017 10:03:17
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteMovil.aspx?Id=3154882. Error Message:PV 2 0
+__________________________
+
+Log Entry : 
+11/27/2017 10:04:14
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteMovil.aspx?Id=3154882. Error Message:Mariano esta logueado, pero lo redirijo al login porque faltan los datos de session. No deberia mejor mandarlo a SeleccionarEmpresa? Ademas, no hago el LogOut y le queda el cookie!!!
+__________________________
+
+Log Entry : 
+11/27/2017 10:05:53
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteMovil.aspx?Id=3154882. Error Message:La carta numero 564793833 id=3154882 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+11/27/2017 10:05:53
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteMovil.aspx?Id=3154882. Error Message:PV 2 0
+__________________________
+
+Log Entry : 
+11/27/2017 10:07:35
+Error in: http://localhost:50769/SeleccionarEmpresa.aspx. Error Message:sesion: RODRIGORIOS True
+__________________________
+
+Log Entry : 
+11/27/2017 10:07:35
+Error in: http://localhost:50769/SeleccionarEmpresa.aspx. Error Message:Pasa nomas. membership: RODRIGORIOS
+__________________________

@@ -3784,7 +3784,7 @@ Partial Class CartadeporteABMMovil
 
 
         Dim s = New ServicioCartaPorte.servi()
-        s.GrabarComentario_DLL(IdCartaDePorte, "<a href=""" + "\DataBackupear\" + nombrenuevo + """   > Bajar archivo </a>", Membership.GetUser.UserName, SC)
+        s.GrabarComentario_DLL(IdCartaDePorte, "\DataBackupear\" + nombrenuevo, Membership.GetUser.UserName, SC)
 
         AjaxControlToolkit.ToolkitScriptManager.RegisterStartupScript(Me, Me.GetType(), "dfsdf", " $('#Lista').trigger('reloadGrid'); scrollToLastRow($('#Lista'));", True)
 
