@@ -263,6 +263,11 @@ namespace ProntoMVC.Controllers
                 foreach (TarjetasCredito u in db.TarjetasCreditoes.OrderBy(x => x.Nombre).ToList())
                     Datacombo.Add(u.IdTarjetaCredito, u.Nombre);
             }
+            if (TipoEntidad == 4)
+            {
+                foreach (Caja u in db.Cajas.OrderBy(x => x.Descripcion).ToList())
+                    Datacombo.Add(u.IdCaja, u.Descripcion);
+            }
             return PartialView("Select", Datacombo);
         }
 

@@ -1084,7 +1084,9 @@ namespace ProntoMVC.Controllers
                                      a.Fax,
                                      a.Email,
                                      a.Cuit,
-                                     DescripcionIva = a.DescripcionIva.Descripcion
+                                     DescripcionIva = a.DescripcionIva.Descripcion,
+                                     IdCodigoIva = a.IdCodigoIva,
+                                     IdIBCondicionPorDefecto = a.IdIBCondicionPorDefecto
                                  }).ToList();
 
             if (filtereditems.Count == 0) return Json(new { value = "No se encontraron resultados" }, JsonRequestBehavior.AllowGet);
@@ -1128,7 +1130,6 @@ namespace ProntoMVC.Controllers
                              value = item.RazonSocial,
                              // value = SqlFunctions.StringConvert(item.Codigo) + " " + item.RazonSocial,
                              // value = item.Codigo + " " + item.RazonSocial, // esto trae problemas de COLLATION para linq... lo mejor parece ser resolver esos temas con una vista en sql
-
                              codigo = item.CodigoProveedor,
                              idCodigoIva = item.IdCodigoIva,
                              IdIBCondicionPorDefecto = item.IdIBCondicionPorDefecto,
