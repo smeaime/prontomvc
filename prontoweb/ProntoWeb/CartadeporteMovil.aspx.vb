@@ -41,8 +41,9 @@ Partial Class CartadeporteABMMovil
         'todo: está bien que deje habilitado el viewstate para el objetito CartaPorte, pero
         'sacarlo para los controles
 
-
-
+        If Not (Roles.IsUserInRole(Membership.GetUser().UserName, "WilliamsComercial") Or Roles.IsUserInRole(Membership.GetUser().UserName, "WilliamsAdmin") Or Roles.IsUserInRole(Membership.GetUser().UserName, "WilliamsFacturacion")) Then
+            Response.Redirect("CartadeporteExternoMovil.aspx?Id=" & If(Request.QueryString("Id"), "").ToString())
+        End If
 
         If Request.Browser("IsMobileDevice") <> "true" Then
             Response.Redirect("CartaDePorte.aspx?Id=" & If(Request.QueryString("Id"), "").ToString())
