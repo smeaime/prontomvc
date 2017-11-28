@@ -6104,7 +6104,7 @@ Formato localidad-provincia	destination	x
                                 
                                 a.IdReclamoComentario.ToString(),
                                 a.IdReclamo.ToString(),
-                                a.Empleado.Nombre.NullSafeToString(),
+                                a.NombreUsuario.NullSafeToString() + "<br/> " + a.Fecha.GetValueOrDefault().ToShortTimeString()  + "<br/> "  + a.Fecha.GetValueOrDefault().ToShortDateString(),
 
                                 (a.IdEmpleado==1) ? "" : a.Comentario,
                                 //a.Comentario,  // (a.IdEmpleado!=1) ? "" : a.Comentario ,
@@ -6710,48 +6710,8 @@ Formato localidad-provincia	destination	x
 
             //estan como empleados los usuarios externos de williams?
 
-            var scEF = ProntoMVC.Data.Models.Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC));
-
-            using (DemoProntoEntities db = new DemoProntoEntities(scEF))
-            {
-
-                db.Database.CommandTimeout = 200;
-
-                Reclamo rec;
-                CartasDePorte carta = db.CartasDePortes.Find(2633399);
-
-                if (carta.IdReclamo == null)
-                {
-                    rec = new Reclamo();
-                    rec.Estado = 22;
-                    rec.Descripcion = "nuevo reclamo";
-                    db.Reclamos.Add(rec);
-                    db.SaveChanges();
-                    carta.IdReclamo = rec.IdReclamo;
-                }
-                else
-                {
-                    rec = db.Reclamos.Find(carta.IdReclamo);
-                }
-
-
-                var com = new ReclamoComentario(); // db.ReclamoComentarios.FirstOrDefault().IdReclamo;
-                com.IdReclamo = rec.IdReclamo;
-                com.IdEmpleado = 1;
-                com.Comentario = comentario;
-                com.Fecha = DateTime.Now;
-                db.ReclamoComentarios.Add(com);
-
-
-                db.SaveChanges();
-
-
-
-
-            }
-
-
-            return "";
+            GrabarComentario_DLL(idcarta, comentario, nombreusuario, SC);
+return "";
 
         }
 

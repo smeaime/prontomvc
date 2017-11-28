@@ -41,11 +41,15 @@ Partial Class CartadeporteABMExternoMovil
         'todo: está bien que deje habilitado el viewstate para el objetito CartaPorte, pero
         'sacarlo para los controles
 
-        hacer la misma validacion q haces con las imagenes
+
+
+
+
+
 
 
         If Request.Browser("IsMobileDevice") <> "true" Then
-            Response.Redirect("CartaDePorte.aspx?Id=" & If(Request.QueryString("Id"), "").ToString())
+            'Response.Redirect("CartaDePorte.aspx?Id=" & If(Request.QueryString("Id"), "").ToString())
         End If
 
 
@@ -207,80 +211,139 @@ Partial Class CartadeporteABMExternoMovil
             End If
 
 
+
+
+
+
+
+            '//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            '//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            '//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            '//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            '//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            '//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            'permisos del usuario externo para esta carta
+            Dim rs As String
+            Try
+                rs = UserDatosExtendidosManager.TraerRazonSocialDelUsuario(Session(SESSIONPRONTO_UserId), ConexBDLmaster, HFSC.Value)
+            Catch ex As Exception
+                ErrHandler2.WriteError(ex)
+                rs = Session(SESSIONPRONTO_UserName) 'como no encuentro el usuario en la tabla de datos adicionales de la bdlmaster, uso el nombre del usuario como razon social que esperaba encontrar en esa dichosa tabla
+            End Try
+
+            Dim idcli As Integer
+            If rs <> "" Then
+                idcli = BuscaIdClientePreciso(rs, HFSC.Value)
+                If idcli = -1 Then
+
+                    MsgBoxAjax(Me, "No existe el cliente: " & rs)
+                    Exit Sub
+                End If
+            End If
+
+            If myCartaDePorte.Titular <> idcli And
+                myCartaDePorte.Entregador <> idcli And
+                myCartaDePorte.CuentaOrden1 <> idcli And
+                myCartaDePorte.CuentaOrden2 <> idcli And
+                IdClienteEquivalenteDelIdVendedor(myCartaDePorte.Corredor, SC) <> idcli Then
+
+                ErrHandler2.WriteError("No tenés permisos para esta carta")
+                MsgBoxAjaxAndRedirect(Me, "No tenés permisos para esta carta", "CartaDePorteInformesAccesoClientes.aspx")
+                Exit Sub
+            End If
+
+            '//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            '//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            '//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            '//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            '//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            '//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            '//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            '//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            '//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            '//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+
+
+
             If IdCartaDePorte > 0 And myCartaDePorte Is Nothing Then
-                MsgBoxAjaxAndRedirect(Me, "La carta buscada (ID=" & IdCartaDePorte & ") no existe ", String.Format("CartasDePortes.aspx"))
-                myCartaDePorte = AltaSetup() 'para q no se disparen los validadores
-                RangeValidatorFechaArribo.MinimumValue = Today.AddDays(-3).ToShortDateString 'si no pongo esto, el range hace explotar la pagina
-                '  RangeValidatorFechaDescarga.MinimumValue() = Today.AddDays(-3).ToShortDateString
-                '  RangeValidatorFechaDescarga.Enabled = False
-                Return
+                    MsgBoxAjaxAndRedirect(Me, "La carta buscada (ID=" & IdCartaDePorte & ") no existe ", String.Format("CartasDePortes.aspx"))
+                    myCartaDePorte = AltaSetup() 'para q no se disparen los validadores
+                    RangeValidatorFechaArribo.MinimumValue = Today.AddDays(-3).ToShortDateString 'si no pongo esto, el range hace explotar la pagina
+                    '  RangeValidatorFechaDescarga.MinimumValue() = Today.AddDays(-3).ToShortDateString
+                    '  RangeValidatorFechaDescarga.Enabled = False
+                    Return
+                End If
+
+
+
+
+
+                Me.ViewState.Add(mKey, myCartaDePorte)
+
+                btnOk.OnClientClick = String.Format("fnClickOK('{0}','{1}')", btnOk.UniqueID, "")
+
+                BloqueosDeEdicion(myCartaDePorte)
+
+
+                If myCartaDePorte.NetoFinalIncluyendoMermas > 0 Then 'dependiendo del estado, abre una u otra solapa
+                    TabContainer2.ActiveTabIndex = 1
+                Else
+                    TabContainer2.ActiveTabIndex = 0
+                End If
+
+
+                '////////////////////////////
+                RangeValidatorFechaArribo.MinimumValue = Today.AddDays(-3).ToShortDateString
+                RangeValidatorFechaArribo.MaximumValue = Today.AddDays(3).ToShortDateString
+
+                RefrescarRangeValidatorFechaDescarga()
+
+                '   If RangeValidatorFechaDescarga.MinimumValue() = "" Then RangeValidatorFechaDescarga.MinimumValue() = DateTime.MinValue.ToShortDateString 'Today.AddDays(.ToShortDateString
+
+
+
+
+
+
+
+                ''////////////////////////////////////////////////
+                ''////////////////////////////////////////////////
+                ''debug
+                ''Traerme el maestro de clientes creo que son 140k
+                'Dim items As New System.Collections.Generic.List(Of String)
+                'Dim dt = ExecDinamico(SC, "SELECT razonsocial FROM clientes")
+                'For Each dr As Data.DataRow In dt.Rows
+                '    items.Add(dr.Item(0))
+                'Next
+                'ViewState("CacheClientes") = items.ToArray()
+                ''////////////////////////////////////////////////
+                ''////////////////////////////////////////////////
+                ''////////////////////////////////////////////////
+
+                'ScriptManager.RegisterStartupScript(Me, Me.GetType(), "StartUpSyngenta", "jsVerificarSyngenta();", True)
+                'ScriptManager.RegisterStartupScript(Me, Me.GetType(), "StartUpSyngenta", "jsVerificarSyngentaIntermediario();", True)
+
+                AjaxControlToolkit.ToolkitScriptManager.RegisterStartupScript(Me, Me.GetType(), "StartUpSyngenta", "jsVerificarAcopiosFacturarA();  jsVerificarSyngenta(); jsVerificarSyngentaCorredor(); jsVerificarSyngentaDestinatario(); jsVerificarSyngentaRemitente(); jsVerificarSyngentaIntermediario(); ", True)
+                'AjaxControlToolkit.ToolkitScriptManager.RegisterStartupScript(Me, Me.GetType(), "StartUpSyngenta", "jsVerificarSyngentaIntermediario();", True)
+                'AjaxControlToolkit.ToolkitScriptManager.RegisterStartupScript(Me, Me.GetType(), "StartUpSyngenta", "jsVerificarSyngentaCorredor();", True)
+                'AjaxControlToolkit.ToolkitScriptManager.RegisterStartupScript(Me, Me.GetType(), "StartUpSyngenta", "jsVerificarSyngentaDestinatario();", True)
+                'AjaxControlToolkit.ToolkitScriptManager.RegisterStartupScript(Me, Me.GetType(), "StartUpSyngenta", "jsVerificarSyngentaRemitente();", True)
+
+
+
+
+
             End If
+            'MostrarElementos(False)
 
 
 
-
-
-            Me.ViewState.Add(mKey, myCartaDePorte)
-
-            btnOk.OnClientClick = String.Format("fnClickOK('{0}','{1}')", btnOk.UniqueID, "")
-
-            BloqueosDeEdicion(myCartaDePorte)
-
-
-            If myCartaDePorte.NetoFinalIncluyendoMermas > 0 Then 'dependiendo del estado, abre una u otra solapa
-                TabContainer2.ActiveTabIndex = 1
-            Else
-                TabContainer2.ActiveTabIndex = 0
-            End If
-
-
-            '////////////////////////////
-            RangeValidatorFechaArribo.MinimumValue = Today.AddDays(-3).ToShortDateString
-            RangeValidatorFechaArribo.MaximumValue = Today.AddDays(3).ToShortDateString
-
-            RefrescarRangeValidatorFechaDescarga()
-
-            '   If RangeValidatorFechaDescarga.MinimumValue() = "" Then RangeValidatorFechaDescarga.MinimumValue() = DateTime.MinValue.ToShortDateString 'Today.AddDays(.ToShortDateString
-
-
-
-
-
-
-
-            ''////////////////////////////////////////////////
-            ''////////////////////////////////////////////////
-            ''debug
-            ''Traerme el maestro de clientes creo que son 140k
-            'Dim items As New System.Collections.Generic.List(Of String)
-            'Dim dt = ExecDinamico(SC, "SELECT razonsocial FROM clientes")
-            'For Each dr As Data.DataRow In dt.Rows
-            '    items.Add(dr.Item(0))
-            'Next
-            'ViewState("CacheClientes") = items.ToArray()
-            ''////////////////////////////////////////////////
-            ''////////////////////////////////////////////////
-            ''////////////////////////////////////////////////
-
-            'ScriptManager.RegisterStartupScript(Me, Me.GetType(), "StartUpSyngenta", "jsVerificarSyngenta();", True)
-            'ScriptManager.RegisterStartupScript(Me, Me.GetType(), "StartUpSyngenta", "jsVerificarSyngentaIntermediario();", True)
-
-            AjaxControlToolkit.ToolkitScriptManager.RegisterStartupScript(Me, Me.GetType(), "StartUpSyngenta", "jsVerificarAcopiosFacturarA();  jsVerificarSyngenta(); jsVerificarSyngentaCorredor(); jsVerificarSyngentaDestinatario(); jsVerificarSyngentaRemitente(); jsVerificarSyngentaIntermediario(); ", True)
-            'AjaxControlToolkit.ToolkitScriptManager.RegisterStartupScript(Me, Me.GetType(), "StartUpSyngenta", "jsVerificarSyngentaIntermediario();", True)
-            'AjaxControlToolkit.ToolkitScriptManager.RegisterStartupScript(Me, Me.GetType(), "StartUpSyngenta", "jsVerificarSyngentaCorredor();", True)
-            'AjaxControlToolkit.ToolkitScriptManager.RegisterStartupScript(Me, Me.GetType(), "StartUpSyngenta", "jsVerificarSyngentaDestinatario();", True)
-            'AjaxControlToolkit.ToolkitScriptManager.RegisterStartupScript(Me, Me.GetType(), "StartUpSyngenta", "jsVerificarSyngentaRemitente();", True)
-
-
-
-
-
-        End If
-        'MostrarElementos(False)
-
-
-
-        Me.Title = ViewState("PaginaTitulo") 'lo estoy perdiendo, así que guardo el titulo en el viewstate
+            Me.Title = ViewState("PaginaTitulo") 'lo estoy perdiendo, así que guardo el titulo en el viewstate
 
 
 
@@ -496,7 +559,7 @@ Partial Class CartadeporteABMExternoMovil
         If Not p("PuedeModificar") Then
             'anular la columna de edicion
             'getGridIDcolbyHeader(
-            Response.Redirect(String.Format("Principal.aspx"))
+            'Response.Redirect(String.Format("Principal.aspx"))
         End If
 
 
