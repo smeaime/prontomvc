@@ -1029,6 +1029,17 @@ namespace ProntoMVC.Tests
 
 
 
+        [TestMethod]
+        public void cerrar_consulta_43063()
+        {
+            int idcarta = 2633399;
+
+
+            var s = new ServicioCartaPorte.servi();
+            s.CerrarReclamo_DLL(idcarta, usuario, SC);
+
+        }
+
 
 
         [TestMethod]

@@ -792,6 +792,12 @@ Partial Class CartadeporteABMExternoMovil
         '////////////////////////////////////////////
 
 
+        TabPanel1.Enabled = False
+        TabPanel2.Enabled = False
+        TabPanel3.Enabled = False
+        TabContainer2.ActiveTabIndex = 4
+
+
     End Sub
 
 
