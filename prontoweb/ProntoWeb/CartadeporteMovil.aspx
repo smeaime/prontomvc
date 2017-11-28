@@ -4717,7 +4717,7 @@
                 // CP	TURNO	SITUACION	MERC	TITULAR_CP	INTERMEDIARIO	RTE CIAL	CORREDOR	DESTINATARIO	DESTINO	ENTREGADOR	PROC	KILOS	OBSERVACION
 
 
-                colNames: ['', 'IdReclamoComentario', 'IdReclamo', 'Empleado', 'Comentario', 'Comentario2'
+                colNames: ['', 'IdReclamoComentario', 'IdReclamo', 'Nombre', 'Comentario', 'Comentario'
                                 , 'Fecha', 'ArchivoAdjunto'
                     , 'nrocarta'
                 ],
@@ -4936,7 +4936,7 @@
 
                 shrinkToFit: false,
 
-                width: 260, //$(window).width() - 4, // 310, //'auto',
+                width: 310, //$(window).width() - 4, // 310, //'auto',
                 height: 320, //'auto', // '100%', //$(window).height() - 260, // '100%'
 
                 altRows: false,
