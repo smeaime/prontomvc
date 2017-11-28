@@ -6666,7 +6666,7 @@ Formato localidad-provincia	destination	x
                 if (carta.IdReclamo == null)
                 {
                     rec = new Reclamo();
-                    rec.Estado = 22;
+                    rec.Estado = 1;
                     rec.Descripcion = "nuevo reclamo";
                     db.Reclamos.Add(rec);
                     db.SaveChanges();
@@ -6703,6 +6703,41 @@ Formato localidad-provincia	destination	x
 
 
 
+        public virtual string[] CerrarReclamo_DLL(int idcarta, string nombreusuario, string SC)
+        {
+
+
+            //estan como empleados los usuarios externos de williams?
+
+            var scEF = ProntoMVC.Data.Models.Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC));
+
+            using (DemoProntoEntities db = new DemoProntoEntities(scEF))
+            {
+
+                db.Database.CommandTimeout = 200;
+
+                Reclamo rec;
+                CartasDePorte carta = db.CartasDePortes.Find(idcarta);
+
+                rec = db.Reclamos.Find(carta.IdReclamo);
+
+                rec.Estado = 2;
+
+
+                db.SaveChanges();
+
+
+                var usuariosParticipantes = db.ReclamoComentarios.Where(x => x.IdReclamo == rec.IdReclamo).Select(x => x.NombreUsuario).Distinct().ToArray();
+                return usuariosParticipantes;
+
+            }
+
+
+
+        }
+
+
+
 
         public virtual string GrabarComentarioArchivo_DLL(int idcarta, string comentario, string nombreusuario, string SC)
         {
@@ -6711,7 +6746,7 @@ Formato localidad-provincia	destination	x
             //estan como empleados los usuarios externos de williams?
 
             GrabarComentario_DLL(idcarta, comentario, nombreusuario, SC);
-return "";
+            return "";
 
         }
 

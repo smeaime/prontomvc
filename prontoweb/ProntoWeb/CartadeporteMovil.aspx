@@ -2804,6 +2804,10 @@
                         /*.ui-jqgrid tr.jqgrow td { height: 30px; }*/
 
 
+                        .ui-jqgrid tr.jqgrow td {
+                            white-space: normal !important; /* para el wrap*/
+                        }
+
                         /* .ui-jqgrid {font-size:0.8em} */
                         .ui-jqgrid tr.jqgrow td {
                             font-size: 0.6em
@@ -2841,7 +2845,7 @@
                     <div id="ListaPager" class="scroll" style="text-align: center; height: ;">
                     </div>
 
-                    
+
                     <div class="row-fluid">
 
                         <asp:TextBox ID="TextBox5" runat="server" CssClass=" span8" Width="250px" Height="50px" TextMode="MultiLine" Enabled="true" Text="" />
@@ -2851,7 +2855,7 @@
 
                         <span>
                             <ajaxToolkit:AsyncFileUpload ID="AsyncFileUpload3" runat="server" OnClientUploadComplete="ClientUploadComplete3"
-                                UploaderStyle="Modern" CssClass="AFU3" FailedValidation="False" />
+                                UploaderStyle="Modern" CssClass="AFU AFU3" FailedValidation="False" />
 
                             <input type="button" id="Button77" value="cerrar consulta" class="btn btn-primary" />
                         </span>
