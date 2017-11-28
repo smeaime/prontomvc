@@ -2161,3 +2161,12 @@ go
 
 
 
+
+alter table ReclamoComentarios ADD
+	NombreUsuario varchar(150) NULL
+go
+
+
+
+
+
