@@ -1007,6 +1007,8 @@ namespace ProntoMVC.Tests
         public void EnviarMailALosQueParticipanEnElReclamo()
         {
 
+            // podria pasarle a la funcion el listado de usuarios+mails....
+            // o tambien, pasarle la conexion a la bdlmaster y hacer a mano la busqueda...
 
             //sfasdf
             //asdasdfasdfasdf

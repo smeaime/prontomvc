@@ -219,22 +219,23 @@ Public Class WebServiceCartas
             Dim usuarios = s.GrabarComentario_DLL(idCartaPorte, sComentario, usuario, Encriptar(scs))
 
 
-
-            Dim casillas As String
+            Dim linkAlReclamo = ConfigurationManager.AppSettings("UrlDominio") + "/ProntoWeb/CartaDePorteMovil.aspx?Id=" + idCartaPorte.ToString
+            Dim casillas = ""
             For Each u In usuarios
+                If u Is Nothing Then Continue For
                 If u = usuario Then Continue For
                 casillas += Membership.GetUser(u).Email + ","
             Next
             casillas += ConfigurationManager.AppSettings("ErrorMail")
             Pronto.ERP.Bll.EntidadManager.MandaEmail_Nuevo(casillas,
                                "Consulta por carta porte",
-                            usuario + " " + sComentario + linkAlReclamo,
+                            usuario + " " + sComentario + "<br> " + linkAlReclamo,
                             ConfigurationManager.AppSettings("SmtpUser"),
                             ConfigurationManager.AppSettings("SmtpServer"),
                             ConfigurationManager.AppSettings("SmtpUser"),
                             ConfigurationManager.AppSettings("SmtpPass"),
                               "",
-                           Convert.ToInt16(ConfigurationManager.AppSettings("SmtpPort")))
+                           Convert.ToInt16(ConfigurationManager.AppSettings("SmtpPort")),,,,,,)
 
 
 
