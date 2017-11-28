@@ -23,8 +23,8 @@ Imports Microsoft.VisualBasic
 
 
 '<SoapDocumentService(Use:=System.Web.Services.Description.SoapBindingUse.Literal,   ParameterStyle:=SoapParameterStyle.Wrapped)> _
-<WebService(Namespace:="http://microsoft.com/webservices/")> _
-<System.Web.Script.Services.ScriptService()> _
+<WebService(Namespace:="http://microsoft.com/webservices/")>
+<System.Web.Script.Services.ScriptService()>
 Public Class WebServiceCartas
     Inherits System.Web.Services.WebService
 
@@ -119,7 +119,7 @@ Public Class WebServiceCartas
 
 
 
-    <WebMethod(Description:="Devuelve un archivo con la imagen de la carta porte", EnableSession:=False)> _
+    <WebMethod(Description:="Devuelve un archivo con la imagen de la carta porte", EnableSession:=False)>
     Public Function BajarImagenDeCartaPorte(usuario As String, password As String, numerocarta As Long) As Byte()
 
         Try
@@ -143,7 +143,7 @@ Public Class WebServiceCartas
 
 
 
-    <WebMethod(Description:="Devuelve un listado de descargas", EnableSession:=False)> _
+    <WebMethod(Description:="Devuelve un listado de descargas", EnableSession:=False)>
     Public Function BajarListadoDeCartaPorte(usuario As String, password As String, fechadesde As DateTime, fechahasta As DateTime) As Byte()
 
 
@@ -168,7 +168,7 @@ Public Class WebServiceCartas
     End Function
 
 
-    <WebMethod(Description:="Devuelve un listado de descargas con formato Cerealnet", EnableSession:=False)> _
+    <WebMethod(Description:="Devuelve un listado de descargas con formato Cerealnet", EnableSession:=False)>
     Public Function BajarListadoDeCartaPorte_CerealNet(usuario As String, password As String, cuit As String, fechadesde As DateTime, fechahasta As DateTime) As CerealNet.WSCartasDePorte.respuestaEntrega
 
 
@@ -214,6 +214,14 @@ Public Class WebServiceCartas
 
 
 
+
+            '////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            '////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            '////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            '////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+            Dim carta = CartaDePorteManager.GetItem(Encriptar(scs), idCartaPorte)
             Dim usuario = Membership.GetUser.UserName
             Dim s = New ServicioCartaPorte.servi()
             Dim usuarios = s.GrabarComentario_DLL(idCartaPorte, sComentario, usuario, Encriptar(scs))
@@ -226,10 +234,38 @@ Public Class WebServiceCartas
                 If u = usuario Then Continue For
                 casillas += Membership.GetUser(u).Email + ","
             Next
-            casillas += ConfigurationManager.AppSettings("ErrorMail")
+
+
+            If Not (Roles.IsUserInRole(Membership.GetUser().UserName, "WilliamsComercial") Or Roles.IsUserInRole(Membership.GetUser().UserName, "WilliamsAdmin") Or Roles.IsUserInRole(Membership.GetUser().UserName, "WilliamsFacturacion")) Then
+                'como es un usuario externo el q hace el comentario, incluyo en las casillas a la oficina
+
+                Dim De As String
+                Dim CCOaddress As String
+                Select Case carta.PuntoVenta
+                    Case 1
+                        De = "buenosaires@williamsentregas.com.ar"
+                        CCOaddress = "descargas-ba@williamsentregas.com.ar" ' & CCOaddress
+                    Case 2
+                        De = "sanlorenzo@williamsentregas.com.ar"
+                        CCOaddress = "descargas-sl@williamsentregas.com.ar" ' & CCOaddress
+                    Case 3
+                        De = "arroyoseco@williamsentregas.com.ar"
+                        CCOaddress = "descargas-as@williamsentregas.com.ar" '& CCOaddress
+                    Case 4
+                        De = "bahiablanca@williamsentregas.com.ar"
+                        CCOaddress = "descargas-bb@williamsentregas.com.ar" ' & CCOaddress
+                    Case Else
+                        De = "buenosaires@williamsentregas.com.ar"
+                        CCOaddress = "descargas-ba@williamsentregas.com.ar" ' & CCOaddress
+                End Select
+
+                casillas += De 'ConfigurationManager.AppSettings("ErrorMail")
+            End If
+
+
             Pronto.ERP.Bll.EntidadManager.MandaEmail_Nuevo(casillas,
                                "Consulta por carta porte",
-                            usuario + " " + sComentario + "<br> " + linkAlReclamo,
+                            "Comentario de " + usuario + ": <br/>" + sComentario + "<br/><br/> " + "<a href='" + linkAlReclamo + "'>Link al comentario</a>",
                             ConfigurationManager.AppSettings("SmtpUser"),
                             ConfigurationManager.AppSettings("SmtpServer"),
                             ConfigurationManager.AppSettings("SmtpUser"),
@@ -238,6 +274,11 @@ Public Class WebServiceCartas
                            Convert.ToInt16(ConfigurationManager.AppSettings("SmtpPort")),,,,,,)
 
 
+            '////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            '////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            '////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            '////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            '////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 
@@ -256,7 +297,7 @@ Public Class WebServiceCartas
 
 
 
-    <WebMethod(Description:="", EnableSession:=False)> _
+    <WebMethod(Description:="", EnableSession:=False)>
     Public Function GrabarSituacion(idcarta As Long, idsituacion As Integer, sObservacionesSituacion As String) As String
 
 
