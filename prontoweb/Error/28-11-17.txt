@@ -3514,3 +3514,321 @@ Referencia a objeto no establecida como instancia de un objeto.
    en SituacionCalidadMovil.BindTypeDropDown() en C:\bdl\pronto\prontoweb\ProntoWeb\SituacionCalidadMovil.aspx.vb:línea 184
 App_Web_situacioncalidadmovil.aspx.4199bbd4._1woayks
 __________________________
+
+Log Entry : 
+11/28/2017 12:10:03
+Error in: http://localhost:50769/ProntoWeb/CartasPortesExternoMovil.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartasPortesExternoMovil.BindTypeDropDown() en C:\bdl\pronto\prontoweb\ProntoWeb\CartasPortesExternoMovil.aspx.vb:línea 167
+App_Web_cartasportesexternomovil.aspx.4199bbd4.jngnsl9u
+__________________________
+
+Log Entry : 
+11/28/2017 12:10:07
+Error in: http://localhost:50769/ProntoWeb/CartasDePortes.aspx?tipo=Todas. Error Message:RODRIGORIOS
+__________________________
+
+Log Entry : 
+11/28/2017 12:10:07
+Error in: http://localhost:50769/ProntoWeb/CartasDePortesMovil.aspx. Error Message:RODRIGORIOS
+__________________________
+
+Log Entry : 
+11/28/2017 12:10:07
+Error in: http://localhost:50769/ProntoWeb/CartasDePortesMovil.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartasDePortesMovil.BindTypeDropDown() en C:\bdl\pronto\prontoweb\ProntoWeb\CartasDePortesMovil.aspx.vb:línea 98
+App_Web_cartasdeportesmovil.aspx.4199bbd4.pzxoi8ax
+__________________________
+
+Log Entry : 
+11/28/2017 12:10:07
+Error in: http://localhost:50769/ProntoWeb/CartasDePortesMovil.aspx. Error Message:System.Threading.ThreadAbortException
+Subproceso anulado.
+   en System.Threading.Thread.AbortInternal()
+   en System.Threading.Thread.Abort(Object stateInfo)
+   en System.Web.HttpResponse.AbortCurrentThread()
+   en System.Web.HttpResponse.End()
+   en System.Web.HttpResponse.Redirect(String url, Boolean endResponse, Boolean permanent)
+   en System.Web.HttpResponse.Redirect(String url)
+   en CartasDePortesMovil.Permisos() en C:\bdl\pronto\prontoweb\ProntoWeb\CartasDePortesMovil.aspx.vb:línea 142
+mscorlib
+__________________________
+
+Log Entry : 
+11/28/2017 12:10:07
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesAccesoClientes.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartaDePorteInformesAccesoClientes.BindTypeDropDown() en C:\bdl\pronto\prontoweb\ProntoWeb\CartaDePorteInformesAccesoClientes.aspx.vb:línea 269
+App_Web_cartadeporteinformesaccesoclientes.aspx.4199bbd4.czyyf6jj
+__________________________
+
+Log Entry : 
+11/28/2017 12:10:49
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesAccesoClientes.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartaDePorteInformesAccesoClientes.BindTypeDropDown() en C:\bdl\pronto\prontoweb\ProntoWeb\CartaDePorteInformesAccesoClientes.aspx.vb:línea 269
+App_Web_cartadeporteinformesaccesoclientes.aspx.4199bbd4.czyyf6jj
+__________________________
+
+Log Entry : 
+11/28/2017 12:10:51
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesAccesoClientesMovil.aspx. Error Message:System.Web.HttpException
+El archivo '/ProntoWeb/CartaDePorteInformesAccesoClientesMovil.aspx' no existe.
+   en System.Web.UI.Util.CheckVirtualFileExists(VirtualPath virtualPath)
+   en System.Web.Compilation.BuildManager.GetVPathBuildResultInternal(VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean throwIfNotFound, Boolean ensureIsUpToDate)
+   en System.Web.Compilation.BuildManager.GetVPathBuildResultWithNoAssert(HttpContext context, VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean throwIfNotFound, Boolean ensureIsUpToDate)
+   en System.Web.Compilation.BuildManager.GetVirtualPathObjectFactory(VirtualPath virtualPath, HttpContext context, Boolean allowCrossApp, Boolean throwIfNotFound)
+   en System.Web.Compilation.BuildManager.CreateInstanceFromVirtualPath(VirtualPath virtualPath, Type requiredBaseType, HttpContext context, Boolean allowCrossApp)
+   en System.Web.UI.PageHandlerFactory.GetHandlerHelper(HttpContext context, String requestType, VirtualPath virtualPath, String physicalPath)
+   en System.Web.UI.PageHandlerFactory.GetHandler(HttpContext context, String requestType, String virtualPath, String path)
+   en System.Web.HttpApplication.MaterializeHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   en System.Web.HttpApplication.ExecuteStepImpl(IExecutionStep step)
+   en System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+System.Web
+__________________________
+
+Log Entry : 
+11/28/2017 12:11:44
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesAccesoClientes.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartaDePorteInformesAccesoClientes.BindTypeDropDown() en C:\bdl\pronto\prontoweb\ProntoWeb\CartaDePorteInformesAccesoClientes.aspx.vb:línea 269
+App_Web_cartadeporteinformesaccesoclientes.aspx.4199bbd4.czyyf6jj
+__________________________
+
+Log Entry : 
+11/28/2017 12:11:46
+Error in: http://localhost:50769/ProntoWeb/CartasPortesExternoMovil.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartasPortesExternoMovil.BindTypeDropDown() en C:\bdl\pronto\prontoweb\ProntoWeb\CartasPortesExternoMovil.aspx.vb:línea 167
+App_Web_cartasportesexternomovil.aspx.4199bbd4.jngnsl9u
+__________________________
+
+Log Entry : 
+11/28/2017 12:11:48
+Error in: http://localhost:50769/ProntoWeb/CartasDePortes.aspx?tipo=Todas. Error Message:RODRIGORIOS
+__________________________
+
+Log Entry : 
+11/28/2017 12:11:48
+Error in: http://localhost:50769/ProntoWeb/CartasDePortesMovil.aspx. Error Message:RODRIGORIOS
+__________________________
+
+Log Entry : 
+11/28/2017 12:11:48
+Error in: http://localhost:50769/ProntoWeb/CartasDePortesMovil.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartasDePortesMovil.BindTypeDropDown() en C:\bdl\pronto\prontoweb\ProntoWeb\CartasDePortesMovil.aspx.vb:línea 98
+App_Web_cartasdeportesmovil.aspx.4199bbd4.pzxoi8ax
+__________________________
+
+Log Entry : 
+11/28/2017 12:11:48
+Error in: http://localhost:50769/ProntoWeb/CartasDePortesMovil.aspx. Error Message:System.Threading.ThreadAbortException
+Subproceso anulado.
+   en System.Threading.Thread.AbortInternal()
+   en System.Threading.Thread.Abort(Object stateInfo)
+   en System.Web.HttpResponse.AbortCurrentThread()
+   en System.Web.HttpResponse.End()
+   en System.Web.HttpResponse.Redirect(String url, Boolean endResponse, Boolean permanent)
+   en System.Web.HttpResponse.Redirect(String url)
+   en CartasDePortesMovil.Permisos() en C:\bdl\pronto\prontoweb\ProntoWeb\CartasDePortesMovil.aspx.vb:línea 142
+mscorlib
+__________________________
+
+Log Entry : 
+11/28/2017 12:11:48
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesAccesoClientes.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartaDePorteInformesAccesoClientes.BindTypeDropDown() en C:\bdl\pronto\prontoweb\ProntoWeb\CartaDePorteInformesAccesoClientes.aspx.vb:línea 269
+App_Web_cartadeporteinformesaccesoclientes.aspx.4199bbd4.czyyf6jj
+__________________________
+
+Log Entry : 
+11/28/2017 12:11:50
+Error in: http://localhost:50769/ProntoWeb/CartasPortesExternoMovil.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartasPortesExternoMovil.BindTypeDropDown() en C:\bdl\pronto\prontoweb\ProntoWeb\CartasPortesExternoMovil.aspx.vb:línea 167
+App_Web_cartasportesexternomovil.aspx.4199bbd4.jngnsl9u
+__________________________
+
+Log Entry : 
+11/28/2017 12:11:54
+Error in: http://localhost:50769/ProntoWeb/CartasDePortes.aspx?tipo=Todas. Error Message:RODRIGORIOS
+__________________________
+
+Log Entry : 
+11/28/2017 12:11:54
+Error in: http://localhost:50769/ProntoWeb/CartasDePortesMovil.aspx. Error Message:RODRIGORIOS
+__________________________
+
+Log Entry : 
+11/28/2017 12:11:54
+Error in: http://localhost:50769/ProntoWeb/CartasDePortesMovil.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartasDePortesMovil.BindTypeDropDown() en C:\bdl\pronto\prontoweb\ProntoWeb\CartasDePortesMovil.aspx.vb:línea 98
+App_Web_cartasdeportesmovil.aspx.4199bbd4.pzxoi8ax
+__________________________
+
+Log Entry : 
+11/28/2017 12:11:54
+Error in: http://localhost:50769/ProntoWeb/CartasDePortesMovil.aspx. Error Message:System.Threading.ThreadAbortException
+Subproceso anulado.
+   en System.Threading.Thread.AbortInternal()
+   en System.Threading.Thread.Abort(Object stateInfo)
+   en System.Web.HttpResponse.AbortCurrentThread()
+   en System.Web.HttpResponse.End()
+   en System.Web.HttpResponse.Redirect(String url, Boolean endResponse, Boolean permanent)
+   en System.Web.HttpResponse.Redirect(String url)
+   en CartasDePortesMovil.Permisos() en C:\bdl\pronto\prontoweb\ProntoWeb\CartasDePortesMovil.aspx.vb:línea 142
+mscorlib
+__________________________
+
+Log Entry : 
+11/28/2017 12:11:54
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesAccesoClientes.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartaDePorteInformesAccesoClientes.BindTypeDropDown() en C:\bdl\pronto\prontoweb\ProntoWeb\CartaDePorteInformesAccesoClientes.aspx.vb:línea 269
+App_Web_cartadeporteinformesaccesoclientes.aspx.4199bbd4.czyyf6jj
+__________________________
+
+Log Entry : 
+11/28/2017 12:12:01
+Error in: http://localhost:50769/ProntoWeb/CartasPortesExternoMovil.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartasPortesExternoMovil.BindTypeDropDown() en C:\bdl\pronto\prontoweb\ProntoWeb\CartasPortesExternoMovil.aspx.vb:línea 167
+App_Web_cartasportesexternomovil.aspx.4199bbd4.jngnsl9u
+__________________________
+
+Log Entry : 
+11/28/2017 12:12:03
+Error in: http://localhost:50769/ProntoWeb/CartasDePortes.aspx?tipo=Todas. Error Message:RODRIGORIOS
+__________________________
+
+Log Entry : 
+11/28/2017 12:12:03
+Error in: http://localhost:50769/ProntoWeb/CartasDePortesMovil.aspx. Error Message:RODRIGORIOS
+__________________________
+
+Log Entry : 
+11/28/2017 12:12:03
+Error in: http://localhost:50769/ProntoWeb/CartasDePortesMovil.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartasDePortesMovil.BindTypeDropDown() en C:\bdl\pronto\prontoweb\ProntoWeb\CartasDePortesMovil.aspx.vb:línea 98
+App_Web_cartasdeportesmovil.aspx.4199bbd4.pzxoi8ax
+__________________________
+
+Log Entry : 
+11/28/2017 12:12:03
+Error in: http://localhost:50769/ProntoWeb/CartasDePortesMovil.aspx. Error Message:System.Threading.ThreadAbortException
+Subproceso anulado.
+   en System.Threading.Thread.AbortInternal()
+   en System.Threading.Thread.Abort(Object stateInfo)
+   en System.Web.HttpResponse.AbortCurrentThread()
+   en System.Web.HttpResponse.End()
+   en System.Web.HttpResponse.Redirect(String url, Boolean endResponse, Boolean permanent)
+   en System.Web.HttpResponse.Redirect(String url)
+   en CartasDePortesMovil.Permisos() en C:\bdl\pronto\prontoweb\ProntoWeb\CartasDePortesMovil.aspx.vb:línea 142
+mscorlib
+__________________________
+
+Log Entry : 
+11/28/2017 12:12:03
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesAccesoClientes.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartaDePorteInformesAccesoClientes.BindTypeDropDown() en C:\bdl\pronto\prontoweb\ProntoWeb\CartaDePorteInformesAccesoClientes.aspx.vb:línea 269
+App_Web_cartadeporteinformesaccesoclientes.aspx.4199bbd4.czyyf6jj
+__________________________
+
+Log Entry : 
+11/28/2017 12:13:26
+Error in: http://localhost:50769/ProntoWeb/CartasPortesExternoMovil.aspx. Error Message:RODRIGORIOS esta logueado, pero lo redirijo al login porque faltan los datos de session. No deberia mejor mandarlo a SeleccionarEmpresa? Ademas, no hago el LogOut y le queda el cookie!!!
+__________________________
+
+Log Entry : 
+11/28/2017 12:13:26
+Error in: http://localhost:50769/ProntoWeb/CartasPortesExternoMovil.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartasPortesExternoMovil.BindTypeDropDown() en C:\bdl\pronto\prontoweb\ProntoWeb\CartasPortesExternoMovil.aspx.vb:línea 167
+App_Web_cartasportesexternomovil.aspx.4199bbd4.qwxqttbh
+__________________________
+
+Log Entry : 
+11/28/2017 12:13:26
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesAccesoClientes.aspx. Error Message:RODRIGORIOS esta logueado, pero lo redirijo al login porque faltan los datos de session. No deberia mejor mandarlo a SeleccionarEmpresa? Ademas, no hago el LogOut y le queda el cookie!!!
+__________________________
+
+Log Entry : 
+11/28/2017 12:13:26
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesAccesoClientes.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartaDePorteInformesAccesoClientes.BindTypeDropDown() en C:\bdl\pronto\prontoweb\ProntoWeb\CartaDePorteInformesAccesoClientes.aspx.vb:línea 269
+App_Web_cartadeporteinformesaccesoclientes.aspx.4199bbd4.czyyf6jj
+__________________________
+
+Log Entry : 
+11/28/2017 12:13:30
+Error in: http://localhost:50769/ProntoWeb/CartasPortesExternoMovil.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartasPortesExternoMovil.BindTypeDropDown() en C:\bdl\pronto\prontoweb\ProntoWeb\CartasPortesExternoMovil.aspx.vb:línea 167
+App_Web_cartasportesexternomovil.aspx.4199bbd4.qwxqttbh
+__________________________
+
+Log Entry : 
+11/28/2017 12:16:47
+Error in: http://localhost:50769/ProntoWeb/CartasPortesExternoMovil.aspx. Error Message:System.Web.HttpCompileException
+C:\bdl\pronto\prontoweb\ProntoWeb\CartasPortesExternoMovil.aspx.vb(928): error BC30451: 'CDPs_InfAnalisisTarifa' is not declared. It may be inaccessible due to its protection level.
+   en System.Web.Compilation.AssemblyBuilder.Compile()
+   en System.Web.Compilation.BuildProvidersCompiler.PerformBuild()
+   en System.Web.Compilation.BuildManager.CompileWebFile(VirtualPath virtualPath)
+   en System.Web.Compilation.BuildManager.GetVPathBuildResultInternal(VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean throwIfNotFound, Boolean ensureIsUpToDate)
+   en System.Web.Compilation.BuildManager.GetVPathBuildResultWithNoAssert(HttpContext context, VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean throwIfNotFound, Boolean ensureIsUpToDate)
+   en System.Web.Compilation.BuildManager.GetVirtualPathObjectFactory(VirtualPath virtualPath, HttpContext context, Boolean allowCrossApp, Boolean throwIfNotFound)
+   en System.Web.Compilation.BuildManager.CreateInstanceFromVirtualPath(VirtualPath virtualPath, Type requiredBaseType, HttpContext context, Boolean allowCrossApp)
+   en System.Web.UI.PageHandlerFactory.GetHandlerHelper(HttpContext context, String requestType, VirtualPath virtualPath, String physicalPath)
+   en System.Web.UI.PageHandlerFactory.GetHandler(HttpContext context, String requestType, String virtualPath, String path)
+   en System.Web.HttpApplication.MaterializeHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   en System.Web.HttpApplication.ExecuteStepImpl(IExecutionStep step)
+   en System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+System.Web
+__________________________
+
+Log Entry : 
+11/28/2017 12:17:02
+Error in: http://localhost:50769/ProntoWeb/CartasPortesExternoMovil.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartasPortesExternoMovil.BindTypeDropDown() en C:\bdl\pronto\prontoweb\ProntoWeb\CartasPortesExternoMovil.aspx.vb:línea 169
+App_Web_cartasportesexternomovil.aspx.4199bbd4.9sfo7jrt
+__________________________
+
+Log Entry : 
+11/28/2017 12:18:24
+Error in: http://localhost:50769/ProntoWeb/CartasPortesExternoMovil.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartasPortesExternoMovil.BindTypeDropDown() en C:\bdl\pronto\prontoweb\ProntoWeb\CartasPortesExternoMovil.aspx.vb:línea 171
+App_Web_cartasportesexternomovil.aspx.4199bbd4.gllgvhdv
+__________________________
+
+Log Entry : 
+11/28/2017 12:18:30
+Error in: http://localhost:50769/ProntoWeb/SituacionCalidadMovil.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en SituacionCalidadMovil.BindTypeDropDown() en C:\bdl\pronto\prontoweb\ProntoWeb\SituacionCalidadMovil.aspx.vb:línea 184
+App_Web_situacioncalidadmovil.aspx.4199bbd4.z6uwv-hi
+__________________________
+
+Log Entry : 
+11/28/2017 12:18:55
+Error in: http://localhost:50769/ProntoWeb/CartasPortesExternoMovil.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartasPortesExternoMovil.BindTypeDropDown() en C:\bdl\pronto\prontoweb\ProntoWeb\CartasPortesExternoMovil.aspx.vb:línea 171
+App_Web_cartasportesexternomovil.aspx.4199bbd4.gllgvhdv
+__________________________
+
+Log Entry : 
+11/28/2017 12:18:57
+Error in: http://localhost:50769/ProntoWeb/SituacionCalidadMovil.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en SituacionCalidadMovil.BindTypeDropDown() en C:\bdl\pronto\prontoweb\ProntoWeb\SituacionCalidadMovil.aspx.vb:línea 184
+App_Web_situacioncalidadmovil.aspx.4199bbd4.z6uwv-hi
+__________________________

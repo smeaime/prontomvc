@@ -633,7 +633,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
 
 
-            <div id="dialog" title="" style="">
+            <div id="dialog" title="" style="color: blue">
 
                 <%--<input type="button" id="" value="------" class="" style="height: 50px; margin-left: 5px" />--%>
 
