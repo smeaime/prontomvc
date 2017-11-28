@@ -493,6 +493,10 @@
                                                         .AFU2 input {
                                                             background: url("../imagenes/imagen2.png") no-repeat 100% 1px;
                                                         }
+
+                                                        .AFU3 input {
+                                                            background: url("../imagenes/imagen3.png") no-repeat 100% 1px;
+                                                        }
                                                     </style>
                                                     <script>
 
@@ -2837,7 +2841,7 @@
                     <div id="ListaPager" class="scroll" style="text-align: center; height: ;">
                     </div>
 
-                    <br />
+                    
                     <div class="row-fluid">
 
                         <asp:TextBox ID="TextBox5" runat="server" CssClass=" span8" Width="250px" Height="50px" TextMode="MultiLine" Enabled="true" Text="" />
@@ -2847,7 +2851,7 @@
 
                         <span>
                             <ajaxToolkit:AsyncFileUpload ID="AsyncFileUpload3" runat="server" OnClientUploadComplete="ClientUploadComplete3"
-                                UploaderStyle="Modern" CssClass="AFU" FailedValidation="False" />
+                                UploaderStyle="Modern" CssClass="AFU3" FailedValidation="False" />
 
                             <input type="button" id="Button77" value="cerrar consulta" class="btn btn-primary" />
                         </span>
@@ -4725,15 +4729,15 @@
 
                     { name: 'IdReclamoComentario', index: 'IdReclamoComentario', align: 'left', width: 100, editable: false, hidden: true },
                     { name: 'IdReclamo', index: 'IdReclamo', align: 'left', width: 100, editable: false, hidden: true },
-                    { name: 'Empleado', index: 'Empleado', align: 'left', width: 50, hidden: false },
+                    { name: 'Empleado', index: 'Empleado', align: 'left', width: 80, hidden: false },
                     { name: 'Comentario', index: 'Comentario', align: 'left', width: 200, hidden: true },
-                    { name: 'Comentario', index: 'Comentario', align: 'left', width: 200, hidden: false },
+                    { name: 'Comentario', index: 'Comentario', align: 'left', width: 220, hidden: false },
 
-                    { name: 'Fecha', index: 'Fecha', align: 'left', width: 100, editable: true, hidden: false, sortable: false },
+                    { name: 'Fecha', index: 'Fecha', align: 'left', width: 100, editable: true, hidden: true, sortable: false },
 
 
-                    { name: 'ArchivoAdjunto', index: 'ArchivoAdjunto', align: 'left', width: 100, editable: true, hidden: false, sortable: false },
-            { name: 'ArchivoAdjunto', index: 'ArchivoAdjunto', align: 'left', width: 100, editable: true, hidden: false, sortable: false },
+                    { name: 'ArchivoAdjunto', index: 'ArchivoAdjunto', align: 'left', width: 100, editable: true, hidden: true, sortable: false },
+            { name: 'ArchivoAdjunto', index: 'ArchivoAdjunto', align: 'left', width: 100, editable: true, hidden: true, sortable: false },
 
 
 
