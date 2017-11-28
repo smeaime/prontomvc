@@ -156,23 +156,23 @@ Partial Class CartadeporteABM
             '////////////////////
 
             'http://forums.asp.net/t/1362149.aspx     para que no se apriete dos veces el boton de ok
-            'btnSave.Attributes.Add("onclick", "this.disabled=True;" + ClientScript.GetPostBackEventReference(btnSave, "").ToString())
+            'btnSave.Attributes.Add("onclick", "this.disabled=true;" + ClientScript.GetPostBackEventReference(btnSave, "").ToString())
 
             '///////////////////////////////////////////////
             '///////////////////////////////////////////////
             'para que el click sobre la scrollbar del autocomplete no dispare el postback del textbox que extiende
             'http://aadreja.blogspot.com/2009/07/clicking-autocompleteextender-scrollbar.html
-            'Page.Form.Attributes.Add("onsubmit", "Return checkFocusOnExtender();")
+            'Page.Form.Attributes.Add("onsubmit", "return checkFocusOnExtender();")
             '///////////////////////////////////////////////
 
 
-            'Page.Form.Attributes.Add("onKeyUp", "Return jsRecalcular();")
+            'Page.Form.Attributes.Add("onKeyUp", "return jsRecalcular();")
 
 
             '///////////////////////////////////////////////
             '///////////////////////////
             'pongo popups invisible en tiempo de ejecucion, así los puedo ver en tiempo de diseño 
-            'busco todas las configuraciones de "PopupControlID= "
+            'busco todas las configuraciones de "PopupControlID="
             PanelInfoNum.Attributes("style") = "display:none"
             Panel1.Attributes("style") = "display:none"
             'Panel4.Attributes("style") = "display:none"
@@ -691,6 +691,7 @@ Partial Class CartadeporteABM
 
 
 
+        TextBox5.Enabled = True
         'http://bdlconsultores.dyndns.org/Consultas/Admin/verConsultas1.php?recordid=9513
         'Sacarle a todos los usuarios excepto los de facturacion y a Hugo el link desde 
         'la carta de porte a la factura, el historial y el boton desfacturar.
@@ -1311,25 +1312,25 @@ Partial Class CartadeporteABM
 
 
 
-            .Secada = cmbTipoMermaGranosExtranos.SelectedValue * &H1 + _
-                    cmbTipoMermaQuebrados.SelectedValue * &H2 + _
-                    cmbTipoMermaDaniados.SelectedValue * &H4 + _
-                    cmbTipoMermaChamico.SelectedValue * &H8 + _
-                    cmbTipoMermaRevolcado.SelectedValue * &H10 + _
-                    cmbTipoMermaObjetables.SelectedValue * &H20 + _
-                    cmbTipoMermaAmohosados.SelectedValue * &H40 + _
-                    cmbTipoMermaPuntaSombreada.SelectedValue * &H80 + _
-                    cmbTipoMermaHectolitrico.SelectedValue * &H100 + _
-                    cmbTipoMermaCarbon.SelectedValue * &H200 + _
-                    cmbTipoMermaPanzaBlanca.SelectedValue * &H400 + _
-                    cmbTipoMermaPicados.SelectedValue * &H800 + _
-                    cmbTipoMermaVerdes.SelectedValue * &H1000 + _
-                    cmbTipoMermaQuemados.SelectedValue * &H2000 + _
-                    cmbTipoMermaTierra.SelectedValue * &H4000 + _
-                    cmbTipoMermaZarandeo.SelectedValue * &H8000 + _
-                    cmbTipoMermaHumedad.SelectedValue * &H10000 + _
-                    cmbTipoMermaFumigacion.SelectedValue * &H20000 + _
-                    cmbTipoMermaDescuentoFinal.SelectedValue * &H40000 + _
+            .Secada = cmbTipoMermaGranosExtranos.SelectedValue * &H1 +
+                    cmbTipoMermaQuebrados.SelectedValue * &H2 +
+                    cmbTipoMermaDaniados.SelectedValue * &H4 +
+                    cmbTipoMermaChamico.SelectedValue * &H8 +
+                    cmbTipoMermaRevolcado.SelectedValue * &H10 +
+                    cmbTipoMermaObjetables.SelectedValue * &H20 +
+                    cmbTipoMermaAmohosados.SelectedValue * &H40 +
+                    cmbTipoMermaPuntaSombreada.SelectedValue * &H80 +
+                    cmbTipoMermaHectolitrico.SelectedValue * &H100 +
+                    cmbTipoMermaCarbon.SelectedValue * &H200 +
+                    cmbTipoMermaPanzaBlanca.SelectedValue * &H400 +
+                    cmbTipoMermaPicados.SelectedValue * &H800 +
+                    cmbTipoMermaVerdes.SelectedValue * &H1000 +
+                    cmbTipoMermaQuemados.SelectedValue * &H2000 +
+                    cmbTipoMermaTierra.SelectedValue * &H4000 +
+                    cmbTipoMermaZarandeo.SelectedValue * &H8000 +
+                    cmbTipoMermaHumedad.SelectedValue * &H10000 +
+                    cmbTipoMermaFumigacion.SelectedValue * &H20000 +
+                    cmbTipoMermaDescuentoFinal.SelectedValue * &H40000 +
                     cmbTipoMermaGrado.SelectedValue * &H80000
 
 
@@ -3617,8 +3618,8 @@ Partial Class CartadeporteABM
     End Sub
 
 
-    <WebMethod()> _
-    <Script.Services.ScriptMethod()> _
+    <WebMethod()>
+    <Script.Services.ScriptMethod()>
     Public Shared Function AcopiosPorCliente(NombreCliente As String, SC As String) As String()
         'Return excepciones(SC)
     End Function
@@ -3732,6 +3733,62 @@ Partial Class CartadeporteABM
     Protected Sub butVerLog_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles butVerLog.Click
         VerLog(True)
     End Sub
+
+
+
+    Protected Sub AsyncFileUpload3_UploadedComplete(ByVal sender As Object, ByVal e As AjaxControlToolkit.AsyncFileUploadEventArgs) Handles AsyncFileUpload3.UploadedComplete
+
+
+        Dim DIRFTP = DirApp() & "\DataBackupear\"
+        Dim nombre = NameOnlyFromFullPath(AsyncFileUpload3.PostedFile.FileName)
+        Randomize()
+        Dim nombrenuevo = Int(Rnd(100000) * 100000).ToString.Replace(".", "") + Now.ToString("ddMMMyyyy_HHmmss") + "_" + nombre
+
+
+        'nombrenuevo = CreaDirectorioParaImagenCartaPorte(nombrenuevo, DirApp)
+
+        Dim numeroCarta = Val(nombre)
+        Dim vagon = 0
+
+        If (AsyncFileUpload3.HasFile) Then
+            Try
+
+
+                'Dim nombresolo As String = Mid(nombre, nombre.LastIndexOf("\"))
+
+                '    Session("NombreArchivoSubido") = DIRFTP + nombrenuevo
+
+                Dim MyFile1 As New FileInfo(DIRFTP + nombrenuevo)
+                Try
+                    If MyFile1.Exists Then
+                        MyFile1.Delete()
+                    End If
+                Catch ex As Exception
+                End Try
+
+
+                AsyncFileUpload3.SaveAs(DIRFTP + nombrenuevo)
+
+            Catch ex As Exception
+                ErrHandler2.WriteError(ex.ToString)
+                Throw
+            End Try
+        Else
+            'FileUpLoad2.click 'estaría bueno que se pudiese hacer esto, es decir, llamar al click
+        End If
+
+
+
+        Dim s = New ServicioCartaPorte.servi()
+        s.GrabarComentario_DLL(IdCartaDePorte, "\DataBackupear\" + nombrenuevo, Membership.GetUser.UserName, SC)
+
+        AjaxControlToolkit.ToolkitScriptManager.RegisterStartupScript(Me, Me.GetType(), "dfsdf", " $('#Lista').trigger('reloadGrid'); scrollToLastRow($('#Lista'));", True)
+
+
+    End Sub
+
+
+
 
 
     Protected Sub AsyncFileUpload1_UploadedComplete(ByVal sender As Object, ByVal e As AjaxControlToolkit.AsyncFileUploadEventArgs) Handles AsyncFileUpload1.UploadedComplete
