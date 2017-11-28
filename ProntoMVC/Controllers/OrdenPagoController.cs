@@ -39,19 +39,13 @@ namespace ProntoMVC.Controllers
 
             //var OrdenesPago = db.OrdenesPago.Include(r => r.Condiciones_Compra).OrderBy(r => r.Numero);
             return View();
-        
-        
         }
-
 
         public virtual ViewResult IndexExterno()
         {
             //var OrdenesPago = db.OrdenesPago.Include(r => r.Condiciones_Compra).OrderBy(r => r.Numero);
             return View();
         }
-
-
-
 
         public virtual ActionResult EditExterno(int id)
         {
@@ -101,7 +95,6 @@ namespace ProntoMVC.Controllers
                 return View(OrdenPago);
             }
         }
-
 
         public virtual ActionResult Edit(int id)
         {
@@ -310,121 +303,158 @@ namespace ProntoMVC.Controllers
             return RedirectToAction("Index");
         }
 
-        public virtual ActionResult OrdenesPago_DynamicGridData
-            (string sidx, string sord, int page, int rows, bool _search, string filters,
-            string FechaInicial, string FechaFinal)
-           
+        public virtual FileResult ImprimirConInteropPDF(int id)
         {
-            string campo = String.Empty;
-            int pageSize = rows ; // ?? 20;
-            int currentPage = page; //  ?? 1;
-            int idproveedor;
+            object nulo = null;
+            string baseP = this.HttpContext.Session["BasePronto"].ToString();
+            string SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString(), oStaticMembershipService));
+            string output = AppDomain.CurrentDomain.BaseDirectory + "Documentos\\" + "archivo.pdf";
+            string plantilla;
+            plantilla = AppDomain.CurrentDomain.BaseDirectory + "Documentos\\" + "OrdenPago_" + baseP + ".dotm";
 
-            //var SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString(), oStaticMembershipService));
-            //var dt = Pronto.ERP.Bll.EntidadManager.GetStoreProcedure(SC, "OrdenesPago_TT"); // "FI", "EN", "CA"
-            //IEnumerable<DataRow> Entidad = dt.AsEnumerable();
+            //tengo que copiar la plantilla en el destino, porque openxml usa el archivo que le vaya a pasar
+            System.IO.FileInfo MyFile1 = new System.IO.FileInfo(output);//busca si ya existe el archivo a generar y en ese caso lo borra
+            if (MyFile1.Exists) MyFile1.Delete();
 
-            var Req = db.OrdenesPago.AsQueryable();
+            EntidadManager.ImprimirWordDOT_VersionDLL_PDF(plantilla, ref nulo, SC, nulo, ref nulo, id, "", nulo, nulo, output, nulo);
 
-            if (FechaInicial != string.Empty)
+            byte[] contents = System.IO.File.ReadAllBytes(output);
+            return File(contents, System.Net.Mime.MediaTypeNames.Application.Octet, "OrdenPago.pdf");
+        }
+
+        public class OrdenesPago2
+        {
+            public int IdOrdenPago { get; set; }
+            public int? IdOPComplementariaFF { get; set; }
+            public int? NumeroOrdenPago { get; set; }
+            public string Exterior { get; set; }
+            public DateTime? FechaOrdenPago { get; set; }
+            public string Tipo { get; set; }
+            public string Anulada { get; set; }
+            public string Estado { get; set; }
+            public string Proveedor { get; set; }
+            public string Cuenta { get; set; }
+            public string Moneda { get; set; }
+            public string Obra { get; set; }
+            public decimal? Valores { get; set; }
+            public decimal? Acreedores { get; set; }
+            public decimal? RetencionIVA { get; set; }
+            public decimal? RetencionGanancias { get; set; }
+            public decimal? RetencionIBrutos { get; set; }
+            public decimal? RetencionSUSS { get; set; }
+            public decimal? DevolucionFF { get; set; }
+            public decimal? DiferenciaBalanceo { get; set; }
+            public string OPComplementariaFF { get; set; }
+            public string DestinatarioFF { get; set; }
+            public int? NumeroRendicionFF { get; set; }
+            public string ConfirmacionAcreditacionFF { get; set; }
+            public string ConceptoOPOtros { get; set; }
+            public string Clasificacion { get; set; }
+            public string Detalle { get; set; }
+            public string Modalidad { get; set; }
+            public string EnviarA { get; set; }
+            public string Auxiliar { get; set; }
+            public string Ingreso { get; set; }
+            public DateTime? FechaIngreso { get; set; }
+            public string Modifico { get; set; }
+            public DateTime? FechaModifico { get; set; }
+            public string Anulo { get; set; }
+            public DateTime? FechaAnulacion { get; set; }
+            public string MotivoAnulacion { get; set; }
+            public string Observaciones { get; set; }
+            public decimal? CotizacionDolar { get; set; }
+            public decimal? CotizacionEuro { get; set; }
+        }
+
+        public virtual JsonResult OrdenesPago_DynamicGridData(string sidx, string sord, int page, int rows, bool _search, string filters, string FechaInicial, string FechaFinal)
+        {
+            DateTime FechaDesde, FechaHasta;
+            try
             {
-                DateTime FechaDesde = DateTime.ParseExact(FechaInicial, "dd/MM/yyyy", null);
-                DateTime FechaHasta = DateTime.ParseExact(FechaFinal, "dd/MM/yyyy", null);
-                Req = (from a in Req where a.FechaOrdenPago >= FechaDesde && a.FechaOrdenPago <= FechaHasta select a).AsQueryable();
+                if (FechaInicial == "") FechaDesde = DateTime.MinValue;
+                else FechaDesde = DateTime.ParseExact(FechaInicial, "dd/MM/yyyy", null);
             }
-            
-            idproveedor = buscaridproveedorporcuit(DatosExtendidosDelUsuario_GrupoUsuarios((Guid)oStaticMembershipService.GetUser().ProviderUserKey));
-            if (idproveedor > 0)
+            catch (Exception)
             {
-                string razonsocial = db.Proveedores.Find(idproveedor).RazonSocial;
-                Req = (from a in Req where a.Proveedore.RazonSocial.NullSafeToString() == razonsocial select a).AsQueryable();
-                //Entidad = Entidad.Where(p => (string)p["Proveedor"].NullSafeToString() == razonsocial).AsQueryable();
+                FechaDesde = DateTime.MinValue;
+            }
+
+            try
+            {
+                if (FechaFinal == "") FechaHasta = DateTime.MaxValue;
+                else FechaHasta = DateTime.ParseExact(FechaFinal, "dd/MM/yyyy", null);
+            }
+            catch (Exception)
+            {
+                FechaHasta = DateTime.MaxValue;
             }
 
             int totalRecords = 0;
-       
-            var pagedQuery = Filters.FiltroGenerico_UsandoIQueryable<Data.Models.OrdenPago>
-                                (                               sidx, sord, page, rows, _search, filters, db, ref totalRecords, Req  );
+            int pageSize = rows;
 
-            //DetalleRequerimientos.DetallePedidos, DetalleRequerimientos.DetallePresupuestos
-                                //"Obra,DetalleRequerimientos.DetallePedidos.Pedido,DetalleRequerimientos.DetallePresupuestos.Presupuesto"
-            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-            var data = (
-                        from a in pagedQuery //db.OrdenesPago
-                        //from b in db.Proveedores.Where(o => o.IdProveedor == a.IdProveedor).DefaultIfEmpty()
-                        //from c in db.Cuentas.Where(p => p.IdCuenta == a.IdCuenta).DefaultIfEmpty()
-                        //from d in db.Monedas.Where(q => q.IdMoneda == a.IdMoneda).DefaultIfEmpty()
-                        //from e in db.Conceptos.Where(r => r.IdConcepto == a.IdConcepto).DefaultIfEmpty()
-                        //from f in db.Conceptos.Where(s => s.IdConcepto == a.IdConcepto2).DefaultIfEmpty()
-                        //from g in db.Obras.Where(u => u.IdObra == a.IdObra).DefaultIfEmpty()
-                        //from h in db.Empleados.Where(v => v.IdEmpleado == a.IdEmpleadoFF).DefaultIfEmpty()
-                        //from i in db.Empleados.Where(w => w.IdEmpleado == a.IdUsuarioIngreso).DefaultIfEmpty()
-                        //from j in db.Empleados.Where(x => x.IdEmpleado == a.IdUsuarioModifico).DefaultIfEmpty()
-                        //from k in db.Empleados.Where(y => y.IdEmpleado == a.IdUsuarioAnulo).DefaultIfEmpty()
-                        //from l in db.OrdenesPago.Where(z => z.IdOrdenPago == a.IdOPComplementariaFF).DefaultIfEmpty()
-                        select new
+            var data = (from a in db.OrdenesPago
+                        select new OrdenesPago2
                         {
-                            a.IdOrdenPago,
-                            a.IdOPComplementariaFF,
-                            a.NumeroOrdenPago,
-                            a.Exterior,
-                            FechaOrdenPago = a.FechaOrdenPago ?? DateTime.MinValue,
-                            a.Tipo,
-                            a.Anulada,
-                            Estado = a.Estado == "CA" ? "En Caja" : (a.Estado == "FI" ? "A la firma" : (a.Estado == "EN" ? "Entregado" : (a.Estado == "CO" ? "Caja obra" : ""))),
+                            IdOrdenPago = a.IdOrdenPago,
+                            IdOPComplementariaFF = a.IdOPComplementariaFF,
+                            NumeroOrdenPago = a.NumeroOrdenPago,
+                            Exterior = a.Exterior,
+                            FechaOrdenPago = a.FechaOrdenPago,
+                            Tipo = a.Tipo,
+                            Anulada = a.Anulada,
+                            Estado = a.Estado,
                             Proveedor = a.Proveedore != null ? a.Proveedore.RazonSocial : "",
                             Cuenta = a.Cuenta != null ? a.Cuenta.Descripcion : "",
                             Moneda = a.Moneda != null ? a.Moneda.Abreviatura : "",
-                            Obra = a.Obra  != null ? a.Obra.NumeroObra : "",
-                            a.Valores,
-                            a.Acreedores,
-                            a.RetencionIVA,
-                            a.RetencionGanancias,
-                            a.RetencionIBrutos,
-                            a.RetencionSUSS,
+                            Obra = a.Obra != null ? a.Obra.NumeroObra : "",
+                            Valores = a.Valores,
+                            Acreedores = a.Acreedores,
+                            RetencionIVA = a.RetencionIVA,
+                            RetencionGanancias = a.RetencionGanancias,
+                            RetencionIBrutos = a.RetencionIBrutos,
+                            RetencionSUSS = a.RetencionSUSS,
                             DevolucionFF = a.GastosGenerales,
-                            DiferenciaBalanceo = a.Tipo == "OT" ? "" : (a.Anulada == "SI" ? "" : a.DiferenciaBalanceo.ToString()),
+                            DiferenciaBalanceo = a.DiferenciaBalanceo,
                             OPComplementariaFF = a.OrdenesPago2 != null ? a.OrdenesPago2.NumeroOrdenPago.ToString() : "",
-                            DestinatarioFF = a.Empleado != null ?  a.Empleado.Nombre : "",
-                            a.NumeroRendicionFF,
-                            a.ConfirmacionAcreditacionFF,
+                            DestinatarioFF = a.Empleado != null ? a.Empleado.Nombre : "",
+                            NumeroRendicionFF = a.NumeroRendicionFF,
+                            ConfirmacionAcreditacionFF = a.ConfirmacionAcreditacionFF,
                             ConceptoOPOtros = a.Concepto  != null ?  a.Concepto.Descripcion : "",
                             Clasificacion = a.Concepto1 != null ? a.Concepto1.Descripcion : "",
-                            a.Detalle,
+                            Detalle = a.Detalle,
                             Modalidad = a.TextoAuxiliar1,
                             EnviarA = a.TextoAuxiliar2,
                             Auxiliar = a.TextoAuxiliar3,
                             Ingreso = a.Empleado1  != null ? a.Empleado1.Nombre : "",
-                            a.FechaIngreso,
+                            FechaIngreso = a.FechaIngreso,
                             Modifico = a.Empleado2 != null ? a.Empleado2.Nombre : "",
-                            a.FechaModifico,
+                            FechaModifico = a.FechaModifico,
                             Anulo = a.Empleado3 != null ? a.Empleado3.Nombre : "",
-                            a.FechaAnulacion,
-                            a.MotivoAnulacion,
-                            a.Observaciones,
-                            a.CotizacionDolar,
-                            a.CotizacionEuro
-                        }).AsQueryable(); 
+                            FechaAnulacion = a.FechaAnulacion,
+                            MotivoAnulacion = a.MotivoAnulacion,
+                            Observaciones = a.Observaciones,
+                            CotizacionDolar = a.CotizacionDolar,
+                            CotizacionEuro = a.CotizacionEuro,
+                        }).Where(a => a.FechaOrdenPago >= FechaDesde && a.FechaOrdenPago <= FechaHasta).OrderBy(sidx + " " + sord).AsQueryable();
 
-            //int totalRecords = data.Count();  // Entidad1.Count();
+            var pagedQuery = Filters.FiltroGenerico_UsandoIQueryable<OrdenesPago2>
+                                     (sidx, sord, page, rows, _search, filters, db, ref totalRecords, data);
+
             int totalPages = (int)Math.Ceiling((float)totalRecords / (float)pageSize);
-
-            var data1 = (from a in data select a)
-                        .ToList();
 
             var jsonData = new jqGridJson()
             {
                 total = totalPages,
-                page = currentPage,
+                page = page,
                 records = totalRecords,
-                rows = (from a in data1
+                rows = (from a in pagedQuery
                         select new jqGridRowJson
                         {
                             id = a.IdOrdenPago.ToString(),
-                            cell = new string[] { 
+                            cell = new string[] {
                                 a.Tipo=="CC" ? "<a href="+ Url.Action("EditCC",new {id = a.IdOrdenPago} ) + " target='' >Editar</>" : (a.Tipo=="FF" ? "<a href="+ Url.Action("EditFF",new {id = a.IdOrdenPago} ) + " target='' >Editar</>" : "<a href="+ Url.Action("EditOT",new {id = a.IdOrdenPago} ) + " target='' >Editar</>"),
-                                "<a href="+ Url.Action("ImprimirRetenciones",new {id = a.IdOrdenPago} ) + ">Emitir</a> ",
+                                "<a href="+ Url.Action("ImprimirConInteropPDF",new {id = a.IdOrdenPago} ) + ">Emitir</a> ",
+                                "<a href="+ Url.Action("ImprimirRetenciones",new {id = a.IdOrdenPago} ) + ">Emitir retenciones</a> ",
                                 a.IdOrdenPago.NullSafeToString(),
                                 a.IdOPComplementariaFF.NullSafeToString(),
                                 a.NumeroOrdenPago.NullSafeToString(),
@@ -470,8 +500,7 @@ namespace ProntoMVC.Controllers
             };
             return Json(jsonData, JsonRequestBehavior.AllowGet);
         }
-
-
+        
         public virtual ActionResult OrdenesPago(string sidx, string sord, int? page, int? rows, bool _search, string searchField, string searchOper, string searchString,
             string FechaInicial, string FechaFinal)
         {
@@ -2383,7 +2412,9 @@ namespace ProntoMVC.Controllers
                     {
                         sErrorMsg += "\n" + "Hay valores que apuntan a cuentas bancarias inexistentes";
                     }
-                    if ((x.IdBancoChequera ?? 0) == 0) { sErrorMsg += "\n" + "Hay valores con cuenta bancaria que no tiene chequera asignada"; }
+                    if ((x.IdBancoChequera ?? 0) == 0) { 
+                        sErrorMsg += "\n" + "Hay valores con cuenta bancaria que no tiene chequera asignada";
+                    }
                 }
                 if ((x.IdBancoChequera ?? 0) > 0)
                 {
