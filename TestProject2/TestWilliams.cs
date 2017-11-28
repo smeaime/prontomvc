@@ -865,6 +865,47 @@ namespace ProntoMVC.Tests
 
 
 
+
+
+
+
+        [TestMethod]
+        public void SincroTomasHnos_46995()
+        {
+
+            string sErrores = "", sTitulo = "";
+            LinqCartasPorteDataContext db = null;
+
+            // el _CONST_MAXROWS sale del app.config
+
+            int registrosf = 0;
+
+
+            //Seri posible que en la posición 45 de dicho archivo siempre venga el valor cero(0)? La idea es que los usuarios no tengan que modificar cada archivo que les llega para que no les de error al procesarlo.
+
+
+            var output = SincronismosWilliamsManager.GenerarSincro("TOMAS HNOS", ref sErrores, SC, "dominio", ref sTitulo
+                                 , CartaDePorteManager.enumCDPestado.DescargasMasFacturadas,
+                      "", -1, -1,
+                 -1, -1,
+                 -1, -1, -1, -1,
+                  CartaDePorteManager.FiltroANDOR.FiltroOR, "Ambas",
+                 new DateTime(2017, 9, 13), new DateTime(2017, 9, 13),
+                 -1, "Ambas", false, "", "", -1, ref registrosf, 40);
+
+
+
+            //File.Copy(output, @"C:\Users\Administrador\Desktop\"   Path.GetFileName(output), true);
+            System.Diagnostics.Process.Start(output);
+        }
+
+
+
+
+
+
+
+
         [TestMethod]
         public void SincroChiambretto_46876()
         {
@@ -909,7 +950,7 @@ namespace ProntoMVC.Tests
 
         }
 
-        
+
         public void enviarNotificacionUsuario(string usuario)
         {
             //            var subs = BuscoLasSubscripcionesDelUsuario(usuario);
@@ -924,18 +965,28 @@ namespace ProntoMVC.Tests
 
 
         [TestMethod]
-        public void TienePermisosParaCarta()
+        public void TienePermisosParaEstaCarta_43063()
         {
-            asdasdfasdfasdf
 
-        If Not(Roles.IsUserInRole(Membership.GetUser().UserName, "WilliamsComercial") Or Roles.IsUserInRole(Membership.GetUser().UserName, "WilliamsAdmin") Or Roles.IsUserInRole(Membership.GetUser().UserName, "WilliamsFacturacion")) Then
-            btnsituacion.Visible = False
+        //    TienePermisosParaEstaCarta(usuario, idcarta)
+
+        //If Not(Roles.IsUserInRole(Membership.GetUser().UserName, "WilliamsComercial") Or Roles.IsUserInRole(Membership.GetUser().UserName, "WilliamsAdmin") Or Roles.IsUserInRole(Membership.GetUser().UserName, "WilliamsFacturacion")) Then
+        //    btnsituacion.Visible = False
 
 
 
         }
 
 
+        [TestMethod]
+        public void TienePermisosParaEsteArchivo_43063()
+        {
+            //Busco en q comentario esta el archivo
+            //    busco el reclamo del comentario, y la carta del comentario
+            //    veo si tiene permiso para esa carta
+
+        }
+            
 
         [TestMethod]
         public void bajarArchivo_43063()
@@ -944,31 +995,38 @@ namespace ProntoMVC.Tests
             int idcarta = 2633399;
 
 
-            var s = new ServicioCartaPorte.servi();
-            s.BajarArchivo_DLL( "asarararasa.pdf" , usuario, SC);
-            GrabarComentarioArchivo_DLL
+            //var s = new ServicioCartaPorte.servi();
+            //s.BajarArchivo_DLL( "asarararasa.pdf" , usuario, SC);
+            //GrabarComentarioArchivo_DLL
         }
 
 
-
+        
 
         [TestMethod]
         public void EnviarMailALosQueParticipanEnElReclamo()
         {
-            sfasdf
-            asdasdfasdfasdf
 
-                        Pronto.ERP.Bll.EntidadManager.MandaEmail_Nuevo(ConfigurationManager.AppSettings["ErrorMail"],
-                               "asuntoasuntoasunto 2",
-                            "cuerpocuerpocuerpocuerpocuerpocuerpocuerpocuerpocuerpocuerpocuerpocuerpo cuerpocuerpocuerpocuerpo",
-                            ConfigurationManager.AppSettings["SmtpUser"],
-                            ConfigurationManager.AppSettings["SmtpServer"],
-                            ConfigurationManager.AppSettings["SmtpUser"],
-                            ConfigurationManager.AppSettings["SmtpPass"],
-                              "",
-                           Convert.ToInt16(ConfigurationManager.AppSettings["SmtpPort"]));
+
+            //sfasdf
+            //asdasdfasdfasdf
+
+            //            Pronto.ERP.Bll.EntidadManager.MandaEmail_Nuevo(ConfigurationManager.AppSettings["ErrorMail"],
+            //                   "asuntoasuntoasunto 2",
+            //                "cuerpocuerpocuerpocuerpocuerpocuerpocuerpocuerpocuerpocuerpocuerpocuerpo cuerpocuerpocuerpocuerpo",
+            //                ConfigurationManager.AppSettings["SmtpUser"],
+            //                ConfigurationManager.AppSettings["SmtpServer"],
+            //                ConfigurationManager.AppSettings["SmtpUser"],
+            //                ConfigurationManager.AppSettings["SmtpPass"],
+            //                  "",
+            //               Convert.ToInt16(ConfigurationManager.AppSettings["SmtpPort"]));
 
         }
+
+
+
+
+
 
 
         [TestMethod]

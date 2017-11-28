@@ -6647,7 +6647,7 @@ Formato localidad-provincia	destination	x
 
 
 
-        public virtual string GrabarComentario_DLL(int idcarta, string comentario, string nombreusuario, string SC)
+        public virtual string[] GrabarComentario_DLL(int idcarta, string comentario, string nombreusuario, string SC)
         {
 
 
@@ -6681,6 +6681,7 @@ Formato localidad-provincia	destination	x
                 var com = new ReclamoComentario(); // db.ReclamoComentarios.FirstOrDefault().IdReclamo;
                 com.IdReclamo = rec.IdReclamo;
                 com.IdEmpleado = 1;
+                com.NombreUsuario = nombreusuario;
                 com.Comentario = comentario;
                 com.Fecha = DateTime.Now;
                 db.ReclamoComentarios.Add(com);
@@ -6691,10 +6692,12 @@ Formato localidad-provincia	destination	x
 
 
 
+                var usuariosParticipantes = db.ReclamoComentarios.Where(x => x.IdReclamo == rec.IdReclamo).Select(x => x.NombreUsuario).Distinct().ToArray();
+                return usuariosParticipantes;
+
             }
 
 
-            return "";
 
         }
 

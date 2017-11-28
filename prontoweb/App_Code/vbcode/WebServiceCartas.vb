@@ -214,9 +214,33 @@ Public Class WebServiceCartas
 
 
 
-            Dim idusuario = Membership.GetUser.UserName
+            Dim usuario = Membership.GetUser.UserName
             Dim s = New ServicioCartaPorte.servi()
-            Return s.GrabarComentario_DLL(idCartaPorte, sComentario, "Mariano", Encriptar(scs))
+            Dim usuarios = s.GrabarComentario_DLL(idCartaPorte, sComentario, usuario, Encriptar(scs))
+
+
+
+            Dim casillas As String
+            For Each u In usuarios
+                If u = usuario Then Continue For
+                casillas += Membership.GetUser(u).Email + ","
+            Next
+            casillas += ConfigurationManager.AppSettings("ErrorMail")
+            Pronto.ERP.Bll.EntidadManager.MandaEmail_Nuevo(casillas,
+                               "Consulta por carta porte",
+                            usuario + " " + sComentario + linkAlReclamo,
+                            ConfigurationManager.AppSettings("SmtpUser"),
+                            ConfigurationManager.AppSettings("SmtpServer"),
+                            ConfigurationManager.AppSettings("SmtpUser"),
+                            ConfigurationManager.AppSettings("SmtpPass"),
+                              "",
+                           Convert.ToInt16(ConfigurationManager.AppSettings("SmtpPort")))
+
+
+
+
+
+
 
         Catch ex As Exception
 

@@ -716,8 +716,8 @@
           <Property Name="Campo" Type="varchar" MaxLength="40" />
           <Property Name="Valor" Type="numeric" Precision="18" Scale="2" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'Pronto.dbo.CartasDePorteHistorico' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Pronto.dbo.CartasDePorteHistorico' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="CartasDePorteHistorico">
           <Key>
             <PropertyRef Name="IdCartaDePorte" />
@@ -874,8 +874,8 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.CartasDePorteHistorico' no tiene 
           <Property Name="Descripcion" Type="varchar" MaxLength="60" Nullable="false" />
           <Property Name="IdCliente" Type="int" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'Pronto.dbo.CartasPorteMovimientos' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Pronto.dbo.CartasPorteMovimientos' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="CartasPorteMovimientos">
           <Key>
             <PropertyRef Name="IdCDPMovimiento" />
@@ -1052,6 +1052,15 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.CartasPorteMovimientos' no tiene 
           <Property Name="CodigoNormaCapital" Type="int" />
           <Property Name="FechaInicioVigenciaCodigoNormaCapital" Type="datetime" />
           <Property Name="FechaFinVigenciaCodigoNormaCapital" Type="datetime" />
+          <Property Name="IdIBCondicionPorDefecto31" Type="int" />
+          <Property Name="IdIBCondicionPorDefecto32" Type="int" />
+          <Property Name="IdIBCondicionPorDefecto33" Type="int" />
+          <Property Name="IdIBCondicionPorDefecto34" Type="int" />
+          <Property Name="IdIBCondicionPorDefecto35" Type="int" />
+          <Property Name="IdIBCondicionPorDefecto36" Type="int" />
+          <Property Name="IdIBCondicionPorDefecto37" Type="int" />
+          <Property Name="IdIBCondicionPorDefecto38" Type="int" />
+          <Property Name="IdIBCondicionPorDefecto39" Type="int" />
         </EntityType>
         <EntityType Name="ColaCorreosComprobantes">
           <Key>
@@ -3235,8 +3244,8 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.CartasPorteMovimientos' no tiene 
           <Property Name="FechaInicio" Type="datetime" />
           <Property Name="FechaFinalizacion" Type="datetime" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Pronto.dbo.EjerciciosPeriodos' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="EjerciciosPeriodos">
           <Key>
             <PropertyRef Name="IdEjercicioPeriodo" />
@@ -5438,6 +5447,7 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
           <Property Name="Comentario" Type="varchar" MaxLength="1000" />
           <Property Name="Fecha" Type="datetime" />
           <Property Name="ArchivoAdjunto" Type="varchar" MaxLength="150" />
+          <Property Name="NombreUsuario" Type="varchar" MaxLength="150" />
         </EntityType>
         <EntityType Name="Reclamos">
           <Key>
@@ -5986,8 +5996,8 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
           <Property Name="IdProveedor" Type="int" />
           <Property Name="Codigo" Type="int" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'Pronto.dbo.Tree' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Pronto.dbo.Tree' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="Tree">
           <Key>
             <PropertyRef Name="IdItem" />
@@ -6199,8 +6209,8 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.Tree' no tiene definida ninguna c
           <Property Name="EmiteComision" Type="varchar" MaxLength="2" />
           <Property Name="IdsVendedoresAsignados" Type="varchar" MaxLength="1000" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'Pronto.dbo.wGrillaPersistencia' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Pronto.dbo.wGrillaPersistencia' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="wGrillaPersistencia">
           <Key>
             <PropertyRef Name="IdRenglon" />
@@ -6312,8 +6322,8 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.wGrillaPersistencia' no tiene def
           <Property Name="IdDestino" Type="int" />
           <Property Name="AgregaItemDeGastosAdministrativos" Type="varchar" MaxLength="2" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'Pronto.dbo.VistaCartasPorteMovimientos' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Pronto.dbo.VistaCartasPorteMovimientos' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="VistaCartasPorteMovimientos">
           <Key>
             <PropertyRef Name="IdCDPMovimiento" />
@@ -14746,6 +14756,15 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.VistaCartasPorteMovimientos' no t
           <Property Name="FechaFinVigenciaCodigoNormaCapital" Type="DateTime" Precision="3" />
           <NavigationProperty Name="CartasDePortes" Relationship="DemoProntoModel.FK__CartasDeP__Clien__25735020" FromRole="Cliente" ToRole="CartasDePorte" />
           <NavigationProperty Name="CartasDePortes1" Relationship="DemoProntoModel.FK__CartasDeP__Vende__6D4EF28E" FromRole="Cliente" ToRole="CartasDePorte" />
+          <Property Name="IdIBCondicionPorDefecto31" Type="Int32" />
+          <Property Name="IdIBCondicionPorDefecto32" Type="Int32" />
+          <Property Name="IdIBCondicionPorDefecto33" Type="Int32" />
+          <Property Name="IdIBCondicionPorDefecto34" Type="Int32" />
+          <Property Name="IdIBCondicionPorDefecto35" Type="Int32" />
+          <Property Name="IdIBCondicionPorDefecto36" Type="Int32" />
+          <Property Name="IdIBCondicionPorDefecto37" Type="Int32" />
+          <Property Name="IdIBCondicionPorDefecto38" Type="Int32" />
+          <Property Name="IdIBCondicionPorDefecto39" Type="Int32" />
         </EntityType>
         <EntityType Name="PuntosVenta">
           <Key>
@@ -26394,6 +26413,7 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.VistaCartasPorteMovimientos' no t
           <Property Name="ArchivoAdjunto" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Empleado" Relationship="DemoProntoModel.FK__ReclamoCo__IdEmp__06D9BA67" FromRole="ReclamoComentario" ToRole="Empleado" />
           <NavigationProperty Name="Reclamo" Relationship="DemoProntoModel.FK__ReclamoCo__IdRec__05E5962E" FromRole="ReclamoComentario" ToRole="Reclamo" />
+          <Property Name="NombreUsuario" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="Reclamo">
           <Key>
@@ -27268,6 +27288,15 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.VistaCartasPorteMovimientos' no t
           <EntitySetMapping Name="Clientes">
             <EntityTypeMapping TypeName="DemoProntoModel.Cliente">
               <MappingFragment StoreEntitySet="Clientes">
+                <ScalarProperty Name="IdIBCondicionPorDefecto39" ColumnName="IdIBCondicionPorDefecto39" />
+                <ScalarProperty Name="IdIBCondicionPorDefecto38" ColumnName="IdIBCondicionPorDefecto38" />
+                <ScalarProperty Name="IdIBCondicionPorDefecto37" ColumnName="IdIBCondicionPorDefecto37" />
+                <ScalarProperty Name="IdIBCondicionPorDefecto36" ColumnName="IdIBCondicionPorDefecto36" />
+                <ScalarProperty Name="IdIBCondicionPorDefecto35" ColumnName="IdIBCondicionPorDefecto35" />
+                <ScalarProperty Name="IdIBCondicionPorDefecto34" ColumnName="IdIBCondicionPorDefecto34" />
+                <ScalarProperty Name="IdIBCondicionPorDefecto33" ColumnName="IdIBCondicionPorDefecto33" />
+                <ScalarProperty Name="IdIBCondicionPorDefecto32" ColumnName="IdIBCondicionPorDefecto32" />
+                <ScalarProperty Name="IdIBCondicionPorDefecto31" ColumnName="IdIBCondicionPorDefecto31" />
                 <ScalarProperty Name="FechaFinVigenciaCodigoNormaCapital" ColumnName="FechaFinVigenciaCodigoNormaCapital" />
                 <ScalarProperty Name="FechaInicioVigenciaCodigoNormaCapital" ColumnName="FechaInicioVigenciaCodigoNormaCapital" />
                 <ScalarProperty Name="CodigoNormaCapital" ColumnName="CodigoNormaCapital" />
@@ -33632,6 +33661,7 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.VistaCartasPorteMovimientos' no t
           <EntitySetMapping Name="ReclamoComentarios">
             <EntityTypeMapping TypeName="DemoProntoModel.ReclamoComentario">
               <MappingFragment StoreEntitySet="ReclamoComentarios">
+                <ScalarProperty Name="NombreUsuario" ColumnName="NombreUsuario" />
                 <ScalarProperty Name="ArchivoAdjunto" ColumnName="ArchivoAdjunto" />
                 <ScalarProperty Name="Fecha" ColumnName="Fecha" />
                 <ScalarProperty Name="Comentario" ColumnName="Comentario" />

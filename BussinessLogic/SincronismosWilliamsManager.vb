@@ -25635,7 +25635,10 @@ Namespace Pronto.ERP.Bll
 
                 sb &= "&" & cero.ToString.PadLeft(6) '44 – Código de Establecimiento  Destino	Numérico	6	Código de Establecimiento Destino
 
+
                 sb &= "&" & iisNull(dr("CodigoEstablecimientoProcedencia"), "").ToString.PadLeft(6)   '45 - Código de Establecimiento  Procedencia	Numérico	6	Código de Establecimiento Procedencia
+
+
                 sb &= "&" & iisNull(dr("IdTipoMovimiento"), "").ToString.PadLeft(4) '46 – Código de Tipo de Movimiento	Numérico	4	Código de Tipo de Movimiento
                 '                                                       1.	Egresos contratos de Venta
                 '                                                       2.	Egreso Directo a Destino Productor
