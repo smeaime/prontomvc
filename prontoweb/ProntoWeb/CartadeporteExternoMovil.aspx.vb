@@ -635,7 +635,7 @@ Partial Class CartadeporteABMExternoMovil
 
 
                 'If .IdAprobo > 0 Or .Cumplido = "AN" Then
-                If .IdFacturaImputada <> 0 Or .Anulada = "SI" Then
+                If .IdFacturaImputada <> 0 Or .Anulada = "SI" Or True Then
                     '//////////////////////////
                     'si esta APROBADO o ANULADO, deshabilito la edicion
                     '//////////////////////////
@@ -788,14 +788,28 @@ Partial Class CartadeporteABMExternoMovil
         End If
 
 
-        '////////////////////////////////////////////
-        '////////////////////////////////////////////
 
+
+
+
+
+
+        '////////////////////////////////////////////
+        '////////////////////////////////////////////
+        'para el externo
 
         TabPanel1.Enabled = False
         TabPanel2.Enabled = False
         TabPanel3.Enabled = False
+        TabPanel4.Enabled = False
         TabContainer2.ActiveTabIndex = 4
+        btnOk.Visible = False
+        btnCancel.Visible = False
+        btnDuplicar.Visible = False
+        btnAnular.Visible = False
+
+        Dim tx As TextBox = Me.Master.FindControl("txtSuperbuscador")
+        tx.Visible = False
 
 
     End Sub
