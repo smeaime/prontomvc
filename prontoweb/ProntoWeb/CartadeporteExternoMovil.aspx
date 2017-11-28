@@ -2860,7 +2860,7 @@
                             <ajaxToolkit:AsyncFileUpload ID="AsyncFileUpload3" runat="server" OnClientUploadComplete="ClientUploadComplete3"
                                 UploaderStyle="Modern" CssClass="AFU AFU3" FailedValidation="False" />
 
-                            <input type="button" id="Button77" value="cerrar consulta" class="btn btn-primary" />
+                            <%--<input type="button" id="Button77" value="cerrar consulta" class="btn btn-primary"  />--%>
                         </span>
 
                         <script>
