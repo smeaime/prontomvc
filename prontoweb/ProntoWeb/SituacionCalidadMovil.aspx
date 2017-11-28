@@ -580,7 +580,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
 
                     <button type="button" id="" style="height: 40px; width: 70px; vertical-align: top;" onclick="location.href='CartasPortesExternoMovil.aspx'">
-                        <i class="fa"></i>General
+                        <i class="fa"></i>Vista General
                     </button>
 
 

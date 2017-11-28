@@ -2848,13 +2848,17 @@
                         <asp:TextBox ID="TextBox5" runat="server" CssClass=" span8" Width="250px" Height="50px" TextMode="MultiLine" Enabled="true" Text="" />
 
 
-                        <input type="button" id="Button6" value="enviar" class="btn btn-primary" style="height: 50px; vertical-align: top;" />
-
+                        <asp:Button ID="Button6" runat="server" Text="enviar" class="btn btn-primary" style="height: 50px; width: 50px; vertical-align: top;" />
+                        
                         <span>
                             <ajaxToolkit:AsyncFileUpload ID="AsyncFileUpload3" runat="server" OnClientUploadComplete="ClientUploadComplete3"
                                 UploaderStyle="Modern" CssClass="AFU AFU3" FailedValidation="False" />
 
-                            <input type="button" id="Button77" value="cerrar consulta" class="btn btn-primary" />
+
+                             <asp:Button ID="btnCerrarReclamo" runat="server" Text="cerrar consulta" class="btn btn-primary" style="height: ; width: ; vertical-align: top;" />
+                       
+
+                            
                         </span>
 
                         <script>
@@ -2917,6 +2921,58 @@
 
 
                             })
+
+
+
+
+
+
+                            $("#btnCerrarReclamo").click(function () {
+                                //alert("hola")
+
+                                var d = {
+                                    idCartaPorte: qs["Id"]
+                                }
+
+
+                                $.ajax({
+                                    type: "POST",
+                                    //method: "POST",
+                                    url: "WebServiceCartas.asmx/CerrarReclamo",
+                                    dataType: "json",
+                                    contentType: "application/json; charset=utf-8",
+
+                                    data: JSON.stringify(d),
+
+                                    success: function (data) {
+                                        //alert(data.d);
+                                        //window.open(data.d);
+                                        $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel5_TextBox5").val("")
+                                        $("#Lista").trigger("reloadGrid");
+                                        scrollToLastRow($("#Lista"))
+                                    }
+
+
+                                    ,
+                                    beforeSend: function () {
+                                        //$('.loading').html('some predefined loading img html');
+                                        $("#loading").show();
+                                        $('#grabar2').attr("disabled", true).val("Espere...");
+
+                                    },
+                                    complete: function () {
+                                        $("#loading").hide();
+
+                                        $('#Button6').attr("disabled", true);
+                                    }
+
+
+                                })
+
+
+                            })
+
+
 
 
 
