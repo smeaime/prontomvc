@@ -90,6 +90,30 @@ namespace ProntoMVC.Data.Models
 
 public static class ModelDefinedFunctions
 {
+    [System.Data.Entity.Core.Objects.DataClasses.EdmFunction("DemoProntoModel.Store", "ComprobantesProveedores_Obras")]
+    public static string ComprobantesProveedores_Obras(int IdComprobanteProveedor)
+    {
+        throw new NotSupportedException("Direct calls are not supported.");
+    }
+
+    [System.Data.Entity.Core.Objects.DataClasses.EdmFunction("DemoProntoModel.Store", "ComprobantesProveedores_Pedidos")]
+    public static string ComprobantesProveedores_Pedidos(int IdComprobanteProveedor)
+    {
+        throw new NotSupportedException("Direct calls are not supported.");
+    }
+
+    [System.Data.Entity.Core.Objects.DataClasses.EdmFunction("DemoProntoModel.Store", "ComprobantesProveedores_Recepciones")]
+    public static string ComprobantesProveedores_Recepciones(int IdComprobanteProveedor)
+    {
+        throw new NotSupportedException("Direct calls are not supported.");
+    }
+
+    [System.Data.Entity.Core.Objects.DataClasses.EdmFunction("DemoProntoModel.Store", "ComprobantesProveedores_Subcontratos")]
+    public static string ComprobantesProveedores_Subcontratos(int IdComprobanteProveedor)
+    {
+        throw new NotSupportedException("Direct calls are not supported.");
+    }
+
     [System.Data.Entity.Core.Objects.DataClasses.EdmFunction("DemoProntoModel.Store", "Facturas_OrdenesCompra")]
     public static string FacturasOrdenesCompra(int IdFactura)
     {

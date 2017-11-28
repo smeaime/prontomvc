@@ -4984,6 +4984,14 @@ warning 6002: The table/view 'Pronto.dbo.EjerciciosPeriodos' does not have a pri
           <Property Name="IdPresupuestoObrasNodo" Type="int" />
           <Property Name="Observaciones" Type="ntext" />
         </EntityType>
+        <EntityType Name="PresupuestoObrasRubros">
+          <Key>
+            <PropertyRef Name="IdPresupuestoObraRubro" />
+          </Key>
+          <Property Name="IdPresupuestoObraRubro" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="50" />
+          <Property Name="TipoConsumo" Type="int" />
+        </EntityType>
         <EntityType Name="Presupuestos">
           <Key>
             <PropertyRef Name="IdPresupuesto" />
@@ -9812,6 +9820,18 @@ warning 6002: The table/view 'Pronto.dbo.VistaCartasPorteMovimientos' does not h
           <Parameter Name="IdFormulario" Type="int" Mode="In" />
           <Parameter Name="IdComprobante" Type="int" Mode="In" />
         </Function>
+        <Function Name="ComprobantesProveedores_Obras" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="varchar">
+          <Parameter Name="IdComprobanteProveedor" Type="int" Mode="In" />
+        </Function>
+        <Function Name="ComprobantesProveedores_Pedidos" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="varchar">
+          <Parameter Name="IdComprobanteProveedor" Type="int" Mode="In" />
+        </Function>
+        <Function Name="ComprobantesProveedores_Recepciones" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="varchar">
+          <Parameter Name="IdComprobanteProveedor" Type="int" Mode="In" />
+        </Function>
+        <Function Name="ComprobantesProveedores_Subcontratos" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="varchar">
+          <Parameter Name="IdComprobanteProveedor" Type="int" Mode="In" />
+        </Function>
         <Function Name="Cotizaciones_TX_PorFechaMoneda" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Fecha" Type="datetime" Mode="In" />
           <Parameter Name="IdMoneda" Type="int" Mode="In" />
@@ -10388,6 +10408,7 @@ warning 6002: The table/view 'Pronto.dbo.VistaCartasPorteMovimientos' does not h
           <EntitySet Name="PresupuestoObrasNodosPxQxPresupuesto" EntityType="Self.PresupuestoObrasNodosPxQxPresupuesto" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PresupuestoObrasNodosPxQxPresupuestoPorDia" EntityType="Self.PresupuestoObrasNodosPxQxPresupuestoPorDia" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PresupuestoObrasRedeterminaciones" EntityType="Self.PresupuestoObrasRedeterminaciones" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PresupuestoObrasRubros" EntityType="Self.PresupuestoObrasRubros" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Presupuestos" EntityType="Self.Presupuestos" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ProntoIni" EntityType="Self.ProntoIni" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ProntoIniClaves" EntityType="Self.ProntoIniClaves" Schema="dbo" store:Type="Tables" />
@@ -13595,6 +13616,7 @@ warning 6002: The table/view 'Pronto.dbo.VistaCartasPorteMovimientos' does not h
             <End Role="Reclamo" EntitySet="Reclamos" />
             <End Role="ReclamoComentario" EntitySet="ReclamoComentarios" />
           </AssociationSet>
+          <EntitySet Name="PresupuestoObrasRubros" EntityType="DemoProntoModel.PresupuestoObrasRubro" />
           </EntityContainer>
         <EntityType Name="Articulo">
           <Key>
@@ -26461,6 +26483,14 @@ warning 6002: The table/view 'Pronto.dbo.VistaCartasPorteMovimientos' does not h
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="PresupuestoObrasRubro">
+          <Key>
+            <PropertyRef Name="IdPresupuestoObraRubro" />
+          </Key>
+          <Property Name="IdPresupuestoObraRubro" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="TipoConsumo" Type="Int32" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -33677,6 +33707,15 @@ warning 6002: The table/view 'Pronto.dbo.VistaCartasPorteMovimientos' does not h
                 <ScalarProperty Name="Estado" ColumnName="Estado" />
                 <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
                 <ScalarProperty Name="IdReclamo" ColumnName="IdReclamo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PresupuestoObrasRubros">
+            <EntityTypeMapping TypeName="DemoProntoModel.PresupuestoObrasRubro">
+              <MappingFragment StoreEntitySet="PresupuestoObrasRubros">
+                <ScalarProperty Name="TipoConsumo" ColumnName="TipoConsumo" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="IdPresupuestoObraRubro" ColumnName="IdPresupuestoObraRubro" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -35,158 +35,66 @@
             postData: { 'FechaInicial': function () { return $("#FechaInicial").val(); }, 'FechaFinal': function () { return $("#FechaFinal").val(); } },
             datatype: 'json',
             mtype: 'POST',
-            colNames: ['', 'Emitir', 'IdOrdenPago', 'IdOPComplementariaFF', 'Numero', 'Ext.', 'Fecha Pago', 'Tipo', 'Anulada', 'Estado', 'Proveedor', 'Cuenta', 'Mon.', 'Obra', 'Valores', 'Acreedores',
+            colNames: ['', '', '', 'IdOrdenPago', 'IdOPComplementariaFF', 'Numero', 'Ext.', 'Fecha Pago', 'Tipo', 'Anulada', 'Estado', 'Proveedor', 'Cuenta', 'Mon.', 'Obra', 'Valores', 'Acreedores',
                        'Ret.iva', 'Ret.gan', 'Ret.iibb', 'Ret.SUSS', 'Dev.FF', 'Dif. Balanceo', 'OP compl.FF', 'Destinatario FF', 'Nro.Rend.FF', 'Conf.Acred.FF', 'Conc. OP Otros', 'Clasificacion', 'Detalle',
                        'Modalidad', 'Enviar a', 'Auxiliar', 'Ingreso', 'Fecha ingreso', 'Modifico', 'Fecha modificacion', 'Anulo', 'Fecha anulacion', 'Motivo anulacion', 'Observaciones', 'Cotiz.dolar', 'Cotiz.euro'
             ],
             colModel: [
-                        { name: 'ver', index: 'ver', hidden: false, width: 50 },
-                        { name: 'Emitir', index: 'Emitir', hidden: true, width: 50 },
+                        { name: 'ver', index: 'ver', hidden: false, width: 50, search: false },
+                        { name: 'Emitir', index: 'Emitir', hidden: false, width: 50, search: false },
+                        { name: 'EmitirRetenciones', index: 'EmitirRetenciones', hidden: true, width: 50 },
                         { name: 'IdOrdenPago', index: 'IdOrdenPago', align: 'center', width: 80, sortable: false, editable: false, search: false, hidden: true },
                         { name: 'IdOPComplementariaFF', index: 'IdOPComplementariaFF', align: 'center', width: 80, sortable: false, editable: false, search: false, hidden: true },
-                        { name: 'NumeroOrdenPago', index: 'NumeroOrdenPago', align: 'left', width: 80, editable: false, hidden: false },
-                        { name: 'Exterior', index: 'Exterior', align: 'center', width: 40, editable: false, search: true, hidden: false, searchoptions: { sopt: ['cn','eq']  } },
-
-       {
-           name: 'FechaOrdenPago', index: 'FechaOrdenPago', width: 100, align: 'center',
-           sorttype: 'date', hidden: false, editable: false, formatoptions: { newformat: 'dd/mm/yy' },
-           datefmt: 'dd/mm/yy',
-
-           search: true,
-           searchrules: {
-               date: true
-           },
-           searchoptions: { // http://stackoverflow.com/questions/14632735/jqgrid-searching-dates
-               sopt: ['ge', 'le', 'eq'],
-               dataInit: function (elem) {
-                   $(elem).datepicker({
-                       dateFormat: 'dd/mm/yy',
-                       changeYear: true,
-                       changeMonth: true,
-                       showButtonPanel: true,
-                       onSelect: function () {
-                           $(this).keydown();
-                       }
-                   });
-               }
-           }
-
-       },
-
+                        { name: 'NumeroOrdenPago', index: 'NumeroOrdenPago', align: 'left', width: 80, editable: false, hidden: false, searchoptions: { sopt: ['eq'] } },
+                        { name: 'Exterior', index: 'Exterior', align: 'center', width: 40, editable: false, search: true, hidden: false, searchoptions: { sopt: ['cn'] } },
+                        {
+                            name: 'FechaOrdenPago', index: 'FechaOrdenPago', width: 100, align: 'center', sorttype: 'date', hidden: false, editable: false, formatoptions: { newformat: 'dd/mm/yy' }, datefmt: 'dd/mm/yy',
+                            search: true, searchrules: { date: true }, searchoptions: { sopt: ['ge', 'le', 'eq'] }
+                        },
                         { name: 'Tipo', index: 'Tipo', align: 'left', width: 40, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
                         { name: 'Anulada', index: 'Anulada', align: 'center', width: 50, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
                         { name: 'Estado', index: 'Estado', align: 'left', width: 80, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
-                        { name: 'Proveedor', index: 'Proveedore.RazonSocia', align: 'left', width: 300, editable: false, search: true, searchoptions: { sopt: ['cn', 'eq'] } },
-                        { name: 'Cuenta', index: 'Cuenta.Descripcion', align: 'left', width: 200, editable: false },
-                        { name: 'Moneda', index: 'Moneda.Abreviatura', align: 'center', width: 40, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
-                        { name: 'Obra', index: 'Obra.NumeroObra', align: 'left', width: 70, editable: false },
-                        { name: 'Valores', index: 'Valores', align: 'right', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
-                        { name: 'Acreedores', index: 'Acreedores', align: 'right', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
-                        { name: 'RetencionIVA', index: 'RetencionIVA', align: 'right', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
-                        { name: 'RetencionGanancias', index: 'RetencionGanancias', align: 'right', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
-                        { name: 'RetencionIBrutos', index: 'RetencionIBrutos', align: 'right', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
-                        { name: 'RetencionSUSS', index: 'RetencionSUSS', align: 'right', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
-                        { name: 'DevolucionFF', index: 'DevolucionFF', align: 'right', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
-                        { name: 'DiferenciaBalanceo', index: 'DiferenciaBalanceo', align: 'right', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
-                        { name: 'OPComplementariaFF', index: 'OPComplementariaFF', align: 'left', width: 80, editable: false, hidden: false },
-                        { name: 'DestinatarioFF', index: 'DestinatarioFF', align: 'left', width: 120, editable: false, hidden: false },
-                        { name: 'NumeroRendicionFF', index: 'NumeroRendicionFF', align: 'left', width: 80, editable: false, hidden: false },
-                        { name: 'ConfirmacionAcreditacionFF', index: 'ConfirmacionAcreditacionFF', align: 'center', width: 100, editable: false, search: true, hidden: false, searchoptions: { sopt: ['cn','eq']  } },
-                        { name: 'ConceptoOPOtros', index: 'ConceptoOPOtros', align: 'left', width: 120, editable: false, hidden: false },
-                        { name: 'Clasificacion', index: 'Clasificacion', align: 'left', width: 120, editable: false, hidden: false },
-                        { name: 'Detalle', index: 'Detalle', align: 'left', width: 150, editable: false, hidden: false },
-                        { name: 'Modalidad', index: 'Modalidad', align: 'left', width: 80, editable: false, hidden: false },
-                        { name: 'EnviarA', index: 'EnviarA', align: 'left', width: 80, editable: false, hidden: false },
-                        { name: 'Auxiliar', index: 'Auxiliar', align: 'left', width: 80, editable: false, hidden: false },
-                        { name: 'Ingreso', index: 'Ingreso', align: 'left', width: 120, editable: false, hidden: false },
-
-            {
-                  name: 'FechaIngreso', index: 'FechaIngreso', width: 100, align: 'center',
-                  sorttype: 'date', hidden: false, editable: false, formatoptions: { newformat: 'dd/mm/yy' },
-                  datefmt: 'dd/mm/yy',
-
-                  search: true,
-                  searchrules: {
-                      date: true
-                  },
-                  searchoptions: { // http://stackoverflow.com/questions/14632735/jqgrid-searching-dates
-                      sopt: ['ge', 'le', 'eq'],
-                      dataInit: function (elem) {
-                          $(elem).datepicker({
-                              dateFormat: 'dd/mm/yy',
-                              changeYear: true,
-                              changeMonth: true,
-                              showButtonPanel: true,
-                              onSelect: function () {
-                                  $(this).keydown();
-                              }
-                          });
-                      }
-                  }
-
-              },
-
-                        { name: 'Modifico', index: 'Modifico', align: 'left', width: 120, editable: false, hidden: false },
-                       
-                               {
-                                   name: 'FechaModifico', index: 'FechaModifico', width: 100, align: 'center',
-                                   sorttype: 'date', hidden: false, editable: false, formatoptions: { newformat: 'dd/mm/yy' },
-                                   datefmt: 'dd/mm/yy',
-
-                                   search: true,
-                                   searchrules: {
-                                       date: true
-                                   },
-                                   searchoptions: { // http://stackoverflow.com/questions/14632735/jqgrid-searching-dates
-                                       sopt: ['ge', 'le', 'eq'],
-                                       dataInit: function (elem) {
-                                           $(elem).datepicker({
-                                               dateFormat: 'dd/mm/yy',
-                                               changeYear: true,
-                                               changeMonth: true,
-                                               showButtonPanel: true,
-                                               onSelect: function () {
-                                                   $(this).keydown();
-                                               }
-                                           });
-                                       }
-                                   }
-
-                               },
-
-
-                        { name: 'Anulo', index: 'Anulo', align: 'left', width: 120, editable: false, hidden: false },
-
-                    {
-                         name: 'FechaAnulacion', index: 'FechaAnulacion', width: 100, align: 'center',
-                         sorttype: 'date', hidden: false, editable: false, formatoptions: { newformat: 'dd/mm/yy' },
-                         datefmt: 'dd/mm/yy',
-
-                         search: true,
-                         searchrules: {
-                             date: true
-                         },
-                         searchoptions: { // http://stackoverflow.com/questions/14632735/jqgrid-searching-dates
-                             sopt: ['ge', 'le', 'eq'],
-                             dataInit: function (elem) {
-                                 $(elem).datepicker({
-                                     dateFormat: 'dd/mm/yy',
-                                     changeYear: true,
-                                     changeMonth: true,
-                                     showButtonPanel: true,
-                                     onSelect: function () {
-                                         $(this).keydown();
-                                     }
-                                 });
-                             }
-                         }
-
-                     },
-
-                        { name: 'MotivoAnulacion', index: 'MotivoAnulacion', align: 'left', width: 150, editable: false, hidden: false },
-                        { name: 'Observaciones', index: 'Observaciones', align: 'left', width: 200, editable: false, hidden: false },
-                        { name: 'CotizacionDolar', index: 'CotizacionDolar', align: 'right', width: 70, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
-                        { name: 'CotizacionEuro', index: 'CotizacionEuro', align: 'right', width: 70, editable: false, search: true, searchoptions: { sopt: ['cn'] } }
+                        { name: 'Proveedor', index: 'Proveedor', align: 'left', width: 300, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'Cuenta', index: 'Cuenta', align: 'left', width: 200, editable: false, searchoptions: { sopt: ['cn'] } },
+                        { name: 'Moneda', index: 'Moneda', align: 'center', width: 40, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'Obra', index: 'Obra', align: 'left', width: 70, editable: false, searchoptions: { sopt: ['cn'] } },
+                        { name: 'Valores', index: 'Valores', align: 'right', width: 100, editable: false, search: true, searchoptions: { sopt: ['eq'] } },
+                        { name: 'Acreedores', index: 'Acreedores', align: 'right', width: 100, editable: false, search: true, searchoptions: { sopt: ['eq'] } },
+                        { name: 'RetencionIVA', index: 'RetencionIVA', align: 'right', width: 100, editable: false, search: true, searchoptions: { sopt: ['eq'] } },
+                        { name: 'RetencionGanancias', index: 'RetencionGanancias', align: 'right', width: 100, editable: false, search: true, searchoptions: { sopt: ['eq'] } },
+                        { name: 'RetencionIBrutos', index: 'RetencionIBrutos', align: 'right', width: 100, editable: false, search: true, searchoptions: { sopt: ['eq'] } },
+                        { name: 'RetencionSUSS', index: 'RetencionSUSS', align: 'right', width: 100, editable: false, search: true, searchoptions: { sopt: ['eq'] } },
+                        { name: 'DevolucionFF', index: 'DevolucionFF', align: 'right', width: 100, editable: false, search: true, searchoptions: { sopt: ['eq'] } },
+                        { name: 'DiferenciaBalanceo', index: 'DiferenciaBalanceo', align: 'right', width: 100, editable: false, search: true, searchoptions: { sopt: ['eq'] } },
+                        { name: 'OPComplementariaFF', index: 'OPComplementariaFF', align: 'left', width: 80, editable: false, hidden: false, searchoptions: { sopt: ['cn'] } },
+                        { name: 'DestinatarioFF', index: 'DestinatarioFF', align: 'left', width: 120, editable: false, hidden: false, searchoptions: { sopt: ['cn'] } },
+                        { name: 'NumeroRendicionFF', index: 'NumeroRendicionFF', align: 'left', width: 80, editable: false, hidden: false, searchoptions: { sopt: ['cn'] } },
+                        { name: 'ConfirmacionAcreditacionFF', index: 'ConfirmacionAcreditacionFF', align: 'center', width: 100, editable: false, search: true, hidden: false, searchoptions: { sopt: ['cn'] } },
+                        { name: 'ConceptoOPOtros', index: 'ConceptoOPOtros', align: 'left', width: 120, editable: false, hidden: false, searchoptions: { sopt: ['cn'] } },
+                        { name: 'Clasificacion', index: 'Clasificacion', align: 'left', width: 120, editable: false, hidden: false, searchoptions: { sopt: ['cn'] } },
+                        { name: 'Detalle', index: 'Detalle', align: 'left', width: 150, editable: false, hidden: false, searchoptions: { sopt: ['cn'] } },
+                        { name: 'Modalidad', index: 'Modalidad', align: 'left', width: 80, editable: false, hidden: false, searchoptions: { sopt: ['cn'] } },
+                        { name: 'EnviarA', index: 'EnviarA', align: 'left', width: 80, editable: false, hidden: false, searchoptions: { sopt: ['cn'] } },
+                        { name: 'Auxiliar', index: 'Auxiliar', align: 'left', width: 80, editable: false, hidden: false, searchoptions: { sopt: ['cn'] } },
+                        { name: 'Ingreso', index: 'Ingreso', align: 'left', width: 120, editable: false, hidden: false, searchoptions: { sopt: ['cn'] } },
+                        {
+                            name: 'FechaIngreso', index: 'FechaIngreso', width: 100, align: 'center', sorttype: 'date', hidden: false, editable: false, formatoptions: { newformat: 'dd/mm/yy' }, datefmt: 'dd/mm/yy',
+                            search: true, searchrules: { date: true }, searchoptions: { sopt: ['ge', 'le', 'eq'] }
+                        },
+                        { name: 'Modifico', index: 'Modifico', align: 'left', width: 120, editable: false, hidden: false, searchoptions: { sopt: ['cn'] } },
+                        {
+                            name: 'FechaModifico', index: 'FechaModifico', width: 100, align: 'center', sorttype: 'date', hidden: false, editable: false, formatoptions: { newformat: 'dd/mm/yy' }, datefmt: 'dd/mm/yy',
+                            search: true, searchrules: { date: true }, searchoptions: { sopt: ['ge', 'le', 'eq'] }
+                        },
+                        { name: 'Anulo', index: 'Anulo', align: 'left', width: 120, editable: false, hidden: false, searchoptions: { sopt: ['cn'] } },
+                        {
+                            name: 'FechaAnulacion', index: 'FechaAnulacion', width: 100, align: 'center', sorttype: 'date', hidden: false, editable: false, formatoptions: { newformat: 'dd/mm/yy' }, datefmt: 'dd/mm/yy',
+                            search: true, searchrules: { date: true }, searchoptions: { sopt: ['ge', 'le', 'eq'] }
+                        },
+                        { name: 'MotivoAnulacion', index: 'MotivoAnulacion', align: 'left', width: 150, editable: false, hidden: false, searchoptions: { sopt: ['cn'] } },
+                        { name: 'Observaciones', index: 'Observaciones', align: 'left', width: 200, editable: false, hidden: false, searchoptions: { sopt: ['cn'] } },
+                        { name: 'CotizacionDolar', index: 'CotizacionDolar', align: 'right', width: 70, editable: false, search: true, searchoptions: { sopt: ['eq'] } },
+                        { name: 'CotizacionEuro', index: 'CotizacionEuro', align: 'right', width: 70, editable: false, search: true, searchoptions: { sopt: ['eq'] } }
             ],
             onSelectRow: function (id) {
                 if (id && id !== lastSelectedId) {
@@ -196,10 +104,6 @@
                     lastSelectedId = id;
                 }
             },
-
-
-
-
             pager: $('#ListaPager'),
             rowNum: 15,
             rowList: [10, 20, 50, 20000],
@@ -207,43 +111,27 @@
             sortorder: 'desc',
             viewrecords: true,
             emptyrecords: 'No hay registros para mostrar', //,
-
-        
-
-            
-            ///////////////////////////////
             width: 'auto', // 'auto',
-        autowidth: true,
-        shrinkToFit: false,
-        //////////////////////////////
-
-        height: $(window).height() - ALTOLISTADO, // '100%'
-        altRows: false,
-        footerrow: false, //true,
-        userDataOnFooter: true
-        //    caption: '<b>ORDENES DE PAGO</b>'
-        // ,caption: '<b>FACTURAS</b>'
-
-        , gridview: true
-        , multiboxonly: true
-        , multipleSearch: true
-
-
-
-
+            autowidth: true,
+            shrinkToFit: false,
+            height: $(window).height() - ALTOLISTADO, // '100%'
+            altRows: false,
+            footerrow: false, //true,
+            userDataOnFooter: true,
+            gridview: true,
+            multiboxonly: true,
+            multipleSearch: true
         });
         jQuery("#Lista").jqGrid('navGrid', '#ListaPager', { refresh: true, add: false, edit: false, del: false }, {}, {}, {}, { sopt: ["cn"], width: 700, closeOnEscape: true, closeAfterSearch: true });
         //        jQuery("#Lista").jqGrid('gridResize', { minWidth: 350, maxWidth: 1500, minHeight: 80, maxHeight: 500 });
 
-        jQuery("#Lista").jqGrid('navGrid', '#ListaPager',
- { csv: true, refresh: true, add: false, edit: false, del: false }, {}, {}, {},
- {
-     //sopt: ["cn"]
-     //sopt: ['eq', 'ne', 'lt', 'le', 'gt', 'ge', 'bw', 'bn', 'ew', 'en', 'cn', 'nc', 'nu', 'nn', 'in', 'ni'],
-     width: 700, closeOnEscape: true, closeAfterSearch: true, multipleSearch: true, overlay: false
- }
-);
-
+        jQuery("#Lista").jqGrid('navGrid', '#ListaPager', { csv: true, refresh: true, add: false, edit: false, del: false }, {}, {}, {},
+         {
+             //sopt: ["cn"]
+             //sopt: ['eq', 'ne', 'lt', 'le', 'gt', 'ge', 'bw', 'bn', 'ew', 'en', 'cn', 'nc', 'nu', 'nn', 'in', 'ni'],
+             width: 700, closeOnEscape: true, closeAfterSearch: true, multipleSearch: true, overlay: false
+         }
+        );
 
         jQuery("#Lista").filterToolbar({
             stringResult: true, searchOnEnter: true,
@@ -251,16 +139,12 @@
             enableClear: false
         }); // si queres sacar el enableClear, definilo en las searchoptions de la columna específica http://www.trirand.com/blog/?page_id=393/help/clearing-the-clear-icon-in-a-filtertoolbar/
 
-
-
         $(window).resize(function () {
             RefrescaAnchoJqgrids();
         });
 
-
         $(function () {
             deshabilitarPanelesDerecho();
-
         })
         pageLayout.hide('east');
         pageLayout.hide('south');
