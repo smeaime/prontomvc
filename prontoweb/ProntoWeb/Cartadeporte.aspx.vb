@@ -10,6 +10,8 @@ Imports System.Web.Services
 Imports System.Diagnostics
 Imports System.Linq
 
+Imports ProntoMVC.Data.Models
+
 Imports CartaDePorteManager
 
 Partial Class CartadeporteABM
@@ -725,6 +727,29 @@ Partial Class CartadeporteABM
 
         '////////////////////////////////////////////
         '////////////////////////////////////////////
+
+
+
+
+
+        Using db = New DemoProntoEntities(Auxiliares.FormatearConexParaEntityFramework(Encriptar(SC)))
+
+            Dim rec As Reclamo
+            Dim carta = db.CartasDePortes.Find(myCartaDePorte.Id)
+
+            rec = db.Reclamos.Find(carta.IdReclamo)
+
+            If rec IsNot Nothing Then
+                If rec.Estado = 2 Then
+                    Button6.Enabled = False
+                    TextBox5.Enabled = False
+                    AsyncFileUpload3.Enabled = False
+                    btnCerrarReclamo.Enabled = False
+                End If
+            End If
+
+        End Using
+
 
 
     End Sub
