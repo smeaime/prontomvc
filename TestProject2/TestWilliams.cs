@@ -867,6 +867,43 @@ namespace ProntoMVC.Tests
 
 
 
+        [TestMethod]
+        public void SincroAMAGGI_47023()
+        {
+
+
+
+
+            string sErrores = "", sTitulo = "";
+            LinqCartasPorteDataContext db = null;
+
+            // el _CONST_MAXROWS sale del app.config
+
+            int registrosf = 0;
+
+            int idcli = CartaDePorteManager.BuscarClientePorCUIT("30-71161551-9", SC, "");
+
+
+            var output2 = SincronismosWilliamsManager.GenerarSincro("AMAGGI (DESCARGAS)", ref sErrores, SC, "dominio", ref sTitulo
+                          , CartaDePorteManager.enumCDPestado.DescargasMasFacturadas,
+                       "", -1, -1,
+                  idcli, -1,
+                    -1, -1, -1, -1,
+                   CartaDePorteManager.FiltroANDOR.FiltroOR, "Entregas",
+                  new DateTime(2017, 1, 10), new DateTime(2017, 1, 11),
+                  -1, "Ambas", false, "", "", -1, ref registrosf, 4000);
+
+
+
+
+            System.Diagnostics.Process.Start(output2);
+        }
+
+
+
+
+
+
 
 
         [TestMethod]
@@ -968,8 +1005,8 @@ namespace ProntoMVC.Tests
         public void TienePermisosParaEstaCarta_43063()
         {
 
-        //    TienePermisosParaEstaCarta(usuario, idcarta)
-
+            CartaDePorteManager.TienePermisosParaEstaCarta("Mariano", 6546464, SC, scbdlmasterappconfig);
+            
         //If Not(Roles.IsUserInRole(Membership.GetUser().UserName, "WilliamsComercial") Or Roles.IsUserInRole(Membership.GetUser().UserName, "WilliamsAdmin") Or Roles.IsUserInRole(Membership.GetUser().UserName, "WilliamsFacturacion")) Then
         //    btnsituacion.Visible = False
 
@@ -981,6 +1018,9 @@ namespace ProntoMVC.Tests
         [TestMethod]
         public void TienePermisosParaEsteArchivo_43063()
         {
+
+            // http://localhost:50769/ProntoWeb/CartaPorteDescargarArchivo.aspx?Id=lala.pdf  
+            CartaDePorteManager.TienePermisosParaEsteArchivo("Mariano", "lala.pdf",SC,scbdlmasterappconfig);
             //Busco en q comentario esta el archivo
             //    busco el reclamo del comentario, y la carta del comentario
             //    veo si tiene permiso para esa carta
@@ -988,12 +1028,16 @@ namespace ProntoMVC.Tests
         }
             
 
+
+
+
         [TestMethod]
         public void bajarArchivo_43063()
         {
 
             int idcarta = 2633399;
 
+            //http://localhost:50769/ProntoWeb/CartaPorteDescargarArchivo.aspx?Id=lala.pdf  
 
             //var s = new ServicioCartaPorte.servi();
             //s.BajarArchivo_DLL( "asarararasa.pdf" , usuario, SC);

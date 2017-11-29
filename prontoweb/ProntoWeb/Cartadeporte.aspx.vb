@@ -553,6 +553,8 @@ Partial Class CartadeporteABM
                 'lnkRepetirUltimaCDP.Visible = True
 
                 butVerLog.Visible = False
+
+                TabPanel5.Enabled = False
             Else
                 '//////////////////////////
                 'es EDICION
