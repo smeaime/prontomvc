@@ -288,9 +288,32 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
         </div>
 
 
+
+
+
+
+
+
         <script>
 
             var rowIdContextMenu;
+
+
+
+
+            function deshabilitarEdicion() {
+
+                //alert("hola");
+                $("#btnsituacion").hide();
+                $("#btnLog").hide();
+                $("#btnPanelInformeAjax").hide();
+                $("#btnExportarGrillaAjax").hide();
+
+                $("#Lista").jqGrid('setColProp', 'act', { editable: false });
+            }
+
+
+
 
 
             function cambiarSituaciones(ids, user, pass, callback) {

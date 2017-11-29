@@ -480,6 +480,85 @@ Public Class CartaDePorteManager
 
 
 
+
+    Public Shared Function TienePermisosParaEstaCarta(nombreusuario As String, idcarta As Integer, SC As String, SCbdlmaster As String) As Boolean
+
+        '//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        '//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        'permisos del usuario externo para esta carta
+        Dim rs As String
+        Try
+            rs = UserDatosExtendidosManager.TraerRazonSocialDelUsuario(nombreusuario, SCbdlmaster, SC)
+        Catch ex As Exception
+            ErrHandler2.WriteError(ex)
+            rs = nombreusuario 'como no encuentro el usuario en la tabla de datos adicionales de la bdlmaster, uso el nombre del usuario como razon social que esperaba encontrar en esa dichosa tabla
+        End Try
+
+        Dim idcli As Integer
+        If rs <> "" Then
+            idcli = BuscaIdClientePreciso(rs, SC)
+            If idcli = -1 Then
+
+                'MsgBoxAjax(Me, "No existe el cliente: " & rs)
+                Return False
+            End If
+        End If
+
+
+        Dim myCartaDePorte = CartaDePorteManager.GetItem(SC, idcarta)
+
+        If myCartaDePorte.Titular <> idcli And
+                myCartaDePorte.Entregador <> idcli And
+                myCartaDePorte.CuentaOrden1 <> idcli And
+                myCartaDePorte.CuentaOrden2 <> idcli And
+                IdClienteEquivalenteDelIdVendedor(myCartaDePorte.Corredor, SC) <> idcli Then
+
+            ErrHandler2.WriteError("No tenés permisos para esta carta")
+            'MsgBoxAjaxAndRedirect(Me, "No tenés permisos para esta carta", "CartaDePorteInformesAccesoClientes.aspx")
+            Return False
+
+        Else
+            Return True
+        End If
+
+
+    End Function
+
+
+
+
+
+    Public Shared Function TienePermisosParaEsteArchivo(nombreusuario As String, nombrearchivo As String, SC As String, SCbdlmaster As String) As Boolean
+
+        '//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+        Using db = New DemoProntoEntities(Auxiliares.FormatearConexParaEntityFramework(Encriptar(SC)))
+
+            Dim rec As Reclamo
+
+
+            Dim coment = db.ReclamoComentarios.Where(Function(x) x.Comentario = nombrearchivo).SingleOrDefault
+            If coment IsNot Nothing Then
+                Dim carta = coment.Reclamo.CartasDePortes.First()
+
+                TienePermisosParaEstaCarta(nombreusuario, carta.IdCartaDePorte, SC, SCbdlmaster)
+
+
+
+            End If
+
+        End Using
+
+    End Function
+
+
+
+
+
+
+
+
     Public Shared Function DataTablePorCliente(
             ByVal SC As String,
             ByVal ColumnaParaFiltrar As String,
@@ -13078,6 +13157,7 @@ usuario As String, ConexBDLmaster As String,
 
 
 
+
     Shared Function GrabarImagen(forzarID As Long, SC As String, numeroCarta As Long, vagon As Long, archivoImagenSinPathUbicadaEnDATABACKUPEAR As String, ByRef sError As String, DirApp As String, Optional bForzarCasillaCP As Boolean = False, Optional bForzarCasillaTK As Boolean = False) As String
 
         'quien se encarga de borrar la imagen que no se pudo adjuntar?
@@ -17756,7 +17836,7 @@ usuario As String, ConexBDLmaster As String,
             '& r.Item(5)  & r.Item(0) & " " & r.Item(1)& " " & r.Item(4)  " " & r.Item(7)& " " & r.Item(3)
         Next
 
-        s += "<br/> [1 titular / 2 destinatario / 3 corredor / 4 a tercero / 5 automatico] <br/>"
+        's += "<br/> [1 titular / 2 destinatario / 3 corredor / 4 a tercero / 5 automatico] <br/>"
 
         Return s
 

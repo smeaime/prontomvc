@@ -579,8 +579,8 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                     </button>
 
 
-                    <button type="button" id="" style="height: 40px; width: 70px; vertical-align: top;" onclick="location.href='CartaPorteMovil.aspx'">
-                        <i class="fa"></i>General
+                    <button type="button" id="" style="height: 40px; width: 70px; vertical-align: top;" onclick="location.href='CartasPortesExternoMovil.aspx'">
+                        <i class="fa"></i>Vista General
                     </button>
 
 
@@ -594,6 +594,10 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
 
             <script>
+
+
+
+
 
                 jQuery("#prox").click(function () {
 
@@ -629,13 +633,17 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
 
 
-            <div id="dialog" title="" style="">
+            <div id="dialog" title="" style="color: blue">
 
                 <%--<input type="button" id="" value="------" class="" style="height: 50px; margin-left: 5px" />--%>
 
 
 
-                <asp:Image ID="Image1" runat="server" ImageUrl="~/Imagenes/williamslogin.gif" CssClass="" Height="" Width="250px" ImageAlign="AbsBottom" />
+                <button type="button" id="btnVolver2" value="" class="" style="height: 50px; width: 70px; margin-left: 4px">
+                                    <i class="fa fa-bars fa-2x"></i>
+                                </button>
+
+                <asp:Image ID="Image1" runat="server" ImageUrl="~/Imagenes/williamslogin.gif" CssClass="" Height="" Width="200px" ImageAlign="AbsBottom" />
 
 
 
@@ -661,6 +669,55 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                 </div>
 
 
+                    <ajaxToolkit:Accordion ID="Accordion1" runat="server" SelectedIndex="0" FadeTransitions="false"
+                        FramesPerSecond="60" TransitionDuration="75" AutoSize="None" RequireOpenedPane="false"
+                        Width="160px" SuppressHeaderPostbacks="true" HeaderCssClass="AccordionHeaderCssClass"
+                        HeaderSelectedCssClass="accordionHeaderSelected" OnItemDataBound="Accordion1_DataBound"
+                        EnableViewState="false" Height="500px" TabIndex="-1" Visible="true"
+                        OnPreRender="AccordionPreRender">
+                        <%--por qué andaba mal en el explorer? por el autosize? por el FadeTransitions--%>
+                        <HeaderTemplate>
+                            <div class="accordionHeader">
+                                <a href="<%# Eval("url") %>" tabindex="-1">
+                                    <%#Eval("title")%></a>
+                            </div>
+                        </HeaderTemplate>
+                        <ContentTemplate>
+                            <div class="accordionContent">
+                                <table>
+                                    <asp:Repeater ID="Repeater1" runat="server"
+                                        OnItemDataBound="RepeaterItemDataBound"
+                                        OnPreRender="RepeaterPreRender">
+                                        <ItemTemplate>
+                                            <tr>
+                                                <td id="AccordionSideBarItem" cssclass="cssAccordionSideBarItem">
+                                                    <%--<a id="aLink1" href="<%# CType(Container.DataItem, System.Web.SiteMapNode).Url %>" tabindex="-1">
+                                                                        <%#CType(Container.DataItem, System.Web.SiteMapNode).Title%>
+                                                                    </a>--%>
+                                                    <asp:HyperLink ID="HyperLink2" runat="server" Font-Underline="false" NavigateUrl='<%# CType(Container.DataItem, System.Web.SiteMapNode).Url %>'
+                                                        Text='<%#CType(Container.DataItem, System.Web.SiteMapNode).Title %>'></asp:HyperLink>
+                                                </td>
+                                            </tr>
+                                        </ItemTemplate>
+                                    </asp:Repeater>
+                                </table>
+                            </div>
+                        </ContentTemplate>
+                        <%--el acordion no tiene un AccordionExtender; si el IDE te lo crea, borralo (junto al pane que le adjunta)  
+
+ERA ESO EL PROBLEMA DEL PANELCITO VACIO?????????????????!!!!!!!!!!!!!!!1                
+ERA ESO EL PROBLEMA DEL PANELCITO VACIO?????????????????!!!!!!!!!!!!!!!1                
+ERA ESO EL PROBLEMA DEL PANELCITO VACIO?????????????????!!!!!!!!!!!!!!!1                
+ERA ESO EL PROBLEMA DEL PANELCITO VACIO?????????????????!!!!!!!!!!!!!!!1                
+ERA ESO EL PROBLEMA DEL PANELCITO VACIO?????????????????!!!!!!!!!!!!!!!1                
+
+                           http://forums.asp.net/p/1440213/3259302.aspx#3259302
+                           http://forums.asp.net/p/1423947/3174594.aspx#3174594
+                        --%>
+                    </ajaxToolkit:Accordion>
+                    <asp:SiteMapDataSource ID="SiteMapDataSource" runat="server" ShowStartingNode="false" />
+
+                <br />
                 <a href="CartaDePorteInformesAccesoClientesMovil.aspx"><i class="fa                 fa-desktop fa-2x"></i>VERSION ESCRITORIO  </a>
                 <br />
                 <br />
@@ -848,6 +905,9 @@ Arroyo Seco (Sta. Fe) - René Favaloro 726 / (03402) 421-426 - 429-676 / arroyos
                 jQuery("#btnVolver").click(function () {
                     $("#dialog").dialog("close");
                 })
+                jQuery("#btnVolver2").click(function () {
+                    $("#dialog").dialog("close");
+                })
 
 
 
@@ -864,9 +924,20 @@ Arroyo Seco (Sta. Fe) - René Favaloro 726 / (03402) 421-426 - 429-676 / arroyos
                     //$("#dialog").dialog();
 
                     $("#dialog").dialog({
-                        width: $(window).width(), // 310, //'auto',
+                        position: { my: "right top" },
+                        width: $(window).width() - 80, // 310, //'auto',
                         height: $(window).height(), // '100%'
                         dialogClass: "no-close",
+
+                        modal: true,
+                        //autoOpen: false,
+                        open: function(event, ui) 
+                        { 
+                            $('.ui-widget-overlay').bind('click', function()
+                            { 
+                                $("#dialog").dialog('close'); 
+                            }); 
+                        },
                         buttons: [
                             //    {
                             //        text: "OK",
@@ -1995,7 +2066,7 @@ Arroyo Seco (Sta. Fe) - René Favaloro 726 / (03402) 421-426 - 429-676 / arroyos
                                 name: 'act', index: 'act', align: 'center', width: 60, editable: false, hidden: true, sortable: false, frozen: true, search: false
                             },
 
-                            { name: ' IdCartaDePorte', index: ' IdCartaDePorte', align: 'left', width: 100, editable: false, hidden: true, frozen: true },
+                            { name: 'IdCartaDePorte', index: 'IdCartaDePorte', align: 'left', width: 100, editable: false, hidden: true, frozen: true },
 
                             {
                                 name: 'NumeroCartaEnTextoParaBusqueda', index: 'NumeroCartaEnTextoParaBusqueda', width: 140, align: 'left', sorttype: "text", sortable: true, frozen: true

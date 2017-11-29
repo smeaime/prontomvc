@@ -2154,5 +2154,19 @@ GO
 
 
 
+CREATE NONCLUSTERED INDEX IDX_cartasdeporte_IdReclamo
+ON [dbo].[cartasdeporte] (IdReclamo)
+go
+
+
+
+
+
+alter table ReclamoComentarios ADD
+	NombreUsuario varchar(150) NULL
+go
+
+
+
 
 

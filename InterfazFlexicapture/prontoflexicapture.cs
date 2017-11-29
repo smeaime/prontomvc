@@ -4262,11 +4262,11 @@ Formato localidad-provincia	destination	x
 
 
 
-        public virtual string InformeSituacion_string(int iddestino, DateTime desde, DateTime hasta, string SC,int estado)
+        public virtual string InformeSituacion_string(int iddestino, DateTime desde, DateTime hasta, string SC, int estado)
         {
             string s = "";
 
-            Dictionary<int, int> q = InformeSituacion(iddestino, desde, hasta, SC,estado);
+            Dictionary<int, int> q = InformeSituacion(iddestino, desde, hasta, SC, estado);
 
 
             foreach (var line in q)
@@ -4381,7 +4381,7 @@ Formato localidad-provincia	destination	x
 
         //public const int estado = 11; //por ahora dejo fijo que se use el estado DescargasDeHoyMasTodasLasPosicionesEnRangoFecha
 
-        public virtual Dictionary<int, int> InformeSituacion(int iddestino, DateTime desde, DateTime hasta, string SC, int estado )
+        public virtual Dictionary<int, int> InformeSituacion(int iddestino, DateTime desde, DateTime hasta, string SC, int estado)
         {
 
 
@@ -4654,7 +4654,7 @@ Formato localidad-provincia	destination	x
 
 
 
-        public virtual string CartasPorte_DynamicGridData_NuevoOrden(string sidx, string sord, int page, int rows, bool _search, string filters, string FechaInicial, string FechaFinal, int puntovent, int iddestino, string SC, string nombreusuario, string SCbdlmaster,int estado)
+        public virtual string CartasPorte_DynamicGridData_NuevoOrden(string sidx, string sord, int page, int rows, bool _search, string filters, string FechaInicial, string FechaFinal, int puntovent, int iddestino, string SC, string nombreusuario, string SCbdlmaster, int estado)
         {
 
             // An ASHX is a generic HttpHandler. An ASMX file is a web service. ASHX is a good lean way to provide a response to AJAX calls, but if you want to provide a response which changes based on conditions (such as variable inputs) it can become a bit of a handful - lots of if else etc. ASMX can house mulitple methods which can take parameters.
@@ -5146,13 +5146,13 @@ Formato localidad-provincia	destination	x
                      //   Num de cp - Situacion - obs situcaion - producto - titular - interm - remitente - corredor - destintario - destino - patente - kg proc. - arribo - descarga * El cliente puede modificar la situación? - No no la puede cambiar.
 
                                 "<span> " +
-                                "<b>Situacion</b> " + (a.Situacion ?? 0).NullSafeToString() + 
+                                "<b>Situacion</b> " + (a.Situacion ?? 0).NullSafeToString() +
                                 "<br/><b>Obs</b> " + a.ObservacionesSituacion +
                                 "<br/>" + a.Producto.ToString() +
                                 "<br/>" + a.TitularDesc +
                                 "<br/>" + a.IntermediarioDesc +
                                 "<br/>" + a.RComercialDesc +
-                                "<a href=\"CartaDePorte.aspx?Id=" +  a.IdCartaDePorte + "\"  target=\"_blank\" > Imagenes </>" + 
+                                "<a href=\"CartaDePorte.aspx?Id=" +  a.IdCartaDePorte + "\"  target=\"_blank\" > Imagenes </>" +
                                 "<span/>",
 
 
@@ -5177,7 +5177,7 @@ Formato localidad-provincia	destination	x
                                 Convert.ToInt32( a.NetoPto).ToString(),
 
 
-                                
+
                                 a.FechaArribo==null ? "" :  a.FechaArribo.GetValueOrDefault().ToShortDateString(),
 
 
@@ -5246,7 +5246,7 @@ Formato localidad-provincia	destination	x
         }
 
 
-        public virtual string CartasPorte_DynamicGridData(string sidx, string sord, int page, int rows, bool _search, string filters, string FechaInicial, string FechaFinal, int puntovent, int iddestino, string SC, string nombreusuario, string SCbdlmaster, int estado )
+        public virtual string CartasPorte_DynamicGridData(string sidx, string sord, int page, int rows, bool _search, string filters, string FechaInicial, string FechaFinal, int puntovent, int iddestino, string SC, string nombreusuario, string SCbdlmaster, int estado)
         {
 
             // An ASHX is a generic HttpHandler. An ASMX file is a web service. ASHX is a good lean way to provide a response to AJAX calls, but if you want to provide a response which changes based on conditions (such as variable inputs) it can become a bit of a handful - lots of if else etc. ASMX can house mulitple methods which can take parameters.
@@ -5515,7 +5515,7 @@ Formato localidad-provincia	destination	x
 
         }
 
-        public virtual string CartasPorte_DynamicGridData_ExcelExportacion_UsandoInternalQuery_3(string sidx, string sord, int page, int rows, bool _search, string filters, string FechaInicial, string FechaFinal, int puntovent, int iddestino, string SC, string nombreusuario,int estado)
+        public virtual string CartasPorte_DynamicGridData_ExcelExportacion_UsandoInternalQuery_3(string sidx, string sord, int page, int rows, bool _search, string filters, string FechaInicial, string FechaFinal, int puntovent, int iddestino, string SC, string nombreusuario, int estado)
         {
             //asdad
 
@@ -5939,7 +5939,9 @@ Formato localidad-provincia	destination	x
 
 
 
-        public virtual string Reclamos_DynamicGridData(string sidx, string sord, int page, int rows, bool _search, string filters, string FechaInicial, string FechaFinal, int puntovent, int iddestino, string SC, string nombreusuario, string SCbdlmaster)
+        public virtual string Reclamos_DynamicGridData(string sidx, string sord, int page, int rows, bool _search, string filters,
+                                                        string FechaInicial, string FechaFinal, int puntovent, int idcarta,
+                                                        string SC, string nombreusuario, string SCbdlmaster)
         {
 
             // An ASHX is a generic HttpHandler. An ASMX file is a web service. ASHX is a good lean way to provide a response to AJAX calls, but if you want to provide a response which changes based on conditions (such as variable inputs) it can become a bit of a handful - lots of if else etc. ASMX can house mulitple methods which can take parameters.
@@ -6000,7 +6002,12 @@ Formato localidad-provincia	destination	x
 
 
 
-            var q = db.ReclamoComentarios;
+            IQueryable<ReclamoComentario> q = db.ReclamoComentarios;
+
+
+            var cartareclamo = db.CartasDePortes.Find(idcarta);
+            int? idreclamo = cartareclamo == null ? null : cartareclamo.IdReclamo;
+            if (idreclamo != null) q = q.Where(x => x.IdReclamo == idreclamo);
 
 
 
@@ -6097,17 +6104,19 @@ Formato localidad-provincia	destination	x
                                 
                                 a.IdReclamoComentario.ToString(),
                                 a.IdReclamo.ToString(),
-                                a.Empleado.Nombre.NullSafeToString(),
+                                a.NombreUsuario.NullSafeToString() + "<br/> " + a.Fecha.GetValueOrDefault().ToShortTimeString()  + "<br/> "  + a.Fecha.GetValueOrDefault().ToShortDateString(),
 
-                                a.Comentario,
+                                (a.IdEmpleado==1) ? "" : a.Comentario,
+                                //a.Comentario,  // (a.IdEmpleado!=1) ? "" : a.Comentario ,
+                                a.Comentario.Contains("DataBackupear") ? "<a href='" +  a.Comentario + "'    style='text-decoration: underline; color: blue !important;'  > Bajar archivo </ a > " : a.Comentario,
                                 a.Fecha==null ? "" :  a.Fecha.GetValueOrDefault().ToShortDateString(),
 
-                                a.ArchivoAdjunto.ToString(),
+                                a.ArchivoAdjunto.NullSafeToString(),
 
 
 
                                 "<a href=\"CartaDePorte.aspx?Id=" +  a.Reclamo.CartasDePortes.Select(x=>x.IdCartaDePorte).SingleOrDefault().NullSafeToString() + "\"  target=\"_blank\" >" +  a.Reclamo.CartasDePortes.Select(x=>x.IdCartaDePorte).NullSafeToString().ToString() + "</>" ,
-                                
+
                             }
                         }).ToArray()
             };
@@ -6393,7 +6402,7 @@ Formato localidad-provincia	destination	x
 
 
 
-        public virtual string CartasPorte_DynamicGridData_ExcelExportacion_UsandoInternalQuery(string sidx, string sord, int page, int rows, bool _search, string filters, string FechaInicial, string FechaFinal, int puntovent, int iddestino, string SC, string nombreusuario, int estado )
+        public virtual string CartasPorte_DynamicGridData_ExcelExportacion_UsandoInternalQuery(string sidx, string sord, int page, int rows, bool _search, string filters, string FechaInicial, string FechaFinal, int puntovent, int iddestino, string SC, string nombreusuario, int estado)
         {
             //asdad
 
@@ -6496,7 +6505,7 @@ Formato localidad-provincia	destination	x
         }
 
 
-        public virtual string CartasPorte_DynamicGridData_ExcelExportacion(string sidx, string sord, int page, int rows, bool _search, string filters, string FechaInicial, string FechaFinal, int puntovent, int iddestino, string SC, string nombreusuario,int estado)
+        public virtual string CartasPorte_DynamicGridData_ExcelExportacion(string sidx, string sord, int page, int rows, bool _search, string filters, string FechaInicial, string FechaFinal, int puntovent, int iddestino, string SC, string nombreusuario, int estado)
         {
             //asdad
 
@@ -6580,7 +6589,7 @@ Formato localidad-provincia	destination	x
             //System.Web.Mvc.JsonResult result;
 
             //result = (System.Web.Mvc.JsonResult)CartasPorte_DynamicGridData(sidx, sord, page, rows, _search, filters, "", "", puntovent, iddestino, SC, nombreusuario);
-            string result2 = CartasPorte_DynamicGridData(sidx, sord, 1, 200000, _search, filters, FechaInicial, FechaFinal, puntovent, iddestino, SC, nombreusuario, "",estado);
+            string result2 = CartasPorte_DynamicGridData(sidx, sord, 1, 200000, _search, filters, FechaInicial, FechaFinal, puntovent, iddestino, SC, nombreusuario, "", estado);
 
             System.Web.Script.Serialization.JavaScriptSerializer jsonSerializer = new System.Web.Script.Serialization.JavaScriptSerializer();
             //result = jsonSerializer.Deserialize<jqGridJson>(result2);
@@ -6631,6 +6640,115 @@ Formato localidad-provincia	destination	x
 
         }
 
+
+
+
+
+
+
+
+        public virtual string[] GrabarComentario_DLL(int idcarta, string comentario, string nombreusuario, string SC)
+        {
+
+
+            //estan como empleados los usuarios externos de williams?
+
+            var scEF = ProntoMVC.Data.Models.Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC));
+
+            using (DemoProntoEntities db = new DemoProntoEntities(scEF))
+            {
+
+                db.Database.CommandTimeout = 200;
+
+                Reclamo rec;
+                CartasDePorte carta = db.CartasDePortes.Find(idcarta);
+
+                if (carta.IdReclamo == null)
+                {
+                    rec = new Reclamo();
+                    rec.Estado = 1;
+                    rec.Descripcion = "nuevo reclamo";
+                    db.Reclamos.Add(rec);
+                    db.SaveChanges();
+                    carta.IdReclamo = rec.IdReclamo;
+                }
+                else
+                {
+                    rec = db.Reclamos.Find(carta.IdReclamo);
+                }
+
+
+                var com = new ReclamoComentario(); // db.ReclamoComentarios.FirstOrDefault().IdReclamo;
+                com.IdReclamo = rec.IdReclamo;
+                com.IdEmpleado = 1;
+                com.NombreUsuario = nombreusuario;
+                com.Comentario = comentario;
+                com.Fecha = DateTime.Now;
+                db.ReclamoComentarios.Add(com);
+
+
+                db.SaveChanges();
+
+
+
+
+                var usuariosParticipantes = db.ReclamoComentarios.Where(x => x.IdReclamo == rec.IdReclamo).Select(x => x.NombreUsuario).Distinct().ToArray();
+                return usuariosParticipantes;
+
+            }
+
+
+
+        }
+
+
+
+        public virtual string[] CerrarReclamo_DLL(int idcarta, string nombreusuario, string SC)
+        {
+
+
+            //estan como empleados los usuarios externos de williams?
+
+            var scEF = ProntoMVC.Data.Models.Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC));
+
+            using (DemoProntoEntities db = new DemoProntoEntities(scEF))
+            {
+
+                db.Database.CommandTimeout = 200;
+
+                Reclamo rec;
+                CartasDePorte carta = db.CartasDePortes.Find(idcarta);
+
+                rec = db.Reclamos.Find(carta.IdReclamo);
+
+                rec.Estado = 2;
+
+
+                db.SaveChanges();
+
+
+                var usuariosParticipantes = db.ReclamoComentarios.Where(x => x.IdReclamo == rec.IdReclamo).Select(x => x.NombreUsuario).Distinct().ToArray();
+                return usuariosParticipantes;
+
+            }
+
+
+
+        }
+
+
+
+
+        public virtual string GrabarComentarioArchivo_DLL(int idcarta, string comentario, string nombreusuario, string SC)
+        {
+
+
+            //estan como empleados los usuarios externos de williams?
+
+            GrabarComentario_DLL(idcarta, comentario, nombreusuario, SC);
+            return "";
+
+        }
 
 
 
@@ -7908,4 +8026,14 @@ __________________________
 
     }
 
+
+
+
+
+
+
+
 }
+
+
+
