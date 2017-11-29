@@ -263,7 +263,10 @@ Public Class WebServiceCartas
             End If
 
 
-            Pronto.ERP.Bll.EntidadManager.MandaEmail_Nuevo(casillas,
+            Try
+
+
+                Pronto.ERP.Bll.EntidadManager.MandaEmail_Nuevo(casillas,
                                "Consulta por carta porte",
                             "Comentario de " + usuario + ": <br/>" + sComentario + "<br/><br/> " + "<a href='" + linkAlReclamo + "'>Link al comentario</a>",
                             ConfigurationManager.AppSettings("SmtpUser"),
@@ -273,6 +276,10 @@ Public Class WebServiceCartas
                               "",
                            Convert.ToInt16(ConfigurationManager.AppSettings("SmtpPort")),,,,,,)
 
+            Catch ex As Exception
+                ErrHandler2.WriteError(ex)
+
+            End Try
 
             '////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             '////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
