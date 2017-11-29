@@ -1551,7 +1551,7 @@ Partial Class CartaDePorteInformesConReportViewerSincronismos
                              cmbPuntoVenta.SelectedValue, sTitulo, optDivisionSyngenta.SelectedValue, , txtContrato.Text).ToList
 
 
-                            output = Sincronismo_AmaggiDescargas_Nuevo(q, , sWHERE, sErrores)
+                            output = Sincronismo_AmaggiDescargas_Nuevo(q, HFSC.Value, , sWHERE, sErrores)
 
                         Else
                             'como verificar que solo venga una sin copia? -una opcion en el 
