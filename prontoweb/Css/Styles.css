@@ -523,7 +523,7 @@ Content placeholder - height=100% ???
 
 .panelSuperbuscador
 {
-    width: 520px;
+    width: 35%; /* 520px;*/
 }
 
 /* 
