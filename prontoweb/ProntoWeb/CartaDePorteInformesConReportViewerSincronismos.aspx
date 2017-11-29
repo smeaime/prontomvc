@@ -161,6 +161,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                             <asp:ListItem Enabled="True">Bunge</asp:ListItem>
                             <asp:ListItem Enabled="True">CGG</asp:ListItem>
                             <asp:ListItem Enabled="True">CGG (calidades)</asp:ListItem>
+                            <asp:ListItem Enabled="True">Chiambretto</asp:ListItem>
                             <asp:ListItem Enabled="true">Diaz Forti [BIT]</asp:ListItem>
                             <asp:ListItem Enabled="true">Diaz Riganti</asp:ListItem>
                             <asp:ListItem Enabled="true">DOW</asp:ListItem>

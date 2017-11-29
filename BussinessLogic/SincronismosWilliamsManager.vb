@@ -418,6 +418,16 @@ Namespace Pronto.ERP.Bll
 
 
 
+
+                Case "CHIAMBRETTO"
+                    txtCorredor.Text = ""
+                    Dim cuit = "30-69848607-0"
+                    txtTitular.Text = NombreCliente(SC, BuscarClientePorCUIT("30-69848607-0", SC, ""))
+                    txtIntermediario.Text = NombreCliente(SC, BuscarClientePorCUIT("30-69848607-0", SC, ""))
+                    txtRcomercial.Text = NombreCliente(SC, BuscarClientePorCUIT("30-69848607-0", SC, ""))
+                    txtPopClienteAuxiliar.Text = NombreCliente(SC, BuscarClientePorCUIT("30-69848607-0", SC, ""))
+
+
                 Case "TERRA VERDE"
                     'LARTIRIGOYEN: TITULAR / INTERMEDIARIO / RTTE COMERCIAL / CLIENTE OBSERVACIONES 
                     txtTitular.Text = "TERRA VERDE AGRO INSUMOS S.A."
@@ -9105,7 +9115,8 @@ Namespace Pronto.ERP.Bll
 
 
             'Dim vFileName As String = Path.GetTempFileName() & ".txt"
-            Dim vFileName As String = Path.GetTempPath & "SincroPelayo " & Now.ToString("ddMMMyyyy_HHmmss") & ".txt" 'http://stackoverflow.com/questions/581570/how-can-i-create-a-temp-file-with-a-specific-extension-with-net
+            Dim vFileName As String = Path.GetTempPath & "Chiambretto " & Now.ToString("ddMMMyyyy_HHmmss") & ".csv" 'http://stackoverflow.com/questions/581570/how-can-i-create-a-temp-file-with-a-specific-extension-with-net
+            Dim vdest As String = Path.GetTempPath & "Chiambretto " & Now.ToString("ddMMMyyyy_HHmmss") & ".xlsx"
             'Dim vFileName As String = Path.GetTempPath & "SincroLosGrobo.txt" 'http://stackoverflow.com/questions/581570/how-can-i-create-a-temp-file-with-a-specific-extension-with-net
 
             'Dim vFileName As String = "c:\archivo.txt"
@@ -9121,7 +9132,7 @@ Namespace Pronto.ERP.Bll
             Dim i As Integer = 0
             Dim dr As DataRow
 
-            Const SEP = "&"
+            Const SEP = ";"
 
             'Dim a = pDataTable(1)
 
@@ -9137,68 +9148,72 @@ Namespace Pronto.ERP.Bll
             '29780           564888483	884392	0			0		10941	RAIMAPU                       
             '29980           565144739	884392	0			0		10941	RUCATURKU SRL                 
 
-            'Biotecnologia		
-            '            Calidad CC	CC
-            'CEE 87401100000000.0	8.74217E+13
-            'CuilChofer  20256683416	20121414709
-            'CuitPagadorFlete    20033289141	20066332141
-            'CuitTransportista   33715555389	33715555389
-            'Destino MOLINOS XX SA     	MOLINOS XX SA     
-            'FechaVtoCEE 2017 - 12 - 1	2017-12-18
-            'KM  550	550
-            'BrutoProcedencia
-            '            KgNetoDescarga  29780	29980
-            'KgTaraProcedencia
-            '            KgTotalProcedencia  29500	30000
-            'NombreChofer    BEGA CARLOS                  	GL CARLOS                    
-            'ObservacionesCalidad
-            '            ObservacionesGrales c() / CAM.- c() / CAM.-
-            'PatenteAcoplado     CTP356
-            'PatenteChasis       CTP333
-            'TarifaFlete 640	600
-            'TarifaReferencia
-            '            CodPlanta        18794	     18794
-            'ConfirmKilos
-            '            Cosecha 1617	1617
-            'CTG 11360573	51456282
-            'Corredor    INTCOR S.A.                                      	INTCOR S.A.                                      
-            'CuitCorredor    30663323262	30663323262
-            'Destinatario    MOLINOS XX SA     	MOLINOS XX SA     
-            'CuitDestinatario    30715518773	30715518773
-            'CuitDestino 30715118773	30715118773
-            'Entregador  ENTREGAS SERDEN S.R.L.        	ENTREGAS SERDEN S.R.L.        
-            'CuitEntregador  30707844759	30707844759
-            'Intermediario   CEOS SERV.AGRIC. SA                             	CEOS SERV.AGRIC. SA                             
-            'CuitIntermediario   30706660217	30706660217
-            'RemComercial    ARGENTRADING S.A.                                 	ARGENTRADING S.A.                                 
-            'CuitRemComercial    30711629048	30711629048
-            'Titular HIDALGO SRAVIA M                	HIDALGO SRAVIA M            
-            'CuitTitular 20033489141	20033489141
-            'FechaCP 19 / 10 / 2017	19/10/2017
-            'FechaDescarga   21 / 10 / 2017	21/10/2017
-            'Grano   19	19
-            'Variedad
-            '            BrutoDescarga   45240	44820
-            'KgHum
-            '            KgMermaDescarga 0	0
-            'KgTaraDescargado    15460	14840
-            'KgTotalDescarga 29780	29980
-            'KgVolatil
-            '            KgZaranda
-            '            NumeroCartaPorte    564888483	565144739
-            'Romaneo 884392	884392
-            'PorcentajeHumedad   0	0
-            'PorcetanjeVolatil
-            '            PorcetanjeZaranda
-            '            PorcentajeMermaHumedad  0	0
-            'OtrasMermas
-            '            Procedencia 10941	10941
-            'Transportista   RAIMAPU                       	RUCATURKU SRL                 
+
+
+            '	1	Biotecnologia		
+            '	2	Calidad	CC	CC
+            '	3	CEE	8.74011E+13	8.74217E+13
+            '	4	CuilChofer	20256683416	20121414709
+            '	5	CuitPagadorFlete	20033289141	20066332141
+            '	6	CuitTransportista	33715555389	33715555389
+            '	7	Destino	MOLINOS XX SA     	MOLINOS XX SA     
+            '	8	FechaVtoCEE	2017-12-01	2017-12-18
+            '	9	KM	550	550
+            '	10	BrutoProcedencia		
+            '	11	KgNetoDescarga	29780	29980
+            '	12	KgTaraProcedencia		
+            '	13	KgTotalProcedencia	29500	30000
+            '	14	NombreChofer	BEGA CARLOS                  	GL CARLOS                    
+            '	15	ObservacionesCalidad		
+            '	16	ObservacionesGrales	C/CAM.-                                                          	C/CAM.-                                                          
+            '	17	PatenteAcoplado		CTP356
+            '	18	PatenteChasis		CTP333
+            '	19	TarifaFlete	640	600
+            '	20	TarifaReferencia		
+            '	21	CodPlanta	     18794	     18794
+            '	22	ConfirmKilos		
+            '	23	Cosecha	1617	1617
+            '	24	CTG	11360573	51456282
+            '	25	Corredor	INTCOR S.A.                                      	INTCOR S.A.                                      
+            '	26	CuitCorredor	30663323262	30663323262
+            '	27	Destinatario	MOLINOS XX SA     	MOLINOS XX SA     
+            '	28	CuitDestinatario	30715518773	30715518773
+            '	29	CuitDestino	30715118773	30715118773
+            '	30	Entregador	ENTREGAS SERDEN S.R.L.        	ENTREGAS SERDEN S.R.L.        
+            '	31	CuitEntregador	30707844759	30707844759
+            '	32	Intermediario	CEOS SERV.AGRIC. SA                             	CEOS SERV.AGRIC. SA                             
+            '	33	CuitIntermediario	30706660217	30706660217
+            '	34	RemComercial	ARGENTRADING S.A.                                 	ARGENTRADING S.A.                                 
+            '	35	CuitRemComercial	30711629048	30711629048
+            '	36	Titular	HIDALGO SRAVIA M                	HIDALGO SRAVIA M            
+            '	37	CuitTitular	20033489141	20033489141
+            '	38	FechaCP	19/10/2017	19/10/2017
+            '	39	FechaDescarga	21/10/2017	21/10/2017
+            '	40	Grano	19	19
+            '	41	Variedad		
+            '	42	BrutoDescarga	45240	44820
+            '	43	KgHum		
+            '	44	KgMermaDescarga	0	0
+            '	45	KgTaraDescargado	15460	14840
+            '	46	KgTotalDescarga	29780	29980
+            '	47	KgVolatil		
+            '	48	KgZaranda		
+            '	49	NumeroCartaPorte	564888483	565144739
+            '	50	Romaneo	884392	884392
+            '	51	PorcentajeHumedad	0	0
+            '	52	PorcetanjeVolatil		
+            '	53	PorcetanjeZaranda		
+            '	54	PorcentajeMermaHumedad	0	0
+            '	55	OtrasMermas		
+            '	56	Procedencia	10941	10941
+            '	57	Transportista	RAIMAPU                       	RUCATURKU SRL                 
 
 
 
-            Const sss = "00000000001&       0002&0003&00000004&0000000005&0000000000&0000000007&0000000000&        009&00000000000010&      11&         12&D                           13&         14&15&16&     17&0000045220&0000015680&00000   20&      21&   22&0000000023&   0.00&0000000&0000000026&0000000000&0000000000&00000   29&00000000000030&00000000000031&08732&0000000 33&  34&  35&00000000036&00000000037&00038&00039&&         41&      42&43                                                                                                                           &000044&000045&0046&                  47&        48&        49&  50 &51&52                            &         53&54&00055&0056&00000057&58& &00000000" & vbCrLf &
-"30707844759&27059565341&0005&58962048&0000000000&0000000000&0000000000&0000000000&27059565341&87041338912181&20170326&20253657716&DE DIOS       FACUNDO         &20253657716&NO&NO&615.000&0000045220&0000015680&0000029540&20170201&12.00&0000000000&   0.00&0000000&0000000000&0000000000&0000000000&0000029540&00000000000000&00000000000000&08746&0000000500&SOJA&1516&30539435589&30715118773&18794&08746&&30715118773&11318673&CONF.-                                                                                                                       &000000&000000&0000&                    &AA824GU   &TTU038    &00000&SI&                              &30500959629&NO&00000&0000&00000000&NO& &00000000"
+
+            Const sss = "Biotecnologia;Calidad;CEE;CuilChofer;CuitPagadorFlete;CuitTransportista;Destino;FechaVtoCEE;KM;BrutoProcedencia;KgNetoDescarga;KgTaraProcedencia;KgTotalProcedencia;NombreChofer;ObservacionesCalidad;ObservacionesGrales;PatenteAcoplado;PatenteChasis;TarifaFlete;TarifaReferencia;CodPlanta;ConfirmKilos;Cosecha;CTG;Corredor;CuitCorredor;Destinatario;CuitDestinatario;CuitDestino;Entregador;CuitEntregador;Intermediario;CuitIntermediario;RemComercial;CuitRemComercial;Titular;CuitTitular;FechaCP;FechaDescarga;Grano;Variedad;BrutoDescarga;KgHum;KgMermaDescarga;KgTaraDescargado;KgTotalDescarga;KgVolatil;KgZaranda;NumeroCartaPorte;Romaneo;PorcentajeHumedad;PorcetanjeVolatil;PorcetanjeZaranda;PorcentajeMermaHumedad;OtrasMermas;Procedencia;Transportista" & vbCrLf &
+                        ";CC;8.74011E+13;20256683416;20033289141;33715555389;MOLINOS XX SA     ;2017-12-01;550;;29780;;29500;BEGA CARLOS                  ;;C/CAM.-                                                          ;;;640;;     18794;;1617;11360573;INTCOR S.A.                                      ;30663323262;MOLINOS XX SA     ;30715518773;30715118773;ENTREGAS SERDEN S.R.L.        ;30707844759;CEOS SERV.AGRIC. SA                             ;30706660217;ARGENTRADING S.A.                                 ;30711629048;HIDALGO SRAVIA M                ;20033489141;19/10/2017;21/10/2017;19;;45240;;0;15460;29780;;;564888483;884392;0;;;0;;10941;RAIMAPU                       " & vbCrLf &
+                        ";CC;8.74217E+13;20121414709;20066332141;33715555389;MOLINOS XX SA     ;2017-12-18;550;;29980;;30000;GL CARLOS                    ;;C/CAM.-                                                          ;CTP356;CTP333;600;;     18794;;1617;51456282;INTCOR S.A.                                      ;30663323262;MOLINOS XX SA     ;30715518773;30715118773;ENTREGAS SERDEN S.R.L.        ;30707844759;CEOS SERV.AGRIC. SA                             ;30706660217;ARGENTRADING S.A.                                 ;30711629048;HIDALGO SRAVIA M            ;20033489141;19/10/2017;21/10/2017;19;;44820;;0;14840;29980;;;565144739;884392;0;;;0;;10941;RUCATURKU SRL                 "
 
             PrintLine(nF, sss)
 
@@ -9222,85 +9237,265 @@ Namespace Pronto.ERP.Bll
 
 
 
-                    sb &= IIf(.EntregadorCUIT = "", wilycuit, .EntregadorCUIT).ToString.Replace("-", "") & SEP       '1
-                    sb &= If(.TitularCUIT, "            ").ToString.Replace("-", "") & SEP       '2
-                    sb &= "0005" & SEP       '3
-                    sb &= Right(.NumeroCartaDePorte.ToString, 8) & SEP       '4
-                    sb &= "0000000000&0000000000&0000000000&0000000000&"
-                    sb &= If(.RComercialCUIT, "").ToString.Replace("-", "") & SEP       '9
-                    sb &= JustificadoIzquierda(.CEE.ToString, 14) & SEP '10
-                    sb &= IIf(.FechaVencimiento Is Nothing, "        ", CDate(If(.FechaVencimiento, DateTime.MinValue)).ToString("yyyyMMdd")) & SEP '11
+
+
+
+
+                    '	1	Biotecnologia		
+                    '	2	Calidad	CC	CC
+                    '	3	CEE	8.74011E+13	8.74217E+13
+                    '	4	CuilChofer	20256683416	20121414709
+                    '	5	CuitPagadorFlete	20033289141	20066332141
+
+
+
+                    sb &= "Biotecnologia" & SEP
+                    Dim sCalidad As String
+                    If InStr(.Calidad.ToString.ToLower, "grado 1") > 0 Then
+                        sCalidad = "G1"
+                    ElseIf InStr(.Calidad.ToString.ToLower, "grado 2") > 0 Then
+                        sCalidad = "G2"
+                    ElseIf InStr(.Calidad.ToString.ToLower, "grado 3") > 0 Then
+                        sCalidad = "G3"
+                    ElseIf InStr(.Calidad.ToString.ToLower, "camara") > 0 Then
+                        sCalidad = "CC"
+                    Else
+                        sCalidad = "FE"
+                    End If
+                    sb &= sCalidad & SEP
+                    sb &= JustificadoIzquierda(.CEE.ToString, 14) & SEP
+                    sb &= .ChoferCUIT & SEP
+                    sb &= "" & SEP
+
+
+
+
+
+
+                    '	6	CuitTransportista	33715555389	33715555389
+                    '	7	Destino	MOLINOS XX SA     	MOLINOS XX SA     
+                    '	8	FechaVtoCEE	2017-12-01	2017-12-18
+                    '	9	KM	550	550
+                    '	10	BrutoProcedencia		
+
+
                     sb &= If(.TransportistaCUIT, "           ").ToString.Replace("-", "") & SEP       '12
-                    sb &= JustificadoIzquierda(.TransportistaDesc, 30) & SEP  '13
-                    sb &= If(.TransportistaCUIT, "           ").ToString.Replace("-", "") & SEP       '14
-
-
-                    '15 - Liquida Viaje	16 - Cobra Acarreo	17 - Tarifa de Flete	18 - Kilos Brutos	19 - Kilos Tara	20 - Kilos Descargados	
-                    sb &= IIf(.LiquidaViaje = "SI", "SI", "NO") & SEP
-                    sb &= IIf(.CobraAcarreo = "SI", "SI", "NO") & SEP
-
-                    sb &= If(.Tarifa, 0).ToString("000.000").Replace(",", ".") & SEP '615.000
-                    sb &= JustificadoDerecha(CInt(.BrutoPto).ToString, 10, "0") & SEP '
-                    sb &= JustificadoDerecha(CInt(.TaraPto).ToString, 10, "0") & SEP  '
-                    sb &= JustificadoDerecha(CInt(.NetoPto).ToString, 10, "0") & SEP '
-
-
-                    '21 - Fecha Descarga	22 -Porcentaje Humedad	23 -Kilos Merma Humedad	24 -Porcentaje Merma Zarandeo	25 -Porcentaje Merma Volátil	26 -Kilos Merma Zarandeo	27 -Kilos Merma Volátil	28 -Kilos Servicio	29 -Kilos Netos	30 -Número de Contrato de Compra
-
-
-                    sb &= IIf(.FechaDescarga Is Nothing, "        ", CDate(If(.FechaDescarga, DateTime.MinValue)).ToString("yyyyMMdd")) & SEP  '
-                    sb &= If(.Humedad, 0).ToString("00.00").Replace(",", ".") & SEP
-                    sb &= JustificadoDerecha(CInt(If(.HumedadDesnormalizada, 0)), 10, "0") & SEP
-                    sb &= If(.CalidadMermaZarandeo, 0).ToString("0000.00").Replace(",", ".") & SEP
-                    sb &= "0000000" & SEP  '	25 -Porcentaje Merma Volátil
-                    sb &= "0000000000" & SEP  'JustificadoDerecha(If(.CalidadZarandeoMerma, ""), 10, "0") & SEP
-                    sb &= "0000000000" & SEP  '27 -Kilos Merma Volátil
-                    sb &= "0000000000" & SEP '28 -Kilos Servicio
-                    sb &= JustificadoDerecha(CInt(.NetoProc).ToString, 10, "0") & SEP '29 -Kilos Netos
-                    sb &= JustificadoDerecha(.Contrato, 14) & SEP '30 -Número de Contrato de Compra
-
-
-                    '31- Número de Contrato de Venta	32-Código Localidad ONCCA / Código de Campo Interno del Sistema	33 -Kilómetros	34 -Especie  	35 –Cosecha	36 - Código Corredor	37 -Código Comprador/Vendedor 	38 –Código interno de Destino	39 –Código interno de Procedencia 	40 – Sufijo Carta de Porte	41 – Destinatario CP	42 – Numero de CTG	43 – Comentario	44 – Código de Establecimiento  Destino	
-
-                    sb &= JustificadoDerecha(.Contrato, 14) & SEP
-                    sb &= JustificadoDerecha(.ProcedenciaCodigoONCAA, 5) & SEP
-                    sb &= JustificadoDerecha(If(.KmARecorrer, 0), 10).Replace(",", ".") & SEP
-                    sb &= JustificadoDerecha(Left(.Producto, 4), 4) & SEP '34 -Especie   esto está apareciendo como "SOJA" en el ejemplo.....
-
-                    sb &= Right(.Cosecha, 5).Replace("/", "").PadLeft(4) & SEP
-                    sb &= If(.CorredorCUIT, "").ToString.Replace("-", "") & SEP
-                    sb &= If(.TitularCUIT, "").ToString.Replace("-", "") & SEP
-                    sb &= JustificadoDerecha(.DestinoCodigoONCAA, 5) & SEP  '38
-                    sb &= JustificadoDerecha(.ProcedenciaCodigoONCAA, 5) & SEP
-                    sb &= "" & SEP '40 – Sufijo Carta de Porte
-                    sb &= If(.DestinatarioCUIT, "").ToString.Replace("-", "") & SEP
-                    sb &= JustificadoIzquierda(If(.CTG, "0"), 8) & SEP
-                    sb &= JustificadoIzquierda(.Observaciones.Replace(vbLf, "").Replace(vbCrLf, ""), 125) & SEP
-                    sb &= JustificadoIzquierda(If(.EstablecimientoCodigo, ""), 6) & SEP  '44 – Código de Establecimiento  Destino	
-
-
-                    '                    45 – Código de Establecimiento  Procedencia	46 – Código de Tipo de Movimiento	47 – Código de Chofer en Softcereal	48 – Patente del Camión	49 – Patente del Acoplado	50 – Código de planta	51 – Calidad Conforme	52-Vagon	53 – Entidad destino	
-
-                    sb &= JustificadoDerecha(.EstablecimientoCodigo, 6) & SEP
-                    sb &= JustificadoDerecha(If(.IdTipoMovimiento, ""), 4) & SEP
-                    sb &= "                    " & SEP
-                    sb &= JustificadoIzquierda(.Patente, 10) & SEP
-                    sb &= JustificadoIzquierda(.Acoplado, 10) & SEP
-                    sb &= "     " & SEP
-                    sb &= IIf(If(.NobleConforme, "") = "SI", "SI", "NO") & SEP
-                    sb &= JustificadoDerecha(If(.SubnumeroVagon, ""), 30) & SEP
-                    sb &= JustificadoDerecha(.DestinoCUIT.Replace("-", ""), 11) & SEP
+                    sb &= .DestinoDesc
+                    sb &= .FechaVencimiento & SEP
+                    sb &= .KmARecorrer & SEP
+                    sb &= .BrutoPto & SEP
 
 
 
-                    '54- Guía Propia	55 – Localidad ONCCA Municipio Guía	56 – Prefijo Guía	57 – Numero Guia	58 – Oblea Propia	59 – Tipo de Oblea	60 – Número de Oblea
-                    sb &= "NO" & SEP
-                    sb &= "00000" & SEP  '55 – Localidad ONCCA Municipio Guía
-                    sb &= "0000" & SEP    '56 – Prefijo Guía	
-                    sb &= "00000000" & SEP  '57 – Numero Guia
-                    sb &= "NO" & SEP '58 – Oblea Propia	
-                    sb &= " " & SEP  '59 – Tipo de Oblea
-                    sb &= "00000000" '60 – Número de Oblea
+
+
+
+                    '	11	KgNetoDescarga	29780	29980
+                    '	12	KgTaraProcedencia		
+                    '	13	KgTotalProcedencia	29500	30000
+                    '	14	NombreChofer	BEGA CARLOS                  	GL CARLOS                    
+                    '	15	ObservacionesCalidad		
+
+
+
+                    sb &= .NetoPto & SEP
+                    sb &= .TaraPto & SEP
+                    sb &= .NetoProc & SEP
+                    sb &= .ChoferDesc & SEP
+                    sb &= .Observaciones & SEP
+
+                    '	16	ObservacionesGrales	C/CAM.-                                                          	C/CAM.-                                                          
+                    '	17	PatenteAcoplado		CTP356
+                    '	18	PatenteChasis		CTP333
+                    '	19	TarifaFlete	640	600
+                    '	20	TarifaReferencia		
+
+
+                    sb &= .Observaciones & SEP
+                    sb &= .Acoplado & SEP
+                    sb &= .Patente & SEP
+                    sb &= .Tarifa & SEP
+                    sb &= .Tarifa & SEP
+
+
+
+                    '	21	CodPlanta	     18794	     18794
+                    '	22	ConfirmKilos		
+                    '	23	Cosecha	1617	1617
+                    '	24	CTG	11360573	51456282
+                    '	25	Corredor	INTCOR S.A.                                      	INTCOR S.A.                                      
+
+
+                    sb &= .EstablecimientoCodigo & SEP
+                    sb &= "" & SEP
+                    sb &= .Cosecha & SEP
+                    sb &= .CTG & SEP
+                    sb &= .CorredorDesc & SEP
+
+
+
+
+
+
+
+
+                    '	26	CuitCorredor	30663323262	30663323262
+                    '	27	Destinatario	MOLINOS XX SA     	MOLINOS XX SA     
+                    '	28	CuitDestinatario	30715518773	30715518773
+                    '	29	CuitDestino	30715118773	30715118773
+
+
+
+                    sb &= .CorredorCUIT & SEP
+                    sb &= .DestinatarioDesc & SEP
+                    sb &= .DestinatarioCUIT & SEP
+                    sb &= .DestinoCUIT & SEP
+
+
+                    '	30	Entregador	ENTREGAS SERDEN S.R.L.        	ENTREGAS SERDEN S.R.L.        
+                    '	31	CuitEntregador	30707844759	30707844759
+                    '	32	Intermediario	CEOS SERV.AGRIC. SA                             	CEOS SERV.AGRIC. SA                             
+                    '	33	CuitIntermediario	30706660217	30706660217
+                    '	34	RemComercial	ARGENTRADING S.A.                                 	ARGENTRADING S.A.                                 
+
+                    sb &= .DestinatarioDesc & SEP
+                    sb &= .DestinatarioCUIT & SEP
+                    sb &= .IntermediarioDesc & SEP
+                    sb &= .IntermediarioCUIT & SEP
+                    sb &= .RComercialDesc & SEP
+
+
+
+                    '	35	CuitRemComercial	30711629048	30711629048
+                    '	36	Titular	HIDALGO SRAVIA M                	HIDALGO SRAVIA M            
+                    '	37	CuitTitular	20033489141	20033489141
+                    '	38	FechaCP	19/10/2017	19/10/2017
+                    '	39	FechaDescarga	21/10/2017	21/10/2017
+
+                    sb &= .RComercialCUIT & SEP
+                    sb &= .TitularDesc & SEP
+                    sb &= .TitularCUIT & SEP
+                    sb &= .FechaArribo & SEP
+                    sb &= .FechaDescarga & SEP
+
+
+                    '	40	Grano	19	19
+                    '	41	Variedad		
+                    '	42	BrutoDescarga	45240	44820
+                    '	43	KgHum		
+                    '	44	KgMermaDescarga	0	0
+
+                    sb &= .EspecieONCAA & SEP
+                    sb &= "" & SEP
+                    sb &= .BrutoFinal & SEP
+                    sb &= .Humedad & SEP
+                    sb &= .HumedadDesnormalizada & SEP
+
+                    '	45	KgTaraDescargado	15460	14840
+                    '	46	KgTotalDescarga	29780	29980
+                    '	47	KgVolatil		
+                    '	48	KgZaranda		
+                    '	49	NumeroCartaPorte	564888483	565144739
+
+                    sb &= .TaraFinal & SEP
+                    sb &= .NetoFinal & SEP
+                    sb &= "" & SEP
+                    sb &= "" & SEP
+                    sb &= .NumeroCartaDePorte & SEP
+
+                    '	50	Romaneo	884392	884392
+                    '	51	PorcentajeHumedad	0	0
+                    '	52	PorcetanjeVolatil		
+                    '	53	PorcetanjeZaranda		
+                    '	54	PorcentajeMermaHumedad	0	0
+
+                    sb &= .Turno & SEP
+                    sb &= .Humedad & SEP
+                    sb &= "" & SEP
+                    sb &= "" & SEP
+                    sb &= "" & SEP
+
+                    '	55	OtrasMermas		
+                    '	56	Procedencia	10941	10941
+                    '	57	Transportista	RAIMAPU                       	RUCATURKU SRL                 
+
+                    sb &= "" & SEP
+                    sb &= .ProcedenciaCodigoONCAA & SEP
+                    sb &= .TransportistaDesc & SEP
+
+
+
+
+
+                    'sb &= IIf(.EntregadorCUIT = "", wilycuit, .EntregadorCUIT).ToString.Replace("-", "") & SEP       '1
+                    'sb &= If(.TitularCUIT, "            ").ToString.Replace("-", "") & SEP       '2
+                    'sb &= "0005" & SEP       '3
+                    'sb &= Right(.NumeroCartaDePorte.ToString, 8) & SEP       '4
+                    'sb &= "0000000000&0000000000&0000000000&0000000000&"
+                    'sb &= If(.RComercialCUIT, "").ToString.Replace("-", "") & SEP       '9
+                    'sb &= IIf(.FechaVencimiento Is Nothing, "        ", CDate(If(.FechaVencimiento, DateTime.MinValue)).ToString("yyyyMMdd")) & SEP '11
+                    'sb &= JustificadoIzquierda(.TransportistaDesc, 30) & SEP  '13
+                    'sb &= If(.TransportistaCUIT, "           ").ToString.Replace("-", "") & SEP       '14
+
+
+                    'sb &= IIf(.LiquidaViaje = "SI", "SI", "NO") & SEP
+                    'sb &= IIf(.CobraAcarreo = "SI", "SI", "NO") & SEP
+
+                    'sb &= If(.Tarifa, 0).ToString("000.000").Replace(",", ".") & SEP '615.000
+                    'sb &= JustificadoDerecha(CInt(.BrutoPto).ToString, 10, "0") & SEP '
+                    'sb &= JustificadoDerecha(CInt(.TaraPto).ToString, 10, "0") & SEP  '
+                    'sb &= JustificadoDerecha(CInt(.NetoPto).ToString, 10, "0") & SEP '
+
+
+
+                    'sb &= IIf(.FechaDescarga Is Nothing, "        ", CDate(If(.FechaDescarga, DateTime.MinValue)).ToString("yyyyMMdd")) & SEP  '
+                    'sb &= If(.Humedad, 0).ToString("00.00").Replace(",", ".") & SEP
+                    'sb &= JustificadoDerecha(CInt(If(.HumedadDesnormalizada, 0)), 10, "0") & SEP
+                    'sb &= If(.CalidadMermaZarandeo, 0).ToString("0000.00").Replace(",", ".") & SEP
+                    'sb &= "0000000" & SEP  '	25 -Porcentaje Merma Volátil
+                    'sb &= "0000000000" & SEP  'JustificadoDerecha(If(.CalidadZarandeoMerma, ""), 10, "0") & SEP
+                    'sb &= "0000000000" & SEP  '27 -Kilos Merma Volátil
+                    'sb &= "0000000000" & SEP '28 -Kilos Servicio
+                    'sb &= JustificadoDerecha(CInt(.NetoProc).ToString, 10, "0") & SEP '29 -Kilos Netos
+                    'sb &= JustificadoDerecha(.Contrato, 14) & SEP '30 -Número de Contrato de Compra
+
+
+
+                    'sb &= JustificadoDerecha(.Contrato, 14) & SEP
+                    'sb &= JustificadoDerecha(.ProcedenciaCodigoONCAA, 5) & SEP
+                    'sb &= JustificadoDerecha(If(.KmARecorrer, 0), 10).Replace(",", ".") & SEP
+                    'sb &= JustificadoDerecha(Left(.Producto, 4), 4) & SEP '34 -Especie   esto está apareciendo como "SOJA" en el ejemplo.....
+
+                    'sb &= Right(.Cosecha, 5).Replace("/", "").PadLeft(4) & SEP
+                    'sb &= If(.CorredorCUIT, "").ToString.Replace("-", "") & SEP
+                    'sb &= If(.TitularCUIT, "").ToString.Replace("-", "") & SEP
+                    'sb &= JustificadoDerecha(.DestinoCodigoONCAA, 5) & SEP  '38
+                    'sb &= JustificadoDerecha(.ProcedenciaCodigoONCAA, 5) & SEP
+                    'sb &= "" & SEP '40 – Sufijo Carta de Porte
+                    'sb &= If(.DestinatarioCUIT, "").ToString.Replace("-", "") & SEP
+                    'sb &= JustificadoIzquierda(If(.CTG, "0"), 8) & SEP
+                    'sb &= JustificadoIzquierda(.Observaciones.Replace(vbLf, "").Replace(vbCrLf, ""), 125) & SEP
+                    'sb &= JustificadoIzquierda(If(.EstablecimientoCodigo, ""), 6) & SEP  '44 – Código de Establecimiento  Destino	
+
+                    'sb &= JustificadoDerecha(.EstablecimientoCodigo, 6) & SEP
+                    'sb &= JustificadoDerecha(If(.IdTipoMovimiento, ""), 4) & SEP
+                    'sb &= "                    " & SEP
+                    'sb &= JustificadoIzquierda(.Patente, 10) & SEP
+                    'sb &= JustificadoIzquierda(.Acoplado, 10) & SEP
+                    'sb &= "     " & SEP
+                    'sb &= IIf(If(.NobleConforme, "") = "SI", "SI", "NO") & SEP
+                    'sb &= JustificadoDerecha(If(.SubnumeroVagon, ""), 30) & SEP
+                    'sb &= JustificadoDerecha(.DestinoCUIT.Replace("-", ""), 11) & SEP
+
+
+
+                    'sb &= "NO" & SEP
+                    'sb &= "00000" & SEP  '55 – Localidad ONCCA Municipio Guía
+                    'sb &= "0000" & SEP    '56 – Prefijo Guía	
+                    'sb &= "00000000" & SEP  '57 – Numero Guia
+                    'sb &= "NO" & SEP '58 – Oblea Propia	
+                    'sb &= " " & SEP  '59 – Tipo de Oblea
+                    'sb &= "00000000" '60 – Número de Oblea
 
 
 
@@ -9312,10 +9507,20 @@ Namespace Pronto.ERP.Bll
             Next
 
 
+
+
+
+
+
             FileClose(nF)
 
 
-            Return vFileName
+            ProntoMVC.Data.FuncionesGenericasCSharp.CSV_To_Excel(vFileName, vdest, True, SEP)
+
+
+
+
+            Return vdest
             'Return TextToExcel(vFileName, titulo)
         End Function
 
@@ -25645,7 +25850,8 @@ Namespace Pronto.ERP.Bll
                 sb &= "&" & cero.ToString.PadLeft(6) '44 – Código de Establecimiento  Destino	Numérico	6	Código de Establecimiento Destino
 
 
-                sb &= "&" & iisNull(dr("CodigoEstablecimientoProcedencia"), "").ToString.PadLeft(6)   '45 - Código de Establecimiento  Procedencia	Numérico	6	Código de Establecimiento Procedencia
+                'sb &= "&" & iisNull(dr("CodigoEstablecimientoProcedencia"), "").ToString.PadLeft(6)   '45 - Código de Establecimiento  Procedencia	Numérico	6	Código de Establecimiento Procedencia
+                sb &= "&" & "0".ToString.PadLeft(6) 'reemplazado en 0 por consulta 46995
 
 
                 sb &= "&" & iisNull(dr("IdTipoMovimiento"), "").ToString.PadLeft(4) '46 – Código de Tipo de Movimiento	Numérico	4	Código de Tipo de Movimiento
