@@ -732,3 +732,581 @@ Login failed for user 'sa'.
    en ASP.global_asax.Application_Error(Object sender, EventArgs e) en C:\bdl\pronto\prontoweb\global.asax:línea 433
 .Net SqlClient Data Provider
 __________________________
+
+Log Entry : 
+11/29/2017 16:48:50
+Error in: http://localhost:50769/ProntoWeb/CartaDePorte.aspx?Id=3154882. Error Message:Mariano esta logueado, pero lo redirijo al login porque faltan los datos de session. No deberia mejor mandarlo a SeleccionarEmpresa? Ademas, no hago el LogOut y le queda el cookie!!!
+__________________________
+
+Log Entry : 
+11/29/2017 16:50:03
+Error in: http://localhost:50769/ProntoWeb/CartaDePorte.aspx?Id=3154882. Error Message:La carta numero 564793833 id=3154882 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+11/29/2017 16:50:04
+Error in: http://localhost:50769/ProntoWeb/CartaDePorte.aspx?Id=3154882. Error Message:PV 2 0
+__________________________
+
+Log Entry : 
+11/29/2017 16:51:26
+Error in: http://localhost:50769/ProntoWeb/CartaDePorte.aspx?Id=3154883. Error Message:La carta numero 565147739 id=3154883 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+11/29/2017 16:51:26
+Error in: http://localhost:50769/ProntoWeb/CartaDePorte.aspx?Id=3154883. Error Message:PV 2 0
+__________________________
+
+Log Entry : 
+11/29/2017 16:58:55
+Error in: http://localhost:50769/ProntoWeb/CartaDePorte.aspx?Id=3154883. Error Message:Mariano esta logueado, pero lo redirijo al login porque faltan los datos de session. No deberia mejor mandarlo a SeleccionarEmpresa? Ademas, no hago el LogOut y le queda el cookie!!!
+__________________________
+
+Log Entry : 
+11/29/2017 16:59:19
+Error in: http://localhost:50769/ProntoWeb/CartaDePorte.aspx?Id=3154883. Error Message:La carta numero 565147739 id=3154883 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+11/29/2017 16:59:19
+Error in: http://localhost:50769/ProntoWeb/CartaDePorte.aspx?Id=3154883. Error Message:PV 2 0
+__________________________
+
+Log Entry : 
+11/29/2017 16:59:27
+Error in: http://localhost:50769/ProntoWeb/WebServiceCartas.asmx/GrabarComentario. Error Message:System.InvalidOperationException
+Se debe especificar un destinatario.
+   en System.Net.Mail.SmtpClient.Send(MailMessage message)
+   en Pronto.ERP.Bll.EntidadManager.MandaEmail_Nuevo(String Para, String Asunto, String Cuerpo, String De, String SmtpServer, String SmtpUser, String SmtpPass, String sFileNameAdjunto, Int64 SmtpPort, Int32 EnableSSL, String CCO, String img, String friendlyname, String replyTo, Boolean isHtml, String inlinePNG, String inlinePNG2) en C:\bdl\pronto\BussinessLogic\EntidadManager.vb:línea 316
+System
+__________________________
+
+Log Entry : 
+11/29/2017 16:59:27
+Error in: http://localhost:50769/ProntoWeb/WebServiceCartas.asmx/GrabarComentario. Error Message:ProntoWebMail@gmail.com
+__________________________
+
+Log Entry : 
+11/29/2017 16:59:27
+Error in: http://localhost:50769/ProntoWeb/WebServiceCartas.asmx/GrabarComentario. Error Message:
+__________________________
+
+Log Entry : 
+11/29/2017 16:59:27
+Error in: http://localhost:50769/ProntoWeb/WebServiceCartas.asmx/GrabarComentario. Error Message:System.InvalidOperationException
+Se debe especificar un destinatario.
+   en System.Net.Mail.SmtpClient.Send(MailMessage message)
+   en Pronto.ERP.Bll.EntidadManager.MandaEmail_Nuevo(String Para, String Asunto, String Cuerpo, String De, String SmtpServer, String SmtpUser, String SmtpPass, String sFileNameAdjunto, Int64 SmtpPort, Int32 EnableSSL, String CCO, String img, String friendlyname, String replyTo, Boolean isHtml, String inlinePNG, String inlinePNG2) en C:\bdl\pronto\BussinessLogic\EntidadManager.vb:línea 455
+   en WebServiceCartas.GrabarComentario(Int32 idCartaPorte, String sComentario) en C:\bdl\pronto\prontoweb\App_Code\vbcode\WebServiceCartas.vb:línea 266
+System
+__________________________
+
+Log Entry : 
+11/29/2017 17:42:36
+Error in: http://localhost:50769/ProntoWeb/CartaDePorte.aspx?Id=3154883. Error Message:Mariano esta logueado, pero lo redirijo al login porque faltan los datos de session. No deberia mejor mandarlo a SeleccionarEmpresa? Ademas, no hago el LogOut y le queda el cookie!!!
+__________________________
+
+Log Entry : 
+11/29/2017 17:48:02
+Error in: http://localhost:50769/ProntoWeb/CartaDePorte.aspx?Id=3154883. Error Message:Mariano esta logueado, pero lo redirijo al login porque faltan los datos de session. No deberia mejor mandarlo a SeleccionarEmpresa? Ademas, no hago el LogOut y le queda el cookie!!!
+__________________________
+
+Log Entry : 
+11/29/2017 17:48:06
+Error in: http://localhost:50769/ProntoWeb/CartaDePorte.aspx?Id=3154883. Error Message:La carta numero 565147739 id=3154883 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+11/29/2017 17:48:06
+Error in: http://localhost:50769/ProntoWeb/CartaDePorte.aspx?Id=3154883. Error Message:PV 2 0
+__________________________
+
+Log Entry : 
+11/29/2017 17:48:13
+Error in: http://localhost:50769/ProntoWeb/WebServiceCartas.asmx/GrabarComentario. Error Message:System.InvalidOperationException
+Se debe especificar un destinatario.
+   en System.Net.Mail.SmtpClient.Send(MailMessage message)
+   en Pronto.ERP.Bll.EntidadManager.MandaEmail_Nuevo(String Para, String Asunto, String Cuerpo, String De, String SmtpServer, String SmtpUser, String SmtpPass, String sFileNameAdjunto, Int64 SmtpPort, Int32 EnableSSL, String CCO, String img, String friendlyname, String replyTo, Boolean isHtml, String inlinePNG, String inlinePNG2) en C:\bdl\pronto\BussinessLogic\EntidadManager.vb:línea 316
+System
+__________________________
+
+Log Entry : 
+11/29/2017 17:48:13
+Error in: http://localhost:50769/ProntoWeb/WebServiceCartas.asmx/GrabarComentario. Error Message:ProntoWebMail@gmail.com
+__________________________
+
+Log Entry : 
+11/29/2017 17:48:13
+Error in: http://localhost:50769/ProntoWeb/WebServiceCartas.asmx/GrabarComentario. Error Message:
+__________________________
+
+Log Entry : 
+11/29/2017 17:48:13
+Error in: http://localhost:50769/ProntoWeb/WebServiceCartas.asmx/GrabarComentario. Error Message:System.InvalidOperationException
+Se debe especificar un destinatario.
+   en System.Net.Mail.SmtpClient.Send(MailMessage message)
+   en Pronto.ERP.Bll.EntidadManager.MandaEmail_Nuevo(String Para, String Asunto, String Cuerpo, String De, String SmtpServer, String SmtpUser, String SmtpPass, String sFileNameAdjunto, Int64 SmtpPort, Int32 EnableSSL, String CCO, String img, String friendlyname, String replyTo, Boolean isHtml, String inlinePNG, String inlinePNG2) en C:\bdl\pronto\BussinessLogic\EntidadManager.vb:línea 455
+   en WebServiceCartas.GrabarComentario(Int32 idCartaPorte, String sComentario) en C:\bdl\pronto\prontoweb\App_Code\vbcode\WebServiceCartas.vb:línea 269
+System
+__________________________
+
+Log Entry : 
+11/29/2017 17:48:24
+Error in: http://localhost:50769/ProntoWeb/CartaDePorte.aspx?Id=3154884. Error Message:La carta numero 564556223 id=3154884 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+11/29/2017 17:48:24
+Error in: http://localhost:50769/ProntoWeb/CartaDePorte.aspx?Id=3154884. Error Message:PV 2 0
+__________________________
+
+Log Entry : 
+11/29/2017 17:48:59
+Error in: http://localhost:50769/ProntoWeb/CartaDePorte.aspx?Id=3154884. Error Message:La carta numero 564556223 id=3154884 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+11/29/2017 17:48:59
+Error in: http://localhost:50769/ProntoWeb/CartaDePorte.aspx?Id=3154884. Error Message:PV 2 0
+__________________________
+
+Log Entry : 
+11/29/2017 17:51:01
+Error in: http://localhost:50769/ProntoWeb/Principal.aspx. Error Message:Mariano esta logueado, pero lo redirijo al login porque faltan los datos de session. No deberia mejor mandarlo a SeleccionarEmpresa? Ademas, no hago el LogOut y le queda el cookie!!!
+__________________________
+
+Log Entry : 
+11/29/2017 17:51:02
+Error in: http://localhost:50769/ProntoWeb/CartasDePortes.aspx?tipo=Todas. Error Message:Mariano
+__________________________
+
+Log Entry : 
+11/29/2017 17:53:41
+Error in: http://localhost:50769/ProntoWeb/Principal.aspx. Error Message:Mariano esta logueado, pero lo redirijo al login porque faltan los datos de session. No deberia mejor mandarlo a SeleccionarEmpresa? Ademas, no hago el LogOut y le queda el cookie!!!
+__________________________
+
+Log Entry : 
+11/29/2017 17:53:41
+Error in: http://localhost:50769/ProntoWeb/CartasDePortes.aspx?tipo=Todas. Error Message:Mariano
+__________________________
+
+Log Entry : 
+11/29/2017 17:54:06
+Error in: http://localhost:50769/ProntoWeb/CartaDePorte.aspx?Id=3154884. Error Message:La carta numero 564556223 id=3154884 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+11/29/2017 17:54:06
+Error in: http://localhost:50769/ProntoWeb/CartaDePorte.aspx?Id=3154884. Error Message:PV 2 0
+__________________________
+
+Log Entry : 
+11/29/2017 17:54:16
+Error in: http://localhost:50769/ProntoWeb/WebServiceCartas.asmx/GrabarComentario. Error Message:System.InvalidOperationException
+Se debe especificar un destinatario.
+   en System.Net.Mail.SmtpClient.Send(MailMessage message)
+   en Pronto.ERP.Bll.EntidadManager.MandaEmail_Nuevo(String Para, String Asunto, String Cuerpo, String De, String SmtpServer, String SmtpUser, String SmtpPass, String sFileNameAdjunto, Int64 SmtpPort, Int32 EnableSSL, String CCO, String img, String friendlyname, String replyTo, Boolean isHtml, String inlinePNG, String inlinePNG2) en C:\bdl\pronto\BussinessLogic\EntidadManager.vb:línea 316
+System
+__________________________
+
+Log Entry : 
+11/29/2017 17:54:16
+Error in: http://localhost:50769/ProntoWeb/WebServiceCartas.asmx/GrabarComentario. Error Message:ProntoWebMail@gmail.com
+__________________________
+
+Log Entry : 
+11/29/2017 17:54:16
+Error in: http://localhost:50769/ProntoWeb/WebServiceCartas.asmx/GrabarComentario. Error Message:
+__________________________
+
+Log Entry : 
+11/29/2017 17:54:16
+Error in: http://localhost:50769/ProntoWeb/WebServiceCartas.asmx/GrabarComentario. Error Message:System.InvalidOperationException
+Se debe especificar un destinatario.
+   en System.Net.Mail.SmtpClient.Send(MailMessage message)
+   en Pronto.ERP.Bll.EntidadManager.MandaEmail_Nuevo(String Para, String Asunto, String Cuerpo, String De, String SmtpServer, String SmtpUser, String SmtpPass, String sFileNameAdjunto, Int64 SmtpPort, Int32 EnableSSL, String CCO, String img, String friendlyname, String replyTo, Boolean isHtml, String inlinePNG, String inlinePNG2) en C:\bdl\pronto\BussinessLogic\EntidadManager.vb:línea 455
+   en WebServiceCartas.GrabarComentario(Int32 idCartaPorte, String sComentario) en C:\bdl\pronto\prontoweb\App_Code\vbcode\WebServiceCartas.vb:línea 269
+System
+__________________________
+
+Log Entry : 
+11/29/2017 18:05:50
+Error in: http://localhost:50769/ProntoWeb/CartaDePorte.aspx?Id=3154884. Error Message:Mariano esta logueado, pero lo redirijo al login porque faltan los datos de session. No deberia mejor mandarlo a SeleccionarEmpresa? Ademas, no hago el LogOut y le queda el cookie!!!
+__________________________
+
+Log Entry : 
+11/29/2017 18:06:09
+Error in: http://localhost:50769/ProntoWeb/CartaDePorte.aspx?Id=3154884. Error Message:La carta numero 564556223 id=3154884 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+11/29/2017 18:06:09
+Error in: http://localhost:50769/ProntoWeb/CartaDePorte.aspx?Id=3154884. Error Message:PV 2 0
+__________________________
+
+Log Entry : 
+11/29/2017 18:06:12
+Error in: http://localhost:50769/ProntoWeb/CartaDePorte.aspx?Id=3154884. Error Message:La carta numero 564556223 id=3154884 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+11/29/2017 18:06:12
+Error in: http://localhost:50769/ProntoWeb/CartaDePorte.aspx?Id=3154884. Error Message:PV 2 0
+__________________________
+
+Log Entry : 
+11/29/2017 18:06:16
+Error in: http://localhost:50769/ProntoWeb/CartaDePorte.aspx?Id=3154884. Error Message:La carta numero 564556223 id=3154884 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+11/29/2017 18:06:16
+Error in: http://localhost:50769/ProntoWeb/CartaDePorte.aspx?Id=3154884. Error Message:PV 2 0
+__________________________
+
+Log Entry : 
+11/29/2017 18:06:22
+Error in: http://localhost:50769/ProntoWeb/WebServiceCartas.asmx/AbrirReclamo. Error Message:System.ArgumentException
+Método web AbrirReclamo desconocido.
+Nombre del parámetro: methodName
+   en System.Web.Script.Services.WebServiceData.GetMethodData(String methodName)
+   en System.Web.Script.Services.RestHandler.CreateHandler(WebServiceData webServiceData, String methodName)
+   en System.Web.Script.Services.RestHandler.CreateHandler(HttpContext context)
+   en System.Web.Script.Services.RestHandlerFactory.GetHandler(HttpContext context, String requestType, String url, String pathTranslated)
+   en System.Web.Script.Services.ScriptHandlerFactory.GetHandler(HttpContext context, String requestType, String url, String pathTranslated)
+   en System.Web.HttpApplication.MaterializeHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   en System.Web.HttpApplication.ExecuteStepImpl(IExecutionStep step)
+   en System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+System.Web.Extensions
+__________________________
+
+Log Entry : 
+11/29/2017 18:08:17
+Error in: http://localhost:50769/ProntoWeb/CartaDePorte.aspx?Id=3154884. Error Message:La carta numero 564556223 id=3154884 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+11/29/2017 18:08:17
+Error in: http://localhost:50769/ProntoWeb/CartaDePorte.aspx?Id=3154884. Error Message:PV 2 0
+__________________________
+
+Log Entry : 
+11/29/2017 18:08:29
+Error in: http://localhost:50769/ProntoWeb/CartaDePorte.aspx?Id=3154885. Error Message:La carta numero 564556224 id=3154885 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+11/29/2017 18:08:29
+Error in: http://localhost:50769/ProntoWeb/CartaDePorte.aspx?Id=3154885. Error Message:PV 2 0
+__________________________
+
+Log Entry : 
+11/29/2017 18:09:36
+Error in: http://localhost:50769/ProntoWeb/WebServiceCartas.asmx/AbrirReclamo. Error Message:System.ArgumentException
+Método web AbrirReclamo desconocido.
+Nombre del parámetro: methodName
+   en System.Web.Script.Services.WebServiceData.GetMethodData(String methodName)
+   en System.Web.Script.Services.RestHandler.CreateHandler(WebServiceData webServiceData, String methodName)
+   en System.Web.Script.Services.RestHandler.CreateHandler(HttpContext context)
+   en System.Web.Script.Services.RestHandlerFactory.GetHandler(HttpContext context, String requestType, String url, String pathTranslated)
+   en System.Web.Script.Services.ScriptHandlerFactory.GetHandler(HttpContext context, String requestType, String url, String pathTranslated)
+   en System.Web.HttpApplication.MaterializeHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   en System.Web.HttpApplication.ExecuteStepImpl(IExecutionStep step)
+   en System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+System.Web.Extensions
+__________________________
+
+Log Entry : 
+11/29/2017 18:09:39
+Error in: http://localhost:50769/ProntoWeb/WebServiceCartas.asmx/AbrirReclamo. Error Message:System.ArgumentException
+Método web AbrirReclamo desconocido.
+Nombre del parámetro: methodName
+   en System.Web.Script.Services.WebServiceData.GetMethodData(String methodName)
+   en System.Web.Script.Services.RestHandler.CreateHandler(WebServiceData webServiceData, String methodName)
+   en System.Web.Script.Services.RestHandler.CreateHandler(HttpContext context)
+   en System.Web.Script.Services.RestHandlerFactory.GetHandler(HttpContext context, String requestType, String url, String pathTranslated)
+   en System.Web.Script.Services.ScriptHandlerFactory.GetHandler(HttpContext context, String requestType, String url, String pathTranslated)
+   en System.Web.HttpApplication.MaterializeHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   en System.Web.HttpApplication.ExecuteStepImpl(IExecutionStep step)
+   en System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+System.Web.Extensions
+__________________________
+
+Log Entry : 
+11/29/2017 18:09:41
+Error in: http://localhost:50769/ProntoWeb/WebServiceCartas.asmx/AbrirReclamo. Error Message:System.ArgumentException
+Método web AbrirReclamo desconocido.
+Nombre del parámetro: methodName
+   en System.Web.Script.Services.WebServiceData.GetMethodData(String methodName)
+   en System.Web.Script.Services.RestHandler.CreateHandler(WebServiceData webServiceData, String methodName)
+   en System.Web.Script.Services.RestHandler.CreateHandler(HttpContext context)
+   en System.Web.Script.Services.RestHandlerFactory.GetHandler(HttpContext context, String requestType, String url, String pathTranslated)
+   en System.Web.Script.Services.ScriptHandlerFactory.GetHandler(HttpContext context, String requestType, String url, String pathTranslated)
+   en System.Web.HttpApplication.MaterializeHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   en System.Web.HttpApplication.ExecuteStepImpl(IExecutionStep step)
+   en System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+System.Web.Extensions
+__________________________
+
+Log Entry : 
+11/29/2017 18:09:42
+Error in: http://localhost:50769/ProntoWeb/WebServiceCartas.asmx/AbrirReclamo. Error Message:System.ArgumentException
+Método web AbrirReclamo desconocido.
+Nombre del parámetro: methodName
+   en System.Web.Script.Services.WebServiceData.GetMethodData(String methodName)
+   en System.Web.Script.Services.RestHandler.CreateHandler(WebServiceData webServiceData, String methodName)
+   en System.Web.Script.Services.RestHandler.CreateHandler(HttpContext context)
+   en System.Web.Script.Services.RestHandlerFactory.GetHandler(HttpContext context, String requestType, String url, String pathTranslated)
+   en System.Web.Script.Services.ScriptHandlerFactory.GetHandler(HttpContext context, String requestType, String url, String pathTranslated)
+   en System.Web.HttpApplication.MaterializeHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   en System.Web.HttpApplication.ExecuteStepImpl(IExecutionStep step)
+   en System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+System.Web.Extensions
+__________________________
+
+Log Entry : 
+11/29/2017 18:10:36
+Error in: http://localhost:50769/ProntoWeb/CartadeporteExternoMovil.aspx?Id=3154882. Error Message:RODRIGORIOS esta logueado, pero lo redirijo al login porque faltan los datos de session. No deberia mejor mandarlo a SeleccionarEmpresa? Ademas, no hago el LogOut y le queda el cookie!!!
+__________________________
+
+Log Entry : 
+11/29/2017 18:22:16
+Error in: http://localhost:50769/ProntoWeb/CartadeporteExternoMovil.aspx?Id=3154882. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartadeporteABMExternoMovil.BindTypeDropDown() en C:\bdl\pronto\prontoweb\ProntoWeb\CartadeporteExternoMovil.aspx.vb:línea 1005
+App_Web_cartadeporteexternomovil.aspx.4199bbd4.zt_3miyp
+__________________________
+
+Log Entry : 
+11/29/2017 18:22:16
+Error in: http://localhost:50769/ProntoWeb/CartadeporteExternoMovil.aspx?Id=3154882. Error Message:La carta numero 564793833 id=3154882 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+11/29/2017 18:22:17
+Error in: http://localhost:50769/ProntoWeb/CartadeporteExternoMovil.aspx?Id=3154882. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartadeporteABMExternoMovil.BloqueosDeEdicion(CartaDePorte myCartaDePorte) en C:\bdl\pronto\prontoweb\ProntoWeb\CartadeporteExternoMovil.aspx.vb:línea 587
+App_Web_cartadeporteexternomovil.aspx.4199bbd4.zt_3miyp
+__________________________
+
+Log Entry : 
+11/29/2017 18:22:17
+Error in: http://localhost:50769/ProntoWeb/CartadeporteExternoMovil.aspx?Id=3154882. Error Message:PV 2 0
+__________________________
+
+Log Entry : 
+11/29/2017 18:23:09
+Error in: http://localhost:50769/ProntoWeb/CartadeporteExternoMovil.aspx?Id=3154882. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartadeporteABMExternoMovil.BindTypeDropDown() en C:\bdl\pronto\prontoweb\ProntoWeb\CartadeporteExternoMovil.aspx.vb:línea 1005
+App_Web_cartadeporteexternomovil.aspx.4199bbd4.zt_3miyp
+__________________________
+
+Log Entry : 
+11/29/2017 18:23:10
+Error in: http://localhost:50769/ProntoWeb/CartadeporteExternoMovil.aspx?Id=3154882. Error Message:La carta numero 564793833 id=3154882 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+11/29/2017 18:23:10
+Error in: http://localhost:50769/ProntoWeb/CartadeporteExternoMovil.aspx?Id=3154882. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartadeporteABMExternoMovil.BloqueosDeEdicion(CartaDePorte myCartaDePorte) en C:\bdl\pronto\prontoweb\ProntoWeb\CartadeporteExternoMovil.aspx.vb:línea 587
+App_Web_cartadeporteexternomovil.aspx.4199bbd4.zt_3miyp
+__________________________
+
+Log Entry : 
+11/29/2017 18:23:10
+Error in: http://localhost:50769/ProntoWeb/CartadeporteExternoMovil.aspx?Id=3154882. Error Message:PV 2 0
+__________________________
+
+Log Entry : 
+11/29/2017 18:23:42
+Error in: http://localhost:50769/ProntoWeb/CartadeporteExternoMovil.aspx?Id=3154882. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartadeporteABMExternoMovil.BindTypeDropDown() en C:\bdl\pronto\prontoweb\ProntoWeb\CartadeporteExternoMovil.aspx.vb:línea 1005
+App_Web_cartadeporteexternomovil.aspx.4199bbd4.zt_3miyp
+__________________________
+
+Log Entry : 
+11/29/2017 18:23:42
+Error in: http://localhost:50769/ProntoWeb/CartadeporteExternoMovil.aspx?Id=3154882. Error Message:La carta numero 564793833 id=3154882 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+11/29/2017 18:23:42
+Error in: http://localhost:50769/ProntoWeb/CartadeporteExternoMovil.aspx?Id=3154882. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartadeporteABMExternoMovil.BloqueosDeEdicion(CartaDePorte myCartaDePorte) en C:\bdl\pronto\prontoweb\ProntoWeb\CartadeporteExternoMovil.aspx.vb:línea 587
+App_Web_cartadeporteexternomovil.aspx.4199bbd4.zt_3miyp
+__________________________
+
+Log Entry : 
+11/29/2017 18:23:42
+Error in: http://localhost:50769/ProntoWeb/CartadeporteExternoMovil.aspx?Id=3154882. Error Message:PV 2 0
+__________________________
+
+Log Entry : 
+11/29/2017 18:24:55
+Error in: http://localhost:50769/ProntoWeb/CartadeporteExternoMovil.aspx?Id=3154882. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartadeporteABMExternoMovil.BindTypeDropDown() en C:\bdl\pronto\prontoweb\ProntoWeb\CartadeporteExternoMovil.aspx.vb:línea 1005
+App_Web_cartadeporteexternomovil.aspx.4199bbd4.zt_3miyp
+__________________________
+
+Log Entry : 
+11/29/2017 18:24:55
+Error in: http://localhost:50769/ProntoWeb/CartadeporteExternoMovil.aspx?Id=3154882. Error Message:La carta numero 564793833 id=3154882 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+11/29/2017 18:24:55
+Error in: http://localhost:50769/ProntoWeb/CartadeporteExternoMovil.aspx?Id=3154882. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartadeporteABMExternoMovil.BloqueosDeEdicion(CartaDePorte myCartaDePorte) en C:\bdl\pronto\prontoweb\ProntoWeb\CartadeporteExternoMovil.aspx.vb:línea 587
+App_Web_cartadeporteexternomovil.aspx.4199bbd4.zt_3miyp
+__________________________
+
+Log Entry : 
+11/29/2017 18:24:55
+Error in: http://localhost:50769/ProntoWeb/CartadeporteExternoMovil.aspx?Id=3154882. Error Message:PV 2 0
+__________________________
+
+Log Entry : 
+11/29/2017 18:30:44
+Error in: http://localhost:50769/ProntoWeb/CartadeporteExternoMovil.aspx?Id=3154882. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartadeporteABMExternoMovil.BindTypeDropDown() en C:\bdl\pronto\prontoweb\ProntoWeb\CartadeporteExternoMovil.aspx.vb:línea 1005
+App_Web_cartadeporteexternomovil.aspx.4199bbd4.zt_3miyp
+__________________________
+
+Log Entry : 
+11/29/2017 18:30:44
+Error in: http://localhost:50769/ProntoWeb/CartadeporteExternoMovil.aspx?Id=3154882. Error Message:La carta numero 564793833 id=3154882 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+11/29/2017 18:30:44
+Error in: http://localhost:50769/ProntoWeb/CartadeporteExternoMovil.aspx?Id=3154882. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartadeporteABMExternoMovil.BloqueosDeEdicion(CartaDePorte myCartaDePorte) en C:\bdl\pronto\prontoweb\ProntoWeb\CartadeporteExternoMovil.aspx.vb:línea 587
+App_Web_cartadeporteexternomovil.aspx.4199bbd4.zt_3miyp
+__________________________
+
+Log Entry : 
+11/29/2017 18:30:44
+Error in: http://localhost:50769/ProntoWeb/CartadeporteExternoMovil.aspx?Id=3154882. Error Message:PV 2 0
+__________________________
+
+Log Entry : 
+11/29/2017 18:34:57
+Error in: http://localhost:50769/ProntoWeb/CartadeporteExternoMovil.aspx?Id=3154882. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartadeporteABMExternoMovil.BindTypeDropDown() en C:\bdl\pronto\prontoweb\ProntoWeb\CartadeporteExternoMovil.aspx.vb:línea 1005
+App_Web_cartadeporteexternomovil.aspx.4199bbd4.zt_3miyp
+__________________________
+
+Log Entry : 
+11/29/2017 18:34:57
+Error in: http://localhost:50769/ProntoWeb/CartadeporteExternoMovil.aspx?Id=3154882. Error Message:La carta numero 564793833 id=3154882 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+11/29/2017 18:34:57
+Error in: http://localhost:50769/ProntoWeb/CartadeporteExternoMovil.aspx?Id=3154882. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartadeporteABMExternoMovil.BloqueosDeEdicion(CartaDePorte myCartaDePorte) en C:\bdl\pronto\prontoweb\ProntoWeb\CartadeporteExternoMovil.aspx.vb:línea 587
+App_Web_cartadeporteexternomovil.aspx.4199bbd4.zt_3miyp
+__________________________
+
+Log Entry : 
+11/29/2017 18:34:57
+Error in: http://localhost:50769/ProntoWeb/CartadeporteExternoMovil.aspx?Id=3154882. Error Message:PV 2 0
+__________________________
+
+Log Entry : 
+11/29/2017 18:35:30
+Error in: http://localhost:50769/ProntoWeb/CartaDePorte.aspx?Id=3154885. Error Message:La carta numero 564556224 id=3154885 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+11/29/2017 18:35:30
+Error in: http://localhost:50769/ProntoWeb/CartaDePorte.aspx?Id=3154885. Error Message:PV 2 0
+__________________________
+
+Log Entry : 
+11/29/2017 18:39:51
+Error in: http://localhost:50769/ProntoWeb/Cartadeporte.aspx. Error Message:Mariano esta logueado, pero lo redirijo al login porque faltan los datos de session. No deberia mejor mandarlo a SeleccionarEmpresa? Ademas, no hago el LogOut y le queda el cookie!!!
+__________________________
+
+Log Entry : 
+11/29/2017 18:40:05
+Error in: http://localhost:50769/ProntoWeb/CartaDePorte.aspx?Id=3154885. Error Message:La carta numero 564556224 id=3154885 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+11/29/2017 18:40:05
+Error in: http://localhost:50769/ProntoWeb/CartaDePorte.aspx?Id=3154885. Error Message:PV 2 0
+__________________________
+
+Log Entry : 
+11/29/2017 18:41:16
+Error in: http://localhost:50769/ProntoWeb/CartaDePorte.aspx?Id=3154885. Error Message:La carta numero 564556224 id=3154885 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+11/29/2017 18:41:16
+Error in: http://localhost:50769/ProntoWeb/CartaDePorte.aspx?Id=3154885. Error Message:PV 2 0
+__________________________
+
+Log Entry : 
+11/29/2017 18:42:25
+Error in: http://localhost:50769/ProntoWeb/CartaDePorte.aspx?Id=3154885. Error Message:La carta numero 564556224 id=3154885 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+11/29/2017 18:42:25
+Error in: http://localhost:50769/ProntoWeb/CartaDePorte.aspx?Id=3154885. Error Message:PV 2 0
+__________________________
+
+Log Entry : 
+11/29/2017 18:43:53
+Error in: http://localhost:50769/ProntoWeb/CartaDePorte.aspx?Id=3154885. Error Message:La carta numero 564556224 id=3154885 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+11/29/2017 18:43:53
+Error in: http://localhost:50769/ProntoWeb/CartaDePorte.aspx?Id=3154885. Error Message:PV 2 0
+__________________________
+
+Log Entry : 
+11/29/2017 18:44:10
+Error in: http://localhost:50769/ProntoWeb/CartaDePorte.aspx?Id=3154885. Error Message:La carta numero 564556224 id=3154885 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+11/29/2017 18:44:10
+Error in: http://localhost:50769/ProntoWeb/CartaDePorte.aspx?Id=3154885. Error Message:PV 2 0
+__________________________
+
+Log Entry : 
+11/29/2017 18:44:29
+Error in: http://localhost:50769/ProntoWeb/CartaDePorte.aspx?Id=3154885. Error Message:La carta numero 564556224 id=3154885 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+11/29/2017 18:44:29
+Error in: http://localhost:50769/ProntoWeb/CartaDePorte.aspx?Id=3154885. Error Message:PV 2 0
+__________________________
+
+Log Entry : 
+11/29/2017 18:45:32
+Error in: http://localhost:50769/ProntoWeb/CartaDePorte.aspx?Id=3154885. Error Message:La carta numero 564556224 id=3154885 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+11/29/2017 18:45:32
+Error in: http://localhost:50769/ProntoWeb/CartaDePorte.aspx?Id=3154885. Error Message:PV 2 0
+__________________________
