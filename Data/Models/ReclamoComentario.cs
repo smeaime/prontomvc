@@ -20,6 +20,7 @@ namespace ProntoMVC.Data.Models
         public string Comentario { get; set; }
         public Nullable<System.DateTime> Fecha { get; set; }
         public string ArchivoAdjunto { get; set; }
+        public string NombreUsuario { get; set; }
     
         public virtual Empleado Empleado { get; set; }
         public virtual Reclamo Reclamo { get; set; }

@@ -139,6 +139,16 @@ namespace ProntoMVC.Data.Models
         public Nullable<int> CodigoNormaCapital { get; set; }
         public Nullable<System.DateTime> FechaInicioVigenciaCodigoNormaCapital { get; set; }
         public Nullable<System.DateTime> FechaFinVigenciaCodigoNormaCapital { get; set; }
+        public Nullable<int> IdIBCondicionPorDefecto31 { get; set; }
+        public Nullable<int> IdIBCondicionPorDefecto32 { get; set; }
+        public Nullable<int> IdIBCondicionPorDefecto33 { get; set; }
+        public Nullable<int> IdIBCondicionPorDefecto34 { get; set; }
+        public Nullable<int> IdIBCondicionPorDefecto35 { get; set; }
+        public Nullable<int> IdIBCondicionPorDefecto36 { get; set; }
+        public Nullable<int> IdIBCondicionPorDefecto37 { get; set; }
+        public Nullable<int> IdIBCondicionPorDefecto38 { get; set; }
+        public Nullable<int> IdIBCondicionPorDefecto39 { get; set; }
+        public Nullable<decimal> PorcentajeOtrosImpuestos1 { get; set; }
     
         public virtual Cuenta Cuenta { get; set; }
         public virtual IBCondicion IBCondicione { get; set; }

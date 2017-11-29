@@ -30,53 +30,42 @@
                 Nuevo Fondo fijo
             </button>
 
-            <div class="span4">
-                <div class="input-prepend input-append">
-                    @* <div class="btn-group ">
-                            <button class="btn dropdown-toggle" data-toggle="dropdown">
-                                En todo <span class="caret"></span>
-                            </button>
-                            <div class="dropdown-menu">
-                                Requerimientos
-                            </div>
-                            <ul class="dropdown-menu">
-                                Número
-                            </ul>
-                        </div>*@
-                    <input id="BuscadorListado" type="text" class="" placeholder="Filtrar" style="" />
-                    @if (Roles.IsUserInRole(ViewBag.NombreUsuario, "SuperAdmin"))
-                    {
-                    <select id="campos " class="span4">
-                        <option>Número</option>
-                        <option>Fecha</option>
-                    </select>
-                    <button onclick=" jQuery('#Lista').searchGrid({}) " class="btn append ">
-                        ...</button> }
-                </div>
-            </div>
+            @*<div class="span4">
+        <div class="input-prepend input-append">
+            <input id="BuscadorListado" type="text" class="" placeholder="Filtrar" style="" />
             @if (Roles.IsUserInRole(ViewBag.NombreUsuario, "SuperAdmin"))
             {
-            <div class="btn-group  pull-right ">
-                <button onclick="  " class="btn">
-                    <
-                </button>
-                <button onclick="  " class="btn ">
-                    >
-                </button>
-            </div>
-          
-        
-            <div class="btn-group span2   pull-right ">
-                <button class="btn dropdown-toggle " data-toggle="dropdown">
-                    más <span class="caret "></span>
-                </button>
-                <ul class="dropdown-menu ">
-                    <li><a id="Renumerar" href='@Url.Content("~")ComprobanteProveedor/Importador'>Excel</a></li>
-                    <li><a id="DuplicarItems" href="#">Importar fondos fijos</a></li>
-                </ul>
-            </div>
-        
-            }
+            <select id="campos " class="span4">
+                <option>Número</option>
+                <option>Fecha</option>
+            </select>
+            <button onclick=" jQuery('#Lista').searchGrid({}) " class="btn append ">
+                ...</button> }
+        </div>
+    </div>
+    @if (Roles.IsUserInRole(ViewBag.NombreUsuario, "SuperAdmin"))
+    {
+    <div class="btn-group  pull-right ">
+        <button onclick="  " class="btn">
+            <
+        </button>
+        <button onclick="  " class="btn ">
+            >
+        </button>
+    </div>
+
+
+    <div class="btn-group span2   pull-right ">
+        <button class="btn dropdown-toggle " data-toggle="dropdown">
+            más <span class="caret "></span>
+        </button>
+        <ul class="dropdown-menu ">
+            <li><a id="Renumerar" href='@Url.Content("~")ComprobanteProveedor/Importador'>Excel</a></li>
+            <li><a id="DuplicarItems" href="#">Importar fondos fijos</a></li>
+        </ul>
+    </div>
+
+    }*@
         </div>
     </div>
 
@@ -219,6 +208,7 @@
             ondblClickRow: function (idrow) {
                 window.location.href = ROOT + 'ComprobanteProveedor/Edit/' + idrow;
             },
+            caption: '<b>COMPROBANTES DE PROVEEDORES</b>',
             pager: $('#ListaPager'),
             rowNum: 15,
             rowList: [10, 20, 50],
