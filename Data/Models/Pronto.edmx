@@ -1052,6 +1052,16 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.CartasPorteMovimientos' no tiene 
           <Property Name="CodigoNormaCapital" Type="int" />
           <Property Name="FechaInicioVigenciaCodigoNormaCapital" Type="datetime" />
           <Property Name="FechaFinVigenciaCodigoNormaCapital" Type="datetime" />
+          <Property Name="IdIBCondicionPorDefecto31" Type="int" />
+          <Property Name="IdIBCondicionPorDefecto32" Type="int" />
+          <Property Name="IdIBCondicionPorDefecto33" Type="int" />
+          <Property Name="IdIBCondicionPorDefecto34" Type="int" />
+          <Property Name="IdIBCondicionPorDefecto35" Type="int" />
+          <Property Name="IdIBCondicionPorDefecto36" Type="int" />
+          <Property Name="IdIBCondicionPorDefecto37" Type="int" />
+          <Property Name="IdIBCondicionPorDefecto38" Type="int" />
+          <Property Name="IdIBCondicionPorDefecto39" Type="int" />
+          <Property Name="PorcentajeOtrosImpuestos1" Type="numeric" Precision="6" Scale="2" />
         </EntityType>
         <EntityType Name="ColaCorreosComprobantes">
           <Key>
@@ -4341,6 +4351,7 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
           <Property Name="PuntoVenta" Type="int" />
           <Property Name="DocumentacionCompleta" Type="varchar" MaxLength="2" />
           <Property Name="FechaTimeStamp" Type="timestamp" StoreGeneratedPattern="Computed" />
+          <Property Name="RetencionOTROS" Type="numeric" Precision="18" Scale="2" />
         </EntityType>
         <EntityType Name="OrdenesTrabajo">
           <Key>
@@ -5178,6 +5189,7 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
           <Property Name="RegimenSimplificadoIIBB" Type="varchar" MaxLength="2" />
           <Property Name="IdIBCondicionAnterior" Type="int" />
           <Property Name="RiesgoFiscal" Type="varchar" MaxLength="2" />
+          <Property Name="PorcentajeOtrosImpuestos1" Type="numeric" Precision="6" Scale="2" />
         </EntityType>
         <EntityType Name="Provincias">
           <Key>
@@ -5446,6 +5458,7 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
           <Property Name="Comentario" Type="varchar" MaxLength="1000" />
           <Property Name="Fecha" Type="datetime" />
           <Property Name="ArchivoAdjunto" Type="varchar" MaxLength="150" />
+          <Property Name="NombreUsuario" Type="varchar" MaxLength="150" />
         </EntityType>
         <EntityType Name="Reclamos">
           <Key>
@@ -10127,6 +10140,18 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.VistaCartasPorteMovimientos' no t
         <Function Name="Pedidos_Requerimientos" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="varchar">
           <Parameter Name="IdPedido" Type="int" Mode="In" />
         </Function>
+        <Function Name="Recepciones_Obras" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="varchar">
+          <Parameter Name="IdRecepcion" Type="int" Mode="In" />
+        </Function>
+        <Function Name="Recepciones_Pedidos" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="varchar">
+          <Parameter Name="IdRecepcion" Type="int" Mode="In" />
+        </Function>
+        <Function Name="Recepciones_Requerimientos" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="varchar">
+          <Parameter Name="IdRecepcion" Type="int" Mode="In" />
+        </Function>
+        <Function Name="Recepciones_Solicitantes" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="varchar">
+          <Parameter Name="IdRecepcion" Type="int" Mode="In" />
+        </Function>
         <Function Name="Remitos_TX_ItemsPendientesDeFacturar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="Requerimientos_ActualizarEstado" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="IdRequerimiento" Type="int" Mode="In" />
@@ -14768,6 +14793,16 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.VistaCartasPorteMovimientos' no t
           <Property Name="FechaFinVigenciaCodigoNormaCapital" Type="DateTime" Precision="3" />
           <NavigationProperty Name="CartasDePortes" Relationship="DemoProntoModel.FK__CartasDeP__Clien__25735020" FromRole="Cliente" ToRole="CartasDePorte" />
           <NavigationProperty Name="CartasDePortes1" Relationship="DemoProntoModel.FK__CartasDeP__Vende__6D4EF28E" FromRole="Cliente" ToRole="CartasDePorte" />
+          <Property Name="IdIBCondicionPorDefecto31" Type="Int32" />
+          <Property Name="IdIBCondicionPorDefecto32" Type="Int32" />
+          <Property Name="IdIBCondicionPorDefecto33" Type="Int32" />
+          <Property Name="IdIBCondicionPorDefecto34" Type="Int32" />
+          <Property Name="IdIBCondicionPorDefecto35" Type="Int32" />
+          <Property Name="IdIBCondicionPorDefecto36" Type="Int32" />
+          <Property Name="IdIBCondicionPorDefecto37" Type="Int32" />
+          <Property Name="IdIBCondicionPorDefecto38" Type="Int32" />
+          <Property Name="IdIBCondicionPorDefecto39" Type="Int32" />
+          <Property Name="PorcentajeOtrosImpuestos1" Type="Decimal" Precision="6" Scale="2" />
         </EntityType>
         <EntityType Name="PuntosVenta">
           <Key>
@@ -16507,6 +16542,7 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.VistaCartasPorteMovimientos' no t
           <Property Name="RegimenSimplificadoIIBB" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
           <Property Name="IdIBCondicionAnterior" Type="Int32" />
           <Property Name="RiesgoFiscal" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="PorcentajeOtrosImpuestos1" Type="Decimal" Precision="6" Scale="2" />
         </EntityType>
         <EntityType Name="Rubro">
           <Key>
@@ -18644,6 +18680,7 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.VistaCartasPorteMovimientos' no t
           <Property Name="PuntoVenta" Type="Int32" />
           <Property Name="DocumentacionCompleta" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
           <Property Name="FechaTimeStamp" Type="Binary" MaxLength="8" FixedLength="true" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="RetencionOTROS" Type="Decimal" Precision="18" Scale="2" />
         </EntityType>
         <Association Name="FK_DetalleOrdenesPagoRubrosContables_RubrosContables">
           <End Type="DemoProntoModel.RubrosContable" Role="RubrosContable" Multiplicity="0..1" />
@@ -26416,6 +26453,7 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.VistaCartasPorteMovimientos' no t
           <Property Name="ArchivoAdjunto" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Empleado" Relationship="DemoProntoModel.FK__ReclamoCo__IdEmp__06D9BA67" FromRole="ReclamoComentario" ToRole="Empleado" />
           <NavigationProperty Name="Reclamo" Relationship="DemoProntoModel.FK__ReclamoCo__IdRec__05E5962E" FromRole="ReclamoComentario" ToRole="Reclamo" />
+          <Property Name="NombreUsuario" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="Reclamo">
           <Key>
@@ -27298,6 +27336,16 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.VistaCartasPorteMovimientos' no t
           <EntitySetMapping Name="Clientes">
             <EntityTypeMapping TypeName="DemoProntoModel.Cliente">
               <MappingFragment StoreEntitySet="Clientes">
+                <ScalarProperty Name="PorcentajeOtrosImpuestos1" ColumnName="PorcentajeOtrosImpuestos1" />
+                <ScalarProperty Name="IdIBCondicionPorDefecto39" ColumnName="IdIBCondicionPorDefecto39" />
+                <ScalarProperty Name="IdIBCondicionPorDefecto38" ColumnName="IdIBCondicionPorDefecto38" />
+                <ScalarProperty Name="IdIBCondicionPorDefecto37" ColumnName="IdIBCondicionPorDefecto37" />
+                <ScalarProperty Name="IdIBCondicionPorDefecto36" ColumnName="IdIBCondicionPorDefecto36" />
+                <ScalarProperty Name="IdIBCondicionPorDefecto35" ColumnName="IdIBCondicionPorDefecto35" />
+                <ScalarProperty Name="IdIBCondicionPorDefecto34" ColumnName="IdIBCondicionPorDefecto34" />
+                <ScalarProperty Name="IdIBCondicionPorDefecto33" ColumnName="IdIBCondicionPorDefecto33" />
+                <ScalarProperty Name="IdIBCondicionPorDefecto32" ColumnName="IdIBCondicionPorDefecto32" />
+                <ScalarProperty Name="IdIBCondicionPorDefecto31" ColumnName="IdIBCondicionPorDefecto31" />
                 <ScalarProperty Name="FechaFinVigenciaCodigoNormaCapital" ColumnName="FechaFinVigenciaCodigoNormaCapital" />
                 <ScalarProperty Name="FechaInicioVigenciaCodigoNormaCapital" ColumnName="FechaInicioVigenciaCodigoNormaCapital" />
                 <ScalarProperty Name="CodigoNormaCapital" ColumnName="CodigoNormaCapital" />
@@ -28286,6 +28334,7 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.VistaCartasPorteMovimientos' no t
           <EntitySetMapping Name="Proveedores">
             <EntityTypeMapping TypeName="DemoProntoModel.Proveedor">
               <MappingFragment StoreEntitySet="Proveedores">
+                <ScalarProperty Name="PorcentajeOtrosImpuestos1" ColumnName="PorcentajeOtrosImpuestos1" />
                 <ScalarProperty Name="RiesgoFiscal" ColumnName="RiesgoFiscal" />
                 <ScalarProperty Name="IdIBCondicionAnterior" ColumnName="IdIBCondicionAnterior" />
                 <ScalarProperty Name="RegimenSimplificadoIIBB" ColumnName="RegimenSimplificadoIIBB" />
@@ -29758,6 +29807,7 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.VistaCartasPorteMovimientos' no t
           <EntitySetMapping Name="OrdenesPago">
             <EntityTypeMapping TypeName="DemoProntoModel.OrdenPago">
               <MappingFragment StoreEntitySet="OrdenesPago">
+                <ScalarProperty Name="RetencionOTROS" ColumnName="RetencionOTROS" />
                 <ScalarProperty Name="FechaTimeStamp" ColumnName="FechaTimeStamp" />
                 <ScalarProperty Name="DocumentacionCompleta" ColumnName="DocumentacionCompleta" />
                 <ScalarProperty Name="PuntoVenta" ColumnName="PuntoVenta" />
@@ -33662,6 +33712,7 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.VistaCartasPorteMovimientos' no t
           <EntitySetMapping Name="ReclamoComentarios">
             <EntityTypeMapping TypeName="DemoProntoModel.ReclamoComentario">
               <MappingFragment StoreEntitySet="ReclamoComentarios">
+                <ScalarProperty Name="NombreUsuario" ColumnName="NombreUsuario" />
                 <ScalarProperty Name="ArchivoAdjunto" ColumnName="ArchivoAdjunto" />
                 <ScalarProperty Name="Fecha" ColumnName="Fecha" />
                 <ScalarProperty Name="Comentario" ColumnName="Comentario" />

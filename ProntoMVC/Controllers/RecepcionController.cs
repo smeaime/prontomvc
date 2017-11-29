@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-
 using System.Transactions;
-
 using System.Data;
 using System.Data.Entity;
 using System.Data.Entity.SqlServer;
@@ -16,22 +14,12 @@ using System.Web.Mvc;
 using System.Web.Script.Serialization;
 using System.Text;
 using System.Reflection;
-
-
-
-
-
 using ProntoMVC.Data.Models;
 using ProntoMVC.Models;
 using jqGrid.Models;
 using Lib.Web.Mvc.JQuery.JqGrid;
-
-
 using System.Web.Security;
-
 using Pronto.ERP.Bll;
-
-
 // using ProntoMVC.Controllers.Logica;
 using DocumentFormat.OpenXml;
 using DocumentFormat.OpenXml.Packaging;
@@ -40,400 +28,14 @@ using OpenXmlPowerTools;
 using System.Diagnostics;
 using ClosedXML.Excel;
 using System.IO;
-
-
-
-
 using Pronto.ERP.Bll;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-
 
 namespace ProntoMVC.Controllers
 {
     public partial class RecepcionController : ProntoBaseController
     {
-
-
-        public virtual JsonResult DetRecepcionesSinFormato(int IdRecepcion)
-        {
-            var Det = db.DetalleRecepciones.Where(p => p.IdRecepcion == IdRecepcion).ToList(); //.AsQueryable();
-
-            Parametros parametros = db.Parametros.Find(1);
-            var mIdCuentaDiferenciaCambio = parametros.IdCuentaDiferenciaCambio ?? 0;
-            string cuentadesc;
-
-
-
-            Det.ToList();
-
-            DataTable dt = EntidadManager.GetStoreProcedure(SCsql(), "Recepciones_TX_DetallesParaComprobantesProveedores", IdRecepcion);
-
-
-            //var q= from i in Det
-            //       from mappings in dt.AsEnumerable()
-            //                .Where(mapping => mapping["IdCuentaContable"].NullSafeToString() == IdRecepcion.ToString() ).DefaultIfEmpty() 
-            //        select i;
-
-
-
-
-
-            //foreach (DataRow dr in dt)
-            //{
-
-
-
-            //}
-
-
-
-
-
-            try
-            {
-                cuentadesc = db.Cuentas.Find(mIdCuentaDiferenciaCambio).Descripcion;
-            }
-            catch (Exception)
-            {
-
-                cuentadesc = "";
-            }
-
-
-
-            var data = (from a in Det
-                        from mappings in dt.AsEnumerable()
-                             .Where(mapping => mapping["IdDetalleRecepcion"].NullSafeToString() == a.IdDetalleRecepcion.ToString()).DefaultIfEmpty()
-                        select new
-                        {
-                            a.IdDetallePedido,
-                            a.IdArticulo,
-                            a.IdUnidad,
-                            a.IdDetalleRequerimiento,
-                            // a.NumeroItem,
-                            //a.DetalleRequerimiento.Requerimientos.Obra.NumeroObra,
-                            a.Cantidad,
-                            //a.Unidad.Abreviatura,
-                            //a.Articulo.Codigo,
-                            //a.Articulo.Descripcion,
-                            //a.FechaEntrega,
-                            a.Observaciones,
-                            //a.DetalleRequerimiento.Requerimientos.NumeroRequerimiento,
-                            //NumeroItemRM = a.DetalleRequerimiento.NumeroItem,
-                            //a.Adjunto,
-                            //a.ArchivoAdjunto1,
-                            //a.ArchivoAdjunto2,
-                            //a.ArchivoAdjunto3,
-                            //a.Precio
-
-                            //idcuenta = mIdCuentaDiferenciaCambio,
-                            //cuentadescripcion = cuentadesc
-
-                            IdCuenta = mappings["IdCuenta"].NullSafeToString(),
-                            CodigoCuenta = mappings["CodigoCuenta"].NullSafeToString(),
-                            cuentadescripcion = (db.Cuentas.Find(Generales.Val(mappings["IdCuenta"].NullSafeToString())) ?? new Cuenta()).Descripcion
-
-
-                        }).OrderBy(p => p.IdArticulo).ToList();
-            return Json(data, JsonRequestBehavior.AllowGet);
-        }
-
-
-        public virtual ActionResult Recepciones(string sidx, string sord, int? page, int? rows, bool _search, string searchField, string searchOper, string searchString,
-                                            string FechaInicial, string FechaFinal, string IdObra, bool bAConfirmar = false, bool bALiberar = false)
-        {
-            string campo = String.Empty;
-            int pageSize = rows ?? 20;
-            int currentPage = page ?? 1;
-
-            int totalRecords = 0;
-            int totalPages = 0;
-
-
-            if (true)
-            {
-                LinqToSQL_ProntoDataContext l2sqlPronto = new LinqToSQL_ProntoDataContext(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SCsql()));
-                var qq = (from rm in l2sqlPronto.Requerimientos
-                          select l2sqlPronto.Requerimientos_Pedidos(rm.IdRequerimiento)
-                          ).Take(100).ToList();
-
-
-            }
-
-            var Req = db.Recepciones
-                // .Include(x => x.DetallePedidos.Select(y => y.Unidad))
-                // .Include(x => x.DetallePedidos.Select(y => y.Moneda))
-                //.Include(x => x.DetallePedidos. .moneda)
-                //   .Include("DetallePedidos.Unidad") // funciona tambien
-                //    .Include(x => x.Moneda)
-                //.Include(x => x.Obra)
-
-                    //.Include(x => x.SolicitoRequerimiento)
-                //.Include(x => x.AproboRequerimiento)
-                //.Include(x => x.Sectores)
-                //  .Include("DetallePedidos.IdDetalleRequerimiento") // funciona tambien
-                //   .Include("DetalleRequerimientos.DetallePedidos.Pedido") // funciona tambien
-                //.Include(x => x.DetalleRequerimientos)
-
-                        //.Include(x => x.DetalleRequerimientos
-                //            .Select(y => y.DetallePedidos
-                //                )
-                //        )
-                //.Include(x => x.DetalleRequerimientos
-                //            .Select(y => y.DetallePresupuestos
-                //                )
-                //        )
-
-                 //       .Include(r => r.DetalleRequerimientos.Select(dr => dr.DetallePedidos.Select(dt => dt.Pedido)))
-
-           //  .Include("DetalleRequerimientos.DetallePedidos.Pedido") // funciona tambien
-                //   .Include("DetalleRequerimientos.DetallePresupuestos.Presupuesto") // funciona tambien
-                // .Include(x => x.Aprobo)
-                          .AsQueryable();
-
-
-            // Requerimiento test = Req.Where(x => x.IdRequerimiento == 4).ToList().FirstOrDefault();
-
-
-            //if (bAConfirmar)
-            //{
-
-            //    Req = (from a in Req where (a.Confirmado ?? "SI") == "NO" select a).AsQueryable();
-            //    //            WHERE  IsNull(Confirmado,'SI')='NO' and 
-            //    //(@IdObraAsignadaUsuario=-1 or Requerimientos.IdObra=@IdObraAsignadaUsuario)
-
-            //}
-            //if (bALiberar)
-            //{
-            //    Req = (from a in Req where a.Aprobo == null select a).AsQueryable();
-            //    //            WHERE  Requerimientos.Aprobo is null and 
-            //    //(@IdObraAsignadaUsuario=-1 or Requerimientos.IdObra=@IdObraAsignadaUsuario)
-
-            //}
-
-
-
-
-            if (IdObra != string.Empty)
-            {
-                //int IdObra1 = Convert.ToInt32(IdObra);
-                //Req = (from a in Req where a.IdObra == IdObra1 select a).AsQueryable();
-            }
-            if (FechaInicial != string.Empty)
-            {
-                DateTime FechaDesde = DateTime.ParseExact(FechaInicial, "dd/MM/yyyy", null);
-                DateTime FechaHasta = DateTime.ParseExact(FechaFinal, "dd/MM/yyyy", null);
-                Req = (from a in Req where a.FechaRecepcion >= FechaDesde && a.FechaRecepcion <= FechaHasta select a).AsQueryable();
-            }
-            if (_search)
-            {
-                switch (searchField.ToLower())
-                {
-                    case "numerorequerimiento":
-                        campo = String.Format("Obra.NumeroObra.Contains(\"{0}\") OR NumeroRequerimiento = {1} ", searchString, Generales.Val(searchString));
-
-                        //if (searchString != "")
-                        //{
-                        //    campo = String.Format("{0} = {1}", searchField, Generales.Val(searchString));
-                        //}
-                        //else
-                        //{
-                        //    campo = "true";
-                        //}
-                        break;
-                    case "fecharequerimiento":
-                        //No anda
-                        campo = String.Format("{0}.Contains(\"{1}\")", searchField, searchString);
-                        break;
-                    default:
-                        campo = String.Format("Obra.Descripcion.Contains(\"{0}\") OR NumeroRequerimiento = {1} ", searchString, Generales.Val(searchString));
-
-                        //campo = String.Format("{0}.Contains(\"{1}\")", searchField, searchString);
-                        break;
-                }
-            }
-            else
-            {
-                campo = "true";
-            }
-
-
-            try
-            {
-
-                var Req1 = from a in Req.Where(campo) select a.IdRequerimiento;
-
-                totalRecords = Req1.Count();
-                totalPages = (int)Math.Ceiling((float)totalRecords / (float)pageSize);
-            }
-            catch (Exception)
-            {
-
-                //                throw;
-            }
-
-            //switch (sidx.ToLower())
-            //{
-            //    case "numerorequerimiento":
-            //        if (sord.Equals("desc"))
-            //            Req = Req.OrderByDescending(a => a.NumeroRequerimiento);
-            //        else
-            //            Req = Req.OrderBy(a => a.NumeroRequerimiento);
-            //        break;
-            //    case "fecharequerimiento":
-            //        if (sord.Equals("desc"))
-            //            Req = Req.OrderByDescending(a => a.FechaRequerimiento);
-            //        else
-            //            Req = Req.OrderBy(a => a.FechaRequerimiento);
-            //        break;
-            //    case "numeroobra":
-            //        if (sord.Equals("desc"))
-            //            Req = Req.OrderByDescending(a => a.Obra.NumeroObra);
-            //        else
-            //            Req = Req.OrderBy(a => a.Obra.NumeroObra);
-            //        break;
-            //    case "libero":
-            //        if (sord.Equals("desc"))
-            //            Req = Req.OrderByDescending(a => a.Empleados.Nombre);
-            //        else
-            //            Req = Req.OrderBy(a => a.Empleados.Nombre);
-            //        break;
-            //    case "aprobo":
-            //        if (sord.Equals("desc"))
-            //            Req = Req.OrderByDescending(a => a.Empleados1.Nombre);
-            //        else
-            //            Req = Req.OrderBy(a => a.Empleados1.Nombre);
-            //        break;
-            //    case "sector":
-            //        if (sord.Equals("desc"))
-            //            Req = Req.OrderByDescending(a => a.Sectores.Descripcion);
-            //        else
-            //            Req = Req.OrderBy(a => a.Sectores.Descripcion);
-            //        break;
-            //    case "detalle":
-            //        if (sord.Equals("desc"))
-            //            Req = Req.OrderByDescending(a => a.Detalle);
-            //        else
-            //            Req = Req.OrderBy(a => a.Detalle);
-            //        break;
-            //    default:
-            //        if (sord.Equals("desc"))
-            //            Req = Req.OrderByDescending(a => a.NumeroRequerimiento);
-            //        else
-            //            Req = Req.OrderBy(a => a.NumeroRequerimiento);
-            //        break;
-            //}
-
-            var data = from a in Req  // .Where(campo)
-                           .OrderBy(sidx + " " + sord)
-
-//.Skip((currentPage - 1) * pageSize).Take(pageSize)
-.ToList()
-                       select a; //supongo que tengo que hacer la paginacion antes de hacer un select, para que me llene las colecciones anidadas
-
-
-            var jsonData = new jqGridJson()
-            {
-                total = totalPages,
-                page = currentPage,
-                records = totalRecords,
-                rows = (from a in data
-                        select new jqGridRowJson
-                        {
-                            id = a.IdRecepcion.ToString(),
-                            cell = new string[] { 
-                                //"<a href="+ Url.Action("Edit",new {id = a.IdRequerimiento} ) + " target='' >Editar</>" ,
-                                "<a href="+ Url.Action("Edit",new {id = a.IdRecepcion} ) + "  >Editar</>" ,
-							    "<a href="+ Url.Action("Imprimir",new {id = a.IdRecepcion} )  +">Imprimir</>" ,
-                                a.IdRecepcion.ToString(), 
-                                a.NumeroRecepcion1.ToString(), 
-                                a.NumeroRecepcion2.ToString(), 
-                                a.FechaRecepcion.GetValueOrDefault().ToString("dd/MM/yyyy"),
-                              //  a.Cumplido,
-                              //  a.Recepcionado,
-                              //  a.Entregado,
-                              //  a.Impresa,
-                              //  a.Detalle,
-                              //  //a.Obra.Descripcion, 
-                              //(a.Obra==null) ?  "" :  a.Obra.NumeroObra,
-
-                                //  string.Join(" ",  a.DetalleRequerimientos.Select(x=> (x.DetallePresupuestos.Select(y=> y.IdPresupuesto))  )),
-                                // string.Join(" ",  a.DetalleRequerimientos.Select(x=>(x.DetallePresupuestos   ==null) ? "" : x.DetallePresupuestos.Select(z=>z.Presupuesto.Numero.ToString()).NullSafeToString() ).Distinct()),
-
-
-                                // Req ya viene con todos los datos para las colecciones hijas. lo paginé y ahí hice el select (arriba)
-                                // Req ya viene con todos los datos para las colecciones hijas. lo paginé y ahí hice el select (arriba)
-                                // Req ya viene con todos los datos para las colecciones hijas. lo paginé y ahí hice el select (arriba)
-                                // Req ya viene con todos los datos para las colecciones hijas. lo paginé y ahí hice el select (arriba)
-
-                                //string.Join(",",  a.DetalleRequerimientos
-                                //    .SelectMany(x =>
-                                //        (x.DetallePresupuestos == null) ?
-                                //        null :
-                                //        x.DetallePresupuestos.Select(y =>
-                                //                    (y.Presupuesto == null) ?
-                                //                    null :
-                                //                    y.Presupuesto.Numero.NullSafeToString()
-                                //            )
-                                //    ).Distinct()
-                                //),
-
-
-                                //"",
-
-                                 
-
-                                //string.Join(",",  a.DetalleRequerimientos
-                                //    .SelectMany(x =>
-                                //        (x.DetallePedidos == null) ?
-                                //        null :
-                                //        x.DetallePedidos.Select(y =>
-                                //                    (y.Pedido == null) ?
-                                //                    null :
-                                //                    "<a href="+ Url.Action("Edit", "Pedido",new {id = y.Pedido.IdPedido} ) + "  >" + y.Pedido.NumeroPedido.NullSafeToString() + "</>"
-                                                    
-                                //            )
-                                //    ).Distinct()
-                                //),
-
-
-                                "", //recepciones
-                                "", // salidas
-
-                                //a.Comparativas,
-                                //string.Join(" ",  a.DetalleRequerimientos.Select(x=> x.DetallePedidos.Count ))  ,
-
-
-                                ////string.Join(" ",  a.DetalleRequerimientos.Select(x=>(x.DetallePedidos   ==null) ? "" : x.DetallePedidos.Select(z=>z.Pedido.NumeroPedido.ToString()).NullSafeToString() ).Distinct()),
-                                //a.Recepciones,
-                                
-                                
-                                
-                                //(a.SolicitoRequerimiento==null) ?  "" :   a.SolicitoRequerimiento.Nombre,
-                                //(a.AproboRequerimiento==null) ?  "" :  a.AproboRequerimiento.Nombre,
-                                //(a.Sectores==null) ?  "" : a.Sectores.Descripcion,
-
-                                //a.UsuarioAnulacion,
-                                //a.FechaAnulacion.NullSafeToString(),
-                                //a.MotivoAnulacion,
-                                //a.FechasLiberacion,
-                             
-                                //a.Observaciones,
-                                //a.LugarEntrega,
-                                //a.IdObra.ToString(),
-                                //a.IdSector.ToString(),
-                                //a.ConfirmadoPorWeb.NullSafeToString()
-                            }
-                        }).ToArray()
-            };
-
-            return Json(jsonData, JsonRequestBehavior.AllowGet);
-        }
-
-
-
-
         public virtual ViewResult Index()
         {
             if (!PuedeLeer(enumNodos.Recepciones)) throw new Exception("No tenés permisos");
@@ -911,6 +513,349 @@ namespace ProntoMVC.Controllers
             }
         }
 
+        public virtual JsonResult DetRecepcionesSinFormato(int IdRecepcion)
+        {
+            var Det = db.DetalleRecepciones.Where(p => p.IdRecepcion == IdRecepcion).ToList(); //.AsQueryable();
+
+            Parametros parametros = db.Parametros.Find(1);
+            var mIdCuentaDiferenciaCambio = parametros.IdCuentaDiferenciaCambio ?? 0;
+            string cuentadesc;
+
+            Det.ToList();
+
+            DataTable dt = EntidadManager.GetStoreProcedure(SCsql(), "Recepciones_TX_DetallesParaComprobantesProveedores", IdRecepcion);
+
+            //var q= from i in Det
+            //       from mappings in dt.AsEnumerable()
+            //                .Where(mapping => mapping["IdCuentaContable"].NullSafeToString() == IdRecepcion.ToString() ).DefaultIfEmpty() 
+            //        select i;
+
+            //foreach (DataRow dr in dt)
+            //{
+
+            //}
+
+            try
+            {
+                cuentadesc = db.Cuentas.Find(mIdCuentaDiferenciaCambio).Descripcion;
+            }
+            catch (Exception)
+            {
+                cuentadesc = "";
+            }
+
+            var data = (from a in Det
+                        from mappings in dt.AsEnumerable()
+                             .Where(mapping => mapping["IdDetalleRecepcion"].NullSafeToString() == a.IdDetalleRecepcion.ToString()).DefaultIfEmpty()
+                        select new
+                        {
+                            a.IdDetallePedido,
+                            a.IdArticulo,
+                            a.IdUnidad,
+                            a.IdDetalleRequerimiento,
+                            // a.NumeroItem,
+                            //a.DetalleRequerimiento.Requerimientos.Obra.NumeroObra,
+                            a.Cantidad,
+                            //a.Unidad.Abreviatura,
+                            //a.Articulo.Codigo,
+                            //a.Articulo.Descripcion,
+                            //a.FechaEntrega,
+                            a.Observaciones,
+                            //a.DetalleRequerimiento.Requerimientos.NumeroRequerimiento,
+                            //NumeroItemRM = a.DetalleRequerimiento.NumeroItem,
+                            //a.Adjunto,
+                            //a.ArchivoAdjunto1,
+                            //a.ArchivoAdjunto2,
+                            //a.ArchivoAdjunto3,
+                            //a.Precio
+
+                            //idcuenta = mIdCuentaDiferenciaCambio,
+                            //cuentadescripcion = cuentadesc
+
+                            IdCuenta = mappings["IdCuenta"].NullSafeToString(),
+                            CodigoCuenta = mappings["CodigoCuenta"].NullSafeToString(),
+                            cuentadescripcion = (db.Cuentas.Find(Generales.Val(mappings["IdCuenta"].NullSafeToString())) ?? new Cuenta()).Descripcion
+
+
+                        }).OrderBy(p => p.IdArticulo).ToList();
+            return Json(data, JsonRequestBehavior.AllowGet);
+        }
+
+        public virtual ActionResult Recepciones(string sidx, string sord, int? page, int? rows, bool _search, string searchField, string searchOper, string searchString,
+                                            string FechaInicial, string FechaFinal, string IdObra, bool bAConfirmar = false, bool bALiberar = false)
+        {
+            string campo = String.Empty;
+            int pageSize = rows ?? 20;
+            int currentPage = page ?? 1;
+
+            int totalRecords = 0;
+            int totalPages = 0;
+
+            if (true)
+            {
+                LinqToSQL_ProntoDataContext l2sqlPronto = new LinqToSQL_ProntoDataContext(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SCsql()));
+                var qq = (from rm in l2sqlPronto.Requerimientos
+                          select l2sqlPronto.Requerimientos_Pedidos(rm.IdRequerimiento)
+                          ).Take(100).ToList();
+
+
+            }
+
+            var Req = db.Recepciones
+                // .Include(x => x.DetallePedidos.Select(y => y.Unidad))
+                // .Include(x => x.DetallePedidos.Select(y => y.Moneda))
+                //.Include(x => x.DetallePedidos. .moneda)
+                //   .Include("DetallePedidos.Unidad") // funciona tambien
+                //    .Include(x => x.Moneda)
+                //.Include(x => x.Obra)
+
+                    //.Include(x => x.SolicitoRequerimiento)
+                //.Include(x => x.AproboRequerimiento)
+                //.Include(x => x.Sectores)
+                //  .Include("DetallePedidos.IdDetalleRequerimiento") // funciona tambien
+                //   .Include("DetalleRequerimientos.DetallePedidos.Pedido") // funciona tambien
+                //.Include(x => x.DetalleRequerimientos)
+
+                        //.Include(x => x.DetalleRequerimientos
+                //            .Select(y => y.DetallePedidos
+                //                )
+                //        )
+                //.Include(x => x.DetalleRequerimientos
+                //            .Select(y => y.DetallePresupuestos
+                //                )
+                //        )
+
+                 //       .Include(r => r.DetalleRequerimientos.Select(dr => dr.DetallePedidos.Select(dt => dt.Pedido)))
+
+           //  .Include("DetalleRequerimientos.DetallePedidos.Pedido") // funciona tambien
+                //   .Include("DetalleRequerimientos.DetallePresupuestos.Presupuesto") // funciona tambien
+                // .Include(x => x.Aprobo)
+                          .AsQueryable();
+
+
+            // Requerimiento test = Req.Where(x => x.IdRequerimiento == 4).ToList().FirstOrDefault();
+
+
+            //if (bAConfirmar)
+            //{
+
+            //    Req = (from a in Req where (a.Confirmado ?? "SI") == "NO" select a).AsQueryable();
+            //    //            WHERE  IsNull(Confirmado,'SI')='NO' and 
+            //    //(@IdObraAsignadaUsuario=-1 or Requerimientos.IdObra=@IdObraAsignadaUsuario)
+
+            //}
+            //if (bALiberar)
+            //{
+            //    Req = (from a in Req where a.Aprobo == null select a).AsQueryable();
+            //    //            WHERE  Requerimientos.Aprobo is null and 
+            //    //(@IdObraAsignadaUsuario=-1 or Requerimientos.IdObra=@IdObraAsignadaUsuario)
+
+            //}
+
+            if (IdObra != string.Empty)
+            {
+                //int IdObra1 = Convert.ToInt32(IdObra);
+                //Req = (from a in Req where a.IdObra == IdObra1 select a).AsQueryable();
+            }
+            if (FechaInicial != string.Empty)
+            {
+                DateTime FechaDesde = DateTime.ParseExact(FechaInicial, "dd/MM/yyyy", null);
+                DateTime FechaHasta = DateTime.ParseExact(FechaFinal, "dd/MM/yyyy", null);
+                Req = (from a in Req where a.FechaRecepcion >= FechaDesde && a.FechaRecepcion <= FechaHasta select a).AsQueryable();
+            }
+            if (_search)
+            {
+                switch (searchField.ToLower())
+                {
+                    case "numerorequerimiento":
+                        campo = String.Format("Obra.NumeroObra.Contains(\"{0}\") OR NumeroRequerimiento = {1} ", searchString, Generales.Val(searchString));
+
+                        //if (searchString != "")
+                        //{
+                        //    campo = String.Format("{0} = {1}", searchField, Generales.Val(searchString));
+                        //}
+                        //else
+                        //{
+                        //    campo = "true";
+                        //}
+                        break;
+                    case "fecharequerimiento":
+                        //No anda
+                        campo = String.Format("{0}.Contains(\"{1}\")", searchField, searchString);
+                        break;
+                    default:
+                        campo = String.Format("Obra.Descripcion.Contains(\"{0}\") OR NumeroRequerimiento = {1} ", searchString, Generales.Val(searchString));
+
+                        //campo = String.Format("{0}.Contains(\"{1}\")", searchField, searchString);
+                        break;
+                }
+            }
+            else
+            {
+                campo = "true";
+            }
+
+            try
+            {
+                var Req1 = from a in Req.Where(campo) select a.IdRequerimiento;
+
+                totalRecords = Req1.Count();
+                totalPages = (int)Math.Ceiling((float)totalRecords / (float)pageSize);
+            }
+            catch (Exception)
+            {
+
+                //                throw;
+            }
+
+            //switch (sidx.ToLower())
+            //{
+            //    case "numerorequerimiento":
+            //        if (sord.Equals("desc"))
+            //            Req = Req.OrderByDescending(a => a.NumeroRequerimiento);
+            //        else
+            //            Req = Req.OrderBy(a => a.NumeroRequerimiento);
+            //        break;
+            //    case "fecharequerimiento":
+            //        if (sord.Equals("desc"))
+            //            Req = Req.OrderByDescending(a => a.FechaRequerimiento);
+            //        else
+            //            Req = Req.OrderBy(a => a.FechaRequerimiento);
+            //        break;
+            //    case "numeroobra":
+            //        if (sord.Equals("desc"))
+            //            Req = Req.OrderByDescending(a => a.Obra.NumeroObra);
+            //        else
+            //            Req = Req.OrderBy(a => a.Obra.NumeroObra);
+            //        break;
+            //    case "libero":
+            //        if (sord.Equals("desc"))
+            //            Req = Req.OrderByDescending(a => a.Empleados.Nombre);
+            //        else
+            //            Req = Req.OrderBy(a => a.Empleados.Nombre);
+            //        break;
+            //    case "aprobo":
+            //        if (sord.Equals("desc"))
+            //            Req = Req.OrderByDescending(a => a.Empleados1.Nombre);
+            //        else
+            //            Req = Req.OrderBy(a => a.Empleados1.Nombre);
+            //        break;
+            //    case "sector":
+            //        if (sord.Equals("desc"))
+            //            Req = Req.OrderByDescending(a => a.Sectores.Descripcion);
+            //        else
+            //            Req = Req.OrderBy(a => a.Sectores.Descripcion);
+            //        break;
+            //    case "detalle":
+            //        if (sord.Equals("desc"))
+            //            Req = Req.OrderByDescending(a => a.Detalle);
+            //        else
+            //            Req = Req.OrderBy(a => a.Detalle);
+            //        break;
+            //    default:
+            //        if (sord.Equals("desc"))
+            //            Req = Req.OrderByDescending(a => a.NumeroRequerimiento);
+            //        else
+            //            Req = Req.OrderBy(a => a.NumeroRequerimiento);
+            //        break;
+            //}
+
+            var data = from a in Req  // .Where(campo)
+                           .OrderBy(sidx + " " + sord)
+                           //.Skip((currentPage - 1) * pageSize).Take(pageSize)
+                            .ToList()
+                       select a; //supongo que tengo que hacer la paginacion antes de hacer un select, para que me llene las colecciones anidadas
+
+            var jsonData = new jqGridJson()
+            {
+                total = totalPages,
+                page = currentPage,
+                records = totalRecords,
+                rows = (from a in data
+                        select new jqGridRowJson
+                        {
+                            id = a.IdRecepcion.ToString(),
+                            cell = new string[] { 
+                                //"<a href="+ Url.Action("Edit",new {id = a.IdRequerimiento} ) + " target='' >Editar</>" ,
+                                "<a href="+ Url.Action("Edit",new {id = a.IdRecepcion} ) + "  >Editar</>" ,
+							    "<a href="+ Url.Action("Imprimir",new {id = a.IdRecepcion} )  +">Imprimir</>" ,
+                                a.IdRecepcion.ToString(), 
+                                a.NumeroRecepcion1.ToString(), 
+                                a.NumeroRecepcion2.ToString(), 
+                                a.FechaRecepcion.GetValueOrDefault().ToString("dd/MM/yyyy"),
+                              //  a.Cumplido,
+                              //  a.Recepcionado,
+                              //  a.Entregado,
+                              //  a.Impresa,
+                              //  a.Detalle,
+                              //  //a.Obra.Descripcion, 
+                              //(a.Obra==null) ?  "" :  a.Obra.NumeroObra,
+
+                                //  string.Join(" ",  a.DetalleRequerimientos.Select(x=> (x.DetallePresupuestos.Select(y=> y.IdPresupuesto))  )),
+                                // string.Join(" ",  a.DetalleRequerimientos.Select(x=>(x.DetallePresupuestos   ==null) ? "" : x.DetallePresupuestos.Select(z=>z.Presupuesto.Numero.ToString()).NullSafeToString() ).Distinct()),
+
+                                // Req ya viene con todos los datos para las colecciones hijas. lo paginé y ahí hice el select (arriba)
+
+                                //string.Join(",",  a.DetalleRequerimientos
+                                //    .SelectMany(x =>
+                                //        (x.DetallePresupuestos == null) ?
+                                //        null :
+                                //        x.DetallePresupuestos.Select(y =>
+                                //                    (y.Presupuesto == null) ?
+                                //                    null :
+                                //                    y.Presupuesto.Numero.NullSafeToString()
+                                //            )
+                                //    ).Distinct()
+                                //),
+                                //"",
+
+                                //string.Join(",",  a.DetalleRequerimientos
+                                //    .SelectMany(x =>
+                                //        (x.DetallePedidos == null) ?
+                                //        null :
+                                //        x.DetallePedidos.Select(y =>
+                                //                    (y.Pedido == null) ?
+                                //                    null :
+                                //                    "<a href="+ Url.Action("Edit", "Pedido",new {id = y.Pedido.IdPedido} ) + "  >" + y.Pedido.NumeroPedido.NullSafeToString() + "</>"
+                                                    
+                                //            )
+                                //    ).Distinct()
+                                //),
+
+
+                                "", //recepciones
+                                "", // salidas
+
+                                //a.Comparativas,
+                                //string.Join(" ",  a.DetalleRequerimientos.Select(x=> x.DetallePedidos.Count ))  ,
+
+
+                                ////string.Join(" ",  a.DetalleRequerimientos.Select(x=>(x.DetallePedidos   ==null) ? "" : x.DetallePedidos.Select(z=>z.Pedido.NumeroPedido.ToString()).NullSafeToString() ).Distinct()),
+                                //a.Recepciones,
+                                
+                                
+                                
+                                //(a.SolicitoRequerimiento==null) ?  "" :   a.SolicitoRequerimiento.Nombre,
+                                //(a.AproboRequerimiento==null) ?  "" :  a.AproboRequerimiento.Nombre,
+                                //(a.Sectores==null) ?  "" : a.Sectores.Descripcion,
+
+                                //a.UsuarioAnulacion,
+                                //a.FechaAnulacion.NullSafeToString(),
+                                //a.MotivoAnulacion,
+                                //a.FechasLiberacion,
+                             
+                                //a.Observaciones,
+                                //a.LugarEntrega,
+                                //a.IdObra.ToString(),
+                                //a.IdSector.ToString(),
+                                //a.ConfirmadoPorWeb.NullSafeToString()
+                            }
+                        }).ToArray()
+            };
+
+            return Json(jsonData, JsonRequestBehavior.AllowGet);
+        }
+
         public virtual FileResult ImprimirConInteropPDF(int id)
         {
             object nulo = null;
@@ -932,105 +877,77 @@ namespace ProntoMVC.Controllers
 
         private class Recepcione2
         {
-
-            public string Acargo { get; set; }
-            public string ActualizarCostoImportacionDesdePedido { get; set; }
-            public string Anulada { get; set; }
-            public string ArchivoAdjunto1 { get; set; }
-            public decimal? CantidadEnOrigen { get; set; }
-            public string Chofer { get; set; }
-            public string CircuitoFirmasCompleto { get; set; }
-            public string CodigoTarifador { get; set; }
-            public virtual ICollection<DetalleRecepcione> DetalleRecepciones { get; set; }
-            public decimal? DistanciaRecorrida { get; set; }
-            public byte? EnviarEmail { get; set; }
-            public DateTime? FechaAnulacion { get; set; }
-            public DateTime? FechaImportacionTransmision { get; set; }
-            public DateTime? FechaIngreso { get; set; }
-            public DateTime? FechaLiberacion { get; set; }
-            public DateTime? FechaPesada { get; set; }
-            public DateTime? FechaRecepcion { get; set; }
-            public DateTime? FechaRegistracion { get; set; }
-            public DateTime? FechaUltimaModificacion { get; set; }
-            public int? IdAcopio { get; set; }
-            public int? IdChofer { get; set; }
-            public int? IdComprador { get; set; }
-            public int? IdDepositoOrigen { get; set; }
-            public int? IdEquipo { get; set; }
-            public int? IdFlete { get; set; }
-            public int? IdObra { get; set; }
-            public int? IdOrigenTransmision { get; set; }
-            public int? IdPedido { get; set; }
-            public int? IdPesada { get; set; }
-            public int? IdProveedor { get; set; }
             public int IdRecepcion { get; set; }
-            public int? IdRecepcionOriginal { get; set; }
-            public int? IdRecepcionSAT { get; set; }
-            public int? IdRequerimiento { get; set; }
-            public int? IdTarifaFlete { get; set; }
-            public int? IdTransportista { get; set; }
-            public int? IdUsuarioAnulo { get; set; }
-            public int? IdUsuarioIngreso { get; set; }
-            public int? IdUsuarioModifico { get; set; }
-            public decimal? ImporteIVA { get; set; }
-            public decimal? ImpuestosInternos { get; set; }
-            public int? Libero { get; set; }
-            public string MotivoAnulacion { get; set; }
-            public string NumeroDocumentoChofer { get; set; }
-            public int? NumeroOrdenCarga { get; set; }
-            public int? NumeroPesada { get; set; }
-            public int? NumeroRecepcion1 { get; set; }
-            public int? NumeroRecepcion2 { get; set; }
             public int? NumeroRecepcionAlmacen { get; set; }
-            public int? NumeroRecepcionOrigen1 { get; set; }
-            public int? NumeroRecepcionOrigen2 { get; set; }
-            public int? NumeroRemitoTransporte1 { get; set; }
-            public int? NumeroRemitoTransporte2 { get; set; }
-            public string Observaciones { get; set; }
-            public string ObservacionesPesada { get; set; }
-            public string Patente { get; set; }
-            public decimal? PercepcionIIBB { get; set; }
-            public decimal? PercepcionIVA { get; set; }
-            public decimal? PesoBruto { get; set; }
-            public decimal? PesoNeto { get; set; }
-            public DateTime? PRESTOFechaProceso { get; set; }
-            public string ProcesadoPorCPManualmente { get; set; }
-            public decimal? Progresiva1 { get; set; }
-            public decimal? Progresiva2 { get; set; }
-            public int? Realizo { get; set; }
+            public string NumeroRecepcion1 { get; set; }
+            public string NumeroRecepcion2 { get; set; }
             public string SubNumero { get; set; }
-            public decimal? Tara { get; set; }
-            public decimal? TarifaFlete { get; set; }
-            public int? TipoRecepcion { get; set; }
-
-
-
             public string ProveedorCodigo { get; set; }
             public string ProveedorNombre { get; set; }
             public string ProveedorCuit { get; set; }
-            public string Obra { get; set; }
+            public DateTime? FechaRecepcion { get; set; }
+            public string Obras { get; set; }
+            public string Anulada { get; set; }
             public string Requerimientos { get; set; }
-            public string Solicitantes { get; set; }
+            public string SolicitantesRequerimientos { get; set; }
             public string Pedidos { get; set; }
-            public int? CantidadItems { get; set; }
-            public string Transportista { get; set; }
-            public string Emitio { get; set; }
+            public string ListaAcopio { get; set; }
+            public string Observaciones { get; set; }
             public string Confecciono { get; set; }
+            public DateTime? FechaIngreso { get; set; }
             public string Modifico { get; set; }
+            public DateTime? FechaUltimaModificacion { get; set; }
             public string Anulo { get; set; }
-
+            public DateTime? FechaAnulacion { get; set; }
+            public string MotivoAnulacion { get; set; }
+            public int? NumeroPesada { get; set; }
+            public decimal? Progresiva1 { get; set; }
+            public decimal? Progresiva2 { get; set; }
+            public DateTime? FechaPesada { get; set; }
+            public string ObservacionesPesada { get; set; }
+            public string CircuitoFirmasCompleto { get; set; }
+            public string Transportista { get; set; }
+            public string Chofer { get; set; }
+            public string NumeroDocumentoChofer { get; set; }
+            public string Patente { get; set; }
+            public decimal? PesoBruto { get; set; }
+            public decimal? PesoNeto { get; set; }
+            public decimal? Tara { get; set; }
+            public int? NumeroOrdenCarga { get; set; }
+            public int? NumeroRemitoTransporte1 { get; set; }
+            public int? NumeroRemitoTransporte2 { get; set; }
+            public int? Items { get; set; }
         }
 
         public virtual ActionResult TT_DynamicGridData(string sidx, string sord, int page, int rows, bool _search, string filters, string FechaInicial, string FechaFinal)
         {
+            DateTime FechaDesde, FechaHasta;
+            try
+            {
+                if (FechaInicial == "") FechaDesde = DateTime.MinValue;
+                else FechaDesde = DateTime.ParseExact(FechaInicial, "dd/MM/yyyy", null);
+            }
+            catch (Exception)
+            {
+                FechaDesde = DateTime.MinValue;
+            }
 
-            string campo = String.Empty;
+            try
+            {
+                if (FechaFinal == "") FechaHasta = DateTime.MaxValue;
+                else FechaHasta = DateTime.ParseExact(FechaFinal, "dd/MM/yyyy", null);
+            }
+            catch (Exception)
+            {
+                FechaHasta = DateTime.MaxValue;
+            }
+
+            int totalRecords = 0;
             int pageSize = rows;
-            int currentPage = page;
 
-            var data = (from a in db.Recepciones.Include(x => x.DetalleRecepciones)
+            var data = (from a in db.Recepciones
                         from b in db.Proveedores.Where(v => v.IdProveedor == a.IdProveedor).DefaultIfEmpty()
-                        from c in db.Obras.Where(v => v.IdObra == a.IdObra).DefaultIfEmpty()
+                        //from c in db.Obras.Where(v => v.IdObra == a.IdObra).DefaultIfEmpty()
                         from d in db.Transportistas.Where(v => v.IdTransportista == a.IdTransportista).DefaultIfEmpty()
                         from e in db.Empleados.Where(y => y.IdEmpleado == a.Realizo).DefaultIfEmpty()
                         from f in db.Empleados.Where(y => y.IdEmpleado == a.IdUsuarioIngreso).DefaultIfEmpty()
@@ -1039,25 +956,21 @@ namespace ProntoMVC.Controllers
                         select new Recepcione2
                         {
                             IdRecepcion = a.IdRecepcion,
-                            DetalleRecepciones = a.DetalleRecepciones,
-                            IdProveedor = a.IdProveedor,
-                            IdObra = a.IdObra,
-                            IdTransportista = a.IdTransportista,
                             NumeroRecepcionAlmacen = a.NumeroRecepcionAlmacen,
-                            NumeroRecepcion1 = a.NumeroRecepcion1,
-                            NumeroRecepcion2 = a.NumeroRecepcion2,
-                            FechaRecepcion = a.FechaRecepcion,
-                            Anulada = a.Anulada,
+                            NumeroRecepcion1 = SqlFunctions.Replicate("0", 4 - a.NumeroRecepcion1.ToString().Length) + a.NumeroRecepcion1.ToString(),
+                            NumeroRecepcion2 = SqlFunctions.Replicate("0", 8 - a.NumeroRecepcion2.ToString().Length) + a.NumeroRecepcion2.ToString(),
+                            SubNumero = a.SubNumero,
                             ProveedorCodigo = b.CodigoEmpresa != null ? b.CodigoEmpresa : "",
                             ProveedorNombre = b.RazonSocial != null ? b.RazonSocial : "",
                             ProveedorCuit = b.Cuit != null ? b.Cuit : "",
-                            Obra = c != null ? c.NumeroObra : "",
-                            Requerimientos = "",
-                            Solicitantes = "",
-                            Pedidos = "",
-                            CantidadItems = 0,
-                            Transportista = d != null ? d.RazonSocial : "",
-                            Emitio = e != null ? e.Nombre : "",
+                            FechaRecepcion = a.FechaRecepcion,
+                            Anulada = a.Anulada,
+                            Obras = ModelDefinedFunctions.Recepciones_Obras(a.IdRecepcion).ToString(),
+                            Requerimientos = ModelDefinedFunctions.Recepciones_Requerimientos(a.IdRecepcion).ToString(),
+                            SolicitantesRequerimientos = ModelDefinedFunctions.Recepciones_Solicitantes(a.IdRecepcion).ToString(),
+                            Pedidos = ModelDefinedFunctions.Recepciones_Pedidos(a.IdRecepcion).ToString(),
+                            ListaAcopio = "",
+                            Observaciones = a.Observaciones,
                             Confecciono = f != null ? f.Nombre : "",
                             FechaIngreso = a.FechaIngreso,
                             Modifico = g != null ? g.Nombre : "",
@@ -1065,92 +978,82 @@ namespace ProntoMVC.Controllers
                             Anulo = h != null ? h.Nombre : "",
                             FechaAnulacion = a.FechaAnulacion,
                             MotivoAnulacion = a.MotivoAnulacion,
+                            NumeroPesada = a.NumeroPesada,
+                            Progresiva1 = a.Progresiva1,
+                            Progresiva2 = a.Progresiva2,
+                            FechaPesada = a.FechaPesada,
+                            ObservacionesPesada = a.ObservacionesPesada,
+                            CircuitoFirmasCompleto = a.CircuitoFirmasCompleto,
+                            Transportista = d != null ? d.RazonSocial : "",
                             Chofer = a.Chofer,
+                            NumeroDocumentoChofer = a.NumeroDocumentoChofer,
                             Patente = a.Patente,
-                            NumeroRemitoTransporte1 = a.NumeroRemitoTransporte1 != null ? a.NumeroRemitoTransporte1 : 0,
-                            NumeroRemitoTransporte2 = a.NumeroRemitoTransporte2 != null ? a.NumeroRemitoTransporte2 : 0,
-                            Observaciones = a.Observaciones
-                        }).AsQueryable();
-
-            if (FechaInicial != string.Empty)
-            {
-                DateTime FechaDesde = DateTime.ParseExact(FechaInicial, "dd/MM/yyyy", null);
-                DateTime FechaHasta = DateTime.ParseExact(FechaFinal, "dd/MM/yyyy", null);
-                data = (from a in data where a.FechaRecepcion >= FechaDesde && a.FechaRecepcion <= FechaHasta select a).AsQueryable();
-            }
-
-            int totalRecords = data.Count();
-            int totalPages = (int)Math.Ceiling((float)totalRecords / (float)pageSize);
-
-
+                            PesoBruto = a.PesoBruto,
+                            PesoNeto = a.PesoNeto,
+                            Tara = a.Tara,
+                            NumeroOrdenCarga = a.NumeroOrdenCarga,
+                            NumeroRemitoTransporte1 = a.NumeroRemitoTransporte1,
+                            NumeroRemitoTransporte2 = a.NumeroRemitoTransporte1,
+                            Items = a.DetalleRecepciones.Distinct().Count(),
+                        }).Where(a => a.FechaRecepcion >= FechaDesde && a.FechaRecepcion <= FechaHasta).OrderBy(sidx + " " + sord).AsQueryable();
 
             var pagedQuery = Filters.FiltroGenerico_UsandoIQueryable<Recepcione2>
-                   (sidx, sord, page, rows, _search, filters, db, ref totalRecords, data);
+                                     (sidx, sord, page, rows, _search, filters, db, ref totalRecords, data);
 
-
-
+            int totalPages = (int)Math.Ceiling((float)totalRecords / (float)pageSize);
 
             var jsonData = new jqGridJson()
             {
                 total = totalPages,
-                page = currentPage,
+                page = page,
                 records = totalRecords,
                 rows = (from a in pagedQuery
                         select new jqGridRowJson
                         {
                             id = a.IdRecepcion.ToString(),
-                            cell = new string[] { 
+                            cell = new string[] {
                                 "<a href="+ Url.Action("Edit",new {id = a.IdRecepcion} ) + ">Editar</>",
                                 "<a href="+ Url.Action("ImprimirConInteropPDF",new {id = a.IdRecepcion} ) + ">Emitir</a> ",
                                 a.IdRecepcion.ToString(),
-                                a.IdProveedor.NullSafeToString(),
-                                a.IdObra.NullSafeToString(),
-                                a.IdTransportista.NullSafeToString(),
                                 a.NumeroRecepcionAlmacen.NullSafeToString(),
-                                a.NumeroRecepcion1.NullSafeToString().PadLeft(4,'0') + '-'+a.NumeroRecepcion2.NullSafeToString().PadLeft(8,'0'),
-                                a.FechaRecepcion == null ? "" : a.FechaRecepcion.GetValueOrDefault().ToString("dd/MM/yyyy"),
-                                a.Anulada.NullSafeToString(),
+                                a.NumeroRecepcion1.NullSafeToString(),
+                                a.NumeroRecepcion2.NullSafeToString(),
+                                a.SubNumero.NullSafeToString(),
                                 a.ProveedorCodigo.NullSafeToString(),
                                 a.ProveedorNombre.NullSafeToString(),
                                 a.ProveedorCuit.NullSafeToString(),
-                                a.Obra.NullSafeToString(),
-                                string.Join(",", 
-                                       a.DetalleRecepciones
-                                       .Select(x => 
-                                           (x.DetalleRequerimiento == null) ?
-                                           "" :
-                                           ((   x.DetalleRequerimiento.Requerimientos == null) ? 
-                                               "" :
-                                               x.DetalleRequerimiento.Requerimientos.NumeroRequerimiento.NullSafeToString()
-                                           )
-                                       ).Distinct()
-                                ),
-                                a.Solicitantes.NullSafeToString(),
-                                string.Join(",", 
-                                       a.DetalleRecepciones
-                                       .Select(x => 
-                                           (x.DetallePedido == null) ?
-                                           "" :
-                                           ((   x.DetallePedido.Pedido == null) ? 
-                                               "" :
-                                               x.DetallePedido.Pedido.NumeroPedido.NullSafeToString()
-                                           )
-                                       ).Distinct()
-                                ),
-                                db.DetalleRecepciones.Where(x=>x.IdRecepcion==a.IdRecepcion).Select(x=>x.IdDetalleRecepcion).Distinct().Count().ToString(),
-                                a.Transportista.NullSafeToString(),
-                                a.Emitio.NullSafeToString(),
-                                a.Confecciono.NullSafeToString(),
-                                a.FechaIngreso.NullSafeToString(),
-                                a.Modifico.NullSafeToString(),
-                                a.FechaUltimaModificacion.NullSafeToString(),
-                                a.Anulo.NullSafeToString(),
-                                a.FechaAnulacion.NullSafeToString(),
-                                a.MotivoAnulacion.NullSafeToString(),
-                                a.Chofer.NullSafeToString(),
-                                a.Patente.NullSafeToString(),
-                                a.NumeroRemitoTransporte1.NullSafeToString().PadLeft(4,'0') + '-'+a.NumeroRemitoTransporte2.NullSafeToString().PadLeft(8,'0'),
+                                a.FechaRecepcion == null ? "" : a.FechaRecepcion.GetValueOrDefault().ToString("dd/MM/yyyy"),
+                                a.Anulada.NullSafeToString(),
+                                a.Obras.NullSafeToString(),
+                                a.Requerimientos.NullSafeToString(),
+                                a.SolicitantesRequerimientos.NullSafeToString(),
+                                a.Pedidos.NullSafeToString(),
+                                a.ListaAcopio.NullSafeToString(),
                                 a.Observaciones.NullSafeToString(),
+                                a.Confecciono.NullSafeToString(),
+                                a.FechaIngreso == null ? "" : a.FechaIngreso.GetValueOrDefault().ToString("dd/MM/yyyy"),
+                                a.Modifico.NullSafeToString(),
+                                a.FechaUltimaModificacion == null ? "" : a.FechaUltimaModificacion.GetValueOrDefault().ToString("dd/MM/yyyy"),
+                                a.Anulo.NullSafeToString(),
+                                a.FechaAnulacion == null ? "" : a.FechaAnulacion.GetValueOrDefault().ToString("dd/MM/yyyy"),
+                                a.MotivoAnulacion.NullSafeToString(),
+                                a.NumeroPesada.NullSafeToString(),
+                                a.Progresiva1.NullSafeToString(),
+                                a.Progresiva2.NullSafeToString(),
+                                a.FechaPesada == null ? "" : a.FechaPesada.GetValueOrDefault().ToString("dd/MM/yyyy"),
+                                a.ObservacionesPesada.NullSafeToString(),
+                                a.CircuitoFirmasCompleto.NullSafeToString(),
+                                a.Transportista.NullSafeToString(),
+                                a.Chofer.NullSafeToString(),
+                                a.NumeroDocumentoChofer.NullSafeToString(),
+                                a.Patente.NullSafeToString(),
+                                a.PesoBruto.NullSafeToString(),
+                                a.PesoNeto.NullSafeToString(),
+                                a.Tara.NullSafeToString(),
+                                a.NumeroOrdenCarga.NullSafeToString(),
+                                a.NumeroRemitoTransporte1.NullSafeToString(),
+                                a.NumeroRemitoTransporte2.NullSafeToString(),
+                                a.Items.NullSafeToString()
                             }
                         }).ToArray()
             };

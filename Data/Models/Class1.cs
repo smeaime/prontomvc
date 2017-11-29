@@ -144,6 +144,30 @@ public static class ModelDefinedFunctions
         throw new NotSupportedException("Direct calls are not supported.");
     }
 
+    [System.Data.Entity.Core.Objects.DataClasses.EdmFunction("DemoProntoModel.Store", "Recepciones_Obras")]
+    public static string Recepciones_Obras(int IdRecepcion)
+    {
+        throw new NotSupportedException("Direct calls are not supported.");
+    }
+
+    [System.Data.Entity.Core.Objects.DataClasses.EdmFunction("DemoProntoModel.Store", "Recepciones_Pedidos")]
+    public static string Recepciones_Pedidos(int IdRecepcion)
+    {
+        throw new NotSupportedException("Direct calls are not supported.");
+    }
+
+    [System.Data.Entity.Core.Objects.DataClasses.EdmFunction("DemoProntoModel.Store", "Recepciones_Requerimientos")]
+    public static string Recepciones_Requerimientos(int IdRecepcion)
+    {
+        throw new NotSupportedException("Direct calls are not supported.");
+    }
+
+    [System.Data.Entity.Core.Objects.DataClasses.EdmFunction("DemoProntoModel.Store", "Recepciones_Solicitantes")]
+    public static string Recepciones_Solicitantes(int IdRecepcion)
+    {
+        throw new NotSupportedException("Direct calls are not supported.");
+    }
+
     [System.Data.Entity.Core.Objects.DataClasses.EdmFunction("DemoProntoModel.Store", "ValesSalida_Salidas")]
     public static string ValesSalida_Salidas(int IdValeSalida)
     {

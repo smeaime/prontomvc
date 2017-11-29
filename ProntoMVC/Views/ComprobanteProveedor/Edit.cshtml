@@ -171,6 +171,10 @@
                                         $("#IdCondicionCompra").val(ui.item.IdCondicionCompra);
                                         $("#ProveedorCodigo").val(ui.item.codigo);
                                         event.preventDefault();
+                                        $("#ListaDrag").jqGrid("clearGridData", true)
+                                        //$("#ListaGastos").jqGrid().setGridParam({ datatype: "local" });
+                                        $("#ListaDrag").jqGrid().setGridParam({ IdProveedor: ui.item.id }).trigger("reloadGrid");
+                                        //$("#ListaDrag").trigger("reloadGrid");
                                         ActualizarDatos();
                                         //ActualizarPuntosDeVenta();
                                     }
