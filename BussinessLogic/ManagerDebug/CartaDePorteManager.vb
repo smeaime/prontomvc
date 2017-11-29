@@ -14018,6 +14018,22 @@ usuario As String, ConexBDLmaster As String,
 
 
 
+    Public Shared Function PlantillaWilliamsPorPuntoVenta(puntoventa As Integer) As String
+        Dim planti As String
+        Select Case puntoventa
+            Case 10
+                planti = "FactElec_Williams_0010.docx"
+            Case 20
+                planti = "FactElec_Williams_0020.docx"
+            Case 30
+                planti = "FactElec_Williams_0030.docx"
+            Case 40
+                planti = "FactElec_Williams_0040.docx"
+            Case Else
+                planti = "FactElec_Williams.docx"
+        End Select
+        Return planti
+    End Function
 
 
 
@@ -14029,7 +14045,13 @@ usuario As String, ConexBDLmaster As String,
         Dim output As String
         Randomize()
         Dim prefijo As String = Int(Rnd() * 10000)
-        Dim p = DirApp & "\Documentos\" & "FactElec_Williams.docx"
+
+
+
+        Dim planti = PlantillaWilliamsPorPuntoVenta(ofac.PuntoVenta)
+
+        Dim p = DirApp & "\Documentos\" & planti
+
 
 
         output = System.IO.Path.GetTempPath() & "\" & prefijo & "FacturaElectronica_Numero" & ofac.Numero & ".docx"

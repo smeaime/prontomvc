@@ -483,11 +483,6 @@ go
 
 
 
-CREATE INDEX IDX_Cartasdeporte_PorFecha  on cartasdeporte(FechaModificacion )
-go
-
-
-
 
 
 
@@ -2169,4 +2164,9 @@ go
 
 
 
+
+
+
+CREATE INDEX IDX_Cartasdeporte_PorFecha  on cartasdeporte(FechaModificacion )
+go
 
