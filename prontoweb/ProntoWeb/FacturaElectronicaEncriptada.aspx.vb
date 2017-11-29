@@ -413,7 +413,8 @@ Partial Class FacturaElectronicaEncriptada
 
                 Dim ofac = FacturaManager.GetItem(SC, IdFactura, True)
                 Dim prefijo As String = Int(Rnd() * 10000)
-                Dim p = DirApp() & "\Documentos\" & "FactElec_Williams.docx"
+                Dim p = DirApp() & "\Documentos\" & PlantillaWilliamsPorPuntoVenta(ofac.PuntoVenta)
+
 
 
                 output = System.IO.Path.GetTempPath() & "\" & prefijo & "FacturaElecronicaAdjuntos_Numero" & ofac.Numero & ".xls"

@@ -9249,7 +9249,7 @@ Namespace Pronto.ERP.Bll
 
 
 
-                    sb &= "Biotecnologia" & SEP
+                    sb &= "" & SEP
                     Dim sCalidad As String
                     If InStr(.Calidad.ToString.ToLower, "grado 1") > 0 Then
                         sCalidad = "G1"
@@ -9264,7 +9264,7 @@ Namespace Pronto.ERP.Bll
                     End If
                     sb &= sCalidad & SEP
                     sb &= JustificadoIzquierda(.CEE.ToString, 14) & SEP
-                    sb &= .ChoferCUIT & SEP
+                    sb &= If(.ChoferCUIT, "").ToString.Replace("-", "") & SEP
                     sb &= "" & SEP
 
 
@@ -9280,7 +9280,7 @@ Namespace Pronto.ERP.Bll
 
 
                     sb &= If(.TransportistaCUIT, "           ").ToString.Replace("-", "") & SEP       '12
-                    sb &= .DestinoDesc
+                    sb &= .DestinoDesc & SEP
                     sb &= .FechaVencimiento & SEP
                     sb &= .KmARecorrer & SEP
                     sb &= .BrutoPto & SEP
@@ -9346,10 +9346,10 @@ Namespace Pronto.ERP.Bll
 
 
 
-                    sb &= .CorredorCUIT & SEP
+                    sb &= If(.CorredorCUIT, "").ToString.Replace("-", "") & SEP
                     sb &= .DestinatarioDesc & SEP
-                    sb &= .DestinatarioCUIT & SEP
-                    sb &= .DestinoCUIT & SEP
+                    sb &= If(.DestinatarioCUIT, "").ToString.Replace("-", "") & SEP
+                    sb &= If(.DestinoCUIT, "").ToString.Replace("-", "") & SEP
 
 
                     '	30	Entregador	ENTREGAS SERDEN S.R.L.        	ENTREGAS SERDEN S.R.L.        
@@ -9359,9 +9359,9 @@ Namespace Pronto.ERP.Bll
                     '	34	RemComercial	ARGENTRADING S.A.                                 	ARGENTRADING S.A.                                 
 
                     sb &= .DestinatarioDesc & SEP
-                    sb &= .DestinatarioCUIT & SEP
+                    sb &= If(.DestinatarioCUIT, "").ToString.Replace("-", "") & SEP
                     sb &= .IntermediarioDesc & SEP
-                    sb &= .IntermediarioCUIT & SEP
+                    sb &= If(.IntermediarioCUIT, "").ToString.Replace("-", "") & SEP
                     sb &= .RComercialDesc & SEP
 
 
@@ -9372,9 +9372,9 @@ Namespace Pronto.ERP.Bll
                     '	38	FechaCP	19/10/2017	19/10/2017
                     '	39	FechaDescarga	21/10/2017	21/10/2017
 
-                    sb &= .RComercialCUIT & SEP
+                    sb &= If(.RComercialCUIT, "").ToString.Replace("-", "") & SEP
                     sb &= .TitularDesc & SEP
-                    sb &= .TitularCUIT & SEP
+                    sb &= If(.TitularCUIT, "").ToString.Replace("-", "") & SEP
                     sb &= .FechaArribo & SEP
                     sb &= .FechaDescarga & SEP
 
@@ -9485,7 +9485,7 @@ Namespace Pronto.ERP.Bll
                     'sb &= "     " & SEP
                     'sb &= IIf(If(.NobleConforme, "") = "SI", "SI", "NO") & SEP
                     'sb &= JustificadoDerecha(If(.SubnumeroVagon, ""), 30) & SEP
-                    'sb &= JustificadoDerecha(.DestinoCUIT.Replace("-", ""), 11) & SEP
+                    'sb &= JustificadoDerecha(.DestinoCUIT.ToString.Replace("-", ""), 11) & SEP
 
 
 

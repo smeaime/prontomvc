@@ -3417,7 +3417,9 @@ Partial Class FacturaABM
         '////////////////////////////////////////////////////////
         'Genera las plantillas 
         'Dim p = DirApp() & "\Documentos\" & "FacturaNET_Williams.docx"
-        Dim p = DirApp() & "\Documentos\" & "FactElec_Williams.docx"
+
+
+
 
 
         Try
@@ -3433,6 +3435,12 @@ Partial Class FacturaABM
             For Each i In Facturas 'GetListaDeFacturasTildadas()
                 ' Dim ofac = ClaseMigrar.GetItemComProntoFactura(HFSC.Value, i, False)
                 Dim ofac = FacturaManager.GetItem(HFSC.Value, i, True)
+
+
+                ssss
+
+                Dim p = DirApp() & "\Documentos\" & PlantillaWilliamsPorPuntoVenta(ofac.PuntoVenta)
+
 
 
                 output = System.IO.Path.GetTempPath() & "\" & "FacturaNET_Numero" & ofac.Numero & ".docx"
