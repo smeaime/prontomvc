@@ -48,7 +48,7 @@ Partial Class CartadeporteABM
         End If
 
         If Request.Browser("IsMobileDevice") = "true" Then
-            Response.Redirect("CartaDePorteMovil.aspx?Id=" & If(Request.QueryString("Id"), "").ToString())
+            'Response.Redirect("CartaDePorteMovil.aspx?Id=" & If(Request.QueryString("Id"), "").ToString())
         End If
 
 
