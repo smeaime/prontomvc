@@ -593,7 +593,7 @@ Namespace Pronto.ERP.Bll
                         Using adapter As New WillyInformesDataSetTableAdapters.wCartasDePorte_TX_InformesCorregidoTableAdapter
 
                             'http://blogs.msdn.com/b/smartclientdata/archive/2005/08/16/increasetableadapterquerytimeout.aspx
-                            adapter.SetCommandTimeOut(100)
+                            adapter.SetCommandTimeOut(200)
 
                             adapter.Connection.ConnectionString = desiredConnectionString 'tenes que cambiar el ConnectionModifier=Public http://weblogs.asp.net/rajbk/archive/2007/05/26/changing-the-connectionstring-of-a-wizard-generated-tableadapter-at-runtime-from-an-objectdatasource.aspx
                             'adapter.Connection..Adapter.SelectCommand.CommandTimeout = 60
@@ -14438,9 +14438,12 @@ Namespace Pronto.ERP.Bll
                     sb &= Int(Val(.Merma)).ToString.PadLeft(10) 'KgsZaran	STRING(10)	Kilos zarandeo (sin decimales))    726)    735
                     sb &= cadenavacia.ToString.PadLeft(10) 'PorDesca	STRING(10)	Porcentaje descarte (dos (2) decimales))    736)    745
                     sb &= Int(Val(cadenavacia)).ToString.PadLeft(10) 'KgsDesca	STRING(10)	Kilogramos Descarte (Sin Decimales))    746)    755
-                    sb &= Left(Val(cadenavacia).ToString, 10).PadLeft(10) 'PorVolat	STRING(10)	Porcentaje volátil (dos (2) decimales))    756)    765
-                    sb &= Int(Val(cadenavacia)).ToString.PadLeft(10) 'KgsVolat	STRING(10)	Kilogramos volátil (sin decimales))    766)    775
 
+
+                    Dim cc = CartaDePorteManager.GetItem(SC, cdp.IdCartaDePorte)
+                    sb &= String.Format("{0:F2}", cc.CalidadMermaVolatil).PadLeft(10) 'PorVolat	STRING(10)	Porcentaje volátil (dos (2) decimales))    756)    765
+                    sb &= Int(Val(cc.CalidadMermaVolatilMerma)).ToString.PadLeft(10) 'KgsVolat	STRING(10)	Kilogramos volátil (sin decimales))    766)    775
+                    cc = Nothing
 
 
 
@@ -14691,7 +14694,7 @@ Namespace Pronto.ERP.Bll
 
 
 
-        Public Shared Function Sincronismo_AmaggiDescargas_Nuevo(q As Generic.List(Of CartasConCalada),
+        Public Shared Function Sincronismo_AmaggiDescargas_Nuevo(q As Generic.List(Of CartasConCalada), SC As String,
             Optional ByVal titulo As String = "", Optional ByVal sWHERE As String = "", Optional ByRef sErrores As String = "") As String
 
 
@@ -15170,8 +15173,14 @@ Namespace Pronto.ERP.Bll
                     sb &= Int(Val(.Merma)).ToString.PadLeft(10) 'KgsZaran	STRING(10)	Kilos zarandeo (sin decimales))    726)    735
                     sb &= cadenavacia.ToString.PadLeft(10) 'PorDesca	STRING(10)	Porcentaje descarte (dos (2) decimales))    736)    745
                     sb &= Int(Val(cadenavacia)).ToString.PadLeft(10) 'KgsDesca	STRING(10)	Kilogramos Descarte (Sin Decimales))    746)    755
-                    sb &= Left(Val(cadenavacia).ToString, 10).PadLeft(10) 'PorVolat	STRING(10)	Porcentaje volátil (dos (2) decimales))    756)    765
-                    sb &= Int(Val(cadenavacia)).ToString.PadLeft(10) 'KgsVolat	STRING(10)	Kilogramos volátil (sin decimales))    766)    775
+
+
+
+
+                    Dim cc = CartaDePorteManager.GetItem(SC, cdp.IdCartaDePorte)
+                    sb &= String.Format("{0:F2}", cc.CalidadMermaVolatil).PadLeft(10) 'PorVolat	STRING(10)	Porcentaje volátil (dos (2) decimales))    756)    765
+                    sb &= Int(Val(cc.CalidadMermaVolatilMerma)).ToString.PadLeft(10) 'KgsVolat	STRING(10)	Kilogramos volátil (sin decimales))    766)    775
+
 
 
 
