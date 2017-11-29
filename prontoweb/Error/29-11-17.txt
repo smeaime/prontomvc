@@ -1,0 +1,83 @@
+
+Log Entry : 
+11/29/2017 07:14:24
+Error in: http://localhost:50769/ProntoWeb/Cartadeporte.aspx. Error Message:Mariano esta logueado, pero lo redirijo al login porque faltan los datos de session. No deberia mejor mandarlo a SeleccionarEmpresa? Ademas, no hago el LogOut y le queda el cookie!!!
+__________________________
+
+Log Entry : 
+11/29/2017 07:20:51
+Error in: http://localhost:50769/ProntoWeb/Cartadeporte.aspx. Error Message:Mariano esta logueado, pero lo redirijo al login porque faltan los datos de session. No deberia mejor mandarlo a SeleccionarEmpresa? Ademas, no hago el LogOut y le queda el cookie!!!
+__________________________
+
+Log Entry : 
+11/29/2017 07:44:55
+Error in: http://localhost:50769/ProntoWeb/Principal.aspx. Error Message:Mariano esta logueado, pero lo redirijo al login porque faltan los datos de session. No deberia mejor mandarlo a SeleccionarEmpresa? Ademas, no hago el LogOut y le queda el cookie!!!
+__________________________
+
+Log Entry : 
+11/29/2017 07:44:56
+Error in: http://localhost:50769/ProntoWeb/CartasDePortes.aspx?tipo=Todas. Error Message:Mariano
+__________________________
+
+Log Entry : 
+11/29/2017 07:45:16
+Error in: http://localhost:50769/ProntoWeb/CartaPorteDescargarArchivo.aspx?Id=lala.pdf. Error Message:lala.pdf
+__________________________
+
+Log Entry : 
+11/29/2017 07:45:16
+Error in: http://localhost:50769/ProntoWeb/CartaPorteDescargarArchivo.aspx?Id=lala.pdf. Error Message:La entrada no es una cadena Base 64 válida porque contiene un carácter que no es Base 64, más de dos caracteres de relleno o un carácter no válido entre los caracteres de relleno. 
+__________________________
+
+Log Entry : 
+11/29/2017 07:45:16
+Error in: http://localhost:50769/ProntoWeb/CartaPorteDescargarArchivo.aspx?Id=lala.pdf. Error Message:System.InvalidCastException
+La conversión de la cadena "La entrada no es una cadena Base" en el tipo 'Integer' no es válida.
+   en Microsoft.VisualBasic.CompilerServices.Conversions.ToInteger(String Value)
+   en CartaPorteDescargarArchivo.Page_Load(Object sender, EventArgs e) en C:\bdl\pronto\prontoweb\ProntoWeb\CartaPorteDescargarArchivo.aspx.vb:línea 131
+Microsoft.VisualBasic
+__________________________
+
+Log Entry : 
+11/29/2017 07:48:06
+Error in: http://localhost:50769/ProntoWeb/CartaPorteDescargarArchivo.aspx?Id=lala.pdf. Error Message:lala.pdf
+__________________________
+
+Log Entry : 
+11/29/2017 07:48:06
+Error in: http://localhost:50769/ProntoWeb/CartaPorteDescargarArchivo.aspx?Id=lala.pdf. Error Message:La entrada no es una cadena Base 64 válida porque contiene un carácter que no es Base 64, más de dos caracteres de relleno o un carácter no válido entre los caracteres de relleno. 
+__________________________
+
+Log Entry : 
+11/29/2017 07:48:07
+Error in: http://localhost:50769/ProntoWeb/CartaPorteDescargarArchivo.aspx?Id=lala.pdf. Error Message:System.InvalidCastException
+La conversión de la cadena "La entrada no es una cadena Base" en el tipo 'Integer' no es válida.
+   en Microsoft.VisualBasic.CompilerServices.Conversions.ToInteger(String Value)
+   en CartaPorteDescargarArchivo.Page_Load(Object sender, EventArgs e) en C:\bdl\pronto\prontoweb\ProntoWeb\CartaPorteDescargarArchivo.aspx.vb:línea 131
+Microsoft.VisualBasic
+__________________________
+
+Log Entry : 
+11/29/2017 07:52:06
+Error in: http://localhost:50769/ProntoWeb/CartaPorteDescargarArchivo.aspx?Id=lala.pdf. Error Message:PDF de imágenes de cartaporte. Probablemente por la memoria. Reiniciar el IIS. lala.pdf
+__________________________
+
+Log Entry : 
+11/29/2017 07:53:28
+Error in: http://localhost:50769/ProntoWeb/CartaPorteDescargarArchivo.aspx. Error Message:Página no autorizada
+__________________________
+
+Log Entry : 
+11/29/2017 07:53:59
+Error in: http://localhost:50769/ProntoWeb/CartaPorteDescargarArchivo.aspx. Error Message:PDF de imágenes de cartaporte. Probablemente por la memoria. Reiniciar el IIS. 
+__________________________
+
+Log Entry : 
+11/29/2017 07:54:15
+Error in: http://localhost:50769/ProntoWeb/CartaPorteDescargarArchivo.aspx?Id=lala.pdf. Error Message:System.Threading.ThreadAbortException: Subproceso anulado.
+   en System.Threading.Thread.AbortInternal()
+   en System.Threading.Thread.Abort(Object stateInfo)
+   en System.Web.HttpResponse.AbortCurrentThread()
+   en System.Web.HttpResponse.End()
+   en CartaPorteDescargarArchivo.Page_Load(Object sender, EventArgs e) en C:\bdl\pronto\prontoweb\ProntoWeb\CartaPorteDescargarArchivo.aspx.vb:línea 164
+__________________________

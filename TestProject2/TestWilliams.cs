@@ -867,13 +867,436 @@ namespace ProntoMVC.Tests
 
 
 
+        [TestMethod]
+        public void SincroAMAGGI_47023()
+        {
 
 
-                
+
+
+            string sErrores = "", sTitulo = "";
+            LinqCartasPorteDataContext db = null;
+
+            // el _CONST_MAXROWS sale del app.config
+
+            int registrosf = 0;
+
+            int idcli = CartaDePorteManager.BuscarClientePorCUIT("30-71161551-9", SC, "");
+
+
+            var output2 = SincronismosWilliamsManager.GenerarSincro("AMAGGI (DESCARGAS)", ref sErrores, SC, "dominio", ref sTitulo
+                          , CartaDePorteManager.enumCDPestado.DescargasMasFacturadas,
+                       "", -1, -1,
+                  idcli, -1,
+                    -1, -1, -1, -1,
+                   CartaDePorteManager.FiltroANDOR.FiltroOR, "Entregas",
+                  new DateTime(2017, 1, 10), new DateTime(2017, 1, 11),
+                  -1, "Ambas", false, "", "", -1, ref registrosf, 4000);
+
+
+
+
+            System.Diagnostics.Process.Start(output2);
+        }
+
+
+
+
+
+
 
 
         [TestMethod]
-        public void resumen_46943()
+        public void SincroTomasHnos_46995()
+        {
+
+            string sErrores = "", sTitulo = "";
+            LinqCartasPorteDataContext db = null;
+
+            // el _CONST_MAXROWS sale del app.config
+
+            int registrosf = 0;
+
+
+            //Seri posible que en la posición 45 de dicho archivo siempre venga el valor cero(0)? La idea es que los usuarios no tengan que modificar cada archivo que les llega para que no les de error al procesarlo.
+
+
+            var output = SincronismosWilliamsManager.GenerarSincro("TOMAS HNOS", ref sErrores, SC, "dominio", ref sTitulo
+                                 , CartaDePorteManager.enumCDPestado.DescargasMasFacturadas,
+                      "", -1, -1,
+                 -1, -1,
+                 -1, -1, -1, -1,
+                  CartaDePorteManager.FiltroANDOR.FiltroOR, "Ambas",
+                 new DateTime(2017, 9, 13), new DateTime(2017, 9, 13),
+                 -1, "Ambas", false, "", "", -1, ref registrosf, 40);
+
+
+
+            //File.Copy(output, @"C:\Users\Administrador\Desktop\"   Path.GetFileName(output), true);
+            System.Diagnostics.Process.Start(output);
+        }
+
+
+
+
+
+
+
+
+        [TestMethod]
+        public void SincroChiambretto_46876()
+        {
+
+            string sErrores = "", sTitulo = "";
+            LinqCartasPorteDataContext db = null;
+
+            int registrosf = 0;
+
+            int idcli = CartaDePorteManager.BuscarVendedorPorCUIT("30 -71544287-2", SC, "");
+
+
+            var output = SincronismosWilliamsManager.GenerarSincro("Chiambretto", ref sErrores, SC, "dominio", ref sTitulo
+                                , CartaDePorteManager.enumCDPestado.DescargasMasFacturadas,
+                     "", -1, idcli,
+                -1, -1,
+                -1, -1, -1, -1,
+                 CartaDePorteManager.FiltroANDOR.FiltroOR, "Ambas",
+                new DateTime(2017, 1, 13), new DateTime(2017, 1, 16),
+                -1, "Ambas", false, "", "", -1, ref registrosf, 40);
+
+
+
+
+            System.Diagnostics.Process.Start(output);
+        }
+
+
+
+
+
+
+
+
+
+        [TestMethod]
+        public void enviosPush__()
+        {
+            string deviceId = "asdfsadf";
+
+            var c = new Sch_WCFApplication.PushNotification(deviceId, "holaaaaaa", "titulo");
+
+        }
+
+
+        public void enviarNotificacionUsuario(string usuario)
+        {
+            //            var subs = BuscoLasSubscripcionesDelUsuario(usuario);
+            //            MandoMensajeAListadoDeSubscripciones(subs);
+
+        }
+
+
+
+
+
+
+
+        [TestMethod]
+        public void TienePermisosParaEstaCarta_43063()
+        {
+
+            CartaDePorteManager.TienePermisosParaEstaCarta("Mariano", 6546464, SC, scbdlmasterappconfig);
+            
+        //If Not(Roles.IsUserInRole(Membership.GetUser().UserName, "WilliamsComercial") Or Roles.IsUserInRole(Membership.GetUser().UserName, "WilliamsAdmin") Or Roles.IsUserInRole(Membership.GetUser().UserName, "WilliamsFacturacion")) Then
+        //    btnsituacion.Visible = False
+
+
+
+        }
+
+
+        [TestMethod]
+        public void TienePermisosParaEsteArchivo_43063()
+        {
+
+            // http://localhost:50769/ProntoWeb/CartaPorteDescargarArchivo.aspx?Id=lala.pdf  
+            CartaDePorteManager.TienePermisosParaEsteArchivo("Mariano", "lala.pdf",SC,scbdlmasterappconfig);
+            //Busco en q comentario esta el archivo
+            //    busco el reclamo del comentario, y la carta del comentario
+            //    veo si tiene permiso para esa carta
+
+        }
+            
+
+
+
+
+        [TestMethod]
+        public void bajarArchivo_43063()
+        {
+
+            int idcarta = 2633399;
+
+            //http://localhost:50769/ProntoWeb/CartaPorteDescargarArchivo.aspx?Id=lala.pdf  
+
+            //var s = new ServicioCartaPorte.servi();
+            //s.BajarArchivo_DLL( "asarararasa.pdf" , usuario, SC);
+            //GrabarComentarioArchivo_DLL
+        }
+
+
+        
+
+        [TestMethod]
+        public void EnviarMailALosQueParticipanEnElReclamo()
+        {
+
+            // podria pasarle a la funcion el listado de usuarios+mails....
+            // o tambien, pasarle la conexion a la bdlmaster y hacer a mano la busqueda...
+
+            //sfasdf
+            //asdasdfasdfasdf
+
+            //            Pronto.ERP.Bll.EntidadManager.MandaEmail_Nuevo(ConfigurationManager.AppSettings["ErrorMail"],
+            //                   "asuntoasuntoasunto 2",
+            //                "cuerpocuerpocuerpocuerpocuerpocuerpocuerpocuerpocuerpocuerpocuerpocuerpo cuerpocuerpocuerpocuerpo",
+            //                ConfigurationManager.AppSettings["SmtpUser"],
+            //                ConfigurationManager.AppSettings["SmtpServer"],
+            //                ConfigurationManager.AppSettings["SmtpUser"],
+            //                ConfigurationManager.AppSettings["SmtpPass"],
+            //                  "",
+            //               Convert.ToInt16(ConfigurationManager.AppSettings["SmtpPort"]));
+
+        }
+
+
+
+
+
+        [TestMethod]
+        public void cerrar_consulta_43063()
+        {
+            int idcarta = 2633399;
+
+
+            var s = new ServicioCartaPorte.servi();
+            s.CerrarReclamo_DLL(idcarta, usuario, SC);
+
+        }
+
+
+
+        [TestMethod]
+        public void agregar_comentario_43063()
+        {
+
+            // http://localhost:50769/ProntoWeb/ReclamosPorUsuarioMovil.aspx?Id=2633399
+            // http://localhost:50769/ProntoWeb/CartaDePorte.aspx?Id=2633399
+
+
+            int idcarta = 2633399;
+
+
+            var s = new ServicioCartaPorte.servi();
+            s.GrabarComentario_DLL(idcarta, "este es mi comentario", usuario, SC);
+            //s.UploadComentario_DLL();            // y si directamente comparto una url?... -pero cómo darle acceso a esa url al usuario externo?????
+
+
+        }
+
+
+
+        [TestMethod]
+        public void consultas_conversaciones_chats_bld_43063()
+        {
+
+            /*
+                        verMisChats
+
+                    AgregarChat(idusuario, idreclamo, comentario)
+
+                    quienes escuchan el chat? quiero decir, a quien les llega el mail / notificacion
+
+                    SubirArchivo
+
+                    ColaDeMails o SignalR
+                    */
+
+
+
+
+            string filtro = ""; // "{\"groupOp\":\"OR\",\"rules\":[{\"field\":\"DestinoDesc\",\"op\":\"eq\",\"data\":\"MOL. CAÑUELAS - ZARATE\"},{\"field\":\"DestinoDesc\",\"op\":\"eq\",\"data\":\"TERMINAL 6\"}]}";
+            //string output = @"C:\Users\Mariano\Downloads\Informe" + DateTime.Now.ToString("ddMMMyyyy_HHmmss") + ".xls";
+
+            var scEF = ProntoMVC.Data.Models.Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC));
+            DemoProntoEntities db = new DemoProntoEntities(scEF);
+
+            ReportViewer ReporteLocal = new Microsoft.Reporting.WebForms.ReportViewer();
+
+
+
+            int idcarta = 2633399;
+
+
+            var rec = new Reclamo();
+            rec.Estado = 22;
+            rec.Descripcion = "asdfasdf";
+            db.Reclamos.Add(rec);
+            db.SaveChanges();
+
+            var comentario = new ReclamoComentario(); // db.ReclamoComentarios.FirstOrDefault().IdReclamo;
+            comentario.IdReclamo = rec.IdReclamo;
+            comentario.IdEmpleado = 1;
+            comentario.Comentario = "hola hola";
+            db.ReclamoComentarios.Add(comentario);
+
+            var comentario2 = new ReclamoComentario(); // db.ReclamoComentarios.FirstOrDefault().IdReclamo;
+            comentario2.IdReclamo = rec.IdReclamo;
+            comentario2.IdEmpleado = 10;
+            comentario2.Comentario = "q haces";
+            db.ReclamoComentarios.Add(comentario2);
+
+
+            db.CartasDePortes.Find(idcarta).IdReclamo = rec.IdReclamo;
+
+            db.SaveChanges();
+
+
+            var s = new ServicioCartaPorte.servi();
+            string ret = s.Reclamos_DynamicGridData("Fecha", "asc", 1, 999999, true, filtro, "", "", 0, idcarta, SC, "", "");
+            System.Web.Script.Serialization.JavaScriptSerializer jsonSerializer = new System.Web.Script.Serialization.JavaScriptSerializer();
+            jqGridJson listado = jsonSerializer.Deserialize<jqGridJson>(ret);
+            Assert.IsTrue(listado.records > 0);
+
+        }
+
+
+
+
+
+        [TestMethod]
+        public void porcentajeiva_en_el_detalle_46968()
+        {
+
+            string txtBuscar = "";
+            string txtTarifaGastoAdministrativo = "";
+
+            bool chkPagaCorredor = false;
+            //   numeroOrdenCompra As String, ByRef PrimeraIdFacturaGenerada As Object, 
+
+
+            int optFacturarA = 4;
+            string agruparArticulosPor = "Destino";
+
+
+            string txtCorredor = "";
+            long idClienteAfacturarle = 30446; // la celestina s.a.
+            int idClienteObservaciones = -1;
+            bool SeEstaSeparandoPorCorredor = true;
+            int PuntoVenta = 1;
+
+            DataTable dtRenglonesAgregados = new DataTable();
+            //dtRenglonesAgregados.Rows.Add(dtRenglonesAgregados.NewRow());
+
+            var listEmbarques = new System.Collections.Generic.List<System.Data.DataRow>();
+            //listEmbarques.Add(dtRenglonesAgregados.NewRow());
+
+
+
+            var lote = new System.Collections.Generic.List<Pronto.ERP.BO.CartaDePorte>();
+            string ms = "";
+
+
+
+            var scEF = Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC));
+            DemoProntoEntities db = new DemoProntoEntities(scEF);
+
+
+
+
+            //////////////////////////////////////
+            //////////////////////////////////////
+            //////////////////////////////////////
+            //////////////////////////////////////
+            // empresa (para que sea agente de percepcion)
+            db.Parametros.First().PercepcionIIBB = "SI";
+
+            // punto de venta para que perciba ingresos brutos
+            //Dim numeropuntoVenta = PuntoVentaWilliams.NumeroPuntoVentaSegunSucursalWilliams(sucursalWilliams, SC)
+            //Dim IdPuntoVenta As Integer = EntidadManager.TablaSelectId(SC, _
+            //                                "PuntosVenta", _
+            //                                "PuntoVenta=" & numeropuntoVenta & " AND Letra='" & _
+            //                                mLetra & "' AND IdTipoComprobante=" & EntidadManager.IdTipoComprobante.Factura)
+            //Dim IdObra As Integer = PuntoVentaWilliams.ObraSegunSucursalWilliams(sucursalWilliams, SC)
+            var pv = db.PuntosVentas.Where(x => x.PuntoVenta == 10).FirstOrDefault();
+            pv.AgentePercepcionIIBB = "SI";
+
+
+            // cliente
+            var cliente = db.Clientes.Find(idClienteAfacturarle);
+            // no poner. la tabla IBCondiciones ya esta relacionada a un IdProvincia. //  cliente.IdProvincia = 3; //capital
+            cliente.IBCondicion = 5; //Edu, a parte de Convenio Multilateral, Jurisdiccion Local y No Alcanzado, hay que agregar No Inscripto.    usar 2 o 3    "Exento"  "Inscripto Convenio Multilateral "    "Inscripto Jurisdicción Local "  "No Alcanzado"
+            cliente.IdIBCondicionPorDefecto = 10;  //en williams,  6 es  "Santa Fe Convenio Multilateral 0.7%" <-- las condiciones estan relacionadas a una provincia
+
+
+            //ibcondicion
+            //en la tabla IBCondiciones, q diferencia hay entre Alicuota, AlicuotaPercepcion y AlicuotaPercepcionConvenio?
+            // -la primera es de retencion.
+            var ibcondicion = db.IBCondiciones.Find(5);
+            ibcondicion.AlicuotaPercepcion = 7;
+            ibcondicion.AlicuotaPercepcionConvenio = 8;
+            ibcondicion.ImporteTopeMinimoPercepcion = 10;
+
+
+            db.SaveChanges();
+            //////////////////////////////////////
+            //////////////////////////////////////
+            //////////////////////////////////////
+            //////////////////////////////////////
+
+
+
+
+
+            for (int n = 1372900; n < 1372910; n++)
+            {
+                var cp = (from i in db.CartasDePortes where i.IdCartaDePorte == n select i).Single();
+                cp.TarifaFacturada = Convert.ToDecimal(2.77);
+                cp.IdFacturaImputada = 0;
+                db.SaveChanges();
+
+                var c = CartaDePorteManager.GetItem(SC, n);
+                // CartaDePorteManager.Save(SC, c, 2, "", false, ref ms);
+
+                lote.Add(c);
+            }
+
+
+            IEnumerable<LogicaFacturacion.grup> imputaciones = null;
+
+
+            int idFactura = LogicaFacturacion.CreaFacturaCOMpronto(lote, idClienteAfacturarle, PuntoVenta,
+                                                 dtRenglonesAgregados, SC, null, optFacturarA,
+                                              agruparArticulosPor, txtBuscar, txtTarifaGastoAdministrativo, SeEstaSeparandoPorCorredor,
+                                                txtCorredor, chkPagaCorredor, listEmbarques, ref imputaciones, idClienteObservaciones);
+
+            var f = db.Facturas.Find(idFactura);
+
+            //Assert.AreEqual(true, f.ImporteTotal<100);
+            Assert.AreEqual(0, f.RetencionIBrutos1);
+
+
+            // parece que en el codigo de edu, solo se revisa el ImporteTopeMinimo cuando no es codigoprovincia 901 o 902 (capital o buenos aires)
+
+        }
+
+
+
+
+
+
+        [TestMethod]
+        public void informe_resumen_de_facturacion_46943()
         {
 
             // En el periodo anterior sigue habiendo bnastante diferencia
@@ -916,17 +1339,17 @@ namespace ProntoMVC.Tests
             yourParams2[14] = new ReportParameter("idArticulo", " -1");
             yourParams2[15] = new ReportParameter("idProcedencia", " -1");
             yourParams2[16] = new ReportParameter("idDestino", " -1");
-            yourParams2[17] = new ReportParameter("AplicarANDuORalFiltro",CartaDePorteManager.FiltroANDOR.FiltroOR.ToString());
+            yourParams2[17] = new ReportParameter("AplicarANDuORalFiltro", CartaDePorteManager.FiltroANDOR.FiltroOR.ToString());
             yourParams2[18] = new ReportParameter("ModoExportacion", "true");
-            yourParams2[19] = new ReportParameter("puntoventa",  "-1" );
+            yourParams2[19] = new ReportParameter("puntoventa", "-1");
 
 
             var s = CartaDePorteManager.RebindReportViewer_ServidorExcel(ref ReporteLocal,
                       "Williams - Resumen de Totales Generales (Facturacion).rdl", yourParams2, ref output2, false);
 
 
-            
-            
+
+
 
 
             System.Diagnostics.Process.Start(output2);
@@ -984,13 +1407,13 @@ Error in: http://iismvc/Williams/ProntoWeb/WebServiceCartas.asmx/GrabarSituacion
             // url: "WebServiceCartas.asmx/CartaPorteBatchUpdate",
 
             //string ms = CartaDePorteManager.GrabarSituacion_DLL(2638292, 2, "RECHAZADO EN PLAYA EXTERNA", SC);
-            List<long> ids=new List<long>();
+            List<long> ids = new List<long>();
             for (int n = 2633332; n < 2633400; n++) ids.Add(n);
             string ms = CartaDePorteManager.GrabarSituaciones_DLL(ids.ToArray(), 2, "RECHAZADO EN PLAYA EXTERNA", SC);
 
 
 
-           // string ms = CartaDePorteManager.GrabarSituaciones_DLL(new long[] { 2633332, 2325493, 2636664 }, 2, "RECHAZADO EN PLAYA EXTERNA", SC);
+            // string ms = CartaDePorteManager.GrabarSituaciones_DLL(new long[] { 2633332, 2325493, 2636664 }, 2, "RECHAZADO EN PLAYA EXTERNA", SC);
 
         }
 
@@ -1918,44 +2341,6 @@ Error in: http://iismvc/Williams/ProntoWeb/WebServiceCartas.asmx/GrabarSituacion
 
 
 
-
-
-        [TestMethod]
-        public void consultas_conversaciones_chats_bld_43063()
-        {
-
-            /*
-                        verMisChats
-
-                    AgregarChat(idusuario, idreclamo, comentario)
-
-                    quienes escuchan el chat? quiero decir, a quien les llega el mail / notificacion
-
-                    SubirArchivo
-
-                    ColaDeMails o SignalR
-                    */
-
-
-
-
-            string filtro = ""; // "{\"groupOp\":\"OR\",\"rules\":[{\"field\":\"DestinoDesc\",\"op\":\"eq\",\"data\":\"MOL. CAÑUELAS - ZARATE\"},{\"field\":\"DestinoDesc\",\"op\":\"eq\",\"data\":\"TERMINAL 6\"}]}";
-            //string output = @"C:\Users\Mariano\Downloads\Informe" + DateTime.Now.ToString("ddMMMyyyy_HHmmss") + ".xls";
-
-            var scEF = ProntoMVC.Data.Models.Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC));
-            DemoProntoEntities db = new DemoProntoEntities(scEF);
-
-            ReportViewer ReporteLocal = new Microsoft.Reporting.WebForms.ReportViewer();
-
-
-            var m = db.ReclamoComentarios.FirstOrDefault().IdReclamo;
-
-
-
-            var s = new ServicioCartaPorte.servi();
-            var d = s.Reclamos_DynamicGridData("Fecha", "desc", 1, 999999, true, filtro, "", "", 0, 0, SC, "", "");
-
-        }
 
 
 

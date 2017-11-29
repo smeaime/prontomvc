@@ -135,11 +135,13 @@ document.cookie = 'killme' + escape('nothing')
                                     <asp:TextBox ID="Password" runat="server" TextMode="Password" Font-Size="20"
                                         Style="padding: 5px;" Width="285"></asp:TextBox><br />
                                     <br />
-                                    <asp:Button ID="LoginButton" runat="server" CommandName="Login" Text=" Entrar " Height="80"
+                                    <asp:Button ID="LoginButton" runat="server" CommandName="Login" Text=" Entrar " Height="60"
                                         Font-Size="20" Font-Bold="true" Width="300" CssClass="but" ValidationGroup="LoginUserValidationGroup"
                                         Font-Names="'Lucida Grande', Tahoma" Style="margin-left: 0px; background-color: #4F6AA3; color: White; border: 1px solid #2F5BB7;" />
                                     <loginbuttonstyle cssclass="but" />
-                                    <br />
+                                    <br /><br />
+                                        <asp:Label ID="FailureText" runat="server" EnableViewState="false" Width="230" Font-Bold="true"
+                                            ForeColor="#DD4B39" BackColor="transparent" CssClass="Alerta" BorderWidth="0" />
                                     <br />
                                     <asp:CheckBox ID="RememberMe" runat="server" TextAlign="Left"
                                         Style="margin-left: 0px; vertical-align: middle" Font-Size="15" />
@@ -149,9 +151,6 @@ document.cookie = 'killme' + escape('nothing')
                                     <br />
                                     <asp:LinkButton runat="server" Style="margin-top: 10px; font-size: 18px" PostBackUrl="OlvidoPassword.aspx">¿Olvidaste tu contraseña?</asp:LinkButton>
                                     <div style="text-align: left;">
-                                        <br />
-                                        <asp:Label ID="FailureText" runat="server" EnableViewState="false" Width="230" Font-Bold="true"
-                                            ForeColor="#DD4B39" BackColor="transparent" CssClass="Alerta" BorderWidth="0" />
                                     </div>
                                 </LayoutTemplate>
                                 <FailureTextStyle ForeColor="White" BackColor="" Wrap="true" Width="230"></FailureTextStyle>
