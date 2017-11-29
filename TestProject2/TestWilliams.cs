@@ -865,6 +865,41 @@ namespace ProntoMVC.Tests
 
 
 
+        [TestMethod]
+        public void plantillas_por_punto_de_venta_47029()
+        {
+            
+            var scEF = ProntoMVC.Data.Models.Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC));
+            DemoProntoEntities db = new DemoProntoEntities(scEF);
+
+            var f = db.Facturas.Find(80500);
+            f.CAE = "654646";
+            db.SaveChanges();
+
+            var f2 = db.Facturas.Find(87700);
+            f2.CAE = "654646";
+            db.SaveChanges();
+
+
+            var output2 = CartaDePorteManager.ImprimirFacturaElectronica(80500, false, SC, DirApp);
+
+
+            System.Diagnostics.Process.Start(output2);
+
+
+            var output3 = CartaDePorteManager.ImprimirFacturaElectronica(87700, false, SC, DirApp);
+
+
+            System.Diagnostics.Process.Start(output3);
+
+        }
+
+
+        
+
+
+
+
 
 
         [TestMethod]
@@ -952,7 +987,7 @@ namespace ProntoMVC.Tests
 
             int registrosf = 0;
 
-            int idcli = CartaDePorteManager.BuscarVendedorPorCUIT("30 -71544287-2", SC, "");
+            int idcli = CartaDePorteManager.BuscarVendedorPorCUIT("30-71544287-2", SC, "");
 
 
             var output = SincronismosWilliamsManager.GenerarSincro("Chiambretto", ref sErrores, SC, "dominio", ref sTitulo
