@@ -528,83 +528,65 @@ $(function () {
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     $("#ListaDrag").jqGrid({
-        url: ROOT + 'OrdenCompra/TT_DynamicGridData',
-        //postData: {
-        //    'FechaInicial': function () { return $("#FechaInicial").val(); },
-        //    'FechaFinal': function () { return $("#FechaFinal").val(); }, 'PendienteFactura': "SI"
-        //},
+        url: ROOT + 'Pedido/Pedidos_Pendientes',
+        postData: { 'IdProveedor': function () { return $("#IdProveedor").val(); } },
         datatype: 'json',
         mtype: 'POST',
-        colNames: ['', '', 'IdOrdenCompra', 'IdCliente', 'IdObra', 'IdCondicionVenta', 'IdListaPrecios', 'IdMoneda', 'Nro. OC cliente', 'Numero OC', 'Fecha', 'Producido', 'Cumplido', 'Anulada',
-                   'Selecc.', 'Obra', 'Codigo cliente', 'Cliente', 'CUIT', 'Aprobo', 'Remitos', 'Facturas', 'Condicion de venta', 'Items', 'Facturar a', 'Fecha anulacion', 'Usuario anulo', 'Fecha ingreso',
-                   'Usuario ingreso', 'Fecha modificacion', 'Usuario modifico', 'Grupo fact.', 'Tipo OC', 'Mayor entrega', 'Lista de precio', '% Bonif.', 'Importe total', 'Mon.', 'Observaciones'],
+        cellEdit: false,
+        colNames: ['IdPedido', 'IdProveedor', 'Numero', 'Sub', 'Fecha', 'Salida', 'Cumplido', 'RMs', 'Obras', 'Cod. prov.', 'Proveedor', 'Subtotal', 'Bonif.', 'IVA', 'Otros',
+                   'Imp. Int.', 'Total pedido', 'Mon.', 'Comprador', 'Aprobo', 'Items', 'Comparativa', 'Tipo compra', 'Observaciones', 'Cond. compra', 'Detalle cond. compra', 'Exterior',
+                   'Nro. licitacion', 'Impresa', 'Anuló', 'Fecha anulacion', 'Motivo anulacion', 'Equipos destino', 'Circ. firma completo', 'Condicion iva', 'Fecha envio', 'Detalles generales'
+        ],
         colModel: [
-                    { name: 'ver', index: 'ver', hidden: true, width: 50 },
-                    { name: 'Emitir', index: 'Emitir', hidden: true, width: 50 },
-                    { name: 'IdOrdenCompra', index: 'IdOrdenCompra', width: 80, sortable: false, editable: false, search: false, hidden: true },
-                    { name: 'IdCliente', index: 'IdCliente', width: 80, sortable: false, editable: false, search: false, hidden: true },
-                    { name: 'IdObra', index: 'IdObra', width: 80, sortable: false, editable: false, search: false, hidden: true },
-                    { name: 'IdCondicionVenta', index: 'IdCondicionVenta', width: 80, sortable: false, editable: false, search: false, hidden: true },
-                    { name: 'IdListaPrecios', index: 'IdListaPrecios', width: 80, sortable: false, editable: false, search: false, hidden: true },
-                    { name: 'IdMoneda', index: 'IdMoneda', width: 80, sortable: false, editable: false, search: false, hidden: true },
-                    { name: 'NumeroOrdenCompraCliente', index: 'NumeroOrdenCompraCliente', align: 'center', width: 80, editable: false, search: true, hidden: false, searchoptions: { sopt: ['cn', 'eq'] } },
+                    { name: 'IdPedido', index: 'IdPedido', align: 'left', width: 100, editable: false, hidden: true },
+                    { name: 'IdProveedor', index: 'IdProveedor', align: 'left', width: 100, editable: false, hidden: true },
+                    { name: 'NumeroPedido', index: 'NumeroPedido', align: 'right', width: 70, frozen: true, editable: false, search: true, searchoptions: { sopt: ['eq'] } },
+                    { name: 'SubNumero', index: 'SubNumero', align: 'right', width: 30, frozen: true, editable: false, search: true, searchoptions: { sopt: ['eq'] } },
                     {
-                        name: 'NumeroOrdenCompra', index: 'NumeroOrdenCompra', align: 'center',
-                        //formatter: 'integer',
-                        //sorttype: 'integer',
-                        width: 80, editable: false, search: true, hidden: false, searchoptions: { sopt: ['cn', 'eq'] }
+                        name: 'FechaPedido', index: 'FechaPedido', width: 100, align: 'center', sorttype: 'date', hidden: false, editable: false, formatoptions: { newformat: 'dd/mm/yy' }, datefmt: 'dd/mm/yy',
+                        search: true, searchrules: { date: true }, searchoptions: { sopt: ['ge', 'le', 'eq'] }
                     },
                     {
-                        name: 'FechaOrdenCompra', index: 'FechaOrdenCompra', width: 80, align: 'center',
-                        sorttype: 'date', hidden: false, editable: false,
-                        formatoptions: { newformat: 'dd/mm/yy' }, datefmt: 'dd/mm/yy',
-                        search: true,
-                        searchrules: {
-                            date: true
-                        },
-                        searchoptions: { // http://stackoverflow.com/questions/14632735/jqgrid-searching-dates
-                            sopt: ['ge', 'le', 'eq'],
-                            dataInit: function (elem) {
-                                $(elem).datepicker({
-                                    dateFormat: 'dd/mm/yy',
-                                    changeYear: true,
-                                    changeMonth: true,
-                                    showButtonPanel: true,
-                                    onSelect: function () {
-                                        $(this).keydown();
-                                    }
-                                });
-                            }
-                        }
+                        name: 'FechaSalida', index: 'FechaSalida', width: 100, align: 'center', sorttype: 'date', hidden: false, editable: false, formatoptions: { newformat: 'dd/mm/yy' }, datefmt: 'dd/mm/yy',
+                        search: true, searchrules: { date: true }, searchoptions: { sopt: ['ge', 'le', 'eq'] }
                     },
-                    { name: 'Producido', index: 'Producido', align: 'center', width: 70, editable: false, search: true, hidden: false, searchoptions: { sopt: ['cn', 'eq'] } },
-                    { name: 'Cumplido', index: 'Cumplido', align: 'center', width: 70, editable: false, search: true, hidden: false, searchoptions: { sopt: ['cn', 'eq'] } },
-                    { name: 'Anulada', index: 'Anulada', align: 'center', width: 50, editable: false, search: true, hidden: false, searchoptions: { sopt: ['cn', 'eq'] } },
-                    { name: 'SeleccionadaParaFacturacion', index: 'SeleccionadaParaFacturacion', align: 'center', width: 70, editable: false, search: true, hidden: false, searchoptions: { sopt: ['cn', 'eq'] } },
-                    { name: 'Obra.Descripcion', index: 'Obra.Descripcion', align: 'center', width: 120, editable: false, search: true, hidden: false, searchoptions: { sopt: ['cn', 'eq'] } },
-                    { name: 'Cliente.Codigo', index: 'Cliente.Codigo', align: 'center', width: 60, editable: false, search: true, hidden: false, searchoptions: { sopt: ['cn', 'eq'] } },
-                    { name: 'Cliente.RazonSocial', index: 'Cliente.RazonSocial', align: 'left', width: 400, editable: false, search: true, searchoptions: { sopt: ['cn', 'eq'] } },
-                    { name: 'Cliente.Cuit', index: 'Cliente.Cuit', align: 'center', width: 120, editable: false, search: true, hidden: false, searchoptions: { sopt: ['cn', 'eq'] } },
-                    { name: 'Aprobo', index: 'Aprobo', align: 'left', width: 150, editable: false, hidden: false },
-                    { name: 'Remitos', index: 'Remitos', align: 'left', width: 150, editable: false, search: true, searchoptions: { sopt: ['cn', 'eq'] } },
-                    { name: 'Facturas', index: 'Facturas', align: 'left', width: 150, editable: false, search: true, searchoptions: { sopt: ['cn', 'eq'] } },
-                    { name: 'Condiciones_Compra.Descripcion', index: 'Condiciones_Compra.Descripcion', align: 'left', width: 170, editable: false, search: true, searchoptions: { sopt: ['cn', 'eq'] } },
-                    { name: 'Items', index: 'Items', align: 'center', width: 50, editable: false, search: true, hidden: false, searchoptions: { sopt: ['cn', 'eq'] } },
-                    { name: 'FacturarA', index: 'FacturarA', align: 'left', width: 170, editable: false, search: true, searchoptions: { sopt: ['cn', 'eq'] } },
-                    { name: 'FechaAnulacion', index: 'FechaAnulacion', width: 80, align: 'center', sorttype: 'date', hidden: false, editable: false, formatoptions: { newformat: 'dd/mm/yy' }, datefmt: 'dd/mm/yy', search: false },
-                    { name: 'UsuarioAnulo', index: 'Empleado.Nombre', align: 'left', width: 150, editable: false, hidden: false },
-                    { name: 'FechaIngreso', index: 'FechaIngreso', width: 80, align: 'center', sorttype: 'date', hidden: false, editable: false, formatoptions: { newformat: 'dd/mm/yy' }, datefmt: 'dd/mm/yy', search: false },
-                    { name: 'UsuarioIngreso', index: 'Empleado2.Nombre', align: 'left', width: 150, editable: false, hidden: false },
-                    { name: 'FechaModifico', index: 'FechaModifico', width: 80, align: 'center', sorttype: 'date', hidden: false, editable: false, formatoptions: { newformat: 'dd/mm/yy' }, datefmt: 'dd/mm/yy', search: false },
-                    { name: 'UsuarioModifico', index: 'Empleado1.Nombre', align: 'left', width: 150, editable: false, hidden: false },
-                    { name: 'GrupoFacturacion', index: 'GrupoFacturacion', align: 'center', width: 70, editable: false, search: true, hidden: false, searchoptions: { sopt: ['cn', 'eq'] } },
-                    { name: 'TipoOC', index: 'TipoOC', align: 'center', width: 70, editable: false, search: true, hidden: false, searchoptions: { sopt: ['cn', 'eq'] } },
-                    { name: 'MayorFechaEntrega', index: 'MayorFechaEntrega', width: 80, align: 'center', sorttype: 'date', hidden: false, editable: false, formatoptions: { newformat: 'dd/mm/yy' }, datefmt: 'dd/mm/yy', search: false },
-                    { name: 'ListasPrecio.Descripcion', index: 'ListaDePrecio.Descripcion', align: 'left', width: 120, editable: false, search: true, searchoptions: { sopt: ['cn', 'eq'] } },
-                    { name: 'PorcentajeBonificacion', index: 'PorcentajeBonificacion', align: 'right', width: 50, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
-                    { name: 'ImporteTotal', index: 'ImporteTotal', align: 'right', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
-                    { name: 'Moneda', index: 'Moneda.Abreviatura', align: 'center', width: 40, editable: false, search: true, hidden: false, searchoptions: { sopt: ['cn', 'eq'] } },
-                    { name: 'Observaciones', index: 'Observaciones', align: 'left', width: 500, editable: false, hidden: false, search: true, searchoptions: { sopt: ['cn'] } }
+                    { name: 'Cumplido', index: 'Cumplido', align: 'left', width: 40, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                    { name: 'Requerimientos', index: 'Requerimientos', align: 'left', width: 200, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                    { name: 'Obras', index: 'Obras', align: 'left', width: 200, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                    { name: 'ProveedoresCodigo', index: 'ProveedoresCodigo', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                    { name: 'ProveedoresNombre', index: 'ProveedoresNombre', align: 'left', width: 300, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                    { name: 'TotalGravado', index: 'TotalGravado', align: 'right', width: 100, editable: false, search: true, searchoptions: { sopt: ['eq'] } },
+                    { name: 'ImporteBonificacion', index: 'ImporteBonificacion', align: 'right', width: 70, editable: false, search: true, searchoptions: { sopt: ['eq'] } },
+                    { name: 'ImporteIva1', index: 'ImporteIva1', align: 'right', width: 100, editable: false, search: true, searchoptions: { sopt: ['eq'] } },
+                    { name: 'OtrosConceptos', index: 'OtrosConceptos', align: 'right', width: 100, editable: false, search: true, searchoptions: { sopt: ['eq'] } },
+                    { name: 'ImpuestosInternos', index: 'ImpuestosInternos', align: 'right', width: 70, editable: false, search: true, searchoptions: { sopt: ['eq'] } },
+                    { name: 'ImporteTotal', index: 'ImporteTotal', align: 'right', width: 100, editable: false, search: true, searchoptions: { sopt: ['eq'] } },
+                    { name: 'Moneda', index: 'Moneda', align: 'left', width: 50, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                    { name: 'Comprador', index: 'Comprador', align: 'left', width: 150, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                    { name: 'LiberadoPor', index: 'LiberadoPor', align: 'left', width: 150, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                    { name: 'CantidadItems', index: 'CantidadItems', align: 'right', width: 50, editable: false, search: true, searchoptions: { sopt: ['eq'] } },
+                    { name: 'NumeroComparativa', index: 'NumeroComparativa', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['eq'] } },
+                    { name: 'TiposCompra', index: 'TiposCompra', align: 'left', width: 200, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                    { name: 'Observaciones', index: 'Observaciones', align: 'left', width: 400, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                    { name: 'CondicionCompra', index: 'CondicionCompra', align: 'left', width: 250, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                    { name: 'DetalleCondicionCompra', index: 'DetalleCondicionCompra', align: 'left', width: 200, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                    { name: 'PedidoExterior', index: 'PedidoExterior', align: 'left', width: 50, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                    { name: 'NumeroLicitacion', index: 'NumeroLicitacion', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['eq'] } },
+                    { name: 'Impresa', index: 'Impresa', align: 'left', width: 60, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                    { name: 'UsuarioAnulo', index: 'UsuarioAnulo', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                    {
+                        name: 'FechaAnulacion', index: 'FechaAnulacion', width: 100, align: 'center', sorttype: 'date', hidden: false, editable: false, formatoptions: { newformat: 'dd/mm/yy' }, datefmt: 'dd/mm/yy',
+                        search: true, searchrules: { date: true }, searchoptions: { sopt: ['ge', 'le', 'eq'] }
+                    },
+                    { name: 'MotivoAnulacion', index: 'MotivoAnulacion', align: 'left', width: 200, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                    { name: 'EquipoDestino', index: 'EquipoDestino', align: 'left', width: 250, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                    { name: 'CircuitoFirmasCompleto', index: 'CircuitoFirmasCompleto', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                    { name: 'DescripcionIva', index: 'DescripcionIva', align: 'left', width: 100, hidden: true, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                    {
+                        name: 'FechaEnvioProveedor', index: 'FechaEnvioProveedor', width: 100, align: 'center', sorttype: 'date', hidden: false, editable: false, formatoptions: { newformat: 'dd/mm/yy' }, datefmt: 'dd/mm/yy',
+                        search: true, searchrules: { date: true }, searchoptions: { sopt: ['ge', 'le', 'eq'] }
+                    },
+                    { name: 'Detalle', index: 'Detalle', align: 'left', width: 200, editable: false, search: true, searchoptions: { sopt: ['cn'] } }
         ],
         ondblClickRow: function (id) {
             Copiar1(id, "Dbl");
@@ -617,49 +599,46 @@ $(function () {
         pager: $('#ListaDragPager'),
         rowNum: 15,
         rowList: [10, 20, 50],
-        sortname: 'FechaOrdenCompra',//,NumeroOrdenCompra',
-        sortorder: "desc",
+        sortname: 'NumeroPedido', 
+        sortorder: 'desc',
         viewrecords: true,
-        emptyrecords: 'No hay registros para mostrar', //,
-
+        emptyrecords: 'No hay registros para mostrar', 
         width: 'auto', // 'auto',
         autowidth: true,
         shrinkToFit: false,
-
         height: $(window).height() - ALTOLISTADO, // '100%'
         altRows: false,
         footerrow: false, //true,
         userDataOnFooter: true,
         gridview: true,
         multiboxonly: true,
-        multipleSearch: true
+        multipleSearch: true,
+        multiselect: true,
     })
-
-    //    jQuery("#ListaDrag").jqGrid('navGrid', '#ListaDragPager', { refresh: true, add: false, edit: false, del: false }, {}, {}, {}, { sopt: ["cn"], width: 700, closeOnEscape: true, closeAfterSearch: true });
-    jQuery("#ListaDrag").jqGrid('navGrid', '#ListaDragPager',
-            { csv: true, refresh: true, add: false, edit: false, del: false }, {}, {}, {}, { width: 700, closeOnEscape: true, closeAfterSearch: true, multipleSearch: true, overlay: false });
-    jQuery("#ListaDrag").jqGrid('navButtonAdd', '#ListaPager', {
-        caption: "",
-        buttonicon: "ui-icon-calculator",
-        title: "Choose columns",
-        onClickButton: function () {
-            $(this).jqGrid('columnChooser',
-                { width: 550, msel_opts: { dividerLocation: 0.5 }, modal: true });
-            $("#colchooser_" + $.jgrid.jqID(this.id) + ' div.available>div.actions')
-                .prepend('<label style="float:left;position:relative;margin-left:0.6em;top:0.6em">Search:</label>');
-        }
-    });
+    //jQuery("#ListaDrag").jqGrid('navGrid', '#ListaDragPager',
+    //        { csv: true, refresh: true, add: false, edit: false, del: false }, {}, {}, {}, { width: 700, closeOnEscape: true, closeAfterSearch: true, multipleSearch: true, overlay: false });
+    //jQuery("#ListaDrag").jqGrid('navButtonAdd', '#ListaPager', {
+    //    caption: "",
+    //    buttonicon: "ui-icon-calculator",
+    //    title: "Choose columns",
+    //    onClickButton: function () {
+    //        $(this).jqGrid('columnChooser',
+    //            { width: 550, msel_opts: { dividerLocation: 0.5 }, modal: true });
+    //        $("#colchooser_" + $.jgrid.jqID(this.id) + ' div.available>div.actions')
+    //            .prepend('<label style="float:left;position:relative;margin-left:0.6em;top:0.6em">Search:</label>');
+    //    }
+    //});
     jQuery("#ListaDrag").filterToolbar({
         stringResult: true, searchOnEnter: true,
         defaultSearch: 'cn',
         enableClear: false
-    }); // si queres sacar el enableClear, definilo en las searchoptions de la columna específica http://www.trirand.com/blog/?page_id=393/help/clearing-the-clear-icon-in-a-filtertoolbar/
-    jQuery("#ListaDrag").jqGrid('navButtonAdd', '#ListaPager',
-        {
-            caption: "Filter", title: "Toggle Searching Toolbar",
-            buttonicon: 'ui-icon-pin-s',
-            onClickButton: function () { myGrid[0].toggleToolbar(); }
-        });
+    }); 
+    //jQuery("#ListaDrag").jqGrid('navButtonAdd', '#ListaPager',
+    //    {
+    //        caption: "Filter", title: "Toggle Searching Toolbar",
+    //        buttonicon: 'ui-icon-pin-s',
+    //        onClickButton: function () { myGrid[0].toggleToolbar(); }
+    //    });
 
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -875,9 +854,9 @@ $(function () {
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     //DEFINICION DE PANEL ESTE PARA LISTAS DRAG DROP
-    $('a#a_panel_este_tab1').text('Ordenes de compra');
-    $('a#a_panel_este_tab2').text('Remitos');
-    $('a#a_panel_este_tab3').text('Articulos');
+    $('a#a_panel_este_tab1').text('Pedidos');
+    $('a#a_panel_este_tab2').text('Vacante 1');
+    $('a#a_panel_este_tab3').text('Vacante 2');
 
     ConectarGrillas1();
     ConectarGrillas2();
@@ -939,79 +918,45 @@ $(function () {
     }
 
     function Copiar1(idsource, Origen) {
-        var acceptId = idsource, IdOrdenCompra = 0, mPrimerItem = true, IdObra = 0, Letra = "", Precio = 0, PorcentajeBonificacion = 0, Cantidad = 0, PendienteFacturar = 0, PorcentajeIva = 0;
-        var PrecioUnitario = 0, IdCodigoIva = 0, mAux, $gridOrigen = $("#ListaDrag"), $gridDestino = $("#Lista");
+        var acceptId = idsource, IdPedido = 0, IdProveedor = 0;
+        var mPrimerItem = true, $gridOrigen = $("#ListaDrag"), $gridDestino = $("#Lista");
 
         var getdata = $gridOrigen.jqGrid('getRowData', acceptId);
         var tmpdata = {}, dataIds, data2, Id, Id2, i, date, displayDate;
 
         try {
-            IdOrdenCompra = getdata['IdOrdenCompra'];
-            IdObra = getdata['IdObra'];
+            IdPedido = getdata['IdPedido'];
 
-            $("#IdCliente").val(getdata['IdCliente']);
-            $("#IdObra").val(getdata['IdObra']);
-            $("#IdCondicionVenta").val(getdata['IdCondicionVenta']);
-            $("#IdListaPrecios").val(getdata['IdListaPrecios']);
-            $("#IdMoneda").val(getdata['IdMoneda']);
-            //$("#Cliente").val(getdata['ClienteNombre']);
-            $("#Observaciones").val(getdata['Observaciones']);
-            $("#PorcentajeBonificacion").val(getdata['PorcentajeBonificacion']);
+            $("#IdProveedor").val(getdata['IdProveedor']);
+            $("#ProveedorCodigo").val(getdata['ProveedoresCodigo']);
+            $("#Proveedor").val(getdata['ProveedoresNombre']);
 
             $.ajax({
                 type: "GET",
                 contentType: "application/json; charset=utf-8",
-                url: ROOT + 'OrdenCompra/DetOrdenesCompraSinFormato/',
-                data: { IdOrdenCompra: IdOrdenCompra },
+                url: ROOT + 'Pedido/DetPedidosParaComprobanteProveedor/',
+                data: { IdPedido: IdPedido },
                 dataType: "Json",
                 success: function (data) {
                     var longitud = data.length;
                     for (var i = 0; i < data.length; i++) {
                         Id2 = ($gridDestino.jqGrid('getGridParam', 'records') + 1) * -1;
-                        if (data[i].PendienteFacturar > 0) {
-                            IdCodigoIva = data[i].IdCodigoIva;
-                            Letra = "B";
-                            if (IdCodigoIva == 1) { Letra = "A" }
-                            if (IdCodigoIva == 3) { Letra = "E" }
-                            if (IdCodigoIva == 9) { Letra = "A" }
-                            Precio = data[i].Precio;
-                            PorcentajeBonificacion = data[i].PorcentajeBonificacion;
-                            Cantidad = data[i].Cantidad;
-                            PendienteFacturar = data[i].PendienteFacturar;
-                            PorcentajeIva = data[i].PorcentajeIva;
 
-                            tmpdata['IdDetalleFactura'] = Id2;
+                        if (data[i].Importe != 0) {
+                            tmpdata['IdDetalleComprobanteProveedor'] = Id2;
+                            tmpdata['IdDetallePedido'] = data[i].IdDetallePedido;
                             tmpdata['IdArticulo'] = data[i].IdArticulo;
-                            tmpdata['IdUnidad'] = data[i].IdUnidad;
-                            tmpdata['IdColor'] = data[i].IdColor;
-                            tmpdata['IdObra'] = data[i].IdObra;
-                            tmpdata['Obra'] = data[i].Obra;
-                            tmpdata['OrigenDescripcion'] = data[i].OrigenDescripcion;
-                            tmpdata['TipoCancelacion'] = data[i].TipoCancelacion;
-                            tmpdata['IdDetalleOrdenCompra'] = data[i].IdDetalleOrdenCompra;
-                            tmpdata['Codigo'] = data[i].Codigo;
-                            tmpdata['Articulo'] = data[i].Articulo;
-                            if (data[i].TipoCancelacion == 1) {
-                                tmpdata['Cantidad'] = PendienteFacturar;
-                                tmpdata['PorcentajeCertificacion'] = "";
-                            } else {
-                                tmpdata['Cantidad'] = Cantidad;
-                                tmpdata['PorcentajeCertificacion'] = PendienteFacturar;
-                            }
-                            tmpdata['Unidad'] = data[i].Unidad;
-                            tmpdata['TiposDeDescripcion'] = data[i].TiposDeDescripcion;
-                            tmpdata['Observaciones'] = data[i].Observaciones;
-                            tmpdata['OrdenCompra'] = data[i].OrdenCompraNumero;
-                            tmpdata['Bonificacion'] = PorcentajeBonificacion;
-                            if (Letra == "B" && IdCodigoIva != 8) {
-                                PrecioUnitario = Precio + (Precio * PorcentajeIva / 100);
-                            } else {
-                                PrecioUnitario = Precio;
-                            }
-                            tmpdata['PrecioUnitario'] = PrecioUnitario;
+                            tmpdata['IdCuenta'] = data[i].IdCuentaContable;
+                            tmpdata['IdRubroFinanciero'] = data[i].IdRubroFinanciero;
+                            tmpdata['CodigoCuenta'] = data[i].CuentaCodigo;
+                            tmpdata['CuentaContable'] = data[i].CuentaDescripcion;
+                            tmpdata['CodigoArticulo'] = data[i].ArticuloCodigo;
+                            tmpdata['Articulo'] = data[i].ArticuloDescripcion;
+                            tmpdata['Cantidad'] = data[i].Cantidad;
+                            tmpdata['Importe'] = data[i].Importe;
+                            tmpdata['PorcentajeIva'] = data[i].AlicuotaIVA;
 
-                            var Importe = CalcularImporteItem(tmpdata['Cantidad'], PrecioUnitario, PorcentajeBonificacion) || 0;
-                            tmpdata['Importe'] = Importe[0];
+                            $("#IdObra").val(data[i].IdObra);
 
                             getdata = tmpdata;
 
