@@ -2848,14 +2848,14 @@
                         <asp:TextBox ID="TextBox5" runat="server" CssClass=" span8" Width="250px" Height="50px" TextMode="MultiLine" Enabled="true" Text="" />
 
 
-                        <asp:Button ID="Button6" runat="server" Text="enviar" class="btn btn-primary" style="height: 50px; width: 50px; vertical-align: top;" />
+                        <asp:Button ID="Button6" runat="server" Text="enviar" class="btn btn-primary" style="height: 50px; width: 50px; vertical-align: top;"  UseSubmitBehavior="false" />
                         
                         <span>
                             <ajaxToolkit:AsyncFileUpload ID="AsyncFileUpload3" runat="server" OnClientUploadComplete="ClientUploadComplete3"
                                 UploaderStyle="Modern" CssClass="AFU AFU3" FailedValidation="False" />
 
 
-                             <asp:Button ID="btnCerrarReclamo" runat="server" Text="cerrar consulta" class="btn btn-primary" style="height: ; width: ; vertical-align: top;" />
+                             <asp:Button ID="btnCerrarReclamo" runat="server" Text="cerrar consulta" class="btn btn-primary" style="height: ; width: ; vertical-align: top;"  UseSubmitBehavior="false" />
                        
 
                             
