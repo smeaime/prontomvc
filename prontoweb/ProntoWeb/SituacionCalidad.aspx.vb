@@ -232,7 +232,24 @@ Partial Class SituacionCalidad
         '////////////////////////////////////////////
         'If ProntoFuncionesUIWeb.EstaEsteRol("Cliente") Or
 
-        Return
+
+        If Not (Roles.IsUserInRole(Membership.GetUser().UserName, "WilliamsComercial") Or Roles.IsUserInRole(Membership.GetUser().UserName, "WilliamsAdmin") Or Roles.IsUserInRole(Membership.GetUser().UserName, "WilliamsFacturacion")) Then
+            'btnsituacion.Enabled = False
+            'btnLog.Enabled = False
+            'btnPanelInformeAjax.Enabled = False
+            'btnExportarGrillaAjax.Enabled = False
+
+
+            Response.Redirect("SituacionCalidadExterno.aspx")
+            Return
+
+            AjaxControlToolkit.ToolkitScriptManager.RegisterStartupScript(Me, Me.GetType(), "StartUpScript2", "deshabilitarEdicion();", True)
+
+
+        End If
+
+
+
 
         Dim p = BDLmasterPermisosManager.Fetch(ConexBDLmaster, Session(SESSIONPRONTO_UserId), BDLmasterPermisosManager.EntidadesPermisos.CDPs_ControlDiario)
 

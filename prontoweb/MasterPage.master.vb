@@ -303,7 +303,7 @@ Partial Class MasterPage
         Dim nodes As SiteMapNodeCollection = CType(siteMapView.Select(DataSourceSelectArguments.Empty), SiteMapNodeCollection)
 
 
-        NodosRequerimientos(nodes)
+        'NodosRequerimientos(nodes)
 
 
         '///////////////////////////////////////////////////////
@@ -364,7 +364,7 @@ Partial Class MasterPage
             End If
         End If
 
-        ResaltarNodoElegido()
+        'ResaltarNodoElegido()
 
 
     End Sub
