@@ -3437,7 +3437,7 @@ Partial Class FacturaABM
                 Dim ofac = FacturaManager.GetItem(HFSC.Value, i, True)
 
 
-                ssss
+
 
                 Dim p = DirApp() & "\Documentos\" & PlantillaWilliamsPorPuntoVenta(ofac.PuntoVenta)
 
