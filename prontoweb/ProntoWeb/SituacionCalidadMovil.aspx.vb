@@ -24,7 +24,7 @@ Imports Pronto.ERP.Bll.EntidadManager
 
 Imports System.Web.Services
 
-
+Imports Pronto.ERP.Bll.BDLmasterPermisosManager.EntidadesPermisos
 
 
 
@@ -129,6 +129,10 @@ Partial Class SituacionCalidadMovil
             BloqueosDeEdicion()
 
         End If
+
+
+        RebindAcordion(sender, e)
+
 
 
         'AjaxControlToolkit.ToolkitScriptManager.GetCurrent(Me.Page).RegisterPostBackControl(informe)
@@ -275,6 +279,8 @@ Partial Class SituacionCalidadMovil
         '////////////////////////////////////////////
         '////////////////////////////////////////////
         'If ProntoFuncionesUIWeb.EstaEsteRol("Cliente") Or
+
+        Return
 
         Dim p = BDLmasterPermisosManager.Fetch(ConexBDLmaster, Session(SESSIONPRONTO_UserId), BDLmasterPermisosManager.EntidadesPermisos.CDPs_ControlDiario)
 
@@ -684,6 +690,398 @@ Partial Class SituacionCalidadMovil
         salida.Text = q
 
     End Sub
+
+
+
+
+
+
+    '///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    '///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    '///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    'Acordion
+    '///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    '///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    '///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    '///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+    Sub RebindAcordion(ByVal sender As Object, ByVal e As System.EventArgs)
+
+
+        ConfiguracionDeLaEmpresa()
+
+
+
+        Dim siteMapView As SiteMapDataSourceView = CType(SiteMapDataSource.GetView(String.Empty), SiteMapDataSourceView)
+        Dim nodes As SiteMapNodeCollection = CType(siteMapView.Select(DataSourceSelectArguments.Empty), SiteMapNodeCollection)
+
+
+        'NodosRequerimientos(nodes)
+
+
+        '///////////////////////////////////////////////////////
+
+
+        'Dim Children As SiteMapNodeCollection
+        'Dim n As SiteMapNode
+        'Children = From n In SiteMap.CurrentNode.ChildNodes.Cast(Of SiteMapNode)() _
+        '                    Where n.Url <> "/Registration.aspx" _
+        '                    Select n
+
+
+        '///////////////////////////////////////////////////////
+
+
+        Accordion1.DataSource = nodes
+        Accordion1.DataBind()
+
+        'con SelectedIndex=-1 el acordion cierra solito los panes
+        'SelectedIndex=0 es el panel de arriba de todo
+        If Session(SESSIONPRONTO_SelectedIndexAnteriorDelAcordion) Is Nothing Then
+            Session(SESSIONPRONTO_SelectedIndexAnteriorDelAcordion) = -1
+        End If
+
+        If Session("SelectedPane") Is Nothing Then
+            'panel abierto por default del acordion 
+
+            If True Then
+                Session("SelectedPane") = 5
+            ElseIf BDLMasterEmpresasManager.EmpresaPropietariaDeLaBase(ConexBDLmaster) = "Williams" Then
+                Session("SelectedPane") = 5
+            Else
+                Session("SelectedPane") = 5 '-1
+            End If
+
+        End If
+
+        Accordion1.SelectedIndex = Session("SelectedPane")
+        If False Then
+            If Accordion1.SelectedIndex > -1 And SiteMap.CurrentNode IsNot Nothing Then
+                AccordionSiteMap_OpenCurrentPane(sender, e)         'http://forums.asp.net/p/1092148/1921906.aspx
+                Session(SESSIONPRONTO_SelectedIndexAnteriorDelAcordion) = Accordion1.SelectedIndex
+            ElseIf SiteMap.CurrentNode IsNot Nothing Then
+                AccordionSiteMap_OpenCurrentPane(sender, e)
+                'Session(SESSIONPRONTO_SelectedIndexAnteriorDelAcordion) = Accordion1.SelectedIndex
+            Else
+                If Session(SESSIONPRONTO_SelectedIndexAnteriorDelAcordion) > -1 Then
+                    'AccordionSiteMap_OpenCurrentPane(sender, e)
+                    Accordion1.SelectedIndex = Session(SESSIONPRONTO_SelectedIndexAnteriorDelAcordion)
+                    Accordion1.SelectedIndex = Session("SelectedPane")
+                    'Los problemas son por acá
+
+                Else
+                    'cierro los panelcitos
+                    Accordion1.SelectedIndex = -1
+                End If
+                Accordion1.SelectedIndex = Session("SelectedPane")
+            End If
+        End If
+
+        'ResaltarNodoElegido()
+
+
+    End Sub
+
+
+
+    Protected Sub AccordionSiteMap_OpenCurrentPane(ByVal sender As Object, ByVal e As EventArgs)
+
+
+        'Debug.Print(SiteMap.RootNode.ChildNodes(0).Title) 'si imprime "FAVORITOS", es que está usando el otro sitemap....
+
+        Dim siteMapView As SiteMapDataSourceView = CType(SiteMapDataSource.GetView(String.Empty), SiteMapDataSourceView)
+        Dim nodes As SiteMapNodeCollection = CType(siteMapView.Select(DataSourceSelectArguments.Empty), SiteMapNodeCollection)
+
+
+        If SiteMap.CurrentNode Is Nothing Then
+            Accordion1.SelectedIndex = -1
+        Else
+            Accordion1.SelectedIndex = RootIndexofCurrentNode(SiteMap.RootNode.ChildNodes)
+            'Accordion1.SelectedIndex = RootIndexofCurrentNode(nodes)
+        End If
+    End Sub
+
+
+
+    Private Function RootIndexofCurrentNode(ByVal Nodes As SiteMapNodeCollection) As Short
+        'busca el indice del padre del nodo elegido, para poder elegir el panelcito del acordion correspondiente
+
+        Dim index As Short = -2
+        If Nodes Is Nothing Then
+            RootIndexofCurrentNode = -1
+        ElseIf Nodes.Contains(SiteMap.CurrentNode) Then
+            RootIndexofCurrentNode = Nodes.IndexOf(SiteMap.CurrentNode)
+        Else
+            For Each n As SiteMapNode In Nodes
+                index = RootIndexofCurrentNode(n.ChildNodes)
+                If index <> -1 Then
+                    If n.ParentNode.ToString = SiteMap.RootNode.ToString Then
+                        Return SiteMap.RootNode.ChildNodes.IndexOf(n)
+                    Else
+                        Return index
+                    End If
+                End If
+            Next
+            Return -1
+        End If
+    End Function
+
+
+
+
+    Protected Sub Accordion1_DataBound(ByVal sender As Object, ByVal e As AjaxControlToolkit.AccordionItemEventArgs) Handles Accordion1.ItemDataBound
+        If CType(e, AjaxControlToolkit.AccordionItemEventArgs).ItemType = AjaxControlToolkit.AccordionItemType.Content Then
+            Dim cPanel As AjaxControlToolkit.AccordionContentPanel = e.AccordionItem
+            Dim rptr As System.Web.UI.WebControls.Repeater = CType(cPanel.Controls(1), System.Web.UI.WebControls.Repeater)
+            Dim sNode As System.Web.SiteMapNode = CType(CType(e, AjaxControlToolkit.AccordionItemEventArgs).AccordionItem.DataItem, System.Web.SiteMapNode)
+            Dim childNodes As System.Web.SiteMapNodeCollection = sNode.ChildNodes
+            If Not childNodes Is Nothing AndAlso childNodes.Count > 0 Then
+                rptr.DataSourceID = Nothing
+                rptr.DataSource = childNodes
+                rptr.DataBind()
+            End If
+        End If
+    End Sub
+
+
+
+    '///////////////////////////////////
+    Sub RepeaterItemDataBound(ByVal sender As Object, ByVal e As RepeaterItemEventArgs)
+        'http://forums.asp.net/t/1695206.aspx/1
+
+        Dim item As RepeaterItem = e.Item
+
+        Dim node As SiteMapNode = item.DataItem
+
+        Dim hl As HyperLink = e.Item.FindControl("HyperLink2")
+
+        Dim td = e.Item.FindControl("AccordionSideBarItem")
+        Dim a = e.Item.FindControl("aLink1")
+
+
+        'If e.Item.ItemType = ListItemType.Item Or e.Item.ItemType = ListItemType.AlternatingItem Then
+        'DirectCast(e.Item.FindControl("HyperLink1"), HyperLink).ForeColor = System.Drawing.Color.Red
+        'End If
+
+        'si una rama se queda sin nodos, tambien hay que volarla
+
+
+        If HayQueOcultarEsteNodo(hl.NavigateUrl) Then
+            e.Item.Visible = False
+            Return
+        End If
+
+
+
+        Dim bEncontro = False
+        If Not IsNothing(hl) Then
+            If hl.NavigateUrl = Request.Url.PathAndQuery.ToString() Then
+                'If InStr(Request.Url.PathAndQuery.ToString(), hl.NavigateUrl) > 0 Then
+                'hl.ForeColor = System.Drawing.Color.Red
+                'hl.Font.Bold = True
+
+                'hl.BorderStyle = BorderStyle.Solid
+                hl.CssClass = "AccordionItemSeleccionado"
+                'hl.Style.Add("border", "solid 1px 0px 0px 0px")
+                '                text-decoration: none;
+                'border-width: 2px;
+                'margin: 2px;
+                'border-style: solid;
+                '}
+
+                Try
+                    Debug.Print(item.ItemIndex)
+                    Debug.Print(item.Parent.ClientID)
+                    Session("SelectedPane") = CInt(TextoEntre(item.Parent.ClientID, "Pane_", "_content"))
+                Catch ex As Exception
+
+                End Try
+
+                bEncontro = True
+            End If
+        End If
+
+        If Not bEncontro Then Accordion1.SelectedIndex = Session("SelectedPane")
+
+        If Not IsNothing(td) Or Not IsNothing(a) Or Not IsNothing(hl) Then
+            'Stop
+        End If
+
+    End Sub
+
+
+    Sub RepeaterPreRender(sender As Object, e As System.EventArgs)
+        'Repeater()
+
+        'Repeater1.
+
+        ''http://stackoverflow.com/questions/6281559/asp-net-repeater-loop-through-items-in-the-item-template
+        ''You would want to do that in the Page PreRender, after the Repeater has been bound.
+
+
+
+        'For Each sss
+
+
+        'Next
+
+        'Dim item As RepeaterItem = e.Item
+
+    End Sub
+
+    Sub AccordionPreRender(sender As Object, e As System.EventArgs)
+
+        'oculto el panel si no tiene nodos
+
+        For Each p In Accordion1.Panes
+            Debug.Print(p.Visible)
+            'Debug.Print(p.ContentContainer.Controls.Count)
+            Dim n As SiteMapNode = p.ContentContainer.DataItem
+            Debug.Print(n.Title)
+            Debug.Print(n.ChildNodes.Count)
+            If n.ChildNodes.Count <= 0 Then p.Visible = False
+        Next
+
+
+
+    End Sub
+
+
+
+    Function HayQueOcultarEsteNodo(ByVal url As String) As Boolean
+
+        Try
+            If Session(SESSIONPRONTO_UserId) Is Nothing Then Return True
+
+
+            If InStr(url, "CartaDePorteAnalisisTarifa.aspx") Then
+                Dim p = BDLmasterPermisosManager.Fetch(ConexBDLmaster, Session(SESSIONPRONTO_UserId), CDPs_InfAnalisisTarifa)
+                If Not p("PuedeLeer") Then
+                    Return True
+                End If
+            End If
+
+
+            If InStr(url, "CartaDePorteInformesGerenciales.aspx") Then
+                Dim p = BDLmasterPermisosManager.Fetch(ConexBDLmaster, Session(SESSIONPRONTO_UserId), CDPs_InfGerenciales)
+                If Not p("PuedeLeer") Then
+                    Return True
+                End If
+            End If
+
+
+
+            If InStr(url, "CDPFacturacion.aspx") Then
+                Dim p = BDLmasterPermisosManager.Fetch(ConexBDLmaster, Session(SESSIONPRONTO_UserId), CDPs_Facturacion)
+                If Not p("PuedeLeer") Then
+                    Return True
+                End If
+            End If
+
+            If InStr(url, "Facturas.aspx") Then
+                Dim p = BDLmasterPermisosManager.Fetch(ConexBDLmaster, Session(SESSIONPRONTO_UserId), Facturas)
+                If Not p("PuedeLeer") Then
+                    Return True
+                End If
+            End If
+
+            If InStr(url, "ListasPrecios.aspx") Then
+                Dim p = BDLmasterPermisosManager.Fetch(ConexBDLmaster, Session(SESSIONPRONTO_UserId), Listas_de_Precios)
+                If Not p("PuedeLeer") Then
+                    Return True
+                End If
+            End If
+
+            If InStr(url, "Vendedores.aspx") Then
+                Dim p = BDLmasterPermisosManager.Fetch(ConexBDLmaster, Session(SESSIONPRONTO_UserId), Vendedores)
+                If Not p("PuedeLeer") Then
+                    Return True
+                End If
+            End If
+
+            If InStr(url, "/Clientes.aspx") Then 'si sacas la "/", tambien vuela el accesoinformesclientes.aspx
+                Dim p = BDLmasterPermisosManager.Fetch(ConexBDLmaster, Session(SESSIONPRONTO_UserId), BDLmasterPermisosManager.EntidadesPermisos.Clientes)
+                If Not p("PuedeLeer") Then
+                    Return True
+                End If
+            End If
+
+
+            If InStr(url, "/Obra") Then 'si sacas la "/", tambien vuela el accesoinformesclientes.aspx
+                Dim p = BDLmasterPermisosManager.Fetch(ConexBDLmaster, Session(SESSIONPRONTO_UserId), BDLmasterPermisosManager.EntidadesPermisos.Obras)
+                If Not p("PuedeLeer") Then
+                    Return True
+                End If
+            End If
+
+            If InStr(url, "/Requerimiento") Then 'si sacas la "/", tambien vuela el accesoinformesclientes.aspx
+                Dim p = BDLmasterPermisosManager.Fetch(ConexBDLmaster, Session(SESSIONPRONTO_UserId), BDLmasterPermisosManager.EntidadesPermisos.Requerimientos)
+                If Not p("PuedeLeer") Then
+                    Return True
+                End If
+            End If
+
+            If InStr(url, "/Articulo") Then 'si sacas la "/", tambien vuela el accesoinformesclientes.aspx
+                Dim p = BDLmasterPermisosManager.Fetch(ConexBDLmaster, Session(SESSIONPRONTO_UserId), BDLmasterPermisosManager.EntidadesPermisos.Artículos)
+                If Not p("PuedeLeer") Then
+                    Return True
+                End If
+            End If
+
+
+            If InStr(url, "/Unidad") Then 'si sacas la "/", tambien vuela el accesoinformesclientes.aspx
+                Dim p = BDLmasterPermisosManager.Fetch(ConexBDLmaster, Session(SESSIONPRONTO_UserId), BDLmasterPermisosManager.EntidadesPermisos.Unidades)
+                If Not p("PuedeLeer") Then
+                    Return True
+                End If
+            End If
+
+            If InStr(url, "/Sector") Then 'si sacas la "/", tambien vuela el accesoinformesclientes.aspx
+                Dim p = BDLmasterPermisosManager.Fetch(ConexBDLmaster, Session(SESSIONPRONTO_UserId), BDLmasterPermisosManager.EntidadesPermisos.Sectores)
+                If Not p("PuedeLeer") Then
+                    Return True
+                End If
+            End If
+
+        Catch ex As Exception
+
+        End Try
+
+        Return False
+    End Function
+
+
+
+    Sub ConfiguracionDeLaEmpresa()
+        Try
+
+            Dim Usuario = New Usuario
+            Usuario = Session(SESSIONPRONTO_USUARIO)
+
+
+            'LogoImage.ImageUrl = BDLMasterEmpresasManagerMigrar.SetLogoImage_MasterPage(Usuario)
+            SiteMapDataSource.SiteMapProvider = BDLMasterEmpresasManagerMigrar.SetSiteMap(Usuario)
+
+
+        Catch ex As Exception
+
+            ErrHandler.WriteError(ex)
+        End Try
+
+    End Sub
+
+
+    '///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    '///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    '///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    'fin del Acordion
+    '///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    '///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    '///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    '///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 End Class
 
 

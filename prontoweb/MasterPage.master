@@ -23,6 +23,10 @@
 
     </script>
 </head>
+
+ <meta name="viewport" content="width=500,initial-scale=1, minimum-scale=1.0">
+
+
 <body class="bodyMasterPage">
     <%--repito la referencia porque cuando se llega acá redirigido desde SeleccionarEmpresa, no encuentra el path.
     esto me cuesta un simpatico 404 en toda pagina con masterpage... Buscar otra solucion
@@ -128,10 +132,10 @@
                                 <tr>
                                     <td></td>
                                     <td width="180px" rowspan="100%">
-                                        <a type="button" id="btnMostrarMenu" >
-                                           <i class="fa fa-bars fa-2x"></i> 
-                                            </a>
-                                       <%-- <button type="button" id="btnMostrarMenu" value="" class="" style="height: ; width: ; margin-left: ; background-color: transparent">
+                                        <a type="button" id="btnMostrarMenu" style="margin-left: 5px">
+                                            <i class="fa fa-bars fa-2x"></i>
+                                        </a>
+                                        <%-- <button type="button" id="btnMostrarMenu" value="" class="" style="height: ; width: ; margin-left: ; background-color: transparent">
                                             <i class="fa fa-bars fa-1x"></i>
                                         </button>--%>
 
@@ -148,7 +152,7 @@
                                         <asp:Label ID="lblInfoBajoElLogo" runat="server" Font-Size="Small" CssClass="Alerta"
                                             Style="margin-left: 2px; margin-bottom: ;" Height=""></asp:Label>
 
-                                        </td>
+                                    </td>
                                     <td>
                                         <table width="100%" border="0" cellpadding="0" cellspacing="0">
                                             <tr>
@@ -248,31 +252,31 @@
                                                             }
 
                                                         </script>
-                                        <%--CompletionListCssClass="AutoCompleteScrollParaElSuperbuscador"--%>
-                                        <%--CompletionListItemCssClass="AutoCompleteScrollParaElSuperbuscadorlistitem" --%>
-                                        <%--CompletionListHighlightedItemCssClass="AutoCompleteScrollParaElSuperbuscadorhoverlistitem"--%>
-                                        <table style="border-width: 0px; padding: 0px; margin: 0px; height: 22px; visibility: hidden; display: none;">
-                                            <tr>
-                                                <td></td>
-                                                <td>
-                                                    <asp:Button ID="btnBuscar" runat="server" Visible="false" Text="Buscar" CssClass="butBuscar" />
+                                                        <%--CompletionListCssClass="AutoCompleteScrollParaElSuperbuscador"--%>
+                                                        <%--CompletionListItemCssClass="AutoCompleteScrollParaElSuperbuscadorlistitem" --%>
+                                                        <%--CompletionListHighlightedItemCssClass="AutoCompleteScrollParaElSuperbuscadorhoverlistitem"--%>
+                                                        <table style="border-width: 0px; padding: 0px; margin: 0px; height: 22px; visibility: hidden; display: none;">
+                                                            <tr>
+                                                                <td></td>
+                                                                <td>
+                                                                    <asp:Button ID="btnBuscar" runat="server" Visible="false" Text="Buscar" CssClass="butBuscar" />
+                                                                </td>
+                                                            </tr>
+                                                        </table>
+                                                    </asp:Panel>
                                                 </td>
-                                            </tr>
-                                        </table>
-                                        </asp:Panel>
-                                    </td>
-                                    <td align="right" width="100%" cssclass="margender">
-                                        <asp:Label ID="lblTipoBase" runat="server" Font-Size="Small" CssClass="Alerta"></asp:Label>
-                                        <asp:LinkButton ID="lnkEmpresa" runat="server" Font-Bold="false" CausesValidation="False"
-                                            CssClass="margender" TabIndex="-1" BorderStyle="None" BorderWidth="0px"
-                                            Visible="true">a</asp:LinkButton>
-                                        <%--PostBackUrl='SeleccionarEmpresa.aspx'--%>
+                                                <td align="right" width="100%" cssclass="margender">
+                                                    <asp:Label ID="lblTipoBase" runat="server" Font-Size="Small" CssClass="Alerta"></asp:Label>
+                                                    <asp:LinkButton ID="lnkEmpresa" runat="server" Font-Bold="false" CausesValidation="False"
+                                                        CssClass="margender" TabIndex="-1" BorderStyle="None" BorderWidth="0px"
+                                                        Visible="true">a</asp:LinkButton>
+                                                    <%--PostBackUrl='SeleccionarEmpresa.aspx'--%>
 
-                                        <asp:DropDownList ID="DDLEmpresas" runat="server" Width="200" TabIndex="1" Font-Size="XX-Small"
-                                            CssClass="DropDownTransparente" Visible="False">
-                                        </asp:DropDownList>
-                                        <asp:Label ID="lblInfo" runat="server" Text="Empresa" CssClass="margender" Visible="false"></asp:Label>
-                                        |
+                                                    <asp:DropDownList ID="DDLEmpresas" runat="server" Width="200" TabIndex="1" Font-Size="XX-Small"
+                                                        CssClass="DropDownTransparente" Visible="False">
+                                                    </asp:DropDownList>
+                                                    <asp:Label ID="lblInfo" runat="server" Text="Empresa" CssClass="margender" Visible="false"></asp:Label>
+                                                    |
                                             <asp:LoginView ID="LoginView" runat="server">
                                                 <LoggedInTemplate>
                                                     <asp:LoginName ID="LoginName1" runat="server" Font-Bold="false" CssClass="margender" />
@@ -282,10 +286,10 @@
                                                         TabIndex="-1" LogoutText="Salir" Font-Underline="False" CssClass="margender" />
                                                 </LoggedInTemplate>
                                             </asp:LoginView>
-                                        <asp:Label ID="lblSoloParaHacerEspacio" runat="server" Text=" " Width="3"></asp:Label>
-                                    </td>
-                                </tr>
-                                </table>
+                                                    <asp:Label ID="lblSoloParaHacerEspacio" runat="server" Text=" " Width="3"></asp:Label>
+                                                </td>
+                                            </tr>
+                                        </table>
                                     </td>
                                     <td class="margenDerecho"></td>
                                 </tr>
@@ -564,7 +568,7 @@ ERA ESO EL PROBLEMA DEL PANELCITO VACIO?????????????????!!!!!!!!!!!!!!!1
                             <div id="divsupercontenedor" class="supercontenedor">
                                 <div id="divprop" class="prop">
                                 </div>
-                                <div id="divcontentplaceholder" class="cssContentPlaceHolder">
+                                <div id="divcontentplaceholder" class="cssContentPlaceHolder" style="overflow: hidden !important">
                                     <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
                                     </asp:ContentPlaceHolder>
                                 </div>

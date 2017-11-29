@@ -15,12 +15,12 @@
       <FullPath>TestHarcodeada.rds</FullPath>
     </ProjectItem>
     <ProjectItem>
-      <Name>WilliamsTest.rds</Name>
-      <FullPath>WilliamsTest.rds</FullPath>
-    </ProjectItem>
-    <ProjectItem>
       <Name>TestPCMariano.rds</Name>
       <FullPath>TestPCMariano.rds</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>WilliamsTest.rds</Name>
+      <FullPath>WilliamsTest.rds</FullPath>
     </ProjectItem>
   </DataSources>
   <DataSets>
@@ -572,7 +572,7 @@
       <Platform>Win32</Platform>
       <Options>
         <OutputPath>bin\DebugLocal</OutputPath>
-        <TargetServerVersion>SSRS2008R2</TargetServerVersion>
+        <TargetServerVersion>SSRS2008</TargetServerVersion>
         <TargetServerURL>http://desktop-clvul7u/ReportServer</TargetServerURL>
         <TargetFolder>Pronto informes</TargetFolder>
         <TargetDataSourceFolder>Data Sources</TargetDataSourceFolder>

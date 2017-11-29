@@ -118,6 +118,7 @@
     <Compile Include="Advanced techniques.cs" />
     <Compile Include="DataForExcel.cs" />
     <Compile Include="Frequently asked questions.cs" />
+    <Compile Include="pushFirebase.cs" />
     <Compile Include="prontoflexicapture.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service References\ServiceReference1\Reference.cs">

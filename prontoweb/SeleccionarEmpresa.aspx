@@ -26,7 +26,7 @@
 
 
         <%--https://developer.mozilla.org/en-US/docs/Mozilla/Mobile/Viewport_meta_tag--%>
-    <meta name="viewport" content="width=400px, initial-scale=1">
+    <meta name="viewport" content="width=300px, initial-scale=1">
 
 
   <%--  <script src="../JavaScript/jquery-1.4.2.min.js" type="text/javascript"></script>
@@ -56,20 +56,20 @@
        <ajaxToolkit:ToolkitScriptManager ID="ScriptManager1" runat="server" LoadScriptsBeforeUI="False"
                         EnablePageMethods="False" AsyncPostBackTimeout="360000" />--%>
     <div align="center">
-        <table style="width: 550px" class="t1">
+        <table style="width: " class="t1">
             <tr>
                 <td style="width: 300px; background-color: #4A3C8C; font-size: medium;" align="center">
                     <span style="color: #f0ffff; font-size: 12pt">Seleccionar empresa</span>
                 </td>
             </tr>
             <tr>
-                <td align="center" class="style2" style="font-size: medium">
+                <td align="center" class="" style="font-size: medium">
                     &nbsp;&nbsp;
-                    <asp:Panel ID="PanelListEmpresas" runat="server" Height="100px">
-                        <asp:ListBox ID="DDLEmpresas" runat="server" Width="200" TabIndex="1">
+                    <asp:Panel ID="PanelListEmpresas" runat="server" Height="">
+                        <asp:ListBox ID="DDLEmpresas" runat="server" Width="300" TabIndex="1" Font-Size="20">
                         </asp:ListBox>
                         <br /> <br />
-                        <asp:Button ID="ButContinuar" runat="server" Text="Continuar" CssClass="but" TabIndex="2"  Width="200"/>
+                        <asp:Button ID="ButContinuar" runat="server" Text="Continuar" CssClass="but" TabIndex="2"  Width="250" Height="50"/>
                         <%-- <asp:UpdateProgress ID="UpdateProgress100" runat="server">
                     <ProgressTemplate>
                         <img src="Imagenes/25-1.gif" alt="" />
@@ -89,7 +89,7 @@
                         <%--<asp:HiddenField ID="HFSC" runat="server" />--%>
                         <asp:HiddenField ID="HFIdUser" runat="server" />
                         &nbsp;&nbsp;</asp:Panel>
-                    <asp:Panel ID="PanelInfo" runat="server" Width="550px" Height="16px">
+                    <asp:Panel ID="PanelInfo" runat="server" Width="300px" Height="16px">
                         <br />
                         <asp:Label ID="LblTextInfo" runat="server" Font-Bold="True" ForeColor="Red" Text="Comuníquese con el administrador del sistema para que le asigne una empresa"></asp:Label></asp:Panel>
                 </td>

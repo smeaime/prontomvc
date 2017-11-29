@@ -1551,7 +1551,7 @@ Partial Class CartaDePorteInformesConReportViewerSincronismos
                              cmbPuntoVenta.SelectedValue, sTitulo, optDivisionSyngenta.SelectedValue, , txtContrato.Text).ToList
 
 
-                            output = Sincronismo_AmaggiDescargas_Nuevo(q, , sWHERE, sErrores)
+                            output = Sincronismo_AmaggiDescargas_Nuevo(q, HFSC.Value, , sWHERE, sErrores)
 
                         Else
                             'como verificar que solo venga una sin copia? -una opcion en el 
@@ -1634,6 +1634,31 @@ Partial Class CartaDePorteInformesConReportViewerSincronismos
 
                         lblErrores.Text = sErrores
                         sErrores = ""
+
+
+
+
+
+
+                    Case "CHIAMBRETTO"
+
+
+                        output = SincronismosWilliamsManager.GenerarSincro("CHIAMBRETTO", sErrores,
+                           HFSC.Value, ConfigurationManager.AppSettings("UrlDominio"),
+                           "", estadofiltro, "", idVendedor, idCorredor,
+                          idDestinatario, idIntermediario,
+                          idRComercial, idArticulo, idProcedencia, idDestino,
+                          IIf(cmbCriterioWHERE.SelectedValue = "todos",
+                              CartaDePorteManager.FiltroANDOR.FiltroAND,
+                            CartaDePorteManager.FiltroANDOR.FiltroOR),
+                          DropDownList2.Text,
+                   Convert.ToDateTime(iisValidSqlDate(txtFechaDesde.Text, #1/1/1753#)),
+                   Convert.ToDateTime(iisValidSqlDate(txtFechaHasta.Text, #1/1/2100#)),
+                             cmbPuntoVenta.SelectedValue, optDivisionSyngenta.SelectedValue, , , , idClienteAuxiliar, registrosFiltrados)
+
+                        lblErrores.Text = sErrores
+                        sErrores = ""
+
 
 
 

@@ -26,6 +26,15 @@ Partial Class CartasDePortes
 
 
 
+
+
+        If Request.Browser("IsMobileDevice") = "true" Then
+            Response.Redirect("CartasDePortesMovil.aspx")
+        End If
+
+
+
+
         'HFSC.Value = DirectCast(Session(SESSIONPRONTO_USUARIO), Usuario).StringConnection
         HFSC.Value = GetConnectionString(Server, Session)
 

@@ -213,6 +213,37 @@ namespace ProntoMVC.Data
 
 
 
+        public static string CSV_To_Excel(string csvFileName, string excelFileName, bool firstRowIsHeader = false, char delimiter= ',')
+        {
+
+            //string csvFileName = @"FL_insurance_sample.csv";
+            //string excelFileName = @"FL_insurance_sample.xls";
+
+            string worksheetsName = "Hoja1";
+
+
+            var format = new ExcelTextFormat();
+            format.Delimiter = delimiter;
+            format.EOL = "\r";              // DEFAULT IS "\r\n";
+                                            // format.TextQualifier = '"';
+
+            using (ExcelPackage package = new ExcelPackage(new FileInfo(excelFileName)))
+            {
+                ExcelWorksheet worksheet = package.Workbook.Worksheets.Add(worksheetsName);
+                worksheet.Cells["A1"].LoadFromText(new FileInfo(csvFileName), format, OfficeOpenXml.Table.TableStyles.Medium27, firstRowIsHeader);
+                package.Save();
+            }
+
+          
+            return excelFileName;
+
+
+        }
+
+
+
+
+
 
 
 
@@ -4202,7 +4233,7 @@ namespace ExtensionMethods
         }
 
 
-   
+
 
     }
 }
