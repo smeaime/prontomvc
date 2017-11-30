@@ -3034,17 +3034,28 @@ Public Class LogicaFacturacion
 
 
 
+
+
+
+
+
+
             Dim lotecito As List(Of CartaDePorte) = (From c In listaDeCartasPorteAFacturar
                                                      Where c.IdFacturarselaA = cli And c.ClienteSeparado = clisep
                                                      Select New CartaDePorte With {
+                                                         .Id = c.IdCartaDePorte,
                                                      .IdArticulo = If(c.IdArticulo, -1) _
                                                       , .Destino = If(c.IdDestino, -1),
                                                 .Titular = If(c.IdTitular, -1),
                                             .Entregador = If(c.IdDestinatario, -1),
                                             .NetoFinalIncluyendoMermas = c.KgNetos,
-                                        .TarifaCobradaAlCliente = c.TarifaFacturada
-                                                 }
-                 ).ToList
+                                                    .TarifaCobradaAlCliente = c.TarifaFacturada,
+                                                    .Corredor = If(c.IdCorredor, -1),
+                                                         .CuentaOrden1 = If(c.IdIntermediario, -1),
+                                                         .CuentaOrden2 = If(c.IdRComercial, -1),
+                                                         .FechaDescarga = c.FechaDescarga,
+                                                    .AgregaItemDeGastosAdministrativos = (c.AgregaItemDeGastosAdministrativos.ToString = "SI")
+                                                                 }).ToList
 
             Dim renglongrupo As IEnumerable(Of grup) = AgruparItemsDeLaFactura(lotecito, optFacturarA, agruparArticulosPor, SC, sBusqueda)
             renglongrupo.ToList()
@@ -3058,12 +3069,15 @@ Public Class LogicaFacturacion
                     'marco esas cartas como de otra agrupacion
 
                     Dim g = renglongrupo(n)
+                    Dim ids = g.cartas.Select(Function(x) x.Id).ToList()
 
                     Dim carts = From c In listaDeCartasPorteAFacturar
-                                Where (g.IdArticulo = -1 Or c.IdArticulo = g.IdArticulo) _
-                                And (g.Destino = -1 Or c.IdDestino = g.Destino) _
-                                And (g.Entregador = -1 Or c.IdDestinatario = g.Entregador) _
-                                And (g.Titular = -1 Or c.IdTitular = g.Titular)
+                                Where ids.Contains(c.IdCartaDePorte)
+                    '            Where (g.IdArticulo = -1 Or c.IdArticulo = g.IdArticulo) _
+                    '            And (g.Destino = -1 Or c.IdDestino = g.Destino) _
+                    '            And (g.Entregador = -1 Or c.IdDestinatario = g.Entregador) _
+                    '            And (g.Titular = -1 Or c.IdTitular = g.Titular)
+
 
                     carts.ToList()
 
@@ -6927,15 +6941,21 @@ Public Class LogicaFacturacion
 
                     'el asunto es que si una se pasa, debería parar toda la facturacion, y no saltarse solo esa factura
 
-                    If (renglons + IIf(cantidadGastosAdministrativos > 0, 1, 0) + dtRenglonesManuales.Rows.Count + listEmbarques.Count) > MAXRENGLONES Then
-                        'tomar en cuenta embarques y manuales
+                    'tomar en cuenta embarques y manuales -mejor no, porque en EmparcharClienteSeparadoParaFacturasQueSuperanCantidadDeRenglones no los tomé en cuenta
+                    'tomar en cuenta embarques y manuales -mejor no, porque en EmparcharClienteSeparadoParaFacturasQueSuperanCantidadDeRenglones no los tomé en cuenta
+                    'If (renglons + IIf(cantidadGastosAdministrativos > 0, 1, 0) + dtRenglonesManuales.Rows.Count + listEmbarques.Count) > MAXRENGLONES Then
+                    If (renglons) > MAXRENGLONES Then
 
                         'si tiro una excepcion acá, la captura el try de esta funcion
-                        If Debugger.IsAttached Then Stop
-                        Dim s2 = "La factura para " & IdClienteAFacturarle.ToString() & " tiene " & renglons.ToString() & " renglones y el máximo es " & MAXRENGLONES.ToString()
-                        ErrHandler2.WriteError(s2)
-                        'Throw New Exception(s2)
-                        Return -12
+                        If Debugger.IsAttached Then
+                            Stop
+                        Else
+                            Dim s2 = "La factura para " & IdClienteAFacturarle.ToString() & " tiene " & renglons.ToString() & " renglones y el máximo es " & MAXRENGLONES.ToString()
+                            ErrHandler2.WriteError(s2)
+                            'Throw New Exception(s2)
+                            Return -12
+                        End If
+
                     End If
 
 
