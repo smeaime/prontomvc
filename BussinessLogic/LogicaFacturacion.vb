@@ -1384,30 +1384,38 @@ Public Class LogicaFacturacion
 
 
 
-                        .FacturarselaA = CStr(iisNull(cdp("FacturarselaA")))
-                        .IdFacturarselaA = CInt(iisNull(cdp("IdFacturarselaA")))
-                        .Confirmado = iisNull(cdp("Confirmado"))
-                        .IdCodigoIVA = CInt(iisNull(cdp("IdCodigoIVA"), -1))
-                        .CUIT = CStr(iisNull(cdp("CUIT")))
-                        .ClienteSeparado = CStr(iisNull(cdp("ClienteSeparado")))
-                        .TarifaFacturada = CDec(iisNull(cdp("TarifaFacturada"), 0))
-                        .Producto = CStr(iisNull(cdp("Producto")))
-                        .KgNetos = CDec(iisNull(cdp("KgNetos")))
-                        .IdCorredor = CInt(iisNull(cdp("IdCorredor")))
-                        .IdTitular = CInt(iisNull(cdp("IdTitular")))
-                        .IdIntermediario = CInt(iisNull(cdp("IdIntermediario"), -1))
-                        .IdRComercial = CInt(iisNull(cdp("IdRComercial"), -1))
-                        .IdDestinatario = CInt(iisNull(cdp("IdDestinatario")))
-                        .Titular = CStr(iisNull(cdp("Titular")))
-                        .Intermediario = CStr(iisNull(cdp("Intermediario")))
-                        .R__Comercial = CStr(iisNull(cdp("R. Comercial")))
-                        .Corredor = CStr(iisNull(cdp("Corredor ")))
-                        .Destinatario = CStr(iisNull(cdp("Destinatario")))
-                        .DestinoDesc = CStr(iisNull(cdp("DestinoDesc")))
-                        .Procedcia_ = CStr(iisNull(cdp("Procedcia.")))
-                        .IdDestino = CInt(iisNull(cdp("IdDestino")))
-                        .AgregaItemDeGastosAdministrativos = CStr(iisNull(cdp("AgregaItemDeGastosAdministrativos")))
-                        lista.Add(x)
+                        Try
+
+                            .FacturarselaA = CStr(iisNull(cdp("FacturarselaA")))
+                            .IdFacturarselaA = CInt(iisNull(cdp("IdFacturarselaA")))
+                            .Confirmado = iisNull(cdp("Confirmado"))
+                            .IdCodigoIVA = CInt(iisNull(cdp("IdCodigoIVA"), -1))
+                            .CUIT = CStr(iisNull(cdp("CUIT")))
+                            .ClienteSeparado = CStr(iisNull(cdp("ClienteSeparado")))
+                            .TarifaFacturada = CDec(iisNull(cdp("TarifaFacturada"), 0))
+                            .Producto = CStr(iisNull(cdp("Producto")))
+                            .KgNetos = CDec(iisNull(cdp("KgNetos")))
+                            .IdCorredor = CInt(iisNull(cdp("IdCorredor")))
+                            .IdTitular = CInt(iisNull(cdp("IdTitular")))
+                            .IdIntermediario = CInt(iisNull(cdp("IdIntermediario"), -1))
+                            .IdRComercial = CInt(iisNull(cdp("IdRComercial"), -1))
+                            .IdDestinatario = CInt(iisNull(cdp("IdDestinatario")))
+                            .Titular = CStr(iisNull(cdp("Titular")))
+                            .Intermediario = CStr(iisNull(cdp("Intermediario")))
+                            .R__Comercial = CStr(iisNull(cdp("R. Comercial")))
+                            .Corredor = CStr(iisNull(cdp("Corredor ")))
+                            .Destinatario = CStr(iisNull(cdp("Destinatario")))
+                            .DestinoDesc = CStr(iisNull(cdp("DestinoDesc")))
+                            .Procedcia_ = CStr(iisNull(cdp("Procedcia.")))
+                            .IdDestino = CInt(iisNull(cdp("IdDestino")))
+                            .AgregaItemDeGastosAdministrativos = CStr(iisNull(cdp("AgregaItemDeGastosAdministrativos")))
+                            lista.Add(x)
+                        Catch ex As Exception
+                            If Not Debugger.IsAttached Then Throw
+
+                        End Try
+
+
                     End With
                 Next
 
@@ -3038,14 +3046,18 @@ Public Class LogicaFacturacion
                                                  }
                  ).ToList
 
-            Dim grupo As IEnumerable(Of grup) = AgruparItemsDeLaFactura(lotecito, optFacturarA, agruparArticulosPor, SC, sBusqueda)
-            grupo.ToList()
+            Dim renglongrupo As IEnumerable(Of grup) = AgruparItemsDeLaFactura(lotecito, optFacturarA, agruparArticulosPor, SC, sBusqueda)
+            renglongrupo.ToList()
 
-            If grupo.Count > MAXRENGLONES Then
-                For n = MAXRENGLONES To grupo.Count - 1
+
+
+            If renglongrupo.Count > MAXRENGLONES Then
+
+
+                For n = MAXRENGLONES To renglongrupo.Count - 1
                     'marco esas cartas como de otra agrupacion
 
-                    Dim g = grupo(n)
+                    Dim g = renglongrupo(n)
 
                     Dim carts = From c In listaDeCartasPorteAFacturar
                                 Where (g.IdArticulo = -1 Or c.IdArticulo = g.IdArticulo) _
@@ -3053,13 +3065,15 @@ Public Class LogicaFacturacion
                                 And (g.Entregador = -1 Or c.IdDestinatario = g.Entregador) _
                                 And (g.Titular = -1 Or c.IdTitular = g.Titular)
 
-
+                    carts.ToList()
 
                     For Each cdp In carts
+                        'hago division entera del contador de renglones por el maximo de renglones, y ahi tengo el numero de factura adicional!!!!
+                        'hago division entera del contador de renglones por el maximo de renglones, y ahi tengo el numero de factura adicional!!!!
 
                         'Dim c As wCartasDePorte_TX_FacturacionAutomatica_con_wGrillaPersistenciaResult = listaDeCartasPorteAFacturar.Where(Function(x) x.IdCartaDePorte = cdp.Id).FirstOrDefault
                         Dim c As wCartasDePorte_TX_FacturacionAutomatica_con_wGrillaPersistenciaResult = cdp
-                        c.ClienteSeparado = (reasignador).ToString() + "° renglones maximos" + " " + c.ClienteSeparado + "" 'le reasigno un clienteseparador de fantasía, ya que no tengo un tempIdFacturaAgenerar"
+                        c.ClienteSeparado = ((n + 1) \ MAXRENGLONES).ToString() + "° renglones maximos" + " " + c.ClienteSeparado + "" 'le reasigno un clienteseparador de fantasía, ya que no tengo un tempIdFacturaAgenerar"
 
                     Next
                 Next
@@ -4391,8 +4405,10 @@ Public Class LogicaFacturacion
         Dim l = tablaEditadaDeFacturasParaGenerarComoLista.Select(Function(x) x.idCartaDePorte).ToList
         Dim ss As String
         If Not VerificarQueNoHayaCambiadoElLoteDesdeQueSeCreoLaFacturacion(l, SC, ss) Then
-            Throw New Exception(ss)
-            Return
+            If Not Debugger.IsAttached Then
+                Throw New Exception(ss)
+                Return
+            End If
         End If
 
 
@@ -6915,6 +6931,7 @@ Public Class LogicaFacturacion
                         'tomar en cuenta embarques y manuales
 
                         'si tiro una excepcion acá, la captura el try de esta funcion
+                        If Debugger.IsAttached Then Stop
                         Dim s2 = "La factura para " & IdClienteAFacturarle.ToString() & " tiene " & renglons.ToString() & " renglones y el máximo es " & MAXRENGLONES.ToString()
                         ErrHandler2.WriteError(s2)
                         'Throw New Exception(s2)
@@ -6948,7 +6965,12 @@ Public Class LogicaFacturacion
                                 .Fields("Cantidad").Value = o.NetoFinal '/ 1000 '1
 
 
-                                .Fields("PrecioUnitario").Value = o.total / o.NetoFinal 'o.Tarifa 'tarifa(IdClienteAFacturarle, o.IdArticulo)
+                                If o.NetoFinal = 0 Then
+                                    .Fields("PrecioUnitario").Value = 0
+                                Else
+                                    .Fields("PrecioUnitario").Value = o.total / o.NetoFinal 'o.Tarifa 'tarifa(IdClienteAFacturarle, o.IdArticulo)
+                                End If
+
 
                                 If (.Fields("PrecioUnitario").Value = 0) Then
                                     If Not Debugger.IsAttached Then Throw New Exception("El item de la factura tiene tarifa 0.    " & .Fields("IdArticulo").Value & " " & .Fields("Cantidad").Value)
@@ -7577,7 +7599,7 @@ Public Class LogicaFacturacion
             Catch ex As Exception
 
                 ErrHandler2.WriteError(ex)
-                Throw
+                If Not Debugger.IsAttached Then Throw
             End Try
 
 
