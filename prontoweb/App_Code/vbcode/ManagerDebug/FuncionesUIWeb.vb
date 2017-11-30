@@ -4433,14 +4433,21 @@ Public Module ProntoFuncionesUIWeb
         usuario.Nombre = mu.UserName
 
 
-        'arreglar esto
+
+        sdfsdfsdfsf
+
+        'arreglar esto -deberia guardar la idempresa a la que se conectó?
         If Encriptar(sConex).Contains("SERVERSQL3") Then
-            usuario.IdEmpresa = 52
+            usuario.IdEmpresa = 52  'williams en bdl
         ElseIf Encriptar(sConex).Contains("DESKTOP") Then
-            usuario.IdEmpresa = 1053
+            usuario.IdEmpresa = 1053 'williams en mi pc
         Else
-            usuario.IdEmpresa = 18
+            usuario.IdEmpresa = 18   'esto quizas chifla cuando es la pruebawilliams
         End If
+
+
+        GetUltimaBaseQueAccedioUsuario
+
 
 
         Try
@@ -4457,7 +4464,7 @@ Public Module ProntoFuncionesUIWeb
         Catch ex As Exception
 
             ErrHandler2.WriteError(ex)
-            ErrHandler2.WriteError("Verificar que el usuario tenga una empresa asignada")
+            ErrHandler2.WriteError("Verificar que el usuario tenga una empresa asignada" usuario.UserId, usuario.IdEmpresa, sConex, "XXXXXX")
             Throw
             'La conversión de la cadena "No se encontró empresa para el u" en el tipo 'Integer' no es válida
             'ah, el usuario gradice no tiene empresa asignada en la bdlmaster de clientes
