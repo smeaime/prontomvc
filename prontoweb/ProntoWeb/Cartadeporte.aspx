@@ -281,7 +281,7 @@
         //            http: //www.scottklarr.com/topic/126/how-to-create-ctrl-key-shortcuts-in-javascript/
         //            http: //www.scottklarr.com/topic/126/how-to-create-ctrl-key-shortcuts-in-javascript/
     </script>
-    <div style="width: ; margin-top: 3px; height: auto;">
+    <div style="width: ; margin-top: 3px; height: auto; max-width: 800px">
         <table style="padding: 0px; border: none #FFFFFF; width: ; margin-right: 0px; font-size: large;"
             cellpadding="1" cellspacing="1">
         
@@ -384,7 +384,7 @@
             </tr>
         </table>
         <br />
-        <cc1:TabContainer ID="TabContainer2" runat="server" Height="" Width="100%"
+        <cc1:TabContainer ID="TabContainer2" runat="server" Height="" Width="100%" 
             Style="" ActiveTabIndex="0" CssClass="NewsTab" AccessKey="p">
             <%--  CssClass="SimpleTab"        CssClass="NewsTab"--%>
             <cc1:TabPanel ID="TabPanel2" runat="server" Height="550px">
