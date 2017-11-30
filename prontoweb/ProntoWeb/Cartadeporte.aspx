@@ -2850,8 +2850,8 @@
 
 
 
-<input id="ctl00_ContentPlaceHolder1_TabContainer2_TabPanel5_btnCerrarReclamo"  type="button"   value="abrir" class="btn btn-primary" style="height: 40px ; width: ; vertical-align: top;" />
-<input id="ctl00_ContentPlaceHolder1_TabContainer2_TabPanel5_btnAbrirReclamo"  type="button"   value="cerrar" class="btn btn-primary" style="height: 40px ; width: ; vertical-align: top;" />
+<input id="ctl00_ContentPlaceHolder1_TabContainer2_TabPanel5_btnCerrarReclamo"  type="button"   value="cerrar" class="btn btn-primary" style="height: 40px ; width: ; vertical-align: top;" />
+<input id="ctl00_ContentPlaceHolder1_TabContainer2_TabPanel5_btnAbrirReclamo"  type="button"   value="abrir" class="btn btn-primary" style="  height: 40px ; width: ; vertical-align: top;" />
 
                        
 
@@ -2995,6 +2995,16 @@
                                         $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel5_TextBox5").val("")
                                         $("#Lista").trigger("reloadGrid");
                                         scrollToLastRow($("#Lista"))
+
+                                        $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel5_btnCerrarReclamo").hide();
+                                        $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel5_btnAbrirReclamo").show();
+
+
+
+                                        $('#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel5_Button6').attr("disabled", true);
+                                        $('#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel5_TextBox5').attr("disabled", true);
+                                        $('#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel5_AsyncFileUpload3').attr("disabled", true);
+                                        $('#gbox_Lista').attr("disabled", true);
                                     }
 
 
@@ -3008,12 +3018,10 @@
                                     complete: function () {
                                         $("#loading").hide();
 
-                                        //$('#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel5_Button6').attr("disabled", true);
+                                        //
                                         //$('#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel5_Button6').val("habilitar consulta");
-                                        $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel5_btnCerrarReclamo").hide();
-                                        $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel5_btnAbrirReclamo").show();
+                             
                                         
-
                                     }
 
 
@@ -3049,6 +3057,16 @@
                                         $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel5_TextBox5").val("")
                                         $("#Lista").trigger("reloadGrid");
                                         scrollToLastRow($("#Lista"))
+
+                                        $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel5_btnCerrarReclamo").show();
+                                        $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel5_btnAbrirReclamo").hide();
+
+
+
+                                        $('#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel5_Button6').attr("disabled", false);
+                                        $('#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel5_TextBox5').attr("disabled", false);
+                                        $('#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel5_AsyncFileUpload3').attr("disabled", false);
+                                        $('#gbox_Lista').attr("disabled", false);
                                     }
 
 
@@ -3064,9 +3082,7 @@
 
                                         //$('#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel5_Button6').attr("disabled", true);
                                         //$('#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel5_Button6').val("habilitar consulta");
-                                        $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel5_btnCerrarReclamo").show();
-                                        $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel5_btnAbrirReclamo").hide();
-
+                                       
 
                                     }
 
