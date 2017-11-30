@@ -397,7 +397,7 @@
             </tr>
         </table>
         <br />
-        <cc1:TabContainer ID="TabContainer2" runat="server" Height="" Width="320"
+        <cc1:TabContainer ID="TabContainer2" runat="server" Height="" Width="100%"
             Style="" ActiveTabIndex="0" CssClass="NewsTab" AccessKey="p">
             <%--  CssClass="SimpleTab"        CssClass="NewsTab"--%>
             <cc1:TabPanel ID="TabPanel2" runat="server" Height="550px">
@@ -2797,7 +2797,7 @@
             </cc1:TabPanel>
 
 
-            <cc1:TabPanel ID="TabPanel5" runat="server" BackColor="#6600FF" Height="550px"  width="300px" OnClientPopulated="TabListo()">
+            <cc1:TabPanel ID="TabPanel5" runat="server" BackColor="#6600FF" Height="550px"  width="200px" OnClientPopulated="TabListo()">
                 <HeaderTemplate>
                     C<u>h</u>at
                 </HeaderTemplate>
@@ -3098,7 +3098,7 @@
                                         Visible="False"></asp:Label>
                                 </ProgressTemplate>
                             </asp:UpdateProgress>
-                            <asp:Label ID="Label1" Width="600px" runat="server" Font-Bold="true" ForeColor="LightGreen" />
+                            <asp:Label ID="Label1" Width="" runat="server" Font-Bold="true" ForeColor="LightGreen" />
                         </ContentTemplate>
                     </asp:UpdatePanel>
                 </td>
@@ -4939,7 +4939,7 @@
 
                 shrinkToFit: false,
 
-                width: 310, //$(window).width() - 4, // 310, //'auto',
+                width: 300, //$(window).width() - 10, // 310, //'auto',
                 height: 320, //'auto', // '100%', //$(window).height() - 260, // '100%'
 
                 altRows: false,
