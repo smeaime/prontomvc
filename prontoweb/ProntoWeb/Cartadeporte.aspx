@@ -2,7 +2,7 @@
     CodeFile="Cartadeporte.aspx.vb" Inherits="CartadeporteABM" Title="Untitled Page"
     EnableEventValidation="false" %>
 
-<%--lo del enableeventvalidation lo puse porque tenia un problema con este abm. no copiarlo a los demas abms--%>
+<%--mlo del enableeventvalidation lo puse porque tenia un problema con este abm. no copiarlo a los demas abms--%>
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
 
