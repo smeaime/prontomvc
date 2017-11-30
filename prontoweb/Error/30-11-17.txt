@@ -1492,3 +1492,23 @@ Log Entry :
 11/30/2017 09:46:22
 Error in: http://localhost:50769/ProntoWeb/CartadeporteExternoMovil.aspx?Id=3154800. Error Message:PV 2 0
 __________________________
+
+Log Entry : 
+11/30/2017 12:57:37
+Error in: http://localhost:50769/ProntoWeb/Principal.aspx. Error Message:Mariano esta logueado, pero lo redirijo al login porque faltan los datos de session. No deberia mejor mandarlo a SeleccionarEmpresa? Ademas, no hago el LogOut y le queda el cookie!!!
+__________________________
+
+Log Entry : 
+11/30/2017 12:59:04
+Error in: http://localhost:50769/ProntoWeb/CartasDePortes.aspx?tipo=Todas. Error Message:Mariano
+__________________________
+
+Log Entry : 
+11/30/2017 13:10:48
+Error in: http://localhost:50769/ProntoWeb/Principal.aspx. Error Message:Mariano esta logueado, pero lo redirijo al login porque faltan los datos de session. No deberia mejor mandarlo a SeleccionarEmpresa? Ademas, no hago el LogOut y le queda el cookie!!!
+__________________________
+
+Log Entry : 
+11/30/2017 13:11:49
+Error in: http://localhost:50769/ProntoWeb/CartasDePortes.aspx?tipo=Todas. Error Message:Mariano
+__________________________
