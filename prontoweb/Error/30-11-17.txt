@@ -1512,3 +1512,2535 @@ Log Entry :
 11/30/2017 13:11:49
 Error in: http://localhost:50769/ProntoWeb/CartasDePortes.aspx?tipo=Todas. Error Message:Mariano
 __________________________
+
+Log Entry : 
+11/30/2017 13:29:50
+Error in: http://localhost:50769/ProntoWeb/Principal.aspx. Error Message:Mariano esta logueado, pero lo redirijo al login porque faltan los datos de session. No deberia mejor mandarlo a SeleccionarEmpresa? Ademas, no hago el LogOut y le queda el cookie!!!
+__________________________
+
+Log Entry : 
+11/30/2017 13:29:52
+Error in: http://localhost:50769/ProntoWeb/CartasDePortes.aspx?tipo=Todas. Error Message:Mariano
+__________________________
+
+Log Entry : 
+11/30/2017 13:30:30
+Error in: http://localhost:50769/ProntoWeb/Principal.aspx. Error Message:Mariano esta logueado, pero lo redirijo al login porque faltan los datos de session. No deberia mejor mandarlo a SeleccionarEmpresa? Ademas, no hago el LogOut y le queda el cookie!!!
+__________________________
+
+Log Entry : 
+11/30/2017 13:30:30
+Error in: http://localhost:50769/ProntoWeb/CartaDePorte.aspx?Id=3154800. Error Message:Mariano esta logueado, pero lo redirijo al login porque faltan los datos de session. No deberia mejor mandarlo a SeleccionarEmpresa? Ademas, no hago el LogOut y le queda el cookie!!!
+__________________________
+
+Log Entry : 
+11/30/2017 13:30:32
+Error in: http://localhost:50769/ProntoWeb/CartasDePortes.aspx?tipo=Todas. Error Message:Mariano
+__________________________
+
+Log Entry : 
+11/30/2017 13:30:49
+Error in: http://localhost:50769/ProntoWeb/CartaDePorte.aspx?Id=3154800. Error Message:La carta numero 565168593 id=3154800 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+11/30/2017 13:30:49
+Error in: http://localhost:50769/ProntoWeb/CartaDePorte.aspx?Id=3154800. Error Message:PV 2 0
+__________________________
+
+Log Entry : 
+11/30/2017 13:34:53
+Error in: http://localhost:50769/ProntoWeb/CartaDePorte.aspx?Id=3154800. Error Message:La carta numero 565168593 id=3154800 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+11/30/2017 13:34:53
+Error in: http://localhost:50769/ProntoWeb/CartaDePorte.aspx?Id=3154800. Error Message:PV 2 0
+__________________________
+
+Log Entry : 
+11/30/2017 13:36:25
+Error in: http://localhost:50769/ProntoWeb/CartaDePorte.aspx?Id=3154800. Error Message:La carta numero 565168593 id=3154800 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+11/30/2017 13:36:25
+Error in: http://localhost:50769/ProntoWeb/CartaDePorte.aspx?Id=3154800. Error Message:PV 2 0
+__________________________
+
+Log Entry : 
+11/30/2017 13:41:13
+Error in: http://localhost:50769/ProntoWeb/CartaDePorte.aspx?Id=3154800. Error Message:La carta numero 565168593 id=3154800 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+11/30/2017 13:41:13
+Error in: http://localhost:50769/ProntoWeb/CartaDePorte.aspx?Id=3154800. Error Message:PV 2 0
+__________________________
+
+Log Entry : 
+11/30/2017 13:41:22
+Error in: http://localhost:50769/ProntoWeb/WebServiceClientes.asmx/AcopiosPorCliente. Error Message: -  Error en ExecDinamico. - System.InvalidOperationException: Valor de tiempo de espera caducado. El período de tiempo de espera expiró antes de obtener una conexión del grupo. Esto puede suceder porque todas las conexiones de la agrupación estaban en uso y se alcanzó el máximo tamaño del grupo.
+   en System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.Open()
+   en Pronto.ERP.Dal.GeneralDB.ExecDinamico(String SC, String comandoSQLdinamico, Int32 timeoutSegundos) - SELECT TOP 1 Clientes.* FROM Clientes  WHERE  (RazonSocial = 'VICENTIN SAIC')  OR (CUIT + ' ' + RazonSocial COLLATE Modern_Spanish_ci_as = 'VICENTIN SAIC')  OR (RazonSocial + ' ' + CUIT COLLATE Modern_Spanish_ci_as = 'VICENTIN SAIC')  OR (CUIT = 'VICENTIN SAIC')   8 0
+__________________________
+
+Log Entry : 
+11/30/2017 13:41:22
+Error in: http://localhost:50769/ProntoWeb/WebServiceClientes.asmx/AcopiosPorCliente. Error Message: -  Error en ExecDinamico. - System.InvalidOperationException: Valor de tiempo de espera caducado. El período de tiempo de espera expiró antes de obtener una conexión del grupo. Esto puede suceder porque todas las conexiones de la agrupación estaban en uso y se alcanzó el máximo tamaño del grupo.
+   en System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.Open()
+   en Pronto.ERP.Dal.GeneralDB.ExecDinamico(String SC, String comandoSQLdinamico, Int32 timeoutSegundos) - SELECT TOP 1 Clientes.* FROM Clientes  WHERE  (RazonSocial = 'COMMODITIES S.A.')  OR (CUIT + ' ' + RazonSocial COLLATE Modern_Spanish_ci_as = 'COMMODITIES S.A.')  OR (RazonSocial + ' ' + CUIT COLLATE Modern_Spanish_ci_as = 'COMMODITIES S.A.')  OR (CUIT = 'COMMODITIES S.A.')   8 0
+__________________________
+
+Log Entry : 
+11/30/2017 13:41:22
+Error in: http://localhost:50769/ProntoWeb/WebServiceClientes.asmx/AcopiosPorCliente. Error Message:Valor de tiempo de espera caducado. El período de tiempo de espera expiró antes de obtener una conexión del grupo. Esto puede suceder porque todas las conexiones de la agrupación estaban en uso y se alcanzó el máximo tamaño del grupo.
+__________________________
+
+Log Entry : 
+11/30/2017 13:41:22
+Error in: http://localhost:50769/ProntoWeb/WebServiceClientes.asmx/AcopiosPorCliente. Error Message:Valor de tiempo de espera caducado. El período de tiempo de espera expiró antes de obtener una conexión del grupo. Esto puede suceder porque todas las conexiones de la agrupación estaban en uso y se alcanzó el máximo tamaño del grupo.
+__________________________
+
+Log Entry : 
+11/30/2017 13:41:22
+Error in: http://localhost:50769/ProntoWeb/WebServiceClientes.asmx/AcopiosPorCliente. Error Message:Valor de tiempo de espera caducado. El período de tiempo de espera expiró antes de obtener una conexión del grupo. Esto puede suceder porque todas las conexiones de la agrupación estaban en uso y se alcanzó el máximo tamaño del grupo.
+__________________________
+
+Log Entry : 
+11/30/2017 13:41:22
+Error in: http://localhost:50769/ProntoWeb/WebServiceClientes.asmx/AcopiosPorCliente. Error Message:System.InvalidOperationException: Valor de tiempo de espera caducado. El período de tiempo de espera expiró antes de obtener una conexión del grupo. Esto puede suceder porque todas las conexiones de la agrupación estaban en uso y se alcanzó el máximo tamaño del grupo.
+   en System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.Open()
+   en Pronto.ERP.Dal.GeneralDB.ExecDinamico(String SC, String comandoSQLdinamico, Int32 timeoutSegundos)
+   en Pronto.ERP.Bll.EntidadManager.ExecDinamico(String SC, String sComandoDinamico, Int32 timeoutSegundos) en C:\bdl\pronto\BussinessLogic\EntidadManager.vb:línea 884
+   en SQLdinamico.BuscaIdClientePrecisoConCUIT(String ClienteRazonSocial, String SC) en C:\bdl\pronto\BussinessLogic\SQLdinamico.vb:línea 273
+   en WebServiceClientes.AcopiosPorCliente(String NombreCliente, String SC) en C:\bdl\pronto\prontoweb\App_Code\vbcode\WebServiceClientes.vb:línea 154
+__________________________
+
+Log Entry : 
+11/30/2017 13:41:22
+Error in: http://localhost:50769/ProntoWeb/WebServiceClientes.asmx/AcopiosPorCliente. Error Message:System.InvalidOperationException: Valor de tiempo de espera caducado. El período de tiempo de espera expiró antes de obtener una conexión del grupo. Esto puede suceder porque todas las conexiones de la agrupación estaban en uso y se alcanzó el máximo tamaño del grupo.
+   en System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.Open()
+   en Pronto.ERP.Dal.GeneralDB.ExecDinamico(String SC, String comandoSQLdinamico, Int32 timeoutSegundos)
+   en Pronto.ERP.Bll.EntidadManager.ExecDinamico(String SC, String sComandoDinamico, Int32 timeoutSegundos) en C:\bdl\pronto\BussinessLogic\EntidadManager.vb:línea 884
+   en SQLdinamico.BuscaIdClientePrecisoConCUIT(String ClienteRazonSocial, String SC) en C:\bdl\pronto\BussinessLogic\SQLdinamico.vb:línea 273
+   en WebServiceClientes.AcopiosPorCliente(String NombreCliente, String SC) en C:\bdl\pronto\prontoweb\App_Code\vbcode\WebServiceClientes.vb:línea 154
+__________________________
+
+Log Entry : 
+11/30/2017 13:41:36
+Error in: http://localhost:50769/ProntoWeb/WebServiceClientes.asmx/AcopiosPorCliente. Error Message: -  Error en ExecDinamico. - System.Data.SqlClient.SqlException (0x80131904): Error relacionado con la red o específico de la instancia mientras se establecía una conexión con el servidor SQL Server. No se encontró el servidor o éste no estaba accesible. Compruebe que el nombre de la instancia es correcto y que SQL Server está configurado para admitir conexiones remotas. (provider: Named Pipes Provider, error: 40 - No se pudo abrir una conexión con SQL Server) ---> System.ComponentModel.Win32Exception (0x80004005): No se ha encontrado la ruta de acceso de la red
+   en System.Data.SqlClient.SqlInternalConnectionTds..ctor(DbConnectionPoolIdentity identity, SqlConnectionString connectionOptions, SqlCredential credential, Object providerInfo, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance, SqlConnectionString userConnectionOptions, SessionData reconnectSessionData, DbConnectionPool pool, String accessToken, Boolean applyTransientFaultHandling)
+   en System.Data.SqlClient.SqlConnectionFactory.CreateConnection(DbConnectionOptions options, DbConnectionPoolKey poolKey, Object poolGroupProviderInfo, DbConnectionPool pool, DbConnection owningConnection, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionFactory.CreatePooledConnection(DbConnectionPool pool, DbConnection owningObject, DbConnectionOptions options, DbConnectionPoolKey poolKey, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionPool.CreateObject(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   en System.Data.ProviderBase.DbConnectionPool.UserCreateRequest(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   en System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.Open()
+   en Pronto.ERP.Dal.GeneralDB.ExecDinamico(String SC, String comandoSQLdinamico, Int32 timeoutSegundos)
+ClientConnectionId:00000000-0000-0000-0000-000000000000
+Error Number:53,State:0,Class:20 - SELECT TOP 1 Clientes.* FROM Clientes  WHERE  (RazonSocial = 'BILBAO FACUNDO FABIAN')  OR (CUIT + ' ' + RazonSocial COLLATE Modern_Spanish_ci_as = 'BILBAO FACUNDO FABIAN')  OR (RazonSocial + ' ' + CUIT COLLATE Modern_Spanish_ci_as = 'BILBAO FACUNDO FABIAN')  OR (CUIT = 'BILBAO FACUNDO FABIAN')   8 0
+__________________________
+
+Log Entry : 
+11/30/2017 13:41:36
+Error in: http://localhost:50769/ProntoWeb/WebServiceClientes.asmx/AcopiosPorCliente. Error Message:Error relacionado con la red o específico de la instancia mientras se establecía una conexión con el servidor SQL Server. No se encontró el servidor o éste no estaba accesible. Compruebe que el nombre de la instancia es correcto y que SQL Server está configurado para admitir conexiones remotas. (provider: Named Pipes Provider, error: 40 - No se pudo abrir una conexión con SQL Server)
+__________________________
+
+Log Entry : 
+11/30/2017 13:41:36
+Error in: http://localhost:50769/ProntoWeb/WebServiceClientes.asmx/AcopiosPorCliente. Error Message:System.Data.SqlClient.SqlException (0x80131904): Error relacionado con la red o específico de la instancia mientras se establecía una conexión con el servidor SQL Server. No se encontró el servidor o éste no estaba accesible. Compruebe que el nombre de la instancia es correcto y que SQL Server está configurado para admitir conexiones remotas. (provider: Named Pipes Provider, error: 40 - No se pudo abrir una conexión con SQL Server) ---> System.ComponentModel.Win32Exception (0x80004005): No se ha encontrado la ruta de acceso de la red
+   en System.Data.SqlClient.SqlInternalConnectionTds..ctor(DbConnectionPoolIdentity identity, SqlConnectionString connectionOptions, SqlCredential credential, Object providerInfo, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance, SqlConnectionString userConnectionOptions, SessionData reconnectSessionData, DbConnectionPool pool, String accessToken, Boolean applyTransientFaultHandling)
+   en System.Data.SqlClient.SqlConnectionFactory.CreateConnection(DbConnectionOptions options, DbConnectionPoolKey poolKey, Object poolGroupProviderInfo, DbConnectionPool pool, DbConnection owningConnection, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionFactory.CreatePooledConnection(DbConnectionPool pool, DbConnection owningObject, DbConnectionOptions options, DbConnectionPoolKey poolKey, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionPool.CreateObject(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   en System.Data.ProviderBase.DbConnectionPool.UserCreateRequest(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   en System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.Open()
+   en Pronto.ERP.Dal.GeneralDB.ExecDinamico(String SC, String comandoSQLdinamico, Int32 timeoutSegundos)
+   en Pronto.ERP.Bll.EntidadManager.ExecDinamico(String SC, String sComandoDinamico, Int32 timeoutSegundos) en C:\bdl\pronto\BussinessLogic\EntidadManager.vb:línea 884
+   en SQLdinamico.BuscaIdClientePrecisoConCUIT(String ClienteRazonSocial, String SC) en C:\bdl\pronto\BussinessLogic\SQLdinamico.vb:línea 273
+   en WebServiceClientes.AcopiosPorCliente(String NombreCliente, String SC) en C:\bdl\pronto\prontoweb\App_Code\vbcode\WebServiceClientes.vb:línea 154
+ClientConnectionId:00000000-0000-0000-0000-000000000000
+Error Number:53,State:0,Class:20
+__________________________
+
+Log Entry : 
+11/30/2017 13:41:37
+Error in: http://localhost:50769/ProntoWeb/HandlerReclamos.ashx. Error Message:System.Data.SqlClient.SqlException
+Error relacionado con la red o específico de la instancia mientras se establecía una conexión con el servidor SQL Server. No se encontró el servidor o éste no estaba accesible. Compruebe que el nombre de la instancia es correcto y que SQL Server está configurado para admitir conexiones remotas. (provider: Named Pipes Provider, error: 40 - No se pudo abrir una conexión con SQL Server)
+   en System.Data.SqlClient.SqlInternalConnectionTds..ctor(DbConnectionPoolIdentity identity, SqlConnectionString connectionOptions, SqlCredential credential, Object providerInfo, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance, SqlConnectionString userConnectionOptions, SessionData reconnectSessionData, DbConnectionPool pool, String accessToken, Boolean applyTransientFaultHandling)
+   en System.Data.SqlClient.SqlConnectionFactory.CreateConnection(DbConnectionOptions options, DbConnectionPoolKey poolKey, Object poolGroupProviderInfo, DbConnectionPool pool, DbConnection owningConnection, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionFactory.CreatePooledConnection(DbConnectionPool pool, DbConnection owningObject, DbConnectionOptions options, DbConnectionPoolKey poolKey, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionPool.CreateObject(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   en System.Data.ProviderBase.DbConnectionPool.UserCreateRequest(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   en System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.Open()
+   en Glimpse.Ado.AlternateType.GlimpseDbConnection.Open()
+   en System.Data.Entity.Infrastructure.Interception.DbConnectionDispatcher.<Open>b__36(DbConnection t, DbConnectionInterceptionContext c)
+   en System.Data.Entity.Infrastructure.Interception.InternalDispatcher`1.Dispatch[TTarget,TInterceptionContext](TTarget target, Action`2 operation, TInterceptionContext interceptionContext, Action`3 executing, Action`3 executed)
+   en System.Data.Entity.Infrastructure.Interception.DbConnectionDispatcher.Open(DbConnection connection, DbInterceptionContext interceptionContext)
+   en System.Data.Entity.Core.EntityClient.EntityConnection.<Open>b__2()
+   en System.Data.Entity.SqlServer.DefaultSqlExecutionStrategy.<>c__DisplayClass1.<Execute>b__0()
+   en System.Data.Entity.SqlServer.DefaultSqlExecutionStrategy.Execute[TResult](Func`1 operation)
+   en System.Data.Entity.SqlServer.DefaultSqlExecutionStrategy.Execute(Action operation)
+   en System.Data.Entity.Core.EntityClient.EntityConnection.Open()
+.Net SqlClient Data Provider
+__________________________
+
+Log Entry : 
+11/30/2017 13:41:42
+Error in: http://localhost:50769/ProntoWeb/Cartadeporte.aspx. Error Message:Mariano esta logueado, pero lo redirijo al login porque faltan los datos de session. No deberia mejor mandarlo a SeleccionarEmpresa? Ademas, no hago el LogOut y le queda el cookie!!!
+__________________________
+
+Log Entry : 
+11/30/2017 13:41:45
+Error in: http://localhost:50769/ProntoWeb/HandlerReclamos.ashx. Error Message: -  Error en ExecDinamico. - System.Data.SqlClient.SqlException (0x80131904): Error relacionado con la red o específico de la instancia mientras se establecía una conexión con el servidor SQL Server. No se encontró el servidor o éste no estaba accesible. Compruebe que el nombre de la instancia es correcto y que SQL Server está configurado para admitir conexiones remotas. (provider: Named Pipes Provider, error: 40 - No se pudo abrir una conexión con SQL Server) ---> System.ComponentModel.Win32Exception (0x80004005): No se ha encontrado la ruta de acceso de la red
+   en System.Data.SqlClient.SqlInternalConnectionTds..ctor(DbConnectionPoolIdentity identity, SqlConnectionString connectionOptions, SqlCredential credential, Object providerInfo, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance, SqlConnectionString userConnectionOptions, SessionData reconnectSessionData, DbConnectionPool pool, String accessToken, Boolean applyTransientFaultHandling)
+   en System.Data.SqlClient.SqlConnectionFactory.CreateConnection(DbConnectionOptions options, DbConnectionPoolKey poolKey, Object poolGroupProviderInfo, DbConnectionPool pool, DbConnection owningConnection, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionFactory.CreatePooledConnection(DbConnectionPool pool, DbConnection owningObject, DbConnectionOptions options, DbConnectionPoolKey poolKey, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionPool.CreateObject(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   en System.Data.ProviderBase.DbConnectionPool.UserCreateRequest(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   en System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.Open()
+   en Pronto.ERP.Dal.GeneralDB.ExecDinamico(String SC, String comandoSQLdinamico, Int32 timeoutSegundos)
+ClientConnectionId:00000000-0000-0000-0000-000000000000
+Error Number:53,State:0,Class:20 - EXEC sp_who2 8 0
+__________________________
+
+Log Entry : 
+11/30/2017 13:41:45
+Error in: http://localhost:50769/ProntoWeb/HandlerReclamos.ashx. Error Message:Error relacionado con la red o específico de la instancia mientras se establecía una conexión con el servidor SQL Server. No se encontró el servidor o éste no estaba accesible. Compruebe que el nombre de la instancia es correcto y que SQL Server está configurado para admitir conexiones remotas. (provider: Named Pipes Provider, error: 40 - No se pudo abrir una conexión con SQL Server)
+__________________________
+
+Log Entry : 
+11/30/2017 13:41:45
+Error in: http://localhost:50769/ProntoWeb/HandlerReclamos.ashx. Error Message:System.Data.SqlClient.SqlException
+Error relacionado con la red o específico de la instancia mientras se establecía una conexión con el servidor SQL Server. No se encontró el servidor o éste no estaba accesible. Compruebe que el nombre de la instancia es correcto y que SQL Server está configurado para admitir conexiones remotas. (provider: Named Pipes Provider, error: 40 - No se pudo abrir una conexión con SQL Server)
+   en System.Data.SqlClient.SqlInternalConnectionTds..ctor(DbConnectionPoolIdentity identity, SqlConnectionString connectionOptions, SqlCredential credential, Object providerInfo, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance, SqlConnectionString userConnectionOptions, SessionData reconnectSessionData, DbConnectionPool pool, String accessToken, Boolean applyTransientFaultHandling)
+   en System.Data.SqlClient.SqlConnectionFactory.CreateConnection(DbConnectionOptions options, DbConnectionPoolKey poolKey, Object poolGroupProviderInfo, DbConnectionPool pool, DbConnection owningConnection, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionFactory.CreatePooledConnection(DbConnectionPool pool, DbConnection owningObject, DbConnectionOptions options, DbConnectionPoolKey poolKey, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionPool.CreateObject(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   en System.Data.ProviderBase.DbConnectionPool.UserCreateRequest(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   en System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.Open()
+   en Pronto.ERP.Dal.GeneralDB.ExecDinamico(String SC, String comandoSQLdinamico, Int32 timeoutSegundos)
+   en Pronto.ERP.Bll.EntidadManager.ExecDinamico(String SC, String sComandoDinamico, Int32 timeoutSegundos) en C:\bdl\pronto\BussinessLogic\EntidadManager.vb:línea 884
+   en CartaDePorteManager.Log_sp_who2(String sc) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 8926
+   en ASP.global_asax.Application_Error(Object sender, EventArgs e) en C:\bdl\pronto\prontoweb\global.asax:línea 433
+.Net SqlClient Data Provider
+__________________________
+
+Log Entry : 
+11/30/2017 13:41:47
+Error in: http://localhost:50769/ProntoWeb/CartaDePorte.aspx?Id=3154800. Error Message:La carta numero 565168593 id=3154800 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+11/30/2017 13:41:47
+Error in: http://localhost:50769/ProntoWeb/CartaDePorte.aspx?Id=3154800. Error Message:PV 2 0
+__________________________
+
+Log Entry : 
+11/30/2017 13:42:13
+Error in: http://localhost:50769/ProntoWeb/CartaDePorte.aspx?Id=3154800. Error Message:La carta numero 565168593 id=3154800 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+11/30/2017 13:42:13
+Error in: http://localhost:50769/ProntoWeb/CartaDePorte.aspx?Id=3154800. Error Message:PV 2 0
+__________________________
+
+Log Entry : 
+11/30/2017 13:42:59
+Error in: http://localhost:50769/ProntoWeb/CartaDePorte.aspx?Id=3154800. Error Message:Mariano esta logueado, pero lo redirijo al login porque faltan los datos de session. No deberia mejor mandarlo a SeleccionarEmpresa? Ademas, no hago el LogOut y le queda el cookie!!!
+__________________________
+
+Log Entry : 
+11/30/2017 13:43:49
+Error in: http://localhost:50769/ProntoWeb/CartaDePorte.aspx?Id=3154800. Error Message:La carta numero 565168593 id=3154800 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+11/30/2017 13:43:49
+Error in: http://localhost:50769/ProntoWeb/CartaDePorte.aspx?Id=3154800. Error Message:PV 2 0
+__________________________
+
+Log Entry : 
+11/30/2017 13:44:05
+Error in: http://localhost:50769/ProntoWeb/CartaDePorte.aspx?Id=3154800. Error Message:La carta numero 565168593 id=3154800 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+11/30/2017 13:44:05
+Error in: http://localhost:50769/ProntoWeb/CartaDePorte.aspx?Id=3154800. Error Message:PV 2 0
+__________________________
+
+Log Entry : 
+11/30/2017 13:44:12
+Error in: http://localhost:50769/ProntoWeb/CartaDePorte.aspx?Id=3154800. Error Message:La carta numero 565168593 id=3154800 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+11/30/2017 13:44:12
+Error in: http://localhost:50769/ProntoWeb/CartaDePorte.aspx?Id=3154800. Error Message:PV 2 0
+__________________________
+
+Log Entry : 
+11/30/2017 13:44:42
+Error in: http://localhost:50769/ProntoWeb/CartaDePorte.aspx?Id=3154800. Error Message:La carta numero 565168593 id=3154800 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+11/30/2017 13:44:42
+Error in: http://localhost:50769/ProntoWeb/CartaDePorte.aspx?Id=3154800. Error Message:PV 2 0
+__________________________
+
+Log Entry : 
+11/30/2017 13:45:03
+Error in: http://localhost:50769/ProntoWeb/CartaDePorte.aspx?Id=3154800. Error Message:La carta numero 565168593 id=3154800 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+11/30/2017 13:45:04
+Error in: http://localhost:50769/ProntoWeb/CartaDePorte.aspx?Id=3154800. Error Message:PV 2 0
+__________________________
+
+Log Entry : 
+11/30/2017 13:45:39
+Error in: http://localhost:50769/ProntoWeb/CartaDePorte.aspx?Id=3154800. Error Message:La carta numero 565168593 id=3154800 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+11/30/2017 13:45:39
+Error in: http://localhost:50769/ProntoWeb/CartaDePorte.aspx?Id=3154800. Error Message:PV 2 0
+__________________________
+
+Log Entry : 
+11/30/2017 13:46:24
+Error in: http://localhost:50769/ProntoWeb/CartaDePorte.aspx?Id=3154800. Error Message:La carta numero 565168593 id=3154800 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+11/30/2017 13:46:24
+Error in: http://localhost:50769/ProntoWeb/CartaDePorte.aspx?Id=3154800. Error Message:PV 2 0
+__________________________
+
+Log Entry : 
+11/30/2017 13:48:40
+Error in: http://localhost:50769/ProntoWeb/Cartadeporte.aspx. Error Message:Mariano esta logueado, pero lo redirijo al login porque faltan los datos de session. No deberia mejor mandarlo a SeleccionarEmpresa? Ademas, no hago el LogOut y le queda el cookie!!!
+__________________________
+
+Log Entry : 
+11/30/2017 13:49:15
+Error in: http://localhost:50769/ProntoWeb/CartaDePorte.aspx?Id=3154800. Error Message:La carta numero 565168593 id=3154800 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+11/30/2017 13:49:15
+Error in: http://localhost:50769/ProntoWeb/CartaDePorte.aspx?Id=3154800. Error Message:PV 2 0
+__________________________
+
+Log Entry : 
+11/30/2017 13:49:25
+Error in: http://localhost:50769/ProntoWeb/CartaDePorte.aspx?Id=3154800. Error Message:La carta numero 565168593 id=3154800 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+11/30/2017 13:49:25
+Error in: http://localhost:50769/ProntoWeb/CartaDePorte.aspx?Id=3154800. Error Message:PV 2 0
+__________________________
+
+Log Entry : 
+11/30/2017 13:51:32
+Error in: http://localhost:50769/ProntoWeb/CartaDePorte.aspx?Id=3154800. Error Message:La carta numero 565168593 id=3154800 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+11/30/2017 13:51:32
+Error in: http://localhost:50769/ProntoWeb/CartaDePorte.aspx?Id=3154800. Error Message:PV 2 0
+__________________________
+
+Log Entry : 
+11/30/2017 15:36:35
+Error in: http://localhost:50769/ProntoWeb/CartadeporteExternoMovil.aspx?Id=3154800. Error Message:RODRIGORIOS esta logueado, pero lo redirijo al login porque faltan los datos de session. No deberia mejor mandarlo a SeleccionarEmpresa? Ademas, no hago el LogOut y le queda el cookie!!!
+__________________________
+
+Log Entry : 
+11/30/2017 15:37:15
+Error in: http://localhost:50769/ProntoWeb/HandlerReclamos.ashx. Error Message:System.Data.SqlClient.SqlException
+Error relacionado con la red o específico de la instancia mientras se establecía una conexión con el servidor SQL Server. No se encontró el servidor o éste no estaba accesible. Compruebe que el nombre de la instancia es correcto y que SQL Server está configurado para admitir conexiones remotas. (provider: Named Pipes Provider, error: 40 - No se pudo abrir una conexión con SQL Server)
+   en System.Data.SqlClient.SqlInternalConnectionTds..ctor(DbConnectionPoolIdentity identity, SqlConnectionString connectionOptions, SqlCredential credential, Object providerInfo, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance, SqlConnectionString userConnectionOptions, SessionData reconnectSessionData, DbConnectionPool pool, String accessToken, Boolean applyTransientFaultHandling)
+   en System.Data.SqlClient.SqlConnectionFactory.CreateConnection(DbConnectionOptions options, DbConnectionPoolKey poolKey, Object poolGroupProviderInfo, DbConnectionPool pool, DbConnection owningConnection, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionFactory.CreatePooledConnection(DbConnectionPool pool, DbConnection owningObject, DbConnectionOptions options, DbConnectionPoolKey poolKey, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionPool.CreateObject(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   en System.Data.ProviderBase.DbConnectionPool.UserCreateRequest(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   en System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.Open()
+   en Glimpse.Ado.AlternateType.GlimpseDbConnection.Open()
+   en System.Data.Entity.Infrastructure.Interception.DbConnectionDispatcher.<Open>b__36(DbConnection t, DbConnectionInterceptionContext c)
+   en System.Data.Entity.Infrastructure.Interception.InternalDispatcher`1.Dispatch[TTarget,TInterceptionContext](TTarget target, Action`2 operation, TInterceptionContext interceptionContext, Action`3 executing, Action`3 executed)
+   en System.Data.Entity.Infrastructure.Interception.DbConnectionDispatcher.Open(DbConnection connection, DbInterceptionContext interceptionContext)
+   en System.Data.Entity.Core.EntityClient.EntityConnection.<Open>b__2()
+   en System.Data.Entity.SqlServer.DefaultSqlExecutionStrategy.<>c__DisplayClass1.<Execute>b__0()
+   en System.Data.Entity.SqlServer.DefaultSqlExecutionStrategy.Execute[TResult](Func`1 operation)
+   en System.Data.Entity.SqlServer.DefaultSqlExecutionStrategy.Execute(Action operation)
+   en System.Data.Entity.Core.EntityClient.EntityConnection.Open()
+.Net SqlClient Data Provider
+__________________________
+
+Log Entry : 
+11/30/2017 15:37:23
+Error in: http://localhost:50769/ProntoWeb/HandlerReclamos.ashx. Error Message: -  Error en ExecDinamico. - System.Data.SqlClient.SqlException (0x80131904): Error relacionado con la red o específico de la instancia mientras se establecía una conexión con el servidor SQL Server. No se encontró el servidor o éste no estaba accesible. Compruebe que el nombre de la instancia es correcto y que SQL Server está configurado para admitir conexiones remotas. (provider: Named Pipes Provider, error: 40 - No se pudo abrir una conexión con SQL Server) ---> System.ComponentModel.Win32Exception (0x80004005): No se ha encontrado la ruta de acceso de la red
+   en System.Data.SqlClient.SqlInternalConnectionTds..ctor(DbConnectionPoolIdentity identity, SqlConnectionString connectionOptions, SqlCredential credential, Object providerInfo, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance, SqlConnectionString userConnectionOptions, SessionData reconnectSessionData, DbConnectionPool pool, String accessToken, Boolean applyTransientFaultHandling)
+   en System.Data.SqlClient.SqlConnectionFactory.CreateConnection(DbConnectionOptions options, DbConnectionPoolKey poolKey, Object poolGroupProviderInfo, DbConnectionPool pool, DbConnection owningConnection, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionFactory.CreatePooledConnection(DbConnectionPool pool, DbConnection owningObject, DbConnectionOptions options, DbConnectionPoolKey poolKey, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionPool.CreateObject(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   en System.Data.ProviderBase.DbConnectionPool.UserCreateRequest(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   en System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.Open()
+   en Pronto.ERP.Dal.GeneralDB.ExecDinamico(String SC, String comandoSQLdinamico, Int32 timeoutSegundos)
+ClientConnectionId:00000000-0000-0000-0000-000000000000
+Error Number:53,State:0,Class:20 - EXEC sp_who2 8 0
+__________________________
+
+Log Entry : 
+11/30/2017 15:37:23
+Error in: http://localhost:50769/ProntoWeb/HandlerReclamos.ashx. Error Message:Error relacionado con la red o específico de la instancia mientras se establecía una conexión con el servidor SQL Server. No se encontró el servidor o éste no estaba accesible. Compruebe que el nombre de la instancia es correcto y que SQL Server está configurado para admitir conexiones remotas. (provider: Named Pipes Provider, error: 40 - No se pudo abrir una conexión con SQL Server)
+__________________________
+
+Log Entry : 
+11/30/2017 15:37:23
+Error in: http://localhost:50769/ProntoWeb/HandlerReclamos.ashx. Error Message:System.Data.SqlClient.SqlException
+Error relacionado con la red o específico de la instancia mientras se establecía una conexión con el servidor SQL Server. No se encontró el servidor o éste no estaba accesible. Compruebe que el nombre de la instancia es correcto y que SQL Server está configurado para admitir conexiones remotas. (provider: Named Pipes Provider, error: 40 - No se pudo abrir una conexión con SQL Server)
+   en System.Data.SqlClient.SqlInternalConnectionTds..ctor(DbConnectionPoolIdentity identity, SqlConnectionString connectionOptions, SqlCredential credential, Object providerInfo, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance, SqlConnectionString userConnectionOptions, SessionData reconnectSessionData, DbConnectionPool pool, String accessToken, Boolean applyTransientFaultHandling)
+   en System.Data.SqlClient.SqlConnectionFactory.CreateConnection(DbConnectionOptions options, DbConnectionPoolKey poolKey, Object poolGroupProviderInfo, DbConnectionPool pool, DbConnection owningConnection, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionFactory.CreatePooledConnection(DbConnectionPool pool, DbConnection owningObject, DbConnectionOptions options, DbConnectionPoolKey poolKey, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionPool.CreateObject(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   en System.Data.ProviderBase.DbConnectionPool.UserCreateRequest(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   en System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.Open()
+   en Pronto.ERP.Dal.GeneralDB.ExecDinamico(String SC, String comandoSQLdinamico, Int32 timeoutSegundos)
+   en Pronto.ERP.Bll.EntidadManager.ExecDinamico(String SC, String sComandoDinamico, Int32 timeoutSegundos) en C:\bdl\pronto\BussinessLogic\EntidadManager.vb:línea 884
+   en CartaDePorteManager.Log_sp_who2(String sc) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 8926
+   en ASP.global_asax.Application_Error(Object sender, EventArgs e) en C:\bdl\pronto\prontoweb\global.asax:línea 433
+.Net SqlClient Data Provider
+__________________________
+
+Log Entry : 
+11/30/2017 15:45:35
+Error in: http://localhost:50769/ProntoWeb/Principal.aspx. Error Message:Mariano esta logueado, pero lo redirijo al login porque faltan los datos de session. No deberia mejor mandarlo a SeleccionarEmpresa? Ademas, no hago el LogOut y le queda el cookie!!!
+__________________________
+
+Log Entry : 
+11/30/2017 15:45:35
+Error in: http://localhost:50769/ProntoWeb/CartasDePortes.aspx?tipo=Todas. Error Message:Mariano
+__________________________
+
+Log Entry : 
+11/30/2017 15:46:29
+Error in: http://localhost:50769/ProntoWeb/Principal.aspx. Error Message:Mariano esta logueado, pero lo redirijo al login porque faltan los datos de session. No deberia mejor mandarlo a SeleccionarEmpresa? Ademas, no hago el LogOut y le queda el cookie!!!
+__________________________
+
+Log Entry : 
+11/30/2017 15:46:29
+Error in: http://localhost:50769/ProntoWeb/CartasDePortes.aspx?tipo=Todas. Error Message:Mariano
+__________________________
+
+Log Entry : 
+11/30/2017 15:46:42
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:Server.ScriptTimeout puesto en 7200s. Valor original: 30000000s.
+__________________________
+
+Log Entry : 
+11/30/2017 15:47:33
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:entro en  gv2ReBind 
+__________________________
+
+Log Entry : 
+11/30/2017 15:47:33
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 1 en dtDatasourcePaso2.
+__________________________
+
+Log Entry : 
+11/30/2017 15:47:33
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:entrando en GetDatatableAsignacionAutomatica . tanda 
+__________________________
+
+Log Entry : 
+11/30/2017 15:47:33
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:entrando en generar tabla. tanda 0
+__________________________
+
+Log Entry : 
+11/30/2017 15:47:35
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 2. tanda 0
+__________________________
+
+Log Entry : 
+11/30/2017 15:47:35
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 3. tanda 0
+__________________________
+
+Log Entry : 
+11/30/2017 15:47:35
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:Cartas sin automatico encontrado 0
+__________________________
+
+Log Entry : 
+11/30/2017 15:47:35
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 5. tanda 0
+__________________________
+
+Log Entry : 
+11/30/2017 15:47:35
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:entro a Preprocesos 9
+__________________________
+
+Log Entry : 
+11/30/2017 15:47:35
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:despues de AgregarEmbarques9
+__________________________
+
+Log Entry : 
+11/30/2017 15:47:35
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:despues de ExcluirDeGastosAdministrativos9
+__________________________
+
+Log Entry : 
+11/30/2017 15:47:35
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:despues de ReasignarAquellosQueSeLeFacturanForzosamenteAlCorredor9
+__________________________
+
+Log Entry : 
+11/30/2017 15:47:35
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:despues de CasosSyngenta_y_Acopios9
+__________________________
+
+Log Entry : 
+11/30/2017 15:47:35
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:entro en PostProcesos 9
+__________________________
+
+Log Entry : 
+11/30/2017 15:47:35
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:despues de EmparcharClienteSeparadoParaCasosQueSuperenUnMontoDeterminado 9
+__________________________
+
+Log Entry : 
+11/30/2017 15:47:35
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:despues de EmparcharClienteSeparadoParaFacturasQueSuperanCantidadDeRenglones 9
+__________________________
+
+Log Entry : 
+11/30/2017 15:47:35
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:despues de SepararAcopiosLDCyACA 9
+__________________________
+
+Log Entry : 
+11/30/2017 15:47:35
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:despues de PostProcesoFacturacion_ReglaExportadores 9
+__________________________
+
+Log Entry : 
+11/30/2017 15:47:35
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 6. tanda 0
+__________________________
+
+Log Entry : 
+11/30/2017 15:47:36
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 7. tanda 7882
+__________________________
+
+Log Entry : 
+11/30/2017 15:47:36
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:salgo. tanda 7882
+__________________________
+
+Log Entry : 
+11/30/2017 15:47:36
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 2 en GetDatatableAsignacionAutomatica . tanda 7882
+__________________________
+
+Log Entry : 
+11/30/2017 15:47:36
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 3 en GetDatatableAsignacionAutomatica . tanda 7882
+__________________________
+
+Log Entry : 
+11/30/2017 15:47:36
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 4 en GetDatatableAsignacionAutomatica . tanda 7882
+__________________________
+
+Log Entry : 
+11/30/2017 15:47:36
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 2 en dtDatasourcePaso2.
+__________________________
+
+Log Entry : 
+11/30/2017 15:47:36
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 2b en dtDatasourcePaso2.
+__________________________
+
+Log Entry : 
+11/30/2017 15:47:36
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 2 en getgrillapaso2.
+__________________________
+
+Log Entry : 
+11/30/2017 15:47:36
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 3 en getgrillapaso2.
+__________________________
+
+Log Entry : 
+11/30/2017 15:47:36
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:salgo de  getGrillaPaso2 .
+__________________________
+
+Log Entry : 
+11/30/2017 15:47:36
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 2 en gv2ReBind.
+__________________________
+
+Log Entry : 
+11/30/2017 15:47:36
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:salgo de  gv2ReBind .
+__________________________
+
+Log Entry : 
+11/30/2017 15:47:46
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:entro en  gv2ReBind 
+__________________________
+
+Log Entry : 
+11/30/2017 15:47:46
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 1 en dtDatasourcePaso2.
+__________________________
+
+Log Entry : 
+11/30/2017 15:47:46
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:entrando en GetDatatableAsignacionAutomatica . tanda 0
+__________________________
+
+Log Entry : 
+11/30/2017 15:47:46
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:Cartas sin automatico encontrado (pero este es el modo no automatico!!!)8
+__________________________
+
+Log Entry : 
+11/30/2017 15:47:46
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:entro a Preprocesos 1
+__________________________
+
+Log Entry : 
+11/30/2017 15:47:46
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:despues de AgregarEmbarques1
+__________________________
+
+Log Entry : 
+11/30/2017 15:47:46
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:despues de ExcluirDeGastosAdministrativos1
+__________________________
+
+Log Entry : 
+11/30/2017 15:47:46
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:despues de ReasignarAquellosQueSeLeFacturanForzosamenteAlCorredor1
+__________________________
+
+Log Entry : 
+11/30/2017 15:47:46
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:despues de CasosSyngenta_y_Acopios1
+__________________________
+
+Log Entry : 
+11/30/2017 15:47:46
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:entro en PostProcesos 1
+__________________________
+
+Log Entry : 
+11/30/2017 15:47:46
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:despues de EmparcharClienteSeparadoParaCasosQueSuperenUnMontoDeterminado 1
+__________________________
+
+Log Entry : 
+11/30/2017 15:47:46
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:despues de EmparcharClienteSeparadoParaFacturasQueSuperanCantidadDeRenglones 1
+__________________________
+
+Log Entry : 
+11/30/2017 15:47:46
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:despues de SepararAcopiosLDCyACA 1
+__________________________
+
+Log Entry : 
+11/30/2017 15:47:46
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:despues de PostProcesoFacturacion_ReglaExportadores 1
+__________________________
+
+Log Entry : 
+11/30/2017 15:47:46
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 2 en GetDatatableAsignacionAutomatica . tanda 288
+__________________________
+
+Log Entry : 
+11/30/2017 15:47:46
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 3 en GetDatatableAsignacionAutomatica . tanda 288
+__________________________
+
+Log Entry : 
+11/30/2017 15:47:46
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 4 en GetDatatableAsignacionAutomatica . tanda 288
+__________________________
+
+Log Entry : 
+11/30/2017 15:47:46
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 2 en dtDatasourcePaso2.
+__________________________
+
+Log Entry : 
+11/30/2017 15:47:46
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 2b en dtDatasourcePaso2.
+__________________________
+
+Log Entry : 
+11/30/2017 15:47:46
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 2 en getgrillapaso2.
+__________________________
+
+Log Entry : 
+11/30/2017 15:47:46
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 3 en getgrillapaso2.
+__________________________
+
+Log Entry : 
+11/30/2017 15:47:46
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:salgo de  getGrillaPaso2 .
+__________________________
+
+Log Entry : 
+11/30/2017 15:47:46
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 2 en gv2ReBind.
+__________________________
+
+Log Entry : 
+11/30/2017 15:47:46
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:salgo de  gv2ReBind .
+__________________________
+
+Log Entry : 
+11/30/2017 15:47:46
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:entro en  gv2ReBind 
+__________________________
+
+Log Entry : 
+11/30/2017 15:47:46
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 1 en dtDatasourcePaso2.
+__________________________
+
+Log Entry : 
+11/30/2017 15:47:46
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:entrando en GetDatatableAsignacionAutomatica . tanda 0
+__________________________
+
+Log Entry : 
+11/30/2017 15:47:46
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:Cartas sin automatico encontrado (pero este es el modo no automatico!!!)8
+__________________________
+
+Log Entry : 
+11/30/2017 15:47:46
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:entro a Preprocesos 1
+__________________________
+
+Log Entry : 
+11/30/2017 15:47:46
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:despues de AgregarEmbarques1
+__________________________
+
+Log Entry : 
+11/30/2017 15:47:46
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:despues de ExcluirDeGastosAdministrativos1
+__________________________
+
+Log Entry : 
+11/30/2017 15:47:46
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:despues de ReasignarAquellosQueSeLeFacturanForzosamenteAlCorredor1
+__________________________
+
+Log Entry : 
+11/30/2017 15:47:46
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:despues de CasosSyngenta_y_Acopios1
+__________________________
+
+Log Entry : 
+11/30/2017 15:47:46
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:entro en PostProcesos 1
+__________________________
+
+Log Entry : 
+11/30/2017 15:47:46
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:despues de EmparcharClienteSeparadoParaCasosQueSuperenUnMontoDeterminado 1
+__________________________
+
+Log Entry : 
+11/30/2017 15:47:46
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:despues de EmparcharClienteSeparadoParaFacturasQueSuperanCantidadDeRenglones 1
+__________________________
+
+Log Entry : 
+11/30/2017 15:47:46
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:despues de SepararAcopiosLDCyACA 1
+__________________________
+
+Log Entry : 
+11/30/2017 15:47:46
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:despues de PostProcesoFacturacion_ReglaExportadores 1
+__________________________
+
+Log Entry : 
+11/30/2017 15:47:46
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 2 en GetDatatableAsignacionAutomatica . tanda 4797
+__________________________
+
+Log Entry : 
+11/30/2017 15:47:46
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 3 en GetDatatableAsignacionAutomatica . tanda 4797
+__________________________
+
+Log Entry : 
+11/30/2017 15:47:46
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 4 en GetDatatableAsignacionAutomatica . tanda 4797
+__________________________
+
+Log Entry : 
+11/30/2017 15:47:46
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 2 en dtDatasourcePaso2.
+__________________________
+
+Log Entry : 
+11/30/2017 15:47:46
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 2b en dtDatasourcePaso2.
+__________________________
+
+Log Entry : 
+11/30/2017 15:47:46
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 2 en getgrillapaso2.
+__________________________
+
+Log Entry : 
+11/30/2017 15:47:46
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 3 en getgrillapaso2.
+__________________________
+
+Log Entry : 
+11/30/2017 15:47:46
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:salgo de  getGrillaPaso2 .
+__________________________
+
+Log Entry : 
+11/30/2017 15:47:46
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 2 en gv2ReBind.
+__________________________
+
+Log Entry : 
+11/30/2017 15:47:46
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:salgo de  gv2ReBind .
+__________________________
+
+Log Entry : 
+11/30/2017 15:47:56
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 1 en dtDatasourcePaso2.
+__________________________
+
+Log Entry : 
+11/30/2017 15:47:56
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:entrando en GetDatatableAsignacionAutomatica . tanda 4797
+__________________________
+
+Log Entry : 
+11/30/2017 15:47:56
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 2 en GetDatatableAsignacionAutomatica . tanda 4797
+__________________________
+
+Log Entry : 
+11/30/2017 15:47:56
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 3 en GetDatatableAsignacionAutomatica . tanda 4797
+__________________________
+
+Log Entry : 
+11/30/2017 15:47:56
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 4 en GetDatatableAsignacionAutomatica . tanda 4797
+__________________________
+
+Log Entry : 
+11/30/2017 15:47:56
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 2 en dtDatasourcePaso2.
+__________________________
+
+Log Entry : 
+11/30/2017 15:47:56
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 2b en dtDatasourcePaso2.
+__________________________
+
+Log Entry : 
+11/30/2017 15:47:56
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:entrando en GetDatatableAsignacionAutomatica . tanda 4797
+__________________________
+
+Log Entry : 
+11/30/2017 15:47:56
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 2 en GetDatatableAsignacionAutomatica . tanda 4797
+__________________________
+
+Log Entry : 
+11/30/2017 15:47:56
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 3 en GetDatatableAsignacionAutomatica . tanda 4797
+__________________________
+
+Log Entry : 
+11/30/2017 15:47:56
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 4 en GetDatatableAsignacionAutomatica . tanda 4797
+__________________________
+
+Log Entry : 
+11/30/2017 15:47:56
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:entro en  gv2ReBind 
+__________________________
+
+Log Entry : 
+11/30/2017 15:47:56
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 1 en dtDatasourcePaso2.
+__________________________
+
+Log Entry : 
+11/30/2017 15:47:56
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:entrando en GetDatatableAsignacionAutomatica . tanda 4797
+__________________________
+
+Log Entry : 
+11/30/2017 15:47:56
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 2 en GetDatatableAsignacionAutomatica . tanda 4797
+__________________________
+
+Log Entry : 
+11/30/2017 15:47:56
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 3 en GetDatatableAsignacionAutomatica . tanda 4797
+__________________________
+
+Log Entry : 
+11/30/2017 15:47:56
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 4 en GetDatatableAsignacionAutomatica . tanda 4797
+__________________________
+
+Log Entry : 
+11/30/2017 15:47:56
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 2 en dtDatasourcePaso2.
+__________________________
+
+Log Entry : 
+11/30/2017 15:47:56
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 2b en dtDatasourcePaso2.
+__________________________
+
+Log Entry : 
+11/30/2017 15:47:56
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 2 en getgrillapaso2.
+__________________________
+
+Log Entry : 
+11/30/2017 15:47:56
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 3 en getgrillapaso2.
+__________________________
+
+Log Entry : 
+11/30/2017 15:47:56
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:salgo de  getGrillaPaso2 .
+__________________________
+
+Log Entry : 
+11/30/2017 15:47:56
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 2 en gv2ReBind.
+__________________________
+
+Log Entry : 
+11/30/2017 15:47:56
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:salgo de  gv2ReBind .
+__________________________
+
+Log Entry : 
+11/30/2017 15:47:56
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:Hay tarifas en cero
+__________________________
+
+Log Entry : 
+11/30/2017 15:48:01
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 1 en dtDatasourcePaso2.
+__________________________
+
+Log Entry : 
+11/30/2017 15:48:01
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:entrando en GetDatatableAsignacionAutomatica . tanda 4797
+__________________________
+
+Log Entry : 
+11/30/2017 15:48:01
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 2 en GetDatatableAsignacionAutomatica . tanda 4797
+__________________________
+
+Log Entry : 
+11/30/2017 15:48:01
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 3 en GetDatatableAsignacionAutomatica . tanda 4797
+__________________________
+
+Log Entry : 
+11/30/2017 15:48:01
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 4 en GetDatatableAsignacionAutomatica . tanda 4797
+__________________________
+
+Log Entry : 
+11/30/2017 15:48:01
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 2 en dtDatasourcePaso2.
+__________________________
+
+Log Entry : 
+11/30/2017 15:48:01
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 2b en dtDatasourcePaso2.
+__________________________
+
+Log Entry : 
+11/30/2017 15:49:01
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:System.Exception
+La tarifa de la lista está vencida
+   en Pronto.ERP.Bll.ListaPreciosManager.VerificarVencimientoLista(Int64 idListaPrecio, String SC) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 520
+   en Pronto.ERP.Bll.ListaPreciosManager.SavePrecioPorCliente(String SC, Int64 IdCliente, Int64 IdArticulo, Double Precio, Int64 IdDestino) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 549
+   en CDPFacturacion.CambiarLasTarifasQueEstenEnCero(Double tarifaNueva) en C:\bdl\pronto\prontoweb\ProntoWeb\CDPFacturacion.aspx.vb:línea 2832
+BusinessLogic
+__________________________
+
+Log Entry : 
+11/30/2017 15:49:02
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:entro en  gv2ReBind 
+__________________________
+
+Log Entry : 
+11/30/2017 15:49:03
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 1 en dtDatasourcePaso2.
+__________________________
+
+Log Entry : 
+11/30/2017 15:49:03
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:entrando en GetDatatableAsignacionAutomatica . tanda 4797
+__________________________
+
+Log Entry : 
+11/30/2017 15:49:03
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 2 en GetDatatableAsignacionAutomatica . tanda 4797
+__________________________
+
+Log Entry : 
+11/30/2017 15:49:03
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 3 en GetDatatableAsignacionAutomatica . tanda 4797
+__________________________
+
+Log Entry : 
+11/30/2017 15:49:03
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 4 en GetDatatableAsignacionAutomatica . tanda 4797
+__________________________
+
+Log Entry : 
+11/30/2017 15:49:03
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 2 en dtDatasourcePaso2.
+__________________________
+
+Log Entry : 
+11/30/2017 15:49:03
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 2b en dtDatasourcePaso2.
+__________________________
+
+Log Entry : 
+11/30/2017 15:49:03
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 2 en getgrillapaso2.
+__________________________
+
+Log Entry : 
+11/30/2017 15:49:03
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 3 en getgrillapaso2.
+__________________________
+
+Log Entry : 
+11/30/2017 15:49:03
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:salgo de  getGrillaPaso2 .
+__________________________
+
+Log Entry : 
+11/30/2017 15:49:03
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 2 en gv2ReBind.
+__________________________
+
+Log Entry : 
+11/30/2017 15:49:03
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:salgo de  gv2ReBind .
+__________________________
+
+Log Entry : 
+11/30/2017 15:49:08
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 1 en dtDatasourcePaso2.
+__________________________
+
+Log Entry : 
+11/30/2017 15:49:08
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:entrando en GetDatatableAsignacionAutomatica . tanda 4797
+__________________________
+
+Log Entry : 
+11/30/2017 15:49:08
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 2 en GetDatatableAsignacionAutomatica . tanda 4797
+__________________________
+
+Log Entry : 
+11/30/2017 15:49:08
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 3 en GetDatatableAsignacionAutomatica . tanda 4797
+__________________________
+
+Log Entry : 
+11/30/2017 15:49:08
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 4 en GetDatatableAsignacionAutomatica . tanda 4797
+__________________________
+
+Log Entry : 
+11/30/2017 15:49:08
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 2 en dtDatasourcePaso2.
+__________________________
+
+Log Entry : 
+11/30/2017 15:49:08
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 2b en dtDatasourcePaso2.
+__________________________
+
+Log Entry : 
+11/30/2017 15:49:08
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:entrando en GetDatatableAsignacionAutomatica . tanda 4797
+__________________________
+
+Log Entry : 
+11/30/2017 15:49:08
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 2 en GetDatatableAsignacionAutomatica . tanda 4797
+__________________________
+
+Log Entry : 
+11/30/2017 15:49:08
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 3 en GetDatatableAsignacionAutomatica . tanda 4797
+__________________________
+
+Log Entry : 
+11/30/2017 15:49:08
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 4 en GetDatatableAsignacionAutomatica . tanda 4797
+__________________________
+
+Log Entry : 
+11/30/2017 15:49:10
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:Tarifas ok. Se factura. 30/11/2017 15:49:10 4 FUTUROS Y OPCIONES .COM Mariano
+__________________________
+
+Log Entry : 
+11/30/2017 15:49:10
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:Separo las facturas que se generan en el lote.30/11/2017 15:49:10
+__________________________
+
+Log Entry : 
+11/30/2017 15:49:10
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:ActualizarCampoClienteSeparador 1 filas
+__________________________
+
+Log Entry : 
+11/30/2017 15:49:10
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:Empiezo a facturar en serio.30/11/2017 15:49:10
+__________________________
+
+Log Entry : 
+11/30/2017 15:49:16
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:Fin facturacion.7872 7872  Tiempo usado: 6 segundos. 
+__________________________
+
+Log Entry : 
+11/30/2017 15:49:16
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:UPDATE    Facturas  SET numeroordencompraexterna=0   WHERE idFactura>= 100236  AND    idFactura <= 100236
+__________________________
+
+Log Entry : 
+11/30/2017 15:49:28
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:entrando en GetDatatableAsignacionAutomatica . tanda 4797
+__________________________
+
+Log Entry : 
+11/30/2017 15:49:28
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 2 en GetDatatableAsignacionAutomatica . tanda 4797
+__________________________
+
+Log Entry : 
+11/30/2017 15:49:28
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 3 en GetDatatableAsignacionAutomatica . tanda 4797
+__________________________
+
+Log Entry : 
+11/30/2017 15:49:28
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 4 en GetDatatableAsignacionAutomatica . tanda 4797
+__________________________
+
+Log Entry : 
+11/30/2017 15:49:28
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:ActualizarCampoClienteSeparador 1 filas
+__________________________
+
+Log Entry : 
+11/30/2017 15:50:49
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:Server.ScriptTimeout puesto en 7200s. Valor original: 30000000s.
+__________________________
+
+Log Entry : 
+11/30/2017 15:51:02
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:entro en  gv2ReBind 
+__________________________
+
+Log Entry : 
+11/30/2017 15:51:02
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 1 en dtDatasourcePaso2.
+__________________________
+
+Log Entry : 
+11/30/2017 15:51:02
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:entrando en GetDatatableAsignacionAutomatica . tanda 
+__________________________
+
+Log Entry : 
+11/30/2017 15:51:02
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:entrando en generar tabla. tanda 0
+__________________________
+
+Log Entry : 
+11/30/2017 15:51:02
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 2. tanda 0
+__________________________
+
+Log Entry : 
+11/30/2017 15:51:02
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 3. tanda 0
+__________________________
+
+Log Entry : 
+11/30/2017 15:51:02
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:Cartas sin automatico encontrado 63
+__________________________
+
+Log Entry : 
+11/30/2017 15:51:02
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 4. tanda 0
+__________________________
+
+Log Entry : 
+11/30/2017 15:51:02
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 5. tanda 0
+__________________________
+
+Log Entry : 
+11/30/2017 15:51:02
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:entro a Preprocesos 2301
+__________________________
+
+Log Entry : 
+11/30/2017 15:51:02
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:despues de AgregarEmbarques2301
+__________________________
+
+Log Entry : 
+11/30/2017 15:51:02
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:despues de ExcluirDeGastosAdministrativos2301
+__________________________
+
+Log Entry : 
+11/30/2017 15:51:02
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:despues de ReasignarAquellosQueSeLeFacturanForzosamenteAlCorredor2301
+__________________________
+
+Log Entry : 
+11/30/2017 15:51:03
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:despues de CasosSyngenta_y_Acopios2301
+__________________________
+
+Log Entry : 
+11/30/2017 15:51:03
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:entro en PostProcesos 2267
+__________________________
+
+Log Entry : 
+11/30/2017 15:51:03
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:despues de EmparcharClienteSeparadoParaCasosQueSuperenUnMontoDeterminado 2267
+__________________________
+
+Log Entry : 
+11/30/2017 15:51:03
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:despues de EmparcharClienteSeparadoParaFacturasQueSuperanCantidadDeRenglones 2267
+__________________________
+
+Log Entry : 
+11/30/2017 15:51:03
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:despues de SepararAcopiosLDCyACA 2267
+__________________________
+
+Log Entry : 
+11/30/2017 15:51:03
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:despues de PostProcesoFacturacion_ReglaExportadores 2267
+__________________________
+
+Log Entry : 
+11/30/2017 15:51:03
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 6. tanda 0
+__________________________
+
+Log Entry : 
+11/30/2017 15:51:03
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 7. tanda 9887
+__________________________
+
+Log Entry : 
+11/30/2017 15:51:03
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:salgo. tanda 9887
+__________________________
+
+Log Entry : 
+11/30/2017 15:51:03
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 2 en GetDatatableAsignacionAutomatica . tanda 9887
+__________________________
+
+Log Entry : 
+11/30/2017 15:51:04
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 3 en GetDatatableAsignacionAutomatica . tanda 9887
+__________________________
+
+Log Entry : 
+11/30/2017 15:51:04
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 4 en GetDatatableAsignacionAutomatica . tanda 9887
+__________________________
+
+Log Entry : 
+11/30/2017 15:51:04
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 2 en dtDatasourcePaso2.
+__________________________
+
+Log Entry : 
+11/30/2017 15:51:04
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 2b en dtDatasourcePaso2.
+__________________________
+
+Log Entry : 
+11/30/2017 15:51:04
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 2 en getgrillapaso2.
+__________________________
+
+Log Entry : 
+11/30/2017 15:51:04
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:salgo de  getGrillaPaso2 .
+__________________________
+
+Log Entry : 
+11/30/2017 15:51:04
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 2 en gv2ReBind.
+__________________________
+
+Log Entry : 
+11/30/2017 15:51:04
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:salgo de  gv2ReBind .
+__________________________
+
+Log Entry : 
+11/30/2017 15:51:15
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:entro en  gv2ReBind 
+__________________________
+
+Log Entry : 
+11/30/2017 15:51:15
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 1 en dtDatasourcePaso2.
+__________________________
+
+Log Entry : 
+11/30/2017 15:51:15
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:entrando en GetDatatableAsignacionAutomatica . tanda 0
+__________________________
+
+Log Entry : 
+11/30/2017 15:51:15
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:Cartas sin automatico encontrado (pero este es el modo no automatico!!!)415
+__________________________
+
+Log Entry : 
+11/30/2017 15:51:16
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:entro a Preprocesos 1869
+__________________________
+
+Log Entry : 
+11/30/2017 15:51:16
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:despues de AgregarEmbarques1869
+__________________________
+
+Log Entry : 
+11/30/2017 15:51:16
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:despues de ExcluirDeGastosAdministrativos1869
+__________________________
+
+Log Entry : 
+11/30/2017 15:51:16
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:despues de ReasignarAquellosQueSeLeFacturanForzosamenteAlCorredor1869
+__________________________
+
+Log Entry : 
+11/30/2017 15:51:16
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:despues de CasosSyngenta_y_Acopios1869
+__________________________
+
+Log Entry : 
+11/30/2017 15:51:16
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:entro en PostProcesos 1869
+__________________________
+
+Log Entry : 
+11/30/2017 15:51:16
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:despues de EmparcharClienteSeparadoParaCasosQueSuperenUnMontoDeterminado 1869
+__________________________
+
+Log Entry : 
+11/30/2017 15:51:16
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:despues de EmparcharClienteSeparadoParaFacturasQueSuperanCantidadDeRenglones 1869
+__________________________
+
+Log Entry : 
+11/30/2017 15:51:16
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:despues de SepararAcopiosLDCyACA 1869
+__________________________
+
+Log Entry : 
+11/30/2017 15:51:16
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:despues de PostProcesoFacturacion_ReglaExportadores 1869
+__________________________
+
+Log Entry : 
+11/30/2017 15:51:16
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 2 en GetDatatableAsignacionAutomatica . tanda 7506
+__________________________
+
+Log Entry : 
+11/30/2017 15:51:16
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 3 en GetDatatableAsignacionAutomatica . tanda 7506
+__________________________
+
+Log Entry : 
+11/30/2017 15:51:16
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 4 en GetDatatableAsignacionAutomatica . tanda 7506
+__________________________
+
+Log Entry : 
+11/30/2017 15:51:16
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 2 en dtDatasourcePaso2.
+__________________________
+
+Log Entry : 
+11/30/2017 15:51:16
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 2b en dtDatasourcePaso2.
+__________________________
+
+Log Entry : 
+11/30/2017 15:51:16
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 2 en getgrillapaso2.
+__________________________
+
+Log Entry : 
+11/30/2017 15:51:16
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:salgo de  getGrillaPaso2 .
+__________________________
+
+Log Entry : 
+11/30/2017 15:51:16
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 2 en gv2ReBind.
+__________________________
+
+Log Entry : 
+11/30/2017 15:51:16
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:salgo de  gv2ReBind .
+__________________________
+
+Log Entry : 
+11/30/2017 15:51:16
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:entro en  gv2ReBind 
+__________________________
+
+Log Entry : 
+11/30/2017 15:51:16
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 1 en dtDatasourcePaso2.
+__________________________
+
+Log Entry : 
+11/30/2017 15:51:16
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:entrando en GetDatatableAsignacionAutomatica . tanda 0
+__________________________
+
+Log Entry : 
+11/30/2017 15:51:16
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:Cartas sin automatico encontrado (pero este es el modo no automatico!!!)415
+__________________________
+
+Log Entry : 
+11/30/2017 15:51:16
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:entro a Preprocesos 1869
+__________________________
+
+Log Entry : 
+11/30/2017 15:51:16
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:despues de AgregarEmbarques1869
+__________________________
+
+Log Entry : 
+11/30/2017 15:51:16
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:despues de ExcluirDeGastosAdministrativos1869
+__________________________
+
+Log Entry : 
+11/30/2017 15:51:16
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:despues de ReasignarAquellosQueSeLeFacturanForzosamenteAlCorredor1869
+__________________________
+
+Log Entry : 
+11/30/2017 15:51:16
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:despues de CasosSyngenta_y_Acopios1869
+__________________________
+
+Log Entry : 
+11/30/2017 15:51:16
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:entro en PostProcesos 1869
+__________________________
+
+Log Entry : 
+11/30/2017 15:51:16
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:despues de EmparcharClienteSeparadoParaCasosQueSuperenUnMontoDeterminado 1869
+__________________________
+
+Log Entry : 
+11/30/2017 15:51:17
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:despues de EmparcharClienteSeparadoParaFacturasQueSuperanCantidadDeRenglones 1869
+__________________________
+
+Log Entry : 
+11/30/2017 15:51:17
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:despues de SepararAcopiosLDCyACA 1869
+__________________________
+
+Log Entry : 
+11/30/2017 15:51:17
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:despues de PostProcesoFacturacion_ReglaExportadores 1869
+__________________________
+
+Log Entry : 
+11/30/2017 15:51:17
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 2 en GetDatatableAsignacionAutomatica . tanda 9082
+__________________________
+
+Log Entry : 
+11/30/2017 15:51:17
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 3 en GetDatatableAsignacionAutomatica . tanda 9082
+__________________________
+
+Log Entry : 
+11/30/2017 15:51:17
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 4 en GetDatatableAsignacionAutomatica . tanda 9082
+__________________________
+
+Log Entry : 
+11/30/2017 15:51:17
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 2 en dtDatasourcePaso2.
+__________________________
+
+Log Entry : 
+11/30/2017 15:51:17
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 2b en dtDatasourcePaso2.
+__________________________
+
+Log Entry : 
+11/30/2017 15:51:17
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 2 en getgrillapaso2.
+__________________________
+
+Log Entry : 
+11/30/2017 15:51:17
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:salgo de  getGrillaPaso2 .
+__________________________
+
+Log Entry : 
+11/30/2017 15:51:17
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 2 en gv2ReBind.
+__________________________
+
+Log Entry : 
+11/30/2017 15:51:17
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:salgo de  gv2ReBind .
+__________________________
+
+Log Entry : 
+11/30/2017 15:51:36
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 1 en dtDatasourcePaso2.
+__________________________
+
+Log Entry : 
+11/30/2017 15:51:36
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:entrando en GetDatatableAsignacionAutomatica . tanda 9082
+__________________________
+
+Log Entry : 
+11/30/2017 15:51:36
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 2 en GetDatatableAsignacionAutomatica . tanda 9082
+__________________________
+
+Log Entry : 
+11/30/2017 15:51:36
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 3 en GetDatatableAsignacionAutomatica . tanda 9082
+__________________________
+
+Log Entry : 
+11/30/2017 15:51:36
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 4 en GetDatatableAsignacionAutomatica . tanda 9082
+__________________________
+
+Log Entry : 
+11/30/2017 15:51:36
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 2 en dtDatasourcePaso2.
+__________________________
+
+Log Entry : 
+11/30/2017 15:51:36
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 2b en dtDatasourcePaso2.
+__________________________
+
+Log Entry : 
+11/30/2017 15:51:59
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:System.Exception
+La tarifa de la lista está vencida
+   en Pronto.ERP.Bll.ListaPreciosManager.VerificarVencimientoLista(Int64 idListaPrecio, String SC) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 520
+   en Pronto.ERP.Bll.ListaPreciosManager.SavePrecioPorCliente(String SC, Int64 IdCliente, Int64 IdArticulo, Double Precio, Int64 IdDestino) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 549
+   en CDPFacturacion.CambiarLasTarifasQueEstenEnCero(Double tarifaNueva) en C:\bdl\pronto\prontoweb\ProntoWeb\CDPFacturacion.aspx.vb:línea 2832
+BusinessLogic
+__________________________
+
+Log Entry : 
+11/30/2017 15:52:02
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:System.Exception
+La tarifa de la lista está vencida
+   en Pronto.ERP.Bll.ListaPreciosManager.VerificarVencimientoLista(Int64 idListaPrecio, String SC) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 520
+   en Pronto.ERP.Bll.ListaPreciosManager.SavePrecioPorCliente(String SC, Int64 IdCliente, Int64 IdArticulo, Double Precio, Int64 IdDestino) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 549
+   en CDPFacturacion.CambiarLasTarifasQueEstenEnCero(Double tarifaNueva) en C:\bdl\pronto\prontoweb\ProntoWeb\CDPFacturacion.aspx.vb:línea 2832
+BusinessLogic
+__________________________
+
+Log Entry : 
+11/30/2017 15:52:02
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:System.Exception
+La tarifa de la lista está vencida
+   en Pronto.ERP.Bll.ListaPreciosManager.VerificarVencimientoLista(Int64 idListaPrecio, String SC) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 520
+   en Pronto.ERP.Bll.ListaPreciosManager.SavePrecioPorCliente(String SC, Int64 IdCliente, Int64 IdArticulo, Double Precio, Int64 IdDestino) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 549
+   en CDPFacturacion.CambiarLasTarifasQueEstenEnCero(Double tarifaNueva) en C:\bdl\pronto\prontoweb\ProntoWeb\CDPFacturacion.aspx.vb:línea 2832
+BusinessLogic
+__________________________
+
+Log Entry : 
+11/30/2017 15:52:02
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:System.Exception
+La tarifa de la lista está vencida
+   en Pronto.ERP.Bll.ListaPreciosManager.VerificarVencimientoLista(Int64 idListaPrecio, String SC) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 520
+   en Pronto.ERP.Bll.ListaPreciosManager.SavePrecioPorCliente(String SC, Int64 IdCliente, Int64 IdArticulo, Double Precio, Int64 IdDestino) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 549
+   en CDPFacturacion.CambiarLasTarifasQueEstenEnCero(Double tarifaNueva) en C:\bdl\pronto\prontoweb\ProntoWeb\CDPFacturacion.aspx.vb:línea 2832
+BusinessLogic
+__________________________
+
+Log Entry : 
+11/30/2017 15:52:02
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:System.Exception
+La tarifa de la lista está vencida
+   en Pronto.ERP.Bll.ListaPreciosManager.VerificarVencimientoLista(Int64 idListaPrecio, String SC) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 520
+   en Pronto.ERP.Bll.ListaPreciosManager.SavePrecioPorCliente(String SC, Int64 IdCliente, Int64 IdArticulo, Double Precio, Int64 IdDestino) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 549
+   en CDPFacturacion.CambiarLasTarifasQueEstenEnCero(Double tarifaNueva) en C:\bdl\pronto\prontoweb\ProntoWeb\CDPFacturacion.aspx.vb:línea 2832
+BusinessLogic
+__________________________
+
+Log Entry : 
+11/30/2017 15:52:02
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:System.Exception
+La tarifa de la lista está vencida
+   en Pronto.ERP.Bll.ListaPreciosManager.VerificarVencimientoLista(Int64 idListaPrecio, String SC) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 520
+   en Pronto.ERP.Bll.ListaPreciosManager.SavePrecioPorCliente(String SC, Int64 IdCliente, Int64 IdArticulo, Double Precio, Int64 IdDestino) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 549
+   en CDPFacturacion.CambiarLasTarifasQueEstenEnCero(Double tarifaNueva) en C:\bdl\pronto\prontoweb\ProntoWeb\CDPFacturacion.aspx.vb:línea 2832
+BusinessLogic
+__________________________
+
+Log Entry : 
+11/30/2017 15:52:02
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:System.Exception
+La tarifa de la lista está vencida
+   en Pronto.ERP.Bll.ListaPreciosManager.VerificarVencimientoLista(Int64 idListaPrecio, String SC) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 520
+   en Pronto.ERP.Bll.ListaPreciosManager.SavePrecioPorCliente(String SC, Int64 IdCliente, Int64 IdArticulo, Double Precio, Int64 IdDestino) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 549
+   en CDPFacturacion.CambiarLasTarifasQueEstenEnCero(Double tarifaNueva) en C:\bdl\pronto\prontoweb\ProntoWeb\CDPFacturacion.aspx.vb:línea 2832
+BusinessLogic
+__________________________
+
+Log Entry : 
+11/30/2017 15:52:02
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:System.Exception
+La tarifa de la lista está vencida
+   en Pronto.ERP.Bll.ListaPreciosManager.VerificarVencimientoLista(Int64 idListaPrecio, String SC) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 520
+   en Pronto.ERP.Bll.ListaPreciosManager.SavePrecioPorCliente(String SC, Int64 IdCliente, Int64 IdArticulo, Double Precio, Int64 IdDestino) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 549
+   en CDPFacturacion.CambiarLasTarifasQueEstenEnCero(Double tarifaNueva) en C:\bdl\pronto\prontoweb\ProntoWeb\CDPFacturacion.aspx.vb:línea 2832
+BusinessLogic
+__________________________
+
+Log Entry : 
+11/30/2017 15:52:02
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:System.Exception
+La tarifa de la lista está vencida
+   en Pronto.ERP.Bll.ListaPreciosManager.VerificarVencimientoLista(Int64 idListaPrecio, String SC) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 520
+   en Pronto.ERP.Bll.ListaPreciosManager.SavePrecioPorCliente(String SC, Int64 IdCliente, Int64 IdArticulo, Double Precio, Int64 IdDestino) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 549
+   en CDPFacturacion.CambiarLasTarifasQueEstenEnCero(Double tarifaNueva) en C:\bdl\pronto\prontoweb\ProntoWeb\CDPFacturacion.aspx.vb:línea 2832
+BusinessLogic
+__________________________
+
+Log Entry : 
+11/30/2017 15:52:02
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:System.Exception
+La tarifa de la lista está vencida
+   en Pronto.ERP.Bll.ListaPreciosManager.VerificarVencimientoLista(Int64 idListaPrecio, String SC) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 520
+   en Pronto.ERP.Bll.ListaPreciosManager.SavePrecioPorCliente(String SC, Int64 IdCliente, Int64 IdArticulo, Double Precio, Int64 IdDestino) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 549
+   en CDPFacturacion.CambiarLasTarifasQueEstenEnCero(Double tarifaNueva) en C:\bdl\pronto\prontoweb\ProntoWeb\CDPFacturacion.aspx.vb:línea 2832
+BusinessLogic
+__________________________
+
+Log Entry : 
+11/30/2017 15:52:02
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:entro en  gv2ReBind 
+__________________________
+
+Log Entry : 
+11/30/2017 15:52:02
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 1 en dtDatasourcePaso2.
+__________________________
+
+Log Entry : 
+11/30/2017 15:52:02
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:entrando en GetDatatableAsignacionAutomatica . tanda 9082
+__________________________
+
+Log Entry : 
+11/30/2017 15:52:02
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 2 en GetDatatableAsignacionAutomatica . tanda 9082
+__________________________
+
+Log Entry : 
+11/30/2017 15:52:02
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 3 en GetDatatableAsignacionAutomatica . tanda 9082
+__________________________
+
+Log Entry : 
+11/30/2017 15:52:02
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 4 en GetDatatableAsignacionAutomatica . tanda 9082
+__________________________
+
+Log Entry : 
+11/30/2017 15:52:02
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 2 en dtDatasourcePaso2.
+__________________________
+
+Log Entry : 
+11/30/2017 15:52:02
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 2b en dtDatasourcePaso2.
+__________________________
+
+Log Entry : 
+11/30/2017 15:52:02
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 2 en getgrillapaso2.
+__________________________
+
+Log Entry : 
+11/30/2017 15:52:02
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:salgo de  getGrillaPaso2 .
+__________________________
+
+Log Entry : 
+11/30/2017 15:52:02
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 2 en gv2ReBind.
+__________________________
+
+Log Entry : 
+11/30/2017 15:52:02
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:salgo de  gv2ReBind .
+__________________________
+
+Log Entry : 
+11/30/2017 15:52:07
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 1 en dtDatasourcePaso2.
+__________________________
+
+Log Entry : 
+11/30/2017 15:52:07
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:entrando en GetDatatableAsignacionAutomatica . tanda 9082
+__________________________
+
+Log Entry : 
+11/30/2017 15:52:07
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 2 en GetDatatableAsignacionAutomatica . tanda 9082
+__________________________
+
+Log Entry : 
+11/30/2017 15:52:07
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 3 en GetDatatableAsignacionAutomatica . tanda 9082
+__________________________
+
+Log Entry : 
+11/30/2017 15:52:07
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 4 en GetDatatableAsignacionAutomatica . tanda 9082
+__________________________
+
+Log Entry : 
+11/30/2017 15:52:07
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 2 en dtDatasourcePaso2.
+__________________________
+
+Log Entry : 
+11/30/2017 15:52:07
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 2b en dtDatasourcePaso2.
+__________________________
+
+Log Entry : 
+11/30/2017 15:52:07
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:entrando en GetDatatableAsignacionAutomatica . tanda 9082
+__________________________
+
+Log Entry : 
+11/30/2017 15:52:07
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 2 en GetDatatableAsignacionAutomatica . tanda 9082
+__________________________
+
+Log Entry : 
+11/30/2017 15:52:07
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 3 en GetDatatableAsignacionAutomatica . tanda 9082
+__________________________
+
+Log Entry : 
+11/30/2017 15:52:07
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 4 en GetDatatableAsignacionAutomatica . tanda 9082
+__________________________
+
+Log Entry : 
+11/30/2017 15:52:07
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:Tarifas ok. Se factura. 30/11/2017 15:52:07 4 FUTUROS Y OPCIONES .COM Mariano
+__________________________
+
+Log Entry : 
+11/30/2017 15:52:07
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:Separo las facturas que se generan en el lote.30/11/2017 15:52:07
+__________________________
+
+Log Entry : 
+11/30/2017 15:52:07
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:ActualizarCampoClienteSeparador 1869 filas
+__________________________
+
+Log Entry : 
+11/30/2017 15:52:09
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:Empiezo a facturar en serio.30/11/2017 15:52:09
+__________________________
+
+Log Entry : 
+11/30/2017 15:53:10
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:Fin facturacion.7873 7874  Tiempo usado: 63 segundos. 
+__________________________
+
+Log Entry : 
+11/30/2017 15:53:10
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:UPDATE    Facturas  SET numeroordencompraexterna=0   WHERE idFactura>= 100237  AND    idFactura <= 100238
+__________________________
+
+Log Entry : 
+11/30/2017 15:53:12
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:entrando en GetDatatableAsignacionAutomatica . tanda 9082
+__________________________
+
+Log Entry : 
+11/30/2017 15:53:12
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 2 en GetDatatableAsignacionAutomatica . tanda 9082
+__________________________
+
+Log Entry : 
+11/30/2017 15:53:12
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 3 en GetDatatableAsignacionAutomatica . tanda 9082
+__________________________
+
+Log Entry : 
+11/30/2017 15:53:12
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 4 en GetDatatableAsignacionAutomatica . tanda 9082
+__________________________
+
+Log Entry : 
+11/30/2017 15:53:12
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:ActualizarCampoClienteSeparador 1869 filas
+__________________________
+
+Log Entry : 
+11/30/2017 15:53:22
+Error in: http://localhost:50769/ProntoWeb/Factura.aspx?Id=100238. Error Message:Me faltan parametros. PuntosVenta_TX_PuntosVentaPorIdTipoComprobanteLetra esperaba 6 y se le pasaron 3
+__________________________
+
+Log Entry : 
+11/30/2017 15:53:22
+Error in: http://localhost:50769/ProntoWeb/Factura.aspx?Id=100238. Error Message:Me faltan parametros. PuntosVenta_TX_PuntosVentaPorIdTipoComprobanteLetra esperaba 6 y se le pasaron 3
+__________________________
+
+Log Entry : 
+11/30/2017 15:53:24
+Error in: http://localhost:50769/ProntoWeb/Factura.aspx?Id=100237. Error Message:Me faltan parametros. PuntosVenta_TX_PuntosVentaPorIdTipoComprobanteLetra esperaba 6 y se le pasaron 3
+__________________________
+
+Log Entry : 
+11/30/2017 15:53:24
+Error in: http://localhost:50769/ProntoWeb/Factura.aspx?Id=100237. Error Message:Me faltan parametros. PuntosVenta_TX_PuntosVentaPorIdTipoComprobanteLetra esperaba 6 y se le pasaron 3
+__________________________
+
+Log Entry : 
+11/30/2017 15:54:34
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:entro en  gv2ReBind 
+__________________________
+
+Log Entry : 
+11/30/2017 15:54:34
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 1 en dtDatasourcePaso2.
+__________________________
+
+Log Entry : 
+11/30/2017 15:54:34
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:entrando en GetDatatableAsignacionAutomatica . tanda 0
+__________________________
+
+Log Entry : 
+11/30/2017 15:54:34
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:Cartas sin automatico encontrado (pero este es el modo no automatico!!!)415
+__________________________
+
+Log Entry : 
+11/30/2017 15:54:34
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:entro a Preprocesos 1869
+__________________________
+
+Log Entry : 
+11/30/2017 15:54:34
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:despues de AgregarEmbarques1869
+__________________________
+
+Log Entry : 
+11/30/2017 15:54:34
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:despues de ExcluirDeGastosAdministrativos1869
+__________________________
+
+Log Entry : 
+11/30/2017 15:54:34
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:despues de ReasignarAquellosQueSeLeFacturanForzosamenteAlCorredor1869
+__________________________
+
+Log Entry : 
+11/30/2017 15:54:34
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:despues de CasosSyngenta_y_Acopios1869
+__________________________
+
+Log Entry : 
+11/30/2017 15:54:34
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:entro en PostProcesos 1869
+__________________________
+
+Log Entry : 
+11/30/2017 15:54:34
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:despues de EmparcharClienteSeparadoParaCasosQueSuperenUnMontoDeterminado 1869
+__________________________
+
+Log Entry : 
+11/30/2017 15:54:34
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:despues de EmparcharClienteSeparadoParaFacturasQueSuperanCantidadDeRenglones 1869
+__________________________
+
+Log Entry : 
+11/30/2017 15:54:34
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:despues de SepararAcopiosLDCyACA 1869
+__________________________
+
+Log Entry : 
+11/30/2017 15:54:34
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:despues de PostProcesoFacturacion_ReglaExportadores 1869
+__________________________
+
+Log Entry : 
+11/30/2017 15:54:35
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 2 en GetDatatableAsignacionAutomatica . tanda 8692
+__________________________
+
+Log Entry : 
+11/30/2017 15:54:35
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 3 en GetDatatableAsignacionAutomatica . tanda 8692
+__________________________
+
+Log Entry : 
+11/30/2017 15:54:35
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 4 en GetDatatableAsignacionAutomatica . tanda 8692
+__________________________
+
+Log Entry : 
+11/30/2017 15:54:35
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 2 en dtDatasourcePaso2.
+__________________________
+
+Log Entry : 
+11/30/2017 15:54:35
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 2b en dtDatasourcePaso2.
+__________________________
+
+Log Entry : 
+11/30/2017 15:54:35
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 2 en getgrillapaso2.
+__________________________
+
+Log Entry : 
+11/30/2017 15:54:35
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:salgo de  getGrillaPaso2 .
+__________________________
+
+Log Entry : 
+11/30/2017 15:54:35
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 2 en gv2ReBind.
+__________________________
+
+Log Entry : 
+11/30/2017 15:54:35
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:salgo de  gv2ReBind .
+__________________________
+
+Log Entry : 
+11/30/2017 15:54:58
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:entro en  gv2ReBind 
+__________________________
+
+Log Entry : 
+11/30/2017 15:54:58
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 1 en dtDatasourcePaso2.
+__________________________
+
+Log Entry : 
+11/30/2017 15:54:58
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:entrando en GetDatatableAsignacionAutomatica . tanda 
+__________________________
+
+Log Entry : 
+11/30/2017 15:54:58
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:Cartas sin automatico encontrado (pero este es el modo no automatico!!!)415
+__________________________
+
+Log Entry : 
+11/30/2017 15:54:58
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:entro a Preprocesos 1869
+__________________________
+
+Log Entry : 
+11/30/2017 15:54:58
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:despues de AgregarEmbarques1869
+__________________________
+
+Log Entry : 
+11/30/2017 15:54:58
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:despues de ExcluirDeGastosAdministrativos1869
+__________________________
+
+Log Entry : 
+11/30/2017 15:54:58
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:despues de ReasignarAquellosQueSeLeFacturanForzosamenteAlCorredor1869
+__________________________
+
+Log Entry : 
+11/30/2017 15:54:58
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:despues de CasosSyngenta_y_Acopios1869
+__________________________
+
+Log Entry : 
+11/30/2017 15:54:58
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:entro en PostProcesos 1869
+__________________________
+
+Log Entry : 
+11/30/2017 15:54:58
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:despues de EmparcharClienteSeparadoParaCasosQueSuperenUnMontoDeterminado 1869
+__________________________
+
+Log Entry : 
+11/30/2017 15:54:58
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:despues de EmparcharClienteSeparadoParaFacturasQueSuperanCantidadDeRenglones 1869
+__________________________
+
+Log Entry : 
+11/30/2017 15:54:58
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:despues de SepararAcopiosLDCyACA 1869
+__________________________
+
+Log Entry : 
+11/30/2017 15:54:58
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:despues de PostProcesoFacturacion_ReglaExportadores 1869
+__________________________
+
+Log Entry : 
+11/30/2017 15:54:59
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 2 en GetDatatableAsignacionAutomatica . tanda 7421
+__________________________
+
+Log Entry : 
+11/30/2017 15:54:59
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 3 en GetDatatableAsignacionAutomatica . tanda 7421
+__________________________
+
+Log Entry : 
+11/30/2017 15:54:59
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 4 en GetDatatableAsignacionAutomatica . tanda 7421
+__________________________
+
+Log Entry : 
+11/30/2017 15:54:59
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 2 en dtDatasourcePaso2.
+__________________________
+
+Log Entry : 
+11/30/2017 15:54:59
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 2b en dtDatasourcePaso2.
+__________________________
+
+Log Entry : 
+11/30/2017 15:54:59
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 2 en getgrillapaso2.
+__________________________
+
+Log Entry : 
+11/30/2017 15:54:59
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:salgo de  getGrillaPaso2 .
+__________________________
+
+Log Entry : 
+11/30/2017 15:54:59
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 2 en gv2ReBind.
+__________________________
+
+Log Entry : 
+11/30/2017 15:54:59
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:salgo de  gv2ReBind .
+__________________________
+
+Log Entry : 
+11/30/2017 15:55:21
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 1 en dtDatasourcePaso2.
+__________________________
+
+Log Entry : 
+11/30/2017 15:55:21
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:entrando en GetDatatableAsignacionAutomatica . tanda 7421
+__________________________
+
+Log Entry : 
+11/30/2017 15:55:21
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 2 en GetDatatableAsignacionAutomatica . tanda 7421
+__________________________
+
+Log Entry : 
+11/30/2017 15:55:21
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 3 en GetDatatableAsignacionAutomatica . tanda 7421
+__________________________
+
+Log Entry : 
+11/30/2017 15:55:21
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 4 en GetDatatableAsignacionAutomatica . tanda 7421
+__________________________
+
+Log Entry : 
+11/30/2017 15:55:21
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 2 en dtDatasourcePaso2.
+__________________________
+
+Log Entry : 
+11/30/2017 15:55:21
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 2b en dtDatasourcePaso2.
+__________________________
+
+Log Entry : 
+11/30/2017 15:55:24
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:System.Exception
+La tarifa de la lista está vencida
+   en Pronto.ERP.Bll.ListaPreciosManager.VerificarVencimientoLista(Int64 idListaPrecio, String SC) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 520
+   en Pronto.ERP.Bll.ListaPreciosManager.SavePrecioPorCliente(String SC, Int64 IdCliente, Int64 IdArticulo, Double Precio, Int64 IdDestino) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 549
+   en CDPFacturacion.CambiarLasTarifasQueEstenEnCero(Double tarifaNueva) en C:\bdl\pronto\prontoweb\ProntoWeb\CDPFacturacion.aspx.vb:línea 2832
+BusinessLogic
+__________________________
+
+Log Entry : 
+11/30/2017 15:55:24
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:System.Exception
+La tarifa de la lista está vencida
+   en Pronto.ERP.Bll.ListaPreciosManager.VerificarVencimientoLista(Int64 idListaPrecio, String SC) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 520
+   en Pronto.ERP.Bll.ListaPreciosManager.SavePrecioPorCliente(String SC, Int64 IdCliente, Int64 IdArticulo, Double Precio, Int64 IdDestino) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 549
+   en CDPFacturacion.CambiarLasTarifasQueEstenEnCero(Double tarifaNueva) en C:\bdl\pronto\prontoweb\ProntoWeb\CDPFacturacion.aspx.vb:línea 2832
+BusinessLogic
+__________________________
+
+Log Entry : 
+11/30/2017 15:55:24
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:System.Exception
+La tarifa de la lista está vencida
+   en Pronto.ERP.Bll.ListaPreciosManager.VerificarVencimientoLista(Int64 idListaPrecio, String SC) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 520
+   en Pronto.ERP.Bll.ListaPreciosManager.SavePrecioPorCliente(String SC, Int64 IdCliente, Int64 IdArticulo, Double Precio, Int64 IdDestino) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 549
+   en CDPFacturacion.CambiarLasTarifasQueEstenEnCero(Double tarifaNueva) en C:\bdl\pronto\prontoweb\ProntoWeb\CDPFacturacion.aspx.vb:línea 2832
+BusinessLogic
+__________________________
+
+Log Entry : 
+11/30/2017 15:55:24
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:System.Exception
+La tarifa de la lista está vencida
+   en Pronto.ERP.Bll.ListaPreciosManager.VerificarVencimientoLista(Int64 idListaPrecio, String SC) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 520
+   en Pronto.ERP.Bll.ListaPreciosManager.SavePrecioPorCliente(String SC, Int64 IdCliente, Int64 IdArticulo, Double Precio, Int64 IdDestino) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 549
+   en CDPFacturacion.CambiarLasTarifasQueEstenEnCero(Double tarifaNueva) en C:\bdl\pronto\prontoweb\ProntoWeb\CDPFacturacion.aspx.vb:línea 2832
+BusinessLogic
+__________________________
+
+Log Entry : 
+11/30/2017 15:55:24
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:System.Exception
+La tarifa de la lista está vencida
+   en Pronto.ERP.Bll.ListaPreciosManager.VerificarVencimientoLista(Int64 idListaPrecio, String SC) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 520
+   en Pronto.ERP.Bll.ListaPreciosManager.SavePrecioPorCliente(String SC, Int64 IdCliente, Int64 IdArticulo, Double Precio, Int64 IdDestino) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 549
+   en CDPFacturacion.CambiarLasTarifasQueEstenEnCero(Double tarifaNueva) en C:\bdl\pronto\prontoweb\ProntoWeb\CDPFacturacion.aspx.vb:línea 2832
+BusinessLogic
+__________________________
+
+Log Entry : 
+11/30/2017 15:55:24
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:System.Exception
+La tarifa de la lista está vencida
+   en Pronto.ERP.Bll.ListaPreciosManager.VerificarVencimientoLista(Int64 idListaPrecio, String SC) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 520
+   en Pronto.ERP.Bll.ListaPreciosManager.SavePrecioPorCliente(String SC, Int64 IdCliente, Int64 IdArticulo, Double Precio, Int64 IdDestino) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 549
+   en CDPFacturacion.CambiarLasTarifasQueEstenEnCero(Double tarifaNueva) en C:\bdl\pronto\prontoweb\ProntoWeb\CDPFacturacion.aspx.vb:línea 2832
+BusinessLogic
+__________________________
+
+Log Entry : 
+11/30/2017 15:55:24
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:System.Exception
+La tarifa de la lista está vencida
+   en Pronto.ERP.Bll.ListaPreciosManager.VerificarVencimientoLista(Int64 idListaPrecio, String SC) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 520
+   en Pronto.ERP.Bll.ListaPreciosManager.SavePrecioPorCliente(String SC, Int64 IdCliente, Int64 IdArticulo, Double Precio, Int64 IdDestino) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 549
+   en CDPFacturacion.CambiarLasTarifasQueEstenEnCero(Double tarifaNueva) en C:\bdl\pronto\prontoweb\ProntoWeb\CDPFacturacion.aspx.vb:línea 2832
+BusinessLogic
+__________________________
+
+Log Entry : 
+11/30/2017 15:55:24
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:System.Exception
+La tarifa de la lista está vencida
+   en Pronto.ERP.Bll.ListaPreciosManager.VerificarVencimientoLista(Int64 idListaPrecio, String SC) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 520
+   en Pronto.ERP.Bll.ListaPreciosManager.SavePrecioPorCliente(String SC, Int64 IdCliente, Int64 IdArticulo, Double Precio, Int64 IdDestino) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 549
+   en CDPFacturacion.CambiarLasTarifasQueEstenEnCero(Double tarifaNueva) en C:\bdl\pronto\prontoweb\ProntoWeb\CDPFacturacion.aspx.vb:línea 2832
+BusinessLogic
+__________________________
+
+Log Entry : 
+11/30/2017 15:55:24
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:System.Exception
+La tarifa de la lista está vencida
+   en Pronto.ERP.Bll.ListaPreciosManager.VerificarVencimientoLista(Int64 idListaPrecio, String SC) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 520
+   en Pronto.ERP.Bll.ListaPreciosManager.SavePrecioPorCliente(String SC, Int64 IdCliente, Int64 IdArticulo, Double Precio, Int64 IdDestino) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 549
+   en CDPFacturacion.CambiarLasTarifasQueEstenEnCero(Double tarifaNueva) en C:\bdl\pronto\prontoweb\ProntoWeb\CDPFacturacion.aspx.vb:línea 2832
+BusinessLogic
+__________________________
+
+Log Entry : 
+11/30/2017 15:55:24
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:System.Exception
+La tarifa de la lista está vencida
+   en Pronto.ERP.Bll.ListaPreciosManager.VerificarVencimientoLista(Int64 idListaPrecio, String SC) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 520
+   en Pronto.ERP.Bll.ListaPreciosManager.SavePrecioPorCliente(String SC, Int64 IdCliente, Int64 IdArticulo, Double Precio, Int64 IdDestino) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 549
+   en CDPFacturacion.CambiarLasTarifasQueEstenEnCero(Double tarifaNueva) en C:\bdl\pronto\prontoweb\ProntoWeb\CDPFacturacion.aspx.vb:línea 2832
+BusinessLogic
+__________________________
+
+Log Entry : 
+11/30/2017 15:55:24
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:entro en  gv2ReBind 
+__________________________
+
+Log Entry : 
+11/30/2017 15:55:24
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 1 en dtDatasourcePaso2.
+__________________________
+
+Log Entry : 
+11/30/2017 15:55:24
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:entrando en GetDatatableAsignacionAutomatica . tanda 7421
+__________________________
+
+Log Entry : 
+11/30/2017 15:55:24
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 2 en GetDatatableAsignacionAutomatica . tanda 7421
+__________________________
+
+Log Entry : 
+11/30/2017 15:55:24
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 3 en GetDatatableAsignacionAutomatica . tanda 7421
+__________________________
+
+Log Entry : 
+11/30/2017 15:55:24
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 4 en GetDatatableAsignacionAutomatica . tanda 7421
+__________________________
+
+Log Entry : 
+11/30/2017 15:55:24
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 2 en dtDatasourcePaso2.
+__________________________
+
+Log Entry : 
+11/30/2017 15:55:24
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 2b en dtDatasourcePaso2.
+__________________________
+
+Log Entry : 
+11/30/2017 15:55:24
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 2 en getgrillapaso2.
+__________________________
+
+Log Entry : 
+11/30/2017 15:55:24
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:salgo de  getGrillaPaso2 .
+__________________________
+
+Log Entry : 
+11/30/2017 15:55:24
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 2 en gv2ReBind.
+__________________________
+
+Log Entry : 
+11/30/2017 15:55:24
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:salgo de  gv2ReBind .
+__________________________
+
+Log Entry : 
+11/30/2017 15:55:29
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 1 en dtDatasourcePaso2.
+__________________________
+
+Log Entry : 
+11/30/2017 15:55:29
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:entrando en GetDatatableAsignacionAutomatica . tanda 7421
+__________________________
+
+Log Entry : 
+11/30/2017 15:55:29
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 2 en GetDatatableAsignacionAutomatica . tanda 7421
+__________________________
+
+Log Entry : 
+11/30/2017 15:55:29
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 3 en GetDatatableAsignacionAutomatica . tanda 7421
+__________________________
+
+Log Entry : 
+11/30/2017 15:55:29
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 4 en GetDatatableAsignacionAutomatica . tanda 7421
+__________________________
+
+Log Entry : 
+11/30/2017 15:55:29
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 2 en dtDatasourcePaso2.
+__________________________
+
+Log Entry : 
+11/30/2017 15:55:29
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 2b en dtDatasourcePaso2.
+__________________________
+
+Log Entry : 
+11/30/2017 15:55:29
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:entrando en GetDatatableAsignacionAutomatica . tanda 7421
+__________________________
+
+Log Entry : 
+11/30/2017 15:55:29
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 2 en GetDatatableAsignacionAutomatica . tanda 7421
+__________________________
+
+Log Entry : 
+11/30/2017 15:55:29
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 3 en GetDatatableAsignacionAutomatica . tanda 7421
+__________________________
+
+Log Entry : 
+11/30/2017 15:55:29
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 4 en GetDatatableAsignacionAutomatica . tanda 7421
+__________________________
+
+Log Entry : 
+11/30/2017 15:55:29
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:Tarifas ok. Se factura. 30/11/2017 15:55:29 4 FUTUROS Y OPCIONES .COM Mariano
+__________________________
+
+Log Entry : 
+11/30/2017 15:55:29
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:Separo las facturas que se generan en el lote.30/11/2017 15:55:29
+__________________________
+
+Log Entry : 
+11/30/2017 15:55:29
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:ActualizarCampoClienteSeparador 1869 filas
+__________________________
+
+Log Entry : 
+11/30/2017 15:55:30
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:Empiezo a facturar en serio.30/11/2017 15:55:30
+__________________________
+
+Log Entry : 
+11/30/2017 16:03:10
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:La factura para 13648 tiene 57 renglones y el máximo es 15
+__________________________
+
+Log Entry : 
+11/30/2017 16:03:10
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:No se pudo crear la factura para <a href="Cliente.aspx?Id=13648" target="_blank">FUTUROS Y OPCIONES .COM</a>;  Excede el máximo de renglones <br/>No se pudo crear la factura para <a href="Cliente.aspx?Id=13648" target="_blank">FUTUROS Y OPCIONES .COM</a>;  verificar IVA y CUIT, o que la carta no estuviese imputada anteriormente; Verificar que no  se haya disparado el error 'listacdp vacia' o no haya otro cliente con el mismo nombre <br/>
+
+__________________________
+
+Log Entry : 
+11/30/2017 16:03:33
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:Error al buscar facturas generadas. System.IndexOutOfRangeException: No hay ninguna fila en la posición 0.
+   en System.Data.RBTree`1.GetNodeByIndex(Int32 userIndex)
+   en System.Data.DataRowCollection.get_Item(Int32 index)
+   en LogicaFacturacion.GenerarLoteFacturas_NUEVO(DataTable& grilla, String SC, Int64 optFacturarA, GridView& gvFacturasGeneradas, Boolean SeEstaSeparandoPorCorredor, HttpSessionState& Session, Int32 PuntoVenta, DataTable dtViewstateRenglonesManuales, String agruparArticulosPor, String txtBuscar, String txtTarifaGastoAdministrativo, String& errLog, String txtCorredor, Boolean chkPagaCorredor, String numeroOrdenCompra, Object& PrimeraIdFacturaGenerada, Object& UltimaIdFacturaGenerada, Int64 idClienteObservaciones) en C:\bdl\pronto\BussinessLogic\LogicaFacturacion.vb:línea 4872
+__________________________
+
+Log Entry : 
+11/30/2017 16:03:37
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:entrando en GetDatatableAsignacionAutomatica . tanda 7421
+__________________________
+
+Log Entry : 
+11/30/2017 16:03:37
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 2 en GetDatatableAsignacionAutomatica . tanda 7421
+__________________________
+
+Log Entry : 
+11/30/2017 16:03:37
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 3 en GetDatatableAsignacionAutomatica . tanda 7421
+__________________________
+
+Log Entry : 
+11/30/2017 16:03:37
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:punto 4 en GetDatatableAsignacionAutomatica . tanda 7421
+__________________________
+
+Log Entry : 
+11/30/2017 16:03:37
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:ActualizarCampoClienteSeparador 1869 filas
+__________________________
+
+Log Entry : 
+11/30/2017 16:03:43
+Error in: http://localhost:50769/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:System.OutOfMemoryException
+Se produjo una excepción de tipo 'System.OutOfMemoryException'.
+   en System.Collections.ArrayList.set_Capacity(Int32 value)
+   en System.Collections.ArrayList.EnsureCapacity(Int32 min)
+   en System.Collections.ArrayList.Add(Object value)
+   en System.Web.UI.Control.SaveViewStateRecursive(ViewStateMode inheritedMode)
+   en System.Web.UI.Control.SaveViewStateRecursive(ViewStateMode inheritedMode)
+   en System.Web.UI.Control.SaveViewStateRecursive(ViewStateMode inheritedMode)
+   en System.Web.UI.Control.SaveViewStateRecursive(ViewStateMode inheritedMode)
+   en System.Web.UI.Control.SaveViewStateRecursive(ViewStateMode inheritedMode)
+   en System.Web.UI.Control.SaveViewStateRecursive(ViewStateMode inheritedMode)
+   en System.Web.UI.Control.SaveViewStateRecursive(ViewStateMode inheritedMode)
+   en System.Web.UI.Control.SaveViewStateRecursive(ViewStateMode inheritedMode)
+   en System.Web.UI.Control.SaveViewStateRecursive(ViewStateMode inheritedMode)
+   en System.Web.UI.Control.SaveViewStateRecursive(ViewStateMode inheritedMode)
+   en System.Web.UI.Control.SaveViewStateRecursive(ViewStateMode inheritedMode)
+   en System.Web.UI.Control.SaveViewStateRecursive(ViewStateMode inheritedMode)
+   en System.Web.UI.Control.SaveViewStateRecursive(ViewStateMode inheritedMode)
+   en System.Web.UI.Control.SaveViewStateRecursive(ViewStateMode inheritedMode)
+   en System.Web.UI.Page.SaveAllState()
+   en System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+mscorlib
+__________________________
