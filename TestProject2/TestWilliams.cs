@@ -932,11 +932,11 @@ Error in: https://prontoweb.williamsentregas.com.ar/ProntoWeb/CDPFacturacion.asp
 
 
 
-            long idClienteAfacturarle = 13648; // futuros y opciones
-            const int idcorredorFYO= 107;
+            int idClienteAfacturarle = 13648; // futuros y opciones
+            const int idcorredorFYO = 107;
             int optFacturarA = 4; //para fyo, stella usa "por corredor" (o sea, opcion 3.   1. titular/ 2 destinatario /   3.corredor  / 4 a tercero / 5 automatico)   
             bool SeEstaSeparandoPorCorredor = false;
-            string agruparArticulosPor = "Destino+RComercial/Interm+Destinat(CANJE)" ; // usar un agrupamiento complejo, así salen más renglones en la factura
+            string agruparArticulosPor = "Destino+RComercial/Interm+Destinat(CANJE)"; // usar un agrupamiento complejo, así salen más renglones en la factura
 
 
             string txtCorredor = "";
@@ -954,7 +954,7 @@ Error in: https://prontoweb.williamsentregas.com.ar/ProntoWeb/CDPFacturacion.asp
 
 
 
-            
+
             DataTable dtRenglonesAgregados = new DataTable();
             //dtRenglonesAgregados.Rows.Add(dtRenglonesAgregados.NewRow());
 
@@ -974,15 +974,20 @@ Error in: https://prontoweb.williamsentregas.com.ar/ProntoWeb/CDPFacturacion.asp
             List<int> lista_int = new List<int>();
 
 
-
-            for (int n = 1372500; n < 1372990; n++)
+            // estás agregando cartas q no son facturables (por ejemplo, incompletas) que desde el frontend no se pueden agregar
+            // estás agregando cartas q no son facturables (por ejemplo, incompletas) que desde el frontend no se pueden agregar
+            for (int n = 2000000; n < 2000500; n++) // estás agregando cartas q no son facturables (por ejemplo, incompletas) que desde el frontend no se pueden agregar
             {
                 var cp = (from i in db.CartasDePortes where i.IdCartaDePorte == n select i).Single();
                 cp.TarifaFacturada = Convert.ToDecimal(2.77);
+                cp.Vendedor = idClienteAfacturarle;
                 cp.Corredor = idcorredorFYO;
                 cp.IdFacturaImputada = 0;
-                db.SaveChanges();
+            }
+            db.SaveChanges();
 
+            for (int n = 2000000; n < 2000500; n++) // estás agregando cartas q no son facturables (por ejemplo, incompletas) que desde el frontend no se pueden agregar
+            {
                 var c = CartaDePorteManager.GetItem(SC, n);
                 // CartaDePorteManager.Save(SC, c, 2, "", false, ref ms);
 
@@ -1042,12 +1047,16 @@ Error in: https://prontoweb.williamsentregas.com.ar/ProntoWeb/CDPFacturacion.asp
             object pag = 1;
             int cuantosrenglones = 9999999;
 
+
+            string txtFacturarATerceros = EntidadManager.NombreCliente(SC, idClienteAfacturarle);
+
+
             DataTable tablaEditadaDeFacturasParaGenerar = LogicaFacturacion.GetDatatableAsignacionAutomatica(
                                                      SC, ref pag, ref sesionId,
                                                    cuantosrenglones, PuntoVenta,
                                                     desde,
                                                     hasta,
-                                                     sLista, "", optFacturarA, ""
+                                                     sLista, "", optFacturarA, optFacturarA==4 ? txtFacturarATerceros : ""
                                                      , SC, "", "",
                                                     "", "", "", "",
                                                     "", "", txtBuscar, "",
@@ -1087,6 +1096,8 @@ Error in: https://prontoweb.williamsentregas.com.ar/ProntoWeb/CDPFacturacion.asp
 
 
 
+            //hay q vigilar la funcion EmparcharClienteSeparadoParaFacturasQueSuperanCantidadDeRenglones -evidentemente esa funcion solo está haciendo 2 facturas si se queda corto, pero no más.
+
             LogicaFacturacion.GenerarLoteFacturas_NUEVO(
                             ref tablaEditadaDeFacturasParaGenerar, SC,
                             optFacturarA, ref gv,
@@ -1117,7 +1128,7 @@ Error in: https://prontoweb.williamsentregas.com.ar/ProntoWeb/CDPFacturacion.asp
         [TestMethod]
         public void plantillas_por_punto_de_venta_47029()
         {
-            
+
             var scEF = ProntoMVC.Data.Models.Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC));
             DemoProntoEntities db = new DemoProntoEntities(scEF);
 
@@ -1144,7 +1155,7 @@ Error in: https://prontoweb.williamsentregas.com.ar/ProntoWeb/CDPFacturacion.asp
         }
 
 
-        
+
 
 
 
@@ -1290,9 +1301,9 @@ Error in: https://prontoweb.williamsentregas.com.ar/ProntoWeb/CDPFacturacion.asp
         {
 
             CartaDePorteManager.TienePermisosParaEstaCarta("Mariano", 6546464, SC, scbdlmasterappconfig);
-            
-        //If Not(Roles.IsUserInRole(Membership.GetUser().UserName, "WilliamsComercial") Or Roles.IsUserInRole(Membership.GetUser().UserName, "WilliamsAdmin") Or Roles.IsUserInRole(Membership.GetUser().UserName, "WilliamsFacturacion")) Then
-        //    btnsituacion.Visible = False
+
+            //If Not(Roles.IsUserInRole(Membership.GetUser().UserName, "WilliamsComercial") Or Roles.IsUserInRole(Membership.GetUser().UserName, "WilliamsAdmin") Or Roles.IsUserInRole(Membership.GetUser().UserName, "WilliamsFacturacion")) Then
+            //    btnsituacion.Visible = False
 
 
 
@@ -1304,13 +1315,13 @@ Error in: https://prontoweb.williamsentregas.com.ar/ProntoWeb/CDPFacturacion.asp
         {
 
             // http://localhost:50769/ProntoWeb/CartaPorteDescargarArchivo.aspx?Id=lala.pdf  
-            CartaDePorteManager.TienePermisosParaEsteArchivo("Mariano", "lala.pdf",SC,scbdlmasterappconfig);
+            CartaDePorteManager.TienePermisosParaEsteArchivo("Mariano", "lala.pdf", SC, scbdlmasterappconfig);
             //Busco en q comentario esta el archivo
             //    busco el reclamo del comentario, y la carta del comentario
             //    veo si tiene permiso para esa carta
 
         }
-            
+
 
 
 
@@ -1329,7 +1340,7 @@ Error in: https://prontoweb.williamsentregas.com.ar/ProntoWeb/CDPFacturacion.asp
         }
 
 
-        
+
 
         [TestMethod]
         public void EnviarMailALosQueParticipanEnElReclamo()

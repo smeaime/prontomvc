@@ -7962,6 +7962,7 @@ usuario As String, ConexBDLmaster As String,
                 tablafact = "CLIVEN" 'esto esta mallllllll
                 If BuscaIdClientePreciso(txtFacturarATerceros, HFSC) = -1 Then
                     'si no encontras el cliente, por qué no te quejás en lugar de hacer esto?
+                    If Debugger.IsAttached Then Stop
                     optFacturarA = 1
                     IdFacturarselaA = "CLIVEN.IdCliente"
                     facturarselaA = "CLIVEN.Razonsocial"
