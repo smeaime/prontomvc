@@ -4434,19 +4434,21 @@ Public Module ProntoFuncionesUIWeb
 
 
 
-        sdfsdfsdfsf
 
-        'arreglar esto -deberia guardar la idempresa a la que se conectó?
+
+        'arreglar esto -deberia guardar la idempresa a la que se conectó? GetUltimaBaseQueAccedioUsuario()?
         If Encriptar(sConex).Contains("SERVERSQL3") Then
             usuario.IdEmpresa = 52  'williams en bdl
         ElseIf Encriptar(sConex).Contains("DESKTOP") Then
             usuario.IdEmpresa = 1053 'williams en mi pc
+        ElseIf HttpContext.Current.Request.URL.ToString().Contains("prontotesting") Then
+            usuario.IdEmpresa = 19 'esta es la base pruebawilliams
         Else
-            usuario.IdEmpresa = 18   'esto quizas chifla cuando es la pruebawilliams
+            usuario.IdEmpresa = 18   'produccion. esto quizas chifla cuando es la pruebawilliams
         End If
 
 
-        GetUltimaBaseQueAccedioUsuario
+
 
 
 
@@ -4464,8 +4466,15 @@ Public Module ProntoFuncionesUIWeb
         Catch ex As Exception
 
             ErrHandler2.WriteError(ex)
-            ErrHandler2.WriteError("Verificar que el usuario tenga una empresa asignada" usuario.UserId, usuario.IdEmpresa, sConex, "XXXXXX")
-            Throw
+            ErrHandler2.WriteError("Verificar que el usuario tenga una empresa asignada")
+
+            Try
+                ErrHandler2.WriteError("usuario " & usuario.UserId & " " & usuario.IdEmpresa & "    " & sConex)
+            Catch eee As Exception
+
+            End Try
+
+            Throw ex
             'La conversión de la cadena "No se encontró empresa para el u" en el tipo 'Integer' no es válida
             'ah, el usuario gradice no tiene empresa asignada en la bdlmaster de clientes
 
