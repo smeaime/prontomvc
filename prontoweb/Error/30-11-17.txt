@@ -748,3 +748,747 @@ Log Entry :
 11/30/2017 08:24:09
 Error in: http://localhost:50769/ProntoWeb/CartaDePorte.aspx?Id=3154882. Error Message:Mariano esta logueado, pero lo redirijo al login porque faltan los datos de session. No deberia mejor mandarlo a SeleccionarEmpresa? Ademas, no hago el LogOut y le queda el cookie!!!
 __________________________
+
+Log Entry : 
+11/30/2017 08:53:46
+Error in: http://localhost:50769/ProntoWeb/CartaDePorte.aspx?Id=3154882. Error Message:Mariano esta logueado, pero lo redirijo al login porque faltan los datos de session. No deberia mejor mandarlo a SeleccionarEmpresa? Ademas, no hago el LogOut y le queda el cookie!!!
+__________________________
+
+Log Entry : 
+11/30/2017 08:54:31
+Error in: http://localhost:50769/ProntoWeb/CartaDePorte.aspx?Id=3154882. Error Message:La carta numero 564793833 id=3154882 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+11/30/2017 08:54:31
+Error in: http://localhost:50769/ProntoWeb/CartaDePorte.aspx?Id=3154882. Error Message:PV 2 0
+__________________________
+
+Log Entry : 
+11/30/2017 08:54:39
+Error in: http://localhost:50769/ProntoWeb/WebServiceCartas.asmx/AbrirReclamo. Error Message:System.ArgumentException
+Método web AbrirReclamo desconocido.
+Nombre del parámetro: methodName
+   en System.Web.Script.Services.WebServiceData.GetMethodData(String methodName)
+   en System.Web.Script.Services.RestHandler.CreateHandler(WebServiceData webServiceData, String methodName)
+   en System.Web.Script.Services.RestHandler.CreateHandler(HttpContext context)
+   en System.Web.Script.Services.RestHandlerFactory.GetHandler(HttpContext context, String requestType, String url, String pathTranslated)
+   en System.Web.Script.Services.ScriptHandlerFactory.GetHandler(HttpContext context, String requestType, String url, String pathTranslated)
+   en System.Web.HttpApplication.MaterializeHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   en System.Web.HttpApplication.ExecuteStepImpl(IExecutionStep step)
+   en System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+System.Web.Extensions
+__________________________
+
+Log Entry : 
+11/30/2017 08:54:45
+Error in: http://localhost:50769/ProntoWeb/CartaDePorte.aspx?Id=3154885. Error Message:La carta numero 564556224 id=3154885 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+11/30/2017 08:54:45
+Error in: http://localhost:50769/ProntoWeb/CartaDePorte.aspx?Id=3154885. Error Message:PV 2 0
+__________________________
+
+Log Entry : 
+11/30/2017 08:54:52
+Error in: http://localhost:50769/ProntoWeb/CartaDePorte.aspx?Id=3154889. Error Message:La carta numero 564959925 id=3154889 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+11/30/2017 08:54:52
+Error in: http://localhost:50769/ProntoWeb/CartaDePorte.aspx?Id=3154889. Error Message:PV 2 0
+__________________________
+
+Log Entry : 
+11/30/2017 08:56:03
+Error in: http://localhost:50769/ProntoWeb/CartaDePorte.aspx?Id=3154889. Error Message:La carta numero 564959925 id=3154889 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+11/30/2017 08:56:03
+Error in: http://localhost:50769/ProntoWeb/CartaDePorte.aspx?Id=3154889. Error Message:PV 2 0
+__________________________
+
+Log Entry : 
+11/30/2017 08:56:09
+Error in: http://localhost:50769/ProntoWeb/WebServiceCartas.asmx/GrabarComentario. Error Message:System.InvalidOperationException
+Se debe especificar un destinatario.
+   en System.Net.Mail.SmtpClient.Send(MailMessage message)
+   en Pronto.ERP.Bll.EntidadManager.MandaEmail_Nuevo(String Para, String Asunto, String Cuerpo, String De, String SmtpServer, String SmtpUser, String SmtpPass, String sFileNameAdjunto, Int64 SmtpPort, Int32 EnableSSL, String CCO, String img, String friendlyname, String replyTo, Boolean isHtml, String inlinePNG, String inlinePNG2) en C:\bdl\pronto\BussinessLogic\EntidadManager.vb:línea 316
+System
+__________________________
+
+Log Entry : 
+11/30/2017 08:56:09
+Error in: http://localhost:50769/ProntoWeb/WebServiceCartas.asmx/GrabarComentario. Error Message:ProntoWebMail@gmail.com
+__________________________
+
+Log Entry : 
+11/30/2017 08:56:09
+Error in: http://localhost:50769/ProntoWeb/WebServiceCartas.asmx/GrabarComentario. Error Message:
+__________________________
+
+Log Entry : 
+11/30/2017 08:56:09
+Error in: http://localhost:50769/ProntoWeb/WebServiceCartas.asmx/GrabarComentario. Error Message:System.InvalidOperationException
+Se debe especificar un destinatario.
+   en System.Net.Mail.SmtpClient.Send(MailMessage message)
+   en Pronto.ERP.Bll.EntidadManager.MandaEmail_Nuevo(String Para, String Asunto, String Cuerpo, String De, String SmtpServer, String SmtpUser, String SmtpPass, String sFileNameAdjunto, Int64 SmtpPort, Int32 EnableSSL, String CCO, String img, String friendlyname, String replyTo, Boolean isHtml, String inlinePNG, String inlinePNG2) en C:\bdl\pronto\BussinessLogic\EntidadManager.vb:línea 455
+   en WebServiceCartas.GrabarComentario(Int32 idCartaPorte, String sComentario) en C:\bdl\pronto\prontoweb\App_Code\vbcode\WebServiceCartas.vb:línea 269
+System
+__________________________
+
+Log Entry : 
+11/30/2017 09:20:39
+Error in: http://localhost:50769/ProntoWeb/CartaDePorte.aspx?Id=3154889. Error Message:La carta numero 564959925 id=3154889 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+11/30/2017 09:20:39
+Error in: http://localhost:50769/ProntoWeb/CartaDePorte.aspx?Id=3154889. Error Message:PV 2 0
+__________________________
+
+Log Entry : 
+11/30/2017 09:23:51
+Error in: http://localhost:50769/ProntoWeb/CartaDePorte.aspx?Id=3154889. Error Message:System.Web.HttpCompileException
+C:\bdl\pronto\prontoweb\ProntoWeb\Cartadeporte.aspx.vb(746): error BC30451: 'Button6' is not declared. It may be inaccessible due to its protection level.
+   en System.Web.Compilation.AssemblyBuilder.Compile()
+   en System.Web.Compilation.BuildProvidersCompiler.PerformBuild()
+   en System.Web.Compilation.BuildManager.CompileWebFile(VirtualPath virtualPath)
+   en System.Web.Compilation.BuildManager.GetVPathBuildResultInternal(VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean throwIfNotFound, Boolean ensureIsUpToDate)
+   en System.Web.Compilation.BuildManager.GetVPathBuildResultWithNoAssert(HttpContext context, VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean throwIfNotFound, Boolean ensureIsUpToDate)
+   en System.Web.Compilation.BuildManager.GetVirtualPathObjectFactory(VirtualPath virtualPath, HttpContext context, Boolean allowCrossApp, Boolean throwIfNotFound)
+   en System.Web.Compilation.BuildManager.CreateInstanceFromVirtualPath(VirtualPath virtualPath, Type requiredBaseType, HttpContext context, Boolean allowCrossApp)
+   en System.Web.UI.PageHandlerFactory.GetHandlerHelper(HttpContext context, String requestType, VirtualPath virtualPath, String physicalPath)
+   en System.Web.UI.PageHandlerFactory.GetHandler(HttpContext context, String requestType, String virtualPath, String path)
+   en System.Web.HttpApplication.MaterializeHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   en System.Web.HttpApplication.ExecuteStepImpl(IExecutionStep step)
+   en System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+System.Web
+__________________________
+
+Log Entry : 
+11/30/2017 09:24:29
+Error in: http://localhost:50769/ProntoWeb/CartaDePorte.aspx?Id=3154889. Error Message:La carta numero 564959925 id=3154889 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+11/30/2017 09:24:29
+Error in: http://localhost:50769/ProntoWeb/CartaDePorte.aspx?Id=3154889. Error Message:PV 2 0
+__________________________
+
+Log Entry : 
+11/30/2017 09:24:38
+Error in: http://localhost:50769/ProntoWeb/WebServiceClientes.asmx/AcopiosPorCliente. Error Message: -  Error en ExecDinamico. - System.InvalidOperationException: Valor de tiempo de espera caducado. El período de tiempo de espera expiró antes de obtener una conexión del grupo. Esto puede suceder porque todas las conexiones de la agrupación estaban en uso y se alcanzó el máximo tamaño del grupo.
+   en System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.Open()
+   en Pronto.ERP.Dal.GeneralDB.ExecDinamico(String SC, String comandoSQLdinamico, Int32 timeoutSegundos) - SELECT TOP 1 Clientes.* FROM Clientes  WHERE  (RazonSocial = 'VICENTIN SAIC')  OR (CUIT + ' ' + RazonSocial COLLATE Modern_Spanish_ci_as = 'VICENTIN SAIC')  OR (RazonSocial + ' ' + CUIT COLLATE Modern_Spanish_ci_as = 'VICENTIN SAIC')  OR (CUIT = 'VICENTIN SAIC')   8 0
+__________________________
+
+Log Entry : 
+11/30/2017 09:24:38
+Error in: http://localhost:50769/ProntoWeb/WebServiceClientes.asmx/AcopiosPorCliente. Error Message: -  Error en ExecDinamico. - System.InvalidOperationException: Valor de tiempo de espera caducado. El período de tiempo de espera expiró antes de obtener una conexión del grupo. Esto puede suceder porque todas las conexiones de la agrupación estaban en uso y se alcanzó el máximo tamaño del grupo.
+   en System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.Open()
+   en Pronto.ERP.Dal.GeneralDB.ExecDinamico(String SC, String comandoSQLdinamico, Int32 timeoutSegundos) - SELECT TOP 1 Clientes.* FROM Clientes  WHERE  (RazonSocial = 'PROFERTIL S.A.')  OR (CUIT + ' ' + RazonSocial COLLATE Modern_Spanish_ci_as = 'PROFERTIL S.A.')  OR (RazonSocial + ' ' + CUIT COLLATE Modern_Spanish_ci_as = 'PROFERTIL S.A.')  OR (CUIT = 'PROFERTIL S.A.')   8 0
+__________________________
+
+Log Entry : 
+11/30/2017 09:24:38
+Error in: http://localhost:50769/ProntoWeb/WebServiceClientes.asmx/AcopiosPorCliente. Error Message:Valor de tiempo de espera caducado. El período de tiempo de espera expiró antes de obtener una conexión del grupo. Esto puede suceder porque todas las conexiones de la agrupación estaban en uso y se alcanzó el máximo tamaño del grupo.
+__________________________
+
+Log Entry : 
+11/30/2017 09:24:38
+Error in: http://localhost:50769/ProntoWeb/WebServiceClientes.asmx/AcopiosPorCliente. Error Message:Valor de tiempo de espera caducado. El período de tiempo de espera expiró antes de obtener una conexión del grupo. Esto puede suceder porque todas las conexiones de la agrupación estaban en uso y se alcanzó el máximo tamaño del grupo.
+__________________________
+
+Log Entry : 
+11/30/2017 09:24:38
+Error in: http://localhost:50769/ProntoWeb/WebServiceClientes.asmx/AcopiosPorCliente. Error Message:System.InvalidOperationException: Valor de tiempo de espera caducado. El período de tiempo de espera expiró antes de obtener una conexión del grupo. Esto puede suceder porque todas las conexiones de la agrupación estaban en uso y se alcanzó el máximo tamaño del grupo.
+   en System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.Open()
+   en Pronto.ERP.Dal.GeneralDB.ExecDinamico(String SC, String comandoSQLdinamico, Int32 timeoutSegundos)
+   en Pronto.ERP.Bll.EntidadManager.ExecDinamico(String SC, String sComandoDinamico, Int32 timeoutSegundos) en C:\bdl\pronto\BussinessLogic\EntidadManager.vb:línea 884
+   en SQLdinamico.BuscaIdClientePrecisoConCUIT(String ClienteRazonSocial, String SC) en C:\bdl\pronto\BussinessLogic\SQLdinamico.vb:línea 273
+   en WebServiceClientes.AcopiosPorCliente(String NombreCliente, String SC) en C:\bdl\pronto\prontoweb\App_Code\vbcode\WebServiceClientes.vb:línea 154
+__________________________
+
+Log Entry : 
+11/30/2017 09:24:38
+Error in: http://localhost:50769/ProntoWeb/WebServiceClientes.asmx/AcopiosPorCliente. Error Message:System.InvalidOperationException: Valor de tiempo de espera caducado. El período de tiempo de espera expiró antes de obtener una conexión del grupo. Esto puede suceder porque todas las conexiones de la agrupación estaban en uso y se alcanzó el máximo tamaño del grupo.
+   en System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.Open()
+   en System.Data.Linq.SqlClient.SqlConnectionManager.UseConnection(IConnectionUser user)
+   en System.Data.Linq.SqlClient.SqlProvider.get_IsSqlCe()
+   en System.Data.Linq.SqlClient.SqlProvider.InitializeProviderMode()
+   en System.Data.Linq.SqlClient.SqlProvider.System.Data.Linq.Provider.IProvider.Execute(Expression query)
+   en System.Data.Linq.DataQuery`1.System.Collections.Generic.IEnumerable<T>.GetEnumerator()
+   en System.Collections.Generic.List`1..ctor(IEnumerable`1 collection)
+   en System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
+   en CartaDePorteManager.excepcionesAcopios(String SC, Int32 idcliente) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 391
+   en WebServiceClientes.AcopiosPorCliente(String NombreCliente, String SC) en C:\bdl\pronto\prontoweb\App_Code\vbcode\WebServiceClientes.vb:línea 155
+__________________________
+
+Log Entry : 
+11/30/2017 09:24:55
+Error in: http://localhost:50769/ProntoWeb/WebServiceClientes.asmx/AcopiosPorCliente. Error Message: -  Error en ExecDinamico. - System.Data.SqlClient.SqlException (0x80131904): Error relacionado con la red o específico de la instancia mientras se establecía una conexión con el servidor SQL Server. No se encontró el servidor o éste no estaba accesible. Compruebe que el nombre de la instancia es correcto y que SQL Server está configurado para admitir conexiones remotas. (provider: Named Pipes Provider, error: 40 - No se pudo abrir una conexión con SQL Server) ---> System.ComponentModel.Win32Exception (0x80004005): No se ha encontrado la ruta de acceso de la red
+   en System.Data.SqlClient.SqlInternalConnectionTds..ctor(DbConnectionPoolIdentity identity, SqlConnectionString connectionOptions, SqlCredential credential, Object providerInfo, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance, SqlConnectionString userConnectionOptions, SessionData reconnectSessionData, DbConnectionPool pool, String accessToken, Boolean applyTransientFaultHandling)
+   en System.Data.SqlClient.SqlConnectionFactory.CreateConnection(DbConnectionOptions options, DbConnectionPoolKey poolKey, Object poolGroupProviderInfo, DbConnectionPool pool, DbConnection owningConnection, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionFactory.CreatePooledConnection(DbConnectionPool pool, DbConnection owningObject, DbConnectionOptions options, DbConnectionPoolKey poolKey, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionPool.CreateObject(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   en System.Data.ProviderBase.DbConnectionPool.UserCreateRequest(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   en System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.Open()
+   en Pronto.ERP.Dal.GeneralDB.ExecDinamico(String SC, String comandoSQLdinamico, Int32 timeoutSegundos)
+ClientConnectionId:00000000-0000-0000-0000-000000000000
+Error Number:53,State:0,Class:20 - SELECT TOP 1 Clientes.* FROM Clientes  WHERE  (RazonSocial = 'TOMAS HNOS Y CIA. S.A.')  OR (CUIT + ' ' + RazonSocial COLLATE Modern_Spanish_ci_as = 'TOMAS HNOS Y CIA. S.A.')  OR (RazonSocial + ' ' + CUIT COLLATE Modern_Spanish_ci_as = 'TOMAS HNOS Y CIA. S.A.')  OR (CUIT = 'TOMAS HNOS Y CIA. S.A.')   8 0
+__________________________
+
+Log Entry : 
+11/30/2017 09:24:55
+Error in: http://localhost:50769/ProntoWeb/WebServiceClientes.asmx/AcopiosPorCliente. Error Message:Error relacionado con la red o específico de la instancia mientras se establecía una conexión con el servidor SQL Server. No se encontró el servidor o éste no estaba accesible. Compruebe que el nombre de la instancia es correcto y que SQL Server está configurado para admitir conexiones remotas. (provider: Named Pipes Provider, error: 40 - No se pudo abrir una conexión con SQL Server)
+__________________________
+
+Log Entry : 
+11/30/2017 09:24:55
+Error in: http://localhost:50769/ProntoWeb/WebServiceClientes.asmx/AcopiosPorCliente. Error Message:System.Data.SqlClient.SqlException (0x80131904): Error relacionado con la red o específico de la instancia mientras se establecía una conexión con el servidor SQL Server. No se encontró el servidor o éste no estaba accesible. Compruebe que el nombre de la instancia es correcto y que SQL Server está configurado para admitir conexiones remotas. (provider: Named Pipes Provider, error: 40 - No se pudo abrir una conexión con SQL Server) ---> System.ComponentModel.Win32Exception (0x80004005): No se ha encontrado la ruta de acceso de la red
+   en System.Data.SqlClient.SqlInternalConnectionTds..ctor(DbConnectionPoolIdentity identity, SqlConnectionString connectionOptions, SqlCredential credential, Object providerInfo, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance, SqlConnectionString userConnectionOptions, SessionData reconnectSessionData, DbConnectionPool pool, String accessToken, Boolean applyTransientFaultHandling)
+   en System.Data.SqlClient.SqlConnectionFactory.CreateConnection(DbConnectionOptions options, DbConnectionPoolKey poolKey, Object poolGroupProviderInfo, DbConnectionPool pool, DbConnection owningConnection, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionFactory.CreatePooledConnection(DbConnectionPool pool, DbConnection owningObject, DbConnectionOptions options, DbConnectionPoolKey poolKey, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionPool.CreateObject(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   en System.Data.ProviderBase.DbConnectionPool.UserCreateRequest(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   en System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.Open()
+   en Pronto.ERP.Dal.GeneralDB.ExecDinamico(String SC, String comandoSQLdinamico, Int32 timeoutSegundos)
+   en Pronto.ERP.Bll.EntidadManager.ExecDinamico(String SC, String sComandoDinamico, Int32 timeoutSegundos) en C:\bdl\pronto\BussinessLogic\EntidadManager.vb:línea 884
+   en SQLdinamico.BuscaIdClientePrecisoConCUIT(String ClienteRazonSocial, String SC) en C:\bdl\pronto\BussinessLogic\SQLdinamico.vb:línea 273
+   en WebServiceClientes.AcopiosPorCliente(String NombreCliente, String SC) en C:\bdl\pronto\prontoweb\App_Code\vbcode\WebServiceClientes.vb:línea 154
+ClientConnectionId:00000000-0000-0000-0000-000000000000
+Error Number:53,State:0,Class:20
+__________________________
+
+Log Entry : 
+11/30/2017 09:25:18
+Error in: http://localhost:50769/ProntoWeb/HandlerReclamos.ashx. Error Message:System.Data.SqlClient.SqlException
+Error relacionado con la red o específico de la instancia mientras se establecía una conexión con el servidor SQL Server. No se encontró el servidor o éste no estaba accesible. Compruebe que el nombre de la instancia es correcto y que SQL Server está configurado para admitir conexiones remotas. (provider: Named Pipes Provider, error: 40 - No se pudo abrir una conexión con SQL Server)
+   en System.Data.SqlClient.SqlInternalConnectionTds..ctor(DbConnectionPoolIdentity identity, SqlConnectionString connectionOptions, SqlCredential credential, Object providerInfo, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance, SqlConnectionString userConnectionOptions, SessionData reconnectSessionData, DbConnectionPool pool, String accessToken, Boolean applyTransientFaultHandling)
+   en System.Data.SqlClient.SqlConnectionFactory.CreateConnection(DbConnectionOptions options, DbConnectionPoolKey poolKey, Object poolGroupProviderInfo, DbConnectionPool pool, DbConnection owningConnection, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionFactory.CreatePooledConnection(DbConnectionPool pool, DbConnection owningObject, DbConnectionOptions options, DbConnectionPoolKey poolKey, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionPool.CreateObject(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   en System.Data.ProviderBase.DbConnectionPool.UserCreateRequest(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   en System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   en System.Data.SqlClient.SqlConnection.Open()
+   en Glimpse.Ado.AlternateType.GlimpseDbConnection.Open()
+   en System.Data.Entity.Infrastructure.Interception.DbConnectionDispatcher.<Open>b__36(DbConnection t, DbConnectionInterceptionContext c)
+   en System.Data.Entity.Infrastructure.Interception.InternalDispatcher`1.Dispatch[TTarget,TInterceptionContext](TTarget target, Action`2 operation, TInterceptionContext interceptionContext, Action`3 executing, Action`3 executed)
+   en System.Data.Entity.Infrastructure.Interception.DbConnectionDispatcher.Open(DbConnection connection, DbInterceptionContext interceptionContext)
+   en System.Data.Entity.Core.EntityClient.EntityConnection.<Open>b__2()
+   en System.Data.Entity.SqlServer.DefaultSqlExecutionStrategy.<>c__DisplayClass1.<Execute>b__0()
+   en System.Data.Entity.SqlServer.DefaultSqlExecutionStrategy.Execute[TResult](Func`1 operation)
+   en System.Data.Entity.SqlServer.DefaultSqlExecutionStrategy.Execute(Action operation)
+   en System.Data.Entity.Core.EntityClient.EntityConnection.Open()
+.Net SqlClient Data Provider
+__________________________
+
+Log Entry : 
+11/30/2017 09:25:24
+Error in: http://localhost:50769/ProntoWeb/CartaDePorte.aspx?Id=3154889. Error Message:Mariano esta logueado, pero lo redirijo al login porque faltan los datos de session. No deberia mejor mandarlo a SeleccionarEmpresa? Ademas, no hago el LogOut y le queda el cookie!!!
+__________________________
+
+Log Entry : 
+11/30/2017 09:25:24
+Error in: http://localhost:50769/ProntoWeb/Cartadeporte.aspx. Error Message:Mariano esta logueado, pero lo redirijo al login porque faltan los datos de session. No deberia mejor mandarlo a SeleccionarEmpresa? Ademas, no hago el LogOut y le queda el cookie!!!
+__________________________
+
+Log Entry : 
+11/30/2017 09:25:37
+Error in: http://localhost:50769/ProntoWeb/CartaDePorte.aspx?Id=3154889. Error Message:La carta numero 564959925 id=3154889 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+11/30/2017 09:25:37
+Error in: http://localhost:50769/ProntoWeb/CartaDePorte.aspx?Id=3154889. Error Message:PV 2 0
+__________________________
+
+Log Entry : 
+11/30/2017 09:27:08
+Error in: http://localhost:50769/ProntoWeb/CartaDePorte.aspx?Id=3154889. Error Message:La carta numero 564959925 id=3154889 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+11/30/2017 09:27:09
+Error in: http://localhost:50769/ProntoWeb/CartaDePorte.aspx?Id=3154889. Error Message:PV 2 0
+__________________________
+
+Log Entry : 
+11/30/2017 09:27:41
+Error in: http://localhost:50769/ProntoWeb/WebServiceCartas.asmx/GrabarComentario. Error Message:System.InvalidOperationException
+Se debe especificar un destinatario.
+   en System.Net.Mail.SmtpClient.Send(MailMessage message)
+   en Pronto.ERP.Bll.EntidadManager.MandaEmail_Nuevo(String Para, String Asunto, String Cuerpo, String De, String SmtpServer, String SmtpUser, String SmtpPass, String sFileNameAdjunto, Int64 SmtpPort, Int32 EnableSSL, String CCO, String img, String friendlyname, String replyTo, Boolean isHtml, String inlinePNG, String inlinePNG2) en C:\bdl\pronto\BussinessLogic\EntidadManager.vb:línea 316
+System
+__________________________
+
+Log Entry : 
+11/30/2017 09:27:41
+Error in: http://localhost:50769/ProntoWeb/WebServiceCartas.asmx/GrabarComentario. Error Message:ProntoWebMail@gmail.com
+__________________________
+
+Log Entry : 
+11/30/2017 09:27:41
+Error in: http://localhost:50769/ProntoWeb/WebServiceCartas.asmx/GrabarComentario. Error Message:
+__________________________
+
+Log Entry : 
+11/30/2017 09:27:41
+Error in: http://localhost:50769/ProntoWeb/WebServiceCartas.asmx/GrabarComentario. Error Message:System.InvalidOperationException
+Se debe especificar un destinatario.
+   en System.Net.Mail.SmtpClient.Send(MailMessage message)
+   en Pronto.ERP.Bll.EntidadManager.MandaEmail_Nuevo(String Para, String Asunto, String Cuerpo, String De, String SmtpServer, String SmtpUser, String SmtpPass, String sFileNameAdjunto, Int64 SmtpPort, Int32 EnableSSL, String CCO, String img, String friendlyname, String replyTo, Boolean isHtml, String inlinePNG, String inlinePNG2) en C:\bdl\pronto\BussinessLogic\EntidadManager.vb:línea 455
+   en WebServiceCartas.GrabarComentario(Int32 idCartaPorte, String sComentario) en C:\bdl\pronto\prontoweb\App_Code\vbcode\WebServiceCartas.vb:línea 269
+System
+__________________________
+
+Log Entry : 
+11/30/2017 09:27:59
+Error in: http://localhost:50769/ProntoWeb/WebServiceCartas.asmx/GrabarComentario. Error Message:System.InvalidOperationException
+Se debe especificar un destinatario.
+   en System.Net.Mail.SmtpClient.Send(MailMessage message)
+   en Pronto.ERP.Bll.EntidadManager.MandaEmail_Nuevo(String Para, String Asunto, String Cuerpo, String De, String SmtpServer, String SmtpUser, String SmtpPass, String sFileNameAdjunto, Int64 SmtpPort, Int32 EnableSSL, String CCO, String img, String friendlyname, String replyTo, Boolean isHtml, String inlinePNG, String inlinePNG2) en C:\bdl\pronto\BussinessLogic\EntidadManager.vb:línea 316
+System
+__________________________
+
+Log Entry : 
+11/30/2017 09:27:59
+Error in: http://localhost:50769/ProntoWeb/WebServiceCartas.asmx/GrabarComentario. Error Message:ProntoWebMail@gmail.com
+__________________________
+
+Log Entry : 
+11/30/2017 09:27:59
+Error in: http://localhost:50769/ProntoWeb/WebServiceCartas.asmx/GrabarComentario. Error Message:
+__________________________
+
+Log Entry : 
+11/30/2017 09:27:59
+Error in: http://localhost:50769/ProntoWeb/WebServiceCartas.asmx/GrabarComentario. Error Message:System.InvalidOperationException
+Se debe especificar un destinatario.
+   en System.Net.Mail.SmtpClient.Send(MailMessage message)
+   en Pronto.ERP.Bll.EntidadManager.MandaEmail_Nuevo(String Para, String Asunto, String Cuerpo, String De, String SmtpServer, String SmtpUser, String SmtpPass, String sFileNameAdjunto, Int64 SmtpPort, Int32 EnableSSL, String CCO, String img, String friendlyname, String replyTo, Boolean isHtml, String inlinePNG, String inlinePNG2) en C:\bdl\pronto\BussinessLogic\EntidadManager.vb:línea 455
+   en WebServiceCartas.GrabarComentario(Int32 idCartaPorte, String sComentario) en C:\bdl\pronto\prontoweb\App_Code\vbcode\WebServiceCartas.vb:línea 269
+System
+__________________________
+
+Log Entry : 
+11/30/2017 09:28:02
+Error in: http://localhost:50769/ProntoWeb/WebServiceCartas.asmx/AbrirReclamo. Error Message:System.ArgumentException
+Método web AbrirReclamo desconocido.
+Nombre del parámetro: methodName
+   en System.Web.Script.Services.WebServiceData.GetMethodData(String methodName)
+   en System.Web.Script.Services.RestHandler.CreateHandler(WebServiceData webServiceData, String methodName)
+   en System.Web.Script.Services.RestHandler.CreateHandler(HttpContext context)
+   en System.Web.Script.Services.RestHandlerFactory.GetHandler(HttpContext context, String requestType, String url, String pathTranslated)
+   en System.Web.Script.Services.ScriptHandlerFactory.GetHandler(HttpContext context, String requestType, String url, String pathTranslated)
+   en System.Web.HttpApplication.MaterializeHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   en System.Web.HttpApplication.ExecuteStepImpl(IExecutionStep step)
+   en System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+System.Web.Extensions
+__________________________
+
+Log Entry : 
+11/30/2017 09:28:09
+Error in: http://localhost:50769/ProntoWeb/WebServiceCartas.asmx/AbrirReclamo. Error Message:System.ArgumentException
+Método web AbrirReclamo desconocido.
+Nombre del parámetro: methodName
+   en System.Web.Script.Services.WebServiceData.GetMethodData(String methodName)
+   en System.Web.Script.Services.RestHandler.CreateHandler(WebServiceData webServiceData, String methodName)
+   en System.Web.Script.Services.RestHandler.CreateHandler(HttpContext context)
+   en System.Web.Script.Services.RestHandlerFactory.GetHandler(HttpContext context, String requestType, String url, String pathTranslated)
+   en System.Web.Script.Services.ScriptHandlerFactory.GetHandler(HttpContext context, String requestType, String url, String pathTranslated)
+   en System.Web.HttpApplication.MaterializeHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   en System.Web.HttpApplication.ExecuteStepImpl(IExecutionStep step)
+   en System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+System.Web.Extensions
+__________________________
+
+Log Entry : 
+11/30/2017 09:28:53
+Error in: http://localhost:50769/ProntoWeb/CartaDePorte.aspx?Id=3154889. Error Message:La carta numero 564959925 id=3154889 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+11/30/2017 09:28:53
+Error in: http://localhost:50769/ProntoWeb/CartaDePorte.aspx?Id=3154889. Error Message:PV 2 0
+__________________________
+
+Log Entry : 
+11/30/2017 09:29:13
+Error in: http://localhost:50769/ProntoWeb/CartaDePorte.aspx?Id=3154870. Error Message:La carta numero 900300143 id=3154870 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+11/30/2017 09:29:13
+Error in: http://localhost:50769/ProntoWeb/CartaDePorte.aspx?Id=3154870. Error Message:PV 2 0
+__________________________
+
+Log Entry : 
+11/30/2017 09:29:18
+Error in: http://localhost:50769/ProntoWeb/CartaDePorte.aspx?Id=3154871. Error Message:La carta numero 900396140 id=3154871 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+11/30/2017 09:29:18
+Error in: http://localhost:50769/ProntoWeb/CartaDePorte.aspx?Id=3154871. Error Message:PV 2 0
+__________________________
+
+Log Entry : 
+11/30/2017 09:29:27
+Error in: http://localhost:50769/ProntoWeb/CartaDePorte.aspx?Id=3154800. Error Message:La carta numero 565168593 id=3154800 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+11/30/2017 09:29:27
+Error in: http://localhost:50769/ProntoWeb/CartaDePorte.aspx?Id=3154800. Error Message:PV 2 0
+__________________________
+
+Log Entry : 
+11/30/2017 09:29:40
+Error in: http://localhost:50769/ProntoWeb/WebServiceCartas.asmx/GrabarComentario. Error Message:System.InvalidOperationException
+Se debe especificar un destinatario.
+   en System.Net.Mail.SmtpClient.Send(MailMessage message)
+   en Pronto.ERP.Bll.EntidadManager.MandaEmail_Nuevo(String Para, String Asunto, String Cuerpo, String De, String SmtpServer, String SmtpUser, String SmtpPass, String sFileNameAdjunto, Int64 SmtpPort, Int32 EnableSSL, String CCO, String img, String friendlyname, String replyTo, Boolean isHtml, String inlinePNG, String inlinePNG2) en C:\bdl\pronto\BussinessLogic\EntidadManager.vb:línea 316
+System
+__________________________
+
+Log Entry : 
+11/30/2017 09:29:40
+Error in: http://localhost:50769/ProntoWeb/WebServiceCartas.asmx/GrabarComentario. Error Message:ProntoWebMail@gmail.com
+__________________________
+
+Log Entry : 
+11/30/2017 09:29:40
+Error in: http://localhost:50769/ProntoWeb/WebServiceCartas.asmx/GrabarComentario. Error Message:
+__________________________
+
+Log Entry : 
+11/30/2017 09:29:40
+Error in: http://localhost:50769/ProntoWeb/WebServiceCartas.asmx/GrabarComentario. Error Message:System.InvalidOperationException
+Se debe especificar un destinatario.
+   en System.Net.Mail.SmtpClient.Send(MailMessage message)
+   en Pronto.ERP.Bll.EntidadManager.MandaEmail_Nuevo(String Para, String Asunto, String Cuerpo, String De, String SmtpServer, String SmtpUser, String SmtpPass, String sFileNameAdjunto, Int64 SmtpPort, Int32 EnableSSL, String CCO, String img, String friendlyname, String replyTo, Boolean isHtml, String inlinePNG, String inlinePNG2) en C:\bdl\pronto\BussinessLogic\EntidadManager.vb:línea 455
+   en WebServiceCartas.GrabarComentario(Int32 idCartaPorte, String sComentario) en C:\bdl\pronto\prontoweb\App_Code\vbcode\WebServiceCartas.vb:línea 269
+System
+__________________________
+
+Log Entry : 
+11/30/2017 09:29:48
+Error in: http://localhost:50769/ProntoWeb/WebServiceCartas.asmx/GrabarComentario. Error Message:System.InvalidOperationException
+Se debe especificar un destinatario.
+   en System.Net.Mail.SmtpClient.Send(MailMessage message)
+   en Pronto.ERP.Bll.EntidadManager.MandaEmail_Nuevo(String Para, String Asunto, String Cuerpo, String De, String SmtpServer, String SmtpUser, String SmtpPass, String sFileNameAdjunto, Int64 SmtpPort, Int32 EnableSSL, String CCO, String img, String friendlyname, String replyTo, Boolean isHtml, String inlinePNG, String inlinePNG2) en C:\bdl\pronto\BussinessLogic\EntidadManager.vb:línea 316
+System
+__________________________
+
+Log Entry : 
+11/30/2017 09:29:48
+Error in: http://localhost:50769/ProntoWeb/WebServiceCartas.asmx/GrabarComentario. Error Message:ProntoWebMail@gmail.com
+__________________________
+
+Log Entry : 
+11/30/2017 09:29:48
+Error in: http://localhost:50769/ProntoWeb/WebServiceCartas.asmx/GrabarComentario. Error Message:
+__________________________
+
+Log Entry : 
+11/30/2017 09:29:48
+Error in: http://localhost:50769/ProntoWeb/WebServiceCartas.asmx/GrabarComentario. Error Message:System.InvalidOperationException
+Se debe especificar un destinatario.
+   en System.Net.Mail.SmtpClient.Send(MailMessage message)
+   en Pronto.ERP.Bll.EntidadManager.MandaEmail_Nuevo(String Para, String Asunto, String Cuerpo, String De, String SmtpServer, String SmtpUser, String SmtpPass, String sFileNameAdjunto, Int64 SmtpPort, Int32 EnableSSL, String CCO, String img, String friendlyname, String replyTo, Boolean isHtml, String inlinePNG, String inlinePNG2) en C:\bdl\pronto\BussinessLogic\EntidadManager.vb:línea 455
+   en WebServiceCartas.GrabarComentario(Int32 idCartaPorte, String sComentario) en C:\bdl\pronto\prontoweb\App_Code\vbcode\WebServiceCartas.vb:línea 269
+System
+__________________________
+
+Log Entry : 
+11/30/2017 09:31:23
+Error in: http://localhost:50769/ProntoWeb/CartaDePorte.aspx?Id=3154800. Error Message:La carta numero 565168593 id=3154800 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+11/30/2017 09:31:23
+Error in: http://localhost:50769/ProntoWeb/CartaDePorte.aspx?Id=3154800. Error Message:PV 2 0
+__________________________
+
+Log Entry : 
+11/30/2017 09:31:24
+Error in: http://localhost:50769/ProntoWeb/CartaDePorte.aspx?Id=3154800. Error Message:La carta numero 565168593 id=3154800 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+11/30/2017 09:31:24
+Error in: http://localhost:50769/ProntoWeb/CartaDePorte.aspx?Id=3154800. Error Message:PV 2 0
+__________________________
+
+Log Entry : 
+11/30/2017 09:32:07
+Error in: http://localhost:50769/ProntoWeb/CartadeporteExternoMovil.aspx?Id=3154882. Error Message:RODRIGORIOS esta logueado, pero lo redirijo al login porque faltan los datos de session. No deberia mejor mandarlo a SeleccionarEmpresa? Ademas, no hago el LogOut y le queda el cookie!!!
+__________________________
+
+Log Entry : 
+11/30/2017 09:32:38
+Error in: http://localhost:50769/ProntoWeb/CartadeporteExternoMovil.aspx?Id=3154800. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartadeporteABMExternoMovil.BindTypeDropDown() en C:\bdl\pronto\prontoweb\ProntoWeb\CartadeporteExternoMovil.aspx.vb:línea 1005
+App_Web_cartadeporteexternomovil.aspx.4199bbd4.ygn7tsif
+__________________________
+
+Log Entry : 
+11/30/2017 09:32:42
+Error in: http://localhost:50769/ProntoWeb/CartadeporteExternoMovil.aspx?Id=3154800. Error Message:La carta numero 565168593 id=3154800 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+11/30/2017 09:32:44
+Error in: http://localhost:50769/ProntoWeb/CartadeporteExternoMovil.aspx?Id=3154800. Error Message:No tenés permisos para esta carta
+__________________________
+
+Log Entry : 
+11/30/2017 09:33:00
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesAccesoClientes.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartaDePorteInformesAccesoClientes.BindTypeDropDown() en C:\bdl\pronto\prontoweb\ProntoWeb\CartaDePorteInformesAccesoClientes.aspx.vb:línea 269
+App_Web_cartadeporteinformesaccesoclientes.aspx.4199bbd4.ucd2zahk
+__________________________
+
+Log Entry : 
+11/30/2017 09:34:14
+Error in: http://localhost:50769/ProntoWeb/CartaDePorte.aspx?Id=3154800. Error Message:La carta numero 565168593 id=3154800 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+11/30/2017 09:34:14
+Error in: http://localhost:50769/ProntoWeb/CartaDePorte.aspx?Id=3154800. Error Message:PV 2 0
+__________________________
+
+Log Entry : 
+11/30/2017 09:35:12
+Error in: http://localhost:50769/ProntoWeb/CartadeporteExternoMovil.aspx?Id=3154882. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartadeporteABMExternoMovil.BindTypeDropDown() en C:\bdl\pronto\prontoweb\ProntoWeb\CartadeporteExternoMovil.aspx.vb:línea 1005
+App_Web_cartadeporteexternomovil.aspx.4199bbd4.ygn7tsif
+__________________________
+
+Log Entry : 
+11/30/2017 09:35:13
+Error in: http://localhost:50769/ProntoWeb/CartadeporteExternoMovil.aspx?Id=3154882. Error Message:La carta numero 564793833 id=3154882 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+11/30/2017 09:35:13
+Error in: http://localhost:50769/ProntoWeb/CartadeporteExternoMovil.aspx?Id=3154882. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartadeporteABMExternoMovil.BloqueosDeEdicion(CartaDePorte myCartaDePorte) en C:\bdl\pronto\prontoweb\ProntoWeb\CartadeporteExternoMovil.aspx.vb:línea 587
+App_Web_cartadeporteexternomovil.aspx.4199bbd4.ygn7tsif
+__________________________
+
+Log Entry : 
+11/30/2017 09:35:13
+Error in: http://localhost:50769/ProntoWeb/CartadeporteExternoMovil.aspx?Id=3154882. Error Message:PV 2 0
+__________________________
+
+Log Entry : 
+11/30/2017 09:35:21
+Error in: http://localhost:50769/ProntoWeb/CartadeporteExternoMovil.aspx?Id=3154800. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartadeporteABMExternoMovil.BindTypeDropDown() en C:\bdl\pronto\prontoweb\ProntoWeb\CartadeporteExternoMovil.aspx.vb:línea 1005
+App_Web_cartadeporteexternomovil.aspx.4199bbd4.ygn7tsif
+__________________________
+
+Log Entry : 
+11/30/2017 09:35:21
+Error in: http://localhost:50769/ProntoWeb/CartadeporteExternoMovil.aspx?Id=3154800. Error Message:La carta numero 565168593 id=3154800 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+11/30/2017 09:35:21
+Error in: http://localhost:50769/ProntoWeb/CartadeporteExternoMovil.aspx?Id=3154800. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartadeporteABMExternoMovil.BloqueosDeEdicion(CartaDePorte myCartaDePorte) en C:\bdl\pronto\prontoweb\ProntoWeb\CartadeporteExternoMovil.aspx.vb:línea 587
+App_Web_cartadeporteexternomovil.aspx.4199bbd4.ygn7tsif
+__________________________
+
+Log Entry : 
+11/30/2017 09:35:21
+Error in: http://localhost:50769/ProntoWeb/CartadeporteExternoMovil.aspx?Id=3154800. Error Message:PV 2 0
+__________________________
+
+Log Entry : 
+11/30/2017 09:38:44
+Error in: http://localhost:50769/ProntoWeb/CartadeporteExternoMovil.aspx?Id=3154800. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartadeporteABMExternoMovil.BindTypeDropDown() en C:\bdl\pronto\prontoweb\ProntoWeb\CartadeporteExternoMovil.aspx.vb:línea 1005
+App_Web_cartadeporteexternomovil.aspx.4199bbd4.wf2btd7o
+__________________________
+
+Log Entry : 
+11/30/2017 09:39:35
+Error in: http://localhost:50769/ProntoWeb/CartadeporteExternoMovil.aspx?Id=3154800. Error Message:La carta numero 565168593 id=3154800 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+11/30/2017 09:39:51
+Error in: http://localhost:50769/ProntoWeb/CartadeporteExternoMovil.aspx?Id=3154800. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartadeporteABMExternoMovil.BloqueosDeEdicion(CartaDePorte myCartaDePorte) en C:\bdl\pronto\prontoweb\ProntoWeb\CartadeporteExternoMovil.aspx.vb:línea 587
+App_Web_cartadeporteexternomovil.aspx.4199bbd4.wf2btd7o
+__________________________
+
+Log Entry : 
+11/30/2017 09:39:51
+Error in: http://localhost:50769/ProntoWeb/CartadeporteExternoMovil.aspx?Id=3154800. Error Message:PV 2 0
+__________________________
+
+Log Entry : 
+11/30/2017 09:40:38
+Error in: http://localhost:50769/ProntoWeb/WebServiceClientes.asmx/AcopiosPorCliente. Error Message: -  Error en ExecDinamico. - System.Data.SqlClient.SqlException (0x80131904): Se agotó el tiempo de espera de ejecución. El período de tiempo de espera transcurrió antes de la finalización de la operación o el servidor no responde. ---> System.ComponentModel.Win32Exception (0x80004005): Tiempo de espera de la operación de espera agotado
+   en Microsoft.VisualBasic.CompilerServices.Symbols.Container.InvokeMethod(Method TargetProcedure, Object[] Arguments, Boolean[] CopyBack, BindingFlags Flags)
+   en Microsoft.VisualBasic.CompilerServices.NewLateBinding.CallMethod(Container BaseReference, String MethodName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack, BindingFlags InvocationFlags, Boolean ReportErrors, ResolutionFailure& Failure)
+   en Microsoft.VisualBasic.CompilerServices.NewLateBinding.ObjectLateCall(Object Instance, Type Type, String MemberName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack, Boolean IgnoreReturn)
+   en Microsoft.VisualBasic.CompilerServices.NewLateBinding.LateCall(Object Instance, Type Type, String MemberName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack, Boolean IgnoreReturn)
+   en Pronto.ERP.Dal.GeneralDB.ExecDinamico(String SC, String comandoSQLdinamico, Int32 timeoutSegundos)
+ClientConnectionId:1494ab88-ed66-4449-9f8d-c1f2a11463a4
+Error Number:-2,State:0,Class:11 - SELECT TOP 1 Clientes.* FROM Clientes  WHERE  (RazonSocial = 'BILBAO FACUNDO FABIAN')  OR (CUIT + ' ' + RazonSocial COLLATE Modern_Spanish_ci_as = 'BILBAO FACUNDO FABIAN')  OR (RazonSocial + ' ' + CUIT COLLATE Modern_Spanish_ci_as = 'BILBAO FACUNDO FABIAN')  OR (CUIT = 'BILBAO FACUNDO FABIAN')   8 0
+__________________________
+
+Log Entry : 
+11/30/2017 09:40:38
+Error in: http://localhost:50769/ProntoWeb/WebServiceClientes.asmx/AcopiosPorCliente. Error Message:Se agotó el tiempo de espera de ejecución. El período de tiempo de espera transcurrió antes de la finalización de la operación o el servidor no responde.
+__________________________
+
+Log Entry : 
+11/30/2017 09:40:38
+Error in: http://localhost:50769/ProntoWeb/WebServiceClientes.asmx/AcopiosPorCliente. Error Message:System.Data.SqlClient.SqlException (0x80131904): Se agotó el tiempo de espera de ejecución. El período de tiempo de espera transcurrió antes de la finalización de la operación o el servidor no responde. ---> System.ComponentModel.Win32Exception (0x80004005): Tiempo de espera de la operación de espera agotado
+   en Microsoft.VisualBasic.CompilerServices.Symbols.Container.InvokeMethod(Method TargetProcedure, Object[] Arguments, Boolean[] CopyBack, BindingFlags Flags)
+   en Microsoft.VisualBasic.CompilerServices.NewLateBinding.CallMethod(Container BaseReference, String MethodName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack, BindingFlags InvocationFlags, Boolean ReportErrors, ResolutionFailure& Failure)
+   en Microsoft.VisualBasic.CompilerServices.NewLateBinding.ObjectLateCall(Object Instance, Type Type, String MemberName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack, Boolean IgnoreReturn)
+   en Microsoft.VisualBasic.CompilerServices.NewLateBinding.LateCall(Object Instance, Type Type, String MemberName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack, Boolean IgnoreReturn)
+   en Pronto.ERP.Dal.GeneralDB.ExecDinamico(String SC, String comandoSQLdinamico, Int32 timeoutSegundos)
+   en Pronto.ERP.Bll.EntidadManager.ExecDinamico(String SC, String sComandoDinamico, Int32 timeoutSegundos) en C:\bdl\pronto\BussinessLogic\EntidadManager.vb:línea 884
+   en SQLdinamico.BuscaIdClientePrecisoConCUIT(String ClienteRazonSocial, String SC) en C:\bdl\pronto\BussinessLogic\SQLdinamico.vb:línea 273
+   en WebServiceClientes.AcopiosPorCliente(String NombreCliente, String SC) en C:\bdl\pronto\prontoweb\App_Code\vbcode\WebServiceClientes.vb:línea 154
+ClientConnectionId:1494ab88-ed66-4449-9f8d-c1f2a11463a4
+Error Number:-2,State:0,Class:11
+__________________________
+
+Log Entry : 
+11/30/2017 09:41:14
+Error in: http://localhost:50769/ProntoWeb/CartadeporteExternoMovil.aspx?Id=3154800. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartadeporteABMExternoMovil.BindTypeDropDown() en C:\bdl\pronto\prontoweb\ProntoWeb\CartadeporteExternoMovil.aspx.vb:línea 1005
+App_Web_cartadeporteexternomovil.aspx.4199bbd4.qulksyl8
+__________________________
+
+Log Entry : 
+11/30/2017 09:41:59
+Error in: http://localhost:50769/ProntoWeb/CartadeporteExternoMovil.aspx?Id=3154800. Error Message:La carta numero 565168593 id=3154800 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+11/30/2017 09:42:01
+Error in: http://localhost:50769/ProntoWeb/CartadeporteExternoMovil.aspx?Id=3154800. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartadeporteABMExternoMovil.BloqueosDeEdicion(CartaDePorte myCartaDePorte) en C:\bdl\pronto\prontoweb\ProntoWeb\CartadeporteExternoMovil.aspx.vb:línea 587
+App_Web_cartadeporteexternomovil.aspx.4199bbd4.qulksyl8
+__________________________
+
+Log Entry : 
+11/30/2017 09:42:01
+Error in: http://localhost:50769/ProntoWeb/CartadeporteExternoMovil.aspx?Id=3154800. Error Message:PV 2 0
+__________________________
+
+Log Entry : 
+11/30/2017 09:42:41
+Error in: http://localhost:50769/ProntoWeb/CartadeporteExternoMovil.aspx?Id=3154801. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartadeporteABMExternoMovil.BindTypeDropDown() en C:\bdl\pronto\prontoweb\ProntoWeb\CartadeporteExternoMovil.aspx.vb:línea 1005
+App_Web_cartadeporteexternomovil.aspx.4199bbd4.qulksyl8
+__________________________
+
+Log Entry : 
+11/30/2017 09:43:05
+Error in: http://localhost:50769/ProntoWeb/CartadeporteExternoMovil.aspx?Id=3154801. Error Message:La carta numero 565168594 id=3154801 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+11/30/2017 09:43:06
+Error in: http://localhost:50769/ProntoWeb/CartadeporteExternoMovil.aspx?Id=3154801. Error Message:No tenés permisos para esta carta
+__________________________
+
+Log Entry : 
+11/30/2017 09:43:33
+Error in: http://localhost:50769/ProntoWeb/CartaDePorteInformesAccesoClientes.aspx. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartaDePorteInformesAccesoClientes.BindTypeDropDown() en C:\bdl\pronto\prontoweb\ProntoWeb\CartaDePorteInformesAccesoClientes.aspx.vb:línea 269
+App_Web_cartadeporteinformesaccesoclientes.aspx.4199bbd4.ucd2zahk
+__________________________
+
+Log Entry : 
+11/30/2017 09:46:18
+Error in: http://localhost:50769/ProntoWeb/CartadeporteExternoMovil.aspx?Id=3154800. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartadeporteABMExternoMovil.BindTypeDropDown() en C:\bdl\pronto\prontoweb\ProntoWeb\CartadeporteExternoMovil.aspx.vb:línea 1005
+App_Web_cartadeporteexternomovil.aspx.4199bbd4.-o8nnawv
+__________________________
+
+Log Entry : 
+11/30/2017 09:46:22
+Error in: http://localhost:50769/ProntoWeb/CartadeporteExternoMovil.aspx?Id=3154800. Error Message:La carta numero 565168593 id=3154800 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+11/30/2017 09:46:22
+Error in: http://localhost:50769/ProntoWeb/CartadeporteExternoMovil.aspx?Id=3154800. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartadeporteABMExternoMovil.BloqueosDeEdicion(CartaDePorte myCartaDePorte) en C:\bdl\pronto\prontoweb\ProntoWeb\CartadeporteExternoMovil.aspx.vb:línea 587
+App_Web_cartadeporteexternomovil.aspx.4199bbd4.-o8nnawv
+__________________________
+
+Log Entry : 
+11/30/2017 09:46:22
+Error in: http://localhost:50769/ProntoWeb/CartadeporteExternoMovil.aspx?Id=3154800. Error Message:PV 2 0
+__________________________

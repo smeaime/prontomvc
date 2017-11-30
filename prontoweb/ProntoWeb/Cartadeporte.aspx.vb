@@ -743,10 +743,10 @@ Partial Class CartadeporteABM
 
             If rec IsNot Nothing Then
                 If rec.Estado = 2 Then
-                    Button6.Enabled = False
+                    'Button6.Enabled = False
                     TextBox5.Enabled = False
                     AsyncFileUpload3.Enabled = False
-                    btnCerrarReclamo.Enabled = False
+                    'btnCerrarReclamo.Enabled = False
                 End If
             End If
 
