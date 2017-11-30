@@ -9,11 +9,6 @@
 
 
 
-    
-
-
-
-
 
 
     <%--/////////////////////////////////////////////////////////////--%>
@@ -191,7 +186,6 @@
         }
 
 
-
         //            http: //www.scottklarr.com/topic/126/how-to-create-ctrl-key-shortcuts-in-javascript/
         //            http: //www.scottklarr.com/topic/126/how-to-create-ctrl-key-shortcuts-in-javascript/
 
@@ -290,14 +284,7 @@
     <div style="width: ; margin-top: 3px; height: auto;">
         <table style="padding: 0px; border: none #FFFFFF; width: ; margin-right: 0px; font-size: large;"
             cellpadding="1" cellspacing="1">
-            <%--  <tr>
-                <td colspan="3" style="border: thin none #FFFFFF; font-weight: bold; color: #FFFFFF;
-                    font-size: large; height: 12px;" align="left" valign="top">
-                    CARTA DE PORTE
-                  
-                </td>
-               
-            </tr>--%>
+        
             <tr>
                 <td class="EncabezadoCell" style="width: 70px; font-weight: bold; font-size: 20px;">C.PORTE
                 </td>
@@ -307,7 +294,7 @@
                             <td>
                                 <div>
                                     <a href="javascript:;" accesskey="f"></a>
-                                    <asp:TextBox ID="txtNumeroCDP" runat="server" Width="120px" TabIndex="2" AutoPostBack="True"
+                                    <asp:TextBox ID="txtNumeroCDP" runat="server" Width="120px" TabIndex="2" AutoPostBack="True" Enabled="false"
                                         Font-Bold="true" Font-Size="24px" Height="24px" MaxLength="10" Style="font-weight: bolder;"></asp:TextBox>
                                     <cc1:FilteredTextBoxExtender ID="FilteredTextBoxExtender441" runat="server" TargetControlID="txtNumeroCDP"
                                         ValidChars="1234567890" Enabled="True">
@@ -317,7 +304,7 @@
                                         Font-Bold="True" ValidationGroup="Encabezado" Style="display: none" />
                                     <ajaxToolkit:ValidatorCalloutExtender ID="ValidatorCalloutExtender8" runat="server"
                                         Enabled="True" TargetControlID="RequiredFieldValidator12" CssClass="CustomValidatorCalloutStyle" />
-                                    <asp:TextBox ID="txtSubfijo" runat="server" Width="35px" TabIndex="2" ToolTip="Subfijo"
+                                    <asp:TextBox ID="txtSubfijo" runat="server" Width="35px" TabIndex="2" ToolTip="Subfijo" Visible="false"
                                         MaxLength="5" Font-Size="24px" Height="24px" Style="font-weight: bolder;"></asp:TextBox>
                                     <cc1:FilteredTextBoxExtender ID="FilteredTextBoxExtender112" runat="server" TargetControlID="txtSubfijo"
                                         ValidChars="1234567890" Enabled="True" />
@@ -330,7 +317,7 @@
                                     </style>
                                     <%-- <ajaxToolkit:TextBoxWatermarkExtender ID="TBWE2" runat="server" TargetControlID="txtSubfijo"
                                         WatermarkText="Subf" WatermarkCssClass="watermarked aaa" Enabled="True" />--%>
-                                    <asp:TextBox ID="txtSubNumeroVagon" runat="server" Width="80px" TabIndex="2" AutoPostBack="True"
+                                    <asp:TextBox ID="txtSubNumeroVagon" runat="server" Width="80px" TabIndex="2" AutoPostBack="True"  Visible="false"
                                         ToolTip="Vagón" MaxLength="7" Font-Size="24px" Height="24px" Style="font-weight: bolder;">
                                         
                                         
@@ -2853,16 +2840,19 @@
 
                         <asp:TextBox ID="TextBox5" runat="server" CssClass=" span8" Width="250px" Height="50px" TextMode="MultiLine" Enabled="true" Text="" />
 
+                        <input id="ctl00_ContentPlaceHolder1_TabContainer2_TabPanel5_Button6"  type="button"   value="enviar" class="btn btn-primary" style="height: 55px; width: 50px; vertical-align: top;" />
 
-                        <asp:Button ID="Button6" runat="server" Text="enviar" class="btn btn-primary" style="height: 50px; width: 50px; vertical-align: top;"  UseSubmitBehavior="false" />
+                        
                         
                         <span>
-                            <ajaxToolkit:AsyncFileUpload ID="AsyncFileUpload3" runat="server" OnClientUploadComplete="ClientUploadComplete3"
+                            <ajaxToolkit:AsyncFileUpload ID="AsyncFileUpload3" runat="server" OnClientUploadComplete="ClientUploadComplete3" Height="40px" Font-Size="16"
                                 UploaderStyle="Traditional" CssClass="AFU AFU3" FailedValidation="False" />
 
 
-                             <asp:Button ID="btnCerrarReclamo" runat="server" Text="cerrar consulta" class="btn btn-primary" style="height: ; width: ; vertical-align: top;"  UseSubmitBehavior="false" />
-                             <asp:Button ID="btnAbrirReclamo" runat="server" Text="abrir consulta" class="btn btn-primary" style="height: ; width: ; vertical-align: top;"  UseSubmitBehavior="false" />
+
+<input id="ctl00_ContentPlaceHolder1_TabContainer2_TabPanel5_btnCerrarReclamo"  type="button"   value="abrir" class="btn btn-primary" style="height: 40px ; width: ; vertical-align: top;" />
+<input id="ctl00_ContentPlaceHolder1_TabContainer2_TabPanel5_btnAbrirReclamo"  type="button"   value="cerrar" class="btn btn-primary" style="height: 40px ; width: ; vertical-align: top;" />
+
                        
 
                             
@@ -2885,8 +2875,56 @@
 
 
 
+                            $("#Button9").click(function () {
+                              
+
+                                var d = {
+                                    idCartaPorte: qs["Id"],
+                                    sComentario: $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel5_TextBox5").val()
+                                }
+
+
+                                $.ajax({
+                                    type: "POST",
+                                    //method: "POST",
+                                    url: "WebServiceCartas.asmx/GrabarComentario",
+                                    dataType: "json",
+                                    contentType: "application/json; charset=utf-8",
+
+                                    data: JSON.stringify(d),
+
+                                    success: function (data) {
+                                        //alert(data.d);
+                                        //window.open(data.d);
+                                        $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel5_TextBox5").val("")
+                                        $("#Lista").trigger("reloadGrid");
+                                        scrollToLastRow($("#Lista"))
+                                    }
+
+
+                                    ,
+                                    beforeSend: function () {
+                                        //$('.loading').html('some predefined loading img html');
+                                        $("#loading").show();
+                                        $('#grabar2').attr("disabled", true).val("Espere...");
+
+                                    },
+                                    complete: function () {
+                                        $("#loading").hide();
+                                    }
+
+
+                                })
+
+
+                            })
+
+
+
                             $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel5_Button6").click(function () {
                                 //alert("hola")
+
+                                //return;
 
                                 var d = {
                                     idCartaPorte: qs["Id"],
@@ -3150,7 +3188,7 @@
         </asp:UpdatePanel>
     </div>
     <br />
-    <div style="display: inline;">
+    <div style="display: inline; visibility: hidden">
         <table style="vertical-align: middle">
             <tr>
                 <td>
