@@ -2170,3 +2170,15 @@ go
 CREATE INDEX IDX_Cartasdeporte_PorFecha  on cartasdeporte(FechaModificacion )
 go
 
+
+
+
+
+
+
+select * from vendedores where nombre like 'futuros%'
+
+select * from  wTempCartasPorteFacturacionAutomatica where idsesion=7069
+
+
+

@@ -747,7 +747,19 @@ Partial Class CartadeporteABM
                     TextBox5.Enabled = False
                     AsyncFileUpload3.Enabled = False
                     'btnCerrarReclamo.Enabled = False
+
+                    AjaxControlToolkit.ToolkitScriptManager.RegisterStartupScript(Me, Me.GetType(), "StartUp2",
+                            "$('#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel5_btnCerrarReclamo').hide();  $('#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel5_btnAbrirReclamo').show(); " _
+                            , True)
+
+                Else
+
+                    AjaxControlToolkit.ToolkitScriptManager.RegisterStartupScript(Me, Me.GetType(), "StartUp2",
+                            "$('#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel5_btnCerrarReclamo').show();  $('#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel5_btnAbrirReclamo').hide(); " _
+                            , True)
+
                 End If
+
             End If
 
         End Using
