@@ -717,3 +717,34 @@ Log Entry :
 11/30/2017 08:08:20
 Error in: http://localhost:50769/ProntoWeb/CartadeporteExternoMovil.aspx?Id=3154882. Error Message:PV 2 0
 __________________________
+
+Log Entry : 
+11/30/2017 08:24:05
+Error in: http://localhost:50769/ProntoWeb/CartadeporteExternoMovil.aspx?Id=3154882. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartadeporteABMExternoMovil.BindTypeDropDown() en C:\bdl\pronto\prontoweb\ProntoWeb\CartadeporteExternoMovil.aspx.vb:línea 1005
+App_Web_cartadeporteexternomovil.aspx.4199bbd4.ygn7tsif
+__________________________
+
+Log Entry : 
+11/30/2017 08:24:05
+Error in: http://localhost:50769/ProntoWeb/CartadeporteExternoMovil.aspx?Id=3154882. Error Message:La carta numero 564793833 id=3154882 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+11/30/2017 08:24:05
+Error in: http://localhost:50769/ProntoWeb/CartadeporteExternoMovil.aspx?Id=3154882. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartadeporteABMExternoMovil.BloqueosDeEdicion(CartaDePorte myCartaDePorte) en C:\bdl\pronto\prontoweb\ProntoWeb\CartadeporteExternoMovil.aspx.vb:línea 587
+App_Web_cartadeporteexternomovil.aspx.4199bbd4.ygn7tsif
+__________________________
+
+Log Entry : 
+11/30/2017 08:24:05
+Error in: http://localhost:50769/ProntoWeb/CartadeporteExternoMovil.aspx?Id=3154882. Error Message:PV 2 0
+__________________________
+
+Log Entry : 
+11/30/2017 08:24:09
+Error in: http://localhost:50769/ProntoWeb/CartaDePorte.aspx?Id=3154882. Error Message:Mariano esta logueado, pero lo redirijo al login porque faltan los datos de session. No deberia mejor mandarlo a SeleccionarEmpresa? Ademas, no hago el LogOut y le queda el cookie!!!
+__________________________
